@@ -1627,7 +1627,7 @@ function customPCSetup():void {
 		player.clitLength = 0.25;
 		player.createBreastRow();
 		player.breastRows[0].breastRating = 3;
-		player.nippleLength 0.5;
+		player.nippleLength = 0.5;
 		player.hairLength = 22;
 		player.hairColor = "red";
 		player.skinTone = "light";
