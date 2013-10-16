@@ -197,7 +197,9 @@
 			// I'm not sure how most of the files in /classes/classes/ are included
 			// anyways, lets manually include it here until I read up on the include mechanics
 			// of AS
-			include "saves.as";
+			// I moved saves.as back into includes, to keep the class directories
+			// free of any non-packaged files. - amygdala
+			include "../../includes/saves.as";
 			
 			this.stop();
 		}
