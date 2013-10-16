@@ -33,6 +33,13 @@ package classes
 	
 	public class CoC extends MovieClip
 	{
+		/****
+			This is used purely for bodges while we get things cleaned up.
+			Hopefully, anything you stick to this object can be removed eventually.
+			I only used it because for some reason the Flash compiler wasn't seeing
+			certain functions, even though they were in the same scope as the
+			function calling them.
+		****/
 		public var semiglobalReferencer :* = {};
 
 		public function CoC()
