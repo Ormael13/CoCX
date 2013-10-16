@@ -1,5 +1,43 @@
-﻿const YVONNE_FUCK_COUNTER:int = 437;
+﻿/**
+ * The lovely town of Tel Adre
+ * @author:
+ */
 
+const YVONNE_FUCK_COUNTER:int = 437;
+
+/**
+ * 3 variables that define bonuses for piercing.
+ */
+//{region PiercingVariables
+
+//0) **Clit (+2 sens)
+//1) **Dick (+2 lib) adds the word 'pierced' sometimes to the description
+//2) **Ears
+//3) **Eyebrow (-.5 def)
+//4) **Lip (-.5 def)
+//5) **Nipples (+1 sens, +1 lib)
+//6) **Nose (+.5 attack)
+//7) **Tongue (+1 sens)
+//8) **Vulva (+1 sens)
+var piercingLoc:Number = 0;
+
+//1. Amethyst (+1 int, +1 lib)
+//2. Diamond (+2 int, -1 cor)
+//3. Gold (+1 int, +1 sens)
+//4. Emerald (+1 spe)
+//5. Jade (+1 spe, -.5 tou)
+//6. Onyx (+1 tou, -1 spe)
+//7. Ruby (+1 lib, +1 sens)
+//8. Steel (+2 str, -2 int)
+var piercingMat:Number = 0;
+
+//1. Stud
+//2. Ring (Called prince albert on dick)
+//3. Jacobs Ladder (dick only)
+//4. Hoop (ears/nipples/clit)
+//5. Chain (nipples only)
+var piercingType:Number = 0;
+//}endregion
 
 function discoverTelAdre():void {
 	outputText("", true);

@@ -1,4 +1,9 @@
-﻿// import classes.creature;
+﻿/**
+ * Urta's Quest
+ * @Author: 
+ */
+
+// import classes.creature;
 // import flash.events.MouseEvent;
 // import classes.itemSlotClass;
 
@@ -15,6 +20,10 @@ const URTA_IS_VULQUINE_MENACE:int = 719;
 const URTA_RAPED_MINO_LORD:int = 720;
 const URTA_MINO_AND_SUCCUBI_SLAVE:int = 721;
 const EDRYN_BIRF_COUNTDOWN:int = 722;
+
+//Mystery variables for now
+var player2:creature = new creature();
+var urtaQItems:Array = new Array();
 
 function urtaBusy():Boolean {
 	return (flags[EDRYN_BIRF_COUNTDOWN] > 0 || flags[URTA_QUEST_STATUS] == -1);

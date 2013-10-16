@@ -1,5 +1,6 @@
 ﻿//import flash.ui.Mouse;
 //Assign listeners!  IMPORTANT - keyboard listener placed in startup.as!
+
 b1Text.addEventListener(MouseEvent.CLICK, buttonEvent);
 b2Text.addEventListener(MouseEvent.CLICK, buttonEvent);
 b3Text.addEventListener(MouseEvent.CLICK, buttonEvent);
@@ -10,11 +11,12 @@ b7Text.addEventListener(MouseEvent.CLICK, buttonEvent);
 b8Text.addEventListener(MouseEvent.CLICK, buttonEvent);
 b9Text.addEventListener(MouseEvent.CLICK, buttonEvent);
 b0Text.addEventListener(MouseEvent.CLICK, buttonEvent);
-temp = 0;
-while(temp < 10) {
-	buttons[temp].addEventListener(MouseEvent.CLICK, buttonEvent);
-	temp++;
-}
+//This is already done in InitialiseUI.as
+//temp = 0;
+//while(temp < 10) {
+	//buttons[temp].addEventListener(MouseEvent.CLICK, buttonEvent);
+	//temp++;
+//}
 newGameText.addEventListener(MouseEvent.CLICK, newGameGo);
 newGameBG.addEventListener(MouseEvent.CLICK, newGameGo);
 appearanceText.addEventListener(MouseEvent.CLICK, appearance);
@@ -51,68 +53,68 @@ perksBG.addEventListener(MouseEvent.ROLL_OVER, buttonOn);
 perksBG.addEventListener(MouseEvent.ROLL_OUT, buttonOff);
 perksText.addEventListener(MouseEvent.ROLL_OVER, buttonOn);
 perksText.addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-buttons[0].addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-buttons[0].addEventListener(MouseEvent.ROLL_OUT, buttonOff);
+gButtons[0].addEventListener(MouseEvent.ROLL_OVER, buttonOn);
+gButtons[0].addEventListener(MouseEvent.ROLL_OUT, buttonOff);
 b1Text.addEventListener(MouseEvent.ROLL_OVER, buttonOn);
 b1Text.addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-buttons[1].addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-buttons[1].addEventListener(MouseEvent.ROLL_OUT, buttonOff);
+gButtons[1].addEventListener(MouseEvent.ROLL_OVER, buttonOn);
+gButtons[1].addEventListener(MouseEvent.ROLL_OUT, buttonOff);
 b2Text.addEventListener(MouseEvent.ROLL_OVER, buttonOn);
 b2Text.addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-buttons[2].addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-buttons[2].addEventListener(MouseEvent.ROLL_OUT, buttonOff);
+gButtons[2].addEventListener(MouseEvent.ROLL_OVER, buttonOn);
+gButtons[2].addEventListener(MouseEvent.ROLL_OUT, buttonOff);
 b3Text.addEventListener(MouseEvent.ROLL_OVER, buttonOn);
 b3Text.addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-buttons[3].addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-buttons[3].addEventListener(MouseEvent.ROLL_OUT, buttonOff);
+gButtons[3].addEventListener(MouseEvent.ROLL_OVER, buttonOn);
+gButtons[3].addEventListener(MouseEvent.ROLL_OUT, buttonOff);
 b4Text.addEventListener(MouseEvent.ROLL_OVER, buttonOn);
 b4Text.addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-buttons[4].addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-buttons[4].addEventListener(MouseEvent.ROLL_OUT, buttonOff);
+gButtons[4].addEventListener(MouseEvent.ROLL_OVER, buttonOn);
+gButtons[4].addEventListener(MouseEvent.ROLL_OUT, buttonOff);
 b5Text.addEventListener(MouseEvent.ROLL_OVER, buttonOn);
 b5Text.addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-buttons[5].addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-buttons[5].addEventListener(MouseEvent.ROLL_OUT, buttonOff);
+gButtons[5].addEventListener(MouseEvent.ROLL_OVER, buttonOn);
+gButtons[5].addEventListener(MouseEvent.ROLL_OUT, buttonOff);
 b6Text.addEventListener(MouseEvent.ROLL_OVER, buttonOn);
 b6Text.addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-buttons[6].addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-buttons[6].addEventListener(MouseEvent.ROLL_OUT, buttonOff);
+gButtons[6].addEventListener(MouseEvent.ROLL_OVER, buttonOn);
+gButtons[6].addEventListener(MouseEvent.ROLL_OUT, buttonOff);
 b7Text.addEventListener(MouseEvent.ROLL_OVER, buttonOn);
 b7Text.addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-buttons[7].addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-buttons[7].addEventListener(MouseEvent.ROLL_OUT, buttonOff);
+gButtons[7].addEventListener(MouseEvent.ROLL_OVER, buttonOn);
+gButtons[7].addEventListener(MouseEvent.ROLL_OUT, buttonOff);
 b8Text.addEventListener(MouseEvent.ROLL_OVER, buttonOn);
 b8Text.addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-buttons[8].addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-buttons[8].addEventListener(MouseEvent.ROLL_OUT, buttonOff);
+gButtons[8].addEventListener(MouseEvent.ROLL_OVER, buttonOn);
+gButtons[8].addEventListener(MouseEvent.ROLL_OUT, buttonOff);
 b9Text.addEventListener(MouseEvent.ROLL_OVER, buttonOn);
 b9Text.addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-buttons[9].addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-buttons[9].addEventListener(MouseEvent.ROLL_OUT, buttonOff);
+gButtons[9].addEventListener(MouseEvent.ROLL_OVER, buttonOn);
+gButtons[9].addEventListener(MouseEvent.ROLL_OUT, buttonOff);
 b0Text.addEventListener(MouseEvent.ROLL_OVER, buttonOn);
 b0Text.addEventListener(MouseEvent.ROLL_OUT, buttonOff);
 
 function buttonEvent(e:MouseEvent):void {
 	mouseOverText.visible = false;
-	var temp:int = 0;
+	var buttonIndex:int = 0;
 	//Set temp equal to the button that was clicked.
-	while(temp < 10) {
-		if(e.target == buttons[temp]) break;
-		temp++;
+	while(buttonIndex < 10) {
+		if(e.target == gButtons[buttonIndex]) break;
+		buttonIndex++;
 	}
-	if(e.target == b1Text) temp = 0;
-	else if(e.target == b2Text) temp = 1;
-	else if(e.target == b3Text) temp = 2;
-	else if(e.target == b4Text) temp = 3;
-	else if(e.target == b5Text) temp = 4;
-	else if(e.target == b6Text) temp = 5;
-	else if(e.target == b7Text) temp = 6;
-	else if(e.target == b8Text) temp = 7;
-	else if(e.target == b9Text) temp = 8;
-	else if(e.target == b0Text) temp = 9;
+	if(e.target == b1Text) buttonIndex = 0;
+	else if(e.target == b2Text) buttonIndex = 1;
+	else if(e.target == b3Text) buttonIndex = 2;
+	else if(e.target == b4Text) buttonIndex = 3;
+	else if(e.target == b5Text) buttonIndex = 4;
+	else if(e.target == b6Text) buttonIndex = 5;
+	else if(e.target == b7Text) buttonIndex = 6;
+	else if(e.target == b8Text) buttonIndex = 7;
+	else if(e.target == b9Text) buttonIndex = 8;
+	else if(e.target == b0Text) buttonIndex = 9;
 	//Standard method.
 	trace("FUNC LENGTH" + funcs.length);
-	executeButtonClick(temp);
+	executeButtonClick(buttonIndex);
 }
 
 function executeButtonClick(button:int = 0):void {
