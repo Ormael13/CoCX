@@ -1,4 +1,4 @@
-package classes
+﻿package classes
 {
 	import classes.assClass;
 	import classes.breastRowClass;
@@ -64,7 +64,6 @@ package classes
 			include "../../includes/appearance.as";
 			include "../../includes/exploration.as";
 			include "../../includes/combat.as";
-			include "../../includes/saves.as";
 			include "../../includes/transform.as";
 			include "../../includes/masturbation.as";
 			include "../../includes/pregnancy.as";
@@ -192,6 +191,14 @@ package classes
 			include "../../includes/arian.as";
 			include "../../includes/heliaPreggers.as";
 			include "../../includes/froggirl.as";
+			
+			
+			// we had two saves.as files. It was causing wierd issues.
+			// I'm not sure how most of the files in /classes/classes/ are included
+			// anyways, lets manually include it here until I read up on the include mechanics
+			// of AS
+			include "saves.as";
+			
 			this.stop();
 		}
 	}

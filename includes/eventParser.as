@@ -109,14 +109,6 @@ function doSystem(eventNo:Number):void {
 		outputText("", true);
 		goNext(24, false);
 	}
-	//toggle debug
-	if(eventNo == 18) {
-		if(debug) debug = false;
-		else debug = true;
-		mainMenu();
-		dataBG.visible = true;
-		dataText.visible = true;
-	}
 	//Load menu
 	if(eventNo == 19 ) {
 		loadScreen();
@@ -431,14 +423,6 @@ function doSystem(eventNo:Number):void {
 		outputText("You choose the 'Seduction' perk, replacing the 'tease' attack with a more powerful 'seduction' variant.", true);
 		doNext(1);
 	}
-	//Display Credits Menu
-	if(eventNo == 63) {
-		creditsScreen();
-	}
-	//Display title
-	if(eventNo == 64) {
-		mainMenu();
-	}
 	//turn on/off autosave
 	if(eventNo == 65) {
 		var e:MouseEvent;
@@ -531,10 +515,6 @@ function doSystem(eventNo:Number):void {
 		exploreDeepwoods();
 		return;		
 	}
-	if(eventNo == 81) {
-		howToPlay();
-		return;
-	}
 	if(eventNo == 82) {
 		deleteScreen();
 		return;
@@ -602,14 +582,7 @@ function doSystem(eventNo:Number):void {
 		exploreHighMountain();
 		return;
 	}
-	//Toggle Easy Mode
-	if(eventNo == 96) {
-		if(flags[99] == 0) flags[99] = 1;
-		else flags[99] = 0;
-		mainMenu();
-		dataBG.visible = true;
-		dataText.visible = true;
-	}
+
 	//located in exploration.as
 	if(eventNo == 97) {
 		explorePlains();
@@ -767,18 +740,6 @@ function doSystem(eventNo:Number):void {
 		exploreSwamp();
 		return;
 	}
-	if(eventNo == 112) {
-		if(flags[273] == 0) flags[273] = 1;
-		else flags[273] = 0;
-		mainMenu();
-		return;
-	}
-	if(eventNo == 113) {
-		if(flags[305] == 0) flags[305] = 1;
-		else flags[305] = 0;
-		mainMenu();
-		return;
-	}
 	if(eventNo == 114) {
 		aCb.visible = false;
 		applyPerk(tempPerk);
@@ -791,11 +752,6 @@ function doSystem(eventNo:Number):void {
 	}
 	if(eventNo == 116) {
 		perkBuyMenu();
-		return;
-	}
-	if(eventNo == 117) {
-		eventTester();
-		
 		return;
 	}
 	if(eventNo == 118) {
@@ -822,6 +778,79 @@ function doSystem(eventNo:Number):void {
 		campLoversMenu();
 		return;
 	}
+
+
+
+	// --------------------------------------------------------------------------------------------------------------
+	// Settings and startup menu items
+
+	//Display Credits Menu
+	if(eventNo == 63) {
+		creditsScreen();
+	}
+	
+	//Display title
+	if(eventNo == 64) {
+		mainMenu();
+	}
+
+	if(eventNo == 81) {
+		howToPlay();
+		return;
+	}
+
+	// Toggles -------------------------
+	
+	//toggle debug
+	if(eventNo == 18) {
+		if(debug) debug = false;
+		else debug = true;
+		dataBG.visible = true;
+		dataText.visible = true;
+		settingsScreen();
+	}
+	
+	//Toggle Easy Mode
+	if(eventNo == 96) {
+		if(flags[99] == 0) flags[99] = 1;
+		else flags[99] = 0;
+		settingsScreen();
+		dataBG.visible = true;
+		dataText.visible = true;
+	}
+
+	
+	// Sprite toggle
+	if(eventNo == 112) {
+		if(flags[273] == 0) 
+			flags[273] = 1;
+		else flags[273] = 0;
+		settingsScreen();
+		return;
+	}
+
+	// Silly Toggle
+	if(eventNo == 113) {
+		if(flags[305] == 0)
+			flags[305] = 1;
+		else flags[305] = 0;
+		settingsScreen();
+		return;
+	}
+	// End Toggles -------------------------
+
+	if(eventNo == 122) {
+		settingsScreen();
+		return;
+	}
+
+
+	if(eventNo == 117) {
+		eventTester();
+		
+		return;
+	}
+
 }
 
 

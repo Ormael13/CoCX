@@ -130,16 +130,44 @@ function mainMenu(e:MouseEvent = undefined):void {
 	//Sets game state to 3, used for determining back functionality of save/load menu.
 	gameState = 3;
 	outputText("<b>Corruption of Champions (" + version + ")</b>\n(Formerly Unnamed Text Game)\n\nCreated by: Fenoxo\nEdited By: Ashi, SoS, Zeikfried, and Others\n\n<b><u>DISCLAIMER</u>\n\n-There are many strange and odd fetishes contained in this flash.  Peruse at own risk.\n-Please be 18 or the legal age to view porn before playing.\n-Try to keep your keyboard clean.  Think of the children!</b>\n\nFor more information see Fenoxo's Blog at <b>fenoxo.com</b>.\n\nAlso go play Nimin by Xadera on furaffinity.", true);
-	if(debug) outputText("\n\n<b>DEBUG MODE ENABLED:  ITEMS WILL NOT BE CONSUMED BY USE.</b>", false);
-	if(flags[273] == 1) outputText("\n\n<b>Sprites disabled.</b>", false);
-	if(flags[99] == 1) outputText("\n\n<b>Easy Mode On:  Bad-ends can be ignored.</b>", false);
-	if(flags[305] == 1) outputText("\n\n<b>SILLY MODE ENGAGED: Crazy, nonsensical, and possibly hilarious things may occur.</b>", false);
-	if(isEaster()) outputText("\n\n<b>It's Easter!  Enjoy the eggs!</b>");
-	if(isValentine()) outputText("\n\n<b>It's Valentine's!</b>");
-	if(isHeliaBirthday()) outputText("\n\n<b>It's Helia's Birthday Month!</b>");
-	if(player.str > 0) choices("EZ Mode",  96, "Credits", 63, "Instructions", 81, "four", 0, "five", 0, "Toggle Debug", 18, "Tester", 117, "Silly Toggle", 113, "Sprite Toggle", 112, "Resume", 1);
-	else choices("EZ Mode",  96, "Credits", 63, "Instructions", 81, "four", 0, "five", 0, "Toggle Debug", 18, "seven", 0, "Silly Toggle", 113, "Sprite Toggle", 112, "",0);
+	if(debug) 
+		outputText("\n\n<b>DEBUG MODE ENABLED:  ITEMS WILL NOT BE CONSUMED BY USE.</b>", false);
+	if(flags[273] == 1) 
+		outputText("\n\n<b>Sprites disabled.</b>", false);
+	if(flags[99] == 1) 
+		outputText("\n\n<b>Easy Mode On:  Bad-ends can be ignored.</b>", false);
+	if(flags[305] == 1) 
+		outputText("\n\n<b>SILLY MODE ENGAGED: Crazy, nonsensical, and possibly hilarious things may occur.</b>", false);
+	if(isEaster()) 
+		outputText("\n\n<b>It's Easter!  Enjoy the eggs!</b>");
+	if(isValentine()) 
+		outputText("\n\n<b>It's Valentine's!</b>");
+	if(isHeliaBirthday()) 
+		outputText("\n\n<b>It's Helia's Birthday Month!</b>");
+
+	if(player.str > 0)  //we're in a game, allow resume.
+		choices("Null",  0, "Credits", 63, "Instructions", 81, "four", 0, "five", 0, "Null", 0, "seven", 0, "Silly Toggle", 0, "Settings", 112, "Resume", 1);
+	else 
+		choices("Null",  0, "Credits", 63, "Instructions", 81, "four", 0, "five", 0, "Null", 0, "seven", 0, "Silly Toggle", 0, "Settings", 122, "",0);
+	//else choices("EZ Mode",  96, "Credits", 63, "Instructions", 81, "four", 0, "five", 0, "Toggle Debug", 18, "seven", 0, "Silly Toggle", 113, "Sprite Toggle", 112, "",0);
 }
+
+
+function settingsScreen():void {
+	outputText("<b>Settings toggles:</b>\n", true);
+	if(debug) 
+		outputText("\n\n<b>DEBUG MODE ENABLED:  ITEMS WILL NOT BE CONSUMED BY USE.</b>", false);
+	if(flags[273] == 1) 
+		outputText("\n\n<b>Sprites disabled.</b>", false);
+	if(flags[99] == 1) 
+		outputText("\n\n<b>Easy Mode On:  Bad-ends can be ignored.</b>", false);
+	if(flags[305] == 1) 
+		outputText("\n\n<b>SILLY MODE ENGAGED: Crazy, nonsensical, and possibly hilarious things may occur.</b>", false);
+
+	choices("Toggle Debug", 18, "EZ Mode", 96, "Silly Toggle", 113, "Sprite Toggle", 112, "five", 0, "Null", 0, "Null", 0, "Null", 0, "Null", 0, "Back", 64);
+}
+
+
 function creditsScreen():void {
 	outputText("<b>Coding and Main Events:</b>\n", true);
 	outputText(" * Fenoxo\n\n", false);

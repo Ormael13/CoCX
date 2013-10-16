@@ -4694,6 +4694,7 @@ function lustPercent():Number {
 	return lust;
 }
 
+//TODO stats function with dynamic arguments so you don't have to specify all those zeros each time.
 //Modify stats
 function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:Number, sens:Number, lust2:Number, corr:Number, resisted:Boolean = true) {
 	//Easy mode cuts lust gains!
