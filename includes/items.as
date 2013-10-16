@@ -1,4 +1,4 @@
-﻿import classes.itemSlotClass;
+﻿// import classes.itemSlotClass;
 
 const FOX_BAD_END_WARNING:int = 477;
 const TIMES_MET_CHICKEN_HARPY:int = 652;

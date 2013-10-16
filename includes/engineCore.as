@@ -1,4 +1,4 @@
-﻿import flash.events.MouseEvent;
+﻿// import flash.events.MouseEvent;
 
 const DOUBLE_ATTACK_STYLE:int = 867;
 const SPELLS_CAST:int = 868;

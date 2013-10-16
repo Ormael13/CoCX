@@ -1,9 +1,9 @@
-﻿import flash.net.FileReference;
-import flash.events.Event;
-import flash.net.URLRequest;
-import flash.utils.ByteArray;
-import flash.net.URLLoader;
-import flash.net.SharedObject;
+﻿// import flash.net.FileReference;
+// import flash.events.Event;
+// import flash.net.URLRequest;
+// import flash.utils.ByteArray;
+// import flash.net.URLLoader;
+// import flash.net.SharedObject;
 
 var file:FileReference;
 var loader:URLLoader;
@@ -197,12 +197,12 @@ function purgeTheMutant():void {
 	doNext(82);
 }
 
-function saveGame(slot:String):void
+function saveGame_OLD(slot:String):void
 {
 	saveGameObject(slot, false);
 }
 
-function loadGame(slot:String):void
+function loadGame_OLD(slot:String):void
 {
 	var saveFile = SharedObject.getLocal(slot,"/");;
     loadGameObject(saveFile,slot);
@@ -215,12 +215,12 @@ function loadGame(slot:String):void
 //FURNITURE'S JUNK
 function saveGameObject(slot:String, isFile:Boolean):void
 {
-	import classes.cockClass;
-	import classes.vaginaClass;
-	import classes.breastRowClass;
-	import classes.assClass;
-	import classes.perkClass;
-	import classes.statusAffectClass;
+	// import classes.cockClass;
+	// import classes.vaginaClass;
+	// import classes.breastRowClass;
+	// import classes.assClass;
+	// import classes.perkClass;
+	// import classes.statusAffectClass;
 	
 	//Autosave stuff
 	if(player.slotName != "VOID") player.slotName = slot;
@@ -646,12 +646,12 @@ function loadGameObject(saveData:Object, slot:String = "VOID"):void
 	
 	//Autosave stuff
 	player.slotName = slot;
-	import classes.cockClass;
-	import classes.vaginaClass;
-	import classes.breastRowClass;
-	import classes.assClass;
-	import classes.perkClass;
-	import classes.statusAffectClass;
+	// import classes.cockClass;
+	// import classes.vaginaClass;
+	// import classes.breastRowClass;
+	// import classes.assClass;
+	// import classes.perkClass;
+	// import classes.statusAffectClass;
 	var counter:Number = player.cocks.length;
     //Initialize the save file
 	//var saveFile:Object = loader.data.readObject();
@@ -1289,18 +1289,18 @@ function loadGame(slot:String):Boolean
     }
     return false;    
 }*/
-/*function loadGame(slot:String):Boolean
+function loadGame(slot:String):Boolean
 {
 	dungeonLoc = 0;
 	inDungeon = false;
 	//Autosave stuff
 	player.slotName = slot;
-	import classes.cockClass;
-	import classes.vaginaClass;
-	import classes.breastRowClass;
-	import classes.assClass;
-	import classes.perkClass;
-	import classes.statusAffectClass;
+	// import classes.cockClass;
+	// import classes.vaginaClass;
+	// import classes.breastRowClass;
+	// import classes.assClass;
+	// import classes.perkClass;
+	// import classes.statusAffectClass;
 	var counter:Number = player.cocks.length;
     //Initialize the save file
 	var saveFile = SharedObject.getLocal(slot,"/");;
@@ -1649,16 +1649,16 @@ function loadGame(slot:String):Boolean
 		return true;
 	}
 	return false;
-}*/
+}
 
-/*function saveGame(slot:String):Boolean
+function saveGame(slot:String):Boolean
 {
 	import classes.cockClass;
-	import classes.vaginaClass;
-	import classes.breastRowClass;
-	import classes.assClass;
-	import classes.perkClass;
-	import classes.statusAffectClass;
+	// import classes.vaginaClass;
+	// import classes.breastRowClass;
+	// import classes.assClass;
+	// import classes.perkClass;
+	// import classes.statusAffectClass;
 	//Autosave stuff
 	if(player.slotName != "VOID") player.slotName = slot;
 	
@@ -1961,7 +1961,7 @@ function loadGame(slot:String):Boolean
 	if(saveFile.flush() == SharedObjectFlushStatus.FLUSHED) return true;
 	else return false;
 }
-*/
+
 
 //This is just the save/load code - from it you can get 
 //strings from the save objects, and load games from strings. 
