@@ -824,6 +824,8 @@ function amilyAndJojoFuck():void {
 	doNext(13);
 }
 
+// Hurray var/function hoisting.
+this.semiglobalReferencer.jojoRape = jojoRape;
 
 function jojoRape():void {
 	spriteSelect(34);

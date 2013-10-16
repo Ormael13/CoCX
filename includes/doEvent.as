@@ -78,7 +78,8 @@ function doEvent(eventNo):void {
 	//Begin the jojo rapingz
 	if(eventNo == 2004) {
 		spriteSelect(34);
-		jojoRape();
+		//jojoRape();
+		this.semiglobalReferencer.jojoRape();
 		doNext(13);
 	}
 	//Encounter sand-witch

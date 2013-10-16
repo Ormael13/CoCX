@@ -1,6 +1,6 @@
-﻿import classes.creature;
-import flash.events.MouseEvent;
-import classes.itemSlotClass;
+﻿// import classes.creature;
+// import flash.events.MouseEvent;
+// import classes.itemSlotClass;
 
 const URTA_MET_HEL:int = 710;
 const URTA_QUEST_STATUS:int = 711;

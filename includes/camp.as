@@ -1,7 +1,7 @@
 ﻿const SLEEP_WITH:int = 701;
 
-import classes.creature;
-import classes.cockClass;
+// import classes.creature;
+// import classes.cockClass;
 
 function camp():void {
 	trace("Current fertility: " + player.totalFertility());

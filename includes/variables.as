@@ -1,4 +1,4 @@
-﻿import classes.creature;
+﻿// import classes.creature;
 
 //Create a player
 var player:creature = new creature();

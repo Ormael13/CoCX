@@ -584,9 +584,9 @@ function keyboard(e:KeyboardEvent):void {
 
 
 //DROPDOWN BOX STUFF
-import fl.controls.ComboBox; 
-import fl.data.DataProvider; 
-import flash.net.navigateToURL; 
+// import fl.controls.ComboBox; 
+// import fl.data.DataProvider; 
+// import flash.net.navigateToURL; 
  
 var perkList:Array = new Array( 
     {label:"Pretend Strength Perk"},
