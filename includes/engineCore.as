@@ -3,6 +3,24 @@
 const DOUBLE_ATTACK_STYLE:int = 867;
 const SPELLS_CAST:int = 868;
 
+//Fenoxo loves his temps
+var temp:int = 0;
+
+//Used to set what each action buttons displays and does.
+var args:Array = new Array();
+var funcs:Array = new Array();
+
+//Used for stat tracking to keep up/down arrows correct.
+var oldStr:Number = 0;
+var oldTou:Number = 0;
+var oldSpe:Number = 0;
+var oldInte:Number = 0;
+var oldSens:Number = 0;
+var oldLib:Number = 0;
+var oldCor:Number = 0;
+var oldHP:Number = 0;
+var oldLust:Number = 0;
+
 function maxHP():Number {
 	var max:Number = 0;
 	max += int(player.tou*2 + 50);
@@ -1811,16 +1829,16 @@ function buttonOn( e:MouseEvent)
 	if(e.target.name == "perksText") perksBG.alpha = .5;
 	if(e.target.name == "dataText") dataBG.alpha = .5;
 	if(e.target.name == "levelText2") levelBG.alpha = .5;
-	if(e.target.name == "b1Text") buttons[0].alpha = .5;
-	if(e.target.name == "b2Text") buttons[1].alpha = .5;
-	if(e.target.name == "b3Text") buttons[2].alpha= .5;
-	if(e.target.name == "b4Text") buttons[3].alpha = .5;
-	if(e.target.name == "b5Text") buttons[4].alpha = .5;
-	if(e.target.name == "b6Text") buttons[5].alpha = .5;
-	if(e.target.name == "b7Text") buttons[6].alpha = .5;
-	if(e.target.name == "b8Text") buttons[7].alpha = .5;
-	if(e.target.name == "b9Text") buttons[8].alpha = .5;
-	if(e.target.name == "b0Text") buttons[9].alpha = .5;
+	if(e.target.name == "b1Text") gButtons[0].alpha = .5;
+	if(e.target.name == "b2Text") gButtons[1].alpha = .5;
+	if(e.target.name == "b3Text") gButtons[2].alpha= .5;
+	if(e.target.name == "b4Text") gButtons[3].alpha = .5;
+	if(e.target.name == "b5Text") gButtons[4].alpha = .5;
+	if(e.target.name == "b6Text") gButtons[5].alpha = .5;
+	if(e.target.name == "b7Text") gButtons[6].alpha = .5;
+	if(e.target.name == "b8Text") gButtons[7].alpha = .5;
+	if(e.target.name == "b9Text") gButtons[8].alpha = .5;
+	if(e.target.name == "b0Text") gButtons[9].alpha = .5;
 	if(e.target.name == "statsText") statsBG.alpha = .5;
 	mouseOverTextin(e, buttonText(e.target.name));
 	//e.target.alpha = .5;
@@ -1845,16 +1863,16 @@ function buttonOff(e:MouseEvent)
 	if(e.target.name == "perksText") perksBG.alpha = 1;
 	if(e.target.name == "dataText") dataBG.alpha = 1;
 	if(e.target.name == "levelText2") levelBG.alpha = 1;
-	if(e.target.name == "b1Text") buttons[0].alpha = 1;
-	if(e.target.name == "b2Text") buttons[1].alpha = 1;
-	if(e.target.name == "b3Text") buttons[2].alpha = 1;
-	if(e.target.name == "b4Text") buttons[3].alpha = 1;
-	if(e.target.name == "b5Text") buttons[4].alpha = 1;
-	if(e.target.name == "b6Text") buttons[5].alpha = 1;
-	if(e.target.name == "b7Text") buttons[6].alpha = 1;
-	if(e.target.name == "b8Text") buttons[7].alpha = 1;
-	if(e.target.name == "b9Text") buttons[8].alpha = 1;
-	if(e.target.name == "b0Text") buttons[9].alpha = 1;
+	if(e.target.name == "b1Text") gButtons[0].alpha = 1;
+	if(e.target.name == "b2Text") gButtons[1].alpha = 1;
+	if(e.target.name == "b3Text") gButtons[2].alpha = 1;
+	if(e.target.name == "b4Text") gButtons[3].alpha = 1;
+	if(e.target.name == "b5Text") gButtons[4].alpha = 1;
+	if(e.target.name == "b6Text") gButtons[5].alpha = 1;
+	if(e.target.name == "b7Text") gButtons[6].alpha = 1;
+	if(e.target.name == "b8Text") gButtons[7].alpha = 1;
+	if(e.target.name == "b9Text") gButtons[8].alpha = 1;
+	if(e.target.name == "b0Text") gButtons[9].alpha = 1;
 	if(e.target.name == "statsText") statsBG.alpha = 1;
 	//Clear mouseover space
 	mouseOverText.visible = false;
@@ -3628,52 +3646,52 @@ function buttonSetup(pos:int,text1:String = ""):void {
 	if(pos == 0) {
 		b1Text.visible = true;
 		b1Text.text = text1;
-		buttons[0].visible = true;
+		gButtons[0].visible = true;
 	}
 	if(pos == 1) {
 		b2Text.visible = true;
 		b2Text.text = text1;
-		buttons[1].visible = true;
+		gButtons[1].visible = true;
 	}
 	if(pos == 2) {
 		b3Text.visible = true;
 		b3Text.text = text1;
-		buttons[2].visible = true;
+		gButtons[2].visible = true;
 	}
 	if(pos == 3) {
 		b4Text.visible = true;
 		b4Text.text = text1;
-		buttons[3].visible = true;
+		gButtons[3].visible = true;
 	}
 	if(pos == 4) {
 		b5Text.visible = true;
 		b5Text.text = text1;
-		buttons[4].visible = true;
+		gButtons[4].visible = true;
 	}
 	if(pos == 5) {
 		b6Text.visible = true;
 		b6Text.text = text1;
-		buttons[5].visible = true;
+		gButtons[5].visible = true;
 	}
 	if(pos == 6) {
 		b7Text.visible = true;
 		b7Text.text = text1;
-		buttons[6].visible = true;
+		gButtons[6].visible = true;
 	}
 	if(pos == 7) {
 		b8Text.visible = true;
 		b8Text.text = text1;
-		buttons[7].visible = true;
+		gButtons[7].visible = true;
 	}
 	if(pos == 8) {
 		b9Text.visible = true;
 		b9Text.text = text1;
-		buttons[8].visible = true;
+		gButtons[8].visible = true;
 	}
 	if(pos == 9) {
 		b0Text.visible = true;
 		b0Text.text = text1;
-		buttons[9].visible = true;
+		gButtons[9].visible = true;
 	}
 }
 
@@ -3764,61 +3782,61 @@ function removeButton(arg):void {
 	}
 	if(buttonToRemove == 0) {
 		b1Text.visible = false;
-		buttons[0].visible = false;
+		gButtons[0].visible = false;
 		funcs[0] = null;
 		args[0] = -9000;
 	}
 	else if(buttonToRemove == 1) {
 		b2Text.visible = false;
-		buttons[1].visible = false;
+		gButtons[1].visible = false;
 		funcs[1] = null;
 		args[1] = -9000;
 	}
 	else if(buttonToRemove == 2) {
 		b3Text.visible = false;
-		buttons[2].visible = false;
+		gButtons[2].visible = false;
 		funcs[2] = null;
 		args[2] = -9000;
 	}
 	else if(buttonToRemove == 3) {
 		b4Text.visible = false;
-		buttons[3].visible = false;
+		gButtons[3].visible = false;
 		funcs[3] = null;
 		args[3] = -9000;
 	}
 	else if(buttonToRemove == 4) {
 		b5Text.visible = false;
-		buttons[4].visible = false;
+		gButtons[4].visible = false;
 		funcs[4] = null;
 		args[4] = -9000;
 	}
 	else if(buttonToRemove == 5) {
 		b6Text.visible = false;
-		buttons[5].visible = false;
+		gButtons[5].visible = false;
 		funcs[5] = null;
 		args[5] = -9000;
 	}
 	else if(buttonToRemove == 6) {
 		b7Text.visible = false;
-		buttons[6].visible = false;
+		gButtons[6].visible = false;
 		funcs[6] = null;
 		args[6] = -9000;
 	}
 	else if(buttonToRemove == 7) {
 		b8Text.visible = false;
-		buttons[7].visible = false;
+		gButtons[7].visible = false;
 		funcs[7] = null;
 		args[7] = -9000;
 	}
 	else if(buttonToRemove == 8) {
 		b9Text.visible = false;
-		buttons[8].visible = false;
+		gButtons[8].visible = false;
 		funcs[8] = null;
 		args[8] = -9000;
 	}
 	else if(buttonToRemove == 9) {
 		b0Text.visible = false;
-		buttons[9].visible = false;
+		gButtons[9].visible = false;
 		funcs[9] = null;
 		args[9] = -9000;
 	}
@@ -3864,83 +3882,83 @@ function menu(text1:String = "", func1:Function = null, arg1:Number = -9000, tex
 	if(text0 != null) b0Text.htmlText = text0;
 	if(func1 == null) {
 		b1Text.visible = false;
-		buttons[0].visible = false;
+		gButtons[0].visible = false;
 	}
 	else {
 		b1Text.visible = true;
-		buttons[0].visible = true;
+		gButtons[0].visible = true;
 	}
 	if(func2 == null) {
 		b2Text.visible = false;
-		buttons[1].visible = false;
+		gButtons[1].visible = false;
 	}
 	else {
 		b2Text.visible = true;
-		buttons[1].visible = true;
+		gButtons[1].visible = true;
 	}
 	if(func3 == null) {
 		b3Text.visible = false;
-		buttons[2].visible = false;
+		gButtons[2].visible = false;
 	}
 	else {
 		b3Text.visible = true;
-		buttons[2].visible = true;
+		gButtons[2].visible = true;
 	}
 	if(func4 == null) {
 		b4Text.visible = false;
-		buttons[3].visible = false;
+		gButtons[3].visible = false;
 	}
 	else {
 		b4Text.visible = true;
-		buttons[3].visible = true;
+		gButtons[3].visible = true;
 	}
 	if(func5 == null) {
 		b5Text.visible = false;
-		buttons[4].visible = false;
+		gButtons[4].visible = false;
 	}
 	else {
 		b5Text.visible = true;
-		buttons[4].visible = true;
+		gButtons[4].visible = true;
 	}
 	if(func6 == null) {
 		b6Text.visible = false;
-		buttons[5].visible = false;
+		gButtons[5].visible = false;
 	}
 	else {
 		b6Text.visible = true;
-		buttons[5].visible = true;
+		gButtons[5].visible = true;
 	}
 	if(func7 == null) {
 		b7Text.visible = false;
-		buttons[6].visible = false;
+		gButtons[6].visible = false;
 	}
 	else {
 		b7Text.visible = true;
-		buttons[6].visible = true;
+		gButtons[6].visible = true;
 	}
 	if(func8 == null) {
 		b8Text.visible = false;
-		buttons[7].visible = false;
+		gButtons[7].visible = false;
 	}
 	else {
 		b8Text.visible = true;
-		buttons[7].visible = true;
+		gButtons[7].visible = true;
 	}
 	if(func9 == null) {
 		b9Text.visible = false;
-		buttons[8].visible = false;
+		gButtons[8].visible = false;
 	}
 	else {
 		b9Text.visible = true;
-		buttons[8].visible = true;
+		gButtons[8].visible = true;
 	}
 	if(func0 == null) {
 		b0Text.visible = false;
-		buttons[9].visible = false;
+		gButtons[9].visible = false;
 	}
 	else {
 		b0Text.visible = true;
-		buttons[9].visible = true;
+		gButtons[9].visible = true;
 	}
 	mainText.htmlText = currentText;
 	scrollBar.update();
@@ -3972,83 +3990,83 @@ function choices(text1:String, butt1:Number, text2:String, butt2:Number, text3:S
 	b0Text.htmlText = text0;
 	if(buttonEvents[0] == 0) {
 		b1Text.visible = false;
-		buttons[0].visible = false;
+		gButtons[0].visible = false;
 	}
 	else {
 		b1Text.visible = true;
-		buttons[0].visible = true;
+		gButtons[0].visible = true;
 	}
 	if(buttonEvents[1] == 0) {
 		b2Text.visible = false;
-		buttons[1].visible = false;
+		gButtons[1].visible = false;
 	}
 	else {
 		b2Text.visible = true;
-		buttons[1].visible = true;
+		gButtons[1].visible = true;
 	}
 	if(buttonEvents[2] == 0) {
 		b3Text.visible = false;
-		buttons[2].visible = false;
+		gButtons[2].visible = false;
 	}
 	else {
 		b3Text.visible = true;
-		buttons[2].visible = true;
+		gButtons[2].visible = true;
 	}
 	if(buttonEvents[3] == 0) {
 		b4Text.visible = false;
-		buttons[3].visible = false;
+		gButtons[3].visible = false;
 	}
 	else {
 		b4Text.visible = true;
-		buttons[3].visible = true;
+		gButtons[3].visible = true;
 	}
 	if(buttonEvents[4] == 0) {
 		b5Text.visible = false;
-		buttons[4].visible = false;
+		gButtons[4].visible = false;
 	}
 	else {
 		b5Text.visible = true;
-		buttons[4].visible = true;
+		gButtons[4].visible = true;
 	}
 	if(buttonEvents[5] == 0) {
 		b6Text.visible = false;
-		buttons[5].visible = false;
+		gButtons[5].visible = false;
 	}
 	else {
 		b6Text.visible = true;
-		buttons[5].visible = true;
+		gButtons[5].visible = true;
 	}
 	if(buttonEvents[6] == 0) {
 		b7Text.visible = false;
-		buttons[6].visible = false;
+		gButtons[6].visible = false;
 	}
 	else {
 		b7Text.visible = true;
-		buttons[6].visible = true;
+		gButtons[6].visible = true;
 	}
 	if(buttonEvents[7] == 0) {
 		b8Text.visible = false;
-		buttons[7].visible = false;
+		gButtons[7].visible = false;
 	}
 	else {
 		b8Text.visible = true;
-		buttons[7].visible = true;
+		gButtons[7].visible = true;
 	}
 	if(buttonEvents[8] == 0) {
 		b9Text.visible = false;
-		buttons[8].visible = false;
+		gButtons[8].visible = false;
 	}
 	else {
 		b9Text.visible = true;
-		buttons[8].visible = true;
+		gButtons[8].visible = true;
 	}
 	if(buttonEvents[9] == 0) {
 		b0Text.visible = false;
-		buttons[9].visible = false;
+		gButtons[9].visible = false;
 	}
 	else {
 		b0Text.visible = true;
-		buttons[9].visible = true;
+		gButtons[9].visible = true;
 	}
 	funcs = new Array();
 	args = new Array();
@@ -4082,54 +4100,54 @@ function simpleChoices(text1:String, butt1:Number, text2:String, butt2:Number, t
 	b5Text.htmlText = text5;
 	if(buttonEvents[0] == 0) {
 		b1Text.visible = false;
-		buttons[0].visible = false;
+		gButtons[0].visible = false;
 	}
 	else {
 		b1Text.visible = true;
-		buttons[0].visible = true;
+		gButtons[0].visible = true;
 	}
 	if(buttonEvents[1] == 0) {
 		b2Text.visible = false;
-		buttons[1].visible = false;
+		gButtons[1].visible = false;
 	}
 	else {
 		b2Text.visible = true;
-		buttons[1].visible = true;
+		gButtons[1].visible = true;
 	}
 	if(buttonEvents[2] == 0) {
 		b3Text.visible = false;
-		buttons[2].visible = false;
+		gButtons[2].visible = false;
 	}
 	else {
 		b3Text.visible = true;
-		buttons[2].visible = true;
+		gButtons[2].visible = true;
 	}
 	if(buttonEvents[3] == 0) {
 		b4Text.visible = false;
-		buttons[3].visible = false;
+		gButtons[3].visible = false;
 	}
 	else {
 		b4Text.visible = true;
-		buttons[3].visible = true;
+		gButtons[3].visible = true;
 	}
 	if(buttonEvents[4] == 0) {
 		b5Text.visible = false;
-		buttons[4].visible = false;
+		gButtons[4].visible = false;
 	}
 	else {
 		b5Text.visible = true;
-		buttons[4].visible = true;
+		gButtons[4].visible = true;
 	}
 	b6Text.visible = false;
-	buttons[5].visible = false;
+	gButtons[5].visible = false;
 	b7Text.visible = false;
-	buttons[6].visible = false;
+	gButtons[6].visible = false;
 	b8Text.visible = false;
-	buttons[7].visible = false;
+	gButtons[7].visible = false;
 	b9Text.visible = false;
-	buttons[8].visible = false;
+	gButtons[8].visible = false;
 	b0Text.visible = false;
-	buttons[9].visible = false;
+	gButtons[9].visible = false;
 	funcs = new Array();
 	args = new Array();
 	mainText.htmlText = currentText;
@@ -4139,30 +4157,30 @@ function simpleChoices(text1:String, butt1:Number, text2:String, butt2:Number, t
 function doYesNo(eventYes:Number, eventNo:Number):void {
 	//Make buttons 1-2 visible and hide the rest.
 	b1Text.visible = true;
-	buttons[0].visible = true;
+	gButtons[0].visible = true;
 	b2Text.visible = true;
-	buttons[1].visible = true;
+	gButtons[1].visible = true;
 	buttonEvents[0] = eventYes;
 	buttonEvents[1] = eventNo;
 	b1Text.htmlText = "Yes";
 	b2Text.htmlText = "No";
 	//Hide the others.
 	b3Text.visible = false;
-	buttons[2].visible = false;
+	gButtons[2].visible = false;
 	b4Text.visible = false;
-	buttons[3].visible = false;
+	gButtons[3].visible = false;
 	b5Text.visible = false;
-	buttons[4].visible = false;
+	gButtons[4].visible = false;
 	b6Text.visible = false;
-	buttons[5].visible = false;
+	gButtons[5].visible = false;
 	b7Text.visible = false;
-	buttons[6].visible = false;
+	gButtons[6].visible = false;
 	b8Text.visible = false;
-	buttons[7].visible = false;
+	gButtons[7].visible = false;
 	b9Text.visible = false;
-	buttons[8].visible = false;
+	gButtons[8].visible = false;
 	b0Text.visible = false;
-	buttons[9].visible = false;
+	gButtons[9].visible = false;
 	outputText("", false, true);
 	funcs = new Array();
 	args = new Array();
