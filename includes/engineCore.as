@@ -3964,7 +3964,17 @@ function menu(text1:String = "", func1:Function = null, arg1:Number = -9000, tex
 	scrollBar.update();
 }
 
-function choices(text1:String, butt1:Number, text2:String, butt2:Number, text3:String, butt3:Number, text4:String, butt4:Number, text5:String, butt5:Number, text6:String, butt6:Number, text7:String, butt7:Number, text8:String, butt8:Number, text9:String, butt9:Number, text0:String, butt0:Number):void 
+/*
+function choices(text1:String, butt1:Number, 
+					text2:String, butt2:Number, 
+					text3:String, butt3:Number, 
+					text4:String, butt4:Number, 
+					text5:String, butt5:Number, 
+					text6:String, butt6:Number, 
+					text7:String, butt7:Number, 
+					text8:String, butt8:Number, 
+					text9:String, butt9:Number, 
+					text0:String, butt0:Number):void 
 {
 	//Transfer event code to storage
 	buttonEvents[0] = butt1;
@@ -3988,91 +3998,117 @@ function choices(text1:String, butt1:Number, text2:String, butt2:Number, text3:S
 	b8Text.htmlText = text8;
 	b9Text.htmlText = text9;
 	b0Text.htmlText = text0;
-	if(buttonEvents[0] == 0) {
-		b1Text.visible = false;
-		gButtons[0].visible = false;
+
+
+	var bTextArr:Array = new Array( b1Text,
+									b2Text,
+									b3Text,
+									b4Text,
+									b5Text,
+									b6Text,
+									b7Text,
+									b8Text,
+									b9Text,
+									b0Text);
+
+	var j:int;
+
+	// iterate over the button options, and only enable the ones which have a corresponding event number
+
+	for (j = 0; j < 10; j += 1)
+	{
+
+		if(buttonEvents[j] == 0) {
+			bTextArr[j].visible = false;
+			gButtons[j].visible = false;
+		}
+		else {
+			bTextArr[j].visible = true;
+			gButtons[j].visible = true;
+		}
+
 	}
-	else {
-		b1Text.visible = true;
-		gButtons[0].visible = true;
-	}
-	if(buttonEvents[1] == 0) {
-		b2Text.visible = false;
-		gButtons[1].visible = false;
-	}
-	else {
-		b2Text.visible = true;
-		gButtons[1].visible = true;
-	}
-	if(buttonEvents[2] == 0) {
-		b3Text.visible = false;
-		gButtons[2].visible = false;
-	}
-	else {
-		b3Text.visible = true;
-		gButtons[2].visible = true;
-	}
-	if(buttonEvents[3] == 0) {
-		b4Text.visible = false;
-		gButtons[3].visible = false;
-	}
-	else {
-		b4Text.visible = true;
-		gButtons[3].visible = true;
-	}
-	if(buttonEvents[4] == 0) {
-		b5Text.visible = false;
-		gButtons[4].visible = false;
-	}
-	else {
-		b5Text.visible = true;
-		gButtons[4].visible = true;
-	}
-	if(buttonEvents[5] == 0) {
-		b6Text.visible = false;
-		gButtons[5].visible = false;
-	}
-	else {
-		b6Text.visible = true;
-		gButtons[5].visible = true;
-	}
-	if(buttonEvents[6] == 0) {
-		b7Text.visible = false;
-		gButtons[6].visible = false;
-	}
-	else {
-		b7Text.visible = true;
-		gButtons[6].visible = true;
-	}
-	if(buttonEvents[7] == 0) {
-		b8Text.visible = false;
-		gButtons[7].visible = false;
-	}
-	else {
-		b8Text.visible = true;
-		gButtons[7].visible = true;
-	}
-	if(buttonEvents[8] == 0) {
-		b9Text.visible = false;
-		gButtons[8].visible = false;
-	}
-	else {
-		b9Text.visible = true;
-		gButtons[8].visible = true;
-	}
-	if(buttonEvents[9] == 0) {
-		b0Text.visible = false;
-		gButtons[9].visible = false;
-	}
-	else {
-		b0Text.visible = true;
-		gButtons[9].visible = true;
-	}
+
+
 	funcs = new Array();
 	args = new Array();
 	mainText.htmlText = currentText;
 	scrollBar.update();
 }
+*/
+
+function choices(text1:String, butt1:*, 
+						text2:String, butt2:*, 
+						text3:String, butt3:*, 
+						text4:String, butt4:*, 
+						text5:String, butt5:*, 
+						text6:String, butt6:*, 
+						text7:String, butt7:*, 
+						text8:String, butt8:*, 
+						text9:String, butt9:*, 
+						text0:String, butt0:*):void 
+{
+	//Transfer event code to storage
+	buttonEvents[0] = butt1;
+	buttonEvents[1] = butt2;
+	buttonEvents[2] = butt3;
+	buttonEvents[3] = butt4;
+	buttonEvents[4] = butt5;
+	buttonEvents[5] = butt6;
+	buttonEvents[6] = butt7;
+	buttonEvents[7] = butt8;
+	buttonEvents[8] = butt9;
+	buttonEvents[9] = butt0;
+	//Set button texts
+	b1Text.htmlText = text1;
+	b2Text.htmlText = text2;
+	b3Text.htmlText = text3;
+	b4Text.htmlText = text4;
+	b5Text.htmlText = text5;
+	b6Text.htmlText = text6;
+	b7Text.htmlText = text7;
+	b8Text.htmlText = text8;
+	b9Text.htmlText = text9;
+	b0Text.htmlText = text0;
+
+
+	var bTextArr:Array = new Array( b1Text,
+									b2Text,
+									b3Text,
+									b4Text,
+									b5Text,
+									b6Text,
+									b7Text,
+									b8Text,
+									b9Text,
+									b0Text);
+
+	var j:int;
+
+	// iterate over the button options, and only enable the ones which have a corresponding event number
+
+	for (j = 0; j < 10; j += 1)
+	{
+
+		if(buttonEvents[j] == 0) {
+			bTextArr[j].visible = false;
+			gButtons[j].visible = false;
+		}
+		else {
+			bTextArr[j].visible = true;
+			gButtons[j].visible = true;
+		}
+
+	}
+
+
+	funcs = new Array();
+	args = new Array();
+	mainText.htmlText = currentText;
+	scrollBar.update();
+}
+
+
 function simpleChoices(text1:String, butt1:Number, text2:String, butt2:Number, text3:String, butt3:Number, text4:String, butt4:Number, text5:String, butt5:Number):void 
 {
 	//Cancel change due to game being over

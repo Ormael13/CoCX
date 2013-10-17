@@ -2,35 +2,52 @@
 const EVENT_PARSER_ESCAPE:int = 800;
 const PHYLLA_GEMS_HUNTED_TODAY:int = 893;
 
-function eventParser(eventNo:Number):void {
+function eventParser(eventNo:*):void {
 	//Clear banked buttons
+
 	trace("EVENT CODE: " + eventNo);
-	//Clear sprite if not in combat
-	if(!inCombat() && eventNo != 5007) spriteSelect(-1);
-	//Clear pic if not in combat
-	if(!inCombat() && eventNo != 5007) clearImages();
-	//Reset newgame buttons till back at camp
-	newGameText.removeEventListener(MouseEvent.CLICK, mainMenu);
-	newGameBG.removeEventListener(MouseEvent.CLICK, mainMenu);
-	newGameText.addEventListener(MouseEvent.CLICK, newGameGo);
-	newGameBG.addEventListener(MouseEvent.CLICK, newGameGo);
-	newGameText.text = "New Game";
-	if(eventNo != 1) {
-		hideMenus();
+	if (eventNo is Function)
+	{
+		trace("It's a function");
+
+		eventNo();
 	}
-	/*if(eventNo == 1000 && gameState == 1 && menuLoc == 1) {
-		menuLoc = 0;
-		outputText("\n\n", false);
-		if(!combatRoundOver()) enemyAI();
-		else outputText(monster.capitalA + monster.short + " is defeated!");
-		return;
-	}*/
-	if(eventNo < 1000) doSystem(eventNo);
-	if(eventNo >=1000 && eventNo < 2000) doItems(eventNo);
-	if(eventNo >=2000 && eventNo < 5000) doEvent(eventNo);
-	if(eventNo >=5000 && eventNo < 7000) doCombat(eventNo);
-	if(eventNo >= 10000 && eventNo < 10999) doCreation(eventNo);
-	if(eventNo >= 11000) doDungeon(eventNo);
+	else if (eventNo is int)
+	{
+		//Clear sprite if not in combat
+		if(!inCombat() && eventNo != 5007) spriteSelect(-1);
+		//Clear pic if not in combat
+		if(!inCombat() && eventNo != 5007) clearImages();
+		//Reset newgame buttons till back at camp
+		newGameText.removeEventListener(MouseEvent.CLICK, mainMenu);
+		newGameBG.removeEventListener(MouseEvent.CLICK, mainMenu);
+		newGameText.addEventListener(MouseEvent.CLICK, newGameGo);
+		newGameBG.addEventListener(MouseEvent.CLICK, newGameGo);
+		newGameText.text = "New Game";
+		if(eventNo != 1) {
+			hideMenus();
+		}
+		/*if(eventNo == 1000 && gameState == 1 && menuLoc == 1) {
+			menuLoc = 0;
+			outputText("\n\n", false);
+			if(!combatRoundOver()) enemyAI();
+			else outputText(monster.capitalA + monster.short + " is defeated!");
+			return;
+		}*/
+
+
+		if(eventNo < 1000) doSystem(eventNo);
+		if(eventNo >=1000 && eventNo < 2000) doItems(eventNo);
+		if(eventNo >=2000 && eventNo < 5000) doEvent(eventNo);
+		if(eventNo >=5000 && eventNo < 7000) doCombat(eventNo);
+		if(eventNo >= 10000 && eventNo < 10999) doCreation(eventNo);
+		if(eventNo >= 11000) doDungeon(eventNo);
+	}
+
+	else
+	{
+		trace("OMGWTFBBQ, what kind of object was passed?" + eventNo)
+	}
 }
 
 
@@ -867,6 +884,23 @@ function doNext(eventNo:Number):void {
 	scrollBar.update();
 	simpleChoices("Next", eventNo, "", 0, "", 0, "", 0, "", 0); 
 }
+
+
+
+
+function betterDoNext(func:Function):void {
+	//Prevent new events in combat from automatically overwriting a game over. 
+	if(b1Text.text.indexOf("Game Over") != -1) {
+		trace("Do next setup cancelled by game over");
+		return;
+	}
+	funcs = new Array();
+	args = new Array();
+	mainText.htmlText = currentText;
+	scrollBar.update();
+	choices("Next", func, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0); 
+}
+
 
 
 //Argument is time passed.  Pass to event parser if nothing happens.
