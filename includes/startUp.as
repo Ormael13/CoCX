@@ -147,8 +147,9 @@ function mainMenu(e:MouseEvent = undefined):void {
 
 	if(player.str > 0)  //we're in a game, allow resume.
 		choices("Null",  0, "Credits", 63, "Instructions", 81, "four", 0, "five", 0, "Null", 0, "seven", 0, "Silly Toggle", 0, "Settings", 112, "Resume", 1);
+		
 	else 
-		choices("Null",  0, "Credits", 63, "Instructions", 81, "four", 0, "five", 0, "Null", 0, "seven", 0, "Silly Toggle", 0, "Settings", 122, "",0);
+		choices("Null",  0, "Credits", creditsScreen, "Instructions", howToPlay, "Null", 0, "Null", 0, "Null", 0, "Null", 0, "Null", 0, "Settings", settingsScreen, "Null",0);
 	//else choices("EZ Mode",  96, "Credits", 63, "Instructions", 81, "four", 0, "five", 0, "Toggle Debug", 18, "seven", 0, "Silly Toggle", 113, "Sprite Toggle", 112, "",0);
 }
 
