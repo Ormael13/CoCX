@@ -186,7 +186,7 @@ function doCombat(eventNum:Number)
 		perksBG.visible = false;
 		perksText.visible = false;
 		b1Text.visible = true;
-		buttons[0].visible = true;
+		gButtons[0].visible = true;
 		b1Text.htmlText = "Attack";
 		var waitT:String = "Wait";
 		if(monster.hasStatusAffect("level") >= 0) waitT = "Climb";

@@ -51,7 +51,9 @@
 		{
 			// big splat of include lines here...
 			// These are relative to the current directory, which is /classes/classes.
-			include "../../includes/variables.as";
+			include "../../includes/GlobalVariables.as";
+			include "../../includes/OnLoadVariables.as";
+			include "../../includes/InitialiseUI.as";
 			include "../../includes/startUp.as";
 			include "../../includes/engineCore.as";
 			include "../../includes/input.as";
