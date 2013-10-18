@@ -35,7 +35,7 @@ function interactWithAuntNancy():void {
 		outputText("Aunt Nancy sighs.  \"<i>Sorry. I don't mean to bore you with an old woman's rambling.  I... I just miss him, so much, and I get a little... lonely, sometimes.</i>\"  She looks at you, with a strange, half-hungry, half-desperate look in her eyes.  \"<i>Would you mind... coming home with me?  You seem a little tense, and I'd like to give you a massage.</i>\"\n\n", false);
 		//[Gain 20 Lust.] (I remain steadfastly unaroused; maudlin self-pity isn't sexy.  -Z)
 		stats(0,0,0,0,0,0,10,0);
-		simpleChoices("Agree",2974,"Decline",2973,"",0,"",0,"",0);
+		simpleChoices("Agree",timeForAuntNancySpiderCooch,"Decline",declineAuntNancyMassage,"",0,"",0,"",0);
 	}
 	//[If Time >= 1400 - (100*(Relationship with Aunt Nancy/30), Relationship with Aunt Nancy >= 30, and PillowTalk= 1]
 	else if(flags[264] >= 30 && hours >= (14 - (flags[264]/30)) && flags[266] > 0) {
@@ -43,7 +43,7 @@ function interactWithAuntNancy():void {
 
 		outputText("\"<i>Couldn't stay away, could you friend?</i>\" she asks, quietly, a sexy smile on her lovely face.  \"<i>What'll it be? Do you want a drink...</i>\"  The spider-lady leans her white-haired head next to your ear conspiratorially, and whispers, \"<i>Or, do you want me to get off early and give you a little... massage?</i>\"  You shiver at her words.\n\n", false);
 		//[Choice: Strong, Light, Agree, Decline]
-		simpleChoices("Strong",2971,"Light",2972,"Agree",2974,"",0,"Back",2973);
+		simpleChoices("Strong",strongStuff,"Light",lightStuff,"Agree",timeForAuntNancySpiderCooch,"",0,"Back",declineAuntNancyMassage);
 	}
 	//[Interaction 1]
 	//If Relationship with Nancy < 30
@@ -54,7 +54,7 @@ function interactWithAuntNancy():void {
 		//[If MetNancy < 1, MetNancy += 1]
 		if(flags[263] < 1) flags[263] = 1;
 		//[Choice: Strong, Light]
-		simpleChoices("Strong",2971,"Light",2972,"",0,"",0,"Leave",2256);
+		simpleChoices("Strong",strongStuff,"Light",lightStuff,"",0,"",0,"Leave",barTelAdre);
 	}
 }
 
@@ -65,7 +65,7 @@ function strongStuff():void {
 	if(player.gems < 5) {
 		outputText("You start to ask for a strong drink and then remember you can't afford it.", false);
 		//Do next
-		doNext(2970);
+		doNext(interactWithAuntNancy);
 		return;
 	}
 	stats(0,1,0,-1,0,0,15,0);
@@ -98,7 +98,7 @@ function lightStuff():void {
 	if(player.gems < 5) {
 		outputText("You start to ask for a light drink and then remember you can't afford it.", false);
 		//Do next
-		doNext(2970);
+		doNext(interactWithAuntNancy);
 		return;
 	}
 	player.gems -= 5;
@@ -185,7 +185,7 @@ function timeForAuntNancySpiderCooch():void {
 	//[Gain 30 Lust, New Page]
 	player.lust += 29;
 	stats(0,0,0,0,0,0,1,0);
-	doNext(2975);
+	doNext(auntNancyPoonPartII);
 }
 function auntNancyPoonPartII():void {
 	outputText("", true);
@@ -339,7 +339,7 @@ function auntNancyPoonPartII():void {
 		//[If PC is lactating:]
 		if(player.biggestLactation() >= 1) outputText("As milk leaks slowly from your " + nippleDescript(0) + "s, the spider-lady notices. She lowers her head and wraps her soft, lovely lips around the tip of one of your " + allBreastsDescript() + ", sucking gently and frantically flicking her tongue against your " + nippleDescript(0) + ".  You moan and lie back into the web, the multitude of sexual pleasures assaulting your senses almost more than you can bear as Aunt Nancy begins swallowing up your milk.\n\n", false);
 	}
-	doNext(2976);
+	doNext(auntNancyPoonPartIII);
 }
 
 function auntNancyPoonPartIII():void {
@@ -435,7 +435,7 @@ function auntNancyPoonPartIII():void {
 	outputText("\"<i>And I'll be damned if I do all the work this time,</i>\" Aunt Nancy adds, before letting out a satisfied groan at the touch of your lips.", false);
 
 	//[Next Page, Time += 200]
-	doNext(2977);
+	doNext(auntNancyPoonPartIV);
 }
 function auntNancyPoonPartIV():void {
 	outputText("", true);

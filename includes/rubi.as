@@ -143,7 +143,7 @@ function specialRelationship20scene():void {
 	outputText("\n\nYou're a little surprised, but it does make sense.  She... he is pretty flat-chested, and you'd often wondered if you'd seen a bulge of some sort in her skirt from time to time...");
 	flags[RUBI_ADMITTED_GENDER] = 1;
 	//(Accept) or (Reject)
-	simpleChoices("Accept",3891,"Reject",3892,"",0,"",0,"",0);
+	simpleChoices("Accept",acceptRubi,"Reject",rejectRubi,"",0,"",0,"",0);
 }
 //[If Accept]
 function acceptRubi():void {
@@ -492,7 +492,7 @@ function buyRubiMilk():void {
 	player.gems -= 3;
  	rubiAffection(3);
 	player.modThickness(100,1);
-	if(rubiAffection() >= 30 && flags[RUBI_ADMITTED_GENDER] == 0) doNext(3890);
+	if(rubiAffection() >= 30 && flags[RUBI_ADMITTED_GENDER] == 0) doNext(specialRelationship20scene);
 	else doNext(13);
 }
  
@@ -518,7 +518,7 @@ function getTeaFromRubi():void {
 	player.gems -= 6;
 	rubiAffection(5);
 	fatigue(-25);
-	if(rubiAffection() >= 30 && flags[RUBI_ADMITTED_GENDER] == 0) doNext(3890);
+	if(rubiAffection() >= 30 && flags[RUBI_ADMITTED_GENDER] == 0) doNext(specialRelationship20scene);
 	else doNext(13);
 }
  
@@ -553,7 +553,7 @@ function chatWithRubi():void {
 		outputText("You decide not to order anything to drink, instead taking the opportunity to hang out with Rubi whenever " + rubiMF("he","she") + " has a free moment.  You talk of pleasant but inconsequential things.  Rubi spends some time discussing " + rubiMF("his","her") + " old village, an honest-to-goodness human village.  Life there was good, they had plenty of farms bringing in food, and very little corruption to contend with.  There were some residents with inhuman features, usually achieved willingly, but the majority were pureblood humans.  That changed years ago when a detachment of incubi, succubi and imps attacked.  Rubi and a handful made it out fine, but got split up along the way.  As far as Rubi knows, everyone else either perished or was corrupted in the aftermath.");
 		outputText("\n\nEventually you run out of topics to discuss and excuse yourself, giving Rubi a kiss on the lips before heading back to camp.");
 	}
-	if(rubiAffection() >= 30 && flags[RUBI_ADMITTED_GENDER] == 0) doNext(3890);
+	if(rubiAffection() >= 30 && flags[RUBI_ADMITTED_GENDER] == 0) doNext(specialRelationship20scene);
 	else doNext(13);
 }
  
@@ -1119,7 +1119,7 @@ function findBimboCheatster():void {
 	outputText("\n\nThere she is, Rubi, splayed out on the couch, naked with two fingers buried deep inside her pussy.  You shift around a bit, and see nearby her a tanned man in the process of taking off his shirt.  So, you got to them before they did anything.  Rubi moans, running a hand through her platinum blonde hair and staring at the tanned man.");
 	outputText("\n\nYou could interrupt them before they go any further, or wait until it's over.");
 	//[Interrupt] [Wait]
-	simpleChoices("Interrupt",3906,"Watch n Wait",3907,"",0,"",0,"",0);
+	simpleChoices("Interrupt",interruptTheNTRsYouCrazyFool,"Watch n Wait",waitAndGetNTRedLikeTheBoyBitchYouAre,"",0,"",0,"",0);
 }
 //(Interrupt)
 function interruptTheNTRsYouCrazyFool():void {
@@ -1147,7 +1147,7 @@ function interruptTheNTRsYouCrazyFool():void {
 		}
 	}
 	//[Leads to Resolution]
-	doNext(3908);
+	doNext(NTRbimboBitchResolution);
 }
 
 //(Wait)
@@ -1173,7 +1173,7 @@ function waitAndGetNTRedLikeTheBoyBitchYouAre():void {
 	outputText("\n\nWell, this is as good of a time as any to confront her...  You stand up, adjust your clothing, and walk inside as a naked Rubi cleans herself off with a moist towel.");
 	outputText("\n\nShe spots you and lights up, \"<i>Oh baby!  Like, I didn't know you'd be coming by!</i>\"  She then seems to realize that she's stark naked, mostly covered in cum, and that you came in just seconds after her previous lover left.  \"<i>Oh.  Yeah.</i>\"");
 	//[leads to Resolution]
-	doNext(3908);
+	doNext(NTRbimboBitchResolution);
 }
 
 //(Resolution)
@@ -1186,7 +1186,7 @@ function NTRbimboBitchResolution():void {
 	outputText("\n\nRubi hugs the cushion close, apparently done with her speech.  So how do you react?");
 	outputText("\n\nYou could tell her no, forbidding her to see anyone else.  Or you could say yes, letting her sleep with anyone.  You could always break up with her.  Or there might be a fourth option...");
 	//[No] [Yes] [Break Up] [Pimp]
-	simpleChoices("No",3909,"Yes",3910,"Break Up",3911,"Pimp",3912,"",0);
+	simpleChoices("No",noBimboNTR,"Yes",yesBimboNTR,"Break Up",breakUpWithRubi,"Pimp",pimpOutRubi,"",0);
 }
 
 //(No)
@@ -3252,5 +3252,5 @@ function giveRubiClothes(short:String = ""):void {
 	else if(short == "I.Corst") flags[RUBI_INQUISITORS_CORSET] = 1;
 	else if(short == "BonStrp") flags[RUBI_BONDAGE_STRAPS] = 1;
 	rubiAffection(20);
-	doNext(3898);
+	doNext(rubisFuckingHouseYouPervert);
 }

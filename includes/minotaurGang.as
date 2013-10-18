@@ -32,7 +32,7 @@ function meetMinotaurSons():void {
 	
 			outputText("You can't help but laugh with a mixture of maternal pride and rational worry.  What do your offspring have planned for you?  Judging by the three stiffening loincloths, they won't hold back much longer.  What will you do?", false);
 			//[Fight] [Submit] [Negotiate] [Run]
-			simpleChoices("Fight",3152,"Submit",3153,"Negotiate",3150,"",0,"Leave",3151);
+			simpleChoices("Fight",fightOTaurs,"Submit",submitToMinotaurMob,"Negotiate",negotiate,"",0,"Leave",runFromMinotaurs);
 		}
 		//(Addicted) 
 		else {
@@ -57,7 +57,7 @@ function meetMinotaurSons():void {
 			else if(player.cor < 66) outputText("You're not sure how to feel about this morally, but you can't keep from licking your lips, fantasizing about the fix these wonderful kids of yours are so willing to give you.", false);
 			else outputText("Who cares if they're your offspring?  They're all grown up and they smell so... appetizing.", false);
 			//[Fight] [Submit] [Run]
-			simpleChoices("Fight",3152,"Submit",3153,"Negotiate",3150,"",0,"Leave",3151);
+			simpleChoices("Fight",fightOTaurs,"Submit",submitToMinotaurMob,"Negotiate",negotiate,"",0,"Leave",runFromMinotaurs);
 		}
 	}
 	//Repeat meetings
@@ -106,13 +106,13 @@ function meetMinotaurSons():void {
 				if(minotaurNeed()) {
 					outputText("Your mind is already fogging under the intense need of your addiction, and you do the only thing a junkie like you can do in this situation – drop down on all fours and get ready to be used.", false);
 					//Same as 'submit'
-					doNext(3153);
+					doNext(submitToMinotaurMob);
 					return;
 				}
 				outputText("Your mind is fogging from the scent in the air, but thankfully, you aren't in withdrawal right now.  You can try to resist and maybe even turn the tables on your brood, or you can run.", false);
 			}
 			//[Fight] [Submit] [Run]
-			simpleChoices("Fight",3152,"Submit",3153,"",0,"",0,"Run",3151);
+			simpleChoices("Fight",fightOTaurs,"Submit",submitToMinotaurMob,"",0,"",0,"Run",runFromMinotaurs);
 		}
 		//Tribe sized
 		else {
@@ -159,13 +159,13 @@ function meetMinotaurSons():void {
 				if(minotaurNeed()) {
 					outputText("This is perfect... you need it so bad!  You drop down on all fours and wiggle your child-bearing hips, hoping they'll hurry and cum inside you.", false);
 					//SUBMIT!
-					doNext(3153);
+					doNext(submitToMinotaurMob);
 					return;
 				}
 				outputText("This is glorious – so many horny, willing boys, all here for you to squeeze dry.  Even if you wanted to leave, you'd have to fight them to make an opening.  It'd be better to just beat them into submission and take your time savoring their wondrous spunk.", false);
 			}
 			//[Fight] [Submit]
-			simpleChoices("Fight",3152,"Submit",3153,"",0,"",0,"",0);
+			simpleChoices("Fight",fightOTaurs,"Submit",submitToMinotaurMob,"",0,"",0,"",0);
 		}
 	}
 }
@@ -183,7 +183,7 @@ function negotiate():void {
 	
 	outputText("Looks like they're only interested in one thing.", false);
 	//[Fight] [Submit] [Run]
-	simpleChoices("Fight",3152,"Submit",3153,"",0,"",0,"Run",3151);
+	simpleChoices("Fight",fightOTaurs,"Submit",submitToMinotaurMob,"",0,"",0,"Run",runFromMinotaurs);
 }
 
 //[Run] 
@@ -995,7 +995,7 @@ function minotaurGangBadEnd():void {
 	
 	outputText("Your son sighs and slumps down, his cock slowly slipping from your abused vulva, escaping with a wet 'pop'.  A river of white rolls out of your body to further stain the room's furnishings.  You shudder from the sensation as a it triggers a series of tiny, miniature climaxes.  While you're lost to the pleasure, the minitaur departs with noticeably less bulge in his loincloth.  At the same time, the other girls crowd around you, scooping up what they can save of your boy's liquid love and shoveling it into their greedy, whorish maws.  The cow-girl industriously sets to work, using her massive tongue on your " + vaginaDescript() + " to scoop out every drop she can get.  You cum on her face, splattering her with spooge and your feminine moisture.  She smiles and kisses your still-sensitive clit, throwing you into a black-out inducing orgasm.", false);
 	stats(0,0,0,-10,10,10,-100,0);
-	doNext(3162);
+	doNext(minotaurGangBadEnd2);
 }
 	
 //[Next]
