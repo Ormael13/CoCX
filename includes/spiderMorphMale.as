@@ -14,7 +14,7 @@ function greetMaleSpiderMorph():void {
 	else {
 		outputText("He breaks into a smile and says, \"<i>Hi there!  I haven't seen anyone else with a shred of sanity in FOREVER.  Would you mind just, talking with me?</i>\"", false);
 		//[Fight] [Talk] [Leave]
-		simpleChoices("Fight",2997,"Talk",2996,"",0,"",0,"Leave",13);
+		simpleChoices("Fight",2997,"Talk",talkToSpiderBoy,"",0,"",0,"Leave",13);
 	}
 }
 

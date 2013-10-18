@@ -54,7 +54,7 @@ function meetRaphael():void {
 	outputText("You rub your eyes, walk towards the wall and take a curious look up. It appears to be a red fox. He's looking down on you with a triumphant smirk on a tapered snout; most definitely male and masculine. Although not the broadest figure around, his muscles are lean and strong. His contoured torso flares up above narrow hips and gives him a body that has an agile deftness to it. He wears a loose, red-brown jacket and supple deerskin pants, with a red sash across the hip and soft-soled boots below. They do much to complement the vivid color of his fur, which is a vibrant crimson, broken only by the beige fur running down his chest and towards his crotch. Lithe, the only two things that are large about him is the clear bulge in his thin leather pants and the bushy tail that flicks playfully from side to side. The russet rogue takes quite a bit of pleasure from larceny it seems. Judging by his ornate outfit, he does it for the thrill of it. He himself must be well off.", false);
 	//Set first meeting complete
 	flags[134] = 1;
-	doNext(2654);
+	doNext(meetRaphaelPtII);
 }
 
 //~~~ Next Page ~~~
@@ -70,7 +70,7 @@ function meetRaphaelPtII():void {
 		
 	outputText("What do you do?", false);
 	//[Talk] [Slap] [Swoon]
-	simpleChoices("Talk",2657,"Slap",2655,"Swoon",2656,"",0,"",0);
+	simpleChoices("Talk",RaphaelFirstMeetingTALK,"Slap",RaphaelFirstMeetingSLAP,"Swoon",RaphaelFirstMeetingSWOON,"",0,"",0);
 }
 
 //{When Player chooses Slap/refuse after the first encounter}
@@ -167,7 +167,7 @@ function RaphaelDress():void {
 
 	outputText("Soon enough you put it down and begin to inspect the equally lustrous garment he left you. You unfold it and marvel at the Bordeaux colored clothes.", false);
 	//nxt page
-	doNext(2659);
+	doNext(RaphaelDressPtII);
 }
 
 //~~~ Next Page ~~~
@@ -224,7 +224,7 @@ function RaphaelEncounterIIDressFollowup():void {
 		outputText("What do you do?", false);
 		flags[139] == 0;
 		//[Reject] [Frisk] [Date]
-		simpleChoices("Reject",2662,"Frisk",2663,"Date",2661,"",0,"",0);
+		simpleChoices("Reject",RaphaelChooseReject,"Frisk",RaphaelChooseFrisk,"Date",RaphaelSelectDate,"",0,"",0);
 	}
 	//({If player does not meet the first encounter requirements:}
 	else {
@@ -275,7 +275,7 @@ function RaphaelSelectDate():void {
 
 	outputText("It almost feels like you're consenting when you reach for his soft, cushioned padded furry paw, after which he pulls you up and helps you over the wall.", false);
 	//{Unlocks Picnic}
-	doNext(2668);
+	doNext(RaphaelPicnic);
 }
 //{When player chooses [Reject] after second encounter}
 function RaphaelChooseReject():void {
@@ -315,7 +315,7 @@ function RaphaelChooseFrisk():void {
 
 		outputText("\"<i>But the day is young!</i>\" He proclaims before slipping from your hold and up the wall, extending you his paw. \"<i>Join me! And together we shall paint the forest russet red!</i>\" And he winks at you while pulling you up. \"<i>Maybe I could even show you how I do it, huh?</i>\"\n\n", false);
 		//{Next scene picnic}
-		doNext(2668);
+		doNext(RaphaelPicnic);
 	}
 	//({Int or Spe between 24-36 and Cor is not higher than that}
 	else if((player.inte < 36 && player.spe < 36) && player.cor < 36) {
@@ -330,7 +330,7 @@ function RaphaelChooseFrisk():void {
 		
 		outputText("\"<i>But the day is young!</i>\" He proclaims before slipping from your hold and up the wall, extending you his paw. \"<i>Join me! And together we shall paint the forest russet red!</i>\" And he winks at you while pulling you up. \"<i>You have skill though. Stick with me and maybe I can teach you.</i>\"\n\n", false);
 		//{Next scene picnic}
-		doNext(2668);
+		doNext(RaphaelPicnic);
 	}
 	//({Int or Spe are above 35 and Cor is not higher than that}
 	else if(player.cor < 35) {
@@ -342,7 +342,7 @@ function RaphaelChooseFrisk():void {
 		
 		outputText("How do you respond?", false);
 		//Reject] [Accept]
-		simpleChoices("Reject",2665,"Accept",2664,"",0,"",0,"",0);
+		simpleChoices("Reject",friskRejectChoice,"Accept",friskAcceptChoice,"",0,"",0,"",0);
 	}
 	//{If player's corruption is higher than 19 and higher than Intelligence.}
 	else {
@@ -354,7 +354,7 @@ function RaphaelChooseFrisk():void {
 
 		outputText("What do you do?", false);
 		//[Squeeze] [Fondle]
-		simpleChoices("Squeeze",2667,"Fondle",2666,"",0,"",0,"",0);
+		simpleChoices("Squeeze",friskSqueezeChoice,"Fondle",friskFondleChoice,"",0,"",0,"",0);
 	}
 }
 
@@ -365,7 +365,7 @@ function friskAcceptChoice():void {
 
 	outputText("You waive his paw and choose to walk around the 8 foot long wall, instead of struggle to climb over it. Raphael flashes a grin of delight when you do. \"<i>I can see I've caught on to a smart one! Stick with me and I could even finish your education. I promise that graduation will be something... special.</i>\"\n\n", false); 
 	//{Next scene picnic}
-	doNext(2668);
+	doNext(RaphaelPicnic);
 }
 
 //[reject]
@@ -409,7 +409,7 @@ function friskFondleChoice():void {
 	outputText("\"<i>But the day is young!</i>\" He proclaims before shooting up the wall and extending you his paw. \"<i>Join me! And together we shall paint the forest russet red!</i>\" And he winks at you while pulling you up. \"<i>Stick with me and I could finish your education. I will promise that your graduation will be... everything you hoped for. Like the wild mare is shown what is expected from her, the russet rogue never leaves a lady wanting.</i>\"\n\n", false); 
 	stats(0,0,0,0,0,0,5+player.lib/10,0);
 	//{Next scene Picnic}
-	doNext(2668);
+	doNext(RaphaelPicnic);
 }
 
 //[Squeeze]
@@ -445,7 +445,7 @@ function RaphaelPicnic():void {
 
 	outputText("Only when Raphael picks up a piece of bacon and nibbles on it, do you seek to satisfy your own urge by breaking off a piece of baguette and washing the moist bread down with a sip of wine. You're oddly at peace with consuming something of Raphael's. Not only because he partakes just as eagerly, but because spiking the food doesn't seem like his style. Going over the dangers in your mind however, you also quickly realize that this is simply his method of winning you over with charm. Deep down, you're still supposed to be the hero champion this realm needs. It will take more than just wine and pastry to win you over.", false);
 	//~~~ Next page ~~~
-	doNext(2669);
+	doNext(RaphaelPicnicII);
 }
 function RaphaelPicnicII():void {
 	outputText("", true);
@@ -453,7 +453,7 @@ function RaphaelPicnicII():void {
 
 	outputText("Curious and certain he has a great deal of knowledge on Mareth, you begin asking Raphael questions about his craft and his experiences. Soon enough, two distinct subjects come up as possible topics. Then again, the wine goes straight to your head and this seems like the perfect time to enjoy more leisurely activities and simply enjoy yourself.\n\n", false);
 	//[Discuss] [Skill] [Flirt]
-	simpleChoices("Fencing",2671,"Thieving",2678,"Flirt",0,"",0,"",0);
+	simpleChoices("Fencing",RaphaelPicnicSkill,"Thieving",RaphaelPicnicChooseThieving,"Flirt",0,"",0,"",0);
 }
 function RaphaelPicnicEnd():void {
 	outputText("", true);
@@ -616,10 +616,10 @@ function RaphaelPicnicSkill():void {
 		outputText("What do you do?", false);
 		flags[137] = 4;
 		//[Fence] [Discuss]
-		simpleChoices("Fence",2673,"Discus",2672,"",0,"",0,"",0);
+		simpleChoices("Fence",fenceRaphaelSexily,"Discus",fenceOfferChangeToDiscuss,"",0,"",0,"",0);
 		return;
 	}
-	doNext(2670);
+	doNext(RaphaelPicnicEnd);
 }
 
 function fenceOfferChangeToDiscuss():void {
@@ -650,7 +650,7 @@ function fenceRaphaelSexily():void {
 
 	outputText("With a soft metallic scrape, the sword falls into his sheath and you bump clumsily into his body, while Raphael continues to stand firm and proud.  When he holds your wrist to the scabbard, he has effectively disarmed you.  You can't believe it's over when you get back up, using his body as a support.\n\n", false);
 	//~~~ Next Page ~~~
-	doNext(2674);
+	doNext(fenceRaphaelSexilyPtII);
 }
 
 function fenceRaphaelSexilyPtII():void {
@@ -689,10 +689,10 @@ function fenceRaphaelSexilyPtII():void {
 		//[Yes] [No])
 		//yes to sex
 		//[No] leads up to the universal rejection scene
-		doYesNo(2675,2677);
+		doYesNo(RaphaelPostFenceSex,declinePuttingOutForRogues);
 	}
 	//Elsewise to smex!
-	else doNext(2675);
+	else doNext(RaphaelPostFenceSex);
 }
 
 //{speedsex}
@@ -716,7 +716,7 @@ function RaphaelPostFenceSex():void {
 
 	outputText("It is how you spend the rest of that morning, filled a thousands times over and constantly driven past the edge of orgasmic bliss by the master fencer's trained thrusts.  His civilized smile has long since given way to the mean smirk of a sexual victor driving his victim to the edge of madness.", false);
 	stats(0,0,0,0,0,0,-100,0);
-	doNext(2676);
+	doNext(postRaphaelCoitus);
 
 }
 
@@ -899,7 +899,7 @@ function RaphaelPicnicChooseThieving(newl:Boolean = true):void {
 		//[Fencing] [Flirt]
 		//[Fencing] {Leads to Fencing Variables}
 		//[Flirt] Leads towards the final Int Sex scene. 
-		simpleChoices("Fencing",2671,"Flirt",2679,"",0,"",0,"",0);
+		simpleChoices("Fencing",RaphaelPicnicSkill,"Flirt",thieveryEnding,"",0,"",0,"",0);
 		return;
 	}
 	doNext(1);
@@ -943,7 +943,7 @@ function thieveryEnding():void {
 	stats(0,0,0,0,0,0,25,0);
 	//Choose: 
 	//[Yes] [No]
-	doYesNo(2680,2677);
+	doYesNo(RaphaelThieverySmex,declinePuttingOutForRogues);
 	//press [Yes] to smart sex
 	//[No] leads up to universal rejection scene
 }
@@ -967,7 +967,7 @@ function RaphaelThieverySmex():void {
 	outputText("It is how you spend the rest of that morning, filled a thousands times over and constantly driven past the edge of orgasmic bliss by the master fencer's trained thrusts. His civilized smile has long since given way to the mean smirk of a sexual victor, driving his prey to the edge of madness.", false);
 
 	//~~~ Next page ~~~
-	doNext(2681);
+	doNext(RaphaelThieverySmexPtII);
 }
 
 function RaphaelThieverySmexPtII():void {
@@ -1031,7 +1031,7 @@ function quiksilverFawkesEndGame():void {
 	outputText("It removes itself from atop your body.  After having the breath knocked out of you, you take a moment to recover it and finally manage to get back up and meet the two monsters of the mist.", false); 
 
 	//~Next Page~
-	doNext(2683);
+	doNext(QuiksilverFawkesPtII);
 }
 
 function QuiksilverFawkesPtII():void {
@@ -1071,7 +1071,7 @@ function QuiksilverFawkesPtII():void {
 	outputText("You could sell Raphael out, or you could cover for him.  What do you do?", false);
 
 	//[Cover] [Sell out] 
-	simpleChoices("Cover",2684,"Sell Out",2686,"",0,"",0,"",0);
+	simpleChoices("Cover",coverForRaphael,"Sell Out",betrayRaphael,"",0,"",0,"",0);
 }
 
 //{PC chooses to cover for Raphael}
@@ -1096,7 +1096,7 @@ function coverForRaphael():void {
 
 	outputText("Skoll picks up Raphael's clothes.  The two brothers then get on all four of their limbs and speed off into the fog.  Fierce, dangerous beasts they are.\n\n", false);
 	//~~~ Next page ~~~
-	doNext(2685);
+	doNext(coverForRaphaelII);
 }
 
 function coverForRaphaelII():void {

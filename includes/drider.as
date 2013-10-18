@@ -364,7 +364,7 @@ function winDriderPCDickInSpiderCunt():void {
 	else outputText("soaking in the white puddle of spooge", false);
 	outputText(".  Even unconscious, her vagina continues its rhythmic contractions around your cock, working you towards another burst of orgasmic pleasure while you wait for your strength to come back...\n\n", false);
 	//[NEXT]
-	doNext(3015);
+	doNext(winDriderPCDickInSpiderCunt2);
 	stats(0,0,0,0,1,1,-100,0);
 }
 //Part 2 of the above
@@ -986,7 +986,7 @@ function driderVagSmartFuck():void {
 	else if(hasItem("T.SSilk",1)) {
 		outputText("\n\nRemembering the bundle of silk that you have with you, it doesn't take long to come up with a very enticing idea for dealing with the drider.  However, you have a feeling that you won't be able to do much else with the silk if you go through with your plan.  Are you sure you want to use it on her?");
 		//[Yes] [No]
-		doYesNo(3741,3740);
+		doYesNo(3741,dontSilkRapeDrider);
 	}
 }
 
@@ -996,7 +996,7 @@ function dontSilkRapeDrider():void {
 	clearOutput();
 	outputText("Deciding against wasting the valuable material for little more than a quick fuck, you ponder your other options for using the defeated girl.");
 	//(Return to "win" menu)
-	doNext(3745);
+	doNext(defeatDriderIntro);
 }
 
 function driderTiedUpPartTwo(useItem:Boolean):void {
@@ -1033,7 +1033,7 @@ function driderTiedUpPartTwo(useItem:Boolean):void {
 	else outputText("Reaching back into your pack, you grab the remainder of the bundle of silk that you tied the girl's hands with.  Looking over the mass of white-grey strands, you smile as you see that there seems to be more than enough left for what you have in mind.");
 	
 	//New Page
-	doNext(3743);
+	doNext(driderTiedUpPartThree);
 }
 
 function driderTiedUpPartThree():void {
@@ -1082,7 +1082,7 @@ function driderTiedUpPartThree():void {
 	
 	outputText("\n\nFinally finished, you collapse on top of the similarly exhausted woman, barely capable of moving after such a breathtaking end.  Your shaft still twinges after such a powerful climax, not helped by the way her pussy continually shudders around you.  The drider, smothered underneath you, begins to sink slowly into the soft ground of the swamp, still completely oblivious to anything going on around her.  Deciding it would be a terrible shame if your new cumdump were to be lost so soon after acquiring it, you heave yourself onto unsteady legs, cock drizzling as you withdraw yourself from the abused, sperm-stuffed cunt that surrounded it.");
 	stats(0,0,0,0,0,-1,-100,0);
-	doNext(3744);
+	doNext(driderTiedUpPartFour);
 }
 
 function driderTiedUpPartFour():void {

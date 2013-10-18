@@ -181,7 +181,7 @@ function consensualSatyrFuck(loc:int = 0):void {
 	}
 	//What should you do?
 	//[Trick him] [Keep Drinking] [Skip Foreplay] [Leave]
-	simpleChoices("Trick Him",trick,"Keep Drinking",3872,"Skip Foreplay",foreplay,"",0,"Leave",3873);
+	simpleChoices("Trick Him",trick,"Keep Drinking",keepDrinking,"Skip Foreplay",foreplay,"",0,"Leave",leavePartySatyr);
 }
 
 //[=Keep Drinking=]
@@ -250,7 +250,7 @@ function skipForeplay():void {
 	outputText("\n\nThe satyr looks surprised, then grins.  \"<i>Very well, if you insist...</i>\" he purrs, reaching out to grab and push you to the ground, tearing roughly at your [armor] until you are naked.");
 	
 	//Play appropriate willing sex scene//
-	doNext(3878);
+	doNext(willinglyBoneSatyr);
 }
 
 //Sex Scenes
@@ -543,7 +543,7 @@ function trappedSatyr():void {
 	else {
 		outputText("You can see his goat tail flitting happily above his tight, squeezable asscheeks, the loincloth discarded beside him failing to obscure his black cherry, ripe for the picking.  Do you take advantage of his distraction and ravage his ass while he's helpless?\n\n", false);
 		//[Yes] [No]
-		simpleChoices("Ravage",3238,"",0,"",0,"",0,"Leave",3237);
+		simpleChoices("Ravage",rapeSatyr,"",0,"",0,"",0,"Leave",ignoreSatyr);
 	}
 }
 
@@ -608,7 +608,7 @@ function rapeSatyr():void {
 	outputText("As you watch the lewd display, you feel your arousal building and your " + cockDescript(x) + " growing back into full mast. Figuring you already have a willing slut readily available, you consider using him to relieve yourself once more... What do you do?", false);
 	stats(0,0,0,0,0,0,-100,0);
 	//[Again][Leave]
-	simpleChoices("Again",3240,"",0,"",0,"",0,"Leave",3239);
+	simpleChoices("Again",secondSatyrFuck,"",0,"",0,"",0,"Leave",dontRepeatFuckSatyr);
 }
 
 //[=Leave=]

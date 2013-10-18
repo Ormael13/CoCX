@@ -348,7 +348,7 @@ function finalEncounterLevelCeraphPiercingButtholeNipples():void {
 	outputText("Ceraph wiggles out from between the bushes, holding a bondage harness and openly eyeing your body.  She suggestively says, \"<i><i>Well, aren't you just a cute little slave-to-be.  Are you ready to put yourself in your slave harness and join my harem?  I've got a few more piercings I think would look great on you.  Maybe I could give you an oral fixation and a foot fetish.  Wouldn't that be nice?  Or maybe I can just keep you tied up and parade you around Mareth.  You know I'll make sure you love every minute baby, just come put this on.</i></i>\"\n\n", false);
 	
 	outputText("It shames you to admit it, but you desperately want to be naked and restrained, paraded around to tease and amuse Ceraph's enemies.  You know the desires were forced on you by her cursed piercings, but it doesn't make it any easier to deny the feelings they've brought out in you.  The sexy demon-dom would be happy to feed you foreign desires and stoke them into a burning blaze that would burn away your doubts and worries.  Do you give in and become her bondage slave?\n\n", false);
-	simpleChoices("Yes",2326,"No",2324,"Fight",2325,"",0,"",0);
+	simpleChoices("Yes",agreeToBecomeCeraphsFuckpetBondageToyBitchSlut,"No",finalCeraphEncounterChoiceNo,"Fight",finalCeraphEncounterStartFight,"",0,"",0);
 }
 //[no]
 function finalCeraphEncounterChoiceNo():void {
@@ -404,7 +404,7 @@ function agreeToBecomeCeraphsFuckpetBondageToyBitchSlut():void {
 	if(player.tailType == 0) outputText("backside", false);
 	else outputText("tail", false);
 	outputText(" back and forth to show Mistress how happy you are.  Obedience slowly crowds your mind, rolling over your other thoughts and concerns inexorably.  Your worries, cares, and troubles slide away, replaced with an all-consuming need to please.", false);
-	doNext(2327);
+	doNext(agreeToBeABitchPt2);
 }
 
 //(EPILOGUE)
@@ -427,7 +427,7 @@ function ceraphFirstTime():void {
 	
 	outputText("The goblin's ears are covered in a dazzling array of piercings of all varieties.  She isn't dressed nearly as slutty as most of the goblins you've seen.\n\n", false);outputText("Do you let her put the earrings in your ears?", false);
 	flags[24] = 1;
-	doYesNo(2330,2329);
+	doYesNo(ceraphFirstTimeVolunteer,ceraphFirstTimeDecline);
 }
 
 //[No]
@@ -489,7 +489,7 @@ function level3CeraphOffer():void {
 	outputText("Ceraph once again appears to you, licking her lips and repeatedly swatting a riding crop against her thigh.  She asks, \"<i><i>Have you come to love the exposure, the helplessness, of being nude and restrained?  Does your body ache for me to turn you into a bound love-pet yet?  We could keep going down this road my pet-to-be, just one more piercing and then you'll be ready.</i></i>\"\n\n", false);
 	outputText("Do you let her pierce you?", false);
 	//[Yes] [No]
-	doYesNo(2334,2333);
+	doYesNo(yesOHGODYESPIERCELEVEL3,level3CeraphOfferNo);
 }
 
 //[No]
@@ -885,9 +885,9 @@ function winRapeChoices():void {
 
 		simpleChoices("Fuck Her",dicking,"Ride Her",cunting,"FuckHerAss",buttsmexing,"B.Titfuck",bikiniTits,"Leave",leave);
 		/*
-		if(player.gender == 1) doYesNo(2318,5007);
-		if(player.gender == 2) doYesNo(2319,5007);
-		if(player.gender == 3) simpleChoices("Fuck Her",2318,"Ride Her",2319,"",0,"",0,"Leave",5007);
+		if(player.gender == 1) doYesNo(maleFuckCeraphsPussy,5007);
+		if(player.gender == 2) doYesNo(rideCeraphsCockLikeaBAWSSexclamation11eleven,5007);
+		if(player.gender == 3) simpleChoices("Fuck Her",maleFuckCeraphsPussy,"Ride Her",rideCeraphsCockLikeaBAWSSexclamation11eleven,"",0,"",0,"Leave",5007);
 		*/
 	}
 	else {
@@ -1031,7 +1031,7 @@ function hugeCorruptionForceFuckCeraph():void {
 	}
 	outputText("(Do you accept Ceraph's Offer?)", false);
 	//Y/N – remove 1 fetish level or +10 gems
-	doYesNo(2497,5007);
+	doYesNo(ceraphsNiceOffer,5007);
 	stats(0,0,0,0,3,3,-100,1);
 }
 
@@ -1091,7 +1091,7 @@ function friendlyNeighborhoodSpiderManCeraph():void {
 	outputText("The demoness lifts one heeled foot high onto a boulder and winks at you, letting her whip rub up and down her hard, nodule-studded shaft.  Her tail rises languidly between her perfect, lissom legs, rubbing the glistening wet delta of her sex enticingly.  The demon coos, \"<i>Oh, I do love putting on a show for my future pets.  Tell me, did you really come up here to fight?  I'd rather lie back in the sunlight, rubbing my fingers over my glistening skin and showing everyone just how wondrous sex with me would be.  You can even go if you want, or maybe you'd have something worth trading with me?</i>\"", false);
 	stats(0,0,0,0,0,0,(5 + player.cor/10 + player.lib/20),0)
 	//[Fight] [Trade] [Run]
-	simpleChoices("Fight",2867,"Trade",2869,"",0,"",0,"Run",2868);
+	simpleChoices("Fight",startAFightWithCeraph,"Trade",tradeCeraphSomething,"",0,"",0,"Run",runFromCeraphsNiceDeal);
 }
 
 //[Fight] → Cue normal Ceraph fight
@@ -1149,7 +1149,7 @@ function tradeCeraphSomething():void {
 		outputText("</i>\"\n\n", false);
 	}
 	//Leave uses the run text!
-	simpleChoices("Liqueur",liqueur,"Endowment",endowment,"Armor",armor,"",0,"Leave",2868);
+	simpleChoices("Liqueur",liqueur,"Endowment",endowment,"Armor",armor,"",0,"Leave",runFromCeraphsNiceDeal);
 }
 
 
@@ -1273,7 +1273,7 @@ function tradeCeraphCrotchityBits():void {
 	
 	outputText("Do you let her take it?", false);
 	flags[217] = choice;
-	doYesNo(2874,2873);
+	doYesNo(giveUpYourBallsOrWhateverForLessFetishes,bailBeforeCeraphYoinksYourNads);
 }
 
 //[No]
