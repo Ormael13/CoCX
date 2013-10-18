@@ -25,7 +25,7 @@ function bunnbunbunMeet():void {
 		
 		outputText("Even though nearly a minute has passed, the bunny-lass is STILL frozen and staring.  She hasn't done anything since realizing that you're looking at her.  Well, it looks like the ball's in your court.  What do you do?", false);
 		//[Talk] [Rape Her]
-		simpleChoices("Talk",talkToBunnyBunBun,"Rape Her",rapeBunBun,"",0,"",0,"Leave",13);
+		simpleChoices("Talk",2647,"Rape Her",2648,"",0,"",0,"Leave",13);
 	}
 	//Met her
 	else {
@@ -68,7 +68,7 @@ function bunnbunbunMeet():void {
 		outputText("  Her dick in your ass?)", false);
 		//var Ass:Number = 0;
 		//Dick In V] [Dick in A] [Vagina] [Ass] [Leave]
-		choices("DickInVag",DickInV,"Vagina",Vagina,"69",sixtyNine,"LayYourEggs",eggs,"BeAssFucked",bunbunFucksPCInAss,"",0,"",0,"",0,"",0,"Leave",13);		
+		choices("DickInVag",DickInV,"Vagina",Vagina,"69",sixtyNine,"LayYourEggs",eggs,"BeAssFucked",2650,"",0,"",0,"",0,"",0,"Leave",13);		
 	}
 }
 //[Talk]
@@ -107,7 +107,7 @@ function talkToBunnyBunBun():void {
 	outputText("  Her dick in your ass?)", false);
 	//var Ass:Number = 0;
 	//Dick In V] [Dick in A] [Vagina] [Ass] [Leave]
-	simpleChoices("DickInVag",DickInV,"DickInAss",bunbunFucksPCInAss,"Vagina",Vagina,"69",sixtyNine,"Leave",13);
+	simpleChoices("DickInVag",DickInV,"DickInAss",2650,"Vagina",Vagina,"69",sixtyNine,"Leave",13);
 	stats(0,0,0,0,0,0,5+player.lib/20,0);
 }
 //[Rape Her]
@@ -152,7 +152,7 @@ function rapeBunBun():void {
 		outputText("  Her dick in your ass?)", false);
 		//var Ass:Number = 0;
 		//Dick In V] [Dick in A] [Vagina] [Ass] [Leave]
-		simpleChoices("DickInVag",DickInV,"DickInAss",bunbunFucksPCInAss,"Vagina",Vagina,"69",sixtyNine,"Leave",13);
+		simpleChoices("DickInVag",DickInV,"DickInAss",2650,"Vagina",Vagina,"69",sixtyNine,"Leave",13);
 
 	}
 }

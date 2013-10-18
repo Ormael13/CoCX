@@ -149,7 +149,7 @@ function benoitTransactBuy(slot:int = 1):void {
 	else shortName = flags[BENOIT_3];
 	if(player.gems < 2 * itemValue(shortName)) {
 		outputText("You consider making a purchase, but you lack the gems to go through with it.");
-		doNext(benoitsBuyMenu);
+		doNext(3787);
 		return;
 	}
 	if(benoitLover()) outputText("After examining what you've picked out with " + benoitMF("his","her") + " fingers, " + benoitMF("Benoit","Benoite") + " hands it over and accepts your gems with a grin.");
@@ -215,7 +215,7 @@ function benoitSellTransact(slot:int = 1):void {
 	statScreenRefresh();
 	//(+1 Affection)
 	benoitAffection(1);
-	doNext(benoitSellMenu);
+	doNext(3788);
 }
 
 //All slots are reset each day.  Benoit buys items at 66% the rate Oswald does.  
@@ -472,7 +472,7 @@ function eggySuggest():void {
 		
 			outputText("\n\nOnce again, you carefully inch your blind charge to a clear cranny and push him against a wooden wall, standing back to slowly peel off your [armor].  You grin as you ostentatiously drop each piece onto the packed earth, allowing him to guess what it is by the sound it makes.  His breathing comes heavier as your undergarments make a feathery sound as they fall.  As you take his hands and lay them upon your naked skin, you think about how you want to go about this.");
 		}
-		simpleChoices("Let Him",repeatSexWithBenoitLetHim,"Take Charge",repeatBenoitFuckTakeCharge,"",0,"",0,"",0);
+		simpleChoices("Let Him",3812,"Take Charge",3813,"",0,"",0,"",0);
 		return;
 	}
 	flags[BENOIT_TIMES_SEXED_FEMPCS]++;
@@ -576,7 +576,7 @@ function eggySuggest():void {
 	stats(0,0,0,0,0,0,-100,0);
 	if((player.pregnancyType == 5 || player.hasPerk("Harpy Womb") >= 0 || player.hasPerk("Oviposition") >= 0) && (player.pregnancyIncubation == 0 || player.pregnancyType == 5)) {
 		outputText("  I would not inflict my children upon you.  Ere, take as much as you like.</i>\"");
-		simpleChoices("Take It",takeBenoitsContraceptives,"",0,"",0,"",0,"Leave",dontTakeEggtraceptives);
+		simpleChoices("Take It",3810,"",0,"",0,"",0,"Leave",3811);
 	}
 	else {
 		outputText("  I cannot give you babies unless you 'ave eggs.  I guess I should think a bit more before I go digging for things...</i>\"");
@@ -769,13 +769,13 @@ function tryToConvertToBassyWomb():void {
 	//A double dose of ovi-elixer, a bottle of reptilum, goblin ale and some basilisk blood would probably do...
 	if(!(hasItem("OviElix",2) && hasItem("Reptlum",1) && hasItem("Gob.Ale",1))) {
 		outputText("You don't have the necessary ingredients to attempt this yet.  You recall " + benoitMF("Benoit","Benoite") + " mentioning that you would need Reptilum, two Ovi Elixirs, and Goblin Ale.");
-		doNext(benoitIntro);
+		doNext(3786);
 	}
 	/*else if(player.isTaur()) {
 		outputText("\"<i>Forgive me, [name],</i>\" Benoit says, clearly troubled, as you begin hauling out the ingredients and announcing your plan.  \"<i>I sink your body is already stressed enough wis 'aving to pump so little blood so far... I would razer you not take furzer risks on my account until your form is more... compact.  I cannot be a part of zis... 'owever much I would like to.  You mean too much to me, you see.</i>\"");
 		outputText("\n\nLeft speechless by his frankness, you can only sweep the items back into your bag.");
 		//return to shop menu
-		doNext(benoitIntro);
+		doNext(3786);
 	}*/
 	//Ingredients in inventory: 
 	else {

@@ -334,7 +334,7 @@ function craftSilkArmor():void {
 		return;
 	}
 	//[Yes] [No]
-	doYesNo(commissionSilkArmorForReal,declineSilkArmorCommish);
+	doYesNo(3000,3001);
 }
 function commissionSilkArmorForReal():void {
 	spriteSelect(49);

@@ -51,7 +51,7 @@ function workOutForIfris():void {
 	outputText("", true);
 	if(player.fatigue > 70) {
 		outputText("There's no way you could work out as tired as you are.  Maybe you could come back to flirt with the demonic-looking girl during your next workout.", false);
-		doNext(gymDesc);
+		doNext(2783);
 		return;
 	}
 	outputText("You smile to the devil-looking-girl and tell her you're just here to get your work-out on.\n\n", false);
@@ -60,7 +60,7 @@ function workOutForIfris():void {
 
 	outputText("\"<i>I hope you don't mind if I keep you company. I'd love to... see you in action.</i>\"\n\n", false);
 	//WORK OUT or SHOW OFF?
-	simpleChoices("Work Out",liftWhileIfrisWatches,"Show Off",showOffForIfris,"",0,"",0,"",0);
+	simpleChoices("Work Out",2848,"Show Off",2849,"",0,"",0,"",0);
 }
 //3b-PC asks if she'd like to join them-
 function askIfrisToJoinYou():void {
@@ -68,7 +68,7 @@ function askIfrisToJoinYou():void {
 	outputText("", true);
 	if(player.fatigue > 70) {
 		outputText("There's no way you could work out as tired as you are.  Maybe you could come back to flirt with the demonic-looking girl during your next workout.", false);
-		doNext(gymDesc);
+		doNext(2783);
 		return;
 	}
 	outputText("You ask Ifris if she'd like to join you in some exercises. Her eyes glint mischievously, obviously finding unintended meaning in your words, and you can't help but blush.\n\n", false);
@@ -77,7 +77,7 @@ function askIfrisToJoinYou():void {
 
 	outputText("You shrug at her response, but there's something about the way she eyes you now...", false);
 	//WORK OUT or SHOW OFF?
-	simpleChoices("Work Out",liftWhileIfrisWatches,"Show Off",showOffForIfris,"",0,"",0,"",0);
+	simpleChoices("Work Out",2848,"Show Off",2849,"",0,"",0,"",0);
 }
 
 //4a-PC does a modest work out-

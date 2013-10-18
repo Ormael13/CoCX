@@ -2187,7 +2187,7 @@ function doItems(eventNo:Number):void {
 			itemSlot1.quantity = 0;
 			itemSlot1.shortName = "";
 		}		
-		doNext(oswaldPawn);
+		doNext(2255);
 		player.gems += temp;
 		statScreenRefresh();
 		return;
@@ -2202,7 +2202,7 @@ function doItems(eventNo:Number):void {
 			itemSlot2.quantity = 0;
 			itemSlot2.shortName = "";
 		}		
-		doNext(oswaldPawn);
+		doNext(2255);
 		player.gems += temp;
 		statScreenRefresh();
 		return;
@@ -2217,7 +2217,7 @@ function doItems(eventNo:Number):void {
 			itemSlot3.quantity = 0;
 			itemSlot3.shortName = "";
 		}		
-		doNext(oswaldPawn);
+		doNext(2255);
 		player.gems += temp;
 		statScreenRefresh();
 		return;
@@ -2232,7 +2232,7 @@ function doItems(eventNo:Number):void {
 			itemSlot4.quantity = 0;
 			itemSlot4.shortName = "";
 		}		
-		doNext(oswaldPawn);
+		doNext(2255);
 		player.gems += temp;
 		statScreenRefresh();
 		return;
@@ -2247,7 +2247,7 @@ function doItems(eventNo:Number):void {
 			itemSlot5.quantity = 0;
 			itemSlot5.shortName = "";
 		}
-		doNext(oswaldPawn);
+		doNext(2255);
 		player.gems += temp;
 		statScreenRefresh();
 		return;
@@ -6391,7 +6391,7 @@ function itemGoNext():void {
 	}
 	//Armor shop
 	if(menuLoc == 9) {
-		doNext(armorShop);
+		doNext(2274);
 		return;
 	}
 	if(menuLoc == 11) {
@@ -6400,12 +6400,12 @@ function itemGoNext():void {
 	}
 	//Lumi's potion shop
 	if(menuLoc == 12) {
-		doNext(lumiShop);
+		doNext(2436);
 		return;
 	}
 	//Lumi's enhancement shop
 	if(menuLoc == 13) {
-		doNext(lumiEnhance);
+		doNext(2441);
 		return;
 	}
 	//Late night looting
@@ -6415,7 +6415,7 @@ function itemGoNext():void {
 	}
 	//Weapon shop
 	if(menuLoc == 15) {
-		doNext(weaponShop);
+		doNext(2553);
 		return;
 	}
 	if(menuLoc == 16) {
@@ -6431,7 +6431,7 @@ function itemGoNext():void {
 		return;
 	}
 	if(menuLoc == 19) {
-		doNext(bakeryuuuuuu);
+		doNext(2836);
 		return;
 	}
 	if(menuLoc == 20) {
@@ -6451,19 +6451,19 @@ function itemGoNext():void {
 		return;		
 	}
 	if(menuLoc == 24) {
-		doNext(barTelAdre);
+		doNext(2256);
 		return;
 	}
 	if(menuLoc == 25) {
-		doNext(owcaTavern);
+		doNext(3618);
 		return;
 	}
 	if(menuLoc == 26) {
-		doNext(benoitsBuyMenu);
+		doNext(3787);
 		return;
 	}
 	if(menuLoc == 27) {
-		doNext(chickenHarpy);
+		doNext(3968);
 		return;
 	}
 	if(menuLoc == 28) {
@@ -6471,7 +6471,7 @@ function itemGoNext():void {
 		return;
 	}
 	if(menuLoc == 29) {
-		doNext(ingredientsMenu);
+		doNext(3997);
 		return;
 	}
 	if(menuLoc == 2) doNext(13);

@@ -26,7 +26,7 @@ function findBazaar():void {
 	}
 	outputText("\n\nDo you approach?", false);
 	//[YES] [NOOOO]
-	doYesNo(approachBazaarGuard,13);
+	doYesNo(2854,13);
 }
 
 //[FUCK YES I WILL PUT IT IN YOUR BIZARRE ANUS]
@@ -169,11 +169,11 @@ function askJoeyAboutOffer():void {
 	outputText("\n\nWhat do you think? Will you take the cock massager for 200 gems?");
 	if(player.gems < 200) {
 		outputText("\n\n<b>You don't have enough money.</b>");
-		doNext(noMilkerPlzJoey);
+		doNext(3573);
 		return;
 	}
 	//[Yes] [No]
-	doYesNo(buyCockMilker,noMilkerPlzJoey);
+	doYesNo(3574,3573);
 }
 //[No]
 function noMilkerPlzJoey():void {
@@ -196,7 +196,7 @@ function joeyAndrogyny():void {
 	outputText("", true);
 	if(player.gems < 500) {
 		outputText("You haven't got enough gems for that treatment!", false);
-		doNext(theSlipperySqueeze);
+		doNext(2856);
 		return;
 	}
 	player.gems -= 500;
@@ -236,9 +236,9 @@ function joeyMassage():void {
 	outputText("</i>\"", false);
 	if(player.hasCock()) {
 		outputText("\n\nDo you accept Joey's potion?", false);
-		doYesNo(joeysMassageWithEXTRASpooge,joeysMassageWifNoExtraJizz);
+		doYesNo(2859,2858);
 	}
-	else doNext(joeysMassageWifNoExtraJizz);
+	else doNext(2858);
 }
 
 function joeysMassageWifNoExtraJizz():void {
@@ -379,13 +379,13 @@ function joeyBigBalls():void {
 		if(player.cor > 70) outputText("; you won't get to watch him fountaining all that pearly spunk like a perverted statue", false);
 		outputText(".  What do you decide?", false);
 		//[SuckCumOut] [MasturbateOut]
-		simpleChoices("SuckCumOut",suckOffJoeysGardenHose,"MasturbateOut",joeyWanksItOut,"",0,"",0,"",0);
+		simpleChoices("SuckCumOut",3193,"MasturbateOut",3192,"",0,"",0,"",0);
 	}
 	//(Sucked Joey once) 
 	else {
 		outputText("As soon as you enter The Slippery Squeeze, you know somehow that something is amiss.  Joey staggers out from a back-room, his balls once again swollen huge and round.  He looks at you and admits, \"<i>Someone's <b>got</b> to be sabotaging me... gods, this hurts!  Could you help me, or should I go in the back and jerk it out myself?</i>\"\n\n", false);
 		//[SuckCumOut] [MasturbateOut]
-		simpleChoices("SuckCumOut",suckOffJoeysGardenHose,"MasturbateOut",joeyWanksItOut,"",0,"",0,"",0);
+		simpleChoices("SuckCumOut",3193,"MasturbateOut",3192,"",0,"",0,"",0);
 	}
 	flags[348]++;	
 }

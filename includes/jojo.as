@@ -741,7 +741,7 @@ function amilyTeachingJojoBJ():void {
 	outputText("  She seems visibly distracted by the mouse's boner, and will likely wind up fucking him soon.  [if (hasCock = true) \"Do you surprise them both by allowing Amily to demonstrate on you?\" else \"Do you want to watch them fuck?\"]");
 	var demon:Number = 0;
 	if(player.hasCock()) demon = 3452;
-	simpleChoices("Demonstrate",demon,"Watch",amilyAndJojoFuck,"",0,"",0,"Leave",1);
+	simpleChoices("Demonstrate",demon,"Watch",3456,"",0,"",0,"Leave",1);
 }
 //Scene 1 Result: Male Gets BJ (Z)
 function BJRidesGETYOUONE():void {

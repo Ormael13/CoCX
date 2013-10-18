@@ -53,7 +53,7 @@ function fountainEncounter():void {
 	outputText("You come closer and discover a placard.  It reads, \"Fountain of Endowment\".  Well, clearly it's supposed to enhance something, but at what cost?\n\n", false);
 	outputText("Do you drink from the fountain?", false);
 	//[Yes] [No]
-	doYesNo(drinkFountainEndowment,13);
+	doYesNo(2207,13);
 }
 
 function drinkFountainEndowment():void {
@@ -667,7 +667,7 @@ function exgartuanBeeRape():void {
 	outputText("You pull out with a satisfied grunt, enjoying the wet 'schlick' sound your " + cockDescript(0) + " makes as it pulls free of the bee-girl's once-tight hole.  Where once there was a honey-coated slit now resides a gaping monster, drooling a gooey mixture of slime and your tainted demonic seed.  Well, maybe her queen will have an easier time packing her full of eggs.\n\n", false);
 	outputText("You redress, whistling happily as you prepare to leave.  Your victim is practically unconscious, still shaking from the intense experience and leaking eggs and honey from the organ on her backside.  Do you cut her down or leave her bound up for the locals to enjoy?", false);
 	stats(0,0,0,0,1,0,-100,2);
-	simpleChoices("Leave Her",leaveBeePostRape,"Free Her",freeBeePostRape,"",0,"",0,"",0);
+	simpleChoices("Leave Her",2206,"Free Her",2205,"",0,"",0,"",0);
 }
 
 //[Free Her] (negates some corruption gain)
@@ -701,7 +701,7 @@ function exgartuanSleepSurprise():void {
 		outputText("After listlessly staring at your forced exhibitionism for a few seconds, your sleep anxiety wins over.  You bend over to begin taking off the article... only to find that it refuses to budge.  It acts as if it were adhered to your skin, resisting any actions to undo it from your groin.  After fidgeting with it for a few seconds, you let out an exasperated groan.  You're certainly in no mood to struggle with it nor who's responsible any further, reaching over and pulling up your covers.  One more sigh escapes your lips as you gaze upon the unsightly bulge before resting back on your pillow and closing your eyes.\n\n", false);
 		
 		//[new page. If lust <75, raise to 75]
-		doNext(exgartuanBulgeTortureII);
+		doNext(3384);
 		return;
 	}
 	else {
@@ -866,7 +866,7 @@ function exgartuanBulgeTortureII():void {
 	
 	//[new page. lust raises to 100]
 	stats(0,0,0,0,0,0,1000,0);
-	doNext(exgartuanBulgeTortureIII);
+	doNext(3385);
 }
 function exgartuanBulgeTortureIII():void {
 	outputText("", true);
@@ -934,7 +934,7 @@ function exgartuanBulgeTortureIII():void {
 	outputText(" hits you square in the face.  The surprising force of the blow sends you reeling, your hands clearing from the mighty demon as he points skyward, showering everything around you in black, warm ejaculate.  You care little, however, being too busy convulsing and indulging on every ounce of pleasure radiating through it.  It doesn't take long for you to black out, drawing an end to your excruciating experience.\n\n", false);
 	//[new page. lust resets to 0. corruption raises by 2. player gains ailment \"<i>Jizzpants</i>\"]
 	stats(0,0,0,0,0,0,-100,2);
-	doNext(exgartuanBulgeTortureIV);
+	doNext(3386);
 }
 
 function exgartuanBulgeTortureIV():void {
@@ -1001,7 +1001,7 @@ function boobGartuanSURPRISE():void {
 		return;
 	}
 	//[new page]
-	doNext(boobgartuanSurprise2);
+	doNext(3387);
 }
 
 function boobgartuanSurprise2():void {
@@ -1050,7 +1050,7 @@ function boobgartuanSurprise2():void {
 		outputText("For a moment, you can swear you felt them rumbling... taunting you...", false);
 		//[end of occurrence ==0]
 	}
-	doNext(boobgartuanSurprise3);
+	doNext(3388);
 }
 //[new page.  occurrence ≥1 starts here]
 function boobgartuanSurprise3():void {

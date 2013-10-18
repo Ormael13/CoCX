@@ -23,7 +23,7 @@ function pureJojoAndAmilySpar():void {
 	outputText("Amily and Jojo appear to be sparring.  Amily has a pair of knives in her hands, and Jojo has a staff.  The twin blurs of fur are whirling about in a frenzy of movement.  Jojo is deflecting most of the smaller mouse's strikes, and even manages to get in the occasional strike with his staff.  He's undone the top of his robe, and sweat is pouring off of his fur.  It's clear he's working himself harder than the female.  The match-up is remarkably even, but they spot you and wrap up the intense sparring session for now.  Jojo gives you a respectful nod and departs, guzzling water from a skin as he pulls his robes back into their normal places.\n\n", false);
 		
 	//[To amily screen]
-	doNext(amilyFollowerEncounter);
+	doNext(2427);
 }
 
 //[Amily rages at what you've done to jojo (corrupted after she met pure jojo) – encountered when visiting corrupt jojo for faps]
@@ -147,7 +147,7 @@ function amilyDiscoversJojoWithTentaclesAndShitOhBoy():void {
 	else {
 		outputText("This is bad.  You could try to explain that what happened to Jojo was a moment of weakness before you overcame your corruption, but judging from the look in her eyes, she would KILL JOJO rather than let him continue to live in such a pathetic state.  Or, you could stand by your choice to corrupt Jojo, but you'd have to get Amily to leave so she couldn't harm Jojo.  Flipping her the bird might do the trick.", false);
 		//[Corrupt/Choose Jojo]
-		simpleChoices("Explain",aerisDies,"Flip Bird",2500,"",0,"",0,"",0);
+		simpleChoices("Explain",2501,"Flip Bird",2500,"",0,"",0,"",0);
 	}
 }
 function AmilyLeavesBirdJojoTentacles():void { 
@@ -343,7 +343,7 @@ function marbleVsAmilyFreakout():void {
 	
 	//Player choices how they want to respond.  
 	//Stay silent (A1), pimp (B1), or explain (C1).
-	simpleChoices("StaySilent",marbleIsPissyAndYourTooDumbToTalk,"Pimp",beAPimpMarbleLovesIt,"Explain",LucyYouGotSomeSplainingToDo,"",0,"",0);
+	simpleChoices("StaySilent",2507,"Pimp",2508,"Explain",2511,"",0,"",0);
 }
 
 //Stay silent like a douche
@@ -388,13 +388,13 @@ function beAPimpMarbleLovesIt():void {
 	if(player.hasPerk("Marble's Milk") >= 0) {
 		outputText("Marble blinks before saying \"<i>" + player.short + ", try again, I know you're better then that.</i>\"  You blink in response and wonder yourself what possessed you to say that.\n\n", false);
 		//Player chooses stay silent (A1) or explain (C1)
-		simpleChoices("StaySilent",marbleIsPissyAndYourTooDumbToTalk,"Explain",LucyYouGotSomeSplainingToDo,"",0,"",0,"",0);
+		simpleChoices("StaySilent",2507,"Explain",2511,"",0,"",0,"",0);
 	}
 	//Pimp -> PC is not addicted (B3)
 	else {
 		outputText("The two of them simply stare at you for several minutes in disbelief at your statement, it doesn't seem like either expected you to say that.  Finally Amily sputters, \"<i>I... what, how?   This isn't like how you acted when we were back in my village.</i>\"  You give her a winning smile and say, \"<i>Hey baby, I meant every word of it, and just look at me!  I can handle two girls like you, easy.</i>\"  Marble gives you the strangest of looks before saying, \"<i>Apparently you have a death wish,</i>\" before her hammer comes to the ready.  Amily does the same with her blowpipe.\n\nThe mouse begs, \"<i>" + player.short + ", please tell me you were making a bad joke.</i>\"\n\n", false);
 		//Player chooses serious (B4), just joking (B5)
-		simpleChoices("Serious",srslyPimpinGuyz,"Joking",jokeAboutPimpularness,"",0,"",0,"",0);
+		simpleChoices("Serious",2509,"Joking",2510,"",0,"",0,"",0);
 	}
 }
 //Pimp -> PC is not addicted -> serious (B4)
@@ -430,7 +430,7 @@ function jokeAboutPimpularness():void {
 	outputText("", true);
 	outputText("You assure them that you thought a joke might help them calm down.  The two of them seem to disagree with you on that sentiment, but wait for you to say something else.", false);
 	//Player chooses stay silent (A1) or explain (C1)
-	simpleChoices("StaySilent",marbleIsPissyAndYourTooDumbToTalk,"Explain",LucyYouGotSomeSplainingToDo,"",0,"",0,"",0);
+	simpleChoices("StaySilent",2507,"Explain",2511,"",0,"",0,"",0);
 }
 
 function LucyYouGotSomeSplainingToDo():void {
@@ -455,7 +455,7 @@ function LucyYouGotSomeSplainingToDo():void {
 			y = 0;
 		}
 		//Player chooses stay silent (A1), blame Marble (C4), blame Amily (C5)
-		simpleChoices("StaySilent",marbleIsPissyAndYourTooDumbToTalk,"BlameMarble",0,"BlameAmily",blameAmilysDumbMouseCunt,"",0,"",0);
+		simpleChoices("StaySilent",2507,"BlameMarble",0,"BlameAmily",2513,"",0,"",0);
 		return;
 	}
 }
@@ -510,7 +510,7 @@ function askAboutAmily():void {
 	//after 1400 and Urta's on duty:
 	if(hours > 14) {
 		outputText("You ask the assembled bar patrons if anybody has seen either a strange mouse-woman or Urta around, but don't get much of a response.  One cat-boy drinking at the bar haltingly suggests he may have noticed someone like that earlier in the day, but that was before Urta went on duty.  You thank him for the info.", false);
-		doNext(barTelAdre);
+		doNext(2256);
 		return;
 	}
 	//before Urta goes on duty at 1400:
@@ -531,7 +531,7 @@ function askAboutAmily():void {
 		
 		outputText("Do you leave them to get acquainted (and possibly be up for threesomes in the future), or do you barge in and stop these cheating sluts?", false);
 		//[Leave Them (finishes as normal] [Interrupt]
-		simpleChoices("Leave Them",askAboutAmilyPt2,"Interrupt",cheatingSloots,"",0,"",0,"",0);
+		simpleChoices("Leave Them",3203,"Interrupt",3204,"",0,"",0,"",0);
 	}
 }
 		
@@ -554,7 +554,7 @@ function cheatingSloots():void {
 	
 	outputText("Well, the mouse may have a point.  You could let them get to know each other and perhaps turn this into a threesome down the road, or you could put a firm end to it right now.  There's a pretty good chance putting your boot down on this might piss off one of them.", false);
 	//[Let Them Be] [End It]
-	simpleChoices("Let It Be",letTheSlootsFuck,"End It",endThisMadness,"",0,"",0,"",0);
+	simpleChoices("Let It Be",3205,"End It",3206,"",0,"",0,"",0);
 }
 function letTheSlootsFuck():void {
 	outputText("", true);
@@ -601,7 +601,7 @@ function amilyUrtaMorningAfter():void {
 	outputText("You wait for her to relax, and then, with studied nonchalance, add that it looked like the two of them had settled things amicably enough.  At that, Amily looks panic-stricken, fear and embarrassment warring for her face.  \"<i>... you saw?</i>\" she manages to blurt.  \"<i>Uh... uh... sorry,</i>\" Amily is mumbling, panic still evident.  \"<i>I mean...</i>\"  The mouse trails off, looking at you for reassurance.  What do you do?", false);
 	
 	//[Smile and nod][Be totally a dick]
-	simpleChoices("Be Nice",smileAndNodToAmilyXUrta,"Be A Dick",beADickToAmily,"",0,"",0,"",0);
+	simpleChoices("Be Nice",3189,"Be A Dick",3188,"",0,"",0,"",0);
 }
 
 //[Be totally a dick]
@@ -667,7 +667,7 @@ function amilyUrtaSex():void {
 	var vag:Number = 0;
 	if(player.hasVagina()) vag = 3396;
 	if(player.hasCock()) dick = 3397;
-	simpleChoices("Use Dick",dick,"Use Vag",vag,"",0,"",0,"Watch",amilyUrtaSexWatch);
+	simpleChoices("Use Dick",dick,"Use Vag",vag,"",0,"",0,"Watch",3191);
 }
 function amilyUrtaSexWatch():void {
 	outputText("", true);

@@ -44,7 +44,7 @@ function edrynBarTalk():void {
 		outputText("You stay with her and chat, learning more about your newborn child and otherwise having a pleasant time with your quadruped lover.", false);
 		cheatTime(1);
 		flags[72] = 0;
-		doNext(barTelAdre);
+		doNext(2256);
 		return;
 	}
 	//Mid-pregnancy talk
@@ -52,7 +52,7 @@ function edrynBarTalk():void {
 		outputText("Edryn smiles pleasantly as you approach, ", false);
 		outputText("offering you a spot at the table across from her.  She pushes aside the piled-up dishes and shifts uncomfortably on her pregnant bulk.  You smile at her and enjoy a light chat for a while, until Edryn runs out of food.  She excuses herself, and rises to go to the restroom.\n\n", false);
 		//Edryn pregnant offer
-		doNext(pregdrynOffer);
+		doNext(2494);
 		return;
 	}
 	//Post kids talk
@@ -63,7 +63,7 @@ function edrynBarTalk():void {
 		if(player.totalCocks() == 0) {
 			outputText("She looks down, eyes fixing on your crotch for a moment before she sighs, \"<i>Why did you get rid of your dick?  I like you a lot, but I don't really want to have sex with you like you are now.</i>\"\n\nIt looks like you won't get to have any fun with her right now.", false);
 			cheatTime(1);
-			doNext(barTelAdre);
+			doNext(2256);
 			return;
 		}
 		//(WANG FITS)
@@ -71,7 +71,7 @@ function edrynBarTalk():void {
 			outputText("She winks at you as she gets up and trots off, giving her butt a sensual sway to draw your eyes.  Her potent scent hangs in the air, and your body reacts immediately and intensely, flooding you with arousal.  ", false);
 			outputText("You look down at your " + multiCockDescriptLight() + " and curse, irritated at how easily she can affect you.  There's no way you'll be turning her down this time.  You get up and follow her back to her room, intent on taking care of the need between your legs.\n\n", false);
 			//Sex
-			doNext(pregdrynOffer);
+			doNext(2494);
 			return;
 		}
 		//(Too small)
@@ -93,7 +93,7 @@ function edrynBarTalk():void {
 			else {
 				outputText("I'd love to help you, but I don't have any supplies for you.  I'm sure you'll find a way.</i>\"\n\n", false);
 				cheatTime(1);
-				doNext(barTelAdre);
+				doNext(2256);
 				return;
 			}
 			takeItem();
@@ -114,7 +114,7 @@ function edrynBarTalk():void {
 			else {
 				outputText("She says, \"<i>You should find some Reducto or something to shrink that down.  I haven't come across any more so you'll have to get it yourself.</i>\"\n\n", false);
 				cheatTime(1);
-				doNext(barTelAdre);
+				doNext(2256);
 				return;
 			}
 		}
@@ -163,7 +163,7 @@ function edrynBarTalk():void {
 			else {
 				outputText("\n\nYou wait until she returns, wishing for once that things could be normal.  Though the remaining conversation is pleasant, you have a hard time enjoying yourself, and eventually bid the pretty centaur farewell.", false);
 				cheatTime(1);
-				doNext(barTelAdre);
+				doNext(2256);
 			}
 		}
 	}
@@ -173,14 +173,14 @@ function edrynBarTalk():void {
 		if(player.hasVagina() && player.lust > 70) {
 			outputText("and as wet as you are right now, you find her scent to be intriguing.  Some part of you is curious what it would taste like.  When the centauress returns you compliment her on her shapely backside, but she only smiles politely and informs you that she \"<i>doesn't swing for your team,</i>\" whatever that means.  The rest of the conversation is quite pleasant, but all good things must come to an end.", false);
 			cheatTime(1);
-			doNext(barTelAdre);
+			doNext(2256);
 		}
 		//Everybody else is all "BLEH"
 		else {
 			outputText("but the potent musky scent only reminds you of how different things are here.", false);
 			outputText("\n\nYou wait until she returns, wishing for once that things could be normal.  Though the remaining conversation is pleasant, you have a hard time enjoying yourself, and eventually bid the pretty centaur farewell.", false);
 			cheatTime(1);
-			doNext(barTelAdre);
+			doNext(2256);
 		}
 	}
 }
@@ -220,7 +220,7 @@ function edrynOffer():void {
 			outputText("Oh my, you're a little bit small for my tastes love.  Maybe you should try some of the local delicacies and trot back here so I can help you out ok?</i>\"\n\n", false);
 			outputText("You're a bit disappointed with the outcome. It doesn't look like you'll be getting any centaur tail tonight.", false);
 			cheatTime(1);
-			doNext(barTelAdre);
+			doNext(2256);
 			return;
 		}
 		//Too big
@@ -228,7 +228,7 @@ function edrynOffer():void {
 			outputText("Oh wow, you're a little bit too big for me to handle, love.  Maybe you should try to find something to shrink that down a little, not too much, and trot back here so I can help you out ok?</i>\"\n\n", false);
 			outputText("You're a bit disappointed with the outcome. It doesn't look like you'll be getting any centaur tail tonight.", false);
 			cheatTime(1);
-			doNext(barTelAdre);
+			doNext(2256);
 			return;
 		}
 		//Big enough
@@ -240,7 +240,7 @@ function edrynOffer():void {
 		outputText("She releases your " + cockDescript(x) + " and looks expectantly at you.  Your body is ready to do anything for a chance to breed her.  What will you do?\n\n", false);
 		if(cost > 0) outputText("(Do you pay " + num2Text(cost) + " gems to fuck her?)", false);
 		else outputText("(Do you fuck her?)", false);
-		doYesNo(edrynSexSelecter,barTelAdre);
+		doYesNo(2259,2256);
 	}
 	else if(player.cockTotal() > 0) {
 		//(HORSE CONT) 
@@ -250,7 +250,7 @@ function edrynOffer():void {
 				outputText("\"<i>Wow, that's huge!  Sweetheart, you'll need to be a bit smaller if you want to play with me.  Why not go out and find something to shrink it down to something a horse like me can handle, then maybe we can play ok?</i>\"\n\n", false);
 				outputText("You're a bit disappointed with the outcome. It doesn't look like you'll be getting any centaur tail tonight.", false);
 				cheatTime(1);
-				doNext(barTelAdre);
+				doNext(2256);
 				return;
 			}
 			if(player.cockArea(x) >= 24) {
@@ -264,14 +264,14 @@ function edrynOffer():void {
 				outputText(cockDescript(x) + " twitch.  Will you accept her proposition and give her what she wants?\n\n", false);
 				if(cost > 0) outputText("(Do you pay " + num2Text(cost) + " gems to fuck her?)", false);
 				else outputText("(Do you fuck her?)", false);
-				doYesNo(edrynSexSelecter,barTelAdre);
+				doYesNo(2259,2256);
 			}
 			//(HORSE TOO SMALL)
 			else {
 				outputText("\"<i>Ouch, is that all?  Sweetheart, you'll need to be a bit bigger if you want to play with me.  Why not go out and try some of the local delicacies, then maybe we can play ok?</i>\"\n\n", false);
 				outputText("You're a bit disappointed with the outcome. It doesn't look like you'll be getting any centaur tail tonight.", false);
 				cheatTime(1);
-				doNext(barTelAdre);
+				doNext(2256);
 				return;
 			}
 		}
@@ -282,7 +282,7 @@ function edrynOffer():void {
 				outputText("\"<i>Wow, that's huge!  Sweetheart, you'll need to be a bit smaller if you want to play with me.  Why not go out and find something to shrink it down to something a horse like me can handle, then maybe we can play ok?</i>\"\n\n", false);
 				outputText("You're a bit disappointed with the outcome. It doesn't look like you'll be getting any centaur tail tonight.", false);
 				cheatTime(1);
-				doNext(barTelAdre);
+				doNext(2256);
 				return;
 			}
 			//(cont Normal) 
@@ -295,14 +295,14 @@ function edrynOffer():void {
 				outputText("gets you the ride of a lifetime.  So what do you say " + player.short + "?  Do you want to be my sex-toy?</i>\"\n\n", false);
 				outputText("She stands up and turns, exposing her exotic hind-end to you.  A drop of fluid slips from her folds and splatters under the table, reminding you just how wet this trick would be.  Do you really want to do her?", false);
 				if(cost > 0) outputText("\n\n(Do you pay " + num2Text(cost) + " gems to fuck her?)", false);
-				doYesNo(edrynSexSelecter,barTelAdre);
+				doYesNo(2259,2256);
 			}
 			//(rejected)
 			else {
 				outputText("\"<i>Wow, that's it?  I'm sorry but you'll have to be a bit bigger before you can play with me.  Why not try some of the local specialties and come back when you're a bit bigger?</i>\"\n\n", false);
 				outputText("You're a bit disappointed with the outcome. It doesn't look like you'll be getting any centaur tail tonight.", false);
 				cheatTime(1);
-				doNext(barTelAdre);
+				doNext(2256);
 			}
 		}
 	}
@@ -334,7 +334,7 @@ function edrynSexSelecter():void {
 	if(cost > player.gems) {
 		outputText("You realize you can't afford to stay with the sexy centaur, and leave full of disappointment and arousal.", true);
 		cheatTime(1);
-		doNext(barTelAdre);
+		doNext(2256);
 		return;
 	}
 	//Pay gems and update sidebar
@@ -502,7 +502,7 @@ function approachHelAtZeBitch():void {
 		outputText("  Eventually, though, Hel gives you a sultry look and asks if you're up for a little group activity.  Are you?\n\n", false);
 	}
 	//(Display Options: [Threesome] [Leave]
-	simpleChoices("Edryn3Some",edryn,"Fox Girls",heliaPlusFoxyFluffs,"",0,"",0,"Leave",leaveHelInZeBitch);
+	simpleChoices("Edryn3Some",edryn,"Fox Girls",3401,"",0,"",0,"Leave",3356);
 }
 
 //First Time - Leave
@@ -516,7 +516,7 @@ function leaveHelInZeBitch():void {
 
 		outputText("You spend the rest of the hour quietly chatting with Helia before giving her a friendly kiss goodbye and stepping away.", false);
 	}
-	doNext(barTelAdre);
+	doNext(2256);
 }
 
 //First Time -- Threesome
@@ -544,7 +544,7 @@ function helEdrynThreeSomeStartYerEngines():void {
 
 		outputText("Grinning, the three of you make your way up to Edryn's private chambers.", false);
 	}
-	doNext(threesomeEdrynAndHel);
+	doNext(3358);
 }
 
 //THREESOME SEX
@@ -597,7 +597,7 @@ function findOutEdrynIsPregnant():void {
 	var aroused:Number = 0;
 	if(player.totalCocks() > 0) aroused = 2493;
 	//[Shocked] [Pleased] [Aroused (Requires Wang)]
-	simpleChoices("Shocked",shockedByEdrynsPregnancy,"Pleased",pleasedbyPregdryn,"Aroused",aroused,"",0,"",0);
+	simpleChoices("Shocked",2489,"Pleased",2492,"Aroused",aroused,"",0,"",0);
 }
 
 //Shocked
@@ -608,7 +608,7 @@ function shockedByEdrynsPregnancy():void {
 	
 	outputText("\n\n<b>What do you do?</b>", false);
 	//[Accept it] [Reject it]
-	simpleChoices("Accept It",shockedByPregdrynThenAccept,"Reject It",beAnAssholeToPregdryn,"",0,"",0,"",0);
+	simpleChoices("Accept It",2490,"Reject It",2491,"",0,"",0,"",0);
 }
 //Accept it
 function shockedByPregdrynThenAccept():void {
@@ -619,7 +619,7 @@ function shockedByPregdrynThenAccept():void {
 	outputText("\"<i>Thank you!  You had me really going for a moment there, you know that?  Wow, that is a weight off my chest,</i>\" exhales Edryn.  She climbs up onto her hooves and whispers, \"<i>I've got to use the little ponies' room, I'll be right back lover,</i>\" before she departs.\n\n", false);
 	
 	//[To Pregnant Offer]
-	doNext(pregdrynOffer);
+	doNext(2494);
 }
 
 //Reject it
@@ -633,7 +633,7 @@ function beAnAssholeToPregdryn():void {
 	outputText("<b>(Edryn will no longer speak with you.)</b>", false);
 	flags[70] = 1;
 	//Use the 1 hour cheat thinger
-	doNext(barTelAdre);
+	doNext(2256);
 }
 //Pleased
 function pleasedbyPregdryn():void {
@@ -644,7 +644,7 @@ function pleasedbyPregdryn():void {
 	outputText("Edryn pulls back from the table and stretches, her muscles visibly loosening as the tension oozes out of her imposing frame.  She whispers, \"<i>Be right back lover, I've got to make a stop at the little ponies' room,</i>\" before she departs.\n\n", false);
 	
 	//[To Pregger Offer]
-	doNext(pregdrynOffer);
+	doNext(2494);
 }
 
 //Aroused
@@ -654,7 +654,7 @@ function arousedByPregdryn():void {
 	outputText("You break into a grin bordering on lecherousness and congratulate the lusty centaur.  Her eyes widen for a moment, shocked from your expression, then narrow into a sultry expression.  Edryn teases, \"<i>I think someone has a bit of a pregnancy fetish, hrmm?  Is it the thought of my tits getting swollen with milk or the idea of me being jiggly and randy all the time that does it for you?</i>\"  She shivers, the outlines of her prominent nipples straining against her already-tightly-stretched tunic.  Edryn's eyes drop down and a rueful smile works its way across her face as she admits, \"<i>Great, now I'm turned on too!  Let me go use the little ponies' room. Then, MAYBE, we can help take care of each other.</i>\"\n\n", false);
 	
 	//[To Pregger Offer]
-	doNext(pregdrynOffer);
+	doNext(2494);
 }
 
 
@@ -717,7 +717,7 @@ function pregdrynOffer(cs:Boolean = true):void {
 		outputText("She looks down, eyes fixing on your crotch for a moment before she sighs, \"<i>Why did you get rid of your dick?  I like you a lot, but I don't really want to have sex with you like you are now.</i>\"\n\nEdryn leaves looking a little depressed.", false);
 		//Bar menu?
 		cheatTime(1);
-		doNext(barTelAdre);
+		doNext(2256);
 		return;
 	}
 	//(MEETS SIZE REQUIREMENTS)
@@ -733,7 +733,7 @@ function pregdrynOffer(cs:Boolean = true):void {
 		outputText("The centaur doesn't wait for a reply, and takes off at a trot towards her quarters.  A few drips have splattered across the floor, leaving a trail for you to follow.  You get up, dazed with arousal and leaking pre-cum, and stagger through the bar to her room, practically lust-drunk.", false);
 		stats(0,0,0,0,0,0,50,0);
 		//TO SEX!
-		//doNext(fuckPregEdryn);
+		//doNext(2495);
 		outputText("\n\nHow do you want to handle this?  ");
 		menu();
 		outputText("You could have some great, pregnant taur sex.");
@@ -756,7 +756,7 @@ function pregdrynOffer(cs:Boolean = true):void {
 		
 		outputText("Edryn releases you and climbs up on all fours, making her way towards her room in the back of the establishment.  The smell of her need hangs heavy in the air, and you follow it like a lost puppy.  Of course, puppies don't have their massive, rock-hard maleness visible to everyone around them.  Thankfully, you reach her door quickly, and bolt inside.", false);
 		//Go to 'too big or too small eat out'
-		doNext(jizzFromEatingPregdrynOut);
+		doNext(2496);
 		stats(0,0,0,0,0,0,50,0);
 		return;
 	}
@@ -768,7 +768,7 @@ function pregdrynOffer(cs:Boolean = true):void {
 		
 		outputText("The centaur doesn't wait for a reply, and takes off at a trot towards her quarters.  A few drips have splattered across the floor, leaving a trail for you to follow.  You get up, dazed with arousal and leaking pre-cum, and stagger through the bar to her room, practically drunk on lust.", false);
 		//Go to 'too big or too small eat out'
-		doNext(jizzFromEatingPregdrynOut);
+		doNext(2496);
 		stats(0,0,0,0,0,0,50,0);
 		return;
 	}

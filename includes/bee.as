@@ -27,7 +27,7 @@ function beeEncounterLevel2():void {
 			outputText("Your " + cockDescript(0) + " wriggles free of your " + player.armorName + ", as you keep walking forward.  A bodiless voice yells, \"<i>Honeypot, honeypot, ME LOOOOVE HONEYPOOOOOT!</i>\"\n\n", false);
 			outputText("The bee-girl's eyes widen at the sight, shocked by your over-endowed form being dragged towards her as if there were a magnet in your " + cockDescript(0) + ".  She presses herself against the flower's petals, terrified and afraid to put up any meaningful resistance.  The nagging voice pipes up, \"<i>So are we gonna rape her or what, " + player.short + "?  I need some honeyyy!</i>\"\n\n", false);
 			outputText("She seems too surprised to resist.  Will you go along with Exgartuan and rape her?", false);
-			doYesNo(exgartuanBeeRape,13);
+			doYesNo(2204,13);
 			return;
 		}
 		else {
@@ -41,7 +41,7 @@ function beeEncounterLevel2():void {
 	if((player.lib + player.cor < 140) || rand(2) == 0) {
 		outputText("You barely stop yourself from gleefully throwing yourself into her arms.  You realize the harmonic buzzing of her wings and the unearthly scent of her honey briefly robbed you of your reason.  Feeling momentarily more clear-headed, what do you do?", false);
 		//Choices - fight, talk, seduce, submit, run
-		simpleChoices("Fight", 2060, "Talk", beeTalk, "Seduce", 0, "", 0, "Leave", 13);
+		simpleChoices("Fight", 2060, "Talk", 2054, "Seduce", 0, "", 0, "Leave", 13);
 		return;
 	}
 	else beeEncounterLevel3();
@@ -281,7 +281,7 @@ function beeTalk():void {
 		//If you get lucky, chance for free honey and -corruption in exchange for lust.
 		if(rand(2) == 0) {
 			outputText("\"<i>Awww, it zzzeemz you've caught me with my 'pants' down,</i>\" she giggles, \"<i>I'm all out of eggzzz.</i>\"  She pats her smaller-sized abdomen for a moment, thinking.\n\nHer eyes light up with inspiration, \"<i>Zzzince I'm ztill zzzo horny, would you like pure undiluted honey? Itzzz very good,</i>\" she says, spreading her legs and exposing the source of the scent – her puffy black vulva dripping with sticky amber fluid.\n\nDo you collect her honey?", true);
-			doYesNo(freeHoneyEvent,13);
+			doYesNo(2056,13);
 		}
 		//If you get unlucky you just get the choice of getting egg-laid.
 		else {
@@ -608,7 +608,7 @@ function beeRapesYou():void {
 		if(player.gender == 3 || player.gender == 0) {
 			outputText("Defeated, there is little you can do to stop the bee-girl as she approaches, buzzing and humming intently.  Cooing and humming into your ear, her pheromones filling the air, she rapidly overwhelms your mental resistance.\n\n", true);
 			//Link to standard bee rape scene #3.
-			doNext(beeEncounterLevel3);
+			doNext(2053);
 		}
 	}
 }
@@ -1143,7 +1143,7 @@ function corruptNagaBitchesRapeABee():void {
 	outputText("\"<i>What…</i>\" she asks hazily, \"<i>What are you zzztaring... at...</i>\" Her words begin to trail off as your gaze locks with hers, hypnotizing her. You watch as her lids begin to droop, and you can feel her muscles becoming slack within your coils. The emotionless expression you're wearing hides the sheer delight you feel.\n\n", false);
 	
 	outputText("It takes a few minutes, but you relish every second of the bee-girl's conscious mind slipping away. You unwind your tail from around her, never breaking your gaze for even a second. To your pleasure, your captive continues to stand still on her own volition.", false);
-	doNext(nagaRapesPt2TheExtremeContinuationOfAwesome);
+	doNext(2776);
 }
 function nagaRapesPt2TheExtremeContinuationOfAwesome():void {
 	spriteSelect(6);

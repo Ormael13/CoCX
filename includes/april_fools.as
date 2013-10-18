@@ -6,7 +6,7 @@ function poniesYN():Boolean {
 		outputText("", true);
 		outputText("While walking around the lake, you hear the sound of feminine voices laughing and talking, accompanied by the distinctive clip-clop of hooves. Stepping lightly through the overgrowth you stumble across a group of small brightly colored ponies. The strange part about them isn't so much their size, but rather the shape of their bodies.  They almost look cartoonish in nature, a few even sport fluttery, feathery looking wings.\n\n", false);
 		//(option: Approach? Leave them Be?)
-		simpleChoices("Approach",approachPonies,"",0,"",0,"",0,"Leave",leavePonies);
+		simpleChoices("Approach",2587,"",0,"",0,"",0,"Leave",2586);
 		flags[118]++;
 		return true;
 	}

@@ -62,7 +62,7 @@ function fapArenaGOOOO():void {
 		else outputText("By gods, what are you doing here?", false);
 		//end of condition about PC's corr
 		outputText("\n\nDo you stay?", false);
-		doYesNo(fapArenaPageII,2855);
+		doYesNo(3168,2855);
 	}
 	//[if dick size > 8 inches: after first time] 
 	else {
@@ -74,7 +74,7 @@ function fapArenaGOOOO():void {
 		outputText("Everyone nods in agreement, hands and genitalia quivering in excitement.", false);
 		//[if Corr >40]
 		if(player.cor > 66) outputText("  You look forward to this new masturbating session.", false);
-		doNext(fapArenaPageII);
+		doNext(3168);
 	}
 	//end of condition about PC's first time, display the following
 }
