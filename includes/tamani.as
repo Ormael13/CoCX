@@ -103,7 +103,7 @@ function tamaniMaleFirstEncounter():void {
 	outputText("A goblin leaps out from behind a rock outcropping.  For something so small, she has a lot of curves.  She advances towards you, rolling her hips in a suggestive way, immediately diverting your blood-flow to your crotch.  The little thing is only about four feet tall, with pink and black dyed hair cut into a cute little 'do.  The greenish-gray skin of her breasts jiggles pleasantly with every step, supported by a few leather straps, amplifying her cleavage.  Her cunt lips are pierced multiple times, inflamed, and slightly parted.  There really isn't any clothing on her to hide them, just more of the ever-present straps wrapping around her thighs.\n\n", false);
 	outputText("The goblin makes you an offer that's difficult to turn down, \"<i>Hey there stud, want to fuck me pregnant?  I promise my box will milk your dick dry.  Just let Tamani take care of all your boners OK?</i>\"", false);
 	//[Fuck Her] [Refuse]
-	simpleChoices("Fuck Her",2195,"Refuse",2196,"",0,"",0,"",0);
+	simpleChoices("Fuck Her",tamaniFirstTimeConsentual,"Refuse",tamaniFirstTimeRefusal,"",0,"",0,"",0);
 }
 //[Fuck Her – Consentual First Time]
 function tamaniFirstTimeConsentual():void {
@@ -168,7 +168,7 @@ function tamaniFirstTimeRefusal():void {
 	outputText("Tamani's eyes widen in surprise, \"<i>Don't let the size fool you, big " + player.boyGirl() + ". I can take more than you think,</i>\" she says while her hands begins playing with her box, \"<i>Are you sure you don't want to just let off a little steam?</i>\"\n\n", false);
 	//[Fuck Her (Goes to fuck her - consensual first time)]
 	//[No means no]
-	simpleChoices("Fuck Her",2195,"No",2197,"",0,"",0,"",0);
+	simpleChoices("Fuck Her",tamaniFirstTimeConsentual,"No",tamaniSecondRefusal,"",0,"",0,"",0);
 	stats(0,0,0,0,0,0,5,0);
 }
 //[No Means No]
@@ -197,7 +197,7 @@ function tamaniMaleRepeatEncounter():void {
 	//[Take Her – win sex] 
 	//[Let Her – Get dommed] 
 	//[No – starts fight]
-	simpleChoices("Take Her",2200,"Let Her",2198,"No",2203,"",0,"",0);
+	simpleChoices("Take Her",tamaniSexWon,"Let Her",tamaniSexLetHer,"No",2203,"",0,"",0);
 }
 
 //[Let Her (Or Combat Rape)]
@@ -537,7 +537,7 @@ function tamaniPregnantEncounter():void {
 	outputText("Tamani strolls out from behind a boulder, and wow is she ever pregnant.  It doesn't diminish the look of lust in her eyes when she meets your gaze, but her hands do keep rubbing the outside of her belly, only pausing to squeeze drops of milk from her nipples.  Her leather straps seem to fit her even better than before, accentuating her expanding curves and looking fantastic on her pregnant form.\n\n", false);
 	outputText("She parts her legs and rubs her lower lips while she begs you, \"<i>Please fuck me!   I'm so horny from the pregnancy and I can't wait to give you daughters so you can knock me up all over again!</i>\"", false);
 	//[Fuck Her] [Refuse]
-	simpleChoices("Fuck Her",2201,"Refuse",2202,"",0,"",0,"",0);
+	simpleChoices("Fuck Her",tamaniPregnantFuck,"Refuse",tamaniPregnantRefusal,"",0,"",0,"",0);
 }
 
 //[Refuse]

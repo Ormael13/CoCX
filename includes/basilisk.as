@@ -109,7 +109,7 @@ function defeatBasilisk():void {
 	if(player.lust >= 33 && player.gender > 0) {
 		outputText("  Certain that the creature won't dare try and turn its eyes on you again, you take your time to look the tall reptile over directly for the first time.  Perhaps you could use it to satisfy your baser urges. If so, what part of it do you choose?", false);
 		//[Tongue][Ass]
-		simpleChoices("Tongue",3012,"Ass",evil,"",0,"Lay Eggs",eggs,"Leave",5007);
+		simpleChoices("Tongue",tongueBasiliskSmex,"Ass",evil,"",0,"Lay Eggs",eggs,"Leave",5007);
 	}
 	else eventParser(5007);
 }

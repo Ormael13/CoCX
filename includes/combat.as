@@ -236,7 +236,7 @@ function doCombat(eventNum:Number)
 			} else if(monster.hasStatusAffect("Constricted") >= 0) {
 				simpleChoices("Squeeze", 5119,"Tease",5120,"",0,"",0,"Release",5121);
 			} else if(player.hasStatusAffect("Bound") >= 0) {
-				simpleChoices("Struggle",2335,"Wait",2336,"",0,"",0,"",0);
+				simpleChoices("Struggle",ceraphBindingStruggle,"Wait",ceraphBoundWait,"",0,"",0,"",0);
 			} else if(player.hasStatusAffect("GooArmorBind") >= 0) {
 				choices("Struggle", 5077,"",0,"",0,"",0,"",0,"Wait",5071,"",0,"",0,"",0,"",0);
 			} else if(monster.hasStatusAffect("Minotaur Entangled") >= 0) {
@@ -701,7 +701,7 @@ function doCombat(eventNum:Number)
 				if(player.statusAffectv1("Tamani") <= -500 && player.canOvipositSpider()) {
 					temp2 = 3837;
 				}
-				simpleChoices("Fuck",2200,"Buttfuck",temp,"",0,"Lay Eggs",temp2,"Leave",5007);
+				simpleChoices("Fuck",tamaniSexWon,"Buttfuck",temp,"",0,"Lay Eggs",temp2,"Leave",5007);
 			}
 			else eventParser(5007);			
 			return;
@@ -761,7 +761,7 @@ function doCombat(eventNum:Number)
 			outputText("You strike out and the last of the demons tumbles to the ground with a thud. You stand there for a second surrounded by dead or unconscious demons feeling like a god of battle. Then you realize that if a god of battle does exist he lives on a demonic plane like this, so to avoid insulting him you take your hands off your hips and your " + player.legs() + " off the head of the demon leader before you start to search the bodies.", true);
 			stats(0,0,0,0,0,0,1,0);
 			if(monster.hasStatusAffect("phyllafight") >= 0) {
-				doNext(3579);
+				doNext(consolePhylla);
 				return;
 			}
 			eventParser(5007);
@@ -772,7 +772,7 @@ function doCombat(eventNum:Number)
 			//Rape if not naga, turned on, and girl that can fit!
 			if(player.hasVagina() && player.lust >= 33 && !player.isNaga()) {
 				outputText("  You find yourself musing that you could probably take advantage of the poor 'doggy'.  Do you fuck it?", false);
-				simpleChoices("Fuck it",2746,"",0,"",0,"",0,"Leave",5007);
+				simpleChoices("Fuck it",hellHoundPropahRape,"",0,"",0,"",0,"Leave",5007);
 				return;
 			}
 			eventParser(5007);
@@ -840,7 +840,7 @@ function doCombat(eventNum:Number)
 				//Rapes not on the table.
 				else {
 					outputText("\n\nYour nipples ache with the desire to forcibly breastfeed the gelatinous beast.  Do you?", false);
-					doYesNo(2480,5007);					
+					doYesNo(rapeOozeWithMilk,5007);					
 				}
 			}
 			//Not a breastfeeder
@@ -1127,7 +1127,7 @@ function doCombat(eventNum:Number)
 				if(player.statusAffectv1("Tamani") <= -500 && player.canOvipositSpider()) {
 					temp2 = 3837;
 				}
-				simpleChoices("Fuck",2200,"Buttfuck",temp,"",0,"Lay Eggs",temp2,"Leave",5007);
+				simpleChoices("Fuck",tamaniSexWon,"Buttfuck",temp,"",0,"Lay Eggs",temp2,"Leave",5007);
 			}
 			else eventParser(5007);			
 			return;
@@ -1231,7 +1231,7 @@ function doCombat(eventNum:Number)
 		if(monster.short == "demons") {
 			outputText("The demons stop attacking, and reach out to touch your body. Some are already masturbating like it's the only thing in the world and you know that right now, if you wanted to, you could make each and every one of them fuck you.");
 			if(monster.hasStatusAffect("phyllafight") >= 0) {
-				doNext(3579);
+				doNext(consolePhylla);
 				return;
 			}
 			outputText("  Do you rape them?", true);
@@ -1309,7 +1309,7 @@ function doCombat(eventNum:Number)
 				//Rapes not on the table.
 				else {
 					outputText("\n\nYour nipples ache with the desire to forcibly breastfeed the gelatinous beast.  Do you?", false);
-					doYesNo(2480,5007);					
+					doYesNo(rapeOozeWithMilk,5007);					
 				}
 			}
 			//Not a breastfeeder

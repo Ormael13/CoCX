@@ -56,7 +56,7 @@ function encounterKiha():void {
 		
 		outputText("What do you do?", false);
 		//[Fight] [Ask Why][Buy Passage][Leave]
-		simpleChoices("Fight",3177,"Ask Why",3178,"Buy Passage",3175,"",0,"Leave",3176);
+		simpleChoices("Fight",meetKihaAndFight,"Ask Why",askWhy,"Buy Passage",offerToBuyPassageFromKiha,"",0,"Leave",leaveWhenMeetingAgressiveKiha);
 	}
 	//*Repeat Encounter - PC WAS VICTORIOUS LAST FIGHT 
 	else if(flags[PC_WIN_LAST_KIHA_FIGHT] == 1) {
@@ -77,7 +77,7 @@ function encounterKiha():void {
 			temp = 0;
 		}
 		//[Pay] [This was my idea] [Leave] [Fight] - Leave uses standard leave text
-		simpleChoices("Fight",3177,"Pay",temp,"My Idea",3180,"",0,"Leave",3176);
+		simpleChoices("Fight",meetKihaAndFight,"Pay",temp,"My Idea",tellKihaTributeWasYourIdea,"",0,"Leave",leaveWhenMeetingAgressiveKiha);
 	}
 	//*Repeat Encounter - Tribute Wore off 
 	else if(flags[KIHA_TOLL] > 1 && 
@@ -90,7 +90,7 @@ function encounterKiha():void {
 			temp = 0;
 		}
 		//[Pay Again] [This was my idea] [Leave]  [Fight] - As first time Tribute Offer encounter
-		simpleChoices("Fight",3177,"Pay",temp,"My Idea",3180,"",0,"Leave",3176);
+		simpleChoices("Fight",meetKihaAndFight,"Pay",temp,"My Idea",tellKihaTributeWasYourIdea,"",0,"Leave",leaveWhenMeetingAgressiveKiha);
 	}
 	//Generic Repeat Encounter 
 	else {
@@ -101,7 +101,7 @@ function encounterKiha():void {
 		if(flags[KIHA_TOLL] == 0) {
 			outputText("If you hurry, you might get a word in edge-wise.  What do you do?", false);
 			//[Fight] [Ask Why][Buy Passage][Leave]
-			simpleChoices("Fight",3177,"Ask Why",3178,"Buy Passage",3175,"",0,"Leave",3176);
+			simpleChoices("Fight",meetKihaAndFight,"Ask Why",askWhy,"Buy Passage",offerToBuyPassageFromKiha,"",0,"Leave",leaveWhenMeetingAgressiveKiha);
 		}
 		else {
 			outputText("It's a fight!", false);
@@ -118,7 +118,7 @@ function offerToBuyPassageFromKiha():void {
 	//(Unlocks toll option next encounter)
 	flags[KIHA_TOLL] = 1;
 	//[Fight] [Leave] - Same results as main fight/leave.
-	simpleChoices("Fight",3177,"",0,"",0,"",0,"Leave",3176);
+	simpleChoices("Fight",meetKihaAndFight,"",0,"",0,"",0,"Leave",leaveWhenMeetingAgressiveKiha);
 }
 //[Leave] 
 function leaveWhenMeetingAgressiveKiha():void {
@@ -158,7 +158,7 @@ function payKihaTribute():void {
 	flags[KIHA_TOLL]++;
 	//(2-5 more explorations of her area before she shows up demanding more tribute!)
 	//(do a 'Kiha' exploration with chances of fantabulous prizes)
-	doNext(3186);	
+	doNext(kihaExplore);	
 }
 function kihaExplore(clearScreen:Boolean = true):void {
 	if(clearScreen) outputText("", true);

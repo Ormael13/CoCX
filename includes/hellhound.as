@@ -171,13 +171,13 @@ function HellHoundMasterEncounter():void {
 	if(flags[141] == 0) {
 		outputText("As you're wandering the mountains, you feel an odd presence in the back of your mind.  It calls out to you with promise of power and safety, but part of you feels a bit apprehensive at the prospect of giving yourself over to it.  Do you let the presence take over?", false);
 		//Player chooses yes/no - no -> (B), yes -> (C)
-		doYesNo(2689,2688);
+		doYesNo(acceptCrazyPresences,declineCrazyPresences);
 	}
 	else if(flags[141] == 1) {
 		//Second Encounter (D)
 		//can be triggered if the PC still has the required canine traits, and has a piece of Lethicite.
 		outputText("As you're wandering the mountains, you once again feel an odd presence in the back of your mind.  You're sure it is the hellhound master once again.  You look at the pink crystal in your possession, and wonder if you should exchange it for the promissed hellfire.  Do you let the presence take over and give away the Lethicite?", false);
-		doYesNo(2692,2691);
+		doYesNo(giveUpLethicite,declineGivingAwayLethicite);
 		//Player choose yes or no, no -> E, yes -> F
 	}
 }
@@ -198,7 +198,7 @@ function acceptCrazyPresences():void {
 
 	outputText("You continue your trek to the master's home, you can feel that you're close.  At the back of the vale, stands what seems to be a fort of sorts in front of a large cliff face.  At the entrance, stands a stunning indigo succubus holding the leash of a very big hellhound.  She smiles as she sees you approach and calls you over.  You happily trot over to the demon mistress and nuzzle your head against her thighs.  She takes your canine head between her hands and gives you a playful rub while saying \"<i>Ah, what a cute little lost doggy.  You here to see the master?  Go on in, he always has time for his faithful hounds.  You're probably really lonely, I'm sure he can find a friend to join you on that beautiful body.</i>\"  You nod at her eagerly and proceed inside.\n\n", false);
 	//nxt page
-	doNext(2690);
+	doNext(acceptCrazyPresencesII);
 }
 
 function acceptCrazyPresencesII():void {
@@ -235,8 +235,8 @@ function giveUpLethicite():void {
 	outputText("You barely spare a thought at the interior in your hurry to get to the master.  As you burst into the room, the master's eyes light up at the sight of you.  \"<i>Ah!  It is my favorite fan.  Have you brought me a piece of that pink crystal I asked you for?</i>\"\n\n", false);
 	
 	//Player chooses to either give Merae's full Lethicite, or a regular piece of Lethicite.  Limited by what they have, of course.  They cannot choose to leave at this point.  Merae's Lethicite -> G, Regular Lethicite -> H.
-	if(player.keyItemv2("Marae's Lethicite") == 0) simpleChoices("Give All",2694,"Give Part",2693,"",0,"",0,"",0);
-	else doNext(2693);
+	if(player.keyItemv2("Marae's Lethicite") == 0) simpleChoices("Give All",giveALLTHELETHICITES,"Give Part",giveLethicitePiece,"",0,"",0,"",0);
+	else doNext(giveLethicitePiece);
 }
 //Regular Lethicite
 function giveLethicitePiece():void {
