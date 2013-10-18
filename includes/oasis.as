@@ -56,7 +56,7 @@ function oasisTalkAccept():void {
 		player.addStatusValue("Voluntary Demonpack",1,1);
 	}
 	//TO THE SECKSIN!
-	doNext(2141);
+	doNext(oasisSexing);
 }
 function oasisSexing():void {
 	spriteSelect(46);
@@ -162,7 +162,7 @@ function oasisSexing():void {
 	}
 	//If you submitted willingly - chance of bad end
 	if(player.statusAffectv1("Voluntary Demonpack") >= 6 && player.hasVagina()) {
-		doNext(2139);
+		doNext(oasisBadEnd);
 		return;
 	}
 	outputText("You fuck for hours 'feasting' with the demons. Pain, pleasure and exhaustion intermingle and no matter how hard you try to cling to consciousness you are in no state to concentrate. You dangle over the edge for what seems like eternity before another orgasm, stronger than any other, hits you like a solid wall and you black out. For a little while you drift in and out of conscious reality to find your body still the object of demonic attentions until eventually you wake to find that the seemingly endless string of orgasms has stopped. Looking around you see what demons remain awake engaged solely in fucking each other. Tender and sore from the abuse and still finding it hard to concentrate you gather your clothes and steal away, leaving them to the tail end of their orgy. In the aftermath you feel like you've just run an endurance race, but the rubbed raw sensitivity of your brutally fucked body tells another tale.", false);
@@ -197,7 +197,7 @@ function oasisBadEnd():void {
 	if(player.gender >= 2) outputText("He reaches down to grab a hold of your hair and lifts you to your feet, causing you to yelp out in pain from the sharp pull.  ", false);
 	outputText("He gives the chain attached to your neck an extra sharp tug and forces you to start walking behind him. As the tribe starts to move on to their next destination with you in tow, the leader turns to you. \"<i>You might just find becoming a slave is better than you think. Why else would you keep returning to us and joining our Feast if you didn't crave more of what we had to offer?</i>\"\n\n", false);
 	outputText("Flushing red in embarrassment at his words, you reluctantly follow after the leader and the rest of the tribe in obedience. You mull over what the leader had just said in your mind, and can't help but wonder what your future will be like if you remained with them.", false);
-	doNext(2140);
+	doNext(oasisBadEndEpilogue);
 }
 function oasisBadEndEpilogue():void {
 	spriteSelect(46);

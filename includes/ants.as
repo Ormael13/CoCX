@@ -78,7 +78,7 @@ function firstAntColonyEncounter():void {
 	outputText("\n\nYou could watch from where you're hiding, or you could play the hero and step in.");
 	//[Keep Hidden]
 	//[Play Hero]
-	simpleChoices("Play Hero",3577,"Keep Hidden",3578,"",0,"",0,"",0);
+	simpleChoices("Play Hero",playHero,"Keep Hidden",keepHidden,"",0,"",0,"",0);
 }
 //►[Keep Hidden]
 function keepHidden():void {
@@ -246,7 +246,7 @@ function antColonyChallenge():void {
 		outputText("\n\n\"<i>Oh good, you're here.  I was beginning to think you were a coward.</i>\"  Before you can respond to his insult, he cuts you off.  \"<i>We're ready to start when you are.  Let's hope you survive longer than the last guy.</i>\"");
 	}
 	//[Fight] [Leave]
-	simpleChoices("Fight",3575,"",0,"",0,"",0,"Leave",3576);
+	simpleChoices("Fight",antColiseumFight,"",0,"",0,"",0,"Leave",leaveAntColony);
 }
 
 //►[Leave]

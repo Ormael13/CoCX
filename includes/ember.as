@@ -102,7 +102,7 @@ Spar (fight Ember)*/
 	var milk:int = 0;
 	if(flags[EMBER_OVIPOSITION] > 0 && flags[EMBER_GENDER] >= 2 && flags[EMBER_INCUBATION] == 0) egg = 3720;
 	if(flags[EMBER_MILK] > 0) milk = 3723;
-	choices("Appearance",3715,"Talk",3716,"DrinkBlood",3696,"Drink Milk",milk,"Get Egg",egg,"Sex",3738,"Spar",3724,"",0,"",0,"Back",74);
+	choices("Appearance",embersAppearance,"Talk",talkToEmber,"DrinkBlood",bloodForTheBloodGod,"Drink Milk",milk,"Get Egg",egg,"Sex",emberSexMenu,"Spar",decideToSparEmbra,"",0,"",0,"Back",74);
 }
 
 //Approach for sex - initial output when selecting [Sex] menu (Z)
@@ -170,7 +170,7 @@ function emberSexMenu(output:Boolean = true):void {
 		getBlown = 3730;
 		pitchAnal = 3731;
 	}
-	//choices("Catch Anal",catchAnal,"Pitch Anal",pitchAnal,"Blow Ember",blowEmber,"Get Blown",getBlown,"Eat Her Out",eatOut,"Get Eaten Out",getEatenOut,"Penetrate Her",penetrateHer,"Get Penetrated",getPenetrated,"",0,"Leave",3691);
+	//choices("Catch Anal",catchAnal,"Pitch Anal",pitchAnal,"Blow Ember",blowEmber,"Get Blown",getBlown,"Eat Her Out",eatOut,"Get Eaten Out",getEatenOut,"Penetrate Her",penetrateHer,"Get Penetrated",getPenetrated,"",0,"Leave",emberCampMenu);
 	menu();
 	
 	if(catchAnal > 0) addButton(0,"Catch Anal",eventParser,catchAnal);
@@ -209,7 +209,7 @@ function findEmbersEgg():void {
 		outputText("\n\nTrue enough, after a short trek through familiar tunnels you find yourself once again standing before the alleged 'dragon egg'.");
 	}
 	flags[TIMES_FOUND_EMBERS_EGG]++;
-	simpleChoices("Take It",3698,"Destroy It",3694,"",0,"",0,"Leave",3693);
+	simpleChoices("Take It",takeEmbersEggHomeInADoggieBag,"Destroy It",destroyBabyEmberYouMonster,"",0,"",0,"Leave",leaveEmbersAssOutToDry);
 }
 
 //[=Leave=] (Z)
@@ -228,7 +228,7 @@ function destroyBabyEmberYouMonster():void {
 	outputText("\n\nWith nothing else in the cave, you prepare to leave, but find yourself stopped by a sudden thought.  The egg yolk, though raw, looks strangely appetizing...");
 	flags[EGG_BROKEN] = 1;
 	//[Eat][Leave]
-	simpleChoices("Eat It",3695,"",0,"",0,"",0,"Leave",13);
+	simpleChoices("Eat It",eatEmbersYolkLikeAnEvenBiggerDick,"",0,"",0,"",0,"Leave",13);
 }
 
 //[=Eat=]
@@ -408,7 +408,7 @@ function emberEggInteraction():void {
 		//Do you give in to the urge?
 		//[Yes][No]
 		//[= Yes =]
-		doYesNo(3712,3702);
+		doYesNo(masturbateOntoAnEgg,dontEggFap);
 		//(Use the appropriate Egg Masturbation scene.)
 		return;
 	}	
@@ -437,9 +437,9 @@ function emberEggInteraction():void {
 		hatch = 3713;
 		outputText("\n\n<b>The egg is ready to be hatched - if you're just as ready.</b>");
 	}
-	if(hatch > 0) choices("Hatch",hatch,"Blood",3711,"IncubiDraft",draft,"Pure Draft",pDraft,"Succubi Milk",milk,"Pure Milk",pMilk,"Hair Serum",hair,"Ovi Elixir",ovi,"Lactaid",lactaid,"Back",3703);
-	else if(fap > 0) choices("Masturbate",fap,"Blood",3711,"IncubiDraft",draft,"Pure Draft",pDraft,"Succubi Milk",milk,"Pure Milk",pMilk,"Hair Serum",hair,"Ovi Elixir",ovi,"Lactaid",lactaid,"Back",3703);
-	else choices("Hatch",hatch,"Blood",3711,"IncubiDraft",draft,"Pure Draft",pDraft,"Succubi Milk",milk,"Pure Milk",pMilk,"Hair Serum",hair,"Ovi Elixir",ovi,"Lactaid",lactaid,"Back",3703);
+	if(hatch > 0) choices("Hatch",hatch,"Blood",giveEmberBludSausages,"IncubiDraft",draft,"Pure Draft",pDraft,"Succubi Milk",milk,"Pure Milk",pMilk,"Hair Serum",hair,"Ovi Elixir",ovi,"Lactaid",lactaid,"Back",leaveWithoutUsingAnEmberItem);
+	else if(fap > 0) choices("Masturbate",fap,"Blood",giveEmberBludSausages,"IncubiDraft",draft,"Pure Draft",pDraft,"Succubi Milk",milk,"Pure Milk",pMilk,"Hair Serum",hair,"Ovi Elixir",ovi,"Lactaid",lactaid,"Back",leaveWithoutUsingAnEmberItem);
+	else choices("Hatch",hatch,"Blood",giveEmberBludSausages,"IncubiDraft",draft,"Pure Draft",pDraft,"Succubi Milk",milk,"Pure Milk",pMilk,"Hair Serum",hair,"Ovi Elixir",ovi,"Lactaid",lactaid,"Back",leaveWithoutUsingAnEmberItem);
 }
 
 //[= No =]
@@ -471,9 +471,9 @@ function dontEggFap():void {
 	outputText("\n\nYou start fishing through your pockets, holding up the various items you have; it doesn't react to some, while others make its flashes quicken.  These you set aside.  When you've finished testing the contents of your pouches, you look at the items the egg has selected.  As you rest your hand on the egg and consider your choices, it begins to excite once more, alarming you.  You pull away and it calms down... the egg considers <b>you</b> an item as well, apparently!");
 	if(hatch > 0) outputText("\n\n<b>The egg is ready to be hatched - if you're just as ready.</b>");
 	
-	if(hatch > 0) choices("Hatch",hatch,"Blood",3711,"IncubiDraft",draft,"Pure Draft",pDraft,"Succubi Milk",milk,"Pure Milk",pMilk,"Hair Serum",hair,"Ovi Elixir",ovi,"Lactaid",lactaid,"Back",3703);
-	else if(fap > 0) choices("Masturbate",fap,"Blood",3711,"IncubiDraft",draft,"Pure Draft",pDraft,"Succubi Milk",milk,"Pure Milk",pMilk,"Hair Serum",hair,"Ovi Elixir",ovi,"Lactaid",lactaid,"Back",3703);
-	else choices("Hatch",hatch,"Blood",3711,"IncubiDraft",draft,"Pure Draft",pDraft,"Succubi Milk",milk,"Pure Milk",pMilk,"Hair Serum",hair,"Ovi Elixir",ovi,"Lactaid",lactaid,"Back",3703);
+	if(hatch > 0) choices("Hatch",hatch,"Blood",giveEmberBludSausages,"IncubiDraft",draft,"Pure Draft",pDraft,"Succubi Milk",milk,"Pure Milk",pMilk,"Hair Serum",hair,"Ovi Elixir",ovi,"Lactaid",lactaid,"Back",leaveWithoutUsingAnEmberItem);
+	else if(fap > 0) choices("Masturbate",fap,"Blood",giveEmberBludSausages,"IncubiDraft",draft,"Pure Draft",pDraft,"Succubi Milk",milk,"Pure Milk",pMilk,"Hair Serum",hair,"Ovi Elixir",ovi,"Lactaid",lactaid,"Back",leaveWithoutUsingAnEmberItem);
+	else choices("Hatch",hatch,"Blood",giveEmberBludSausages,"IncubiDraft",draft,"Pure Draft",pDraft,"Succubi Milk",milk,"Pure Milk",pMilk,"Hair Serum",hair,"Ovi Elixir",ovi,"Lactaid",lactaid,"Back",leaveWithoutUsingAnEmberItem);
 }
 
 //Leave Without Using Item (Z)
@@ -758,7 +758,7 @@ function hatchZeMuzzles():void {
 		}
 	}
 	//Aftermath (Z)
-	doNext(3714);
+	doNext(meetEmberAftermath);
 }
 
 //Aftermath (Z)
@@ -876,7 +876,7 @@ function embersAppearance():void {
 		outputText("\n\nEmber's legs themselves are somewhat human-like in appearance, but they're covered in the thick protective scales that don most of " + emberMF("his","her") + " extremities.  Only the feet look like anything but normal human anatomy; the clawed feet of a predator decorate " + emberMF("him","her") + " instead, capped with talons meant for gripping at the ground... or at prey.");
 		outputText("\n\nHaving drawn the dragon's attention with your examination of " + emberMF("his","her") + " body, Ember darts a reptilian tongue out from " + emberMF("his","her") + " lips, as if to entice you.");
 	}
-	doNext(3691);
+	doNext(emberCampMenu);
 }
 
 //Talk 
@@ -908,7 +908,7 @@ function talkToEmber():void {
 	//Talk about Dragons
 	//Talk about Exploring
 	//Talk about Yourself
-	simpleChoices("Dragons",3717,"Exploring",3718,"Yourself",3719,"",0,"Back",3691);
+	simpleChoices("Dragons",talkToEmberAboutDragonzzz,"Exploring",discussExplorationWithEmber,"Yourself",talkToEmberAboutYourself,"",0,"Back",emberCampMenu);
 }
 
 //Talk about Dragons (Z)
@@ -1307,7 +1307,7 @@ function bloodForTheBloodGod():void {
 		
 		outputText("\n\nAs you drink, you feel a rush of energy course throughout your body; you feel lofty, powerful, and erudite.  Who knows what will happen if you keep drinking...");
 		//[Continue][Stop]
-		simpleChoices("Continue",3700,"Stop",3699,"",0,"",0,"",0);
+		simpleChoices("Continue",drinkDeeplyOfDagronBlud,"Stop",noMoDagronBlud,"",0,"",0,"",0);
 	}
 	//(High Affection)
 	else {
@@ -1317,7 +1317,7 @@ function bloodForTheBloodGod():void {
 		outputText("\n\nEmber kisses you back; " + emberMF("his","her") + " bleeding tongue stroking yours lovingly.");
 		outputText("\n\nAs you drink, you feel a rush of energy course throughout your body; you feel lofty, powerful, and erudite.  Who knows what will happen if you keep drinking?");
 		//[Continue][Stop]
-		simpleChoices("Continue",3700,"Stop",3699,"",0,"",0,"",0);
+		simpleChoices("Continue",drinkDeeplyOfDagronBlud,"Stop",noMoDagronBlud,"",0,"",0,"",0);
 	}
 	//Flag as drinking her blood today!
 	flags[DRANK_EMBER_BLOOD_TODAY] = 1;
@@ -3144,7 +3144,7 @@ function penetrateEmbrah():void {
 	outputText("\n\n\"<i>Yes... let's go again...</i>\" she responds tiredly, before slumping down for a quick nap.  Beyond satisfied yourself, you settle on top of her with a sigh and a groan, repositioning yourself for greater comfort as you join her in sleep.");
 	
 	stats(0,0,0,0,.5,-2,-100,0);
-	doNext(3735);
+	doNext(penetrateEmbrahPartII);
 }
 
 //PART II!
@@ -3277,7 +3277,7 @@ function getPenetratedByEmberLastSexSceneWoooo():void {
 	stats(0,0,0,0,0,-2,-100,0);
 	if(player.lib > 50) stats(0,0,0,0,-3,0,0,0);
 	slimeFeed();
-	doNext(3737);
+	doNext(getPenetratedByEmberLastSexSceneWooooPartII);
 }
 //Part II
 function getPenetratedByEmberLastSexSceneWooooPartII():void {
@@ -3334,7 +3334,7 @@ function emberRapesYourHeatness():void {
 	stats(0,0,0,0,0,0,10 + player.lib/10,0);
 	outputText("\n\nWhat do you say?");
 	//[Accept] [Deny]
-	simpleChoices("Accept",3773,"Deny",3772,"",0,"",0,"",0);
+	simpleChoices("Accept",timeToPuffTheMagicDragon,"Deny",fuckOffEmberIWantANap,"",0,"",0,"",0);
 }
 
 //[=Deny=]
@@ -3375,7 +3375,7 @@ function timeToPuffTheMagicDragon():void {
 	if(player.pregnancyIncubation == 0 && flags[EMBER_INCUBATION] == 0 && flags[EMBER_GENDER] == 3 && player.gender == 3) {
 		outputText("\n\n(Who should bear the kids?)");
 		//[Ember] [You]
-		simpleChoices("Ember",3775,"You",3774,"",0,"",0,"",0);
+		simpleChoices("Ember",breedEmberPregnantAsIfThereWasAnyOtherKindOfBreeding,"You",getKnockedUpByEmbrahBroBaby,"",0,"",0,"",0);
 	}
 	//[Play appropriate breeding scene.]
 	//Female Breeding Scene:

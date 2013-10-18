@@ -31,7 +31,7 @@ function wandererFirstMeeting():void {
 	outputText("On the left is a man carrying a heavily loaded wheelbarrow and struggling not to stumble in the sandy desert soil.  Slightly behind and to the right of the man is a shapely woman, her demonic origins plain to anyone who notices the spikes on her head.  As they near the man notices your presence and calls out, \"<i>Ho, traveler!  Fine day isn't it?</i>\"\n\n", false);
 	outputText("The strange pair close the intervening distance, allowing you to make out more of their forms.  As expected, the succubus is quite a beauty, with curvy flesh in all the right places.  The man introduces himself as he struggles with his heavy load.  \"<i>I am Marcus,  former traveler of extraordinary places and seeker of forbidden knowledge!  Though all that was a long time ago; I'm retired, you see.  I've settled down with my new partner, Lucia.</i>\"  Marcus gestures, indicating the bored-looking succubus accompanying him.\n\n", false);
 	outputText("You start to greet them, but nearly faint in shock – Marcus' wheelbarrow isn't full of cargo.  It's the only thing keeping his oversized balls from dragging in the sand!  He smiles at your reaction and winks lewdly, \"<i>Why do you think I have to keep a succubus around?  If I don't empty these puppies every hour or two I damn near explode!</i>\"  Looking thoughtful for a moment, Marcus nods to himself and asks, \"<i>I don't suppose you have a moment to help me with a quandary I've been having?</i>\"", false);
-	simpleChoices("Help Him",2064,"",0,"",0,"",0,"Leave",2067);
+	simpleChoices("Help Him",wandererHelpHim,"",0,"",0,"",0,"Leave",wandererLeave);
 }
 //Leave
 function wandererLeave():void {
@@ -43,13 +43,13 @@ function wandererLeave():void {
 function wandererRepeatMeeting():void {
 	spriteSelect(42);
 	outputText("Marcus waves to you as he crests a nearby dune, yelling a greeting.  \"<i>Hey traveler!  Do you have a moment to help a man with a question of theological and moral imperatives?</i>\"\n\nHis succubus accomplice, Lucia, snorts in disdain.", true);
-	simpleChoices("Yes",2064,"",0,"",0,"",0,"Leave",2067);
+	simpleChoices("Yes",wandererHelpHim,"",0,"",0,"",0,"Leave",wandererLeave);
 }
 //Volunteer to help
 function wandererHelpHim():void {
 	spriteSelect(42);
 	outputText("\"<i>Oh good!</i>\" he exclaims as he begins elaborating.  \"<i>My dear succubus here is growing tired of our arrangement, and she wants me to give up the last of my humanity and become a demon like her.  I'm not really sure I want to lose my soul, but at the same time, I know enough about their kind to know I'd REALLY enjoy being an incubus, if you know what I mean.  Before I make the plunge, I'd like a second opinion – what do you think?</i>\"\n\nHe glances over his shoulder with almost a small measure of fear.", true);
-	simpleChoices("Go Demon",2065,"Stay Human",2066,"",0,"",0,"",0);
+	simpleChoices("Go Demon",wandererGoDemon,"Stay Human",wandererStayHuman,"",0,"",0,"",0);
 }
 //Ask marcus to stay human
 function wandererStayHuman():void {

@@ -45,14 +45,14 @@ function gangbangVillageFirstGoRound():void {
 		outputText("\n\nYour curiosity gets the better of your caution, and you admit that you're indeed a traveller from another world, then introduce yourself.");
 		outputText("\n\n\"<i>Of course, of course.  Why don't you follow us, valiant warrior?  We were just about to return home; we could use a little company.</i>\"  As she talks you can't help but notice she keeps readjusting her dress, subtly revealing a bit more of her cleavage at every shift.  You see she also takes repeated glances at your crotch, probably thinking she's being discreet enough.  Her nipples are hardening through her dress, her smile is teasing you; her entire body language seems to be an open invitation as well as a display of seduction.");
 		outputText("\n\nDo you follow her?");
-		doYesNo(3605,3604);
+		doYesNo(agreeToFollowRebecFirstTime,dontGoToZeVillage);
 	}
 	//As long as you don't follow her once, display this on subsequent encounters (Z)
 	else if(flags[TIMES_IN_DEMON_PIT] == 0) {
 		outputText("After wandering across the plains for a while, you spot Rebecc, the girl you met before, amongst a group of fellow farmers; she calls out to you.  \"<i>Hello again, traveler!  You seem lost... would you mind spending some time with us at our village?</i>\"");
 		outputText("\n\nAs before, you notice while speaking with her that she keeps glancing at your crotch for a few seconds at a time.  She puts on a sultry smile as she nudges the edges of her dress, revealing more and more cleavage each time.  She's a bit shaky as well; it's almost as if she's attempting to seduce you, but is only with difficulty able to contain herself.  Will you spend time with her in the village?");
 		//Yes/No
-		doYesNo(3605,3604);
+		doYesNo(agreeToFollowRebecFirstTime,dontGoToZeVillage);
 	}
 	//Second (and subsequent) encounter; only happens once PC accepted being sacrificed once (Z)
 	else {
@@ -64,7 +64,7 @@ function gangbangVillageFirstGoRound():void {
 		outputText("\n\n\"<i>My home is yours, hero; alongside everyone else's.  You will always be welcome here.  Don't hesitate to come to my place; you must feel all dirty and sullied from these corrupted monsters.  Don't worry, I'll clean you up.</i>\"  She winks at you and walks into her house, leaving her door open as an invitation.");
 		outputText("\n\n(<b>Owca Village added to your 'Places' menu.</b>)");
 		flags[OWCA_UNLOCKED] = 1;
-		doNext(3631);
+		doNext(gangbangVillageStuff);
 	}
 }
 function dontGoToZeVillage():void {
@@ -135,8 +135,8 @@ function agreeToFollowRebecFirstTime():void {
 		outputText("\n\nYou know very well what these people want: some meat to appease the demons.  Will you help them?");
 	}
 	//Yes/No
-	if(flags[TIMES_IN_DEMON_PIT] == 0) doYesNo(3607,3606);
-	else doYesNo(3608,3606);
+	if(flags[TIMES_IN_DEMON_PIT] == 0) doYesNo(3607,declineRebeccsPlea);
+	else doYesNo(3608,declineRebeccsPlea);
 }
 //Refuse plea (Z)
 function declineRebeccsPlea():void {
@@ -208,8 +208,8 @@ function intoTheDemonPit(sacrifice:Boolean = true):void {
 	}
 	flags[TIMES_IN_DEMON_PIT]++;
 	flags[DAYS_SINCE_LAST_DEMON_DEALINGS] = 0;
-	if(sacrifice) simpleChoices("Submit",3614,"Fight",3612,"",0,"",0,"",0);
-	else simpleChoices("Submit",3614,"Fight",3613,"",0,"",0,"",0);
+	if(sacrifice) simpleChoices("Submit",loseOrSubmitToVapula,"Fight",3612,"",0,"",0,"",0);
+	else simpleChoices("Submit",loseOrSubmitToVapula,"Fight",3613,"",0,"",0,"",0);
 }
 //Submit/Fight
 function fightZeDemons(sacrifice:Boolean = true):void {
@@ -337,9 +337,9 @@ function loseOrSubmitToVapula():void {
 	//[Vapula Submissiveness raises by 10. If it reaches 100 or more, go on to the Vapula Slave Bad End. Otherwise Wake up scene. Additionally, if it is raised to 90 or more this way, display warning:]
 	flags[VAPULA_SUBMISSIVENESS] += 10;
 	if(flags[VAPULA_SUBMISSIVENESS] >= 90 && flags[VAPULA_SUBMISSIVENESS] < 100) outputText("\n\n<b>You're starting to get dangerously used to this kind of treatment.  Your holes are being stretched to accommodate monstrous sizes and don't hurt that much anymore.  You feel like you could stand this as long as you need to with ease... maybe it's time to stop volunteering?</b>");
-	if(flags[VAPULA_SUBMISSIVENESS] >= 100) doNext(3632);
-	else if(player.hasStatusAffect("lostVillagerSpecial") >= 0) doNext(3642);
-	else doNext(3615);//WAKE UP
+	if(flags[VAPULA_SUBMISSIVENESS] >= 100) doNext(slaveToVapulaBadEnd);
+	else if(player.hasStatusAffect("lostVillagerSpecial") >= 0) doNext(morningAfterRape);
+	else doNext(wakeUpAfterDemonGangBangs);//WAKE UP
 	stats(0,0,0,0,1,2,-100,3);
 }
 
@@ -379,7 +379,7 @@ function defeetVapulasHorde():void {
 	//[(requires genitals and and corr >60)
 	if(player.cor > 60 && player.gender > 0) {
 		outputText("\n\nDo you take advantage of them?");
-		doYesNo(3617,3633);
+		doYesNo(rapeZeVapula,noVapulaSex);
 		return;
 	}
 	else {
@@ -548,7 +548,7 @@ function owcaMainScreenOn():void {
 		outputText("\n\nThis time you fully understand the consequences of another sacrifice.  Do you comply?");
 		//Yes: Leads to Accept Plea scene. Attitude is raised by 5.
 		//No: Leads to Refuse Plea scene. Attitude is lowered by 10.
-		doYesNo(3608,3606);
+		doYesNo(3608,declineRebeccsPlea);
 		return;
 	}
 	//[if attitude > 80]
@@ -589,7 +589,7 @@ function owcaMainScreenOn():void {
 		tavern = 3618;
 	}
 	//[Pit][Herds][Rebecc][Tavern]
-	simpleChoices("Pit",pit,"Herds",herd,"Rebecc",3626,"Tavern",tavern,"Leave",13);
+	simpleChoices("Pit",pit,"Herds",herd,"Rebecc",rebeccMenu,"Tavern",tavern,"Leave",13);
 }
 //Tavern (Z)
 function owcaTavern():void {
@@ -615,7 +615,7 @@ function owcaTavern():void {
 	outputText("\nMinotaur Cum: " + (300 - flags[OWCAS_ATTITUDE]) + " gems");
 	if((300 - flags[OWCAS_ATTITUDE]) > player.gems) cum = 0;
 	outputText("</i>");
-	simpleChoices("Sheep Milk",milk,"Goblin Ale",goblin,"Bro Brew",brew,"MinotaurCum",cum,"Back",3631);
+	simpleChoices("Sheep Milk",milk,"Goblin Ale",goblin,"Bro Brew",brew,"MinotaurCum",cum,"Back",gangbangVillageStuff);
 }
 
 function owcaBuySetup(item:String = "MinoCum"):void {
@@ -676,7 +676,7 @@ function rebeccMenu():void {
 		sex = 3629;
 		outputText("\n\nYou could try and force yourself on her, but you might not be welcome in town after...");
 	}
-	simpleChoices("Appearance",3627,"Bath",3628,"",0,"Surprise Sex",sex,"Back",3631);
+	simpleChoices("Appearance",rebeccAppearance,"Bath",rebeccBathScene,"",0,"Surprise Sex",sex,"Back",gangbangVillageStuff);
 }
 //Rebecc Appearance (Z)
 function rebeccAppearance():void {
@@ -685,7 +685,7 @@ function rebeccAppearance():void {
 	outputText("\n\nShe has a pair of ample, barely concealed breasts.  Although you can't see them outright, her thin clothing leaves little doubt that they're D-cups.  Her 0.5 inch nipples point through her dress whenever she's aroused.");
 	outputText("\n\nShe has a pussy of dubious virginity but copious wetness between her legs.  Occasionally a damp patch will appear on her dress, betraying her arousal.");
 	outputText("\n\nYou can't see her asshole, but it's safe to assume it's placed between her squeezable buttocks, right where it belongs.");
-	doNext(3626);
+	doNext(rebeccMenu);
 }
 //Rebecc Bath scene (Z)
 function rebeccBathScene():void {
@@ -782,7 +782,7 @@ function desperateVillages():void {
 	outputText("\n\nIt seems that these villagers have grown weary of your repeated refusals; they are likely to react angrily if you deny them another sacrifice.");
 	outputText("\n\nDo you submit?");
 	//Yes/No. Yes leads to Accept Plea, Attitude raised by 10. No to Villagers Fight
-	doYesNo(3608,3638);
+	doYesNo(3608,fightZeVillagers);
 }
 //Villagers Fight (Z, but pretty barebones)
 function fightZeVillagers():void {
@@ -810,7 +810,7 @@ function beatUpOwca():void {
 		torch = 3639;
 	var rape:Number = 0;
 	if(player.cor >= 60 && player.gender > 0 && player.lust >= 33) rape = 3630;
-	simpleChoices("Rape Rebbecc",rape,"Torch Village",torch,"",0,"",0,"Leave",3640);
+	simpleChoices("Rape Rebbecc",rape,"Torch Village",torch,"",0,"",0,"Leave",leaveOwcaAfterWhupping);
 }
 //"Leave" redirects the PC to camp; next encounter is Rebecc's Last Plea.
 function leaveOwcaAfterWhupping():void {
@@ -826,9 +826,9 @@ function torchOwcaMotherFuckers():void {
 	stats(0,0,0,0,0,0,0,15);
 	if(player.cor >= 60 && player.gender > 0 && player.lust >= 33) {
 		outputText("You notice Rebecc is still weeping among the scattered bodies of the beaten villagers.  Do you abuse her?");
-		simpleChoices("Abuse Her",3630,"",0,"",0,"",0,"Leave",3641);
+		simpleChoices("Abuse Her",3630,"",0,"",0,"",0,"Leave",torchUpVillagersAndLeave);
 	}
-	else doNext(3641);
+	else doNext(torchUpVillagersAndLeave);
 }
 	
 //Fuck off village
@@ -852,7 +852,7 @@ function loseToOwca():void {
 	HPChange(50,false);
 	fatigue(-30);
 	//after nightly scene, next encounter is Post-Mob Encounter
-	doNext(3614);
+	doNext(loseOrSubmitToVapula);
 	player.createStatusAffect("lostVillagerSpecial",0,0,0,0);
 }
 //Post-Mob Encounter (Z)
@@ -865,7 +865,7 @@ function morningAfterRape():void {
 	//Option: Forgive. Sets Attitude to 50, quest goes back to normal.
 	//Option: Rape. Leads to Rebecc Rape scene and ends the quest. 
 	//Option: Leave. Redirects PC to camp, next encounter leads to Rebecc's Last Plea
-	simpleChoices("Forgive",3643,"Rape",3629,"",0,"",0,"Leave",3644);
+	simpleChoices("Forgive",forgiveOwca,"Rape",3629,"",0,"",0,"Leave",fuckThisShit);
 }
 //Option: Forgive (Z)
 function forgiveOwca():void {
@@ -879,7 +879,7 @@ function forgiveOwca():void {
 	flags[OWCAS_ATTITUDE] = 60;
 	flags[OWCA_ANGER_DISABLED] = 1;
 	//To main owca menu
-	doNext(3631);
+	doNext(gangbangVillageStuff);
 }
 //Option: Leave (Z)
 function fuckThisShit():void {
@@ -897,7 +897,7 @@ function rebeccsLastPlea():void {
 	//(You could rape her.) //Leads to Rebecc Rape scene. 
 	//(You could face the villagers and demons in her stead.) 
 	//(You could leave.) //End of quest.
-	simpleChoices("Rape Her",3630,"Face Them All",3646,"",0,"",0,"Leave",3645);
+	simpleChoices("Rape Her",3630,"Face Them All",faceDownHordes,"",0,"",0,"Leave",leaveRebeccToBeRaped);
 }
 //Option: Leave (Z)
 function leaveRebeccToBeRaped():void {
@@ -958,7 +958,7 @@ function subdueVapula():void {
 	if(player.gender > 0 && player.lust >= 33) fuck = 3617;
 	var enslave:int = 0;
 	if(player.gender > 0 && player.cor >= 66) enslave = 3748;
-	simpleChoices("Disband",3747,"EnslaveVapula",enslave,"JustFuckEm",fuck,"",0,"Skip Out",5007);
+	simpleChoices("Disband",disbandHorde,"EnslaveVapula",enslave,"JustFuckEm",fuck,"",0,"Skip Out",5007);
 }
 //Option: Disband (Z)
 function disbandHorde():void {
@@ -1234,7 +1234,7 @@ function talkToVapulaForSomeReason():void {
 		}
 		threesomeB = 3752;
 	}
-	simpleChoices(haremT,haremB,threesomeT,threesomeB,"",0,"",0,"Back",3749);
+	simpleChoices(haremT,haremB,threesomeT,threesomeB,"",0,"",0,"Back",callSlaveVapula);
 }
 
 function toggleCeruleanVapulaAssist():void {
@@ -1251,7 +1251,7 @@ function toggleCeruleanVapulaAssist():void {
 		flags[VAPULA_THREESOMES] = 0;
 	}
 	//Return to talk menu
-	doNext(3751);
+	doNext(talkToVapulaForSomeReason);
 }
 function toggleVapulaHaremFucks():void {
 	clearOutput();
@@ -1270,7 +1270,7 @@ function toggleVapulaHaremFucks():void {
 		flags[VAPULA_HAREM_FUCK] = 1; 
 	}
 	//Return to talk menu
-	doNext(3751);
+	doNext(talkToVapulaForSomeReason);
 }
 //Feed
 function feedVapulaACupOfJizz():void {
@@ -1314,7 +1314,7 @@ function vapulaThreesomeMenu():void {
 		if(bimboSophie()) sophie = 3764;
 		if(izmaFollower() && flags[IZMA_NO_COCK] == 0) izma = 3757;
 	}
-	choices("Amily",amily,"Ceraph",ceraph,"Sophie",sophie,"Jojo",jojo,"Izma",izma,"",0,"",0,"",0,"",0,"Back",3749);
+	choices("Amily",amily,"Ceraph",ceraph,"Sophie",sophie,"Jojo",jojo,"Izma",izma,"",0,"",0,"",0,"",0,"Back",callSlaveVapula);
 }
 
 //Vapula-Ceraph threesome
@@ -1327,7 +1327,7 @@ function vapulaCeraphThreesome():void {
 	outputText("\n\nHow will you take them?");
 	//Plz both - requires dick
 	//Option: Butt-fuck train. Requires Ceraph to be herm.
-	simpleChoices("Please Both",3766,"AnalTrain",3765,"",0,"",0,"",0);
+	simpleChoices("Please Both",vapulaCeraphThreesomePleaseBoth,"AnalTrain",vapulaAndCeraphButtfuckTrainYeehaw,"",0,"",0,"",0);
 }
 //Option: Please both.
 function vapulaCeraphThreesomePleaseBoth():void {
@@ -1787,7 +1787,7 @@ function chixFeedVapulaBlehblehIVantToZuckYourSpooo():void {
 	//Feed/Tease
 	var tease:int = 0;
 	if(flags[VAPULA_HAREM_FUCK] == 0) tease = 3771;
-	simpleChoices("Feed",3770,"Tease",tease,"",0,"",0,"",0);
+	simpleChoices("Feed",chicksFeedVapula,"Tease",tease,"",0,"",0,"",0);
 }
 //Tease
 function teaseVapula():void {

@@ -828,14 +828,14 @@ function minoAddictionBadEndEncounter():void {
 	//(Withdrawal) 
 	if(flags[20] == 3) {
 		outputText("So great is your need that you don't even think about it, you just start following.", false);
-		doNext(2316);
+		doNext(minoAddictionBadEnd2);
 	}
 	else {
 		//(if smart)
 		if(player.inte > 40) outputText("A tiny voice speaks up, warning you that it would be hard to get away from such a gathering.  ", false);
 		outputText("Do you follow the minotaur-scent like the addict that you are?", false);
 		//[Yes] [No]
-		doYesNo(2316,13);
+		doYesNo(minoAddictionBadEnd2,13);
 	}
 }
 
@@ -868,7 +868,7 @@ function minoAddictionBadEnd2():void {
 	outputText("Your master pulls out and fastens a leather collar around your neck before dragging you through the mud back to his campfire.  Between the tugging of your collar and rough throat-fucking, you're breathless and gasping, but you couldn't be any happier.  Your new owner lifts you up by your " + assDescript() + " and forces himself inside your " + assholeDescript() + ", stuffing you full of thick minotaur cock.  Still heavily drugged by the load in your gut, you giggle happily as you're bounced up and down, totally relaxed in your master's presence.\n\n", false);
 	
 	outputText("He grunts and cums inside you for the second time, somehow still able to flood your bowels with what feels like a gallon of cum.  Drooling brainlessly, happy gurgles trickle from your throat as you're pulled off and tossed to the side.  You don't feel the impact of your body landing in the mud, or even notice when you're passed around the camp-fire, broken in as each of your new monstrous masters has his turn.", false);
-	doNext(2317);
+	doNext(minoCumAddictBadEnd3);
 	stats(0,0,0,-20,5,15,50,10);
 }
 //[PAGE 2]

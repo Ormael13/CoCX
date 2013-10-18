@@ -872,7 +872,7 @@ function doSystem(eventNo:Number):void {
 
 
 
-function doNext(eventNo:Number):void {
+function doNext(eventNo:*):void {
 	//Prevent new events in combat from automatically overwriting a game over. 
 	if(b1Text.text.indexOf("Game Over") != -1) {
 		trace("Do next setup cancelled by game over");
@@ -887,19 +887,6 @@ function doNext(eventNo:Number):void {
 
 
 
-
-function betterDoNext(func:Function):void {
-	//Prevent new events in combat from automatically overwriting a game over. 
-	if(b1Text.text.indexOf("Game Over") != -1) {
-		trace("Do next setup cancelled by game over");
-		return;
-	}
-	funcs = new Array();
-	args = new Array();
-	mainText.htmlText = currentText;
-	scrollBar.update();
-	choices("Next", func, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0); 
-}
 
 
 
@@ -2971,7 +2958,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 					//outputText("\nA huge grin passes over Marble's face, \"<i>I'm glad to hear it sweetie,</i>\" she tells you, \"<i>I was hoping you might help me out with my chores. Then I'll see about getting you some milk.</i>\"  The idea of working for her milk seems oddly right, and you put a huge effort into helping Marble with her chores.  Afterwards, Marble gladly agrees to give you her milk. While you are nursing from her, she starts to talk: \"<i>Sweetie, I've been thinking.  I think you should stay here with me from now on, since you need my milk to survive.</i>\"  She starts to stroke your head.  \"<i>You always do such a good job with the chores too; do you really want to do anything else?</i>\"  You try to pull back from her and tell her about your quest, but she keeps your mouth from straying from her breast.  \"<i>No, of course you don't.</i>\"  She says with finality, and you feel your need to do anything else fade....\n\n", false);
 					//outputText("\nMarble continues talking for a while, but it doesn't really matter to you anymore, all that matters to you now is earning her milk, and doing anything to please her.  Your mind is still able to wander freely, but it is so fixated on your need that you will remain at Marble's side for the rest of your life.  Your village will just have to rely on the next champion.", false);
 					outputText("Marble grabs you and pulls your head into her chest.  \"<i>Mmm, if you need me so much, then I want you to move in with me on the farm,</i>\" she says happily above you.  \"<i>That way, I can take care of you and you can help me, and we'll both be happy.</i>\"  You panic a bit; while you'd certainly be happy to have the source of her delicious milk at your fingertips, leaving the portal unguarded means the demons will be free to set up shop there again!  Marble responds to your squirming by tightening her arms and says, \"<i>Ah, ah, remember, sweetie; you need my milk and I control whether or not you can drink it.  I'm happy to share it, but if I'm being so generous, I think the least you could do is make it easier for me.  I don't think living here and helping me with the farmwork is too much to ask, do you?</i>\"  Her face contorts into an open-mouthed smile and her eyes glitter.  You sigh into her chest, she's right, there isn't much you can do about it now...");
-					doNext(2181);
+					doNext(marbleBadEndFollowup);
 					return true;
 				}
 				//Affection 50-79, type 1:
@@ -3010,7 +2997,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 					//outputText("At your words, Marble's face falls completely.  She looks up at you for a moment before saying \"<i>I'm so sorry; it's my fault for not being able to refuse you.</i>\"  You hesitate, not sure how to reply to her.  She sighs and invites you to her chest.\n\n", false);
 					//outputText("As you're drinking from Marble's breasts, you hear her say \"<i>Don't you ever leave my side again, sweety.  I'll make it up to you for what happened.</i>\"  As she says this an odd feeling passes through you.  For a brief instant you panic as you realize that any thought not to do as Marble asks is vanishing from your mind.  Then it passes, and without any doubt, you will be staying with Marble for the rest of your life.  There will be no more adventuring for this year's champion.  \n\n", false);
 					outputText("Marble grabs you and pulls your head into her chest.  \"<i>I'm so sorry sweetie, I never meant for this to happen,</i>\" she sobs above you.   \"<i>I'll make this right, I'll make sure nothing else ever hurts you, even if I have to make you stay here with me.</i>\"  An alarm rings in your head; how are you supposed to complete your mission like this?  Marble feels you squirm, and speaks again.  \"<i>I'm sorry, [name], but if you need my milk, this is really the best way... for both of us.</i>\"");
-					doNext(2181);
+					doNext(marbleBadEndFollowup);
 					return true;
 				}
 				//Affection < 80, type 2:
@@ -3060,7 +3047,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 					//Not yet met!  MEETING TIEM!
 					if(flags[134] == 0) {
 						outputText("<b>\nSomething unusual happens that morning...</b>\n", false);
-						doNext(2687);
+						doNext(meetRaphael);
 						return true;
 					}
 					//Already met!
@@ -3068,13 +3055,13 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 						//Not given dress yet
 						if(flags[135] == 0 && flags[140] == 0) {
 							outputText("<b>\nSomething unusual happens that morning...</b>\n", false);
-							doNext(2658);
+							doNext(RaphaelDress);
 							return true;
 						}
 						//Dress followup - Call picnic date prologue!
 						if(player.armorName == "red, high-society bodysuit"  && (flags[135] > 1 && flags[135] <= 4)) {
 							outputText("<b>\nSomething unusual happens that morning...</b>\n", false);
-							doNext(2660);
+							doNext(RaphaelEncounterIIDressFollowup);
 							return true;
 						}
 					}
@@ -3091,7 +3078,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 					//shot down yet?
 					if(flags[139] == 0 && player.armorName == "red, high-society bodysuit") {
 						outputText("<b>\nSomething unusual happens that morning...</b>\n", false);
-						doNext(2660);
+						doNext(RaphaelEncounterIIDressFollowup);
 						return true;
 					}
 					
@@ -3100,7 +3087,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			//FINALE
 			else if(flags[133] == 1) {
 				outputText("<b>\nSomething unusual happens that morning...</b>\n", false);
-				doNext(2682);
+				doNext(quiksilverFawkesEndGame);
 				return true;
 			}
 		}
