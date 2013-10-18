@@ -4190,7 +4190,7 @@ function simpleChoices(text1:String, butt1:Number, text2:String, butt2:Number, t
 	scrollBar.update();
 }
 
-function doYesNo(eventYes:Number, eventNo:Number):void {
+function doYesNo(eventYes:*, eventNo:*):void {
 	//Make buttons 1-2 visible and hide the rest.
 	b1Text.visible = true;
 	gButtons[0].visible = true;
