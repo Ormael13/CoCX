@@ -97,9 +97,9 @@ function willOWisp():void {
 	if(player.hasKeyItem("Traveler's Guide") >= 0) {
 		outputText( "\n\nYour mind is jogged out of its haze when you remember a note from the Traveler's Guide.  It warned about mysterious flames in the forest that lead hapless adventurers astray.  You hesitate now, wondering what to do.");
 		//[Turn Back] [Follow] //automatically follow without traveler's guide.
-		simpleChoices("Turn Back",turnBackFromWillOWisp,"Follow",followTheWillOWisp,"",0,"",0,"",0);
+		simpleChoices("Turn Back",3917,"Follow",3918,"",0,"",0,"",0);
 	}
-	else doNext(followTheWillOWisp);
+	else doNext(3918);
 }
 
 //[Turn Back] (C)
@@ -139,8 +139,8 @@ function followTheWillOWisp(firstTime:Boolean = false):void {
 		outputText("How did she get behind you so quickly?  You were staring at her the entire time!  Glancing quickly over your shoulder, you confirm that this is not a case of twins, but when you turn to face her, she has disappeared once again!\n\n");
 		outputText("\"<i>Over here, silly~</i>\" she calls to you with a mischievous tone, beckoning to you as you whip around to face her voice.  \"<i>Don't be shy, I don't bite...  often...</i>\"\n\n");
 		outputText("Her tone is innocuous enough, but her mannerisms are a little disconcerting, somehow.  What are you going to do?");
-		if(!inCombat()) simpleChoices("Fight",fightSomeKitsunes,"Talk",talkAfterResistingKitsunellusion,"",0,"",0,"",0);
-		else simpleChoices("Fight",fightSomeKitsunes,"Talk",talkAfterResistingKitsunellusion,"",0,"",0,"",0);
+		if(!inCombat()) simpleChoices("Fight",3971,"Talk",3919,"",0,"",0,"",0);
+		else simpleChoices("Fight",3971,"Talk",3919,"",0,"",0,"",0);
 	}
 }
 
@@ -244,7 +244,7 @@ function nonTentaclePCMansion(willing:Boolean):void {
 	outputText( "\"<i>We hope you enjoyed the feast we prepared,</i>\" says the one with jet-black hair, as she and her sisters crowd around you in the water, fully nude.  \"<i>Now, it's </i>our<i> turn.</i>\"\n\n");
 	outputText("\"<i>Just relax,</i>\" the redhead whispers into your ear in a warm tone that seems to demolish any vestige of resistance.  \"<i>We'll take care of everything...</i>\"  Up to your waist in the warm water of the hot springs, you can't help but surrender to their will, your worries flowing out of you.  Enveloped on all sides by their unearthly warm flesh, you lean into their arms and sigh blissfully as every touch and caress sends shivers down your spine.\n\n" );
 	if(player.tentacleCocks() >= 3) {
-		doNext(tentacleKitsuneWingWangs);
+		doNext(3942);
 	}
 	else {
 		if(willing) {
@@ -340,7 +340,7 @@ function kitSuneLetHerMansion(willing:Boolean):void {
 	if(player.gender >= 2) outputText("  A flood of seed begins to spill from your abused pussy, gushing over the redhead's groin and spreading into the water.  The flow is soon stemmed by the introduction of the black-haired girl's tongue, plush lips pressed against your cunt as she hungrily sucks down the outpouring of semen.  She gulps loudly and gluttonously, spreading your lips with her thumbs and swallowing every last delicious salty morsel, her stomach swelling and quivering as your own overfull abdomen begins to deflate in equal measure.");
 	outputText("  As your twitching cock relieves itself of the last of your seed inside the blonde's " + ((player.biggestCockArea() > 80) ? "pussy" : "ass") + ", you feel your strength slipping away from you with each spasm, your eyelids growing heavy with an uncommon weariness.\n\n");
 	stats(0,0,0,0,0,0,-100,0);
-	doNext(kitsuneStillHungryMansion);
+	doNext(3933);
 } //End letHer() 	
 
 //Formerly shoveHer()
@@ -408,7 +408,7 @@ function kitsuneShoveHerMansion(willing:Boolean):void {
 		outputText("As your twitching cock relieves itself of the last of your seed inside the blonde's pussy, you feel your strength slipping away from you with each spasm, your eyelids growing heavy with an uncommon weariness.\n\n");
 	}
 	stats(0,0,0,0,0,0,-100,0);
-	doNext(kitsuneStillHungryMansion);
+	doNext(3933);
 } // End shoveHer()
 
 //formerly
@@ -589,7 +589,7 @@ function outro(tentacles:Boolean = false):void {
 	}
 	if(player.fatigue >= 100) {
 		//mansionBadEnd();
-		doNext(mansionBadEnd);
+		doNext(3945);
 	}
 	else {
 		outputText( "\n\nWhen you awaken the next morning, the sisters, the hot springs, and the mansion are nowhere to be found.  You are lying naked in the wilderness, your possessions sitting in a neat little pile a short distance away, and your memories of the previous night are little more than a hazy fever dream");
@@ -635,7 +635,7 @@ function mansionBadEnd():void {
 	outputText("As they crowd around, you can feel the lights in your mind flickering off one by one.  Azure flames swirl about the room, capturing you in their hypnotic thrall as you slowly drop to the floor, entranced by the kitsune's witchery.\n\n");
 	outputText("\"<i>You'll stay, won't you?</i>\"  the blonde says, placing her hand under your chin and delicately tipping your head back to look up into her eyes.  As you feel yourself being pulled into the depths of those green pools, you hear someone voicing their assent, only to realize that the voice was your own.\n\n");
 	outputText("You cling to the last vestiges of your mind with all your might, but to no avail.  Your mind, still muddied by the spirits you imbibed the night before, succumbs to the three enchantress' hypnotic power.  Eighteen bushy tails curl around you, pulling you up into a warm, calming embrace, and you have just enough time to register a cool tingling sensation spreading throughout your body before the last glimmer of free will you possess is snuffed out forever.");
-	doNext(kitSuneMansionBadEndII);
+	doNext(3946);
 }
 
 function kitSuneMansionBadEndII():void {

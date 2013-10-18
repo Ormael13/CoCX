@@ -121,7 +121,7 @@ function keltRequiresNakedness():void {
 	outputText("Do you obey his demand?", false);
 	if(player.cor > 70 && player.inte > 40 && player.lowerBody != 4) {
 		outputText("\n\n<b>If you fight back and take him down a peg, you might never see him again...</b>");
-		simpleChoices("Reluctantly", 2114, "Eagerly", 2115, "Fight Back", keltResistance, "", 0, "Never", 2116);
+		simpleChoices("Reluctantly", 2114, "Eagerly", 2115, "Fight Back", 2262, "", 0, "Never", 2116);
 		return;
 	}
 	else simpleChoices("Reluctantly", 2114, "Eagerly", 2115, "", 0, "", 0, "Never", 2116);
@@ -407,7 +407,7 @@ function keltMainEncounterAfterNakedReq():void {
 				
 				if(player.inte > 40 && player.cor > 70 && player.lowerBody != 4) {
 					outputText("\n\n<b>If you fight back and take him down a peg, you might never see him again...</b>");
-					simpleChoices("Yes",2114,"No",2116,"Fight Back",keltResistance,"",0,"",0);
+					simpleChoices("Yes",2114,"No",2116,"Fight Back",2262,"",0,"",0);
 				}
 				else doYesNo(2114,2116);
 				return;
@@ -833,7 +833,7 @@ function keltResistance():void {
 	else outputText("fighting anger-fueled muscle-spasms", false); 
 	outputText(" as Kelt's insults go too far.  You've had just about enough of his disingenuous assertions!\r\r", false);
 	outputText("An idea on how to put him in his place slowly forms in the back of your mind, though you're sure pulling it off would humiliate the puffed-up centaur into never his showing his face around the farm again.  Do you do it?", false);
-	doYesNo(fuckKeltsShitUp,keltResistancePussyOut);
+	doYesNo(2261,2260);
 }
 function keltResistancePussyOut():void {
 	spriteSelect(35);

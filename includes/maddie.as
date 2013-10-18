@@ -18,7 +18,7 @@ function procMaddieOneIntro():void {
 	else {
 		outputText("You walk into the bakery and a burly, hair-covered arm grabs your shoulder.  The familiar voice of a minotaur barks, \"<i>You.  You can help.  Come.</i>\"  You turn, but he's already walking towards an 'employees only' door.  Do you follow?", false);
 	}
-	doYesNo(followMinotaurIntoBackroom,bakeryuuuuuu);
+	doYesNo(2932,2836);
 }
 //[Follow] 
 function followMinotaurIntoBackroom():void {
@@ -30,7 +30,7 @@ function followMinotaurIntoBackroom():void {
 		if(player.hasPerk("Minotaur Cum Addict") >= 0) outputText("You lick your lips when you realize you're meeting the source of the 'special' éclairs.", false);
 		else outputText("You blush when you realize what he must be using for crème filling.", false);
 		//[Give Them] [Leave]
-		if(hasItem("BeeHony",1) && hasItem("L.Draft",1)) simpleChoices("Give Them",handOverIngredientsItBeBakingTimeYo,"",0,"",0,"",0,"Leave",nopeAintGotNoneODemSpeculIngredimathings);
+		if(hasItem("BeeHony",1) && hasItem("L.Draft",1)) simpleChoices("Give Them",2934,"",0,"",0,"",0,"Leave",2933);
 		else simpleChoices("",0,"",0,"",0,"",0,"Leave",13);	
 		flags[241] = 1;
 	}
@@ -39,7 +39,7 @@ function followMinotaurIntoBackroom():void {
 		outputText("You follow the burly chef through the door, winding through the familiar ovens.  By the time you reach his work area, you're both covered in a fine sheen of sweat and you find yourself responding to the minotaur musk unconsciously.  The strange chef turns to ask, \"<i>You have special ingredients now, yes?</i>\"", false);
 		//[Yes] [Lie – No/Not Yet]
 		if(hasItem("BeeHony",1) && hasItem("L.Draft",1)) simpleChoices("Yes",2934,"Lie - No",2933,"",0,"",0,"",0);
-		else simpleChoices("No",nopeAintGotNoneODemSpeculIngredimathings,"",0,"",0,"",0,"",0);
+		else simpleChoices("No",2933,"",0,"",0,"",0,"",0);
 	}
 }
 
@@ -52,7 +52,7 @@ function nopeAintGotNoneODemSpeculIngredimathings():void {
 	if(player.cor > 50) outputText("starting a fight inside Tel'Adre", false);
 	else outputText("overstaying your welcome", false);
 	outputText(" – you depart.", false);
-	doNext(bakeryuuuuuu);
+	doNext(2836);
 }
 //[Yes – baking]
 function handOverIngredientsItBeBakingTimeYo():void {
@@ -69,9 +69,9 @@ function handOverIngredientsItBeBakingTimeYo():void {
 	if(player.hasPerk("Minotaur Cum Addict") >= 0) outputText("  Your mouth salivates at the thought.", false);
 	else outputText("You aren't sure you want to.", false);
 	outputText("\n\n", false);
-	if(player.hasPerk("Minotaur Cum Addict") >= 0) doNext(waitForSlutCake);
+	if(player.hasPerk("Minotaur Cum Addict") >= 0) doNext(2936);
 	//[Wait] [Sneak Out]
-	else simpleChoices("Wait",waitForSlutCake,"Sneak Out",sneakAwayFromMaddie,"",0,"",0,"",0);
+	else simpleChoices("Wait",2936,"Sneak Out",2935,"",0,"",0,"",0);
 }
 	
 //[Sneak Out]
@@ -105,7 +105,7 @@ function waitForSlutCake():void {
 	
 	outputText("Running seems like a very good idea.  Who knows what she has planned for you?", false);
 	//[RUN] [TRY TO TALK]
-	simpleChoices("Run Away",runAwayFromMaddiiiieee,"TryToTalk",talkToMaddie,"",0,"",0,"",0);
+	simpleChoices("Run Away",2937,"TryToTalk",2938,"",0,"",0,"",0);
 }
 //[RUN DAFUQ AWAY]
 function runAwayFromMaddiiiieee():void {
@@ -121,7 +121,7 @@ function runAwayMaddieFollowup():void {
 	outputText("", true);
 	flags[242] = -2;
 	outputText("You return to a strange sight indeed.  Urta and Edryn are leading a procession of over thirty city guards, arranged in a loose circle around the cupcake-girl.  Her comparatively tiny, tin-foil fez is gone, along with most of her blue-iced 'armor'.  She looks weak, pathetic, and beaten as she's prodded with spears and escorted from the city, never to return again.  Vanilla-scented tears stain the pavement behind her, leaving a trail the whole way back to the bakery.\n\n", false);
-	doNext(telAdreMenu);
+	doNext(2211);
 }
 	
 //[TRY TO TALK]
@@ -230,5 +230,5 @@ function bakeryEpilogue():void {
 	outputText("\"<i>Thanks.  Figured out what went wrong with Maddie's help.  Made masterpiece.  Buy giant cupcake sometime.  Delicious!  Promise it's safe and non-addictive.  Expensive though.  Ingredients rare.\n\n", false);
 	outputText("-X</i>\"", false);
 	flags[242] = 4;
-	doNext(bakeryuuuuuu);
+	doNext(2836);
 }

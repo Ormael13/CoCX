@@ -93,7 +93,7 @@ function bimbotizeMeCaptainSophie():void {
 	
 	outputText("You shake your head, feeling the compulsion picking at your mind.  Damn, she can still try to compel you with her words.  Do you take her home to be your live-in bimbo of choice?", false);
 	stats(0,0,0,0,0,0,0,5);
-	doYesNo(acceptBimboSophie,declineBimboSophie);
+	doYesNo(3027,3026);
 }
 	
 function declineBimboSophie():void {
@@ -443,11 +443,11 @@ function bimboSophieLicksRugs():void {
 	luststickApplication(4);
 	if(player.inte * 2 < player.cor + player.lib) {
 		outputText("There's no way you could ever turn her down at this point... just look at her lips... they'd never lie to you.  It'll feel so good...", false);
-		doNext(bimboSophieSixtyNineAfterCunnilingus);
+		doNext(3030);
 	}
 	else {
 		outputText("What do you do?", false);
-		simpleChoices("Sixtynine",bimboSophieSixtyNineAfterCunnilingus,"",0,"",0,"",0,"Leave",13);
+		simpleChoices("Sixtynine",3030,"",0,"",0,"",0,"Leave",13);
 	}
 }
 //SixtyNine Continuation - GOILS you're a wreckin' machine

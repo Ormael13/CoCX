@@ -43,7 +43,7 @@ function approachLilium():void {
 	}
 	if(player.gems < 200) outputText("<b>You remember that you haven't got the 200 gems for her services right now.  Maybe next time.</b>", false);
 	else pay = 2979;
-	simpleChoices("Pay",pay,"",0,"",0,"",0,"Leave",leaveLilium);
+	simpleChoices("Pay",pay,"",0,"",0,"",0,"Leave",2980);
 }
 
 

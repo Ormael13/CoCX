@@ -9,7 +9,7 @@ function salonPaymentMenu():void {
 	if(player.hasCock()) blow = 2154;
 	var minoCum:Number = 0;
 	if(flags[142] > 0) minoCum = 2696;
-	choices("Goblin Blow",blow,"Canine",gloryholeDoggie,"Imp",gloryholeImp,"Minotaur",gloryholeMinotaur,"Incubus",gloryholeIncubus,"",0,"",0,"",0,"Buy MinoCum",minoCum,"Leave",13);
+	choices("Goblin Blow",blow,"Canine",2155,"Imp",2156,"Minotaur",2157,"Incubus",2158,"",0,"",0,"",0,"Buy MinoCum",minoCum,"Leave",13);
 }
 function salonPurchaseMenu():void {
 	flags[SALON_PAID] = 1;
@@ -328,7 +328,7 @@ function minotaurCumBukkakeInSalon():void {
 	outputText("The strength goes completely out of your " + player.legs() + ", but you manage to hold yourself up long enough for your stud to flex his cock inside you and fill up your backdoor with more potent addiction.  You slide off, nerveless and still orgasming as jizz rains on your back from the abandoned cock, rolling off you to add to the ever-widening puddle of fluids on the floor.  Smiling vacantly and addled on more minotaur-cum than any one person has reason to handle, you stumble up on all fours and crawl to the next one.  More...", false);
 	//[NEXT]
 	stats(0,0,0,0,2,2,-100,2);
-	doNext(minotaurSalonFollowUp);
+	doNext(2695);
 }
 function minotaurSalonFollowUp():void {
 	spriteSelect(38);
