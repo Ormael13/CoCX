@@ -4108,120 +4108,40 @@ function choices(text1:String, butt1:*,
 	scrollBar.update();
 }
 
-
-function simpleChoices(text1:String, butt1:Number, text2:String, butt2:Number, text3:String, butt3:Number, text4:String, butt4:Number, text5:String, butt5:Number):void 
+// simpleChoices and doYesNo are convenience functions. They shouldn't re-implement code from choices()
+function simpleChoices(text1:String, butt1:*, 
+						text2:String, butt2:*, 
+						text3:String, butt3:*, 
+						text4:String, butt4:*, 
+						text5:String, butt5:*):void 
 {
-	//Cancel change due to game being over
-	if(b1Text.text.indexOf("Game Over") != -1) {
-		trace("simplechoices setup cancelled by game over");
-		return;
-	}
-	//outputText("", false, true);
-	//Transfer event code to storage
-	buttonEvents[0] = butt1;
-	buttonEvents[1] = butt2;
-	buttonEvents[2] = butt3;
-	buttonEvents[3] = butt4;
-	buttonEvents[4] = butt5;
-	buttonEvents[5] = 0;
-	buttonEvents[6] = 0;
-	buttonEvents[7] = 0;
-	buttonEvents[8] = 0;
-	buttonEvents[9] = 0;
-	//Set button texts
-	b1Text.htmlText = text1;
-	b2Text.htmlText = text2;
-	b3Text.htmlText = text3;
-	b4Text.htmlText = text4;
-	b5Text.htmlText = text5;
-	if(buttonEvents[0] == 0) {
-		b1Text.visible = false;
-		gButtons[0].visible = false;
-	}
-	else {
-		b1Text.visible = true;
-		gButtons[0].visible = true;
-	}
-	if(buttonEvents[1] == 0) {
-		b2Text.visible = false;
-		gButtons[1].visible = false;
-	}
-	else {
-		b2Text.visible = true;
-		gButtons[1].visible = true;
-	}
-	if(buttonEvents[2] == 0) {
-		b3Text.visible = false;
-		gButtons[2].visible = false;
-	}
-	else {
-		b3Text.visible = true;
-		gButtons[2].visible = true;
-	}
-	if(buttonEvents[3] == 0) {
-		b4Text.visible = false;
-		gButtons[3].visible = false;
-	}
-	else {
-		b4Text.visible = true;
-		gButtons[3].visible = true;
-	}
-	if(buttonEvents[4] == 0) {
-		b5Text.visible = false;
-		gButtons[4].visible = false;
-	}
-	else {
-		b5Text.visible = true;
-		gButtons[4].visible = true;
-	}
-	b6Text.visible = false;
-	gButtons[5].visible = false;
-	b7Text.visible = false;
-	gButtons[6].visible = false;
-	b8Text.visible = false;
-	gButtons[7].visible = false;
-	b9Text.visible = false;
-	gButtons[8].visible = false;
-	b0Text.visible = false;
-	gButtons[9].visible = false;
-	funcs = new Array();
-	args = new Array();
-	mainText.htmlText = currentText;
-	scrollBar.update();
+
+	choices(text1,butt1,
+			text2,butt2,
+			text3,butt3,
+			text4,butt4,
+			text5,butt5,
+			"",0,
+			"",0,
+			"",0,
+			"",0,
+			"",0);
 }
 
 function doYesNo(eventYes:*, eventNo:*):void {
 	//Make buttons 1-2 visible and hide the rest.
-	b1Text.visible = true;
-	gButtons[0].visible = true;
-	b2Text.visible = true;
-	gButtons[1].visible = true;
-	buttonEvents[0] = eventYes;
-	buttonEvents[1] = eventNo;
-	b1Text.htmlText = "Yes";
-	b2Text.htmlText = "No";
-	//Hide the others.
-	b3Text.visible = false;
-	gButtons[2].visible = false;
-	b4Text.visible = false;
-	gButtons[3].visible = false;
-	b5Text.visible = false;
-	gButtons[4].visible = false;
-	b6Text.visible = false;
-	gButtons[5].visible = false;
-	b7Text.visible = false;
-	gButtons[6].visible = false;
-	b8Text.visible = false;
-	gButtons[7].visible = false;
-	b9Text.visible = false;
-	gButtons[8].visible = false;
-	b0Text.visible = false;
-	gButtons[9].visible = false;
-	outputText("", false, true);
-	funcs = new Array();
-	args = new Array();
-	mainText.htmlText = currentText;
-	scrollBar.update();
+
+	choices("Yes",eventYes,
+			"No",eventNo,
+			"",0,
+			"",0,
+			"",0,
+			"",0,
+			"",0,
+			"",0,
+			"",0,
+			"",0);
+
 }
 function invertGo():void{ 
 	if (blackBackground.visible == false){
