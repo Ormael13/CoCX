@@ -7,17 +7,12 @@ import os.path
 # Ok, this is kind of a mess, but it currently seems to work without major crashes or causing any 
 # invalid code output, at least as far as I have been able to check.
 
-funcFind = re.compile(r"(if\(eventNo == \d*?\) )\{\W*")
-funcExtr = re.compile(r"if\(eventNo == (\d*)\) (\w*)\(\)")
 
-simpleCRe = re.compile(r"[ 	]simpleChoices\([\w\"\ \,]*?\);")
-choicesRe = re.compile(r"choices\([\w\"\ \,]*?\);")
-doYesNoRe = re.compile(r"doYesNo\([\w\"\ \,]*?\);")
-doNextRe = re.compile(r"doNext\(\d*?\);")
-
-searchREs = [simpleCRe, choicesRe, doYesNoRe, doNextRe]
 
 def cleanEventNumbers():
+
+	funcFind = re.compile(r"(if\(eventNo == \d*?\) )\{\W*")
+	funcExtr = re.compile(r"if\(eventNo == (\d*)\) (\w*)\(\)")
 
 	eventF = open("./includes/doEvent.as", "r")
 	eventS = eventF.read()
@@ -32,6 +27,14 @@ def cleanEventNumbers():
 
 	#Ok, now we have a eventNo <-> function name dictionary
 	
+
+	simpleCRe = re.compile(r"[ 	]simpleChoices\([\w\"\ \,\?]*?\);")
+	choicesRe = re.compile(r"choices\([\w\"\ \,\?]*?\);")
+	doYesNoRe = re.compile(r"doYesNo\([\w\"\ \,\?]*?\);")
+	doNextRe = re.compile(r"doNext\(\d*?\);")
+
+	searchREs = [simpleCRe, choicesRe, doYesNoRe, doNextRe]
+
 	filelist = os.listdir("./includes")
 	print filelist
 	for filename in filelist:
@@ -43,9 +46,8 @@ def cleanEventNumbers():
 			# BRUTE FORCE IT. BECAUSE LAZY
 			tmpO = tmp
 
-			reRes = True
 			for repRe in searchREs:
-				print repRe.pattern
+				#print repRe.pattern
 				insertionPoint = 0
 				while repRe.search(tmp[insertionPoint:]):
 				
@@ -76,12 +78,58 @@ def cleanEventNumbers():
 
 
 
+def cleanStaleDoEventIfs():
+
+	numExtr = re.compile(r"if\(eventNo == (\d*)\)")
+
+
+	with open("./includes/doEvent.as", "r") as eventF:
+		eventS = eventF.read()
+
+
+	filelist = os.listdir("./includes")
+	files = []
+
+	#Pull all the as files into memory. 
+	for filename in filelist:
+		if filename.endswith(".as") and not filename.find("doEvent")+1:		
+			with open(os.path.join("./includes", filename), "r") as fileH:
+				tmp = fileH.read()
+			files.append(tmp)
+
+
+	for match in numExtr.finditer(eventS):
+		
+		num = match.group(1)
+
+		numUnused = True
+
+		for fContents in files:
+
+				if num in fContents:
+					print "num exists", num
+					numUnused = False
+					break
+
+
+		if numUnused:
+			start, length = match.start(), len(match.group())
+			print start, length
+
+			prefix, call, postfix = eventS[:start], eventS[start:start+length], eventS[start+length:]
+
+			call = call.replace("eventNo", " false ")
+			eventS = prefix+call+postfix
+
+	with open("./includes/doEvent.as", "w") as eventF:
+		eventF.write(eventS)
 
 if __name__ == "__main__":
 
 	print "OMG WE'S BREAKIN STUF!!111one!"
 
 	cleanEventNumbers()
+	cleanStaleDoEventIfs()
 
 	#print eventS
 	#print eventS

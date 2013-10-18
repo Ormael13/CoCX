@@ -40,7 +40,6 @@ function farmExploreEncounter():void {
 		var cockMilk:Number = 0;
 		var marble:Number = 0;
 		if(player.hasStatusAffect("Kelt") >= 0 && player.hasStatusAffect("KeltOff") < 0) {
-			//keltEvent = 2172;
 			if(flags[KELT_BREAK_LEVEL] >= 4) addButton(1,"Kelly",breakingKeltOptions);
 			else addButton(1,"Kelt",breakingKeltOptions);
 		}
@@ -49,15 +48,15 @@ function farmExploreEncounter():void {
 				outputText("\n\n<b>Your " + nippleDescript(0) + "s are currently too sore to be milked.  You'll have to wait a while.</b>", false);
 			}
 			else if(flags[WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(2,"Get Milked",getMilked);
-			//milkYou = 2179;
+			
 		}
 		if(player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") >= 0 && player.cockTotal() > 0)
 		{
-			//cockMilk = 2184;
+			
 			if(flags[WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(5,"Milk Cock",cockPumping);
 		}
 		if(player.hasStatusAffect("Marble Rape Attempted") < 0 && player.hasStatusAffect("No More Marble") < 0 && player.hasStatusAffect("Marble") >= 0 && flags[MARBLE_WARNING] == 0) {
-			//marble = 3553;
+			
 			if(flags[WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(3,"Marble", meetMarble);
 		}
 		//choices("Explore",exploreFarm,"Kelt",keltEvent,"Get Milked",milkYou,"Marble",marble,"Milk Jojo",milkJojo,"Milk Cock",cockMilk,"Talk",talkWhitney,"Work",workFarm,"",0,"Leave",13);

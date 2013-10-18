@@ -1159,7 +1159,7 @@ function helChatMenu():void {
 		var attackin:Number = 0;
 		if(flags[HEL_TALKED_ABOUT_ATTACKING_YOU] == 0) attackin = 3299;
 		if(flags[HEL_TALKED_ABOUT_BERSERKING] == 0) zerk = 3297;
-		choices("",0,"Berserking?",zerk,"Y Attack Me",attackin,"Seconds",3301,"MinosRBad",3981,"",0,"",0,"",0,"",0,"Leave",3302);
+		choices("",0,"Berserking?",zerk,"Y Attack Me",attackin,"Seconds",askMommaHelForSecondsAfterDinner,"MinosRBad",telHelToGetOffTheMInoCock,"",0,"",0,"",0,"",0,"Leave",leaveHelAfterMinoThreeSomeChat);
 	}
 }
 

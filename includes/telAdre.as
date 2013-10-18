@@ -1364,7 +1364,7 @@ function urtaIsABadass():void {
 	flags[33] = 1;
 	outputText("", true);
 	outputText("There's a commotion in the streets of Tel'Adre.  A dense crowd of onlookers has formed around the center of the street, massed together so tightly that you're unable to see much, aside from the backs the other onlookers' heads.  The sound of blows impacting on flesh can be heard over the crowd's murmuring, alerting you of the fight at the gathering's core.", false);
-	simpleChoices("Investigate",2360,"Who cares?",2211,"",0,"",0,"",0);
+	simpleChoices("Investigate",watchUrtaBeABadass,"Who cares?",telAdreMenu,"",0,"",0,"",0);
 }
 
 //[Invetigate]
