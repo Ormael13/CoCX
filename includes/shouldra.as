@@ -135,7 +135,7 @@ function shouldraGreeting():void {
 			if(flags[TIMES_BEATEN_SHOULDRA] == 3) outputText("You can't say you saw that coming.  It seems she has offered to forego the fight in lieu of sexings.  ", false);
 			outputText("Would you like to accept her offer, or do you want to fight her regardless?", false);
 			//Now back to the good part!
-			simpleChoices("Accept",yankeeEchoPapa,"Fight",novemberAlphaHotel,"",0,"",0,"",0);
+			simpleChoices("Accept",3207,"Fight",3208,"",0,"",0,"",0);
 		}
 		else {
 			//FIGHT!
@@ -152,7 +152,7 @@ function yankeeEchoPapa():void {
 	outputText("", true);
 	outputText("You graciously accept her offer, and she nods happily.  \"<i>Perfect!  Now then, let's get to it...</i>\"\n\n", false);
 	//[skip to 'let her in' text (i.e. win sex intro)]
-	doNext(littlePigLittlePigLetMeIn);
+	doNext(3211);
 }
 //[nah] 
 function novemberAlphaHotel():void {
@@ -183,11 +183,11 @@ function defeatDannyPhantom():void {
 		//([if first time]
 		if(flags[TIMES_POSSESSED_BY_SHOULDRA] < 1) {
 			outputText("What does she mean, \"<i>let me in?</i>\" Do you want to find out?", false);
-			doYesNo(littlePigLittlePigLetMeIn,noSlimingSlimer);
+			doYesNo(3211,3210);
 		}
 		else {
 			outputText("What do you do?", false);
-			simpleChoices("Let Her In",littlePigLittlePigLetMeIn,"Deny",noSlimingSlimer,"",0,"",0,"",0);
+			simpleChoices("Let Her In",3211,"Deny",3210,"",0,"",0,"",0);
 		}
 	}
 	flags[TIMES_BEATEN_SHOULDRA]++;
@@ -280,10 +280,10 @@ function sharkbustersVictory():void {
 	if(player.hasCock() && player.hasVagina()) {
 		outputText("Which gender would you like to focus on?", false);
 		//male / female)
-		simpleChoices("male",ghostIzmaPenis,"female",sharkyEctoginas,"",0,"",0,"",0);
+		simpleChoices("male",3215,"female",3214,"",0,"",0,"",0);
 	}
-	else if(player.hasVagina()) doNext(sharkyEctoginas);
-	else if(player.hasCock()) doNext(ghostIzmaPenis);
+	else if(player.hasVagina()) doNext(3214);
+	else if(player.hasCock()) doNext(3215);
 }
 
 //Shark Girl x Ghost Girl - Vagina Scene (Giantess)
@@ -612,7 +612,7 @@ function penisLossThatIsntALoss():void {
 		if(player.cockTotal() > 1) outputText("s", false);
 		outputText(" while swaying her hips to and fro.  Both of her hands get to work on rubbing your ever-growing testicles, but two hands can't cover the growing amount of space necessary for effective stimulation.  She shrugs, content with patting, tickling, and squeezing the skin she can reach.  A massive churning begins in your gargantuan cumsack, a movement that actually shakes the ground.  Both of you knows what that signifies, the ghost girl going so far as to disengage from her feverish oral to stare longingly at you.  It seems you hold the key to sating her lust or denying her the orgasm she so craves; what do you do?", false);
 		
-		simpleChoices("LetHerCum",letShouldraIn,"KeepHerOut",kickShouldraOut,"",0,"",0,"",0);
+		simpleChoices("LetHerCum",3235,"KeepHerOut",3236,"",0,"",0,"",0);
 		return;
 	}
 	outputText("\n\n", false);
@@ -811,7 +811,7 @@ function hermaphroditeGhostsCumEctoplasm():void {
 		if(player.cockTotal() > 1) outputText("s", false);
 		outputText(" while swaying her hips to and fro.  Both of her hands get to work on rubbing your ever-growing testicles, but two hands can't cover the growing amount of space necessary for effective stimulation.  She shrugs, content with patting, tickling, and squeezing the skin she can reach.  A massive churning begins in your gargantuan cumsack, a movement that actually shakes the ground.  Both of you knows what that signifies, the ghost girl going so far as to disengage from her feverish oral to stare longingly at you.  It seems you hold the key to sating her lust or denying her the orgasm she so craves; what do you do?", false);
 		
-		simpleChoices("LetHerCum",letShouldraIn,"KeepHerOut",kickShouldraOut,"",0,"",0,"",0);
+		simpleChoices("LetHerCum",3235,"KeepHerOut",3236,"",0,"",0,"",0);
 		return;
 	}
 	outputText("\n\n", false);
@@ -1183,7 +1183,7 @@ function superCoolPaladinSexStuffDudeGasmJizzMonkies():void {
 	
 	outputText("You look up to gaze into her moderately attractive face. Is it?", false);
 	flags[366]++;
-	doYesNo(courtCrazyGirlsDotCom,noCourtingYouFag);
+	doYesNo(3233,3234);
 }
 //(no)
 function noCourtingYouFag():void {

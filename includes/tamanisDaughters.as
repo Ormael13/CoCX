@@ -67,7 +67,7 @@ function encounterTamanisDaughters():void {
 		if(flags[56] >= 10) outputText(", your wife", false);
 		outputText(".  You realize now that the other goblins must be your daughters.  Another crowd of small women emerges from the bushes, closing in a ring around you, preventing any chance of escape.  The largest of the younger goblin-women steps forwards, her " + tdCup() + " breasts jiggling, barely contained by the bondage ropes she has tied around herself.  She stops once she's next to her mother and Tamani explains, \"<i>I just can't keep their aching cunts at home anymore!  They're fertile adults now and they're wanting to get some experience with real dicks.  I figured you wouldn't mind helping them out a little.</i>\"\n\nWhat do you do? (Fight them off, Fuck them willingly, Let them fuck you)", false);
 		//[Fuck Them] [Let Them] [Fight]
-		simpleChoices("Fight",2479, "Fuck Them",fuckYoDaughtersHomie,"Let Them",legTamanisDaughtersRAEPYou,"",0,"",0);
+		simpleChoices("Fight",2479, "Fuck Them",2471,"Let Them",2472,"",0,"",0);
 		return;
 	}
 	outputText("While roaming along, you find your path ahead blocked by ", false);
@@ -79,11 +79,11 @@ function encounterTamanisDaughters():void {
 	if(flags[59] == 0) {
 		outputText("She calls out, \"<i>We're tired of getting leftovers, so we're coming to the source.  Are you going to give us what we want?</i>\"\n\n", false);
 		//[Fuck them] [Fight] [Play Dumb]
-		simpleChoices("Fight",fightTamanisDaughters, "Fuck Them",fuckYoDaughtersHomie,"Play Dumb",playDumbToTamanisDaughters,"Let Them",legTamanisDaughtersRAEPYou,"",0);
+		simpleChoices("Fight",2470, "Fuck Them",2471,"Play Dumb",2469,"Let Them",2472,"",0);
 	}
 	else {
 		outputText("She calls out, \"<i>We came back for more cream!  Come on, let's fuck again!</i>\"\n\nIt doesn't look like 'no' is a word they understand.  What do you do?</i>", false);
-		simpleChoices("Fight",fightTamanisDaughters,"Fuck Them",fuckYoDaughtersHomie,"Let Them",legTamanisDaughtersRAEPYou,"",0,"",0);
+		simpleChoices("Fight",2470,"Fuck Them",2471,"Let Them",2472,"",0,"",0);
 	}
 }
 
@@ -106,7 +106,7 @@ function playDumbToTamanisDaughters():void {
 	outputText("litters one way or another!</i>\"\n\n", false);
 	
 	//[Fuck them] [Fight] [Let them have their way with you]
-	simpleChoices("Fuck Them",fuckYoDaughtersHomie,"Fight",fightTamanisDaughters,"",0,"Let Them",legTamanisDaughtersRAEPYou,"",0);
+	simpleChoices("Fuck Them",2471,"Fight",2470,"",0,"Let Them",2472,"",0);
 }
 
 //[Fight Them]
@@ -796,7 +796,7 @@ function tamaniDaughtersCombatLossDrain():void {
 	else {
 		outputText("You lose consciousness a few hours into the ordeal, still cumming with no sign of stopping, your body sustained by the fluids pouring into your backside.  The dreams you have are a constant barrage of sexual situations, flitting between various incongruous orgasmic acts.  Were you capable of comprehending your situation, you probably wouldn't even want to wake up.  Thankfully, your unwished desires become reality.", false);
 		//[NEXT]
-		doNext(tamaniDaughtersBadEndChoice);
+		doNext(2474);
 	}
 	//Needz variable to track how many times PC has been 'chaired'
 	flags[58]++;
@@ -817,7 +817,7 @@ function tamaniDaughtersBadEndChoice():void {
 	if(player.statusAffectv1("Exgartuan") == 1) outputText("Exgartuan barks, \"<i>Hell yes I do!</i>\" but the goblin only smirks down for a moment before looking back at you.\n\n", false);
 	
 	outputText("(Options: Yes, No, I'd rather fill your cunts individually & personally)", false);
-	simpleChoices("Yes",tamaniDaughtersYesBadEndMePlease,"No",tamaniDaughtersDeclineBadEnd,"Individual",tamanisDaughtersFillIndividuallyBADEND,"",0,"",0);
+	simpleChoices("Yes",2475,"No",2476,"Individual",2477,"",0,"",0);
 }
 //[Yes]
 function tamaniDaughtersYesBadEndMePlease():void {
@@ -1030,7 +1030,7 @@ function combatWinAgainstDaughters():void {
 		outputText("You smile in satisfaction as " + monster.a + monster.short + " collapses, unable to continue fighting.", true);
 		if(player.lust >= 33 && player.cockTotal() > 0) {
 			outputText("In spite of their injuries, they do try to present their bodies in as lewd a way as possible.  You could still fuck them, but things might get out of hand...\n\nDo you fuck them?", true);
-			doYesNo(fuckYoDaughtersHomie, 5007);
+			doYesNo(2471, 5007);
 		}
 		else eventParser(5007);
 		return;
@@ -1040,7 +1040,7 @@ function combatWinAgainstDaughters():void {
 		stats(0,0,0,0,0,0,5,0);
 		if(player.lust >= 33 && player.cockTotal() > 0) {
 			outputText("You could still fuck them, but things might get out of hand...\n\nDo you fuck them?", false);
-			doYesNo(fuckYoDaughtersHomie, 5007);
+			doYesNo(2471, 5007);
 		}
 		else eventParser(5007);
 		return;
@@ -1063,13 +1063,13 @@ function loseToDaughters():void {
 			return;
 		}
 		if(monster.hasStatusAffect("Tamani") >= 0) {
-			if(rand(2) == 0) doNext(loseToDaughtersWithTamaniThere);
-			else doNext(legTamanisDaughtersRAEPYou);
+			if(rand(2) == 0) doNext(2478);
+			else doNext(2472);
 			return;
 		}
 		else {
-			if(rand(2) == 0) doNext(tamaniDaughtersCombatLossDrain);
-			else doNext(legTamanisDaughtersRAEPYou);
+			if(rand(2) == 0) doNext(2473);
+			else doNext(2472);
 			return;
 		}
 	}
@@ -1082,12 +1082,12 @@ function loseToDaughters():void {
 			return;
 		}
 		if(monster.hasStatusAffect("Tamani") >= 0) {
-			doNext(loseToDaughtersWithTamaniThere);
+			doNext(2478);
 			return;
 		}
 		else {
-			if(rand(2) == 0) doNext(tamaniDaughtersCombatLossDrain);
-			else doNext(legTamanisDaughtersRAEPYou);
+			if(rand(2) == 0) doNext(2473);
+			else doNext(2472);
 			return;
 		}
 	}

@@ -30,17 +30,17 @@ function xmasBitchEncounter():void {
 		outputText("She nods, bouncing up and down in excitement and flushing slightly, \"<i>Yup, just tear the lid off and get your gift!</i>\"\n\n", false);
 		if(flags[34] > 0) outputText("Here we go again...\n\n");
 		//[Open Present] [Unwrap Elf] [Decline]
-		simpleChoices("OpenPresent",openXmasPresent,"",0,"Decline",declineXmasPresent,"",0,"",0);
+		simpleChoices("OpenPresent",2361,"",0,"Decline",2359,"",0,"",0);
 		return;
 	}
 	if(player.gender == 0) {
 		outputText("She nods, bouncing up in down in excitement, \"<i>Yup!  Just open it up!  Are you ready?</i>\"\n\n", false);
-		simpleChoices("OpenPresent",openXmasPresent,"",0,"Decline",declineXmasPresent,"",0,"",0);
+		simpleChoices("OpenPresent",2361,"",0,"Decline",2359,"",0,"",0);
 		return;
 	}
 	outputText("She nods, bouncing up in down in excitement, \"<i>Yup!  You can unwrap it or unwrap me.  What'll it be?</i>\"\n\n", false);
 	//[Open Present] [Unwrap Elf] [Decline]
-	simpleChoices("OpenPresent",openXmasPresent,"Unwrap Elf",unwrapElfyPresent,"Decline",declineXmasPresent,"",0,"",0);
+	simpleChoices("OpenPresent",2361,"Unwrap Elf",2362,"Decline",2359,"",0,"",0);
 	
 }
 
@@ -191,7 +191,7 @@ function dickXmasElfGo():void {
 	}
 	//(Go to followup for fucking scene)
 	//[Next]
-	doNext(xmasFuckFollowup);
+	doNext(2363);
 	stats(0,0,0,0,0,0,-100,0);
 }
 
@@ -221,7 +221,7 @@ function vagFuckXmasElf():void {
 	outputText("You throw your head back and let out a low shuddering moan as she spins the dildo even faster, forcing your convulsing cunt to stay locked in a mind-shattering orgasm.  Eyes crossed, you collapse onto your back and twitch, body wriggling and flopping about nervelessly as it caves in to pleasure it was never meant to handle.\n\n", false);
 
 	outputText("You black out to the following words: \"<i>Good girl.  Keep cumming, let out all those naughty thoughts.  I can't wait to see you next year!</i>\"", false);
-	doNext(xmasFuckFollowupFems);
+	doNext(2364);
 	stats(0,0,0,0,0,0,-100,0);
 }
 	
@@ -234,7 +234,7 @@ function xmasFuckFollowup():void {
 	if(player.hasPerk("Elven Bounty") >= 0) outputText(" <b>again</b>");
 	outputText("?", false);
 	//[Yes][No] – yes awards (+250 mls cum volume), no awards +15 intellect
-	doYesNo(xmasPerkM,xmasSmart);
+	doYesNo(2366,2365);
 	//(-5 corruption)
 	stats(0,0,0,0,0,0,0,-5);
 	//(+20 sens unless it would bring you over 80 sens, then +5 sens)
@@ -253,7 +253,7 @@ function xmasFuckFollowupFems():void {
 	if(player.hasPerk("Elven Bounty") >= 0) outputText(" <b>again</b>");
 	outputText("?", false);
 	//[Yes][No] – yes awards (+15 fertility!), no awards +15 intellect
-	doYesNo(xmasPerkM,xmasSmart);
+	doYesNo(2366,2365);
 	//(-5 corruption)
 	stats(0,0,0,0,0,0,0,-5);
 	//(+20 sens unless it would bring you over 80 sens, then +5 sens)

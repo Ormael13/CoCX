@@ -40,7 +40,7 @@ function greetHeckel():void {
 	else {
 		outputText("Heckel is checking her pulse between laps when you approach her.  She grins as she catches sight of you, her teeth flashing in the light.  \"<i>Back again, fresh meat?  I thought I might have scared you off last time.</i>\"  She puts her hands on her hips and very blatantly looks your body up and down.  After a moment she nods to herself, as if making up her mind.  \"<i>I guess you can keep up after all.  What do you say to a workout, partner?</i>\"\n\n", false);
 	}
-	simpleChoices("Training",heckelTraining,"",0,"",0,"",0,"Leave",gymDesc);
+	simpleChoices("Training",2839,"",0,"",0,"",0,"Leave",2783);
 }
 
 //First time Sex
@@ -53,7 +53,7 @@ function heckelTraining():void {
 		outputText("You tell Heckel that you're looking for a training partner, and she makes no attempt to hide her gaze as she looks you up and down.  When she's finished, she shakes her head and picks up her pace on the track.  \"<i>I don't think so, " + player.short + ".  Maybe if you spend some more time around here, you'll find your own way into the swing of things.  From what I'm seeing, there's no way you can handle what I've got.</i>\"\n\n", false);
 
 		outputText("You open your mouth to reply, but the hyena has already started another lap.  Deciding it isn't worth it, you turn away indignantly.", false);
-		doNext(gymDesc);
+		doNext(2783);
 		return;
 	}
 	//Centaur or Genderless
@@ -61,7 +61,7 @@ function heckelTraining():void {
 		outputText("You tell Heckel that you're looking for a training partner, but she suddenly looks off balance. She shifts from foot to foot as she looks you up and down, head cocked to the side.\n\n", false);
 
 		outputText("\"<i>Err, look " + player.short + ", people around here come in all shapes and sizes and use all sorts of... equipment. Maybe you should go find someone more your type to ask, because I honestly don't know what to do with yours.</i>\"\n\n", false);
-		doNext(gymDesc);
+		doNext(2783);
 		return;
 	}
 	if(flags[202] + flags[203] == 0) {
@@ -86,7 +86,7 @@ function heckelTraining():void {
 			dom = 3966;
 		}
 		//ORAL or LEAVE
-		simpleChoices("Oral",heckelOrallyFixated,"Anal",0,"Be Top Dog",dom,"",0,"Leave",13);
+		simpleChoices("Oral",2840,"Anal",0,"Be Top Dog",dom,"",0,"Leave",13);
 	}
 	//FOLLOWUP SECKZ
 	else {
@@ -105,7 +105,7 @@ function heckelTraining():void {
 			dom = 3966;
 		}
 		//ORAL or LEAVE
-		simpleChoices("Oral",heckelOrallyFixated,"Anal",heckelLovesDaAnal,"Be Top Dog",dom,"",0,"Leave",13);
+		simpleChoices("Oral",2840,"Anal",2842,"Be Top Dog",dom,"",0,"Leave",13);
 	}
 }
 
@@ -124,7 +124,7 @@ function heckelOrallyFixated():void {
 		outputText("You take another inch into your throat before pulling off. Heckel growls above you until you lower your head again, this time further than before. Her growl becomes a moan instantly as the paw on your head is joined by another, both gripping your hair together. As you raise and lower your head, the furry balls in front of you begin to swing back and forth with Heckel's small thrusts, and you reach out a hand to fondle them.\n\n", false);
 	
 		outputText("As you fondle her balls, your fingers graze over something wet behind them. If you could smile around the mouthful of doggy-dick, you definitely would. You've discovered that Heckel is definitely a herm, and you make sure to give her gash another graze as you bob your head down. The head of her cock pulses as you take her length deeper than you had before, and the hands in your hair tighten their grip as Heckel rises from her seat suddenly. You lose pace at this sudden change, and the position forces you to look up at her face.", false);
-		doNext(heckelOralFixationII);
+		doNext(2841);
 	}
 	//Repeat
 	else {
@@ -215,7 +215,7 @@ function heckelLovesDaAnal(loss:Boolean = false):void {
 
 	outputText("Even with only a few inches inside your ass, her tongue makes you moan almost immediately. She rolls in back and forth, then side to side, then pushes it in and out before starting the cycle over. The teasing becomes more and more unbearable until you're ready to abandon caution and begin masturbating, but just as you tense to change position she stops and pulls her tongue out suddenly.\n\n", false);
 	//NEXT
-	doNext(heckelLovesAnal2);
+	doNext(2843);
 	//Increment Anal count
 	flags[203]++;
 }

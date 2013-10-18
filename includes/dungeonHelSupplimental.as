@@ -78,7 +78,7 @@ function heliaDiscovery():void {
 
 	outputText("\n\nDo you agree to help Helia?  She'd probably be <b>very</b> grateful...");
 	//(Display Options: [Yes] [No])
-	doYesNo(agreeToHelpHeliaDungeon,noDungeon);
+	doYesNo(3583,3582);
 }
 
 //Intro Scene -- No
@@ -154,7 +154,7 @@ function goToHeliaDungeon():void {
 	clearOutput();
 	outputText("You tell Helia that yeah, you're as ready as you'll ever be.  She beams and grabs you in a tight hug.  \"<i>Thanks again, [name].  You're a real goddamn champion, you know that?</i>\"  You laugh it off, but the salamander gives you a sultry wink and starts off toward the mountains.  You're quick to follow her.");
 	//(NEXT)
-	doNext(goToHeliaDungeon2);
+	doNext(3586);
 }
 function goToHeliaDungeon2():void {
 	clearOutput();
@@ -671,7 +671,7 @@ function pcDefeatedByBrigid():void {
 		
 		outputText("\n\nAn alarm blares in your mind and you reach out sluggishly to try and grab her slim ankle, but she kicks you in the head and your vision goes mazy.  The last thing you make out before slipping into unconsciousness is the harpy standing over Hel, pinning her fiery tail under a shield held down with one claw as she forces the contents of a vial down the salamander's gullet...");
 		
-		doNext(brigitPostQueenDeathBadEndII);
+		doNext(3785);
 	}
 }
 

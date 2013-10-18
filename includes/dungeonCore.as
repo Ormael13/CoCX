@@ -1649,7 +1649,7 @@ function demonBadEnd():void {
 		outputText("  Before you get into that, you spy a small piece of pink crystal on the floor between your legs.  You snatch it and devour it before the succubus has a chance and eat it, turning part of your soul into new-found demonic strength before you return to a long night of sex...", false);
 	}
 	stats(2,2,2,2,2,2,-100,100);
-	doNext(demonBadEnd2);
+	doNext(2192);
 }
 //epilogues
 function demonBadEnd2():void {

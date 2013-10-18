@@ -115,7 +115,7 @@ function cottonGreeting():void {
 		}
 		outputText("\"<i>Hey, I'm Cotton, what can I do you for?</i>\" she says in a friendly manner.  You also give your name, and explain you were curious as to what she was doing.  \"<i>Oh, this? Just doing some yoga.</i>\"  Judging by your quizzical look, she continues, \"<i>Yoga is like an exercise routine for your body and soul.  When the body is happy and healthy, the mind and soul follow.  It's a very relaxing and... sensual exercise.  Would you like to try it?</i>\"", false);
 		//[Yes] [No]
-		doYesNo(acceptYoga,turnDownYogaWifCottonFirstTime);
+		doYesNo(2810,2809);
 	}
 	//Met before
 	else {
@@ -281,7 +281,7 @@ function acceptYoga():void {
 	var option4:Number = 0;
 	if(player.fatigue > 80) {
 		outputText("You're wayyy too tired to do any yoga right now.", false);
-		doNext(telAdreMenu);
+		doNext(2211);
 		return;
 	}
 	if(flags[167] == 0 && player.gems < 10) {
@@ -307,7 +307,7 @@ function acceptYoga():void {
 		if(player.hasCock()) fuckHer = 2817;
 		if(player.gender > 0) getFucked = 2818;
 		//if(player.spe >= 50 && !player.isTaur()) option3 = 2819;
-		simpleChoices("Fuck Her",fuckHer,"Get Fucked",getFucked,"Tantric Sex",option3,"",0,"Leave",leaveCotton);
+		simpleChoices("Fuck Her",fuckHer,"Get Fucked",getFucked,"Tantric Sex",option3,"",0,"Leave",2820);
 	}
 	//First time
 	else if(flags[176] == 0) {
@@ -326,7 +326,7 @@ function acceptYoga():void {
 	
 		outputText("\"<i>Oh, that's too bad. But you've done pretty good for a beginner,</i>\" she helps you up off the mat and pats you gently on the back. \"<i>Want to hit the showers then?</i>\" Despite having done little more than stretching, you find you are sweating quite a bit... but something makes you wonder if her idea of hitting the shower is the same as yours.", false);
 		//[Shower] or [Leave]
-		simpleChoices("Shower",cottonShowerFunTimes,"",0,"",0,"",0,"Leave",leaveAfterYoga);
+		simpleChoices("Shower",2812,"",0,"",0,"",0,"Leave",2811);
 	}
 	//(Repeat Encounter (Didn't have sex))
 	//Done yoga > 0 && met type = 1
@@ -338,7 +338,7 @@ function acceptYoga():void {
 		if(player.hasCock()) fuckHer = 2817;
 		if(player.gender > 0) getFucked = 2818;
 		if(player.spe >= 50 && !player.isTaur()) option3 = 2819;
-		simpleChoices("Fuck Her",fuckHer,"Get Fucked",getFucked,"Tantric Sex",option3,"",0,"Leave",leaveCotton);
+		simpleChoices("Fuck Her",fuckHer,"Get Fucked",getFucked,"Tantric Sex",option3,"",0,"Leave",2820);
 	}
 	//(Repeat Encounter (Had Sex))
 	else {
@@ -357,7 +357,7 @@ function acceptYoga():void {
 		if(player.hasCock()) fuckHer = 2817;
 		if(player.gender > 0) getFucked = 2818;
 		if(player.spe >= 50 && !player.isTaur()) option3 = 2819;
-		simpleChoices("Fuck Her",fuckHer,"Get Fucked",getFucked,"Tantric Sex",option3,"",0,"Leave",leaveCotton);
+		simpleChoices("Fuck Her",fuckHer,"Get Fucked",getFucked,"Tantric Sex",option3,"",0,"Leave",2820);
 	}
 	//(Increases muscle tone up to 50, speed and feminine features.)
 	player.modTone(52,1);
@@ -445,7 +445,7 @@ function cottonShowerFunTimes():void {
 	//[Fuck Her (Male or Herm only)] [Get Fucked] [Service her] [Refuse]
 	if(player.hasCock()) option1 = 2813;
 	if(player.gender > 0) option2 = 2814;
-	simpleChoices("Fuck Her",option1,"Get Fucked",option2,"ServiceHer",serviceFirstTimeCotton,"",0,"Refuse",refuseFirstTimeCotton);
+	simpleChoices("Fuck Her",option1,"Get Fucked",option2,"ServiceHer",2815,"",0,"Refuse",2816);
 }
 
 //(Fuck Her)
