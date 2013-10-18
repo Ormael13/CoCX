@@ -42,7 +42,7 @@ function encounterRogarSwamp():void {
 			if(player.isNaga() || player.tailType > 0) outputText("  Your tail flicks about happily.", false);
 			outputText("  Should you really wait for him?", false);
 		}
-		doYesNo(waitForChunkyOrcLoe,dontWaitForRogar);
+		doYesNo(3368,3369);
 	}
 		//((Ro'gar phase = 1)) (edited)
 	else if(flags[ROGAR_PHASE] == 1) {
@@ -266,7 +266,7 @@ function waitForChunkyOrcLoe():void {
 
 //sexy choices
 function sexyChoices():void {
-	simpleChoices("Ewww",ewwwRogarIsGay,"NoThnxBro",noSlowBroIDontWantPokeSex,"Lick Clean",okayBroLetsHaveAGayCarwash,"",0,"",0);
+	simpleChoices("Ewww",3370,"NoThnxBro",3371,"Lick Clean",3372,"",0,"",0);
 }
 //((Ewww))
 function ewwwRogarIsGay():void {
@@ -344,7 +344,7 @@ function rogarThirdPhase():void {
 		}
 		
 		//return to bar menu
-		doNext(barTelAdre);
+		doNext(2256);
 		return;
 	}
 	//((androgynous or masculine and breasts <= A-cup))
@@ -432,7 +432,7 @@ function rogarPhaseFour():void {
 	else if((player.biggestTitSize() >= 2) && flags[ROGAR_WARNING] == 1) {
 		outputText("Ro'gar the orc is here drinking again, but as you catch his eye, a pained expression flashes across his face as he looks over your form.  It's clear he doesn't relish the prospect of talking to you right now, but knowing him, he's too polite to say so.  The wind spills from your sails and your icebreaker slips from your mind - answering him with a simple glance of resignation is the most you can manage.  He gives you a weak smile and returns to his drink.", false);
 		//return to bar menu
-		doNext(barTelAdre);
+		doNext(2256);
 	}
 	//(andro or masculine with tits <= A)
 	else {
@@ -477,7 +477,7 @@ function rogarFuckMenu():void {
 		getAnal = 3376;
 		frot = 3381;
 	}
-	simpleChoices("GetAnal",getAnal,"GiveAnal",giveAnal,"Frot",frot,"BroDrink",brodown,"No Thanks",noTHanksRogarIAintGayDudeIjustLickedThatMudToBeNice);
+	simpleChoices("GetAnal",getAnal,"GiveAnal",giveAnal,"Frot",frot,"BroDrink",brodown,"No Thanks",3375);
 }
 
 //[No Thanks]
@@ -485,7 +485,7 @@ function noTHanksRogarIAintGayDudeIjustLickedThatMudToBeNice():void {
 	outputText("", true);
 	outputText("You smile at the orc, but tell him that you're not really in the mood to hang out right now.  He looks crestfallen, but nods at you.  \"<i>Well, I understan'.  I'll be seein' ya later, then.</i>\"", false);
 	//Bar menu!
-	doNext(barTelAdre);
+	doNext(2256);
 }
 
 //(([Get Anal], Scenario 1a: give up the buttcherry (buttvirgins only)))
@@ -654,7 +654,7 @@ function brobrobrobro():void {
 	outputText("", true);
 	outputText("You follow Ro'gar home and walk into the apartment, draping your arm around the orc man in a tight hug. \"<i>Glad ta see you too.  What's that you got?</i>\"  Ro'gar looks at the can in your pack.  \"<i>Bro Brew!  Love the stuff.  That for me?</i>\"  He snickers and snags it before you can object, then plays keepaway with you, yanking the can out of reach.  Did you want to keep that?  His dangerous, playful expression would suggest he means to make mischief for you if you try to grab it, and it may get spilled - on you!\n\n", false);
 	//[Fukkin' Grab It!][Reverse Psychology]
-	simpleChoices("FukkinGrabIt",takeDatBroBrewFromDaBigMeanOlOrc,"ReversePsych",rogarIsDumb,"",0,"",0,"",0);
+	simpleChoices("FukkinGrabIt",3380,"ReversePsych",3379,"",0,"",0,"",0);
 }
 //[reverse psychology]
 function rogarIsDumb():void {

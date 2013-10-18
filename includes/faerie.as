@@ -17,7 +17,7 @@ function encounterFaerie():void {
 			}
 			else outputText("\n\nYou lazily make a grab for her and easily snatch her out of the air.  Her body is sticky with a mix of desire and your last encounter.  You can feel her humping against your pinky while she begs, \"<i>Come on, let me crawl into your " + player.armorName + " and wrap myself around your shaft.  I promise I'll only drink a little pre-cum this time, just enough to let me get off.  I'll be a good faerie slut, just let me get you off!</i>\"\n\nDo you let the faerie get you off?", false);
 			stats(0,0,0,0,0,0,player.lib/10+2,0);
-			doYesNo(faerieCaptureHJ,letFaerieGo);
+			doYesNo(2170,2171);
 			return;
 		}
 		stats(0,0,0,0,0,0,player.lib/10+2,0);
@@ -35,8 +35,8 @@ function encounterFaerie():void {
 	outputText("The faerie slows the beating of her wings and hovers towards you. You dismiss your fearful notions, certain a small faerie is quite harmless to you.\n\n", false);
 	outputText("How do you react?", false);
 	//Shoo Away, Nothing, RAEP
-	if(player.hasVagina()) simpleChoices("Shoo Away",faerieShooAway,"Nothing",faerieDoNothing,"Rape",faerieRAEP,"",0,"",0);
-	else simpleChoices("Shoo Away",faerieShooAway,"Nothing",faerieDoNothing,"",0,"",0,"",0);
+	if(player.hasVagina()) simpleChoices("Shoo Away",2187,"Nothing",2186,"Rape",2185,"",0,"",0);
+	else simpleChoices("Shoo Away",2187,"Nothing",2186,"",0,"",0,"",0);
 }
 
 function faerieRAEP():void {

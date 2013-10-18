@@ -47,7 +47,7 @@ function meetSophie():void {
 	outputText("you wrench your gaze away from her breasts and introduce yourself.  It's hard to stay focused on introduction while she's wrapping her wing-like arms around her tits and squeezing them together, amplifying her cleavage.  The matronly harpy is looking at you expectantly, and it occurs to you that she's still waiting on an answer to her question.  Why did you come here?\n\n", false);
 	
 	//[Looking for Demons] [Sex] [Got Lost] [Foraging]
-	simpleChoices("Foraging",tellSophieYoureForagingForStuff,"Got Lost",sophieMeetingGotLost,"Look4Demons",sophieLookingForDemons,"Sex",sophieMeetingChoseSex,"",0);
+	simpleChoices("Foraging",2527,"Got Lost",2526,"Look4Demons",2522,"Sex",2524,"",0);
 }
 
 //[Repeat Meeting]
@@ -74,13 +74,13 @@ function meetSophieRepeat():void {
 			if(player.lust < 60 || rand(3) <= 1) {
 				outputText("Her need amplifies the compulsion, making it difficult to resist.  It looks like if you turned her down now she'd probably try to force herself on you anyway.  Do you give in to her demand?", false);
 				//[Yes-Consentual sex] [No - fight]
-				simpleChoices("Yes",consensualSexSelector,"No",fightSophie,"",0,"",0,"",0);
+				simpleChoices("Yes",2529,"No",2519,"",0,"",0,"",0);
 			}
 			//(high lust?)
 			else {
 				outputText("Her need amplifies the compulsion, and as turned on as you already are, there's no way you could resist.", false);
 				//To sex
-				doNext(consensualSexSelector);
+				doNext(2529);
 			}
 			return;
 		}
@@ -101,7 +101,7 @@ function meetSophieRepeat():void {
 		outputText("(Her words sink into you, and a desire to go with her threatens to overcome your self-control.  You take a deep breath and clear your head.  Do you go with her, turn her down, or try to take control and be the dominant one?  You'll probably have to fight her in order to dominate her...)", false);
 		stats(0,0,0,0,0,0,20,0);
 		//[Yes – consentacle sex] [No – sad harpy]
-		simpleChoices("Yes",consensualSexSelector,"No",shootDownSophieSex,"Dominate",fightSophie,"",0,"",0);
+		simpleChoices("Yes",2529,"No",2523,"Dominate",2519,"",0,"",0);
 		return;
 	}
 	//(NO DICK)
@@ -111,14 +111,14 @@ function meetSophieRepeat():void {
 			outputText("Your climb manages to take you back into the harpy nests again.  Sophie flutters down next to you and warns, \"<i>Cutey, a " + player.mf("neuter","girl") + " like you doesn't belong up here.  The younger harpies don't really get the idea of conversation and see you as competition.</i>\"\n\n", false);
 			
 			outputText("Do you see the wisdom of her words and climb back down the mountain, fight Sophie, or keep climbing?", false);
-			simpleChoices("Fight Sophie",FirstTimeSophieForceSex,"Keep Climbing",PCIgnoresSophieAndHarpyIsFought,"",0,"",0,"Leave",13);
+			simpleChoices("Fight Sophie",2525,"Keep Climbing",2521,"",0,"",0,"Leave",13);
 			return;
 		}
 		//(LACTATE)
 		else {
 			outputText("Your climb manages to take you back into the harpy nests again.  Sophie flutters down next to you and licks her lips hungrily.  She asks, \"<i>Would you mind coming up to my nest and sharing some of your milk?  I've worked up quite a craving for cute girl-milk.</i>\"\n\n", false);
 			outputText("Do you agree to breastfeed the hungry harpy?", false);
-			simpleChoices("Yes",cramANippleInIt,"No",shootDownSophieSex,"Fight Her",FirstTimeSophieForceSex,"",0,"",0);
+			simpleChoices("Yes",2528,"No",2523,"Fight Her",2525,"",0,"",0);
 			//No(2528,2523);
 			//[Yes][No]
 			return;
@@ -147,7 +147,7 @@ function repeatBreastFeeding():void {
 	outputText("", true);
 	outputText("You agree and climb the rest of the way up to her nest, finding Sophie waiting for you there.", false);
 	//– to consentual breastfeeding.
-	doNext(cramANippleInIt);
+	doNext(2528);
 }
 //Normal Harpy Fight
 function PCIgnoresSophieAndHarpyIsFought():void {
@@ -182,7 +182,7 @@ function sophieLookingForDemons():void {
 	outputText("Her words sink into you, and a compulsion to go with her threatens to overcome your self-control.  You take a deep breath and clear your head.  Do you go with her?", false);
 	
 	//[Yes – consentacle sex] [No – sad harpy]
-	doYesNo(consensualSexSelector,shootDownSophieSex);
+	doYesNo(2529,2523);
 }
 //[No]
 function shootDownSophieSex():void {
@@ -206,7 +206,7 @@ function sophieMeetingChoseSex():void {
 		if(player.hasVagina()) {
 			outputText("  What do you do?", false);
 			//[Stay&Sex] [Leave]
-			simpleChoices("Force Sex",FirstTimeSophieForceSex,"Leave",13,"",0,"",0,"",0);
+			simpleChoices("Force Sex",2525,"Leave",13,"",0,"",0,"",0);
 			return;
 		}
 		doNext(13);
@@ -218,7 +218,7 @@ function sophieMeetingChoseSex():void {
 		
 		outputText("As if you could deny the curvy, sexy body of the motherly harpy...", false);
 		//[To consentual sex]
-		doNext(consensualSexSelector);
+		doNext(2529);
 		return;
 	}
 }
@@ -246,12 +246,12 @@ function sophieMeetingGotLost():void {
 	if(player.totalCocks() > 0) {
 		outputText("Would you stay and help a lonely matron with her needs?</i>\"\n\n", false);
 		//[To consensual sex or sophie sadface.
-		doYesNo(consensualSexSelector,shootDownSophieSex);
+		doYesNo(2529,2523);
 	}
 	else if(player.biggestLactation() >= 1.5) {
 		outputText("My, you're quite the laden little cow aren't you?  Would you mind sharing?</i>\"\n\n", false);
 		//to b. feeding or sophie sadface.
-		doYesNo(cramANippleInIt,shootDownSophieSex);
+		doYesNo(2528,2523);
 	}
 	else {
 		outputText("Mmm, it's a shame you don't have a penis, or you could show me what I was missing.</i>\"  The sexually deprived bird-woman plies you with questions about the world for the better part of an hour, masturbating to several mid-conversation orgasms.  Once she exhausts herself, she thanks you and leans down for her nap.  Her tail-feathers fluff in what is clearly a dismissal.", false);
@@ -511,7 +511,7 @@ function consensualHotSophieDickings():void {
 	sophieFucked();
 	outputText("Do you take her up on her offer?", false);
 	//[Yes/No]
-	doYesNo(postSophieSexSnuggle,postSexSophieSnuggleTurnedDown);
+	doYesNo(2530,2531);
 
 }
 
@@ -641,7 +641,7 @@ function consensualSophieSexNoFit():void {
 	sophieFucked();
 	outputText("Do you take her up on her offer?", false);
 	//[Yes/No]
-	doYesNo(postSophieSexSnuggle,postSexSophieSnuggleTurnedDown);
+	doYesNo(2530,2531);
 	//Go to same yes or no as 'fits' options.
 }
 function sophieFucked(dicked:Boolean = true):void {

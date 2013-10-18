@@ -194,7 +194,7 @@ function isabellaGreeting():void {
 			outputText("You answer and begin to explain yourself, but she interrupts, \"<i>Get out!  Zis is mein camp and I vill not tolerate you here!</i>\"\n\n", false);
 			outputText("A bit taken aback by her violent reaction, you blink in confusion as she pulls a titanic shield from behind her chair and slides her arm comfortably into the strap.  What do you do?\n\n", false);
 			//[Talk] [Fight] [Leave]
-			simpleChoices("Try to Talk",tryToTalkDownAngryCow,"Fight",unwelcomeFightCowGal,"",0,"",0,"Leave",leaveAngryIzzy);
+			simpleChoices("Try to Talk",2955,"Fight",2953,"",0,"",0,"Leave",2952);
 		}
 		//(Shorter PC's) 
 		else {
@@ -211,7 +211,7 @@ function isabellaGreeting():void {
 				else outputText("  The cow's eyes close, disappointment visible on her face when she sees the sheer size of your bulge.", false);
 			}
 			//[Talk – real conversations] [Drink – leads to breastfeeding] [Get Licks – leads to oral for small fries] [Rape?]
-			simpleChoices("Talk",talkWithIsabella,"Drink",nomOnMommaIzzysTits,"Get Licked",suck,"Fight",fightIsabella,"Leave",13);
+			simpleChoices("Talk",2969,"Drink",2956,"Get Licked",suck,"Fight",2954,"Leave",13);
 		}
 		return;
 	}
@@ -220,7 +220,7 @@ function isabellaGreeting():void {
 		outputText("You stumble through the grass, nearly tripping as it parts to reveal the now-familiar sight of Isabella's camp.  The cow-girl spots you instantly and snarls, \"<i>Begone!  I varned you once already!</i>\"", false);
 		//[Talk] [Fight] [Leave]
 		//Leave goes to special variation, see below.
-		simpleChoices("Try To Talk",tryToTalkDownAngryCow,"Fight",fightIsabella,"",0,"",0,"Leave",leaveAngryIzzy);
+		simpleChoices("Try To Talk",2955,"Fight",2954,"",0,"",0,"Leave",2952);
 		return;
 	}
 	//Camp Meeting – Was welcome tall, but not short yet!
@@ -283,7 +283,7 @@ function isabellaGreeting():void {
 			}
 		}
 	}
-	choices("Talk",talkWithIsabella,"Drink",nomOnMommaIzzysTits,"Get Licked",suck,"Fight 4 Rape",fightIsabella,"Offer Oral",volunteerToSlurpCowCunt,"",0,"",0,"",0,"",0,"Leave",13);
+	choices("Talk",2969,"Drink",2956,"Get Licked",suck,"Fight 4 Rape",2954,"Offer Oral",2958,"",0,"",0,"",0,"",0,"Leave",13);
 	//outputText("ISABELLA HAS BROKEN.  PLEASE TELL FENOXO.", true);
 }
 //Leave]	
@@ -687,7 +687,7 @@ function volunteerToSlurpCowCunt():void {
 			outputText("before offering something else.  \"<i>Perhaps you could undress?  I ");
 			if(isabellaAccent()) outputText("vould like to return ze favor.</i>\"", false);
 			else outputText("would like to return the favor.</i>\"", false);
-			doYesNo(izzyGivesSmallWangsFreeOral,13);
+			doYesNo(2957,13);
 			return;
 		}
 	}
@@ -700,7 +700,7 @@ function volunteerToSlurpCowCunt():void {
 		if(!isabellaAccent()) outputText("Seeing the ardent desire your sexual service has so visibly inspired in your body - in your slick, ready cunt and erect nipples - the cow-girl smiles slightly, and asks, \"<i>Perhaps you would like me to return the favor?  It seems only fair...</i>\"");
 		else outputText("Seeing the ardent desire your sexual service has so visibly inspired in your body - in your slick, ready cunt and erect nipples - the cow-girl smiles slightly, and asks, \"<i>Perhaps you vould like me to return ze favor?  It seems only fair...</i>\"");
 		//[Leave] [Get Cowlicked]
-		simpleChoices("Get Licked",receiveAllTheCowTOngues,"Leave",13,"",0,"",0,"",0);
+		simpleChoices("Get Licked",3492,"Leave",13,"",0,"",0,"",0);
 	}
 }
 
@@ -822,7 +822,7 @@ function IsabellaWinsAndSpanks():void {
 	}
 	if(player.hasCock()) {
 		if(player.cocks[player.shortestCockIndex()].cockLength < 9) {
-			doNext(IsabellaPostSpankFeedSex);
+			doNext(2961);
 			return;
 		}
 	}

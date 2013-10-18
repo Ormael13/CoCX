@@ -35,14 +35,14 @@ function cinnabarGreeting():void {
 		if(!player.hasCock()) {
 			outputText("You walk over towards the rat-morph, and as you near, she places her hands on her hips, sizing you up with her intense, blood-red eyes.  She licks her lips and sidles alongside you, caressing your body as she offers, \"<i>50 gems for an hour.  That's all it takes to have Cinnabar be your companion...</i>\"  Her voice trails off into a husky vibration as she awaits your response.\n\n", false);
 			//[Buy an hour] [Leave]
-			simpleChoices("Buy1Hour",cinnabarNonHugeDickings,"",0,"",0,"",0,"Leave",2855);
+			simpleChoices("Buy1Hour",2861,"",0,"",0,"",0,"Leave",2855);
 			return;
 		}
 		//(Small Cock)
 		else if(player.biggestCockArea() < 100) {
 			outputText("You walk over towards the rat-morph, and as you near she places her hands on her hips, sizing you up with her intense, blood-red eyes.  She sidles up alongside you, caressing your body until she feels your bulge.  Her hand stops in place and licks her black, glossy lips,  giggling, \"<i>I see you've still got a little boy-cock, huh? Well, 50 gems will get you an hour of my time.  That's all it takes to have Cinnabar be your companion...</i>\"  The slutty rat-girl's voice trails off into a husky vibration while she awaits your response.", false);
 			//[Buy an hour] [Leave]
-			simpleChoices("Buy1Hour",cinnabarNonHugeDickings,"",0,"",0,"",0,"Leave",2855);
+			simpleChoices("Buy1Hour",2861,"",0,"",0,"",0,"Leave",2855);
 			return;
 		}
 		//(Big enough Cock) 
@@ -56,7 +56,7 @@ function cinnabarGreeting():void {
 			if(player.cockTotal() > 2 && player.biggestCockArea2() >= 75)
 				simpleChoices("Fuck Her",2862,"Multi-Fuck",2866,"",0,"",0,"Leave",2855);
 			else 
-				simpleChoices("Fuck Her",cinnabarGetsFUKKKKED,"",0,"",0,"",0,"Leave",2855);
+				simpleChoices("Fuck Her",2862,"",0,"",0,"",0,"Leave",2855);
 			return;
 		}
 	}
@@ -66,14 +66,14 @@ function cinnabarGreeting():void {
 		if(!player.hasCock()) {
 			outputText("You walk over towards Cinnabar, and as you near, she places her hands on her hips, sizing you up with her intense, blood-red eyes.  She licks her lips and sidles alongside you, caressing your body as she offers, \"<i>50 gems for an hour.  That's all it takes to have a companion...</i>\"  Her voice trails off into a husky vibration as she awaits your response.\n\n", false);
 			//[Buy an hour] [Leave]
-			simpleChoices("Buy1Hour",cinnabarNonHugeDickings,"",0,"",0,"",0,"Leave",2855);
+			simpleChoices("Buy1Hour",2861,"",0,"",0,"",0,"Leave",2855);
 			return;
 		}
 		//(Small Cock)
 		else if(player.biggestCockArea() < 100) {
 			outputText("You walk over towards Cinnabar, and as you near, she places her hands on her hips, sizing you up with her intense, blood-red eyes.  She sidles up alongside you, caressing your body until she feels your bulge.  Her hand stops in place and licks her black, glossy lips,  giggling, \"<i>I see you've still got a little boy, huh? Well, 50 gems will get you an hour of my time.  That's all it takes to have a VERY skilled companion...</i>\"  The slutty rat-girl's voice trails off into a husky vibration while she awaits your response.", false);
 			//[Buy an hour] [Leave]
-			simpleChoices("Buy1Hour",cinnabarNonHugeDickings,"",0,"",0,"",0,"Leave",2855);
+			simpleChoices("Buy1Hour",2861,"",0,"",0,"",0,"Leave",2855);
 			return;
 		}
 		//(Big enough Cock) 
@@ -87,7 +87,7 @@ function cinnabarGreeting():void {
 			if(player.cockTotal() > 2 && player.biggestCockArea2() >= 75)
 				simpleChoices("Fuck Her",2862,"Multi-Fuck",2866,"",0,"",0,"Leave",2855);
 			else 
-				simpleChoices("Fuck Her",cinnabarGetsFUKKKKED,"",0,"",0,"",0,"Leave",2855);
+				simpleChoices("Fuck Her",2862,"",0,"",0,"",0,"Leave",2855);
 			return;
 		}
 	}
@@ -268,10 +268,10 @@ function cinnabarGetsFUKKKKED():void {
 	outputText("It barely registers – you're too busy cramming inch after inch into the slowly-widening vice in front of you, enthralled by just how much cock-flesh her body can devour.  She's frothing at the mouth, screaming, squeaking, and pounding on the bed.  You push forward a little harder, tugging on the base of her tail for leverage as huge globs of rat-cum rain from the stretched-out snatch onto the sheets.   Another three inches sink into your new cock-sleeve, and she starts to whimper and squeak, reminding you of an old, worn-out chew-toy that your father's dog used to play with.", false);
 	//HUger
 	if(player.cockArea(x) >= 200) {
-		if(player.cor >= 75) doNext(fuckCinnabarHugerAndCorruptedEr);
-		else doNext(cinnabarHuger);
+		if(player.cor >= 75) doNext(2863);
+		else doNext(2864);
 	}
-	else doNext(cinnabarHuge);
+	else doNext(2865);
 }
 	
 //(Huger and Corrupteder) (75+ corr)
