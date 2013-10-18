@@ -15,7 +15,7 @@
 		outputText("Made of polished steel, the machine has many foreign parts you couldn't even begin to guess the use of, and some familiar ones from the other work out machines from the main gym floor.  This one, however, even seems to have a small monitoring screen!  You could easily sit down and check out this sophisticated device while waiting for the goblin to come out from the back rooms.\n\n", false);
 		
 		outputText("Do you use it or not?", false);
-		doYesNo(2829,2828);
+		doYesNo(useTheSexMachine,leaveShowers);
 		flags[182] = 1;
 	}
 	//Go directly to sex if you know what's in store!

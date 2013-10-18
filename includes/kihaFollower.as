@@ -92,7 +92,7 @@ function loseKihaPreSpiderFight():void {
 
 	outputText("You could warn Kiha of the approaching mob - or you could let them jump her and scamper away in the confusion, leaving Kiha to whatever horrible fate awaits her.  What do you do?", false);
 	//(Display Options: [Warn Kiha] [Let Them])
-	simpleChoices("Warn Kiha",3418,"Let Them",3419,"",0,"",0,"",0);
+	simpleChoices("Warn Kiha",warnKihaOfHerImpendingDemise,"Let Them",letTheSpidersHaveTheirWayWithKiha,"",0,"",0,"",0);
 }
 
 //Player Wins Against Kiha (Z)
@@ -111,7 +111,7 @@ function playerBeatsUpKihaPreSpiderFight():void {
 
 	outputText("You could make like a baker and move your buns, but Gods knows what will happen to Kiha if you do.", false);
 	//(Display Options: [Help Kiha] [Leave Her]
-	simpleChoices("Help Kiha",3420,"Leave Her",3421,"",0,"",0,"",0);
+	simpleChoices("Help Kiha",helpKihaAgainstSpoidahs,"Leave Her",leaveKihaToSpoidahHorde,"",0,"",0,"",0);
 }
 
 //Warn Kiha (Z)
@@ -360,7 +360,7 @@ function kihaFriendlyGreeting(output = true):void {
 	var talk:int = 0;
 	if(flags[KIHA_TALK_STAGE] < 6) talk = 3426;
 	//(Display Options: [Talk] [Spar] [Hug] [Leave]
-	simpleChoices("Talk",talk,"Spar",3422,"Hug",3425,"",0,"Leave",13);
+	simpleChoices("Talk",talk,"Spar",sparWithKiha,"Hug",hugFriendWarmKiha,"",0,"Leave",13);
 }
 //Spar with Friendly Kiha - Intro (Z)
 function sparWithKiha():void {
@@ -492,7 +492,7 @@ function kihaXSalamander():void {
 	outputText("[pg]You consider warning the dragoness, but too late!  The mysterious figure leaps from the brush and shoulder-slams into Kiha, throwing her right off you and into the mud.  Before you can even say a word to your new friend, she grabs you by the scruff of your neck and throws you to the ground behind her, putting herself between you and Kiha.", false);
 	outputText("[pg]You could just lie there, but you're not sure how well you'd fare against two powerful warriors at once - you could end up dominated, at the very least.  You could instead try and get the jump on the fighters before they jump you... Or, you suppose you could get the fuck out while you have the chance.", false);
 	//(Display Options: [Lie There] [Jump Them] [GTFO])
-	simpleChoices("Lie There",3424,"Jump Them",3427,"GTFO",3423,"",0,"",0);
+	simpleChoices("Lie There",lieThere,"Jump Them",jumpDaBitches,"GTFO",GTFO,"",0,"",0);
 }
 
 //GTFO (Z)
@@ -635,7 +635,7 @@ function kihaAdmitsSheLikesYourWang():void {
 		outputText("Kiha lightly drops out of the trees in front of you, kicking up a small splash of fetid water as she comes to rest a few feet away.  She rests her axe over her shoulder nonchalantly and smiles as she says, \"<i>Did you come back to get your ass kicked?  You wouldn't be the first to throw fights so you could check me out while you're lying on the ground.</i>\"  Her tail swings around to playfully catch you on the " + buttDescript() + ", a hint of crimson spreading on her dark skin, matching the ruby hue of her shimmering scales.  Kiha strikes a battle-ready pose that looks a bit more lewd than normal as she asks, \"<i>So, you here to fight, or waste more time talking?</i>\"");
 		outputText("[pg]Do you hug her, and potentially take things to the next level, or would you rather do something else?");
 	}
-	simpleChoices("Talk",0,"Spar",3422,"Hug",3425,"LovinHug",3445,"Leave",13);
+	simpleChoices("Talk",0,"Spar",sparWithKiha,"Hug",hugFriendWarmKiha,"LovinHug",lovinHugKiha,"Leave",13);
 }
 //Loving Hug
 function lovinHugKiha():void {
@@ -673,9 +673,9 @@ function lovinHugKiha():void {
 	outputText("[pg]\"<i>Does getting dragons off really make you that light-headed?</i>\" Kiha asks.  She tackles you into her bed before you can answer.  Her attitude, while still fierce, reminds you more of a playful kitten than a threat.", false);
 	//[Route to appropriate sex scene!]
 	stats(0,0,0,0,0,0,100,0);
-	if(player.hasCock()) doNext(3428);
-	else if(player.hasVagina()) doNext(3429);
-	else doNext(3430);
+	if(player.hasCock()) doNext(lovingHugDickings);
+	else if(player.hasVagina()) doNext(lovingHugsGirlFuckSex);
+	else doNext(lovingHugsForRetards);
 }
 //Loving Hug Continued: Dicks Ahoy!
 function lovingHugDickings():void {
@@ -799,7 +799,7 @@ function warmLoverKihaIntro(output:Boolean = true):void {
 			}
 			outputText("When you approach your dragoness lover, a warm smile spreads across her dark features.  She gives you a playful punch on the shoulder and laughs, \"<i>Hey, doofus. You need something -- maybe a little dragon loving?</i>\" she adds with a wink.");
 			leave = 121;
-			//choices("Hang Out",3431,"Hug",3425,"InviteCamp",campo,"Sex",3434,"Spar",3422,"",0,"",0,"",0,"",0,"Leave",leave);
+			//choices("Hang Out",hangOutWithKiha,"Hug",hugFriendWarmKiha,"InviteCamp",campo,"Sex",kihaSexMenu,"Spar",sparWithKiha,"",0,"",0,"",0,"",0,"Leave",leave);
 			menu();
 			addButton(0,"Hang Out",eventParser,3431);
 			addButton(1,"Hug",eventParser,3425);
@@ -825,7 +825,7 @@ function warmLoverKihaIntro(output:Boolean = true):void {
 	//   Biggus Dickus // Vaginal // Anal // 69+Tail // Tail Pegging // Item/Morph-specific scenes?
 	//-[Invite to Camp] (If KihaAffection >= 200)
 	//-[Leave])
-	choices("Hang Out",3431,"Hug",3425,"InviteCamp",campo,"Sex",3434,"Spar",3422,"",0,"",0,"",0,"",0,"Leave",leave);
+	choices("Hang Out",hangOutWithKiha,"Hug",hugFriendWarmKiha,"InviteCamp",campo,"Sex",kihaSexMenu,"Spar",sparWithKiha,"",0,"",0,"",0,"",0,"Leave",leave);
 }
 
 
@@ -1659,7 +1659,7 @@ function kihaBitchesOutCorruptPCs():void {
 		outputText("[pg]\"<i>[name].</i>\"  She says flatly, planting the haft of her axe in the ground, leaning heavily upon it.");
 		outputText("[pg]You say hello, looking nervously around.  Something isn't right here, and your hand drifts toward your [weaponName].");
 		outputText("[pg]\"<i>Listen, [name],</i>\" Kiha says, eyeing you from behind her axe.  \"<i>Maybe we've gotten to be friends lately, but... something's changed about you.  I can SMELL the corruption on you, the lust... I-I can't do it, [name].  I can't be around someone that could turn into someTHING at any moment, someone who's just letting themselves go like... like you are. Please j-just go, [name].</i>\"  You try to protest, to reason with the fiery warrior, but she only lifts up her axe and levels it at you...  \"<i>J-JUST GO!</i>\"");
-		simpleChoices("Fight",3177,"",0,"",0,"",0,"Leave",13);
+		simpleChoices("Fight",meetKihaAndFight,"",0,"",0,"",0,"Leave",13);
 	}
 	else {
 		outputText("Kiha approaches you, her belongings gathered in her hands.  The sexy dragoness seems visibly upset, and before you can say a word, she interrupts, \"<i>Don't say a word, [name].  You're corrupt.  I can smell the corruption rolling off you from over here.  I won't be here when you turn into a demon, and I don't want to fight you... but if you come after me, I won't hesitate to defend myself!</i>\"");
@@ -1698,7 +1698,7 @@ function kihaCampAppearance():void {
 	outputText("[pg]She has a pair of dusky, soft D-cup tits, with a single 0.5 inch nipple on each breast.");
 	outputText("[pg]Kiha has a loose twat between her legs which constantly drips a warm, wet lubricant that stains her thighs.");
 	outputText("[pg]Between her gropable butt-cheeks, Kiha has a single tight asshole, right where it belongs.");
-	doNext(3435);
+	doNext(encounterKiha);
 }
 
 
@@ -1720,7 +1720,7 @@ function dominateKihasFaceWithStuffAndStuffOrSomethingIDunnoWhyImStillWritingThi
 	outputText("[pg]\"<i>If you want have your way with me, you'll need to earn it, just like anyone else,</i>\" Kiha explains.  She narrows her eyes at you and questions, \"<i>The question is, are you " + player.mf("man","woman") + " enough to take what you want?  I wouldn't want you to get hurt.</i>\"");
 	outputText("[pg]That seems like a challenge.  Will you rise to it, or will you back down?");
 	//[Back down]    [Fight for position]
-	simpleChoices("Back Down",3447,"FightForDom",3448,"",0,"",0,"",0);
+	simpleChoices("Back Down",beABitchDumbass,"FightForDom",fightForDominanceWithDragonCunnies,"",0,"",0,"",0);
 }
 
 //[Back down]

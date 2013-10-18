@@ -60,7 +60,7 @@ function farmExploreEncounter():void {
 			//marble = 3553;
 			if(flags[WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(3,"Marble", meetMarble);
 		}
-		//choices("Explore",2173,"Kelt",keltEvent,"Get Milked",milkYou,"Marble",marble,"Milk Jojo",milkJojo,"Milk Cock",cockMilk,"Talk",2177,"Work",2178,"",0,"Leave",13);
+		//choices("Explore",exploreFarm,"Kelt",keltEvent,"Get Milked",milkYou,"Marble",marble,"Milk Jojo",milkJojo,"Milk Cock",cockMilk,"Talk",talkWhitney,"Work",workFarm,"",0,"Leave",13);
 		if(flags[WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(0,"Explore",exploreFarm);
 		if(flags[WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(6,"Talk",talkWhitney);
 		if(flags[WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(7,"Work",workFarm);
@@ -113,7 +113,7 @@ function talkWhitney():void {
 			outputText("\"<i>Well of course, it needs hooked into a pump system, collection reservoir, and a power source.  It just happens I've got all that equipment set up for my cows in the barn, and I reckon it'd be easier to plug into than a girl sniffing minotaur musk,</i>\" Whitney explains, \"<i>If you like I could get it all set up for ya, hell, I might even toss you a few gems if you can produce enough milk.</i>\"\n\n", false);
 			//(, hell, if you manage to gather large enough quantities with it, I might be able to find a way to inseminate my cattle with it and be able to pay you for it.  Don't you worry none, I know ways to make this kind of thing work).</i>\"
 			outputText("Do you give the breast milker to Whitney for her to hook up?", false);
-			doYesNo(2174,2176);
+			doYesNo(whitneyMilkerHookup,whitneyMilkerRefusal);
 			return;
 		}
 		else if(player.biggestLactation() >= 2) {
@@ -142,7 +142,7 @@ function talkWhitney():void {
 		outputText("You nod and tell her how you got it and explain that even though it should be fully functional, it'll need to connect to some other machinery to work, and it's way more than any one person could handle.\n\n", false);
 		outputText("\"<i><i>Well of course, it needs hooked into a pump system, collection reservoir, and a power source.  It just happens I've got all that equipment set up for my cows in the barn, and I reckon it'd be easier to plug into than a girl sniffing minotaur musk.</i></i>\" Whitney explains, \"<i><i>If you like I could get it all set up for ya, hell, if you manage to gather large enough quantities with it, I might be able to find a way to inseminate my cattle with it and pay ya for it.  Don't you worry none, I know ways to make this kind of thing work.</i></i>\"\n\n", false);
 		outputText("Do you give the cock milker to Whitney for her to hook up?", false);
-		doYesNo(2175,2176);
+		doYesNo(2175,whitneyMilkerRefusal);
 		return;
 	}
 	//[GENERIC TALK]
@@ -635,7 +635,7 @@ function getMilked():void {
 			if(liters > 30) stats(0,0,0,-2,0,0,0,0);
 		}
 		if(player.inte < 10) {
-			doNext(2188);
+			doNext(cowBadEnd1);
 			return;
 		}
 		else if(player.inte < 15) outputText("  You stretch and let out a contented moo, long and loud.  How silly!", false);
@@ -816,7 +816,7 @@ function cockPumping():void {
 		}
 		stats(0,0,0,0,0,0,-150,0);
 		//TO BAD ENDAGE
-		doNext(2585);
+		doNext(milkerBadEnd1);
 		return;
 	}
 	flags[112]++;
@@ -923,7 +923,7 @@ function cowBadEnd1():void {
 	outputText("You moo with delight, fondling your dripping " + allBreastsDescript() + " as you relax in your stall.   You know there was something uh, important or something that you were going to do - besides getting your udders milked!  Mmmmm, all your worries about that other thing just melt away when you're in your harness, spraying out milk...\n\n", true);
 	outputText("You stop, trying to put your remaining wits to work and remember what you were going to do.   Let's see, you were coming here because your tits were so full that they made you ache, and you got hooked up and pumped like a good cow.  Another soft moo escapes your lips.  Now you're turned on and masturbating your drippy udders.  So the next step would be...\n\n", false);
 	outputText("...finding someone to fuck you silly while you get something to eat.  It's so simple!  You crawl out of your stall, feeling your ponderous breasts jiggle as they drag on the ground.  A trail of white cream clearly marks your passage out into the fields, eventually passing beyond the edges of Whitney's farm and into the mountains.", false);
-	doNext(2189);
+	doNext(cowBadEnd2);
 }
 
 function cowBadEnd2():void {
