@@ -2522,9 +2522,11 @@ function urtaDialogueMenu():void {
 	addButton(1,"Edryn",eventParser,3497);
 	addButton(2,"The Watch",eventParser,3498);
 	addButton(3,"Alcoholism",eventParser,3499);
-	if(urtaKids() > 0 && player.hasKeyItem("Spare Key to Urta's House") < 0) addButton(4,"Visit Kids",visitKidsFirstTime);
-	else if(flags[FIRST_TIME_AT_URTA_HOUSE] > 0) addButton(4,"Her House",talkToUrtaAboutHerHouse);
-	addButton(9,"Leave",eventParser,13);
+	if(urtaKids() > 0 && player.hasKeyItem("Spare Key to Urta's House") < 0) 
+		addButton(4,"Visit Kids",visitKidsFirstTime);
+	else 
+		if(flags[FIRST_TIME_AT_URTA_HOUSE] > 0) addButton(4,"Her House",talkToUrtaAboutHerHouse);
+			addButton(9,"Leave",eventParser,13);
 }
 
 //[=Urta=]
@@ -2535,9 +2537,12 @@ function urtaDiscussesSelf():void {
 	if(!urtaLove()) outputText("\"<i>You wanna talk about me?</i>\" she asks, blushing softly.  \"<i>Well, there isn't THAT much to tell, but what do you want to know?</i>\"   She seems surprisingly pleased to have the chance to talk.");
 	else outputText("\"<i>Well, I don't think there's that much to tell,</i>\" she says with a smile.  She idly blows a bang out of her face and exhales, \"<i>Well, lover, I'm an open book for you, what do you want to know?</i>\"");
 	//[Family] [Sex/Romance] [Employment] [Prejudice]
-	if(flags[URTA_QUEST_STATUS] == .5) simpleChoices("Infertility",3985,"Romance&Sex",3505,"Employment",3508,"Prejudice",3509,"Back",3496);
-	else if(flags[URTA_QUEST_STATUS] == 1) simpleChoices("Fertility",3986,"Romance&Sex",3505,"Employment",3508,"Prejudice",3509,"Back",3496);
-	else simpleChoices("Family",3504,"Romance&Sex",3505,"Employment",3508,"Prejudice",3509,"Back",3496);
+	if(flags[URTA_QUEST_STATUS] == .5) 
+		simpleChoices("Infertility",3985,"Romance&Sex",3505,"Employment",3508,"Prejudice",3509,"Back",3496);
+	else if(flags[URTA_QUEST_STATUS] == 1) 
+		simpleChoices("Fertility",3986,"Romance&Sex",3505,"Employment",3508,"Prejudice",3509,"Back",3496);
+	else 
+		simpleChoices("Family",3504,"Romance&Sex",3505,"Employment",3508,"Prejudice",3509,"Back",3496);
 	
 }
 
@@ -2591,9 +2596,13 @@ function urtaPregOthersToggle():void {
 	clearOutput();
 	if(flags[URTA_PREG_EVERYBODY] == 1) {
 		outputText("\"<i>Awww, are you sure?  Wouldn't you like ");
-		if(player.hasCock()) outputText("to help me make Edryn's belly bloat with our seed, and then play 'Guess Who Is The Father'?");
-		else if(player.hasVagina()) outputText("to have me get the both of your pregnant at the same time, so we can all enjoy together?");
-		else outputText("see me put this thing to work in the way that it's meant to?");
+		if(player.hasCock()) 
+			outputText("to help me make Edryn's belly bloat with our seed, and then play 'Guess Who Is The Father'?");
+		else 
+			if(player.hasVagina()) 
+				outputText("to have me get the both of your pregnant at the same time, so we can all enjoy together?");
+			else 
+				outputText("see me put this thing to work in the way that it's meant to?");
 		outputText("</i>\" Urta says, giving you a playful pinch.");
 		flags[URTA_PREG_EVERYBODY] = 0;
 	}
@@ -2610,8 +2619,10 @@ function urtaDiscussesEdryn():void {
 	clearOutput();
 	spriteSelect(1);
 	outputText("You think for a moment, then tell her that you have questions about Edryn.");
-	if(!urtaLove()) outputText("\n\nUrta glances at you, eyes growing a little dark.  \"<i>Sure, I guess I can tell you some things, but you really should just ask her,</i>\" she says, sounding... well, you think she sounds a little jealous.");
-	else outputText("\n\n\"<i>I don't need to worry about her stealing you away from me, do I, lover?</i>\" the gray fox teases.   She smirks knowlngly and continues, \"<i>I'm joking, though she is a hottie, isn't she?  What do you want to know?</i>\"");
+	if(!urtaLove()) 
+		outputText("\n\nUrta glances at you, eyes growing a little dark.  \"<i>Sure, I guess I can tell you some things, but you really should just ask her,</i>\" she says, sounding... well, you think she sounds a little jealous.");
+	else 
+		outputText("\n\n\"<i>I don't need to worry about her stealing you away from me, do I, lover?</i>\" the gray fox teases.   She smirks knowlngly and continues, \"<i>I'm joking, though she is a hottie, isn't she?  What do you want to know?</i>\"");
 	//[History Together] [Working Together] [Romance?]
 	simpleChoices("History",urtaDiscussesEdrynHistory,"Working",urtaDiscussesWorkingWithEdryn,"Romance",urtaDiscussesEdrynRomance,"",0,"Back",urtaDialogueMenu);
 }
@@ -2636,28 +2647,40 @@ function urtaDiscussesAlcholism():void {
 	if(flags[DISCUSSED_URTA_ALCOHOLISM] == 0 && flags[145] == 0) {
 		outputText("You quietly inform Urta that you and she need to talk about her drinking habit.  She swallows nervously and insists, \"<i>I - I only drink to try and keep my cock under control.</i>\"");
 		outputText("\n\nYou point out that her actions clearly belie that statement - she would never ask you to jerk her off in public or let her fuck your ass in the middle of the bar when sober.  Urta flinches at your words, ");
-		if(player.cor < 33) outputText("and you feel a little bad for putting her through this");
-		else if(player.cor < 66) outputText("and you would feel bad if this talk weren't necessary");
-		else outputText("but you don't let up for a moment");
+		if(player.cor < 33) 
+			outputText("and you feel a little bad for putting her through this");
+		else 
+			if(player.cor < 66) 
+				outputText("and you would feel bad if this talk weren't necessary");
+			else 
+				outputText("but you don't let up for a moment");
 		outputText(".  You insist that you aren't upset with her, that you're not blaming her for anything, but you need to talk to her about this matter.");
 		outputText("[pg]Urta refuses to meet your eye for several long minutes.  Nervously, she begins tapping one clawed finger on the table.  \"<i>I... okay.  The truth is that I did start drinking originally in the hopes it would make my erections subside and make me harder to arouse.  As you've seen, it doesn't work like that - truth be told, I'm kind of a horny drunk.</i>\"");
 		outputText("[pg]You ask why, then, she does it - why does she keep drinking?");
 		outputText("[pg]\"<i>Because it's an excuse for me to cut loose, alright?</i>\" she barks indignantly.  Now she meets your eyes, staring into them with defiance.  \"<i>I work day in and day out to keep this city from falling apart, and the whole time, I have to deal with this... this thing between my legs, undermining everything I say.  ");
-		if(urtaLove()) outputText("Lover");
-		else outputText("Cutey");
+		if(urtaLove()) 
+			outputText("Lover");
+		else 
+			outputText("Cutey");
 		outputText(", you don't know what I've been through.  In here, when I'm off the clock, I can just have a bottle, hang out with my friends, and kind of... just... bask in everyone else's happiness.  It's not much, but it's better than sitting at home, bored and lonely.</i>\"");
 		outputText("[pg]She finally ceases her rambling dialogue and sighs loudly, shaking her head.  \"<i>Maybe it was a bad idea, but it was my idea, you know?</i>\"  Then, she looks up at you, gently.  \"<i>Besides, I got to meet you, didn't I?  Even with all the bad, I gained you for a ");
-		if(!urtaLove()) outputText("friend.</i>\"");
-		else outputText("lover.  I don't think I've ever had anyone accept me like you have - even Edryn kind of holds back from me.  You... you're different.  Maybe it's because you're an off-worlder, I don't know, but meeting you has been the best thing to happen to me since I joined the guard.  Honestly... I feel like I could probably stop - I don't really need it anymore, though I do seem to wind up having a lot of fun when I do.</i>\"");
+		if(!urtaLove()) 
+			outputText("friend.</i>\"");
+		else 
+			outputText("lover.  I don't think I've ever had anyone accept me like you have - even Edryn kind of holds back from me.  You... you're different.  Maybe it's because you're an off-worlder, I don't know, but meeting you has been the best thing to happen to me since I joined the guard.  Honestly... I feel like I could probably stop - I don't really need it anymore, though I do seem to wind up having a lot of fun when I do.</i>\"");
 		outputText("[pg]Urta falls silent, waiting for you to speak.  Will you tell her to start drinking less?  Will you tell her that you are fine with her drinking habits, now that she's explained her startling change in behavior and her reasons for doing so?  Will you break up with her if she's that much of an alcoholic? Or do you want her to drink even more - perhaps you find her so much more fun to be with when she's blink stinking drunk?");
 		//[Drink More] [Drink Less] [No Change] [Break Up]
 		simpleChoices("Drink More",urtaDiscussAlcoholDrinkMore,"Drink Less",urtaDiscussAlcoholDrinkLess,"Be Yourself",urtaDiscussAlcoholNoChange,"Break Up",breakUpWithTheBitchOverAlcoholism,"",0);
 	}
 	else {
 		outputText("You tell Urta that you want to discuss her newfound drinking habits.  The grey-furred fox-morph meets your gaze calmly.  \"<i>Really?  What more do you have in mind?</i>\" she asks.");
-		if(flags[146] == 1) outputText("  \"<i>I can't drink any more than I already do - I'm kind of pushing the laws to drink as much as I do already.</i>\"  She burps loudly, then starts on another bottle.");
-		else if(flags[146] == 0) outputText("  \"<i>You said you didn't mind me drinking as much as I do... are you going to ask me to cut down?</i>\" she asks, calmly and clearly assuming that's what you intend.");
-		else outputText("  \"<i>I said it before, I'll say it again, I'm not going to stop drinking entirely - there's nothing wrong with a few cold ones to take the edge off.  I don't drink myself stupid any more; that should be enough for you,</i>\" she replies, defensively.");
+		if(flags[146] == 1) 
+			outputText("  \"<i>I can't drink any more than I already do - I'm kind of pushing the laws to drink as much as I do already.</i>\"  She burps loudly, then starts on another bottle.");
+		else 
+			if(flags[146] == 0) 
+				outputText("  \"<i>You said you didn't mind me drinking as much as I do... are you going to ask me to cut down?</i>\" she asks, calmly and clearly assuming that's what you intend.");
+			else 
+				outputText("  \"<i>I said it before, I'll say it again, I'm not going to stop drinking entirely - there's nothing wrong with a few cold ones to take the edge off.  I don't drink myself stupid any more; that should be enough for you,</i>\" she replies, defensively.");
 		simpleChoices("Drink A Lot",urtaDiscussAlcoholDrinkMore,"Drink A Little",urtaDiscussAlcoholDrinkLess,"Be Yourself",urtaDiscussAlcoholNoChange,"Break Up",0,"",0);
 	}
 }
@@ -2728,8 +2751,10 @@ function urtaDiscussesFamily():void {
 		outputText("You tell Urta that you'd like to learn about her family.  What are her parents like?  Does she have any siblings?  Is she the only hermaphrodite in the family?");
 		//(Regular
 		if(!urtaLove()) {
-			if(flags[URTA_FAMILY_TALK_ATTEMPTS] == 0) outputText("\n\nUrta winces, eyes starting to grow damp with unshed tears.  However, then she stares at you fiercely.  \"<i>I don't want to talk about them,</i>\" she growls.");
-			else outputText("\n\nShe gives you a cold stare, making it quite clear she's still not inclined to discuss them.  Whatever the story is, it must be pretty painful.");
+			if(flags[URTA_FAMILY_TALK_ATTEMPTS] == 0) 
+				outputText("\n\nUrta winces, eyes starting to grow damp with unshed tears.  However, then she stares at you fiercely.  \"<i>I don't want to talk about them,</i>\" she growls.");
+			else 
+				outputText("\n\nShe gives you a cold stare, making it quite clear she's still not inclined to discuss them.  Whatever the story is, it must be pretty painful.");
 		}
 		//(Lover, First Time: 
 		else {
