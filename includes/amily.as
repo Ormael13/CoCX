@@ -108,7 +108,7 @@ function discoverAmilyVillage():void {
 	outputText("As you roam the shores of the lake, you find your footsteps echoing as though you were stepping on wood rather than squishing in the sandy mud of the shore. Curious, you squat down and brush the soil away, revealing the rotting form of a wooden plank. Looking carefully at the ground underfoot, you realize that it is part of a pathway – the kind that villages make to provide easier access to and from muddy rivers, lakes and beaches. You believe you can make out the rest of the path clearly enough to follow it to its end.\n\n", false);
 	outputText("Do you follow the pathway?", false);
 	//Yes / No
-	doYesNo(2370,2369);
+	doYesNo(exploreAmilyVillage,dontExploreAmilyVillage);
 }
 
 //[No]
@@ -236,7 +236,7 @@ function exploreVillageRuin():void {
 				outputText("Using all of your knowledge, skill and cunning, you sneak and squirm through the ruins until you finally find yourself coming up right behind the dusty mouse girl. She's picking berries off of a small bush and hasn't noticed you yet.\n\n", false);
 				outputText("How do you approach her?", false);
 				//Announce yourself / Scare her
-				simpleChoices("Announce",2387,"Scare Her",2388,"",0,"",0,"",0);
+				simpleChoices("Announce",announceSelfOnDesperatePleaMeeting,"Scare Her",scareAmilyOnDesperatePleaMeeting,"",0,"",0,"",0);
 			}*/
 			outputText("After wondering for a while how on earth you are going to track down Amily, you hear a whistle. Looking around, you see her waving cheekily at you from around a corner; it's pretty obvious that you have a long way to go before you'll be able to beat her at this kind of game.\n\n", false);
 			
@@ -248,7 +248,7 @@ function exploreVillageRuin():void {
 			//Accept her / Turn her down gently / Turn her down bluntly
 			var fur:Number = 0;
 			if(flags[AMILY_NOT_FURRY] == 0) fur = 3174;
-			simpleChoices("Accept Her",2390,"RejectFurry",fur,"RejectGently",2391,"BluntReject",2392,"",0);
+			simpleChoices("Accept Her",desperateAmilyPleaAcceptHer,"RejectFurry",fur,"RejectGently",desperateAmilyPleaTurnDown,"BluntReject",desperateAmilyPleaTurnDownBlunt,"",0);
 			return;		
 		}
 		//[First Meeting]
@@ -286,7 +286,7 @@ function exploreVillageRuin():void {
 
 			outputText("What do you do?", false);
 			//Accept Eagerly / Accept Hesitantly / Refuse
-			simpleChoices("AcceptEagerly",2372,"Hesitantly",2373,"NoFurries",3174,"Refuse",2374,"",0);
+			simpleChoices("AcceptEagerly",acceptAmilysOfferEagerly,"Hesitantly",acceptAmilyOfferHesitantly,"NoFurries",amilyNoFur,"Refuse",refuseAmilysOffer,"",0);
 			//Set flag for 'last gender met as'
 			flags[AMILY_PC_GENDER] = player.gender;
 			return;
@@ -300,7 +300,7 @@ function exploreVillageRuin():void {
 				outputText("Using all of your knowledge, skill and cunning, you sneak and squirm through the ruins until you finally find yourself coming up right behind the dusty mouse girl. She's picking berries off of a small bush and hasn't noticed you yet.\n\n", false);
 				outputText("How do you approach her?", false);
 				//Announce yourself / Scare her
-				simpleChoices("Announce",2375,"Scare",2376,"",0,"",0,"",0);
+				simpleChoices("Announce",remeetingAmilyAnnounceSelf,"Scare",remeetingAmilyScare,"",0,"",0,"",0);
 			}
 			//[Player does not meets the requirements to stalk Amily]*/
 			//else {
@@ -514,7 +514,7 @@ function exploreVillageRuin():void {
 		}
 		outputText("How do you approach her?", false);
 		//Announce yourself / Scare her
-		simpleChoices("Announce",2385,"Scare Her",2386,"",0,"",0,"",0);
+		simpleChoices("Announce",sneakyUberAmilyRemeetingsAnnounce,"Scare Her",scareAmilyRemeetingsProBaws,"",0,"",0,"",0);
 		return;
 	}*/
 	
@@ -576,7 +576,7 @@ function exploreVillageRuin():void {
 	if(flags[AMILY_PC_GENDER] != player.gender) {
 	//Stripped this out since it was making her flip out weirdly at genderless folks
 	//|| (player.gender == 0 && flags[AMILY_AFFECTION] < 15)) {
-		doNext(2763);
+		doNext(amilyNewGenderConfrontation);
 		return;
 	}
 	//Sex / Talk / Talk then sex
@@ -589,9 +589,9 @@ function exploreVillageRuin():void {
 
 	var sex:Number = determineAmilySexEvent();
 	if (sex > 0) 
-		simpleChoices("Sex",sex,"Talk",2383,"Both",2384,"Efficiency",efficiency,"Leave",13);
+		simpleChoices("Sex",sex,"Talk",talkToAmily,"Both",talkThenSexWithAmily,"Efficiency",efficiency,"Leave",13);
 	else 
-		simpleChoices("",0,"Talk",2383,"",0,"Efficiency",efficiency,"Leave",13);
+		simpleChoices("",0,"Talk",talkToAmily,"",0,"Efficiency",efficiency,"Leave",13);
 	//Set flag for 'last gender met as'
 	flags[AMILY_PC_GENDER] = player.gender;
 	return;
@@ -703,7 +703,7 @@ function acceptAmilysOfferEagerly():void {
 	//[+5 Libido]
 	stats(0,0,0,0,5,0,0,0);
 	//[/ Go to [First Time Sex]]
-	doNext(2405);
+	doNext(amilySexHappens);
 }
 
 //[Accept Hesitantly]
@@ -728,7 +728,7 @@ function acceptAmilyOfferHesitantly():void {
 	//{+5 Affection}
 	flags[AMILY_AFFECTION] += 5;
 	//[/ Go to [First Time Sex]]
-	doNext(2405);
+	doNext(amilySexHappens);
 }
 	
 //[Refuse]
@@ -759,7 +759,7 @@ function remeetingAmilyAnnounceSelf():void {
 	outputText("", true);
 	amilySprite();
 	outputText("Reasoning that it's best not to scare someone like Amily, you clear your throat nosily. Amily whirls around to face you and immediately draws her knife into a defensive position. When she sees that it's you, she blinks a few times before grinning in surprise. \"<i>Why hello, " + player.short + "; good to see you again! It's nice to be reminded that there's another person out here who hasn't become a brainless fuck-puppet.</i>\" Her mood then sobers.\n\n", false);
-	doNext(2377);
+	doNext(amilyRemeetingContinued);
 }
 
 //[Scare her]
@@ -777,7 +777,7 @@ function remeetingAmilyScare():void {
 	else {
 		outputText("You manage to leap backwards just in time to avoid a strike that could have seriously hurt you. Amily recovers quickly and readies her knife again, only to realize that it's you. An irritated expression crosses her face. \"<i>Are you insane!? Do you have any idea how stupid that was? I could have killed you!</i>\" she bellows, before slowly calming down. \"<i>Ah, well… no harm, no foul, I guess…</i>\"\n\n", false);
 	}
-	doNext(2377);
+	doNext(amilyRemeetingContinued);
 }
 
 function amilyRemeetingContinued():void {
@@ -785,7 +785,7 @@ function amilyRemeetingContinued():void {
 	amilySprite();
 	outputText("\"<i>So, have you changed your mind? Have you come to help me out?</i>\" Amily asks curiously.\n\n", false);
 	//Accept / Politely refuse / Here to talk / Get lost
-	simpleChoices("Accept",2378,"RefusePolite",2379,"Just Talk",2380,"Get Lost",2381,"Leave",13);
+	simpleChoices("Accept",secondTimeAmilyOfferedAccepted,"RefusePolite",secondTimeAmilyRefuseAgain,"Just Talk",repeatAmilyTalk,"Get Lost",tellAmilyToGetLost,"Leave",13);
 }
 
 //[Accept]
@@ -796,7 +796,7 @@ function secondTimeAmilyOfferedAccepted():void {
 	//Offer accepted
 	flags[AMILY_OFFER_ACCEPTED] = 1;
 	//[/ Go to [First Time Sex]]
-	doNext(2405);
+	doNext(amilySexHappens);
 }
 
 
@@ -851,7 +851,7 @@ function sexWithAmily():void {
 			outputText("\"<i>Of course you did. Well, come on, I guess I can oblige you. It's the only way I'm going to get pregnant.</i>\"\n\n", false);
 			outputText("She sets off, clearly leading the way as you follow her.\n\n", false);
 			//[/ Go to [Low Affection Sex]]
-			doNext(2405);
+			doNext(amilySexHappens);
 			return;
 		}
 		//[Medium Affection]
@@ -860,14 +860,14 @@ function sexWithAmily():void {
 
 			outputText("You have to push yourself to keep up with her, but she's clearly just playing with you by moving so quickly rather than seriously trying to escape you.\n\n", false);
 			//[/ Go to [Low Affection Sex]]
-			doNext(2405);
+			doNext(amilySexHappens);
 			return;
 		}
 		//[High Affection]
 		else {
 			outputText("Amily doesn't bother to say anything; she just grins like the cat that ate the canary (well, the mouse that ate the cheesecake, anyway). She grabs hold of your hand and does her best to pull you as fast as she can towards her closest bolt-hole.\n\n", false);
 			//[/ Go to [Low Affection Sex]]
-			doNext(2405);
+			doNext(amilySexHappens);
 			return;
 		}
 	}
@@ -889,14 +889,14 @@ function sexWithAmily():void {
 
 			outputText("Though she does set off and indicate for you to follow, you realize that she's not too happy about your reason for being here.\n\n", false);
 			//[/ Go to [Medium Affection Sex]]
-			doNext(2405);
+			doNext(amilySexHappens);
 			return;
 		}
 		//[High Affection]
 		else {
 			outputText("\"<i>You still want me, even though I'm already pregnant?</i>\" she asks – not angry or disappointed, but sounding rather pleased. \"<i>Well, how can I say no to you?</i>\" She smiles broadly and begins to walk away, doing her best to give you a sexy wiggle of her hips as an invitation for you to follow her.\n\n", false);
 			//[/ Go to [High Affection Sex]] 
-			doNext(2405);
+			doNext(amilySexHappens);
 			return;
 		}
 	}
@@ -933,7 +933,7 @@ function sexWithAmily():void {
 		else {
 			outputText("She looks a little puzzled by the request, but then smiles with sincere pleasure. \"<i>I'm game if you are, dear.</i>\" She winks and offers her hand to you. You take it, and let her lead you to her chosen nesting site.\n\n", false);
 			//[/ Go to [High Affection - Heavily Pregnant Sex]]
-			doNext(2405);
+			doNext(amilySexHappens);
 			return;
 		}
 	}
@@ -1098,8 +1098,8 @@ function sneakyUberAmilyRemeetingsAnnounce():void {
 		else outputText("\"<i>It's not easy for me to run and hide anymore, these days. I'm glad you decided to do the guardian angel act. So, how can I thank you for coming to check on me?</i>\"\n\n", false);
 	}
 	//Sex / Talk / Talk then sex
-	if(player.lust >= 33) simpleChoices("Sex",2382,"Talk",2383,"Both",2384,"",0,"",0);
-	else simpleChoices("",0,"Talk",2383,"",0,"",0,"",0);
+	if(player.lust >= 33) simpleChoices("Sex",sexWithAmily,"Talk",talkToAmily,"Both",talkThenSexWithAmily,"",0,"",0);
+	else simpleChoices("",0,"Talk",talkToAmily,"",0,"",0,"",0);
 }
 
 //[Scare her]
@@ -1158,8 +1158,8 @@ function scareAmilyRemeetingsProBaws():void {
 	}
 	//Sex / Talk / Talk then sex
 	//(Same as [Normal Remeeting))
-	if(player.lust >= 33) simpleChoices("Sex",2382,"Talk",2383,"Both",2384,"",0,"",0);
-	else simpleChoices("",0,"Talk",2383,"",0,"",0,"",0);
+	if(player.lust >= 33) simpleChoices("Sex",sexWithAmily,"Talk",talkToAmily,"Both",talkThenSexWithAmily,"",0,"",0);
+	else simpleChoices("",0,"Talk",talkToAmily,"",0,"",0,"",0);
 	//Affection -1;
 	flags[AMILY_AFFECTION] -= 1;
 }
@@ -1198,7 +1198,7 @@ function desperateFinallyAmily():void {
 	outputText("Amily scuffs the ground with one of her finger-like toe claws, looking down at it as if it was the most interesting thing in the world – or as if she doesn't dare to look you in the eyes. \"<i>I... You know what I've been asking of you; from you, and you keep turning me down… but you kept talking to me, asking me about myself. You wanted to get to know me, but... why don't you want to know ALL of me? I... I want to give myself to you. You're the nicest, kindest man I've met – even before the demons destroyed my village. I want to be with you... but you don't seem to want to be with me.</i>\" She looks up to you at last, her eyes wet with tears. \"<i>Is there something wrong with me? Can't you like me in that way?</i>\" she pleads.\n\n", false);
 	
 	//Accept her / Turn her down gently / Turn her down bluntly
-	simpleChoices("Accept Her",2390,"TurnDownGently",2391,"TurnDownBlunt",2392,"",0,"",0);
+	simpleChoices("Accept Her",desperateAmilyPleaAcceptHer,"TurnDownGently",desperateAmilyPleaTurnDown,"TurnDownBlunt",desperateAmilyPleaTurnDownBlunt,"",0,"",0);
 }
 
 //[Accept her]
@@ -1211,7 +1211,7 @@ function desperateAmilyPleaAcceptHer():void {
 	
 	outputText("Amily stares at you, stunned. After a moment, she embraces you fiercely and begins to drag you away.\n\n", false);
 	//[/ Go to [High Affection Sex]]
-	doNext(2405);
+	doNext(amilySexHappens);
 }
 
 //[Turn her down gently]
@@ -1263,7 +1263,7 @@ function fuckingMouseBitchPopsShitOut():void {
 	//Increase baby count here rather than in 3 places.
 	flags[AMILY_BIRTH_TOTAL]++;
 	//Leave / Watch / Help
-	simpleChoices("Leave",2394,"Watch",2395,"Help",2396,"",0,"",0);
+	simpleChoices("Leave",pregnancyIsScaryGoddamnMousePregnancyImNotWatchingThisShit,"Watch",heyIGotTicketsToMicePoppingOut,"Help",helpThatFukkinUngratefulBitchGiveBirth,"",0,"",0);
 }
 
 //[Leave]
@@ -1867,7 +1867,7 @@ function stickItInMouseTwatForTheFirstTimeNOTWORTHALLBULLSHIT():void {
 	//[Take Charge]
 	//[Wait for Her]
 	//[Kiss Her]
-	simpleChoices("Take Charge",2402,"Wait 4 Her",2403,"Kiss Her",2404,"",0,"",0);
+	simpleChoices("Take Charge",FirstTimeAmilyTakeCharge,"Wait 4 Her",beSomeKindofNervousDoucheAndWaitForAmily,"Kiss Her",kissAmilyInDaMoufFirstTimeIsSomehowBetterThatWay,"",0,"",0);
 }
 
 //[=Take Charge=]
@@ -1992,7 +1992,7 @@ function amilySexHappens():void {
 		outputText("Amily's efforts at leading you through the ruined village are brisk and efficient. You don't really think she's looking forward to doing this all that much. No, that might be overstating things. It's more like she's under the impression that, details aside, this encounter between the two of you will be pure business.\n\n", false);
 
 		outputText("It's hard for you to say if you were led by a different route this time, but soon you are in what Amily has to offer for a private bedchamber, and she begins to reach for her clothes, obviously expecting you to do the same thing.\n\n", false);
-		simpleChoices("Business",2406,"Playtime 1st",2407,"",0,"",0,"",0);
+		simpleChoices("Business",amilySexBusiness,"Playtime 1st",amilySexPlaytimeFirst,"",0,"",0,"",0);
 		return;
 	}
 	//Moderate Affection Sex:
@@ -2004,7 +2004,7 @@ function amilySexHappens():void {
 	
 		outputText("Once you are inside, Amily gently tries to push you onto the bedding where you will be mating. Once you are seated, she smiles at you with a teasing expression and begins to slowly strip herself off, clearly trying to make the act seem as erotic as possible.", false);
 		if(flags[AMILY_INCUBATION] > 90) outputText("  However, her confidence visibly slips when she has to fully bare the bulging belly that marks her pregnant state, but she musters the confidence and starts to show it off for you as well.", false);
-		simpleChoices("Step In",2415,"Watch Show",2414,"",0,"",0,"",0);
+		simpleChoices("Step In",amilyStepTheFuckIn,"Watch Show",amilyEnjoyShow,"",0,"",0,"",0);
 		return;
 	}
 	else {
@@ -2068,7 +2068,7 @@ function caressAmilyHaveSex():void {
 	outputText("", true);
 	amilySprite();
 	outputText("Watching Amily masturbate and tease herself in front of you is definitely erotic... but you want something more to this session than that. Licking your lips with a combination of arousal and nervousness, you tentatively reach out one hand and brush a feather-light touch against her fingers.  Her eyes, which she had previously been keeping closed, suddenly spring open, and you ready yourself to withdraw and apologize if she protests. But, for whatever reason, she does not protest and, emboldened, you continue to touch and caress her. You keep your touches gentle, light and restricted to non-intimate regions, but she seems to be enjoying this; she draws a little closer, and reaches out to brush your cheek, absentmindedly using the very hand she had been stroking her netherlips with before, and so the scent of her intimate regions drifts to your nostrils from where her fingers lay. Her eyes have rolled almost completely shut, the gaze she is giving you is a very languid one, but something about the set of her lips, only just starting to open, entices you to kiss them.\n\n", false);
-	simpleChoices("Refuse Kiss",2411,"Kiss Her",2412,"",0,"",0,"",0);	
+	simpleChoices("Refuse Kiss",AmilyGetKissed,"Kiss Her",AmilyTakeTheKiss,"",0,"",0,"",0);	
 }
 //[Refuse the Kiss]
 function AmilyGetKissed():void {
@@ -2146,7 +2146,7 @@ function AmilyMidSexLevel2():void {
 	outputText("By the time Amily is completely naked, she is clearly excited about what is coming up; you even think she's wet already. She stares at you with a mischievous, turned-on smile, waiting to see what you will do now that it is your turn to strip.\n\n", false);
 	
 	outputText("Do you do a striptease of your own or just strip naked and get to business?", false);
-	simpleChoices("Striptease",2417,"Business",2418,"",0,"",0,"",0);
+	simpleChoices("Striptease",StripForAmilyYouSlut,"Business",getDownWithSexTiem,"",0,"",0,"",0);
 }
 
 //[Fair Is Fair]
@@ -2171,7 +2171,7 @@ function continueWithMoreMidLevelAmilySex():void {
 	stats(0,0,0,0,0,0,5,0);
 	amilySprite();
 	outputText("Once you are both naked, you embrace and begin with a deep kiss. Slowly you two sink down and start exploring each other's body. You feel Amily's hands caressing you while you lightly kiss her breasts, one of your hands slowly drifting down to her cute ass and lightly squeezing it. Looking into her eyes, you see a sparkle in them before she surprises you and somehow manages to turn you onto your back. Now she's sitting on your belly, with your already hard cock being fondled by her rather flexible tail. Grinning at you, she seems to plan on teasing you as long as possible before allowing you to enter her.\n\n", false);
-	simpleChoices("Play Along",2420,"Please Her",2421,"",0,"",0,"",0);	
+	simpleChoices("Play Along",playAlongWithAmilyWhataDumbBitch,"Please Her",workToPleaseTheCunt,"",0,"",0,"",0);	
 }
 //[Play Along]
 function playAlongWithAmilyWhataDumbBitch():void {
@@ -2197,7 +2197,7 @@ function AmilyMiddleGradeSexOver():void {
 	amilyPreggoChance();
 	flags[AMILY_AFFECTION] += 3 + rand(4);
 	flags[AMILY_FUCK_COUNTER]++;
-	simpleChoices("Say Goodbye",2423,"Stay A While",2424,"",0,"",0,"",0);
+	simpleChoices("Say Goodbye",sayGoodByeToAmilyPostSecks,"Stay A While",stayAfterAmilyMiddleGradeSecks,"",0,"",0,"",0);
 }
 
 //[Say Goodbye]
@@ -2474,13 +2474,13 @@ function amilyMenu(output:Boolean = true):void {
 	if(flags[AMILY_FOLLOWER] == 1) {
 		//outputText("Options:\nAppearance\nTalk\nMake Love\n", false);
 		//MOAR OPTIONS: Give Present\nAlchemy\nTeach Blowpipe
-		choices("Appearance",2428,"Talk",2429,"Make Love",2430,"Give Present",2433,"Date",date,"Lay Eggs",eggs,"Defur",defur,"",0,"",0,"Back",121);
+		choices("Appearance",amilyAppearance,"Talk",talkToAmilyCamp,"Make Love",fuckTheMouseBitch,"Give Present",giveAmilyAPresent,"Date",date,"Lay Eggs",eggs,"Defur",defur,"",0,"",0,"Back",121);
 	}
 	//Corrupt
 	else {
 		//outputText("Options:\nAppearance\nGive Item\nSex\nTalk\n", false);
 		//  [Sex] [Give Item] [Talk] [Call Jojo]
-		choices("Appearance",2428,"Give Item",2433,"Sex",2430,"Talk",2805,"Defur",defur,"",0,"",0,"",0,"",0,"Back",120);
+		choices("Appearance",amilyAppearance,"Give Item",giveAmilyAPresent,"Sex",fuckTheMouseBitch,"Talk",talkWithCORRUPTCUNT,"Defur",defur,"",0,"",0,"",0,"",0,"Back",120);
 	}
 }
 
@@ -2593,7 +2593,7 @@ function amilyAppearance():void {
 	}
 	outputText("\n\nShe has a tiny pink pucker between her mousey butt-cheeks, where it belongs.");
 	//Back to amily menu
-	doNext(2427);
+	doNext(amilyFollowerEncounter);
 }
 
 // EVENT 2429: Talk to Amily in camp
@@ -2620,7 +2620,7 @@ function fuckTheMouseBitch():void {
 	//[Amily rejects sex]
 	if(flags[77] > 0) {
 		outputText("Amily pushes you away and says, \"<i>Not until we fix Jojo.</i>\"  You sigh and grumble.  No sex today!", false);
-		doNext(2427);
+		doNext(amilyFollowerEncounter);
 		return;
 	}
 
@@ -2668,7 +2668,7 @@ function fuckTheMouseBitch():void {
 		nurse = 3991;
 		outputText("Amily might be up for playing nurse again.\n");
 	}
-	choices("TakeCharge",2431,"Amily Leads",2432,bText,babies,"Urta",urta,"Swim",swim,"Izma3Some",threesome,"Nurse RP",nurse,"",0,"",0,"Back",2427);
+	choices("TakeCharge",amilyTakesChargeSex,"Amily Leads",letAmilyLead,bText,babies,"Urta",urta,"Swim",swim,"Izma3Some",threesome,"Nurse RP",nurse,"",0,"",0,"Back",amilyFollowerEncounter);
 }
 
 //[=Take Charge=]
@@ -2695,7 +2695,7 @@ function amilyTakesChargeSex():void {
 	if(flags[AMILY_BIRTH_TOTAL] > 0 || flags[AMILY_LACTATION_RATE] >= 1) drinkMilk = 2770;
 	outputText("You stride up to her and take her in your arms, kissing her deeply. She melts enthusiastically into your embrace, kissing you back just as hard, her tail winding around your " + player.leg() + ". You lead her back to the nest she has made for herself and firmly but gently place her on her back there. She smiles up at you. \"<i>Ooh, taking charge, are we?</i>\" She trills with pleasure, tail waving to and fro with sincere excitement.\n\nWhat will you do?", false);
 	var scene:Number = rand(4);
-	choices("Fuck",fuck,"DrinkMilk",drinkMilk,"Eat Out",2771,"GetSucked",getSucked,"Scissor",scissor,"Mount Her",mountHer,"Buttfuck",buttFuckButtFUCKBUTTFUCK,"Catch Anal",catchs,"",0,"",0);
+	choices("Fuck",fuck,"DrinkMilk",drinkMilk,"Eat Out",takeChargeAmilyEatOut,"GetSucked",getSucked,"Scissor",scissor,"Mount Her",mountHer,"Buttfuck",buttFuckButtFUCKBUTTFUCK,"Catch Anal",catchs,"",0,"",0);
 }
 	
 	
@@ -3119,9 +3119,9 @@ function giveAmilyAPresent():void {
 	if(sDelight + incubusDraft + succubusMilk + pinkEgg + whiteEgg + brownEgg + purpleEgg + clothes == 0) {
 		if(flags[AMILY_FOLLOWER] == 1) outputText("You realize that you don't have any items she would be interested in, and apologize.", false);
 		else outputText("You realize you don't have any items worth using on her.", false);
-		doNext(2427);
+		doNext(amilyFollowerEncounter);
 	}
-	choices(incuText,incubusDraft,"Succ Milk",succubusMilk,"Pnk Egg",pinkEgg,"White Egg",whiteEgg,"Brown Egg",brownEgg,"PurpleEgg",purpleEgg,"Reducto",reducto,"SDelite",sDelight,clothesT,clothes,"Back",2427);
+	choices(incuText,incubusDraft,"Succ Milk",succubusMilk,"Pnk Egg",pinkEgg,"White Egg",whiteEgg,"Brown Egg",brownEgg,"PurpleEgg",purpleEgg,"Reducto",reducto,"SDelite",sDelight,clothesT,clothes,"Back",amilyFollowerEncounter);
 }
 
 //[Purified Incubus Draft - If Amily is a Female]
@@ -3168,7 +3168,7 @@ function giveAmilyPureIncubusDraft():void {
 			outputText("You hastily assure her that it is purified and so neither of you have to worry about joining the ranks of the demons. She still looks skeptical, but then nods slowly and approaches you.\n\n", false);
 		
 			outputText("\"<i>All right... but, are you sure you want to give that to me? You know it will make me grow a penis, right?</i>\"\n\n", false);
-			doYesNo(2454,2427);
+			doYesNo(giveAmilyPureIncubusDraft4Realz,amilyFollowerEncounter);
 		}
 	}
 	//CORRUPT
@@ -3189,7 +3189,7 @@ function giveAmilyPureIncubusDraft():void {
 			outputText("Do you make her grow a huge one?", false);
 			flags[AMILY_WANG_LENGTH] = 4;
 			flags[AMILY_WANG_GIRTH] = 1;
-			doYesNo(2798,2797);
+			doYesNo(corruptAmilyGetsDickMaxxedOut,corruptAmilyYouDeclineMaxxingHerDick);
 		}
 		else if(flags[AMILY_WANG_LENGTH] < 15 && flags[AMILY_WANG_GIRTH] < 3) {
 			//Consume dah goodies!
@@ -3202,12 +3202,12 @@ function giveAmilyPureIncubusDraft():void {
 
 			outputText("Satisfied, you dismiss her with a wave and go about your business.", false);
 			amilyDickGrow();
-			doNext(2427);
+			doNext(amilyFollowerEncounter);
 		}
 		//Too big!
 		else {
 			outputText("You reconsider - her small frame probably couldn't handle anything larger.", false);
-			doNext(2427);
+			doNext(amilyFollowerEncounter);
 		}
 	}
 }
@@ -3215,7 +3215,7 @@ function corruptAmilyYouDeclineMaxxingHerDick():void {
 	outputText("", true);
 	amilySprite();
 	outputText("You decide to leave her as she is. If you want her to have a bigger dick you can always give her more drafts. \"<i>I want you to practice using your new tool, so you'll be ready whenever I need you,</i>\" you order Amily. \"<i>Yes, " + player.mf("master","mistress") + ",</i>\" she answers. You leave her on the floor and go about your business.", false);
-	doNext(2427);
+	doNext(amilyFollowerEncounter);
 }
 function corruptAmilyGetsDickMaxxedOut():void {
 	outputText("", true);
@@ -3235,7 +3235,7 @@ function corruptAmilyGetsDickMaxxedOut():void {
 	outputText("You abandon her in a heap of fluids and go about your own business.", false);
 	flags[AMILY_WANG_LENGTH] = 15;
 	flags[AMILY_WANG_GIRTH] = 3;
-	doNext(2427);
+	doNext(amilyFollowerEncounter);
 }
 
 //(If the player says Yes): 
@@ -3250,7 +3250,7 @@ function giveAmilyPureIncubusDraft4Realz():void {
 	
 	outputText("Catching her breath, she stares at her new appendage with an unreadable expression, then pulls her clothes back on with a grimace. You decide to give her some time alone to adjust to the change.", false);
 	amilyDickGrow();
-	doNext(2427);
+	doNext(amilyFollowerEncounter);
 }
 
 function amilyDickGrow():void {
@@ -3276,7 +3276,7 @@ function declineToMakeAmilyFuta():void {
 	outputText("", true);
 	amilySprite();
 	outputText("On second thought, you decide against giving it to her. Amily looks relieved as you apologize and put it back in your pocket. \"<i>So, what did you really want to ask me about?</i>\" She says, eager to change the subject.\n\nYou don't really have anything to say and walk away, embarrassed.", false);
-	doNext(2427);
+	doNext(amilyFollowerEncounter);
 }
 
 //[Purified Succubi Milk]
@@ -3332,7 +3332,7 @@ function giveAmilyPurifiedSuccubusMilk():void {
 			outputText("Looks like giving her more milk only makes her pussy sensitive. You're tempted to make use of her new, sensitive pussy, but refrain from doing so. It'll be more fun to let her lust build. You toss the vial away and casually stride back into the camp, leaving Amily panting in her juices.", false);
 		}
 	}
-	doNext(2427);
+	doNext(amilyFollowerEncounter);
 }
 
 
@@ -3384,7 +3384,7 @@ function amilyDrinksSuccubusDelight():void {
 		outputText("You pick up a vial of Succubi's Delight and show it to Amily. \"<i>Drink this; you need bigger balls,</i>\" you order her, passing the bottle to her. Amily replies, \"<i>Yes, " + player.mf("master","mistress") + "</i>.\" Then she opens her legs and downs the bottle. She moans as her balls grow bigger and denser, churning with the extra cum her sack now holds.", false);
 		flags[171]++;
 	}
-	doNext(2427);
+	doNext(amilyFollowerEncounter);
 }
 
 //[Give Succubus' Delight]
@@ -3397,7 +3397,7 @@ function giveCorruptAmilySuccubusDelight():void {
 	//No balls yet?  QUERY!
 	if(flags[171] == 0) {
 		outputText("You pick up a vial of Succubi's Delight and show it to Amily. \"<i>Drink this,</i>\" you order her, passing the bottle to her. \"<i>You're going to give me balls, " + player.mf("master","mistress") + "? Are you sure?</i>\"\n\n", false);
-		doYesNo(2799,2427);
+		doYesNo(amilyDrinksSuccubusDelight,amilyFollowerEncounter);
 		return;
 	}
 	else amilyDrinksSuccubusDelight();
@@ -3421,7 +3421,7 @@ function giveAmilyAPinkEgg():void {
 	else consumeItem("L.PnkEg",1);
 	flags[AMILY_WANG_LENGTH] = 0;
 	flags[AMILY_WANG_GIRTH] = 0;
-	doNext(2427);
+	doNext(amilyFollowerEncounter);
 }
 //[White Egg]
 function giveAmilyAWhiteEgg():void {
@@ -3466,7 +3466,7 @@ function giveAmilyAWhiteEgg():void {
 			flags[AMILY_NIPPLE_LENGTH] = int(flags[AMILY_NIPPLE_LENGTH] * 100) / 100;
 		}
 	}
-	doNext(2427);
+	doNext(amilyFollowerEncounter);
 		
 }
 
@@ -3516,7 +3516,7 @@ function giveAmilyABrownEgg():void {
 			outputText("Amily scarfs down the egg and looks back expectantly, but it doesn't seem to make her already massive backside any larger.  She pouts and whimpers, \"<i>Slut is sorry, but her ass is as big and round as it can get " + player.mf("master","mistress") + "!</i>\"", false);
 		}
 	}
-	doNext(2427);
+	doNext(amilyFollowerEncounter);
 }
 
 //[Purple Egg]
@@ -3565,7 +3565,7 @@ function giveAmilyAPurpleEgg():void {
 			stats(0,0,0,0,0,0,4,0);
 		}
 	}
-	doNext(2427);
+	doNext(amilyFollowerEncounter);
 }
 /*
 [Reducto]
@@ -3594,7 +3594,7 @@ function giveAmilySomePants():void {
 		outputText("You assure her that she looks beautiful. \"<i>Flatterer.</i>\" She smirks, and then wanders off to the stream.", false);
 	}
 	consumeItem("C.Cloth",1);
-	doNext(2427);
+	doNext(amilyFollowerEncounter);
 }
 /*
 //[Lactaid]
@@ -4401,7 +4401,7 @@ function amilyIsTotallyALesbo():void {
 	outputText("You interject, telling her to slow down and breathe, you're not going anywhere. Amily pants, then finally squeaks out, \"<i>I'm in love with you!</i>\" before her face turns bright red. Stunned, you ask her to repeat that. \"<i>I said... I'm in love with you. I... ah, forget it, who was I kidding?</i>\" She trails off, sadly, and you watch as she begins to turn around and shuffle off.", false);
 	//Set flag that she's confessed her lesbo-live!
 	flags[AMILY_CONFESSED_LESBIAN] = 1;
-	simpleChoices("Stop Her",2751,"Let Her Go",2752,"",0,"",0,"",0);
+	simpleChoices("Stop Her",amilyLesboStopHer,"Let Her Go",amilyLesboLetHerGo,"",0,"",0,"",0);
 }
 //[=Stop Her=]
 function amilyLesboStopHer():void {
@@ -4410,7 +4410,7 @@ function amilyLesboStopHer():void {
 	outputText("Before she can get too far, though, your hand shoots out and clasps her shoulder. She starts to question what you're doing, but you spin her around and pull her into a tight embrace, telling her that you feel the same way. Shyly, she offers her lips to you, and you kiss them eagerly. When you seperate for breath, you ask if she wants to see what it's like with another woman. Her eyes glazed, she nods at you wordlessly and starts leading you away down the street.\n\n", false);
 	//WHAT THE FUCK DOES THIS SCENE LEAD TO?
 	flags[AMILY_CONFESSED_LESBIAN] = 2;
-	doNext(2756);
+	doNext(girlyGirlMouseSex);
 }
 
 //[=Let Her Go=]
@@ -4446,7 +4446,7 @@ function amilyPostConfessionGirlRemeeting():void {
 	outputText("She looks down at the ground, unable to meet your eyes, then pulls her tattered pants down to reveal something you never would have expected. A penis - a four inch long, surprisingly human-like penis, already swelling to erection. Blushing, she starts to speak, still not looking at you. \"<i>I... I thought that, if it's my idea and all, I should be the one to grow this thing... Please, I love you, I want to have children with you, can't we -</i>\"\n\n", false);
 	flags[AMILY_WANG_LENGTH] = 4;
 	flags[AMILY_WANG_GIRTH] = 1;
-	simpleChoices("Accept",2754,"Reject",2755,"",0,"",0,"",0);
+	simpleChoices("Accept",amilyOnGirlSurpriseBonerAcceptance,"Reject",amilyOnGirlSurpriseBonerREJECT,"",0,"",0,"",0);
 }
 //[=Accept=]
 function amilyOnGirlSurpriseBonerAcceptance():void {
@@ -4456,7 +4456,7 @@ function amilyOnGirlSurpriseBonerAcceptance():void {
 
 	outputText("She still starts leading you away, though.", false);
 	//TO THE SMEX yiffyiffmurrmurr!
-	doNext(2757);
+	doNext(hermilyOnFemalePC);
 }
 //[=Reject=]
 function amilyOnGirlSurpriseBonerREJECT():void {
@@ -4576,7 +4576,7 @@ function pcBirthsAmilysKidsQuestVersion():void {
 		outputText("You are eager to comply, though your last thought as you sink into unconsciousness is to wonder what Amily wants to talk about.", false);
 		flags[PC_PENDING_PREGGERS] = 1;	
 		//To part 2!
-		doNext(2759);
+		doNext(postBirthingEndChoices);
 		return;
 	}
 	outputText("You wake up suddenly to strong pains and pressures in your gut. As your eyes shoot wide open, you look down to see your belly absurdly full and distended. You can feel movement underneath the skin, and watch as it is pushed out in many places, roiling and squirming in disturbing ways. The feelings you get from inside are just as disconcerting. You count not one, but many little things moving around inside you. There are so many, you can't keep track of them.\n\n", false);
@@ -4605,7 +4605,7 @@ function postBirthingEndChoices():void {
 	outputText(", but... I love you. The children, they're going to leave here now, and set up a new village somewhere else. But I... I want to stay here with you. Forever. Please, say yes.</i>\"\n\n", false);
 	outputText("Do you accept her offer?", false);
 	flags[PC_TIMES_BIRTHED_AMILYKIDS]++;
-	simpleChoices("Accept",2760,"StayFriends",2761,"ShootDown",2762,"",0,"",0);
+	simpleChoices("Accept",acceptAmilyAsYourFemaleWaifu,"StayFriends",declineButBeFriends,"ShootDown",notInterestedInDumbshitMouseBitches,"",0,"",0);
 }
 
 //[=Accept=]
@@ -4682,7 +4682,7 @@ function amilyNewGenderConfrontation():void {
 			else {
 				outputText("Amily looks quite upset, and then her expression changes to one of resolve. \"<i>I won't pretend to know how this happened, or to understand why you would do this voluntarily, if that was the case, but you mean too much to me to let you go over something like this.</i>\" She seizes hold of your hand, fiercely, and starts determinedly pulling you along. \"<i>Come with me!</i>\" She orders.", false);
 				//(Amily Yuri sex scene plays.)
-				doNext(2756);
+				doNext(girlyGirlMouseSex);
 				return;
 			}
 		}
@@ -4751,7 +4751,7 @@ function amilyNewGenderConfrontation():void {
 				//mark as agreed to preg-quest!
 				flags[AMILY_OFFER_ACCEPTED] = 1;
 				//(Play High Affection Male sex scene.)
-				doNext(2405);
+				doNext(amilySexHappens);
 				return;
 			}
 		}
@@ -4821,8 +4821,8 @@ function amilyNewGenderConfrontation():void {
 				flags[AMILY_OFFER_ACCEPTED] = 1;
 				//(Use the Remeeting scene options.)
 				if(player.lust >= 33) sex = 2382
-				if(sex > 0) simpleChoices("Sex",sex,"Talk",2383,"Both",2384,"",0,"",0);
-				else simpleChoices("",0,"Talk",2383,"",0,"",0,"",0);
+				if(sex > 0) simpleChoices("Sex",sex,"Talk",talkToAmily,"Both",talkThenSexWithAmily,"",0,"",0);
+				else simpleChoices("",0,"Talk",talkToAmily,"",0,"",0,"",0);
 				return;
 			}
 			//High Affection:
@@ -4834,8 +4834,8 @@ function amilyNewGenderConfrontation():void {
 				flags[AMILY_OFFER_ACCEPTED] = 1;
 				//(Use the Remeeting scene options.)
 				if(player.lust >= 33) sex = 2382
-				if(sex > 0) simpleChoices("Sex",sex,"Talk",2383,"Both",2384,"",0,"",0);
-				else simpleChoices("",0,"Talk",2383,"",0,"",0,"",0);
+				if(sex > 0) simpleChoices("Sex",sex,"Talk",talkToAmily,"Both",talkThenSexWithAmily,"",0,"",0);
+				else simpleChoices("",0,"Talk",talkToAmily,"",0,"",0,"",0);
 				return;
 			}
 		}
@@ -4846,7 +4846,7 @@ function amilyNewGenderConfrontation():void {
 				outputText("\"<i>Well, I guess it's nice to see another woman around... though I could have used you as all male. So, do you want to talk?</i>\" Amily asks.\n\n", false);
 				//(Amily gains a small amount of Affection, begin the Female variant of Amily's quest.)
 				flags[AMILY_AFFECTION] += 2;
-				doNext(2383);
+				doNext(talkToAmily);
 				return;
 			}
 			//Medium Affection:
@@ -4959,10 +4959,10 @@ function maybeHermsAintAllBadBITCH():void {
 	
 	//[Yes]
 	//[No]
-	//doYesNo(2766,2767);
+	//doYesNo(beAmilysDadAsAHerm,fuckNoYouWontBeAmilysHermDaddy);
 	var noFurry:int = 0;
 	if(flags[AMILY_NOT_FURRY] == 0) noFurry = 3174;
-	simpleChoices("Yes",2766,"No",2767,"NoFurry",noFurry,"",0,"",0);
+	simpleChoices("Yes",beAmilysDadAsAHerm,"No",fuckNoYouWontBeAmilysHermDaddy,"NoFurry",noFurry,"",0,"",0);
 }
 
 //[=Yes=]
@@ -4972,7 +4972,7 @@ function beAmilysDadAsAHerm():void {
 	flags[AMILY_HERM_QUEST] = 2;
 	outputText("You tell her that you'll forgive her, and you will help her breed the "+((flags[AMILY_NOT_FURRY]==0)?"free mousemorphs that she wants so badly. She looks a bit confused by you using the term 'mouse-morphs', but otherwise seems happy.":"")+" \"<i>Wonderful! Come with me!</i>\" She says, grabbing your hand and pulling you down the street.\n\n", false);
 	//(Play out "First Sex" scene, with whatever tweaks are needed to account for the PC's hermaphroditic nature.)
-	doNext(2405);
+	doNext(amilySexHappens);
 }
 //[=No=]
 function fuckNoYouWontBeAmilysHermDaddy():void {
@@ -5013,7 +5013,7 @@ function makeAmilyAHerm():void {
 	flags[AMILY_WANG_GIRTH] = 1;
 	consumeItem("P.Draft", 1);
 	//[Herm Amily on Female PC, First Time, scene plays]
-	doNext(2757);
+	doNext(hermilyOnFemalePC);
 }
 
 //ENHANCED CAMP FOLLOWER SHIT
@@ -5149,7 +5149,7 @@ function makeChildren():void {
 		
 		flags[AMILY_ALLOWS_FERTILITY] = 1;
 	}
-	doNext(2427);
+	doNext(amilyFollowerEncounter);
 }
 
 //[Revised Corrupt Meeting]
@@ -5333,7 +5333,7 @@ function talkWithCORRUPTCUNT(sexAfter:Boolean = false):void {
 		//(If player has no main item:)
 		if(itemSlot1.quantity == 0) {
 			outputText("You tell her that you'll call for her, if you ever need her knowledge.\n\n", false);
-			if(sexAfter) doNext(2405);
+			if(sexAfter) doNext(amilySexHappens);
 			else doNext(13);
 			return;
 		}
@@ -5868,23 +5868,23 @@ function conquerThatMouseBitch():void {
 function chooseYourAmilyRape():void {
 	amilySprite();
 	if(flags[170] == 0) {
-		doNext(2787);
+		doNext(rapeCorruptAmily1);
 	}
 	//2nd rape scene
 	else if(flags[170] == 1) {
-		if(player.gender == 1) doNext(2790);
-		else if(player.gender == 2) doNext(2791);
-		else if(player.gender == 3) simpleChoices("MaleFocus",2790,"FemaleFocus",2791,"",0,"",0,"",0);
+		if(player.gender == 1) doNext(rapeCorruptAmily2Male);
+		else if(player.gender == 2) doNext(rapeCorruptAmily2Female);
+		else if(player.gender == 3) simpleChoices("MaleFocus",rapeCorruptAmily2Male,"FemaleFocus",rapeCorruptAmily2Female,"",0,"",0,"",0);
 	}
 	//3nd rape scene
 	else if(flags[170] == 2) {
-		if(player.gender == 1) doNext(2792);
-		else if(player.gender == 2) doNext(2793);
-		else if(player.gender == 3) simpleChoices("MaleFocus",2792,"FemaleFocus",2793,"",0,"",0,"",0);
+		if(player.gender == 1) doNext(rapeCorruptAmily3Male);
+		else if(player.gender == 2) doNext(rapeCorruptAmily3Female);
+		else if(player.gender == 3) simpleChoices("MaleFocus",rapeCorruptAmily3Male,"FemaleFocus",rapeCorruptAmily3Female,"",0,"",0,"",0);
 	}
 	//4nd rape scene
 	else if(flags[170] == 3) {
-		doNext(2794);
+		doNext(rapeCorruptAmily4Meeting);
 	}
 }
 
@@ -5925,12 +5925,12 @@ function rapeCorruptAmily1():void {
 	//[(if herm) 
 	if(player.gender == 3) {
 		outputText("Which part of you should Amily lick?", false);
-		simpleChoices("Cock",2788,"Pussy",2789,"",0,"",0,"",0);
+		simpleChoices("Cock",rapeCorruptAmily1Male,"Pussy",rapeCorruptAmily1Female,"",0,"",0,"",0);
 	}
 	//Cocks!
-	else if(player.gender == 1) doNext(2788);
+	else if(player.gender == 1) doNext(rapeCorruptAmily1Male);
 	//Cunts!
-	else doNext(2789);
+	else doNext(rapeCorruptAmily1Female);
 }
 //[Male]
 function rapeCorruptAmily1Male():void {
@@ -6231,10 +6231,10 @@ function rapeCorruptAmily4Meeting():void {
 	if(player.gender == 3) {
 		outputText("Which part should you use to finish off the mousette?", false);
 		//[Cock] [Pussy]
-		simpleChoices("Cock",2795,"Pussy",2796,"",0,"",0,"",0);
+		simpleChoices("Cock",rapeCorruptAmily4Male,"Pussy",rapeCorruptAmily4Female,"",0,"",0,"",0);
 	}
-	else if(player.gender == 2) doNext(2796);
-	else doNext(2795);
+	else if(player.gender == 2) doNext(rapeCorruptAmily4Female);
+	else doNext(rapeCorruptAmily4Male);
 }
 
 //[Male]
@@ -6709,7 +6709,7 @@ function amilyDefurryOfferAtCamp():void
 	if (!amilyCanHaveTFNow())
 	{
 		outputText("Unfortunately, you can't do such a thing until you have acquired the necessary magical prerequisites.  In simple terms, you need a <b>golden seed</b> for a human face, a <b>black egg</b> to get rid of the fur, and some <b>purified succubus milk</b> to round things off.", true);
-		doNext(2427);
+		doNext(amilyFollowerEncounter);
 		return;
 	}
 	//EAT ZE ITEMS!
@@ -6750,7 +6750,7 @@ function amilyDefurryOfferAtCamp():void
 	flags[AMILY_NOT_FURRY] = 1;
 	flags[AMILY_OFFERED_DEFURRY] = 2;
 	amilySprite();
-	doNext(2427);
+	doNext(amilyFollowerEncounter);
 }
 //Amily/Urta Interaction
 //Must have Pure Amily as follower
@@ -6763,7 +6763,7 @@ function dateNightFirstTime():void {
 	outputText("Sitting Amily down, you ask her what she'd think about taking a \"<i>little trip</i>\" with you into town.\n\n", false);
 	if(flags[AMILY_INCUBATION] > 0) {
 		outputText("\"<i>Perhaps once I'm no longer pregnant.  I wouldn't want to hurt the little ones,</i>\" Amily answers.");
-		doNext(2427);
+		doNext(amilyFollowerEncounter);
 		return;
 	}
 	outputText("\"<i>A-A trip?</i>\" the little mouse-morph stutters, surprised at your sudden invitation.  \"<i>Well, I haven't really been out much since we, you know...</i>\" She suddenly brightens. \"<i>Yeah, why not?  Could be fun!  I've never been to Tel'Adre, though.  What's it like?</i>\" You take Amily's hand in yours and start to tell her all about the strange, faraway city as you prepare for your \"<i>date.</i>\"  When she's ready, the two of you head out toward the desert.\n\n", false);
@@ -6795,7 +6795,7 @@ function dateNightFirstTime():void {
 
 	outputText("Well, this could be interesting.  If you get both the girls drunk, it might be easy (or inevitable) for something sexual to happen.  Or, you could take Amily home right now and make sure nothing untoward happens to either of your lovers.", false);
 	//(Display Options: [Drink!] [Leave])
-	simpleChoices("Drink",3398,"",0,"",0,"",0,"Leave",3399);
+	simpleChoices("Drink",liqueurUpTheWaifus,"",0,"",0,"",0,"Leave",amilyXUrtaRunAWAY);
 }
 
 //Amily/Urta -- LEAVE
@@ -6838,9 +6838,9 @@ function liqueurUpTheWaifus():void {
 	else outputText("over the mouse's skin ", false);
 	outputText("and Amily wrapping her lithe little tail around Urta's massive endowment.  You strip off your " + player.armorName + " and, looming over the girls, decide on how you want to go about this.", false);
 	//(Display Appropriate Options: [Use Cock] [Use Vag])
-	if(player.gender == 1) simpleChoices("Use Cock",3397,"",0,"",0,"",0,"",0);
-	if(player.gender == 2) simpleChoices("",0,"Use Vagina",3396,"",0,"",0,"",0);
-	if(player.gender == 3) simpleChoices("Use Cock",3397,"Use Vagina",3396,"",0,"",0,"",0);
+	if(player.gender == 1) simpleChoices("Use Cock",threesomeAmilUrtaCAWKS,"",0,"",0,"",0,"",0);
+	if(player.gender == 2) simpleChoices("",0,"Use Vagina",urtaXAmilyCuntPussyVagSQUICK,"",0,"",0,"",0);
+	if(player.gender == 3) simpleChoices("Use Cock",threesomeAmilUrtaCAWKS,"Use Vagina",urtaXAmilyCuntPussyVagSQUICK,"",0,"",0,"",0);
 	if(player.gender == 0) simpleChoices("Nevermind",13,"",0,"",0,"",0,"",0);
 }
 
@@ -6886,7 +6886,7 @@ function threesomeAmilUrtaCAWKS():void {
 		flags[AMILY_VISITING_URTA] = 4;
 	}
 	stats(0,0,0,0,0,-2,-100,0);
-	doNext(3395);
+	doNext(urtaXAmilyAfterMurrrath);
 }
 //Urta/Amily -- [Use Vag]
 function urtaXAmilyCuntPussyVagSQUICK():void {
@@ -6918,7 +6918,7 @@ function urtaXAmilyCuntPussyVagSQUICK():void {
 		outputText("\n\n(<b>Urta unlocked in Amily's sex menu!</b>)", false);
 		flags[AMILY_VISITING_URTA] = 4;
 	}
-	doNext(3395);
+	doNext(urtaXAmilyAfterMurrrath);
 }
 //Urta/Amily -- Parting (First & Repeat)
 function urtaXAmilyAfterMurrrath():void {
@@ -7225,7 +7225,7 @@ function layEggsInAmily():void {
 	if(flags[41] > 0) outputText("  \"<i>But try to remember that I'm already carrying.  I don't want it getting too cramped in there; so make sure you don't miss, alright?</i>\"");
 	outputText("\n\nYour try to clear your mind as the pleasure starts to overwhelm you, ovipositor extending fully whilst you attempt to focus and decide how to proceed.");
 	//[Anal]
-	doNext(3948);
+	doNext(layEggsInAmilysCorruptedHole);
 }
 
 function layEggsInAmilysCorruptedHole():void {
@@ -7311,7 +7311,7 @@ function layEggsInAmilysCorruptedHole():void {
 		flags[AMILY_OVIPOSITED_COUNT] = player.eggs();
 	}
 	player.dumpEggs();
-	doNext(3949);
+	doNext(layEggsInAmilysButtPt2);
 	
 }
 
@@ -7382,7 +7382,7 @@ function amilySwimFuckIntro():void {
 		outputText("\n\nAmily saunters up and grabs your hand, leading you towards the stream while her " + amilyButt() + " sways in your direction.  Amusingly, her tail is poking through a hole in the rear triangle of her sexy black bikini bottoms.");
 	}
 	flags[AMILY_TIMES_SWIMFUCKED]++;
-	doNext(3961);
+	doNext(amilySwimFuckPartII);
 }
 
 //Go 'Swimming'

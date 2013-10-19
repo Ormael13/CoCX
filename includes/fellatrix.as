@@ -31,7 +31,7 @@ function fellatrixBarApproach():void {
 		outputText("You nod slightly, glancing back at Dominika, then shrug.", false);
 		//TO THE BAR
 		cheatTime(1);
-		doNext(2256);
+		doNext(barTelAdre);
 		return;
 	}
 	//[First encounter]
@@ -63,7 +63,7 @@ function fellatrixBarApproach():void {
 			outputText("You make your way over to Dominika's table and start up a conversation with the modestly dressed woman. You share exploits and knowledge, but can't help but feel like she's being somewhat distant. She glances out to the distance more than once, and drums her fingers on the table. You make conversation for a little while longer, but realize that it's not really going to go anywhere, and excuse yourself.", false);
 		}
 		cheatTime(1);
-		doNext(2256);
+		doNext(barTelAdre);
 		return;
 	}
 	//Second encounter]
@@ -74,13 +74,13 @@ function fellatrixBarApproach():void {
 		
 		outputText("\"<i>Although…</i>\" she seems to think about something, glancing over at you for a few seconds. After a pause, she adds \"<i>If you'd like, my place is just a few blocks down, I could... impart some knowledge on you there.</i>\"\n\n", false);
 		
-		simpleChoices("Sure",2733,"No Thanks",2732,"",0,"",0,"",0);
+		simpleChoices("Sure",acceptDominikasKnowledge,"No Thanks",turnDownDominikasKnowledge,"",0,"",0,"",0);
 		return;
 	}
 	//[Follow-up Introduction]
 	else {
 		outputText("You make your way over to Dominika's table and strike up conversation with the modestly dressed woman. Her eyes give away her smile and the two of you discuss your exploits. She doesn't attempt to hide the casual way she ogles you during the conversation, and after a brief while, she invites you back to her place.", false);
-		simpleChoices("Sure",2733,"No Thanks",2732,"",0,"",0,"",0);
+		simpleChoices("Sure",acceptDominikasKnowledge,"No Thanks",turnDownDominikasKnowledge,"",0,"",0,"",0);
 		return;
 	}
 	outputText("ERROR, ERROR, ALERT THE FENFEN!", true);
@@ -92,7 +92,7 @@ function turnDownDominikasKnowledge():void {
 	outputText("", true);
 	outputText("\"<i>Fair enough,</i>\" Dominika nods. \"<i>Let me know if you change your mind.</i>\" The two of you make small talk for a while longer, before you decide to get back to work and excuse yourself.\n\n", false);
 	cheatTime(1);
-	doNext(2256);
+	doNext(barTelAdre);
 }
 //[\"<i>Sure</i>\"]
 function acceptDominikasKnowledge():void {
@@ -205,7 +205,7 @@ function acceptDominikasKnowledge():void {
 			stats(0,0,0,2,0,0,0,0);
 		}
 	}
-	doNext(2734);
+	doNext(fellatrixSexWarmup);
 }
 //[All scenes lead to:]
 function fellatrixSexWarmup():void {
@@ -240,7 +240,7 @@ function fellatrixSexWarmup():void {
 		doNext(13);
 		return;
 	}
-	simpleChoices("Yes",2738,"No",2735,"",0,"",0,"",0);
+	simpleChoices("Yes",acceptFellatrixOral,"No",declineFellatrixOral,"",0,"",0,"",0);
 }
 
 //If \"<i>No.</i>\"]
@@ -253,7 +253,7 @@ function declineFellatrixOral():void {
 	
 		outputText("She pauses. \"<i>Or cunnilingus, I mean, I haven't looked between your legs yet. You know what this place is like.</i>\"\n\nYou suppose it might not hurt.  Do you want to receive some oral?", false);
 		stats(0,0,0,0,0,0,10,0);
-		doYesNo(2738,2736);
+		doYesNo(acceptFellatrixOral,declineFellatrixOralHARDCORE);
 	}
 	else {
 		//[Say \"<i>No</i>\" to oral AFTER having said \"<i>Yes</i>\" first encounter]
@@ -264,7 +264,7 @@ function declineFellatrixOral():void {
 		outputText("What were you thinking?  A little oral sounds great.", false);
 		
 		//(Only \"<i>Yes</i>\" is available)
-		simpleChoices("Yes",2738,"",0,"",0,"",0,"",0);
+		simpleChoices("Yes",acceptFellatrixOral,"",0,"",0,"",0,"",0);
 	}
 }
 //[If \"<i>No.</i>\" twice]
@@ -273,7 +273,7 @@ function declineFellatrixOralHARDCORE():void {
 	outputText("", true);
 	outputText("\"<i>Really?</i>\" she asks again. \"<i>But, I mean... fucking look at these!</i>\" She purses her dark lips, running her tongue over them to emphasize how they glisten in the light. \"<i>Don't tell me you don't think these would feel fucking rad on you.</i>\"\n\nIt's VERY tempting.  Maybe one little round of fellatio?", false);
 	stats(0,0,0,0,0,0,(10 + player.lib/10),0);
-	doYesNo(2738,2737);
+	doYesNo(acceptFellatrixOral,declineFellatrixOralSUPERHARDCORE);
 }	
 
 //[If \"<i>No.</i>\" three times]
@@ -286,7 +286,7 @@ function declineFellatrixOralSUPERHARDCORE():void {
 	//(Dominika does not appear again.)
 	flags[150] = -1;
 	cheatTime(1);
-	doNext(2256);
+	doNext(barTelAdre);
 }
 
 
@@ -316,7 +316,7 @@ function acceptFellatrixOral():void {
 			outputText("She takes a deep breath, turning back towards you. \"<i>I would burn this city to the ground if it would result in my freedom from this land, able to return to the spires of my home at last. But surely, as a champion of Ingnam, you understand? To see your family, your friends once again?</i>\"\n\n", false);
 		
 			outputText("She seems to be looking at you for affirmation.", false);
-			simpleChoices("Agree",2747,"Ehhh",2748,"Disagree",2749,"",0,"",0);
+			simpleChoices("Agree",agreeWithDominika,"Ehhh",ehhhhDominika,"Disagree",disagreeDominika,"",0,"",0);
 		}
 		else {
 			outputText("You arrive at Dominika's apartment and are led in to the familiar adjacent room, where the familiar slick and slurping brutality is enacted by Dominika's mouth upon you.  Those lips engulf you, devour you, caress you, and in the haze of pleasure you love every single moment.  They shine in your mind glamorized, an immaculate altar to which you can only cum, and cum, and cum, and...\n\n", false);
@@ -332,7 +332,7 @@ function acceptFellatrixOral():void {
 			outputText("The aggressiveness of her speech has had a clear effect on Dominika.  Her tattooes have a subtle fading light to them, vanishing as she regains her composure.  When she turns back to you her expression is solemn, and cold.  \"<i>I am ready to leave this city to the fate it has resigned itself to.</i>\"  The words come quietly, but hold more weight than all the dialogue you two have shared.  \"<i>But with it actively choosing to oppress me rather than fight, I cannot do it alone. You, champion – you are strong. Regardless of what this land has done to you, you fight.</i>\"\n\n", false);
 
 			outputText("She crosses the room to return to you, resting a hand on your chest.  \"<i>I want my freedom back, and I do not care anymore what I have to destroy to get it.  Help me.</i>\"", false);
-			simpleChoices("Agree",2747,"Ehhh",2748,"Disagree",2749,"",0,"",0);
+			simpleChoices("Agree",agreeWithDominika,"Ehhh",ehhhhDominika,"Disagree",disagreeDominika,"",0,"",0);
 		}
 		stats(0,0,0,0,-1,1,-100,0);
 		return;
@@ -553,7 +553,7 @@ function acceptFellatrixOral():void {
 	}
 	stats(0,0,0,0,-1,1,-100,0);
 	
-	if(timesFellatrixSucked() >= 4 && flags[175] == 0) doNext(2850);
+	if(timesFellatrixSucked() >= 4 && flags[175] == 0) doNext(dominidrama);
 	else doNext(14);
 }
 
@@ -661,7 +661,7 @@ function dominidrama():void {
 
 	outputText("\"<i>Have you heard of anyone fitting that description?</i>\"\n\n", false);
 	
-	doYesNo(2851,2852);
+	doYesNo(dominidramaYes,dominidramaNo);
 }
 
 //[Yes]
@@ -836,7 +836,7 @@ function dominikaBlowjobs():void {
 	}
 	stats(0,0,0,0,5,-15,-100,0);
 	//[Next]
-	doNext(3271);
+	doNext(dominikaBlowjobs2);
 }
 
 function dominikaBlowjobs2():void {

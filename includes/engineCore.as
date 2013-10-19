@@ -4116,6 +4116,7 @@ function simpleChoices(text1:String, butt1:*,
 						text5:String, butt5:*):void 
 {
 
+	trace("SimpleChoices");
 	choices(text1,butt1,
 			text2,butt2,
 			text3,butt3,
@@ -4131,6 +4132,7 @@ function simpleChoices(text1:String, butt1:*,
 function doYesNo(eventYes:Number, eventNo:Number):void {
 	//Make buttons 1-2 visible and hide the rest.
 
+	trace("doYesNo");
 	choices("Yes",eventYes,
 			"No",eventNo,
 			"",0,
@@ -4143,6 +4145,21 @@ function doYesNo(eventYes:Number, eventNo:Number):void {
 			"",0);
 
 }
+
+
+
+function doNext(eventNo:*):void {
+	//Prevent new events in combat from automatically overwriting a game over. 
+	if(b1Text.text.indexOf("Game Over") != -1) {
+		trace("Do next setup cancelled by game over");
+		return;
+	}
+	
+	trace("DoNext have item:", eventNo);
+	choices("Next", eventNo, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0); 
+}
+
+
 function invertGo():void{ 
 	if (blackBackground.visible == false){
 		blackBackground.visible = true;

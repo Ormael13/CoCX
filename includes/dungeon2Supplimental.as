@@ -665,7 +665,7 @@ function useVala():void {
 	}
 	//Go to pt 2
 	stats(0,0,0,0,0,0,40,0);
-	doNext(2596);
+	doNext(useValaPtII);
 	
 }
 
@@ -721,7 +721,7 @@ function freeValazLooseCoochie():void {
 	var Sex:Number = 0;
 	if(player.gender > 0) Sex = 2599;
 	//Choicez go here.  I can haz fucks?
-	simpleChoices("Fix Her",Heal,"Sex",Sex,"Reject",2601,"",0,"",0);
+	simpleChoices("Fix Her",Heal,"Sex",Sex,"Reject",rejectFuckingVala,"",0,"",0);
 }
 
 //[Heal]
@@ -737,7 +737,7 @@ function healVala():void {
 		
 		outputText("The effects of your cure are more violent than you expected. The fairy thrashes wildly, causing you to drop your bottle of Pure Honey, sending it spilling over the table, shattering the delicate equipment and ruining the unlabeled concoctions within. Moving to keep the girl from hurting herself in her seizure, you hold her head against your chest and wait out the wild bucking. Gradually, her motions slow and her breath calms to a more normal pace. When she looks back up at you, her eyes are clear at last, the pollution of lust burned away by the honey's restorative properties. She gives you a genuine smile and speaks with a voice like the rushing of wind over reeds. \"<i>Thank you. I cannot express my gratitude for what you've done. The fate you've saved me from was worse than any death these wretched creatures could have subjected me to.</i>\"", false);
 		//[Next]
-		doNext(2598);
+		doNext(healValaPartTwoTheHealingHealsOfRevenge);
 	}
 	//Pearl!
 	else {
@@ -790,7 +790,7 @@ function ValaGetsSexed():void {
 	}
 	stats(0,0,0,0,0,0,33,0);
 	//[Next]
-	doNext(2600);
+	doNext(valaGetsSexedPtDuece);
 }
 
 function valaGetsSexedPtDuece():void {
@@ -954,7 +954,7 @@ function loseToVala():void {
 		outputText("Vala forces a bottle into your throat before your defeated form has a chance to react, and you grunt with pleasure as a new gash opens between your " + player.legs() + "!", false);
 		player.createVagina();
 		player.gender = 2;
-		doNext(2611);
+		doNext(loseToValaFemale);
 	}
 }
 //Fight Loss-
@@ -970,7 +970,7 @@ function loseToValaAsHerm():void {
 
 	outputText("At least the fairy's desire lubricated the thing, you think, giving yourself small comfort before the fairy brings the wicked, two-pronged device to your " + vaginaDescript(0) + " and " + assholeDescript() + ". You tremble at how cold it is, and try to shift away, but the chains and your own weakness leave you at the girl's mercies. She slides the dildo into your holes with agonizing slowness, giggling the whole time, until the metal cockheads are fully inside you. \"<i>It is good to be a toy,</i>\" she coos. \"<i>Good toys get used every day.</i>\" With a playful kiss on your rump, she gives the spigot the tiniest of turns and you hear a gurgling surge from somewhere above you. The hose comes alive in her hands and begins to twist and writhe in the air as some horrible fluid is pumped through it, toward the iron cocks and your defenseless nethers. You clench as hard as you can, trying to expel the penetrating shafts, but the fairy seems to be getting stronger and more mad the longer this goes on. You moan and try to prepare for the worst.\n\n", false);
 	//[Next]
-	doNext(2602);
+	doNext(loseToValaAsHermPartII);
 }
 
 function loseToValaAsHermPartII():void {
@@ -984,7 +984,7 @@ function loseToValaAsHermPartII():void {
 
 	outputText("You cry out desperately, but the fairy is the only one to hear your pleas and she is lost in her own sea of brainless orgasms. You resist the swarming sensations, trying to avoid the fairy's fate, but she's got you trapped between her twitching cunt and the jizz-blasting hose. All you can think of is the over-ripe sweetness of the fairy's fluids splashing against your thighs and the jack-hammering blasts of seed flooding your blazing cunt. The fire in your gut creeps up to your " + allBreastsDescript() + " and your heart pounds with as much force as the foot of cum-fed iron inside your overflowing " + vaginaDescript(0) + ". You try to promise yourself that you won't give in, but your captor twisting on your cumming cock and the barbed dildo inside your spunk-inflated womb drive the words from your mind. The heat in your breast surges into your head and it almost feels as if the seed blasting into your birth canal has made it up to your brain. You try to think, but it's too difficult. Thinking brings terrible pain, it's so much easier to surrender. To let yourself break. You look into the enslaved fairy's empty, pink eyes one more time and whisper a prayer of thanks to your Mistress. She seems started by the title and a slow smile spreads across her heart-shaped face. Then, all thought fades and your world becomes pink.\n\n", false);
 	//[Go to Bad End 1]
-	doNext(2603);
+	doNext(badEndValaNumber1);
 }
 
 //Fight Loss-
@@ -994,10 +994,10 @@ function loseToValaAsMale():void {
 
 	outputText("You are powerless to stop the fairy as she drags you to the south wall and up to the wooden rail secured a couple of feet off the ground. \"<i>When she was still growing, Bitch was too small and tight for the masters,</i>\" your captor tells you. \"<i>They blessed her with this ladder to make us big enough. You will feel their generosity.</i>\" Gripping you under the arms, the fairy's lust-fuelled strength lifts you off the ground and flies you directly over the bristling peg ladder.\n\n", false);
 	//[Next]
-	if(player.ass.analLooseness < 2) doNext(2606);
-	else if(player.ass.analLooseness < 3) doNext(2607);
-	else if(player.ass.analLooseness < 5) doNext(2608);
-	else doNext(2609);
+	if(player.ass.analLooseness < 2) doNext(loseToValaAsMaleIITight);
+	else if(player.ass.analLooseness < 3) doNext(loseToValaMaleIILoose);
+	else if(player.ass.analLooseness < 5) doNext(loseToValaMaleIIVeryLoose);
+	else doNext(loseToValaMaleIIGape);
 }
 
 function loseToValaAsMaleIITight():void {
@@ -1009,7 +1009,7 @@ function loseToValaAsMaleIITight():void {
 	//[Player gets looser ass, and move to next level]
 	player.ass.analLooseness = 2;
 	//[Next]
-	doNext(2607);
+	doNext(loseToValaMaleIILoose);
 }
 
 function loseToValaMaleIILoose():void {
@@ -1020,7 +1020,7 @@ function loseToValaMaleIILoose():void {
 	//[Player's ass widens and go to next]
 	player.ass.analLooseness++;
 	//[Next]
-	doNext(2608);
+	doNext(loseToValaMaleIIVeryLoose);
 }
 
 //(Very loose ass)
@@ -1031,7 +1031,7 @@ function loseToValaMaleIIVeryLoose():void {
 	//[Player's ass widens and go to last]
 	player.ass.analLooseness = 5;
 	//[Next]
-	doNext(2609);
+	doNext(loseToValaMaleIIGape);
 }
 
 //(Gaping asshole)
@@ -1042,7 +1042,7 @@ function loseToValaMaleIIGape():void {
 	
 	outputText("Turning you around in her arms, the fairy lets you see the full depths of mindless depravity in her empty gaze. She strokes your " + cockDescript(0) + ", bringing it just shy of climax before mounting you, her sopping cunny softer and warmer than anything you can remember. \"<i>Silly toy,</i>\" she whispers to you. \"<i>It has nothing to give. The masters possess everything already.</i>\" She gives you a peck on the cheek and stops flapping her dragon-fly wings, letting the two of you plummet toward the monstrosity. Your world explodes into pain and your cock erupts with a mind-breaking orgasm inside the girl before your vision fails and the merciful oblivion of unconsciousness rushes over you.", false);
 	//[Go to Bad End 2]
-	doNext(2604);
+	doNext(badEndValaNumber2);
 }
 
 
@@ -1060,7 +1060,7 @@ function loseToValaFemale():void {
 	outputText("Trying to regain your composure after nearly being drowned and frozen in one go, you hardly even notice when the fairy places a big bucket in front of you. \"<i>All clean? The slut looks so pretty now. But it has to make itself presentable. The masters must enjoy your appearance and smell as much as your flesh. One warm meal for a good pet.</i>\" You curse the slave and knock the bucket over, spilling its vile contents onto the floor, seething spunk sliding down to the drain. The girl laughs, spritely voice like shattered crystal. \"<i>Bitch remembers when she was as defiant as you. If the sweet slut does not want her meal, perhaps another bath?</i>\" She slides her hand to another switch and leans on it, while licking her lips. Instead of rushing water, a curtain of white fills your eyes, nose, and mouth, a rush of seething heat pouring around you. Clawing at your face and the collar, you realize she's dumped a shower of splattering cum on you from some recessed reservoir in the ceiling. You scream and thrash, but the goo just keeps coming, burying you in a slimy shell, your defiance only allowing it to roll down your throat with hacking swallows. When you finally slump down and let it run over you, the fairy relents.", false);
 	
 	//[Next]
-	doNext(2610);
+	doNext(loseToValueFemalePtII);
 }
 
 function loseToValueFemalePtII():void {
@@ -1073,7 +1073,7 @@ function loseToValueFemalePtII():void {
 	outputText("You lift the bucket, ready to slurp up the whole pail when the fairy makes an off-handed comment. \"<i>The masters mix their love with minotaur beasts, to make it seep into your mind,</i>\" she sighs, wistfully, looking terribly envious of your position. The girl seems to regret giving you the addictive cum, her words dulled by your jizz-drunk senses. Dimly, some part of your mind wonders if the minotaurs' drug-like seed is already working, but it hardly matters anymore. You're too far gone, by now. You put the bucket in your lap and bend down, into it. Placing the tip of your nose against its lurid surface, you breathe deeply, drinking in the odor as much as savoring the moment. Then, with relish, you submerge your " + player.face() + " into the inky abyss of the spunk bucket, inhaling the sweet honey with an open mouth, air escaping your throat and bubbling up as you suck down gulp after gulp from your full-facial meal. The imp juice shower set your skin on fire, but drinking their salty discharg fills your organs with a raging inferno that drives away your memories, one by one. You gulp mouthfuls down, without even pausing to breathe. Every swallow blanks a part of your mind, first your crusade against the demons of the cave, then the friends you've met in this world, and then even your home. The liquid passion fills your mind, burying all else. Every part of your personality is replaced by the need for ejaculate and your vision turns white as, finally, you can't seem to recall your name.", false);
 	
 	//[Go to Bad End 2]
-	doNext(2604);
+	doNext(badEndValaNumber2);
 }
 
 //BAD END 1-
@@ -1104,7 +1104,7 @@ function badEndValaNumber2():void {
 
 	outputText("The large imp in front of you gives the knob on the funnel a twist and, to your horror, the sloshing flood of imp seed and fairy jizz comes washing down the winding pipe, sliding right past your undefended lips and down your penetrated gullet. Your stomach recoils at the infernal meal, but it just keeps pouring from the over-fucked fairy girl and her precariously perched offspring. As the cum washes down the hose, the silent imp uncorks a little black vial and pours it into funnel, mixing with the seething river running into your belly. You try to close your throat, to vomit, to bite through the gag, anything to keep the concoction from reaching you, but your attempts are in vain, and the sable fluid runs into your body. You shudder, mind racing for ways to escape, but your thoughts are interrupted when the apparent leader of the imps leans down and takes your chin in his hand, smiling a wicked grin of jagged, uneven teeth.", false);
 	//[Next]
-	doNext(2605);
+	doNext(badEndValaNumber2Pt2);
 }
 
 function badEndValaNumber2Pt2():void {
@@ -1136,7 +1136,7 @@ function fightValaVictory():void {
 	//[Fuck] [Leave]
 	if(player.gender > 0) {
 		outputText(" What will you do?", false);
-		simpleChoices("Fuck",2612,"",0,"",0,"",0,"Leave",5007);
+		simpleChoices("Fuck",valaFightVictoryFuck,"",0,"",0,"",0,"Leave",5007);
 	}
 	else eventParser(5007);
 	
@@ -1181,7 +1181,7 @@ function valaFightVictoryFuck():void {
 	}
 	stats(0,0,0,0,0,0,99,1);
 	//Next
-	doNext(2613);
+	doNext(valaFightVictoryFuckPtII);
 }
 
 //[Fuck]
@@ -1259,7 +1259,7 @@ function leftValaAlone():void {
 	if(player.gender > 0) Wake = 2619;
 	var shouldra:int = 0;
 	if(player.lust >= 33 && followerShouldra()) shouldra = 3669;
-	simpleChoices("Fix Her",2615,"Use",Use,"Wake",Wake,"ShouldraVala",shouldra,"Leave",1);
+	simpleChoices("Fix Her",tryToHealVala,"Use",Use,"Wake",Wake,"ShouldraVala",shouldra,"Leave",1);
 }
 
 //[Heal]
@@ -1280,7 +1280,7 @@ function tryToHealVala():void {
 		outputText("The effects of your cure are more violent than you expected. The fairy thrashes wildly, causing you to drop your bottle of Pure Honey, sending it spilling over the table, shattering the delicate equipment and ruining the unlabeled concoctions within. Moving to keep the girl from hurting herself in her seizure, you hold her head against your chest and wait out the wild bucking. Gradually, her motions slow and her breath calms to a more normal pace. When she looks back up at you, her eyes are clear at last, the pollution of lust burned away by the honey's restorative properties. She gives you a genuine smile and speaks with a voice like the rushing of wind over reeds. \"<i>Thank you,</i>\" she gasps. \"<i>Thank you. I cannot express my gratitude for what you've done. The fate you've saved me from was worse than any death those wretched creatures could have subjected me to.</i>\"", false);
 		
 		//[Next]
-		doNext(2616);
+		doNext(tryToHealValaWHoney2);
 		return;
 	}
 	//Pure Pearl
@@ -1336,7 +1336,7 @@ function useValaOHYEAHSNAPINTOASLIMJIM():void {
 	}
 	//[Next]
 	stats(0,0,0,0,0,0,80,0);
-	doNext(2618);
+	doNext(useValaOHYEAHKOOLAIDPTII);
 }
 
 function useValaOHYEAHKOOLAIDPTII():void {
@@ -1406,7 +1406,7 @@ function wakeValaUpBeforeYouGoGo():void {
 	}
 	stats(0,0,0,0,0,0,999,0);
 	//[Next]
-	doNext(2620);
+	doNext(wakeMeUpBeforeValaGoGosPtII);
 }
 
 function wakeMeUpBeforeValaGoGosPtII():void {
@@ -1515,7 +1515,7 @@ function chooseValaInBar():void {
 		if(flags[120] == 0) {
 			outputText("\n\nA thought occurs to her and she leans in, conspiratorially. \"<i>Actually, some of my sisters are visiting from the forest today. Should we spend some time with them, or do I get you all for myself?</i>\"", false);
 			//[Fairies][You][Leave]
-			simpleChoices("Faeries",2626,"You",2625,"Cum Bath",cumBath,"",0,"Leave",2256);
+			simpleChoices("Faeries",faerieOrgyFuck,"You",cleansedValaRepeatBrainFucking,"Cum Bath",cumBath,"",0,"Leave",barTelAdre);
 		}
 		else simpleChoices("You",2625,"",0,"Cum Bath",cumBath,"",0,"Leave",2256)
 		if(flags[120] == 0)
@@ -1542,7 +1542,7 @@ function cleansedFirstRemeet():void {
 
 	outputText("\"<i>I've been looking forward to this,</i>\" she whispers, flying up to steal a kiss from you, her soft, fey lips leaving a taste of pure, spring rain on the tip of your tongue. Piece by piece, she strips the clothes from your shoulders and hips, leaving warm kisses on your exposed skin with every piece she removes. When your body is laid bare before her, the pixie raises her hands to her own dress. She hesitates to expose the permanent scars the imps left on her, but sighing, she laughs and a sweet wind sweeps through the storeroom. \"<i>Silly to be bashful around you, of all people,</i>\" she chuckles, sliding out of her verdant silk, pulling pins from her bun to let long, violet tresses spill down her shoulders with a shake of her head. She bats her eyes at you over one shoulder and flashes a wry little smile. \"<i>If we can replace every hash mark on my back with one of your visits, I'll switch to backless dresses,</i>\" she teases. Flying over you, she lands her delicate legs and plump, breeder's rear in your lap, wrapping her arms around your shoulders and hugging you tightly. \"<i>So, what's on your mind, hero?</i>\"", false);
 	//[You][Leave]
-	simpleChoices("You",2623,"",0,"",0,"",0,"Leave",2256);
+	simpleChoices("You",cleansedValaFuckHerBrainsOut,"",0,"",0,"",0,"Leave",barTelAdre);
 }
 
 //[You] 
@@ -1599,7 +1599,7 @@ function cleansedValaFuckHerBrainsOut():void {
 			outputText("Vala's lips, perhaps trained to please imp cocks, are tighter on your " + nippleDescript(0) + " than you would've believed possible, suckling milk from your depths. With a breathtaking mixture of pressure and softness, she nurses your breast more efficiently than any machine, your warm milk filling her hungry maw in short order. She nurses at each breast in turn, bringing each one to frothy lactation faster than the last until your chest is heaving, your breasts jiggling, and your body clenching down in a shivering climax. Your orgasm leaves you unprepared for the fairy girl's and when her body starts quivers, her breasts flood your mouth with more milk than you can handle. Even swallowing as quickly as you can, it runs through your lips and even up your nose in two twin jets of pale alabaster that leave your wet nostrils with the lingering scent of honey wine. Sweating and still leaking milk, she rights herself and lands, cupping her breasts with one hand and stroking the paunch of her tiny stomach with the other. \"<i>Ooo… so full. I hope I was as good for you as you were for me,</i>\" she coos.", false);
 		}
 	}
-	doNext(2624);
+	doNext(cleansedValaFuckHerBrainsOutPtII);
 	stats(0,0,0,0,0,0,-100,0);
 }
 
@@ -1659,7 +1659,7 @@ function cleansedValaFuckHerBrainsOutPtII():void {
 	}
 	//[End Encounter]
 	cheatTime(1);
-	doNext(2256);
+	doNext(barTelAdre);
 }
 
 
@@ -1672,7 +1672,7 @@ function cleansedValaRepeatBrainFucking():void {
 	outputText("", true);
 	outputText("She flashes a beautiful smile and tells the bartender that she'll be taking her break early. Grabbing you by the hand, she rushes to the stockroom and sheds her dress without any trace of her former shame about her tattooed back. When you're too slow taking off your " + player.armorName + ", she helps, deft hands made all the quicker by eagerness. When the two of you are naked, she pushes you onto the well-worn stool and sits in your lap, staring into your eyes with a small smile.", false);
 	//[Next] (go to Growth scene)
-	doNext(2623);
+	doNext(cleansedValaFuckHerBrainsOut);
 }
 
 //[Fairies]
@@ -1686,10 +1686,10 @@ function faerieOrgyFuck():void {
 	//[Herm]
 	if(player.gender == 3) {
 		outputText("Vala folds her arms across her breast. \"<i>But which one should we use?</i>\" she ponders. \"<i>I wouldn't advise trying both- your mind wouldn't be able to take it. You'd end up worse than just mind-broken, you'd be a drooling shell. And I'd never do that to my hero,</i>\" she smiles and gives you a wink. \"<i>So, what would you prefer?</i>\"\n\n", false);
-		simpleChoices("Male",2627,"Female",2628,"",0,"",0,"",0);
+		simpleChoices("Male",faerieOrgyFuckMaleContinue,"Female",faerieOrgyFuckFemaleContinue,"",0,"",0,"",0);
 	}
-	else if(player.gender == 2) doNext(2628);
-	else if(player.gender == 1) doNext(2627);
+	else if(player.gender == 2) doNext(faerieOrgyFuckFemaleContinue);
+	else if(player.gender == 1) doNext(faerieOrgyFuckMaleContinue);
 }
 	
 //[Male]
@@ -1716,7 +1716,7 @@ function faerieOrgyFuckMaleContinue():void {
 	outputText("\"<i>You see?</i>\" Vala asks, holding the organic device aloft with a mischievous smile. \"<i>They don't last forever, but while they do, these little toys give us a very intimate connection to loved ones. This way, I can go all week with a reminder of you inside me.</i>\" She gives you a kiss on the lips and the fairies give you a tiny chorus of applause for the entertaining show. It's good that her little friends aren't around more often, you pant to yourself, or you'd be a drooling vegetable in no time.\n\n", false);
 	cheatTime(1);
 	stats(0,0,0,0,0,0,-100,0);
-	doNext(2256);
+	doNext(barTelAdre);
 }
 
 //[Female]
@@ -1735,7 +1735,7 @@ function faerieOrgyFuckFemaleContinue():void {
 	outputText("\"<i>You see?</i>\" Vala asks, holding the organic device aloft with a mischievous smile. \"<i>They don't last forever, but while they do, these little toys give us a very intimate connection to loved ones. This way, I can go about all week with a reminder of you inside me.</i>\" She gives you a kiss on the lips and the fairies give you a tiny chorus of applause for the entertaining show. It's good that her little friends aren't around more often, you gasp to yourself, or you'd be a drooling vegetable in no time.", false);
 	cheatTime(1);
 	stats(0,0,0,0,0,0,-100,0);
-	doNext(2256);
+	doNext(barTelAdre);
 }
 
 //ZETAZ START
@@ -1890,7 +1890,7 @@ function defeatZetaz():void {
 	outputText(", you need to find her and bring her down.  What do you do?", false);
 	outputText("\n\n(Sexually Interrogate, Kill Him, or Offer Safety for Information?)\n", false);
 	//[Sexual Interrogation] [Brutal Interrogation] [Release for Info]
-	simpleChoices("Sexual",2636,"End Him",2633,"Safety",2637,"",0,"",0);
+	simpleChoices("Sexual",sexualInterrogation,"End Him",endZetaz,"Safety",releaseZForInfo,"",0,"",0);
 }
 
 //[Release Zetaz 4 Info Win]
@@ -2084,7 +2084,7 @@ function femaleZetazOver():void {
 	//(max libido, lust, and sensitivity)
 	stats(0,0,0,0,100,100,1000,50);
 	//[NEXT]
-	doNext(2629);
+	doNext(femaleZetazOverPtII);
 }
 
 function femaleZetazOverPtII():void {
@@ -2111,7 +2111,7 @@ function femaleZetazOverPtII():void {
 	stats(0,0,0,0,0,0,-100,50);
 	
 	//[Epilogue]
-	doNext(2632);
+	doNext(zetazBadEndEpilogue);
 }
 function zetazBadEndEpilogue():void {
 	outputText("", true);
@@ -2190,7 +2190,7 @@ function hermZetazOver():void {
 	outputText("The imps start hooting and cat-calling, laughing and prodding your body with their twisted demonic members as your mind starts to come apart in the seething oven of unnatural lust.\n\n", false);
 	//NEXT
 	stats(0,0,0,0,100,100,1000,50);
-	doNext(2630);
+	doNext(hermZetazOverPtII);
 }
 
 function hermZetazOverPtII():void {
@@ -2222,7 +2222,7 @@ function hermZetazOverPtII():void {
 	
 	outputText("Your master finishes squirting inside you and withdraws, pawing at your milk-leaking teats for a moment as you continue to shudder and cum like a good bitch.  Wow, you really are a good bitch aren't you?  Pride wells in your breast as the imp's chanting reaches a crescendo and a relaxed smile forms on your " + player.face() + ".  Yes, you're a good, breeding bitch.   Master is smiling up at you and you know you've made him feel very happy.  Hopefully he'll come back soon and fuck you some more.  Your pussy feels so empty without him.", false);
 	stats(0,0,0,0,0,0,-100,50);
-	doNext(2632);
+	doNext(zetazBadEndEpilogue);
 }
 	
 //M-Males – drugged & pegged, slowly have their memories erased/brainwashed.
@@ -2255,7 +2255,7 @@ function malesZetazOver():void {
 	outputText("As soon as your orgasm concludes, another wave of aphrodisiacs enters your mouth, and you have to drink all over again.  Something warm flashes in your backside, making you feel stuffed and hot, but then Zetaz pulls his cock free and another, slightly different prick is buried in your asshole.  The imps take turns battering your backdoor, force-feeding you potions, and sometimes even jerking you off to see how much you squirt, until your mind shuts down from the constant assault of drugs, sex, and pleasure.\n\n", false);
 	
 	stats(0,0,0,0,100,100,1000,50);
-	doNext(2631);
+	doNext(malesZetazOverPtII);
 }
 
 function malesZetazOverPtII():void {
@@ -2293,7 +2293,7 @@ function malesZetazOverPtII():void {
 	outputText("Zetaz laughs and pumps at the huge button; even though it's quite lacking in femininity, it still makes you squeal like a little girl.  Your " + player.legs() + " shake wildly, trembling against the wall while your juicy snatch gets fucked good and hard and the mixed jism boils out around the imp lord's massive, swollen member.   The fucking is hard, fast, and so brutal that you get off multiple times in the span of a few minutes, though the imps don't even try to dose you for each one.  Zetaz slaps your " + assDescript() + " a few times before he pushes himself to the hilt, stretching your well-fucked cunt to its limits.  He twitches and grunts, and a blast of gooey heat suffuses your core with corrupt pleasure.  Somehow you know, just know, that you'll be pregnant from this, but you have a hard time caring.  It feels too good...\n\n", false);
 	
 	stats(0,0,0,0,100,100,1000,50);
-	doNext(2632);
+	doNext(zetazBadEndEpilogue);
 }
 
 
@@ -2403,7 +2403,7 @@ function valaCumBath():void {
 		outputText("The fairy brushes her glittering hair behind her shoulders and sits on her knees in front of you, large pink eyes staring up eagerly.");
 	}
 	//[NEXT]
-	doNext(3450);
+	doNext(valaCumBath2);
 }
 
 function valaCumBath2():void {

@@ -205,7 +205,7 @@ function fSpiderMorphGreeting():void {
 	else outputText("You go exploring in the swamp, and before you get far, a female spider-morph appears!  She's clearly different than the last one you ran into, though many of her features remain the same.  You realize she's no more than a dozen paces away and slowly approaching with a strange glint in her eye.\n\n", false);
 	//Menu for either
 	outputText("What do you do?", false);
-	simpleChoices("Fight",2984,"Try to Talk",2986,"",0,"",0,"Leave",2985);
+	simpleChoices("Fight",fightFSpiderMorph,"Try to Talk",talkToFSpiderMorph,"",0,"",0,"Leave",runFromFSpiderMorph);
 	//Incremement 'times encountered spider-girls'
 	flags[270]++;
 }
@@ -248,7 +248,7 @@ function talkToFSpiderMorph():void {
 			}
 			outputText(" well, you're the first sane person I've had a chance to ask.  Oh fuck it, can I tie you up and fuck you? Please?</i>\"\n\n", false);
 			outputText("Do you let her fuck you?", false);
-			simpleChoices("Yes",2987,"",0,"",0,"",0,"Leave",2988);
+			simpleChoices("Yes",voluntaryFemaleSpiderMorphRapesYou,"",0,"",0,"",0,"Leave",declinedCrazyFemaleSpiderMorphSexFunTimes);
 		}
 		//(OPTION 2 - GIFT) 
 		else {
