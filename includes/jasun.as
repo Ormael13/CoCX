@@ -30,8 +30,8 @@ function changingRoom():void {
 		outputText("You enter back into the largest of the changing rooms. Everything seems to be as it was the last time you poked your head in here. Everything somehow stays so clean in this particular place despite that so much sex and debauchery goes down in this city. You find it all rather refreshing, quite honestly.", false);
 	}
 	//[Look Around]
-	if(flags[181] == 0) simpleChoices("Look Around",2822,"",0,"",0,"",0,"Leave",13);
-	else simpleChoices("Jasun",2822,"",0,"",0,"",0,"Leave",13); 
+	if(flags[181] == 0) simpleChoices("Look Around",meetJasun,"",0,"",0,"",0,"Leave",13);
+	else simpleChoices("Jasun",meetJasun,"",0,"",0,"",0,"Leave",13); 
 }
 
 //AT CHANGING ROOM (SELECTING TO SEE THE SHARK OR LOOK AROUND IF FIRST TIME)
@@ -86,7 +86,7 @@ function meetJasun():void {
 			//IF YOU HAVE THE BIKINI ON
 			outputText("\"<i>And look at that, it's like you were ready for me the whole time!</i>\" He motions with one of his clawed fingers at your attire. You shamelessly pose in a proud manner and it causes him to laugh heartily. He seems unperturbed or even turned on by the fact that your swimsuit barely covers anything at all, almost like he's totally used to seeing people wear this kind of thing. You wonder what world he could possibly be from to end up the way he is. \"<i>Come, come with me. I have something to show you.</i>\" He walks up to you and pushes by you with his humongous frame. As he does, he grabs your left wrist with his right arm and all but drags you from the changing room to show you whatever he's talking about.\n\n", false);
 			//[Continue]
-			doNext(2823);
+			doNext(meetJasun2);
 			return;
 		}
 	}
@@ -119,7 +119,7 @@ function meetJasun():void {
 			return;
 		}
 		outputText("Jasun comes out of his stall and smiles when he sees you, already beginning to strain against the skimpy fabric of his bottom.  He asks, \"<i>Would you like to come swimming with me?</i>\" though his tone indicates that swimming may involve more than a few laps.", false);
-		doYesNo(2823,2824);
+		doYesNo(meetJasun2,turnAwayFromAdj);
 		return;
 	}
 	//Repeat
@@ -147,7 +147,7 @@ function meetJasun():void {
 
 		//(This is here for the same reason as before)
 		//[InVagina]
-		doNext(2826);
+		doNext(jasunSecks);
 		return;
 	}
 }
@@ -162,7 +162,7 @@ function meetJasun2():void {
 	outputText("\"<i>My name is Jasun, " + player.short + ". My people love the water, but most of them are ferocious and have lost their way. Seeing as I could no longer stay with them without risking my own life constantly, I came to Tel'Adre and set about working with the gym here to set up this wondrous pool. I spend most of my time here. Not many people get to use it, but I think you are ready.</i>\" He smiles at you without baring his teeth and you're flattered, knowing how difficult that must be for something with his jaw structure. \"<i>Come, let's swim.</i>\" He puts out his hand, palm up, literally asking for your hand for him to take you into the water.\n\n", false);
 	flags[181] = 1;
 	//[Accept] [Turn Away]
-	simpleChoices("Accept",2825,"Turn Away",2824,"",0,"",0,"",0);
+	simpleChoices("Accept",acceptJasunsAdvances,"Turn Away",turnAwayFromAdj,"",0,"",0,"",0);
 }
 
 //IF YOU TURN AWAY
@@ -186,7 +186,7 @@ function acceptJasunsAdvances():void {
 	
 	//(This is here because it'd be really cool if this wins to expand it and have anal and/or blowjob scenes)
 	//[InVagina]
-	doNext(2826);
+	doNext(jasunSecks);
 }
 
 function jasunSecks():void {

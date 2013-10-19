@@ -54,7 +54,7 @@ function approach():void {
 	if(player.gems >= 2) beer = 3525;
 	else outputText("\n\n<b>You're too poor for beer.</b>");
 	//[Talk] [Get Beer] [Leave]
-	simpleChoices("Talk",3528,"Get Beer",beer,"",0,"",0,"Leave",3529);
+	simpleChoices("Talk",talkToNiamh,"Get Beer",beer,"",0,"",0,"Leave",leaveNiamh);
 }
 
 //[Get Beer]
@@ -87,7 +87,7 @@ function getANiamhBeer():void {
 	if(player.gems >= 2) togo = 3527;
 	else outputText("\n\n<b>You're too poor to buy the mug.</b>");
 	flags[GOT_NIAMH_BEER]++;
-	simpleChoices("Here",3526,"To Go",togo,"",0,"",0,"",0);
+	simpleChoices("Here",drinkNiamhsBeerInTelAdre,"To Go",togo,"",0,"",0,"",0);
 }
 
 //[Here]
@@ -128,7 +128,7 @@ function drinkNiamhsBeerInTelAdre():void {
 			outputText("\n\n\"<i>Well lass, it looks like those big ole titties o' yours are takin' a cue from me.  Sorry 'bout that.  Musta been the beer.</i>\"  She gives your other nipple a tweak to fill a second shot glass.  \"<i>Yup, definitely the beer.  You're lactatin' some delicious booze now, jus' like me.  Dinnae worry.  Ah seen it happen before.  Usually don't last long.  But seein' as how you're leaking some good beer there, what's you say to selling some o' it?  Afterall, I can't 'ave ye givin' the stuff away fo' free while I'm chargin' for it, right?</i>\"");
 			//[SELL YOUR BOOZE]  [LEAVE]
 		}
-		simpleChoices("SellYourBooze",3954,"",0,"",0,"",0,"Leave",3953);
+		simpleChoices("SellYourBooze",sellYourBooze,"",0,"",0,"",0,"Leave",leaveWithBeerTits);
 		return;
 	}
 	outputText("You yell \"<i>Skoal!</i>\" and upend the mug into your mouth, drinking greedily.  The warmth of the booze quickly follows the liquid itself - potent stuff, this is.");
@@ -204,7 +204,7 @@ function leaveNiamh():void {
 	clearOutput();
 	outputText("You decide that you don't really want to talk to this strange cat-girl and, as politely as possible, excuse yourself.");
 	//Player returns to Wet Bitch menu
-	doNext(2256);
+	doNext(barTelAdre);
 }
 
 //Black Cat Beer
@@ -268,7 +268,7 @@ function maybeLaterNiamh():void {
 	if(player.gems >= 2) beer = 3525;
 	else outputText("\n\n<b>You're too poor for beer.</b>");
 	//[Talk] [Get Beer] [Leave]
-	simpleChoices("Talk",3528,"Get Beer",beer,"",0,"",0,"Leave",3529);
+	simpleChoices("Talk",talkToNiamh,"Get Beer",beer,"",0,"",0,"Leave",leaveNiamh);
 }
 
 //[Succubus Milk] or [Bimbo Liqueur]  
@@ -329,7 +329,7 @@ function niamhPostTelAdreMoveOut():void {
 	outputText(" fluid she's leaving behind.");
 	outputText("\n\n\"<i>Wha's yer name, by th' way?</i>\" she suddenly inquires, sobering just a bit.  You decide there's no harm in formally introducing yourself.  \"<i>[name], eh?  Weeeeeird name,</i>\" she comments.");
 	outputText("\n\n\"<i>Anywaays, wanna gulp?</i>\" she asks, her inhibitions obviously shed by the mixture of your meddling and her drunkenness.  A fair question, and one that sets you back on your heels a bit - do you want a drink of this corrupted cat-girl's new brew?");
-	simpleChoices("Yes",3536,"",0,"",0,"",0,"Leave",3535);
+	simpleChoices("Yes",niamhCorruptedMobileSnackDrinkTime,"",0,"",0,"",0,"Leave",niamhCorruptMobileSnackTurnDown);
 }
 
 //[no]  
@@ -483,7 +483,7 @@ function bazaardNiamhDrink():void {
 	else { 
 	
 	}
-	simpleChoices("Drink",3539,"Bottle",3540,"",0,"",0,"",0);
+	simpleChoices("Drink",drinkFromZeTap,"Bottle",getBimboChampFromNiamh,"",0,"",0,"",0);
 }
 //{If player drinks from the tap:}
 function drinkFromZeTap():void {
@@ -622,7 +622,7 @@ function sellYourBooze():void {
 			outputText("pre-cum drizzles down your " + multiCockDescriptLight() + " as the need to fuck a pussy grows stronger.  A few wandering hands reveals some apparent interest amongst the folks in the bar in seeing your genitals as active as your nipples.");
 		}
 		//[FUCK THE BAR] [LEAVE]
-		simpleChoices("Fuck Bar",3955,"",0,"",0,"",0,"Leave",3953);
+		simpleChoices("Fuck Bar",barBeerOrgyTits,"",0,"",0,"",0,"Leave",leaveWithBeerTits);
 	}
 }
 

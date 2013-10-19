@@ -79,7 +79,7 @@ function checkBakeryMenu():void {
 	outputText("\nWhat will you order?", false);
 	
 	menu();
-	//choices("Brownies",2832,"Cookies",2831,"Cupcakes",2833,"Doughnuts",2830,"Pound Cake",2834,"Fox Berry",3580,"SpecialEclair",minoCum,"GiantCupcake",gcupcake,"",0,"Leave",2836);
+	//choices("Brownies",2832,"Cookies",2831,"Cupcakes",2833,"Doughnuts",2830,"Pound Cake",2834,"Fox Berry",buyFoxBerry,"SpecialEclair",minoCum,"GiantCupcake",gcupcake,"",0,"Leave",bakeryuuuuuu);
 	
 	addButton(0,"Brownies",eventParser,2832);
 	addButton(1,"Cookies",eventParser,2831);
@@ -255,7 +255,7 @@ function buyFig():void {
 
 
 function talkBakeryMenu():void {
-	//choices("Brownies",2832,"Cookies",2831,"Cupcakes",2833,"Doughnuts",2830,"Pound Cake",2834,"Fox Berry",3580,"SpecialEclair",minoCum,"GiantCupcake",gcupcake,rubiT,rubiB,"Leave",2211);
+	//choices("Brownies",2832,"Cookies",2831,"Cupcakes",2833,"Doughnuts",2830,"Pound Cake",2834,"Fox Berry",buyFoxBerry,"SpecialEclair",minoCum,"GiantCupcake",gcupcake,rubiT,rubiB,"Leave",telAdreMenu);
 	clearOutput();
 	outputText("Who will you talk to?\n");
 	var rubiT:String = "Waitress";
@@ -285,7 +285,7 @@ function nomnomnom():void {
 	outputText("", true);
 	if(player.gems < flags[199]) {
 		outputText("You don't have enough gems to order that!", false);
-		//doNext(2836);
+		//doNext(bakeryuuuuuu);
 		menu();
 		addButton(0,"Next",checkBakeryMenu);
 		return;
@@ -353,7 +353,7 @@ function nomnomnom():void {
 			}
 		}
 	}
-	//doNext(2836);
+	//doNext(bakeryuuuuuu);
 	menu();
 	addButton(0,"Next",checkBakeryMenu);
 }
@@ -368,7 +368,7 @@ function buySlutCake():void {
 	outputText("", true);
 	if(player.gems < 500) {
 		outputText("You don't have enough gems for one of those!", false);
-		//doNext(2836);
+		//doNext(bakeryuuuuuu);
 		menu();
 		addButton(0,"Next",checkBakeryMenu);
 		return;

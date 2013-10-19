@@ -37,7 +37,7 @@ function initialShouldersRecruitment():void {
 	spriteSelect(67);
 	outputText("The ghost girl shows up far earlier than normal, this time around; you usually have to wait for her to make an appearance, but this time, it's as if she's seeking you.  You wait for her to say something, cast a spell, punch you in the face, anything.  She just keeps hesitating and glancing at you.  \"<i>Say,</i>\" she begins nervously, \"<i>...what would you say to us... hanging out some more?  Like, I mean... you know, me going with you.  Doing stuff and things.  That might be... nice...</i>\"");
 	outputText("\n\nIt seems like she isn't looking forward to at least one of the possible answers.  Is she asking to come along with you?  She seems to want a response.  <b>Do you want to let her tag along?</b>");
-	doYesNo(3648,3647);
+	doYesNo(recruitShouldraForCampSexyTimes,noFollowerShoulders);
 }
 //NO OF COURSE NOT THAT SHIT'S 2SCARY4ME
 function noFollowerShoulders():void {
@@ -867,7 +867,7 @@ function shouldraFollowerScreen():void {
 	}
 	var sex:int = 0;
 	if(player.lust >= 33) sex = 3673;
-	simpleChoices("Talk",3656,"Sex",sex,"",0,"Go Away",3674,"Back",74);
+	simpleChoices("Talk",shouldraTalkMenu,"Sex",sex,"",0,"Go Away",kickFollowerShouldraOut,"Back",74);
 }
 
 function shouldraSexMenu():void {
@@ -884,7 +884,7 @@ function shouldraSexMenu():void {
 		anal = 3672;
 		outputText("\n\nShouldra could also let you have a little anal fun, if you'd like.");
 	}
-	simpleChoices("GhostMasturbate",3671,"Anal Masturb",anal,"Visit Vala",vala,"",0,"Back",3665);
+	simpleChoices("GhostMasturbate",shouldraFappinTimes,"Anal Masturb",anal,"Visit Vala",vala,"",0,"Back",shouldraFollowerScreen);
 }
 
 //Talk Options
@@ -904,7 +904,7 @@ function shouldraTalkMenu():void {
 		outputText("\n\nShouldra could permanently expand or reduce part of your body.");
 	}
 	else if(flags[SHOULDRA_PLOT_LEVEL] >= 2) outputText("\n\nShouldra needs some time before she can grow or shrink one of your body parts permanently.");
-	simpleChoices("Normal Talk",3657,"Grow Something",blowShitUp,"Shrink Something",shrinkShit,"",0,"Back",3665);
+	simpleChoices("Normal Talk",shouldraYappin,"Grow Something",blowShitUp,"Shrink Something",shrinkShit,"",0,"Back",shouldraFollowerScreen);
 }
 
 //Grow Bodypart
@@ -926,7 +926,7 @@ function shouldraGroPlus():void {
 	if(player.balls > 0) balls = 3654;
 	if(player.hasCock()) cock = 3651;
 	if(player.hasVagina()) clit = 3652;
-	choices("Balls",balls,"Breasts",breast,"Clit",clit,"Cock",cock,"Nipples",nipples,"Butt",butt,"",0,"",0,"",0,"Back",3656);
+	choices("Balls",balls,"Breasts",breast,"Clit",clit,"Cock",cock,"Nipples",nipples,"Butt",butt,"",0,"",0,"",0,"Back",shouldraTalkMenu);
 }
 		
 //Balls
@@ -1067,7 +1067,7 @@ function shouldraReductoMenu():void {
 	if(player.balls > 0 && player.ballSize > 1) balls = 3659;
 	if(player.hasCock() && player.longestCockLength() > 4) cock = 3662;
 	if(player.hasVagina() && player.clitLength > .25) clit = 3661;
-	choices("Balls",balls,"Breasts",breasts,"Clit",clit,"Cock",cock,"Nipples",nipples,"Butt",butt,"",0,"",0,"",0,"Back",3656);
+	choices("Balls",balls,"Breasts",breasts,"Clit",clit,"Cock",cock,"Nipples",nipples,"Butt",butt,"",0,"",0,"",0,"Back",shouldraTalkMenu);
 }
 //Balls
 function shouldraReductosYourBallsUpInsideYa():void {
@@ -1206,7 +1206,7 @@ function kickFollowerShouldraOut():void {
 	//She Fucking Explodes
 	else {
 		outputText("Are you sure you want to ask her to leave after she opened herself up to you?  It's just a hunch, but she might not take this very well.");
-		doYesNo(3666,3656);
+		doYesNo(definitelyKickOutCrazyGhosts,shouldraTalkMenu);
 	}
 }
 
@@ -1331,7 +1331,7 @@ function nightTimeShouldraRapesThePC():void {
 		outputText("\n\nYou aren't sure why you kowtow to her little game.  Maybe it's the surge of adrenaline, the rapidly approaching water below or you're just horny after the less-than-fulfilling sex act before.  Either way, your left hand surges for your [vagina], left unnaturally open from ghostly antics earlier in the night.  You tease at your labia, play at your [clit].  It's working, but not fast enough!  With the wind smacking you hard, and your predicament making you at least a little nervous, you desperately try to think of something to-");
 		outputText("\n\nYour right hand is still five dicks strong.  With no further debate, you dive the transmogrified hand to your cooch, pinching your [clit] between your thumb and forefinger while digging the remaining three into your gaping hole.  You press the two cockheads hard against your buzzer, stiffening all your phallic fingers.  Meanwhile, your remaining three fingers plumb your depths, alternating between thrusting and rubbing.  The bizarre one-armed sex feat is blowing your mind, drawing you ever so close to climax.  Just as you're about to make liftoff, your body slams hard into the ocean.");
 	}
-	doNext(3667);
+	doNext(edwardShouldraDickHandsPartII);
 }
 
 function edwardShouldraDickHandsPartII():void {
@@ -1603,7 +1603,7 @@ function shouldraAndWormsYoureGonnaHaveABadTime():void {
 	else outputText("\n\n\"<i>Your dick's INFESTED!</i>\"  your mouth utters, lower jaw quivering in fear.  A worm pokes its head up out of your fat cock head, causing Shouldra to scream and violently pivot your hips again, desperately trying to shake more of the vermin loose.  \"<i>I... I can feel all of them... crawling around in-  How do you live like this!</i>\"  You explain to the panicked spirit to the best of your ability the allure of your dickworms - maybe you should have figured out a better name - how they aid in battle, how they help <i>after</i> battle, and many other fascinating facts one may not realize about your chummy little pals.");
 	outputText("\n\nThe two of you sit in silence for a moment, your body breathing heavily.  \"<i>What the fuck is wrong with you?</i>\"  your mouth says plainly.  More wormy escape attempts cause your pelvis to thrash about; Shouldra not only refuses to touch your blighted phallus, but is actively working to avoid its every swing. \"<i>NOPE.  NEVER.  These fuckers have GOT to GO!  There's no way in HELL I'm riding shotgun with-</i>\"  The ghost has you shout yet again, quickly jumping away from a thick strand of your jism flying back towards you.  Looks like the decision lies with you.");
 	//[Keep Worms]	[Keep Shouldra]
-	simpleChoices("Keep Shouldra",3676,"Keep Worms",3675,"",0,"",0,"",0);
+	simpleChoices("Keep Shouldra",kickOutWormiesForYourGhostPalPAL,"Keep Worms",kickOutShouldra4YoWormyBuddies,"",0,"",0,"",0);
 }
 //Keep Worms
 function kickOutShouldra4YoWormyBuddies():void {
@@ -1701,7 +1701,7 @@ function exgartuMonAndShouldraShowdown():void {
 	if(silly()) outputText("  It's a man's right to choose what's done with his body.  Not anyone else's!");
 	outputText("  You shout loud enough to get the two to at least shut up and notice you're there.  It's time to end this little battle once and for all, starting with your first - and hopefully last - involvement.");
 	//[Keep Exgartuan]	[Keep Shouldra]	[Keep Both!]
-	simpleChoices("Keep Exgartuon",3677,"Keep Shouldra",3678,"Keep Both",3681,"",0,"",0);
+	simpleChoices("Keep Exgartuon",keepExgartuanInsteadOfShouldra,"Keep Shouldra",keepShouldraAndKickOutExgartuan,"Keep Both",keepAllTheGhosts,"",0,"",0);
 }
 //Keep Exgartuan
 function keepExgartuanInsteadOfShouldra():void {
@@ -1766,7 +1766,7 @@ function keepShouldraPartIIExgartumonsUndeatH():void {
 	outputText("\n\nYou fear for the worst as your bed and sheets close in on you.");
 	flags[SHOULDRA_EXGARTUDRAMA] = 0;
 	//[next page]
-	doNext(3680);
+	doNext(keepShouldraPartIIIExgartumonsUndeatH);
 }
 function keepShouldraPartIIIExgartumonsUndeatH():void {
 	clearOutput();
@@ -1828,7 +1828,7 @@ function shouldraBakeryIntro():void {
 	if(flags[SHOULDRA_BAKERY_TIMES] == 0) outputText("You smirk, wondering how exactly a ghost manages to work up a hunger.  Your skepticism is met by an intense stabbing pain in your stomach, forcing you to buckle slightly from the cramping.  It lasts only a moment before it vanishes, however.  \"<i>You feel that, smartass?</i>\" The ghost girl sneers, \"<i>That's what decades of fasting will do to you.");
 	else outputText("You point out that she's already had something at the bakery.  \"<i>Yeah, I did.  And now I'm hungry again.  Deal with it.");
 	outputText("  Now, how about a snack?  Or two?</i>\" Her enthusiasm is clear...  and slightly worrying.");
-	simpleChoices("Continue",3684,"Bail Out",3683,"",0,"",0,"",0);
+	simpleChoices("Continue",feedShouldraACake,"Bail Out",bailOut,"",0,"",0,"",0);
 }
 
 //Bail out (you pussy)
@@ -1850,7 +1850,7 @@ function feedShouldraACake():void {
 	outputText("\n\nYou spy the pastry-woman Maddie working at the counter; seems she had to be pulled off baking duty for some reason.  As she glances around the room, your eyes meet, and she quickly looks away.  Is she...  blushing?  You didn't know she could do that.");
 	outputText("\n\nShouldra is definitely getting antsy now, and you can feel her dragging your eyes towards the menu.  A sliver of drool slides down your chin.  You sigh and let the ghost girl head towards the service counter; hopefully both your wallet and your figure will remain reasonably intact.");
 	//Maddie
-	simpleChoices("Maddie",3685,"",0,"",0,"",0,"",0);
+	simpleChoices("Maddie",shouldraAndMaddieSittingInATree,"",0,"",0,"",0,"",0);
 }
 
 function shouldraAndMaddieSittingInATree():void {
@@ -1865,7 +1865,7 @@ function shouldraAndMaddieSittingInATree():void {
 	else outputText("curvaceous");
 	outputText(" figure...");
 	//[Go along with it] [Resist]
-	simpleChoices("Go Along",3686,"Resist",3687,"",0,"",0,"",0);
+	simpleChoices("Go Along",goAlongWIthShouldrasEatingSpree,"Resist",resistBeingAFatass,"",0,"",0,"",0);
 }
 //Go along with it
 function goAlongWIthShouldrasEatingSpree():void {

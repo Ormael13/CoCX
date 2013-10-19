@@ -129,7 +129,7 @@ if __name__ == "__main__":
 	print "OMG WE'S BREAKIN STUF!!111one!"
 
 	cleanEventNumbers()
-	cleanStaleDoEventIfs()
+	#cleanStaleDoEventIfs()
 
 	#print eventS
 	#print eventS
