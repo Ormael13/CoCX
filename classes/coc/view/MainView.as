@@ -1,8 +1,29 @@
+/****
+	coc.view.MainView
+
+	Constructor takes this options object:
+		options = {
+			onNewGameClick: callback,
+			onDataClick: callback,
+			onStatsClick: callback,
+			onLevelClick: callback,
+			onPerksClick: callback,
+			onAppearanceClick: callback
+			...?
+		}
+
+	Note: likely, things are going to be access via
+		parent.globalThingHere and so on.
+		where parent is an instance of CoC.
+****/
+
 package coc.view {
 	import flash.display.MovieClip;
+	import flash.events.Event;
+	import flash.events.MouseEvent;
 	import flash.text.TextField;
 
-	public class MainView extends MovieClip {
+	public dynamic class MainView extends MovieClip {
 		private static const BOTTOM_BUTTON_COUNT :int = 10;
 		private static const BOTTOM_BUTTON_PER_ROW_COUNT :int = 5;
 
@@ -13,17 +34,52 @@ package coc.view {
 		private static const BUTTON_REAL_WIDTH :Number = 150;
 		private static const BUTTON_REAL_HEIGHT :Number = 40;
 
-		public var bottomButtons :Array; // <MovieClip>
+		public var bottomButtonTexts :Array; // <TextField>
+		public var bottomButtonBGs :Array; // <MovieClip>
+		public var toolTip :*;
+		public var statsView :*;
 
-		public function MainView() :void {
+		protected var bottomButtonSettings :Array;
+
+		protected var options :Object;
+		protected var allButtons :Array;
+
+		public function MainView( options :Object ) :void {
+			this.options = options;
+
 			super();
+
+			// Stub.  This will replace engineCore/mouseOverTextin().
+			this.toolTip = {
+				showForButton: function( ... args ) { trace( "ToolTip.showForButton: noop." ); },
+				hide: function( ... args ) { trace( "ToolTip.hide: noop." ); }
+			}
+
+			this.bottomButtonSettings = [];
+
+			this.bottomButtonTexts = [
+				b1Text, b2Text, b3Text, b4Text, b5Text,
+				b6Text, b7Text, b8Text, b9Text, b0Text // wonky.
+				];
 
 			disableMouseForMostTextFields();
 			createBottomButtons();
-		}
+
+			this.allButtons = this.bottomButtonBGs.concat([
+					newGameBG, dataBG, statsBG, levelBG, perksBG, appearanceBG
+				]);
+
+			hookTopButtons();
+			hookBottomButtons();
+			hookAllButtons();
+		};
+
+
+
+		//////// Initialization methods. /////////
 
 		// Removes the need for some code in input.as and InitializeUI.as.
-		public function disableMouseForMostTextFields() {
+		protected function disableMouseForMostTextFields() :void {
 			for( ci = 0; ci < this.numChildren; ++ci ) {
 				t = this.getChildAt( ci ) as TextField;
 
@@ -40,14 +96,17 @@ package coc.view {
 						t.mouseEnabled = false;
 				}
 			}
-		}
+		};
 
-		public function createBottomButtons() {
+		// This creates the bottom buttons,
+		// positions them,
+		// and also assigns their index to a bottomIndex property on them.
+		protected function createBottomButtons() :void {
 			var b :MovieClip, BCs :Array,
 				bi :int, r :int, c: int,
 				backgroundChildIndex :int;
 
-			this.bottomButtons = [];
+			this.bottomButtonBGs = [];
 
 			BCs = [ buttonBackground0,
 					buttonBackground1,
@@ -64,6 +123,7 @@ package coc.view {
 
 			for( bi = 0; bi < BOTTOM_BUTTON_COUNT; ++bi ) {
 				b = new (BCs[ bi ])();
+				b.bottomIndex = bi;
 
 				r = (bi / BOTTOM_BUTTON_PER_ROW_COUNT) << 0;
 				c = bi % BOTTOM_BUTTON_PER_ROW_COUNT;
@@ -73,9 +133,114 @@ package coc.view {
 				b.width = BUTTON_REAL_WIDTH;   //The button symbols are actually 135 wide
 				b.height = BUTTON_REAL_HEIGHT; //and 38 high. Not sure why the difference here.
 
-				this.bottomButtons.push( b );
+				this.bottomButtonBGs.push( b );
 				this.addChildAt( b, backgroundChildIndex + 1 );
 			}
-		}
+		};
+
+		// Top-button-specific hooks.
+		protected function hookTopButtons() :void {
+			// It is an error if any of these callbacks are undefined.
+			newGameBG.addEventListener( MouseEvent.CLICK, this.options.onNewGameClick );
+			dataBG.addEventListener( MouseEvent.CLICK, this.options.onNewGameClick );
+			statsBG.addEventListener( MouseEvent.CLICK, this.options.onStatsClick );
+			levelBG.addEventListener( MouseEvent.CLICK, this.options.onLevelClick );
+			perksBG.addEventListener( MouseEvent.CLICK, this.options.onPerksClick );
+			appearanceBG.addEventListener( MouseEvent.CLICK, this.options.onAppearanceClick );
+		};
+
+		protected function hookBottomButtons() :void {
+			var bi :MovieClip;
+
+			for each( bi in this.bottomButtonBGs ) {
+				bi.addEventListener( MouseEvent.CLICK, this.executeBottomButtonClick );
+			}
+		};
+
+		protected function hookAllButtons() {
+			var b :MovieClip;
+
+			for each( b in this.allButtons ) {
+				this.addEventListener( MouseEvent.ROLL_OVER, this.hoverButton );
+				this.addEventListener( MouseEvent.ROLL_OUT, this.dimButton );
+			}
+		};
+
+
+
+		//////// Internal view update methods ////////
+
+		protected function showBottomButton( index :int ) :void {
+			this.bottomButtonBGs[ index ].visible = true;
+		};
+
+		protected function hideBottomButton( index :int ) {
+			this.bottomButtonBGs[ index ].visible = false;
+		};
+
+
+
+		//////// Internal event handlers ////////
+
+		protected function executeBottomButtonClick( event :Event ) {
+			var b :MovieClip, bi :int, buttonSettings :*;
+
+			b = event.currentTarget;
+			bi = this.bottomButtonBGs.indexOf( b );
+
+			buttonSettings = this.bottomButtonSettings[ bi ];
+
+			if( buttonSettings && buttonSettings.callback ) {
+				if( (typeof buttonSettings.callback) == 'function' )
+					buttonSettings.callback();
+				else {
+					trace( "Non-function event:", buttonSettings.callback, " Dropping on the ground for now." );
+				}
+			}
+		};
+
+		protected function hoverButton( event :MouseEvent ) {
+			// event.currentTarget.alpha = 1;
+			this.toolTip.showForButton( event.currentTarget );
+		};
+
+		protected function dimButton( event :MouseEvent ) {
+			// event.currentTarget.alpha = 0.5; // ?
+			this.toolTip.hide();
+		};
+
+
+
+		//////// Public methods ////////
+
+		// tool tip gets passed in.  MainView will have nothing to do with storing those.
+		public function setButton( index :int, label :String = null, callback :Function = null, toolTip :* = null ) {
+			if( index < 0 || index >= BOTTOM_BUTTON_COUNT ) {
+				trace( "MainView.setButton called with out of range index:", index );
+				throw new RangeError()
+			}
+			if( callback ) {
+				this.bottomButtonSettings[ index ] = {
+					label: label,
+					callback: callback,
+					toolTip: toolTip
+				};
+
+				showBottomButton( index );
+			}
+			else {
+				this.bottomButtonSettings[ index ] = null;
+
+				hideBottomButton( index );
+			}
+		};
+
+		public function clearBottomButtons() :void {
+			var i :int;
+
+			for( i = 0; i < BOTTOM_BUTTON_COUNT; ++i ) {
+				this.setButton( i );
+			}
+		};
 	}
 }
