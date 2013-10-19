@@ -33,8 +33,8 @@ var images = new Array();
 //System time
 var date = new Date();
 
-var args:Array = new Array();
-var funcs:Array = new Array();
+//var args:Array = new Array();
+//var funcs:Array = new Array();
 var buttons:Array = new Array();
 var buttonEvents:Array = new Array();
 

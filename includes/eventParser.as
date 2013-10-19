@@ -46,7 +46,8 @@ function eventParser(eventNo:*):void {
 
 	else
 	{
-		trace("OMGWTFBBQ, what kind of object was passed?" + eventNo)
+		trace("OMGWTFBBQ, eventNo =", eventNo);
+		trace("Type of eventNo: ", flash.utils.getQualifiedClassName(eventNo));
 	}
 }
 
@@ -882,6 +883,7 @@ function doNext(eventNo:Number):void {
 	args = new Array();
 	mainText.htmlText = currentText;
 	scrollBar.update();
+	trace("DoNext have item:", eventNo);
 	simpleChoices("Next", eventNo, "", 0, "", 0, "", 0, "", 0); 
 }
 
