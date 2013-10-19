@@ -43,7 +43,7 @@ function approachIfris():void {
 	}
 	outputText("(You could go ahead and work out while she watches, ask her to join you, or leave.)", false);
 	//Work out || Ask Her To Join || Leave?
-	simpleChoices("Work Out",2846,"Join Me?",2847,"",0,"",0,"Leave",2783);
+	simpleChoices("Work Out",workOutForIfris,"Join Me?",askIfrisToJoinYou,"",0,"",0,"Leave",gymDesc);
 }
 //3a-PC responds they want to work out-
 function workOutForIfris():void {
