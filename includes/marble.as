@@ -53,7 +53,7 @@ function encounterMarbleInitially():void {
 	outputText("\"<i>My name's Marble, what's yours?</i>\" she asks you.  You introduce yourself and exchange a few pleasantries before she asks how she can help you.  You tell her that you actually came to help her, explaining that Whitney said she could use a gentle touch.  \"<i>Oh that would be nice</i>\", she says \"<i>Spending the night connected to the milking machine was a mistake, and now I need something gentle.</i>\"  How will you help her?", false);
 	outputText("\n\n(Of course, you could always turn around and resolve to avoid her from this point on, if you wanted.)");
 	//- player chooses caress, suckle, or rape
-	simpleChoices("Caress",caressMarble,"Suckle",suckleMarble,"Rape",2089,"",0,"Leave",turnOffMarbleForever);
+	simpleChoices("Caress",caressMarble,"Suckle",suckleMarble,"Rape",rapeDAHMARBLEZ,"",0,"Leave",turnOffMarbleForever);
 }
 
 function turnOffMarbleForever():void {
@@ -290,7 +290,7 @@ function resistMarbleInitially():void {
 	//- continue to the next part
 	outputText("\"<i>My name's Marble, what's yours?</i>\" she asks you.  You introduce yourself and exchange a few pleasantries before she asks how she can help you.  You tell her that you actually came to help her, explaining that Whitney said she could use a gentle touch.  \"<i>Oh that would be nice</i>\", she says \"<i>Spending the night connected to the milking machine was a mistake, and now I need something gentle.</i>\"  How will you help her?", false);
 	//- player chooses caress, suckle, or rape
-	simpleChoices("Caress",caressMarble,"Suckle",suckleMarble,"Rape",2089,"",0,"",0);
+	simpleChoices("Caress",caressMarble,"Suckle",suckleMarble,"Rape",rapeDAHMARBLEZ,"",0,"",0);
 }
 
 function marblePicksYouUpInitially():void {
