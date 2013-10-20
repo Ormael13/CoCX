@@ -1,3 +1,5 @@
+//import classes.Monster;
+//import classes.Player;
 /**
  * Global Variables used across the whole game. I hope to whittle it down slowly.
  */
@@ -26,13 +28,13 @@ var mobile:Boolean = false;
 //{ region PlayerVariables
 
 //The Player object, used everywhere
-var player:creature = new creature();
+var player:Player = new Player();
 
 //Used in perk selection, mainly eventParser, input and engineCore
 var tempPerk:String = "";
 
 //Create monster, used all over the place
-var monster:creature = new creature();
+var monster:Monster = new Monster();
 //} endregion
 
 /**
@@ -123,7 +125,7 @@ var currentText:String = "";
  */
 //{ region PlotVariables
 
- //Plot variables
+//Plot variables
 var explored:Boolean = false;
 var foundForest:Boolean = false;
 var foundDesert:Boolean = false;

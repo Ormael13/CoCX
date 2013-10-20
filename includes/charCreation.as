@@ -1,4 +1,5 @@
-﻿const CUSTOM_PC_ENABLED:int = 759;
+﻿import classes.Player;
+const CUSTOM_PC_ENABLED:int = 759;
 
 function newGameGo(e:MouseEvent):void {
 	funcs = new Array();
@@ -61,7 +62,7 @@ function newGameGo(e:MouseEvent):void {
 	//Hold onto old data for NG+
 	var oldPlayer:creature = player;
 	//Reset all standard stats
-	player = new creature();
+	player = new Player();
 	player.str = 15;
 	player.tou = 15;
 	player.spe = 15;

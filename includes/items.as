@@ -6,6 +6,7 @@ const EGGS_BOUGHT:int = 653;
 const BIKINI_ARMOR_BONUS:int = 769;
 
 function itemLongName(shortName1:String):String {
+	
 	if(shortName1 == "DryTent") return "a shriveled tentacle";
 	if(shortName1 == "IzyMilk") return "a bottle of Isabella's milk";
 	if(shortName1 == "EctoPls") return "a bottle of ectoplasm";
