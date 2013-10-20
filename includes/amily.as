@@ -132,17 +132,17 @@ function exploreAmilyVillage():void {
 function exploreVillageRuin():void {
 	outputText("", true);
 	//50% chance of ghost-girl
-	if((flags[365] == 0 && flags[254] > 0 && flags[255] > 0 && rand(10) <= 3) && !followerShouldra() && flags[SHOULDRA_FOLLOWER_STATE] != .5) {
+	if((flags[UNKNOWN_FLAG_NUMBER_00365] == 0 && flags[UNKNOWN_FLAG_NUMBER_00254] > 0 && flags[UNKNOWN_FLAG_NUMBER_00255] > 0 && rand(10) <= 3) && !followerShouldra() && flags[SHOULDRA_FOLLOWER_STATE] != .5) {
 		shouldraGreeting();
 		return;
 	}
 	//20% chance of playing with a rack
-	if(rand(5) == 0 && (flags[254] == 0 || flags[255] == 0)) {
+	if(rand(5) == 0 && (flags[UNKNOWN_FLAG_NUMBER_00254] == 0 || flags[UNKNOWN_FLAG_NUMBER_00255] == 0)) {
 		var rack:Number = 0;
 		//Already got weapon
-		if(flags[254] > 0) rack = 0;
+		if(flags[UNKNOWN_FLAG_NUMBER_00254] > 0) rack = 0;
 		//Already got armor
-		else if(flags[255] > 0) rack = 1;
+		else if(flags[UNKNOWN_FLAG_NUMBER_00255] > 0) rack = 1;
 		//Got neither - 50% of each
 		else if(rand(2) == 0) rack = 1;
 		outputText("While picking through the ruined houses and abandoned structures of this dilapidated village, you manage to find something useful!  There's an intact but empty ", false);
@@ -154,11 +154,11 @@ function exploreVillageRuin():void {
 		outputText(".  You check it over and spot an easy way to fold it up for transport.  This would be a fine addition to your camp, so you pack it up and haul it back.", false);
 		if(rack == 1) {
 			player.createKeyItem("Equipment Rack - Weapons",0,0,0,0);
-			flags[254] = 1;
+			flags[UNKNOWN_FLAG_NUMBER_00254] = 1;
 		}
 		else {
 			player.createKeyItem("Equipment Rack - Armor",0,0,0,0);
-			flags[255] = 1;
+			flags[UNKNOWN_FLAG_NUMBER_00255] = 1;
 		}
 		doNext(13);
 		return;
@@ -183,15 +183,15 @@ function exploreVillageRuin():void {
 	//CORRUPTIONZ
 	if(flags[AMILY_CORRUPT_FLIPOUT] > 0 && player.cor > 25) {
 		//Cook amily a snack if player doesnt have key item for it.
-		if(player.hasKeyItem("Potent Mixture") < 0 && flags[170] < 3) {
+		if(player.hasKeyItem("Potent Mixture") < 0 && flags[UNKNOWN_FLAG_NUMBER_00170] < 3) {
 			cookAmilyASnack();
 			return;
 		}
 		//Has snacks!
 		else {
-			if(flags[170] == 0) stalkingZeAmiliez();
-			else if(flags[170] == 1) stalkingZeAmiliez2();
-			else if(flags[170] == 2) stalkingZeAmiliez3();
+			if(flags[UNKNOWN_FLAG_NUMBER_00170] == 0) stalkingZeAmiliez();
+			else if(flags[UNKNOWN_FLAG_NUMBER_00170] == 1) stalkingZeAmiliez2();
+			else if(flags[UNKNOWN_FLAG_NUMBER_00170] == 2) stalkingZeAmiliez3();
 			else rapeCorruptAmily4Meeting();
 			return;
 		}
@@ -1427,17 +1427,17 @@ function thisFunctionProbablySucksTooOhYeahAmilyFunction():void {
 	flags[AMILY_NIPPLE_LENGTH] = .3;
 	flags[AMILY_HIP_RATING] = 6;
 	flags[AMILY_ASS_SIZE] = 6;
-	flags[172] = 1;
+	flags[UNKNOWN_FLAG_NUMBER_00172] = 1;
 	
 	flags[AMILY_CLOTHING] = "rags";
 	//if marble is there, tag it for freakout
 	if(player.hasStatusAffect("Camp Marble") >= 0) {
-		flags[85] = 1;
+		flags[UNKNOWN_FLAG_NUMBER_00085] = 1;
 	}
-	else flags[85] = 2;
+	else flags[UNKNOWN_FLAG_NUMBER_00085] = 2;
 	//if Izma is there, tag for freekout!
-	if(flags[238] == 1) {
-		flags[236] = 1;
+	if(flags[UNKNOWN_FLAG_NUMBER_00238] == 1) {
+		flags[UNKNOWN_FLAG_NUMBER_00236] = 1;
 	}
 	//Disable amily encounters in the village!
 	flags[AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 1;
@@ -2394,12 +2394,12 @@ function amilyFollowerEncounter():void {
 	amilySprite();
 	if(flags[AMILY_CLOTHING] == 0) flags[AMILY_CLOTHING] = "rags";
 	//Amily freakout
-	if(player.cor >= 50 && flags[173] == 0 && flags[AMILY_FOLLOWER] == 1) {
+	if(player.cor >= 50 && flags[UNKNOWN_FLAG_NUMBER_00173] == 0 && flags[AMILY_FOLLOWER] == 1) {
 		amilyTaintWarning();
 		return;
 	}
 	//Clear warning if PC is good!
-	if(player.cor < 50 && flags[173] > 0) flags[173] = 0;
+	if(player.cor < 50 && flags[UNKNOWN_FLAG_NUMBER_00173] > 0) flags[UNKNOWN_FLAG_NUMBER_00173] = 0;
 	//Preggo birthing!
 	if(flags[AMILY_INCUBATION] == 1 && flags[AMILY_FOLLOWER] == 2) {
 		outputText("", true);
@@ -2409,12 +2409,13 @@ function amilyFollowerEncounter():void {
 		return;
 	}	
 	//Jojo + Amily Spar
-	if(flags[AMILY_FOLLOWER] == 1 && flags[74] == 1 && flags[75] == 0 && player.hasStatusAffect("PureCampJojo") >= 0) {
+	if(flags[AMILY_FOLLOWER] == 1 && flags[UNKNOWN_FLAG_NUMBER_00074] == 1 && flags[UNKNOWN_FLAG_NUMBER_00075] == 0 && player.hasStatusAffect("PureCampJojo") >= 0) {
 		pureJojoAndAmilySpar();
 		return;
 	}
 	//Amily
-	if(flags[AMILY_FOLLOWER] == 1 && flags[77] == 1 && hasItem("PurHony",1) && flags[78] == 0 && flags[79] == 0) {
+	if(flags[AMILY_FOLLOWER] == 1 && flags[UNKNOWN_FLAG_NUMBER_00077] == 1 && hasItem("PurHony",1) && flags[UNKNOWN_FLAG_NUMBER_00078] == 0 && flags[UNKNOWN_FLAG_NUMBER_00079] == 0) 
+	{
 		fixJojoOOOOHYEEEEAHSNAPINTOASLIMJIM();
 		return;
 	}
@@ -2444,11 +2445,14 @@ function amilyFollowerEncounter():void {
 		//CORRUPT
 		else {
 			//Stage 1:
-			if(flags[AMILY_INCUBATION] > 120) outputText("You notice that Amily seems to be ill. Despite that, she seems to be happy about something. You wonder what could be going on, and decide to ask; Amily grins at you. \"<i>Oh, " + player.mf("master", "mistress") + "! You did it! You're going to be a father... I can't wait to birth many more mouse-sluts for you, " + player.mf("master", "mistress") + ".</i>\"\n\n", false);
+			if(flags[AMILY_INCUBATION] > 120) 
+				outputText("You notice that Amily seems to be ill. Despite that, she seems to be happy about something. You wonder what could be going on, and decide to ask; Amily grins at you. \"<i>Oh, " + player.mf("master", "mistress") + "! You did it! You're going to be a father... I can't wait to birth many more mouse-sluts for you, " + player.mf("master", "mistress") + ".</i>\"\n\n", false);
 			//Stage 2:
-			else if(flags[AMILY_INCUBATION] > 96) outputText("Amily's belly is starting to protrude a little. She's unquestionably pregnant.\n\n", false);
+			else if(flags[AMILY_INCUBATION] > 96) 
+				outputText("Amily's belly is starting to protrude a little. She's unquestionably pregnant.\n\n", false);
 			//Stage 3:
-			else if(flags[AMILY_INCUBATION] > 72) outputText("Amily's belly has gotten very big. She must be carrying more than one child.\n\n", false);
+			else if(flags[AMILY_INCUBATION] > 72) 
+				outputText("Amily's belly has gotten very big. She must be carrying more than one child.\n\n", false);
 			//Stage 4:
 			else if(flags[AMILY_INCUBATION] > 48) outputText("Amily's swollen stomach moves on occasion, warranting a stroke from her to urge the restless children within to come out soon.\n\n", false);
 			//Stage 5:
@@ -2461,7 +2465,7 @@ function amilyFollowerEncounter():void {
 function amilyMenu(output:Boolean = true):void {
 	var date:Number = 0;
 	//If no fight yet, have option to introduce Urta and Amily
-	if(player.gender > 0 && flags[AMILY_FOLLOWER] == 1 && flags[AMILY_VISITING_URTA] == 0 && (flags[12] >= 5 || urtaLove()) && !urtaBusy()) 
+	if(player.gender > 0 && flags[AMILY_FOLLOWER] == 1 && flags[AMILY_VISITING_URTA] == 0 && (flags[UNKNOWN_FLAG_NUMBER_00012] >= 5 || urtaLove()) && !urtaBusy()) 
 	{
 		if(output)outputText("<b>You could take Amily on a date to Tel'Adre, and perhaps even introduce her to Urta!</b>\n\n", false);
 		date = 3400;
@@ -2573,10 +2577,10 @@ function amilyAppearance():void {
 		//(If Amily has a penis:
 		if(flags[AMILY_WANG_LENGTH] > 0) {
 			outputText("She has a half-erect " + flags[AMILY_WANG_LENGTH] + "-inch penis growing from her crotch. It is surprisingly human looking, "+((flags[AMILY_NOT_FURRY]==0) ? "naked and hairless ":"")+"and pink and throbbing", false);
-			if(flags[171] == 0) outputText(" - it even has a foreskin, not a sheath.\n\n", false);
+			if(flags[UNKNOWN_FLAG_NUMBER_00171] == 0) outputText(" - it even has a foreskin, not a sheath.\n\n", false);
 			else outputText(", though it does have a" + ((flags[AMILY_NOT_FURRY]==1) ? " little sheath.":" fuzzy little sheath.") + "\n\n", false);
 		}
-		if(flags[171] > 0) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00171] > 0) {
 			outputText("She has " + amilyBalls() + " dangling ", false);
 			if(flags[AMILY_WANG_LENGTH] > 0) outputText("underneath her shaft", false);
 			else outputText("from her groin", false);
@@ -2584,10 +2588,10 @@ function amilyAppearance():void {
 		}
 		//Need to account for pussy wetness here.
 		outputText("Amily has a ", false);
-		if(flags[172] == 2) outputText("moist, ", false);
-		if(flags[172] == 3) outputText("wet, ", false);
-		if(flags[172] == 4) outputText("dripping, ", false);
-		if (flags[172] >= 5) outputText("soaked, ", false);
+		if(flags[UNKNOWN_FLAG_NUMBER_00172] == 2) outputText("moist, ", false);
+		if(flags[UNKNOWN_FLAG_NUMBER_00172] == 3) outputText("wet, ", false);
+		if(flags[UNKNOWN_FLAG_NUMBER_00172] == 4) outputText("dripping, ", false);
+		if (flags[UNKNOWN_FLAG_NUMBER_00172] >= 5) outputText("soaked, ", false);
 		// [Horsecock]
 		outputText("pink pussy in between her legs; "+stopSayingNetherlipsFuck+".", false);
 	}
@@ -2618,7 +2622,7 @@ function fuckTheMouseBitch():void {
 	var babies:Number = 0;
 	var bText:String = "";
 	//[Amily rejects sex]
-	if(flags[77] > 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00077] > 0) {
 		outputText("Amily pushes you away and says, \"<i>Not until we fix Jojo.</i>\"  You sigh and grumble.  No sex today!", false);
 		doNext(amilyFollowerEncounter);
 		return;
@@ -2642,7 +2646,7 @@ function fuckTheMouseBitch():void {
 			bText = "MakeBabies";
 			babies = 2775;
 			//Send make babies to an appropriate override
-			if(izmaFollower() && flags[AMILY_X_IZMA_POTION_3SOME] == 0 && player.hasCock() && flags[250] == 0 && flags[AMILY_INCUBATION] == 0) {
+			if(izmaFollower() && flags[AMILY_X_IZMA_POTION_3SOME] == 0 && player.hasCock() && flags[UNKNOWN_FLAG_NUMBER_00250] == 0 && flags[AMILY_INCUBATION] == 0) {
 				babies = 3989;
 			}
 		}
@@ -2654,7 +2658,7 @@ function fuckTheMouseBitch():void {
 		}
 	}
 	var urta:Number = 0;
-	if(flags[AMILY_VISITING_URTA] == 4 && flags[12] >= 0 && !urtaBusy()) urta = 3190;
+	if(flags[AMILY_VISITING_URTA] == 4 && flags[UNKNOWN_FLAG_NUMBER_00012] >= 0 && !urtaBusy()) urta = 3190;
 	var swim:int = 0;
 	if(flags[AMILY_OWNS_BIKINI] > 0 && player.hasCock() && !amilyCorrupt()) swim = 3960;
 	var threesome:int = 0;
@@ -2675,24 +2679,33 @@ function fuckTheMouseBitch():void {
 function amilyTakesChargeSex():void {
 	amilySprite();
 	outputText("", true);
-	var x:Number = player.cockThatFits(61);
-	var fuck:Number = 0;
-	var drinkMilk:Number = 0;
-	var getSucked:Number = 0;
-	var scissor:Number = 0;
-	var mountHer:Number = 0;
-	var buttFuckButtFUCKBUTTFUCK:Number = 0;
-	var catchs:Number = 0;
-	if(flags[45] > 0) catchs = 3410;
-	if(player.hasCock()) {
-		if(player.cockThatFits(50) >= 0) buttFuckButtFUCKBUTTFUCK = 3411;
+	var fuck:* = 0;
+	var drinkMilk:* = 0;
+	var getSucked:* = 0;
+	var scissor:* = 0;
+	var mountHer:* = 0;
+	var buttFuckButtFUCKBUTTFUCK:* = 0;
+	var catchs:* = 0;
+	if(flags[AMILY_WANG_LENGTH] > 0) 
+		catchs = 3410;
+	if(player.hasCock()) 
+	{
+		if(player.cockThatFits(50) >= 0) 
+			buttFuckButtFUCKBUTTFUCK = fuckPureAmilysHeiny;
 	}
-	if(flags[AMILY_WANG_LENGTH] > 0 && player.hasVagina()) mountHer = 2774;
+	if(flags[AMILY_WANG_LENGTH] > 0 && player.hasVagina()) 
+		mountHer = takeChargeAmilyMountHer;
 	if(player.hasVagina())
-	if(player.hasVagina()) scissor = 2773;
-	if(player.hasCock()) getSucked = 2772;
-	if(x != -1) fuck = 2769;
-	if(flags[AMILY_BIRTH_TOTAL] > 0 || flags[AMILY_LACTATION_RATE] >= 1) drinkMilk = 2770;
+		scissor = takeChargeAmilyScissorMeTimbers;
+	if(player.hasCock()) 
+		getSucked = takeChargeAmilyGetSucked;
+
+	if(player.cockThatFits(61) != -1) 
+		fuck = takeChargeAmilyFuck;
+
+	if(flags[AMILY_BIRTH_TOTAL] > 0 || flags[AMILY_LACTATION_RATE] >= 1) 
+		drinkMilk = takeChargeAmilyMouseMilk;
+
 	outputText("You stride up to her and take her in your arms, kissing her deeply. She melts enthusiastically into your embrace, kissing you back just as hard, her tail winding around your " + player.leg() + ". You lead her back to the nest she has made for herself and firmly but gently place her on her back there. She smiles up at you. \"<i>Ooh, taking charge, are we?</i>\" She trills with pleasure, tail waving to and fro with sincere excitement.\n\nWhat will you do?", false);
 	var scene:Number = rand(4);
 	choices("Fuck",fuck,"DrinkMilk",drinkMilk,"Eat Out",takeChargeAmilyEatOut,"GetSucked",getSucked,"Scissor",scissor,"Mount Her",mountHer,"Buttfuck",buttFuckButtFUCKBUTTFUCK,"Catch Anal",catchs,"",0,"",0);
@@ -2740,10 +2753,10 @@ function takeChargeAmilyMouseMilk():void {
 	outputText("The taste is unique, distinctly unlike anything you have ever drank before, and yet somehow so very much Amily. It is thick and creamy and piquant, putting you somewhat in mind of well-aged cheddar, warm from her body-heat and very nourishing.\n\n", false);
 
 	//(Low Amily Milk:
-	if(flags[51] < 1) outputText("You drink eagerly, suckling and nursing with all the erotic skill you can muster, and soon her breast is empty. Without further ado, you turn to the next one, and repeat the experience there. Amily moans softly, disappointed, when you drink it dry as well, and you give each nipple in turn a teasing last loving lick before withdrawing. Your mousy lover smiles at you. \"<i>I hope you enjoyed your drink.</i>\" You assure her that you did, and then you help her get dressed, having had enough fun for now.\n\n", false);
+	if(flags[AMILY_LACTATION_RATE] < 1) outputText("You drink eagerly, suckling and nursing with all the erotic skill you can muster, and soon her breast is empty. Without further ado, you turn to the next one, and repeat the experience there. Amily moans softly, disappointed, when you drink it dry as well, and you give each nipple in turn a teasing last loving lick before withdrawing. Your mousy lover smiles at you. \"<i>I hope you enjoyed your drink.</i>\" You assure her that you did, and then you help her get dressed, having had enough fun for now.\n\n", false);
 	
 	//(Moderate Amily Milk:
-	else if(flags[51] < 2) outputText("You drink eagerly, suckling and nursing with all the erotic skill you can muster, and the milk flows thick and freely. You drink and drink, and then, when her breast is empty, you feel compelled to empty the other one. By the time you're finished, you're quite relieved; you feel uncomfortably full, and your stomach gurgles softly as it strains to start digesting your liquid meal. \"<i>Well, they do say milk is good for you, but try not to overdo it, okay?</i>\" Amily teases you. You stick your tongue out at her - which prompts her to pull you into a kiss, her tongue wriggling against yours as she does her best to wring the taste of her own milk from your mouth. Eventually, you push her off... not trying too hard... and she gets dressed, walking away with a jaunty wave of her tail.\n\n", false);
+	else if(flags[AMILY_LACTATION_RATE] < 2) outputText("You drink eagerly, suckling and nursing with all the erotic skill you can muster, and the milk flows thick and freely. You drink and drink, and then, when her breast is empty, you feel compelled to empty the other one. By the time you're finished, you're quite relieved; you feel uncomfortably full, and your stomach gurgles softly as it strains to start digesting your liquid meal. \"<i>Well, they do say milk is good for you, but try not to overdo it, okay?</i>\" Amily teases you. You stick your tongue out at her - which prompts her to pull you into a kiss, her tongue wriggling against yours as she does her best to wring the taste of her own milk from your mouth. Eventually, you push her off... not trying too hard... and she gets dressed, walking away with a jaunty wave of her tail.\n\n", false);
 
 	//(High Amily Milk:
 	else {
@@ -3314,14 +3327,14 @@ function giveAmilyPurifiedSuccubusMilk():void {
 		outputText("\n\n", false);
 
 		outputText("You uncork the vial, spread Amily's pussy with a hand and pour the contents of the vial into Amily's hungry snatch. \"<i>Ah " + player.mf("master","mistress") + "! It feels so good! Just like cum,</i>\" Amily moans in pleasure. The contents quickly disappear inside Amily's womb, triggering an orgasm within the whorish mouse-slave.", false);
-		flags[172]++;
+		flags[UNKNOWN_FLAG_NUMBER_00172]++;
 		//[(if Amily reached/is a squirter)
-		if(flags[172] >= 5) outputText("  A jet of femcum flies straight out of her pussy, only to arch and hit her straight in the face.", false);
+		if(flags[UNKNOWN_FLAG_NUMBER_00172] >= 5) outputText("  A jet of femcum flies straight out of her pussy, only to arch and hit her straight in the face.", false);
 		else outputText("  Juices flood out of her pussy like water comes out of a spring, running down her body and pooling underneath her.", false);
 		outputText("\n\n", false);
 		
 		//(if Amily's wetness < 4 (squirter))
-		if(flags[172] < 5) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00172] < 5) {
 			outputText("You let go of Amily's legs and she plops down in her pooled juices. You observe her as she comes down from her afterglow and realise her pussy is now much wetter; you're tempted to make her use her newly lubed up pussy, but refrain from doing so.\n\n", false);
 			outputText("It'll be more fun to let her lust build; no doubt her pussy must be extra sensitive after this healthy dose of milk. You toss the vial away and casually stride back into the camp, leaving Amily panting on her juices.", false);
 		}
@@ -3345,7 +3358,7 @@ function amilyDrinksSuccubusDelight():void {
 	var footpaw:String = "foot";
 	if (flags[AMILY_NOT_FURRY] == 0)
 		footpaw += "paw";
-	if(flags[171] == 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00171] == 0) {
 		consumeItem("SDelite",1);
 		outputText("You tell her you need her to be able to cum more, so balls would help with that. Amily smiles and says, \"<i>Of course, " + player.mf("master","mistress") + ". Forgive your stupid mouse slut for questioning you.</i>\"\n\n", false);
 		outputText("She opens her legs so you can watch and downs the bottle in one go.", false);
@@ -3372,17 +3385,17 @@ function amilyDrinksSuccubusDelight():void {
 		else outputText("between her legs. Her skin grows expands with the lumps, forming into a small sack. It continues to expand and is finally complimented by a couple of orbs falling into her " + ((flags[AMILY_NOT_FURRY]==0) ? "fuzzy " :"") + " nutsack, giving it the weight it needs to produce cum, though how it will ever expel it is a mystery to you. ", false);
 		outputText("\"<i>Good. Now, I want you to practice walking with these. I can't have you hurting yourself as you walk about,</i>\" you tell her. \"<i>Yes, " + player.mf("master","mistress") + "</i>\,\" she replies, panting slightly; you leave her prone on the ground.", false);
 		stats(0,0,0,0,0,0,-100,0);
-		flags[171]++;
+		flags[UNKNOWN_FLAG_NUMBER_00171]++;
 	}
 	//Too much
-	else if(flags[171] >= 6) {
+	else if(flags[UNKNOWN_FLAG_NUMBER_00171] >= 6) {
 		outputText("You realize that giving Amily any more Succubi's Delight would make her practically immobile.  No, she doesn't need any more.  Maybe once you've secured a more appropriate place to keep an over-endowed harem.", false);
 	}
 	//[Give Succubus' Delight - repeat]
 	else {
 		consumeItem("SDelite",1);
 		outputText("You pick up a vial of Succubi's Delight and show it to Amily. \"<i>Drink this; you need bigger balls,</i>\" you order her, passing the bottle to her. Amily replies, \"<i>Yes, " + player.mf("master","mistress") + "</i>.\" Then she opens her legs and downs the bottle. She moans as her balls grow bigger and denser, churning with the extra cum her sack now holds.", false);
-		flags[171]++;
+		flags[UNKNOWN_FLAG_NUMBER_00171]++;
 	}
 	doNext(amilyFollowerEncounter);
 }
@@ -3395,7 +3408,7 @@ function giveCorruptAmilySuccubusDelight():void {
 	//Amily must have a dick before she can take Succubus' Delight
 	//Maximum size is cantaloupe-sized (size 6)
 	//No balls yet?  QUERY!
-	if(flags[171] == 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00171] == 0) {
 		outputText("You pick up a vial of Succubi's Delight and show it to Amily. \"<i>Drink this,</i>\" you order her, passing the bottle to her. \"<i>You're going to give me balls, " + player.mf("master","mistress") + "? Are you sure?</i>\"\n\n", false);
 		doYesNo(amilyDrinksSuccubusDelight,amilyFollowerEncounter);
 		return;
@@ -3740,7 +3753,7 @@ function amilyButt():String {
 }
 
 function amilyBalls():String {
-	if(flags[171] == 0) return "prostate";
+	if(flags[UNKNOWN_FLAG_NUMBER_00171] == 0) return "prostate";
 	var descripted:Boolean = false;
 	var rando:Number = 0;
 	var desc:String = "";
@@ -3749,17 +3762,17 @@ function amilyBalls():String {
 	if(rando == 1) desc += "two ";
 	if(rando == 2) desc += "duo of ";
 	//size!
-	if(flags[171] > 1 && rand(3) <= 1) {
-		if(flags[171] > 1 && flags[171] < 2) desc += "large ";
-		if(flags[171] >= 2 && flags[171] < 3) desc += "baseball-sized ";
-		if(flags[171] >= 3 && flags[171] < 4) desc += "apple-sized ";
-		if(flags[171] >= 4 && flags[171] < 5) desc += "grapefruit-sized ";
-		if(flags[171] >= 5 && flags[171] < 7) desc += "cantaloupe-sized ";
-		if(flags[171] >= 7 && flags[171] < 9) desc += "soccerball-sized ";
-		if(flags[171] >= 9 && flags[171] < 12) desc += "basketball-sized ";
-		if(flags[171] >= 12 && flags[171] < 15) desc += "watermelon-sized ";
-		if(flags[171] >= 15 && flags[171] < 18) desc += "beachball-sized ";
-		if(flags[171] >= 18) desc += "hideously swollen and oversized ";
+	if(flags[UNKNOWN_FLAG_NUMBER_00171] > 1 && rand(3) <= 1) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00171] > 1 && flags[UNKNOWN_FLAG_NUMBER_00171] < 2) desc += "large ";
+		if(flags[UNKNOWN_FLAG_NUMBER_00171] >= 2 && flags[UNKNOWN_FLAG_NUMBER_00171] < 3) desc += "baseball-sized ";
+		if(flags[UNKNOWN_FLAG_NUMBER_00171] >= 3 && flags[UNKNOWN_FLAG_NUMBER_00171] < 4) desc += "apple-sized ";
+		if(flags[UNKNOWN_FLAG_NUMBER_00171] >= 4 && flags[UNKNOWN_FLAG_NUMBER_00171] < 5) desc += "grapefruit-sized ";
+		if(flags[UNKNOWN_FLAG_NUMBER_00171] >= 5 && flags[UNKNOWN_FLAG_NUMBER_00171] < 7) desc += "cantaloupe-sized ";
+		if(flags[UNKNOWN_FLAG_NUMBER_00171] >= 7 && flags[UNKNOWN_FLAG_NUMBER_00171] < 9) desc += "soccerball-sized ";
+		if(flags[UNKNOWN_FLAG_NUMBER_00171] >= 9 && flags[UNKNOWN_FLAG_NUMBER_00171] < 12) desc += "basketball-sized ";
+		if(flags[UNKNOWN_FLAG_NUMBER_00171] >= 12 && flags[UNKNOWN_FLAG_NUMBER_00171] < 15) desc += "watermelon-sized ";
+		if(flags[UNKNOWN_FLAG_NUMBER_00171] >= 15 && flags[UNKNOWN_FLAG_NUMBER_00171] < 18) desc += "beachball-sized ";
+		if(flags[UNKNOWN_FLAG_NUMBER_00171] >= 18) desc += "hideously swollen and oversized ";
 	}
 	else if(flags[AMILY_NOT_FURRY] == 0) desc += "fuzzy ";
 	rando = rand(9);
@@ -4108,7 +4121,7 @@ function corruptAmilyScissorsLikeAPro():void {
 	if(flags[AMILY_WANG_LENGTH] > 0) {
 		outputText("idly stroking her " + amilyCock(), false);
 		//(if Amily has balls)
-		if(flags[171] > 0) outputText(" and " + amilyBalls() + ", which you shift to reveal her ", false);
+		if(flags[UNKNOWN_FLAG_NUMBER_00171] > 0) outputText(" and " + amilyBalls() + ", which you shift to reveal her ", false);
 		else outputText(" before dipping down to her ", false);
 	} 
 	else outputText("eyeing her ", false);
@@ -4134,7 +4147,7 @@ function corruptAmilyScissorsLikeAPro():void {
 
 	outputText("Amily moans", false);
 	//[(if Amily's a squirter)
-	if (flags[172] >= 5) outputText(" and a jet of warm juices splashes against your " + vaginaDescript(), false);
+	if (flags[UNKNOWN_FLAG_NUMBER_00172] >= 5) outputText(" and a jet of warm juices splashes against your " + vaginaDescript(), false);
 	// [Horsecock]
 	outputText("; her "+((flags[AMILY_NOT_FURRY]==0)?"claws":"feet")+" curl in pleasure and she begins panting, eager to pleasure you and enjoying being used so. Amily looks at you, awaiting your next move or command with lusty eyes; you grin and wonder how much teasing can she take before she starts begging for release. You rub Amily's little wethole with your own gently, barely touching and taking care to ensure your clit pokes hers; Amily moans in pleasure, but you can see this is not enough to get her to cum. Still you continue with your light teasing until Amily says, \"<i>Please mistress! I-I need... I can't... Ah!</i>\"\n\n", false);
 
@@ -4147,7 +4160,7 @@ function corruptAmilyScissorsLikeAPro():void {
 	// [Horsecock]
 	outputText("\"<i>Thank you so much mistress! I love to fuck! I love to be fucked! I love to be used! I love being your sextoy! I love the way your pussy feels against mine! I love you, mistress!</i>\" Amily screams as an orgasm rocks her, she presses against you with all her strength, legs wrapping themselves around you, "+((flags[AMILY_NOT_FURRY]==0)?"claws":"feet")+" curled in pleasure, eyes rolled back.", false);
 	//[(if Amily's a squirter)
-	if(flags[172] >= 5) outputText("  A veritable jet of juices shoots up, splashing against your netherlips, some of it even making it inside.", false);
+	if(flags[UNKNOWN_FLAG_NUMBER_00172] >= 5) outputText("  A veritable jet of juices shoots up, splashing against your netherlips, some of it even making it inside.", false);
 	else outputText("  Wet squeltches and splats resound around you, as the results of Amily's orgasm flood what little space remains between the two of you.", false);
 	//[(if Amily has a cock)
 	if(flags[AMILY_WANG_LENGTH] > 0) outputText(" Her " + amilyCock() + " throbs and cum splashes on her breasts and face.", false);
@@ -4196,12 +4209,12 @@ function corruptAmilysPussyGetsMotherfuckingFucked():void {
 
 	outputText("It pleases you to see how much of a eager bitch she really is. You step close and take hold of her hip, then further tease her by rubbing your shaft along her slit, slickening it with her juices.", false);
 	//[(if Amily has balls) 
-	if(flags[171] > 0) outputText("  Her balls do get in the way, but they form a nice cushion to rub your " + cockDescript(0) + " on, further stimulating you.", false);
+	if(flags[UNKNOWN_FLAG_NUMBER_00171] > 0) outputText("  Her balls do get in the way, but they form a nice cushion to rub your " + cockDescript(0) + " on, further stimulating you.", false);
 	outputText("  Amily squeals in glee and wraps her legs around your " + hipDescript() + ". She is too well-trained to use them to slam you into her crotch, but you can feel the muscles in them quivering with the urge to pull you into proper penetrative position. You smile wickedly, as much as you want to plow her depths and fuck her raw, you also want to see just how far you can go before she breaks... \"<i>" + player.mf("Master","Mistress") + "... please... why are you torturing yourself? Give yourself over to your loving mousy slut; lose yourself between my legs, let my needy cunt swallow your " + cockDescript(0) + " and milk you as only I can. No two-bit whore of a succubus will ever bring you the pleasure I will...</i>\" Amily moans pleadingly, her tail rising up to caress your " + assDescript() + ", her hands playing with her " + amilyTits() + ".\n\n", false);
 
 	outputText("\"<i>Torturing myself you say? I think you're right. Maybe I should see if ", false);
 	//[(if Jojo's corrupt)
-	if(monk >= 5 && flags[80] == 0) outputText("Jojo wants to play,", false);
+	if(monk >= 5 && flags[UNKNOWN_FLAG_NUMBER_00080] == 0) outputText("Jojo wants to play,", false);
 	//(else)
 	else outputText("I can't find someone else to play with,", false);
 	outputText("</i>\" you say, nonchalantly attempting to pull away from her. \"<i>No!</i>\" Amily screams; her legs tighten about your waist with such force that she actually lifts herself off of the ground in her eagerness to plant herself firmly against your crotch, rubbing her slavering pussy against you. \"<i>Mine! My fuck! Mine!</i>\" she squeaks indignantly. You laugh at how far you've pushed your little mouse slave.  Sliding your " + cockDescript(0) + " against her pussy, you bend down and grope her breasts roughly, drawing a desperate moan from her; slowly you get closer to her ears, then whisper, \"<i>Go ahead,</i>\" while humping against her to further excite her.\n\n", false);
@@ -4212,7 +4225,7 @@ function corruptAmilysPussyGetsMotherfuckingFucked():void {
 	}
 	else {
 		outputText("She quivers with tension; for a moment, you think she's going to kiss you in gratitude. But then, instead, she remembers her place and pushes backward, her tail awkwardly coiling around your " + cockDescript(0) + " and pulling on it to clumsily maneuver it into place. You can feel the heat emanating from her juicy cunt as the tip brushes against its lips, seconds before, with a squeal of triumph, she brutally impales herself upon you. You can't help but moan in pleasure, despite all the teasing you really needed this. Her insides are warm and wet, just the way you like it.", false);
-		if(flags[172] >= 5) outputText("  Jets of fluid wash down whatever pre escapes your rigid tool.", false);
+		if(flags[UNKNOWN_FLAG_NUMBER_00172] >= 5) outputText("  Jets of fluid wash down whatever pre escapes your rigid tool.", false);
 		outputText("  You have half a mind to brutalize the mousette then and there; yet for now you decide to let Amily have her way. She has earned this small reward for amusing you.", false);
 		outputText("\n\n", false);
 	}
@@ -4224,14 +4237,14 @@ function corruptAmilysPussyGetsMotherfuckingFucked():void {
 	//(if Amily is herm: 
 	if(flags[AMILY_WANG_LENGTH] > 0) outputText("  Her " + amilyCock() + " slices through the air like a fleshy knife, that stiff with blood and pleasure.", false);
 	//(If Amily is squirter: 
-	if(flags[172] >= 5) outputText("  Although she has yet to climax, her cunt is already bubbling and frothing madly around your " + cockDescript(0) + ", causing you to squelch and slurp loudly with each thrust in and out of her wet depths. She's like a pot of sexual fluids on the boil, just waiting to geyser forth. All she needs is a little more encouragement.", false);
+	if(flags[UNKNOWN_FLAG_NUMBER_00172] >= 5) outputText("  Although she has yet to climax, her cunt is already bubbling and frothing madly around your " + cockDescript(0) + ", causing you to squelch and slurp loudly with each thrust in and out of her wet depths. She's like a pot of sexual fluids on the boil, just waiting to geyser forth. All she needs is a little more encouragement.", false);
 	outputText("\n\n", false);
 
 	outputText("You feel it's time to end this. So with one last vicious thrust, you cause Amily to dig slightly into the floor and cum. Painting her walls all the way to her womb, you unload.  Even her cervix is unable to stop the torrent you unleash upon her.", false);
 	//[(If Amily is pregnant)
 	if(flags[AMILY_INCUBATION] > 0) outputText("  You wonder if your unborn children will appreciate their bath. Their mother certainly does.", false);
 	//(If not squirter:
-	if(flags[172] < 5) outputText("  Her fluids slop wetly over your crotch, painting between your legs with her lubricant.", false);
+	if(flags[UNKNOWN_FLAG_NUMBER_00172] < 5) outputText("  Her fluids slop wetly over your crotch, painting between your legs with her lubricant.", false);
 	//(If squirter:
 	else outputText("  A cascade of fluids pours from inside her; if you had allowed her to ride atop you, you'd be sopping with her femcum.", false);
 	//(If Amily is herm: 
@@ -4274,7 +4287,7 @@ function corruptAmilyCampBonesPCWithHerCock():void {
 
 	outputText("\"<i>Stay still, don't touch yourself and don't move.</i>\" You order Amily, she responds with an eager, \"<i>Yes " + player.mf("master","mistress") + "!</i>\" You continue looking at Amily's cock, carefully admiring your work.", false);
 	//[(if Amily has balls)
-	if(flags[171] > 0) outputText("  A pair of balls hangs under Amily's shaft; as you look, you have the slightest impression that her balls became rounder, fuller...", false);
+	if(flags[UNKNOWN_FLAG_NUMBER_00171] > 0) outputText("  A pair of balls hangs under Amily's shaft; as you look, you have the slightest impression that her balls became rounder, fuller...", false);
 	outputText("  Amily's shaft is ", false);
 	if(flags[AMILY_WANG_LENGTH] < 6) outputText("small", false);
 	else if(flags[AMILY_WANG_LENGTH] < 9) outputText("average", false);
@@ -4282,7 +4295,7 @@ function corruptAmilyCampBonesPCWithHerCock():void {
 	outputText("; you wonder how good Amily is at using it. Gently you touch her shaft, testing its girth and drawing a silent whimper from Amily; a small bead of pre begins forming on the tip as her cock throbs slightly. Smiling, you grab Amily's shaft, carefully teasing her tip with your thumb and feeling her pulse through her cock; as more blood is diverted towards her throbbing organ, Amily begins panting lightly; clearly you're exciting her more and more... You chuckle and look at Amily's eyes, daring her to disobey your orders. She looks back with resolve and adoration. You laugh mischievously, and clench your fist, gripping and releasing Amily's shaft rhythmically, drawing forth more pre while Amily gasps and her resolve and adoration melt into lust and desire.\n\n", false);
 
 	outputText("\"<i>If you even dare disobey my orders, I'll have to punish you,</i>\" you warn her, smiling as she squirms under your touch. \"<i>I-I won't " + player.mf("master","mistress") + ".</i>\" Amily answers, with more worry than determination. You can tell it wouldn't take much stimulation to make the mousette break; still it would be fun seeing her try, so you decide to take this slowly. You gently run the tip of your finger along the underside of Amily's shaft, her hips lift a bit trying to get you to touch more of her shaft. Immediately you chastise her.  \"<i>I told you not to move.</i>\" Amily flinches and forces herself to stay still; her body begins to sweat and she trembles with each stroke of your finger; pre-cum flowing steadily; her breathing grows laboured", false);
-	if(flags[171] > 0) outputText(", and her balls seeingly inflate", false);
+	if(flags[UNKNOWN_FLAG_NUMBER_00171] > 0) outputText(", and her balls seeingly inflate", false);
 	outputText(". Amily moans; she is almost on the edge of an orgasm when you suddenly stop. Amily whimpers in frustration. \"<i>M-" + player.mf("Master","Mistress") + "... Please...</i>\" she begs, panting.\n\n", false);
 
 	outputText("You smirk at her, amused. \"<i>What's wrong, Amily? You aren't going to disobey me, are you? I would so hate for you to disobey me...</i>\" You purr. Even as you speak, you stroke her shaft, gently tracing the head with the ball of your thumb, fingers dancing sensually up and down her length. \"<i>I don't want to punish you,</i>\" you tell her. \"<i>It hurts me, having to make you suffer, but it's for your own good...</i>\" You smirk and add, \"<i>By the way, you're not allowed to orgasm either.</i>\" Amily looks at you in desperation; while you watch in amusement. Amily's breathing gets a bit more regular, and you know she's no longer close to blowing. Now that is not fun at all... You blow on her cock lightly, the gentle caress of the wind and its soothing coldness shakes Amily to the core. Instantly her dick throbs, veins looking like they'll burst; her prick gets so hard, you're almost sure Amily will pop right then and there; somehow, she manages to hold back, but you can see that she is even closer now than she was earlier. You can't help the small laugh of amusement that escapes you.\n\n", false);
@@ -4298,14 +4311,14 @@ function corruptAmilyCampBonesPCWithHerCock():void {
 	//(squirter PC: 
 	if(player.wetness() >= 5) outputText(", the sounds of your fem-lube slurping and squelching as she smears it over herself and makes it splash out onto the ground beneath you", false);
 	//(if Amily has balls:
-	if(flags[171] > 0) outputText(" and the meaty smack-smack-smack of her balls slapping against your " + assDescript(), false);
+	if(flags[UNKNOWN_FLAG_NUMBER_00171] > 0) outputText(" and the meaty smack-smack-smack of her balls slapping against your " + assDescript(), false);
 	outputText(".\n\n", false);
 
 	outputText("You consider stopping Amily and smacking her for being a disobedient horny slut, but her desperate, clumsy thrusts do bring you some pleasure; besides, listening to you is beyond her capacity right now. She is truly possessed by her lust; you moan and laugh.  You find her desperation cute; how easy it was to reduce your cumbucket mouse into a mindless animal only capable of sex... oh! She hit a sweet spot!\n\n", false);
 	
 	outputText("Maybe Amily isn't totally lost in her own needs; when you react to her hitting a particular spot, she pauses, for a heartbeat, and then she picks up again, still rutting you as hard and wild as before, but now aiming specifically to hit that spot, to make this as good for you as she can, given her state. You can feel gobbets of pre-cum starting to spurt and gush into your depths - you don't think she'll last much longer. Amily's frantic thrusting slows considerably and she groans with the effort of each thrust.  ", false);
 	//[(if Amily has balls)
-	if(flags[171] > 0) outputText("The slapping of her balls on your ass reverberates around you.  ", false);
+	if(flags[UNKNOWN_FLAG_NUMBER_00171] > 0) outputText("The slapping of her balls on your ass reverberates around you.  ", false);
 	outputText("The squelching noise of a wet pussy on cock grows audibly louder, heralding the coming of a final, explosive climax.  With a nearly screaming groan, Amily explodes inside you; thrusting as deep as she can, while her mouse-spunk pools inside your womb.\n\n", false);
 
 	outputText("Amily collapses on top of you, panting and sweating; you casually say, \"<i>Is that all? First you fuck me without permission, now you would dare not finish me off?</i>\" Amily gasps and quickly extracts herself from you; she kneels and bows her head as far as it'll go while muttering a string of apologies. \"<i>Please mistress, forgive this unworthy slut. I swore to serve you and only you, yet I dared to pleasure myself instead of you.</i>\" You get up and silence her by sitting atop her and pushing her head down into the floor with one of your " + player.feet() + ". \"<i>Silence, whore, I'm thinking about what I should do with you.</i>\" You touch yourself as you think of a suitable punishment, juice and cum slowly trickling down on top of Amily. You suddenly have an idea, but first you must take care of your needs... You get up and sit on a nearby rock, spreading your legs and order Amily. \"<i>Get up, slut. First you will pleasure me, then I will punish you. Now put that " + amilyCock() + " of yours to use.</i>\"\n\n", false);
@@ -5076,7 +5089,7 @@ function amilyPopsOutKidsInCamp():void {
 		//(If Amily is herm: 
 		if(flags[AMILY_WANG_LENGTH] > 0) outputText("  She has hold of her cock with both hands and is furiously jacking herself off, spurts of cum spilling like a fountain; then spattering onto her heaving breasts, face and belly, even though her erection refuses to die away.", false);
 		//[If Amily has balls:
-		if(flags[171] > 0) outputText("  Her testicles shake and quiver, swaying in the breeze as the pussy behind them readies itself to disgorge the life crammed into her swollen stomach above.", false);
+		if(flags[UNKNOWN_FLAG_NUMBER_00171] > 0) outputText("  Her testicles shake and quiver, swaying in the breeze as the pussy behind them readies itself to disgorge the life crammed into her swollen stomach above.", false);
 		outputText("  Her eyes are rolled up in her head and her face is contorted into an expression of unholy orgasmic delight.\n\n", false);
 
 		outputText("With a lewd moan, Amily pants, \"<i>Yes, it's coming! It's coming!!</i>\" Then she loses her balance and falls onto her back, her legs spreading wide; as if she wanted the whole world to see what's about to take place. And then it begins... A gush of fluids", false);
@@ -5084,7 +5097,7 @@ function amilyPopsOutKidsInCamp():void {
 		if(flags[AMILY_WANG_LENGTH] > 0) outputText(" followed by a spurt of cum", false);
 		outputText(" signals the coming of the first mouse. The head topped with wide mousy ears appears from in-between Amily's stretched lips, its small hands follow in suit;", false);
 		//[(if Amily has balls) 
-		if(flags[171] > 0) outputText(" it grabs Amily's balls and uses them to try and pull itself out;", false);
+		if(flags[UNKNOWN_FLAG_NUMBER_00171] > 0) outputText(" it grabs Amily's balls and uses them to try and pull itself out;", false);
 		outputText(" its efforts to leave its mother's leaking canal are finally paid off when a jet of fluids slicken its lower half, making its exit easier. As soon as it's out, another mousy head starts showing; Amily moans and screams her pleasure as the process repeats itself over and over.\n\n", false);
 
 		outputText("When the last "+((flags[AMILY_NOT_FURRY]==0)?"mouse":"mouse-girl")+" is finally free of the confines of its slutty mother's cunt, they all crawl up towards their mother's breasts and each takes their turn drinking from their mother's corrupt milk. You just smile and observe; Amily's babies come in various flavours, some are girls, some are boys, and some are even both; they all share the same lewd purple "+((flags[AMILY_NOT_FURRY]==0)?"fur":"skin tone")+" of their mother; you can't help but wonder if they'll be wonderful cum-sluts like their mother. As they drink, you see the little babies grow bigger; and that's not all, you see little cocks getting bigger, balls developing, breasts expanding, pussies juicing up.  The sight fills you with joy.\n\n", false);
@@ -5211,7 +5224,7 @@ function meetAmilyAsACorruptAsshat():void {
 function cookAmilyASnack():void {
 	outputText("", true);
 	//[Cooking the drug - repeat]
-	if(flags[169] > 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00169] > 0) {
 		//After raping Amily for the first time, she is commited to the path of corruption.
 		//Used to get to stage 2 and 3 of corruption, for stage 4 PC only needs the correct amount of Corruption.
 		//Potent Mixture key-item added to inventory.
@@ -5256,7 +5269,7 @@ function cookAmilyASnack():void {
 			else consumeItem("F.Draft",1);
 			consumeItem("Gob.Ale",1);
 			player.createKeyItem("Potent Mixture",0,0,0,0);
-			flags[169]++;
+			flags[UNKNOWN_FLAG_NUMBER_00169]++;
 		}
 	}
 	//First Time
@@ -5308,7 +5321,7 @@ function cookAmilyASnack():void {
 			else consumeItem("F.Draft",1);
 			consumeItem("Gob.Ale",1);
 			player.createKeyItem("Potent Mixture",0,0,0,0);
-			flags[169]++;
+			flags[UNKNOWN_FLAG_NUMBER_00169]++;
 		}
 	}
 	stats(0,0,0,0,0,0,-100,0);
@@ -5867,23 +5880,23 @@ function conquerThatMouseBitch():void {
 
 function chooseYourAmilyRape():void {
 	amilySprite();
-	if(flags[170] == 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00170] == 0) {
 		doNext(rapeCorruptAmily1);
 	}
 	//2nd rape scene
-	else if(flags[170] == 1) {
+	else if(flags[UNKNOWN_FLAG_NUMBER_00170] == 1) {
 		if(player.gender == 1) doNext(rapeCorruptAmily2Male);
 		else if(player.gender == 2) doNext(rapeCorruptAmily2Female);
 		else if(player.gender == 3) simpleChoices("MaleFocus",rapeCorruptAmily2Male,"FemaleFocus",rapeCorruptAmily2Female,"",0,"",0,"",0);
 	}
 	//3nd rape scene
-	else if(flags[170] == 2) {
+	else if(flags[UNKNOWN_FLAG_NUMBER_00170] == 2) {
 		if(player.gender == 1) doNext(rapeCorruptAmily3Male);
 		else if(player.gender == 2) doNext(rapeCorruptAmily3Female);
 		else if(player.gender == 3) simpleChoices("MaleFocus",rapeCorruptAmily3Male,"FemaleFocus",rapeCorruptAmily3Female,"",0,"",0,"",0);
 	}
 	//4nd rape scene
-	else if(flags[170] == 3) {
+	else if(flags[UNKNOWN_FLAG_NUMBER_00170] == 3) {
 		doNext(rapeCorruptAmily4Meeting);
 	}
 }
@@ -5891,7 +5904,7 @@ function chooseYourAmilyRape():void {
 //Rape Amily 1
 function rapeCorruptAmily1():void {
 	amilySprite();
-	flags[170]++;
+	flags[UNKNOWN_FLAG_NUMBER_00170]++;
 	outputText("", true);
 	//[Raping Amily]
 	outputText("You wait for a while, idly looking at the mixture you made for Amily, until a groan draws your attention towards the bound mouse.\n\n", false);
@@ -6079,7 +6092,7 @@ function rapeCorruptAmily2Female():void {
 		
 function rapeCorruptAmily2Epilogue():void {
 	amilySprite();
-	flags[170]++;
+	flags[UNKNOWN_FLAG_NUMBER_00170]++;
 	//Both variations link into this next paragraph
 	outputText("Amily falls on her back, panting happily and licking her mouth to taste as much of you as possible. That's when you notice her beginning to change, slowly but significantly.\n\n", false);
 
@@ -6191,7 +6204,7 @@ function rapeCorruptAmily3Female():void {
 //Both variants link here
 function rapeCorruptAmily3Epilogue():void {
 	amilySprite();
-	flags[170]++;
+	flags[UNKNOWN_FLAG_NUMBER_00170]++;
 	outputText("Amily falls on her back, licking her lips and rubbing her bulging belly. Then she begins moaning as something starts changing. Her tail thrashes madly between her legs, and you watch enraptured as a spade-like tip forms on the tip of her tail. On top of her head a pair of small bumps appear, then develop into small cute demonic horns... Just like you imagined. Could it be that the true source of Amily's transformation was you, and not the mixture?\n\n", false);
 
 	outputText("You smile wickedly. It was you all along; corrupting the mousette into a slut. You turn around and start back towards your camp.\n\n", false);
@@ -6416,19 +6429,19 @@ function rapeCorruptAmily4Epilogue():void {
 	//Make babies disappear
 	flags[AMILY_INCUBATION] = 0;
 	//Set other flags if Amily is moving in for the first time
-	if(flags[173] == 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00173] == 0) {
 		flags[AMILY_CUP_SIZE] = 5;
 		flags[AMILY_NIPPLE_LENGTH] = .5;
 		flags[AMILY_HIP_RATING] = 12;
 		flags[AMILY_ASS_SIZE] = 12;
-		flags[172] = 1;
+		flags[UNKNOWN_FLAG_NUMBER_00172] = 1;
 		flags[AMILY_CLOTHING] = "sexy rags";
 	}
 	//if marble is there, tag it for freakout
 	if(player.hasStatusAffect("Camp Marble") >= 0) {
-		flags[85] = 1;
+		flags[UNKNOWN_FLAG_NUMBER_00085] = 1;
 	}
-	else flags[85] = 2;
+	else flags[UNKNOWN_FLAG_NUMBER_00085] = 2;
 	//Disable amily encounters in the village!
 	flags[AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 1;
 	doNext(13);	
@@ -6595,7 +6608,7 @@ function amilyTaintWarning():void {
 	amilySprite();
 	outputText("Amily approaches you, looking concerned.  \"<i>Darling... I don't know what's been going on, but you need to start taking better care of yourself.  I can smell the corruption taking root in you - if you don't stop, you'll soon start acting like any other demon.</i>\"\n\n", false);
 	doNext(13);
-	flags[173] = 1;
+	flags[UNKNOWN_FLAG_NUMBER_00173] = 1;
 	doNext(13);
 }
 
@@ -6639,7 +6652,7 @@ function amilyReturns():void {
 	//Move in
 	flags[AMILY_FOLLOWER] = 1;
 	//Clear 'warning'
-	flags[173] = 0;
+	flags[UNKNOWN_FLAG_NUMBER_00173] = 0;
 	//Disable village encounters
 	flags[AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 1;
 }
@@ -6789,7 +6802,7 @@ function dateNightFirstTime():void {
 	//(OLD: Urta is either too dense to catch the hint or simply ignores it. You sigh and ask Amily if it's alright if Urta joins you.
 	//outputText("\"<i>Huh? Oh yeah, ish fiiine,</i>\" Amily drawls, half-drunk. Oh, this is going to end well.)
 	outputText("The fox-girl grabs a chair from an adjacent table and brings it over, sitting reverse and leaning heavily on the back rest.  Before she can say anything more than a simple greeting, however, Amily grabs a bottle from ", false);
-	if(flags[121] == 0) outputText("a passing waitress", false);
+	if(flags[UNKNOWN_FLAG_NUMBER_00121] == 0) outputText("a passing waitress", false);
 	else outputText("a rather alarmed Vala as she flutters by", false);
 	outputText(". \"<i>Herr, ish gud,</i>\" Amily slurs, pawing off the bottle to a surprised Urta.\n\n", false);
 
@@ -6870,7 +6883,7 @@ function threesomeAmilUrtaCAWKS():void {
 
 	outputText("Urta is close to orgasm, and now under a twin-dick assault, Amily won't last much longer either.  Urta lets out a harsh growl and, grabbing Amily's hips, thrusts until her balls slap the bottom of your " + cockDescript(x) + ".  You feel the force of her orgasm, the sudden heat inside Amily's fuckhole spreading right to your cock as Urta's foxy spunk starts spewing back out of Amily's twat.  You follow her example, plunging yourself as far into the mouse-girl as you can and cum, shooting your load straight up her ass until her tight, velvety walls are running white with your spooge.  Overwhelmed by the two jets shooting into her at once, Amily rolls her head back and screams, clamping down hard on the cocks inside her", false);
 	//if Futamily: 
-	if(flags[45] > 0) outputText(" as her cock orgasms, too, spurting a nice, thick trail of mousecum all over Urta's face and tits", false);
+	if(flags[AMILY_WANG_LENGTH] > 0) outputText(" as her cock orgasms, too, spurting a nice, thick trail of mousecum all over Urta's face and tits", false);
 	outputText(".\n\n", false);
 
 	outputText("Now thoroughly filled with cum, Amily slides off your dick and Urta's, falling face-first between the fox-girl's soft tits.  Urta, covered in thick white cum, only laughs and wraps her arms around Amily, hugging her new fuckbuddy tight.  With a smile, you crawl into bed beside them, locking both girls in a tight embrace.\n\n", false);
@@ -6967,7 +6980,7 @@ function pureAmilyPutsItInYourRectumDamnNearKilledEm():void {
 	outputText("  The ointment does its job admirably, allowing Amily to penetrate you fully with no pain whatsoever", false);
 	if(player.analCapacity() > 60) outputText(", though you are sure you could easily handle her without it", false);
 	outputText(".  Slowly, she begins to rock her hips back and forth, placing her hands on your " + hipDescript() + " for support.", false);
-	buttChange(flags[45] * flags[46], true, true, false);
+	buttChange(flags[AMILY_WANG_LENGTH] * flags[AMILY_WANG_GIRTH], true, true, false);
 	outputText("\n\n", false);
 
 	if(flags[AMILY_TIMES_BUTTFUCKED_PC] == 0) outputText("\"<i>Is this okay? Ah... it feels... really good...</i>\" she says with a low moan, to which you reply with a pleasure-filled groan of your own.\n\n", false);
@@ -7016,7 +7029,7 @@ function fuckPureAmilysHeiny():void {
 	var x:Number = player.cockThatFits(50);
 	if(x < 0) x = 0;
 	outputText("You pause and flash her a coy smirk, then you gently place the tip of a finger on her nose, slowly running it down along her body, over her lip, between her breasts, across her stomach, finally stopping to firmly grip her " + amilyButt() + ".", false);
-	if(flags[45] > 0) outputText("  Her pants tent from arousal as her male organ reacts to your sensual touching, and you start to teasingly stroke it as well.", false);
+	if(flags[AMILY_WANG_LENGTH] > 0) outputText("  Her pants tent from arousal as her male organ reacts to your sensual touching, and you start to teasingly stroke it as well.", false);
 	outputText("\n\n", false);
 	
 	//(First Time):
@@ -7053,7 +7066,7 @@ function fuckPureAmilysHeiny():void {
 	//Merge):
 	outputText("As she touches the cool salve to your shaft, you let out a small shiver.  Her hands work delicately, spreading a thin layer across your entire length, until your " + cockDescript(x) + " glistens with a glossy, greenish sheen.\n\n", false);
 
-	outputText("She wipes her hand off on a discreet corner of her " + flags[52] + " and begins to shimmy out of them.", false);
+	outputText("She wipes her hand off on a discreet corner of her " + flags[AMILY_CLOTHING] + " and begins to shimmy out of them.", false);
 	if(flags[TIMES_FUCKED_AMILYBUTT] == 0) outputText("  \"<i>I'm... not really sure how this goes... I guess... like this?</i>\"", false);
 	outputText("  Turning around, she lowers herself onto the ground carefully, her whiplike tail raising out of the way as she slides onto her knees and elbows.\n\n", false);
 
@@ -7077,7 +7090,7 @@ function fuckPureAmilysHeiny():void {
 	else if(player.cumQ() <= 500) outputText(" the swell of your orgasm pushing past her sphincter as you unload a thick deluge into her back door", false);
 	else outputText(" the volume of your virile jism filling her innards with warmth as she begins to gain a slight bulge in her abdomen", false);
 	outputText(".  Being stimulated in such a way is not enough to give Amily a complete release, but the sensation of your warm cum filling her rear is enough to make ", false);
-	if(flags[45] > 0) outputText("her own member twitch and dribble a small puddle of clear pre-cum onto the ground below her, joining with ", false);
+	if(flags[AMILY_WANG_LENGTH] > 0) outputText("her own member twitch and dribble a small puddle of clear pre-cum onto the ground below her, joining with ", false);
 	outputText("a noticeable trail of juices gradually sliding down her thighs.\n\n", false);
 
 	outputText("You very carefully pull back, Amily drawing a sharp intake of breath when you are fully freed from the grips of her pucker.  Gently sliding down alongside her, you draw her into a warm embrace, cuddling with her for a long while afterward", false);
@@ -7199,7 +7212,7 @@ function amilyEggStuff():void {
 	outputText(" you gently take her hand and ask if she can help you out, explaining that you're not sure whether you can take care of it yourself and going out exploring in such a state could end badly.  Seeing her brow wrinkle as you explain, you add that she probably has more experience with this sort of thing than you do.");
 	outputText("\n\n\"<i>Damnit, [name].  You know that this isn't what I meant when I asked to have children with you, right?</i>\"  Despite her begrudging tone, her tail flits back and forth excitedly ");
 	//if amily = herm 
-	if(flags[45] > 0) outputText("and you notice a growing bulge in her trousers");
+	if(flags[AMILY_WANG_LENGTH] > 0) outputText("and you notice a growing bulge in her trousers");
 	outputText(".  Looks like you aren't entirely twisting her arm to get her to go along with this.  \"<i>Fine, I'll help lighten that load you've got, just...  don't expect me to help out as much around camp if I'm full of eggs.</i>\"");
 	
 	outputText("\n\nBefore she can move away you quickly wrap your arms around her, pulling the mousegirl into a deep kiss.  She grabs you around the neck, pressing her body against you as your tongues wrestle.  Amily coos slightly as you rub her back and you break the kiss, whispering your thanks for being such an accommodating lover.  She gives you a final peck before heading back to her bedding, a small smile on her face.");
@@ -7222,7 +7235,7 @@ function layEggsInAmily():void {
 	outputText("\n\n\"<i>I suppose I could be persuaded, you <b>do</b> look like you need a little attention...</i>\"  You feel a hand slipping down into your [armor] as she cranes her neck, moaning quietly as her searching fingers find their way to your [if (hasCock = true) \"stiffening shaft\"][if (isHerm = true) \" and \"][if (hasVagina = true) \"slick snatch\"]");
 	if(player.gender == 0) outputText("blank groin");
 	outputText(", teasing you into unconsciously humping against her slender digits.");
-	if(flags[41] > 0) outputText("  \"<i>But try to remember that I'm already carrying.  I don't want it getting too cramped in there; so make sure you don't miss, alright?</i>\"");
+	if(flags[AMILY_INCUBATION] > 0) outputText("  \"<i>But try to remember that I'm already carrying.  I don't want it getting too cramped in there; so make sure you don't miss, alright?</i>\"");
 	outputText("\n\nYour try to clear your mind as the pleasure starts to overwhelm you, ovipositor extending fully whilst you attempt to focus and decide how to proceed.");
 	//[Anal]
 	doNext(layEggsInAmilysCorruptedHole);
@@ -7236,10 +7249,10 @@ function layEggsInAmilysCorruptedHole():void {
 	outputText(", your bulging ovipositor fully emerging at the same time.");
 	
 	outputText("\n\n\"<i>Looks like someone's excited; you must really enjoy the idea of filling me with eggs.</i>\"  Amily's voice is playful as her fingers trace over your lower stomach, clouding your mind with bliss as she avoids caressing your needy nethers.  However, as you finally strip her leggings it quickly becomes clear that she's as ready as you are, the sight of her flushed labia glistening with a wet sheen");
-	if(flags[45] > 0) outputText(" and her erect shaft shuddering as it throbs in the air");
+	if(flags[AMILY_WANG_LENGTH] > 0) outputText(" and her erect shaft shuddering as it throbs in the air");
 	outputText(" telling you everything.  You ask her if she's sure she isn't projecting just a little, the mousegirl blushing furiously as she sheepishly nods, a demure smile spreading across her face.");
 	outputText("\n\nWith her reddened lips ");
-	if(flags[45] > 0) outputText("and stiff cock ");
+	if(flags[AMILY_WANG_LENGTH] > 0) outputText("and stiff cock ");
 	outputText("exposed Amily positions herself below your hips, settling gently on your thighs with her firm cheeks resting on your egg-filled abdomen.  You gasp as her tail flits across the sensitive surface, before it gently wraps around your slick, aching ovipositor.  She smirks at you as the pressure on your shaft increases, turning your gasp into a long, drawn out moan that leaves you thrusting uselessly into the air, your body shuddering with ecstasy.");
 	outputText("\n\nYou grip her by the waist, holding her in place as you try to position your insectile half.  Amily moans as your ovipositor brushes between her cheeks in search of an entrance, her lower body jolting forwards in response to the unexpected contact.  Her hot sex presses wetly against ");
 	if(player.gender > 0) outputText("yours");
@@ -7249,11 +7262,11 @@ function layEggsInAmilysCorruptedHole():void {
 	//(Males/Herms) 
 	if(player.hasCock()) {
 		outputText("Unable to hold yourself back, you grab her hips and raise them up, desperate to feel yourself buried as deeply into her as possible.  She groans as your [cockHead] grazes along her dripping entrance, running a hand down her body to position you.  Your breath catches in your throat when her hand clutches your member, turning into a ragged moan as she rocks her hips against you, pressing your tip against her to slowly spread her lips.  You can only pant whilst your body is wracked with pleasure, clenching your teeth to try and stop yourself from crying out as Amily soaks your length with arousal");
-		if(flags[45] > 0) outputText(", her shaft oozing thick globs of pre-cum that that roll down her cock to smear against your own as she moves against you");
+		if(flags[AMILY_WANG_LENGTH] > 0) outputText(", her shaft oozing thick globs of pre-cum that that roll down her cock to smear against your own as she moves against you");
 		outputText(".");
 	}
 	//(Females + AmilyUndicked)
-	else if(player.hasVagina() && flags[45] == 0) {
+	else if(player.hasVagina() && flags[AMILY_WANG_LENGTH] == 0) {
 		outputText("Her soaked pussy keeps pressing against yours, smearing both of you with femcum as you both shiver with delight.  Your ovipositor twitches wildly as you scrabble in the dirt, moaning incoherently with each thrust Amily makes against your lust-crazed frame.  Her hard little clit slips between your lips suddenly, sliding up your slit until it flicks against your own hard button, leaving both of you shuddering at the overwhelming sensation.");
 	}
 	//(Females + AmilyHerm)
@@ -7263,7 +7276,7 @@ function layEggsInAmilysCorruptedHole():void {
 	//{(Genderless) 
 	else {
 		outputText("She moans as your shaft rubs against her, her own thrusts against your blank groin increasing in pace every time your overly sensitive pseudo-member grazes her behind.  Her femcum splatters your lower half with each roll of her hips");
-		if(flags[45] > 0) outputText(", her shaft covering your stomach with thick strands of pre-cum");
+		if(flags[AMILY_WANG_LENGTH] > 0) outputText(", her shaft covering your stomach with thick strands of pre-cum");
 		outputText(" as thrusts become faster and harder.  You pant huskily in time with your lover, hands sliding around her hips to grab her cheeks in an attempt to sink you throbbing length inside her.");
 	}
 	
@@ -7271,7 +7284,7 @@ function layEggsInAmilysCorruptedHole():void {
 	//(Males/Herms) 
 	if(player.hasCock()) outputText("  Amily jolts forwards from the unexpected movement and you seize the opportunity, impaling her tight, wet entrance on your [cock].  You both cry out in bliss as she sinks down your shaft, her passage almost burning your oversensitive shaft as her arms wrap around your neck, pulling herself close to you.");
 	//(Females + AmilyHerm) 
-	else if(player.hasVagina() && flags[45] > 0) {
+	else if(player.hasVagina() && flags[AMILY_WANG_LENGTH] > 0) {
 		outputText("  Amily jumps forwards suddenly in reaction to your uncontrolled spasm, her shaft suddenly spearing you and forcing a desperate cry from your lips.  She responds in kind, a strangled moan escaping her as she slumps against you, her hips starting to thrust wildly into your tremlbing [vagina].");
 	}
 	//(F/F or Genderless) 
@@ -7296,7 +7309,7 @@ function layEggsInAmilysCorruptedHole():void {
 	//(Males/Herms) 
 	if(player.hasCock()) outputText("her pussy spasms around your member, the feeling pulling you over the edge with her, your hips thrusting into her tight confines as you fill her with cream.  She shivers with delight at the double-stuffing you're giving her, relaxing in your arms as you both rides out the pleasure high.");
 	//(Females + AmilyHerm)
-	else if(player.hasCock() && flags[45] > 0) outputText("she floods your [vagina] with her hot seed, arms tightening around your neck to pull herself as tightly against you as she can, her shaft pulsing as it erupts.  She grunts squeakily with each spurt, packing your tight hole with as much cum as she can manage, even as you fill her rear with egg after egg.  The flurry of sensation pushes you over the edge, you stomach going tight as you wrap your legs around Amily, pinning her against you as you hump uselessly against her, your pussy quivering with each movement.");
+	else if(player.hasCock() && flags[AMILY_WANG_LENGTH] > 0) outputText("she floods your [vagina] with her hot seed, arms tightening around your neck to pull herself as tightly against you as she can, her shaft pulsing as it erupts.  She grunts squeakily with each spurt, packing your tight hole with as much cum as she can manage, even as you fill her rear with egg after egg.  The flurry of sensation pushes you over the edge, you stomach going tight as you wrap your legs around Amily, pinning her against you as you hump uselessly against her, your pussy quivering with each movement.");
 	//(F/F or Genderless) 
 	else outputText("her hips slam into yours one final time, bodies trembling as you both reach your peaks together.  You feel liquid splattering your crotch, coating your thighs as Amily grinds into you, her breathing becoming ragged as she tries to keep moving throughout her body-shaking orgasm.  Groaning, you can do little more that hold her in your arms as your own climax electrifies your muscles, your body going taut with pleasure.");
 	
@@ -7324,12 +7337,12 @@ function layEggsInAmilysButtPt2():void {
 //Amily Laying
 function amilyLaysEggsLikeABitch():void {
 	outputText("\nWhilst wandering around your camp, you heard a flurry of soft squeaks from the direction of Amily's nest.  Intrigued, you sidle over to see what the commotion is.  When you get there, your eyes widen at the sight of your oft-restrained lover relaxing in her soft bedding, completely bottomless.  Her legs are spread wide, giving you a perfect view of both her holes as she rapidly ");
-	if(flags[45] == 0) outputText("teases her clit");
+	if(flags[AMILY_WANG_LENGTH] == 0) outputText("teases her clit");
 	else outputText("squeezes her shaft");
 	outputText(" with one hand, the other catching your eye as it moves beneath her top, apparently caressing her breasts.");
 	outputText("\n\nThe sight surprises you so much that it takes a few moments of dumbstruck staring to notice the small pile of glistening orbs gathering between Amily's thighs.  Realisation quickly hits you as another slime-covered sphere joins them, easing its way out of the girl's tight ass to a chorus of soft moans.  It looks as though she's been at this for a while, though you doubt she's anywhere close to being finished yet.");
 	outputText("\n\nAnother egg flows from her, still covered with the thick goo that you left in her when you made your 'deposit'.  Amily tenses at the way it spreads her ring, ");
-	if(flags[45] == 0) outputText("pussy visibly quivering");
+	if(flags[AMILY_WANG_LENGTH] == 0) outputText("pussy visibly quivering");
 	else outputText("member oozing a thick glob of pre-cum");
 	outputText(" as her body shudders with pleasure.");
 	
@@ -7361,7 +7374,7 @@ function amilySwimFuckIntro():void {
 		outputText(" is almost totally exposed, left unbound by the skimpy fabric that barely covers her most sensitive places.  The mousette's toned legs and thighs draw your eye, right up to her " + amilyHips() + " and " + amilyButt() + ", divided by a narrow strip of black fabric.  Between those survival-honed limbs is a tiny triangle that barely covers Amily's nether-lips, clinging gently to her clearly visible camel toe.");
 		if(flags[AMILY_WANG_LENGTH] > 0) {
 			outputText("  The top portion of it is pulled out away from her body, a taut tent that her " + amilyCock() + " is threatening to tear through at any moment.  After a moment of fidgeting, Amily pulls it out the top to flop lamely.");
-			if(flags[171] > 0) outputText("  It snaps back onto her " + amilyBalls() + " to snug them tightly.");
+			if(flags[UNKNOWN_FLAG_NUMBER_00171] > 0) outputText("  It snaps back onto her " + amilyBalls() + " to snug them tightly.");
 		}
 		outputText("  Higher up, silky onyx wreaths the globes of " + amilyTits() + ", but as you admire her new appearance, the hard tips of " + amilyNipples() + " rise up, so clearly defined that you can see their pebbly texture through the inviting swimsuit.");
 		outputText("\n\n\"<i>How do I look,</i>\" your lover asks demurely, toeing at the dirt.  The usually confident little mouse is clearly out of her element but excited as well.");
@@ -7376,7 +7389,7 @@ function amilySwimFuckIntro():void {
 		outputText("\n\nAmily scurries off towards her stash, and you wait patiently for her return.  When she comes back, her little body is all bound up in sheer black, simultaneously concealing and highlighting her assets.");
 		if(flags[AMILY_WANG_LENGTH] > 0) {
 			outputText("  The only thing left exposed is her " + amilyCock() + ", which bobs lightly with each step.");
-			if(flags[171] > 0) outputText("  Her balls are snugly secured in her bottoms, looking like a cute little sphere of virile fun.");
+			if(flags[UNKNOWN_FLAG_NUMBER_00171] > 0) outputText("  Her balls are snugly secured in her bottoms, looking like a cute little sphere of virile fun.");
 		}
 		outputText("  The hard points of her " + amilyNipples() + " prominantly display themselves on the bikini top.  Clearly she doesn't plan to spend too much swimming, just like last time.");
 		outputText("\n\nAmily saunters up and grabs your hand, leading you towards the stream while her " + amilyButt() + " sways in your direction.  Amusingly, her tail is poking through a hole in the rear triangle of her sexy black bikini bottoms.");
@@ -7505,7 +7518,7 @@ function drinkThePotion():void {
 		outputText("\n\nThe pretty tigershark-girl comes sashaying around the rocks, putting a bookmark in her reading material as she answers the high-pitched call.  She glances between the two of you and huffs, \"<i>Oh, couldn't think of having a little fun without me?</i>\" with a wry grin.  Her skirt rustles slightly as she closes the intervening distance");
 		if(flags[IZMA_NO_COCK] == 0) outputText(", barely concealing the half-swollen bulge beneath");
 		outputText(".  Izma says, \"<i>What the hell, I ");
-		if(flags[250] > 0) outputText("suppose I can do it for fun, since I'm already pregnant.");
+		if(flags[UNKNOWN_FLAG_NUMBER_00250] > 0) outputText("suppose I can do it for fun, since I'm already pregnant.");
 		else outputText("suppose we can have another kid.");
 		outputText("</i>\"");
 		outputText("\n\nThe potions are passed around, and the three of you quickly get to drinking them.  The girls finish their half-filled bottles first, leaving them with nothing to do but slowly undress you while you try to devour the last of the sweet, lust-inducing stuff.  It's very hard to focus on swallowing your part of the equation with four hands roaming across your body, and you nearly choke on it when the two girls start hugging you from each side, mismatched hands diving into your crotch to fondle [oneCock] with eager grasps.  The artificial warmth that's gathering in your midsection slowly spreads throughout your body, though it seems like the bulk of it winds up in [eachCock] where it can be properly stimulated by the needy females' pleasant fingers.");
@@ -7523,7 +7536,7 @@ function drinkThePotion():void {
 }
 
 //Start Ze Fucking!
-//flags[250]
+//flags[UNKNOWN_FLAG_NUMBER_00250]
 function izmaAmilyDrugThreeWaySex():void {
 	clearOutput();
 	outputText("The amorous embrace's effects on you are more than telling.  [EachCock] has swollen up, long and proud, as thick with arousal as ");
@@ -7533,8 +7546,8 @@ function izmaAmilyDrugThreeWaySex():void {
 	if(player.balls > 0) outputText(", one that has your [sack] swelling slightly, the skin growing smooth and glossy as it fills with the heavy, comfortable weight of your sloshing seed");
 	else outputText(", one that has you feeling comfortably swollen with pent-up seed just waiting to erupt");
 	outputText(".  Droplets of pre-cum slowly trickle from [eachCock] onto the busy ladies' hands and forearms, turning their fondles into strokes so wet and lubricated that you could almost mistake them for a succubus's twat.  There's something wonderfully right about being served by these docile woman");
-	if(flags[AMILY_INCUBATION] == 0 && flags[250] == 0) outputText(", with their hungry wombs just waiting to be impregnated at your leisure");
-	else if(flags[AMILY_INCUBATION] > 0 && flags[250] > 0) outputText(", with their ripe wombs stuffed full of your offspring already");
+	if(flags[AMILY_INCUBATION] == 0 && flags[UNKNOWN_FLAG_NUMBER_00250] == 0) outputText(", with their hungry wombs just waiting to be impregnated at your leisure");
+	else if(flags[AMILY_INCUBATION] > 0 && flags[UNKNOWN_FLAG_NUMBER_00250] > 0) outputText(", with their ripe wombs stuffed full of your offspring already");
 	else outputText(", with at least one of their wombs already ripe with your offspring");
 	outputText(".");
 	
@@ -7569,7 +7582,7 @@ function izmaAmilyDrugThreeWaySex():void {
 	outputText(".  The sapphic kiss is shattered by your slit-moistening hardness, and Amily looks back at you, disentangling her tail from Izma's to caress you as she asks, \"<i>You aren't going to waste it outside, are you?  Please, cum in me!</i>\"");
 	
 	outputText("\n\n\"<i>No, give it to me!  ");
-	if(flags[250] > 0) outputText("My pussy is the obvious, stronger choice.");
+	if(flags[UNKNOWN_FLAG_NUMBER_00250] > 0) outputText("My pussy is the obvious, stronger choice.");
 	else outputText("I'm the stronger, obvious breeding choice.  Knock me up and you'll have fitter, better offspring.");
 	outputText("  Besides, can't you feel how wet my cunt is, and how those little tentacles inside are going to feel around you when you give me your cum?  That is your job as Alpha after all, to dominate my pussy and fill it full of you...  Ooooh...</i>\" Izma moans, pleading her own case as she starts to finger Amily's asshole.  \"<i>Besides, this little - ohgods - thing couldn't handle your babies, [name].</i>\"");
 	outputText("\n\nAmily squeaks in surprise at the sudden intrusion before stabbing her tail tip into the shark's rectum as well, turning Izma's demands into a lewd moan.  \"<i>Come on, [name].  I'm the one that figured out-ooouuuhhhh... uh, how to make the potion.  ");
@@ -7579,10 +7592,10 @@ function izmaAmilyDrugThreeWaySex():void {
 	else outputText("blushing so hard her whole face is almost beet-red, a fine look on her with her tongue dangling so erotically out of her gasping mouth");
 	outputText(".");
 	outputText("\n\nYou push and pull on the two girls, fucking both sets of mons without care for who eventually gets jizz inside them.  You're definitely going to flood a ");
-	if(flags[AMILY_INCUBATION] == 0 || flags[250] == 0) outputText("womb");
+	if(flags[AMILY_INCUBATION] == 0 || flags[UNKNOWN_FLAG_NUMBER_00250] == 0) outputText("womb");
 	else outputText("cunt");
 	outputText(", judging by how full your genitals are feeling, but it doesn't matter greatly one way or the other.  There's a calm, confident surety in the back of your mind that keeps reminding you that you're in charge here, and that both these women WILL be ");
-	if(flags[AMILY_INCUBATION] == 0 || flags[250] == 0) outputText("pregnant");
+	if(flags[AMILY_INCUBATION] == 0 || flags[UNKNOWN_FLAG_NUMBER_00250] == 0) outputText("pregnant");
 	else outputText("squirting");
 	outputText(" for you.  Each time you slam your ");
 	if(player.cockTotal() > 1) outputText("doubled dicks");
@@ -7611,12 +7624,12 @@ function izmaAmilyDrugThreeWaySex():void {
 function izmaAmilyDrugThreeWaySex2():void {
 	clearOutput();
 	outputText("Time goes hazy, for a bit, but the cool air on your sopping boner is enough to rouse you back to full consciousness.  The scene is unreal.  Amily rolled off of Izma at some point and is laying flat on her back, cradling her ");
-	if(flags[250] == 0) outputText("cum-");
+	if(flags[UNKNOWN_FLAG_NUMBER_00250] == 0) outputText("cum-");
 	outputText("pregnant belly and murmuring, \"<i>Babies,</i>\" while her fingers mindlessly diddle her alabaster-painted cunt.  She shudders as aftershocks of pleasure torture her lust-wracked brain, keeping her in a horny, docile state.");
 	outputText("\n\nIzma seems to have taken advantage of your lapse in consciousness - you're on your back, and she's straddling your chest");
 	if(flags[IZMA_NO_COCK] == 0) outputText(", dick and balls flopping lamely on top of you");
 	outputText(".  She pants, \"<i>Dunno why I didn't just fuck ya while you were out of it...  Didn't seem right.</i>\"  Rubbing her breast one-handed, the shark-girl begs, \"<i>Can I have it now?  Can you cum in me like you did her, [name]?  Please, I'm so... so wet for you, I'll make you feel so good.</i>\"  She keeps scooting back and forth just above your [hips], the hard lump of her clit pressing into you as she awaits permission to ");
-	if(flags[250] == 0) outputText("be inseminated");
+	if(flags[UNKNOWN_FLAG_NUMBER_00250] == 0) outputText("be inseminated");
 	else outputText("have her pregnant-pussy packed full again");
 	outputText(".");
 	
@@ -7651,18 +7664,18 @@ function izmaAmilyDrugThreeWaySex2():void {
 	if(player.cockTotal() == 2) outputText(", taking a hand away from your extra dick to support herself,");
 	if(player.cockTotal() > 2) outputText(", taking a hand away from one of your extra dicks to support herself,");
 	outputText(" and kisses you passionately.  The fervent kiss is as short as it is frenzied, but as you're recovering from it, Izma starts to talk, \"<i>You like that, Alpha?  You like having my cunt suckling on your dick?</i>\"  She swivels her hips with her words, the inner tentacles all pulling on you in concerted waves, actually lifting your penis to press deeper inside her, right up against her ");
-	if(flags[250] > 0) outputText("closed");
+	if(flags[UNKNOWN_FLAG_NUMBER_00250] > 0) outputText("closed");
 	else outputText("dilated");
 	outputText(" cervix.  \"<i>");
-	if(flags[250] > 0) outputText("I know I'm pregnant, but I want you to cum as deeply inside me as possible, okay?  I just... I have to have your cum. I NEED to feel that warmth flooding inside me.  It'll... ohh, yes... it'll make me feel so good, so loved.");
+	if(flags[UNKNOWN_FLAG_NUMBER_00250] > 0) outputText("I know I'm pregnant, but I want you to cum as deeply inside me as possible, okay?  I just... I have to have your cum. I NEED to feel that warmth flooding inside me.  It'll... ohh, yes... it'll make me feel so good, so loved.");
 	else outputText("I don't know how, but I just know that you're going to make me pregnant when you cum inside me.  It's going to get me oh-ohhhhh... so heavy with your child, and it'll be perfect and blissful.  You're going to fucking flood me with jizz, aren't you, Alpha?");
 	outputText("</i>\"  Izma's eyes twinkle with a mixture of obscene hunger and overbearing affection.  She whispers, \"<i>Will you please");
-	if(flags[250] == 0) outputText(" make me your gravid, jizz-slurping beta-wife?");
+	if(flags[UNKNOWN_FLAG_NUMBER_00250] == 0) outputText(" make me your gravid, jizz-slurping beta-wife?");
 	else outputText(" cum in your pregnant, jizz-hungry wife?");
 	outputText("</i>\"");
 	
 	outputText("\n\nFuck, it's like she's telling you to do exactly what you want to do!  There's nothing hotter than ");
-	if(flags[250] == 0) outputText("watching a bitch's belly bloat as it's packed to a full, fertile dome");
+	if(flags[UNKNOWN_FLAG_NUMBER_00250] == 0) outputText("watching a bitch's belly bloat as it's packed to a full, fertile dome");
 	else outputText("stuffing a cunt so full she'll never stop dripping your seed");
 	outputText(".  Getting to lie back and watch her cum her brains out while you do it?  That's just icing on the cake.  Izma's feelers flutter erotically about you, spastically stroking with uncoordinated, individual slithers that remind you of a hundred tiny tongues.  She gets infinitely wetter, something you didn't think possible, and her whole body begins to go scarlet, coloring as she climaxes.");
 	if(flags[IZMA_NO_COCK] == 0) outputText("  Her four balls quake atop you, and you watch her urethra bulge, ready to splatter your [chest] with her own, lesser climax.");
@@ -7670,7 +7683,7 @@ function izmaAmilyDrugThreeWaySex2():void {
 	if(flags[IZMA_NO_COCK] == 0) outputText("  The smell of her hot, inferior seed hits your nostrils, exciting you even further as it rolls off of you in thick globs.");
 	
 	outputText("\n\nYou feel like an over-pressurized tank that's just been tapped.  One moment, there's indescribable force all bottled up inside you, and the next you're letting it spray out in long waves, each one guided through your urethra by contractions so violent they cause your whole body to shake each time.  You pump long lances of seed into the shark-girl's ready snatch.  She screams, \"<i>Yes!  Give it to me!  Ohhh, gods, YES!</i>\" as you fill her.");
-	if(flags[252] > 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00252] > 0) {
 		outputText("  Her womb remains steadfastly closed, already seeded to capacity, so your salty deposit quickly floods the smaller canal.  The tendrils go lax as they're dipped in your baby-batter, each limp in the heady flow.");
 		if(player.hasKnot(player.biggestCockIndex())) outputText("  Your knot balloons explosively inside her, but the seal on her womb is tighter.");
 		outputText("  Jism rushes out around your cock in a river.  The nest was already soaked with liquid lust from your last tryst, moments ago, but now it's soaked completely white.  After a while, Izma's actually forced off you by the incredible potency of your eruptions, falling flat on her back.");
@@ -7683,7 +7696,7 @@ function izmaAmilyDrugThreeWaySex2():void {
 		outputText(".");
 	}
 	outputText("\n\nIzma pants, \"<i>Ung... mmm... so much,</i>\" and cradles her ");
-	if(flags[252] == 0) outputText("jizz-bloated");
+	if(flags[UNKNOWN_FLAG_NUMBER_00252] == 0) outputText("jizz-bloated");
 	else outputText("child-bearing");
 	outputText(" middle.  You're still going, still spurting, but without a tight hole to fill, there's just no pleasure on it.  You start to push yourself up - you need to impregnate something, but Amily is there in a flash, still jilling her pussy as she stuffs her ass with your squirting cock.  It slides on in with ease thanks to its copious spurting and the double-dose of cunt-juice that wreathes it.");
 	
@@ -7709,16 +7722,16 @@ function izmaAmilyDrugThreeWaySex3():void {
 	stats(0,0,0,0,0,-3,-100,0);
 	outputText("<b>Some time later...</b>\n");
 	outputText("You come to in a daze.  You're soaked in sexual juices of all kinds from the waist down, though for once, [eachCock] has gone soft.  Izma is snuggled up under your left arm and Amily under your right.  They're still asleep, but they're even more soaked than you, and hugging each other across your body.  The potion may have worked a little differently than Amily designed it to, but you can't really complain about the results.");
-	if(flags[250] == 0 || flags[AMILY_INCUBATION] == 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00250] == 0 || flags[AMILY_INCUBATION] == 0) {
 		outputText("\n\n(<b>");
 		if(flags[AMILY_INCUBATION] == 0) {
 			outputText("Amily");
 			flags[AMILY_INCUBATION] = 168;
-			if(flags[250] == 0) outputText(" and ");
+			if(flags[UNKNOWN_FLAG_NUMBER_00250] == 0) outputText(" and ");
 		}
-		if(flags[250] == 0) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00250] == 0) {
 			outputText("Izma");
-			flags[250] = 300;
+			flags[UNKNOWN_FLAG_NUMBER_00250] = 300;
 		}
 		outputText(" definitely got pregnant.</b>)");
 	}

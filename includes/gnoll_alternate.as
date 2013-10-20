@@ -15,8 +15,8 @@ function gnoll2Encounter():void {
 	spriteSelect(54);
 	outputText("", true);
 	//<First Encounter>
-	if(flags[209] == 0) {
-		flags[209]++;
+	if(flags[HAVE_ENCOUNTERED_GNOLL_PLAINS] == 0) {
+		flags[HAVE_ENCOUNTERED_GNOLL_PLAINS]++;
 		outputText("Waves of long, dry grass spread before you in gentle, rolling hills.  Your mind begins to wander, staring at the featureless expanse as the waist-high grass rustles against your body.  It seems like there is nothing but peace to be found here below the expansive blue sky and the dry grass.\n\n", false);
 
 		outputText("The only warning you have is when your ears catch the barest of whispers, giving you time to jump to the side, just as a long wooden javelin whistles through the air where your head would have been.  You whirl around to see a massive hyena woman standing a few yards away.  The tall, muscular woman ", false);

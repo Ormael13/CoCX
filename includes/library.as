@@ -10,7 +10,7 @@ function visitZeMagesTower():void {
 	menu();
 	if(flags[TIMES_BEEN_TO_LIBRARY] == 0 || hours <= 17)  {
 		addButton(1,"You Okay?",youOkayBuddy);
-		if(flags[175] > 0) addButton(2,"Mali",talkToMali);
+		if(flags[UNKNOWN_FLAG_NUMBER_00175] > 0) addButton(2,"Mali",talkToMali);
 	}
 	if(flags[TIMES_VISITED_MALI] > 0) addButton(2,"Mali",talkToMali);
 	addButton(0,"Study",studyInTA);

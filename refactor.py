@@ -139,7 +139,7 @@ def getFlagDict():
 
 
 def cleanFlags():
-	with open("flagDefsOld.as", "r") as fA:
+	with open("flagDefsNamed.as", "r") as fA:
 		good = fA.readlines()
 
 	maxLen = 0
@@ -240,7 +240,7 @@ def insertFlags():
 				m = flagRE.search(tmp[insertionPoint:])
 				start, length = m.start(1)+insertionPoint, len(m.group(1))
 
-				print m.group(), m.group(1)
+				# print m.group(), m.group(1)
 				insertionPoint = start+length
 				flagNum += 1
 
@@ -249,12 +249,18 @@ def insertFlags():
 				oldCall = call
 				call = call.replace(call, flags[call])
 
-				if oldCall != call:		
-					print "Old:", oldCall
-					print "New:", call
+				# if oldCall != call:		
+				# 	print "Old:", oldCall
+				# 	print "New:", call
 
 				tmp = prefix+call+postfix
+			if len(tmp)-len(tmpO) != 0:
+				print filename
+				print len(tmpO), len(tmp)
+				print "Length Delta", len(tmp)-len(tmpO) 
 
+			with open(os.path.join("./includes", filename), "w") as fileH:
+				tmp = fileH.write(tmp)
 	'''
 				
 				insertionPoint = start+length
@@ -262,8 +268,6 @@ def insertFlags():
 			print len(tmpO), len(tmp)
 			print "Length Delta", len(tmp)-len(tmpO) 
 
-			with open(os.path.join("./includes", filename), "w") as fileH:
-				tmp = fileH.write(tmp)
 
 	'''
 	print "Total Integer flag indices:", flagNum

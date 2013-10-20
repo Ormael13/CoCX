@@ -660,7 +660,7 @@ function barBeerOrgyTits():void {
 	//Third Paragraph
 	//===============
 	//IF player has pussy and Urta is in the bar and sex with her is unlocked.
-	if(hours < 15 && flags[12] > 0 && player.hasVagina()) {
+	if(hours < 15 && flags[UNKNOWN_FLAG_NUMBER_00012] > 0 && player.hasVagina()) {
 		outputText("\n\nA pair of familiar paws grab your ankles and spread your legs wide.  Your labia practically spurt out girl cum in anticipation of what's about to happen.  \"<i>Oh, looks like someone's overly eager.</i>\"  You struggle to look over the mounds of your own tits to see who's standing between your legs.  The familiar sight of an oversized horse-cock waving in the air catches your attention shortly before the grinning smile of Urta comes in to view.  \"<i>My aren't you going to get reamed, lover.</i>\"  No sooner than she says that than the flared head of her cock plunges with a wet squish between your nether lips.  You feel her stretching your entrance apart as her massive horse meat bores into your body.  Blissful screams of pleasure are heard and it isn't until the head of Urta's cock breaks into your womb that you realize it's you that's screaming in ecstasy.");
 		if(player.pregnancyIncubation == 0) outputText("  Some folks give yelps and cheers when they see the bulge that repeatedly forms in your abdomen each time Urta thrusts herself inside you.");
 		cuntChange(60,true,true,false);
@@ -722,7 +722,7 @@ function barBeerOrgyTits():void {
 	//Varies based on body type and characters present
 	//================================================
 	// IF [Edryn and Urta are present in the bar and free sex with both is unlocked and character is a herm]
-	if(player.statusAffectv1("Edryn") >= 5 && player.gender == 3 && hours == 14 && flags[12] > 0) {
+	if(player.statusAffectv1("Edryn") >= 5 && player.gender == 3 && hours == 14 && flags[UNKNOWN_FLAG_NUMBER_00012] > 0) {
 		outputText("\n\nYou're so dizzy on pleasure that you barely notice it when you're lifted off the table and carried through the bar again.  You can hardly feel your feet and legs when the crowd stands you up, and with a weak lifting of your head you see why the sudden change of position.  Right in front of you is Edryn's womanly hindquarters with her black cunt lips jiggling back and forth, dripping her girly horse juices from their sopping wet folds.  You don't even have to do anything has several hands angle [eachCock] and guide you forwards.");
 		// IF [player has a single cock]
 		if(player.cockTotal() == 1) outputText("  Edryn moans out loud in ecstasy as your [cock] fills her up.");
@@ -755,7 +755,7 @@ function barBeerOrgyTits():void {
 		growTits(2, player.bRows(), false, 2);
 	}
 	// IF [Urta but not Edryn is present in the bar and sex with her is unlocked and character has pussy]
-	else if(player.hasVagina() && hours < 15 && flags[12] > 0) {
+	else if(player.hasVagina() && hours < 15 && flags[UNKNOWN_FLAG_NUMBER_00012] > 0) {
 		outputText("\n\nYou hear passionate cries of lustful need from Urta as her horse-cock reams you with greater ferocity.  Her orgasm nearly knocks her off her feet as her shaft swells wider, stretching you apart as the cum surges up through it.");
 		// IF [player is not pregnant]  
 		if(player.pregnancyIncubation == 0) outputText("  The eruption of cum from her horsecock out does every other ejaculating dick in the room.  Your belly button pops outward as your stomach swells from the surging torrent of sperm pumping directly into your womb.  The hands of strangers grab your legs to keep you pinned in place while Urta struggles to keep her gushing cock inside your cunt despite the building pressure.  A couple voices call out, \"<i>She's gonna pop!  Is she gonna pop?  I think she is!</i>\"  Niamh is forced to sit up higher as your cum bloated belly pushes up against her.  Urta looks as if she's having a seizure from the sheer effort of unloading herself into you.  You scream out loud from the ecstasy of swelling but cries of pleasure are lost within Niamh's pussy folds, urging her to come again.  Her girl cum squirts down your throat, making your belly feel all the more tight and fit to burst.");

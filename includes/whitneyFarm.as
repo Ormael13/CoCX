@@ -590,9 +590,9 @@ function getMilked():void {
 	var payout:Number = 0;
 	var cap:Number = 500;
 	//Ez mode cap doubles
-	if(flags[99] == 1) cap *= 2;
+	if(flags[UNKNOWN_FLAG_NUMBER_00099] == 1) cap *= 2;
 	if(debug) {
-		flags[104] = 0;
+		flags[UNKNOWN_FLAG_NUMBER_00104] = 0;
 		cap = 9999;
 	}
 	liters = int(player.lactationQ()* (rand(10) + 90) / 100)/1000;
@@ -601,18 +601,18 @@ function getMilked():void {
 	payout = int(liters*2*4);
 	outputText("The machinery displays " + liters + " liters of milk", false);
 	//If already at cap
-	if(flags[104] >= cap) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00104] >= cap) {
 		outputText(" and displays a warning that <b>you're producing more than Whitney can pay for</b>", false);
 		payout = 0;		
 	}
 	if(payout > 0) {
 		//If over cap reduce payout to the difference
-		if(payout + flags[104] > cap) payout = cap - flags[104];
+		if(payout + flags[UNKNOWN_FLAG_NUMBER_00104] > cap) payout = cap - flags[UNKNOWN_FLAG_NUMBER_00104];
 		//Keep track of how much is paid
-		flags[104] += payout;
+		flags[UNKNOWN_FLAG_NUMBER_00104] += payout;
 		outputText(" and automatically dispenses " + num2Text(payout) + " gems.  Whitney really went all out with this setup!", false);
 		//Display a warning that you've capped out.
-		if(flags[104] >= cap) outputText("  <b>The machinery warns you that Whitney can't afford any more this week!</b>", false);
+		if(flags[UNKNOWN_FLAG_NUMBER_00104] >= cap) outputText("  <b>The machinery warns you that Whitney can't afford any more this week!</b>", false);
 		player.gems += payout;
 	}
 	else outputText(".", false);
@@ -770,7 +770,7 @@ function cockPumping():void {
 		else outputText("You're kept on the edge of orgasm for the better part of an hour.   Rhythmic contractions squeeze through the flesh-tubes wrapped around your manhoods, keeping them painfully hard and dribbling, always backing off before you can truly cum.  You thrash in your harness wildly, insane with need and nearly frothing at the mouth.  The licking tongues never stop, licking between every wave of mechanized suction that pulls on your many malenesses.   You babble incoherently, pleasure-drunk, not even noticing a green light on the far side of the wall turning on.  One thing you do notice is that the cock-tubes aren't slowing down their ministrations.  You're finally allowed to cum!\n\n", false);
 	}
 	//BAD END!?
-	if(player.cumQ() >= 50 && player.fatigue >= 100 && flags[112] > 0) {
+	if(player.cumQ() >= 50 && player.fatigue >= 100 && flags[UNKNOWN_FLAG_NUMBER_00112] > 0) {
 		//(small/medium helperless skeet)
 		if(cumQ < 1000) {
 			outputText("The orgasm rolls over you, shutting down your thoughts as your body spasms in its straps, boiling out ", false);
@@ -818,8 +818,8 @@ function cockPumping():void {
 		doNext(milkerBadEnd1);
 		return;
 	}
-	flags[112]++;
-	flags[333]++;
+	flags[UNKNOWN_FLAG_NUMBER_00112]++;
+	flags[UNKNOWN_FLAG_NUMBER_00333]++;
 	//ORGAZMO
 	if(cumQ < 10) {
 		if(player.cockTotal() == 1) outputText("The orgasm rolls over you, shutting down your thoughts as your body spasms in its straps, boiling out tiny squirts of spunk.  Wriggling cillia convulse around you, licking your " + cockHead() + " as it flares wide, filling with blood and dripping out a little cum.  You moan and scream with delight, babbling happily as you watch your insignificant amount of cum wick up the clear tube and into the machinery in the wall.  All too soon the pleasure comes to and end, and your cock starts to soften inside its squishy prison.  The harness slowly loosens, lowering you to the ground and releasing you.\n\n", false);
@@ -880,9 +880,9 @@ function cockPumping():void {
 	var payout:Number = 0;
 	var cap:Number = 500;
 	//Ez mode cap doubles
-	if(flags[99] == 1) cap *= 2;
+	if(flags[UNKNOWN_FLAG_NUMBER_00099] == 1) cap *= 2;
 	if(debug) {
-		flags[104] = 0;
+		flags[UNKNOWN_FLAG_NUMBER_00104] = 0;
 		cap = 9999;
 	}
 	//Get rid of extra digits
@@ -895,18 +895,18 @@ function cockPumping():void {
 		payout = 2 + int(cumQ/200)*2;
 	}
 	//If over cap!
-	if(flags[104] >= cap) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00104] >= cap) {
 		payout = 0;
 		outputText("It also shows a warning: <b>FUNDS EXHAUSTED.</b>  ", false);
 	}
 	//Reduce payout if it would push past
-	else if(flags[104] + payout >= cap) {
-		payout = cap - flags[104];
+	else if(flags[UNKNOWN_FLAG_NUMBER_00104] + payout >= cap) {
+		payout = cap - flags[UNKNOWN_FLAG_NUMBER_00104];
 		outputText("It also shows a warning: <b>Not enough gems for full payment.  GEMS NOW EXHAUSTED.</b>  ", false);
 	}	
 	if(payout > 0) {
 		player.gems += payout;
-		flags[104] += payout;
+		flags[UNKNOWN_FLAG_NUMBER_00104] += payout;
 		statScreenRefresh();
 		if(player.cumQ() < 1000) player.cumMultiplier++;
 		if(payout == 1) outputText(Num2Text(payout) + " gem rolls out into a collection plate.  Whitney really put a lot of work into this!  You pocket the gem and g", false);

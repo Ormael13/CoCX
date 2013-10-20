@@ -27,7 +27,7 @@ function talkToScylla():void {
 
 function helpScylla():void {
 	spriteSelect(51);
-	flags[54]++;
+	flags[UNKNOWN_FLAG_NUMBER_00054]++;
 	var x:Number = player.biggestCockIndex();
 	outputText("", true);
 	outputText("You explain that you've run into this sort of thing before and ask her to follow you upstairs to a room. Shyly, she accompanies you and sits down on the bed next to you. In the light, you get a better look at her. She's nearly 7 feet tall, though terribly thin from her demonic starvation. Her breasts have not lost any weight, however, and the D-cups push against her dress with every breath. She shakes her curly black hair from the hood and it spills down her back in surprisingly long locks- it's at least four feet and forms a billowing curtain around her shoulders, hips, and waist. She looks innocently at you, patiently waiting for your diagnosis. The hopeful trust in her eyes almost makes you blush as you explain that the demons have given her a powerful addiction. Considering the nature of her tormenters, she is almost certainly addicted to cum.\n\n", false);
@@ -58,7 +58,7 @@ function helpScylla():void {
 
 function dontHelpScylla():void {
 	spriteSelect(51);
-	flags[54]--;
+	flags[UNKNOWN_FLAG_NUMBER_00054]--;
 	outputText("", true);
 	outputText("You tell Scylla the demons have addicted her to cum and turn away before she can return.  You melt away into the crowd and leave her to her thoughts, knowing she'll end up on her knees soon enough.  You can't help but wonder if you did the right thing, suppressing your libido and preventing the possibility of taint was good, but then again, nun looked about to starve...\n\nYou wrestle with your decision the whole way back to your camp, feeling fairly turned off by the time you get back.", false);
 	stats(0,0,0,0,-2,0,-99,0);
@@ -70,7 +70,7 @@ function dontHelpScylla():void {
 function scyllaRoundII():void {
 	spriteSelect(51);
 	flags[FED_SCYLLA_TODAY] = 1;
-	flags[54]++;
+	flags[UNKNOWN_FLAG_NUMBER_00054]++;
 	outputText("", true);
 	outputText("The Wet Bitch is particularly busy today and you're obliged to sit at the bar after shouldering your way through the crowd. Before you can even place an order, the bartender slides you a note. Curious, you unfold the crisp, white parchment. The note is written in such a light hand that you have to strain to read it in the dim bar. The flowing, graceful message reads: \"<i>Dear " + player.short + ", I am sorry to impose upon you once more, but if you don't mind, could you maybe help me one more time? I am in one of the rooms upstairs, could you come up and see me?  In your debt, Scylla.</i>\"\n\n", false);
 
@@ -136,7 +136,7 @@ function scyllaRoundIIPartIII():void {
 function scyllaRoundThreeCUM():void {
 	spriteSelect(51);
 	outputText("", true);
-	flags[54]++;
+	flags[UNKNOWN_FLAG_NUMBER_00054]++;
 	//Standard
 	if(player.hasKeyItem("Opal Ring") < 0 || flags[FED_SCYLLA_TODAY] == 1) {
 		outputText("You step into the Wet Bitch and are immediately struck by the sighing silence that's settled over the usually bustling tavern. Glancing around, you notice that all the men and herms are leaning back in their chairs, completely worn out. The origin of their exhaustion becomes apparent when a door opens upstairs and an equine shambles out, adjusting his belt and walking unsteadily, looking decidedly drained. Deciding to investigate, you head upstairs and peek through the ajar door.\n\n", false);
@@ -266,7 +266,7 @@ function scyllaIIIFinisher():void {
 function scyllaRoundIVGo():void {
 	spriteSelect(51);
 	outputText("", true);
-	flags[54]++;
+	flags[UNKNOWN_FLAG_NUMBER_00054]++;
 	outputText("The tavern has a decent crowd, the air thick with laughter and ribald conversation. Scylla is speaking with a few strangers, politely nodding when you spot her. You wave to her on your way in and she waves back, excusing herself from the conversation and making her way over to you. She explains that she has a few things to take care of, but she'd be glad to have your company later.  Scylla ducks out the door and you shrug, deciding to kill some time. You order a drink and begin to walk away from the bar when you feel a sharp sting on the back of your neck. You slap the welt and angrily look for the insect that stung you, but the dull roar of the patrons' lusty conversations hides the culprit's escape. You grumble and rub the pinched muscle in your shoulder as you grab your drink and settle by the fire.\n\n", false);
 	
 	outputText("You should've ordered something to eat, you realize a little later when the drink leaves you tipsier than it should have. You feel woozy and arise with difficulty, your head spinning. You're not sure how much time has passed, but everything's darker now. Nobody is paying attention to you, but they all somehow look larger and more imposing. You struggle to keep your balance and fail, tumbling into a clumsy heap on the floor. It seems your clothes tripped you up – for some reason, they don't fit very well anymore. As you dully pull at the loose material, your hands trace blurry trails through the air and it dawns on you that something is wrong. You try to work up a panic, but your building stupor makes everything seem distant and unimportant. You look at your glass and wonder if you've been drugged, or maybe... You touch the tiny welt on your neck. Poison, you realize too late. Your attempt to shout an alarm doesn't even manage to move your lips. All around you, strangers are talking, laughing and drinking, but for you, there is only the encroaching darkness and the mercy of an unknown assailant.\n\n", false);
@@ -420,10 +420,10 @@ function scyllaPtIVEpilogue():void {
 function scyllaAdictsAnonV():void {
 	spriteSelect(51);
 	doNext(13);
-	if(flags[105] == 0) scyllaPtVFirstTime();
+	if(flags[UNKNOWN_FLAG_NUMBER_00105] == 0) scyllaPtVFirstTime();
 	else scyllaPtVRepeat();
 	//Set scylla progression if not set yet!
-	if(flags[54] < 5) flags[54] = 5;
+	if(flags[UNKNOWN_FLAG_NUMBER_00054] < 5) flags[UNKNOWN_FLAG_NUMBER_00054] = 5;
 }
 //[Nun]
 function scyllaPtVFirstTime():void {
@@ -475,7 +475,7 @@ function scyllaPtVRepeat():void {
 //[Leave]	(First time and Repeat)
 function scyllaPtVLeave():void {
 	spriteSelect(51);
-	flags[105]++;
+	flags[UNKNOWN_FLAG_NUMBER_00105]++;
 	outputText("", true);
 	//[Lust down]
 	stats(0,0,0,0,0,0,-10,0);
@@ -489,19 +489,19 @@ function scyllaPtVLeave():void {
 function scyllaPtVTakeAdvantage():void {
 	spriteSelect(51);
 	if(player.hasStatusAffect("Exgartuan") >= 0 && player.statusAffectv2("Exgartuan") == 0) {
-		flags[105]++;
-		flags[106]++;
+		flags[UNKNOWN_FLAG_NUMBER_00105]++;
+		flags[UNKNOWN_FLAG_NUMBER_00106]++;
 		scyllaVTakeAdvantageWithExgartuan();
 		return;
 	}
 	if(player.totalCocks() >= 3) {
-		flags[105]++;
-		flags[106]++;
+		flags[UNKNOWN_FLAG_NUMBER_00105]++;
+		flags[UNKNOWN_FLAG_NUMBER_00106]++;
 		addictionAdvantageMultiDickGreatTimeParty();
 		return;
 	}
-	flags[105]++;
-	flags[106]++;
+	flags[UNKNOWN_FLAG_NUMBER_00105]++;
+	flags[UNKNOWN_FLAG_NUMBER_00106]++;
 	outputText("", true);
 	//[Corruption up]
 	stats(0,0,0,0,0,0,0,1);
@@ -607,7 +607,7 @@ function scyllaPtVShare():void {
 	spriteSelect(51);
 	outputText("", true);
 	//FIRST TIEM
-	if(flags[107] == 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00107] == 0) {
 		outputText("With a blush of embarrassment, you push the door open and step inside. \"<i>I'm " + player.short + " and I'm an addict,</i>\" you admit, keeping your eyes cast down.\n\n", false);
 		
 		outputText("The girls look surprised by your entry, but Scylla is welcoming all the same. \"<i>Oh, " + player.short + ", I'm so glad you could join us after all,</i>\" she fibs, covering the fact that you were obviously spying on them. \"<i>Pastie, Abby, this is my dear friend. Please, take a seat here,</i>\" she offers you her chair and daintily takes a place on the edge of the room's bed. \"<i>Please, tell us more about yourself.</i>\"\n\n", false);
@@ -619,16 +619,16 @@ function scyllaPtVShare():void {
 		outputText("You resolve to be on your best behavior, mentally noting that your 'best' isn't what it used to be. What would you like to talk about today?\n\n", false);
 	}
 	//Increment times met share group
-	flags[107]++;
+	flags[UNKNOWN_FLAG_NUMBER_00107]++;
 	//Increment overall meetings
-	flags[105]++;
+	flags[UNKNOWN_FLAG_NUMBER_00105]++;
 	outputText("What addiction would you like to discuss?", false);
 	//Set choices
 	var milk:Number = 0;
 	if((player.hasPerk("Marble's Milk") >= 0 || player.statusAffectv3("Marble") > 0) && player.hasPerk("Marble Resistant") < 0)
 		milk = 2571;
 	var cum:Number = 0;
-	if(flags[18] >= 50 || player.hasPerk("Minotaur Cum Addict") >= 0) cum = 2576;
+	if(flags[UNKNOWN_FLAG_NUMBER_00018] >= 50 || player.hasPerk("Minotaur Cum Addict") >= 0) cum = 2576;
 	var sex:Number = 0;
 	if(player.lib >= 85 || minLust() >= 20) sex = 2581;
 	var tentacles:int = 0;
@@ -645,7 +645,7 @@ function scyllaPtVNoDiscussion():void {
 //[Marble's Milk]	(First time and Repeat)
 function scyllaPtVMilk():void {
 	spriteSelect(51);
-	flags[108]++;
+	flags[UNKNOWN_FLAG_NUMBER_00108]++;
 	outputText("", true);
 	outputText("You tell the girls about Whitney's farm and how you help out when you can. You relate how you met Marble and the relationship that blossomed. Eventually, you get to the topic of her milk. Your mouth begins to water and you can almost see those big, beautiful udders as you describe your first taste- the warm flavor spraying on your mouth as you stroked her nipple with your tongue, her skin earthy and moist with matronly excitement. You talk about the feel of her arms cradling your head as you nursed one teat, then the other, drinking in her sighs of relief as much as the nectar of her body.\n\n", false);
 	
@@ -718,7 +718,7 @@ function scyllaPtVMilkV():void {
 function scyllaPtVCum():void {
 	spriteSelect(51);
 	outputText("", true);
-	flags[109]++;
+	flags[UNKNOWN_FLAG_NUMBER_00109]++;
 	outputText("You take a moment to collect your thoughts before beginning. You're not exactly sure when it was that you first heard of minotaurs, but you remember in crystal-clear detail the first time you smelled one. Every rippling muscle on their monstrous body reeking of their musk, you found it impossible not to get light-headed each time you tangled with one. Even worse, they knew exactly how their stench affected their prey and those horrible beasts used it against you in the worst ways. Every time you see them, your resistance crumbles, your mind turns off, and there's nothing but your pounding heart and the promise of their release. The helplessness and the weakness that drains you is all the worse for how... relieved... you feel when at last their hot, thick cum whitewashes your body, inside and out. Every drop of the tingling heat wraps iron bands around your lungs and electrifies your muscles into jelly. Even afterwards, the odor lingers like a collar around your neck, marking you as their property, humiliating and exciting you all at once.\n\n", false);
 	
 	outputText("You bury your face in your hands as you admit that you've never even seriously tried to quit. How could you? Can the dirt stop trees from drinking its nutrients? Does sand rebel when clams encase it in alabaster to produce pearls? Being used time and time again is all you deserve. It's what you need. You're not strong enough to stop and you never will be.\n\n", false);
@@ -792,7 +792,7 @@ function scyllaPtVCumV():void {
 function scyllaPtVSex():void {
 	spriteSelect(51);
 	outputText("", true);
-	flags[110]++;
+	flags[UNKNOWN_FLAG_NUMBER_00110]++;
 	stats(0,0,0,0,0,0,10,0);
 	outputText("You're a little uncomfortable talking about this in front of the nun, but you push through the embarrassment and admit that you like sex. Abylon snorts, rolling her eyes. You clarify that you really, really, REALLY like sex. Ever since you lost your virginity, you just haven't been able to get enough. Imps, hell hounds, naga - if it's got a pulse, you'll jump it. Sometimes, you'll even let yourself be beaten in battle - just to let them have their way with you, with bestial dicks stuffing your every orifice and monstrous cunts milking your seed. But it's not just beasts. All the people who've been so kind to you, all you can do is think about fucking them silly. The heat, the sweat, the cum; despite the importance of your mission, it's too much to resist. You worry that maybe it's warping how you see the world. Will you be able to return home without trying to suck and fuck your way through all the people you knew and loved? Are you even capable of real love anymore?\n\n", false);
 	
@@ -861,8 +861,8 @@ function addictionAdvantageMultiDickGreatTimeParty():void {
 	spriteSelect(51);
 	outputText("", true);
 	//[First time]
-	if(flags[144] == 0) {
-		flags[144]++;
+	if(flags[UNKNOWN_FLAG_NUMBER_00144] == 0) {
+		flags[UNKNOWN_FLAG_NUMBER_00144]++;
 		outputText("You decide this is too good to pass by, so you step up to the ladies' room and knock crisply. Scylla opens the door curiously and smiles when she sees you. \"<i>Oh, " + player.short + ", what a pleasant surprise! We were just in the middle of a... the middle of...</i>\" she trails off, noticing the look of wicked relish on your face and you push the seven-foot girl aside, stepping inside confidently. Her eyes drop to your crotch and her stomach rumbles loudly as she stares at the over-stuffed mass of cocks straining against your " + player.armorName + ". Licking her lips without realizing it, the nun keeps trying to stay focused. \"<i>This... um... what was I...</i>?\" she mutters, unable to keep her thoughts together. Abylon regards you distrustfully but she bites her lips and rubs her legs together through her armor when your musk hits her. Pastie is too drunk to notice the sudden pressure in the room.\n\n", false);
 		
 		outputText("No sense in playing coy when you're the drug in a room full of addicts. You use both hands to pull out your fleshy sheath of monstrous organs, letting them hang in the open air, twitching under the surveillance of three sets of horny eyes. \"<i>I brought enough for the whole class,</i>\" you grin, by way of invitation. The nun shakes her head, trying to clear her mind and failing, giggling involuntarily. The goblin trembles, her fists balled into pale knuckles.  \"<i>Can't fight nature,</i>\" she sneers, through clenched teeth. \"<i>Like mother, like daughter.</i>\" Pastie hiccups, trying to figure out what's happening.\n\n", false); 
@@ -967,7 +967,7 @@ function addictionScyllaTakeAdvantageDicksBonusAndEpilogue():void {
 //Scylla #6 - Cat Scratch Fever 
 function Scylla6():void {
 	spriteSelect(59);
-	if(flags[54] < 6) flags[54] = 6;
+	if(flags[UNKNOWN_FLAG_NUMBER_00054] < 6) flags[UNKNOWN_FLAG_NUMBER_00054] = 6;
 	outputText("", true);
 	outputText("For once, the Wet Bitch isn't terribly crowded, the few people in the bar finishing their drinks and heading out. Scylla is one of those on their way out of the bar- she's just finishing a suspiciously creamy coffee when you catch her attention. She apologizes that she's just now leaving, but invites you to join her on a walk around town. She often ministers to the ill and homeless and would welcome an extra set of hands at her modest soup kitchen. You're not really enthusiastic about that plan, but to be honest, you're a little curious to see how a cum-hungry, bimbo-proportioned, bashful nun serves her religion.\n\n", false);
 	outputText("The two of you step out, into Tel'Adre's streets and you take Scylla's hand in the crook of your arm as you escort her. As strange a sight as the two of you are, few people look your way. In a city of numerous anthro-morphs, you suppose your own form isn't all that disturbing. The thought is vaguely comforting and you think you understand why Scylla chose to live here, rather than on church grounds. The buxom giantess may tower over most people, but centaurs are larger still. When people routinely wear rubber bondage suits and lace-thin bikinis, a full nun's habit barely even counts as a fetish outfit. And while her milk-bloated tits, with their puffed-out nipple lips are certainly notable, there are mice herms with cocks larger than they are, a bevy of ring studs piercing the towering organs like a ladder. Actually... people-watching in town might not be a bad pastime, you think to yourself while rubbing between your thighs when the nun isn't watching.\n\n", false);

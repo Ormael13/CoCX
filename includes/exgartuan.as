@@ -711,13 +711,13 @@ function exgartuanSleepSurprise():void {
 		
 		outputText("A voice thrums in your head, \"<i>", false);
 		//Split based on how often done
-		if(flags[103] == 0) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00103] == 0) {
 			outputText("This is how you fucking please a dick!  If you aren't going to take care of our needs, then I will!  Every night if I have to!", false);
 		}
-		else if(flags[103] < 2) {
+		else if(flags[UNKNOWN_FLAG_NUMBER_00103] < 2) {
 			outputText("Oh come on, remember how hard you came last time?  Why don't you stroke the shaft with your hands and I'll see if I can pump more into your belly.", false);
 		}
-		else if(flags[103] < 10) {
+		else if(flags[UNKNOWN_FLAG_NUMBER_00103] < 10) {
 			outputText("How many times have we done this now?  It's probably past time you got used to sucking yourself off at night and quit making a fuss about it.  Now that you're awake, let's put that tongue to use and get to stroking.  I feel a big finish coming!", false);
 		}
 		else {
@@ -739,7 +739,7 @@ function exgartuanSleepSurprise():void {
 		}
 		else {
 			//MED+ COR, NOT DONE A LOT:
-			if(flags[103] < 5) {
+			if(flags[UNKNOWN_FLAG_NUMBER_00103] < 5) {
 				outputText("You grab hold of your over-sized, demon-infested organ with both hands, resigned to this fate.  Even if you managed to stop Exgartuan now, he would just start all over again once you'd fallen asleep.  The pre-slicked, veiny surface slides through your fingers, outputting a cacophony of pleasure through your nervous system.  Your eyes cross from the feeling, and you actually cry moans of need into your own " + cockHead(0) + ".  It vibrates pleasantly, dumping a few loads of pre-cum into your gullet while ", false);
 				if(player.biggestTitSize() >= 2) outputText("you squeeze your tits around your " + cockDescript(0) + " with your biceps", false);
 				else outputText("you squeeze and caress your " + cockDescript(0), false);
@@ -792,7 +792,7 @@ function exgartuanSleepSurprise():void {
 		outputText("  Liquid-hot pressure slides over the underside of your " + cockDescript(0) + ", licking wetly at the pulsating, need-filled demon-prick.  Your rogue tongue's attentions have the desired effect, and the cries of your pleasure are muffled by your own thick flesh and its rapidly distending urethra.\n\n", false);
 		
 		outputText("If someone were watching", false);
-		if(monk >= 5 && player.hasStatusAffect("noJojo") < 0 && flags[80] == 0) outputText(", and judging by Jojo's high pitched whines, he certainly is,", false);
+		if(monk >= 5 && player.hasStatusAffect("noJojo") < 0 && flags[UNKNOWN_FLAG_NUMBER_00080] == 0) outputText(", and judging by Jojo's high pitched whines, he certainly is,", false);
 		outputText(" they'd see dick-flesh bulging with a heavy load as it's pumped into your lips.  The fully-inflated cum-tube distends your mouth, stretching your jaw painfully, and dumps it's creamy cargo into its willing receptacle.  Your belly burbles as it adjusts to the ", false);
 		temp = player.cumQ();
 		if(temp < 50) outputText("surprisingly light", false);
@@ -815,7 +815,7 @@ function exgartuanSleepSurprise():void {
 		}
 		outputText("\n\n", false);
 		
-		if(monk >= 5 && player.hasStatusAffect("noJojo") < 0 && flags[80] == 0) {
+		if(monk >= 5 && player.hasStatusAffect("noJojo") < 0 && flags[UNKNOWN_FLAG_NUMBER_00080] == 0) {
 			outputText("The splatter of mouse-cum erupting in the wood reaches your ears, bringing a wistful smile to your face.  That slutty mouse is such a peeping tom!  ", false);
 		}
 		outputText("Your eyes slowly roll back down while Exgartuan deflates, leaving a trail of pleased, white submission ", false);
@@ -828,7 +828,7 @@ function exgartuanSleepSurprise():void {
 		else if(player.lib < 80) stats(0,0,0,0,.5,0,0,0);
 		else stats(0,0,0,0,.25,0,0,0);
 		stats(0,0,0,0,0,0,10,0);
-		flags[103]++;
+		flags[UNKNOWN_FLAG_NUMBER_00103]++;
 		slimeFeed();
 	}
 	player.changeStatusValue("Exgartuan",2,25);

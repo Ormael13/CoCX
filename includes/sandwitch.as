@@ -871,7 +871,7 @@ function sandwitchSpanking():void {
 	monster.lust = 98;
 	monster.HP = 2;
 	player.lust = 100;
-	flags[89] = monster.XP;
+	flags[UNKNOWN_FLAG_NUMBER_00089] = monster.XP;
 	eventParser(5007);
 	stats(0,0,0,0,0,5,-100,0);
 }

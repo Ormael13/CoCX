@@ -221,7 +221,7 @@ function fightZeDemons(sacrifice:Boolean = true):void {
 	if(sacrifice) {
 		//Remove weapon
 		player.createStatusAffect("Disarmed",0,0,0,0);
-		flags[268] = player.weaponName;
+		flags[UNKNOWN_FLAG_NUMBER_00268] = player.weaponName;
 		player.weaponName = "fists";
 		player.weaponAttack = 0;
 		monster.createStatusAffect("Bow Disabled",0,0,0,0);
@@ -1142,7 +1142,7 @@ function mouseWaifuFreakout(amily:Boolean = false, jojo:Boolean = false) {
 		//FLAG THAT THIS SHIT WENT DOWN
 		flags[AMILY_CORRUPT_FLIPOUT] = 1;
 		//Make sure the camp warning thing is off so she never moves back in.  Bitch be mad.
-		flags[173] = 0;
+		flags[UNKNOWN_FLAG_NUMBER_00173] = 0;
 	}
 	//[(if PC corr > 70)
 	if(player.cor > 70) outputText("\n\n\"<i>Fine. Go fuck off then, I don't need you.  I have a much better and hotter slut now. Don't hesitate to come back if you want some sweet pussy, though.</i>\"");

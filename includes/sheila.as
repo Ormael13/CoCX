@@ -2777,7 +2777,7 @@ function forcedSheilaOral(dick:Boolean = true):void {
 		
 		outputText("\n\n\"<i>You are awful at this,</i>\" you gripe, sitting heavily on her head.  A muffled complaint comes from under you, but you pay it no mind.  \"<i>No boy parts, tail too stubby to insert... and now no oral skills either.  Seriously, what are you good for except taking the dick and making babies?  Why don't you just stay home with your legs open and hold out a begging bowl?");
 		//[(PC has met hellhound master)
-		if(flags[141] > 0) outputText("  I know a nice boy in the mountains who keeps dogs, and I'm sure he'd love to have a womb like yours for their seed.  By this time tomorrow, you could have a cock in both holes, filling you with hellhound babies since you can't please a person.");
+		if(flags[UNKNOWN_FLAG_NUMBER_00141] > 0) outputText("  I know a nice boy in the mountains who keeps dogs, and I'm sure he'd love to have a womb like yours for their seed.  By this time tomorrow, you could have a cock in both holes, filling you with hellhound babies since you can't please a person.");
 		outputText("</i>\"");
 		
 		outputText("\n\nYou can feel her face heating up under your [butt] as she flushes with shame; seems like you struck a nerve.  You ");
@@ -2787,7 +2787,7 @@ function forcedSheilaOral(dick:Boolean = true):void {
 		if(player.exploredForest >= 40) outputText(" - in fact, there are quite a few I've seen who look like better lovers than you.  Maybe I should carry you to the forest and tie you to a nice pussy-shaped giant flower to give you lessons");
 		outputText(".  ");
 		//[(minotaur addiction score =/= 0%)
-		if(flags[18] > 0 || player.hasPerk("Minotaur Cum Addict") >= 0) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00018] > 0 || player.hasPerk("Minotaur Cum Addict") >= 0) {
 			outputText("Perhaps I'll turn you over to a minotaur; you're bound to get better at using your tongue when you're addicted to their amazing seed.  Would you like that?  The first thing you'd see in the morning would be a huge flared cock, right in front of you, dripping with heavenly precum and waiting for your mouth... or your cunt.  You could be just another minotaur-fucking slut of the plains.  ");
 		}
 		outputText("Or I could take you home and give you personal training myself, whenever I feel like it, and invite travelers to do the same");
@@ -2797,7 +2797,7 @@ function forcedSheilaOral(dick:Boolean = true):void {
 		
 		outputText("\n\nYour [vagOrAss] squeezes around Sheila's hesitant tongue, turned on more by the spectacle of selling her body than by any of her poor efforts.  She squirms under you, rubbing her thighs together as you paint the worst pictures of her future you can imagine, and you climax");
 		//[(PC has met Lumi or Lynette)
-		if(player.hasStatusAffect("hairdresser meeting") >= 0 || flags[53] > 0) {
+		if(player.hasStatusAffect("hairdresser meeting") >= 0 || flags[UNKNOWN_FLAG_NUMBER_00053] > 0) {
 			outputText(" while imagining her turned over to the goblins for experiments, forced to drink potion after potion - most would be dedicated to growing cocks on her or increasing semen production, of course");
 		}
 		outputText(".  Your hole clenches and drools on her, and the woman's rude tongue retreats from the pressure, leaving you painfully empty.");
@@ -4982,7 +4982,7 @@ function jojoRuinsTheAnalHateFuck(clear:Boolean = true):void {
 	//set lust to 100, huge corruption gain (like it matters), set sheilapreg to -3 and disable Jojo unless and until new corrupted content is written to reflect changes
 	stats(0,0,0,0,0,0,100,10,false);
 	flags[SHEILA_PREG] = -3;
-	flags[80] = 1;
+	flags[UNKNOWN_FLAG_NUMBER_00080] = 1;
 	if(inCombat()) eventParser(5007);
 	else doNext(13);
 }

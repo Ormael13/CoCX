@@ -1,7 +1,7 @@
 ﻿function fapAppearance(display:Boolean = true):void {
 	if(display) {
 		//[Paragraph: Bazaar description, 1st time]
-		if(flags[339] == 0) outputText("\n\nThere is a gigantic tent standing in the clearing, with a large crowd gathering around it.   Perhaps you could investigate and see what is going on inside.", false);
+		if(flags[UNKNOWN_FLAG_NUMBER_00339] == 0) outputText("\n\nThere is a gigantic tent standing in the clearing, with a large crowd gathering around it.   Perhaps you could investigate and see what is going on inside.", false);
 		//Option labeled "Tent» is available.
 		//[Paragraph: Bazaar description: after 1st time]
 		else outputText("\n\nA large crowd is gathering around the large tent, probably going for another 'session'.   Perhaps you could join them?", false);
@@ -13,9 +13,9 @@ function fapArenaGOOOO():void {
 	//(set X = longest cock)
 	var x:Number = player.longestCock();
 	//Increment 'times fap-arena'ed
-	flags[334]++;
+	flags[UNKNOWN_FLAG_NUMBER_00334]++;
 	//[1st time]
-	if(flags[334] == 1) outputText("As you approach the tent, you notice these people are actually waiting in line, pleasantly chatting with each other.  All varieties of species are there, from cute little goblins and mouse-faced people with rodent-like teeth, to towering centaurs and minotaurs, the latter easily noticed with their strong scent.   You spot the occasional sharp-toothed dog-morph or shark breeder, some traditional incubi and a few tentacled mutants, victims of consuming corrupted vegetation.  There are even a few humans, nonchalantly standing in the waiting line and making conversation, as if some of the others weren't monstrosities.  What strikes you is everyone's perfect civility.  Obviously everyone is used to the place.\n\n", false);
+	if(flags[UNKNOWN_FLAG_NUMBER_00334] == 1) outputText("As you approach the tent, you notice these people are actually waiting in line, pleasantly chatting with each other.  All varieties of species are there, from cute little goblins and mouse-faced people with rodent-like teeth, to towering centaurs and minotaurs, the latter easily noticed with their strong scent.   You spot the occasional sharp-toothed dog-morph or shark breeder, some traditional incubi and a few tentacled mutants, victims of consuming corrupted vegetation.  There are even a few humans, nonchalantly standing in the waiting line and making conversation, as if some of the others weren't monstrosities.  What strikes you is everyone's perfect civility.  Obviously everyone is used to the place.\n\n", false);
 
 	outputText("The waiting line advances and you finally end up in front of the tent's entrance guarded by a surprisingly tall goblin.  She looks at you with assessing eyes, suddenly grabs your crotch with her left hand, rubs it for a second, and says, ", false);
 	//[if dick size < 8 inches] 
@@ -32,8 +32,8 @@ function fapArenaGOOOO():void {
 		return;
 	}
 	//[if dick size >= 8 inches: 1st time] 
-	else if(flags[339] == 0) {
-		flags[339]++;
+	else if(flags[UNKNOWN_FLAG_NUMBER_00339] == 0) {
+		flags[UNKNOWN_FLAG_NUMBER_00339]++;
 		outputText("\"<i>You must be new here.  Go to the backroom on the left, undress yourself and wait with the others in the main room; the session will start soon.</i>\"\n\n", false);
 		outputText("Meekly following the others into the backroom, you start removing your " + player.armorName + ".  You watch other people, fully clothed when they step in, completely naked when they go out.  The sensation of something out of place continues to bother you with all these people casually speaking and laughing with their raging erections showing, and then you finally get it: everyone in here has a dick. Even the feminine-looking ones with ample breasts and a generous ass are actually herms, as their huge boners attest.\n\n", false);
 		
@@ -242,7 +242,7 @@ function fapResults(place:Number = 3):void {
 	outputText("You pant and relax, exhausted.  Your right arm is cramped and your " + cockDescript(x) + " is sore.  People around you look similarly tired and are slowly recovering from this rough collective dick-stroking session.  Someone gently taps your shoulder.  It is your left neighbor: \"<i>Well played. I didn't expect you would be so... resistant.  Few players last that long with me, because their rods generally don't endure my handjobs.</i>\"  He proceeds to shake hands; both you are smeared with pre-cum and various cock juices, but you don't care.  You smile and thank him for the good game and the orgasm.  It comes as something of a relief that everyone seems to show good sportsmanship.  Everyone is congratulating each other; various comments reach your ears about the game they just had and how well their opponents did.  Your right partner stands before you.  \"<i>Whoa, you sure know how to give a handjob!  That was amazing, and you know what?  I don't care if I haven't won!</i>\"  You tell him that you're glad that he enjoyed your efforts.  Everyone is now laughing and chatting casually, as if their still erect cocks weren't dripping semen and they weren't busy giving furious handjobs a few minutes ago.  ", false);
 		
 	//[if first time]
-	if(flags[339] == 1) outputText("You stand here, a little lost, wondering what will happen next.", false);
+	if(flags[UNKNOWN_FLAG_NUMBER_00339] == 1) outputText("You stand here, a little lost, wondering what will happen next.", false);
 	else outputText("You join them, congratulating some on the strength of their stroke, and commenting on the various aspects of the fapping game you've just had.", false);
 	outputText("\n\n", false);
 		
