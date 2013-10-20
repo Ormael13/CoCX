@@ -153,7 +153,7 @@ function exploreVillageRuin():void {
 		else outputText("weapons", false);
 		outputText(".  You check it over and spot an easy way to fold it up for transport.  This would be a fine addition to your camp, so you pack it up and haul it back.", false);
 		if(rack == 1) {
-			player.createKeyItem("Equipment Rack - Weapons",0,0,0,0);
+			player.createKeyItem("Equipment Rack - Weapons", 0, 0, 0, 0);
 			flags[254] = 1;
 		}
 		else {

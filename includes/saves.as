@@ -248,15 +248,15 @@ function saveGameObject(slot:String, isFile:Boolean):void
 	trace("SAVE DATAZ");
 	saveFile.data.short = player.short;
 	saveFile.data.a = player.a;
-	saveFile.data.long = player.long;
-	saveFile.data.capitalA = player.capitalA;
-	saveFile.data.temperment = player.temperment;
-	saveFile.data.special1 = player.special1;
-	saveFile.data.special2 = player.special2;
-	saveFile.data.special3 = player.special3;
-	saveFile.data.pronoun1 = player.pronoun1;
-	saveFile.data.pronoun2 = player.pronoun2;
-	saveFile.data.pronoun3 = player.pronoun3;
+	//saveFile.data.long = player.long;
+	//saveFile.data.capitalA = player.capitalA;
+	//saveFile.data.temperment = player.temperment;
+	//saveFile.data.special1 = player.special1;
+	//saveFile.data.special2 = player.special2;
+	//saveFile.data.special3 = player.special3;
+	//saveFile.data.pronoun1 = player.pronoun1;
+	//saveFile.data.pronoun2 = player.pronoun2;
+	//saveFile.data.pronoun3 = player.pronoun3;
 	
 	//Notes
 	if(nameBox.text != "") {
@@ -671,15 +671,15 @@ function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		clearGearStorage();
 		player.short = saveFile.data.short;
 		player.a = saveFile.data.a
-		player.long = saveFile.data.long;
-		player.capitalA = saveFile.data.capitalA;
-		player.temperment = saveFile.data.temperment;
-		player.special1 = saveFile.data.special1;
-		player.special2 = saveFile.data.special2;
-		player.special3 = saveFile.data.special3;
-		player.pronoun1 = saveFile.data.pronoun1;
-		player.pronoun2 = saveFile.data.pronoun2;
-		player.pronoun3 = saveFile.data.pronoun3;
+		//player.long = saveFile.data.long;
+		//player.capitalA = saveFile.data.capitalA;
+		//player.temperment = saveFile.data.temperment;
+		//player.special1 = saveFile.data.special1;
+		//player.special2 = saveFile.data.special2;
+		//player.special3 = saveFile.data.special3;
+		//player.pronoun1 = saveFile.data.pronoun1;
+		//player.pronoun2 = saveFile.data.pronoun2;
+		//player.pronoun3 = saveFile.data.pronoun3;
 		notes = saveFile.data.notes;
 		
 		//flags
