@@ -3,19 +3,19 @@
 //283	Sophie Disabled Forever
 //284	Has Ovi Event Procced?
 
-const SOPHIE_HEAT_COUNTER:int = 737;
-const SOPHIE_INCUBATION:int = 738;
-const SOPHIE_BROACHED_SLEEP_WITH:int = 739;
-const SOPHIE_ADULT_KID_COUNT:int = 740;
-const SOPHIE_DAUGHTER_MATURITY_COUNTER:int = 741;
-const SOPHIE_EGG_COUNTER:int = 742;
-const SOPHIE_FAMILY_INCEST:int = 743;
-const DAUGHTER_ONE_BIMBO:int = 750;
-const DAUGHTER_TWO_BIMBO:int = 751;
-const DAUGHTER_THREE_BIMBO:int = 752;
-const DAUGHTER_FOUR_BIMBO:int = 753;
-const TIMES_SOPHIE_AND_IZMA_FUCKED:int = 780;
-const TOLD_SOPHIE_TO_IZMA:int = 781;
+//const SOPHIE_HEAT_COUNTER:int = 737;
+//const SOPHIE_INCUBATION:int = 738;
+//const SOPHIE_BROACHED_SLEEP_WITH:int = 739;
+//const SOPHIE_ADULT_KID_COUNT:int = 740;
+//const SOPHIE_DAUGHTER_MATURITY_COUNTER:int = 741;
+//const SOPHIE_EGG_COUNTER:int = 742;
+//const SOPHIE_FAMILY_INCEST:int = 743;
+//const DAUGHTER_ONE_BIMBO:int = 750;
+//const DAUGHTER_TWO_BIMBO:int = 751;
+//const DAUGHTER_THREE_BIMBO:int = 752;
+//const DAUGHTER_FOUR_BIMBO:int = 753;
+//const TIMES_SOPHIE_AND_IZMA_FUCKED:int = 780;
+//const TOLD_SOPHIE_TO_IZMA:int = 781;
 
 /*Sophie TF Notes:
 DD tits become F, impairing flight to gliding at best.

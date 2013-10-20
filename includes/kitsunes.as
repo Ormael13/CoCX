@@ -1,8 +1,8 @@
-﻿const MANSION_VISITED:int = 626;
-const redheadIsFuta:int = 627;
-const MET_KITSUNES:int = 628;
-const KITSUNE_SHRINE_VISIT:int = 708;
-const TOOK_KITSUNE_STATUE:int = 709;
+﻿//const MANSION_VISITED:int = 626;
+//const redheadIsFuta:int = 627;
+//const MET_KITSUNES:int = 628;
+//const KITSUNE_SHRINE_VISIT:int = 708;
+//const TOOK_KITSUNE_STATUE:int = 709;
 
 //[Enter the Trickster] (Coded)
 function enterTheTrickster():void {

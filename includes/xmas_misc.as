@@ -1,11 +1,11 @@
 ﻿//CONSTS
-const CANDY_CANE_YEAR_MET:int = 637;
-const XMAS_CHICKEN_YEAR:int = 642;
-const KAMI_ENCOUNTER:int = 643;
-const POLAR_PETE_YEAR_MET:int = 644;
-const NIEVE_STAGE:int = 647;
-const NIEVE_GENDER:int = 648;
-const NIEVE_MOUTH:int = 649;
+//const CANDY_CANE_YEAR_MET:int = 637;
+//const XMAS_CHICKEN_YEAR:int = 642;
+//const KAMI_ENCOUNTER:int = 643;
+//const POLAR_PETE_YEAR_MET:int = 644;
+//const NIEVE_STAGE:int = 647;
+//const NIEVE_GENDER:int = 648;
+//const NIEVE_MOUTH:int = 649;
 
 //TOC (Ctr + F to find):
 //1. Kirbster's Bunny Trap

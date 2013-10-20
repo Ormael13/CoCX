@@ -1,12 +1,12 @@
-﻿const MET_NIAMH:int = 446;
-const GOT_NIAMH_BEER:int = 447;
-const TALKED_NIAMH:int = 448;
+﻿//const MET_NIAMH:int = 446;
+//const GOT_NIAMH_BEER:int = 447;
+//const TALKED_NIAMH:int = 448;
 //-1 = bazaar moved in, 0 = nothing, 1 = trigger time, otherwise time till trigger
-const NIAMH_MOVED_OUT_COUNTER:int = 449;
+//const NIAMH_MOVED_OUT_COUNTER:int = 449;
 //0 = normal, 1 = corrupt, 2 = bimbo
-const NIAMH_STATUS:int = 450;
-const NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER:int = 451;
-const TIMES_NIAMH_BAZAAR_MET:int = 452;
+//const NIAMH_STATUS:int = 450;
+//const NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER:int = 451;
+//const TIMES_NIAMH_BAZAAR_MET:int = 452;
 
 function telAdreNiamh():void {
 	if(flags[MET_NIAMH] == 0) {

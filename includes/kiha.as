@@ -1,13 +1,13 @@
 ﻿/*FLAGS STUFF*/
 //1 = PC asked her about it, past that it counts the times paid
-const KIHA_TOLL:int = 341;
+//const KIHA_TOLL:int = 341;
 //Tracks how many special explores the PC gets.
-const KIHA_TOLL_DURATION:int = 342;
-const TIMES_MET_KIHA:int = 343;
+//const KIHA_TOLL_DURATION:int = 342;
+//const TIMES_MET_KIHA:int = 343;
 //used to track the different levels of 'talk to Kiha
-const KIHA_TALK_STAGE:int = 344;
-const PC_WIN_LAST_KIHA_FIGHT:int = 345;
-const KIHA_CHOKED_OUT_PC:int = 432;
+//const KIHA_TALK_STAGE:int = 344;
+//const PC_WIN_LAST_KIHA_FIGHT:int = 345;
+//const KIHA_CHOKED_OUT_PC:int = 432;
 
 //Encounter Dragon-Gal 
 function encounterKiha():void {

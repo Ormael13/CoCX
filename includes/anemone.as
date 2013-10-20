@@ -30,14 +30,14 @@
 //-direct attacks cause PC to touch tentacles with a high probability, getting a shock of venom that lowers speed/str and inflames lust
 //-drops [TF item] and maybe some other lake- or factory-related item
 
-const TIMES_MET_ANEMONE:int = 453;
-const ANEMONE_KID:int = 454;
-const KID_ITEM_FIND_HOURS:int = 455;
-const ANEMONE_WATCH:int = 456;
-const ANEMONE_WEAPON:int = 457;
-const KID_A_XP:int = 756;
-const KID_SITTER:int = 757; //0 = no sitter, 1 = possible, 2 = doing dat shit
-const HAD_KID_A_DREAM:int = 758;
+//  TIMES_MET_ANEMONE:int = 453;
+//  ANEMONE_KID:int = 454;
+//  KID_ITEM_FIND_HOURS:int = 455;
+//  ANEMONE_WATCH:int = 456;
+//  ANEMONE_WEAPON:int = 457;
+//  KID_A_XP:int = 756;
+//  KID_SITTER:int = 757; //0 = no sitter, 1 = possible, 2 = doing dat shit
+//  HAD_KID_A_DREAM:int = 758;
 
 function anemonePreg():void {
 	player.knockUp(10,256,101);

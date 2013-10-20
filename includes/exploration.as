@@ -1,7 +1,7 @@
-﻿const MET_OTTERGIRL:int = 777;
-const HAS_SEEN_MINO_AND_COWGIRL:int = 892;
-const EXPLORATION_PAGE:int = 1015;
-const BOG_EXPLORED:int = 1016;
+﻿//const MET_OTTERGIRL:int = 777;
+//const HAS_SEEN_MINO_AND_COWGIRL:int = 892;
+//const EXPLORATION_PAGE:int = 1015;
+//const BOG_EXPLORED:int = 1016;
 function doExplore():void {
 	//vars for menu building
 	var forest:Number = 0;

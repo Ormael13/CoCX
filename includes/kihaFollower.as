@@ -21,21 +21,21 @@
 //ANAL CAPACITY = 94
 
 //-1 = left to spiders, 0 = normal, 1 = friend, 2 = warm
-const KIHA_AFFECTION_LEVEL:int = 421;
+//const KIHA_AFFECTION_LEVEL:int = 421;
 //Used during warm.  Maxes at 100
-const KIHA_AFFECTION:int = 422;
+//const KIHA_AFFECTION:int = 422;
 //0 = normal, 1 = Kiha has bitched/moved out about corruption, 2 she came back
-const KIHA_CORRUPTION_BITCH:int = 423;
-const KIHA_NEED_SPIDER_TEXT:int = 424;
+//const KIHA_CORRUPTION_BITCH:int = 423;
+//const KIHA_NEED_SPIDER_TEXT:int = 424;
 //1 if they fucked, -1 if you ran
-const KIHA_AND_HEL_WHOOPIE:int = 425;
-const KIHA_ADMITTED_WARM_FEELINZ:int = 426;
-const KIHA_MOVE_IN_OFFER:int = 427;
-const KIHA_FOLLOWER:int = 428;
-const KIHA_NEEDS_TO_REACT_TO_HORSECOCKING:int = 429;
-const KIHA_CERVIXGINITY_TAKEN:int = 430;
-const KIHA_HORSECOCK_FUCKED:int = 431;
-const KIHA_CAMP_WATCH:int = 982;
+//const KIHA_AND_HEL_WHOOPIE:int = 425;
+//const KIHA_ADMITTED_WARM_FEELINZ:int = 426;
+//const KIHA_MOVE_IN_OFFER:int = 427;
+//const KIHA_FOLLOWER:int = 428;
+//const KIHA_NEEDS_TO_REACT_TO_HORSECOCKING:int = 429;
+//const KIHA_CERVIXGINITY_TAKEN:int = 430;
+//const KIHA_HORSECOCK_FUCKED:int = 431;
+//const KIHA_CAMP_WATCH:int = 982;
 
 function followerKiha():Boolean {
 	if(flags[KIHA_CORRUPTION_BITCH] == 1) return false;

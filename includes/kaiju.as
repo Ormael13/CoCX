@@ -1,8 +1,8 @@
-﻿const KAIJU_MEETINGS:int = 910;
-const KAIJU_DISABLED:int = 911;
-const KAIJU_TALK_CYCLE:int = 912;
-const KAIJU_COCK:int = 913;
-const KAIJU_BAD_END_COUNTER:int = 914;
+﻿//const KAIJU_MEETINGS:int = 910;
+//const KAIJU_DISABLED:int = 911;
+//const KAIJU_TALK_CYCLE:int = 912;
+//const KAIJU_COCK:int = 913;
+//const KAIJU_BAD_END_COUNTER:int = 914;
 
 //First encounter
 //Boat

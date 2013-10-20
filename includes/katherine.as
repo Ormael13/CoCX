@@ -1,11 +1,11 @@
 ﻿//CAPACITY: 70
 
-const KATHERINE_UNLOCKED:int = 398;
-const KATHERINE_DICK_COUNT:int = 399;
-const KATHERINE_DICK_LENGTH:int = 400;
-const KATHERINE_KNOT_THICKNESS:int = 401;
-const KATHERINE_BALL_SIZE:int = 402;
-const KATHERINE_TIMES_SEXED:int = 403;
+//const KATHERINE_UNLOCKED:int = 398;
+//const KATHERINE_DICK_COUNT:int = 399;
+//const KATHERINE_DICK_LENGTH:int = 400;
+//const KATHERINE_KNOT_THICKNESS:int = 401;
+//const KATHERINE_BALL_SIZE:int = 402;
+//const KATHERINE_TIMES_SEXED:int = 403;
 
 function kathCock():String {
 	return NPCCockDescript(2,flags[KATHERINE_DICK_LENGTH]);

@@ -1,11 +1,11 @@
-﻿const JOEY_OFFERED_MILKER:int = 466;
-const OWN_MAIDEN_BIKINI:int = 770;
-const COUNTDOWN_TO_NIGHT_RAPE:int = 872;
-const SOCK_COUNTER:int = 895;
-const SOCK_HOLDING:int = 896;
-const FOUND_SOCKS:int = 897;
-const SOCKS_BOUGHT:int = 898;
-const MIDAS_JERKED:int = 899;
+﻿// JOEY_OFFERED_MILKER:int = 466;
+// OWN_MAIDEN_BIKINI:int = 770;
+// COUNTDOWN_TO_NIGHT_RAPE:int = 872;
+// SOCK_COUNTER:int = 895;
+// SOCK_HOLDING:int = 896;
+// FOUND_SOCKS:int = 897;
+// SOCKS_BOUGHT:int = 898;
+// MIDAS_JERKED:int = 899;
 //Set Up With The Travelling, Tainted Bazaar
 
 

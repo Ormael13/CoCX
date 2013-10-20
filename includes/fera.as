@@ -1,4 +1,4 @@
-﻿const PUMPKIN_FUCK_YEAR_DONE:int = 522;
+﻿//const PUMPKIN_FUCK_YEAR_DONE:int = 522;
 
 function isHalloween():Boolean {
 	return ((date.date >= 28 && date.month == 9) || (date.date < 2 && date.month == 10));

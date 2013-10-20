@@ -1,4 +1,4 @@
-﻿const FARM_DISABLED:int = 464;
+﻿//const FARM_DISABLED:int = 464;
 
 function farmExploreEncounter():void {
 	var temporary:Number = 0;

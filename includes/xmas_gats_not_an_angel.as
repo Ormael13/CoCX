@@ -1,7 +1,7 @@
-﻿const GATS_ANGEL_GOOD_ENDED:int = 638;
-const GATS_ANGEL_DISABLED:int = 639;
-const GATS_ANGEL_QUEST_BEGAN:int = 640;
-const GATS_ANGEL_TIME_TO_FIND_KEY:int = 641;
+﻿//const GATS_ANGEL_GOOD_ENDED:int = 638;
+//const GATS_ANGEL_DISABLED:int = 639;
+//const GATS_ANGEL_QUEST_BEGAN:int = 640;
+//const GATS_ANGEL_TIME_TO_FIND_KEY:int = 641;
 /*A Christmas Carol
 
 Entry for the 2012 CoC Contest, \"<i>A Very Milky XMas</i>\".

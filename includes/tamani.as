@@ -1,5 +1,5 @@
-﻿const TIMES_OVIPOSITED_TAMANI:int = 581;
-const TAMANI_TIME_OUT:int = 580;
+﻿//const TIMES_OVIPOSITED_TAMANI:int = 581;
+//const TAMANI_TIME_OUT:int = 580;
 
 /*NOTES:
 Tamani encountered if you have a dick, short alternate female scene available.

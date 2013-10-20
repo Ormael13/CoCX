@@ -124,12 +124,158 @@ def cleanStaleDoEventIfs():
 	with open("./includes/doEvent.as", "w") as eventF:
 		eventF.write(eventS)
 
+def getFlagDict():
+	with open("FlagDictionary.txt", "r") as fd:
+		lines = fd.readlines()
+	ret = {}
+	for line in lines:
+		num, desc = line.split("=", 1)
+		desc = desc.split("/")[-1]
+		num = num.rstrip().lstrip()
+		desc = desc.rstrip().lstrip()
+		ret[int(num)] = desc
+
+	return ret
+
+
+def cleanFlags():
+	with open("flagDefsOld.as", "r") as fA:
+		good = fA.readlines()
+
+	maxLen = 0
+	targetLen = 70
+	out = {}
+
+	flagDict = getFlagDict()
+
+	for line in good:
+		if "=" and ";" in line:
+
+			prefix, postfix = line.split("=", 1)
+			prefix = prefix.rstrip().lstrip()
+			postfix = postfix.rstrip().lstrip()
+
+			num_s, comment = postfix.split(";")
+			comment = comment.split("/")[-1]
+			if maxLen < len(prefix):
+				maxLen = len(prefix)
+
+			num_i = int(num_s)
+
+			tmp = prefix + " "*(targetLen - len(prefix))
+			tmp += "=" + " "*(5-len(num_s)) + num_s + "; // " + comment
+			if num_i in flagDict:
+				if not flagDict[num_i] in tmp:
+					tmp += flagDict[num_i]
+				else:
+					print "In tmp already = ", flagDict[num_i]
+
+			out[num_i] = tmp
+
+
+		else:
+			if line.rstrip().lstrip() != "":
+				print "Wut:", line
+	print "done"
+	print maxLen
+	outL = []
+
+	for x in range(3000):
+		if x in out:
+			outL.append(out[x])
+		else:
+			prefix = "const UNKNOWN_FLAG_NUMBER_%05d:int" % x
+			tmp = prefix + " "*(targetLen - len(prefix))
+			tmp += "=" + " "*(5-len(str(x))) + str(x) + ";"
+
+			if x in flagDict:
+				tmp += " // %s" % flagDict[x]
+			outL.append(tmp)
+
+	with open("flagDefs.as", "w") as outF:
+		for x in outL:
+			#print x
+			outF.write("%s\n" % x)
+
+	#for key, value in out.iteritems():
+	#	print key, value
+
+
+def insertFlags():
+
+	with open("flagDefs.as", "r") as flagsF:
+		lines = flagsF.readlines()
+
+	flags = {}
+	for line in lines:
+		prefix, postfix = line.split("=", 1)
+		prefix = prefix.rstrip().lstrip().split()[-1].split(":")[0]
+		postfix = postfix.rstrip().lstrip().split(";")[0]
+		print postfix, prefix
+		flags[postfix] = prefix
+
+
+	#Ok, now we have a eventNo <-> event number macro
+
+	flagRE = re.compile(r"flags\[(\d*?)\]")
+
+
+	
+
+	
+	filelist = os.listdir("./includes")
+	print filelist
+	flagNum = 0
+	for filename in filelist:
+		if filename.endswith(".as") and not filename.find("doEvent")+1:			#Iterate over all the .as files in ./includes, and skip the doEvent file
+			with open(os.path.join("./includes", filename), "r") as fileH:
+				tmp = fileH.read()
+
+			# BRUTE FORCE IT. BECAUSE LAZY
+			tmpO = tmp
+
+			insertionPoint = 0
+			while flagRE.search(tmp[insertionPoint:]):
+			
+				m = flagRE.search(tmp[insertionPoint:])
+				start, length = m.start(1)+insertionPoint, len(m.group(1))
+
+				print m.group(), m.group(1)
+				insertionPoint = start+length
+				flagNum += 1
+
+				prefix, call, postfix = tmp[:start], tmp[start:start+length], tmp[start+length:]
+
+				oldCall = call
+				call = call.replace(call, flags[call])
+
+				if oldCall != call:		
+					print "Old:", oldCall
+					print "New:", call
+
+				tmp = prefix+call+postfix
+
+	'''
+				
+				insertionPoint = start+length
+
+			print len(tmpO), len(tmp)
+			print "Length Delta", len(tmp)-len(tmpO) 
+
+			with open(os.path.join("./includes", filename), "w") as fileH:
+				tmp = fileH.write(tmp)
+
+	'''
+	print "Total Integer flag indices:", flagNum
+
+
 if __name__ == "__main__":
 
 	print "OMG WE'S BREAKIN STUF!!111one!"
 
-	cleanEventNumbers()
+	#cleanEventNumbers()
 	#cleanStaleDoEventIfs()
 
-	#print eventS
-	#print eventS
+	cleanFlags()
+
+	insertFlags()

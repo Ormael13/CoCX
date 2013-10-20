@@ -1,19 +1,19 @@
-﻿const TIMES_IN_BENOITS:int = 562;
-const BENOIT_AFFECTION:int = 563;
-const BENOIT_EXPLAINED_SHOP:int = 564;
-const BENOIT_SUGGEST_UNLOCKED:int = 565;
-const BENOIT_1:int = 567;
-const BENOIT_2:int = 568;
-const BENOIT_3:int = 569;
-const BENOIT_TALKED_TODAY:int = 570;
-const BENOIT_TALKED_TO_PROPERLY:int = 571;
-const BENOIT_EGGS:int = 572;
-const BENOIT_TIMES_SEXED_FEMPCS:int = 573;
-const BENOIT_BIRTH_DELAY:int = 574;
-const BENOIT_WOMB_TALK_UNLOCKED:int = 575;
-const BENOIT_POST_FIRSTFUCK_TALK:int = 576;
-const BENOIT_TESTED_BASILISK_WOMB:int = 577;
-const BENOIT_GENERIC_EGGS:int = 632;
+﻿//  TIMES_IN_BENOITS:int = 562;
+//  BENOIT_AFFECTION:int = 563;
+//  BENOIT_EXPLAINED_SHOP:int = 564;
+//  BENOIT_SUGGEST_UNLOCKED:int = 565;
+//  BENOIT_1:int = 567;
+//  BENOIT_2:int = 568;
+//  BENOIT_3:int = 569;
+//  BENOIT_TALKED_TODAY:int = 570;
+//  BENOIT_TALKED_TO_PROPERLY:int = 571;
+//  BENOIT_EGGS:int = 572;
+//  BENOIT_TIMES_SEXED_FEMPCS:int = 573;
+//  BENOIT_BIRTH_DELAY:int = 574;
+//  BENOIT_WOMB_TALK_UNLOCKED:int = 575;
+//  BENOIT_POST_FIRSTFUCK_TALK:int = 576;
+//  BENOIT_TESTED_BASILISK_WOMB:int = 577;
+//  BENOIT_GENERIC_EGGS:int = 632;
 //(Shop open between 9:00 and 17:00)
 
 //Fen, you'll need a function to determine gendered pronouns and version of name for this character. I've formatted all the eligible places I found in the order of [male/female]. -Z

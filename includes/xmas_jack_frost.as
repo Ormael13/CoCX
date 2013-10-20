@@ -1,5 +1,5 @@
-﻿const JACK_FROST_YEAR:int = 645;
-const JACK_FROST_PROGRESS:int = 646;
+﻿//const JACK_FROST_YEAR:int = 645;
+//const JACK_FROST_PROGRESS:int = 646;
 
 //Jack Frost and Snow
 /*

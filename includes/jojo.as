@@ -1,8 +1,8 @@
-﻿const TIMES_AMILY_AND_JOJO_PLAYED_TIMES:int = 434;
-const AMILY_X_JOJO_COOLDOWN:int = 435;
-const JOJO_MOVE_IN_DISABLED:int = 550;
-const TIMES_EGGED_JOJO:int = 590;
-const JOJO_EGGCUBATE_COUNT:int = 591;
+﻿//const TIMES_AMILY_AND_JOJO_PLAYED_TIMES:int = 434;
+//const AMILY_X_JOJO_COOLDOWN:int = 435;
+//const JOJO_MOVE_IN_DISABLED:int = 550;
+//const TIMES_EGGED_JOJO:int = 590;
+//const JOJO_EGGCUBATE_COUNT:int = 591;
 
 
 function assholeOrPussy():String {

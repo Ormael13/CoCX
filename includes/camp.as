@@ -1,4 +1,4 @@
-﻿const SLEEP_WITH:int = 701;
+﻿//  SLEEP_WITH:int = 701;
 
 // import classes.creature;
 // import classes.cockClass;

@@ -1,16 +1,16 @@
 ﻿//VARS
-const TIMES_FUCKED_FLOWER:int = 594;
-const TIMES_RIDDEN_FLOWER:int = 595;
-const FUCK_FLOWER_LEVEL:int = 596;
-const FUCK_FLOWER_GROWTH_COUNTER:int = 597;
-const FUCK_FLOWER_KILLED:int = 598;
-const AMILY_TREE_FLIPOUT:int = 599;
-const HOLLI_FRUIT:int = 600;
-const HOLLI_FRUIT_EXPLAINED:int = 601;
-const HOLLI_DEFENSE_ON:int = 602;
-const HOLLI_SUBMISSIVE:int = 682;
-const FOUGHT_HOLLI:int = 923;
-const THREATENED_HOLLI:int = 924;
+//const TIMES_FUCKED_FLOWER:int = 594;
+//const TIMES_RIDDEN_FLOWER:int = 595;
+//const FUCK_FLOWER_LEVEL:int = 596;
+//const FUCK_FLOWER_GROWTH_COUNTER:int = 597;
+//const FUCK_FLOWER_KILLED:int = 598;
+//const AMILY_TREE_FLIPOUT:int = 599;
+//const HOLLI_FRUIT:int = 600;
+//const HOLLI_FRUIT_EXPLAINED:int = 601;
+//const HOLLI_DEFENSE_ON:int = 602;
+//const HOLLI_SUBMISSIVE:int = 682;
+//const FOUGHT_HOLLI:int = 923;
+//const THREATENED_HOLLI:int = 924;
 
 /*Plant Sprout Notes:
 	-Small sapling plants near corner of camp after 2nd Marae meeting.
