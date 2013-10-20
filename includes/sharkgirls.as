@@ -31,7 +31,7 @@ Sex Life: The shark girls treat sex like a game or a sport, constantly battling 
 //[Explore Lake]
 function sharkGirlEncounter(exploreLoc:Number = 0) {
 	//Set 'PC met Sharkgirls' for Izma stuff
-	if(flags[230] == 0) flags[230] = 1;
+	if(flags[UNKNOWN_FLAG_NUMBER_00230] == 0) flags[UNKNOWN_FLAG_NUMBER_00230] = 1;
 	if(player.hasStatusAffect("Shark-Girl") < 0) player.createStatusAffect("Shark-Girl",0,0,0,0);
 	else if(player.statusAffectv1("Shark-Girl") >= 7 && player.totalCocks() > 0) {
 		spriteSelect(70);

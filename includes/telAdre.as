@@ -114,11 +114,11 @@ function telAdreTour():void {
 }
 
 function telAdreMenu():void {
-	if(flags[VALENTINES_EVENT_YEAR] < date.fullYear && player.balls > 0 && player.hasCock() && flags[54] >= 4 && flags[105] > 0 && isValentine()) {
+	if(flags[VALENTINES_EVENT_YEAR] < date.fullYear && player.balls > 0 && player.hasCock() && flags[UNKNOWN_FLAG_NUMBER_00054] >= 4 && flags[UNKNOWN_FLAG_NUMBER_00105] > 0 && isValentine()) {
 		crazyVDayShenanigansByVenithil();
 		return;
 	}
-	if(!urtaBusy() && flags[33] == 0 && rand(15) == 0 && hours > 15) {
+	if(!urtaBusy() && flags[UNKNOWN_FLAG_NUMBER_00033] == 0 && rand(15) == 0 && hours > 15) {
 		urtaIsABadass();
 		return;
 	}
@@ -140,7 +140,7 @@ function telAdreMenu():void {
 		urtaSpecialDeliveries();
 		return;
 	}
-	if(flags[242] == -1) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00242] == -1) {
 		runAwayMaddieFollowup();
 		return;
 	}
@@ -148,7 +148,7 @@ function telAdreMenu():void {
 	outputText("A sign depicting a hermaphroditic centaur covered in piercings hangs in front of one of the sandstone buildings, and bright pink lettering declares it to be the 'Piercing Studio'.  You glance over and see the wooden facade of Urta's favorite bar, 'The Wet Bitch'.  How strange that those would be what she talks about during a tour.  In any event you can also spot some kind of wolf-man banging away on an anvil in a blacksmith's stand, and a foppishly-dressed dog-man with large floppy ears seems to be running some kind of pawnshop in his stand.  Steam boils from the top of a dome-shaped structure near the far end of the street, and simple lettering painted on the dome proclaims it to be a bakery.  Perhaps those shops will be interesting as well.", false);
 	var homes:Boolean = false;
 	var homeB:int = 0;
-	if(flags[133] == -2) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00133] == -2) {
 		if(RaphaelLikes())
 		{
 			homes = true;
@@ -186,7 +186,7 @@ function houses():void {
 	clearOutput();
 	outputText("Whose home will you visit?");
 	var orphanage:int = 0;
-	if(flags[133] == -2) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00133] == -2) {
 		if(RaphaelLikes())
 		{
 			orphanage = 3975;
@@ -906,34 +906,34 @@ function barTelAdre():void {
 		button = anotherButton(button,"Ask4Amily",eventParser,3187);
 	}
 	//DOMINIKA
-	if(hours > 17 && hours < 20 && flags[150] != -1) {
+	if(hours > 17 && hours < 20 && flags[UNKNOWN_FLAG_NUMBER_00150] != -1) {
 		button = anotherButton(button,"Dominika",eventParser,2739);
 	}
 	//EDRYN!
 	if(flags[EDRYN_BIRF_COUNTDOWN] == 0) {
 		if(edrynBar()) {
 			//Edryn panic appearance!
-			if(flags[71] == 0 && flags[68] > 0 && flags[69] == 0) {
+			if(flags[UNKNOWN_FLAG_NUMBER_00071] == 0 && flags[EDRYN_PREGNANCY_INCUBATION] > 0 && flags[UNKNOWN_FLAG_NUMBER_00069] == 0) {
 				outputText("\n\nEdryn smiles when she sees you and beckons you towards her.  Fear and some kind of frantic need are painted across her face, imploring you to come immediately.  Whatever the problem is, it doesn't look like it can wait.", false);
 				doNext(findOutEdrynIsPregnant);
-				flags[71]++;
+				flags[UNKNOWN_FLAG_NUMBER_00071]++;
 				return;
 			}
 			//Edryn re-preggers appearance!
-			if(flags[71] == 0 && flags[69] > 0) {
-				flags[71]++;
+			if(flags[UNKNOWN_FLAG_NUMBER_00071] == 0 && flags[UNKNOWN_FLAG_NUMBER_00069] > 0) {
+				flags[UNKNOWN_FLAG_NUMBER_00071]++;
 				outputText("\n\nEdryn smiles at you and yells, \"<i>Guess what " + player.short + "?  I'm pregnant again!</i>\"  There are some hoots and catcalls but things quickly die down.  You wonder if her scent will be as potent as before?", false);
 			}
 			//Edryn just had a kid and hasn't talked about it!
-			else if(flags[72] == 1) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00072] == 1) {
 				outputText("\n\nEdryn the centaur isn't pregnant anymore!  She waves excitedly at you, beckoning you over to see her.  It looks like she's already given birth to your child!", false);
 			}
 			//Mid-pregnancy appearance
-			else if(flags[68] > 0) {
+			else if(flags[EDRYN_PREGNANCY_INCUBATION] > 0) {
 				outputText("\n\nEdryn is seated at her usual table, and chowing down with wild abandon.  A stack of plates is piled up next to her.  Clearly she has been doing her best to feed her unborn child.  She notices you and waves, blushing heavily.", false); 
 			}
 			//Appearance changes if has had kids
-			else if(flags[69] > 0) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00069] > 0) {
 				outputText("\n\nEdryn is seated at her usual place, picking at a plate of greens and sipping a mug of the local mead.  She looks bored until she sees you.  Her expression brightens immediately, and Edryn fiddles with her hair and changes her posture slightly.  You aren't sure if she means to, but her cleavage is prominently displayed in an enticing manner.", false);
 			}
 			else if(player.statusAffectv1("Edryn") < 3) {
@@ -951,7 +951,7 @@ function barTelAdre():void {
 	//NANCY
 	if(auntNancy(false)) {
 		auntNancy(true);
-		if(flags[263] > 0) button = anotherButton(button,"Nancy",eventParser,2970);
+		if(flags[UNKNOWN_FLAG_NUMBER_00263] > 0) button = anotherButton(button,"Nancy",eventParser,2970);
 		else button = anotherButton(button,"Barkeep",eventParser,2970);
 	}
 	else outputText("\n\nIt doesn't look like there's a bartender working at the moment.", false);
@@ -979,37 +979,37 @@ function barTelAdre():void {
 		//Scylla repeat
 		//big dick!
 		if(player.longestCockLength() >= 12) {
-			if(flags[54] == 0) {
+			if(flags[UNKNOWN_FLAG_NUMBER_00054] == 0) {
 				outputText("\n\nThere is one nun sitting in a corner booth who catches your eye.  She sits straight-backed against the dark, wood chair, her thin waist accentuating the supple curve of her breasts. She's dressed in a black robe that looks a few sizes too small for her hips and wears a black and white cloth over her head.", false);
 				button = anotherButton(button,"Nun",eventParser,2447);
 			}
-			else if(flags[54] == 1 && rand(5) == 0) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00054] == 1 && rand(5) == 0) {
 				outputText("", true);
 				scyllaRoundII();
 				return;
 			}
-			else if(flags[54] == 2 && rand(5) == 0) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00054] == 2 && rand(5) == 0) {
 				outputText("", true);
 				scyllaRoundThreeCUM()
 				return;
 			}
 			//Round 4 goes here
-			else if(flags[54] == 3 && rand(5) == 0) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00054] == 3 && rand(5) == 0) {
 				scyllaRoundIVGo();
 				return;
 			}
 			//Round 6 - catscratch!
-			else if(flags[54] == 5 && rand(5) == 0) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00054] == 5 && rand(5) == 0) {
 				outputText("\n\nIt looks like Scylla is here but getting ready to leave.  You could check and see what the misguided nun is up to.", false);
 				button = anotherButton(button,"Scylla",eventParser,2705);
 			}
 			//Round 5 - repeatable!
-			else if(flags[54] >= 4 && (hours == 18 || hours == 19)) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00054] >= 4 && (hours == 18 || hours == 19)) {
 				outputText("\n\nYou see Scylla's white and black nun's habit poking above the heads of the other patrons. The tall woman seems unaware of her effect on those around her, but it's clear by the way people are crowding she's acquired a reputation by now. You're not sure what she's doing, but you could push your way through to find out.", false);
 				button = anotherButton(button,"Scylla",eventParser,2563);
 			}			
 			//Round 2.5 Repeatable
-			else if(flags[54] >= 2 && flags[FED_SCYLLA_TODAY] == 0 && hours >= 7 && hours <= 11) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00054] >= 2 && flags[FED_SCYLLA_TODAY] == 0 && hours >= 7 && hours <= 11) {
 				outputText("\n\nIt looks like Scylla is milling around here this morning, praying as she keeps an eye out for someone to 'help'.");
 				button = anotherButton(button,"Scylla",eventParser,3992);
 			}
@@ -1024,19 +1024,19 @@ function barTelAdre():void {
 	if(!urtaBusy() && flags[AMILY_VISITING_URTA] != 1 && hours < 15) {
 		//Scylla + Urta sitting in a tree
 		// SOME COMFORT     FUCKED URTA      NOT PISSED      DRUNK TIME    SCYLLA TO LV4    RANDOM CHANCE  HAS THIS HAPPENED BEFORE? SCYLLA REQS ->
-		if(flags[13] == 0 && flags[12] > 2 && flags[11] > 0 && flags[31] < 1 && (urtaDrunk() || flags[143] > 0) && flags[54] >= 3 && rand(3) == 0 && (flags[143] == 0 || (flags[147] == 0 && flags[145] > 0)) && ((flags[143] > 0 && !urtaDrunk()) || player.balls > 0) && player.totalCocks() > 0 && !hasButton("Scylla") && !hasButton("ScyllaCats")) {
-			if(flags[143] > 0) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00013] == 0 && flags[UNKNOWN_FLAG_NUMBER_00012] > 2 && flags[UNKNOWN_FLAG_NUMBER_00011] > 0 && flags[UNKNOWN_FLAG_NUMBER_00031] < 1 && (urtaDrunk() || flags[UNKNOWN_FLAG_NUMBER_00143] > 0) && flags[UNKNOWN_FLAG_NUMBER_00054] >= 3 && rand(3) == 0 && (flags[UNKNOWN_FLAG_NUMBER_00143] == 0 || (flags[UNKNOWN_FLAG_NUMBER_00147] == 0 && flags[UNKNOWN_FLAG_NUMBER_00145] > 0)) && ((flags[UNKNOWN_FLAG_NUMBER_00143] > 0 && !urtaDrunk()) || player.balls > 0) && player.totalCocks() > 0 && !hasButton("Scylla") && !hasButton("ScyllaCats")) {
+			if(flags[UNKNOWN_FLAG_NUMBER_00143] > 0) {
 				outputText("\n\nUrta's usual place is vacant, though her table still holds a half-drank glass of water.  If it's anything like the last time this happened, she's snuck into a back room with Scylla to relieve some pressure.  It might not hurt to join in...", false);
 			}
 			else {
-				if(flags[143] == 0) {
+				if(flags[UNKNOWN_FLAG_NUMBER_00143] == 0) {
 					outputText("\n\n<b>Though Urta would normally be here getting sloshed, her usual spot is completely vacant.  You ask around but all you get are shrugs and giggles.  Something isn't quite right here.  You see an empty bottle of one of her favorite brands of whiskey still rolling on her table, so she can't have been gone long.  Maybe she had guard business, or had to head to the back rooms for something?</b>", false);
 				}
 				else {
 					outputText("\n\nUrta's usual place is vacant, though her table still holds a half-drank mug of something potent and alcoholic.  If it's anything like the last time this happened, she's snuck into a back room with Scylla to relieve some pressure.  It might not hurt to join in...", false);
 				}
 			}
-			flags[13] = 4;
+			flags[UNKNOWN_FLAG_NUMBER_00013] = 4;
 			button = anotherButton(button,"Back Room",eventParser,2697);
 		}
 		else if(urtaBarDescript()) {
@@ -1071,27 +1071,27 @@ function oldbarTelAdre():void {
 	if(!urtaBusy()) {
 		if(edrynBar()) {
 			//Edryn panic appearance!
-			if(flags[71] == 0 && flags[68] > 0 && flags[69] == 0) {
+			if(flags[UNKNOWN_FLAG_NUMBER_00071] == 0 && flags[EDRYN_PREGNANCY_INCUBATION] > 0 && flags[UNKNOWN_FLAG_NUMBER_00069] == 0) {
 				outputText("\n\nEdryn smiles when she sees you and beckons you towards her.  Fear and some kind of frantic need are painted across her face, imploring you to come immediately.  Whatever the problem is, it doesn't look like it can wait.", false);
 				doNext(findOutEdrynIsPregnant);
-				flags[71]++;
+				flags[UNKNOWN_FLAG_NUMBER_00071]++;
 				return;
 			}
 			//Edryn re-preggers appearance!
-			if(flags[71] == 0 && flags[69] > 0) {
-				flags[71]++;
+			if(flags[UNKNOWN_FLAG_NUMBER_00071] == 0 && flags[UNKNOWN_FLAG_NUMBER_00069] > 0) {
+				flags[UNKNOWN_FLAG_NUMBER_00071]++;
 				outputText("\n\nEdryn smiles at you and yells, \"<i>Guess what " + player.short + "?  I'm pregnant again!</i>\"  There are some hoots and catcalls but things quickly die down.  You wonder if her scent will be as potent as before?", false);
 			}
 			//Edryn just had a kid and hasn't talked about it!
-			else if(flags[72] == 1) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00072] == 1) {
 				outputText("\n\nEdryn the centaur isn't pregnant anymore!  She waves excitedly at you, beckoning you over to see her.  It looks like she's already given birth to your child!", false);
 			}
 			//Mid-pregnancy appearance
-			else if(flags[68] > 0) {
+			else if(flags[EDRYN_PREGNANCY_INCUBATION] > 0) {
 				outputText("\n\nEdryn is seated at her usual table, and chowing down with wild abandon.  A stack of plates is piled up next to her.  Clearly she has been doing her best to feed her unborn child.  She notices you and waves, blushing heavily.", false); 
 			}
 			//Appearance changes if has had kids
-			else if(flags[69] > 0) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00069] > 0) {
 				outputText("\n\nEdryn is seated at her usual place, picking at a plate of greens and sipping a mug of the local mead.  She looks bored until she sees you.  Her expression brightens immediately, and Edryn fiddles with her hair and changes her posture slightly.  You aren't sure if she means to, but her cleavage is prominently displayed in an enticing manner.", false);
 			}
 			else if(player.statusAffectv1("Edryn") < 3) {
@@ -1112,40 +1112,40 @@ function oldbarTelAdre():void {
 		//Scylla repeat
 		//big dick!
 		if(player.longestCockLength() >= 12) {
-			if(flags[54] == 0) {
+			if(flags[UNKNOWN_FLAG_NUMBER_00054] == 0) {
 				outputText("\n\nThere is one nun sitting in a corner booth who catches your eye.  She sits straight-backed against the dark, wood chair, her thin waist accentuating the supple curve of her breasts. She's dressed in a black robe that looks a few sizes too small for her hips and wears a black and white cloth over her head.", false);
 				misc1 = 2447;
 				misc1Name = "Nun";
 			}
-			else if(flags[54] == 1 && rand(5) == 0) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00054] == 1 && rand(5) == 0) {
 				outputText("", true);
 				scyllaRoundII();
 				return;
 			}
-			else if(flags[54] == 2 && rand(5) == 0) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00054] == 2 && rand(5) == 0) {
 				outputText("", true);
 				scyllaRoundThreeCUM()
 				return;
 			}
 			//Round 4 goes here
-			else if(flags[54] == 3 && rand(5) == 0) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00054] == 3 && rand(5) == 0) {
 				scyllaRoundIVGo();
 				return;
 			}
 			//Round 6 - catscratch!
-			else if(flags[54] == 5 && rand(5) == 0) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00054] == 5 && rand(5) == 0) {
 				outputText("\n\nIt looks like Scylla is here but getting ready to leave.  You could check and see what the misguided nun is up to.", false);
 				misc1Name = "Scylla";
 				misc1 = 2705;
 			}
 			//Round 5 - repeatable!
-			else if(flags[54] >= 4 && (hours == 18 || hours == 19)) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00054] >= 4 && (hours == 18 || hours == 19)) {
 				outputText("\n\nYou see Scylla's white and black nun's habit poking above the heads of the other patrons. The tall woman seems unaware of her effect on those around her, but it's clear by the way people are crowding she's acquired a reputation by now. You're not sure what she's doing, but you could push your way through to find out.", false);
 				misc1Name = "Scylla";
 				misc1 = 2563;
 			}			
 			//Round 2.5 Repeatable
-			else if(flags[54] >= 2 && flags[FED_SCYLLA_TODAY] == 0 && hours >= 7 && hours <= 11) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00054] >= 2 && flags[FED_SCYLLA_TODAY] == 0 && hours >= 7 && hours <= 11) {
 				outputText("\n\nIt looks like Scylla is milling around here this morning, praying as she keeps an eye out for someone to 'help'.");
 				misc1Name = "Scylla";
 				misc1 = 3992;
@@ -1172,23 +1172,23 @@ function oldbarTelAdre():void {
 	if(!urtaBusy() && flags[AMILY_VISITING_URTA] != 1 && hours < 15) {
 		//Scylla + Urta sitting in a tree
 		// SOME COMFORT     FUCKED URTA      NOT PISSED      DRUNK TIME    SCYLLA TO LV4    RANDOM CHANCE  HAS THIS HAPPENED BEFORE? SCYLLA REQS ->
-		if(flags[13] == 0 && flags[12] > 2 && flags[11] > 0 && flags[31] < 1 && (urtaDrunk() || flags[143] > 0) && flags[54] >= 3 && rand(3) == 0 && (flags[143] == 0 || (flags[147] == 0 && flags[145] > 0)) && ((flags[143] > 0 && !urtaDrunk()) || player.balls > 0) && player.totalCocks() > 0 && misc1Name != "Scylla") {
-			if(flags[143] > 0) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00013] == 0 && flags[UNKNOWN_FLAG_NUMBER_00012] > 2 && flags[UNKNOWN_FLAG_NUMBER_00011] > 0 && flags[UNKNOWN_FLAG_NUMBER_00031] < 1 && (urtaDrunk() || flags[UNKNOWN_FLAG_NUMBER_00143] > 0) && flags[UNKNOWN_FLAG_NUMBER_00054] >= 3 && rand(3) == 0 && (flags[UNKNOWN_FLAG_NUMBER_00143] == 0 || (flags[UNKNOWN_FLAG_NUMBER_00147] == 0 && flags[UNKNOWN_FLAG_NUMBER_00145] > 0)) && ((flags[UNKNOWN_FLAG_NUMBER_00143] > 0 && !urtaDrunk()) || player.balls > 0) && player.totalCocks() > 0 && misc1Name != "Scylla") {
+			if(flags[UNKNOWN_FLAG_NUMBER_00143] > 0) {
 				outputText("\n\nUrta's usual place is vacant, though her table still holds a half-drank glass of water.  If it's anything like the last time this happened, she's snuck into a back room with Scylla to relieve some pressure.  It might not hurt to join in...", false);
 			}
 			else {
-				if(flags[143] == 0) {
+				if(flags[UNKNOWN_FLAG_NUMBER_00143] == 0) {
 					outputText("\n\n<b>Though Urta would normally be here getting sloshed, her usual spot is completely vacant.  You ask around but all you get are shrugs and giggles.  Something isn't quite right here.  You see an empty bottle of one of her favorite brands of whiskey still rolling on her table, so she can't have been gone long.  Maybe she had guard business, or had to head to the back rooms for something?</b>", false);
 				}
 				else {
 					outputText("\n\nUrta's usual place is vacant, though her table still holds a half-drank mug of something potent and alcoholic.  If it's anything like the last time this happened, she's snuck into a back room with Scylla to relieve some pressure.  It might not hurt to join in...", false);
 				}
 			}
-			flags[13] = 4;
+			flags[UNKNOWN_FLAG_NUMBER_00013] = 4;
 			if(misc1Name == "Scylla") misc1 = 0;
 			urta = 0;
 			backroom = 2697;
-			flags[13] = 4;
+			flags[UNKNOWN_FLAG_NUMBER_00013] = 4;
 		}
 		else if(urtaBarDescript()) {
 			if(flags[URTA_INCUBATION_CELEBRATION] == 0 && flags[URTA_INCUBATION] > 0) {
@@ -1205,7 +1205,7 @@ function oldbarTelAdre():void {
 		backroomT = "Ask4Amily";		
 	}
 	var dominika:Number = 0
-	if(hours > 17 && hours < 20 && flags[150] != -1) {
+	if(hours > 17 && hours < 20 && flags[UNKNOWN_FLAG_NUMBER_00150] != -1) {
 		dominika = 2739;
 		fellatrixBarAppearance();
 	}
@@ -1214,7 +1214,7 @@ function oldbarTelAdre():void {
 	var nancyText:String = "Barkeep";
 	if(auntNancy(false)) {
 		auntNancy(true);
-		if(flags[263] > 0) nancyText = "Nancy";
+		if(flags[UNKNOWN_FLAG_NUMBER_00263] > 0) nancyText = "Nancy";
 		nancy = 2970;
 	}
 	else outputText("\n\nIt doesn't look like there's a bartender working at the moment.", false);
@@ -1361,7 +1361,7 @@ function debitArmor():void {
 }
 
 function urtaIsABadass():void {
-	flags[33] = 1;
+	flags[UNKNOWN_FLAG_NUMBER_00033] = 1;
 	outputText("", true);
 	outputText("There's a commotion in the streets of Tel'Adre.  A dense crowd of onlookers has formed around the center of the street, massed together so tightly that you're unable to see much, aside from the backs the other onlookers' heads.  The sound of blows impacting on flesh can be heard over the crowd's murmuring, alerting you of the fight at the gathering's core.", false);
 	simpleChoices("Investigate",watchUrtaBeABadass,"Who cares?",telAdreMenu,"",0,"",0,"",0);
@@ -1398,7 +1398,7 @@ function gymDesc():void {
 	outputText("", true);
 	outputText("Even though Ingnam, your hometown, was a large, prosperous village, you never saw a gym before coming to Tel'Adre.  The structure itself has numerous architectural differences from the surrounding buildings: short, waist-high walls, an arched ceiling supported by simple columns, and a sand-covered floor.  Perhaps the only 'normal' rooms inside are the changing stands and bathrooms, which ", false);
 	if(player.cor < 35) outputText("thankfully ", false);
-	else if(flags[23] > 0 || player.cor > 80) outputText("unfortunately ", false);
+	else if(flags[UNKNOWN_FLAG_NUMBER_00023] > 0 || player.cor > 80) outputText("unfortunately ", false);
 	outputText("have full sized walls to protect their users' privacy.  A breeze blows by, revealing that the open-air design provides great ventilation.  You note a wall of weights of different sizes and shapes, perfect for building muscle and bulking up.  There are also jogging tracks and even a full-sized, grass-covered track out back for centaurs to run on.  Though some of the equipment seems a bit esoteric in nature, you're sure you can make use of most of this stuff.\n\n", false);
 	
 	outputText("Though the gym sees heavy use by the city guard and various citizens, it's not too busy at present.", false);
@@ -1406,10 +1406,10 @@ function gymDesc():void {
 	//(An extraordinarily well-muscled centaur male is by the weights, lifting some huge dumbbells and sweating like crazy.  In true centaur fashion, he's not wearing any clothes, but then again, male centaurs don't have much that regular clothes would hide.)
 	//(There's a lizan girl jogging laps on one of the tracks.  She's quite thin, but her muscles have a lean definition to them.  She's wearing a one-piece, spandex leotard that hugs her tight ass and pert, b-cup breasts nicely.)  
 	outputText("  There's a centauress in a tank-top just inside the doorway with huge, rounded melons and perky nipples, but she merely coughs to get you to look up and says, \"<i>", false);
-	if(flags[167] == 0) outputText("10 gems an hour to use the facilities here, or 500 for a life-time membership.</i>\"  She has her hands on her hips, and it looks you'll have to pay ten gems to actually get to use any of this stuff.", false);
+	if(flags[UNKNOWN_FLAG_NUMBER_00167] == 0) outputText("10 gems an hour to use the facilities here, or 500 for a life-time membership.</i>\"  She has her hands on her hips, and it looks you'll have to pay ten gems to actually get to use any of this stuff.", false);
 	else outputText("Oh, welcome back " + player.short + ".  Have a nice workout!</i>\"", false);
 	
-	if(player.gems < 10 && flags[167] == 0) {
+	if(player.gems < 10 && flags[UNKNOWN_FLAG_NUMBER_00167] == 0) {
 		outputText("\n\n<b>You reach into your pockets for the fee and come up empty.  It looks like you won't get close to enough to use the equipment or meet anyone.  Damn!</b>", false);
 		//(back to tel'adre streets)
 		doNext(telAdreMenu);
@@ -1435,18 +1435,18 @@ function gymMenu():void {
 	var lottie:Number = lottieAppearance(false);
 	var lottieB:String = "Pig-Lady";
 	var loppe:int = 0;
-	if(flags[281] > 0) lottieB = "Lottie";
+	if(flags[UNKNOWN_FLAG_NUMBER_00281] > 0) lottieB = "Lottie";
 	if(ifrisIntro()) ifris = 2845;
-	if(flags[205] > 0) ifrisB = "Ifris";
+	if(flags[MET_IFRIS] > 0) ifrisB = "Ifris";
 	if(hours > 9 && hours <= 15) {
 		hyena = 2844;
-		if(flags[204] > 0) hyenaB = "Heckel";
+		if(flags[MET_HECKEL] > 0) hyenaB = "Heckel";
 	}
-	if(flags[167] == 0 && player.gems >= 500) membership = 2784;
+	if(flags[UNKNOWN_FLAG_NUMBER_00167] == 0 && player.gems >= 500) membership = 2784;
 	if(flags[PC_IS_A_DEADBEAT_COTTON_DAD] == 0) {
 		if(cottonsIntro()) cotton = 2808;
 	}
-	if(flags[177] > 0) cottonB = "Cotton";
+	if(flags[UNKNOWN_FLAG_NUMBER_00177] > 0) cottonB = "Cotton";
 	if(flags[LOPPE_MET] > 0 && flags[LOPPE_DISABLED] == 0) loppe = 3976;
 	
 	choices("ChangeRoom",changingRoom,cottonB,cotton,hyenaB,hyena,ifrisB,ifris,"Jog",goJogging,"LiftWeights",weightLifting,"Life Member",membership,"Lottie",lottie,"Loppe",loppe,"Leave",telAdreMenu);
@@ -1460,7 +1460,7 @@ function buyGymLifeTimeMembership():void {
 		outputText("  It brings a flush to your face that has nothing to do with exercise.  Maybe you'll be able to con her into some alone time later?", false);
 		stats(0,0,0,0,0,0,(10+player.lib/10),0);
 	}
-	flags[167] = 1;
+	flags[UNKNOWN_FLAG_NUMBER_00167] = 1;
 	player.gems -= 500;
 	statScreenRefresh();
 	//[Bring up gym menu]
@@ -1472,12 +1472,12 @@ function weightLifting():void {
 	//Too tired?  Fuck off.
 	if(player.fatigue > 75) {
 		outputText("<b>There's no way you could exercise right now - you're exhausted!</b>  ", false);
-		if(flags[167] == 0) outputText("It'd be better to save your money and come back after you've rested.", false);
+		if(flags[UNKNOWN_FLAG_NUMBER_00167] == 0) outputText("It'd be better to save your money and come back after you've rested.", false);
 		doNext(telAdreMenu);
 		return;
 	}
 	//Deduct gems if not a full member.
-	if(flags[167] == 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00167] == 0) {
 		player.gems -= 10;
 		statScreenRefresh();
 	}
@@ -1518,12 +1518,12 @@ function goJogging():void {
 	//Too tired?  Fuck off.
 	if(player.fatigue > 70) {
 		outputText("<b>There's no way you could exercise right now - you're exhausted!</b>  ", false);
-		if(flags[167] == 0) outputText("It'd be better to save your money and come back after you've rested.", false);
+		if(flags[UNKNOWN_FLAG_NUMBER_00167] == 0) outputText("It'd be better to save your money and come back after you've rested.", false);
 		doNext(telAdreMenu);
 		return;
 	}
 	//Deduct gems if not a full member.
-	if(flags[167] == 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00167] == 0) {
 		player.gems -= 10;
 		statScreenRefresh();
 	}
@@ -1603,7 +1603,7 @@ function yaraSex(girl:Boolean = true):void {
 	spriteSelect(63);
 	outputText("", true);
 	outputText("Yara makes you comfortable and has you look away while she uses her piercing tools.  It hurts, but she's skilled. Before you know it, your piercing is done!  You move to rise, retaining a bit of modesty", false);
-	if(flags[23] > 0) outputText(" despite the guilty thrill", false);
+	if(flags[UNKNOWN_FLAG_NUMBER_00023] > 0) outputText(" despite the guilty thrill", false);
 	outputText(".  \"<i>Hold it,</i>\" Yara commands softly, pressing her hand against your " + chestDesc() + " and pushing you back in your chair.  \"<i>Do you think I'll let you get away without some... field testing?</i>\"\n\n", false);
 
 	outputText("She seems intent on getting some loving - would you like to turn her down, or will you let nature run its course?", false);

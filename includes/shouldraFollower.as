@@ -875,7 +875,7 @@ function shouldraSexMenu():void {
 	spriteSelect(67);
 	outputText("Shouldra stirs from somewhere deep inside you, excitement evident in the swiftness of her reaction.  \"<i>Is it time for some fun, Champ?</i>\" she asks happily, her increased lust affecting you just a bit.  Do you oblige her?");
 	var vala:int = 0;
-	if(flags[119] != 0 && (hours >= 12 && hours <= 21)) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00119] != 0 && (hours >= 12 && hours <= 21)) {
 		outputText("\n\nVala might interest Shouldra.  You could go introduce them...");
 		vala = 3668;
 	}
@@ -1423,7 +1423,7 @@ function shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMakeThisFun
 	//16 (has any of Marae's gift perks)
 	if(player.hasPerk("Marae's Gift - Stud") >= 0 || player.hasPerk("Marae's Gift - Fertility") >= 0 || player.hasPerk("Marae's Gift - Profractory") >= 0 || player.hasPerk("Marae's Gift - Buttslut") >= 0) choices[choices.length] = 16;
 	//17 (has had children with Izma)
-	if(flags[251] + flags[252] > 0) choices[choices.length] = 17;
+	if(flags[UNKNOWN_FLAG_NUMBER_00251] + flags[UNKNOWN_FLAG_NUMBER_00252] > 0) choices[choices.length] = 17;
 	//18 (has Incorporeality perk)
 	if(player.hasPerk("Incorporeality") >= 0) choices[choices.length] = 18;
 	//19 (possessed by Boobgartuan)
@@ -1550,7 +1550,7 @@ function shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMakeThisFun
 		//(has had children with Izma)
 		case 17:
 			outputText("\"<i>");
-			if(flags[251] + flags[252] == 1) outputText("That shark daughter of yours is");
+			if(flags[UNKNOWN_FLAG_NUMBER_00251] + flags[UNKNOWN_FLAG_NUMBER_00252] == 1) outputText("That shark daughter of yours is");
 			else outputText("Those shark daughters of yours are");
 			outputText(" pretty cute you know,</i>\"  Shouldra blurts seemingly from nowhere.  Looks as though she's helping herself to your head.  \"<i>I'd love to get to meet them sometime, Champ.  Put some otherworldly fright in 'em so they grow up right!</i>\"  You doubt Izma would be too onboard with this visit.");
 			break;
@@ -1875,9 +1875,9 @@ function goAlongWIthShouldrasEatingSpree():void {
 	if(flags[SHOULDRA_BAKERY_TIMES] > 0) outputText("\"Man, you're not sure you want that kind of impact on your figure again...  \"");
 	outputText("Ah, what the hell.  You were hungry anyway.  You let Shouldra guide the cake into your mouth.  Mmm, not bad; rich, sweet and delicate.  Shouldra chuckles in your mind as she releases her control slightly, letting you lick your fingers clean of any stray crumbs.  \"<i>Well, guess you're pretty hungry yourself!  Alright, Champ, I'll give you some freedom, but just remember you're not the only one with an appetite.</i>\" You wince as your hunger intensifies to the verge of pain; looks like you're eating for two.  Your eyes lock on to the feast before you and something snaps in your mind.  You need this food, all of this food, inside you.  <i>Now</i>.");
 	outputText("\n\nYou finish the torte, pausing only to scrape the platter clean and devour the crumbs before starting on some brownies.  As snack upon snack disappears down your maw, your stomach grows warm and full, feeling mildly bloated as the last brownie passes your lips.  \"<i>Ooh, is your poor lil' tummy feeling a bit full?</i>\" Shouldra snickers.  \"<i>Let's get it out of this cumbersome outfit.</i>\" An incantation echoes in your mind before your [armor] shimmers and vanishes.  Well, that was unexpected");
-	if(flags[23] > 0) outputText(", though not completely unwelcome");
+	if(flags[UNKNOWN_FLAG_NUMBER_00023] > 0) outputText(", though not completely unwelcome");
 	outputText(".  You blush furiously and back into the corner of the (now rather cold) booth");
-	if(flags[23] > 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00023] > 0) {
 		outputText(" as your heart races and blood rushes down towards your ");
 		if(player.hasCock()) {
 			outputText("drowsy member");
@@ -1887,7 +1887,7 @@ function goAlongWIthShouldrasEatingSpree():void {
 		if(player.gender == 0) outputText("groin");
 	}
 	outputText(", before you realise that nobody seems to notice your predicament.  Shouldra reads your thoughts and responds, \"<i>Thought you might appreciate some privacy");
-	if(flags[23] > 0) outputText(", even with that kink of yours");
+	if(flags[UNKNOWN_FLAG_NUMBER_00023] > 0) outputText(", even with that kink of yours");
 	outputText(", Champ.  Here's something extra anyway, just in case.</i>\" One ghostly incantation later, and ");
 	if(player.femininity <= 50) outputText("a buttoned shirt and pair of belted jeans");
 	else outputText("a tight-fitting tank top and skirt");

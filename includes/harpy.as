@@ -32,7 +32,7 @@ function harpyUberCharge():void {
 	}
 	//(Harpy special attack 1, part two if PC does anything but "Wait")
 	else {
-		if(flags[22] == 0) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00022] == 0) {
 			var damage:Number = 160 + rand(20);
 			damage = takeDamage(140);
 			outputText("The harpy lets out a terrible cry and drops, reaching an almost impossible speed as she dives down at you.  Her eyes are narrowed like a true bird of prey.  You were too busy with your own attack to avoid it!  Her claws surge down and pierce your " + player.armorName + " like paper, driving hard into the flesh beneath and making you cry out in pain.  The harpy dumps you onto the ground, your wounds bleeding profusely. (" + damage + ")", false);
@@ -550,7 +550,7 @@ function WinOnHarpyAndOralRape():void {
 	monster.lust = 98;
 	monster.HP = 2;
 	player.lust = 100;
-	flags[89] = monster.XP;
+	flags[UNKNOWN_FLAG_NUMBER_00089] = monster.XP;
 	eventParser(5007);
 	stats(0,0,0,0,1,0,-100,0);
 }
@@ -709,7 +709,7 @@ function clitFuckAHarpy():void {
 		monster.lust = 98;
 		monster.HP = 2;
 		player.lust = 100;
-		flags[89] = monster.XP;
+		flags[UNKNOWN_FLAG_NUMBER_00089] = monster.XP;
 		eventParser(5007);
 		stats(0,0,0,0,.5,-1,-100,0);
 	}

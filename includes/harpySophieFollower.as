@@ -15,9 +15,9 @@
 //const SOPHIE_FOLLOWER_PROGRESS:int = 755;
 
 function sophieFollower():Boolean {
-	if(flags[283] > 0) return false;
+	if(flags[UNKNOWN_FLAG_NUMBER_00283] > 0) return false;
 	if(bimboSophie()) return false;
-	if(flags[282] > 0 && flags[SOPHIE_DEBIMBOED] > 0) return true;
+	if(flags[UNKNOWN_FLAG_NUMBER_00282] > 0 && flags[SOPHIE_DEBIMBOED] > 0) return true;
 	if(flags[SOPHIE_RECRUITED_PURE] > 0) return true;
 	return false;
 }
@@ -155,7 +155,7 @@ function letDebimboSophieGo():void {
 			stats(0,0,0,0,0,0,25,0);
 		}
 	}
-	flags[283] = 1;
+	flags[UNKNOWN_FLAG_NUMBER_00283] = 1;
 	if(inCombat()) eventParser(5007);
 	else doNext(13);
 }
@@ -256,7 +256,7 @@ function followerSophieMainScreen():void {
 		return;
 	}
 	else {
-		if(flags[282] > 0) outputText("Sophie leans back in her nest as you approach, her prominent, bare F-cups on display.  She's completely nude, as always, and sits with her avian legs shamelessly spread, revealing the slick slit of her womanhood framed by downy-soft platinum blonde feathers.  \"<i>Hey there, " + player.mf("handsome","cutey") + ".  What can Momma Sophie do for you?  Come for a cuddle in my welcoming wings, maybe; or for something more... exciting?</i>\"");
+		if(flags[UNKNOWN_FLAG_NUMBER_00282] > 0) outputText("Sophie leans back in her nest as you approach, her prominent, bare F-cups on display.  She's completely nude, as always, and sits with her avian legs shamelessly spread, revealing the slick slit of her womanhood framed by downy-soft platinum blonde feathers.  \"<i>Hey there, " + player.mf("handsome","cutey") + ".  What can Momma Sophie do for you?  Come for a cuddle in my welcoming wings, maybe; or for something more... exciting?</i>\"");
 		else outputText("Sophie leans back in her nest as you approach, her prominant, bare DD-cups on display.  She's completely nude, as always, and sits with her avian legs demurely crossed, concealing the slick slit of her womanhood from you.  \"<i>Hey there, " + player.mf("handsome","cutey") + ".  What can Momma Sophie do for you?</i>\"");
 	}
 	//BimboBody Sophie Follower, Options*
@@ -296,16 +296,16 @@ function sexWithFollowerSophie():void {
 function sophieAppearance():void {
 	clearOutput();
 	outputText("Sophie is a big, buxom harpy, no two ways about her.  She has ");
-	if(flags[282] > 0) outputText("very ");
+	if(flags[UNKNOWN_FLAG_NUMBER_00282] > 0) outputText("very ");
 	outputText("long ");
-	if(flags[282] > 0) outputText("platinum-blond");
+	if(flags[UNKNOWN_FLAG_NUMBER_00282] > 0) outputText("platinum-blond");
 	else outputText("pink");
 	outputText(" 'hair' that dangles off her shoulders, like a bird's plumage.  She wears a thick layer of golden lipstick over her plump");
-	if(flags[282] > 0) outputText(", super-sized");
+	if(flags[UNKNOWN_FLAG_NUMBER_00282] > 0) outputText(", super-sized");
 	outputText(" lips at all times, like most of her kind, the gloss capable of giving her voice a compelling quality or inducing arousal on contact with males or herms.  Her face lacks the youthful quality found among many of her sisters, though you don't see any of the lines that would indicate age.");
 	
 	outputText("\n\nSophie's breasts are ");
-	if(flags[282] > 0) outputText("so immense they would drag her to the ground if she tried to fly, a sexy, lingering aftereffect of the draft you gave her.  The wobbly bimbo-tits look to be about F-cups.");
+	if(flags[UNKNOWN_FLAG_NUMBER_00282] > 0) outputText("so immense they would drag her to the ground if she tried to fly, a sexy, lingering aftereffect of the draft you gave her.  The wobbly bimbo-tits look to be about F-cups.");
 	else outputText("unusually large.  The buxom harpy does seem slightly encumbered by them, but still capable of flight.  Her breasts look to be about DD-cups, nice and big enough for a soft squeeze or rough tit-fuck.");
 	
 	outputText("\n\nShe has a glittering, moist pussy concealed between her thick thighs, both of which start the feathery covering that reaches all the way to her bird-like, taloned feet.  Her jiggly backside wobbles slightly with every exaggerated step she takes, with her long tailfeathers fanning above it.  You're sure there's a tight butthole located between them, where it belongs, but you can't really get a look at it with all the plump ass surrounding it.");
@@ -322,7 +322,7 @@ function sleepWithSophieToggle():void {
 	if(flags[SLEEP_WITH] != "Sophie") {
 		outputText("You ask Sophie if she'd like to start sleeping with you at night.  Sophie cocks an eyebrow up at the suggestion.");
 		//DEBIMBO'ed
-		if(flags[282] > 0) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00282] > 0) {
 			outputText("\n\n\"<i>First you turn me into a bimbo, then you give me back my faculties.  Now, you expect me to just jump into bed with you like a brainless bimbo?</i>\" she asks, looking you up and down.");
 			outputText("\n\nYou ");
 			if(player. cor < 33) outputText("sheepishly ");
@@ -346,7 +346,7 @@ function sleepWithSophieToggle():void {
 	else {
 		//Don't Sleep WIth:*
 		outputText("You tell Sophie that you'd rather not sleep with her for now.  She sighs heavily at the proclamation and says, \"<i>");
-		if(flags[282] == 0) outputText("Well, it is your bed.  Let me know if you want me coming back for snuggles, okay?");
+		if(flags[UNKNOWN_FLAG_NUMBER_00282] == 0) outputText("Well, it is your bed.  Let me know if you want me coming back for snuggles, okay?");
 		else outputText("Couldn't handle all these curves, huh, [name]?  Don't fret, Momma Sophie will stick around until you can't stop yourself from cuddling up on her.");
 		outputText("</i>\"");
 		flags[SLEEP_WITH] = "";
@@ -466,7 +466,7 @@ function sophieFollowerGivesBlowjobs():void {
 	outputText("?</i>\"  She saunters up with her hips swaying seductively, her juicy mound squelching noisily, webs of lubricant dangling between her thighs whenever they spread.  The harpy's fingertip punches into your chest");
 	if(player.biggestTitSize() >= 1) outputText(", right between your [chest]");
 	outputText(", and she slowly trails it up to your chin, which she gently grabs in her long-nailed fingers.  \"<i>");
-	if(flags[282] > 0) outputText("You may have given me a bimbo's body and an insatiable need for sex,");
+	if(flags[UNKNOWN_FLAG_NUMBER_00282] > 0) outputText("You may have given me a bimbo's body and an insatiable need for sex,");
 	else outputText("You may have seduced me into your camp with hot sex,");
 	outputText("</i>\" she coos, \"<i>but that doesn't mean I'll wrap these beautiful lips around you for nothing.  How about you let me use that cute face of yours to grind my pussy on, and I'll return the favor?</i>\"  She blows you a kiss that culminates in her running her tongue over her swollen lips in a slow, wet circle.");
 	//[Force Her] [Sixtynine]
@@ -646,7 +646,7 @@ function sophieSmallDongTeases():void {
 		
 		outputText("\n\nRubbing her chin, the harpy matron slowly begins to nod.  \"<i>Not bad, though maybe next time I'll put some makeup on you first, to complete the experience.</i>\"  She flicks your boner again and asks, \"<i>Are you ready?</i>\"");
 		outputText("\n\nYou bite your lip and nod eagerly, nearly cumming from that single touch.  Your ");
-		if(flags[282] > 0) outputText("golden");
+		if(flags[UNKNOWN_FLAG_NUMBER_00282] > 0) outputText("golden");
 		else outputText("pink");
 		outputText("-haired mistress looks down at you graciously as she inexorably slides closer, and you find the intense anticipation is almost a pleasure all its own.  Then, her feverishly-warm delta contacts your sweating cock-skin, the sweet sensation of her juicy snatch against you too much to endure.  Your dainty cock dilates as wide as its diminutive girth will allow, and as you meet Sophie's knowing smile, you moan and release, spraying sperm against her plump clit and ");
 		if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < 150) outputText("pregnant ");

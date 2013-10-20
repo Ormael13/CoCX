@@ -1345,12 +1345,12 @@ function kihaPlaysWithBigassCocksFemDomAhoy():void {
 	if(player.cumQ() >= 2000) outputText("Wave after wave of spunk rains down over you, forming a gratuitous puddle and utterly, completely sliming you both.  ");
 	outputText("Kiha shivers slightly and brushes a few ropes of jism away from her eyes as she says, \"<i>Idiot!  You got me wet!</i>\"");
 	outputText("[pg]You slump down with a dopey smile, dragging the spooge-spattered dragoness with you, back into a hug.  Kiha snorts a puff of fire in irritation, but admits, \"<i>You know, if I do that to you... I wouldn't mind you getting all hot and bothered for me more often.  J-just keep it out of my hair next time, doofus!</i>\"  She stands, uncoiling her tail from your slowly-softening shaft and stretching, forcing you to look at the absolutely soaked wetness of her pussy.  The lips are tinged reddish and enflamed with lust, though Kiha seems to manage it well as she saunters away towards a stream.");
-	if(flags[252] > 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00252] > 0) {
 		if(player.cor < 50) outputText("  You hope she doesn't get jumped by your tiger-shark children.");
 		else outputText("  You wonder what would happen if she got jumped by your tigershark children.");
 	}
 	outputText("[pg]Wiping up as best you can, you don your [armor] and walk back");
-	if(monk >= 5 && player.hasStatusAffect("noJojo") < 0 && flags[80] == 0) {
+	if(monk >= 5 && player.hasStatusAffect("noJojo") < 0 && flags[UNKNOWN_FLAG_NUMBER_00080] == 0) {
 		if(!tentacleJojo()) outputText(", ignoring the sounds of Jojo feverishly masturbating in the woods");
 		else outputText(", ignoring the sound of Jojo vigorously fucking himself with all his tentacles in the trees");
 	}

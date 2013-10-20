@@ -167,7 +167,7 @@ function getASprout():void {
 	clearOutput();
 	outputText("Around the edge of your camp, you spot some plant-life beginning to sprout.  The barren, wasteland crust is fractured and broken, giving up a leafy green shoot.  It only reaches up to your knee, but the plant looks healthy and young.  Perhaps it will grow larger?  There is a central stem that supports most of the weight, but a dozen branches fork off, supporting a bevy of shiny green leaves.");
 	outputText("\n\nYou briefly wonder how something could take root in such soil and be so successful, but then you recall the corrupt goddess, Marae.  She mentioned something about having roots through this world, didn't she?");
-	if(flags[100] == 2) outputText("  She even promised to plant a tree in your camp...");
+	if(flags[UNKNOWN_FLAG_NUMBER_00100] == 2) outputText("  She even promised to plant a tree in your camp...");
 	outputText("  You look closer and see purple veins on the undersides of the leaves, throbbing with what can only be the tainted liquids that suffuse much of this planet.  Fully grown, it might spread its corruption to your camp.\n\n<b>Do you destroy it?</b>");
 	flags[FUCK_FLOWER_LEVEL] = 1;
 	flags[FUCK_FLOWER_GROWTH_COUNTER] = 0;
@@ -284,7 +284,7 @@ function rideDatFuckingFukkFlowerP2():void {
 		outputText(" milk.");
 	}
 	outputText("  You moan in unabashed delight, your mouth hanging open in a mindless, blissful 'o' in between vocalizations.  If your friends back home could see you now, writhing in the dirt, face open in simple, animal pleasure, and perhaps worst of all, fucking a plant, you'd die of ");
-	if(flags[23] == 0 && player.cor + player.lib < 150) outputText("embarrassment");
+	if(flags[UNKNOWN_FLAG_NUMBER_00023] == 0 && player.cor + player.lib < 150) outputText("embarrassment");
 	else outputText("lust");
 	outputText(".");
 	
@@ -527,7 +527,7 @@ function stayQuietWhileAmilyBitchesAboutFuckingArborday():void {
 	flags[AMILY_FOLLOWER] = 0;
 	//Set - amily flipped her shit
 	flags[AMILY_TREE_FLIPOUT] = 1;
-	flags[173] > 0;
+	flags[UNKNOWN_FLAG_NUMBER_00173] > 0;
 	//Enable village encounters
 	flags[AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
 	//Change to plain mouse birth!
@@ -548,10 +548,10 @@ function slapAmilysWhoreFace():void {
 	outputText("girl says, eyes wet with tears, \"<i>but I don't.  Goodbye.</i>\"");
 	
 	outputText("\n\nWithout another word, she turns, gathers her things, and leaves.");
-	flags[43] = 0;
-	flags[168] = 1;
-	flags[36] = 0;
-	flags[44] = 1;
+	flags[AMILY_FOLLOWER] = 0;
+	flags[AMILY_CORRUPT_FLIPOUT] = 1;
+	flags[AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
+	flags[AMILY_VILLAGE_ACCESSIBLE] = 1;
 	//no more classes, no more books; no more Amily's dirty looks
 	//bitch goes in ruined village
 	doNext(1);

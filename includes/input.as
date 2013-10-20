@@ -271,24 +271,24 @@ function keyboard(e:KeyboardEvent):void {
 	var f:MouseEvent = undefined;
 	trace("Keyboard key inputted.  Keycode: " + e.keyCode);
 	//Cheat Code stuff!
-	if(flags[27] == 0) {
-		if(e.keyCode == 38) flags[27]++;
-		else flags[27] = 0;
+	if(flags[UNKNOWN_FLAG_NUMBER_00027] == 0) {
+		if(e.keyCode == 38) flags[UNKNOWN_FLAG_NUMBER_00027]++;
+		else flags[UNKNOWN_FLAG_NUMBER_00027] = 0;
 	}
-	else if(flags[27] == 1) {
-		if(e.keyCode == 40) flags[27]++;
-		else flags[27] = 0;
+	else if(flags[UNKNOWN_FLAG_NUMBER_00027] == 1) {
+		if(e.keyCode == 40) flags[UNKNOWN_FLAG_NUMBER_00027]++;
+		else flags[UNKNOWN_FLAG_NUMBER_00027] = 0;
 	}
-	else if(flags[27] == 2) {
-		if(e.keyCode == 37) flags[27]++;
-		else flags[27] = 0;
+	else if(flags[UNKNOWN_FLAG_NUMBER_00027] == 2) {
+		if(e.keyCode == 37) flags[UNKNOWN_FLAG_NUMBER_00027]++;
+		else flags[UNKNOWN_FLAG_NUMBER_00027] = 0;
 	}
-	else if(flags[27] == 3 && player.str > 0 && b1Text.text.indexOf("Game Over") == -1) {
+	else if(flags[UNKNOWN_FLAG_NUMBER_00027] == 3 && player.str > 0 && b1Text.text.indexOf("Game Over") == -1) {
 		if(e.keyCode == 39) {
 			giveHumanizer();
 			return;
 		}
-		else flags[27] = 0;
+		else flags[UNKNOWN_FLAG_NUMBER_00027] = 0;
 	}
 	//Stats Hotkey
 	if(e.keyCode == 83 && statsBG.visible && player.str > 0) {

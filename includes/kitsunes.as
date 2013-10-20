@@ -187,7 +187,7 @@ function leaveKitsune(talked:Boolean = true):void {
 	outputText("She holds out a small white package tied with string, grinning eagerly.  You hesitate, wondering whether it would be wise to take a gift from this strange woman, but before you can protest, she shoves the package into your hands.  When you look up from the featureless wrapping, there is no sign of her save for the echo of a mischievous giggle through the trees.\n\n");
 	outputText("<b>You have received a Kitsune's Gift!</b>\n" );
 	if(inCombat()) {
-		flags[234] = "KitGift";
+		flags[UNKNOWN_FLAG_NUMBER_00234] = "KitGift";
 		eventParser(5007);
 	}
 	else {
@@ -1740,7 +1740,7 @@ function doseAKitsuneWithOviElixirs():void {
 	consumeItem("OviElix",1);
 	outputText("\"<i>Take good care of my little eggies, darling!</i>\"");
 	//{replace normal kitsune loot tables with randomly colored eggs}
-	flags[234] = shortName;
+	flags[UNKNOWN_FLAG_NUMBER_00234] = shortName;
 	//Advance time 1hr and return to camp. +Sensitivity, +Libido
 	stats(0,0,0,0,1,1,-100,0);
 	eventParser(5007);

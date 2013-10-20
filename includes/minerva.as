@@ -71,7 +71,7 @@ function firstMinervaEncounter():void {
 	clearOutput();
 	outputText("Returning to the mountains, you begin to climb; the usual search for loot and, perhaps, some harpies driving your upward efforts.  Perhaps you'll run into");
 	//If Sophie Bimbo=0:
-	if(flags[282] == 0 && flags[283] == 0 && !sophieFollower()) outputText(" that matronly harpy, Sophie");
+	if(flags[UNKNOWN_FLAG_NUMBER_00282] == 0 && flags[UNKNOWN_FLAG_NUMBER_00283] == 0 && !sophieFollower()) outputText(" that matronly harpy, Sophie");
 	else outputText(" something interesting");
 	outputText(", or get some good plunder from some of the local beasts");
 	//if minotaur cum addict:
@@ -1350,7 +1350,7 @@ function sirensSong():void {
 	else {
 		outputText("Her hum becomes a song.  A magnificent song without words, a sound that should be impossible for any human, or creature for that matter, to make naturally.");
 		//If wait: 
-		if(flags[22] == 1) outputText("  You cover your ears before she even opened her lips, wary of its power.  Judging by the dim feeling of pleasure simmering through you with the little sound you're picking up regardless, it probably was for the better.");
+		if(flags[UNKNOWN_FLAG_NUMBER_00022] == 1) outputText("  You cover your ears before she even opened her lips, wary of its power.  Judging by the dim feeling of pleasure simmering through you with the little sound you're picking up regardless, it probably was for the better.");
 		//No wait - insta loss:
 		else {
 			outputText("  Your mind clouds over as the song flows through your ears and fills your mind with sweet bliss.  You lower your [weapon] and dreamily walk into the siren's sweet embrace.  You absent-mindedly disrobe yourself as you move in closer, the song getting louder with each step you take, until you finally bury yourself into the siren's soft bosom and she wraps her feathery arms around your body.  She stops singing her beautiful song and whispers into your ear, \"<i>You're all mine now.</i>\"");

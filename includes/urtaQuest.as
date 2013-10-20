@@ -93,7 +93,7 @@ function comfortUrtaAfterFamFamTalk():void {
 	
 	outputText("\n\nNodding, you give the girl a smile as you stand up to depart.  Her eyes twinkle happily as she watches you go.");
 	urtaLove(5);
-	flags[12] += 3;
+	flags[UNKNOWN_FLAG_NUMBER_00012] += 3;
 	doNext(13);
 }
 
@@ -112,7 +112,7 @@ function yeeshUrtaAfterFamFamTalk():void {
 	outputText("\n\nUrta nods slowly and throws back a swig from her drink.  \"<i>I will.</i>\"");
 	outputText("\n\nGood bitch...");
 	urtaLove(1);
-	flags[12] += 1;
+	flags[UNKNOWN_FLAG_NUMBER_00012] += 1;
 	doNext(13);
 }
 	
@@ -125,8 +125,8 @@ function whoCaresUrtaAfterFamFamTalk():void {
 	outputText("\n\nUrta growls, \"<i>You asked!</i>\"");
 	outputText("\n\nYou tell her that you asked about her parents, not a summary of every misfortune to ever befall her.  Then, you leave, sending a barmaid her way with a drink.  The whiny cunt will likely need it to get over her bruised pride.  You doubt it will stop her from jumping your bones the next time you visit.  Her libido's too high for her to resist.");
 	urtaLove(-10);
-	flags[12] -= 5;
-	if(flags[12] < 1) flags[12] = 1;
+	flags[UNKNOWN_FLAG_NUMBER_00012] -= 5;
+	if(flags[UNKNOWN_FLAG_NUMBER_00012] < 1) flags[UNKNOWN_FLAG_NUMBER_00012] = 1;
 	doNext(13);
 }
 
@@ -3007,8 +3007,8 @@ function getKnockedUpWithGodChild():void {
 	outputText(" balls, slathering them with slick spunk.");
 	
 	var ballWorship:Array = new Array();
-	if((amilyFollower() && flags[43] == 2) && campCorruptJojo()) ballWorship[ballWorship.length] = 0;
-	if((amilyFollower() && flags[43] == 2) || campCorruptJojo()) ballWorship[ballWorship.length] = 1;
+	if((amilyFollower() && flags[AMILY_FOLLOWER] == 2) && campCorruptJojo()) ballWorship[ballWorship.length] = 0;
+	if((amilyFollower() && flags[AMILY_FOLLOWER] == 2) || campCorruptJojo()) ballWorship[ballWorship.length] = 1;
 	if(bimboSophie()) ballWorship[ballWorship.length] = 2;
 	if(followerHel()) ballWorship[ballWorship.length] = 3;
 	if(latexGooFollower()) ballWorship[ballWorship.length] = 4;
