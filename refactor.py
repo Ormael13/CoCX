@@ -39,7 +39,7 @@ def cleanEventNumbers():
 	print filelist
 	for filename in filelist:
 		if filename.endswith(".as") and not filename.find("doEvent")+1:			#Iterate over all the .as files in ./includes, and skip the doEvent file
-			print filename
+			#print filename
 			with open(os.path.join("./includes", filename), "r") as fileH:
 				tmp = fileH.read()
 
@@ -69,15 +69,15 @@ def cleanEventNumbers():
 					tmp = prefix+call+postfix
 
 					insertionPoint = start+length
+			if len(tmp)-len(tmpO) != 0:
+				print len(tmpO), len(tmp)
+				print "Length Delta", len(tmp)-len(tmpO) 
 
-			print len(tmpO), len(tmp)
-			print "Length Delta", len(tmp)-len(tmpO) 
-
-			with open(os.path.join("./includes", filename), "w") as fileH:
-				tmp = fileH.write(tmp)
+				with open(os.path.join("./includes", filename), "w") as fileH:
+					tmp = fileH.write(tmp)
 
 
-
+#
 def cleanStaleDoEventIfs():
 
 	numExtr = re.compile(r"if\(eventNo == (\d*)\)")
@@ -107,19 +107,26 @@ def cleanStaleDoEventIfs():
 		for fContents in files:
 
 				if num in fContents:
-					print "num exists", num
+					#print "num exists", num
 					numUnused = False
 					break
 
 
 		if numUnused:
 			start, length = match.start(), len(match.group())
-			print start, length
+
 
 			prefix, call, postfix = eventS[:start], eventS[start:start+length], eventS[start+length:]
 
-			call = call.replace("eventNo", " false ")
-			eventS = prefix+call+postfix
+			#num = call.split()[-1].rstrip("\)")
+
+			print start, length, num
+
+			if (num in prefix) or (num in postfix):
+				print "used elsewhere in doEvent.as"
+			else:
+				call = call.replace("eventNo", " false ")
+				eventS = prefix+call+postfix
 
 	with open("./includes/doEvent.as", "w") as eventF:
 		eventF.write(eventS)
@@ -297,7 +304,7 @@ def functionYoink():
 					else:
 						funcs[nameLen] = [item]
 
-	for x in range(150):
+	for x in range(250):
 		if x in funcs:
 			print "Name length = ", x
 			for name in funcs[x]:
@@ -309,9 +316,9 @@ if __name__ == "__main__":
 	print "OMG WE'S BREAKIN STUF!!111one!"
 
 	#cleanEventNumbers()
-	#cleanStaleDoEventIfs()
+	cleanStaleDoEventIfs()
 
 	#cleanFlags()
 
 	#insertFlags()
-	functionYoink()
+	#functionYoink()
