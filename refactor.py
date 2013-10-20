@@ -227,7 +227,7 @@ def insertFlags():
 	print filelist
 	flagNum = 0
 	for filename in filelist:
-		if filename.endswith(".as") and not filename.find("doEvent")+1:			#Iterate over all the .as files in ./includes, and skip the doEvent file
+		if filename.endswith(".as"):			#Iterate over all the .as files in ./includes, and skip the doEvent file
 			with open(os.path.join("./includes", filename), "r") as fileH:
 				tmp = fileH.read()
 
@@ -273,6 +273,37 @@ def insertFlags():
 	print "Total Integer flag indices:", flagNum
 
 
+
+def functionYoink():
+
+	funcs = {}
+
+	flagRE = re.compile(r"function ([\w]*?)\(")
+	filelist = os.listdir("./includes")
+	print filelist
+	flagNum = 0
+	for filename in filelist:
+		if filename.endswith(".as"):			#Iterate over all the .as files in ./includes, and skip the doEvent file
+			with open(os.path.join("./includes", filename), "r") as fileH:
+				tmp = fileH.read()
+				print "Functions in file %s:" % filename
+				for item in flagRE.findall(tmp):
+					print "	%s" % item
+
+					nameLen = len(item)
+
+					if nameLen in funcs:
+						funcs[nameLen].append(item)
+					else:
+						funcs[nameLen] = [item]
+
+	for x in range(150):
+		if x in funcs:
+			print "Name length = ", x
+			for name in funcs[x]:
+				print "	%s" % name
+
+
 if __name__ == "__main__":
 
 	print "OMG WE'S BREAKIN STUF!!111one!"
@@ -280,6 +311,7 @@ if __name__ == "__main__":
 	#cleanEventNumbers()
 	#cleanStaleDoEventIfs()
 
-	cleanFlags()
+	#cleanFlags()
 
-	insertFlags()
+	#insertFlags()
+	functionYoink()
