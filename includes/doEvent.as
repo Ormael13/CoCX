@@ -686,7 +686,7 @@ This license supercedes all previous licenses and remains in force.
 	if(eventNo == 2017) {
 		spriteSelect(23);
 		outputText("Which book are you interested in perusing?", true);
-		if(flags[244] > 0) simpleChoices("Dangerous Plants", 2029, "Traveler's Guide", 2031, "Hentai Comic", 2033, "Yoga Guide", 2940, "Back", 2015);
+		if(flags[UNKNOWN_FLAG_NUMBER_00244] > 0) simpleChoices("Dangerous Plants", 2029, "Traveler's Guide", 2031, "Hentai Comic", 2033, "Yoga Guide", 2940, "Back", 2015);
 		else simpleChoices("Dangerous Plants", 2029, "Traveler's Guide", 2031, "Hentai Comic", 2033, "", 0, "Back", 2015);
 		statScreenRefresh();
 	}
@@ -795,13 +795,13 @@ This license supercedes all previous licenses and remains in force.
 			outputText("The Succubus stops, turns and points to you in derision. \"<i>And YOU! You no-cock, no-cunt having pissant! Take your ass back to the lab before they find out you escaped!!!!!</i>\"\n\n", false);
 
 			outputText("The Succubus resumes her stormy exit. You look at the bottle of Cerulean Potion and wonder if it REALLY had some psychotropics in it. What the hell just happened?!", false);
-			flags[62] = 1;
+			flags[UNKNOWN_FLAG_NUMBER_00062] = 1;
 			doNext(1);
 			return;
 		}
 		if(player.gender == 1) outputText("\"<i>Awwww! Did my blue skin and pointy teeth scare you?</i>\" she says in a childish voice. \"<i>Believe me stud, if I wanted to harm you, I would not have let you wake up at all. I am here because you have 'called' me.</i>\" She teases you with the empty blue bottle you bought from the merchant. \"<i>My essence is in this bottle. Any man who drinks this, I am compelled to return the pleasure by drinking his.</i>\" The demon woman reaches her skinny hand down to your crotch where you see you have become fiercely erect. The demon gently strokes your cock until you begin oozing generous amounts of your own natural lubricants. The demon takes one of her massive breasts and teases you with her fat nipples. \"<i>Open your mouth,</i>\" she demands. \"<i>Take me into your mouth as I will soon take you into mine.</i>\"\n\n", false);
 		else if(player.gender == 3) {
-			flags[111]++;
+			flags[UNKNOWN_FLAG_NUMBER_00111]++;
 			outputText("\nIt is obvious that you have been confronted by a succubus. As the fire illuminates your captor, her grin widens broadly.\n\n", false);
 
 			outputText("\"<i>Well, well, well!</i>\" the Succubus jingles. \"<i>What have we here?! A little girl with a big cock!</i>\"\n\n", false);
@@ -1671,8 +1671,8 @@ This license supercedes all previous licenses and remains in force.
 		temp7 = 0;
 		temp8 = 0;
 		if(player.hasPerk("Marble's Milk") >= 0 && hasItem("Lactaid",1)) temp2 = 2269;
-		if(hasItem("P.Draft",1) && flags[4] == 0) temp4 = 2273;
-		if(flags[4] > 0) {
+		if(hasItem("P.Draft",1) && flags[UNKNOWN_FLAG_NUMBER_00004] == 0) temp4 = 2273;
+		if(flags[UNKNOWN_FLAG_NUMBER_00004] > 0) {
 			if(hasItem("PinkEgg",1)) temp5 = 2270;
 			if(hasItem("L.PnkEg",1)) temp6 = 2271;
 		}
@@ -1859,12 +1859,12 @@ This license supercedes all previous licenses and remains in force.
 	if(eventNo == 2150) {
 		spriteSelect(34);
 		//Amily meets Jojo:
-		if(flags[74] == 0 && flags[43] == 1 && amilyFollower()) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00074] == 0 && flags[AMILY_FOLLOWER] == 1 && amilyFollower()) {
 			amilyMeetsPureJojo();
 			return;
 		}
 		//Rathazul & Jojo
-		if(flags[84] == 1 && rand(2) == 0) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00084] == 1 && rand(2) == 0) {
 			catchRathazulNapping();
 			return;
 		}
@@ -3992,7 +3992,7 @@ This license supercedes all previous licenses and remains in force.
 	if(eventNo == 2638) {
 		outputText("", true);
 		shortName = "BonStrp";
-		flags[129]++;
+		flags[UNKNOWN_FLAG_NUMBER_00129]++;
 		takeItem();
 		return;
 	}
@@ -4786,43 +4786,43 @@ This license supercedes all previous licenses and remains in force.
 	}
 	if(eventNo == 2830) {
 		//[doughnuts] – some thickness, lots of – tone. (+hips and butt!)
-		flags[198] = "doughnuts";
-		flags[199] = 5;
+		flags[TEMP_STORAGE_PASTRY_NAME] = "doughnuts";
+		flags[TEMP_STORAGE_PASTRY_PRICE] = 5;
 		nomnomnom();
 		return;
 	}
 	if(eventNo == 2831) {
 		//[cookies] – thickness and a little – tone (+hips)
-		flags[198] = "cookies";
-		flags[199] = 4;
+		flags[TEMP_STORAGE_PASTRY_NAME] = "cookies";
+		flags[TEMP_STORAGE_PASTRY_PRICE] = 4;
 		nomnomnom();
 		return;
 	}
 	if(eventNo == 2832) {
 		//[brownies] – lots of thickness (chance of +butt)
-		flags[198] = "brownies";
-		flags[199] = 3;
+		flags[TEMP_STORAGE_PASTRY_NAME] = "brownies";
+		flags[TEMP_STORAGE_PASTRY_PRICE] = 3;
 		nomnomnom();
 		return;
 	}
 	if(eventNo == 2833) {
 		//[cupcakes] – lots of – tone (chance of +hips)
-		flags[198] = "cupcakes";
-		flags[199] = 3;
+		flags[TEMP_STORAGE_PASTRY_NAME] = "cupcakes";
+		flags[TEMP_STORAGE_PASTRY_PRICE] = 3;
 		nomnomnom();
 		return;
 	}
 	if(eventNo == 2834) {
 		//[pound cake] – even split of + thickness and – tone.  (+butt)
-		flags[198] = "pound cake";
-		flags[199] = 4;	
+		flags[TEMP_STORAGE_PASTRY_NAME] = "pound cake";
+		flags[TEMP_STORAGE_PASTRY_PRICE] = 4;	
 		nomnomnom();
 		return;
 	}
 	if(eventNo == 2835) {
 		//[mino cum eclair] – helps your cravings and – tone!, LUST!
-		flags[198] = "eclair";
-		flags[199] = 10;
+		flags[TEMP_STORAGE_PASTRY_NAME] = "eclair";
+		flags[TEMP_STORAGE_PASTRY_PRICE] = 10;
 		nomnomnom();
 		return;
 	}
@@ -5026,7 +5026,7 @@ This license supercedes all previous licenses and remains in force.
 		return;
 	}
 	if(eventNo == 2884) {
-		flags[226] = 1;
+		flags[UNKNOWN_FLAG_NUMBER_00226] = 1;
 		roxanneDrinkingContest();
 		return;
 	}
@@ -5379,7 +5379,7 @@ This license supercedes all previous licenses and remains in force.
 		return;
 	}
 	if(eventNo == 2968) {
-		flags[256] = 1;
+		flags[UNKNOWN_FLAG_NUMBER_00256] = 1;
 		isabellaGreeting();
 		return;
 	}
@@ -5518,7 +5518,7 @@ This license supercedes all previous licenses and remains in force.
 		return;
 	}
 	if(eventNo == 3002) {
-		flags[275] = 1;
+		flags[UNKNOWN_FLAG_NUMBER_00275] = 1;
 		chooseArmorOrRobes();
 		return;
 	}
@@ -5527,7 +5527,7 @@ This license supercedes all previous licenses and remains in force.
 		return;
 	}
 	if(eventNo == 3004) {
-		flags[275] = 2;
+		flags[UNKNOWN_FLAG_NUMBER_00275] = 2;
 		chooseArmorOrRobes();
 		return;
 	}
@@ -5677,7 +5677,7 @@ This license supercedes all previous licenses and remains in force.
 	}
 	if(eventNo == 3041) {
 		if(rand(24) == 0 && player.hasCock()) catgirlEncounter();
-		else if(rand(24) == 0 && flags[293] == 0) carephCorruptionSlaves();
+		else if(rand(24) == 0 && flags[UNKNOWN_FLAG_NUMBER_00293] == 0) carephCorruptionSlaves();
 		else if(rand(24) <= 1 && player.gender > 0) encounterZetsuko();
 		else ceraphFollowerAppearance();
 		return;
