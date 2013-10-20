@@ -1,7 +1,7 @@
-﻿const IZMA_NO_COCK:int = 439;
-const ASKED_IZMA_ABOUT_WANG_REMOVAL:int = 440;
-const IZMA_X_LATEXY_DISABLED:int = 784;
-const TIMES_IZMA_DOMMED_LATEXY:int = 785;
+﻿//const IZMA_NO_COCK:int = 439;
+//const ASKED_IZMA_ABOUT_WANG_REMOVAL:int = 440;
+//const IZMA_X_LATEXY_DISABLED:int = 784;
+//const TIMES_IZMA_DOMMED_LATEXY:int = 785;
 
 //Izma the Tigershark.
 //Credits: Jokester, Quiet Browser, LukaDoc and Bob.

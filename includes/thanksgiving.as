@@ -20,7 +20,7 @@ SPITROAST HER! GangHel Style*/
 Note on progression:
    The PC has, after each scene (Baste, Stuff, Spitroast) the option to say \"<i>That's Enough</i>\" or continue on to the next scene -- the scenes must be done in order, however.*/
    
-const TURKEY_FUCK_YEAR_DONE:int = 566;
+//const TURKEY_FUCK_YEAR_DONE:int = 566;
 
 function isThanksgiving():Boolean {
 	return ((date.date >= 21 && date.month == 10) && (date.date < 30 && date.month == 10));

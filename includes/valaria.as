@@ -1,4 +1,4 @@
-﻿const VELARIA_FUTA:int = 499;
+﻿//const VELARIA_FUTA:int = 499;
 
 
 //Camp Menu -- [Followers] -- [Valeria]

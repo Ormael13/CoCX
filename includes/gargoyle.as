@@ -1,10 +1,10 @@
-﻿const GAR_NAME:int = 825;
-const GAR_CONFIDENCE:int = 826;
-const RITUAL_INTRO:int = 827;
-const KINKY_RITUALS_SPOKEN:int = 828;
-const GAR_HISTORY:int = 829;
-const GAR_CATHEDRAL:int = 830;
-const GAR_NAME_TALKS:int = 831;
+﻿//const GAR_NAME:int = 825;
+//const GAR_CONFIDENCE:int = 826;
+//const RITUAL_INTRO:int = 827;
+//const KINKY_RITUALS_SPOKEN:int = 828;
+//const GAR_HISTORY:int = 829;
+//const GAR_CATHEDRAL:int = 830;
+//const GAR_NAME_TALKS:int = 831;
 
 function gargoyleConfidence(arg:Number = 0):Number {
 	if(arg != 0) {

@@ -1,6 +1,6 @@
-﻿const TIMES_ENCOUNTERED_SAND_TRAPS:int = 578;
-const SANDTRAP_NAGA_3SOME:int = 579;
-const SANDTRAP_LOSS_REPEATS:int = 812;
+﻿//const TIMES_ENCOUNTERED_SAND_TRAPS:int = 578;
+// const SANDTRAP_NAGA_3SOME:int = 579;
+//const SANDTRAP_LOSS_REPEATS:int = 812;
 
 function trapLevel(adjustment:Number = 0):Number {
 	if(monster.hasStatusAffect("level") < 0) monster.createStatusAffect("level",4,0,0,0);

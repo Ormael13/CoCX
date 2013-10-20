@@ -1,12 +1,12 @@
-﻿const MINERVA_LOVE:int = 813;
-const MINERVA_BACKSTORY:int = 814;
-const MINERVA_BACKSTORY_LEARNED:int = 815;
-const TIMES_MINERVA_SEXED:int = 816;
-const TIMES_BUTTFUCKED_MINERVA:int = 817;
-const TIMES_MINERVA_COWGIRLED:int = 818;
-const TIMES_MINERVA_LAPSEXED:int = 819;
-const MINERVA_LEZZES_OUT:int = 820;
-const MET_MINERVA:int = 821;
+﻿//const MINERVA_LOVE:int = 813;
+//const MINERVA_BACKSTORY:int = 814;
+//const MINERVA_BACKSTORY_LEARNED:int = 815;
+//const TIMES_MINERVA_SEXED:int = 816;
+//const TIMES_BUTTFUCKED_MINERVA:int = 817;
+//const TIMES_MINERVA_COWGIRLED:int = 818;
+//const TIMES_MINERVA_LAPSEXED:int = 819;
+//const MINERVA_LEZZES_OUT:int = 820;
+//const MET_MINERVA:int = 821;
 
 //-Tainted Minerva vaginal capacity: 90
 //-Tainted Minerva anal capacity: 100

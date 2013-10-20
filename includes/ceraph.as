@@ -1,5 +1,5 @@
 ﻿//VARS
-const ZETSUKO_MET:int = 406;
+//  ZETSUKO_MET:int = 406;
 
 //Pierced Slave Encounter Chain – PC encounters an omnibus who attempts to
 //trick/force the player into wearing cursed piercings.

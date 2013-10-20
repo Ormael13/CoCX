@@ -1,6 +1,6 @@
 ﻿//VARS
-const GOOGIRL_BIRTHS:int = 384;
-const GOOGIRL_CONSECUTIVE_LOSSES:int = 385;
+//const GOOGIRL_BIRTHS:int = 384;
+//const GOOGIRL_CONSECUTIVE_LOSSES:int = 385;
 
 
 //goo-girl encounter- 

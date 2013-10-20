@@ -20,15 +20,15 @@ Skin and Fur: The skin tone of these creatures is very close to being human; the
 Behaviour: The behaviour of Lacta Bovine varies greatly between each individual.  The only major unifying behaviours are their desire to give milk to almost any living creature and a high libido, common to all corrupted creatures.
 Special abilities: A lightly corrupted creature with most of the corruption centered in their breast milk.  It is addictive to those that drink it repeatedly, eventually making them dependent on the one from whom it was drunk. The milk also strengthens the drinker and helps them to relocate the one who nursed them, though that Lacta Bovine is granted limited powers of control over them.  Finally, the breasts of Lacta Bovine are incredibly resilient and able to heal from almost any damage, even being cut off. Thus, they can produce milk for their entire life without fail.
 */
-const MARBLE_LUST:int = 3;
-const MARBLE_KIDS:int = 8;
-const MURBLE_FARM_TALK_LEVELS:int = 458;
-const BROKE_UP_WITH_MARBLE:int = 459;
-const MARBLE_PLAYED_WITH_KIDS_TODAY:int = 460;
-const MARBLE_CAMPTALK_LEVEL:int = 461;
-const MARBLE_TELADRE_STORY:int = 462;
-const MARBLE_WARNING:int = 463;
-const MARBLE_BOVA_LEVEL:int = 465;
+//const MARBLE_LUST:int = 3;
+//const MARBLE_KIDS:int = 8;
+//const MURBLE_FARM_TALK_LEVELS:int = 458;
+//const BROKE_UP_WITH_MARBLE:int = 459;
+//const MARBLE_PLAYED_WITH_KIDS_TODAY:int = 460;
+//const MARBLE_CAMPTALK_LEVEL:int = 461;
+//const MARBLE_TELADRE_STORY:int = 462;
+//const MARBLE_WARNING:int = 463;
+//const MARBLE_BOVA_LEVEL:int = 465;
 
 function marbleFollower():Boolean {
 	if(player.hasStatusAffect("Camp Marble") >= 0) return true;

@@ -20,23 +20,23 @@
 */
 
 
-const URTA_FAMILY_TALK_ATTEMPTS:int = 442;
-const URTA_OPEN_ABOUT_EDRYN:int = 443;
-const PC_DISLIKES_URTA_AND_EDRYN_TOGETHER:int = 444;
-const DISCUSSED_URTA_ALCOHOLISM:int = 445;
-const URTA_EGGS:int = 582;
-const URTA_FERTILE_EGGS:int = 583;
-const URTA_EGG_FORCE_EVENT:int = 584;
-const URTA_TIMES_EGG_PREGGED:int = 585;
-const URTA_EGG_INCUBATION:int = 586;
-const URTA_FLATBELLY_NOTICE:int = 587;
-const URTA_SCYLLA_BIG_DICK_TIMES_DONE:int = 633;
-const URTA_FERTILE:int = 723;
-const URTA_PREG_EVERYBODY:int = 724;
-const URTA_CUM_NO_CUM_DAYS:int = 782;
-const URTA_X_RAPHAEL_HAPPENED:int = 783;
-const MET_OLIVIA:int = 822;
-const URTA_PETPLAY_DONE:int = 857;
+//const URTA_FAMILY_TALK_ATTEMPTS:int = 442;
+//const URTA_OPEN_ABOUT_EDRYN:int = 443;
+//const PC_DISLIKES_URTA_AND_EDRYN_TOGETHER:int = 444;
+//const DISCUSSED_URTA_ALCOHOLISM:int = 445;
+//const URTA_EGGS:int = 582;
+//const URTA_FERTILE_EGGS:int = 583;
+//const URTA_EGG_FORCE_EVENT:int = 584;
+//const URTA_TIMES_EGG_PREGGED:int = 585;
+//const URTA_EGG_INCUBATION:int = 586;
+//const URTA_FLATBELLY_NOTICE:int = 587;
+//const URTA_SCYLLA_BIG_DICK_TIMES_DONE:int = 633;
+//const URTA_FERTILE:int = 723;
+//const URTA_PREG_EVERYBODY:int = 724;
+//const URTA_CUM_NO_CUM_DAYS:int = 782;
+//const URTA_X_RAPHAEL_HAPPENED:int = 783;
+//const MET_OLIVIA:int = 822;
+//const URTA_PETPLAY_DONE:int = 857;
 
 function urtaCapacity():Number {
 	if(flags[URTA_TENTACLE_GAPED] > 0) return 500;

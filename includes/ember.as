@@ -3,47 +3,47 @@
 //Tainted Ember
 //Link: Tainted Ember
 //Variable and Flag Listing
-const EMBER_AFFECTION:int = 523; //: Pretty obvious
-const EMBER_HATCHED:int = 524; //: is ember hatched? 1 = true
-const EMBER_GENDER:int = 525; // 1 for male, 2 for female, 3 for herm. This also controls the egg's shell color.
-const EMBER_TYPE:int = 526; //numerical value; Ember is supposed to have many forms, this will control which one is born. (This is important for when Ember has hybrid forms.)
-const EMBER_COR:int = 527; //Controls Ember's current corruption levels, only default/dragon-girl Ember uses this. (Default starting value = 50)
-const EMBER_HAIR:int = 528; //0 for no hair, 1 for hair, 2 for mane.
-const EMBER_MILK:int = 529; //0 for no lactation, 1 for lactating.
-const EMBER_OVIPOSITION:int = 530; //0 for no egg laying, 1 for egg laying.
-const EMBER_ROUNDFACE:int = 531; //0 for anthro Ember, 1 for dragon-girl Ember. (You might want to control this with the Type flag since only default Embers use this variable.)
-const EMBER_EGG_FLUID_COUNT:int = 532; //This controls when it's time to hatch. Every item use and every time you use the egg as a masturbation aid, this will be incremented. Threshold for birthing is 5, but the birthing process can only be triggered when using as a masturbatory aid. This is done to allow players the chance to modify Ember before actually hatching.
+// EMBER_AFFECTION:int = 523; //: Pretty obvious
+// EMBER_HATCHED:int = 524; //: is ember hatched? 1 = true
+// EMBER_GENDER:int = 525; // 1 for male, 2 for female, 3 for herm. This also controls the egg's shell color.
+// EMBER_TYPE:int = 526; //numerical value; Ember is supposed to have many forms, this will control which one is born. (This is important for when Ember has hybrid forms.)
+// EMBER_COR:int = 527; //Controls Ember's current corruption levels, only default/dragon-girl Ember uses this. (Default starting value = 50)
+// EMBER_HAIR:int = 528; //0 for no hair, 1 for hair, 2 for mane.
+// EMBER_MILK:int = 529; //0 for no lactation, 1 for lactating.
+// EMBER_OVIPOSITION:int = 530; //0 for no egg laying, 1 for egg laying.
+// EMBER_ROUNDFACE:int = 531; //0 for anthro Ember, 1 for dragon-girl Ember. (You might want to control this with the Type flag since only default Embers use this variable.)
+// EMBER_EGG_FLUID_COUNT:int = 532; //This controls when it's time to hatch. Every item use and every time you use the egg as a masturbation aid, this will be incremented. Threshold for birthing is 5, but the birthing process can only be triggered when using as a masturbatory aid. This is done to allow players the chance to modify Ember before actually hatching.
 //BreathType: Controls which breath weapon the PC will have via TFing. Every Ember has its unique breath weapon to pass on.
 //EmberQuestTrigger: Controls whether the PC can still visit the lost dragon city. 0 can visit and 1 can't, special text will be displayed. (Future Expansion)
 //BreathCooldown: How many hours you need to wait to be able to use the breath weapon again.
-const EMBER_STAT:int = 533; //All Embers have a hidden stat, Corrupt has Ego, Pure has Confidence, Tainted has Affection, and hybrids vary. There is a need to track this, but only 1 special stat for every Ember.
-const EMBER_INTERNAL_DICK:int = 534; //Dragon-girl Ember can have either a internal sheath to keep " + emberMF("his","her") + " dick in or have it be more human-like. 0 = internal, 1 = external.
+// EMBER_STAT:int = 533; //All Embers have a hidden stat, Corrupt has Ego, Pure has Confidence, Tainted has Affection, and hybrids vary. There is a need to track this, but only 1 special stat for every Ember.
+// EMBER_INTERNAL_DICK:int = 534; //Dragon-girl Ember can have either a internal sheath to keep " + emberMF("his","her") + " dick in or have it be more human-like. 0 = internal, 1 = external.
 //EmberKidsCount: How many children you've had with Ember, this will be important later.
 //BooleanEmberKidMale: If you've had a male child with Ember, having a herm sets both flags to 1 (true).
 //BooleanEmberKidFemale: If you've had a female child with Ember, having a herm sets both flags to 1 (true).
-const TIMES_EQUIPPED_EMBER_SHIELD:int = 535;
-const TOOK_EMBER_EGG:int = 536; //PC Take ember's egg home?
-const EGG_BROKEN:int = 537; //PC Smash!? ember's egg?
-const TIMES_FOUND_EMBERS_EGG:int =538; //Times stumbled into ze egg.
-const EMBER_JACKED_ON:int = 539; //Has the PC masturbated on the egg yet?  Needed to hatcH!
-const EMBER_OVI_BITCHED_YET:int = 540; //Used to trigger emberBitchesAboutPCBeingFullOfEggs()
-const EMBER_LUST_BITCHING_COUNTER:int = 541;
-const EMBER_CURRENTLY_FREAKING_ABOUT_MINOCUM:int = 542; // Used to trigger minotaurJizzFreakout()
-const DRANK_EMBER_BLOOD_TODAY:int = 543; //Cooldown for ember TFs
+// TIMES_EQUIPPED_EMBER_SHIELD:int = 535;
+// TOOK_EMBER_EGG:int = 536; //PC Take ember's egg home?
+// EGG_BROKEN:int = 537; //PC Smash!? ember's egg?
+// TIMES_FOUND_EMBERS_EGG:int =538; //Times stumbled into ze egg.
+// EMBER_JACKED_ON:int = 539; //Has the PC masturbated on the egg yet?  Needed to hatcH!
+// EMBER_OVI_BITCHED_YET:int = 540; //Used to trigger emberBitchesAboutPCBeingFullOfEggs()
+// EMBER_LUST_BITCHING_COUNTER:int = 541;
+// EMBER_CURRENTLY_FREAKING_ABOUT_MINOCUM:int = 542; // Used to trigger minotaurJizzFreakout()
+// DRANK_EMBER_BLOOD_TODAY:int = 543; //Cooldown for ember TFs
 
-const EMBER_PUSSY_FUCK_COUNT:int = 544;
-const TIMES_BUTTFUCKED_EMBER:int = 545;
+// EMBER_PUSSY_FUCK_COUNT:int = 544;
+// TIMES_BUTTFUCKED_EMBER:int = 545;
 
-const EMBER_INCUBATION:int = 553;
-const EMBER_CHILDREN_MALES:int = 554;
-const EMBER_CHILDREN_FEMALES:int = 555;
-const EMBER_CHILDREN_HERMS:int = 556;
-const EMBER_EGGS:int = 557;
-const EMBER_BITCHES_ABOUT_PREGNANT_PC:int = 558;
-const EMBER_TALKS_TO_PC_ABOUT_PC_MOTHERING_DRAGONS:int = 559;
-const EMBER_PREGNANT_TALK:int = 560;
+// EMBER_INCUBATION:int = 553;
+// EMBER_CHILDREN_MALES:int = 554;
+// EMBER_CHILDREN_FEMALES:int = 555;
+// EMBER_CHILDREN_HERMS:int = 556;
+// EMBER_EGGS:int = 557;
+// EMBER_BITCHES_ABOUT_PREGNANT_PC:int = 558;
+// EMBER_TALKS_TO_PC_ABOUT_PC_MOTHERING_DRAGONS:int = 559;
+// EMBER_PREGNANT_TALK:int = 560;
 
-const TIMES_EMBER_LUSTY_FUCKED:int = 824;
+// TIMES_EMBER_LUSTY_FUCKED:int = 824;
 
 
 function emberAffection(changes:Number = 0):Number {

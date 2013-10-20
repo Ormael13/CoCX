@@ -1,5 +1,5 @@
-﻿const EGG_WITCH_TYPE:int = 589;
-const EGG_WITCH_COUNTER:int = 588;
+﻿//const EGG_WITCH_TYPE:int = 589;
+//const EGG_WITCH_COUNTER:int = 588;
 
 function sandwitchRape():void {
 	spriteSelect(50);

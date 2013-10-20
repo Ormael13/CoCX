@@ -1,4 +1,4 @@
-﻿const RATHAZUL_DEBIMBO_OFFERED:int = 744;
+﻿//const RATHAZUL_DEBIMBO_OFFERED:int = 744;
 
 	//Rathazul the Alchemist
 	//Encounter, random text for potential uses, choices.

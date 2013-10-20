@@ -6,9 +6,9 @@
 //-Items - "Items Start"
 
 //All sex/rape/combat moves for the shit in d2.
-const VALA_CUMBATH_TIMES:int = 433;
-const TIMES_VALA_CONSENSUAL_BIG:int = 767;
-const TIMES_VAPULA_AND_GIANT_VALA:int = 768;
+// VALA_CUMBATH_TIMES:int = 433;
+// TIMES_VALA_CONSENSUAL_BIG:int = 767;
+// TIMES_VAPULA_AND_GIANT_VALA:int = 768;
 
 function impGangAI():void {
 	if(monster.hasStatusAffect("ImpUber") >= 0) impGangUber();

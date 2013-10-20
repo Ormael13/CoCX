@@ -1,22 +1,22 @@
 ﻿/* Written by Nonesuch and PKD, edited by Abraxas, Anzuaz, 05095coc and some helpful anons; ideas suggested by Abraxas, G3 and some helpful anons. */
 
-const DECLINED_TO_VISIT_REBECCS_VILLAGE:int = 500;
-const TIMES_IN_DEMON_PIT:int = 501;
-const TIMES_REFUSED_REBECCS_OFFER:int = 502;
-const OWCAS_ATTITUDE:int = 503;
-const VAPULA_SUBMISSIVENESS:int = 504;
-const DAYS_SINCE_LAST_DEMON_DEALINGS:int = 505;
-const OWCA_UNLOCKED:int = 506;
-const REBECCS_LAST_PLEA:int = 507;
-const OWCA_ANGER_DISABLED:int = 508;
+//const DECLINED_TO_VISIT_REBECCS_VILLAGE:int = 500;
+//const TIMES_IN_DEMON_PIT:int = 501;
+//const TIMES_REFUSED_REBECCS_OFFER:int = 502;
+//const OWCAS_ATTITUDE:int = 503;
+//const VAPULA_SUBMISSIVENESS:int = 504;
+//const DAYS_SINCE_LAST_DEMON_DEALINGS:int = 505;
+//const OWCA_UNLOCKED:int = 506;
+//const REBECCS_LAST_PLEA:int = 507;
+//const OWCA_ANGER_DISABLED:int = 508;
 
-const VAPULA_HAREM_FUCK:int = 546;
-const VAPULA_THREESOMES:int = 547;
-const OWCA_SACRIFICE_DISABLED:int = 548;
-const VAPULA_FOLLOWER:int = 549;
-const VAPULA_DAYS_SINCE_FED:int = 551;
-const VAPULA_TEASE_COUNT:int = 552;
-const VAPULA_EARNED_A_SPANK:int = 634;
+//const VAPULA_HAREM_FUCK:int = 546;
+//const VAPULA_THREESOMES:int = 547;
+//const OWCA_SACRIFICE_DISABLED:int = 548;
+//const VAPULA_FOLLOWER:int = 549;
+//const VAPULA_DAYS_SINCE_FED:int = 551;
+//const VAPULA_TEASE_COUNT:int = 552;
+//const VAPULA_EARNED_A_SPANK:int = 634;
 
 function vapulaSlave():Boolean {
 	if(flags[VAPULA_FOLLOWER] == 1) return true;

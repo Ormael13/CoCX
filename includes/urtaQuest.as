@@ -7,19 +7,19 @@
 // import flash.events.MouseEvent;
 // import classes.itemSlotClass;
 
-const URTA_MET_HEL:int = 710;
-const URTA_QUEST_STATUS:int = 711;
-const URTA_FUCKED_HEL:int = 712;
-const SUCCUBI_MILKED_GNOLL_PRINCESS:int = 713;
-const URTA_TAKEN_BY_GNOLLS:int = 714;
-const URTA_BECOMES_SNAKE_SLAVE:int = 715;
-const URTA_GOBLIN_SLAVE:int = 716
-const URTA_TENTACLE_RAPED:int = 717;
-const URTA_TENTACLE_GAPED:int = 718;
-const URTA_IS_VULQUINE_MENACE:int = 719;
-const URTA_RAPED_MINO_LORD:int = 720;
-const URTA_MINO_AND_SUCCUBI_SLAVE:int = 721;
-const EDRYN_BIRF_COUNTDOWN:int = 722;
+//const URTA_MET_HEL:int = 710;
+//const URTA_QUEST_STATUS:int = 711;
+//const URTA_FUCKED_HEL:int = 712;
+//const SUCCUBI_MILKED_GNOLL_PRINCESS:int = 713;
+//const URTA_TAKEN_BY_GNOLLS:int = 714;
+//const URTA_BECOMES_SNAKE_SLAVE:int = 715;
+//const URTA_GOBLIN_SLAVE:int = 716
+//const URTA_TENTACLE_RAPED:int = 717;
+//const URTA_TENTACLE_GAPED:int = 718;
+//const URTA_IS_VULQUINE_MENACE:int = 719;
+//const URTA_RAPED_MINO_LORD:int = 720;
+//const URTA_MINO_AND_SUCCUBI_SLAVE:int = 721;
+//const EDRYN_BIRF_COUNTDOWN:int = 722;
 
 //Mystery variables for now
 var player2:creature = new creature();

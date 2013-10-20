@@ -1,4 +1,4 @@
-﻿const SALON_PAID:int = 441;
+﻿//const SALON_PAID:int = 441;
 function hairDresser():void {
 	outputText("While exploring the mountain, you find a cleverly concealed doorway.  From inside you can hear the sound of blades being sharpened.  Do you enter the doorway?", true);
 	doYesNo(2169,13);

@@ -30,54 +30,54 @@
 166 Amily Allowing Fertility In Camp? (1 = yes)
 */
 // Sorry for this, but it makes it a helluva lot easier for me to read it - Harb
-const AMILY_VISITING_URTA:int = 346;
-const AMILY_NEED_TO_FREAK_ABOUT_URTA:int = 347;
-const AMILY_MET:int=35; //  (0 = not met, 1 = met)
-const AMILY_VILLAGE_ENCOUNTERS_DISABLED:int=36; // 1=true,44=village button
-const AMILY_GROSSED_OUT_BY_WORMS:int=37; // 1=freaked out
-const AMILY_AFFECTION:int=38; //  (< 15 = low.  In between = medium. 40+= high affect)
-const AMILY_OFFER_ACCEPTED:int=39; //  (1 = true, 0 = not yet)
-const AMILY_BIRTH_TOTAL:int=40; //
-const AMILY_INCUBATION:int=41; //   0 = not pregnant, otherwise hours till birth 168
-const AMILY_FUCK_COUNTER:int=42; //
-const AMILY_FOLLOWER:int=43; //
-const AMILY_VILLAGE_ACCESSIBLE:int=44; //
-const AMILY_WANG_LENGTH:int=45; //
-const AMILY_WANG_GIRTH:int=46; //
-const AMILY_CUP_SIZE:int=47; // 5-Jan
-const AMILY_NIPPLE_LENGTH:int=48; // 0.3-4
-const AMILY_HIP_RATING:int=49; // girly-womanly
-const AMILY_ASS_SIZE:int=50; //
-const AMILY_LACTATION_RATE:int=51; //
-const AMILY_CLOTHING:int=52; //
-const AMILY_MET_AS:int=158; //
-const AMILY_CONFESSED_LESBIAN:int=159; // 1=yes,2=and accepted
-const AMILY_TIMES_FUCKED_FEMPC:int=160; //
-const AMILY_HERM_TIMES_FUCKED_BY_FEMPC:int=161; //
-const PC_TIMES_BIRTHED_AMILYKIDS:int=162; //
-const PC_PENDING_PREGGERS:int=163; // 1=yes,2=finished
-const AMILY_PC_GENDER:int=164; //
-const AMILY_HERM_QUEST:int=165; // 1=amily flipped out, 2=accepted as amily's dad
-const AMILY_ALLOWS_FERTILITY:int = 166; // 
-const AMILY_CORRUPT_FLIPOUT:int = 168;
-const AMILY_TIMES_BUTTFUCKED_PC:int = 419;
-const TIMES_FUCKED_AMILYBUTT:int = 420;
-
-// NEEDS NEW NUMBERS AND SHIT
-const AMILY_OFFERED_DEFURRY:int = 336; // 1 = Offered to defurry Amily
-const AMILY_NOT_FURRY:int = 337; // 1 = Amily is no longer a flea-ridden furry who stinks up your carpet.
-const AMILY_IS_BATMAN:int = 338; // 1 = You turned Amily into a human and then pissed all over her happy thoughts.  She now stalks you from rooftops while buying graphite helmets, utility belts, and a sweet, jetpowered car in the theme of a rat.
-
-//1 = timer started, 30 = RIPE FOR INCEST
-const AMILY_INCEST_COUNTDOWN_TIMER:int = 436;
-
-const AMILY_OVIPOSITED_COUNT:int = 629;
-const AMILY_OVIPOSITED_COUNTDOWN:int = 630;
-const AMILY_OVIPOSITION_UNLOCKED:int = 631;
-const AMILY_TIMES_SWIMFUCKED:int = 635;
-const AMILY_OWNS_BIKINI:int = 636;
-const AMILY_X_IZMA_POTION_3SOME:int = 771;
-const GIVEN_AMILY_NURSE_OUTFIT:int = 775;
+//  AMILY_VISITING_URTA:int = 346;
+//  AMILY_NEED_TO_FREAK_ABOUT_URTA:int = 347;
+//  AMILY_MET:int=35; //  (0 = not met, 1 = met)
+//  AMILY_VILLAGE_ENCOUNTERS_DISABLED:int=36; // 1=true,44=village button
+//  AMILY_GROSSED_OUT_BY_WORMS:int=37; // 1=freaked out
+//  AMILY_AFFECTION:int=38; //  (< 15 = low.  In between = medium. 40+= high affect)
+//  AMILY_OFFER_ACCEPTED:int=39; //  (1 = true, 0 = not yet)
+//  AMILY_BIRTH_TOTAL:int=40; //
+//  AMILY_INCUBATION:int=41; //   0 = not pregnant, otherwise hours till birth 168
+//  AMILY_FUCK_COUNTER:int=42; //
+//  AMILY_FOLLOWER:int=43; //
+//  AMILY_VILLAGE_ACCESSIBLE:int=44; //
+//  AMILY_WANG_LENGTH:int=45; //
+//  AMILY_WANG_GIRTH:int=46; //
+//  AMILY_CUP_SIZE:int=47; // 5-Jan
+//  AMILY_NIPPLE_LENGTH:int=48; // 0.3-4
+//  AMILY_HIP_RATING:int=49; // girly-womanly
+//  AMILY_ASS_SIZE:int=50; //
+//  AMILY_LACTATION_RATE:int=51; //
+//  AMILY_CLOTHING:int=52; //
+//  AMILY_MET_AS:int=158; //
+//  AMILY_CONFESSED_LESBIAN:int=159; // 1=yes,2=and accepted
+//  AMILY_TIMES_FUCKED_FEMPC:int=160; //
+//  AMILY_HERM_TIMES_FUCKED_BY_FEMPC:int=161; //
+//  PC_TIMES_BIRTHED_AMILYKIDS:int=162; //
+//  PC_PENDING_PREGGERS:int=163; // 1=yes,2=finished
+//  AMILY_PC_GENDER:int=164; //
+//  AMILY_HERM_QUEST:int=165; // 1=amily flipped out, 2=accepted as amily's dad
+//  AMILY_ALLOWS_FERTILITY:int = 166; // 
+//  AMILY_CORRUPT_FLIPOUT:int = 168;
+//  AMILY_TIMES_BUTTFUCKED_PC:int = 419;
+//  TIMES_FUCKED_AMILYBUTT:int = 420;
+// 
+// // NEEDS NEW NUMBERS AND SHIT
+//  AMILY_OFFERED_DEFURRY:int = 336; // 1 = Offered to defurry Amily
+//  AMILY_NOT_FURRY:int = 337; // 1 = Amily is no longer a flea-ridden furry who stinks up your carpet.
+//  AMILY_IS_BATMAN:int = 338; // 1 = You turned Amily into a human and then pissed all over her happy thoughts.  She now stalks you from rooftops while buying graphite helmets, utility belts, and a sweet, jetpowered car in the theme of a rat.
+// 
+// //1 = timer started, 30 = RIPE FOR INCEST
+//  AMILY_INCEST_COUNTDOWN_TIMER:int = 436;
+// 
+//  AMILY_OVIPOSITED_COUNT:int = 629;
+//  AMILY_OVIPOSITED_COUNTDOWN:int = 630;
+//  AMILY_OVIPOSITION_UNLOCKED:int = 631;
+//  AMILY_TIMES_SWIMFUCKED:int = 635;
+//  AMILY_OWNS_BIKINI:int = 636;
+//  AMILY_X_IZMA_POTION_3SOME:int = 771;
+//  GIVEN_AMILY_NURSE_OUTFIT:int = 775;
 
 
 // NEW EVENTS:

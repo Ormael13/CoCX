@@ -1,4 +1,4 @@
-﻿const LAST_EASTER_YEAR:int = 823;
+﻿// LAST_EASTER_YEAR:int = 823;
 
 //[First time approach]
 function bakeryuuuuuu():void {

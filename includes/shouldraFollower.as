@@ -1,17 +1,17 @@
 ﻿/*Follower Shouldra tracks hours since her last fuck, similar to Exgartuan. Each sex scene involving her resets this counter and also puts her to "sleep" (length of sleep at least 16 hours). Shouldra will gradually fuck with the PC the longer they go without involving her in sex (length of time below)*/
 
-const GENDERLESS_MASTURBATION_WITH_GHOST_COUNT:int = 511;
-const SHOULDRA_TONGUE_LICKS_TIMES:int = 512;
-const SHOULDRA_FOLLOWER_STATE:int = 513;
-const SHOULDRA_PLOT_LEVEL:int = 514;
-const SHOULDRA_TALK_NEEDED:int = 515;
-const SHOULDRA_PLOT_COUNTDOWN:int = 516;
-const SHOULDRA_SLEEP_TIMER:int = 517;
-const SHOULDRA_MAGIC_COOLDOWN:int = 518;
-const SHOULDRA_TIMES_NIGHT_RAPED_PC:int = 519;
-const SHOULDRA_EXGARTUDRAMA:int = 520;
-const SHOULDRA_BAKERY_TIMES:int = 521;
-const SHOULDRA_MET_VALA:int = 766;
+//const GENDERLESS_MASTURBATION_WITH_GHOST_COUNT:int = 511;
+//const SHOULDRA_TONGUE_LICKS_TIMES:int = 512;
+//const SHOULDRA_FOLLOWER_STATE:int = 513;
+//const SHOULDRA_PLOT_LEVEL:int = 514;
+//const SHOULDRA_TALK_NEEDED:int = 515;
+//const SHOULDRA_PLOT_COUNTDOWN:int = 516;
+//const SHOULDRA_SLEEP_TIMER:int = 517;
+//const SHOULDRA_MAGIC_COOLDOWN:int = 518;
+//const SHOULDRA_TIMES_NIGHT_RAPED_PC:int = 519;
+//const SHOULDRA_EXGARTUDRAMA:int = 520;
+//const SHOULDRA_BAKERY_TIMES:int = 521;
+//const SHOULDRA_MET_VALA:int = 766;
 
 function followerShouldra():Boolean {
 	if(flags[SHOULDRA_FOLLOWER_STATE] == 1) return true;

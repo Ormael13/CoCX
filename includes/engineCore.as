@@ -1,7 +1,7 @@
 ﻿// import flash.events.MouseEvent;
 
-const DOUBLE_ATTACK_STYLE:int = 867;
-const SPELLS_CAST:int = 868;
+//const DOUBLE_ATTACK_STYLE:int = 867;
+//const SPELLS_CAST:int = 868;
 
 //Fenoxo loves his temps
 var temp:int = 0;

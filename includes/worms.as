@@ -1,5 +1,5 @@
-﻿const EVER_INFESTED:int = 787;	
-const CAME_WORMS_AFTER_COMBAT:int = 788;
+﻿//const EVER_INFESTED:int = 787;	
+//const CAME_WORMS_AFTER_COMBAT:int = 788;
 /*
  LICENSE 
  

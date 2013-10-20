@@ -2,9 +2,9 @@
 //" + flags[MILK_NAME] + ": This slut's name. Can't call her Bath Slut forever. Unless you do.
 //[MilkySize]: Does Milky have GIANT HUGE BOOBS that she can't fucking walk with, does she have a big plump set of HHH cups you can smother yourself and your big fat cock with, or a more reasonable DD bust, the perfect size to drink from, titfuck, and play with all day long.
 
-const MILK_NAME:int = 869;
-const MILK_SIZE:int = 870;
-const MET_MILK_SLAVE:int = 871;
+//const MILK_NAME:int = 869;
+//const MILK_SIZE:int = 870;
+//const MET_MILK_SLAVE:int = 871;
 
 function milkSlave():Boolean {
 	if(flags[MILK_NAME] is String) return true;

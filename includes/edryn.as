@@ -1,9 +1,9 @@
 ﻿//VARS
 //player.statusAffectv1("Edryn") >= 4 = FREE SEX
-const EDRYN_TIMES_HEL_THREESOMED:int = 404;
-const HEL_EDRYN_OFFER:int = 405;
-const EDRYN_PREGNANCY_INCUBATION:int = 68;
-const TIMES_EATEN_EDRYN_PUSSY_RUT:int = 776;
+// EDRYN_TIMES_HEL_THREESOMED:int = 404;
+// HEL_EDRYN_OFFER:int = 405;
+// EDRYN_PREGNANCY_INCUBATION:int = 68;
+// TIMES_EATEN_EDRYN_PUSSY_RUT:int = 776;
 
 
 function edrynBarTalk():void {

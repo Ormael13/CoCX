@@ -1,15 +1,15 @@
-﻿const LOPPE_FURRY:int = 684;
-const LOPPE_FERTILE:int = 685;
-const LOPPE_KIDS:int = 686;
-const LOPPE_TRAINING:int = 687;
-const LOPPE_KIDS_LIMIT:int = 688;
-const LOPPE_URTA_CHATS:int = 689;
-const LOPPE_PC_MET_UMA:int = 690;
-const LOPPE_TIMES_SEXED:int = 691;
-const LOPPE_DENIAL_COUNTER:int = 692;
-const LOPPE_DISABLED:int = 693;
-const TIMES_ASKED_LOPPE_ABOUT_LOPPE:int = 694;
-const LOPPE_MET:int = 695;
+﻿//const LOPPE_FURRY:int = 684;
+//const LOPPE_FERTILE:int = 685;
+//const LOPPE_KIDS:int = 686;
+//const LOPPE_TRAINING:int = 687;
+//const LOPPE_KIDS_LIMIT:int = 688;
+//const LOPPE_URTA_CHATS:int = 689;
+//const LOPPE_PC_MET_UMA:int = 690;
+//const LOPPE_TIMES_SEXED:int = 691;
+//const LOPPE_DENIAL_COUNTER:int = 692;
+//const LOPPE_DISABLED:int = 693;
+//const TIMES_ASKED_LOPPE_ABOUT_LOPPE:int = 694;
+//const LOPPE_MET:int = 695;
 
 function loppeCapacity():int {
 	return 90;

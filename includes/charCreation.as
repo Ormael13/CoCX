@@ -1,4 +1,4 @@
-﻿const CUSTOM_PC_ENABLED:int = 759;
+﻿// CUSTOM_PC_ENABLED:int = 759;
 
 function newGameGo(e:MouseEvent):void {
 	funcs = new Array();

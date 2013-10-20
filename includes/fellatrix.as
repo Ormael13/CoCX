@@ -1,6 +1,6 @@
-﻿const DOMINIKA_TIMES_MULTICOCK_SLOBBERED:int = 386;
-const DOMINIKA_TIMES_HYPNO_BJ:int = 387;
-const DOMINIKA_LAST_HYPNO_SUCK_COUNT:int = 388;
+﻿//const DOMINIKA_TIMES_MULTICOCK_SLOBBERED:int = 386;
+//const DOMINIKA_TIMES_HYPNO_BJ:int = 387;
+//const DOMINIKA_LAST_HYPNO_SUCK_COUNT:int = 388;
 
 function fellatrixBarAppearance():void {
 	if(flags[150] == 0) outputText("\n\nYou spot a face you haven't seen before – or rather, eyes you haven't seen before. A woman sits at a table in the back, most of her features hidden beneath a white cloth wrapped around her head to form a turban and veil. The rest of her dress seems equally modest but loose, efficient for desert travel. She idly runs her finger and its accompanying black-painted fingernail over the top of an empty cup, staring off into the distance and thinking about some unknown detail. What skin you can see is pale but perhaps most notably for Tel'Adre, human. Blue eyes glance over and meet your own, and you are reminded of your village back home. Her reaction to your look is unreadable thanks to her veil, but she watches you for a few moments longer before turning away again.", false);

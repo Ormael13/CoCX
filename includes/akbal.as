@@ -1,5 +1,5 @@
-﻿const AKBAL_TIMES_BITCHED:int = 902;
-const AKBAL_BITCH_Q:int = 903;
+﻿//  AKBAL_TIMES_BITCHED:int = 902;
+//  AKBAL_BITCH_Q:int = 903;
 
 //Akbal of the Terrestrial Fire [EDITED]
 //2. AKBAL'S MY BITCH

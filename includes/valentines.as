@@ -1,4 +1,4 @@
-﻿const VALENTINES_EVENT_YEAR:int = 736;
+﻿//const VALENTINES_EVENT_YEAR:int = 736;
 
 function isValentine():Boolean {
 	if(date.date >= 13 && date.date <= 15 && date.month == 1) return true;

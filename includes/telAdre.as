@@ -3,7 +3,7 @@
  * @author:
  */
 
-const YVONNE_FUCK_COUNTER:int = 437;
+//const YVONNE_FUCK_COUNTER:int = 437;
 
 /**
  * 3 variables that define bonuses for piercing.

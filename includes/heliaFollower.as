@@ -1,19 +1,19 @@
-﻿const HELIA_FOLLOWER_DISABLED:int = 696
-const HEL_INTROS_LEVEL:int = 697;
-const MINO_SONS_HAVE_SOPHIE:int = 698;
-const KEEP_HELIA_AND_SOPHIE:int = 699;
-const FOLLOWER_HEL_TALKS:int = 670;
-const HEL_CAN_SWIM:int = 703;
-const HEL_GUARDING:int = 704;
+﻿//const HELIA_FOLLOWER_DISABLED:int = 696
+//const HEL_INTROS_LEVEL:int = 697;
+//const MINO_SONS_HAVE_SOPHIE:int = 698;
+//const KEEP_HELIA_AND_SOPHIE:int = 699;
+//const FOLLOWER_HEL_TALKS:int = 670;
+//const HEL_CAN_SWIM:int = 703;
+//const HEL_GUARDING:int = 704;
 
-const HELIA_ANAL_TRAINING_OFFERED:int = 926;
-const HELIA_ANAL_TRAINING:int = 927;
+//const HELIA_ANAL_TRAINING_OFFERED:int = 926;
+//const HELIA_ANAL_TRAINING:int = 927;
 
-const HELIA_BIRTHDAY_OFFERED:int = 928;
-const HELIA_BDAY_DRINKS:int = 929;
-const HELIA_BDAY_HAKON_AND_KIRI:int = 930;
-const HELIA_BDAY_PHOENIXES:int = 931;
-const HELIA_BDAY_FOX_TWINS:int = 932;
+//const HELIA_BIRTHDAY_OFFERED:int = 928;
+//const HELIA_BDAY_DRINKS:int = 929;
+//const HELIA_BDAY_HAKON_AND_KIRI:int = 930;
+//const HELIA_BDAY_PHOENIXES:int = 931;
+//const HELIA_BDAY_FOX_TWINS:int = 932;
 
 function helCapacity():Number {
 	return 85;

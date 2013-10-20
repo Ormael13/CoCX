@@ -1,4 +1,4 @@
-﻿const SATYR_KIDS:int = 603;
+﻿//const SATYR_KIDS:int = 603;
 //Game Implementation (code from here)
 //Fight Encounter (Z)
 //Happens either in the plains or the swamp.

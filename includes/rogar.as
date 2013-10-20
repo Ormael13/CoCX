@@ -13,16 +13,16 @@
 
 //flag list:
 //Ro'gar phase flag: state 0 - zero phase, initial encounter; 1 - phase 1, bath/BJ chance; 2 - phase 2, Ro'gar begins the move; 3 - phase 3, Ro'gar is a [Cloaked Figure] in the Wet Bitch; 4 - phase 4 repeatables in the bar as [Ro'gar]
-const ROGAR_PHASE:int = 407;
+//const ROGAR_PHASE:int = 407;
 //Dirt Mc Girt flag: state 0 - player has not had the opportunity to tongue-bathe Ro'; 1 - player gently turned down the chance to bathe him; 2 - player bathed Ro'
 //Dirt Mc Girt flag legend: 2 = gave tongue bath; 1 = declined to give tongue bath; 0 = was not given the option to tongue bathe; default setting 0
-const ROGAR_DIRT:int = 408;
+//const ROGAR_DIRT:int = 408;
 //Ro'roh Raggy flag: state 0 - Ro'gar perceives player as masculine or androgynous; 1 - Ro'gar perceives player as feminine
-const ROGAR_WARNING:int = 409;
+//const ROGAR_WARNING:int = 409;
 //Crying Game flag: state 0 - Ro'gar events can trigger; 1 - Ro'gar is put off by the PC and will no longer appear
-const ROGAR_DISABLED:int = 410;
+//const ROGAR_DISABLED:int = 410;
 //unnamed phase 4 timing flag: measures how long it's been since player last saw Ro'gar once he enters phase 4, to enforce a once-per-day sex limit
-const ROGAR_FUCKED_TODAY:int = 411;
+//const ROGAR_FUCKED_TODAY:int = 411;
 
 //notes: I'm using the Crying Game flag as an all-purpose Ro'gar lockout, so check it before every possible Ro'gar meeting and prevent swamp scenes and the bar button from loading if present; if Crying Game = 1, no Ro'gar scenes, period
 //the reference originates from the half-scene in phase 4 where he can discover you're female or unsexed after already having gotten a BJ from you

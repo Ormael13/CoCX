@@ -1,5 +1,5 @@
-﻿const TIMES_LOST_HECKEL_DOM_CHALLENGE:int = 650;
-const TIMES_DOMMED_HECKEL:int = 651;
+﻿//const TIMES_LOST_HECKEL_DOM_CHALLENGE:int = 650;
+//const TIMES_DOMMED_HECKEL:int = 651;
 
 /*By submitting content to Fenoxo for addition to Corruption of Champions, I agree to give up any
 and all creative and legal control over how the characters and events from my submissions are

@@ -1,5 +1,5 @@
-﻿const TIMES_SOLO_FED_NUN:int = 778;
-const FED_SCYLLA_TODAY:int = 779;
+﻿//const TIMES_SOLO_FED_NUN:int = 778;
+//const FED_SCYLLA_TODAY:int = 779;
 
 //Scylla- cum addicted demon-tainted nun
 
