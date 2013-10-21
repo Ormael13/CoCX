@@ -11,7 +11,7 @@
 function bunnbunbunMeet():void {
 	outputText("", true);
 	spriteSelect(13);
-	if(flags[132] == 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00132] == 0) {
 		outputText("A ", false);
 		if(player.tallness > 64) outputText("short ", false);
 		outputText("bunny-girl appears from behind some bushes, hopping about and clutching a basket full of multicolored eggs tightly in front of her muscular, fur-covered thighs.  She hops around a few times, peering closely at the ground as if searching for something.  Her slow, deliberate hopping comes to an end as she looks up and spots you.  The bunny's eyes widen into shocked dinner-plates, like she's utterly amazed someone saw her.  She freezes completely still, watching you, and you're given the chance to give her a good looking over.\n\n", false);
@@ -25,7 +25,7 @@ function bunnbunbunMeet():void {
 		
 		outputText("Even though nearly a minute has passed, the bunny-lass is STILL frozen and staring.  She hasn't done anything since realizing that you're looking at her.  Well, it looks like the ball's in your court.  What do you do?", false);
 		//[Talk] [Rape Her]
-		simpleChoices("Talk",2647,"Rape Her",2648,"",0,"",0,"Leave",13);
+		simpleChoices("Talk",talkToBunnyBunBun,"Rape Her",rapeBunBun,"",0,"",0,"Leave",13);
 	}
 	//Met her
 	else {
@@ -68,13 +68,13 @@ function bunnbunbunMeet():void {
 		outputText("  Her dick in your ass?)", false);
 		//var Ass:Number = 0;
 		//Dick In V] [Dick in A] [Vagina] [Ass] [Leave]
-		choices("DickInVag",DickInV,"Vagina",Vagina,"69",sixtyNine,"LayYourEggs",eggs,"BeAssFucked",2650,"",0,"",0,"",0,"",0,"Leave",13);		
+		choices("DickInVag",DickInV,"Vagina",Vagina,"69",sixtyNine,"LayYourEggs",eggs,"BeAssFucked",bunbunFucksPCInAss,"",0,"",0,"",0,"",0,"Leave",13);		
 	}
 }
 //[Talk]
 function talkToBunnyBunBun():void {
 	spriteSelect(13);
-	flags[132]++;
+	flags[UNKNOWN_FLAG_NUMBER_00132]++;
 	outputText("", true);
 	outputText("You slowly introduce yourself, and let the bunny-girl know that you mean her no harm. She doesn't move until you finish, but as you conclude she visibly relaxes and nods.  It doesn't stop her tail from twitching, and if anything, her nose joins it in twitching, but she asks, \"<i>How is it you can see me?  I've got a lot of eggs to hide and normally no one sees me.</i>\"\n\n", false);
 	
@@ -107,7 +107,7 @@ function talkToBunnyBunBun():void {
 	outputText("  Her dick in your ass?)", false);
 	//var Ass:Number = 0;
 	//Dick In V] [Dick in A] [Vagina] [Ass] [Leave]
-	simpleChoices("DickInVag",DickInV,"DickInAss",2650,"Vagina",Vagina,"69",sixtyNine,"Leave",13);
+	simpleChoices("DickInVag",DickInV,"DickInAss",bunbunFucksPCInAss,"Vagina",Vagina,"69",sixtyNine,"Leave",13);
 	stats(0,0,0,0,0,0,5+player.lib/20,0);
 }
 //[Rape Her]
@@ -123,7 +123,7 @@ function rapeBunBun():void {
 	}
 	//[Rape Her Faster]
 	else {
-		flags[132]++;
+		flags[UNKNOWN_FLAG_NUMBER_00132]++;
 		outputText("You lunge forward off your " + player.feet() + ", trying to tackle and pin the poor girl, but at the first sign of movement from you,  she launches herself up and back with a powerful hop.  She didn't count on your speed, and you manage to tackle her mid-air.  Both of you slam into the ground, the bunny pinned tightly underneath you.  Her basket and eggs went flying when you hit her, and now there's a few dozen eggs scattered in the tall grass.   The girl wriggles, trying to squeeze out of your grip, but you hold firm to her as she cries, \"<i>YOU MEANIE!</i>\"\n\n", false);
 	
 		outputText("Your belly feels warm and wet, and as you pull back to examine the bunny, the source of the moisture is revealed.  The girl isn't a girl at all!  She's got a hard 14-inch dick and a pair of bouncing, egg-sized balls that are working quite hard to leak bunny-cum onto you.  You reach down underneath the orbs and thankfully find another source of wetness.  At least you weren't completely wrong!  You're dealing with a hermaphrodite, and a horny one at that.  Why would she bother resisting when her body is so thrilled to be so close to you?\n\n", false);
@@ -152,7 +152,7 @@ function rapeBunBun():void {
 		outputText("  Her dick in your ass?)", false);
 		//var Ass:Number = 0;
 		//Dick In V] [Dick in A] [Vagina] [Ass] [Leave]
-		simpleChoices("DickInVag",DickInV,"DickInAss",2650,"Vagina",Vagina,"69",sixtyNine,"Leave",13);
+		simpleChoices("DickInVag",DickInV,"DickInAss",bunbunFucksPCInAss,"Vagina",Vagina,"69",sixtyNine,"Leave",13);
 
 	}
 }

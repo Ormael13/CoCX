@@ -28,7 +28,7 @@ Lasts 4-8 hours.
 function meetSophie():void {
 	sophieSprite();
 	//increment met tag
-	flags[90]++;
+	flags[UNKNOWN_FLAG_NUMBER_00090]++;
 	outputText("", true);
 	outputText("You make the grueling trek through mountain passes with slow, weary determination.  As you get higher, you feel almost like you could reach out and touch the omnipresent clouds that surround the summit.  The fluttering of dozens of harpy wings fills the air when you get close to their nesting area.  They flutter off and circle in the distance, seemingly content to watch you for now.  You glance around and discover numerous egg-filled nests before deciding it would be wise to stay away from those. The mothers haven't gone far.  Climbing higher, you take special care not to disturb the nests, but the effort is wasted.\n\n", false);
 	
@@ -47,7 +47,7 @@ function meetSophie():void {
 	outputText("you wrench your gaze away from her breasts and introduce yourself.  It's hard to stay focused on introduction while she's wrapping her wing-like arms around her tits and squeezing them together, amplifying her cleavage.  The matronly harpy is looking at you expectantly, and it occurs to you that she's still waiting on an answer to her question.  Why did you come here?\n\n", false);
 	
 	//[Looking for Demons] [Sex] [Got Lost] [Foraging]
-	simpleChoices("Foraging",2527,"Got Lost",2526,"Look4Demons",2522,"Sex",2524,"",0);
+	simpleChoices("Foraging",tellSophieYoureForagingForStuff,"Got Lost",sophieMeetingGotLost,"Look4Demons",sophieLookingForDemons,"Sex",sophieMeetingChoseSex,"",0);
 }
 
 //[Repeat Meeting]
@@ -55,7 +55,7 @@ function meetSophieRepeat():void {
 	sophieSprite();
 	outputText("", true);
 	//(Pissed)
-	if(flags[96] > 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00096] > 0) {
 		outputText("During your exploration of the mountains you wind up passing close to the harpy nests again.  Uh oh.  There's a constant, irritating buzz in the background that makes it hard to focus on what you're doing.  You crest a ledge and find yourself back on the edge of Sophie's nest.  Shit.  She glowers at you and raises one of her talons.  It's a fight!\n\n", false);
 		doNext(1);
 		startCombat(26);
@@ -64,7 +64,7 @@ function meetSophieRepeat():void {
 	//(Has dick)
 	if(player.totalCocks() > 0) {
 		//(Random Rape) 
-		if(rand(2) == 0 && flags[93] <= 0) {
+		if(rand(2) == 0 && flags[UNKNOWN_FLAG_NUMBER_00093] <= 0) {
 			outputText("During your exploration of the mountains you wind up passing close to the harpy nests again, and Sophie flaps her way over to you.  Her breasts jiggle pleasantly and she hooks her talons through the belt you use to hold your pouches before you can stop her.  The force of her flapping wings pulls you off the mountain, suspending you hundreds of feet above the ground as she flies you back towards her nest.  ", false);
 			if(player.tallness > 72) outputText("The harpy struggles with your weight and is clearly out of breath by the time she gets you up to her nest.", false);
 			else outputText("The flight is thankfully brief, and she actually gives you a good view of the mountain-side as she brings you up to her nest.", false);
@@ -74,23 +74,23 @@ function meetSophieRepeat():void {
 			if(player.lust < 60 || rand(3) <= 1) {
 				outputText("Her need amplifies the compulsion, making it difficult to resist.  It looks like if you turned her down now she'd probably try to force herself on you anyway.  Do you give in to her demand?", false);
 				//[Yes-Consentual sex] [No - fight]
-				simpleChoices("Yes",2529,"No",2519,"",0,"",0,"",0);
+				simpleChoices("Yes",consensualSexSelector,"No",fightSophie,"",0,"",0,"",0);
 			}
 			//(high lust?)
 			else {
 				outputText("Her need amplifies the compulsion, and as turned on as you already are, there's no way you could resist.", false);
 				//To sex
-				doNext(2529);
+				doNext(consensualSexSelector);
 			}
 			return;
 		}
 		//(Have sexed) 
-		if(flags[91] > 0) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00091] > 0) {
 			outputText("During your exploration of the mountains you wind up passing close to the harpy nests again, and Sophie flaps her way over to you.  Her breasts jiggle pleasantly and she hooks her talons through through the belt you use to hold your pouches before you can stop her.  The force of her flapping wings pulls you off the mountain, suspending you hundreds of feet above the ground as she flies you back towards her nest.  ", false);
 			if(player.tallness > 72) outputText("The harpy struggles with your weight and is clearly out of breath by the time she gets you up to her nest.", false);
 			else outputText("The flight is thankfully brief, and she actually gives you a good view of the mountain-side as she brings you up to her nest.", false);
 			outputText("  Sophie releases you and flops down across from you, clearly tired.  She asks, \"<i>Did you climb all the way up here to see me?  That's sooo sweet!  ", false);
-			if(flags[93] > 0) outputText("I still haven't laid your egg, but if you want it might be fun to take care of your naughty little urges.", false);
+			if(flags[UNKNOWN_FLAG_NUMBER_00093] > 0) outputText("I still haven't laid your egg, but if you want it might be fun to take care of your naughty little urges.", false);
 			else outputText("I already laid your last egg, so why don't you come over her and give momma some sugar?", false);
 			outputText("</i>\"  Her thighs spread apart, inviting you back for more of her pleasure.\n\n", false);
 		}
@@ -101,7 +101,7 @@ function meetSophieRepeat():void {
 		outputText("(Her words sink into you, and a desire to go with her threatens to overcome your self-control.  You take a deep breath and clear your head.  Do you go with her, turn her down, or try to take control and be the dominant one?  You'll probably have to fight her in order to dominate her...)", false);
 		stats(0,0,0,0,0,0,20,0);
 		//[Yes – consentacle sex] [No – sad harpy]
-		simpleChoices("Yes",2529,"No",2523,"Dominate",2519,"",0,"",0);
+		simpleChoices("Yes",consensualSexSelector,"No",shootDownSophieSex,"Dominate",fightSophie,"",0,"",0);
 		return;
 	}
 	//(NO DICK)
@@ -111,14 +111,14 @@ function meetSophieRepeat():void {
 			outputText("Your climb manages to take you back into the harpy nests again.  Sophie flutters down next to you and warns, \"<i>Cutey, a " + player.mf("neuter","girl") + " like you doesn't belong up here.  The younger harpies don't really get the idea of conversation and see you as competition.</i>\"\n\n", false);
 			
 			outputText("Do you see the wisdom of her words and climb back down the mountain, fight Sophie, or keep climbing?", false);
-			simpleChoices("Fight Sophie",2525,"Keep Climbing",2521,"",0,"",0,"Leave",13);
+			simpleChoices("Fight Sophie",FirstTimeSophieForceSex,"Keep Climbing",PCIgnoresSophieAndHarpyIsFought,"",0,"",0,"Leave",13);
 			return;
 		}
 		//(LACTATE)
 		else {
 			outputText("Your climb manages to take you back into the harpy nests again.  Sophie flutters down next to you and licks her lips hungrily.  She asks, \"<i>Would you mind coming up to my nest and sharing some of your milk?  I've worked up quite a craving for cute girl-milk.</i>\"\n\n", false);
 			outputText("Do you agree to breastfeed the hungry harpy?", false);
-			simpleChoices("Yes",2528,"No",2523,"Fight Her",2525,"",0,"",0);
+			simpleChoices("Yes",cramANippleInIt,"No",shootDownSophieSex,"Fight Her",FirstTimeSophieForceSex,"",0,"",0);
 			//No(2528,2523);
 			//[Yes][No]
 			return;
@@ -137,7 +137,7 @@ function consensualSexSelector():void {
 function fightSophie():void {
 	sophieSprite();
 	startCombat(26);
-	flags[96] += rand(24);
+	flags[UNKNOWN_FLAG_NUMBER_00096] += rand(24);
 	eventParser(1);
 }
 
@@ -147,7 +147,7 @@ function repeatBreastFeeding():void {
 	outputText("", true);
 	outputText("You agree and climb the rest of the way up to her nest, finding Sophie waiting for you there.", false);
 	//– to consentual breastfeeding.
-	doNext(2528);
+	doNext(cramANippleInIt);
 }
 //Normal Harpy Fight
 function PCIgnoresSophieAndHarpyIsFought():void {
@@ -182,7 +182,7 @@ function sophieLookingForDemons():void {
 	outputText("Her words sink into you, and a compulsion to go with her threatens to overcome your self-control.  You take a deep breath and clear your head.  Do you go with her?", false);
 	
 	//[Yes – consentacle sex] [No – sad harpy]
-	doYesNo(2529,2523);
+	doYesNo(consensualSexSelector,shootDownSophieSex);
 }
 //[No]
 function shootDownSophieSex():void {
@@ -206,7 +206,7 @@ function sophieMeetingChoseSex():void {
 		if(player.hasVagina()) {
 			outputText("  What do you do?", false);
 			//[Stay&Sex] [Leave]
-			simpleChoices("Force Sex",2525,"Leave",13,"",0,"",0,"",0);
+			simpleChoices("Force Sex",FirstTimeSophieForceSex,"Leave",13,"",0,"",0,"",0);
 			return;
 		}
 		doNext(13);
@@ -218,7 +218,7 @@ function sophieMeetingChoseSex():void {
 		
 		outputText("As if you could deny the curvy, sexy body of the motherly harpy...", false);
 		//[To consentual sex]
-		doNext(2529);
+		doNext(consensualSexSelector);
 		return;
 	}
 }
@@ -246,12 +246,12 @@ function sophieMeetingGotLost():void {
 	if(player.totalCocks() > 0) {
 		outputText("Would you stay and help a lonely matron with her needs?</i>\"\n\n", false);
 		//[To consensual sex or sophie sadface.
-		doYesNo(2529,2523);
+		doYesNo(consensualSexSelector,shootDownSophieSex);
 	}
 	else if(player.biggestLactation() >= 1.5) {
 		outputText("My, you're quite the laden little cow aren't you?  Would you mind sharing?</i>\"\n\n", false);
 		//to b. feeding or sophie sadface.
-		doYesNo(2528,2523);
+		doYesNo(cramANippleInIt,shootDownSophieSex);
 	}
 	else {
 		outputText("Mmm, it's a shame you don't have a penis, or you could show me what I was missing.</i>\"  The sexually deprived bird-woman plies you with questions about the world for the better part of an hour, masturbating to several mid-conversation orgasms.  Once she exhausts herself, she thanks you and leans down for her nap.  Her tail-feathers fluff in what is clearly a dismissal.", false);
@@ -374,7 +374,7 @@ function cramANippleInIt():void {
 	if(player.cor > 60) outputText("  You give her wide ass a playful slap and start climbing down before she can retaliate.", false);
 	stats(0,0,0,0,0,0,-50,0);
 	//increment times bfed.
-	flags[92]++;
+	flags[UNKNOWN_FLAG_NUMBER_00092]++;
 	if(gameState == 1 || gameState == 2) eventParser(5007);
 	else doNext(13);
 	//You've now been milked, reset the timer for that
@@ -474,11 +474,11 @@ function consensualHotSophieDickings():void {
 	outputText(" are aching and sore.\n\n", false);
 	
 	outputText("Completely spent by the encounter, you lean on her soft, downy chest and try to catch your breath.  Her tight tunnel continues to squeeze and churn, milking any last bits of goo from your urethra.  Sophie groans, \"<i>Mmm, such potent seed for one so young.  ", false);
-	if(flags[91] == 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00091] == 0) {
 		outputText("Did you know in the old days we used to keep men trapped like this for a whole day?  We'd keep stroking them like this and get a whole days worth of orgasm.  It was magnificent.  Of course we're so fertile now a single orgasm is enough to fertilize an egg.  It looks like you got off lucky, huh?", false);
 	}
-	else if(flags[91] <= 2) outputText("You really like it when I milk you don't you?  That must be why you keep coming back for more.", false);
-	else if(flags[91] <= 10) {
+	else if(flags[UNKNOWN_FLAG_NUMBER_00091] <= 2) outputText("You really like it when I milk you don't you?  That must be why you keep coming back for more.", false);
+	else if(flags[UNKNOWN_FLAG_NUMBER_00091] <= 10) {
 		outputText("Do you have a fetish for ", false);
 		if(rand(2) == 0) outputText("older women", false);
 		else outputText("harpies", false);
@@ -496,7 +496,7 @@ function consensualHotSophieDickings():void {
 	outputText(".  You struggle up to your feet and marvel at how rigid ", false);
 	if(player.cockTotal() > 1) outputText("each of ", false);
 	outputText(" your " + multiCockDescriptLight() + " remains.  Sophie giggles, \"<i>", false);
-	if(flags[91] == 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00091] == 0) {
 		outputText("Sorry cutey, the lip gloss is going to keep you nice and hard.  It's meant to help your ", false);
 		if(player.balls > 0) outputText("balls", false);
 		else outputText("body", false);
@@ -511,7 +511,7 @@ function consensualHotSophieDickings():void {
 	sophieFucked();
 	outputText("Do you take her up on her offer?", false);
 	//[Yes/No]
-	doYesNo(2530,2531);
+	doYesNo(postSophieSexSnuggle,postSexSophieSnuggleTurnedDown);
 
 }
 
@@ -608,11 +608,11 @@ function consensualSophieSexNoFit():void {
 	outputText(".  She flops on her back", false);
 	if(player.cumQ() >= 2000) outputText(" in the semen-soaked nest", false);
 	outputText(" and runs her hands over her abdomen, clearly enjoying the idea of laying another egg.  Sophie groans, \"<i>Mmm, such potent seed for one so young.  ", false);
-	if(flags[91] == 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00091] == 0) {
 		outputText("Did you know in the old days we used to keep men trapped like this for a whole day?  We'd keep stroking them like this and get a whole days worth of orgasm.  It was magnificent.  Of course we're so fertile now a single orgasm is enough to fertilize an egg.  It looks like you got off lucky, huh?", false);
 	}
-	else if(flags[91] <= 2) outputText("You really like it when I milk you don't you?  That must be why you keep coming back for more.", false);
-	else if(flags[91] <= 10) {
+	else if(flags[UNKNOWN_FLAG_NUMBER_00091] <= 2) outputText("You really like it when I milk you don't you?  That must be why you keep coming back for more.", false);
+	else if(flags[UNKNOWN_FLAG_NUMBER_00091] <= 10) {
 		outputText("Do you have a fetish for ", false);
 		if(rand(2) == 0) outputText("older women", false);
 		else outputText("harpies", false);
@@ -626,7 +626,7 @@ function consensualSophieSexNoFit():void {
 	outputText("You struggle up to your feet and marvel at how rigid ", false);
 	if(player.cockTotal() > 1) outputText("each of ", false);
 	outputText("your " + multiCockDescriptLight() + " remains.  Sophie giggles, \"<i>", false);
-	if(flags[91] == 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00091] == 0) {
 		outputText("Sorry cutey, the lip gloss is going to keep you nice and hard.  It's meant to help your ", false);
 		if(player.balls > 0) outputText("balls", false);
 		else outputText("body", false);
@@ -641,27 +641,27 @@ function consensualSophieSexNoFit():void {
 	sophieFucked();
 	outputText("Do you take her up on her offer?", false);
 	//[Yes/No]
-	doYesNo(2530,2531);
+	doYesNo(postSophieSexSnuggle,postSexSophieSnuggleTurnedDown);
 	//Go to same yes or no as 'fits' options.
 }
 function sophieFucked(dicked:Boolean = true):void {
 	//knock up if not knocked up
-	if(flags[93] <= 0 && dicked) {
-		flags[93] = 48 + rand(48);
+	if(flags[UNKNOWN_FLAG_NUMBER_00093] <= 0 && dicked) {
+		flags[UNKNOWN_FLAG_NUMBER_00093] = 48 + rand(48);
 	}
 	//if forced to lesbosecks
 	if(!dicked) {
-		flags[98]++;
+		flags[UNKNOWN_FLAG_NUMBER_00098]++;
 		//If not pissed increment times pissed
-		if(flags[96] <= 0) {
-			flags[96] = 72 + rand(100);
-			flags[97]++;
+		if(flags[UNKNOWN_FLAG_NUMBER_00096] <= 0) {
+			flags[UNKNOWN_FLAG_NUMBER_00096] = 72 + rand(100);
+			flags[UNKNOWN_FLAG_NUMBER_00097]++;
 		}
 		//Increase pissed time
-		else flags[96] += rand(72);
+		else flags[UNKNOWN_FLAG_NUMBER_00096] += rand(72);
 	}
 	//increment times fucked
-	flags[91]++;
+	flags[UNKNOWN_FLAG_NUMBER_00091]++;
 }
 
 
@@ -670,7 +670,7 @@ function luststickApplication(hours:Number = 4):void {
 	//Immune to luststick?
 	if(player.hasPerk("Luststick Adapted") >= 0) return;
 	//Increment luststick resistance
-	flags[285] += Math.floor(hours/2);
+	flags[UNKNOWN_FLAG_NUMBER_00285] += Math.floor(hours/2);
 	if(!player.hasCock()) return;
 	//Max of 20.
 	if(hours > 20) hours = 20;
@@ -1095,8 +1095,8 @@ function sophieVictoryPussyGrind():void {
 	else if(player.vaginas[0].vaginalWetness >= 2) outputText("Juice trickles from the paired pussies", false);
 	else outputText("Sophie's pussy soaks your own with her juices", false);
 	outputText(" until you fall away from each other, spent and rubbing your tender cunts.  The older bird-woman reluctantly admits, \"<i>", false);
-	if(flags[98] == 0) outputText("Cutey, you sure know your way around a pussy, but I just don't like to do this kind of thing.  Don't expect me to be some lesbo bird-slut who'll lick your slit at the drop of a hat.", false);
-	else if(flags[98] < 6) outputText("Cutey, you get me off hard every time, but I'd still rather not mess with another girl.  I much prefer getting a younger man in my nest and letting him ravage me.", false);
+	if(flags[UNKNOWN_FLAG_NUMBER_00098] == 0) outputText("Cutey, you sure know your way around a pussy, but I just don't like to do this kind of thing.  Don't expect me to be some lesbo bird-slut who'll lick your slit at the drop of a hat.", false);
+	else if(flags[UNKNOWN_FLAG_NUMBER_00098] < 6) outputText("Cutey, you get me off hard every time, but I'd still rather not mess with another girl.  I much prefer getting a younger man in my nest and letting him ravage me.", false);
 	else outputText("I'm not sure how you keep making me cum, but I'd appreciate it if you stopped.", false);
 	outputText("</i>\"\n\n", false);
 	
@@ -1146,7 +1146,7 @@ function fuckDatClit():void {
 	monster.lust = 98;
 	monster.HP = 2;
 	player.lust = 100;
-	flags[89] = monster.XP;
+	flags[UNKNOWN_FLAG_NUMBER_00089] = monster.XP;
 	eventParser(5007);
 	stats(0,0,0,0,0,1,-100,0);
 }
@@ -1175,7 +1175,7 @@ function tinyDickSupremeSophieLoss():void {
 	outputText("As if she was reading your mind, Sophie answers, \"<i>This is for your own good.  Maybe someday you'll grow up and get a decent cock for me to fuck, but until then you're just a little boy who who would be better off a girl.</i>\"  You actually start to cry, but at the same time you're lifting your " + hipDescript() + " in time with her foot, and your tiny little cock turns it into a Slip N' Slide of pre-cum.   Sophie snickers, \"<i>You're ready,</i>\" and pulls her foot back, trailing strings of fluid.   She steps down and looks at you with a knowing, almost-cruel smile on her face.\n\n", false);
 	
 	outputText("The fluids from her aroused gash drip onto your belly as she bends her legs and begins to bring it closer.  She sneers, \"<i>I'm amazed you haven't cum yet, little girl.  I'm getting closer now, how soon do you think you'll start spurting? Now?  No, but you'll squirt soon.</i>\"  You watch transfixed as Sophie's cunt hovers over-top of you, continuing its slow descent towards your " + cockDescript(0) + ".  Oh gods, why are you so hard?  Your cock is twitching on its own by the time her pussy is a foot away.  No no no, you panic mentally, and think of the most boring, dreadful thing you can.  ", false);
-	if(flags[35] > 0 && player.cor > 50) outputText("You imagine Amily's voice nattering away about how terrible the corruption is, but it doesn't help!  Y", false);
+	if(flags[AMILY_MET] > 0 && player.cor > 50) outputText("You imagine Amily's voice nattering away about how terrible the corruption is, but it doesn't help!  Y", false);
 	else outputText("It doesn't help; y", false);
 	outputText("our eyes are fixated on the pink-lipped folds of Sophie's sex as it creeps closer.\n\n", false);
 	
@@ -1272,10 +1272,10 @@ function SophieLossRapeNoDonguuuu():void {
 	stats(-1,-1,0,0,0,0,0,0);
 	eventParser(5007);
 	//If not pissed increment times pissed
-	if(flags[96] <= 0) {
-		flags[96] = 72 + rand(100);
-		flags[97]++;
+	if(flags[UNKNOWN_FLAG_NUMBER_00096] <= 0) {
+		flags[UNKNOWN_FLAG_NUMBER_00096] = 72 + rand(100);
+		flags[UNKNOWN_FLAG_NUMBER_00097]++;
 	}
 	//Increase pissed time
-	else flags[96] += rand(72);
+	else flags[UNKNOWN_FLAG_NUMBER_00096] += rand(72);
 }

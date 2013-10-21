@@ -1,5 +1,5 @@
-﻿const EGG_WITCH_TYPE:int = 589;
-const EGG_WITCH_COUNTER:int = 588;
+﻿//const EGG_WITCH_TYPE:int = 589;
+//const EGG_WITCH_COUNTER:int = 588;
 
 function sandwitchRape():void {
 	spriteSelect(50);
@@ -555,7 +555,7 @@ function missingoSex5():void {
 	outputText("Oh goddammit. You remember that your progress from before was lost, and now you have to start from the beginning. You can't help but roll your eyes and groan, though you're hardly angry enough to put a controller-shaped hole through your TV screen over this. But hey! At least you were smart enough to jot down the Champion Password. Perhaps one day video games will be sophisticated enough to have some internal means of storing progress, but at least with this, you should be able to get all of your old stuff!", false);
 	
 	//Restore]
-	simpleChoices("Restore",3199,"",0,"",0,"",0,"",0);
+	simpleChoices("Restore",missingoSex6,"",0,"",0,"",0,"",0);
 }
 //{Next Page}
 function missingoSex6():void {
@@ -602,7 +602,7 @@ function ovipositSandWitches():void {
 	outputText(" can do to their partners and unsure if this is really what she wants.  The poor girl seems to need a little 'encouragement'... of course, you could just skip all that regardless if you really wanted.");
 	
 	//[Foreplay 1st]    [Get Fucking]
-	simpleChoices("Foreplay 1st",3843,"Get Fucking",3844,"",0,"",0,"",0);
+	simpleChoices("Foreplay 1st",eggwitchForeplay,"Get Fucking",getToFuckingWithZeEggsInWitch,"",0,"",0,"",0);
 }
 
 //[Foreplay 1st]
@@ -626,7 +626,7 @@ function eggwitchForeplay():void {
 	else outputText("Laying");
 	outputText(" against your mate, you both take the moment to revel in the anticipation of coitus.");
 	stats(0,0,0,0,0,0,25,-.35);
-	doNext(3842);
+	doNext(laySomeEggsInThatWitchFinally);
 	//go to merge
 }
 
@@ -652,7 +652,7 @@ function getToFuckingWithZeEggsInWitch():void {
 		outputText("\n\n\"<i>Please... take me...</i>\"");
 	}
 	//both go to merge
-	doNext(3842);
+	doNext(laySomeEggsInThatWitchFinally);
 	stats(0,0,0,0,0,0,15,0);
 }
 
@@ -774,7 +774,7 @@ function helpZeWithBirfBabies():void {
 	}
 	//PC is everything else: 
 	else outputText("\n\nEasing a hand under her armpit, you give her the support she needs to hobble along the hot desert sand.  Which direction to hobble in gives you cause for concern though; you don't really know where you are at this point.  Making the only choice you can, you concentrate on the camp.  With the rough picture in mind you tell the sand witch to hold on, before the two of you slowly make your way across the dry desert sea...");
-	doNext(3841);
+	doNext(sandwitchBirthsYourMonstrosities);
 }
 
 //[Must I really?] (corr >=60)
@@ -795,7 +795,7 @@ function reluctantlyHelpZeWitch():void {
 	}
 	//PC is everything else:  
 	else outputText("\n\nEasing a hand under her armpit, you give her the support she needs to hobble along the hot desert sand.  Which direction to hobble in gives you cause for concern though; you don't really know where you are at this point.  Making the only choice you can, you concentrate on the camp.  With the rough picture in mind you tell the sand witch to hold on, before the two of you slowly make your way across the dry desert sea...");
-	doNext(3841);
+	doNext(sandwitchBirthsYourMonstrosities);
 }
 
 
@@ -871,7 +871,7 @@ function sandwitchSpanking():void {
 	monster.lust = 98;
 	monster.HP = 2;
 	player.lust = 100;
-	flags[89] = monster.XP;
+	flags[UNKNOWN_FLAG_NUMBER_00089] = monster.XP;
 	eventParser(5007);
 	stats(0,0,0,0,0,5,-100,0);
 }

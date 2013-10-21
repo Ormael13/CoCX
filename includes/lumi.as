@@ -1,16 +1,16 @@
 ﻿function lumiEncounter():void {
 	outputText("", true);
 	//1st time lumi meeting
-	if(flags[53] == 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00053] == 0) {
 		//placeholder text for outside the cathedral
 		outputText("You spot an anomaly in the barren wastes; a door that seems to be standing out in the middle of nowhere. Somehow, you figure that it must lead to some other part of the world, and the only reason it's here is because you can't get to where the door should be right now.\n\n", false);
 		outputText("Do you open it?", false);
-		doYesNo(2435,13);
+		doYesNo(lumiLabChoices,13);
 	}
 	else {
 		//placeholder text for outside the cathedral
 		outputText("You spot the door standing in the middle of nowhere again, and you guess that it will lead you back to Lumi's laboratory.  It swings open easily...", false);
-		doNext(2435);
+		doNext(lumiLabChoices);
 	}
 //end of placeholder text
 }
@@ -19,9 +19,9 @@ function lumiLabChoices():void {
 	spriteSelect(37);
 	outputText("", true);
 	//First time meeting
-	if(flags[53] == 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00053] == 0) {
 		//Set Lumi met flag 
-		flags[53]++;
+		flags[UNKNOWN_FLAG_NUMBER_00053]++;
 		outputText("You open the door and carefully check inside for any enemies that may be trying to ambush you. The room seems to be some kind of alchemical lab, with shelves full of apparatuses all along the walls, a desk on one side of the room, and a long table across the room from you that is full of alchemical experiments in progress, many give off lots of smoke, and others are bottles of bubbling fluids.  A goblin wearing an apron and some kind of headband is sitting on a tall, wheeled stool; she is otherwise nude and seems to be watching at least 3 experiments right now. She suddenly turns around and looks straight in your direction.  It's hard to tell thanks to the dark goggles that hide her eyes from view, but you're fairly certain she's watching you.  After a few seconds she yells \"<i>Cuths-tohmer!</i>\" in a thick lisp. She looks harmless enough, so you step inside while she fiddles with her experiments, reducing the bubbling smoke.  She jumps down from her stool, tears off her apron, bounds over to the desk, and scrambles on top of it.\n\n", false);
 
 		outputText("She's about 3 feet tall, with yellow-green skin, and wears her orange hair in a long ponytail that reaches to her knees.  Her breasts are about B cup, with average nipples that have been colored orange. All of her nails have been painted orange to match. She doesn't seem to ever stop moving, and while the majority of her face looks cute, it's a little hard to be sure while she's wearing those thick goggles.  The solid black lenses of her goggles make her look quite unsettling, stifling any appeal her form could inspire in you.\n\n", false);
@@ -36,7 +36,7 @@ function lumiLabChoices():void {
 	}
 	var enhance:Number = 0;
 	if(lumiEnhance(true)) enhance = 2441;
-	simpleChoices("Shop",2436,"Enhance",enhance,"",0,"",0,"Leave",13);
+	simpleChoices("Shop",lumiShop,"Enhance",enhance,"",0,"",0,"Leave",13);
 }
 
 function lumiShop():void {
@@ -48,7 +48,7 @@ function lumiShop():void {
 	outputText("Lust Draft - 15 gems\nGoblin Ale - 20 gems\nOviposition Elixir - 45 gems\n", false);
 	
 	//The player is given a list of choices, clicking on one gives the description and the price, like Giacomo.
-	simpleChoices("LustDraft",2437,"GoblinAle",2438,"OviElixir",2439,"",0,"Leave",2435);
+	simpleChoices("LustDraft",lumiLustDraftPitch,"GoblinAle",lumiPitchGobboAle,"OviElixir",lumiPitchOviElixer,"",0,"Leave",lumiLabChoices);
 }
 
 //Lust Draft
@@ -58,7 +58,7 @@ function lumiLustDraftPitch():void {
 	outputText("You point at the bottle filled with bubble-gum pink fluid.\n\n\"<i>De lust dwaft? Always a favowite, with it you nevar have to worwy about not bein weady for sexy time; one of my fiwst creations. 15 gems each.</i>\"\n\n", false);
 	shortName = "L.Draft";
 	outputText("Will you buy the lust draft?", false);
-	doYesNo(2440,2436);
+	doYesNo(lumiPurchase,lumiShop);
 }
 //Goblin Ale
 function lumiPitchGobboAle():void {
@@ -67,7 +67,7 @@ function lumiPitchGobboAle():void {
 	outputText("You point at the flagon. \"<i>Oh? Oh thats Lumi's... actually no, dat tispsy stuff for 20 gems. You'll like if you want to be like Lumi. Do you like it?</i>\"\n\n", false);
 	shortName = "Gob.Ale";
 	outputText("Will you buy the goblin ale?", false);
-	doYesNo(2440,2436);
+	doYesNo(lumiPurchase,lumiShop);
 }
 //Ovi Elixir
 function lumiPitchOviElixer():void {
@@ -76,7 +76,7 @@ function lumiPitchOviElixer():void {
 	outputText("You point at the curious hexagonal bottle. \"<i>De Oviposar Elixir? Made baithsed on da giant bee's special stuff dey give deir queen. It will help make de burfing go faster, an if you dwink it while you awen pweggy, iw will give you some eggs to burf later. More dwinks, eqwals more and biggar eggs. Lumi charges 45 gems for each dose.</i>\"\n\n", false);
 	shortName = "OviElix";
 	outputText("Will you buy the Ovi Elixir?", false);
-	doYesNo(2440,2436);
+	doYesNo(lumiPurchase,lumiShop);
 }
 
 
@@ -101,7 +101,7 @@ function lumiPurchase():void {
 	else {
 		outputText("You go to pay Lumi the gems, but then you realize that you don't have enough. Lumi seems to know what happened and tells you \"<i>Ok, is dere somefing you want to buy that you can affowd?</i>\"\n\n", false);
 		//Return to main Lumi menu
-		doNext(2436);
+		doNext(lumiShop);
 	}
 }
 
@@ -133,7 +133,7 @@ function lumiEnhance(justCheck:Boolean = false):Boolean {
 	if(player.gems < 100) {
 		outputText("You shake your head no, and Lumi gives you a disappointed look and says, \"<i>Den Lumi can do no enhancement for you. Anyfing else?</i>\"\n\n", false);
 		//Return to main Lumi menu
-		doNext(2435);
+		doNext(lumiLabChoices);
 		return false;
 	}
 	else {

@@ -182,17 +182,17 @@ function deleteScreen():void {
 	choices("Slot 1", slot1, "Slot 2", slot2, "Slot 3", slot3, "Slot 4", slot4, "Slot 5", slot5, "Slot 6", slot6, "Slot 7", slot7, "Slot 8", slot8, "Slot 9", slot9, "Back", 30);
 }
 function confirmDelete():void {
-	outputText("You are about to delete the following save: <b>" + flags[63] + "</b>\r\rAre you sure you want to delete it?", true);
+	outputText("You are about to delete the following save: <b>" + flags[UNKNOWN_FLAG_NUMBER_00063] + "</b>\r\rAre you sure you want to delete it?", true);
 	simpleChoices("No",82,"Yes",93,"",0,"",0,"",0);
 }
 function purgeTheMutant():void {
-	var test = SharedObject.getLocal(flags[63],"/");
-	trace("DELETING SLOT: " + flags[63]);
+	var test = SharedObject.getLocal(flags[UNKNOWN_FLAG_NUMBER_00063],"/");
+	trace("DELETING SLOT: " + flags[UNKNOWN_FLAG_NUMBER_00063]);
 	var blah:Array = new Array("been virus bombed","been purged","been vaped","been nuked from orbit","taken an arrow to the knee","fallen on its sword","lost its reality matrix cohesion","been cleansed","suffered the following error: (404) Porn Not Found");
 
 	trace(blah.length + " array slots");
 	var select:Number = rand(blah.length);
-	outputText(flags[63] + " has " + blah[select] + ".", true);
+	outputText(flags[UNKNOWN_FLAG_NUMBER_00063] + " has " + blah[select] + ".", true);
 	test.clear();
 	doNext(82);
 }
@@ -641,9 +641,9 @@ function loadGameObject(saveData:Object, slot:String = "VOID"):void
 	var sprite:Boolean = false;
 	//If at initial title
 	if(player.str == 0) {
-		if(flags[273] > 0) sprite = true;
-		if(flags[99] > 0) easy = true;
-		if(flags[305] > 0) silly = true;
+		if(flags[UNKNOWN_FLAG_NUMBER_00273] > 0) sprite = true;
+		if(flags[UNKNOWN_FLAG_NUMBER_00099] > 0) easy = true;
+		if(flags[UNKNOWN_FLAG_NUMBER_00305] > 0) silly = true;
 	}
 	
 	//Autosave stuff
@@ -693,10 +693,10 @@ function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			}
 		}	
 		//If at initial title
-		if(sprite) flags[273] = 1;
-		if(easy) flags[99] = 1;
-		else flags[99] = 0;
-		if(silly) flags[305] = 1;
+		if(sprite) flags[UNKNOWN_FLAG_NUMBER_00273] = 1;
+		if(easy) flags[UNKNOWN_FLAG_NUMBER_00099] = 1;
+		else flags[UNKNOWN_FLAG_NUMBER_00099] = 0;
+		if(silly) flags[UNKNOWN_FLAG_NUMBER_00305] = 1;
 		
 		//PIERCINGS
 		if(saveFile.data.nipplesPierced == undefined) {

@@ -10,30 +10,30 @@
 //New Variable: [HelspawnDadddy], recording who, exactly, fathered Hel’s daughter
 //New Variable: [HelLove] Yes/No, set by the PC in the beginning.
 
-const HELSPAWN_NAME:int = 956;
-const HELSPAWN_PERSONALITY:int = 957;
+//const HELSPAWN_NAME:int = 956;
+//const HELSPAWN_PERSONALITY:int = 957;
 //0 = PC, 1 = Spider, 2 = Mai
-const HELSPAWN_DADDY:int = 958;
-const HELSPAWN_WEAPON:int = 959;
-const HELSPAWN_AGE:int = 960;
-const HELSPAWN_GROWUP_COUNTER:int = 961;
-const HEL_LOVE:int = 962;
+//const HELSPAWN_DADDY:int = 958;
+//const HELSPAWN_WEAPON:int = 959;
+//const HELSPAWN_AGE:int = 960;
+//const HELSPAWN_GROWUP_COUNTER:int = 961;
+//const HEL_LOVE:int = 962;
 //Has Helia had the pale flame event happen?
-const HELIA_KIDS_CHAT:int = 963;
-const HELIA_TALK_SEVEN:int = 964;
+//const HELIA_KIDS_CHAT:int = 963;
+//const HELIA_TALK_SEVEN:int = 964;
 //Track Hel getting knocked up by others. 1 = doing it. 2 = talked to PC about it.
-const HEL_NTR_TRACKER:int = 965;
-const HEL_BONUS_POINTS:int = 966;
-const HEL_PREGNANCY_INCUBATION:int = 967;
+//const HEL_NTR_TRACKER:int = 965;
+//const HEL_BONUS_POINTS:int = 966;
+//const HEL_PREGNANCY_INCUBATION:int = 967;
 //0 = no notices. 1 = bulgy. 2 = pretty preg. 3 = gravid.
-const HEL_PREGNANCY_NOTICES:int = 968;
-const HAD_FIRST_HELSPAWN_TALK:int = 969;
-const HELSPAWN_INCEST:int = 970;
-const HEL_TALK_EIGHT:int = 971;
-const HELSPAWN_DISCOVER_BOOZE:int = 972;
-const HELSPAWN_FUCK_INTERRUPTUS:int = 973;
-const SPIDER_BRO_GIFT:int = 974;
-const HAKON_AND_KIRI_VISIT:int = 975;
+//const HEL_PREGNANCY_NOTICES:int = 968;
+//const HAD_FIRST_HELSPAWN_TALK:int = 969;
+//const HELSPAWN_INCEST:int = 970;
+//const HEL_TALK_EIGHT:int = 971;
+//const HELSPAWN_DISCOVER_BOOZE:int = 972;
+//const HELSPAWN_FUCK_INTERRUPTUS:int = 973;
+//const SPIDER_BRO_GIFT:int = 974;
+//const HAKON_AND_KIRI_VISIT:int = 975;
 
 //In this Expansion, Helia the Salamander, who’s spent much of her life alone until the brave Champion took her into his confidence, enters a stage in her life called The Pale Flame: whether she wants to admit it or not, her body’s ready for children; she’s found the person she truly wants to be with. She asks the Champion to father her child; if that is impossible, but desired (or the PC doesn’t want to be the daddy, but wants Hel to have kids anyway), she will offer to get Mai the Foxgirl to knock her up instead; if it is undesired at all, the PC can ask Hel to go on herbs, suppressing her fertility until the PC's ready. Hel will remain on herbs until the PC decides he’s ready.
 

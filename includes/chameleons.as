@@ -20,7 +20,7 @@ Item Use Scenes Intro (Victory) (Z edited)
 //ENCOUNTER TEXT (Introduction; First Time) (Z edited)
 //Savin's Note: This is way too much intro shit for a repeat-encounter; I'm adding a 2nd Time + intro below.
 
-const TIMES_MET_CHAMELEON:int = 561;
+// TIMES_MET_CHAMELEON:int = 561;
 
 function encounterChameleon():void {
 	clearOutput();

@@ -1,6 +1,6 @@
 ﻿//VARS
-const GOOGIRL_BIRTHS:int = 384;
-const GOOGIRL_CONSECUTIVE_LOSSES:int = 385;
+//const GOOGIRL_BIRTHS:int = 384;
+//const GOOGIRL_CONSECUTIVE_LOSSES:int = 385;
 
 
 //goo-girl encounter- 
@@ -209,7 +209,7 @@ function gooGirlBadEnd():void {
 	
 	outputText("Your body feels leaden and overburdened, making escape impossible. When the girls reach you, they dive into your now-permeable membrane, one by one at first, then two and three at a time. You grow and swell as they fill you, cascades of memories and thoughts suffocating you like the torrent of a waterfall. Your bloated, expanding body responds to the psychic barrage in the only way it can- releasing an orgasm of gushing fluids from your body in lustful spree, showering the girls milling about you in protein-rich, gooey milk and cum, feeding their bodies even as they force-feed your mind. Hundreds of years unpack themselves within you, tiny heart buds floating inside of your chest, gradually merging into one, vibrant crimson orb.", false);
 	//[Next]
-	doNext(3269);
+	doNext(gooGirlBadEnd2);
 }
 function gooGirlBadEnd2():void {
 	outputText("", true);
@@ -415,7 +415,7 @@ function beatUpGoo():void {
 		else if(player.hasVagina()) {
 			sex1S = "Fuck";
 			sex1N = 3263;
-			if(flags[23] >= 1) {
+			if(flags[UNKNOWN_FLAG_NUMBER_00023] >= 1) {
 				sex2S = "Exhib.Fuck";
 				sex2N = 3264;
 			}

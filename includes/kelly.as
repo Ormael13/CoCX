@@ -1,26 +1,26 @@
-﻿const KELT_BREAK_LEVEL:int = 725;
-const KELLY_CUNT_TYPE:int = 726;
-const NEVER_RESIST_KELT:int = 727;
-const WHITNEY_FLIPPED_OUT_OVER_KELLY:int = 728;
-const TIMES_PUNISHED_KELLY:int = 729;
-const TIMES_RIM_JOBBED_BY_KELLY:int = 730;
-const TIMES_RIDDEN_KELLY_FOR_PUNISHMENT:int = 731;
-const KELLY_BONUS_TIT_ROWS:int = 732;
-const KELLY_LACTATING:int = 733;
-const KELLY_DISOBEYING_COUNTER:int = 734;
-const KELLY_VAGINALLY_FUCKED_COUNT:int = 735;
-const KELLY_BONUS_BOOB_ROWS:int = 904;
-const KELLY_INCUBATION:int = 905;
-const KELLY_TIMES_PEPPERED:int = 906;
-const KELLY_HEAT_TIME:int = 907;
-const KELLY_KIDS:int = 908;
-const KELLY_FIRST_KID_GENDER:int = 909;
-const KELLY_HAIR_COLOR:int = 976;
-const KELLY_TALK_N_HAND_TIMES:int = 977;
-const KELLY_TIMES_REWARDED:int = 978;
-const KELLY_TIMES_DIED_HAIR:int = 979;
-const KELLY_TIMES_APPLESAUCED:int = 980;
-const KELLY_REWARD_COOLDOWN:int = 981;
+﻿//const KELT_BREAK_LEVEL:int = 725;
+//const KELLY_CUNT_TYPE:int = 726;
+//const NEVER_RESIST_KELT:int = 727;
+//const WHITNEY_FLIPPED_OUT_OVER_KELLY:int = 728;
+//const TIMES_PUNISHED_KELLY:int = 729;
+//const TIMES_RIM_JOBBED_BY_KELLY:int = 730;
+//const TIMES_RIDDEN_KELLY_FOR_PUNISHMENT:int = 731;
+//const KELLY_BONUS_TIT_ROWS:int = 732;
+//const KELLY_LACTATING:int = 733;
+//const KELLY_DISOBEYING_COUNTER:int = 734;
+//const KELLY_VAGINALLY_FUCKED_COUNT:int = 735;
+//const KELLY_BONUS_BOOB_ROWS:int = 904;
+//const KELLY_INCUBATION:int = 905;
+//const KELLY_TIMES_PEPPERED:int = 906;
+//const KELLY_HEAT_TIME:int = 907;
+//const KELLY_KIDS:int = 908;
+//const KELLY_FIRST_KID_GENDER:int = 909;
+//const KELLY_HAIR_COLOR:int = 976;
+//const KELLY_TALK_N_HAND_TIMES:int = 977;
+//const KELLY_TIMES_REWARDED:int = 978;
+//const KELLY_TIMES_DIED_HAIR:int = 979;
+//const KELLY_TIMES_APPLESAUCED:int = 980;
+//const KELLY_REWARD_COOLDOWN:int = 981;
 //Items
 //Besides, the PC needs 15 succubi Milk to turn Kelt female. If the PC has a pink egg, only 10 are needed. If the PC has a large pink egg (or two pink eggs), only 5 are needed. 
 
@@ -1989,7 +1989,7 @@ function kellyBJsAhoy():void {
 				if(flags[KELLY_INCUBATION] > 0) outputText(", milk laden");
 				outputText(" breasts whilst slavishly polishing the [balls] of the " + player.mf("man","woman") + " who made her into, well, a ball-licking bitch.");
 				//[Dominika dreams:
-				if(flags[54] > 0 && flags[150] > 0) outputText("  You are gripped by a sudden but thrilling velvet-edged sense of déjà vu.  Has this scene not repeated somewhere else?");
+				if(flags[UNKNOWN_FLAG_NUMBER_00054] > 0 && flags[UNKNOWN_FLAG_NUMBER_00150] > 0) outputText("  You are gripped by a sudden but thrilling velvet-edged sense of déjà vu.  Has this scene not repeated somewhere else?");
 			}
 		}
 		//Vagina:
@@ -2016,7 +2016,7 @@ function kellyBJsAhoy():void {
 				if(flags[KELLY_INCUBATION] > 0) outputText(", milk laden");
 				outputText(" breasts whilst slavishly polishing the [balls] of the " + player.mf("man","woman") + " who made her into, well, a ball-licking bitch.");
 				//Dominika dreams:
-				if(flags[54] > 0 && flags[150] > 0) outputText("  You are gripped by a sudden but thrilling, velvet-edged sense of déjà vu.  Has this scene not repeated somewhere else?");
+				if(flags[UNKNOWN_FLAG_NUMBER_00054] > 0 && flags[UNKNOWN_FLAG_NUMBER_00150] > 0) outputText("  You are gripped by a sudden but thrilling, velvet-edged sense of déjà vu.  Has this scene not repeated somewhere else?");
 			}			
 		}
 		//[merge]
@@ -2075,7 +2075,7 @@ function kellyBJsAhoy():void {
 				outputText(", then back to the first one, a slow and sensual repetition.  The warm air is punctuated with desperate 'ahh, ahn, ahh's as she surrenders herself to the deep, shameful lust of the act, supporting her soft");
 				if(flags[KELLY_INCUBATION] > 0) outputText(", milk laden");
 				outputText(" breasts whilst slavishly polishing the [balls] of the centaur who made her into, well, a ball-licking bitch.");
-				if(flags[54] > 0 && flags[150] > 0) outputText("  You are gripped by a sudden but thrilling, velvet-edged sense of déjà vu.  Has this scene not repeated somewhere else?");
+				if(flags[UNKNOWN_FLAG_NUMBER_00054] > 0 && flags[UNKNOWN_FLAG_NUMBER_00150] > 0) outputText("  You are gripped by a sudden but thrilling, velvet-edged sense of déjà vu.  Has this scene not repeated somewhere else?");
 			}
 		}
 		//Vagina: 
@@ -2101,7 +2101,7 @@ function kellyBJsAhoy():void {
 				outputText(", then back to the first one, a slow and sensual repetition.  The warm air is punctuated with desperate 'ahh, ahn, ahh's as she surrenders herself to the deep, shameful lust of the act, supporting her soft");
 				if(flags[KELLY_INCUBATION] > 0) outputText(", milk-laden");
 				outputText(" breasts whilst slavishly polishing the [balls] of the centaur who made her into, well, a ball-licking bitch.");
-				if(flags[54] > 0 && flags[150] > 0) outputText("  You are gripped by a sudden but thrilling, velvet-edged sense of déjà vu.  Has this scene not repeated somewhere else?");
+				if(flags[UNKNOWN_FLAG_NUMBER_00054] > 0 && flags[UNKNOWN_FLAG_NUMBER_00150] > 0) outputText("  You are gripped by a sudden but thrilling, velvet-edged sense of déjà vu.  Has this scene not repeated somewhere else?");
 			}
 		}
 		//[merge]

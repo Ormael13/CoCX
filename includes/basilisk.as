@@ -14,7 +14,7 @@ function basiliskGreeting():void {
 	spriteSelect(75);
 	outputText("", true);
 	//First encounter: 
-	if(flags[276] == 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00276] == 0) {
 		outputText("You are carefully trailblazing up a steep pass in the jagged mountain peaks when a furious screech from high above you makes you start.\n\n", false);
 
 		outputText("\"<i>Thiieeeeeeeeef, filthy thieeeeeeeeef!</i>\"  A harpy flaps into view over the ridge, her face a picture of rage.  You hastily assume a fighting stance- but the harpy completely ignores you, her gaze sliding over you and onto the rock wall behind you.  \"<i>You can hide but you can't run, sneak thiieeeeeeeef!  When I find you, I'm going to tear your naaaaaaaaasty little eyes out!</i>\"  She flies on, screaming with anger, her head moving back and forth in jerky movements, scrying the landscape. You stare blankly in bafflement at this display, but are glad that a harpy's attention is on someone else for a change. Marveling at your fortune, you decide to press on.\n\n", false);
@@ -24,7 +24,7 @@ function basiliskGreeting():void {
 		outputText("Using every vestige of your willpower, you tear your gaze away from the terrible, paralyzing sight.  Panting and feeling groggy, you desperately hold the rock formation in the corner of your eye. A tall, thin bipedal shape disengages from the stone against which it had been camouflaging itself, and stalks predatorily towards you.  With small, quick glances you glean fleeting impressions of grey-green scales, a tightly muscled yellow underbelly, cruelly curved index claws, a whip like tail. The creature moves its snub head towards yours suddenly, trying to catch your gaze with its deadly grey eyes again.  You recoil and ready yourself to fight it as best you can.\n\n", false);
 		//(spd loss)
 		basiliskSpeed(5);
-		flags[276]++;
+		flags[UNKNOWN_FLAG_NUMBER_00276]++;
 		startCombat(39);
 	}
 	//Standard encounter:
@@ -32,10 +32,10 @@ function basiliskGreeting():void {
 		outputText("You notice a large boulder ahead.  There is something curiously shaped about it. A small, wet grey shape on it catches your eye...\n\n", false);
 
 		outputText("You look away in the nick of time, and ready yourself to fight as the basilisk slides from its hiding place and advances upon you, its deadly eyes and sharp claws glinting coldly in the sunlight.\n\n", false);
-		flags[276]++;
+		flags[UNKNOWN_FLAG_NUMBER_00276]++;
 		startCombat(39);
 	}
-	flags[276]++;
+	flags[UNKNOWN_FLAG_NUMBER_00276]++;
 	spriteSelect(75);
 }
 
@@ -109,7 +109,7 @@ function defeatBasilisk():void {
 	if(player.lust >= 33 && player.gender > 0) {
 		outputText("  Certain that the creature won't dare try and turn its eyes on you again, you take your time to look the tall reptile over directly for the first time.  Perhaps you could use it to satisfy your baser urges. If so, what part of it do you choose?", false);
 		//[Tongue][Ass]
-		simpleChoices("Tongue",3012,"Ass",evil,"",0,"Lay Eggs",eggs,"Leave",5007);
+		simpleChoices("Tongue",tongueBasiliskSmex,"Ass",evil,"",0,"Lay Eggs",eggs,"Leave",5007);
 	}
 	else eventParser(5007);
 }
@@ -553,7 +553,7 @@ function basiliskAdvantageGoblin():void {
 
 		outputText("The minotaur holds onto you until he has finished spurting his last into you, before abruptly setting you back down on your frozen feet, pulling his slimy, receding member out of your abused anus and with a satisfied snort, takes his leave.  You feel his cum drooling out of you and down your " + hipDescript() + ", but in your hazy, druggy state the feeling is almost sensual.", false);
 		//(Addict: 
-		if(flags[20] > 0 || player.hasPerk("Minotaur Cum Addict") >= 0) outputText("  You're incredibly frustrated that you can't clench yourself and hold the magical substance deep inside you, so you can savor the wonderful, soft elation it blossoms inside of you for as long as you can.", false);
+		if(flags[UNKNOWN_FLAG_NUMBER_00020] > 0 || player.hasPerk("Minotaur Cum Addict") >= 0) outputText("  You're incredibly frustrated that you can't clench yourself and hold the magical substance deep inside you, so you can savor the wonderful, soft elation it blossoms inside of you for as long as you can.", false);
 		outputText("\n\n", false);
 		
 		outputText("Eventually, after another thirty or so minutes of being forced to stand there and savor the cum trickling down your legs, you find with great relief you can begin to move your fingers again. With some effort you manage to work power into each corner of your body and finally shake free of the basilisk's curse; quickly, you shake the aching out of your " + player.legs() + " and re-dress before anything else finds you and woozily begin to make your way back down the mountain, trying to ignore the feeling of ooze dripping out of you.", false);
@@ -605,7 +605,7 @@ function basiliskAdvantageMinotaur():void {
 
 	outputText("The minotaur holds onto you until he has finished spurting his last into you, before abruptly setting you back down on your frozen feet, pulling his slimy, receding member out of your abused anus and with a satisfied snort, takes his leave.  You feel his cum drooling out of you and down your " + hipDescript() + ", but in your hazy, druggy state the feeling is almost sensual.", false);
 	//(Addict: 
-	if(flags[20] > 0 || player.hasPerk("Minotaur Cum Addict") >= 0) outputText("  You're incredibly frustrated that you can't clench yourself and hold the magical substance deep inside you, so you can savor the wonderful, soft elation it blossoms inside of you for as long as you can.", false);
+	if(flags[UNKNOWN_FLAG_NUMBER_00020] > 0 || player.hasPerk("Minotaur Cum Addict") >= 0) outputText("  You're incredibly frustrated that you can't clench yourself and hold the magical substance deep inside you, so you can savor the wonderful, soft elation it blossoms inside of you for as long as you can.", false);
 	outputText("\n\n", false);
 
 	outputText("Eventually, after another thirty or so minutes of being forced to stand there and savor the cum trickling down your legs, you find with great relief you can begin to move your fingers again. With some effort you manage to work power into each corner of your body and finally shake free of the basilisk's curse; quickly, you shake the aching out of your knees and redress before anything else finds you and woozily begin to make your way back down the mountain, trying to ignore the feeling of ooze dripping out of you.", false);

@@ -1,5 +1,5 @@
-﻿const GOTTEN_INQUISITOR_ARMOR:int = 415;
-const DOMINIKAS_SWORD_GIVEN:int = 416;
+﻿//const GOTTEN_INQUISITOR_ARMOR:int = 415;
+//const DOMINIKAS_SWORD_GIVEN:int = 416;
 
 //[INTRO]
 function inquisitorRobesDiscovery():void {

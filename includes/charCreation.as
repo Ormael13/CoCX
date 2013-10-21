@@ -1,4 +1,4 @@
-﻿const CUSTOM_PC_ENABLED:int = 759;
+﻿// CUSTOM_PC_ENABLED:int = 759;
 
 function newGameGo(e:MouseEvent):void {
 	funcs = new Array();
@@ -24,9 +24,9 @@ function newGameGo(e:MouseEvent):void {
 	var easy:Boolean = false;
 	var sprite:Boolean = false;
 	//If at initial title
-	if(flags[273] > 0) sprite = true;
-	if(flags[99] > 0) easy = true;
-	if(flags[305] > 0) silly = true;
+	if(flags[UNKNOWN_FLAG_NUMBER_00273] > 0) sprite = true;
+	if(flags[UNKNOWN_FLAG_NUMBER_00099] > 0) easy = true;
+	if(flags[UNKNOWN_FLAG_NUMBER_00305] > 0) silly = true;
 	b1Text.text = "Newgame";
 	flags[CUSTOM_PC_ENABLED] = 0;
 	
@@ -71,10 +71,10 @@ function newGameGo(e:MouseEvent):void {
 	player.cor = 0;
 	notes = "No Notes Available.";
 	player.lust = 15;
-	player.XP = flags[187];
+	player.XP = flags[NEW_GAME_PLUS_BONUS_STORED_XP];
 	player.level = 1;
 	player.HP = maxHP();
-	player.gems = flags[188];
+	player.gems = flags[NEW_GAME_PLUS_BONUS_STORED_ITEMS];
 	player.hairLength = 5;
 	player.skinType = 0;
 	player.faceType = 0;
@@ -152,10 +152,10 @@ function newGameGo(e:MouseEvent):void {
 	//Lets get this bitch started
 	gameState = 0;
 	//NG+ Clothes reset
-	if(flags[187] + flags[188] > 0) {
+	if(flags[NEW_GAME_PLUS_BONUS_STORED_XP] + flags[NEW_GAME_PLUS_BONUS_STORED_ITEMS] > 0) {
 		//Clear Raphael's training variable so it does not effect
 		//Weapon strength post-newgame.
-		flags[137] = 0;
+		flags[UNKNOWN_FLAG_NUMBER_00137] = 0;
 		player.armorName= oldPlayer.armorName;
 		player.weaponName= oldPlayer.weaponName;
 		player.weaponVerb= oldPlayer.weaponVerb;
@@ -184,12 +184,12 @@ function newGameGo(e:MouseEvent):void {
 		flags[i] = 0;
 	}
 	//Remember silly/sprite/etc
-	if(sprite) flags[273] = 1;
-	if(easy) flags[99] = 1;
-	if(silly) flags[305] = 1;
+	if(sprite) flags[UNKNOWN_FLAG_NUMBER_00273] = 1;
+	if(easy) flags[UNKNOWN_FLAG_NUMBER_00099] = 1;
+	if(silly) flags[UNKNOWN_FLAG_NUMBER_00305] = 1;
 	//Set that jojo debug doesn't need to run
-	flags[102] = 1;
-	flags[2999] = 3;
+	flags[UNKNOWN_FLAG_NUMBER_00102] = 1;
+	flags[UNKNOWN_FLAG_NUMBER_02999] = 3;
 	//Time reset
 	days = 0;
 	hours = 0;
@@ -551,13 +551,13 @@ function doCreation(eventNo:Number):void {
 		if(nameBox.text == "") {
 			//If part of newgame+, don't fully wipe.
 			if(player.XP > 0 && player.explored == 0) {
-				flags[187] = player.XP;
-				if(flags[187] == 0) flags[187] = 1;
+				flags[NEW_GAME_PLUS_BONUS_STORED_XP] = player.XP;
+				if(flags[NEW_GAME_PLUS_BONUS_STORED_XP] == 0) flags[NEW_GAME_PLUS_BONUS_STORED_XP] = 1;
 				while(player.level > 1) {
-					flags[187] += player.level * 100;
+					flags[NEW_GAME_PLUS_BONUS_STORED_XP] += player.level * 100;
 					player.level--;
 				}
-				flags[188] = player.gems;
+				flags[NEW_GAME_PLUS_BONUS_STORED_ITEMS] = player.gems;
 			}
 			newGameGo(e);
 			outputText("\n\n\n<b>You must select a name.</b>", false);
@@ -579,13 +579,13 @@ function doCreation(eventNo:Number):void {
 	}
 	//New Game+
 	if(eventNo == 10035) {
-		flags[187] = player.XP;
-		if(flags[187] == 0) flags[187] = 1;
+		flags[NEW_GAME_PLUS_BONUS_STORED_XP] = player.XP;
+		if(flags[NEW_GAME_PLUS_BONUS_STORED_XP] == 0) flags[NEW_GAME_PLUS_BONUS_STORED_XP] = 1;
 		while(player.level > 1) {
-			flags[187] += player.level * 100;
+			flags[NEW_GAME_PLUS_BONUS_STORED_XP] += player.level * 100;
 			player.level--;
 		}
-		flags[188] = player.gems;
+		flags[NEW_GAME_PLUS_BONUS_STORED_ITEMS] = player.gems;
 		newGameGo(e);
 		return;
 	}
@@ -672,12 +672,12 @@ function doCreation(eventNo:Number):void {
 		}
 		else historyPerk = "History: Smith";
 		player.createPerk(historyPerk,0,0,0,0,"YOU GOT HISTORY BRO!");
-		if(flags[418] == 0) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00418] == 0) {
 			eventParser(10045);
-			flags[418] = 1;
+			flags[UNKNOWN_FLAG_NUMBER_00418] = 1;
 		}
 		else {
-			flags[418] = 1;
+			flags[UNKNOWN_FLAG_NUMBER_00418] = 1;
 			eventParser(1);
 		}
 		return;
@@ -827,7 +827,7 @@ function specialName(arg:String):Boolean {
 //Set custom stats and display a blurb about them.  No need to set up buttons, handled outside in 10045
 function customPCSetup():void {
 	//Set as having history perk
-	flags[418] = 1;
+	flags[UNKNOWN_FLAG_NUMBER_00418] = 1;
 	if(player.short == "Vahdunbrii") {
 		player.createBreastRow();
 		player.createVagina();
@@ -919,9 +919,9 @@ function customPCSetup():void {
 		createStorage();
 		player.createKeyItem("Camp - Chest",0,0,0,0);
 		player.createKeyItem("Equipment Rack - Weapons",0,0,0,0);
-		flags[254] = 1;
+		flags[UNKNOWN_FLAG_NUMBER_00254] = 1;
 		player.createKeyItem("Equipment Rack - Armor",0,0,0,0);
-		flags[255] = 1;
+		flags[UNKNOWN_FLAG_NUMBER_00255] = 1;
 		//(Flexibility), (Incorporeality), History: Religious, Dragonfire, Brood Mother, Magical Fertility, Wet Pussy, Tough, Strong, Fast, Smart, History: Scholar, History: Slacker, Strong Back, Strong Back 2: Stronger Harder
 		player.createPerk("Flexibility",0,0,0,0,"Due to your cat-like body, you're able to dodge attacks more often.");
 		player.createPerk("History: Religious",0,0,0,0,"");
@@ -1288,7 +1288,7 @@ function customPCSetup():void {
 		//human tongue
 		//human face
 		//no tail, fur, or scales"
-		flags[418] = 0;
+		flags[UNKNOWN_FLAG_NUMBER_00418] = 0;
 		player.str = 25;
 		player.tou = 25;
 		player.inte = 25;
@@ -1570,14 +1570,14 @@ function customPCSetup():void {
 		player.hipRating = 5;
 		player.buttRating = 5;
 		player.thickness = 10;
-		flags[23] = 2;
+		flags[UNKNOWN_FLAG_NUMBER_00023] = 2;
 		player.earsPierced = 1;
 		player.earsPShort = "green gem-stone handcuffs";
 		player.earsPLong = "Green gem-stone handcuffs";
 		player.nipplesPierced = 1;
 		player.nipplesPShort = "seamless black nipple-studs";
 		player.nipplesPLong = "Seamless black nipple-studs";
-		flags[23] = 2;
+		flags[UNKNOWN_FLAG_NUMBER_00023] = 2;
 		player.vaginas[0].clitPierced = 1;
 		player.vaginas[0].clitPShort = "emerald clit-stud";
 		player.vaginas[0].clitPLong = "Emerald clit-stud";

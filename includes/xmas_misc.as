@@ -1,11 +1,11 @@
 ﻿//CONSTS
-const CANDY_CANE_YEAR_MET:int = 637;
-const XMAS_CHICKEN_YEAR:int = 642;
-const KAMI_ENCOUNTER:int = 643;
-const POLAR_PETE_YEAR_MET:int = 644;
-const NIEVE_STAGE:int = 647;
-const NIEVE_GENDER:int = 648;
-const NIEVE_MOUTH:int = 649;
+//const CANDY_CANE_YEAR_MET:int = 637;
+//const XMAS_CHICKEN_YEAR:int = 642;
+//const KAMI_ENCOUNTER:int = 643;
+//const POLAR_PETE_YEAR_MET:int = 644;
+//const NIEVE_STAGE:int = 647;
+//const NIEVE_GENDER:int = 648;
+//const NIEVE_MOUTH:int = 649;
 
 //TOC (Ctr + F to find):
 //1. Kirbster's Bunny Trap
@@ -436,7 +436,7 @@ function getWinterPudding():void {
 	clearOutput();
 	if(player.gems < 35) {
 		outputText("Sadly, the pudding isn't free, and it looks like you don't have the 35 gems you'd need to try a bite!");
-		doNext(2836);
+		doNext(bakeryuuuuuu);
 		return;
 	}
 	player.gems -= 35;
@@ -470,7 +470,7 @@ function getWinterPudding():void {
 		player.hornType = 5;
 		player.horns = 4 + rand(12);
 	}
-	doNext(2836);
+	doNext(bakeryuuuuuu);
 }
 
 //4. Donto's Polar Pete

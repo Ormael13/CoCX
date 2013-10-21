@@ -30,14 +30,14 @@
 //-direct attacks cause PC to touch tentacles with a high probability, getting a shock of venom that lowers speed/str and inflames lust
 //-drops [TF item] and maybe some other lake- or factory-related item
 
-const TIMES_MET_ANEMONE:int = 453;
-const ANEMONE_KID:int = 454;
-const KID_ITEM_FIND_HOURS:int = 455;
-const ANEMONE_WATCH:int = 456;
-const ANEMONE_WEAPON:int = 457;
-const KID_A_XP:int = 756;
-const KID_SITTER:int = 757; //0 = no sitter, 1 = possible, 2 = doing dat shit
-const HAD_KID_A_DREAM:int = 758;
+//  TIMES_MET_ANEMONE:int = 453;
+//  ANEMONE_KID:int = 454;
+//  KID_ITEM_FIND_HOURS:int = 455;
+//  ANEMONE_WATCH:int = 456;
+//  ANEMONE_WEAPON:int = 457;
+//  KID_A_XP:int = 756;
+//  KID_SITTER:int = 757; //0 = no sitter, 1 = possible, 2 = doing dat shit
+//  HAD_KID_A_DREAM:int = 758;
 
 function anemonePreg():void {
 	player.knockUp(10,256,101);
@@ -576,11 +576,11 @@ function minoCumForAnemonieeeeez():void {
 	outputText("The initial surprise subsides to wooly-headedness and a feeling of mild arousal as the stingers in her tentacles find exposed flesh.  In panic of drowning you pull free of the ropy mass and backpaddle away from the girl until your " + player.feet() + " reassuringly touch the shallows of the lakebed.  As you shake your head to clear the haze, you notice a few of your items have fallen out of your pouches and are floating in the water.  The anemone has picked one in particular up and is examining it; a bottle of minotaur cum.  Her eyes light up in recognition as the fluid sloshes back and forth and she looks beseechingly at you, cradling it next to her cheek.  \"<i>Gimme?</i>\" she asks, trying to look as sweet as possible.\n\n", false);
 
 	//[(PC not addicted)
-	if(flags[20] == 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00020] == 0) {
 		outputText("Do you want to make a present of the bottle?", false);
 	}
 	//(PC addicted but sated)
-	else if(flags[20] == 1) {
+	else if(flags[UNKNOWN_FLAG_NUMBER_00020] == 1) {
 		outputText("You're still riding high from your last dose; do you want to share your buzz with the girl? It might lead to something fun...", false);
 	}
 	//(PC addicted but in withdrawal)
@@ -630,7 +630,7 @@ function giveMino():void {
 		//Normal male: -requires dick of area < 36
 		if(player.cockTotal() > 0) cockRape = 2592;
 		if(player.hasVagina()) vaginaRape = 2591;
-		simpleChoices("Your ass",2593,"Your Cock",cockRape,"Your Vagina",vaginaRape,"",0,"Leave",13);
+		simpleChoices("Your ass",victoryButtholeRape,"Your Cock",cockRape,"Your Vagina",vaginaRape,"",0,"Leave",13);
 		return;
 	}
 	doNext(13);
@@ -692,7 +692,7 @@ function anemoneButtPlugginz():void {
 	var hotdog:int = 0;
 	if(!player.isTaur()) hotdog = 3820;
 	
-	simpleChoices("FUCK IT",3819,"Hotdog",hotdog,"",0,"",0,"Fuck Off",3821);
+	simpleChoices("FUCK IT",anemoneQuoteUnquoteAnal,"Hotdog",hotdog,"",0,"",0,"Fuck Off",fuckingAssholelessAnemoneeeez);
 }
 
 //[FUCK IT] (if cock fit 48, use cock; else use clit scenes)
@@ -1010,7 +1010,7 @@ function anemoneKidBirthPtII():void {
 	outputText("\n\nAnd... she's plunging the dipper into the barrel around her ankles.  You can hear it scraping the sides and bottom as she swishes it around to fill it up.  Politely and carefully handing it back to you, she resumes her seat and the water level rises slightly to cover her legs.  You stare at the dipper and then at her; she returns your gaze unflinchingly, splashing some liquid on her exposed gills with an idle hand.");
 	outputText("\n\nDoes she expect you to drink this?  And does she plan to live in your camp?  Won't it be absurdly toilsome to evict someone from your water barrel without speaking a word of their language or using physical force?  Your mind, unwilling to fathom answers to these questions - which is just as well since they're all variations on 'yes' - latches onto the trivial like a lifeline.  The water level was definitely lower than you left it before your nap.  Maybe she absorbed it through her skin as she grew to adulthood?  This might explain why her hips and thighs are better developed than her chest and 'hair'.");
 	outputText("\n\nChanging tack to work your hesitant brain around to the real issue, you address her again; assisted by clumsy pantomime, you ask her if she intends to stay in your barrel forever.  She smiles widely, her eyes lighting up, then makes a show of bowing her head graciously several times.  Oh... she thought it was an invitation.  The wind spills out of your sails and your shoulders slump in the face of her cheerful imperturbability.  Looks like words won't work; you'll have to reach her with your fists.  Do you eject the anemone from your camp?");
-	simpleChoices("Keep It",3545,"Eject",3544,"",0,"",0,"",0);
+	simpleChoices("Keep It",keepAnemoneKid,"Eject",getRidOfAnemone,"",0,"",0,"",0);
 	//[yesno]
 }
 //[yes, i am allergic to fun. sweep the leg, johnny! get 'em a body bag!]
@@ -1212,7 +1212,7 @@ function placeInAnemone(slot:Number = 1):void {
 		itemSlot5.quantity--;
 		if(itemSlot5.quantity == 0) itemSlot5.shortName = "";
 	}
-	doNext(3546);
+	doNext(approachAnemoneBarrel);
 }
 
 //[Take Weapon]
@@ -1250,7 +1250,7 @@ function anemoneWatchToggle():void {
 			flags[ANEMONE_WATCH] = 1;
 		}
 	}
-	doNext(3546);
+	doNext(approachAnemoneBarrel);
 }
 
 //[Tutor](only appears if Kid A is armed and present)
@@ -1595,7 +1595,7 @@ function evictANemone():void {
 	outputText("Really evict the anemone?");
 	spriteSelect(71);
 	//[Yes][No]
-	doYesNo(3552,3546);
+	doYesNo(reallyEvictDaAnemone,approachAnemoneBarrel);
 }
 //Yes]
 function reallyEvictDaAnemone():void {

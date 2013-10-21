@@ -1,62 +1,62 @@
-﻿const RUBI_AFFECTION:int = 604;
-const RUBI_DISABLED:int = 605;
+﻿//const RUBI_AFFECTION:int = 604;
+//const RUBI_DISABLED:int = 605;
 
 //0 = not admitted (she), 1 = "he", 2 = "she"
-const RUBI_ADMITTED_GENDER:int = 606;
-const RUBI_INTRODUCED:int = 607;
-const RUBI_BLU_BALLS:int = 608;
-const RUBI_ORGASM_DENIAL:int = 609;
-const RUBI_BIMBO:int = 610;
-const RUBI_INCUBUS_PROGRESS:int = 611;
-const RUBI_SUITCLOTHES:int = 612;
-const RUBI_FETISH_CLOTHES:int = 613;
-const RUBI_GREEN_ADVENTURER:int = 614;
-const RUBI_TUBE_TOP:int = 615;
-const RUBI_BODYSUIT:int = 616;
-const RUBI_LONGDRESS:int = 617;
-const RUBI_TIGHT_PANTS:int = 618;
-const RUBI_NURSE_CLOTHES:int = 619;
-const RUBI_SWIMWEAR:int = 620;
-const RUBI_PROSTITUTION:int = 621;
-const RUBIS_HOUSE_FIRST_TIME:int = 622;
-const RUBI_GOT_BIMBO_SKIRT:int = 623;
-const RUBI_PROFIT:int = 624;
-const RUBI_BIMBO_MINIDRESS:int = 625;
-const TIMES_RUBI_MASSAGED:int = 832;
+//const RUBI_ADMITTED_GENDER:int = 606;
+//const RUBI_INTRODUCED:int = 607;
+//const RUBI_BLU_BALLS:int = 608;
+//const RUBI_ORGASM_DENIAL:int = 609;
+//const RUBI_BIMBO:int = 610;
+//const RUBI_INCUBUS_PROGRESS:int = 611;
+//const RUBI_SUITCLOTHES:int = 612;
+//const RUBI_FETISH_CLOTHES:int = 613;
+//const RUBI_GREEN_ADVENTURER:int = 614;
+//const RUBI_TUBE_TOP:int = 615;
+//const RUBI_BODYSUIT:int = 616;
+//const RUBI_LONGDRESS:int = 617;
+//const RUBI_TIGHT_PANTS:int = 618;
+//const RUBI_NURSE_CLOTHES:int = 619;
+//const RUBI_SWIMWEAR:int = 620;
+//const RUBI_PROSTITUTION:int = 621;
+//const RUBIS_HOUSE_FIRST_TIME:int = 622;
+//const RUBI_GOT_BIMBO_SKIRT:int = 623;
+//const RUBI_PROFIT:int = 624;
+//const RUBI_BIMBO_MINIDRESS:int = 625;
+//const TIMES_RUBI_MASSAGED:int = 832;
 //Third's horrible new shit
-const RUBI_BREAST_SIZE:int = 984;
-const RUBI_COCK_SIZE:int = 985;
-const RUBI_COCK_TYPE:int = 986;
-const RUBI_LOWERBODY:int = 987;
-const RUBI_HORNTYPE:int = 988; 
+//const RUBI_BREAST_SIZE:int = 984;
+//const RUBI_COCK_SIZE:int = 985;
+//const RUBI_COCK_TYPE:int = 986;
+//const RUBI_LOWERBODY:int = 987;
+//const RUBI_HORNTYPE:int = 988; 
 //0 = normal, 1 = black
-const RUBI_NIPPLETYPE:int = 989;
-const RUBI_NO_CUNT:int = 990;
-const RUBI_CUNTTYPE:int = 991;
-const RUBI_EYE_DESCRIPT:int = 992;
-const RUBI_EYE_TYPE:int = 993;
-const RUBI_SKIN:int = 994;
-const RUBI_HAIR:int = 995;
-const RUBI_HAIR_LENGTH:int = 996;
-const RUBI_BALLS_TYPE:int = 997;
-const RUBI_EAR_TYPE:int = 998;
-const RUBI_HANDS:int = 999;
-const RUBI_WHISKERS:int = 1000;
-const RUBI_FEET:int = 1001;
-const RUBI_DEBIMBO:int = 1002;
-const RUBI_NIPPLE_TYPE:int = 1003;
+//const RUBI_NIPPLETYPE:int = 989;
+//const RUBI_NO_CUNT:int = 990;
+//const RUBI_CUNTTYPE:int = 991;
+//const RUBI_EYE_DESCRIPT:int = 992;
+//const RUBI_EYE_TYPE:int = 993;
+//const RUBI_SKIN:int = 994;
+//const RUBI_HAIR:int = 995;
+//const RUBI_HAIR_LENGTH:int = 996;
+//const RUBI_BALLS_TYPE:int = 997;
+//const RUBI_EAR_TYPE:int = 998;
+//const RUBI_HANDS:int = 999;
+//const RUBI_WHISKERS:int = 1000;
+//const RUBI_FEET:int = 1001;
+//const RUBI_DEBIMBO:int = 1002;
+//const RUBI_NIPPLE_TYPE:int = 1003;
 //HE/SHE
-const RUBI_SHE:int = 1004;
-const TIMES_DISCUSSED_RUBIS_IDENTITY:int = 1005;
-const RUBI_ICECREAM_CONFESSION:int = 1006;
-const TIMES_RUBI_DATED:int = 1007;
-const RUBI_FANCY_CONFESSION:int = 1008;
-const RUBI_BAR_CONFESSION:int = 1009;
-const RUBI_TIMES_ANALLY_TRAINED:int = 1010;
-const RUBI_TIMES_GIVEN_AN_ITEM:int = 1011;
-const RUBI_BONDAGE_STRAPS:int = 1012;
-const RUBI_INQUISITORS_CORSET:int = 1013;
-const RUBI_SETUP:int = 1014;
+//const RUBI_SHE:int = 1004;
+//const TIMES_DISCUSSED_RUBIS_IDENTITY:int = 1005;
+//const RUBI_ICECREAM_CONFESSION:int = 1006;
+//const TIMES_RUBI_DATED:int = 1007;
+//const RUBI_FANCY_CONFESSION:int = 1008;
+//const RUBI_BAR_CONFESSION:int = 1009;
+//const RUBI_TIMES_ANALLY_TRAINED:int = 1010;
+//const RUBI_TIMES_GIVEN_AN_ITEM:int = 1011;
+//const RUBI_BONDAGE_STRAPS:int = 1012;
+//const RUBI_INQUISITORS_CORSET:int = 1013;
+//const RUBI_SETUP:int = 1014;
 
 function initializeRubi():void {
 	if(flags[RUBI_BIMBO] == 0) {
@@ -143,7 +143,7 @@ function specialRelationship20scene():void {
 	outputText("\n\nYou're a little surprised, but it does make sense.  She... he is pretty flat-chested, and you'd often wondered if you'd seen a bulge of some sort in her skirt from time to time...");
 	flags[RUBI_ADMITTED_GENDER] = 1;
 	//(Accept) or (Reject)
-	simpleChoices("Accept",3891,"Reject",3892,"",0,"",0,"",0);
+	simpleChoices("Accept",acceptRubi,"Reject",rejectRubi,"",0,"",0,"",0);
 }
 //[If Accept]
 function acceptRubi():void {
@@ -492,7 +492,7 @@ function buyRubiMilk():void {
 	player.gems -= 3;
  	rubiAffection(3);
 	player.modThickness(100,1);
-	if(rubiAffection() >= 30 && flags[RUBI_ADMITTED_GENDER] == 0) doNext(3890);
+	if(rubiAffection() >= 30 && flags[RUBI_ADMITTED_GENDER] == 0) doNext(specialRelationship20scene);
 	else doNext(13);
 }
  
@@ -518,7 +518,7 @@ function getTeaFromRubi():void {
 	player.gems -= 6;
 	rubiAffection(5);
 	fatigue(-25);
-	if(rubiAffection() >= 30 && flags[RUBI_ADMITTED_GENDER] == 0) doNext(3890);
+	if(rubiAffection() >= 30 && flags[RUBI_ADMITTED_GENDER] == 0) doNext(specialRelationship20scene);
 	else doNext(13);
 }
  
@@ -553,7 +553,7 @@ function chatWithRubi():void {
 		outputText("You decide not to order anything to drink, instead taking the opportunity to hang out with Rubi whenever " + rubiMF("he","she") + " has a free moment.  You talk of pleasant but inconsequential things.  Rubi spends some time discussing " + rubiMF("his","her") + " old village, an honest-to-goodness human village.  Life there was good, they had plenty of farms bringing in food, and very little corruption to contend with.  There were some residents with inhuman features, usually achieved willingly, but the majority were pureblood humans.  That changed years ago when a detachment of incubi, succubi and imps attacked.  Rubi and a handful made it out fine, but got split up along the way.  As far as Rubi knows, everyone else either perished or was corrupted in the aftermath.");
 		outputText("\n\nEventually you run out of topics to discuss and excuse yourself, giving Rubi a kiss on the lips before heading back to camp.");
 	}
-	if(rubiAffection() >= 30 && flags[RUBI_ADMITTED_GENDER] == 0) doNext(3890);
+	if(rubiAffection() >= 30 && flags[RUBI_ADMITTED_GENDER] == 0) doNext(specialRelationship20scene);
 	else doNext(13);
 }
  
@@ -1119,7 +1119,7 @@ function findBimboCheatster():void {
 	outputText("\n\nThere she is, Rubi, splayed out on the couch, naked with two fingers buried deep inside her pussy.  You shift around a bit, and see nearby her a tanned man in the process of taking off his shirt.  So, you got to them before they did anything.  Rubi moans, running a hand through her platinum blonde hair and staring at the tanned man.");
 	outputText("\n\nYou could interrupt them before they go any further, or wait until it's over.");
 	//[Interrupt] [Wait]
-	simpleChoices("Interrupt",3906,"Watch n Wait",3907,"",0,"",0,"",0);
+	simpleChoices("Interrupt",interruptTheNTRsYouCrazyFool,"Watch n Wait",waitAndGetNTRedLikeTheBoyBitchYouAre,"",0,"",0,"",0);
 }
 //(Interrupt)
 function interruptTheNTRsYouCrazyFool():void {
@@ -1147,7 +1147,7 @@ function interruptTheNTRsYouCrazyFool():void {
 		}
 	}
 	//[Leads to Resolution]
-	doNext(3908);
+	doNext(NTRbimboBitchResolution);
 }
 
 //(Wait)
@@ -1173,7 +1173,7 @@ function waitAndGetNTRedLikeTheBoyBitchYouAre():void {
 	outputText("\n\nWell, this is as good of a time as any to confront her...  You stand up, adjust your clothing, and walk inside as a naked Rubi cleans herself off with a moist towel.");
 	outputText("\n\nShe spots you and lights up, \"<i>Oh baby!  Like, I didn't know you'd be coming by!</i>\"  She then seems to realize that she's stark naked, mostly covered in cum, and that you came in just seconds after her previous lover left.  \"<i>Oh.  Yeah.</i>\"");
 	//[leads to Resolution]
-	doNext(3908);
+	doNext(NTRbimboBitchResolution);
 }
 
 //(Resolution)
@@ -1186,7 +1186,7 @@ function NTRbimboBitchResolution():void {
 	outputText("\n\nRubi hugs the cushion close, apparently done with her speech.  So how do you react?");
 	outputText("\n\nYou could tell her no, forbidding her to see anyone else.  Or you could say yes, letting her sleep with anyone.  You could always break up with her.  Or there might be a fourth option...");
 	//[No] [Yes] [Break Up] [Pimp]
-	simpleChoices("No",3909,"Yes",3910,"Break Up",3911,"Pimp",3912,"",0);
+	simpleChoices("No",noBimboNTR,"Yes",yesBimboNTR,"Break Up",breakUpWithRubi,"Pimp",pimpOutRubi,"",0);
 }
 
 //(No)
@@ -3252,5 +3252,5 @@ function giveRubiClothes(short:String = ""):void {
 	else if(short == "I.Corst") flags[RUBI_INQUISITORS_CORSET] = 1;
 	else if(short == "BonStrp") flags[RUBI_BONDAGE_STRAPS] = 1;
 	rubiAffection(20);
-	doNext(3898);
+	doNext(rubisFuckingHouseYouPervert);
 }

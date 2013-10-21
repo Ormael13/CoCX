@@ -1084,7 +1084,7 @@ function doDungeon(eventNo:Number):void {
 	}
 	//Try to go to Zetaz's room from the south
 	if(eventNo == 11077) {
-		if(flags[115] == 0) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00115] == 0) {
 			outputText("The door won't budge.", true);
 			doNext(1);
 			return;

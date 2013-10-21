@@ -1,19 +1,19 @@
-﻿const HELIA_FOLLOWER_DISABLED:int = 696
-const HEL_INTROS_LEVEL:int = 697;
-const MINO_SONS_HAVE_SOPHIE:int = 698;
-const KEEP_HELIA_AND_SOPHIE:int = 699;
-const FOLLOWER_HEL_TALKS:int = 670;
-const HEL_CAN_SWIM:int = 703;
-const HEL_GUARDING:int = 704;
+﻿//const HELIA_FOLLOWER_DISABLED:int = 696
+//const HEL_INTROS_LEVEL:int = 697;
+//const MINO_SONS_HAVE_SOPHIE:int = 698;
+//const KEEP_HELIA_AND_SOPHIE:int = 699;
+//const FOLLOWER_HEL_TALKS:int = 670;
+//const HEL_CAN_SWIM:int = 703;
+//const HEL_GUARDING:int = 704;
 
-const HELIA_ANAL_TRAINING_OFFERED:int = 926;
-const HELIA_ANAL_TRAINING:int = 927;
+//const HELIA_ANAL_TRAINING_OFFERED:int = 926;
+//const HELIA_ANAL_TRAINING:int = 927;
 
-const HELIA_BIRTHDAY_OFFERED:int = 928;
-const HELIA_BDAY_DRINKS:int = 929;
-const HELIA_BDAY_HAKON_AND_KIRI:int = 930;
-const HELIA_BDAY_PHOENIXES:int = 931;
-const HELIA_BDAY_FOX_TWINS:int = 932;
+//const HELIA_BIRTHDAY_OFFERED:int = 928;
+//const HELIA_BDAY_DRINKS:int = 929;
+//const HELIA_BDAY_HAKON_AND_KIRI:int = 930;
+//const HELIA_BDAY_PHOENIXES:int = 931;
+//const HELIA_BDAY_FOX_TWINS:int = 932;
 
 function helCapacity():Number {
 	return 85;
@@ -333,7 +333,7 @@ function bimboSophieGetsBooted4Firebutt():void {
 	outputText("\n\n<i>\"N-no, Sophie.  You need to leave, now.\"</i>");
 	
 	//{If PC has a gang of Mino Sons}
-	if(flags[326] >= 3) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00326] >= 3) {
 		outputText("\n\nAs you're trying to get rid of the dumb blonde you made, you hear the clop of hooves approaching.  You look up in time to see a few familiar faces - your minotaur sons!");
 		outputText("\n\n<i>\"Hey there, mom,\"</i> the biggest of them says, <i>\"Whatcha got there?  You bring us a present?\"</i>");
 		outputText("\n\nNo, you di- hey, wait a minute...");
@@ -362,7 +362,7 @@ function bimboSophieGetsBooted4Firebutt():void {
 		
 		outputText("\n\nGod DAMMIT, Hel.");
 	}
-	flags[283] = 1;
+	flags[UNKNOWN_FLAG_NUMBER_00283] = 1;
 	doNext(13);
 }
 
@@ -499,7 +499,7 @@ function heliaFollowerMenu(display:Boolean = true):void {
 			if(display) outputText("You approach Hel as she's pacing around camp.  She's clad in her normal field attire: a simple scale bikini top and leather thong which supports her scimitar's scabbard.  Her cloak is loosely thrown over her shoulders, giving her a slight measure of protection from the mountain's harsh environs.");
 			if(display) outputText("\n\n\"<i>Heya, [name]! Ready to hit the road?</i>\"");
 			//(Display Options: [Dungeon] [Not Yet])
-			simpleChoices("Dungeon",3585,"",0,"",0,"",0,"Not Yet",3584);
+			simpleChoices("Dungeon",goToHeliaDungeon,"",0,"",0,"",0,"Not Yet",notYet);
 		}
 	}
 }
@@ -1996,7 +1996,7 @@ function goWithHelia():void {
 	if(flags[HARPY_QUEEN_EXECUTED] > 0) outputText("finally killing that bitch of a queen");
 	else outputText("setting the queen right, but leaving her alive for when it's finally time to bring the fight to Lethice");
 	outputText(".  You nod at his thanks, and his hand is soon replaced by Helia's as she grabs you on her way toward the gigantic cake.  The towering white confectionary seems more than big enough to feed everyone in the group, a huge extravagance on the part of her family.  You hear a quiet whisper about ");
-	if(flags[119] == 1) outputText("a certain waitress fairy having... supplied the icing herself");
+	if(flags[UNKNOWN_FLAG_NUMBER_00119] == 1) outputText("a certain waitress fairy having... supplied the icing herself");
 	else outputText("a certain minotaur chef having supplied the icing himself");
 	outputText(" as Hel is handed an oversized knife and urged to blow out the candles atop it, arranged into a perfect 23.");
 	
@@ -2105,8 +2105,8 @@ function leaveWithGirls():void {
 	if(player.gender == 3) {
 		outputText("\n\n\"<i>So what parts do you want to use?</i>\" she asks, looking to your mixed endowments.", false);
 		//(Display Options: [As Male] [As Female])
-		simpleChoices("As Male",3404,"As Female",3405,"",0,"",0,"",0);
+		simpleChoices("As Male",foxyFluffsFoursomeAsMale,"As Female",foxyFluffGirlsFuckSex,"",0,"",0,"",0);
 	}
-	else if(player.gender == 2) doNext(3405);
-	else doNext(3404);
+	else if(player.gender == 2) doNext(foxyFluffGirlsFuckSex);
+	else doNext(foxyFluffsFoursomeAsMale);
 }

@@ -7,19 +7,19 @@
 // import flash.events.MouseEvent;
 // import classes.itemSlotClass;
 
-const URTA_MET_HEL:int = 710;
-const URTA_QUEST_STATUS:int = 711;
-const URTA_FUCKED_HEL:int = 712;
-const SUCCUBI_MILKED_GNOLL_PRINCESS:int = 713;
-const URTA_TAKEN_BY_GNOLLS:int = 714;
-const URTA_BECOMES_SNAKE_SLAVE:int = 715;
-const URTA_GOBLIN_SLAVE:int = 716
-const URTA_TENTACLE_RAPED:int = 717;
-const URTA_TENTACLE_GAPED:int = 718;
-const URTA_IS_VULQUINE_MENACE:int = 719;
-const URTA_RAPED_MINO_LORD:int = 720;
-const URTA_MINO_AND_SUCCUBI_SLAVE:int = 721;
-const EDRYN_BIRF_COUNTDOWN:int = 722;
+//const URTA_MET_HEL:int = 710;
+//const URTA_QUEST_STATUS:int = 711;
+//const URTA_FUCKED_HEL:int = 712;
+//const SUCCUBI_MILKED_GNOLL_PRINCESS:int = 713;
+//const URTA_TAKEN_BY_GNOLLS:int = 714;
+//const URTA_BECOMES_SNAKE_SLAVE:int = 715;
+//const URTA_GOBLIN_SLAVE:int = 716
+//const URTA_TENTACLE_RAPED:int = 717;
+//const URTA_TENTACLE_GAPED:int = 718;
+//const URTA_IS_VULQUINE_MENACE:int = 719;
+//const URTA_RAPED_MINO_LORD:int = 720;
+//const URTA_MINO_AND_SUCCUBI_SLAVE:int = 721;
+//const EDRYN_BIRF_COUNTDOWN:int = 722;
 
 //Mystery variables for now
 var player2:creature = new creature();
@@ -93,7 +93,7 @@ function comfortUrtaAfterFamFamTalk():void {
 	
 	outputText("\n\nNodding, you give the girl a smile as you stand up to depart.  Her eyes twinkle happily as she watches you go.");
 	urtaLove(5);
-	flags[12] += 3;
+	flags[UNKNOWN_FLAG_NUMBER_00012] += 3;
 	doNext(13);
 }
 
@@ -112,7 +112,7 @@ function yeeshUrtaAfterFamFamTalk():void {
 	outputText("\n\nUrta nods slowly and throws back a swig from her drink.  \"<i>I will.</i>\"");
 	outputText("\n\nGood bitch...");
 	urtaLove(1);
-	flags[12] += 1;
+	flags[UNKNOWN_FLAG_NUMBER_00012] += 1;
 	doNext(13);
 }
 	
@@ -125,8 +125,8 @@ function whoCaresUrtaAfterFamFamTalk():void {
 	outputText("\n\nUrta growls, \"<i>You asked!</i>\"");
 	outputText("\n\nYou tell her that you asked about her parents, not a summary of every misfortune to ever befall her.  Then, you leave, sending a barmaid her way with a drink.  The whiny cunt will likely need it to get over her bruised pride.  You doubt it will stop her from jumping your bones the next time you visit.  Her libido's too high for her to resist.");
 	urtaLove(-10);
-	flags[12] -= 5;
-	if(flags[12] < 1) flags[12] = 1;
+	flags[UNKNOWN_FLAG_NUMBER_00012] -= 5;
+	if(flags[UNKNOWN_FLAG_NUMBER_00012] < 1) flags[UNKNOWN_FLAG_NUMBER_00012] = 1;
 	doNext(13);
 }
 
@@ -3007,8 +3007,8 @@ function getKnockedUpWithGodChild():void {
 	outputText(" balls, slathering them with slick spunk.");
 	
 	var ballWorship:Array = new Array();
-	if((amilyFollower() && flags[43] == 2) && campCorruptJojo()) ballWorship[ballWorship.length] = 0;
-	if((amilyFollower() && flags[43] == 2) || campCorruptJojo()) ballWorship[ballWorship.length] = 1;
+	if((amilyFollower() && flags[AMILY_FOLLOWER] == 2) && campCorruptJojo()) ballWorship[ballWorship.length] = 0;
+	if((amilyFollower() && flags[AMILY_FOLLOWER] == 2) || campCorruptJojo()) ballWorship[ballWorship.length] = 1;
 	if(bimboSophie()) ballWorship[ballWorship.length] = 2;
 	if(followerHel()) ballWorship[ballWorship.length] = 3;
 	if(latexGooFollower()) ballWorship[ballWorship.length] = 4;

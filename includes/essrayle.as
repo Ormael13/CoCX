@@ -1,10 +1,10 @@
-﻿const MET_ESSY:int = 772;
-const TURNED_DOWN_ESSY_FIRST_MEETING:int = 773;
-const ACCEPTED_ESSY_FIRST_MEETING:int = 774;
-const ESSRAYLE_ESCAPED_DUNGEON:int = 863;
-const TOLD_MOTHER_TO_RELEASE_ESSY:int = 864;
-const ESSY_DUNGEON_FUCKED:int = 865;
-const ESSY_MET_IN_DUNGEON:int = 866;
+﻿//const MET_ESSY:int = 772;
+//const TURNED_DOWN_ESSY_FIRST_MEETING:int = 773;
+//const ACCEPTED_ESSY_FIRST_MEETING:int = 774;
+//const ESSRAYLE_ESCAPED_DUNGEON:int = 863;
+//const TOLD_MOTHER_TO_RELEASE_ESSY:int = 864;
+//const ESSY_DUNGEON_FUCKED:int = 865;
+//const ESSY_MET_IN_DUNGEON:int = 866;
 
 //Restriction on meeting Essy I'd figure is you can't be genderless, Essy is a very sexual being and if she doesn't detect a sex in someone, she's bluntly not interested. I'd imagine she'd be more receptive to nagas, those rather cowish in species, and characters with very, very large breasts.
 

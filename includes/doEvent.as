@@ -617,7 +617,7 @@ This license supercedes all previous licenses and remains in force.
 		}		
 	}
 	//Tree Boob fun-times
-	if(eventNo == 2014) {
+	if( false  == 2014) {
 		//UNFINISHED
 	}
 	//A WILD GIACOMO APPEARS
@@ -686,7 +686,7 @@ This license supercedes all previous licenses and remains in force.
 	if(eventNo == 2017) {
 		spriteSelect(23);
 		outputText("Which book are you interested in perusing?", true);
-		if(flags[244] > 0) simpleChoices("Dangerous Plants", 2029, "Traveler's Guide", 2031, "Hentai Comic", 2033, "Yoga Guide", 2940, "Back", 2015);
+		if(flags[UNKNOWN_FLAG_NUMBER_00244] > 0) simpleChoices("Dangerous Plants", 2029, "Traveler's Guide", 2031, "Hentai Comic", 2033, "Yoga Guide", 2940, "Back", 2015);
 		else simpleChoices("Dangerous Plants", 2029, "Traveler's Guide", 2031, "Hentai Comic", 2033, "", 0, "Back", 2015);
 		statScreenRefresh();
 	}
@@ -795,13 +795,13 @@ This license supercedes all previous licenses and remains in force.
 			outputText("The Succubus stops, turns and points to you in derision. \"<i>And YOU! You no-cock, no-cunt having pissant! Take your ass back to the lab before they find out you escaped!!!!!</i>\"\n\n", false);
 
 			outputText("The Succubus resumes her stormy exit. You look at the bottle of Cerulean Potion and wonder if it REALLY had some psychotropics in it. What the hell just happened?!", false);
-			flags[62] = 1;
+			flags[UNKNOWN_FLAG_NUMBER_00062] = 1;
 			doNext(1);
 			return;
 		}
 		if(player.gender == 1) outputText("\"<i>Awwww! Did my blue skin and pointy teeth scare you?</i>\" she says in a childish voice. \"<i>Believe me stud, if I wanted to harm you, I would not have let you wake up at all. I am here because you have 'called' me.</i>\" She teases you with the empty blue bottle you bought from the merchant. \"<i>My essence is in this bottle. Any man who drinks this, I am compelled to return the pleasure by drinking his.</i>\" The demon woman reaches her skinny hand down to your crotch where you see you have become fiercely erect. The demon gently strokes your cock until you begin oozing generous amounts of your own natural lubricants. The demon takes one of her massive breasts and teases you with her fat nipples. \"<i>Open your mouth,</i>\" she demands. \"<i>Take me into your mouth as I will soon take you into mine.</i>\"\n\n", false);
 		else if(player.gender == 3) {
-			flags[111]++;
+			flags[UNKNOWN_FLAG_NUMBER_00111]++;
 			outputText("\nIt is obvious that you have been confronted by a succubus. As the fire illuminates your captor, her grin widens broadly.\n\n", false);
 
 			outputText("\"<i>Well, well, well!</i>\" the Succubus jingles. \"<i>What have we here?! A little girl with a big cock!</i>\"\n\n", false);
@@ -1202,24 +1202,24 @@ This license supercedes all previous licenses and remains in force.
 		beeEncounterLevel2();
 	}
 	//Encounter bee girl level 3 - get raeped.
-	if(eventNo == 2053) {
+	if( false  == 2053) {
 		beeEncounterLevel3();
 		if(gameState > 0) eventParser(5007);
 	}
 	//Talk to bee girl
-	if(eventNo == 2054) {
+	if( false  == 2054) {
 		beeTalk();
 	}
 	//Decline talking to bee-girl
-	if(eventNo == 2055) {
+	if( false  == 2055) {
 		declineBeeTalk();
 	}
 	//Free honey event!
-	if(eventNo == 2056) {
+	if( false  == 2056) {
 		freeHoneyEvent();
 	}
 	//Seduce bee girl
-	if(eventNo == 2057) {
+	if( false  == 2057) {
 		seduceBeeGirl();
 	}
 	//Bee rapes you
@@ -1243,27 +1243,27 @@ This license supercedes all previous licenses and remains in force.
 		beeEncounterLevel3();
 	}
 	//Encounter the wanderer for the first time
-	if(eventNo == 2062) {
+	if( false  == 2062) {
 		wandererFirstMeeting();
 	}
 	//Encounter the wanderer repeat visits
-	if(eventNo == 2063) {
+	if( false  == 2063) {
 		wandererRepeatMeeting();
 	}
 	//Do you help the wanderer?
-	if(eventNo == 2064) {
+	if( false  == 2064) {
 		wandererHelpHim();
 	}
 	//Tell the wanderer to go demon
-	if(eventNo == 2065) {
+	if( false  == 2065) {
 		wandererGoDemon();
 	}
 	//Tell him to stay human
-	if(eventNo == 2066) {
+	if( false  == 2066) {
 		wandererStayHuman();
 	}
 	//Leave the wanderer and ignore him
-	if(eventNo == 2067) {
+	if( false  == 2067) {
 		wandererLeave();
 	}
 	//Generic farm encounter
@@ -1328,7 +1328,7 @@ This license supercedes all previous licenses and remains in force.
 		return;
 	}
 	//Try to pull sword free of tree
-	if(eventNo == 2074) {
+	if( false  == 2074) {
 		tryToTakeSwordInStone();
 	}
 	//Grab marae's boob!
@@ -1337,10 +1337,10 @@ This license supercedes all previous licenses and remains in force.
 		doNext(13);
 		takeDamage(player.HP-1);
 	}
-	if(eventNo == 2076) {
+	if( false  == 2076) {
 		maraeStealLethicite();
 	}
-	if(eventNo == 2077) {
+	if( false  == 2077) {
 		maraeBadEnd();
 	}
 	//Run from corrupt marae
@@ -1464,21 +1464,21 @@ This license supercedes all previous licenses and remains in force.
 		resistMarbleInitially();
 		return;
 	}
-	if(eventNo == 2087) {
-		caressMarble();
-		return;
-	}
-	if(eventNo == 2088) {
-		suckleMarble();
-		doNext(13);
-		return;
-	}
-	if(eventNo == 2089) {
-		doNext(13);
+	// if( false  == 2087) {
+	// 	caressMarble();
+	// 	return;
+	// }
+	// if( false  == 2088) {
+	// 	suckleMarble();
+	// 	doNext(13);
+	// 	return;
+	// }
+	if( false  == 2089) {
 		rapeDAHMARBLEZ();
+		doNext(13);
 		return;
 	}
-	if(eventNo == 2090) {
+	if( false  == 2090) {
 		drinkMarbleMilk();
 		return;
 	}
@@ -1497,7 +1497,7 @@ This license supercedes all previous licenses and remains in force.
 		turnDownMarbleSexRepeat();
 		return;
 	}
-	if(eventNo == 2094) {
+	if( false  == 2094) {
 		turnDownMarbleSexFirstTime();
 		return;
 	}
@@ -1511,11 +1511,11 @@ This license supercedes all previous licenses and remains in force.
 		doNotWantMarbleAddiction();
 		return;
 	}
-	if(eventNo == 2097) {
+	if( false  == 2097) {
 		playerAgreesToDrinkMarbleMilkBottled();
 		return;
 	}
-	if(eventNo == 2098) {
+	if( false  == 2098) {
 		playerRefusesToDrinkBottledMilk();
 		return;
 	}
@@ -1524,11 +1524,11 @@ This license supercedes all previous licenses and remains in force.
 		playerDrinksMarbleMilk();
 		return;
 	}
-	if(eventNo == 2100) {
+	if( false  == 2100) {
 		playerDeclinesToDrinkMarbleMilk();
 		return;
 	}
-	if(eventNo == 2101) {
+	if( false  == 2101) {
 		marbleChoreHelpChooseMilk();
 		return;
 	}
@@ -1537,39 +1537,39 @@ This license supercedes all previous licenses and remains in force.
 		marbleChoreHelpChooseMarble();
 		return;
 	}
-	if(eventNo == 2103) {
+	if( false  == 2103) {
 		marbleChoreRefusal();
 		return;
 	}
-	if(eventNo == 2104) {
+	if( false  == 2104) {
 		AshamedAddictionComfort();
 		return;
 	}
-	if(eventNo == 2105) {
+	if( false  == 2105) {
 		AshamedAddictionBlame();
 		return;
 	}
-	if(eventNo == 2106) {
+	if( false  == 2106) {
 		resistAddiction();
 		return;
 	}
-	if(eventNo == 2107) {
+	if( false  == 2107) {
 		addictionGiveIn()
 		return;
 	}
-	if(eventNo == 2108) {
+	if( false  == 2108) {
 		dumpMarblesMilk();
 		return;
 	}
-	if(eventNo == 2109) {
+	if( false  == 2109) {
 		refuseMarblesMilkAddiction();
 		return;
 	}
-	if(eventNo == 2110) {
+	if( false  == 2110) {
 		ashamedAddictionBegForIt();
 		return;
 	}
-	if(eventNo == 2111) {
+	if( false  == 2111) {
 		doNext(13);
 		marbleCampFuckFUCKFUCKFUCK();
 		return;
@@ -1649,7 +1649,7 @@ This license supercedes all previous licenses and remains in force.
 		doNext(13);
 		return;
 	}
-	if(eventNo == 2126) 
+	if( false  == 2126) 
 	{
 		doNext(1);
 		marbleInfo();
@@ -1671,8 +1671,8 @@ This license supercedes all previous licenses and remains in force.
 		temp7 = 0;
 		temp8 = 0;
 		if(player.hasPerk("Marble's Milk") >= 0 && hasItem("Lactaid",1)) temp2 = 2269;
-		if(hasItem("P.Draft",1) && flags[4] == 0) temp4 = 2273;
-		if(flags[4] > 0) {
+		if(hasItem("P.Draft",1) && flags[UNKNOWN_FLAG_NUMBER_00004] == 0) temp4 = 2273;
+		if(flags[UNKNOWN_FLAG_NUMBER_00004] > 0) {
 			if(hasItem("PinkEgg",1)) temp5 = 2270;
 			if(hasItem("L.PnkEg",1)) temp6 = 2271;
 		}
@@ -1688,7 +1688,7 @@ This license supercedes all previous licenses and remains in force.
 		marbleGathered();
 		return;		
 	}
-	if(eventNo == 2130) 
+	if( false  == 2130) 
 	{
 		doNext(1);
 		talkWithMarbleAtCamp();
@@ -1745,15 +1745,15 @@ This license supercedes all previous licenses and remains in force.
 		masturbateJojo();
 		return;
 	}
-	if(eventNo == 2139) {
+	if( false  == 2139) {
 		oasisBadEnd();
 		return;
 	}
-	if(eventNo == 2140) {
+	if( false  == 2140) {
 		oasisBadEndEpilogue();
 		return;
 	}
-	if(eventNo == 2141) {
+	if( false  == 2141) {
 		oasisSexing();
 		return;
 	}
@@ -1828,17 +1828,17 @@ This license supercedes all previous licenses and remains in force.
 		return;
 	}
 	//Marble 
-	if(eventNo == 2146) {
+	if( false  == 2146) {
 		marbleAfterRapeNo();
 		return;
 	}
 	//after rape - choose to fight
-	if(eventNo == 2147) {
+	if( false  == 2147) {
 		marbleAfterRapeStartFight();
 		return;
 	}
 	//after rape - choose to confront
-	if(eventNo == 2148) {
+	if( false  == 2148) {
 		marbleAfterRapeYes();
 		return;
 	}
@@ -1859,12 +1859,12 @@ This license supercedes all previous licenses and remains in force.
 	if(eventNo == 2150) {
 		spriteSelect(34);
 		//Amily meets Jojo:
-		if(flags[74] == 0 && flags[43] == 1 && amilyFollower()) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00074] == 0 && flags[AMILY_FOLLOWER] == 1 && amilyFollower()) {
 			amilyMeetsPureJojo();
 			return;
 		}
 		//Rathazul & Jojo
-		if(flags[84] == 1 && rand(2) == 0) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00084] == 1 && rand(2) == 0) {
 			catchRathazulNapping();
 			return;
 		}
@@ -1949,22 +1949,22 @@ This license supercedes all previous licenses and remains in force.
 		return;
 	}
 	//Dog BJ
-	if(eventNo == 2155) {
+	if( false  == 2155) {
 		gloryholeDoggie();
 		return;
 	}
 	//Imp BJ
-	if(eventNo == 2156) {
+	if( false  == 2156) {
 		gloryholeImp();
 		return;
 	}
 	//Minotaur BJ
-	if(eventNo == 2157) {
+	if( false  == 2157) {
 		gloryholeMinotaur();
 		return;
 	}
 	//Incubus BJ
-	if(eventNo == 2158) {
+	if( false  == 2158) {
 		gloryholeIncubus();
 		return;
 	}
@@ -2040,28 +2040,28 @@ This license supercedes all previous licenses and remains in force.
 		}
 	}
 	//Fuck faerie
-	if(eventNo == 2170) {
+	if( false  == 2170) {
 		faerieCaptureHJ();
 		return;
 	}
 	//Dont fuck faerie
-	if(eventNo == 2171) {
+	if( false  == 2171) {
 		letFaerieGo();
 		return;
 	}
 	//Encounter kelt
-	if(eventNo == 2172) {
+	if( false  == 2172) {
 		breakingKeltOptions();
 		//keltEncounter();
 		return;
 	}
 	//Explore farm
-	if(eventNo == 2173) {
+	if( false  == 2173) {
 		exploreFarm();
 		return;
 	}
 	//Hook up tit milker
-	if(eventNo == 2174) {
+	if( false  == 2174) {
 		whitneyMilkerHookup();
 		return;
 	}
@@ -2071,22 +2071,22 @@ This license supercedes all previous licenses and remains in force.
 		return;
 	}
 	//Refuse hookup
-	if(eventNo == 2176) {
+	if( false  == 2176) {
 		whitneyMilkerRefusal();
 		return;
 	}
 	//Farm talkie
-	if(eventNo == 2177) {
+	if( false  == 2177) {
 		talkWhitney();
 		return;
 	}	
 	//Farm work
-	if(eventNo == 2178) {
+	if( false  == 2178) {
 		workFarm();
 		return;
 	}
 	//Milked work
-	if(eventNo == 2179) {
+	if( false  == 2179) {
 		getMilked();
 		return;
 	}
@@ -2097,7 +2097,7 @@ This license supercedes all previous licenses and remains in force.
 		return;
 	}
 	//Marble Bad-End Continuation
-	if(eventNo == 2181) {
+	if( false  == 2181) {
 		marbleBadEndFollowup();
 		return;
 	}
@@ -2123,33 +2123,33 @@ This license supercedes all previous licenses and remains in force.
 		return;
 	}
 	//Cock pump go
-	if(eventNo == 2184) {
+	if( false  == 2184) {
 		doNext(13);
 		cockPumping();
 		return;
 	}
 	//Female faerie rape
-	if(eventNo == 2185) {
+	if( false  == 2185) {
 		faerieRAEP();
 		return;
 	}
 	//Female do nothing
-	if(eventNo == 2186) {
+	if( false  == 2186) {
 		faerieDoNothing();
 		return;
 	}
 	//Female shoo
-	if(eventNo == 2187) {
+	if( false  == 2187) {
 		faerieShooAway();
 		return;
 	}
 	//Cow Bad End 1
-	if(eventNo == 2188) {
+	if( false  == 2188) {
 		cowBadEnd1();
 		return;
 	}
 	//Cow Bad End 2
-	if(eventNo == 2189) {
+	if( false  == 2189) {
 		cowBadEnd2();
 		return;
 	}
@@ -2175,47 +2175,47 @@ This license supercedes all previous licenses and remains in force.
 		return;
 	}
 	//Bad end for going full demon
-	if(eventNo == 2192) {
+	if( false  == 2192) {
 		demonBadEnd2();
 		return;
 	}
-	if(eventNo == 2193) {
+	if( false  == 2193) {
 		tamaniFemaleYes();
 		return;
 	}
-	if(eventNo == 2194) {
+	if( false  == 2194) {
 		tamaniFemaleNo();
 		return;
 	}
-	if(eventNo == 2195) {
+	if( false  == 2195) {
 		tamaniFirstTimeConsentual();
 		return;
 	}
-	if(eventNo == 2196) {
+	if( false  == 2196) {
 		tamaniFirstTimeRefusal();
 		return;
 	}
-	if(eventNo == 2197) {
+	if( false  == 2197) {
 		tamaniSecondRefusal();
 		return;
 	}
-	if(eventNo == 2198) {
+	if( false  == 2198) {
 		tamaniSexLetHer();
 		return;
 	}
-	if(eventNo == 2199) {
+	if( false  == 2199) {
 		tamaniSexLost();
 		return;
 	}
-	if(eventNo == 2200) {
+	if( false  == 2200) {
 		tamaniSexWon();
 		return;
 	}
-	if(eventNo == 2201) {
+	if( false  == 2201) {
 		tamaniPregnantFuck();
 		return;
 	}
-	if(eventNo == 2202) {
+	if( false  == 2202) {
 		tamaniPregnantRefusal();
 		return;
 	}
@@ -2224,31 +2224,31 @@ This license supercedes all previous licenses and remains in force.
 		startCombat(17);
 		return;
 	}
-	if(eventNo == 2204) {
+	if( false  == 2204) {
 		exgartuanBeeRape();
 		return;
 	}
-	if(eventNo == 2205) {
+	if( false  == 2205) {
 		freeBeePostRape();
 		return;
 	}
-	if(eventNo == 2206) {
+	if( false  == 2206) {
 		leaveBeePostRape();
 		return;
 	}
-	if(eventNo == 2207) {
+	if( false  == 2207) {
 		drinkFountainEndowment();
 		return;
 	}
-	if(eventNo == 2208) {
+	if( false  == 2208) {
 		discoverTelAdre();
 		return;
 	}
-	if(eventNo == 2209) {
+	if( false  == 2209) {
 		encounterTelAdre();
 		return;
 	}
-	if(eventNo == 2210) {
+	if( false  == 2210) {
 		telAdreTour();
 		return;
 	}
@@ -2260,11 +2260,11 @@ This license supercedes all previous licenses and remains in force.
 		piercingStudio();
 		return;
 	}
-	if(eventNo == 2213) {
+	if( false  == 2213) {
 		pierceMenu();
 		return;
 	}
-	if(eventNo == 2214) {
+	if( false  == 2214) {
 		chooseMaterials();
 		return;
 	}
@@ -2304,63 +2304,63 @@ This license supercedes all previous licenses and remains in force.
 		vulvaPierce();
 		return;
 	}
-	if(eventNo == 2224) {
+	if( false  == 2224) {
 		chooseStud();
 		return;
 	}
-	if(eventNo == 2225) {
+	if( false  == 2225) {
 		chooseRing();
 		return;
 	}
-	if(eventNo == 2226) {
+	if( false  == 2226) {
 		chooseLadder();
 		return;
 	}
-	if(eventNo == 2227) {
+	if( false  == 2227) {
 		chooseHoop();
 		return;
 	}
-	if(eventNo == 2228) {
+	if( false  == 2228) {
 		chooseChain();
 		return;
 	}
-	if(eventNo == 2229) {
+	if( false  == 2229) {
 		chooseMaterials();
 		return;
 	}
-	if(eventNo == 2230) {
+	if( false  == 2230) {
 		normalPierceAssemble();
 		return;
 	}
-	if(eventNo == 2231) {
+	if( false  == 2231) {
 		chooseAmethyst();
 		return;
 	}
-	if(eventNo == 2232) {
+	if( false  == 2232) {
 		chooseDiamond();
 		return;
 	}
-	if(eventNo == 2233) {
+	if( false  == 2233) {
 		chooseGold();
 		return;
 	}
-	if(eventNo == 2234) {
+	if( false  == 2234) {
 		chooseEmerald();
 		return;
 	}
-	if(eventNo == 2235) {
+	if( false  == 2235) {
 		chooseJade();
 		return;
 	}
-	if(eventNo == 2236) {
+	if( false  == 2236) {
 		chooseOnyx();
 		return;
 	}
-	if(eventNo == 2237) {
+	if( false  == 2237) {
 		chooseRuby();
 		return;
 	}
-	if(eventNo == 2238) {
+	if( false  == 2238) {
 		chooseSteel();
 		return;
 	}
@@ -2368,7 +2368,7 @@ This license supercedes all previous licenses and remains in force.
 		aboutYara();
 		return;
 	}
-	if(eventNo == 2240) {
+	if( false  == 2240) {
 		piercingRemove();
 		return;
 	}
@@ -2412,19 +2412,19 @@ This license supercedes all previous licenses and remains in force.
 		chooseAdvancedMaterials();
 		return;
 	}
-	if(eventNo == 2251) {
+	if( false  == 2251) {
 		chooseLethite();
 		return;
 	}
-	if(eventNo == 2252) {
+	if( false  == 2252) {
 		chooseFertite();
 		return;
 	}
-	if(eventNo == 2253) {
+	if( false  == 2253) {
 		chooseFurrite();
 		return;
 	}
-	if(eventNo == 2254) {
+	if( false  == 2254) {
 		chooseCrimstone();
 		return;
 	}
@@ -2440,11 +2440,11 @@ This license supercedes all previous licenses and remains in force.
 		edrynBarTalk();
 		return;
 	}
-	if(eventNo == 2258) {
+	if( false  == 2258) {
 		fuckEdrynNonTaur();
 		return;
 	}
-	if(eventNo == 2259) {
+	if( false  == 2259) {
 		edrynSexSelecter();
 		return;
 	}
@@ -2452,7 +2452,7 @@ This license supercedes all previous licenses and remains in force.
 		keltResistancePussyOut();
 		return;
 	}
-	if(eventNo == 2261) {
+	if( false  == 2261) {
 		fuckKeltsShitUp();
 		return;
 	}
@@ -2476,11 +2476,11 @@ This license supercedes all previous licenses and remains in force.
 		succubusGetsDildoed();
 		return;
 	}
-	if(eventNo == 2267) {
+	if( false  == 2267) {
 		marbleNightSexDudes();
 		return;
 	}
-	if(eventNo == 2268) {
+	if( false  == 2268) {
 		marbleNightSexChicks();
 		return;
 	}
@@ -2508,7 +2508,7 @@ This license supercedes all previous licenses and remains in force.
 		armorShop();
 		return;
 	}
-	if(eventNo == 2275) {
+	if( false  == 2275) {
 		armorBuy();
 		return;
 	}
@@ -2542,11 +2542,11 @@ This license supercedes all previous licenses and remains in force.
 		armorBuy();
 		return;
 	}
-	if(eventNo == 2282) {
+	if( false  == 2282) {
 		debitArmor();
 		return;
 	}
-	if(eventNo == 2283) {
+	if( false  == 2283) {
 		urtaBarDescript();
 		return;
 	}
@@ -2554,11 +2554,11 @@ This license supercedes all previous licenses and remains in force.
 		urtaBarApproach();
 		return;
 	}
-	if(eventNo == 2285) {
+	if( false  == 2285) {
 		drinkUrtasBooze();
 		return;
 	}
-	if(eventNo == 2286) {
+	if( false  == 2286) {
 		drinkUrtasBoozePtTwo();
 		return;
 	}
@@ -2570,27 +2570,27 @@ This license supercedes all previous licenses and remains in force.
 		drinkUrtasBoozeLetHer();
 		return;
 	}
-	if(eventNo == 2289) {
+	if( false  == 2289) {
 		urtaFollowedOutBack();
 		return;
 	}
-	if(eventNo == 2290) {
+	if( false  == 2290) {
 		urtaSneakAwayFromMasturbate();
 		return;
 	}
-	if(eventNo == 2291) {
+	if( false  == 2291) {
 		watchUrtaJerkIt();
 		return;
 	}
-	if(eventNo == 2292) {
+	if( false  == 2292) {
 		dualUrtaMasturbation();
 		return;
 	}
-	if(eventNo == 2293) {
+	if( false  == 2293) {
 		urtaFuckHer();
 		return;
 	}
-	if(eventNo == 2294) {
+	if( false  == 2294) {
 		urtaSneakAwayFromMasturbate();
 		return;
 	}
@@ -2606,11 +2606,11 @@ This license supercedes all previous licenses and remains in force.
 		getAPublicFacialFromUrta();
 		return;
 	}
-	if(eventNo == 2298) {
+	if( false  == 2298) {
 		optionalUrtaBukkake();
 		return;
 	}
-	if(eventNo == 2299) {
+	if( false  == 2299) {
 		declineUrtaBukkake();
 		return;
 	}
@@ -2626,11 +2626,11 @@ This license supercedes all previous licenses and remains in force.
 		dudeFuckingUrtasCooch();
 		return;
 	}
-	if(eventNo == 2303) {
+	if( false  == 2303) {
 		fuckUrtasVagButTooBig();
 		return;
 	}
-	if(eventNo == 2304) {
+	if( false  == 2304) {
 		fuckItAndLeave();
 		return;
 	}
@@ -2638,51 +2638,51 @@ This license supercedes all previous licenses and remains in force.
 		tenderTakeItUpTheAssFromUrta();
 		return;
 	}
-	if(eventNo == 2306) {
+	if( false  == 2306) {
 		supahAkabalEdition();
 		return;
 	}
-	if(eventNo == 2307) {
+	if( false  == 2307) {
 		superAkbalioTalk();
 		return;
 	}
-	if(eventNo == 2308) {
+	if( false  == 2308) {
 		repeatAkbalPostSubmission();
 		return;
 	}
-	if(eventNo == 2309) {
+	if( false  == 2309) {
 		akbalDeny();
 		return;
 	}
-	if(eventNo == 2310) {
+	if( false  == 2310) {
 		 ackbalRepeatAfterWin();
 		return;
 	}
-	if(eventNo == 2311) {
+	if( false  == 2311) {
 		ackbalRepeatAfterLoss();
 		return;
 	}
-	if(eventNo == 2312) {
+	if( false  == 2312) {
 		startuAkabalFightomon();
 		return;
 	}
-	if(eventNo == 2313) {
+	if( false  == 2313) {
 		akbalSubmit();
 		return;
 	}
-	if(eventNo == 2314) {
+	if( false  == 2314) {
 		akbalSubmissionFollowup();
 		return;
 	}
-	if(eventNo == 2315) {
+	if( false  == 2315) {
 		minoAddictionBadEndEncounter();
 		return;
 	}
-	if(eventNo == 2316) {
+	if( false  == 2316) {
 		minoAddictionBadEnd2();
 		return;
 	}
-	if(eventNo == 2317) {
+	if( false  == 2317) {
 		minoCumAddictBadEnd3();
 		return;
 	}
@@ -2706,59 +2706,59 @@ This license supercedes all previous licenses and remains in force.
 		getPiercedByCeraphLoss3();
 		return;
 	}
-	if(eventNo == 2323) {
+	if( false  == 2323) {
 		finalEncounterLevelCeraphPiercingButtholeNipples();
 		return;
 	}
-	if(eventNo == 2324) {
+	if( false  == 2324) {
 		finalCeraphEncounterChoiceNo();
 		return;
 	}
-	if(eventNo == 2325) {
+	if( false  == 2325) {
 		finalCeraphEncounterStartFight();
 		return;
 	}
-	if(eventNo == 2326) {
+	if( false  == 2326) {
 		agreeToBecomeCeraphsFuckpetBondageToyBitchSlut();
 		return;
 	}
-	if(eventNo == 2327) {
+	if( false  == 2327) {
 		agreeToBeABitchPt2();
 		return;
 	}
-	if(eventNo == 2328) {
+	if( false  == 2328) {
 		ceraphFirstTime();
 		return;
 	}
-	if(eventNo == 2329) {
+	if( false  == 2329) {
 		ceraphFirstTimeDecline();
 		return;
 	}
-	if(eventNo == 2330) {
+	if( false  == 2330) {
 		ceraphFirstTimeVolunteer();
 		return;
 	}
-	if(eventNo == 2331) {
+	if( false  == 2331) {
 		ceraphFirstTimeRepeat();
 		return;
 	}
-	if(eventNo == 2332) {
+	if( false  == 2332) {
 		level3CeraphOffer();
 		return;
 	}
-	if(eventNo == 2333) {
+	if( false  == 2333) {
 		level3CeraphOfferNo();
 		return;
 	}
-	if(eventNo == 2334) {
+	if( false  == 2334) {
 		yesOHGODYESPIERCELEVEL3();
 		return;
 	}
-	if(eventNo == 2335) {
+	if( false  == 2335) {
 		ceraphBindingStruggle();
 		return;
 	}
-	if(eventNo == 2336) {
+	if( false  == 2336) {
 		ceraphBoundWait();
 		return;
 	}
@@ -2768,51 +2768,51 @@ This license supercedes all previous licenses and remains in force.
 		takeItem();
 		return;
 	}
-	if(eventNo == 2338) {
+	if( false  == 2338) {
 		marbleCockuBlockuUrta();
 		return;
 	}
-	if(eventNo == 2339) {
+	if( false  == 2339) {
 		TellUrtaDAHTRUUUUF();
 		return;
 	}
-	if(eventNo == 2340) {
+	if( false  == 2340) {
 		comfortUrtaAfterTellinTruuf();
 		return;
 	}
-	if(eventNo == 2341) {
+	if( false  == 2341) {
 		toughenUpUrtaAfterTellingTruuf();
 		return;
 	}
-	if(eventNo == 2342) {
+	if( false  == 2342) {
 		walkoutOnUrtaAfterTellingTruff();
 		return;
 	}
-	if(eventNo == 2343) {
+	if( false  == 2343) {
 		trufftrufftrufftruff();
 		return;
 	}
-	if(eventNo == 2344) {
+	if( false  == 2344) {
 		lietoUrtaAboutMarble();
 		return;
 	}
-	if(eventNo == 2345) {
+	if( false  == 2345) {
 		UrtaTwuWuvOffer();
 		return;
 	}
-	if(eventNo == 2346) {
+	if( false  == 2346) {
 		noUDontLoveUrta();
 		return;
 	}
-	if(eventNo == 2347) {
+	if( false  == 2347) {
 		stayFuckbuddiesAfterShootingDown();
 		return;
 	}
-	if(eventNo == 2348) {
+	if( false  == 2348) {
 		turnDownFuckbuddiesANDLove();
 		return;
 	}
-	if(eventNo == 2349) {
+	if( false  == 2349) {
 		TwuWuvIsBeautifulUrta();
 		return;
 	}
@@ -2820,15 +2820,15 @@ This license supercedes all previous licenses and remains in force.
 		eatUrtaOutNomNomPussy();
 		return;
 	}
-	if(eventNo == 2351) {
+	if( false  == 2351) {
 		giveUrtaCumGlass();
 		return;
 	}
-	if(eventNo == 2352) {
+	if( false  == 2352) {
 		drinkUrtasCumGlass();
 		return;
 	}
-	if(eventNo == 2353) {
+	if( false  == 2353) {
 		setAsideUrtaCumGlass();
 		return;
 	}
@@ -2848,39 +2848,39 @@ This license supercedes all previous licenses and remains in force.
 		oralFiestyUberExplosionUrta();
 		return;
 	}
-	if(eventNo == 2358) {
+	if( false  == 2358) {
 		urtaHomeLuvLuvinsMenu();
 		return;
 	}
-	if(eventNo == 2359) {
+	if( false  == 2359) {
 		declineXmasPresent();
 		return;
 	}
-	if(eventNo == 2360) {
+	if( false  == 2360) {
 		watchUrtaBeABadass();
 		return;
 	}	
-	if(eventNo == 2361) {
+	if( false  == 2361) {
 		openXmasPresent();
 		return;
 	}	
-	if(eventNo == 2362) {
+	if( false  == 2362) {
 		unwrapElfyPresent();
 		return;
 	}	
-	if(eventNo == 2363) {
+	if( false  == 2363) {
 		xmasFuckFollowup();
 		return;
 	}	
-	if(eventNo == 2364) {
+	if( false  == 2364) {
 		xmasFuckFollowupFems();
 		return;
 	}	
-	if(eventNo == 2365) {
+	if( false  == 2365) {
 		xmasSmart();
 		return;
 	}	
-	if(eventNo == 2366) {
+	if( false  == 2366) {
 		xmasPerkM()
 		return;
 	}	
@@ -2888,15 +2888,15 @@ This license supercedes all previous licenses and remains in force.
 		urtasCoochiNeedsFuckedLove();
 		return;
 	}	
-	if(eventNo == 2368) {
+	if( false  == 2368) {
 		discoverAmilyVillage();
 		return;
 	}	
-	if(eventNo == 2369) {
+	if( false  == 2369) {
 		dontExploreAmilyVillage();
 		return;
 	}	
-	if(eventNo == 2370) {
+	if( false  == 2370) {
 		exploreAmilyVillage();
 		return;
 	}
@@ -2904,43 +2904,43 @@ This license supercedes all previous licenses and remains in force.
 		exploreVillageRuin();
 		return;
 	}	
-	if(eventNo == 2372) {
+	if( false  == 2372) {
 		acceptAmilysOfferEagerly();
 		return;
 	}
-	if(eventNo == 2373) {
+	if( false  == 2373) {
 		acceptAmilyOfferHesitantly();
 		return;
 	}
-	if(eventNo == 2374) {
+	if( false  == 2374) {
 		refuseAmilysOffer();
 		return;
 	}
-	if(eventNo == 2375) {
+	if( false  == 2375) {
 		remeetingAmilyAnnounceSelf();
 		return;
 	}
-	if(eventNo == 2376) {
+	if( false  == 2376) {
 		remeetingAmilyScare();
 		return;
 	}
-	if(eventNo == 2377) {
+	if( false  == 2377) {
 		amilyRemeetingContinued();
 		return;
 	}
-	if(eventNo == 2378) {
+	if( false  == 2378) {
 		secondTimeAmilyOfferedAccepted();
 		return;
 	}
-	if(eventNo == 2379) {
+	if( false  == 2379) {
 		secondTimeAmilyRefuseAgain();
 		return;
 	}
-	if(eventNo == 2380) {
+	if( false  == 2380) {
 		repeatAmilyTalk();
 		return;
 	}
-	if(eventNo == 2381) {
+	if( false  == 2381) {
 		tellAmilyToGetLost();
 		return;
 	}
@@ -2948,67 +2948,67 @@ This license supercedes all previous licenses and remains in force.
 		sexWithAmily();
 		return;
 	}
-	if(eventNo == 2383) {
+	if( false  == 2383) {
 		talkToAmily();
 		return;
 	}
-	if(eventNo == 2384) {
+	if( false  == 2384) {
 		talkThenSexWithAmily();
 		return;
 	}
-	if(eventNo == 2385) {
+	if( false  == 2385) {
 		sneakyUberAmilyRemeetingsAnnounce();
 		return;
 	}
-	if(eventNo == 2386) {
+	if( false  == 2386) {
 		scareAmilyRemeetingsProBaws();
 		return;
 	}
-	if(eventNo == 2387) {
+	if( false  == 2387) {
 		announceSelfOnDesperatePleaMeeting();
 		return;
 	}
-	if(eventNo == 2388) {
+	if( false  == 2388) {
 		scareAmilyOnDesperatePleaMeeting();
 		return;
 	}
-	if(eventNo == 2389) {
+	if( false  == 2389) {
 		desperateFinallyAmily();
 		return;
 	}
-	if(eventNo == 2390) {
+	if( false  == 2390) {
 		desperateAmilyPleaAcceptHer();
 		return;
 	}
-	if(eventNo == 2391) {
+	if( false  == 2391) {
 		desperateAmilyPleaTurnDown();
 		return;
 	}
-	if(eventNo == 2392) {
+	if( false  == 2392) {
 		desperateAmilyPleaTurnDownBlunt();
 		return;
 	}
-	if(eventNo == 2393) {
+	if( false  == 2393) {
 		fuckingMouseBitchPopsShitOut();
 		return;
 	}
-	if(eventNo == 2394) {
+	if( false  == 2394) {
 		pregnancyIsScaryGoddamnMousePregnancyImNotWatchingThisShit();
 		return;
 	}
-	if(eventNo == 2395) {
+	if( false  == 2395) {
 		heyIGotTicketsToMicePoppingOut();
 		return;
 	}
-	if(eventNo == 2396) {
+	if( false  == 2396) {
 		helpThatFukkinUngratefulBitchGiveBirth();
 		return;
 	}
-	if(eventNo == 2397) {
+	if( false  == 2397) {
 		thisIsAReallyShittyBadEnd();
 		return;
 	}
-	if(eventNo == 2398) {
+	if( false  == 2398) {
 		thisFunctionProbablySucksTooOhYeahAmilyFunction();
 		return;
 	}
@@ -3022,19 +3022,19 @@ This license supercedes all previous licenses and remains in force.
 		talkWithCuntIMeanAmily(true);
 		return;
 	}
-	if(eventNo == 2401) {
+	if( false  == 2401) {
 		stickItInMouseTwatForTheFirstTimeNOTWORTHALLBULLSHIT();
 		return;
 	}
-	if(eventNo == 2402) {
+	if( false  == 2402) {
 		FirstTimeAmilyTakeCharge();
 		return;
 	}
-	if(eventNo == 2403) {
+	if( false  == 2403) {
 		beSomeKindofNervousDoucheAndWaitForAmily();
 		return;
 	}
-	if(eventNo == 2404) {
+	if( false  == 2404) {
 		kissAmilyInDaMoufFirstTimeIsSomehowBetterThatWay();
 		return;
 	}
@@ -3042,15 +3042,15 @@ This license supercedes all previous licenses and remains in force.
 		amilySexHappens();
 		return;
 	}
-	if(eventNo == 2406) {
+	if( false  == 2406) {
 		amilySexBusiness();
 		return;
 	}
-	if(eventNo == 2407) {
+	if( false  == 2407) {
 		amilySexPlaytimeFirst();
 		return;
 	}
-	if(eventNo == 2408) {
+	if( false  == 2408) {
 		amilySexPtII();
 		return;
 	}
@@ -3062,67 +3062,67 @@ This license supercedes all previous licenses and remains in force.
 		caressAmilyHaveSex();
 		return;
 	}
-	if(eventNo == 2411) {
+	if( false  == 2411) {
 		AmilyGetKissed();
 		return;
 	}
-	if(eventNo == 2412) {
+	if( false  == 2412) {
 		AmilyTakeTheKiss();
 		return;
 	}
-	if(eventNo == 2413) {
+	if( false  == 2413) {
 		continueAmilySmex();
 		return;
 	}
-	if(eventNo == 2414) {
+	if( false  == 2414) {
 		amilyEnjoyShow();
 		return;
 	}
-	if(eventNo == 2415) {
+	if( false  == 2415) {
 		amilyStepTheFuckIn();
 		return;
 	}
-	if(eventNo == 2416) {
+	if( false  == 2416) {
 		AmilyMidSexLevel2();
 		return;
 	}
-	if(eventNo == 2417) {
+	if( false  == 2417) {
 		StripForAmilyYouSlut();
 		return;
 	}
-	if(eventNo == 2418) {
+	if( false  == 2418) {
 		getDownWithSexTiem();
 		return;
 	}
-	if(eventNo == 2419) {
+	if( false  == 2419) {
 		continueWithMoreMidLevelAmilySex();
 		return;
 	}
-	if(eventNo == 2420) {
+	if( false  == 2420) {
 		playAlongWithAmilyWhataDumbBitch();
 		return;
 	}
-	if(eventNo == 2421) {
+	if( false  == 2421) {
 		workToPleaseTheCunt();
 		return;
 	}
-	if(eventNo == 2422) {
+	if( false  == 2422) {
 		AmilyMiddleGradeSexOver();
 		return;
 	}
-	if(eventNo == 2423) {
+	if( false  == 2423) {
 		sayGoodByeToAmilyPostSecks();
 		return;
 	}
-	if(eventNo == 2424) {
+	if( false  == 2424) {
 		stayAfterAmilyMiddleGradeSecks();
 		return;
 	}
-	if(eventNo == 2425) {
+	if( false  == 2425) {
 		amilyHighAffectionSecks();
 		return;
 	}
-	if(eventNo == 2426) {
+	if( false  == 2426) {
 		fuckAmilyPreg();
 		return;
 	}
@@ -3130,7 +3130,7 @@ This license supercedes all previous licenses and remains in force.
 		amilyFollowerEncounter();
 		return;
 	}
-	if(eventNo == 2428) {
+	if( false  == 2428) {
 		amilyAppearance();
 		return;
 	}
@@ -3138,23 +3138,23 @@ This license supercedes all previous licenses and remains in force.
 		talkToAmilyCamp();
 		return;
 	}
-	if(eventNo == 2430) {
+	if( false  == 2430) {
 		fuckTheMouseBitch();
 		return;
 	}
-	if(eventNo == 2431) {
+	if( false  == 2431) {
 		amilyTakesChargeSex();
 		return;
 	}
-	if(eventNo == 2432) {
+	if( false  == 2432) {
 		letAmilyLead();
 		return;
 	}
-	if(eventNo == 2433) {
+	if( false  == 2433) {
 		giveAmilyAPresent();
 		return;
 	}
-	if(eventNo == 2434) {
+	if( false  == 2434) {
 		lumiEncounter();
 		return;
 	}
@@ -3162,23 +3162,23 @@ This license supercedes all previous licenses and remains in force.
 		lumiLabChoices();
 		return;
 	}
-	if(eventNo == 2436) {
+	if( false  == 2436) {
 		lumiShop();
 		return;
 	}
-	if(eventNo == 2437) {
+	if( false  == 2437) {
 		lumiLustDraftPitch();
 		return;
 	}
-	if(eventNo == 2438) {
+	if( false  == 2438) {
 		lumiPitchGobboAle();
 		return;
 	}
-	if(eventNo == 2439) {
+	if( false  == 2439) {
 		lumiPitchOviElixer();
 		return;
 	}
-	if(eventNo == 2440) {
+	if( false  == 2440) {
 		lumiPurchase();
 		return;
 	}
@@ -3202,7 +3202,7 @@ This license supercedes all previous licenses and remains in force.
 		lumiEnhanceDraft();
 		return;
 	}
-	if(eventNo == 2446) {
+	if( false  == 2446) {
 		lumiEnhanceGo();
 		return;
 	}
@@ -3210,23 +3210,23 @@ This license supercedes all previous licenses and remains in force.
 		talkToScylla();
 		return;
 	}
-	if(eventNo == 2448) {
+	if( false  == 2448) {
 		helpScylla();
 		return;
 	}
-	if(eventNo == 2449) {
+	if( false  == 2449) {
 		dontHelpScylla();
 		return;
 	}
-	if(eventNo == 2450) {
+	if( false  == 2450) {
 		scyllaRoundII();
 		return;
 	}
-	if(eventNo == 2451) {
+	if( false  == 2451) {
 		scyllaRoundIIPartII();
 		return;
 	}
-	if(eventNo == 2452) {
+	if( false  == 2452) {
 		scyllaRoundIIPartIII();
 		return;
 	}
@@ -3234,11 +3234,11 @@ This license supercedes all previous licenses and remains in force.
 		giveAmilyPureIncubusDraft();
 		return;
 	}
-	if(eventNo == 2454) {
+	if( false  == 2454) {
 		giveAmilyPureIncubusDraft4Realz();
 		return;
 	}
-	if(eventNo == 2455) {
+	if( false  == 2455) {
 		declineToMakeAmilyFuta();
 		return;
 	}
@@ -3266,71 +3266,71 @@ This license supercedes all previous licenses and remains in force.
 		giveAmilySomePants();
 		return;
 	}
-	if(eventNo == 2462) {
+	if( false  == 2462) {
 		scyllaRoundThreeCUM();
 		return;
 	}
-	if(eventNo == 2463) {
+	if( false  == 2463) {
 		scyllaIIIBellyChat();
 		return;
 	}
-	if(eventNo == 2464) {
+	if( false  == 2464) {
 		scyllaIIIHOWZUBREETH();
 		return;
 	}
-	if(eventNo == 2465) {
+	if( false  == 2465) {
 		scyllaLevelIIIRoundIIIFIGHT();
 		return;
 	}
-	if(eventNo == 2466) {
+	if( false  == 2466) {
 		scyllaIIIFinisher();
 		return;
 	}
-	if(eventNo == 2467) {
+	if( false  == 2467) {
 		getRapedByTamaniYouHypnoSlut();
 		return;
 	}
-	if(eventNo == 2468) {
+	if( false  == 2468) {
 		encounterTamanisDaughters();
 		return;
 	}
-	if(eventNo == 2469) {
+	if( false  == 2469) {
 		playDumbToTamanisDaughters();
 		return;
 	}
-	if(eventNo == 2470) {
+	if( false  == 2470) {
 		fightTamanisDaughters();
 		return;
 	}
-	if(eventNo == 2471) {
+	if( false  == 2471) {
 		fuckYoDaughtersHomie();
 		return;
 	}
-	if(eventNo == 2472) {
+	if( false  == 2472) {
 		legTamanisDaughtersRAEPYou();
 		return;
 	}
-	if(eventNo == 2473) {
+	if( false  == 2473) {
 		tamaniDaughtersCombatLossDrain();
 		return;
 	}
-	if(eventNo == 2474) {
+	if( false  == 2474) {
 		tamaniDaughtersBadEndChoice();
 		return;
 	}
-	if(eventNo == 2475) {
+	if( false  == 2475) {
 		tamaniDaughtersYesBadEndMePlease();
 		return;
 	}
-	if(eventNo == 2476) {
+	if( false  == 2476) {
 		tamaniDaughtersDeclineBadEnd();
 		return;
 	}
-	if(eventNo == 2477) {
+	if( false  == 2477) {
 		tamanisDaughtersFillIndividuallyBADEND();
 		return;
 	}
-	if(eventNo == 2478) {
+	if( false  == 2478) {
 		loseToDaughtersWithTamaniThere();
 		return;
 	}
@@ -3373,23 +3373,23 @@ This license supercedes all previous licenses and remains in force.
 		catAutoLick();
 		return;
 	}
-	if(eventNo == 2488) {
+	if( false  == 2488) {
 		findOutEdrynIsPregnant();
 		return;
 	}
-	if(eventNo == 2489) {
+	if( false  == 2489) {
 		shockedByEdrynsPregnancy();
 		return;
 	}
-	if(eventNo == 2490) {
+	if( false  == 2490) {
 		shockedByPregdrynThenAccept();
 		return;
 	}
-	if(eventNo == 2491) {
+	if( false  == 2491) {
 		beAnAssholeToPregdryn();
 		return;
 	}
-	if(eventNo == 2492) {
+	if( false  == 2492) {
 		pleasedbyPregdryn();
 		return;
 	}
@@ -3397,7 +3397,7 @@ This license supercedes all previous licenses and remains in force.
 		arousedByPregdryn();
 		return;
 	}
-	if(eventNo == 2494) {
+	if( false  == 2494) {
 		pregdrynOffer();
 		return;
 	}
@@ -3409,7 +3409,7 @@ This license supercedes all previous licenses and remains in force.
 		jizzFromEatingPregdrynOut();
 		return;
 	}
-	if(eventNo == 2497) {
+	if( false  == 2497) {
 		ceraphsNiceOffer();
 		return;
 	}
@@ -3428,7 +3428,7 @@ This license supercedes all previous licenses and remains in force.
 		AmilyLeavesBirdJojoTentacles();
 		return;
 	}
-	if(eventNo == 2501) {
+	if( false  == 2501) {
 		aerisDies();
 		return;
 	}
@@ -3457,23 +3457,23 @@ This license supercedes all previous licenses and remains in force.
 		TellRathazulJojoIsHarmless();
 		return;
 	}
-	if(eventNo == 2507) {
+	if( false  == 2507) {
 		marbleIsPissyAndYourTooDumbToTalk();
 		return;
 	}
-	if(eventNo == 2508) {
+	if( false  == 2508) {
 		beAPimpMarbleLovesIt();
 		return;
 	}
-	if(eventNo == 2509) {
+	if( false  == 2509) {
 		srslyPimpinGuyz();
 		return;
 	}
-	if(eventNo == 2510) {
+	if( false  == 2510) {
 		jokeAboutPimpularness();
 		return;
 	}
-	if(eventNo == 2511) {
+	if( false  == 2511) {
 		LucyYouGotSomeSplainingToDo();
 		return;
 	}
@@ -3481,7 +3481,7 @@ This license supercedes all previous licenses and remains in force.
 		BlameMarblezSweetVagoozle();
 		return;
 	}
-	if(eventNo == 2513) {
+	if( false  == 2513) {
 		blameAmilysDumbMouseCunt();
 		return;
 	}
@@ -3497,27 +3497,27 @@ This license supercedes all previous licenses and remains in force.
 		victoryHarpyGetsHerPussyRaped();
 		return;
 	}
-	if(eventNo == 2517) {
+	if( false  == 2517) {
 		meetSophie();
 		return;
 	}
-	if(eventNo == 2518) {
+	if( false  == 2518) {
 		meetSophieRepeat();
 		return;
 	}
-	if(eventNo == 2519) {
+	if( false  == 2519) {
 		fightSophie();
 		return;
 	}
-	if(eventNo == 2520) {
+	if( false  == 2520) {
 		repeatBreastFeeding();
 		return;
 	}
-	if(eventNo == 2521) {
+	if( false  == 2521) {
 		PCIgnoresSophieAndHarpyIsFought();
 		return;
 	}
-	if(eventNo == 2522) {
+	if( false  == 2522) {
 		sophieLookingForDemons();
 		return;
 	}
@@ -3525,19 +3525,19 @@ This license supercedes all previous licenses and remains in force.
 		shootDownSophieSex();
 		return;
 	}
-	if(eventNo == 2524) {
+	if( false  == 2524) {
 		sophieMeetingChoseSex();
 		return;
 	}
-	if(eventNo == 2525) {
+	if( false  == 2525) {
 		FirstTimeSophieForceSex();
 		return;
 	}
-	if(eventNo == 2526) {
+	if( false  == 2526) {
 		sophieMeetingGotLost();
 		return;
 	}
-	if(eventNo == 2527) {
+	if( false  == 2527) {
 		tellSophieYoureForagingForStuff();
 		return;
 	}
@@ -3545,19 +3545,19 @@ This license supercedes all previous licenses and remains in force.
 		cramANippleInIt();
 		return;
 	}
-	if(eventNo == 2529) {
+	if( false  == 2529) {
 		consensualSexSelector();
 		return;
 	}
-	if(eventNo == 2530) {
+	if( false  == 2530) {
 		postSophieSexSnuggle();
 		return;
 	}
-	if(eventNo == 2531) {
+	if( false  == 2531) {
 		postSexSophieSnuggleTurnedDown();
 		return;
 	}
-	if(eventNo == 2532) {
+	if( false  == 2532) {
 		consensualSophieSexNoFit();
 		return;
 	}
@@ -3577,11 +3577,11 @@ This license supercedes all previous licenses and remains in force.
 		fuckDatClit();
 		return;
 	}
-	if(eventNo == 2537) {
+	if( false  == 2537) {
 		tinyDickSupremeSophieLoss();
 		return;
 	}
-	if(eventNo == 2538) {
+	if( false  == 2538) {
 		normalLossRapuuuuSophie();
 		return;
 	}
@@ -3589,55 +3589,55 @@ This license supercedes all previous licenses and remains in force.
 		tooBigForOwnGoodSophieLossRape();
 		return;
 	}
-	if(eventNo == 2540) {
+	if( false  == 2540) {
 		SophieLossRapeNoDonguuuu();
 		return;
 	}
-	if(eventNo == 2541) {
+	if( false  == 2541) {
 		MaraeIIStageII();
 		return;
 	}
-	if(eventNo == 2542) {
+	if( false  == 2542) {
 		MaraePt2RoundIIIPrizes();
 		return;
 	}
-	if(eventNo == 2543) {
+	if( false  == 2543) {
 		MaraeIIFlyAway();
 		return;
 	}
-	if(eventNo == 2544) {
+	if( false  == 2544) {
 		scyllaRoundIVPtII();
 		return;
 	}
-	if(eventNo == 2545) {
+	if( false  == 2545) {
 		scyllaRoundIVPtIII();
 		return;
 	}
-	if(eventNo == 2546) {
+	if( false  == 2546) {
 		scyllaRoundIVPtIVWATCH();
 		return;
 	}
-	if(eventNo == 2547) {
+	if( false  == 2547) {
 		scyllaWatchSecondPartPoorImp();
 		return;
 	}
-	if(eventNo == 2548) {
+	if( false  == 2548) {
 		scyllaWatchThirdPartOhShitSon();
 		return;
 	}
-	if(eventNo == 2549) {
+	if( false  == 2549) {
 		scyllaPtIVKissPtI();
 		return;
 	}
-	if(eventNo == 2550) {
+	if( false  == 2550) {
 		scyllaPtIVKissPtII();
 		return;
 	}
-	if(eventNo == 2551) {
+	if( false  == 2551) {
 		scyllaPtIVKissPtIII();
 		return;
 	}
-	if(eventNo == 2552) {
+	if( false  == 2552) {
 		scyllaPtIVEpilogue();
 		return;
 	}
@@ -3650,7 +3650,7 @@ This license supercedes all previous licenses and remains in force.
 		weaponBuy();
 		return;
 	}
-	if(eventNo == 2555) {
+	if( false  == 2555) {
 		debitWeapon();
 		return;
 	}
@@ -3693,31 +3693,31 @@ This license supercedes all previous licenses and remains in force.
 		scyllaAdictsAnonV();
 		return;
 	}
-	if(eventNo == 2564) {
+	if( false  == 2564) {
 		scyllaPtVFirstTime();
 		return;
 	}
-	if(eventNo == 2565) {
+	if( false  == 2565) {
 		scyllaPtVFirstTimeII();
 		return;
 	}
-	if(eventNo == 2566) {
+	if( false  == 2566) {
 		scyllaPtVRepeat();
 		return;
 	}
-	if(eventNo == 2567) {
+	if( false  == 2567) {
 		scyllaPtVLeave();
 		return;
 	}
-	if(eventNo == 2568) {
+	if( false  == 2568) {
 		scyllaPtVTakeAdvantage();
 		return;
 	}
-	if(eventNo == 2569) {
+	if( false  == 2569) {
 		scyllaPtVShare();
 		return;
 	}
-	if(eventNo == 2570) {
+	if( false  == 2570) {
 		scyllaPtVNoDiscussion();
 		return;
 	}
@@ -3725,19 +3725,19 @@ This license supercedes all previous licenses and remains in force.
 		scyllaPtVMilk();
 		return;
 	}
-	if(eventNo == 2572) {
+	if( false  == 2572) {
 		scyllaPtVMilkII();
 		return;
 	}
-	if(eventNo == 2573) {
+	if( false  == 2573) {
 		scyllaPtVMilkIII();
 		return;
 	}
-	if(eventNo == 2574) {
+	if( false  == 2574) {
 		scyllaPtVMilkIV();
 		return;
 	}
-	if(eventNo == 2575) {
+	if( false  == 2575) {
 		scyllaPtVMilkV();
 		return;
 	}
@@ -3745,19 +3745,19 @@ This license supercedes all previous licenses and remains in force.
 		scyllaPtVCum();
 		return;
 	}
-	if(eventNo == 2577) {
+	if( false  == 2577) {
 		scyllaPtVCumII();
 		return;
 	}
-	if(eventNo == 2578) {
+	if( false  == 2578) {
 		scyllaPtVCumIII();
 		return;
 	}
-	if(eventNo == 2579) {
+	if( false  == 2579) {
 		scyllaPtVCumIV();
 		return;
 	}
-	if(eventNo == 2580) {
+	if( false  == 2580) {
 		scyllaPtVCumV();
 		return;
 	}
@@ -3765,27 +3765,27 @@ This license supercedes all previous licenses and remains in force.
 		scyllaPtVSex();
 		return;
 	}
-	if(eventNo == 2582) {
+	if( false  == 2582) {
 		scyllaPtVSexII();
 		return;
 	}
-	if(eventNo == 2583) {
+	if( false  == 2583) {
 		scyllaPtVSexIII();
 		return;
 	}
-	if(eventNo == 2584) {
+	if( false  == 2584) {
 		scyllaPtVSexIV();
 		return;
 	}
-	if(eventNo == 2585) {
+	if( false  == 2585) {
 		milkerBadEnd1();
 		return;
 	}
-	if(eventNo == 2586) {
+	if( false  == 2586) {
 		leavePonies();
 		return;
 	}
-	if(eventNo == 2587) {
+	if( false  == 2587) {
 		approachPonies();
 		return;
 	}
@@ -3821,7 +3821,7 @@ This license supercedes all previous licenses and remains in force.
 		useVala();
 		return;
 	}
-	if(eventNo == 2596) {
+	if( false  == 2596) {
 		useValaPtII();
 		return;
 	}
@@ -3829,7 +3829,7 @@ This license supercedes all previous licenses and remains in force.
 		healVala();
 		return;
 	}
-	if(eventNo == 2598) {
+	if( false  == 2598) {
 		healValaPartTwoTheHealingHealsOfRevenge();
 		return;
 	}
@@ -3837,39 +3837,39 @@ This license supercedes all previous licenses and remains in force.
 		ValaGetsSexed();
 		return;
 	}
-	if(eventNo == 2600) {
+	if( false  == 2600) {
 		valaGetsSexedPtDuece();
 		return;
 	}
-	if(eventNo == 2601) {
+	if( false  == 2601) {
 		rejectFuckingVala();
 		return;
 	}
-	if(eventNo == 2602) {
+	if( false  == 2602) {
 		loseToValaAsHermPartII();
 		return;
 	}
-	if(eventNo == 2603) {
+	if( false  == 2603) {
 		badEndValaNumber1();
 		return;
 	}
-	if(eventNo == 2604) {
+	if( false  == 2604) {
 		badEndValaNumber2();
 		return;
 	}
-	if(eventNo == 2605) {
+	if( false  == 2605) {
 		badEndValaNumber2Pt2();
 		return;
 	}
-	if(eventNo == 2606) {
+	if( false  == 2606) {
 		loseToValaAsMaleIITight();
 		return;
 	}
-	if(eventNo == 2607) {
+	if( false  == 2607) {
 		loseToValaMaleIILoose();
 		return;
 	}
-	if(eventNo == 2608) {
+	if( false  == 2608) {
 		loseToValaMaleIIVeryLoose();
 		return;
 	}
@@ -3877,19 +3877,19 @@ This license supercedes all previous licenses and remains in force.
 		loseToValaMaleIIGape();
 		return;
 	}
-	if(eventNo == 2610) {
+	if( false  == 2610) {
 		loseToValueFemalePtII();
 		return;
 	}
-	if(eventNo == 2611) {
+	if( false  == 2611) {
 		loseToValaFemale();
 		return;
 	}
-	if(eventNo == 2612) {
+	if( false  == 2612) {
 		valaFightVictoryFuck();
 		return;
 	}
-	if(eventNo == 2613) {
+	if( false  == 2613) {
 		valaFightVictoryFuckPtII();
 		return;
 	}
@@ -3897,11 +3897,11 @@ This license supercedes all previous licenses and remains in force.
 		leftValaAlone();
 		return;
 	}
-	if(eventNo == 2615) {
+	if( false  == 2615) {
 		tryToHealVala();
 		return;
 	}
-	if(eventNo == 2616) {
+	if( false  == 2616) {
 		tryToHealValaWHoney2();
 		return;
 	}
@@ -3909,7 +3909,7 @@ This license supercedes all previous licenses and remains in force.
 		useValaOHYEAHSNAPINTOASLIMJIM();
 		return;
 	}
-	if(eventNo == 2618) {
+	if( false  == 2618) {
 		useValaOHYEAHKOOLAIDPTII();
 		return;
 	}
@@ -3917,7 +3917,7 @@ This license supercedes all previous licenses and remains in force.
 		wakeValaUpBeforeYouGoGo();
 		return;
 	}
-	if(eventNo == 2620) {
+	if( false  == 2620) {
 		wakeMeUpBeforeValaGoGosPtII()
 		return;
 	}
@@ -3929,11 +3929,11 @@ This license supercedes all previous licenses and remains in force.
 		cleansedFirstRemeet();
 		return;
 	}
-	if(eventNo == 2623) {
+	if( false  == 2623) {
 		cleansedValaFuckHerBrainsOut();
 		return;
 	}
-	if(eventNo == 2624) {
+	if( false  == 2624) {
 		cleansedValaFuckHerBrainsOutPtII();
 		return;
 	}
@@ -3945,27 +3945,27 @@ This license supercedes all previous licenses and remains in force.
 		faerieOrgyFuck();
 		return;
 	}
-	if(eventNo == 2627) {
+	if( false  == 2627) {
 		faerieOrgyFuckMaleContinue();
 		return;
 	}
-	if(eventNo == 2628) {
+	if( false  == 2628) {
 		faerieOrgyFuckFemaleContinue();
 		return;
 	}
-	if(eventNo == 2629) {
+	if( false  == 2629) {
 		femaleZetazOverPtII();
 		return;
 	}
-	if(eventNo == 2630) {
+	if( false  == 2630) {
 		hermZetazOverPtII();
 		return;
 	}
-	if(eventNo == 2631) {
+	if( false  == 2631) {
 		malesZetazOverPtII();
 		return;
 	}
-	if(eventNo == 2632) {
+	if( false  == 2632) {
 		zetazBadEndEpilogue();
 		return;
 	}
@@ -3981,18 +3981,18 @@ This license supercedes all previous licenses and remains in force.
 		sexualTortureReleaseZetaz();
 		return;
 	}
-	if(eventNo == 2636) {
+	if( false  == 2636) {
 		sexualInterrogation();
 		return;
 	}
-	if(eventNo == 2637) {
+	if( false  == 2637) {
 		releaseZForInfo();
 		return;
 	}
 	if(eventNo == 2638) {
 		outputText("", true);
 		shortName = "BonStrp";
-		flags[129]++;
+		flags[UNKNOWN_FLAG_NUMBER_00129]++;
 		takeItem();
 		return;
 	}
@@ -4039,11 +4039,11 @@ This license supercedes all previous licenses and remains in force.
 		incubusTransact();
 		return;
 	}
-	if(eventNo == 2647) {
+	if( false  == 2647) {
 		talkToBunnyBunBun();
 		return;
 	}
-	if(eventNo == 2648) {
+	if( false  == 2648) {
 		rapeBunBun();
 		return;
 	}
@@ -4051,7 +4051,7 @@ This license supercedes all previous licenses and remains in force.
 		bunbunFucksYourVag();
 		return;
 	}
-	if(eventNo == 2650) {
+	if( false  == 2650) {
 		bunbunFucksPCInAss();
 		return;
 	}
@@ -4068,171 +4068,171 @@ This license supercedes all previous licenses and remains in force.
 		incubusBuy();
 		return;
 	}
-	if(eventNo == 2654) {
+	if( false  == 2654) {
 		meetRaphaelPtII();
 		return;
 	}
-	if(eventNo == 2655) {
+	if( false  == 2655) {
 		RaphaelFirstMeetingSLAP();
 		return;
 	}
-	if(eventNo == 2656) {
+	if( false  == 2656) {
 		RaphaelFirstMeetingSWOON()
 		return;
 	}
-	if(eventNo == 2657) {
+	if( false  == 2657) {
 		RaphaelFirstMeetingTALK();
 		return;
 	}
-	if(eventNo == 2658) {
+	if( false  == 2658) {
 		RaphaelDress()
 		return;
 	}
-	if(eventNo == 2659) {
+	if( false  == 2659) {
 		RaphaelDressPtII();
 		return;
 	}
-	if(eventNo == 2660) {
+	if( false  == 2660) {
 		RaphaelEncounterIIDressFollowup();
 		return;
 	}
-	if(eventNo == 2661) {
+	if( false  == 2661) {
 		RaphaelSelectDate();
 		return;
 	}
-	if(eventNo == 2662) {
+	if( false  == 2662) {
 		RaphaelChooseReject();
 		return;
 	}
-	if(eventNo == 2663) {
+	if( false  == 2663) {
 		RaphaelChooseFrisk();
 		return;
 	}
-	if(eventNo == 2664) {
+	if( false  == 2664) {
 		friskAcceptChoice();
 		return;
 	}
-	if(eventNo == 2665) {
+	if( false  == 2665) {
 		friskRejectChoice();
 		return;
 	}
-	if(eventNo == 2666) {
+	if( false  == 2666) {
 		friskFondleChoice();
 		return;
 	}
-	if(eventNo == 2667) {
+	if( false  == 2667) {
 		friskSqueezeChoice();
 		return;
 	}
-	if(eventNo == 2668) {
+	if( false  == 2668) {
 		RaphaelPicnic();
 		return;
 	}
-	if(eventNo == 2669) {
+	if( false  == 2669) {
 		RaphaelPicnicII();
 		return;
 	}
-	if(eventNo == 2670) {
+	if( false  == 2670) {
 		RaphaelPicnicEnd();
 		return;
 	}
-	if(eventNo == 2671) {
+	if( false  == 2671) {
 		RaphaelPicnicSkill();
 		return;
 	}
-	if(eventNo == 2672) {
+	if( false  == 2672) {
 		fenceOfferChangeToDiscuss();
 		return;
 	}
-	if(eventNo == 2673) {
+	if( false  == 2673) {
 		fenceRaphaelSexily();
 		return;
 	}
-	if(eventNo == 2674) {
+	if( false  == 2674) {
 		fenceRaphaelSexilyPtII();
 		return;
 	}
-	if(eventNo == 2675) {
+	if( false  == 2675) {
 		RaphaelPostFenceSex();
 		return;
 	}
-	if(eventNo == 2676) {
+	if( false  == 2676) {
 		postRaphaelCoitus();
 		return;
 	}
-	if(eventNo == 2677) {
+	if( false  == 2677) {
 		declinePuttingOutForRogues();
 		return;
 	}
-	if(eventNo == 2678) {
+	if( false  == 2678) {
 		RaphaelPicnicChooseThieving();
 		return;
 	}
-	if(eventNo == 2679) {
+	if( false  == 2679) {
 		thieveryEnding();
 		return;
 	}
-	if(eventNo == 2680) {
+	if( false  == 2680) {
 		RaphaelThieverySmex();
 		return;
 	}
-	if(eventNo == 2681) {
+	if( false  == 2681) {
 		RaphaelThieverySmexPtII();
 		return;
 	}
-	if(eventNo == 2682) {
+	if( false  == 2682) {
 		quiksilverFawkesEndGame();
 		return;
 	}
-	if(eventNo == 2683) {
+	if( false  == 2683) {
 		QuiksilverFawkesPtII();
 		return;
 	}
-	if(eventNo == 2684) {
+	if( false  == 2684) {
 		coverForRaphael();
 		return;
 	}
-	if(eventNo == 2685) {
+	if( false  == 2685) {
 		coverForRaphaelII();
 		return;
 	}
-	if(eventNo == 2686) {
+	if( false  == 2686) {
 		betrayRaphael();
 		return;
 	}
-	if(eventNo == 2687) {
+	if( false  == 2687) {
 		meetRaphael();
 		return;
 	}
-	if(eventNo == 2688) {
+	if( false  == 2688) {
 		declineCrazyPresences();
 		return;
 	}
-	if(eventNo == 2689) {
+	if( false  == 2689) {
 		acceptCrazyPresences();
 		return;
 	}
-	if(eventNo == 2690) {
+	if( false  == 2690) {
 		acceptCrazyPresencesII();
 		return;
 	}
-	if(eventNo == 2691) {
+	if( false  == 2691) {
 		declineGivingAwayLethicite();
 		return;
 	}
-	if(eventNo == 2692) {
+	if( false  == 2692) {
 		giveUpLethicite();
 		return;
 	}
-	if(eventNo == 2693) {
+	if( false  == 2693) {
 		giveLethicitePiece();
 		return;
 	}
-	if(eventNo == 2694) {
+	if( false  == 2694) {
 		giveALLTHELETHICITES();
 		return;
 	}
-	if(eventNo == 2695) {
+	if( false  == 2695) {
 		minotaurSalonFollowUp();
 		return;
 	}
@@ -4256,31 +4256,31 @@ This license supercedes all previous licenses and remains in force.
 		scyllaAndUrtaSittingInATree();
 		return;
 	}
-	if(eventNo == 2698) {
+	if( false  == 2698) {
 		heartBreakHotelInTelAdre();
 		return;
 	}
-	if(eventNo == 2699) {
+	if( false  == 2699) {
 		flipUrtaTheBird();
 		return;
 	}
-	if(eventNo == 2700) {
+	if( false  == 2700) {
 		watchTwoHotBitchesAndJerkIt();
 		return;
 	}
-	if(eventNo == 2701) {
+	if( false  == 2701) {
 		makeUrtaSitOnYourLapWithScylla();
 		return;
 	}
-	if(eventNo == 2702) {
+	if( false  == 2702) {
 		addictionScyllaTakeAdvantageDicksII();
 		return;
 	}
-	if(eventNo == 2703) {
+	if( false  == 2703) {
 		addictionScyllaTakeAdvantageDicksIII();
 		return;
 	}
-	if(eventNo == 2704) {
+	if( false  == 2704) {
 		addictionScyllaTakeAdvantageDicksBonusAndEpilogue();
 		return;
 	}
@@ -4300,39 +4300,39 @@ This license supercedes all previous licenses and remains in force.
 		lactateAndKickAss();
 		return;
 	}
-	if(eventNo == 2709) {
+	if( false  == 2709) {
 		Scylla6YellForHelp();
 		return;
 	}
-	if(eventNo == 2710) {
+	if( false  == 2710) {
 		Scylla6AfterYellTruth();
 		return;
 	}
-	if(eventNo == 2711) {
+	if( false  == 2711) {
 		Scylla6AfterYellLie();
 		return;
 	}
-	if(eventNo == 2712) {
+	if( false  == 2712) {
 		Scylla6MilkyWait();
 		return;
 	}
-	if(eventNo == 2713) {
+	if( false  == 2713) {
 		Scylla6MilkyWaitII();
 		return;
 	}
-	if(eventNo == 2714) {
+	if( false  == 2714) {
 		Scylla6MilkyWaitIII();
 		return;
 	}
-	if(eventNo == 2715) {
+	if( false  == 2715) {
 		Scylla6NoMilkGetHelp();
 		return;
 	}
-	if(eventNo == 2716) {
+	if( false  == 2716) {
 		Scylla6NoMilkTruth();
 		return;
 	}
-	if(eventNo == 2717) {
+	if( false  == 2717) {
 		Scylla6NoMilkLie();
 		return;
 	}
@@ -4340,83 +4340,83 @@ This license supercedes all previous licenses and remains in force.
 		Scylla6NoMilkSubmit();
 		return;
 	}
-	if(eventNo == 2719) {
+	if( false  == 2719) {
 		Scylla6NoMilkSubmitII();
 		return;
 	}
-	if(eventNo == 2720) {
+	if( false  == 2720) {
 		Scylla6NoMilkSubmitIII();
 		return;
 	}
-	if(eventNo == 2721) {
+	if( false  == 2721) {
 		Scylla6NoMilkSubmitIV();
 		return;
 	}
-	if(eventNo == 2722) {
+	if( false  == 2722) {
 		Scylla6NoMilkRAPETHEWORLD();
 		return;
 	}
-	if(eventNo == 2723) {
+	if( false  == 2723) {
 		Scylla6NoMilkRapeII();
 		return;
 	}
-	if(eventNo == 2724) {
+	if( false  == 2724) {
 		Scylla6NoMilkRapeIII();
 		return;
 	}
-	if(eventNo == 2725) {
+	if( false  == 2725) {
 		Scylla6NoMilkRapeIV();
 		return;
 	}
-	if(eventNo == 2726) {
+	if( false  == 2726) {
 		tellUrtaNoMoreScylla();
 		return;
 	}
-	if(eventNo == 2727) {
+	if( false  == 2727) {
 		tellUrtaMoreScyllaIsFine();
 		return;
 	}
-	if(eventNo == 2728) {
+	if( false  == 2728) {
 		leaveUrtaAfterScyllaConfrontation();
 		return;
 	}
-	if(eventNo == 2729) {
+	if( false  == 2729) {
 		tellUrtaToBeADrunkenHussy();
 		return;
 	}
-	if(eventNo == 2730) {
+	if( false  == 2730) {
 		tellUrtaToStopBeingALush();
 		return;
 	}
-	if(eventNo == 2731) {
+	if( false  == 2731) {
 		tellUrtaToStayTheSame();
 		return;
 	}
-	if(eventNo == 2732) {
+	if( false  == 2732) {
 		turnDownDominikasKnowledge();
 		return;
 	}
-	if(eventNo == 2733) {
+	if( false  == 2733) {
 		acceptDominikasKnowledge();
 		return;
 	}
-	if(eventNo == 2734) {
+	if( false  == 2734) {
 		fellatrixSexWarmup();
 		return;
 	}
-	if(eventNo == 2735) {
+	if( false  == 2735) {
 		declineFellatrixOral();
 		return;
 	}
-	if(eventNo == 2736) {
+	if( false  == 2736) {
 		declineFellatrixOralHARDCORE();
 		return;
 	}
-	if(eventNo == 2737) {
+	if( false  == 2737) {
 		declineFellatrixOralSUPERHARDCORE();
 		return;
 	}
-	if(eventNo == 2738) {
+	if( false  == 2738) {
 		acceptFellatrixOral();
 		return;
 	}
@@ -4436,15 +4436,15 @@ This license supercedes all previous licenses and remains in force.
 		dickDownGnollClit();
 		return;
 	}
-	if(eventNo == 2743) {
+	if( false  == 2743) {
 		dickInGnollAss();
 		return;
 	}
-	if(eventNo == 2744) {
+	if( false  == 2744) {
 		suckGnollClit();
 		return;
 	}
-	if(eventNo == 2745) {
+	if( false  == 2745) {
 		takeGnollClit();
 		return;
 	}
@@ -4452,39 +4452,39 @@ This license supercedes all previous licenses and remains in force.
 		hellHoundPropahRape();
 		return;
 	}
-	if(eventNo == 2747) {
+	if( false  == 2747) {
 		agreeWithDominika();
 		return;
 	}
-	if(eventNo == 2748) {
+	if( false  == 2748) {
 		ehhhhDominika();
 		return;
 	}
-	if(eventNo == 2749) {
+	if( false  == 2749) {
 		disagreeDominika();
 		return;
 	}
-	if(eventNo == 2750) {
+	if( false  == 2750) {
 		amilyIsTotallyALesbo();
 		return;
 	}
-	if(eventNo == 2751) {
+	if( false  == 2751) {
 		amilyLesboStopHer();
 		return;
 	}
-	if(eventNo == 2752) {
+	if( false  == 2752) {
 		amilyLesboLetHerGo();
 		return;
 	}
-	if(eventNo == 2753) {
+	if( false  == 2753) {
 		amilyPostConfessionGirlRemeeting();
 		return;
 	}
-	if(eventNo == 2754) {
+	if( false  == 2754) {
 		amilyOnGirlSurpriseBonerAcceptance();
 		return;
 	}
-	if(eventNo == 2755) {
+	if( false  == 2755) {
 		amilyOnGirlSurpriseBonerREJECT();
 		return;
 	}
@@ -4496,43 +4496,43 @@ This license supercedes all previous licenses and remains in force.
 		hermilyOnFemalePC();
 		return;
 	}
-	if(eventNo == 2758) {
+	if( false  == 2758) {
 		pcBirthsAmilysKidsQuestVersion();
 		return;
 	}
-	if(eventNo == 2759) {
+	if( false  == 2759) {
 		postBirthingEndChoices();
 		return;
 	}
-	if(eventNo == 2760) {
+	if( false  == 2760) {
 		acceptAmilyAsYourFemaleWaifu();
 		return;
 	}
-	if(eventNo == 2761) {
+	if( false  == 2761) {
 		declineButBeFriends();
 		return;
 	}
-	if(eventNo == 2762) {
+	if( false  == 2762) {
 		notInterestedInDumbshitMouseBitches();
 		return;
 	}
-	if(eventNo == 2763) {
+	if( false  == 2763) {
 		amilyNewGenderConfrontation();
 		return;
 	}
-	if(eventNo == 2764) {
+	if( false  == 2764) {
 		whyNotHerms();
 		return;
 	}
-	if(eventNo == 2765) {
+	if( false  == 2765) {
 		maybeHermsAintAllBadBITCH();
 		return;
 	}
-	if(eventNo == 2766) {
+	if( false  == 2766) {
 		beAmilysDadAsAHerm();
 		return;
 	}
-	if(eventNo == 2767) {
+	if( false  == 2767) {
 		fuckNoYouWontBeAmilysHermDaddy();
 		return;
 	}
@@ -4540,27 +4540,27 @@ This license supercedes all previous licenses and remains in force.
 		makeAmilyAHerm();
 		return;
 	}
-	if(eventNo == 2769) {
+	if( false  == 2769) {
 		takeChargeAmilyFuck();
 		return;
 	}
-	if(eventNo == 2770) {
+	if( false  == 2770) {
 		takeChargeAmilyMouseMilk();
 		return;
 	}
-	if(eventNo == 2771) {
+	if( false  == 2771) {
 		takeChargeAmilyEatOut();
 		return;
 	}
-	if(eventNo == 2772) {
+	if( false  == 2772) {
 		takeChargeAmilyGetSucked();
 		return;
 	}
-	if(eventNo == 2773) {
+	if( false  == 2773) {
 		takeChargeAmilyScissorMeTimbers();
 		return;
 	}
-	if(eventNo == 2774) {
+	if( false  == 2774) {
 		takeChargeAmilyMountHer();
 		return;
 	}
@@ -4568,7 +4568,7 @@ This license supercedes all previous licenses and remains in force.
 		makeChildren();
 		return;
 	}
-	if(eventNo == 2776) {
+	if( false  == 2776) {
 		nagaRapesPt2TheExtremeContinuationOfAwesome();
 		return;
 	}
@@ -4604,63 +4604,63 @@ This license supercedes all previous licenses and remains in force.
 		buyGymLifeTimeMembership();
 		return;
 	}
-	if(eventNo == 2785) {
+	if( false  == 2785) {
 		weightLifting();
 		return;
 	}
-	if(eventNo == 2786) {
+	if( false  == 2786) {
 		goJogging();
 		return;
 	}
-	if(eventNo == 2787) {
+	if( false  == 2787) {
 		rapeCorruptAmily1();
 		return;
 	}
-	if(eventNo == 2788) {
+	if( false  == 2788) {
 		rapeCorruptAmily1Male();
 		return;
 	}
-	if(eventNo == 2789) {
+	if( false  == 2789) {
 		rapeCorruptAmily1Female();
 		return;
 	}
-	if(eventNo == 2790) {
+	if( false  == 2790) {
 		rapeCorruptAmily2Male();
 		return;
 	}
-	if(eventNo == 2791) {
+	if( false  == 2791) {
 		rapeCorruptAmily2Female();
 		return;
 	}
-	if(eventNo == 2792) {
+	if( false  == 2792) {
 		rapeCorruptAmily3Male();
 		return;
 	}
-	if(eventNo == 2793) {
+	if( false  == 2793) {
 		rapeCorruptAmily3Female();
 		return;
 	}
-	if(eventNo == 2794) {
+	if( false  == 2794) {
 		rapeCorruptAmily4Meeting();
 		return;
 	}
-	if(eventNo == 2795) {
+	if( false  == 2795) {
 		rapeCorruptAmily4Male();
 		return;
 	}
-	if(eventNo == 2796) {
+	if( false  == 2796) {
 		rapeCorruptAmily4Female();
 		return;
 	}
-	if(eventNo == 2797) {
+	if( false  == 2797) {
 		corruptAmilyYouDeclineMaxxingHerDick();
 		return;
 	}
-	if(eventNo == 2798) {
+	if( false  == 2798) {
 		corruptAmilyGetsDickMaxxedOut();
 		return;
 	}
-	if(eventNo == 2799) {
+	if( false  == 2799) {
 		amilyDrinksSuccubusDelight();
 		return;
 	}
@@ -4684,7 +4684,7 @@ This license supercedes all previous licenses and remains in force.
 		corruptAmilysPussyGetsMotherfuckingFucked();
 		return;
 	}
-	if(eventNo == 2805) {
+	if( false  == 2805) {
 		talkWithCORRUPTCUNT();
 		return;
 	}
@@ -4700,19 +4700,19 @@ This license supercedes all previous licenses and remains in force.
 		cottonGreeting();
 		return;
 	}
-	if(eventNo == 2809) {
+	if( false  == 2809) {
 		turnDownYogaWifCottonFirstTime();
 		return;
 	}
-	if(eventNo == 2810) {
+	if( false  == 2810) {
 		acceptYoga();
 		return;
 	}
-	if(eventNo == 2811) {
+	if( false  == 2811) {
 		leaveAfterYoga();
 		return;
 	}
-	if(eventNo == 2812) {
+	if( false  == 2812) {
 		cottonShowerFunTimes();
 		return;
 	}
@@ -4724,11 +4724,11 @@ This license supercedes all previous licenses and remains in force.
 		cottonFucksYou();
 		return;
 	}
-	if(eventNo == 2815) {
+	if( false  == 2815) {
 		serviceFirstTimeCotton();
 		return;
 	}
-	if(eventNo == 2816) {
+	if( false  == 2816) {
 		refuseFirstTimeCotton();
 		return;
 	}
@@ -4744,31 +4744,31 @@ This license supercedes all previous licenses and remains in force.
 		cottonTantricSex();
 		return;
 	}
-	if(eventNo == 2820) {
+	if( false  == 2820) {
 		leaveCotton();
 		return;
 	}
-	if(eventNo == 2821) {
+	if( false  == 2821) {
 		changingRoom();
 		return;
 	}
-	if(eventNo == 2822) {
+	if( false  == 2822) {
 		meetJasun();
 		return;
 	}
-	if(eventNo == 2823) {
+	if( false  == 2823) {
 		meetJasun2();
 		return;
 	}
-	if(eventNo == 2824) {
+	if( false  == 2824) {
 		turnAwayFromAdj();
 		return;
 	}
-	if(eventNo == 2825) {
+	if( false  == 2825) {
 		acceptJasunsAdvances();
 		return;
 	}
-	if(eventNo == 2826) {
+	if( false  == 2826) {
 		jasunSecks();
 		return;
 	}
@@ -4776,53 +4776,53 @@ This license supercedes all previous licenses and remains in force.
 		exploreShowers();
 		return;
 	}
-	if(eventNo == 2828) {
+	if( false  == 2828) {
 		leaveShowers();
 		return;
 	}
-	if(eventNo == 2829) {
+	if( false  == 2829) {
 		useTheSexMachine();
 		return;
 	}
 	if(eventNo == 2830) {
 		//[doughnuts] – some thickness, lots of – tone. (+hips and butt!)
-		flags[198] = "doughnuts";
-		flags[199] = 5;
+		flags[TEMP_STORAGE_PASTRY_NAME] = "doughnuts";
+		flags[TEMP_STORAGE_PASTRY_PRICE] = 5;
 		nomnomnom();
 		return;
 	}
 	if(eventNo == 2831) {
 		//[cookies] – thickness and a little – tone (+hips)
-		flags[198] = "cookies";
-		flags[199] = 4;
+		flags[TEMP_STORAGE_PASTRY_NAME] = "cookies";
+		flags[TEMP_STORAGE_PASTRY_PRICE] = 4;
 		nomnomnom();
 		return;
 	}
 	if(eventNo == 2832) {
 		//[brownies] – lots of thickness (chance of +butt)
-		flags[198] = "brownies";
-		flags[199] = 3;
+		flags[TEMP_STORAGE_PASTRY_NAME] = "brownies";
+		flags[TEMP_STORAGE_PASTRY_PRICE] = 3;
 		nomnomnom();
 		return;
 	}
 	if(eventNo == 2833) {
 		//[cupcakes] – lots of – tone (chance of +hips)
-		flags[198] = "cupcakes";
-		flags[199] = 3;
+		flags[TEMP_STORAGE_PASTRY_NAME] = "cupcakes";
+		flags[TEMP_STORAGE_PASTRY_PRICE] = 3;
 		nomnomnom();
 		return;
 	}
 	if(eventNo == 2834) {
 		//[pound cake] – even split of + thickness and – tone.  (+butt)
-		flags[198] = "pound cake";
-		flags[199] = 4;	
+		flags[TEMP_STORAGE_PASTRY_NAME] = "pound cake";
+		flags[TEMP_STORAGE_PASTRY_PRICE] = 4;	
 		nomnomnom();
 		return;
 	}
 	if(eventNo == 2835) {
 		//[mino cum eclair] – helps your cravings and – tone!, LUST!
-		flags[198] = "eclair";
-		flags[199] = 10;
+		flags[TEMP_STORAGE_PASTRY_NAME] = "eclair";
+		flags[TEMP_STORAGE_PASTRY_PRICE] = 10;
 		nomnomnom();
 		return;
 	}
@@ -4838,23 +4838,23 @@ This license supercedes all previous licenses and remains in force.
 		mudFacial();
 		return;
 	}
-	if(eventNo == 2839) {
+	if( false  == 2839) {
 		heckelTraining();
 		return;
 	}
-	if(eventNo == 2840) {
+	if( false  == 2840) {
 		heckelOrallyFixated();
 		return;
 	}
-	if(eventNo == 2841) {
+	if( false  == 2841) {
 		heckelOralFixationII();
 		return;
 	}
-	if(eventNo == 2842) {
+	if( false  == 2842) {
 		heckelLovesDaAnal();
 		return;
 	}
-	if(eventNo == 2843) {
+	if( false  == 2843) {
 		heckelLovesAnal2();
 		return;
 	}
@@ -4866,39 +4866,39 @@ This license supercedes all previous licenses and remains in force.
 		approachIfris();
 		return;
 	}
-	if(eventNo == 2846) {
+	if( false  == 2846) {
 		workOutForIfris();
 		return;
 	}
-	if(eventNo == 2847) {
+	if( false  == 2847) {
 		askIfrisToJoinYou();
 		return;
 	}
-	if(eventNo == 2848) {
+	if( false  == 2848) {
 		liftWhileIfrisWatches();
 		return;
 	}
-	if(eventNo == 2849) {
+	if( false  == 2849) {
 		showOffForIfris();
 		return;
 	}
-	if(eventNo == 2850) {
+	if( false  == 2850) {
 		dominidrama();
 		return;
 	}
-	if(eventNo == 2851) {
+	if( false  == 2851) {
 		dominidramaYes();
 		return;
 	}
-	if(eventNo == 2852) {
+	if( false  == 2852) {
 		dominidramaNo();
 		return;
 	}
-	if(eventNo == 2853) {
+	if( false  == 2853) {
 		findBazaar();
 		return;
 	}
-	if(eventNo == 2854) {
+	if( false  == 2854) {
 		approachBazaarGuard();
 		return;
 	}
@@ -4921,11 +4921,11 @@ This license supercedes all previous licenses and remains in force.
 		joeyMassage();
 		return;
 	}
-	if(eventNo == 2858) {
+	if( false  == 2858) {
 		joeysMassageWifNoExtraJizz();
 		return;
 	}
-	if(eventNo == 2859) {
+	if( false  == 2859) {
 		joeysMassageWithEXTRASpooge();
 		return;
 	}
@@ -4933,7 +4933,7 @@ This license supercedes all previous licenses and remains in force.
 		cinnabarGreeting();
 		return;
 	}
-	if(eventNo == 2861) {
+	if( false  == 2861) {
 		cinnabarNonHugeDickings();
 		return;
 	}
@@ -4941,15 +4941,15 @@ This license supercedes all previous licenses and remains in force.
 		cinnabarGetsFUKKKKED();
 		return;
 	}
-	if(eventNo == 2863) {
+	if( false  == 2863) {
 		fuckCinnabarHugerAndCorruptedEr();
 		return;
 	}
-	if(eventNo == 2864) {
+	if( false  == 2864) {
 		cinnabarHuger();
 		return;
 	}
-	if(eventNo == 2865) {
+	if( false  == 2865) {
 		cinnabarHuge();
 		return;
 	}
@@ -4957,15 +4957,15 @@ This license supercedes all previous licenses and remains in force.
 		cinnabarMultiCockPortalFuckFest();
 		return;
 	}
-	if(eventNo == 2867) {
+	if( false  == 2867) {
 		startAFightWithCeraph();
 		return;
 	}
-	if(eventNo == 2868) {
+	if( false  == 2868) {
 		runFromCeraphsNiceDeal();
 		return;
 	}
-	if(eventNo == 2869) {
+	if( false  == 2869) {
 		tradeCeraphSomething();
 		return;
 	}
@@ -4981,11 +4981,11 @@ This license supercedes all previous licenses and remains in force.
 		tradeCeraphCrotchityBits();
 		return;
 	}
-	if(eventNo == 2873) {
+	if( false  == 2873) {
 		bailBeforeCeraphYoinksYourNads();
 		return;
 	}
-	if(eventNo == 2874) {
+	if( false  == 2874) {
 		giveUpYourBallsOrWhateverForLessFetishes();
 		return;
 	}
@@ -5001,7 +5001,7 @@ This license supercedes all previous licenses and remains in force.
 		RoxanneChooseApproachOrRepeat();
 		return;
 	}
-	if(eventNo == 2878) {
+	if( false  == 2878) {
 		roxanneDrinkingContest();
 		return;
 	}
@@ -5013,20 +5013,20 @@ This license supercedes all previous licenses and remains in force.
 		roxanneCunnilingus();
 		return;
 	}
-	if(eventNo == 2881) {
+	if( false  == 2881) {
 		roxanneRimjob();
 		return;
 	}
-	if(eventNo == 2882) {
+	if( false  == 2882) {
 		roxanneReamsYouNormal();
 		return;
 	}
-	if(eventNo == 2883) {
+	if( false  == 2883) {
 		roxanneFucksYourAssOHGODITSHUGE();
 		return;
 	}
 	if(eventNo == 2884) {
-		flags[226] = 1;
+		flags[UNKNOWN_FLAG_NUMBER_00226] = 1;
 		roxanneDrinkingContest();
 		return;
 	}
@@ -5042,7 +5042,7 @@ This license supercedes all previous licenses and remains in force.
 		joeyAndrogyny();
 		return;
 	}
-	if(eventNo == 2888) {
+	if( false  == 2888) {
 		tradeWithFuckingSharkBitches();
 		return;
 	}
@@ -5050,7 +5050,7 @@ This license supercedes all previous licenses and remains in force.
 		readSharkCuntManual();
 		return;
 	}
-	if(eventNo == 2890) {
+	if( false  == 2890) {
 		readSharkCuntManual2();
 		return;
 	}
@@ -5058,7 +5058,7 @@ This license supercedes all previous licenses and remains in force.
 		sharkEdgingGuideLOL();
 		return;
 	}
-	if(eventNo == 2892) {
+	if( false  == 2892) {
 		readSharkEdgingGuideLOL();
 		return;
 	}
@@ -5066,39 +5066,39 @@ This license supercedes all previous licenses and remains in force.
 		sharkgirlPronz();
 		return;
 	}
-	if(eventNo == 2894) {
+	if( false  == 2894) {
 		readSharkgirlPornzYouFuckingPervertAsshole();
 		return;
 	}
-	if(eventNo == 2895) {
+	if( false  == 2895) {
 		talkToASharkCoochie();
 		return;
 	}
-	if(eventNo == 2896) {
+	if( false  == 2896) {
 		leaveSumSharkPussyOnTheBeach();
 		return;
 	}
-	if(eventNo == 2897) {
+	if( false  == 2897) {
 		fightSharkCunt();
 		return;
 	}
-	if(eventNo == 2898) {
+	if( false  == 2898) {
 		defeatIzma();
 		return;
 	}
-	if(eventNo == 2899) {
+	if( false  == 2899) {
 		IzmaWins();
 		return;
 	}
-	if(eventNo == 2900) {
+	if( false  == 2900) {
 		loseToIzma();
 		return;
 	}
-	if(eventNo == 2901) {
+	if( false  == 2901) {
 		finalIzmaSubmission();
 		return;
 	}
-	if(eventNo == 2902) {
+	if( false  == 2902) {
 		IzmaBadEnd();
 		return;
 	}
@@ -5110,27 +5110,27 @@ This license supercedes all previous licenses and remains in force.
 		useVagooOnIzmaWin();
 		return;
 	}
-	if(eventNo == 2905) {
+	if( false  == 2905) {
 		eatIzmasLeafAfterRapinHer();
 		return;
 	}
-	if(eventNo == 2906) {
+	if( false  == 2906) {
 		dontEatIzamsLeafAfterRape();
 		return;
 	}
-	if(eventNo == 2907) {
+	if( false  == 2907) {
 		takeItInZeButtVictoryLikeFromIzma();
 		return;
 	}
-	if(eventNo == 2908) {
+	if( false  == 2908) {
 		leaveIzmaVictoryTease();
 		return;
 	}
-	if(eventNo == 2909) {
+	if( false  == 2909) {
 		chooseIzmaTooth();
 		return;
 	}
-	if(eventNo == 2910) {
+	if( false  == 2910) {
 		chooseIzmaGloves();
 		return;
 	}
@@ -5150,31 +5150,31 @@ This license supercedes all previous licenses and remains in force.
 		meetIzmaAtLake();
 		return;
 	}
-	if(eventNo == 2915) {
+	if( false  == 2915) {
 		chooseYourIzmaWeapon();
 		return;
 	}
-	if(eventNo == 2916) {
+	if( false  == 2916) {
 		izmaLakeTurnedDownCampSex();
 		return;
 	}
-	if(eventNo == 2917) {
+	if( false  == 2917) {
 		izmaLakeSexAsEquals();
 		return;
 	}
-	if(eventNo == 2918) {
+	if( false  == 2918) {
 		izmaLakeDominate();
 		return;
 	}
-	if(eventNo == 2919) {
+	if( false  == 2919) {
 		submitToLakeIzma();
 		return;
 	}
-	if(eventNo == 2920) {
+	if( false  == 2920) {
 		acceptIzmaAsYourBitch();
 		return;
 	}
-	if(eventNo == 2921) {
+	if( false  == 2921) {
 		IzmaStayAtTheLakeBitch();
 		return;
 	}
@@ -5182,7 +5182,7 @@ This license supercedes all previous licenses and remains in force.
 		izmaFollowerMenu();
 		return;
 	}
-	if(eventNo == 2923) {
+	if( false  == 2923) {
 		izmaPearance();
 		return;
 	}
@@ -5206,11 +5206,11 @@ This license supercedes all previous licenses and remains in force.
 		followerIzmaTakesIt69();
 		return;
 	}
-	if(eventNo == 2929) {
+	if( false  == 2929) {
 		talkWivIzma();
 		return;
 	}
-	if(eventNo == 2930) {
+	if( false  == 2930) {
 		chooseNotToFlirtWithIzma();
 		return;
 	}
@@ -5218,7 +5218,7 @@ This license supercedes all previous licenses and remains in force.
 		chooseToFlirtWithIzma();
 		return;
 	}
-	if(eventNo == 2932) {
+	if( false  == 2932) {
 		followMinotaurIntoBackroom();
 		return;
 	}
@@ -5230,19 +5230,19 @@ This license supercedes all previous licenses and remains in force.
 		handOverIngredientsItBeBakingTimeYo();
 		return;
 	}
-	if(eventNo == 2935) {
+	if( false  == 2935) {
 		sneakAwayFromMaddie();
 		return;
 	}
-	if(eventNo == 2936) {
+	if( false  == 2936) {
 		waitForSlutCake();
 		return;
 	}
-	if(eventNo == 2937) {
+	if( false  == 2937) {
 		runAwayFromMaddiiiieee();
 		return;
 	}
-	if(eventNo == 2938) {
+	if( false  == 2938) {
 		talkToMaddie();
 		return;
 	}
@@ -5274,7 +5274,7 @@ This license supercedes all previous licenses and remains in force.
 		doNext(2017);
 		return;
 	}
-	if(eventNo == 2942) {
+	if( false  == 2942) {
 		gatASharkTooth();
 		return;
 	}
@@ -5282,7 +5282,7 @@ This license supercedes all previous licenses and remains in force.
 		izmaKidsPlaytime();
 		return;
 	}
-	if(eventNo == 2944) {
+	if( false  == 2944) {
 		firstTimeDeclineIzmasKdiddlezlijfhdjkfhslkfbsjkhfbs(); 
 		return;
 	}
@@ -5294,7 +5294,7 @@ This license supercedes all previous licenses and remains in force.
 		inCampRideIzmasDickDongTheWitchIsDead();
 		return;
 	}
-	if(eventNo == 2947) {
+	if( false  == 2947) {
 		IzmaCampBooks();
 		return;
 	}
@@ -5314,23 +5314,23 @@ This license supercedes all previous licenses and remains in force.
 		stash(false);
 		return;
 	}
-	if(eventNo == 2952) {
+	if( false  == 2952) {
 		leaveAngryIzzy();
 		return;
 	}
-	if(eventNo == 2953) {
+	if( false  == 2953) {
 		unwelcomeFightCowGal();
 		return;
 	}
-	if(eventNo == 2954) {
+	if( false  == 2954) {
 		fightIsabella();
 		return;
 	}
-	if(eventNo == 2955) {
+	if( false  == 2955) {
 		tryToTalkDownAngryCow();
 		return;
 	}
-	if(eventNo == 2956) {
+	if( false  == 2956) {
 		nomOnMommaIzzysTits();
 		return;
 	}
@@ -5338,19 +5338,19 @@ This license supercedes all previous licenses and remains in force.
 		izzyGivesSmallWangsFreeOral();
 		return;
 	}
-	if(eventNo == 2958) {
+	if( false  == 2958) {
 		volunteerToSlurpCowCunt();
 		return;
 	}
-	if(eventNo == 2959) {
+	if( false  == 2959) {
 		IsabellaWinsAndSpanks();
 		return;
 	}
-	if(eventNo == 2960) {
+	if( false  == 2960) {
 		isabellaRapesYouWithHerAss();
 		return;
 	}
-	if(eventNo == 2961) {
+	if( false  == 2961) {
 		IsabellaPostSpankFeedSex();
 		return;
 	}
@@ -5379,11 +5379,11 @@ This license supercedes all previous licenses and remains in force.
 		return;
 	}
 	if(eventNo == 2968) {
-		flags[256] = 1;
+		flags[UNKNOWN_FLAG_NUMBER_00256] = 1;
 		isabellaGreeting();
 		return;
 	}
-	if(eventNo == 2969) {
+	if( false  == 2969) {
 		talkWithIsabella();
 		return;
 	}
@@ -5391,31 +5391,31 @@ This license supercedes all previous licenses and remains in force.
 		interactWithAuntNancy();
 		return;
 	}
-	if(eventNo == 2971) {
+	if( false  == 2971) {
 		strongStuff();
 		return;
 	}
-	if(eventNo == 2972) {
+	if( false  == 2972) {
 		lightStuff();
 		return;
 	}
-	if(eventNo == 2973) {
+	if( false  == 2973) {
 		declineAuntNancyMassage();
 		return;
 	}
-	if(eventNo == 2974) {
+	if( false  == 2974) {
 		timeForAuntNancySpiderCooch();
 		return;
 	}
-	if(eventNo == 2975) {
+	if( false  == 2975) {
 		auntNancyPoonPartII();
 		return;
 	}
-	if(eventNo == 2976) {
+	if( false  == 2976) {
 		auntNancyPoonPartIII();
 		return;
 	}
-	if(eventNo == 2977) {
+	if( false  == 2977) {
 		auntNancyPoonPartIV();
 		return;
 	}
@@ -5427,7 +5427,7 @@ This license supercedes all previous licenses and remains in force.
 		payForLilium();
 		return;
 	}
-	if(eventNo == 2980) {
+	if( false  == 2980) {
 		leaveLilium();
 		return;
 	}
@@ -5443,23 +5443,23 @@ This license supercedes all previous licenses and remains in force.
 		liliumNippleFuck();
 		return;
 	}
-	if(eventNo == 2984) {
+	if( false  == 2984) {
 		fightFSpiderMorph();
 		return;
 	}
-	if(eventNo == 2985) {
+	if( false  == 2985) {
 		runFromFSpiderMorph();
 		return;
 	}
-	if(eventNo == 2986) {
+	if( false  == 2986) {
 		talkToFSpiderMorph();
 		return;
 	}
-	if(eventNo == 2987) {
+	if( false  == 2987) {
 		voluntaryFemaleSpiderMorphRapesYou();
 		return;
 	}
-	if(eventNo == 2988) {
+	if( false  == 2988) {
 		declinedCrazyFemaleSpiderMorphSexFunTimes();
 		return;
 	}
@@ -5491,7 +5491,7 @@ This license supercedes all previous licenses and remains in force.
 		victoryCowgirlRidingOnSpiderBoi();
 		return;
 	}
-	if(eventNo == 2996) {
+	if( false  == 2996) {
 		talkToSpiderBoy();
 		return;
 	}
@@ -5513,21 +5513,21 @@ This license supercedes all previous licenses and remains in force.
 		commissionSilkArmorForReal();
 		return;
 	}
-	if(eventNo == 3001) {
+	if( false  == 3001) {
 		declineSilkArmorCommish();
 		return;
 	}
 	if(eventNo == 3002) {
-		flags[275] = 1;
+		flags[UNKNOWN_FLAG_NUMBER_00275] = 1;
 		chooseArmorOrRobes();
 		return;
 	}
-	if(eventNo == 3003) {
+	if( false  == 3003) {
 		collectRathazulArmor();
 		return;
 	}
 	if(eventNo == 3004) {
-		flags[275] = 2;
+		flags[UNKNOWN_FLAG_NUMBER_00275] = 2;
 		chooseArmorOrRobes();
 		return;
 	}
@@ -5559,7 +5559,7 @@ This license supercedes all previous licenses and remains in force.
 		centaurOnImpFemale(true);
 		return;
 	}
-	if(eventNo == 3012) {
+	if( false  == 3012) {
 		tongueBasiliskSmex();
 		return;
 	}
@@ -5571,7 +5571,7 @@ This license supercedes all previous licenses and remains in force.
 		winDriderPCDickInSpiderCunt();
 		return;
 	}
-	if(eventNo == 3015) {
+	if( false  == 3015) {
 		winDriderPCDickInSpiderCunt2();
 		return;
 	}
@@ -5591,15 +5591,15 @@ This license supercedes all previous licenses and remains in force.
 		victoryVSDriderStickDickInSpinneret();
 		return;
 	}
-	if(eventNo == 3020) {
+	if( false  == 3020) {
 		scyllaVTakeAdvantageWithExgartuan2();
 		return;
 	}
-	if(eventNo == 3021) {
+	if( false  == 3021) {
 		scyllaVTakeAdvantageWithExgartuan3();
 		return;
 	}
-	if(eventNo == 3022) {
+	if( false  == 3022) {
 		scyllaVTakeAdvantageWithExgartuan4();
 		return;
 	}
@@ -5607,7 +5607,7 @@ This license supercedes all previous licenses and remains in force.
 		girlsRapeAkbal();
 		return;
 	}
-	if(eventNo == 3024) {
+	if( false  == 3024) {
 		girlsRapeAkbalPart2();
 		return;
 	}
@@ -5615,11 +5615,11 @@ This license supercedes all previous licenses and remains in force.
 		rapeAkbalForcedFemaleOral();
 		return;
 	}
-	if(eventNo == 3026) {
+	if( false  == 3026) {
 		declineBimboSophie();
 		return;
 	}
-	if(eventNo == 3027) {
+	if( false  == 3027) {
 		acceptBimboSophie();
 		return;
 	}
@@ -5627,23 +5627,23 @@ This license supercedes all previous licenses and remains in force.
 		approachBimboSophieInCamp();
 		return;
 	}
-	if(eventNo == 3029) {
+	if( false  == 3029) {
 		bimboSophieLicksRugs();
 		return;
 	}
-	if(eventNo == 3030) {
+	if( false  == 3030) {
 		bimboSophieSixtyNineAfterCunnilingus();
 		return;
 	}
-	if(eventNo == 3031) {
+	if( false  == 3031) {
 		buttFuckBimboSophie();
 		return;
 	}
-	if(eventNo == 3032) {
+	if( false  == 3032) {
 		fuckBimboSophiesTits();
 		return;
 	}
-	if(eventNo == 3033) {
+	if( false  == 3033) {
 		sophieEggApocalypse();
 		return;
 	}
@@ -5659,30 +5659,30 @@ This license supercedes all previous licenses and remains in force.
 		bimbotizeMeCaptainSophie();
 		return;
 	}
-	if(eventNo == 3037) {
+	if( false  == 3037) {
 		submissiveCeraphOffer();
 		return;
 	}
-	if(eventNo == 3038) {
+	if( false  == 3038) {
 		collarCeraph();
 		return;
 	}
-	if(eventNo == 3039) {
+	if( false  == 3039) {
 		carryCarephsToken();
 		return;
 	}
-	if(eventNo == 3040) {
+	if( false  == 3040) {
 		getCeraphFollowerPiercing();
 		return;
 	}
 	if(eventNo == 3041) {
 		if(rand(24) == 0 && player.hasCock()) catgirlEncounter();
-		else if(rand(24) == 0 && flags[293] == 0) carephCorruptionSlaves();
+		else if(rand(24) == 0 && flags[UNKNOWN_FLAG_NUMBER_00293] == 0) carephCorruptionSlaves();
 		else if(rand(24) <= 1 && player.gender > 0) encounterZetsuko();
 		else ceraphFollowerAppearance();
 		return;
 	}
-	if(eventNo == 3042) {
+	if( false  == 3042) {
 		cawkTawgle();
 		return;
 	}
@@ -5694,7 +5694,7 @@ This license supercedes all previous licenses and remains in force.
 		unfetishifyYourselfWithFollowerCeraph();
 		return;
 	}
-	if(eventNo == 3045) {
+	if( false  == 3045) {
 		goThroughWithCeraphUnfetishification();
 		return;
 	}
@@ -5710,7 +5710,7 @@ This license supercedes all previous licenses and remains in force.
 		ceraphTentacleGrape();
 		return;
 	}
-	if(eventNo == 3049) {
+	if( false  == 3049) {
 		punishCeraphForSurpriseThroatFuck();
 		return;
 	}
@@ -5726,11 +5726,11 @@ This license supercedes all previous licenses and remains in force.
 		followerCeraphRoleplay();
 		return;
 	}
-	if(eventNo == 3053) {
+	if( false  == 3053) {
 		fuckCeraphsCatgirls();
 		return;
 	}
-	if(eventNo == 3054) {
+	if( false  == 3054) {
 		declineCeraphsCatgirls();
 		return;
 	}
@@ -5742,7 +5742,7 @@ This license supercedes all previous licenses and remains in force.
 		ceraphUrtaRoleplaySober();
 		return;
 	}
-	if(eventNo == 3057) {
+	if( false  == 3057) {
 		ceraphUrtaRoleplaySober2();
 		return;
 	}
@@ -5750,27 +5750,27 @@ This license supercedes all previous licenses and remains in force.
 		overHearDemonsAboutSyrena();
 		return;
 	}
-	if(eventNo == 3059) {
+	if( false  == 3059) {
 		iQuitCeraphCorruptionDemons();
 		return;
 	}
-	if(eventNo == 3060) {
+	if( false  == 3060) {
 		declineCeraphFauxCorruption();
 		return;
 	}
-	if(eventNo == 3061) {
+	if( false  == 3061) {
 		acceptMoreCeraphFauxCorruption();
 		return;
 	}
-	if(eventNo == 3062) {
+	if( false  == 3062) {
 		makeCarephsLackeysLeave();
 		return;
 	}
-	if(eventNo == 3063) {
+	if( false  == 3063) {
 		ceraphLackeyCorruption();
 		return;
 	}
-	if(eventNo == 3064) {
+	if( false  == 3064) {
 		ceraphUrtaRoleplayDrunk2();
 		return;
 	}
@@ -5782,11 +5782,11 @@ This license supercedes all previous licenses and remains in force.
 		postUdderChoice(true);
 		return;
 	}
-	if(eventNo == 3067) {
+	if( false  == 3067) {
 		yesUdderPWEASE();
 		return;
 	}
-	if(eventNo == 3068) {
+	if( false  == 3068) {
 		noUdderPlz();
 		return;
 	}
@@ -5798,27 +5798,27 @@ This license supercedes all previous licenses and remains in force.
 		sweetieNOOOO();
 		return;
 	}
-	if(eventNo == 3071) {
+	if( false  == 3071) {
 		encounterLottie();
 		return;
 	}
-	if(eventNo == 3072) {
+	if( false  == 3072) {
 		fourthMeetingChooseSexWithLottie();
 		return;
 	}
-	if(eventNo == 3073) {
+	if( false  == 3073) {
 		stayLottieBuds4Evah();
 		return;
 	}
-	if(eventNo == 3074) {
+	if( false  == 3074) {
 		declineBeingLottiesGymHamsandwich();
 		return;
 	}
-	if(eventNo == 3075) {
+	if( false  == 3075) {
 		acceptBeingLottiesHamSandwich();
 		return;
 	}
-	if(eventNo == 3076) {
+	if( false  == 3076) {
 		gotInShapeButTurnedDownLottie();
 		return;
 	}
@@ -5826,15 +5826,15 @@ This license supercedes all previous licenses and remains in force.
 		gotInShapeComedyDeclineLottie();
 		return;
 	}
-	if(eventNo == 3078) {
+	if( false  == 3078) {
 		gotInShapeAcceptTrainingOffer();
 		return;
 	}
-	if(eventNo == 3079) {
+	if( false  == 3079) {
 		drinkWaterWithYourHamhock();
 		return;
 	}
-	if(eventNo == 3080) {
+	if( false  == 3080) {
 		drinkLustWithYourHamhock();
 		return;
 	}
@@ -5846,99 +5846,99 @@ This license supercedes all previous licenses and remains in force.
 		getSuckedOffByAHamSandwich();
 		return;
 	}
-	if(eventNo == 3083) {
+	if( false  == 3083) {
 		lotteryAppearance();
 		return;
 	}
-	if(eventNo == 3084) {
+	if( false  == 3084) {
 		talkToPigSlut();
 		return;
 	}
-	if(eventNo == 3085) {
+	if( false  == 3085) {
 		firstOralReactionChooseEncourage();
 		return;
 	}
-	if(eventNo == 3086) {
+	if( false  == 3086) {
 		firstOralReactionChooseAbuse();
 		return;
 	}
-	if(eventNo == 3087) {
+	if( false  == 3087) {
 		firstAnalReactionChooseEncourage();
 		return;
 	}
-	if(eventNo == 3088) {
+	if( false  == 3088) {
 		firstAnalReactionChooseAbuse();
 		return;
 	}
-	if(eventNo == 3089) {
+	if( false  == 3089) {
 		lottieLowMoraleWeightGainEncourage();
 		return;
 	}
-	if(eventNo == 3090) {
+	if( false  == 3090) {
 		lottieLowMorealeWeightGainAbuse();
 		return;
 	}
-	if(eventNo == 3091) {
+	if( false  == 3091) {
 		lottieMediumMoraleWeightGainEncourage();
 		return;
 	}
-	if(eventNo == 3092) {
+	if( false  == 3092) {
 		lottieMediumMorealeWeightGainAbuse();
 		return;
 	}
-	if(eventNo == 3093) {
+	if( false  == 3093) {
 		lottieHighMoraleWeightGainEncourage();
 		return;
 	}
-	if(eventNo == 3094) {
+	if( false  == 3094) {
 		lottieHighMoraleWeightGainAbuse();
 		return;
 	}
-	if(eventNo == 3095) {
+	if( false  == 3095) {
 		lottieHighMoraleWeightGainFATTYLOVESIT();
 		return;
 	}
-	if(eventNo == 3096) {
+	if( false  == 3096) {
 		lottieHighMoraleWeightGainFATTYLOVESABUSE();
 		return;
 	}
-	if(eventNo == 3097) {
+	if( false  == 3097) {
 		lottieLowMoraleWeightLossEncourage();
 		return;
 	}
-	if(eventNo == 3098) {
+	if( false  == 3098) {
 		lottieLowMoraleWeightLossAbuse();
 		return;
 	}
-	if(eventNo == 3099) {
+	if( false  == 3099) {
 		lottieMediumMoraleWeightLossEncourage();
 		return;
 	}
-	if(eventNo == 3100) {
+	if( false  == 3100) {
 		lottieMediumMoraleWeightLossAbuse();
 		return;
 	}
-	if(eventNo == 3101) {
+	if( false  == 3101) {
 		lottieHighMoraleWeightLossEncourage();
 		return;
 	}
-	if(eventNo == 3102) {
+	if( false  == 3102) {
 		lottieHighMoraleWeightLossAbuse();
 		return;
 	}
-	if(eventNo == 3103) {
+	if( false  == 3103) {
 		lottieHighMoraleWeightLossFATTYLOVESIT();
 		return;
 	}
-	if(eventNo == 3104) {
+	if( false  == 3104) {
 		lottieHighMoraleWeightLossFATTYLOVESABUSE();
 		return;
 	}
-	if(eventNo == 3105) {
+	if( false  == 3105) {
 		lottieFatLoserCulminationFuckChoice();
 		return;
 	}
-	if(eventNo == 3106) {
+	if( false  == 3106) {
 		lottieFatLoserCulminationHumiliationChoice();
 		return;
 	}
@@ -5946,11 +5946,11 @@ This license supercedes all previous licenses and remains in force.
 		lottieFatLoserCulminationLeaveComedyChoice();
 		return;
 	}
-	if(eventNo == 3108) {
+	if( false  == 3108) {
 		lottieHighMoraleFatLoveSelfOneTimeEvent();
 		return;
 	}
-	if(eventNo == 3109) {
+	if( false  == 3109) {
 		lottieHighMoraleFatYoullGetThereOneTimeEvent();
 		return;
 	}
@@ -5970,79 +5970,79 @@ This license supercedes all previous licenses and remains in force.
 		charlottesWebComedyBullshit();
 		return;
 	}
-	if(eventNo == 3114) {
+	if( false  == 3114) {
 		lottieSuccessOneShot();
 		return;
 	}
-	if(eventNo == 3115) {
+	if( false  == 3115) {
 		leaveLottieInsteadOfYogaSex();
 		return;
 	}
-	if(eventNo == 3116) {
+	if( false  == 3116) {
 		lottieExercise();
 		return;
 	}
-	if(eventNo == 3117) {
+	if( false  == 3117) {
 		lottieWeights();
 		return;
 	}
-	if(eventNo == 3118) {
+	if( false  == 3118) {
 		boastAtLottie();
 		return;
 	}
-	if(eventNo == 3119) {
+	if( false  == 3119) {
 		trainWithLottie();
 		return;
 	}
-	if(eventNo == 3120) {
+	if( false  == 3120) {
 		boastAtFitLottie();
 		return;
 	}
-	if(eventNo == 3121) {
+	if( false  == 3121) {
 		trainWithFitLottie();
 		return;
 	}
-	if(eventNo == 3122) {
+	if( false  == 3122) {
 		goJoggingWithLottie();
 		return;
 	}
-	if(eventNo == 3123) {
+	if( false  == 3123) {
 		sprintAndLeaveLottieBehind();
 		return;
 	}
-	if(eventNo == 3124) {
+	if( false  == 3124) {
 		jogWithLottie();
 		return;
 	}
-	if(eventNo == 3125) {
+	if( false  == 3125) {
 		sprintAndLeaveFitLottieBehind();
 		return;
 	}
-	if(eventNo == 3126) {
+	if( false  == 3126) {
 		jogWithFitLottie();
 		return;
 	}
-	if(eventNo == 3127) {
+	if( false  == 3127) {
 		lottieYoga();
 		return;
 	}
-	if(eventNo == 3128) {
+	if( false  == 3128) {
 		lottieYogaAlone();
 		return;
 	}
-	if(eventNo == 3129) {
+	if( false  == 3129) {
 		togetherLottieYoga();
 		return;
 	}
-	if(eventNo == 3130) {
+	if( false  == 3130) {
 		lottiePool();
 		return;
 	}
-	if(eventNo == 3131) {
+	if( false  == 3131) {
 		jumpInPoolBeforeLottieSeesYourWingWang();
 		return;
 	}
-	if(eventNo == 3132) {
+	if( false  == 3132) {
 		waitAndShowLottieYourPoolBoner();
 		return;
 	}
@@ -6050,7 +6050,7 @@ This license supercedes all previous licenses and remains in force.
 		giveLottieAnItem();
 		return;
 	}
-	if(eventNo == 3134) {
+	if( false  == 3134) {
 		feedLottieAWholeCafe();
 		return;
 	}
@@ -6118,27 +6118,27 @@ This license supercedes all previous licenses and remains in force.
 		negotiate();
 		return;
 	}
-	if(eventNo == 3151) {
+	if( false  == 3151) {
 		runFromMinotaurs();
 		return;
 	}
-	if(eventNo == 3152) {
+	if( false  == 3152) {
 		fightOTaurs();
 		return;
 	}
-	if(eventNo == 3153) {
+	if( false  == 3153) {
 		submitToMinotaurMob();
 		return;
 	}
-	if(eventNo == 3154) {
+	if( false  == 3154) {
 		nonAddictMinotaurGangBang();
 		return;
 	}
-	if(eventNo == 3155) {
+	if( false  == 3155) {
 		loseToMinoMobVeryPregnant();
 		return;
 	}
-	if(eventNo == 3156) {
+	if( false  == 3156) {
 		analSpearSemiPregMinotaurGangbang();
 		return;
 	}
@@ -6162,7 +6162,7 @@ This license supercedes all previous licenses and remains in force.
 		victoryBJNippleFuckMinotaurGang();
 		return;
 	}
-	if(eventNo == 3162) {
+	if( false  == 3162) {
 		minotaurGangBadEnd2();
 		return;
 	}
@@ -6186,7 +6186,7 @@ This license supercedes all previous licenses and remains in force.
 		fapArenaGOOOO();
 		return;
 	}
-	if(eventNo == 3168) {
+	if( false  == 3168) {
 		fapArenaPageII();
 		return;
 	}
@@ -6206,7 +6206,7 @@ This license supercedes all previous licenses and remains in force.
 		amilyDefurryOfferAtCamp();
 		return;
 	}
-	if(eventNo == 3173) {
+	if( false  == 3173) {
 		amilySufferNotTheFurryToLive();
 		return;
 	}
@@ -6214,19 +6214,19 @@ This license supercedes all previous licenses and remains in force.
 		amilyNoFur();
 		return;
 	}
-	if(eventNo == 3175) {
+	if( false  == 3175) {
 		offerToBuyPassageFromKiha();
 		return;
 	}
-	if(eventNo == 3176) {
+	if( false  == 3176) {
 		leaveWhenMeetingAgressiveKiha();
 		return;
 	}
-	if(eventNo == 3177) {
+	if( false  == 3177) {
 		meetKihaAndFight();
 		return;
 	}
-	if(eventNo == 3178) {
+	if( false  == 3178) {
 		askWhy();
 		return;
 	}
@@ -6234,7 +6234,7 @@ This license supercedes all previous licenses and remains in force.
 		payKihaTribute();
 		return;
 	}
-	if(eventNo == 3180) {
+	if( false  == 3180) {
 		tellKihaTributeWasYourIdea();
 		return;
 	}
@@ -6250,7 +6250,7 @@ This license supercedes all previous licenses and remains in force.
 		victoryDickKiha();
 		return;
 	}
-	if(eventNo == 3184) {
+	if( false  == 3184) {
 		kihaRapesLittleGirlsISawItOnTheNews();
 		return;
 	}
@@ -6258,7 +6258,7 @@ This license supercedes all previous licenses and remains in force.
 		rapeKihaWithWORDS();
 		return;
 	}
-	if(eventNo == 3186) {
+	if( false  == 3186) {
 		kihaExplore();
 		return;
 	}
@@ -6266,11 +6266,11 @@ This license supercedes all previous licenses and remains in force.
 		askAboutAmily();
 		return;
 	}
-	if(eventNo == 3188) {
+	if( false  == 3188) {
 		beADickToAmily();
 		return;
 	}
-	if(eventNo == 3189) {
+	if( false  == 3189) {
 		smileAndNodToAmilyXUrta();
 		return;
 	}
@@ -6278,15 +6278,15 @@ This license supercedes all previous licenses and remains in force.
 		amilyUrtaSex();
 		return;
 	}
-	if(eventNo == 3191) {
+	if( false  == 3191) {
 		amilyUrtaSexWatch();
 		return;
 	}
-	if(eventNo == 3192) {
+	if( false  == 3192) {
 		joeyWanksItOut();
 		return;
 	}
-	if(eventNo == 3193) {
+	if( false  == 3193) {
 		suckOffJoeysGardenHose();
 		return;
 	}
@@ -6310,7 +6310,7 @@ This license supercedes all previous licenses and remains in force.
 		missingoSex5();
 		return;
 	}
-	if(eventNo == 3199) {
+	if( false  == 3199) {
 		missingoSex6();
 		return;
 	}
@@ -6326,39 +6326,39 @@ This license supercedes all previous licenses and remains in force.
 		crushUrtasHeart();
 		return;
 	}
-	if(eventNo == 3203) {
+	if( false  == 3203) {
 		askAboutAmilyPt2();
 		return;
 	}
-	if(eventNo == 3204) {
+	if( false  == 3204) {
 		cheatingSloots();
 		return;
 	}
-	if(eventNo == 3205) {
+	if( false  == 3205) {
 		letTheSlootsFuck();
 		return;
 	}
-	if(eventNo == 3206) {
+	if( false  == 3206) {
 		endThisMadness();
 		return;
 	}
-	if(eventNo == 3207) {
+	if( false  == 3207) {
 		yankeeEchoPapa();
 		return;
 	}
-	if(eventNo == 3208) {
+	if( false  == 3208) {
 		novemberAlphaHotel();
 		return;
 	}
-	if(eventNo == 3209) {
+	if( false  == 3209) {
 		defeatDannyPhantom();
 		return;
 	}
-	if(eventNo == 3210) {
+	if( false  == 3210) {
 		noSlimingSlimer();
 		return;
 	}
-	if(eventNo == 3211) {
+	if( false  == 3211) {
 		littlePigLittlePigLetMeIn();
 		return;
 	}
@@ -6370,11 +6370,11 @@ This license supercedes all previous licenses and remains in force.
 		sharkbustersVictory();
 		return;
 	}
-	if(eventNo == 3214) {
+	if( false  == 3214) {
 		sharkyEctoginas();
 		return;
 	}
-	if(eventNo == 3215) {
+	if( false  == 3215) {
 		ghostIzmaPenis();
 		return;
 	}
@@ -6382,11 +6382,11 @@ This license supercedes all previous licenses and remains in force.
 		ghostGooGurlzDuckfaces();
 		return;
 	}
-	if(eventNo == 3217) {
+	if( false  == 3217) {
 		slimeGinaFlation();
 		return;
 	}
-	if(eventNo == 3218) {
+	if( false  == 3218) {
 		slimeyPenorsAhoy();
 		return;
 	}
@@ -6398,11 +6398,11 @@ This license supercedes all previous licenses and remains in force.
 		penisLossThatIsntALoss();
 		return;
 	}
-	if(eventNo == 3221) {
+	if( false  == 3221) {
 		dewormYourGhost();
 		return;
 	}
-	if(eventNo == 3222) {
+	if( false  == 3222) {
 		penisGartuanGhostSmexVictory();
 		return;
 	}
@@ -6414,75 +6414,75 @@ This license supercedes all previous licenses and remains in force.
 		hermaphroditeGhostsCumEctoplasm();
 		return;
 	}
-	if(eventNo == 3225) {
+	if( false  == 3225) {
 		loseToShouldra();
 		return;
 	}
-	if(eventNo == 3226) {
+	if( false  == 3226) {
 		ourDadTaughtUsNotToBeAshamedOfOurDicks();
 		return;
 	}
-	if(eventNo == 3227) {
+	if( false  == 3227) {
 		loseToShouldraWithWorms();
 		return;
 	}
-	if(eventNo == 3228) {
+	if( false  == 3228) {
 		ghostGinaLosses();
 		return;
 	}
-	if(eventNo == 3229) {
+	if( false  == 3229) {
 		loseToShouldraAsHerm();
 		return;
 	}
-	if(eventNo == 3230) {
+	if( false  == 3230) {
 		shouldraGiantCockLoss();
 		return;
 	}
-	if(eventNo == 3231) {
+	if( false  == 3231) {
 		genderlessShouldrasLossRapes();
 		return;
 	}
-	if(eventNo == 3232) {
+	if( false  == 3232) {
 		ghostGartuanLossSceneOrSomeShit();
 		return;
 	}
-	if(eventNo == 3233) {
+	if( false  == 3233) {
 		courtCrazyGirlsDotCom();
 		return;
 	}
-	if(eventNo == 3234) {
+	if( false  == 3234) {
 		noCourtingYouFag();
 		return;
 	}
-	if(eventNo == 3235) {
+	if( false  == 3235) {
 		letShouldraIn();
 		return;
 	}
-	if(eventNo == 3236) {
+	if( false  == 3236) {
 		kickShouldraOut();
 		return;
 	}
-	if(eventNo == 3237) {
+	if( false  == 3237) {
 		ignoreSatyr();
 		return;
 	}
-	if(eventNo == 3238) {
+	if( false  == 3238) {
 		rapeSatyr();
 		return;
 	}
-	if(eventNo == 3239) {
+	if( false  == 3239) {
 		dontRepeatFuckSatyr();
 		return;
 	}
-	if(eventNo == 3240) {
+	if( false  == 3240) {
 		secondSatyrFuck();
 		return;
 	}
-	if(eventNo == 3241) {
+	if( false  == 3241) {
 		turnDownIsabellaFollower();
 		return;
 	}
-	if(eventNo == 3242) {
+	if( false  == 3242) {
 		moveTheBitchIn();
 		return;
 	}
@@ -6506,15 +6506,15 @@ This license supercedes all previous licenses and remains in force.
 		tentacleBoneFollowerIzzy();
 		return;
 	}
-	if(eventNo == 3248) {
+	if( false  == 3248) {
 		izzyMilkYourselfDamnit();
 		return;
 	}
-	if(eventNo == 3249) {
+	if( false  == 3249) {
 		izzyMilkingMeinMilkersMya();
 		return;
 	}
-	if(eventNo == 3250) {
+	if( false  == 3250) {
 		izzyMilkingMeinMilkersMya2();
 		return;
 	}
@@ -6530,11 +6530,11 @@ This license supercedes all previous licenses and remains in force.
 		getMilk();
 		return;
 	}
-	if(eventNo == 3254) {
+	if( false  == 3254) {
 		campIzzySexMenu();
 		return;
 	}
-	if(eventNo == 3255) {
+	if( false  == 3255) {
 		isabellaSparMenu()
 		return;
 	}
@@ -6550,19 +6550,19 @@ This license supercedes all previous licenses and remains in force.
 		isabellaBurps();
 		return;
 	}
-	if(eventNo == 3259) {
+	if( false  == 3259) {
 		runAwayFromIzzyBurps();
 		return;
 	}
-	if(eventNo == 3260) {
+	if( false  == 3260) {
 		getIzzyBurped();
 		return;
 	}
-	if(eventNo == 3261) {
+	if( false  == 3261) {
 		declineIzzysCowBurpApology();
 		return;
 	}
-	if(eventNo == 3262) {
+	if( false  == 3262) {
 		acceptCowpology();
 		return;
 	}
@@ -6590,7 +6590,7 @@ This license supercedes all previous licenses and remains in force.
 		gooMaleRape(2);
 		return;
 	}
-	if(eventNo == 3269) {
+	if( false  == 3269) {
 		gooGirlBadEnd2();
 		return;
 	}
@@ -6598,7 +6598,7 @@ This license supercedes all previous licenses and remains in force.
 		analRapuzulaKiha();
 		return;
 	}
-	if(eventNo == 3271) {
+	if( false  == 3271) {
 		dominikaBlowjobs2();
 		return;
 	}
@@ -6614,7 +6614,7 @@ This license supercedes all previous licenses and remains in force.
 		cerminika();
 		return;
 	}
-	if(eventNo == 3275) {
+	if( false  == 3275) {
 		postHelFuckBuddyFollowup();
 		return;
 	}
@@ -6674,31 +6674,31 @@ This license supercedes all previous licenses and remains in force.
 		rapingHelsAssMeansYourCorruptCauseAnalIsEvil();
 		return;
 	}
-	if(eventNo == 3290) {
+	if( false  == 3290) {
 		receiveCorruptRimjobsFromHel();
 		return;
 	}
-	if(eventNo == 3291) {
+	if( false  == 3291) {
 		helMinotaurThreesome();
 		return;
 	}
-	if(eventNo == 3292) {
+	if( false  == 3292) {
 		leaveMinotaurHelThreesome();
 		return;
 	}
-	if(eventNo == 3293) {
+	if( false  == 3293) {
 		fuckHerAss();
 		return;
 	}
-	if(eventNo == 3294) {
+	if( false  == 3294) {
 		helMinoThreeSomeLickItsDick();
 		return;
 	}
-	if(eventNo == 3295) {
+	if( false  == 3295) {
 		postMinoThreesomeDecisionTime();
 		return;
 	}
-	if(eventNo == 3296) {
+	if( false  == 3296) {
 		bugOutAfterHelMinoThreesome();
 		return;
 	}
@@ -6706,7 +6706,7 @@ This license supercedes all previous licenses and remains in force.
 		berserkMode();
 		return;
 	}
-	if(eventNo == 3298) {
+	if( false  == 3298) {
 		askHelAboutHer();
 		return;
 	}
@@ -6714,15 +6714,15 @@ This license supercedes all previous licenses and remains in force.
 		askHelAboutAttackingYou();
 		return;
 	}
-	if(eventNo == 3300) {
+	if( false  == 3300) {
 		telHelSTOPATTACKINGMEYOUBITCH();
 		return;
 	}
-	if(eventNo == 3301) {
+	if( false  == 3301) {
 		askMommaHelForSecondsAfterDinner();
 		return;
 	}
-	if(eventNo == 3302) {
+	if( false  == 3302) {
 		leaveHelAfterMinoThreeSomeChat();
 		return;
 	}
@@ -6730,35 +6730,35 @@ This license supercedes all previous licenses and remains in force.
 		helDefeatedNormal(true);
 		return;
 	}
-	if(eventNo == 3304) {
+	if( false  == 3304) {
 		helChatMenu();
 		return;
 	}
-	if(eventNo == 3305) {
+	if( false  == 3305) {
 		salamanderXIsabellaDiplomacy();
 		return;
 	}
-	if(eventNo == 3306) {
+	if( false  == 3306) {
 		salamanderXIsabellaDiplomacy2();
 		return;
 	}
-	if(eventNo == 3307) {
+	if( false  == 3307) {
 		watchIsabellaAndHelFight();
 		return;
 	}
-	if(eventNo == 3308) {
+	if( false  == 3308) {
 		skipTownOnIsabellaAndHelsFight();
 		return;
 	}
-	if(eventNo == 3309) {
+	if( false  == 3309) {
 		leaveIsabellaSallyBehind();
 		return;
 	}
-	if(eventNo == 3310) {
+	if( false  == 3310) {
 		nomOnIzzyTitWithSallyMancer();
 		return;
 	}
-	if(eventNo == 3311) {
+	if( false  == 3311) {
 		noThreesomeSexWithSallyAndIssyLastMinute();
 		return;
 	}
@@ -6766,7 +6766,7 @@ This license supercedes all previous licenses and remains in force.
 		stuffIzzyAndSalamanderWithDicks();
 		return;
 	}
-	if(eventNo == 3313) {
+	if( false  == 3313) {
 		izzySallyThreeSomeFollowup();
 		return;
 	}
@@ -6786,43 +6786,43 @@ This license supercedes all previous licenses and remains in force.
 		visitKatherine();
 		return;
 	}
-	if(eventNo == 3318) {
+	if( false  == 3318) {
 		katherineMenu();
 		return;
 	}
-	if(eventNo == 3319) {
+	if( false  == 3319) {
 		talkToKatherine();
 		return;
 	}
-	if(eventNo == 3320) {
+	if( false  == 3320) {
 		katherineDefur();
 		return;
 	}
-	if(eventNo == 3321) {
+	if( false  == 3321) {
 		katherinesHistory();
 		return;
 	}
-	if(eventNo == 3322) {
+	if( false  == 3322) {
 		askKatherineAboutGang();
 		return;
 	}
-	if(eventNo == 3323) {
+	if( false  == 3323) {
 		askKatherineAboutDogCock();
 		return;
 	}
-	if(eventNo == 3324) {
+	if( false  == 3324) {
 		askKatherineAboutVagrancy();
 		return;
 	}
-	if(eventNo == 3325) {
+	if( false  == 3325) {
 		askKatherineAboutLoveAndLust();
 		return;
 	}
-	if(eventNo == 3326) {
+	if( false  == 3326) {
 		katherinesAppearance();
 		return;
 	}
-	if(eventNo == 3327) {
+	if( false  == 3327) {
 		giveKatherineAnItem();
 		return;
 	}
@@ -6858,7 +6858,7 @@ This license supercedes all previous licenses and remains in force.
 		katherineSex();
 		return;
 	}
-	if(eventNo == 3336) {
+	if( false  == 3336) {
 		katSexMenu();
 		return;
 	}
@@ -6866,11 +6866,11 @@ This license supercedes all previous licenses and remains in force.
 		katPenetrate();
 		return;
 	}
-	if(eventNo == 3338) {
+	if( false  == 3338) {
 		katBalls();
 		return;
 	}
-	if(eventNo == 3339) {
+	if( false  == 3339) {
 		katCock();
 		return;
 	}
@@ -6894,7 +6894,7 @@ This license supercedes all previous licenses and remains in force.
 		letKatKnotYourCuntPussyFuck();
 		return;
 	}
-	if(eventNo == 3345) {
+	if( false  == 3345) {
 		getPenetrated();
 		return;
 	}
@@ -6906,7 +6906,7 @@ This license supercedes all previous licenses and remains in force.
 		suckedNFuckedByKat();
 		return;
 	}
-	if(eventNo == 3348) {
+	if( false  == 3348) {
 		oralKatherineChoices();
 		return;
 	}
@@ -6918,11 +6918,11 @@ This license supercedes all previous licenses and remains in force.
 		katherineGivesPCOralAllDayLongDotJPG();
 		return;
 	}
-	if(eventNo == 3351) {
+	if( false  == 3351) {
 		katherineGoesDownOnTheGirlsOhYahBabyLesbo();
 		return;
 	}
-	if(eventNo == 3352) {
+	if( false  == 3352) {
 		katherineLicksAllTheBoyPenises();
 		return;
 	}
@@ -6938,7 +6938,7 @@ This license supercedes all previous licenses and remains in force.
 		approachHelAtZeBitch();
 		return;
 	}
-	if(eventNo == 3356) {
+	if( false  == 3356) {
 		leaveHelInZeBitch();
 		return;
 	}
@@ -6946,7 +6946,7 @@ This license supercedes all previous licenses and remains in force.
 		helEdrynThreeSomeStartYerEngines();
 		return;
 	}
-	if(eventNo == 3358) {
+	if( false  == 3358) {
 		threesomeEdrynAndHel();
 		return;
 	}
@@ -6958,7 +6958,7 @@ This license supercedes all previous licenses and remains in force.
 		tamaniAnalShits();
 		return;
 	}
-	if(eventNo == 3361) {
+	if( false  == 3361) {
 		encounterZetsuko();
 		return;
 	}
@@ -6974,11 +6974,11 @@ This license supercedes all previous licenses and remains in force.
 		zetsukoBanana();
 		return;
 	}
-	if(eventNo == 3365) {
+	if( false  == 3365) {
 		noZetsukoLoveToday();
 		return;
 	}
-	if(eventNo == 3366) {
+	if( false  == 3366) {
 		lottieAndIfrisNTREpilogue();
 		return;
 	}
@@ -6986,23 +6986,23 @@ This license supercedes all previous licenses and remains in force.
 		ifrisAndLottieGetsNTRedLiftingWeights();
 		return;
 	}
-	if(eventNo == 3368) {
+	if( false  == 3368) {
 		waitForChunkyOrcLoe();
 		return;
 	}
-	if(eventNo == 3369) {
+	if( false  == 3369) {
 		dontWaitForRogar();
 		return;
 	}
-	if(eventNo == 3370) {
+	if( false  == 3370) {
 		ewwwRogarIsGay();
 		return;
 	}
-	if(eventNo == 3371) {
+	if( false  == 3371) {
 		noSlowBroIDontWantPokeSex();
 		return;
 	}
-	if(eventNo == 3372) {
+	if( false  == 3372) {
 		okayBroLetsHaveAGayCarwash();
 		return;
 	}
@@ -7014,7 +7014,7 @@ This license supercedes all previous licenses and remains in force.
 		rogarPhaseFour();
 		return;
 	}
-	if(eventNo == 3375) {
+	if( false  == 3375) {
 		noTHanksRogarIAintGayDudeIjustLickedThatMudToBeNice();
 		return;
 	}
@@ -7030,11 +7030,11 @@ This license supercedes all previous licenses and remains in force.
 		brobrobrobro();
 		return;
 	}
-	if(eventNo == 3379) {
+	if( false  == 3379) {
 		rogarIsDumb();
 		return;
 	}
-	if(eventNo == 3380) {
+	if( false  == 3380) {
 		takeDatBroBrewFromDaBigMeanOlOrc();
 		return;
 	}
@@ -7042,7 +7042,7 @@ This license supercedes all previous licenses and remains in force.
 		frotWithRogar();
 		return;
 	}
-	if(eventNo == 3382) {
+	if( false  == 3382) {
 		findLostIzmaKidsII();
 		return;
 	}
@@ -7050,23 +7050,23 @@ This license supercedes all previous licenses and remains in force.
 		disciplineEldestMinotaurSon();
 		return;
 	}
-	if(eventNo == 3384) {
+	if( false  == 3384) {
 		exgartuanBulgeTortureII();
 		return;
 	}
-	if(eventNo == 3385) {
+	if( false  == 3385) {
 		exgartuanBulgeTortureIII();
 		return;
 	}
-	if(eventNo == 3386) {
+	if( false  == 3386) {
 		exgartuanBulgeTortureIV();
 		return;
 	}
-	if(eventNo == 3387) {
+	if( false  == 3387) {
 		boobgartuanSurprise2();
 		return;
 	}
-	if(eventNo == 3388) {
+	if( false  == 3388) {
 		boobgartuanSurprise3();
 		return;
 	}
@@ -7094,7 +7094,7 @@ This license supercedes all previous licenses and remains in force.
 		noogaisNippleRape();
 		return;
 	}
-	if(eventNo == 3395) {
+	if( false  == 3395) {
 		urtaXAmilyAfterMurrrath();
 		return;
 	}
@@ -7106,11 +7106,11 @@ This license supercedes all previous licenses and remains in force.
 		threesomeAmilUrtaCAWKS();
 		return;
 	}
-	if(eventNo == 3398) {
+	if( false  == 3398) {
 		liqueurUpTheWaifus();
 		return;
 	}
-	if(eventNo == 3399) {
+	if( false  == 3399) {
 		amilyXUrtaRunAWAY();
 		return;
 	}
@@ -7118,27 +7118,27 @@ This license supercedes all previous licenses and remains in force.
 		dateNightFirstTime();
 		return;
 	}
-	if(eventNo == 3401) {
+	if( false  == 3401) {
 		heliaPlusFoxyFluffs();
 		return;
 	}
-	if(eventNo == 3402) {
+	if( false  == 3402) {
 		runAwayFromFoxGirls();
 		return;
 	}
-	if(eventNo == 3403) {
+	if( false  == 3403) {
 		heliasFoxyFourSomeFluffs();
 		return;
 	}
-	if(eventNo == 3404) {
+	if( false  == 3404) {
 		foxyFluffsFoursomeAsMale();
 		return;
 	}
-	if(eventNo == 3405) {
+	if( false  == 3405) {
 		foxyFluffGirlsFuckSex();
 		return;
 	}
-	if(eventNo == 3406) {
+	if( false  == 3406) {
 		foxyFluffOutro();
 		return;
 	}
@@ -7158,15 +7158,15 @@ This license supercedes all previous licenses and remains in force.
 		pureAmilyPutsItInYourRectumDamnNearKilledEm();
 		return;
 	}
-	if(eventNo == 3411) {
+	if( false  == 3411) {
 		fuckPureAmilysHeiny();
 		return;
 	}
-	if(eventNo == 3412) {
+	if( false  == 3412) {
 		yoDawgHyenaBallz2();
 		return;
 	}
-	if(eventNo == 3413) {
+	if( false  == 3413) {
 		yoDawgHyenaBallz3();
 		return;
 	}
@@ -7182,23 +7182,23 @@ This license supercedes all previous licenses and remains in force.
 		lottiesThirtyMinutePigGasm();
 		return;
 	}
-	if(eventNo == 3417) {
+	if( false  == 3417) {
 		kihaSpiderEventIntro();
 		return;
 	}
-	if(eventNo == 3418) {
+	if( false  == 3418) {
 		warnKihaOfHerImpendingDemise();
 		return;
 	}
-	if(eventNo == 3419) {
+	if( false  == 3419) {
 		letTheSpidersHaveTheirWayWithKiha();
 		return;
 	}
-	if(eventNo == 3420) {
+	if( false  == 3420) {
 		helpKihaAgainstSpoidahs();
 		return;
 	}
-	if(eventNo == 3421) {
+	if( false  == 3421) {
 		leaveKihaToSpoidahHorde();
 		return;
 	}
@@ -7206,11 +7206,11 @@ This license supercedes all previous licenses and remains in force.
 		sparWithKiha();
 		return;
 	}
-	if(eventNo == 3423) {
+	if( false  == 3423) {
 		GTFO();
 		return;
 	}
-	if(eventNo == 3424) {
+	if( false  == 3424) {
 		lieThere();
 		return;
 	}
@@ -7222,19 +7222,19 @@ This license supercedes all previous licenses and remains in force.
 		talkToFriendlyKiha();
 		return;
 	}
-	if(eventNo == 3427) {
+	if( false  == 3427) {
 		jumpDaBitches();
 		return;
 	}
-	if(eventNo == 3428) {
+	if( false  == 3428) {
 		lovingHugDickings();
 		return;
 	}
-	if(eventNo == 3429) {
+	if( false  == 3429) {
 		lovingHugsGirlFuckSex();
 		return;
 	}
-	if(eventNo == 3430) {
+	if( false  == 3430) {
 		lovingHugsForRetards();
 		return;
 	}
@@ -7294,7 +7294,7 @@ This license supercedes all previous licenses and remains in force.
 		inviteKihaForDickings();
 		return;
 	}
-	if(eventNo == 3445) {
+	if( false  == 3445) {
 		lovinHugKiha();
 		return;
 	}
@@ -7302,11 +7302,11 @@ This license supercedes all previous licenses and remains in force.
 		dominateKihasFaceWithStuffAndStuffOrSomethingIDunnoWhyImStillWritingThis();
 		return;
 	}
-	if(eventNo == 3447) {
+	if( false  == 3447) {
 		beABitchDumbass();
 		return;
 	}
-	if(eventNo == 3448) {
+	if( false  == 3448) {
 		fightForDominanceWithDragonCunnies();
 		return;
 	}
@@ -7314,11 +7314,11 @@ This license supercedes all previous licenses and remains in force.
 		valaCumBath();
 		return;
 	}
-	if(eventNo == 3450) {
+	if( false  == 3450) {
 		valaCumBath2();
 		return;
 	}
-	if(eventNo == 3451) {
+	if( false  == 3451) {
 		amilyTeachingJojoBJ();
 		return;
 	}
@@ -7338,7 +7338,7 @@ This license supercedes all previous licenses and remains in force.
 		fillJojosMouthWithHotStickyCum();
 		return;
 	}
-	if(eventNo == 3456) {
+	if( false  == 3456) {
 		amilyAndJojoFuck();
 		return;
 	}
@@ -7350,19 +7350,19 @@ This license supercedes all previous licenses and remains in force.
 		fuckIncestCunts(true);
 		return;
 	}
-	if(eventNo == 3459) {
+	if( false  == 3459) {
 		yvonneFlirt();
 		return;
 	}
-	if(eventNo == 3460) {
+	if( false  == 3460) {
 		backOutOfYvonneFuck();
 		return;
 	}
-	if(eventNo == 3461) {
+	if( false  == 3461) {
 		fuckYvonneInZeBlacksmith();
 		return;
 	}
-	if(eventNo == 3462) {
+	if( false  == 3462) {
 		giveFollowerBodyBits();
 		return;
 	}
@@ -7410,23 +7410,23 @@ This license supercedes all previous licenses and remains in force.
 		removeIzmasPenis();
 		return;
 	}
-	if(eventNo == 3474) {
+	if( false  == 3474) {
 		RadarIzmaCumInYourChest();
 		return;
 	}
-	if(eventNo == 3475) {
+	if( false  == 3475) {
 		facialWhereItGoesRadarIzmaXpack();
 		return;
 	}
-	if(eventNo == 3476) {
+	if( false  == 3476) {
 		IzmaSelfFacialWheeRadar();
 		return;
 	}
-	if(eventNo == 3477) {
+	if( false  == 3477) {
 		radarIzmaXpackDenyHer();
 		return;
 	}
-	if(eventNo == 3478) {
+	if( false  == 3478) {
 		radarIzmaXPackLetHer();
 		return;
 	}
@@ -7434,23 +7434,23 @@ This license supercedes all previous licenses and remains in force.
 		followerIzmaMountsPC(true);
 		return;
 	}
-	if(eventNo == 3480) {
+	if( false  == 3480) {
 		RadarIzmaLeaveHerWangUnWingWanged();
 		return;
 	}
-	if(eventNo == 3481) {
+	if( false  == 3481) {
 		izmaLakeDominateContinueVanilla();
 		return;
 	}
-	if(eventNo == 3482) {
+	if( false  == 3482) {
 		noWankingForIzma();
 		return;
 	}
-	if(eventNo == 3483) {
+	if( false  == 3483) {
 		letIzmaWankLikeABitch();
 		return;
 	}
-	if(eventNo == 3484) {
+	if( false  == 3484) {
 		noWankingForIzmaRadarSaysSo();
 		return;
 	}
@@ -7458,15 +7458,15 @@ This license supercedes all previous licenses and remains in force.
 		fuckIzmasPussyDominate();
 		return;
 	}
-	if(eventNo == 3486) {
+	if( false  == 3486) {
 		gooJob();
 		return;
 	}
-	if(eventNo == 3487) {
+	if( false  == 3487) {
 		radarIzmaSpanking(true);
 		return;
 	}
-	if(eventNo == 3488) {
+	if( false  == 3488) {
 		radarIzmaGasm();
 		return;
 	}
@@ -7474,15 +7474,15 @@ This license supercedes all previous licenses and remains in force.
 		radarIzmaAnalDominant();
 		return;
 	}
-	if(eventNo == 3490) {
+	if( false  == 3490) {
 		radarIzmaAnalDomResultTuckIn();
 		return;
 	}
-	if(eventNo == 3491) {
+	if( false  == 3491) {
 		radarIzmaLeaveHerInTheDirtAfterAnalDom();
 		return;
 	}
-	if(eventNo == 3492) {
+	if( false  == 3492) {
 		receiveAllTheCowTOngues();
 		return;
 	}
@@ -7490,7 +7490,7 @@ This license supercedes all previous licenses and remains in force.
 		fuckIsabella();
 		return;
 	}
-	if(eventNo == 3494) {
+	if( false  == 3494) {
 		QBsTalkExpack();
 		return;
 	}
@@ -7518,15 +7518,15 @@ This license supercedes all previous licenses and remains in force.
 		urtaDiscussAlcoholDrinkMore();
 		return;
 	}
-	if(eventNo == 3501) {
+	if( false  == 3501) {
 		urtaDiscussAlcoholDrinkLess();
 		return;
 	}
-	if(eventNo == 3502) {
+	if( false  == 3502) {
 		urtaDiscussAlcoholNoChange();
 		return;
 	}
-	if(eventNo == 3503) {
+	if( false  == 3503) {
 		breakUpWithTheBitchOverAlcoholism();
 		return;
 	}
@@ -7538,11 +7538,11 @@ This license supercedes all previous licenses and remains in force.
 		urtaDiscussesSexAndROmance();
 		return;
 	}
-	if(eventNo == 3506) {
+	if( false  == 3506) {
 		urtaDiscussionLeaveAfterROmance();
 		return;
 	}
-	if(eventNo == 3507) {
+	if( false  == 3507) {
 		urtaDiscussionTeaseAfterRomance();
 		return;
 	}
@@ -7554,55 +7554,55 @@ This license supercedes all previous licenses and remains in force.
 		urtaDiscussesPrejudice();
 		return;
 	}
-	if(eventNo == 3510) {
+	if( false  == 3510) {
 		urtaDiscussesEdrynHistory();
 		return;
 	}
-	if(eventNo == 3511) {
+	if( false  == 3511) {
 		urtaDiscussesWorkingWithEdryn();
 		return;
 	}
-	if(eventNo == 3512) {
+	if( false  == 3512) {
 		urtaDiscussesEdrynRomance();
 		return;
 	}
-	if(eventNo == 3513) {
+	if( false  == 3513) {
 		urtaDiscussesEdrynNonLoveAccept();
 		return;
 	}
-	if(eventNo == 3514) {
+	if( false  == 3514) {
 		urtaDiscussesEdrynNonLoveREJECT();
 		return;
 	}
-	if(eventNo == 3515) {
+	if( false  == 3515) {
 		urtaDiscussesEdrynLoveHappy();
 		return;
 	}
-	if(eventNo == 3516) {
+	if( false  == 3516) {
 		urtaDiscussesEdrynLoveTolerate();
 		return;
 	}
-	if(eventNo == 3517) {
+	if( false  == 3517) {
 		urtaDiscussesEdrynLoveBreakup();
 		return;
 	}
-	if(eventNo == 3518) {
+	if( false  == 3518) {
 		urtaDiscussesWatchMembership();
 		return;
 	}
-	if(eventNo == 3519) {
+	if( false  == 3519) {
 		urtaDiscussesWatchRole();
 		return;
 	}
-	if(eventNo == 3520) {
+	if( false  == 3520) {
 		urtaDiscussesTheWatchsReach();
 		return;
 	}
-	if(eventNo == 3521) {
+	if( false  == 3521) {
 		urtaDiscussesCrimeAndPunishment();
 		return;
 	}
-	if(eventNo == 3522) {
+	if( false  == 3522) {
 		bigBootyRoxanneContestLoss();
 		return;
 	}
@@ -7618,7 +7618,7 @@ This license supercedes all previous licenses and remains in force.
 		getANiamhBeer();
 		return;
 	}
-	if(eventNo == 3526) {
+	if( false  == 3526) {
 		drinkNiamhsBeerInTelAdre();
 		return;
 	}
@@ -7626,11 +7626,11 @@ This license supercedes all previous licenses and remains in force.
 		blackCatBeerToGo();
 		return;
 	}
-	if(eventNo == 3528) {
+	if( false  == 3528) {
 		talkToNiamh();
 		return;
 	}
-	if(eventNo == 3529) {
+	if( false  == 3529) {
 		leaveNiamh();
 		return;
 	}
@@ -7638,7 +7638,7 @@ This license supercedes all previous licenses and remains in force.
 		harpyScissorSurprise();
 		return;
 	}
-	if(eventNo == 3531) {
+	if( false  == 3531) {
 		harpyScissorSurprisePtII();
 		return;
 	}
@@ -7650,15 +7650,15 @@ This license supercedes all previous licenses and remains in force.
 		taintNiamh(true);
 		return;
 	}
-	if(eventNo == 3534) {
+	if( false  == 3534) {
 		taintNiamh(false);
 		return;
 	}
-	if(eventNo == 3535) {
+	if( false  == 3535) {
 		niamhCorruptMobileSnackTurnDown();
 		return;
 	}
-	if(eventNo == 3536) {
+	if( false  == 3536) {
 		niamhCorruptedMobileSnackDrinkTime();
 		return;
 	}
@@ -7670,11 +7670,11 @@ This license supercedes all previous licenses and remains in force.
 		bazaardNiamhDrink();
 		return;
 	}
-	if(eventNo == 3539) {
+	if( false  == 3539) {
 		drinkFromZeTap();
 		return;
 	}
-	if(eventNo == 3540) {
+	if( false  == 3540) {
 		getBimboChampFromNiamh();
 		return;
 	}
@@ -7690,11 +7690,11 @@ This license supercedes all previous licenses and remains in force.
 		yeahSeanLetsBimbooze();
 		return;
 	}
-	if(eventNo == 3544) {
+	if( false  == 3544) {
 		getRidOfAnemone();
 		return;
 	}
-	if(eventNo == 3545) {
+	if( false  == 3545) {
 		keepAnemoneKid();
 		return;
 	}
@@ -7714,31 +7714,31 @@ This license supercedes all previous licenses and remains in force.
 		takeOutOfAnemone();
 		return;
 	}
-	if(eventNo == 3550) {
+	if( false  == 3550) {
 		anemoneWatchToggle();
 		return;
 	}
-	if(eventNo == 3551) {
+	if( false  == 3551) {
 		evictANemone();
 		return;
 	}
-	if(eventNo == 3552) {
+	if( false  == 3552) {
 		reallyEvictDaAnemone();
 		return;
 	}
-	if(eventNo == 3553) {
+	if( false  == 3553) {
 		meetMarble();
 		return;
 	}
-	if(eventNo == 3554) {
+	if( false  == 3554) {
 		definitelyBreakUpWithWithMarble();
 		return;
 	}
-	if(eventNo == 3555) {
+	if( false  == 3555) {
 		breakUpWithMarble();
 		return;
 	}
-	if(eventNo == 3556) {
+	if( false  == 3556) {
 		turnOffMarbleForever();
 		return;
 	}
@@ -7746,7 +7746,7 @@ This license supercedes all previous licenses and remains in force.
 		marbleNomNoms();
 		return;
 	}
-	if(eventNo == 3558) {
+	if( false  == 3558) {
 		marbleNightSexIntro();
 		return;
 	}
@@ -7758,35 +7758,35 @@ This license supercedes all previous licenses and remains in force.
 		forceFeedMarble();
 		return;
 	}
-	if(eventNo == 3561) {
+	if( false  == 3561) {
 		rapeMarbleInHerRoom();
 		return;
 	}
-	if(eventNo == 3562) {
+	if( false  == 3562) {
 		getOutOfDodge();
 		return;
 	}
-	if(eventNo == 3563) {
+	if( false  == 3563) {
 		stayForFights();
 		return;
 	}
-	if(eventNo == 3564) {
+	if( false  == 3564) {
 		pickAFight();
 		return;
 	}
-	if(eventNo == 3565) {
+	if( false  == 3565) {
 		apologizetoWalkingTitsIMEANMARBLE();
 		return;
 	}
-	if(eventNo == 3566) {
+	if( false  == 3566) {
 		leaveNonFriendsMarble4EVERRRR();
 		return;
 	}
-	if(eventNo == 3567) {
+	if( false  == 3567) {
 		leaveNonFriendsMarble();
 		return;
 	}
-	if(eventNo == 3568) {
+	if( false  == 3568) {
 		marbleWarningStateMeeting();
 		return;
 	}
@@ -7806,31 +7806,31 @@ This license supercedes all previous licenses and remains in force.
 		askJoeyAboutOffer();
 		return;
 	}
-	if(eventNo == 3573) {
+	if( false  == 3573) {
 		noMilkerPlzJoey();
 		return;
 	}
-	if(eventNo == 3574) {
+	if( false  == 3574) {
 		buyCockMilker();
 		return;
 	}
-	if(eventNo == 3575) {
+	if( false  == 3575) {
 		antColiseumFight();
 		return;
 	}
-	if(eventNo == 3576) {
+	if( false  == 3576) {
 		leaveAntColony();
 		return;
 	}
-	if(eventNo == 3577) {
+	if( false  == 3577) {
 		playHero();
 		return;
 	}
-	if(eventNo == 3578) {
+	if( false  == 3578) {
 		keepHidden();
 		return;
 	}
-	if(eventNo == 3579) {
+	if( false  == 3579) {
 		consolePhylla();
 		return;
 	}
@@ -7842,23 +7842,23 @@ This license supercedes all previous licenses and remains in force.
 		lumiEnhanceFox();
 		return;
 	}
-	if(eventNo == 3582) {
+	if( false  == 3582) {
 		noDungeon();
 		return;
 	}
-	if(eventNo == 3583) {
+	if( false  == 3583) {
 		agreeToHelpHeliaDungeon();
 		return;
 	}
-	if(eventNo == 3584) {
+	if( false  == 3584) {
 		notYet();
 		return;
 	}
-	if(eventNo == 3585) {
+	if( false  == 3585) {
 		goToHeliaDungeon();
 		return;
 	}
-	if(eventNo == 3586) {
+	if( false  == 3586) {
 		goToHeliaDungeon2();
 		return;
 	}
@@ -7870,19 +7870,19 @@ This license supercedes all previous licenses and remains in force.
 		valeriaFollower();
 		return;
 	}
-	if(eventNo == 3589) {
+	if( false  == 3589) {
 		valeriaAppearance();
 		return;
 	}
-	if(eventNo == 3590) {
+	if( false  == 3590) {
 		valeriaSpar();
 		return;
 	}
-	if(eventNo == 3591) {
+	if( false  == 3591) {
 		pcWinsValeriaSpar();
 		return;
 	}
-	if(eventNo == 3592) {
+	if( false  == 3592) {
 		pcWinsValeriaSparDefeat();
 		return;
 	}
@@ -7910,35 +7910,35 @@ This license supercedes all previous licenses and remains in force.
 		valeriaSexDominated();
 		return;
 	}
-	if(eventNo == 3599) {
+	if( false  == 3599) {
 		talkWithValeria();
 		return;
 	}
-	if(eventNo == 3600) {
+	if( false  == 3600) {
 		flirtWithValeria();
 		return;
 	}
-	if(eventNo == 3601) {
+	if( false  == 3601) {
 		acceptValeriasNeeds();
 		return;
 	}
-	if(eventNo == 3602) {
+	if( false  == 3602) {
 		declineValeriasNeeds();
 		return;
 	}
-	if(eventNo == 3603) {
+	if( false  == 3603) {
 		takeValeria();
 		return;
 	}
-	if(eventNo == 3604) {
+	if( false  == 3604) {
 		dontGoToZeVillage();
 		return;
 	}
-	if(eventNo == 3605) {
+	if( false  == 3605) {
 		agreeToFollowRebecFirstTime();
 		return;
 	}
-	if(eventNo == 3606) {
+	if( false  == 3606) {
 		declineRebeccsPlea();
 		return;
 	}
@@ -7950,7 +7950,7 @@ This license supercedes all previous licenses and remains in force.
 		acceptRebeccsPlea(false, true);
 		return;
 	}
-	if(eventNo == 3609) {
+	if( false  == 3609) {
 		acceptRebeccsPlea(false, false);
 		return;
 	}
@@ -7970,15 +7970,15 @@ This license supercedes all previous licenses and remains in force.
 		fightZeDemons(false);
 		return;
 	}
-	if(eventNo == 3614) {
+	if( false  == 3614) {
 		loseOrSubmitToVapula();
 		return;
 	}
-	if(eventNo == 3615) {
+	if( false  == 3615) {
 		wakeUpAfterDemonGangBangs();
 		return;
 	}
-	if(eventNo == 3616) {
+	if( false  == 3616) {
 		defeetVapulasHorde();
 		return;
 	}
@@ -7990,23 +7990,23 @@ This license supercedes all previous licenses and remains in force.
 		owcaTavern();
 		return;
 	}
-	if(eventNo == 3619) {
+	if( false  == 3619) {
 		sheepMilk();
 		return;
 	}
-	if(eventNo == 3620) {
+	if( false  == 3620) {
 		buyOwcaShit("MinoCum");
 		return;
 	}
-	if(eventNo == 3621) {
+	if( false  == 3621) {
 		buyOwcaShit("BroBrew");
 		return;
 	}
-	if(eventNo == 3622) {
+	if( false  == 3622) {
 		buyOwcaShit("Gob.Ale");
 		return;
 	}
-	if(eventNo == 3623) {
+	if( false  == 3623) {
 		buyOwcaShit("SheepMk");
 		return;
 	}
@@ -8018,15 +8018,15 @@ This license supercedes all previous licenses and remains in force.
 		zePit();
 		return;
 	}
-	if(eventNo == 3626) {
+	if( false  == 3626) {
 		rebeccMenu();
 		return;
 	}
-	if(eventNo == 3627) {
+	if( false  == 3627) {
 		rebeccAppearance();
 		return;
 	}
-	if(eventNo == 3628) {
+	if( false  == 3628) {
 		rebeccBathScene();
 		return;
 	}
@@ -8042,11 +8042,11 @@ This license supercedes all previous licenses and remains in force.
 		gangbangVillageStuff();
 		return;
 	}
-	if(eventNo == 3632) {
+	if( false  == 3632) {
 		slaveToVapulaBadEnd();
 		return;
 	}
-	if(eventNo == 3633) {
+	if( false  == 3633) {
 		noVapulaSex();
 		return;
 	}
@@ -8066,7 +8066,7 @@ This license supercedes all previous licenses and remains in force.
 		owcaBuySetup("SheepMk");
 		return;
 	}
-	if(eventNo == 3638) {
+	if( false  == 3638) {
 		fightZeVillagers();
 		return;
 	}
@@ -8074,39 +8074,39 @@ This license supercedes all previous licenses and remains in force.
 		torchOwcaMotherFuckers();
 		return;
 	}
-	if(eventNo == 3640) {
+	if( false  == 3640) {
 		leaveOwcaAfterWhupping();
 		return;
 	}
-	if(eventNo == 3641) {
+	if( false  == 3641) {
 		torchUpVillagersAndLeave();
 		return;
 	}
-	if(eventNo == 3642) {
+	if( false  == 3642) {
 		morningAfterRape();
 		return;
 	}
-	if(eventNo == 3643) {
+	if( false  == 3643) {
 		forgiveOwca();
 		return;
 	}
-	if(eventNo == 3644) {
+	if( false  == 3644) {
 		fuckThisShit();
 		return;
 	}
-	if(eventNo == 3645) {
+	if( false  == 3645) {
 		leaveRebeccToBeRaped();
 		return;
 	}
-	if(eventNo == 3646) {
+	if( false  == 3646) {
 		faceDownHordes();
 		return;
 	}
-	if(eventNo == 3647) {
+	if( false  == 3647) {
 		noFollowerShoulders();
 		return;
 	}
-	if(eventNo == 3648) {
+	if( false  == 3648) {
 		recruitShouldraForCampSexyTimes();
 		return;
 	}
@@ -8138,11 +8138,11 @@ This license supercedes all previous licenses and remains in force.
 		shouldraGroPlus();
 		return;
 	}
-	if(eventNo == 3656) {
+	if( false  == 3656) {
 		shouldraTalkMenu();
 		return;
 	}
-	if(eventNo == 3657) {
+	if( false  == 3657) {
 		shouldraYappin();
 		return;
 	}
@@ -8178,11 +8178,11 @@ This license supercedes all previous licenses and remains in force.
 		shouldraFollowerScreen();
 		return;
 	}
-	if(eventNo == 3666) {
+	if( false  == 3666) {
 		definitelyKickOutCrazyGhosts();
 		return;
 	}
-	if(eventNo == 3667) {
+	if( false  == 3667) {
 		edwardShouldraDickHandsPartII();
 		return;
 	}
@@ -8198,7 +8198,7 @@ This license supercedes all previous licenses and remains in force.
 		sandWitchGetsGhostly();
 		return;
 	}
-	if(eventNo == 3671) {
+	if( false  == 3671) {
 		shouldraFappinTimes();
 		return;
 	}
@@ -8210,51 +8210,51 @@ This license supercedes all previous licenses and remains in force.
 		shouldraSexMenu();
 		return;
 	}
-	if(eventNo == 3674) {
+	if( false  == 3674) {
 		kickFollowerShouldraOut();
 		return;
 	}
-	if(eventNo == 3675) {
+	if( false  == 3675) {
 		kickOutShouldra4YoWormyBuddies();
 		return;
 	}
-	if(eventNo == 3676) {
+	if( false  == 3676) {
 		kickOutWormiesForYourGhostPalPAL();
 		return;
 	}
-	if(eventNo == 3677) {
+	if( false  == 3677) {
 		keepExgartuanInsteadOfShouldra();
 		return;
 	}
-	if(eventNo == 3678) {
+	if( false  == 3678) {
 		keepShouldraAndKickOutExgartuan();
 		return;
 	}
-	if(eventNo == 3679) {
+	if( false  == 3679) {
 		keepShouldraPartIIExgartumonsUndeatH();
 		return;
 	}
-	if(eventNo == 3680) {
+	if( false  == 3680) {
 		keepShouldraPartIIIExgartumonsUndeatH();
 		return;
 	}
-	if(eventNo == 3681) {
+	if( false  == 3681) {
 		keepAllTheGhosts();
 		return;
 	}
-	if(eventNo == 3682) {
+	if( false  == 3682) {
 		shouldraBakeryIntro();
 		return;
 	}
-	if(eventNo == 3683) {
+	if( false  == 3683) {
 		bailOut();
 		return;
 	}
-	if(eventNo == 3684) {
+	if( false  == 3684) {
 		feedShouldraACake();
 		return;
 	}
-	if(eventNo == 3685) {
+	if( false  == 3685) {
 		shouldraAndMaddieSittingInATree();
 		return;
 	}
@@ -8262,7 +8262,7 @@ This license supercedes all previous licenses and remains in force.
 		goAlongWIthShouldrasEatingSpree();		
 		return;
 	}
-	if(eventNo == 3687) {
+	if( false  == 3687) {
 		resistBeingAFatass();
 		return;
 	}
@@ -8270,11 +8270,11 @@ This license supercedes all previous licenses and remains in force.
 		pumpkinFuck();
 		return;
 	}
-	if(eventNo == 3689) {
+	if( false  == 3689) {
 		pumpkinFuckPartII();
 		return;
 	}
-	if(eventNo == 3690) {
+	if( false  == 3690) {
 		pumpkinFuckPartIII();
 		return;
 	}
@@ -8282,23 +8282,23 @@ This license supercedes all previous licenses and remains in force.
 		emberCampMenu();
 		return;
 	}
-	if(eventNo == 3692) {
+	if( false  == 3692) {
 		findEmbersEgg();
 		return;
 	}
-	if(eventNo == 3693) {
+	if( false  == 3693) {
 		leaveEmbersAssOutToDry();
 		return;
 	}
-	if(eventNo == 3694) {
+	if( false  == 3694) {
 		destroyBabyEmberYouMonster();
 		return;
 	}
-	if(eventNo == 3695) {
+	if( false  == 3695) {
 		eatEmbersYolkLikeAnEvenBiggerDick();
 		return;
 	}
-	if(eventNo == 3696) {
+	if( false  == 3696) {
 		bloodForTheBloodGod();
 		return;
 	}
@@ -8306,15 +8306,15 @@ This license supercedes all previous licenses and remains in force.
 		getSomeStuff();
 		return;
 	}
-	if(eventNo == 3698) {
+	if( false  == 3698) {
 		takeEmbersEggHomeInADoggieBag();
 		return;
 	}
-	if(eventNo == 3699) {
+	if( false  == 3699) {
 		noMoDagronBlud();
 		return;
 	}
-	if(eventNo == 3700) {
+	if( false  == 3700) {
 		drinkDeeplyOfDagronBlud();
 		return;
 	}
@@ -8322,11 +8322,11 @@ This license supercedes all previous licenses and remains in force.
 		emberEggInteraction();
 		return;
 	}
-	if(eventNo == 3702) {
+	if( false  == 3702) {
 		dontEggFap();
 		return;
 	}
-	if(eventNo == 3703) {
+	if( false  == 3703) {
 		leaveWithoutUsingAnEmberItem();
 		return;
 	}
@@ -8358,7 +8358,7 @@ This license supercedes all previous licenses and remains in force.
 		hairExtensionSerum();
 		return;
 	}
-	if(eventNo == 3711) {
+	if( false  == 3711) {
 		giveEmberBludSausages();
 		return;
 	}
@@ -8370,27 +8370,27 @@ This license supercedes all previous licenses and remains in force.
 		hatchZeMuzzles();
 		return;
 	}
-	if(eventNo == 3714) {
+	if( false  == 3714) {
 		meetEmberAftermath();
 		return;
 	}
-	if(eventNo == 3715) {
+	if( false  == 3715) {
 		embersAppearance();
 		return;
 	}
-	if(eventNo == 3716) {
+	if( false  == 3716) {
 		talkToEmber();
 		return;
 	}
-	if(eventNo == 3717) {
+	if( false  == 3717) {
 		talkToEmberAboutDragonzzz();
 		return;
 	}
-	if(eventNo == 3718) {
+	if( false  == 3718) {
 		discussExplorationWithEmber();
 		return;
 	}
-	if(eventNo == 3719) {
+	if( false  == 3719) {
 		talkToEmberAboutYourself();
 		return;
 	}
@@ -8410,15 +8410,15 @@ This license supercedes all previous licenses and remains in force.
 		getMilkFromEmber();
 		return;
 	}
-	if(eventNo == 3724) {
+	if( false  == 3724) {
 		decideToSparEmbra();
 		return;
 	}
-	if(eventNo == 3725) {
+	if( false  == 3725) {
 		mountPumpkinsIII();
 		return;
 	}
-	if(eventNo == 3726) {
+	if( false  == 3726) {
 		pumpkinMountingLevelII();
 		return;
 	}
@@ -8454,7 +8454,7 @@ This license supercedes all previous licenses and remains in force.
 		penetrateEmbrah();
 		return;
 	}
-	if(eventNo == 3735) {
+	if( false  == 3735) {
 		penetrateEmbrahPartII();
 		return;
 	}
@@ -8462,11 +8462,11 @@ This license supercedes all previous licenses and remains in force.
 		getPenetratedByEmberLastSexSceneWoooo();
 		return;
 	}
-	if(eventNo == 3737) {
+	if( false  == 3737) {
 		getPenetratedByEmberLastSexSceneWooooPartII();
 		return;
 	}
-	if(eventNo == 3738) {
+	if( false  == 3738) {
 		emberSexMenu();
 		return;
 	}
@@ -8474,7 +8474,7 @@ This license supercedes all previous licenses and remains in force.
 		driderVagSmartFuck();
 		return;
 	}
-	if(eventNo == 3740) {
+	if( false  == 3740) {
 		dontSilkRapeDrider();
 		return;
 	}
@@ -8482,27 +8482,27 @@ This license supercedes all previous licenses and remains in force.
 		driderTiedUpPartTwo(true);
 		return;
 	}
-	if(eventNo == 3742) {
+	if( false  == 3742) {
 		driderTiedUpPartTwo(false);
 		return;
 	}
-	if(eventNo == 3743) {
+	if( false  == 3743) {
 		driderTiedUpPartThree();
 		return;
 	}
-	if(eventNo == 3744) {
+	if( false  == 3744) {
 		driderTiedUpPartFour();
 		return;
 	}
-	if(eventNo == 3745) {
+	if( false  == 3745) {
 		defeatDriderIntro();
 		return;
 	}
-	if(eventNo == 3746) {
+	if( false  == 3746) {
 		flirtWithVictoria();
 		return;
 	}
-	if(eventNo == 3747) {
+	if( false  == 3747) {
 		disbandHorde();
 		return;
 	}
@@ -8534,11 +8534,11 @@ This license supercedes all previous licenses and remains in force.
 		feedVapulaACupOfJizz();
 		return;
 	}
-	if(eventNo == 3755) {
+	if( false  == 3755) {
 		chicksFeedVapula();
 		return;
 	}
-	if(eventNo == 3756) {
+	if( false  == 3756) {
 		teaseVapula();
 		return;
 	}
@@ -8562,11 +8562,11 @@ This license supercedes all previous licenses and remains in force.
 		vapulaAndAmilyThreesome();
 		return;
 	}
-	if(eventNo == 3762) {
+	if( false  == 3762) {
 		vapulaSophieThreesomeCunts();
 		return;
 	}
-	if(eventNo == 3763) {
+	if( false  == 3763) {
 		vapulaSophieThreeSome();
 		return;
 	}
@@ -8574,11 +8574,11 @@ This license supercedes all previous licenses and remains in force.
 		vapulaSophieThreesomeSelect();
 		return;
 	}
-	if(eventNo == 3765) {
+	if( false  == 3765) {
 		vapulaAndCeraphButtfuckTrainYeehaw();
 		return;
 	}
-	if(eventNo == 3766) {
+	if( false  == 3766) {
 		vapulaCeraphThreesomePleaseBoth();
 		return;
 	}
@@ -8594,7 +8594,7 @@ This license supercedes all previous licenses and remains in force.
 		chixFeedVapulaBlehblehIVantToZuckYourSpooo();
 		return;
 	}
-	if(eventNo == 3770) {
+	if( false  == 3770) {
 		chicksFeedVapula();
 		return;
 	}
@@ -8602,19 +8602,19 @@ This license supercedes all previous licenses and remains in force.
 		teaseVapula();
 		return;
 	}
-	if(eventNo == 3772) {
+	if( false  == 3772) {
 		fuckOffEmberIWantANap();
 		return;
 	}
-	if(eventNo == 3773) {
+	if( false  == 3773) {
 		timeToPuffTheMagicDragon();
 		return;
 	}
-	if(eventNo == 3774) {
+	if( false  == 3774) {
 		getKnockedUpByEmbrahBroBaby();
 		return;
 	}
-	if(eventNo == 3775) {
+	if( false  == 3775) {
 		breedEmberPregnantAsIfThereWasAnyOtherKindOfBreeding();
 		return;
 	}
@@ -8654,7 +8654,7 @@ This license supercedes all previous licenses and remains in force.
 		defeatChameleonGirl();
 		return;
 	}
-	if(eventNo == 3785) {
+	if( false  == 3785) {
 		brigitPostQueenDeathBadEndII();
 		return;
 	}
@@ -8682,7 +8682,7 @@ This license supercedes all previous licenses and remains in force.
 		benoitTransactBuy(3);
 		return;
 	}
-	if(eventNo == 3792) {
+	if( false  == 3792) {
 		benoitTransactBuy(4);
 		return;
 	}
@@ -8710,19 +8710,19 @@ This license supercedes all previous licenses and remains in force.
 		talkToBenoit();
 		return;
 	}
-	if(eventNo == 3799) {
+	if( false  == 3799) {
 		letZeTurkeyApproach();
 		return;
 	}
-	if(eventNo == 3800) {
+	if( false  == 3800) {
 		shooTurkeyAway();
 		return;
 	}
-	if(eventNo == 3801) {
+	if( false  == 3801) {
 		noThanksTurkeyGal();
 		return;
 	}
-	if(eventNo == 3802) {
+	if( false  == 3802) {
 		basteThatTurkeyBooty();
 		return;
 	}
@@ -8738,15 +8738,15 @@ This license supercedes all previous licenses and remains in force.
 		thatllDoTurkey();
 		return;
 	}
-	if(eventNo == 3806) {
+	if( false  == 3806) {
 		turkeyAppetizer();
 		return;
 	}
-	if(eventNo == 3807) {
+	if( false  == 3807) {
 		femaleAndTurkeyMainCourse();
 		return;
 	}
-	if(eventNo == 3808) {
+	if( false  == 3808) {
 		haveTurkeyGirlDesertInYourCunt();
 		return;
 	}
@@ -8754,19 +8754,19 @@ This license supercedes all previous licenses and remains in force.
 		eggySuggest();
 		return;
 	}
-	if(eventNo == 3810) {
+	if( false  == 3810) {
 		takeBenoitsContraceptives();
 		return;
 	}
-	if(eventNo == 3811) {
+	if( false  == 3811) {
 		dontTakeEggtraceptives();
 		return;
 	}
-	if(eventNo == 3812) {
+	if( false  == 3812) {
 		repeatSexWithBenoitLetHim();
 		return;
 	}
-	if(eventNo == 3813) {
+	if( false  == 3813) {
 		repeatBenoitFuckTakeCharge();
 		return;
 	}
@@ -8774,7 +8774,7 @@ This license supercedes all previous licenses and remains in force.
 		tryToConvertToBassyWomb();
 		return;
 	}
-	if(eventNo == 3815) {
+	if( false  == 3815) {
 		//ARG: later:Boolean
 		suggestSexAfterBasiWombed(true);
 		return;
@@ -8784,7 +8784,7 @@ This license supercedes all previous licenses and remains in force.
 		suggestSexAfterBasiWombed(false);
 		return;
 	}
-	if(eventNo == 3817) {
+	if( false  == 3817) {
 		
 		return;
 	}
@@ -8792,7 +8792,7 @@ This license supercedes all previous licenses and remains in force.
 		anemoneButtPlugginz();
 		return;
 	}
-	if(eventNo == 3819) {
+	if( false  == 3819) {
 		anemoneQuoteUnquoteAnal();
 		return;
 	}
@@ -8800,7 +8800,7 @@ This license supercedes all previous licenses and remains in force.
 		hotdogTheAnemone();
 		return;
 	}
-	if(eventNo == 3821) {
+	if( false  == 3821) {
 		fuckingAssholelessAnemoneeeez();
 		return;
 	}
@@ -8812,7 +8812,7 @@ This license supercedes all previous licenses and remains in force.
 		dontSaveTheTarps();
 		return;
 	}
-	if(eventNo == 3824) {
+	if( false  == 3824) {
 		startSandTarpFight();
 		return;
 	}
@@ -8832,15 +8832,15 @@ This license supercedes all previous licenses and remains in force.
 		useSandTarpsHands();
 		return;
 	}
-	if(eventNo == 3829) {
+	if( false  == 3829) {
 		dickwieldersLoseToSandTarps();
 		return;
 	}
-	if(eventNo == 3830) {
+	if( false  == 3830) {
 		chicksLoseToSandTarp();
 		return;
 	}
-	if(eventNo == 3831) {
+	if( false  == 3831) {
 		genderlessLoss();
 		return;
 	}
@@ -8880,19 +8880,19 @@ This license supercedes all previous licenses and remains in force.
 		giveTheFoxSomeEggs();
 		return;
 	}
-	if(eventNo == 3841) {
+	if( false  == 3841) {
 		sandwitchBirthsYourMonstrosities();
 		return;
 	}
-	if(eventNo == 3842) {
+	if( false  == 3842) {
 		laySomeEggsInThatWitchFinally();
 		return;
 	}
-	if(eventNo == 3843) {
+	if( false  == 3843) {
 		eggwitchForeplay();
 		return;
 	}
-	if(eventNo == 3844) {
+	if( false  == 3844) {
 		getToFuckingWithZeEggsInWitch();
 		return;
 	}
@@ -8924,15 +8924,15 @@ This license supercedes all previous licenses and remains in force.
 		getHugeEggsInCawk();
 		return;
 	}
-	if(eventNo == 3852) {
+	if( false  == 3852) {
 		destroyDatFukkinTree();
 		return;
 	}
-	if(eventNo == 3853) {
+	if( false  == 3853) {
 		letZeFuckingSproutLive();
 		return;
 	}
-	if(eventNo == 3854) {
+	if( false  == 3854) {
 		destroyDatFuckingPlantAtP2();
 		return;
 	}
@@ -8948,7 +8948,7 @@ This license supercedes all previous licenses and remains in force.
 		fuckTheFlower();
 		return;
 	}
-	if(eventNo == 3858) {
+	if( false  == 3858) {
 		drinkThePlantGirlsSap();
 		return;
 	}
@@ -8964,7 +8964,7 @@ This license supercedes all previous licenses and remains in force.
 		treeMenu();
 		return;
 	}
-	if(eventNo == 3862) {
+	if( false  == 3862) {
 		slapAmilysWhoreFace();
 		return;
 	}
@@ -8992,7 +8992,7 @@ This license supercedes all previous licenses and remains in force.
 		begHolli4Watches();
 		return;
 	}
-	if(eventNo == 3869) {
+	if( false  == 3869) {
 		stayQuietWhileAmilyBitchesAboutFuckingArborday();
 		return;
 	}
@@ -9000,15 +9000,15 @@ This license supercedes all previous licenses and remains in force.
 		consensualSatyrFuck(0);
 		return;
 	}
-	if(eventNo == 3871) {
+	if( false  == 3871) {
 		consensualSatyrFuck(1);
 		return;
 	}
-	if(eventNo == 3872) {
+	if( false  == 3872) {
 		keepDrinking();
 		return;
 	}
-	if(eventNo == 3873) {
+	if( false  == 3873) {
 		leavePartySatyr();
 		return;
 	}
@@ -9028,7 +9028,7 @@ This license supercedes all previous licenses and remains in force.
 		malesTakeAdvantageOfSatyrs();
 		return;
 	}
-	if(eventNo == 3878) {
+	if( false  == 3878) {
 		willinglyBoneSatyr();
 		return;
 	}
@@ -9076,15 +9076,15 @@ This license supercedes all previous licenses and remains in force.
 		//giveIncubusDraftRubi();
 		return;
 	}
-	if(eventNo == 3890) {
+	if( false  == 3890) {
 		specialRelationship20scene();
 		return;
 	}
-	if(eventNo == 3891) {
+	if( false  == 3891) {
 		acceptRubi();
 		return;
 	}
-	if(eventNo == 3892) {
+	if( false  == 3892) {
 		rejectRubi();
 		return;
 	}
@@ -9140,59 +9140,59 @@ This license supercedes all previous licenses and remains in force.
 		findBimboCheatster();
 		return;
 	}
-	if(eventNo == 3906) {
+	if( false  == 3906) {
 		interruptTheNTRsYouCrazyFool();
 		return;
 	}
-	if(eventNo == 3907) {
+	if( false  == 3907) {
 		waitAndGetNTRedLikeTheBoyBitchYouAre();
 		return;
 	}
-	if(eventNo == 3908) {
+	if( false  == 3908) {
 		NTRbimboBitchResolution();
 		return;
 	}
-	if(eventNo == 3909) {
+	if( false  == 3909) {
 		noBimboNTR();
 		return;
 	}
-	if(eventNo == 3910) {
+	if( false  == 3910) {
 		yesBimboNTR();
 		return;
 	}
-	if(eventNo == 3911) {
+	if( false  == 3911) {
 		breakUpWithRubi();
 		return;
 	}
-	if(eventNo == 3912) {
+	if( false  == 3912) {
 		pimpOutRubi();
 		return;
 	}
-	if(eventNo == 3913) {
+	if( false  == 3913) {
 		enterTheTrickster();
 		return;
 	}
-	if(eventNo == 3914) {
+	if( false  == 3914) {
 		loseKitsuneImpFight();
 		return;
 	}
-	if(eventNo == 3915) {
+	if( false  == 3915) {
 		winKitsuneImpFight();
 		return;
 	}
-	if(eventNo == 3916) {
+	if( false  == 3916) {
 		willOWisp();
 		return;
 	}
-	if(eventNo == 3917) {
+	if( false  == 3917) {
 		turnBackFromWillOWisp();
 		return;
 	}
-	if(eventNo == 3918) {
+	if( false  == 3918) {
 		followTheWillOWisp();
 		return;
 	}
-	if(eventNo == 3919) {
+	if( false  == 3919) {
 		talkAfterResistingKitsunellusion();
 		return;
 	}
@@ -9208,11 +9208,11 @@ This license supercedes all previous licenses and remains in force.
 		mansion(true, true);
 		return;
 	}
-	if(eventNo == 3923) {
+	if( false  == 3923) {
 		mansion(false, false);
 		return;
 	}
-	if(eventNo == 3924) {
+	if( false  == 3924) {
 		mansion(false, true);
 		return;
 	}
@@ -9248,7 +9248,7 @@ This license supercedes all previous licenses and remains in force.
 		kitsuneShoveHerMansion(false);
 		return;
 	}
-	if(eventNo == 3933) {
+	if( false  == 3933) {
 		kitsuneStillHungryMansion();
 		return;
 	}
@@ -9284,23 +9284,23 @@ This license supercedes all previous licenses and remains in force.
 		genderlessKitsuneStillHungry(false);
 		return;
 	}
-	if(eventNo == 3942) {
+	if( false  == 3942) {
 		tentacleKitsuneWingWangs();
 		return;
 	}
-	if(eventNo == 3943) {
+	if( false  == 3943) {
 		outro(true);
 		return;
 	}
-	if(eventNo == 3944) {
+	if( false  == 3944) {
 		outro(false);
 		return;
 	}
-	if(eventNo == 3945) {
+	if( false  == 3945) {
 		mansionBadEnd();
 		return;
 	}
-	if(eventNo == 3946) {
+	if( false  == 3946) {
 		kitSuneMansionBadEndII();
 		return;
 	}
@@ -9308,11 +9308,11 @@ This license supercedes all previous licenses and remains in force.
 		followTheWillOWisp(true);
 		return;
 	}
-	if(eventNo == 3948) {
+	if( false  == 3948) {
 		layEggsInAmilysCorruptedHole();
 		return;
 	}
-	if(eventNo == 3949) {
+	if( false  == 3949) {
 		layEggsInAmilysButtPt2();
 		return;
 	}
@@ -9329,15 +9329,15 @@ This license supercedes all previous licenses and remains in force.
 		layEggsInYerTits();
 		return;
 	}
-	if(eventNo == 3953) {
+	if( false  == 3953) {
 		leaveWithBeerTits();
 		return;
 	}
-	if(eventNo == 3954) {
+	if( false  == 3954) {
 		sellYourBooze();
 		return;
 	}
-	if(eventNo == 3955) {
+	if( false  == 3955) {
 		barBeerOrgyTits();
 		return;
 	}
@@ -9349,7 +9349,7 @@ This license supercedes all previous licenses and remains in force.
 		dockWithUrtaUnderScyllasSoberSupervision();
 		return;
 	}
-	if(eventNo == 3958) {
+	if( false  == 3958) {
 		dockWithUrtaUnderScyllasSoberSupervision2();
 		return;
 	}
@@ -9361,7 +9361,7 @@ This license supercedes all previous licenses and remains in force.
 		amilySwimFuckIntro();
 		return;
 	}
-	if(eventNo == 3961) {
+	if( false  == 3961) {
 		amilySwimFuckPartII();
 		return;
 	}
@@ -9401,15 +9401,15 @@ This license supercedes all previous licenses and remains in force.
 		approachLatexy();
 		return;
 	}
-	if(eventNo == 3971) {
+	if( false  == 3971) {
 		fightSomeKitsunes();
 		return;
 	}
-	if(eventNo == 3972) {
+	if( false  == 3972) {
 		rideDatSophieVag();
 		return;
 	}
-	if(eventNo == 3973) {
+	if( false  == 3973) {
 		preferTamaniFemdom();
 		return;
 	}
@@ -9425,7 +9425,7 @@ This license supercedes all previous licenses and remains in force.
 		loppeGenericMeetings();
 		return;
 	}
-	if(eventNo == 3977) {
+	if( false  == 3977) {
 		marbleTalkOverhaul();
 		return;
 	}
@@ -9433,15 +9433,15 @@ This license supercedes all previous licenses and remains in force.
 		shareTentaclesWithScylla();
 		return;
 	}
-	if(eventNo == 3979) {
+	if( false  == 3979) {
 		rideDatSophieVag(true);
 		return;
 	}
-	if(eventNo == 3980) {
+	if( false  == 3980) {
 		lippleBondUrtaScylla();
 		return;
 	}
-	if(eventNo == 3981) {
+	if( false  == 3981) {
 		telHelToGetOffTheMInoCock();
 		return;
 	}
@@ -9453,7 +9453,7 @@ This license supercedes all previous licenses and remains in force.
 		lumiEnhanceFoxJewel();
 		return;
 	}
-	if(eventNo == 3984) {
+	if( false  == 3984) {
 		talkWithUrtaAboutFamFam();
 		return;
 	}
@@ -9509,5 +9509,8 @@ This license supercedes all previous licenses and remains in force.
 		ingredientsMenu();
 		return;
 	}
+	outputText("<B>OH SHIT, SOMETHING WENT WRONG</B>\n", false);
+	outputText("Please report the following to Fake-Name on the forums:\n", false);
+	outputText("Failing Event-number: " + String(eventNo), false);
 }
 

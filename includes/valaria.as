@@ -1,4 +1,4 @@
-﻿const VELARIA_FUTA:int = 499;
+﻿//const VELARIA_FUTA:int = 499;
 
 
 //Camp Menu -- [Followers] -- [Valeria]
@@ -10,7 +10,7 @@ function valeriaFollower():void {
 	var sex:Number = 0;
 	if(player.lust > 33) sex = 3593;
 	//(Display Options: [Appearance] [Spar] [Sex] [Talk])
-	choices("Appearance",3589,"Spar",3590,"Sex",sex,"Talk",3599,"Take",3603,"",0,"",0,"",0,"",0,"Back",74);
+	choices("Appearance",valeriaAppearance,"Spar",valeriaSpar,"Sex",sex,"Talk",talkWithValeria,"Take",takeValeria,"",0,"",0,"",0,"",0,"Back",74);
 }
 
 //[Valeria] -- [Appearance]
@@ -23,7 +23,7 @@ function valeriaAppearance():void {
 	if(flags[VELARIA_FUTA] == 1) outputText("\n\nWhen you desire it, she's able to form an impressive human-shaped cock above her twat, usually capping out at about 12 inches. Gooey as it is, it constantly dribbles bits of goop, not unlike pre-cum.");
 	outputText("\n\nShe has created an easily stretchable, gooey cunt between her legs, with a tiny 0.2 inch clitoris.");
 	outputText("\n\nShe generally doesn't bother to affect an anus, though you can't imagine it'd be too difficult to penetrate her gooey, gropable behind.");
-	doNext(3588);
+	doNext(valeriaFollower);
 }
 //Valeria] -- [Spar]
 function valeriaSpar():void {
@@ -70,7 +70,7 @@ function pcWinsValeriaSparDefeat():void {
 	else {
 		outputText(".  \"<i>Well, since you're so... eager... I might as well get my daily fluids while we're here.</i>\"");
 		//(Go to Valeria's gender-appropriate FemDom sex scenes)
-		doNext(3598);
+		doNext(valeriaSexDominated);
 	}
 }
 
@@ -100,7 +100,7 @@ function followersValeriaSex(display:Boolean = true):void {
 		dickText = "Lose Dick";
 		dickToggle = 3594;
 	}
-	choices("PenetrateHer",penetrate,"Get Fucked",getFucked,"Gooflation",gooFlation,"GetDominated",dominated,dickText,dickToggle,"",0,"",0,"",0,"",0,"Back",3588);
+	choices("PenetrateHer",penetrate,"Get Fucked",getFucked,"Gooflation",gooFlation,"GetDominated",dominated,dickText,dickToggle,"",0,"",0,"",0,"",0,"Back",valeriaFollower);
 }
 
 //Valeria -- [Sex] -- [Dick/No Dick]
@@ -138,7 +138,7 @@ function valeriaDickToggle():void {
 		}
 
 	}
-	doNext(3588);
+	doNext(valeriaFollower);
 }
 
 //Valeria -- [Sex] -- [Get Fucked]
@@ -358,8 +358,8 @@ function talkWithValeria():void {
 	outputText("\n\nValeria chuckles wryly. \"<i>Well, it's not like I'm completely unchanged,</i>\" she whispers huskily, leaning close and looking hungrily at your crotch.  \"<i>After all, I have certain... appetites... now, you know.  I'm not proud of my new needs, but I'm afraid I just can't ignore them...</i>\"");
 	//How do you respond to that?
 	//(Display Options: [Flirt](PC has Gender) [Accept] [Gross])
-	if(player.gender > 0) simpleChoices("Flirt",3600,"Accept",3601,"Gross",3602,"",0,"",0);
-	else simpleChoices("",0,"Accept",3601,"Gross",3602,"",0,"",0);
+	if(player.gender > 0) simpleChoices("Flirt",flirtWithValeria,"Accept",acceptValeriasNeeds,"Gross",declineValeriasNeeds,"",0,"",0);
+	else simpleChoices("",0,"Accept",acceptValeriasNeeds,"Gross",declineValeriasNeeds,"",0,"",0);
 }
 
 //[Flirt]
@@ -385,7 +385,7 @@ function acceptValeriasNeeds():void {
 	outputText(", as long as they don't interfere with your mission as Champion.");
 	outputText("\n\n\"<i>They won't, partner,</i>\" Valeria says with a little wink. \"<i>I give you my word.</i>\"");
 	outputText("\n\nNodding, you ruffle her gooey hair and get back to business.");
-	doNext(3588);
+	doNext(valeriaFollower);
 }
 //[Gross]
 function declineValeriasNeeds():void {
