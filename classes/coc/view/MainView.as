@@ -49,11 +49,11 @@ package coc.view {
 
 			super();
 
-			// Stub.  This will replace engineCore/mouseOverTextin().
-			this.toolTip = {
-				showForButton: function( ... args ) { trace( "ToolTip.showForButton: noop." ); },
-				hide: function( ... args ) { trace( "ToolTip.hide: noop." ); }
-			}
+			this.toolTipView = new ToolTipView( this );
+			this.addChild( this.toolTipview )
+
+			this.statsView = new StatsView( this );
+			this.addChild( this.statsView );
 
 			this.bottomButtonSettings = [];
 
@@ -94,6 +94,7 @@ package coc.view {
 
 					default:
 						t.mouseEnabled = false;
+						break;
 				}
 			}
 		};
@@ -217,7 +218,8 @@ package coc.view {
 		public function setButton( index :int, label :String = null, callback :Function = null, toolTip :* = null ) {
 			if( index < 0 || index >= BOTTOM_BUTTON_COUNT ) {
 				trace( "MainView.setButton called with out of range index:", index );
-				throw new RangeError()
+				// throw new RangeError();
+				return;
 			}
 			if( callback ) {
 				this.bottomButtonSettings[ index ] = {
