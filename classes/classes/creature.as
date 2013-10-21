@@ -839,28 +839,28 @@ package classes
 			var counter:Number = 0
 			//Start the array if its the first bit
 			if(perks.length == 0) {
-				trace("New Perk Started Array! " + keyName);
+				//trace("New Perk Started Array! " + keyName);
 				perks.push(newKeyItem);
 				arrayed = true;
 				keySlot = 0;
 			}
 			//If it belongs at the end, push it on
 			if(perks[perks.length-1].perkName < keyName && !arrayed) {
-				trace("New Perk Belongs at the end!! " + keyName);
+				//trace("New Perk Belongs at the end!! " + keyName);
 				perks.push(newKeyItem);
 				arrayed = true;
 				keySlot = perks.length-1;
 			}
 			//If it belongs in the beginning, splice it in
 			if(perks[0].perkName > keyName && !arrayed) {
-				trace("New Perk Belongs at the beginning! " + keyName);
+				//trace("New Perk Belongs at the beginning! " + keyName);
 				perks.splice(0,0,newKeyItem);
 				arrayed = true;
 				keySlot = 0;
 			}
 			//Find the spot it needs to go in and splice it in.
 			if(!arrayed){
-				trace("New Perk using alphabetizer! " + keyName);
+				//trace("New Perk using alphabetizer! " + keyName);
 				counter = perks.length;
 				while(counter > 0 && !arrayed) {
 					counter--;
@@ -890,7 +890,7 @@ package classes
 			}
 			//Fallback
 			if(!arrayed) {
-				trace("New Perk Belongs at the end!! " + keyName);
+				//trace("New Perk Belongs at the end!! " + keyName);
 				perks.push(newKeyItem);
 				arrayed = true;
 				keySlot = perks.length-1;
@@ -902,7 +902,7 @@ package classes
 			perks[keySlot].value3 = value3;
 			perks[keySlot].value4 = value4;
 			perks[keySlot].perkDesc = desc;
-			trace("NEW PERK FOR PLAYER in slot " + keySlot + ": " + perks[keySlot].perkName);
+			//trace("NEW PERK FOR PLAYER in slot " + keySlot + ": " + perks[keySlot].perkName);
 		}
 		//fertility must be >= random(0-beat)
 		public function knockUp(type:int = 0,incubation:int = 0,beat:int = 100,arg:int = 0):void {
@@ -1062,7 +1062,7 @@ package classes
 			statusAffects[statusAffects.length-1].value2 = value2;
 			statusAffects[statusAffects.length-1].value3 = value3;
 			statusAffects[statusAffects.length-1].value4 = value4;
-			trace("NEW STATUS APPLIED TO PLAYER!: " + statusName);
+			//trace("NEW STATUS APPLIED TO PLAYER!: " + statusName);
 		}
 		//Remove a status
 		public function removeStatusAffect(statusName:String):void {
@@ -1320,28 +1320,28 @@ package classes
 			var counter:Number = 0
 			//Start the array if its the first bit
 			if(keyItems.length == 0) {
-				trace("New Key Item Started Array! " + keyName);
+				//trace("New Key Item Started Array! " + keyName);
 				keyItems.push(newKeyItem);
 				arrayed = true;
 				keySlot = 0;
 			}
 			//If it belongs at the end, push it on
 			if(keyItems[keyItems.length-1].keyName < keyName && !arrayed) {
-				trace("New Key Item Belongs at the end!! " + keyName);
+				//trace("New Key Item Belongs at the end!! " + keyName);
 				keyItems.push(newKeyItem);
 				arrayed = true;
 				keySlot = keyItems.length-1;
 			}
 			//If it belongs in the beginning, splice it in
 			if(keyItems[0].keyName > keyName && !arrayed) {
-				trace("New Key Item Belongs at the beginning! " + keyName);
+				//trace("New Key Item Belongs at the beginning! " + keyName);
 				keyItems.splice(0,0,newKeyItem);
 				arrayed = true;
 				keySlot = 0;
 			}
 			//Find the spot it needs to go in and splice it in.
 			if(!arrayed){
-				trace("New Key Item using alphabetizer! " + keyName);
+				//trace("New Key Item using alphabetizer! " + keyName);
 				counter = keyItems.length;
 				while(counter > 0 && !arrayed) {
 					counter--;
@@ -1371,7 +1371,7 @@ package classes
 			}
 			//Fallback
 			if(!arrayed) {
-				trace("New Key Item Belongs at the end!! " + keyName);
+				//trace("New Key Item Belongs at the end!! " + keyName);
 				keyItems.push(newKeyItem);
 				arrayed = true;
 				keySlot = keyItems.length-1;
@@ -1382,7 +1382,7 @@ package classes
 			keyItems[keySlot].value2 = value2;
 			keyItems[keySlot].value3 = value3;
 			keyItems[keySlot].value4 = value4;
-			trace("NEW KEYITEM FOR PLAYER in slot " + keySlot + ": " + keyItems[keySlot].keyName);
+			//trace("NEW KEYITEM FOR PLAYER in slot " + keySlot + ": " + keyItems[keySlot].keyName);
 		}
 		//Remove a key item
 		public function removeKeyItem(itemName:String):void {

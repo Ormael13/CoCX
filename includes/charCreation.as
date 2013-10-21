@@ -24,9 +24,9 @@ function newGameGo(e:MouseEvent):void {
 	var easy:Boolean = false;
 	var sprite:Boolean = false;
 	//If at initial title
-	if(flags[UNKNOWN_FLAG_NUMBER_00273] > 0) sprite = true;
-	if(flags[UNKNOWN_FLAG_NUMBER_00099] > 0) easy = true;
-	if(flags[UNKNOWN_FLAG_NUMBER_00305] > 0) silly = true;
+	if(flags[SHOW_SPRITES_FLAG] > 0) sprite = true;
+	if(flags[EASY_MODE_ENABLE_FLAG] > 0) easy = true;
+	if(flags[SILLY_MODE_ENABLE_FLAG] > 0) silly = true;
 	b1Text.text = "Newgame";
 	flags[CUSTOM_PC_ENABLED] = 0;
 	
@@ -184,9 +184,9 @@ function newGameGo(e:MouseEvent):void {
 		flags[i] = 0;
 	}
 	//Remember silly/sprite/etc
-	if(sprite) flags[UNKNOWN_FLAG_NUMBER_00273] = 1;
-	if(easy) flags[UNKNOWN_FLAG_NUMBER_00099] = 1;
-	if(silly) flags[UNKNOWN_FLAG_NUMBER_00305] = 1;
+	if(sprite) flags[SHOW_SPRITES_FLAG] = 1;
+	if(easy) flags[EASY_MODE_ENABLE_FLAG] = 1;
+	if(silly) flags[SILLY_MODE_ENABLE_FLAG] = 1;
 	//Set that jojo debug doesn't need to run
 	flags[UNKNOWN_FLAG_NUMBER_00102] = 1;
 	flags[UNKNOWN_FLAG_NUMBER_02999] = 3;

@@ -2612,7 +2612,7 @@ function doCombat(eventNum:Number)
 	//GAME OVERS
 	if(eventNum == 5025) {
 		outputText("<b>GAME OVER</b>", true);
-		if(flags[UNKNOWN_FLAG_NUMBER_00099] == 1 || debug) simpleChoices("Game Over", 9999, "",0,"NewGamePlus",10035,"",0,"CHEAT", 1);
+		if(flags[EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "",0,"NewGamePlus",10035,"",0,"CHEAT", 1);
 		else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus",10035, "BLAH", 0, "LULZ", 0);
 		dataBG.visible = true;
 		dataText.visible = true;
@@ -2628,7 +2628,7 @@ function doCombat(eventNum:Number)
 	//Soft Game Over - for when you want to leave the text on-screen
 	if(eventNum == 5035) {
 		outputText("\n\n<b>GAME OVER</b>", false);
-		if(flags[UNKNOWN_FLAG_NUMBER_00099] == 1 || debug) simpleChoices("Game Over", 9999, "",0,"NewGamePlus",10035,"",0,"Debug Cheat", 1);
+		if(flags[EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "",0,"NewGamePlus",10035,"",0,"Debug Cheat", 1);
 		else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus", 10035, "BLAH", 0, "LULZ", 0);
 		dataBG.visible = true;
 		dataText.visible = true;
@@ -4482,7 +4482,7 @@ function doDamage(damage:Number):Number {
 }
 function takeDamage(damage:Number, noMod:Boolean = false):Number {
 	//EZ MOAD half damage
-	if(flags[UNKNOWN_FLAG_NUMBER_00099] == 1) damage /= 2;
+	if(flags[EASY_MODE_ENABLE_FLAG] == 1) damage /= 2;
 	if(player.hasStatusAffect("Shielding") >= 0) {
 		damage -= 30;
 		if(damage < 1) damage = 1;

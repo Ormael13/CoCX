@@ -97,7 +97,7 @@ const UNKNOWN_FLAG_NUMBER_00095:int                                   =   95; //
 const UNKNOWN_FLAG_NUMBER_00096:int                                   =   96; // Sophie Pissed Off Counter
 const UNKNOWN_FLAG_NUMBER_00097:int                                   =   97; // Times Pissed Off Sophie
 const UNKNOWN_FLAG_NUMBER_00098:int                                   =   98; // Times Lesbo-Sexed
-const UNKNOWN_FLAG_NUMBER_00099:int                                   =   99; // Invincibility On - Easy Mode.	0=false, 1=true
+const EASY_MODE_ENABLE_FLAG:int                                       =   99; // Invincibility On - Easy Mode.	0=false, 1=true
 const UNKNOWN_FLAG_NUMBER_00100:int                                   =  100; // Corrupt Marae Followups
 const UNKNOWN_FLAG_NUMBER_00101:int                                   =  101; // Found Wizard Staff
 const UNKNOWN_FLAG_NUMBER_00102:int                                   =  102; // Has extra jojo time been cleared? - Jojo Debug Flag
@@ -271,7 +271,7 @@ const UNKNOWN_FLAG_NUMBER_00269:int                                   =  269; //
 const UNKNOWN_FLAG_NUMBER_00270:int                                   =  270; // Times encountered spiderbitches
 const UNKNOWN_FLAG_NUMBER_00271:int                                   =  271; // Spider Preggo Timer
 const UNKNOWN_FLAG_NUMBER_00272:int                                   =  272; // Times Explored Swamp
-const UNKNOWN_FLAG_NUMBER_00273:int                                   =  273; // Sprites off? toggle
+const SHOW_SPRITES_FLAG:int                                           =  273; // Sprites off? toggle
 const UNKNOWN_FLAG_NUMBER_00274:int                                   =  274; // Rathazul silk armor queue - 1 = armor done!
 const UNKNOWN_FLAG_NUMBER_00275:int                                   =  275; // Rathazul armor type selector - 1=armor, 2=robes
 const UNKNOWN_FLAG_NUMBER_00276:int                                   =  276; // Times Encountered Basilisk
@@ -303,7 +303,7 @@ const UNKNOWN_FLAG_NUMBER_00301:int                                   =  301; //
 const UNKNOWN_FLAG_NUMBER_00302:int                                   =  302; // LOTTIE: Encouragement moved from 30 to 31 yet? (1 = yes)
 const UNKNOWN_FLAG_NUMBER_00303:int                                   =  303; // LOTTIE: Encouragement moved from 80 to 79 yet? (1 = yes)
 const UNKNOWN_FLAG_NUMBER_00304:int                                   =  304; // LOTTIE: Encouragement moved from 79 to 80 yet? (1=yes)
-const UNKNOWN_FLAG_NUMBER_00305:int                                   =  305; // SILLY MODE ON?
+const SILLY_MODE_ENABLE_FLAG:int                                      =  305; // SILLY MODE ON?
 const UNKNOWN_FLAG_NUMBER_00306:int                                   =  306; // LOTTIE: Need to talk about Oral?
 const UNKNOWN_FLAG_NUMBER_00307:int                                   =  307; // LOTTIE: Need to talk about Anal?
 const UNKNOWN_FLAG_NUMBER_00308:int                                   =  308; // LOTTIE: WEIGHT AT CONCLUSION OF LAST TALK EVENT
