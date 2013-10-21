@@ -132,11 +132,11 @@ function mainMenu(e:MouseEvent = undefined):void {
 	outputText("<b>Corruption of Champions (" + version + ")</b>\n(Formerly Unnamed Text Game)\n\nCreated by: Fenoxo\nEdited By: Ashi, SoS, Zeikfried, and Others\n\n<b><u>DISCLAIMER</u>\n\n-There are many strange and odd fetishes contained in this flash.  Peruse at own risk.\n-Please be 18 or the legal age to view porn before playing.\n-Try to keep your keyboard clean.  Think of the children!</b>\n\nFor more information see Fenoxo's Blog at <b>fenoxo.com</b>.\n\nAlso go play Nimin by Xadera on furaffinity.", true);
 	if(debug) 
 		outputText("\n\n<b>DEBUG MODE ENABLED:  ITEMS WILL NOT BE CONSUMED BY USE.</b>", false);
-	if(flags[UNKNOWN_FLAG_NUMBER_00273] == 1) 
+	if(flags[SHOW_SPRITES_FLAG] == 1) 
 		outputText("\n\n<b>Sprites disabled.</b>", false);
-	if(flags[UNKNOWN_FLAG_NUMBER_00099] == 1) 
+	if(flags[EASY_MODE_ENABLE_FLAG] == 1) 
 		outputText("\n\n<b>Easy Mode On:  Bad-ends can be ignored.</b>", false);
-	if(flags[UNKNOWN_FLAG_NUMBER_00305] == 1) 
+	if(flags[SILLY_MODE_ENABLE_FLAG] == 1) 
 		outputText("\n\n<b>SILLY MODE ENGAGED: Crazy, nonsensical, and possibly hilarious things may occur.</b>", false);
 	if(isEaster()) 
 		outputText("\n\n<b>It's Easter!  Enjoy the eggs!</b>");
@@ -158,11 +158,11 @@ function settingsScreen():void {
 	outputText("<b>Settings toggles:</b>\n", true);
 	if(debug) 
 		outputText("\n\n<b>DEBUG MODE ENABLED:  ITEMS WILL NOT BE CONSUMED BY USE.</b>", false);
-	if(flags[UNKNOWN_FLAG_NUMBER_00273] == 1) 
+	if(flags[SHOW_SPRITES_FLAG] == 1) 
 		outputText("\n\n<b>Sprites disabled.</b>", false);
-	if(flags[UNKNOWN_FLAG_NUMBER_00099] == 1) 
+	if(flags[EASY_MODE_ENABLE_FLAG] == 1) 
 		outputText("\n\n<b>Easy Mode On:  Bad-ends can be ignored.</b>", false);
-	if(flags[UNKNOWN_FLAG_NUMBER_00305] == 1) 
+	if(flags[SILLY_MODE_ENABLE_FLAG] == 1) 
 		outputText("\n\n<b>SILLY MODE ENGAGED: Crazy, nonsensical, and possibly hilarious things may occur.</b>", false);
 
 	choices("Toggle Debug", 18, "EZ Mode", 96, "Silly Toggle", 113, "Sprite Toggle", 112, "five", 0, "Null", 0, "Null", 0, "Null", 0, "Null", 0, "Back", 64);

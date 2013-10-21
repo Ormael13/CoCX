@@ -470,7 +470,7 @@ function jojoMilkPay(tentacle:Boolean = false):void {
 	var cap:Number = 500;
 	var cumQ:Number = 0;
 	//Ez mode cap doubles
-	if(flags[UNKNOWN_FLAG_NUMBER_00099] == 1) cap *= 2;
+	if(flags[EASY_MODE_ENABLE_FLAG] == 1) cap *= 2;
 	if(debug) {
 		flags[UNKNOWN_FLAG_NUMBER_00104] = 0;
 		cap = 9999;

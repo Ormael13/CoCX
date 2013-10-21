@@ -830,8 +830,8 @@ function doSystem(eventNo:Number):void {
 	
 	//Toggle Easy Mode
 	if(eventNo == 96) {
-		if(flags[UNKNOWN_FLAG_NUMBER_00099] == 0) flags[UNKNOWN_FLAG_NUMBER_00099] = 1;
-		else flags[UNKNOWN_FLAG_NUMBER_00099] = 0;
+		if(flags[EASY_MODE_ENABLE_FLAG] == 0) flags[EASY_MODE_ENABLE_FLAG] = 1;
+		else flags[EASY_MODE_ENABLE_FLAG] = 0;
 		settingsScreen();
 		dataBG.visible = true;
 		dataText.visible = true;
@@ -840,18 +840,18 @@ function doSystem(eventNo:Number):void {
 	
 	// Sprite toggle
 	if(eventNo == 112) {
-		if(flags[UNKNOWN_FLAG_NUMBER_00273] == 0) 
-			flags[UNKNOWN_FLAG_NUMBER_00273] = 1;
-		else flags[UNKNOWN_FLAG_NUMBER_00273] = 0;
+		if(flags[SHOW_SPRITES_FLAG] == 0) 
+			flags[SHOW_SPRITES_FLAG] = 1;
+		else flags[SHOW_SPRITES_FLAG] = 0;
 		settingsScreen();
 		return;
 	}
 
 	// Silly Toggle
 	if(eventNo == 113) {
-		if(flags[UNKNOWN_FLAG_NUMBER_00305] == 0)
-			flags[UNKNOWN_FLAG_NUMBER_00305] = 1;
-		else flags[UNKNOWN_FLAG_NUMBER_00305] = 0;
+		if(flags[SILLY_MODE_ENABLE_FLAG] == 0)
+			flags[SILLY_MODE_ENABLE_FLAG] = 1;
+		else flags[SILLY_MODE_ENABLE_FLAG] = 0;
 		settingsScreen();
 		return;
 	}
