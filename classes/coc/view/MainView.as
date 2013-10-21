@@ -214,13 +214,16 @@ package coc.view {
 
 		//////// Public methods ////////
 
-		// tool tip gets passed in.  MainView will have nothing to do with storing those.
+		// tool tip gets passed in?  MainView will have nothing to do with storing those.
+		// Ideally, the tool tips would be part of perks/items' definitions.
+		// Perhaps not even need to be passed in, merely referenced in some model.
 		public function setButton( index :int, label :String = null, callback :Function = null, toolTip :* = null ) {
 			if( index < 0 || index >= BOTTOM_BUTTON_COUNT ) {
 				trace( "MainView.setButton called with out of range index:", index );
 				// throw new RangeError();
 				return;
 			}
+
 			if( callback ) {
 				this.bottomButtonSettings[ index ] = {
 					label: label,
