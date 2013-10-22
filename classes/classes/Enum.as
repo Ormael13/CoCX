@@ -1,4 +1,4 @@
-package  
+package classes
 {
 	/**
 	 * Enum Class. http://scottbilas.com/blog/ultimate-as3-fake-enums/
@@ -121,6 +121,9 @@ package
 // private support class
 class EnumConstants
 {
+	//AS3 won't find Enum if it isn't in the default package
+	import classes.Enum;
+	
 	public function EnumConstants(i_byIndex:Array)
 	{
 		ByIndex = i_byIndex;

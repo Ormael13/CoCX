@@ -1369,7 +1369,7 @@ function marbleMilkSex(newpage:Boolean = true):void {
 			temp = player.cocks.length;
 			while(temp > 0) {
 				temp--;
-				if(player.cocks[temp].cockType > 2) {
+				if(player.cocks[temp].cockType.Index > 2) {
 					outputText(cockDescript(temp), false);
 					temp = -1;
 				}
@@ -2156,7 +2156,7 @@ function marbleCampSexNew():void {
 			if(player.cocks.length > 0) {
 				outputText("\n\nShe moves down to your crotch and slips your " + cockDescript(0) + " between her breasts.  She smiles at you and says, \"<i>This is what you were hoping for, right?</i>\" before squeezing them together tightly and pushing your " + cockDescript(0) + " in and out.  You sigh in pleasure and smile down at Marble as she pumps you between her breasts.  But it seems Marble is unsatisfied with only that; she quickens her pace and starts moving each of her breasts up and down opposite each other.", false);
 				//Multiple dick side note
-				if (player.cocks.number > 1) {
+				if (player.cocks.length > 1) {
 					outputText("  Yet still unsatisfied, Marble engulfs and rub the rest of your " + multiCockDescriptLight() + " within her ample mounds.  ", false);
 				}
 			}

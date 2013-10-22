@@ -1,7 +1,7 @@
 ﻿//CoC Creature.as
 package classes
 {
-	import classes.cockClass;
+	//import classes.cockClass;
 	import classes.Cock;
 	import classes.vaginaClass;
 	import classes.breastRowClass;
@@ -230,9 +230,9 @@ package classes
 		
 		//Sexual Stuff		
 		//MALE STUFF
-		public var cocks:Array;
+		//public var cocks:Array;
 		//TODO: Tuck away into Male genital class?
-		//public var cocks:Vector.<cockClass>;
+		public var cocks:Vector.<Cock>;
 		//balls
 		public var balls:Number = 0;
 		public var cumMultiplier:Number = 1;
@@ -260,9 +260,9 @@ package classes
 		//Constructor
 		public function creature()
 		{
-			cocks = new Array();
+			//cocks = new Array();
 			//The world isn't ready for typed Arrays just yet.
-			//cocks = new Vector.<cockClass>();
+			cocks = new Vector.<Cock>();
 			vaginas = new Array();
 			//vaginas: Vector.<Vagina> = new Vector.<Vagina>();
 			breastRows = new Array();
@@ -902,7 +902,7 @@ package classes
 			while (counter > 0)
 			{
 				counter--;
-				if ((cocks[index].cockType != 1 && cocks[counter].cockType == 1) || (cocks[index].cockLength < cocks[counter].cockLength && cocks[counter].cockType == 1))
+				if ((cocks[index].cockType != CockTypesEnum.HORSE && cocks[counter].cockType == CockTypesEnum.HORSE) || (cocks[index].cockLength < cocks[counter].cockLength && cocks[counter].cockType == CockTypesEnum.HORSE))
 					index = counter;
 			}
 			return cocks[index].cockLength;
@@ -1130,7 +1130,7 @@ package classes
 							}
 						}
 						if (index >= 0 && index == index2)
-							//trace("FUCK ERROR COCKTHATFITS2 SHIT IS BROKED!");
+							trace("FUCK ERROR COCKTHATFITS2 SHIT IS BROKED!");
 					}
 					//Store the index of fitting dick
 					else
@@ -1312,25 +1312,25 @@ package classes
 			return int(Math.random() * max);
 		}
 		
-		public function cockDescript(cockNum:Number):String
+		public function cockDescript(cockIndex:Number):String
 		{
 			if (totalCocks() == 0)
 				return "<b>ERROR: CockDescript Called But No Cock Present</b>";
-			if (cockTotal() <= cockNum && cockNum != 99)
-				return "<b>ERROR: CockDescript called with index of " + cockNum + " - out of BOUNDS</b>";
+			if (cockTotal() <= cockIndex && cockIndex != 99)
+				return "<b>ERROR: CockDescript called with index of " + cockIndex + " - out of BOUNDS</b>";
 			//Cocknum 99 to default to boring descriptions!
-			if (cockNum != 99)
+			if (cockIndex != 99)
 			{
 				if (rand(2) == 0)
-					descript += cockAdjective(cockNum) + ", ";
-				descript += cockNoun(cocks[cockNum].cockType);
+					descript += cockAdjective(cockIndex) + ", ";
+				descript += cockNoun(cocks[cockIndex].cockType);
 			}
 			else
-				cockNum = 0;
+				cockIndex = 0;
 			var descript:String = "";
 			//50% of the time add a descriptor
 			if (rand(2) == 0)
-				descript += cockAdjective(cockNum) + " ";
+				descript += cockAdjective(cockIndex) + " ";
 			var rando:Number = 0;
 			rando = int(Math.random() * 10)
 			if (rando >= 0 && rando <= 4)
@@ -1345,12 +1345,12 @@ package classes
 			return descript;
 		}
 		
-		//Used in multiCockDescript and potentiall elsewhere - barebones cock names
-		function cockNoun(type:Number):String
+		//Used in multiCockDescript and potentially elsewhere - barebones cock names
+		function cockNoun(type:CockTypesEnum):String
 		{
 			var descript:String = "";
 			var rando:Number = 0;
-			if (type == 0)
+			if (type == CockTypesEnum.HUMAN)
 			{
 				rando = rand(10) + 1;
 				if (rando >= 0 && rando <= 4)
@@ -1362,7 +1362,7 @@ package classes
 				if (rando > 7)
 					descript += "shaft";
 			}
-			if (type == 2)
+			if (type == CockTypesEnum.DOG)
 			{
 				if (dogScore() >= foxScore())
 				{
@@ -1417,7 +1417,7 @@ package classes
 						descript += "knotted fox-cock";
 				}
 			}
-			if (type == 1)
+			if (type == CockTypesEnum.HORSE)
 			{
 				rando = rand(6);
 				if (rando == 0)
@@ -1437,7 +1437,7 @@ package classes
 				if (rando == 7)
 					descript += "flared stallion-cock";
 			}
-			if (type == 3)
+			if (type == CockTypesEnum.DEMON)
 			{
 				rando = int(Math.random() * 11);
 				if (rando == 0)
@@ -1463,7 +1463,7 @@ package classes
 				if (rando == 10)
 					descript += "blighted cock";
 			}
-			if (type == 4)
+			if (type == CockTypesEnum.TENTACLE)
 			{
 				rando = int(Math.random() * 11);
 				if (rando == 0)
@@ -1489,7 +1489,7 @@ package classes
 				if (rando == 10)
 					descript += "vine-shaped cock";
 			}
-			if (type == 5)
+			if (type == CockTypesEnum.CAT)
 			{
 				rando = int(Math.random() * 11);
 				if (rando == 0)
@@ -1515,7 +1515,7 @@ package classes
 				if (rando == 10)
 					descript += "nubby kitten-prick";
 			}
-			if (type == 6)
+			if (type == CockTypesEnum.LIZARD)
 			{
 				rando = int(Math.random() * 11);
 				if (rando == 0)
@@ -1541,7 +1541,7 @@ package classes
 				if (rando == 10)
 					descript += "bulging snake-dick";
 			}
-			if (type == 7)
+			if (type == CockTypesEnum.ANEMONE)
 			{
 				rando = rand(11);
 				if (rando == 0)
@@ -1567,7 +1567,7 @@ package classes
 				if (rando == 10)
 					descript += "squirming shaft";
 			}
-			if (type == 8)
+			if (type == CockTypesEnum.KANGAROO)
 			{
 				rando = rand(11);
 				if (rando == 0)
@@ -1593,7 +1593,7 @@ package classes
 				if (rando == 10)
 					descript += "squirming shaft";
 			}
-			if (type == 9)
+			if (type == CockTypesEnum.DRAGON)
 			{
 				rando = rand(11);
 				if (rando == 0)
@@ -1623,20 +1623,20 @@ package classes
 		}
 		
 		//New cock adjectives.  The old one sucked dicks
-		public function cockAdjective(cockNum:Number = -1)
+		public function cockAdjective(cockIndex:Number = -1)
 		{
 			var descript:String = "";
 			var rando:Number = 0;
 			var multi:Boolean = false;
 			//If used for multiple cocks, set multi flag
-			if (cockNum < 0)
+			if (cockIndex < 0)
 			{
 				//Since we have multi dicks lets talk about the biggest!
-				cockNum = biggestCockIndex();
+				cockIndex = biggestCockIndex();
 				multi = true;
 			}
 			//Pierced - 1/5 chance
-			if (!multi && rand(5) == 0 && cocks[cockNum].pierced > 0)
+			if (!multi && rand(5) == 0 && cocks[cockIndex].isPierced == true)
 			{
 				descript += "pierced";
 			}
@@ -1654,7 +1654,7 @@ package classes
 			//Length 1/3 chance
 			else if (rand(3) == 0)
 			{
-				if (cocks[cockNum].cockLength < 3)
+				if (cocks[cockIndex].cockLength < 3)
 				{
 					rando = rand(4);
 					if (rando == 0)
@@ -1668,7 +1668,7 @@ package classes
 					else
 						descript = "tiny";
 				}
-				else if (cocks[cockNum].cockLength < 5)
+				else if (cocks[cockIndex].cockLength < 5)
 				{
 					rando = rand(2);
 					if (rando == 0)
@@ -1676,7 +1676,7 @@ package classes
 					else
 						descript = "small";
 				}
-				else if (cocks[cockNum].cockLength < 7)
+				else if (cocks[cockIndex].cockLength < 7)
 				{
 					rando = rand(2);
 					if (rando == 0)
@@ -1684,19 +1684,19 @@ package classes
 					else
 						descript = "nice";
 				}
-				else if (cocks[cockNum].cockLength < 9)
+				else if (cocks[cockIndex].cockLength < 9)
 				{
 					rando = rand(3);
 					if (rando == 0)
 					{
-						if (cocks[cockNum].cockType == 1)
+						if (cocks[cockIndex].cockType == CockTypesEnum.HORSE)
 							descript = "pony-sized";
 						else
 							descript = "long";
 					}
 					else if (rando == 1)
 					{
-						if (cocks[cockNum].cockType == 1)
+						if (cocks[cockIndex].cockType == CockTypesEnum.HORSE)
 							descript = "colt-like";
 						else
 							descript = "lengthy";
@@ -1704,14 +1704,14 @@ package classes
 					else
 						descript = "sizable";
 				}
-				else if (cocks[cockNum].cockLength < 13)
+				else if (cocks[cockIndex].cockLength < 13)
 				{
 					rando = rand(3);
 					if (rando == 0)
 						descript = "huge";
 					else if (rando == 1)
 					{
-						if (cocks[cockNum].cockType == 2)
+						if (cocks[cockIndex].cockType == CockTypesEnum.DOG)
 							descript = "mastiff-like";
 						else
 							descript = "cucumber-length";
@@ -1719,7 +1719,7 @@ package classes
 					else
 						descript = "foot-long";
 				}
-				else if (cocks[cockNum].cockLength < 18)
+				else if (cocks[cockIndex].cockLength < 18)
 				{
 					rando = rand(3);
 					if (rando == 0)
@@ -1729,7 +1729,7 @@ package classes
 					else
 						descript = "forearm-length";
 				}
-				else if (cocks[cockNum].cockLength < 30)
+				else if (cocks[cockIndex].cockLength < 30)
 				{
 					rando = rand(3);
 					if (rando == 0)
@@ -1742,7 +1742,7 @@ package classes
 				else
 				{
 					rando = rand(4);
-					if (cocks[cockNum].cockType == 4 && rand(4) == 0)
+					if (cocks[cockIndex].cockType == CockTypesEnum.TENTACLE && rand(4) == 0)
 						descript = "coiled ";
 					else
 					{
@@ -1853,7 +1853,7 @@ package classes
 			//Girth - fallback
 			else
 			{
-				if (cocks[cockNum].cockThickness <= .75)
+				if (cocks[cockIndex].cockThickness <= .75)
 				{
 					rando = rand(3);
 					if (rando == 0)
@@ -1863,11 +1863,11 @@ package classes
 					else
 						descript += "narrow";
 				}
-				else if (cocks[cockNum].cockThickness <= 1.2)
+				else if (cocks[cockIndex].cockThickness <= 1.2)
 				{
 					descript += "ample";
 				}
-				else if (cocks[cockNum].cockThickness <= 1.4)
+				else if (cocks[cockIndex].cockThickness <= 1.4)
 				{
 					rando = rand(2);
 					if (rando == 0)
@@ -1875,7 +1875,7 @@ package classes
 					else
 						descript += "big";
 				}
-				else if (cocks[cockNum].cockThickness <= 2)
+				else if (cocks[cockIndex].cockThickness <= 2)
 				{
 					rando = rand(3);
 					if (rando == 0)
@@ -1885,7 +1885,7 @@ package classes
 					else
 						descript += "meaty";
 				}
-				else if (cocks[cockNum].cockThickness <= 3.5)
+				else if (cocks[cockIndex].cockThickness <= 3.5)
 				{
 					rando = rand(3);
 					if (rando == 0)
@@ -1895,7 +1895,7 @@ package classes
 					else
 						descript += "distended";
 				}
-				else if (cocks[cockNum].cockThickness > 3.5)
+				else if (cocks[cockIndex].cockThickness > 3.5)
 				{
 					rando = rand(3);
 					if (rando == 0)
@@ -2250,7 +2250,7 @@ package classes
 			while (counter > 0)
 			{
 				counter--;
-				if (cocks[counter].cockType == 4)
+				if (cocks[counter].cockType == CockTypesEnum.TENTACLE)
 					tentacleCockC++;
 			}
 			return tentacleCockC;
@@ -2264,7 +2264,7 @@ package classes
 			while (counter > 0)
 			{
 				counter--;
-				if (cocks[counter].cockType == 3)
+				if (cocks[counter].cockType == CockTypesEnum.DEMON)
 					demonCockC++;
 			}
 			return demonCockC;
@@ -2278,7 +2278,7 @@ package classes
 			while (counter > 0)
 			{
 				counter--;
-				if (cocks[counter].cockType == 5)
+				if (cocks[counter].cockType == CockTypesEnum.CAT)
 					catCockC++;
 			}
 			return catCockC;
@@ -2292,13 +2292,13 @@ package classes
 			while (counter > 0)
 			{
 				counter--;
-				if (cocks[counter].cockType == 6)
+				if (cocks[counter].cockType == CockTypesEnum.LIZARD)
 					lizCockC++;
 			}
 			return lizCockC;
 		}
 		
-		public function findFirstCockType(type:Number = 0):Number
+		public function findFirstCockType(type:CockTypesEnum):Number
 		{
 			var index:Number = 0;
 			if (cocks[index].cockType == type)
@@ -2313,6 +2313,21 @@ package classes
 			return 0;
 		}
 		
+		/*public function findFirstCockType(type:Number = 0):Number
+		{
+			var index:Number = 0;
+			if (cocks[index].cockType == type)
+				return index;
+			while (index < cocks.length)
+			{
+				index++;
+				if (cocks[index].cockType == type)
+					return index;
+			}
+			//trace("creature.findFirstCockType ERROR - searched for cocktype: " + type + " and could not find it.");
+			return 0;
+		}*/
+		
 		public function displacerCocks():Number
 		{
 			var displacerWang:Number = 0;
@@ -2320,7 +2335,7 @@ package classes
 			while (counter > 0)
 			{
 				counter--;
-				if (cocks[counter].cockType == 10)
+				if (cocks[counter].cockType == CockTypesEnum.DISPLACER)
 					displacerWang++;
 			}
 			return displacerWang;
@@ -2334,7 +2349,7 @@ package classes
 			while (counter > 0)
 			{
 				counter--;
-				if (cocks[counter].cockType == 8)
+				if (cocks[counter].cockType == CockTypesEnum.KANGAROO)
 					kangaWang++;
 			}
 			return kangaWang;
@@ -2348,7 +2363,7 @@ package classes
 			while (counter > 0)
 			{
 				counter--;
-				if (cocks[counter].cockType == 1)
+				if (cocks[counter].cockType == CockTypesEnum.HORSE)
 					horseCockC++;
 			}
 			return horseCockC;
@@ -2362,7 +2377,7 @@ package classes
 			while (counter > 0)
 			{
 				counter--;
-				if (cocks[counter].cockType == 7)
+				if (cocks[counter].cockType == CockTypesEnum.ANEMONE)
 					anemoneCockC++;
 			}
 			return anemoneCockC;
@@ -2377,33 +2392,33 @@ package classes
 			{
 				counter--;
 				//Human - > horse
-				if (cocks[counter].cockType == 0)
+				if (cocks[counter].cockType == CockTypesEnum.HUMAN)
 				{
-					cocks[counter].cockType = 1;
+					cocks[counter].cockType = CockTypesEnum.HORSE;
 					return counter;
 				}
 				//Dog - > horse
-				if (cocks[counter].cockType == 2)
+				if (cocks[counter].cockType == CockTypesEnum.DOG)
 				{
-					cocks[counter].cockType = 1;
+					cocks[counter].cockType = CockTypesEnum.HORSE;
 					return counter;
 				}
 				//Tentacle - > horse
-				if (cocks[counter].cockType == 4)
+				if (cocks[counter].cockType == CockTypesEnum.TENTACLE)
 				{
-					cocks[counter].cockType = 1;
+					cocks[counter].cockType = CockTypesEnum.HORSE;
 					return counter;
 				}
 				//Demon -> horse
-				if (cocks[counter].cockType == 3)
+				if (cocks[counter].cockType == CockTypesEnum.DEMON)
 				{
-					cocks[counter].cockType = 1;
+					cocks[counter].cockType = CockTypesEnum.HORSE;
 					return counter;
 				}
 				//Catch-all
-				if (cocks[counter].cockType > 4)
+				if (cocks[counter].cockType.Index > 4)
 				{
-					cocks[counter].cockType = 1;
+					cocks[counter].cockType = CockTypesEnum.HORSE;
 					return counter;
 				}
 			}
@@ -2418,7 +2433,7 @@ package classes
 			while (counter > 0)
 			{
 				counter--;
-				if (cocks[counter].cockType == 2)
+				if (cocks[counter].cockType == CockTypesEnum.DOG)
 					dogCockC++;
 			}
 			return dogCockC;
@@ -2432,7 +2447,7 @@ package classes
 			while (counter > 0)
 			{
 				counter--;
-				if (cocks[counter].cockType == 9)
+				if (cocks[counter].cockType == CockTypesEnum.DRAGON)
 					dragonCockC++;
 			}
 			return dragonCockC;
@@ -2446,7 +2461,7 @@ package classes
 			while (counter > 0)
 			{
 				counter--;
-				if (cocks[counter].cockType == 0)
+				if (cocks[counter].cockType == CockTypesEnum.HUMAN)
 					normalCockC++;
 			}
 			return normalCockC;
@@ -2959,8 +2974,8 @@ package classes
 			if (cocks.length >= 10)
 				return false;
 			//TODO: Integrate Cock class
-			//var newCock:Cock = new Cock(clength, cthickness);
-			var newCock:cockClass = new cockClass();
+			var newCock:Cock = new Cock();
+			//var newCock:cockClass = new cockClass();
 			cocks.push(newCock);
 			//cocks[cocks.length-1].cockThickness = cthickness;
 			//cocks[cocks.length-1].cockLength = clength;

@@ -1448,7 +1448,7 @@ function updatePregnancy():Boolean {
 			//(doesn't exist)
 			else outputText("  The tentacles curl inwards, rubbing on the head of your new blue pecker", false);
 			player.createCock((4+rand(3)),1.2);
-			player.cocks[player.cockTotal()-1].cockType = 7;
+			player.cocks[player.cockTotal()-1].cockType = CockTypesEnum.ANEMONE;
 			outputText(" and you quickly become fully erect from the aphrodisiac they inject.  Over and over the tentacles caress " + sMultiCockDesc() + " sensually, leaving behind a tingling trail of vibrant pleasure", false);
 			//[(if no dick1 and no balls)
 			if(player.totalCocks() == 1 && player.balls == 0) outputText("; you feel a pressure build below the shaft, near your asshole", false);

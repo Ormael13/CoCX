@@ -309,8 +309,8 @@ function getPiercedByCeraphLoss3():void {
 		if(player.cocks[0].pierced > 0) outputText(", the old piercing clattering to the ground as it slides out of your flesh, ", false);
 		outputText(" and snaps the diamond stud through your sensitive flesh, making your vision haze red in pain.\n\n", false);
 		player.cocks[0].pierced = 1;
-		player.cocks[0].pShort = "diamond cock-stud";
-		player.cocks[0].pLong = "Diamond cock-stud";
+		player.cocks[0].pShortDesc = "diamond cock-stud";
+		player.cocks[0].pLongDesc = "Diamond cock-stud";
 	}
 	//[cunts]
 	else if(player.hasVagina()) {
@@ -526,8 +526,8 @@ function yesOHGODYESPIERCELEVEL3():void {
 			outputText(", the old piercing clattering to the ground as it slides out of your flesh,", false);
 		outputText(" and snaps the diamond stud through your sensitive flesh, making your vision haze red in pain.", false);
 		player.cocks[0].pierced = 1;
-		player.cocks[0].pShort = "seamless, diamond cock-stud";
-		player.cocks[0].pLong = "Seamless, diamond cock-stud";
+		player.cocks[0].pShortDesc = "seamless, diamond cock-stud";
+		player.cocks[0].pLongDesc = "Seamless, diamond cock-stud";
 	}
 	//[cunts]
 	else if(player.hasVagina()) {
@@ -1226,13 +1226,13 @@ function tradeCeraphCrotchityBits():void {
 	else if(choice == 1) {
 		temp2 = rand(player.cockTotal());
 		outputText("She pipes up, \"<i>", false);
-		if(player.cocks[temp2].cockType == 1) outputText("Oooh, is that a horse-cock?  Those are quite nice.  I love the feel of a flare inside me, or even better, plunging one deep into a slut's poor, abused asshole.", false);
-		else if(player.cocks[temp2].cockType == 2) outputText("Oooh, is that a dog-cock?  Those are quite nice.  It's oh-so-fun to enhance the knots on those and then watch them puff up enough to distend some poor slave's gut.", false);
-		else if(player.cocks[temp2].cockType == 3) outputText("Oooh, is that a demon-cock?  As you can see I'm QUITE familiar with those, but it might be fun to replace one of my girl's tongues with it.", false);
-		else if(player.cocks[temp2].cockType == 5) outputText("Oooh, is that a kitty-dick?  The spines on those feel so good while they rub down all your walls or catch your prostate.  Meow.", false);
-		else if(player.cocks[temp2].cockType == 6) outputText("Wow, you've got a snake-dick?  I haven't seen one of those in a while.  I love the bulbous, knot-like texture.  Maybe I'll graft it onto a chair and make one of my boys sit on it for a few days.", false);
-		else if(player.cocks[temp2].cockType == 4) outputText("Oooh, a tentacle cock?  How lucky to find one of those on you!  I've been meaning to add another poor tentacle-slave.", false);
-		else if(player.cocks[temp2].cockType == 7) outputText("Oooh, an anemone-cock?  Simply marvelous!  I might have to crank up the strength of the venom and use it myself!", false);
+		if(player.cocks[temp2].cockType == CockTypesEnum.HUMAN) outputText("Oooh, is that a horse-cock?  Those are quite nice.  I love the feel of a flare inside me, or even better, plunging one deep into a slut's poor, abused asshole.", false);
+		else if(player.cocks[temp2].cockType == CockTypesEnum.DOG) outputText("Oooh, is that a dog-cock?  Those are quite nice.  It's oh-so-fun to enhance the knots on those and then watch them puff up enough to distend some poor slave's gut.", false);
+		else if(player.cocks[temp2].cockType == CockTypesEnum.DEMON) outputText("Oooh, is that a demon-cock?  As you can see I'm QUITE familiar with those, but it might be fun to replace one of my girl's tongues with it.", false);
+		else if(player.cocks[temp2].cockType == CockTypesEnum.CAT) outputText("Oooh, is that a kitty-dick?  The spines on those feel so good while they rub down all your walls or catch your prostate.  Meow.", false);
+		else if(player.cocks[temp2].cockType == CockTypesEnum.LIZARD) outputText("Wow, you've got a snake-dick?  I haven't seen one of those in a while.  I love the bulbous, knot-like texture.  Maybe I'll graft it onto a chair and make one of my boys sit on it for a few days.", false);
+		else if(player.cocks[temp2].cockType == CockTypesEnum.TENTACLE) outputText("Oooh, a tentacle cock?  How lucky to find one of those on you!  I've been meaning to add another poor tentacle-slave.", false);
+		else if(player.cocks[temp2].cockType == CockTypesEnum.ANEMONE) outputText("Oooh, an anemone-cock?  Simply marvelous!  I might have to crank up the strength of the venom and use it myself!", false);
 		else outputText("Oooh, a normal, uncorrupted cock.  How utterly droll!  You'd think these would be more common, but it's quite a treat to come across one.", false);
 		if(player.cockTotal() > 1) {
 			outputText("  Of course that's not the only prick you're packing, hrmmm?  Maybe I should take ", false);

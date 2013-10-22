@@ -2,7 +2,8 @@
 {
 	import classes.assClass;
 	import classes.breastRowClass;
-	import classes.cockClass;
+	//import classes.cockClass;
+	import classes.Cock;
 	import classes.creature;
 	import classes.itemSlotClass;
 	import classes.perkClass;

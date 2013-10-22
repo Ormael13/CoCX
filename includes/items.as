@@ -1,4 +1,5 @@
 ﻿// import classes.itemSlotClass;
+import classes.CockTypesEnum
 
 //const FOX_BAD_END_WARNING:int = 477;
 //const TIMES_MET_CHICKEN_HARPY:int = 652;
@@ -2986,7 +2987,7 @@ function incubiDraft(tainted:Boolean):void {
 	//Lowlevel changes
 	if(rando < 50) {
 		if(player.cocks.length == 1) {
-			if(player.cocks[0].cockType != 3) outputText("\n\nYour " + cockDescript(0) + " becomes shockingly hard.  It turns a shiny inhuman purple and spasms, dribbling hot demon-like cum as it begins to grow.", false);
+			if(player.cocks[0].cockType != CockTypesEnum.DEMON) outputText("\n\nYour " + cockDescript(0) + " becomes shockingly hard.  It turns a shiny inhuman purple and spasms, dribbling hot demon-like cum as it begins to grow.", false);
 			else outputText("\n\nYour " + cockDescript(0) + " becomes shockingly hard.  It dribbles hot demon-like cum as it begins to grow.", false);
 			if(rand(4) == 0) temp = player.cocks[0].growCock(3);
 			else temp = player.cocks[0].growCock(1);
@@ -2998,7 +2999,7 @@ function incubiDraft(tainted:Boolean):void {
 			if(temp > 2) outputText("  You smile and idly stroke your lengthening " + cockDescript(0) + " as a few more inches sprout.", false);
 			if(tainted) stats(0, 0, 0, 1, 2, 1, 5 + temp*3, 1);
 			else stats(0, 0, 0, 1, 2, 1, 5 + temp*3, 0);
-			if(player.cocks[0].cockType != 3) outputText("  With the transformation complete, your " + cockDescript(0) + " returns to its normal coloration.", false);
+			if(player.cocks[0].cockType != CockTypesEnum.DEMON) outputText("  With the transformation complete, your " + cockDescript(0) + " returns to its normal coloration.", false);
 			else outputText("  With the transformation complete, your " + cockDescript(0) + " throbs in an almost happy way as it goes flaccid once more.", false);
 		}
 		if(player.cocks.length > 1) {
@@ -3400,7 +3401,7 @@ function minotaurBlood():void {
 				player.createCock();
 				player.cocks[0].cockLength = player.clitLength + 2;
 				player.cocks[0].cockThickness = 1;
-				player.cocks[0].cockType = 1;
+				player.cocks[0].cockType = CockTypesEnum.HORSE;
 				player.clitLength = .25;
 			}
 			genderCheck();
@@ -3469,7 +3470,7 @@ function minotaurBlood():void {
 	//Boosts cock size up to 36"x5".
 	if(changes < changeLimit && rand(2) == 0 && player.cocks.length > 0) {
 		//Length first
-		if(player.cocks[0].cockLength < 36 && player.cocks[0].cockType == 1) {
+		if(player.cocks[0].cockLength < 36 && player.cocks[0].cockType == CockTypesEnum.HUMAN) {
 			//Thickness too if small enough
 			if(player.cocks[0].cockThickness < 5) {
 				//Increase by 2 + rand(8), and store the actual amount in temp
@@ -3494,7 +3495,7 @@ function minotaurBlood():void {
 			changes++;
 		}
 		//if too long check thickness
-		else if(player.cocks[0].cockThickness < 5 && player.cocks[0].cockType == 1) {
+		else if(player.cocks[0].cockThickness < 5 && player.cocks[0].cockType == CockTypesEnum.HUMAN) {
 			player.cocks[0].thickenCock(1);
 			outputText("\n\nMuch to your delight and surprise, you discover your " + cockDescript(0) + " has thickened noticeably.", false);
 			changes++;
@@ -3502,12 +3503,12 @@ function minotaurBlood():void {
 	}
 	//Morph dick to horsediiiiick
 	if(player.cocks.length > 0 && rand(2) == 0 && changes < changeLimit) {
-		if(player.cocks[0].cockType != 1) {
+		if(player.cocks[0].cockType != CockTypesEnum.HORSE) {
 			//Text for humandicks or others
-			if(player.cocks[0].cockType == 0 || player.cocks[0].cockType > 2) outputText("\n\nYour " + cockDescript(0) + " begins to feel strange... you pull down your pants to take a look and see it darkening as you feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your cock's base, tightening and pulling your cock inside its depths.  A hot feeling envelops your member as it suddenly grows into a horse penis, dwarfing its old size.  The skin is mottled brown and black and feels more sensitive than normal.  Your hands are irresistibly drawn to it, and you jerk yourself off, splattering cum with intense force.", false); 
+			if(player.cocks[0].cockType == CockTypesEnum.HUMAN || player.cocks[0].cockType.Index > 2) outputText("\n\nYour " + cockDescript(0) + " begins to feel strange... you pull down your pants to take a look and see it darkening as you feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your cock's base, tightening and pulling your cock inside its depths.  A hot feeling envelops your member as it suddenly grows into a horse penis, dwarfing its old size.  The skin is mottled brown and black and feels more sensitive than normal.  Your hands are irresistibly drawn to it, and you jerk yourself off, splattering cum with intense force.", false); 
 			//Text for dogdicks
-			if(player.cocks[0].cockType == 2) outputText("\n\nYour " + dogDescript(0) + " begins to feel odd...  You pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + dogDescript(0) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond its traditional size.  You notice your knot vanishing, the extra flesh pushing more fresh horsecock out from your sheath.  <b>Your hands are drawn to the strange new " + horseDescript(0) + "</b>, and you jerk yourself off, splattering thick ropes of cum with intense force.", false);
-			player.cocks[0].cockType = 1;
+			if(player.cocks[0].cockType == CockTypesEnum.DOG) outputText("\n\nYour " + dogDescript(0) + " begins to feel odd...  You pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + dogDescript(0) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond its traditional size.  You notice your knot vanishing, the extra flesh pushing more fresh horsecock out from your sheath.  <b>Your hands are drawn to the strange new " + horseDescript(0) + "</b>, and you jerk yourself off, splattering thick ropes of cum with intense force.", false);
+			player.cocks[0].cockType = CockTypesEnum.HORSE;
 			player.increaseCock(4, 0)
 			stats(0, 0, 0, 0, 5, 4, 35, 0);
 			outputText("<b>  You now have a horse-penis.</b>", false);
@@ -3844,28 +3845,28 @@ function equinum():void {
 				temp = 0;
 				//Use temp3 to track whether or not anything is changed.
 				temp3 = 0;
-				if(player.cocks[0].cockType == 0) {
+				if(player.cocks[0].cockType == CockTypesEnum.HUMAN) {
 					outputText("\n\nYour " + cockDescript(0) + " begins to feel strange... you pull down your pants to take a look and see it darkening as you feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your cock's base, tightening and pulling your cock inside its depths.  A hot feeling envelops your member as it suddenly grows into a horse penis, dwarfing its old size.  The skin is mottled brown and black and feels more sensitive than normal.  Your hands are irresistibly drawn to it, and you jerk yourself off, splattering cum with intense force.", false);  
 					temp = player.addHorseCock();
 					temp2 = player.increaseCock(rand(4) + 4, temp);
 					temp3 = 1;
 					stats(0, 0, 0, 0, 5, 4, 35, 0);
 				}
-				if(player.cocks[0].cockType == 2) {
+				if(player.cocks[0].cockType == CockTypesEnum.DOG) {
 					temp = player.addHorseCock();
 					outputText("\n\nYour " + dogDescript(0) + " begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + dogDescript(0) + " as it flattens, flaring outwards.  Your cock pushes out of your sheath, inch after inch of animal-flesh growing beyond it's traditional size.  You notice your knot vanishing, the extra flesh pushing more horsecock out from your sheath.  Your hands are drawn to the strange new " + horseDescript(0) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.", false);
 					temp2 = player.increaseCock(rand(4) + 4, temp);
 					temp3 = 1;
 					stats(0, 0, 0, 0, 5, 4, 35, 0);
 				}
-				if(player.cocks[0].cockType == 4) {
+				if(player.cocks[0].cockType == CockTypesEnum.TENTACLE) {
 					temp = player.addHorseCock();
 					outputText("\n\nYour " + cockDescript(0) + " begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + cockDescript(0) + " as it flattens, flaring outwards.  Your skin folds and bunches around the base, forming an animalistic sheath.  The slick inhuman texture you recently had fades, taking on a more leathery texture.  Your hands are drawn to the strange new " + horseDescript(0) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.", false);
 					temp2 = player.increaseCock(rand(4) + 4, temp);
 					temp3 = 1;
 					stats(0, 0, 0, 0, 5, 4, 35, 0);
 				}
-				if(player.cocks[0].cockType > 4) {
+				if(player.cocks[0].cockType.Index > 4) {
 					outputText("\n\nYour " + cockDescript(0) + " begins to feel odd... you pull down your clothes to take a look and see it darkening.  You feel a growing tightness in the tip of your " + cockDescript(0) + " as it flattens, flaring outwards.  Your skin folds and bunches around the base, forming an animalistic sheath.  The slick inhuman texture you recently had fades, taking on a more leathery texture.  Your hands are drawn to the strange new " + horseDescript(0) + ", and you jerk yourself off, splattering thick ropes of cum with intense force.", false);
 					temp = player.addHorseCock();
 					temp2 = player.increaseCock(rand(4) + 4, temp);
@@ -4517,27 +4518,27 @@ function caninePepper(type:Number = 0):void {
 					player.createCock(7 + rand(7),1.5 + rand(10)/10);
 					outputText("\n\nA painful lump forms on your groin, nearly doubling you over as it presses against your " + player.armorName + ".  You rip open your gear and watch, horrified as the discolored skin splits apart, revealing a pair of red-tipped points.  A feeling of relief, and surprising lust grows as they push forward, glistening red and thickening.  The skin bunches up into an animal-like sheath, while a pair of fat bulges pop free.  You now have two nice thick dog-cocks, with decent sized knots.  Both pulse and dribble animal-pre, arousing you in spite of your attempts at self-control.", false); 
 					player.cocks[0].knotMultiplier = 1.7;
-					player.cocks[0].cockType = 2;
+					player.cocks[0].cockType = CockTypesEnum.DOG;
 					player.cocks[1].knotMultiplier = 1.7;
-					player.cocks[1].cockType = 2;
+					player.cocks[1].cockType = CockTypesEnum.DOG;
 					stats(0,0,0,0,0,0,50,0);
 				}
 				//1 dick - grow 1 and convert 1
 				else if(player.cockTotal() == 1) {
 					outputText("\n\nYour " + cockDescript(0) + " vibrates, the veins clearly visible as it reddens and distorts.  The head narrows into a pointed tip while a gradually widening bulge forms around the base.  Where it meets your crotch, the skin bunches up around it, forming a canine-like sheath.  ", false);
-					player.cocks[0].cockType = 2;
+					player.cocks[0].cockType = CockTypesEnum.DOG;
 					player.cocks[0].knotMultiplier = 1.5;
 					outputText("You feel something slippery wiggling inside the new sheath, and another red point peeks out.  In spite of yourself, you start getting turned on by the change, and the new dick slowly slides free, eventually stopping once the thick knot pops free.  The pair of dog-dicks hang there, leaking pre-cum and arousing you far beyond normal.", false);
 					player.createCock(7 + rand(7),1.5 + rand(10)/10);
 					player.cocks[1].knotMultiplier = 1.7;
-					player.cocks[1].cockType = 2;
+					player.cocks[1].cockType = CockTypesEnum.DOG;
 					stats(0,0,0,0,2,0,50,0);
 				}
 				//2 dicks+ - convert first 2 to doggie-dom
 				else {
 					outputText("\n\nYour crotch twitches, and you pull open your " + player.armorName + " to get a better look.  You watch in horror and arousal as your " + cockDescript(0) + " and " + cockDescript(1) + " both warp and twist, becoming red and pointed, growing thick bulges near the base.  When it stops you have two dog-cocks and an animal-like sheath.  The whole episode turns you on far more than it should, leaving you dripping animal pre and ready to breed.", false);
-					player.cocks[0].cockType = 2;
-					player.cocks[1].cockType = 2;
+					player.cocks[0].cockType = CockTypesEnum.DOG;
+					player.cocks[1].cockType = CockTypesEnum.DOG;
 					player.cocks[0].knotMultiplier = 1.4;
 					player.cocks[0].knotMultiplier = 1.4;
 					stats(0,0,0,0,2,0,50,0);
@@ -4549,22 +4550,22 @@ function caninePepper(type:Number = 0):void {
 				if(player.cockTotal() == 1) {
 					outputText("\n\nYou feel something slippery wiggling inside your sheath, and another red point peeks out.  In spite of yourself, you start getting turned on by the change, and the new dick slowly slides free, eventually stopping once the thick knot pops free.  The pair of dog-dicks hang there, leaking pre-cum and arousing you far beyond normal.", false);
 					player.createCock(7 + rand(7),1.5 + rand(10)/10);
-					player.cocks[1].cockType = 2;
+					player.cocks[1].cockType = CockTypesEnum.DOG;
 					player.cocks[1].knotMultiplier = 1.4;
 					stats(0,0,0,0,2,0,50,0);
 				}
 				//if player has more
 				if(player.cockTotal() >= 1) {
 					//if first dick is already doggi'ed
-					if(player.cocks[0].cockType == 2) {
+					if(player.cocks[0].cockType == CockTypesEnum.DOG) {
 						outputText("\n\nYour crotch twitches, and you pull open your " + player.armorName + " to get a better look.  You watch in horror and arousal as your " + cockDescript(1) + " warps and twists, becoming red and pointed, just like other dog-dick, growing thick bulges near the base.  When it stops you have two dog-cocks and an animal-like sheath.  The whole episode turns you on far more than it should, leaving you dripping animal pre and ready to breed.", false);
-						player.cocks[1].cockType = 2;
+						player.cocks[1].cockType = CockTypesEnum.DOG;
 						player.cocks[1].knotMultiplier = 1.4;
 					}
 					//first dick is not dog
 					else {
 						outputText("\n\nYour crotch twitches, and you pull open your " + player.armorName + " to get a better look.  You watch in horror and arousal as your " + cockDescript(0) + " warps and twists, becoming red and pointed, just like other dog-dick, growing thick bulges near the base.  When it stops you have two dog-cocks and an animal-like sheath.  The whole episode turns you on far more than it should, leaving you dripping animal pre and ready to breed.", false);
-						player.cocks[0].cockType = 2;
+						player.cocks[0].cockType = CockTypesEnum.DOG;
 						player.cocks[0].knotMultiplier = 1.4;
 					}
 					stats(0,0,0,0,2,0,50,0);
@@ -4582,7 +4583,7 @@ function caninePepper(type:Number = 0):void {
 				temp = 0
 				//set temp2 to first dogdick for initialization
 				while(temp < player.cocks.length) {
-					if(player.cocks[temp].cockType == 2) {
+					if(player.cocks[temp].cockType == CockTypesEnum.DOG) {
 						temp2 = temp;
 						break;
 					}
@@ -4593,7 +4594,7 @@ function caninePepper(type:Number = 0):void {
 				//Find smallest knot
 				while(temp > 0) {
 					temp--;
-					if(player.cocks[temp].cockType == 2 && player.cocks[temp].knotMultiplier < player.cocks[temp2].knotMultiplier) temp2 = temp;
+					if(player.cocks[temp].cockType == CockTypesEnum.DOG && player.cocks[temp].knotMultiplier < player.cocks[temp2].knotMultiplier) temp2 = temp;
 				}
 				//Have smallest knotted cock selected.
 				temp3 = (rand(2) + 5)/20 * crit;
@@ -4610,7 +4611,7 @@ function caninePepper(type:Number = 0):void {
 			//Grow dogdick with big knot
 			else {
 				outputText("\n\nYour " + cockDescript(0) + " twitches, reshaping itself.  The crown tapers down to a point while the base begins swelling.  It isn't painful in the slightest, actually kind of pleasant.  Your dog-like knot slowly fills up like a balloon, eventually stopping when it's nearly twice as thick as the rest.  You touch and shiver with pleasure, oozing pre-cum.", false);
-				player.cocks[0].cockType = 2;
+				player.cocks[0].cockType = CockTypesEnum.DOG;
 				player.cocks[0].knotMultiplier = 2.1;
 			}
 		}
@@ -4649,7 +4650,7 @@ function caninePepper(type:Number = 0):void {
 			temp = 0
 			//set temp2 to first dogdick for initialization
 			while(temp < player.cocks.length) {
-				if(player.cocks[temp].cockType == 2) {
+				if(player.cocks[temp].cockType == CockTypesEnum.DOG) {
 					temp2 = temp;
 					break;
 				}
@@ -4660,7 +4661,7 @@ function caninePepper(type:Number = 0):void {
 			//Find smallest knot
 			while(temp > 0) {
 				temp--;
-				if(player.cocks[temp].cockType == 2 && player.cocks[temp].knotMultiplier < player.cocks[temp2].knotMultiplier) temp2 = temp;
+				if(player.cocks[temp].cockType == CockTypesEnum.DOG && player.cocks[temp].knotMultiplier < player.cocks[temp2].knotMultiplier) temp2 = temp;
 			}
 			//Have smallest knotted cock selected.
 			temp3 = (rand(2) + 1)/20 * crit;
@@ -4682,7 +4683,7 @@ function caninePepper(type:Number = 0):void {
 			while(temp > 0 && temp2 == 0) {
 				temp--;
 				//Store cock index if not a dogCock and exit loop.
-				if(player.cocks[temp].cockType != 2) {
+				if(player.cocks[temp].cockType != CockTypesEnum.DOG) {
 					temp3 = temp;
 					//kicking out of tah loop!
 					temp2 = 1000;
@@ -4690,12 +4691,12 @@ function caninePepper(type:Number = 0):void {
 			}
 			//Talk about it 
 			//Hooooman
-			if(player.cocks[temp3].cockType == 0) {
+			if(player.cocks[temp3].cockType == CockTypesEnum.HUMAN) {
 				outputText("\n\nYour " + cockDescript(temp3) + " clenches painfully, becoming achingly, throbbingly erect.  A tightness seems to squeeze around the base, and you wince as you see your skin and flesh shifting forwards into a canine-looking sheath.  You shudder as the crown of your " + cockDescript(temp3) + " reshapes into a point, the sensations nearly too much for you.  You throw back your head as the transformation completes, your " + dogDescript(temp3) + " much thicker than it ever was before.  <b>You now have a dog-cock.</b>", false);
 				stats(0,0,0,0,0,10,5*crit,0);
 			}
 			//Horse
-			if(player.cocks[temp3].cockType == 1) {
+			if(player.cocks[temp3].cockType == CockTypesEnum.HUMAN) {
 				outputText("\n\nYour " + horseDescript(temp3) + " shrinks, the extra equine length seeming to shift into girth.  The flared tip vanishes into a more pointed form, a thick knotted bulge forming just above your sheath.  <b>You now have a dog-cock.</b>", false);
 				//Tweak length/thickness.
 				if(player.cocks[temp3].cockLength > 6) player.cocks[temp3].cockLength -= 2;
@@ -4705,28 +4706,28 @@ function caninePepper(type:Number = 0):void {
 				stats(0,0,0,0,0,4,5*crit,0);
 			}
 			//Tentacular Tuesday!
-			if(player.cocks[temp3].cockType == 4) {
+			if(player.cocks[temp3].cockType == CockTypesEnum.TENTACLE) {
 				outputText("\n\nYour " + cockDescript(temp3) + " coils in on itself, reshaping and losing its plant-like coloration as it thickens near the base, bulging out in a very canine-looking knot.  Your skin bunches painfully around the base, forming into a sheath.  <b>You now have a dog-cock.</b>", false);
 				stats(0,0,0,0,0,4,5*crit,0);
 			}
 			//Misc
-			if(player.cocks[temp3].cockType > 4) {
+			if(player.cocks[temp3].cockType.Index > 4) {
 				outputText("\n\nYour " + cockDescript(temp3) + " trembles, reshaping itself into a shiny red doggie-dick with a fat knot at the base.  <b>You now have a dog-cock.</b>", false);
 				stats(0,0,0,0,0,4,5*crit,0);
 			}
 			temp = 0;
 			//Demon
-			if(player.cocks[temp3].cockType == 3) {
+			if(player.cocks[temp3].cockType == CockTypesEnum.DEMON) {
 				outputText("\n\nYour " + cockDescript(temp3) + " color shifts red for a moment and begins to swell at the base, but within moments it smooths out, retaining its distinctive demonic shape, only perhaps a bit thicker.", false);
 				stats(0,0,0,0,0,1,2*crit,0);
 				temp = 1;
 			}
 			//Xform it!
-			player.cocks[temp3].cockType = 2;
+			player.cocks[temp3].cockType = CockTypesEnum.DOG;
 			player.cocks[temp3].knotMultiplier = 1.1;
 			player.cocks[temp3].thickenCock(2);
 			if(temp == 1) {
-				player.cocks[temp3].cockType = 3;
+				player.cocks[temp3].cockType = CockTypesEnum.DEMON;
 			}
 			changes++;
 
@@ -8093,7 +8094,7 @@ function catTransformation():void {
 	if(player.lib < 80 && changes < changeLimit && rand(4) == 0) {
 		//Cat dicked folks
 		if(player.catCocks() > 0) {
-			temp = player.findFirstCockType(5);
+			temp = player.findFirstCockType(CockTypesEnum.CAT);
 			outputText("\n\nYou feel your " + cockDescript(temp) + " growing hard, the barbs becoming more sensitive. You gently run your hands down them and imagine the feeling of raking the insides of a cunt as you pull.  The fantasy continues, and after ejaculating and hearing the female yowl with pleasure, you shake your head and try to drive off the image.  ", false);
 			if(player.cor < 33) outputText("You need to control yourself better.", false);
 			else if(player.cor < 66) outputText("You're not sure how you feel about the fantasy.", false);
@@ -8175,15 +8176,15 @@ function catTransformation():void {
 	if(player.cockTotal() > 0 && player.catCocks() < player.cockTotal() &&
 		changes < changeLimit && rand(4) == 0) {
 		//loop through and find a non-cat wang.
-		for(var i:Number = 0;i < (player.cockTotal()) && player.cocks[i].cockType == 5;i++) 
+		for(var i:Number = 0;i < (player.cockTotal()) && player.cocks[i].cockType == CockTypesEnum.CAT;i++) 
 		{ }
-		outputText("\n\nYour " + cockDescript(i) + " swells up with near-painful arousal and begins to transform.  It turns pink and begins to narrow until the tip is barely wide enough to accommodate your urethra.  Barbs begin to sprout from its flesh, if you can call the small, fleshy nubs barbs. They start out thick around the base of your " + cockNoun(0) + " and shrink towards the tip. The smallest are barely visible. <b>Your new feline dong throbs powerfully</b> and spurts a few droplets of cum.  ", false);
+		outputText("\n\nYour " + cockDescript(i) + " swells up with near-painful arousal and begins to transform.  It turns pink and begins to narrow until the tip is barely wide enough to accommodate your urethra.  Barbs begin to sprout from its flesh, if you can call the small, fleshy nubs barbs. They start out thick around the base of your " + cockNoun(CockTypesEnum.HUMAN) + " and shrink towards the tip. The smallest are barely visible. <b>Your new feline dong throbs powerfully</b> and spurts a few droplets of cum.  ", false);
 		if(!player.hasSheath()) {
 			outputText("Then, it begins to shrink and sucks itself inside your body.  Within a few moments, a fleshy sheath is formed.", false);
 			if(player.balls > 0) outputText("  Thankfully, your balls appear untouched.", false);
 		}
 		else outputText("Then, it disappears back into your sheath.", false);
-		player.cocks[i].cockType = 5;
+		player.cocks[i].cockType = CockTypesEnum.CAT;
 		player.cocks[i].knotMultiplier = 1;
 		changes++;
 	}
@@ -8193,7 +8194,7 @@ function catTransformation():void {
 		temp = 0;
 		for(var j:Number = 0;j < (player.cockTotal());j++) 
 		{ 
-			if(player.cocks[j].cockType == 5 && player.cocks[j].cockLength > 6) {
+			if(player.cocks[j].cockType == CockTypesEnum.CAT && player.cocks[j].cockLength > 6) {
 				temp = 1;
 				break;
 			}
@@ -8214,7 +8215,7 @@ function catTransformation():void {
 			j++;
 			for(j; j < player.totalCocks();j++) {
 				//Found another cat wang!
-				if(player.cocks[j].cockType == 5) {
+				if(player.cocks[j].cockType == CockTypesEnum.CAT) {
 					//Long enough - change it
 					if(player.cocks[j].cockLength > 6) {
 						if(player.cocks[j].cockLength > 16) 
@@ -8231,7 +8232,7 @@ function catTransformation():void {
 			outputText("  Although the package is smaller, it feels even more sensitive – as if it retained all sensation of its larger size in its smaller form.", false);
 			stats(0,0,0,0,0,5,0,0);
 			//Make note of other dicks changing
-			if(temp2 == 1) outputText("  Upon further inspection, all your " + cockNoun(5) + "s have shrunk!", false);
+			if(temp2 == 1) outputText("  Upon further inspection, all your " + cockNoun(CockTypesEnum.CAT) + "s have shrunk!", false);
 			changes++;
 		}
 	}
@@ -8400,12 +8401,12 @@ function reptilum():void {
 		//Find the first non-lizzy dick
 		for(temp2 = 0;temp2 < player.totalCocks();temp2++) {
 			//Stop loopahn when dick be found
-			if(player.cocks[temp2].cockType != 6) break;
+			if(player.cocks[temp2].cockType != CockTypesEnum.LIZARD) break;
 		}
 		outputText("\n\nA slow tingle warms your groin.  Before it can progress any further, you yank back your " + player.armorName + " to investigate.  Your " + cockDescript(temp2) + " is changing!  It ripples loosely from ", false);
 		if(player.hasSheath()) outputText("sheath ", false);
 		else outputText("base ", false);
-		outputText("to tip, undulating and convulsing as its color lightens, darkens, and finally settles on a purplish hue.  Your " + cockNoun(0) + " resolves itself into a bulbous form, with a slightly pointed tip.  The 'bulbs' throughout its shape look like they would provide an interesting ride for your sexual partners, but the perverse, alien pecker ", false);
+		outputText("to tip, undulating and convulsing as its color lightens, darkens, and finally settles on a purplish hue.  Your " + cockNoun(CockTypesEnum.HUMAN) + " resolves itself into a bulbous form, with a slightly pointed tip.  The 'bulbs' throughout its shape look like they would provide an interesting ride for your sexual partners, but the perverse, alien pecker ", false);
 		if(player.cor < 33) outputText("horrifies you.", false);
 		else if(player.cor < 66) outputText("is a little strange for your tastes.", false);
 		else {
@@ -8416,10 +8417,10 @@ function reptilum():void {
 		outputText("  <b>You now have a bulbous, lizard-like cock.</b>", false);
 		//Actually xform it nau
 		if(player.hasSheath()) {
-			player.cocks[temp2].cockType = 6;
+			player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
 			if(!player.hasSheath()) outputText("\n\nYour sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>", false);
 		}
-		else player.cocks[temp2].cockType = 6;
+		else player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
 		changes++;
 		stats(0,0,0,0,3,0,10,0);
 	}
@@ -8429,7 +8430,7 @@ function reptilum():void {
 		outputText("\n\nA familiar tingle starts in your crotch, and before you can miss the show, you pull open your " + player.armorName + ".  As if operating on a cue, ", false);
 		for(temp2 = 0;temp2 < player.totalCocks();temp2++) {
 			//Stop loopahn when dick be found
-			if(player.cocks[temp2].cockType != 6) break;
+			if(player.cocks[temp2].cockType != CockTypesEnum.LIZARD) break;
 		}
 		if(player.cockTotal() == 2) outputText("your other dick", false);
 		else outputText("another one of your dicks", false);
@@ -8440,10 +8441,10 @@ function reptilum():void {
 		outputText(" from the pleasure of the change.  In moments <b>you have a bulbous, lizard-like cock.</b>", false);
 		//(REMOVE SHEATH IF NECESSARY)
 		if(player.hasSheath()) {
-			player.cocks[temp2].cockType = 6;
+			player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
 			if(!player.hasSheath()) outputText("\n\nYour sheath tightens and starts to smooth out, revealing ever greater amounts of your " + cockDescript(temp2) + "'s lower portions.  After a few moments <b>your groin is no longer so animalistic – the sheath is gone.</b>", false);
 		}
-		else player.cocks[temp2].cockType = 6;
+		else player.cocks[temp2].cockType = CockTypesEnum.LIZARD;
 		changes++;
 		stats(0,0,0,0,3,0,10,0);
 	}
@@ -8455,7 +8456,7 @@ function reptilum():void {
 		outputText(" as the bulge lengthens, pushing out from your body.  Too surprised to react, you can only pant in pain and watch as the fleshy lump starts to take on a penis-like appearance.  <b>You're growing a second lizard-cock!</b>  It doesn't stop growing until it's just as long as its brother and the same shade of shiny purple.  A dribble of cum oozes from its tip, and you feel relief at last.", false);
 
 		player.createCock();
-		player.cocks[1].cockType = 6;
+		player.cocks[1].cockType = CockTypesEnum.LIZARD;
 		player.cocks[1].cockLength = player.cocks[0].cockLength;
 		player.cocks[1].cockThickness = player.cocks[0].cockThickness;
 		changes++;
@@ -9535,8 +9536,8 @@ function kangaFruit(type:Number = 0):void {
 			x = 0;
 			//Find first roocock!
 			while(x < player.cockTotal()) {
-				if(player.cocks[x].cockType != 8) {
-					player.cocks[x].cockType = 8
+				if(player.cocks[x].cockType != CockTypesEnum.KANGAROO) {
+					player.cocks[x].cockType = CockTypesEnum.KANGAROO;
 					player.cocks[x].knotMultiplier = 1;
 					break;
 				}
@@ -10127,9 +10128,9 @@ function ectoplasm():void {
 	}
 	//Effect script a:  (human wang)  
 	if(player.hasCock() && changes < changeLimit) {
-		if(rand(3) == 0 && player.cocks[0].cockType != 0) {
+		if(rand(3) == 0 && player.cocks[0].cockType != CockTypesEnum.HUMAN) {
 			outputText("\n\nA strange tingling begins behind your " + cockDescript(0) + ", slowly crawling up across its entire length.  While neither particularly arousing nor uncomfortable, you do shift nervously as the feeling intensifies.  You resist the urge to undo your " + player.armorName + " to check, but by the feel of it, your penis is shifting form.  Eventually the transformative sensation fades, <b>leaving you with a completely human penis.</b>", false);
-			player.cocks[0].cockType = 0;
+			player.cocks[0].cockType = CockTypesEnum.HUMAN;
 			changes++;
 		}
 	}
@@ -10650,17 +10651,17 @@ function foxTF(enhanced:Boolean = false):void {
 		while(counter > 0) {
 			counter--;
 			//Add non-dog locations to the array
-			if(player.cocks[counter].cockType != 2) choices[choices.length] = counter;
+			if(player.cocks[counter].cockType != CockTypesEnum.DOG) choices[choices.length] = counter;
 		}
 		if(choices.length != 0) {
 			var select:int = choices[rand(choices.length)];
-			if(player.cocks[select].cockType == 0) {
+			if(player.cocks[select].cockType == CockTypesEnum.HUMAN) {
 				outputText("\n\nYour " + cockDescript(select) + " clenches painfully, becoming achingly, throbbingly erect.  A tightness seems to squeeze around the base, and you wince as you see your skin and flesh shifting forwards into a canine-looking sheath.  You shudder as the crown of your " + cockDescript(select) + " reshapes into a point, the sensations nearly too much for you.  You throw back your head as the transformation completes, your " + dogDescript(select) + " much thicker than it ever was before.  <b>You now have a dog-cock.</b>", false);
 				player.cocks[select].cockThickness += .3;
 				stats(0,0,0,0,0,10,5,0);
 			}
 			//Horse
-			else if(player.cocks[select].cockType == 1) {
+			else if(player.cocks[select].cockType == CockTypesEnum.HUMAN) {
 				outputText("\n\nYour " + horseDescript(select) + " shrinks, the extra equine length seeming to shift into girth.  The flared tip vanishes into a more pointed form, a thick knotted bulge forming just above your sheath.  <b>You now have a dog-cock.</b>", false);
 				//Tweak length/thickness.
 				if(player.cocks[select].cockLength > 6) player.cocks[select].cockLength -= 2;
@@ -10670,7 +10671,7 @@ function foxTF(enhanced:Boolean = false):void {
 				stats(0,0,0,0,0,4,5,0);
 			}
 			//Tentacular Tuesday!
-			else if(player.cocks[select].cockType == 4) {
+			else if(player.cocks[select].cockType == CockTypesEnum.TENTACLE) {
 				outputText("\n\nYour " + cockDescript(select) + " coils in on itself, reshaping and losing it's plant-like coloration as thickens near the base, bulging out in a very canine-looking knot.  Your skin bunches painfully around the base, forming into a sheath.  <b>You now have a dog-cock.</b>", false);
 				stats(0,0,0,0,0,4,10,0);
 			}
@@ -10679,7 +10680,7 @@ function foxTF(enhanced:Boolean = false):void {
 				outputText("\n\nYour " + cockDescript(select) + " trembles, reshaping itself into a shiny red doggie-dick with a fat knot at the base.  <b>You now have a dog-cock.</b>", false);
 				stats(0,0,0,0,0,4,10,0);
 			}
-			player.cocks[select].cockType = 2;
+			player.cocks[select].cockType = CockTypesEnum.DOG;
 			player.cocks[select].knotMultiplier = 1.25;
 			changes++;
 		}

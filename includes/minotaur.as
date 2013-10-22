@@ -115,7 +115,7 @@ function rapeMinotaurTentacles():void {
 	var x:Number = 0;
 	var counter:Number = 0;
 	while(counter < player.cockTotal()) {
-		if(player.cocks[counter].cockType == 4) {
+		if(player.cocks[counter].cockType == CockTypesEnum.TENTACLE) {
 			x = counter;
 			break;
 		}
@@ -143,7 +143,7 @@ function rapeMinotaurTentacles():void {
 		//Find the first non-tentacle dick for a point of comparison
 		while(temp > 0 && temp2 == -1) {
 			temp--;
-			if(player.cocks[temp].cockType != 4) temp2 = temp;
+			if(player.cocks[temp].cockType != CockTypesEnum.TENTACLE) temp2 = temp;
 		}
 		//failsafe
 		if(temp2 == -1) temp2 = 0;
@@ -152,7 +152,7 @@ function rapeMinotaurTentacles():void {
 		while(temp > 0) {
 			temp--;
 			//Check to see if this cock is longer than the saved one.
-			if(player.cocks[temp].cockLength > player.cocks[temp2].cockLength && player.cocks[temp].cockType != 4) {
+			if(player.cocks[temp].cockLength > player.cocks[temp2].cockLength && player.cocks[temp].cockType != CockTypesEnum.TENTACLE) {
 				temp2 = temp;
 			}
 		}
@@ -185,7 +185,7 @@ function rapeMinotaurTentacle():void {
 	var x:Number = 0;
 	var counter:Number = 0;
 	while(counter < player.cockTotal()) {
-		if(player.cocks[counter].cockType == 4) {
+		if(player.cocks[counter].cockType == CockTypesEnum.TENTACLE) {
 			x = counter;
 			break;
 		}
@@ -808,7 +808,7 @@ function minoAddictionFuck():void {
 	monster.createCock();
 	monster.cocks[0].cockLength = rand(13) + 24;
 	monster.cocks[0].cockThickness = 2 + rand(3);
-	monster.cocks[0].cockType = 1;
+	monster.cocks[0].cockType = CockTypesEnum.HORSE;
 	monster.balls = 2;
 	monster.cumMultiplier = 1.5;
 	monster.ballSize = 2 + rand(13);

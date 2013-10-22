@@ -482,9 +482,9 @@ function displacerDreamIII():void {
 	var x:int = player.cockTotal();
 	while (x > 0) {
 		x--;
-		if(player.cocks[x].sock == "amaranthine" && player.cocks[x].cockType != 10) {
-			if(player.cocks[x].cockType != 2) player.cocks[x].knotMultiplier = 1.5;
-			player.cocks[x].cockType = 10;
+		if(player.cocks[x].sock == "amaranthine" && player.cocks[x].cockType != CockTypesEnum.DISPLACER) {
+			if(player.cocks[x].cockType != CockTypesEnum.DOG) player.cocks[x].knotMultiplier = 1.5;
+			player.cocks[x].cockType = CockTypesEnum.DISPLACER;
 		}
 	}
 	doNext(1);

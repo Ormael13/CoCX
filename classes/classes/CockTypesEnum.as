@@ -1,10 +1,10 @@
-package
+package classes
 {
-	import Enum;
+	import classes.Enum;
 	
 	public class CockTypesEnum extends Enum
 	{
-		{initEnum(CocksEnum);}
+		{initEnum(CockTypesEnum);}
 		
 		/*Cock types
 		   0 - human
@@ -19,16 +19,16 @@ package
 		   9 - dragon
 		   10 - displacer
 		 */
-		public static const HUMAN:CocksEnum = new CocksEnum();
-		public static const HORSE:CocksEnum = new CocksEnum();
-		public static const DOG:CocksEnum = new CocksEnum();
-		public static const DEMON:CocksEnum = new CocksEnum();
-		public static const TENTACLE:CocksEnum = new CocksEnum();
-		public static const CAT:CocksEnum = new CocksEnum();
-		public static const LIZARD:CocksEnum = new CocksEnum();
-		public static const ANEMONE:CocksEnum = new CocksEnum();
-		public static const KANGAROO:CocksEnum = new CocksEnum();
-		public static const DRAGON:CocksEnum = new CocksEnum();
-		public static const DISPLACER:CocksEnum = new CocksEnum();
+		public static const HUMAN:CockTypesEnum = new CockTypesEnum();
+		public static const HORSE:CockTypesEnum = new CockTypesEnum();
+		public static const DOG:CockTypesEnum = new CockTypesEnum();
+		public static const DEMON:CockTypesEnum = new CockTypesEnum();
+		public static const TENTACLE:CockTypesEnum = new CockTypesEnum();
+		public static const CAT:CockTypesEnum = new CockTypesEnum();
+		public static const LIZARD:CockTypesEnum = new CockTypesEnum();
+		public static const ANEMONE:CockTypesEnum = new CockTypesEnum();
+		public static const KANGAROO:CockTypesEnum = new CockTypesEnum();
+		public static const DRAGON:CockTypesEnum = new CockTypesEnum();
+		public static const DISPLACER:CockTypesEnum = new CockTypesEnum();
 	}
 }

@@ -509,7 +509,7 @@ function izzyTentacleRapeBool():Boolean {
 	while(counter < player.tentacleCocks() && temp > 0) {
 		temp--;
 		//Does this dick work for it?
-		if(player.cocks[temp].cockType == 4 && player.cocks[temp].cockLength >= 24) {
+		if(player.cocks[temp].cockType == CockTypesEnum.TENTACLE && player.cocks[temp].cockLength >= 24) {
 			counter++;
 		}
 	}
@@ -539,7 +539,7 @@ function tentacleBoneFollowerIzzy():void {
 	while(counter < player.tentacleCocks() && temp > 0) {
 		temp--;
 		//Does this dick work for it?
-		if(player.cocks[temp].cockType == 4 && player.cocks[temp].cockLength >= 24) {
+		if(player.cocks[temp].cockType == CockTypesEnum.TENTACLE && player.cocks[temp].cockLength >= 24) {
 			counter++;
 			//Set the tentacle array up
 			if(t1 == -1) t1 = temp;

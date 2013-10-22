@@ -211,7 +211,8 @@ function loadGame(slot:String):void
 //FURNITURE'S JUNK
 function saveGameObject(slot:String, isFile:Boolean):void
 {
-	import classes.cockClass;
+	//import classes.cockClass
+	import classes.Cock;
 	import classes.vaginaClass;
 	import classes.breastRowClass;
 	import classes.assClass;
@@ -244,7 +245,6 @@ function saveGameObject(slot:String, isFile:Boolean):void
 	//Save sum dataz
 	trace("SAVE DATAZ");
 	saveFile.data.short = player.short;
-<<<<<<< HEAD
 	saveFile.data.a = player.a;
 	//saveFile.data.long = player.long;
 	//saveFile.data.capitalA = player.capitalA;
@@ -255,16 +255,6 @@ function saveGameObject(slot:String, isFile:Boolean):void
 	//saveFile.data.pronoun1 = player.pronoun1;
 	//saveFile.data.pronoun2 = player.pronoun2;
 	//saveFile.data.pronoun3 = player.pronoun3;
-=======
-	saveFile.data.long = player.long;
-	saveFile.data.temperment = player.temperment;
-	saveFile.data.special1 = player.special1;
-	saveFile.data.special2 = player.special2;
-	saveFile.data.special3 = player.special3;
-	saveFile.data.pronoun1 = player.pronoun1;
-	saveFile.data.pronoun2 = player.pronoun2;
-	saveFile.data.pronoun3 = player.pronoun3;
->>>>>>> 3f3db627ace5c2d3767bfd6f4f7ece3a24aa0ae9
 	
 	//Notes
 	if(nameBox.text != "") {
@@ -407,8 +397,8 @@ function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.cocks[i].cockType = player.cocks[i].cockType;
 		saveFile.data.cocks[i].knotMultiplier = player.cocks[i].knotMultiplier;
 		saveFile.data.cocks[i].pierced = player.cocks[i].pierced;
-		saveFile.data.cocks[i].pShort = player.cocks[i].pShort;
-		saveFile.data.cocks[i].pLong = player.cocks[i].pLong;
+		saveFile.data.cocks[i].pShortDesc = player.cocks[i].pShortDesc;
+		saveFile.data.cocks[i].pLongDesc = player.cocks[i].pLongDesc;
 	}
 	//Set Vaginal Array
 	for(i = 0; i < player.vaginas.length ; i++) {
@@ -656,7 +646,8 @@ function loadGameObject(saveData:Object, slot:String = "VOID"):void
 	
 	//Autosave stuff
 	player.slotName = slot;
-	import classes.cockClass;
+	//import classes.cockClass;
+	import classes.Cock
 	import classes.vaginaClass;
 	import classes.breastRowClass;
 	import classes.assClass;
@@ -670,14 +661,13 @@ function loadGameObject(saveData:Object, slot:String = "VOID"):void
 	if(saveFile.data.exists)
 	{
 		//KILL ALL COCKS;
-		player = new creature();
+		player = new Player();
 
 		//trace("Type of saveFile.data = ", getClass(saveFile.data));
 
 		clearStorage();
 		clearGearStorage();
 		player.short = saveFile.data.short;
-<<<<<<< HEAD
 		player.a = saveFile.data.a
 		//player.long = saveFile.data.long;
 		//player.capitalA = saveFile.data.capitalA;
@@ -688,16 +678,6 @@ function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		//player.pronoun1 = saveFile.data.pronoun1;
 		//player.pronoun2 = saveFile.data.pronoun2;
 		//player.pronoun3 = saveFile.data.pronoun3;
-=======
-		player.long = saveFile.data.long;
-		player.temperment = saveFile.data.temperment;
-		player.special1 = saveFile.data.special1;
-		player.special2 = saveFile.data.special2;
-		player.special3 = saveFile.data.special3;
-		player.pronoun1 = saveFile.data.pronoun1;
-		player.pronoun2 = saveFile.data.pronoun2;
-		player.pronoun3 = saveFile.data.pronoun3;
->>>>>>> 3f3db627ace5c2d3767bfd6f4f7ece3a24aa0ae9
 		notes = saveFile.data.notes;
 		
 		//flags
@@ -896,13 +876,13 @@ function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.cocks[i].knotMultiplier = saveFile.data.cocks[i].knotMultiplier;
 			if(saveFile.data.cocks[i].pierced == undefined) {
 				player.cocks[i].pierced = 0;
-				player.cocks[i].pShort = "";
-				player.cocks[i].pLong = "";
+				player.cocks[i].pShortDesc = "";
+				player.cocks[i].pLongDesc = "";
 			}
 			else {
 				player.cocks[i].pierced = saveFile.data.cocks[i].pierced;
-				player.cocks[i].pShort = saveFile.data.cocks[i].pShort;
-				player.cocks[i].pLong = saveFile.data.cocks[i].pLong;
+				player.cocks[i].pShortDesc = saveFile.data.cocks[i].pShort;
+				player.cocks[i].pLongDesc = saveFile.data.cocks[i].pLong;
 			}
 			//trace("LoadOne Cock i(" + i + ")");
 		}
