@@ -5631,7 +5631,7 @@ function startCombat(monsterNum:Number):void {
 		monster.createCock();
 		monster.cocks[0].cockLength = rand(2) + 11;
 		monster.cocks[0].cockThickness = 2.5;
-		monster.cocks[0].cockType = 0;
+		monster.cocks[0].cockType = CockTypesEnum.HUMAN;
 		monster.balls = 2;
 		monster.cumMultiplier = 3;
 		monster.ballSize = 1;
@@ -6052,7 +6052,7 @@ function startCombat(monsterNum:Number):void {
 		monster.createCock();
 		monster.cocks[0].cockLength = rand(13) + 24;
 		monster.cocks[0].cockThickness = 2 + rand(3);
-		monster.cocks[0].cockType = 1;
+		monster.cocks[0].cockType = CockTypesEnum.HORSE;
 		monster.balls = 2;
 		monster.cumMultiplier = 1.5;
 		monster.ballSize = 2 + rand(13);
@@ -6318,7 +6318,7 @@ function startCombat(monsterNum:Number):void {
 		monster.createCock();
 		monster.cocks[0].cockLength = 18;
 		monster.cocks[0].cockThickness = 2;
-		monster.cocks[0].cockType = 0;
+		monster.cocks[0].cockType = CockTypesEnum.HUMAN;
 		monster.balls = 0;
 		monster.cumMultiplier = 3;
 		monster.ballSize = 1;
@@ -6448,11 +6448,11 @@ function startCombat(monsterNum:Number):void {
 		monster.createCock();
 		monster.cocks[0].cockLength = 18;
 		monster.cocks[0].cockThickness = 2;
-		monster.cocks[0].cockType = 0;
+		monster.cocks[0].cockType = CockTypesEnum.HUMAN;
 		monster.createCock();
 		monster.cocks[1].cockLength = 18;
 		monster.cocks[1].cockThickness = 2;
-		monster.cocks[1].cockType = 0;
+		monster.cocks[1].cockType = CockTypesEnum.HUMAN;
 		monster.createVagina();
 		monster.vaginas[0].virgin = false;
 		monster.vaginas[0].vaginalWetness = 3;
@@ -8428,7 +8428,7 @@ function startCombat(monsterNum:Number):void {
 		monster.createCock();
 		monster.cocks[0].cockLength = 15;
 		monster.cocks[0].cockThickness = 2.5;
-		monster.cocks[0].cockType = 0;
+		monster.cocks[0].cockType = CockTypesEnum.HUMAN;
 		monster.balls = 2;
 		monster.cumMultiplier = 6;
 		monster.ballSize = 4;
@@ -8570,7 +8570,7 @@ function startCombat(monsterNum:Number):void {
 		monster.createCock();
 		monster.cocks[0].cockLength = 10;
 		monster.cocks[0].cockThickness = 2;
-		monster.cocks[0].cockType = 3;
+		monster.cocks[0].cockType = CockTypesEnum.DEMON;
 		doNext(1);
 	}
 	//LOAD TAMANI'S DAUGHTERS
@@ -9366,7 +9366,7 @@ function startCombat(monsterNum:Number):void {
 		monster.createCock();
 		monster.cocks[0].cockLength = 7;
 		monster.cocks[0].cockThickness = 1;
-		monster.cocks[0].cockType = 7;
+		monster.cocks[0].cockType = CockTypesEnum.ANEMONE;
 		doNext(1);
 	}
 	//LOAD VALA!
@@ -9635,7 +9635,7 @@ function startCombat(monsterNum:Number):void {
 		monster.createCock();
 		monster.cocks[0].cockLength = rand(2) + 11;
 		monster.cocks[0].cockThickness = 2.5;
-		monster.cocks[0].cockType = 0;
+		monster.cocks[0].cockType = CockTypesEnum.HUMAN;
 		monster.balls = 2;
 		monster.cumMultiplier = 3;
 		monster.ballSize = 1;
@@ -10991,7 +10991,7 @@ function startCombat(monsterNum:Number):void {
 		monster.createCock();
 		monster.cocks[0].cockLength = rand(13) + 24;
 		monster.cocks[0].cockThickness = 2 + rand(3);
-		monster.cocks[0].cockType = 1;
+		monster.cocks[0].cockType = CockTypesEnum.HORSE;
 		monster.balls = 2;
 		monster.cumMultiplier = 1.5;
 		monster.ballSize = 2 + rand(13);
@@ -11656,7 +11656,7 @@ function startCombat(monsterNum:Number):void {
 		monster.createCock();
 		monster.cocks[0].cockLength = 9;
 		monster.cocks[0].cockThickness = 2;
-		monster.cocks[0].cockType = 0;
+		monster.cocks[0].cockType = CockTypesEnum.HUMAN;
 		monster.createVagina();
 		monster.vaginas[0].virgin = false;
 		monster.vaginas[0].vaginalWetness = 3;
@@ -12437,7 +12437,7 @@ function startCombat(monsterNum:Number):void {
 		monster.createCock();
 		monster.cocks[0].cockLength = 9;
 		monster.cocks[0].cockThickness = 2;
-		monster.cocks[0].cockType = 0;
+		monster.cocks[0].cockType = CockTypesEnum.HUMAN;
 		monster.createVagina();
 		monster.vaginas[0].virgin = false;
 		monster.vaginas[0].vaginalWetness = 3;
@@ -12578,7 +12578,7 @@ function startCombat(monsterNum:Number):void {
 			monster.createCock();
 			monster.cocks[0].cockLength = 16;
 			monster.cocks[0].cockThickness = 2;
-			monster.cocks[0].cockType = 9;
+			monster.cocks[0].cockType = CockTypesEnum.DRAGON;
 			monster.ballSize = 4;
 		}
 		monster.cumMultiplier = 3;
@@ -12870,7 +12870,7 @@ function startCombat(monsterNum:Number):void {
 		monster.createCock();
 		monster.cocks[0].cockLength = 10;
 		monster.cocks[0].cockThickness = 2;
-		monster.cocks[0].cockType = 0;
+		monster.cocks[0].cockType = CockTypesEnum.HUMAN;
 		monster.ballSize = 4;
 		monster.cumMultiplier = 3;
 		monster.ass.analLooseness = 2;
@@ -13002,7 +13002,7 @@ function startCombat(monsterNum:Number):void {
 		monster.createCock();
 		monster.cocks[0].cockLength = rand(13) + 14;
 		monster.cocks[0].cockThickness = 1.5 + rand(20)/2;
-		monster.cocks[0].cockType = 0;
+		monster.cocks[0].cockType = CockTypesEnum.HUMAN;
 		monster.balls = 2;
 		monster.cumMultiplier = 1.5;
 		monster.ballSize = 2 + rand(13);
@@ -13143,7 +13143,7 @@ function startCombat(monsterNum:Number):void {
 			monster.createCock();
 			monster.cocks[0].cockLength = rand(13) + 14;
 			monster.cocks[0].cockThickness = 1.5 + rand(20)/2;
-			monster.cocks[0].cockType = 0;
+			monster.cocks[0].cockType = CockTypesEnum.HUMAN;
 			monster.balls = 2;
 			monster.cumMultiplier = 1.5;
 			monster.ballSize = 2 + rand(13);
@@ -13410,7 +13410,7 @@ function startCombat(monsterNum:Number):void {
 		monster.createCock();
 		monster.cocks[0].cockLength = rand(13) + 24;
 		monster.cocks[0].cockThickness = 2 + rand(3);
-		monster.cocks[0].cockType = 1;
+		monster.cocks[0].cockType = CockTypesEnum.HORSE;
 		monster.balls = 2;
 		monster.cumMultiplier = 1.5;
 		monster.ballSize = 2 + rand(13);
@@ -13679,7 +13679,7 @@ function startCombat(monsterNum:Number):void {
 		monster.createCock();
 		monster.cocks[0].cockLength = 36;
 		monster.cocks[0].cockThickness = 3.5;
-		monster.cocks[0].cockType = 1;
+		monster.cocks[0].cockType = CockTypesEnum.HORSE;
 		monster.balls = 2;
 		monster.cumMultiplier = 1.5;
 		monster.ballSize = 2 + rand(13);
@@ -14104,7 +14104,7 @@ function startCombat(monsterNum:Number):void {
 		monster.cocks[0].cockLength = rand(2) + 11;
 		monster.cocks[0].cockThickness = 2.5;
 		monster.cocks[0].cockType = rand(3);
-		if(monster.cocks[0].cockType == 0) monster.cocks[0].cockType = 3;
+		if(monster.cocks[0].cockType == CockTypesEnum.HUMAN) monster.cocks[0].cockType = CockTypesEnum.DEMON;
 		monster.balls = 2;
 		monster.cumMultiplier = 3;
 		monster.ballSize = 1;
@@ -14379,7 +14379,7 @@ function startCombat(monsterNum:Number):void {
 		monster.createCock();
 		monster.cocks[0].cockLength = 12;
 		monster.cocks[0].cockThickness = 2;
-		monster.cocks[0].cockType = 0;
+		monster.cocks[0].cockType = CockTypesEnum.HUMAN;
 
 		doNext(1);
 	}
@@ -14654,7 +14654,7 @@ function startCombat(monsterNum:Number):void {
 		monster.createCock();
 		monster.cocks[0].cockLength = 12;
 		monster.cocks[0].cockThickness = 2;
-		monster.cocks[0].cockType = 0;
+		monster.cocks[0].cockType = CockTypesEnum.HUMAN;
 
 		doNext(1);
 	}

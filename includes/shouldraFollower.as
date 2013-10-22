@@ -1746,7 +1746,7 @@ function keepShouldraAndKickOutExgartuan():void {
 	outputText("\n\n\"<i>You know, nothing in that pile effected your actual load,</i>\" Shouldra smiles, reaching over from her perch to rub your [balls].  \"<i>How's about we greet the morning sunrise with my brand new cock.  I never liked that grody demonic dong you had earlier.  I mean, just look at this thing.  I made the head nice and...</i>\"");
 	outputText("\n\nShouldra goes on and on about her new toy.  She's certainly a spry little thing.  After paying one more glance to the mess in the side of your tent, you finally get to move on with your day.  You really hope Shouldra was right about that sight evaporating on its own.");
 	//PC has human dick
-	player.cocks[0].cockType = 0;
+	player.cocks[0].cockType = CockTypesEnum.HUMAN;
 	//Exgartuan departs
 	player.removeStatusAffect("Exgartuan");
 	//unlocks one more scene for later that night

@@ -196,7 +196,7 @@ function serviceLowCorruptionHighLust():void
 			{
 				outputText("Eventually your own arousal becomes unbearable and you reach down to work your own " + cockDescript(0) + " as well, continuing to run your other hand up and down the creature's length.  You gasp slightly as soon as you wrap your hand around your " + cockDescript(0) + ", the creature's fluid making you exceptionally sensitive.  You moan softly in spite of yourself and begin to thrust your hips a bit against your fist, stroking yourself and the creature from crest to root.  The creature's erection gains definition as it starts pulsing harder and faster, turning into ", false);
 				//Compare cocks
-				if(player.cocks[0].cockType == 0) outputText("a near exact replica of your own " + cockDescript(0) + "!  ", false);
+				if(player.cocks[0].cockType == CockTypesEnum.HUMAN) outputText("a near exact replica of your own " + cockDescript(0) + "!  ", false);
 				//Cocks are different so it's a 'human' penis
 				else outputText("a distinctly human penis.  ", false);
 			}

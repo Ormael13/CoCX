@@ -597,7 +597,7 @@ This license supercedes all previous licenses and remains in force.
 					if(player.cocks.length == 1) {
 						outputText("Your feel your " + cockDescript(0) + " bending and flexing of its own volition... looking down, you see it morph into a green vine-like shape.  <b>You now have a tentacle cock!</b>  ", false);
 						//Set primary cock flag
-						player.cocks[0].cockType = 4;
+						player.cocks[0].cockType = CockTypesEnum.TENTACLE;
 						temp++;
 					}
 					//multi
@@ -607,7 +607,7 @@ This license supercedes all previous licenses and remains in force.
 						//Set cock flags
 						while(temp2 > 0) {
 							temp2--;
-							player.cocks[temp2].cockType = 4;
+							player.cocks[temp2].cockType = CockTypesEnum.TENTACLE;
 						}
 						temp++;
 					}				

@@ -1,9 +1,9 @@
 package classes
 {
-	import CockTypesEnum;
+	import classes.CockTypesEnum;
 	public class Cock
 	{		
-		/*private var _cockLength:Number;
+		private var _cockLength:Number;
 		private var _cockThickness:Number;		
 		private var _cockType:CockTypesEnum;	//See CockTypesEnum.as for all cock types
 		
@@ -11,6 +11,9 @@ package classes
 		private var _knotMultiplier:Number;
 		
 		//Piercing info
+		private var _isPierced:Boolean;
+		private var _pierced:Number;
+		//Not yet, sweet prince. PiercedType current has no uses. But it will, one day.
 		private var _pierceType:PiercingTypesEnum;
 		private var _pShortDesc:String;
 		private var _pLongDesc:String;
@@ -23,7 +26,9 @@ package classes
 		{
 			_cockLength = i_cockLength;
 			_cockThickness = i_cockThickness;
+			_pierced = 0;
 			_knotMultiplier = 1;
+			_isPierced = false;
 			_pierceType = PiercingTypesEnum.NONE;
 			_pShortDesc = "";
 			_pLongDesc = "";
@@ -244,12 +249,12 @@ package classes
 		
 		public function get pShortDesc():String 
 		{
-			return _pShort;
+			return _pShortDesc;
 		}
 		
 		public function set pShortDesc(value:String):void 
 		{
-			_pShort = value;
+			_pShortDesc = value;
 		}
 		
 		public function get pLongDesc():String 
@@ -270,6 +275,16 @@ package classes
 		public function set sock(value:String):void 
 		{
 			_sock = value;
-		}*/
+		}
+		
+		public function get pierced():Number 
+		{
+			return _pierced;
+		}
+		
+		public function set pierced(value:Number):void 
+		{
+			_pierced = value;
+		}
 	}
 }

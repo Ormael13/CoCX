@@ -199,7 +199,7 @@ function startUrtaQuest():void {
 	player.tailType = 13;
 	player.tailVenom = 1;
 	player.createCock();
-	player.cocks[0].cockType = 1;
+	player.cocks[0].cockType = CockTypesEnum.HORSE;
 	player.cocks[0].cockLength = 20;
 	player.cocks[0].cockThickness = 3;
 	player.balls = 2;

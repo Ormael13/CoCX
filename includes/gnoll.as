@@ -337,7 +337,7 @@ function dickInGnollAss():void {
 		outputText("The gnoll must be taught a lesson, but you're staying the hell away from her freaky anatomy.  You roughly roll her onto her belly and pull her lean ass up into the air.  You line up your " + cockDescript(x) + " and ram it home into her tiny puckered entrance, eliciting a half-conscious gasp from the hyena girl.\n\n", false);
 		//(if cockTotal>1)
 		if(player.totalCocks() > 1 && player.cockArea(x) < monster.analCapacity() && y != -1) {
-			outputText("With a smirk, you pound away for a few minutes to get her loosened up.  Then you reach down and slap another " + cockNoun(0) + " alongside the first.  With a grunt and a thrust, you shove both of them inside.", false);
+			outputText("With a smirk, you pound away for a few minutes to get her loosened up.  Then you reach down and slap another " + cockNoun(CockTypesEnum.HUMAN) + " alongside the first.  With a grunt and a thrust, you shove both of them inside.", false);
 			//(if cockTotal>2)
 			if(player.totalCocks() > 2 && player.cockArea(x) + player.cockArea(y) < monster.analCapacity()) outputText("  A few thrusts more, and you slow again.  As you gather up your third cock, the gnoll whimpers quietly, fearing what she knows will come next.  You slowly push forward, sinking your rigid meat into her ass.  When all three are in, it's very slow going, but you don't let up.", false);
 			//(if cockTotal>3)

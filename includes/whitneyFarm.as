@@ -775,7 +775,7 @@ function cockPumping():void {
 		if(cumQ < 1000) {
 			outputText("The orgasm rolls over you, shutting down your thoughts as your body spasms in its straps, boiling out ", false);
 			if(cumQ > 500) outputText("thick ", false);
-			outputText("spurts of spunk.  Wriggling cillia convulse around you, licking your head as it flares wide, filling with blood and pouring out cum.  You moan and scream with delight, babbling happily as you watch your cum wick up the clear tube and into the machinery in the wall.  All too soon the pleasure comes to and end; the harness lowers you to the ground and releases you, but the squishy walls of your demon machine lover don't cease their ministrations on your tender " + cockNoun(0), false);
+			outputText("spurts of spunk.  Wriggling cillia convulse around you, licking your head as it flares wide, filling with blood and pouring out cum.  You moan and scream with delight, babbling happily as you watch your cum wick up the clear tube and into the machinery in the wall.  All too soon the pleasure comes to and end; the harness lowers you to the ground and releases you, but the squishy walls of your demon machine lover don't cease their ministrations on your tender " + cockNoun(CockTypesEnum.HUMAN), false);
 			if(player.cockTotal() > 1) outputText("s", false);
 			outputText(".\n\n", false);
 						

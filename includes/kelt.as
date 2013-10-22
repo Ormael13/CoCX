@@ -171,13 +171,13 @@ function keltEagerlyGetNaked():void {
 		//(Any Cock: 
 		outputText("and almost inevitably, his eyes drop down to your " + cockDescript(0) + ".  He snorts, ", false);
 		//(Human Cock:
-		if(player.cocks[0].cockType == 0) outputText("\"<i>Heh.  Just sporting the normal model, huh?  You know there's a phrase around here... hung like a human!  Trust me... it's not a compliment.  ", false);
+		if(player.cocks[0].cockType == CockTypesEnum.HUMAN) outputText("\"<i>Heh.  Just sporting the normal model, huh?  You know there's a phrase around here... hung like a human!  Trust me... it's not a compliment.  ", false);
 		//(Dog Cock:
-		if(player.cocks[0].cockType == 2) outputText("\"<i>Oh, lookie here!  We got ourselves a little doggie dong!  Well, cock or not, you'll always be a bitch to me, mutt.  ", false);
+		if(player.cocks[0].cockType == CockTypesEnum.DOG) outputText("\"<i>Oh, lookie here!  We got ourselves a little doggie dong!  Well, cock or not, you'll always be a bitch to me, mutt.  ", false);
 		//(Horse Cock: 
-		if(player.cocks[0].cockType == 1) outputText("\"<i>Now that's just sad.  Getting a little envious of me, huh?  Had to go out and get a nice horsecock all your own?  Should have asked.  I'd have given you a taste of mine!  ", false);
+		if(player.cocks[0].cockType == CockTypesEnum.HUMAN) outputText("\"<i>Now that's just sad.  Getting a little envious of me, huh?  Had to go out and get a nice horsecock all your own?  Should have asked.  I'd have given you a taste of mine!  ", false);
 		//(Tentacle Cock or other weirdness
-		if(player.cocks[0].cockType >= 3) outputText("\"<i>Hah!  I'll bite... what the fuck are you supposed to be?  That a cock, or just an ugly, misplaced tail?  HA!  ", false);
+		if(player.cocks[0].cockType.Index >= 3) outputText("\"<i>Hah!  I'll bite... what the fuck are you supposed to be?  That a cock, or just an ugly, misplaced tail?  HA!  ", false);
 		//(Small Size, ?-10 inches:
 		if(player.cocks[0].cockLength <= 10) outputText("\"So, when you poke a woman with that, does she notice?  Or do you have to tell her when to start faking her orgasm?</i>\"\r\r", false);
 		//(Medium Size, 11-20 inches: 
@@ -225,13 +225,13 @@ function keltReluctantlyGetNaked():void {
 		//(Any Cock: 
 		outputText("and almost inevitably, his eyes drop down to your " + cockDescript(0) + ".  He snorts, ", false);
 		//(Human Cock:
-		if(player.cocks[0].cockType == 0) outputText("\"<i>Heh.  Just sporting the normal model, huh?  You know there's a phrase around here... hung like a human!  Trust me... it's not a compliment.  ", false);
+		if(player.cocks[0].cockType == CockTypesEnum.HUMAN) outputText("\"<i>Heh.  Just sporting the normal model, huh?  You know there's a phrase around here... hung like a human!  Trust me... it's not a compliment.  ", false);
 		//(Dog Cock:
-		if(player.cocks[0].cockType == 2) outputText("\"<i>Oh, lookie here!  We got ourselves a little doggie dong!  Well, cock or not, you'll always be a bitch to me, mutt.  ", false);
+		if(player.cocks[0].cockType == CockTypesEnum.DOG) outputText("\"<i>Oh, lookie here!  We got ourselves a little doggie dong!  Well, cock or not, you'll always be a bitch to me, mutt.  ", false);
 		//(Horse Cock: 
-		if(player.cocks[0].cockType == 1) outputText("\"<i>Now that's just sad.  Getting a little envious of me, huh?  Had to go out and get a nice horsecock all your own?  Should have asked.  I'd have given you a taste of mine!  ", false);
+		if(player.cocks[0].cockType == CockTypesEnum.HUMAN) outputText("\"<i>Now that's just sad.  Getting a little envious of me, huh?  Had to go out and get a nice horsecock all your own?  Should have asked.  I'd have given you a taste of mine!  ", false);
 		//(Tentacle Cock or other weirdness
-		if(player.cocks[0].cockType >= 3) outputText("\"<i>Hah!  I'll bite... what the fuck are you supposed to be?  That a cock, or just an ugly, misplaced tail?  HA!  ", false);
+		if(player.cocks[0].cockType.Index >= 3) outputText("\"<i>Hah!  I'll bite... what the fuck are you supposed to be?  That a cock, or just an ugly, misplaced tail?  HA!  ", false);
 		//(Small Size, ?-10 inches:
 		if(player.cocks[0].cockLength <= 10) outputText("\"So, when you poke a woman with that, does she notice?  Or do you have to tell her when to start faking her orgasm?</i>\"\r\r", false);
 		//(Medium Size, 11-20 inches: 

@@ -1376,7 +1376,7 @@ function emberTFs():void {
 		//Build an array of all the locations for TF'able cocks.
 		while(temp > 0) {
 			temp--;
-			if(player.cocks[temp].cockType != 9) choices[choices.length] = temp;
+			if(player.cocks[temp].cockType != CockTypesEnum.DRAGON) choices[choices.length] = temp;
 		}
 		//Randomly choose one of those locations
 		select = choices[rand(choices.length)];
@@ -1388,7 +1388,7 @@ function emberTFs():void {
 		stats(0,0,0,0,0,10,10,0);
 		changes++;
 		//Apply the TF
-		player.cocks[select].cockType = 9;
+		player.cocks[select].cockType = CockTypesEnum.DRAGON;
 		player.cocks[select].knotMultiplier = 1.3;
 	}
 	//Gain Dragon Head 
@@ -2589,7 +2589,7 @@ function stickDickInKnifeDrawer():void {
 	outputText(" sniffing your musk with obvious delight.");
 	
 	//(if Ember chose a dragon cock)
-	if(player.cocks[x].cockType == 9) outputText("\n\n\"<i>Such a magnificent, beautiful cock... it feels powerful... and familiar.</i>\"");
+	if(player.cocks[x].cockType == CockTypesEnum.DRAGON) outputText("\n\n\"<i>Such a magnificent, beautiful cock... it feels powerful... and familiar.</i>\"");
 	else outputText("\n\n\"<i>T-this isn't something that I know how to work... but I suppose I could try it... for you.</i>\"");
 	
 	outputText("\n\nYou shiver at the sensations of " + emberMF("his","her") + " hands on your cock");
@@ -3040,7 +3040,7 @@ function penetrateEmbrah():void {
 		outputText("\n\n\"<i>You have quite a selection, but I only need one... this one!</i>\" Ember says, taking your " + cockDescript(x) + " in her hand and stroking it into a full erection.");
 	}
 	//(if PC has a dragon cock)
-	if(player.cocks[x].cockType == 9) {
+	if(player.cocks[x].cockType == CockTypesEnum.DRAGON) {
 		outputText("\n\n\"<i>What a wonderful tool you have... I guess this might just be good enough to make me orgasm,</i>\" Ember remarks, admiring your dick.");
 		outputText("\n\nYou can't resist smiling and noting that Ember always seems to like that one best.  Perhaps because of the familiarity.");
 		outputText("\n\n\"<i>Actually I'd be fine with anything you... no wait, I mean...  Of course!  It's only right for a dragon to like a dragon's cock!</i>\"  Ember replies.");

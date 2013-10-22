@@ -1852,7 +1852,7 @@ function tentaDickLottieButtFuckbuttFuckButtFUCKBUTTFUCKBUTTFUCK():void {
 	var zzzzzzzz:Number = -1;
 	var counter:Number = 0;
 	while(counter < player.cockTotal()) {
-		if(player.cocks[counter].cockType == 4) {
+		if(player.cocks[counter].cockType == CockTypesEnum.TENTACLE) {
 			if(x == -1) x = counter;
 			else if(y == -1) y = counter;
 			else if(z == -1) z = counter;

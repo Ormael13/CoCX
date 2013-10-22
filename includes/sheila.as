@@ -1933,7 +1933,7 @@ function consentacleVagSexForKangarooSlutBitches():void {
 	
 	outputText("\n\n\"<i>Please... I can't take any more,</i>\" she whines.  \"<i>Stop pashing on my nips and put it in, mate.</i>\"  The hand at her crotch begins trying to unfasten her belt while the other grabs and fondles her breast; you smirk and complete your own undressing quickly with both hands.  As " + sMultiCockDesc() + " emerges, engorged with blood, from your clothing, she switches from undressing back to rubbing, breathing heavily and stroking herself through the fabric as she stares at your ");
 	//[(if wangaroo)
-	if(player.cocks[player.cockThatFits(32)].cockType == 8) outputText("tapered, fleshy penis.  \"<i>Wow... you never see those.</i>\"");
+	if(player.cocks[player.cockThatFits(32)].cockType == CockTypesEnum.KANGAROO) outputText("tapered, fleshy penis.  \"<i>Wow... you never see those.</i>\"");
 	else outputText(multiCockDescriptLight() + ".");
 	
 	outputText("\n\n\"<i>What's wrong?</i>\" you tease.  \"<i>I thought you wanted it in, but your pants are still in the way?</i>\"");
@@ -2007,7 +2007,7 @@ function consentacleVagSexForKangarooSlutBitches():void {
 	
 	outputText("\n\n\"<i>Oh god!</i>\" she yells.  \"<i>Pull out, before you get me pregnant!</i>\"  ");
 	//[(non-dog cock)
-	if(player.cocks[x].cockType != 2) {
+	if(player.cocks[x].cockType != CockTypesEnum.DOG) {
 		outputText("You oblige shakingly, pulling your " + cockNoun(player.cocks[x].cockType) + " out of her clenching pussy with a wet, sucking noise.  A trickle of semen drools from between her lips as you unburden yourself of the rest of your load, squirting it onto her groin");
 		//[(big skeet)
 		if(player.cumQ() > 500) outputText(", breasts, and face");

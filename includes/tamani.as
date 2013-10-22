@@ -801,9 +801,9 @@ function getRapedByTamaniYouHypnoSlut():void {
 		
 		outputText("An intense orgasm rolls through you, making your body clench as your piston your " + cockDescript(primary) + " forwards, burying it deeply inside the goblin-shaped cum-receptacle.  ", false);
 		if(player.hasKnot(primary)) outputText("Your knot balloons inside her, locking her place", false);
-		else if(player.cocks[primary].cockType == 1) outputText("Your flare widens, actually holding itself inside Tamani's womb", false);
-		else if(player.cocks[primary].cockType == 3) outputText("The corrupted nodules along your " + cockDescript(primary) + " pulsate in rippling, wave-like motions, massaging the interior of Tamani's twat", false);
-		else if(player.cocks[primary].cockType == 4) outputText("Your tentacle-cock's tip widens, mushroom-like inside Tamani's womb", false);
+		else if(player.cocks[primary].cockType == CockTypesEnum.HUMAN) outputText("Your flare widens, actually holding itself inside Tamani's womb", false);
+		else if(player.cocks[primary].cockType == CockTypesEnum.DEMON) outputText("The corrupted nodules along your " + cockDescript(primary) + " pulsate in rippling, wave-like motions, massaging the interior of Tamani's twat", false);
+		else if(player.cocks[primary].cockType == CockTypesEnum.TENTACLE) outputText("Your tentacle-cock's tip widens, mushroom-like inside Tamani's womb", false);
 		else outputText("Your sensitive head swells slightly in time with the contractions of your orgasm", false);
 		outputText(" as you begin to fill your wife's womb with seed.   The orgasm is intense", false);
 		if(player.cumQ() < 50) outputText(", but brief, and after a few moments of spasming pleasure, the flood of cum slows to a trickle.", false);
@@ -850,9 +850,9 @@ function getRapedByTamaniYouHypnoSlut():void {
 		
 		outputText("You do as your are told, like a good husband, and Tamani stays close, bound to you by a flexible, artificial umbilical.  She sits next to you, propping her feet up onto your " + cockDescript(0) + ".   The goblin doesn't have any shoes on her green-tinted feet, and in spite of the rough living conditions, they're softer than her hands, and nearly as dextrous.  You look over at her, questioningly at first, though it shifts to confused happiness as she begins stroking her left foot up and down your legth.  Your wife shifts her right leg underneath you, and curls her toes around to interlock them with her left.\n\n", false);
 		
-		outputText("With both her feet locked together, wrapped around most of your sensitive " + cockNoun(0) + " and sliding along it, your petite wife begins giving you the foot-job of a lifetime.  The awkward position and intense desire make the both of you break out in a sweat, and before long her slippery feet are lubricated enough for her to pick up the tempo.  You rock against her soles, gazing lovingly into her eyes as she fondles her clit and gives you a perverted wink.  Tamani exclaims, \"<i>Oooh I can feel you twitching under my toes!  Does Tamani's little feet feel good on her ", false);
+		outputText("With both her feet locked together, wrapped around most of your sensitive " + cockNoun(CockTypesEnum.HUMAN) + " and sliding along it, your petite wife begins giving you the foot-job of a lifetime.  The awkward position and intense desire make the both of you break out in a sweat, and before long her slippery feet are lubricated enough for her to pick up the tempo.  You rock against her soles, gazing lovingly into her eyes as she fondles her clit and gives you a perverted wink.  Tamani exclaims, \"<i>Oooh I can feel you twitching under my toes!  Does Tamani's little feet feel good on her ", false);
 		if(player.tallness > 60) outputText("big ", false);
-		outputText(player.mf("strong man's","sexy lover's") + " " + cockNoun(0) + "?</i>\"\n\n", false);
+		outputText(player.mf("strong man's","sexy lover's") + " " + cockNoun(CockTypesEnum.HUMAN) + "?</i>\"\n\n", false);
 		
 		outputText("You assure her that they do like what she is doing – very much so – and ", false);
 		if(player.cor < 33) outputText("beg", false);

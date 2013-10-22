@@ -844,7 +844,7 @@ function isabellaRapesYouWithHerAss():void {
 	
 	outputText("What's she going to do with you?  She seemed so mad earlier, but this... this just sounds like you're about to get laid.  The cow-girl steps over you, her olive skirt rustling like the nearby plains grasses, barely concealing the treasures it conceals from your sight while she positions herself above your groin.  With her hips swiveling slightly, the busty redhead flexes her thick thighs and lowers herself down.  Each second of waiting is agonizing, and the feel of her sweat-slicked bubble-butt brushing your " + cockHead(x) + " is maddening.", false);
 	if(player.cockTotal() > 1) {
-		if(player.cockTotal() > 2) outputText("  The bovine bitch reaches down to swat at some of your " + cockNoun(0) + "s, pushing them out of the way.  \"<i>So gross.  Why vould you vant so many penises?</i>\"", false);
+		if(player.cockTotal() > 2) outputText("  The bovine bitch reaches down to swat at some of your " + cockNoun(CockTypesEnum.HUMAN) + "s, pushing them out of the way.  \"<i>So gross.  Why vould you vant so many penises?</i>\"", false);
 		else outputText("  The bovine bitch reaches down to stroke your " + cockDescript(x) + ".  \"<i>So ready, ja?  Vhy are you so eager to be punished?</i>\"", false);
 	}
 	outputText("\n\n", false);
@@ -1251,11 +1251,11 @@ function victoryAgainstIzzzzzySixtyNine():void {
 		else outputText("base", false);
 		outputText(" numerous times before bobbing her head up and down.  She's using her tongue like some kind of onahole, and the warm, slippery pressure makes your " + cockDescript(x) + " want to melt with pleasure.  The cow-girl slides all the way to the tip", false);
 		if(player.hasKnot(x)) outputText(", struggling with the knot", false);
-		else if(player.cocks[x].cockType == 1) outputText(", getting stuck at the medial ring", false);
-		else if(player.cocks[x].cockType == 3) outputText(", slowed by all the nubs", false);
-		else if(player.cocks[x].cockType == 5) outputText(", slowed by all the spines", false);
-		else if(player.cocks[x].cockType == 4) outputText(", stopping under the mushroom-like head", false);
-		else if(player.cocks[x].cockType == 7) outputText(", giggling from the 'stings' your anemone-like prick gave her", false);
+		else if(player.cocks[x].cockType == CockTypesEnum.HUMAN) outputText(", getting stuck at the medial ring", false);
+		else if(player.cocks[x].cockType == CockTypesEnum.DEMON) outputText(", slowed by all the nubs", false);
+		else if(player.cocks[x].cockType == CockTypesEnum.CAT) outputText(", slowed by all the spines", false);
+		else if(player.cocks[x].cockType == CockTypesEnum.TENTACLE) outputText(", stopping under the mushroom-like head", false);
+		else if(player.cocks[x].cockType == CockTypesEnum.ANEMONE) outputText(", giggling from the 'stings' your anemone-like prick gave her", false);
 		else outputText(", rubbing her mouth against your urethral bulge", false);
 		outputText(" before she plants a kiss on your opening.  She tenderly kisses the cum-slit, all the while keeping her tongue-sheath securely around your member.  You tremble from her masterful technique, bombarded with hellish levels of sensation.", false);
 	}

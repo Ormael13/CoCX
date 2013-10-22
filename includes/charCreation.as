@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-﻿import classes.Player;
-const CUSTOM_PC_ENABLED:int = 759;
-=======
 ﻿// CUSTOM_PC_ENABLED:int = 759;
->>>>>>> 3f3db627ace5c2d3767bfd6f4f7ece3a24aa0ae9
 
 function newGameGo(e:MouseEvent):void {
 	funcs = new Array();
@@ -64,7 +59,7 @@ function newGameGo(e:MouseEvent):void {
 	inDungeon = false;
 	dungeonLoc = 0;
 	//Hold onto old data for NG+
-	var oldPlayer:creature = player;
+	var oldPlayer:Player = player;
 	//Reset all standard stats
 	player = new Player();
 	player.str = 15;
@@ -242,7 +237,7 @@ function doCreation(eventNo:Number):void {
 		player.tone = 60;
 		player.cocks[0].cockLength = 5.5;
 		player.cocks[0].cockThickness = 1;
-		player.cocks[0].cockType = 0;
+		player.cocks[0].cockType = CockTypesEnum.HUMAN;
 		player.cocks[0].knotMultiplier = 1;
 		player.createBreastRow();
 		player.breastRows[0].breastRating = 0;
@@ -1023,7 +1018,7 @@ function customPCSetup():void {
 		player.createCock();
 		player.cocks[0].cockLength = 11.5;
 		player.cocks[0].cockThickness = 2;
-		player.cocks[0].cockType = 2;
+		player.cocks[0].cockType = CockTypesEnum.DOG;
 		player.cocks[0].knotMultiplier = 1.5;
 		player.createBreastRow();
 		player.breastRows[0].breastRating = 0;
@@ -1120,7 +1115,7 @@ function customPCSetup():void {
 		player.cocks[0].cockLength = 11;
 		player.cocks[0].cockThickness = 2;
 		player.cocks[0].knotMultiplier = 1.2;
-		player.cocks[0].cockType = 2;
+		player.cocks[0].cockType = CockTypesEnum.DOG;
 		player.balls = 0;
 		player.createBreastRow();
 		player.createVagina();
@@ -1310,7 +1305,7 @@ function customPCSetup():void {
 		if(player.biggestTitSize() > 1) player.breastRows[0].breastRating = 1;
 		if(!player.hasCock()) {
 			player.createCock();
-			player.cocks[0].cockType = 2;
+			player.cocks[0].cockType = CockTypesEnum.DOG;
 			player.cocks[0].cockLength = 8;
 			player.cocks[0].cockThickness = 1;
 			player.cocks[0].knotMultiplier = 1.4;
@@ -1335,10 +1330,10 @@ function customPCSetup():void {
 		player.cocks[1].cockLength == 12;
 		player.cocks[0].pierced = 2;
 		player.cocks[1].pierced = 2;
-		player.cocks[0].pShort = "silver cock-ring";
-		player.cocks[1].pShort = "silver cock-ring";
-		player.cocks[0].pLong = "Silver cock-ring";
-		player.cocks[1].pLong = "Silver cock-ring";
+		player.cocks[0].pShortDesc = "silver cock-ring";
+		player.cocks[1].pShortDesc = "silver cock-ring";
+		player.cocks[0].pLongDesc = "Silver cock-ring";
+		player.cocks[1].pLongDesc = "Silver cock-ring";
 		//"Androgynous face, large brown eyes, long black hair down to about ass level, full lips, pirced with one silver ring ass itself is round and thick, chest is flat, only two nipples, about nickle sized pierced with silver studs, skin of a pale ghostly transparent complexion, rest of the body is not notably muscular or chubby in any definite way, feet seem to taper off into full transparency. Full body housed in the lewd Inquisitor Armor, wielding a Wizard Staff. Starting at level 5 with tank, regeneration, healing, smarts, channeling, mage and incorperability perks, a full knowledge of 
 		player.gender = 1;
 		player.tallness = 72;
@@ -1652,7 +1647,7 @@ function customPCSetup():void {
 		player.cocks[0].cockLength = 27;
 		player.cocks[0].cockThickness = 1.4;
 		player.cocks[0].knotMultiplier = 3.6;
-		player.cocks[0].cockType = 2;
+		player.cocks[0].cockType = CockTypesEnum.DOG;
 		player.balls = 0;
 		player.ballSize = 2;
 		player.cumMultiplier = 7500;
@@ -1750,24 +1745,24 @@ function customPCSetup():void {
 		player.createCock();
 		player.createCock();
 		player.createCock();
-		player.cocks[0].cockType = 1;
+		player.cocks[0].cockType = CockTypesEnum.HORSE;
 		player.cocks[0].cockLength = 15;
 		player.cocks[0].cockThickness = 3;
-		player.cocks[1].cockType = 1;
+		player.cocks[1].cockType = CockTypesEnum.HORSE;
 		player.cocks[1].cockLength = 15;
 		player.cocks[1].cockThickness = 3;
-		player.cocks[2].cockType = 2;
+		player.cocks[2].cockType = CockTypesEnum.DOG;
 		player.cocks[2].cockLength = 15;
 		player.cocks[2].cockThickness = 3;
 		player.cocks[2].knotMultiplier = 2;
-		player.cocks[3].cockType = 2;
+		player.cocks[3].cockType = CockTypesEnum.DOG;
 		player.cocks[3].cockLength = 15;
 		player.cocks[3].cockThickness = 3;
 		player.cocks[3].knotMultiplier = 2;
-		player.cocks[4].cockType = 9;
+		player.cocks[4].cockType = CockTypesEnum.DRAGON;
 		player.cocks[4].cockLength = 15;
 		player.cocks[4].cockThickness = 3;
-		player.cocks[5].cockType = 9;
+		player.cocks[5].cockType = CockTypesEnum.DRAGON;
 		player.cocks[5].cockLength = 15;
 		player.cocks[5].cockThickness = 3;
 		player.balls = 4;
@@ -1801,7 +1796,7 @@ function customPCSetup():void {
 		//Character Creation	If possible I would like a herm with a cat cock that is 10 inches by 4 inches. Anything else is up to you.	I would like a herm catmorph with two large d breasts and shoulder length hair. Also if possible I would like to start with some gel armor. Everything else is fair game.	Hikari
 		outputText("As a herm with a super-thick cat-cock, D-cup breasts, and out-of-this-world armor, you're a natural pick for champion.");
 		if(!player.hasCock()) player.createCock();
-		player.cocks[0].cockType = 5;
+		player.cocks[0].cockType = CockTypesEnum.CAT;
 		player.cocks[0].cockLength = 10;
 		player.cocks[0].cockThickness = 4;
 		if(!player.hasVagina()) player.createVagina();
@@ -1841,14 +1836,14 @@ function customPCSetup():void {
 		player.createCock();
 		player.cocks[0].cockLength = 12;
 		player.cocks[0].cockThickness = 2.8;
-		player.cocks[0].cockType = 2;
+		player.cocks[0].cockType = CockTypesEnum.DOG;
 		player.cocks[0].knotMultiplier = 1.8;
 		player.cocks[1].cockLength = 10;
 		player.cocks[1].cockThickness = 2.5;
-		player.cocks[1].cockType = 4;
+		player.cocks[1].cockType = CockTypesEnum.TENTACLE;
 		player.cocks[0].pierced = 3;
-		player.cocks[0].pShort = "fertite cock-jacob's ladder";
-		player.cocks[0].pLong = "Fertite cock-jacob's ladder";
+		player.cocks[0].pShortDesc = "fertite cock-jacob's ladder";
+		player.cocks[0].pLongDesc = "Fertite cock-jacob's ladder";
 		player.createPerk("Pierced: Fertite",5,0,0,0,"You've been pierced with Fertite and any male or female organs have become more fertile.");
 		//- and one tight asshole
 		player.ass.analLooseness = 0
@@ -2111,16 +2106,16 @@ function customPCSetup():void {
 		player.createCock();
 		player.cocks[0].cockLength = 24;
 		player.cocks[0].cockThickness = 3;
-		player.cocks[0].cockType = 1;
+		player.cocks[0].cockType = CockTypesEnum.HORSE;
 		player.cocks[1].cockLength = 24;
 		player.cocks[1].cockThickness = 3;
-		player.cocks[1].cockType = 9;
+		player.cocks[1].cockType = CockTypesEnum.DRAGON;
 		player.cocks[2].cockLength = 12;
 		player.cocks[2].cockThickness = 2;
-		player.cocks[2].cockType = 2;
+		player.cocks[2].cockType = CockTypesEnum.DOG;
 		player.cocks[3].cockLength = 12;
 		player.cocks[3].cockThickness = 2;
-		player.cocks[3].cockType = 5;
+		player.cocks[3].cockType = CockTypesEnum.CAT;
 
 		//A pair of 8-inch balls
 		player.balls = 2;
@@ -2236,7 +2231,7 @@ function customPCSetup():void {
 		//Tail type = Dragon
 		player.tailType = 14;
 		//Cock type = Equine
-		player.cocks[0].cockType = 1;
+		player.cocks[0].cockType = CockTypesEnum.HORSE;
 		player.cocks[0].cockLength = 14;
 		player.cocks[0].cockThickness = 2.5;
 		//Vulva Type = Equine

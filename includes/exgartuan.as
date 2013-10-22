@@ -126,7 +126,7 @@ function drinkFountainEndowment():void {
 function exgartuanInfestDick():void {
 	spriteSelect(15);
 	//(+Demon dick possession – not demoncocked)
-	if(player.cocks[0].cockType != 3) {
+	if(player.cocks[0].cockType != CockTypesEnum.DEMON) {
 		outputText("\n\nYour " + cockDescript(0) + " puffs up, getting longer and harder, but also distorting as bumps and nodules sprout all along its surface.  The coloration darkens, turning a very dark purple as a ring of bigger nodules grow out around the head.  You now have a much larger and far more corrupted dick!   It dribbles pre-cum and twitches about as if sniffing the air, feeling very warm and sensitive.", false);
 		outputText("\n\nA voice suddenly splits the air, demanding, \"<i>Satiate me mortal, or I'll make you find someone who will!</i>\"", false);
 		outputText("\n\nWhat the hell was that?  You look around, but cannot find the source of the voice.   It speaks again, \"<i>Down here.  What are you, deaf!?</i>\"", false);
@@ -134,7 +134,7 @@ function exgartuanInfestDick():void {
 		outputText("\n\n\"<i>Yes I am.  You should consider yourself lucky – you're now the host of the great demon Exgartuan, and you'd best please me every few hours, or I'll make sure your body finds someone to relieve my building pressure.   But I think you'll do fine.  Come now, I can see a wonderful camp in your mind that we can paint white,</i>\" it suggests.", false);
 		outputText("\n\nWell now... This was certainly unexpected.  Perhaps there's a way to be rid of this thing?", false);
 		stats(0,0,0,0,5,0,10,10);
-		player.cocks[0].cockType = 3;
+		player.cocks[0].cockType = CockTypesEnum.DEMON;
 		player.cocks[0].cockLength += 1;
 		player.cocks[0].cockThickness += .5;
 	}

@@ -558,7 +558,7 @@ function victoryDickKiha():void {
 		temp = player.cocks.length;
 		while(temp > 0) {
 			temp--;
-			if(player.cocks[temp].cockType == 4 && temp != x && temp != y) {
+			if(player.cocks[temp].cockType == CockTypesEnum.TENTACLE && temp != x && temp != y) {
 				z = temp;
 				break;
 			}

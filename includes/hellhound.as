@@ -297,8 +297,8 @@ function giveALLTHELETHICITES():void {
 		if(player.totalCocks() > 2 || player.cockThatFits(60) < 0) {
 			outputText("He then reaches around your waist and takes a hold of your " + multiCockDescriptLight() + ".  \"<i>Before we get started, let's make sure you're just right for Cremera.</i>\"  He then reforms your body to have twin doggy pricks of appropriately sized.  \"<i>Now.</i>\"\n\n", false);
 			//PC's dicks become two 14 by 3 inch dog dicks, all other dicks are removed
-			player.cocks[0].cockType = 2;
-			player.cocks[1].cockType = 2;
+			player.cocks[0].cockType = CockTypesEnum.DOG;
+			player.cocks[1].cockType = CockTypesEnum.DOG;
 			player.cocks[0].cockThickness = 3;
 			player.cocks[1].cockThickness = 3;
 			player.cocks[0].cockLength = 14;

@@ -1677,7 +1677,7 @@ package classes
 			while (count > 0)
 			{
 				count--;
-				if (cocks[count].sock == "amaranthine" && cocks[count].cockType != 10)
+				if (cocks[count].sock == "amaranthine" && cocks[count].cockType != CockTypesEnum.DISPLACER)
 					return true;
 			}
 			return false;
@@ -1694,7 +1694,7 @@ package classes
 		{
 			if (arg > cockTotal() - 1 || arg < 0)
 				return false;
-			return (cocks[arg].cockType == 2 || cocks[arg].cockType == 10);
+			return (cocks[arg].cockType == CockTypesEnum.DOG || cocks[arg].cockType == CockTypesEnum.DISPLACER);
 		}
 		
 		
