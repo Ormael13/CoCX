@@ -549,7 +549,7 @@
 		}
 		else outputText (num2Text(Math.round(10*player.cocks[temp].cockThickness)/10) + " inches wide.", false);
 		//Horsecock flavor
-		if(player.cocks[temp].cockType == CockTypesEnum.HUMAN) {
+		if(player.cocks[temp].cockType == CockTypesEnum.HORSE) {
 			outputText("  It's mottled black and brown in a very animalistic pattern.  The 'head' of your shaft flares proudly, just like a horse's.", false);
 		}
 		//dog cock flavor
@@ -646,7 +646,7 @@
 				}
 			}
 			//horse cock flavor
-			if(player.cocks[temp].cockType == CockTypesEnum.HUMAN) {
+			if(player.cocks[temp].cockType == CockTypesEnum.HORSE) {
 				outputText("  It's mottled black and brown in a very animalistic pattern.  The 'head' of your " + cockDescript(temp) + " flares proudly, just like a horse's.", false);
 			}
 			//dog cock flavor

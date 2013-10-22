@@ -1813,7 +1813,7 @@ function ottergirlLikesDongs():void {
 	
 	
 	//[equine]
-	if(player.cocks[x].cockType == CockTypesEnum.HUMAN) outputText("to your flare, sucking, teasing and ");
+	if(player.cocks[x].cockType == CockTypesEnum.HORSE) outputText("to your flare, sucking, teasing and ");
 	//[canine]
 	else if(player.hasKnot(x)) outputText("to the base of your cock, planting sloppy kisses on your knot, ");
 	//[demonic]

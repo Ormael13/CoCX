@@ -1251,7 +1251,7 @@ function victoryAgainstIzzzzzySixtyNine():void {
 		else outputText("base", false);
 		outputText(" numerous times before bobbing her head up and down.  She's using her tongue like some kind of onahole, and the warm, slippery pressure makes your " + cockDescript(x) + " want to melt with pleasure.  The cow-girl slides all the way to the tip", false);
 		if(player.hasKnot(x)) outputText(", struggling with the knot", false);
-		else if(player.cocks[x].cockType == CockTypesEnum.HUMAN) outputText(", getting stuck at the medial ring", false);
+		else if(player.cocks[x].cockType == CockTypesEnum.HORSE) outputText(", getting stuck at the medial ring", false);
 		else if(player.cocks[x].cockType == CockTypesEnum.DEMON) outputText(", slowed by all the nubs", false);
 		else if(player.cocks[x].cockType == CockTypesEnum.CAT) outputText(", slowed by all the spines", false);
 		else if(player.cocks[x].cockType == CockTypesEnum.TENTACLE) outputText(", stopping under the mushroom-like head", false);

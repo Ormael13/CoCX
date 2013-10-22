@@ -1,6 +1,4 @@
-﻿import classes.CockTypesEnum;
-import classes.Player;
-function sackDescript():String {
+﻿function sackDescript():String {
 	if(player.balls == 0) return "prostate";
 	var rando:Number = 0;
 	var desc:String = "";
@@ -1513,7 +1511,7 @@ function multiCockDescript():String {
 			normalCocks++;
 			normalCockKey = currCock;
 		}
-		if(player.cocks[currCock].cockType == CockTypesEnum.HUMAN) {
+		if(player.cocks[currCock].cockType == CockTypesEnum.HORSE) {
 			horseCocks++;
 			horseCockKey = currCock;
 		}
@@ -1619,7 +1617,7 @@ function multiCockDescript():String {
 				descript += cockNoun(CockTypesEnum.DOG) + "s";
 				descripted = true;
 			}
-			if(player.cocks[0].cockType == CockTypesEnum.HUMAN) {
+			if(player.cocks[0].cockType == CockTypesEnum.HORSE) {
 				descript += cockAdjectives(averageLength, averageThickness, 1) + ", ";
 				descript += cockNoun(CockTypesEnum.HORSE) + "s";
 				descripted = true;			
@@ -1689,7 +1687,7 @@ function multiCockDescriptLight():String {
 			normalCocks++;
 			normalCockKey = currCock;
 		}
-		if(player.cocks[currCock].cockType == CockTypesEnum.HUMAN) {
+		if(player.cocks[currCock].cockType == CockTypesEnum.HORSE) {
 			horseCocks++;
 			horseCockKey = currCock;
 		}
@@ -1843,7 +1841,7 @@ function eMultiCockDescriptLight():String {
 			normalCocks++;
 			normalCockKey = currCock;
 		}
-		if(monster.cocks[currCock].cockType == CockTypesEnum.HUMAN) {
+		if(monster.cocks[currCock].cockType == CockTypesEnum.HORSE) {
 			horseCocks++;
 			horseCockKey = currCock;
 		}
@@ -1975,7 +1973,7 @@ function eMultiCockDescriptLight():String {
 function eCockHead(cockNum:Number = 0):String {
 	if(cockNum < 0) return "ERROR";
 	if(cockNum > monster.cocks.length-1) return "ERROR";
-	if(monster.cocks[cockNum].cockType == CockTypesEnum.HUMAN) {
+	if(monster.cocks[cockNum].cockType == CockTypesEnum.HORSE) {
 		if(rand(2) == 0) return "flare";
 		else return "flat tip";
 	}
@@ -2406,7 +2404,7 @@ function cockAdjective(cockNum:Number = -1) {
 		multi = true;
 	}
 	//Pierced - 1/5 chance
-	if(!multi && rand(5) == 0 && player.cocks[cockNum].isPierced == true) {
+	if(!multi && rand(5) == 0 && player.cocks[cockNum].pierced > 0) {
 		descript += "pierced";
 	}
 	else if(!multi && rand(5) == 0 && player.cocks[cockNum].sock != "") {
@@ -2448,11 +2446,11 @@ function cockAdjective(cockNum:Number = -1) {
 		else if(player.cocks[cockNum].cockLength < 11) {
 			rando = rand(3);
 			if(rando == 0) {
-				if(player.cocks[cockNum].cockType == CockTypesEnum.HUMAN) descript = "pony-sized";
+				if(player.cocks[cockNum].cockType == CockTypesEnum.HORSE) descript = "pony-sized";
 				else descript = "long";
 			}
 			else if(rando == 1) {
-				if(player.cocks[cockNum].cockType == CockTypesEnum.HUMAN) descript = "colt-like";
+				if(player.cocks[cockNum].cockType == CockTypesEnum.HORSE) descript = "colt-like";
 				else descript = "lengthy";
 			}
 			else descript = "sizable";
@@ -2754,7 +2752,7 @@ function cockDescript(cockNum:Number):String {
 	if(player.cockTotal() <= cockNum && cockNum != 99) return "<b>ERROR: CockDescript called with index of " + cockNum + " - out of BOUNDS</b>";
 	//Cocknum 99 to default to boring descriptions!
 	if(cockNum != 99) {
-		if(player.cocks[cockNum].cockType == CockTypesEnum.HUMAN)
+		if(player.cocks[cockNum].cockType == CockTypesEnum.HORSE)
 			return horseDescript(cockNum);
 		else if(player.cocks[cockNum].cockType == CockTypesEnum.DOG)
 			return dogDescript(cockNum);
@@ -3105,7 +3103,7 @@ function cockHead(cockNum:Number = 0):String {
 	var temp:int;
 	if(cockNum < 0) return "ERROR";
 	if(cockNum > player.cocks.length-1) return "ERROR";
-	if(player.cocks[cockNum].cockType == CockTypesEnum.HUMAN) {
+	if(player.cocks[cockNum].cockType == CockTypesEnum.HORSE) {
 		if(rand(2) == 0) return "flare";
 		else return "flat tip";
 	}
@@ -3459,11 +3457,11 @@ function NPCCockAdjective(cockType:CockTypesEnum, cockLength:Number = 5, lust:Nu
 		else if(cockLength < 9) {
 			rando = rand(3);
 			if(rando == 0) {
-				if(cockType == CockTypesEnum.HUMAN) descript = "pony-sized";
+				if(cockType == CockTypesEnum.HORSE) descript = "pony-sized";
 				else descript = "long";
 			}
 			else if(rando == 1) {
-				if(cockType == CockTypesEnum.HUMAN) descript = "colt-like";
+				if(cockType == CockTypesEnum.HORSE) descript = "colt-like";
 				else descript = "lengthy";
 			}
 			else descript = "sizable";

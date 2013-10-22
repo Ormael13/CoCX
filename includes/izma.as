@@ -991,7 +991,7 @@ function nonFightIzmaSmexPAINUS():void {
 		//[Human dick in slot 0]
 		if(player.cocks[0].cockType == CockTypesEnum.HUMAN) outputText("Izma seems surprised to see your genitalia is similar to hers.  \"<i>Huh. Thought that every land-dweller usually bumbled into a dick transformation around here.</i>\"", false);
 		//[Horse cock in slot 0] 
-		else if(player.cocks[0].cockType == CockTypesEnum.HUMAN) outputText("Seeing your " + cockDescript(0) + " causes Izma to lick her lips slowly. \"<i>Well... Equinum is pretty popular, isn't it?</i>\"", false);
+		else if(player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("Seeing your " + cockDescript(0) + " causes Izma to lick her lips slowly. \"<i>Well... Equinum is pretty popular, isn't it?</i>\"", false);
 		//[Dog cock]
 		else if(player.hasKnot(0)) outputText("Izma stares intently at your " + cockDescript(0) + ", as if trying to make up her mind about it. \"<i>Well, it is a rather cute look. Just be careful with the knot, will ya?</i>\"", false);
 		//[Tentacle] 

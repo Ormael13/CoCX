@@ -1893,7 +1893,7 @@ function FirstTimeAmilyTakeCharge():void {
 			outputText("\"<i>Just shut up and you'll enjoy this.</i>\" You promise her.\n\n", false);
 		}
 		//(If player has an equine penis 14 inches or more long)
-		else if(player.cocks[0].cockType == CockTypesEnum.HUMAN) {
+		else if(player.cocks[0].cockType == CockTypesEnum.HORSE) {
 			outputText("Her eyes go wide with shock and fear as she discovers your stallion-like cock. \"<i>Even in this world, being hung like a horse isn't a good thing! I can't take something like that!</i>\"\n\n", false);
 			outputText("\"<i>How do you know until you've tried?</i>\" You ask.\n\n", false);
 		}
@@ -2342,7 +2342,7 @@ function fuckAmilyPreg():void {
 
 	outputText("\"<i>I did some research on the matter, just in case you still wanted to make love while I'm like this... I'm pretty glad you do - you have no idea how horny I've been from this</i>\" Amily says as she straddles your hips, feeling the extra weight that the cute little mouse-girl has put on. Nothing you can't handle, and certainly something you're not going to call attention to.\n\n", false);
 
-	outputText("Amily teases you for a little while, running her pussy-lips and tail along the tip of your erection a few times, earning a few moans and groans from you. Amily smirks slightly before sliding herself down your fully erect " + cockNoun(player.cocks[0].cockType) + ", taking as much as she can. You're a little worried that this might be harmful for your offspring, or worse that they'll know what's going on...But Amily really seems to know more about this than you do, so you're just going to go along with her suggestions on the matter.\n\n", false);
+	outputText("Amily teases you for a little while, running her pussy-lips and tail along the tip of your erection a few times, earning a few moans and groans from you. Amily smirks slightly before sliding herself down your fully erect " + cockNoun(CockTypesEnum.HUMAN) + ", taking as much as she can. You're a little worried that this might be harmful for your offspring, or worse that they'll know what's going on...But Amily really seems to know more about this than you do, so you're just going to go along with her suggestions on the matter.\n\n", false);
 
 	outputText("Amily manages to keep a rather impressive rhythm and pace as she rides your cock like a mechanical bull. In time you manage to return her motions, thrusting your hips up to meet her and twisiting yourself around counter-clockwise. The way Amily shrieks, or squeeks, in pleasure is a good sign, and as a result, you pick up speed with your gyrations. The intense pleasure makes you wish this session didn't have to end, but as you feel your orgasm rapidly approach, you sigh in defeat and resolve to make it a memorable one. You quickly clasp your hands around Amily's hips and pick up speed, making Amily gasp in surprise. You keep your motions up for another few minutes, before the two of you bring each other to a powerful simultaneous orgasm, mixed fluids drooling from Amily's thoroughly stretched cunt", false);
 	if(flags[AMILY_WANG_LENGTH] > 0) outputText(", her own mouse-cock spewing futa-cum all over her belly", false);
