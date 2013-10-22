@@ -1,12 +1,12 @@
-﻿const MET_NIAMH:int = 446;
-const GOT_NIAMH_BEER:int = 447;
-const TALKED_NIAMH:int = 448;
+﻿//const MET_NIAMH:int = 446;
+//const GOT_NIAMH_BEER:int = 447;
+//const TALKED_NIAMH:int = 448;
 //-1 = bazaar moved in, 0 = nothing, 1 = trigger time, otherwise time till trigger
-const NIAMH_MOVED_OUT_COUNTER:int = 449;
+//const NIAMH_MOVED_OUT_COUNTER:int = 449;
 //0 = normal, 1 = corrupt, 2 = bimbo
-const NIAMH_STATUS:int = 450;
-const NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER:int = 451;
-const TIMES_NIAMH_BAZAAR_MET:int = 452;
+//const NIAMH_STATUS:int = 450;
+//const NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER:int = 451;
+//const TIMES_NIAMH_BAZAAR_MET:int = 452;
 
 function telAdreNiamh():void {
 	if(flags[MET_NIAMH] == 0) {
@@ -54,7 +54,7 @@ function approach():void {
 	if(player.gems >= 2) beer = 3525;
 	else outputText("\n\n<b>You're too poor for beer.</b>");
 	//[Talk] [Get Beer] [Leave]
-	simpleChoices("Talk",3528,"Get Beer",beer,"",0,"",0,"Leave",3529);
+	simpleChoices("Talk",talkToNiamh,"Get Beer",beer,"",0,"",0,"Leave",leaveNiamh);
 }
 
 //[Get Beer]
@@ -87,7 +87,7 @@ function getANiamhBeer():void {
 	if(player.gems >= 2) togo = 3527;
 	else outputText("\n\n<b>You're too poor to buy the mug.</b>");
 	flags[GOT_NIAMH_BEER]++;
-	simpleChoices("Here",3526,"To Go",togo,"",0,"",0,"",0);
+	simpleChoices("Here",drinkNiamhsBeerInTelAdre,"To Go",togo,"",0,"",0,"",0);
 }
 
 //[Here]
@@ -128,7 +128,7 @@ function drinkNiamhsBeerInTelAdre():void {
 			outputText("\n\n\"<i>Well lass, it looks like those big ole titties o' yours are takin' a cue from me.  Sorry 'bout that.  Musta been the beer.</i>\"  She gives your other nipple a tweak to fill a second shot glass.  \"<i>Yup, definitely the beer.  You're lactatin' some delicious booze now, jus' like me.  Dinnae worry.  Ah seen it happen before.  Usually don't last long.  But seein' as how you're leaking some good beer there, what's you say to selling some o' it?  Afterall, I can't 'ave ye givin' the stuff away fo' free while I'm chargin' for it, right?</i>\"");
 			//[SELL YOUR BOOZE]  [LEAVE]
 		}
-		simpleChoices("SellYourBooze",3954,"",0,"",0,"",0,"Leave",3953);
+		simpleChoices("SellYourBooze",sellYourBooze,"",0,"",0,"",0,"Leave",leaveWithBeerTits);
 		return;
 	}
 	outputText("You yell \"<i>Skoal!</i>\" and upend the mug into your mouth, drinking greedily.  The warmth of the booze quickly follows the liquid itself - potent stuff, this is.");
@@ -204,7 +204,7 @@ function leaveNiamh():void {
 	clearOutput();
 	outputText("You decide that you don't really want to talk to this strange cat-girl and, as politely as possible, excuse yourself.");
 	//Player returns to Wet Bitch menu
-	doNext(2256);
+	doNext(barTelAdre);
 }
 
 //Black Cat Beer
@@ -268,7 +268,7 @@ function maybeLaterNiamh():void {
 	if(player.gems >= 2) beer = 3525;
 	else outputText("\n\n<b>You're too poor for beer.</b>");
 	//[Talk] [Get Beer] [Leave]
-	simpleChoices("Talk",3528,"Get Beer",beer,"",0,"",0,"Leave",3529);
+	simpleChoices("Talk",talkToNiamh,"Get Beer",beer,"",0,"",0,"Leave",leaveNiamh);
 }
 
 //[Succubus Milk] or [Bimbo Liqueur]  
@@ -329,7 +329,7 @@ function niamhPostTelAdreMoveOut():void {
 	outputText(" fluid she's leaving behind.");
 	outputText("\n\n\"<i>Wha's yer name, by th' way?</i>\" she suddenly inquires, sobering just a bit.  You decide there's no harm in formally introducing yourself.  \"<i>[name], eh?  Weeeeeird name,</i>\" she comments.");
 	outputText("\n\n\"<i>Anywaays, wanna gulp?</i>\" she asks, her inhibitions obviously shed by the mixture of your meddling and her drunkenness.  A fair question, and one that sets you back on your heels a bit - do you want a drink of this corrupted cat-girl's new brew?");
-	simpleChoices("Yes",3536,"",0,"",0,"",0,"Leave",3535);
+	simpleChoices("Yes",niamhCorruptedMobileSnackDrinkTime,"",0,"",0,"",0,"Leave",niamhCorruptMobileSnackTurnDown);
 }
 
 //[no]  
@@ -483,7 +483,7 @@ function bazaardNiamhDrink():void {
 	else { 
 	
 	}
-	simpleChoices("Drink",3539,"Bottle",3540,"",0,"",0,"",0);
+	simpleChoices("Drink",drinkFromZeTap,"Bottle",getBimboChampFromNiamh,"",0,"",0,"",0);
 }
 //{If player drinks from the tap:}
 function drinkFromZeTap():void {
@@ -622,7 +622,7 @@ function sellYourBooze():void {
 			outputText("pre-cum drizzles down your " + multiCockDescriptLight() + " as the need to fuck a pussy grows stronger.  A few wandering hands reveals some apparent interest amongst the folks in the bar in seeing your genitals as active as your nipples.");
 		}
 		//[FUCK THE BAR] [LEAVE]
-		simpleChoices("Fuck Bar",3955,"",0,"",0,"",0,"Leave",3953);
+		simpleChoices("Fuck Bar",barBeerOrgyTits,"",0,"",0,"",0,"Leave",leaveWithBeerTits);
 	}
 }
 
@@ -660,7 +660,7 @@ function barBeerOrgyTits():void {
 	//Third Paragraph
 	//===============
 	//IF player has pussy and Urta is in the bar and sex with her is unlocked.
-	if(hours < 15 && flags[12] > 0 && player.hasVagina()) {
+	if(hours < 15 && flags[UNKNOWN_FLAG_NUMBER_00012] > 0 && player.hasVagina()) {
 		outputText("\n\nA pair of familiar paws grab your ankles and spread your legs wide.  Your labia practically spurt out girl cum in anticipation of what's about to happen.  \"<i>Oh, looks like someone's overly eager.</i>\"  You struggle to look over the mounds of your own tits to see who's standing between your legs.  The familiar sight of an oversized horse-cock waving in the air catches your attention shortly before the grinning smile of Urta comes in to view.  \"<i>My aren't you going to get reamed, lover.</i>\"  No sooner than she says that than the flared head of her cock plunges with a wet squish between your nether lips.  You feel her stretching your entrance apart as her massive horse meat bores into your body.  Blissful screams of pleasure are heard and it isn't until the head of Urta's cock breaks into your womb that you realize it's you that's screaming in ecstasy.");
 		if(player.pregnancyIncubation == 0) outputText("  Some folks give yelps and cheers when they see the bulge that repeatedly forms in your abdomen each time Urta thrusts herself inside you.");
 		cuntChange(60,true,true,false);
@@ -722,7 +722,7 @@ function barBeerOrgyTits():void {
 	//Varies based on body type and characters present
 	//================================================
 	// IF [Edryn and Urta are present in the bar and free sex with both is unlocked and character is a herm]
-	if(player.statusAffectv1("Edryn") >= 5 && player.gender == 3 && hours == 14 && flags[12] > 0) {
+	if(player.statusAffectv1("Edryn") >= 5 && player.gender == 3 && hours == 14 && flags[UNKNOWN_FLAG_NUMBER_00012] > 0) {
 		outputText("\n\nYou're so dizzy on pleasure that you barely notice it when you're lifted off the table and carried through the bar again.  You can hardly feel your feet and legs when the crowd stands you up, and with a weak lifting of your head you see why the sudden change of position.  Right in front of you is Edryn's womanly hindquarters with her black cunt lips jiggling back and forth, dripping her girly horse juices from their sopping wet folds.  You don't even have to do anything has several hands angle [eachCock] and guide you forwards.");
 		// IF [player has a single cock]
 		if(player.cockTotal() == 1) outputText("  Edryn moans out loud in ecstasy as your [cock] fills her up.");
@@ -755,7 +755,7 @@ function barBeerOrgyTits():void {
 		growTits(2, player.bRows(), false, 2);
 	}
 	// IF [Urta but not Edryn is present in the bar and sex with her is unlocked and character has pussy]
-	else if(player.hasVagina() && hours < 15 && flags[12] > 0) {
+	else if(player.hasVagina() && hours < 15 && flags[UNKNOWN_FLAG_NUMBER_00012] > 0) {
 		outputText("\n\nYou hear passionate cries of lustful need from Urta as her horse-cock reams you with greater ferocity.  Her orgasm nearly knocks her off her feet as her shaft swells wider, stretching you apart as the cum surges up through it.");
 		// IF [player is not pregnant]  
 		if(player.pregnancyIncubation == 0) outputText("  The eruption of cum from her horsecock out does every other ejaculating dick in the room.  Your belly button pops outward as your stomach swells from the surging torrent of sperm pumping directly into your womb.  The hands of strangers grab your legs to keep you pinned in place while Urta struggles to keep her gushing cock inside your cunt despite the building pressure.  A couple voices call out, \"<i>She's gonna pop!  Is she gonna pop?  I think she is!</i>\"  Niamh is forced to sit up higher as your cum bloated belly pushes up against her.  Urta looks as if she's having a seizure from the sheer effort of unloading herself into you.  You scream out loud from the ecstasy of swelling but cries of pleasure are lost within Niamh's pussy folds, urging her to come again.  Her girl cum squirts down your throat, making your belly feel all the more tight and fit to burst.");

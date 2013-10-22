@@ -1,15 +1,15 @@
-﻿const LOPPE_FURRY:int = 684;
-const LOPPE_FERTILE:int = 685;
-const LOPPE_KIDS:int = 686;
-const LOPPE_TRAINING:int = 687;
-const LOPPE_KIDS_LIMIT:int = 688;
-const LOPPE_URTA_CHATS:int = 689;
-const LOPPE_PC_MET_UMA:int = 690;
-const LOPPE_TIMES_SEXED:int = 691;
-const LOPPE_DENIAL_COUNTER:int = 692;
-const LOPPE_DISABLED:int = 693;
-const TIMES_ASKED_LOPPE_ABOUT_LOPPE:int = 694;
-const LOPPE_MET:int = 695;
+﻿//const LOPPE_FURRY:int = 684;
+//const LOPPE_FERTILE:int = 685;
+//const LOPPE_KIDS:int = 686;
+//const LOPPE_TRAINING:int = 687;
+//const LOPPE_KIDS_LIMIT:int = 688;
+//const LOPPE_URTA_CHATS:int = 689;
+//const LOPPE_PC_MET_UMA:int = 690;
+//const LOPPE_TIMES_SEXED:int = 691;
+//const LOPPE_DENIAL_COUNTER:int = 692;
+//const LOPPE_DISABLED:int = 693;
+//const TIMES_ASKED_LOPPE_ABOUT_LOPPE:int = 694;
+//const LOPPE_MET:int = 695;
 
 function loppeCapacity():int {
 	return 90;
@@ -368,7 +368,7 @@ function askLoppeAboutChildren():void {
 	outputText("\n\nIt makes sense she wouldn't want to be a mother right now... but, what about being a father?  How can she control that?");
 	outputText("\n\nLoppe grins at you.  \"<i>I have taken special measures to ensure neither my partners nor I will end up with an unexpected package.</i>\"");
 	//(If EdrynKids or CottonKids =>1: 
-	if(flags[69] + flags[COTTON_KID_COUNT] > 0) outputText("\n\nYou warn her that might not be enough, as you've learned the hard way you're a bit too potent for most herbal contraceptives to handle.");
+	if(flags[UNKNOWN_FLAG_NUMBER_00069] + flags[COTTON_KID_COUNT] > 0) outputText("\n\nYou warn her that might not be enough, as you've learned the hard way you're a bit too potent for most herbal contraceptives to handle.");
 	
 	outputText("\n\nLoppe winks.  \"<i>I know herbs aren't totally reliable for a fact, plus I've been around, so I realized I needed something a bit more... permanent... some time ago.  I've had a local wizard place a spell on me to make me completely sterile; and if I ever want to have kids, all I need to do is say a small incantation and the spell vanishes.</i>\"");
 	
@@ -460,17 +460,17 @@ function gossipWithLoppe():void {
 	//Urta
 	addButton(0,"Urta",gossipWithLoppeAboutUrta);
 	//Scylla (Must have helped her enough times to know she needs cum to survive.)
-	if(flags[54] > 0) addButton(1,"Scylla",gossipWithLoppeAboutScylla);
+	if(flags[UNKNOWN_FLAG_NUMBER_00054] > 0) addButton(1,"Scylla",gossipWithLoppeAboutScylla);
 	//Jasun
-	if(flags[179] > 0) addButton(2,"Jasun",gossipWithLoppeAboutJasun);
+	if(flags[UNKNOWN_FLAG_NUMBER_00179] > 0) addButton(2,"Jasun",gossipWithLoppeAboutJasun);
 	//Heckel
-	if(flags[204] > 0) addButton(3,"Heckel",gossipWithLoppeAboutHeckel);
+	if(flags[MET_HECKEL] > 0) addButton(3,"Heckel",gossipWithLoppeAboutHeckel);
 	//Edryn
 	addButton(4,"Edryn",gossipWithLoppeAboutEdryn);
 	//Lottie
-	if(flags[281] > 0) addButton(5,"Lottie",gossipWithLoppeAboutLottie);
+	if(flags[UNKNOWN_FLAG_NUMBER_00281] > 0) addButton(5,"Lottie",gossipWithLoppeAboutLottie);
 	//Cotton
-	if(flags[177] > 0) addButton(6,"Cotton",gossipWithLoppeAboutCotton);
+	if(flags[UNKNOWN_FLAG_NUMBER_00177] > 0) addButton(6,"Cotton",gossipWithLoppeAboutCotton);
 	//Back (spacebar default)
 	addButton(9,"Back",talkWithLoppe);
 }
@@ -479,7 +479,7 @@ function gossipWithLoppe():void {
 function gossipWithLoppeAboutUrta():void {
 	clearOutput();
 	//(if UrtaSex or UrtaLover flags are NOT active)
-	if(flags[11] <= 0 || flags[12] == -1) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00011] <= 0 || flags[UNKNOWN_FLAG_NUMBER_00012] == -1) {
 		outputText("\"<i>Ah, so you've met Watch Captain Urta?  She's famous around here, you know; people say she's a legendary bare-knuckle brawler and one of the toughest guards on the force.  The only problem is that she's not really that easy to approach... I guess she prefers to keep to herself.  Although she acts very friendly with that pretty centauress, Edryn.</i>\"");
 		outputText("\n\nLoppe taps her lips thinking of what else she could add, but shrugs.  \"<i>I guess that's all I have on her - I don't really know her that well.  Sorry!</i>\"");
 		doNext(13);
@@ -638,11 +638,11 @@ function gossipWithLoppeAboutLottie():void {
 	clearOutput();
 	outputText("\"<i>That pig-girl that started hanging around the gym in the evenings?  I heard about her... I believe she wants to get fit,</i>\" Loppe comments conversationally.");
 	//(if PC's training Lottie)
-	if(flags[299] == 1) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00299] == 1) {
 		outputText("\n\n\"<i>Seems like she found a gym buddy.  That's great; poor thing could really use some help with that.  She tries hard in short bursts, but she needs to actually stick with it and eat a proper diet.  Ah, I suppose I should hide the carrot cake before saying that, huh?</i>\"");
 	}
 	//(else if PC's met Lottie)
-	else if(flags[281] > 0) {
+	else if(flags[UNKNOWN_FLAG_NUMBER_00281] > 0) {
 		outputText("\n\n\"<i>Poor girl hasn't found a real partner to help her yet.  Maybe you could give her a little attention if you're going to be around?  I bet she'd be grateful.</i>\"");
 	}
 	else {
@@ -1077,7 +1077,7 @@ function loppeRidesPCCockFinal():void {
 	}
 	outputText("\n\nReleasing you, Loppe points to a nearby chair.  \"<i>I've laid out your [armor] over there, but feel free to stay as long as you want to.</i>\"  You thank her for the kind offer, but the last thing you need are imps or goblins getting into your supplies and making off with your things.  You redress yourself, negligently allowing Loppe glimpses of your naked body as you do so");
 	//[(Exhibitionist)
-	if(flags[23] > 0) outputText("; it gives you something of a thrill, though nowhere near as much as taking them off for her in the first place did");
+	if(flags[UNKNOWN_FLAG_NUMBER_00023] > 0) outputText("; it gives you something of a thrill, though nowhere near as much as taking them off for her in the first place did");
 	outputText(".  Finished, you depart.");
 	stats(0,.5,0,0,.5,-4,-100,0);
 	flags[LOPPE_TIMES_SEXED]++;

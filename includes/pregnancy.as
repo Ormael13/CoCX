@@ -528,7 +528,7 @@ function updatePregnancy():Boolean {
 			}
 			if(player.pregnancyIncubation == 216) {
 				outputText("\n<b>There is no question you're pregnant; your belly is already as big as that of any pregnant woman back home.", false);
-				if(flags[43] == 1) outputText("  Amily smiles at you reassuringly. \"<i>We do have litters, dear, this is normal.</i>\"", false);
+				if(flags[AMILY_FOLLOWER] == 1) outputText("  Amily smiles at you reassuringly. \"<i>We do have litters, dear, this is normal.</i>\"", false);
 				outputText("</b>", false);
 				outputText("\n", false);
 				stats(0, 0, -1, 0, 1, 1, 2, 0);
@@ -580,7 +580,7 @@ function updatePregnancy():Boolean {
 		//Shark Pregnancy!
 		if(player.pregnancyType == 12) {			
 			if(player.pregnancyIncubation == 275) {
-				if(flags[238] == 1) outputText("\n<b>You wake up feeling kind of nauseous.  Izma insists that you stay in bed and won't hear a word otherwise, tending to you in your sickened state.  When you finally feel better, she helps you up.  \"<i>You know, " + player.short + "... I think you might be pregnant.</i>\" Izma says, sounding very pleased at the idea. You have to admit, you do seem to have gained some weight...</b>\n", false);
+				if(flags[UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("\n<b>You wake up feeling kind of nauseous.  Izma insists that you stay in bed and won't hear a word otherwise, tending to you in your sickened state.  When you finally feel better, she helps you up.  \"<i>You know, " + player.short + "... I think you might be pregnant.</i>\" Izma says, sounding very pleased at the idea. You have to admit, you do seem to have gained some weight...</b>\n", false);
 				else outputText("\n<b>You wake up feeling bloated, and your belly is actually looking a little puffy. At the same time, though, you have the oddest cravings... you could really go for some fish.</b>\n", false);
 				displayedUpdate = true;
 			}
@@ -589,7 +589,7 @@ function updatePregnancy():Boolean {
 				displayedUpdate = true;	
 			}
 			if(player.pregnancyIncubation == 216) {
-				if(flags[238] == 1) outputText("\n<b>Your stomach is undeniably swollen now, and you feel thirsty all the time. Izma is always there to bring you water, even anticipating your thirst before you recognize it yourself. She smiles all the time now, and seems to be very pleased with herself.", false);
+				if(flags[UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("\n<b>Your stomach is undeniably swollen now, and you feel thirsty all the time. Izma is always there to bring you water, even anticipating your thirst before you recognize it yourself. She smiles all the time now, and seems to be very pleased with herself.", false);
 				else outputText("\n<b>There is no question you're pregnant; your belly is getting bigger and for some reason, you feel thirsty ALL the time.", false);
 				outputText("</b>", false);
 				outputText("\n", false);
@@ -597,18 +597,18 @@ function updatePregnancy():Boolean {
 				displayedUpdate = true;				
 			}
 			if(player.pregnancyIncubation == 180) {
-				if(flags[238] == 1) outputText("\n<b>There is no denying your pregnancy, and Izma is head-over-heels with your 'beautifully bountiful new body', as she puts it. She is forever finding an excuse to touch your bulging stomach, and does her best to coax you to rest against her. However, when you do sit against her, she invariably starts getting hard underneath you.</b>\n", false);
+				if(flags[UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("\n<b>There is no denying your pregnancy, and Izma is head-over-heels with your 'beautifully bountiful new body', as she puts it. She is forever finding an excuse to touch your bulging stomach, and does her best to coax you to rest against her. However, when you do sit against her, she invariably starts getting hard underneath you.</b>\n", false);
 				else outputText("\n<b>There is no denying your pregnancy.  Your belly bulges and occasionally squirms as your growing offspring shifts position.</b>\n", false);
 				displayedUpdate = true;				
 			}
 			if(player.pregnancyIncubation == 120) {
-				if(flags[238] == 1) outputText("\n<b>Your stomach is swollen and gravid; you can feel the baby inside you kicking and wriggling. Izma is always on hand now, it seems, and she won't dream of you fetching your own food or picking up anything you've dropped. She's always dropping hints about how you should try going around naked for comfort's sake. While you are unwilling to do so, you find yourself dreaming about sinking into cool, clean water, and take many baths and swims. Whatever is inside you always seems to like it; they get so much more active when you're in the water.</b>\n", false);
+				if(flags[UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("\n<b>Your stomach is swollen and gravid; you can feel the baby inside you kicking and wriggling. Izma is always on hand now, it seems, and she won't dream of you fetching your own food or picking up anything you've dropped. She's always dropping hints about how you should try going around naked for comfort's sake. While you are unwilling to do so, you find yourself dreaming about sinking into cool, clean water, and take many baths and swims. Whatever is inside you always seems to like it; they get so much more active when you're in the water.</b>\n", false);
  				else outputText("\n<b>Your stomach is swollen and gravid; you can feel the baby inside you kicking and wriggling.  You find yourself dreaming about sinking into cool, clean water, and take many baths and swims. Whatever is inside you always seems to like it; they get so much more active when you're in the water.</b>\n", false);
 				stats(0, 0, -2, 0, 1, 1, 4, 0);
 				displayedUpdate = true;
 			}
 			if(player.pregnancyIncubation == 72) {
-				if(flags[238] == 1) outputText("\n<b>You dream of the water, of a life under the waves, where it's cool and wet and you are free. You spend as much time in the river as possible now, the baby inside you kicking and squirming impatiently, eager to be free of the confines of your womb and have much greater depths to swim and play in. Izma makes no secret of her pleasure and informs you that you should deliver soon.</b>\n", false);
+				if(flags[UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("\n<b>You dream of the water, of a life under the waves, where it's cool and wet and you are free. You spend as much time in the river as possible now, the baby inside you kicking and squirming impatiently, eager to be free of the confines of your womb and have much greater depths to swim and play in. Izma makes no secret of her pleasure and informs you that you should deliver soon.</b>\n", false);
 				else outputText("\n<b>You dream of the water, of a life under the waves, where it's cool and wet and you are free. You spend as much time in the river as possible now, the baby inside you kicking and squirming impatiently, eager to be free of the confines of your womb and have much greater depths to swim and play in.  The time for delivery will probably come soon.</b>\n", false);
 				displayedUpdate = true;
 			}
@@ -1559,7 +1559,7 @@ function updatePregnancy():Boolean {
 			genderCheck();
 		}	
 		//If you like terrible outcomes
-		if(flags[9] < 100) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00009] < 100) {
 			outputText("\nYou feel a clenching sensation in your belly and something shifts inside.  Your contractions start a few moments later and you realize that it's time for your child to be born.  You cry out mildly in pain and lie down, letting your body start to push the baby out.  Marble doesn't seem to be around right now, so you can do nothing but push.\n\n", false);
 
 			outputText("You push and heave with all your might, little else going through your mind. You somehow register when the head comes out, and soon the shoulders along with the rest of the body follow.  You lean back and pant for a while before feeling a pair of hands grab a hold of you. They slowly and clumsily feel up your body before finding your " + biggestBreastSizeDescript() + " and a mouth quickly closes down on a " + nippleDescript(0) + ".  You sigh softly, and drift off to sleep.", false);
@@ -1584,7 +1584,7 @@ function updatePregnancy():Boolean {
 			}
 			outputText("The little girl is already starting to look like she is a few years old; she's trotting around on her little hooves.", false);
 			//Add to marble-kids:
-			flags[8]++;
+			flags[MARBLE_KIDS]++;
 		}
 		//Increase the size of the PC's hips, as per normal for pregnancies, increase birth counter
 		if(player.hipRating < 10) {
@@ -1632,13 +1632,13 @@ function updatePregnancy():Boolean {
 		//326 Number of sons grown
 		//327 Number of sons pending
 		//328 growup countdown
-		flags[327]++;
-		if(flags[328] == 0) flags[328] = 150;		
+		flags[UNKNOWN_FLAG_NUMBER_00327]++;
+		if(flags[UNKNOWN_FLAG_NUMBER_00328] == 0) flags[UNKNOWN_FLAG_NUMBER_00328] = 150;		
 	}
 	//Amily failsafe - converts PC with pure babies to mouse babies if Amily is corrupted
 	if(player.pregnancyIncubation == 1 && player.pregnancyType == 11) 
 	{
-		if(flags[43] == 2 || flags[170] > 0) player.pregnancyType = 4;
+		if(flags[AMILY_FOLLOWER] == 2 || flags[UNKNOWN_FLAG_NUMBER_00170] > 0) player.pregnancyType = 4;
 	}
 	//Amily failsafe - converts PC with pure babies to mouse babies if Amily is with Urta
 	if(player.pregnancyIncubation == 1 && player.pregnancyType == 11) 

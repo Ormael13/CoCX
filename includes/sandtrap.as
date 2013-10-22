@@ -1,6 +1,6 @@
-﻿const TIMES_ENCOUNTERED_SAND_TRAPS:int = 578;
-const SANDTRAP_NAGA_3SOME:int = 579;
-const SANDTRAP_LOSS_REPEATS:int = 812;
+﻿//const TIMES_ENCOUNTERED_SAND_TRAPS:int = 578;
+// const SANDTRAP_NAGA_3SOME:int = 579;
+//const SANDTRAP_LOSS_REPEATS:int = 812;
 
 function trapLevel(adjustment:Number = 0):Number {
 	if(monster.hasStatusAffect("level") < 0) monster.createStatusAffect("level",4,0,0,0);
@@ -43,7 +43,7 @@ function encounterASandTarp():void {
 			outputText("\n\nMoving as quickly and lightly as you can, you manage to hop clear of the sandtrap's pitfall and claw your way up a relatively stable dune.  You turn to take the androgynous creature in, half buried in its deep hollow.");
 			outputText("\n\n\"<i>You've got quick feet, little ant!</i>\" it giggles.  It lowers its brow and leers up at you with smouldering black eyes, its hands slowly and sensuously trailing patterns in the sand.  \"<i>I bet you're good at lots of other things, too.  Why doesn't the brave little ant come down here and show me?</i>\"  If you're going to fight this creature, you will have to step into its treacherous hollow to get in range, which is surely its intention - if you try launching things at it from where you are, it will probably just hide itself.  On the other hand, it would be easy to just ignore its taunts and walk away.");
 			//Fight]/[Leave]
-			simpleChoices("Fight",3824,"",0,"",0,"",0,"Leave",13);
+			simpleChoices("Fight",startSandTarpFight,"",0,"",0,"",0,"Leave",13);
 		}
 		//Speed check fail: 
 		else {
@@ -105,7 +105,7 @@ function dontSaveTheTarps():void {
 	outputText(" midriff exposed and glamour gone, the creature looks quite different; six eyes as black as its hair look at you hungrily from its beautiful androgynous face, whilst four slender arms trail patterns in the sand around its willowy, flat-chested midsection.  It wriggles its body tauntingly at you, making the sand beneath it move ponderously.  You glimpse insect chitin beneath its flat humanoid belly; the buried half of this creature must be monstrous.");
 	outputText("\n\n\"<i>You aren't as slow as you look, little ant,</i>\" it calls up to you, grinning slyly.  It speaks in a buzzing, fluttering voice which is nothing like the one it attempted to entice you into its trap with.  \"<i>Why don't you come down here and dance for me some more?  I'm sure a quick, strong traveller like you could run rings around a simple little sandtrap like me.</i>\"  If you're going to fight this creature, you will have to step into its treacherous hollow to get in range, which is surely its intention - if you try launching things at it from where you are, it will probably just hide itself.  On the other hand, it would be easy to just ignore its taunts and walk away.");
 	//[Fight]/[Leave]
-	simpleChoices("Fight",3824,"",0,"",0,"",0,"Leave",13);
+	simpleChoices("Fight",startSandTarpFight,"",0,"",0,"",0,"Leave",13);
 }
 
 
@@ -196,9 +196,9 @@ function sandtrapmentLoss(clear:Boolean = false):void {
 	//PC lust loss: 
 	else outputText("You feel as radiant and molten as the sun above you... you just want to sink into the warm sand surrounding you forever.  Why are you struggling against it again?  You can't remember; with a sigh, you fall backwards onto the soft powder and allow yourself to be carried right down to the bottom.  The sandtrap chuckles softly as it envelopes you in its waiting arms.  \"<i>Good " + player.mf("boy","girl") + "...</i>\"");
 	
-	if(player.hasCock()) doNext(3829);
-	else if(player.hasVagina()) doNext(3830);
-	else doNext(3831);
+	if(player.hasCock()) doNext(dickwieldersLoseToSandTarps);
+	else if(player.hasVagina()) doNext(chicksLoseToSandTarp);
+	else doNext(genderlessLoss);
 }
 
 function pcBeatsATrap():void {

@@ -1,5 +1,5 @@
-﻿const TIMES_LOST_HECKEL_DOM_CHALLENGE:int = 650;
-const TIMES_DOMMED_HECKEL:int = 651;
+﻿//const TIMES_LOST_HECKEL_DOM_CHALLENGE:int = 650;
+//const TIMES_DOMMED_HECKEL:int = 651;
 
 /*By submitting content to Fenoxo for addition to Corruption of Champions, I agree to give up any
 and all creative and legal control over how the characters and events from my submissions are
@@ -15,24 +15,24 @@ Requirements for anal: ass 'a little loose'
 */
 //Intro:
 function heckelAppearance():void {
-	if(flags[204] == 0) outputText("\n\nYou can see a brown hyena running around an indoor track, her tongue lolling out of her mouth as she runs. She spares a glance towards you before returning to her workout, her legs a blur of motion beneath her.", false);
+	if(flags[MET_HECKEL] == 0) outputText("\n\nYou can see a brown hyena running around an indoor track, her tongue lolling out of her mouth as she runs. She spares a glance towards you before returning to her workout, her legs a blur of motion beneath her.", false);
 	else outputText("\n\nYou can see Heckel is here, running laps on an indoor track again.", false);
 }
 
 //Greeting scene:
 function greetHeckel():void {
 	outputText("", true);
-	if(flags[204] == 0) {
+	if(flags[MET_HECKEL] == 0) {
 		outputText("As you approach the edge of the track, the hyena comes around the bend towards you.  Her fur is a light brown mottled with spots of dark brown and black, with a thicker and longer black mane passing for hair.  You get a good view of her B-cup breasts bouncing inside her shirt, black workout bra straps sticking out on her shoulders.  She has simple black shorts on that hug her firm ass, and you can't help but admire her toned legs as they move beneath her.  As she stops running and turns toward you, you see something else entirely bouncing around in her groin.  Her body reminds you of a coiled spring, too much power and tension in too small a frame.\n\n", false);
 	
 		outputText("When she draws up to you, she slows down long enough to have a conversation.  She smiles at you with a grin that manages to show every single fang, and you realize she caught you staring.  \"<i>Fresh meat, huh? I'm Heckel, the alpha dog around here.</i>\"  She extends a large paw toward you as she wipes her face.  You ignore the sweat as you shake hands and introduce yourself.\n\n", false);
 	
 		outputText("\"<i>So, " + player.short + ", what can I do for you?  The person working the desk can give you a tour if that's what you need... or maybe you were looking for a training partner?  If you can keep up with me, of course.</i>\"\n\n", false);
-		flags[204]++;
+		flags[MET_HECKEL]++;
 	}
 	//Brooke + Heckel 3some
 	// Affection = 70, after first-time sex, talk to Heckel between 13:00 and 15:00, must not be a first-time encounter with Heckel, requires a gender
-	else if(brookeAffection() >= 70 && flags[BROOKE_MEDIUM_SCENE] > 0 && flags[204] > 0 && hours >= 13 && hours <= 15 && (player.hasVagina() || player.cockThatFits(brookeCapacity()) >= 0)) {
+	else if(brookeAffection() >= 70 && flags[BROOKE_MEDIUM_SCENE] > 0 && flags[MET_HECKEL] > 0 && hours >= 13 && hours <= 15 && (player.hasVagina() || player.cockThatFits(brookeCapacity()) >= 0)) {
 		specialHeckelAndBrookeEncounter();
 		return;
 	}
@@ -40,7 +40,7 @@ function greetHeckel():void {
 	else {
 		outputText("Heckel is checking her pulse between laps when you approach her.  She grins as she catches sight of you, her teeth flashing in the light.  \"<i>Back again, fresh meat?  I thought I might have scared you off last time.</i>\"  She puts her hands on her hips and very blatantly looks your body up and down.  After a moment she nods to herself, as if making up her mind.  \"<i>I guess you can keep up after all.  What do you say to a workout, partner?</i>\"\n\n", false);
 	}
-	simpleChoices("Training",2839,"",0,"",0,"",0,"Leave",2783);
+	simpleChoices("Training",heckelTraining,"",0,"",0,"",0,"Leave",gymDesc);
 }
 
 //First time Sex
@@ -53,7 +53,7 @@ function heckelTraining():void {
 		outputText("You tell Heckel that you're looking for a training partner, and she makes no attempt to hide her gaze as she looks you up and down.  When she's finished, she shakes her head and picks up her pace on the track.  \"<i>I don't think so, " + player.short + ".  Maybe if you spend some more time around here, you'll find your own way into the swing of things.  From what I'm seeing, there's no way you can handle what I've got.</i>\"\n\n", false);
 
 		outputText("You open your mouth to reply, but the hyena has already started another lap.  Deciding it isn't worth it, you turn away indignantly.", false);
-		doNext(2783);
+		doNext(gymDesc);
 		return;
 	}
 	//Centaur or Genderless
@@ -61,13 +61,13 @@ function heckelTraining():void {
 		outputText("You tell Heckel that you're looking for a training partner, but she suddenly looks off balance. She shifts from foot to foot as she looks you up and down, head cocked to the side.\n\n", false);
 
 		outputText("\"<i>Err, look " + player.short + ", people around here come in all shapes and sizes and use all sorts of... equipment. Maybe you should go find someone more your type to ask, because I honestly don't know what to do with yours.</i>\"\n\n", false);
-		doNext(2783);
+		doNext(gymDesc);
 		return;
 	}
-	if(flags[202] + flags[203] == 0) {
+	if(flags[TIMES_FUCKED_HECKEL_BLOWJOB] + flags[TIMES_FUCKED_HECKEL_ANAL] == 0) {
 		outputText("You tell Heckel that you're looking for a training partner, and she makes no attempt to hide her gaze as she looks you up and down.  When she's finished, her unsettling grin returns.  \"<i>Excellent!  Let me just get cleaned up and we'll start with some stretches.</i>\"\n\n", false);
 		
-		if(flags[167] == 0) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00167] == 0) {
 			outputText("The centauress working the door walks up to collect her fee, and you drop 10 gems for an hour workout into her hand.\n\n", false);
 			player.gems -= 10;
 			statScreenRefresh();
@@ -86,11 +86,11 @@ function heckelTraining():void {
 			dom = 3966;
 		}
 		//ORAL or LEAVE
-		simpleChoices("Oral",2840,"Anal",0,"Be Top Dog",dom,"",0,"Leave",13);
+		simpleChoices("Oral",heckelOrallyFixated,"Anal",0,"Be Top Dog",dom,"",0,"Leave",13);
 	}
 	//FOLLOWUP SECKZ
 	else {
-		if(flags[167] == 0) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00167] == 0) {
 			outputText("The centauress working the door walks up to collect her fee, and you drop 10 gems for an hour workout into her hand.\n\n", false);
 			player.gems -= 10;
 			statScreenRefresh();
@@ -105,14 +105,14 @@ function heckelTraining():void {
 			dom = 3966;
 		}
 		//ORAL or LEAVE
-		simpleChoices("Oral",2840,"Anal",2842,"Be Top Dog",dom,"",0,"Leave",13);
+		simpleChoices("Oral",heckelOrallyFixated,"Anal",heckelLovesDaAnal,"Be Top Dog",dom,"",0,"Leave",13);
 	}
 }
 
 //oral
 function heckelOrallyFixated():void {
 	outputText("", true);
-	if(flags[202] == 0) {
+	if(flags[TIMES_FUCKED_HECKEL_BLOWJOB] == 0) {
 		outputText("You walk over to Heckel and fall to your knees, already licking your lips. Heckel throws her head back in a barking laugh as she scoots forward, one paw coming around the back of your head. Without needing further encouragement, you grab the flaccid dog cock and give it an experimental pump.\n\n", false);
 
 		outputText("You can feel the blood flowing beneath your fingers as your hand works, the black shaft growing firmer and bigger in your grasp. You lean in for a lick from base to tip, and it feels unexpectedly rough on your tongue with the smell of the savanna. Before you can fall into another staring trance with it, you open your mouth and take the head in.\n\n", false);
@@ -124,7 +124,7 @@ function heckelOrallyFixated():void {
 		outputText("You take another inch into your throat before pulling off. Heckel growls above you until you lower your head again, this time further than before. Her growl becomes a moan instantly as the paw on your head is joined by another, both gripping your hair together. As you raise and lower your head, the furry balls in front of you begin to swing back and forth with Heckel's small thrusts, and you reach out a hand to fondle them.\n\n", false);
 	
 		outputText("As you fondle her balls, your fingers graze over something wet behind them. If you could smile around the mouthful of doggy-dick, you definitely would. You've discovered that Heckel is definitely a herm, and you make sure to give her gash another graze as you bob your head down. The head of her cock pulses as you take her length deeper than you had before, and the hands in your hair tighten their grip as Heckel rises from her seat suddenly. You lose pace at this sudden change, and the position forces you to look up at her face.", false);
-		doNext(2841);
+		doNext(heckelOralFixationII);
 	}
 	//Repeat
 	else {
@@ -163,7 +163,7 @@ function heckelOrallyFixated():void {
 		doNext(13);
 	}
 	//Increment BJ count
-	flags[202]++;
+	flags[TIMES_FUCKED_HECKEL_BLOWJOB]++;
 }
 
 function heckelOralFixationII():void {
@@ -215,9 +215,9 @@ function heckelLovesDaAnal(loss:Boolean = false):void {
 
 	outputText("Even with only a few inches inside your ass, her tongue makes you moan almost immediately. She rolls in back and forth, then side to side, then pushes it in and out before starting the cycle over. The teasing becomes more and more unbearable until you're ready to abandon caution and begin masturbating, but just as you tense to change position she stops and pulls her tongue out suddenly.\n\n", false);
 	//NEXT
-	doNext(2843);
+	doNext(heckelLovesAnal2);
 	//Increment Anal count
-	flags[203]++;
+	flags[TIMES_FUCKED_HECKEL_ANAL]++;
 }
 
 function heckelLovesAnal2():void {
@@ -325,7 +325,7 @@ function dominateHeckelConclusion():void {
 	outputText("You casually rise and circle round the table.  Before she can react, you dexterously slip your hands down to Heckel's sculpted, furry backside and lift her high, easily flipping her up onto the wooden surface.  The muscle-herm grunts softly as she comes to rest upon the polished wood, her flopping dog-cock already starting to thicken with the telltale engorgement of oncoming arousal.  Smirking, you gently prod at the growing knot and tease her - she might be an avowed dom, but her dick seems excited by the prospect of sex on any terms.");
 	outputText("\n\nHeckel protests, \"<i>Please; just because my body is looking for a fuck doesn't mean I want to be your bottom bitch.</i>\"");
 	outputText("\n\nYou flick one of her fuzz-shrouded balls and laugh, \"<i>You could've fooled me.</i>\"  The hyena-girl begins a new protest, but before it can leave her mouth, you dip lower to her lube-moistened cunt and tweak her hidden clit.  Her voice goes from griping to whorish moan in a flash, rising in volume until you're sure someone must hear.  ");
-	if(flags[23] > 0) outputText("You grin and blush hotly, imagining the whole of the gym watching you fuck this hyena, their watchful eyes exciting you further.");
+	if(flags[UNKNOWN_FLAG_NUMBER_00023] > 0) outputText("You grin and blush hotly, imagining the whole of the gym watching you fuck this hyena, their watchful eyes exciting you further.");
 	else if(player.cor < 33) outputText("You blush a bit at that, uncomfortable at your sex being so public but unwilling to stop.");
 	else if(player.cor < 66) outputText("You smirk a little at that while barely acknowledge the worry of being caught nagging at your consciousness.");
 	else outputText("You grin widely at that and secretly hope that the whole gym will come in to see their 'alpha' laid low.");
@@ -386,7 +386,7 @@ function dominateHeckelConclusion():void {
 	outputText("\n\nHeckel moans again when you take your cock away from her lewd licks.  Looking over her, you admire your handiwork and get dressed, feeling utterly satisfied.");
 	if(silly()) {
 		outputText("  You grab a bacon shake from the shake-cart on your way out");
-		if(flags[281] > 0) outputText(", then give Lottie a high five");
+		if(flags[UNKNOWN_FLAG_NUMBER_00281] > 0) outputText(", then give Lottie a high five");
 		outputText(".  You really love bacon.");
 	}
 	stats(0,0,0,0,0,-2,-100,0);

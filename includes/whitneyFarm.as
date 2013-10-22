@@ -1,4 +1,4 @@
-﻿const FARM_DISABLED:int = 464;
+﻿//const FARM_DISABLED:int = 464;
 
 function farmExploreEncounter():void {
 	var temporary:Number = 0;
@@ -40,7 +40,6 @@ function farmExploreEncounter():void {
 		var cockMilk:Number = 0;
 		var marble:Number = 0;
 		if(player.hasStatusAffect("Kelt") >= 0 && player.hasStatusAffect("KeltOff") < 0) {
-			//keltEvent = 2172;
 			if(flags[KELT_BREAK_LEVEL] >= 4) addButton(1,"Kelly",breakingKeltOptions);
 			else addButton(1,"Kelt",breakingKeltOptions);
 		}
@@ -49,18 +48,18 @@ function farmExploreEncounter():void {
 				outputText("\n\n<b>Your " + nippleDescript(0) + "s are currently too sore to be milked.  You'll have to wait a while.</b>", false);
 			}
 			else if(flags[WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(2,"Get Milked",getMilked);
-			//milkYou = 2179;
+			
 		}
 		if(player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") >= 0 && player.cockTotal() > 0)
 		{
-			//cockMilk = 2184;
+			
 			if(flags[WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(5,"Milk Cock",cockPumping);
 		}
 		if(player.hasStatusAffect("Marble Rape Attempted") < 0 && player.hasStatusAffect("No More Marble") < 0 && player.hasStatusAffect("Marble") >= 0 && flags[MARBLE_WARNING] == 0) {
-			//marble = 3553;
+			
 			if(flags[WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(3,"Marble", meetMarble);
 		}
-		//choices("Explore",2173,"Kelt",keltEvent,"Get Milked",milkYou,"Marble",marble,"Milk Jojo",milkJojo,"Milk Cock",cockMilk,"Talk",2177,"Work",2178,"",0,"Leave",13);
+		//choices("Explore",exploreFarm,"Kelt",keltEvent,"Get Milked",milkYou,"Marble",marble,"Milk Jojo",milkJojo,"Milk Cock",cockMilk,"Talk",talkWhitney,"Work",workFarm,"",0,"Leave",13);
 		if(flags[WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(0,"Explore",exploreFarm);
 		if(flags[WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(6,"Talk",talkWhitney);
 		if(flags[WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(7,"Work",workFarm);
@@ -113,7 +112,7 @@ function talkWhitney():void {
 			outputText("\"<i>Well of course, it needs hooked into a pump system, collection reservoir, and a power source.  It just happens I've got all that equipment set up for my cows in the barn, and I reckon it'd be easier to plug into than a girl sniffing minotaur musk,</i>\" Whitney explains, \"<i>If you like I could get it all set up for ya, hell, I might even toss you a few gems if you can produce enough milk.</i>\"\n\n", false);
 			//(, hell, if you manage to gather large enough quantities with it, I might be able to find a way to inseminate my cattle with it and be able to pay you for it.  Don't you worry none, I know ways to make this kind of thing work).</i>\"
 			outputText("Do you give the breast milker to Whitney for her to hook up?", false);
-			doYesNo(2174,2176);
+			doYesNo(whitneyMilkerHookup,whitneyMilkerRefusal);
 			return;
 		}
 		else if(player.biggestLactation() >= 2) {
@@ -142,7 +141,7 @@ function talkWhitney():void {
 		outputText("You nod and tell her how you got it and explain that even though it should be fully functional, it'll need to connect to some other machinery to work, and it's way more than any one person could handle.\n\n", false);
 		outputText("\"<i><i>Well of course, it needs hooked into a pump system, collection reservoir, and a power source.  It just happens I've got all that equipment set up for my cows in the barn, and I reckon it'd be easier to plug into than a girl sniffing minotaur musk.</i></i>\" Whitney explains, \"<i><i>If you like I could get it all set up for ya, hell, if you manage to gather large enough quantities with it, I might be able to find a way to inseminate my cattle with it and pay ya for it.  Don't you worry none, I know ways to make this kind of thing work.</i></i>\"\n\n", false);
 		outputText("Do you give the cock milker to Whitney for her to hook up?", false);
-		doYesNo(2175,2176);
+		doYesNo(2175,whitneyMilkerRefusal);
 		return;
 	}
 	//[GENERIC TALK]
@@ -591,9 +590,9 @@ function getMilked():void {
 	var payout:Number = 0;
 	var cap:Number = 500;
 	//Ez mode cap doubles
-	if(flags[99] == 1) cap *= 2;
+	if(flags[EASY_MODE_ENABLE_FLAG] == 1) cap *= 2;
 	if(debug) {
-		flags[104] = 0;
+		flags[UNKNOWN_FLAG_NUMBER_00104] = 0;
 		cap = 9999;
 	}
 	liters = int(player.lactationQ()* (rand(10) + 90) / 100)/1000;
@@ -602,18 +601,18 @@ function getMilked():void {
 	payout = int(liters*2*4);
 	outputText("The machinery displays " + liters + " liters of milk", false);
 	//If already at cap
-	if(flags[104] >= cap) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00104] >= cap) {
 		outputText(" and displays a warning that <b>you're producing more than Whitney can pay for</b>", false);
 		payout = 0;		
 	}
 	if(payout > 0) {
 		//If over cap reduce payout to the difference
-		if(payout + flags[104] > cap) payout = cap - flags[104];
+		if(payout + flags[UNKNOWN_FLAG_NUMBER_00104] > cap) payout = cap - flags[UNKNOWN_FLAG_NUMBER_00104];
 		//Keep track of how much is paid
-		flags[104] += payout;
+		flags[UNKNOWN_FLAG_NUMBER_00104] += payout;
 		outputText(" and automatically dispenses " + num2Text(payout) + " gems.  Whitney really went all out with this setup!", false);
 		//Display a warning that you've capped out.
-		if(flags[104] >= cap) outputText("  <b>The machinery warns you that Whitney can't afford any more this week!</b>", false);
+		if(flags[UNKNOWN_FLAG_NUMBER_00104] >= cap) outputText("  <b>The machinery warns you that Whitney can't afford any more this week!</b>", false);
 		player.gems += payout;
 	}
 	else outputText(".", false);
@@ -635,7 +634,7 @@ function getMilked():void {
 			if(liters > 30) stats(0,0,0,-2,0,0,0,0);
 		}
 		if(player.inte < 10) {
-			doNext(2188);
+			doNext(cowBadEnd1);
 			return;
 		}
 		else if(player.inte < 15) outputText("  You stretch and let out a contented moo, long and loud.  How silly!", false);
@@ -771,7 +770,7 @@ function cockPumping():void {
 		else outputText("You're kept on the edge of orgasm for the better part of an hour.   Rhythmic contractions squeeze through the flesh-tubes wrapped around your manhoods, keeping them painfully hard and dribbling, always backing off before you can truly cum.  You thrash in your harness wildly, insane with need and nearly frothing at the mouth.  The licking tongues never stop, licking between every wave of mechanized suction that pulls on your many malenesses.   You babble incoherently, pleasure-drunk, not even noticing a green light on the far side of the wall turning on.  One thing you do notice is that the cock-tubes aren't slowing down their ministrations.  You're finally allowed to cum!\n\n", false);
 	}
 	//BAD END!?
-	if(player.cumQ() >= 50 && player.fatigue >= 100 && flags[112] > 0) {
+	if(player.cumQ() >= 50 && player.fatigue >= 100 && flags[UNKNOWN_FLAG_NUMBER_00112] > 0) {
 		//(small/medium helperless skeet)
 		if(cumQ < 1000) {
 			outputText("The orgasm rolls over you, shutting down your thoughts as your body spasms in its straps, boiling out ", false);
@@ -816,11 +815,11 @@ function cockPumping():void {
 		}
 		stats(0,0,0,0,0,0,-150,0);
 		//TO BAD ENDAGE
-		doNext(2585);
+		doNext(milkerBadEnd1);
 		return;
 	}
-	flags[112]++;
-	flags[333]++;
+	flags[UNKNOWN_FLAG_NUMBER_00112]++;
+	flags[UNKNOWN_FLAG_NUMBER_00333]++;
 	//ORGAZMO
 	if(cumQ < 10) {
 		if(player.cockTotal() == 1) outputText("The orgasm rolls over you, shutting down your thoughts as your body spasms in its straps, boiling out tiny squirts of spunk.  Wriggling cillia convulse around you, licking your " + cockHead() + " as it flares wide, filling with blood and dripping out a little cum.  You moan and scream with delight, babbling happily as you watch your insignificant amount of cum wick up the clear tube and into the machinery in the wall.  All too soon the pleasure comes to and end, and your cock starts to soften inside its squishy prison.  The harness slowly loosens, lowering you to the ground and releasing you.\n\n", false);
@@ -881,9 +880,9 @@ function cockPumping():void {
 	var payout:Number = 0;
 	var cap:Number = 500;
 	//Ez mode cap doubles
-	if(flags[99] == 1) cap *= 2;
+	if(flags[EASY_MODE_ENABLE_FLAG] == 1) cap *= 2;
 	if(debug) {
-		flags[104] = 0;
+		flags[UNKNOWN_FLAG_NUMBER_00104] = 0;
 		cap = 9999;
 	}
 	//Get rid of extra digits
@@ -896,18 +895,18 @@ function cockPumping():void {
 		payout = 2 + int(cumQ/200)*2;
 	}
 	//If over cap!
-	if(flags[104] >= cap) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00104] >= cap) {
 		payout = 0;
 		outputText("It also shows a warning: <b>FUNDS EXHAUSTED.</b>  ", false);
 	}
 	//Reduce payout if it would push past
-	else if(flags[104] + payout >= cap) {
-		payout = cap - flags[104];
+	else if(flags[UNKNOWN_FLAG_NUMBER_00104] + payout >= cap) {
+		payout = cap - flags[UNKNOWN_FLAG_NUMBER_00104];
 		outputText("It also shows a warning: <b>Not enough gems for full payment.  GEMS NOW EXHAUSTED.</b>  ", false);
 	}	
 	if(payout > 0) {
 		player.gems += payout;
-		flags[104] += payout;
+		flags[UNKNOWN_FLAG_NUMBER_00104] += payout;
 		statScreenRefresh();
 		if(player.cumQ() < 1000) player.cumMultiplier++;
 		if(payout == 1) outputText(Num2Text(payout) + " gem rolls out into a collection plate.  Whitney really put a lot of work into this!  You pocket the gem and g", false);
@@ -923,7 +922,7 @@ function cowBadEnd1():void {
 	outputText("You moo with delight, fondling your dripping " + allBreastsDescript() + " as you relax in your stall.   You know there was something uh, important or something that you were going to do - besides getting your udders milked!  Mmmmm, all your worries about that other thing just melt away when you're in your harness, spraying out milk...\n\n", true);
 	outputText("You stop, trying to put your remaining wits to work and remember what you were going to do.   Let's see, you were coming here because your tits were so full that they made you ache, and you got hooked up and pumped like a good cow.  Another soft moo escapes your lips.  Now you're turned on and masturbating your drippy udders.  So the next step would be...\n\n", false);
 	outputText("...finding someone to fuck you silly while you get something to eat.  It's so simple!  You crawl out of your stall, feeling your ponderous breasts jiggle as they drag on the ground.  A trail of white cream clearly marks your passage out into the fields, eventually passing beyond the edges of Whitney's farm and into the mountains.", false);
-	doNext(2189);
+	doNext(cowBadEnd2);
 }
 
 function cowBadEnd2():void {

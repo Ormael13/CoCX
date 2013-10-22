@@ -1,16 +1,16 @@
 ﻿//VARS
-const HEL_TALKED_ABOUT_BERSERKING:int = 390;
-const HEL_TALKED_ABOUT_HER:int = 391;
-const HEL_TALKED_ABOUT_ATTACKING_YOU:int = 392;
-const HEL_FUCKBUDDY:int = 393;
-const HEL_FUCK_COUNTER:int = 394;
-const HEL_AFFECTION:int = 395;
-const HEL_TIMES_ENCOUNTERED:int = 396;
-const HEL_ISABELLA_THREESOME_ENABLED:int = 397;
-const HEL_FOXY_FOURSOME_WARNED:int = 417;
-const PC_PROMISED_HEL_MONOGAMY_FUCKS:int = 705;
-const HEL_RAPED_TODAY:int = 706;
-const TIMES_HELIA_DOUBLE_DONGED:int = 786;
+//const HEL_TALKED_ABOUT_BERSERKING:int = 390;
+//const HEL_TALKED_ABOUT_HER:int = 391;
+//const HEL_TALKED_ABOUT_ATTACKING_YOU:int = 392;
+//const HEL_FUCKBUDDY:int = 393;
+//const HEL_FUCK_COUNTER:int = 394;
+//const HEL_AFFECTION:int = 395;
+//const HEL_TIMES_ENCOUNTERED:int = 396;
+//const HEL_ISABELLA_THREESOME_ENABLED:int = 397;
+//const HEL_FOXY_FOURSOME_WARNED:int = 417;
+//const PC_PROMISED_HEL_MONOGAMY_FUCKS:int = 705;
+//const HEL_RAPED_TODAY:int = 706;
+//const TIMES_HELIA_DOUBLE_DONGED:int = 786;
 
 //Randomly encountered when EXPLORING the PLAINS.
 //REQUIRES FOUGHT GNOLL!
@@ -330,7 +330,7 @@ function helDefeatedCorrupt():void {
 		if(player.lust < 33) outputText("\n\nYou aren't turned on enough to fuck her right now.", false);
 		if(player.cockThatFits(85) == -1) outputText("\n\nYour dick is too big to fuck her anally.", false);
 	}
-	simpleChoices("Rape Ass",ass,"Get Rimjob",3290,"",0,"",0,"Wait",3303);
+	simpleChoices("Rape Ass",ass,"Get Rimjob",receiveCorruptRimjobsFromHel,"",0,"",0,"Wait",3303);
 	//(Wait takes you to \"<i>normal</i>\" post-victory, below)
 }
 //COMBAT – PLAYER WINS w/ LESS THAN 85 CORRUPTION
@@ -486,7 +486,7 @@ function beatUpHelAndStealHerWalletFromHerVagina():void {
 	//Bump up follower tracking affection too
 	helAffection(5);
 	if(inCombat()) eventParser(5007);
-	else doNext(3275);
+	else doNext(postHelFuckBuddyFollowup);
 }
 
 
@@ -521,7 +521,7 @@ function fuckHelsAss():void {
 	//Bump up follower tracking affection too
 	helAffection(5);
 	if(inCombat()) eventParser(5007);
-	else doNext(3275);
+	else doNext(postHelFuckBuddyFollowup);
 }
 
 //Player Win – Victory Fuck – Get Blown (Male) (edited)
@@ -549,7 +549,7 @@ function helBlowsYou():void {
 	//Bump up follower tracking affection too
 	helAffection(5);
 	if(inCombat()) eventParser(5007);
-	else doNext(3275);
+	else doNext(postHelFuckBuddyFollowup);
 }
 
 //Player Win – DP(Multicock Only) (edited)
@@ -582,7 +582,7 @@ function dpHel():void {
 	//Bump up follower tracking affection too
 	helAffection(5);
 	if(inCombat()) eventParser(5007);
-	else doNext(3275);
+	else doNext(postHelFuckBuddyFollowup);
 }
 
 //Player Win – Get Licked (Vagita) (edited)
@@ -610,7 +610,7 @@ function getLickedByHel():void {
 	//Bump up follower tracking affection too
 	helAffection(5);
 	if(inCombat()) eventParser(5007);
-	else doNext(3275);
+	else doNext(postHelFuckBuddyFollowup);
 }
 
 //Player Win – Tail Wank (dix of any size) (edited)
@@ -638,7 +638,7 @@ function helTailWanksYourDickBecauseSheLovesYouDesuDesuHoraHora():void {
 	//Bump up follower tracking affection too
 	helAffection(5);
 	if(inCombat()) eventParser(5007);
-	else doNext(3275);
+	else doNext(postHelFuckBuddyFollowup);
 }
 
 //Player Win – Tail Pegging (Anal) (edited)
@@ -675,7 +675,7 @@ function helTailPegging():void {
 	//Bump up follower tracking affection too
 	helAffection(5);
 	if(inCombat()) eventParser(5007);
-	else doNext(3275);
+	else doNext(postHelFuckBuddyFollowup);
 }
 
 //Player Win – Coil her Up (Wang Naga) (edited)
@@ -716,7 +716,7 @@ function nagaCoilsUpHel():void {
 	//Bump up follower tracking affection too
 	helAffection(5);
 	if(inCombat()) eventParser(5007);
-	else doNext(3275);
+	else doNext(postHelFuckBuddyFollowup);
 }
 
 
@@ -746,7 +746,7 @@ function nagaCoilsUpAnalNaga():void {
 	//Bump up follower tracking affection too
 	helAffection(5);
 	if(inCombat()) eventParser(5007);
-	else doNext(3275);
+	else doNext(postHelFuckBuddyFollowup);
 }
 
 //Player Win – Mount Her (Wangbearing Centaurs of height >= 60</i>\") (edited)
@@ -794,7 +794,7 @@ function mountHel():void {
 	//Bump up follower tracking affection too
 	helAffection(5);
 	if(inCombat()) eventParser(5007);
-	else doNext(3275);
+	else doNext(postHelFuckBuddyFollowup);
 }
 
 //Player Win – Hanging 69 (Vaginataurs of height >= 60</i>\") (edited)
@@ -846,7 +846,7 @@ function helVaginaTaur69():void {
 	//Bump up follower tracking affection too
 	helAffection(5);
 	if(inCombat()) eventParser(5007);
-	else doNext(3275);
+	else doNext(postHelFuckBuddyFollowup);
 }
 
 //Player Win – Possession (Ghost Morphs w/ Possession Power) (ehrdaterd)
@@ -903,7 +903,7 @@ function helPossessionShitPoopCock():void {
 	//Bump up follower tracking affection too
 	helAffection(5);
 	if(inCombat()) eventParser(5007);
-	else doNext(3275);
+	else doNext(postHelFuckBuddyFollowup);
 }
 
 
@@ -940,7 +940,7 @@ function rapingHelsAssMeansYourCorruptCauseAnalIsEvil():void {
 	//Bump down follower tracking affection too
 	helAffection(-15);
 	if(inCombat()) eventParser(5007);
-	else doNext(3275);
+	else doNext(postHelFuckBuddyFollowup);
 }
 
 //Player Win – Corrupt Rape – Get Rimjob (edited)
@@ -969,7 +969,7 @@ function receiveCorruptRimjobsFromHel():void {
 	//Bump up follower tracking affection too
 	helAffection(-15);
 	if(inCombat()) eventParser(5007);
-	else doNext(3275);
+	else doNext(postHelFuckBuddyFollowup);
 }
 
 //===========================================================================
@@ -996,9 +996,9 @@ function helMinotaurThreesome():void {
 
 	///Player's Options:
 	//Male/Herm – [Fuck her Ass] [Mino Lick] [Leave]
-	if(player.hasCock() && player.cockThatFits(85) >= 0) simpleChoices("FuckHerAss",3293,"Mino Lick",3294,"",0,"",0,"Nope",3292);
+	if(player.hasCock() && player.cockThatFits(85) >= 0) simpleChoices("FuckHerAss",fuckHerAss,"Mino Lick",helMinoThreeSomeLickItsDick,"",0,"",0,"Nope",leaveMinotaurHelThreesome);
 	//Female/Genderless – [Mino Lick] [Leave]
-	else simpleChoices("",0,"Mino Lick",3294,"",0,"",0,"Nope",3292);
+	else simpleChoices("",0,"Mino Lick",helMinoThreeSomeLickItsDick,"",0,"",0,"Nope",leaveMinotaurHelThreesome);
 }
 //[Leave]
 function leaveMinotaurHelThreesome():void {
@@ -1036,7 +1036,7 @@ function fuckHerAss():void {
 	helAffection(5);
 	flags[HEL_FUCK_COUNTER]++;
 	//POST THREESOME RESULT
-	doNext(3295);
+	doNext(postMinoThreesomeDecisionTime);
 }
 
 
@@ -1067,7 +1067,7 @@ function helMinoThreeSomeLickItsDick():void {
 	helAffection(5);
 	flags[HEL_FUCK_COUNTER]++;
 	//POST THREESOME RESULT
-	doNext(3295);
+	doNext(postMinoThreesomeDecisionTime);
 }
 
 //AFTER THREESOME SCENE (edited)
@@ -1147,19 +1147,19 @@ function askHelAboutAttackingYou():void {
 	outputText("You suppose you could ask her to stop attacking you anyway, though.  One less threat out here couldn't hurt, and maybe – just maybe – you could skip the formalities when you meet and go straight to the really fun part.\n\n", false);
 	flags[HEL_TALKED_ABOUT_ATTACKING_YOU] = 1;
 	//[Stop] [Say Nothing]
-	simpleChoices("Stop",3300,"Say Nothing",3304,"",0,"",0,"",0);
+	simpleChoices("Stop",telHelSTOPATTACKINGMEYOUBITCH,"Say Nothing",helChatMenu,"",0,"",0,"",0);
 }
 
 //[Say Nothing]
 function helChatMenu():void {
 	spriteSelect(68);
-	if(flags[HEL_TALKED_ABOUT_HER] == 0) simpleChoices("About Her",3298,"",0,"",0,"",0,"Leave",3296);
+	if(flags[HEL_TALKED_ABOUT_HER] == 0) simpleChoices("About Her",askHelAboutHer,"",0,"",0,"",0,"Leave",bugOutAfterHelMinoThreesome);
 	else {
 		var zerk:Number = 0;
 		var attackin:Number = 0;
 		if(flags[HEL_TALKED_ABOUT_ATTACKING_YOU] == 0) attackin = 3299;
 		if(flags[HEL_TALKED_ABOUT_BERSERKING] == 0) zerk = 3297;
-		choices("",0,"Berserking?",zerk,"Y Attack Me",attackin,"Seconds",3301,"MinosRBad",3981,"",0,"",0,"",0,"",0,"Leave",3302);
+		choices("",0,"Berserking?",zerk,"Y Attack Me",attackin,"Seconds",askMommaHelForSecondsAfterDinner,"MinosRBad",telHelToGetOffTheMInoCock,"",0,"",0,"",0,"",0,"Leave",leaveHelAfterMinoThreeSomeChat);
 	}
 }
 
@@ -1236,7 +1236,7 @@ function salamanderXIsabellaPlainsIntro():void {
 
 	outputText("Before Isabella can say any more, the salamander leaps into the air and slams her sword down upon the cow-girl's narrowly-interposed shield.  The force of the blow staggers both of them, giving you a moment to intervene before there's bloodshed!", false);
 	//(Display Options: [Diplomacy] [Watch] [Leave])
-	simpleChoices("Diplomacy",3305,"Watch",3307,"",0,"",0,"Leave",3308);
+	simpleChoices("Diplomacy",salamanderXIsabellaDiplomacy,"Watch",watchIsabellaAndHelFight,"",0,"",0,"Leave",skipTownOnIsabellaAndHelsFight);
 }
 
 //Diplomacy (edited)
@@ -1258,7 +1258,7 @@ function salamanderXIsabellaDiplomacy():void {
 	takeDamage(10);
 	statScreenRefresh();
 	//(Diplomacy Continued)
-	doNext(3306);
+	doNext(salamanderXIsabellaDiplomacy2);
 }
 
 function salamanderXIsabellaDiplomacy2():void {
@@ -1408,7 +1408,7 @@ function isabellaXHelThreeSomePlainsStart():void {
 
 	outputText("You certainly do feel thirsty, and Isabella's invitation is certainly... enticing, and is made all the more exciting by the busty salamander you'll be sharing a meal with.", false);
 	//(Display Options: [Drink] [Leave])
-	simpleChoices("Drink",3310,"",0,"",0,"",0,"Leave",3309);
+	simpleChoices("Drink",nomOnIzzyTitWithSallyMancer,"",0,"",0,"",0,"Leave",leaveIsabellaSallyBehind);
 }
 //Isabella x Hel Threesome Scene – Beginning at Camp (edited)
 //(Has a 10% chance to play when the player chooses [Sleep] while Isabella is at camp)
@@ -1425,7 +1425,7 @@ function isabellaXHelThreeSomeCampStart():void {
 
 	outputText("You certainly do feel thirsty, and Isabella's invitation is certainly... enticing, and is made all the more exciting by the busty salamander you'll be sharing a meal with.", false);
 	//(Display Options: [Drink] [Leave])
-	simpleChoices("Drink",3310,"",0,"",0,"",0,"Leave",1);
+	simpleChoices("Drink",nomOnIzzyTitWithSallyMancer,"",0,"",0,"",0,"Leave",1);
 }
 
 //[Leave]
@@ -1480,7 +1480,7 @@ function nomOnIzzyTitWithSallyMancer():void {
 	//(If PC is genderless: Unfortunately, you don't have much to contribute...)
 	else outputText("Unfortunately, you don't have much to contribute...", false);
 	//(Display Appropriate Options: [1 Dick] [2 Dicks] [4 Dicks] [Vagina] [Leave])
-	simpleChoices("Dick",dick,"",0,"",0,"Vagina",vag,"Leave",3311);
+	simpleChoices("Dick",dick,"",0,"",0,"Vagina",vag,"Leave",noThreesomeSexWithSallyAndIssyLastMinute);
 	//(Dick scenes have a common open, then branch out before a common end between all genders)
 }
 
@@ -1607,7 +1607,7 @@ function stuffIzzyAndSalamanderWithDicks():void {
 	//(Scene End)
 	//Bump up follower tracking affection too
 	helAffection(5);
-	doNext(3313);
+	doNext(izzySallyThreeSomeFollowup);
 }
 
 function izzySallyThreeSomeFollowup():void {
@@ -1679,7 +1679,7 @@ function heliaPlusFoxyFluffs():void {
 	
 		outputText("\"<i>Mmm, wanna play with Sister and I?</i>\" Mai purrs, nuzzling your neck after a long swig of beer.  Hel and Miko both give you hopeful, expectant looks.  Do you?\n\n", false);
 		//(Display Options: [Foursome] [Leave])
-		simpleChoices("Foursome",3403,"",0,"",0,"",0,"Leave",3402);
+		simpleChoices("Foursome",heliasFoxyFourSomeFluffs,"",0,"",0,"",0,"Leave",runAwayFromFoxGirls);
 	}
 	//(Leave because cocks are a new reveal; should give those grossed out by futa an escape; doesn't appear afterwards to save horny gamers a click)
 	//Fox Girls -- Repeat Intro
@@ -1688,7 +1688,7 @@ function heliaPlusFoxyFluffs():void {
 
 		outputText("Amused, Hel gives Miko's bountiful bosom a playful grope and says, \"<i>My, my, " + player.short + ", looking for a little foxy foursome?  Well, I think that can be arranged, what do you say, girls?</i>\"", false);
 		//(NEXT button, to Foursome)
-		doNext(3403);
+		doNext(heliasFoxyFourSomeFluffs);
 	}
 }
 
@@ -1697,7 +1697,7 @@ function runAwayFromFoxGirls():void {
 	spriteSelect(68);
 	outputText("", true);
 	outputText("You graciously excuse yourself, saying that you forgot something back at camp.  All three girls say \"<i>Awwww</i>\" in unison, but don't make any special effort to keep you from going.  As you head out, you look over your shoulder in time to see Hel give you a little wink as the fox-herms clamber into her lap.  At least someone's getting laid today.\n\n", false);
-	doNext(2256);
+	doNext(barTelAdre);
 }
 
 //Foursome Scene Intro (First & Repeat)
@@ -1712,10 +1712,10 @@ function heliasFoxyFourSomeFluffs():void {
 	if(player.gender == 3) {
 		outputText("\"<i>So what parts do you want to use?</i>\" she asks, looking to your mixed endowments.", false);
 		//(Display Options: [As Male] [As Female])
-		simpleChoices("As Male",3404,"As Female",3405,"",0,"",0,"",0);
+		simpleChoices("As Male",foxyFluffsFoursomeAsMale,"As Female",foxyFluffGirlsFuckSex,"",0,"",0,"",0);
 	}
-	else if(player.gender == 2) doNext(3405);
-	else doNext(3404);
+	else if(player.gender == 2) doNext(foxyFluffGirlsFuckSex);
+	else doNext(foxyFluffsFoursomeAsMale);
 }
 
 //Foursome Scene -- As Male
@@ -1740,7 +1740,7 @@ function foxyFluffsFoursomeAsMale():void {
 
 	outputText("You can only shudder and gasp as pleasure overtakes you.  You bury your face into Mai's neck, biting her as the last of your cum explodes deep inside her.  Mai bucks her hips back at you and squeezes your cock, milking you of every last drop until your shaft is utterly spent.  Moaning, you withdraw from inside her, dragging a waterfall of hot white cum out of her as you do so.", false);
 	stats(0,0,0,0,0,-1,-100,0);
-	doNext(3406);
+	doNext(foxyFluffOutro);
 }
 //Foursome Scene -- As Female
 function foxyFluffGirlsFuckSex():void {
@@ -1771,7 +1771,7 @@ function foxyFluffGirlsFuckSex():void {
 
 	outputText("Suddenly, Miko lets out a sharp cry and slams her hips into Hel's.  You can only see the looks on both her face and Hel's as they cum in unison, white fox-spunk dribbling out of the slamander's hot snatch.  \"<i>Gonna... Gonna cum...</i>\" Mai whimpers, giving you only a moment to prepare before she grabs your arms and pulls you down onto her chest, burying your face between her heavy tits.  She jackhammers your now-exposed cunt.  ramming her knot in and out of you until you can't think straight.  You cum, your " + vaginaDescript() + " clamping down on her doggy cock.  Waves of explosive pleasure shoot through you, making you spasm in the fox-herm's arms, only barely aware of her shooting her load deep inside you, coating your walls with thick, hot spunk.  You ride out the orgasm buried in Mai's chest, shuddering and gasping as she kisses you over and over, letting her thick knot deflate inside you until her own cum leaks out, staining her smooth thighs and legs.", false);
 	stats(0,0,0,0,0,-1,-100,0);
-	doNext(3406);
+	doNext(foxyFluffOutro);
 }
 
 //Foursome Scene -- Outro
@@ -1820,7 +1820,7 @@ function helCanFuckMinosWhenever():void {
 	clearOutput();
 	outputText("You decide not to deter Hel from her minotaur-raping ways.  Nothing bad could come of your salamander friend fucking a few more 'taurs than she already has, right?  You're sure she can just manage her addiction, or lack thereof, just fine on her own.");
 	//(Return to post-threesome menu)
-	doNext(3304);
+	doNext(helChatMenu);
 }
 
 //[Satisfy Her]

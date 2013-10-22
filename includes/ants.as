@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿import classes.Player;
 
 const ANTS_PC_FAILED_PHYLLA:int = 467;
@@ -37,6 +38,45 @@ const PHYLLA_INHERITED_KNOWLEDGE:int = 900;
 const PHYLLA_IZMA_TALK:int = 901;
 
 const DIDNT_FUCK_PHYLLA_ON_RECRUITMENT:int = 925;
+=======
+﻿//  ANTS_PC_FAILED_PHYLLA:int = 467;
+//  ANT_COLONY_KEPT_HIDDEN:int = 468;
+//  PC_READY_FOR_ANT_COLONY_CHALLENGE:int = 469;
+//  PHYLLA_SAVED:int = 470;
+//  MET_ANT_ARENA:int = 471;
+//  ANT_ARENA_WINS:int = 472;
+//  ANT_ARENA_LOSSES:int = 473;
+//  ANTS_PC_BEAT_GNOLL:int = 474;
+//  ANTS_PC_LOST_TO_GNOLL:int = 475;
+//  MET_ANT_ARENA_GNOLL:int = 476;
+
+//  PHYLLA_CAPACITY:int = 873;
+//  ANT_KIDS:int = 874;
+//  ANT_WAIFU:int = 875;
+//  PHYLLA_STAY_HOME:int = 876;
+
+//  PHYLLA_CAMP_VISITS:int = 877;
+//  DAYS_PHYLLA_IN_CAMP:int = 878;
+//  PHYLLA_EGG_LAYING:int = 879;
+
+//  PHYLLA_BLOWJOBS:int = 880;
+//  TALKED_WITH_PHYLLA_ABOUT_HISTORY:int = 881;
+//  TIMES_LINKED_BJ_SUCK:int = 882;
+//  PHYLLA_FUCKS:int = 883;
+//  TIMES_CORRUPT_MALE_ANT_ORGY:int = 884;
+//  TIMES_CORRUPT_FEMALE_ANT_ORGY:int = 885;
+//  PHYLLA_TIMES_DRIDER_EGG_LAYED:int = 886;
+//  DAYS_PHYLLA_HAS_SPENT_BIRTHING:int = 887;
+//  ANTS_BIRTHED_FROM_LICKING:int = 888;
+//  PHYLLA_COOLDOWN:int = 889;
+//  TIMES_EGG_IMPREGNATING_PHYLLA:int = 890;
+//  PHYLLA_DRIDER_INCUBATION:int = 891;
+//  PHYLLA_DRIDER_BABIES_COUNT:int = 894;
+//  PHYLLA_INHERITED_KNOWLEDGE:int = 900;
+//  PHYLLA_IZMA_TALK:int = 901;
+
+//  DIDNT_FUCK_PHYLLA_ON_RECRUITMENT:int = 925;
+>>>>>>> 3f3db627ace5c2d3767bfd6f4f7ece3a24aa0ae9
 
 function phyllaWaifu():Boolean {
 	if(flags[ANT_WAIFU] > 0) return true;
@@ -80,7 +120,7 @@ function firstAntColonyEncounter():void {
 	outputText("\n\nYou could watch from where you're hiding, or you could play the hero and step in.");
 	//[Keep Hidden]
 	//[Play Hero]
-	simpleChoices("Play Hero",3577,"Keep Hidden",3578,"",0,"",0,"",0);
+	simpleChoices("Play Hero",playHero,"Keep Hidden",keepHidden,"",0,"",0,"",0);
 }
 //►[Keep Hidden]
 function keepHidden():void {
@@ -248,7 +288,7 @@ function antColonyChallenge():void {
 		outputText("\n\n\"<i>Oh good, you're here.  I was beginning to think you were a coward.</i>\"  Before you can respond to his insult, he cuts you off.  \"<i>We're ready to start when you are.  Let's hope you survive longer than the last guy.</i>\"");
 	}
 	//[Fight] [Leave]
-	simpleChoices("Fight",3575,"",0,"",0,"",0,"Leave",3576);
+	simpleChoices("Fight",antColiseumFight,"",0,"",0,"",0,"Leave",leaveAntColony);
 }
 
 //►[Leave]

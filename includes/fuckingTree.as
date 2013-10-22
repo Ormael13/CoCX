@@ -1,16 +1,16 @@
 ﻿//VARS
-const TIMES_FUCKED_FLOWER:int = 594;
-const TIMES_RIDDEN_FLOWER:int = 595;
-const FUCK_FLOWER_LEVEL:int = 596;
-const FUCK_FLOWER_GROWTH_COUNTER:int = 597;
-const FUCK_FLOWER_KILLED:int = 598;
-const AMILY_TREE_FLIPOUT:int = 599;
-const HOLLI_FRUIT:int = 600;
-const HOLLI_FRUIT_EXPLAINED:int = 601;
-const HOLLI_DEFENSE_ON:int = 602;
-const HOLLI_SUBMISSIVE:int = 682;
-const FOUGHT_HOLLI:int = 923;
-const THREATENED_HOLLI:int = 924;
+//const TIMES_FUCKED_FLOWER:int = 594;
+//const TIMES_RIDDEN_FLOWER:int = 595;
+//const FUCK_FLOWER_LEVEL:int = 596;
+//const FUCK_FLOWER_GROWTH_COUNTER:int = 597;
+//const FUCK_FLOWER_KILLED:int = 598;
+//const AMILY_TREE_FLIPOUT:int = 599;
+//const HOLLI_FRUIT:int = 600;
+//const HOLLI_FRUIT_EXPLAINED:int = 601;
+//const HOLLI_DEFENSE_ON:int = 602;
+//const HOLLI_SUBMISSIVE:int = 682;
+//const FOUGHT_HOLLI:int = 923;
+//const THREATENED_HOLLI:int = 924;
 
 /*Plant Sprout Notes:
 	-Small sapling plants near corner of camp after 2nd Marae meeting.
@@ -58,7 +58,7 @@ function treeMenu(output:Boolean = true):void {
 	}
 	else if(flags[FUCK_FLOWER_LEVEL] == 1) {
 		if(output) outputText("The sprout looks about the same as when you first noticed it.  It's a simple, leafy shoot that only goes to about knee height.  It looks healthy and strong, with a few dozen branches and shiny green leaves.  If you look closely, the veins on the undersides of the leaf are purplish and pulse slightly with corruption.  You could easily destroy it.");
-		simpleChoices("Burn It",3852,"",0,"",0,"",0,"Back",1000);
+		simpleChoices("Burn It",destroyDatFukkinTree,"",0,"",0,"",0,"Back",1000);
 	}
 	else if(flags[FUCK_FLOWER_LEVEL] == 2) {
 		//[Fuck It] [Ride Stamen] [Do Nothing] [Destroy It]
@@ -66,7 +66,7 @@ function treeMenu(output:Boolean = true):void {
 		if(player.hasCock() && player.cockThatFits(100) >= 0 && player.lust >= 33) fuck = 3855;
 		
 		if(player.hasVagina() && player.lust >= 33) ride = 3856;
-		simpleChoices("Fuck It",fuck,"Ride Stamen",ride,"",0,"Destroy It",3854,"Back",1000);
+		simpleChoices("Fuck It",fuck,"Ride Stamen",ride,"",0,"Destroy It",destroyDatFuckingPlantAtP2,"Back",1000);
 	}
 	else if(flags[FUCK_FLOWER_LEVEL] == 3) {
 		if(output) outputText("The familiar plant has blossomed into a nicely sized tree, though you doubt it has finished growing just yet.  It sports an outstretched canopy with nice, green leaves.  Unfortunately, you can still trace the corrupted veins on their undersides from below.  The vaginal flower is still there and is in full bloom, now several feet across and practically dripping with moisture.  Just up the trunk, there's a pair of small, roughly b-cup breasts bulging out of the bark.  They're exquisitely smooth and soft, and they ooze sweet-smelling sap that your tongue would love to taste.  In the canopy above, tentacle vines idly writhe about, though they show no sizes of aggression.");
@@ -77,7 +77,7 @@ function treeMenu(output:Boolean = true):void {
 		if(player.hasCock() && player.lust >= 33) fuck = 3857;
 		if(player.hasVagina() && player.lust >= 33) ride = 3859;
 		//[Fuck flower] [Drink Sap] [Ride Tentacles] [{Torch It}] [Leave It]
-		simpleChoices("Fuck Flower",fuck,"Drink Sap",3858,"Ride Tentacle",ride,"Torch It",burnIt, "Leave It", 1000);
+		simpleChoices("Fuck Flower",fuck,"Drink Sap",drinkThePlantGirlsSap,"Ride Tentacle",ride,"Torch It",burnIt, "Leave It", 1000);
 	}
 	else {
 		//Camp Menu (edited)
@@ -120,7 +120,7 @@ function treeMenu(output:Boolean = true):void {
 			burnIt = 3867;
 			
 			//[Fuck Her] [Drink] [Tentacle Ride] {Guard Camp} {Threaten} [Leave]
-			choices("Fuck Holli",fuck,"Drink Sap",3864,"Ride Tentacles",ride,guardT,burnIt,"Eat A Fruit",eat,"",0,"",0,"",0,"",0,"Leave", 1000);
+			choices("Fuck Holli",fuck,"Drink Sap",haveAMapleSyrupSnack,"Ride Tentacles",ride,guardT,burnIt,"Eat A Fruit",eat,"",0,"",0,"",0,"",0,"Leave", 1000);
 		}
 		else {
 			menu();
@@ -167,12 +167,12 @@ function getASprout():void {
 	clearOutput();
 	outputText("Around the edge of your camp, you spot some plant-life beginning to sprout.  The barren, wasteland crust is fractured and broken, giving up a leafy green shoot.  It only reaches up to your knee, but the plant looks healthy and young.  Perhaps it will grow larger?  There is a central stem that supports most of the weight, but a dozen branches fork off, supporting a bevy of shiny green leaves.");
 	outputText("\n\nYou briefly wonder how something could take root in such soil and be so successful, but then you recall the corrupt goddess, Marae.  She mentioned something about having roots through this world, didn't she?");
-	if(flags[100] == 2) outputText("  She even promised to plant a tree in your camp...");
+	if(flags[UNKNOWN_FLAG_NUMBER_00100] == 2) outputText("  She even promised to plant a tree in your camp...");
 	outputText("  You look closer and see purple veins on the undersides of the leaves, throbbing with what can only be the tainted liquids that suffuse much of this planet.  Fully grown, it might spread its corruption to your camp.\n\n<b>Do you destroy it?</b>");
 	flags[FUCK_FLOWER_LEVEL] = 1;
 	flags[FUCK_FLOWER_GROWTH_COUNTER] = 0;
 	//[Yes] [No]
-	simpleChoices("Yes",3852,"No",3853,"",0,"",0,"",0);
+	simpleChoices("Yes",destroyDatFukkinTree,"No",letZeFuckingSproutLive,"",0,"",0,"",0);
 }
 //[Yes] Destroy Tree (edited)
 function destroyDatFukkinTree():void {
@@ -213,7 +213,7 @@ function fuckPlantGrowsToLevel2():void {
 	if(player.hasCock() && player.cockThatFits(100) >= 0 && player.lust >= 33) fuck = 3855;
 	var ride:int = 0;
 	if(player.hasVagina() && player.lust >= 33) ride = 3856;
-	simpleChoices("Fuck It",fuck,"Ride Stamen",ride,"Do Nothing",1,"Destroy It",3854,"",0);
+	simpleChoices("Fuck It",fuck,"Ride Stamen",ride,"Do Nothing",1,"Destroy It",destroyDatFuckingPlantAtP2,"",0);
 	
 }
 
@@ -284,7 +284,7 @@ function rideDatFuckingFukkFlowerP2():void {
 		outputText(" milk.");
 	}
 	outputText("  You moan in unabashed delight, your mouth hanging open in a mindless, blissful 'o' in between vocalizations.  If your friends back home could see you now, writhing in the dirt, face open in simple, animal pleasure, and perhaps worst of all, fucking a plant, you'd die of ");
-	if(flags[23] == 0 && player.cor + player.lib < 150) outputText("embarrassment");
+	if(flags[UNKNOWN_FLAG_NUMBER_00023] == 0 && player.cor + player.lib < 150) outputText("embarrassment");
 	else outputText("lust");
 	outputText(".");
 	
@@ -327,7 +327,7 @@ function flowerGrowsToP3():void {
 	if(player.hasCock() && player.lust >= 33) fuck = 3857;
 	if(player.hasVagina() && player.lust >= 33) ride = 3859;
 	//[Fuck flower] [Drink Sap] [Ride Tentacles] [{Torch It}] [Leave It]
-	simpleChoices("Fuck Flower",fuck,"Drink Sap",3858,"Ride Tentacle",ride,"Torch It",burnIt, "Leave It", 1);
+	simpleChoices("Fuck Flower",fuck,"Drink Sap",drinkThePlantGirlsSap,"Ride Tentacle",ride,"Torch It",burnIt, "Leave It", 1);
 }
 
 //Fuck Flower (skimmed)
@@ -514,7 +514,7 @@ function amilyHatesTreeFucking():void {
 	outputText("\n\nNo matter how you try to interrupt, Amily's not even giving you a chance to answer...");
 	
 	//[Stay Quiet][Slap Her]
-	simpleChoices("Stay Quiet",3869,"Slap Her",3862,"",0,"",0,"",0);
+	simpleChoices("Stay Quiet",stayQuietWhileAmilyBitchesAboutFuckingArborday,"Slap Her",slapAmilysWhoreFace,"",0,"",0,"",0);
 }
 //[Stay Quiet]
 function stayQuietWhileAmilyBitchesAboutFuckingArborday():void {
@@ -527,7 +527,7 @@ function stayQuietWhileAmilyBitchesAboutFuckingArborday():void {
 	flags[AMILY_FOLLOWER] = 0;
 	//Set - amily flipped her shit
 	flags[AMILY_TREE_FLIPOUT] = 1;
-	flags[173] > 0;
+	flags[UNKNOWN_FLAG_NUMBER_00173] > 0;
 	//Enable village encounters
 	flags[AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
 	//Change to plain mouse birth!
@@ -548,10 +548,10 @@ function slapAmilysWhoreFace():void {
 	outputText("girl says, eyes wet with tears, \"<i>but I don't.  Goodbye.</i>\"");
 	
 	outputText("\n\nWithout another word, she turns, gathers her things, and leaves.");
-	flags[43] = 0;
-	flags[168] = 1;
-	flags[36] = 0;
-	flags[44] = 1;
+	flags[AMILY_FOLLOWER] = 0;
+	flags[AMILY_CORRUPT_FLIPOUT] = 1;
+	flags[AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
+	flags[AMILY_VILLAGE_ACCESSIBLE] = 1;
 	//no more classes, no more books; no more Amily's dirty looks
 	//bitch goes in ruined village
 	doNext(1);
@@ -744,7 +744,7 @@ function askHolliToWatch():void {
 	else {
 		outputText("You tell Holli you'd like her to stop watching at night.  She laughs, \"<i>You just want a chance to come back and beg some more, don't you?  I thought you were supposed to be tough shit, not a simpering little submissive.</i>\"");
 		flags[HOLLI_DEFENSE_ON] = 0;
-		doNext(3861);
+		doNext(treeMenu);
 	}
 }
 
@@ -758,7 +758,7 @@ function begHolli4Watches():void {
 	outputText("\n\nThis is... utterly humiliating!  You blush in shame and give her root another, longer lick, no longer caring about how bad it tastes, as long as you can get this over with!  You blink moisture from your eyes and unabashedly beg, \"<i>Please, mistress Holli.  I need you.  I don't want to get stuffed by dozens of imps.  I'm weak, and I need you to watch over me.  Please, please help me, mistress Holli.</i>\"  You rub your cheek against her root and look up hopefully.");
 	outputText("\n\n\"<i>Hah.  I guess I'll watch your camp.</i>\"");
 	flags[HOLLI_DEFENSE_ON] = 1;
-	doNext(3861);
+	doNext(treeMenu);
 }
 	
 //Donation Day Dominate Holli Content

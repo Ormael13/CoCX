@@ -1,7 +1,7 @@
-﻿const GATS_ANGEL_GOOD_ENDED:int = 638;
-const GATS_ANGEL_DISABLED:int = 639;
-const GATS_ANGEL_QUEST_BEGAN:int = 640;
-const GATS_ANGEL_TIME_TO_FIND_KEY:int = 641;
+﻿//const GATS_ANGEL_GOOD_ENDED:int = 638;
+//const GATS_ANGEL_DISABLED:int = 639;
+//const GATS_ANGEL_QUEST_BEGAN:int = 640;
+//const GATS_ANGEL_TIME_TO_FIND_KEY:int = 641;
 /*A Christmas Carol
 
 Entry for the 2012 CoC Contest, \"<i>A Very Milky XMas</i>\".
@@ -375,7 +375,7 @@ function conclusionOfGiantessGoodEnd():void {
 	outputText("\n\nAfter a long pause, you pocket the key, square yourself with Carol and North, returning her hand gesture before giving them a goofy grin that positively sparks in the snow-cushioned landscape.  As you turn to depart once more, you wave over your shoulder, escorted out with the continued giggles and lovey-dovey conversation of the unlikely couple.");
 	outputText("\n\nMerry Christmas indeed!");
 	//[if you haven't been introduced to christmas via elf or otherwise] 
-	if(flags[34] == 0) outputText("\n\nYou have no idea what that is.");
+	if(flags[UNKNOWN_FLAG_NUMBER_00034] == 0) outputText("\n\nYou have no idea what that is.");
 	//[end, get The North Star & A Christmas Carol perks]
 	//The North Star
 	//Witness picnic events with North & Carol at the High Mountain.

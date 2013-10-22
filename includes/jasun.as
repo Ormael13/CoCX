@@ -16,13 +16,13 @@
 function changingRoom():void {
 	//Charge for gym if no lifetime member!
 	outputText("", true);
-	if(flags[167] == 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00167] == 0) {
 		outputText("You toss ten gems to centaur and head towards the back.\n\n", false);
 		player.gems -= 10;
 		statScreenRefresh();
 	}
 	//AT CHANGING ROOM (1ST TIME)
-	if(flags[179] == 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00179] == 0) {
 		outputText("You walk into the largest of the changing rooms and take a look about.  The room's walls appear to be some kind of adobe material and are rough to the touch, but flush and with few cracks.  You'd hazard that this building must be pretty new.  Looking to the right of the entrance, you find a series of rudimentary sinks and shiny metal plates on the walls above them which function as mirrors.  In front of you are six changing stalls, and immediately to your left are a few bathroom stalls.  You find it pretty practical that all of these things are together in one room, but are rather curious as to why there are so few of these rooms in the first place.\n\n", false);
 	}
 	//AT CHANGING ROOM (2ND+ TIME)
@@ -30,16 +30,16 @@ function changingRoom():void {
 		outputText("You enter back into the largest of the changing rooms. Everything seems to be as it was the last time you poked your head in here. Everything somehow stays so clean in this particular place despite that so much sex and debauchery goes down in this city. You find it all rather refreshing, quite honestly.", false);
 	}
 	//[Look Around]
-	if(flags[181] == 0) simpleChoices("Look Around",2822,"",0,"",0,"",0,"Leave",13);
-	else simpleChoices("Jasun",2822,"",0,"",0,"",0,"Leave",13); 
+	if(flags[UNKNOWN_FLAG_NUMBER_00181] == 0) simpleChoices("Look Around",meetJasun,"",0,"",0,"",0,"Leave",13);
+	else simpleChoices("Jasun",meetJasun,"",0,"",0,"",0,"Leave",13); 
 }
 
 //AT CHANGING ROOM (SELECTING TO SEE THE SHARK OR LOOK AROUND IF FIRST TIME)
 function meetJasun():void {
 	outputText("", true);
 	spriteSelect(33);
-	if(flags[179] == 0) {
-		flags[179]++;
+	if(flags[UNKNOWN_FLAG_NUMBER_00179] == 0) {
+		flags[UNKNOWN_FLAG_NUMBER_00179]++;
 		outputText("As your eyes survey the room, you find a very thick figure step out from one of the changing stalls.  He is at least six feet tall from your guesstimate and has a massive barreled chest, the kind that could no doubt bench press anything the creature's own weight.  His shoulder span must be at least ", false);
 		if(silly()) outputText("six", false);
 		else outputText("three", false);
@@ -86,15 +86,15 @@ function meetJasun():void {
 			//IF YOU HAVE THE BIKINI ON
 			outputText("\"<i>And look at that, it's like you were ready for me the whole time!</i>\" He motions with one of his clawed fingers at your attire. You shamelessly pose in a proud manner and it causes him to laugh heartily. He seems unperturbed or even turned on by the fact that your swimsuit barely covers anything at all, almost like he's totally used to seeing people wear this kind of thing. You wonder what world he could possibly be from to end up the way he is. \"<i>Come, come with me. I have something to show you.</i>\" He walks up to you and pushes by you with his humongous frame. As he does, he grabs your left wrist with his right arm and all but drags you from the changing room to show you whatever he's talking about.\n\n", false);
 			//[Continue]
-			doNext(2823);
+			doNext(meetJasun2);
 			return;
 		}
 	}
 	//Met Jasun but not boned!
-	else if(flags[179] > 0 && flags[180] == 0) {
-		if(flags[181] == 0) {
+	else if(flags[UNKNOWN_FLAG_NUMBER_00179] > 0 && flags[UNKNOWN_FLAG_NUMBER_00180] == 0) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00181] == 0) {
 			outputText("While you look around the changing room, one of the gym's other patron asks you if you're looking for Jasun.  Seeing your confusion, they describe the hunky shark guy you met before.  You nod and smile, happy to have learned his name.\n\n", false);
-			flags[181]++;
+			flags[UNKNOWN_FLAG_NUMBER_00181]++;
 		}
 		//If you're a dude.
 		if(player.gender <= 1) {
@@ -119,7 +119,7 @@ function meetJasun():void {
 			return;
 		}
 		outputText("Jasun comes out of his stall and smiles when he sees you, already beginning to strain against the skimpy fabric of his bottom.  He asks, \"<i>Would you like to come swimming with me?</i>\" though his tone indicates that swimming may involve more than a few laps.", false);
-		doYesNo(2823,2824);
+		doYesNo(meetJasun2,turnAwayFromAdj);
 		return;
 	}
 	//Repeat
@@ -147,7 +147,7 @@ function meetJasun():void {
 
 		//(This is here for the same reason as before)
 		//[InVagina]
-		doNext(2826);
+		doNext(jasunSecks);
 		return;
 	}
 }
@@ -160,9 +160,9 @@ function meetJasun2():void {
 	outputText("and then suddenly stops. The light in the room blinds you for a moment, but then your eyes adjust and what you see makes you gasp. There's an entire swimming pool in here, and it's absolutely gargantuan! You pull away from the shark-man and walk up to the water, running your hand through it and looking about like a kid who just walked into a toy store. He walks up behind you slowly and sits down on the ledge into the pool beside you.\n\n", false);
 
 	outputText("\"<i>My name is Jasun, " + player.short + ". My people love the water, but most of them are ferocious and have lost their way. Seeing as I could no longer stay with them without risking my own life constantly, I came to Tel'Adre and set about working with the gym here to set up this wondrous pool. I spend most of my time here. Not many people get to use it, but I think you are ready.</i>\" He smiles at you without baring his teeth and you're flattered, knowing how difficult that must be for something with his jaw structure. \"<i>Come, let's swim.</i>\" He puts out his hand, palm up, literally asking for your hand for him to take you into the water.\n\n", false);
-	flags[181] = 1;
+	flags[UNKNOWN_FLAG_NUMBER_00181] = 1;
 	//[Accept] [Turn Away]
-	simpleChoices("Accept",2825,"Turn Away",2824,"",0,"",0,"",0);
+	simpleChoices("Accept",acceptJasunsAdvances,"Turn Away",turnAwayFromAdj,"",0,"",0,"",0);
 }
 
 //IF YOU TURN AWAY
@@ -186,7 +186,7 @@ function acceptJasunsAdvances():void {
 	
 	//(This is here because it'd be really cool if this wins to expand it and have anal and/or blowjob scenes)
 	//[InVagina]
-	doNext(2826);
+	doNext(jasunSecks);
 }
 
 function jasunSecks():void {
@@ -194,7 +194,7 @@ function jasunSecks():void {
 	spriteSelect(33);
 	//Increment 'times had sex'
 	slimeFeed();
-	if(flags[180] == 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00180] == 0) {
 		outputText("He grips your back firmly in one of his thick, clawed hands and kisses your neck thoroughly. As he does so, he uses his other hand to play with your nipples, working them up to standing on end with little to no work necessary. You gasp as he sucks on your neck, biting down with some of his front teeth slightly in order to tease you further. One of your hands reaches back behind his head, grabs his hair, and tugs. He chuckles in response, finding your aggression refreshing given how soft you've been with each other thus far. He goes back to nibbling at your neck and playing with your nipples. In response to this constant arousal, you use your other hand to start playing with his huge cock, toying with the rim and otherwise stroking his rod under the water. You notice immediately after touching it that it's slick to the touch, as if the males of his species do the lubrication. Swooning from his constant teasing torture, you stroke him up and down, fondling the large sack at the base of his dick with your fingers. He twitches in response to this, and you smile in finding some way to get back at him for his handiwork. He keeps going, but now his hand falls from your nipple down to your womanhood. As his finger trails down the length of your body, he uses one of his claws to cut an ever so thin line down your flesh, mixing pain with pleasure as you yearn for him to reach inside of you.\n\n", false);
 	
 		outputText("He reaches your silky folds, pushes aside your skimpy bikini, and reaches in with first one, and then two fingers. His claws poke you thoroughly, but manage to only add in a constant measure of pain to all of the pleasure of the experience; you don't mind at all. The more work he does on you, the more work you do on him, now gripping his shaft with both of your hands and working it ferociously. You fondle the tip and the base at once, and in response to the pain he gives you, occasionally grip hard enough to make him wince. It seems that he enjoys this sort of aggression, though, and presses into you stronger each time you do it. After a bit more work on your part, pre-cum starts bubbling out of his penis and filling the water around the two of you. It's colorless, but nearly causes you to orgasm when it hits your slick cunt, making it practically beg to be filled. You thrust your hips onto his hand, Jasun now ramming his whole hand in and out of you rhythmically, opening you up for him to enter you himself. You almost lose consciousness from the mix of his pre in the water turning you on and the pain and pleasure of your coming orgasm, but somehow manage to keep working him, tightening your grip around his head and shaft, making him grunt more frequently in response. Just then, you throw your head back in ecstasy and cum from his fisting you, and his cock erupts straight into the water at practically the same time, splashing your breasts with his juices underwater. The water seems to be warming up significantly, raising noticeably in temperature from cum mixing in with it. Sighing in release, you find yourself turned on yet again by his cum flushing your skin, and are not quite ready for this to be over. Bringing your head back down to meet his eyes with yours, he knows what you want, and you nod meekly, practically begging for him to join with you.\n\n", false);
@@ -218,7 +218,7 @@ function jasunSecks():void {
 
 		outputText("When you wake back up, you find that your bikini is next to you and that everything else seems to be fine. You put your bikini back on and look around, unable to see Jasun anywhere. You walk toward the gym's exit and reminisce of your experience today, ready for whatever your next escapade will bring.", false);
 	}
-	flags[180]++;
+	flags[UNKNOWN_FLAG_NUMBER_00180]++;
 	stats(0,0,0,0,0,-1,-100,0);
 	doNext(13);
 }

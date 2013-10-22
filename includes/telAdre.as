@@ -3,7 +3,7 @@
  * @author:
  */
 
-const YVONNE_FUCK_COUNTER:int = 437;
+//const YVONNE_FUCK_COUNTER:int = 437;
 
 /**
  * 3 variables that define bonuses for piercing.
@@ -48,7 +48,7 @@ function discoverTelAdre():void {
 	else {
 		outputText("While out prowling the desert dunes you manage to spy the desert city of Tel'Adre again.  You could hike over to it again, but some part of you fears being rejected for being 'impure' once again.  Do you try?", false);
 	}
-	doYesNo(2209,13);
+	doYesNo(encounterTelAdre,13);
 }
 
 //player chose to approach the city in the distance
@@ -95,7 +95,7 @@ function telAdreCrystal():void {
 	}
 	outputText("The vixen Urta gestures towards the smaller door and asks, \"<i>Would you a like a tour of Tel'Adre, newcomer?</i>\"\n\n", false);
 	outputText("You remember your etiquette and nod, thankful to have a quick introduction to such a new place.  Urta leaves Edryn to watch the gate and leads you inside.  You do notice her gait is a bit odd, and her fluffy fox-tail seems to be permanently wrapped around her right leg.  The door closes behind you easily as you step into the city of Tel'Adre...", false);
-	doNext(2210);
+	doNext(telAdreTour);
 }
 
 function telAdreTour():void {
@@ -110,15 +110,15 @@ function telAdreTour():void {
 	outputText("A bit further on, you're shown a piercing parlor, apparently another favorite of Urta's.  A cute human girl with cat-like ears peeks out the front and gives you both a friendly wave.  It's so strange to see so many people together in one place, doing things OTHER than fucking.  The whole thing makes you miss your hometown more than ever.  Tears come to your eyes unbidden, and you wipe them away, glad to at least have this one reminder of normalcy.  Urta politely pretends not to notice, though the tail she keeps wrapped around her leg twitches as she wraps up the tour.\n\n", false); 
 	outputText("She gives you a friendly punch on the shoulder and says, \"<i>Okay, gotta go!  Be good and stay out of trouble, alright?</i>\"\n\n", false);
 	outputText("Before you can answer, she's taken off back down the street, probably stopping off at 'The Wet Bitch' for a drink.  Strange, her departure was rather sudden...", false);
-	doNext(2211);
+	doNext(telAdreMenu);
 }
 
 function telAdreMenu():void {
-	if(flags[VALENTINES_EVENT_YEAR] < date.fullYear && player.balls > 0 && player.hasCock() && flags[54] >= 4 && flags[105] > 0 && isValentine()) {
+	if(flags[VALENTINES_EVENT_YEAR] < date.fullYear && player.balls > 0 && player.hasCock() && flags[UNKNOWN_FLAG_NUMBER_00054] >= 4 && flags[UNKNOWN_FLAG_NUMBER_00105] > 0 && isValentine()) {
 		crazyVDayShenanigansByVenithil();
 		return;
 	}
-	if(!urtaBusy() && flags[33] == 0 && rand(15) == 0 && hours > 15) {
+	if(!urtaBusy() && flags[UNKNOWN_FLAG_NUMBER_00033] == 0 && rand(15) == 0 && hours > 15) {
 		urtaIsABadass();
 		return;
 	}
@@ -140,7 +140,7 @@ function telAdreMenu():void {
 		urtaSpecialDeliveries();
 		return;
 	}
-	if(flags[242] == -1) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00242] == -1) {
 		runAwayMaddieFollowup();
 		return;
 	}
@@ -148,7 +148,7 @@ function telAdreMenu():void {
 	outputText("A sign depicting a hermaphroditic centaur covered in piercings hangs in front of one of the sandstone buildings, and bright pink lettering declares it to be the 'Piercing Studio'.  You glance over and see the wooden facade of Urta's favorite bar, 'The Wet Bitch'.  How strange that those would be what she talks about during a tour.  In any event you can also spot some kind of wolf-man banging away on an anvil in a blacksmith's stand, and a foppishly-dressed dog-man with large floppy ears seems to be running some kind of pawnshop in his stand.  Steam boils from the top of a dome-shaped structure near the far end of the street, and simple lettering painted on the dome proclaims it to be a bakery.  Perhaps those shops will be interesting as well.", false);
 	var homes:Boolean = false;
 	var homeB:int = 0;
-	if(flags[133] == -2) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00133] == -2) {
 		if(RaphaelLikes())
 		{
 			homes = true;
@@ -160,7 +160,7 @@ function telAdreMenu():void {
 	if(urtaKids() > 0 && player.hasKeyItem("Spare Key to Urta's House") >= 0) homes = true;
 	if(flags[ARIAN_PARK] >= 4 && !arianFollower()) homes = true;
 	if(homes) homeB = 3993;
-	choices("Shops",3995,"Bakery",2836,"Bar",2256,"Gym",2783,"Homes",homeB,"Park",2255,"Pawn",2255,"Tower",3996,"Weapons",2553,"Leave",13);
+	choices("Shops",armorShops,"Bakery",bakeryuuuuuu,"Bar",barTelAdre,"Gym",gymDesc,"Homes",homeB,"Park",oswaldPawn,"Pawn",oswaldPawn,"Tower",visitZeMagesTower,"Weapons",weaponShop,"Leave",13);
 	menu();
 	addButton(0,"Shops",eventParser,3995);
 	addButton(1,"Bakery",eventParser,2836);
@@ -186,7 +186,7 @@ function houses():void {
 	clearOutput();
 	outputText("Whose home will you visit?");
 	var orphanage:int = 0;
-	if(flags[133] == -2) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00133] == -2) {
 		if(RaphaelLikes())
 		{
 			orphanage = 3975;
@@ -209,7 +209,7 @@ function piercingStudio():void {
 	outputText("", true);
 	outputText("The interior of the piercing studio is earthy, leaving the stone floors and walls uncovered, though the windows are covered with woven blankets, sewn from multicolored threads.  There are a number of cushy chairs facing a wall of mirrors, along with a shelf covered in needles, piercings, and strong alcohols.  A brunette prowls about the place, tidying it up during a lull in business.  You dully notice that unlike everyone else in this town, she's mostly human.  Perhaps she came through a portal as well?  She approaches you, and you see a cat tail waving behind her, and a pair of fuzzy feline ears, both covered in piercings, perched atop her head.  Clearly she's been here long enough to pick up some of the local flavor.\n\n", false);
 	outputText("She introduces herself, \"<i>Hello there " + player.mf("sir","cutie") + ", my name is Yara.  Would you like to get a piercing?</i>\"", false);
-	simpleChoices("Pierce",2213,"Remove",2240,"About Her",about,"",0,"Leave",2211);
+	simpleChoices("Pierce",pierceMenu,"Remove",piercingRemove,"About Her",about,"",0,"Leave",telAdreMenu);
 }
 function aboutYara():void {
 	spriteSelect(63);
@@ -219,7 +219,7 @@ function aboutYara():void {
 	else outputText("you haven't seen many other humans about.", false);
 	outputText("\n\nShe blushes a little when she answers, her tail curling about her protectively, \"<i>My home city was built around a portal, and the Baron that ruled it insisted that we send a sacrifice through every year.  We were raised believing that if we didn't sacrifice SOMEONE, the gods would become angry and bring our city to ruin.  Of course the whole thing was a sham, but the families of those sacrificed get compensation.  My father tried to whore me out first, but when that didn't work, the bastard had me drugged and sacrificed.  I woke up next to a lake, ate some weird fruit when I got hungry, and I...well, I changed.  Thankfully I found my way here before I ran into any demons, or who knows what would have happened to me!  Tel'Adre has been good to me, and I'm sure it'll be good to you.  Now, how about getting a piercing?</i>\"", false);
 	stats(0,0,0,2,0,0,-5,-1);
-	doNext(2212);
+	doNext(piercingStudio);
 }
 function pierceMenu():void {
 	spriteSelect(63);
@@ -250,10 +250,10 @@ function pierceMenu():void {
 	}
 	outputText("Yara asks, \"<i>Ok then, what would you like pierced " + player.mf("sir","cutie") + "?  Just keep in mind my piercings are special - they're permanent and CAN'T be removed.</i>\"", true);
 	if(clit + dick + ears + eyebrow + lip + nipples + nose + tongue + vulva > 0) 
-		choices("Clit",clit,"Dick",dick,"Ears",ears,"Eyebrow",eyebrow,"Lip",lip,"Nipples",nipples,"Nose",nose,"Tongue",tongue,"Labia",vulva,"Back",2212);
+		choices("Clit",clit,"Dick",dick,"Ears",ears,"Eyebrow",eyebrow,"Lip",lip,"Nipples",nipples,"Nose",nose,"Tongue",tongue,"Labia",vulva,"Back",piercingStudio);
 	else {
 		outputText("\n\nYou give yourself a quick once-over and realize there's nowhere left for her to pierce you.  Oh well.", false);
-		doNext(2212);
+		doNext(piercingStudio);
 	}
 }
 
@@ -262,10 +262,10 @@ function dickPierce():void {
 	if(player.totalCocks() > 0) outputText("\"<i>Ok, this is gonna hurt a LOT, but I've heard good things about it.  What kind of piercing do you want done?</i>\" Yara asks.", true);
 	else {
 		outputText("You realize you don't have a dick to pierce.  Whoops!  Better pick something else...", true);
-		doNext(2213);
+		doNext(pierceMenu);
 		return;
 	}
-	simpleChoices("Stud",2224,"Ring",2225,"Ladder",2226,"Back",2213,"Nevermind",2212);
+	simpleChoices("Stud",chooseStud,"Ring",chooseRing,"Ladder",chooseLadder,"Back",pierceMenu,"Nevermind",piercingStudio);
 	piercingLoc = 1;
 }
 
@@ -274,53 +274,53 @@ function clitPierce():void {
 	if(player.hasVagina()) outputText("\"<i>Ohhh that's going to be suckably cute!</i>\" exclaims Yara, blushing more than a little. \"<i>What kind of piercing would you like?</i>", true);
 	else {
 		outputText("You realize you don't have a clit to pierce.  Whoops!  Better pick something else...", true);
-		doNext(2213);
+		doNext(pierceMenu);
 		return;
 	}
 	piercingLoc = 0;
-	simpleChoices("Stud",2224,"Ring",2225,"",0,"Back",2213,"Nevermind",2212);
+	simpleChoices("Stud",chooseStud,"Ring",chooseRing,"",0,"Back",pierceMenu,"Nevermind",piercingStudio);
 }
 
 function earPierce():void {
 	spriteSelect(63);
 	piercingLoc = 2;
 	outputText("\"<i>Okay, just let me get my supplies and we can get started.  What kind of jewelry do you want in them?</i>\" asks Yara.", true)
-	simpleChoices("Stud",2224,"Ring",2225,"Hoop",2227,"Back",2213,"Nevermind",2212);
+	simpleChoices("Stud",chooseStud,"Ring",chooseRing,"Hoop",chooseHoop,"Back",pierceMenu,"Nevermind",piercingStudio);
 }
 
 function eyebrowPierce():void {
 	spriteSelect(63);
 	piercingLoc = 3;
 	outputText("\"<i>Ah, that's a good look!  What do you want there?</i>\" asks Yara.", true);
-	simpleChoices("Stud",2224,"Ring",2225,"",0,"Back",2213,"Nevermind",2212);
+	simpleChoices("Stud",chooseStud,"Ring",chooseRing,"",0,"Back",pierceMenu,"Nevermind",piercingStudio);
 }
 
 function lipPierce():void {
 	spriteSelect(63);
 	piercingLoc = 4;
 	outputText("\"<i>Oh my, that'll be HAWT!  What kind of jewelry do you want there?</i>\" asks Yara.", true);
-	simpleChoices("Stud",2224,"Ring",2225,"",0,"Back",2213,"Nevermind",2212);
+	simpleChoices("Stud",chooseStud,"Ring",chooseRing,"",0,"Back",pierceMenu,"Nevermind",piercingStudio);
 }
 
 function nipplePierce():void {
 	spriteSelect(63);
 	piercingLoc = 5;
 	outputText("\"<i>Yeah sure I can do those!  What kind of jewelry do you want there?  I'm partial to nipple-chains myself,</i>\" admits Yara, blushing bright red.", true);
-	simpleChoices("Studs",2224,"Rings",2225,"Chain",2228,"Back",2213,"Nevermind",2212);
+	simpleChoices("Studs",chooseStud,"Rings",chooseRing,"Chain",chooseChain,"Back",pierceMenu,"Nevermind",piercingStudio);
 }
 
 function nosePierce():void {
 	spriteSelect(63);
 	piercingLoc = 6;
 	outputText("Yara wrinkles her nose in distaste, \"<i>Really?  Well ok, what do you want there?</i>\"", true);
-	simpleChoices("Stud",2224,"Ring",2225,"",0,"Back",2213,"Nevermind",2212);
+	simpleChoices("Stud",chooseStud,"Ring",chooseRing,"",0,"Back",pierceMenu,"Nevermind",piercingStudio);
 }
 
 function tonguePierce():void {
 	spriteSelect(63);
 	piercingLoc = 7;
 	outputText("Yara happily purrs, \"<i>Oh my, I bet that'll fun!  I'm afraid I can only put a stud there though, ok?</i>\"", true);
-	simpleChoices("Ok",2224,"",0,"",0,"Back",2213,"Nevermind",2212);
+	simpleChoices("Ok",chooseStud,"",0,"",0,"Back",pierceMenu,"Nevermind",piercingStudio);
 }
 function vulvaPierce():void {
 	spriteSelect(63);
@@ -328,10 +328,10 @@ function vulvaPierce():void {
 	if(player.hasVagina()) outputText("Yara explains, \"<i>This is gonna hurt a lot, but I think you'll love how it feels after.  I know I do!  Now what kind of jewelry do you want down-town?</i>\"", true);
 	else {
 		outputText("You realize you don't have a pussy to pierce.  Whoops!  Better pick something else...", true);
-		doNext(2213);
+		doNext(pierceMenu);
 		return;
 	}
-	simpleChoices("Stud",2224,"Ring",2225,"",0,"Back",2213,"Nevermind",2212);
+	simpleChoices("Stud",chooseStud,"Ring",chooseRing,"",0,"Back",pierceMenu,"Nevermind",piercingStudio);
 }
 function chooseStud():void {
 	piercingType = 1;
@@ -359,12 +359,12 @@ function chooseMaterials():void {
 	outputText("Yara gathers up her materials and says, \"<i>Ok, now what type of material do you want it made from?  Don't worry about price, none of these are that rare, so the piercing will only be 100 gems.  Though I do have some rarer materials; you'll need 1000 gems to spend if you want to check them out.</i>\"", true);
 	if(player.gems < 100) {
 		outputText("\n\nYou realize you don't have enough gems to get a piercing.", false);
-		doNext(2212);
+		doNext(piercingStudio);
 		return;
 	}
 	var rare:Number = 0;
 	if(player.gems >= 1000) rare = 2250;
-	choices("Amethyst",2231,"Diamond",2232,"Gold",2233,"Emerald",2234,"Jade",2235,"Onyx",2236,"Ruby",2237,"Steel",2238,"Rare Menu",rare,"Nevermind",2212);
+	choices("Amethyst",chooseAmethyst,"Diamond",chooseDiamond,"Gold",chooseGold,"Emerald",chooseEmerald,"Jade",chooseJade,"Onyx",chooseOnyx,"Ruby",chooseRuby,"Steel",chooseSteel,"Rare Menu",rare,"Nevermind",piercingStudio);
 }
 function chooseAmethyst():void {
 	piercingMat = 1;
@@ -418,7 +418,7 @@ function chooseCrimstone():void {
 function areYouSure():void {
 	spriteSelect(63);
 	outputText("Yara says, \"<i>Ok, last chance to back out, are you sure you want to go ahead with this?  Remember, once I put it in, it's permanent.</i>\"", true);
-	doYesNo(2230,2212);
+	doYesNo(normalPierceAssemble,piercingStudio);
 }
 	//9. Lethite (Demon Lure)
 	//10. Fertite (Fertility Booster)
@@ -433,7 +433,7 @@ function chooseAdvancedMaterials():void {
 	outputText("\n3. Furrite - This beautiful purple gem is actually crystalized from materials used in hunting lures.  It is said to enhance the wearer's appeal to beast-people.", false);
 	outputText("\n4. Crimstone - Crimstone is said to be formed from volcanic fires, and to keep the fires of one's desires burning brightly.", false);
 	outputText("\n\n<b>DISCLAIMER</b>: Yara's Piercing Studio is not responsible if the piercee's body absorbs any residual magic of these stones, and is not required to resolve any issues if the effects persist beyond removal.</b>", false);
-	simpleChoices("Lethite",2251,"Fertite",2252,"Furrite",2253,"Crimstone",2254,"Back",2214);
+	simpleChoices("Lethite",chooseLethite,"Fertite",chooseFertite,"Furrite",chooseFurrite,"Crimstone",chooseCrimstone,"Back",chooseMaterials);
 }
 
 function normalPierceAssemble():void {
@@ -699,7 +699,7 @@ function normalPierceAssemble():void {
 		return;
 	}
 	//Piercing shop main menu
-	doNext(2212);
+	doNext(piercingStudio);
 }
 
 function specialPierceAssemble():void {
@@ -736,21 +736,21 @@ function piercingRemove():void {
 	}
 	if(clit + dick + ears + eyebrow + lip + nipples + nose + tongue + vulva == 0) {
 		outputText("Yara giggles, \"<i>You don't have any piercings, silly!</i>\"", true);
-		doNext(2212);
+		doNext(piercingStudio);
 		return;
 	}
 	outputText("\"<i>Really?</i>\" asks Yara, \"<i>I told you those piercings are permanent!  Well, I suppose they CAN be removed, but you're gonna hurt like hell afterword.  If you really want me to, I can remove something, but it'll cost you 100 gems for the painkillers and labor.</i>\"", true);
 	if(player.gems < 100) {
 		outputText("\n\n<b>You do not have enough gems.</b>", false);
-		doNext(2212);
+		doNext(piercingStudio);
 		return;
 	}
 	if(player.tou <= 5.5) {
 		outputText("Yara looks you up and down before refusing you outright, \"<i>You don't look so good " + player.short + ".  I don't think your body could handle it right now.</i>\"", true);
-		doNext(2212);
+		doNext(piercingStudio);
 		return;
 	}
-	choices("Clit",clit,"Dick",dick,"Ears",ears,"Eyebrow",eyebrow,"Lip",lip,"Nipples",nipples,"Nose",nose,"Tongue",tongue,"Labia",vulva,"Back",2212);
+	choices("Clit",clit,"Dick",dick,"Ears",ears,"Eyebrow",eyebrow,"Lip",lip,"Nipples",nipples,"Nose",nose,"Tongue",tongue,"Labia",vulva,"Back",piercingStudio);
 }
 
 function removeClitPierce():void {
@@ -762,7 +762,7 @@ function removeClitPierce():void {
 	stats(0,-5,0,0,0,0,0,0);
 	player.gems -= 100;
 	statScreenRefresh();
-	doNext(2212);
+	doNext(piercingStudio);
 }
 
 function removeCockPierce():void {
@@ -774,7 +774,7 @@ function removeCockPierce():void {
 	stats(0,-5,0,0,0,0,0,0);
 	player.gems -= 100;
 	statScreenRefresh();
-	doNext(2212);
+	doNext(piercingStudio);
 }
 
 function removeEarsPierce():void {
@@ -786,7 +786,7 @@ function removeEarsPierce():void {
 	stats(0,-5,0,0,0,0,0,0);
 	player.gems -= 100;
 	statScreenRefresh();
-	doNext(2212);
+	doNext(piercingStudio);
 }
 
 function removeEyebrowPierce():void {
@@ -798,7 +798,7 @@ function removeEyebrowPierce():void {
 	stats(0,-5,0,0,0,0,0,0);
 	player.gems -= 100;
 	statScreenRefresh();
-	doNext(2212);
+	doNext(piercingStudio);
 }
 
 function removeLipPierce():void {
@@ -810,7 +810,7 @@ function removeLipPierce():void {
 	stats(0,-5,0,0,0,0,0,0);
 	player.gems -= 100;
 	statScreenRefresh();
-	doNext(2212);
+	doNext(piercingStudio);
 }
 
 function removeNipplesPierce():void {
@@ -822,7 +822,7 @@ function removeNipplesPierce():void {
 	stats(0,-5,0,0,0,0,0,0);
 	player.gems -= 100;
 	statScreenRefresh();
-	doNext(2212);
+	doNext(piercingStudio);
 }
 
 function removeNosePierce():void {
@@ -834,7 +834,7 @@ function removeNosePierce():void {
 	stats(0,-5,0,0,0,0,0,0);
 	player.gems -= 100;
 	statScreenRefresh();
-	doNext(2212);
+	doNext(piercingStudio);
 }
 
 function removeTonguePierce():void {
@@ -846,7 +846,7 @@ function removeTonguePierce():void {
 	stats(0,-5,0,0,0,0,0,0);
 	player.gems -= 100;
 	statScreenRefresh();
-	doNext(2212);
+	doNext(piercingStudio);
 }
 
 function removeVulvaPierce():void {
@@ -858,7 +858,7 @@ function removeVulvaPierce():void {
 	stats(0,-5,0,0,0,0,0,0);
 	player.gems -= 100;
 	statScreenRefresh();
-	doNext(2212);
+	doNext(piercingStudio);
 }
 
 function oswaldPawn():void {
@@ -906,34 +906,34 @@ function barTelAdre():void {
 		button = anotherButton(button,"Ask4Amily",eventParser,3187);
 	}
 	//DOMINIKA
-	if(hours > 17 && hours < 20 && flags[150] != -1) {
+	if(hours > 17 && hours < 20 && flags[UNKNOWN_FLAG_NUMBER_00150] != -1) {
 		button = anotherButton(button,"Dominika",eventParser,2739);
 	}
 	//EDRYN!
 	if(flags[EDRYN_BIRF_COUNTDOWN] == 0) {
 		if(edrynBar()) {
 			//Edryn panic appearance!
-			if(flags[71] == 0 && flags[68] > 0 && flags[69] == 0) {
+			if(flags[UNKNOWN_FLAG_NUMBER_00071] == 0 && flags[EDRYN_PREGNANCY_INCUBATION] > 0 && flags[UNKNOWN_FLAG_NUMBER_00069] == 0) {
 				outputText("\n\nEdryn smiles when she sees you and beckons you towards her.  Fear and some kind of frantic need are painted across her face, imploring you to come immediately.  Whatever the problem is, it doesn't look like it can wait.", false);
-				doNext(2488);
-				flags[71]++;
+				doNext(findOutEdrynIsPregnant);
+				flags[UNKNOWN_FLAG_NUMBER_00071]++;
 				return;
 			}
 			//Edryn re-preggers appearance!
-			if(flags[71] == 0 && flags[69] > 0) {
-				flags[71]++;
+			if(flags[UNKNOWN_FLAG_NUMBER_00071] == 0 && flags[UNKNOWN_FLAG_NUMBER_00069] > 0) {
+				flags[UNKNOWN_FLAG_NUMBER_00071]++;
 				outputText("\n\nEdryn smiles at you and yells, \"<i>Guess what " + player.short + "?  I'm pregnant again!</i>\"  There are some hoots and catcalls but things quickly die down.  You wonder if her scent will be as potent as before?", false);
 			}
 			//Edryn just had a kid and hasn't talked about it!
-			else if(flags[72] == 1) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00072] == 1) {
 				outputText("\n\nEdryn the centaur isn't pregnant anymore!  She waves excitedly at you, beckoning you over to see her.  It looks like she's already given birth to your child!", false);
 			}
 			//Mid-pregnancy appearance
-			else if(flags[68] > 0) {
+			else if(flags[EDRYN_PREGNANCY_INCUBATION] > 0) {
 				outputText("\n\nEdryn is seated at her usual table, and chowing down with wild abandon.  A stack of plates is piled up next to her.  Clearly she has been doing her best to feed her unborn child.  She notices you and waves, blushing heavily.", false); 
 			}
 			//Appearance changes if has had kids
-			else if(flags[69] > 0) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00069] > 0) {
 				outputText("\n\nEdryn is seated at her usual place, picking at a plate of greens and sipping a mug of the local mead.  She looks bored until she sees you.  Her expression brightens immediately, and Edryn fiddles with her hair and changes her posture slightly.  You aren't sure if she means to, but her cleavage is prominently displayed in an enticing manner.", false);
 			}
 			else if(player.statusAffectv1("Edryn") < 3) {
@@ -951,7 +951,7 @@ function barTelAdre():void {
 	//NANCY
 	if(auntNancy(false)) {
 		auntNancy(true);
-		if(flags[263] > 0) button = anotherButton(button,"Nancy",eventParser,2970);
+		if(flags[UNKNOWN_FLAG_NUMBER_00263] > 0) button = anotherButton(button,"Nancy",eventParser,2970);
 		else button = anotherButton(button,"Barkeep",eventParser,2970);
 	}
 	else outputText("\n\nIt doesn't look like there's a bartender working at the moment.", false);
@@ -979,37 +979,37 @@ function barTelAdre():void {
 		//Scylla repeat
 		//big dick!
 		if(player.longestCockLength() >= 12) {
-			if(flags[54] == 0) {
+			if(flags[UNKNOWN_FLAG_NUMBER_00054] == 0) {
 				outputText("\n\nThere is one nun sitting in a corner booth who catches your eye.  She sits straight-backed against the dark, wood chair, her thin waist accentuating the supple curve of her breasts. She's dressed in a black robe that looks a few sizes too small for her hips and wears a black and white cloth over her head.", false);
 				button = anotherButton(button,"Nun",eventParser,2447);
 			}
-			else if(flags[54] == 1 && rand(5) == 0) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00054] == 1 && rand(5) == 0) {
 				outputText("", true);
 				scyllaRoundII();
 				return;
 			}
-			else if(flags[54] == 2 && rand(5) == 0) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00054] == 2 && rand(5) == 0) {
 				outputText("", true);
 				scyllaRoundThreeCUM()
 				return;
 			}
 			//Round 4 goes here
-			else if(flags[54] == 3 && rand(5) == 0) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00054] == 3 && rand(5) == 0) {
 				scyllaRoundIVGo();
 				return;
 			}
 			//Round 6 - catscratch!
-			else if(flags[54] == 5 && rand(5) == 0) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00054] == 5 && rand(5) == 0) {
 				outputText("\n\nIt looks like Scylla is here but getting ready to leave.  You could check and see what the misguided nun is up to.", false);
 				button = anotherButton(button,"Scylla",eventParser,2705);
 			}
 			//Round 5 - repeatable!
-			else if(flags[54] >= 4 && (hours == 18 || hours == 19)) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00054] >= 4 && (hours == 18 || hours == 19)) {
 				outputText("\n\nYou see Scylla's white and black nun's habit poking above the heads of the other patrons. The tall woman seems unaware of her effect on those around her, but it's clear by the way people are crowding she's acquired a reputation by now. You're not sure what she's doing, but you could push your way through to find out.", false);
 				button = anotherButton(button,"Scylla",eventParser,2563);
 			}			
 			//Round 2.5 Repeatable
-			else if(flags[54] >= 2 && flags[FED_SCYLLA_TODAY] == 0 && hours >= 7 && hours <= 11) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00054] >= 2 && flags[FED_SCYLLA_TODAY] == 0 && hours >= 7 && hours <= 11) {
 				outputText("\n\nIt looks like Scylla is milling around here this morning, praying as she keeps an eye out for someone to 'help'.");
 				button = anotherButton(button,"Scylla",eventParser,3992);
 			}
@@ -1024,19 +1024,19 @@ function barTelAdre():void {
 	if(!urtaBusy() && flags[AMILY_VISITING_URTA] != 1 && hours < 15) {
 		//Scylla + Urta sitting in a tree
 		// SOME COMFORT     FUCKED URTA      NOT PISSED      DRUNK TIME    SCYLLA TO LV4    RANDOM CHANCE  HAS THIS HAPPENED BEFORE? SCYLLA REQS ->
-		if(flags[13] == 0 && flags[12] > 2 && flags[11] > 0 && flags[31] < 1 && (urtaDrunk() || flags[143] > 0) && flags[54] >= 3 && rand(3) == 0 && (flags[143] == 0 || (flags[147] == 0 && flags[145] > 0)) && ((flags[143] > 0 && !urtaDrunk()) || player.balls > 0) && player.totalCocks() > 0 && !hasButton("Scylla") && !hasButton("ScyllaCats")) {
-			if(flags[143] > 0) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00013] == 0 && flags[UNKNOWN_FLAG_NUMBER_00012] > 2 && flags[UNKNOWN_FLAG_NUMBER_00011] > 0 && flags[UNKNOWN_FLAG_NUMBER_00031] < 1 && (urtaDrunk() || flags[UNKNOWN_FLAG_NUMBER_00143] > 0) && flags[UNKNOWN_FLAG_NUMBER_00054] >= 3 && rand(3) == 0 && (flags[UNKNOWN_FLAG_NUMBER_00143] == 0 || (flags[UNKNOWN_FLAG_NUMBER_00147] == 0 && flags[UNKNOWN_FLAG_NUMBER_00145] > 0)) && ((flags[UNKNOWN_FLAG_NUMBER_00143] > 0 && !urtaDrunk()) || player.balls > 0) && player.totalCocks() > 0 && !hasButton("Scylla") && !hasButton("ScyllaCats")) {
+			if(flags[UNKNOWN_FLAG_NUMBER_00143] > 0) {
 				outputText("\n\nUrta's usual place is vacant, though her table still holds a half-drank glass of water.  If it's anything like the last time this happened, she's snuck into a back room with Scylla to relieve some pressure.  It might not hurt to join in...", false);
 			}
 			else {
-				if(flags[143] == 0) {
+				if(flags[UNKNOWN_FLAG_NUMBER_00143] == 0) {
 					outputText("\n\n<b>Though Urta would normally be here getting sloshed, her usual spot is completely vacant.  You ask around but all you get are shrugs and giggles.  Something isn't quite right here.  You see an empty bottle of one of her favorite brands of whiskey still rolling on her table, so she can't have been gone long.  Maybe she had guard business, or had to head to the back rooms for something?</b>", false);
 				}
 				else {
 					outputText("\n\nUrta's usual place is vacant, though her table still holds a half-drank mug of something potent and alcoholic.  If it's anything like the last time this happened, she's snuck into a back room with Scylla to relieve some pressure.  It might not hurt to join in...", false);
 				}
 			}
-			flags[13] = 4;
+			flags[UNKNOWN_FLAG_NUMBER_00013] = 4;
 			button = anotherButton(button,"Back Room",eventParser,2697);
 		}
 		else if(urtaBarDescript()) {
@@ -1071,27 +1071,27 @@ function oldbarTelAdre():void {
 	if(!urtaBusy()) {
 		if(edrynBar()) {
 			//Edryn panic appearance!
-			if(flags[71] == 0 && flags[68] > 0 && flags[69] == 0) {
+			if(flags[UNKNOWN_FLAG_NUMBER_00071] == 0 && flags[EDRYN_PREGNANCY_INCUBATION] > 0 && flags[UNKNOWN_FLAG_NUMBER_00069] == 0) {
 				outputText("\n\nEdryn smiles when she sees you and beckons you towards her.  Fear and some kind of frantic need are painted across her face, imploring you to come immediately.  Whatever the problem is, it doesn't look like it can wait.", false);
-				doNext(2488);
-				flags[71]++;
+				doNext(findOutEdrynIsPregnant);
+				flags[UNKNOWN_FLAG_NUMBER_00071]++;
 				return;
 			}
 			//Edryn re-preggers appearance!
-			if(flags[71] == 0 && flags[69] > 0) {
-				flags[71]++;
+			if(flags[UNKNOWN_FLAG_NUMBER_00071] == 0 && flags[UNKNOWN_FLAG_NUMBER_00069] > 0) {
+				flags[UNKNOWN_FLAG_NUMBER_00071]++;
 				outputText("\n\nEdryn smiles at you and yells, \"<i>Guess what " + player.short + "?  I'm pregnant again!</i>\"  There are some hoots and catcalls but things quickly die down.  You wonder if her scent will be as potent as before?", false);
 			}
 			//Edryn just had a kid and hasn't talked about it!
-			else if(flags[72] == 1) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00072] == 1) {
 				outputText("\n\nEdryn the centaur isn't pregnant anymore!  She waves excitedly at you, beckoning you over to see her.  It looks like she's already given birth to your child!", false);
 			}
 			//Mid-pregnancy appearance
-			else if(flags[68] > 0) {
+			else if(flags[EDRYN_PREGNANCY_INCUBATION] > 0) {
 				outputText("\n\nEdryn is seated at her usual table, and chowing down with wild abandon.  A stack of plates is piled up next to her.  Clearly she has been doing her best to feed her unborn child.  She notices you and waves, blushing heavily.", false); 
 			}
 			//Appearance changes if has had kids
-			else if(flags[69] > 0) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00069] > 0) {
 				outputText("\n\nEdryn is seated at her usual place, picking at a plate of greens and sipping a mug of the local mead.  She looks bored until she sees you.  Her expression brightens immediately, and Edryn fiddles with her hair and changes her posture slightly.  You aren't sure if she means to, but her cleavage is prominently displayed in an enticing manner.", false);
 			}
 			else if(player.statusAffectv1("Edryn") < 3) {
@@ -1112,40 +1112,40 @@ function oldbarTelAdre():void {
 		//Scylla repeat
 		//big dick!
 		if(player.longestCockLength() >= 12) {
-			if(flags[54] == 0) {
+			if(flags[UNKNOWN_FLAG_NUMBER_00054] == 0) {
 				outputText("\n\nThere is one nun sitting in a corner booth who catches your eye.  She sits straight-backed against the dark, wood chair, her thin waist accentuating the supple curve of her breasts. She's dressed in a black robe that looks a few sizes too small for her hips and wears a black and white cloth over her head.", false);
 				misc1 = 2447;
 				misc1Name = "Nun";
 			}
-			else if(flags[54] == 1 && rand(5) == 0) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00054] == 1 && rand(5) == 0) {
 				outputText("", true);
 				scyllaRoundII();
 				return;
 			}
-			else if(flags[54] == 2 && rand(5) == 0) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00054] == 2 && rand(5) == 0) {
 				outputText("", true);
 				scyllaRoundThreeCUM()
 				return;
 			}
 			//Round 4 goes here
-			else if(flags[54] == 3 && rand(5) == 0) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00054] == 3 && rand(5) == 0) {
 				scyllaRoundIVGo();
 				return;
 			}
 			//Round 6 - catscratch!
-			else if(flags[54] == 5 && rand(5) == 0) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00054] == 5 && rand(5) == 0) {
 				outputText("\n\nIt looks like Scylla is here but getting ready to leave.  You could check and see what the misguided nun is up to.", false);
 				misc1Name = "Scylla";
 				misc1 = 2705;
 			}
 			//Round 5 - repeatable!
-			else if(flags[54] >= 4 && (hours == 18 || hours == 19)) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00054] >= 4 && (hours == 18 || hours == 19)) {
 				outputText("\n\nYou see Scylla's white and black nun's habit poking above the heads of the other patrons. The tall woman seems unaware of her effect on those around her, but it's clear by the way people are crowding she's acquired a reputation by now. You're not sure what she's doing, but you could push your way through to find out.", false);
 				misc1Name = "Scylla";
 				misc1 = 2563;
 			}			
 			//Round 2.5 Repeatable
-			else if(flags[54] >= 2 && flags[FED_SCYLLA_TODAY] == 0 && hours >= 7 && hours <= 11) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00054] >= 2 && flags[FED_SCYLLA_TODAY] == 0 && hours >= 7 && hours <= 11) {
 				outputText("\n\nIt looks like Scylla is milling around here this morning, praying as she keeps an eye out for someone to 'help'.");
 				misc1Name = "Scylla";
 				misc1 = 3992;
@@ -1172,23 +1172,23 @@ function oldbarTelAdre():void {
 	if(!urtaBusy() && flags[AMILY_VISITING_URTA] != 1 && hours < 15) {
 		//Scylla + Urta sitting in a tree
 		// SOME COMFORT     FUCKED URTA      NOT PISSED      DRUNK TIME    SCYLLA TO LV4    RANDOM CHANCE  HAS THIS HAPPENED BEFORE? SCYLLA REQS ->
-		if(flags[13] == 0 && flags[12] > 2 && flags[11] > 0 && flags[31] < 1 && (urtaDrunk() || flags[143] > 0) && flags[54] >= 3 && rand(3) == 0 && (flags[143] == 0 || (flags[147] == 0 && flags[145] > 0)) && ((flags[143] > 0 && !urtaDrunk()) || player.balls > 0) && player.totalCocks() > 0 && misc1Name != "Scylla") {
-			if(flags[143] > 0) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00013] == 0 && flags[UNKNOWN_FLAG_NUMBER_00012] > 2 && flags[UNKNOWN_FLAG_NUMBER_00011] > 0 && flags[UNKNOWN_FLAG_NUMBER_00031] < 1 && (urtaDrunk() || flags[UNKNOWN_FLAG_NUMBER_00143] > 0) && flags[UNKNOWN_FLAG_NUMBER_00054] >= 3 && rand(3) == 0 && (flags[UNKNOWN_FLAG_NUMBER_00143] == 0 || (flags[UNKNOWN_FLAG_NUMBER_00147] == 0 && flags[UNKNOWN_FLAG_NUMBER_00145] > 0)) && ((flags[UNKNOWN_FLAG_NUMBER_00143] > 0 && !urtaDrunk()) || player.balls > 0) && player.totalCocks() > 0 && misc1Name != "Scylla") {
+			if(flags[UNKNOWN_FLAG_NUMBER_00143] > 0) {
 				outputText("\n\nUrta's usual place is vacant, though her table still holds a half-drank glass of water.  If it's anything like the last time this happened, she's snuck into a back room with Scylla to relieve some pressure.  It might not hurt to join in...", false);
 			}
 			else {
-				if(flags[143] == 0) {
+				if(flags[UNKNOWN_FLAG_NUMBER_00143] == 0) {
 					outputText("\n\n<b>Though Urta would normally be here getting sloshed, her usual spot is completely vacant.  You ask around but all you get are shrugs and giggles.  Something isn't quite right here.  You see an empty bottle of one of her favorite brands of whiskey still rolling on her table, so she can't have been gone long.  Maybe she had guard business, or had to head to the back rooms for something?</b>", false);
 				}
 				else {
 					outputText("\n\nUrta's usual place is vacant, though her table still holds a half-drank mug of something potent and alcoholic.  If it's anything like the last time this happened, she's snuck into a back room with Scylla to relieve some pressure.  It might not hurt to join in...", false);
 				}
 			}
-			flags[13] = 4;
+			flags[UNKNOWN_FLAG_NUMBER_00013] = 4;
 			if(misc1Name == "Scylla") misc1 = 0;
 			urta = 0;
 			backroom = 2697;
-			flags[13] = 4;
+			flags[UNKNOWN_FLAG_NUMBER_00013] = 4;
 		}
 		else if(urtaBarDescript()) {
 			if(flags[URTA_INCUBATION_CELEBRATION] == 0 && flags[URTA_INCUBATION] > 0) {
@@ -1205,7 +1205,7 @@ function oldbarTelAdre():void {
 		backroomT = "Ask4Amily";		
 	}
 	var dominika:Number = 0
-	if(hours > 17 && hours < 20 && flags[150] != -1) {
+	if(hours > 17 && hours < 20 && flags[UNKNOWN_FLAG_NUMBER_00150] != -1) {
 		dominika = 2739;
 		fellatrixBarAppearance();
 	}
@@ -1214,7 +1214,7 @@ function oldbarTelAdre():void {
 	var nancyText:String = "Barkeep";
 	if(auntNancy(false)) {
 		auntNancy(true);
-		if(flags[263] > 0) nancyText = "Nancy";
+		if(flags[UNKNOWN_FLAG_NUMBER_00263] > 0) nancyText = "Nancy";
 		nancy = 2970;
 	}
 	else outputText("\n\nIt doesn't look like there's a bartender working at the moment.", false);
@@ -1233,7 +1233,7 @@ function oldbarTelAdre():void {
 		outputText("\n\nRo'gar is here with his back turned to the door, wearing his usual obscuring cloak.", false);
 	}		
 	var kath:Number = 0;
-	choices("Dominika",dominika,"Edryn",edryn,"Hel",hel,misc1Name,misc1,nancyText,nancy,rogarT,rogarB,"Urta",urta,"Vala",vala,"Backroom",backroom,"Leave",2211);
+	choices("Dominika",dominika,"Edryn",edryn,"Hel",hel,misc1Name,misc1,nancyText,nancy,rogarT,rogarB,"Urta",urta,"Vala",vala,"Backroom",backroom,"Leave",telAdreMenu);
 }
 
 function tailorShoppe():void {
@@ -1275,7 +1275,7 @@ function buyClothes():void {
 		return;
 	}
 	//Go to debit/update function or back to shop window
-	if(player.hasCock() && player.lust >= 33) simpleChoices("Yes",1074,"No",1072,"",0,"",0,"Flirt",3746);
+	if(player.hasCock() && player.lust >= 33) simpleChoices("Yes",1074,"No",1072,"",0,"",0,"Flirt",flirtWithVictoria);
 	else doYesNo(1074,1072);
 }
 
@@ -1302,7 +1302,7 @@ function armorShop():void {
 		}
 		else egg = 3697;
 	}
-	choices("ChBikni",2276,"FullChn",2277,"FullPlt",2278,"IndecSt",2279,"LthrRob",2280,"ScaleMl",2281,"",0,"Eggshell",egg,"Flirt",3459,"Leave",2211);
+	choices("ChBikni",2276,"FullChn",2277,"FullPlt",2278,"IndecSt",2279,"LthrRob",2280,"ScaleMl",2281,"",0,"Eggshell",egg,"Flirt",yvonneFlirt,"Leave",telAdreMenu);
 }
 
 function weaponShop():void {
@@ -1321,12 +1321,12 @@ function weaponBuy():void {
 	if(player.gems < itemValue(shortName)) {
 		outputText("\n\nYou count out your gems and realize it's beyond your price range.", false);
 		//Goto shop main menu
-		doNext(2553);
+		doNext(weaponShop);
 		return;
 	}
 	else outputText("\n\nDo you buy it?\n\n", false);
 	//Go to debit/update function or back to shop window
-	doYesNo(2555,2553);
+	doYesNo(debitWeapon,weaponShop);
 }
 function debitWeapon():void {
 	spriteSelect(80);
@@ -1343,12 +1343,12 @@ function armorBuy():void {
 	if(player.gems < itemValue(shortName)) {
 		outputText("\n\nYou count out your gems and realize it's beyond your price range.", false);
 		//Goto shop main menu
-		doNext(2274);
+		doNext(armorShop);
 		return;
 	}
 	else outputText("\n\nDo you buy it?", false);
 	//Go to debit/update function or back to shop window
-	doYesNo(2282,2274);
+	doYesNo(debitArmor,armorShop);
 }
 
 function debitArmor():void {
@@ -1361,10 +1361,10 @@ function debitArmor():void {
 }
 
 function urtaIsABadass():void {
-	flags[33] = 1;
+	flags[UNKNOWN_FLAG_NUMBER_00033] = 1;
 	outputText("", true);
 	outputText("There's a commotion in the streets of Tel'Adre.  A dense crowd of onlookers has formed around the center of the street, massed together so tightly that you're unable to see much, aside from the backs the other onlookers' heads.  The sound of blows impacting on flesh can be heard over the crowd's murmuring, alerting you of the fight at the gathering's core.", false);
-	simpleChoices("Investigate",2360,"Who cares?",2211,"",0,"",0,"",0);
+	simpleChoices("Investigate",watchUrtaBeABadass,"Who cares?",telAdreMenu,"",0,"",0,"",0);
 }
 
 //[Invetigate]
@@ -1385,7 +1385,7 @@ function watchUrtaBeABadass():void {
 	
 	outputText("She barks, \"<i>Get this one outside the walls before he wakes.  I won't have this corrupted filth in our city, and make sure you get the wards updated.  If he manages to find his way back, you sorry excuses for guards will be going out with him.</i>\"\n\n", false);
 	outputText("A few dog-morphs in similar armor to Urta approach and lash ropes around the wolf's legs.  They hand a line to a centaur, and together the party begins dragging the unconscious body away.  With the action over, the crowd begins dispersing.  More than a few males nod to Urta respectfully.  She keeps her expression neutral and excuses herself to resume her rounds, wiping her hands off on her armor-studded skirt as she leaves.", false);
-	doNext(2211);
+	doNext(telAdreMenu);
 }
 
 function gymDesc():void {
@@ -1398,7 +1398,7 @@ function gymDesc():void {
 	outputText("", true);
 	outputText("Even though Ingnam, your hometown, was a large, prosperous village, you never saw a gym before coming to Tel'Adre.  The structure itself has numerous architectural differences from the surrounding buildings: short, waist-high walls, an arched ceiling supported by simple columns, and a sand-covered floor.  Perhaps the only 'normal' rooms inside are the changing stands and bathrooms, which ", false);
 	if(player.cor < 35) outputText("thankfully ", false);
-	else if(flags[23] > 0 || player.cor > 80) outputText("unfortunately ", false);
+	else if(flags[UNKNOWN_FLAG_NUMBER_00023] > 0 || player.cor > 80) outputText("unfortunately ", false);
 	outputText("have full sized walls to protect their users' privacy.  A breeze blows by, revealing that the open-air design provides great ventilation.  You note a wall of weights of different sizes and shapes, perfect for building muscle and bulking up.  There are also jogging tracks and even a full-sized, grass-covered track out back for centaurs to run on.  Though some of the equipment seems a bit esoteric in nature, you're sure you can make use of most of this stuff.\n\n", false);
 	
 	outputText("Though the gym sees heavy use by the city guard and various citizens, it's not too busy at present.", false);
@@ -1406,13 +1406,13 @@ function gymDesc():void {
 	//(An extraordinarily well-muscled centaur male is by the weights, lifting some huge dumbbells and sweating like crazy.  In true centaur fashion, he's not wearing any clothes, but then again, male centaurs don't have much that regular clothes would hide.)
 	//(There's a lizan girl jogging laps on one of the tracks.  She's quite thin, but her muscles have a lean definition to them.  She's wearing a one-piece, spandex leotard that hugs her tight ass and pert, b-cup breasts nicely.)  
 	outputText("  There's a centauress in a tank-top just inside the doorway with huge, rounded melons and perky nipples, but she merely coughs to get you to look up and says, \"<i>", false);
-	if(flags[167] == 0) outputText("10 gems an hour to use the facilities here, or 500 for a life-time membership.</i>\"  She has her hands on her hips, and it looks you'll have to pay ten gems to actually get to use any of this stuff.", false);
+	if(flags[UNKNOWN_FLAG_NUMBER_00167] == 0) outputText("10 gems an hour to use the facilities here, or 500 for a life-time membership.</i>\"  She has her hands on her hips, and it looks you'll have to pay ten gems to actually get to use any of this stuff.", false);
 	else outputText("Oh, welcome back " + player.short + ".  Have a nice workout!</i>\"", false);
 	
-	if(player.gems < 10 && flags[167] == 0) {
+	if(player.gems < 10 && flags[UNKNOWN_FLAG_NUMBER_00167] == 0) {
 		outputText("\n\n<b>You reach into your pockets for the fee and come up empty.  It looks like you won't get close to enough to use the equipment or meet anyone.  Damn!</b>", false);
 		//(back to tel'adre streets)
-		doNext(2211);
+		doNext(telAdreMenu);
 		return;
 	}
 	lottieAppearance();
@@ -1435,21 +1435,21 @@ function gymMenu():void {
 	var lottie:Number = lottieAppearance(false);
 	var lottieB:String = "Pig-Lady";
 	var loppe:int = 0;
-	if(flags[281] > 0) lottieB = "Lottie";
+	if(flags[UNKNOWN_FLAG_NUMBER_00281] > 0) lottieB = "Lottie";
 	if(ifrisIntro()) ifris = 2845;
-	if(flags[205] > 0) ifrisB = "Ifris";
+	if(flags[MET_IFRIS] > 0) ifrisB = "Ifris";
 	if(hours > 9 && hours <= 15) {
 		hyena = 2844;
-		if(flags[204] > 0) hyenaB = "Heckel";
+		if(flags[MET_HECKEL] > 0) hyenaB = "Heckel";
 	}
-	if(flags[167] == 0 && player.gems >= 500) membership = 2784;
+	if(flags[UNKNOWN_FLAG_NUMBER_00167] == 0 && player.gems >= 500) membership = 2784;
 	if(flags[PC_IS_A_DEADBEAT_COTTON_DAD] == 0) {
 		if(cottonsIntro()) cotton = 2808;
 	}
-	if(flags[177] > 0) cottonB = "Cotton";
+	if(flags[UNKNOWN_FLAG_NUMBER_00177] > 0) cottonB = "Cotton";
 	if(flags[LOPPE_MET] > 0 && flags[LOPPE_DISABLED] == 0) loppe = 3976;
 	
-	choices("ChangeRoom",2821,cottonB,cotton,hyenaB,hyena,ifrisB,ifris,"Jog",2786,"LiftWeights",2785,"Life Member",membership,"Lottie",lottie,"Loppe",loppe,"Leave",2211);
+	choices("ChangeRoom",changingRoom,cottonB,cotton,hyenaB,hyena,ifrisB,ifris,"Jog",goJogging,"LiftWeights",weightLifting,"Life Member",membership,"Lottie",lottie,"Loppe",loppe,"Leave",telAdreMenu);
 }
 
 function buyGymLifeTimeMembership():void {
@@ -1460,7 +1460,7 @@ function buyGymLifeTimeMembership():void {
 		outputText("  It brings a flush to your face that has nothing to do with exercise.  Maybe you'll be able to con her into some alone time later?", false);
 		stats(0,0,0,0,0,0,(10+player.lib/10),0);
 	}
-	flags[167] = 1;
+	flags[UNKNOWN_FLAG_NUMBER_00167] = 1;
 	player.gems -= 500;
 	statScreenRefresh();
 	//[Bring up gym menu]
@@ -1472,12 +1472,12 @@ function weightLifting():void {
 	//Too tired?  Fuck off.
 	if(player.fatigue > 75) {
 		outputText("<b>There's no way you could exercise right now - you're exhausted!</b>  ", false);
-		if(flags[167] == 0) outputText("It'd be better to save your money and come back after you've rested.", false);
-		doNext(2211);
+		if(flags[UNKNOWN_FLAG_NUMBER_00167] == 0) outputText("It'd be better to save your money and come back after you've rested.", false);
+		doNext(telAdreMenu);
 		return;
 	}
 	//Deduct gems if not a full member.
-	if(flags[167] == 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00167] == 0) {
 		player.gems -= 10;
 		statScreenRefresh();
 	}
@@ -1510,7 +1510,7 @@ function weightLifting():void {
 		addButton(1,"Showers",repeatChooseShower);
 		addButton(4,"Leave",eventParser,13);
 	}
-	else doYesNo(2827,13);
+	else doYesNo(exploreShowers,13);
 }
 
 function goJogging():void {
@@ -1518,12 +1518,12 @@ function goJogging():void {
 	//Too tired?  Fuck off.
 	if(player.fatigue > 70) {
 		outputText("<b>There's no way you could exercise right now - you're exhausted!</b>  ", false);
-		if(flags[167] == 0) outputText("It'd be better to save your money and come back after you've rested.", false);
-		doNext(2211);
+		if(flags[UNKNOWN_FLAG_NUMBER_00167] == 0) outputText("It'd be better to save your money and come back after you've rested.", false);
+		doNext(telAdreMenu);
 		return;
 	}
 	//Deduct gems if not a full member.
-	if(flags[167] == 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00167] == 0) {
 		player.gems -= 10;
 		statScreenRefresh();
 	}
@@ -1596,14 +1596,14 @@ function goJogging():void {
 		addButton(1,"Showers",repeatChooseShower);
 		addButton(4,"Leave",eventParser,13);
 	}
-	else doYesNo(2827,13);
+	else doYesNo(exploreShowers,13);
 }
 
 function yaraSex(girl:Boolean = true):void {
 	spriteSelect(63);
 	outputText("", true);
 	outputText("Yara makes you comfortable and has you look away while she uses her piercing tools.  It hurts, but she's skilled. Before you know it, your piercing is done!  You move to rise, retaining a bit of modesty", false);
-	if(flags[23] > 0) outputText(" despite the guilty thrill", false);
+	if(flags[UNKNOWN_FLAG_NUMBER_00023] > 0) outputText(" despite the guilty thrill", false);
 	outputText(".  \"<i>Hold it,</i>\" Yara commands softly, pressing her hand against your " + chestDesc() + " and pushing you back in your chair.  \"<i>Do you think I'll let you get away without some... field testing?</i>\"\n\n", false);
 
 	outputText("She seems intent on getting some loving - would you like to turn her down, or will you let nature run its course?", false);
@@ -1676,7 +1676,7 @@ function letsDoYaraSex(girl:Boolean = true):void {
 		outputText("Her head stops short, though.  Through your gasping relief, you managed to lock onto her legs.  \"<i>Nice...nice catch,</i>\" is about all Yara manages to share before resuming her purring contentment upside down, limp arms spread across the floor.  After a minute or so, the two of you regain some sort of composure, but the spectacular gymnast from before can only bare to slink around on the ground as she reorients herself.  The most you need to do is fix the back of your chair, lifting it to a more comfortable height.  \"<i>Can you spare one more helping hand here, friend?</i>\" Yara requests, now having at least managed to at least sit up straight.  The two of you exchange a knowing glance as you lift the metal-worker back to her feet.", false);
 	}
 	stats(0,0,0,0,0,0,-100,0);
-	doNext(2212);
+	doNext(piercingStudio);
 }
 
 
@@ -1690,21 +1690,21 @@ function yvonneFlirt():void {
 	if(player.cockTotal() == 0 || player.tallness > 65 || player.cockThatFits(75) == -1) {
 		outputText("Sorry, but you don't look like you'd be much fun.");
 		outputText("</i>\"");
-		doNext(2274);
+		doNext(armorShop);
 		return;
 	}
 	if(flags[YVONNE_FUCK_COUNTER] == 0) outputText("Well, I could use a quick fuck.  If you meant what you said, go change the sign to say 'out' please.");
 	else outputText("You want to go again, huh?  I do love working up a sweat...");
 	outputText("</i>\"");
 	//[Fuck] [Nevermind]
-	simpleChoices("Fuck Her",3461,"Nevermind",3460,"",0,"",0,"",0);
+	simpleChoices("Fuck Her",fuckYvonneInZeBlacksmith,"Nevermind",backOutOfYvonneFuck,"",0,"",0,"",0);
 }
 //[Nevermind]
 function backOutOfYvonneFuck():void {
 	spriteSelect(64)
 	clearOutput();
 	outputText("You politely decline, not wanting to interrupt her work.  Yvonne sighs and begins to pump the bellows, muttering, \"<i>Then you'd better be buying something!</i>\"");
-	doNext(2274);
+	doNext(armorShop);
 }
 //[Fuck]
 function fuckYvonneInZeBlacksmith():void {

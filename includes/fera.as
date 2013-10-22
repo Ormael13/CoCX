@@ -1,4 +1,4 @@
-﻿const PUMPKIN_FUCK_YEAR_DONE:int = 522;
+﻿//const PUMPKIN_FUCK_YEAR_DONE:int = 522;
 
 function isHalloween():Boolean {
 	return ((date.date >= 28 && date.month == 9) || (date.date < 2 && date.month == 10));
@@ -68,7 +68,7 @@ function pumpkinFuck():void {
 		if(player.weaponName == "fists") outputText("brandishing your fists");
 		else outputText("picking up your [weapon]");
 		outputText(" as if it would somehow protect your nude body.");
-		doNext(3689);
+		doNext(pumpkinFuckPartII);
 		stats(0,0,0,0,0,0,-100,2);
 	}
 }
@@ -103,7 +103,7 @@ function pumpkinFuckPartII():void {
 	outputText("\n\nHow long it goes on you can't say.  Somewhere along the lines your memory went dark, repurposed by your coiled masters to allow you to feel even greater heights of bliss.  There's faint flashes of you thrashing, but giant-sized labia keep you pinned in place, your limbs devoured in vaginal restraint.  With a triumphant surge, bulges stretch your abused noise-holes and work deep into your skull.  Your world goes white, an orgasmic soup of delight that washes any vestiges of thought from you and leaves behind only dripping obedience to pleasure.  Your cock fires weakly, offering tribute Fera in sympathy, yet the real thing is in your cum-bathed brain.  Runny tentacle-spooge drips from your nose as you gurgle in bliss, then black out.");
 	hideUpDown();
 	stats(0,0,0,0,0,0,-100,0);
-	doNext(3690);
+	doNext(pumpkinFuckPartIII);
 }
 
 function pumpkinFuckPartIII():void {
@@ -163,7 +163,7 @@ function mountPumpkin():void {
 		else outputText("raising your guard");
 		outputText(" as if it would somehow protect your nude body.");
 		
-		doNext(3726);
+		doNext(pumpkinMountingLevelII);
 	}
 	stats(0,0,0,0,0,0,-100,1);
 }
@@ -200,7 +200,7 @@ function pumpkinMountingLevelII():void {
 	
 	outputText("\n\nHow long it goes on you can't say.  Somewhere along the lines your memory went dark, repurposed by your coiled masters to allow you to feel even greater heights of bliss.  There's faint flashes of you thrashing, but giant-sized testicles keep you pinned in place, your limbs devoured in penile restraint.  With a triumphant surge, bulges stretch your abused noise-holes and work deep into your skull.  Your world goes white, and an orgasmic soup of delight washes over you and erases any vestiges of thought from you, leaving behind only dripping obedience to pleasure.  Your pussy twitches weakly, offering tribute to Fera in sympathy, yet the real thing is in your cum-bathed brain.  Runny tentacle-spooge drips from your nose as you gurgle in bliss, then black out.");
 	//>Next
-	doNext(3725);
+	doNext(mountPumpkinsIII);
 }
 
 function mountPumpkinsIII():void {

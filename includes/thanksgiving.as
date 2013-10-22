@@ -20,7 +20,7 @@ SPITROAST HER! GangHel Style*/
 Note on progression:
    The PC has, after each scene (Baste, Stuff, Spitroast) the option to say \"<i>That's Enough</i>\" or continue on to the next scene -- the scenes must be done in order, however.*/
    
-const TURKEY_FUCK_YEAR_DONE:int = 566;
+//const TURKEY_FUCK_YEAR_DONE:int = 566;
 
 function isThanksgiving():Boolean {
 	return ((date.date >= 21 && date.month == 10) && (date.date < 30 && date.month == 10));
@@ -37,7 +37,7 @@ function datTurkeyRumpMeeting():void {
 	outputText("\n\n\"<i>G-gobble?</i>\"  she asks quietly, her big blue eyes pleading at you.");
 	
 	//[Shoo her Off] [Let her Approach]
-	simpleChoices("Let Approach",3799,"Shoo Away",3800,"",0,"",0,"",0);
+	simpleChoices("Let Approach",letZeTurkeyApproach,"Shoo Away",shooTurkeyAway,"",0,"",0,"",0);
 }
 
 //Shoo her Off -McGirt
@@ -67,7 +67,7 @@ function letZeTurkeyApproach():void {
 	outputText("\n\n\"<i>Gobble?</i>\"  she asks again, her hand drifting onto your leg.  You feel [eachCock] involuntarily stiffening as her slender, alabaster fingers slide along your thigh.  \"<i>Gobble,</i>\" she repeats, brushing your stiffening prick through your [armor].  Oh, is that what she wants?  Well then....");
 	
 	//(Baste Her) (That's Enough)
-	simpleChoices("Baste Her",3802,"No Thanks",3801,"",0,"",0,"",0);
+	simpleChoices("Baste Her",basteThatTurkeyBooty,"No Thanks",noThanksTurkeyGal,"",0,"",0,"",0);
 }
 
 function noThanksTurkeyGal():void {
@@ -132,7 +132,7 @@ function stuffDatTurkeyWithSpoo():void {
 		outputText("\n\nAs you lay atop the turkey, you hear a faint, almost pleading, \"<i>Gobble?</i>\"  from her. Furrowing your brow, you pick yourself up to look at the cum-slathered turkey.  As soon as you're off her, she rolls over onto her hands and knees, her big bubble butt sticking up in the air for you, her plume of feathers tickling your cheeks.  She... still wants more?</i>\"");
 		simpleChoices("Spit-Roast",3804,"",0,"",0,"",0,"That's Enough",3805);
 	}
-	else doNext(3805);
+	else doNext(thatllDoTurkey);
 }
 
 //SPITROAST HER! GangHel Style 
@@ -163,7 +163,7 @@ function spitRoastThatTurkey():void {
 	
 	outputText("\n\nYou pull out of her with a wet squelch, grinning as a flood of your spunk starts to pour from her abused asshole, mixing in with the titgravy and two other loads you blew on her previously.  Supported by her huge tits, the turkey-girl goes limp, finally contented by the third fucking, her body stained and completely covered in your cum.  Looking around her, you see Hel lying on her back, snoring quietly after her own tail-based orgasm, her own body coated liberally with femcum and globs of your own spunk that rubbed off on her.");
 	stats(0,0,0,0,0,-1,-100,0);
-	doNext(3805);
+	doNext(thatllDoTurkey);
 }
 
 function thatllDoTurkey():void {
@@ -191,7 +191,7 @@ function femaleLetZeTurkeyGalApproach():void {
 	
 	outputText("\n\nIt looks like you've found yourself a dinner guest...");
 	//[Appetiser] [Main Course] [Dessert]
-	simpleChoices("Appetiser",3806,"Main Course",3807,"Dessert",3808,"",0,"",0);
+	simpleChoices("Appetiser",turkeyAppetizer,"Main Course",femaleAndTurkeyMainCourse,"Dessert",haveTurkeyGirlDesertInYourCunt,"",0,"",0);
 }
 
 //Appetiser:
@@ -218,7 +218,7 @@ function turkeyAppetizer():void {
 	outputText("\n\nUnable to stop yourself, you wrench your hand out from beneath her garment and before the girl can tell what's happening, you start to pull it up over her head, finally unleashing those fantastic breasts to the fresh air.  She nearly squawks as you drag her up from her relaxed position to free the material trapped beneath her, but calms down once you manage to get the thing over her head, throwing the soaked cloth out of the way.");
 	
 	stats(0,0,0,0,0,0,-100,0);
-	doNext(3807);
+	doNext(femaleAndTurkeyMainCourse);
 }
 
 
@@ -245,7 +245,7 @@ function femaleAndTurkeyMainCourse():void {
 	
 	outputText("\n\nFinally, unable to withstand it any longer, you break you lips away from her teat and push the girl to the ground, your hunger for her body finally having overcome your hunger for her gravy.  She looks up at you with a confused expression to begin with, but once she sees your hands darting to the clasps of your armour, a much more sultry look crosses her features.");
 	stats(0,0,0,0,0,0,30,0);
-	doNext(3808);
+	doNext(haveTurkeyGirlDesertInYourCunt);
 }
 	
 //DESERT

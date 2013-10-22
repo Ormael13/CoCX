@@ -1,4 +1,4 @@
-﻿const RATHAZUL_DEBIMBO_OFFERED:int = 744;
+﻿//const RATHAZUL_DEBIMBO_OFFERED:int = 744;
 
 	//Rathazul the Alchemist
 	//Encounter, random text for potential uses, choices.
@@ -36,27 +36,27 @@ function encounterRathazul():void {
 
 function campRathazul():void {
 	spriteSelect(49);
-	if(flags[274] == 1 && flags[275] > 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00274] == 1 && flags[UNKNOWN_FLAG_NUMBER_00275] > 0) {
 		collectRathazulArmor();
 		return;
 	}
 	//Special rathazul/follower scenes scenes.
-	if(rand(6) == 0 && flags[87] == 0) {
-		flags[87] = 3;
+	if(rand(6) == 0 && flags[UNKNOWN_FLAG_NUMBER_00087] == 0) {
+		flags[UNKNOWN_FLAG_NUMBER_00087] = 3;
 		//Pure jojo
-		if(flags[84] == 0 && player.hasStatusAffect("PureCampJojo") >= 0 && flags[80] == 0) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00084] == 0 && player.hasStatusAffect("PureCampJojo") >= 0 && flags[UNKNOWN_FLAG_NUMBER_00080] == 0) {
 			jojoOffersRathazulMeditation();
 			return;
 		}
-		if(flags[82] == 0 && flags[43] == 1 && amilyFollower()) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00082] == 0 && flags[AMILY_FOLLOWER] == 1 && amilyFollower()) {
 			AmilyIntroducesSelfToRathazul();
 			return;
 		}
-		if(flags[82] == 1 && flags[43] == 1 && amilyFollower()) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00082] == 1 && flags[AMILY_FOLLOWER] == 1 && amilyFollower()) {
 			amilyIngredientDelivery();
 			return;
 		}
-		if(flags[82] == 2 && flags[43] == 1 && amilyFollower()) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00082] == 2 && flags[AMILY_FOLLOWER] == 1 && amilyFollower()) {
 			amilyAsksAboutRathazulsVillage();
 			return;
 		}
@@ -162,7 +162,7 @@ function rathazulWorkOffer():Boolean {
 	var reductos:Number = 0;
 	if(player.hasStatusAffect("Camp Rathazul") >= 0 && player.statusAffectv2("metRathazul") >= 4) {
 		outputText("The rat hurries over to his supplies and produces a container of paste, looking rather proud of himself, \"<i>Good news everyone!  I've developed a paste you could use to shrink down any, ah, oversized body parts.  The materials are expensive though, so I'll need ", false);
-		if(flags[82] >= 2) outputText("50", false);
+		if(flags[UNKNOWN_FLAG_NUMBER_00082] >= 2) outputText("50", false);
 		else outputText("100", false);
 		outputText(" gems for each jar of ointment you want.</i>\"\n\n", false);
 		totalOffers++;
@@ -171,7 +171,7 @@ function rathazulWorkOffer():Boolean {
 	}
 	//SPOIDAH
 	var silk:Number = 0;
-	if(player.hasStatusAffect("Camp Rathazul") >= 0 && hasItem("T.SSilk", 1) && flags[274] + flags[275] == 0) {
+	if(player.hasStatusAffect("Camp Rathazul") >= 0 && hasItem("T.SSilk", 1) && flags[UNKNOWN_FLAG_NUMBER_00274] + flags[UNKNOWN_FLAG_NUMBER_00275] == 0) {
 		silk = 5;
 		spoken = true;
 		totalOffers++;
@@ -306,7 +306,7 @@ function RathazulArmorMenu():void {
 	if(hasItem("B.Chitn", 5)) {
 		beeArmor = 2180;
 	}
-	if(player.hasStatusAffect("Camp Rathazul") >= 0 && hasItem("T.SSilk", 1) && flags[274] + flags[275] == 0) {
+	if(player.hasStatusAffect("Camp Rathazul") >= 0 && hasItem("T.SSilk", 1) && flags[UNKNOWN_FLAG_NUMBER_00274] + flags[UNKNOWN_FLAG_NUMBER_00275] == 0) {
 		silk = 2999;
 	}
 	simpleChoices("BeeArmor",beeArmor,"GelArmor",gelArmor,"SpiderSilk",silk,"",0,"Back",2070);
@@ -334,7 +334,7 @@ function craftSilkArmor():void {
 		return;
 	}
 	//[Yes] [No]
-	doYesNo(3000,3001);
+	doYesNo(commissionSilkArmorForReal,declineSilkArmorCommish);
 }
 function commissionSilkArmorForReal():void {
 	spriteSelect(49);
@@ -356,18 +356,18 @@ function chooseArmorOrRobes():void {
 	spriteSelect(49);
 	outputText("Rathazul grunts in response and goes back to work.  You turn back to the center of your camp, wondering if the old rodent will actually deliver the wondrous item that he's promised you.", true);
 	doNext(13);
-	flags[274] = 24;
-	trace("274: " + flags[274]);
+	flags[UNKNOWN_FLAG_NUMBER_00274] = 24;
+	trace("274: " + flags[UNKNOWN_FLAG_NUMBER_00274]);
 }
 function collectRathazulArmor():void {
 	spriteSelect(49);
 	outputText("", true);
 	outputText("Rathazul beams and ejaculates, \"<i>Good news everyone!  Your ", false);
-	if(flags[275] == 1) outputText("armor", false);
+	if(flags[UNKNOWN_FLAG_NUMBER_00275] == 1) outputText("armor", false);
 	else outputText("robe", false);
 	outputText(" is finished!</i>\"\n\n", false);
 	//Robe
-	if(flags[275] == 2) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00275] == 2) {
 		outputText("Hanging from a small rack is a long, flowing robe.  It glitters brightly in the light, the pearl-white threads seeming to shimmer and shine with every ripple the breeze blows through the soft fabric.  You run your fingers over the silken garment, feeling the soft material give at your touch.  There's a hood with a golden border embroidered around the edge.  For now, it hangs limply down the back, but it would be easy to pull up in order to shield the wearer's eyes from harsh sunlight or rainy drizzle.  The sleeves match the cowl, circled with intricate threads laid out in arcane patterns.\n\n", false);
 		
 		outputText("Rathazul gingerly takes down the garment and hands it to you.  \"<i>Don't let the softness of the material fool you.  This robe is tougher than many armors, and the spider-silk's properties may even help you in your spell-casting as well.</i>\"\n\n", false);
@@ -381,8 +381,8 @@ function collectRathazulArmor():void {
 		shortName = "SSArmor";
 	}
 	//Reset counters
-	flags[275] = 0;
-	flags[274] = 0;
+	flags[UNKNOWN_FLAG_NUMBER_00275] = 0;
+	flags[UNKNOWN_FLAG_NUMBER_00274] = 0;
 	menuLoc = 2;
 	takeItem();
 }

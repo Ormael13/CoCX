@@ -1,4 +1,4 @@
-﻿const SALON_PAID:int = 441;
+﻿//const SALON_PAID:int = 441;
 function hairDresser():void {
 	outputText("While exploring the mountain, you find a cleverly concealed doorway.  From inside you can hear the sound of blades being sharpened.  Do you enter the doorway?", true);
 	doYesNo(2169,13);
@@ -8,8 +8,8 @@ function salonPaymentMenu():void {
 	var blow:Number = 0;
 	if(player.hasCock()) blow = 2154;
 	var minoCum:Number = 0;
-	if(flags[142] > 0) minoCum = 2696;
-	choices("Goblin Blow",blow,"Canine",2155,"Imp",2156,"Minotaur",2157,"Incubus",2158,"",0,"",0,"",0,"Buy MinoCum",minoCum,"Leave",13);
+	if(flags[UNKNOWN_FLAG_NUMBER_00142] > 0) minoCum = 2696;
+	choices("Goblin Blow",blow,"Canine",gloryholeDoggie,"Imp",gloryholeImp,"Minotaur",gloryholeMinotaur,"Incubus",gloryholeIncubus,"",0,"",0,"",0,"Buy MinoCum",minoCum,"Leave",13);
 }
 function salonPurchaseMenu():void {
 	flags[SALON_PAID] = 1;
@@ -21,7 +21,7 @@ function salonPurchaseMenu():void {
 	var minoCum:Number = 0;
 	var mudFacial:Number = 0;
 	var sandFacial:Number = 0;
-	if(flags[142] > 0) minoCum = 2696;
+	if(flags[UNKNOWN_FLAG_NUMBER_00142] > 0) minoCum = 2696;
 	if(player.hairLength > 2) cutShort = 2159;
 	if(player.hairLength > 13) cutMedium = 2160;
 	if(player.hairLength >= 26) cutLong = 2161;
@@ -57,7 +57,7 @@ function hairDresserRepeatGreeting():void {
 	spriteSelect(38);
 	var minoCum:Number = 0;
 	//Chance for mino craziness here
-	if(rand(5) == 0 && (player.hasPerk("Minotaur Cum Addict") >= 0 || flags[20] > 0)) {
+	if(rand(5) == 0 && (player.hasPerk("Minotaur Cum Addict") >= 0 || flags[UNKNOWN_FLAG_NUMBER_00020] > 0)) {
 		minotaurCumBukkakeInSalon();	
 		return;
 	}
@@ -160,7 +160,7 @@ function goblinHairDresserFacefuck():void {
 function hairDressingMainMenu():void {
 	spriteSelect(38);
 	outputText("Lynnette offers and explains their options, \"<i>So what'll it be hun?  We could cut it down or give you a lengthening treatment. Or you can get a hair-dye to use on your own.  Just remember to come back in a few days for a touchup.</i>\"", false);
-	if(flags[142] > 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00142] > 0) {
 		outputText("\n\nOf course you could always spend some gems and buy some minotaur cum instead...", false);
 	}
 	salonPurchaseMenu();
@@ -215,7 +215,7 @@ function hairGrow():void {
 	}
 	outputText("Lynnette grabs a bottle and squirts a white fluid into your hair.  You really hope it isn't your payment.  But it must not be, as within short order you feel the added weight of ", true);
 	temp = rand(3) + 3;
-	flags[66] = 0;
+	flags[UNKNOWN_FLAG_NUMBER_00066] = 0;
 	player.hairLength += temp;
 	outputText(num2Text(temp) + " more inches of " + player.hairColor + " hair.", false);
 	doNext(13);
@@ -328,14 +328,14 @@ function minotaurCumBukkakeInSalon():void {
 	outputText("The strength goes completely out of your " + player.legs() + ", but you manage to hold yourself up long enough for your stud to flex his cock inside you and fill up your backdoor with more potent addiction.  You slide off, nerveless and still orgasming as jizz rains on your back from the abandoned cock, rolling off you to add to the ever-widening puddle of fluids on the floor.  Smiling vacantly and addled on more minotaur-cum than any one person has reason to handle, you stumble up on all fours and crawl to the next one.  More...", false);
 	//[NEXT]
 	stats(0,0,0,0,2,2,-100,2);
-	doNext(2695);
+	doNext(minotaurSalonFollowUp);
 }
 function minotaurSalonFollowUp():void {
 	spriteSelect(38);
 	outputText("", true);
-	if(flags[142] == 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00142] == 0) {
 		//Unlock mino cum purchase
-		flags[142]++;
+		flags[UNKNOWN_FLAG_NUMBER_00142]++;
 		//text goez here
 		outputText("Lynnette slaps your face, waking you from your stupor.  What?  Where are you?  You look around and realize you're strapped into a barber's chair and caked with white goop, but why?\n\n", false);
 		outputText("The goblin answers before you can vocalize your query, \"<i>Baby, you're so cum-hungry you make my daughters look like chaste virgins!  I haven't seen anyone go to town on minotaurs like that since my mother passed away, Marae guide her soul.  Normally we don't have that much use for the minotaurs outside of a bit of recreational drug-play, but you milked out so much cum that we can start selling it!  Isn't that great!?</i>\"\n\n", false);

@@ -2,9 +2,9 @@
 //" + flags[MILK_NAME] + ": This slut's name. Can't call her Bath Slut forever. Unless you do.
 //[MilkySize]: Does Milky have GIANT HUGE BOOBS that she can't fucking walk with, does she have a big plump set of HHH cups you can smother yourself and your big fat cock with, or a more reasonable DD bust, the perfect size to drink from, titfuck, and play with all day long.
 
-const MILK_NAME:int = 869;
-const MILK_SIZE:int = 870;
-const MET_MILK_SLAVE:int = 871;
+//const MILK_NAME:int = 869;
+//const MILK_SIZE:int = 870;
+//const MET_MILK_SLAVE:int = 871;
 
 function milkSlave():Boolean {
 	if(flags[MILK_NAME] is String) return true;
@@ -349,7 +349,7 @@ function milkBathTime():void {
 	if(flags[VALARIA_AT_CAMP] == 1) count++;
 	if(amilyFollower() && !amilyCorrupt()) count++;
 	if(followerHel()) count++;
-	if(flags[238] == 1) count++;
+	if(flags[UNKNOWN_FLAG_NUMBER_00238] == 1) count++;
 	if(followerEmber()) count++;
 	if(followerKiha()) count++;
 	if(count >= 3) {
@@ -399,7 +399,7 @@ function communalBath():void {
 	if(followerHel()) outputText("\n\nWith a gleeful shout, Hel rushes the pool.  In one swift motion, she tosses her scale bikini aside and cannon-balls in, splashing everyone with a creamy tidal wave.  Chuckling, you clear your eyes - just in time for her bikini bottom to land on your face.");
 	
 	//If PC has Izma: 
-	if(flags[238] == 1) outputText("\n\nYou didn't even notice Izma getting into the pool.  The first sign of her is the sudden appearance of a bright red fin sticking above the water, closing in on you.  She breaches at the last moment, laughing gaily as she gives her alpha a kiss.");
+	if(flags[UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("\n\nYou didn't even notice Izma getting into the pool.  The first sign of her is the sudden appearance of a bright red fin sticking above the water, closing in on you.  She breaches at the last moment, laughing gaily as she gives her alpha a kiss.");
 	
 	//{If PC has Ember:
 	if(followerEmber()) outputText("\n\nEmber approaches the pool, reptilian tail swishing eagerly.  " + emberMF("He","She") + " lowers " + emberMF("himself","herself") + " in with ease, sighing contentedly as milk washes over " + emberMF("his","her") + " scaled body.  \"<i>Is this how you humans bathe normally?</i>\"  " + emberMF("He","She") + " muses.  \"<i>How bizarre.</i>\"");

@@ -2,7 +2,7 @@
 
 function ifrisIntro():Boolean {
 	if(hours >= 15) {
-		if(flags[205] > 0) outputText("\n\nIfris is standing in the corner of the room, wearing her usual black bikini and eyeing you as soon as you walk in.", false);
+		if(flags[MET_IFRIS] > 0) outputText("\n\nIfris is standing in the corner of the room, wearing her usual black bikini and eyeing you as soon as you walk in.", false);
 		else outputText("\n\nIn the corner of the room stands a lone figure, her bright cherry-red skin making her stand out.  A long, spaded tail swishes behind her slowly, the length much thicker than most demon tails you've seen.  She couldn't be more than five feet tall, her slender, lithe form looking more athletic than muscular.  A black bikini covers just enough to be modest, her supple C-cup breasts more perky than they have a right to be.  She slowly rolls a lock of springy, curly hair around one index finger, her glowing crimson gaze set on a nearby weight-lifting machine incredulously.  Feeling your eyes on her glistening, oiled skin, she slowly turns them to you instead.", false);
 		return true;
 	}
@@ -14,8 +14,8 @@ function ifrisIntro():Boolean {
 function approachIfris():void {
 	spriteSelect(28);
 	outputText("", true);
-	if(flags[205] == 0) {
-		flags[205] = 1;
+	if(flags[MET_IFRIS] == 0) {
+		flags[MET_IFRIS] = 1;
 		outputText("The curious, appraising gaze on her pretty face turns into a pleased smile as you walk over, and her clawed toes click gently on the floor as she takes the last few steps to meet you. As you open your mouth to speak she preempts you, those pretty, black-painted lips parting, a voice too husky and smooth to be up to any good greeting you.\n\n", false);
 	
 		outputText("\"<i>Hello, darling. I'm so glad you decided to join me... You can call me Ifris.</i>\" She tilts her head to the side cutely, gazing up at you through her lashes.\n\n", false);
@@ -25,10 +25,10 @@ function approachIfris():void {
 		outputText("\"<i>It's nice to meet you. Are you here to use the machines, or were you just hoping to watch the pretty bodies working up a sweat?</i>\" she giggles cutely, two of her clawed fingers covering her mouth demurely.\n\n", false);
 	}
 	//2a-Repeat approach, no sex-
-	else if(flags[206] + flags[207] == 0) {
+	else if(flags[TIMES_FUCKED_IFRIS_BLOWJOB] + flags[TIMES_FUCKED_IFRIS_LICKED] == 0) {
 		outputText("Ifris grins as you walk over again, the devil girl's dark tongue dabbing at her even darker lips as she all but coos up at you.\n\n", false);
 
-		if(flags[208] == 0) outputText("\"<i>Hello darling... here to actually give me a show?</i>\"\n\n", false);
+		if(flags[IFRIS_SHOWED_OFF] == 0) outputText("\"<i>Hello darling... here to actually give me a show?</i>\"\n\n", false);
 		else outputText("\"<i>Hello darling... here to give another show? I did so enjoy your last performance.</i>\"\n\n", false);
 	}
 	//2b-Repeat approach, had oral-
@@ -43,7 +43,7 @@ function approachIfris():void {
 	}
 	outputText("(You could go ahead and work out while she watches, ask her to join you, or leave.)", false);
 	//Work out || Ask Her To Join || Leave?
-	simpleChoices("Work Out",2846,"Join Me?",2847,"",0,"",0,"Leave",2783);
+	simpleChoices("Work Out",workOutForIfris,"Join Me?",askIfrisToJoinYou,"",0,"",0,"Leave",gymDesc);
 }
 //3a-PC responds they want to work out-
 function workOutForIfris():void {
@@ -51,7 +51,7 @@ function workOutForIfris():void {
 	outputText("", true);
 	if(player.fatigue > 70) {
 		outputText("There's no way you could work out as tired as you are.  Maybe you could come back to flirt with the demonic-looking girl during your next workout.", false);
-		doNext(2783);
+		doNext(gymDesc);
 		return;
 	}
 	outputText("You smile to the devil-looking-girl and tell her you're just here to get your work-out on.\n\n", false);
@@ -60,7 +60,7 @@ function workOutForIfris():void {
 
 	outputText("\"<i>I hope you don't mind if I keep you company. I'd love to... see you in action.</i>\"\n\n", false);
 	//WORK OUT or SHOW OFF?
-	simpleChoices("Work Out",2848,"Show Off",2849,"",0,"",0,"",0);
+	simpleChoices("Work Out",liftWhileIfrisWatches,"Show Off",showOffForIfris,"",0,"",0,"",0);
 }
 //3b-PC asks if she'd like to join them-
 function askIfrisToJoinYou():void {
@@ -68,7 +68,7 @@ function askIfrisToJoinYou():void {
 	outputText("", true);
 	if(player.fatigue > 70) {
 		outputText("There's no way you could work out as tired as you are.  Maybe you could come back to flirt with the demonic-looking girl during your next workout.", false);
-		doNext(2783);
+		doNext(gymDesc);
 		return;
 	}
 	outputText("You ask Ifris if she'd like to join you in some exercises. Her eyes glint mischievously, obviously finding unintended meaning in your words, and you can't help but blush.\n\n", false);
@@ -77,15 +77,15 @@ function askIfrisToJoinYou():void {
 
 	outputText("You shrug at her response, but there's something about the way she eyes you now...", false);
 	//WORK OUT or SHOW OFF?
-	simpleChoices("Work Out",2848,"Show Off",2849,"",0,"",0,"",0);
+	simpleChoices("Work Out",liftWhileIfrisWatches,"Show Off",showOffForIfris,"",0,"",0,"",0);
 }
 
 //4a-PC does a modest work out-
 function liftWhileIfrisWatches():void {
 	spriteSelect(28);
-	flags[208]++;
+	flags[IFRIS_SHOWED_OFF]++;
 	outputText("", true);
-	if(flags[167] == 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00167] == 0) {
 		outputText("The centauress working the door walks up to collect her fee, and you drop 10 gems for an hour workout into her hand.\n\n", false);
 		player.gems -= 10;
 		statScreenRefresh();
@@ -108,10 +108,10 @@ function liftWhileIfrisWatches():void {
 //4b-PC decides to show off, possible strength requirement?-
 function showOffForIfris():void {
 	spriteSelect(28);
-	flags[208]++;
+	flags[IFRIS_SHOWED_OFF]++;
 	fatigue(30);
 	outputText("", true);
-	if(flags[167] == 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00167] == 0) {
 		outputText("The centauress working the door walks up to collect her fee, and you drop 10 gems for an hour workout into her hand.\n\n", false);
 		player.gems -= 10;
 		statScreenRefresh();
@@ -128,7 +128,7 @@ function showOffForIfris():void {
 
 		outputText("Humiliated, you stand and leave, nursing your sore body and ego.", false);
 		//Reset 'shown off for ifris'
-		flags[208] = 0;
+		flags[IFRIS_SHOWED_OFF] = 0;
 		takeDamage(10);
 		doNext(13);
 		return;
@@ -141,7 +141,7 @@ function showOffForIfris():void {
 
 		outputText("Well, at least you had the good sense to stop before you hurt yourself...\n\n", false);
 		doNext(13);
-		flags[208] = 0;
+		flags[IFRIS_SHOWED_OFF] = 0;
 		return;
 	}
 	//4b5-PC masculinity > 60, corruption > 75, has cow features-
@@ -164,7 +164,7 @@ function showOffForIfris():void {
 			return;
 		}
 		//First time
-		if(flags[206] == 0) {
+		if(flags[TIMES_FUCKED_IFRIS_BLOWJOB] == 0) {
 			outputText("Gripping the bars tightly, you grit your teeth and give a mighty push upwards! Your muscles strain and you grunt with effort, a little amazed gasp leaving the red beauty's lips as the weights lift slowly but surely. You can't help but grin proudly as your elbows lock, the weight completely lifted, and you bring it back down, only to push again.\n\n", false); 
 	
 			outputText("Ifris moves closer, her oiled skin glistening as she watches your muscles straining, bending in to get a closer look. As you look down you notice her bend forward, the weight momentarily forgotten as those luscious, perfect mounds of tit-flesh almost spill out of her bikini top. She grins slowly at you, following your gaze, and even giving a teasing little shake, making the orbs jiggle.\n\n", false); 
@@ -203,11 +203,11 @@ function showOffForIfris():void {
 
 			outputText("With that slow, almost painfully-hard suckle, she pops from the " + cockHead(0) + " of your " + cockDescript(0) + " out and sucks in a deep breath, giggling and leaning down to kiss you.  She murmurs, \"<i>You do better each time, darling. I'll see you again I hope.</i>\"  With that, she's leaving you again, all but skipping out the door, that wetness trickling down her long, red legs...", false);
 		}
-		flags[206]++;
+		flags[TIMES_FUCKED_IFRIS_BLOWJOB]++;
 	}
 	//4b4-PC succeeds! Is female!-
 	else if(player.hasVagina()) {
-		if(flags[207] == 0) {
+		if(flags[TIMES_FUCKED_IFRIS_LICKED] == 0) {
 			outputText("Gripping the bars tightly, you grit your teeth and give a mighty push upwards! Your muscles strain and you grunt with effort, a little amazed gasp leaving the red beauty's lips as the weights lift slowly but surely. You can't help but grin proudly as your elbows lock, the weight completely lifted, and you bring it back down, only to push again.\n\n", false);
 	
 			outputText("Ifris moves closer, her oiled skin glistening as she watches your muscles straining, bending in to get a closer look. As you look down you notice her bend forward, the weight momentarily forgotten as those luscious, perfect mounds of tit-flesh almost spill out of her bikini top. She grins slowly at you, following your gaze, and even giving a teasing little shake, making the orbs jiggle.\n\n", false);
@@ -240,7 +240,7 @@ function showOffForIfris():void {
 
 			outputText("\"<i>Always a pleasure, darling. I can't wait to see you again soon...</i>\" And she's leaving you once more, her butt swaying more than usual, moisture leaking down her long, slender legs...", false);
 		}
-		flags[207]++;
+		flags[TIMES_FUCKED_IFRIS_LICKED]++;
 	}
 	//Stat changes HERE!
 	if(player.str < 90) stats(.5,0,0,0,0,0,0,0);

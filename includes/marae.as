@@ -103,13 +103,13 @@ function encounterMarae():void {
 				outputText("Spellbound, you watch as she forces more and more fingers into her hungry flower-hole, \"<i>Ever since then, I've just been drinking in more and corruption, and waiting for someone to come here and help fill my hole.  I've played with my flower for what has felt like days on end.  Every time I come harder and harder.  The more I let go the better it is.  Do you know what I did this morning?  I let my branches grow tentacles to fuck my mouth and pussy at the same time.  I came over and over and over, and then I had my roots pull in all the cum they could find to fill my womb with.</i>\"\n\n", false);
 				outputText("You gasp at the change she has gone through, getting more than a little turned on yourself.  Thinking that a once chaste goddess has been reduced to a horny slut makes you wonder how you stand any chance of victory.  Marae keeps up her show, \"<i>It's so good.  Come join me in it.  I gave in to the pleasure already.  If you look behind me, you can see what's left of my soul.  I could feel it dripping out through my cunny a little bit each time I came.  After a while it flowed together and started to crystalize.  I think the demons call it lethicite, but I just wish I still had a soul so I could do it all over again.  Come fuck me, I want to watch you go mad while you cum out your soul.</i>\"\n\n", false);
 				outputText("It sounds like a very pleasant offer, but it would mean the total abandonment of your reasons for coming here.   You could probably get away if you were to run, she doesn't seem to be nearly as powerful.  Or you could risk trying to steal the lethicite before making your getaway, but it wouldn't be hard for her to catch you that close.", false);
-				simpleChoices("Run",2078,"Lethicite",2076,"Accept",2077,"",0,"",0);
+				simpleChoices("Run",2078,"Lethicite",maraeStealLethicite,"Accept",maraeBadEnd,"",0,"",0);
 			}
 			//Repeat corrupt meeting
 			else {
 				outputText("Marae smiles and leans forwards, cupping her breasts in her hands.  Amazingly, she flows out from the tree, standing as a free woman before you.  She massages her G-sized breasts, winking lewdly and pinching her shining purplish nipples, squeezing out droplets of honey-colored sap.  She blows you a kiss while the flower at her groin opens welcomingly.  She moans, \"<i>Reconsider my offer yet, " + player.short + "?  I won't force you, but don't you want to spend eternity in heaven with a living goddess?</i>\"", false);
 				//Yes - accept, No- run
-				doYesNo(2077,2078);
+				doYesNo(maraeBadEnd,2078);
 			}
 		}
 	}	
@@ -228,7 +228,7 @@ function maraeStealLethicite():void {
 
 function level2MaraeEncounter():void {
 	spriteSelect(40);
-	flags[100] = 1;
+	flags[UNKNOWN_FLAG_NUMBER_00100] = 1;
 	outputText("", true);
 	outputText("While rowing about the lake", false);
 	if(player.str > 70) outputText(" with ease", false);
@@ -269,19 +269,19 @@ function level2MaraeEncounter():void {
 	//Cant fly?  Stuck for sex!
 	if(!player.canFly()) {
 		outputText("You don't see any escape!", false);
-		doNext(2541);
+		doNext(MaraeIIStageII);
 	}
 	//Can fly?  Choice to run
 	else {
 		outputText("You don't think she's counted on your wings.  If you tried to fly you could probably get out of the reach of her tentacles in short order.", false);
-		simpleChoices("Stay",2541,"",0,"",0,"",0,"Fly Away",2543);
+		simpleChoices("Stay",MaraeIIStageII,"",0,"",0,"",0,"Fly Away",MaraeIIFlyAway);
 	}
 }
 	
 function MaraeIIStageII():void {
 	spriteSelect(40);
 	outputText("", true);
-	flags[100] = 2;
+	flags[UNKNOWN_FLAG_NUMBER_00100] = 2;
 	//[Girls]
 	//Marae grows vine-cawks for DP action
 	if(player.gender == 2) {
@@ -415,7 +415,7 @@ function MaraeIIStageII():void {
 		outputText("You slide out and slump over, utterly exhausted by the breeding session.  The goddess pulls her tentacles from your abused openings, marveling at the outflow of plant-spunk while you relax and pass out.  You feel her fold your hands around your belly to cradle the pregnant bulge, and then you're snoring contentedly.\n\n", false);
 	}
 	//ONWARD TO NUMBER 3
-	doNext(2542);
+	doNext(MaraePt2RoundIIIPrizes);
 }
 
 function MaraePt2RoundIIIPrizes():void {

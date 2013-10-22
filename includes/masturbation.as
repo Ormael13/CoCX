@@ -1,5 +1,5 @@
-﻿const DICK_EGG_INCUBATION:int = 592;
-const TIMES_EGGED_IN_COCK:int = 593;
+﻿//const DICK_EGG_INCUBATION:int = 592;
+//const TIMES_EGGED_IN_COCK:int = 593;
 
 //Masturbate Menu
 function masturbateMenu():void {
@@ -19,11 +19,11 @@ function masturbateMenu():void {
 	else addButton(button,"Masturbate",eventParser,10);
 	button++;
 	//catofellato
-	if(player.hasCock() && (player.hasPerk("Flexibility") >= 0 || flags[67] > 0)) {
+	if(player.hasCock() && (player.hasPerk("Flexibility") >= 0 || flags[UNKNOWN_FLAG_NUMBER_00067] > 0)) {
 		addButton(button,"Lick Cock",eventParser,2487);
 		button++;
 	}
-	if(player.hasVagina() && (player.hasPerk("Flexibility") >= 0 || flags[67] > 0)) {
+	if(player.hasVagina() && (player.hasPerk("Flexibility") >= 0 || flags[UNKNOWN_FLAG_NUMBER_00067] > 0)) {
 		addButton(button,"Lick 'Gina",lickYerGirlParts);
 		button++;
 	}
@@ -1961,7 +1961,7 @@ function deluxeDildo():void {
 			//(+sensitivity by 3 & intellect -2 & libido +1	)
 		}
 		//Option Jojo veyeurism?
-		if(monk >= 5 && flags[80] == 0) {
+		if(monk >= 5 && flags[UNKNOWN_FLAG_NUMBER_00080] == 0) {
 			outputText("\n\nAs you stand and try to clean up you manage to spot Jojo off in the woods, ", false);
 			if(player.hasStatusAffect("Tentacle Jojo") >= 0) outputText("his tentacles splattering mouse-jizz everywhere as he gets off from your show.", false);
 			else outputText("splattering himself with mouse-spunk as he finishes enjoying your inadvertent show.  He runs off before you have a chance to react.", false);
@@ -1992,7 +1992,7 @@ function centaurMasturbation():Boolean {
 	//NippleCunt scene
 	if(selector == 0) {
 		outputText("You shrug out of your " + player.armorName + ", ", false);
-		if(flags[23] > 0) outputText("panting lustily as you envision being caught masturbating your " + nippleDescript(0) + "s.", false);
+		if(flags[UNKNOWN_FLAG_NUMBER_00023] > 0) outputText("panting lustily as you envision being caught masturbating your " + nippleDescript(0) + "s.", false);
 		else if(player.cor < 33) outputText("blushing a bit as you look down at your " + nippleDescript(0) + "s.", false);
 		else if(player.cor < 66) outputText("shivering as the air hits your exposed " + nippleDescript(0) + "s.", false);
 		else outputText("smiling to yourself as you blatantly oogle your " + nippleDescript(0) + "s.", false);
@@ -2188,12 +2188,12 @@ function centaurMasturbation():Boolean {
 	}
 	//Failsafe - you suck.
 	else {
-		if(flags[60] == 0) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00060] == 0) {
 			outputText("No matter how you twist and turn, you can't reach anywhere close to your ", false);
 			if(player.hasCock() || player.hasVagina()) outputText("genitalia", false);
 			else outputText("anything remotely sexual", false);
 			outputText("!  It seems that being a centaur has a rather crippling downside – you can't reach around to get yourself off and sate your lusts!\n\n", false);
-			flags[60]++;
+			flags[UNKNOWN_FLAG_NUMBER_00060]++;
 		}
 		else {
 			outputText("You still can't reach around to masturbate yourself.  Being half-horse sure is inconvenient!\n\n", false);
@@ -2215,8 +2215,8 @@ function lickYerGirlParts():void {
 		return;
 	}
 	//[1st time doing this]
-	if(flags[67] == 0) {
-		flags[67]++;
+	if(flags[UNKNOWN_FLAG_NUMBER_00067] == 0) {
+		flags[UNKNOWN_FLAG_NUMBER_00067]++;
 		outputText("You take off your " + player.armorName + " and take a seat on the ground. You spread your legs and look down at your sex. It's aching for something more than just your fingers, and you have a craving to taste the lustful juices leaking out. A very perverted idea flashes through your brain, putting a smile on your face. You lay on your side and spread your legs again, giving you a perfect view of your " + vaginaDescript(0) + ". You lean your head down with your tongue sticking out; closer and closer you come to your own cunt, feeling the heat from your puss flowing against your face as your own hot breath returns the warmth. You're only a small distance away from tasting it before you can't bend any farther.  Your cunny can almost feel your tongue wriggling its slimy warm wetness only a few centimeters away. You pull your head back and let out a frustrated sigh before you remember how the cats in your village got to those hard to reach places: they stretched one of their legs straight up. Following their example, you point one leg straight to the sky and close your eyes as you plunge your head down. You slowly open one eye to see that you're face to face with your " + vaginaDescript(0) + "; you're amazed that you are actually able to do it. You begin lapping your tongue up and down the slutty snatch.\n\n", false);
 			
 		outputText("The feeling is amazing, as you flick your tongue across your swollen " + clitDescript() + ". Juices leak from your moist hole, filling your mouth with the sweet taste of girlcum. You can feel your entire sex pulsing and throbbing around your tongue as you plumb the depths of your " + vaginaDescript(0) + ".  The vibrations from your moans and screams of pleasure cause the intense feelings to increase, making you a slave to your own needs. Your juices flow down your chin as you try to swallow every last drop. You crane your neck, giving you deeper access to your wanting honey pot. You can feel yourself tightening around your tongue as it rams into your pussy, soaking up the juices as you slowly reach your peak.  You lick and suck hard around your " + clitDescript() + ", using both your hands to spread your cunt farther open. You move your head in an up and down motion just like a cat when they groom themselves. Your lapping and tongue play continues until you can feel your body tense up, ready to cum.\n\n", false);
@@ -2250,8 +2250,8 @@ function catAutoLick():void {
 	//Male Masturbation
 	if(player.gender == 1 || player.gender == 3) {
 		//1st time
-		if(flags[67] == 0) {
-			flags[67]++;
+		if(flags[UNKNOWN_FLAG_NUMBER_00067] == 0) {
+			flags[UNKNOWN_FLAG_NUMBER_00067]++;
 			outputText("You undress from your " + player.armorName + " and take a seat on the ground. You take a look at your transformed body, making notes of things you haven't noticed before. Suddenly, an idea pops into your head: the cats back at the village could reach any place on their body with their tongues! You wonder... closing your eyes and slowly bending down, you try to get as close as possible to your " + cockDescript(0) + ". It only takes a moment before you feel warm breath blowing against your dick. You open your eyes, coming face to face with your erect member. Your body is twisted and bent in a way that only cats can manage. You huff a cloud of hot air on your pecker, and the resulting sensation causes your eyes to roll back in your head. That was incredible and it's about to get better as another thought passes through your head, giving you a dirty smile.\n\n", false);
 
 			outputText("You lick the head of your throbbing man-meat and another bodyshaking shudder flows through you. You do it a few more times, enjoying the sensations running around inside of you. You bend down farther and lick from the base of your dick to the head. Slowly, you take the head inside of your mouth and begin sucking on it, trying to keep the drool in your mouth. The feeling is enough to make you cum, but you hold it in and move on. You take a few more inches inside your mouth as you begin pumping and thrusting, making lewd noises of moaning and sucking. The feeling is better than any blowjob you've ever had. You start to pump faster and faster, desperate to cum all over your own face. Just thinking about the fact that you're doing this to yourself turns you on even more. You take the rest of your " + cockDescript(0) + " inside of your mouth. You can smell the musty scent coming off of your " + sackDescript() + ". Your throat closes up on your member as you hum and flick your tongue across its head.\n\n", false);

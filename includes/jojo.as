@@ -1,8 +1,8 @@
-﻿const TIMES_AMILY_AND_JOJO_PLAYED_TIMES:int = 434;
-const AMILY_X_JOJO_COOLDOWN:int = 435;
-const JOJO_MOVE_IN_DISABLED:int = 550;
-const TIMES_EGGED_JOJO:int = 590;
-const JOJO_EGGCUBATE_COUNT:int = 591;
+﻿//const TIMES_AMILY_AND_JOJO_PLAYED_TIMES:int = 434;
+//const AMILY_X_JOJO_COOLDOWN:int = 435;
+//const JOJO_MOVE_IN_DISABLED:int = 550;
+//const TIMES_EGGED_JOJO:int = 590;
+//const JOJO_EGGCUBATE_COUNT:int = 591;
 
 
 function assholeOrPussy():String {
@@ -37,7 +37,7 @@ function tentacleJojo():Boolean {
 	return false;
 }
 function campCorruptJojo():Boolean {
-	if(monk >= 5 && player.hasStatusAffect("noJojo") < 0 && flags[80] == 0) return true;
+	if(monk >= 5 && player.hasStatusAffect("noJojo") < 0 && flags[UNKNOWN_FLAG_NUMBER_00080] == 0) return true;
 	return false;
 }
 function jojoMutationOffer():void {
@@ -53,19 +53,19 @@ function jojoMutationOfferNo():void {
 function corruptCampJojo():void {
 	spriteSelect(34);
 	//Corrupt Amily and Jojo sexings
-	if(flags[43] == 2 && amilyFollower() && campCorruptJojo() && flags[AMILY_X_JOJO_COOLDOWN] <= 0 && rand(5) == 0) {
+	if(flags[AMILY_FOLLOWER] == 2 && amilyFollower() && campCorruptJojo() && flags[AMILY_X_JOJO_COOLDOWN] <= 0 && rand(5) == 0) {
 		flags[AMILY_X_JOJO_COOLDOWN] = 7;
 		hideMenus();
 		amilyTeachingJojoBJ();
 		return;
 	}
 	//Oh shit goes down! (Wiv Tentacles)
-	if(amilyFollower && flags[81] == 0 && rand(10) <= 1 && flags[43] == 1 && player.hasStatusAffect("Tentacle Jojo") >= 0) {
+	if(amilyFollower && flags[UNKNOWN_FLAG_NUMBER_00081] == 0 && rand(10) <= 1 && flags[AMILY_FOLLOWER] == 1 && player.hasStatusAffect("Tentacle Jojo") >= 0) {
 		amilyDiscoversJojoWithTentaclesAndShitOhBoy();
 		return;
 	}
 	//Oh shit goes down! (No tentacles)
-	else if(flags[76] == 0 && rand(10) <= 1 && flags[43] == 1 && amilyFollower() && player.hasStatusAffect("Tentacle Jojo") < 0) {
+	else if(flags[UNKNOWN_FLAG_NUMBER_00076] == 0 && rand(10) <= 1 && flags[AMILY_FOLLOWER] == 1 && amilyFollower() && player.hasStatusAffect("Tentacle Jojo") < 0) {
 		amilyIsPissedAtYouForRuiningJojo();
 		return;
 	}
@@ -83,9 +83,9 @@ function corruptCampJojo():void {
 	var eggs:int = 0;
 	if(player.canOvipositBee()) eggs = 3850;
 	if(player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") >= 0) {
-		if(flags[332] > 0) outputText("\n\n<b>Jojo is still drained from his last visit to the milkers - you should wait a few hours before taking him back.</b>", false);
+		if(flags[UNKNOWN_FLAG_NUMBER_00332] > 0) outputText("\n\n<b>Jojo is still drained from his last visit to the milkers - you should wait a few hours before taking him back.</b>", false);
 		//First time:
-		else if(flags[331] == 0) milkHim = 3163;
+		else if(flags[UNKNOWN_FLAG_NUMBER_00331] == 0) milkHim = 3163;
 		//Followup:
 		else {
 			milkHim = 3164;
@@ -462,7 +462,7 @@ function useTentacleJojo():void {
 //Jojo milk payments
 function jojoMilkPay(tentacle:Boolean = false):void {
 	spriteSelect(34);
-	flags[332] = 4;
+	flags[UNKNOWN_FLAG_NUMBER_00332] = 4;
 	outputText("A loud 'ding' chimes and a panel displays ", false);
 
 	//Set temp to liter amount produced.
@@ -470,9 +470,9 @@ function jojoMilkPay(tentacle:Boolean = false):void {
 	var cap:Number = 500;
 	var cumQ:Number = 0;
 	//Ez mode cap doubles
-	if(flags[99] == 1) cap *= 2;
+	if(flags[EASY_MODE_ENABLE_FLAG] == 1) cap *= 2;
 	if(debug) {
-		flags[104] = 0;
+		flags[UNKNOWN_FLAG_NUMBER_00104] = 0;
 		cap = 9999;
 	}
 	//Get rid of extra digits
@@ -490,20 +490,20 @@ function jojoMilkPay(tentacle:Boolean = false):void {
 		payout = 2 + int(cumQ/200)*2;
 	}
 	//Reduce payout if it would push past
-	if(flags[104] + payout >= cap) {
-		payout = cap - flags[104];
+	if(flags[UNKNOWN_FLAG_NUMBER_00104] + payout >= cap) {
+		payout = cap - flags[UNKNOWN_FLAG_NUMBER_00104];
 		outputText("It also shows a warning: <b>Not enough gems for full payment.  GEMS NOW EXHAUSTED.</b>  ", false);
 	}
 	//If over cap!
-	else if(flags[104] >= cap) {
+	else if(flags[UNKNOWN_FLAG_NUMBER_00104] >= cap) {
 		payout = 0;
 		outputText("It also shows a warning: <b>FUNDS EXHAUSTED.</b>  ", false);
 	}
 	if(payout > 0) {
 		player.gems += payout;
-		flags[104] += payout;
+		flags[UNKNOWN_FLAG_NUMBER_00104] += payout;
 		statScreenRefresh();
-		flags[331]++;
+		flags[UNKNOWN_FLAG_NUMBER_00331]++;
 		if(payout == 1) outputText(Num2Text(payout) + " gem rolls out into a collection plate.  Whitney really put a lot of work into this!  You pocket the gem and g", false);
 		else outputText(Num2Text(payout) + " gems roll out into a collection plate.  Whitney really put a lot of work into this!  You pocket the gems and g", false);
 	}
@@ -512,9 +512,9 @@ function jojoMilkPay(tentacle:Boolean = false):void {
 function jojoCumQ():Number {
 	var cumQ:Number = 0;
 	cumQ = 400;
-	if(flags[331] < 4) cumQ += flags[331] * 200;
-	else cumQ += flags[331] * 100;
-	if(tentacleJojo()) cumQ += 500 + flags[331] * 100;
+	if(flags[UNKNOWN_FLAG_NUMBER_00331] < 4) cumQ += flags[UNKNOWN_FLAG_NUMBER_00331] * 200;
+	else cumQ += flags[UNKNOWN_FLAG_NUMBER_00331] * 100;
+	if(tentacleJojo()) cumQ += 500 + flags[UNKNOWN_FLAG_NUMBER_00331] * 100;
 	return cumQ;
 }
 
@@ -533,7 +533,7 @@ function milkJojoFirst():void {
 	outputText("Looming over the next hill, you can see the large, well-maintained roof of Whitney's farm.  She does a fantastic job of keeping everything running considering it seems to be primarily a one-woman show.  Whatever the case, it doesn't look like she's near the barn right now.  It's the perfect time to introduce two of your favorite toys to one another!  Tugging on Jojo's ear, you start dragging him down the hillside towards the empty barn.  He doesn't fight at all, moaning and dripping behind you as if he knows what's coming.  Perhaps he learned a little about 'milking' from somewhere before you broke him?\n\n", false);
 	
 	outputText("Sliding easily, the barn door barely creaks as you push it open and send Jojo inside.  You glance around furtively, making sure you weren't seen, and then you close the door behind you.  Jojo has slumped down into some straw and started masturbating again, yanking on his corruption-bloated cock as if it's the only thing in the room that matters.  Slapping his balls to get his attention, you lead him towards your stall.  It's empty and clean as always", false);
-	if(flags[333] > 0) outputText(", even though it reeks of the spunk you've spilled into the milker's mechanical embrace", false);
+	if(flags[UNKNOWN_FLAG_NUMBER_00333] > 0) outputText(", even though it reeks of the spunk you've spilled into the milker's mechanical embrace", false);
 	outputText(".  Jojo shrugs and whines at you, pleading to be allowed to touch himself again.\n\n", false);
 	
 	outputText("You smirk and push him inside, tangling him up in the dangling milk-harness.  The surprised mouse struggles and looks back at you with a mix of confusion and lust warring in his pliant, submissive eyes.  Placing a reassuring fingertip on his nose, you make calming, shushing noises at him as you strap him in properly.  Thankfully the harness is quite adjustable, and you're able to give the corrupt fuck-beast a proper fitting before you milk him.  Each time you cinch one of the bands tight, you make sure to give his balls or his a cock a gentle squeeze.  The extra attention keeps Jojo calm as he is increasingly immobilized.  Only one fitting remains to be tightened, and knowing all too well what will happen, you give it a tug.\n\n", false);
@@ -551,7 +551,7 @@ function milkJojoFirst():void {
 		//(Cock - too big!)	
 		if(x < 0) {
 			x = player.biggestCockIndex();
-			if(flags[333] > 0) outputText("You know from experience that machine usually takes an hour before it will allow release", false);
+			if(flags[UNKNOWN_FLAG_NUMBER_00333] > 0) outputText("You know from experience that machine usually takes an hour before it will allow release", false);
 			else outputText("You figure the machine will probably pump him for quite a while before it allows release", false);
 			outputText(", and you're getting quite turned on from the show.  You shuck your " + player.armorName + " and pull out " + oMultiCockDesc() + ", feeling ", false);
 			if(player.lust < 50) outputText("it stiffin in your hand", false);
@@ -560,7 +560,7 @@ function milkJojoFirst():void {
 		}
 		//(Cock - butt rape!)
 		else {
-			if(flags[333] > 0) outputText("You know from experience that machine usually takes an hour before it will allow release", false);
+			if(flags[UNKNOWN_FLAG_NUMBER_00333] > 0) outputText("You know from experience that machine usually takes an hour before it will allow release", false);
 			else outputText("You figure the machine will probably pump him for quite a while before it allows release", false);
 			outputText(", and you're getting quite turned on from the show.  You shuck your " + player.armorName + " and pull out " + oMultiCockDesc() + ", feeling ", false);
 			if(player.lust < 50) outputText("it stiffin in your hand", false);
@@ -571,7 +571,7 @@ function milkJojoFirst():void {
 	}
 	//(Vagoozle!)
 	else if(player.hasVagina()) {
-		if(flags[333] > 0) outputText("You know from experience that machine usually takes an hour before it will allow release", false);
+		if(flags[UNKNOWN_FLAG_NUMBER_00333] > 0) outputText("You know from experience that machine usually takes an hour before it will allow release", false);
 		else outputText("You figure the machine will probably pump him for quite a while before it allows release", false);
 		outputText(", and you're getting quite turned on from the show.  You shuck your " + player.armorName + " and reveal your " + vaginaDescript() + ", feeling your " + clitDescript() + " grow firm and hard.  For his part, Jojo doesn't even notice.  He just moans, squirms, and twitches any time he's brought particularly close to orgasm.  Seating yourself down below him, you let your fingers play across your now-wet folds, caressing your labia before you slide a few digits inside.  You brush your thumb against your clitoral hood and shudder from pleasure, enjoying watching your pet get milked as much as he's enjoying the milking.  ", false);
 		if(player.clitLength > 3) outputText("Your other hand grabs your penis-sized 'button' and begins to jack it, the action sending tremors of sensation through your " + hipDescript() + ".  ", false);
@@ -580,7 +580,7 @@ function milkJojoFirst():void {
 	}
 	//(NEITHER!)
 	else {
-		if(flags[333] > 0) outputText("You know from experience that machine usually takes an hour before it will allow release", false);
+		if(flags[UNKNOWN_FLAG_NUMBER_00333] > 0) outputText("You know from experience that machine usually takes an hour before it will allow release", false);
 		else outputText("You figure the machine will probably pump him for quite a while before it allows release", false);
 		outputText(", and while you're getting quite turned on from the show, you lack the equipment to take care of your lusts in a satisfactory way.  Meanwhile, Jojo is just moaning, squirming, and twitching each time he's brought close to orgasm.  You sit down and watch the machinery take your mouse-toy to task, wishing you had similar endowments you could be taking care of right now.\n\n", false);
 		stats(0,0,0,0,0,0,50,0);
@@ -683,7 +683,7 @@ function repeatMilkJojo(tentacle:Boolean = false):void {
 		if(player.gender > 0) outputText("loins", false);
 		else outputText("body", false);
 		outputText(".  You close your eyes and forget about the mouse, stripping out of your clothes to expose your nudity  to questing hands.  As you work yourself into a sexual frenzy, you become more aware of Jojo's lusty, panting gaze on your exposed skin.  ", false);
-		if(flags[23] > 0) outputText("An exhibitionist thrill shivers through you at the thought being watched while engaged in such a carnal act.  ", false);
+		if(flags[UNKNOWN_FLAG_NUMBER_00023] > 0) outputText("An exhibitionist thrill shivers through you at the thought being watched while engaged in such a carnal act.  ", false);
 		outputText("Your climax comes as fast as it is hard, breaking over you in a concussive wave of bliss.\n\n", false);
 		
 		outputText("Blinking the stars from your eyes, you look up to see Jojo hanging there, panting and shaking.  The ever-present mechanical hum incrementally increases in pitch, climbing all the way to a keening wail that would put a banshee to shame.  Swollen bulges of cum are coursing through the tentacle-slut's members, distending the shafts and the tubes struggling to encapsulate the newfound girth.  Jojo's eyes roll back while frothy spit drips from his open maw and dangling tongue.  His body strains at the harness' bindings, the huge, dangling orbs between his legs visibly contracting as their cargo is released.  Semen bubbles from the seals at the edges of hoses as your pet drowns the cock-milker in spooge.  Gauges on the wall rapidly switch to 'F', one after another.  The last meter tops out, and then the pressure is blasting the suckers off his dicks, sending the sperm-packed machinery flying from the sheer, cummy pressure.\n\n", false);
@@ -741,7 +741,7 @@ function amilyTeachingJojoBJ():void {
 	outputText("  She seems visibly distracted by the mouse's boner, and will likely wind up fucking him soon.  [if (hasCock = true) \"Do you surprise them both by allowing Amily to demonstrate on you?\" else \"Do you want to watch them fuck?\"]");
 	var demon:Number = 0;
 	if(player.hasCock()) demon = 3452;
-	simpleChoices("Demonstrate",demon,"Watch",3456,"",0,"",0,"Leave",1);
+	simpleChoices("Demonstrate",demon,"Watch",amilyAndJojoFuck,"",0,"",0,"Leave",1);
 }
 //Scene 1 Result: Male Gets BJ (Z)
 function BJRidesGETYOUONE():void {

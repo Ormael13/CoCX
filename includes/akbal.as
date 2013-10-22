@@ -1,5 +1,5 @@
-﻿const AKBAL_TIMES_BITCHED:int = 902;
-const AKBAL_BITCH_Q:int = 903;
+﻿//  AKBAL_TIMES_BITCHED:int = 902;
+//  AKBAL_BITCH_Q:int = 903;
 
 //Akbal of the Terrestrial Fire [EDITED]
 //2. AKBAL'S MY BITCH
@@ -17,15 +17,15 @@ function supahAkabalEdition():void {
 		akbitchEncounter();
 		return;
 	}
-	if(flags[17] == 2) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00017] == 2) {
 		repeatAkbalPostSubmission();
 		return;
 	}
-	if(flags[17] == 1) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00017] == 1) {
 		ackbalRepeatAfterWin();
 		return;
 	}
-	if(flags[17] == -1) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00017] == -1) {
 		ackbalRepeatAfterLoss();
 		return;
 	}
@@ -42,7 +42,7 @@ function supahAkabalEdition():void {
 
 	outputText("The aura pouring forth from this 'Akbal' is anything but god-like; you recognize the demon for what it truly is.  Yet its ivory teeth and sharp claws prove to you that it can make good on its threat.  What do you do?", false);
 	//Talk / Fight / Run	
-	simpleChoices("Talk",2307,"Fight",2312,"",0,"",0,"Leave",13);
+	simpleChoices("Talk",superAkbalioTalk,"Fight",startuAkabalFightomon,"",0,"",0,"Leave",13);
 }
 
 
@@ -54,7 +54,7 @@ function superAkbalioTalk():void {
 	outputText("After a few moments of silence you ask, \"<i>What do you mean, 'submit'?</i>\" Akbal grins, revealing a row of wicked ivory teeth as he opens his mouth. You suddenly feel the demon's powerful body pinning you down, a wide tongue licking your neck and claws tickling your back in a way that is both horrifying and sensual. Yet after a moment of taking it in, you realize that he is still there in front of you, unmoved and grinning. You can guess what the image means: he wants you to become his mate for a day to make up for invading his territory.  What do you do?\n\n", false);
 
 	//Submit / Fight
-	simpleChoices("Fight",2312,"Submit",2313,"",0,"",0,"",0);
+	simpleChoices("Fight",startuAkabalFightomon,"Submit",akbalSubmit,"",0,"",0,"",0);
 }
 
 //[Encounter if previously submitted]
@@ -64,7 +64,7 @@ function repeatAkbalPostSubmission():void {
 	outputText("As you walk through the forest, you hear a purring coming from behind you.  Turning around reveals that Akbal has come to find you.  He uses his head to push you in the direction of his territory, obviously wanting to dominate you again.\n\n", false);
 	outputText("What do you do?", false);
 	//Submit / Deny / Fight
-	simpleChoices("Submit",2313,"Deny",2309,"Fight",2312,"",0,"",0);
+	simpleChoices("Submit",akbalSubmit,"Deny",akbalDeny,"Fight",startuAkabalFightomon,"",0,"",0);
 }
 
 //[Deny]
@@ -84,7 +84,7 @@ function ackbalRepeatAfterWin():void {
 	if(player.lowerBody == 4) outputText("equine leap places you a good distance away from him.  Do you fight or flee?\n\n", false);
 	else outputText("dodging roll places you a good distance away from him.  Do you fight or flee?\n\n", false);
 	//Fight / Flee
-	simpleChoices("Fight",2312,"",0,"",0,"",0,"Leave",13);
+	simpleChoices("Fight",startuAkabalFightomon,"",0,"",0,"",0,"Leave",13);
 }
 
 //[Encounter if previously fought and lost]
@@ -94,7 +94,7 @@ function ackbalRepeatAfterLoss():void {
 	outputText("A chorus of laughter sounds inside your mind as the jaguar demon, Akbal, drops to the ground in front of you.  His masculine voice says, \"<i>Well, if it isn't the defiant welp who, in all their great idiocy, has wandered into my territory again.  Will you submit, or do I have to teach you another harsh lesson?</i>\"\n\n", false);
 	
 	//Submit / Fight / Run
-	simpleChoices("Submit",2313,"Fight",2312,"",0,"",0,"Leave",13);
+	simpleChoices("Submit",akbalSubmit,"Fight",startuAkabalFightomon,"",0,"",0,"Leave",13);
 }
 
 //[Fight]
@@ -104,18 +104,18 @@ function startuAkabalFightomon():void {
 	outputText("You ready your " + player.weaponName + " and prepare to battle the demon jaguar.", false);
 	//[battle ensues]
 	startCombat(22);	
-	flags[15]++;
+	flags[UNKNOWN_FLAG_NUMBER_00015]++;
 }
 
 //[Submit]
 function akbalSubmit():void {
 	spriteSelect(2);
 	slimeFeed();
-	flags[16]++;
-	flags[17] = 2;
+	flags[UNKNOWN_FLAG_NUMBER_00016]++;
+	flags[UNKNOWN_FLAG_NUMBER_00017] = 2;
 	flags[AKBAL_BITCH_Q] = -1;
 	//Big booty special
-	if(flags[16] > 5 && flags[15] < 2 && player.buttRating >= 13 && player.tone < 80) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00016] > 5 && flags[UNKNOWN_FLAG_NUMBER_00015] < 2 && player.buttRating >= 13 && player.tone < 80) {
 		akbalBigButtSubmit();
 		return;
 	}
@@ -316,12 +316,12 @@ function akbalSubmit():void {
 function akbalSubmissionFollowup():void {
 	spriteSelect(2);
 	outputText("", true);
-	if(flags[16] < 4) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00016] < 4) {
 		outputText("You awake in your camp feeling dangerous, powerful and fiercely satisfied.", false);
 	}
 	//[After 8th submission, if whispered and corruption is greater than 80%]
 	//(fighting Akbal disables this scene, but you retain the ability if you rape him after)
-	else if(flags[15] == 0 && flags[16] >= 8 && player.cor > 80) {
+	else if(flags[UNKNOWN_FLAG_NUMBER_00015] == 0 && flags[UNKNOWN_FLAG_NUMBER_00016] >= 8 && player.cor > 80) {
 		if(player.cor < 80 || player.hasPerk("Fire Lord") >= 0) {
 			outputText("You awake in your camp feeling dangerous, powerful and fiercely satisfied.", false);
 		}
@@ -481,7 +481,7 @@ function akbalHeal():void {
 //Victory/Defeat Scenes
 //[Victory via HP]
 function victoryChoices():void {
-	flags[17] = 1;
+	flags[UNKNOWN_FLAG_NUMBER_00017] = 1;
 	//[General Victory]
 	if(monster.HP < 1) {
 		/*if(rand(10) == 0) {
@@ -831,7 +831,7 @@ function girlsRapeAkbal():void {
 	}
 	stats(0,0,0,0,0,0,50,0);
 	//-Page Turn-
-	doNext(3024);
+	doNext(girlsRapeAkbalPart2);
 }
 
 function girlsRapeAkbalPart2():void {
@@ -946,7 +946,7 @@ function girlsRapeAkbalPart2():void {
 	eventParser(5007);
 }
 function loseToAckballllllz():void {
-	flags[17] = -1;
+	flags[UNKNOWN_FLAG_NUMBER_00017] = -1;
 	flags[AKBAL_BITCH_Q] = 0;
 	outputText("", true);
 	//[Defeat via HP]

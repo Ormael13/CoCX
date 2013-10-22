@@ -1,13 +1,13 @@
 ﻿/*FLAGS STUFF*/
 //1 = PC asked her about it, past that it counts the times paid
-const KIHA_TOLL:int = 341;
+//const KIHA_TOLL:int = 341;
 //Tracks how many special explores the PC gets.
-const KIHA_TOLL_DURATION:int = 342;
-const TIMES_MET_KIHA:int = 343;
+//const KIHA_TOLL_DURATION:int = 342;
+//const TIMES_MET_KIHA:int = 343;
 //used to track the different levels of 'talk to Kiha
-const KIHA_TALK_STAGE:int = 344;
-const PC_WIN_LAST_KIHA_FIGHT:int = 345;
-const KIHA_CHOKED_OUT_PC:int = 432;
+//const KIHA_TALK_STAGE:int = 344;
+//const PC_WIN_LAST_KIHA_FIGHT:int = 345;
+//const KIHA_CHOKED_OUT_PC:int = 432;
 
 //Encounter Dragon-Gal 
 function encounterKiha():void {
@@ -56,7 +56,7 @@ function encounterKiha():void {
 		
 		outputText("What do you do?", false);
 		//[Fight] [Ask Why][Buy Passage][Leave]
-		simpleChoices("Fight",3177,"Ask Why",3178,"Buy Passage",3175,"",0,"Leave",3176);
+		simpleChoices("Fight",meetKihaAndFight,"Ask Why",askWhy,"Buy Passage",offerToBuyPassageFromKiha,"",0,"Leave",leaveWhenMeetingAgressiveKiha);
 	}
 	//*Repeat Encounter - PC WAS VICTORIOUS LAST FIGHT 
 	else if(flags[PC_WIN_LAST_KIHA_FIGHT] == 1) {
@@ -77,7 +77,7 @@ function encounterKiha():void {
 			temp = 0;
 		}
 		//[Pay] [This was my idea] [Leave] [Fight] - Leave uses standard leave text
-		simpleChoices("Fight",3177,"Pay",temp,"My Idea",3180,"",0,"Leave",3176);
+		simpleChoices("Fight",meetKihaAndFight,"Pay",temp,"My Idea",tellKihaTributeWasYourIdea,"",0,"Leave",leaveWhenMeetingAgressiveKiha);
 	}
 	//*Repeat Encounter - Tribute Wore off 
 	else if(flags[KIHA_TOLL] > 1 && 
@@ -90,7 +90,7 @@ function encounterKiha():void {
 			temp = 0;
 		}
 		//[Pay Again] [This was my idea] [Leave]  [Fight] - As first time Tribute Offer encounter
-		simpleChoices("Fight",3177,"Pay",temp,"My Idea",3180,"",0,"Leave",3176);
+		simpleChoices("Fight",meetKihaAndFight,"Pay",temp,"My Idea",tellKihaTributeWasYourIdea,"",0,"Leave",leaveWhenMeetingAgressiveKiha);
 	}
 	//Generic Repeat Encounter 
 	else {
@@ -101,7 +101,7 @@ function encounterKiha():void {
 		if(flags[KIHA_TOLL] == 0) {
 			outputText("If you hurry, you might get a word in edge-wise.  What do you do?", false);
 			//[Fight] [Ask Why][Buy Passage][Leave]
-			simpleChoices("Fight",3177,"Ask Why",3178,"Buy Passage",3175,"",0,"Leave",3176);
+			simpleChoices("Fight",meetKihaAndFight,"Ask Why",askWhy,"Buy Passage",offerToBuyPassageFromKiha,"",0,"Leave",leaveWhenMeetingAgressiveKiha);
 		}
 		else {
 			outputText("It's a fight!", false);
@@ -118,7 +118,7 @@ function offerToBuyPassageFromKiha():void {
 	//(Unlocks toll option next encounter)
 	flags[KIHA_TOLL] = 1;
 	//[Fight] [Leave] - Same results as main fight/leave.
-	simpleChoices("Fight",3177,"",0,"",0,"",0,"Leave",3176);
+	simpleChoices("Fight",meetKihaAndFight,"",0,"",0,"",0,"Leave",leaveWhenMeetingAgressiveKiha);
 }
 //[Leave] 
 function leaveWhenMeetingAgressiveKiha():void {
@@ -158,7 +158,7 @@ function payKihaTribute():void {
 	flags[KIHA_TOLL]++;
 	//(2-5 more explorations of her area before she shows up demanding more tribute!)
 	//(do a 'Kiha' exploration with chances of fantabulous prizes)
-	doNext(3186);	
+	doNext(kihaExplore);	
 }
 function kihaExplore(clearScreen:Boolean = true):void {
 	if(clearScreen) outputText("", true);
@@ -660,7 +660,7 @@ function rapeKihaWithWORDS():void {
 		outputText("Shrugging, you decide she's unlikely to talk more on this topic for now, so you change the topic to something else - your own history.  You tell her of your village, of the portal, and the day you were chosen as champion.  You talk of your training, and how different this land was from everything you expected.  You tell of your struggles.  You describe your victories.  You commiserate about your defeats.  You pour out all of the best and worst of your journeys in this strange realm.  Surprisingly, Kiha listens with rapt attention, never once interrupting.\n\n", false);
 		
 		outputText("Once you finish she comes out of it and mutters, \"<i>So you had it hard?  It doesn't matter.  I had it harder.</i>\"  She launches into the air and flies away before you can answer.", false);
-		if(silly() && flags[281] > 0 && lottieMorale() <= 33) outputText("  Is that what it feels like to be Lottie?", false);
+		if(silly() && flags[UNKNOWN_FLAG_NUMBER_00281] > 0 && lottieMorale() <= 33) outputText("  Is that what it feels like to be Lottie?", false);
 	}
 	//Conversation Level 3 (40- Corruption! PUREBABIES ONLY!) (Zed)
 	else if(flags[KIHA_TALK_STAGE] == 2) {
