@@ -1226,7 +1226,7 @@ function tradeCeraphCrotchityBits():void {
 	else if(choice == 1) {
 		temp2 = rand(player.cockTotal());
 		outputText("She pipes up, \"<i>", false);
-		if(player.cocks[temp2].cockType == CockTypesEnum.HUMAN) outputText("Oooh, is that a horse-cock?  Those are quite nice.  I love the feel of a flare inside me, or even better, plunging one deep into a slut's poor, abused asshole.", false);
+		if(player.cocks[temp2].cockType == CockTypesEnum.HORSE) outputText("Oooh, is that a horse-cock?  Those are quite nice.  I love the feel of a flare inside me, or even better, plunging one deep into a slut's poor, abused asshole.", false);
 		else if(player.cocks[temp2].cockType == CockTypesEnum.DOG) outputText("Oooh, is that a dog-cock?  Those are quite nice.  It's oh-so-fun to enhance the knots on those and then watch them puff up enough to distend some poor slave's gut.", false);
 		else if(player.cocks[temp2].cockType == CockTypesEnum.DEMON) outputText("Oooh, is that a demon-cock?  As you can see I'm QUITE familiar with those, but it might be fun to replace one of my girl's tongues with it.", false);
 		else if(player.cocks[temp2].cockType == CockTypesEnum.CAT) outputText("Oooh, is that a kitty-dick?  The spines on those feel so good while they rub down all your walls or catch your prostate.  Meow.", false);

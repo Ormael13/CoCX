@@ -971,7 +971,7 @@ function fuckNieve():void {
 		//(Human) 
 		if(player.cocks[x].cockType == CockTypesEnum.HUMAN) outputText("  Your normal, unaltered cock seems to take on a slight blue tint, although you can confirm it's not going numb.  Quite the contrary, it seems to be getting more sensitive as Nieve's lips roll over it.");
 		//(Equine) 
-		else if(player.cocks[x].cockType == CockTypesEnum.HUMAN) outputText("  Nieve fawns over your horsecock like a cultist praying to a god.  She sucks and kisses, running the tip of her tongue all along the sides until she reaches the sheathe, and then right back up the other side.");
+		else if(player.cocks[x].cockType == CockTypesEnum.HORSE) outputText("  Nieve fawns over your horsecock like a cultist praying to a god.  She sucks and kisses, running the tip of her tongue all along the sides until she reaches the sheathe, and then right back up the other side.");
 		//(Canine) 
 		else if(player.hasKnot(x)) {
 			outputText("  Nieve eyes the knot on your cock as though it were a challenge.  She inches down your shaft, getting ever closer.");

@@ -143,12 +143,12 @@ function sprocketImp():void {
 	//Variable cocktext
 	if(player.cocks[0].cockType == CockTypesEnum.HUMAN || player.cocks[0].cockType == CockTypesEnum.DEMON || player.cocks[0].cockType.Index > 4) outputText("your " + cockDescript(0) + ", rubbing the tip of his prick against your own, ", false);
 	else if(player.hasKnot(0)) outputText("your " + cockDescript(0) + ", rubbing the tip of his prick against the your point, ", false);
-	else if(player.cocks[0].cockType == CockTypesEnum.HUMAN) outputText("your " + cockDescript(0) + ", rubbing the tip of his prick against your flared head, ", false);
+	else if(player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("your " + cockDescript(0) + ", rubbing the tip of his prick against your flared head, ", false);
 	else if(player.cocks[0].cockType == CockTypesEnum.TENTACLE) outputText("your huge green dick, rubbing the tip of his prick against your purplish cock-head, ", false);
 	outputText("smearing your pre-cum together.  You wonder if he is planning on just jerking both of you off as you shake the cloth from your face.  He flashes you an evil smile, making your eyes widen in terror as you realize what he is planning. Before you can even think to make a move to stop him, the imp ", false);
 	if(player.cocks[0].cockType == CockTypesEnum.HUMAN || player.cocks[0].cockType == CockTypesEnum.DEMON || player.cocks[0].cockType.Index > 4) outputText("shoves his shaft deeply into the slit in the head of your dick.  ", false);
 	else if(player.hasKnot(0)) outputText("finds the hole in the pointed head of your cock and plunges his shaft deeply into it, literally fucking your urethra.  ", false);
-	else if(player.cocks[0].cockType == CockTypesEnum.HUMAN) outputText("seats his dick in the flared head of your prick, and then pushes farther. His shaft plunges into yours, filling your cock more than any cum load ever could.  ", false);
+	else if(player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("seats his dick in the flared head of your prick, and then pushes farther. His shaft plunges into yours, filling your cock more than any cum load ever could.  ", false);
 	else if(player.cocks[0].cockType == CockTypesEnum.TENTACLE) outputText("shoves his dick deeply into the slit in the head of your vine-like cock.  ", false);
 	//New PG
 	outputText("\n\n", false);

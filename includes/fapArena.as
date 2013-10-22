@@ -115,7 +115,7 @@ function fapArenaPageII():void {
 	if(player.cocks[x].cockType == CockTypesEnum.DEMON) c = 10;
 	else if(player.cocks[x].cockType == CockTypesEnum.TENTACLE) c = 5;
 	else if(player.cocks[x].cockType == CockTypesEnum.LIZARD) c = 3;
-	else if(player.cocks[x].cockType == CockTypesEnum.HUMAN) c = 2;
+	else if(player.cocks[x].cockType == CockTypesEnum.HORSE) c = 2;
 	//R the player's lust resistance (0<R<1)
 	var r = lustPercent()/100;
 	//The game does a roll between 0 and 100, call it N.

@@ -888,8 +888,8 @@ function masturbateGo():void {
 		//5 lucky to find demon/animal
 		if(player.cocks[0].cockThickness < 1.8) outputText("You easily wrap a hand around your " + cockDescript(0) + " and start masturbating.  ", false);
 		if(player.cocks[0].cockThickness >= 1.8 && player.cocks[0].cockThickness < 3) {
-			if(player.cocks[0].cockType == CockTypesEnum.HUMAN || player.cocks[0].cockType.Index > 2) outputText("You have some difficulty fitting your hand around your " + cockDescript(0) + ", relishing the feelings of your large endowment as you begin masturbating.  ", false);
-			if(player.cocks[0].cockType == CockTypesEnum.HUMAN) outputText("You have some difficulty fitting your hand around your " + horseDescript(0) + ", relishing the feelings of your animalistic endowments as you begin masturbating.  ", false);
+			if(player.cocks[0].cockType == CockTypesEnum.HUMAN || player.cocks[0].cockType.Index > 1) outputText("You have some difficulty fitting your hand around your " + cockDescript(0) + ", relishing the feelings of your large endowment as you begin masturbating.  ", false);
+			if(player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("You have some difficulty fitting your hand around your " + horseDescript(0) + ", relishing the feelings of your animalistic endowments as you begin masturbating.  ", false);
 			if(player.hasKnot()) outputText("You have some difficulty fitting your hand around your " + cockDescript(0) + ", relishing the feelings of your bulbous beast endowments as you begin masturbating.  ", false);
 		}
 		if(player.cocks[0].cockThickness >= 3 && player.cocks[0].cockThickness < 5) {
@@ -1716,7 +1716,7 @@ function multiNippleFuckPrep(randomCock:Number):void {
 		else outputText("your " + cockDescript(randomCock) + " ",false);	
 	}
 	//Applying randomization - horse cocks
-	if(player.cocks[randomCock].cockType == CockTypesEnum.HUMAN)
+	if(player.cocks[randomCock].cockType == CockTypesEnum.HORSE)
 	{
 		outputText("flared tip of ",false);
 		//more than one?
@@ -2073,7 +2073,7 @@ function centaurMasturbation():Boolean {
 		if(plural) outputText("  After a moment they peek out from under your forelegs, proudly displaying your " + multiCockDescriptLight() + ".", false);
 		else {
 			outputText("  After a moment it peeks out from under your forelegs, proudly displaying your ", false);
-			if(player.cocks[primary].cockType == CockTypesEnum.HUMAN) outputText("flared tip", false);
+			if(player.cocks[primary].cockType == CockTypesEnum.HORSE) outputText("flared tip", false);
 			else if(player.cocks[primary].cockType == CockTypesEnum.DEMON) outputText("nodule-ringed head", false);
 			else if(player.cocks[primary].cockType == CockTypesEnum.DOG) outputText("pointed erection", false);
 			else if(player.cocks[primary].cockType == CockTypesEnum.TENTACLE) outputText("wriggling, mushroom-like tip", false);

@@ -1,5 +1,4 @@
 ﻿// import classes.itemSlotClass;
-import classes.CockTypesEnum
 
 //const FOX_BAD_END_WARNING:int = 477;
 //const TIMES_MET_CHICKEN_HARPY:int = 652;
@@ -3470,7 +3469,7 @@ function minotaurBlood():void {
 	//Boosts cock size up to 36"x5".
 	if(changes < changeLimit && rand(2) == 0 && player.cocks.length > 0) {
 		//Length first
-		if(player.cocks[0].cockLength < 36 && player.cocks[0].cockType == CockTypesEnum.HUMAN) {
+		if(player.cocks[0].cockLength < 36 && player.cocks[0].cockType == CockTypesEnum.HORSE) {
 			//Thickness too if small enough
 			if(player.cocks[0].cockThickness < 5) {
 				//Increase by 2 + rand(8), and store the actual amount in temp
@@ -3495,7 +3494,7 @@ function minotaurBlood():void {
 			changes++;
 		}
 		//if too long check thickness
-		else if(player.cocks[0].cockThickness < 5 && player.cocks[0].cockType == CockTypesEnum.HUMAN) {
+		else if(player.cocks[0].cockThickness < 5 && player.cocks[0].cockType == CockTypesEnum.HORSE) {
 			player.cocks[0].thickenCock(1);
 			outputText("\n\nMuch to your delight and surprise, you discover your " + cockDescript(0) + " has thickened noticeably.", false);
 			changes++;
@@ -4696,7 +4695,7 @@ function caninePepper(type:Number = 0):void {
 				stats(0,0,0,0,0,10,5*crit,0);
 			}
 			//Horse
-			if(player.cocks[temp3].cockType == CockTypesEnum.HUMAN) {
+			if(player.cocks[temp3].cockType == CockTypesEnum.HORSE) {
 				outputText("\n\nYour " + horseDescript(temp3) + " shrinks, the extra equine length seeming to shift into girth.  The flared tip vanishes into a more pointed form, a thick knotted bulge forming just above your sheath.  <b>You now have a dog-cock.</b>", false);
 				//Tweak length/thickness.
 				if(player.cocks[temp3].cockLength > 6) player.cocks[temp3].cockLength -= 2;
@@ -10661,7 +10660,7 @@ function foxTF(enhanced:Boolean = false):void {
 				stats(0,0,0,0,0,10,5,0);
 			}
 			//Horse
-			else if(player.cocks[select].cockType == CockTypesEnum.HUMAN) {
+			else if(player.cocks[select].cockType == CockTypesEnum.HORSE) {
 				outputText("\n\nYour " + horseDescript(select) + " shrinks, the extra equine length seeming to shift into girth.  The flared tip vanishes into a more pointed form, a thick knotted bulge forming just above your sheath.  <b>You now have a dog-cock.</b>", false);
 				//Tweak length/thickness.
 				if(player.cocks[select].cockLength > 6) player.cocks[select].cockLength -= 2;

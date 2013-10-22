@@ -130,7 +130,7 @@ function goblinRapesPlayer():void {
 		//[DICK FITS]
 		else {
 			outputText("The goblin-girl doesn't waste time with any more foreplay, she just arches her back like a cat about to get the cream, and slides her plush ass towards your " + cockDescript(0) + " with deliberate slowness.  Her eyes watch you with an intent expression as the slightly parted lips of her sex brush against your ", false);
-			if(player.cocks[0].cockType == CockTypesEnum.HUMAN) outputText("flare", false);
+			if(player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("flare", false);
 			else outputText("cock-head", false);
 			outputText(", spreading around you ever-so-slowly as she sinks further and further down.  She licks her glossy lips and blows you a kiss as she violently pushes the rest of the way down, impaling herself on every inch of your length.\n\n", false);
 			outputText("She arches her back further, proudly displaying the bulge your manhood has made in her tight little tummy.  She coos while fiddling with her clit, \"<i>Mmmm I'm so glad that fit.  The last mate I found was too big to stuff my greedy hole, and that's never as fun.</i>\"  She looks wistful for a moment as her hips begin grinding up and down, \"<i>He did fill me fit to burst though.  Can you do that for me?  Can you fuck me pregnant?</i>\" she asks.\n\n", false);
@@ -463,10 +463,10 @@ function manRapesGoblinTooBig():void {
 	if(player.cor < 50) outputText("shrug and guess you may as well try since she's ready", false);
 	else outputText("grin, happy to try and stretch her around yourself", false);
 	outputText(".  The ", false);
-	if(player.cocks[0].cockType == CockTypesEnum.HUMAN) outputText("flare", false);
+	if(player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("flare", false);
 	else outputText("head", false);
 	outputText(" of your " + cockDescript(x) + " visibly pulses in excitement as you brush it against her already-slick folds.  She squirms under you, clearly enjoying the feeling of you pushing against her opening.  With painful slowness, you begin pushing forward, feeling her body stretch around your ", false);
-	if(player.cocks[0].cockType == CockTypesEnum.HUMAN) outputText("flare", false);
+	if(player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("flare", false);
 	else outputText("crown", false);
 	outputText(", but after a moment or two of progress the tiny passage will stretch no more, and you're sure you can't force any more in without hurting her.\n\n", false);
 	outputText("Disgruntled with the tease, you pull out and slide it onto her torso, pinning her underneath your " + cockDescript(x) + " and smearing her face and body with her juices.  Her tits squish down enough that her erect little purple nipples barely poke out on each side.  The little slut looks relieved and more than a little turned on.  She licks her lips and speaks happily, \"<i>Thanks hun, I think you would have torn me in half!  Don't worry, I'm more than happy to get soaked with your cum,</i>\" as she wraps her arms and legs around you", false);
@@ -498,7 +498,7 @@ function gobboGetsRapedMaleFits():void {
 		outputText("You start walking, letting your movements work with gravity, allowing you to penetrate her with little difficulty. Those puffy wet walls clench you tightly as she slides down, ", false);
 		if(player.cocks[0].cockType == CockTypesEnum.DEMON) outputText("rubbing painfully against your demonic nubs", false);
 		else if(player.hasKnot(0)) outputText("stretching painfully around your knot", false);
-		else if(player.cocks[0].cockType == CockTypesEnum.HUMAN || player.cocks[0].cockType.Index > 3) outputText("feeling painfully tight around you", false);
+		else if(player.cocks[0].cockType == CockTypesEnum.HORSE || player.cocks[0].cockType.Index > 3) outputText("feeling painfully tight around you", false);
 		outputText(". With each and every step she slides down further, stretching her to capacity, until she sits almost completely impaled on you, grabbing your ", false);
 		if(player.biggestTitSize() >= 1) outputText(allBreastsDescript(), false);
 		else outputText("torso", false);
@@ -530,7 +530,7 @@ function gobboGetsRapedMaleFits():void {
 		outputText("You start walking, letting the movements work with gravity to allow you to effortlessly penetrate her.  Those puffy wet walls clench you tightly as she slides down ", false);
 		if(player.cocks[0].cockType == CockTypesEnum.DEMON) outputText("rubbing perfectly against your demonic nubs", false);
 		else if(player.hasKnot(0)) outputText("stretching tightly around your knot", false);
-		else if(player.cocks[0].cockType == CockTypesEnum.HUMAN || player.cocks[0].cockType.Index > 3) outputText("feeling absolutely perfect around you", false);
+		else if(player.cocks[0].cockType == CockTypesEnum.HORSE || player.cocks[0].cockType.Index > 3) outputText("feeling absolutely perfect around you", false);
 		outputText(".  With each and every step you take, she slides down further, until she sits fully impaled on you, grabbing your ", false);
 		if(player.biggestTitSize() >= 1) outputText(allBreastsDescript(), false);
 		else outputText("torso", false);

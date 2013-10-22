@@ -175,7 +175,7 @@ function keltEagerlyGetNaked():void {
 		//(Dog Cock:
 		if(player.cocks[0].cockType == CockTypesEnum.DOG) outputText("\"<i>Oh, lookie here!  We got ourselves a little doggie dong!  Well, cock or not, you'll always be a bitch to me, mutt.  ", false);
 		//(Horse Cock: 
-		if(player.cocks[0].cockType == CockTypesEnum.HUMAN) outputText("\"<i>Now that's just sad.  Getting a little envious of me, huh?  Had to go out and get a nice horsecock all your own?  Should have asked.  I'd have given you a taste of mine!  ", false);
+		if(player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("\"<i>Now that's just sad.  Getting a little envious of me, huh?  Had to go out and get a nice horsecock all your own?  Should have asked.  I'd have given you a taste of mine!  ", false);
 		//(Tentacle Cock or other weirdness
 		if(player.cocks[0].cockType.Index >= 3) outputText("\"<i>Hah!  I'll bite... what the fuck are you supposed to be?  That a cock, or just an ugly, misplaced tail?  HA!  ", false);
 		//(Small Size, ?-10 inches:
@@ -229,7 +229,7 @@ function keltReluctantlyGetNaked():void {
 		//(Dog Cock:
 		if(player.cocks[0].cockType == CockTypesEnum.DOG) outputText("\"<i>Oh, lookie here!  We got ourselves a little doggie dong!  Well, cock or not, you'll always be a bitch to me, mutt.  ", false);
 		//(Horse Cock: 
-		if(player.cocks[0].cockType == CockTypesEnum.HUMAN) outputText("\"<i>Now that's just sad.  Getting a little envious of me, huh?  Had to go out and get a nice horsecock all your own?  Should have asked.  I'd have given you a taste of mine!  ", false);
+		if(player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("\"<i>Now that's just sad.  Getting a little envious of me, huh?  Had to go out and get a nice horsecock all your own?  Should have asked.  I'd have given you a taste of mine!  ", false);
 		//(Tentacle Cock or other weirdness
 		if(player.cocks[0].cockType.Index >= 3) outputText("\"<i>Hah!  I'll bite... what the fuck are you supposed to be?  That a cock, or just an ugly, misplaced tail?  HA!  ", false);
 		//(Small Size, ?-10 inches:

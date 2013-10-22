@@ -1291,7 +1291,7 @@ function incubusVictoryRapeSex():void {
 		}
 		outputText(".  Having resolved to take the demon's backdoor, you approach his weakened form with brimming confidence.  He looks up, clearly hoping your plan is to squat on his throbbing member.  You dispel his misguided notion when you grab him by the horns and shove his face against the floor. He struggles weakly until you press down harder, making it clear he is to stay in position - on his knees with his head down and his ass in the air.  Circling your prey, you inspect his flawless body and carefully note that the hole at his crotch actually exposes a fair portion of his very supple and surprisingly feminine-looking backside.\n\n", false);
 		outputText("You don't waste any time, gripping your " + cockDescript(0) + " in one hand and ", false);
-		if(player.cocks[0].cockType == CockTypesEnum.HUMAN) outputText("pressing your thick flare ", false);
+		if(player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("pressing your thick flare ", false);
 		if(player.cocks[0].cockType == CockTypesEnum.DOG) outputText("pressing your pointed tip ", false);
 		if(player.cocks[0].cockType == CockTypesEnum.HUMAN || player.cocks[0].cockType.Index > 2) outputText("pressing your head ", false);
 		outputText("between the incubus' cheeks towards his inhumanly smooth rear-passage.  You gasp in delight at the tight ribbed texture of his asshole as you slide ", false);
