@@ -805,7 +805,7 @@
 	if(player.totalCocks() > 0) {
 		if(player.cocks[0].pierced > 0) outputText("\nLooking positively perverse, a " + player.cocks[0].pShort + " adorns your " + cockDescript(0) + ".", false);
 	}
-	if(flags[286] == 1) outputText("\nA magical, ruby-studded bar pierces your belly button, allowing you to summon Ceraph on a whim.", false);
+	if(flags[UNKNOWN_FLAG_NUMBER_00286] == 1) outputText("\nA magical, ruby-studded bar pierces your belly button, allowing you to summon Ceraph on a whim.", false);
 	if(player.hasVagina()) {
 		if(player.vaginas[0].labiaPierced > 0) outputText("\nYour " + vaginaDescript(0) + " glitters with the " + player.vaginas[0].labiaPShort + " hanging from your lips.", false);
 		if(player.vaginas[0].clitPierced > 0) outputText("\nImpossible to ignore, your " + clitDescript() + " glitters with its " + player.vaginas[0].clitPShort + ".", false);

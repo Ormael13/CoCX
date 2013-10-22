@@ -149,8 +149,8 @@ function spiderDisarm():void {
 	}
 	else {
 		outputText("You don't react fast enough and the sticky webbing pulls your " + player.weaponName + " out of your grip, gluing it to a nearby tree.  There's no way to get it back right now, you'll have to fight bare-handed!", false);
-		flags[268] = player.weaponName;
-		flags[269] = player.weaponAttack;
+		flags[UNKNOWN_FLAG_NUMBER_00268] = player.weaponName;
+		flags[UNKNOWN_FLAG_NUMBER_00269] = player.weaponAttack;
 		player.weaponName = "fists";
 		player.weaponAttack = 0;
 		player.createStatusAffect("Disarmed",0,0,0,0);
@@ -191,12 +191,12 @@ function fSpiderMorphGreeting():void {
 	outputText("", true);
 	spriteSelect(73);
 	//Egg sack sometimes
-	if(flags[271] > 0 && flags[271] < 100) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00271] > 0 && flags[UNKNOWN_FLAG_NUMBER_00271] < 100) {
 		findASpiderMorphEggSack();
 		return;
 	}
 	//*Greeting Event (1st time):
-	if(flags[270] == 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00270] == 0) {
 		outputText("You go exploring into the swamp, doing your best to ignore the oppressive heat and moisture of the place.  Insects buzz and flit about you constantly in an attempt to drive you mad with their incessant buzzing.  You swat a particularly noisy one from your " + player.face() + " before you realize you're no longer alone.\n\n", false);
 
 		outputText("A strange, naked female stands before you, hands on her hips as she eyes you up and down.  She's completely unclothed, revealing the paleness of her glistening skin to the humid swamp air, and though her legs and arms are both wreathed in some kind of shiny black covering, it only seems to enhance her nudity rather than conceal it.  Bobbing behind her is a sizable, black sphere with a few small protrusions that you can only assume are spinnerets. She's clearly a spider-girl, and now that you look closer, that black material is her exoskeleton!  The monster-girl flashes her needle-like fangs at you in a smile as she approaches.\n\n", false);
@@ -205,9 +205,9 @@ function fSpiderMorphGreeting():void {
 	else outputText("You go exploring in the swamp, and before you get far, a female spider-morph appears!  She's clearly different than the last one you ran into, though many of her features remain the same.  You realize she's no more than a dozen paces away and slowly approaching with a strange glint in her eye.\n\n", false);
 	//Menu for either
 	outputText("What do you do?", false);
-	simpleChoices("Fight",2984,"Try to Talk",2986,"",0,"",0,"Leave",2985);
+	simpleChoices("Fight",fightFSpiderMorph,"Try to Talk",talkToFSpiderMorph,"",0,"",0,"Leave",runFromFSpiderMorph);
 	//Incremement 'times encountered spider-girls'
-	flags[270]++;
+	flags[UNKNOWN_FLAG_NUMBER_00270]++;
 }
 
 //Selecting fight starts combat and eventParsers to 1 to display the combat menu and enemy description.
@@ -248,7 +248,7 @@ function talkToFSpiderMorph():void {
 			}
 			outputText(" well, you're the first sane person I've had a chance to ask.  Oh fuck it, can I tie you up and fuck you? Please?</i>\"\n\n", false);
 			outputText("Do you let her fuck you?", false);
-			simpleChoices("Yes",2987,"",0,"",0,"",0,"Leave",2988);
+			simpleChoices("Yes",voluntaryFemaleSpiderMorphRapesYou,"",0,"",0,"",0,"Leave",declinedCrazyFemaleSpiderMorphSexFunTimes);
 		}
 		//(OPTION 2 - GIFT) 
 		else {
@@ -735,7 +735,7 @@ function fSpiderMorphRapeDude():void {
 	outputText("  You get dressed and head back to camp.", false);
 	
 	stats(0,0,0,0,0,0,-100,0);
-	flags[271] = 200;
+	flags[UNKNOWN_FLAG_NUMBER_00271] = 200;
 	if(!inCombat()) doNext(13);
 	else eventParser(5007);
 }
@@ -801,7 +801,7 @@ function evilSpiderGirlVictoryAnal():void {
 	else if(player.cumQ() < 500) outputText("gush", false);
 	else outputText("river", false);
 	outputText(" of seed rushes out of her gaped anus, pooling on the swamp floor as she slowly loses consciousness.  You give her ass an affectionate slap and get dressed, feeling sated and ready to resume your adventures.", false);
-	if(y != 1) flags[271] = 200;
+	if(y != 1) flags[UNKNOWN_FLAG_NUMBER_00271] = 200;
 	stats(0,0,0,0,0,0,-100,0);
 	if(!inCombat()) doNext(13);
 	else eventParser(5007);
@@ -813,7 +813,7 @@ function findASpiderMorphEggSack():void {
 	outputText("You stumble upon a huge, webbed sack hanging from a tree.  Examining it closer, you see that bound up inside it are nearly a dozen webs, each containing a wriggling form.  They start moving faster and faster, perhaps reacting to the nearby movement, before the shells finally shatter and unleash their cargo.  Inside each is a tiny, six inch tall humanoid figure, each resembling a child in miniature.  Remarkably, their features remind you of your own, and before the significance of that fact settles in, they drop to the ground and scurry away on their tiny, carapace-covered legs.\n\n", false);
 
 	outputText("You're left scratching your head when you realize they were your own children, birthed by the spider-morph you fucked not so long ago.\n\n", false);
-	flags[271] = 0;
+	flags[UNKNOWN_FLAG_NUMBER_00271] = 0;
 	doNext(13);
 }
 	

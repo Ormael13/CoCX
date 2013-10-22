@@ -1,4 +1,4 @@
-﻿const TIMES_ENCOUNTERED_FROG:int = 1017;
+﻿//const TIMES_ENCOUNTERED_FROG:int = 1017;
 //Intro
 function findTheFrogGirl():void {
 	clearOutput();

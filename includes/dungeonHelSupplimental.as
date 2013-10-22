@@ -1,27 +1,27 @@
 ﻿//Project Introduction:
 //New Values:
 //-HelAffection -- A score measuring Hel's general fondness for the Player Character, measured on a scale of 0 - 100, with \"<i>0</i>\" being immediately after achieving \"<i>Fuckbuddy</i>\" status. Increases by 5 each time you fuck (not Corrupt!Rape) Hel, and 10 each time you engage in one of her threesomes. When HelAffection equals 70 points, the number freezes and Expansion 2 content triggers.
-const HEL_AFFECTION_FOLLOWER:int = 478;
-const HEL_FOLLOWER_LEVEL:int = 479;
-const TOOK_GOO_ARMOR:int = 480;
-const LOST_GOO_ARMOR_FIGHT:int = 481;
-const WON_GOO_ARMOR_FIGHT:int = 482;
-const HEL_REDUCED_ENCOUNTER_RATE:int = 483;
-const MET_VALERIA:int = 484;
-const HEL_HARPIES_DEFEATED:int = 485;
-const HEL_DUNGEON_MEAD_LOOTED:int = 486;
-const HEL_BRIGID_DEFEATED:int = 487;
-const HEL_PC_TALKED_WITH_HAKON:int = 488;
-const HEL_DUNGEON_TAKEN_WHIP:int = 489;
-const HEL_DUNGEON_TAKEN_STRAPS:int = 490;
-const HEL_DUNGEON_TAKEN_DAGGER:int = 491;
-const HEL_PHOENIXES_DEFEATED:int = 492;
-const HEL_HARPY_QUEEN_DEFEATED:int = 493;
-const HARPY_QUEEN_EXECUTED:int = 494;
-const HEL_KNOWS_ABOUT_HAKON:int = 495;
-const FOUGHT_WITH_HEL_IN_DUNGEON:int = 496;
-const TOOK_QUEEN_STAFF:int = 497;
-const VALARIA_AT_CAMP:int = 498;
+// HEL_AFFECTION_FOLLOWER:int = 478;
+// HEL_FOLLOWER_LEVEL:int = 479;
+// TOOK_GOO_ARMOR:int = 480;
+// LOST_GOO_ARMOR_FIGHT:int = 481;
+// WON_GOO_ARMOR_FIGHT:int = 482;
+// HEL_REDUCED_ENCOUNTER_RATE:int = 483;
+// MET_VALERIA:int = 484;
+// HEL_HARPIES_DEFEATED:int = 485;
+// HEL_DUNGEON_MEAD_LOOTED:int = 486;
+// HEL_BRIGID_DEFEATED:int = 487;
+// HEL_PC_TALKED_WITH_HAKON:int = 488;
+// HEL_DUNGEON_TAKEN_WHIP:int = 489;
+// HEL_DUNGEON_TAKEN_STRAPS:int = 490;
+// HEL_DUNGEON_TAKEN_DAGGER:int = 491;
+// HEL_PHOENIXES_DEFEATED:int = 492;
+// HEL_HARPY_QUEEN_DEFEATED:int = 493;
+// HARPY_QUEEN_EXECUTED:int = 494;
+// HEL_KNOWS_ABOUT_HAKON:int = 495;
+// FOUGHT_WITH_HEL_IN_DUNGEON:int = 496;
+// TOOK_QUEEN_STAFF:int = 497;
+// VALARIA_AT_CAMP:int = 498;
 
 
 
@@ -78,7 +78,7 @@ function heliaDiscovery():void {
 
 	outputText("\n\nDo you agree to help Helia?  She'd probably be <b>very</b> grateful...");
 	//(Display Options: [Yes] [No])
-	doYesNo(3583,3582);
+	doYesNo(agreeToHelpHeliaDungeon,noDungeon);
 }
 
 //Intro Scene -- No
@@ -154,7 +154,7 @@ function goToHeliaDungeon():void {
 	clearOutput();
 	outputText("You tell Helia that yeah, you're as ready as you'll ever be.  She beams and grabs you in a tight hug.  \"<i>Thanks again, [name].  You're a real goddamn champion, you know that?</i>\"  You laugh it off, but the salamander gives you a sultry wink and starts off toward the mountains.  You're quick to follow her.");
 	//(NEXT)
-	doNext(3586);
+	doNext(goToHeliaDungeon2);
 }
 function goToHeliaDungeon2():void {
 	clearOutput();
@@ -671,7 +671,7 @@ function pcDefeatedByBrigid():void {
 		
 		outputText("\n\nAn alarm blares in your mind and you reach out sluggishly to try and grab her slim ankle, but she kicks you in the head and your vision goes mazy.  The last thing you make out before slipping into unconsciousness is the harpy standing over Hel, pinning her fiery tail under a shield held down with one claw as she forces the contents of a vial down the salamander's gullet...");
 		
-		doNext(3785);
+		doNext(brigitPostQueenDeathBadEndII);
 	}
 }
 

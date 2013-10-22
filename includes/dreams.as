@@ -45,11 +45,11 @@ function dreamSelect():Boolean {
 		if(player.hasPerk("Minotaur Cum Addict") >= 0) choices[choices.length] = 6;
 	}
 	//Akbal
-	if(flags[16] > 4) {
-		if(flags[16] > 10) choices[choices.length] = 7;
-		if(flags[16] > 13) choices[choices.length] = 7;
-		if(flags[16] > 15) choices[choices.length] = 7;
-		if(flags[16] > 18) choices[choices.length] = 7;
+	if(flags[UNKNOWN_FLAG_NUMBER_00016] > 4) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00016] > 10) choices[choices.length] = 7;
+		if(flags[UNKNOWN_FLAG_NUMBER_00016] > 13) choices[choices.length] = 7;
+		if(flags[UNKNOWN_FLAG_NUMBER_00016] > 15) choices[choices.length] = 7;
+		if(flags[UNKNOWN_FLAG_NUMBER_00016] > 18) choices[choices.length] = 7;
 		choices[choices.length] = 7;
 		choices[choices.length] = 7;
 	}
@@ -73,7 +73,7 @@ function dreamSelect():Boolean {
 		choices[choices.length] = 11;
 	}
 	//Dom + Scylla
-	if(flags[54] > 0 && flags[150] > 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00054] > 0 && flags[UNKNOWN_FLAG_NUMBER_00150] > 0) {
 		choices[choices.length] = 12;
 		choices[choices.length] = 12;
 		choices[choices.length] = 12;

@@ -1,19 +1,19 @@
-﻿const TIMES_IN_BENOITS:int = 562;
-const BENOIT_AFFECTION:int = 563;
-const BENOIT_EXPLAINED_SHOP:int = 564;
-const BENOIT_SUGGEST_UNLOCKED:int = 565;
-const BENOIT_1:int = 567;
-const BENOIT_2:int = 568;
-const BENOIT_3:int = 569;
-const BENOIT_TALKED_TODAY:int = 570;
-const BENOIT_TALKED_TO_PROPERLY:int = 571;
-const BENOIT_EGGS:int = 572;
-const BENOIT_TIMES_SEXED_FEMPCS:int = 573;
-const BENOIT_BIRTH_DELAY:int = 574;
-const BENOIT_WOMB_TALK_UNLOCKED:int = 575;
-const BENOIT_POST_FIRSTFUCK_TALK:int = 576;
-const BENOIT_TESTED_BASILISK_WOMB:int = 577;
-const BENOIT_GENERIC_EGGS:int = 632;
+﻿//  TIMES_IN_BENOITS:int = 562;
+//  BENOIT_AFFECTION:int = 563;
+//  BENOIT_EXPLAINED_SHOP:int = 564;
+//  BENOIT_SUGGEST_UNLOCKED:int = 565;
+//  BENOIT_1:int = 567;
+//  BENOIT_2:int = 568;
+//  BENOIT_3:int = 569;
+//  BENOIT_TALKED_TODAY:int = 570;
+//  BENOIT_TALKED_TO_PROPERLY:int = 571;
+//  BENOIT_EGGS:int = 572;
+//  BENOIT_TIMES_SEXED_FEMPCS:int = 573;
+//  BENOIT_BIRTH_DELAY:int = 574;
+//  BENOIT_WOMB_TALK_UNLOCKED:int = 575;
+//  BENOIT_POST_FIRSTFUCK_TALK:int = 576;
+//  BENOIT_TESTED_BASILISK_WOMB:int = 577;
+//  BENOIT_GENERIC_EGGS:int = 632;
 //(Shop open between 9:00 and 17:00)
 
 //Fen, you'll need a function to determine gendered pronouns and version of name for this character. I've formatted all the eligible places I found in the order of [male/female]. -Z
@@ -149,7 +149,7 @@ function benoitTransactBuy(slot:int = 1):void {
 	else shortName = flags[BENOIT_3];
 	if(player.gems < 2 * itemValue(shortName)) {
 		outputText("You consider making a purchase, but you lack the gems to go through with it.");
-		doNext(3787);
+		doNext(benoitsBuyMenu);
 		return;
 	}
 	if(benoitLover()) outputText("After examining what you've picked out with " + benoitMF("his","her") + " fingers, " + benoitMF("Benoit","Benoite") + " hands it over and accepts your gems with a grin.");
@@ -215,7 +215,7 @@ function benoitSellTransact(slot:int = 1):void {
 	statScreenRefresh();
 	//(+1 Affection)
 	benoitAffection(1);
-	doNext(3788);
+	doNext(benoitSellMenu);
 }
 
 //All slots are reset each day.  Benoit buys items at 66% the rate Oswald does.  
@@ -374,7 +374,7 @@ function talkToBenoit():void {
 		else if(choice == 6) {
 			outputText("You ask " + benoitMF("Benoit","Benoite") + " for any rumours going around.");
 			//[Deep cave cleared: 
-			if(flags[114] > 0) outputText("\n\n\"<i>Somesing strange did 'appen ze uzzer day, now you mention it,</i>\" " + benoitMF("he","she") + " says, tapping a curved tooth.  \"<i>I got a big group of imps in ere.  I normally don't serve zem because zey are always stealing sings whilst one of zem is paying, but zese guys seemed too worked up to even sink about lifting ze shop - zey smelt of fear.  Zey were buying lots of food and survival gear - one of zem kept going on and on about ze fact zey left \"<i>ze fairy</i>\" behind, until one of ze uzzers slapped 'im and said if 'ee didn't shut up, 'ee would be ze fairy.</i>\"  " + benoitMF("Benoit","Benoite") + " shrugs.  \"<i>Nasty little sings.  Tasty, though.</i>\"");
+			if(flags[UNKNOWN_FLAG_NUMBER_00114] > 0) outputText("\n\n\"<i>Somesing strange did 'appen ze uzzer day, now you mention it,</i>\" " + benoitMF("he","she") + " says, tapping a curved tooth.  \"<i>I got a big group of imps in ere.  I normally don't serve zem because zey are always stealing sings whilst one of zem is paying, but zese guys seemed too worked up to even sink about lifting ze shop - zey smelt of fear.  Zey were buying lots of food and survival gear - one of zem kept going on and on about ze fact zey left \"<i>ze fairy</i>\" behind, until one of ze uzzers slapped 'im and said if 'ee didn't shut up, 'ee would be ze fairy.</i>\"  " + benoitMF("Benoit","Benoite") + " shrugs.  \"<i>Nasty little sings.  Tasty, though.</i>\"");
 			//[Factory not cleared: 
 			else if(player.hasStatusAffect("DungeonShutDown") < 0) outputText("\n\n\"<i>Not anysing very interesting,</i>\" " + benoitMF("he","she") + " shrugs.  \"<i>I get a few customers from ze desert city, Tel'Adre, coming in 'ere in secret to pick up a few sings zey cannot find back 'ome.  So zey are still a sing.  You 'ave to wonder ow much longer zey can keep hiding, though.</i>\"");
 			else {
@@ -472,7 +472,7 @@ function eggySuggest():void {
 		
 			outputText("\n\nOnce again, you carefully inch your blind charge to a clear cranny and push him against a wooden wall, standing back to slowly peel off your [armor].  You grin as you ostentatiously drop each piece onto the packed earth, allowing him to guess what it is by the sound it makes.  His breathing comes heavier as your undergarments make a feathery sound as they fall.  As you take his hands and lay them upon your naked skin, you think about how you want to go about this.");
 		}
-		simpleChoices("Let Him",3812,"Take Charge",3813,"",0,"",0,"",0);
+		simpleChoices("Let Him",repeatSexWithBenoitLetHim,"Take Charge",repeatBenoitFuckTakeCharge,"",0,"",0,"",0);
 		return;
 	}
 	flags[BENOIT_TIMES_SEXED_FEMPCS]++;
@@ -576,7 +576,7 @@ function eggySuggest():void {
 	stats(0,0,0,0,0,0,-100,0);
 	if((player.pregnancyType == 5 || player.hasPerk("Harpy Womb") >= 0 || player.hasPerk("Oviposition") >= 0) && (player.pregnancyIncubation == 0 || player.pregnancyType == 5)) {
 		outputText("  I would not inflict my children upon you.  Ere, take as much as you like.</i>\"");
-		simpleChoices("Take It",3810,"",0,"",0,"",0,"Leave",3811);
+		simpleChoices("Take It",takeBenoitsContraceptives,"",0,"",0,"",0,"Leave",dontTakeEggtraceptives);
 	}
 	else {
 		outputText("  I cannot give you babies unless you 'ave eggs.  I guess I should think a bit more before I go digging for things...</i>\"");
@@ -769,13 +769,13 @@ function tryToConvertToBassyWomb():void {
 	//A double dose of ovi-elixer, a bottle of reptilum, goblin ale and some basilisk blood would probably do...
 	if(!(hasItem("OviElix",2) && hasItem("Reptlum",1) && hasItem("Gob.Ale",1))) {
 		outputText("You don't have the necessary ingredients to attempt this yet.  You recall " + benoitMF("Benoit","Benoite") + " mentioning that you would need Reptilum, two Ovi Elixirs, and Goblin Ale.");
-		doNext(3786);
+		doNext(benoitIntro);
 	}
 	/*else if(player.isTaur()) {
 		outputText("\"<i>Forgive me, [name],</i>\" Benoit says, clearly troubled, as you begin hauling out the ingredients and announcing your plan.  \"<i>I sink your body is already stressed enough wis 'aving to pump so little blood so far... I would razer you not take furzer risks on my account until your form is more... compact.  I cannot be a part of zis... 'owever much I would like to.  You mean too much to me, you see.</i>\"");
 		outputText("\n\nLeft speechless by his frankness, you can only sweep the items back into your bag.");
 		//return to shop menu
-		doNext(3786);
+		doNext(benoitIntro);
 	}*/
 	//Ingredients in inventory: 
 	else {

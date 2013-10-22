@@ -1,27 +1,27 @@
-﻿const SANURA_DISABLED:int = 833;
-const MET_SANURA:int = 834;
-const BEATEN_SANURA_COUNT:int = 835;
-const SANDWITCH_MOB_DEFEATED:int = 836;
-const SANDWITCH_THRONE_UNLOCKED:int = 837;
-const SAND_WITCHES_FRIENDLY:int = 838;
-const CUM_WITCH_DEFEATED:int = 839;
-const ENTERED_SANDWITCH_DUNGEON:int = 840;
-const PAWJOBS:int = 841;
-const RIDDLE_ONE:int = 842;
-const RIDDLE_TWO:int = 843;
-const RIDDLE_THREE:int = 844;
-const TIMES_SUBMITTED_TO_SANURA:int = 845;
-const TIMES_WINFUCKED_SANURA:int = 846;
-const SAND_MOTHER_DEFEATED:int = 847;
-const TIMES_TENTACLED_SAND_MOTHER:int = 848;
-const SAND_WITCHES_COWED:int = 849;
-const SAND_WITCH_LOOT_TAKEN:int = 850;
-const TIMES_FRIENDLY_FUCKED_SAND_MOTHER:int = 851;
-const MORE_CUM_WITCHES:int = 852;
-const CUM_WITCHES_FIGHTABLE:int = 853;
-const SAND_WITCH_LEAVE_ME_ALONE:int = 854;
-const BEEN_BLESSED_BY_CUM_WITCH:int = 855;
-const DISCOVERED_WITCH_DUNGEON:int = 856;
+﻿// SANURA_DISABLED:int = 833;
+// MET_SANURA:int = 834;
+// BEATEN_SANURA_COUNT:int = 835;
+// SANDWITCH_MOB_DEFEATED:int = 836;
+// SANDWITCH_THRONE_UNLOCKED:int = 837;
+// SAND_WITCHES_FRIENDLY:int = 838;
+// CUM_WITCH_DEFEATED:int = 839;
+// ENTERED_SANDWITCH_DUNGEON:int = 840;
+// PAWJOBS:int = 841;
+// RIDDLE_ONE:int = 842;
+// RIDDLE_TWO:int = 843;
+// RIDDLE_THREE:int = 844;
+// TIMES_SUBMITTED_TO_SANURA:int = 845;
+// TIMES_WINFUCKED_SANURA:int = 846;
+// SAND_MOTHER_DEFEATED:int = 847;
+// TIMES_TENTACLED_SAND_MOTHER:int = 848;
+// SAND_WITCHES_COWED:int = 849;
+// SAND_WITCH_LOOT_TAKEN:int = 850;
+// TIMES_FRIENDLY_FUCKED_SAND_MOTHER:int = 851;
+// MORE_CUM_WITCHES:int = 852;
+// CUM_WITCHES_FIGHTABLE:int = 853;
+// SAND_WITCH_LEAVE_ME_ALONE:int = 854;
+// BEEN_BLESSED_BY_CUM_WITCH:int = 855;
+// DISCOVERED_WITCH_DUNGEON:int = 856;
 
 function enterBoobsDungeon():void {
 	inDungeon = true;
@@ -2387,7 +2387,7 @@ function explainYourSelfToZeSandBitch():void {
 	
 	outputText("\n\nSuddenly, the Queen jerks up, looking you in the eye with her strange, white-irised gaze.");
 	//(No new PG.  Corrupt version)
-	if(player.cor > player.inte || monk >= 5 || player.hasStatusAffect("Exgartuan") >= 0 || amilyCorrupt() || flags[283] > 0 || flags[282] > 0 || flags[NIAMH_STATUS] > 0) {
+	if(player.cor > player.inte || monk >= 5 || player.hasStatusAffect("Exgartuan") >= 0 || amilyCorrupt() || flags[UNKNOWN_FLAG_NUMBER_00283] > 0 || flags[UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[NIAMH_STATUS] > 0) {
 		outputText("  \"<i>There is some truth to your tale, [name], but I am a Sand Mother.  We are schooled in the art of sussing out the corrupt or unclean.  If we could not detect disguised demons and demonic agents, we would not flourish as we do now, and this great desert would not be on the cusp of resurrection.</i>\"");
 		outputText("\n\nThe Sand Mother steps out of her throne, brandishing a shining scepter as she rises.  Her lips curve into a cruel smile and she challenges, \"<i>Fight me, [name], and fall like every demonic agent before you.  Do not fear, for when you lose, you shall be reborn to serve a just cause.  Your taint may yet be exorcised.</i>\"");
 		outputText("\n\nThere's no way out, it's a fight!");

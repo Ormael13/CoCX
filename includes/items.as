@@ -1,9 +1,9 @@
 ﻿// import classes.itemSlotClass;
 
-const FOX_BAD_END_WARNING:int = 477;
-const TIMES_MET_CHICKEN_HARPY:int = 652;
-const EGGS_BOUGHT:int = 653;
-const BIKINI_ARMOR_BONUS:int = 769;
+//const FOX_BAD_END_WARNING:int = 477;
+//const TIMES_MET_CHICKEN_HARPY:int = 652;
+//const EGGS_BOUGHT:int = 653;
+//const BIKINI_ARMOR_BONUS:int = 769;
 
 function itemLongName(shortName1:String):String {
 	
@@ -387,7 +387,7 @@ function dropItem(monsterName:String):void {
 		else shortName = "Brown D";
 	}
 	if(monsterName == "Vala") {
-		if(flags[126] == 0) shortName = "NumbRox";
+		if(flags[UNKNOWN_FLAG_NUMBER_00126] == 0) shortName = "NumbRox";
 	}
 	if(monsterName == "plain girl") {
 		if(rand(3) == 0) shortName = "EctoPls";
@@ -517,10 +517,10 @@ function dropItem(monsterName:String):void {
 		else if(temp == 6) shortName = "W. Book";
 		else if(temp == 7) shortName = "B.Chitn";
 		//force honey drop if milked
-		if(flags[65] == 1) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00065] == 1) {
 			if(rand(2) == 0) shortName = "BeeHony";
 			else shortName = "PurHony";
-			flags[65] = 0;
+			flags[UNKNOWN_FLAG_NUMBER_00065] = 0;
 		}
 	}
 	if(monsterName == "demons") {
@@ -591,7 +591,7 @@ function dropItem(monsterName:String):void {
 		shortName = "FoxJewl";
 	}
 	//Chance of armor if at level 1 pierce fetish
-	if(!plotFight && monster.short != "Ember" && monster.short != "Kiha" && monster.short != "Helia" && monster.short != "Isabella" && flags[23] == 1 && rand(10) == 0 && !hasItem("SeductA", 1) && !ceraphIsFollower()) {
+	if(!plotFight && monster.short != "Ember" && monster.short != "Kiha" && monster.short != "Helia" && monster.short != "Isabella" && flags[UNKNOWN_FLAG_NUMBER_00023] == 1 && rand(10) == 0 && !hasItem("SeductA", 1) && !ceraphIsFollower()) {
 		shortName = "SeductA";
 	}
 	
@@ -615,8 +615,8 @@ function dropItem(monsterName:String):void {
 		if(temp == 12) shortName ="L.BlkEg";
 	}
 	//Bonus loot overrides others
-	if(flags[234] != "") {
-		shortName = flags[234];
+	if(flags[UNKNOWN_FLAG_NUMBER_00234] != "") {
+		shortName = flags[UNKNOWN_FLAG_NUMBER_00234];
 	}
 	//if(debug) shortName = "OviElix";
 	if(shortName != "NULL") {
@@ -692,8 +692,8 @@ function fixedDamage(weaponName):Number {
 	if(weaponName == "deadly spear") attack = 8;
 	if(weaponName == "coiled whip") attack = 5;
 	if(weaponName == "succubi whip") attack = 10;
-	if(weaponName == "jeweled rapier") attack = (13 + flags[137]*2);
-	if(weaponName == "Raphael's rapier" || weaponName == "vulpine rapier") attack = 8 + flags[137]*2;
+	if(weaponName == "jeweled rapier") attack = (13 + flags[UNKNOWN_FLAG_NUMBER_00137]*2);
+	if(weaponName == "Raphael's rapier" || weaponName == "vulpine rapier") attack = 8 + flags[UNKNOWN_FLAG_NUMBER_00137]*2;
 	if(weaponName == "spiked gauntlet") attack = 5;
 	if(weaponName == "hooked gauntlets") attack = 8;
 	//CHEATAHN'
@@ -976,7 +976,7 @@ function applyArmorStats(armorName:String, output:Boolean = true):void {
 			player.nipplesPierced = 1;
 			player.nipplesPShort = "seamless black nipple-studs";
 			player.nipplesPLong = "Seamless black nipple-studs";
-			flags[23] = 2;
+			flags[UNKNOWN_FLAG_NUMBER_00023] = 2;
 			return;
 		}
 		else {
@@ -2070,9 +2070,9 @@ function doItems(eventNo:Number):void {
 	if(eventNo == 1058) {
 		spriteSelect(49);
 		outputText("", true);
-		if(player.gems >= 100 || (player.gems >= 50 && flags[82] >= 2)) {
+		if(player.gems >= 100 || (player.gems >= 50 && flags[UNKNOWN_FLAG_NUMBER_00082] >= 2)) {
 			outputText("Rathazul hands you the Reducto with a nod before returning to his work.\n\n", false);
-			if(flags[82] >= 2) player.gems -= 50;
+			if(flags[UNKNOWN_FLAG_NUMBER_00082] >= 2) player.gems -= 50;
 			else player.gems -= 100;
 			shortName = "Reducto";
 			takeItem();
@@ -2188,7 +2188,7 @@ function doItems(eventNo:Number):void {
 			itemSlot1.quantity = 0;
 			itemSlot1.shortName = "";
 		}		
-		doNext(2255);
+		doNext(oswaldPawn);
 		player.gems += temp;
 		statScreenRefresh();
 		return;
@@ -2203,7 +2203,7 @@ function doItems(eventNo:Number):void {
 			itemSlot2.quantity = 0;
 			itemSlot2.shortName = "";
 		}		
-		doNext(2255);
+		doNext(oswaldPawn);
 		player.gems += temp;
 		statScreenRefresh();
 		return;
@@ -2218,7 +2218,7 @@ function doItems(eventNo:Number):void {
 			itemSlot3.quantity = 0;
 			itemSlot3.shortName = "";
 		}		
-		doNext(2255);
+		doNext(oswaldPawn);
 		player.gems += temp;
 		statScreenRefresh();
 		return;
@@ -2233,7 +2233,7 @@ function doItems(eventNo:Number):void {
 			itemSlot4.quantity = 0;
 			itemSlot4.shortName = "";
 		}		
-		doNext(2255);
+		doNext(oswaldPawn);
 		player.gems += temp;
 		statScreenRefresh();
 		return;
@@ -2248,7 +2248,7 @@ function doItems(eventNo:Number):void {
 			itemSlot5.quantity = 0;
 			itemSlot5.shortName = "";
 		}
-		doNext(2255);
+		doNext(oswaldPawn);
 		player.gems += temp;
 		statScreenRefresh();
 		return;
@@ -2925,10 +2925,10 @@ function destroyItems(itemName:String, minQuantity:Number):Boolean {
 function ceruleanPotion():void {
 	slimeFeed();
 	//Repeat genderless encounters
-	if(player.gender == 0 && flags[62] > 0) {
+	if(player.gender == 0 && flags[UNKNOWN_FLAG_NUMBER_00062] > 0) {
 		outputText("You take another sip of the Cerulean Potion.  You find it soothing and become very excited about the possibility of another visit from the succubus.", true);
 	}
-	else if(player.gender == 3 && flags[111] > 0) {
+	else if(player.gender == 3 && flags[UNKNOWN_FLAG_NUMBER_00111] > 0) {
 		outputText("With anticipation, you chug down another bottle of the Cerulean Potion. A warm sensation radiates out from your stomach as you feel the potion course through your body.", true);
 	}
 	//All else
@@ -3218,9 +3218,9 @@ function minotaurCum():void {
 	minoCumAddiction(7);
 	outputText("", true);
 	outputText("As soon as you crack the seal on the bottled white fluid, a ", false);
-	if(flags[20] == 0) outputText("potent musk washes over you.", false);
+	if(flags[UNKNOWN_FLAG_NUMBER_00020] == 0) outputText("potent musk washes over you.", false);
 	else outputText("heavenly scent fills your nostrils.", false);
-	if(flags[18] < 50) outputText("  It makes you feel dizzy, ditzy, and placid.", false);
+	if(flags[UNKNOWN_FLAG_NUMBER_00018] < 50) outputText("  It makes you feel dizzy, ditzy, and placid.", false);
 	else outputText("  It makes you feel euphoric, happy, and willing to do ANYTHING to keep feeling this way.", false);
 	outputText("  Unbidden, your hand brings the bottle to your lips, and the heady taste fills your mouth as you convulsively swallow the entire bottle.", false);
 	//-Raises lust by 10.
@@ -3249,7 +3249,7 @@ function minotaurCum():void {
 	//(Minotaur fantasy)
 	if(gameState == 0 && rand(10) == 1) {
 		outputText("\n\nYour eyes flutter closed for a second as a fantasy violates your mind.  You're on your knees, prostrate before a minotaur.  Its narcotic scent fills the air around you, and you're swaying back and forth with your belly already sloshing and full of spunk.  Its equine-like member is rubbing over your face, and you submit to the beast, stretching your jaw wide to take its sweaty, glistening girth inside you.  Your tongue quivers happily as you begin sucking and slurping, swallowing each drop of pre-cum you entice from the beastly erection.  Gurgling happily, you give yourself to your inhuman master for a chance to swallow into unthinking bliss.", false);
-		stats(0,0,0,0,1,0,rand(5)+player.cor/20+flags[18]/5,0);
+		stats(0,0,0,0,1,0,rand(5)+player.cor/20+flags[UNKNOWN_FLAG_NUMBER_00018]/5,0);
 	}
 	//(Healing – if hurt and uber-addicted (hasperk))
 	if(player.HP < maxHP() && player.hasPerk("Minotaur Cum Addict") >= 0) {
@@ -3257,8 +3257,8 @@ function minotaurCum():void {
 		HPChange(int(maxHP()/4), false);
 	}
 	//Uber-addicted status!
-	if(player.hasPerk("Minotaur Cum Addict") >= 0 && flags[21] <= 0) {
-		flags[21] = 3 + rand(2);
+	if(player.hasPerk("Minotaur Cum Addict") >= 0 && flags[UNKNOWN_FLAG_NUMBER_00021] <= 0) {
+		flags[UNKNOWN_FLAG_NUMBER_00021] = 3 + rand(2);
 		outputText("\n\n<b>Your body feels so amazing and sensitive.  Experimentally you pinch yourself and discover that even pain is turning you on!</b>", false);
 	}
 }
@@ -6392,7 +6392,7 @@ function itemGoNext():void {
 	}
 	//Armor shop
 	if(menuLoc == 9) {
-		doNext(2274);
+		doNext(armorShop);
 		return;
 	}
 	if(menuLoc == 11) {
@@ -6401,12 +6401,12 @@ function itemGoNext():void {
 	}
 	//Lumi's potion shop
 	if(menuLoc == 12) {
-		doNext(2436);
+		doNext(lumiShop);
 		return;
 	}
 	//Lumi's enhancement shop
 	if(menuLoc == 13) {
-		doNext(2441);
+		doNext(lumiEnhance);
 		return;
 	}
 	//Late night looting
@@ -6416,7 +6416,7 @@ function itemGoNext():void {
 	}
 	//Weapon shop
 	if(menuLoc == 15) {
-		doNext(2553);
+		doNext(weaponShop);
 		return;
 	}
 	if(menuLoc == 16) {
@@ -6432,7 +6432,7 @@ function itemGoNext():void {
 		return;
 	}
 	if(menuLoc == 19) {
-		doNext(2836);
+		doNext(bakeryuuuuuu);
 		return;
 	}
 	if(menuLoc == 20) {
@@ -6452,19 +6452,19 @@ function itemGoNext():void {
 		return;		
 	}
 	if(menuLoc == 24) {
-		doNext(2256);
+		doNext(barTelAdre);
 		return;
 	}
 	if(menuLoc == 25) {
-		doNext(3618);
+		doNext(owcaTavern);
 		return;
 	}
 	if(menuLoc == 26) {
-		doNext(3787);
+		doNext(benoitsBuyMenu);
 		return;
 	}
 	if(menuLoc == 27) {
-		doNext(3968);
+		doNext(chickenHarpy);
 		return;
 	}
 	if(menuLoc == 28) {
@@ -6472,7 +6472,7 @@ function itemGoNext():void {
 		return;
 	}
 	if(menuLoc == 29) {
-		doNext(3997);
+		doNext(ingredientsMenu);
 		return;
 	}
 	if(menuLoc == 2) doNext(13);
@@ -7540,8 +7540,8 @@ function slimeFeed():void {
 		}
 	}
 	if(player.hasPerk("Diapause") >= 0) {
-		flags[228] += 3 + rand(3);
-		flags[229] = 1;
+		flags[UNKNOWN_FLAG_NUMBER_00228] += 3 + rand(3);
+		flags[UNKNOWN_FLAG_NUMBER_00229] = 1;
 	}
 }
 
@@ -7813,7 +7813,7 @@ function snakeOil():void {
 
 function extensionSerum():void {
 	outputText("", true);
-	if(flags[26] > 2) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00026] > 2) {
 		outputText("<b>No way!</b>  Your head itches like mad from using the rest of these, and you will NOT use another.\n", false);
 		if(!debug) {
 			shortName = "ExtSerm";
@@ -7822,24 +7822,24 @@ function extensionSerum():void {
 		return;
 	}
 	outputText("You open the bottle of hair extension serum and follow the directions carefully, massaging it into your scalp and being careful to keep it from getting on any other skin.  You wash off your hands with lakewater just to be sure.", false);
-	if(flags[25] <= 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00025] <= 0) {
 		outputText("\n\nThe tingling on your head lets you know that it's working!", false);
-		flags[25] = 7;
-		flags[26] = 1;
+		flags[UNKNOWN_FLAG_NUMBER_00025] = 7;
+		flags[UNKNOWN_FLAG_NUMBER_00026] = 1;
 	}
-	else if(flags[26] == 1) {
+	else if(flags[UNKNOWN_FLAG_NUMBER_00026] == 1) {
 		outputText("\n\nThe tingling intensifies, nearly making you feel like tiny invisible faeries are massaging your scalp.", false);
-		flags[26]++;
+		flags[UNKNOWN_FLAG_NUMBER_00026]++;
 	}
-	else if(flags[26] == 2) {
+	else if(flags[UNKNOWN_FLAG_NUMBER_00026] == 2) {
 		outputText("\n\nThe tingling on your scalp is intolerable!  It's like your head is a swarm of angry ants, though you could swear your hair is growing so fast that you can feel it weighing you down more and more!", false);
-		flags[26]++;
+		flags[UNKNOWN_FLAG_NUMBER_00026]++;
 	}
-	if(flags[66] > 0 && player.hairType != 4) {
-		flags[66] = 0;
+	if(flags[UNKNOWN_FLAG_NUMBER_00066] > 0 && player.hairType != 4) {
+		flags[UNKNOWN_FLAG_NUMBER_00066] = 0;
 		outputText("\n\n<b>Somehow you know that your " + hairDescript() + " is growing again.</b>", false);
 	}
-	if(flags[25] < 7) flags[25] = 7;
+	if(flags[UNKNOWN_FLAG_NUMBER_00025] < 7) flags[UNKNOWN_FLAG_NUMBER_00025] = 7;
 }
 function Hummus():void {
 	outputText("", true);
@@ -7945,7 +7945,7 @@ function Hummus():void {
 
 
 function giveHumanizer():void {
-	if(flags[28] > 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00028] > 0) {
 		outputText("<b>I was a cheater until I took an arrow to the knee...</b>", true);
 		eventParser(5035);
 		return;
@@ -7953,7 +7953,7 @@ function giveHumanizer():void {
 	outputText("I AM NOT A CROOK.  BUT YOU ARE!  <b>CHEATER</b>!\n\n", true);
 	shortName = "Hummus ";
 	takeItem();
-	flags[28]++;
+	flags[UNKNOWN_FLAG_NUMBER_00028]++;
 }
 
 function coal():void {
@@ -8598,11 +8598,11 @@ function reptilum():void {
 		}	
 	}
 	//-Hair stops growing!
-	if(flags[66] == 0 && changes < changeLimit && rand(4) == 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00066] == 0 && changes < changeLimit && rand(4) == 0) {
 		outputText("\n\nYour scalp tingles oddly.  In a panic, you reach up to your " + hairDescript() + ", but thankfully it appears unchanged.\n\n", false);
 		outputText("(<b>Your hair has stopped growing.</b>)", false);
 		changes++;
-		flags[66]++;
+		flags[UNKNOWN_FLAG_NUMBER_00066]++;
 	}	
 	//Big physical changes:
 	//-Legs – Draconic, clawed feet
@@ -10237,9 +10237,9 @@ function shriveledTentacle():void {
 		outputText("\n\nYour balance slides way off, and you plop down on the ground as mass concentrates on your head.  Reaching up, you give a little shriek as you feel a disturbingly thick, squirming thing where your hair should be.  Pulling it down in front of your eyes, you notice it's still attached to your head; what's more, it's the same color as your hair used to be.  <b>You now have squirming tentacles in place of hair!</b>  As you gaze at it, a gentle heat starts to suffuse your hand.  The tentacles must be developing their characteristic stingers!  You quickly let go; you'll have to take care to keep them from rubbing on your skin at all hours.  On the other hand, they're quite short and you find you can now flex and extend them as you would any other muscle, so that shouldn't be too hard.  You settle on a daring, windswept look for now.", false);
 		player.hairType = 4;
 		player.hairLength = 5;
-		if(flags[66] == 0) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00066] == 0) {
 			outputText("  <b>(Your hair has stopped growing.)</b>", false);
-			flags[66] = 1;
+			flags[UNKNOWN_FLAG_NUMBER_00066] = 1;
 		}
 		changes++;		
 		changes++;		
@@ -11626,7 +11626,7 @@ function lustyMaidenPaizuri():void {
 	if(player.hasVirginVagina()) stats(0,0,0,0,0,0,0,-1);
 	//If minotaur, increase addiction slightly.
 	if(monster.short == "minotaur") minoCumAddiction(3);
-	if(monster.short == "Ceraph") flags[291]++;
+	if(monster.short == "Ceraph") flags[UNKNOWN_FLAG_NUMBER_00291]++;
 	//Usable on: Imps, Minotaurs, Satyrs, Incubus Mechanic, Anemones, Spider Guys, Akbal, Drider, Fetish Zealot, Sand Trap, Very Corrupt Jojo (Maybe slight decorruption to him), Ceraph, Red Kitsune if cock out.
 	if(inCombat()) eventParser(5007);
 	else doNext(13);

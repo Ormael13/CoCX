@@ -21,24 +21,24 @@ Variable List
 ===========================*/
 //ISABELLAS CUNT CAPACITY: 164!
 
-const ISABELLA_TIMES_OFFERED_FOLLOWER:int = 367;
-const ISABELLA_AFFECTION:int = 368;
-const ISABELLA_FOLLOWER_ACCEPTED:int = 369;
-const ISABELLA_PLAINS_DISABLED:int = 370;
-const ISABELLA_CAMP_DISABLED:int = 371;
-const ISABELLA_ACCENT_TRAINING_PERCENT:int = 372;
-const ISABELLA_ACCENT_TRAINING_COOLDOWN:int = 373;
-const ISABELLA_ACCENT_FORCED_ON:int = 374;
-const ISABELLA_MILKED_YET:int = 375;
-const ISABELLA_BLOWJOBS_DISABLED:int = 376;
-const ISABELLA_MORNING_FELLATIO_COUNT:int = 377;
-const ISABELLA_TIME_SINCE_LAST_HOTDOGGING:int = 378;
-const ISABELLA_TIMES_HOTDOGGED:int = 379;
-const ISABELLA_MILK_COOLDOWN:int = 380;
-const ISABELLA_MURBLE_BLEH:int = 381;
-const ISABELLA_SPARRING_INTRO:int = 382;
-const ISABELLA_PROBOVA_BURP_COUNT:int = 383;
-const FOUND_ISABELLA_AT_FARM_TODAY:int = 707;
+//const ISABELLA_TIMES_OFFERED_FOLLOWER:int = 367;
+//const ISABELLA_AFFECTION:int = 368;
+//const ISABELLA_FOLLOWER_ACCEPTED:int = 369;
+//const ISABELLA_PLAINS_DISABLED:int = 370;
+//const ISABELLA_CAMP_DISABLED:int = 371;
+//const ISABELLA_ACCENT_TRAINING_PERCENT:int = 372;
+//const ISABELLA_ACCENT_TRAINING_COOLDOWN:int = 373;
+//const ISABELLA_ACCENT_FORCED_ON:int = 374;
+//const ISABELLA_MILKED_YET:int = 375;
+//const ISABELLA_BLOWJOBS_DISABLED:int = 376;
+//const ISABELLA_MORNING_FELLATIO_COUNT:int = 377;
+//const ISABELLA_TIME_SINCE_LAST_HOTDOGGING:int = 378;
+//const ISABELLA_TIMES_HOTDOGGED:int = 379;
+//const ISABELLA_MILK_COOLDOWN:int = 380;
+//const ISABELLA_MURBLE_BLEH:int = 381;
+//const ISABELLA_SPARRING_INTRO:int = 382;
+//const ISABELLA_PROBOVA_BURP_COUNT:int = 383;
+//const FOUND_ISABELLA_AT_FARM_TODAY:int = 707;
 
 function isabellaFollower():Boolean {
 	if(flags[ISABELLA_FOLLOWER_ACCEPTED] == 1 && flags[ISABELLA_CAMP_DISABLED] == 0) return true;
@@ -75,7 +75,7 @@ function isabellaMoovesInGreeting():void {
 		outputText("  You blush and squirm a little from the dark-hued warrioress' affections, yet you endure them all the same.\n\n", false);
 		
 		outputText("Do you invite her to camp?", false);
-		doYesNo(3242,3241);
+		doYesNo(moveTheBitchIn,turnDownIsabellaFollower);
 	}
 	//Repeat Offer
 	else {
@@ -89,7 +89,7 @@ function isabellaMoovesInGreeting():void {
 			if(player.cocks[player.shortestCockIndex()].cockLength < 9)
 				suck = 2957;
 		}
-		choices("Talk",2969,"Drink",2956,"Get Licked",suck,"Fight 4 Rape",2954,"Offer Oral",2958,"Accept Offer",3242,"",0,"",0,"",0,"Leave",13);
+		choices("Talk",talkWithIsabella,"Drink",nomOnMommaIzzysTits,"Get Licked",suck,"Fight 4 Rape",fightIsabella,"Offer Oral",volunteerToSlurpCowCunt,"Accept Offer",moveTheBitchIn,"",0,"",0,"",0,"Leave",13);
 	}
 	flags[ISABELLA_TIMES_OFFERED_FOLLOWER]++;
 }
@@ -106,7 +106,7 @@ function turnDownIsabellaFollower():void {
 		if(player.cocks[player.shortestCockIndex()].cockLength < 9)
 			suck = 2957;
 	}
-	choices("Talk",2969,"Drink",2956,"Get Licked",suck,"Fight 4 Rape",2954,"Offer Oral",2958,"",0,"",0,"",0,"",0,"Leave",13);
+	choices("Talk",talkWithIsabella,"Drink",nomOnMommaIzzysTits,"Get Licked",suck,"Fight 4 Rape",fightIsabella,"Offer Oral",volunteerToSlurpCowCunt,"",0,"",0,"",0,"",0,"Leave",13);
 }
 //Move Ze Bitch In! 
 function moveTheBitchIn():void {
@@ -157,7 +157,7 @@ function callForFollowerIsabella():void {
 		pro = 3258;
 		outputText("\n\n<b>Isabella would probably drink a bottle of Pro Bova if you gave it to her.</b>", false);
 	}
-	choices("Accent Coach",accent,"Get Milk",milk,"GiveProBova",pro,"Sex",3254,"Spar",3255,"",0,"",0,"",0,"",0,"Back",121);
+	choices("Accent Coach",accent,"Get Milk",milk,"GiveProBova",pro,"Sex",campIzzySexMenu,"Spar",isabellaSparMenu,"",0,"",0,"",0,"",0,"Back",121);
 }
 
 function campIzzySexMenu():void {
@@ -187,7 +187,7 @@ function campIzzySexMenu():void {
 	if(player.hasCock() && player.lust >= 33) hotdog = 3246;
 	var fuckHer:int = 0;
 	if(player.cockThatFits(164) >= 0 && player.lust >= 33) fuckHer = 3493;
-	choices(bjTogText,bjToggle,"Drink Milk",2956,"Hotdog",hotdog,"Service Her",2958,"TentacleSex",tentacle,"Get Sucked",getSucked,"Fuck Her",fuckHer,"",0,"",0,"Back",3243);
+	choices(bjTogText,bjToggle,"Drink Milk",nomOnMommaIzzysTits,"Hotdog",hotdog,"Service Her",volunteerToSlurpCowCunt,"TentacleSex",tentacle,"Get Sucked",getSucked,"Fuck Her",fuckHer,"",0,"",0,"Back",callForFollowerIsabella);
 }
 
 
@@ -199,7 +199,7 @@ function isabellasAccentCoaching():void {
 	if(flags[ISABELLA_ACCENT_TRAINING_COOLDOWN] > 1) {
 		outputText("Isabella shakes her head and says, \"<i>Nein.  I do not vish to spend time on zis now.</b>\"", false);
 		//Back to follower menu!
-		doNext(3243);
+		doNext(callForFollowerIsabella);
 		return;
 	}	
 	/*(req's 100% teach score to replace dialogue.  Success 
@@ -368,7 +368,7 @@ function toggleIsabellasMorningWoodChopping():void {
 		flags[ISABELLA_BLOWJOBS_DISABLED] = 0;
 	}
 	//To Izzy SEX menu
-	doNext(3254);
+	doNext(campIzzySexMenu);
 }
 //Repeatable Campsex: Hot Dogginz' 
 function repeatGermanBratwurstInCamp():void {
@@ -662,7 +662,7 @@ function milktasticLacticLactation():void {
 	outputText("Isabella's moans distract you and you look over.  She's rubbing her breasts gingerly, wincing as she tests her strange nipples with a finger.  Do you go and check on her?", false);
 	
 	//[Yes][No]
-	doYesNo(3249,3248);
+	doYesNo(izzyMilkingMeinMilkersMya,izzyMilkYourselfDamnit);
 }
 
 //[No]
@@ -701,7 +701,7 @@ function izzyMilkingMeinMilkersMya():void {
 	else outputText("\"<i>Ohh, " + player.short + ", I had forgotten all about those milkers with all the work around camp!  Yes, let us go there immediately!</i>\"\n\n", false);
 	
 	//--next--
-	doNext(3250);
+	doNext(izzyMilkingMeinMilkersMya2);
 }
 function izzyMilkingMeinMilkersMya2():void {
 	spriteSelect(31);
@@ -785,7 +785,7 @@ function getMilk():void {
 		outputText("Isabella shakes her head and tells you she", false);
 		if(flags[ISABELLA_MILKED_YET] == -1) outputText("'s out of bottled milk right now, and that you should check back later.", false);
 		else outputText("'s still sore from last time, and that you should wait till later.", false);
-		doNext(3243);
+		doNext(callForFollowerIsabella);
 		return;
 	}
 	//[(if Izzy Milked Yet flag = -1)
@@ -841,7 +841,7 @@ function isabellaSparMenu():void {
 	if(isabellaAccent()) outputText("Isabella asks, \"<i>Vhat stakes should ve use?  Vould you rather we spar light or fight like ze creatures of zis world?</i>\"", false);
 	else outputText("Isabella asks, \"<i>How should we fight?  Would you rather we spar light or fight like the creatures of this world?</i>\"", false);
 	outputText("\n\n(Do you spar 'light' with no consequences for losing, or would you rather spar 'hard' (with full consequences for loss/win)?)", false);
-	simpleChoices("Light",3257,"Hard",3256,"",0,"",0,"Back",3243);
+	simpleChoices("Light",3257,"Hard",3256,"",0,"",0,"Back",callForFollowerIsabella);
 }
 
 function sparring(type:int = 1):void {
@@ -897,7 +897,7 @@ function isabellaBurps():void {
 		outputText("Her eyes widen as realization strikes her.  \"<i>Back away,</i>\" she warns, weakly waving an arm at you. \"<i>Allergy...</i>\" It seems as if something might be coming. Do you flee from the pained cow-girl, or do you attempt to assist her with her problem?  Though, judging by her reaction, assistance might be a poor plan...", false);
 	
 		//put 'run' and 'help' buttons root hurr
-		simpleChoices("Run",3259,"Help",3260,"",0,"",0,"",0);
+		simpleChoices("Run",runAwayFromIzzyBurps,"Help",getIzzyBurped,"",0,"",0,"",0);
 	}
 	//Repeat
 	else {
@@ -907,7 +907,7 @@ function isabellaBurps():void {
 		else outputText("You're sure about this, huh?</i>\" she asks to confirm, shaking the bottle at you gently.  \"<i>You know what this does to me.</i>\"  Your mischievous smile is the only answer she needs.  She easily gulps down the potion, already rubbing her belly in apparent anticipation.  She notices your curious glance and answers with a nervous chuckle.  \"<i>It's one of those things...</i>\" she tries to explain while waiting for the onset of her reaction.  \"<i>Making you more like me... it's comforting somehow.</i>\"\n\n", false);
 
 		outputText("\"<i>Aaah, I can feel it,</i>\" she warns, and sure enough, the bottom hem of her top lifts to reveal an unhurriedly-swelling ponch.  \"<i>Are you ready, or are you having second thoughts?</i>\"  Your gaze falls to her gurgling pot-belly as you mull over her question.  Do you see any harm in getting another dose of Izzy-gas, or would you like to duck out of this one?", false);
-		simpleChoices("Run",3259,"Stay",3260,"",0,"",0,"",0);
+		simpleChoices("Run",runAwayFromIzzyBurps,"Stay",getIzzyBurped,"",0,"",0,"",0);
 	}
 }
 
@@ -928,7 +928,7 @@ function runAwayFromIzzyBurps():void {
 		if(isabellaAccent()) outputText("It seems mein body rejected zis 'Pro Bova' for one reason or another.</i>\"  No harm, no foul, you offer hopefully, and she nods.  \"<i>But make sure to seriously zink before giving me a potion again!</i>\" she warns, waggling a foreboding finger your way.  You think back to that cloud of gas, and what the probable effect of such a thing would be in close proximity.  Even if you wanted to test that out, however, you'd need another Pro Bova...", false);
 		else outputText("It seems my body rejected this 'Pro Bova' for one reason or another.</i>\"  No harm, no foul, you offer hopefully, and she nods.  \"<i>But make sure to seriously think before giving me a potion again!</i>\" she warns, waggling a foreboding finger your way.  You think back to that cloud of gas, and what the probable effect of such a thing would be in close proximity.  Even if you wanted to test that out, however, you'd need another Pro Bova...", false);
 		//Back to follower menu
-		doNext(3243);
+		doNext(callForFollowerIsabella);
 	}
 	else {
 		//outta there
@@ -938,7 +938,7 @@ function runAwayFromIzzyBurps():void {
 		else outputText("The gaseous assault eventually diminishes, her belly returning to a healthy state and the cloud dispersing.  She sighs in relief as she pats her tummy, looking to you with a hint of disappointment darkening her expression.  \"<i>I'm getting used to this,</i>\" she sighs as you approach.  \"<i>It would be so much more fun if you were here to... enjoy it with me.  Think about that next time you bring me one of these, okay?</i>\"\n\n", false);
 		
 		outputText("At your nod, she smiles in satisfaction and moves away.  You can't be sure, but you almost swear you hear her burp once more.", false);
-		doNext(3243);
+		doNext(callForFollowerIsabella);
 	}
 }
 
@@ -1068,7 +1068,7 @@ function getIzzyBurped():void {
 		//'sorry for burping in your face bro'
 		outputText("Isabella smiles and draws you in for a smooth.  \"<i>I suppose I should really apologize again,</i>\" she muses as she slowly draws back, tongue licking up the small bridge of drool between your lips.  \"<i>Do you accept my apology?</i>\" she asks wryly.", false);
 	}
-	doYesNo(3262,3261);
+	doYesNo(acceptCowpology,declineIzzysCowBurpApology);
 }
 //no
 function declineIzzysCowBurpApology():void {

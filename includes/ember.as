@@ -3,47 +3,47 @@
 //Tainted Ember
 //Link: Tainted Ember
 //Variable and Flag Listing
-const EMBER_AFFECTION:int = 523; //: Pretty obvious
-const EMBER_HATCHED:int = 524; //: is ember hatched? 1 = true
-const EMBER_GENDER:int = 525; // 1 for male, 2 for female, 3 for herm. This also controls the egg's shell color.
-const EMBER_TYPE:int = 526; //numerical value; Ember is supposed to have many forms, this will control which one is born. (This is important for when Ember has hybrid forms.)
-const EMBER_COR:int = 527; //Controls Ember's current corruption levels, only default/dragon-girl Ember uses this. (Default starting value = 50)
-const EMBER_HAIR:int = 528; //0 for no hair, 1 for hair, 2 for mane.
-const EMBER_MILK:int = 529; //0 for no lactation, 1 for lactating.
-const EMBER_OVIPOSITION:int = 530; //0 for no egg laying, 1 for egg laying.
-const EMBER_ROUNDFACE:int = 531; //0 for anthro Ember, 1 for dragon-girl Ember. (You might want to control this with the Type flag since only default Embers use this variable.)
-const EMBER_EGG_FLUID_COUNT:int = 532; //This controls when it's time to hatch. Every item use and every time you use the egg as a masturbation aid, this will be incremented. Threshold for birthing is 5, but the birthing process can only be triggered when using as a masturbatory aid. This is done to allow players the chance to modify Ember before actually hatching.
+// EMBER_AFFECTION:int = 523; //: Pretty obvious
+// EMBER_HATCHED:int = 524; //: is ember hatched? 1 = true
+// EMBER_GENDER:int = 525; // 1 for male, 2 for female, 3 for herm. This also controls the egg's shell color.
+// EMBER_TYPE:int = 526; //numerical value; Ember is supposed to have many forms, this will control which one is born. (This is important for when Ember has hybrid forms.)
+// EMBER_COR:int = 527; //Controls Ember's current corruption levels, only default/dragon-girl Ember uses this. (Default starting value = 50)
+// EMBER_HAIR:int = 528; //0 for no hair, 1 for hair, 2 for mane.
+// EMBER_MILK:int = 529; //0 for no lactation, 1 for lactating.
+// EMBER_OVIPOSITION:int = 530; //0 for no egg laying, 1 for egg laying.
+// EMBER_ROUNDFACE:int = 531; //0 for anthro Ember, 1 for dragon-girl Ember. (You might want to control this with the Type flag since only default Embers use this variable.)
+// EMBER_EGG_FLUID_COUNT:int = 532; //This controls when it's time to hatch. Every item use and every time you use the egg as a masturbation aid, this will be incremented. Threshold for birthing is 5, but the birthing process can only be triggered when using as a masturbatory aid. This is done to allow players the chance to modify Ember before actually hatching.
 //BreathType: Controls which breath weapon the PC will have via TFing. Every Ember has its unique breath weapon to pass on.
 //EmberQuestTrigger: Controls whether the PC can still visit the lost dragon city. 0 can visit and 1 can't, special text will be displayed. (Future Expansion)
 //BreathCooldown: How many hours you need to wait to be able to use the breath weapon again.
-const EMBER_STAT:int = 533; //All Embers have a hidden stat, Corrupt has Ego, Pure has Confidence, Tainted has Affection, and hybrids vary. There is a need to track this, but only 1 special stat for every Ember.
-const EMBER_INTERNAL_DICK:int = 534; //Dragon-girl Ember can have either a internal sheath to keep " + emberMF("his","her") + " dick in or have it be more human-like. 0 = internal, 1 = external.
+// EMBER_STAT:int = 533; //All Embers have a hidden stat, Corrupt has Ego, Pure has Confidence, Tainted has Affection, and hybrids vary. There is a need to track this, but only 1 special stat for every Ember.
+// EMBER_INTERNAL_DICK:int = 534; //Dragon-girl Ember can have either a internal sheath to keep " + emberMF("his","her") + " dick in or have it be more human-like. 0 = internal, 1 = external.
 //EmberKidsCount: How many children you've had with Ember, this will be important later.
 //BooleanEmberKidMale: If you've had a male child with Ember, having a herm sets both flags to 1 (true).
 //BooleanEmberKidFemale: If you've had a female child with Ember, having a herm sets both flags to 1 (true).
-const TIMES_EQUIPPED_EMBER_SHIELD:int = 535;
-const TOOK_EMBER_EGG:int = 536; //PC Take ember's egg home?
-const EGG_BROKEN:int = 537; //PC Smash!? ember's egg?
-const TIMES_FOUND_EMBERS_EGG:int =538; //Times stumbled into ze egg.
-const EMBER_JACKED_ON:int = 539; //Has the PC masturbated on the egg yet?  Needed to hatcH!
-const EMBER_OVI_BITCHED_YET:int = 540; //Used to trigger emberBitchesAboutPCBeingFullOfEggs()
-const EMBER_LUST_BITCHING_COUNTER:int = 541;
-const EMBER_CURRENTLY_FREAKING_ABOUT_MINOCUM:int = 542; // Used to trigger minotaurJizzFreakout()
-const DRANK_EMBER_BLOOD_TODAY:int = 543; //Cooldown for ember TFs
+// TIMES_EQUIPPED_EMBER_SHIELD:int = 535;
+// TOOK_EMBER_EGG:int = 536; //PC Take ember's egg home?
+// EGG_BROKEN:int = 537; //PC Smash!? ember's egg?
+// TIMES_FOUND_EMBERS_EGG:int =538; //Times stumbled into ze egg.
+// EMBER_JACKED_ON:int = 539; //Has the PC masturbated on the egg yet?  Needed to hatcH!
+// EMBER_OVI_BITCHED_YET:int = 540; //Used to trigger emberBitchesAboutPCBeingFullOfEggs()
+// EMBER_LUST_BITCHING_COUNTER:int = 541;
+// EMBER_CURRENTLY_FREAKING_ABOUT_MINOCUM:int = 542; // Used to trigger minotaurJizzFreakout()
+// DRANK_EMBER_BLOOD_TODAY:int = 543; //Cooldown for ember TFs
 
-const EMBER_PUSSY_FUCK_COUNT:int = 544;
-const TIMES_BUTTFUCKED_EMBER:int = 545;
+// EMBER_PUSSY_FUCK_COUNT:int = 544;
+// TIMES_BUTTFUCKED_EMBER:int = 545;
 
-const EMBER_INCUBATION:int = 553;
-const EMBER_CHILDREN_MALES:int = 554;
-const EMBER_CHILDREN_FEMALES:int = 555;
-const EMBER_CHILDREN_HERMS:int = 556;
-const EMBER_EGGS:int = 557;
-const EMBER_BITCHES_ABOUT_PREGNANT_PC:int = 558;
-const EMBER_TALKS_TO_PC_ABOUT_PC_MOTHERING_DRAGONS:int = 559;
-const EMBER_PREGNANT_TALK:int = 560;
+// EMBER_INCUBATION:int = 553;
+// EMBER_CHILDREN_MALES:int = 554;
+// EMBER_CHILDREN_FEMALES:int = 555;
+// EMBER_CHILDREN_HERMS:int = 556;
+// EMBER_EGGS:int = 557;
+// EMBER_BITCHES_ABOUT_PREGNANT_PC:int = 558;
+// EMBER_TALKS_TO_PC_ABOUT_PC_MOTHERING_DRAGONS:int = 559;
+// EMBER_PREGNANT_TALK:int = 560;
 
-const TIMES_EMBER_LUSTY_FUCKED:int = 824;
+// TIMES_EMBER_LUSTY_FUCKED:int = 824;
 
 
 function emberAffection(changes:Number = 0):Number {
@@ -102,7 +102,7 @@ Spar (fight Ember)*/
 	var milk:int = 0;
 	if(flags[EMBER_OVIPOSITION] > 0 && flags[EMBER_GENDER] >= 2 && flags[EMBER_INCUBATION] == 0) egg = 3720;
 	if(flags[EMBER_MILK] > 0) milk = 3723;
-	choices("Appearance",3715,"Talk",3716,"DrinkBlood",3696,"Drink Milk",milk,"Get Egg",egg,"Sex",3738,"Spar",3724,"",0,"",0,"Back",74);
+	choices("Appearance",embersAppearance,"Talk",talkToEmber,"DrinkBlood",bloodForTheBloodGod,"Drink Milk",milk,"Get Egg",egg,"Sex",emberSexMenu,"Spar",decideToSparEmbra,"",0,"",0,"Back",74);
 }
 
 //Approach for sex - initial output when selecting [Sex] menu (Z)
@@ -170,7 +170,7 @@ function emberSexMenu(output:Boolean = true):void {
 		getBlown = 3730;
 		pitchAnal = 3731;
 	}
-	//choices("Catch Anal",catchAnal,"Pitch Anal",pitchAnal,"Blow Ember",blowEmber,"Get Blown",getBlown,"Eat Her Out",eatOut,"Get Eaten Out",getEatenOut,"Penetrate Her",penetrateHer,"Get Penetrated",getPenetrated,"",0,"Leave",3691);
+	//choices("Catch Anal",catchAnal,"Pitch Anal",pitchAnal,"Blow Ember",blowEmber,"Get Blown",getBlown,"Eat Her Out",eatOut,"Get Eaten Out",getEatenOut,"Penetrate Her",penetrateHer,"Get Penetrated",getPenetrated,"",0,"Leave",emberCampMenu);
 	menu();
 	
 	if(catchAnal > 0) addButton(0,"Catch Anal",eventParser,catchAnal);
@@ -209,7 +209,7 @@ function findEmbersEgg():void {
 		outputText("\n\nTrue enough, after a short trek through familiar tunnels you find yourself once again standing before the alleged 'dragon egg'.");
 	}
 	flags[TIMES_FOUND_EMBERS_EGG]++;
-	simpleChoices("Take It",3698,"Destroy It",3694,"",0,"",0,"Leave",3693);
+	simpleChoices("Take It",takeEmbersEggHomeInADoggieBag,"Destroy It",destroyBabyEmberYouMonster,"",0,"",0,"Leave",leaveEmbersAssOutToDry);
 }
 
 //[=Leave=] (Z)
@@ -228,7 +228,7 @@ function destroyBabyEmberYouMonster():void {
 	outputText("\n\nWith nothing else in the cave, you prepare to leave, but find yourself stopped by a sudden thought.  The egg yolk, though raw, looks strangely appetizing...");
 	flags[EGG_BROKEN] = 1;
 	//[Eat][Leave]
-	simpleChoices("Eat It",3695,"",0,"",0,"",0,"Leave",13);
+	simpleChoices("Eat It",eatEmbersYolkLikeAnEvenBiggerDick,"",0,"",0,"",0,"Leave",13);
 }
 
 //[=Eat=]
@@ -408,7 +408,7 @@ function emberEggInteraction():void {
 		//Do you give in to the urge?
 		//[Yes][No]
 		//[= Yes =]
-		doYesNo(3712,3702);
+		doYesNo(masturbateOntoAnEgg,dontEggFap);
 		//(Use the appropriate Egg Masturbation scene.)
 		return;
 	}	
@@ -437,9 +437,9 @@ function emberEggInteraction():void {
 		hatch = 3713;
 		outputText("\n\n<b>The egg is ready to be hatched - if you're just as ready.</b>");
 	}
-	if(hatch > 0) choices("Hatch",hatch,"Blood",3711,"IncubiDraft",draft,"Pure Draft",pDraft,"Succubi Milk",milk,"Pure Milk",pMilk,"Hair Serum",hair,"Ovi Elixir",ovi,"Lactaid",lactaid,"Back",3703);
-	else if(fap > 0) choices("Masturbate",fap,"Blood",3711,"IncubiDraft",draft,"Pure Draft",pDraft,"Succubi Milk",milk,"Pure Milk",pMilk,"Hair Serum",hair,"Ovi Elixir",ovi,"Lactaid",lactaid,"Back",3703);
-	else choices("Hatch",hatch,"Blood",3711,"IncubiDraft",draft,"Pure Draft",pDraft,"Succubi Milk",milk,"Pure Milk",pMilk,"Hair Serum",hair,"Ovi Elixir",ovi,"Lactaid",lactaid,"Back",3703);
+	if(hatch > 0) choices("Hatch",hatch,"Blood",giveEmberBludSausages,"IncubiDraft",draft,"Pure Draft",pDraft,"Succubi Milk",milk,"Pure Milk",pMilk,"Hair Serum",hair,"Ovi Elixir",ovi,"Lactaid",lactaid,"Back",leaveWithoutUsingAnEmberItem);
+	else if(fap > 0) choices("Masturbate",fap,"Blood",giveEmberBludSausages,"IncubiDraft",draft,"Pure Draft",pDraft,"Succubi Milk",milk,"Pure Milk",pMilk,"Hair Serum",hair,"Ovi Elixir",ovi,"Lactaid",lactaid,"Back",leaveWithoutUsingAnEmberItem);
+	else choices("Hatch",hatch,"Blood",giveEmberBludSausages,"IncubiDraft",draft,"Pure Draft",pDraft,"Succubi Milk",milk,"Pure Milk",pMilk,"Hair Serum",hair,"Ovi Elixir",ovi,"Lactaid",lactaid,"Back",leaveWithoutUsingAnEmberItem);
 }
 
 //[= No =]
@@ -471,9 +471,9 @@ function dontEggFap():void {
 	outputText("\n\nYou start fishing through your pockets, holding up the various items you have; it doesn't react to some, while others make its flashes quicken.  These you set aside.  When you've finished testing the contents of your pouches, you look at the items the egg has selected.  As you rest your hand on the egg and consider your choices, it begins to excite once more, alarming you.  You pull away and it calms down... the egg considers <b>you</b> an item as well, apparently!");
 	if(hatch > 0) outputText("\n\n<b>The egg is ready to be hatched - if you're just as ready.</b>");
 	
-	if(hatch > 0) choices("Hatch",hatch,"Blood",3711,"IncubiDraft",draft,"Pure Draft",pDraft,"Succubi Milk",milk,"Pure Milk",pMilk,"Hair Serum",hair,"Ovi Elixir",ovi,"Lactaid",lactaid,"Back",3703);
-	else if(fap > 0) choices("Masturbate",fap,"Blood",3711,"IncubiDraft",draft,"Pure Draft",pDraft,"Succubi Milk",milk,"Pure Milk",pMilk,"Hair Serum",hair,"Ovi Elixir",ovi,"Lactaid",lactaid,"Back",3703);
-	else choices("Hatch",hatch,"Blood",3711,"IncubiDraft",draft,"Pure Draft",pDraft,"Succubi Milk",milk,"Pure Milk",pMilk,"Hair Serum",hair,"Ovi Elixir",ovi,"Lactaid",lactaid,"Back",3703);
+	if(hatch > 0) choices("Hatch",hatch,"Blood",giveEmberBludSausages,"IncubiDraft",draft,"Pure Draft",pDraft,"Succubi Milk",milk,"Pure Milk",pMilk,"Hair Serum",hair,"Ovi Elixir",ovi,"Lactaid",lactaid,"Back",leaveWithoutUsingAnEmberItem);
+	else if(fap > 0) choices("Masturbate",fap,"Blood",giveEmberBludSausages,"IncubiDraft",draft,"Pure Draft",pDraft,"Succubi Milk",milk,"Pure Milk",pMilk,"Hair Serum",hair,"Ovi Elixir",ovi,"Lactaid",lactaid,"Back",leaveWithoutUsingAnEmberItem);
+	else choices("Hatch",hatch,"Blood",giveEmberBludSausages,"IncubiDraft",draft,"Pure Draft",pDraft,"Succubi Milk",milk,"Pure Milk",pMilk,"Hair Serum",hair,"Ovi Elixir",ovi,"Lactaid",lactaid,"Back",leaveWithoutUsingAnEmberItem);
 }
 
 //Leave Without Using Item (Z)
@@ -758,7 +758,7 @@ function hatchZeMuzzles():void {
 		}
 	}
 	//Aftermath (Z)
-	doNext(3714);
+	doNext(meetEmberAftermath);
 }
 
 //Aftermath (Z)
@@ -876,7 +876,7 @@ function embersAppearance():void {
 		outputText("\n\nEmber's legs themselves are somewhat human-like in appearance, but they're covered in the thick protective scales that don most of " + emberMF("his","her") + " extremities.  Only the feet look like anything but normal human anatomy; the clawed feet of a predator decorate " + emberMF("him","her") + " instead, capped with talons meant for gripping at the ground... or at prey.");
 		outputText("\n\nHaving drawn the dragon's attention with your examination of " + emberMF("his","her") + " body, Ember darts a reptilian tongue out from " + emberMF("his","her") + " lips, as if to entice you.");
 	}
-	doNext(3691);
+	doNext(emberCampMenu);
 }
 
 //Talk 
@@ -908,7 +908,7 @@ function talkToEmber():void {
 	//Talk about Dragons
 	//Talk about Exploring
 	//Talk about Yourself
-	simpleChoices("Dragons",3717,"Exploring",3718,"Yourself",3719,"",0,"Back",3691);
+	simpleChoices("Dragons",talkToEmberAboutDragonzzz,"Exploring",discussExplorationWithEmber,"Yourself",talkToEmberAboutYourself,"",0,"Back",emberCampMenu);
 }
 
 //Talk about Dragons (Z)
@@ -1307,7 +1307,7 @@ function bloodForTheBloodGod():void {
 		
 		outputText("\n\nAs you drink, you feel a rush of energy course throughout your body; you feel lofty, powerful, and erudite.  Who knows what will happen if you keep drinking...");
 		//[Continue][Stop]
-		simpleChoices("Continue",3700,"Stop",3699,"",0,"",0,"",0);
+		simpleChoices("Continue",drinkDeeplyOfDagronBlud,"Stop",noMoDagronBlud,"",0,"",0,"",0);
 	}
 	//(High Affection)
 	else {
@@ -1317,7 +1317,7 @@ function bloodForTheBloodGod():void {
 		outputText("\n\nEmber kisses you back; " + emberMF("his","her") + " bleeding tongue stroking yours lovingly.");
 		outputText("\n\nAs you drink, you feel a rush of energy course throughout your body; you feel lofty, powerful, and erudite.  Who knows what will happen if you keep drinking?");
 		//[Continue][Stop]
-		simpleChoices("Continue",3700,"Stop",3699,"",0,"",0,"",0);
+		simpleChoices("Continue",drinkDeeplyOfDagronBlud,"Stop",noMoDagronBlud,"",0,"",0,"",0);
 	}
 	//Flag as drinking her blood today!
 	flags[DRANK_EMBER_BLOOD_TODAY] = 1;
@@ -3144,7 +3144,7 @@ function penetrateEmbrah():void {
 	outputText("\n\n\"<i>Yes... let's go again...</i>\" she responds tiredly, before slumping down for a quick nap.  Beyond satisfied yourself, you settle on top of her with a sigh and a groan, repositioning yourself for greater comfort as you join her in sleep.");
 	
 	stats(0,0,0,0,.5,-2,-100,0);
-	doNext(3735);
+	doNext(penetrateEmbrahPartII);
 }
 
 //PART II!
@@ -3277,7 +3277,7 @@ function getPenetratedByEmberLastSexSceneWoooo():void {
 	stats(0,0,0,0,0,-2,-100,0);
 	if(player.lib > 50) stats(0,0,0,0,-3,0,0,0);
 	slimeFeed();
-	doNext(3737);
+	doNext(getPenetratedByEmberLastSexSceneWooooPartII);
 }
 //Part II
 function getPenetratedByEmberLastSexSceneWooooPartII():void {
@@ -3334,7 +3334,7 @@ function emberRapesYourHeatness():void {
 	stats(0,0,0,0,0,0,10 + player.lib/10,0);
 	outputText("\n\nWhat do you say?");
 	//[Accept] [Deny]
-	simpleChoices("Accept",3773,"Deny",3772,"",0,"",0,"",0);
+	simpleChoices("Accept",timeToPuffTheMagicDragon,"Deny",fuckOffEmberIWantANap,"",0,"",0,"",0);
 }
 
 //[=Deny=]
@@ -3375,7 +3375,7 @@ function timeToPuffTheMagicDragon():void {
 	if(player.pregnancyIncubation == 0 && flags[EMBER_INCUBATION] == 0 && flags[EMBER_GENDER] == 3 && player.gender == 3) {
 		outputText("\n\n(Who should bear the kids?)");
 		//[Ember] [You]
-		simpleChoices("Ember",3775,"You",3774,"",0,"",0,"",0);
+		simpleChoices("Ember",breedEmberPregnantAsIfThereWasAnyOtherKindOfBreeding,"You",getKnockedUpByEmbrahBroBaby,"",0,"",0,"",0);
 	}
 	//[Play appropriate breeding scene.]
 	//Female Breeding Scene:

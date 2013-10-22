@@ -1,11 +1,11 @@
-﻿const JOEY_OFFERED_MILKER:int = 466;
-const OWN_MAIDEN_BIKINI:int = 770;
-const COUNTDOWN_TO_NIGHT_RAPE:int = 872;
-const SOCK_COUNTER:int = 895;
-const SOCK_HOLDING:int = 896;
-const FOUND_SOCKS:int = 897;
-const SOCKS_BOUGHT:int = 898;
-const MIDAS_JERKED:int = 899;
+﻿// JOEY_OFFERED_MILKER:int = 466;
+// OWN_MAIDEN_BIKINI:int = 770;
+// COUNTDOWN_TO_NIGHT_RAPE:int = 872;
+// SOCK_COUNTER:int = 895;
+// SOCK_HOLDING:int = 896;
+// FOUND_SOCKS:int = 897;
+// SOCKS_BOUGHT:int = 898;
+// MIDAS_JERKED:int = 899;
 //Set Up With The Travelling, Tainted Bazaar
 
 
@@ -13,8 +13,8 @@ const MIDAS_JERKED:int = 899;
 //[Find Travelling Bazaar]
 function findBazaar():void {
 	outputText("", true);
-	if(flags[212] == 0) {
-		flags[212]++;
+	if(flags[BAZAAR_ENCOUNTERED] == 0) {
+		flags[BAZAAR_ENCOUNTERED]++;
 		outputText("Warm, earthy breezes drift by as you explore the wind-blown grasses of the plains.  Though it seems you can see for miles, with the grasses subtly shifting between a few feet and over a dozen feet tall, it's impossible to tell what you'll stumble into next.  You trust your ears and your nose as much as your oft-blocked vision at this point, and before long you catch a whiff of blackened meat and aromatic spices.  There's some kind of camp not far away!\n\n", false);
 		
 		outputText("You raise your " + player.weaponName + " and cautiously creep through the towering vegetation, trying not to give your position away until you've ascertained just what type of people inhabit this camp.  Bright light flickers through the grass in front of you, and you part it to peek from between the blowing stalks.  There's a ring of brightly colored wagons set up here, with a tall, picketed fence erected around them.  Smoke curls up from the camp's center, twisting in the air like a viper in the grass.  Each of the wagons appears to be expanded, deployed into a small, self-contained structure.  Clearly this is some kind of traveling caravan or bazaar.\n\n", false);
@@ -26,7 +26,7 @@ function findBazaar():void {
 	}
 	outputText("\n\nDo you approach?", false);
 	//[YES] [NOOOO]
-	doYesNo(2854,13);
+	doYesNo(approachBazaarGuard,13);
 }
 
 //[FUCK YES I WILL PUT IT IN YOUR BIZARRE ANUS]
@@ -45,9 +45,9 @@ function enterTheBazaarAndMenu(demons:Boolean = true):void {
 	outputText("", true);
 	var rat:String = "Rat";
 	var lilium:String = "Demon";
-	if(hours >= 15 && hours <= 20 && flags[214] > 0) rat = "Cinnabar";
+	if(hours >= 15 && hours <= 20 && flags[CINNABAR_NUMBER_ENCOUNTERS] > 0) rat = "Cinnabar";
 	//Make sure flags to allow entrance is set.
-	if(flags[211] == 0) flags[211] = 1;
+	if(flags[BAZAAR_ENTERED] == 0) flags[BAZAAR_ENTERED] = 1;
 	outputText("You breeze past the crimson guard and enter the interior of the Bizarre Bazaar.  The ground is hard-packed, trampled as if walked over by hundreds of hooves, paws, and feet.  A massive bonfire rages in the center of the clearing, crackling and popping as it consumes its fuel gluttonously.  Surrounding the blazing behemoth are tiny, wheeled food-carts with vendors hawking everything from sausage to something called a 'marshmallow'.  Huge wagons ring the clearing, many set up to display exotic wares or services.  You can see everything from dancing centaurs to demons browsing the wares, but it seems an uneasy truce of sorts reigns here.  Then again, maybe the demons have just not had the chance to openly attack this place yet.", false);
 	outputText("\n\nOne of the wagons proudly proclaims itself to be \"Greta's Garments,\" though both 'G's are emphasized with cute, stylized devil horns, and the 'S' is shaped in the form of a spaded, demonic tail.  Obviously it must some kind of clothing shop.");
 	var roxanne:Number = RoxanneAppearance();
@@ -66,13 +66,13 @@ function enterTheBazaarAndMenu(demons:Boolean = true):void {
 	}
 	tent = 3167;
 	fapAppearance();
-	if(flags[221] > 0) roxanneT = "Roxanne";
-	if(flags[267] > 0) lilium = "Lilium";
-	if(flags[292] == 0 && rand(4) == 0 && demons) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00221] > 0) roxanneT = "Roxanne";
+	if(flags[UNKNOWN_FLAG_NUMBER_00267] > 0) lilium = "Lilium";
+	if(flags[UNKNOWN_FLAG_NUMBER_00292] == 0 && rand(4) == 0 && demons) {
 		overHearDemonsAboutSyrena();
 		return;
 	}
-	if((flags[292] == 1 || flags[292] == 2) && demons && rand(10) == 0) {
+	if((flags[UNKNOWN_FLAG_NUMBER_00292] == 1 || flags[UNKNOWN_FLAG_NUMBER_00292] == 2) && demons && rand(10) == 0) {
 		//[Repeat Variant]
 		outputText("\n\n<b>The familiar sounds of the two griping demons can be heard nearby.  Do you listen in again?</b>", false);
 		demon = 3058;
@@ -111,8 +111,8 @@ function theSlipperySqueeze():void {
 	var androgyny:Number = 0;
 	var milker:Number = 0;
 	//(First time desc:
-	if(flags[210] == 0) {
-		flags[210]++;
+	if(flags[BAZAAR_SLIPPERY_SQUEEZE_VISITED] == 0) {
+		flags[BAZAAR_SLIPPERY_SQUEEZE_VISITED]++;
 		outputText("A short, bunny-eared clerk leans on the counter, batting long eyelashes at you as you approach.  The rabbit is wearing a gauzy, sheer pink top and lots of make-up that accentuates her plump, red lips and curvy, cute features.  She doesn't have much in the chest department, but she's unmistakably cute.  You ask the little miss what kind of services this place offers, and she responds by covering her mouth with her hand and giggling girlishly.\n\n", false);
 		outputText("It takes her a few moments for her to get over her humor, but she brushes a hand through her silken hair and replies, \"<i>Oh, I'm sorry if I gave the wrong impression " + player.mf("mister","miss") + ", but I'm not a girl at all.  I'm definitely a male - I just love looking cute and fuckable!  You've got to admit I'm a pretty hot little package!</i>\"  To emphasize 'his' point, the bunny-boy twirls in place, and you notice that all he wears below the waist is a tight, package-hugging thong.  His tail twitches happily from exhibiting himself so, but he doesn't seem to be too aroused yet.\n\n", false);
 		outputText("Before you can comment on his odd mannerisms, he titters, \"<i>You're in 'The Slippery Squeeze', though some have called us 'The Happiest Ending' after a nice, HARD massage.</i>\"  The long-eared bunny-trap licks his gloss-coated lips enticingly before continuing. \"<i>We specialize in salty oil rubs and the complete release of all your tensions.  It's very therapeutic, both for the customer and the masseuse.  We specialize in creating our own, in-house massage lotions that are sure to make the tension ooze from your pores.</i>\"\n\n", false);
@@ -169,11 +169,11 @@ function askJoeyAboutOffer():void {
 	outputText("\n\nWhat do you think? Will you take the cock massager for 200 gems?");
 	if(player.gems < 200) {
 		outputText("\n\n<b>You don't have enough money.</b>");
-		doNext(3573);
+		doNext(noMilkerPlzJoey);
 		return;
 	}
 	//[Yes] [No]
-	doYesNo(3574,3573);
+	doYesNo(buyCockMilker,noMilkerPlzJoey);
 }
 //[No]
 function noMilkerPlzJoey():void {
@@ -196,7 +196,7 @@ function joeyAndrogyny():void {
 	outputText("", true);
 	if(player.gems < 500) {
 		outputText("You haven't got enough gems for that treatment!", false);
-		doNext(2856);
+		doNext(theSlipperySqueeze);
 		return;
 	}
 	player.gems -= 500;
@@ -236,9 +236,9 @@ function joeyMassage():void {
 	outputText("</i>\"", false);
 	if(player.hasCock()) {
 		outputText("\n\nDo you accept Joey's potion?", false);
-		doYesNo(2859,2858);
+		doYesNo(joeysMassageWithEXTRASpooge,joeysMassageWifNoExtraJizz);
 	}
-	else doNext(2858);
+	else doNext(joeysMassageWifNoExtraJizz);
 }
 
 function joeysMassageWifNoExtraJizz():void {
@@ -369,7 +369,7 @@ function joeysMassageWithEXTRASpooge():void {
 function joeyBigBalls():void {
 	outputText("", true);
 	//(FIRST TIME) 
-	if(flags[348] == 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00348] == 0) {
 		outputText("Before you can even clear the door-frame, Joey the bunny-boy masseuse launches himself into you, his hands clutching wildly at your " + player.armorName + ".  You look down at him, and his wide, open eyes stare back with panic; namely, the look of someone in over their head with no idea how to save themselves.  Worse still, his trademark thong is bulging out obscenely, cum spilling down the sides while his immensely swollen gonads threaten to burst free of the garment's fraying threads.  Joey babbles, \"<i>Help!  I was testing the potions, and-and-and... I dunno what went wrong, b-b-but my balls are backing up faster than it dribbles out.  They feel like they're going to burst!!  Help meeeeee!</i>\"\n\n", false);
 		outputText("You push the panicked lagomorph back a pace so that you can breathe and appraise the situation.  Joey's legs are drenched, soaked with sloppy spooge.  His thong is on the verge of bursting.  Most notable, his bloated balls look more like cantaloupes than testicles, and these melons are ripening to an unseen Demeter's power, swelling ever-so-slightly larger with each passing second.  You estimate that there's precious little time.\n\n", false);
 		
@@ -379,26 +379,26 @@ function joeyBigBalls():void {
 		if(player.cor > 70) outputText("; you won't get to watch him fountaining all that pearly spunk like a perverted statue", false);
 		outputText(".  What do you decide?", false);
 		//[SuckCumOut] [MasturbateOut]
-		simpleChoices("SuckCumOut",3193,"MasturbateOut",3192,"",0,"",0,"",0);
+		simpleChoices("SuckCumOut",suckOffJoeysGardenHose,"MasturbateOut",joeyWanksItOut,"",0,"",0,"",0);
 	}
 	//(Sucked Joey once) 
 	else {
 		outputText("As soon as you enter The Slippery Squeeze, you know somehow that something is amiss.  Joey staggers out from a back-room, his balls once again swollen huge and round.  He looks at you and admits, \"<i>Someone's <b>got</b> to be sabotaging me... gods, this hurts!  Could you help me, or should I go in the back and jerk it out myself?</i>\"\n\n", false);
 		//[SuckCumOut] [MasturbateOut]
-		simpleChoices("SuckCumOut",3193,"MasturbateOut",3192,"",0,"",0,"",0);
+		simpleChoices("SuckCumOut",suckOffJoeysGardenHose,"MasturbateOut",joeyWanksItOut,"",0,"",0,"",0);
 	}
-	flags[348]++;	
+	flags[UNKNOWN_FLAG_NUMBER_00348]++;	
 }
 
 //Masturbate It Out (work it out on the floor)
 function joeyWanksItOut():void {
 	outputText("", true);
-	if(flags[349] == 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00349] == 0) {
 		outputText("You tell Joey that if he masturbates to erectness, his body should be able to shoot it out faster.  He smacks his forehead and runs into a back room, his thong disintegrating around his growing testes as he runs. The door slams, leaving you in peace.  A little freaked out, you head back to camp for now.", false);
 		doNext(13);
 	}
 	else eventParser(13);
-	flags[349]++;
+	flags[UNKNOWN_FLAG_NUMBER_00349]++;
 }
 //Suck Cum Out (not your garden-variety hoes)
 function suckOffJoeysGardenHose():void {
@@ -436,7 +436,7 @@ function suckOffJoeysGardenHose():void {
 
 function overHearDemonsAboutSyrena():void {
 	outputText("", true);
-	if(flags[292] == 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00292] == 0) {
 		outputText("A whisper of conversation catches your ear while you're wandering the bazaar, and overcome by curiosity, you veer towards it.\n\n", false);
 		outputText("As you're closing in on the voices, the dialogue grows clear enough to understand.\n\n", false);
 		outputText("\"<i>-old him if he doesn't finish this week's experiments, she's going drop him into a submission tank instead of the champion!</i>\" exclaims the first voice, sounding quite feminine.\n\n", false);
@@ -448,7 +448,7 @@ function overHearDemonsAboutSyrena():void {
 		outputText("Well, that explains a lot.  The demons seem to have an active research department, though the one called Syrena does not seem to please her underlings very much.  Then again, you doubt any demonic servants are pleased with their bosses.  You can't wait to put a stop to their labors, but for now, there's nothing to do but use the bazaar or go home.\n\n", false);
 	}
 	//[Listen in repeat]
-	else if(flags[292] == 1) {
+	else if(flags[UNKNOWN_FLAG_NUMBER_00292] == 1) {
 		outputText("Just as before, you spot the collar-popping incubus and his lab coat-clad lover complaining about their boss.\n\n", false);
 		outputText("\"<i>-still sore!  I can't believe she did that to me!</i>\" groans the male.\n\n", false);
 		outputText("Smiling cruelly, the slick-pussied succubus says, \"<i>You deserved it.  Honestly, you turned in cum-stained reports to your boss, and you're surprised that she took your ass for a ride as punishment?  If you ask me, you planned all this.  Who do you think had to clean up the huge mess you left on the floor?</i>\"\n\n", false);
@@ -457,7 +457,7 @@ function overHearDemonsAboutSyrena():void {
 		outputText("\"<i>Babe, you're sliming everywhere again.  Why don't we go blow off some steam?</i>\"  The two horny demons run off and disappear.\n\n", false);
 	}
 	//[Listen in Repeat 2]  
-	else if(flags[292] >= 2) {
+	else if(flags[UNKNOWN_FLAG_NUMBER_00292] >= 2) {
 		outputText("This time, the two chatty demons are seated near the fire, and the reason for their altered location seems clear.  The succubus' belly is gravid to an unusual degree, utterly packed with some kind of corrupted offspring.  She's rubbing both her hands over the stretched skin-dome and moaning in discomfort, the packed womb squirming beneath her touches.\n\n", false);
 		outputText("Meanwhile, the male incubus is knocking back a beer, grumbling, \"<i>Could you take it down a notch?  It isn't like this is the first time you've had to lug around a load of imps - don't be so melodramatic.</i>\"\n\n", false);
 		outputText("His pregnant companion growls and tugs at her undersized labcoat, failing to conceal the blueberry-colored bulge of her belly from him as she retorts, \"<i>You didn't have to get all these fucked into you, now did you?  Hell, she even shot me up with fertility-plus first!  It feels like there's two dozen of the little bastards packed in there!  I figure in another day or two I won't even be able to walk.</i>\"\n\n", false);
@@ -468,7 +468,7 @@ function overHearDemonsAboutSyrena():void {
 	}
 	//enterTheBazaarAndMenu(false);
 	doNext(2855);
-	flags[292]++;
+	flags[UNKNOWN_FLAG_NUMBER_00292]++;
 }
 
 //"Greta's Garments" - Interior

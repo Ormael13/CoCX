@@ -178,7 +178,7 @@ function doCombat(eventNum:Number)
 	var pSpecials:int = 5161;
 	
 	if(eventNum == 5000) {
-		flags[22] = 0;
+		flags[UNKNOWN_FLAG_NUMBER_00022] = 0;
 		dataBG.visible = false;
 		dataText.visible = false;
 		appearanceText.visible = false;
@@ -236,7 +236,7 @@ function doCombat(eventNum:Number)
 			} else if(monster.hasStatusAffect("Constricted") >= 0) {
 				simpleChoices("Squeeze", 5119,"Tease",5120,"",0,"",0,"Release",5121);
 			} else if(player.hasStatusAffect("Bound") >= 0) {
-				simpleChoices("Struggle",2335,"Wait",2336,"",0,"",0,"",0);
+				simpleChoices("Struggle",ceraphBindingStruggle,"Wait",ceraphBoundWait,"",0,"",0,"",0);
 			} else if(player.hasStatusAffect("GooArmorBind") >= 0) {
 				choices("Struggle", 5077,"",0,"",0,"",0,"",0,"Wait",5071,"",0,"",0,"",0,"",0);
 			} else if(monster.hasStatusAffect("Minotaur Entangled") >= 0) {
@@ -423,15 +423,15 @@ function doCombat(eventNum:Number)
 				player.gems -= temp;
 				gameState = 0;
 				//BUNUS XPZ
-				if(flags[89] > 0) {
-					player.XP += flags[89];
-					outputText("  Somehow you managed to gain " + flags[89] + " XP from the situation.", false);
-					flags[89] = 0;
+				if(flags[UNKNOWN_FLAG_NUMBER_00089] > 0) {
+					player.XP += flags[UNKNOWN_FLAG_NUMBER_00089];
+					outputText("  Somehow you managed to gain " + flags[UNKNOWN_FLAG_NUMBER_00089] + " XP from the situation.", false);
+					flags[UNKNOWN_FLAG_NUMBER_00089] = 0;
 				}
 				//Bonus lewts
-				if(flags[234] != "") {
-					outputText("  Somehow you came away from the encounter with " + itemLongName(flags[234]) + ".\n\n", false);
-					shortName = flags[234];
+				if(flags[UNKNOWN_FLAG_NUMBER_00234] != "") {
+					outputText("  Somehow you came away from the encounter with " + itemLongName(flags[UNKNOWN_FLAG_NUMBER_00234]) + ".\n\n", false);
+					shortName = flags[UNKNOWN_FLAG_NUMBER_00234];
 					menuLoc = 18;
 					takeItem();
 				}
@@ -701,7 +701,7 @@ function doCombat(eventNum:Number)
 				if(player.statusAffectv1("Tamani") <= -500 && player.canOvipositSpider()) {
 					temp2 = 3837;
 				}
-				simpleChoices("Fuck",2200,"Buttfuck",temp,"",0,"Lay Eggs",temp2,"Leave",5007);
+				simpleChoices("Fuck",tamaniSexWon,"Buttfuck",temp,"",0,"Lay Eggs",temp2,"Leave",5007);
 			}
 			else eventParser(5007);			
 			return;
@@ -761,7 +761,7 @@ function doCombat(eventNum:Number)
 			outputText("You strike out and the last of the demons tumbles to the ground with a thud. You stand there for a second surrounded by dead or unconscious demons feeling like a god of battle. Then you realize that if a god of battle does exist he lives on a demonic plane like this, so to avoid insulting him you take your hands off your hips and your " + player.legs() + " off the head of the demon leader before you start to search the bodies.", true);
 			stats(0,0,0,0,0,0,1,0);
 			if(monster.hasStatusAffect("phyllafight") >= 0) {
-				doNext(3579);
+				doNext(consolePhylla);
 				return;
 			}
 			eventParser(5007);
@@ -772,7 +772,7 @@ function doCombat(eventNum:Number)
 			//Rape if not naga, turned on, and girl that can fit!
 			if(player.hasVagina() && player.lust >= 33 && !player.isNaga()) {
 				outputText("  You find yourself musing that you could probably take advantage of the poor 'doggy'.  Do you fuck it?", false);
-				simpleChoices("Fuck it",2746,"",0,"",0,"",0,"Leave",5007);
+				simpleChoices("Fuck it",hellHoundPropahRape,"",0,"",0,"",0,"Leave",5007);
 				return;
 			}
 			eventParser(5007);
@@ -840,7 +840,7 @@ function doCombat(eventNum:Number)
 				//Rapes not on the table.
 				else {
 					outputText("\n\nYour nipples ache with the desire to forcibly breastfeed the gelatinous beast.  Do you?", false);
-					doYesNo(2480,5007);					
+					doYesNo(rapeOozeWithMilk,5007);					
 				}
 			}
 			//Not a breastfeeder
@@ -1127,7 +1127,7 @@ function doCombat(eventNum:Number)
 				if(player.statusAffectv1("Tamani") <= -500 && player.canOvipositSpider()) {
 					temp2 = 3837;
 				}
-				simpleChoices("Fuck",2200,"Buttfuck",temp,"",0,"Lay Eggs",temp2,"Leave",5007);
+				simpleChoices("Fuck",tamaniSexWon,"Buttfuck",temp,"",0,"Lay Eggs",temp2,"Leave",5007);
 			}
 			else eventParser(5007);			
 			return;
@@ -1231,7 +1231,7 @@ function doCombat(eventNum:Number)
 		if(monster.short == "demons") {
 			outputText("The demons stop attacking, and reach out to touch your body. Some are already masturbating like it's the only thing in the world and you know that right now, if you wanted to, you could make each and every one of them fuck you.");
 			if(monster.hasStatusAffect("phyllafight") >= 0) {
-				doNext(3579);
+				doNext(consolePhylla);
 				return;
 			}
 			outputText("  Do you rape them?", true);
@@ -1309,7 +1309,7 @@ function doCombat(eventNum:Number)
 				//Rapes not on the table.
 				else {
 					outputText("\n\nYour nipples ache with the desire to forcibly breastfeed the gelatinous beast.  Do you?", false);
-					doYesNo(2480,5007);					
+					doYesNo(rapeOozeWithMilk,5007);					
 				}
 			}
 			//Not a breastfeeder
@@ -2223,7 +2223,7 @@ function doCombat(eventNum:Number)
 		if(monster.short == "Tamani") {
 			if(player.totalCocks() > 0) {
 				//hypnoslut loss scene
-				if(flags[56] > 19 && rand(2) == 0) {
+				if(flags[UNKNOWN_FLAG_NUMBER_00056] > 19 && rand(2) == 0) {
 					getRapedByTamaniYouHypnoSlut();
 					return;
 				}
@@ -2612,7 +2612,7 @@ function doCombat(eventNum:Number)
 	//GAME OVERS
 	if(eventNum == 5025) {
 		outputText("<b>GAME OVER</b>", true);
-		if(flags[99] == 1 || debug) simpleChoices("Game Over", 9999, "",0,"NewGamePlus",10035,"",0,"CHEAT", 1);
+		if(flags[EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "",0,"NewGamePlus",10035,"",0,"CHEAT", 1);
 		else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus",10035, "BLAH", 0, "LULZ", 0);
 		dataBG.visible = true;
 		dataText.visible = true;
@@ -2628,7 +2628,7 @@ function doCombat(eventNum:Number)
 	//Soft Game Over - for when you want to leave the text on-screen
 	if(eventNum == 5035) {
 		outputText("\n\n<b>GAME OVER</b>", false);
-		if(flags[99] == 1 || debug) simpleChoices("Game Over", 9999, "",0,"NewGamePlus",10035,"",0,"Debug Cheat", 1);
+		if(flags[EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "",0,"NewGamePlus",10035,"",0,"Debug Cheat", 1);
 		else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus", 10035, "BLAH", 0, "LULZ", 0);
 		dataBG.visible = true;
 		dataText.visible = true;
@@ -3034,7 +3034,7 @@ function doCombat(eventNum:Number)
 	if(eventNum == 5071) {
 		//Gain fatigue if not fighting sand tarps
 		if(monster.hasStatusAffect("level") < 0) fatigue(-5);
-		flags[22] = 1;
+		flags[UNKNOWN_FLAG_NUMBER_00022] = 1;
 		if(monster.hasStatusAffect("PCTailTangle") >= 0) {
 			kitsuneWait();
 			return;
@@ -3848,7 +3848,7 @@ function attack():void {
 		enemyAI();
 		return;
 	}
-	if(flags[23] >= 3 && !isUrta()) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00023] >= 3 && !isUrta()) {
 		outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  Ceraph's piercings have made normal attack impossible!  Maybe you could try something else?\n\n", false);
 		enemyAI();
 		return;
@@ -4482,7 +4482,7 @@ function doDamage(damage:Number):Number {
 }
 function takeDamage(damage:Number, noMod:Boolean = false):Number {
 	//EZ MOAD half damage
-	if(flags[99] == 1) damage /= 2;
+	if(flags[EASY_MODE_ENABLE_FLAG] == 1) damage /= 2;
 	if(player.hasStatusAffect("Shielding") >= 0) {
 		damage -= 30;
 		if(damage < 1) damage = 1;
@@ -4517,7 +4517,7 @@ function takeDamage(damage:Number, noMod:Boolean = false):Number {
 	if(damage < 1) damage = 1;
 	//Else deduct.
 	else player.HP-=damage;
-	if(flags[21] > 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00021] > 0) {
 		stats(0,0,0,0,0,0,int(damage/2),0);
 	}
 	hpDown.visible = true;
@@ -4914,11 +4914,11 @@ function clearStatuses(visibility:Boolean):void {
 	if(player.hasStatusAffect("Disarmed") >= 0) {
 		player.removeStatusAffect("Disarmed");
 		if(player.weaponName == "fists") {
-			player.weaponName = flags[268];
-			player.weaponAttack = fixedDamage(flags[268]);
+			player.weaponName = flags[UNKNOWN_FLAG_NUMBER_00268];
+			player.weaponAttack = fixedDamage(flags[UNKNOWN_FLAG_NUMBER_00268]);
 		}
 		else {
-			flags[234] = lootWeaponName(flags[268]);
+			flags[UNKNOWN_FLAG_NUMBER_00234] = lootWeaponName(flags[UNKNOWN_FLAG_NUMBER_00268]);
 		}
 	}
 	if(player.hasStatusAffect("Anemone Venom") >= 0) {
@@ -5207,35 +5207,35 @@ function combatStatusesUpdate():void {
 		}
 		monster.lust += monster.lustVuln * (2 + rand(4));
 	}
-	if(player.hasStatusAffect("Bound") >= 0 && flags[23] >= 2) {
+	if(player.hasStatusAffect("Bound") >= 0 && flags[UNKNOWN_FLAG_NUMBER_00023] >= 2) {
 		outputText("The feel of tight leather completely immobilizing you turns you on more and more.  Would it be so bad to just wait and let her play with you like this?\n\n", false);
 		stats(0,0,0,0,0,0,3,0);
 	}
 	if(monster.hasStatusAffect("QueenBind") >= 0) {
 		outputText("You're utterly restrained by the Harpy Queen's magical ropes!\n\n");
-		if(flags[23] >= 2) stats(0,0,0,0,0,0,3,0);
+		if(flags[UNKNOWN_FLAG_NUMBER_00023] >= 2) stats(0,0,0,0,0,0,3,0);
 	}
 	if(player.hasStatusAffect("GooArmorBind") >= 0) {
-		if(flags[23] >= 2) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00023] >= 2) {
 			outputText("The feel of the all-encapsulating goo immobilizing your helpless body turns you on more and more.  Maybe you should just wait for it to completely immobilize you, have you at its mercy.\n\n");
 			stats(0,0,0,0,0,0,3,0);
 		}
 		else outputText("You're utterly immobilized by the goo flowing around you.  You'll have to struggle free!\n\n");
 	}
 	if(player.hasStatusAffect("HarpyBind") >= 0) {
-		if(flags[23] >= 2) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00023] >= 2) {
 			outputText("The harpies are holding you down and restraining you, making the struggle all the sweeter!\n\n");
 			stats(0,0,0,0,0,0,3,0);
 		}
 		else outputText("You're restrained by the harpies so that they can beat on you with impunity.  You'll need to struggle to break free!\n\n");
 	}
-	if(player.hasStatusAffect("Naga Bind") >= 0 && flags[23] >= 2) {
+	if(player.hasStatusAffect("Naga Bind") >= 0 && flags[UNKNOWN_FLAG_NUMBER_00023] >= 2) {
 		outputText("Coiled tightly by the naga and utterly immobilized, you can't help but become aroused thanks to your bondage fetish.\n\n", false);
 		stats(0,0,0,0,0,0,5,0);
 	}
 	if(player.hasStatusAffect("TentacleBind") >= 0) {
 		outputText("You are firmly trapped in the tentacle's coils.  <b>The only thing you can try to do is struggle free!</b>\n\n", false);
-		if(flags[23] >= 2) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00023] >= 2) {
 			outputText("Wrapped tightly in the tentacles, you find it hard to resist becoming more and more aroused...\n\n", false);
 			stats(0,0,0,0,0,0,3,0);
 		}
@@ -5379,7 +5379,7 @@ function combatStatusesUpdate():void {
 		}
 	}
 	//Bondage straps + bondage fetish
-	if(flags[23] >= 2 && player.armorName == "barely-decent bondage straps") {
+	if(flags[UNKNOWN_FLAG_NUMBER_00023] >= 2 && player.armorName == "barely-decent bondage straps") {
 		outputText("The feeling of the tight, leather straps holding tightly to your body while exposing so much of it turns you on a little bit more.\n\n", false);
 		stats(0,0,0,0,0,0,2,0);
 	}
@@ -9406,22 +9406,22 @@ function startCombat(monsterNum:Number):void {
 		monster.cor = 50;
 		monster.fatigue = 0;
 		monster.lustVuln = .5;
-		if(flags[126] > 0) monster.lustVuln += .25;
-		if(flags[126] > 2) monster.lustVuln += .5;
+		if(flags[UNKNOWN_FLAG_NUMBER_00126] > 0) monster.lustVuln += .25;
+		if(flags[UNKNOWN_FLAG_NUMBER_00126] > 2) monster.lustVuln += .5;
 		
 		//Combat Stats
 		monster.bonusHP = 350;
 		monster.HP = eMaxHP();
 		
-		monster.lust = 30 + flags[126] * 10;
+		monster.lust = 30 + flags[UNKNOWN_FLAG_NUMBER_00126] * 10;
 		if(monster.lust > 80) monster.lust = 80;
 		
 		
 		//Level Stats
 		monster.level = 11;
 		monster.XP = totalXP() + 50;
-		if(flags[126] > 0) monster.XP = 5;
-		if(flags[126] > 2) monster.XP = 1;
+		if(flags[UNKNOWN_FLAG_NUMBER_00126] > 0) monster.XP = 5;
+		if(flags[UNKNOWN_FLAG_NUMBER_00126] > 2) monster.XP = 1;
 		monster.gems = 1;
 		
 		
@@ -10863,11 +10863,11 @@ function startCombat(monsterNum:Number):void {
 	//Minotaur gang!
 	if(monsterNum == 41) {
 		monster.short="minotaur";
-		if(flags[326] < 20) monster.short += " gang";
+		if(flags[UNKNOWN_FLAG_NUMBER_00326] < 20) monster.short += " gang";
 		else monster.short += " tribe";
 		monster.plural = true;
-		monster.long = Num2Text(flags[326]) + " shaggy beastmen stand around you in a loose circle.  Their postures aren't exactly threatening.  If anything, they seem to be standing protectively around you, as if their presence would somehow shelter you from the rest of the mountain.  All of their features share a brotherly similarity, though there's still a fair bit of differences between your minotaur sons.  One of them is a head above the rest, a massive hulk of muscle so big he seems to dwarf the rest.  In stark contrast, a feminine minitaur keeps his distance in the rear.";
-		if(flags[326] >= 20) monster.long += "  The tribe constantly makes hoots and cat-calls, fully expecting to be fucking you soon.";
+		monster.long = Num2Text(flags[UNKNOWN_FLAG_NUMBER_00326]) + " shaggy beastmen stand around you in a loose circle.  Their postures aren't exactly threatening.  If anything, they seem to be standing protectively around you, as if their presence would somehow shelter you from the rest of the mountain.  All of their features share a brotherly similarity, though there's still a fair bit of differences between your minotaur sons.  One of them is a head above the rest, a massive hulk of muscle so big he seems to dwarf the rest.  In stark contrast, a feminine minitaur keeps his distance in the rear.";
+		if(flags[UNKNOWN_FLAG_NUMBER_00326] >= 20) monster.long += "  The tribe constantly makes hoots and cat-calls, fully expecting to be fucking you soon.";
 		monster.a ="the ";
 		monster.capitalA ="The ";
 		monster.temperment = 1;
@@ -10899,15 +10899,15 @@ function startCombat(monsterNum:Number):void {
 		monster.fatigue = 0;
 		
 		//Combat Stats
-		monster.bonusHP = 340 + 50 * (flags[326] - 3);
+		monster.bonusHP = 340 + 50 * (flags[UNKNOWN_FLAG_NUMBER_00326] - 3);
 		monster.HP = eMaxHP();
 		monster.lustVuln = 0.45;
-		if((flags[326] - 3) * 2 > 13) monster.lustVuln = .3;
-		else monster.lustVuln -= (flags[326] - 3) * 0.02;
+		if((flags[UNKNOWN_FLAG_NUMBER_00326] - 3) * 2 > 13) monster.lustVuln = .3;
+		else monster.lustVuln -= (flags[UNKNOWN_FLAG_NUMBER_00326] - 3) * 0.02;
 		monster.lust = 30;
 		
 		//Level Stats
-		monster.level = 11 + Math.round((flags[326] - 3)/2);
+		monster.level = 11 + Math.round((flags[UNKNOWN_FLAG_NUMBER_00326] - 3)/2);
 		if(monster.level > 14) monster.level = 14;
 		monster.XP = totalXP();
 		monster.gems = rand(15) + 45;
@@ -16369,7 +16369,7 @@ function tease():void {
 		}
 		if(monster.plural) damage *= 1.3;
 		enemyTeaseReaction(damage + rand(bonusDamage));
-		if(flags[23] >= 1) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00023] >= 1) {
 			if(player.lust < 75) outputText("\nFlaunting your body in such a way gets you a little hot and bothered.", false);
 			else outputText("\nIf you keep exposing yourself you're going to get too horny to fight back.  This exhibitionism fetish makes it hard to resist just stripping naked and giving up.", false);
 			stats(0,0,0,0,0,0,2 + rand(3),0);
@@ -16879,7 +16879,7 @@ function kick():void {
 	//(bipedal hoof-kick) 
 	else if(player.lowerBody == 1) outputText("You twist and lurch as you raise a leg and slam your hoof forward in a kick.  ", false);
 
-	if(flags[23] >= 3) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00023] >= 3) {
 		outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  Ceraph's piercings have made normal attack impossible!  Maybe you could try something else?\n\n", false);
 		enemyAI();
 		return;
@@ -17496,8 +17496,8 @@ function runAway():void {
 		doNext(5000);
 		return;
 	}
-	if(flags[329] == 1 && (monster.short == "minotaur gang" || monster.short == "minotaur tribe")) {
-		flags[329] = 0;
+	if(flags[UNKNOWN_FLAG_NUMBER_00329] == 1 && (monster.short == "minotaur gang" || monster.short == "minotaur tribe")) {
+		flags[UNKNOWN_FLAG_NUMBER_00329] = 0;
 		//(Free run away) 
 		outputText("You slink away while the pack of brutes is arguing.  Once they finish that argument, they'll be sorely disappointed!", true);
 		gameState = 0;

@@ -284,7 +284,7 @@ package classes
 			//Start the array if its the first bit
 			if (perks.length == 0)
 			{
-				trace("New Perk Started Array! " + keyName);
+				//trace("New Perk Started Array! " + keyName);
 				perks.push(newKeyItem);
 				arrayed = true;
 				keySlot = 0;
@@ -292,7 +292,7 @@ package classes
 			//If it belongs at the end, push it on
 			if (perks[perks.length - 1].perkName < keyName && !arrayed)
 			{
-				trace("New Perk Belongs at the end!! " + keyName);
+				//trace("New Perk Belongs at the end!! " + keyName);
 				perks.push(newKeyItem);
 				arrayed = true;
 				keySlot = perks.length - 1;
@@ -300,7 +300,7 @@ package classes
 			//If it belongs in the beginning, splice it in
 			if (perks[0].perkName > keyName && !arrayed)
 			{
-				trace("New Perk Belongs at the beginning! " + keyName);
+				//trace("New Perk Belongs at the beginning! " + keyName);
 				perks.splice(0, 0, newKeyItem);
 				arrayed = true;
 				keySlot = 0;
@@ -308,7 +308,7 @@ package classes
 			//Find the spot it needs to go in and splice it in.
 			if (!arrayed)
 			{
-				trace("New Perk using alphabetizer! " + keyName);
+				//trace("New Perk using alphabetizer! " + keyName);
 				counter = perks.length;
 				while (counter > 0 && !arrayed)
 				{
@@ -344,7 +344,7 @@ package classes
 			//Fallback
 			if (!arrayed)
 			{
-				trace("New Perk Belongs at the end!! " + keyName);
+				//trace("New Perk Belongs at the end!! " + keyName);
 				perks.push(newKeyItem);
 				arrayed = true;
 				keySlot = perks.length - 1;
@@ -356,7 +356,7 @@ package classes
 			perks[keySlot].value3 = value3;
 			perks[keySlot].value4 = value4;
 			perks[keySlot].perkDesc = desc;
-			trace("NEW PERK FOR PLAYER in slot " + keySlot + ": " + perks[keySlot].perkName);
+			//trace("NEW PERK FOR PLAYER in slot " + keySlot + ": " + perks[keySlot].perkName);
 		}
 		
 		//Remove perk
@@ -375,7 +375,7 @@ package classes
 				if (perks[counter].perkName == perkName)
 				{
 					perks.splice(counter, 1);
-					trace("Attempted to remove \"" + perkName + "\" perk.");
+					//trace("Attempted to remove \"" + perkName + "\" perk.");
 					counter = 0;
 				}
 			}
@@ -581,7 +581,7 @@ package classes
 			statusAffects[statusAffects.length - 1].value2 = value2;
 			statusAffects[statusAffects.length - 1].value3 = value3;
 			statusAffects[statusAffects.length - 1].value4 = value4;
-			trace("NEW STATUS APPLIED TO PLAYER!: " + statusName);
+			//trace("NEW STATUS APPLIED TO PLAYER!: " + statusName);
 		}
 		
 		//Remove a status
@@ -600,7 +600,7 @@ package classes
 				if (statusAffects[counter].statusAffectName == statusName)
 				{
 					statusAffects.splice(counter, 1);
-					trace("Attempted to remove \"" + statusName + "\" status.");
+					//trace("Attempted to remove \"" + statusName + "\" status.");
 					counter = 0;
 				}
 			}
@@ -1130,7 +1130,7 @@ package classes
 							}
 						}
 						if (index >= 0 && index == index2)
-							trace("FUCK ERROR COCKTHATFITS2 SHIT IS BROKED!");
+							//trace("FUCK ERROR COCKTHATFITS2 SHIT IS BROKED!");
 					}
 					//Store the index of fitting dick
 					else
@@ -2119,7 +2119,7 @@ package classes
 							if (breastRows[index].lactationMultiplier < breastRows[counter].lactationMultiplier)
 								index = counter;
 						}
-						trace(biggestLactation());
+						//trace(biggestLactation());
 						breastRows[index].lactationMultiplier += todo;
 						if (breastRows[index].lactationMultiplier < 0)
 							breastRows[index].lactationMultiplier = 0;
@@ -2234,9 +2234,9 @@ package classes
 				quantity += 200;
 			quantity += statusAffectv1("rut");
 			quantity *= (1 + (2 * perkv1("Pierced: Fertite")) / 100);
-			trace("Final Cum Volume: " + int(quantity) + "mLs.");
+			//trace("Final Cum Volume: " + int(quantity) + "mLs.");
 			if (quantity < 0)
-				trace("SOMETHING HORRIBLY WRONG WITH CUM CALCULATIONS");
+				//trace("SOMETHING HORRIBLY WRONG WITH CUM CALCULATIONS");
 			if (quantity < 2)
 				quantity = 2;
 			return quantity;
@@ -2309,7 +2309,7 @@ package classes
 				if (cocks[index].cockType == type)
 					return index;
 			}
-			trace("creature.findFirstCockType ERROR - searched for cocktype: " + type + " and could not find it.");
+			//trace("creature.findFirstCockType ERROR - searched for cocktype: " + type + " and could not find it.");
 			return 0;
 		}
 		
@@ -3021,7 +3021,7 @@ package classes
 				else
 				{
 					cocks.splice(arraySpot, totalRemoved);
-					trace("Attempted to remove " + totalRemoved + " cocks.");
+					//trace("Attempted to remove " + totalRemoved + " cocks.");
 				}
 			}
 			genderCheck();
@@ -3049,7 +3049,7 @@ package classes
 				else
 				{
 					vaginas.splice(arraySpot, totalRemoved);
-					trace("Attempted to remove " + totalRemoved + " vaginas.");
+					//trace("Attempted to remove " + totalRemoved + " vaginas.");
 				}
 			}
 			genderCheck();
@@ -3077,7 +3077,7 @@ package classes
 				else
 				{
 					breastRows.splice(arraySpot, totalRemoved);
-					trace("Attempted to remove " + totalRemoved + " breastRows.");
+					//trace("Attempted to remove " + totalRemoved + " breastRows.");
 				}
 			}
 		}

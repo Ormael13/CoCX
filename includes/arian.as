@@ -1,30 +1,30 @@
-﻿const ARIAN_FOLLOWER:int = 933;
-const ARIAN_PARK:int = 934; //-1 = disabled, 1 = helped.
-const ARIAN_HEALTH:int = 935; //Higher is better.
-const ARIAN_ANAL_XP:int = 936;
+﻿// ARIAN_FOLLOWER:int = 933;
+// ARIAN_PARK:int = 934; //-1 = disabled, 1 = helped.
+// ARIAN_HEALTH:int = 935; //Higher is better.
+// ARIAN_ANAL_XP:int = 936;
 
-const ARIAN_CAPACITY:int = 937;
-const ARIAN_COCK_SIZE:int = 938;
-const ARIAN_DOUBLE_COCK:int = 939;
-const ARIAN_VAGINA:int = 940;
-const ARIAN_BREASTS:int = 941;
-const ARIAN_VIRGIN:int = 942;
+// ARIAN_CAPACITY:int = 937;
+// ARIAN_COCK_SIZE:int = 938;
+// ARIAN_DOUBLE_COCK:int = 939;
+// ARIAN_VAGINA:int = 940;
+// ARIAN_BREASTS:int = 941;
+// ARIAN_VIRGIN:int = 942;
 
-const ARIAN_S_DIALOGUE:int = 943;
-const ARIAN_HERM_CHAT:int = 944;
-const ARIAN_ASS_CHAT:int = 945;
-const ARIAN_LESSONS:int = 946;
-const ARIAN_DOUBLE_PENETRATION_CHAT:int = 947;
-const ARIAN_FIRST_REPTILUM:int = 948;
-const ARIAN_TREATMENT:int = 949;
-const ARIAN_EGG_CHAT:int = 952;
-const ARIAN_EGG_EVENT:int = 953;
-const ARIAN_EGG_COLOR:int = 954;
-const ARIAN_EGG_COUNTER:int = 955;
+// ARIAN_S_DIALOGUE:int = 943;
+// ARIAN_HERM_CHAT:int = 944;
+// ARIAN_ASS_CHAT:int = 945;
+// ARIAN_LESSONS:int = 946;
+// ARIAN_DOUBLE_PENETRATION_CHAT:int = 947;
+// ARIAN_FIRST_REPTILUM:int = 948;
+// ARIAN_TREATMENT:int = 949;
+// ARIAN_EGG_CHAT:int = 952;
+// ARIAN_EGG_EVENT:int = 953;
+// ARIAN_EGG_COLOR:int = 954;
+// ARIAN_EGG_COUNTER:int = 955;
 
-const ARIAN_HAS_BLOWN:int = 950;
-const ARIAN_MORNING:int = 951;
-const TIMES_ARIAN_DILDOED:int = 983;
+// ARIAN_HAS_BLOWN:int = 950;
+// ARIAN_MORNING:int = 951;
+// TIMES_ARIAN_DILDOED:int = 983;
 
 /*Design Notes
 Arian has a \"<i>health</i>\" stat that goes from 0 to 100. Where 0 equals very sick and 100 equals healthy. This also works as a sort of affection meter.

@@ -1,19 +1,19 @@
-﻿const TIMES_MET_SHOULDRA:int = 351;
-const TIMES_BEATEN_SHOULDRA:int = 352;
-const TIMES_POSSESSED_BY_SHOULDRA:int = 353;
-const TIMED_SHARKGINAS:int = 354;
-const TIMES_SHARKPENISED:int = 355;
-const SHOULDRA_SLIME_PENOR_TIMES:int = 356;
-const SHOULDRA_GENDERLESS_FUCK_COUNT:int = 357;
-const SHOULDRA_PENIS_DEFEAT_TIMES:int = 358;
-const SHOULDRA_WORM_SCENE_COUNTER:int = 359;
-const SHOULDRA_EXGARTUAN_SPIRIT_SEX_COUNT:int = 360;
-const SHOULDRA_VAGINAL_POSSESSIONS:int = 361;
-const SHOULDRA_HERMSEX_COUNT:int = 362;
-const SHOULDRA_USES_YOUR_GIANT_COCK_COUNT:int = 363;
-const TIMES_MET_OOZE:int = 364;
-const SLIMEGINAED:int = 509;
-const GHOST_GIRL_SLIME_X_SHOULDRA_COUNTER:int = 510;
+﻿//const TIMES_MET_SHOULDRA:int = 351;
+//const TIMES_BEATEN_SHOULDRA:int = 352;
+//const TIMES_POSSESSED_BY_SHOULDRA:int = 353;
+//const TIMED_SHARKGINAS:int = 354;
+//const TIMES_SHARKPENISED:int = 355;
+//const SHOULDRA_SLIME_PENOR_TIMES:int = 356;
+//const SHOULDRA_GENDERLESS_FUCK_COUNT:int = 357;
+//const SHOULDRA_PENIS_DEFEAT_TIMES:int = 358;
+//const SHOULDRA_WORM_SCENE_COUNTER:int = 359;
+//const SHOULDRA_EXGARTUAN_SPIRIT_SEX_COUNT:int = 360;
+//const SHOULDRA_VAGINAL_POSSESSIONS:int = 361;
+//const SHOULDRA_HERMSEX_COUNT:int = 362;
+//const SHOULDRA_USES_YOUR_GIANT_COCK_COUNT:int = 363;
+//const TIMES_MET_OOZE:int = 364;
+//const SLIMEGINAED:int = 509;
+//const GHOST_GIRL_SLIME_X_SHOULDRA_COUNTER:int = 510;
 
 function shouldraAI():void {
 	var attack:Number = rand(3);
@@ -99,7 +99,7 @@ function shouldraMagicLazers():void {
 function shouldraGreeting():void {
 	spriteSelect(66);
 	outputText("", true);
-	if(silly() && flags[366] == 0) {
+	if(silly() && flags[UNKNOWN_FLAG_NUMBER_00366] == 0) {
 		//NO MUTANTS ALLOWED
 		if(player.cockTotal() > 1 || player.faceType != 0 || player.lowerBody != 0 || player.tailType > 0 || player.horns > 0 || player.cor > 15 || player.longestCockLength() > 10 || player.tallness < 65 || player.tallness > 78 || player.hasVagina()) {}
 		else {
@@ -135,7 +135,7 @@ function shouldraGreeting():void {
 			if(flags[TIMES_BEATEN_SHOULDRA] == 3) outputText("You can't say you saw that coming.  It seems she has offered to forego the fight in lieu of sexings.  ", false);
 			outputText("Would you like to accept her offer, or do you want to fight her regardless?", false);
 			//Now back to the good part!
-			simpleChoices("Accept",3207,"Fight",3208,"",0,"",0,"",0);
+			simpleChoices("Accept",yankeeEchoPapa,"Fight",novemberAlphaHotel,"",0,"",0,"",0);
 		}
 		else {
 			//FIGHT!
@@ -152,7 +152,7 @@ function yankeeEchoPapa():void {
 	outputText("", true);
 	outputText("You graciously accept her offer, and she nods happily.  \"<i>Perfect!  Now then, let's get to it...</i>\"\n\n", false);
 	//[skip to 'let her in' text (i.e. win sex intro)]
-	doNext(3211);
+	doNext(littlePigLittlePigLetMeIn);
 }
 //[nah] 
 function novemberAlphaHotel():void {
@@ -183,11 +183,11 @@ function defeatDannyPhantom():void {
 		//([if first time]
 		if(flags[TIMES_POSSESSED_BY_SHOULDRA] < 1) {
 			outputText("What does she mean, \"<i>let me in?</i>\" Do you want to find out?", false);
-			doYesNo(3211,3210);
+			doYesNo(littlePigLittlePigLetMeIn,noSlimingSlimer);
 		}
 		else {
 			outputText("What do you do?", false);
-			simpleChoices("Let Her In",3211,"Deny",3210,"",0,"",0,"",0);
+			simpleChoices("Let Her In",littlePigLittlePigLetMeIn,"Deny",noSlimingSlimer,"",0,"",0,"",0);
 		}
 	}
 	flags[TIMES_BEATEN_SHOULDRA]++;
@@ -226,7 +226,7 @@ function littlePigLittlePigLetMeIn():void {
 	
 	//CHOICES HURRAH
 	var lake:Number = 0;
-	if(player.gender > 0 && ((player.hasStatusAffect("Boat Discovery") >= 0 && flags[230] > 0) || flags[TIMES_MET_OOZE] > 0)) {
+	if(player.gender > 0 && ((player.hasStatusAffect("Boat Discovery") >= 0 && flags[UNKNOWN_FLAG_NUMBER_00230] > 0) || flags[TIMES_MET_OOZE] > 0)) {
 		outputText("You could take her to the lake to find someone to play with...\n\n", false);
 		lake = 3212;
 	}
@@ -252,7 +252,7 @@ function nowOnVickiLake():void {
 	//SHARK-GIRL - REQUIRES BOAT AND MET SHARKGIRL
 	//SLIME - REQUIRES MET SLIME
 	var shark:Number = 0;
-	if(player.hasStatusAffect("Boat Discovery") >= 0 && flags[230] > 0)
+	if(player.hasStatusAffect("Boat Discovery") >= 0 && flags[UNKNOWN_FLAG_NUMBER_00230] > 0)
 		shark = 3213;
 	var ooze:Number = 0;
 	if(flags[TIMES_MET_OOZE] > 0) ooze = 3216;
@@ -280,10 +280,10 @@ function sharkbustersVictory():void {
 	if(player.hasCock() && player.hasVagina()) {
 		outputText("Which gender would you like to focus on?", false);
 		//male / female)
-		simpleChoices("male",3215,"female",3214,"",0,"",0,"",0);
+		simpleChoices("male",ghostIzmaPenis,"female",sharkyEctoginas,"",0,"",0,"",0);
 	}
-	else if(player.hasVagina()) doNext(3214);
-	else if(player.hasCock()) doNext(3215);
+	else if(player.hasVagina()) doNext(sharkyEctoginas);
+	else if(player.hasCock()) doNext(ghostIzmaPenis);
 }
 
 //Shark Girl x Ghost Girl - Vagina Scene (Giantess)
@@ -441,7 +441,7 @@ function slimeGinaFlation():void {
 	outputText("The oozy evacuation keeps up for many long, pleasure-filled heartbeats, your breasts deflating as the slime spurts out of your body. Eventually, the spurts turn to a drizzle, and you push out the remainder of the goo with a compression of your back-to-normal boobs. Reaching into the diluted sage substance, you feel around for any signs of life for the poor ghost girl. You feel a slender hand wrap around your wrist, and you easily heave the spirit free of the twitching mess. Free of the mostly-empty influence of the green slime, she whimsically floats about you. \"<i>It took you long enough!</i>\" she berates you angrily. \"<i>...But, you managed to get me out of there with my sanity intact...and I DID have a good time, so...</i>\"  She substantiates in front of you, smiling radiantly. \"<i>Thanks,</i>\" she says amiably. \"<i>I'm gonna go home. Oh, before I go...</i>\"  She brazenly undoes her leggings, pulling them away from her crotch and reaching into her box. She extricates a good amount of ectoplasm, then pulls a small bottle from a pocket inside her tunic and squeezes the goop inside. With an amiable grin, she hands the bottle to you, and you nod your appreciation. You part ways there, with you redressing and heading back to your campsite, and the ghost girl beginning her trek back to the town ruins.", false);
 	stats(0,0,0,0,0,0,-100,0);
 	if(inCombat()) {
-		flags[234] = "EctoPls";
+		flags[UNKNOWN_FLAG_NUMBER_00234] = "EctoPls";
 		eventParser(5007);
 	}
 	else {
@@ -502,7 +502,7 @@ function slimeyPenorsAhoy():void {
 	stats(0,0,0,0,0,0,-100,0);
 	flags[SHOULDRA_SLIME_PENOR_TIMES]++;
 	if(inCombat()) {
-		flags[234] = "EctoPls";
+		flags[UNKNOWN_FLAG_NUMBER_00234] = "EctoPls";
 		eventParser(5007);
 	}
 	else {
@@ -612,7 +612,7 @@ function penisLossThatIsntALoss():void {
 		if(player.cockTotal() > 1) outputText("s", false);
 		outputText(" while swaying her hips to and fro.  Both of her hands get to work on rubbing your ever-growing testicles, but two hands can't cover the growing amount of space necessary for effective stimulation.  She shrugs, content with patting, tickling, and squeezing the skin she can reach.  A massive churning begins in your gargantuan cumsack, a movement that actually shakes the ground.  Both of you knows what that signifies, the ghost girl going so far as to disengage from her feverish oral to stare longingly at you.  It seems you hold the key to sating her lust or denying her the orgasm she so craves; what do you do?", false);
 		
-		simpleChoices("LetHerCum",3235,"KeepHerOut",3236,"",0,"",0,"",0);
+		simpleChoices("LetHerCum",letShouldraIn,"KeepHerOut",kickShouldraOut,"",0,"",0,"",0);
 		return;
 	}
 	outputText("\n\n", false);
@@ -623,7 +623,7 @@ function penisLossThatIsntALoss():void {
 	stats(0,0,0,0,0,0,-100,0);
 	flags[SHOULDRA_PENIS_DEFEAT_TIMES]++;
 	if(inCombat()) {
-		flags[234] = "EctoPls";
+		flags[UNKNOWN_FLAG_NUMBER_00234] = "EctoPls";
 		eventParser(5007);
 	}
 	else {
@@ -668,7 +668,7 @@ function ghostBJFinisher(inside:Boolean):void {
 		outputText("She wobbles almost exaggeratedly before falling sideways, smacking her head against the ground and sending up a small splash of cum.  If she felt any pain, however, she doesn't react to it at all, staring vacantly at a dilapidated building and drooling slightly.  That outta teach her to try to pull a fast one on you twice, you figure.  As you stride past her, you tug her pants down to her knees and scoop out a good amount of ectoplasm from her vagina.  You reach into her pocket and grab a bottle (honking her boob for good measure and eliciting an aroused twitch), dumping the goo in and stuffing it in your pack.  She'll probably find a goblin eventually, you figure as you begin your journey back to the camp.", false);
 	}
 	if(inCombat()) {
-		flags[234] = "EctoPls";
+		flags[UNKNOWN_FLAG_NUMBER_00234] = "EctoPls";
 		eventParser(5007);
 	}
 	else {
@@ -811,7 +811,7 @@ function hermaphroditeGhostsCumEctoplasm():void {
 		if(player.cockTotal() > 1) outputText("s", false);
 		outputText(" while swaying her hips to and fro.  Both of her hands get to work on rubbing your ever-growing testicles, but two hands can't cover the growing amount of space necessary for effective stimulation.  She shrugs, content with patting, tickling, and squeezing the skin she can reach.  A massive churning begins in your gargantuan cumsack, a movement that actually shakes the ground.  Both of you knows what that signifies, the ghost girl going so far as to disengage from her feverish oral to stare longingly at you.  It seems you hold the key to sating her lust or denying her the orgasm she so craves; what do you do?", false);
 		
-		simpleChoices("LetHerCum",3235,"KeepHerOut",3236,"",0,"",0,"",0);
+		simpleChoices("LetHerCum",letShouldraIn,"KeepHerOut",kickShouldraOut,"",0,"",0,"",0);
 		return;
 	}
 	outputText("\n\n", false);
@@ -890,7 +890,7 @@ function ourDadTaughtUsNotToBeAshamedOfOurDicks():void {
 	stats(0,0,0,0,0,1,-100,0);
 	flags[SHOULDRA_PENIS_DEFEAT_TIMES]++;
 	if(inCombat()) {
-		flags[234] = "EctoPls";
+		flags[UNKNOWN_FLAG_NUMBER_00234] = "EctoPls";
 		eventParser(5007);
 	}
 	else {
@@ -934,7 +934,7 @@ function ghostGinaLosses():void {
 	flags[SHOULDRA_VAGINAL_POSSESSIONS]++;
 	stats(0,0,0,0,0,1,-100,0);
 	if(inCombat()) {
-		flags[234] = "EctoPls";
+		flags[UNKNOWN_FLAG_NUMBER_00234] = "EctoPls";
 		eventParser(5007);
 	}
 	else {
@@ -964,7 +964,7 @@ function loseToShouldraAsHerm():void {
 	flags[SHOULDRA_HERMSEX_COUNT]++;
 	stats(0,0,0,0,0,1,-100,0);
 	if(inCombat()) {
-		flags[234] = "EctoPls";
+		flags[UNKNOWN_FLAG_NUMBER_00234] = "EctoPls";
 		eventParser(5007);
 	}
 	else {
@@ -1067,7 +1067,7 @@ function shouldraGiantCockLoss():void {
 	stats(0,0,0,0,1,1,-100,0);
 	flags[SHOULDRA_USES_YOUR_GIANT_COCK_COUNT]++;
 	if(inCombat()) {
-		flags[234] = "EctoPls";
+		flags[UNKNOWN_FLAG_NUMBER_00234] = "EctoPls";
 		eventParser(5007);
 	}
 	else {
@@ -1122,7 +1122,7 @@ function genderlessShouldrasLossRapes():void {
 	flags[SHOULDRA_GENDERLESS_FUCK_COUNT]++;
 	stats(0,0,0,0,0,1,-100,0);
 	if(inCombat()) {
-		flags[234] = "EctoPls";
+		flags[UNKNOWN_FLAG_NUMBER_00234] = "EctoPls";
 		eventParser(5007);
 	}
 	else {
@@ -1182,8 +1182,8 @@ function superCoolPaladinSexStuffDudeGasmJizzMonkies():void {
 	outputText("While she speaks, you cannot help but notice how pure her body was in appearance; her loose-fitting tunic flows very modestly down to her thighs, preserving her frame from the lecherous eyes of any devious creatures that may be lurking about. Her leather leggings, while form-fitting, are done so in a stylish and innocent way, and you take little offense. You inform her of your ecclesiastical quest to rid the world of all taint, and she nods with what you assume to be admiration. On impulse, you take the hand of the lady before you and raise it to your lips, then inquire on her marital status. It takes her a moment to get over the shock of such a blunt question, but she composes herself quite quickly. \"<i>I am quite single,</i>\" she assures you, a smirk beginning to play across her face. \"<i>Is this a remarkably subtle attempt to court me?</i>\"\n\n", false);
 	
 	outputText("You look up to gaze into her moderately attractive face. Is it?", false);
-	flags[366]++;
-	doYesNo(3233,3234);
+	flags[UNKNOWN_FLAG_NUMBER_00366]++;
+	doYesNo(courtCrazyGirlsDotCom,noCourtingYouFag);
 }
 //(no)
 function noCourtingYouFag():void {
@@ -1197,7 +1197,7 @@ function courtCrazyGirlsDotCom():void {
 	spriteSelect(66);
 	outputText("", true);
 	outputText("Her smile widens as she regards your venerable visage. \"<i>Is that so?</i>\" she says softly. \"<i>Interesting. I'll be back in a moment.</i>\" She returns to her \"<i>house,</i>\" rummaging around for some time before returning to you, hands hidden behind her. \"<i>If I am to be sought by a paladin, we must do things right,</i>\" she explains, handing you a small silk handkerchief. The white fabric slides around your fingers like a sacrosanct flow of holy water, and you reverently tuck her gift into your " + player.armorName + ", laying it over your heart. \"<i>Come back in two days' time, please,</i>\" she asks softly. Your eyes meet for a long moment, and it appears as if she's struggling to say something. She instead breaks away and starts back towards her shelter. \"<i>Be safe,</i>\" she advises, and with a smile and a wave, she's gone. For moments you stand silently, then you turn and start away with long, saintly strides. There's more work to do.\n\n", false);
-	flags[365] = 48;
+	flags[UNKNOWN_FLAG_NUMBER_00365] = 48;
 	doNext(13);
 }
 
@@ -1241,7 +1241,7 @@ function ginaBoobgartuanShouldra():void {
 	outputText("\n\nThough exhausted and a little sore from Exgartuan's treatment of your body, you keep the presence of mind to lean down -- pushing your " + breastDescript(0) + " out of the way -- and scoop up a little ectoplasm from her still-gaping box.  You make a point to ignore Exgartuan's triumphant chortle as you leave the ghost girl to her sleep and walk back to camp.  What a day.");
 	stats(0,0,0,0,0,0,-100,0);
 	if(inCombat()) {
-		flags[234] = "EctoPls";
+		flags[UNKNOWN_FLAG_NUMBER_00234] = "EctoPls";
 		eventParser(5007);
 	}
 	else {
@@ -1323,7 +1323,7 @@ function slimeGhostGalForHerms(clearOut:Boolean = false):void {
 	//ECTOPLZ
 	stats(0,0,0,0,0,-1,-100,0);
 	if(inCombat()) {
-		flags[234] = "EctoPls";
+		flags[UNKNOWN_FLAG_NUMBER_00234] = "EctoPls";
 		eventParser(5007);
 	}
 	else {

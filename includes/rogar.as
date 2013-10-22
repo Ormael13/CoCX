@@ -13,16 +13,16 @@
 
 //flag list:
 //Ro'gar phase flag: state 0 - zero phase, initial encounter; 1 - phase 1, bath/BJ chance; 2 - phase 2, Ro'gar begins the move; 3 - phase 3, Ro'gar is a [Cloaked Figure] in the Wet Bitch; 4 - phase 4 repeatables in the bar as [Ro'gar]
-const ROGAR_PHASE:int = 407;
+//const ROGAR_PHASE:int = 407;
 //Dirt Mc Girt flag: state 0 - player has not had the opportunity to tongue-bathe Ro'; 1 - player gently turned down the chance to bathe him; 2 - player bathed Ro'
 //Dirt Mc Girt flag legend: 2 = gave tongue bath; 1 = declined to give tongue bath; 0 = was not given the option to tongue bathe; default setting 0
-const ROGAR_DIRT:int = 408;
+//const ROGAR_DIRT:int = 408;
 //Ro'roh Raggy flag: state 0 - Ro'gar perceives player as masculine or androgynous; 1 - Ro'gar perceives player as feminine
-const ROGAR_WARNING:int = 409;
+//const ROGAR_WARNING:int = 409;
 //Crying Game flag: state 0 - Ro'gar events can trigger; 1 - Ro'gar is put off by the PC and will no longer appear
-const ROGAR_DISABLED:int = 410;
+//const ROGAR_DISABLED:int = 410;
 //unnamed phase 4 timing flag: measures how long it's been since player last saw Ro'gar once he enters phase 4, to enforce a once-per-day sex limit
-const ROGAR_FUCKED_TODAY:int = 411;
+//const ROGAR_FUCKED_TODAY:int = 411;
 
 //notes: I'm using the Crying Game flag as an all-purpose Ro'gar lockout, so check it before every possible Ro'gar meeting and prevent swamp scenes and the bar button from loading if present; if Crying Game = 1, no Ro'gar scenes, period
 //the reference originates from the half-scene in phase 4 where he can discover you're female or unsexed after already having gotten a BJ from you
@@ -42,7 +42,7 @@ function encounterRogarSwamp():void {
 			if(player.isNaga() || player.tailType > 0) outputText("  Your tail flicks about happily.", false);
 			outputText("  Should you really wait for him?", false);
 		}
-		doYesNo(3368,3369);
+		doYesNo(waitForChunkyOrcLoe,dontWaitForRogar);
 	}
 		//((Ro'gar phase = 1)) (edited)
 	else if(flags[ROGAR_PHASE] == 1) {
@@ -266,7 +266,7 @@ function waitForChunkyOrcLoe():void {
 
 //sexy choices
 function sexyChoices():void {
-	simpleChoices("Ewww",3370,"NoThnxBro",3371,"Lick Clean",3372,"",0,"",0);
+	simpleChoices("Ewww",ewwwRogarIsGay,"NoThnxBro",noSlowBroIDontWantPokeSex,"Lick Clean",okayBroLetsHaveAGayCarwash,"",0,"",0);
 }
 //((Ewww))
 function ewwwRogarIsGay():void {
@@ -344,7 +344,7 @@ function rogarThirdPhase():void {
 		}
 		
 		//return to bar menu
-		doNext(2256);
+		doNext(barTelAdre);
 		return;
 	}
 	//((androgynous or masculine and breasts <= A-cup))
@@ -432,7 +432,7 @@ function rogarPhaseFour():void {
 	else if((player.biggestTitSize() >= 2) && flags[ROGAR_WARNING] == 1) {
 		outputText("Ro'gar the orc is here drinking again, but as you catch his eye, a pained expression flashes across his face as he looks over your form.  It's clear he doesn't relish the prospect of talking to you right now, but knowing him, he's too polite to say so.  The wind spills from your sails and your icebreaker slips from your mind - answering him with a simple glance of resignation is the most you can manage.  He gives you a weak smile and returns to his drink.", false);
 		//return to bar menu
-		doNext(2256);
+		doNext(barTelAdre);
 	}
 	//(andro or masculine with tits <= A)
 	else {
@@ -477,7 +477,7 @@ function rogarFuckMenu():void {
 		getAnal = 3376;
 		frot = 3381;
 	}
-	simpleChoices("GetAnal",getAnal,"GiveAnal",giveAnal,"Frot",frot,"BroDrink",brodown,"No Thanks",3375);
+	simpleChoices("GetAnal",getAnal,"GiveAnal",giveAnal,"Frot",frot,"BroDrink",brodown,"No Thanks",noTHanksRogarIAintGayDudeIjustLickedThatMudToBeNice);
 }
 
 //[No Thanks]
@@ -485,7 +485,7 @@ function noTHanksRogarIAintGayDudeIjustLickedThatMudToBeNice():void {
 	outputText("", true);
 	outputText("You smile at the orc, but tell him that you're not really in the mood to hang out right now.  He looks crestfallen, but nods at you.  \"<i>Well, I understan'.  I'll be seein' ya later, then.</i>\"", false);
 	//Bar menu!
-	doNext(2256);
+	doNext(barTelAdre);
 }
 
 //(([Get Anal], Scenario 1a: give up the buttcherry (buttvirgins only)))
@@ -654,7 +654,7 @@ function brobrobrobro():void {
 	outputText("", true);
 	outputText("You follow Ro'gar home and walk into the apartment, draping your arm around the orc man in a tight hug. \"<i>Glad ta see you too.  What's that you got?</i>\"  Ro'gar looks at the can in your pack.  \"<i>Bro Brew!  Love the stuff.  That for me?</i>\"  He snickers and snags it before you can object, then plays keepaway with you, yanking the can out of reach.  Did you want to keep that?  His dangerous, playful expression would suggest he means to make mischief for you if you try to grab it, and it may get spilled - on you!\n\n", false);
 	//[Fukkin' Grab It!][Reverse Psychology]
-	simpleChoices("FukkinGrabIt",3380,"ReversePsych",3379,"",0,"",0,"",0);
+	simpleChoices("FukkinGrabIt",takeDatBroBrewFromDaBigMeanOlOrc,"ReversePsych",rogarIsDumb,"",0,"",0,"",0);
 }
 //[reverse psychology]
 function rogarIsDumb():void {
