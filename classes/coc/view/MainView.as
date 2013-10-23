@@ -44,8 +44,8 @@ package coc.view {
 		protected var options :Object;
 		protected var allButtons :Array;
 
-		public function MainView( options :Object ) :void {
-			this.options = options;
+		public function MainView() :void {
+			// this.options = options;
 
 			super();
 
@@ -69,7 +69,7 @@ package coc.view {
 					newGameBG, dataBG, statsBG, levelBG, perksBG, appearanceBG
 				]);
 
-			hookTopButtons();
+			// hookTopButtons();
 			hookBottomButtons();
 			hookAllButtons();
 		};
@@ -80,6 +80,8 @@ package coc.view {
 
 		// Removes the need for some code in input.as and InitializeUI.as.
 		protected function disableMouseForMostTextFields() :void {
+			var ci :int, t :TextField;
+
 			for( ci = 0; ci < this.numChildren; ++ci ) {
 				t = this.getChildAt( ci ) as TextField;
 
@@ -120,6 +122,8 @@ package coc.view {
 					buttonBackground8,
 					buttonBackground9 ];
 
+
+
 			backgroundChildIndex = this.getChildIndex( background );
 
 			for( bi = 0; bi < BOTTOM_BUTTON_COUNT; ++bi ) {
@@ -140,14 +144,14 @@ package coc.view {
 		};
 
 		// Top-button-specific hooks.
-		protected function hookTopButtons() :void {
+		public function hookTopButtons( callbacks ) :void {
 			// It is an error if any of these callbacks are undefined.
-			newGameBG.addEventListener( MouseEvent.CLICK, this.options.onNewGameClick );
-			dataBG.addEventListener( MouseEvent.CLICK, this.options.onNewGameClick );
-			statsBG.addEventListener( MouseEvent.CLICK, this.options.onStatsClick );
-			levelBG.addEventListener( MouseEvent.CLICK, this.options.onLevelClick );
-			perksBG.addEventListener( MouseEvent.CLICK, this.options.onPerksClick );
-			appearanceBG.addEventListener( MouseEvent.CLICK, this.options.onAppearanceClick );
+			newGameBG.addEventListener( MouseEvent.CLICK, callbacks.onNewGameClick );
+			dataBG.addEventListener( MouseEvent.CLICK, callbacks.onDataClick );
+			statsBG.addEventListener( MouseEvent.CLICK, callbacks.onStatsClick );
+			levelBG.addEventListener( MouseEvent.CLICK, callbacks.onLevelClick );
+			perksBG.addEventListener( MouseEvent.CLICK, callbacks.onPerksClick );
+			appearanceBG.addEventListener( MouseEvent.CLICK, callbacks.onAppearanceClick );
 		};
 
 		protected function hookBottomButtons() :void {
@@ -172,11 +176,24 @@ package coc.view {
 		//////// Internal view update methods ////////
 
 		protected function showBottomButton( index :int ) :void {
+			var buttonTF :TextField = this.bottomButtonTexts[ index ] as TextField,
+				buttonBG :MovieClip = this.bottomButtonBGs[ index ] as MovieClip,
+				buttonSettings = this.bottomButtonSettings[ index ];
+
+			if( ! buttonSettings ) {
+				trace( "MainView/showBottomButton: Done penissed up, button's settings are null.  Tried to show button", index );
+				return;
+			}
+
 			this.bottomButtonBGs[ index ].visible = true;
+
+			buttonTF.text = buttonSettings.label;
+			buttonTF.visible = true;
 		};
 
 		protected function hideBottomButton( index :int ) {
 			this.bottomButtonBGs[ index ].visible = false;
+			this.bottomButtonTexts[ index ].visible = false;
 		};
 
 
@@ -186,8 +203,13 @@ package coc.view {
 		protected function executeBottomButtonClick( event :Event ) {
 			var b :MovieClip, bi :int, buttonSettings :*;
 
-			b = event.currentTarget;
-			bi = this.bottomButtonBGs.indexOf( b );
+			b = event.currentTarget as MovieClip;
+
+			if( ! b ) {
+				trace( "MainView.executeBottomButtonClick: Something done penissed up, button bg (event target) is not a movieclip:", event.currentTarget );
+			}
+
+			bi = b.bottomIndex;
 
 			buttonSettings = this.bottomButtonSettings[ bi ];
 
@@ -201,13 +223,17 @@ package coc.view {
 		};
 
 		protected function hoverButton( event :MouseEvent ) {
-			// event.currentTarget.alpha = 1;
-			this.toolTip.showForButton( event.currentTarget );
+			event.currentTarget.alpha = 0.5;
+			trace( "MainView/hoverButton: Skipping showing toolTip" );
+			// this.toolTip.showForButton(
+			// 	event.currentTarget,
+			// 	this.bottomButtonSettings[ event.currentTarget.bottomIndex ].toolTip );
 		};
 
 		protected function dimButton( event :MouseEvent ) {
-			// event.currentTarget.alpha = 0.5; // ?
-			this.toolTip.hide();
+			event.currentTarget.alpha = 1.0;
+			trace( "MainView/dimButton: Skipping hiding toolTip" );
+			// this.toolTip.hide();
 		};
 
 

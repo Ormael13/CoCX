@@ -1,13 +1,14 @@
 package coc.view {
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
+	import flash.text.TextField;
 
-	public class ToolTip extends Sprite {
+	public class ToolTipView extends Sprite {
 		public var
 			bg :Sprite,
 			tf :TextField;
 
-		public function ToolTip( mainView :MovieClip ) :void {
+		public function ToolTipView( mainView :MovieClip ) :void {
 			this.bg = mainView.popUpBG;
 			this.tf = mainView.mouseOverText;
 
@@ -16,11 +17,11 @@ package coc.view {
 		};
 
 		public function showForButton( ... args ) {
-			trace( "ToolTip.showForButton: stub" );
+			trace( "ToolTipView.showForButton: stub, args:", args.join( ", " ) );
 		};
 
 		public function hide() {
-			trace( "ToolTip.hide: stub" );
+			trace( "ToolTipView.hide: stub" );
 		};
 	}
 }

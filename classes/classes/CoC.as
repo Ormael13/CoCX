@@ -10,6 +10,8 @@
 	import classes.statusAffectClass;
 	import classes.vaginaClass;
 
+	import coc.view.MainView;
+
 	import fl.controls.ComboBox; 
 	import fl.data.DataProvider; 
 	import flash.display.Loader;
@@ -43,8 +45,11 @@
 		****/
 		public var semiglobalReferencer :* = {};
 
+		public var mainView :MainView;
+
 		public function CoC()
 		{
+			this.mainView = new MainView({});
 			this.addFrameScript( 0, this.run );
 		}
 
