@@ -1,11 +1,11 @@
 ﻿// import classes.creature;
 
 //Create a player
-var player:creature = new creature();
-var player2:creature = new creature();
+//var player:creature = new creature();
+//var player2:creature = new creature();
 var urtaQItems:Array = new Array();
 //Create monster
-var monster:creature = new creature();
+//var monster:creature = new creature();
 //DEBUG
 var debug:Boolean = false;
 //used for creation

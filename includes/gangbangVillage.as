@@ -1696,7 +1696,7 @@ function jojoButtFuckTrain():void {
 	temp = player.cockTotal();
 	while(temp > 0) {
 		temp--;
-		if(player.cocks[temp].cockType == 4 && temp != x) {
+		if(player.cocks[temp].cockType == CockTypesEnum.TENTACLE && temp != x) {
 			if(n1 == -1) n1 = temp;
 			else if(n2 == -1) n2 = temp;
 			else if(n3 == -1) n3 = temp;

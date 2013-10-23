@@ -335,8 +335,8 @@ function CeraphHandsOutNewFetishesLikePervCandy():void {
 			if(player.cocks[0].pierced > 0) outputText(", the old piercing clattering to the ground as it slides out, ", false);
 			outputText(" and snaps the diamond stud through your sensitive flesh, making your vision haze red in pain.\n\n", false);
 			player.cocks[0].pierced = 1;
-			player.cocks[0].pShort = "diamond cock-stud";
-			player.cocks[0].pLong = "Diamond cock-stud";
+			player.cocks[0].pShortDesc = "diamond cock-stud";
+			player.cocks[0].pLongDesc = "Diamond cock-stud";
 		}
 		//[cunts]
 		else if(player.hasVagina()) {
@@ -828,7 +828,7 @@ function ceraphLackeyCorruption():void {
 	var demon:Boolean = false;
 	x = player.biggestCockIndex();
 	if(player.hasCock()) {
-		if(player.cocks[x].cockType == 3) demon = true;
+		if(player.cocks[x].cockType == CockTypesEnum.DEMON) demon = true;
 	}
 	//(else if PC's cock is below cock area 48)
 	if(player.cockArea(player.biggestCockIndex()) < 48 && player.hasCock()) {

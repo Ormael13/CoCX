@@ -1561,7 +1561,7 @@ function fuckDraftBlond():void {
 	var x:int = -1;
 	var temp = 0;
 	while(temp < player.cockTotal() && x < 0) {
-		if(player.cocks[temp].cockType == 2) x = temp;
+		if(player.cocks[temp].cockType == CockTypesEnum.DOG) x = temp;
 		temp++;
 	}
 	if(x < 0) x = player.biggestCockIndex();

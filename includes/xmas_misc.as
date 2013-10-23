@@ -969,9 +969,9 @@ function fuckNieve():void {
 	//(Variable depending on dick-type)
 	if(x >= 0) {
 		//(Human) 
-		if(player.cocks[x].cockType == 0) outputText("  Your normal, unaltered cock seems to take on a slight blue tint, although you can confirm it's not going numb.  Quite the contrary, it seems to be getting more sensitive as Nieve's lips roll over it.");
+		if(player.cocks[x].cockType == CockTypesEnum.HUMAN) outputText("  Your normal, unaltered cock seems to take on a slight blue tint, although you can confirm it's not going numb.  Quite the contrary, it seems to be getting more sensitive as Nieve's lips roll over it.");
 		//(Equine) 
-		else if(player.cocks[x].cockType == 1) outputText("  Nieve fawns over your horsecock like a cultist praying to a god.  She sucks and kisses, running the tip of her tongue all along the sides until she reaches the sheathe, and then right back up the other side.");
+		else if(player.cocks[x].cockType == CockTypesEnum.HORSE) outputText("  Nieve fawns over your horsecock like a cultist praying to a god.  She sucks and kisses, running the tip of her tongue all along the sides until she reaches the sheathe, and then right back up the other side.");
 		//(Canine) 
 		else if(player.hasKnot(x)) {
 			outputText("  Nieve eyes the knot on your cock as though it were a challenge.  She inches down your shaft, getting ever closer.");
@@ -993,17 +993,17 @@ function fuckNieve():void {
 		9 - dragon
 		*/	
 		//(Demonic)
-		else if(player.cocks[x].cockType == 3) outputText("  Your purple, demonic shaft pulses and throbs, seemingly immune to the unnatural cold of Nieve's mouth. Seemingly oblivious to its nature, Nieve slavers over each nodule, giving every ridge and bump a kiss and more than just a lick.");
+		else if(player.cocks[x].cockType == CockTypesEnum.DEMON) outputText("  Your purple, demonic shaft pulses and throbs, seemingly immune to the unnatural cold of Nieve's mouth. Seemingly oblivious to its nature, Nieve slavers over each nodule, giving every ridge and bump a kiss and more than just a lick.");
 		//(Tentacle) 
-		else if(player.cocks[x].cockType == 4) outputText("  Nieve does not seem put off by your tentacle cock in the least, in fact she confesses, \"<i>It reminds me of a comic I read before coming here.</i>\"  As she fawns over your cock, you're certain you hear whispers of \"<i>Oh, you sexy tentacle beast...</i>\" coming from her mouth when she gets her breath.");
+		else if(player.cocks[x].cockType == CockTypesEnum.TENTACLE) outputText("  Nieve does not seem put off by your tentacle cock in the least, in fact she confesses, \"<i>It reminds me of a comic I read before coming here.</i>\"  As she fawns over your cock, you're certain you hear whispers of \"<i>Oh, you sexy tentacle beast...</i>\" coming from her mouth when she gets her breath.");
 		//(Feline) 
-		else if(player.cocks[x].cockType == 5) outputText("  Though the barbs on your cock are soft and pliable, they reflexively harden up after Nieve's tongue washes over them.  She doesn't pay particular attention to the barbs, but she does seem rather careful not to get one hooked on her lip.");
+		else if(player.cocks[x].cockType == CockTypesEnum.CAT) outputText("  Though the barbs on your cock are soft and pliable, they reflexively harden up after Nieve's tongue washes over them.  She doesn't pay particular attention to the barbs, but she does seem rather careful not to get one hooked on her lip.");
 		//(Lizard)
-		else if(player.cocks[x].cockType == 6) outputText("  Nieve fawns over your scaled and ridged reptilian cock, slurping and smooching up and down its length. It seems a bit more resistant to the biting cold of Nieve's mouth, which is lucky when she backs off, exposing your entire wet, frigid length to the wintery air surrounding you.");
+		else if(player.cocks[x].cockType == CockTypesEnum.LIZARD) outputText("  Nieve fawns over your scaled and ridged reptilian cock, slurping and smooching up and down its length. It seems a bit more resistant to the biting cold of Nieve's mouth, which is lucky when she backs off, exposing your entire wet, frigid length to the wintery air surrounding you.");
 		//(Anemone) 
-		else if(player.cocks[x].cockType == 7) outputText("  Nieve giggles whenever one of your wriggling tentacles stings her, seemingly immune to its effects, and kisses it back.  Soon after she devours your whole length, delighted to feel the sting of your cock in the back of her throat.");
+		else if(player.cocks[x].cockType == CockTypesEnum.ANEMONE) outputText("  Nieve giggles whenever one of your wriggling tentacles stings her, seemingly immune to its effects, and kisses it back.  Soon after she devours your whole length, delighted to feel the sting of your cock in the back of her throat.");
 		//(Kangaroo) 
-		else if(player.cocks[x].cockType == 8) outputText("  It takes Nieve a little while to catch on that your cock isn't quite human, and by the time she figures it out, she mutters, \"<i>Huh, that's strange... I thought kangaroos had balls above the cock,</i>\" before shrugging and getting back to work.");
+		else if(player.cocks[x].cockType == CockTypesEnum.KANGAROO) outputText("  It takes Nieve a little while to catch on that your cock isn't quite human, and by the time she figures it out, she mutters, \"<i>Huh, that's strange... I thought kangaroos had balls above the cock,</i>\" before shrugging and getting back to work.");
 		//(If you add dicks later, placeholder text:) 
 		else outputText("  Nieve works on your mutant cock, spending time working every unique little facet of it.");
 	}

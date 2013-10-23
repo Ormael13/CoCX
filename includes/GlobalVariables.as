@@ -1,3 +1,5 @@
+//import classes.Monster;
+//import classes.Player;
 /**
  * Global Variables used across the whole game. I hope to whittle it down slowly.
  */
@@ -7,6 +9,9 @@
  * Debug, Version, etc
  */
 //{ region SystemVariables
+
+
+
 
 //DEBUG, used all over the place
 var debug:Boolean = false;
@@ -26,13 +31,13 @@ var mobile:Boolean = false;
 //{ region PlayerVariables
 
 //The Player object, used everywhere
-var player:creature = new creature();
+var player:Player = new Player();
 
 //Used in perk selection, mainly eventParser, input and engineCore
 var tempPerk:String = "";
 
 //Create monster, used all over the place
-var monster:creature = new creature();
+var monster:Monster = new Monster();
 //} endregion
 
 /**
@@ -46,7 +51,7 @@ var itemSwapping:Boolean = false;
 
 //The extreme flag state array. This needs to go. Holds information about everything, whether it be certain attacks for NPCs 
 //or state information to do with the game. 
-var flags = new Array();
+var flags = new DefaultDict();
 for (var i = 0; i < 3000; i++)
 {
 	flags.push(0);
@@ -123,7 +128,7 @@ var currentText:String = "";
  */
 //{ region PlotVariables
 
- //Plot variables
+//Plot variables
 var explored:Boolean = false;
 var foundForest:Boolean = false;
 var foundDesert:Boolean = false;

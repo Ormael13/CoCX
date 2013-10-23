@@ -1507,15 +1507,15 @@ function multiCockDescript():String {
 	//Count cocks & Prep average totals
 	while(currCock <= totCock-1) {
 		trace("Counting cocks!");
-		if(player.cocks[currCock].cockType == 0) {
+		if(player.cocks[currCock].cockType == CockTypesEnum.HUMAN) {
 			normalCocks++;
 			normalCockKey = currCock;
 		}
-		if(player.cocks[currCock].cockType == 1) {
+		if(player.cocks[currCock].cockType == CockTypesEnum.HORSE) {
 			horseCocks++;
 			horseCockKey = currCock;
 		}
-		if(player.cocks[currCock].cockType == 2) {
+		if(player.cocks[currCock].cockType == CockTypesEnum.DOG) {
 			dogCocks++;
 			dogCockKey = currCock;
 		}
@@ -1546,11 +1546,11 @@ function multiCockDescript():String {
 			if(rando == 3) descript += "matching ";
 			if(rando == 4) descript += "twin "
 			descript += cockAdjectives(averageLength, averageThickness, player.cocks[0].cockType);
-			if(normalCocks == 2) descript += " " + cockNoun(0) + "s";
-			if(horseCocks == 2) descript += ", " + cockNoun(1) + "s";
-			if(dogCocks == 2) descript += ", " + cockNoun(2) + "s";
+			if(normalCocks == 2) descript += " " + cockNoun(CockTypesEnum.HUMAN) + "s";
+			if(horseCocks == 2) descript += ", " + cockNoun(CockTypesEnum.HORSE) + "s";
+			if(dogCocks == 2) descript += ", " + cockNoun(CockTypesEnum.DOG) + "s";
 			//Tentacles
-			if(player.cocks[0].cockType > 2) descript += ", " + cockNoun(player.cocks[0].cockType) + "s";
+			if(player.cocks[0].cockType.Index > 2) descript += ", " + cockNoun(player.cocks[0].cockType) + "s";
 		}
 		//Nonidentical
 		else {
@@ -1576,11 +1576,11 @@ function multiCockDescript():String {
 			if(rando == 3) descript += "a triad of ";
 			if(rando == 4) descript += "a triumvirate of ";
 			descript += cockAdjectives(averageLength, averageThickness, player.cocks[currCock-1].cockType);
-			if(normalCocks == 3) descript += " " + cockNoun(0) + "s";
-			if(horseCocks == 3) descript += ", " + cockNoun(1) + "s";
-			if(dogCocks == 3) descript += ", " + cockNoun(2) + "s";
+			if(normalCocks == 3) descript += " " + cockNoun(CockTypesEnum.HUMAN) + "s";
+			if(horseCocks == 3) descript += ", " + cockNoun(CockTypesEnum.HORSE) + "s";
+			if(dogCocks == 3) descript += ", " + cockNoun(CockTypesEnum.DOG) + "s";
 			//Tentacles
-			if(player.cocks[0].cockType > 2) descript += ", " + cockNoun(player.cocks[0].cockType) + "s";
+			if(player.cocks[0].cockType.Index > 2) descript += ", " + cockNoun(player.cocks[0].cockType) + "s";
 
 		}
 		else {
@@ -1607,22 +1607,22 @@ function multiCockDescript():String {
 		descripted = false;
 		//If same types...
 		if(same) {
-			if(player.cocks[0].cockType == 0) {
+			if(player.cocks[0].cockType == CockTypesEnum.HUMAN) {
 				descript += cockAdjectives(averageLength, averageThickness, 0) + " ";	
-				descript += cockNoun(0) + "s";
+				descript += cockNoun(CockTypesEnum.HUMAN) + "s";
 				descripted = true;
 			}
-			if(player.cocks[0].cockType == 2) {
+			if(player.cocks[0].cockType == CockTypesEnum.DOG) {
 				descript += cockAdjectives(averageLength, averageThickness, 2) + ", ";
-				descript += cockNoun(2) + "s";
+				descript += cockNoun(CockTypesEnum.DOG) + "s";
 				descripted = true;
 			}
-			if(player.cocks[0].cockType == 1) {
+			if(player.cocks[0].cockType == CockTypesEnum.HORSE) {
 				descript += cockAdjectives(averageLength, averageThickness, 1) + ", ";
-				descript += cockNoun(1) + "s";
+				descript += cockNoun(CockTypesEnum.HORSE) + "s";
 				descripted = true;			
 			}
-			if(player.cocks[0].cockType > 2) {
+			if(player.cocks[0].cockType.Index > 2) {
 				descript += cockAdjectives(averageLength, averageThickness, 1) + ", ";
 				descript += cockNoun(player.cocks[0].cockType) + "s";
 				descripted = true;			
@@ -1644,15 +1644,15 @@ function multiCockDescript():String {
 function multiCockSuperLight():String {
 	var output:String = "";
 	if(player.cocks.length < 1) return "<b>ERROR: NO WANGS DETECTED for multicocksuperlight()</b>";
-	if(player.horseCocks() == player.totalCocks()) output += cockNoun(1);
-	else if(player.dogCocks() == player.totalCocks()) output += cockNoun(2);
-	else if(player.demonCocks() == player.totalCocks()) output += cockNoun(3);
-	else if(player.tentacleCocks() == player.totalCocks()) output += cockNoun(4);
-	else if(player.catCocks() == player.totalCocks()) output += cockNoun(5);
-	else if(player.lizardCocks() == player.totalCocks()) output += cockNoun(6);
-	else if(player.anemoneCocks() == player.totalCocks()) output += cockNoun(7);
-	else if(player.kangaCocks() == player.totalCocks()) output += cockNoun(8);
-	else output += cockNoun(0);
+	if(player.horseCocks() == player.totalCocks()) output += cockNoun(CockTypesEnum.HORSE);
+	else if(player.dogCocks() == player.totalCocks()) output += cockNoun(CockTypesEnum.DOG);
+	else if(player.demonCocks() == player.totalCocks()) output += cockNoun(CockTypesEnum.DEMON);
+	else if(player.tentacleCocks() == player.totalCocks()) output += cockNoun(CockTypesEnum.TENTACLE);
+	else if(player.catCocks() == player.totalCocks()) output += cockNoun(CockTypesEnum.CAT);
+	else if(player.lizardCocks() == player.totalCocks()) output += cockNoun(CockTypesEnum.LIZARD);
+	else if(player.anemoneCocks() == player.totalCocks()) output += cockNoun(CockTypesEnum.ANEMONE);
+	else if(player.kangaCocks() == player.totalCocks()) output += cockNoun(CockTypesEnum.KANGAROO);
+	else output += cockNoun(CockTypesEnum.HUMAN);
 	//Add s if plural
 	if(player.cockTotal() > 1) output += "s";
 	//Reset to normal description if singular
@@ -1683,15 +1683,15 @@ function multiCockDescriptLight():String {
 	if(totCock == 1) return cockDescript(0);
 	//Count cocks & Prep average totals
 	while(currCock <= totCock-1) {
-		if(player.cocks[currCock].cockType == 0) {
+		if(player.cocks[currCock].cockType == CockTypesEnum.HUMAN) {
 			normalCocks++;
 			normalCockKey = currCock;
 		}
-		if(player.cocks[currCock].cockType == 1) {
+		if(player.cocks[currCock].cockType == CockTypesEnum.HORSE) {
 			horseCocks++;
 			horseCockKey = currCock;
 		}
-		if(player.cocks[currCock].cockType == 2) {
+		if(player.cocks[currCock].cockType == CockTypesEnum.DOG) {
 			dogCocks++;
 			dogCockKey = currCock;
 		}
@@ -1722,11 +1722,11 @@ function multiCockDescriptLight():String {
 			if(rando == 3) descript += "matching ";
 			if(rando == 4) descript += "twin "
 			descript += cockAdjective();
-			if(normalCocks == 2) descript += " " + cockNoun(0) + "s";
-			if(horseCocks == 2) descript += ", " + cockNoun(1) + "s";
-			if(dogCocks == 2) descript += ", " + cockNoun(2) + "s";
+			if(normalCocks == 2) descript += " " + cockNoun(CockTypesEnum.HUMAN) + "s";
+			if(horseCocks == 2) descript += ", " + cockNoun(CockTypesEnum.HORSE) + "s";
+			if(dogCocks == 2) descript += ", " + cockNoun(CockTypesEnum.DOG) + "s";
 			//Failsafe
-			if(player.cocks[0].cockType > 2) descript += ", " + cockNoun(player.cocks[0].cockType) + "s";
+			if(player.cocks[0].cockType.Index > 2) descript += ", " + cockNoun(player.cocks[0].cockType) + "s";
 		}
 		//Nonidentical
 		else {
@@ -1752,11 +1752,11 @@ function multiCockDescriptLight():String {
 			if(rando == 3) descript += "triad of ";
 			if(rando == 4) descript += "triumvirate of ";
 			descript += cockAdjective();
-			if(normalCocks == 3) descript += " " + cockNoun(0) + "s";
-			if(horseCocks == 3) descript += ", " + cockNoun(1) + "s";
-			if(dogCocks == 3) descript += ", " + cockNoun(2) + "s";
+			if(normalCocks == 3) descript += " " + cockNoun(CockTypesEnum.HUMAN) + "s";
+			if(horseCocks == 3) descript += ", " + cockNoun(CockTypesEnum.HORSE) + "s";
+			if(dogCocks == 3) descript += ", " + cockNoun(CockTypesEnum.DOG) + "s";
 			//Tentacles
-			if(player.cocks[0].cockType > 2) descript += ", " + cockNoun(player.cocks[0].cockType) + "s";
+			if (player.cocks[0].cockType.Index > 2) descript += ", " + cockNoun(player.cocks[0].cockType) + "s";
 		}
 		else {
 			rando = rand(2);
@@ -1784,20 +1784,20 @@ function multiCockDescriptLight():String {
 		if(same) {
 			if(currCock == normalCocks) {
 				descript += cockAdjective() + " ";	
-				descript += cockNoun(0) + "s";
+				descript += cockNoun(CockTypesEnum.HUMAN) + "s";
 				descripted = true;
 			}
 			if(currCock == dogCocks) {
 				descript += cockAdjective() + ", ";
-				descript += cockNoun(2) + "s";
+				descript += cockNoun(CockTypesEnum.DOG) + "s";
 				descripted = true;
 			}
 			if(currCock == horseCocks) {
 				descript += cockAdjective() + ", ";
-				descript += cockNoun(1) + "s";
+				descript += cockNoun(CockTypesEnum.HORSE) + "s";
 				descripted = true;			
 			}
-			if(player.cocks[0].cockType > 2) {
+			if(player.cocks[0].cockType.Index > 2) {
 				descript += cockAdjective() + ", ";
 				descript += cockNoun(player.cocks[0].cockType) + "s";
 				descripted = true;			
@@ -1837,15 +1837,15 @@ function eMultiCockDescriptLight():String {
 	if(totCock == 1) return eCockDescript(0);
 	//Count cocks & Prep average totals
 	while(currCock <= totCock-1) {
-		if(monster.cocks[currCock].cockType == 0) {
+		if(monster.cocks[currCock].cockType == CockTypesEnum.HUMAN) {
 			normalCocks++;
 			normalCockKey = currCock;
 		}
-		if(monster.cocks[currCock].cockType == 1) {
+		if(monster.cocks[currCock].cockType == CockTypesEnum.HORSE) {
 			horseCocks++;
 			horseCockKey = currCock;
 		}
-		if(monster.cocks[currCock].cockType == 2) {
+		if(monster.cocks[currCock].cockType == CockTypesEnum.DOG) {
 			dogCocks++;
 			dogCockKey = currCock;
 		}
@@ -1876,11 +1876,11 @@ function eMultiCockDescriptLight():String {
 			if(rando == 3) descript += "matching ";
 			if(rando == 4) descript += "twin "
 			descript += eCockAdjectives(averageLength, averageThickness, monster.cocks[0].cockType);
-			if(normalCocks == 2) descript += eCockNoun(0) + "s";
-			if(horseCocks == 2) descript += eCockNoun(1) + "s";
-			if(dogCocks == 2) descript += eCockNoun(2) + "s";
+			if(normalCocks == 2) descript += eCockNoun(CockTypesEnum.HUMAN) + "s";
+			if(horseCocks == 2) descript += eCockNoun(CockTypesEnum.HORSE) + "s";
+			if(dogCocks == 2) descript += eCockNoun(CockTypesEnum.DOG) + "s";
 			//Failsafe
-			if(monster.cocks[0].cockType > 2) descript += eCockNoun(monster.cocks[0].cockType) + "s";
+			if(monster.cocks[0].cockType.Index > 2) descript += eCockNoun(monster.cocks[0].cockType) + "s";
 		}
 		//Nonidentical
 		else {
@@ -1906,11 +1906,11 @@ function eMultiCockDescriptLight():String {
 			if(rando == 3) descript += "triad of ";
 			if(rando == 4) descript += "triumvirate of ";
 			descript += eCockAdjectives(averageLength, averageThickness, monster.cocks[currCock-1].cockType);
-			if(normalCocks == 3) descript += eCockNoun(0) + "s";
-			if(horseCocks == 3) descript += eCockNoun(1) + "s";
-			if(dogCocks == 3) descript += eCockNoun(2) + "s";
+			if(normalCocks == 3) descript += eCockNoun(CockTypesEnum.HUMAN) + "s";
+			if(horseCocks == 3) descript += eCockNoun(CockTypesEnum.HORSE) + "s";
+			if(dogCocks == 3) descript += eCockNoun(CockTypesEnum.DOG) + "s";
 			//Tentacles
-			if(monster.cocks[0].cockType > 2) descript += eCockNoun(monster.cocks[0].cockType) + "s";
+			if(monster.cocks[0].cockType.Index > 2) descript += eCockNoun(monster.cocks[0].cockType) + "s";
 		}
 		else {
 			rando = rand(2);
@@ -1938,20 +1938,20 @@ function eMultiCockDescriptLight():String {
 		if(same) {
 			if(currCock == normalCocks) {
 				descript += eCockAdjectives(averageLength, averageThickness, 0);	
-				descript += eCockNoun(0) + "s";
+				descript += eCockNoun(CockTypesEnum.HUMAN) + "s";
 				descripted = true;
 			}
 			if(currCock == dogCocks) {
 				descript += eCockAdjectives(averageLength, averageThickness, 2);
-				descript += eCockNoun(2) + "s";
+				descript += eCockNoun(CockTypesEnum.DOG) + "s";
 				descripted = true;
 			}
 			if(currCock == horseCocks) {
 				descript += eCockAdjectives(averageLength, averageThickness, 1);
-				descript += eCockNoun(1) + "s";
+				descript += eCockNoun(CockTypesEnum.HORSE) + "s";
 				descripted = true;			
 			}
-			if(monster.cocks[0].cockType > 2) {
+			if(monster.cocks[0].cockType.Index > 2) {
 				descript += eCockAdjectives(averageLength, averageThickness, 1);
 				descript += eCockNoun(monster.cocks[0].cockType) + "s";
 				descripted = true;			
@@ -1973,35 +1973,35 @@ function eMultiCockDescriptLight():String {
 function eCockHead(cockNum:Number = 0):String {
 	if(cockNum < 0) return "ERROR";
 	if(cockNum > monster.cocks.length-1) return "ERROR";
-	if(monster.cocks[cockNum].cockType == 1) {
+	if(monster.cocks[cockNum].cockType == CockTypesEnum.HORSE) {
 		if(rand(2) == 0) return "flare";
 		else return "flat tip";
 	}
-	if(monster.cocks[cockNum].cockType == 2) {
+	if(monster.cocks[cockNum].cockType == CockTypesEnum.DOG) {
 		if(rand(2) == 0) return "pointed tip";
 		else return "narrow tip";
 	}
-	if(monster.cocks[cockNum].cockType == 3) {
+	if(monster.cocks[cockNum].cockType == CockTypesEnum.DEMON) {
 		if(rand(2) == 0) return "tainted crown";
 		else return "nub-ringed tip";
 	}
-	if(monster.cocks[cockNum].cockType == 4) {
+	if(monster.cocks[cockNum].cockType == CockTypesEnum.TENTACLE) {
 		if(rand(2) == 0) return "mushroom-like tip";
 		else return "wide plant-like crown";
 	}
-	if(monster.cocks[cockNum].cockType == 5) {
+	if(monster.cocks[cockNum].cockType == CockTypesEnum.CAT) {
 		if(rand(2) == 0) return "point";
 		else return "narrow tip";
 	}
-	if(monster.cocks[cockNum].cockType == 6) {
+	if(monster.cocks[cockNum].cockType == CockTypesEnum.LIZARD) {
 		if(rand(2) == 0) return "crown";
 		else return "head";
 	}
-	if(monster.cocks[cockNum].cockType == 6) {
+	if(monster.cocks[cockNum].cockType == CockTypesEnum.LIZARD) {
 		if(rand(2) == 0) return "blue tip";
 		else return "wiggling crown";
 	}
-	if(monster.cocks[cockNum].cockType == 8) {
+	if(monster.cocks[cockNum].cockType == CockTypesEnum.KANGAROO) {
 		if(rand(2) == 0) return "tip";
 		else return "point";
 	}
@@ -2014,17 +2014,17 @@ function eCockHead(cockNum:Number = 0):String {
 
 
 //Used in multiCockDescript and potentiall elsewhere - barebones cock names
-function eCockNoun(type:Number):String {
+function eCockNoun(type:CockTypesEnum):String {
 	var descript:String = "";
 	var rando:Number = 0;
-	if(type == 0) {
+	if(type == CockTypesEnum.HUMAN) {
 		rando = rand(10) + 1;
 		if(rando >= 0 && rando <=4) descript += "cock";
 		if(rando ==5 || rando == 6) descript += "prick";
 		if(rando == 7) descript += "pecker";
 		if(rando > 7) descript += "shaft";
 	}
-	if(type == 2) {
+	if(type == CockTypesEnum.DOG) {
 		rando=int(Math.random()*11);
 		if(rando == 0) descript+="doggie dong";
 		if(rando == 1) descript+="canine shaft";
@@ -2038,7 +2038,7 @@ function eCockNoun(type:Number):String {
 		if(rando == 9) descript+="canine cock";
 		if(rando == 10) descript+="dog cock";
 	}
-	if(type == 1) {
+	if(type == CockTypesEnum.HORSE) {
 		rando = rand(6);
 		if(rando == 0) descript+="horsecock";
 		if(rando == 1) descript+="equine prick";
@@ -2047,7 +2047,7 @@ function eCockNoun(type:Number):String {
 		if(rando == 4) descript+="stallion-prick";
 		if(rando == 5) descript+="equine dong";
 	}
-	if(type == 3) {
+	if(type == CockTypesEnum.DEMON) {
 		rando=int(Math.random()*11);
 		if(rando == 0) descript+="demon-dick";
 		if(rando == 1) descript+="nubby shaft";
@@ -2061,7 +2061,7 @@ function eCockNoun(type:Number):String {
 		if(rando == 9) descript+="unholy cock";
 		if(rando == 10) descript+="blighted cock";
 	}
-	if(type == 4) {
+	if(type == CockTypesEnum.TENTACLE) {
 		rando=int(Math.random()*11);
 		if(rando == 0) descript+="tentacle prick";
 		if(rando == 1) descript+="plant-like shaft";
@@ -2075,7 +2075,7 @@ function eCockNoun(type:Number):String {
 		if(rando == 9) descript+="vine prick";
 		if(rando == 10) descript+="vine-like cock";
 	}
-	if(type == 5) {
+	if(type == CockTypesEnum.CAT) {
 		rando=int(Math.random()*11);
 		if(rando == 0) descript+="feline dick";
 		if(rando == 1) descript+="cat-cock";
@@ -2089,7 +2089,7 @@ function eCockNoun(type:Number):String {
 		if(rando == 9) descript+="'barbed' dick";
 		if(rando == 10) descript+="kitten-prick";
 	}
-	if(type == 6) {
+	if(type == CockTypesEnum.LIZARD) {
 		rando=int(Math.random()*11);
 		if(rando == 0) descript+="reptile-dick";
 		if(rando == 1) descript+="purple cock";
@@ -2106,7 +2106,7 @@ function eCockNoun(type:Number):String {
 	return descript;
 }
 //Used in multiCockDescript to avoid duplicate code
-function eCockAdjectives(cLength:Number, thickness:Number, type:Number):String {
+function eCockAdjectives(cLength:Number, thickness:Number, type:CockTypesEnum):String {
 	var descript:String = "";
 	var rando:Number = 0;
 	var descripted:Boolean = false;
@@ -2174,14 +2174,14 @@ function eCockAdjectives(cLength:Number, thickness:Number, type:Number):String {
 		//lots of cum? drippy.
 		if(monster.cumQ() > 50 && monster.cumQ() < 200 && rand(2) == 0) {
 			//for hroses and dogs
-			if(type == 1 || type == 2) descript += "animal-pre leaking ";
+			if(type == CockTypesEnum.HORSE || type == CockTypesEnum.DOG || CockTypesEnum.CAT || CockTypesEnum.KANGAROO) descript += "animal-pre leaking ";
 			else descript += "pre-slickened ";
 			descripted = true;
 		}
 		//Tons of cum
 		if(monster.cumQ() >= 200 && rand(2) == 0) {
 			//for horses and dogs
-			if(type == 1 || type == 2) descript += "animal-spunk dripping ";
+			if(type == CockTypesEnum.HORSE || type == CockTypesEnum.DOG || CockTypesEnum.CAT || CockTypesEnum.KANGAROO) descript += "animal-spunk dripping ";
 			else descript += "cum-drooling ";
 			descripted = true;
 		}
@@ -2209,12 +2209,12 @@ function eCockAdjectives(cLength:Number, thickness:Number, type:Number):String {
 		}
 	}
 	//animal fillers
-	if(type == 1 && !descripted && rand(2) == 0) {
+	if(type == CockTypesEnum.HORSE && !descripted && rand(2) == 0) {
 		if(rand(2) == 0) descript += "flared ";
 		else descript += "musky ";
 		descripted = true;
 	}
-	if(type == 2 && !descripted && rand(2) == 0) {
+	if((type == CockTypesEnum.DOG || CockTypesEnum.CAT) && !descripted && rand(2) == 0) {
 		if(rand(2) == 0) descript += "musky ";
 		else descript += "pointed ";
 		descripted = true;
@@ -2446,11 +2446,11 @@ function cockAdjective(cockNum:Number = -1) {
 		else if(player.cocks[cockNum].cockLength < 11) {
 			rando = rand(3);
 			if(rando == 0) {
-				if(player.cocks[cockNum].cockType == 1) descript = "pony-sized";
+				if(player.cocks[cockNum].cockType == CockTypesEnum.HORSE) descript = "pony-sized";
 				else descript = "long";
 			}
 			else if(rando == 1) {
-				if(player.cocks[cockNum].cockType == 1) descript = "colt-like";
+				if(player.cocks[cockNum].cockType == CockTypesEnum.HORSE) descript = "colt-like";
 				else descript = "lengthy";
 			}
 			else descript = "sizable";
@@ -2459,7 +2459,7 @@ function cockAdjective(cockNum:Number = -1) {
 			rando = rand(3);
 			if(rando == 0) descript = "huge";
 			else if(rando == 1) {
-				if(player.cocks[cockNum].cockType == 2) descript = "mastiff-like";
+				if(player.cocks[cockNum].cockType == CockTypesEnum.DOG) descript = "mastiff-like";
 				else descript = "cucumber-length";
 			}
 			else descript = "foot-long";
@@ -2478,7 +2478,7 @@ function cockAdjective(cockNum:Number = -1) {
 		}
 		else {
 			rando = rand(4);
-			if(player.cocks[cockNum].cockType == 4 && rand(4) == 0) descript = "coiled ";
+			if(player.cocks[cockNum].cockType == CockTypesEnum.TENTACLE && rand(4) == 0) descript = "coiled ";
 			else {
 				if(rando == 0) descript = "towering";
 				else if(rando == 1) descript = "freakish";
@@ -2723,7 +2723,7 @@ function dogDescript(cockNum:Number):String {
 	var descript:String = "";
 	//50% of the time add a descriptor
 	if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
-	descript += cockNoun(2);
+	descript += cockNoun(CockTypesEnum.DOG);
 	return descript;
 }
 function tentacleDescript(cockNum:Number):String {
@@ -2752,25 +2752,25 @@ function cockDescript(cockNum:Number):String {
 	if(player.cockTotal() <= cockNum && cockNum != 99) return "<b>ERROR: CockDescript called with index of " + cockNum + " - out of BOUNDS</b>";
 	//Cocknum 99 to default to boring descriptions!
 	if(cockNum != 99) {
-		if(player.cocks[cockNum].cockType == 1)
+		if(player.cocks[cockNum].cockType == CockTypesEnum.HORSE)
 			return horseDescript(cockNum);
-		else if(player.cocks[cockNum].cockType == 2)
+		else if(player.cocks[cockNum].cockType == CockTypesEnum.DOG)
 			return dogDescript(cockNum);
-		else if(player.cocks[cockNum].cockType == 4)
+		else if(player.cocks[cockNum].cockType == CockTypesEnum.TENTACLE)
 			return tentacleDescript(cockNum);
-		else if(player.cocks[cockNum].cockType == 3)
+		else if(player.cocks[cockNum].cockType == CockTypesEnum.DEMON)
 			return demonDescript(cockNum);
-		else if(player.cocks[cockNum].cockType == 5)
+		else if(player.cocks[cockNum].cockType == CockTypesEnum.CAT)
 			return catDescript(cockNum);
-		else if(player.cocks[cockNum].cockType == 6)
+		else if(player.cocks[cockNum].cockType == CockTypesEnum.LIZARD)
 			return snakeDescript(cockNum);
-		else if(player.cocks[cockNum].cockType == 7)
+		else if(player.cocks[cockNum].cockType == CockTypesEnum.ANEMONE)
 			return anemoneDescript(cockNum);
-		else if(player.cocks[cockNum].cockType == 8)
+		else if(player.cocks[cockNum].cockType == CockTypesEnum.KANGAROO)
 			return kangaDescript(cockNum);
-		else if(player.cocks[cockNum].cockType == 9)
+		else if(player.cocks[cockNum].cockType == CockTypesEnum.DRAGON)
 			return dragonDescript(cockNum);
-		else if(player.cocks[cockNum].cockType == 10)
+		else if(player.cocks[cockNum].cockType == CockTypesEnum.DISPLACER)
 			return displacerDescript(cockNum);
 	}
 	else cockNum = 0;
@@ -2795,7 +2795,7 @@ function horseDescript(cockNum:Number):String {
 	var descript:String = "";
 	//50% of the time add a descriptor
 	if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
-	descript += cockNoun(1);
+	descript += cockNoun(CockTypesEnum.HORSE);
 	return descript;
 }
 
@@ -2913,7 +2913,7 @@ function eCockDescript(cockNum:Number):String {
 		if(monster.cocks[cockNum].cockThickness > 3.5) descript = "distended ";
 		descripted = true;
 	}
-	if(descripted && monster.cocks[cockNum].cockType > 0) descript += ", ";
+	if(descripted && monster.cocks[cockNum].cockType.Index > 0) descript += ", ";
 	descript += cockNoun(monster.cocks[cockNum].cockType);
 	return descript;	
 }
@@ -3103,39 +3103,39 @@ function cockHead(cockNum:Number = 0):String {
 	var temp:int;
 	if(cockNum < 0) return "ERROR";
 	if(cockNum > player.cocks.length-1) return "ERROR";
-	if(player.cocks[cockNum].cockType == 1) {
+	if(player.cocks[cockNum].cockType == CockTypesEnum.HORSE) {
 		if(rand(2) == 0) return "flare";
 		else return "flat tip";
 	}
-	if(player.cocks[cockNum].cockType == 2) {
+	if(player.cocks[cockNum].cockType == CockTypesEnum.DOG) {
 		if(rand(2) == 0) return "pointed tip";
 		else return "narrow tip";
 	}
-	if(player.cocks[cockNum].cockType == 3) {
+	if(player.cocks[cockNum].cockType == CockTypesEnum.DEMON) {
 		if(rand(2) == 0) return "tainted crown";
 		else return "nub-ringed tip";
 	}
-	if(player.cocks[cockNum].cockType == 4) {
+	if(player.cocks[cockNum].cockType == CockTypesEnum.TENTACLE) {
 		if(rand(2) == 0) return "mushroom-like tip";
 		else return "wide plant-like crown";
 	}
-	if(player.cocks[cockNum].cockType == 5) {
+	if(player.cocks[cockNum].cockType == CockTypesEnum.CAT) {
 		if(rand(2) == 0) return "point";
 		else return "narrow tip";
 	}
-	if(player.cocks[cockNum].cockType == 6) {
+	if(player.cocks[cockNum].cockType == CockTypesEnum.LIZARD) {
 		if(rand(2) == 0) return "crown";
 		else return "head";
 	}
-	if(player.cocks[cockNum].cockType == 6) {
+	if(player.cocks[cockNum].cockType == CockTypesEnum.LIZARD) {
 		if(rand(2) == 0) return "blue tip";
 		else return "wiggling crown";
 	}
-	if(player.cocks[cockNum].cockType == 8) {
+	if(player.cocks[cockNum].cockType == CockTypesEnum.KANGAROO) {
 		if(rand(2) == 0) return "tip";
 		else return "point";
 	}
-	if(player.cocks[cockNum].cockType == 10) {
+	if(player.cocks[cockNum].cockType == CockTypesEnum.DISPLACER) {
 		temp = rand(5);
 		if(temp == 0) return "star tip";
 		else if(temp == 1) return "blooming cock-head";
@@ -3430,7 +3430,7 @@ function NPCCockNoun(type:Number):String {
 }
 
 //Multipurpose NPC cock descs
-function NPCCockAdjective(cockType:Number = 0, cockLength:Number = 5, lust:Number = 50) {
+function NPCCockAdjective(cockType:CockTypesEnum, cockLength:Number = 5, lust:Number = 50) {	
 	var descript:String = "";
 	var rando:Number = 0;
 	var multi:Boolean = false;
@@ -3457,11 +3457,11 @@ function NPCCockAdjective(cockType:Number = 0, cockLength:Number = 5, lust:Numbe
 		else if(cockLength < 9) {
 			rando = rand(3);
 			if(rando == 0) {
-				if(cockType == 1) descript = "pony-sized";
+				if(cockType == CockTypesEnum.HORSE) descript = "pony-sized";
 				else descript = "long";
 			}
 			else if(rando == 1) {
-				if(cockType == 1) descript = "colt-like";
+				if(cockType == CockTypesEnum.HORSE) descript = "colt-like";
 				else descript = "lengthy";
 			}
 			else descript = "sizable";
@@ -3470,7 +3470,7 @@ function NPCCockAdjective(cockType:Number = 0, cockLength:Number = 5, lust:Numbe
 			rando = rand(3);
 			if(rando == 0) descript = "huge";
 			else if(rando == 1) {
-				if(cockType == 2) descript = "mastiff-like";
+				if(cockType == CockTypesEnum.DOG) descript = "mastiff-like";
 				else descript = "cucumber-length";
 			}
 			else descript = "foot-long";
@@ -3489,7 +3489,7 @@ function NPCCockAdjective(cockType:Number = 0, cockLength:Number = 5, lust:Numbe
 		}
 		else {
 			rando = rand(4);
-			if(cockType == 4 && rand(4) == 0) descript = "coiled ";
+			if(cockType == CockTypesEnum.TENTACLE && rand(4) == 0) descript = "coiled ";
 			else {
 				if(rando == 0) descript = "towering";
 				else if(rando == 1) descript = "freakish";

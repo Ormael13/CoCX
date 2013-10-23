@@ -132,7 +132,7 @@ function maraeBadEnd():void {
 		player.createCock();
 		player.cocks[0].cockLength = 36;
 		player.cocks[0].cockThickness = 2;
-		player.cocks[0].cockType = 4;
+		player.cocks[0].cockType = CockTypesEnum.TENTACLE;
 	}
 	else {
 		outputText("You drink deeply, suckling her thick syrupy milk with strength born of an instantaneous addiction.  The desire to attain more of her 'milk' overrides any other thoughts, clouding over them like a dense morning fog.  The slick nipples feel like they tense and squirm in your mouth as you draw every last bit of their delicious cargo into your greedy gullet.  You " + hipDescript() + " twitch and squirm, throbbing and hard, making your " + multiCockDescriptLight() + " bob in the air.   Heedless of your groin's incessant begging, you work the nipple in your mouth as if it was your whole world, trying to pleasure as much as suckle.  You can feel your " + multiCockDescriptLight() + " squirming in the air  as if reaching for her.  Wait squirming!?  You're pulled back from her nipple and given the chance to look down, where ", false);
@@ -140,7 +140,7 @@ function maraeBadEnd():void {
 			//Single cawks
 			if(player.cocks.length == 1) {
 				//Set primary cock flag
-				player.cocks[0].cockType = 4;
+				player.cocks[0].cockType = CockTypesEnum.TENTACLE;
 			}
 			//multi
 			if(player.cockTotal() > 1) {
@@ -148,7 +148,7 @@ function maraeBadEnd():void {
 				//Set cock flags
 				while(temp > 0) {
 					temp--;
-					player.cocks[temp].cockType = 4;
+					player.cocks[temp].cockType = CockTypesEnum.TENTACLE;
 				}
 			}				
 		}
@@ -337,7 +337,7 @@ function MaraeIIStageII():void {
 		buttChange(12,true,true,false);
 		outputText("  The open plant-hole dives for your groin while you're distracted, hits your " + cockDescript(0) + " and devours it with a greedy sluuuuurp.", false);
 		if(player.cockTotal() == 2) outputText("  Another vine that may as well be the first's twin snakes from between the goddess' legs and jumps onto your " + cockDescript(1) + ".", false);
-		else if(player.cockTotal() > 2) outputText("  More 'open' vines shimmy forth from between Marae's legs and jump up onto your " + cockNoun(0) + "s.", false);
+		else if(player.cockTotal() > 2) outputText("  More 'open' vines shimmy forth from between Marae's legs and jump up onto your " + cockNoun(CockTypesEnum.HUMAN) + "s.", false);
 		
 		outputText("You grunt and pump your hips, shameless as you give in to the squeezing, textured tentacle", false);
 		if(player.cockTotal() > 1) outputText("s", false);
@@ -376,7 +376,7 @@ function MaraeIIStageII():void {
 		if(player.cockTotal() > 1) {
 			if(player.cockTotal() > 2) outputText("  Another ", false);
 			else outputText("Your other ", false);
-			outputText(cockNoun(0) + " prods at her tight pucker, and with a slight adjustment, you're able to line it up.  It's wet!  Inch after inch slides in with incredible ease, violating her slippery butthole until you've completely double-penetrated her.", false);
+			outputText(cockNoun(CockTypesEnum.HUMAN) + " prods at her tight pucker, and with a slight adjustment, you're able to line it up.  It's wet!  Inch after inch slides in with incredible ease, violating her slippery butthole until you've completely double-penetrated her.", false);
 		}
 		outputText("\n\n", false);
 		

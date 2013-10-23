@@ -1,4 +1,5 @@
-﻿/**
+﻿import classes.Player;
+/**
  * Urta's Quest
  * @Author: 
  */
@@ -21,8 +22,10 @@
 //const URTA_MINO_AND_SUCCUBI_SLAVE:int = 721;
 //const EDRYN_BIRF_COUNTDOWN:int = 722;
 
-//Mystery variables for now
-var player2:creature = new creature();
+//You play as Urta, which copies everyone about you into this new variable. Very clumsy.
+//TODO: Figure out this whole thing. You play as Urta but the whole quest saves you state into this variable and swaps back and forth 
+//whenever you "leave" the quest 
+var player2:Player = new Player();
 var urtaQItems:Array = new Array();
 
 function urtaBusy():Boolean {
@@ -178,7 +181,7 @@ function startUrtaQuest():void {
 	player2 = clone(player);
 	//var playerTwo:creature = new creature;
 	//var playerTwo:creature = Object(ObjectUtil.copy(player));
-	player = new creature();
+	player = new Player();
 	player.short = "Urta";
 	player.tallness = 71;
 	player.hairColor = "gray";
@@ -196,7 +199,7 @@ function startUrtaQuest():void {
 	player.tailType = 13;
 	player.tailVenom = 1;
 	player.createCock();
-	player.cocks[0].cockType = 1;
+	player.cocks[0].cockType = CockTypesEnum.HORSE;
 	player.cocks[0].cockLength = 20;
 	player.cocks[0].cockThickness = 3;
 	player.balls = 2;

@@ -2,7 +2,8 @@
 {
 	import classes.assClass;
 	import classes.breastRowClass;
-	import classes.cockClass;
+	//import classes.cockClass;
+	import classes.Cock;
 	import classes.creature;
 	import classes.itemSlotClass;
 	import classes.perkClass;
@@ -196,7 +197,7 @@
 
 
 			
-			include "../../flagDefs.as";
+			include "../../includes/flagDefs.as";
 			
 			// we had two saves.as files. It was causing wierd issues.
 			// I'm not sure how most of the files in /classes/classes/ are included

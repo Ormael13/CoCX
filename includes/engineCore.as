@@ -34,7 +34,7 @@ function maxHP():Number {
 }
 
 function silly():Boolean {
-	if(flags[UNKNOWN_FLAG_NUMBER_00305] == 1) return true;
+	if(flags[SILLY_MODE_ENABLE_FLAG] == 1) return true;
 	return false
 }
 
@@ -3964,78 +3964,6 @@ function menu(text1:String = "", func1:Function = null, arg1:Number = -9000, tex
 	scrollBar.update();
 }
 
-/*
-function choices(text1:String, butt1:Number, 
-					text2:String, butt2:Number, 
-					text3:String, butt3:Number, 
-					text4:String, butt4:Number, 
-					text5:String, butt5:Number, 
-					text6:String, butt6:Number, 
-					text7:String, butt7:Number, 
-					text8:String, butt8:Number, 
-					text9:String, butt9:Number, 
-					text0:String, butt0:Number):void 
-{
-	//Transfer event code to storage
-	buttonEvents[0] = butt1;
-	buttonEvents[1] = butt2;
-	buttonEvents[2] = butt3;
-	buttonEvents[3] = butt4;
-	buttonEvents[4] = butt5;
-	buttonEvents[5] = butt6;
-	buttonEvents[6] = butt7;
-	buttonEvents[7] = butt8;
-	buttonEvents[8] = butt9;
-	buttonEvents[9] = butt0;
-	//Set button texts
-	b1Text.htmlText = text1;
-	b2Text.htmlText = text2;
-	b3Text.htmlText = text3;
-	b4Text.htmlText = text4;
-	b5Text.htmlText = text5;
-	b6Text.htmlText = text6;
-	b7Text.htmlText = text7;
-	b8Text.htmlText = text8;
-	b9Text.htmlText = text9;
-	b0Text.htmlText = text0;
-
-
-	var bTextArr:Array = new Array( b1Text,
-									b2Text,
-									b3Text,
-									b4Text,
-									b5Text,
-									b6Text,
-									b7Text,
-									b8Text,
-									b9Text,
-									b0Text);
-
-	var j:int;
-
-	// iterate over the button options, and only enable the ones which have a corresponding event number
-
-	for (j = 0; j < 10; j += 1)
-	{
-
-		if(buttonEvents[j] == 0) {
-			bTextArr[j].visible = false;
-			gButtons[j].visible = false;
-		}
-		else {
-			bTextArr[j].visible = true;
-			gButtons[j].visible = true;
-		}
-
-	}
-
-
-	funcs = new Array();
-	args = new Array();
-	mainText.htmlText = currentText;
-	scrollBar.update();
-}
-*/
 
 function choices(text1:String, butt1:*, 
 						text2:String, butt2:*, 
@@ -4129,7 +4057,7 @@ function simpleChoices(text1:String, butt1:*,
 			"",0);
 }
 
-function doYesNo(eventYes:Number, eventNo:Number):void {
+function doYesNo(eventYes:*, eventNo:*):void {
 	//Make buttons 1-2 visible and hide the rest.
 
 	trace("doYesNo");
@@ -4689,7 +4617,7 @@ function lustPercent():Number {
 //Modify stats
 function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:Number, sens:Number, lust2:Number, corr:Number, resisted:Boolean = true) {
 	//Easy mode cuts lust gains!
-	if(flags[UNKNOWN_FLAG_NUMBER_00099] == 1 && lust2 > 0 && resisted) lust2 /= 2;
+	if(flags[EASY_MODE_ENABLE_FLAG] == 1 && lust2 > 0 && resisted) lust2 /= 2;
 	//Set original values to begin tracking for up/down values if
 	//they aren't set yet.
 	//These are reset when up/down arrows are hidden with 
@@ -4901,7 +4829,7 @@ function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):void {
 }
 
 function spriteSelect(choice:Number = 0):void {
-	if(choice < 0 || flags[UNKNOWN_FLAG_NUMBER_00273] == 1) sprite.visible = false;
+	if(choice < 0 || flags[SHOW_SPRITES_FLAG] == 1) sprite.visible = false;
 	else {
 		sprite.visible = true;
 		sprite.gotoAndStop(choice);

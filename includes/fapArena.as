@@ -112,10 +112,10 @@ function fapArenaPageII():void {
 	//D the number of hours since he last came 
 	var d:Number = player.hoursSinceCum;
 	var c:Number = 0;
-	if(player.cocks[x].cockType == 3) c = 10;
-	else if(player.cocks[x].cockType == 4) c = 5;
-	else if(player.cocks[x].cockType == 6) c = 3;
-	else if(player.cocks[x].cockType == 1) c = 2;
+	if(player.cocks[x].cockType == CockTypesEnum.DEMON) c = 10;
+	else if(player.cocks[x].cockType == CockTypesEnum.TENTACLE) c = 5;
+	else if(player.cocks[x].cockType == CockTypesEnum.LIZARD) c = 3;
+	else if(player.cocks[x].cockType == CockTypesEnum.HORSE) c = 2;
 	//R the player's lust resistance (0<R<1)
 	var r = lustPercent()/100;
 	//The game does a roll between 0 and 100, call it N.
@@ -428,11 +428,11 @@ function tentacleFapSpecial(place:Number):void {
 	temp = player.cocks.length;
 	while(temp > 0) {
 		temp--;
-		if(player.cocks[x].cockLength >= 40 && player.cocks[x].cockType == 4)
+		if(player.cocks[x].cockLength >= 40 && player.cocks[x].cockType == CockTypesEnum.TENTACLE)
 			break;
 	}
-	if(player.cocks[x].cockLength >= 40 && player.cocks[x].cockType == 4) {
-		outputText("You suddenly remember your " + cockNoun(4) + " isn't getting love. The poor squirming thing is trembling in arousal and you decide it should also take part in the collective butt-fuck; you don't care whether it's cheating or not; after all, the butt-fuck has already begun.  Besides, the referee is too busy touching herself to notice anything.  Fortunately your tentacle dick is long and flexible enough to be guided toward some hole to fuck; you proceed to snake your tentacle dong around, looking for some vagina.  After a few seconds of unsuccessful searching, groping muscled butts with your nodules but finding no hole that's already filled by some ramming cock, your ropy member finally locates a gaping, fluid-dripping vagina.  You've found a herm!  Her slick fuck-hole is oozing due to the unholy embrace of flesh her pucker and her shaft are already getting, and you have no trouble sliding a few inches inside with expert guidance.  The brutal and unexpected secondary intrusion makes her moan instantly.  You welcome this new burst of pleasure and start jamming your tentacle pecker back and forth in the herm's vagina, all the while ", false);
+	if(player.cocks[x].cockLength >= 40 && player.cocks[x].cockType == CockTypesEnum.TENTACLE) {
+		outputText("You suddenly remember your " + cockNoun(CockTypesEnum.TENTACLE) + " isn't getting love. The poor squirming thing is trembling in arousal and you decide it should also take part in the collective butt-fuck; you don't care whether it's cheating or not; after all, the butt-fuck has already begun.  Besides, the referee is too busy touching herself to notice anything.  Fortunately your tentacle dick is long and flexible enough to be guided toward some hole to fuck; you proceed to snake your tentacle dong around, looking for some vagina.  After a few seconds of unsuccessful searching, groping muscled butts with your nodules but finding no hole that's already filled by some ramming cock, your ropy member finally locates a gaping, fluid-dripping vagina.  You've found a herm!  Her slick fuck-hole is oozing due to the unholy embrace of flesh her pucker and her shaft are already getting, and you have no trouble sliding a few inches inside with expert guidance.  The brutal and unexpected secondary intrusion makes her moan instantly.  You welcome this new burst of pleasure and start jamming your tentacle pecker back and forth in the herm's vagina, all the while ", false);
 		if(place <= 2) outputText("fucking your partner's anus", false);
 		if(place == 2) outputText(" and", false);
 		if(place >= 2) outputText(" being fucked from behind", false);
@@ -446,7 +446,7 @@ function tentacleFapSpecial(place:Number):void {
 		}
 		//[if you lost]
 		else {
-			outputText("This is such an awkward position, moving your " + cockNoun(4) + " backwards and blindly penetrating some herm girl you don't see.  But at least it's fair game; why should you be the only one on the receiving end?  You firmly lodge your sleek intruder inside the girl's love tunnel and start pushing, thrusting harder and deeper every time the butt-fuck wagon hits your " + assDescript() + ", as if you wanted to punish her for being part of your own rough penetration, and transmit some of the pure anal-induced energy from thirty people's cock-thrusts to her... you aren't disappointed.  As soon as your " + cockNoun(4) + " starts rocking in and out of the herm's moist pussy, she lets out a huge, obscenely whorish scream of pleasure.  She waggles from one side to another and accelerates her butt-fucking and hole-filling pace, unable to control her sensations.  This disrupts the whole butt-fucking train, and everyone's ass and cock is affected to some extent; everyone's pleasure is increased because of your audacious looping retro-fuck initiative, and other loud, reluctant moans are heard.  You can't help but join them in this unholy orgy of hole-penetration.  The herm's repeated, irregular screams are covering everyone else's though, and the abundant flow of girl-squirt and pre-cum leaking out of your connected genitals tells you much about both your states of arousal.  It won't be long before you both come.\n\n", false);
+			outputText("This is such an awkward position, moving your " + cockNoun(CockTypesEnum.TENTACLE) + " backwards and blindly penetrating some herm girl you don't see.  But at least it's fair game; why should you be the only one on the receiving end?  You firmly lodge your sleek intruder inside the girl's love tunnel and start pushing, thrusting harder and deeper every time the butt-fuck wagon hits your " + assDescript() + ", as if you wanted to punish her for being part of your own rough penetration, and transmit some of the pure anal-induced energy from thirty people's cock-thrusts to her... you aren't disappointed.  As soon as your " + cockNoun(CockTypesEnum.TENTACLE) + " starts rocking in and out of the herm's moist pussy, she lets out a huge, obscenely whorish scream of pleasure.  She waggles from one side to another and accelerates her butt-fucking and hole-filling pace, unable to control her sensations.  This disrupts the whole butt-fucking train, and everyone's ass and cock is affected to some extent; everyone's pleasure is increased because of your audacious looping retro-fuck initiative, and other loud, reluctant moans are heard.  You can't help but join them in this unholy orgy of hole-penetration.  The herm's repeated, irregular screams are covering everyone else's though, and the abundant flow of girl-squirt and pre-cum leaking out of your connected genitals tells you much about both your states of arousal.  It won't be long before you both come.\n\n", false);
 		}
 	}
 }
@@ -455,10 +455,10 @@ function tentacleFapCum():Boolean {
 	temp = player.cocks.length;
 	while(temp > 0) {
 		temp--;
-		if(player.cocks[x].cockLength >= 40 && player.cocks[x].cockType == 4)
+		if(player.cocks[x].cockLength >= 40 && player.cocks[x].cockType == CockTypesEnum.TENTACLE)
 			break;
 	}
-	if(player.cocks[x].cockLength >= 40 && player.cocks[x].cockType == 4) {
+	if(player.cocks[x].cockLength >= 40 && player.cocks[x].cockType == CockTypesEnum.TENTACLE) {
 		outputText("  Your tentacle pecker starts vibrating on its own, and soon it also releases a voluminous amount of jizz inside the herm's vagina.  She is also reaching her climax; her pussy is drenching the end of your tentacled shaft with girl-juices.", false);
 		return true;
 	}

@@ -264,7 +264,7 @@ function useTentacleJojo():void {
 			else outputText("easily swallowing", false);
 			outputText(" your " + multiCockDescriptLight() + " in tight vises of pleasure.  The sensation is overhwelmingly pleasurable, like having three cocks being licked and sucked by 1000 tongues.", false);
 			//(if extra: 
-			if(player.cockTotal() > 3) outputText("  The remaining " + cockNoun(0) + "'s pulse and throb with jealous desire, until one of the tentacles slips off and captures it.  They take turns, slipping off and capturing each of your offerings until you wish they'd just keep sucking forever.", false);
+			if(player.cockTotal() > 3) outputText("  The remaining " + cockNoun(CockTypesEnum.HUMAN) + "'s pulse and throb with jealous desire, until one of the tentacles slips off and captures it.  They take turns, slipping off and capturing each of your offerings until you wish they'd just keep sucking forever.", false);
 			outputText("\n\n", false);
 		}
 	}
@@ -470,7 +470,7 @@ function jojoMilkPay(tentacle:Boolean = false):void {
 	var cap:Number = 500;
 	var cumQ:Number = 0;
 	//Ez mode cap doubles
-	if(flags[UNKNOWN_FLAG_NUMBER_00099] == 1) cap *= 2;
+	if(flags[EASY_MODE_ENABLE_FLAG] == 1) cap *= 2;
 	if(debug) {
 		flags[UNKNOWN_FLAG_NUMBER_00104] = 0;
 		cap = 9999;
@@ -917,12 +917,12 @@ function jojoRape():void {
 					if(player.cumQ() >= 25 && player.cumQ() < 250) {
 						if(player.horseCocks() == 1) outputText(" Your " + cockDescript(0) + " flares wildly as musky horse-cum erupts from it, splattering over Jojo.  ", false);
 						if(player.dogCocks() == 1) outputText("The terrible pressure in your " + dogDescript(0) + " finally relents, in the form of a fountain of doggie-cum, spraying out from your " + cockDescript(0) + " in a steady stream that seems to last and last.  ", false);
-						if(player.cocks[0].cockType == 0 || player.cocks[0].cockType > 2) outputText("Your body tenses and cums a thick eruption far beyond what a normal human could produce.  Jojo is splattered with the stuff.  ", false);
+						if(player.cocks[0].cockType == CockTypesEnum.HUMAN || player.cocks[0].cockType.Index > 2) outputText("Your body tenses and cums a thick eruption far beyond what a normal human could produce.  Jojo is splattered with the stuff.  ", false);
 					}
 					if(player.cumQ() >= 250) {
 						if(player.horseCocks() == 1) outputText("Your " + cockDescript(0) + " ripples and bulges with animalistic vigor, horse-cum splattering everywhere with each contraction.  The musky animal-jizz never seems to stop pouring from your equine organ, soaking the mouse from the waist up.  ", false);
 						if(player.dogCocks() == 1) outputText("Your " + cockDescript(0) + " suddenly releases the pressure, a constant stream of doggie-cum spouting from your " + cockDescript(0) + " like some kind of cum-hose.  It seems to go on endlessly, covering the mouse from the waist up with thick ribbons of doggie-spooge as your knot slowly shrinks to normal.  ", false);
-						if(player.cocks[0].cockType == 0 || player.cocks[0].cockType > 2) outputText("Your body tenses and cums a thick eruption far beyond what a normal human could produce.  Jojo is splattered with the stuff.  ", false);
+						if(player.cocks[0].cockType == CockTypesEnum.HUMAN || player.cocks[0].cockType.Index > 2) outputText("Your body tenses and cums a thick eruption far beyond what a normal human could produce.  Jojo is splattered with the stuff.  ", false);
 					}
 				}
 				//Sorry multicocks, I'm donE!

@@ -451,7 +451,7 @@ function acceptFellatrixOral():void {
 			flags[UNKNOWN_FLAG_NUMBER_00156]++;
 		}
 		//Horsecock suck
-		else if(player.cocks[x].cockType == 1) {
+		else if(player.cocks[x].cockType == CockTypesEnum.HORSE) {
 			// - first time horsesuck
 			if(flags[UNKNOWN_FLAG_NUMBER_00174] == 0) {
 				outputText("The smile that spreads across her face might have looked sinister on someone else. She takes your hand and guides you to the other room, licking her lips. Within rests an extraordinarily comfortable-looking bed, featuring a level of finery you had nearly forgotten existed. The cabalist leads you to it, and helps you sit down. \"<i>Yeah,</i>\" she smirks, \"<i>I figured you might say yes.</i>\" She reaches down to remove the bottom of your " + player.armorName + ", before chuckling lightly at the sight of your " + cockDescript(x) + ". \"<i>Oh yeah?</i>\" she says, \"<i>Do they call you the Icathian Stallion?</i>\"\n\n", false);

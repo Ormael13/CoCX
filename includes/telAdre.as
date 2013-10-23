@@ -649,8 +649,8 @@ function normalPierceAssemble():void {
 			break;
 		case 1:
 			player.cocks[0].pierced = piercingType;
-			player.cocks[0].pShort = shortP;
-			player.cocks[0].pLong = longP;
+			player.cocks[0].pShortDesc = shortP;
+			player.cocks[0].pLongDesc = longP;
 			break;
 		case 2:
 			player.earsPierced = piercingType;
@@ -769,8 +769,8 @@ function removeCockPierce():void {
 	spriteSelect(63);
 	outputText("Yara gives you something to drink and you swiftly black out.  You awake about an hour later, sore and weak, though thankfully not bleeding.", true);
 	player.cocks[0].pierced = 0;
-	player.cocks[0].pShort = "";
-	player.cocks[0].pLong = "";
+	player.cocks[0].pShortDesc = "";
+	player.cocks[0].pLongDesc = "";
 	stats(0,-5,0,0,0,0,0,0);
 	player.gems -= 100;
 	statScreenRefresh();

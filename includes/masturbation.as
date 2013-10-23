@@ -888,8 +888,8 @@ function masturbateGo():void {
 		//5 lucky to find demon/animal
 		if(player.cocks[0].cockThickness < 1.8) outputText("You easily wrap a hand around your " + cockDescript(0) + " and start masturbating.  ", false);
 		if(player.cocks[0].cockThickness >= 1.8 && player.cocks[0].cockThickness < 3) {
-			if(player.cocks[0].cockType == 0 || player.cocks[0].cockType > 2) outputText("You have some difficulty fitting your hand around your " + cockDescript(0) + ", relishing the feelings of your large endowment as you begin masturbating.  ", false);
-			if(player.cocks[0].cockType == 1) outputText("You have some difficulty fitting your hand around your " + horseDescript(0) + ", relishing the feelings of your animalistic endowments as you begin masturbating.  ", false);
+			if(player.cocks[0].cockType == CockTypesEnum.HUMAN || player.cocks[0].cockType.Index > 1) outputText("You have some difficulty fitting your hand around your " + cockDescript(0) + ", relishing the feelings of your large endowment as you begin masturbating.  ", false);
+			if(player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("You have some difficulty fitting your hand around your " + horseDescript(0) + ", relishing the feelings of your animalistic endowments as you begin masturbating.  ", false);
 			if(player.hasKnot()) outputText("You have some difficulty fitting your hand around your " + cockDescript(0) + ", relishing the feelings of your bulbous beast endowments as you begin masturbating.  ", false);
 		}
 		if(player.cocks[0].cockThickness >= 3 && player.cocks[0].cockThickness < 5) {
@@ -1708,7 +1708,7 @@ function multiNippleFuckPrep(randomCock:Number):void {
 	if(player.lib >= 70) outputText("Without hesitation, you shove the ", false);
 	//I love it when the new code makes things simpler.	
 	//Applying randomization - normal cocks
-	if(player.cocks[randomCock].cockType == 0)
+	if(player.cocks[randomCock].cockType == CockTypesEnum.HUMAN)
 	{
 		outputText("tip of ",false);
 		//more than one?
@@ -1716,7 +1716,7 @@ function multiNippleFuckPrep(randomCock:Number):void {
 		else outputText("your " + cockDescript(randomCock) + " ",false);	
 	}
 	//Applying randomization - horse cocks
-	if(player.cocks[randomCock].cockType == 1)
+	if(player.cocks[randomCock].cockType == CockTypesEnum.HORSE)
 	{
 		outputText("flared tip of ",false);
 		//more than one?
@@ -1724,7 +1724,7 @@ function multiNippleFuckPrep(randomCock:Number):void {
 		else outputText("your " + horseDescript(randomCock) + " ",false);
 	}
 	//Applying randomization - dog cocks
-	if(player.cocks[randomCock].cockType == 2)
+	if(player.cocks[randomCock].cockType == CockTypesEnum.DOG)
 	{
 		outputText("pointed tip of ",false);
 		//more than one?
@@ -1732,7 +1732,7 @@ function multiNippleFuckPrep(randomCock:Number):void {
 		else outputText("your " + dogDescript(randomCock) + " ",false);
 	}
 	//Applying randomization - everything else
-	if(player.cocks[randomCock].cockType >= 3)
+	if(player.cocks[randomCock].cockType.Index >= 3)
 	{
 		outputText("tip of ",false);
 		//more than one?
@@ -2073,13 +2073,13 @@ function centaurMasturbation():Boolean {
 		if(plural) outputText("  After a moment they peek out from under your forelegs, proudly displaying your " + multiCockDescriptLight() + ".", false);
 		else {
 			outputText("  After a moment it peeks out from under your forelegs, proudly displaying your ", false);
-			if(player.cocks[primary].cockType == 1) outputText("flared tip", false);
-			else if(player.cocks[primary].cockType == 3) outputText("nodule-ringed head", false);
-			else if(player.cocks[primary].cockType == 2) outputText("pointed erection", false);
-			else if(player.cocks[primary].cockType == 4) outputText("wriggling, mushroom-like tip", false);
-			else if(player.cocks[primary].cockType == 5) outputText("spiny head", false); 
-			else if(player.cocks[primary].cockType == 6) outputText("pointed, purple tip", false);
-			else if(player.cocks[primary].cockType == 7) outputText("tentacle-ringed head", false);
+			if(player.cocks[primary].cockType == CockTypesEnum.HORSE) outputText("flared tip", false);
+			else if(player.cocks[primary].cockType == CockTypesEnum.DEMON) outputText("nodule-ringed head", false);
+			else if(player.cocks[primary].cockType == CockTypesEnum.DOG) outputText("pointed erection", false);
+			else if(player.cocks[primary].cockType == CockTypesEnum.TENTACLE) outputText("wriggling, mushroom-like tip", false);
+			else if(player.cocks[primary].cockType == CockTypesEnum.CAT) outputText("spiny head", false); 
+			else if(player.cocks[primary].cockType == CockTypesEnum.LIZARD) outputText("pointed, purple tip", false);
+			else if(player.cocks[primary].cockType == CockTypesEnum.ANEMONE) outputText("tentacle-ringed head", false);
 			else outputText("dome-like head", false);
 			outputText(".", false);
 		}
@@ -2648,7 +2648,7 @@ function tentacleSelfFuck():void {
 	var y:int = -1;
 	temp = 0;
 	while (temp < player.cockTotal()) {
-		if(player.cocks[temp].cockType == 4) {
+		if(player.cocks[temp].cockType == CockTypesEnum.TENTACLE) {
 			if(x == -1) x = temp;
 		}
 		temp++;
@@ -2658,8 +2658,8 @@ function tentacleSelfFuck():void {
 	while(temp < player.cockTotal()) {
 		if(temp != x) {
 			if(y < 0) y = temp;
-			else if(rand(2) == 0 && player.cocks[y].cockType != 4) y = temp;
-			else if(player.cocks[temp].cockType == 4) y = temp;
+			else if(rand(2) == 0 && player.cocks[y].cockType != CockTypesEnum.TENTACLE) y = temp;
+			else if(player.cocks[temp].cockType == CockTypesEnum.TENTACLE) y = temp;
 		}
 		temp++;
 	}
@@ -2702,7 +2702,7 @@ function tentacleSelfFuck():void {
 	outputText("\n\nRipples of delight radiate along your " + cockDescript(x) + " as it buries itself as deeply into your velvet tunnel as possible.  The fat, purplish head stretches you out as it goes, just enough that the trailing stalk is comfortably ensconced in twat.  Tugging on the exposed portion, you find yourself pumping wildly on your length, squeezing it while paroxysms of ecstasy render your fine muscle control useless.  The dual sensations of being fucked and dishing out a hot dicking have overlapped into a tangled-up knot inside you.");
 	if(y >= 0) {
 		outputText("  Your " + cockDescript(y) + " is getting jacked off by the engorged cock-coil's motions and slowly leaks creamy pre over the jerking length.");
-		if(player.cocks[y].cockType == 4) {
+		if(player.cocks[y].cockType == CockTypesEnum.TENTACLE) {
 			outputText("  In no time flat the second tendril has gotten the idea, and it elongates to reach for your unoccupied asshole.  There's a moment of token resistance before it violates your [asshole], but then, there's only the warm heat of a torrid butt-fuck.");
 			//BUTTCHANGE IF APPROPRIATE
 			buttChange(player.cockArea(y),true,true,false);
@@ -2725,7 +2725,7 @@ function tentacleSelfFuck():void {
 	else {
 		outputText("  The pleasured noises issuing forth from your 'O'-gaped lips get higher and higher pitched with each passing second, and for a split second, you find yourself wishing you had a third tentacle so you could suck it while you fuck yourself.");
 		if(y >= 0) {
-			if(player.cocks[y].cockType == 4 && player.cocks[y].cockLength >= 20) outputText("  Lucky, you're big enough down there a juicy cock-head is right there, and you bend to slurp it up without thought, busily self-sucking with reckless abandon.");
+			if(player.cocks[y].cockType == CockTypesEnum.TENTACLE && player.cocks[y].cockLength >= 20) outputText("  Lucky, you're big enough down there a juicy cock-head is right there, and you bend to slurp it up without thought, busily self-sucking with reckless abandon.");
 		}
 	}
 	//MORE
@@ -2813,7 +2813,7 @@ function tentacleGoesUpYerPooperNewsAtEleven():void {
 	var x:int = -1;
 	temp = 0;
 	while(temp < player.cockTotal()) {
-		if(player.cocks[temp].cockType == 4) {
+		if(player.cocks[temp].cockType == CockTypesEnum.TENTACLE) {
 			x = temp;
 			if(rand(2) == 0) break;
 		}

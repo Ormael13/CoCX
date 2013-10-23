@@ -127,7 +127,7 @@ function edrynBarTalk():void {
 	outputText("You take a close look at your dinner companion, trying to puzzle out what you're picking up on, but you just can't place it.  Edryn burps quietly, apologizing for her rudeness, and excuses herself to the girl's room.  As she turns away to leave, you get a good look at her backside.  Her horse-like sex is huge and puffy, and glistening with moisture.  The gentle flicking of her tail from side to side pushes her musky scent into you like a wave, ", false);
 	if(player.lowerBody == 4 && player.totalCocks() > 0) {
 		outputText("and the potent female scent works its way into your blood, making you dizzy as your " + cockDescript(0) + " ", false);
-		if(player.cocks[0].cockType == 1) outputText("pours out of its sheath", false);
+		if(player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("pours out of its sheath", false);
 		else outputText("fills near instantaneously", false);
 		outputText(", now rock-hard.  You breathe deeply, your mind subsumed in a sea of equine instincts.  The hard floor squeezes your " + cockDescript(0) + " painfully underneath you, forcing you to rise up onto your hooves.  You can feel more than a few curious gazes sliding along your now fully exposed maleness, and it twitches as if it were happy for the attention.\n\n", false);
 		outputText("Swaying back and forth, alternatively snorting and breathing deeply of the female's scent, your gaze immediately locked onto the returning mare.  Your " + cockDescript(0) + " jumps and bounces underneath you, painfully hard and swollen.  A thick dollop of pre beads on your " + cockHead(0) + ", as if the bar needed your display to be any more overtly sexual.  Edryn looks you over, walking alongside you she talks, \"<i>My my, someone liked what they saw.  Or was it smelled?  I can never tell what it is that gets you " + player.mf("studs","hotties") + " so worked up about me.</i>\"\n\n", false);
@@ -139,7 +139,7 @@ function edrynBarTalk():void {
 	else if(player.totalCocks() > 0) {
 		if(player.horseCocks() > 0) {
 			outputText("and the potent female scent makes you feel a bit dizzy and dazed.  ", false);
-			if(player.cocks[0].cockLength > 16) outputText("You barely register the thump of your hardening " + cockNoun(1) + " as it smacks into the underside of the table.\n\n", false);
+			if(player.cocks[0].cockLength > 16) outputText("You barely register the thump of your hardening " + cockNoun(CockTypesEnum.HORSE) + " as it smacks into the underside of the table.\n\n", false);
 			else outputText("You squirm uncomfortably, feeling constrained by your " + player.armorName + " as you surge to erectness.\n\n", false);
 			outputText("Swaying back and forth in a scent induced haze, you fail to notice Edryn's return.  She coughs noisily, drawing you back to the real world and pushing away the memory of her glistening snatch.  You start to fumble for words until you realize she's smiling knowingly at you.  Unexpectedly, caresses slide against your groin, hefting and measuring you through your " + player.armorName + ".\n\n", false);
 			stats(0,0,0,0,0,0,60,0);
@@ -154,7 +154,7 @@ function edrynBarTalk():void {
 				outputText("You give the rapidly dissipating scent a sniff and note that it isn't unpleasant, just strong, and once again you find yourself imagining standing ", false);
 				if(player.tallness < 60) outputText("on a stool ", false);
 				outputText("behind her, fucking her like the beast-woman she is.  Lost in your thoughts, you fail to notice Edryn's return.  She coughs noisily, rousing you from the impromptu fantasy as she gives you a knowing smile.  An unexpected caress slides against you groin, rubbing and hefting you carefully.", false);
-				if(player.cocks[0].cockType == 4) outputText("  She smiles coyly when your " + cockDescript(0) + " wriggles, wrapping around her arm.", false);
+				if(player.cocks[0].cockType == CockTypesEnum.TENTACLE) outputText("  She smiles coyly when your " + cockDescript(0) + " wriggles, wrapping around her arm.", false);
 				outputText("\n\n", false);
 				stats(0,0,0,0,0,0,40,0);
 				edrynOffer();
@@ -406,8 +406,8 @@ function fuckEdrynNonTaur():void {
 	outputText("Supporting your", false);
 	if(player.cockArea(x) > 200) outputText(" hefty package with both hands", false);
 	else outputText("self with your hand", false);
-	outputText(", you guide your " + cockDescript(x) + " towards the shining, black horse-cunt in front of you.  It parts easily, like a velvet curtain.  You slowly slide forward into Edryn's welcoming nethers, enjoying not having to fight to get your large " + cockNoun(0) + " in for a change.  She trembles as you pass the halfway point, ", false);
-	if(player.cocks[x].cockType == 1) outputText("feeling your ring of prepuce slipping between her lips.  ", false);
+	outputText(", you guide your " + cockDescript(x) + " towards the shining, black horse-cunt in front of you.  It parts easily, like a velvet curtain.  You slowly slide forward into Edryn's welcoming nethers, enjoying not having to fight to get your large " + cockNoun(CockTypesEnum.HUMAN) + " in for a change.  She trembles as you pass the halfway point, ", false);
+	if(player.cocks[x].cockType == CockTypesEnum.HORSE) outputText("feeling your ring of prepuce slipping between her lips.  ", false);
 	else outputText("squirting little bit of fluid on the floor.  ", false);
 	outputText("The further you push inside, the more aware of her warmth you become.  Her body temperature is higher than a human's, and it feels almost good enough to make you melt.\n\n", false);
 	
@@ -854,7 +854,7 @@ function fuckPregEdryn():void {
 		
 		outputText("Edryn breaks the kiss with a strand of spit hanging in the middle.  She giggles euphorically, \"<i>Wow.  Ummm, wow!  That was nice!  Now get off me you ", false);
 		if(player.tallness > 74) outputText("big ", false);
-		outputText("lug!</i>\"  She playfully pushes you back and tries to drag herself out from under you.  You laugh with her and pull back, letting your softening " + cockNoun(0) + " pull free from her cum-glazed twat.  It escapes with a wet squish, releasing a torrent of centaur cum from the unplugged opening.\n\n", false);
+		outputText("lug!</i>\"  She playfully pushes you back and tries to drag herself out from under you.  You laugh with her and pull back, letting your softening " + cockNoun(CockTypesEnum.HUMAN) + " pull free from her cum-glazed twat.  It escapes with a wet squish, releasing a torrent of centaur cum from the unplugged opening.\n\n", false);
 		
 		outputText("After you both get a chance to stagger up to your feet and get dressed, Edryn thanks you, \"<i>That was wonderful dear.  I'll probably be horny and dripping again in a few minutes, so please come back soon.  I think I'm going to be a sopping wet mess until our child is born.</i>\"\n\n", false);
 	}
@@ -893,7 +893,7 @@ function jizzFromEatingPregdrynOut():void {
 	
 	outputText("You tremble as you pull away, licking her lust from your lips and gasping for air as you shift to lick at her clit.", false);
 	if(player.lowerBody == 4) {
-		outputText("  Your hooves twitch weekly on the floor, forgetten about as you focus entirely on your hands, mouth, and pulsating " + cockNoun(0), false);
+		outputText("  Your hooves twitch weekly on the floor, forgetten about as you focus entirely on your hands, mouth, and pulsating " + cockNoun(CockTypesEnum.HUMAN), false);
 		if(player.cockTotal() > 1) outputText("s", false);
 		outputText(".", false);
 	}
@@ -997,14 +997,14 @@ function edrynFucktroduction():void {
 		if(cost > 0) outputText("Coins exchange hands and her arm finds its way back inside your " + player.armorName + ", pulling you towards a back room.  A round of chuckles chases you through the bar room until they're silenced by the heavy thud of a door closing behind you.  You're pushed against the wall hard enough to make your teeth click.  The stars gradually clear from your view, revealing a massive gash, drooling with clear feminine slime.  The scent assails you, ", false);
 		else if(flags[UNKNOWN_FLAG_NUMBER_00069] == 0) outputText("Her arm finds its way back inside your " + player.armorName + ", pulling you towards a back room.  A round of chuckles chases you through the bar room until they're silenced by the heavy thud of a door closing behind you.  You're pushed against the wall hard enough to make your teeth click.  The stars gradually clear from your view, revealing a massive gash, drooling with clear feminine slime.  The scent assails you, ", false);
 		else outputText("A round of chuckles chases you through the bar room until they're silenced by the heavy thud of a door closing behind you.  You're pushed against the wall hard enough to make your teeth click.  The stars gradually clear from your view, revealing a massive gash, drooling with clear feminine slime.  The scent assails you, ", false);
-		if(player.cocks[0].cockType == 1) outputText("making your " + cockDescript(x) + " twitch and ache.  It floods your body with animalistic desires, overpowering any sense of propriety you might have once had.", false);
+		if(player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("making your " + cockDescript(x) + " twitch and ache.  It floods your body with animalistic desires, overpowering any sense of propriety you might have once had.", false);
 		else outputText("overpowering you with strange lust.  As turned on as you are, it's difficult not to enjoy this.", false);
 	}
 	//TAUR
 	else {
 		if(cost > 0) outputText("Coins exchange hands and she grabs you, pulling you back towards a darkened doorway in the rear of the bar.  A round of chuckles chases you through the bar room until they're silenced by the heavy thud of a door closing behind you.  Edryn turns away from you, exposing her massive gash, drooling with clear feminine slime.  The scent assails you, ", false);
 		else outputText("She grabs you, pulling you back towards a darkened doorway in the rear of the bar.  A round of chuckles chases you through the bar room until they're silenced by the heavy thud of a door closing behind you.  Edryn turns away from you, exposing her massive gash, drooling with clear feminine slime.  The scent assails you, ", false);
-		if(player.cocks[0].cockType == 1) outputText("making your " + cockDescript(x) + " twitch and ache.  It floods your body with animalistic desires, overpowering any sense of propriety you might have once had.", false);
+		if(player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("making your " + cockDescript(x) + " twitch and ache.  It floods your body with animalistic desires, overpowering any sense of propriety you might have once had.", false);
 		else outputText("overpowering you with strange lust.  As turned on as you are, it's difficult not to enjoy this.", false);
 	}
 	//NEW

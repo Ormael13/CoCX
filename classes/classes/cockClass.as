@@ -48,10 +48,10 @@
 					if(cockLength > 10 && cockType != 1) {
 						temp /= 2;
 					}
-					if(cockType == 1 && cockLength > 17) temp/=2;
+					if(cockType == CockTypesEnum.HUMAN && cockLength > 17) temp/=2;
 					//Cut again for massively dicked
 					if(cockType != 1 && cockLength > 24) temp/=2;
-					if(cockType == 1 && cockLength > 40) temp/=2;
+					if(cockType == CockTypesEnum.HUMAN && cockLength > 40) temp/=2;
 					//Start adding up bonus length
 					amountGrown += temp;
 					cockLength += temp;
@@ -70,12 +70,12 @@
 						temp /= 2;
 					}
 					//Cut length loss, horses lose slower
-					if(cockType == 1 && cockLength < 10) temp/=3;
+					if(cockType == CockTypesEnum.HUMAN && cockLength < 10) temp/=3;
 					else if(cockLength < 10) temp/=2;
 					//Cut again for massively dicked
-					if(cockType == 1 && cockLength < 4) temp/=3;
+					if(cockType == CockTypesEnum.HUMAN && cockLength < 4) temp/=3;
 					else if(cockLength < 4) temp/=2;
-					if(cockType == 1 && cockLength < 6) temp/=3;
+					if(cockType == CockTypesEnum.HUMAN && cockLength < 6) temp/=3;
 					else if(cockLength < 6) temp/=2;
 					//MINIMUM LENGTH OF 1!
 					if(cockLength == 1) temp = 0;

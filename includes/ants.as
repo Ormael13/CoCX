@@ -1,4 +1,5 @@
-﻿//  ANTS_PC_FAILED_PHYLLA:int = 467;
+﻿import classes.Player;
+//  ANTS_PC_FAILED_PHYLLA:int = 467;
 //  ANT_COLONY_KEPT_HIDDEN:int = 468;
 //  PC_READY_FOR_ANT_COLONY_CHALLENGE:int = 469;
 //  PHYLLA_SAVED:int = 470;
@@ -847,9 +848,10 @@ function femalePhyllaFirstTimePlusCock():void {
 		}
 		else {
 			//PC has one/two dick(s) not exceeding 4 inches in width total: 
-			if(player.cockTotal() == 2 && player.cockArea(player.smallestCockIndex2()) + player.cockArea(player.smallestCockIndex()) <= phyllaCapacity())
+			if(player.cockTotal() == 2 && (player.cockArea(player.smallestCockIndex2()) + player.cockArea(player.smallestCockIndex()) <= phyllaCapacity()))
 				outputText("two of your " + multiCockDescriptLight() + ", stroking them apologetically as she scissors you.  You feel her almost insatiable appetite for all parts of your body.  You feel Phylla's, mind slowly becoming lost in pleasure.");
-			else if(player.cocks[player.smallestCockIndex()] < 4) outputText("your " + cockDescript(player.smallestCockIndex()) + ", stroking it apologetically as she scissors you.  You feel her almost insatiable appetite for all parts of your body.  You feel Phylla's, mind slowly becoming lost in pleasure.");
+			//TODO: "player.cocks[player.smallestCockIndex()] < 4" changed to cockLength. Not sure if it is the appropriate attribute.
+			else if(player.cocks[player.smallestCockIndex()].cockLength < 4) outputText("your " + cockDescript(player.smallestCockIndex()) + ", stroking it apologetically as she scissors you.  You feel her almost insatiable appetite for all parts of your body.  You feel Phylla's mind slowly becoming lost in pleasure.");
 			//PC only has a dick(s) that('s) (are) more than 4 inches in width: 
 			else outputText("your " + cockDescript(player.smallestCockIndex()) + ", but simply can't fit any number of her hands around the entirety of your glans; instead, she takes to caressing the head of your " + cockDescript(player.biggestCockIndex()) + ".");
 			//(Leads to - Scissoring Continuation)

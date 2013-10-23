@@ -579,7 +579,7 @@ function forceSophieBlowjob():void {
 	}
 	
 	outputText("\n\nAlmost regretfully, you ");
-	if(player.cocks[x].cockType != 2) outputText("slip your spasming boner out of her golden gates, dripping the last few drops onto her pouty lower-lip.");
+	if(player.cocks[x].cockType != CockTypesEnum.DOG) outputText("slip your spasming boner out of her golden gates, dripping the last few drops onto her pouty lower-lip.");
 	else outputText("pull against Sophie's cock-locked mouth, but your knot won't budge.  You sit there waiting for it to go down for what seems like forever, and her lipstick doesn't exactly help - it seems like your cum continues to flow and dribble the entire time, your animal-dong intent on inseminating the harpy's mouth.  Still, you manage to 'pop' free eventually, even though it stretches Sophie's jaw and echoes around your camp.");
 	outputText("\n\nThe harpy blushes up at you, gulping down the last thick deposit as she continues to masturbate her way to a second breathless orgasm, her tailfeathers quivering as it runs through her.  You tweak one of her tits for good measure before getting dressed and reminding her that she enjoyed it.   Sophie protests through her white-stained lips, \"<i>");
 	if(flags[SOPHIE_FOLLOWER_IRRITATION] == 1) outputText("Ahhh... not... not as much as... I would if you'd reciprocate!");

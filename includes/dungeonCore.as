@@ -1051,7 +1051,7 @@ function succubusVictoryRape():void {
 		if(player.cockArea(0) > monster.vaginalCapacity()) {
 			outputText("But the pleasure is short-lived, as even her altered physiology can't accommodate your massive tool. With a grunt of frustration you yank your hungry demonic cock away from your goal.  She smiles knowingly and massages her breasts, releasing streams of the same black fluid from her tumescent nipples. It coats the valley of her pornstar-sized breasts, allowing the fluid to flow down and pool in her tight little belly button.\n\n", false);
 			outputText("\"<i>This will, like, be even better anyways stud!</i>\" coos a higher pitched you, smashing her tits together wetly for emphasis.  Viscous strings of lubricants form a mesmerizing lattice between her mountainous tits as she puts on a show for you.  Entirely of its own accord, your " + cockDescript(0) + " drags you into her web of corruption, plopping itself firmly into the river of desire that fountains from the peaks on either side. With a steady rhythm, you rock your " + hipDescript() + " back and forwards, plunging into her delicious fuckpillows without abandon. With an inhuman strength, she pushes them together, forcing them to completely encircle your over-sized pole with a tight ring of corruption-dripping tit-flesh.\n\n", false);
-			player.cocks[0].cockType = 3;
+			player.cocks[0].cockType = CockTypesEnum.DEMON;
 			//[normal]
 			if(player.cumQ() < 50) outputText("Droplets of pre begin to escape your cock-slit every time your sensitive nodules pass between your fem-clone's wondrous pleasure-tits.  You fuck harder, no longer caring if it's your choice or your cock's, mashing your purplish head against her lips with every stroke.  The flash-fire of an orgasm sweeps over you, over-engorging the nodules all over your cock and doubling their size.  Your hips resort to tiny rocking motions as you rub your cock-slit into your fem-self's open mouth, blasting thick ropes of tainted black cum into her mouth. Though you quickly empty of cum and collapse onto her, your " + hipDescript() + " continue to fuck like a machine.  All you can do is hang on to your meat and try to stay conscious as your demonic prick feasts on your double.\n\n", false); 
 			//[high]
@@ -1076,7 +1076,7 @@ function succubusVictoryRape():void {
 			if(player.biggestTitSize() > 0) outputText("Your female double reaches down to pinch your nipple, spurring you on, \"<i>Please, could you like, cum for me?</i>\"", false);
 			//New PG
 			outputText("\n\n", false);
-			player.cocks[0].cockType = 3;
+			player.cocks[0].cockType = CockTypesEnum.DEMON;
 			outputText("The succubus bucks her hips weakly, still clearly defeated, but egging on your orgasm as dark fluids squelch free from her quim.  \"<i>Please... can't you see how hot you're making me?  I've made your cock perfect, so please make me cum!</i>\" she begs as she quivers with delight.  ", false);  
 			outputText("You pause to think about it, not noticing that your groin is pounding away with furious energy, splattering cum and pre over her thighs as your new cock's instincts take control from your waist down.  Gasping with sudden pleasure, you feel a flash of heat pass through your tainted meatstick as an orgasm builds.", false);
 			//New PG
@@ -1291,9 +1291,9 @@ function incubusVictoryRapeSex():void {
 		}
 		outputText(".  Having resolved to take the demon's backdoor, you approach his weakened form with brimming confidence.  He looks up, clearly hoping your plan is to squat on his throbbing member.  You dispel his misguided notion when you grab him by the horns and shove his face against the floor. He struggles weakly until you press down harder, making it clear he is to stay in position - on his knees with his head down and his ass in the air.  Circling your prey, you inspect his flawless body and carefully note that the hole at his crotch actually exposes a fair portion of his very supple and surprisingly feminine-looking backside.\n\n", false);
 		outputText("You don't waste any time, gripping your " + cockDescript(0) + " in one hand and ", false);
-		if(player.cocks[0].cockType == 1) outputText("pressing your thick flare ", false);
-		if(player.cocks[0].cockType == 2) outputText("pressing your pointed tip ", false);
-		if(player.cocks[0].cockType == 0 || player.cocks[0].cockType > 2) outputText("pressing your head ", false);
+		if(player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("pressing your thick flare ", false);
+		if(player.cocks[0].cockType == CockTypesEnum.DOG) outputText("pressing your pointed tip ", false);
+		if(player.cocks[0].cockType == CockTypesEnum.HUMAN || player.cocks[0].cockType.Index > 2) outputText("pressing your head ", false);
 		outputText("between the incubus' cheeks towards his inhumanly smooth rear-passage.  You gasp in delight at the tight ribbed texture of his asshole as you slide ", false);
 		if(player.cocks[0].cockLength > 10) outputText("deep inside ", false);
 		else outputText("inside ", false);
@@ -1537,7 +1537,7 @@ function demonBadEnd():void {
 			player.createCock();
 			player.cocks[0].cockLength = 10;
 			player.cocks[0].cockThickness = 2;
-			player.cocks[0].cockType = 3;
+			player.cocks[0].cockType = CockTypesEnum.DEMON;
 			player.balls = 2;
 			player.ballSize = 3;
 		}
