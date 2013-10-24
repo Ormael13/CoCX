@@ -589,8 +589,10 @@
 			outputText("  With its tapered tip, there are few holes you wouldn't be able to get into.  It has a strange, knot-like bulb at its base, but doesn't usually flare during arousal as a dog's knot would.");
 		}
 		//Worm flavor
-		if(player.hasStatusAffect("infested") >= 0) outputText("  Every now and again a slimy worm coated in spunk slips partway out of your " + cockDescript(0) + ", tasting the air like a snake's tongue.", false);		
-		if(player.cocks[temp].sock != "") sockDescript(temp);
+		if(player.hasStatusAffect("infested") >= 0) 
+			outputText("  Every now and again a slimy worm coated in spunk slips partway out of your " + cockDescript(0) + ", tasting the air like a snake's tongue.", false);		
+		if(player.cocks[temp].sock) 
+			sockDescript(temp);
 		//DONE WITH COCKS, moving on!
 		outputText("\n", false);
 	}
