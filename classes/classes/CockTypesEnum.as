@@ -19,6 +19,63 @@ package classes
 		   9 - dragon
 		   10 - displacer
 		 */
+		public static function legacySuportLoadCockType(cockType:*):CockTypesEnum
+		{
+			if (cockType is int)
+			{
+				switch (cockType)
+				{
+					case 0:
+						 return CockTypesEnum[HUMAN]
+						 break;
+					case 1:
+						 return CockTypesEnum[HORSE]
+						 break;
+					case 2:
+						 return CockTypesEnum[DOG]
+						 break;
+					case 3:
+						 return CockTypesEnum[DEMON]
+						 break;
+					case 4:
+						 return CockTypesEnum[TENTACLE]
+						 break;
+					case 5:
+						 return CockTypesEnum[CAT]
+						 break;
+					case 6:
+						 return CockTypesEnum[LIZARD]
+						 break;
+					case 7:
+						 return CockTypesEnum[ANEMONE]
+						 break;
+					case 8:
+						 return CockTypesEnum[KANGAROO]
+						 break;
+					case 9:
+						 return CockTypesEnum[DRAGON]
+						 break;
+					case 10:
+						 return CockTypesEnum[DISPLACER]
+						 break;
+					default:
+						 return CockTypesEnum[HUMAN]
+						 break;
+				}
+
+			}
+			else if (cockType is String)
+			{
+				return CockTypesEnum[cockType];
+			}
+
+			else
+			{
+				throw new Error("Invalid cock type!" + cockType); 
+				return CockTypesEnum[HUMAN];
+			}
+		}
+
 		public static const HUMAN:CockTypesEnum = new CockTypesEnum();
 		public static const HORSE:CockTypesEnum = new CockTypesEnum();
 		public static const DOG:CockTypesEnum = new CockTypesEnum();
