@@ -17,7 +17,7 @@ package classes
 		private var _dict:Dictionary;
 
 		// Set to true to print any access to defaultDict members
-		private var debugPrintDict:Boolean = true;		
+		private var debugPrintDict:Boolean = false;		
 
 		public function DefaultDict()		// Constructor
 		{
