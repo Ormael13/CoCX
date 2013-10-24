@@ -24,9 +24,12 @@ function newGameGo(e:MouseEvent):void {
 	var easy:Boolean = false;
 	var sprite:Boolean = false;
 	//If at initial title
-	if(flags[SHOW_SPRITES_FLAG] > 0) sprite = true;
-	if(flags[EASY_MODE_ENABLE_FLAG] > 0) easy = true;
-	if(flags[SILLY_MODE_ENABLE_FLAG] > 0) silly = true;
+	if(flags[SHOW_SPRITES_FLAG]) 
+		sprite = true;
+	if(flags[EASY_MODE_ENABLE_FLAG]) 
+		easy = true;
+	if(flags[SILLY_MODE_ENABLE_FLAG]) 
+		silly = true;
 	b1Text.text = "Newgame";
 	flags[CUSTOM_PC_ENABLED] = 0;
 	

@@ -639,9 +639,12 @@ function loadGameObject(saveData:Object, slot:String = "VOID"):void
 	var sprite:Boolean = false;
 	//If at initial title
 	if(player.str == 0) {
-		if(flags[SHOW_SPRITES_FLAG] > 0) sprite = true;
-		if(flags[EASY_MODE_ENABLE_FLAG] > 0) easy = true;
-		if(flags[SILLY_MODE_ENABLE_FLAG] > 0) silly = true;
+		if(flags[SHOW_SPRITES_FLAG]) 
+			sprite = true;
+		if(flags[EASY_MODE_ENABLE_FLAG])
+			easy = true;
+		if(flags[SILLY_MODE_ENABLE_FLAG]) 
+			silly = true;
 	}
 	
 	//Autosave stuff
@@ -693,13 +696,13 @@ function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		}	
 		//If at initial title
 		if(sprite) 
-			flags[SHOW_SPRITES_FLAG] = 1;
+			flags[SHOW_SPRITES_FLAG] = true;
 		if(easy) 
-			flags[EASY_MODE_ENABLE_FLAG] = 1;
+			flags[EASY_MODE_ENABLE_FLAG] = true;
 		else 
-			flags[EASY_MODE_ENABLE_FLAG] = 0;
+			flags[EASY_MODE_ENABLE_FLAG] = false;
 		if(silly) 
-			flags[SILLY_MODE_ENABLE_FLAG] = 1;
+			flags[SILLY_MODE_ENABLE_FLAG] = true;
 		
 		//PIERCINGS
 		
