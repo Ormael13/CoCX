@@ -4829,7 +4829,7 @@ function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):void {
 }
 
 function spriteSelect(choice:Number = 0):void {
-	if(choice < 0 || flags[SHOW_SPRITES_FLAG] == 1) sprite.visible = false;
+	if(choice < 0 || flags[SHOW_SPRITES_FLAG]) sprite.visible = false;
 	else {
 		sprite.visible = true;
 		sprite.gotoAndStop(choice);

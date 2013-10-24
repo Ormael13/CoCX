@@ -61,7 +61,7 @@ package classes
 		}
 
 		// Overrides any attempt to set a class member or indice (defaultDict[name] = x or defaultDict.name = x)
-		// If x == 0, does nothing. Else, it sets _dict[name] = x
+		// If x == 0, it removes {name} from _dict if it's present, otherwise does nothing. Else, it sets _dict[name] = x
 		override flash_proxy function setProperty(name:*, value:*):void 
 		{
 			if (value != 0)
@@ -70,7 +70,13 @@ package classes
 				_dict[name] = value;
 			}
 			else
-				if (debugPrintDict) trace("setProperty" + name + " to " + value + " Ignoring");
+				if (name in _dict)
+				{
+					if (debugPrintDict) trace("setProperty" + name + " to " + value + " Deleting key");
+					delete _dict[name];
+				}
+				else
+					if (debugPrintDict) trace("setProperty" + name + " to " + value + " Ignoring");
 		}
 	
 		// callProperly is called when functions are called on instances of defaultDict, 
