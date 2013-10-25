@@ -169,8 +169,8 @@ const UNKNOWN_FLAG_NUMBER_00167:int                                   =  167; //
 const AMILY_CORRUPT_FLIPOUT:int                                       =  168; // Amily flip out about corruption yet?
 const UNKNOWN_FLAG_NUMBER_00169:int                                   =  169; // Times cooked Amily's Drug
 const UNKNOWN_FLAG_NUMBER_00170:int                                   =  170; // Amily's Corruption Value
-const UNKNOWN_FLAG_NUMBER_00171:int                                   =  171; // Amily's Balls: 1 = yes, higher numbers = bigger balls.
-const UNKNOWN_FLAG_NUMBER_00172:int                                   =  172; // Amily's Wetness
+const AMILY_HAS_BALLS_AND_SIZE:int                                    =  171; // Amily's Balls: 1 = yes, higher numbers = bigger balls.
+const AMILY_VAGINAL_WETNESS:int                                       =  172; // Amily's Wetness
 const UNKNOWN_FLAG_NUMBER_00173:int                                   =  173; // In camp amily warns you!  DUN DUN DUN! - Amily Freaked out about your corruption.	0=Not freaked out, 1=Freaked out
 const UNKNOWN_FLAG_NUMBER_00174:int                                   =  174; // Times Dominika Sucked off horsecocks
 const UNKNOWN_FLAG_NUMBER_00175:int                                   =  175; // Dominidrama - 1 = yes, 2 = no
