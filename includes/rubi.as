@@ -2560,7 +2560,7 @@ function giveRubiATFItem(short:String):void {
 			flags[RUBI_BREAST_SIZE]++;
 		}		
 		//(If Penis size decreases)
-		if(flags[RUBI_COCK_SIZE] > 4) {
+		if((flags[RUBI_COCK_SIZE] > 4) && (!flags[HYPER_HAPPY])) {
 			outputText("\n\nRubi's " + rubiCock() + " swells up suddenly, growing painfully hard.  " + rubiMF("He","She") + " grasps it and moans suddenly as it begins to dwindle in size, shrinking down by at least an inch, leaving " + rubiMF("him","her") + " with a ");
 			flags[RUBI_COCK_SIZE]--;
 			outputText(Math.round(flags[RUBI_COCK_SIZE]*10)/10 + "-inch penis.");
@@ -2618,7 +2618,7 @@ function giveRubiATFItem(short:String):void {
 		else outputText("You hand over the bottle of purified milky white fluids to Rubi.  " + rubiMF("He","She") + " takes a moment to read over the pink label before pulling out the cork and downing the whole bottle in one gulp.");
 		
 		//(If Bust size decreases)
-		if(flags[RUBI_BREAST_SIZE] > 0) {
+		if((flags[RUBI_BREAST_SIZE] > 0) && (!flags[HYPER_HAPPY])){
 			outputText("\n\nRubi gasps a little and " + rubiMF("his","her") + " hands immediately dart to " + rubiMF("his","her") + " chest.  Before your eyes, Rubi's breasts begin to dwindle, shrinking down an entire cup size.  Rubi cups " + rubiMF("his","her") + " breasts experimentally, getting used to their new, reduced, weight.");
 			flags[RUBI_BREAST_SIZE]--;
 			if(flags[RUBI_BREAST_SIZE] < 0) flags[RUBI_BREAST_SIZE] = 0;
@@ -2771,7 +2771,7 @@ function giveRubiATFItem(short:String):void {
 		
 		outputText("\n\nWith Rubi finally covered from the neck down in the oils, you stand back and smile, waiting for the transformations to kick in.");
 		//(If Bust size decreases)
-		if(flags[RUBI_BREAST_SIZE] > 1) {
+		if((flags[RUBI_BREAST_SIZE] > 1) && (!flags[HYPER_HAPPY])) {
 			outputText("\n\nRubi gasps a little and " + rubiMF("his","her") + " hands immediately dart to " + rubiMF("his","her") + " chest.  Before your eyes, Rubi's breasts begin to dwindle, shrinking down an entire cup size.  Rubi cups " + rubiMF("his","her") + " breasts experimentally, getting used to their new, reduced, weight.");
 			flags[RUBI_BREAST_SIZE]--;
 			if(flags[RUBI_BREAST_SIZE] < 1) flags[RUBI_BREAST_SIZE] = 1;
@@ -2783,7 +2783,7 @@ function giveRubiATFItem(short:String):void {
 			if(flags[RUBI_BREAST_SIZE] > 1) flags[RUBI_BREAST_SIZE] = 1;
 		}
 		//(If Penis size decreases)
-		else if(flags[RUBI_COCK_SIZE] > 3) {
+		else if((flags[RUBI_COCK_SIZE] > 3) && (!flags[HYPER_HAPPY])) {
 			outputText("\n\nRubi's " + rubiCock() + " swells up suddenly, growing painfully hard.  " + rubiMF("He","She") + " grasps it and moans suddenly as it begins to dwindle in size, shrinking down by at least an inch, leaving " + rubiMF("him","her") + " with a ");
 			flags[RUBI_COCK_SIZE]--;
 			if(flags[RUBI_COCK_SIZE] < 3) flags[RUBI_COCK_SIZE] = 3;

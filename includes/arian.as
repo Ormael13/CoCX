@@ -2659,7 +2659,7 @@ function giveIncubusDraftToArian():void {
 		}
 	}
 	//(else if ArianBreasts > 1) //Boob shrinkage.
-	if(flags[ARIAN_BREASTS] > 1) {
+	if(flags[ARIAN_BREASTS] > 1 && (!flags[HYPER_HAPPY])) {
 		flags[ARIAN_BREASTS]--;
 		outputText("\n\nArian shudders as she feels the changes sweep through her, but rather than settling on her huge lizan shaft, the warmth that precedes change settles on her breasts.  Arian moans and kneads her mounds as they shrink to a smaller size.");
 		outputText("\n\n\"<i>Well, at least my chest won't feel so heavy anymore.  I hope you're not disappointed?</i>\" Arian asks, panting.");
@@ -2671,7 +2671,7 @@ function giveIncubusDraftToArian():void {
 		arianSexMenu(false);
 		return;
 	}
-	else if(flags[ARIAN_BREASTS] == 1) { //Now you are male again.
+	else if(flags[ARIAN_BREASTS] == 1 && (!flags[HYPER_HAPPY])) { //Now you are male again.
 		outputText("\n\nArian shudders as she feels the changes sweep through her, but rather than settling on her huge lizan shaft, the warmth that precedes change settles on her breasts.  Arian moans and kneads her mounds as they shrink until they are completely gone.  Her nipples follow suit, being replaced by smooth scales.");
 		
 		outputText("\n\nArian moan as another change happen below; she spreads her legs and watch in wonder as the lips her wet fuckhole join together, becoming smooth scales as well.  A few more subtle changes occur as Arian's body shift towards the masculine and finally settles down.  Arian breaths a sigh of relief.");
@@ -2771,7 +2771,7 @@ function succubiMilkForArian():void {
 		}
 	}
 	//(else If ArianCockSize > 1) //Dick shrinkage.
-	else if(flags[ARIAN_COCK_SIZE] > 1) {
+	else if(flags[ARIAN_COCK_SIZE] > 1 && (!flags[HYPER_HAPPY])){
 		outputText("\n\nWarmth flows throughout Arian's body, and she moans in obvious pleasure.  Then, she opens her robes and look at her rock-hard bulbous shaft.  It throbs as if edging a massive orgasm, but much to Arian's surprise it starts to shrink, until it finally grows limp and hides itself in its protective slit.  \"<i>I... didn't expect that,</i>\" Arian remarks.");
 		
 		outputText("\n\nYou note it's not that surprising; the potion in question is a feminizer, so it must be shrinking away the only trace of her masculinity left - her cock");
@@ -2781,7 +2781,7 @@ function succubiMilkForArian():void {
 		
 		outputText("\n\nYou ask, then, if Arian's so comfortable with her girly side, maybe she'd like to try out her more female parts?  Arian blushes and averts her eyes, nodding lightly.");
 	}
-	else if(flags[ARIAN_COCK_SIZE] == 1 && flags[ARIAN_DOUBLE_COCK] >= 1) {
+	else if(flags[ARIAN_COCK_SIZE] == 1 && flags[ARIAN_DOUBLE_COCK] >= 1 && (!flags[HYPER_HAPPY])) {
 		outputText("\n\nWarmth flows throughout Arian's body, and she moans in obvious pleasure.  Then she opens her robes and look at her pair of rock-hard bulbous shafts.  They throb as if edging a massive orgasm, but much to Arian's surprise they begin to merge, until only one reptilian dick remains; finally it grows limp and recedes into it's hiding place.  \"<i>They fused into one,</i>\" Arian remarks.");
 		
 		outputText("\n\nMaybe it's because of the increasingly high femininity the milk is bestowing on her, you suggest?");
@@ -2794,7 +2794,7 @@ function succubiMilkForArian():void {
 		outputText("\n\nArian blushes.  \"<i>I... show me...</i>\"");
 		flags[ARIAN_DOUBLE_COCK] = 0;
 	}
-	else if(flags[ARIAN_COCK_SIZE] == 1) {
+	else if(flags[ARIAN_COCK_SIZE] == 1 && (!flags[HYPER_HAPPY])) {
 		flags[ARIAN_COCK_SIZE] = 0;
 		outputText("\n\nWarmth flows throughout Arian's body, and she moans in obvious pleasure.  Then, she opens her robes and look at her rock-hard bulbous shaft.  It throbs and slowly recedes back into its hiding place.  An indignant rope of cum shoots into the air, splashing on her belly as the slit containing the last of her malehood finally closes up, leaving only smooth scales in its wake.  Arian pants, \"<i>Looks like I'm completely female now.</i>\"");
 		
