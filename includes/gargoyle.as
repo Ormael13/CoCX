@@ -83,7 +83,7 @@ function breakZeChains():void {
 	
 	outputText("\n\nThe gargoyle has stepped down from her pedestal, and now kneels as a supplicant before a king, forehead near the ground and weight rested upon her stone knuckles even as her massive wingspan unfolds behind her and her mace-like tail swishes rapidly behind her.  Slowly, the gargoyle raises her head to gaze upon you, her now ruby-red eyes staring into yours. Her smooth, nippleless breasts heave, once-stone hair falling forward in stands, fringing her smooth, angular face.  Her thin, gray lips slowly curl into a small, sultry smile as she says, just on the edge of hearing...");
 	
-	outputText("\n\n\"<i>Master. My. . . Master.</i>\"");
+	outputText("\n\n\"<i>Master. My... Master.</i>\"");
 	
 	outputText("\n\nYou glance over your shoulder, but there's no one else here.  She must be referring to you!");
 	
@@ -515,7 +515,7 @@ function bodyRitual():void {
 	
 	outputText("\n\n\"<i>With pain comes purity,</i>\" " + flags[GAR_NAME] + " says, so quietly you can barely hear her.  \"<i>Prepare yourself, Master,</i>\" she adds, and your heart nearly skips a beat when you hear the crack of a whip behind you.  Oh, shit, this is going to hu-CRACK!  You see stars as white-hot pain arcs through your body, making you scream into the wall.  You can feel the burning streak left across your back by the bullwhip, throbbing mercilessly in the moments before CRACK!  She hits you again, throwing you forward against your bonds with the force of the blow.");
 	
-	outputText("\n\nOver your ragged, pained breathing, you can just hear " + flags[GAR_NAME] + " chanting: \"<i>With pain comes purity....CRACK!  With agony comes enlightenment....CRACK!  Through torment comes holiness...CRACK!</i>\"  The last crack of the whip leaves you groaning, breathless, sagging in your bonds. Somehow, though, you do feel... cleaner?  Like a weight was just lifted from your heart.  And you know you're going to be thicker-skinned after that!  Quietly, reservedly, " + flags[GAR_NAME] + " releases you from your bonds, and you stagger into her waiting arms.  She helps you over to the altar and lays you down, letting you rest after your ordeal.  She stands over you, watching you pant and gasp.  You suppose you could get some vengeance for her brutality – or you could be kind.  What do you do?");
+	outputText("\n\nOver your ragged, pained breathing, you can just hear " + flags[GAR_NAME] + " chanting: \"<i>With pain comes purity.... CRACK!  With agony comes enlightenment.... CRACK!  Through torment comes holiness... CRACK!</i>\"  The last crack of the whip leaves you groaning, breathless, sagging in your bonds. Somehow, though, you do feel... cleaner?  Like a weight was just lifted from your heart.  And you know you're going to be thicker-skinned after that!  Quietly, reservedly, " + flags[GAR_NAME] + " releases you from your bonds, and you stagger into her waiting arms.  She helps you over to the altar and lays you down, letting you rest after your ordeal.  She stands over you, watching you pant and gasp.  You suppose you could get some vengeance for her brutality – or you could be kind.  What do you do?");
 	stats(0,0,0,0,-.5,-2,0,0);
 	takeDamage(Math.round(maxHP()/2));
 	//(Display options: [Nothing] [Revenge] and [Cuddle])
@@ -586,11 +586,11 @@ function banishmentGargoyleRitual():void {
 	
 	outputText("\n\n\"<i>Do not worry, Master,</i>\" " + flags[GAR_NAME] + " says");
 	if(gargoyleConfidence() >= 50) outputText(" soothingly, using her free hand to stroke your thighs");
-	outputText(".  \"<i>The pain is necessary.  Everything will be alright.</i>\"");
+	outputText(".  \"<i>The pain is necessary.  Everything will be all right.</i>\"");
 	
 	outputText("\n\nStill, you can't help but hiss in agony as the holy burn spreads through you, seeping into your vulnerable gentials and sensitive chest.");
 	//with Exgartuan:
-	if(player.hasStatusAffect("Exgartuan") >= 0) outputText("  Booming from within you, you hear the demon's voice: \"<i>Hey!  What the shit is this!?  What're you doing? Fucking stop you ingrate!</i>\"");
+	if(player.hasStatusAffect("Exgartuan") >= 0) outputText("  Booming from within you, you hear the demon's voice: \"<i>Hey!  What the shit is this!?  What're you doing? Fucking stop, you ingrate!</i>\"");
 	//with Worms: 
 	else outputText("  Gratifyingly, however, you can feel the infestation within you squirming and writhing, desperately seeking escape.");
 	
@@ -733,14 +733,15 @@ function banishPervRitual():void {
 	else outputText("them");
 	outputText(".  She gives you an understanding nod and tells you to strip.  As you do so, she dips beneath the altar, reappearing with what a silver, blue-rune covered rod nestled into what looks like a leather thong.  " + flags[GAR_NAME] + " slips the thong on, letting a slight gasp escape her lips as the inner end of the rod enters her.");
 	
-	outputText("\n\nShe gives the shaft of the strap-on a few experimental strokes and, satisfied, says, \"<i>I've turned down the power of the runes, so it will not hurt you so much.  Though it will take longer than normal.  I suggest you lubricate it, Master.</i>\"  Smiling, she sits herself atop the alter and presents her silver “cock” to you.  You kneel and slip your face between her spread legs, giving the rod a quick lick.  Its incredibly smooth and quite cold, much like its wearer, but your tongue comes away with a warm tingle spreading through it – not pain, but more like numbness.  You take the rod into your mouth, running your tongue across its length and thrusting your face against it, blowing it like a cock while getting it sopping wet with your saliva.  You've only been at it for a minute when you notice " + flags[GAR_NAME] + " is bucking her hips slightly and moaning quietly, obviously getting more than a little enjoyment from the sensation.  Perhaps she can feel through it, like a real dick?  Grinning, you redouble your efforts to suck her off.");
+	outputText("\n\nShe gives the shaft of the strap-on a few experimental strokes and, satisfied, says, \"<i>I\'ve turned down the power of the runes, so it will not hurt you so much... though it will take longer than normal.  I suggest you lubricate it, Master.</i>\"  Smiling, she sits herself atop the alter and presents her silver “cock” to you.  You kneel and slip your face between her spread legs, giving the rod a quick lick.  It\'s incredibly smooth and quite cold, much like its wearer, but your tongue comes away with a warm tingle spreading through it – not pain, but more like numbness.  You take the rod into your mouth, running your tongue across its length and thrusting your face against it, blowing it like a cock while getting it sopping wet with your saliva.  You\'ve only been at it for a minute when you notice " + flags[GAR_NAME] + " is bucking her hips slightly and moaning quietly, obviously getting more than a little enjoyment from the sensation.  Perhaps she can feel through it, like a real dick?  Grinning, you redouble your efforts to suck her off.");
 	
 	outputText("\n\n\"<i>Enough, Master,</i>\" she gasps, pushing you back.  Breathing heavily, she takes you by the hand and gets you to brace yourself against the altar.  Your entire mouth is numb, now, tingling from the strange sensation given off by the holy rod-cock.  " + flags[GAR_NAME] + " slips behind you, putting a cool, soft hand on your [hips] as she lines up for penetration.  You grip down hard on the edge of the altar, and try your best to relax your sphincter as you begin to feel a tingling pressure against your back door.");
-	if(player.ass.analWetness > 0) outputText("  She slips in easy, sliding her tingling holy rod into your until her hips are pressed against your [butt]");
+	if(player.ass.analWetness > 0) 
+		outputText("  She slips in easily, sliding her tingling holy rod into you until her hips are pressed against your [butt]");
 	else outputText("  She slowly but surely coaxes the holy rod into your asshole, making long and slow thrusts into you until she finally bottoms out");
 	outputText(".");
 
-	outputText("\n\nWith her rod firmly inside you, " + flags[GAR_NAME] + " put her hands on your [hips] for leverage and begins to pull out again, leaving a hot, intense tingling sensation in your rectum.  She thrusts in, this time much more quickly than you were expecting, making you gasp and moan as her hips slam into yours.");
+	outputText("\n\nWith her rod firmly inside you, " + flags[GAR_NAME] + " puts her hands on your [hips] for leverage and begins to pull out again, leaving a hot, intense tingling sensation in your rectum.  She thrusts in, this time much more quickly than you were expecting, making you gasp and moan as her hips slam into yours.");
 	//If PC has Worms: 
 	if(player.hasStatusAffect("Exgartuan") < 0) outputText("  You can feel her cock ram against your prostate, and shudder as the writhing mass of worms begin to panic as her cock pushes against them, obviously causing the creatures great pain.");
 	outputText("  " + flags[GAR_NAME] + " begins to fuck you in earnest, hammering your [asshole] with the strap-on until you're both panting and gasping, nearly overwhelmed by sensation.");
@@ -749,7 +750,7 @@ function banishPervRitual():void {
 	
 	//(If PC has a cock:
 	if(player.hasCock()) {
-		outputText("\n\n" + flags[GAR_NAME] + " suddenly releases your hips and, pressing her soft breasts into your sweat-slicked back, grabs your [cock biggest] in her cold hand.  You let out a little gasp as she begins to jerk you off, rapidly pistoning your cock as she continues to pound your ass.  Between the dual stimulation, you feel a pressure begin to swell up inside your abused prostate, a tell-tale sign of orgasm.  She gives you a last few thrusts before you cum, splattering the altar with thick ropes of cum as you both yell in ecstasy.");
+		outputText("\n\n" + flags[GAR_NAME] + " suddenly releases your hips and, pressing her soft breasts into your sweat-slicked back, grabs your [cock biggest] in her cold hand.  You let out a little gasp as she begins to jerk you off, rapidly pistoning your cock as she continues to pound your ass.  Between the dual stimulation, you feel a pressure begin to swell up inside your abused prostate, a tell-tale sign of orgasm.  She gives you a few last thrusts before you cum, splattering the altar with thick ropes of cum as you both yell in ecstasy.");
 	}
 	else {
 		outputText("\n\n" + flags[GAR_NAME] + " reaches the peak of her speed, utterly reaming you as ");
@@ -759,8 +760,10 @@ function banishPervRitual():void {
 	}
 	
 	outputText("\n\nSuddenly, the holy rod jammed up your [asshole] makes a loud hissing sound, and withdraws. Panting, you collapse to the ground, gripping your gut.  It's over, and though a part of you feels suddenly very empty, it's soon forgotten as " + flags[GAR_NAME] + " slips down beside you, having already tossed the holy rod out the window.  The creature");
-	if(player.hasStatusAffect("Exgartuan") >= 0) outputText(" within you has");
-	else outputText(" within you have");
+	if(player.hasStatusAffect("Exgartuan") >= 0) 
+		outputText(" within you has");
+	else 
+		outputText(" within you have");
 	outputText(" been absorbed and purged by the rod; and you can't help but hope she has more... just in case.");
 	
 	outputText("\n\nStill panting and gasping from your ordeal, you slip an arm around " + flags[GAR_NAME] + "'s shoulders, bringing her into a tight embrace.  Smiling cutely, she nuzzles her cheek against your chest, and winds her large bat-wings around the two of you, wrapping you together.  You give her a long, tender kiss on the brow, and let her remain like that for a good long while, basking in each others' presence.");
@@ -831,7 +834,7 @@ function berateGargoyleForBeingDumb():void {
 	clearOutput();
 	//(Confidence -5)
 	gargoyleConfidence(-5);
-	outputText("\n\nYou give " + flags[GAR_NAME] + " a none-to-gentle swat on the head, and tell her off for presuming to refuse you information.  The harshness of your voice only causes her to sob openly, however, and recoil away from you before you can hit her.  You sigh with frustration, and storm out of the cathedral before you have to listen to a moment more of your servant's cries.");
+	outputText("\n\nYou attempt to give " + flags[GAR_NAME] + " a none-too-gentle swat on the head, and tell her off for presuming to refuse you information.  The harshness of your voice only causes her to sob openly, however, and recoil away from you before you can hit her.  You sigh with frustration, and storm out of the cathedral before you have to listen to a moment more of your servant\'s cries.");
 	//(Return PC to camp, advance time 1 hour.)
 	doNext(13);
 }
@@ -844,7 +847,7 @@ function comfortGargoyleDumbness():void {
 	outputText("You sigh and reach over to " + flags[GAR_NAME] + "; ");
 	//if Confidence <50:
 	if(gargoyleConfidence() < 50) outputText("she recoils, but ");
-	outputText("you cup her cheek, and turn her to face you.  If she could produce tears, you're sure they'd be streaming down her cheeks.  You give her your most reassuring smile and lean in to give her a quick kiss on the brow.  She gasps, but before you know it has leapt into your lap and has buried her face into your chest, holding onto you as if for dear life.  You put your arms around her and hold her close while she cries, spending the next few minutes either whispering reassurances to her or stroking her back and hair.  Eventually, she calms down.  Ever so shyly, " + flags[GAR_NAME] + " returns the kiss you'd given her.  \"<i>I'm sorry, Master,</i>\" she whispers, curling up beside you.  \"<i>I should have been strong enough to protect my people.  I know that.  That it's my fault they've all been dragged off to some unholy carnal pit.  I just...</i>\"  You stop her before she can go on and tell her that no, it wasn't her fault.  She couldn't have done anything to stop it.  She tries to give you a brave smile and says, \"<i>I know. Can we... talk about something else, Master?</i>\"");
+	outputText("you cup her cheek, and turn her to face you.  If she could produce tears, you're sure they'd be streaming down her cheeks.  You give her your most reassuring smile and lean in to give her a quick kiss on the brow.  She gasps, but before you know it, she has leapt into your lap and has buried her face into your chest, holding onto you as if for dear life.  You put your arms around her and hold her close while she cries, spending the next few minutes either whispering reassurances to her or stroking her back and hair.  Eventually, she calms down.  Ever so shyly, " + flags[GAR_NAME] + " returns the kiss you'd given her.  \"<i>I'm sorry, Master,</i>\" she whispers, curling up beside you.  \"<i>I should have been strong enough to protect my people.  I know that.  That it's my fault they've all been dragged off to some unholy carnal pit.  I just...</i>\"  You stop her before she can go on and tell her that no, it wasn't her fault.  She couldn't have done anything to stop it.  She tries to give you a brave smile and says, \"<i>I know. Can we... talk about something else, Master?</i>\"");
 	//(Return PC to the Talk menu)
 	talkToGargoyle(false);
 }

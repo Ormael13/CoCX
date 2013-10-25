@@ -97,8 +97,19 @@ function rubiCock():String {
 	return NPCCockDescript(flags[RUBI_COCK_TYPE], flags[RUBI_COCK_SIZE], 50);
 }
 function rubiBreasts():String {
-	if(flags[RUBI_BREAST_SIZE] < 1) return "chest";
-	else return npcBreastDescript(flags[RUBI_BREAST_SIZE]);
+	var ret:String = "pair of ";
+
+
+	if(flags[RUBI_BREAST_SIZE] < 1)
+		ret = "chest";
+	else
+	{
+		ret += breastCup(flags[RUBI_BREAST_SIZE]);
+		ret += " ";
+		ret += npcBreastDescript(flags[RUBI_BREAST_SIZE]);
+	}
+
+	return ret;
 }
 function rubiChest():String {
 	return rubiBreasts();
@@ -106,6 +117,8 @@ function rubiChest():String {
 function rubiCapacity():Number {
 	var bonus:int = flags[RUBI_TIMES_ANALLY_TRAINED]*10;
 	if(bonus > 76) bonus = 76;
+	if (flags[HYPER_HAPPY])
+		bonus += 200;		// MAKE IT FIT
 	return 24 + bonus;
 }
 function rubiMF(man:String,woman:String):String {
@@ -196,8 +209,8 @@ function rubiIntros():Number {
 	outputText("\n");
 	return 3894;
 }
-
-//Approach Rubi scenes
+// Approach
+// Rubi scenes1
 function approachRubiScenes():void {
 	clearOutput();
 	//(First time)
@@ -739,7 +752,7 @@ function fuckRubi():void {
 	}
 	else {
 		if(player.clitLength <= 4) size = 0;
-		else if(player.clitLength <= 12) size = 1;
+		else if(player.clitLength <= 12 || flags[HYPER_HAPPY]) size = 1;
 		else size = 2;
 	}
 	if(size == 0) {
@@ -1336,6 +1349,7 @@ function goInRubisClosetSoThatYouCanComeOutOfTheCloset():void {
 //Appearance
 function rubiAppearance():void {
 	clearOutput();
+	trace("WUT");
 	outputText("You look over your naked, demon-morph lover.");
 	outputText("\n\nRubi is about five feet tall, with a very lithe, feminine body.  " + rubiMF("His","Her") + " skin is ");
 	
@@ -2314,10 +2328,10 @@ function getFuckedByRubi():void {
 	outputText("\n\nRubi wraps " + rubiMF("his","her") + " lips around your [vagOrAss] and flicks " + rubiMF("his","her") + " tongue along the sensitive flesh.  You shiver and sprawl out on the bed, taking it all in.  Rubi lavishes your tight hole with " + rubiMF("his","her") + " lips and tongue, lapping and slurping messily, all in preparation for what is to come, no doubt.  But " + rubiMF("he","she") + " doesn't get ahead of " + rubiMF("him","her") + "self, and takes " + rubiMF("his","her") + " time to make sure you're good and ready.  " + rubiMF("His","Her") + " perfectly manicured fingers trace patterns only " + rubiMF("he","she") + " can decipher on your inner thigh, movements so delicate and precise that your body quivers of its own accord.  " + rubiMF("His","Her") + " other hand slips up your stomach, inching along and teasing your flesh with the same arcane movements of " + rubiMF("his","her") + " fingers.");
 	
 	outputText("\n\nWith your crotch freshly lubricated, Rubi stands and quickly disrobes, adding to the pile of clothing on the floor.  " + rubiMF("His","Her") + " feminine hands run down " + rubiMF("his","her") + " body and grasp at the " + rubiCock() + " sprouting from " + rubiMF("his","her") + " groin, stroking it to its full length.  Its ");
-	if(flags[RUBI_COCK_TYPE] == 0) outputText("pink, mushroom-like tip");
-	else if(flags[RUBI_COCK_TYPE] == 3) outputText("purple, nodule-laden tip");
-	else if(flags[RUBI_COCK_TYPE] == 1) outputText("blunted, musky tip");
-	else if(flags[RUBI_COCK_TYPE] == 1) outputText("tentacle-ringed crown");
+	if(flags[RUBI_COCK_TYPE] == CockTypesEnum.legacySuportLoadCockType("HUMAN")) outputText("pink, mushroom-like tip");
+	else if(flags[RUBI_COCK_TYPE] == CockTypesEnum.legacySuportLoadCockType("DEMON")) outputText("purple, nodule-laden tip");
+	else if(flags[RUBI_COCK_TYPE] == CockTypesEnum.legacySuportLoadCockType("HORSE")) outputText("blunted, musky tip");
+	else if(flags[RUBI_COCK_TYPE] == CockTypesEnum.legacySuportLoadCockType("TENTACLE")) outputText("tentacle-ringed crown");
 	outputText(" emerges from the foreskin surrounding it as " + rubiMF("his","her") + " cock strains, aching for something, anything to fill.");
 
 	outputText("\n\nWith a look into your eyes, confirming " + rubiMF("his","her") + " desires, " + rubiMF("he","she") + " gives " + rubiMF("his","her") + " cock what it wants.  One swift motion is all it takes as Rubi sinks " + rubiMF("his","her") + " dick inside you several inches.  The feeling of penetration makes you moan suddenly, louder than you wanted to.  Rubi smiles, pulls out a few inches, and pushes back inside, just a little deeper.  This time it's your demonic lover's turn to moan as you clamp your [vagOrAss] around " + rubiMF("his","her") + " invading member, tightening around " + rubiMF("him","her") + " like a vice.");
@@ -2555,7 +2569,7 @@ function giveRubiATFItem(short:String):void {
 			outputText("You hand over the bottle of purified milky white fluids to Rubi.  " + rubiMF("He","She") + " takes a moment to read over the pink label before pulling out the cork and downing the whole bottle in one gulp.");
 		}
 		//(If Bust size increases)
-		if(flags[RUBI_BREAST_SIZE] < 7) {
+		if(flags[RUBI_BREAST_SIZE] < 7 || (flags[RUBI_BREAST_SIZE] < 30 && flags[HYPER_HAPPY])) {
 			outputText("\n\nRubi gasps a little and " + rubiMF("his","her") + " hands immediately dart to " + rubiMF("his","her") + " chest.  Before your eyes, Rubi's breasts begin to swell, growing an entire cup size.  Rubi cups " + rubiMF("his","her") + " breasts experimentally, getting used to their new weight.");
 			flags[RUBI_BREAST_SIZE]++;
 		}		
@@ -2624,7 +2638,9 @@ function giveRubiATFItem(short:String):void {
 			if(flags[RUBI_BREAST_SIZE] < 0) flags[RUBI_BREAST_SIZE] = 0;
 		}
 		//(If Penis size increases)
-		if(flags[RUBI_COCK_SIZE] > 0 && (flags[RUBI_COCK_SIZE] < 12 || (flags[RUBI_COCK_TYPE] == 1 && flags[RUBI_COCK_SIZE] < 20))) {
+		if(flags[RUBI_COCK_SIZE] > 0 && ((flags[RUBI_COCK_SIZE] < 12 || (flags[RUBI_COCK_TYPE] == CockTypesEnum["human"] && flags[RUBI_COCK_SIZE] < 20)) ||
+										(flags[RUBI_COCK_SIZE] < 30 && flags[HYPER_HAPPY]) ) )
+		{
 			outputText("\n\nRubi's " + rubiCock() + " swells up suddenly, growing painfully hard.  " + rubiMF("He","She") + " grasps it and moans suddenly as it begins to pulse, growing larger with every throb, increasing in size by at least an inch, leaving " + rubiMF("him","her") + " with a ");
 			flags[RUBI_COCK_SIZE]++;
 			outputText(Math.round(flags[RUBI_COCK_SIZE]*10)/10 + "-inch penis.");
@@ -2734,9 +2750,9 @@ function giveRubiATFItem(short:String):void {
 			flags[RUBI_COCK_SIZE] = 5;
 		}
 		//(If Rubi gets Horsecock)
-		if(flags[RUBI_COCK_TYPE] != 1) {
+		if(flags[RUBI_COCK_TYPE] != CockTypesEnum["human"]) {
 			outputText("\n\nFor a few moments nothing happens.  Then Rubi suddenly doubles over, clutching " + rubiMF("his","her") + " stomach in pain.  With one hand clamped firmly around " + rubiMF("his","her") + " midsection, " + rubiMF("his","her") + " other hand reaches down to grasp at " + rubiMF("his","her") + " " + rubiCock() + ".  The flesh on " + rubiMF("his","her") + " cock ripples, veins suddenly bulging.  A low moan wrestles its way out of Rubi's throat as " + rubiMF("his","her") + " cock morphs, the pink head flattening all of a sudden and flaring outwards.");
-			flags[RUBI_COCK_TYPE] = 1;
+			flags[RUBI_COCK_TYPE] = CockTypesEnum["human"];
 			outputText("\n\nRubi's dick thickens in " + rubiMF("his","her") + " hand, gaining at least an inch of width as it continues to change.  A thick, fleshy ring bulges out near the base of the cock... the beginnings of a sheathe, no doubt.  As you watch on in awe, the flesh at the base of Rubi's cock begins to darken, slowly become a dusky grey-black, which also overtakes " + rubiMF("his","her") + " ");
 			if(flags[RUBI_BLU_BALLS] >= 4 && flags[RUBI_BLU_BALLS] < 9) outputText("swollen ");
 			else if(flags[RUBI_BLU_BALLS] >= 9) outputText("engorged ");
@@ -2827,9 +2843,9 @@ function giveRubiATFItem(short:String):void {
 			flags[RUBI_LOWERBODY] = 1;
 		}
 		//(Gaining Cat Penis)
-		else if(flags[RUBI_COCK_TYPE] != 5) {
+		else if(flags[RUBI_COCK_TYPE] != CockTypesEnum["cat"]) {
 			outputText("\n\nFor a few moments nothing happens.  Then Rubi suddenly doubles over, clutching " + rubiMF("his","her") + " stomach in pain.  With one hand clamped firmly around " + rubiMF("his","her") + " midsection, " + rubiMF("his","her") + " other hand reaches down to grasp at " + rubiMF("his","her") + " " + rubiCock() + ".  The flesh on " + rubiMF("his","her") + " cock ripples, veins suddenly bulging.  A low moan wrestles its way out of Rubi's throat as " + rubiMF("his","her") + " cock morphs, its tip lengthening out while a number of barb-like protrusions sprout from the head.  Before your eyes the barbs quiver and then go flush against " + rubiMF("his","her") + " cock.  They don't seem sharp, more like they're ready to stimulate a potential mate.");
-			flags[RUBI_COCK_TYPE] = 5;
+			flags[RUBI_COCK_TYPE] = CockTypesEnum["cat"];
 		}
 		//(Gaining Fur)
 		else if(flags[RUBI_SKIN] != 2) {
@@ -2859,7 +2875,7 @@ function giveRubiATFItem(short:String):void {
 		outputText(" underneath.  The demon-marked " + rubiMF("boy","girl") + " rubs " + rubiMF("his","her") + " stomach appreciatively.  \"<i>Those were some great peaches, babe.</i>\"");
 		
 		//(Any changes? Yes)
-		if(flags[RUBI_EAR_TYPE] != 2 || flags[RUBI_SKIN] != 3 || (flags[RUBI_COCK_SIZE] > 0 && flags[RUBI_COCK_TYPE] != 7)) {
+		if(flags[RUBI_EAR_TYPE] != 2 || flags[RUBI_SKIN] != 3 || (flags[RUBI_COCK_SIZE] > 0 && flags[RUBI_COCK_TYPE] != CockTypesEnum.legacySuportLoadCockType(7))) {
 			outputText("\n\nRubi's eyes suddenly dart open and " + rubiMF("he","she") + " clutches " + rubiMF("his","her") + " stomach.  \"<i>Oh gods…  My belly feels so warm all of a sudden.</i>\"");
 			//(Feathery ears)
 			if(flags[RUBI_EAR_TYPE] != 2) {
@@ -2883,16 +2899,16 @@ function giveRubiATFItem(short:String):void {
 				flags[RUBI_SKIN] = 3;
 			}
 			//(Anemone Penis, must have a penis)
-			else if(flags[RUBI_COCK_SIZE] > 0 && flags[RUBI_COCK_TYPE] != 7) {
+			else if(flags[RUBI_COCK_SIZE] > 0 && flags[RUBI_COCK_TYPE] != CockTypesEnum.legacySuportLoadCockType(7)) {
 				outputText("\n\n" + rubiMF("His","Her") + " hands don't dally there long before darting down to " + rubiMF("his","her") + " crotch, groping at the " + rubiCock() + " betwixt " + rubiMF("his","her") + " legs.  The flesh seems to  ripple, with veins suddenly bulging.  A low, husky groan wrestles its way out of Rubi's throat as " + rubiMF("his","her") + " cock morphs");
-				if(flags[RUBI_COCK_TYPE] != 0) outputText(", first shifting towards a more human-like appearance");
+				if(flags[RUBI_COCK_TYPE] != CockTypesEnum.legacySuportLoadCockType(0)) outputText(", first shifting towards a more human-like appearance");
 				outputText(".  Small nodules appear, around the crown of the penis, and around its base.  Rubi's delicate hands run across two of the nodules, and " + rubiMF("his","her") + " cock suddenly stiffens, harder than you've ever seen it!  Whatever those things are, they're quite sensitive.");
 				
 				outputText("\n\nThe little nubs quickly grow outwards, lengthening into tiny, anemone-like tentacles.  When the changes finally stop, Rubi gazes down with no small amount of trepidation, as the four tentacles around the head of " + rubiMF("his","her") + " penis and the four at its base wriggle and writhe of their own accord.");
 				
 				outputText("\n\n\"<i>Oh... Oh my.</i>\"  It's all " + rubiMF("he","she") + " can say as " + rubiMF("he","she") + " wraps a hand around this newly modified appendage.  The tentacles likewise attempt to wrap themselves around Rubi's hand, clearly having a mind of their own.  You're fairly certain this will take a little while to adapt to.");
 			}
-			flags[RUBI_COCK_TYPE] = 7;
+			flags[RUBI_COCK_TYPE] = CockTypesEnum.legacySuportLoadCockType(7);
 		}
 		//(No)
 		else {
@@ -2933,10 +2949,10 @@ function rubiPenisGroPlus():void {
 	outputText("You hand over the vial of greenish liquid.  Rubi takes a moment to look it over before, before taking a deep breath and injecting the entire thing into the base of " + rubiMF("his","her") + " " + rubiCock() + ".");
 	
 	//(If Penis increase)
-	if(flags[RUBI_COCK_SIZE] < 12 || (flags[RUBI_COCK_TYPE] == 1 && flags[RUBI_COCK_SIZE] < 20)) {
+	if(flags[RUBI_COCK_SIZE] < 12 || (flags[RUBI_COCK_TYPE] == CockTypesEnum.legacySuportLoadCockType(1) && flags[RUBI_COCK_SIZE] < 20)) {
 		outputText("\n\nRubi grips " + rubiMF("his","her") + " cock as it suddenly hardens, visibly throbbing in " + rubiMF("his","her") + " grasp.  It surges, growing larger, gaining about two inches right before your eyes.");
 		flags[RUBI_COCK_SIZE] += 2 + rand(2);
-		if(flags[RUBI_COCK_TYPE] != 1) {
+		if(flags[RUBI_COCK_TYPE] != CockTypesEnum.legacySuportLoadCockType(1)) {
 			if(flags[RUBI_COCK_SIZE] > 12) flags[RUBI_COCK_SIZE] = 12;
 		}
 		else {
@@ -2945,7 +2961,7 @@ function rubiPenisGroPlus():void {
 	}
 	else {
 		outputText("\n\nSadly, apart from making " + rubiMF("his","her") + " cock hard, it doesn't seem to have much of an effect on Rubi's ");
-		if(flags[RUBI_COCK_TYPE] == 1) outputText("sheath-stuffing horse-dick");
+		if(flags[RUBI_COCK_TYPE] == CockTypesEnum.legacySuportLoadCockType(1)) outputText("sheath-stuffing horse-dick");
 		else outputText("foot-long dick.");
 	}
 	consumeItem("GroPlus",1);

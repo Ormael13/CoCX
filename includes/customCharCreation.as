@@ -796,7 +796,7 @@ function customPCSetup():void {
 	}
 	if(player.short == "Rann Rayla") {
 		//Specific Character	Virgin female.	Max femininity. Thin with a little muscle. Size C breasts. Long red hair. Light colored skin. 5'5" tall. 	Rann Rayla
-		outputText("You're a young, fiery redhead who's utterly feminine.  You've got C-cup breasts and long red hair.  Being a champion can't be that bad, right?");
+		outputText("You're a young, fiery redhead who\'s utterly feminine.  You've got C-cup breasts and long red hair.  Being a champion can\'t be that bad, right?");
 		player.createVagina();
 		player.clitLength = 0.25;
 		player.createBreastRow();

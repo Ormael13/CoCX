@@ -1063,7 +1063,18 @@ function brookeSpecialMediumSceneContinued():void {
 		
 		outputText("\n\n<i>\"Fuck yes, [name],\"</i> she chants every once in a while.  <i>\"Fuck me, you dirty herm bitch.  Show me what you got.  Cum in me, [name], fucking give me all you got.\"</i>  You say nothing in response, and simply keep doing what you're doing.");
 		//[if (hasBalls = true)
-		if(player.balls > 0) outputText("  Your [sack] swings with every pump, slapping onto the firm skin of Brooke's vulva every time you bottom out.  You feel no pain, and in fact the smoothness of her fur around her genitals tickles the cum out of your [balls] all the faster.");
+		if(player.balls > 0)
+		{
+			if (player.hasStatusAffect("Uniball") < 0) 
+			{
+				outputText("  Your [sack] swings with every pump, slapping onto the firm skin of Brooke\'s vulva every time you bottom out.  You feel no pain, and in fact the smoothness of her fur around her genitals tickles the cum out of your [balls] all the faster.");
+			}
+			else 
+			{
+				outputText("  Your [sack] is to tight and smooth to swing, but it still slaps against the firm skin of Brooke\'s vulva every time you bottom out.  The smoothness of her fur around her genitals tickles the cum out of your [balls] all the faster.");
+			}
+		}
+
 		if(player.cockTotal() == 1) outputText("  You drill into that canine pussy, giving Brooke everything you have.  Your body burns and your cum churns the longer you go.  Her voice ascends from pitiful puppy whining to the jubilant cries of a woman well fucked, and the rise of her yells bring with them the rise of your cum.");
 		if(player.cockTotal() == 2) outputText("  Your second penis swings, cold and alone, between your body and Brooke's as you continue to saw into her with your " + cockDescript(x) + ".  The tip points up to the cleft of her swinging, pounding breasts, ready to erupt and coat the underside of her tits with your offering.  She knows of it, and she does what she can to pleasure it, but even her well-defined six-pack can only do so much.");
 		if(player.cockTotal() >= 3) outputText("  Unfortunately, as much as both you and Brooke want to pleasure as much of you as possible, she can only do so much.  [EachCock] thrust into nothing between you, each of them stiff and pointed right up at her face – if they can't cum inside her, then they'll jealously paint her white on the outside.");

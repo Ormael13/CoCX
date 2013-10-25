@@ -76,6 +76,63 @@ package classes
 			}
 		}
 
+		public static function legacySuportGetCockType(cockType:*):Number
+		{
+			if (cockType is CockTypesEnum)
+			{
+				switch (cockType)
+				{
+					case CockTypesEnum[HUMAN]:
+						 return 0
+						 break;
+					case CockTypesEnum[HORSE]:
+						 return 1
+						 break;
+					case CockTypesEnum[DOG]:
+						 return 2
+						 break;
+					case CockTypesEnum[DEMON]:
+						 return 3
+						 break;
+					case CockTypesEnum[TENTACLE]:
+						 return 4
+						 break;
+					case CockTypesEnum[CAT]:
+						 return 5
+						 break;
+					case CockTypesEnum[LIZARD]:
+						 return 6
+						 break;
+					case CockTypesEnum[ANEMONE]:
+						 return 7
+						 break;
+					case CockTypesEnum[KANGAROO]:
+						 return 8
+						 break;
+					case CockTypesEnum[DRAGON]:
+						 return 9
+						 break;
+					case CockTypesEnum[DISPLACER]:
+						 return 10
+						 break;
+					default:
+						 return 0
+						 break;
+				}
+
+			}
+			else if (cockType is String)
+			{
+				return legacySuportGetCockType(CockTypesEnum[cockType]);
+			}
+
+			else
+			{
+				throw new Error("Invalid cock type!" + cockType); 
+				return 0;
+			}
+		}
+
 		public static const HUMAN:CockTypesEnum = new CockTypesEnum();
 		public static const HORSE:CockTypesEnum = new CockTypesEnum();
 		public static const DOG:CockTypesEnum = new CockTypesEnum();
