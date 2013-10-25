@@ -338,7 +338,7 @@ function creditsScreen():void {
 	outputText("* Noogai, Reaper, and Numbers (Nipple-Fucking Victory vs Imp Rape)\n", false);
 	outputText("* Verse and IAMurow (Bee-Girl MultiCock Rapes)\n", false);
 	outputText("* Sombrero (Additional Imp Lust Loss Scene (Dick insertion ahoy!)\n", false);
-	outputText("* The Dark Master (Marble, Fetish Cultist, Fetish Zealot, Hellhound, Lumi, Some Cat Transformations, LaBova, Ceraph's Cat-Slaves, a Cum Witch Scene, Forced Nursing:Imps&Goblins)\n", false);
+	outputText("* The Dark Master (Marble, Fetish Cultist, Fetish Zealot, Hellhound, Lumi, Some Cat Transformations, LaBova, Ceraph's Cat-Slaves, a Cum Witch Scene, Mouse Dreams, Forced Nursing:Imps&Goblins)\n", false);
 	outputText("* Mr. Fleshcage (Cat Transformation/Masturbation)\n", false);
 	outputText("* Spy (Cat Masturbation, Forced Nursing: Minotaur, Bee, & Cultist)\n", false);
 	outputText("* PostNuclearMan (Some Cat TF)\n", false);

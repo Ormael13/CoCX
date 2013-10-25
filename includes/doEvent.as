@@ -9509,6 +9509,8 @@ This license supercedes all previous licenses and remains in force.
 		ingredientsMenu();
 		return;
 	}
+
+	
 	outputText("<B>OH SHIT, SOMETHING WENT WRONG</B>\n", false);
 	outputText("Please report the following to Fake-Name on the forums:\n", false);
 	outputText("Failing Event-number: " + String(eventNo), false);

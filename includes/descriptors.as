@@ -3288,22 +3288,43 @@ function breastCup(size:Number):String {
 }
 
 
-function NPCCockDescript(cockType:Number, cockLength:Number = 0, lust:Number = 50):String {
-	if(cockType > 0) return NPCCockAdjective(cockType,cockLength,lust) + ", " + NPCCockNoun(cockType);
-	return NPCCockAdjective(cockType,cockLength,lust) + " " + NPCCockNoun(cockType);
+function NPCCockDescript(cockType:*, cockLength:Number = 0, lust:Number = 50):String 
+{
+	if (cockType is int)
+		cockType = CockTypesEnum.legacySuportLoadCockType(cockType);
+
+	var descript:String = "";
+	
+	if(cockType != CockTypesEnum["HUMAN"])
+	{
+		descript += NPCCockAdjective(cockType,cockLength,lust);
+		descript += ", ";
+		descript += NPCCockNoun(cockType);
+	}
+	else
+	{
+		descript += NPCCockAdjective(cockType,cockLength,lust);
+		descript += " ";
+		descript += NPCCockNoun(cockType);
+	}
+	return descript;
 }
+	
 //Modular NPC dicks!
-function NPCCockNoun(type:Number):String {
+function NPCCockNoun(type:*):String {
+	var cockTypeNum:int;
+
+	cockTypeNum = CockTypesEnum.legacySuportGetCockType(type);
 	var descript:String = "";
 	var rando:Number = 0;
-	if(type == 0) {
+	if(cockTypeNum == 0) {
 		rando = rand(10) + 1;
 		if(rando >= 0 && rando <=4) descript += "cock";
 		if(rando ==5 || rando == 6) descript += "prick";
 		if(rando == 7) descript += "pecker";
 		if(rando > 7) descript += "shaft";
 	}
-	if(type == 2) {
+	if(cockTypeNum == 2) {
 		rando=int(Math.random()*11);
 		if(rando == 0) descript+="dog-shaped dong";
 		if(rando == 1) descript+="canine shaft";
@@ -3317,7 +3338,7 @@ function NPCCockNoun(type:Number):String {
 		if(rando == 9) descript+="canine cock";
 		if(rando == 10) descript+="knotted dog-cock";
 	}
-	if(type == 1) {
+	if(cockTypeNum == 1) {
 		rando = rand(6);
 		if(rando == 0) descript+="flared horse-cock";
 		if(rando == 1) descript+="equine prick";
@@ -3328,7 +3349,7 @@ function NPCCockNoun(type:Number):String {
 		if(rando == 6) descript+="beast cock";
 		if(rando == 7) descript+="flared stallion-cock";
 	}
-	if(type == 3) {
+	if(cockTypeNum == 3) {
 		rando=int(Math.random()*11);
 		if(rando == 0) descript+="nub-covered demon-dick";
 		if(rando == 1) descript+="nubby shaft";
@@ -3342,7 +3363,7 @@ function NPCCockNoun(type:Number):String {
 		if(rando == 9) descript+="unholy cock";
 		if(rando == 10) descript+="blighted cock";
 	}
-	if(type == 4) {
+	if(cockTypeNum == 4) {
 		rando=int(Math.random()*11);
 		if(rando == 0) descript+="twisting tentacle-prick";
 		if(rando == 1) descript+="wriggling plant-shaft";
@@ -3356,7 +3377,7 @@ function NPCCockNoun(type:Number):String {
 		if(rando == 9) descript+="slithering vine-prick";
 		if(rando == 10) descript+="vine-shaped cock";
 	}
-	if(type == 5) {
+	if(cockTypeNum == 5) {
 		rando=int(Math.random()*11);
 		if(rando == 0) descript+="feline dick";
 		if(rando == 1) descript+="spined cat-cock";
@@ -3370,7 +3391,7 @@ function NPCCockNoun(type:Number):String {
 		if(rando == 9) descript+="barbed dick";
 		if(rando == 10) descript+="nubby kitten-prick";
 	}
-	if(type == 6) {
+	if(cockTypeNum == 6) {
 		rando=int(Math.random()*11);
 		if(rando == 0) descript+="reptilian dick";
 		if(rando == 1) descript+="purple cock";
@@ -3384,7 +3405,7 @@ function NPCCockNoun(type:Number):String {
 		if(rando == 9) descript+="bulbous snake-shaft";
 		if(rando == 10) descript+="bulging snake-dick";
 	}
-	if(type == 7) {
+	if(cockTypeNum == 7) {
 		rando = rand(11);
 		if(rando == 0) descript+="anemone dick";
 		if(rando == 1) descript+="tentacle-ringed cock";
@@ -3398,7 +3419,7 @@ function NPCCockNoun(type:Number):String {
 		if(rando == 9) descript+="near-transparent shaft";
 		if(rando == 10) descript+="squirming shaft";
 	}
-	if(type == 8) {
+	if(cockTypeNum == 8) {
 		rando = rand(11);
 		if(rando == 0) descript+="kangaroo-like dick";
 		if(rando == 1) descript+="pointed cock";
@@ -3412,7 +3433,7 @@ function NPCCockNoun(type:Number):String {
 		if(rando == 9) descript+="curved kangaroo-cock";
 		if(rando == 10) descript+="squirming shaft";
 	}
-	if(type == 9) {
+	if(cockTypeNum == 9) {
 		rando = rand(11);
 		if(rando == 0) descript+="dragon-like dick";
 		if(rando == 1) descript+="segmented shaft";
@@ -3430,7 +3451,8 @@ function NPCCockNoun(type:Number):String {
 }
 
 //Multipurpose NPC cock descs
-function NPCCockAdjective(cockType:CockTypesEnum, cockLength:Number = 5, lust:Number = 50) {	
+function NPCCockAdjective(cockType:CockTypesEnum, cockLength:Number = 5, lust:Number = 50):String 
+{	
 	var descript:String = "";
 	var rando:Number = 0;
 	var multi:Boolean = false;
