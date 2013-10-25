@@ -11,6 +11,12 @@
 //- Player does not have a cock or balls, for now
 
 function RaphaelLikes():Boolean {
+	if (flags[LOW_STANDARDS_FOR_ALL])		
+	{
+		if (player.gender == 2 || player.gender == 3)	// you at least need a vagoo for raphael to fuck you. Otherwise the sex scenes will be rather broken.
+			return true;
+	}
+	
 	//({If player has no legs, or a centaur body.}
 	if(!player.isBiped()) 
 		return false;
