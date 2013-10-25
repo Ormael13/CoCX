@@ -47,8 +47,12 @@
 
 		public var mainView :MainView;
 
+		// TODO: We need a model class, and to replace this * with it.
+		public var model :*;
+
 		public function CoC()
 		{
+			this.model = {}; // TODO: Also replace this initialization with a Real-Boy-Instantiation.
 			this.mainView = new MainView({});
 			this.addFrameScript( 0, this.run );
 		}
@@ -59,7 +63,7 @@
 			// These are relative to the current directory, which is /classes/classes.
 			include "../../includes/GlobalVariables.as";
 			include "../../includes/OnLoadVariables.as";
-			include "../../includes/InitialiseUI.as";
+			// include "../../includes/InitialiseUI.as";
 			include "../../includes/startUp.as";
 			include "../../includes/engineCore.as";
 			include "../../includes/input.as";

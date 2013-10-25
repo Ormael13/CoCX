@@ -2,75 +2,17 @@
 //Keyboard listener!
 stage.addEventListener(KeyboardEvent.KEY_DOWN, keyboard);
 
-function hideThisButton(e:MouseEvent):void{
-	e.target.visible=false;
-}
+// unused.
+// function hideThisButton(e:MouseEvent):void{
+// 	e.target.visible=false;
+// }
 // Create a new instance of the Font1 symbol from the document's library.
 
+// mouseOverText.type = TextFieldType.DYNAMIC;
 
-/* Create a new TextFormat object, and set the font property to the myFont
-   object's fontName property. 
-var myFormat:TextFormat = new TextFormat();
-myFormat.font = new buttonFont().fontName
-myFormat.bold = true;
-if(mobile) myFormat.size = 22;
-else myFormat.size = 18;
-
-	Create a new TextField object, assign the text format using the 
-   defaultTextFormat property, and set the embedFonts property to true.
-newGameText.defaultTextFormat = myFormat;
-newGameText.embedFonts = true;
-newGameText.text = "New Game";
-b1Text.defaultTextFormat = myFormat;
-b1Text.embedFonts = true;
-b1Text.text = "New Game";
-//b2Text.defaultTextFormat = myFormat;
-b2Text.embedFonts = true;
-b2Text.text = "New Game";
-b3Text.defaultTextFormat = myFormat;
-b3Text.embedFonts = true;
-b3Text.text = "New Game";
-b4Text.defaultTextFormat = myFormat;
-b4Text.embedFonts = true;
-b4Text.text = "New Game";
-b5Text.defaultTextFormat = myFormat;
-b5Text.embedFonts = true;
-b5Text.text = "New Game";
-b6Text.defaultTextFormat = myFormat;
-b6Text.embedFonts = true;
-b6Text.text = "New Game";
-b7Text.defaultTextFormat = myFormat;
-b7Text.embedFonts = true;
-b7Text.text = "New Game";
-b8Text.defaultTextFormat = myFormat;
-b8Text.embedFonts = true;
-b8Text.text = "New Game";
-b9Text.defaultTextFormat = myFormat;
-b9Text.embedFonts = true;
-b9Text.text = "New Game";
-b0Text.defaultTextFormat = myFormat;
-b0Text.embedFonts = true;
-b0Text.text = "New Game";
-dataText.defaultTextFormat = myFormat;
-dataText.embedFonts = true;
-dataText.text = "Data";
-levelText2.defaultTextFormat = myFormat;
-levelText2.embedFonts = true;
-levelText2.text = "Level Up";
-perksText.defaultTextFormat = myFormat;
-perksText.embedFonts = true;
-perksText.text = "Perks";
-appearanceText.defaultTextFormat = myFormat;
-appearanceText.embedFonts = true;
-appearanceText.text = "Appearance";
-statsText.defaultTextFormat = myFormat;
-statsText.embedFonts = true;
-statsText.text = "More Stats";
-mouseOverText.defaultTextFormat = myFormat;
-mouseOverText.embedFonts = true;*/
-mouseOverText.type = TextFieldType.DYNAMIC;
-textBGWhite.visible = false;
-textBGTan.visible = false;
+// These are toggled between by the [home] key.
+mainView.textBGWhite.visible = false;
+mainView.textBGTan.visible = false;
 
 //Not exactly sure what the purpose of this is. I'm pretty sure there is no Serializing going on anywhere.
 registerClassAlias("creature", creature);
@@ -80,12 +22,12 @@ registerClassAlias("Cock", Cock);
 
 
 
-//Invert shit
+//Invert shit - Not referenced outside of this line or the func def.  Probably can be discarded.
 invertGo();
 //Hide sprites
-sprite.visible = false;
+mainView.sprite.visible = false;
 //Hide second text window
-imageText.visible = false;
+mainView.imageText.visible = false;
 //Hide stats
 hideStats();
 //Hide level up button and associate level up stuff

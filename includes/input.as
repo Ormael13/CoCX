@@ -465,11 +465,11 @@ function keyboard(e:KeyboardEvent):void {
 	}
 	//Home key cycles background presets!
 	if(e.keyCode == 36) {
-		if(!textBGWhite.visible) textBGWhite.visible = true;
-		else if(!textBGTan.visible) textBGTan.visible = true;
+		if(!mainView.textBGWhite.visible) mainView.textBGWhite.visible = true;
+		else if(!mainView.textBGTan.visible) mainView.textBGTan.visible = true;
 		else {
-			textBGTan.visible = false;
-			textBGWhite.visible = false;
+			mainView.textBGTan.visible = false;
+			mainView.textBGWhite.visible = false;
 		}
 	}		
 	//If 1 key pressed!

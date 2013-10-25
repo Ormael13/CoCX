@@ -44,15 +44,21 @@ package coc.view {
 		protected var options :Object;
 		protected var allButtons :Array;
 
-		public function MainView() :void {
-			// this.options = options;
+		protected var model :*; // TODO: Need an actual class type.
+
+		public function MainView( model :*, options :Object = null ) :void {
+			// Note: Currently we can't touch this on construction
+			// due to the code being a mess.  We'll fix that at some point.
+			// maybe even get like update events or some shit like real MV*s or something.
+			this.model = model;
+			this.options = options;
 
 			super();
 
-			this.toolTipView = new ToolTipView( this );
+			this.toolTipView = new ToolTipView( this, this.model );
 			this.addChild( this.toolTipview )
 
-			this.statsView = new StatsView( this );
+			this.statsView = new StatsView( this, this.model );
 			this.addChild( this.statsView );
 
 			this.bottomButtonSettings = [];
@@ -239,6 +245,32 @@ package coc.view {
 
 
 		//////// Public methods ////////
+
+		public function showMenuButtons() {
+			dataBG.visible = true;
+			dataText.visible = true;
+			appearanceText.visible = true;
+			appearanceBG.visible = true;
+			levelText2.visible = true;
+			levelBG.visible = true;
+			perksBG.visible = true;
+			perksText.visible = true;
+			statsText.visible = true;
+			statsBG.visible = true;
+		};
+
+		public function hideMenuButtons() {
+			dataBG.visible = false;
+			dataText.visible = false;
+			appearanceText.visible = false;
+			appearanceBG.visible = false;
+			levelText2.visible = false;
+			levelBG.visible = false;
+			perksBG.visible = false;
+			perksText.visible = false;
+			statsText.visible = false;
+			statsBG.visible = false;
+		};
 
 		// tool tip gets passed in?  MainView will have nothing to do with storing those.
 		// Ideally, the tool tips would be part of perks/items' definitions.
