@@ -149,7 +149,7 @@ function edrynBarTalk():void {
 		//Non horsedick
 		else {
 			outputText("but the potent musky scent only reminds you of how different things are here.", false);
-			if(player.cor > 50 || player.statusAffectv1("Edryn") > 0) {
+			if(player.cor > 50 || player.statusAffectv1("Edryn") > 0 || flags[LOW_STANDARDS_FOR_ALL]) {
 				outputText("  Unbidden, your mind wonders what her juicy horse-snatch would feel like, and your " + cockDescript(0) + " responds immediately, thickening with readiness.  You squirm uncomfortably from how constricting your " + player.armorName + " feels.\n\n", false);
 				outputText("You give the rapidly dissipating scent a sniff and note that it isn't unpleasant, just strong, and once again you find yourself imagining standing ", false);
 				if(player.tallness < 60) outputText("on a stool ", false);
