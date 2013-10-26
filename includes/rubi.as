@@ -2843,7 +2843,7 @@ function giveRubiATFItem(short:String):void {
 			flags[RUBI_LOWERBODY] = 1;
 		}
 		//(Gaining Cat Penis)
-		else if(flags[RUBI_COCK_TYPE] != CockTypesEnum["cat"]) {
+		else if(flags[RUBI_COCK_TYPE] != CockTypesEnum["cat"] && flags[RUBI_COCK_SIZE] > 0) {
 			outputText("\n\nFor a few moments nothing happens.  Then Rubi suddenly doubles over, clutching " + rubiMF("his","her") + " stomach in pain.  With one hand clamped firmly around " + rubiMF("his","her") + " midsection, " + rubiMF("his","her") + " other hand reaches down to grasp at " + rubiMF("his","her") + " " + rubiCock() + ".  The flesh on " + rubiMF("his","her") + " cock ripples, veins suddenly bulging.  A low moan wrestles its way out of Rubi's throat as " + rubiMF("his","her") + " cock morphs, its tip lengthening out while a number of barb-like protrusions sprout from the head.  Before your eyes the barbs quiver and then go flush against " + rubiMF("his","her") + " cock.  They don't seem sharp, more like they're ready to stimulate a potential mate.");
 			flags[RUBI_COCK_TYPE] = CockTypesEnum["cat"];
 		}
