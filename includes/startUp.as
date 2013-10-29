@@ -77,11 +77,11 @@ function mainMenu(e:MouseEvent = undefined):void {
 	outputText("<b>Corruption of Champions (" + version + ")</b>\n(Formerly Unnamed Text Game)\n\nCreated by: Fenoxo\nEdited By: Ashi, SoS, Zeikfried, and Others\n\n<b><u>DISCLAIMER</u>\n\n-There are many strange and odd fetishes contained in this flash.  Peruse at own risk.\n-Please be 18 or the legal age to view porn before playing.\n-Try to keep your keyboard clean.  Think of the children!</b>\n\nFor more information see Fenoxo's Blog at <b>fenoxo.com</b>.\n\nAlso go play Nimin by Xadera on furaffinity.", true);
 	if(debug) 
 		outputText("\n\n<b>DEBUG MODE ENABLED:  ITEMS WILL NOT BE CONSUMED BY USE.</b>", false);
-	if(flags[SHOW_SPRITES_FLAG] == 1) 
+	if(flags[SHOW_SPRITES_FLAG]) 
 		outputText("\n\n<b>Sprites disabled.</b>", false);
-	if(flags[EASY_MODE_ENABLE_FLAG] == 1) 
+	if(flags[EASY_MODE_ENABLE_FLAG]) 
 		outputText("\n\n<b>Easy Mode On:  Bad-ends can be ignored.</b>", false);
-	if(flags[SILLY_MODE_ENABLE_FLAG] == 1) 
+	if(flags[SILLY_MODE_ENABLE_FLAG]) 
 		outputText("\n\n<b>SILLY MODE ENGAGED: Crazy, nonsensical, and possibly hilarious things may occur.</b>", false);
 	if(isEaster()) 
 		outputText("\n\n<b>It's Easter!  Enjoy the eggs!</b>");
@@ -91,28 +91,151 @@ function mainMenu(e:MouseEvent = undefined):void {
 		outputText("\n\n<b>It's Helia's Birthday Month!</b>");
 
 	if(player.str > 0)  //we're in a game, allow resume.
-		choices("Null",  0, "Credits", 63, "Instructions", 81, "four", 0, "five", 0, "Null", 0, "seven", 0, "Silly Toggle", 0, "Settings", 112, "Resume", 1);
+		choices("Null",  0, "Credits", creditsScreen, "Instructions", howToPlay, "", 0, "", 0, "", 0, "", 0, "", 0, "Settings", settingsScreen, "Resume", 1);
 		
 	else 
-		choices("Null",  0, "Credits", creditsScreen, "Instructions", howToPlay, "Null", 0, "Null", 0, "Null", 0, "Null", 0, "Null", 0, "Settings", settingsScreen, "Null",0);
+		choices("Null",  0, "Credits", creditsScreen, "Instructions", howToPlay, "", 0, "", 0, "", 0, "", 0, "", 0, "Settings", settingsScreen, "Null",0);
 	//else choices("EZ Mode",  96, "Credits", 63, "Instructions", 81, "four", 0, "five", 0, "Toggle Debug", 18, "seven", 0, "Silly Toggle", 113, "Sprite Toggle", 112, "",0);
 }
 
 
 function settingsScreen():void {
 	outputText("<b>Settings toggles:</b>\n", true);
-	if(debug) 
-		outputText("\n\n<b>DEBUG MODE ENABLED:  ITEMS WILL NOT BE CONSUMED BY USE.</b>", false);
-	if(flags[SHOW_SPRITES_FLAG] == 1) 
-		outputText("\n\n<b>Sprites disabled.</b>", false);
-	if(flags[EASY_MODE_ENABLE_FLAG] == 1) 
-		outputText("\n\n<b>Easy Mode On:  Bad-ends can be ignored.</b>", false);
-	if(flags[SILLY_MODE_ENABLE_FLAG] == 1) 
-		outputText("\n\n<b>SILLY MODE ENGAGED: Crazy, nonsensical, and possibly hilarious things may occur.</b>", false);
 
-	choices("Toggle Debug", 18, "EZ Mode", 96, "Silly Toggle", 113, "Sprite Toggle", 112, "five", 0, "Null", 0, "Null", 0, "Null", 0, "Null", 0, "Back", 64);
+	if(debug) 
+		outputText("Debug mode enabled: <b>Yes</b>\n	Items will not be consumed by use.", false);
+	else
+		outputText("Debug mode enabled: <b>No</b>\n	Items consumption will occur as normal.", false);
+
+	outputText("\n\n", false);
+
+	if(flags[SHOW_SPRITES_FLAG]) 
+		outputText("Sprites enabled: <b>Yes</b>.\n	You like to look at pretty pictures.", false);
+	else
+		outputText("Sprites enabled: <b>No</b>.\n	There are only words. Nothing else.", false);
+
+	outputText("\n\n", false);
+
+	if(flags[EASY_MODE_ENABLE_FLAG]) 
+		outputText("Easy Mode <b>On</b>\n	Bad-ends can be ignored.", false);
+	else
+		outputText("Easy Mode <b>Off</b>\n	You die, you're dead.", false);
+		
+	outputText("\n\n", false);
+
+	if(flags[SILLY_MODE_ENABLE_FLAG]) 
+		outputText("Silly Mode <b>On</b>\n	Crazy, nonsensical, and possibly hilarious things may occur.", false);
+	else
+		outputText("Silly Mode <b>Off</b>\n	You're an incorrigable stick-in-the-mud with no sense of humor.", false);
+
+	outputText("\n\n", false);
+	outputText("<b>The following flags are not fully implemeneted yet.</b>", false);
+	outputText("\n\n", false);
+
+	if(flags[LOW_STANDARDS_FOR_ALL]) 
+	{
+		outputText("Low standards Mode <b>On</b>\n	NPCs ignore body type preferences.", false);
+		outputText("\n	(Not gender preferences though. You still need the right hole.)", false);
+	}
+	else
+		outputText("Low standards Mode <b>Off</b>\n	NPCs have body-type preferences.", false);
+
+
+	outputText("\n\n", false);
+
+	if(flags[HYPER_HAPPY]) 
+	{
+		outputText("Hyper Happy mode <b>On</b>\n	Only reducto and humus shrink endowments.", false);
+		outputText("\n	Incubus draft doesn't affect breasts, and succubi milk doesn't affect cocks.")
+	}
+	else
+		outputText("Hyper Happy mode <b>Off</b>\n	Male enhancement potions shrink female endowments, and vice versa.", false);
+
+
+
+
+	choices("Toggle Debug", toggleDebug, 
+			"Sprite Toggle", toggleSpritesFlag, 
+			"EZ Mode", toggleEasyModeFlag, 
+			"Silly Toggle", toggleSillyFlag, 
+			"Null", 0, 
+			"Hyper Happy", toggleHyperHappy, 
+			"Low Standards", toggleStandards, 
+			"Null", 0, 
+			"Null", 0, 
+			"Back", 64);
 }
 
+
+function toggleStandards():void
+{
+	//toggle debug
+	if(flags[LOW_STANDARDS_FOR_ALL]) 
+		flags[LOW_STANDARDS_FOR_ALL] = false;
+	else 
+		flags[LOW_STANDARDS_FOR_ALL] = true;
+	settingsScreen();
+	return;
+}
+
+function toggleHyperHappy():void
+{
+	//toggle debug
+	if(flags[HYPER_HAPPY]) 
+		flags[HYPER_HAPPY] = false;
+	else 
+		flags[HYPER_HAPPY] = true;
+	settingsScreen();
+	return;
+}
+
+function toggleDebug():void
+{
+	//toggle debug
+	if(debug) 
+		debug = false;
+	else 
+		debug = true;
+	dataBG.visible = true;
+	dataText.visible = true;
+	settingsScreen();
+	return;
+}
+
+function toggleEasyModeFlag():void
+{
+	if(flags[EASY_MODE_ENABLE_FLAG] == 0) 
+		flags[EASY_MODE_ENABLE_FLAG] = 1;
+	else 
+		flags[EASY_MODE_ENABLE_FLAG] = 0;
+	settingsScreen();
+	dataBG.visible = true;
+	dataText.visible = true;
+	settingsScreen();
+	return;	
+}
+
+function toggleSpritesFlag():void
+{
+	if(flags[SHOW_SPRITES_FLAG]) 
+		flags[SHOW_SPRITES_FLAG] = false;
+	else 
+		flags[SHOW_SPRITES_FLAG] = true;
+	settingsScreen();
+	return;
+}
+
+function toggleSillyFlag():void
+{
+
+	if(flags[SILLY_MODE_ENABLE_FLAG])
+		flags[SILLY_MODE_ENABLE_FLAG] = false;
+	else 
+		flags[SILLY_MODE_ENABLE_FLAG] = true;
+	settingsScreen();
+	return;
+	
+}
 
 function creditsScreen():void {
 	outputText("<b>Coding and Main Events:</b>\n", true);
@@ -157,7 +280,7 @@ function creditsScreen():void {
 	outputText("* Noogai, Reaper, and Numbers (Nipple-Fucking Victory vs Imp Rape)\n", false);
 	outputText("* Verse and IAMurow (Bee-Girl MultiCock Rapes)\n", false);
 	outputText("* Sombrero (Additional Imp Lust Loss Scene (Dick insertion ahoy!)\n", false);
-	outputText("* The Dark Master (Marble, Fetish Cultist, Fetish Zealot, Hellhound, Lumi, Some Cat Transformations, LaBova, Ceraph's Cat-Slaves, a Cum Witch Scene, Forced Nursing:Imps&Goblins)\n", false);
+	outputText("* The Dark Master (Marble, Fetish Cultist, Fetish Zealot, Hellhound, Lumi, Some Cat Transformations, LaBova, Ceraph's Cat-Slaves, a Cum Witch Scene, Mouse Dreams, Forced Nursing:Imps&Goblins)\n", false);
 	outputText("* Mr. Fleshcage (Cat Transformation/Masturbation)\n", false);
 	outputText("* Spy (Cat Masturbation, Forced Nursing: Minotaur, Bee, & Cultist)\n", false);
 	outputText("* PostNuclearMan (Some Cat TF)\n", false);

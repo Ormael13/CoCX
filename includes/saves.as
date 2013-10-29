@@ -394,7 +394,7 @@ function saveGameObject(slot:String, isFile:Boolean):void
 	for(i = 0; i < player.cocks.length ; i++) {
 		saveFile.data.cocks[i].cockThickness = player.cocks[i].cockThickness;
 		saveFile.data.cocks[i].cockLength = player.cocks[i].cockLength;
-		saveFile.data.cocks[i].cockType = player.cocks[i].cockType;
+		saveFile.data.cocks[i].cockType = player.cocks[i].cockType.toString();
 		saveFile.data.cocks[i].knotMultiplier = player.cocks[i].knotMultiplier;
 		saveFile.data.cocks[i].pierced = player.cocks[i].pierced;
 		saveFile.data.cocks[i].pShortDesc = player.cocks[i].pShortDesc;
@@ -484,7 +484,7 @@ function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.itemStorage.push(new Array());
 	}
 
-	trace("whut 1");
+	
 	//Populate storage slot array
 	for(i = 0; i < itemStorage.length ; i++) {
 		saveFile.data.itemStorage[i].shortName = itemStorage[i].shortName;
@@ -496,7 +496,7 @@ function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.gearStorage.push(new Array());
 	}
 
-	trace("whut 2");
+	
 	//Populate gear slot array
 	for(i = 0; i < gearStorage.length ; i++) {
 		saveFile.data.gearStorage[i].shortName = gearStorage[i].shortName;
@@ -520,7 +520,7 @@ function saveGameObject(slot:String, isFile:Boolean):void
 	saveFile.data.gameState = gameState;
 	
 
-	trace("whut 3");
+	
 	//Time and Items
 	saveFile.data.hours = hours;
 	saveFile.data.days = days;
@@ -534,7 +534,7 @@ function saveGameObject(slot:String, isFile:Boolean):void
 	saveFile.data.beeProgress = beeProgress;
 	
 
-	trace("whut 4");
+	
 	//ITEMZ. Item1s
 	saveFile.data.itemSlot1 = new Array();
 	saveFile.data.itemSlot1.quantity = itemSlot1.quantity;
@@ -639,9 +639,12 @@ function loadGameObject(saveData:Object, slot:String = "VOID"):void
 	var sprite:Boolean = false;
 	//If at initial title
 	if(player.str == 0) {
-		if(flags[SHOW_SPRITES_FLAG] > 0) sprite = true;
-		if(flags[EASY_MODE_ENABLE_FLAG] > 0) easy = true;
-		if(flags[SILLY_MODE_ENABLE_FLAG] > 0) silly = true;
+		if(flags[SHOW_SPRITES_FLAG]) 
+			sprite = true;
+		if(flags[EASY_MODE_ENABLE_FLAG])
+			easy = true;
+		if(flags[SILLY_MODE_ENABLE_FLAG]) 
+			silly = true;
 	}
 	
 	//Autosave stuff
@@ -693,13 +696,13 @@ function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		}	
 		//If at initial title
 		if(sprite) 
-			flags[SHOW_SPRITES_FLAG] = 1;
+			flags[SHOW_SPRITES_FLAG] = true;
 		if(easy) 
-			flags[EASY_MODE_ENABLE_FLAG] = 1;
+			flags[EASY_MODE_ENABLE_FLAG] = true;
 		else 
-			flags[EASY_MODE_ENABLE_FLAG] = 0;
+			flags[EASY_MODE_ENABLE_FLAG] = false;
 		if(silly) 
-			flags[SILLY_MODE_ENABLE_FLAG] = 1;
+			flags[SILLY_MODE_ENABLE_FLAG] = true;
 		
 		//PIERCINGS
 		
@@ -872,7 +875,7 @@ function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		for(i = 0; i < saveFile.data.cocks.length ; i++) {
 			player.cocks[i].cockThickness = saveFile.data.cocks[i].cockThickness;
 			player.cocks[i].cockLength = saveFile.data.cocks[i].cockLength;
-			player.cocks[i].cockType = saveFile.data.cocks[i].cockType;
+			player.cocks[i].cockType = CockTypesEnum.legacySuportLoadCockType(saveFile.data.cocks[i].cockType);
 			player.cocks[i].knotMultiplier = saveFile.data.cocks[i].knotMultiplier;
 			if(saveFile.data.cocks[i].pierced == undefined) {
 				player.cocks[i].pierced = 0;

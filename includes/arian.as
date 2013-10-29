@@ -631,7 +631,7 @@ function bargeInOnArian():void {
 		outputText("\n\nYou pull the covers off his face and say, \"<i>Well... we'll have to fix that then.</i>\"  You slip off his bed and begin stripping off your [armor].  Arian shyly does the same, stripping off his robes until he is laying in his bed, completely naked.");
 		outputText("\n\nOnce you toss your [armor] on the floor, however, Arian's eyes widen as he realises you're not entirely female; he eyes your " + multiCockDescriptLight() + " and the moistening pussy between your legs with equal parts wonder and arousal.");
 		outputText("\n\n\"<i>I... you... I never... wow....</i>\"  You call Arian's name, breaking his trance.  \"<i>S-Sorry for staring,</i>\" he quickly apologises, but you just chuckle at his reaction and tell him he doesn't have to worry about this.");
-		outputText("\n\n\"<i>I never imagined you would have both... err... genders,</i>\" he says nervously.  You just smile at him and ask if he has a problem with that?");
+		this.outputText("\n\n\"<i>I never imagined you would have both... err... genders,</i>\" " + this.arianMF("he", "she") + " says nervously.  You just smile at him and ask if he has a problem with that?");
 		outputText("\n\nArian quickly blurts out, \"<i>No!  Of course not!  Never!  I just... well... to be honest I don't mind that you have extra... umm... parts; in fact I think that is... kinda... sexy.</i>\"  He looks at you, cheeks red in shame over his admission.  \"<i>So... umm... my point is... I don't mind if you....</i>\"  Arian swallows audibly.  \"<i>If you decide to penetrate me... that is if you don't mind me being male... I don't mean to offend you or anything!  I just heard that some girls like you prefer... other girls....</i>\"  He looks away in shame.");
 		outputText("\n\nYou rub your chin in thought....");
 		//[Like Male] [Prefer Female]
@@ -1042,7 +1042,7 @@ function arianMagicLessons():void {
 		}
 	}
 	else if (player.inte < 75) {
-		outputText("<b>Game Note: This isn't canon and will be re-written soonish.</b>");
+		outputText("<b>Game Note: This isn\'t canon and will be re-written soonish.</b>");
 		//Teach Blind if PC doesn't know.
 		outputText("\n\nYou say you have a pretty good understanding of how magic works now, so you'd like " + arianMF("him","her") + " to get started on the more complex theories.");
 		outputText("\n\nArian rubs " + arianMF("his","her") + " chin in thought.  \"<i>Hmm.... Aha!  Let's discuss conjuration.  This is where we start getting to the more complex theories and methods.  I know I don't have to say it, but pay attention.  Conjuration is an important art for any mage.</i>\"");
@@ -2659,7 +2659,7 @@ function giveIncubusDraftToArian():void {
 		}
 	}
 	//(else if ArianBreasts > 1) //Boob shrinkage.
-	if(flags[ARIAN_BREASTS] > 1) {
+	if(flags[ARIAN_BREASTS] > 1 && (!flags[HYPER_HAPPY])) {
 		flags[ARIAN_BREASTS]--;
 		outputText("\n\nArian shudders as she feels the changes sweep through her, but rather than settling on her huge lizan shaft, the warmth that precedes change settles on her breasts.  Arian moans and kneads her mounds as they shrink to a smaller size.");
 		outputText("\n\n\"<i>Well, at least my chest won't feel so heavy anymore.  I hope you're not disappointed?</i>\" Arian asks, panting.");
@@ -2671,7 +2671,7 @@ function giveIncubusDraftToArian():void {
 		arianSexMenu(false);
 		return;
 	}
-	else if(flags[ARIAN_BREASTS] == 1) { //Now you are male again.
+	else if(flags[ARIAN_BREASTS] == 1 && (!flags[HYPER_HAPPY])) { //Now you are male again.
 		outputText("\n\nArian shudders as she feels the changes sweep through her, but rather than settling on her huge lizan shaft, the warmth that precedes change settles on her breasts.  Arian moans and kneads her mounds as they shrink until they are completely gone.  Her nipples follow suit, being replaced by smooth scales.");
 		
 		outputText("\n\nArian moan as another change happen below; she spreads her legs and watch in wonder as the lips her wet fuckhole join together, becoming smooth scales as well.  A few more subtle changes occur as Arian's body shift towards the masculine and finally settles down.  Arian breaths a sigh of relief.");
@@ -2771,7 +2771,7 @@ function succubiMilkForArian():void {
 		}
 	}
 	//(else If ArianCockSize > 1) //Dick shrinkage.
-	else if(flags[ARIAN_COCK_SIZE] > 1) {
+	else if(flags[ARIAN_COCK_SIZE] > 1 && (!flags[HYPER_HAPPY])){
 		outputText("\n\nWarmth flows throughout Arian's body, and she moans in obvious pleasure.  Then, she opens her robes and look at her rock-hard bulbous shaft.  It throbs as if edging a massive orgasm, but much to Arian's surprise it starts to shrink, until it finally grows limp and hides itself in its protective slit.  \"<i>I... didn't expect that,</i>\" Arian remarks.");
 		
 		outputText("\n\nYou note it's not that surprising; the potion in question is a feminizer, so it must be shrinking away the only trace of her masculinity left - her cock");
@@ -2781,7 +2781,7 @@ function succubiMilkForArian():void {
 		
 		outputText("\n\nYou ask, then, if Arian's so comfortable with her girly side, maybe she'd like to try out her more female parts?  Arian blushes and averts her eyes, nodding lightly.");
 	}
-	else if(flags[ARIAN_COCK_SIZE] == 1 && flags[ARIAN_DOUBLE_COCK] >= 1) {
+	else if(flags[ARIAN_COCK_SIZE] == 1 && flags[ARIAN_DOUBLE_COCK] >= 1 && (!flags[HYPER_HAPPY])) {
 		outputText("\n\nWarmth flows throughout Arian's body, and she moans in obvious pleasure.  Then she opens her robes and look at her pair of rock-hard bulbous shafts.  They throb as if edging a massive orgasm, but much to Arian's surprise they begin to merge, until only one reptilian dick remains; finally it grows limp and recedes into it's hiding place.  \"<i>They fused into one,</i>\" Arian remarks.");
 		
 		outputText("\n\nMaybe it's because of the increasingly high femininity the milk is bestowing on her, you suggest?");
@@ -2794,7 +2794,7 @@ function succubiMilkForArian():void {
 		outputText("\n\nArian blushes.  \"<i>I... show me...</i>\"");
 		flags[ARIAN_DOUBLE_COCK] = 0;
 	}
-	else if(flags[ARIAN_COCK_SIZE] == 1) {
+	else if(flags[ARIAN_COCK_SIZE] == 1 && (!flags[HYPER_HAPPY])) {
 		flags[ARIAN_COCK_SIZE] = 0;
 		outputText("\n\nWarmth flows throughout Arian's body, and she moans in obvious pleasure.  Then, she opens her robes and look at her rock-hard bulbous shaft.  It throbs and slowly recedes back into its hiding place.  An indignant rope of cum shoots into the air, splashing on her belly as the slit containing the last of her malehood finally closes up, leaving only smooth scales in its wake.  Arian pants, \"<i>Looks like I'm completely female now.</i>\"");
 		
@@ -3286,15 +3286,15 @@ function arianSpellPlace(spell:String):void {
 	
 	outputText("\n\n\"<i>Okay. Please, hand me the ingredients and I'll have it imbued in a moment.</i>\"  " + arianMF("He","She") + " smiles at you.  Fishing around amongst your belongings, you gather the necessary items and hold them out to the lizan.");
 	
-	outputText("\n\nArian eagerly nabs the offered ingredients and moves to " + emberMF("his","her") + " work desk.  " + arianMF("He","She") + " takes a nearby bowl and fills it with water, then looks around.  \"<i>Hmm... I'm forgetting something....  Oh, right!  I'm going to have to ask you for your talisman, too, [name].</i>\"  " + arianMF("He","She") + " extends a hand to you.");
+	outputText("\n\nArian eagerly nabs the offered ingredients and moves to " + arianMF("his","her") + " work desk.  " + arianMF("He","She") + " takes a nearby bowl and fills it with water, then looks around.  \"<i>Hmm... I'm forgetting something....  Oh, right!  I'm going to have to ask you for your talisman, too, [name].</i>\"  " + arianMF("He","She") + " extends a hand to you.");
 	
-	outputText("\n\nYou can't resist noting you were expecting " + emberMF("him","her") + " to say that, plucking it from your neck and passing it to the reptilian wizard.");
+	outputText("\n\nYou can't resist noting you were expecting " + arianMF("him","her") + " to say that, plucking it from your neck and passing it to the reptilian wizard.");
 	
-	outputText("\n\n\"<i>Erm... right.  Now I need to focus.</i>\"  " + arianMF("He","She") + " places your talisman in the bowl, submerging it in water, then closes " + emberMF("his","her") + " eyes and begins focusing his magic.  Shortly after, the ingredients you offered suddenly burst into flames, burning until only their ashes are left; the ashes float into the bowl and mix with the water inside.");
+	outputText("\n\n\"<i>Erm... right.  Now I need to focus.</i>\"  " + arianMF("He","She") + " places your talisman in the bowl, submerging it in water, then closes " + arianMF("his","her") + " eyes and begins focusing " + this.arianMF("his", "her") + " magic.  Shortly after, the ingredients you offered suddenly burst into flames, burning until only their ashes are left; the ashes float into the bowl and mix with the water inside.");
 	
 	outputText("\n\nA soft hum emanates from within the bowl and the water begins glowing.  It doesn't take long for the humming to fade; Arian reaches inside the bowl and lifts your talisman for you to see.  \"<i>Here you go, [name].</i>\"");
 	
-	outputText("\n\nYou thank " + emberMF("him","her") + " and accept the talisman, feeling the pulsating energies within for a few moments before placing it back around your neck.  You thank Arian for " + emberMF("his","her") + " help, assuring " + emberMF("him","her") + " that this will surely help you in your travels through these lands.");
+	outputText("\n\nYou thank " + arianMF("him","her") + " and accept the talisman, feeling the pulsating energies within for a few moments before placing it back around your neck.  You thank Arian for " + arianMF("his","her") + " help, assuring " + arianMF("him","her") + " that this will surely help you in your travels through these lands.");
 	
 	outputText("\n\n(<b>Your talisman has been imbued with the " + spell + " spell. You can use it from the M. Specials menu in combat.</b>)\n\n");
 	clearCharges();
@@ -3407,7 +3407,7 @@ function sleepWithArian(newl:Boolean = false):void {
 //[=Sleep=]
 function dontListenToLowAnalXPArian():void {
 	clearOutput();
-	outputText("You gently stroke the lizan's side and plant a soft, gentle kiss on his neck.  At your ministrations, Arian sighs and slowly falls still again.  You wait, but it seems that whatever dreams he was having have faded and he's truly asleep now, allowing you to go back to sleep yourself.");
+	outputText("You gently stroke the lizan\'s side and plant a soft, gentle kiss on " + arianMF("his", "her") + " neck.  At your ministrations, Arian sighs and slowly falls still again.  You wait, but it seems that whatever dreams " + arianMF("he", "she") + " was having have faded and " + arianMF("he", "she") + "\'s truly asleep now, allowing you to go back to sleep yourself.");
 	menu();
 	addButton(0,"Next",sleepWrapper);
 }
@@ -3439,7 +3439,7 @@ function listenToLowAnalXPArian():void {
 //[=Sleep=]
 function dontListenToMediumAnalXPArian():void {
 	clearOutput();
-	outputText("You gently stroke the lizan's side and plant a soft, gentle kiss on his neck.  At your ministrations, Arian sighs and slowly falls still again.  You wait, but it seems that whatever dreams he was having have faded and he's truly asleep now, allowing you to go back to sleep yourself.");
+	outputText("You gently stroke the lizan's side and plant a soft, gentle kiss on  " + arianMF("his", "her") + " neck.  At your ministrations, Arian sighs and slowly falls still again.  You wait, but it seems that whatever dreams " + arianMF("he", "she") + " was having have faded and  " + arianMF("he", "she") + " 's truly asleep now, allowing you to go back to sleep yourself.");
 	sleepRecovery(false);
 	menu();
 	addButton(0,"Next",sleepWrapper);
@@ -3880,7 +3880,7 @@ function arianDildoFun():void {
 	
 	outputText("\n\nYou carefully put the dildo down beside the pillow before turning to Arian and pulling her into an embrace, arms around her waist, before spinning her around, sweeping her off her feet, and dropping her flat on the bed.  She giggles nervously as you slide yourself into position, straddling her and pinning her wrists to the bed beside her head, leaving her helpless.  Your tongue slides out of your lips in a lecherous gesture before you bend your head down and kiss her first on one dark nipple, and then on the other.  Arian wriggles and squirms underneath you as you start to plant quick, soft, gentle kisses up her torso and towards her neck, diligently kissing your way towards her lips.  Once there, you plant a butterfly kiss on her lips, but that's not enough; you release your grip on her wrists and instead place a soft but authoritative palm on each of her cheeks, pinning her in place as you passionately consume her lips with your own.");
 	
-	outputText("\n\nYour lizan lover reciprocates your kiss.  Scaled arms wrapping around you as she hugs you tightly, legs instinctively spreading to allow you access.  You continue to suckle at her lips, forcefully probing at them with your tongue to see if she will allow you access.  Even a you do this, you settle yourself more comfortably upon her body and slide a hand down her torso, over her belly until you reach between her legs.  ");
+	outputText("\n\nYour lizan lover reciprocates your kiss.  Scaled arms wrapping around you as she hugs you tightly, legs instinctively spreading to allow you access.  You continue to suckle at her lips, forcefully probing at them with your tongue to see if she will allow you access.  Even as you do this, you settle yourself more comfortably upon her body and slide a hand down her torso, over her belly until you reach between her legs.  ");
 	if(flags[ARIAN_COCK_SIZE] > 0) {
 		outputText("Ignoring her cock");
 		if(flags[ARIAN_DOUBLE_COCK] > 0) outputText("s");
