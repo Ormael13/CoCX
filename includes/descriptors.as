@@ -2222,175 +2222,321 @@ function eCockAdjectives(cLength:Number, thickness:Number, type:CockTypesEnum):S
 	return descript;
 }
 
+// BLARGH. THERE ARE TWO INSTANCES OF cockNoun. Because STUPID. 
+// There is this one, and one in creature.as.
+// they're both used. blarurgushtkalskdjha;lsjdhfaljdfha;sldf
+// Only one had been updated to use CockTypesEnum, so shit was asploding all over the place.
+// Ideally, we really, really should get rid of one of them entirely, but I don't know how the namespace
+// stuff is working at the moment.
+// therefore:
+// TODO: FIX DIS SHIT
 
-//Used in multiCockDescript and potentiall elsewhere - barebones cock names
-function cockNoun(type:Number):String {
+//Used in multiCockDescript and potentially elsewhere - barebones cock names
+function cockNoun(cockType:CockTypesEnum):String
+{
+
 	var descript:String = "";
 	var rando:Number = 0;
-	if(type == 0) {
+	if (cockType == CockTypesEnum.HUMAN)
+	{
 		rando = rand(10) + 1;
-		if(rando >= 0 && rando <=4) descript += "cock";
-		if(rando ==5 || rando == 6) descript += "prick";
-		if(rando == 7) descript += "pecker";
-		if(rando > 7) descript += "shaft";
+		if (rando >= 0 && rando <= 4)
+			descript += "cock";
+		if (rando == 5 || rando == 6)
+			descript += "prick";
+		if (rando == 7)
+			descript += "pecker";
+		if (rando > 7)
+			descript += "shaft";
 	}
-	if(type == 2) {
-		if(player.dogScore() >= player.foxScore()) {
-			rando=int(Math.random()*11);
-			if(rando == 0) descript+="dog-shaped dong";
-			if(rando == 1) descript+="canine shaft";
-			if(rando == 2) descript+="pointed prick";
-			if(rando == 3) descript+="knotty dog-shaft";
-			if(rando == 4) descript+="bestial cock";
-			if(rando == 5) descript+="animalistic puppy-pecker";
-			if(rando == 6) descript+="pointed dog-dick";
-			if(rando == 7) descript+="pointed shaft";
-			if(rando == 8) descript+="canine member";
-			if(rando == 9) descript+="canine cock";
-			if(rando == 10) descript+="knotted dog-cock";
+	if (cockType == CockTypesEnum.DOG)
+	{
+		if (player.dogScore() >= player.foxScore())
+		{
+			rando = int(Math.random() * 11);
+			if (rando == 0)
+				descript += "dog-shaped dong";
+			if (rando == 1)
+				descript += "canine shaft";
+			if (rando == 2)
+				descript += "pointed prick";
+			if (rando == 3)
+				descript += "knotty dog-shaft";
+			if (rando == 4)
+				descript += "bestial cock";
+			if (rando == 5)
+				descript += "animalistic puppy-pecker";
+			if (rando == 6)
+				descript += "pointed dog-dick";
+			if (rando == 7)
+				descript += "pointed shaft";
+			if (rando == 8)
+				descript += "canine member";
+			if (rando == 9)
+				descript += "canine cock";
+			if (rando == 10)
+				descript += "knotted dog-cock";
 		}
-		else {
-			rando=int(Math.random()*11);
-			if(rando == 0) descript+="fox-shaped dong";
-			if(rando == 1) descript+="vulpine shaft";
-			if(rando == 2) descript+="pointed prick";
-			if(rando == 3) descript+="knotty fox-shaft";
-			if(rando == 4) descript+="bestial cock";
-			if(rando == 5) descript+="animalistic vixen-pricker";
-			if(rando == 6) descript+="pointed fox-dick";
-			if(rando == 7) descript+="pointed shaft";
-			if(rando == 8) descript+="vulpine member";
-			if(rando == 9) descript+="vulpine cock";
-			if(rando == 10) descript+="knotted fox-cock";
+		else
+		{
+			rando = int(Math.random() * 11);
+			if (rando == 0)
+				descript += "fox-shaped dong";
+			if (rando == 1)
+				descript += "vulpine shaft";
+			if (rando == 2)
+				descript += "pointed prick";
+			if (rando == 3)
+				descript += "knotty fox-shaft";
+			if (rando == 4)
+				descript += "bestial cock";
+			if (rando == 5)
+				descript += "animalistic vixen-pricker";
+			if (rando == 6)
+				descript += "pointed fox-dick";
+			if (rando == 7)
+				descript += "pointed shaft";
+			if (rando == 8)
+				descript += "vulpine member";
+			if (rando == 9)
+				descript += "vulpine cock";
+			if (rando == 10)
+				descript += "knotted fox-cock";
 		}
 	}
-	if(type == 1) {
+	if (cockType == CockTypesEnum.HORSE)
+	{
 		rando = rand(6);
-		if(rando == 0) descript+="flared horse-cock";
-		if(rando == 1) descript+="equine prick";
-		if(rando == 2) descript+="bestial horse-shaft";
-		if(rando == 3) descript+="flat-tipped horse-member";
-		if(rando == 4) descript+="animalistic stallion-prick";
-		if(rando == 5) descript+="equine dong";
-		if(rando == 6) descript+="beast cock";
-		if(rando == 7) descript+="flared stallion-cock";
+		if (rando == 0)
+			descript += "flared horse-cock";
+		if (rando == 1)
+			descript += "equine prick";
+		if (rando == 2)
+			descript += "bestial horse-shaft";
+		if (rando == 3)
+			descript += "flat-tipped horse-member";
+		if (rando == 4)
+			descript += "animalistic stallion-prick";
+		if (rando == 5)
+			descript += "equine dong";
+		if (rando == 6)
+			descript += "beast cock";
+		if (rando == 7)
+			descript += "flared stallion-cock";
 	}
-	if(type == 3) {
-		rando=int(Math.random()*11);
-		if(rando == 0) descript+="nub-covered demon-dick";
-		if(rando == 1) descript+="nubby shaft";
-		if(rando == 2) descript+="corrupted cock";
-		if(rando == 3) descript+="perverse pecker";
-		if(rando == 4) descript+="bumpy demon-dick";
-		if(rando == 5) descript+="demonic cock";
-		if(rando == 6) descript+="demonic dong";
-		if(rando == 7) descript+="cursed cock";
-		if(rando == 8) descript+="infernal prick";
-		if(rando == 9) descript+="unholy cock";
-		if(rando == 10) descript+="blighted cock";
+	if (cockType == CockTypesEnum.DEMON)
+	{
+		rando = int(Math.random() * 11);
+		if (rando == 0)
+			descript += "nub-covered demon-dick";
+		if (rando == 1)
+			descript += "nubby shaft";
+		if (rando == 2)
+			descript += "corrupted cock";
+		if (rando == 3)
+			descript += "perverse pecker";
+		if (rando == 4)
+			descript += "bumpy demon-dick";
+		if (rando == 5)
+			descript += "demonic cock";
+		if (rando == 6)
+			descript += "demonic dong";
+		if (rando == 7)
+			descript += "cursed cock";
+		if (rando == 8)
+			descript += "infernal prick";
+		if (rando == 9)
+			descript += "unholy cock";
+		if (rando == 10)
+			descript += "blighted cock";
 	}
-	if(type == 4) {
-		rando=int(Math.random()*11);
-		if(rando == 0) descript+="twisting tentacle-prick";
-		if(rando == 1) descript+="wriggling plant-shaft";
-		if(rando == 2) descript+="sinuous tentacle-cock";
-		if(rando == 3) descript+="squirming cock-tendril";
-		if(rando == 4) descript+="writhing tentacle-pecker";
-		if(rando == 5) descript+="wriggling plant-prick";
-		if(rando == 6) descript+="penile flora";
-		if(rando == 7) descript+="smooth shaft";
-		if(rando == 8) descript+="undulating tentacle-dick";
-		if(rando == 9) descript+="slithering vine-prick";
-		if(rando == 10) descript+="vine-shaped cock";
+	if (cockType == CockTypesEnum.TENTACLE)
+	{
+		rando = int(Math.random() * 11);
+		if (rando == 0)
+			descript += "twisting tentacle-prick";
+		if (rando == 1)
+			descript += "wriggling plant-shaft";
+		if (rando == 2)
+			descript += "sinuous tentacle-cock";
+		if (rando == 3)
+			descript += "squirming cock-tendril";
+		if (rando == 4)
+			descript += "writhing tentacle-pecker";
+		if (rando == 5)
+			descript += "wriggling plant-prick";
+		if (rando == 6)
+			descript += "penile flora";
+		if (rando == 7)
+			descript += "smooth shaft";
+		if (rando == 8)
+			descript += "undulating tentacle-dick";
+		if (rando == 9)
+			descript += "slithering vine-prick";
+		if (rando == 10)
+			descript += "vine-shaped cock";
 	}
-	if(type == 5) {
-		rando=int(Math.random()*11);
-		if(rando == 0) descript+="feline dick";
-		if(rando == 1) descript+="spined cat-cock";
-		if(rando == 2) descript+="pink kitty-cock";
-		if(rando == 3) descript+="spiny prick";
-		if(rando == 4) descript+="animalistic kitty-prick";
-		if(rando == 5) descript+="oddly-textured cat-penis";
-		if(rando == 6) descript+="feline member";
-		if(rando == 7) descript+="spined shaft";
-		if(rando == 8) descript+="feline shaft";
-		if(rando == 9) descript+="barbed dick";
-		if(rando == 10) descript+="nubby kitten-prick";
+	if (cockType == CockTypesEnum.CAT)
+	{
+		rando = int(Math.random() * 11);
+		if (rando == 0)
+			descript += "feline dick";
+		if (rando == 1)
+			descript += "spined cat-cock";
+		if (rando == 2)
+			descript += "pink kitty-cock";
+		if (rando == 3)
+			descript += "spiny prick";
+		if (rando == 4)
+			descript += "animalistic kitty-prick";
+		if (rando == 5)
+			descript += "oddly-textured cat-penis";
+		if (rando == 6)
+			descript += "feline member";
+		if (rando == 7)
+			descript += "spined shaft";
+		if (rando == 8)
+			descript += "feline shaft";
+		if (rando == 9)
+			descript += "barbed dick";
+		if (rando == 10)
+			descript += "nubby kitten-prick";
 	}
-	if(type == 6) {
-		rando=int(Math.random()*11);
-		if(rando == 0) descript+="reptilian dick";
-		if(rando == 1) descript+="purple cock";
-		if(rando == 2) descript+="inhuman cock";
-		if(rando == 3) descript+="reptilian prick";
-		if(rando == 4) descript+="purple prick";
-		if(rando == 5) descript+="purple member";
-		if(rando == 6) descript+="serpentine member";
-		if(rando == 7) descript+="serpentine shaft";
-		if(rando == 8) descript+="reptilian shaft";
-		if(rando == 9) descript+="bulbous snake-shaft";
-		if(rando == 10) descript+="bulging snake-dick";
+	if (cockType == CockTypesEnum.LIZARD)
+	{
+		rando = int(Math.random() * 11);
+		if (rando == 0)
+			descript += "reptilian dick";
+		if (rando == 1)
+			descript += "purple cock";
+		if (rando == 2)
+			descript += "inhuman cock";
+		if (rando == 3)
+			descript += "reptilian prick";
+		if (rando == 4)
+			descript += "purple prick";
+		if (rando == 5)
+			descript += "purple member";
+		if (rando == 6)
+			descript += "serpentine member";
+		if (rando == 7)
+			descript += "serpentine shaft";
+		if (rando == 8)
+			descript += "reptilian shaft";
+		if (rando == 9)
+			descript += "bulbous snake-shaft";
+		if (rando == 10)
+			descript += "bulging snake-dick";
 	}
-	if(type == 7) {
+	if (cockType == CockTypesEnum.ANEMONE)
+	{
 		rando = rand(11);
-		if(rando == 0) descript+="anemone dick";
-		if(rando == 1) descript+="tentacle-ringed cock";
-		if(rando == 2) descript+="blue member";
-		if(rando == 3) descript+="stinger-laden shaft";
-		if(rando == 4) descript+="pulsating prick";
-		if(rando == 5) descript+="anemone prick";
-		if(rando == 6) descript+="stinger-coated member";
-		if(rando == 7) descript+="blue cock";
-		if(rando == 8) descript+="tentacle-ringed dick";
-		if(rando == 9) descript+="near-transparent shaft";
-		if(rando == 10) descript+="squirming shaft";
+		if (rando == 0)
+			descript += "anemone dick";
+		if (rando == 1)
+			descript += "tentacle-ringed cock";
+		if (rando == 2)
+			descript += "blue member";
+		if (rando == 3)
+			descript += "stinger-laden shaft";
+		if (rando == 4)
+			descript += "pulsating prick";
+		if (rando == 5)
+			descript += "anemone prick";
+		if (rando == 6)
+			descript += "stinger-coated member";
+		if (rando == 7)
+			descript += "blue cock";
+		if (rando == 8)
+			descript += "tentacle-ringed dick";
+		if (rando == 9)
+			descript += "near-transparent shaft";
+		if (rando == 10)
+			descript += "squirming shaft";
 	}
-	if(type == 8) {
+	if (cockType == CockTypesEnum.KANGAROO)
+	{
 		rando = rand(11);
-		if(rando == 0) descript+="kangaroo-like dick";
-		if(rando == 1) descript+="pointed cock";
-		if(rando == 2) descript+="marsupial member";
-		if(rando == 3) descript+="tapered shaft";
-		if(rando == 4) descript+="curved pecker";
-		if(rando == 5) descript+="pointed prick";
-		if(rando == 6) descript+="squirming kangaroo-cock";
-		if(rando == 7) descript+="marsupial cock";
-		if(rando == 8) descript+="tapered kangaroo-dick";
-		if(rando == 9) descript+="curved kangaroo-cock";
-		if(rando == 10) descript+="squirming shaft";
+		if (rando == 0)
+			descript += "kangaroo-like dick";
+		if (rando == 1)
+			descript += "pointed cock";
+		if (rando == 2)
+			descript += "marsupial member";
+		if (rando == 3)
+			descript += "tapered shaft";
+		if (rando == 4)
+			descript += "curved pecker";
+		if (rando == 5)
+			descript += "pointed prick";
+		if (rando == 6)
+			descript += "squirming kangaroo-cock";
+		if (rando == 7)
+			descript += "marsupial cock";
+		if (rando == 8)
+			descript += "tapered kangaroo-dick";
+		if (rando == 9)
+			descript += "curved kangaroo-cock";
+		if (rando == 10)
+			descript += "squirming shaft";
 	}
-	if(type == 9) {
+	if (cockType == CockTypesEnum.DRAGON) 
+	{
 		rando = rand(11);
-		if(rando == 0) descript+="dragon-like dick";
-		if(rando == 1) descript+="segmented shaft";
-		if(rando == 2) descript+="pointed prick";
-		if(rando == 3) descript+="knotted dragon-cock";
-		if(rando == 4) descript+="mythical mast";
-		if(rando == 5) descript+="segmented tool";
-		if(rando == 6) descript+="draconic dick";
-		if(rando == 7) descript+="draconic cock";
-		if(rando == 8) descript+="tapered dick";
-		if(rando == 9) descript+="unusual endowment";
-		if(rando == 10) descript+="scaly shaft";
+		if (rando == 0)
+			descript += "dragon-like dick";
+		if (rando == 1)
+			descript += "segmented shaft";
+		if (rando == 2)
+			descript += "pointed prick";
+		if (rando == 3)
+			descript += "knotted dragon-cock";
+		if (rando == 4)
+			descript += "mythical mast";
+		if (rando == 5)
+			descript += "segmented tool";
+		if (rando == 6)
+			descript += "draconic dick";
+		if (rando == 7)
+			descript += "draconic cock";
+		if (rando == 8)
+			descript += "tapered dick";
+		if (rando == 9)
+			descript += "unusual endowment";
+		if (rando == 10)
+			descript += "scaly shaft";
 	}
-	if(type == 10) {
+	if(cockType == CockTypesEnum.DISPLACER)
+	{
 		rando = rand(12);
-		if(rando == 0) descript+="coerl cock";
-		if(rando == 1) descript+="tentacle-tipped phallus";
-		if(rando == 2) descript+="starfish-tipped shaft";
-		if(rando == 3) descript+="alien member";
-		if(rando == 4) descript+="almost-canine dick";
-		if(rando == 5) descript+="bizarre prick";
-		if(rando == 6) descript+="beastly cock";
-		if(rando == 7) descript+="cthulhu-tier cock";
-		if(rando == 8) descript+="coerl cock";
-		if(rando == 9) descript+="animal dong";
-		if(rando == 10) descript+="star-capped tool";
-		if(rando == 11) descript+="knotted erection";
+		if(rando == 0) 
+			descript+="coerl cock";
+		if(rando == 1) 
+			descript+="tentacle-tipped phallus";
+		if(rando == 2) 
+			descript+="starfish-tipped shaft";
+		if(rando == 3) 
+			descript+="alien member";
+		if(rando == 4) 
+			descript+="almost-canine dick";
+		if(rando == 5) 
+			descript+="bizarre prick";
+		if(rando == 6) 
+			descript+="beastly cock";
+		if(rando == 7) 
+			descript+="cthulhu-tier cock";
+		if(rando == 8) 
+			descript+="coerl cock";
+		if(rando == 9) 
+			descript+="animal dong";
+		if(rando == 10) 
+			descript+="star-capped tool";
+		if(rando == 11) 
+			descript+="knotted erection";
 	}
+
 	return descript;
 }
-
 
 //New cock adjectives.  The old one sucked dicks
 function cockAdjective(cockNum:Number = -1) {
@@ -2706,74 +2852,75 @@ function cockAdjectives(cLength:Number, thickness:Number, type:Number):String {
 	return descript;
 }
 
-function kangaDescript(cockNum:Number):String {
-	if(player.totalCocks() == 0) return "<b>ERROR: kangaDescript Called But No Cock Present</b>";
-	if(cockNum > (player.cocks.length - 1)) return "<B>Error: Invalid cock number (" + cockNum + ") passed to kangaDescript()</b>";
-	if(cockNum < 0) return "<B>Error: Invalid cockNum (" + cockNum + ") passed to kangaDescript()</b>";
-	var descript:String = "";
-	//50% of the time add a descriptor
-	if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
-	descript += cockNoun(player.cocks[cockNum].cockType);
-	return descript;
-}
-function dogDescript(cockNum:Number):String {
-	if(player.totalCocks() == 0) return "<b>ERROR: CockDescript Called But No Cock Present</b>";
-	if(cockNum > (player.cocks.length - 1)) return "<B>Error: Invalid cock number (" + cockNum + ") passed to dogDescript()</b>";
-	if(cockNum < 0) return "<B>Error: Invalid cockNum (" + cockNum + ") passed to dogDescript()</b>";
-	var descript:String = "";
-	//50% of the time add a descriptor
-	if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
-	descript += cockNoun(CockTypesEnum.DOG);
-	return descript;
-}
-function tentacleDescript(cockNum:Number):String {
-	if(player.totalCocks() == 0) return "<b>ERROR: CockDescript Called But No Cock Present</b>";
-	if(cockNum > (player.cocks.length - 1)) return "<B>Error: Invalid cock number (" + cockNum + ") passed to tentacleDescript()</b>";
-	if(cockNum < 0) return "<B>Error: Invalid cockNum (" + cockNum + ") passed to tentacleDescript()</b>";
-	var descript:String = "";
-	//50% of the time add a descriptor
-	if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
-	descript += cockNoun(player.cocks[cockNum].cockType);
-	return descript;
-}
-function demonDescript(cockNum:Number):String {
-	if(player.totalCocks() == 0) return "<b>ERROR: CockDescript Called But No Cock Present</b>";
-	if(cockNum > (player.cocks.length - 1)) return "<B>Error: Invalid cock number (" + cockNum + ") passed to demonDescript()</b>";
-	if(cockNum < 0) return "<B>Error: Invalid cockNum (" + cockNum + ") passed to demonDescript()</b>";
-	var descript:String = "";
-	//50% of the time add a descriptor
-	if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
-	descript += cockNoun(player.cocks[cockNum].cockType);
-	return descript;
-}
 
-function cockDescript(cockNum:Number):String {
+function cockDescript(cockNum:Number):String 
+{
+	// trace("CockIndex:", cockNum);
 	if(player.totalCocks() == 0) return "<b>ERROR: CockDescript Called But No Cock Present</b>";
 	if(player.cockTotal() <= cockNum && cockNum != 99) return "<b>ERROR: CockDescript called with index of " + cockNum + " - out of BOUNDS</b>";
 	//Cocknum 99 to default to boring descriptions!
-	if(cockNum != 99) {
+	if(cockNum != 99) 
+	{
 		if(player.cocks[cockNum].cockType == CockTypesEnum.HORSE)
+		{
+			// trace("CockTypeFound - HORSE");
 			return horseDescript(cockNum);
+		}
 		else if(player.cocks[cockNum].cockType == CockTypesEnum.DOG)
+		{
+			// trace("CockTypeFound - DOG");
 			return dogDescript(cockNum);
+		}
 		else if(player.cocks[cockNum].cockType == CockTypesEnum.TENTACLE)
+		{
+			// trace("CockTypeFound - TENTACLE");
 			return tentacleDescript(cockNum);
+		}
 		else if(player.cocks[cockNum].cockType == CockTypesEnum.DEMON)
+		{
+			// trace("CockTypeFound - DEMON");
 			return demonDescript(cockNum);
+		}
 		else if(player.cocks[cockNum].cockType == CockTypesEnum.CAT)
+		{
+			// trace("CockTypeFound - CAT");
 			return catDescript(cockNum);
+		}
 		else if(player.cocks[cockNum].cockType == CockTypesEnum.LIZARD)
+		{
+			// trace("CockTypeFound - LIZARD");
 			return snakeDescript(cockNum);
+		}
 		else if(player.cocks[cockNum].cockType == CockTypesEnum.ANEMONE)
+		{
+			// trace("CockTypeFound - ANEMONE");
 			return anemoneDescript(cockNum);
+		}
 		else if(player.cocks[cockNum].cockType == CockTypesEnum.KANGAROO)
+		{
+			// trace("CockTypeFound - KANGAROO");
 			return kangaDescript(cockNum);
+		}
 		else if(player.cocks[cockNum].cockType == CockTypesEnum.DRAGON)
+		{
+			// trace("CockTypeFound - DRAGON");
 			return dragonDescript(cockNum);
+		}
 		else if(player.cocks[cockNum].cockType == CockTypesEnum.DISPLACER)
+		{
+			// trace("CockTypeFound - DISPLACER");
 			return displacerDescript(cockNum);
+		}
+		else
+		{
+			// trace("Cock type failed to match. ERROR");
+		}
 	}
-	else cockNum = 0;
+	else 
+		cockNum = 0;
+
+	trace("Fell through the if statement. Wut?", cockNum);
+
 	var descript:String = "";
 	//50% of the time add a descriptor
 	if(rand(2) == 0) descript += cockAdjective(cockNum) + " ";
@@ -2787,55 +2934,115 @@ function cockDescript(cockNum:Number):String {
 	return descript;
 }
 
+function kangaDescript(cockNum:Number):String 
+{
+	var descript:String = "";
+	if(player.totalCocks() == 0) return "<b>ERROR: kangaDescript Called But No Cock Present</b>";
+	if(cockNum > (player.cocks.length - 1)) return "<B>Error: Invalid cock number (" + cockNum + ") passed to kangaDescript()</b>";
+	if(cockNum < 0) return "<B>Error: Invalid cockNum (" + cockNum + ") passed to kangaDescript()</b>";
+	//50% of the time add a descriptor
+	if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
+	descript += cockNoun(player.cocks[cockNum].cockType);
+	return descript;
+}
+function dogDescript(cockNum:Number):String 
+{
+	var descript:String = "";
+	if(player.totalCocks() == 0) return "<b>ERROR: CockDescript Called But No Cock Present</b>";
+	if(cockNum > (player.cocks.length - 1)) return "<B>Error: Invalid cock number (" + cockNum + ") passed to dogDescript()</b>";
+	if(cockNum < 0) return "<B>Error: Invalid cockNum (" + cockNum + ") passed to dogDescript()</b>";
+	//50% of the time add a descriptor
+	if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
+	descript += cockNoun(CockTypesEnum.DOG);
+	return descript;
+}
+function tentacleDescript(cockNum:Number):String 
+{
+	var descript:String = "";
+	if(player.totalCocks() == 0) return "<b>ERROR: CockDescript Called But No Cock Present</b>";
+	if(cockNum > (player.cocks.length - 1)) return "<B>Error: Invalid cock number (" + cockNum + ") passed to tentacleDescript()</b>";
+	if(cockNum < 0) return "<B>Error: Invalid cockNum (" + cockNum + ") passed to tentacleDescript()</b>";
+	//50% of the time add a descriptor
+	if(rand(2) == 0) 
+		descript += cockAdjective(cockNum) + ", ";
+
+	descript += cockNoun(player.cocks[cockNum].cockType);
+	return descript;
+}
+function demonDescript(cockNum:Number):String 
+{
+	var descript:String = "";
+	if(player.totalCocks() == 0) 
+		return "<b>ERROR: CockDescript Called But No Cock Present</b>";
+	if(cockNum > (player.cocks.length - 1)) 
+		return "<B>Error: Invalid cock number (" + cockNum + ") passed to demonDescript()</b>";
+	if(cockNum < 0) 
+		return "<B>Error: Invalid cockNum (" + cockNum + ") passed to demonDescript()</b>";
+	//50% of the time add a descriptor
+	if(rand(2) == 0) 
+		descript += cockAdjective(cockNum) + ", ";
+	descript += cockNoun(player.cocks[cockNum].cockType);
+
+	// trace("DemonDescript Output - ", descript);
+	// trace("CockNoun = ", cockNoun(player.cocks[cockNum].cockType), "cockType", player.cocks[cockNum].cockType);
+	return descript;
+}
+
+
 //Horsecock + Descript
-function horseDescript(cockNum:Number):String {
+function horseDescript(cockNum:Number):String 
+{
+	var descript:String = "";
 	if(player.totalCocks() == 0) return "<b>ERROR: CockDescript Called But No Cock Present</b>";
 	if(cockNum > (player.cocks.length - 1)) return "<B>Error: Invalid cock number (" + cockNum + ") passed to horseDescript()</b>";
 	if(cockNum < 0) return "<B>Error: Invalid cockNum (" + cockNum + ") passed to horseDescript()</b>";
-	var descript:String = "";
 	//50% of the time add a descriptor
 	if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
 	descript += cockNoun(CockTypesEnum.HORSE);
 	return descript;
 }
 
-function catDescript(cockNum:Number):String {
+function catDescript(cockNum:Number):String 
+{
+	var descript:String = "";
 	if(player.totalCocks() == 0) return "<b>ERROR: catDescript Called But No Cock Present</b>";
 	if(cockNum > (player.cocks.length - 1)) return "<B>Error: Invalid cock number (" + cockNum + ") passed to catDescript()</b>";
 	if(cockNum < 0) return "<B>Error: Invalid cockNum (" + cockNum + ") passed to catDescript()</b>";
-	var descript:String = "";
 	//50% of the time add a descriptor
 	if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
 	descript += cockNoun(player.cocks[cockNum].cockType);
 	return descript;
 }
 
-function anemoneDescript(cockNum:Number):String {
+function anemoneDescript(cockNum:Number):String 
+{
+	var descript:String = "";
 	if(player.totalCocks() == 0) return "<b>ERROR: anemoneDescript Called But No Cock Present</b>";
 	if(cockNum > (player.cocks.length - 1)) return "<B>Error: Invalid cock number (" + cockNum + ") passed to anemoneDescript()</b>";
 	if(cockNum < 0) return "<B>Error: Invalid cockNum (" + cockNum + ") passed to anemoneDescript()</b>";
-	var descript:String = "";
 	//50% of the time add a descriptor
 	if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
 	descript += cockNoun(player.cocks[cockNum].cockType);
 	return descript;
 }
-function dragonDescript(cockNum:Number):String {
+function dragonDescript(cockNum:Number):String 
+{
+	var descript:String = "";
 	if(player.totalCocks() == 0) return "<b>ERROR: dragonDescript Called But No Cock Present</b>";
 	if(cockNum > (player.cocks.length - 1)) return "<B>Error: Invalid cock number (" + cockNum + ") passed to dragonDescript()</b>";
 	if(cockNum < 0) return "<B>Error: Invalid cockNum (" + cockNum + ") passed to dragonDescript()</b>";
-	var descript:String = "";
 	//50% of the time add a descriptor
 	if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
 	descript += cockNoun(player.cocks[cockNum].cockType);
 	return descript;
 }
 
-function displacerDescript(cockNum:Number):String {
+function displacerDescript(cockNum:Number):String 
+{
+	var descript:String = "";
 	if(player.totalCocks() == 0) return "<b>ERROR: dragonDescript Called But No Cock Present</b>";
 	if(cockNum > (player.cocks.length - 1)) return "<B>Error: Invalid cock number (" + cockNum + ") passed to dragonDescript()</b>";
 	if(cockNum < 0) return "<B>Error: Invalid cockNum (" + cockNum + ") passed to dragonDescript()</b>";
-	var descript:String = "";
 	//50% of the time add a descriptor
 	if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
 	descript += cockNoun(player.cocks[cockNum].cockType);
@@ -2843,11 +3050,12 @@ function displacerDescript(cockNum:Number):String {
 }
 
 
-function snakeDescript(cockNum:Number):String {
+function snakeDescript(cockNum:Number):String 
+{
+	var descript:String = "";
 	if(player.totalCocks() == 0) return "<b>ERROR: snakeDescript Called But No Cock Present</b>";
 	if(cockNum > (player.cocks.length - 1)) return "<B>Error: Invalid cock number (" + cockNum + ") passed to snakeDescript()</b>";
 	if(cockNum < 0) return "<B>Error: Invalid cockNum (" + cockNum + ") passed to snakeDescript()</b>";
-	var descript:String = "";
 	//50% of the time add a descriptor
 	if(rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
 	descript += cockNoun(player.cocks[cockNum].cockType);

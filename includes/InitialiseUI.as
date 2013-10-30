@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Initialises the "action" buttons at the bottom of the main screen
  *
  * gButtons is an array that holds the 10 buttons along the bottom of the screen
@@ -21,10 +21,10 @@ gButtons[8] = new buttonBackground8();
 gButtons[9] = new buttonBackground9();
 
 //Add the MouseClick event listeners and add the buttons to the stage
-for (var i:int = 0; i < NUM_OF_BUTTONS; i++)
+for (var loopCnt:int = 0; loopCnt < NUM_OF_BUTTONS; loopCnt++)
 {
-	gButtons[i].addEventListener(MouseEvent.CLICK, buttonEvent);
-	this.addChild(gButtons[i]);
+	gButtons[loopCnt].addEventListener(MouseEvent.CLICK, buttonEvent);
+	this.addChild(gButtons[loopCnt]);
 }
 
 //Positioning the buttons
