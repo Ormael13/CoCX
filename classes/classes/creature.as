@@ -1346,11 +1346,12 @@ package classes
 		}
 		
 		//Used in multiCockDescript and potentially elsewhere - barebones cock names
-		function cockNoun(type:CockTypesEnum):String
+		function cockNoun(cockType:CockTypesEnum):String
 		{
+
 			var descript:String = "";
 			var rando:Number = 0;
-			if (type == CockTypesEnum.HUMAN)
+			if (cockType == CockTypesEnum.HUMAN)
 			{
 				rando = rand(10) + 1;
 				if (rando >= 0 && rando <= 4)
@@ -1362,7 +1363,7 @@ package classes
 				if (rando > 7)
 					descript += "shaft";
 			}
-			if (type == CockTypesEnum.DOG)
+			if (cockType == CockTypesEnum.DOG)
 			{
 				if (dogScore() >= foxScore())
 				{
@@ -1417,7 +1418,7 @@ package classes
 						descript += "knotted fox-cock";
 				}
 			}
-			if (type == CockTypesEnum.HORSE)
+			if (cockType == CockTypesEnum.HORSE)
 			{
 				rando = rand(6);
 				if (rando == 0)
@@ -1437,7 +1438,7 @@ package classes
 				if (rando == 7)
 					descript += "flared stallion-cock";
 			}
-			if (type == CockTypesEnum.DEMON)
+			if (cockType == CockTypesEnum.DEMON)
 			{
 				rando = int(Math.random() * 11);
 				if (rando == 0)
@@ -1463,7 +1464,7 @@ package classes
 				if (rando == 10)
 					descript += "blighted cock";
 			}
-			if (type == CockTypesEnum.TENTACLE)
+			if (cockType == CockTypesEnum.TENTACLE)
 			{
 				rando = int(Math.random() * 11);
 				if (rando == 0)
@@ -1489,7 +1490,7 @@ package classes
 				if (rando == 10)
 					descript += "vine-shaped cock";
 			}
-			if (type == CockTypesEnum.CAT)
+			if (cockType == CockTypesEnum.CAT)
 			{
 				rando = int(Math.random() * 11);
 				if (rando == 0)
@@ -1515,7 +1516,7 @@ package classes
 				if (rando == 10)
 					descript += "nubby kitten-prick";
 			}
-			if (type == CockTypesEnum.LIZARD)
+			if (cockType == CockTypesEnum.LIZARD)
 			{
 				rando = int(Math.random() * 11);
 				if (rando == 0)
@@ -1541,7 +1542,7 @@ package classes
 				if (rando == 10)
 					descript += "bulging snake-dick";
 			}
-			if (type == CockTypesEnum.ANEMONE)
+			if (cockType == CockTypesEnum.ANEMONE)
 			{
 				rando = rand(11);
 				if (rando == 0)
@@ -1567,7 +1568,7 @@ package classes
 				if (rando == 10)
 					descript += "squirming shaft";
 			}
-			if (type == CockTypesEnum.KANGAROO)
+			if (cockType == CockTypesEnum.KANGAROO)
 			{
 				rando = rand(11);
 				if (rando == 0)
@@ -1593,7 +1594,7 @@ package classes
 				if (rando == 10)
 					descript += "squirming shaft";
 			}
-			if (type == CockTypesEnum.DRAGON)
+			if (cockType == CockTypesEnum.DRAGON) 
 			{
 				rando = rand(11);
 				if (rando == 0)
@@ -1619,9 +1620,39 @@ package classes
 				if (rando == 10)
 					descript += "scaly shaft";
 			}
+			if(cockType == CockTypesEnum.DISPLACER)
+			{
+				rando = rand(12);
+				if(rando == 0) 
+					descript+="coerl cock";
+				if(rando == 1) 
+					descript+="tentacle-tipped phallus";
+				if(rando == 2) 
+					descript+="starfish-tipped shaft";
+				if(rando == 3) 
+					descript+="alien member";
+				if(rando == 4) 
+					descript+="almost-canine dick";
+				if(rando == 5) 
+					descript+="bizarre prick";
+				if(rando == 6) 
+					descript+="beastly cock";
+				if(rando == 7) 
+					descript+="cthulhu-tier cock";
+				if(rando == 8) 
+					descript+="coerl cock";
+				if(rando == 9) 
+					descript+="animal dong";
+				if(rando == 10) 
+					descript+="star-capped tool";
+				if(rando == 11) 
+					descript+="knotted erection";
+			}
+
+			trace("Produced noun descriptor - ", descript);
 			return descript;
 		}
-		
+
 		//New cock adjectives.  The old one sucked dicks
 		public function cockAdjective(cockIndex:Number = -1)
 		{

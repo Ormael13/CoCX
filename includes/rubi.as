@@ -691,11 +691,14 @@ function rubiIdentity():void {
 	//Identity
 	if(flags[TIMES_DISCUSSED_RUBIS_IDENTITY] == 0) {
 		outputText("You've noticed Rubi always refers to himself as a \"he\", despite ");
-		if(flags[RUBI_NO_CUNT] == 1) outputText("his attempts to appear otherwise");
-		else outputText("his relatively recent transformation to the contrary");
+		if(flags[RUBI_NO_CUNT] == 1) 
+			outputText("his attempts to appear otherwise");
+		else 
+			outputText("his relatively recent transformation to the contrary");
 		outputText(".  Questioning him about it, he simply blushes.");
 		outputText("\n\n\"<i>Oh, that… Um, I guess I never really figured I was a girl, you know?  I really love pretty clothes and other things people call girly, but I never necessarily wanted to be a girl.");
-		if(flags[RUBI_NO_CUNT] == 0) outputText("  Though now that I am, I absolutely love it!");
+		if(flags[RUBI_NO_CUNT] == 0) 
+			outputText("  Though now that I am, I absolutely love it!");
 		outputText("</i>\" he confides, fidgeting slightly.  \"<i>If you wanted to call me a \"she\", I'd be OK with that, just so you know.</i>\"");
 		outputText("\n\nWhich type of pronoun would you prefer Rubi to use?");
 	}
@@ -732,14 +735,21 @@ function rubiIsAShe():void {
 //Fuck Rubi
 //(available for players with cocks or large clits (at least 4</i>\")) (If Orgasm Denial is activated, adds 1 to Blue Balls)
 function fuckRubi():void {
-	var x:int = player.cockThatFits(rubiCapacity());
-	if(x < 0) x = player.biggestCockIndex();
+	var x:int;
+	x = player.cockThatFits(rubiCapacity());
+	if(x < 0) 
+		x = player.biggestCockIndex();
 	clearOutput();
 	//(-100 Arousal)
 	outputText("You take Rubi by the hand and head into the bedroom, clutching " + rubiMF("him","her") + " close.  You sit on the edge of the soft fluffy bed and pull the little demon " + rubiMF("boy","girl") + " onto your lap.  The two of you kiss, letting your " + tongueDescript() + " explore the depths of your partner's mouth.");
 	outputText("\n\nRunning your hands along Rubi's body, you pull and tear at the clothes keeping you apart.  Garments fly as you ravish each other, and it isn't long before you're both naked, with Rubi straddling your waist.  " + rubiMF("He giggles and reaches between his legs","She giggles and reaches between her legs") + ", wrapping slender fingers around your ");
-	if(player.hasCock()) outputText(cockDescript(x));
-	else outputText(clitDescript());
+	if(player.hasCock()) 
+	{
+		// trace("Rubi - PlayerHasCock");
+		outputText(cockDescript(x), false);
+	}
+	else 
+		outputText(clitDescript(), false);
 	outputText(".");
 	
 	var size:int = 0;

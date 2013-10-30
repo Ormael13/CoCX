@@ -553,6 +553,7 @@ function exploreForest():void {
 			outputText("You trip on an exposed root, scraping yourself somewhat, but otherwise the hour is uneventful.", false);
 			takeDamage(10);
 			doNext(13);
+			trace("FIX MEEEEE");
 			return;
 		}
 	}
