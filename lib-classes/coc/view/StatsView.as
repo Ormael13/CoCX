@@ -44,7 +44,7 @@ package coc.view {
                     "sideBarBG"
                 ];
 
-            var statsUpDowns :Array = [
+            var statsUpDownsNames :Array = [
                     "strUp",      "strDown",
                     "touUp",      "touDown",
                     "speUp",      "speDown",
@@ -64,9 +64,13 @@ package coc.view {
                 this.addChildAt( mainView.getChildByName( statsDOName ), 0 );
             }
 
-            // glom on to things.
-            // addChild ALL THE STATS.
-        }
+            this.upDownsContainer = new Sprite();
+            this.addChild( this.upDownsContainer );
+
+            for each( var statsUpDownDOName :* in statsUpDownsNames ) {
+                this.upDownsContainer.addChild( mainView.getChildByName( statsUpDownDOName ) );
+            }
+        };
 
         protected function setStatText( name :String, value :* ) {
             (this.getChildByName( name ) as TextField).htmlText = String( Math.floor( value ) );

@@ -4265,29 +4265,29 @@ function hideMenus():void {
 }
 //Hide the up/down indicators
 function hideUpDown():void {
-	strUp.visible = false;
-	strDown.visible = false;
-	touUp.visible = false;
-	touDown.visible = false;
-	speUp.visible = false;
-	speDown.visible = false;
-	inteUp.visible = false;
-	inteDown.visible = false;
-	libUp.visible = false;
-	libDown.visible = false;
-	sensUp.visible = false;
-	sensDown.visible = false;
-	corUp.visible = false;
-	corDown.visible = false;
-	hpUp.visible = false;
-	hpDown.visible = false;
-	lustUp.visible = false;
-	lustDown.visible = false;
-	levelUp.visible = false;
-	xpUp.visible = false;
-	xpDown.visible = false;
-	fatigueUp.visible = false;
-	fatigueDown.visible = false;
+	// strUp.visible = false;
+	// strDown.visible = false;
+	// touUp.visible = false;
+	// touDown.visible = false;
+	// speUp.visible = false;
+	// speDown.visible = false;
+	// inteUp.visible = false;
+	// inteDown.visible = false;
+	// libUp.visible = false;
+	// libDown.visible = false;
+	// sensUp.visible = false;
+	// sensDown.visible = false;
+	// corUp.visible = false;
+	// corDown.visible = false;
+	// hpUp.visible = false;
+	// hpDown.visible = false;
+	// lustUp.visible = false;
+	// lustDown.visible = false;
+	// levelUp.visible = false;
+	// xpUp.visible = false;
+	// xpDown.visible = false;
+	// fatigueUp.visible = false;
+	// fatigueDown.visible = false;
 	//Clear storage values so up/down arrows can be properly displayed
 	oldStr = 0;
 	oldTou = 0;
