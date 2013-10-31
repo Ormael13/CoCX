@@ -2465,7 +2465,7 @@ function amilyFollowerEncounter():void {
 function amilyMenu(output:Boolean = true):void {
 	var date:Number = 0;
 	//If no fight yet, have option to introduce Urta and Amily
-	if(player.gender > 0 && flags[AMILY_FOLLOWER] == 1 && flags[AMILY_VISITING_URTA] == 0 && (flags[UNKNOWN_FLAG_NUMBER_00012] >= 5 || urtaLove()) && !urtaBusy()) 
+	if(player.gender > 0 && flags[AMILY_FOLLOWER] == 1 && flags[AMILY_VISITING_URTA] == 0 && (flags[URTA_COMFORTABLE_WITH_OWN_BODY] >= 5 || urtaLove()) && !urtaBusy()) 
 	{
 		if(output)outputText("<b>You could take Amily on a date to Tel'Adre, and perhaps even introduce her to Urta!</b>\n\n", false);
 		date = 3400;
@@ -2658,7 +2658,7 @@ function fuckTheMouseBitch():void {
 		}
 	}
 	var urta:Number = 0;
-	if(flags[AMILY_VISITING_URTA] == 4 && flags[UNKNOWN_FLAG_NUMBER_00012] >= 0 && !urtaBusy()) urta = 3190;
+	if(flags[AMILY_VISITING_URTA] == 4 && flags[URTA_COMFORTABLE_WITH_OWN_BODY] >= 0 && !urtaBusy()) urta = 3190;
 	var swim:int = 0;
 	if(flags[AMILY_OWNS_BIKINI] > 0 && player.hasCock() && !amilyCorrupt()) swim = 3960;
 	var threesome:int = 0;

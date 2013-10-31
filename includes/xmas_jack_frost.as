@@ -301,7 +301,7 @@ function processJackFrostEvent():void {
 	else if(flags[JACK_FROST_PROGRESS] <= 7 && player.hasStatusAffect("Camp Marble") >= 0) {
 		flags[JACK_FROST_PROGRESS] = 8;
 		//With Kids
-		if(flags[MARBLE_KIDS] > 0 && flags[UNKNOWN_FLAG_NUMBER_00009] >= 100) {
+		if(flags[MARBLE_KIDS] > 0 && flags[MARBLE_NURSERY_CONSTRUCTION] >= 100) {
 			outputText("You find Marble simply staring into the sky, a look of wonder covering her face.  Dancing around her in excitement ");
 			if(flags[MARBLE_KIDS] > 1) outputText("are ");
 			else outputText("is ");

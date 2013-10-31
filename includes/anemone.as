@@ -576,11 +576,11 @@ function minoCumForAnemonieeeeez():void {
 	outputText("The initial surprise subsides to wooly-headedness and a feeling of mild arousal as the stingers in her tentacles find exposed flesh.  In panic of drowning you pull free of the ropy mass and backpaddle away from the girl until your " + player.feet() + " reassuringly touch the shallows of the lakebed.  As you shake your head to clear the haze, you notice a few of your items have fallen out of your pouches and are floating in the water.  The anemone has picked one in particular up and is examining it; a bottle of minotaur cum.  Her eyes light up in recognition as the fluid sloshes back and forth and she looks beseechingly at you, cradling it next to her cheek.  \"<i>Gimme?</i>\" she asks, trying to look as sweet as possible.\n\n", false);
 
 	//[(PC not addicted)
-	if(flags[UNKNOWN_FLAG_NUMBER_00020] == 0) {
+	if(flags[MINOTAUR_CUM_ADDICTION_STATE] == 0) {
 		outputText("Do you want to make a present of the bottle?", false);
 	}
 	//(PC addicted but sated)
-	else if(flags[UNKNOWN_FLAG_NUMBER_00020] == 1) {
+	else if(flags[MINOTAUR_CUM_ADDICTION_STATE] == 1) {
 		outputText("You're still riding high from your last dose; do you want to share your buzz with the girl? It might lead to something fun...", false);
 	}
 	//(PC addicted but in withdrawal)

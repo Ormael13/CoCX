@@ -375,7 +375,7 @@ function conclusionOfGiantessGoodEnd():void {
 	outputText("\n\nAfter a long pause, you pocket the key, square yourself with Carol and North, returning her hand gesture before giving them a goofy grin that positively sparks in the snow-cushioned landscape.  As you turn to depart once more, you wave over your shoulder, escorted out with the continued giggles and lovey-dovey conversation of the unlikely couple.");
 	outputText("\n\nMerry Christmas indeed!");
 	//[if you haven't been introduced to christmas via elf or otherwise] 
-	if(flags[UNKNOWN_FLAG_NUMBER_00034] == 0) outputText("\n\nYou have no idea what that is.");
+	if(flags[PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] == 0) outputText("\n\nYou have no idea what that is.");
 	//[end, get The North Star & A Christmas Carol perks]
 	//The North Star
 	//Witness picnic events with North & Carol at the High Mountain.

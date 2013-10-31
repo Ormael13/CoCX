@@ -1591,8 +1591,8 @@ function interactWithMarbleAtCamp():void {
 	if(player.hasStatusAffect("MarbleHasItem") >= 0) gatherEvent = 2129;
 	//The player gives Marble an item, right now only Lactaid will be here, and only if the player is fully addicted
 	if(player.hasPerk("Marble's Milk") >= 0 && hasItem("Lactaid",1)) giveItemEvent = 2128;
-	if(hasItem("P.Draft",1) && flags[UNKNOWN_FLAG_NUMBER_00004] == 0) giveItemEvent = 2128;
-	if(flags[UNKNOWN_FLAG_NUMBER_00004] > 0) {
+	if(hasItem("P.Draft",1) && flags[MARBLE_DICK_TYPE] == 0) giveItemEvent = 2128;
+	if(flags[MARBLE_DICK_TYPE] > 0) {
 		if(hasItem("PinkEgg",1)) giveItemEvent = 2128;
 		if(hasItem("L.PnkEg",1)) giveItemEvent = 2128;
 	}
@@ -2025,7 +2025,7 @@ function marbleCampSexNew():void {
 				
 				outputText("\n\nYou gently moan into her breast in response, causing her to giggle as she plays with the tip of your " + cockDescript(0) + ".  She returns to the pumping motion and increases the pace just as you decide you need something to grab onto - and the most pleasant things at hand are her breasts.  Marble gasps in surprise and moans as you rub her breasts while suckling, and starts jerking you off even faster in response.");
 				//( [Female Marble]
-				if(flags[UNKNOWN_FLAG_NUMBER_00005] == 0) outputText("  Her thighs seem to be rubbing together, and the place you're lying on feels a tiny bit wet, so you assume it isn't only you who's getting more and more excited by this.");
+				if(flags[MARBLE_DICK_LENGTH] == 0) outputText("  Her thighs seem to be rubbing together, and the place you're lying on feels a tiny bit wet, so you assume it isn't only you who's getting more and more excited by this.");
 				else outputText("  Her thighs are gently rubbing beneath you, and you feel something hard poking you in the back.  You smile around the nipple you have in your mouth.");
 				//[If balls] : A
 				if(player.balls > 0) outputText("  As her hand reaches the base of your cock, she stops stroking it to take a moment and gently roll your " + ballsDescriptLight() + " with her fingers.  \"<i>Are these ready to shoot out for me soon, sweetie?</i>\""); 
@@ -2051,7 +2051,7 @@ function marbleCampSexNew():void {
 				else outputText("\n\nShe grabs your clit and strokes it a few times, then grins widely.  \"<i>This is kind of perverse, sweetie.  Is this really one of your lady parts?</i>\"");
 				outputText("  She returns to pumping her fingers in and out of your pussy and, just as she increases the pace, you decide you need something to grab onto - and the most pleasant things at hand are her breasts.  Marble gasps in surprise and moans as you rub her breasts while suckling, and starts fingering you even faster in response.");
 				//( [Female Marble] 
-				if(flags[UNKNOWN_FLAG_NUMBER_00005] == 0) outputText("  Her thighs seem to be rubbing together, and the place you're lying on feels a tiny bit wet, so you assume it isn't only you who's getting more and more excited by this.");
+				if(flags[MARBLE_DICK_LENGTH] == 0) outputText("  Her thighs seem to be rubbing together, and the place you're lying on feels a tiny bit wet, so you assume it isn't only you who's getting more and more excited by this.");
 				else outputText("  Her thighs are gently rubbing beneath you, and you feel something hard poking you in the back.  You smile around the nipple you have in your mouth.");
 
 				outputText("\n\nYou're at the edge already, and the fingering of your " + vaginaDescript(0) + " as well as the rubbing motion against your [clit] soon send you over it.  Thrashing in Marble's embrace, you release your feminine juices all over her hand.");
@@ -2210,7 +2210,7 @@ function marbleCampSexNew():void {
 		outputText("\n\n\"<i>It's a long journey to your special place, sweetie; I hope you enjoy the trip,</i>\" she says as she runs her fingers down your tail, gently playing with the end.  \"<i>Look at this cute little candy, just for me.</i>\"  She lifts your tail up to her mouth, then sticks out her inhumanly long tongue and starts to run it around the tip.  The feel of it sends tingles up your spine.  \"<i>Aww, did I make you shiver with pleasure, sweetie?</i>\"  Marble teases, and sets your tail back down.");
 		outputText("\n\n\"<i>Now sweetie, how about a nice tail massage?</i>\" she says, putting her hands on the exposed underside of your tail and starting to rub the soft scales.  You sigh softly as she gently moves up your length, massaging your tail with shallow downward strokes.  \"<i>Enjoying yourself?  Let me make this even better for you,</i>\" she gently intones as she she gets close to your groin.  She removes her top, and lowers her large breasts to your serpentine length.  Marble grins at you, then turns around and, pushing her breasts down on your tail, starts to slither herself back down your length, giving you an enticing view of her rump.  All the while, her fingers continue to play with the sensitive underside of your tail just ahead of her soft body.");
 		if(player.lib >= 50) outputText("  Quietly, you reach down and hook your fingers into the hem of her clothing, allowing her to pull it half off with her next shift and expose her pussy");
-		if(flags[UNKNOWN_FLAG_NUMBER_00005] > 0) outputText(" and " + marbleCock());
+		if(flags[MARBLE_DICK_LENGTH] > 0) outputText(" and " + marbleCock());
 		outputText(".  \"<i>Why, you shameless " + player.mf("pervert","hussy") + "!</i>\" the cow-girl says in mock-offense, winking at you.");
 	
 		outputText("\n\nWhen she gets back to your tail, she turns around once more, and crawls back towards your upper body, while walking her fingers up your tail again.");
@@ -2254,25 +2254,25 @@ function marbleCock():String {
 	var rando:Number;
 	//Discuss length one in 3 times.
 	if(int(Math.random()*3) == 0) {
-		if(flags[UNKNOWN_FLAG_NUMBER_00005] < 3) descript = "squat ";
-		if(flags[UNKNOWN_FLAG_NUMBER_00005] >= 3 && flags[UNKNOWN_FLAG_NUMBER_00005] < 5) descript = "short ";
-		if(flags[UNKNOWN_FLAG_NUMBER_00005] >= 5 && flags[UNKNOWN_FLAG_NUMBER_00005] < 7) descript = "average ";
-		if(flags[UNKNOWN_FLAG_NUMBER_00005] >= 7 && flags[UNKNOWN_FLAG_NUMBER_00005] < 9) descript = "long ";
-		if(flags[UNKNOWN_FLAG_NUMBER_00005] >= 10 && flags[UNKNOWN_FLAG_NUMBER_00005] < 13) descript = "huge ";
-		if(flags[UNKNOWN_FLAG_NUMBER_00005] >= 13 && flags[UNKNOWN_FLAG_NUMBER_00005] < 18) descript = "massive ";
-		if(flags[UNKNOWN_FLAG_NUMBER_00005] >= 18 && flags[UNKNOWN_FLAG_NUMBER_00005] < 30) descript = "enormous ";
-		if(flags[UNKNOWN_FLAG_NUMBER_00005] >= 30) descript = "towering ";
+		if(flags[MARBLE_DICK_LENGTH] < 3) descript = "squat ";
+		if(flags[MARBLE_DICK_LENGTH] >= 3 && flags[MARBLE_DICK_LENGTH] < 5) descript = "short ";
+		if(flags[MARBLE_DICK_LENGTH] >= 5 && flags[MARBLE_DICK_LENGTH] < 7) descript = "average ";
+		if(flags[MARBLE_DICK_LENGTH] >= 7 && flags[MARBLE_DICK_LENGTH] < 9) descript = "long ";
+		if(flags[MARBLE_DICK_LENGTH] >= 10 && flags[MARBLE_DICK_LENGTH] < 13) descript = "huge ";
+		if(flags[MARBLE_DICK_LENGTH] >= 13 && flags[MARBLE_DICK_LENGTH] < 18) descript = "massive ";
+		if(flags[MARBLE_DICK_LENGTH] >= 18 && flags[MARBLE_DICK_LENGTH] < 30) descript = "enormous ";
+		if(flags[MARBLE_DICK_LENGTH] >= 30) descript = "towering ";
 		descripted = true;
 	}
 
 	//Discuss girth one in 3 times.
 	if(int(Math.random()*3) == 0) {
 		//narrow, thin, ample, broad, distended, voluminous
-		if(flags[UNKNOWN_FLAG_NUMBER_00006] <= .75) descript += "narrow "
-		if(flags[UNKNOWN_FLAG_NUMBER_00006] > 1 && flags[UNKNOWN_FLAG_NUMBER_00006] <= 1.4) descript += "ample ";
-		if(flags[UNKNOWN_FLAG_NUMBER_00006] > 1.4 && flags[UNKNOWN_FLAG_NUMBER_00006] <= 2) descript += "broad ";
-		if(flags[UNKNOWN_FLAG_NUMBER_00006] > 2 && flags[UNKNOWN_FLAG_NUMBER_00006] <= 3.5) descript += "fat ";
-		if(flags[UNKNOWN_FLAG_NUMBER_00006] > 3.5) descript += "distended ";
+		if(flags[MARBLE_DICK_THICKNESS] <= .75) descript += "narrow "
+		if(flags[MARBLE_DICK_THICKNESS] > 1 && flags[MARBLE_DICK_THICKNESS] <= 1.4) descript += "ample ";
+		if(flags[MARBLE_DICK_THICKNESS] > 1.4 && flags[MARBLE_DICK_THICKNESS] <= 2) descript += "broad ";
+		if(flags[MARBLE_DICK_THICKNESS] > 2 && flags[MARBLE_DICK_THICKNESS] <= 3.5) descript += "fat ";
+		if(flags[MARBLE_DICK_THICKNESS] > 3.5) descript += "distended ";
 		descripted = true;
 	}
 	rando=int(Math.random()*10)
@@ -2574,18 +2574,18 @@ function marbleBadEndFollowup():void {
 }
 
 //BIRTHING OVERWRITES SECKS
-//if(flags[UNKNOWN_FLAG_NUMBER_00001] == 1)
+//if(flags[MARBLE_PREGNACY_INCUBATION] == 1)
 function marblePoopsBaybees():void {
-	flags[UNKNOWN_FLAG_NUMBER_00001] = 0;
+	flags[MARBLE_PREGNACY_INCUBATION] = 0;
 	//Normal shitz
-	if(flags[UNKNOWN_FLAG_NUMBER_00002] == 1) {
+	if(flags[MARBLE_PREGNACY_TYPE] == 1) {
 		//Gives birth at 28 days
 		outputText("\nMarble rushes up to you with a concerned look on her face.  \"<i>Sweetie, its time!  Our child is going to come into the world!</i>\"  She squats down and gets you to kneel next to her, putting your hand against her now gaping womanhood.  You can feel that something is starting to come out of the hole, and you start encouraging Marble as she continues to breathe heavily and occasionally grunt from the effort of pushing the child out.\n\n", false);
 		outputText("As the head comes out of her hole, you can see that it has small nub like horns and cute little bovine ears.  You call to Marble that you can see the head and that it's already is starting to look like her.  You hear Marble give a happy laugh between her breaths as she continues to push the child out.  You notice that the smell around Marble is a little different right now, though you can't judge exactly what the difference is.\n\n", false);
 		outputText("After only a few short minutes, the child is pushed out by Marble completely and she gives a satisfied sigh.  You look at the child as it starts bawling and see that it is indeed a little cow-girl that the two of you have brought into the world.  You can already tell that she has all the bovine features that Marble has", false);
 		//Does the PC note that she is not a futa?
 		//If (Marble has a cock)
-		if(flags[UNKNOWN_FLAG_NUMBER_00004] > 0) outputText(", but you notice that she does not have a cock of any kind. It seems that trait isn't passed on", false);
+		if(flags[MARBLE_DICK_TYPE] > 0) outputText(", but you notice that she does not have a cock of any kind. It seems that trait isn't passed on", false);
 		outputText(".   The little girl's face is a really pretty one; you're sure that she'll grow up to be like her mom.  You hand Marble the child and she puts the crying child to her chest. The little girl stops crying at once and starts eagerly gobbling down Marble's milk.\n\n", false);
 		//If (PC is addicted to Marble)
 		if(player.hasPerk("Marble's Milk") >= 0) {
@@ -2644,7 +2644,7 @@ function marblePoopsBaybees():void {
 		return;
 	}
 	//Eggs
-	else if(flags[UNKNOWN_FLAG_NUMBER_00002] == 2) {
+	else if(flags[MARBLE_PREGNACY_TYPE] == 2) {
 		//Birthing eggs
 		//Gives birth as the standard time for eggs
 		outputText("\nYou hear moaning coming from a secluded part of the rocks and go over to investigate.  You find Marble squatted down on the ground with a ", false);
@@ -2693,29 +2693,29 @@ function marblePoopsBaybees():void {
 function marbleNightSleepFlavor():Boolean {
 	spriteSelect(41);
 	//If player is marble-preggo, she builds nursery
-	if(flags[UNKNOWN_FLAG_NUMBER_00009] == 0 && player.pregnancyType == 8 && (player.pregnancyIncubation <= 128)) {
+	if(flags[MARBLE_NURSERY_CONSTRUCTION] == 0 && player.pregnancyType == 8 && (player.pregnancyIncubation <= 128)) {
 		outputText("<b>Citing your pregnant belly, Marble informs you she'll be getting to work on building a nursery for your coming cow-child soon.</b>\n\n", false);
-		flags[UNKNOWN_FLAG_NUMBER_00009]++;
+		flags[MARBLE_NURSERY_CONSTRUCTION]++;
 	}
 	//PREGGO ALERTZ
 	//3 days: 
-	if(flags[UNKNOWN_FLAG_NUMBER_00001] == 648) outputText("<b>You notice that Marble seems to have gained some weight.</b>\n\n", false);
+	if(flags[MARBLE_PREGNACY_INCUBATION] == 648) outputText("<b>You notice that Marble seems to have gained some weight.</b>\n\n", false);
 	//8 days: 
-	else if(flags[UNKNOWN_FLAG_NUMBER_00001] == 528) outputText("<b>Marble's belly has gotten a fair bit bigger; she may be pregnant.</b>\n\n", false);
+	else if(flags[MARBLE_PREGNACY_INCUBATION] == 528) outputText("<b>Marble's belly has gotten a fair bit bigger; she may be pregnant.</b>\n\n", false);
 	//12 days: 
-	else if(flags[UNKNOWN_FLAG_NUMBER_00001] == 432) {
+	else if(flags[MARBLE_PREGNACY_INCUBATION] == 432) {
 		outputText("<b>Marble's belly has gotten bigger; she is obviously pregnant.", false);
 		//(if the nursery has not yet been built, she is forced to start working on it here and her job cannot be changed until it has been finished)
-		if(flags[UNKNOWN_FLAG_NUMBER_00009] == 0 && flags[UNKNOWN_FLAG_NUMBER_00002] == 1) {
-			flags[UNKNOWN_FLAG_NUMBER_00009]++;
+		if(flags[MARBLE_NURSERY_CONSTRUCTION] == 0 && flags[MARBLE_PREGNACY_TYPE] == 1) {
+			flags[MARBLE_NURSERY_CONSTRUCTION]++;
 			outputText("  She lets you know that she'll be busy working on a nursery for her child for a while.", false);
 		}
 		outputText("</b>\n\n", false);
 	}
 	//18 days: 
-	else if(flags[UNKNOWN_FLAG_NUMBER_00001] == 288) outputText("<b>Marble's pregnancy has advanced further still, though the structure of her body keeps it from slowing her down.</b>\n\n", false);
+	else if(flags[MARBLE_PREGNACY_INCUBATION] == 288) outputText("<b>Marble's pregnancy has advanced further still, though the structure of her body keeps it from slowing her down.</b>\n\n", false);
 	//24 days: 
-	else if(flags[UNKNOWN_FLAG_NUMBER_00001] == 144) outputText("<b>Marble is probably getting close to giving birth, as her belly has gotten very large.</b>\n\n", false);
+	else if(flags[MARBLE_PREGNACY_INCUBATION] == 144) outputText("<b>Marble is probably getting close to giving birth, as her belly has gotten very large.</b>\n\n", false);
 	//Both under 30 - no sex
 	//Player 60+ & marble 20+ - sex
 	//Marble 60+ & player 20+ - service
@@ -2766,7 +2766,7 @@ function marbleNightSleepFlavor():Boolean {
 		if(player.lust < 33) {
 			outputText("and I know you really aren't in the mood, but could you please help me out?</i>\"  You sit up and ask her what it is.  She looks at you slightly embarrassed before asking you, \"<i>Could you please ", false);
 			//If (Marble is a herm)
-			if(flags[UNKNOWN_FLAG_NUMBER_00004] > 0)
+			if(flags[MARBLE_DICK_TYPE] > 0)
 				outputText("suck my " + marbleCock() + "?  I really, really need it.</i>\"", false);
 			else
 				outputText("lick my womanhood?  I really want to feel your tongue bring me to release...</i>\"", false);
@@ -2774,7 +2774,7 @@ function marbleNightSleepFlavor():Boolean {
 			//options: yes/no (yes continues the current scene, this is a bit awkward as the current breaks are in the middle of if statements, so new futa/female if statements will need to be added)
 			var tailJob:Number = 0 ;
 			//tailjob for futa marble if PC is naga
-			if(player.isNaga() && flags[UNKNOWN_FLAG_NUMBER_00005] > 0) tailJob = 3570;
+			if(player.isNaga() && flags[MARBLE_DICK_LENGTH] > 0) tailJob = 3570;
 			simpleChoices("Yes",marbleNomNoms,"No",1,"Tailjob",tailJob,"",0,"",0);
 		}
 		else {
@@ -2796,7 +2796,7 @@ function pcPregWithMarblesKids():Boolean {
 	return false;
 }
 function marblePregWithPCKids():Boolean {
-	if(flags[UNKNOWN_FLAG_NUMBER_00002] == 1 && flags[UNKNOWN_FLAG_NUMBER_00001] <= 280 && flags[UNKNOWN_FLAG_NUMBER_00001] != 0) return true;
+	if(flags[MARBLE_PREGNACY_TYPE] == 1 && flags[MARBLE_PREGNACY_INCUBATION] <= 280 && flags[MARBLE_PREGNACY_INCUBATION] != 0) return true;
 	return false;
 }
 
@@ -2887,7 +2887,7 @@ function marbleNightSexIntro(clear:Boolean = true):void {
 		if(player.hasVagina()) outputText(vaginaDescript(0), false);
 		outputText(" while you slip your own hand into her clothes and ", false);
 		//If (Marble is a herm) {
-		if(flags[UNKNOWN_FLAG_NUMBER_00004] > 0) {
+		if(flags[MARBLE_DICK_TYPE] > 0) {
 			outputText("gently rub her " + marbleCock() + ".  After a moment, you move your hand down lower and ", false);
 		}
 		outputText(" run your fingers down her moist womanhood.  The two of you quiver under each other's ministrations.  Both of you work to quickly free yourselves from your clothing, growing increasingly excited at where things are going.  Free of your garments, you move overtop of Marble.\n\n", false);
@@ -2985,7 +2985,7 @@ function marbleNightSexDudes():void {
 		outputText(" unleashes its own load, liberally covering both of you.  ", false);
 	}
 	//does Marble spray her cock?
-	if(flags[UNKNOWN_FLAG_NUMBER_00004] > 0) {
+	if(flags[MARBLE_DICK_TYPE] > 0) {
 		outputText("Trapped between your bodies,  Marble's " + marbleCock() + " spasms and sprays the two of you.", false);
 	}
 	//Chance of impregnating Marble (if she is purified or the PC is addicted) based on the PC's cum production
@@ -2999,7 +2999,7 @@ function marbleNightSexChicks():void {
 	flags[MARBLE_LUST] = 0;
 	var preggerOdds:Number = 0;
 	outputText("", true);
-	if(flags[UNKNOWN_FLAG_NUMBER_00004] == 0) {
+	if(flags[MARBLE_DICK_TYPE] == 0) {
 		outputText("You gently lift yourself up as Marble produces her double dildo and slips it inside her womanhood.  Smiling at her, you slowly lower your body and impale your " + vaginaDescript(0) + " onto the artificial rod.  ", false);
 		//Loosen PC's vagina if they are really tight, also removes virginity
 		cuntChange(14,true);
@@ -3043,7 +3043,7 @@ function marbleNightSexChicks():void {
 		outputText("You gently lift yourself up into the air and guide your " + vaginaDescript(0) + " to the tip of her waiting " + marbleCock() + ".  You slowly lower your " + vaginaDescript(0) + " onto her quivering " + marbleCock() + ", gaining inch by inch ", false);
 		//is she satisfied?
 		//If (player can fit all of her cock and PC is not a virgin) {
-		if(player.vaginalCapacity() > flags[UNKNOWN_FLAG_NUMBER_00005] * flags[UNKNOWN_FLAG_NUMBER_00006]) {
+		if(player.vaginalCapacity() > flags[MARBLE_DICK_LENGTH] * flags[MARBLE_DICK_THICKNESS]) {
 			outputText("until she is fully within you.  The two of you shudder in pleasure, and Marble says, \"<i>Oh sweetie, you got it all in there.  Being inside another woman like this is something I'll never really get used to, but I can't deny how good it feels.</i>\"\n\n", false);  
 		}
 		//Marble seems to think you can take more then maybe you should be able to take
@@ -3087,7 +3087,7 @@ function marbleNightSexChicks():void {
 		outputText("The two of you give one more shudder from the wonderful stimulation, before collapsing on top of one another.  ", false);
 		//Pregnancy chance for PC, ¼ their fertility
 		player.knockUp(8,368,150);
-		cuntChange(flags[UNKNOWN_FLAG_NUMBER_00006] * flags[UNKNOWN_FLAG_NUMBER_00005], true);
+		cuntChange(flags[MARBLE_DICK_THICKNESS] * flags[MARBLE_DICK_LENGTH], true);
 	}
 	marbleSexFinish();
 }
@@ -3117,13 +3117,13 @@ function marblePreggoChance(preggerMult:Number):void {
 	trace("MARBLE PREGGO ODDS: " + preggerOdds);
 	if(rand(100) < preggerOdds && player.hasPerk("Marble's Milk") >= 0) {
 		//SHUT UP SHES ALREADY PREGNANT
-		if(flags[UNKNOWN_FLAG_NUMBER_00001] > 0) {}
+		if(flags[MARBLE_PREGNACY_INCUBATION] > 0) {}
 		//NO SHE AINT
 		else {
 			trace("Marble got PREGNANT!");
 			//SHE IS NAU!
-			flags[UNKNOWN_FLAG_NUMBER_00001] = 720;
-			flags[UNKNOWN_FLAG_NUMBER_00002] = 1;
+			flags[MARBLE_PREGNACY_INCUBATION] = 720;
+			flags[MARBLE_PREGNACY_TYPE] = 1;
 		}
 	}
 	
@@ -3147,7 +3147,7 @@ function marbleNomNoms():void {
 	//intro for non corrupt Marble
 	//outputText("You go to lie down and notice that Marble hasn't gone to bed yet.  You decide not worry about it too much until you hear Marble come clopping up beside you.  \"<i>Sweetie?</i>\" she calls out to you as she crawls in next to you.  \"<i>Sweetie, I'm feeling really horny and I know you really aren't in the mood, but could you please help me out?</i>\"  You sit up and ask her how you can help; you could never refuse her.  She looks at you slightly embarrassed before asking you, \"<i>Could you please ", false);
 	//If (Marble is a herm) {
-	if(flags[UNKNOWN_FLAG_NUMBER_00004] > 0) {
+	if(flags[MARBLE_DICK_TYPE] > 0) {
 		slimeFeed();
 		//outputText("suck my " + marbleCock() + "?  I really, really need it.</i>\"", false);
 		if(player.cor < 30) {
@@ -3205,9 +3205,9 @@ function MarbleDigsDraftsYo():void {
 	else outputText("nervous ", false);
 	outputText("smile.  <b>Marble is now a hermaphrodite.</b>  ", false);
 	doNext(13);
-	flags[UNKNOWN_FLAG_NUMBER_00004] = 1;
-	flags[UNKNOWN_FLAG_NUMBER_00005] = 7;
-	flags[UNKNOWN_FLAG_NUMBER_00006] = 2;
+	flags[MARBLE_DICK_TYPE] = 1;
+	flags[MARBLE_DICK_LENGTH] = 7;
+	flags[MARBLE_DICK_THICKNESS] = 2;
 	
 }
 
@@ -3232,9 +3232,9 @@ function MarblePEggEffects():void {
 		outputText("So does this mean you don't want me to have a cock anymore, sweetie?</i>\"  You assure her that yes, you don't want her to have it anymore.  She seems relieved by this and admits, \"<i>Thank you sweetie, I don't think I really liked having it,</i>\" before eating the egg.\n\n", false);
 	}
 	outputText("She lifts up her skirt and the two of you watch as her " + marbleCock() + " is absorbed back into her body.  <b>Marble is now purely female.</b>  ", false);
-	flags[UNKNOWN_FLAG_NUMBER_00004] = 0;
-	flags[UNKNOWN_FLAG_NUMBER_00005] = 0;
-	flags[UNKNOWN_FLAG_NUMBER_00006] = 0;
+	flags[MARBLE_DICK_TYPE] = 0;
+	flags[MARBLE_DICK_LENGTH] = 0;
+	flags[MARBLE_DICK_THICKNESS] = 0;
 	doNext(13);
 }
 
@@ -3244,20 +3244,20 @@ function marbleOvulatesLikeMadDawg():void {
 	outputText("", true);
 	//gives her eggs if she isn't pregnant, speeds pregnancy if she is.  She will refuse to take it if she is visibly pregnant with something other than eggs, and the nursery hasn't been built yet.
 	//Marble is visibly pregnant with non-eggs, and the nursery has not been built yet) {
-	if(flags[UNKNOWN_FLAG_NUMBER_00009] < 100 && flags[UNKNOWN_FLAG_NUMBER_00001] > 0 && flags[UNKNOWN_FLAG_NUMBER_00002] == 1) {
+	if(flags[MARBLE_NURSERY_CONSTRUCTION] < 100 && flags[MARBLE_PREGNACY_INCUBATION] > 0 && flags[MARBLE_PREGNACY_TYPE] == 1) {
 		outputText("Marble refuses to take the elixir to speed up her pregnancy until after she has finished the nursery. ", false);
 		doNext(13);
 		return;
 	}
-	else if(flags[UNKNOWN_FLAG_NUMBER_00001] > 0) {
+	else if(flags[MARBLE_PREGNACY_INCUBATION] > 0) {
 		outputText("After taking the elixir, Marble's belly rumbles slightly.  You can both tell that her pregnancy has advanced.  ", false);
-		flags[UNKNOWN_FLAG_NUMBER_00001] -= 40 + rand(30);
-		if(flags[UNKNOWN_FLAG_NUMBER_00001] <= 0) flags[UNKNOWN_FLAG_NUMBER_00001] = 1;
+		flags[MARBLE_PREGNACY_INCUBATION] -= 40 + rand(30);
+		if(flags[MARBLE_PREGNACY_INCUBATION] <= 0) flags[MARBLE_PREGNACY_INCUBATION] = 1;
 	}
 	else {
 		outputText("After taking the elixir, Marble tells you that her belly feels full.  It sounds like she'll be laying eggs soon.  ", false);
-		flags[UNKNOWN_FLAG_NUMBER_00001] = 96;
-		flags[UNKNOWN_FLAG_NUMBER_00002] = 2;
+		flags[MARBLE_PREGNACY_INCUBATION] = 96;
+		flags[MARBLE_PREGNACY_TYPE] = 2;
 	}
 	consumeItem("OviElix",1);
 	doNext(13);
@@ -3354,20 +3354,20 @@ function marbleAppearance():void {
 	//Marble's Pregnancy
 	//Marble's cock
 	//These pieces of text should appear in the same place as they do for the PC
-	if(flags[UNKNOWN_FLAG_NUMBER_00001] > 0) {
-		if(flags[UNKNOWN_FLAG_NUMBER_00001] > 648) {}
+	if(flags[MARBLE_PREGNACY_INCUBATION] > 0) {
+		if(flags[MARBLE_PREGNACY_INCUBATION] > 648) {}
 		//3-8 days in...
-		else if(flags[UNKNOWN_FLAG_NUMBER_00001] > 528) outputText("It looks like she's put on some weight since coming to your camp.\n\n", false);
+		else if(flags[MARBLE_PREGNACY_INCUBATION] > 528) outputText("It looks like she's put on some weight since coming to your camp.\n\n", false);
 		//8-12 days in...
-		else if(flags[UNKNOWN_FLAG_NUMBER_00001] > 432) outputText("Her belly has swollen a bit; she may be pregnant.\n\n", false);
+		else if(flags[MARBLE_PREGNACY_INCUBATION] > 432) outputText("Her belly has swollen a bit; she may be pregnant.\n\n", false);
 		//12-18 days in...
-		else if(flags[UNKNOWN_FLAG_NUMBER_00001] > 288) outputText("Her belly is obviously swollen; she is almost certainly pregnant.\n\n", false);
+		else if(flags[MARBLE_PREGNACY_INCUBATION] > 288) outputText("Her belly is obviously swollen; she is almost certainly pregnant.\n\n", false);
 		//18-24 days in...
-		else if(flags[UNKNOWN_FLAG_NUMBER_00001] > 144) outputText("Her belly is very swollen; she is very pregnant.\n\n", false);
+		else if(flags[MARBLE_PREGNACY_INCUBATION] > 144) outputText("Her belly is very swollen; she is very pregnant.\n\n", false);
 		//OH GOD SHES FAT( 24+ days)
 		else outputText("Her belly is extremely swollen and occasionally quivers when whatever she is pregnant with moves around.\n\n", false);
 	}
-	if(flags[UNKNOWN_FLAG_NUMBER_00004] > 0) outputText("She has grown a " + marbleCock() + " since you brought her to camp. It is " + num2Text(int(flags[UNKNOWN_FLAG_NUMBER_00005])) + " inches long and " + num2Text(int(flags[UNKNOWN_FLAG_NUMBER_00006])) + " inches thick.\n\n", false);
+	if(flags[MARBLE_DICK_TYPE] > 0) outputText("She has grown a " + marbleCock() + " since you brought her to camp. It is " + num2Text(int(flags[MARBLE_DICK_LENGTH])) + " inches long and " + num2Text(int(flags[MARBLE_DICK_THICKNESS])) + " inches thick.\n\n", false);
 	
 	if(player.statusAffectv4("Marble")<=50) outputText("She has a pussy, with a 0.5 inch clit.\n\n", false);
 	else if(player.statusAffectv4("Marble") <=75) outputText("She has a cunt, with a 0.6 inch clit.  You can see moisture gleaming from it.\n\n", false);
@@ -3387,7 +3387,7 @@ function giveMarbleTailjobRelease():void {
 	outputText("You tell Marble that while you're not in a mood to suck her off today, you're not just going to leave her alone with it, either, and ask for her permission to do an exotic alternative.  Slowly, she nods, apparently not so sure about what you mean or whether she should agree.");
 	outputText("\n\nYou grin at her and slowly move your serpentine tail towards her leg, then up her bovine-like calf and towards her thighs.  Her body shivers at the sensation, and when she looks down, she finally gets the idea and smiles back at you, kindly.");
 	outputText("\n\nMoving your serpentine tail between her thighs, you decide to start with her original set of genitalia, slowly sliding the tip across her already somewhat moist labia.  You gently push it in, causing her to nearly jump up in surprise, her large breasts jiggling pleasantly as you tease the inside, close to the entrance.  Suddenly, you push more of your tail in and wiggle it inside of her, causing her hips to shake, her mouth to moan and her groin to moisten.  After a short period of wiggling, you shift the muscles in your tail and deliver a few pumps into her pussy, causing her soft butt to shake and forcing another moan.");
-	outputText("\n\nDeciding the moisture on your tail and her arousal level to be sufficient, you remove yourself from the confines of her pussy and slide up to the main offender - Marble's " + num2Text(flags[UNKNOWN_FLAG_NUMBER_00005]) + " inch long, fully erect cock.  You promptly her to tell you if you squeeze too tightly, and prod with the tip of your tail, pushing against the underside of her cock insistently.  Slowly, you run it up her shaft until the end of your tail is stroking her sensitive tip; then, you sensuously drag the rest of the moistened scales over and around her member, squeezing and wrapping it.  Slowly, you cover all of her manhood with your moist tail, and constrict, causing her to yelp before you start to move your coils up and down, essentially jerking her off along her entire length.");
+	outputText("\n\nDeciding the moisture on your tail and her arousal level to be sufficient, you remove yourself from the confines of her pussy and slide up to the main offender - Marble's " + num2Text(flags[MARBLE_DICK_LENGTH]) + " inch long, fully erect cock.  You promptly her to tell you if you squeeze too tightly, and prod with the tip of your tail, pushing against the underside of her cock insistently.  Slowly, you run it up her shaft until the end of your tail is stroking her sensitive tip; then, you sensuously drag the rest of the moistened scales over and around her member, squeezing and wrapping it.  Slowly, you cover all of her manhood with your moist tail, and constrict, causing her to yelp before you start to move your coils up and down, essentially jerking her off along her entire length.");
 	outputText("\n\nMarble isn't content with simply standing there while you're tugging on her member; one of her hands gently strokes the end of your tail while the other rubs her breast, playing with her nipple.  Pleased that she's enjoying herself, you again shift your tail to rub the very tip of it against her sensitive clit, all the while stroking the male side of her genitalia with the part just before the end.  Marble moans loudly and her hands stop migrating as one of them squeezes your tail and the other grabs her pillowy breast rather roughly.  It'd appear that with the combined strokes to both of her parts, it won't take long to give her her release... you decide to move on to the main event.");
 	outputText("\n\nShifting your coils over her erection so that your movements will stimulate her more effectively, the end of your tail droops down and rubs against her clit as you push it inside her.  With intense, but careful, pumping and stroking movements, you cause her to nearly writhe as she pants from excitement.  \"<i>S...sweetie, you're teasing too many places at once...</i>\" she whispers, half-heartedly.  You have to admit, feeling her more sensitive bits and being able to explore her soft body thoroughly with your tail does excite you as well.");
 	outputText("\n\nIt doesn't take long for her to climax after that.  After a few more strokes and pushes against the walls of her pussy, she releases a moo-like moan and you feel her contracting rhythmically around your tail while her cock twitches, releasing a sticky liquid right into the coils.");
