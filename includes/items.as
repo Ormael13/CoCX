@@ -8177,7 +8177,7 @@ function catTransformation():void {
 		//loop through and find a non-cat wang.
 		for(var i:Number = 0;i < (player.cockTotal()) && player.cocks[i].cockType == CockTypesEnum.CAT;i++) 
 		{ }
-		outputText("\n\nYour " + cockDescript(i) + " swells up with near-painful arousal and begins to transform.  It turns pink and begins to narrow until the tip is barely wide enough to accommodate your urethra.  Barbs begin to sprout from its flesh, if you can call the small, fleshy nubs barbs. They start out thick around the base of your " + cockNoun(CockTypesEnum.HUMAN) + " and shrink towards the tip. The smallest are barely visible. <b>Your new feline dong throbs powerfully</b> and spurts a few droplets of cum.  ", false);
+		outputText("\n\nYour " + cockDescript(i) + " swells up with near-painful arousal and begins to transform.  It turns pink and begins to narrow until the tip is barely wide enough to accommodate your urethra.  Barbs begin to sprout from its flesh, if you can call the small, fleshy nubs barbs. They start out thick around the base of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " and shrink towards the tip. The smallest are barely visible. <b>Your new feline dong throbs powerfully</b> and spurts a few droplets of cum.  ", false);
 		if(!player.hasSheath()) {
 			outputText("Then, it begins to shrink and sucks itself inside your body.  Within a few moments, a fleshy sheath is formed.", false);
 			if(player.balls > 0) outputText("  Thankfully, your balls appear untouched.", false);
@@ -8231,7 +8231,7 @@ function catTransformation():void {
 			outputText("  Although the package is smaller, it feels even more sensitive – as if it retained all sensation of its larger size in its smaller form.", false);
 			stats(0,0,0,0,0,5,0,0);
 			//Make note of other dicks changing
-			if(temp2 == 1) outputText("  Upon further inspection, all your " + cockNoun(CockTypesEnum.CAT) + "s have shrunk!", false);
+			if(temp2 == 1) outputText("  Upon further inspection, all your " + Appearance.cockNoun(CockTypesEnum.CAT) + "s have shrunk!", false);
 			changes++;
 		}
 	}
@@ -8405,7 +8405,7 @@ function reptilum():void {
 		outputText("\n\nA slow tingle warms your groin.  Before it can progress any further, you yank back your " + player.armorName + " to investigate.  Your " + cockDescript(temp2) + " is changing!  It ripples loosely from ", false);
 		if(player.hasSheath()) outputText("sheath ", false);
 		else outputText("base ", false);
-		outputText("to tip, undulating and convulsing as its color lightens, darkens, and finally settles on a purplish hue.  Your " + cockNoun(CockTypesEnum.HUMAN) + " resolves itself into a bulbous form, with a slightly pointed tip.  The 'bulbs' throughout its shape look like they would provide an interesting ride for your sexual partners, but the perverse, alien pecker ", false);
+		outputText("to tip, undulating and convulsing as its color lightens, darkens, and finally settles on a purplish hue.  Your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " resolves itself into a bulbous form, with a slightly pointed tip.  The 'bulbs' throughout its shape look like they would provide an interesting ride for your sexual partners, but the perverse, alien pecker ", false);
 		if(player.cor < 33) outputText("horrifies you.", false);
 		else if(player.cor < 66) outputText("is a little strange for your tastes.", false);
 		else {

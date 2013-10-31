@@ -1249,7 +1249,8 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		cottonPregUpdates();
 		//Fix femininity ratings if out of whack!
-		if(player.hasPerk("Androgyny") < 0) textHolder = player.fixFemininity();
+		if(player.hasPerk("Androgyny") < 0) 
+			textHolder = player.fixFemininity();
 		if(textHolder != "") {
 			outputText(textHolder, false);
 			needNext = true;
@@ -3394,6 +3395,23 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			return true;
 		}
 	}
+	if (player.totalCocks() != 0)
+	{
+		var counter:Number = player.totalCocks() - 1;
+		while (counter >= 0)
+		{
+			if (player.cocks[counter].cockType == CockTypesEnum.DOG || player.cocks[counter].cockType == CockTypesEnum.FOX)
+			{
+				if (player.dogScore() >= player.foxScore())
+					player.cocks[counter].cockType = CockTypesEnum.DOG;
+				else
+					player.cocks[counter].cockType = CockTypesEnum.FOX;
+			}
+			counter--;
+			trace("IMA LOOPIN", counter);
+		}
+		
+	}	
 	statScreenRefresh();
 	if(needNext || defNext) {
 		doNext(1);

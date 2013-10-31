@@ -844,7 +844,7 @@ function isabellaRapesYouWithHerAss():void {
 	
 	outputText("What's she going to do with you?  She seemed so mad earlier, but this... this just sounds like you're about to get laid.  The cow-girl steps over you, her olive skirt rustling like the nearby plains grasses, barely concealing the treasures it conceals from your sight while she positions herself above your groin.  With her hips swiveling slightly, the busty redhead flexes her thick thighs and lowers herself down.  Each second of waiting is agonizing, and the feel of her sweat-slicked bubble-butt brushing your " + cockHead(x) + " is maddening.", false);
 	if(player.cockTotal() > 1) {
-		if(player.cockTotal() > 2) outputText("  The bovine bitch reaches down to swat at some of your " + cockNoun(CockTypesEnum.HUMAN) + "s, pushing them out of the way.  \"<i>So gross.  Why vould you vant so many penises?</i>\"", false);
+		if(player.cockTotal() > 2) outputText("  The bovine bitch reaches down to swat at some of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + "s, pushing them out of the way.  \"<i>So gross.  Why vould you vant so many penises?</i>\"", false);
 		else outputText("  The bovine bitch reaches down to stroke your " + cockDescript(x) + ".  \"<i>So ready, ja?  Vhy are you so eager to be punished?</i>\"", false);
 	}
 	outputText("\n\n", false);

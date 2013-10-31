@@ -58,6 +58,9 @@ package classes
 					case 10:
 						 return CockTypesEnum[DISPLACER]
 						 break;
+					case 11:
+						 return CockTypesEnum[FOX]
+						 break;
 					default:
 						 return CockTypesEnum[HUMAN]
 						 break;
@@ -115,6 +118,9 @@ package classes
 					case CockTypesEnum[DISPLACER]:
 						 return 10
 						 break;
+					case CockTypesEnum[FOX]:
+						 return 11
+						 break;
 					default:
 						 return 0
 						 break;
@@ -144,5 +150,6 @@ package classes
 		public static const KANGAROO:CockTypesEnum = new CockTypesEnum();
 		public static const DRAGON:CockTypesEnum = new CockTypesEnum();
 		public static const DISPLACER:CockTypesEnum = new CockTypesEnum();
+		public static const FOX:CockTypesEnum = new CockTypesEnum();
 	}
 }

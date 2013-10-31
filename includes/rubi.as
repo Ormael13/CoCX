@@ -1359,7 +1359,6 @@ function goInRubisClosetSoThatYouCanComeOutOfTheCloset():void {
 //Appearance
 function rubiAppearance():void {
 	clearOutput();
-	trace("WUT");
 	outputText("You look over your naked, demon-morph lover.");
 	outputText("\n\nRubi is about five feet tall, with a very lithe, feminine body.  " + rubiMF("His","Her") + " skin is ");
 	

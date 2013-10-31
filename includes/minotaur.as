@@ -908,7 +908,7 @@ function minotaurBlowjob():void {
 	outputText("revealing your " + multiCockDescriptLight() + " to the defeated bull.  The beast looks to you in both arousal and shock, mouth parting slightly at the idea of another creature taking charge.  Within the musky stench of its dripping shaft you nearly lose yourself, and ", false);
 	if(!player.isTaur()) outputText("taking the bull by the horns", false);
 	else outputText("pinning his horns in the crook of your forelegs", false);
-	outputText(", you guide its mouth closer to your member as if on autopilot.  \"<i>Let's see just how good you are at milking,</i>\" you blurt; the minotaur moos in defiance but is soon silenced when the head of your " + cockNoun(player.cocks[x].cockType) + " presses into its bovine mouth.\n\n", false);
+	outputText(", you guide its mouth closer to your member as if on autopilot.  \"<i>Let's see just how good you are at milking,</i>\" you blurt; the minotaur moos in defiance but is soon silenced when the head of your " + Appearance.cockNoun(player.cocks[x].cockType) + " presses into its bovine mouth.\n\n", false);
 
 	outputText("You grimace at the awkward feeling of the beast's snout against you, but soon regain confidence in your choice as the monster begins to take your prick into his mouth.  His eyes grow wide as his lips wrap around you, with ", false);
 	if(monster.lust > 99) outputText("his own burning lusts", false);
