@@ -335,6 +335,7 @@ function suckleMarble():void {
 	//(apply the stat effect 'Marble's Milk' to the player)
 	applyMarblesMilk();
 	stats(0,0,0,0,0,0,25,0);
+	doNext(13);
 }
 
 //(player chose rape)
