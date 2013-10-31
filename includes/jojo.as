@@ -264,7 +264,7 @@ function useTentacleJojo():void {
 			else outputText("easily swallowing", false);
 			outputText(" your " + multiCockDescriptLight() + " in tight vises of pleasure.  The sensation is overhwelmingly pleasurable, like having three cocks being licked and sucked by 1000 tongues.", false);
 			//(if extra: 
-			if(player.cockTotal() > 3) outputText("  The remaining " + cockNoun(CockTypesEnum.HUMAN) + "'s pulse and throb with jealous desire, until one of the tentacles slips off and captures it.  They take turns, slipping off and capturing each of your offerings until you wish they'd just keep sucking forever.", false);
+			if(player.cockTotal() > 3) outputText("  The remaining " + Appearance.cockNoun(CockTypesEnum.HUMAN) + "'s pulse and throb with jealous desire, until one of the tentacles slips off and captures it.  They take turns, slipping off and capturing each of your offerings until you wish they'd just keep sucking forever.", false);
 			outputText("\n\n", false);
 		}
 	}

@@ -688,7 +688,11 @@
 			if(player.cocks[temp].cockType == CockTypesEnum.DRAGON) {
 				outputText("  With its tapered tip, there are few holes you wouldn't be able to get into.  It has a strange, knot-like bulb at its base, but doesn't usually flare during arousal as a dog's knot would.");
 			}
-			if(player.cocks[temp].sock != "") sockDescript(temp);
+			if(player.cocks[temp].sock != "" && player.cocks[temp].sock != null)	// I dunno what was happening, but it looks like .sock is null, as it doesn't exist. I guess this is probably more left over from some of the restucturing.
+			{																		// Anyways, check against null values, and stuff works again.
+				trace("Found a sock description (WTF even is a sock?)", player.cocks[temp].sock);
+				sockDescript(temp);
+			}
 			temp++;
 			rando++
 			outputText("\n", false);
@@ -717,7 +721,8 @@
 			if(player.skinType == 3) outputText("An oozing, semi-solid sack with " + ballsDescript() + " swings heavily beneath your " + multiCockDescriptLight() + ".", false);
 		}
 		outputText("  You estimate each of them to be about " + num2Text(Math.round(player.ballSize)) + " ", false);
-		if(Math.round(player.ballSize) == 1) outputText("inch", false);
+		if(Math.round(player.ballSize) == 1) 
+			outputText("inch", false);
 		else outputText("inches", false);
 		outputText(" across.\n", false);
 	}	
@@ -822,17 +827,27 @@
 
 function sockDescript(index:int):void {
 	outputText("  ");
-	if(player.cocks[index].sock == "wool") outputText("It's covered by a wooly white cock-sock, keeping it snug and warm despite how cold it might get.");
-	else if(player.cocks[index].sock == "alabaster") outputText("It's covered by a white, lacey cock-sock, snugly wrapping around it like a bridal dress around a bride.");
-	else if(player.cocks[index].sock == "cockring") outputText("It's covered by a black latex cock-sock with two attached metal rings, keeping your cock just a little harder and [balls] aching for release.");
-	else if(player.cocks[index].sock == "viridian") outputText("It's covered by a lacey dark green cock-sock accented with red rose-like patterns.  Just wearing it makes your body, especially your cock, tingle.");
-	else if(player.cocks[index].sock == "scarlet") outputText("It's covered by a lacey red cock-sock that clings tightly to your member.  Just wearing it makes your cock throb, as if it yearns to be larger...");
-	else if(player.cocks[index].sock == "cobalt") outputText("It's covered by a lacey blue cock-sock that clings tightly to your member... really tightly.  It's so tight it's almost uncomfortable, and you wonder if any growth might be inhibited.");
-	else if(player.cocks[index].sock == "gilded") outputText("It's covered by a metallic gold cock-sock that clings tightly to you, its surface covered in glittering gems.  Despite the warmth of your body, the cock-sock remains cool.");
-	else if(player.cocks[index].sock == "amaranthine") {
+	if(player.cocks[index].sock == "wool") 
+		outputText("It's covered by a wooly white cock-sock, keeping it snug and warm despite how cold it might get.");
+	else if(player.cocks[index].sock == "alabaster") 
+		outputText("It's covered by a white, lacey cock-sock, snugly wrapping around it like a bridal dress around a bride.");
+	else if(player.cocks[index].sock == "cockring") 
+		outputText("It's covered by a black latex cock-sock with two attached metal rings, keeping your cock just a little harder and [balls] aching for release.");
+	else if(player.cocks[index].sock == "viridian") 
+		outputText("It's covered by a lacey dark green cock-sock accented with red rose-like patterns.  Just wearing it makes your body, especially your cock, tingle.");
+	else if(player.cocks[index].sock == "scarlet") 
+		outputText("It's covered by a lacey red cock-sock that clings tightly to your member.  Just wearing it makes your cock throb, as if it yearns to be larger...");
+	else if(player.cocks[index].sock == "cobalt") 
+		outputText("It's covered by a lacey blue cock-sock that clings tightly to your member... really tightly.  It's so tight it's almost uncomfortable, and you wonder if any growth might be inhibited.");
+	else if(player.cocks[index].sock == "gilded") 
+		outputText("It's covered by a metallic gold cock-sock that clings tightly to you, its surface covered in glittering gems.  Despite the warmth of your body, the cock-sock remains cool.");
+	else if(player.cocks[index].sock == "amaranthine") 
+	{
 		outputText("It's covered by a lacey purple cock-sock");
-		if(player.cocks[index].cockType != CockTypesEnum.DISPLACER) outputText(" that fits somewhat awkwardly on your member");
-		else outputText(" that fits your coeurl cock perfectly");
+		if(player.cocks[index].cockType != CockTypesEnum.DISPLACER) 
+			outputText(" that fits somewhat awkwardly on your member");
+		else
+			outputText(" that fits your coeurl cock perfectly");
 		outputText(".  Just wearing it makes you feel stronger and more powerful.");
 	}
 	else outputText("<b>Yo, this is an error.</b>");

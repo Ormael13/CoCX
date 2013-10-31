@@ -427,7 +427,7 @@ function rapeAGoblinCorruptTooBig():void {
 		if(player.cockTotal() > 1) outputText("and the rest of your " + multiCockDescriptLight() + " drench her, ", false);
 	}
 	else if(player.cockTotal() > 1) {
-		outputText("while your other " + cockNoun(CockTypesEnum.HUMAN), false);
+		outputText("while your other " + Appearance.cockNoun(CockTypesEnum.HUMAN), false);
 		if(player.cockTotal() > 2) outputText(" drench her, ", false);
 		else outputText(" drenches her, ", false);
 	}
