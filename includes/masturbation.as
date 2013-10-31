@@ -1992,7 +1992,7 @@ function centaurMasturbation():Boolean {
 	//NippleCunt scene
 	if(selector == 0) {
 		outputText("You shrug out of your " + player.armorName + ", ", false);
-		if(flags[UNKNOWN_FLAG_NUMBER_00023] > 0) outputText("panting lustily as you envision being caught masturbating your " + nippleDescript(0) + "s.", false);
+		if(flags[PC_FETISH] > 0) outputText("panting lustily as you envision being caught masturbating your " + nippleDescript(0) + "s.", false);
 		else if(player.cor < 33) outputText("blushing a bit as you look down at your " + nippleDescript(0) + "s.", false);
 		else if(player.cor < 66) outputText("shivering as the air hits your exposed " + nippleDescript(0) + "s.", false);
 		else outputText("smiling to yourself as you blatantly oogle your " + nippleDescript(0) + "s.", false);

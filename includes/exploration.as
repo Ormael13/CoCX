@@ -743,11 +743,11 @@ function exploreHighMountain():void {
 		}
 	}
 	//10% chance to mino encounter rate if addicted
-	if(flags[UNKNOWN_FLAG_NUMBER_00020] > 0 && rand(10) == 0) {
+	if(flags[MINOTAUR_CUM_ADDICTION_STATE] > 0 && rand(10) == 0) {
 		spriteSelect(44);
 		//Cum addictus interruptus!  LOL HARRY POTTERFAG
 		//Withdrawl auto-fuck!
-		if(flags[UNKNOWN_FLAG_NUMBER_00020] == 3) {
+		if(flags[MINOTAUR_CUM_ADDICTION_STATE] == 3) {
 			minoAddictionFuck();
 			return;
 		}
@@ -829,12 +829,12 @@ function exploreMountain():void {
 	}
 	//Rarer 'nice' Ceraph encounter
 	//Overlaps half the old encounters once pierced.
-	if(!ceraphIsFollower() && player.level > 2 && (player.exploredMountain % 30 == 0) && flags[UNKNOWN_FLAG_NUMBER_00023] > 0) {
+	if(!ceraphIsFollower() && player.level > 2 && (player.exploredMountain % 30 == 0) && flags[PC_FETISH] > 0) {
 		friendlyNeighborhoodSpiderManCeraph();
 		return;
 	}
 	//15% chance of Ceraph
-	if(!ceraphIsFollower() && player.level > 2 && (player.exploredMountain % 15 == 0) && flags[UNKNOWN_FLAG_NUMBER_00023] != 1) {
+	if(!ceraphIsFollower() && player.level > 2 && (player.exploredMountain % 15 == 0) && flags[PC_FETISH] != 1) {
 		encounterCeraph();
 		return;
 	}
@@ -851,7 +851,7 @@ function exploreMountain():void {
 		else chooser = 3;		
 	}
 	//10% chance to mino encounter rate if addicted
-	if(flags[UNKNOWN_FLAG_NUMBER_00020] > 0 && rand(10) == 0) {
+	if(flags[MINOTAUR_CUM_ADDICTION_STATE] > 0 && rand(10) == 0) {
 		chooser = 1;
 	}
 	//10% MORE chance for minos if uber-addicted
@@ -971,7 +971,7 @@ function exploreMountain():void {
 		}
 		//Cum addictus interruptus!  LOL HARRY POTTERFAG
 		//Withdrawl auto-fuck!
-		if(flags[UNKNOWN_FLAG_NUMBER_00020] == 3) {
+		if(flags[MINOTAUR_CUM_ADDICTION_STATE] == 3) {
 			minoAddictionFuck();
 			return;
 		}
@@ -2073,7 +2073,7 @@ function joinBeingAMinoCumSlut():void {
 	
 	outputText("\n\nYou quickly re-dress and head back to camp, spying the occassional goblin or imp scurrying from its hiding spot, no doubt recovering from their own self-inflicted orgasms.");
 	stats(0,0,0,0,.5,-3,-100,1);
-	if(flags[UNKNOWN_FLAG_NUMBER_00023] > 0) {
+	if(flags[PC_FETISH] > 0) {
 		outputText("  A thrill runs through you.  Even though you were brought to such a satisfying climax, the whole thought that goblins and imps were watching you and getting off on it... it just makes you hornier than you were before.");
 		stats(0,0,0,0,0,0,100,0);
 	}

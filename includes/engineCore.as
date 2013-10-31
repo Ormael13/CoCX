@@ -4453,8 +4453,8 @@ function displayStats(e:MouseEvent) {
 		else outputText("100%\n", false);
 	}
 	//MINO!
-	if(flags[UNKNOWN_FLAG_NUMBER_00340] > 0 || flags[UNKNOWN_FLAG_NUMBER_00018] > 0 || player.hasPerk("Minotaur Cum Addict") >= 0) {
-		if(player.hasPerk("Minotaur Cum Addict") < 0) outputText("<b>Minotaur Cum Addiction:</b> " + Math.round(flags[UNKNOWN_FLAG_NUMBER_00018] * 10)/10 + "%\n", false);
+	if(flags[UNKNOWN_FLAG_NUMBER_00340] > 0 || flags[MINOTAUR_CUM_ADDICTION_TRACKER] > 0 || player.hasPerk("Minotaur Cum Addict") >= 0) {
+		if(player.hasPerk("Minotaur Cum Addict") < 0) outputText("<b>Minotaur Cum Addiction:</b> " + Math.round(flags[MINOTAUR_CUM_ADDICTION_TRACKER] * 10)/10 + "%\n", false);
 		else outputText("<b>Minotaur Cum Addiction:</b> 100+%\n", false);
 	}
 	if(player.hasPerk("Spider Ovipositor") >= 0 || player.hasPerk("Bee Ovipositor") >= 0) outputText("<b>Ovipositor Total Egg Count: " + player.eggs() + "\nOvipositor Fertilized Egg Count: " + player.fertilizedEggs() + "</b>\n");
@@ -4551,10 +4551,10 @@ function displayStats(e:MouseEvent) {
 	if(rubiAffection() > 0) outputText("<b>Rubi's Affection:</b> " + Math.round(rubiAffection()) + "%\n");
 	if(rubiAffection() > 0) outputText("<b>Rubi's Orifice Capacity:</b> " + Math.round(rubiCapacity()) + "%\n");
 	
-	if(flags[UNKNOWN_FLAG_NUMBER_00012] != 0) {
+	if(flags[URTA_COMFORTABLE_WITH_OWN_BODY] != 0) {
 		if(urtaLove()) outputText("<b>Urta Status: </b>Lover\n");
-		else if(flags[UNKNOWN_FLAG_NUMBER_00012] == -1) outputText("<b>Urta Status: </b>Ashamed\n");
-		else if(flags[UNKNOWN_FLAG_NUMBER_00029] < 30) outputText("<b>Urta Status: </b>" + Math.round(flags[UNKNOWN_FLAG_NUMBER_00029] * 3.3333) + "% Affection\n");
+		else if(flags[URTA_COMFORTABLE_WITH_OWN_BODY] == -1) outputText("<b>Urta Status: </b>Ashamed\n");
+		else if(flags[URTA_PC_AFFECTION_COUNTER] < 30) outputText("<b>Urta Status: </b>" + Math.round(flags[URTA_PC_AFFECTION_COUNTER] * 3.3333) + "% Affection\n");
 		else outputText("<b>Urta Status: </b>Ready To Confess Love\n");
 	}
 	

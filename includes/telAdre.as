@@ -118,7 +118,7 @@ function telAdreMenu():void {
 		crazyVDayShenanigansByVenithil();
 		return;
 	}
-	if(!urtaBusy() && flags[UNKNOWN_FLAG_NUMBER_00033] == 0 && rand(15) == 0 && hours > 15) {
+	if(!urtaBusy() && flags[PC_SEEN_URTA_BADASS_FIGHT] == 0 && rand(15) == 0 && hours > 15) {
 		urtaIsABadass();
 		return;
 	}
@@ -1024,7 +1024,7 @@ function barTelAdre():void {
 	if(!urtaBusy() && flags[AMILY_VISITING_URTA] != 1 && hours < 15) {
 		//Scylla + Urta sitting in a tree
 		// SOME COMFORT     FUCKED URTA      NOT PISSED      DRUNK TIME    SCYLLA TO LV4    RANDOM CHANCE  HAS THIS HAPPENED BEFORE? SCYLLA REQS ->
-		if(flags[UNKNOWN_FLAG_NUMBER_00013] == 0 && flags[UNKNOWN_FLAG_NUMBER_00012] > 2 && flags[UNKNOWN_FLAG_NUMBER_00011] > 0 && flags[UNKNOWN_FLAG_NUMBER_00031] < 1 && (urtaDrunk() || flags[UNKNOWN_FLAG_NUMBER_00143] > 0) && flags[UNKNOWN_FLAG_NUMBER_00054] >= 3 && rand(3) == 0 && (flags[UNKNOWN_FLAG_NUMBER_00143] == 0 || (flags[UNKNOWN_FLAG_NUMBER_00147] == 0 && flags[UNKNOWN_FLAG_NUMBER_00145] > 0)) && ((flags[UNKNOWN_FLAG_NUMBER_00143] > 0 && !urtaDrunk()) || player.balls > 0) && player.totalCocks() > 0 && !hasButton("Scylla") && !hasButton("ScyllaCats")) {
+		if(flags[URTA_TIME_SINCE_LAST_CAME] == 0 && flags[URTA_COMFORTABLE_WITH_OWN_BODY] > 2 && flags[TIMES_FUCKED_URTA] > 0 && flags[URTA_ANGRY_AT_PC_COUNTDOWN] < 1 && (urtaDrunk() || flags[UNKNOWN_FLAG_NUMBER_00143] > 0) && flags[UNKNOWN_FLAG_NUMBER_00054] >= 3 && rand(3) == 0 && (flags[UNKNOWN_FLAG_NUMBER_00143] == 0 || (flags[UNKNOWN_FLAG_NUMBER_00147] == 0 && flags[UNKNOWN_FLAG_NUMBER_00145] > 0)) && ((flags[UNKNOWN_FLAG_NUMBER_00143] > 0 && !urtaDrunk()) || player.balls > 0) && player.totalCocks() > 0 && !hasButton("Scylla") && !hasButton("ScyllaCats")) {
 			if(flags[UNKNOWN_FLAG_NUMBER_00143] > 0) {
 				outputText("\n\nUrta's usual place is vacant, though her table still holds a half-drank glass of water.  If it's anything like the last time this happened, she's snuck into a back room with Scylla to relieve some pressure.  It might not hurt to join in...", false);
 			}
@@ -1036,7 +1036,7 @@ function barTelAdre():void {
 					outputText("\n\nUrta's usual place is vacant, though her table still holds a half-drank mug of something potent and alcoholic.  If it's anything like the last time this happened, she's snuck into a back room with Scylla to relieve some pressure.  It might not hurt to join in...", false);
 				}
 			}
-			flags[UNKNOWN_FLAG_NUMBER_00013] = 4;
+			flags[URTA_TIME_SINCE_LAST_CAME] = 4;
 			button = anotherButton(button,"Back Room",eventParser,2697);
 		}
 		else if(urtaBarDescript()) {
@@ -1172,7 +1172,7 @@ function oldbarTelAdre():void {
 	if(!urtaBusy() && flags[AMILY_VISITING_URTA] != 1 && hours < 15) {
 		//Scylla + Urta sitting in a tree
 		// SOME COMFORT     FUCKED URTA      NOT PISSED      DRUNK TIME    SCYLLA TO LV4    RANDOM CHANCE  HAS THIS HAPPENED BEFORE? SCYLLA REQS ->
-		if(flags[UNKNOWN_FLAG_NUMBER_00013] == 0 && flags[UNKNOWN_FLAG_NUMBER_00012] > 2 && flags[UNKNOWN_FLAG_NUMBER_00011] > 0 && flags[UNKNOWN_FLAG_NUMBER_00031] < 1 && (urtaDrunk() || flags[UNKNOWN_FLAG_NUMBER_00143] > 0) && flags[UNKNOWN_FLAG_NUMBER_00054] >= 3 && rand(3) == 0 && (flags[UNKNOWN_FLAG_NUMBER_00143] == 0 || (flags[UNKNOWN_FLAG_NUMBER_00147] == 0 && flags[UNKNOWN_FLAG_NUMBER_00145] > 0)) && ((flags[UNKNOWN_FLAG_NUMBER_00143] > 0 && !urtaDrunk()) || player.balls > 0) && player.totalCocks() > 0 && misc1Name != "Scylla") {
+		if(flags[URTA_TIME_SINCE_LAST_CAME] == 0 && flags[URTA_COMFORTABLE_WITH_OWN_BODY] > 2 && flags[TIMES_FUCKED_URTA] > 0 && flags[URTA_ANGRY_AT_PC_COUNTDOWN] < 1 && (urtaDrunk() || flags[UNKNOWN_FLAG_NUMBER_00143] > 0) && flags[UNKNOWN_FLAG_NUMBER_00054] >= 3 && rand(3) == 0 && (flags[UNKNOWN_FLAG_NUMBER_00143] == 0 || (flags[UNKNOWN_FLAG_NUMBER_00147] == 0 && flags[UNKNOWN_FLAG_NUMBER_00145] > 0)) && ((flags[UNKNOWN_FLAG_NUMBER_00143] > 0 && !urtaDrunk()) || player.balls > 0) && player.totalCocks() > 0 && misc1Name != "Scylla") {
 			if(flags[UNKNOWN_FLAG_NUMBER_00143] > 0) {
 				outputText("\n\nUrta's usual place is vacant, though her table still holds a half-drank glass of water.  If it's anything like the last time this happened, she's snuck into a back room with Scylla to relieve some pressure.  It might not hurt to join in...", false);
 			}
@@ -1184,11 +1184,11 @@ function oldbarTelAdre():void {
 					outputText("\n\nUrta's usual place is vacant, though her table still holds a half-drank mug of something potent and alcoholic.  If it's anything like the last time this happened, she's snuck into a back room with Scylla to relieve some pressure.  It might not hurt to join in...", false);
 				}
 			}
-			flags[UNKNOWN_FLAG_NUMBER_00013] = 4;
+			flags[URTA_TIME_SINCE_LAST_CAME] = 4;
 			if(misc1Name == "Scylla") misc1 = 0;
 			urta = 0;
 			backroom = 2697;
-			flags[UNKNOWN_FLAG_NUMBER_00013] = 4;
+			flags[URTA_TIME_SINCE_LAST_CAME] = 4;
 		}
 		else if(urtaBarDescript()) {
 			if(flags[URTA_INCUBATION_CELEBRATION] == 0 && flags[URTA_INCUBATION] > 0) {
@@ -1361,7 +1361,7 @@ function debitArmor():void {
 }
 
 function urtaIsABadass():void {
-	flags[UNKNOWN_FLAG_NUMBER_00033] = 1;
+	flags[PC_SEEN_URTA_BADASS_FIGHT] = 1;
 	outputText("", true);
 	outputText("There's a commotion in the streets of Tel'Adre.  A dense crowd of onlookers has formed around the center of the street, massed together so tightly that you're unable to see much, aside from the backs the other onlookers' heads.  The sound of blows impacting on flesh can be heard over the crowd's murmuring, alerting you of the fight at the gathering's core.", false);
 	simpleChoices("Investigate",watchUrtaBeABadass,"Who cares?",telAdreMenu,"",0,"",0,"",0);
@@ -1398,7 +1398,7 @@ function gymDesc():void {
 	outputText("", true);
 	outputText("Even though Ingnam, your hometown, was a large, prosperous village, you never saw a gym before coming to Tel'Adre.  The structure itself has numerous architectural differences from the surrounding buildings: short, waist-high walls, an arched ceiling supported by simple columns, and a sand-covered floor.  Perhaps the only 'normal' rooms inside are the changing stands and bathrooms, which ", false);
 	if(player.cor < 35) outputText("thankfully ", false);
-	else if(flags[UNKNOWN_FLAG_NUMBER_00023] > 0 || player.cor > 80) outputText("unfortunately ", false);
+	else if(flags[PC_FETISH] > 0 || player.cor > 80) outputText("unfortunately ", false);
 	outputText("have full sized walls to protect their users' privacy.  A breeze blows by, revealing that the open-air design provides great ventilation.  You note a wall of weights of different sizes and shapes, perfect for building muscle and bulking up.  There are also jogging tracks and even a full-sized, grass-covered track out back for centaurs to run on.  Though some of the equipment seems a bit esoteric in nature, you're sure you can make use of most of this stuff.\n\n", false);
 	
 	outputText("Though the gym sees heavy use by the city guard and various citizens, it's not too busy at present.", false);
@@ -1603,7 +1603,7 @@ function yaraSex(girl:Boolean = true):void {
 	spriteSelect(63);
 	outputText("", true);
 	outputText("Yara makes you comfortable and has you look away while she uses her piercing tools.  It hurts, but she's skilled. Before you know it, your piercing is done!  You move to rise, retaining a bit of modesty", false);
-	if(flags[UNKNOWN_FLAG_NUMBER_00023] > 0) outputText(" despite the guilty thrill", false);
+	if(flags[PC_FETISH] > 0) outputText(" despite the guilty thrill", false);
 	outputText(".  \"<i>Hold it,</i>\" Yara commands softly, pressing her hand against your " + chestDesc() + " and pushing you back in your chair.  \"<i>Do you think I'll let you get away without some... field testing?</i>\"\n\n", false);
 
 	outputText("She seems intent on getting some loving - would you like to turn her down, or will you let nature run its course?", false);

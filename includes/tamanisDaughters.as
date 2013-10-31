@@ -742,7 +742,7 @@ function tamaniDaughtersCombatLossDrain():void {
 	
 	outputText("You blush, ", false);
 	//EXHIBITIONISTZ
-	if(flags[UNKNOWN_FLAG_NUMBER_00023] > 0) outputText("unimaginably turned on by being used and abused by such machinery in front of an audience of your own horny children.", false);
+	if(flags[PC_FETISH] > 0) outputText("unimaginably turned on by being used and abused by such machinery in front of an audience of your own horny children.", false);
 	else if(player.cor > 60) outputText("turned on by being milked in such an obscene way.", false);
 	else outputText("horrified at the situation but unable to resist arousal as you're constantly sucked and pleasured.", false);
 	outputText("\n\n", false);

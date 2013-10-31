@@ -28,8 +28,8 @@ function ceraphFollowerAppearance(output:Boolean = true):void {
 	else dickToggle = "Go Herm";
 	var gainFetish:Number = 0;
 	var loseFetish:Number = 0;
-	if(flags[UNKNOWN_FLAG_NUMBER_00023] < 3) gainFetish = 3043;
-	if(flags[UNKNOWN_FLAG_NUMBER_00023] > 0) loseFetish = 3044;
+	if(flags[PC_FETISH] < 3) gainFetish = 3043;
+	if(flags[PC_FETISH] > 0) loseFetish = 3044;
 	var rp:Number = 0;
 	if(player.lust >= 33) rp = 3052;
 	var sexMenu:int = 0;
@@ -80,7 +80,7 @@ function followerCeraphRoleplay():void {
 	var urta:Number = 0;
 	var marbles:Number = 0;
 	var dominika:Number = 0;
-	if(flags[UNKNOWN_FLAG_NUMBER_00011] > 0 && (player.hasCock() || player.hasVagina()) && player.lust >= 33) urta = 3055;
+	if(flags[TIMES_FUCKED_URTA] > 0 && (player.hasCock() || player.hasVagina()) && player.lust >= 33) urta = 3055;
 	if(player.hasCock() && player.cockThatFits(70) >= 0 && player.hasStatusAffect("Marble") >= 0 && player.lust >= 33) marbles = 3070;
 	if(flags[UNKNOWN_FLAG_NUMBER_00150] > 0 && player.lust >= 33 && player.hasCock()) dominika = 3274;
 	if(player.lust < 33) outputText("\n\n<b>You aren't turned on enough for sex.</b>", false);
@@ -261,7 +261,7 @@ function CeraphHandsOutNewFetishesLikePervCandy():void {
 	outputText("", true);
 	spriteSelect(7);
 	//*Fetish level = 0
-	if(flags[UNKNOWN_FLAG_NUMBER_00023] == 0) {
+	if(flags[PC_FETISH] == 0) {
 		outputText("Ceraph comes forward on your command, whispering calmly as she ", false);
 		if(player.earsPierced == 0) outputText("pulls a pair of gleaming, green piercings from a pouch.  \"<i>Oh, don't worry " + player.mf("Master","Mistress") + "; you're going to love this so much.  These piercings are special, and they'll give you exactly what you want.</i>\"", false);
 		else outputText("places her hands upon your pierced ears.  She whispers softly, \"<i>Don't worry " + player.mf("Master","Mistress") + ", I can easily use the piercings you already have.  It won't hurt.</i>\"", false);
@@ -284,11 +284,11 @@ function CeraphHandsOutNewFetishesLikePervCandy():void {
 			player.earsPShort = "green gem-stone ear-studs";
 			player.earsPLong = "Green gem-stone ear-studs";
 		}
-		flags[UNKNOWN_FLAG_NUMBER_00023] = 1;
+		flags[PC_FETISH] = 1;
 		stats(0,0,0,0,0,0,25,1);
 	}
 	//*Fetish level = 1
-	else if(flags[UNKNOWN_FLAG_NUMBER_00023] == 1) {
+	else if(flags[PC_FETISH] == 1) {
 		outputText("Ceraph giggles as she closes in on you once again.  Sighing, you lie there and allow your slave to massage your temples, using her magic to paralyze and numb your body.  ", false);
 		if(player.nipplesPierced == 0) {
 			outputText("She's all too happy to build up the suspense as she pulls out a pair of shining black studs, \"<i>Oh, do you know what these are going to do?  Well, how about I slide them into your ", false);
@@ -314,10 +314,10 @@ function CeraphHandsOutNewFetishesLikePervCandy():void {
 			player.nipplesPShort = "seamless black nipple-studs";
 			player.nipplesPLong = "Seamless black nipple-studs";
 		}
-		flags[UNKNOWN_FLAG_NUMBER_00023] = 2;
+		flags[PC_FETISH] = 2;
 	}
 	//*Fetish level = 2
-	else if(flags[UNKNOWN_FLAG_NUMBER_00023] == 2) {
+	else if(flags[PC_FETISH] == 2) {
 		outputText("The demoness pulls out a diamond-studded piercing and closes in on you, her cock peeking out of her panties, her pussy moist, and her hips swaying seductively as she advances.  Ceraph gives you a serious look and warns you, \"<i>You realize you're not even going to be able to lift a hand against your foes after this?  You really love a challenge, don't you " + player.mf("Master","Mistress") + "?</i>\"\n\n", false);
 	
 		outputText("The idea of facing the denizens of this land without even so much as the ability to throw a punch turns you on immensely, and you pant and gasp as ", false);
@@ -357,7 +357,7 @@ function CeraphHandsOutNewFetishesLikePervCandy():void {
 			player.eyebrowPLong = "Diamond eyebrow-stud";
 		}
 		//Set fetish level
-		flags[UNKNOWN_FLAG_NUMBER_00023] = 3;
+		flags[PC_FETISH] = 3;
 		outputText("As she finishes, you get up and attempt to test your slut's work.  Raising your hand for a slap, you try to bring it down on Ceraph's face.  She flinches, but the blow stops a few inches away from her, melting into a gentle caress.  <b>You can no longer use basic physical attacks!</b>  She drops to her knees and asks, \"<i>Have I displeased you?  I can remove the compulsion in it if you like.</i>\"\n\n", false);
 		
 		outputText("You rub a hand through the demon's pitch-black hair and let her know that it's exactly what you asked for.\n\n", false);
@@ -391,9 +391,9 @@ function goThroughWithCeraphUnfetishification():void {
 	else outputText("You slap her across the face for her temerity.", false);
 	
 	stats(0,-1,0,0,0,0,0,1);
-	if(flags[UNKNOWN_FLAG_NUMBER_00023] == 3) flags[UNKNOWN_FLAG_NUMBER_00023] = 2;
-	else if(flags[UNKNOWN_FLAG_NUMBER_00023] == 2) flags[UNKNOWN_FLAG_NUMBER_00023] = 1;
-	else if(flags[UNKNOWN_FLAG_NUMBER_00023] == 1) flags[UNKNOWN_FLAG_NUMBER_00023] = 0;
+	if(flags[PC_FETISH] == 3) flags[PC_FETISH] = 2;
+	else if(flags[PC_FETISH] == 2) flags[PC_FETISH] = 1;
+	else if(flags[PC_FETISH] == 1) flags[PC_FETISH] = 0;
 	//Back to follower menu
 	doNext(ceraphFollowerAppearance);
 }
@@ -947,7 +947,7 @@ function sweetieNOOOO():void {
 
 	outputText("The increasingly cow-like omnibus takes a grip on either side of her hips and, with an ecstatic cry, tugs outward, widening her hips and throwing her gait off even more.  She sticks her thumb into her mouth and blows, and though you suspect that's simply for theatrics, her thighs thicken and her butt plumps up, filling up her overalls perfectly.  Ceraph reaches up and pinches her own cheeks, rounding her angled features off into a more rounded, softer visage.  With a snap of her fingers, a blossom of creamy-colored skin starts at her nose, running along her face and down her neck, enveloping the previously purple hue.  ", false);
 	//([if real Marble has cock]
-	if(flags[UNKNOWN_FLAG_NUMBER_00005] > 0 && flags[CERAPH_HIDING_DICK] == 0) outputText("Her nubbly member presumably shifts its color from royal purple to a lighter, brownish tone as well, inflating to the familiar seven-inch measurement; at least, so you'd judge by the sudden bulge in the overalls.  ", false);
+	if(flags[MARBLE_DICK_LENGTH] > 0 && flags[CERAPH_HIDING_DICK] == 0) outputText("Her nubbly member presumably shifts its color from royal purple to a lighter, brownish tone as well, inflating to the familiar seven-inch measurement; at least, so you'd judge by the sudden bulge in the overalls.  ", false);
 	outputText("A ruffle of her hair sparks a similar coloration shift to the same brown as her leg fur, and the black of her eyes shift to whites with brown irises.\n\n", false);
 
 	outputText("\"<i>One last touch,</i>\" she moans as her whole frame begins to jostle about.  With a shake, her entire body leaps up a couple inches in height, and another, and another until she's roughly the same size as that familiar cowgirl.", false);

@@ -1,9 +1,9 @@
 ﻿function minotaurAddicted():Boolean {
-	if(player.hasPerk("Minotaur Cum Addict") >= 0 || flags[UNKNOWN_FLAG_NUMBER_00020] >= 1) return true;
+	if(player.hasPerk("Minotaur Cum Addict") >= 0 || flags[MINOTAUR_CUM_ADDICTION_STATE] >= 1) return true;
 	return false;
 }
 function minotaurNeed():Boolean {
-	if(flags[UNKNOWN_FLAG_NUMBER_00020] > 1) return true;
+	if(flags[MINOTAUR_CUM_ADDICTION_STATE] > 1) return true;
 	return false;
 }
 
@@ -54,7 +54,7 @@ function minoVictoryRapeChoices():void {
 	var tempText:String = "";
 	temp = 0;
 	//Enable mino milking even if not in need
-	if(flags[UNKNOWN_FLAG_NUMBER_00020] >= 1 || player.hasPerk("Minotaur Cum Addict") >= 0) {
+	if(flags[MINOTAUR_CUM_ADDICTION_STATE] >= 1 || player.hasPerk("Minotaur Cum Addict") >= 0) {
 		if(player.biggestTitSize() >= 5 && !player.isNaga()) {
 			temp = 5131;
 			tempText = "Titfuck Him";
@@ -66,7 +66,7 @@ function minoVictoryRapeChoices():void {
 		filled = 5132;
 	}
 	//Hungry for cum?  Grab a snickers.
-	if(flags[UNKNOWN_FLAG_NUMBER_00020] >= 1) {
+	if(flags[MINOTAUR_CUM_ADDICTION_STATE] >= 1) {
 		outputText("Smiling down at your vanquished foe, you feel a familiar hunger growing within you.  What do you do?", true);
 	}
 	//Not an addict
@@ -476,7 +476,7 @@ function minoPheromones():void {
 	else outputText("right past your head.  ", false);
 	outputText("The animalistic scent of it seems to get inside you, the musky aroma burning a path of liquid heat to your groin.", false);
 	stats(0,0,0,0,0,0,10 + player.lib/20,0);	
-	if(player.hasPerk("Minotaur Cum Addict") >= 0 || flags[UNKNOWN_FLAG_NUMBER_00020] == 2) {
+	if(player.hasPerk("Minotaur Cum Addict") >= 0 || flags[MINOTAUR_CUM_ADDICTION_STATE] == 2) {
 		if(rand(2) == 0) outputText("\n<b>You shiver with need, wanting nothing more than to bury your face under that loincloth and slurp out every drop of goopey goodness.</b>", false);
 		else outputText("\n<b>You groan and lick your lips over and over, craving the taste of him in your mouth.</b>", false);
 		stats(0,0,0,0,0,0,5+rand(5),0);
@@ -685,80 +685,80 @@ function minoCumAddiction(raw:Number = 10):void {
 	//Increment minotaur cum intake count
 	flags[UNKNOWN_FLAG_NUMBER_00340]++;
 	//Fix if variables go out of range.
-	if(flags[UNKNOWN_FLAG_NUMBER_00018] < 0) flags[UNKNOWN_FLAG_NUMBER_00018] = 0;
-	if(flags[UNKNOWN_FLAG_NUMBER_00020] < 0) flags[UNKNOWN_FLAG_NUMBER_00020] = 0;
-	if(flags[UNKNOWN_FLAG_NUMBER_00018] > 120) flags[UNKNOWN_FLAG_NUMBER_00018] = 120;
+	if(flags[MINOTAUR_CUM_ADDICTION_TRACKER] < 0) flags[MINOTAUR_CUM_ADDICTION_TRACKER] = 0;
+	if(flags[MINOTAUR_CUM_ADDICTION_STATE] < 0) flags[MINOTAUR_CUM_ADDICTION_STATE] = 0;
+	if(flags[MINOTAUR_CUM_ADDICTION_TRACKER] > 120) flags[MINOTAUR_CUM_ADDICTION_TRACKER] = 120;
 	
 	//Turn off withdrawal
-	//if(flags[UNKNOWN_FLAG_NUMBER_00020] > 1) flags[UNKNOWN_FLAG_NUMBER_00020] = 1;
+	//if(flags[MINOTAUR_CUM_ADDICTION_STATE] > 1) flags[MINOTAUR_CUM_ADDICTION_STATE] = 1;
 	//Reset counter
-	flags[UNKNOWN_FLAG_NUMBER_00019] = 0;
+	flags[TIME_SINCE_LAST_CONSUMED_MINOTAUR_CUM] = 0;
 	//If highly addicted, rises slower
-	if(flags[UNKNOWN_FLAG_NUMBER_00018] >= 60) raw /= 2;
-	if(flags[UNKNOWN_FLAG_NUMBER_00018] >= 80) raw /= 2;
-	if(flags[UNKNOWN_FLAG_NUMBER_00018] >= 90) raw /= 2;
+	if(flags[MINOTAUR_CUM_ADDICTION_TRACKER] >= 60) raw /= 2;
+	if(flags[MINOTAUR_CUM_ADDICTION_TRACKER] >= 80) raw /= 2;
+	if(flags[MINOTAUR_CUM_ADDICTION_TRACKER] >= 90) raw /= 2;
 	//If in withdrawl, readdiction is potent!
-	if(flags[UNKNOWN_FLAG_NUMBER_00020] == 3) raw += 10;
-	if(flags[UNKNOWN_FLAG_NUMBER_00020] == 2) raw += 5;
+	if(flags[MINOTAUR_CUM_ADDICTION_STATE] == 3) raw += 10;
+	if(flags[MINOTAUR_CUM_ADDICTION_STATE] == 2) raw += 5;
 	raw = Math.round(raw * 100)/100;
-	flags[UNKNOWN_FLAG_NUMBER_00018] += raw;
+	flags[MINOTAUR_CUM_ADDICTION_TRACKER] += raw;
 	//PUT SOME CAPS ON DAT' SHIT
 	if(raw > 50) raw = 20;
 	if(raw < -50) raw = -20;
 	//Recheck to make sure shit didn't break
-	if(flags[UNKNOWN_FLAG_NUMBER_00018] > 120) flags[UNKNOWN_FLAG_NUMBER_00018] = 120;
-	if(flags[UNKNOWN_FLAG_NUMBER_00018] < 0) flags[UNKNOWN_FLAG_NUMBER_00018] = 0;
+	if(flags[MINOTAUR_CUM_ADDICTION_TRACKER] > 120) flags[MINOTAUR_CUM_ADDICTION_TRACKER] = 120;
+	if(flags[MINOTAUR_CUM_ADDICTION_TRACKER] < 0) flags[MINOTAUR_CUM_ADDICTION_TRACKER] = 0;
 
-	trace("MINO CUM ADDICTION %: " + flags[UNKNOWN_FLAG_NUMBER_00018]);
+	trace("MINO CUM ADDICTION %: " + flags[MINOTAUR_CUM_ADDICTION_TRACKER]);
 }
 
 function minoCumUpdate():Boolean {
-	if(flags[UNKNOWN_FLAG_NUMBER_00018] == 0) return false;
+	if(flags[MINOTAUR_CUM_ADDICTION_TRACKER] == 0) return false;
 	var output:Boolean = false;
-	trace("MINO CUM ADDICTION %: " + flags[UNKNOWN_FLAG_NUMBER_00018]);
+	trace("MINO CUM ADDICTION %: " + flags[MINOTAUR_CUM_ADDICTION_TRACKER]);
 	//Your addicted enough for it to be official!
-	if(flags[UNKNOWN_FLAG_NUMBER_00020] == 0 && flags[UNKNOWN_FLAG_NUMBER_00018] >= 50) {
+	if(flags[MINOTAUR_CUM_ADDICTION_STATE] == 0 && flags[MINOTAUR_CUM_ADDICTION_TRACKER] >= 50) {
 		outputText("\nYou find yourself becoming aroused at the merest thought of minotaurs and their delicious cum.  Immediately you remember how great it made you feel, and you want more.  <b>You're now addicted to minotaur cum!</b>\n", false);
-		flags[UNKNOWN_FLAG_NUMBER_00020] = 1;
+		flags[MINOTAUR_CUM_ADDICTION_STATE] = 1;
 		output = true;
 	}
 	//If under 50, clear addiction and stuff
-	if(flags[UNKNOWN_FLAG_NUMBER_00018] < 50) {
+	if(flags[MINOTAUR_CUM_ADDICTION_TRACKER] < 50) {
 		//Clear addiction if addicted!
-		if(flags[UNKNOWN_FLAG_NUMBER_00020] > 0) {
+		if(flags[MINOTAUR_CUM_ADDICTION_STATE] > 0) {
 			//Clear addiction text
 			outputText("\n<b>For the first time in a long while, your head is clear and devoid of the unnatural need for minotaur cum. You've overcome your dependance on it, ", false);
 			if(player.cor > 60) outputText("but miss the tingling apathy and fuzziness that filled your head every time one of them was squirting inside you.", false);
 			else outputText("and resolve to give the beasts a wide berth from now on.", false);
 			outputText("</b>\n", false);
-			flags[UNKNOWN_FLAG_NUMBER_00020] = 0;
+			flags[MINOTAUR_CUM_ADDICTION_STATE] = 0;
 			output = true;
 		}
 	}
 	//If over 50, addicted, become addicted, withdrawl, etc
 	else {
 		//Recover if fed during need or want.
-		if(flags[UNKNOWN_FLAG_NUMBER_00020] > 1 && flags[UNKNOWN_FLAG_NUMBER_00019] < 24) {
+		if(flags[MINOTAUR_CUM_ADDICTION_STATE] > 1 && flags[TIME_SINCE_LAST_CONSUMED_MINOTAUR_CUM] < 24) {
 			outputText("<b>\nYou sigh happily before you return to camp.  You got just what you needed.</b>\n", false);
-			flags[UNKNOWN_FLAG_NUMBER_00020] = 1;
+			flags[MINOTAUR_CUM_ADDICTION_STATE] = 1;
 			output = true;
 		}
 		//Go into 'need' if its time.
-		if(flags[UNKNOWN_FLAG_NUMBER_00019] >= 24 && flags[UNKNOWN_FLAG_NUMBER_00020] == 1) {
-			flags[UNKNOWN_FLAG_NUMBER_00020] = 2;
+		if(flags[TIME_SINCE_LAST_CONSUMED_MINOTAUR_CUM] >= 24 && flags[MINOTAUR_CUM_ADDICTION_STATE] == 1) {
+			flags[MINOTAUR_CUM_ADDICTION_STATE] = 2;
 			output = true;
 			flags[UNKNOWN_FLAG_NUMBER_00330] = 12;
 			outputText("\n<b>You shiver, feeling a little cold.  Maybe you ought to get some more minotaur cum?  You just don't feel right without that pleasant buzz in the back of your mind.</b>\n", false);
 		}
 		//Go into 'withdrawal' if its time.
-		if(flags[UNKNOWN_FLAG_NUMBER_00019] >= 48 && flags[UNKNOWN_FLAG_NUMBER_00020] == 2) {
-			flags[UNKNOWN_FLAG_NUMBER_00020] = 3;
+		if(flags[TIME_SINCE_LAST_CONSUMED_MINOTAUR_CUM] >= 48 && flags[MINOTAUR_CUM_ADDICTION_STATE] == 2) {
+			flags[MINOTAUR_CUM_ADDICTION_STATE] = 3;
 			output = true;
 			flags[UNKNOWN_FLAG_NUMBER_00330] = 12;
 			outputText("\n<b>A steady fire of lust slowly grows within you as you shiver and grab at your head.  You're in withdrawal after having gone so long without a dose of minotaur love.  You just know you're going to be horny and achy until you get some.</b>\n", false);
 		}
 		//UBER ADDICTION MESSAGE
-		if(flags[UNKNOWN_FLAG_NUMBER_00018] >= 100) {
+		if(flags[MINOTAUR_CUM_ADDICTION_TRACKER] >= 100) {
 			if(player.hasPerk("Minotaur Cum Addict") >= 0) {}
 			else {
 				player.createPerk("Minotaur Cum Addict",0,0,0,0,"A hopeless addict to minotaur cum, you need it regularly and can be healed by bottled minotaur cum.");
@@ -767,29 +767,29 @@ function minoCumUpdate():Boolean {
 			}
 		}
 		//3 lust an hour if in withdrawl, 1 if in need
-		if(flags[UNKNOWN_FLAG_NUMBER_00020] == 3 && flags[UNKNOWN_FLAG_NUMBER_00019] >= 48) {
+		if(flags[MINOTAUR_CUM_ADDICTION_STATE] == 3 && flags[TIME_SINCE_LAST_CONSUMED_MINOTAUR_CUM] >= 48) {
 			stats(0,0,0,0,0,0,2,0);
 		}
-		if(flags[UNKNOWN_FLAG_NUMBER_00020] == 2 && flags[UNKNOWN_FLAG_NUMBER_00019] >= 48) {
+		if(flags[MINOTAUR_CUM_ADDICTION_STATE] == 2 && flags[TIME_SINCE_LAST_CONSUMED_MINOTAUR_CUM] >= 48) {
 			stats(0,0,0,0,0,0,1,0);
 		}
 	}
 
 	//Decrement addiction value as needed
-	if(flags[UNKNOWN_FLAG_NUMBER_00019] >= 48 && player.hasPerk("Minotaur Cum Addict") < 0) {
-		if(flags[UNKNOWN_FLAG_NUMBER_00018] >= 0.15) flags[UNKNOWN_FLAG_NUMBER_00018] -= 0.15;
+	if(flags[TIME_SINCE_LAST_CONSUMED_MINOTAUR_CUM] >= 48 && player.hasPerk("Minotaur Cum Addict") < 0) {
+		if(flags[MINOTAUR_CUM_ADDICTION_TRACKER] >= 0.15) flags[MINOTAUR_CUM_ADDICTION_TRACKER] -= 0.15;
 	}
 	//Increment time since last imbibing cum...
 	//used for withdrawal and reducing overall addiction.
-	flags[UNKNOWN_FLAG_NUMBER_00019]++;
+	flags[TIME_SINCE_LAST_CONSUMED_MINOTAUR_CUM]++;
 	//Minotaur cum item's status affect decrement
-	if(flags[UNKNOWN_FLAG_NUMBER_00021] > 0) {
-		flags[UNKNOWN_FLAG_NUMBER_00021]--;
-		if(flags[UNKNOWN_FLAG_NUMBER_00021] == 0) {
+	if(flags[MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
+		flags[MINOTAUR_CUM_REALLY_ADDICTED_STATE]--;
+		if(flags[MINOTAUR_CUM_REALLY_ADDICTED_STATE] == 0) {
 			outputText("\n<b>Pain and pleasure are no longer so indistinguishable to you.\n</b>", false);
 			output = true;
 		}
-		if(flags[UNKNOWN_FLAG_NUMBER_00021] < 0) flags[UNKNOWN_FLAG_NUMBER_00021] = 0;
+		if(flags[MINOTAUR_CUM_REALLY_ADDICTED_STATE] < 0) flags[MINOTAUR_CUM_REALLY_ADDICTED_STATE] = 0;
 	}
 	return output;
 }
@@ -826,7 +826,7 @@ function minoAddictionBadEndEncounter():void {
 	outputText("While exploring the mountains you catch a strong whiff of your favorite scent.  Tipping your head to the side, you take in a few deep lungfuls and sigh.   Judging by the strength of the smell, there must be MANY minotaurs gathered together.   Immediate visions of being surrounded by the muscly monsters fill your mind.   In your fantasy your holes are plugged and you're soaked in their wondrous stuff.  You desperately want it to be a reality, and all you need to do is follow your nose...\n\n", false);
 
 	//(Withdrawal) 
-	if(flags[UNKNOWN_FLAG_NUMBER_00020] == 3) {
+	if(flags[MINOTAUR_CUM_ADDICTION_STATE] == 3) {
 		outputText("So great is your need that you don't even think about it, you just start following.", false);
 		doNext(minoAddictionBadEnd2);
 	}
@@ -966,7 +966,7 @@ function layEggsInAMinotaurSpiderLike():void {
 	if(player.gender > 0) outputText("combination of the scent of your fluids and the ");
 	outputText("sensation of eggs forcing their way past his sphincter proves too much for your bovine bitch to resist, and he helplessly sprays his musky cum, stream after stream jetting up his chest and across his face as his eyes roll back in his head.");
 	//[(mino addict)
-	if(flags[UNKNOWN_FLAG_NUMBER_00020] >= 1) {
+	if(flags[MINOTAUR_CUM_ADDICTION_STATE] >= 1) {
 		outputText("  The smell is too much for you as well, and as you come a second time, you point his flare at your mouth, gulping as much of his seed as you can get.");
 		minoCumAddiction(3);
 	}

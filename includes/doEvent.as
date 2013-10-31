@@ -1671,8 +1671,8 @@ This license supercedes all previous licenses and remains in force.
 		temp7 = 0;
 		temp8 = 0;
 		if(player.hasPerk("Marble's Milk") >= 0 && hasItem("Lactaid",1)) temp2 = 2269;
-		if(hasItem("P.Draft",1) && flags[UNKNOWN_FLAG_NUMBER_00004] == 0) temp4 = 2273;
-		if(flags[UNKNOWN_FLAG_NUMBER_00004] > 0) {
+		if(hasItem("P.Draft",1) && flags[MARBLE_DICK_TYPE] == 0) temp4 = 2273;
+		if(flags[MARBLE_DICK_TYPE] > 0) {
 			if(hasItem("PinkEgg",1)) temp5 = 2270;
 			if(hasItem("L.PnkEg",1)) temp6 = 2271;
 		}

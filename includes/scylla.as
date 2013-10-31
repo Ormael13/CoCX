@@ -628,7 +628,7 @@ function scyllaPtVShare():void {
 	if((player.hasPerk("Marble's Milk") >= 0 || player.statusAffectv3("Marble") > 0) && player.hasPerk("Marble Resistant") < 0)
 		milk = 2571;
 	var cum:Number = 0;
-	if(flags[UNKNOWN_FLAG_NUMBER_00018] >= 50 || player.hasPerk("Minotaur Cum Addict") >= 0) cum = 2576;
+	if(flags[MINOTAUR_CUM_ADDICTION_TRACKER] >= 50 || player.hasPerk("Minotaur Cum Addict") >= 0) cum = 2576;
 	var sex:Number = 0;
 	if(player.lib >= 85 || minLust() >= 20) sex = 2581;
 	var tentacles:int = 0;
