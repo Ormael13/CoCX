@@ -331,8 +331,7 @@ package classes
 						else
 						{
 							//If the next slot is later we are go
-							if (perks[counter].perkName <= keyName)
-							{
+							if(perks[counter].perkName <= keyName) {
 								arrayed = true;
 								perks.splice(counter, 0, newKeyItem);
 								keySlot = counter;
@@ -1691,6 +1690,10 @@ package classes
 				bonus += 10;
 			if (hasPerk("Cornucopia") >= 0)
 				bonus += 30;
+			if(hasPerk("Fera's Boon - Wide Open") >= 0) 
+				bonus += 25;
+			if(hasPerk("Fera's Boon - Milking Twat") >= 0) 
+				bonus += 40;
 			total = (bonus + statusAffectv1("Bonus vCapacity") + 8 * vaginas[0].vaginalLooseness * vaginas[0].vaginalLooseness) * (1 + vaginas[0].vaginalWetness / 10);
 			return total;
 		}
@@ -1954,6 +1957,8 @@ package classes
 				quantity += 200;
 			if (hasPerk("Magical Virility") >= 0)
 				quantity += 200;
+			if(hasPerk("Fera's Boon - Seeder") >= 0) 
+				quantity += 1000;
 			//if(hasPerk("Elven Bounty") >= 0) quantity += 250;;
 			quantity += perkv1("Elven Bounty");
 			if (hasPerk("Bro Body") >= 0)
@@ -2481,7 +2486,7 @@ package classes
 							return "she";
 					}
 					if (caps)
-						return "it";
+						return "It";
 					else
 						return "it";
 				}

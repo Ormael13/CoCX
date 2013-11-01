@@ -2,6 +2,7 @@
 	if(player.vaginas.length == 0) return false;
 	var stretched:Boolean = false;
 	var devirgined:Boolean = false;
+	if(player.hasPerk("Fera's Boon - Milking Twat") < 0 || player.vaginas[0].vaginalLooseness <= 1) {
 	//cArea > capacity = autostreeeeetch.
 	if(cArea >= player.vaginalCapacity()) {
 		if(player.vaginas[0].vaginalLooseness >= 5) {}
@@ -17,6 +18,7 @@
 	else if(cArea >= .75 * player.vaginalCapacity() && rand(4) == 0) {
 		player.vaginas[0].vaginalLooseness++;
 		stretched = true;
+		}
 	}
 	//If virgin
 	if(player.vaginas[0].virgin) {

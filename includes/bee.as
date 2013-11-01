@@ -707,7 +707,7 @@ function rapeTheBeeGirlWithADick():void {
 
 		outputText("You reach down and stroke her hair. She flinches from your hand at first before realizing that you genuinely mean her no harm. Her own hand reaches to slide up your arm as you pull yourself down to kiss her. She happily kisses you back, her long, thin, dexterous tongue wrapping around your own.\n\n", false);
 
-		outputText("Pulling back, you consider her for a moment. She watches as you slip out of your " + player.armorName + ", licking her lips at the site of your " + chestDesc() + ". Once you're torso is free you reach down again and pick up the bee maiden. She's surprisingly light and you lift her with ease, feeling her legs wrap around you as you hug and kiss her.\n\n", false);
+		outputText("Pulling back, you consider her for a moment. She watches as you slip out of your " + player.armorName + ", licking her lips at the site of your " + chestDesc() + ". Once your torso is free you reach down again and pick up the bee maiden. She's surprisingly light and you lift her with ease, feeling her legs wrap around you as you hug and kiss her.\n\n", false);
 
 		outputText("It's not long before she's gently grinding her cunt against your body and you find your hand slide down her front to slip gently inside her sticky folds. She moans into your mouth and vibrates as a little gush of honey squirts out of her. You bring your hand back up and the pair of you clean it off with your tongues.\n\n", false);
 

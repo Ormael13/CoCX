@@ -39,7 +39,7 @@ function helAffection(diff:Number = 0):Number {
 	}
 	else if(followerHel()) {
 		flags[HEL_AFFECTION_FOLLOWER] = 100;
-		flags[HEL_BONUS_POINTS] += diff;
+		flags[HEL_BONUS_POINTS] += diff * 3;
 		if(diff > 0) if(flags[HEL_BONUS_POINTS] > 150) flags[HEL_BONUS_POINTS] = 150;
 		else if(diff < 0) if(flags[HEL_BONUS_POINTS] < 0) flags[HEL_BONUS_POINTS] = 0;		
 	}
@@ -1008,6 +1008,7 @@ function heliaRoughSex(output:Boolean = true):void {
 			}
 		}
 	}
+	if(player.lust < 33) outputText("\n\n<b>You aren't turned on enough for sex right now.</b>");
 	if(inCombat()) addButton(9,"Leave",eventParser,5007);
 	else addButton(9,"Back",heliaFollowerMenu);
 }

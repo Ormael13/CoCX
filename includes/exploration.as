@@ -182,9 +182,23 @@ function exploreDeepwoods():void {
 	var chooser:Number = rand(5);
 	var temp2:Number = 0;
 	//Every tenth exploration finds a pumpkin if eligible!
-	if(player.statusAffectv1("exploredDeepwoods")% 10 == 0 && date.fullYear > flags[PUMPKIN_FUCK_YEAR_DONE] && isHalloween()) {
+	if(player.statusAffectv1("exploredDeepwoods")% 10 == 0 && isHalloween()) {
+		//If Fera isn't free yet...
+		if(player.hasPerk("Fera's Boon - Breeding Bitch") < 0 && player.hasPerk("Fera's Boon - Alpha") < 0) {
+			if(date.fullYear > flags[PUMPKIN_FUCK_YEAR_DONE]) {
 		pumpkinFuckEncounter();
 		return;
+	}
+		}
+		//Fera is free!
+		else {
+			if(flags[FERAS_TRAP_SPRUNG_YEAR] == 0) {
+				if(date.fullYear > flags[FERAS_GLADE_EXPLORED_YEAR]) {
+					feraSceneTwoIntroduction();
+					return;
+				}
+			}
+		}
 	}
 	//Hel jumps you for sex.
 	if(flags[PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !followerHel()) {
@@ -1366,6 +1380,7 @@ function exploreBog():void {
 	if(player.buttPregnancyIncubation == 0 && rand(3) == 0) findTheFrogGirl();
 	else if(rand(2) == 0) encounterChameleon();
 	else {
+		clearOutput();
 		outputText("You wander around through the humid muck, but you don't run into anything interesting.");
 		doNext(13);
 	}

@@ -1066,6 +1066,28 @@ function updatePregnancy():Boolean {
 				}
 			}
 		}
+		//Frog Eggs
+		else if(player.pregnancyType == 23) {
+			if(player.pregnancyIncubation == 8) {
+				//Egg Maturing
+				if(player.hasVagina()) {
+					outputText("\nYour gut churns, and with a squelching noise, a torrent of transparent slime gushes from your [vagina].  You immediately fall to your knees, landing wetly amidst the slime.  The world around briefly flashes with unbelievable colors, and you hear someone giggling.\n\nAfter a moment, you realize that it’s you.");
+					//pussy:
+					if(player.hasVagina()) outputText("  Against your [vagina], the slime feels warm and cold at the same time, coaxing delightful tremors from your [clit].");
+					//[balls:
+					else if(player.balls > 0) outputText("  Slathered in hallucinogenic frog slime, your balls tingle, sending warm pulses of pleasure all the way up into your brain.");
+					//genderless: 
+					else outputText("  Your [vagina] begins twitching, aching for something to push through it over and over again.");
+					outputText("  Seated in your own slime, you moan softly, unable to keep your hands off yourself.");
+					stats(0,0,0,0,0,0,100,0,false);
+					displayedUpdate = true;
+				}
+				else {
+					outputText("\nYour gut churns, but after a moment it settles. Your belly does seem a bit bigger and more gravid afterward, like you're filling up with fluid without any possible vent. You suddenly wonder if losing your pussy was such a great idea.");
+					displayedUpdate = true;
+				}
+			}
+		}
 	}
 	//IF INCUBATION IS ANAL
 	if(player.buttPregnancyIncubation > 1) {
@@ -1368,6 +1390,13 @@ function updatePregnancy():Boolean {
 			displayedUpdate = true;
 			popOutBenoitEggs();
 		}
+	}
+	//Give birf if its time... to FROG EGGS
+	if(player.pregnancyIncubation == 1 && player.pregnancyType == 23) {
+		layFrogEggs();
+		displayedUpdate = true;
+		player.pregnancyIncubation = 0;
+		player.pregnancyType = 0;
 	}
 	//BASILISK BIRF
 	//Bunbun birfs

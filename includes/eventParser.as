@@ -17,7 +17,7 @@ function eventParser(eventNo:*):void {
 		//Clear sprite if not in combat
 		if(!inCombat() && eventNo != 5007) spriteSelect(-1);
 		//Clear pic if not in combat
-		if(!inCombat() && eventNo != 5007) clearImages();
+		//if(!inCombat() && eventNo != 5007) clearImages();
 		//Reset newgame buttons till back at camp
 		newGameText.removeEventListener(MouseEvent.CLICK, mainMenu);
 		newGameBG.removeEventListener(MouseEvent.CLICK, mainMenu);
@@ -2114,6 +2114,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(player.hasStatusAffect("CuntStretched") >= 0) {
 			player.addStatusValue("CuntStretched",1,1);
 			if(player.vaginas.length > 0) {
+				if(player.hasPerk("Fera's Boon - Wide Open") < 0) {
 				if(player.vaginas[0].vaginalLooseness == 2 && player.statusAffectv1("CuntStretched") >= 200) {
 					outputText("\nYour " + vaginaDescript(0) + " recovers from your ordeals, tightening up a bit.\n", false);
 					player.vaginas[0].vaginalLooseness--;
@@ -2132,8 +2133,9 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 					player.changeStatusValue("CuntStretched",1,0);
 					needNext = true;
 				}
+				}
 				if(player.vaginas[0].vaginalLooseness == 5 && player.statusAffectv1("CuntStretched") >= 50) {
-					outputText("\nYour " + vaginaDescript(0) + " recovers from the brutal stretching it has received and tightens up.\n", false);
+					outputText("\nYour " + vaginaDescript(0) + " recovers from the brutal stretching it has received and tightens up a little bit, but not much.\n", false);
 					player.vaginas[0].vaginalLooseness--;
 					player.changeStatusValue("CuntStretched",1,0);
 					needNext = true;
@@ -3167,6 +3169,12 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 				//Make sure pregnancy texts aren't hidden
 				if(updatePregnancy()) needNext = true;
 			}
+			if(player.hasPerk("Fera's Boon - Wide Open") >= 0 || player.hasPerk("Fera's Boon - Milking Twat") >= 0) {
+				if(player.pregnancyIncubation > 0) player.pregnancyIncubation--;
+				if(player.buttPregnancyIncubation > 0) player.buttPregnancyIncubation--;
+				//Make sure pregnancy texts aren't hidden
+				if(updatePregnancy()) needNext = true;
+			}
 			if(flags[EVENT_PARSER_ESCAPE] == 1) {
 				flags[EVENT_PARSER_ESCAPE] = 0;
 				return true;
@@ -3236,6 +3244,12 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 				return true;
 			}
 			if(player.hasPerk("Fera's Boon - Breeding Bitch") >= 0) {
+				if(player.pregnancyIncubation > 0) player.pregnancyIncubation--;
+				if(player.buttPregnancyIncubation > 0) player.buttPregnancyIncubation--;
+				//Make sure pregnancy texts aren't hidden
+				if(updatePregnancy()) needNext = true;
+			}
+			if(player.hasPerk("Fera's Boon - Wide Open") >= 0 || player.hasPerk("Fera's Boon - Milking Twat") >= 0) {
 				if(player.pregnancyIncubation > 0) player.pregnancyIncubation--;
 				if(player.buttPregnancyIncubation > 0) player.buttPregnancyIncubation--;
 				//Make sure pregnancy texts aren't hidden
@@ -3395,6 +3409,8 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			return true;
 		}
 	}
+	// update cock type as dog/fox depending on whether the player resembles one more then the other.
+	// Previously used to be computed directly in cockNoun, but refactoring prevents access to the Player class when in cockNoun now.
 	if (player.totalCocks() != 0)
 	{
 		var counter:Number = player.totalCocks() - 1;
