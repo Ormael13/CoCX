@@ -284,7 +284,7 @@ function rideDatFuckingFukkFlowerP2():void {
 		outputText(" milk.");
 	}
 	outputText("  You moan in unabashed delight, your mouth hanging open in a mindless, blissful 'o' in between vocalizations.  If your friends back home could see you now, writhing in the dirt, face open in simple, animal pleasure, and perhaps worst of all, fucking a plant, you'd die of ");
-	if(flags[UNKNOWN_FLAG_NUMBER_00023] == 0 && player.cor + player.lib < 150) outputText("embarrassment");
+	if(flags[PC_FETISH] == 0 && player.cor + player.lib < 150) outputText("embarrassment");
 	else outputText("lust");
 	outputText(".");
 	

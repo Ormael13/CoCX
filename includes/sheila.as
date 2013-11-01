@@ -2008,7 +2008,7 @@ function consentacleVagSexForKangarooSlutBitches():void {
 	outputText("\n\n\"<i>Oh god!</i>\" she yells.  \"<i>Pull out, before you get me pregnant!</i>\"  ");
 	//[(non-dog cock)
 	if(player.cocks[x].cockType != CockTypesEnum.DOG) {
-		outputText("You oblige shakingly, pulling your " + cockNoun(player.cocks[x].cockType) + " out of her clenching pussy with a wet, sucking noise.  A trickle of semen drools from between her lips as you unburden yourself of the rest of your load, squirting it onto her groin");
+		outputText("You oblige shakingly, pulling your " + Appearance.cockNoun(player.cocks[x].cockType) + " out of her clenching pussy with a wet, sucking noise.  A trickle of semen drools from between her lips as you unburden yourself of the rest of your load, squirting it onto her groin");
 		//[(big skeet)
 		if(player.cumQ() > 500) outputText(", breasts, and face");
 		outputText(".");
@@ -2787,7 +2787,7 @@ function forcedSheilaOral(dick:Boolean = true):void {
 		if(player.exploredForest >= 40) outputText(" - in fact, there are quite a few I've seen who look like better lovers than you.  Maybe I should carry you to the forest and tie you to a nice pussy-shaped giant flower to give you lessons");
 		outputText(".  ");
 		//[(minotaur addiction score =/= 0%)
-		if(flags[UNKNOWN_FLAG_NUMBER_00018] > 0 || player.hasPerk("Minotaur Cum Addict") >= 0) {
+		if(flags[MINOTAUR_CUM_ADDICTION_TRACKER] > 0 || player.hasPerk("Minotaur Cum Addict") >= 0) {
 			outputText("Perhaps I'll turn you over to a minotaur; you're bound to get better at using your tongue when you're addicted to their amazing seed.  Would you like that?  The first thing you'd see in the morning would be a huge flared cock, right in front of you, dripping with heavenly precum and waiting for your mouth... or your cunt.  You could be just another minotaur-fucking slut of the plains.  ");
 		}
 		outputText("Or I could take you home and give you personal training myself, whenever I feel like it, and invite travelers to do the same");

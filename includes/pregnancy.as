@@ -1559,7 +1559,7 @@ function updatePregnancy():Boolean {
 			genderCheck();
 		}	
 		//If you like terrible outcomes
-		if(flags[UNKNOWN_FLAG_NUMBER_00009] < 100) {
+		if(flags[MARBLE_NURSERY_CONSTRUCTION] < 100) {
 			outputText("\nYou feel a clenching sensation in your belly and something shifts inside.  Your contractions start a few moments later and you realize that it's time for your child to be born.  You cry out mildly in pain and lie down, letting your body start to push the baby out.  Marble doesn't seem to be around right now, so you can do nothing but push.\n\n", false);
 
 			outputText("You push and heave with all your might, little else going through your mind. You somehow register when the head comes out, and soon the shoulders along with the rest of the body follow.  You lean back and pant for a while before feeling a pair of hands grab a hold of you. They slowly and clumsily feel up your body before finding your " + biggestBreastSizeDescript() + " and a mouth quickly closes down on a " + nippleDescript(0) + ".  You sigh softly, and drift off to sleep.", false);

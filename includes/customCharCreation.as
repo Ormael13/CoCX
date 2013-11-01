@@ -744,14 +744,14 @@ function customPCSetup():void {
 		player.hipRating = 5;
 		player.buttRating = 5;
 		player.thickness = 10;
-		flags[UNKNOWN_FLAG_NUMBER_00023] = 2;
+		flags[PC_FETISH] = 2;
 		player.earsPierced = 1;
 		player.earsPShort = "green gem-stone handcuffs";
 		player.earsPLong = "Green gem-stone handcuffs";
 		player.nipplesPierced = 1;
 		player.nipplesPShort = "seamless black nipple-studs";
 		player.nipplesPLong = "Seamless black nipple-studs";
-		flags[UNKNOWN_FLAG_NUMBER_00023] = 2;
+		flags[PC_FETISH] = 2;
 		player.vaginas[0].clitPierced = 1;
 		player.vaginas[0].clitPShort = "emerald clit-stud";
 		player.vaginas[0].clitPLong = "Emerald clit-stud";

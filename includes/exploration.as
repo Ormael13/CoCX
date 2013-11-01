@@ -553,6 +553,7 @@ function exploreForest():void {
 			outputText("You trip on an exposed root, scraping yourself somewhat, but otherwise the hour is uneventful.", false);
 			takeDamage(10);
 			doNext(13);
+			trace("FIX MEEEEE");
 			return;
 		}
 	}
@@ -742,11 +743,11 @@ function exploreHighMountain():void {
 		}
 	}
 	//10% chance to mino encounter rate if addicted
-	if(flags[UNKNOWN_FLAG_NUMBER_00020] > 0 && rand(10) == 0) {
+	if(flags[MINOTAUR_CUM_ADDICTION_STATE] > 0 && rand(10) == 0) {
 		spriteSelect(44);
 		//Cum addictus interruptus!  LOL HARRY POTTERFAG
 		//Withdrawl auto-fuck!
-		if(flags[UNKNOWN_FLAG_NUMBER_00020] == 3) {
+		if(flags[MINOTAUR_CUM_ADDICTION_STATE] == 3) {
 			minoAddictionFuck();
 			return;
 		}
@@ -828,12 +829,12 @@ function exploreMountain():void {
 	}
 	//Rarer 'nice' Ceraph encounter
 	//Overlaps half the old encounters once pierced.
-	if(!ceraphIsFollower() && player.level > 2 && (player.exploredMountain % 30 == 0) && flags[UNKNOWN_FLAG_NUMBER_00023] > 0) {
+	if(!ceraphIsFollower() && player.level > 2 && (player.exploredMountain % 30 == 0) && flags[PC_FETISH] > 0) {
 		friendlyNeighborhoodSpiderManCeraph();
 		return;
 	}
 	//15% chance of Ceraph
-	if(!ceraphIsFollower() && player.level > 2 && (player.exploredMountain % 15 == 0) && flags[UNKNOWN_FLAG_NUMBER_00023] != 1) {
+	if(!ceraphIsFollower() && player.level > 2 && (player.exploredMountain % 15 == 0) && flags[PC_FETISH] != 1) {
 		encounterCeraph();
 		return;
 	}
@@ -850,7 +851,7 @@ function exploreMountain():void {
 		else chooser = 3;		
 	}
 	//10% chance to mino encounter rate if addicted
-	if(flags[UNKNOWN_FLAG_NUMBER_00020] > 0 && rand(10) == 0) {
+	if(flags[MINOTAUR_CUM_ADDICTION_STATE] > 0 && rand(10) == 0) {
 		chooser = 1;
 	}
 	//10% MORE chance for minos if uber-addicted
@@ -970,7 +971,7 @@ function exploreMountain():void {
 		}
 		//Cum addictus interruptus!  LOL HARRY POTTERFAG
 		//Withdrawl auto-fuck!
-		if(flags[UNKNOWN_FLAG_NUMBER_00020] == 3) {
+		if(flags[MINOTAUR_CUM_ADDICTION_STATE] == 3) {
 			minoAddictionFuck();
 			return;
 		}
@@ -1546,7 +1547,7 @@ function bigJunkDesertScene():void {
 	//PARAGRAPH 1
 	outputText("Walking along the sandy dunes of the desert you find yourself increasingly impeded by the bulk of your " + cockDescript(x) + " dragging along the sandscape behind you.  The incredibly hot surface of the desert causes your loins to sweat heavily and fills them with relentless heat.", false);
 	
-	if(player.cocks.length == 1) outputText("  As it drags along the dunes, the sensation forces you to imagine the rough textured tongue of a monstrous animal sliding along the head of your " + cockNoun(player.cocks[x].cockType) + ".", false);
+	if(player.cocks.length == 1) outputText("  As it drags along the dunes, the sensation forces you to imagine the rough textured tongue of a monstrous animal sliding along the head of your " + Appearance.cockNoun(player.cocks[x].cockType) + ".", false);
 	else if (player.cocks.length >= 2) outputText("  With all of your " + multiCockDescriptLight() + " dragging through the sands they begin feeling as if the rough textured tongues of " + num2Text(player.cockTotal()) + " different monstrous animals were slobbering over each one.", false);
 	outputText("\n\n", false);
 
@@ -1618,8 +1619,8 @@ function bigJunkForestScene(lake:Boolean = false):void {
 	if(lake) outputText("wet ground behind you.", false);
 	else outputText("earth behind you.", false);
 	if(player.cocks.length == 1) {
-		if(lake) outputText("  As it drags through the lakeside mud, the sensation forces you to imagine the velvety folds of a monstrous pussy sliding along the head of your " + cockNoun(player.cocks[x].cockType) + ", gently attempting to suck it off.", false);
-		else outputText("  As it drags across the grass, twigs, and exposed tree roots, the sensation forces you to imagine the fingers of a giant hand sliding along the head of your " + cockNoun(player.cocks[x].cockType) +", gently jerking it off.", false);
+		if(lake) outputText("  As it drags through the lakeside mud, the sensation forces you to imagine the velvety folds of a monstrous pussy sliding along the head of your " + Appearance.cockNoun(player.cocks[x].cockType) + ", gently attempting to suck it off.", false);
+		else outputText("  As it drags across the grass, twigs, and exposed tree roots, the sensation forces you to imagine the fingers of a giant hand sliding along the head of your " + Appearance.cockNoun(player.cocks[x].cockType) +", gently jerking it off.", false);
 	}
 	else if (player.cocks.length >= 2) {
 		if(lake) outputText("  With all of your " + multiCockDescriptLight() + " dragging through the mud, they begin feeling as if the lips of " + num2Text(player.cockTotal()) + " different cunts were slobbering over each one.", false);
@@ -2072,7 +2073,7 @@ function joinBeingAMinoCumSlut():void {
 	
 	outputText("\n\nYou quickly re-dress and head back to camp, spying the occassional goblin or imp scurrying from its hiding spot, no doubt recovering from their own self-inflicted orgasms.");
 	stats(0,0,0,0,.5,-3,-100,1);
-	if(flags[UNKNOWN_FLAG_NUMBER_00023] > 0) {
+	if(flags[PC_FETISH] > 0) {
 		outputText("  A thrill runs through you.  Even though you were brought to such a satisfying climax, the whole thought that goblins and imps were watching you and getting off on it... it just makes you hornier than you were before.");
 		stats(0,0,0,0,0,0,100,0);
 	}

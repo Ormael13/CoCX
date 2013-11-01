@@ -581,8 +581,8 @@ function endThisMadness():void {
 		
 		outputText("The angry vixen snatches her clothes from a peg on the wall and slides out the door, too pissed to care that she's standing naked.  \"<i>I won't be a problem for you any more.  Just stay away from me.</i>\"\n\n", false);
 		urtaLove(-100);
-		flags[UNKNOWN_FLAG_NUMBER_00030] = -1;
-		flags[UNKNOWN_FLAG_NUMBER_00012] = -1;
+		flags[URTA_PC_LOVE_COUNTER] = -1;
+		flags[URTA_COMFORTABLE_WITH_OWN_BODY] = -1;
 	}
 	flags[AMILY_VISITING_URTA] = 3;
 	outputText("You shrug.  Well, that puts an end to that.", false);

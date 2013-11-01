@@ -1875,9 +1875,9 @@ function goAlongWIthShouldrasEatingSpree():void {
 	if(flags[SHOULDRA_BAKERY_TIMES] > 0) outputText("\"Man, you're not sure you want that kind of impact on your figure again...  \"");
 	outputText("Ah, what the hell.  You were hungry anyway.  You let Shouldra guide the cake into your mouth.  Mmm, not bad; rich, sweet and delicate.  Shouldra chuckles in your mind as she releases her control slightly, letting you lick your fingers clean of any stray crumbs.  \"<i>Well, guess you're pretty hungry yourself!  Alright, Champ, I'll give you some freedom, but just remember you're not the only one with an appetite.</i>\" You wince as your hunger intensifies to the verge of pain; looks like you're eating for two.  Your eyes lock on to the feast before you and something snaps in your mind.  You need this food, all of this food, inside you.  <i>Now</i>.");
 	outputText("\n\nYou finish the torte, pausing only to scrape the platter clean and devour the crumbs before starting on some brownies.  As snack upon snack disappears down your maw, your stomach grows warm and full, feeling mildly bloated as the last brownie passes your lips.  \"<i>Ooh, is your poor lil' tummy feeling a bit full?</i>\" Shouldra snickers.  \"<i>Let's get it out of this cumbersome outfit.</i>\" An incantation echoes in your mind before your [armor] shimmers and vanishes.  Well, that was unexpected");
-	if(flags[UNKNOWN_FLAG_NUMBER_00023] > 0) outputText(", though not completely unwelcome");
+	if(flags[PC_FETISH] > 0) outputText(", though not completely unwelcome");
 	outputText(".  You blush furiously and back into the corner of the (now rather cold) booth");
-	if(flags[UNKNOWN_FLAG_NUMBER_00023] > 0) {
+	if(flags[PC_FETISH] > 0) {
 		outputText(" as your heart races and blood rushes down towards your ");
 		if(player.hasCock()) {
 			outputText("drowsy member");
@@ -1887,7 +1887,7 @@ function goAlongWIthShouldrasEatingSpree():void {
 		if(player.gender == 0) outputText("groin");
 	}
 	outputText(", before you realise that nobody seems to notice your predicament.  Shouldra reads your thoughts and responds, \"<i>Thought you might appreciate some privacy");
-	if(flags[UNKNOWN_FLAG_NUMBER_00023] > 0) outputText(", even with that kink of yours");
+	if(flags[PC_FETISH] > 0) outputText(", even with that kink of yours");
 	outputText(", Champ.  Here's something extra anyway, just in case.</i>\" One ghostly incantation later, and ");
 	if(player.femininity <= 50) outputText("a buttoned shirt and pair of belted jeans");
 	else outputText("a tight-fitting tank top and skirt");
