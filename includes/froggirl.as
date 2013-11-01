@@ -4,7 +4,7 @@ function findTheFrogGirl():void {
 	clearOutput();
 	if(flags[TIMES_ENCOUNTERED_FROG] == 0) {
 		outputText("You begin your trudge through the bog, slogging through the soupy muck.  Insects buzz by every second, spinning in hectic spirals around your head.");
-		outputText("\n\nYou soon become aware of a new sound behind the buzzing—a musical chirping.  Step by step, you move toward it, pushing aside hanging curtains of gray moss until the dark trees of the swamp give way to the wide roots of mangroves.  The sporadic notes trickle into your ears, and you feel unusually relaxed as you move toward their source.");
+		outputText("\n\nYou soon become aware of a new sound behind the buzzing - a musical chirping.  Step by step, you move toward it, pushing aside hanging curtains of gray moss until the dark trees of the swamp give way to the wide roots of mangroves.  The sporadic notes trickle into your ears, and you feel unusually relaxed as you move toward their source.");
 		outputText("\n\nThe wide roots of the trees create separate, tiny ponds, where its looks like condensed water has collected into pools of pristine, blue water.  The chirping echoes from the high walls of mangrove roots, coming from a slim figure seated in the largest pool.  Vaguely feminine, it sits cross-legged and waist-deep in the pool, arms open wide and welcoming.  Light glints off the smooth skin of the lithe form as her lips part, issuing out another stream of alluring, musical notes.");
 		outputText("\n\nYou move closer, climbing up a low terrace of crystal-clear pools, your [feet] knocking against the chalk-white wood of the mangrove.  Nearer to the source, the sunlit glare is less intense and the singer comes into sudden focus.");
 		outputText("\n\nWith lime green skin and a white underbelly, she most resembles a frog, even down to a slippery sheen coating her from head to toe.  Despite a clearly feminine frame, her pearly-white chest is completely flat and bereft of nipples.  Yellow and red marks pattern her, spotting their way down her limbs.  Her arms end in oddly-wide hands, with broadened circular tips.  One set of fingers tugs back a hanging fringe of pink hair, and large yellow eyes blink brightly at you from beneath it.");
@@ -102,7 +102,8 @@ function questDatFrogGirl():void {
 	outputText("\n\nYou wonder what it would be like to carry the massive load of eggs. Do you want to offer to carry the frog’s eggs or continue on your way?");
 	menu();
 	addButton(4,"Leave",continueOnYourWay);
-	addButton(0,"Carry",carryBeeGirlsEggsVoluntarilyYouButtSlut);
+	if(player.hasVagina()) addButton(0,"Vaginally",superBonusFrogEggsInYerCooch);
+	addButton(1,"Carry",carryBeeGirlsEggsVoluntarilyYouButtSlut);
 }
 
 //Continue on your way:
@@ -191,4 +192,75 @@ function birthFrogEggsAnal():void {
 	player.hipRating++;
 	player.ass.analWetness += 1;
 	stats(0,0,0,0,0,1,-100,0);
+}
+//Superbonus Vaginal Eggs!
+function superBonusFrogEggsInYerCooch():void {
+	clearOutput();
+	outputText("\"<i>Wait, you want them where?</i>\" asks the frog girl, incredulously.");
+	outputText("\n\nYou repeat that you’d like her to lay her clutch in your womb, licking your lips and running your fingers down to your [vagina].");
+	outputText("\n\n\"<i>Huh, now why didn’t I think of that?</i>\" mutters the frog girl, furrowing her brow.  \"<i>It’s a fantastic idea, though,</i>\" she chirps.  \"<i>I just need you in the right position.</i>\"");
+	outputText("\n\nShe leans in against you, her lips brushing against yours as her broad hand slides behind you, her cool touch leaving a patina of tingling slime against your back.  You arch your back reflexively, feeling pleasant tingles running from your [face] all the way down to your [legs].");
+	outputText("\n\nAs the small of your back pushes up, your hips rise up in the water, guided by the frog girl’s light touches across your [ass].  Every fingertip sends hallucinogens through your system, making the world light up, spin, or fill with tiny motes of light.  By the time she slings a smooth thigh over your [leg], you’re giggling at the kaleidoscopic universe unfolding before you.");
+	outputText("\n\nYou hear the frog girl coo as she touches her pussy against yours, smearing her slickness against your mound.  Her touch sends shivery, silvery sensations up your spine, and you feel your own wetness oozing out against her.");
+	outputText("\n\nThicker slime adheres her pussy to yours, making every grind and shove a shared sensation. As she squeezes down on her belly, pressure builds against your opening, and her pussy lips spread against yours, parting you open to take the first of her eggs.  As the jelly-like mass over her egg begins to squeeze into you, the world goes purple, then blue, then the water around you seems to rise slowly up into the air.");
+	outputText("\n\nIf you could think clearly at this point, you would attribute this to the mind-bending frog slime, but all you can think about is the sensation of your pussy spreading wider and wider, taking in another goo-covered egg.  The frog girl’s thighs clamp around you, one against your belly, the other");
+	cuntChange(25,true,true,false);
+	if(player.tailType > 0) outputText(" hooked over your tail,");
+	else outputText(" clasped against your, [ass],");
+	outputText(" smearing more and more of her slime against your body.");
+	
+	outputText("\n\nYou feel your brain turn happy little cartwheels as egg after egg pushes into you.  Somewhere along the way you cum, but you’re not even sure of that - your mind is too fogged by the hallucinogenic slime.");
+	outputText("\n\nYou’re not sure when the frog girl finishes.  By the time the trees stop dancing and the sky stops rippling, you’re floating face-up in the pool, watching the curve of your now-swollen belly as you bob gently in the water.");
+	outputText("\n\nAs awareness slowly starts to trickle in to your head, you blink, groaning slightly as you sit up, clutching your massive, pregnant belly, feeling the jelly-eggs inside shifting when you step up out of the water.  You pause as a tiny trickle of slime oozes out from your vagina, sending a brief rainbow flash across your vision and the echo of an orgasm through your system, before you put your [armor] back on and stagger back toward camp.");
+	//[Vaginal wetness +1, Sensitivity +1]
+	stats(0,0,0,0,0,1,-100,0);
+	player.knockUp(23,30,1,1);
+	doNext(13);
+}
+
+//Vaginal Egg birth
+function layFrogEggs():void {
+	if(player.vaginas.length == 0) {
+		outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold: a vagina.  ", false);
+		player.createVagina();
+		genderCheck();
+	}
+	outputText("You shudder as you feel the familiar tingle of stimulant slime running down your thighs.");
+	outputText("\n\nAs your swollen belly churns, the instinctive need for water ripples through you.");
+	outputText("\n\nYou hustle to the banks of the campside stream as quickly as your pregnant belly will allow, splashing down waist-deep in the water.  The coolness eases your urgency as you shift your [ass] against the smooth stones of the riverbed.  Groaning, you close your eyes and clutch at your stomach, a sharp ache throbbing between your legs.");
+	outputText("\n\nBefore the pain can full blossom, you feel a coolness at your pussy.  The familiar tingle of frog slime slathers itself over your vagina.  Breathing easy once more, you look down to see the head of the frog girl just below the water.  Pink hair drifting lazily in the current, she bobs her head up and down between your thighs.  You let out a sigh as you feel more of her mind-bending goo adhere to your nethers.");
+	outputText("\n\nAs the slime begins to numb your pussy, her head bobs up out of the water.");
+	outputText("\n\n\"<i>I don’t often lay eggs this way,</i>\" she says, slurping her tongue back into her mouth.  \"<i>So I wanted to come by to make sure things were alright.</i>\"");
+	outputText("\n\nYou’re able to thank her, briefly, before you feel an immense pressure just below your hips.  You toss your head back, surprised to find the frog girl’s hand there, cupping against your [hair].");
+	outputText("\n\n\"<i>Easy there, love,</i>\" she mutters, leaning across to press her lips against yours.  You blink in surprise as her tongue slides into your mouth.  The muscular organ writhes between your lips as her other hand rubs gently against your throat.");
+	outputText("\n\nYou swallow reflexively, gulping down a load of her slime.  Immediately lightheaded, you moan softly, feeling a familiar weakness in your limbs.  Her tongue snakes out of your mouth, leaving you with a trickle of goo running down your chin.");
+	outputText("\n\n\"<i>Let’s relax your muscles and free your mind, dear,</i>\" says the frog girl with a smile.  You try to focus on her, but yours eyes just seem to cross and uncross on their own.  Her slick lips press against yours once more, and you feel a massive load of her slime force its way into your mouth, her muscular tongue right behind it.");
+	outputText("\n\nLacking the muscle control to resist, you swallow, your vision brightening with dancing motes of light and swirls of color.  You barely feel her lips pull away, but you feel the trickle of slime as it runs down your chin and onto your [chest].");
+	outputText("\n\nThe forest around you turns upside down as you lean forward and giggle, trying to make sense of what’s going on.  You feel your pussy stretch wider and wider, but there’s no pain, just a warm numbness and happy clouds at the corners of your eyes.  Between your legs you catch sight of the frog girl’s fingertips pushing between your lips, gently cradling large, grapefruit-sized eggs as they squish out of your body.");
+	cuntChange(80,true,true,false);
+	outputText("\n\nYou lose count of the squishy eggs passing through your vagina, distracted by the mesmerizing way they bob along in the water, anchored to the frog girl’s side.");
+	outputText("\n\nYou don’t even remember passing out, only awaking to the familiar sound of humming.  A chorus of alluring chirrups suffuses the air as you open your eyes.  Blinking to clear your vision, you find yourself lying atop a patch of riverbank ferns.");
+	outputText("\n\n\"<i>Sorry, did we wake you up?</i>\" queries the voice of the frog girl.  You push yourself up, seeing her floating mid-stream, surrounded by a half-dozen frog girl nymphs. From the waist-up, they’re miniature versions of their mother with varying haircolors, but from the waist down, they resemble large tadpoles.  No more than  few feet long, they bob along next to their mother as she conducts their song.");
+	outputText("\n\n\"<i>I was just sticking around to make sure you were alright,</i>\" she says.");
+	outputText("\n\nThe nymphs in the water all turn to you, their large eyes wide, ribbiting excitedly.");
+	outputText("\n\n\"<i>And to make sure you had a proper thank you,</i>\" she says.  \"<i>Girls?</i>\"");
+	outputText("\n\n\"<i>Thank you, Miss!</i>\" they chant in unison, dissolving into giggles afterward.");
+	outputText("\n\nYou smile weakly, wondering if the frog slime is still affecting you.");
+	outputText("\n\n\"<i>Right then!  Time for us to be off,</i>\" says the frog girl.  She seems much more put together with young ones in her charge.");
+	outputText("\n\nTo you, she says with a wink, \"<i>They won’t take long to grow up, you know - so feel free to stop by the swamp and help out with the next batch!</i>\"");
+	outputText("\n\nWith a splash, she dives beneath the water, her brood following suit.  The ripples of their passage follow them downstream until they’re out of sight.");
+	outputText("\n\nYou shake your head wearily as you sit up, your head still spinning slightly.");
+	outputText("\n\nWith a wince, you head back to camp, hoping that the frog slime hasn’t affected you permanently.");
+	
+	//[Vaginal gape +1/Vaginal Moistness +1/Hips +1, Sensitivity +1]
+	if(player.vaginas[0].vaginalWetness < 5) {
+		player.vaginas[0].vaginalWetness++;
+		outputText("  It rapidly becomes clear that it has.  <b>Your pussy is wetter than ever.</b>");
+	}
+	if(player.hipRating < 25) {
+		player.hipRating++;
+		outputText("  There's an extra thickness to your [hips] as well.");
+	}
+	stats(0,0,0,0,0,1,-100,0);
+	doNext(13);
 }

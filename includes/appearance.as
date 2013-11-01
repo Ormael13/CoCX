@@ -823,6 +823,8 @@
 	if(player.gems == 1) outputText("\n\n<b>You have " + player.gems + " shining gem, collected in your travels.", false);
 	mainText.htmlText = currentText;
 	scrollBar.update();
+	//menu();
+	//addButton(0,"Next",camp);
 }
 
 function sockDescript(index:int):void {

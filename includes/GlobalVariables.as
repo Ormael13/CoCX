@@ -17,8 +17,8 @@
 var debug:Boolean = false;
 
 //Version NUMBER
-var ver:String = "0.8.3b";
-var version:String = "v0.8.3b (<b>Bog Lovin'</b>)";
+var ver:String = "0.8.3d1";
+var version:String = "v0.8.3d1 (<b>Dick or Treat</b>)";
 
 //Indicates if building for mobile?
 var mobile:Boolean = false;

@@ -168,7 +168,7 @@ function urtaBarDescript():Boolean {
 
 function urtaBarApproach():void {
 	spriteSelect(1);
-	showImage(0);
+	//showImage(0);
 	var spank:Number = 0;
 	if((player.hasCock() && player.cockThatFits(urtaCapacity()) >= 0) || player.hasKeyItem("Deluxe Dildo") >= 0) spank = 3523;
 	outputText("", true);

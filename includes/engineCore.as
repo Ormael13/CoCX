@@ -938,6 +938,12 @@ function perkLongDescription(perkName:String = ""):String {
 			return "You choose the 'Speedy Recovery' perk, boosting your fatigue recovery rate!";
 		case "Regeneration 2":
 			return "You choose the 'Regeneration 2' perk, giving an addition 2% of max HP per turn in combat and 4% of max HP per hour.";
+		case "Fera's Boon - Seeder":
+			return "Increases cum output by 1,000 mLs.";
+		case "Fera's Boon - Wide Open":
+			return "Keeps your pussy permanently gaped and increases pregnancy speed.";
+		case "Fera's Boon - Milking Twat":
+			return "Keeps your pussy from ever getting too loose and increases pregnancy speed.";
 		case "Tank 2":
 			return "You choose the 'Tank 2' perk, granting an extra maximum HP for each point of toughness.";
 		case "Weapon Mastery":
@@ -1279,6 +1285,12 @@ function perkDescription(perkName:String = ""):String {
 		case "Regeneration 2":
 			return "Gain 2% of max HP per round of combat and 4% of max HP per hour out of combat.";
 			break;
+		case "Fera's Boon - Seeder":
+			return "Increases cum output by 1,000 mLs.";
+		case "Fera's Boon - Wide Open":
+			return "Keeps your pussy permanently gaped and increases pregnancy speed.";
+		case "Fera's Boon - Milking Twat":
+			return "Keeps your pussy from ever getting too loose and increases pregnancy speed.";
 		case "Spellcasting Affinity":
 			return "Reduces spell costs by " + player.perkv1("Spellcasting Affinity") + "%.";
 			break;
@@ -4466,6 +4478,7 @@ function displayStats(e:MouseEvent) {
 		if(player.hasPerk("Brood Mother") >= 0) preg++;
 		if(player.hasPerk("Fera's Boon - Breeding Bitch") >= 0) preg++;
 		if(player.hasPerk("Magical Fertility") >= 0) preg++;
+		if(player.hasPerk("Fera's Boon - Wide Open") >= 0 || player.hasPerk("Fera's Boon - Milking Twat") >= 0) preg++;
 		outputText(preg + "\n", false);
 	}	
 	if(player.hasStatusAffect("Slime Craving") >= 0) {
@@ -4852,6 +4865,10 @@ function ImageLoaded(e:Event) {
     //this.addChild(e.target.loader.content); // loaded content is stored in e.target.loader.content variable
 	images[images.length] = e.target.loader.content;
 }
+/*The stuff below is a stupid experiment, all except the following line:
+<img src='artPack/white_devil_urta.jpg' width='400' height='514'/>
+Drop that into the text in a scene and BLAMMO! You got an Urta pic. It looks like you need to 
+have the width and height both specified to do it
 
 function showImage(arg:Number = 0):void {
 	if(arg > images.length-1) {
@@ -4873,4 +4890,4 @@ function clearImages():void {
 	}
 	mainText.x = 208.5;
 	mainText.width = 771.4;
-}
+}*/
