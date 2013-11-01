@@ -17,7 +17,7 @@ function eventParser(eventNo:*):void {
 		//Clear sprite if not in combat
 		if(!inCombat() && eventNo != 5007) spriteSelect(-1);
 		//Clear pic if not in combat
-		if(!inCombat() && eventNo != 5007) clearImages();
+		//if(!inCombat() && eventNo != 5007) clearImages();
 		//Reset newgame buttons till back at camp
 		newGameText.removeEventListener(MouseEvent.CLICK, mainMenu);
 		newGameBG.removeEventListener(MouseEvent.CLICK, mainMenu);

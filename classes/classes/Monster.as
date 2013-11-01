@@ -14,6 +14,7 @@ package classes
 		public var capitalA:String = "A ";
 		//Is a creature a 'plural' encounter - mob, etc. 
 		public var plural:Boolean = false;
+		public var imageName:String = "";
 		
 		//Lust vulnerability
 		public var lustVuln:Number = 1;

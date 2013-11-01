@@ -247,7 +247,7 @@ package classes
 		public var clitLength:Number = .5;
 		public var nippleLength:Number = .25;
 		public var breastRows:Array;
-		public var ass = new assClass();		
+		public var ass:assClass = new assClass();		
 		
 		//Monsters have few perks, which I think should be a status effect for clarity's sake.
 		//TODO: Move perks into monster status effects.
@@ -275,7 +275,7 @@ package classes
 		//Create a perk
 		public function createPerk(keyName:String, value1:Number, value2:Number, value3:Number, value4:Number, desc:String = ""):void
 		{
-			var newKeyItem = new perkClass();
+			var newKeyItem:perkClass = new perkClass();
 			//used to denote that the array has already had its new spot pushed on.
 			var arrayed:Boolean = false;
 			//used to store where the array goes
@@ -1346,6 +1346,7 @@ package classes
 		}
 		
 		//Used in multiCockDescript and potentially elsewhere - barebones cock names
+		//TODO: Confusing clash with cockNoun in descriptors.as
 		function cockNoun(cockType:CockTypesEnum):String
 		{
 
@@ -1654,7 +1655,7 @@ package classes
 		}
 
 		//New cock adjectives.  The old one sucked dicks
-		public function cockAdjective(cockIndex:Number = -1)
+		public function cockAdjective(cockIndex:Number = -1):String
 		{
 			var descript:String = "";
 			var rando:Number = 0;
@@ -3002,11 +3003,12 @@ package classes
 		//Create a cock
 		public function createCock(clength:Number = 5.5, cthickness:Number = 1):Boolean
 		{
+			trace("createCock called. clength = " + clength + ", cthickness = " + cthickness);
 			if (cocks.length >= 10)
 				return false;
-			//TODO: Integrate Cock class
-			var newCock:Cock = new Cock();
+			var newCock:Cock = new Cock(clength, cthickness);
 			//var newCock:cockClass = new cockClass();
+			trace("New cock info. Length = " + newCock.cockLength + ", Thickness = " + newCock.cockThickness + ", Type = " + newCock.cockType);
 			cocks.push(newCock);
 			//cocks[cocks.length-1].cockThickness = cthickness;
 			//cocks[cocks.length-1].cockLength = clength;
@@ -3018,7 +3020,7 @@ package classes
 		{
 			if (vaginas.length >= 2)
 				return false;
-			var newVagina = new vaginaClass();
+			var newVagina:vaginaClass = new vaginaClass();
 			vaginas.push(newVagina);
 			return true;
 		}
@@ -3028,7 +3030,7 @@ package classes
 		{
 			if (breastRows.length >= 10)
 				return false;
-			var newBreastRow = new breastRowClass();
+			var newBreastRow:breastRowClass = new breastRowClass();
 			breastRows.push(newBreastRow);
 			return true;
 		}
@@ -3046,7 +3048,7 @@ package classes
 		}
 		
 		//Remove cocks
-		public function removeCock(arraySpot, totalRemoved):void
+		public function removeCock(arraySpot:int, totalRemoved:int):void
 		{
 			//Various Errors preventing action
 			if (arraySpot < 0 || totalRemoved <= 0)
@@ -3102,7 +3104,7 @@ package classes
 		}
 		
 		//Remove a breast row
-		public function removeBreastRow(arraySpot, totalRemoved):void
+		public function removeBreastRow(arraySpot:int, totalRemoved:int):void
 		{
 			//Various Errors preventing action
 			if (arraySpot < -1 || totalRemoved <= 0)

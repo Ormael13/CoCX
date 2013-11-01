@@ -4838,7 +4838,8 @@ function spriteSelect(choice:Number = 0):void {
 	}
 }
 
-loadImage("artPack/white_devil_urta.jpg");
+//DEPRECATED. Images are handled by ImageManager class in classes
+/*loadImage("artPack/white_devil_urta.jpg");
 
 function loadImage(imageURL:String) {
     var imageLoader:Loader = new Loader();
@@ -4853,6 +4854,7 @@ function ImageLoaded(e:Event) {
 	images[images.length] = e.target.loader.content;
 }
 
+//Deprecated. Using showImage from ImageManager now.
 function showImage(arg:Number = 0):void {
 	if(arg > images.length-1) {
 		trace("Attempt to show invalid image!");
@@ -4873,4 +4875,4 @@ function clearImages():void {
 	}
 	mainText.x = 208.5;
 	mainText.width = 771.4;
-}
+}*/
