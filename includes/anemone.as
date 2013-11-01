@@ -147,6 +147,7 @@ function defeatAnemone():void {
 function victoryButtholeRape():void {
 	spriteSelect(4);
 	outputText("", true);
+	outputText(images.showImage("anemone-getanal"), false);
 	outputText("You look over the anemone in front of you.  Your attention focuses on her blue shaft; those smaller tentacles should have plenty of pleasing venom in them as well.  Stripping off your " + player.armorName + ", you approach her and push her backwards.  Her gills slide off her breasts and float at her sides. revealing a pair of cute nipples.  You take the opportunity to stroke the shaft of her penis and rub her vagina a bit, soaking up some venom and making your hands tingle.\n\n", false);
 
 	outputText("Quite soon you can hardly stand your own arousal and your lover's cock is nice and hard.  Straddling the anemone, you position your " + assholeDescript() + " over her colorful shaft and gradually lower yourself towards it.  The florid crown slips into your hole, delivering the expected shock, and a gasp from behind you is accompanied by the anemone's hands moving to your hips.", false);
@@ -191,6 +192,7 @@ function victoryButtholeRape():void {
 function rapeAnemoneWithDick():void {
 	spriteSelect(4);
 	outputText("", true);
+	outputText(images.showImage("anemone-male-fuck"), false);
 	if(player.cockThatFits(36) >= 0) {
 		var x:Number = player.cockThatFits(36);
 		outputText("Rubbing yourself through your " + player.armorName + ", you look over the anemone; your attention wanders down her torso to the blue slit between her legs", false);
@@ -294,6 +296,7 @@ function rapeAnemoneWithDick():void {
 function rapeAnemoneWithPussy():void {
 	spriteSelect(4);
 	outputText("", true);
+	outputText(images.showImage("anemone-female-fuck"), false);
 	outputText("As you review your handiwork, the stirrings in your feminine side focus your attention on the anemone's penis.  Those smaller tentacles on it should have plenty of pleasing venom in them as well.  You make up your mind to put them to use for you.\n\n", false);
 
 	outputText("The anemone looks vacantly up at you as you approach.  Reaching forward, you take her cock in your hand", false);
@@ -394,7 +397,8 @@ function loseToAnemone():void {
 		return;
 	}
 	//loss, male:
-	if(player.cockTotal() > 0) {
+	if (player.cockTotal() > 0) {
+		outputText(images.showImage("anemone-male-fuck"), false);
 		if(player.cockThatFits(36) >= 0) {
 			outputText("Shivering, you slump before the anemone and begin trying to remove your " + player.armorName + ".  She claps and peals happily, splashing over to you.  Pushing your trembling hands out of the way, she unfastens your garments and pulls them free of you, taking the opportunity to run a hand up your " + cockDescript(x) + ".  ", false);
 			if(player.cumQ() < 50) outputText("A droplet", false);
@@ -542,6 +546,7 @@ function loseToAnemone():void {
 	}
 	//loss rape, vaginal (only full females):
 	else {
+		outputText(images.showImage("anemone-female-fuck"), false);
 		outputText("Shivering, you fall to your knees before the anemone and begin trying to remove your " + player.armorName + ".  She claps and peals happily, splashing over to you.  Pushing your trembling hands out of the way, she unfastens your garments and pulls them free of you, but her bright expression dims a bit when she sees only your " + vaginaDescript(0) + ".", false);
 		//[(lactation)
 		if(player.biggestLactation() > 1) outputText("  For a moment it brightens again when she notices the dribble of milk leaking from your " + nippleDescript(0) + "s. With one finger she collects a bit and tastes it, only to grimace and stick her tongue out.", false);
@@ -700,6 +705,7 @@ function anemoneQuoteUnquoteAnal():void {
 	clearOutput();
 	var dick:Boolean = (player.cockThatFits(48) >= 0 && player.hasCock());
 	var x:int = 0;
+	outputText(images.showImage("anemone-bj"), false);
 	if(dick) x = player.cockThatFits(48);
 	outputText("You're in the mood for anal and anal you shall have.  ");
 	
@@ -778,6 +784,7 @@ function anemoneQuoteUnquoteAnal():void {
 //[Hotdog!]
 function hotdogTheAnemone():void {
 	clearOutput();
+	outputText(images.showImage("anemone-doggy"), false);
 	var dick:Boolean = (player.cockThatFits(48) >= 0 && player.hasCock());
 	var x:int = 0;
 	if(dick) x = player.cockThatFits(48);
@@ -849,6 +856,7 @@ function anemoneGetsLayedByBeePositor():void {
 		return;
 	}
 	clearOutput();
+	outputText(images.showImage("anemone-egg"), false);
 	outputText("The tentacles on this girl sing a siren song and beg you to sample their venomous, greedy caresses as you plunge your egg-layer into her... even the small, blue feelers around the ");
 	if(monster.HP < 1) outputText("reclining");
 	else outputText("vigorously masturbating");
@@ -921,6 +929,7 @@ function anemoneGetsLayedByBeePositor():void {
 //[Ovipositor] option with spiderbutts
 function spiderOvipositAnAnemone():void {
 	clearOutput();
+	outputText(images.showImage("anemone-egg"), false);
 	outputText("As the girl's resistance ebbs, ");
 	if(player.HP < 1) outputText("eyes unfocused with fatigue");
 	else outputText("two fingers plunging eagerly into her pussy");
@@ -1451,6 +1460,7 @@ function kidASex(cont:Boolean = true):Boolean {
 	if(flags[ANEMONE_KID] == 2 && player.hasCock() && player.cockThatFits(36) >= 0) {
 		x = player.cockThatFits(36);
 		outputText("\n\n");
+		outputText(images.showImage("anemone-kid-male-vagfuck"), false);
 		outputText("You collapse onto your back, panting your arousal into the dry air.  Shyly at first but with increasing confidence as you fail to react, your daughter slips a hand into your clothes and down to your crotch.  She bites her lip and blushes as her hand reaches the neck of your " + cockNoun(player.cocks[x].cockType) + ", then her resolve appears to crystallize as she yanks it free from your " + player.armorName + ". At first, nothing happens and your erect cock just bobs through the empty air, but then you feel soft fingertips guiding it and a warm, tight squeeze at the end of your dick.  Raising your head in surprise, you see the anemone has mounted you!  She blushes and looks away at the eye contact, but her mouth opens in a sly grin as she begins to shift her hips, sliding your " + cockDescript(x) + " deeper into herself.");
 		
 		outputText("\n\nShe flushes and winces as you sink into her, breathing heavily as her pussy stretches and her small cock hardens over you.  Gods, it's so tight; as you look your amazement at her, her eyes twinkle.  She takes in the last of your shaft laboriously and then, relaxing, leans forward and plants a kiss on your chest to answer your unspoken question.  The girl was actually saving her first time for you?  You prop yourself up on your elbow and pull her face into yours, giving her a short kiss; she smiles bashfully and then pulls out of your grip to sit upright with her hands on your stomach.");
@@ -1491,6 +1501,7 @@ function kidASex(cont:Boolean = true):Boolean {
 			temp++;
 		}
 		outputText("\n\n");
+		outputText(images.showImage("anemone-kid-male-bj"), false);
 		outputText("You collapse onto your back, panting your arousal into the dry air.  Shyly at first but with increasing confidence as you fail to react, your daughter slips a hand into your clothes and down to your crotch.  She bites her lip and blushes as her hand reaches the neck of your " + cockNoun(player.cocks[x].cockType) + ", then her resolve appears to crystallize as she yanks it free from your " + player.armorName + ".  A sudden wetness at the end of your dick raises your head in surprise; the mop-topped girl is kneeling over you with the crown in her mouth and, as you make eye contact, turns the deepest shade of blue you've ever seen on her.");
 		
 		outputText("\n\nHer embarrassment evidently can't brake her instinct, though, because her mouth continues to work on your " + cockDescript(x) + " even as she casts down her gaze to avoid meeting your own.  As if to conceal herself, her shoulder-length tentacles shift forward to drape over her face, scraping along the end of your dick, right behind the head.  A dose of venom lances through your skin; your eyes roll back and your hips begin to buck gently into her mouth as your reason deserts.");
@@ -1562,6 +1573,7 @@ function kidASex(cont:Boolean = true):Boolean {
 	//if KidXP >= 40 and lust > 99 after tutor and PC has vag and no cox
 	else if(player.hasVagina()) {
 		outputText("\n\n");
+		outputText(images.showImage("anemone-kid-female-sex"), false);
 		outputText("You collapse onto your back, panting your arousal into the dry air.  Shyly at first but with increasing confidence as you fail to react, your daughter slips a hand into your clothes and down to your crotch.  She stops, vexed, as her fingers find nothing but your " + vaginaDescript(0) + ", then appears to reach a decision and pulls down the bottoms of your " + player.armorName + ".  Gently, she caresses the labia, eliciting a soft moan from you, then looks up nervously at the sound to check your response.  When you continue staring into the empty sky, she pulls away and you feel hands pushing your legs apart.  Even this isn't enough to stir you from your lust-induced haze, nor is the feeling of having your backside lifted by those same hands.  However, when you feel a persistent, wriggling pressure at the entrance to your inflamed pussy, you begin to return to reality.  Lifting your head to look at the anemone, you see her holding your thighs in the air as she attempts to orient herself to you, utmost concentration lining her features.  She succeeds and slides into you, then looks up to check your face again... and drops your body into her lap as she pulls her hands in front of herself defensively at the sudden scrutiny.");
 		
 		outputText("\n\nLaughable as her reaction is, the venom now coursing through your " + vaginaDescript(0) + " ensures not a giggle escapes you; your hips begin writhing in her lap, trying to find purchase on the blue girl to better pump her shaft for its seed.");
@@ -1617,7 +1629,8 @@ function reallyEvictDaAnemone():void {
 function kidADreams():void {
 	outputText("\n<b><u>In the middle of the night...</u></b>");
 	//if male:
-	if(player.hasCock() && (!player.hasVagina() || player.femininity < 50)) {
+	if (player.hasCock() && (!player.hasVagina() || player.femininity < 50)) {
+		outputText(images.showImage("anemone-kid-male-masti"), false);
 		outputText("\nThe church bell chimes overhead as you regard the figure opposite you.  Your family chose this woman and arranged this marriage, true, but it's not fair to say you're not at least a little interested in the svelte, veiled form inhabiting the wedding dress your mother handed down to her.");
 		outputText("\n\nThe pastor coughs politely.  \"<i>Well... do you?  Take this woman?</i>\"");
 		
@@ -1640,6 +1653,7 @@ function kidADreams():void {
 	}
 	//if female:
 	else {
+		outputText(images.showImage("anemone-kid-female-masti"), false);
 		outputText("\nThe elder's son must be behind the schoolhouse again.  You've noticed him going back there several days this week.  Quietly, you slip from behind your desk and exit the little two-room school.  Sure, he might be old enough to be working the fields by now, but that's no excuse to slack off during his final studies.");
 		outputText("\n\nAs you draw up to the corner, you can hear his voice raised in soft, girlish gasps.  Peering around carefully, you find him sitting on the ground with his shoulder to the wall, turned away from you; over that shoulder, the little blue head of his cock is clearly visible above his clenched fist.  He continues jerking off, unaware of your presence, and as you look on, you marvel at how much thinner and more feminine this hunched figure compared to the dashing, popular boy from your memory.");
 		outputText("\n\n\"<i>[name]!</i>\" he peals suddenly, stroking with vigor at his thoughts of you.  Startled and perhaps a bit flattered, you take a half-step back, and the noise brings his attention around.  In surprise, he half-turns and half-falls to face you, wide opaque eyes looking out of an alarmingly blue face in shock as his little dick twitches and spurts a string of goo toward your lap.");

@@ -290,7 +290,7 @@ function resistMarbleInitially():void {
 	//- continue to the next part
 	outputText("\"<i>My name's Marble, what's yours?</i>\" she asks you.  You introduce yourself and exchange a few pleasantries before she asks how she can help you.  You tell her that you actually came to help her, explaining that Whitney said she could use a gentle touch.  \"<i>Oh that would be nice</i>\", she says \"<i>Spending the night connected to the milking machine was a mistake, and now I need something gentle.</i>\"  How will you help her?", false);
 	//- player chooses caress, suckle, or rape
-	simpleChoices("Caress",caressMarble,"Suckle",suckleMarble,"Rape",rapeDAHMARBLEZ,"",0,"",0);
+	simpleChoices("Caress",caressMarble,"Suckle",caressMarble,"Rape",rapeDAHMARBLEZ,"",0,"",0);
 }
 
 function marblePicksYouUpInitially():void {
@@ -334,7 +334,8 @@ function suckleMarble():void {
 	marbleStatusChange(15,10);
 	//(apply the stat effect 'Marble's Milk' to the player)
 	applyMarblesMilk();
-	stats(0,0,0,0,0,0,25,0);
+	stats(0, 0, 0, 0, 0, 0, 25, 0);
+	doNext(13);
 }
 
 //(player chose rape)

@@ -9,7 +9,8 @@ var notes:String = "";
 nameBox.maxChars = 54;
 
 //Images for image pack!
-var images = new Array();
+//NO! Images now work through ImageManager in GlobalVariables
+//var images = new Array();
 
 //System time
 var date = new Date();

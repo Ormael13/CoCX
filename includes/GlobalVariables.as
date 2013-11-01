@@ -1,5 +1,3 @@
-//import classes.Monster;
-//import classes.Player;
 /**
  * Global Variables used across the whole game. I hope to whittle it down slowly.
  */
@@ -10,9 +8,6 @@
  */
 //{ region SystemVariables
 
-
-
-
 //DEBUG, used all over the place
 var debug:Boolean = false;
 
@@ -22,6 +17,8 @@ var version:String = "v0.8.3b (<b>Bog Lovin'</b>)";
 
 //Indicates if building for mobile?
 var mobile:Boolean = false;
+
+var images:ImageManager = new ImageManager();
 //} endregion
 
 /**

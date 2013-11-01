@@ -22,7 +22,7 @@ package classes
 		private var _sock:String;
 		
 		//constructor
-		public function Cocks(i_cockLength:Number = 5.5, i_cockThickness = 1)
+		public function Cock(i_cockLength:Number = 5.5, i_cockThickness = 1)
 		{
 			_cockLength = i_cockLength;
 			_cockThickness = i_cockThickness;
