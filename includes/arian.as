@@ -203,7 +203,7 @@ function helpArianWhenYouMeetHim():void {
 	
 	outputText("\n\nThe lizan gasps and covers his mouth, startled.  \"<i>Oh, forgive me.  How rude, I should have introduced myself before.</i>\"  He clears his throat and starts, \"<i>My name is Arian, and as you can see, I'm a lizan.  I just wanted to go out for a little while, but my aides are intent on keeping me in bed; they say I'm not well enough to be going out... but I say if anyone knows my body, that would be me!  And if I feel like going out, then so the gods help me, I will!</i>\"  He finishes forcefully, before realizing he's rambling.  \"<i>Oh, forgive me... this really isn't your problem, sorry for troubling you,</i>\" he says, letting his head hang.");
 
-	outputText("\n\nYou tell him it's alright.  It sounds like he's been cooped up by his aides for a long time.  \"<i>Yes, sometimes I just feel like getting a bit of fresh air, so I just come to this park.</i>\"  He smiles to himself.  \"<i>I shouldn't keep you though.  Thank you for your help... err?</i>\"  You tell the lizan your name.  \"<i>I will be fine now,  so I'll be seeing you.</i>\"  He smiles at you in a friendly way.");
+	outputText("\n\nYou tell him it's alright.  It sounds like he's been cooped up by his aides for a long time.  \"<i>Yes, sometimes I just feel like getting a bit of fresh air, so I just come to this park.</i>\"  He smiles to himself.  \"<i>I shouldn't keep you though.  Thank you for your help... err?</i>\"  You tell the lizan your name.  \"<i>I will be fine now,  so I'll be seeing you.</i>\"  " + arianMF("He","She") + " smiles at you in a friendly way.");
 	
 	outputText("\n\nYou decide to leave him for the moment, and head back to the camp.");
 	//(Park added to TA's Menu.  It will later be replaced by Arian's house.)
@@ -246,7 +246,7 @@ function visitThePark():void {
 			outputText("  You thought spellcasting merely took fatigue and the proper mindset, not life force, and you express that sentiment to the lizan.");
 		}
 		
-		outputText("\n\n\"<i>Ah...  Now we're getting to why I'm in such a miserable state.  You see I've found a new way to use white magic; one that results in far more powerful spells;  problem is it is very unhealthy for the caster.</i>\"  He smiles at you weakly.  \"<i>In order to achieve a state of complete concentration, I stop all my bodily functions.  My heart stops beating, I stop breathing, I dedicate all of my being to the spell I wish to cast.  This is very dangerous, but thanks to this I am able to achieve a degree of concentration that no other mage can.</i>\"  He gauges your reaction.  \"<i>So what would you say?  Impressive?  Reckless?  Stupid?</i>\"");
+		outputText("\n\n\"<i>Ah...  Now we're getting to why I'm in such a miserable state.  You see I've found a new way to use white magic; one that results in far more powerful spells;  problem is it is very unhealthy for the caster.</i>\"  " + arianMF("He","She") + " smiles at you weakly.  \"<i>In order to achieve a state of complete concentration, I stop all my bodily functions.  My heart stops beating, I stop breathing, I dedicate all of my being to the spell I wish to cast.  This is very dangerous, but thanks to this I am able to achieve a degree of concentration that no other mage can.</i>\"  He gauges your reaction.  \"<i>So what would you say?  Impressive?  Reckless?  Stupid?</i>\"");
 		outputText("\n\nYou admit that's an impressive feat to pull off... but, can't he just cast magic the usual way?  Wouldn't that be better for him, if his technique is so much more draining and physically challenging than the conventional style?");
 		
 		outputText("\n\n\"<i>Yes, you are correct my friend.  And while I do use my magic in the traditional fashion now, that simply was not an option.</i>\"  He coughs.  \"<i>But that is a story for another time,  I think I've held you enough for now.</i>\"  He closes his eyes and leans back.");
@@ -298,7 +298,7 @@ function visitThePark():void {
 		
 		outputText("\n\nYou decide that it wouldn't be too much trouble, and tell Arian that you'll give him a hand to get home.");
 		
-		outputText("\n\nArian leads you to the doorsteps of his house, and unhooking his arm from around your shoulder he takes your hands in his own and smiles at you.  \"<i>Thank you for the help, and for listening to my story.</i>\"  Then looking into you eyes expectantly, he asks, \"<i>Listen [name].  I would love it if you could visit me once in awhile.  It can be very lonely here and although my aides are always by my side there are things I simply can't talk about with them.  So... could you find time to visit a sickly mage?</i>\"");
+		outputText("\n\nArian leads you to the doorsteps of his house, and unhooking his arm from around your shoulder he takes your hands in " + arianMF("his","her") + " own and smiles at you.  \"<i>Thank you for the help, and for listening to my story.</i>\"  Then looking into you eyes expectantly, he asks, \"<i>Listen [name].  I would love it if you could visit me once in awhile.  It can be very lonely here and although my aides are always by my side there are things I simply can't talk about with them.  So... could you find time to visit a sickly mage?</i>\"");
 		
 		outputText("\n\nYou assure him you'll think about it; it's time he went inside and had some rest.  \"<i>Thank you, I'll be seeing you then.</i>\"  He releases your hand and slowly walks inside, barely getting the door open before two pairs of arms grab him and drag him in, closing the door behind him.  You shrug it off and head back towards camp; that diversion was nice, but you have other things to do.");
 		//Player returns to (Tel'Adre / camp).
@@ -457,7 +457,7 @@ function visitAriansHouse():void {
 			else if(flags[ARIAN_HEALTH] < 10) {
 				outputText("\n\nYou hear a faint cough through the door.  \"<i>Come in.</i>\"  You hear a tired voice say.  Gently clasping the doorknob, you slowly open the door, careful of startling the sickly lizan.");
 				outputText("\n\nArian smiles at you as you enter.  \"<i>Oh, hello [name].  I'm glad you came.</i>\"  He slowly sits up and motions to a chair nearby.  \"<i>Make yourself at home.</i>\"");
-				outputText("\n\nYou pull the offered chair and sit next to his bed, smiling at him.");
+				outputText("\n\nYou pull the offered chair and sit next to his bed, smiling at " + arianMF("him","her") + ".");
 				outputText("\n\n\"<i>So, is there anything you'd like to do?  Maybe talk?</i>\"  Arian asks.  You reply that talking is fine.");
 			}
 			//10-19 health:
@@ -631,7 +631,7 @@ function bargeInOnArian():void {
 		outputText("\n\nYou pull the covers off his face and say, \"<i>Well... we'll have to fix that then.</i>\"  You slip off his bed and begin stripping off your [armor].  Arian shyly does the same, stripping off his robes until he is laying in his bed, completely naked.");
 		outputText("\n\nOnce you toss your [armor] on the floor, however, Arian's eyes widen as he realises you're not entirely female; he eyes your " + multiCockDescriptLight() + " and the moistening pussy between your legs with equal parts wonder and arousal.");
 		outputText("\n\n\"<i>I... you... I never... wow....</i>\"  You call Arian's name, breaking his trance.  \"<i>S-Sorry for staring,</i>\" he quickly apologises, but you just chuckle at his reaction and tell him he doesn't have to worry about this.");
-		this.outputText("\n\n\"<i>I never imagined you would have both... err... genders,</i>\" " + this.arianMF("he", "she") + " says nervously.  You just smile at him and ask if he has a problem with that?");
+		outputText("\n\n\"<i>I never imagined you would have both... err... genders,</i>\" " + arianMF("he","she") + " says nervously.  You just smile at him and ask if he has a problem with that?");
 		outputText("\n\nArian quickly blurts out, \"<i>No!  Of course not!  Never!  I just... well... to be honest I don't mind that you have extra... umm... parts; in fact I think that is... kinda... sexy.</i>\"  He looks at you, cheeks red in shame over his admission.  \"<i>So... umm... my point is... I don't mind if you....</i>\"  Arian swallows audibly.  \"<i>If you decide to penetrate me... that is if you don't mind me being male... I don't mean to offend you or anything!  I just heard that some girls like you prefer... other girls....</i>\"  He looks away in shame.");
 		outputText("\n\nYou rub your chin in thought....");
 		//[Like Male] [Prefer Female]
@@ -1042,7 +1042,7 @@ function arianMagicLessons():void {
 		}
 	}
 	else if (player.inte < 75) {
-		outputText("<b>Game Note: This isn\'t canon and will be re-written soonish.</b>");
+		outputText("<b>Game Note: This isn't canon and will be re-written soonish.</b>");
 		//Teach Blind if PC doesn't know.
 		outputText("\n\nYou say you have a pretty good understanding of how magic works now, so you'd like " + arianMF("him","her") + " to get started on the more complex theories.");
 		outputText("\n\nArian rubs " + arianMF("his","her") + " chin in thought.  \"<i>Hmm.... Aha!  Let's discuss conjuration.  This is where we start getting to the more complex theories and methods.  I know I don't have to say it, but pay attention.  Conjuration is an important art for any mage.</i>\"");
@@ -1066,7 +1066,7 @@ function arianMagicLessons():void {
 	}
 	else { 
 		//Teach Whitefire if PC doesn't know.
-		outputText("<b>Game Note: This isn't cannon and will be re-written soonish.</b>");
+		outputText("<b>Game Note: This isn't canon and will be re-written soonish.</b>");
 		outputText("\n\nYou ask Arian if " + arianMF("he","she") + " wouldn't mind hearing some of your own theories about magic; you've been giving the subject a lot of thought lately.");
 		outputText("\n\nArian looks at you, eyes alight with interest at what you have to say.  \"<i>Please, do share your thoughts.</i>\"  You explain that if you are able to use magic to conjure elements, with a little concentration it might also be possible to alter these elements on the fly; you convey the method you theorized to the lizan mage.");
 		outputText("\n\nIf you can conjure elements at will, would it be possible to also alter them?  You could have one element start out as a non-volatile substance within your hands and then hurl it towards a target whilst also focusing upon changing its nature, thus creating an explosive reaction.  For instance, you can start out with a small gathering of dust and quickly change it into a highly combustible element and make it look like as if you made the air explode.");
@@ -1294,7 +1294,7 @@ function takeYerLizardHomePartII():void {
 	
 	outputText("\n\nAs you walk inside you can't help but gasp in amazement... clearly you have underestimated the lizan.  The inside of the tent is pretty big comparing to the outside, and you see all the tools and facilities one would need to live in the wilderness with relative comfort.");
 	
-	outputText("\n\nIn one corner you see what looks like a small kitchen of sorts, complete with a wide assortment of utensils.  In the opposite corner you see a work desk much like the one Arian had set up in " + arianMF("his","she") + " house.  Sitting in the middle of the room is a comfy-looking couch with a small table in front of it.  Further inside you see a comfortable looking bed with a few bookshelves and a small wardrobe sitting nearby.  A soft rug covers the floor of the tent and looking up you see what looks like a small magic lamp, lightning up the whole tent so you can clearly see how comfortable Arian is going to be compared to you");
+	outputText("\n\nIn one corner you see what looks like a small kitchen of sorts, complete with a wide assortment of utensils.  In the opposite corner you see a work desk much like the one Arian had set up in " + arianMF("his","her") + " house.  Sitting in the middle of the room is a comfy-looking couch with a small table in front of it.  Further inside you see a comfortable looking bed with a few bookshelves and a small wardrobe sitting nearby.  A soft rug covers the floor of the tent and looking up you see what looks like a small magic lamp, lightning up the whole tent so you can clearly see how comfortable Arian is going to be compared to you");
 	if(followersCount() > 1) outputText(" and your companions");
 	outputText(".");
 	
@@ -1441,11 +1441,11 @@ function giveArianAnal():void {
 		
 		//(Low Cum Amount)
 		if(player.cumQ() < 250) {
-			outputText("\n\nEven though your load might pale in comparison to other creatures native to Mareth, you have no doubt that you're more than enough to fill Arian's tight ass flush with cum.  You unload inside him with short, controlled thrusts.");
+			outputText("\n\nEven though your load might pale in comparison to other creatures native to Mareth, you have no doubt that you're more than enough to fill Arian's tight ass flush with cum.  You unload inside " + arianMF("him","her") + " with short, controlled thrusts.");
 		}
 		//(Medium Cum Amount)
 		else if(player.cumQ() < 1000) {
-			outputText("\n\nYou begin dumping your prodigious amount of cum inside your willing lizan lover.  The more you unload into his tight ass the more pleasurable his slick muscle spasms feel, milking you for more and more cum, such a lewd little hole this puckered rosebud of Arian's.  You sigh as " + arianMF("his","her") + " belly inflates and some of your spent seed begins dripping from around Arian's little hole.");
+			outputText("\n\nYou begin dumping your prodigious amount of cum inside your willing lizan lover.  The more you unload into " + arianMF("his","her") + " tight ass the more pleasurable " + arianMF("his","her") + " slick muscle spasms feel, milking you for more and more cum, such a lewd little hole this puckered rosebud of Arian's.  You sigh as " + arianMF("his","her") + " belly inflates and some of your spent seed begins dripping from around Arian's little hole.");
 		}
 		//(High Cum Amount)
 		else {
@@ -1490,7 +1490,7 @@ function giveArianAnal():void {
 			else outputText("pillowy");
 			outputText("mounds.");
 			
-			outputText("\n\nYou can't resist sneaking an admiring grope of the lizan's presented bosom, admitting that gaining breasts in exchange for anal affinity sounds like a fair trade, but you aren't complaining about Arian's bust either.  admitting that gaining breasts in exchange for anal affinity.  Arian gasps and drops chest-first onto the bed.  \"<i>They are sensitive, too.</i>\"  Arian smiles nervously at you.");
+			outputText("\n\nYou can't resist sneaking an admiring grope of the lizan's presented bosom, admitting that gaining breasts in exchange for anal affinity sounds like a fair trade, but you aren't complaining about Arian's bust either.  Arian gasps and drops chest-first onto the bed.  \"<i>They are sensitive, too.</i>\"  Arian smiles nervously at you.");
 		}
 		outputText("\n\nYou sneak a probing hand under and up between Arian's legs.  Oh ho!  You grin as ");
 		if(flags[ARIAN_COCK_SIZE] > 0) {
@@ -1509,15 +1509,15 @@ function giveArianAnal():void {
 		outputText("\n\nWell, if " + arianMF("he","she") + "'s that eager to get started....  You deliver a playful slap on " + arianMF("his","her") + " ass, which ripples delightfully at the impact and sends a crack echoing through the lizan's ");
 		if(arianFollower()) outputText("tent");
 		else outputText("bedchamber");
-		outputText(".  You sink your fingers into the smoothly scaled skin of " + arianMF("his","her") + " butt, and promptly thrust your " + cockDescript(x) + " into his back passage; not with the gentleness you showed Arian as an anal virgin, but not with brutal force, either.  The practice the lizan's had with pleasuring your cock with his ass is obvious - you slide in as if it's been lubed, with what little resistance it poses quickly giving way under the insistent pressure of your thrusts.  It's not as painfully tight as it was, the looseness letting you move more freely without fear of hurting your lover, but at the same time it grips you like a well-trained pussy, holding you deliciously tight and eagerly sucking you into its depths.");
+		outputText(".  You sink your fingers into the smoothly scaled skin of " + arianMF("his","her") + " butt, and promptly thrust your " + cockDescript(x) + " into " + arianMF("his","her") + " back passage; not with the gentleness you showed Arian as an anal virgin, but not with brutal force, either.  The practice the lizan's had with pleasuring your cock with his ass is obvious - you slide in as if it's been lubed, with what little resistance it poses quickly giving way under the insistent pressure of your thrusts.  It's not as painfully tight as it was, the looseness letting you move more freely without fear of hurting your lover, but at the same time it grips you like a well-trained pussy, holding you deliciously tight and eagerly sucking you into its depths.");
 		
 		outputText("\n\nArian moans lewdly at your intrusion.  \"<i>Ah, I can feel you inside me.  I love this feeling... so full....  Do you like my ass, [name]?  Does it feel good when you use me like this?</i>\"");
 		
-		outputText("\n\nYes, you hiss, yes it feels good... does he really enjoy this so much?  You never stop your thrusts, relentlessly pounding into his greedy little ");
+		outputText("\n\nYes, you hiss, yes it feels good... does " + arianMF("he","she") + " really enjoy this so much?  You never stop your thrusts, relentlessly pounding into " + arianMF("his","her") + " greedy little ");
 		if(flags[ARIAN_VAGINA] < 1) outputText("boypussy");
 		else outputText("nether-pussy");
 		outputText(".  \"<i>Yesssss.... Oh, sometimes it hurts a bit, but the feeling, the pleasure, the pain.... It's heavenly.</i>\"");
-		outputText("\n\nSmiling wryly, you lean over Arian's back and whisper into " + arianMF("his","her") + " ear, that if " + arianMF("he","she") + " likes this so much... you'll just have to fuck him more.  Having said that, you quicken your pace, drawing a pleasured, shuddering moan from your lizan lover.  \"<i>Ah!  [name]!  If you keep this up you're going to make me - Ah!</i>\"  Make " + arianMF("him","her") + " what now?  \"<i>C-cuuuuum~</i>\"");
+		outputText("\n\nSmiling wryly, you lean over Arian's back and whisper into " + arianMF("his","her") + " ear, that if " + arianMF("he","she") + " likes this so much... you'll just have to fuck " + arianMF("him","her") + " more.  Having said that, you quicken your pace, drawing a pleasured, shuddering moan from your lizan lover.  \"<i>Ah!  [name]!  If you keep this up you're going to make me - Ah!</i>\"  Make " + arianMF("him","her") + " what now?  \"<i>C-cuuuuum~</i>\"");
 		
 		outputText("\n\nArian's ass tightens around your " + cockDescript(x) + " as " + arianMF("his","her") + " ");
 		if(flags[ARIAN_COCK_SIZE] > 0) {
@@ -1555,13 +1555,13 @@ function giveArianAnal():void {
 	//AnalXP <= 100
 	//Very Loose, sensitive enough to make Arian cum just from insertion. (Feels better than anything else. Yep, Arian really becomes a buttslut at this point)
 	else {
-		outputText("\n\n" + arianMF("He","She") + " fidgets and moans as " + arianMF("he","she") + " eagerly rolls onto " + arianMF("his","her") + " hands and knees, lifting " + arianMF("his","her") + " tail out of the way and spreading his cheeks to give you a glimpse of " + arianMF("his","her") + " throbbing, loose, puckered hole.  Arian pants and looks back at you in excitement.  \"<i>I'm all ready for you, [name].  Just go ahead and fill me up.</i>\"  " + arianMF("He","She") + " grins at you.  It's clear to see that Arian likes the idea of being taken, but there really is no need to rush... you'd rather savor this, plus teasing your eager lizan lover is always a bonus.");
+		outputText("\n\n" + arianMF("He","She") + " fidgets and moans as " + arianMF("he","she") + " eagerly rolls onto " + arianMF("his","her") + " hands and knees, lifting " + arianMF("his","her") + " tail out of the way and spreading " + arianMF("his","her") + " cheeks to give you a glimpse of " + arianMF("his","her") + " throbbing, loose, puckered hole.  Arian pants and looks back at you in excitement.  \"<i>I'm all ready for you, [name].  Just go ahead and fill me up.</i>\"  " + arianMF("He","She") + " grins at you.  It's clear to see that Arian likes the idea of being taken, but there really is no need to rush... you'd rather savor this, plus teasing your eager lizan lover is always a bonus.");
 		
 		outputText("\n\nYou smirk fiercely and ask teasingly if this is really the proud, independent mage Arian lying before you with " + arianMF("his","her") + " tail in the air and " + arianMF("his","her") + " ass up, a buttslut yearning and anxious to be fucked like an animal.  Arian looks back at you, pleadingly.  \"<i>Aww, come on, don't tease me.  Can't you see how much I need this?</i>\"");
 		
 		outputText("\n\nHow much does " + arianMF("he","she") + " need it, you ask?  Enough to beg for it, like the little buttslut " + arianMF("he","she") + " is, hmm?  If " + arianMF("he","she") + " can convince you " + arianMF("he","she") + " wants it enough, you'll give it to " + arianMF("him","her") + ", you tell " + arianMF("him","her") + ".  Arian's tail encircles your waist, and pulls you towards " + arianMF("his","her") + " quivering rosebud.  \"<i>Come on... fill me up.  I'm so hot it feels like I'm on fire!  Fill me up, please?</i>\"");
 		
-		outputText("\n\nWhat a naughty, naughty little buttslut " + arianMF("he","she") + " is, you croon, and deliver a playful slap to " + arianMF("his","her") + " ass, before squeezing the luscious round buttock, fingers creeping into " + arianMF("his","her") + " crevice to probe at his back passage.  To your surprise, the slight pressure you're exerting makes " + arianMF("his","her") + " orifice ripple and flex; " + arianMF("he","she") + "'s trained his ass so well " + arianMF("he","she") + " can even try to deliberately grab you with it and suck you in.");
+		outputText("\n\nWhat a naughty, naughty little buttslut " + arianMF("he","she") + " is, you croon, and deliver a playful slap to " + arianMF("his","her") + " ass, before squeezing the luscious round buttock, fingers creeping into " + arianMF("his","her") + " crevice to probe at his back passage.  To your surprise, the slight pressure you're exerting makes " + arianMF("his","her") + " orifice ripple and flex; " + arianMF("he","she") + "'s trained " + arianMF("his","her") + " ass so well " + arianMF("he","she") + " can even try to deliberately grab you with it and suck you in.");
 		
 		outputText("\n\nArian moans and bucks against your fingers, eager to get more of you inside.  \"<i>Ah... yessss... more...</i>\"  " + arianMF("He","She") + " groans.  Looking under " + arianMF("him","her") + ", you can see that " + arianMF("his","her") + " ");
 		if(flags[ARIAN_VAGINA] > 0) outputText("wet gash is positively leaking lizan juices");
@@ -1569,7 +1569,7 @@ function giveArianAnal():void {
 		if(flags[ARIAN_COCK_SIZE] > 0) outputText("erect cock is already leaking pre like a sieve");
 		outputText(".  You can hardly believe how far Arian has come; you ask " + arianMF("him","her") + " if it really feels that good?  \"<i>More than you can... ah... imagine, now fill me up!</i>\" " + arianMF("he","she") + " demands with a sense of urgency.");
 		
-		outputText("\n\nSeeing no reason to delay any longer, and figuring he must be well-trained enough now that you don't need to be gentle, you promptly extract your fingers from the lizan's greedy ass and then slam your shaft home in one fierce thrust, asking if this is what he wanted.");
+		outputText("\n\nSeeing no reason to delay any longer, and figuring " + arianMF("he","she") + " must be well-trained enough now that you don't need to be gentle, you promptly extract your fingers from the lizan's greedy ass and then slam your shaft home in one fierce thrust, asking if this is what " + arianMF("he","she") + " wanted.");
 		
 		outputText("\n\nArian gasps and opens " + arianMF("his","her") + " maw in a silent scream.  " + arianMF("His","Her") + " ass contracts, milking you; ");
 		if(flags[ARIAN_VAGINA] > 0) outputText("her pussy clenches, spilling a flood of juices; ");
@@ -1577,7 +1577,7 @@ function giveArianAnal():void {
 		if(flags[ARIAN_COCK_SIZE] > 0) outputText("his cock throbs and shoots rope after rope of cum onto the bedsheets");
 		outputText(". Overwhelmed by your sudden intrusion, Arian collapses forward, burying " + arianMF("his","her") + " face on " + arianMF("his","her") + " pillow and dragging you on top of " + arianMF("him","her") + ".  \"<i>Ah... [name], you feel so good.  It's amazing.  I never thought buttsex could ever feel this good.</i>\"");
 		
-		outputText("\n\nYou almost blink in surprise; you were just throwing the term buttslut around as a joke, you didn't think Arian was really like that.  Still, there are far more important matters - like digging your way into the depths of Arian's greedy little ass with your " + cockDescript(x) + "!  You squeeze the lizan's scaly butt and begin to rut him like an animal, thrusting your way in and out of his back passage with all the eagerness you can muster.");
+		outputText("\n\nYou almost blink in surprise; you were just throwing the term buttslut around as a joke, you didn't think Arian was really like that.  Still, there are far more important matters - like digging your way into the depths of Arian's greedy little ass with your " + cockDescript(x) + "!  You squeeze the lizan's scaly butt and begin to rut " + arianMF("him","her") + " like an animal, thrusting your way in and out of his back passage with all the eagerness you can muster.");
 		
 		outputText("\n\nArian scream in pleasure, muffled by " + arianMF("his","her") + " pillow.  " + arianMF("His","Her") + " ass strives to pull you in as far as you can go, contracting, milking, gripping; even though Arian's just climaxed, you can see " + arianMF("his","her") + " ");
 		if(flags[ARIAN_COCK_SIZE] > 0) {
@@ -1647,7 +1647,7 @@ function giveArianAnal():void {
 			flags[ARIAN_ASS_CHAT]++;
 		}
 		else {
-			outputText("\n\nYou pat Arian gently on " + arianMF("his","her") + " ass and comment playfully that " + arianMF("he","she") + " is such an unabashed buttslut, isn't " + arianMF("he","she") + "?  Still, did " + arianMF("he","she") + " get enough cock up his ass for a while?");
+			outputText("\n\nYou pat Arian gently on " + arianMF("his","her") + " ass and comment playfully that " + arianMF("he","she") + " is such an unabashed buttslut, isn't " + arianMF("he","she") + "?  Still, did " + arianMF("he","she") + " get enough cock up " + arianMF("his","her") + " ass for a while?");
 			
 			outputText("\n\nArian smiles wryly at you.  \"<i>I guess I've got enough to hold me for a while now, but I could always use another dose.</i>\"");
 			
@@ -1701,7 +1701,7 @@ function getBlownByArian():void {
 	
 		outputText("\n\nOn " + arianMF("him","her") + "self?!  You blurt out; just how flexible is " + arianMF("he","she") + "?!");
 		
-		outputText("\n\nArian smiles nervously and bites " + arianMF("his","her") + " lower lip.  \"<i>I'm a mage, remember?  There's a lot of things you can do with magic, but this isn't about me, [name].  It's about you... so let me show you what I learned.</i>\"  Arian plants a kiss on your [cockHead biggest], before slowly wrapping it around " + arianMF("his","her") + " tongue and sucking you right back into his cock-hungry maw.");
+		outputText("\n\nArian smiles nervously and bites " + arianMF("his","her") + " lower lip.  \"<i>I'm a mage, remember?  There's a lot of things you can do with magic, but this isn't about me, [name].  It's about you... so let me show you what I learned.</i>\"  Arian plants a kiss on your [cockHead biggest] before slowly wrapping around it with " + arianMF("his","her") + " tongue and sucking you right back into " + arianMF("his","her") + " cock-hungry maw.");
 		
 		outputText("\n\nYou moan, agreeing that, yes, this is far more important.");
 	}
@@ -2069,7 +2069,7 @@ function suckAriansDick():void {
 	outputText("\n\nUnable to hold back any longer, Arian's hands pull on the sheets as " + arianMF("his","her") + " ");
 	if(flags[ARIAN_DOUBLE_COCK] > 0) outputText("twin cocks throb");
 	else outputText("cock throbs");
-	outputText(" one more time and erupt into your waiting mouth");
+	outputText(" one more time and erupts into your waiting mouth");
 	if(flags[ARIAN_DOUBLE_COCK] > 0) outputText(" and chin");
 	outputText(".  " + arianMF("His","Her") + " legs close around your back, effectively keeping you from moving too far away as " + arianMF("he","she") + " finishes giving you all of " + arianMF("his","her") + " load.");
 	
@@ -2232,6 +2232,7 @@ function getPenetratedByArianAndHisHitlerMustache():void {
 	
 	outputText("\n\nArian " + arianMF("himself","herself") + " lets out a cry of relief; having finally achieved " + arianMF("his","her") + " goal in helping you orgasm means " + arianMF("he","she") + " can give in to the sensations ");
 	if(flags[ARIAN_VAGINA] == 0) outputText("he himself ");
+	else outputText("she ");
 	outputText("is being overwhelmed by, spraying your ");
 	if(flags[ARIAN_DOUBLE_COCK] == 0) outputText("cavity");
 	else outputText("cavities");
@@ -3290,13 +3291,13 @@ function arianSpellPlace(spell:String):void {
 	
 	outputText("\n\nYou can't resist noting you were expecting " + arianMF("him","her") + " to say that, plucking it from your neck and passing it to the reptilian wizard.");
 	
-	outputText("\n\n\"<i>Erm... right.  Now I need to focus.</i>\"  " + arianMF("He","She") + " places your talisman in the bowl, submerging it in water, then closes " + arianMF("his","her") + " eyes and begins focusing " + this.arianMF("his", "her") + " magic.  Shortly after, the ingredients you offered suddenly burst into flames, burning until only their ashes are left; the ashes float into the bowl and mix with the water inside.");
+	outputText("\n\n\"<i>Erm... right.  Now I need to focus.</i>\"  " + arianMF("He","She") + " places your talisman in the bowl, submerging it in water, then closes " + arianMF("his","her") + " eyes and begins focusing " + arianMF("his","her") + " magic.  Shortly after, the ingredients you offered suddenly burst into flames, burning until only their ashes are left; the ashes float into the bowl and mix with the water inside.");
 	
 	outputText("\n\nA soft hum emanates from within the bowl and the water begins glowing.  It doesn't take long for the humming to fade; Arian reaches inside the bowl and lifts your talisman for you to see.  \"<i>Here you go, [name].</i>\"");
 	
 	outputText("\n\nYou thank " + arianMF("him","her") + " and accept the talisman, feeling the pulsating energies within for a few moments before placing it back around your neck.  You thank Arian for " + arianMF("his","her") + " help, assuring " + arianMF("him","her") + " that this will surely help you in your travels through these lands.");
 	
-	outputText("\n\n(<b>Your talisman has been imbued with the " + spell + " spell. You can use it from the M. Specials menu in combat.</b>)\n\n");
+	outputText("\n\n(<b>Your talisman has been imbued with the " + spell + ". You can use it from the M. Specials menu in combat.</b>)\n\n");
 	clearCharges();
 	if(spell == "Shielding Spell") {
 		player.createStatusAffect("Shielding Spell",0,0,0,0);
@@ -3375,7 +3376,7 @@ function sleepWithArian(newl:Boolean = false):void {
 	
 	//(if AnalXP <33)
 	if(flags[ARIAN_ANAL_XP] < 33) {
-		outputText("\n\nA strange sensation, combined with a soft sound, stirs you from your sleep.  You realise that Arian is stirring in his sleep, softly mumbling to himself as " + arianMF("his","her") + " tail gently swishes to and fro under the covers, sometimes accidentally running its warm length over your " + player.skinFurScales() + ".");
+		outputText("\n\nA strange sensation, combined with a soft sound, stirs you from your sleep.  You realise that Arian is stirring in " + arianMF("his","her") + " sleep, softly mumbling to " + arianMF("him","her") + "self as " + arianMF("his","her") + " tail gently swishes to and fro under the covers, sometimes accidentally running its warm length over your " + player.skinFurScales() + ".");
 		
 		outputText("\n\nAt first you think the lizan might actually be awake, but under further inspection you realize that " + arianMF("he","she") + " is just sleep-talking.  Should you listen in or just go back to sleep?");
 		menu();
@@ -3407,7 +3408,7 @@ function sleepWithArian(newl:Boolean = false):void {
 //[=Sleep=]
 function dontListenToLowAnalXPArian():void {
 	clearOutput();
-	outputText("You gently stroke the lizan\'s side and plant a soft, gentle kiss on " + arianMF("his", "her") + " neck.  At your ministrations, Arian sighs and slowly falls still again.  You wait, but it seems that whatever dreams " + arianMF("he", "she") + " was having have faded and " + arianMF("he", "she") + "\'s truly asleep now, allowing you to go back to sleep yourself.");
+	outputText("You gently stroke the lizan's side and plant a soft, gentle kiss on " + arianMF("his","her") + " neck.  At your ministrations, Arian sighs and slowly falls still again.  You wait, but it seems that whatever dreams " + arianMF("he","she") + " was having have faded and " + arianMF("he","she") + "'s truly asleep now, allowing you to go back to sleep yourself.");
 	menu();
 	addButton(0,"Next",sleepWrapper);
 }
@@ -3422,7 +3423,7 @@ function listenToLowAnalXPArian():void {
 	outputText("\n\n\"<i>But sausages belong inside breads,</i>\" Arian whimpers.  \"<i>But... if you're sure... okay....</i>\"  Under the covers you feel Arian wiggling " + arianMF("his","her") + " butt against you, " + arianMF("his","her") + " tail lifting to make room for the \"<i>sausage</i>\".");
 	//(if PC has a cock)
 	if(player.hasCock()) {
-		outputText("\n\nYou wonder for a moment if maybe this is fair, but decide that, if he's obviously dreaming about it eagerly....  Your hand slips under the covers to start stroking your [cock smallest], gently coaxing yourself to erection.  Once you've gotten yourself sufficiently stiff, you wrap your arms around the lizan's waist for balance and start pushing yourself in.");
+		outputText("\n\nYou wonder for a moment if maybe this is fair, but decide that, if " + arianMF("he","she") + "'s obviously dreaming about it eagerly....  Your hand slips under the covers to start stroking your [cock smallest], gently coaxing yourself to erection.  Once you've gotten yourself sufficiently stiff, you wrap your arms around the lizan's waist for balance and start pushing yourself in.");
 	}
 	else {
 		outputText("\n\nGiven you're rather lacking in the penis department, you decide to make do with your fingers; should be close enough for someone new to anal like " + arianMF("him","her") + ", right?  Copiously lubricating your middle finger with saliva, you wriggle it between " + arianMF("his","her") + " soft asscheeks and begin gently pushing it into his tight little pucker.");
@@ -3430,7 +3431,7 @@ function listenToLowAnalXPArian():void {
 	outputText("\n\nBefore you can even drive an inch in, Arian suddenly says, \"<i>No!  Wait!  I'm not ready yet!  I need to bake for a few more minutes before you can put the sausage in... and add more milk...</i>\"");
 	outputText("\n\n...Okay, this is getting weird enough.  You're not really sure you can stay in the mood to fuck " + arianMF("his","her") + " ass.");
 	outputText("\n\n\"<i>[name]... just let me bake overnight.  I'll be ready tomorrow.  G'night...</i>\"  Having said that, Arian finally calms down.");
-	outputText("\n\nYou wonder if maybe Arian always dreamed of being a baker instead of a wizard.  Or if he just had a midnight craving for pastry.  With a soft sigh, you make yourself settle down and try to get back to sleep.");
+	outputText("\n\nYou wonder if maybe Arian always dreamed of being a baker instead of a wizard.  Or if " + arianMF("he","she") + " just had a midnight craving for pastry.  With a soft sigh, you make yourself settle down and try to get back to sleep.");
 	stats(0,0,0,0,0,0,15,0);
 	menu();
 	addButton(0,"Next",sleepWrapper);
@@ -3439,7 +3440,7 @@ function listenToLowAnalXPArian():void {
 //[=Sleep=]
 function dontListenToMediumAnalXPArian():void {
 	clearOutput();
-	outputText("You gently stroke the lizan's side and plant a soft, gentle kiss on  " + arianMF("his", "her") + " neck.  At your ministrations, Arian sighs and slowly falls still again.  You wait, but it seems that whatever dreams " + arianMF("he", "she") + " was having have faded and  " + arianMF("he", "she") + " 's truly asleep now, allowing you to go back to sleep yourself.");
+	outputText("You gently stroke the lizan's side and plant a soft, gentle kiss on his neck.  At your ministrations, Arian sighs and slowly falls still again.  You wait, but it seems that whatever dreams he was having have faded and he's truly asleep now, allowing you to go back to sleep yourself.");
 	sleepRecovery(false);
 	menu();
 	addButton(0,"Next",sleepWrapper);
@@ -3450,19 +3451,19 @@ function listenToMediumAnalXPArian():void {
 	flags[ARIAN_MORNING] = 1;
 	outputText("You turn you head to try and catch what Arian might be dreaming about.");
 	outputText("\n\n\"<i>Hmm... no, not my muffins.</i>\"");
-	outputText("\n\n...Muffins?  " + arianMF("He","She") + "'s kicking and squirming like that... over a dream about muffins?  Feeling mischievous, and maybe a little insulted, you lean over his ear and whisper that you've got some very special muffins for him.");
+	outputText("\n\n...Muffins?  " + arianMF("He","She") + "'s kicking and squirming like that... over a dream about muffins?  Feeling mischievous, and maybe a little insulted, you lean over " + arianMF("his","her") + " ear and whisper that you've got some very special muffins for him.");
 	outputText("\n\n\"<i>Really?  What flavor?</i>\"");
-	outputText("\n\nYou tell him it's a surprise.");
+	outputText("\n\nYou tell " + arianMF("him","her") + " it's a surprise.");
 	outputText("\n\n\"<i>Hmm, okay then.  Shove it in.</i>\"  Arian lifts " + arianMF("his","her") + " tail out of the way, wiggling " + arianMF("his","her") + " hips against you.");
 	
 	//(if PC has a cock)
 	if(player.hasCock()) {
-		outputText("\n\nWell, if this is what he wants, you're happy to oblige.  Your hand slips under the covers to start stroking your [cock smallest], gently coaxing yourself to erection.  Once you've gotten yourself sufficiently stiff, you wrap your arms around the lizan's waist for balance and start pushing yourself in.");
+		outputText("\n\nWell, if this is what " + arianMF("he","she") + " wants, you're happy to oblige.  Your hand slips under the covers to start stroking your [cock smallest], gently coaxing yourself to erection.  Once you've gotten yourself sufficiently stiff, you wrap your arms around the lizan's waist for balance and start pushing yourself in.");
 		outputText("\n\nArian moans.  \"<i>Such a familiar flavor.  Why didn't you tell me you were [name] flavoured?  I love muffins.  I love [name] muffins.</i>\"");
-		outputText("\n\nYou blink in surprise; is Arian really asleep, you wonder?  No, " + arianMF("he","she") + "'s got to be awake, otherwise how could he realise you're actually fucking his ass?  \"<i>Hmm... tasty...</i>\"  You lean over the lizan, ");
+		outputText("\n\nYou blink in surprise; is Arian really asleep, you wonder?  No, " + arianMF("he","she") + "'s got to be awake, otherwise how could " + arianMF("he","she") + " realise you're actually fucking his ass?  \"<i>Hmm... tasty...</i>\"  You lean over the lizan, ");
 		if(player.hasCock()) outputText("cock");
 		else outputText("finger");
-		outputText(" still worming its way into his fuckable ass, but it really does look like he's fast asleep.  Weird.  \"<i>So many muffins... all [name] flavoured...</i>\"  " + arianMF("he","she") + " calms down and begins snoring lightly.");
+		outputText(" still worming its way into " + arianMF("his","her") + " fuckable ass, but it really does look like " + arianMF("he","she") + "'s fast asleep.  Weird.  \"<i>So many muffins... all [name] flavoured...</i>\"  " + arianMF("he","she") + " calms down and begins snoring lightly.");
 		outputText("\n\nUnbelievable... if you didn't know better you'd think that Arian is the one doing the teasing here.  Still... " + arianMF("he","she") + "'s fast asleep right now, and you don't feel like fucking " + arianMF("him","her") + " in " + arianMF("his","her") + " sleep");
 		if(player.cor >= 66) outputText(", despite the silly lizan being deserving of it");
 		outputText(".  But as payback, " + arianMF("he","she") + "'s going to sleep with you inside, not that it seems like it'll be much of a problem to " + arianMF("him","her") + "... Too bad you can't hold an erection all the time while asleep, so you know eventually you'll slip out...");
@@ -3537,8 +3538,8 @@ function wakeUpAfterArianSleep():void {
 			//(PC tried but didn't manage to get their cocks in. Even tho you slept with it inside, you do go flaccid at some point in the night.)
 			outputText("Your eyes open, and you suddenly realise that whatever dreams you were having... are now gone.  You make note of the still sleeping lizan right next to you and recall last night's events.  You wonder if Arian will remember any of that...");
 			outputText("\n\nGetting yourself out of bed, you start to stretch your muscles, cracking joints and generally waking yourself up.  While you are doing this, the lizan yawns loudly, slowly coming awake as well.  Rubbing the sleep out of " + arianMF("his","her") + " eyes, Arian utters.  \"<i>Morning, [name].  Sleep well?</i>\"  " + arianMF("he","she") + " turns to look at you and suddenly hides " + arianMF("himself","herself") + " under the covers.");
-			outputText("\n\nYou give him a wide grin and repeat the sentiment, assuring " + arianMF("him","her") + " that you did indeed sleep well.  Aww, why's " + arianMF("he","she") + " being so shy?  It's far too late for either of you to be worried about being naked around each other.");
-			outputText("\n\nArian's head pokes from under the covers.  \"<i>I suppose you're right... but that's still an impressive sight,</i>\"  he says pointing at your erect cock");
+			outputText("\n\nYou give " + arianMF("him","her") + " a wide grin and repeat the sentiment, assuring " + arianMF("him","her") + " that you did indeed sleep well.  Aww, why's " + arianMF("he","she") + " being so shy?  It's far too late for either of you to be worried about being naked around each other.");
+			outputText("\n\nArian's head pokes from under the covers.  \"<i>I suppose you're right... but that's still an impressive sight,</i>\"  " + arianMF("he","she") + " says pointing at your erect cock");
 			if(player.cockTotal() > 1) outputText("s");
 			outputText(".");
 			
@@ -3552,33 +3553,33 @@ function wakeUpAfterArianSleep():void {
 			outputText("\n\nArian promptly nuzzles your " + multiCockDescriptLight() + ", rubbing " + arianMF("his","her") + " face all over ");
 			if(player.cockTotal() == 1) outputText("it");
 			else outputText("them");
-			outputText(" shamelessly until a dollop of pre forms on the tip of your [cock biggest].  \"<i>[name]?</i>\"  You give a deliberate groan, playing up how much you're enjoying this for Arian's benefit and smiling at him.  \"<i>Thanks for the breakfast,</i>\"  " + arianMF("he","she") + " says with a smile, then proceeds to take the entirety of your [cock] past " + arianMF("his","her") + " lips and down " + arianMF("his","her") + " throat.  You can't resist chuckling and patting " + arianMF("him","her") + " on the head.");
+			outputText(" shamelessly until a dollop of pre forms on the tip of your [cock biggest].  \"<i>[name]?</i>\"  You give a deliberate groan, playing up how much you're enjoying this for Arian's benefit and smiling at " + arianMF("him","her") + ".  \"<i>Thanks for the breakfast,</i>\"  " + arianMF("he","she") + " says with a smile, then proceeds to take the entirety of your [cock] past " + arianMF("his","her") + " lips and down " + arianMF("his","her") + " throat.  You can't resist chuckling and patting " + arianMF("him","her") + " on the head.");
 			
 			outputText("\n\nThe lizan mage looks up as best as " + arianMF("he","she") + " can while bobbing on your shaft, trying to gauge your reaction and making sure " + arianMF("he","she") + "'s doing a good job of blowing you.  You smile and make it quite clear that you're enjoying this, then let out a hollow moan as your morning wood goes soft with a decent-sized explosion of cum into the lizan's sucking mouth.");
 			outputText("\n\nArian's eyes bulge with surprise and " + arianMF("he","she") + " begins drinking down in earnest, moaning in enjoyment, which proves to be a mistake... shortly after a particularly lengthy moan, " + arianMF("he","she") + " tries to swallow and winds up choking.  Some cum escapes " + arianMF("him","her") + " through " + arianMF("his","her") + " nose and " + arianMF("he","she") + " quickly pulls away, coughing.  Unfortunately for " + arianMF("him","her") + ", you're still cumming, and the result that even as " + arianMF("he","she") + " gags and splutters, you keep on spurting cum all over " + arianMF("his","her") + " face until you've emptied yourself.  You sigh in relief, then, with a hint of guilt, ask Arian if " + arianMF("he","she") + "'s alright?");
 			outputText("\n\nWiping your seed off " + arianMF("his","her") + " eyes, he says, \"<i>I'm fine... should have been more careful... and don't worry about the facial either, all I need is a few moments to clean myself up.</i>\"  " + arianMF("he","she") + " gets up and walks towards a jug filled with water " + arianMF("he","she") + " keeps nearby.");
-			outputText("\n\nYou quietly get up, pull your clothes on and start heading off to another busy day as Champion.  As you go, you can't help but notice your reptilian lover is licking " + arianMF("his","her") + " face clean of cum and washing it down with the water, rather than washing himself off.");
+			outputText("\n\nYou quietly get up, pull your clothes on and start heading off to another busy day as Champion.  As you go, you can't help but notice your reptilian lover is licking " + arianMF("his","her") + " face clean of cum and washing it down with the water, rather than washing " + arianMF("him","her") + "self off.");
 		}
 		else if(flags[ARIAN_ANAL_XP] < 66) {
 			outputText("With a wide yawn, you open your eyes and realise your dreams have been chased away by your sudden bout of wakefulness.  Arian seems to still be asleep, you take a short moment to snuggle up to the curled lizan, rubbing your erect cock up " + arianMF("his","her") + " butt crack.  Despite going soft and slipping out of the lizan's warm innards, you still have to contend with a morning wood... so you dutifully hump yourself between the lizan's buttcheeks, poking the base of " + arianMF("his","her") + " tail with your protruding shaft.");
 			
-			outputText("\n\n\"<i>Hmm, I'm awake already, stop poking me,</i>\" Arian protests, rubbing the sleep off " + arianMF("his","her") + " eyes and turning to look at you over " + arianMF("his","her") + " shoulder.  \"<i>Morning, [name].  You don't have to keep poking me under the tail to wake me up,</i>\" " + arianMF("he","she") + " says, a bit grumpy.  Then " + arianMF("he","she") + " realizes that your hands are still occupied hugging " + arianMF("him","her") + ", so what's poking him is...  \"<i>Oh!  Sorry about that, [name]!  I thought you wanted something....  I mean, maybe you do want something?</i>\"  " + arianMF("he","she") + " smiles nervously at you.");
+			outputText("\n\n\"<i>Hmm, I'm awake already, stop poking me,</i>\" Arian protests, rubbing the sleep off " + arianMF("his","her") + " eyes and turning to look at you over " + arianMF("his","her") + " shoulder.  \"<i>Morning, [name].  You don't have to keep poking me under the tail to wake me up,</i>\" " + arianMF("he","she") + " says, a bit grumpy.  Then " + arianMF("he","she") + " realizes that your hands are still occupied hugging " + arianMF("him","her") + ", so what's poking " + arianMF("him","her") + " is...  \"<i>Oh!  Sorry about that, [name]!  I thought you wanted something....  I mean, maybe you do want something?</i>\"  " + arianMF("he","she") + " smiles nervously at you.");
 			
 			outputText("\n\nYou make a show of pursing your lips.  The question might be, you decide, does Arian want to do something?  After all, those were rather mixed signals " + arianMF("he","she") + " sent you last night...");
 			outputText("\n\n\"<i>Mixed signals?  Did I do something in the night!?</i>\" " + arianMF("he","she") + " asks worried.");
 			outputText("\n\nWell, you tell " + arianMF("him","her") + ", first " + arianMF("he","she") + " started acting like " + arianMF("he","she") + " really, really wanted you to fuck " + arianMF("his","her") + " ass.  Then, just when you were getting all steamed up and ready to start, " + arianMF("he","she") + " suddenly stopped.  So you were left to try and get back to sleep despite a raging hard-on.  It was really rather annoying, you tell " + arianMF("him","her") + ".");
 			outputText("\n\n\"<i>Oh... umm... sorry.  I was probably sleep talking.  Doesn't happen too often, but well....  Sorry, I had no intention of getting you all worked up for nothing.</i>\"");
 			
-			outputText("\n\nYou tell him that's a start.  Still, you think Arian might want you to work off this morning wood with " + arianMF("him","her") + ", hmm?  Would " + arianMF("he","she") + " like it if you held " + arianMF("him","her") + " close and gave " + arianMF("his","her") + " ass a good hard fuck?");
+			outputText("\n\nYou tell " + arianMF("him","her") + " that's a start.  Still, you think Arian might want you to work off this morning wood with " + arianMF("him","her") + ", hmm?  Would " + arianMF("he","she") + " like it if you held " + arianMF("him","her") + " close and gave " + arianMF("his","her") + " ass a good hard fuck?");
 			outputText("\n\nArian scratches " + arianMF("his","her") + " chin, smiling nervously.  \"<i>Well, I wouldn't be opposed, if you want to.</i>\"");
 			outputText("\n\nYou promptly seize the lizan in a tight embrace, already guiding your [cock smallest] towards " + arianMF("his naughty boy-pussy","her tail-hole") + " with a smile on your face.  You teasingly muse aloud about who was saying you were giving " + arianMF("him","her") + " the choice to say no?");
 			outputText("\n\nArian jumps a bit at being suddenly grabbed, but doesn't resist, instead, " + arianMF("he","she") + " positions " + arianMF("himself","herself") + " to give you easy access to " + arianMF("his","her") + " rosebud.  \"<i>Drat!  And here I thought I would be able to escape punishment from getting you all worked up,</i>\"  Arian replies with a smile.");
 			outputText("\n\nYou waste no further time, pushing your way firmly inside the hole that has so captivated you.  The lizan's tight muscles grip and squeeze you most wonderfully, and you thrust yourself back and forth as quickly and firmly as you can manage without actually hurting " + arianMF("him","her") + ".");
 			outputText("\n\n\"<i>Ah... [name], you really know how to work my ass, don't you?  Hmm... if anyone told me anal feels this good back then I would have said they're insane, but - Oh!... this wonderful dick of yours feels so good.</i>\"  Arian sighs and begins humping back at you.  \"<i>There's no better way to get ready for a full day ahead of us than having sex with you like this,</i>\" " + arianMF("he","she") + " says dreamily.");
 			outputText("\n\nYou thrust and moan and groan, losing yourself in the pleasures of sex with your reptilian lover of ass-fucking.  Eventually, the inevitable happens and, with one final cry, you release your steaming spunk up Arian's tailhole.");
-			outputText("\n\n\"<i>Haaa... I can feel your seed filling me up, washing my ass with your wonderful cream!  Ah, [name]... I love you.  We should do this more often!</i>\"  Arian says in delight as you finish pumping his ass full of jism with a few more thrusts.");
+			outputText("\n\n\"<i>Haaa... I can feel your seed filling me up, washing my ass with your wonderful cream!  Ah, [name]... I love you.  We should do this more often!</i>\"  Arian says in delight as you finish pumping " + arianMF("his","her") + " ass full of jism with a few more thrusts.");
 			outputText("\n\nMaybe we should do this more often, you tell Arian.  The two of you stay locked in an embrace for a little while longer, enjoying this morning's afterglow until Arian decides to break the silence.  \"<i>Maybe we should get ready for the day ahead?  Not that I mind staying like this all day.</i>\"");
-			outputText("\n\nYou agree, and messily pull yourself free of the lizan's tight ass, getting off of your lover's back and stretching out your stiff muscles.  Arian does the same, taking care to keep his ass closed as tightly as possible, to avoid losing any of your earlier deposit.  \"<i>Say, [name].  If you put your clothes on now, they're going to get all dirty.  So, why not get that cleaned up?</i>\" the lizan mage comments, pointing at your cum-slickened shaft.");
+			outputText("\n\nYou agree, and messily pull yourself free of the lizan's tight ass, getting off of your lover's back and stretching out your stiff muscles.  Arian does the same, taking care to keep " + arianMF("his","her") + " ass closed as tightly as possible, to avoid losing any of your earlier deposit.  \"<i>Say, [name].  If you put your clothes on now, they're going to get all dirty.  So, why not get that cleaned up?</i>\" the lizan mage comments, pointing at your cum-slickened shaft.");
 			outputText("\n\nYou agree with the lizan, and start looking around for a convenient rag to clean yourself off with.  But before you can spot one, you feel a familiar lizan's mouth encompass your shaft and begin sucking earnestly, making sure to get your shaft squeaky clean, even as you begin sporting another erection.  With a slurp, Arian pulls free of your shaft, leaving it to bob in the cool air of the morning as " + arianMF("he","she") + " grins at you, wiping " + arianMF("his","her") + " mouth with the back of " + arianMF("his","her") + " arm.  \"<i>There.  I cleaned you up.</i>\"  " + arianMF("He","She") + " grins.");
 			
 			outputText("\n\nYou chuckle and tap the sneaky little lizard on " + arianMF("his","her") + " nose, pointing out that " + arianMF("he","she") + " did do so, but now " + arianMF("he","she") + " got you hard again.  So, what are you supposed to do like this?  As pleasant as it sounds, you can't spend the day buried in " + arianMF("his","her") + " tight little ass.  For emphasis, you spank the lizan sharply on the closest ass-cheek, producing a gobbet of cum trickling from " + arianMF("his","her") + " used tailhole.");
@@ -3594,7 +3595,7 @@ function wakeUpAfterArianSleep():void {
 			outputText("\n\nYou feel a sudden urge to hump and wake up, only to find yourself still deeply lodged inside the greedy lizan's wanton rosebud.  Recalling the previous night and your little quickie in the night, you smile.  It's no wonder you're feeling particularly rested this morning.  " + arianMF("His","Her") + " greedy butt is as clingy as it was during the night... refusing to yield and let your shaft go.");
 			outputText("\n\nWell, if " + arianMF("he","she") + "'s really that desperate for a buttfuck.  You wrap your arms around your reptilian lover's waist, both affectionately and as a way to maintain your position, and start to thrust your pelvis, pistoning your morning wood inside the insatiable asshole you've encouraged in your lover.");
 			outputText("\n\nArian moans and begins bucking back; then after a couple pumps " + arianMF("he","she") + " opens " + arianMF("his","her") + " eyes.  \"<i>Oh... [name]?  Oh!  This feels good...  W-what are you doing?</i>\"");
-			outputText("\n\nJust giving him what he clearly wants so badly, you reply in a distracted tone; you're starting to get into a nice rhythm here and you don't want to lose it.");
+			outputText("\n\nJust giving " + arianMF("him","her") + " what " + arianMF("he","she") + " clearly wants so badly, you reply in a distracted tone; you're starting to get into a nice rhythm here and you don't want to lose it.");
 			outputText("\n\nArian moans, and begins humping back at you eagerly.  \"<i>Oh... you might feel more comfortable in this position.</i>\"  " + arianMF("He","She") + " rolls around on the bed, until " + arianMF("he","she") + " is face down on " + arianMF("his","her") + " pillow, while " + arianMF("his","her") + " butt and tail are high up in the air to give you full access to " + arianMF("his","her") + " eager butt.");
 			outputText("\n\nIf you weren't already buried inside of " + arianMF("him","her") + ", you'd pounce right into " + arianMF("his","her") + " ass.  Instead, you redouble your efforts, savoring the delicious interior of your little buttslut's ass and " + arianMF("his","her") + " now-deliberate efforts to milk your cock of its cum.");
 			outputText("\n\n\"<i>Hmm... harder... faster,</i>\"  Arian begs, in between moans of pleasure.  Seeing no reason to deny " + arianMF("him","her") + ", you pick up the pace, roughly pounding " + arianMF("him","her") + " for all you're worth.");
@@ -3619,7 +3620,7 @@ function wakeUpAfterArianSleep():void {
 			else outputText("Does " + arianMF("he","she") + " really get off on having a girl with a dick all her own fuck " + arianMF("him","her") + " like a girl, hmm?");
 			
 			outputText("\n\n\"<i>No... but I love it regardless!  Fill me with your seed, please!</i>\"  Arian begs, moaning and eagerly awaiting your deposit.");
-			outputText("\n\nYou thrust into him thrice more, then, with a hollow cry, let out all the seed you can to sate your lovely little buttslut's thirst.  And this time, you can properly focus on cumming, too.");
+			outputText("\n\nYou thrust into " + arianMF("him","her") + " thrice more, then, with a hollow cry, let out all the seed you can to sate your lovely little buttslut's thirst.  And this time, you can properly focus on cumming, too.");
 			//(Low cum amount)
 			if(player.cumQ() <= 200) outputText("\n\nThe first jet of cum of the day spurts forth from your tip to paint the eager lizan's insides.  \"<i>Ahhh... that's the way you do it,</i>\"  Arian says, tongue lolling out in pleasure as your cock finishes throbbing and shooting inside.");
 			//(Medium cum amount)

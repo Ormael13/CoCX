@@ -393,7 +393,7 @@ function camp():void {
 		else outputText("Your new home is as comfy as a camp site can be.  The fire-pit and tent are both set up perfectly, and in good repair, and you've even managed to carve some artwork into the rocks around the camp's perimeter.", false);
 	}
 	//Nursery
-	if(flags[UNKNOWN_FLAG_NUMBER_00009] == 100 && player.hasStatusAffect("Camp Marble") >= 0) {
+	if(flags[MARBLE_NURSERY_CONSTRUCTION] == 100 && player.hasStatusAffect("Camp Marble") >= 0) {
 		outputText("  Marble has built a fairly secure nursery amongst the rocks to house your ",false);
 		if(flags[MARBLE_KIDS] == 0) outputText("future children", false);
 		else {
@@ -1238,7 +1238,7 @@ function sleepRecovery(display:Boolean = false):void {
 		if(player.hasPerk("Speedy Recovery") >= 0) fatigue(-int(player.fatigue/4));
 	}
 	//Mino withdrawal
-	else if(flags[UNKNOWN_FLAG_NUMBER_00020] == 3) {
+	else if(flags[MINOTAUR_CUM_ADDICTION_STATE] == 3) {
 		if(display) outputText("\nYou spend much of the night tossing and turning, aching for a taste of minotaur cum.\n", false);
 		HPChange(timeQ * 15, true);
 		fatigue(-int(player.fatigue/2)); 

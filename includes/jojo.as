@@ -264,7 +264,7 @@ function useTentacleJojo():void {
 			else outputText("easily swallowing", false);
 			outputText(" your " + multiCockDescriptLight() + " in tight vises of pleasure.  The sensation is overhwelmingly pleasurable, like having three cocks being licked and sucked by 1000 tongues.", false);
 			//(if extra: 
-			if(player.cockTotal() > 3) outputText("  The remaining " + cockNoun(CockTypesEnum.HUMAN) + "'s pulse and throb with jealous desire, until one of the tentacles slips off and captures it.  They take turns, slipping off and capturing each of your offerings until you wish they'd just keep sucking forever.", false);
+			if(player.cockTotal() > 3) outputText("  The remaining " + Appearance.cockNoun(CockTypesEnum.HUMAN) + "'s pulse and throb with jealous desire, until one of the tentacles slips off and captures it.  They take turns, slipping off and capturing each of your offerings until you wish they'd just keep sucking forever.", false);
 			outputText("\n\n", false);
 		}
 	}
@@ -683,7 +683,7 @@ function repeatMilkJojo(tentacle:Boolean = false):void {
 		if(player.gender > 0) outputText("loins", false);
 		else outputText("body", false);
 		outputText(".  You close your eyes and forget about the mouse, stripping out of your clothes to expose your nudity  to questing hands.  As you work yourself into a sexual frenzy, you become more aware of Jojo's lusty, panting gaze on your exposed skin.  ", false);
-		if(flags[UNKNOWN_FLAG_NUMBER_00023] > 0) outputText("An exhibitionist thrill shivers through you at the thought being watched while engaged in such a carnal act.  ", false);
+		if(flags[PC_FETISH] > 0) outputText("An exhibitionist thrill shivers through you at the thought being watched while engaged in such a carnal act.  ", false);
 		outputText("Your climax comes as fast as it is hard, breaking over you in a concussive wave of bliss.\n\n", false);
 		
 		outputText("Blinking the stars from your eyes, you look up to see Jojo hanging there, panting and shaking.  The ever-present mechanical hum incrementally increases in pitch, climbing all the way to a keening wail that would put a banshee to shame.  Swollen bulges of cum are coursing through the tentacle-slut's members, distending the shafts and the tubes struggling to encapsulate the newfound girth.  Jojo's eyes roll back while frothy spit drips from his open maw and dangling tongue.  His body strains at the harness' bindings, the huge, dangling orbs between his legs visibly contracting as their cargo is released.  Semen bubbles from the seals at the edges of hoses as your pet drowns the cock-milker in spooge.  Gauges on the wall rapidly switch to 'F', one after another.  The last meter tops out, and then the pressure is blasting the suckers off his dicks, sending the sperm-packed machinery flying from the sheer, cummy pressure.\n\n", false);

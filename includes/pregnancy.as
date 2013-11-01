@@ -1066,6 +1066,28 @@ function updatePregnancy():Boolean {
 				}
 			}
 		}
+		//Frog Eggs
+		else if(player.pregnancyType == 23) {
+			if(player.pregnancyIncubation == 8) {
+				//Egg Maturing
+				if(player.hasVagina()) {
+					outputText("\nYour gut churns, and with a squelching noise, a torrent of transparent slime gushes from your [vagina].  You immediately fall to your knees, landing wetly amidst the slime.  The world around briefly flashes with unbelievable colors, and you hear someone giggling.\n\nAfter a moment, you realize that it’s you.");
+					//pussy:
+					if(player.hasVagina()) outputText("  Against your [vagina], the slime feels warm and cold at the same time, coaxing delightful tremors from your [clit].");
+					//[balls:
+					else if(player.balls > 0) outputText("  Slathered in hallucinogenic frog slime, your balls tingle, sending warm pulses of pleasure all the way up into your brain.");
+					//genderless: 
+					else outputText("  Your [vagina] begins twitching, aching for something to push through it over and over again.");
+					outputText("  Seated in your own slime, you moan softly, unable to keep your hands off yourself.");
+					stats(0,0,0,0,0,0,100,0,false);
+					displayedUpdate = true;
+				}
+				else {
+					outputText("\nYour gut churns, but after a moment it settles. Your belly does seem a bit bigger and more gravid afterward, like you're filling up with fluid without any possible vent. You suddenly wonder if losing your pussy was such a great idea.");
+					displayedUpdate = true;
+				}
+			}
+		}
 	}
 	//IF INCUBATION IS ANAL
 	if(player.buttPregnancyIncubation > 1) {
@@ -1369,6 +1391,13 @@ function updatePregnancy():Boolean {
 			popOutBenoitEggs();
 		}
 	}
+	//Give birf if its time... to FROG EGGS
+	if(player.pregnancyIncubation == 1 && player.pregnancyType == 23) {
+		layFrogEggs();
+		displayedUpdate = true;
+		player.pregnancyIncubation = 0;
+		player.pregnancyType = 0;
+	}
 	//BASILISK BIRF
 	//Bunbun birfs
 	if(player.pregnancyType == 9 && player.pregnancyIncubation == 1) {
@@ -1559,7 +1588,7 @@ function updatePregnancy():Boolean {
 			genderCheck();
 		}	
 		//If you like terrible outcomes
-		if(flags[UNKNOWN_FLAG_NUMBER_00009] < 100) {
+		if(flags[MARBLE_NURSERY_CONSTRUCTION] < 100) {
 			outputText("\nYou feel a clenching sensation in your belly and something shifts inside.  Your contractions start a few moments later and you realize that it's time for your child to be born.  You cry out mildly in pain and lie down, letting your body start to push the baby out.  Marble doesn't seem to be around right now, so you can do nothing but push.\n\n", false);
 
 			outputText("You push and heave with all your might, little else going through your mind. You somehow register when the head comes out, and soon the shoulders along with the rest of the body follow.  You lean back and pant for a while before feeling a pair of hands grab a hold of you. They slowly and clumsily feel up your body before finding your " + biggestBreastSizeDescript() + " and a mouth quickly closes down on a " + nippleDescript(0) + ".  You sigh softly, and drift off to sleep.", false);

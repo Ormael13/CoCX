@@ -938,6 +938,12 @@ function perkLongDescription(perkName:String = ""):String {
 			return "You choose the 'Speedy Recovery' perk, boosting your fatigue recovery rate!";
 		case "Regeneration 2":
 			return "You choose the 'Regeneration 2' perk, giving an addition 2% of max HP per turn in combat and 4% of max HP per hour.";
+		case "Fera's Boon - Seeder":
+			return "Increases cum output by 1,000 mLs.";
+		case "Fera's Boon - Wide Open":
+			return "Keeps your pussy permanently gaped and increases pregnancy speed.";
+		case "Fera's Boon - Milking Twat":
+			return "Keeps your pussy from ever getting too loose and increases pregnancy speed.";
 		case "Tank 2":
 			return "You choose the 'Tank 2' perk, granting an extra maximum HP for each point of toughness.";
 		case "Weapon Mastery":
@@ -1279,6 +1285,12 @@ function perkDescription(perkName:String = ""):String {
 		case "Regeneration 2":
 			return "Gain 2% of max HP per round of combat and 4% of max HP per hour out of combat.";
 			break;
+		case "Fera's Boon - Seeder":
+			return "Increases cum output by 1,000 mLs.";
+		case "Fera's Boon - Wide Open":
+			return "Keeps your pussy permanently gaped and increases pregnancy speed.";
+		case "Fera's Boon - Milking Twat":
+			return "Keeps your pussy from ever getting too loose and increases pregnancy speed.";
 		case "Spellcasting Affinity":
 			return "Reduces spell costs by " + player.perkv1("Spellcasting Affinity") + "%.";
 			break;
@@ -4453,8 +4465,8 @@ function displayStats(e:MouseEvent) {
 		else outputText("100%\n", false);
 	}
 	//MINO!
-	if(flags[UNKNOWN_FLAG_NUMBER_00340] > 0 || flags[UNKNOWN_FLAG_NUMBER_00018] > 0 || player.hasPerk("Minotaur Cum Addict") >= 0) {
-		if(player.hasPerk("Minotaur Cum Addict") < 0) outputText("<b>Minotaur Cum Addiction:</b> " + Math.round(flags[UNKNOWN_FLAG_NUMBER_00018] * 10)/10 + "%\n", false);
+	if(flags[UNKNOWN_FLAG_NUMBER_00340] > 0 || flags[MINOTAUR_CUM_ADDICTION_TRACKER] > 0 || player.hasPerk("Minotaur Cum Addict") >= 0) {
+		if(player.hasPerk("Minotaur Cum Addict") < 0) outputText("<b>Minotaur Cum Addiction:</b> " + Math.round(flags[MINOTAUR_CUM_ADDICTION_TRACKER] * 10)/10 + "%\n", false);
 		else outputText("<b>Minotaur Cum Addiction:</b> 100+%\n", false);
 	}
 	if(player.hasPerk("Spider Ovipositor") >= 0 || player.hasPerk("Bee Ovipositor") >= 0) outputText("<b>Ovipositor Total Egg Count: " + player.eggs() + "\nOvipositor Fertilized Egg Count: " + player.fertilizedEggs() + "</b>\n");
@@ -4466,6 +4478,7 @@ function displayStats(e:MouseEvent) {
 		if(player.hasPerk("Brood Mother") >= 0) preg++;
 		if(player.hasPerk("Fera's Boon - Breeding Bitch") >= 0) preg++;
 		if(player.hasPerk("Magical Fertility") >= 0) preg++;
+		if(player.hasPerk("Fera's Boon - Wide Open") >= 0 || player.hasPerk("Fera's Boon - Milking Twat") >= 0) preg++;
 		outputText(preg + "\n", false);
 	}	
 	if(player.hasStatusAffect("Slime Craving") >= 0) {
@@ -4551,10 +4564,10 @@ function displayStats(e:MouseEvent) {
 	if(rubiAffection() > 0) outputText("<b>Rubi's Affection:</b> " + Math.round(rubiAffection()) + "%\n");
 	if(rubiAffection() > 0) outputText("<b>Rubi's Orifice Capacity:</b> " + Math.round(rubiCapacity()) + "%\n");
 	
-	if(flags[UNKNOWN_FLAG_NUMBER_00012] != 0) {
+	if(flags[URTA_COMFORTABLE_WITH_OWN_BODY] != 0) {
 		if(urtaLove()) outputText("<b>Urta Status: </b>Lover\n");
-		else if(flags[UNKNOWN_FLAG_NUMBER_00012] == -1) outputText("<b>Urta Status: </b>Ashamed\n");
-		else if(flags[UNKNOWN_FLAG_NUMBER_00029] < 30) outputText("<b>Urta Status: </b>" + Math.round(flags[UNKNOWN_FLAG_NUMBER_00029] * 3.3333) + "% Affection\n");
+		else if(flags[URTA_COMFORTABLE_WITH_OWN_BODY] == -1) outputText("<b>Urta Status: </b>Ashamed\n");
+		else if(flags[URTA_PC_AFFECTION_COUNTER] < 30) outputText("<b>Urta Status: </b>" + Math.round(flags[URTA_PC_AFFECTION_COUNTER] * 3.3333) + "% Affection\n");
 		else outputText("<b>Urta Status: </b>Ready To Confess Love\n");
 	}
 	
@@ -4853,6 +4866,10 @@ function ImageLoaded(e:Event) {
     //this.addChild(e.target.loader.content); // loaded content is stored in e.target.loader.content variable
 	images[images.length] = e.target.loader.content;
 }
+/*The stuff below is a stupid experiment, all except the following line:
+<img src='artPack/white_devil_urta.jpg' width='400' height='514'/>
+Drop that into the text in a scene and BLAMMO! You got an Urta pic. It looks like you need to 
+have the width and height both specified to do it
 
 //Deprecated. Using showImage from ImageManager now.
 function showImage(arg:Number = 0):void {

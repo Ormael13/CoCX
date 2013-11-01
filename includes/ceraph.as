@@ -94,7 +94,7 @@ function maleFuckCeraphsPussy():void {
 		else if(player.cor < 66) outputText("Her words confuse you.  You never would've done this when you first came here, but you're horny and you know demons don't really mind.", false);
 		else outputText("Her dishonest words anger you, and you slap her in the face.  Both of you know that she wants this almost as much as she wanted to rape you, and any pretense at disliking this act is a deceitful sham.", false);
 		outputText("  It's too late for her to have any hope of swaying you anyway.  You strip off your " + player.armorName + " ", false);
-		if(flags[UNKNOWN_FLAG_NUMBER_00023] >= 1) {
+		if(flags[PC_FETISH] >= 1) {
 			outputText("getting an exhibitionist thrill ", false);
 		}
 		outputText("and begin stroking ", false);
@@ -140,7 +140,7 @@ function maleFuckCeraphsPussy():void {
 		else if(player.cor < 66) outputText("Her words confuse you.  You never would've done this when you first came here, but you're horny and you know demons don't really mind.", false);
 		else outputText("Her dishonest words anger you, and you slap her in the face.  Both of you know that she wants this almost as much as she wanted to rape you, and any pretense at disliking this act is a deceitful sham.", false);
 		outputText("  It's too late for her to have any hope of swaying you anyway.  You strip off your " + player.armorName + " ", false);
-		if(flags[UNKNOWN_FLAG_NUMBER_00023] >= 1) {
+		if(flags[PC_FETISH] >= 1) {
 			outputText("getting an exhibitionist thrill ", false);
 		}
 		outputText("and begin stroking ", false);
@@ -199,7 +199,7 @@ function rideCeraphsCockLikeaBAWSSexclamation11eleven():void {
 	
 	outputText("\n\nIt's too late for her to have any hope of swaying you anyway.  You strip off your " + player.armorName + " ", false); 
 	
-	if(flags[UNKNOWN_FLAG_NUMBER_00023] >= 1) outputText("getting an exhibitionist thrill ", false);
+	if(flags[PC_FETISH] >= 1) outputText("getting an exhibitionist thrill ", false);
 	outputText("and begin touching your " + vaginaDescript(0) + ", getting yourself ready for what is to come.\n\n", false);
 	
 	outputText("You sink down, feeling yourself part around the hot demon-tool, its ring of crown-nubs stroking your walls as you slide down, and the bumpy texture of its shaft makes your " + player.legs() + " feel weak.  You drop the rest of the way down in one smooth, wet slide, ");
@@ -257,7 +257,7 @@ function loseToCeraphAndGetPiercingsInEarsOrSomethingSomehow():void {
 	player.earsPierced = 1;
 	player.earsPShort = "green gem-stone ear-studs";
 	player.earsPLong = "Green gem-stone ear-studs";
-	flags[UNKNOWN_FLAG_NUMBER_00023] = 1;
+	flags[PC_FETISH] = 1;
 	stats(0,0,0,0,0,0,25,5);
 	eventParser(5007);
 }
@@ -284,7 +284,7 @@ function loseToCeraphAnGetPierced2():void {
 	player.nipplesPierced = 1;
 	player.nipplesPShort = "seamless black nipple-studs";
 	player.nipplesPLong = "Seamless black nipple-studs";
-	flags[UNKNOWN_FLAG_NUMBER_00023] = 2;
+	flags[PC_FETISH] = 2;
 	eventParser(5007);
 }
 
@@ -331,7 +331,7 @@ function getPiercedByCeraphLoss3():void {
 		player.eyebrowPLong = "Diamond eyebrow-stud";
 	}
 	//Set fetish level
-	flags[UNKNOWN_FLAG_NUMBER_00023] = 3;
+	flags[PC_FETISH] = 3;
 	outputText("As she finishes, you realize she didn't even try to restrain you!  Feeling a second wind, you twist out of her grasp before she can take advantage of your new piercing and lash out with a vicious punch.  Ceraph doesn't even try to move.  The demon watches calmly as your fist gets closer and closer, then stops, the punch turning into a gentle caress.  Horrified, you try to smack her with a " + player.leg() + ", but all you manage to do is stroke it along her inner thigh.\n\n", false);
 	
 	outputText("\"<i><i>So, I take it you like it?  You'll never be able to raise a hand in anger again.  I guess if you want to win fights you'll have to tease your foes into submission with that luscious body.  I suppose that might be hard to do when you're getting off on exposing yourself and cumming from the thought of being tied down,</i></i>\" she laughs.\n\n", false);
@@ -426,7 +426,7 @@ function ceraphFirstTime():void {
 	outputText("A cute goblin steps out of the bushes, holding a pair of green earrings up to the light.  She politely asks, \"<i><i>Hey cutey!  I've got some spare earrings I made the other day.  I was wondering if you want them?  As you can see, my ears are already full, and my daughters are a bunch of ungrateful cunts.</i></i>\"\n\n", false);
 	
 	outputText("The goblin's ears are covered in a dazzling array of piercings of all varieties.  She isn't dressed nearly as slutty as most of the goblins you've seen.\n\n", false);outputText("Do you let her put the earrings in your ears?", false);
-	flags[UNKNOWN_FLAG_NUMBER_00024] = 1;
+	flags[PC_MET_CERAPH] = 1;
 	doYesNo(ceraphFirstTimeVolunteer,ceraphFirstTimeDecline);
 }
 
@@ -460,7 +460,7 @@ function ceraphFirstTimeVolunteer():void {
 	player.earsPierced = 1;
 	player.earsPShort = "green gem-stone ear-studs";
 	player.earsPLong = "Green gem-stone ear-studs";
-	flags[UNKNOWN_FLAG_NUMBER_00023] = 1;
+	flags[PC_FETISH] = 1;
 	doNext(13);
 }
 
@@ -551,7 +551,7 @@ function yesOHGODYESPIERCELEVEL3():void {
 	outputText("  As she finishes, you feel grateful that she's so willing to lavish you with such sexy jewelry and teach you how to enjoy these wonderful new experiences.  You give her a wet kiss, wondering what she's done to you, but in the end you don't really care.  Somehow you know it's going to make you feel even more like a horny, hot, and obedient sex-pot for your demonic mistress.\n\n", false);  
 	outputText("\"<i><i>So, I take it you like it?  You'll never be able to raise a hand in anger again.  I guess if you want to win fights you'll have to tease your foes into submission with that luscious body.  I suppose that might be hard to do when you're getting off on exposing yourself and cumming from the thought of being tied down,</i></i>\" she laughs.\n\n", false);
 	outputText("You tremble with barely restrained lust as the demoness flounces away.  You'd pursue her, but between her ideas and exposing your crotch to the entire area, you need to cum more than anything in the world.  You scurry back to camp, too horny to think straight and your new piercing aching just enough to keep you from forgetting about it.", false);
-	flags[UNKNOWN_FLAG_NUMBER_00023] = 3;
+	flags[PC_FETISH] = 3;
 	doNext(13);
 }
 
@@ -582,7 +582,7 @@ function ceraphSpecial1():void {
 		else {
 			monster.removeStatusAffect("Uber");
 			//(Avoid!)
-			if(flags[UNKNOWN_FLAG_NUMBER_00022] == 1) {
+			if(flags[IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) {
 				outputText("She throws her hands out, palms facing you, and a rush of pink flame washes towards you.  Thanks to your decision to wait, it's easy to avoid the onrushing flames and her attack.\n\n", false);
 				outputText("Ceraph sighs and asks, \"<i><i>Why would you move?  It would make you feel soooo good!</i></i>\"", false);
 			}
@@ -601,7 +601,7 @@ function ceraphSpecial2():void {
 	if(player.hasStatusAffect("Bound") < 0) {
 		outputText("Ceraph snaps her whip at you, lightning fast.  Unable to avoid the blinding speed of her attack, you find yourself wrapped from head to toe in the strong leather of her whip.  Remarkably, the fire dies out everywhere the whip touches you, leaving you bound but unharmed.", false);
 		//If player has l2 piercing
-		if(flags[UNKNOWN_FLAG_NUMBER_00023] >= 2) {
+		if(flags[PC_FETISH] >= 2) {
 			outputText("  Gods this turns you on!", false);
 			stats(0,0,0,0,0,0,5,0);
 		}
@@ -632,7 +632,7 @@ function ceraphBindingStruggle():void {
 	outputText("You wriggle in the tight binding, trying your best to escape.  ", false);
 	if(player.statusAffectv1("Bound") - 1 <= 0) {
 		outputText("With a mighty twist and stretch, the whip gives and uncurls from you all at once.  You've regained your freedom", false);
-		if(flags[UNKNOWN_FLAG_NUMBER_00023] >= 2) {
+		if(flags[PC_FETISH] >= 2) {
 			outputText(", though you miss the tight leathery embrace", false);
 		}
 		outputText("!", false);
@@ -642,7 +642,7 @@ function ceraphBindingStruggle():void {
 	}
 	else {
 		outputText("Despite your frantic struggling, all you manage to do is chafe against her impressively taut leather whip.", false);
-		if(flags[UNKNOWN_FLAG_NUMBER_00023] >= 2) {
+		if(flags[PC_FETISH] >= 2) {
 			outputText("  You get nice and hot from being so effectively restrained, maybe you should just accept it?", false);
 		}
 		player.addStatusValue("Bound",1,-1);
@@ -660,7 +660,7 @@ function ceraphBindingStruggle():void {
 function ceraphBoundWait():void {
 	outputText("", true);
 	outputText("Why bother resisting?  The feeling of the leather wrapped tightly around you, digging into your " + player.skinDesc + ", is intoxicating.", false);
-	if(flags[UNKNOWN_FLAG_NUMBER_00023] >= 2) {
+	if(flags[PC_FETISH] >= 2) {
 		outputText("  You squirm inside the bindings as you get more and more turned on, hoping that Ceraph will strip away your armor and force you to parade around as her bound, naked pet.", false);
 		stats(0,0,0,0,0,0,5,0);
 	}
@@ -815,30 +815,30 @@ function encounterCeraph():void {
 	//Just in case set up next button for 1 hr + camp
 	doNext(13);
 	//If havent met her
-	if(flags[UNKNOWN_FLAG_NUMBER_00024] == 0) {
+	if(flags[PC_MET_CERAPH] == 0) {
 		spriteSelect(7);
 		ceraphFirstTime();
 		return;
 	}
 	//If still not fetished by her
-	if(flags[UNKNOWN_FLAG_NUMBER_00023] == 0) {
+	if(flags[PC_FETISH] == 0) {
 		spriteSelect(7);
 		ceraphFirstTimeRepeat();
 		return;
 	}
 	//If fetished level 1
-	if(flags[UNKNOWN_FLAG_NUMBER_00023] == 1) {
+	if(flags[PC_FETISH] == 1) {
 		outputText("Though you spend an hour exploring, you don't find anything of note.", true);
 		return;
 	}
 	//fetished level 2
-	if(flags[UNKNOWN_FLAG_NUMBER_00023] == 2) {
+	if(flags[PC_FETISH] == 2) {
 		spriteSelect(7);
 		level3CeraphOffer();
 		return;
 	}
 	//fetished level 3
-	if(flags[UNKNOWN_FLAG_NUMBER_00023] == 3) {
+	if(flags[PC_FETISH] == 3) {
 		spriteSelect(7);
 		finalEncounterLevelCeraphPiercingButtholeNipples();
 		return;
@@ -900,9 +900,9 @@ function loseFUCKME():void {
 	//Reset rape count if lost
 	flags[UNKNOWN_FLAG_NUMBER_00291] = 0;
 	spriteSelect(7);
-	if(flags[UNKNOWN_FLAG_NUMBER_00023] == 0) eventParser(2320);
-	else if(flags[UNKNOWN_FLAG_NUMBER_00023] == 1) eventParser(2321);
-	else if(flags[UNKNOWN_FLAG_NUMBER_00023] == 2) eventParser(2322);
+	if(flags[PC_FETISH] == 0) eventParser(2320);
+	else if(flags[PC_FETISH] == 1) eventParser(2321);
+	else if(flags[PC_FETISH] == 2) eventParser(2322);
 	else {
 		ceraphRapesYouBADDAWGYODIGGITY();
 	}
@@ -912,7 +912,7 @@ function ceraphRapesYouBADDAWGYODIGGITY():void {
 	slimeFeed();
 	spriteSelect(7);
 	outputText("", true);
-	if((gameState < 1 || gameState > 2) && flags[UNKNOWN_FLAG_NUMBER_00023] < 3) outputText("The demoness touches your forehead, and suddenly your mind is awash with fetishes!  Judging by the playful look she has, it's temporary, and you play along.  ", false);
+	if((gameState < 1 || gameState > 2) && flags[PC_FETISH] < 3) outputText("The demoness touches your forehead, and suddenly your mind is awash with fetishes!  Judging by the playful look she has, it's temporary, and you play along.  ", false);
 	outputText("Ceraph throws her head back and laughs as you ", false);
 	if(player.HP < 1) outputText("slump down, defeated", false);
 	else outputText("give up and start masturbating", false);
@@ -985,7 +985,7 @@ function hugeCorruptionForceFuckCeraph():void {
 	
 	outputText("She doesn't seem to mind receiving it at all.  You push forwards into the clenching tightness of a demon's pussy and groan with delight at the feeling of her tight walls clamping down on you.  The once-dominatrix's belly visibly distorts, mirroring the shape of your member as her cunt expands to handle you.  Her curvy hips visibly shift, spreading apart as Ceraph's body bends to your will.  Your " + cockHead(x) + " hits a token block of resistance, but a quick spurt of black, transformative cum dilates her cervix to allows you to pass through. The demonic love canal continues to widen in order to accept the gift of your " + cockDescript(x) + " and you have an easy time pushing the distortion past her belly button to just below her large, firm breasts.\n\n", false);
 	
-	outputText("Even with your dark magic twisting her body, it doesn't look like Ceraph's body can take any more.  Her mind sure as hell can't; her eyes are rolled most of the way back and she's panting pornographic nonsense, \"<i><i>Fuck.. ahh... pussy-cock... oooh... so... big... more... cum-sleeve...</i></i>\"  You're a bit disappointed that you've broken her already, but it quickly fades when you feel her body sucking more of you inside her.  It might be her inherent magic falling under your influence, or maybe her fractured personality has decided to assist you in fully penetrate her.  Whatever the case, a cylindrical bulge forms between her tits, mirroring every vein of your " + cockDescript(x) + " through her skin.\n\n", false);
+	outputText("Even with your dark magic twisting her body, it doesn't look like Ceraph's body can take any more.  Her mind sure as hell can't; her eyes are rolled most of the way back and she's panting pornographic nonsense, \"<i><i>Fuck.. ahh... pussy-cock... oooh... so... big... more... cum-sleeve...</i></i>\"  You're a bit disappointed that you've broken her already, but it quickly fades when you feel her body sucking more of you inside her.  It might be her inherent magic falling under your influence, or maybe her fractured personality has decided to assist you in fully penetrating her.  Whatever the case, a cylindrical bulge forms between her tits, mirroring every vein of your " + cockDescript(x) + " through her skin.\n\n", false);
 	
 	outputText("Ceraph's throat balloons out to handle your girth, just in time for her to suck you further inside.  You aren't even pushing forwards at this point; her entire body feels like the inside of a succubus' cunt, entirely focused on pleasing male organs.  Her babbles cut off into pleased gurgles, and then die down entirely.  You aren't sure how she's breathing, but her jaw unhinges and stretches obscenely.  You can actually see your tainted pre-cum spilling out from between her lips to run down her face, and then your cunt-slicked tip is tasting the air.", false);
 	if(player.cocks[x].cockLength < 68) outputText("  It's impossible!  You aren't long enough for that.  Her body must have shrunk itself to a more appropriate length...", false);
@@ -1021,7 +1021,7 @@ function hugeCorruptionForceFuckCeraph():void {
 		return;
 	}
 	outputText("  That's rarer than you know, so I'm feeling a little generous.  ", false);
-	if(flags[UNKNOWN_FLAG_NUMBER_00023] > 0) outputText("I'll remove some of my magic from you if you want, and I'll even let you keep the piercing.  Would you like that?", false);
+	if(flags[PC_FETISH] > 0) outputText("I'll remove some of my magic from you if you want, and I'll even let you keep the piercing.  Would you like that?", false);
 	else outputText("I'd be willing to give you a few extra gems to keep you motivated to do something like this again.  I LIKE surprises. How about it?", false);
 	outputText("</i></i>\"\n\n", false);
 	if(player.statusAffectv1("Exgartuan") == 1) {
@@ -1038,12 +1038,12 @@ function hugeCorruptionForceFuckCeraph():void {
 function ceraphsNiceOffer():void {
 	outputText("", true);
 	spriteSelect(7);
-	if(flags[UNKNOWN_FLAG_NUMBER_00023] > 0) {
+	if(flags[PC_FETISH] > 0) {
 		outputText("Ceraph touches your forehead, and it feels like her claws are raking through your brain, plowing through the surface of your thoughts.  She pulls away, leaving you feeling a little dazed.  You blink and mentally go over your fetishes - ", false);
-		if(flags[UNKNOWN_FLAG_NUMBER_00023] == 1) outputText("your exhibitionism is gone!", false);
-		else if(flags[UNKNOWN_FLAG_NUMBER_00023] == 2) outputText("your bondage fetish is gone!", false);
+		if(flags[PC_FETISH] == 1) outputText("your exhibitionism is gone!", false);
+		else if(flags[PC_FETISH] == 2) outputText("your bondage fetish is gone!", false);
 		else outputText("your pacifism is gone!", false);
-		flags[UNKNOWN_FLAG_NUMBER_00023]--;
+		flags[PC_FETISH]--;
 	}
 	else {
 		outputText("Ceraph shakes some of the jism out of her hair and reaches under the tangled mass.  Her hand comes out with a small pouch of gems, and she tosses them to you.  You open it up and are surprised to find 10 gems inside.", false);
@@ -1109,7 +1109,7 @@ function runFromCeraphsNiceDeal():void {
 	if(player.cor > 66) outputText("grab your equipment and ", false);
 	outputText("beat a hasty retreat from the trickster of fetishes.  Her masturbatory moans chase you down the mountainside back towards your camp, spiking the already-burning furnace of your lust.", false);
 	//(+10 lust + 10lust/piercing)
-	stats(0,0,0,0,0,0,(10 + flags[UNKNOWN_FLAG_NUMBER_00023] * 10),0);
+	stats(0,0,0,0,0,0,(10 + flags[PC_FETISH] * 10),0);
 	doNext(13);
 }
 
@@ -1124,7 +1124,7 @@ function tradeCeraphSomething():void {
 	//(BIMBO LIQUER) 
 	if(hasItem("BimboLq",1)) {
 		outputText("She finishes and smiles widely.  \"<i>Is that bimbo liqueur?  That stuff is so hard to find, even for a demon like me.  I tell you what, I'll release you from ", false);
-		if(flags[UNKNOWN_FLAG_NUMBER_00023] > 1) outputText("all the fetishes", false);
+		if(flags[PC_FETISH] > 1) outputText("all the fetishes", false);
 		else outputText("the fetish", false);
 		outputText(" I've placed upon you if you'll trade me that stuff.  There's a naughty boy in my harem whose quick wit I've begun to tire of.", false);
 		if(player.gender > 0 || player.biggestTitSize() > 2) outputText("  Or if you'd rather keep it, I could take one of your endowments for my own use and remove a single fetish.  It's always fun giving one of my old pets a new part to play with.", false);
@@ -1135,14 +1135,14 @@ function tradeCeraphSomething():void {
 	//(No Bimbo Liquer) 
 	else if(player.gender > 0 || player.biggestTitSize() > 2) {
 		outputText("She finishes and perks up, leering lewdly at you.  \"<i>I tell you what.  Let me take one of your endowments to use on my pets and I'll get rid of ", false);
-		if(flags[UNKNOWN_FLAG_NUMBER_00023] == 1) outputText("your fetish for you.</i>\"\n\n", false);
+		if(flags[PC_FETISH] == 1) outputText("your fetish for you.</i>\"\n\n", false);
 		else outputText("one of your fetishes for you.</i>\"\n\n", false);
 		endowment = 2872;
 	}
 	//(NO TRADE)
 	else {
 		outputText("She finishes and frowns.  \"<i>I don't think you've got a single thing worth trading.", false);
-		if(flags[UNKNOWN_FLAG_NUMBER_00023] < 2) {
+		if(flags[PC_FETISH] < 2) {
 			armor = 2870;
 			outputText("Don't fret your " + player.mf("pretty little head","charming little head") + ", Mistress Ceraph is nothing if not generous to her pets.  I can give you some beautiful armor to entice your foes with, wouldn't that be lovely?", false);
 		}
@@ -1176,7 +1176,7 @@ function tradeCeraphBimboLiqueur():void {
 	outputText("You mention the deal and she glares back at you in irritation.  Her beautiful features curl with anger, a hand coming out of nowhere to slap you squarely on the side of the temple.  \"<i>Don't interrupt me, pet.</i>\"  Ears ringing, you stagger back, clutching at your head in surprise.  By the time you glare back at her, she's walking away.  You briefly consider giving her payback, but you realize your head feels clearer, more normal.  The artificial fetishes are gone!  While you catalogue lewd acts in your head and marvel at how little they affect you, Ceraph makes good on her escape.", false);
 	consumeItem("BimboLq",1);
 	takeDamage(4);
-	flags[UNKNOWN_FLAG_NUMBER_00023] = 0;
+	flags[PC_FETISH] = 0;
 	stats(0,0,0,0,0,0,-20,0);
 	doNext(13);
 }
@@ -1312,7 +1312,7 @@ function giveUpYourBallsOrWhateverForLessFetishes():void {
 		//PYOING!
 		player.removeCock(x,1);
 		//(-fetish, +cock-toy status +1)
-		flags[UNKNOWN_FLAG_NUMBER_00023]--;
+		flags[PC_FETISH]--;
 		flags[UNKNOWN_FLAG_NUMBER_00218]++;
 		stats(0,0,0,0,-2,-2,0,5);
 	}
@@ -1328,7 +1328,7 @@ function giveUpYourBallsOrWhateverForLessFetishes():void {
 		player.removeVagina(0,1);
 		//(-100 lust, -1 fetish, +1 vagina toy status)
 		stats(0,0,0,0,0,0,-100,5);
-		flags[UNKNOWN_FLAG_NUMBER_00023]--;
+		flags[PC_FETISH]--;
 		flags[UNKNOWN_FLAG_NUMBER_00219]++;
 	}
 	//(Tits) 
@@ -1378,7 +1378,7 @@ function giveUpYourBallsOrWhateverForLessFetishes():void {
 		outputText("Ceraph turns and prances off through the rocks, tweaking your nipples HARD every time you start to make a move to follow her.  It's no use.  She vanishes before long, leaving you to deal with the slowly dwindling sensation of her cock in your tits.\n\n", false);
 		//(-1 fetish, +1 tit toy status)
 		stats(0,0,0,0,0,0,20,5);
-		flags[UNKNOWN_FLAG_NUMBER_00023]--;
+		flags[PC_FETISH]--;
 		flags[UNKNOWN_FLAG_NUMBER_00220]++;
 	}
 	//Fix any gender mixmatches

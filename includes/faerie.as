@@ -202,7 +202,7 @@ function faerieCaptureHJ():void {
 	//Taurs get a special scene!
 	if(player.isTaur()) {
 		outputText("The tiny Faerie climbs on top of your " + cockDescript(0), false);
-		if(player.cockTotal() > 0) outputText("largest " + cockNoun(CockTypesEnum.HUMAN), false);
+		if(player.cockTotal() > 0) outputText("largest " + Appearance.cockNoun(CockTypesEnum.HUMAN), false);
 		outputText(" and crawls about on it for a while, getting used to its shape and taking in deep lungfuls of its musky odour. She wraps herself around you and begins rubbing herself up and down your hard length. As she moves around her tiny slit leaks cum in long streaks, teasing you with a cunt you can't penetrate. Pre begins to leak steadily from your tip as the faerie continues to work her way around, moaning quietly and betraying her inner desire.\n\n", false);
 		outputText("Your body begins to naturally jerk forward and backward, attempting to hump the mare that isn't there. You can feel the faerie sliding about until she clenches onto you tighter, which only serves to make you hump harder. Realizing her mistake too late, she attempts to loosen herself, but your wild bucking sends her flying forward.\n\n", false);
 		outputText("She smashes onto the end of your " + multiCockDescriptLight() + " and grasps at it. Her face crushes into your urethra as her tiny legs wrap themselves around the tip. Your wildly flailing cock starts to grow larger as your orgasm approaches, but the faerie doesn't notice as she happily drinks up your pre.\n\n", false);

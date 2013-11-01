@@ -1,38 +1,38 @@
 const UNKNOWN_FLAG_NUMBER_00000:int                                   =    0;
-const UNKNOWN_FLAG_NUMBER_00001:int                                   =    1; // Marble Pregnancy Incubation
-const UNKNOWN_FLAG_NUMBER_00002:int                                   =    2; // Marble Pregnancy Type" Description="1 = cowgirl
+const MARBLE_PREGNACY_INCUBATION:int                                  =    1; // Marble Pregnancy Incubation
+const MARBLE_PREGNACY_TYPE:int                                        =    2; // Marble Pregnancy Type" Description="1 = cowgirl
 const MARBLE_LUST:int                                                 =    3; // Marble Lust
-const UNKNOWN_FLAG_NUMBER_00004:int                                   =    4; // Marble Dick Type
-const UNKNOWN_FLAG_NUMBER_00005:int                                   =    5; // Marble Dick Length
-const UNKNOWN_FLAG_NUMBER_00006:int                                   =    6; // Marble Dick Thickness
-const UNKNOWN_FLAG_NUMBER_00007:int                                   =    7; // Marble Dooty. Haha doody.  (DUTY)
+const MARBLE_DICK_TYPE:int                                            =    4; // Marble Dick Type
+const MARBLE_DICK_LENGTH:int                                          =    5; // Marble Dick Length
+const MARBLE_DICK_THICKNESS:int                                       =    6; // Marble Dick Thickness
+const MARBLE_UNUSED_DOOTY:int                                         =    7; // Marble Dooty. Haha doody.  (DUTY) Seems unused
 const MARBLE_KIDS:int                                                 =    8; // 
-const UNKNOWN_FLAG_NUMBER_00009:int                                   =    9; // Marble's Bitch-Bin (0 = not start, less than 100 = in progress.  100 = Finished
-const UNKNOWN_FLAG_NUMBER_00010:int                                   =   10; // HAS WORM CUM DISPLAYED YET?
-const UNKNOWN_FLAG_NUMBER_00011:int                                   =   11; // URTA - times fucked
-const UNKNOWN_FLAG_NUMBER_00012:int                                   =   12; // URTA - horsecock comfort level (-1 = hates self, no luvs)
-const UNKNOWN_FLAG_NUMBER_00013:int                                   =   13; // URTA - hours until can be horny again
-const UNKNOWN_FLAG_NUMBER_00014:int                                   =   14; // URTA - seen Urta's toyz?
-const UNKNOWN_FLAG_NUMBER_00015:int                                   =   15; // Akbal resisted?  - 1 means the PC has resisted at least once
-const UNKNOWN_FLAG_NUMBER_00016:int                                   =   16; // Akbal submission counter
-const UNKNOWN_FLAG_NUMBER_00017:int                                   =   17; // Akbal submission state. -1=Lost to him, 1=Beaten him, 2=Akbal is your bitch
-const UNKNOWN_FLAG_NUMBER_00018:int                                   =   18; // Minotaur cum Addiction Tracker
-const UNKNOWN_FLAG_NUMBER_00019:int                                   =   19; // Time Since Last Minocum fix
-const UNKNOWN_FLAG_NUMBER_00020:int                                   =   20; // Current Addict State (0 = normal, 1= addicted, 1 = needy, 2= withdrawal)
-const UNKNOWN_FLAG_NUMBER_00021:int                                   =   21; // lust status affect timer
-const UNKNOWN_FLAG_NUMBER_00022:int                                   =   22; // Did PC Wait in combat?
-const UNKNOWN_FLAG_NUMBER_00023:int                                   =   23; // Fetish Level 1 - exhibitionism, 2 - bondage, 3 - pacifism
-const UNKNOWN_FLAG_NUMBER_00024:int                                   =   24; // Met Ceraph
-const UNKNOWN_FLAG_NUMBER_00025:int                                   =   25; // Increased Hair-growth Days Left
-const UNKNOWN_FLAG_NUMBER_00026:int                                   =   26; // Increased Hair-growth stack
-const UNKNOWN_FLAG_NUMBER_00027:int                                   =   27; // Cheat Input Counter
-const UNKNOWN_FLAG_NUMBER_00028:int                                   =   28; // Cheat Break Counter
-const UNKNOWN_FLAG_NUMBER_00029:int                                   =   29; // Urta love counter
-const UNKNOWN_FLAG_NUMBER_00030:int                                   =   30; // Urta Love Level
-const UNKNOWN_FLAG_NUMBER_00031:int                                   =   31; // Urta pissed countdown
-const UNKNOWN_FLAG_NUMBER_00032:int                                   =   32; // Marble Cockblock happened = 0 - no, 1 = yes
-const UNKNOWN_FLAG_NUMBER_00033:int                                   =   33; // Seen Urta be a badass?
-const UNKNOWN_FLAG_NUMBER_00034:int                                   =   34; // Last year xmas elf encountered
+const MARBLE_NURSERY_CONSTRUCTION:int                                 =    9; // Marble's Bitch-Bin (0 = not start, less than 100 = in progress.  100 = Finished
+const PLAYER_PREGGO_WITH_WORMS:int                                    =   10; // (I think)// HAS WORM CUM DISPLAYED YET? 
+const TIMES_FUCKED_URTA:int                                           =   11; // URTA - times fucked
+const URTA_COMFORTABLE_WITH_OWN_BODY:int                              =   12; // URTA - horsecock comfort level (-1 = hates self, no luvs)
+const URTA_TIME_SINCE_LAST_CAME:int                                   =   13; // URTA - hours until can be horny again
+const PC_SEEN_URTA_SEX_TOYS:int                                       =   14; // URTA - seen Urta's toyz?
+const PLAYER_RESISTED_AKBAL:int                                       =   15; // Akbal resisted?  - 1 means the PC has resisted at least once
+const AKBAL_SUBMISSION_COUNTER:int                                    =   16; // Akbal submission counter
+const AKBAL_SUBMISSION_STATE:int                                      =   17; // Akbal submission state. -1=Lost to him, 1=Beaten him, 2=Akbal is your bitch
+const MINOTAUR_CUM_ADDICTION_TRACKER:int                              =   18; // Minotaur cum Addiction Tracker
+const TIME_SINCE_LAST_CONSUMED_MINOTAUR_CUM:int                       =   19; // Time Since Last Minocum fix
+const MINOTAUR_CUM_ADDICTION_STATE:int                                =   20; // Current Addict State (0 = normal, 1= addicted, 1 = needy, 2= withdrawal)
+const MINOTAUR_CUM_REALLY_ADDICTED_STATE:int                          =   21; // lust status affect timer
+const IN_COMBAT_USE_PLAYER_WAITED_FLAG:int                            =   22; // Did PC Wait in combat?
+const PC_FETISH:int                                                   =   23; // Fetish Level 1 - exhibitionism, 2 - bondage, 3 - pacifism
+const PC_MET_CERAPH:int                                               =   24; // Met Ceraph
+const INCREASED_HAIR_GROWTH_TIME_REMAINING:int                        =   25; // Increased Hair-growth Days Left
+const INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED:int                   =   26; // Increased Hair-growth stack
+const CHEAT_ENTERING_COUNTER:int                                      =   27; // Cheat Input Counter
+const TIMES_CHEATED_COUNTER:int                                       =   28; // Cheat Break Counter
+const URTA_PC_AFFECTION_COUNTER:int                                   =   29; // Urta love counter
+const URTA_PC_LOVE_COUNTER:int                                        =   30; // Urta Love Level
+const URTA_ANGRY_AT_PC_COUNTDOWN:int                                  =   31; // Urta pissed countdown
+const URTA_KNOWS_PC_HAS_MARBLE_FOLLOWER:int                           =   32; // Marble Cockblock happened = 0 - no, 1 = yes
+const PC_SEEN_URTA_BADASS_FIGHT:int                                   =   33; // Seen Urta be a badass?
+const PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE:int                         =   34; // Last year xmas elf encountered
 const AMILY_MET:int                                                   =   35; //   (0 = not met, 1 = met)Amily Met.	 0=Not Met, 1=Met
 const AMILY_VILLAGE_ENCOUNTERS_DISABLED:int                           =   36; //  1=true,44=village buttonAmily Village Encounters Disabled.	 1=True, 44=Village Button?
 const AMILY_GROSSED_OUT_BY_WORMS:int                                  =   37; //  1=freaked out-Amily encounters disabled due to worms 0=False, 1= True
@@ -1016,8 +1016,8 @@ const RUBI_SETUP:int                                                  = 1014; //
 const EXPLORATION_PAGE:int                                            = 1015; // 
 const BOG_EXPLORED:int                                                = 1016; // 
 const TIMES_ENCOUNTERED_FROG:int                                      = 1017; // 
-const UNKNOWN_FLAG_NUMBER_01018:int                                   = 1018;
-const UNKNOWN_FLAG_NUMBER_01019:int                                   = 1019;
+const FERAS_GLADE_EXPLORED_YEAR:int                                   = 1018;
+const FERAS_TRAP_SPRUNG_YEAR:int                                      = 1019;
 const UNKNOWN_FLAG_NUMBER_01020:int                                   = 1020;
 const UNKNOWN_FLAG_NUMBER_01021:int                                   = 1021;
 const UNKNOWN_FLAG_NUMBER_01022:int                                   = 1022;
@@ -2994,7 +2994,7 @@ const UNKNOWN_FLAG_NUMBER_02992:int                                   = 2992;
 const UNKNOWN_FLAG_NUMBER_02993:int                                   = 2993;
 const UNKNOWN_FLAG_NUMBER_02994:int                                   = 2994;
 const UNKNOWN_FLAG_NUMBER_02995:int                                   = 2995;
-const UNKNOWN_FLAG_NUMBER_02996:int                                   = 2996;
+const ITS_EVERY_DAY:int                                               = 2996; // all special calender events occur every day!
 const LOW_STANDARDS_FOR_ALL:int                                       = 2997;
 const HYPER_HAPPY:int                                                 = 2998;
 const UNKNOWN_FLAG_NUMBER_02999:int                                   = 2999; // ------------------------- Jojo Debug Flag?

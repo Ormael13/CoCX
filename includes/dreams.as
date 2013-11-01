@@ -45,11 +45,11 @@ function dreamSelect():Boolean {
 		if(player.hasPerk("Minotaur Cum Addict") >= 0) choices[choices.length] = 6;
 	}
 	//Akbal
-	if(flags[UNKNOWN_FLAG_NUMBER_00016] > 4) {
-		if(flags[UNKNOWN_FLAG_NUMBER_00016] > 10) choices[choices.length] = 7;
-		if(flags[UNKNOWN_FLAG_NUMBER_00016] > 13) choices[choices.length] = 7;
-		if(flags[UNKNOWN_FLAG_NUMBER_00016] > 15) choices[choices.length] = 7;
-		if(flags[UNKNOWN_FLAG_NUMBER_00016] > 18) choices[choices.length] = 7;
+	if(flags[AKBAL_SUBMISSION_COUNTER] > 4) {
+		if(flags[AKBAL_SUBMISSION_COUNTER] > 10) choices[choices.length] = 7;
+		if(flags[AKBAL_SUBMISSION_COUNTER] > 13) choices[choices.length] = 7;
+		if(flags[AKBAL_SUBMISSION_COUNTER] > 15) choices[choices.length] = 7;
+		if(flags[AKBAL_SUBMISSION_COUNTER] > 18) choices[choices.length] = 7;
 		choices[choices.length] = 7;
 		choices[choices.length] = 7;
 	}

@@ -139,7 +139,7 @@ function edrynBarTalk():void {
 	else if(player.totalCocks() > 0) {
 		if(player.horseCocks() > 0) {
 			outputText("and the potent female scent makes you feel a bit dizzy and dazed.  ", false);
-			if(player.cocks[0].cockLength > 16) outputText("You barely register the thump of your hardening " + cockNoun(CockTypesEnum.HORSE) + " as it smacks into the underside of the table.\n\n", false);
+			if(player.cocks[0].cockLength > 16) outputText("You barely register the thump of your hardening " + Appearance.cockNoun(CockTypesEnum.HORSE) + " as it smacks into the underside of the table.\n\n", false);
 			else outputText("You squirm uncomfortably, feeling constrained by your " + player.armorName + " as you surge to erectness.\n\n", false);
 			outputText("Swaying back and forth in a scent induced haze, you fail to notice Edryn's return.  She coughs noisily, drawing you back to the real world and pushing away the memory of her glistening snatch.  You start to fumble for words until you realize she's smiling knowingly at you.  Unexpectedly, caresses slide against your groin, hefting and measuring you through your " + player.armorName + ".\n\n", false);
 			stats(0,0,0,0,0,0,60,0);
@@ -406,7 +406,7 @@ function fuckEdrynNonTaur():void {
 	outputText("Supporting your", false);
 	if(player.cockArea(x) > 200) outputText(" hefty package with both hands", false);
 	else outputText("self with your hand", false);
-	outputText(", you guide your " + cockDescript(x) + " towards the shining, black horse-cunt in front of you.  It parts easily, like a velvet curtain.  You slowly slide forward into Edryn's welcoming nethers, enjoying not having to fight to get your large " + cockNoun(CockTypesEnum.HUMAN) + " in for a change.  She trembles as you pass the halfway point, ", false);
+	outputText(", you guide your " + cockDescript(x) + " towards the shining, black horse-cunt in front of you.  It parts easily, like a velvet curtain.  You slowly slide forward into Edryn's welcoming nethers, enjoying not having to fight to get your large " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " in for a change.  She trembles as you pass the halfway point, ", false);
 	if(player.cocks[x].cockType == CockTypesEnum.HORSE) outputText("feeling your ring of prepuce slipping between her lips.  ", false);
 	else outputText("squirting little bit of fluid on the floor.  ", false);
 	outputText("The further you push inside, the more aware of her warmth you become.  Her body temperature is higher than a human's, and it feels almost good enough to make you melt.\n\n", false);
@@ -854,7 +854,7 @@ function fuckPregEdryn():void {
 		
 		outputText("Edryn breaks the kiss with a strand of spit hanging in the middle.  She giggles euphorically, \"<i>Wow.  Ummm, wow!  That was nice!  Now get off me you ", false);
 		if(player.tallness > 74) outputText("big ", false);
-		outputText("lug!</i>\"  She playfully pushes you back and tries to drag herself out from under you.  You laugh with her and pull back, letting your softening " + cockNoun(CockTypesEnum.HUMAN) + " pull free from her cum-glazed twat.  It escapes with a wet squish, releasing a torrent of centaur cum from the unplugged opening.\n\n", false);
+		outputText("lug!</i>\"  She playfully pushes you back and tries to drag herself out from under you.  You laugh with her and pull back, letting your softening " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " pull free from her cum-glazed twat.  It escapes with a wet squish, releasing a torrent of centaur cum from the unplugged opening.\n\n", false);
 		
 		outputText("After you both get a chance to stagger up to your feet and get dressed, Edryn thanks you, \"<i>That was wonderful dear.  I'll probably be horny and dripping again in a few minutes, so please come back soon.  I think I'm going to be a sopping wet mess until our child is born.</i>\"\n\n", false);
 	}
@@ -893,7 +893,7 @@ function jizzFromEatingPregdrynOut():void {
 	
 	outputText("You tremble as you pull away, licking her lust from your lips and gasping for air as you shift to lick at her clit.", false);
 	if(player.lowerBody == 4) {
-		outputText("  Your hooves twitch weekly on the floor, forgetten about as you focus entirely on your hands, mouth, and pulsating " + cockNoun(CockTypesEnum.HUMAN), false);
+		outputText("  Your hooves twitch weekly on the floor, forgetten about as you focus entirely on your hands, mouth, and pulsating " + Appearance.cockNoun(CockTypesEnum.HUMAN), false);
 		if(player.cockTotal() > 1) outputText("s", false);
 		outputText(".", false);
 	}

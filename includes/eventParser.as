@@ -73,7 +73,7 @@ function doSystem(eventNo:Number):void {
 			return;
 		}
 		menuLoc = 0;
-		flags[UNKNOWN_FLAG_NUMBER_00010] = 0;
+		flags[PLAYER_PREGGO_WITH_WORMS] = 0;
 		camp();
 	}
 	if(eventNo == 2) doExplore();
@@ -1226,12 +1226,12 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 		//EMBER STUFF
 		if(followerEmber() && player.hasStatusAffect("Ember Napping") < 0) {
 			//Mino cum freakout - PC partly addicted!
-			if(flags[UNKNOWN_FLAG_NUMBER_00020] == 1 && player.hasPerk("Minotaur Cum Addict") < 0 && flags[EMBER_CURRENTLY_FREAKING_ABOUT_MINOCUM] == 0) {
+			if(flags[MINOTAUR_CUM_ADDICTION_STATE] == 1 && player.hasPerk("Minotaur Cum Addict") < 0 && flags[EMBER_CURRENTLY_FREAKING_ABOUT_MINOCUM] == 0) {
 				minotaurJizzFreakout();
 				needNext = true;
 			}
 			//Ember is freaking out about addiction, but PC no longer addicted!
-			else if(flags[UNKNOWN_FLAG_NUMBER_00020] == 0 && flags[EMBER_CURRENTLY_FREAKING_ABOUT_MINOCUM] == 1) {
+			else if(flags[MINOTAUR_CUM_ADDICTION_STATE] == 0 && flags[EMBER_CURRENTLY_FREAKING_ABOUT_MINOCUM] == 1) {
 				emberGetOverFreakingOutAboutMinoJizz();
 				needNext = true;
 			}
@@ -1249,7 +1249,8 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		cottonPregUpdates();
 		//Fix femininity ratings if out of whack!
-		if(player.hasPerk("Androgyny") < 0) textHolder = player.fixFemininity();
+		if(player.hasPerk("Androgyny") < 0) 
+			textHolder = player.fixFemininity();
 		if(textHolder != "") {
 			outputText(textHolder, false);
 			needNext = true;
@@ -1389,9 +1390,9 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		
 		//Count down timer for urta's lust
-		if(flags[UNKNOWN_FLAG_NUMBER_00013] > 0) {
-			flags[UNKNOWN_FLAG_NUMBER_00013]--;
-			if(flags[UNKNOWN_FLAG_NUMBER_00013] < 0) flags[UNKNOWN_FLAG_NUMBER_00013] = 0;
+		if(flags[URTA_TIME_SINCE_LAST_CAME] > 0) {
+			flags[URTA_TIME_SINCE_LAST_CAME]--;
+			if(flags[URTA_TIME_SINCE_LAST_CAME] < 0) flags[URTA_TIME_SINCE_LAST_CAME] = 0;
 		}
 		//Update status of Urta eggs
 		if(flags[URTA_EGG_INCUBATION] > 0) {
@@ -1435,13 +1436,13 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(player.statusAffectv4("Marble") > 50) flags[MARBLE_LUST] += .3;
 			if(player.statusAffectv4("Marble") > 70) flags[MARBLE_LUST] += .3;
 			//If bitch-bin is in construction
-			if(flags[UNKNOWN_FLAG_NUMBER_00009] > 0 && flags[UNKNOWN_FLAG_NUMBER_00009] < 100) {
-				flags[UNKNOWN_FLAG_NUMBER_00009]++;
-				if(flags[UNKNOWN_FLAG_NUMBER_00009] >= 100) {
+			if(flags[MARBLE_NURSERY_CONSTRUCTION] > 0 && flags[MARBLE_NURSERY_CONSTRUCTION] < 100) {
+				flags[MARBLE_NURSERY_CONSTRUCTION]++;
+				if(flags[MARBLE_NURSERY_CONSTRUCTION] >= 100) {
 					spriteSelect(41);
 					outputText("\n<b>Marble lets you know that she's finished building a rather secure nursery for your coming offspring.</b>\n", false);
 					needNext = true;
-					flags[UNKNOWN_FLAG_NUMBER_00009] = 100;
+					flags[MARBLE_NURSERY_CONSTRUCTION] = 100;
 				}
 			}
 			
@@ -1473,9 +1474,9 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 		//Mino cum update.
 		if(minoCumUpdate()) needNext = true;
 		//Repeated warnings!
-		else if(flags[UNKNOWN_FLAG_NUMBER_00020] >= 2 && hours % 13 == 0 && flags[UNKNOWN_FLAG_NUMBER_00330] == 0) {
-			if(flags[UNKNOWN_FLAG_NUMBER_00020] == 2) outputText("\n<b>You shiver, feeling a little cold.  Maybe you ought to get some more minotaur cum?  You just don't feel right without that pleasant buzz in the back of your mind.</b>\n", false);
-			else if(flags[UNKNOWN_FLAG_NUMBER_00020] == 3) outputText("\n<b>The steady fire of lust within you burns hot, making you shiver and grab at your head.  You're STILL in withdrawal after having gone so long without a dose of minotaur love.  You just know you're going to be horny and achy until you get some.</b>\n", false);
+		else if(flags[MINOTAUR_CUM_ADDICTION_STATE] >= 2 && hours % 13 == 0 && flags[UNKNOWN_FLAG_NUMBER_00330] == 0) {
+			if(flags[MINOTAUR_CUM_ADDICTION_STATE] == 2) outputText("\n<b>You shiver, feeling a little cold.  Maybe you ought to get some more minotaur cum?  You just don't feel right without that pleasant buzz in the back of your mind.</b>\n", false);
+			else if(flags[MINOTAUR_CUM_ADDICTION_STATE] == 3) outputText("\n<b>The steady fire of lust within you burns hot, making you shiver and grab at your head.  You're STILL in withdrawal after having gone so long without a dose of minotaur love.  You just know you're going to be horny and achy until you get some.</b>\n", false);
 			needNext = true;
 		}
 		//Decrement mino withdrawal symptoms display cooldown
@@ -1490,9 +1491,9 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//Update urta's PO timer
-		if(flags[UNKNOWN_FLAG_NUMBER_00031] > 1) {
-			flags[UNKNOWN_FLAG_NUMBER_00031]--;
-			if(flags[UNKNOWN_FLAG_NUMBER_00031] < 1) flags[UNKNOWN_FLAG_NUMBER_00031] = 1;
+		if(flags[URTA_ANGRY_AT_PC_COUNTDOWN] > 1) {
+			flags[URTA_ANGRY_AT_PC_COUNTDOWN]--;
+			if(flags[URTA_ANGRY_AT_PC_COUNTDOWN] < 1) flags[URTA_ANGRY_AT_PC_COUNTDOWN] = 1;
 		}
 		//Update Amily's preggo counter
 		if(flags[AMILY_INCUBATION] > 1) {
@@ -1876,10 +1877,10 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//Update worm drippy-cooch
-		if(player.hasStatusAffect("worm plugged") >= 0 && flags[UNKNOWN_FLAG_NUMBER_00010] == 0) {
+		if(player.hasStatusAffect("worm plugged") >= 0 && flags[PLAYER_PREGGO_WITH_WORMS] == 0) {
 			if(player.hasVagina()) {
 				if(rand(5) == 0) {
-					flags[UNKNOWN_FLAG_NUMBER_00010] = 1;
+					flags[PLAYER_PREGGO_WITH_WORMS] = 1;
 					outputText("\nA sudden gush of semen-coated worms noisily slurps out of your womb.  It runs down your legs as the worms do their damnedest to escape.  The feeling of so many squiggling forms squirting through your cunt-lips turns you on more than you'd like to admit.  You wonder why they stayed as long as they did, and some part of you worries that their stay may have reduced your capacity to bear children, though in a place like this that might be a blessing.\n", false);
 					needNext = true;
 					stats(0,0,0,0,0,0,2+player.sens/10,0);
@@ -2113,6 +2114,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(player.hasStatusAffect("CuntStretched") >= 0) {
 			player.addStatusValue("CuntStretched",1,1);
 			if(player.vaginas.length > 0) {
+				if(player.hasPerk("Fera's Boon - Wide Open") < 0) {
 				if(player.vaginas[0].vaginalLooseness == 2 && player.statusAffectv1("CuntStretched") >= 200) {
 					outputText("\nYour " + vaginaDescript(0) + " recovers from your ordeals, tightening up a bit.\n", false);
 					player.vaginas[0].vaginalLooseness--;
@@ -2131,8 +2133,9 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 					player.changeStatusValue("CuntStretched",1,0);
 					needNext = true;
 				}
+				}
 				if(player.vaginas[0].vaginalLooseness == 5 && player.statusAffectv1("CuntStretched") >= 50) {
-					outputText("\nYour " + vaginaDescript(0) + " recovers from the brutal stretching it has received and tightens up.\n", false);
+					outputText("\nYour " + vaginaDescript(0) + " recovers from the brutal stretching it has received and tightens up a little bit, but not much.\n", false);
 					player.vaginas[0].vaginalLooseness--;
 					player.changeStatusValue("CuntStretched",1,0);
 					needNext = true;
@@ -2288,7 +2291,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(phyllaWaifu()) flags[DAYS_PHYLLA_IN_CAMP]++;
 			if(flags[SHEILA_CLOCK] < 0) flags[SHEILA_CLOCK]++;
 			if(flags[SHEILA_PREG] > 0) flags[SHEILA_PREG]++;
-			if(flags[UNKNOWN_FLAG_NUMBER_00013] == 0) flags[URTA_CUM_NO_CUM_DAYS]++;
+			if(flags[URTA_TIME_SINCE_LAST_CAME] == 0) flags[URTA_CUM_NO_CUM_DAYS]++;
 			else flags[URTA_CUM_NO_CUM_DAYS] = 0;
 			if(flags[FED_SCYLLA_TODAY] == 1) flags[FED_SCYLLA_TODAY] = 0;
 			//Count Kelt being a bitch
@@ -2368,9 +2371,9 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			//Reduce bad-end for cerulean herms number
 			if(flags[UNKNOWN_FLAG_NUMBER_00061] > 0) flags[UNKNOWN_FLAG_NUMBER_00061] -= 0.5;
 			//Update Urta's luv counter
-			if(flags[UNKNOWN_FLAG_NUMBER_00029] > 0) {
-				flags[UNKNOWN_FLAG_NUMBER_00029] -= .5;
-				if(flags[UNKNOWN_FLAG_NUMBER_00029] < 0) flags[UNKNOWN_FLAG_NUMBER_00029] = 0;
+			if(flags[URTA_PC_AFFECTION_COUNTER] > 0) {
+				flags[URTA_PC_AFFECTION_COUNTER] -= .5;
+				if(flags[URTA_PC_AFFECTION_COUNTER] < 0) flags[URTA_PC_AFFECTION_COUNTER] = 0;
 			}
 			//Latex goo follower daily updates
 			if(latexGooFollower()) {
@@ -2381,9 +2384,9 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 				if(gooHappiness() >= 90) gooObedience(1,false);
 			}
 			//Marble Preggo Counter
-			if(flags[UNKNOWN_FLAG_NUMBER_00001] > 0) {
-				flags[UNKNOWN_FLAG_NUMBER_00001] -= 24;
-				if(flags[UNKNOWN_FLAG_NUMBER_00001] <= 0) flags[UNKNOWN_FLAG_NUMBER_00001] = 1;
+			if(flags[MARBLE_PREGNACY_INCUBATION] > 0) {
+				flags[MARBLE_PREGNACY_INCUBATION] -= 24;
+				if(flags[MARBLE_PREGNACY_INCUBATION] <= 0) flags[MARBLE_PREGNACY_INCUBATION] = 1;
 			}
 			//Tamani's Daughters stuff
 			//Lower countdown till next event
@@ -2440,8 +2443,8 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 			//Lower shark girl counter
 			if(player.statusAffectv1("Shark-Girl") > 0) player.addStatusValue("Shark-Girl",1,-1);
-			if(flags[UNKNOWN_FLAG_NUMBER_00025] > 0) {
-				switch (flags[UNKNOWN_FLAG_NUMBER_00026]) {
+			if(flags[INCREASED_HAIR_GROWTH_TIME_REMAINING] > 0) {
+				switch (flags[INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED]) {
 					case 1:
 						if(!needNext) needNext = growHair(.2);
 						else growHair(.2);
@@ -2457,12 +2460,12 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 					default:
 						break;
 				}
-				flags[UNKNOWN_FLAG_NUMBER_00025]--;
+				flags[INCREASED_HAIR_GROWTH_TIME_REMAINING]--;
 				//reset hair growth multiplier and timer when 
 				//expired.
-				if(flags[UNKNOWN_FLAG_NUMBER_00025] <= 0) {
-					flags[UNKNOWN_FLAG_NUMBER_00025] = 0;
-					flags[UNKNOWN_FLAG_NUMBER_00026] = 0;
+				if(flags[INCREASED_HAIR_GROWTH_TIME_REMAINING] <= 0) {
+					flags[INCREASED_HAIR_GROWTH_TIME_REMAINING] = 0;
+					flags[INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED] = 0;
 					needNext = true;
 					outputText("<b>\nThe tingling on your scalp slowly fades away as the hair extension serum wears off.  Maybe it's time to go back to the salon for more?</b>", false);
 					//Restart hair growth if wuz lizard-stopped
@@ -2509,7 +2512,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 		//BIG EVENTS GO IN HERE
 		//BIG EVENTS GO IN HERE
 		//MARBLE POOPS BAYBEEZ
-		if(flags[UNKNOWN_FLAG_NUMBER_00001] == 1) {
+		if(flags[MARBLE_PREGNACY_INCUBATION] == 1) {
 			marblePoopsBaybees();
 			return true;
 		}		
@@ -2696,7 +2699,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			}	
 		}
 		//XMAS ELF
-		if(hours == 1 && isHolidays() && date.fullYear > flags[UNKNOWN_FLAG_NUMBER_00034]) {
+		if(hours == 1 && isHolidays() && date.fullYear > flags[PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE]) {
 			//Set it to remember the last year encountered
 			xmasBitchEncounter();
 			return true;
@@ -3166,6 +3169,12 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 				//Make sure pregnancy texts aren't hidden
 				if(updatePregnancy()) needNext = true;
 			}
+			if(player.hasPerk("Fera's Boon - Wide Open") >= 0 || player.hasPerk("Fera's Boon - Milking Twat") >= 0) {
+				if(player.pregnancyIncubation > 0) player.pregnancyIncubation--;
+				if(player.buttPregnancyIncubation > 0) player.buttPregnancyIncubation--;
+				//Make sure pregnancy texts aren't hidden
+				if(updatePregnancy()) needNext = true;
+			}
 			if(flags[EVENT_PARSER_ESCAPE] == 1) {
 				flags[EVENT_PARSER_ESCAPE] = 0;
 				return true;
@@ -3235,6 +3244,12 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 				return true;
 			}
 			if(player.hasPerk("Fera's Boon - Breeding Bitch") >= 0) {
+				if(player.pregnancyIncubation > 0) player.pregnancyIncubation--;
+				if(player.buttPregnancyIncubation > 0) player.buttPregnancyIncubation--;
+				//Make sure pregnancy texts aren't hidden
+				if(updatePregnancy()) needNext = true;
+			}
+			if(player.hasPerk("Fera's Boon - Wide Open") >= 0 || player.hasPerk("Fera's Boon - Milking Twat") >= 0) {
 				if(player.pregnancyIncubation > 0) player.pregnancyIncubation--;
 				if(player.buttPregnancyIncubation > 0) player.buttPregnancyIncubation--;
 				//Make sure pregnancy texts aren't hidden
@@ -3394,6 +3409,25 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			return true;
 		}
 	}
+	// update cock type as dog/fox depending on whether the player resembles one more then the other.
+	// Previously used to be computed directly in cockNoun, but refactoring prevents access to the Player class when in cockNoun now.
+	if (player.totalCocks() != 0)
+	{
+		var counter:Number = player.totalCocks() - 1;
+		while (counter >= 0)
+		{
+			if (player.cocks[counter].cockType == CockTypesEnum.DOG || player.cocks[counter].cockType == CockTypesEnum.FOX)
+			{
+				if (player.dogScore() >= player.foxScore())
+					player.cocks[counter].cockType = CockTypesEnum.DOG;
+				else
+					player.cocks[counter].cockType = CockTypesEnum.FOX;
+			}
+			counter--;
+			trace("IMA LOOPIN", counter);
+		}
+		
+	}	
 	statScreenRefresh();
 	if(needNext || defNext) {
 		doNext(1);

@@ -516,27 +516,27 @@ package classes
 		//Determine Fox Rating
 		public override function foxScore():Number
 		{
-			var dogCounter:Number = 0;
+			var foxCounter:Number = 0;
 			if (faceType == 11)
-				dogCounter++;
+				foxCounter++;
 			if (earType == 9)
-				dogCounter++;
+				foxCounter++;
 			if (tailType == 13)
-				dogCounter++;
+				foxCounter++;
 			if (lowerBody == 17)
-				dogCounter++;
-			if (dogCocks() > 0 && dogCounter > 0)
-				dogCounter++;
-			if (breastRows.length > 1 && dogCounter > 0)
-				dogCounter++;
-			if (breastRows.length == 3 && dogCounter > 0)
-				dogCounter++;
-			if (breastRows.length == 4 && dogCounter > 0)
-				dogCounter++;
+				foxCounter++;
+			if (dogCocks() > 0 && foxCounter > 0)
+				foxCounter++;
+			if (breastRows.length > 1 && foxCounter > 0)
+				foxCounter++;
+			if (breastRows.length == 3 && foxCounter > 0)
+				foxCounter++;
+			if (breastRows.length == 4 && foxCounter > 0)
+				foxCounter++;
 			//Fur only counts if some canine features are present
-			if (skinType == 1 && dogCounter > 0)
-				dogCounter++;
-			return dogCounter;
+			if (skinType == 1 && foxCounter > 0)
+				foxCounter++;
+			return foxCounter;
 		}
 		
 		//Determine cat Rating

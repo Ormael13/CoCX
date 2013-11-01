@@ -209,8 +209,7 @@ function rubiIntros():Number {
 	outputText("\n");
 	return 3894;
 }
-// Approach
-// Rubi scenes1
+//Approach Rubi scenes
 function approachRubiScenes():void {
 	clearOutput();
 	//(First time)
@@ -822,7 +821,7 @@ function fuckRubi():void {
 		if(player.hasCock()) outputText(cockDescript(x));
 		else outputText("[clit]");
 		outputText(" slipping between Rubi's thighs, which grip you tightly.  You feel " + rubiMF("his","her") + " ");
-		if(player.hasCock()) outputText("hard cock");
+		if(flags[RUBI_COCK_SIZE] > 0) outputText("hard cock");
 		else outputText("stiff clit");
 		outputText(" pressing against the top of ");
 		if(player.hasCock()) outputText("your dick");
@@ -1359,7 +1358,6 @@ function goInRubisClosetSoThatYouCanComeOutOfTheCloset():void {
 //Appearance
 function rubiAppearance():void {
 	clearOutput();
-	trace("WUT");
 	outputText("You look over your naked, demon-morph lover.");
 	outputText("\n\nRubi is about five feet tall, with a very lithe, feminine body.  " + rubiMF("His","Her") + " skin is ");
 	
@@ -2207,7 +2205,7 @@ function anallyTrainYourBitchBoySlutHowToBeAnalForDCL():void {
 		outputText("\n\nWith the stupid grin still plastered across your face, you take a seat at the edge of Rubi's bed, a fluffy white monster with a lilac-colored bedspread laid across it.  You get comfortable as your demon-tailed lover disappears into the bathroom. Almost ten minutes later, " + rubiMF("he","she") + " reemerges, posing in the doorway.");
 		
 		outputText("\n\nWith one arm raised " + rubiMF("he","she") + " leans against the frame of the door, showing off " + rubiMF("his","her") + " powder blue babydoll.  The skimpy, sheer lingerie barely covers Rubi's body, and in fact leaves " + rubiMF("his","her") + " " + rubiBreasts() + " completely open, framed by a triangle of white lace.  The wavy hem of the babydoll drapes low, but not low enough to cover " + rubiMF("his","her") + " crotch.  Rubi's ");
-		if(flags[RUBI_COCK_SIZE] == 0) outputText(rubiCock());
+		if(flags[RUBI_COCK_SIZE] > 0) outputText(rubiCock());
 		else outputText("sweet pussy");
 		outputText(" is readily on display, and it's all for you.  Rubi's makeup is less than subtle, with bright red lips and a light dusting of silver eyeshadow, enough to make " + rubiMF("his","her") + " eyes pop and not clash with the outfit.  Completing the look is a pair of white fishnet stockings that go up " + rubiMF("his","her") + " legs, ending about mid-thigh.");
 		
@@ -2242,12 +2240,12 @@ function anallyTrainYourBitchBoySlutHowToBeAnalForDCL():void {
 		if(flags[RUBI_COCK_SIZE] > 0) outputText("\n\nRubi's " + rubiCock() + " twitches, rising from its state of semi-hardness.  Within a minute it's standing straight up, creating a noticeable tent in the pale blue, sheer fabric covering your lover's body.  ");
 		else outputText("\n\n");
 		outputText("It takes another minute or so for Rubi to sink all the way down onto the cock, a huge feat in and of itself… but then, of course, there's the knot.  Even now with it deflated, you're not sure your demonic little vixen could handle it.  In fact, " + rubiMF("he","she") + " struggles with it for quite a while, until you lean over and whisper words of encouragement into " + rubiMF("his","her") + " ear.  Naughty words saying what you'll do to that ");
-		if(flags[RUBI_COCK_SIZE] == 1) outputText("ass");
+		if(flags[RUBI_COCK_SIZE] > 0) outputText("ass");
 		else outputText("pussy");
 		outputText(" once it's been properly trained.");
 		
 		outputText("\n\nNeeding no more encouragement, Rubi pushes " + rubiMF("him","her") + "self down further.  " + rubiMF("His","Her") + " eyes rolling up into their sockets in delight as " + rubiMF("his","her") + " ");
-		if(flags[RUBI_COCK_SIZE] == 1) outputText("asshole");
+		if(flags[RUBI_COCK_SIZE] > 0) outputText("asshole");
 		else outputText("cunt");
 		outputText(" is stretched nearly to its limits.  Finally " + rubiMF("he","she") + " lets out a sigh of relief as the knot pops completely into place.  \"<i>Oh… fuck me it's so big,</i>\" " + rubiMF("he","she") + " squeals, " + rubiMF("his","her") + " body visibly shaking.  Rubi's tongue lolls out, dripping a bit of spittle down " + rubiMF("his","her") + " chin.");
 		
@@ -2438,7 +2436,7 @@ function rubiHotdogging():void {
 	outputText("\n\nYour fingers return to the spellbound demon before you, tantalizing " + rubiMF("his","her") + " flesh with the slightest of touches.  It does its job, as between " + rubiMF("his","her") + " legs you can see " + rubiMF("his","her") + " ");
 	if(flags[RUBI_NO_CUNT] == 0) outputText("cunt moistening");
 	if(flags[RUBI_NO_CUNT] == 0 && flags[RUBI_COCK_SIZE] > 0) outputText(" and ");
-	if(flags[RUBI_NO_CUNT] == 0) outputText("cock hardening");
+	if(flags[RUBI_COCK_SIZE] > 0) outputText("cock hardening");
 	outputText(".  " + rubiMF("He","She") + " obviously enjoys this light, playful teasing.  You give Rubi's ass another playful smack, watching " + rubiMF("his","her") + " ");
 	if(flags[RUBI_SKIN] == 0) outputText("pale skin");
 	else if(flags[RUBI_SKIN] == 1|| flags[RUBI_SKIN] == 3) outputText("crimson skin");
@@ -2597,6 +2595,7 @@ function giveRubiATFItem(short:String):void {
 			if(flags[RUBI_NO_CUNT] == 1) {
 				outputText("\n\nRubi shudders suddenly, a soft moan escaping " + rubiMF("his","her") + " lips.  " + rubiMF("His","Her") + " fingers dive deeper, seemingly going inside " + rubiMF("his","her") + " body!  Although it seems strange, you're certain that <b>Rubi has grown a brand new vagina</b>.");
 				flags[RUBI_NO_CUNT] = 0;
+				flags[RUBI_SHE] = 1;
 				flags[RUBI_CUNTTYPE] = 0;
 			}
 		}
@@ -2604,6 +2603,7 @@ function giveRubiATFItem(short:String):void {
 		if(rand(3) == 0 && flags[RUBI_NO_CUNT] > 0) {
 			outputText("\n\nRubi shudders suddenly, a soft moan escaping " + rubiMF("his","her") + " lips.  " + rubiMF("His","Her") + " fingers dive between " + rubiMF("his","her") + " thighs, seemingly going inside " + rubiMF("his","her") + " body!  Although it seems strange, you're certain that <b>Rubi has grown a brand new vagina</b>.  \"<i>Oooh,</i>\" Rubi says, " + rubiMF("his","her") + " body quivering.  \"<i>It's so sensitive!</i>\"");
 			flags[RUBI_NO_CUNT] = 0;
+			flags[RUBI_SHE] = 1;
 		}
 		//(If Rubi gets demonic heels)
 		if(flags[RUBI_FEET] == 0 && rand(3) == 0 && short == "SucMilk") {
@@ -2667,6 +2667,7 @@ function giveRubiATFItem(short:String):void {
 		if(flags[RUBI_NO_CUNT] == 0 && rand(3) == 0) {
 			outputText("\n\nRubi trembles, " + rubiMF("his","her") + " hand dipping between " + rubiMF("his","her") + " thighs, searching around for something.  " + rubiMF("He","She") + " pokes around madly, apparently finding nothing.  \"<i>It... It's gone!</i>\" " + rubiMF("he","she") + " says with a shaky voice.  \"<i>My vagina's gone!</i>\"");
 			flags[RUBI_NO_CUNT] = 1;
+			flags[RUBI_SHE] = 0;
 			flags[RUBI_CUNTTYPE] = 0;
 		}
 	}
@@ -2716,6 +2717,7 @@ function giveRubiATFItem(short:String):void {
 			outputText(".  It's pretty clear, this former male is now completely female.  Rubi collapses backwards onto the couch, the transformations seemingly done.");
 			flags[RUBI_COCK_SIZE] = 0;
 			flags[RUBI_NO_CUNT] = 0;
+			flags[RUBI_SHE] = 1;
 		}
 		outputText("\n\n\"<i>Like, oh.  My.  Gods.  That was so wild,</i>\" " + rubiMF("he","she") + " says, and suddenly grips " + rubiMF("his","her") + " throat.  \"<i>Whoa, like, my voice is different!</i>\"  Though " + rubiMF("he","she") + " had a very feminine voice to begin with, it is noticeably more girly.  Not high pitched, just... girly, and tinged with a hint of a ditzy accent.");
 		
@@ -3117,7 +3119,7 @@ function pickAnItemToFeedRubi():void {
 		outputText("\n\n");
 	}
 	if(!rubiBimbo() && !rubiIncubus() && rubiAffection() >= 100) {
-		outputText("You could give Rubi some incubi draft to make him a little more manly but corrupt, or you could give Rubi a Bimbo Draft to turn him into a smoking hot, female sex-bomb.");
+		outputText("You could give Rubi some incubi draft to make " + rubiMF("him","her") + " a little more manly but corrupt, or you could give Rubi a Bimbo Draft to turn " + rubiMF("him","her") + " into a smoking hot, female sex-bomb.\n\n");
 	}
 	outputText("What will you give " + rubiMF("him","her") + "?");
 	//The following items can be given to Rubi at Relationship 20+: Suit Clothes, Rubber Fetish Outfit, Green Adventurer's Clothing, Tube Top, Bodysuit, Long Dress, Tight Leather Pants, Nurse Clothes, Slutty Swimwear.  Only once per item.
@@ -3189,7 +3191,7 @@ function pickAnItemToFeedRubi():void {
 		events[events.length] = "P.S.Mlk";
 		functions[functions.length] = giveRubiATFItem;
 	}
-	if(hasItem("PurPeac",1)) {
+	if(hasItem("PurPeac",5)) {
 		events[events.length] = "PurPeac";
 		functions[functions.length] = giveRubiATFItem;
 	}

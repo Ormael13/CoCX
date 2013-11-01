@@ -17,15 +17,15 @@ function supahAkabalEdition():void {
 		akbitchEncounter();
 		return;
 	}
-	if(flags[UNKNOWN_FLAG_NUMBER_00017] == 2) {
+	if(flags[AKBAL_SUBMISSION_STATE] == 2) {
 		repeatAkbalPostSubmission();
 		return;
 	}
-	if(flags[UNKNOWN_FLAG_NUMBER_00017] == 1) {
+	if(flags[AKBAL_SUBMISSION_STATE] == 1) {
 		ackbalRepeatAfterWin();
 		return;
 	}
-	if(flags[UNKNOWN_FLAG_NUMBER_00017] == -1) {
+	if(flags[AKBAL_SUBMISSION_STATE] == -1) {
 		ackbalRepeatAfterLoss();
 		return;
 	}
@@ -104,18 +104,18 @@ function startuAkabalFightomon():void {
 	outputText("You ready your " + player.weaponName + " and prepare to battle the demon jaguar.", false);
 	//[battle ensues]
 	startCombat(22);	
-	flags[UNKNOWN_FLAG_NUMBER_00015]++;
+	flags[PLAYER_RESISTED_AKBAL]++;
 }
 
 //[Submit]
 function akbalSubmit():void {
 	spriteSelect(2);
 	slimeFeed();
-	flags[UNKNOWN_FLAG_NUMBER_00016]++;
-	flags[UNKNOWN_FLAG_NUMBER_00017] = 2;
+	flags[AKBAL_SUBMISSION_COUNTER]++;
+	flags[AKBAL_SUBMISSION_STATE] = 2;
 	flags[AKBAL_BITCH_Q] = -1;
 	//Big booty special
-	if(flags[UNKNOWN_FLAG_NUMBER_00016] > 5 && flags[UNKNOWN_FLAG_NUMBER_00015] < 2 && player.buttRating >= 13 && player.tone < 80) {
+	if(flags[AKBAL_SUBMISSION_COUNTER] > 5 && flags[PLAYER_RESISTED_AKBAL] < 2 && player.buttRating >= 13 && player.tone < 80) {
 		akbalBigButtSubmit();
 		return;
 	}
@@ -316,12 +316,12 @@ function akbalSubmit():void {
 function akbalSubmissionFollowup():void {
 	spriteSelect(2);
 	outputText("", true);
-	if(flags[UNKNOWN_FLAG_NUMBER_00016] < 4) {
+	if(flags[AKBAL_SUBMISSION_COUNTER] < 4) {
 		outputText("You awake in your camp feeling dangerous, powerful and fiercely satisfied.", false);
 	}
 	//[After 8th submission, if whispered and corruption is greater than 80%]
 	//(fighting Akbal disables this scene, but you retain the ability if you rape him after)
-	else if(flags[UNKNOWN_FLAG_NUMBER_00015] == 0 && flags[UNKNOWN_FLAG_NUMBER_00016] >= 8 && player.cor > 80) {
+	else if(flags[PLAYER_RESISTED_AKBAL] == 0 && flags[AKBAL_SUBMISSION_COUNTER] >= 8 && player.cor > 80) {
 		if(player.cor < 80 || player.hasPerk("Fire Lord") >= 0) {
 			outputText("You awake in your camp feeling dangerous, powerful and fiercely satisfied.", false);
 		}
@@ -481,7 +481,7 @@ function akbalHeal():void {
 //Victory/Defeat Scenes
 //[Victory via HP]
 function victoryChoices():void {
-	flags[UNKNOWN_FLAG_NUMBER_00017] = 1;
+	flags[AKBAL_SUBMISSION_STATE] = 1;
 	//[General Victory]
 	if(monster.HP < 1) {
 		/*if(rand(10) == 0) {
@@ -946,7 +946,7 @@ function girlsRapeAkbalPart2():void {
 	eventParser(5007);
 }
 function loseToAckballllllz():void {
-	flags[UNKNOWN_FLAG_NUMBER_00017] = -1;
+	flags[AKBAL_SUBMISSION_STATE] = -1;
 	flags[AKBAL_BITCH_Q] = 0;
 	outputText("", true);
 	//[Defeat via HP]
