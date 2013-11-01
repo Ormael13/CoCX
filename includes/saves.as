@@ -32,7 +32,7 @@ function loadSaveDisplay(slot:String, slotName:String):String
 	var holding:String = "";
 	//Initialize the save file
 	var saveFile = SharedObject.getLocal(slot, "/");
-	;
+	
 	var pfileHolding:creature;
 	if (saveFile.data.exists)
 	{
@@ -145,13 +145,13 @@ function saveLoad(e:MouseEvent):void
 	//screen so it doesnt overlap everything.
 	nameBox.visible = false;
 	outputText("", true);
-	outputText("<b>Frequently Asked Questions</b>:\rWhere are my saves located?\r", false);
-	outputText("<i>In Windows Vista/7 (IE/FireFox/Other): Users/[username]/Appdata/Roaming/Macromedia/Flash Player/#Shared Objects/[GIBBERISH]/\r", false, false);
-	outputText("In Windows Vista/7 (Chrome): Users/[username]/AppData/Local/Google/Chrome/User Data/Default/Pepper Data/Shockwave Flash/WritableRoot/#SharedObjects/[GIBBERISH]/\r", false, false);
-	outputText("Inside that folder it will saved in a folder corresponding to where it was played from.  If you saved the CoC.swf to your HDD, then it will be in a folder called localhost.  If you played from my website, it will be in fenoxo.com.  The save files will be labelled CoC_1.sol, CoC_2.sol, CoC_3.sol, etc.</i>\r\r", false);
-	outputText("Why do my saves disappear all the time?\r<i>There are numerous things that will wipe out flash local shared files.  If your browser or player is set to delete flash cookies or data, that will do it.  CCleaner will also remove them.  CoC or its updates will never remove your savegames - if they disappear something else is wiping them out.</i>\r\r", false);
-	outputText("When I play from my HDD I have one set of saves, and when I play off your site I have a different set of saves.  Why?\r<i>Flash stores saved data relative to where it was accessed from.  Playing from your HDD will store things in a different location than fenoxo.com or FurAffinity.</i>\r\r", false);
-	outputText("If you want to be absolutely sure you don't lose a character, copy the .sol file for that slot out and back it up!\r\r<b>For more information, google flash shared objects.</b>", false);
+	outputText("<b>Frequently Asked Questions</b>:\nWhere are my saves located?\n", false);
+	outputText("<i>In Windows Vista/7 (IE/FireFox/Other): Users/[username]/Appdata/Roaming/Macromedia/Flash Player/#Shared Objects/[GIBBERISH]/\n", false, false);
+	outputText("In Windows Vista/7 (Chrome): Users/[username]/AppData/Local/Google/Chrome/User Data/Default/Pepper Data/Shockwave Flash/WritableRoot/#SharedObjects/[GIBBERISH]/\n", false, false);
+	outputText("Inside that folder it will saved in a folder corresponding to where it was played from.  If you saved the CoC.swf to your HDD, then it will be in a folder called localhost.  If you played from my website, it will be in fenoxo.com.  The save files will be labelled CoC_1.sol, CoC_2.sol, CoC_3.sol, etc.</i>\n\n", false);
+	outputText("Why do my saves disappear all the time?\n<i>There are numerous things that will wipe out flash local shared files.  If your browser or player is set to delete flash cookies or data, that will do it.  CCleaner will also remove them.  CoC or its updates will never remove your savegames - if they disappear something else is wiping them out.</i>\n\n", false);
+	outputText("When I play from my HDD I have one set of saves, and when I play off your site I have a different set of saves.  Why?\n<i>Flash stores saved data relative to where it was accessed from.  Playing from your HDD will store things in a different location than fenoxo.com or FurAffinity.</i>\n\n", false);
+	outputText("If you want to be absolutely sure you don't lose a character, copy the .sol file for that slot out and back it up!\n\n<b>For more information, google flash shared objects.</b>", false);
 	//This is to clear the 'game over' block from stopping simpleChoices from working.  Loading games supercede's game over.
 	if (b1Text.text == "Game Over")
 	{
@@ -196,7 +196,7 @@ function deleteScreen():void
 	var slot7:Number = 0;
 	var slot8:Number = 0;
 	var slot9:Number = 0;
-	outputText("Slot,  Race,  Sex,  Game Days Played\r", true);
+	outputText("Slot,  Race,  Sex,  Game Days Played\n", true);
 	outputText(loadSaveDisplay("CoC_1", "1") + loadSaveDisplay("CoC_2", "2") + loadSaveDisplay("CoC_3", "3") + loadSaveDisplay("CoC_4", "4") + loadSaveDisplay("CoC_5", "5") + loadSaveDisplay("CoC_6", "6") + loadSaveDisplay("CoC_7", "7") + loadSaveDisplay("CoC_8", "8") + loadSaveDisplay("CoC_9", "9"), false);
 	test = SharedObject.getLocal("CoC_1", "/");
 	if (test.data.exists)
@@ -226,13 +226,13 @@ function deleteScreen():void
 	if (test.data.exists)
 		slot9 = 91;
 	
-	outputText("\r<b>ONCE DELETED, YOUR SAVE IS GONE FOREVER.</b>", false);
+	outputText("\n<b>ONCE DELETED, YOUR SAVE IS GONE FOREVER.</b>", false);
 	choices("Slot 1", slot1, "Slot 2", slot2, "Slot 3", slot3, "Slot 4", slot4, "Slot 5", slot5, "Slot 6", slot6, "Slot 7", slot7, "Slot 8", slot8, "Slot 9", slot9, "Back", 30);
 }
 
 function confirmDelete():void
 {
-	outputText("You are about to delete the following save: <b>" + flags[UNKNOWN_FLAG_NUMBER_00063] + "</b>\r\rAre you sure you want to delete it?", true);
+	outputText("You are about to delete the following save: <b>" + flags[UNKNOWN_FLAG_NUMBER_00063] + "</b>\n\nAre you sure you want to delete it?", true);
 	simpleChoices("No", 82, "Yes", 93, "", 0, "", 0, "", 0);
 }
 
@@ -458,6 +458,7 @@ function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.cocks[i].pierced = player.cocks[i].pierced;
 		saveFile.data.cocks[i].pShortDesc = player.cocks[i].pShortDesc;
 		saveFile.data.cocks[i].pLongDesc = player.cocks[i].pLongDesc;
+		saveFile.data.cocks[i].sock = player.cocks[i].sock;
 	}
 	//Set Vaginal Array
 	for (i = 0; i < player.vaginas.length; i++)
@@ -467,6 +468,7 @@ function saveGameObject(slot:String, isFile:Boolean):void
 	//Populate Vaginal Array
 	for (i = 0; i < player.vaginas.length; i++)
 	{
+		saveFile.data.vaginas[i].type = player.vaginas[i].type;
 		saveFile.data.vaginas[i].vaginalWetness = player.vaginas[i].vaginalWetness;
 		saveFile.data.vaginas[i].vaginalLooseness = player.vaginas[i].vaginalLooseness;
 		saveFile.data.vaginas[i].fullness = player.vaginas[i].fullness;
@@ -631,6 +633,8 @@ function saveGameObject(slot:String, isFile:Boolean):void
 		var bytes:ByteArray = new ByteArray();
 		bytes.writeObject(saveFile);
 		file.save(bytes, null);
+		outputText("Attempted to save to file.", true);
+		doNext(1);
 	}
 	else
 	{
@@ -669,7 +673,7 @@ function onFileLoaded(evt:Event):void
 	}
 	catch (error:Error)
 	{
-		outputText("<b>!</b> Save file not found, check that it is in the same directory as the CoC.swf file.\r\rLoad from file is not available when playing directly from a website like furaffinity or fenoxo.com.", true);
+		outputText("<b>!</b> Save file not found, check that it is in the same directory as the CoC.swf file.\n\nLoad from file is not available when playing directly from a website like furaffinity or fenoxo.com.",true);
 	}
 }
 
@@ -1013,8 +1017,9 @@ function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.cocks[i].cockLength = saveFile.data.cocks[i].cockLength;
 			player.cocks[i].cockType = CockTypesEnum.legacySuportLoadCockType(saveFile.data.cocks[i].cockType);
 			player.cocks[i].knotMultiplier = saveFile.data.cocks[i].knotMultiplier;
-			if (saveFile.data.cocks[i].pierced == undefined)
-			{
+			if(saveFile.data.cocks[i].sock == undefined) player.cocks[i].sock = "";
+			else player.cocks[i].sock = saveFile.data.cocks[i].sock;
+			if(saveFile.data.cocks[i].pierced == undefined) {
 				player.cocks[i].pierced = 0;
 				player.cocks[i].pShortDesc = "";
 				player.cocks[i].pLongDesc = "";
@@ -1039,8 +1044,9 @@ function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.vaginas[i].vaginalLooseness = saveFile.data.vaginas[i].vaginalLooseness;
 			player.vaginas[i].fullness = saveFile.data.vaginas[i].fullness;
 			player.vaginas[i].virgin = saveFile.data.vaginas[i].virgin;
-			if (saveFile.data.vaginas[i].labiaPierced == undefined)
-			{
+			if(saveFile.data.vaginas[i].type == undefined) player.vaginas[i].type = 0;
+			else player.vaginas[i].type = saveFile.data.vaginas[i].type;
+			if(saveFile.data.vaginas[i].labiaPierced == undefined) {
 				player.vaginas[i].labiaPierced = 0;
 				player.vaginas[i].labiaPShort = "";
 				player.vaginas[i].labiaPLong = "";
@@ -1102,6 +1108,19 @@ function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.perks[i].value2 = saveFile.data.perks[i].value2;
 			player.perks[i].value3 = saveFile.data.perks[i].value3;
 			player.perks[i].value4 = saveFile.data.perks[i].value4;
+			if(isNaN(player.perks[i].value1)) {
+				if(player.perks[i].perkName == "Wizard's Focus") {
+					player.perks[i].value1 = .3;
+				}
+				else player.perks[i].value1 = 0;
+				trace("NaN byaaaatch: " + player.perks[i].value1);
+			}
+			if(player.perks[i].perkName == "Wizard's Focus") {
+				if(player.perks[i].value1 == 0 || player.perks[i].value1 < 0.1) {
+					trace("Wizard's Focus boosted up to par (.5)");
+					player.perks[i].value1 = .5;
+				}
+			}
 			//If no save data for perkDesc, initialize it.
 			if (saveFile.data.perks[i].perkDesc == undefined)
 				player.perks[i].perkDesc = "<b>N/A: This is an older character file.</b>";
@@ -1259,6 +1278,16 @@ function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			itemSlot4.shortName = "GroPlus";
 		if (itemSlot5.shortName.indexOf("Gro+") != -1)
 			itemSlot5.shortName = "GroPlus";
+		//Fixing shit!
+		if(player.hasPerk("Elven Bounty") >= 0) {
+			//CLear duplicates
+			while(player.perkDuplicated("Elven Bounty")) player.removePerk("Elven Bounty");
+			//Fix fudged preggers value
+			if(player.perkv1("Elven Bounty") == 15) {
+				player.changePerkValue("Elven Bounty",1,0);
+				player.addPerkValue("Elven Bounty",2,15);
+			}
+		}
 		doNext(1);
 	}
 }

@@ -2234,7 +2234,7 @@ function amilyHighAffectionSecks():void {
 	if(flags[AMILY_INCUBATION] > 0) outputText("  Even in a slightly pregnant state, she goes surprisingly fast, though she's also rather cautious of her small bump.", false);
 	outputText("\n\n", false);
 
-	outputText("Once inside, the two of you get to work undoing each others clothes, tossing the garments across the room with little care for them. Amily bites her lower lip as she examines your naked form again, before practically jumping you. She wraps her small hands around your stiff " + cockNoun(player.cocks[x].cockType) + " in an almost painful fashion, rubbing and teasing it, and presses her mouth against yours, her tongue exploring every inch of your mouth that it can reach, and you quickly respond by doing the same favour for Amily.", false);
+	outputText("Once inside, the two of you get to work undoing each others clothes, tossing the garments across the room with little care for them. Amily bites her lower lip as she examines your naked form again, before practically jumping you. She wraps her small hands around your stiff " + Appearance.cockNoun(player.cocks[x].cockType) + " in an almost painful fashion, rubbing and teasing it, and presses her mouth against yours, her tongue exploring every inch of your mouth that it can reach, and you quickly respond by doing the same favour for Amily.", false);
 	if(flags[AMILY_INCUBATION] > 0) outputText("  Really it seems the only thing in-between you two now is Amily's small stomach bulge.", false);
 	//(If Amily is herm: 
 	if(flags[AMILY_WANG_LENGTH] > 0) outputText("  You can feel her erection, hot and solid, pressed between your two bodies.", false);
@@ -2349,7 +2349,7 @@ function fuckAmilyPreg():void {
 
 	outputText("\"<i>I did some research on the matter, just in case you still wanted to make love while I'm like this... I'm pretty glad you do - you have no idea how horny I've been from this</i>\" Amily says as she straddles your hips, feeling the extra weight that the cute little mouse-girl has put on. Nothing you can't handle, and certainly something you're not going to call attention to.\n\n", false);
 
-	outputText("Amily teases you for a little while, running her pussy-lips and tail along the tip of your erection a few times, earning a few moans and groans from you. Amily smirks slightly before sliding herself down your fully erect " + cockNoun(CockTypesEnum.HUMAN) + ", taking as much as she can. You're a little worried that this might be harmful for your offspring, or worse that they'll know what's going on...But Amily really seems to know more about this than you do, so you're just going to go along with her suggestions on the matter.\n\n", false);
+	outputText("Amily teases you for a little while, running her pussy-lips and tail along the tip of your erection a few times, earning a few moans and groans from you. Amily smirks slightly before sliding herself down your fully erect " + Appearance.cockNoun(CockTypesEnum.HUMAN) + ", taking as much as she can. You're a little worried that this might be harmful for your offspring, or worse that they'll know what's going on...But Amily really seems to know more about this than you do, so you're just going to go along with her suggestions on the matter.\n\n", false);
 
 	outputText("Amily manages to keep a rather impressive rhythm and pace as she rides your cock like a mechanical bull. In time you manage to return her motions, thrusting your hips up to meet her and twisiting yourself around counter-clockwise. The way Amily shrieks, or squeeks, in pleasure is a good sign, and as a result, you pick up speed with your gyrations. The intense pleasure makes you wish this session didn't have to end, but as you feel your orgasm rapidly approach, you sigh in defeat and resolve to make it a memorable one. You quickly clasp your hands around Amily's hips and pick up speed, making Amily gasp in surprise. You keep your motions up for another few minutes, before the two of you bring each other to a powerful simultaneous orgasm, mixed fluids drooling from Amily's thoroughly stretched cunt", false);
 	if(flags[AMILY_WANG_LENGTH] > 0) outputText(", her own mouse-cock spewing futa-cum all over her belly", false);
@@ -2472,7 +2472,7 @@ function amilyFollowerEncounter():void {
 function amilyMenu(output:Boolean = true):void {
 	var date:Number = 0;
 	//If no fight yet, have option to introduce Urta and Amily
-	if(player.gender > 0 && flags[AMILY_FOLLOWER] == 1 && flags[AMILY_VISITING_URTA] == 0 && (flags[UNKNOWN_FLAG_NUMBER_00012] >= 5 || urtaLove()) && !urtaBusy()) 
+	if(player.gender > 0 && flags[AMILY_FOLLOWER] == 1 && flags[AMILY_VISITING_URTA] == 0 && (flags[URTA_COMFORTABLE_WITH_OWN_BODY] >= 5 || urtaLove()) && !urtaBusy()) 
 	{
 		if(output)outputText("<b>You could take Amily on a date to Tel'Adre, and perhaps even introduce her to Urta!</b>\n\n", false);
 		date = 3400;
@@ -2665,7 +2665,7 @@ function fuckTheMouseBitch():void {
 		}
 	}
 	var urta:Number = 0;
-	if(flags[AMILY_VISITING_URTA] == 4 && flags[UNKNOWN_FLAG_NUMBER_00012] >= 0 && !urtaBusy()) urta = 3190;
+	if(flags[AMILY_VISITING_URTA] == 4 && flags[URTA_COMFORTABLE_WITH_OWN_BODY] >= 0 && !urtaBusy()) urta = 3190;
 	var swim:int = 0;
 	if(flags[AMILY_OWNS_BIKINI] > 0 && player.hasCock() && !amilyCorrupt()) swim = 3960;
 	var threesome:int = 0;
@@ -4061,7 +4061,7 @@ function corruptAmilyLickPussiesLikeAPro():void {
 	//[Oral sex]
 	//Herms pick if Amily gets to lick them or blow them.
 	outputText("\"<i>It's time to eat,</i>\" you declare and Amily instantly perks up after hearing it. You remove the lower half of your " + player.armorName + " and thrust your crotch at Amily; displaying your quickly ", false);
-	if(player.hasCock()) outputText("hardening " + cockNoun(player.cocks[0].cockType) + " and ", false);
+	if(player.hasCock()) outputText("hardening " + Appearance.cockNoun(player.cocks[0].cockType) + " and ", false);
 	outputText("moistening " + vaginaDescript() + ". Amily watches as if mesmerized, drool escaping her mouth as she licks her lips in anticipation.\n\n", false);
 	
 	//[=Pussy=]

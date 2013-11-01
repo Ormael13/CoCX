@@ -415,7 +415,7 @@ function beatUpGoo():void {
 		else if(player.hasVagina()) {
 			sex1S = "Fuck";
 			sex1N = 3263;
-			if(flags[UNKNOWN_FLAG_NUMBER_00023] >= 1) {
+			if(flags[PC_FETISH] >= 1) {
 				sex2S = "Exhib.Fuck";
 				sex2N = 3264;
 			}

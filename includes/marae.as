@@ -337,7 +337,7 @@ function MaraeIIStageII():void {
 		buttChange(12,true,true,false);
 		outputText("  The open plant-hole dives for your groin while you're distracted, hits your " + cockDescript(0) + " and devours it with a greedy sluuuuurp.", false);
 		if(player.cockTotal() == 2) outputText("  Another vine that may as well be the first's twin snakes from between the goddess' legs and jumps onto your " + cockDescript(1) + ".", false);
-		else if(player.cockTotal() > 2) outputText("  More 'open' vines shimmy forth from between Marae's legs and jump up onto your " + cockNoun(CockTypesEnum.HUMAN) + "s.", false);
+		else if(player.cockTotal() > 2) outputText("  More 'open' vines shimmy forth from between Marae's legs and jump up onto your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + "s.", false);
 		
 		outputText("You grunt and pump your hips, shameless as you give in to the squeezing, textured tentacle", false);
 		if(player.cockTotal() > 1) outputText("s", false);
@@ -376,7 +376,7 @@ function MaraeIIStageII():void {
 		if(player.cockTotal() > 1) {
 			if(player.cockTotal() > 2) outputText("  Another ", false);
 			else outputText("Your other ", false);
-			outputText(cockNoun(CockTypesEnum.HUMAN) + " prods at her tight pucker, and with a slight adjustment, you're able to line it up.  It's wet!  Inch after inch slides in with incredible ease, violating her slippery butthole until you've completely double-penetrated her.", false);
+			outputText(Appearance.cockNoun(CockTypesEnum.HUMAN) + " prods at her tight pucker, and with a slight adjustment, you're able to line it up.  It's wet!  Inch after inch slides in with incredible ease, violating her slippery butthole until you've completely double-penetrated her.", false);
 		}
 		outputText("\n\n", false);
 		

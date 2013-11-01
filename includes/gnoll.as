@@ -221,7 +221,7 @@ function getRapedByGnoll():void {
 			if(player.cockTotal() > 1) outputText("The gnoll fishes into your " + multiCockDescriptLight() + " and quickly snaps up the thickest one.  ", false);
 			//(if cockTotal=1)
 			else outputText("The gnoll's hands dart down to your crotch and grabs " + cockDescript(0) + ".  ", false);
-			outputText("\"<i>Yes, this will do nicely,</i>\" she says with relish, pumping your " + cockNoun(player.cocks[player.thickestCock()].cockType) + " until it plumps up, filling with blood.  She cantilevers her body over yours, knees bent sharply, and brings the tip of her massive clitoris up against the head of your dick.  The moment a dollop of pre forms at your urethra, her hips surge forward, sinking her giant clit down the length of your " + cockNoun(player.cocks[player.thickestCock()].cockType) + ".  ", false);
+			outputText("\"<i>Yes, this will do nicely,</i>\" she says with relish, pumping your " + Appearance.cockNoun(player.cocks[player.thickestCock()].cockType) + " until it plumps up, filling with blood.  She cantilevers her body over yours, knees bent sharply, and brings the tip of her massive clitoris up against the head of your dick.  The moment a dollop of pre forms at your urethra, her hips surge forward, sinking her giant clit down the length of your " + Appearance.cockNoun(player.cocks[player.thickestCock()].cockType) + ".  ", false);
 			outputText("You gasp at the feeling of her hot skin rippling down the interior of your dick, and all she can do is laugh as she plunges it deeper and deeper into you.\n\n", false);
 		}
 		//(if cockTotal>0 AND thickestCock()<2")
@@ -230,7 +230,7 @@ function getRapedByGnoll():void {
 			if(player.cockTotal() > 1) outputText("\"<i>This will have to do,</i>\" she says with the barest trace of disappointment as she grabs your thickest cock.  ", false);
 			//(if cockTotal=1)
 			else outputText("\"<i>This will have to do,</i>\" she says as she grabs your cock.  ", false);
-			outputText("She runs her rough hand up and down its length until it begins to plump up.  She cantilevers her body over yours, knees bent sharply, and brings the tip of her massive clitoris up against the head of your dick.  The moment a dollop of pre forms at your urethra, her hips surge forward, sinking her giant clit down the length of your " + cockNoun(player.cocks[player.thickestCock()].cockType) + ".  ", false);
+			outputText("She runs her rough hand up and down its length until it begins to plump up.  She cantilevers her body over yours, knees bent sharply, and brings the tip of her massive clitoris up against the head of your dick.  The moment a dollop of pre forms at your urethra, her hips surge forward, sinking her giant clit down the length of your " + Appearance.cockNoun(player.cocks[player.thickestCock()].cockType) + ".  ", false);
 			outputText("You scream in pain as she forces her bizarre pseudo-penis down the length of your dick.  In horror, you watch as the bulge of her anatomy's invasion of yours slowly descends towards your ", false);
 			if(player.balls > 0) outputText("balls", false);
 			else outputText("groin", false);
@@ -337,7 +337,7 @@ function dickInGnollAss():void {
 		outputText("The gnoll must be taught a lesson, but you're staying the hell away from her freaky anatomy.  You roughly roll her onto her belly and pull her lean ass up into the air.  You line up your " + cockDescript(x) + " and ram it home into her tiny puckered entrance, eliciting a half-conscious gasp from the hyena girl.\n\n", false);
 		//(if cockTotal>1)
 		if(player.totalCocks() > 1 && player.cockArea(x) < monster.analCapacity() && y != -1) {
-			outputText("With a smirk, you pound away for a few minutes to get her loosened up.  Then you reach down and slap another " + cockNoun(CockTypesEnum.HUMAN) + " alongside the first.  With a grunt and a thrust, you shove both of them inside.", false);
+			outputText("With a smirk, you pound away for a few minutes to get her loosened up.  Then you reach down and slap another " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " alongside the first.  With a grunt and a thrust, you shove both of them inside.", false);
 			//(if cockTotal>2)
 			if(player.totalCocks() > 2 && player.cockArea(x) + player.cockArea(y) < monster.analCapacity()) outputText("  A few thrusts more, and you slow again.  As you gather up your third cock, the gnoll whimpers quietly, fearing what she knows will come next.  You slowly push forward, sinking your rigid meat into her ass.  When all three are in, it's very slow going, but you don't let up.", false);
 			//(if cockTotal>3)

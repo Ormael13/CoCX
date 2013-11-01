@@ -591,7 +591,7 @@ function dropItem(monsterName:String):void {
 		shortName = "FoxJewl";
 	}
 	//Chance of armor if at level 1 pierce fetish
-	if(!plotFight && monster.short != "Ember" && monster.short != "Kiha" && monster.short != "Helia" && monster.short != "Isabella" && flags[UNKNOWN_FLAG_NUMBER_00023] == 1 && rand(10) == 0 && !hasItem("SeductA", 1) && !ceraphIsFollower()) {
+	if(!plotFight && monster.short != "Ember" && monster.short != "Kiha" && monster.short != "Helia" && monster.short != "Isabella" && flags[PC_FETISH] == 1 && rand(10) == 0 && !hasItem("SeductA", 1) && !ceraphIsFollower()) {
 		shortName = "SeductA";
 	}
 	
@@ -976,7 +976,7 @@ function applyArmorStats(armorName:String, output:Boolean = true):void {
 			player.nipplesPierced = 1;
 			player.nipplesPShort = "seamless black nipple-studs";
 			player.nipplesPLong = "Seamless black nipple-studs";
-			flags[UNKNOWN_FLAG_NUMBER_00023] = 2;
+			flags[PC_FETISH] = 2;
 			return;
 		}
 		else {
@@ -3218,9 +3218,9 @@ function minotaurCum():void {
 	minoCumAddiction(7);
 	outputText("", true);
 	outputText("As soon as you crack the seal on the bottled white fluid, a ", false);
-	if(flags[UNKNOWN_FLAG_NUMBER_00020] == 0) outputText("potent musk washes over you.", false);
+	if(flags[MINOTAUR_CUM_ADDICTION_STATE] == 0) outputText("potent musk washes over you.", false);
 	else outputText("heavenly scent fills your nostrils.", false);
-	if(flags[UNKNOWN_FLAG_NUMBER_00018] < 50) outputText("  It makes you feel dizzy, ditzy, and placid.", false);
+	if(flags[MINOTAUR_CUM_ADDICTION_TRACKER] < 50) outputText("  It makes you feel dizzy, ditzy, and placid.", false);
 	else outputText("  It makes you feel euphoric, happy, and willing to do ANYTHING to keep feeling this way.", false);
 	outputText("  Unbidden, your hand brings the bottle to your lips, and the heady taste fills your mouth as you convulsively swallow the entire bottle.", false);
 	//-Raises lust by 10.
@@ -3249,7 +3249,7 @@ function minotaurCum():void {
 	//(Minotaur fantasy)
 	if(gameState == 0 && rand(10) == 1) {
 		outputText("\n\nYour eyes flutter closed for a second as a fantasy violates your mind.  You're on your knees, prostrate before a minotaur.  Its narcotic scent fills the air around you, and you're swaying back and forth with your belly already sloshing and full of spunk.  Its equine-like member is rubbing over your face, and you submit to the beast, stretching your jaw wide to take its sweaty, glistening girth inside you.  Your tongue quivers happily as you begin sucking and slurping, swallowing each drop of pre-cum you entice from the beastly erection.  Gurgling happily, you give yourself to your inhuman master for a chance to swallow into unthinking bliss.", false);
-		stats(0,0,0,0,1,0,rand(5)+player.cor/20+flags[UNKNOWN_FLAG_NUMBER_00018]/5,0);
+		stats(0,0,0,0,1,0,rand(5)+player.cor/20+flags[MINOTAUR_CUM_ADDICTION_TRACKER]/5,0);
 	}
 	//(Healing – if hurt and uber-addicted (hasperk))
 	if(player.HP < maxHP() && player.hasPerk("Minotaur Cum Addict") >= 0) {
@@ -3257,8 +3257,8 @@ function minotaurCum():void {
 		HPChange(int(maxHP()/4), false);
 	}
 	//Uber-addicted status!
-	if(player.hasPerk("Minotaur Cum Addict") >= 0 && flags[UNKNOWN_FLAG_NUMBER_00021] <= 0) {
-		flags[UNKNOWN_FLAG_NUMBER_00021] = 3 + rand(2);
+	if(player.hasPerk("Minotaur Cum Addict") >= 0 && flags[MINOTAUR_CUM_REALLY_ADDICTED_STATE] <= 0) {
+		flags[MINOTAUR_CUM_REALLY_ADDICTED_STATE] = 3 + rand(2);
 		outputText("\n\n<b>Your body feels so amazing and sensitive.  Experimentally you pinch yourself and discover that even pain is turning you on!</b>", false);
 	}
 }
@@ -7813,7 +7813,7 @@ function snakeOil():void {
 
 function extensionSerum():void {
 	outputText("", true);
-	if(flags[UNKNOWN_FLAG_NUMBER_00026] > 2) {
+	if(flags[INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED] > 2) {
 		outputText("<b>No way!</b>  Your head itches like mad from using the rest of these, and you will NOT use another.\n", false);
 		if(!debug) {
 			shortName = "ExtSerm";
@@ -7822,24 +7822,24 @@ function extensionSerum():void {
 		return;
 	}
 	outputText("You open the bottle of hair extension serum and follow the directions carefully, massaging it into your scalp and being careful to keep it from getting on any other skin.  You wash off your hands with lakewater just to be sure.", false);
-	if(flags[UNKNOWN_FLAG_NUMBER_00025] <= 0) {
+	if(flags[INCREASED_HAIR_GROWTH_TIME_REMAINING] <= 0) {
 		outputText("\n\nThe tingling on your head lets you know that it's working!", false);
-		flags[UNKNOWN_FLAG_NUMBER_00025] = 7;
-		flags[UNKNOWN_FLAG_NUMBER_00026] = 1;
+		flags[INCREASED_HAIR_GROWTH_TIME_REMAINING] = 7;
+		flags[INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED] = 1;
 	}
-	else if(flags[UNKNOWN_FLAG_NUMBER_00026] == 1) {
+	else if(flags[INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED] == 1) {
 		outputText("\n\nThe tingling intensifies, nearly making you feel like tiny invisible faeries are massaging your scalp.", false);
-		flags[UNKNOWN_FLAG_NUMBER_00026]++;
+		flags[INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED]++;
 	}
-	else if(flags[UNKNOWN_FLAG_NUMBER_00026] == 2) {
+	else if(flags[INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED] == 2) {
 		outputText("\n\nThe tingling on your scalp is intolerable!  It's like your head is a swarm of angry ants, though you could swear your hair is growing so fast that you can feel it weighing you down more and more!", false);
-		flags[UNKNOWN_FLAG_NUMBER_00026]++;
+		flags[INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED]++;
 	}
 	if(flags[UNKNOWN_FLAG_NUMBER_00066] > 0 && player.hairType != 4) {
 		flags[UNKNOWN_FLAG_NUMBER_00066] = 0;
 		outputText("\n\n<b>Somehow you know that your " + hairDescript() + " is growing again.</b>", false);
 	}
-	if(flags[UNKNOWN_FLAG_NUMBER_00025] < 7) flags[UNKNOWN_FLAG_NUMBER_00025] = 7;
+	if(flags[INCREASED_HAIR_GROWTH_TIME_REMAINING] < 7) flags[INCREASED_HAIR_GROWTH_TIME_REMAINING] = 7;
 }
 function Hummus():void {
 	outputText("", true);
@@ -7945,7 +7945,7 @@ function Hummus():void {
 
 
 function giveHumanizer():void {
-	if(flags[UNKNOWN_FLAG_NUMBER_00028] > 0) {
+	if(flags[TIMES_CHEATED_COUNTER] > 0) {
 		outputText("<b>I was a cheater until I took an arrow to the knee...</b>", true);
 		eventParser(5035);
 		return;
@@ -7953,7 +7953,7 @@ function giveHumanizer():void {
 	outputText("I AM NOT A CROOK.  BUT YOU ARE!  <b>CHEATER</b>!\n\n", true);
 	shortName = "Hummus ";
 	takeItem();
-	flags[UNKNOWN_FLAG_NUMBER_00028]++;
+	flags[TIMES_CHEATED_COUNTER]++;
 }
 
 function coal():void {
@@ -8177,7 +8177,7 @@ function catTransformation():void {
 		//loop through and find a non-cat wang.
 		for(var i:Number = 0;i < (player.cockTotal()) && player.cocks[i].cockType == CockTypesEnum.CAT;i++) 
 		{ }
-		outputText("\n\nYour " + cockDescript(i) + " swells up with near-painful arousal and begins to transform.  It turns pink and begins to narrow until the tip is barely wide enough to accommodate your urethra.  Barbs begin to sprout from its flesh, if you can call the small, fleshy nubs barbs. They start out thick around the base of your " + cockNoun(CockTypesEnum.HUMAN) + " and shrink towards the tip. The smallest are barely visible. <b>Your new feline dong throbs powerfully</b> and spurts a few droplets of cum.  ", false);
+		outputText("\n\nYour " + cockDescript(i) + " swells up with near-painful arousal and begins to transform.  It turns pink and begins to narrow until the tip is barely wide enough to accommodate your urethra.  Barbs begin to sprout from its flesh, if you can call the small, fleshy nubs barbs. They start out thick around the base of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " and shrink towards the tip. The smallest are barely visible. <b>Your new feline dong throbs powerfully</b> and spurts a few droplets of cum.  ", false);
 		if(!player.hasSheath()) {
 			outputText("Then, it begins to shrink and sucks itself inside your body.  Within a few moments, a fleshy sheath is formed.", false);
 			if(player.balls > 0) outputText("  Thankfully, your balls appear untouched.", false);
@@ -8231,7 +8231,7 @@ function catTransformation():void {
 			outputText("  Although the package is smaller, it feels even more sensitive – as if it retained all sensation of its larger size in its smaller form.", false);
 			stats(0,0,0,0,0,5,0,0);
 			//Make note of other dicks changing
-			if(temp2 == 1) outputText("  Upon further inspection, all your " + cockNoun(CockTypesEnum.CAT) + "s have shrunk!", false);
+			if(temp2 == 1) outputText("  Upon further inspection, all your " + Appearance.cockNoun(CockTypesEnum.CAT) + "s have shrunk!", false);
 			changes++;
 		}
 	}
@@ -8405,7 +8405,7 @@ function reptilum():void {
 		outputText("\n\nA slow tingle warms your groin.  Before it can progress any further, you yank back your " + player.armorName + " to investigate.  Your " + cockDescript(temp2) + " is changing!  It ripples loosely from ", false);
 		if(player.hasSheath()) outputText("sheath ", false);
 		else outputText("base ", false);
-		outputText("to tip, undulating and convulsing as its color lightens, darkens, and finally settles on a purplish hue.  Your " + cockNoun(CockTypesEnum.HUMAN) + " resolves itself into a bulbous form, with a slightly pointed tip.  The 'bulbs' throughout its shape look like they would provide an interesting ride for your sexual partners, but the perverse, alien pecker ", false);
+		outputText("to tip, undulating and convulsing as its color lightens, darkens, and finally settles on a purplish hue.  Your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " resolves itself into a bulbous form, with a slightly pointed tip.  The 'bulbs' throughout its shape look like they would provide an interesting ride for your sexual partners, but the perverse, alien pecker ", false);
 		if(player.cor < 33) outputText("horrifies you.", false);
 		else if(player.cor < 66) outputText("is a little strange for your tastes.", false);
 		else {
@@ -11777,7 +11777,7 @@ function trapOil():void {
 		if(player.ballSize > 20) player.ballSize--;
 		//Testicle Reduction final: 
 		if(player.ballSize < 1 && player.hasStatusAffect("Uniball") < 0) {
-			outputText("  You whimper as once again, your balls tighten and shrink.  Your eyes widen when you feel the gentle weight of your testicles pushing against the top of your [hips], and a few hesitant swings of your rear confirm what you can feel - you've tightened your balls up so much they no longer hang beneath your " + multiCockDescriptLight() + ", but press perkily upwards.  Heat ringing your ears, you explore your new sack with a careful hand.  You are deeply grateful you apparently haven't reversed puberty, but you discover that though you still have two, your balls now look and feel like one: one cute, tight little sissy parcel, its warm, insistent pressure upwards upon the joining of your thighs a never-ending reminder of it.");
+			outputText("  You whimper as once again, your balls tighten and shrink.  Your eyes widen when you feel the gentle weight of your testicles pushing against the top of your [hips], and a few hesitant swings of your rear confirm what you can feel - you've tightened your balls up so much they no longer hang beneath your " + multiCockDescriptLight() + ", but press perkily upwards.  Heat ringing your ears, you explore your new sack with a careful hand.  You are deeply grateful you apparently haven't reversed puberty, but you discover that though you still have " + num2Text(player.balls) + ", your balls now look and feel like one: one cute, tight little sissy parcel, its warm, insistent pressure upwards upon the joining of your thighs a never-ending reminder of it.");
 			//[Note: Balls description should no longer say “swings heavily beneath”.  For simplicity's sake sex scenes should continue to assume two balls]
 			player.ballSize = 1;
 			player.createStatusAffect("Uniball",0,0,0,0);

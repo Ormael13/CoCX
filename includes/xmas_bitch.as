@@ -9,14 +9,14 @@ function xmasBitchEncounter():void {
 	outputText("Your sleep is disturbed by something repeatedly smacking into your side.  Groggily at first, you grumble and throw back your blanket.  Then you remember where you are, and snap to full wakefulness.  You launch onto your feet, bring up your fists, and stare bewildered at the sight in front of you.\n\n", false);
 		
 	outputText("Standing there, innocent as can be, ");
-	if(flags[UNKNOWN_FLAG_NUMBER_00034] == 0) outputText("is an elf.  She can't be more than four and a half feet tall, and though she has fairly womanly hips, her chest is nothing to speak of.  Her clothing is strange – a red two piece lined with some kind of white fur.  She has typically pointed ears, blond hair, and a red fur-lined cap topped with a white puffball. She's holding a large box in front of her and looking at you expectantly as you stare, dumbfounded.\n\n", false);
+	if(flags[PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] == 0) outputText("is an elf.  She can't be more than four and a half feet tall, and though she has fairly womanly hips, her chest is nothing to speak of.  Her clothing is strange – a red two piece lined with some kind of white fur.  She has typically pointed ears, blond hair, and a red fur-lined cap topped with a white puffball. She's holding a large box in front of her and looking at you expectantly as you stare, dumbfounded.\n\n", false);
 	else outputText("is the same elf you met last year.  She can't be more than four and a half feet tall, and though she has fairly womanly hips, her chest is nothing to speak of.  Her clothing is strange – a red two piece lined with some kind of white fur.  She has typically pointed ears, blond hair, and a red fur-lined cap topped with a white puffball. She's holding a large box in front of her and looking at you expectantly as you stare, dumbfounded.\n\n", false);
 	
 	outputText("The elf says, \"<i>Hiya " + player.short + "!  I brought you a");
-	if(flags[UNKNOWN_FLAG_NUMBER_00034] > 0) outputText("nother");
+	if(flags[PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] > 0) outputText("nother");
 	outputText(" present, straight from the big man himself!</i>\"\n\n", false);
 	
-	if(flags[UNKNOWN_FLAG_NUMBER_00034] > 0) {
+	if(flags[PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] > 0) {
 		outputText("Confused by her sudden re-appearance, you dumbly ask if you'll be getting the same thing as last year.\n\n");
 		outputText("She giggles, \"<i>Oh silly, that would spoil the surprise, wouldn't it?  We've got EVERYONE on our list, even Kelt, though he's getting coal AGAIN.  You'll get what you're supposed to get!</i>\"\n\n", false);
 	}
@@ -28,7 +28,7 @@ function xmasBitchEncounter():void {
 	outputText("You wonder out loud, \"<i>So this... present is mine?</i>\"\n\n", false);
 	if(player.cor >= 90 || monk >= 5 || player.hasStatusAffect("Exgartuan") >= 0 || amilyCorrupt() || flags[UNKNOWN_FLAG_NUMBER_00283] > 0 || flags[UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[NIAMH_STATUS] > 0) {
 		outputText("She nods, bouncing up and down in excitement and flushing slightly, \"<i>Yup, just tear the lid off and get your gift!</i>\"\n\n", false);
-		if(flags[UNKNOWN_FLAG_NUMBER_00034] > 0) outputText("Here we go again...\n\n");
+		if(flags[PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] > 0) outputText("Here we go again...\n\n");
 		//[Open Present] [Unwrap Elf] [Decline]
 		simpleChoices("OpenPresent",openXmasPresent,"",0,"Decline",declineXmasPresent,"",0,"",0);
 		return;
@@ -51,7 +51,7 @@ function declineXmasPresent():void {
 	outputText("You shake your head 'no', and inform the elf that you'll have nothing to do with her 'gifts' or 'surprises'.  She looks on the verge of tears as she whines, \"<i>I'm going to get reamed for this!</i>\"\n\n", false);
 	
 	outputText("Before you can react, she sprints off into the darkness.", false);
-	flags[UNKNOWN_FLAG_NUMBER_00034] = date.fullYear;
+	flags[PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
 	doNext(1);
 }
 //[Open Present]
@@ -68,7 +68,7 @@ function openXmasPresent():void {
 		outputText("The empty 'present' is on the ground with the coal still inside.  You wonder if the coal has any special effect. Everything else in this place does.  In the distance you can hear sleigh bells, and you know it's going to be hard to sleep with all that racket on top of the threat of more intruders...\n\n", false);
 		shortName = "Coal   ";
 		takeItem();
-		flags[UNKNOWN_FLAG_NUMBER_00034] = date.fullYear;
+		flags[PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
 		return;
 	}
 	//Great present!
@@ -77,7 +77,7 @@ function openXmasPresent():void {
 		if(rand(2) == 0) shortName = "SS.Robe";
 		else shortName = "SSArmor";
 		takeItem();
-		flags[UNKNOWN_FLAG_NUMBER_00034] = date.fullYear;
+		flags[PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
 		return;
 	}
 	//[Good present]
@@ -85,7 +85,7 @@ function openXmasPresent():void {
 		outputText("surprise at the box's contents – there's a vial labeled gro+.  It looks like it's going to be a 'big' Christmas this year...\n\n", false);
 		shortName = "GroPlus";
 		takeItem();
-		flags[UNKNOWN_FLAG_NUMBER_00034] = date.fullYear;
+		flags[PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
 		return;
 	}
 	//[Mediocre Present]
@@ -93,7 +93,7 @@ function openXmasPresent():void {
 		outputText("surprise at the box's contents – there is a single vial of succubi's delight packed inside.  It's going to be a white Christmas after all...\n\n", false);
 		shortName = "SDelite";
 		takeItem();
-		flags[UNKNOWN_FLAG_NUMBER_00034] = date.fullYear;
+		flags[PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
 		return;
 	}
 }
@@ -241,7 +241,7 @@ function xmasFuckFollowup():void {
 	if(player.sens + 20 > 80) stats(0,0,0,0,0,5,0,0);
 	else stats(0,0,0,0,0,15,0,0);
 	temp = 1001;
-	flags[UNKNOWN_FLAG_NUMBER_00034] = date.fullYear;
+	flags[PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
 }
 //FEMTASTIC FOLLOWUP:
 function xmasFuckFollowupFems():void {
@@ -260,7 +260,7 @@ function xmasFuckFollowupFems():void {
 	if(player.sens + 20 > 80) stats(0,0,0,0,0,5,0,0);
 	else stats(0,0,0,0,0,15,0,0);
 	temp = 2002;
-	flags[UNKNOWN_FLAG_NUMBER_00034] = date.fullYear;
+	flags[PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
 }
 
 function xmasPerkM():void {

@@ -25,43 +25,47 @@ package classes
 			{
 				switch (cockType)
 				{
-					case 0: 
-						return CockTypesEnum[HUMAN]
-						break;
-					case 1: 
-						return CockTypesEnum[HORSE]
-						break;
-					case 2: 
-						return CockTypesEnum[DOG]
-						break;
-					case 3: 
-						return CockTypesEnum[DEMON]
-						break;
-					case 4: 
-						return CockTypesEnum[TENTACLE]
-						break;
-					case 5: 
-						return CockTypesEnum[CAT]
-						break;
-					case 6: 
-						return CockTypesEnum[LIZARD]
-						break;
-					case 7: 
-						return CockTypesEnum[ANEMONE]
-						break;
-					case 8: 
-						return CockTypesEnum[KANGAROO]
-						break;
-					case 9: 
-						return CockTypesEnum[DRAGON]
-						break;
-					case 10: 
-						return CockTypesEnum[DISPLACER]
-						break;
-					default: 
-						return CockTypesEnum[HUMAN]
-						break;
-				}				
+					case 0:
+						 return CockTypesEnum[HUMAN]
+						 break;
+					case 1:
+						 return CockTypesEnum[HORSE]
+						 break;
+					case 2:
+						 return CockTypesEnum[DOG]
+						 break;
+					case 3:
+						 return CockTypesEnum[DEMON]
+						 break;
+					case 4:
+						 return CockTypesEnum[TENTACLE]
+						 break;
+					case 5:
+						 return CockTypesEnum[CAT]
+						 break;
+					case 6:
+						 return CockTypesEnum[LIZARD]
+						 break;
+					case 7:
+						 return CockTypesEnum[ANEMONE]
+						 break;
+					case 8:
+						 return CockTypesEnum[KANGAROO]
+						 break;
+					case 9:
+						 return CockTypesEnum[DRAGON]
+						 break;
+					case 10:
+						 return CockTypesEnum[DISPLACER]
+						 break;
+					case 11:
+						 return CockTypesEnum[FOX]
+						 break;
+					default:
+						 return CockTypesEnum[HUMAN]
+						 break;
+				}
+
 			}
 			else if (cockType is String)
 			{
@@ -82,42 +86,45 @@ package classes
 			{
 				switch (cockType)
 				{
-					case CockTypesEnum[HUMAN]: 
-						return 0
-						break;
-					case CockTypesEnum[HORSE]: 
-						return 1
-						break;
-					case CockTypesEnum[DOG]: 
-						return 2
-						break;
-					case CockTypesEnum[DEMON]: 
-						return 3
-						break;
-					case CockTypesEnum[TENTACLE]: 
-						return 4
-						break;
-					case CockTypesEnum[CAT]: 
-						return 5
-						break;
-					case CockTypesEnum[LIZARD]: 
-						return 6
-						break;
-					case CockTypesEnum[ANEMONE]: 
-						return 7
-						break;
-					case CockTypesEnum[KANGAROO]: 
-						return 8
-						break;
-					case CockTypesEnum[DRAGON]: 
-						return 9
-						break;
-					case CockTypesEnum[DISPLACER]: 
-						return 10
-						break;
-					default: 
-						return 0
-						break;
+					case CockTypesEnum[HUMAN]:
+						 return 0
+						 break;
+					case CockTypesEnum[HORSE]:
+						 return 1
+						 break;
+					case CockTypesEnum[DOG]:
+						 return 2
+						 break;
+					case CockTypesEnum[DEMON]:
+						 return 3
+						 break;
+					case CockTypesEnum[TENTACLE]:
+						 return 4
+						 break;
+					case CockTypesEnum[CAT]:
+						 return 5
+						 break;
+					case CockTypesEnum[LIZARD]:
+						 return 6
+						 break;
+					case CockTypesEnum[ANEMONE]:
+						 return 7
+						 break;
+					case CockTypesEnum[KANGAROO]:
+						 return 8
+						 break;
+					case CockTypesEnum[DRAGON]:
+						 return 9
+						 break;
+					case CockTypesEnum[DISPLACER]:
+						 return 10
+						 break;
+					case CockTypesEnum[FOX]:
+						 return 11
+						 break;
+					default:
+						 return 0
+						 break;
 				}
 				
 			}

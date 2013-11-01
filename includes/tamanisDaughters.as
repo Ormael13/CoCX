@@ -564,7 +564,7 @@ function legTamanisDaughtersRAEPYou():void {
 			else outputText("\"wife\"", false);
 			outputText(" in mock indignation.   She taps her chin for a moment, ignoring her daughters as they continue to lick and stroke ", false);
 			if(cocks) outputText("each of ", false);
-			outputText("your " + multiCockDescriptLight() + ".  Your eyes roll back in blissful pleasure as Tamani declares, \"<i>Tamani will take care of you, husband.  You're going to cum into these girls' hungry twats until they have to waddle home, and then you're going to remember why Tamani's cunt owns your " + cockNoun(CockTypesEnum.HUMAN) + ", forever.</i>\"\n\n", false);
+			outputText("your " + multiCockDescriptLight() + ".  Your eyes roll back in blissful pleasure as Tamani declares, \"<i>Tamani will take care of you, husband.  You're going to cum into these girls' hungry twats until they have to waddle home, and then you're going to remember why Tamani's cunt owns your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + ", forever.</i>\"\n\n", false);
 			
 			outputText("Tamani pulls out a ring gag, shoves it into your protesting mouth, and pulls the straps securely around the back of your neck.  She tousles your " + hairDescript() + " as you squirm, but the crowd of goblins easily keeps you subdued, assisting their mother now that they know her plans.   You ", false);
 			if(player.cor > 66) outputText("sigh, actually anticipating what's about to come", false);
@@ -582,7 +582,7 @@ function legTamanisDaughtersRAEPYou():void {
 			
 			//(MULTI)
 			if(cocks > 2) {
-				outputText("Meanwhile your other " + cockNoun(CockTypesEnum.HUMAN) + "s are wasting their spunk over your belly, so some of the waiting girls grab them and pull them aside, ramming their tips deep inside their seemingly bottomless fuck-holes.  They giggle and run their manicured nails over your ", false);
+				outputText("Meanwhile your other " + Appearance.cockNoun(CockTypesEnum.HUMAN) + "s are wasting their spunk over your belly, so some of the waiting girls grab them and pull them aside, ramming their tips deep inside their seemingly bottomless fuck-holes.  They giggle and run their manicured nails over your ", false);
 				if(player.biggestTitSize() < 1) outputText("chest", false);
 				else outputText(allBreastsDescript(), false);
 				outputText(", circling your sensitive nipples", false);
@@ -598,7 +598,7 @@ function legTamanisDaughtersRAEPYou():void {
 			}
 			//(SINGLE EXTRA)
 			else if(cocks == 2) {
-				outputText("Meanwhile your other " + cockNoun(CockTypesEnum.HUMAN) + " is wasting its spunk over your belly, so one of the waiting girls grabs it and pull it to the side, ramming its tip deep inside her seemingly bottomless fuck-hole.  She giggle and runs their manicured nails over your ", false);
+				outputText("Meanwhile your other " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " is wasting its spunk over your belly, so one of the waiting girls grabs it and pull it to the side, ramming its tip deep inside her seemingly bottomless fuck-hole.  She giggle and runs their manicured nails over your ", false);
 				if(player.biggestTitSize() < 1) outputText("chest", false);
 				else outputText(allBreastsDescript(), false);
 				outputText(", circling your sensitive nipples", false);
@@ -638,7 +638,7 @@ function legTamanisDaughtersRAEPYou():void {
 			//(Done before)
 			if(flags[UNKNOWN_FLAG_NUMBER_00056] > 0) outputText("Don't you remember the last time we did this?  Of course not.</i>\"  Your hot goblin wife gestures at your suddenly swollen and erect " + cockDescript(0) + ", and continues, \"<i>Your dick remembers my special potion though.  Now, let's get back to teaching that wonderful cum-spout of yours how to behave around its wife and mistress.</i>\"\n\n", false);
 			//(Not Done Before)
-			else outputText("I mixed a special potion in that drink.   It shuts down all those pesky thoughts so you'll listen to your wonderful wife and let her tell you how to think and feel.</i>\"  She strokes your partially softened " + cockNoun(CockTypesEnum.HUMAN) + ", giggling as it hardens for her, \"<i>You won't remember what Tamani tells you once it wears off, but your dick won't ever forget.</i>\"\n\n", false);
+			else outputText("I mixed a special potion in that drink.   It shuts down all those pesky thoughts so you'll listen to your wonderful wife and let her tell you how to think and feel.</i>\"  She strokes your partially softened " + Appearance.cockNoun(CockTypesEnum.HUMAN) + ", giggling as it hardens for her, \"<i>You won't remember what Tamani tells you once it wears off, but your dick won't ever forget.</i>\"\n\n", false);
 			
 			outputText("Tamani slides her jiggling body overtop of you, placing her sopping wet pussy directly over-top of your " + cockDescript(0) + ".  The warm wet fluids of her desire slowly drip down onto you until your entire surface is coated in her clear feminine-drool and the entire area smells like her cunt.  She shivers and looks into your eyes, smiling at your mindless expression as she lectures, \"<i>Feel how hard your dick is?  That's because it smells my hungry, wet pussy.  It knows that it wants to cum for my pussy.  Your cock wants nothing more than to touch my cunt, worship it and bathe it with cum.</i>\"\n\n", false);
 
@@ -742,7 +742,7 @@ function tamaniDaughtersCombatLossDrain():void {
 	
 	outputText("You blush, ", false);
 	//EXHIBITIONISTZ
-	if(flags[UNKNOWN_FLAG_NUMBER_00023] > 0) outputText("unimaginably turned on by being used and abused by such machinery in front of an audience of your own horny children.", false);
+	if(flags[PC_FETISH] > 0) outputText("unimaginably turned on by being used and abused by such machinery in front of an audience of your own horny children.", false);
 	else if(player.cor > 60) outputText("turned on by being milked in such an obscene way.", false);
 	else outputText("horrified at the situation but unable to resist arousal as you're constantly sucked and pleasured.", false);
 	outputText("\n\n", false);

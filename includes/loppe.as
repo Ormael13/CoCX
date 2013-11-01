@@ -479,7 +479,7 @@ function gossipWithLoppe():void {
 function gossipWithLoppeAboutUrta():void {
 	clearOutput();
 	//(if UrtaSex or UrtaLover flags are NOT active)
-	if(flags[UNKNOWN_FLAG_NUMBER_00011] <= 0 || flags[UNKNOWN_FLAG_NUMBER_00012] == -1) {
+	if(flags[TIMES_FUCKED_URTA] <= 0 || flags[URTA_COMFORTABLE_WITH_OWN_BODY] == -1) {
 		outputText("\"<i>Ah, so you've met Watch Captain Urta?  She's famous around here, you know; people say she's a legendary bare-knuckle brawler and one of the toughest guards on the force.  The only problem is that she's not really that easy to approach... I guess she prefers to keep to herself.  Although she acts very friendly with that pretty centauress, Edryn.</i>\"");
 		outputText("\n\nLoppe taps her lips thinking of what else she could add, but shrugs.  \"<i>I guess that's all I have on her - I don't really know her that well.  Sorry!</i>\"");
 		doNext(13);
@@ -1077,7 +1077,7 @@ function loppeRidesPCCockFinal():void {
 	}
 	outputText("\n\nReleasing you, Loppe points to a nearby chair.  \"<i>I've laid out your [armor] over there, but feel free to stay as long as you want to.</i>\"  You thank her for the kind offer, but the last thing you need are imps or goblins getting into your supplies and making off with your things.  You redress yourself, negligently allowing Loppe glimpses of your naked body as you do so");
 	//[(Exhibitionist)
-	if(flags[UNKNOWN_FLAG_NUMBER_00023] > 0) outputText("; it gives you something of a thrill, though nowhere near as much as taking them off for her in the first place did");
+	if(flags[PC_FETISH] > 0) outputText("; it gives you something of a thrill, though nowhere near as much as taking them off for her in the first place did");
 	outputText(".  Finished, you depart.");
 	stats(0,.5,0,0,.5,-4,-100,0);
 	flags[LOPPE_TIMES_SEXED]++;

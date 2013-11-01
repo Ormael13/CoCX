@@ -178,7 +178,7 @@ function doCombat(eventNum:Number)
 	var pSpecials:int = 5161;
 	
 	if(eventNum == 5000) {
-		flags[UNKNOWN_FLAG_NUMBER_00022] = 0;
+		flags[IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 0;
 		dataBG.visible = false;
 		dataText.visible = false;
 		appearanceText.visible = false;
@@ -3034,7 +3034,7 @@ function doCombat(eventNum:Number)
 	if(eventNum == 5071) {
 		//Gain fatigue if not fighting sand tarps
 		if(monster.hasStatusAffect("level") < 0) fatigue(-5);
-		flags[UNKNOWN_FLAG_NUMBER_00022] = 1;
+		flags[IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 1;
 		if(monster.hasStatusAffect("PCTailTangle") >= 0) {
 			kitsuneWait();
 			return;
@@ -3848,7 +3848,7 @@ function attack():void {
 		enemyAI();
 		return;
 	}
-	if(flags[UNKNOWN_FLAG_NUMBER_00023] >= 3 && !isUrta()) {
+	if(flags[PC_FETISH] >= 3 && !isUrta()) {
 		outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  Ceraph's piercings have made normal attack impossible!  Maybe you could try something else?\n\n", false);
 		enemyAI();
 		return;
@@ -4517,7 +4517,7 @@ function takeDamage(damage:Number, noMod:Boolean = false):Number {
 	if(damage < 1) damage = 1;
 	//Else deduct.
 	else player.HP-=damage;
-	if(flags[UNKNOWN_FLAG_NUMBER_00021] > 0) {
+	if(flags[MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
 		stats(0,0,0,0,0,0,int(damage/2),0);
 	}
 	hpDown.visible = true;
@@ -5207,35 +5207,35 @@ function combatStatusesUpdate():void {
 		}
 		monster.lust += monster.lustVuln * (2 + rand(4));
 	}
-	if(player.hasStatusAffect("Bound") >= 0 && flags[UNKNOWN_FLAG_NUMBER_00023] >= 2) {
+	if(player.hasStatusAffect("Bound") >= 0 && flags[PC_FETISH] >= 2) {
 		outputText("The feel of tight leather completely immobilizing you turns you on more and more.  Would it be so bad to just wait and let her play with you like this?\n\n", false);
 		stats(0,0,0,0,0,0,3,0);
 	}
 	if(monster.hasStatusAffect("QueenBind") >= 0) {
 		outputText("You're utterly restrained by the Harpy Queen's magical ropes!\n\n");
-		if(flags[UNKNOWN_FLAG_NUMBER_00023] >= 2) stats(0,0,0,0,0,0,3,0);
+		if(flags[PC_FETISH] >= 2) stats(0,0,0,0,0,0,3,0);
 	}
 	if(player.hasStatusAffect("GooArmorBind") >= 0) {
-		if(flags[UNKNOWN_FLAG_NUMBER_00023] >= 2) {
+		if(flags[PC_FETISH] >= 2) {
 			outputText("The feel of the all-encapsulating goo immobilizing your helpless body turns you on more and more.  Maybe you should just wait for it to completely immobilize you, have you at its mercy.\n\n");
 			stats(0,0,0,0,0,0,3,0);
 		}
 		else outputText("You're utterly immobilized by the goo flowing around you.  You'll have to struggle free!\n\n");
 	}
 	if(player.hasStatusAffect("HarpyBind") >= 0) {
-		if(flags[UNKNOWN_FLAG_NUMBER_00023] >= 2) {
+		if(flags[PC_FETISH] >= 2) {
 			outputText("The harpies are holding you down and restraining you, making the struggle all the sweeter!\n\n");
 			stats(0,0,0,0,0,0,3,0);
 		}
 		else outputText("You're restrained by the harpies so that they can beat on you with impunity.  You'll need to struggle to break free!\n\n");
 	}
-	if(player.hasStatusAffect("Naga Bind") >= 0 && flags[UNKNOWN_FLAG_NUMBER_00023] >= 2) {
+	if(player.hasStatusAffect("Naga Bind") >= 0 && flags[PC_FETISH] >= 2) {
 		outputText("Coiled tightly by the naga and utterly immobilized, you can't help but become aroused thanks to your bondage fetish.\n\n", false);
 		stats(0,0,0,0,0,0,5,0);
 	}
 	if(player.hasStatusAffect("TentacleBind") >= 0) {
 		outputText("You are firmly trapped in the tentacle's coils.  <b>The only thing you can try to do is struggle free!</b>\n\n", false);
-		if(flags[UNKNOWN_FLAG_NUMBER_00023] >= 2) {
+		if(flags[PC_FETISH] >= 2) {
 			outputText("Wrapped tightly in the tentacles, you find it hard to resist becoming more and more aroused...\n\n", false);
 			stats(0,0,0,0,0,0,3,0);
 		}
@@ -5379,7 +5379,7 @@ function combatStatusesUpdate():void {
 		}
 	}
 	//Bondage straps + bondage fetish
-	if(flags[UNKNOWN_FLAG_NUMBER_00023] >= 2 && player.armorName == "barely-decent bondage straps") {
+	if(flags[PC_FETISH] >= 2 && player.armorName == "barely-decent bondage straps") {
 		outputText("The feeling of the tight, leather straps holding tightly to your body while exposing so much of it turns you on a little bit more.\n\n", false);
 		stats(0,0,0,0,0,0,2,0);
 	}
@@ -16449,7 +16449,7 @@ function tease():void {
 		}
 		if(monster.plural) damage *= 1.3;
 		enemyTeaseReaction(damage + rand(bonusDamage));
-		if(flags[UNKNOWN_FLAG_NUMBER_00023] >= 1) {
+		if(flags[PC_FETISH] >= 1) {
 			if(player.lust < 75) outputText("\nFlaunting your body in such a way gets you a little hot and bothered.", false);
 			else outputText("\nIf you keep exposing yourself you're going to get too horny to fight back.  This exhibitionism fetish makes it hard to resist just stripping naked and giving up.", false);
 			stats(0,0,0,0,0,0,2 + rand(3),0);
@@ -16959,7 +16959,7 @@ function kick():void {
 	//(bipedal hoof-kick) 
 	else if(player.lowerBody == 1) outputText("You twist and lurch as you raise a leg and slam your hoof forward in a kick.  ", false);
 
-	if(flags[UNKNOWN_FLAG_NUMBER_00023] >= 3) {
+	if(flags[PC_FETISH] >= 3) {
 		outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  Ceraph's piercings have made normal attack impossible!  Maybe you could try something else?\n\n", false);
 		enemyAI();
 		return;

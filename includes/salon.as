@@ -57,7 +57,7 @@ function hairDresserRepeatGreeting():void {
 	spriteSelect(38);
 	var minoCum:Number = 0;
 	//Chance for mino craziness here
-	if(rand(5) == 0 && (player.hasPerk("Minotaur Cum Addict") >= 0 || flags[UNKNOWN_FLAG_NUMBER_00020] > 0)) {
+	if(rand(5) == 0 && (player.hasPerk("Minotaur Cum Addict") >= 0 || flags[MINOTAUR_CUM_ADDICTION_STATE] > 0)) {
 		minotaurCumBukkakeInSalon();	
 		return;
 	}
