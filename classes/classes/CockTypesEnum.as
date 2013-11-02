@@ -18,6 +18,7 @@ package classes
 		   8 - ugliest wang ever (kangaroo)
 		   9 - dragon
 		   10 - displacer
+		   11 - Fox
 		 */
 		public static function legacySuportLoadCockType(cockType:*):CockTypesEnum
 		{
@@ -151,6 +152,7 @@ package classes
 		public static const KANGAROO:CockTypesEnum = new CockTypesEnum();
 		public static const DRAGON:CockTypesEnum = new CockTypesEnum();
 		public static const DISPLACER:CockTypesEnum = new CockTypesEnum();
+		public static const FOX:CockTypesEnum = new CockTypesEnum();
 		
 		public static function ParseConstant(i_constantName:String, i_caseSensitive:Boolean = false):CockTypesEnum
 		{
