@@ -1602,7 +1602,7 @@ function interactWithMarbleAtCamp():void {
 	//appearnace/info - always there
 	//Sex
 	if(player.lust >= 33) sexEvent = 2127;
-	choices("Appearance",2132,"Talk",marbleTalkOverhaul,"Present",gatherEvent,"Give Item",giveItemEvent,"Get Milk",milkEvent,"Release",sexEvent,"Playtime",playtime,"Break Up",breakUpWithMarble,"",0,"Back",121);
+	choices("Appearance",2132,"Talk",marbleTalkOverhaul,"Present",gatherEvent,"Give Item",giveItemEvent,"Get Milk",milkEvent,"Release",sexEvent,"Playtime",playtime,"Break Up",breakUpWithMarble,"",0,"Back",campLoversMenu);
 }
 
 function marbleTalkOverhaul():void {

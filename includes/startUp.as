@@ -148,12 +148,12 @@ function mainMenu(e:MouseEvent = undefined):void {
 	if(isHeliaBirthday()) 
 		outputText("\n\n<b>It's Helia's Birthday Month!</b>");
 
+	var resume:Number = 0;
 	if(player.str > 0)  //we're in a game, allow resume.
-		choices("Null",  0, "Credits", creditsScreen, "Instructions", howToPlay, "", 0, "", 0, "", 0, "", 0, "", 0, "Settings", settingsScreen, "Resume", 1);
+		resume = 1;
+	
+	choices("",  0, "Credits", creditsScreen, "Instructions", howToPlay, "", 0, "", 0, "ASPLODE", 9000000000, "", 0, "", 0, "Settings", settingsScreen, "Resume", resume);
 		
-	else 
-		choices("Null",  0, "Credits", creditsScreen, "Instructions", howToPlay, "", 0, "", 0, "", 0, "", 0, "", 0, "Settings", settingsScreen, "Null",0);
-	//else choices("EZ Mode",  96, "Credits", 63, "Instructions", 81, "four", 0, "five", 0, "Toggle Debug", 18, "seven", 0, "Silly Toggle", 113, "Sprite Toggle", 112, "",0);
 }
 
 

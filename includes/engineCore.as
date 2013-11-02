@@ -3611,6 +3611,20 @@ function mouseOverTextin(e:MouseEvent, texts:String)
 		mouseOverText.htmlText = "How to play.  Starting tips.  And hotkeys for easy left-handed play...";
 		return;
 	}
+	if(texts.indexOf("Settings") != -1) {
+		positionMOB(e.target.x, e.target.y)			
+		mouseOverText.visible = true;
+		popUpBG.visible = true;
+		mouseOverText.htmlText = "Configure game settings and enable cheats.";
+		return;
+	}
+	if(texts.indexOf("ASPLODE") != -1) {
+		positionMOB(e.target.x, e.target.y)			
+		mouseOverText.visible = true;
+		popUpBG.visible = true;
+		mouseOverText.htmlText = "MAKE SHIT ASPLODE";
+		return;
+	}
 	mouseOverText.visible = false;
 	popUpBG.visible = false;
 }

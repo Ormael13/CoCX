@@ -7,7 +7,7 @@ import os.path
 # Ok, this is kind of a mess, but it currently seems to work without major crashes or causing any 
 # invalid code output, at least as far as I have been able to check.
 
-
+# (choices[\(\)\w,\- \"]+?\W)(120)(\W)
 
 def cleanEventNumbers():
 
@@ -24,7 +24,7 @@ def cleanEventNumbers():
 	#print eventS
 	res = funcExtr.findall(eventS)
 	res = dict(res)
-
+	print res
 	#Ok, now we have a eventNo <-> function name dictionary
 	
 
@@ -73,8 +73,8 @@ def cleanEventNumbers():
 				print len(tmpO), len(tmp)
 				print "Length Delta", len(tmp)-len(tmpO) 
 
-				with open(os.path.join("./includes", filename), "w") as fileH:
-					tmp = fileH.write(tmp)
+				#with open(os.path.join("./includes", filename), "w") as fileH:
+				#	tmp = fileH.write(tmp)
 
 
 #
@@ -315,8 +315,8 @@ if __name__ == "__main__":
 
 	print "OMG WE'S BREAKIN STUF!!111one!"
 
-	#cleanEventNumbers()
-	cleanStaleDoEventIfs()
+	cleanEventNumbers()
+	#cleanStaleDoEventIfs()
 
 	#cleanFlags()
 
