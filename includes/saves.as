@@ -63,7 +63,7 @@ function loadScreen():void
 {
 	var test;
 	
-	var slots = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+	var slots = new Array(saveFileNames.length);
 		
 	outputText("<b><u>Slot: Sex,  Game Days Played</u></b>\r", true);
 	
@@ -91,6 +91,8 @@ function loadScreen():void
 				}
 			})(i);
 		}
+		else
+			slots[i] = 0;		// You have to set the parameter to 0 to disable the button
 	}
 	
 	choices("Slot 1", slots[0], 
@@ -179,27 +181,27 @@ function saveLoad(e:MouseEvent):void
 	}
 	if (temp == 777)
 	{
-		simpleChoices("", 0, "Load", 19, "Load File", -21, "Delete", 82, "Back", 5025);
+		simpleChoices("", 0, "Load", loadScreen, "Load File", -21, "Delete", deleteScreen, "Back", 5025);
 		return;
 	}
 	if (player.str == 0)
 	{
-		simpleChoices("", 0, "Load", 19, "Load File", -21, "Delete", 82, "Back", 64);
+		simpleChoices("", 0, "Load", loadScreen, "Load File", -21, "Delete", deleteScreen, "Back", mainMenu);
 		return;
 	}
 	if (inDungeon)
 	{
-		simpleChoices("", 0, "Load", 19, "Load File", -21, "Delete", 82, "Back", 1);
+		simpleChoices("", 0, "Load", loadScreen, "Load File", -21, "Delete", deleteScreen, "Back", 1);
 		return;
 	}
 	if (gameState == 3)
-		choices("Save", 20, "Load", 19, "Load File", -21, "Delete", 82, "Back", 0, "Save to File", -20, "Load File", -21, "", 0, "", 0, "", 0);
+		choices("Save", saveScreen, "Load", loadScreen, "Load File", -21, "Delete", deleteScreen, "Back", 0, "Save to File", -20, "Load File", -21, "", 0, "", 0, "", 0);
 	else
 	{
 		if (player.autoSave)
-			choices("Save", 20, "Load", 19, "AutoSav: ON", 65, "Delete", 82, "", 0, "Save to File", -20, "Load File", -21, "", 0, "", 0, "Back", 1);
+			choices("Save", saveScreen, "Load", loadScreen, "AutoSav: ON", 65, "Delete", deleteScreen, "", 0, "Save to File", -20, "Load File", -21, "", 0, "", 0, "Back", 1);
 		else
-			choices("Save", 20, "Load", 19, "AutoSav: OFF", 65, "Delete", 82, "", 0, "Save to File", -20, "Load File", -21, "", 0, "", 0, "Back", 1);
+			choices("Save", saveScreen, "Load", loadScreen, "AutoSav: OFF", 65, "Delete", deleteScreen, "", 0, "Save to File", -20, "Load File", -21, "", 0, "", 0, "Back", 1);
 	}
 }
 
@@ -232,6 +234,8 @@ function deleteScreen():void
 				}
 			})(i);
 		}
+		else
+			delFuncs[i] = 0;	//disable buttons for empty slots
 	}
 	
 	// outputText(loadSaveDisplay("CoC_1", "1") + loadSaveDisplay("CoC_2", "2") + loadSaveDisplay("CoC_3", "3") + loadSaveDisplay("CoC_4", "4") + loadSaveDisplay("CoC_5", "5") + loadSaveDisplay("CoC_6", "6") + loadSaveDisplay("CoC_7", "7") + loadSaveDisplay("CoC_8", "8") + loadSaveDisplay("CoC_9", "9"), false);
