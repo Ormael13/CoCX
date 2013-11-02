@@ -152,7 +152,9 @@ function mainMenu(e:MouseEvent = undefined):void {
 	if(player.str > 0)  //we're in a game, allow resume.
 		resume = 1;
 	
-	choices("",  0, "Credits", creditsScreen, "Instructions", howToPlay, "", 0, "", 0, "ASPLODE", 9000000000, "", 0, "", 0, "Settings", settingsScreen, "Resume", resume);
+	//The world isn't quite ready for the ASPLODE button. Uncomment for easy bug reporter testing.
+	//choices("",  0, "Credits", creditsScreen, "Instructions", howToPlay, "", 0, "", 0, "ASPLODE", 9000000000, "", 0, "", 0, "Settings", settingsScreen, "Resume", resume);
+	choices("",  0, "Credits", creditsScreen, "Instructions", howToPlay, "", 0, "", 0, "", 0, "", 0, "", 0, "Settings", settingsScreen, "Resume", resume);
 		
 }
 
