@@ -61,7 +61,7 @@ const UNKNOWN_FLAG_NUMBER_00059:int                                   =   59; //
 const UNKNOWN_FLAG_NUMBER_00060:int                                   =   60; // Fail Masturbation As Centaur?
 const UNKNOWN_FLAG_NUMBER_00061:int                                   =   61; // Cerulean Potion Bad-End Futa Count
 const UNKNOWN_FLAG_NUMBER_00062:int                                   =   62; // Cerulean Potion Neuter Attempted
-const UNKNOWN_FLAG_NUMBER_00063:int                                   =   63; // Used as temp storage for deleting save slots
+const TEMP_STORAGE_SAVE_DELETION:int                                  =   63; // Used as temp storage for deleting save slots
 const UNKNOWN_FLAG_NUMBER_00064:int                                   =   64; // Marble not sleeping with you due to worms
 const UNKNOWN_FLAG_NUMBER_00065:int                                   =   65; // Force Bee Honey Drop - Found Bee Honey.	1=Found
 const UNKNOWN_FLAG_NUMBER_00066:int                                   =   66; // Hair no longer grows due to lizard

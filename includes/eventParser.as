@@ -145,126 +145,10 @@ function doSystem(eventNo:Number):void {
 		showStats();
 		statScreenRefresh();
 	}
-	//Save Slot 1
-	if(eventNo == 21) {
-		saveGame("CoC_1");
-	}
-	//Save SLot 2
-	if(eventNo == 22) {
-		saveGame("CoC_2")
-	}
-	//Save SLot 3
-	if(eventNo == 23) {
-		saveGame("CoC_3")
-	}
-	//Save SLot 4
-	if(eventNo == 24) {
-		saveGame("CoC_4")
-	}
-	//Save SLot 5
-	if(eventNo == 25) {
-		saveGame("CoC_5")
-	}
-	//Save SLot 6
-	if(eventNo == 26) {
-		saveGame("CoC_6")
-	}
-	//Save SLot 7
-	if(eventNo == 27) {
-		saveGame("CoC_7")
-	}
-	//Save SLot 8
-	if(eventNo == 28) {
-		saveGame("CoC_8")
-	}
-	//Save SLot 9
-	if(eventNo == 29) {
-		saveGame("CoC_9")
-	}
-	if(eventNo == 30) {
+	if(eventNo == 30) 	// I have NO idea what could call this. I don't see anything that passes 30 as an event number anywhere
+	{
 		var f:MouseEvent;
 		saveLoad(f);
-	}
-	//Load Slot 1
-	if(eventNo == 31) {
-		if(loadGame("CoC_1")) {
-			doNext(1);
-			showStats();
-			statScreenRefresh();
-			outputText("Slot 1 Loaded!", true);
-		}
-	}
-	//Load Slot 2
-	if(eventNo == 32) {
-		if(loadGame("CoC_2")) {
-			doNext(1);
-			showStats();
-			statScreenRefresh();
-			outputText("Slot 2 Loaded!", true);
-		}
-	}
-	//Load Slot 3
-	if(eventNo == 33) {
-		if(loadGame("CoC_3")) {
-			doNext(1);
-			showStats();
-			statScreenRefresh();
-			outputText("Slot 3 Loaded!", true);
-		}
-	}
-	//Load Slot 4
-	if(eventNo == 34) {
-		if(loadGame("CoC_4")) {
-			doNext(1);
-			showStats();
-			statScreenRefresh();
-			outputText("Slot 4 Loaded!", true);
-		}
-	}
-	//Load Slot 5
-	if(eventNo == 35) {
-		if(loadGame("CoC_5")) {
-			doNext(1);
-			showStats();
-			statScreenRefresh();
-			outputText("Slot 5 Loaded!", true);
-		}
-	}
-	//Load Slot 6
-	if(eventNo == 36) {
-		if(loadGame("CoC_6")) {
-			doNext(1);
-			showStats();
-			statScreenRefresh();
-			outputText("Slot 6 Loaded!", true);
-		}
-	}
-	//Load Slot 7
-	if(eventNo == 37) {
-		if(loadGame("CoC_7")) {
-			doNext(1);
-			showStats();
-			statScreenRefresh();
-			outputText("Slot 7 Loaded!", true);
-		}
-	}
-	//Load Slot 8
-	if(eventNo == 38) {
-		if(loadGame("CoC_8")) {
-			doNext(1);
-			showStats();
-			statScreenRefresh();
-			outputText("Slot 8 Loaded!", true);
-		}
-	}
-	//Load Slot 9
-	if(eventNo == 39) {
-		if(loadGame("CoC_9")) {
-			doNext(1);
-			showStats();
-			statScreenRefresh();
-			outputText("Slot 9 Loaded!", true);
-		}
 	}
 	//Use wait command
 	if(eventNo == 40) {
@@ -537,59 +421,6 @@ function doSystem(eventNo:Number):void {
 		deleteScreen();
 		return;
 	}
-	if(eventNo == 83) {
-		flags[UNKNOWN_FLAG_NUMBER_00063] = "CoC_1";
-		eventParser(92);		
-		return;
-	}
-	if(eventNo == 84) {
-		flags[UNKNOWN_FLAG_NUMBER_00063] = "CoC_2";
-		eventParser(92);		
-		return;
-	}
-	if(eventNo == 85) {
-		flags[UNKNOWN_FLAG_NUMBER_00063] = "CoC_3";
-		eventParser(92);		
-		return;
-	}
-	if(eventNo == 86) {
-		flags[UNKNOWN_FLAG_NUMBER_00063] = "CoC_4";
-		eventParser(92);		
-		return;
-	}
-	if(eventNo == 87) {
-		flags[UNKNOWN_FLAG_NUMBER_00063] = "CoC_5";
-		eventParser(92);		
-		return;
-	}
-	if(eventNo == 88) {
-		flags[UNKNOWN_FLAG_NUMBER_00063] = "CoC_6";
-		eventParser(92);		
-		return;
-	}
-	if(eventNo == 89) {
-		flags[UNKNOWN_FLAG_NUMBER_00063] = "CoC_7";
-		eventParser(92);		
-		return;
-	}
-	if(eventNo == 90) {
-		flags[UNKNOWN_FLAG_NUMBER_00063] = "CoC_8";
-		eventParser(92);		
-		return;
-	}
-	if(eventNo == 91) {
-		flags[UNKNOWN_FLAG_NUMBER_00063] = "CoC_9";
-		eventParser(92);		
-		return;
-	}
-	if(eventNo == 92) {
-		confirmDelete();
-		return;
-	}
-	if(eventNo == 93) {
-		purgeTheMutant();
-		return;
-	}
 	if(eventNo == 94) {
 		//located in exploration.as
 		debugOptions();
@@ -788,99 +619,40 @@ function doSystem(eventNo:Number):void {
 		eventParser(64);
 		return;
 	}
-	if(eventNo == 120) {
+	if(false == 120) {
 		campSlavesMenu();
 		return;
 	}
-	if(eventNo == 121) {
+	if(false == 121) {
 		campLoversMenu();
 		return;
 	}
 
 
-
-	// --------------------------------------------------------------------------------------------------------------
-	// Settings and startup menu items
-
-	//Display Credits Menu
-	if(eventNo == 63) {
-		creditsScreen();
-	}
-	
-	//Display title
-	if(eventNo == 64) {
-		mainMenu();
-	}
-
-	if(eventNo == 81) {
-		howToPlay();
-		return;
-	}
-
-	// Toggles -------------------------
-	
-	//toggle debug
-	if(eventNo == 18) {
-		if(debug) 
-			debug = false;
-		else 
-			debug = true;
-		dataBG.visible = true;
-		dataText.visible = true;
-		settingsScreen();
-	}
-	
-	//Toggle Easy Mode
-	if(eventNo == 96) {
-		if(flags[EASY_MODE_ENABLE_FLAG] == 0) 
-			flags[EASY_MODE_ENABLE_FLAG] = 1;
-		else 
-			flags[EASY_MODE_ENABLE_FLAG] = 0;
-		settingsScreen();
-		dataBG.visible = true;
-		dataText.visible = true;
-	}
-
-	
-	// Sprite toggle
-	if(eventNo == 112) 
-	{
-		
-		if(flags[SHOW_SPRITES_FLAG]) 
-			flags[SHOW_SPRITES_FLAG] = false;
-		else 
-			flags[SHOW_SPRITES_FLAG] = true;
-		settingsScreen();
-		return;
-	}
-
-	// Silly Toggle
-	if(eventNo == 113) {
-		if(flags[SILLY_MODE_ENABLE_FLAG])
-			flags[SILLY_MODE_ENABLE_FLAG] = false;
-		else 
-			flags[SILLY_MODE_ENABLE_FLAG] = true;
-		settingsScreen();
-		return;
-	}
-	// End Toggles -------------------------
-
-	if(eventNo == 122) {
-		settingsScreen();
-		return;
-	}
-
-
-	if(eventNo == 117) {
-		eventTester();
-		
-		return;
-	}
-
+	errorPrint(eventNo);
 }
 
+function getCurrentStackTrace():String
+{
+	var tempError:Error = new Error();
+	var stackTrace:String = tempError.getStackTrace();
+	return stackTrace;
+}
+function errorPrint(details:* = null)
+{
+	outputText("<b>Congradulations, you've found a bug!</b>", true);
+	outputText("\nError: Unknown event number passed!", false);
+	outputText("\n\nPlease report that you had an issue with code: \"" + details + "\" and stack-trace: ", false);
+	outputText("\n<pre>" + getCurrentStackTrace() + "</pre>", false);
+	outputText("\nto fake-name on the forums or", false);
+	outputText(" better yet, file a bug report on git: ", false);
+	outputText("\n\nhttps://github.com/herp-a-derp/Corruption-of-Champions", false);
 
+	outputText("\nPlease try to include the details of what you were doing when you encountered this bug (including the above stack trace copy&pasted into the details), to make tracking", false);
+	outputText(" the issue down easier. Thanks!", false);
 
+	doNext(13);
+}
 
 
 

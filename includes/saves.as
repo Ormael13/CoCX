@@ -64,21 +64,33 @@ function loadScreen():void
 	var test;
 	
 	var slots = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-	
-	var loadFuncs = [31, 32, 33, 34, 35, 36, 37, 38, 39];
-	
+		
 	outputText("<b><u>Slot: Sex,  Game Days Played</u></b>\r", true);
-	//outputText(loadSaveDisplay("CoC_1","1") + loadSaveDisplay("CoC_2","2") + loadSaveDisplay("CoC_3","3") + loadSaveDisplay("CoC_4","4") + loadSaveDisplay("CoC_5","5") + loadSaveDisplay("CoC_6","6") + loadSaveDisplay("CoC_7","7") + loadSaveDisplay("CoC_8","8") + loadSaveDisplay("CoC_9","9"), false);
 	
-	for (var i = 0; i < 9; i += 1)
+	for (var i = 0; i < saveFileNames.length; i += 1)
 	{
 		outputText(loadSaveDisplay(saveFileNames[i], String(i + 1)), false);
 		
-		slots[i] = loadFuncs[i];
 		
 		test = SharedObject.getLocal(saveFileNames[i], "/");
 		if (test.data.exists)
-			slots[i] = loadFuncs[i];
+		{
+			//trace("Creating function with indice = ", i);
+			(function(i)		// messy hack to work around closures. See: http://en.wikipedia.org/wiki/Immediately-invoked_function_expression
+			{
+				slots[i] = function() : void 		// Anonymous functions FTW
+				{
+					trace("Loading save with name", saveFileNames[i], "at index", i)
+					if (loadGame(saveFileNames[i])) 
+					{
+						doNext(1);
+						showStats();
+						statScreenRefresh();
+						outputText("Slot " + i + " Loaded!", true);
+					}
+				}
+			})(i);
+		}
 	}
 	
 	choices("Slot 1", slots[0], 
@@ -107,20 +119,27 @@ function saveScreen():void
 		outputText("<b>Last saved or loaded from: " + player.slotName + "</b>\r\r", false);
 	outputText("<b><u>Slot: Sex,  Game Days Played</u></b>\r", false);
 	
-	var slots = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-	var saveFuncs = [21, 22, 23, 24, 25, 26, 27, 28, 29];
+	var saveFuncs:Array = new Array();
 	
-	for (var i = 0; i < 9; i += 1)
+	
+	for (var i = 0; i < saveFileNames.length; i += 1)
 	{
 		outputText(loadSaveDisplay(saveFileNames[i], String(i + 1)), false);
 		
-		//slots[i] = saveFuncs[i];
-
-		//test = SharedObject.getLocal(saveFileNames[i], "/");
-		//if (test.data.exists)
-			//slots[i] = saveFuncs[i];
+		
+		trace("Creating function with indice = ", i);
+		(function(i)		// messy hack to work around closures. See: http://en.wikipedia.org/wiki/Immediately-invoked_function_expression
+		{
+			saveFuncs[i] = function() : void 		// Anonymous functions FTW
+			{
+				trace("Saving game with name", saveFileNames[i], "at index", i)
+				saveGame(saveFileNames[i]);
+			}
+		})(i);
 		
 	}
+	
+
 	if (player.slotName == "VOID")
 		outputText("\r\r", false);
 	
@@ -187,66 +206,66 @@ function saveLoad(e:MouseEvent):void
 function deleteScreen():void
 {
 	var test;
-	var slot1:Number = 0;
-	var slot2:Number = 0;
-	var slot3:Number = 0;
-	var slot4:Number = 0;
-	var slot5:Number = 0;
-	var slot6:Number = 0;
-	var slot7:Number = 0;
-	var slot8:Number = 0;
-	var slot9:Number = 0;
 	outputText("Slot,  Race,  Sex,  Game Days Played\n", true);
-	outputText(loadSaveDisplay("CoC_1", "1") + loadSaveDisplay("CoC_2", "2") + loadSaveDisplay("CoC_3", "3") + loadSaveDisplay("CoC_4", "4") + loadSaveDisplay("CoC_5", "5") + loadSaveDisplay("CoC_6", "6") + loadSaveDisplay("CoC_7", "7") + loadSaveDisplay("CoC_8", "8") + loadSaveDisplay("CoC_9", "9"), false);
-	test = SharedObject.getLocal("CoC_1", "/");
-	if (test.data.exists)
-		slot1 = 83;
-	test = SharedObject.getLocal("CoC_2", "/");
-	if (test.data.exists)
-		slot2 = 84;
-	test = SharedObject.getLocal("CoC_3", "/");
-	if (test.data.exists)
-		slot3 = 85;
-	test = SharedObject.getLocal("CoC_4", "/");
-	if (test.data.exists)
-		slot4 = 86;
-	test = SharedObject.getLocal("CoC_5", "/");
-	if (test.data.exists)
-		slot5 = 87;
-	test = SharedObject.getLocal("CoC_6", "/");
-	if (test.data.exists)
-		slot6 = 88;
-	test = SharedObject.getLocal("CoC_7", "/");
-	if (test.data.exists)
-		slot7 = 89;
-	test = SharedObject.getLocal("CoC_8", "/");
-	if (test.data.exists)
-		slot8 = 90;
-	test = SharedObject.getLocal("CoC_9", "/");
-	if (test.data.exists)
-		slot9 = 91;
+	
+
+	var delFuncs:Array = new Array();
+	
+	
+	for (var i = 0; i < saveFileNames.length; i += 1)
+	{
+		outputText(loadSaveDisplay(saveFileNames[i], String(i + 1)), false);
+		
+		
+		test = SharedObject.getLocal(saveFileNames[i], "/");
+		if (test.data.exists)
+		{
+			//slots[i] = loadFuncs[i];
+
+			trace("Creating function with indice = ", i);
+			(function(i)		// messy hack to work around closures. See: http://en.wikipedia.org/wiki/Immediately-invoked_function_expression
+			{
+				delFuncs[i] = function() : void 		// Anonymous functions FTW
+				{
+							flags[TEMP_STORAGE_SAVE_DELETION] = saveFileNames[i];
+							confirmDelete();	
+				}
+			})(i);
+		}
+	}
+	
+	// outputText(loadSaveDisplay("CoC_1", "1") + loadSaveDisplay("CoC_2", "2") + loadSaveDisplay("CoC_3", "3") + loadSaveDisplay("CoC_4", "4") + loadSaveDisplay("CoC_5", "5") + loadSaveDisplay("CoC_6", "6") + loadSaveDisplay("CoC_7", "7") + loadSaveDisplay("CoC_8", "8") + loadSaveDisplay("CoC_9", "9"), false);
 	
 	outputText("\n<b>ONCE DELETED, YOUR SAVE IS GONE FOREVER.</b>", false);
-	choices("Slot 1", slot1, "Slot 2", slot2, "Slot 3", slot3, "Slot 4", slot4, "Slot 5", slot5, "Slot 6", slot6, "Slot 7", slot7, "Slot 8", slot8, "Slot 9", slot9, "Back", 30);
+	choices("Slot 1", delFuncs[0], 
+			"Slot 2", delFuncs[1], 
+			"Slot 3", delFuncs[2], 
+			"Slot 4", delFuncs[3], 
+			"Slot 5", delFuncs[4], 
+			"Slot 6", delFuncs[5], 
+			"Slot 7", delFuncs[6], 
+			"Slot 8", delFuncs[7], 
+			"Slot 9", delFuncs[8], 
+			"Back", 30);
 }
 
 function confirmDelete():void
 {
-	outputText("You are about to delete the following save: <b>" + flags[UNKNOWN_FLAG_NUMBER_00063] + "</b>\n\nAre you sure you want to delete it?", true);
-	simpleChoices("No", 82, "Yes", 93, "", 0, "", 0, "", 0);
+	outputText("You are about to delete the following save: <b>" + flags[TEMP_STORAGE_SAVE_DELETION] + "</b>\n\nAre you sure you want to delete it?", true);
+	simpleChoices("No", deleteScreen, "Yes", purgeTheMutant, "", 0, "", 0, "", 0);
 }
 
 function purgeTheMutant():void
 {
-	var test = SharedObject.getLocal(flags[UNKNOWN_FLAG_NUMBER_00063], "/");
-	trace("DELETING SLOT: " + flags[UNKNOWN_FLAG_NUMBER_00063]);
+	var test = SharedObject.getLocal(flags[TEMP_STORAGE_SAVE_DELETION], "/");
+	trace("DELETING SLOT: " + flags[TEMP_STORAGE_SAVE_DELETION]);
 	var blah:Array = new Array("been virus bombed", "been purged", "been vaped", "been nuked from orbit", "taken an arrow to the knee", "fallen on its sword", "lost its reality matrix cohesion", "been cleansed", "suffered the following error: (404) Porn Not Found");
 	
 	trace(blah.length + " array slots");
 	var select:Number = rand(blah.length);
-	outputText(flags[UNKNOWN_FLAG_NUMBER_00063] + " has " + blah[select] + ".", true);
+	outputText(flags[TEMP_STORAGE_SAVE_DELETION] + " has " + blah[select] + ".", true);
 	test.clear();
-	doNext(82);
+	doNext(deleteScreen);
 }
 
 function saveGame(slot:String):void
@@ -265,9 +284,16 @@ function loadGame(slot:String):void
 	doNext(1);
 }
 
+
+/*
+
+OH GOD SOMEONE FIX THIS DISASTER!!!!111one1ONE!
+
+*/
 //FURNITURE'S JUNK
 function saveGameObject(slot:String, isFile:Boolean):void
 {
+
 	//import classes.cockClass
 	import classes.Cock;
 	import classes.vaginaClass;
