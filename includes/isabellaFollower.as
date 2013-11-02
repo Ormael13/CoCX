@@ -157,7 +157,7 @@ function callForFollowerIsabella():void {
 		pro = 3258;
 		outputText("\n\n<b>Isabella would probably drink a bottle of Pro Bova if you gave it to her.</b>", false);
 	}
-	choices("Accent Coach",accent,"Get Milk",milk,"GiveProBova",pro,"Sex",campIzzySexMenu,"Spar",isabellaSparMenu,"",0,"",0,"",0,"",0,"Back",121);
+	choices("Accent Coach",accent,"Get Milk",milk,"GiveProBova",pro,"Sex",campIzzySexMenu,"Spar",isabellaSparMenu,"",0,"",0,"",0,"",0,"Back",campLoversMenu);
 }
 
 function campIzzySexMenu():void {

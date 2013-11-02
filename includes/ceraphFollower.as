@@ -37,7 +37,7 @@ function ceraphFollowerAppearance(output:Boolean = true):void {
 		if(output) outputText("\n\n<b>You aren't turned on enough for sex.</b>", false);
 	}
 	else sexMenu = 3471;
-	choices("Sex",sexMenu,"",0,"",0,"",0,"Partswap",giveFollowerBodyBits,"Roleplay",rp,"Get Fetish",gainFetish,"RemoveFetish",loseFetish,dickToggle,cawkTawgle,"Leave",120);
+	choices("Sex",sexMenu,"",0,"",0,"",0,"Partswap",giveFollowerBodyBits,"Roleplay",rp,"Get Fetish",gainFetish,"RemoveFetish",loseFetish,dickToggle,cawkTawgle,"Leave",campSlavesMenu);
 }
 function ceraphSexMenu():void {
 	clearOutput();

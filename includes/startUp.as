@@ -221,7 +221,7 @@ function settingsScreen():void {
 			"Low Standards", toggleStandards, 
 			"Null", 0, 
 			"Null", 0, 
-			"Back", 64);
+			"Back", mainMenu);
 }
 
 
@@ -409,7 +409,7 @@ function creditsScreen():void {
 	outputText("* Bagpuss (Laying Eggs In Pure Amily)\n");
 	outputText("* Eliria (Bee Laying Eggs in Bunny-Girls)\n");
 	outputText("\nIf I'm missing anyone, please contact me ASAP!  I have done a terrible job keeping the credits up to date!", false);
-	doNext(64);	
+	doNext(mainMenu);	
 }
 
 function howToPlay():void {
@@ -419,7 +419,7 @@ function howToPlay():void {
 	outputText("<b>Combat:</b>\nCombat is won by raising an opponent's lust to 100 or taking their HP to 0.  You lose if your enemy does the same to you.  Loss isn't game over, but some losses will make it harder in the future by lowering your stats.  Beware.  Don't be afraid to spam the <b>Run</b> option when you're in over your head.\n\n", false);
 	outputText("<b>Controls:</b>\nThe game features numerous hot-keys to make playing quicker and easier.\nP key - Perks Menu\nD key - Data Menu\nA key - Appearance Screen\n1 Through 5 - The top row of 'choice' buttons.\n6 Through 0 - The bottom row of 'choice' buttons.\nQ through T - Alternative bottom 'choice' hotkeys.\nSpace Bar - Next/Back/Leave\nHome Key - Toggle text field background.\nS key - Stats Screen\n(Save Hotkeys - May not work in all players)\nF1-F5 - Quicksave to slot 1 through 5.  Only works when Data is visible.\nF6-F0 - Quick Load from slots 1-5.\n\n", false);
 	outputText("<b>Save often using the Data Menu</b> - you never know when your journey will come to an end!", false);
-	doNext(64);
+	doNext(mainMenu);
 }
 
 function eventTester():void {

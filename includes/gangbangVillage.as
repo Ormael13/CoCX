@@ -1191,7 +1191,7 @@ function callSlaveVapula(output:Boolean = true):void {
 	//Requires bipedal-ness
 	if(flags[VAPULA_EARNED_A_SPANK] > 0 && !player.isTaur() && !player.isDrider()) spank = 3959;
 	else threesome = 3768;
-	choices("Appearance",3750,"Talk",3751,"Feed",mFeed,"Feed(Dildo)",fFeed,"Threesome",threesome,"Spank",spank,"",0,"",0,"",0,"Leave",120);
+	choices("Appearance",3750,"Talk",3751,"Feed",mFeed,"Feed(Dildo)",fFeed,"Threesome",threesome,"Spank",spank,"",0,"",0,"",0,"Leave",campSlavesMenu);
 }
 
 //Vapula Appearance - this bitch is purpler than a Nigerian (Z)
