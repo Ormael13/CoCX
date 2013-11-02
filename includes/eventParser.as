@@ -700,7 +700,7 @@ function doSystem(eventNo:Number):void {
 		monster.vaginas[0].vaginalLooseness = 3;
 		monster.ass.analLooseness = 3;
 		outputText(eventTestInput.text, true, true);
-		simpleChoices("Again",117,"",0,"",0,"",0,"Quit",64);
+		simpleChoices("Again",117,"",0,"",0,"",0,"Quit",mainMenu);
 		eventTestInput.x = -10207.5;
 		eventTestInput.y = -1055.1;
 		return;
@@ -708,7 +708,7 @@ function doSystem(eventNo:Number):void {
 	if(eventNo == 119) {
 		eventTestInput.x = -10207.5;
 		eventTestInput.y = -1055.1;
-		eventParser(64);
+		eventParser(mainMenu);
 		return;
 	}
 
