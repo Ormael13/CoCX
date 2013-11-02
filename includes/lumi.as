@@ -34,8 +34,9 @@ function lumiLabChoices():void {
 	else {
 		outputText("Once more, you step into Lumi's lab.  She's still working on her experiments. Before you even have a chance to call out to her, she has already pivoted to watch you.  In a flash her apron hits the floor and she is standing on her desk, asking, \"<i>Stho, what can Lumi the Aochomist Extwaordinaire do fo you today?</i>\"", false);
 	}
-	var enhance:Number = 0;
-	if(lumiEnhance(true)) enhance = 2441;
+	var enhance = 0;
+	if(lumiEnhance(true)) 
+		enhance = lumiEnhance;
 	simpleChoices("Shop",lumiShop,"Enhance",enhance,"",0,"",0,"Leave",13);
 }
 
@@ -86,9 +87,12 @@ function lumiPurchase():void {
 	//After choosing, and PC has enough gems
 	var cost:Number = 0;
 	var itemName:String = shortName;
-	if(shortName == "OviElix") cost = 45;
-	if(shortName == "Gob.Ale") cost = 20;
-	if(shortName == "L.Draft") cost = 15;
+	if(shortName == "OviElix") 
+		cost = 45;
+	if(shortName == "Gob.Ale") 
+		cost = 20;
+	if(shortName == "L.Draft") 
+		cost = 15;
 	if(player.gems >= cost) {
 		outputText("You pay Lumi the gems, and she hands you " + itemLongName(itemName) + " saying, \"<i>Here ya go!</i>\"\n\n", false);
 		player.gems -= cost;
@@ -107,25 +111,35 @@ function lumiPurchase():void {
 
 function lumiEnhance(justCheck:Boolean = false):Boolean {
 	spriteSelect(37);
-	var fox:Number = 0;
-	if(hasItem("FoxBery",1)) fox = 3581;
-	var laBova:Number = 0;
-	if(hasItem("LaBova ",1)) laBova = 2442;
-	var succuDelight:Number = 0;
-	if(hasItem("SDelite",1)) succuDelight = 2443;
-	var oviElix:Number = 0;
-	//if(hasItem("OviElix",1)) oviElix = 2444;
-	var lustDraft:Number = 0;
-	if(hasItem("L.Draft",1)) lustDraft = 2445;
-	var seed:Number = 0;
-	if(hasItem("GldSeed",1)) seed = 2885;
-	var kanga:Number = 0;
-	if(hasItem("KangaFt",1)) kanga = 2886;
-	var kitsune:Number = 0;
-	if(hasItem("FoxJewl",1)) kitsune = 3983;
+	var fox = 0;
+	if(hasItem("FoxBery",1)) 
+		fox = lumiEnhanceFox;
+	var laBova = 0;
+	if(hasItem("LaBova ",1)) 
+		laBova = lumiEnhanceLaBova;
+	var succuDelight = 0;
+	if(hasItem("SDelite",1)) 
+		succuDelight = lumiEnhanceSDelight;
+	var oviElix = 0;
+	//if(hasItem("OviElix",1)) 
+	//	oviElix = lumiEnhanceOviElix;
+	var lustDraft = 0;
+	if(hasItem("L.Draft",1)) 
+		lustDraft = lumiEnhanceDraft;
+	var seed = 0;
+	if(hasItem("GldSeed",1)) 
+		seed = lumiEnhanceGoldenSeed;
+	var kanga = 0;
+	if(hasItem("KangaFt",1)) 
+		kanga = lumiEnhanceKanga;
+	var kitsune = 0;
+	if(hasItem("FoxJewl",1)) 
+		kitsune = lumiEnhanceFoxJewel;
 	if(justCheck) {
-		if(fox + kanga + seed + laBova + succuDelight + oviElix + lustDraft + kitsune > 0) return true;
-		else return false;
+		if(fox || kanga || seed || laBova || succuDelight || oviElix || lustDraft || kitsune)
+			return true;
+		else 
+			return false;
 	}
 	outputText("", true);
 	outputText("\"<i>Do you have 100 gems for de enhancement?</i>\" asks Lumi.\n\n", false); 

@@ -1868,8 +1868,8 @@ function helSexualAmbush():void {
 	if(player.lust < 33) player.lust = 33;
 	flags[HEL_RAPED_TODAY] = 1;
 	//(Raise PC lust; Display sex options)
+	buttonEvents[9] = pussyOutOfHelSexAmbush;
 	helFuckMenu();
-	buttonEvents[9] = 3982;
 }
 
 //[Leave] (From Sexual Ambush)
