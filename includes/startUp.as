@@ -132,6 +132,7 @@ function mainMenu(e:MouseEvent = undefined):void {
 	statsText.visible = false;
 	//Sets game state to 3, used for determining back functionality of save/load menu.
 	gameState = 3;
+
 	outputText("(Alternative) <b>Corruption of Champions (" + version + ")</b>\n(Formerly Unnamed Text Game)", true);
 	outputText("\n\nCreated by: Fenoxo", false);
 	outputText("\nEdited By: Ashi, SoS, Zeikfried, and Others", false);
@@ -141,9 +142,11 @@ function mainMenu(e:MouseEvent = undefined):void {
 	outputText("\n-Please be 18 or the legal age to view porn before playing.", false);
 	outputText("\n-Try to keep your keyboard clean.  Think of the children!</b>", false);
 	outputText("\n\nFor more information see Fenoxo's Blog at <b><u><a href='http://www.fenoxo.com/'>fenoxo.com</a></u></b>.", false);
-	outputText("\n\nAlso go play <u><a href='http://www.furaffinity.net/view/9830293/'>Nimin</a></u> by Xadera on furaffinity.", false);
+	outputText("\n\nAlso go play <u><a href='http://www.furaffinity.net/view/9830293/'>Nimin</a></u> by Xadera on furaffinity.\n\n", false);
 
-
+	outputText("[LOL[WUT]] [herp] [DERP] [if (0 == 0)|HARBLE]\n\n", false);
+	outputText("[r[e[c[u[r[s[i[v[e[lol]]t]a]g[rofl][copter]]b]o]m]i]n][a][t[io]n]", false);
+	
 	if(debug) 
 		outputText("\n\n<b>DEBUG MODE ENABLED:  ITEMS WILL NOT BE CONSUMED BY USE.</b>", false);
 	if(flags[SHOW_SPRITES_FLAG]) 

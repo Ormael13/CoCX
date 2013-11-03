@@ -354,11 +354,59 @@ function checkCondition(variable:String, op:String, test:String):Boolean
 	return result;
 }
 
+function recParser(textCtnt:String):String
+{
+	if (textCtnt.length == 0)	// Short circuit if we've been passed an empty string
+		return "";
+
+	var i:Number = 0;
+	var tmp:Number = 0;
+	var bracketCnt:Number = 0;
+	
+	var retStr:String = "";
+
+	tmp = textCtnt.indexOf("[");
+
+	if (tmp != -1)		// If we have any open brackets other then the one right at position [0] of the string
+	{
+		for (i = tmp; i < textCtnt.length; i += 1)
+		{
+			if (textCtnt.charAt(i) == "[")
+			{
+				bracketCnt += 1;
+			}
+			else if (textCtnt.charAt(i) == "]")
+			{
+				bracketCnt -= 1;
+			}
+			if (bracketCnt == 0)	// We've found the matching closing bracket for the opening bracket at textCtnt[tmp]
+			{
+				retStr += textCtnt.substring(0, tmp);
+				retStr += recParser(textCtnt.substring(tmp+1, i));
+				retStr += recParser(textCtnt.substring(i+1, textCtnt.length));	// Parse the trailing text (if any)
+				trace("bracketContents = ", textCtnt.substring(tmp+1, i));
+				return retStr;
+			}
+		}
+	}
+	else
+	{
+		// Nothing to parse
+		trace("No brackets present", textCtnt);
+		retStr = textCtnt;
+	}
+	return textCtnt;
+}
 function parseText(text:String):String
 {
+
+	recParser(text);
+	var debug = true;
+
+
 	//PARSE DAT TEXT!
 	//Now with more awesome!
-	
+	if(debug) trace("Parsing Text");
 	//Regex to check if something is a number
 	var isNumber:RegExp = new RegExp("[0-9]+");
 	
@@ -377,9 +425,17 @@ function parseText(text:String):String
 	//Regex to match branch tags - You can't nest if's, and they MUST end with a space to make recursive parsing work
 	//var branchTag:RegExp = new RegExp("\\[if\\s\\(([a-zA-Z]+)\\s(=|!=|>|<|<=|>=)\\s(.*?)\\)\\s\\\"(.*?)\\\"\\]");
 	//var branchTag:RegExp = new RegExp("\\[if\\s\\((.*?)\\)\\s\\\"(.*?)\\\"\\]");
-	var branchTag:RegExp = new RegExp("\\[if\\s(.*?)\\s\\\"(.*?)\\\"\\]");
+	//
+	// Produces: [if (EXPRESSION) \"OUTPUT_TEXT\"]
+	// where OUTPUT_TEXT is passed recursively into parseText
+	//
+	var branchTag:RegExp = /\[if (.*?) \"(.*?)\"\]/i;		// unbreak my text editors highlighting "
+	
+	var branchTagElse:RegExp = /\[if (.*?) \"(.*?)\" else \"(.*?)\"\]/i; 		//"
 
-	var branchTagElse:RegExp = new RegExp("\\[if\\s(.*?)\\s\\\"(.*?)\\\"\\selse\\s\\\"(.*?)\\\"\\]");
+	// Old regexes
+	// var branchTag:RegExp = new RegExp("\\[if\\s(.*?)\\s\\\"(.*?)\\\"\\]");
+	// var branchTagElse:RegExp = new RegExp("\\[if\\s(.*?)\\s\\\"(.*?)\\\"\\selse\\s\\\"(.*?)\\\"\\]");
 
 	var rep:String;
 	//We parse the tags from most complex to most basic, as the basic tag has the most "greedy" regex
