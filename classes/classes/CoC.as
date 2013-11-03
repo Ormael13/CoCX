@@ -13,6 +13,9 @@
 
 	import coc.view.MainView;
 
+	import coc.model.GameModel;
+	import coc.model.TimeModel;
+
 	import fl.controls.ComboBox; 
 	import fl.data.DataProvider; 
 	import flash.display.Loader;
@@ -49,11 +52,11 @@
 		public var mainView :MainView;
 
 		// TODO: We need a model class, and to replace this * with it.
-		public var model :*;
+		public var model :GameModel;
 
 		public function CoC()
 		{
-			this.model = {}; // TODO: Also replace this initialization with a Real-Boy-Instantiation.
+			this.model = new GameModel();
 			this.mainView = new MainView({});
 			this.addFrameScript( 0, this.run );
 		}

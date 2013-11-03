@@ -5,13 +5,15 @@ package coc.view {
 
     import flash.text.TextField;
 
+    import coc.model.GameModel;
+
     // Remove dynamic once you've added all the DOs as instance properties.
     public dynamic class StatsView extends Sprite {
         // add things from main view here?
         // yes because we'll need to update all the TFs and progress bars.
         public var upDownsContainer :Sprite;
 
-        protected var model :*; // TODO: Need an actual class type.
+        protected var model :GameModel;
 
         public function StatsView( mainView :MovieClip, model :* ) {
             super();
@@ -109,8 +111,8 @@ package coc.view {
 
             setStatText( "timeText",
                 "<b><u>Day #: {DAYS}</u></b>\n<b>Time : {HOURS}:00</b>"
-                    .replace( "{DAYS}", model.days )
-                    .replace( "{HOURS}", model.hours ) );
+                    .replace( "{DAYS}", model.time.days )
+                    .replace( "{HOURS}", model.time.hours ) );
 
             setStatBar( "strBar", model.player.str/100 );
             setStatBar( "touBar", model.player.tou/100 );
@@ -144,11 +146,15 @@ package coc.view {
 
         // <- hideUpDown
         public function hideUpDown() {
-            // body...
             var ci,
                 cc = this.upDownsContainer.numChildren;
 
-            for( ci = 0; ci < )
+            this.upDownsContainer.visible = false;
+
+            // children also need to be hidden because they're selectively shown on change.
+            for( ci = 0; ci < cc; ++ci ) {
+                this.upDownsContainer.getChildAt( ci ).visible = false;
+            }
         };
     }
 }

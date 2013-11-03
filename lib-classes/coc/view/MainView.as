@@ -23,6 +23,8 @@ package coc.view {
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 
+    import coc.model.GameModel;
+
 	public dynamic class MainView extends MovieClip {
 		private static const BOTTOM_BUTTON_COUNT :int = 10;
 		private static const BOTTOM_BUTTON_PER_ROW_COUNT :int = 5;
@@ -36,15 +38,15 @@ package coc.view {
 
 		public var bottomButtonTexts :Array; // <TextField>
 		public var bottomButtonBGs :Array; // <MovieClip>
-		public var toolTip :*;
-		public var statsView :*;
+		public var toolTip :ToolTipView;
+		public var statsView :StatsView;
 
 		protected var bottomButtonSettings :Array;
 
 		protected var options :Object;
 		protected var allButtons :Array;
 
-		protected var model :*; // TODO: Need an actual class type.
+		protected var model :GameModel; // TODO: Need an actual class type.
 
 		public function MainView( model :*, options :Object = null ) :void {
 			// Note: Currently we can't touch this on construction
