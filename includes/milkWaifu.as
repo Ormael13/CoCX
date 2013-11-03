@@ -260,7 +260,7 @@ function superReductoUsage():void {
 	
 	outputText("\n\n\"<i>Come on, you'll feel a lot better afterwards, I promise,</i>\" you say, crouching down beside her, locking onto " + flags[MILK_NAME] + "'s big brown eyes.");
 	
-	outputText("\n\nIf by nothing else than your soothing tone, " + flags[MILK_NAME] + " stops fussing about the Reducto and does her best to curl up in your lap, giving your free access to her big ol' rack.  You tussle her hair and start thinking about how to go about this.");
+	outputText("\n\nIf by nothing else than your soothing tone, " + flags[MILK_NAME] + " stops fussing about the Reducto and does her best to curl up in your lap, giving you free access to her big ol' rack.  You tussle her hair and start thinking about how to go about this.");
 	
 	//If GIANT BOOBS:
 	if(flags[MILK_SIZE] == 0) {
@@ -362,7 +362,7 @@ function milkBathTime():void {
 //[Next] (Relax)
 function relaxWithMilkWaifu():void {
 	clearOutput();
-	outputText("You sit in the tub for a while, letting the fragrant fluids soak into your " + player.skinFurScales() + ".   You spend the better part of an hour lounging, letting your cares float away in " + flags[MILK_NAME] + "'s endless white bounty.   Finally, though, you pull out the tub's plug and climb out, finding a towel nearby.   Thankfully, the milk doesn't seem to leave behind any residue, and you feel clean and refreshed, if a bit horny.");
+	outputText("You sit in the tub for a while, letting the fragrant fluids soak into your " + player.skinFurScales() + ".   You spend the better part of an hour lounging, letting your cares float away in " + flags[MILK_NAME] + "'s endless white bounty.   Finally though, you pull out the tub's plug and climb out, finding a towel nearby.   Thankfully, the milk doesn't seem to leave behind any residue, and you feel clean and refreshed, if a bit horny.");
 	//(+Lust, -Fatigue)
 	stats(0,0,0,0,0,0,10+player.sens/10,0,false);
 	fatigue(-34);
@@ -542,7 +542,7 @@ function drinkAndFapturbate():void {
 	if(player.gender == 3) {
 		outputText("Your [cock] throbs painfully in your hand, so hot and hard that you're sure you must have begun to leak precum, but any fluid is swiftly washed away by the ever-present milk.   ");
 		if(player.cockTotal() > 1) outputText("You make sure to fondle each of your members equally, caressing, squeezing, and stroking to the tempo of your swelling passion.  ");
-		outputText("With your off-hand, you rub your cream-lubricated fingers through your sodden gash, the flesh parting easily to allow a few of your questing fingers inside.   Delicious bliss unfolds from your [clit] as it pushes free of it's hood, fully engorging, faintly throbbing from aching need.   You brush the button a few times before going back to fingering your box, yet you make sure to strum your thumb across your clit every few moments to keep yourself as close to peak as possible.   Truly, being a hermaphrodite is bliss.");
+		outputText("With your off-hand, you rub your cream-lubricated fingers through your sodden gash, the flesh parting easily to allow a few of your questing fingers inside.   Delicious bliss unfolds from your [clit] as it pushes free of its hood, fully engorging, faintly throbbing from aching need.   You brush the button a few times before going back to fingering your box, yet you make sure to strum your thumb across your clit every few moments to keep yourself as close to peak as possible.   Truly, being a hermaphrodite is bliss.");
 	}
 	//(DA SCHLICKS)
 	else if(player.hasVagina()) outputText("Your pussy juices mix freely with the tub's white-colored 'waters', allowing your cream-lubed fingers to plunge into your [vagina] with ease.   You stroke your lips and caress the interior of your birth canal with the intimate familiarity of a skilled lover, playing with your body until you feel your control slipping, so wound up with lust that you feel like an over-tightened guitar string vibrating out of control.");

@@ -1639,7 +1639,7 @@ function izmaFollowerMenu():void {
 		deDickT = "Go Herm";
 		deDickB = 3472;
 	}
-	choices("Appearance",izmaPearance,"Books",IzmaCampBooks,"Children",kids,"Sex",sex,"Talk",talkWivIzma,"Tooth",gatASharkTooth,"",0,"",0,deDickT,deDickB,"Back",121);
+	choices("Appearance",izmaPearance,"Books",IzmaCampBooks,"Children",kids,"Sex",sex,"Talk",talkWivIzma,"Tooth",gatASharkTooth,"",0,"",0,deDickT,deDickB,"Back",campLoversMenu);
 }
 
 //Get a tiger shark tooth
@@ -3037,7 +3037,7 @@ function radarIzmaAnalDominant():void {
 	//(if Virgin to Tight:
 	if(player.analCapacity() < 35) outputText("painfully rending the tight shape of your anus on it, causing both of you to moan in pain as you envelop more and more of her dick inside of you.  Izma slams into you forcefully as she unleashes a huge gasp, face utterly flooded with ecstasy as she stares into the sky behind closed eyes."); 
 	//(If loose to gaping: 
-	else outputText("slipping past the fleshy \"gates\" of your anus, requiring little stretching or working of your " + assholeDescript() + ".  Your worried that this might not work the way you want it to, given how easy it was to take Izma; a series of wild, erratic thrashing against your ass as the penile intruder tunnels deeper seems to dispel that notion.");
+	else outputText("slipping past the fleshy \"gates\" of your anus, requiring little stretching or working of your " + assholeDescript() + ".  You're worried that this might not work the way you want it to, given how easy it was to take Izma; a series of wild, erratic thrashings against your ass as the penile intruder tunnels deeper seems to dispel that notion.");
 	buttChange(42,true,true,false);
 
 	outputText("\n\nWith a cool, yet skittish breath of air, you tell Izma that you will be working her cock with your ass ");

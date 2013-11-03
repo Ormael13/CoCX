@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Images>
+	<Image id="monster-anemone" width="480" height="360">.\img\puppy.jpg</Image>
+	<Image id="monster-goblin" width="624" height="800">.\img\jrpup1.jpg</Image>
+	<Image id="monster-GooGirl" width="480" height="360">.\img\puppy.jpg</Image>
+	<Image id="monster-GreenSlime" width="300" height="400">.\img\jrpup.jpg</Image>
+	<Image id="monster-imp" width="300" height="400">.\img\jrpup.jpg</Image>
+	<Image id="monster-naga" width="300" height="400">.\img\jrpup.jpg</Image>
+	<Image id="monster-sandtrap" width="480" height="360">.\img\puppy.jpg</Image>
+	<Image id="monster-sandwitch" width="624" height="800">.\img\jrpup1.jpg</Image>
+	<Image id="monster-shark-girl" width="480" height="360">.\img\puppy.jpg</Image>
+	<Image id="monster-Tamani" width="480" height="360">.\img\puppy.jpg</Image>
+</Images>

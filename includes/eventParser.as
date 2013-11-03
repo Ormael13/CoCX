@@ -17,7 +17,7 @@ function eventParser(eventNo:*):void {
 		//Clear sprite if not in combat
 		if(!inCombat() && eventNo != 5007) spriteSelect(-1);
 		//Clear pic if not in combat
-		if(!inCombat() && eventNo != 5007) clearImages();
+		//if(!inCombat() && eventNo != 5007) clearImages();
 		//Reset newgame buttons till back at camp
 		newGameText.removeEventListener(MouseEvent.CLICK, mainMenu);
 		newGameBG.removeEventListener(MouseEvent.CLICK, mainMenu);
@@ -46,8 +46,7 @@ function eventParser(eventNo:*):void {
 
 	else
 	{
-		trace("OMGWTFBBQ, eventNo =", eventNo);
-		trace("Type of eventNo: ", flash.utils.getQualifiedClassName(eventNo));
+		errorPrint(eventNo);		// Dump the system state to the window so the player can file a decent bug-report
 	}
 }
 
@@ -55,7 +54,9 @@ function eventParser(eventNo:*):void {
 function doSystem(eventNo:Number):void {
 	//@ camp
 	//(clear data/appearance buttons if not at camp
-	if(eventNo != 1) {
+	trace("System Event", eventNo)
+	if(eventNo != 1) 
+	{
 		hideMenus();
 	}
 	if(eventNo == 1) {
@@ -75,18 +76,48 @@ function doSystem(eventNo:Number):void {
 		menuLoc = 0;
 		flags[PLAYER_PREGGO_WITH_WORMS] = 0;
 		camp();
+		return;
 	}
-	if(eventNo == 2) doExplore();
-	if(eventNo == 3) exploreDesert();
-	if(eventNo == 4) exploreForest();
-	if(eventNo == 5) exploreLake();
-	if(eventNo == 6) exploreMountain();
+	if(eventNo == 2) 
+	{
+		doExplore();
+		return;
+	}
+	if(eventNo == 3) 
+	{
+		exploreDesert();
+		return;
+	}
+	if(eventNo == 4) 
+	{
+		exploreForest();
+		return;
+	}
+	if(eventNo == 5) 
+	{
+		exploreLake();
+		return;
+	}
+	if(eventNo == 6) 
+	{
+		exploreMountain();
+		return;
+	}
 	//Farm
-	if(eventNo == 7) {}
+	if(eventNo == 7) 
+	{
+		return;
+	}
 	//Jojo
-	if(eventNo == 8) {}
+	if(eventNo == 8) 
+	{
+		return;
+	}
 	//Key locations menu
-	if(eventNo == 9) {}
+	if(eventNo == 9) 
+	{
+		return;
+	}
 	//Masturbate
 	if(eventNo == 10) {
 		if(player.hasStatusAffect("dysfunction") >= 0) {
@@ -95,190 +126,93 @@ function doSystem(eventNo:Number):void {
 			return;
 		}
 		masturbateGo();
+		return;
 	}
 	//Rest
 	if(eventNo == 11) { 
 		rest();
+		return;
 	}
 	//Explore new zones
-	if(eventNo == 12) tryDiscover();	
+	if(eventNo == 12)
+	{
+		tryDiscover();	
+		return;
+	}
 	//Pass an hour
 	if(eventNo == 13) {
 		outputText("An hour passes...\n", true);
 		timeQ = 1;
 		goNext(1, false);
+		return;
 	}
 	if(eventNo == 14) {
 		outputText("Two hours pass...\n", true);
 		timeQ = 2;
 		goNext(2, false);
+		return;
 	}
 	if(eventNo == 15) {
 		outputText("Four hours pass...\n", true);
 		timeQ = 4;
 		goNext(4, false);
+		return;
 	}
 	if(eventNo == 16) {
 		outputText("Eight hours pass...\n", true);
 		timeQ = 8;
 		goNext(8, false);
+		return;
 	}
 	if(eventNo == 17) {
 		outputText("", true);
 		goNext(24, false);
+		return;
 	}
 	//Load menu
 	if(eventNo == 19 ) {
 		loadScreen();
+		return;
 	}
 	//Save Menu
 	if(eventNo == 20) {
 		saveScreen();
+		return;
 	}
 	if(eventNo == -20)
 	{
 		saveGameObject(null, true);
+		return;
 	}
 	if(eventNo == -21)
 	{
 		openSave();
 		showStats();
 		statScreenRefresh();
+		return;
 	}
-	//Save Slot 1
-	if(eventNo == 21) {
-		saveGame("CoC_1");
-	}
-	//Save SLot 2
-	if(eventNo == 22) {
-		saveGame("CoC_2")
-	}
-	//Save SLot 3
-	if(eventNo == 23) {
-		saveGame("CoC_3")
-	}
-	//Save SLot 4
-	if(eventNo == 24) {
-		saveGame("CoC_4")
-	}
-	//Save SLot 5
-	if(eventNo == 25) {
-		saveGame("CoC_5")
-	}
-	//Save SLot 6
-	if(eventNo == 26) {
-		saveGame("CoC_6")
-	}
-	//Save SLot 7
-	if(eventNo == 27) {
-		saveGame("CoC_7")
-	}
-	//Save SLot 8
-	if(eventNo == 28) {
-		saveGame("CoC_8")
-	}
-	//Save SLot 9
-	if(eventNo == 29) {
-		saveGame("CoC_9")
-	}
-	if(eventNo == 30) {
+	if(eventNo == 30) 	// I have NO idea what could call this. I don't see anything that passes 30 as an event number anywhere
+	{
 		var f:MouseEvent;
 		saveLoad(f);
-	}
-	//Load Slot 1
-	if(eventNo == 31) {
-		if(loadGame("CoC_1")) {
-			doNext(1);
-			showStats();
-			statScreenRefresh();
-			outputText("Slot 1 Loaded!", true);
-		}
-	}
-	//Load Slot 2
-	if(eventNo == 32) {
-		if(loadGame("CoC_2")) {
-			doNext(1);
-			showStats();
-			statScreenRefresh();
-			outputText("Slot 2 Loaded!", true);
-		}
-	}
-	//Load Slot 3
-	if(eventNo == 33) {
-		if(loadGame("CoC_3")) {
-			doNext(1);
-			showStats();
-			statScreenRefresh();
-			outputText("Slot 3 Loaded!", true);
-		}
-	}
-	//Load Slot 4
-	if(eventNo == 34) {
-		if(loadGame("CoC_4")) {
-			doNext(1);
-			showStats();
-			statScreenRefresh();
-			outputText("Slot 4 Loaded!", true);
-		}
-	}
-	//Load Slot 5
-	if(eventNo == 35) {
-		if(loadGame("CoC_5")) {
-			doNext(1);
-			showStats();
-			statScreenRefresh();
-			outputText("Slot 5 Loaded!", true);
-		}
-	}
-	//Load Slot 6
-	if(eventNo == 36) {
-		if(loadGame("CoC_6")) {
-			doNext(1);
-			showStats();
-			statScreenRefresh();
-			outputText("Slot 6 Loaded!", true);
-		}
-	}
-	//Load Slot 7
-	if(eventNo == 37) {
-		if(loadGame("CoC_7")) {
-			doNext(1);
-			showStats();
-			statScreenRefresh();
-			outputText("Slot 7 Loaded!", true);
-		}
-	}
-	//Load Slot 8
-	if(eventNo == 38) {
-		if(loadGame("CoC_8")) {
-			doNext(1);
-			showStats();
-			statScreenRefresh();
-			outputText("Slot 8 Loaded!", true);
-		}
-	}
-	//Load Slot 9
-	if(eventNo == 39) {
-		if(loadGame("CoC_9")) {
-			doNext(1);
-			showStats();
-			statScreenRefresh();
-			outputText("Slot 9 Loaded!", true);
-		}
+		return;
 	}
 	//Use wait command
 	if(eventNo == 40) {
 		//See camp.as
 		doWait();
+		return;
 	}
 	//Use sleep command
 	if(eventNo == 41) {
 		//in camp.as
 		doSleep();
+		return;
 	}
 	//Choose masturbate options
 	if(eventNo == 42) {
 		masturbateMenu();
+		return;
 	}
 	//Jojo as a cumsleeve
 	if(eventNo == 43) {
@@ -290,6 +224,7 @@ function doSystem(eventNo:Number):void {
 		stats(5,0,0,0,0,0,0,0);
 		outputText("Your muscles feel significantly stronger from your time adventuring.", true);
 		doNext(116);
+		return;
 	}
 	//Gain +5 Toughness due to level
 	if(eventNo == 45) {
@@ -298,35 +233,44 @@ function doSystem(eventNo:Number):void {
 		statScreenRefresh();
 		outputText("You feel tougher from all the fights you have endured.", true);
 		doNext(116);
+		return;
 	}
 	//Gain +5 Intelligence due to level
 	if(eventNo == 46) {
 		stats(0,0,0,5,0,0,0,0);
 		outputText("Your time spent fighting the creatures of this realm has sharpened your wit.", true);
 		doNext(116);
+		return;
 	}
 	//Gain +5 speed due to level
 	if(eventNo == 47) {
 		stats(0,0,5,0,0,0,0,0);
 		outputText("Your time in combat has driven you to move faster.", true);
 		doNext(116);
+		return;
 	}
 	//Use Onahole
 	if(eventNo == 48) {
 		onaholeUse();
+		return;
 	}
 	//Use Stimbelt
-	if(eventNo == 49) {
+	if(eventNo == 49) 
+	{
 		stimBeltUse();
+		return;
 	}
 	if(eventNo == 50) {
 		deluxeOnaholeUse();
+		return;
 	}
 	if(eventNo == 51) {
 		allNaturalOnaholeUse();
+		return;
 	}
 	if(eventNo == 52) {
 		allNaturalStimBeltUse();
+		return;
 	}
 	//Strong Back Chosen (25 Str perk)
 	if(eventNo == 53) {
@@ -339,6 +283,7 @@ function doSystem(eventNo:Number):void {
 		outputText("You choose the 'Strong Back' perk, enabling a fourth item slot.", true);
 		itemSlot4.unlocked = true;
 		doNext(1);
+		return;
 	}
 	//Perk Strong Back 2 Chosen (50 Str Perk)
 	if(eventNo == 54) {
@@ -351,6 +296,7 @@ function doSystem(eventNo:Number):void {
 		outputText("You choose the 'Strong Back 2: Strong Harder' perk, enabling a fifth item slot.", true);
 		itemSlot5.unlocked = true;
 		doNext(1);
+		return;
 	}
 	//Perk Tank Chosen
 	if(eventNo == 55) {
@@ -363,6 +309,7 @@ function doSystem(eventNo:Number):void {
 		outputText("You choose the 'Tank' perk, giving you an additional 50 hp!", true);
 		doNext(1);
 		stats(0,0,0,0,0,0,0,0);
+		return;
 	}
 	//Perk Regeneration
 	if(eventNo == 56) {
@@ -374,6 +321,7 @@ function doSystem(eventNo:Number):void {
 		player.createPerk("Regeneration",0,0,0,0,"Regenerates 2 HP/hour and 1 HP/round.");
 		outputText("You choose the 'Regeneration' perk, allowing you to heal 2 HP every hour and 1 HP every round of combat!", true);
 		doNext(1);
+		return;
 	}
 	//Perk Evade CHosen
 	if(eventNo == 57) {
@@ -385,6 +333,7 @@ function doSystem(eventNo:Number):void {
 		player.createPerk("Evade",0,0,0,0,"Increases avoidance chances.");
 		outputText("You choose the 'Evade' perk, allowing you to avoid enemy attacks more often!", true);
 		doNext(1);
+		return;
 	}
 	//Perk Runner Chosen
 	if(eventNo == 58) {
@@ -396,6 +345,7 @@ function doSystem(eventNo:Number):void {
 		player.createPerk("Runner",0,0,0,0,"Increases chances of escaping combat.");
 		outputText("You choose the 'Runner' perk, allowing you to run away much faster!", true);
 		doNext(1);
+		return;
 	}		
 	//Fertility Perk Chosen
 	if(eventNo == 59) {
@@ -418,6 +368,7 @@ function doSystem(eventNo:Number):void {
 		player.createPerk("Hot Blooded",20,0,0,0, "Raises minimum lust by up to 20.");
 		outputText("You choose the 'Hot Blooded' perk.  As a result of your enhanced libido, your lust no longer drops below 20!", true);
 		doNext(1);
+		return;
 	}
 	//Corrupted Libido Perk Chosen
 	if(eventNo == 61) {
@@ -429,6 +380,7 @@ function doSystem(eventNo:Number):void {
 		player.createPerk("Corrupted Libido",20,0,0,0, "Reduces lust gain by 10%.");
 		outputText("You choose the 'Corrupted Libido' perk.  As a result of your body's corruption, you've become a bit harder to turn on. (Lust gain reduced by 10%!)", true);
 		doNext(1);
+		return;
 	}
 	//Seduction perk Chosen
 	if(eventNo == 62) {
@@ -440,6 +392,7 @@ function doSystem(eventNo:Number):void {
 		player.createPerk("Seduction",0,0,0,0,"Upgrades your tease attack, making it more effective.");
 		outputText("You choose the 'Seduction' perk, replacing the 'tease' attack with a more powerful 'seduction' variant.", true);
 		doNext(1);
+		return;
 	}
 	//turn on/off autosave
 	if(eventNo == 65) {
@@ -447,13 +400,18 @@ function doSystem(eventNo:Number):void {
 		if(player.autoSave) player.autoSave = false;
 		else player.autoSave = true;
 		saveLoad(e);
+		return;
 	}
-	if(eventNo == 70) {
+	if(eventNo == 70) 
+	{
 		//perkPicking();
+		return;
 	}
 	//Places menu
-	if(eventNo == 71) {
+	if(eventNo == 71) 
+	{
 		places(true);
+		return;
 	}
 	//Precision perk Chosen
 	if(eventNo == 72) {
@@ -465,6 +423,7 @@ function doSystem(eventNo:Number):void {
 		player.createPerk("Precision",0,0,0,0,"Reduces enemy damage resistance by 10.");
 		outputText("You've chosen the 'Precision' perk.  Thanks to your intelligence, you're now more adept at finding and striking an enemy's weak points, reducing their damage resistance by 10.  If your intelligence ever drops below 25 you'll no longer be smart enough to benefit from this perk.", true);
 		doNext(1);
+		return;
 	}
 	//Nymphomania Chosen
 	if(eventNo == 73) {
@@ -476,6 +435,7 @@ function doSystem(eventNo:Number):void {
 		player.createPerk("Nymphomania",0,0,0,0,"Raises minimum lust by up to 30.");
 		outputText("You've chosen the 'Nymphomania' perk.  Due to the incredible amount of corruption you've been exposed to, you've begun to live in a state of minor constant arousal.  Your lust will never drop below 30.", true);
 		doNext(1);
+		return;
 	}
 	//Camp followers screen
 	if(eventNo == 74) {
@@ -493,6 +453,7 @@ function doSystem(eventNo:Number):void {
 		player.createPerk("Spellpower",0,0,0,0,"Increases the effects of your spells by up to 50%.");
 		outputText("You've chosen the 'Spellpower' perk.  Thanks to your sizeable intellect and willpower, you are able to more effectively use magic.", true);
 		doNext(1);
+		return;
 	}
 	//Mage Chosen
 	if(eventNo == 76) {
@@ -504,6 +465,7 @@ function doSystem(eventNo:Number):void {
 		player.createPerk("Mage",0,0,0,0,"Increases the strength of your spells even more than 'Spellpower', up to 100%.");
 		outputText("Thanks in part to your incredible willpower and intellect, you are able to focus your magical abilities even more keenly, boosting your spells effects by up to 100%.", true);
 		doNext(1);
+		return;
 	}
 	if(eventNo == 77) {
 		if(player.hasPerk("Double Attack") >= 0) {
@@ -514,6 +476,7 @@ function doSystem(eventNo:Number):void {
 		player.createPerk("Double Attack",0,0,0,0,"Allows you to perform two melee attacks per round.");
 		outputText("Thanks to your incredible speed, you can land two regular attacks in one round!", true);
 		doNext(1);
+		return;
 	}
 	if(eventNo == 78) {
 		if(player.hasPerk("Acclimation") >= 0) {
@@ -535,59 +498,6 @@ function doSystem(eventNo:Number):void {
 	}
 	if(eventNo == 82) {
 		deleteScreen();
-		return;
-	}
-	if(eventNo == 83) {
-		flags[UNKNOWN_FLAG_NUMBER_00063] = "CoC_1";
-		eventParser(92);		
-		return;
-	}
-	if(eventNo == 84) {
-		flags[UNKNOWN_FLAG_NUMBER_00063] = "CoC_2";
-		eventParser(92);		
-		return;
-	}
-	if(eventNo == 85) {
-		flags[UNKNOWN_FLAG_NUMBER_00063] = "CoC_3";
-		eventParser(92);		
-		return;
-	}
-	if(eventNo == 86) {
-		flags[UNKNOWN_FLAG_NUMBER_00063] = "CoC_4";
-		eventParser(92);		
-		return;
-	}
-	if(eventNo == 87) {
-		flags[UNKNOWN_FLAG_NUMBER_00063] = "CoC_5";
-		eventParser(92);		
-		return;
-	}
-	if(eventNo == 88) {
-		flags[UNKNOWN_FLAG_NUMBER_00063] = "CoC_6";
-		eventParser(92);		
-		return;
-	}
-	if(eventNo == 89) {
-		flags[UNKNOWN_FLAG_NUMBER_00063] = "CoC_7";
-		eventParser(92);		
-		return;
-	}
-	if(eventNo == 90) {
-		flags[UNKNOWN_FLAG_NUMBER_00063] = "CoC_8";
-		eventParser(92);		
-		return;
-	}
-	if(eventNo == 91) {
-		flags[UNKNOWN_FLAG_NUMBER_00063] = "CoC_9";
-		eventParser(92);		
-		return;
-	}
-	if(eventNo == 92) {
-		confirmDelete();
-		return;
-	}
-	if(eventNo == 93) {
-		purgeTheMutant();
 		return;
 	}
 	if(eventNo == 94) {
@@ -616,6 +526,7 @@ function doSystem(eventNo:Number):void {
 		player.createPerk("Thunderous Strikes",0,0,0,0,"+20% 'Attack' damage while strength is at or above 80.");
 		outputText("You choose the 'Thunderous Strikes' perk, increasing normal damage by 20% while your strength is over 80.", true);
 		doNext(1);
+		return;
 	}
 	//Perk: "Weapon Mastery"
 	if(eventNo == 99) {
@@ -628,6 +539,7 @@ function doSystem(eventNo:Number):void {
 		outputText("You choose the 'Weapon Mastery' perk, doubling the effectiveness of large weapons.", true);
 		if(player.weaponPerk == "Large") player.weaponAttack *= 2;
 		doNext(1);
+		return;
 	}
 	//Perk: Tank 2
 	if(eventNo == 100) {
@@ -641,6 +553,7 @@ function doSystem(eventNo:Number):void {
 		statScreenRefresh();
 		HPChange(player.tou, false);
 		doNext(1);
+		return;
 	}
 	//Perk: Regeneration 2
 	if(eventNo == 101) {
@@ -652,6 +565,7 @@ function doSystem(eventNo:Number):void {
 		player.createPerk("Regeneration 2",0,0,0,0,"You regenerate an additional 3HP per round and heal faster out of combat");
 		outputText("You choose the 'Regeneration 2' perk, quadrupling the effectiveness of your regeneration abilities.", true);
 		doNext(1);
+		return;
 	}
 	//Speedy Recovery
 	if(eventNo == 102) {
@@ -663,6 +577,7 @@ function doSystem(eventNo:Number):void {
 		player.createPerk("Speedy Recovery",0,0,0,0,"Thanks to your impressive metabolism you regain fatigue 50% faster.");
 		outputText("You choose the 'Speedy Recovery' perk, boosting your fatigue recovery rate!", true);
 		doNext(1);
+		return;
 	}
 	//Perk: Agility
 	if(eventNo == 103) {
@@ -676,6 +591,7 @@ function doSystem(eventNo:Number):void {
 		if(player.armorPerk == "Light") player.armorDef += Math.round(player.spe/10);
 		else if(player.armorPerk == "Medium") player.armorDef += Math.round(player.spe/15);
 		doNext(1);
+		return;
 	}
 	//Channeling
 	if(eventNo == 104) {
@@ -687,6 +603,7 @@ function doSystem(eventNo:Number):void {
 		player.createPerk("Channeling",0,0,0,0,"You've gotten even better at spellcasting, gaining up to 50% more effectiveness!");
 		outputText("You choose the 'Channeling' perk, boosting the strength of your spellcasting!", true);
 		doNext(1);
+		return;
 	}
 	//Medicine
 	if(eventNo == 105) {
@@ -698,6 +615,7 @@ function doSystem(eventNo:Number):void {
 		player.createPerk("Medicine",0,0,0,0,"You now have a 15% chance per round of cleansing poisons/drugs from your body.");
 		outputText("You choose the 'Medicine' perk, giving you a chance to remove debilitating poisons automatically!", true);
 		doNext(1);
+		return;
 	}
 	//Well Adjusted
 	if(eventNo == 106) {
@@ -709,6 +627,7 @@ function doSystem(eventNo:Number):void {
 		player.createPerk("Well Adjusted",0,0,0,0,"You gain half as much lust as time passes in Mareth.");
 		outputText("You choose the 'Well Adjusted' perk, reducing the amount of lust you naturally gain over time while in this strange land!", true);
 		doNext(1);
+		return;
 	}
 	//Masochism
 	if(eventNo == 107) {
@@ -720,6 +639,7 @@ function doSystem(eventNo:Number):void {
 		player.createPerk("Masochist",0,0,0,0,"You have a masochism fetish and take 30 percent less damage, but you're lust goes up when struck (Requires 60+ Libido).");
 		outputText("You choose the 'Masochist' perk, reducing the damage you take but raising your lust each time!  This perk only functions while your libido is at or above 60!", true);
 		doNext(1);
+		return;
 	}
 	//Sadism
 	if(eventNo == 108) {
@@ -731,6 +651,7 @@ function doSystem(eventNo:Number):void {
 		player.createPerk("Sadist",0,0,0,0,"You have a sadism fetish and strike harder, but become aroused by the act of dealing damage.");
 		outputText("You choose the 'Sadist' perk, increasing damage by 20 percent but causing you to gain lust from dealing damage.", true);
 		doNext(1);
+		return;
 	}
 	//Arousing Aura
 	if(eventNo == 109) {
@@ -742,6 +663,7 @@ function doSystem(eventNo:Number):void {
 		player.createPerk("Arousing Aura",0,0,0,0,"While your corruption is at or above 70, you exude an aura of lust.");
 		outputText("You choose the 'Arousing Aura' perk, causing you to radiate an aura of lust when your corruption is over 70.", true);
 		doNext(1);
+		return;
 	}
 	//Resistance
 	if(eventNo == 110) {
@@ -753,6 +675,7 @@ function doSystem(eventNo:Number):void {
 		player.createPerk("Resistance",0,0,0,0,"You've become resistant to the myriad ways your lust can be increased.");
 		outputText("You choose the 'Resistance' perk, reducing the rate at which your lust increases by 10%.", true);
 		doNext(1);
+		return;
 	}
 	if(eventNo == 111) {
 		exploreSwamp();
@@ -777,7 +700,7 @@ function doSystem(eventNo:Number):void {
 		monster.vaginas[0].vaginalLooseness = 3;
 		monster.ass.analLooseness = 3;
 		outputText(eventTestInput.text, true, true);
-		simpleChoices("Again",117,"",0,"",0,"",0,"Quit",64);
+		simpleChoices("Again",117,"",0,"",0,"",0,"Quit",mainMenu);
 		eventTestInput.x = -10207.5;
 		eventTestInput.y = -1055.1;
 		return;
@@ -785,102 +708,38 @@ function doSystem(eventNo:Number):void {
 	if(eventNo == 119) {
 		eventTestInput.x = -10207.5;
 		eventTestInput.y = -1055.1;
-		eventParser(64);
-		return;
-	}
-	if(eventNo == 120) {
-		campSlavesMenu();
-		return;
-	}
-	if(eventNo == 121) {
-		campLoversMenu();
+		eventParser(mainMenu);
 		return;
 	}
 
-
-
-	// --------------------------------------------------------------------------------------------------------------
-	// Settings and startup menu items
-
-	//Display Credits Menu
-	if(eventNo == 63) {
-		creditsScreen();
-	}
-	
-	//Display title
-	if(eventNo == 64) {
-		mainMenu();
-	}
-
-	if(eventNo == 81) {
-		howToPlay();
-		return;
-	}
-
-	// Toggles -------------------------
-	
-	//toggle debug
-	if(eventNo == 18) {
-		if(debug) 
-			debug = false;
-		else 
-			debug = true;
-		dataBG.visible = true;
-		dataText.visible = true;
-		settingsScreen();
-	}
-	
-	//Toggle Easy Mode
-	if(eventNo == 96) {
-		if(flags[EASY_MODE_ENABLE_FLAG] == 0) 
-			flags[EASY_MODE_ENABLE_FLAG] = 1;
-		else 
-			flags[EASY_MODE_ENABLE_FLAG] = 0;
-		settingsScreen();
-		dataBG.visible = true;
-		dataText.visible = true;
-	}
-
-	
-	// Sprite toggle
-	if(eventNo == 112) 
-	{
-		
-		if(flags[SHOW_SPRITES_FLAG]) 
-			flags[SHOW_SPRITES_FLAG] = false;
-		else 
-			flags[SHOW_SPRITES_FLAG] = true;
-		settingsScreen();
-		return;
-	}
-
-	// Silly Toggle
-	if(eventNo == 113) {
-		if(flags[SILLY_MODE_ENABLE_FLAG])
-			flags[SILLY_MODE_ENABLE_FLAG] = false;
-		else 
-			flags[SILLY_MODE_ENABLE_FLAG] = true;
-		settingsScreen();
-		return;
-	}
-	// End Toggles -------------------------
-
-	if(eventNo == 122) {
-		settingsScreen();
-		return;
-	}
-
-
-	if(eventNo == 117) {
-		eventTester();
-		
-		return;
-	}
-
+	errorPrint(eventNo);		// Dump the system state to the window so the player can file a decent bug-report
 }
+function getCurrentStackTrace():String		// Fuck, stack-traces only work in the debug player.
+{
+	var tempError:Error = new Error();
+	var stackTrace:String = tempError.getStackTrace();
+	return stackTrace;
+}
+function errorPrint(details:* = null)
+{
+	outputText("<b>Congratulations, you've found a bug!</b>", true);
+	outputText("\nError: Unknown event!", false);
+	outputText("\n\nPlease report that you had an issue with code: \"" + details + "\" ", false);
 
+	var sTrace = getCurrentStackTrace();
 
+	if (sTrace)	// Fuck, stack-traces only work in the debug player.
+		outputText("and stack-trace: \n <pre>" + sTrace + "</pre>\n", false); 	
+	outputText("to fake-name on the forums or better yet, file a bug report on github: ", false);
+	outputText("\nhttps://github.com/herp-a-derp/Corruption-of-Champions", false);
 
+	outputText("\nPlease try to include the details of what you were doing when you encountered this bug ", false);
+	if (sTrace)
+		outputText(" (including the above stack trace copy&pasted into the details),", false);
+	outputText(" to make tracking the issue down easier. Thanks!", false);
+
+	doNext(13);
+}
 
 
 
@@ -2114,6 +1973,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(player.hasStatusAffect("CuntStretched") >= 0) {
 			player.addStatusValue("CuntStretched",1,1);
 			if(player.vaginas.length > 0) {
+				if(player.hasPerk("Fera's Boon - Wide Open") < 0) {
 				if(player.vaginas[0].vaginalLooseness == 2 && player.statusAffectv1("CuntStretched") >= 200) {
 					outputText("\nYour " + vaginaDescript(0) + " recovers from your ordeals, tightening up a bit.\n", false);
 					player.vaginas[0].vaginalLooseness--;
@@ -2132,8 +1992,9 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 					player.changeStatusValue("CuntStretched",1,0);
 					needNext = true;
 				}
+				}
 				if(player.vaginas[0].vaginalLooseness == 5 && player.statusAffectv1("CuntStretched") >= 50) {
-					outputText("\nYour " + vaginaDescript(0) + " recovers from the brutal stretching it has received and tightens up.\n", false);
+					outputText("\nYour " + vaginaDescript(0) + " recovers from the brutal stretching it has received and tightens up a little bit, but not much.\n", false);
 					player.vaginas[0].vaginalLooseness--;
 					player.changeStatusValue("CuntStretched",1,0);
 					needNext = true;
@@ -3167,6 +3028,12 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 				//Make sure pregnancy texts aren't hidden
 				if(updatePregnancy()) needNext = true;
 			}
+			if(player.hasPerk("Fera's Boon - Wide Open") >= 0 || player.hasPerk("Fera's Boon - Milking Twat") >= 0) {
+				if(player.pregnancyIncubation > 0) player.pregnancyIncubation--;
+				if(player.buttPregnancyIncubation > 0) player.buttPregnancyIncubation--;
+				//Make sure pregnancy texts aren't hidden
+				if(updatePregnancy()) needNext = true;
+			}
 			if(flags[EVENT_PARSER_ESCAPE] == 1) {
 				flags[EVENT_PARSER_ESCAPE] = 0;
 				return true;
@@ -3236,6 +3103,12 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 				return true;
 			}
 			if(player.hasPerk("Fera's Boon - Breeding Bitch") >= 0) {
+				if(player.pregnancyIncubation > 0) player.pregnancyIncubation--;
+				if(player.buttPregnancyIncubation > 0) player.buttPregnancyIncubation--;
+				//Make sure pregnancy texts aren't hidden
+				if(updatePregnancy()) needNext = true;
+			}
+			if(player.hasPerk("Fera's Boon - Wide Open") >= 0 || player.hasPerk("Fera's Boon - Milking Twat") >= 0) {
 				if(player.pregnancyIncubation > 0) player.pregnancyIncubation--;
 				if(player.buttPregnancyIncubation > 0) player.buttPregnancyIncubation--;
 				//Make sure pregnancy texts aren't hidden
@@ -3395,6 +3268,8 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			return true;
 		}
 	}
+	// update cock type as dog/fox depending on whether the player resembles one more then the other.
+	// Previously used to be computed directly in cockNoun, but refactoring prevents access to the Player class when in cockNoun now.
 	if (player.totalCocks() != 0)
 	{
 		var counter:Number = player.totalCocks() - 1;

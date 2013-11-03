@@ -334,7 +334,7 @@ function suckleMarble():void {
 	marbleStatusChange(15,10);
 	//(apply the stat effect 'Marble's Milk' to the player)
 	applyMarblesMilk();
-	stats(0,0,0,0,0,0,25,0);
+	stats(0, 0, 0, 0, 0, 0, 25, 0);
 	doNext(13);
 }
 
@@ -1602,7 +1602,7 @@ function interactWithMarbleAtCamp():void {
 	//appearnace/info - always there
 	//Sex
 	if(player.lust >= 33) sexEvent = 2127;
-	choices("Appearance",2132,"Talk",marbleTalkOverhaul,"Present",gatherEvent,"Give Item",giveItemEvent,"Get Milk",milkEvent,"Release",sexEvent,"Playtime",playtime,"Break Up",breakUpWithMarble,"",0,"Back",121);
+	choices("Appearance",2132,"Talk",marbleTalkOverhaul,"Present",gatherEvent,"Give Item",giveItemEvent,"Get Milk",milkEvent,"Release",sexEvent,"Playtime",playtime,"Break Up",breakUpWithMarble,"",0,"Back",campLoversMenu);
 }
 
 function marbleTalkOverhaul():void {
@@ -3103,15 +3103,15 @@ function marblePreggoChance(preggerMult:Number):void {
 	//chance for PC's with normal human cum production should be 15% + 1%/100 ml of production (to a max of +15%) + 5% 
 	//for each general male fertility perks + 20% for being Merae's stud.
 
-	var preggerOdds:Number = 15;
+	var preggerOdds:Number = 10;
 	//Count cum quantity
-	preggerOdds += 1 / player.cumQ();
+	preggerOdds += player.cumQ() / 100;
 	//Capped at 20
-	if(preggerOdds > 15) preggerOdds = 15;
+	if(preggerOdds > 20) preggerOdds = 20;
 	//Fertility+ perk bumps odds to 25.
-	if(player.hasPerk("Fertility+") >= 0) preggerOdds = 5;
-	//If has 'stud perk' always get her pregnant
-	if(player.hasPerk("Marae's Gift - Stud") >= 0) preggerOdds = 20;
+	if(player.hasPerk("Fertility+") >= 0) preggerOdds += 5;
+	//If has 'stud perk' almost always get her pregnant
+	if(player.hasPerk("Marae's Gift - Stud") >= 0) preggerOdds += 25;
 	preggerOdds *= preggerMult;
 	//GET HER PREGNANT
 	trace("MARBLE PREGGO ODDS: " + preggerOdds);

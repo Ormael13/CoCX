@@ -18,6 +18,7 @@ package classes
 		   8 - ugliest wang ever (kangaroo)
 		   9 - dragon
 		   10 - displacer
+		   11 - Fox
 		 */
 		public static function legacySuportLoadCockType(cockType:*):CockTypesEnum
 		{
@@ -69,16 +70,17 @@ package classes
 			}
 			else if (cockType is String)
 			{
-				return CockTypesEnum[cockType];
+				return ParseConstant(cockType);
+					//return CockTypesEnum[cockType];
 			}
-
+			
 			else
 			{
-				throw new Error("Invalid cock type!" + cockType); 
+				throw new Error("Invalid cock type!" + cockType);
 				return CockTypesEnum[HUMAN];
 			}
 		}
-
+		
 		public static function legacySuportGetCockType(cockType:*):Number
 		{
 			if (cockType is CockTypesEnum)
@@ -125,20 +127,20 @@ package classes
 						 return 0
 						 break;
 				}
-
+				
 			}
 			else if (cockType is String)
 			{
 				return legacySuportGetCockType(CockTypesEnum[cockType]);
 			}
-
+			
 			else
 			{
-				throw new Error("Invalid cock type!" + cockType); 
+				throw new Error("Invalid cock type!" + cockType);
 				return 0;
 			}
 		}
-
+		
 		public static const HUMAN:CockTypesEnum = new CockTypesEnum();
 		public static const HORSE:CockTypesEnum = new CockTypesEnum();
 		public static const DOG:CockTypesEnum = new CockTypesEnum();
@@ -151,5 +153,10 @@ package classes
 		public static const DRAGON:CockTypesEnum = new CockTypesEnum();
 		public static const DISPLACER:CockTypesEnum = new CockTypesEnum();
 		public static const FOX:CockTypesEnum = new CockTypesEnum();
+		
+		public static function ParseConstant(i_constantName:String, i_caseSensitive:Boolean = false):CockTypesEnum
+		{
+			return CockTypesEnum(Enum.ParseConstant(CockTypesEnum, i_constantName, i_caseSensitive));
+		}
 	}
 }

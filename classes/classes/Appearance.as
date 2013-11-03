@@ -65,8 +65,7 @@
 					descript += "knotted dog-cock";
 			}
 			if (cockType == CockTypesEnum.FOX)
-			{
-				
+			{				
 				rando = int(Math.random() * 11);
 				if (rando == 0)
 					descript += "fox-shaped dong";

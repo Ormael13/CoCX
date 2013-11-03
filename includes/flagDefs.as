@@ -25,14 +25,14 @@ const PC_FETISH:int                                                   =   23; //
 const PC_MET_CERAPH:int                                               =   24; // Met Ceraph
 const INCREASED_HAIR_GROWTH_TIME_REMAINING:int                        =   25; // Increased Hair-growth Days Left
 const INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED:int                   =   26; // Increased Hair-growth stack
-const CHEAT_ENTERING_COUNTER:int                                   =   27; // Cheat Input Counter
-const TIMES_CHEATED_COUNTER:int                                   =   28; // Cheat Break Counter
+const CHEAT_ENTERING_COUNTER:int                                      =   27; // Cheat Input Counter
+const TIMES_CHEATED_COUNTER:int                                       =   28; // Cheat Break Counter
 const URTA_PC_AFFECTION_COUNTER:int                                   =   29; // Urta love counter
-const URTA_PC_LOVE_COUNTER:int                                   =   30; // Urta Love Level
-const URTA_ANGRY_AT_PC_COUNTDOWN:int                                   =   31; // Urta pissed countdown
-const URTA_KNOWS_PC_HAS_MARBLE_FOLLOWER:int                                   =   32; // Marble Cockblock happened = 0 - no, 1 = yes
+const URTA_PC_LOVE_COUNTER:int                                        =   30; // Urta Love Level
+const URTA_ANGRY_AT_PC_COUNTDOWN:int                                  =   31; // Urta pissed countdown
+const URTA_KNOWS_PC_HAS_MARBLE_FOLLOWER:int                           =   32; // Marble Cockblock happened = 0 - no, 1 = yes
 const PC_SEEN_URTA_BADASS_FIGHT:int                                   =   33; // Seen Urta be a badass?
-const PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE:int                                   =   34; // Last year xmas elf encountered
+const PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE:int                         =   34; // Last year xmas elf encountered
 const AMILY_MET:int                                                   =   35; //   (0 = not met, 1 = met)Amily Met.	 0=Not Met, 1=Met
 const AMILY_VILLAGE_ENCOUNTERS_DISABLED:int                           =   36; //  1=true,44=village buttonAmily Village Encounters Disabled.	 1=True, 44=Village Button?
 const AMILY_GROSSED_OUT_BY_WORMS:int                                  =   37; //  1=freaked out-Amily encounters disabled due to worms 0=False, 1= True
@@ -61,7 +61,7 @@ const UNKNOWN_FLAG_NUMBER_00059:int                                   =   59; //
 const UNKNOWN_FLAG_NUMBER_00060:int                                   =   60; // Fail Masturbation As Centaur?
 const UNKNOWN_FLAG_NUMBER_00061:int                                   =   61; // Cerulean Potion Bad-End Futa Count
 const UNKNOWN_FLAG_NUMBER_00062:int                                   =   62; // Cerulean Potion Neuter Attempted
-const UNKNOWN_FLAG_NUMBER_00063:int                                   =   63; // Used as temp storage for deleting save slots
+const TEMP_STORAGE_SAVE_DELETION:int                                  =   63; // Used as temp storage for deleting save slots
 const UNKNOWN_FLAG_NUMBER_00064:int                                   =   64; // Marble not sleeping with you due to worms
 const UNKNOWN_FLAG_NUMBER_00065:int                                   =   65; // Force Bee Honey Drop - Found Bee Honey.	1=Found
 const UNKNOWN_FLAG_NUMBER_00066:int                                   =   66; // Hair no longer grows due to lizard
@@ -1016,8 +1016,8 @@ const RUBI_SETUP:int                                                  = 1014; //
 const EXPLORATION_PAGE:int                                            = 1015; // 
 const BOG_EXPLORED:int                                                = 1016; // 
 const TIMES_ENCOUNTERED_FROG:int                                      = 1017; // 
-const UNKNOWN_FLAG_NUMBER_01018:int                                   = 1018;
-const UNKNOWN_FLAG_NUMBER_01019:int                                   = 1019;
+const FERAS_GLADE_EXPLORED_YEAR:int                                   = 1018;
+const FERAS_TRAP_SPRUNG_YEAR:int                                      = 1019;
 const UNKNOWN_FLAG_NUMBER_01020:int                                   = 1020;
 const UNKNOWN_FLAG_NUMBER_01021:int                                   = 1021;
 const UNKNOWN_FLAG_NUMBER_01022:int                                   = 1022;

@@ -228,7 +228,7 @@ function approachBimboSophieInCamp(output:Boolean = true):void {
 			addButton(8,"NoSnuggles",noSophieSleepWith);
 		}
 	}
-	//choices("Nice Fuck",vag2,"Mean Fuck",vag,"FuckHerAss",anal,"Get Licked",getLicked,"Ovi Elixer",ovi,"Titty-Fuck",titFuck,"",0,"",0,"",0,"Leave",120);
+	//choices("Nice Fuck",vag2,"Mean Fuck",vag,"FuckHerAss",anal,"Get Licked",getLicked,"Ovi Elixer",ovi,"Titty-Fuck",titFuck,"",0,"",0,"",0,"Leave",campSlavesMenu);
 	addButton(9,"Leave",eventParser,120);
 }
 

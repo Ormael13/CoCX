@@ -1873,6 +1873,7 @@ function stickItInMouseTwatForTheFirstTimeNOTWORTHALLBULLSHIT():void {
 //[=Take Charge=]
 function FirstTimeAmilyTakeCharge():void {
 	outputText("", true);
+	outputText(images.showImage("amily-forest-takecharge"), false);
 	amilySprite();
 	outputText("You decide that the scenery doesn't matter; Amily promised you sex, and you want that sex. Without a word you step forward and give her a mighty push, sending her falling onto her butt with a squeak as you thrust her towards the \"<i>bed</i>\" - that she lands in it is more coincidence than anything. You drop down on top of her, pinning her arms and legs with your own.\n\n", false);
 
@@ -1923,6 +1924,7 @@ function FirstTimeAmilyTakeCharge():void {
 //[=Wait for Her=]
 function beSomeKindofNervousDoucheAndWaitForAmily():void {
 	outputText("", true);
+	outputText(images.showImage("amily-forest-plainfuck"), false);
 	amilySprite();
 	outputText("Amily may be a cute little girl, but you're not sure it's really a good idea to... proceed... So you just wait for her to decide whether she really wants to have sex here and now. After a few moments, when it's clear that you're not going to do anything, she frowns a little and steps up to you. Looking up into your eyes, you suddenly realize she wants a kiss. Bending down your head, you plan to give her a rather chaste kiss, but Amily obviously has other ideas. You feel your tongue entering her mouth, and what was intended as a short, innocent kiss turns into a very hot, rather 'not-so-innocent' one.  Suddenly you feel her little hand (or paw?) grabbing your ass.\n\n", false);
 
@@ -1944,6 +1946,7 @@ function beSomeKindofNervousDoucheAndWaitForAmily():void {
 function kissAmilyInDaMoufFirstTimeIsSomehowBetterThatWay():void {
     outputText("", true);
     amilySprite();
+	outputText(images.showImage("amily-forest-kissingfuck"), false);
     outputText("While the scenery certainly isn't anything you'd call \"<i>romantic</i>\" or \"<i>arousing</i>\", the eager little mouse-girl in front of you is quite appealing, so you step up to her, take her in your arms and lightly kiss her. Seeing her eyes widen in surprise for a moment, she soon closes her eyes and returns the kiss. Continuing the kiss you two begin to explore each other. Along the way, you help each other out of your clothes and slowly, almost reluctantly step back so you can for the first time see each other without anything in the way.\n\n", false);
 
     //(If player has a penis 14" long or more)
@@ -2041,6 +2044,7 @@ function amilySexPlaytimeFirst():void {
 
 function amilySexPtII():void {
 	amilySprite();
+	
 	//worm infested reaction
 	if(player.hasStatusAffect("infested") >= 0) {
 		outputText("\"<i>EWWWW!  You're infested!</i>\" she shrieks, \"<i>Get out!  Don't come back till you get rid of the worms!</i>\"\n\nYou high tail it out of there.  It looks like Amily doesn't want much to do with you until you're cured.", false);
@@ -2096,6 +2100,7 @@ function AmilyTakeTheKiss():void {
 function continueAmilySmex():void {
     var x:Number = player.cockThatFits(61);
     amilySprite();
+	outputText(images.showImage("amily-forest-plainfuck"), false);
     outputText("The time couldn't be any more right for either of you, and you both sink onto the bedding that Amily has prepared. Lying side by side, Amily guides you with surprising efficiency into her entry, and then, once you are comfortably inside, she begins to thrust, her cunt gripping your " + cockDescript(x) + " like a vice.\n\n", false);
 
     /*(If player chooses "Share The Pleasure":) 
@@ -2177,6 +2182,7 @@ function continueWithMoreMidLevelAmilySex():void {
 function playAlongWithAmilyWhataDumbBitch():void {
 	outputText("",true);
 	amilySprite();
+	outputText(images.showImage("amily-forest-reverse-cowgirl"), false);
 	outputText("You decide to let her take the dominant position, relax (as much as you can with a beautiful, hot and very wet little mouse-girl sitting on you and fondling you) and simply enjoy her attentions. Amily obviously knows what she is doing - though you have no idea HOW she knows - and manages to bring you nearly to the climax before drawing back a little and letting you calm down.  She repeats this several times until you're nearly going crazy.  Just when you think you can't stand it anymore, she removes her tail from your cock and instead uses it to lightly bind your hands. You could easily move your hands, but decide not to. Grinning at you, she hovers a moment over your cock before slowly sinking down. You somehow manage to avoid cumming as soon as you enter her, but it's really, really hard. Amily's tail draws your 'bound' hands onto her breasts, while hers start caressing yours as she begins slowly riding you. Soon, the speed increases, and it isn't long before you both orgasm.\n\n", false);
 	stats(0,0,0,0,0,-1,-100,0);
 	AmilyMiddleGradeSexOver();
@@ -2324,6 +2330,7 @@ function amilyHighAffectionSecks():void {
 function fuckAmilyPreg():void {
 	amilySprite();
 	outputText("", true);
+	outputText(images.showImage("amily-forest-fuckpreg"), false);
 	outputText("Amily leads you by the hand to her hiding place as quickly as possible...which is a relatively brisk walking speed. You don't rush her or anything, understanding how the heavy bump on her belly is slowing her down, moving side-by-side at the same pace.  You try to help Amily over the difficult terrain facing her.", false);
 	if(flags[AMILY_WANG_LENGTH] > 0) outputText("  The erection tenting her pants isn't helping.", false);
 	outputText("\n\n", false);
@@ -2478,13 +2485,13 @@ function amilyMenu(output:Boolean = true):void {
 	if(flags[AMILY_FOLLOWER] == 1) {
 		//outputText("Options:\nAppearance\nTalk\nMake Love\n", false);
 		//MOAR OPTIONS: Give Present\nAlchemy\nTeach Blowpipe
-		choices("Appearance",amilyAppearance,"Talk",talkToAmilyCamp,"Make Love",fuckTheMouseBitch,"Give Present",giveAmilyAPresent,"Date",date,"Lay Eggs",eggs,"Defur",defur,"",0,"",0,"Back",121);
+		choices("Appearance",amilyAppearance,"Talk",talkToAmilyCamp,"Make Love",fuckTheMouseBitch,"Give Present",giveAmilyAPresent,"Date",date,"Lay Eggs",eggs,"Defur",defur,"",0,"",0,"Back",campLoversMenu);
 	}
 	//Corrupt
 	else {
 		//outputText("Options:\nAppearance\nGive Item\nSex\nTalk\n", false);
 		//  [Sex] [Give Item] [Talk] [Call Jojo]
-		choices("Appearance",amilyAppearance,"Give Item",giveAmilyAPresent,"Sex",fuckTheMouseBitch,"Talk",talkWithCORRUPTCUNT,"Defur",defur,"",0,"",0,"",0,"",0,"Back",120);
+		choices("Appearance",amilyAppearance,"Give Item",giveAmilyAPresent,"Sex",fuckTheMouseBitch,"Talk",talkWithCORRUPTCUNT,"Defur",defur,"",0,"",0,"",0,"",0,"Back",campSlavesMenu);
 	}
 }
 

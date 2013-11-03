@@ -380,6 +380,7 @@ function camp():void {
 	if(player.fatigue > 50) rest = 11;
 	if(player.lust > 30) masturbate = 42;
 	outputText("", true);
+	//outputText(images.showImage("camping"), false);
 	//Isabella upgrades camp level!
 	if(isabellaFollower()) {
 		outputText("Your campsite got a lot more comfortable once Isabella moved in.  Carpets cover up much of the barren ground, simple awnings tied to the rocks provide shade, and hand-made wooden furniture provides comfortable places to sit and sleep.", false);

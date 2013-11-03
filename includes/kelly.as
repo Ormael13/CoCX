@@ -669,7 +669,6 @@ function kellyAppearance():void {
 	else outputText("puffy, black mare-cunt");
 	outputText(" placed below her hindquarters.  It is almost constantly dripping rivulets of moisture when you're around.  Its shining openness seems to welcome you in her warmth.");
 	if(flags[KELLY_HEAT_TIME] > 0 && flags[KELLY_INCUBATION] == 0) outputText("<b>  There is so much leaking from her that you think she might be in heat, rendering her more receptive to impregnation.</b>");
-	if(flags[KELLY_INCUBATION] > 0) outputText("<b>  Her belly is swollen and often wiggles around as your rambunctious offspring moves inside her.</b>");
 	outputText("\n\nShe has a human-like asshole, placed right between her horse butt-cheeks where it belongs.");
 	
 	//[enter pregnancy text]
@@ -1944,6 +1943,7 @@ function giveKellyAppleSauce():void {
 		outputText("\n\nYou dress yourself and amble back out of the stable with her before sending her on her way with a loving, jiggling swat to her boobs.");
 	}
 	stats(0,0,0,0,0,-2,-100,0);
+	flags[KELLY_TIMES_APPLESAUCED]++;
 	doNext(13);
 }
 
