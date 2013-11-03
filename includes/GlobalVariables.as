@@ -12,8 +12,8 @@
 var debug:Boolean = false;
 
 //Version NUMBER
-var ver:String = "0.8.3d1";
-var version:String = "v0.8.3d1 (<b>Dick or Treat</b>)";
+var ver:String = "0.8.3d1.1";
+var version:String = "v0.8.3d1.1 (<b>Dick or Treat</b>)";
 
 //Indicates if building for mobile?
 var mobile:Boolean = false;
@@ -49,10 +49,13 @@ var itemSwapping:Boolean = false;
 //The extreme flag state array. This needs to go. Holds information about everything, whether it be certain attacks for NPCs 
 //or state information to do with the game. 
 var flags = new DefaultDict();
+
+/*
 for (var i = 0; i < 3000; i++)
 {
 	flags.push(0);
 }
+*/
 
 ///Used everywhere to establish what the current game state is
 // Key system variables

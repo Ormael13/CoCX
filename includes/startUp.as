@@ -132,7 +132,18 @@ function mainMenu(e:MouseEvent = undefined):void {
 	statsText.visible = false;
 	//Sets game state to 3, used for determining back functionality of save/load menu.
 	gameState = 3;
-	outputText("<b>Corruption of Champions (" + version + ")</b>\n(Formerly Unnamed Text Game)\n\nCreated by: Fenoxo\nEdited By: Ashi, SoS, Zeikfried, and Others\n\n<b><u>DISCLAIMER</u>\n\n-There are many strange and odd fetishes contained in this flash.  Peruse at own risk.\n-Please be 18 or the legal age to view porn before playing.\n-Try to keep your keyboard clean.  Think of the children!</b>\n\nFor more information see Fenoxo's Blog at <b>fenoxo.com</b>.\n\nAlso go play Nimin by Xadera on furaffinity.", true);
+	outputText("(Alternative) <b>Corruption of Champions (" + version + ")</b>\n(Formerly Unnamed Text Game)", true);
+	outputText("\n\nCreated by: Fenoxo", false);
+	outputText("\nEdited By: Ashi, SoS, Zeikfried, and Others", false);
+	outputText("\n\nOpen-source version modifications by: \nAmygdaloidnucleus/Amygdala, Hoffledop/Yoffy, Herp-a-derp/Fake-Name, Cmacleod42", false);
+	outputText("\n<u><a href='https://github.com/herp-a-derp/Corruption-of-Champions'>https://github.com/herp-a-derp/Corruption-of-Champions</a></u>", false);
+	outputText("\n\n<b><u>DISCLAIMER</u>\n\n-There are many strange and odd fetishes contained in this flash.  Peruse at own risk.", false);
+	outputText("\n-Please be 18 or the legal age to view porn before playing.", false);
+	outputText("\n-Try to keep your keyboard clean.  Think of the children!</b>", false);
+	outputText("\n\nFor more information see Fenoxo's Blog at <b><u><a href='http://www.fenoxo.com/'>fenoxo.com</a></u></b>.", false);
+	outputText("\n\nAlso go play <u><a href='http://www.furaffinity.net/view/9830293/'>Nimin</a></u> by Xadera on furaffinity.", false);
+
+
 	if(debug) 
 		outputText("\n\n<b>DEBUG MODE ENABLED:  ITEMS WILL NOT BE CONSUMED BY USE.</b>", false);
 	if(flags[SHOW_SPRITES_FLAG]) 
