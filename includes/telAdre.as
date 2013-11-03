@@ -118,7 +118,7 @@ function telAdreMenu():void {
 		crazyVDayShenanigansByVenithil();
 		return;
 	}
-	if(!urtaBusy() && flags[PC_SEEN_URTA_BADASS_FIGHT] == 0 && rand(15) == 0 && hours > 15) {
+	if(!urtaBusy() && flags[PC_SEEN_URTA_BADASS_FIGHT] == 0 && rand(15) == 0 && this.model.time.hours > 15) {
 		urtaIsABadass();
 		return;
 	}
@@ -906,7 +906,7 @@ function barTelAdre():void {
 		button = anotherButton(button,"Ask4Amily",eventParser,3187);
 	}
 	//DOMINIKA
-	if(hours > 17 && hours < 20 && flags[UNKNOWN_FLAG_NUMBER_00150] != -1) {
+	if(this.model.time.hours > 17 && this.model.time.hours < 20 && flags[UNKNOWN_FLAG_NUMBER_00150] != -1) {
 		button = anotherButton(button,"Dominika",eventParser,2739);
 	}
 	//EDRYN!
@@ -944,7 +944,7 @@ function barTelAdre():void {
 		}
 	}
 	//HELIA
-	if(player.gender > 0 && hours >= 14 && rand(2) == 0 && hours < 20 && flags[HEL_FUCKBUDDY] == 1 && !(flags[HEL_FOLLOWER_LEVEL] == 1 && flags[HEL_HARPY_QUEEN_DEFEATED]== 0)) {
+	if(player.gender > 0 && this.model.time.hours >= 14 && rand(2) == 0 && this.model.time.hours < 20 && flags[HEL_FUCKBUDDY] == 1 && !(flags[HEL_FOLLOWER_LEVEL] == 1 && flags[HEL_HARPY_QUEEN_DEFEATED]== 0)) {
 		helAppearance();
 		button = anotherButton(button,"Helia",eventParser,3355);
 	}
@@ -957,7 +957,7 @@ function barTelAdre():void {
 	else outputText("\n\nIt doesn't look like there's a bartender working at the moment.", false);
 	
 	//NIAMH
-	if(hours >= 8 && hours <= 16 && flags[NIAMH_STATUS] == 0) {
+	if(this.model.time.hours >= 8 && this.model.time.hours <= 16 && flags[NIAMH_STATUS] == 0) {
 		telAdreNiamh();
 		if(flags[MET_NIAMH] == 0) button = anotherButton(button,"Beer Cat",eventParser,3524);
 		else button = anotherButton(button,"Niamh",eventParser,3524);
@@ -1004,24 +1004,24 @@ function barTelAdre():void {
 				button = anotherButton(button,"Scylla",eventParser,2705);
 			}
 			//Round 5 - repeatable!
-			else if(flags[UNKNOWN_FLAG_NUMBER_00054] >= 4 && (hours == 18 || hours == 19)) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00054] >= 4 && (this.model.time.hours == 18 || this.model.time.hours == 19)) {
 				outputText("\n\nYou see Scylla's white and black nun's habit poking above the heads of the other patrons. The tall woman seems unaware of her effect on those around her, but it's clear by the way people are crowding she's acquired a reputation by now. You're not sure what she's doing, but you could push your way through to find out.", false);
 				button = anotherButton(button,"Scylla",eventParser,2563);
 			}			
 			//Round 2.5 Repeatable
-			else if(flags[UNKNOWN_FLAG_NUMBER_00054] >= 2 && flags[FED_SCYLLA_TODAY] == 0 && hours >= 7 && hours <= 11) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00054] >= 2 && flags[FED_SCYLLA_TODAY] == 0 && this.model.time.hours >= 7 && this.model.time.hours <= 11) {
 				outputText("\n\nIt looks like Scylla is milling around here this morning, praying as she keeps an eye out for someone to 'help'.");
 				button = anotherButton(button,"Scylla",eventParser,3992);
 			}
 		}
 	}
 	//Nun cat stuff!
-	if((hours > 8 || hours < 18) && player.hasKeyItem("Silver Kitty-Bell") >= 0) {
+	if((this.model.time.hours > 8 || this.model.time.hours < 18) && player.hasKeyItem("Silver Kitty-Bell") >= 0) {
 		catMorphIntr();
 		button = anotherButton(button,"ScyllaCats",eventParser,3316);
 	}
 	//URTA	
-	if(!urtaBusy() && flags[AMILY_VISITING_URTA] != 1 && hours < 15) {
+	if(!urtaBusy() && flags[AMILY_VISITING_URTA] != 1 && this.model.time.hours < 15) {
 		//Scylla + Urta sitting in a tree
 		// SOME COMFORT     FUCKED URTA      NOT PISSED      DRUNK TIME    SCYLLA TO LV4    RANDOM CHANCE  HAS THIS HAPPENED BEFORE? SCYLLA REQS ->
 		if(flags[URTA_TIME_SINCE_LAST_CAME] == 0 && flags[URTA_COMFORTABLE_WITH_OWN_BODY] > 2 && flags[TIMES_FUCKED_URTA] > 0 && flags[URTA_ANGRY_AT_PC_COUNTDOWN] < 1 && (urtaDrunk() || flags[UNKNOWN_FLAG_NUMBER_00143] > 0) && flags[UNKNOWN_FLAG_NUMBER_00054] >= 3 && rand(3) == 0 && (flags[UNKNOWN_FLAG_NUMBER_00143] == 0 || (flags[UNKNOWN_FLAG_NUMBER_00147] == 0 && flags[UNKNOWN_FLAG_NUMBER_00145] > 0)) && ((flags[UNKNOWN_FLAG_NUMBER_00143] > 0 && !urtaDrunk()) || player.balls > 0) && player.totalCocks() > 0 && !hasButton("Scylla") && !hasButton("ScyllaCats")) {
@@ -1102,7 +1102,7 @@ function oldbarTelAdre():void {
 		}
 	}
 	//Nun cat stuff!
-	if((hours > 8 || hours < 18) && player.hasKeyItem("Silver Kitty-Bell") >= 0) {
+	if((this.model.time.hours > 8 || this.model.time.hours < 18) && player.hasKeyItem("Silver Kitty-Bell") >= 0) {
 		misc1Name = "ScyllaCats";
 		misc1 = 3316;
 		catMorphIntr();
@@ -1139,27 +1139,27 @@ function oldbarTelAdre():void {
 				misc1 = 2705;
 			}
 			//Round 5 - repeatable!
-			else if(flags[UNKNOWN_FLAG_NUMBER_00054] >= 4 && (hours == 18 || hours == 19)) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00054] >= 4 && (this.model.time.hours == 18 || this.model.time.hours == 19)) {
 				outputText("\n\nYou see Scylla's white and black nun's habit poking above the heads of the other patrons. The tall woman seems unaware of her effect on those around her, but it's clear by the way people are crowding she's acquired a reputation by now. You're not sure what she's doing, but you could push your way through to find out.", false);
 				misc1Name = "Scylla";
 				misc1 = 2563;
 			}			
 			//Round 2.5 Repeatable
-			else if(flags[UNKNOWN_FLAG_NUMBER_00054] >= 2 && flags[FED_SCYLLA_TODAY] == 0 && hours >= 7 && hours <= 11) {
+			else if(flags[UNKNOWN_FLAG_NUMBER_00054] >= 2 && flags[FED_SCYLLA_TODAY] == 0 && this.model.time.hours >= 7 && this.model.time.hours <= 11) {
 				outputText("\n\nIt looks like Scylla is milling around here this morning, praying as she keeps an eye out for someone to 'help'.");
 				misc1Name = "Scylla";
 				misc1 = 3992;
 			}
 		}
 	}
-	if(hours >= 8 && hours <= 16 && (misc1 == 0 || (rand(2) == 0 && misc1 != 2705)) && flags[NIAMH_STATUS] == 0) {
+	if(this.model.time.hours >= 8 && this.model.time.hours <= 16 && (misc1 == 0 || (rand(2) == 0 && misc1 != 2705)) && flags[NIAMH_STATUS] == 0) {
 		telAdreNiamh();
 		if(flags[MET_NIAMH] == 0) misc1Name = "Beer Cat";
 		else misc1Name = "Niamh";
 		misc1 = 3524;
 	}
 	var hel:Number = 0;
-	if(player.gender > 0 && hours >= 14 && rand(2) == 0 && hours < 20 && flags[HEL_FUCKBUDDY] == 1 && (!followerHel() || flags[HEL_HARPY_QUEEN_DEFEATED] == 1)) {
+	if(player.gender > 0 && this.model.time.hours >= 14 && rand(2) == 0 && this.model.time.hours < 20 && flags[HEL_FUCKBUDDY] == 1 && (!followerHel() || flags[HEL_HARPY_QUEEN_DEFEATED] == 1)) {
 		helAppearance();
 		hel = 3355;
 	}
@@ -1169,7 +1169,7 @@ function oldbarTelAdre():void {
 	var backroom:Number = 0;
 	var backroomT:String = "Backrooms";
 	if(purifiedFaerieBitchBar()) vala = 2621;
-	if(!urtaBusy() && flags[AMILY_VISITING_URTA] != 1 && hours < 15) {
+	if(!urtaBusy() && flags[AMILY_VISITING_URTA] != 1 && this.model.time.hours < 15) {
 		//Scylla + Urta sitting in a tree
 		// SOME COMFORT     FUCKED URTA      NOT PISSED      DRUNK TIME    SCYLLA TO LV4    RANDOM CHANCE  HAS THIS HAPPENED BEFORE? SCYLLA REQS ->
 		if(flags[URTA_TIME_SINCE_LAST_CAME] == 0 && flags[URTA_COMFORTABLE_WITH_OWN_BODY] > 2 && flags[TIMES_FUCKED_URTA] > 0 && flags[URTA_ANGRY_AT_PC_COUNTDOWN] < 1 && (urtaDrunk() || flags[UNKNOWN_FLAG_NUMBER_00143] > 0) && flags[UNKNOWN_FLAG_NUMBER_00054] >= 3 && rand(3) == 0 && (flags[UNKNOWN_FLAG_NUMBER_00143] == 0 || (flags[UNKNOWN_FLAG_NUMBER_00147] == 0 && flags[UNKNOWN_FLAG_NUMBER_00145] > 0)) && ((flags[UNKNOWN_FLAG_NUMBER_00143] > 0 && !urtaDrunk()) || player.balls > 0) && player.totalCocks() > 0 && misc1Name != "Scylla") {
@@ -1205,7 +1205,7 @@ function oldbarTelAdre():void {
 		backroomT = "Ask4Amily";		
 	}
 	var dominika:Number = 0
-	if(hours > 17 && hours < 20 && flags[UNKNOWN_FLAG_NUMBER_00150] != -1) {
+	if(this.model.time.hours > 17 && this.model.time.hours < 20 && flags[UNKNOWN_FLAG_NUMBER_00150] != -1) {
 		dominika = 2739;
 		fellatrixBarAppearance();
 	}
@@ -1419,7 +1419,7 @@ function gymDesc():void {
 	if(flags[LOPPE_MET] > 0 && flags[LOPPE_DISABLED] == 0) {
 		outputText("\n\nYou spot Loppe the laquine wandering around, towel slung over her shoulder.  When she sees you, she smiles and waves to you and you wave back.");
 	}
-	if(hours > 9 && hours < 14) heckelAppearance();
+	if(this.model.time.hours > 9 && this.model.time.hours < 14) heckelAppearance();
 	gymMenu();
 }
 
@@ -1438,7 +1438,7 @@ function gymMenu():void {
 	if(flags[UNKNOWN_FLAG_NUMBER_00281] > 0) lottieB = "Lottie";
 	if(ifrisIntro()) ifris = 2845;
 	if(flags[MET_IFRIS] > 0) ifrisB = "Ifris";
-	if(hours > 9 && hours <= 15) {
+	if(this.model.time.hours > 9 && this.model.time.hours <= 15) {
 		hyena = 2844;
 		if(flags[MET_HECKEL] > 0) hyenaB = "Heckel";
 	}

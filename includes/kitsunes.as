@@ -611,8 +611,8 @@ function outro(tentacles:Boolean = false):void {
 			}
 			outputText("production has been enhanced.</b>");
 		}
-		hours = 6;
-		days++;
+		this.model.time.hours = 6;
+		this.model.time.days++;
 		if(!inCombat()) doNext(13);
 		else eventParser(5007);
 	}

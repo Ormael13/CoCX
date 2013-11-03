@@ -11,27 +11,27 @@
 function telAdreNiamh():void {
 	if(flags[MET_NIAMH] == 0) {
 		outputText("\n\nAt a table near the back of the bar sits one of the many curious sights Tel'Adre has to offer: a white-haired, ebony-skinned woman, sporting twitching feline ears and tail.  The curious-looking and mostly human girl sports a pair of form-fitting white leggings and a matching top hat. An unbuttoned leaf-green waistcoat hangs slack around her slender hips, and it doesn't take you long to see the reason for the lack of closure: her ");
-		if(hours <= 8) outputText("massive N-cup breasts, spilling over the table");
-		else if(hours <= 9) outputText("huge M-cup breasts, taking up much of the table");
-		else if(hours <= 10) outputText("great L-cup breasts, advancing far onto the table");
-		else if(hours <= 11) outputText("heavy K-cup breasts, lying on the table for support");
-		else if(hours <= 12) outputText("hefty J-cup breasts, resting comfortably on the table");
-		else if(hours <= 13) outputText("weighty I-cup breasts, dangling to lie on the table");
-		else if(hours <= 14) outputText("squeezable H-cup breasts, settling burdensomely on her chest");
+		if(this.model.time.hours <= 8) outputText("massive N-cup breasts, spilling over the table");
+		else if(this.model.time.hours <= 9) outputText("huge M-cup breasts, taking up much of the table");
+		else if(this.model.time.hours <= 10) outputText("great L-cup breasts, advancing far onto the table");
+		else if(this.model.time.hours <= 11) outputText("heavy K-cup breasts, lying on the table for support");
+		else if(this.model.time.hours <= 12) outputText("hefty J-cup breasts, resting comfortably on the table");
+		else if(this.model.time.hours <= 13) outputText("weighty I-cup breasts, dangling to lie on the table");
+		else if(this.model.time.hours <= 14) outputText("squeezable H-cup breasts, settling burdensomely on her chest");
 		else outputText("moderately manageable G-cups, trembling with every breath she takes");
 		outputText(".  Smooth, touchable skin covers her chest, face, hands and presumably the rest of her; it seems her animalistic accoutrements stop at kitty ears and tail. She takes a deep swig of her drink, following it up with a cute little burp.");
 	}
 	//This scene only plays if the PC has either Talked to Niamh or has gotten at least 1 mug of Black Cat Beer from her.
 	else {
 		outputText("\n\nNiamh is seated at her usual place near the back of the bar, ");
-		if(hours <= 8) outputText("her titanic N-cup 'kegs' resting against the thankfully sturdy table in front of her.  Her teats are engorged with the beer she's cursed to carry, and the stuff dribbles out whenever she shifts.");
-		else if(hours <= 14) {
+		if(this.model.time.hours <= 8) outputText("her titanic N-cup 'kegs' resting against the thankfully sturdy table in front of her.  Her teats are engorged with the beer she's cursed to carry, and the stuff dribbles out whenever she shifts.");
+		else if(this.model.time.hours <= 14) {
 			outputText("her ");
-			if(hours <= 9) outputText("M-cup");
-			else if(hours <= 10) outputText("L-cup");
-			else if(hours <= 11) outputText("K-cup");
-			else if(hours <= 12) outputText("J-cup");
-			else if(hours <= 13) outputText("I-cup");
+			if(this.model.time.hours <= 9) outputText("M-cup");
+			else if(this.model.time.hours <= 10) outputText("L-cup");
+			else if(this.model.time.hours <= 11) outputText("K-cup");
+			else if(this.model.time.hours <= 12) outputText("J-cup");
+			else if(this.model.time.hours <= 13) outputText("I-cup");
 			else outputText("H-cup");
 			outputText(" brew-burdened breasts have clearly gotten smaller as the day dragged on, although they're still uncomfortably sizeable and swollen.");
 		}
@@ -135,7 +135,7 @@ function drinkNiamhsBeerInTelAdre():void {
 	//PC is affected by Black Cat Beer item effects
 	blackCatBeerEffects(false,true);
 	//both output
-	if(hours <= 15) outputText("\n\n\"<i>Thanks for the business, " + player.mfn("laddie","lassie","customer") + "!  Remember, Niamh sells her Black Cat Beer every day from 8 until 4.</i>\"  You nod your head in thanks and step away from the table.");
+	if(this.model.time.hours <= 15) outputText("\n\n\"<i>Thanks for the business, " + player.mfn("laddie","lassie","customer") + "!  Remember, Niamh sells her Black Cat Beer every day from 8 until 4.</i>\"  You nod your head in thanks and step away from the table.");
 	//16:00 ending
 	else {
 		outputText("\n\nThanks to your efforts, ");
@@ -154,7 +154,7 @@ function blackCatBeerToGo():void {
 	player.gems -= 2;
 	statScreenRefresh();
 	//both output
-	if(hours <= 15) outputText("\n\n\"<i>Thanks for the business, " + player.mfn("laddie","lassie","customer") + "!  Remember, Niamh sells her Black Cat Beer every day from 8 until 4.</i>\"  You nod your head in thanks and step away from the table.");
+	if(this.model.time.hours <= 15) outputText("\n\n\"<i>Thanks for the business, " + player.mfn("laddie","lassie","customer") + "!  Remember, Niamh sells her Black Cat Beer every day from 8 until 4.</i>\"  You nod your head in thanks and step away from the table.");
 	//16:00 ending
 	else {
 		outputText("\n\nThanks to your efforts, ");
@@ -179,7 +179,7 @@ function talkToNiamh():void {
 		outputText("\n\n\"<i>The name's Niamh - like the cat noise, eh?  Nya-m? - that's who I am.  I used to be a normal lass... then I stumbled through the portals to this blasted world.  Made the mistake of pickin' up some whiskered fruit an' giving them a samplin'... grew these blasted cat-parts!  So I avoided that lake like th' plague fer a while... ended up in a desert.  Don't know how that happened.  Now, I'm completely lost, and the thirst is killing me - but then, I hear singing.  I charge desperately across a dune, and what do I find?  Some gal sitting in the sand, four big ol' tits hanging out, and guzzling away at a glass of beer - whenever she's empty, she just squirts some more out of her nipples.</i>\"");
 		outputText("\n\nShe shrugs, which does impressive things to her cleavage, then notices your downward glance and taunts you with her laugh, which only causes her huge breasts to jiggle all the more.  \"<i>Aye, just like what I got here.  So, anyway, I beg her to share a drink with me, and she kindly agrees.  I'm so thirsty, and the beer's so good, that, well, I stay there drinking for a good long while...</i>\"");
 		outputText("\n\nShe trails off, then shakes her head sadly, \"<i>I don't really know what happened next; I figure we must have gotten so drunk together that I asked her to cast the same sort of spell on me.  All I know is, I woke up with a killer headache, and monster tits swollen with beer - and the witch o' the sands is gone.  I somehow managed to lug myself around long enough to find... this city.  That nice fox ");
-		if(hours < 15) outputText("who usually sits over yonder ");
+		if(this.model.time.hours < 15) outputText("who usually sits over yonder ");
 		outputText("helped me in and set me up here so I can... lighten me load.  That bulk's basically all brew; I milk it out all the time, but I just keep making more of th' stuff... I don't know any way to stop.</i>\"  She shakes her head and sighs.  \"<i>Ironically, it's kept a roof over my head since I got here.  Folks are happy to pay for Niamh's Black Cat Beer.  So, did you want some, or are you done here?</i>\" she asks.");
 		flags[MET_NIAMH]++;
 		flags[TALKED_NIAMH]++;
@@ -722,7 +722,7 @@ function barBeerOrgyTits():void {
 	//Varies based on body type and characters present
 	//================================================
 	// IF [Edryn and Urta are present in the bar and free sex with both is unlocked and character is a herm]
-	if(player.statusAffectv1("Edryn") >= 5 && player.gender == 3 && hours == 14 && flags[URTA_COMFORTABLE_WITH_OWN_BODY] > 0) {
+	if(player.statusAffectv1("Edryn") >= 5 && player.gender == 3 && this.model.time.hours == 14 && flags[URTA_COMFORTABLE_WITH_OWN_BODY] > 0) {
 		outputText("\n\nYou're so dizzy on pleasure that you barely notice it when you're lifted off the table and carried through the bar again.  You can hardly feel your feet and legs when the crowd stands you up, and with a weak lifting of your head you see why the sudden change of position.  Right in front of you is Edryn's womanly hindquarters with her black cunt lips jiggling back and forth, dripping her girly horse juices from their sopping wet folds.  You don't even have to do anything has several hands angle [eachCock] and guide you forwards.");
 		// IF [player has a single cock]
 		if(player.cockTotal() == 1) outputText("  Edryn moans out loud in ecstasy as your [cock] fills her up.");
@@ -755,7 +755,7 @@ function barBeerOrgyTits():void {
 		growTits(2, player.bRows(), false, 2);
 	}
 	// IF [Urta but not Edryn is present in the bar and sex with her is unlocked and character has pussy]
-	else if(player.hasVagina() && hours < 15 && flags[URTA_COMFORTABLE_WITH_OWN_BODY] > 0) {
+	else if(player.hasVagina() && this.model.time.hours < 15 && flags[URTA_COMFORTABLE_WITH_OWN_BODY] > 0) {
 		outputText("\n\nYou hear passionate cries of lustful need from Urta as her horse-cock reams you with greater ferocity.  Her orgasm nearly knocks her off her feet as her shaft swells wider, stretching you apart as the cum surges up through it.");
 		// IF [player is not pregnant]  
 		if(player.pregnancyIncubation == 0) outputText("  The eruption of cum from her horsecock out does every other ejaculating dick in the room.  Your belly button pops outward as your stomach swells from the surging torrent of sperm pumping directly into your womb.  The hands of strangers grab your legs to keep you pinned in place while Urta struggles to keep her gushing cock inside your cunt despite the building pressure.  A couple voices call out, \"<i>She's gonna pop!  Is she gonna pop?  I think she is!</i>\"  Niamh is forced to sit up higher as your cum bloated belly pushes up against her.  Urta looks as if she's having a seizure from the sheer effort of unloading herself into you.  You scream out loud from the ecstasy of swelling but cries of pleasure are lost within Niamh's pussy folds, urging her to come again.  Her girl cum squirts down your throat, making your belly feel all the more tight and fit to burst.");

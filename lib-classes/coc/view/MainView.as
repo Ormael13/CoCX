@@ -315,6 +315,10 @@ package coc.view {
 				sprite.scaleX = 3;
 				sprite.scaleY = 3;
 			}
-		}
+		};
+
+		public function outputText() :void {
+			// ...
+		};
 	}
 }

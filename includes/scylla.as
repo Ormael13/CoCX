@@ -128,8 +128,8 @@ function scyllaRoundIIPartIII():void {
 	
 	stats(0,0,0,0,4,3,-100,2);
 	player.cumMultiplier += 2;
-	if(hours > 5) days++;
-	hours = 5;
+	if(this.model.time.hours > 5) this.model.time.days++;
+	this.model.time.hours = 5;
 	doNext(13);
 }
 

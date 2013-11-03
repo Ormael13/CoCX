@@ -2394,7 +2394,7 @@ function amilyFollowerEncounter():void {
 		amilyEggStuff();
 		return;
 	}
-	if(flags[AMILY_INCEST_COUNTDOWN_TIMER] >= 30 && flags[AMILY_FOLLOWER] == 2 && (hours >= 11 && hours <= 13)) {
+	if(flags[AMILY_INCEST_COUNTDOWN_TIMER] >= 30 && flags[AMILY_FOLLOWER] == 2 && (this.model.time.hours >= 11 && this.model.time.hours <= 13)) {
 		amilyIncest();
 		return;
 	}

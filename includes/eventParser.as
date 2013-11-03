@@ -756,7 +756,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 	var threshhold:Number = 0;
 	var temp2:Number = 0;
 	while(timeQ > threshhold) {
-		hours++;
+		this.model.time.hours++;
 		if(player.cumMultiplier > 19999) player.cumMultiplier = 19999;
 		if(player.ballSize > 400) player.ballSize = 400;
 		if(player.hasPerk("Strong Back") >= 0 && !itemSlot4.unlocked) {
@@ -814,7 +814,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(flags[UNKNOWN_FLAG_NUMBER_00274] > 300) flags[UNKNOWN_FLAG_NUMBER_00274] = 24;
 		}
 		//Urta Letters
-		if(flags[NEED_URTA_LETTER] == 1 && hours == 6) getUrtaLetter();
+		if(flags[NEED_URTA_LETTER] == 1 && this.model.time.hours == 6) getUrtaLetter();
 		//Urta Pregs
 		if(flags[URTA_INCUBATION] > 0) flags[URTA_INCUBATION]++;
 		if(flags[KELLY_INCUBATION] > 0) {
@@ -954,11 +954,11 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 				flags[SOPHIE_HEAT_COUNTER] = 551;
 		}
 		if(flags[ANEMONE_KID] > 0) {
-			if(flags[KID_SITTER] == 0 && flags[MARBLE_KIDS] >= 5 && hours > 10 && hours < 18 && rand(4) == 0) {
+			if(flags[KID_SITTER] == 0 && flags[MARBLE_KIDS] >= 5 && this.model.time.hours > 10 && this.model.time.hours < 18 && rand(4) == 0) {
 				kidABabysitsCows();
 				needNext = true;
 			}
-			if(flags[KID_SITTER] == 1 && hours > 10 && hours < 18 && rand(4) == 0) {
+			if(flags[KID_SITTER] == 1 && this.model.time.hours > 10 && this.model.time.hours < 18 && rand(4) == 0) {
 				flags[KID_SITTER] = 2;
 			}
 			else if(flags[KID_SITTER] == 2) flags[KID_SITTER] = 1;
@@ -1058,7 +1058,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 		//Increase Roxanne's growing dick size...
 		flags[UNKNOWN_FLAG_NUMBER_00225]++;
 		//Reset if she finds someone to take it (random at high values)
-		if(flags[UNKNOWN_FLAG_NUMBER_00225] >= 300 && hours == 1 && rand(5) == 0) flags[UNKNOWN_FLAG_NUMBER_00225] = 1;
+		if(flags[UNKNOWN_FLAG_NUMBER_00225] >= 300 && this.model.time.hours == 1 && rand(5) == 0) flags[UNKNOWN_FLAG_NUMBER_00225] = 1;
 		//hangover status stuff
 		if(player.hasStatusAffect("Hangover") >= 0) {
 			//Countdown
@@ -1265,7 +1265,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 		//Countdown to urta freakout
 		if(flags[URTA_EGG_FORCE_EVENT] > 0) flags[URTA_EGG_FORCE_EVENT]--;
 		//Urta egg freak out
-		if(hours > 6 && hours < 18 && flags[URTA_EGG_FORCE_EVENT] < 12 && flags[URTA_EGG_FORCE_EVENT] > 0) {
+		if(this.model.time.hours > 6 && this.model.time.hours < 18 && flags[URTA_EGG_FORCE_EVENT] < 12 && flags[URTA_EGG_FORCE_EVENT] > 0) {
 			outputText("\n<b>You feel like you ought to see how Urta is dealing with your little 'donation', and head in to Tel'Adra for a quick checkup on her...</b>\n");
 			urtaChewsOutPC(false);
 		}
@@ -1333,7 +1333,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 		//Mino cum update.
 		if(minoCumUpdate()) needNext = true;
 		//Repeated warnings!
-		else if(flags[MINOTAUR_CUM_ADDICTION_STATE] >= 2 && hours % 13 == 0 && flags[UNKNOWN_FLAG_NUMBER_00330] == 0) {
+		else if(flags[MINOTAUR_CUM_ADDICTION_STATE] >= 2 && this.model.time.hours % 13 == 0 && flags[UNKNOWN_FLAG_NUMBER_00330] == 0) {
 			if(flags[MINOTAUR_CUM_ADDICTION_STATE] == 2) outputText("\n<b>You shiver, feeling a little cold.  Maybe you ought to get some more minotaur cum?  You just don't feel right without that pleasant buzz in the back of your mind.</b>\n", false);
 			else if(flags[MINOTAUR_CUM_ADDICTION_STATE] == 3) outputText("\n<b>The steady fire of lust within you burns hot, making you shiver and grab at your head.  You're STILL in withdrawal after having gone so long without a dose of minotaur love.  You just know you're going to be horny and achy until you get some.</b>\n", false);
 			needNext = true;
@@ -1417,10 +1417,10 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 				if(player.eggs() < 10) {
 					player.addEggs(2);
 				}
-				else if(player.eggs() < 20 && hours % 2 == 0) {
+				else if(player.eggs() < 20 && this.model.time.hours % 2 == 0) {
 					player.addEggs(1);
 				}
-				else if(hours % 4 == 0) {
+				else if(this.model.time.hours % 4 == 0) {
 					player.addEggs(1);
 				}
 				if(player.hasPerk("Spider Ovipositor") >= 0) {
@@ -1505,9 +1505,9 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			//Otherwise pregger check
 			else if(player.pregnancyIncubation < 1 && player.hasVagina()) {
 				//Check once in the morning.
-				if(hours ==1) {
+				if(this.model.time.hours ==1) {
 					//every 15 days if high fertility get egg preg
-					if(player.totalFertility() > 50 && days % 15 == 0) {
+					if(player.totalFertility() > 50 && this.model.time.days % 15 == 0) {
 						outputText("\n<b>Somehow you know that eggs have begun to form inside you.  You wonder how long it will be before they start to show?</b>\n", false);
 						needNext = true;
 						player.knockUp(5,50,1,1);
@@ -1517,7 +1517,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 						player.createStatusAffect("eggs",rand(6),rand(2),(5+rand(3)),0);
 					}
 					//every 30 days if high fertility get egg preg
-					else if(days % 30 == 0) {
+					else if(this.model.time.days % 30 == 0) {
 						outputText("\n<b>Somehow you know that eggs have begun to form inside you.  You wonder how long it will be before they start to show?</b>\n", false);
 						needNext = true;
 						player.knockUp(5,50,1,1);
@@ -1727,7 +1727,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 				player.addStatusValue("Feeder",2,1);
 				trace("Feeder status: " + player.statusAffectv2("Feeder") + " (modded " + ((player.statusAffectv2("Feeder")) - 70) + ")");
 				//After 3 days without feeding someone sensitivity jumps.
-				if(player.statusAffectv2("Feeder") >= 72 && hours == 14) {
+				if(player.statusAffectv2("Feeder") >= 72 && this.model.time.hours == 14) {
 					outputText("\n<b>After having gone so long without feeding your milk to someone, you're starting to feel strange.  Every inch of your skin practically thrums with sensitivity, particularly your sore, dripping nipples.</b>\n", false);
 					temp = (2 + (((player.statusAffectv2("Feeder")) - 70) / 20));
 					stats(0,0,0,0,0,temp,0,0);
@@ -1809,7 +1809,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 					//Chick stuff
 					if(player.statusAffectv1("Exgartuan") == 2 && player.biggestTitSize() >= 12) {
 						//Only once every 9 hours or so.
-						if(hours % 9 == 0) {
+						if(this.model.time.hours % 9 == 0) {
 							// lactation messing with!
 							if(rand(3) == 0) {
 								outputText("\n<b>", false);
@@ -2084,7 +2084,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 				}
 			}
 		}
-		if(hours == 6 && player.armorName == "bimbo skirt" && rand(10) == 0) {
+		if(this.model.time.hours == 6 && player.armorName == "bimbo skirt" && rand(10) == 0) {
 			outputText("\n<b>As you wake up, you feel a strange tingling starting in your nipples that extends down into your breasts.  After a minute, the tingling dissipates in a soothing wave.  As you cup your tits, you realize they've gotten larger!</b>");
 			growTits(1,player.bRows(),false,2);
 			needNext = true;
@@ -2107,7 +2107,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			player.tailVenom += player.tailRecharge;
 			if(player.tailVenom > 100) player.tailVenom = 100;
 		}
-		if(hours == 3 && followerHel() && flags[SLEEP_WITH] == "Helia" && rand(10) == 0) {
+		if(this.model.time.hours == 3 && followerHel() && flags[SLEEP_WITH] == "Helia" && rand(10) == 0) {
 			sleepyNightMareHel();
 		}
 		//Luststick resistance unlock
@@ -2117,30 +2117,30 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(player.hasStatusAffect("Luststick") >= 0) player.removeStatusAffect("Luststick");
 		}
 		//Sophie's love
-		if((player.hasPerk("Luststick Adapted") < 0 || rand(3) == 0) && hours == 10 && bimboSophie() && flags[SOPHIE_INCUBATION] == 0 && !sophieIsInSeason() && flags[SOPHIE_EGG_COUNTER] == 0) {
+		if((player.hasPerk("Luststick Adapted") < 0 || rand(3) == 0) && this.model.time.hours == 10 && bimboSophie() && flags[SOPHIE_INCUBATION] == 0 && !sophieIsInSeason() && flags[SOPHIE_EGG_COUNTER] == 0) {
 			bimboSophieLustStickSurprise();
 			needNext = true;
 		}
 		if(flags[BIKINI_ARMOR_BONUS] > 0) {
 			if(player.armorName == "lusty maiden's armor") {
 				//Adjust for inflation
-				if(hours > 23) flags[BIKINI_ARMOR_BONUS]--;
+				if(this.model.time.hours > 23) flags[BIKINI_ARMOR_BONUS]--;
 				//Keep in bounds.
 				if(flags[BIKINI_ARMOR_BONUS] < 0) flags[BIKINI_ARMOR_BONUS] = 0;
 				if(flags[BIKINI_ARMOR_BONUS] > 8) flags[BIKINI_ARMOR_BONUS] = 8;
 			}
 			else flags[BIKINI_ARMOR_BONUS] = 0;
 		}
-		if(hours > 23) {
-			hours = 0;
-			days++;
-			if(flags[KELLY_REWARD_COOLDOWN] > 0 && days % 3 == 0) flags[KELLY_REWARD_COOLDOWN] = 0;
+		if(this.model.time.hours > 23) {
+			this.model.time.hours = 0;
+			this.model.time.days++;
+			if(flags[KELLY_REWARD_COOLDOWN] > 0 && this.model.time.days % 3 == 0) flags[KELLY_REWARD_COOLDOWN] = 0;
 			if(flags[HELSPAWN_GROWUP_COUNTER] > 0) flags[HELSPAWN_GROWUP_COUNTER]++;
 			if(arianFollower() && flags[ARIAN_VAGINA] > 0) flags[ARIAN_EGG_EVENT]++;
 			flags[ARIAN_LESSONS] = 0;
 			flags[ARIAN_TREATMENT] = 0;
 			flags[BROOKE_MET_TODAY] = 0;
-			if(days % 2 == 0 && flags[KAIJU_BAD_END_COUNTER] > 0) {
+			if(daysdays % 2 == 0 && flags[KAIJU_BAD_END_COUNTER] > 0) {
 				flags[KAIJU_BAD_END_COUNTER]--;
 				if(flags[KAIJU_BAD_END_COUNTER] < 0) flags[KAIJU_BAD_END_COUNTER] = 0;
 			}
@@ -2224,7 +2224,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 				if(flags[UNKNOWN_FLAG_NUMBER_00120] < 0) flags[UNKNOWN_FLAG_NUMBER_00120] = 0;
 			}
 			//Clear Whitney's Weekly limit
-			if(days % 7 == 0) flags[UNKNOWN_FLAG_NUMBER_00104] = 0;
+			if(this.model.time.days % 7 == 0) flags[UNKNOWN_FLAG_NUMBER_00104] = 0;
 			//Clear 'has fucked milker today'
 			if(flags[UNKNOWN_FLAG_NUMBER_00112] > 0) flags[UNKNOWN_FLAG_NUMBER_00112] = 0;
 			//Reduce bad-end for cerulean herms number
@@ -2268,7 +2268,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			
 			//Lower daughter population by 1 every fourth day
 			//once population gets high
-			if(player.statusAffectv2("Tamani") > 40 && days % 4 == 0) {
+			if(player.statusAffectv2("Tamani") > 40 && this.model.time.days % 4 == 0) {
 				player.addStatusValue("Tamani",2,-1);
 			}
 			//Tamani pregnancy counting
@@ -2345,16 +2345,16 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			//Clear dragon breath cooldown!
 			if(player.hasStatusAffect("Dragon Breath Cooldown") >= 0) player.removeStatusAffect("Dragon Breath Cooldown");
 		}
-		if(hours > 20 && hours - 1 <= 20) {
+		if(this.model.time.hours > 20 && this.model.time.hours - 1 <= 20) {
 			outputText("\nThe sky darkens as a starless night falls.  The blood-red moon slowly rises up over the horizon.\n", false);
 			needNext = true;
 		}
-		if(hours >= 6 && hours-1 < 6) {
+		if(this.model.time.hours >= 6 && this.model.time.hours-1 < 6) {
 			outputText("\nThe sky begins to grow brighter as the moon descends over distant mountains, casting a few last ominous shadows before they burn away in the light.\n", false);
 			needNext = true;
 		}
 		//Amily stuff!
-		if(hours == 6) {
+		if(this.model.time.hours == 6) {
 			//Pure amily flips her shit and moves out!
 			if(flags[AMILY_FOLLOWER] == 1 && player.cor >= 66 && flags[UNKNOWN_FLAG_NUMBER_00173] > 0) {
 				farewellNote();
@@ -2384,39 +2384,39 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 				return true;
 			}
 		}
-		if(hours == 6 && flags[SOPHIE_FOLLOWER_PROGRESS] >= 5 && !bimboSophie() && !sophieFollower() && player.hasCock() && flags[NO_PURE_SOPHIE_RECRUITMENT] == 0) {
+		if(this.model.time.hours == 6 && flags[SOPHIE_FOLLOWER_PROGRESS] >= 5 && !bimboSophie() && !sophieFollower() && player.hasCock() && flags[NO_PURE_SOPHIE_RECRUITMENT] == 0) {
 			sophieFollowerIntro();
 			return true;
 		}
-		if(hours == 23 && followerHel() && flags[HEL_BONUS_POINTS] >= 150 && flags[HELIA_KIDS_CHAT] == 0) {
+		if(this.model.time.hours == 23 && followerHel() && flags[HEL_BONUS_POINTS] >= 150 && flags[HELIA_KIDS_CHAT] == 0) {
 			heliaBonusPointsAward();
 			return true;
 		}
-		if(hours == 8 && followerHel() && flags[HEL_NTR_TRACKER] == 1) {
+		if(this.model.time.hours == 8 && followerHel() && flags[HEL_NTR_TRACKER] == 1) {
 			helGotKnockedUp();
 			return true;
 		}
 		if(flags[HEL_FOLLOWER_LEVEL] == 1 && flags[HEL_HARPY_QUEEN_DEFEATED] > 0 && helAffection() >= 100 &&
-		   flags[HELIA_FOLLOWER_DISABLED] == 0 && hours == 2) {
+		   flags[HELIA_FOLLOWER_DISABLED] == 0 && this.model.time.hours == 2) {
 			heliaFollowerIntro();
 			return true;   
 		}
-		if(flags[HEL_FOLLOWER_LEVEL] == -1 && hours == 6) {
+		if(flags[HEL_FOLLOWER_LEVEL] == -1 && this.model.time.hours == 6) {
 			morningAfterHeliaDungeonAgreements();
 			return true;
 		}
 		//Helspawn night smex!
-		if(flags[HELSPAWN_AGE] == 2 && (hours == 2 || hours == 3 || hours == 4) && flags[HELSPAWN_GROWUP_COUNTER] == 7 && flags[HELSPAWN_FUCK_INTERRUPTUS] == 0) {
+		if(flags[HELSPAWN_AGE] == 2 && (this.model.time.hours == 2 || this.model.time.hours == 3 || this.model.time.hours == 4) && flags[HELSPAWN_GROWUP_COUNTER] == 7 && flags[HELSPAWN_FUCK_INTERRUPTUS] == 0) {
 			helspawnIsASlut();
 			return true;
 		}		
 		//Ghostgirl recruitment priority
-		if(flags[SHOULDRA_FOLLOWER_STATE] == .5 && hours == 6) {
+		if(flags[SHOULDRA_FOLLOWER_STATE] == .5 && this.model.time.hours == 6) {
 			morningShouldraAlert();
 			return true;
 		}
 		//Ghostgirl pissed off dreams
-		if(followerShouldra() && flags[SHOULDRA_SLEEP_TIMER] <= -236 && hours == 3 && player.gender > 0) {
+		if(followerShouldra() && flags[SHOULDRA_SLEEP_TIMER] <= -236 && this.model.time.hours == 3 && player.gender > 0) {
 			nightTimeShouldraRapesThePC();
 			return true;
 		}
@@ -2442,16 +2442,16 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 				return true;
 			}
 		}
-		if(rand(4) == 0 && isHolidays() && player.gender > 0 && hours == 6 && flags[XMAS_CHICKEN_YEAR] < date.fullYear) {
+		if(rand(4) == 0 && isHolidays() && player.gender > 0 && this.model.time.hours == 6 && flags[XMAS_CHICKEN_YEAR] < date.fullYear) {
 			getAChristmasChicken();
 			return true;
 		}
 		//Amily X Urta morning after.
-		if(!urtaBusy() && flags[AMILY_VISITING_URTA] == 2 && hours == 6) {
+		if(!urtaBusy() && flags[AMILY_VISITING_URTA] == 2 && this.model.time.hours == 6) {
 			amilyUrtaMorningAfter();
 			return true;
 		}
-		if(flags[VAPULA_FOLLOWER] >= 2.5 && hours == 6) {
+		if(flags[VAPULA_FOLLOWER] >= 2.5 && this.model.time.hours == 6) {
 			femaleVapulaRecruitmentPartII();
 			return true;
 		}
@@ -2466,7 +2466,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 		else if(temp >= 5) ceraph = 3;
 		//DREAMS
 		//Shouldra dreams here
-		if(followerShouldra() && flags[SHOULDRA_PLOT_COUNTDOWN] > 0 && hours == 3) {
+		if(followerShouldra() && flags[SHOULDRA_PLOT_COUNTDOWN] > 0 && this.model.time.hours == 3) {
 			flags[SHOULDRA_PLOT_COUNTDOWN]--;
 			if(flags[SHOULDRA_PLOT_COUNTDOWN] <= 0) {
 				shouldraDream1();
@@ -2474,7 +2474,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//Bee dreams proc
-		if(player.hasCock() && player.hasPerk("Bee Ovipositor") >= 0 && hours == 3 && (player.eggs() >= 20 && rand(6) == 0)) {
+		if(player.hasCock() && player.hasPerk("Bee Ovipositor") >= 0 && this.model.time.hours == 3 && (player.eggs() >= 20 && rand(6) == 0)) {
 			//happens at first sleep after hitting stage 3 unfertilized
 			//To Wong Foo, Thanks for Everything, Julie Newmar
 			outputText("\nYou sit atop your favorite flower, enjoying the smell of verdure and the sounds of the forest.  The sun is shining brightly and it feels wonderful on your chitin.  Your wings twitch happily in the soft breeze, and it feels good to be alive and doing the colony's work... the only sour note is your heavy, bloated abdomen, so full of unfertilized eggs that it droops, so full it strains your back and pinches your nerves.  Still, it's too nice a day to let that depress you, and you take up your customary song, humming tunelessly but mellifluously as you wait for passers-by.");
@@ -2499,7 +2499,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			return true;
 		}
 		//Drider dreams proc
-		if(player.hasCock() && player.hasPerk("Spider Ovipositor") >= 0 && hours == 3 && (player.eggs() >= 20 && rand(6) == 0)) {
+		if(player.hasCock() && player.hasPerk("Spider Ovipositor") >= 0 && this.model.time.hours == 3 && (player.eggs() >= 20 && rand(6) == 0)) {
 			//parser calls go to the player's attributes here
 			outputText("\nIn a moonlit forest, you hang upside down from a thick tree branch suspended by only a string of webbing.  You watch with rising lust as a hapless traveler strolls along below, utterly unaware of the trap you've set.  Your breath catches as " + player.mf("he","she") + " finally encounters your web, flailing against the sticky strands in a futile attempt to free " + player.mf("him","her") + "self.  Once the traveller's struggles slow in fatigue, you descend easily to the forest floor, wrapping " + player.mf("him","her") + " in an elegant silk cocoon before pulling " + player.mf("him","her") + " up into the canopy.  Positioning your catch against the tree's trunk, you sink your fangs through the web and into flesh, feeling " + player.mf("his","her") + " body heat with every drop of venom.  Cutting " + player.mf("his","her") + " crotch free of your webbing, you open " + player.mf("his","her") + " [armor] and release the ");
 			if(player.gender == 3) outputText(vaginaDescript(0) + " and ");
@@ -2521,9 +2521,9 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			//Hey whoever, maybe you write them? -Z
 			return true;
 		}
-		if(hours == 3) {
+		if(this.model.time.hours == 3) {
 			//Plot dreams here
-			if(ceraph > 0 && days % ceraph == 0) {
+			if(ceraph > 0 && this.model.time.days % ceraph == 0) {
 				ceraphBodyPartDreams();
 				doNext(1);
 				return true;
@@ -2536,7 +2536,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 				return true;
 			}
 			//Day 10 dream forcing
-			else if(player.gender > 0 && days == 10) {
+			else if(player.gender > 0 && this.model.time.days == 10) {
 				dayTenDreams();
 				doNext(1);
 				return true;
@@ -2552,19 +2552,19 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 				return true;
 			}
 			//Randomly generated dreams here
-			else if((player.lib > 50 || player.lust > 40) && hours == 3) 
+			else if((player.lib > 50 || player.lust > 40) && this.model.time.hours == 3) 
 			{
 				if(dreamSelect()) return true;
 			}	
 		}
 		//XMAS ELF
-		if(hours == 1 && isHolidays() && date.fullYear > flags[PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE]) {
+		if(this.model.time.hours == 1 && isHolidays() && date.fullYear > flags[PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE]) {
 			//Set it to remember the last year encountered
 			xmasBitchEncounter();
 			return true;
 		}
 		//TURKEY SURPRISE
-		if((hours == 18 || hours == 19) && date.fullYear > flags[TURKEY_FUCK_YEAR_DONE] && isThanksgiving() && player.gender > 0) {
+		if((this.model.time.hours == 18 || this.model.time.hours == 19) && date.fullYear > flags[TURKEY_FUCK_YEAR_DONE] && isThanksgiving() && player.gender > 0) {
 			datTurkeyRumpMeeting();
 			return true;
 		}
@@ -2575,8 +2575,8 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(player.hasPerk("Pierced: Lethite") >= 0) temp += 4;
 		if(player.hasStatusAffect("heat") >= 0) temp += 2;
 		if(vapulaSlave()) temp += 7;
-		if(hours == 2) {
-			if(days % 30 == 0 && flags[ANEMONE_KID] > 0 && player.hasCock() && flags[ANEMONE_WATCH] > 0 && player.statusAffectv2("Tamani") >= 40) {
+		if(this.model.time.hours == 2) {
+			if(this.model.time.days % 30 == 0 && flags[ANEMONE_KID] > 0 && player.hasCock() && flags[ANEMONE_WATCH] > 0 && player.statusAffectv2("Tamani") >= 40) {
 				goblinNightAnemone();
 				needNext = true;
 			}
@@ -2628,7 +2628,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//Chance of threesomes!
-		if(flags[HEL_FUCKBUDDY] == 1 && isabellaFollower() && hours == 2 && days % 11 == 0) {
+		if(flags[HEL_FUCKBUDDY] == 1 && isabellaFollower() && this.model.time.hours == 2 && this.model.time.days % 11 == 0) {
 			trace("ISABELLA/HELL TEST");
 			//Hell/Izzy threesome intro
 			if(flags[HEL_ISABELLA_THREESOME_ENABLED] == 0) {
@@ -2643,12 +2643,12 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 				return true;
 			}
 		}
-		if(hours == 2 && vapulaSlave() && flags[VAPULA_DAYS_SINCE_FED] >= 5 && (player.hasCock() || (player.hasKeyItem("Demonic Strap-On") >= 0 && player.hasVagina()))) {
+		if(this.model.time.hours == 2 && vapulaSlave() && flags[VAPULA_DAYS_SINCE_FED] >= 5 && (player.hasCock() || (player.hasKeyItem("Demonic Strap-On") >= 0 && player.hasVagina()))) {
 			vapulaForceFeeds();
 			return true;
 		}
 		//Dreams on hour 3.
-		if(hours == 4) {
+		if(this.model.time.hours == 4) {
 			if(player.hasStatusAffect("succubiNight") >= 0 && (player.totalCocks() >= 1 || (player.gender == 0))) {
 				//Call secksins!
 				if(player.hasStatusAffect("repeatSuccubi") >= 0) {
@@ -2678,7 +2678,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 				return true;
 			}
 			//Exgartuan night time surprise!
-			else if(player.totalCocks() > 0 && player.statusAffectv1("Exgartuan") == 1 && rand(3) == 0 && player.hoursSinceCum >= 24) {
+			else if(player.totalCocks() > 0 && player.statusAffectv1("Exgartuan") == 1 && rand(3) == 0 && player.this.model.time.hoursSinceCum >= 24) {
 				outputText("\n", false);
 				exgartuanSleepSurprise();;
 				return true;
@@ -2691,19 +2691,19 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//MORNING FUX
-		if(hours == 6 && bimboSophie() && flags[SLEEP_WITH] == "Sophie" && rand(2) == 0 && player.hasCock() && player.cockThatFits(sophieCapacity()) >= 0) {
+		if(this.model.time.hours == 6 && bimboSophie() && flags[SLEEP_WITH] == "Sophie" && rand(2) == 0 && player.hasCock() && player.cockThatFits(sophieCapacity()) >= 0) {
 			outputText("\n<b><u>Something odd happens that morning...</u></b>");
 			if(flags[SOPHIE_INCUBATION] > 0 && flags[SOPHIE_INCUBATION] < 120) fuckYoPregnantHarpyWaifu(true);
 			else sophieFenCraftedSex(true);
 			return true;
 		}
-		if(hours == 6 && sophieFollower() && flags[SLEEP_WITH] == "Sophie" && player.lust >= 50 && player.hasCock() && player.smallestCockArea() <= 5) {
+		if(this.model.time.hours == 6 && sophieFollower() && flags[SLEEP_WITH] == "Sophie" && player.lust >= 50 && player.hasCock() && player.smallestCockArea() <= 5) {
 			sophieSmallDongTeases();
 			return true;
 		}
 		//MARBLE STUFF
 		//End addiction (occurs after the player wakes up when their addiction is under 25 && is not permanently addicted)
-		if(player.statusAffectv3("Marble") > 0 && player.statusAffectv2("Marble") < 25 && player.hasPerk("Marble's Milk") < 0 && player.hasPerk("Marble Resistant") < 0 && hours == 6) {
+		if(player.statusAffectv3("Marble") > 0 && player.statusAffectv2("Marble") < 25 && player.hasPerk("Marble's Milk") < 0 && player.hasPerk("Marble Resistant") < 0 && this.model.time.hours == 6) {
 			spriteSelect(41);
 			outputText("\nYou wake up feeling strangely at ease, having slept better than you have in a long while.  After a minute, you realize that you don't feel a need to drink Marble's milk anymore!  You are free of your addiction.  You hurry off to the farm to give her the news.\n\n", false);
 			outputText("You find Marble in her room.  When you come in she looks up at you and starts.  \"<i>What happened?</i>\" she asks, \"<i>Something about you is completely different from before...</i>\"  You explain to her that you've gotten over your addiction and no longer crave her milk.\n", false);
@@ -2787,7 +2787,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			return true;
 		}
 		//Become permanently addicted (occurs when the player goes to sleep with addiction 100, before it is reduced by the standard 1):
-		if(player.statusAffectv3("Marble") > 0 && player.statusAffectv2("Marble") >= 100 && player.hasPerk("Marble's Milk") < 0 && player.hasPerk("Marble Resistant") < 0 && hours == 6) {
+		if(player.statusAffectv3("Marble") > 0 && player.statusAffectv2("Marble") >= 100 && player.hasPerk("Marble's Milk") < 0 && player.hasPerk("Marble Resistant") < 0 && this.model.time.hours == 6) {
 			spriteSelect(41);
 			outputText("\nYou wake up feeling like something has changed.  With slightly chilling clarity, you realize that you have finally become completely and utterly dependent on Marble's milk; you must drink her milk every day, or you will die.  There is nothing that can be done to change that at this point.  You hurry over to the farm; you have to drink Marble's milk, NOW.\n\n", false);
 			outputText("You find Marble in her room.  When you come in she looks up at you and smiles deeply.  \"<i>What happened?</i>\" she asks, \"<i>Something about you feels so wonderful and right.</i>\"  You explain to her that you've finally become entirely dependent on her milk.\n", false);
@@ -2890,7 +2890,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		//END STUFF MOVED FROM doRest() & doSleep()
 		//Raphae, the Russet Rogue!
-		if(hours == 6 && flags[UNKNOWN_FLAG_NUMBER_00133] >= 0 && player.hasKeyItem("Camp - Chest") >= 0 && player.gems >= 5 && player.statusAffectv1("Tel'Adre") >= 1) {
+		if(this.model.time.hours == 6 && flags[UNKNOWN_FLAG_NUMBER_00133] >= 0 && player.hasKeyItem("Camp - Chest") >= 0 && player.gems >= 5 && player.statusAffectv1("Tel'Adre") >= 1) {
 			/*trace("RAPHAEL FINAL COUNTDOWN: " + flags[UNKNOWN_FLAG_NUMBER_00133]);
 			trace("RAPHAEL MET: " + flags[UNKNOWN_FLAG_NUMBER_00134]);
 			trace("RAPHAEL DRESS TIMER: " + flags[UNKNOWN_FLAG_NUMBER_00135]);
@@ -2948,19 +2948,19 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//Cotton's cereal overlapps marbleliciousness
-		if(hours == 6 && flags[UNKNOWN_FLAG_NUMBER_00245] == 1 && player.biggestLactation() >= 2) {
+		if(this.model.time.hours == 6 && flags[UNKNOWN_FLAG_NUMBER_00245] == 1 && player.biggestLactation() >= 2) {
 			flags[UNKNOWN_FLAG_NUMBER_00245] = 0;
 			nomSomeTitMilkCereal();
 			return true;
 		}
 		//Isabella's morning suckoffs!
-		if(hours == 6 && isabellaFollower() && flags[ISABELLA_BLOWJOBS_DISABLED] == 0 && player.hasCock() && (days % 2 == 0 || player.hasPerk("Marble's Milk") < 0) && player.shortestCockLength() <= 9) {
+		if(this.model.time.hours == 6 && isabellaFollower() && flags[ISABELLA_BLOWJOBS_DISABLED] == 0 && player.hasCock() && (this.model.time.days % 2 == 0 || player.hasPerk("Marble's Milk") < 0) && player.shortestCockLength() <= 9) {
 			spriteSelect(31);
 			isabellaMorningWakeupCall();
 			return true;
 		}
 		//Morning Marble Meetings
-		if(hours == 6 && player.hasPerk("Marble's Milk") >= 0) {
+		if(this.model.time.hours == 6 && player.hasPerk("Marble's Milk") >= 0) {
 			//Marble is at camp
 			if(player.hasStatusAffect("Camp Marble") >= 0) {
 				postAddictionCampMornings(false);
@@ -3299,10 +3299,10 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 function cheatTime(time:Number):void {
 	while(time > 0) {
 		time--;
-		hours++;
-		if(hours > 23) {
-			days++;
-			hours = 0;
+		this.model.time.hours++;
+		if(this.model.time.hours > 23) {
+			this.model.time.days++;
+			this.model.time.hours = 0;
 		}
 	}
 	statScreenRefresh();

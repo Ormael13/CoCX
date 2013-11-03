@@ -36,7 +36,7 @@ WIN:
 //[Drinking Table Appearance]
 function RoxanneAppearance():Number {
 	//When she there?
-	if(hours > 12 && hours < 19) {
+	if(this.model.time.hours > 12 && this.model.time.hours < 19) {
 		//(Not Met) 
 		if(flags[UNKNOWN_FLAG_NUMBER_00221] == 0) outputText("\n\nThere's a table with a half-dozen oddly-dressed lizans not too far from the fire.  A keg is set up a few feet away and they seem to be having a good time.", false);
 		//Met) 

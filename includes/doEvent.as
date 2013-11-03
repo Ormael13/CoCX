@@ -15,7 +15,7 @@ function doEvent(eventNo):void
 	{
 		hideUpDown();
 		stats(0, 0, 0, 0, 0, 0, 40, 2);
-		hours = 18;
+		this.model.time.hours = 18;
 		outputText("You wake with a splitting headache and a body full of burning desire.  A shadow darkens your view momentarily and your training kicks in.  You roll to the side across the bare ground and leap to your feet.  A surprised looking imp stands a few feet away, holding an empty vial.  He's completely naked, an improbably sized pulsing red cock hanging between his spindly legs.  You flush with desire as a wave of lust washes over you, your mind reeling as you fight ", true);
 		if (player.gender == 2)
 			outputText("the urge to chase down his rod and impale yourself on it.\n\n", false);
@@ -6066,7 +6066,7 @@ function doEvent(eventNo):void
 	}
 	else if (eventNo == 2855)
 	{
-		if (hours == 19 || hours == 20)
+		if (this.model.time.hours == 19 || this.model.time.hours == 20)
 		{
 			flags[COUNTDOWN_TO_NIGHT_RAPE]++;
 			if (flags[COUNTDOWN_TO_NIGHT_RAPE] % 4 == 0 && player.gender == 1)

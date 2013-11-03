@@ -90,7 +90,7 @@ function meetBrookeFirstTime():void {
  
 function repeatChooseShower():void {
 	clearOutput();
-	if(hours < 16 || hours > 18 || player.tone < 30) {
+	if(this.model.time.hours < 16 || this.model.time.hours > 18 || player.tone < 30) {
 		//Before 16:00/after 18:00, affection <= 19
 		if(brookeAffection() <= 19) {
 			outputText("You head your way back to the showers, feeling the sweet ache of your muscles as you easily find your way there.  The showers are completely empty when you arrive.  On the one hand, you enjoy having the place to yourself and taking your time, but on the other, you can’t help but feel a little disappointed that the Shepherd girl Brooke wasn't there to greet you.");

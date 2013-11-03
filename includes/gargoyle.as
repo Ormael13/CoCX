@@ -32,7 +32,7 @@ function gargoylesTheShowNowOnWBNetwork():void {
 	//[Next]
 	menu();
 	addButton(0,"Next",gargoyleMeeting2);
-	hours++;
+	this.model.time.hours++;
 }
 
 //(Advance time by 1 hour) 
@@ -220,10 +220,10 @@ function returnToCathedral(woken:Boolean = false):void {
 	}
 	menu();
 	//[b]Cathedral Interior – 06:00 –> 09:00 & 18:00 –> 21:00[/b]
-	if(hours <= 9 || hours >= 18 || woken) {
+	if(this.model.time.hours <= 9 || this.model.time.hours >= 18 || woken) {
 		if(!woken) {
 			outputText("\n\nIn the dim ");
-			if(hours <= 9) outputText("early morning");
+			if(this.model.time.hours <= 9) outputText("early morning");
 			else outputText("late evening");
 			outputText(" light streaming in from the broken windows, you see " + flags[GAR_NAME] + " poking around some of the rubble, slowly but surely making efforts to repair the damage done to the Cathedral.  Seeing you, however, she immediately drops what she was doing and ");
 			if(gargoyleConfidence() < 70) outputText("kneels before you, head bowed low.");

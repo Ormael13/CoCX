@@ -10,6 +10,7 @@
 
 //DEBUG, used all over the place
 var debug:Boolean = false;
+this.model.debug = debug;
 
 //Version NUMBER
 var ver:String = "0.8.3d1";
@@ -29,6 +30,7 @@ var images:ImageManager = new ImageManager();
 
 //The Player object, used everywhere
 var player:Player = new Player();
+model.player = player;
 
 //Used in perk selection, mainly eventParser, input and engineCore
 var tempPerk:String = "";
@@ -106,8 +108,8 @@ var itemSubMenu:Boolean = false;
 //{ region DisplayVariables
 
 //Holds the date and time display in the bottom left
-var hours:Number = 0;
-var days:Number = 0;
+var time :TimeModel = new TimeModel();
+this.model.time = time;
 
 //The string holds all the "story" text, mainly used in engineCore
 var currentText:String = "";

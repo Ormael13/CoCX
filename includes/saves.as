@@ -623,8 +623,8 @@ function saveGameObject(slot:String, isFile:Boolean):void
 	saveFile.data.gameState = gameState;
 	
 	//Time and Items
-	saveFile.data.hours = hours;
-	saveFile.data.days = days;
+	saveFile.data.hours = this.model.time.hours;
+	saveFile.data.days = this.model.time.days;
 	saveFile.data.autoSave = player.autoSave;
 	
 	//PLOTZ
@@ -1262,8 +1262,8 @@ function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		
 		//Days
 		//Time and Items
-		hours = saveFile.data.hours;
-		days = saveFile.data.days;
+		this.model.time.hours = saveFile.data.hours;
+		this.model.time.days = saveFile.data.days;
 		if (saveFile.data.autoSave == undefined)
 			player.autoSave = false;
 		else

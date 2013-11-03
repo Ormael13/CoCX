@@ -9,6 +9,7 @@
 	import classes.perkClass;
 	import classes.statusAffectClass;
 	import classes.vaginaClass;
+	import classes.ImageManager; // This line not necessary, but added because I'm pedantic like that.
 
 	import coc.view.MainView;
 

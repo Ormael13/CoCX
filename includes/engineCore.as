@@ -11,15 +11,17 @@ var args:Array = new Array();
 var funcs:Array = new Array();
 
 //Used for stat tracking to keep up/down arrows correct.
-var oldStr:Number = 0;
-var oldTou:Number = 0;
-var oldSpe:Number = 0;
-var oldInte:Number = 0;
-var oldSens:Number = 0;
-var oldLib:Number = 0;
-var oldCor:Number = 0;
-var oldHP:Number = 0;
-var oldLust:Number = 0;
+var oldStats = {};
+this.model.oldStats = oldStats;
+oldStats.oldStr  = 0;
+oldStats.oldTou  = 0;
+oldStats.oldSpe  = 0;
+oldStats.oldInte = 0;
+oldStats.oldSens = 0;
+oldStats.oldLib  = 0;
+oldStats.oldCor  = 0;
+oldStats.oldHP   = 0;
+oldStats.oldLust = 0;
 
 function maxHP():Number {
 	var max:Number = 0;
@@ -160,10 +162,10 @@ function checkCondition(variable:String, op:String, test:String):Boolean
 			a = player.HP;
 			break;
 		case "hour":
-			a = hours;
+			a = this.model.time.hours;
 			break;
 		case "days":
-			a = days;
+			a = this.model.time.days;
 			break;
 		case "tallness":
 			a = player.tallness;
@@ -4315,14 +4317,14 @@ function hideUpDown():void {
 	// fatigueUp.visible = false;
 	// fatigueDown.visible = false;
 	//Clear storage values so up/down arrows can be properly displayed
-	oldStr = 0;
-	oldTou = 0;
-	oldSpe = 0;
-	oldInte = 0;
-	oldLib = 0;
-	oldSens = 0;
-	oldLust = 0;
-	oldCor = 0;	
+	oldStats.oldStr = 0;
+	oldStats.oldTou = 0;
+	oldStats.oldSpe = 0;
+	oldStats.oldInte = 0;
+	oldStats.oldLib = 0;
+	oldStats.oldSens = 0;
+	oldStats.oldLust = 0;
+	oldStats.oldCor = 0;	
 }
 function physicalCost(mod:Number):Number {
 	var costPercent:Number = 100;
@@ -4655,15 +4657,15 @@ function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:Number,
 	//These are reset when up/down arrows are hidden with 
 	//hideUpDown();
 	//Just check str because they are either all 0 or real values
-	if(oldStr == 0) {
-		oldStr = player.str;
-		oldTou = player.tou;
-		oldSpe = player.spe;
-		oldInte = player.inte;
-		oldLib = player.lib;
-		oldSens = player.sens;
-		oldLust = player.lust;
-		oldCor = player.cor;
+	if(oldStats.oldStr == 0) {
+		oldStats.oldStr = player.str;
+		oldStats.oldTou = player.tou;
+		oldStats.oldSpe = player.spe;
+		oldStats.oldInte = player.inte;
+		oldStats.oldLib = player.lib;
+		oldStats.oldSens = player.sens;
+		oldStats.oldLust = player.lust;
+		oldStats.oldCor = player.cor;
 	}
 	//MOD CHANGES FOR PERKS
 	//Bimbos learn slower
@@ -4746,67 +4748,67 @@ function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:Number,
 	if(player.lust > 100) player.lust = 100;
 	if(player.lust < 0) player.lust = 0;
 	//Display correct up/down arrow.
-	if(player.cor < oldCor) {
+	if(player.cor < oldStats.oldCor) {
 		corDown.visible = true;
 		corUp.visible = false;
 	}
-	if(player.cor > oldCor) {
+	if(player.cor > oldStats.oldCor) {
 		corUp.visible = true;
 		corDown.visible = false;
 	}
-	if(player.lust < oldLust) {
+	if(player.lust < oldStats.oldLust) {
 		lustDown.visible = true;
 		lustUp.visible = false;
 	}
-	if(player.lust > oldLust) {
+	if(player.lust > oldStats.oldLust) {
 		lustUp.visible = true;
 		lustDown.visible = false;
 	}
-	if(player.sens < oldSens) {
+	if(player.sens < oldStats.oldSens) {
 		sensDown.visible = true;
 		sensUp.visible = false;
 	}
-	if(player.sens > oldSens) {
+	if(player.sens > oldStats.oldSens) {
 		sensUp.visible = true;
 		sensDown.visible = false;
 	}
-	if(player.lib < oldLib) {
+	if(player.lib < oldStats.oldLib) {
 		libDown.visible = true;
 		libUp.visible = false;
 	}
-	if(player.lib > oldLib) {
+	if(player.lib > oldStats.oldLib) {
 		libUp.visible = true;
 		libDown.visible = false;
 	}
-	if(player.inte < oldInte) {
+	if(player.inte < oldStats.oldInte) {
 		inteDown.visible = true;
 		inteUp.visible = false;
 	}
-	if(player.inte > oldInte) {
+	if(player.inte > oldStats.oldInte) {
 		inteUp.visible = true;
 		inteDown.visible = false;
 	}
-	if(player.spe < oldSpe) {
+	if(player.spe < oldStats.oldSpe) {
 		speDown.visible = true;
 		speUp.visible = false;
 	}
-	if(player.spe > oldSpe) {
+	if(player.spe > oldStats.oldSpe) {
 		speUp.visible = true;
 		speDown.visible = false;
 	}
-	if(player.tou < oldTou) {
+	if(player.tou < oldStats.oldTou) {
 		touDown.visible = true;
 		touUp.visible = false;
 	}
-	if(player.tou > oldTou) {
+	if(player.tou > oldStats.oldTou) {
 		touUp.visible = true;
 		touDown.visible = false;
 	}
-	if(player.str < oldStr) {
+	if(player.str < oldStats.oldStr) {
 		strDown.visible = true;
 		strUp.visible = false;
 	}
-	if(player.str > oldStr) {
+	if(player.str > oldStats.oldStr) {
 		strUp.visible = true;
 		strDown.visible = false;
 	}

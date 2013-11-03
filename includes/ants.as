@@ -1180,7 +1180,7 @@ function talkAboutAntMatingAndRituals():void {
 			outputText("\n\nThough you tried to count over such a long period of watching her masturbate, you lost track at around 15.");
 			outputText("\n\nShe's tried to stop a few times, pleading to you that it's too much but you just kept forcing her to continue.  After what you can only guess would be a few hours of watching her cum again and again in an almost heroic display of fortitude, she breaks.  Phylla falls over, completely spent. Sprawled out in front of you, her whole body from head to foot is covered in her own juices.");
 			outputText("\n\nYou don't say a word to her as she lies in the pool of her own secretions, her blank eyes gazing into nothingness.  Maybe you broke her, only time will tell, she'll need to recover first.  You set out back to camp, knowing full well she's now just another plaything for you.");
-			hours++;
+			model.time.hours++;
 			stats(0,0,0,0,0,0,25,0);
 		}
 		else {

@@ -1658,10 +1658,10 @@ function sophieAndIzmaPlay():void {
 	outputText("\n");
 	flags[TIMES_SOPHIE_AND_IZMA_FUCKED]++;
 	outputText("<b>Something odd happens that ");
-	if(hours < 6 || hours > 20) outputText("night");
-	else if(hours < 12) outputText("morning");
-	else if(hours == 12) outputText("noon");
-	else if(hours < 5) outputText("afternoon");
+	if(this.model.time.hours < 6 || this.model.time.hours > 20) outputText("night");
+	else if(this.model.time.hours < 12) outputText("morning");
+	else if(this.model.time.hours == 12) outputText("noon");
+	else if(this.model.time.hours < 5) outputText("afternoon");
 	else outputText("evening");
 	outputText("...</b>");
 	outputText("\n\"<i>Give it a rest, you feathery slut!</i>\" shouts Izma's familiar but irritated voice.  \"<i>Just because you want a cock to suck doesn't mean you can lift my skirt and plant that... mmm... lovely lipstick all over my dick... Right there...</i>\"  The shark-herm's voice lifts, crooning with aroused pleasure.  Clearly, Sophie is under Izma's grass skirt and polishing her pole with as much of her heavy lip-gloss as possible.  You slowly creep closer, hearing the audible 'slurp-slurp-slurp' of Sophie's bee-stung lips on Izma's tiger-striped rod, accompanied by excited moans.");

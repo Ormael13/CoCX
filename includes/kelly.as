@@ -711,7 +711,7 @@ function approachKelly():void {
 	//Descriptions and Flavour Text
 	outputText("You aren't welcome on the farm proper, but you can go visit Kelly's field.");
 	//09:00-11:00, 2 or more children:
-	if(hours >= 9 && hours <= 11 && flags[KELLY_KIDS] >= 2) {
+	if(this.model.time.hours >= 9 && this.model.time.hours <= 11 && flags[KELLY_KIDS] >= 2) {
 		outputText("\n\nKelly is standing in the shadow of her barn, an expression of blissful contentment on her face as she nurses your ");
 		if(flags[KELLY_KIDS] > 2) outputText("two youngest ");
 		outputText("children with ");
@@ -720,7 +720,7 @@ function approachKelly():void {
 		outputText("\n\n\"<i>That's enough, little ones.  Mommy needs her daddy time now.</i>\"  Your two centaur children make grumpy 'awww's as they are pulled away from her oozing nipples, but they freeze when they turn around and see you, their milk slathered mouths open in a kind of awe.  They clop off in a hurry as Kelly rearranges her hair and gets up to greet you, the peace in her emerald eyes slowly burnt away by desire.");
 	}
 	//15:00-16:00, 4 or more children:
-	else if(hours >= 15 && hours <= 16 && flags[KELLY_KIDS] >= 4) {
+	else if(this.model.time.hours >= 15 && this.model.time.hours <= 16 && flags[KELLY_KIDS] >= 4) {
 		outputText("\n\nYou see Kelly standing in the middle of her field, surrounded by her children.  She has the butts set up and, judging by the way she is talking and gesturing with the bow in her hand, is teaching your brood how to shoot.  Trying to, anyway: her big, bare boobs make things a bit difficult.  You see she's actually gone to the trouble of constructing adorable little mini-bows, which the group of centaur children are all threading mini-arrows on as she points, and with expressions of deep concentration, pulling tight, taking aim, and... there's a cacophony of whistling, and arrows wind up everywhere but the target.  The sound of shouting and crying echoes across the field as Kelly begins to ball out the one who somehow managed to shoot an arrow through her braid.");
 		outputText("\n\nYou decide to come back a bit later.  Your kids need all the help they can get.");
 		doNext(13);

@@ -536,7 +536,7 @@ function arianHomeMenu():void {
 		if(player.hasKeyItem("Arian's Talisman") >= 0 || player.hasKeyItem("Arian's Charged Talisman") >= 0)
 			addButton(2,"Talisman",imbueTalisman);
 		if(flags[ARIAN_S_DIALOGUE] >= 5) addButton(4,"Treat Corr.",treatCorruption);
-		if(hours >= 17 && arianFollower()) addButton(8,"Sleep With",sleepWithArian,true);
+		if(this.model.time.hours >= 17 && arianFollower()) addButton(8,"Sleep With",sleepWithArian,true);
 		if(flags[SLEEP_WITH] == "Arian") addButton(8,"NoSleepWith",dontSleepWithArian);
 		if(!arianFollower()) addButton(9,"Back",telAdreMenu);
 		else addButton(9,"Back",campLoversMenu);

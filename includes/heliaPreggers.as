@@ -218,8 +218,8 @@ function haveAKid():void {
 	stats(0,0,0,0,0,0,-100,0);
 	menu();
 	addButton(0,"Next",HaveAHellKidPartII);
-	hours = 6;
-	days++;
+	this.model.time.hours = 6;
+	this.model.time.days++;
 }
 
 function HaveAHellKidPartII():void {

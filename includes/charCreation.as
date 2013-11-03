@@ -194,8 +194,8 @@ function newGameGo(e:MouseEvent):void {
 	flags[UNKNOWN_FLAG_NUMBER_00102] = 1;
 	flags[UNKNOWN_FLAG_NUMBER_02999] = 3;
 	//Time reset
-	days = 0;
-	hours = 0;
+	this.model.time.days = 0;
+	this.model.time.hours = 0;
 	//Clear cocks
 	while(player.cocks.length > 0)
 	{
@@ -694,7 +694,7 @@ function doCreation(eventNo:Number):void {
 			return;
 		}
 		statScreenRefresh();
-		hours = 11
+		this.model.time.hours = 11
 		outputText("You are prepared for what is to come.  Most of the last year has been spent honing your body and mind to prepare for the challenges ahead.  You are the Champion of Ingnam.  The one who will journey to the demon realm and guarantee the safety of your friends and family, even though you'll never see them again.  You wipe away a tear as you enter the courtyard and see Elder Nomur waiting for you.  You are ready.\n\n", true);
 		outputText("The walk to the tainted cave is long and silent.  Elder Nomur does not speak.  There is nothing left to say.  The two of you journey in companionable silence.  Slowly the black rock of Mount Ilgast looms closer and closer, and the temperature of the air drops.   You shiver and glance at the Elder, noticing he doesn't betray any sign of the cold.  Despite his age of nearly 80, he maintains the vigor of a man half his age.  You're glad for his strength, as assisting him across this distance would be draining, and you must save your energy for the trials ahead.\n\n", false);
 		outputText("The entrance of the cave gapes open, sharp stalactites hanging over the entrance, giving it the appearance of a monstrous mouth.  Elder Nomur stops and nods to you, gesturing for you to proceed alone.\n\n", false);

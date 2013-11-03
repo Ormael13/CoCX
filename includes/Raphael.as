@@ -1196,7 +1196,7 @@ function orphanageIntro():void {
 			addButton(0,"Next",raphaelIntroPageTwo);
 			flags[TIMES_ORPHANAGED_WITH_RAPHAEL]++
 		}
-		else if(hours >= 19 && hours <= 21) {
+		else if(this.model.time.hours >= 19 && this.model.time.hours <= 21) {
 			//Repeat Approaches
 			//Repeat encounter: When the Orphanage is selected between 19:00 and 21:00
 			outputText("You walk into the alley to the side of the orphanage and look up expectantly, brushing by shady looking teens who enjoy patting you down, but leaving you and your possessions alone otherwise.  They seem to make a game out of it.  The little staging room is lit and you begin to search for the one rope out of many that will hoist you up there by pulling it.  You stay clear of the other ones, not quite sure what they'd do, but half expecting them to fire a crossbow bolt or drop an anvil on your head.  Anxious, you grab the right one and hold on tight as it pulls you up into the air and swings you towards the correct window.");

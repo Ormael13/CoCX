@@ -16,7 +16,7 @@
 //Appearnace
 function cinnabarAppearance(output:Boolean = true):Number {
 	//Send back 0 for 'closed'.
-	if(hours < 15 || hours > 20) return 0;
+	if(this.model.time.hours < 15 || this.model.time.hours > 20) return 0;
 	if(output) {
 		//Not yet introduced
 		if(flags[CINNABAR_NUMBER_ENCOUNTERS] == 0) outputText("\n\nThere's a generously proportioned woman lurking near a tavern.  Looking closer, you can see she has a ruby-red dress over her ruddy fur, and as she turns you make out an unmistakable, rat-like muzzle.", false);
