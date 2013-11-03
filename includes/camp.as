@@ -382,6 +382,12 @@ function camp():void {
 	outputText("", true);
 	//outputText(images.showImage("camping"), false);
 	//Isabella upgrades camp level!
+	outputText("TESTING SHIT!\n")
+	outputText("[if (hasCock = true) \"[cock] stiffening\"][if (isHerm = true) \" and \"][if (hasVagina = true) \"[vagina] starting to burn with need\"] DERP [cock biggest] HERP [armor] LOLWUT  [balls] ");
+	outputText("[If (hours > 19) \"Hug\" else \"Cuddle\"]\n");
+	outputText("\n");
+	outputText("\n");
+
 	if(isabellaFollower()) {
 		outputText("Your campsite got a lot more comfortable once Isabella moved in.  Carpets cover up much of the barren ground, simple awnings tied to the rocks provide shade, and hand-made wooden furniture provides comfortable places to sit and sleep.", false);
 		if(days >= 20) outputText("  You've even managed to carve some artwork into the rocks around the camp's perimeter.", false);
@@ -599,6 +605,7 @@ function camp():void {
 		}
 	}
 	//Menu
+
 	choices("Explore", explore, "Places", placesNum, "Inventory", 1000, "Stash", storage, "Followers", followers, "Lovers", lovers, "Slaves",slaves, "", 0, baitText, masturbate, restName, restEvent);
 	//Lovers
 	//Followers
