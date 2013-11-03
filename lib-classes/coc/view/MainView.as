@@ -305,5 +305,16 @@ package coc.view {
 				this.setButton( i );
 			}
 		};
+
+		public function selectSprite( index :Number = 0 ) :void {
+			if( choice < 0 || flags[ SHOW_SPRITES_FLAG ] )
+				sprite.visible = false;
+			else {
+				sprite.visible = true;
+				sprite.gotoAndStop(choice);
+				sprite.scaleX = 3;
+				sprite.scaleY = 3;
+			}
+		}
 	}
 }

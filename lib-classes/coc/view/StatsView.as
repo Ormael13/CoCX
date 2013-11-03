@@ -132,6 +132,7 @@ package coc.view {
         // <- showStats
         public function show() {
             // make all the stats DOs visible.
+            this.refresh();
             this.visible = true;
         };
 
@@ -144,6 +145,10 @@ package coc.view {
         // <- hideUpDown
         public function hideUpDown() {
             // body...
+            var ci,
+                cc = this.upDownsContainer.numChildren;
+
+            for( ci = 0; ci < )
         };
     }
 }
