@@ -23,11 +23,11 @@
 // gButtons[9] = new buttonBackground9();
 
 //Add the MouseClick event listeners and add the buttons to the stage
-for (var loopCnt:int = 0; loopCnt < NUM_OF_BUTTONS; loopCnt++)
-{
-	gButtons[loopCnt].addEventListener(MouseEvent.CLICK, buttonEvent);
-	this.addChild(gButtons[loopCnt]);
-}
+// for (var loopCnt:int = 0; loopCnt < NUM_OF_BUTTONS; loopCnt++)
+// {
+// 	gButtons[loopCnt].addEventListener(MouseEvent.CLICK, buttonEvent);
+// 	this.addChild(gButtons[loopCnt]);
+// }
 
 //Positioning the buttons
 // var index:int = 0;
