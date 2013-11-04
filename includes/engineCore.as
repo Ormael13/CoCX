@@ -4102,8 +4102,6 @@ function doYesNo(eventYes:*, eventNo:*):void {
 
 }
 
-
-
 function doNext(eventNo:*):void {
 	//Prevent new events in combat from automatically overwriting a game over. 
 	if(b1Text.text.indexOf("Game Over") != -1) {
@@ -4115,184 +4113,30 @@ function doNext(eventNo:*):void {
 	choices("Next", eventNo, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0); 
 }
 
-
 function invertGo():void{ 
-	if (mainView.blackBackground.visible == false){
-		mainView.blackBackground.visible = true;
-		
-	//	statBox.textColor = 0xFFFFFF;
-		/*statValuePane.textColor = 0xFFFFFF;
-		levelPane.textColor = 0xFFFFFF;
-		levelValuePane.textColor = 0xFFFFFF;
-		DayPane.textColor = 0xFFFFFF;
-		DayValuePane.textColor = 0xFFFFFF;
-		clockPane.textColor = 0xFFFFFF;
-		outputWindow.textColor = 0xFFFFFF;
-		region.textColor = 0xFFFFFF;
-		currentRegion.textColor = 0xFFFFFF;	*/
-	}
-	else {
-		mainView.blackBackground.visible = false;
-		//statBox.textColor = 0x000000;
-		/*statValuePane.textColor = 0x000000;
-		levelPane.textColor = 0x000000;
-		levelValuePane.textColor = 0x000000;
-		DayPane.textColor = 0x000000;
-		DayValuePane.textColor = 0x000000;
-		clockPane.textColor = 0x000000;
-		outputWindow.textColor = 0x000000;
-		currentRegion.textColor = 0x000000;	
-		region.textColor = 0x000000;*/
-	}
+	this.mainView.invert();
 }
-
-
 
 //Used to update the display of statistics
 function statScreenRefresh():void {
 	mainView.statsView.show();
-
-	// //Make sure it's all visible
-	// showStats();
-	// coreStatsText.htmlText = "<b><u>Name : " + player.short + "</u>\nCore Stats</b>";
-	// var temp:String = "";
-	// //Set number values:
-	// strNum.htmlText = String(int(player.str));
-	// touNum.htmlText = String(int(player.tou));
-	// speNum.htmlText = String(int(player.spe));
-	// inteNum.htmlText = String(int(player.inte));
-	// libNum.htmlText = String(int(player.lib));
-	// senNum.htmlText = String(int(player.sens));
-	// corNum.htmlText = String(int(player.cor));
-	// fatigueNum.htmlText = String(int(player.fatigue));
-	// HPNum.htmlText = String(int(player.HP));
-	// lustNum.htmlText = String(int(player.lust));
-	// levelNum.htmlText = String(int(player.level));
-	// if(player.XP > 9999) xpNum.htmlText = "++++";
-	// else xpNum.htmlText = String(int(player.XP));
-	// temp = "<b><u>Day #: " + days + "</u></b>\n<b>Time : " + hours + ":00</b>"
-	// timeText.htmlText = temp;
-	// //Set bar lengths
-	// strBar.width = int(player.str/100 * 115);
-	// touBar.width = int(player.tou/100 * 115);
-	// speBar.width = int(player.spe/100 * 115);
-	// inteBar.width = int(player.inte/100 * 115);
-	// libBar.width = int(player.lib/100 * 115);
-	// sensBar.width = int(player.sens/100 * 115);
-	// corBar.width = int(player.cor/100 * 115);
-	// fatigueBar.width = int(player.fatigue/100 * 115);
-	// HPBar.width = int(player.HP/maxHP() * 115);
-	// lustBar.width = int(player.lust/100 * 115);
-	// if(player.gems > 9999) gemsNum.htmlText = "++++";
-	// else gemsNum.htmlText = String(player.gems);
 }
 
 function showStats():void {
 	mainView.statsView.show();
-	// strBar.visible = true;
-	// strText.visible = true;
-	// strNum.visible = true;
-	// touBar.visible = true;
-	// touText.visible = true;
-	// touNum.visible = true;
-	// sensBar.visible = true;
-	// senText.visible = true;
-	// senNum.visible = true;
-	// inteBar.visible = true;
-	// inteText.visible = true;
-	// inteNum.visible = true;
-	// speBar.visible = true;
-	// speText.visible = true;
-	// speNum.visible = true;
-	// libBar.visible = true;
-	// libText.visible = true;
-	// libNum.visible = true;
-	// corBar.visible = true;
-	// corText.visible = true;
-	// corNum.visible = true;
-	// fatigueBar.visible = true;
-	// fatigueText.visible = true;
-	// fatigueNum.visible = true;
-	// HPBar.visible = true;
-	// HPText.visible = true;
-	// HPNum.visible = true;
-	// lustBar.visible = true;
-	// lustText.visible = true;
-	// lustNum.visible = true;
-	// levelText.visible = true;
-	// levelNum.visible = true;
-	// xpNum.visible = true;
-	// xpText.visible = true;
-	// coreStatsText.visible = true;
-	// advancementText.visible = true;
-	// combatStatsText.visible = true;
-	// gemsText.visible = true;
-	// gemsNum.visible = true;
-	// timeText.visible = true;
-	// sideBarBG.visible = true;
-	// timeBG.visible = true;
 }
+
 function hideStats():void {
 	mainView.statsView.hide();
-	// strBar.visible = false;
-	// strText.visible = false;
-	// strNum.visible = false;
-	// touBar.visible = false;
-	// touText.visible = false;
-	// touNum.visible = false;
-	// sensBar.visible = false;
-	// senText.visible = false;
-	// senNum.visible = false;
-	// inteBar.visible = false;
-	// inteText.visible = false;
-	// inteNum.visible = false;
-	// speBar.visible = false;
-	// speText.visible = false;
-	// speNum.visible = false;
-	// libBar.visible = false;
-	// libText.visible = false;
-	// libNum.visible = false;
-	// corBar.visible = false;
-	// corText.visible = false;
-	// corNum.visible = false;
-	// fatigueBar.visible = false;
-	// fatigueText.visible = false;
-	// fatigueNum.visible = false;
-	// HPBar.visible = false;
-	// HPText.visible = false;
-	// HPNum.visible = false;
-	// lustBar.visible = false;
-	// lustText.visible = false;
-	// lustNum.visible = false;
-	// levelText.visible = false;
-	// levelNum.visible = false;
-	// xpNum.visible = false;
-	// xpText.visible = false;
-	// coreStatsText.visible = false;
-	// advancementText.visible = false;
-	// combatStatsText.visible = false;
-	// timeText.visible = false;
-	// gemsText.visible = false;
-	// gemsNum.visible = false;
-	// sideBarBG.visible = false;
-	// timeBG.visible = false;
 }
 
 function hideMenus():void {
 	mainView.hideMenuButtons();
-	// dataBG.visible = false;
-	// dataText.visible = false;
-	// appearanceText.visible = false;
-	// appearanceBG.visible = false;
-	// levelText2.visible = false;
-	// levelBG.visible = false;
-	// perksBG.visible = false;
-	// perksText.visible = false;
-	// statsText.visible = false;
-	// statsBG.visible = false;
 }
+
 //Hide the up/down indicators
 function hideUpDown():void {
+	mainView.statsView.hideUpDown();
 	// strUp.visible = false;
 	// strDown.visible = false;
 	// touUp.visible = false;

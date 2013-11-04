@@ -1,130 +1,44 @@
-﻿//import flash.ui.Mouse;
-//Assign listeners!  IMPORTANT - keyboard listener placed in startup.as!
+﻿// Hooking things to MainView.
+this.mainView.onNewGameClick = newGameGo;
+this.mainView.onAppearanceClick = appearance;
+this.mainView.onDataClick = saveLoad;
+this.mainView.onLevelClick = levelUpGo;
+this.mainView.onPerksClick = displayPerks;
+this.mainView.onStatsClick = displayStats;
 
-b1Text.addEventListener(MouseEvent.CLICK, buttonEvent);
-b2Text.addEventListener(MouseEvent.CLICK, buttonEvent);
-b3Text.addEventListener(MouseEvent.CLICK, buttonEvent);
-b4Text.addEventListener(MouseEvent.CLICK, buttonEvent);
-b5Text.addEventListener(MouseEvent.CLICK, buttonEvent);
-b6Text.addEventListener(MouseEvent.CLICK, buttonEvent);
-b7Text.addEventListener(MouseEvent.CLICK, buttonEvent);
-b8Text.addEventListener(MouseEvent.CLICK, buttonEvent);
-b9Text.addEventListener(MouseEvent.CLICK, buttonEvent);
-b0Text.addEventListener(MouseEvent.CLICK, buttonEvent);
-//This is already done in InitialiseUI.as
-//temp = 0;
-//while(temp < 10) {
-	//buttons[temp].addEventListener(MouseEvent.CLICK, buttonEvent);
-	//temp++;
-//}
-newGameText.addEventListener(MouseEvent.CLICK, newGameGo);
-newGameBG.addEventListener(MouseEvent.CLICK, newGameGo);
-appearanceText.addEventListener(MouseEvent.CLICK, appearance);
-appearanceBG.addEventListener(MouseEvent.CLICK, appearance);
-dataText.addEventListener(MouseEvent.CLICK, saveLoad);
-dataBG.addEventListener(MouseEvent.CLICK, saveLoad);
-levelText2.addEventListener(MouseEvent.CLICK, levelUpGo);
-levelBG.addEventListener(MouseEvent.CLICK, levelUpGo);
-perksBG.addEventListener(MouseEvent.CLICK, displayPerks);
-perksText.addEventListener(MouseEvent.CLICK, displayPerks);
-statsText.addEventListener(MouseEvent.CLICK, displayStats);
-statsBG.addEventListener(MouseEvent.CLICK, displayStats);
+this.mainView._executeButtomButtonClick = executeButtonClick;
 
-//MOUSE OVERRRRRRZ
-statsBG.addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-statsBG.addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-statsText.addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-statsText.addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-newGameBG.addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-newGameBG.addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-levelText2.addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-levelText2.addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-newGameText.addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-newGameText.addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-appearanceBG.addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-appearanceBG.addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-appearanceText.addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-appearanceText.addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-dataBG.addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-dataBG.addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-dataText.addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-dataText.addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-perksBG.addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-perksBG.addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-perksText.addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-perksText.addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-gButtons[0].addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-gButtons[0].addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-b1Text.addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-b1Text.addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-gButtons[1].addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-gButtons[1].addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-b2Text.addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-b2Text.addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-gButtons[2].addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-gButtons[2].addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-b3Text.addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-b3Text.addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-gButtons[3].addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-gButtons[3].addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-b4Text.addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-b4Text.addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-gButtons[4].addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-gButtons[4].addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-b5Text.addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-b5Text.addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-gButtons[5].addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-gButtons[5].addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-b6Text.addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-b6Text.addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-gButtons[6].addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-gButtons[6].addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-b7Text.addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-b7Text.addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-gButtons[7].addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-gButtons[7].addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-b8Text.addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-b8Text.addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-gButtons[8].addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-gButtons[8].addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-b9Text.addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-b9Text.addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-gButtons[9].addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-gButtons[9].addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-b0Text.addEventListener(MouseEvent.ROLL_OVER, buttonOn);
-b0Text.addEventListener(MouseEvent.ROLL_OUT, buttonOff);
-
-function buttonEvent(e:MouseEvent):void {
-	mouseOverText.visible = false;
-	var buttonIndex:int = 0;
-	//Set temp equal to the button that was clicked.
-	while(buttonIndex < 10) {
-		if(e.target == gButtons[buttonIndex]) break;
-		buttonIndex++;
-	}
-	if(e.target == b1Text) buttonIndex = 0;
-	else if(e.target == b2Text) 
-		buttonIndex = 1;
-	else if(e.target == b3Text) 
-		buttonIndex = 2;
-	else if(e.target == b4Text) 
-		buttonIndex = 3;
-	else if(e.target == b5Text) 
-		buttonIndex = 4;
-	else if(e.target == b6Text) 
-		buttonIndex = 5;
-	else if(e.target == b7Text) 
-		buttonIndex = 6;
-	else if(e.target == b8Text) 
-		buttonIndex = 7;
-	else if(e.target == b9Text) 
-		buttonIndex = 8;
-	else if(e.target == b0Text) 
-		buttonIndex = 9;
-	//Standard method.
-	//trace("FUNC LENGTH" + funcs.length);
-	executeButtonClick(buttonIndex);
-}
+// function buttonEvent(e:MouseEvent):void {
+// 	mouseOverText.visible = false;
+// 	var buttonIndex:int = 0;
+// 	//Set temp equal to the button that was clicked.
+// 	while(buttonIndex < 10) {
+// 		if(e.target == gButtons[buttonIndex]) break;
+// 		buttonIndex++;
+// 	}
+// 	if(e.target == b1Text) buttonIndex = 0;
+// 	else if(e.target == b2Text) 
+// 		buttonIndex = 1;
+// 	else if(e.target == b3Text) 
+// 		buttonIndex = 2;
+// 	else if(e.target == b4Text) 
+// 		buttonIndex = 3;
+// 	else if(e.target == b5Text) 
+// 		buttonIndex = 4;
+// 	else if(e.target == b6Text) 
+// 		buttonIndex = 5;
+// 	else if(e.target == b7Text) 
+// 		buttonIndex = 6;
+// 	else if(e.target == b8Text) 
+// 		buttonIndex = 7;
+// 	else if(e.target == b9Text) 
+// 		buttonIndex = 8;
+// 	else if(e.target == b0Text) 
+// 		buttonIndex = 9;
+// 	//Standard method.
+// 	//trace("FUNC LENGTH" + funcs.length);
+// 	executeButtonClick(buttonIndex);
+// }
 
 function executeButtonClick(button:int = 0):void {
 	if(funcs.length == 0) {
@@ -150,126 +64,6 @@ function executeButtonClick(button:int = 0):void {
 	}
 }
 
-
-/*LEGACY CODE!
-function buttonEvent1(e:MouseEvent):void
-{
-	mouseOverText.visible = false;
-	if(funcs.length == 0 || button1Choice == 0)
-	{
-		outputText("\nInactive Button.  This is an error, please contact Fenoxo and describe the circumstances that lead you here.", true);
-		return;
-	}
-	else if(button1Choice != 9998) {
-		trace("Button pressed for: " + button1Choice);
-		eventParser(button1Choice);
-	}
-	else {
-		trace("Button pressed for: " + String(funcs[0]));
-		funcs[0]();
-		funcs = new Array();
-		args = new Array();
-	}
-}
-function buttonEvent2(e:MouseEvent):void
-{
-	if(button2Choice == 0)
-	{
-		outputText("\nInactive Button.  This is an error, please contact Fenoxo and describe the circumstances that lead you here.", true);
-		return;
-	}
-	mouseOverText.visible = false;
-	trace("Button pressed for: " + button2Choice);
-	eventParser(button2Choice);
-}
-function buttonEvent3(e:MouseEvent):void
-{
-	if(button3Choice == 0)
-	{
-		outputText("\nInactive Button.  This is an error, please contact Fenoxo and describe the circumstances that lead you here.", true);
-		return;
-	}
-	mouseOverText.visible = false;
-	trace("Button pressed for: " + button3Choice);
-	eventParser(button3Choice);
-}
-function buttonEvent4(e:MouseEvent):void
-{
-	if(button4Choice == 0)
-	{
-		outputText("\nInactive Button.  This is an error, please contact Fenoxo and describe the circumstances that lead you here.", true);
-		return;
-	}
-	mouseOverText.visible = false;
-	trace("Button pressed for: " + button4Choice);
-	eventParser(button4Choice);
-}
-function buttonEvent5(e:MouseEvent):void
-{
-	if(button5Choice == 0)
-	{
-		outputText("\nInactive Button.  This is an error, please contact Fenoxo and describe the circumstances that lead you here.", true);
-		return;
-	}
-	mouseOverText.visible = false;
-	trace("Button pressed for: " + button5Choice);
-	eventParser(button5Choice);
-}
-function buttonEvent6(e:MouseEvent):void
-{
-	if(button6Choice == 0)
-	{
-		outputText("\nInactive Button.  This is an error, please contact Fenoxo and describe the circumstances that lead you here.", true);
-		return;
-	}
-	mouseOverText.visible = false;
-	trace("Button pressed for: " + button6Choice);
-	eventParser(button6Choice);
-}
-function buttonEvent7(e:MouseEvent):void
-{
-	if(button7Choice == 0)
-	{
-		outputText("\nInactive Button.  This is an error, please contact Fenoxo and describe the circumstances that lead you here.", true);
-		return;
-	}
-	mouseOverText.visible = false;
-	trace("Button pressed for: " + button7Choice);
-	eventParser(button7Choice);
-}
-function buttonEvent8(e:MouseEvent):void
-{
-	if(button8Choice == 0)
-	{
-		outputText("\nInactive Button.  This is an error, please contact Fenoxo and describe the circumstances that lead you here.", true);
-		return;
-	}
-	mouseOverText.visible = false;
-	trace("Button pressed for: " + button8Choice);
-	eventParser(button8Choice);
-}
-function buttonEvent9(e:MouseEvent):void
-{
-	if(button9Choice == 0)
-	{
-		outputText("\nInactive Button.  This is an error, please contact Fenoxo and describe the circumstances that lead you here.", true);
-		return;
-	}
-	mouseOverText.visible = false;
-	trace("Button pressed for: " + button9Choice);
-	eventParser(button9Choice);
-}
-function buttonEvent0(e:MouseEvent):void
-{
-	if(button0Choice == 0)
-	{
-		outputText("\nInactive Button.  This is an error, please contact Fenoxo and describe the circumstances that lead you here.", true);
-		return;
-	}
-	mouseOverText.visible = false;
-	trace("Button pressed for: " + button0Choice);
-	eventParser(button0Choice);
-}*/
 
 //Hugeass keyboard parser
 function keyboard(e:KeyboardEvent):void {

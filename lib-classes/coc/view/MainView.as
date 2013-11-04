@@ -1,24 +1,10 @@
 /****
 	coc.view.MainView
-
-	Constructor takes this options object:
-		options = {
-			onNewGameClick: callback,
-			onDataClick: callback,
-			onStatsClick: callback,
-			onLevelClick: callback,
-			onPerksClick: callback,
-			onAppearanceClick: callback
-			...?
-		}
-
-	Note: likely, things are going to be access via
-		parent.globalThingHere and so on.
-		where parent is an instance of CoC.
 ****/
 
 package coc.view {
 	import flash.display.MovieClip;
+	import flash.display.InteractiveObject;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
@@ -41,10 +27,13 @@ package coc.view {
 		public var toolTip :ToolTipView;
 		public var statsView :StatsView;
 
+		public var _executeButtomButtonClick :Function;
+
 		protected var bottomButtonSettings :Array;
 
 		protected var options :Object;
 		protected var allButtons :Array;
+		protected var callbacks :Object = {};
 
 		protected var model :GameModel; // TODO: Need an actual class type.
 
@@ -53,7 +42,7 @@ package coc.view {
 			// due to the code being a mess.  We'll fix that at some point.
 			// maybe even get like update events or some shit like real MV*s or something.
 			this.model = model;
-			this.options = options;
+			this.options = options || {};
 
 			super();
 
@@ -77,7 +66,6 @@ package coc.view {
 					newGameBG, dataBG, statsBG, levelBG, perksBG, appearanceBG
 				]);
 
-			// hookTopButtons();
 			hookBottomButtons();
 			hookAllButtons();
 		};
@@ -151,17 +139,6 @@ package coc.view {
 			}
 		};
 
-		// Top-button-specific hooks.
-		public function hookTopButtons( callbacks ) :void {
-			// It is an error if any of these callbacks are undefined.
-			newGameBG.addEventListener( MouseEvent.CLICK, callbacks.onNewGameClick );
-			dataBG.addEventListener( MouseEvent.CLICK, callbacks.onDataClick );
-			statsBG.addEventListener( MouseEvent.CLICK, callbacks.onStatsClick );
-			levelBG.addEventListener( MouseEvent.CLICK, callbacks.onLevelClick );
-			perksBG.addEventListener( MouseEvent.CLICK, callbacks.onPerksClick );
-			appearanceBG.addEventListener( MouseEvent.CLICK, callbacks.onAppearanceClick );
-		};
-
 		protected function hookBottomButtons() :void {
 			var bi :MovieClip;
 
@@ -209,25 +186,35 @@ package coc.view {
 		//////// Internal event handlers ////////
 
 		protected function executeBottomButtonClick( event :Event ) {
-			var b :MovieClip, bi :int, buttonSettings :*;
+			var bottomButton :InteractiveObject,
+				bottomButtonIndex :int;
 
-			b = event.currentTarget as MovieClip;
+			if( this._executeButtomButtonClick ) {
+				this.toolTip.hide();
+				bottomButton = (event.currentTarget as InteractiveObject);
+				bottomButtonIndex = this.bottomButtonBGs.indexOf( bottomButton );
+				this._executeButtomButtonClick( bottomButtonIndex );
 
-			if( ! b ) {
-				trace( "MainView.executeBottomButtonClick: Something done penissed up, button bg (event target) is not a movieclip:", event.currentTarget );
 			}
+			// var b :MovieClip, bi :int, buttonSettings :*;
 
-			bi = b.bottomIndex;
+			// b = event.currentTarget as MovieClip;
 
-			buttonSettings = this.bottomButtonSettings[ bi ];
+			// if( ! b ) {
+			// 	trace( "MainView.executeBottomButtonClick: Something done penissed up, button bg (event target) is not a movieclip:", event.currentTarget );
+			// }
 
-			if( buttonSettings && buttonSettings.callback ) {
-				if( (typeof buttonSettings.callback) == 'function' )
-					buttonSettings.callback();
-				else {
-					trace( "Non-function event:", buttonSettings.callback, " Dropping on the ground for now." );
-				}
-			}
+			// bi = b.bottomIndex;
+
+			// buttonSettings = this.bottomButtonSettings[ bi ];
+
+			// if( buttonSettings && buttonSettings.callback ) {
+			// 	if( (typeof buttonSettings.callback) == 'function' )
+			// 		buttonSettings.callback();
+			// 	else {
+			// 		trace( "Non-function event:", buttonSettings.callback, " Dropping on the ground for now." );
+			// 	}
+			// }
 		};
 
 		protected function hoverButton( event :MouseEvent ) {
@@ -321,6 +308,55 @@ package coc.view {
 
 		public function outputText() :void {
 			// ...
+		};
+
+
+
+		//////// misc... ////////
+
+		public function invert() {
+			if( ! this.blackBackground.visible ) {
+				this.blackBackground.visible = true;
+			}
+			else {
+				this.blackBackground.visible = false;
+			}
+		};
+
+
+
+		//////// Setters ////////
+
+		protected function setMenuButtonListener( button :InteractiveObject, callback :Function ) :void {
+			if( this.callbacks[ button.name ] )
+				button.removeEventListener( MouseEvent.CLICK, this.callbacks[ button.name ] );
+
+			this.callbacks[ button.name ] = callback;
+			button.addEventListener( MouseEvent.CLICK, callback );
+		};
+
+		public function set onNewGameClick( callback :Function ) :void {
+			this.setMenuButtonListener( this.newGameBG, callback );
+		};
+
+		public function set onDataClick( callback :Function ) :void {
+			this.setMenuButtonListener( this.dataBG, callback );
+		};
+
+		public function set onStatsClick( callback :Function ) :void {
+			this.setMenuButtonListener( this.statsBG, callback );
+		};
+
+		public function set onLevelClick( callback :Function ) :void {
+			this.setMenuButtonListener( this.levelBG, callback );
+		};
+
+		public function set onPerksClick( callback :Function ) :void {
+			this.setMenuButtonListener( this.perksBG, callback );
+		};
+
+		public function set onAppearanceClick( callback :Function ) :void {
+			this.setMenuButtonListener( this.appearanceBG, callback );
 		};
 	}
 }
