@@ -218,6 +218,10 @@ function checkCondition(variable:String, op:String, test:String):Boolean
 		{
 			result = (a > b);
 		}
+		else if(op == "==")
+		{
+			result = (a == b);
+		}
 		else if(op == "<")
 		{
 			result = (a < b);
@@ -354,6 +358,83 @@ function checkCondition(variable:String, op:String, test:String):Boolean
 	return result;
 }
 
+/*
+planned syntax:
+
+[if (condition) OUTPUT_IF_TRUE]
+[if (condition) OUTPUT_IF_TRUE | OUTPUT_IF_FALSE]		// Note - Implicit else indicated by presence of the "|"
+[functionName|ButtonText]								// Jumps to a section with the label functionName
+[desc|DESC_NAME]										// queries a description parameter
+
+
+*/
+function evalConditional(textCond:String):Boolean
+{
+
+	trace("Evaluating conditional: ", textCond);
+	return false;
+
+}
+function extractConditional(textCtnt:String):Array
+{
+	// take the contents of an if statement:
+	// [if (condition) OUTPUT_IF_TRUE]
+	// [if (condition) OUTPUT_IF_TRUE | OUTPUT_IF_FALSE]
+	// and return the condition and output content as an array:
+	// ["condition", "OUTPUT_IF_TRUE"]
+	// ["condition", "OUTPUT_IF_TRUE | OUTPUT_IF_FALSE"]
+
+	// Allows nested parenthesis, because I'm masochistic
+
+	var ret:Array = new Array("", "", "");	// first string is conditional, second string is the output
+
+	var i:Number = 0;
+	var tmp:Number = 0;
+	var parenthesisCount:Number = 0;
+	
+
+	tmp = textCtnt.indexOf("(");
+
+	if (tmp != -1)		// If we have any open brackets
+	{
+		for (i = tmp; i < textCtnt.length; i += 1)
+		{
+			if (textCtnt.charAt(i) == "(")
+			{
+				parenthesisCount += 1;
+			}
+			else if (textCtnt.charAt(i) == ")")
+			{
+				parenthesisCount -= 1;
+			}
+			if (parenthesisCount == 0)	// We've found the matching closing bracket for the opening bracket at textCtnt[tmp]
+			{
+				ret[0] = recParser(textCtnt.substring(0, tmp));
+				ret[1] = recParser(textCtnt.substring(tmp+1, i));
+				ret[2] = recParser(textCtnt.substring(i+1, textCtnt.length));	// Parse the trailing text (if any)
+				trace("prefix = ", ret[0], " conditional = ", ret[1], " content = ", ret[2]);
+				
+				return ret;
+			}
+		}
+	}
+	else 
+		throw new Error("Invalid if statement!", textCtnt);
+	return ret;
+}
+function evalBracketContents(textCtnt:String):String
+{
+	var tmp:Array;
+	trace("Evaluating string: ", textCtnt);
+	if (textCtnt.toLowerCase().indexOf("if") == 0)
+	{
+		trace("It's an if-statement");
+		tmp = extractConditional(textCtnt);
+		trace(tmp);
+		trace(evalConditional(tmp[1]));
+	}
+	return textCtnt;
+}
 function recParser(textCtnt:String):String
 {
 	if (textCtnt.length == 0)	// Short circuit if we've been passed an empty string
@@ -367,7 +448,7 @@ function recParser(textCtnt:String):String
 
 	tmp = textCtnt.indexOf("[");
 
-	if (tmp != -1)		// If we have any open brackets other then the one right at position [0] of the string
+	if (tmp != -1)		// If we have any open brackets
 	{
 		for (i = tmp; i < textCtnt.length; i += 1)
 		{
@@ -382,9 +463,8 @@ function recParser(textCtnt:String):String
 			if (bracketCnt == 0)	// We've found the matching closing bracket for the opening bracket at textCtnt[tmp]
 			{
 				retStr += textCtnt.substring(0, tmp);
-				retStr += recParser(textCtnt.substring(tmp+1, i));
+				retStr += recParser(evalBracketContents(textCtnt.substring(tmp+1, i)));
 				retStr += recParser(textCtnt.substring(i+1, textCtnt.length));	// Parse the trailing text (if any)
-				trace("bracketContents = ", textCtnt.substring(tmp+1, i));
 				return retStr;
 			}
 		}

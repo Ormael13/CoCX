@@ -134,6 +134,17 @@ function mainMenu(e:MouseEvent = undefined):void {
 	gameState = 3;
 
 	outputText("(Alternative) <b>Corruption of Champions (" + version + ")</b>\n(Formerly Unnamed Text Game)", true);
+	outputText("\n\n", false);
+	
+	outputText("[LOL[WUT]] [herp] [DERP] BLARGH [if (0 == 0)|HARBLE]\n\n", false);
+	outputText("[r[e[c[u[r[s[i[v[e[lol]]t]a]g[rofl][copter]]b]o]m]i]n][a][t[io]n]\n", false);
+	outputText("[if [ [ (4==4)HERP|DERP]\n", false);
+	outputText("[if (4==7)HERP|DERP]\n", false);
+	outputText("[if (4==4)HERP|DERP]\n", false);
+
+	/*
+	outputText("\n\n", false);
+	
 	outputText("\n\nCreated by: Fenoxo", false);
 	outputText("\nEdited By: Ashi, SoS, Zeikfried, and Others", false);
 	outputText("\n\nOpen-source version modifications by: \nAmygdaloidnucleus/Amygdala, Hoffledop/Yoffy, Herp-a-derp/Fake-Name, Cmacleod42", false);
@@ -144,8 +155,6 @@ function mainMenu(e:MouseEvent = undefined):void {
 	outputText("\n\nFor more information see Fenoxo's Blog at <b><u><a href='http://www.fenoxo.com/'>fenoxo.com</a></u></b>.", false);
 	outputText("\n\nAlso go play <u><a href='http://www.furaffinity.net/view/9830293/'>Nimin</a></u> by Xadera on furaffinity.\n\n", false);
 
-	outputText("[LOL[WUT]] [herp] [DERP] [if (0 == 0)|HARBLE]\n\n", false);
-	outputText("[r[e[c[u[r[s[i[v[e[lol]]t]a]g[rofl][copter]]b]o]m]i]n][a][t[io]n]", false);
 	
 	if(debug) 
 		outputText("\n\n<b>DEBUG MODE ENABLED:  ITEMS WILL NOT BE CONSUMED BY USE.</b>", false);
@@ -161,6 +170,7 @@ function mainMenu(e:MouseEvent = undefined):void {
 		outputText("\n\n<b>It's Valentine's!</b>");
 	if(isHeliaBirthday()) 
 		outputText("\n\n<b>It's Helia's Birthday Month!</b>");
+	*/
 
 	var resume:Number = 0;
 	if(player.str > 0)  //we're in a game, allow resume.
