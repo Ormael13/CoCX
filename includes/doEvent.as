@@ -9451,7 +9451,7 @@ function doEvent(eventNo):void
 	}
 	else if (eventNo == 3524)
 	{
-		approach();
+		approachNiamh();
 		return;
 	}
 	else if (eventNo == 3525)
