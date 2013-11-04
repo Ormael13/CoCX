@@ -787,7 +787,7 @@ function lovingHugsForRetards():void {
 //\"<i>Warm</i>\"/Lover Kiha Intro
 function warmLoverKihaIntro(output:Boolean = true):void {
 	var campo:Number = 0;
-	var leave:int = 13;
+	var leave = 13;
 	if(output) {
 		clearOutput();
 		spriteSelect(72);;
@@ -798,7 +798,7 @@ function warmLoverKihaIntro(output:Boolean = true):void {
 				return;
 			}
 			outputText("When you approach your dragoness lover, a warm smile spreads across her dark features.  She gives you a playful punch on the shoulder and laughs, \"<i>Hey, doofus. You need something -- maybe a little dragon loving?</i>\" she adds with a wink.");
-			leave = 121;
+			leave = campLoversMenu;
 			//choices("Hang Out",hangOutWithKiha,"Hug",hugFriendWarmKiha,"InviteCamp",campo,"Sex",kihaSexMenu,"Spar",sparWithKiha,"",0,"",0,"",0,"",0,"Leave",leave);
 			menu();
 			addButton(0,"Hang Out",eventParser,3431);

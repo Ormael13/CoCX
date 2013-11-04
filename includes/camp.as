@@ -328,8 +328,8 @@ function camp():void {
 	var jojo:Number = 0;
 	var placesNum:Number = 0;
 	var followers:Number = 0;
-	var lovers:Number = 0;
-	var slaves:Number = 0;
+	var lovers = 0;
+	var slaves = 0;
 	var storage:Number = 0;
 	if(stash()) storage = 2951;
 	if(places(false)) placesNum = 71; 
@@ -572,9 +572,12 @@ function camp():void {
 	if(player.hasPerk("History: Religious") >= 0 && player.cor <= 66 && !(player.hasStatusAffect("Exgartuan") >= 0 && player.statusAffectv2("Exgartuan") == 0)) baitText = "Meditate";
 	//Initialize companions/followers
 	if(this.model.time.hours > 4 && this.model.time.hours < 23) {
-		if(followersCount() > 0) followers = 74;
-		if(slavesCount() > 0) slaves = 120;
-		if(loversCount() > 0) lovers = 121;
+		if(followersCount() > 0) 
+			followers = 74;
+		if(slavesCount() > 0) 
+			slaves = campSlavesMenu;
+		if(loversCount() > 0) 
+			lovers = campLoversMenu;
 	}
 	var restEvent:Number = 40;
 	var restName:String = "Wait";
