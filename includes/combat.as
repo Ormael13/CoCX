@@ -13898,8 +13898,10 @@ function startCombat(monsterNum:Number):void {
 			//-now totally okay with taking gems and riding the player so hard he passes out for 8 hours regardless
 			//-drops shitty kangaroo item and imp food
 			monster.long = "Sheila is a slim, somewhat athletic woman, over six feet in height.  Her smooth, dark skin is exposed from her head to her clawed feet, and she makes no effort to conceal anything your eyes might linger on.  The " + sheilaCup() + " breasts on her chest";
-			if(sheilaCorruption() <= 40) monster.long += " are firm, squeezable teardrops; she runs a hand absently over one from time to time.";
-			else monster.long += " jiggle as she moves, and she shoves them out to make sure you see just how lewd her body has become since your first meeting.";
+			if(sheilaCorruption() <= 40) 
+				monster.long += " are firm, squeezable teardrops; she runs a hand absently over one from time to time.";
+			else 
+				monster.long += " jiggle as she moves, and she shoves them out to make sure you see just how lewd her body has become since your first meeting.";
 			monster.long += "  Straight, jaw-length auburn hair frames her face along with two long, smooth ears that stick out sideways.  Her only nods to civilization are a dangling purple earring and the finger rings that she wears on her hands, and the wild woman stares openly at you, touching herself.";
 		}
 		if(flags[SHEILA_XP] > 3 || flags[SHEILA_DEMON] > 0) {
@@ -14168,7 +14170,11 @@ function startCombat(monsterNum:Number):void {
 		monster.cocks[0].cockLength = rand(2) + 11;
 		monster.cocks[0].cockThickness = 2.5;
 		monster.cocks[0].cockType = rand(3);
-		if(monster.cocks[0].cockType == CockTypesEnum.HUMAN) monster.cocks[0].cockType = CockTypesEnum.DEMON;
+
+		// Imps now only have demon dicks. 
+		// Not sure if I agree with this, I can imagine the little fuckers abusing the 
+		// shit out of any potions they can get their hands on.
+		monster.cocks[0].cockType = CockTypesEnum.DEMON;
 		monster.balls = 2;
 		monster.cumMultiplier = 3;
 		monster.ballSize = 1;
