@@ -8,6 +8,17 @@
 		// Eventually, this should contain the entire char appearance.
 		// At the moment, it's pretty piecemeal.
 
+		public static function randomChoice(...args):*
+		{
+			if ((args.length == 1) && (args[0] is Array))
+			{
+				var i:Number = int(Math.round(Math.random() * (args[0].length - 1)));
+				return args[0][i];
+			}
+			else 
+				throw Error("WUT");
+		}
+
 		public static function rand(max:Number):Number
 		{
 			return int(Math.random() * max);
@@ -21,305 +32,193 @@
 				trace("Fix this shit already, dammit!")
 				cockType = CockTypesEnum.legacySuportLoadCockType(cockType);
 			}
-
-
+			var options:Array;
 			var descript:String = "";
 			var rando:Number = 0;
 			if (cockType == CockTypesEnum.HUMAN)
 			{
-				rando = rand(10) + 1;
-				if (rando >= 0 && rando <= 4)
-					descript += "cock";
-				if (rando == 5 || rando == 6)
-					descript += "prick";
-				if (rando == 7)
-					descript += "pecker";
-				if (rando > 7)
-					descript += "shaft";
+				// Yeah, this is kind of messy
+				// there is no other easy way to preserve the weighting fenoxo did
+				options = ["cock",
+							"cock",
+							"cock",
+							"cock",
+							"cock",
+							"prick",
+							"prick",
+							"pecker",
+							"shaft",
+							"shaft",
+							"shaft"];
+				descript += randomChoice(options);
 			}
 			if (cockType == CockTypesEnum.DOG)
 			{
-				
-				rando = int(Math.random() * 11);
-				if (rando == 0)
-					descript += "dog-shaped dong";
-				if (rando == 1)
-					descript += "canine shaft";
-				if (rando == 2)
-					descript += "pointed prick";
-				if (rando == 3)
-					descript += "knotty dog-shaft";
-				if (rando == 4)
-					descript += "bestial cock";
-				if (rando == 5)
-					descript += "animalistic puppy-pecker";
-				if (rando == 6)
-					descript += "pointed dog-dick";
-				if (rando == 7)
-					descript += "pointed shaft";
-				if (rando == 8)
-					descript += "canine member";
-				if (rando == 9)
-					descript += "canine cock";
-				if (rando == 10)
-					descript += "knotted dog-cock";
+				options = ["dog-shaped dong",
+							"canine shaft",
+							"pointed prick",
+							"knotty dog-shaft",
+							"bestial cock",
+							"animalistic puppy-pecker",
+							"pointed dog-dick",
+							"pointed shaft",
+							"canine member",
+							"canine cock",
+							"knotted dog-cock"];
+
+				descript += randomChoice(options);
 			}
 			if (cockType == CockTypesEnum.FOX)
 			{				
-				rando = int(Math.random() * 11);
-				if (rando == 0)
-					descript += "fox-shaped dong";
-				if (rando == 1)
-					descript += "vulpine shaft";
-				if (rando == 2)
-					descript += "pointed prick";
-				if (rando == 3)
-					descript += "knotty fox-shaft";
-				if (rando == 4)
-					descript += "bestial cock";
-				if (rando == 5)
-					descript += "animalistic vixen-pricker";
-				if (rando == 6)
-					descript += "pointed fox-dick";
-				if (rando == 7)
-					descript += "pointed shaft";
-				if (rando == 8)
-					descript += "vulpine member";
-				if (rando == 9)
-					descript += "vulpine cock";
-				if (rando == 10)
-					descript += "knotted fox-cock";
+				options = ["fox-shaped dong",
+							"vulpine shaft",
+							"pointed prick",
+							"knotty fox-shaft",
+							"bestial cock",
+							"animalistic vixen-pricker",
+							"pointed fox-dick",
+							"pointed shaft",
+							"vulpine member",
+							"vulpine cock",
+							"knotted fox-cock"];
+				descript += randomChoice(options);
+
 			}
 		
 			if (cockType == CockTypesEnum.HORSE)
 			{
-				rando = rand(6);
-				if (rando == 0)
-					descript += "flared horse-cock";
-				if (rando == 1)
-					descript += "equine prick";
-				if (rando == 2)
-					descript += "bestial horse-shaft";
-				if (rando == 3)
-					descript += "flat-tipped horse-member";
-				if (rando == 4)
-					descript += "animalistic stallion-prick";
-				if (rando == 5)
-					descript += "equine dong";
-				if (rando == 6)
-					descript += "beast cock";
-				if (rando == 7)
-					descript += "flared stallion-cock";
+				options = ["flared horse-cock",
+							"equine prick",
+							"bestial horse-shaft",
+							"flat-tipped horse-member",
+							"animalistic stallion-prick",
+							"equine dong",
+							"beast cock",
+							"flared stallion-cock"];
+				descript += randomChoice(options);
+
 			}
 			if (cockType == CockTypesEnum.DEMON)
 			{
-				rando = int(Math.random() * 11);
-				if (rando == 0)
-					descript += "nub-covered demon-dick";
-				if (rando == 1)
-					descript += "nubby shaft";
-				if (rando == 2)
-					descript += "corrupted cock";
-				if (rando == 3)
-					descript += "perverse pecker";
-				if (rando == 4)
-					descript += "bumpy demon-dick";
-				if (rando == 5)
-					descript += "demonic cock";
-				if (rando == 6)
-					descript += "demonic dong";
-				if (rando == 7)
-					descript += "cursed cock";
-				if (rando == 8)
-					descript += "infernal prick";
-				if (rando == 9)
-					descript += "unholy cock";
-				if (rando == 10)
-					descript += "blighted cock";
+				options = ["nub-covered demon-dick",
+							"nubby shaft",
+							"corrupted cock",
+							"perverse pecker",
+							"bumpy demon-dick",
+							"demonic cock",
+							"demonic dong",
+							"cursed cock",
+							"infernal prick",
+							"unholy cock",
+							"blighted cock"];
+				descript += randomChoice(options);
+
 			}
 			if (cockType == CockTypesEnum.TENTACLE)
 			{
-				rando = int(Math.random() * 11);
-				if (rando == 0)
-					descript += "twisting tentacle-prick";
-				if (rando == 1)
-					descript += "wriggling plant-shaft";
-				if (rando == 2)
-					descript += "sinuous tentacle-cock";
-				if (rando == 3)
-					descript += "squirming cock-tendril";
-				if (rando == 4)
-					descript += "writhing tentacle-pecker";
-				if (rando == 5)
-					descript += "wriggling plant-prick";
-				if (rando == 6)
-					descript += "penile flora";
-				if (rando == 7)
-					descript += "smooth shaft";
-				if (rando == 8)
-					descript += "undulating tentacle-dick";
-				if (rando == 9)
-					descript += "slithering vine-prick";
-				if (rando == 10)
-					descript += "vine-shaped cock";
+				options = ["twisting tentacle-prick",
+							"wriggling plant-shaft",
+							"sinuous tentacle-cock",
+							"squirming cock-tendril",
+							"writhing tentacle-pecker",
+							"wriggling plant-prick",
+							"penile flora",
+							"smooth shaft",
+							"undulating tentacle-dick",
+							"slithering vine-prick",
+							"vine-shaped cock"];
+				descript += randomChoice(options);
 			}
 			if (cockType == CockTypesEnum.CAT)
 			{
-				rando = int(Math.random() * 11);
-				if (rando == 0)
-					descript += "feline dick";
-				if (rando == 1)
-					descript += "spined cat-cock";
-				if (rando == 2)
-					descript += "pink kitty-cock";
-				if (rando == 3)
-					descript += "spiny prick";
-				if (rando == 4)
-					descript += "animalistic kitty-prick";
-				if (rando == 5)
-					descript += "oddly-textured cat-penis";
-				if (rando == 6)
-					descript += "feline member";
-				if (rando == 7)
-					descript += "spined shaft";
-				if (rando == 8)
-					descript += "feline shaft";
-				if (rando == 9)
-					descript += "barbed dick";
-				if (rando == 10)
-					descript += "nubby kitten-prick";
+				options = ["feline dick",
+							"spined cat-cock",
+							"pink kitty-cock",
+							"spiny prick",
+							"animalistic kitty-prick",
+							"oddly-textured cat-penis",
+							"feline member",
+							"spined shaft",
+							"feline shaft",
+							"barbed dick",
+							"nubby kitten-prick"];
+				descript += randomChoice(options);
 			}
 			if (cockType == CockTypesEnum.LIZARD)
 			{
-				rando = int(Math.random() * 11);
-				if (rando == 0)
-					descript += "reptilian dick";
-				if (rando == 1)
-					descript += "purple cock";
-				if (rando == 2)
-					descript += "inhuman cock";
-				if (rando == 3)
-					descript += "reptilian prick";
-				if (rando == 4)
-					descript += "purple prick";
-				if (rando == 5)
-					descript += "purple member";
-				if (rando == 6)
-					descript += "serpentine member";
-				if (rando == 7)
-					descript += "serpentine shaft";
-				if (rando == 8)
-					descript += "reptilian shaft";
-				if (rando == 9)
-					descript += "bulbous snake-shaft";
-				if (rando == 10)
-					descript += "bulging snake-dick";
+				options = ["reptilian dick",
+							"purple cock",
+							"inhuman cock",
+							"reptilian prick",
+							"purple prick",
+							"purple member",
+							"serpentine member",
+							"serpentine shaft",
+							"reptilian shaft",
+							"bulbous snake-shaft",
+							"bulging snake-dick"];
+				descript += randomChoice(options);
 			}
 			if (cockType == CockTypesEnum.ANEMONE)
 			{
-				rando = rand(11);
-				if (rando == 0)
-					descript += "anemone dick";
-				if (rando == 1)
-					descript += "tentacle-ringed cock";
-				if (rando == 2)
-					descript += "blue member";
-				if (rando == 3)
-					descript += "stinger-laden shaft";
-				if (rando == 4)
-					descript += "pulsating prick";
-				if (rando == 5)
-					descript += "anemone prick";
-				if (rando == 6)
-					descript += "stinger-coated member";
-				if (rando == 7)
-					descript += "blue cock";
-				if (rando == 8)
-					descript += "tentacle-ringed dick";
-				if (rando == 9)
-					descript += "near-transparent shaft";
-				if (rando == 10)
-					descript += "squirming shaft";
+				options = ["anemone dick",
+							"tentacle-ringed cock",
+							"blue member",
+							"stinger-laden shaft",
+							"pulsating prick",
+							"anemone prick",
+							"stinger-coated member",
+							"blue cock",
+							"tentacle-ringed dick",
+							"near-transparent shaft",
+							"squirming shaft"];
+				descript += randomChoice(options);
 			}
 			if (cockType == CockTypesEnum.KANGAROO)
 			{
-				rando = rand(11);
-				if (rando == 0)
-					descript += "kangaroo-like dick";
-				if (rando == 1)
-					descript += "pointed cock";
-				if (rando == 2)
-					descript += "marsupial member";
-				if (rando == 3)
-					descript += "tapered shaft";
-				if (rando == 4)
-					descript += "curved pecker";
-				if (rando == 5)
-					descript += "pointed prick";
-				if (rando == 6)
-					descript += "squirming kangaroo-cock";
-				if (rando == 7)
-					descript += "marsupial cock";
-				if (rando == 8)
-					descript += "tapered kangaroo-dick";
-				if (rando == 9)
-					descript += "curved kangaroo-cock";
-				if (rando == 10)
-					descript += "squirming shaft";
+				options = ["kangaroo-like dick",
+							"pointed cock",
+							"marsupial member",
+							"tapered shaft",
+							"curved pecker",
+							"pointed prick",
+							"squirming kangaroo-cock",
+							"marsupial cock",
+							"tapered kangaroo-dick",
+							"curved kangaroo-cock",
+							"squirming shaft"];
+				descript += randomChoice(options);
 			}
 			if (cockType == CockTypesEnum.DRAGON) 
 			{
-				rando = rand(11);
-				if (rando == 0)
-					descript += "dragon-like dick";
-				if (rando == 1)
-					descript += "segmented shaft";
-				if (rando == 2)
-					descript += "pointed prick";
-				if (rando == 3)
-					descript += "knotted dragon-cock";
-				if (rando == 4)
-					descript += "mythical mast";
-				if (rando == 5)
-					descript += "segmented tool";
-				if (rando == 6)
-					descript += "draconic dick";
-				if (rando == 7)
-					descript += "draconic cock";
-				if (rando == 8)
-					descript += "tapered dick";
-				if (rando == 9)
-					descript += "unusual endowment";
-				if (rando == 10)
-					descript += "scaly shaft";
+				options = ["dragon-like dick",
+							"segmented shaft",
+							"pointed prick",
+							"knotted dragon-cock",
+							"mythical mast",
+							"segmented tool",
+							"draconic dick",
+							"draconic cock",
+							"tapered dick",
+							"unusual endowment",
+							"scaly shaft"];
+				descript += randomChoice(options);
 			}
 			if(cockType == CockTypesEnum.DISPLACER)
 			{
-				rando = rand(12);
-				if(rando == 0) 
-					descript+="coerl cock";
-				if(rando == 1) 
-					descript+="tentacle-tipped phallus";
-				if(rando == 2) 
-					descript+="starfish-tipped shaft";
-				if(rando == 3) 
-					descript+="alien member";
-				if(rando == 4) 
-					descript+="almost-canine dick";
-				if(rando == 5) 
-					descript+="bizarre prick";
-				if(rando == 6) 
-					descript+="beastly cock";
-				if(rando == 7) 
-					descript+="cthulhu-tier cock";
-				if(rando == 8) 
-					descript+="coerl cock";
-				if(rando == 9) 
-					descript+="animal dong";
-				if(rando == 10) 
-					descript+="star-capped tool";
-				if(rando == 11) 
-					descript+="knotted erection";
+				options = ["coerl cock",
+							"tentacle-tipped phallus",
+							"starfish-tipped shaft",
+							"alien member",
+							"almost-canine dick",
+							"bizarre prick",
+							"beastly cock",
+							"cthulhu-tier cock",
+							"coerl cock",
+							"animal dong",
+							"star-capped tool",
+							"knotted erection"];
+				descript += randomChoice(options);
 			}
 
 			//trace("Correct Appearance.cockNoun - Produced noun descriptor - ", descript);
