@@ -821,8 +821,8 @@
 	if(player.gems == 0) outputText("\n\n<b>Your money-purse is devoid of any currency.", false);
 	if(player.gems > 1) outputText("\n\n<b>You have " + player.gems + " shining gems, collected in your travels.", false);
 	if(player.gems == 1) outputText("\n\n<b>You have " + player.gems + " shining gem, collected in your travels.", false);
-	mainText.htmlText = currentText;
-	scrollBar.update();
+	trace( "Manually setting output text..." );
+	this.mainView.setOutputText( currentText );
 	//menu();
 	//addButton(0,"Next",camp);
 }

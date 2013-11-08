@@ -29,7 +29,7 @@ package coc.view {
 
 		public var _executeButtomButtonClick :Function;
 
-		protected var bottomButtonSettings :Array;
+		// protected var bottomButtonSettings :Array;
 
 		protected var options :Object;
 		protected var allButtons :Array;
@@ -194,8 +194,8 @@ package coc.view {
 				bottomButton = (event.currentTarget as InteractiveObject);
 				bottomButtonIndex = this.bottomButtonBGs.indexOf( bottomButton );
 				this._executeButtomButtonClick( bottomButtonIndex );
-
 			}
+
 			// var b :MovieClip, bi :int, buttonSettings :*;
 
 			// b = event.currentTarget as MovieClip;
@@ -314,12 +314,42 @@ package coc.view {
 
 		//////// misc... ////////
 
-		public function invert() {
+		public function invert() :void {
 			if( ! this.blackBackground.visible ) {
 				this.blackBackground.visible = true;
 			}
 			else {
 				this.blackBackground.visible = false;
+			}
+		};
+
+		public function clearOutputText() :void {
+			this.mainText.htmlText = '';
+			this.scrollBar.update();
+		};
+
+		public function appendOutputText( text :String ) :void {
+			this.mainText.htmlText += text;
+			this.scrollBar.update();
+		};
+
+		public function setOutputText( text :String ) :void {
+			trace( "MainView#setOutputText(): This is never called in the main outputText() function.  Possible bugs that were patched over by updating text manually?" );
+			this.mainText.htmlText = text;
+			this.scrollBar.update();
+		};
+
+		public function getButtonText( buttonName :String ) :String {
+			var matches :*,
+				buttonIndex :int;
+
+			if( /^buttons\[[0-9]\]/.test( buttonName ) ) {
+				matches = /^buttons\[([0-9])\]/.exec( buttonName );
+				buttonIndex = parseInt( matches[ 1 ], 10 );
+				return this.bottomButtonTexts[ buttonIndex ].text;
+			}
+			else if( /^b[0-9]Text$/.test( buttonName ) ) {
+				return this[ buttonName ].text;
 			}
 		};
 

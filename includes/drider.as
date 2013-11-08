@@ -35,8 +35,7 @@ function driderEncounter():void {
 		outputText("You've yet to meet a wild drider that let you walk away without some sadistic display of power, and this one looks to be no different.", false);
 	}
 	flags[UNKNOWN_FLAG_NUMBER_00277]++;
-	mainText.htmlText = currentText;
-	scrollBar.update();
+	this.mainView.setOutputText( currentText );
 }
 
 function driderAI():void {

@@ -2330,14 +2330,12 @@ function makeUrtaSitOnYourLapWithScylla():void {
 	outputText("", true);
 	if(player.cockThatFits(urtaCapacity()) == -1) {
 		outputText("<b>Urta's pretty flexible but there's no way you'd get something that big inside her backdoor.</b>", false);
-		mainText.htmlText = currentText;
-		scrollBar.update();
+		this.mainView.setOutputText( currentText );
 		return;
 	}
 	if(player.lowerBody == 4) {
 		outputText("<b>There's no way for her to sit in a centaur's lap!</b>", false);
-		mainText.htmlText = currentText;
-		scrollBar.update();
+		this.mainView.setOutputText( currentText );
 		return;
 	}
 	var x:Number = player.cockThatFits(urtaCapacity());

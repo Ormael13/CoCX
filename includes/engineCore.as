@@ -643,7 +643,7 @@ function parseText(text:String):String
 	//While we have basic tags
 	while (result != null)
 	{
-//		rep;
+	//		rep;
 		
 		//Same as param tags, but without the param
 		switch(result[1])
@@ -820,80 +820,12 @@ function parseText(text:String):String
 		
 		result = basicTag.exec(text);
 	}
-	
-	
-	//Old stuff
-	
-	/*output = output.split("{").join("<b>BRACE {</b>");
-	output = output.split("}").join("<b>} BRACE</b>");
-	if(player.hasCock()) {
-		output = output.split("[oneCock]").join(oMultiCockDesc());
-		output = output.split("[OneCock]").join(OMultiCockDesc());
-		output = output.split("[eachCock]").join(sMultiCockDesc());
-		output = output.split("[eachCock]").join(SMultiCockDesc());
-		output = output.split("[biggestCock]").join(cockDescript(player.biggestCockIndex()));
-		output = output.split("[smallestCock]").join(cockDescript(player.smallestCockIndex()));
-		output = output.split("[longestCock]").join(cockDescript(player.longestCock()));
-		output = output.split("[shortestCock]").join(cockDescript(player.shortestCockIndex()));
-		if(player.cockThatFits(monster.vaginalCapacity()) >= 0) output = output.split("[cockFitsVag]").join(cockDescript(player.cockThatFits(monster.vaginalCapacity())));
-		else output = output.split("[cock]").join(cockDescript(player.smallestCockIndex()));
-		if(player.cockThatFits2(monster.vaginalCapacity()) >= 0) output = output.split("[cockFitsVag2]").join(cockDescript(player.cockThatFits2(monster.vaginalCapacity())));
-		else output = output.split("[cock]").join(cockDescript(player.smallestCockIndex()));
-		if(player.cockThatFits(monster.analCapacity()) >= 0) output = output.split("[cockFitsAss]").join(cockDescript(player.cockThatFits(monster.analCapacity())));
-		else output = output.split("[cock]").join(cockDescript(player.smallestCockIndex()));
-		if(player.cockThatFits2(monster.analCapacity()) >= 0)output = output.split("[cockFitsAss2]").join(cockDescript(player.cockThatFits2(monster.analCapacity())));
-		else output = output.split("[cock]").join(cockDescript(player.smallestCockIndex()));
-		output = output.split("[cock]").join(cockDescript(0));
-		output = output.split("[cock2]").join(cockDescript(1));
-		output = output.split("[cock3]").join(cockDescript(2));
-		output = output.split("[cock4]").join(cockDescript(3));
-		output = output.split("[cock5]").join(cockDescript(4));
-		output = output.split("[cock6]").join(cockDescript(5));
-		output = output.split("[cock7]").join(cockDescript(6));
-		output = output.split("[cock8]").join(cockDescript(7));
-		output = output.split("[cock9]").join(cockDescript(8));
-		output = output.split("[cock10]").join(cockDescript(9));
-		output = output.split("[cockHead]").join(cockHead(0));
-		output = output.split("[cockHead]2").join(cockHead(1));
-		output = output.split("[cockHead]3").join(cockHead(2));
-		output = output.split("[cockHead]4").join(cockHead(3));
-		output = output.split("[cockHead]5").join(cockHead(4));
-		output = output.split("[cockHead]6").join(cockHead(5));
-		output = output.split("[cockHead]7").join(cockHead(6));
-		output = output.split("[cockHead]8").join(cockHead(7));
-		output = output.split("[cockHead]9").join(cockHead(8));
-		output = output.split("[cockHead]10").join(cockHead(9));
-	}
-	output = output.split("[hair]").join(hairDescript());
-	output = output.split("[face]").join(player.face());
-	output = output.split("[legs]").join(player.legs());
-	output = output.split("[leg]").join(player.leg());
-	output = output.split("[feet]").join(player.feet());
-	output = output.split("[foot]").join(player.foot());
-	output = output.split("[balls]").join(ballsDescriptLight());
-	output = output.split("[chest]").join(chestDesc());
-	output = output.split("[fullChest]").join(allChestDesc());
-	output = output.split("[hips]").join(hipDescript());
-	output = output.split("[butt]").join(buttDescript());
-	output = output.split("[ass]").join(buttDescript());
-	output = output.split("[asshole]").join(assholeDescript());
-	output = output.split("[butthole]").join(assholeDescript());
-	if(player.hasVagina()) {
-		output = output.split("[cunt]").join(vaginaDescript());
-		output = output.split("[pussy]").join(vaginaDescript());
-		output = output.split("[vagina]").join(vaginaDescript());
-		output = output.split("[vag]").join(vaginaDescript());
-		output = output.split("[vagOrAss]").join(vaginaDescript());
-		output = output.split("[clit]").join(clitDescript());
-	}
-	else output = output.split("[vagOrAss]").join(assholeDescript());*/
-	
 	return text;
 }
+
 function clearOutput():void {
 	currentText = "";
-	mainText.htmlText = "";
-	scrollBar.update();
+	this.mainView.clearOutputText();
 }
 
 function outputText(output:String, purgeText:Boolean = false, parse = true) {
@@ -912,8 +844,7 @@ function outputText(output:String, purgeText:Boolean = false, parse = true) {
 		//if(!debug) mainText.htmlText = currentText;
 	}
 	if(debug) {
-		mainText.htmlText = currentText;
-		scrollBar.update();
+		this.mainView.appendOutputText( currentText );
 	}
 }
 function perkLongDescription(perkName:String = ""):String {
@@ -1691,6 +1622,7 @@ function buildPerkList():void {
 	}
 	aCb.dataProvider = new DataProvider(perkList); 
 }
+
 function applyPerk(pName:String = ""):void {
 	player.perkPoints--;
 	//Apply perk here.
@@ -1824,1811 +1756,793 @@ function applyPerk(pName:String = ""):void {
 	}
 	doNext(1);
 }
+
 function buttonOn( e:MouseEvent)
 {
-/*    var transformer = new Transform(e.target.name);
-    var colorTransformer:ColorTransform = transformer.colorTransform;
-    /*colorTransformer.redMultiplier = redmul == undefined ? 1 : redmul;
-    colorTransformer.greenMultiplier = greenmul == undefined ? 1 : greenmul;
-    colorTransformer.alphaMultiplier = alphamul == undefined ? 1 : alphamul;
-    colorTransformer.redOffset = red;
-    colorTransformer.greenOffset = green;
-    colorTransformer.alphaOffset = alphao == undefined ? 0 : alphao;
-	*/
-//    colorTransformer.blueMultiplier = 1.5;
-//	colorTransformer.blueOffset = 5;
-//    transformer.colorTransform = colorTransformer;
-	if(e.target.name == "newGameText") newGameBG.alpha = .5;
-	if(e.target.name == "appearanceText") appearanceBG.alpha = .5;
-	if(e.target.name == "perksText") perksBG.alpha = .5;
-	if(e.target.name == "dataText") dataBG.alpha = .5;
-	if(e.target.name == "levelText2") levelBG.alpha = .5;
-	if(e.target.name == "b1Text") gButtons[0].alpha = .5;
-	if(e.target.name == "b2Text") gButtons[1].alpha = .5;
-	if(e.target.name == "b3Text") gButtons[2].alpha= .5;
-	if(e.target.name == "b4Text") gButtons[3].alpha = .5;
-	if(e.target.name == "b5Text") gButtons[4].alpha = .5;
-	if(e.target.name == "b6Text") gButtons[5].alpha = .5;
-	if(e.target.name == "b7Text") gButtons[6].alpha = .5;
-	if(e.target.name == "b8Text") gButtons[7].alpha = .5;
-	if(e.target.name == "b9Text") gButtons[8].alpha = .5;
-	if(e.target.name == "b0Text") gButtons[9].alpha = .5;
-	if(e.target.name == "statsText") statsBG.alpha = .5;
 	mouseOverTextin(e, buttonText(e.target.name));
-	//e.target.alpha = .5;
 }
 
 function buttonOff(e:MouseEvent)
 {
-//    var transformer = new Transform(DisplayObject(e.target.name));
-//    var colorTransformer:ColorTransform = transformer.colorTransform;
-    /*colorTransformer.redMultiplier = redmul == undefined ? 1 : redmul;
-    colorTransformer.greenMultiplier = greenmul == undefined ? 1 : greenmul;
-    colorTransformer.blueMultiplier = bluemul == undefined ? 1 : bluemul;
-    colorTransformer.alphaMultiplier = alphamul == undefined ? 1 : alphamul;
-    colorTransformer.redOffset = red;
-    colorTransformer.greenOffset = green;
-    colorTransformer.blueOffset = blue;
-    colorTransformer.alphaOffset = alphao == undefined ? 0 : alphao;
-	*/
-//    transformer.colorTransform = colorTransformer;
-	if(e.target.name == "newGameText") newGameBG.alpha = 1;
-	if(e.target.name == "appearanceText") appearanceBG.alpha = 1;
-	if(e.target.name == "perksText") perksBG.alpha = 1;
-	if(e.target.name == "dataText") dataBG.alpha = 1;
-	if(e.target.name == "levelText2") levelBG.alpha = 1;
-	if(e.target.name == "b1Text") gButtons[0].alpha = 1;
-	if(e.target.name == "b2Text") gButtons[1].alpha = 1;
-	if(e.target.name == "b3Text") gButtons[2].alpha = 1;
-	if(e.target.name == "b4Text") gButtons[3].alpha = 1;
-	if(e.target.name == "b5Text") gButtons[4].alpha = 1;
-	if(e.target.name == "b6Text") gButtons[5].alpha = 1;
-	if(e.target.name == "b7Text") gButtons[6].alpha = 1;
-	if(e.target.name == "b8Text") gButtons[7].alpha = 1;
-	if(e.target.name == "b9Text") gButtons[8].alpha = 1;
-	if(e.target.name == "b0Text") gButtons[9].alpha = 1;
-	if(e.target.name == "statsText") statsBG.alpha = 1;
 	//Clear mouseover space
 	mouseOverText.visible = false;
 	popUpBG.visible = false;
 	e.target.alpha = 1;
 }
+
 function buttonText(buttonName:String):String {
-	if(buttonName == "buttons[0]") return b1Text.text;
-	if(buttonName == "b1Text") return b1Text.text;
-	if(buttonName == "buttons[1]") return b2Text.text;
-	if(buttonName == "b2Text") return b2Text.text;
-	if(buttonName == "buttons[2]") return b3Text.text;
-	if(buttonName == "b3Text") return b3Text.text;
-	if(buttonName == "buttons[3]") return b4Text.text;
-	if(buttonName == "b4Text") return b4Text.text;
-	if(buttonName == "buttons[4]") return b5Text.text;
-	if(buttonName == "b5Text") return b5Text.text;
-	if(buttonName == "buttons[5]") return b6Text.text;
-	if(buttonName == "b6Text") return b6Text.text;
-	if(buttonName == "buttons[6]") return b7Text.text;
-	if(buttonName == "b7Text") return b7Text.text;
-	if(buttonName == "buttons[7]") return b8Text.text;
-	if(buttonName == "b8Text") return b8Text.text;	
-	if(buttonName == "buttons[8]") return b9Text.text;
-	if(buttonName == "b9Text") return b9Text.text;
-	if(buttonName == "buttons[9]") return b0Text.text;
-	if(buttonName == "b0Text") return b0Text.text;	
-	return "NULL";
+	return (this.mainView.getButtonText( buttonName ) || "NULL");
 }
+
 function mouseOverTextin(e:MouseEvent, texts:String)
 {
+	var toolTipText :String;
+
 	//Perkzzz
 	if(texts.indexOf("Strong Back") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The Strong Back perk unlocks an additional inventory space, allowing you to carry more.";
-		return;
+		toolTipText = "The Strong Back perk unlocks an additional inventory space, allowing you to carry more.";
 	}
 	if(texts.indexOf("StrongBack2") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The Strong Back 2 perk unlocks a fifth inventory location, allowing you to carry as much as possible.";
-		return;
+		toolTipText = "The Strong Back 2 perk unlocks a fifth inventory location, allowing you to carry as much as possible.";
 	}
 	if(texts.indexOf("T.Strikes") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "You've gotten so good at putting your sizable strength behind your attacks that you deal 20% more damage with standard attacks while strength is 80 or higher.";
-		return;
+		toolTipText = "You've gotten so good at putting your sizable strength behind your attacks that you deal 20% more damage with standard attacks while strength is 80 or higher.";
 	}
 	if(texts.indexOf("W.Mastery") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "After getting so good at carrying large objects, you find large weapons much easier to handle (Double 'Large' weapon bonuses when equipped).";
-		return;
+		toolTipText = "After getting so good at carrying large objects, you find large weapons much easier to handle (Double 'Large' weapon bonuses when equipped).";
 	}
 	if(texts.indexOf("Tank 2") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Tank 2 raises your maximum HP by an additional 1 HP per point of toughness.";
-		return;
+		toolTipText = "Tank 2 raises your maximum HP by an additional 1 HP per point of toughness.";
 	}
 	if(texts.indexOf("Tank") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The Tank perk adds an additional 50 HP to your maximum hitpoints, allowing you take more damage before losing a fight.";
-		return;
+		toolTipText = "The Tank perk adds an additional 50 HP to your maximum hitpoints, allowing you take more damage before losing a fight.";
 	}
 	if(texts.indexOf("Regenerate") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The Regeneration perk makes your hit points come back faster, both in and out of combat.  In combat you gain 1 HP a round, outside of combat you'll get 2 HP an hour.";
-		return;
+		toolTipText = "The Regeneration perk makes your hit points come back faster, both in and out of combat.  In combat you gain 1 HP a round, outside of combat you'll get 2 HP an hour.";
 	}
 	if(texts.indexOf("Regen 2") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The Regeneration 2 perk quadruples the effectiveness of your regeneration.";
-		return;
+		toolTipText = "The Regeneration 2 perk quadruples the effectiveness of your regeneration.";
 	}
 	if(texts.indexOf("Evade") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The Evade perk gives you an additional 10% chance to avoid enemy attacks beyond the normal dodge chance.";
-		return;
+		toolTipText = "The Evade perk gives you an additional 10% chance to avoid enemy attacks beyond the normal dodge chance.";
 	}
 	if(texts.indexOf("Agility") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The agility perk allows you to increase your armor defense by a portion of your speed when wearing light or medium armor.";
-		return;
+		toolTipText = "The agility perk allows you to increase your armor defense by a portion of your speed when wearing light or medium armor.";
 	}
 	if(texts.indexOf("S.Recovery") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The speedy recovery perk increases the rate at which you regain fatigue.";
-		return;
+		toolTipText = "The speedy recovery perk increases the rate at which you regain fatigue.";
 	}
 	if(texts.indexOf("D.Attack") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The Double Attack perk lets you take advantage of your incredible speed to attack twice in one round.  Requires high speed and strength at or below 60.";
-		return;
+		toolTipText = "The Double Attack perk lets you take advantage of your incredible speed to attack twice in one round.  Requires high speed and strength at or below 60.";
 	}
 	if(texts.indexOf("Spellpower") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The Spellpower perk increases the effects of your spells by up to 50% (dependant on the spell).";
-		return;
+		toolTipText = "The Spellpower perk increases the effects of your spells by up to 50% (dependant on the spell).";
 	}
 	if(texts.indexOf("Mage") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The Mage perk increases the effects of your spells by up to 100% (dependant on the spell).";
-		return;
+		toolTipText = "The Mage perk increases the effects of your spells by up to 100% (dependant on the spell).";
 	}
 	if(texts.indexOf("Channeling") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The channeling perk increases the spell bonus by up to an additional 50%.";
-		return;
+		toolTipText = "The channeling perk increases the spell bonus by up to an additional 50%.";
 	}
 	if(texts.indexOf("Medicine") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The medicine perk gives you a 15% chance per round of removing all non-biological poisons in combat.";
-		return;
+		toolTipText = "The medicine perk gives you a 15% chance per round of removing all non-biological poisons in combat.";
 	}
 	if(texts.indexOf("Runner") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The Runner perk increases your chances of escaping combat significantly, and may help with out of combat escapes as well.";
-		return;
+		toolTipText = "The Runner perk increases your chances of escaping combat significantly, and may help with out of combat escapes as well.";
 	}
 	if(texts.indexOf("Fertility+") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The Fertility+ perk increases your pregnancy chance by 15% and also increases any cum production by 50 percent!";
-		return;
+		toolTipText = "The Fertility+ perk increases your pregnancy chance by 15% and also increases any cum production by 50 percent!";
 	}
 	if(texts.indexOf("Hot Blooded") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The Hot Blooded perk takes advantage of your enhanced libido, allowing your lust to never drop below 20.";
-		return;
+		toolTipText = "The Hot Blooded perk takes advantage of your enhanced libido, allowing your lust to never drop below 20.";
 	}
 	if(texts.indexOf("W.Adjusted") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The Well Adjusted perk halves the lust you gain over time in Mareth.";
-		return;
+		toolTipText = "The Well Adjusted perk halves the lust you gain over time in Mareth.";
 	}
 	if(texts.indexOf("Masochist") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The Masochism perk reduces damage taken by 30 percent but raises your lust from each hit.";
-		return;
+		toolTipText = "The Masochism perk reduces damage taken by 30 percent but raises your lust from each hit.";
 	}
 	if(texts.indexOf("CorruptLibido") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The Corrupted Libido perk lets you use your corruption to adapt to your heightened libido, making lust rise 10 percent slower.";
-		return;
+		toolTipText = "The Corrupted Libido perk lets you use your corruption to adapt to your heightened libido, making lust rise 10 percent slower.";
 	}
 	if(texts.indexOf("Seduction") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The Seduction perk enhances your ability to tease and seduce, upgrading your tease attack significantly.";
-		return;
+		toolTipText = "The Seduction perk enhances your ability to tease and seduce, upgrading your tease attack significantly.";
 	}
 	if(texts.indexOf("Acclimation") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The Acclimation perk allows your highly corrupted form to adapt to the constant lust it's subjected to, slowing additional lust gain.";
-		return;
+		toolTipText = "The Acclimation perk allows your highly corrupted form to adapt to the constant lust it's subjected to, slowing additional lust gain.";
 	}
 	if(texts.indexOf("A. Aura") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The Arousing Aura perk causes you to exude a lust-inducing aura whenever your corruption is 70 or above.";
-		return;
+		toolTipText = "The Arousing Aura perk causes you to exude a lust-inducing aura whenever your corruption is 70 or above.";
 	}
 	if(texts.indexOf("Sadist") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The Sadist perk increases the damage you do with some physical attacks by 20% but causes you to gain lust from it.";
-		return;
+		toolTipText = "The Sadist perk increases the damage you do with some physical attacks by 20% but causes you to gain lust from it.";
 	}
 	if(texts.indexOf("Resistance") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The Resistance perk gives you an additional reduction to lust gains.";
-		return;
+		toolTipText = "The Resistance perk gives you an additional reduction to lust gains.";
 	}
 	if(texts.indexOf("Precision") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The Precision perk allows you to strike an enemy's weak points, reducing damage resistance by 10.  Requires you to keep intelligence above 25, or you'll lose the benefits of this perk.";
-		return;
+		toolTipText = "The Precision perk allows you to strike an enemy's weak points, reducing damage resistance by 10.  Requires you to keep intelligence above 25, or you'll lose the benefits of this perk.";
 	}
 	if(texts.indexOf("Nymphomania") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The Nymphomania perk allows your corruption to have it's way with your lust, keeping you constantly aroused.  Your lust will never drop below 30 with this perk.";
-		return;
+		toolTipText = "The Nymphomania perk allows your corruption to have it's way with your lust, keeping you constantly aroused.  Your lust will never drop below 30 with this perk.";
 	}
 	//Items
 	if(texts.indexOf("MinoBlo") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "You've got a scratched up looking vial full of bright red minotaur blood.  Any time you move it around it seems to froth up, as if eager to escape.";
-		return;
+		toolTipText = "You've got a scratched up looking vial full of bright red minotaur blood.  Any time you move it around it seems to froth up, as if eager to escape.";
 	}
 	if(texts.indexOf("GroPlus") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This is a small needle with a resevoir full of blue liquid.  A faded label marks it as 'GroPlus'.  Its purpose seems obvious.";
-		return;
+		toolTipText = "This is a small needle with a resevoir full of blue liquid.  A faded label marks it as 'GroPlus'.  Its purpose seems obvious.";
 	}
 	if(texts.indexOf("ImpFood") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This is a small parcel of reddish-brown bread stuffed with some kind of meat.  It smells delicious.";
-		return;
+		toolTipText = "This is a small parcel of reddish-brown bread stuffed with some kind of meat.  It smells delicious.";
 	}
 	if(texts.indexOf("Shark.T") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A glinting white tooth, very sharp and intimidating.";
-		return;
+		toolTipText = "A glinting white tooth, very sharp and intimidating.";
 	}
 	if(texts.indexOf("ExtSerm") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This is a bottle of foamy pink liquid, purported by the label to increase the speed at which the user's hair grows.";
-		return;
+		toolTipText = "This is a bottle of foamy pink liquid, purported by the label to increase the speed at which the user's hair grows.";
 	}
 	if(texts.indexOf("ProBova") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This cloudy potion has been enhanced by the alchemist Lumi to imbue its drinker with cow-like attributes.";
-		return;
+		toolTipText = "This cloudy potion has been enhanced by the alchemist Lumi to imbue its drinker with cow-like attributes.";
 	}
 	if(texts.indexOf("MinoCum") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This bottle of minotaur cum looks thick and viscous.  You know it has narcotic properties, but aside from that its effects are relatively unknown.";
-		return;
+		toolTipText = "This bottle of minotaur cum looks thick and viscous.  You know it has narcotic properties, but aside from that its effects are relatively unknown.";
 	}
 	if(texts.indexOf("PurPeac") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This is a peach from Minerva's spring, yellowy-orange with red stripes all over it.";
-		return;
+		toolTipText = "This is a peach from Minerva's spring, yellowy-orange with red stripes all over it.";
 	}
 	if(texts.indexOf("MouseCo") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A handful of rare aromatic beans with sharp creases in the middle, making them look like small mouse ears.  Allegedly very popular and plentiful before the mice-folk were wiped out.";
-		return;
+		toolTipText = "A handful of rare aromatic beans with sharp creases in the middle, making them look like small mouse ears.  Allegedly very popular and plentiful before the mice-folk were wiped out.";
 	}
 	if(texts.indexOf("RingFig") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A dried fig with two lobes and thin dark rings just below its stem.  The skin is wrinkly and it looks vaguely like a bulging scrotum.";
-		return;
+		toolTipText = "A dried fig with two lobes and thin dark rings just below its stem.  The skin is wrinkly and it looks vaguely like a bulging scrotum.";
 	}
 	if(texts.indexOf("Equinum") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This is a long flared vial with a small label that reads, \"<i>Equinum</i>\".  It is likely this potion is tied to horses in some way.";
-		return;
+		toolTipText = "This is a long flared vial with a small label that reads, \"<i>Equinum</i>\".  It is likely this potion is tied to horses in some way.";
 	}
 	if(texts.indexOf("PrFruit") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This sweet-smelling produce looks like an eggplant, but feels almost squishy, and rubbery to the touch. Holding it to your ear, you think you can hear some fluid sloshing around inside.";
-		return;
+		toolTipText = "This sweet-smelling produce looks like an eggplant, but feels almost squishy, and rubbery to the touch. Holding it to your ear, you think you can hear some fluid sloshing around inside.";
 	}
 	if(texts.indexOf("TrapOil") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A round, opaque glass vial filled with a clear, viscous fluid.  It has a symbol inscribed on it, a circle with a cross and arrow pointing out of it in opposite directions.  It looks and smells entirely innocuous.";
-		return;
+		toolTipText = "A round, opaque glass vial filled with a clear, viscous fluid.  It has a symbol inscribed on it, a circle with a cross and arrow pointing out of it in opposite directions.  It looks and smells entirely innocuous.";
 	}
 	if(texts.indexOf("FishFil") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A perfectly cooked piece of fish.  You're not sure what type of fish is, since you're fairly certain \"delicious\" is not a valid species.";
-		return;
+		toolTipText = "A perfectly cooked piece of fish.  You're not sure what type of fish is, since you're fairly certain \"delicious\" is not a valid species.";
 	}
 	if(texts.indexOf("Debimbo") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		if(player.hasPerk("Bimbo Brains") >= 0 || player.hasPerk("Futa Faculties") >= 0) mouseOverText.htmlText = "This should totally like, fix your brain and stuff.  You don't really think anything is wrong with your head - it feels all pink and giggly all the time.";
-		else mouseOverText.htmlText = "This draft is concocted from five scholar's teas and who knows what else.  Supposedly it will correct the stupifying effects of Bimbo Liqueur.";
-		return;
+		if(player.hasPerk("Bimbo Brains") >= 0 || player.hasPerk("Futa Faculties") >= 0)
+			toolTipText = "This should totally like, fix your brain and stuff.  You don't really think anything is wrong with your head - it feels all pink and giggly all the time.";
+		else
+			toolTipText = "This draft is concocted from five scholar's teas and who knows what else.  Supposedly it will correct the stupifying effects of Bimbo Liqueur.";
 	}
 	if(texts.indexOf("FoxJewl") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A shining teardrop-shaped jewel.  An eerie blue flame dances beneath the surface.";
-		return;
+		toolTipText = "A shining teardrop-shaped jewel.  An eerie blue flame dances beneath the surface.";
 	}
 	if(texts.indexOf("MystJwl") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The flames within this jewel glow brighter than before, and have taken on a sinister purple hue.  It has been enhanced to increase its potency, allowing it to transform you more easily, but may have odd side-effects...";
-		return;
+		toolTipText = "The flames within this jewel glow brighter than before, and have taken on a sinister purple hue.  It has been enhanced to increase its potency, allowing it to transform you more easily, but may have odd side-effects...";
 	}
 	if(texts.indexOf("KitGift") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A small square package given to you by a forest kitsune.  It is wrapped up in plain white paper and tied with a string.  Who knows what's inside?";
-		return;
+		toolTipText = "A small square package given to you by a forest kitsune.  It is wrapped up in plain white paper and tied with a string.  Who knows what's inside?";
 	}
 	if(texts.indexOf("GldStat") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "An intricate golden idol of an androgynous humanoid figure with nine long tails.  It probably had some spiritual significance to its owner.";
-		return;
+		toolTipText = "An intricate golden idol of an androgynous humanoid figure with nine long tails.  It probably had some spiritual significance to its owner.";
 	}
 	if(texts.indexOf("DrgnEgg") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A large, solid egg, easily the size of your clenched fist.  Its shell color is reddish-white, with blue splotches.";
-		return;
+		toolTipText = "A large, solid egg, easily the size of your clenched fist.  Its shell color is reddish-white, with blue splotches.";
 	}
 	if(texts.indexOf("DrgnShl") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A durable shield that has been forged from the remains of the dragon egg you found in the swamp. Absorbs any fluid attacks you can catch, rendering them useless.";
-		return;
+		toolTipText = "A durable shield that has been forged from the remains of the dragon egg you found in the swamp. Absorbs any fluid attacks you can catch, rendering them useless.";
 	}
 	if(texts.indexOf("SheepMk") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This bottle of sheep milk is said to have corruption-fighting properties.  It may be useful.";
-		return;
+		toolTipText = "This bottle of sheep milk is said to have corruption-fighting properties.  It may be useful.";
 	}
 	if(texts.indexOf("E.Staff") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This eldritch staff once belonged to the Harpy Queen, who was killed after her defeat at your hands.  It fairly sizzles with magical power.";
-		return;
+		toolTipText = "This eldritch staff once belonged to the Harpy Queen, who was killed after her defeat at your hands.  It fairly sizzles with magical power.";
 	}
 	if(texts.indexOf("FoxBery") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This large orange berry is heavy in your hands.  It may have gotten its name from its bright orange coloration.  You're certain it is no mere fruit.";
-		return;
+		toolTipText = "This large orange berry is heavy in your hands.  It may have gotten its name from its bright orange coloration.  You're certain it is no mere fruit.";
 	}
 	if(texts.indexOf("FoxBery") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This large orange berry is heavy in your hands.  It may have gotten its name from its bright orange coloration.  You're certain it is no mere fruit.";
-		return;
+		toolTipText = "This large orange berry is heavy in your hands.  It may have gotten its name from its bright orange coloration.  You're certain it is no mere fruit.";
 	}
 	if(texts.indexOf("VixVigr") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This small medicine bottle contains something called \"Vixen's Vigor\", supposedly distilled from common fox-berries.  It is supposed to be a great deal more potent, and a small warning label warns of \"extra boobs\", whatever that means.";
-		return;
+		toolTipText = "This small medicine bottle contains something called \"Vixen's Vigor\", supposedly distilled from common fox-berries.  It is supposed to be a great deal more potent, and a small warning label warns of \"extra boobs\", whatever that means.";
 	}
 	if(texts.indexOf("BC Beer") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A capped mug containing an alcoholic drink secreted from the breasts of Niamh.  It smells tasty.";
-		return;
+		toolTipText = "A capped mug containing an alcoholic drink secreted from the breasts of Niamh.  It smells tasty.";
 	}
 	if(texts.indexOf("I.Robes") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "These foreboding red and gold robes are embroidered with the symbols of a lost kingdom.  Wearing them will cause spells to tax your health instead of exhausting you.";
-		return;
+		toolTipText = "These foreboding red and gold robes are embroidered with the symbols of a lost kingdom.  Wearing them will cause spells to tax your health instead of exhausting you.";
 	}
 	if(texts.indexOf("I.Corst") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This sexualized and feminine red and gold ensemble carries with it the hopes of a shamed sorcerer.  Wearing it will cause spells to tax your health instead of exhausting you.";
-		return;
+		toolTipText = "This sexualized and feminine red and gold ensemble carries with it the hopes of a shamed sorcerer.  Wearing it will cause spells to tax your health instead of exhausting you.";
 	}
 	if(texts.indexOf("S.Blade") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Forged not by a swordsmith but a sorceress, this arcane-infused blade amplifies your magic.  Unlike the wizard staves it is based on, this weapon also has a sharp edge, a technological innovation which has proven historically useful in battle.";
-		return;
+		toolTipText = "Forged not by a swordsmith but a sorceress, this arcane-infused blade amplifies your magic.  Unlike the wizard staves it is based on, this weapon also has a sharp edge, a technological innovation which has proven historically useful in battle.";
 	}
 	if(texts.indexOf("DryTent") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A dried tentacle from one of the lake anemones.  It's probably edible, but the stingers are still a little active.";
-		return;
+		toolTipText = "A dried tentacle from one of the lake anemones.  It's probably edible, but the stingers are still a little active.";
 	}
 	if(texts.indexOf("IzyMilk") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This is a bottle of Isabella's milk.  Isabella seems fairly certain it will invigorate you.";
-		return;
+		toolTipText = "This is a bottle of Isabella's milk.  Isabella seems fairly certain it will invigorate you.";
 	}
 	if(texts.indexOf("EctoPls") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The green-tinted, hardly corporeal substance flows like a liquid inside its container. It makes you feel... uncomfortable, as you observe it.";
-		return;
+		toolTipText = "The green-tinted, hardly corporeal substance flows like a liquid inside its container. It makes you feel... uncomfortable, as you observe it.";
 	}
 	if(texts.indexOf("T.SSilk") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This bundle of fibrous silk is incredibly tough and strong, though somehow not sticky in the slightest.  You have no idea how to work these tough little strands into anything usable.  Perhaps one of this land's natives might have an idea?";
-		return;
+		toolTipText = "This bundle of fibrous silk is incredibly tough and strong, though somehow not sticky in the slightest.  You have no idea how to work these tough little strands into anything usable.  Perhaps one of this land's natives might have an idea?";
 	}
 	if(texts.indexOf("SS.Robe") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This robe looks incredibly comfortable.  It's made from alchemically enhanced spider-silk, and embroidered with what looks like magical glyphs around the sleeves and hood.";
-		return;
+		toolTipText = "This robe looks incredibly comfortable.  It's made from alchemically enhanced spider-silk, and embroidered with what looks like magical glyphs around the sleeves and hood.";
 	}
 	if(texts.indexOf("SSArmor") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This armor is as white as the driven snow.  It's crafted out of thousands of strands of spider-silk into an impenetrable protective suit.  The surface is slightly spongy, but so tough you wager most blows would bounce right off.";
-		return;
+		toolTipText = "This armor is as white as the driven snow.  It's crafted out of thousands of strands of spider-silk into an impenetrable protective suit.  The surface is slightly spongy, but so tough you wager most blows would bounce right off.";
 	}
 	if(texts.indexOf("S.Gossr") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "These strands of gooey pink gossamer seem quite unlike the normal silk that spider-morphs produce.  It smells sweet and is clearly edible, but who knows what it might do to you?";
-		return;
+		toolTipText = "These strands of gooey pink gossamer seem quite unlike the normal silk that spider-morphs produce.  It smells sweet and is clearly edible, but who knows what it might do to you?";
 	}
 	if(texts.indexOf("B.Gossr") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "These strands of gooey black gossamer seem quite unlike the normal silk that driders produce.  It smells sweet and is clearly edible, but who knows what it might do to you?";
-		return;
+		toolTipText = "These strands of gooey black gossamer seem quite unlike the normal silk that driders produce.  It smells sweet and is clearly edible, but who knows what it might do to you?";
 	}
 	if(texts.indexOf("TSTooth") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This looks like a normal shark tooth, though with an odd purple glow.";
-		return;
+		toolTipText = "This looks like a normal shark tooth, though with an odd purple glow.";
 	}
 	
 
 	if(texts.indexOf("KangaFt") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A yellow, fibrous, tubular pod.  A split in the end reveals many lumpy, small seeds inside.  The smell of mild fermentation wafts from them.";
-		return;
+		toolTipText = "A yellow, fibrous, tubular pod.  A split in the end reveals many lumpy, small seeds inside.  The smell of mild fermentation wafts from them.";
 	}
 	if(texts.indexOf("MghtyVg") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A yellow, fibrous, tubular pod.  A split in the end reveals many lumpy, small seeds inside.  The smell of mild fermentation wafts from them.  It glows slightly from Lumi's enhancements.";
-		return;
+		toolTipText = "A yellow, fibrous, tubular pod.  A split in the end reveals many lumpy, small seeds inside.  The smell of mild fermentation wafts from them.  It glows slightly from Lumi's enhancements.";
 	}
 	if(texts.indexOf("GldSeed") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This seed looks and smells absolutely delicious.  Though it has an unusual color, the harpies prize these nuts as delicious treats.  Eating one might induce some physical transformations.";
-		return;
+		toolTipText = "This seed looks and smells absolutely delicious.  Though it has an unusual color, the harpies prize these nuts as delicious treats.  Eating one might induce some physical transformations.";
 	}
 	if(texts.indexOf("MagSeed") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This seed glows with power.  It's been enhanced by Lumi to unlock its full potential, allowing it to transform you more easily.";
-		return;
+		toolTipText = "This seed glows with power.  It's been enhanced by Lumi to unlock its full potential, allowing it to transform you more easily.";
 	}
 	if(texts.indexOf("R.BdySt") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A high society bodysuit. It is as easy to mistake it for ballroom apparel as it is for boudoir lingerie. The thin transparent fabric is so light and airy that it makes avoiding blows a second nature.";
-		return;
+		toolTipText = "A high society bodysuit. It is as easy to mistake it for ballroom apparel as it is for boudoir lingerie. The thin transparent fabric is so light and airy that it makes avoiding blows a second nature.";
 	}
 	if(texts.indexOf("BroBrew") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This aluminum can is labelled as 'Bro Brew'.  It even has a picture of a muscly, bare-chested man flexing on it.  A small label in the corner displays: \"Demon General's Warning: Bro Brew's effects are as potent (and irreversible) as they are refreshing.\"";
-		return;
+		toolTipText = "This aluminum can is labelled as 'Bro Brew'.  It even has a picture of a muscly, bare-chested man flexing on it.  A small label in the corner displays: \"Demon General's Warning: Bro Brew's effects are as potent (and irreversible) as they are refreshing.\"";
 	}
 	if(texts.indexOf("BimboLq") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This small bottle of liqueur is labelled 'Bimbo Liqueur'.  There's a HUGE warning label about the effects being strong and usually permanent, so you should handle this with care.";
-		return;
+		toolTipText = "This small bottle of liqueur is labelled 'Bimbo Liqueur'.  There's a HUGE warning label about the effects being strong and usually permanent, so you should handle this with care.";
 	}	
 	if(texts.indexOf("H.Gaunt") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "These metal gauntlets are covered in nasty looking hooks that are sure to tear at your foes flesh and cause them harm.";
-		return;
+		toolTipText = "These metal gauntlets are covered in nasty looking hooks that are sure to tear at your foes flesh and cause them harm.";
 	}
 	if(texts.indexOf("SensDrf") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This carefully labelled potion is a 'Sensitivity Draft', and if the diagrams are any indication, it will make your body more sensitive.";
-		return;
+		toolTipText = "This carefully labelled potion is a 'Sensitivity Draft', and if the diagrams are any indication, it will make your body more sensitive.";
 	}
 	if(texts.indexOf("NumbRox") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This packet of innocuous looking 'candy' guarantees to reduce troublesome sensations and taste delicious.";
-		return;
+		toolTipText = "This packet of innocuous looking 'candy' guarantees to reduce troublesome sensations and taste delicious.";
 	}
 	if(texts.indexOf("BonStrp") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "These leather straps and well-placed hooks are actually designed in such a way as to be worn as clothing.  While they technically would cover your naughty bits, virtually every other inch of your body would be exposed.";
-		return;
+		toolTipText = "These leather straps and well-placed hooks are actually designed in such a way as to be worn as clothing.  While they technically would cover your naughty bits, virtually every other inch of your body would be exposed.";
 	}
 	if(texts.indexOf("NurseCl") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This borderline obscene nurse's outfit would barely cover your hips and crotch.  The midriff is totally exposed, and the white top leaves plenty of room for cleavage.  A tiny white hat tops off the whole ensemble.";
-		return;
+		toolTipText = "This borderline obscene nurse's outfit would barely cover your hips and crotch.  The midriff is totally exposed, and the white top leaves plenty of room for cleavage.  A tiny white hat tops off the whole ensemble.";
 	}
 	if(texts.indexOf("GooArmr") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This shining suit of platemail is more than just platemail - it houses the goo-girl, Valeria!  Together, they provide one tough defense, but you had better be okay with having goo handling your junk while you fight if you wear this!";
-		return;
+		toolTipText = "This shining suit of platemail is more than just platemail - it houses the goo-girl, Valeria!  Together, they provide one tough defense, but you had better be okay with having goo handling your junk while you fight if you wear this!";
 	}
 	if(texts.indexOf("LMArmor") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This skimpy chain bikini barely qualifies as armor.  Indeed, the chain is made from links much finer and lighter than normal, so fine that it feels almost silken under your fingertips.  A simple seal in the g-string-like undergarment states, \"Virgins only.\"";
-		return;
+		toolTipText = "This skimpy chain bikini barely qualifies as armor.  Indeed, the chain is made from links much finer and lighter than normal, so fine that it feels almost silken under your fingertips.  A simple seal in the g-string-like undergarment states, \"Virgins only.\"";
 	}
 	if(texts.indexOf("JRapier") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This jeweled rapier is ancient but untarnished.  The hilt is wonderfully made, and fits your hand like a tailored glove.  The blade is shiny and perfectly designed for stabbing.";
-		return;
+		toolTipText = "This jeweled rapier is ancient but untarnished.  The hilt is wonderfully made, and fits your hand like a tailored glove.  The blade is shiny and perfectly designed for stabbing.";
 	}
 	if(texts.indexOf("RRapier") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "He's bound it with his red sash around the length like a ribbon, as though he has now gifted it to you.  Perhaps it is his way of congratulating you.";
-		return;
+		toolTipText = "He's bound it with his red sash around the length like a ribbon, as though he has now gifted it to you.  Perhaps it is his way of congratulating you.";
 	}
 	if(texts.indexOf("SucWhip") != -1 || texts.indexOf("Demon Whip") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This coiled length of midnight-black leather practically exudes lust.  Though it looks like it could do a lot of damage, the feel of that slick leather impacting flesh is sure to inspire lust.";
-		return;
+		toolTipText = "This coiled length of midnight-black leather practically exudes lust.  Though it looks like it could do a lot of damage, the feel of that slick leather impacting flesh is sure to inspire lust.";
 	}
 	if(texts.indexOf("Reptlum") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This is a rounded bottle with a small label that reads, \"<i>Reptilum</i>\".  It is likely this potion is tied to reptiles in some way.";
-		return;
+		toolTipText = "This is a rounded bottle with a small label that reads, \"<i>Reptilum</i>\".  It is likely this potion is tied to reptiles in some way.";
 	}
 	if(texts.indexOf("W.Fruit") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This small, peach-sized fruit has tiny whisker-like protrusions growing from the sides.";
-		return;
+		toolTipText = "This small, peach-sized fruit has tiny whisker-like protrusions growing from the sides.";
 	}
 	
 	if(texts.indexOf("Gob.Ale") != -1 || texts == "GoblinAle") {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This sealed flagon of 'Goblin Ale' sloshes noisily with alcoholic brew.  Judging by the markings on the flagon, it's a VERY strong drink, and not to be trifled with.";
-		return;
+		toolTipText = "This sealed flagon of 'Goblin Ale' sloshes noisily with alcoholic brew.  Judging by the markings on the flagon, it's a VERY strong drink, and not to be trifled with.";
 	}
 	//"Hummus "
 	if(texts.indexOf("Hummus ") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This pile of hummus doesn't look that clean, and you really don't remember where you got it from.  It looks bland.  So bland that you feel blander just by looking at it.";
-		return;
+		toolTipText = "This pile of hummus doesn't look that clean, and you really don't remember where you got it from.  It looks bland.  So bland that you feel blander just by looking at it.";
 	}
 	
 	if(texts.indexOf("LthrRob") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This is a suit of flexible leather armor with a voluminous set of concealing black robes.";
-		return;
+		toolTipText = "This is a suit of flexible leather armor with a voluminous set of concealing black robes.";
 	}
 	if(texts.indexOf("ScaleMl") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This suit of scale-mail covers the entire body with layered steel scales, providing flexibility and protection.";
-		return;
+		toolTipText = "This suit of scale-mail covers the entire body with layered steel scales, providing flexibility and protection.";
 	}
 	if(texts.indexOf("FullPlt") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A highly protective suit of steel platemail.  It would be hard to find better physical protection than this.";
-		return;
+		toolTipText = "A highly protective suit of steel platemail.  It would be hard to find better physical protection than this.";
 	}
 	if(texts.indexOf("BimboSk") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A tight, cleavage-inducing halter top and an extremely short miniskirt.  The sexual allure of this item is undoubtable.";
-		return;
+		toolTipText = "A tight, cleavage-inducing halter top and an extremely short miniskirt.  The sexual allure of this item is undoubtable.";
 	}
 	if(texts.indexOf("SeductA") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A complete suit of scalemail shaped to hug tightly against every curve, it has a solid steel chest-plate with obscenely large nipples molded into it.  The armor does nothing to cover the backside, exposing the wearer's cheeks to the world.";
-		return;
+		toolTipText = "A complete suit of scalemail shaped to hug tightly against every curve, it has a solid steel chest-plate with obscenely large nipples molded into it.  The armor does nothing to cover the backside, exposing the wearer's cheeks to the world.";
 	}
 	if(texts.indexOf("IndecSt") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This suit of steel 'armor' has two round disks that barely cover the nipples, a tight chainmail bikini, and circular butt-plates.";
-		return;
+		toolTipText = "This suit of steel 'armor' has two round disks that barely cover the nipples, a tight chainmail bikini, and circular butt-plates.";
 	}
 	if(texts.indexOf("W.Robes") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "These robes appear to have once belonged to a female wizard.  They're long with a slit up the side and full billowing sleeves.  The top is surprisingly low cut.  Somehow you know wearing it would aid your spellcasting.";
-		return;
+		toolTipText = "These robes appear to have once belonged to a female wizard.  They're long with a slit up the side and full billowing sleeves.  The top is surprisingly low cut.  Somehow you know wearing it would aid your spellcasting.";
 	}
 	if(texts.indexOf("W.Staff") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This staff is made of very old wood and seems to tingle to the touch.  The top has an odd zig-zag shape to it, and the wood is worn smooth from lots of use.  It probably belonged to a wizard at some point and would aid magic use. (ATK: 3)";
-		return;
+		toolTipText = "This staff is made of very old wood and seems to tingle to the touch.  The top has an odd zig-zag shape to it, and the wood is worn smooth from lots of use.  It probably belonged to a wizard at some point and would aid magic use. (ATK: 3)";
 	}
 	if(texts.indexOf("W. Staff") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "An oddly bent piece of solid wood favored by spell-casters.  It is said to be made of from one of Marae's roots and allow for easier magic use. (ATK: 3) (Cost: 350)";
-		return;
+		toolTipText = "An oddly bent piece of solid wood favored by spell-casters.  It is said to be made of from one of Marae's roots and allow for easier magic use. (ATK: 3) (Cost: 350)";
 	}
 	
 	if(texts.indexOf("W.Stick") != -1 || texts.indexOf("Wingstick") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A tri-bladed throwing weapon.  Though good for only a single use, it's guaranteed to do high damage if it hits.  (Cost: 16) (DMG: 40-100)";
-		return;
+		toolTipText = "A tri-bladed throwing weapon.  Though good for only a single use, it's guaranteed to do high damage if it hits.  (Cost: 16) (DMG: 40-100)";
 	}
 	if(texts.indexOf("Claymor") != -1 || texts.indexOf("L.Claymore") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A massive sword that a very strong warrior might use. Requires 40 strength to use.  (ATK: 15) (Cost: 1000)";
-		return;
+		toolTipText = "A massive sword that a very strong warrior might use. Requires 40 strength to use.  (ATK: 15) (Cost: 1000)";
 	}
 	if(texts.indexOf("Warhamr") != -1 || texts.indexOf("Warhammer") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A huge war-hammer made almost entirely of steel that only the strongest warriors could use.  Requires 80 strength to use.  Getting hit with this might stun the victim.  (ATK: 15) (Cost: 1600)";
-		return;
+		toolTipText = "A huge war-hammer made almost entirely of steel that only the strongest warriors could use.  Requires 80 strength to use.  Getting hit with this might stun the victim.  (ATK: 15) (Cost: 1600)";
 	}
 	if(texts.indexOf("Katana ") != -1 || texts.indexOf("Katana") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A curved bladed weapon that cuts through flesh with the greatest of ease. (ATK: 10) (Cost: 500)";
-		return;
+		toolTipText = "A curved bladed weapon that cuts through flesh with the greatest of ease. (ATK: 10) (Cost: 500)";
 	}
 	if(texts.indexOf("Spear  ") != -1 || texts.indexOf("Spear") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A staff with a sharp blade at the tip designed to pierce through the toughest armor.  This would ignore most armors.  (ATK: 8) (Cost: 450)";
-		return;
+		toolTipText = "A staff with a sharp blade at the tip designed to pierce through the toughest armor.  This would ignore most armors.  (ATK: 8) (Cost: 450)";
 	}
 	if(texts.indexOf("Tail Whip") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Whip your foe with your tail to enrage them and lower their defense!";
-		return;
+		toolTipText = "Whip your foe with your tail to enrage them and lower their defense!";
 	}
 	if(texts.indexOf("Whip   ") != -1 || texts.indexOf("Whip") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A coiled length of leather designed to lash your foes into submission.  There's a chance the bondage inclined might enjoy it! (ATK: 5) (Cost: 500)";
-		return;
+		toolTipText = "A coiled length of leather designed to lash your foes into submission.  There's a chance the bondage inclined might enjoy it! (ATK: 5) (Cost: 500)";
 	}
 	if(texts.indexOf("S.Gaunt") != -1 || texts.indexOf("S.Gauntlet") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This single metal gauntlet has the knuckles tipped with metal spikes.  Though it lacks the damaging potential of other weapons, the sheer pain of its wounds has a chance of stunning your opponent. (ATK: 5) (Cost: 400)";
-		return;
+		toolTipText = "This single metal gauntlet has the knuckles tipped with metal spikes.  Though it lacks the damaging potential of other weapons, the sheer pain of its wounds has a chance of stunning your opponent. (ATK: 5) (Cost: 400)";
 	}
 	
 	if(texts.indexOf("FullChn") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This full suit of chainmail armor covers its wearer from head to toe in protective steel rings.";
-		return;
+		toolTipText = "This full suit of chainmail armor covers its wearer from head to toe in protective steel rings.";
 	}
 	if(texts.indexOf("ChBikni") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A revealing chainmail bikini that barely covers anything.  The bottom half is little more than a triangle of metal and a leather thong.";
-		return;
+		toolTipText = "A revealing chainmail bikini that barely covers anything.  The bottom half is little more than a triangle of metal and a leather thong.";
 	}
 	
 	if(texts.indexOf("SnakOil") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A vial the size of your fist made of dark brown glass. It contains what appears to be an oily, yellowish liquid. The odor is abominable.";
-		return;
+		toolTipText = "A vial the size of your fist made of dark brown glass. It contains what appears to be an oily, yellowish liquid. The odor is abominable.";
 	}
 	if(texts.indexOf("L.Daggr") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A dagger with a short blade in a wavy pattern.  Its edge seems to have been enchanted to always be covered in a light aphrodisiac to arouse anything cut with it.";
-		return;
+		toolTipText = "A dagger with a short blade in a wavy pattern.  Its edge seems to have been enchanted to always be covered in a light aphrodisiac to arouse anything cut with it.";
 	}
 	if(texts.indexOf("KnottyP") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This knotted pepper is very swollen, with a massive, distended knot near the base.";
-		return;
+		toolTipText = "This knotted pepper is very swollen, with a massive, distended knot near the base.";
 	}
 	if(texts.indexOf("BulbyPp") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This bulbous pepper has a slightly different shape than the other canine peppers, with two large orb-like protrusions at the base.";
-		return;
+		toolTipText = "This bulbous pepper has a slightly different shape than the other canine peppers, with two large orb-like protrusions at the base.";
 	}
 	if(texts.indexOf("BlackPp") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This solid black canine pepper is smooth and shiny, but something about it doesn't seem quite right...";
-		return;
+		toolTipText = "This solid black canine pepper is smooth and shiny, but something about it doesn't seem quite right...";
 	}
 	if(texts.indexOf("DblPepp") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This canine pepper is actually two that have grown together due to some freak coincidence.";
-		return;
+		toolTipText = "This canine pepper is actually two that have grown together due to some freak coincidence.";
 	}
 	if(texts.indexOf("LargePp") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This large canine pepper is much bigger than any normal peppers you've seen.";
-		return;
+		toolTipText = "This large canine pepper is much bigger than any normal peppers you've seen.";
 	}
 	if(texts.indexOf("WetClth") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Dripping with a viscous slime, you've no doubt rubbing this cloth on your body would have some kind of strange effect.";
-		return;
+		toolTipText = "Dripping with a viscous slime, you've no doubt rubbing this cloth on your body would have some kind of strange effect.";
 	}
 	if(texts.indexOf("B.Chitn") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A perfect piece of black chitin from a bee-girl.  It still has some fuzz on it.";
-		return;
+		toolTipText = "A perfect piece of black chitin from a bee-girl.  It still has some fuzz on it.";
 	}
 	if(texts.indexOf("BeeArmr") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A suit of armor cleverly fashioned from giant bee chitin.";
-		return;
+		toolTipText = "A suit of armor cleverly fashioned from giant bee chitin.";
 	}
 	if(texts.indexOf("Vital T") != -1 || texts.indexOf("Vitality T.") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This potent tea is supposedly good for the strengthening the body.";
-		return;
+		toolTipText = "This potent tea is supposedly good for the strengthening the body.";
 	}
 	if(texts.indexOf("Smart T") != -1 || texts.indexOf("Scholars T.") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This powerful brew supposedly has mind-strengthening effects.";
-		return;
+		toolTipText = "This powerful brew supposedly has mind-strengthening effects.";
 	}
 	if(texts.indexOf("L.Hammr") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This two-handed warhammer looks pretty devastating.  You took it from Marble after she refused your advances.";
-		return;
+		toolTipText = "This two-handed warhammer looks pretty devastating.  You took it from Marble after she refused your advances.";
 	}
 	if(texts.indexOf("Dual Belt") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This is a strange masturbation device, meant to work every available avenue of stimulation.";
-		return;
+		toolTipText = "This is a strange masturbation device, meant to work every available avenue of stimulation.";
 	}
 	if(texts.indexOf("C. Pole") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This 'centaur pole' as it's called appears to be a sex-toy designed for females of the equine persuasion.  Oddly, it's been sculpted to look like a giant imp, with an even bigger horse-cock.";
-		return;
+		toolTipText = "This 'centaur pole' as it's called appears to be a sex-toy designed for females of the equine persuasion.  Oddly, it's been sculpted to look like a giant imp, with an even bigger horse-cock.";
 	}
 	if(texts.indexOf("Fake Mare") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This fake mare is made of metal and wood, but the anatomically correct vagina looks as soft and wet as any female centaur's.";
-		return;
+		toolTipText = "This fake mare is made of metal and wood, but the anatomically correct vagina looks as soft and wet as any female centaur's.";
 	}
 	if(texts.indexOf("P.LBova") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A bottle containing a misty fluid with a grainy texture; it has a long neck and a ball-like base.  The label has a stylized picture of a well-endowed cow-girl nursing two guys while they jerk themselves off. It has been purified by Rathazul.";
-		return;
+		toolTipText = "A bottle containing a misty fluid with a grainy texture; it has a long neck and a ball-like base.  The label has a stylized picture of a well-endowed cow-girl nursing two guys while they jerk themselves off. It has been purified by Rathazul.";
 	}
 	if(texts.indexOf("L.Draft") != -1 || texts == "LustDraft") {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This vial of bright pink fluid bubbles constantly inside the glass, as if eager to escape.  It smells very sweet, and has \"Lust\" inscribed on the side of the vial.";
-		return;
+		toolTipText = "This vial of bright pink fluid bubbles constantly inside the glass, as if eager to escape.  It smells very sweet, and has \"Lust\" inscribed on the side of the vial.";
 	}
 	if(texts.indexOf("F.Draft") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This vial of red fluid bubbles constantly inside the glass, as if eager to escape.  It smells very strongly, though its odor is difficult to identify.  The word \"Fuck\" is inscribed on the side of the vial.";
-		return;
+		toolTipText = "This vial of red fluid bubbles constantly inside the glass, as if eager to escape.  It smells very strongly, though its odor is difficult to identify.  The word \"Fuck\" is inscribed on the side of the vial.";
 	}
 	if(texts.indexOf("Pipe") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This is a simple rusted pipe of unknown origins.  It's hefty and could probably be used as an effective bludgeoning tool. (ATK: +5) (Cost: 25)";
-		return;
+		toolTipText = "This is a simple rusted pipe of unknown origins.  It's hefty and could probably be used as an effective bludgeoning tool. (ATK: +5) (Cost: 25)";
 	}
 	if(texts.indexOf("Lactaid") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Judging by the name printed on this bottle, 'Lactaid' probably has an effect on the ability to lactate, and you doubt that effect is a reduction.";
-		return;
+		toolTipText = "Judging by the name printed on this bottle, 'Lactaid' probably has an effect on the ability to lactate, and you doubt that effect is a reduction.";
 	}
 	if(texts.indexOf("W. Book") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This white book is totally unmarked, and the cover is devoid of any lettering or title.  A shiny brass clasp keeps the covers closed until you are ready to read it.";
-		return;
+		toolTipText = "This white book is totally unmarked, and the cover is devoid of any lettering or title.  A shiny brass clasp keeps the covers closed until you are ready to read it.";
 	}
 	if(texts.indexOf("B. Book") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This solid black book is totally unmarked, saved for a blood red clasp that holds the covers closed until you are ready to read it.  The pages are edged with gold, like some of the fancy books in the monastary back home.";
-		return;
+		toolTipText = "This solid black book is totally unmarked, saved for a blood red clasp that holds the covers closed until you are ready to read it.  The pages are edged with gold, like some of the fancy books in the monastary back home.";
 	}
 	if(texts.indexOf("LeathrA") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This is a suit of well-made leather armor.  It looks fairly rugged. (+5 Defense)";
-		return;
+		toolTipText = "This is a suit of well-made leather armor.  It looks fairly rugged. (+5 Defense)";
 	}
 	if(texts.indexOf("LaBova ") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A bottle containing a misty fluid with a grainy texture, it has a long neck and a ball-like base.  The label has a stylized picture of a well endowed cowgirl nursing two guys while they jerk themselves off.";
-		return;
+		toolTipText = "A bottle containing a misty fluid with a grainy texture, it has a long neck and a ball-like base.  The label has a stylized picture of a well endowed cowgirl nursing two guys while they jerk themselves off.";
 	}
 	
 	if(texts.indexOf("SDelite") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This precious fluid is often given to men a succubus intends to play with for a long time.";
-		return;
+		toolTipText = "This precious fluid is often given to men a succubus intends to play with for a long time.";
 	}
 	if(texts.indexOf("S.Dream") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This precious fluid is often given to men a succubus intends to play with for a long time, though this batch has been enhanced by Lumi to have even greater potency.";
-		return;
+		toolTipText = "This precious fluid is often given to men a succubus intends to play with for a long time, though this batch has been enhanced by Lumi to have even greater potency.";
 	}
 	if(texts.indexOf("GreenGl") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This tough substance has no obvious use that you can discern.";
-		return;
+		toolTipText = "This tough substance has no obvious use that you can discern.";
 	}
 	if(texts.indexOf("PSDelit") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This precious fluid is often given to men a succubus intends to play with for a long time.  It has been partially purified by Rathazul to prevent corruption.";
-		return;
+		toolTipText = "This precious fluid is often given to men a succubus intends to play with for a long time.  It has been partially purified by Rathazul to prevent corruption.";
 	}
 	if(texts.indexOf("Reducto") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This container full of paste can be used to shrink a body part down by a significant amount.";
-		return;
+		toolTipText = "This container full of paste can be used to shrink a body part down by a significant amount.";
 	}
 	if(texts.indexOf("OviElix") != -1 || texts == "OviElixir") {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This hexagonal crystal bottle is filled with a strange green fluid.  A tag with a picture of an egg is tied to the neck of the bottle, indicating it is somehow connected to egg-laying.";
-		return;
+		toolTipText = "This hexagonal crystal bottle is filled with a strange green fluid.  A tag with a picture of an egg is tied to the neck of the bottle, indicating it is somehow connected to egg-laying.";
 	}
 	if(texts.indexOf("PurHony") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This fine crystal vial is filled with a thick amber liquid that glitters in the light.  You can smell a sweet scent, even though it is tightly corked.";
-		return;
+		toolTipText = "This fine crystal vial is filled with a thick amber liquid that glitters in the light.  You can smell a sweet scent, even though it is tightly corked.";
 	}
 	if(texts.indexOf("BeeHony") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This fine crystal vial is filled with a thick amber liquid that glitters dully in the light.  You can smell a sweet scent, even though it is tightly corked.";
-		return;
+		toolTipText = "This fine crystal vial is filled with a thick amber liquid that glitters dully in the light.  You can smell a sweet scent, even though it is tightly corked.";
 	}
 	if(texts.indexOf("CanineP") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The pepper is shiny and red, bulbous at the base but long and narrow at the tip.  It smells spicy.";
-		return;
+		toolTipText = "The pepper is shiny and red, bulbous at the base but long and narrow at the tip.  It smells spicy.";
 	}
-	if(texts.indexOf("SucMilk") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This milk-bottle is filled to the brim with a creamy white milk of dubious origin.  A pink label proudly labels it as \"<i>Succubi Milk</i>\".  In small text at the bottom of the label it reads: \"<i>To bring out the succubus in YOU!</i>\"";
-		return;
+	if(texts.indexOf("SucMilk") != -1) {			
+		toolTipText = "This milk-bottle is filled to the brim with a creamy white milk of dubious origin.  A pink label proudly labels it as \"<i>Succubi Milk</i>\".  In small text at the bottom of the label it reads: \"<i>To bring out the succubus in YOU!</i>\"";
 	}
-	if(texts.indexOf("P.S.Mlk") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This milk-bottle is filled to the brim with a creamy white milk of dubious origin.  A pink label proudly labels it as \"<i>Succubi Milk</i>\".  In small text at the bottom of the label it reads: \"<i>To bring out the succubus in YOU!</i>\"  Purified by Rathazul to prevent corruption.";
-		return;
+	if(texts.indexOf("P.S.Mlk") != -1) {			
+		toolTipText = "This milk-bottle is filled to the brim with a creamy white milk of dubious origin.  A pink label proudly labels it as \"<i>Succubi Milk</i>\".  In small text at the bottom of the label it reads: \"<i>To bring out the succubus in YOU!</i>\"  Purified by Rathazul to prevent corruption.";
 	}
-	if(texts.indexOf("Cerul P") != -1 || texts.indexOf("Cerulean P.") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This is a mysterious bottle filled with a sky-blue liquid that sloshes gently inside.  Supposedly it will make you irresistible, though to what or who you cannot say.";
-		return;
+	if(texts.indexOf("Cerul P") != -1 || texts.indexOf("Cerulean P.") != -1) {			
+		toolTipText = "This is a mysterious bottle filled with a sky-blue liquid that sloshes gently inside.  Supposedly it will make you irresistible, though to what or who you cannot say.";
 	}
-	if(texts.indexOf("PeppWht") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This tightly corked glass bottle gives of a pepperminty smell and reminds you of the winter holidays.  How odd.";
-		return;
+	if(texts.indexOf("PeppWht") != -1) {			
+		toolTipText = "This tightly corked glass bottle gives of a pepperminty smell and reminds you of the winter holidays.  How odd.";
 	}
-	if(texts.indexOf("IncubiD") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The cork-topped flask swishes with a slimy looking off-white fluid, purported to give incubi-like powers.  A stylized picture of a humanoid with a huge penis is etched into the glass.";
-		return;
+	if(texts.indexOf("IncubiD") != -1) {			
+		toolTipText = "The cork-topped flask swishes with a slimy looking off-white fluid, purported to give incubi-like powers.  A stylized picture of a humanoid with a huge penis is etched into the glass.";
 	}
 	//"M. Milk"
-	if(texts.indexOf("M. Milk") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A clear bottle of milk from Marble's breasts. It smells delicious.";
-		return;
+	if(texts.indexOf("M. Milk") != -1) {			
+		toolTipText = "A clear bottle of milk from Marble's breasts. It smells delicious.";
 	}
-	if(texts.indexOf("P.Draft") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The cork-topped flask swishes with a slimy looking off-white fluid, purported to give incubi-like powers.  A stylized picture of a humanoid with a huge penis is etched into the glass. Rathazul has purified this to prevent corruption upon use.";
-		return;
+	if(texts.indexOf("P.Draft") != -1) {			
+		toolTipText = "The cork-topped flask swishes with a slimy looking off-white fluid, purported to give incubi-like powers.  A stylized picture of a humanoid with a huge penis is etched into the glass. Rathazul has purified this to prevent corruption upon use.";
 	}
-	if(texts.indexOf("TScroll") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This tattered scroll is written in strange symbols, yet you have the feeling that if you tried to, you could decipher it.";
-		return;
+	if(texts.indexOf("TScroll") != -1) {			
+		toolTipText = "This tattered scroll is written in strange symbols, yet you have the feeling that if you tried to, you could decipher it.";
 	}
-	if(texts.indexOf("BrownEg") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This is an oblong egg, not much different from a chicken egg in appearance (save for the color).  Something tells you it's more than just food.";
-		return;
+	if(texts.indexOf("BrownEg") != -1) {			
+		toolTipText = "This is an oblong egg, not much different from a chicken egg in appearance (save for the color).  Something tells you it's more than just food.";
 	}
-	if(texts.indexOf("L.BrnEg") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This is an oblong egg, not much different from an ostrich egg in appearance (save for the color).  Something tells you it's more than just food.";
-		return;
+	if(texts.indexOf("L.BrnEg") != -1) {			
+		toolTipText = "This is an oblong egg, not much different from an ostrich egg in appearance (save for the color).  Something tells you it's more than just food.";
 	}
-	if(texts.indexOf("PurplEg") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This is an oblong egg, not much different from a chicken egg in appearance (save for the color).  Something tells you it's more than just food.";
-		return;
+	if(texts.indexOf("PurplEg") != -1) {			
+		toolTipText = "This is an oblong egg, not much different from a chicken egg in appearance (save for the color).  Something tells you it's more than just food.";
 	}
-	if(texts.indexOf("L.PrpEg") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This is an oblong egg, not much different from an ostrich egg in appearance (save for the color).  Something tells you it's more than just food.";
-		return;
+	if(texts.indexOf("L.PrpEg") != -1) {			
+		toolTipText = "This is an oblong egg, not much different from an ostrich egg in appearance (save for the color).  Something tells you it's more than just food.";
 	}
-	if(texts.indexOf("BlueEgg") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This is an oblong egg, not much different from a chicken egg in appearance (save for the color).  Something tells you it's more than just food.";
-		return;
+	if(texts.indexOf("BlueEgg") != -1) {			
+		toolTipText = "This is an oblong egg, not much different from a chicken egg in appearance (save for the color).  Something tells you it's more than just food.";
 	}
-	if(texts.indexOf("L.BluEg") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This is an oblong egg, not much different from an ostrich egg in appearance (save for the color).  Something tells you it's more than just food.";
-		return;
+	if(texts.indexOf("L.BluEg") != -1) {			
+		toolTipText = "This is an oblong egg, not much different from an ostrich egg in appearance (save for the color).  Something tells you it's more than just food.";
 	}
-	if(texts.indexOf("PinkEgg") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This is an oblong egg, not much different from a chicken egg in appearance (save for the color).  Something tells you it's more than just food.";
-		return;
+	if(texts.indexOf("PinkEgg") != -1) {			
+		toolTipText = "This is an oblong egg, not much different from a chicken egg in appearance (save for the color).  Something tells you it's more than just food.";
 	}
-	if(texts.indexOf("NPnkEgg") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This is an oblong egg with an unnatural neon pink coloration.  It tingles in your hand with odd energies that make you feel as if you could jump straight into the sky.";
-		return;
+	if(texts.indexOf("NPnkEgg") != -1) {			
+		toolTipText = "This is an oblong egg with an unnatural neon pink coloration.  It tingles in your hand with odd energies that make you feel as if you could jump straight into the sky.";
 	}
-	if(texts.indexOf("L.PnkEg") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This is an oblong egg, not much different from an ostrich egg in appearance (save for the color).  Something tells you it's more than just food.";
-		return;
+	if(texts.indexOf("L.PnkEg") != -1) {			
+		toolTipText = "This is an oblong egg, not much different from an ostrich egg in appearance (save for the color).  Something tells you it's more than just food.";
 	}
-	if(texts.indexOf("WhiteEg") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This is an oblong egg, not much different from a chicken egg in appearance.  Something tells you it's more than just food.";
-		return;
+	if(texts.indexOf("WhiteEg") != -1) {			
+		toolTipText = "This is an oblong egg, not much different from a chicken egg in appearance.  Something tells you it's more than just food.";
 	}
-	if(texts.indexOf("L.WhtEg") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This is an oblong egg, not much different from an ostrich egg in appearance.  Something tells you it's more than just food.";
-		return;
+	if(texts.indexOf("L.WhtEg") != -1) {			
+		toolTipText = "This is an oblong egg, not much different from an ostrich egg in appearance.  Something tells you it's more than just food.";
 	}
-	if(texts.indexOf("BlackEg") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This is an oblong egg, not much different from a chicken egg in appearance (save for the color).  Something tells you it's more than just food.";
-		return;
+	if(texts.indexOf("BlackEg") != -1) {			
+		toolTipText = "This is an oblong egg, not much different from a chicken egg in appearance (save for the color).  Something tells you it's more than just food.";
 	}
-	if(texts.indexOf("L.BlkEg") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This is an oblong egg, not much different from an ostrich egg in appearance (save for the color).  Something tells you it's more than just food.  For all you know, it could turn you into rubber!";
-		return;
+	if(texts.indexOf("L.BlkEg") != -1) {			
+		toolTipText = "This is an oblong egg, not much different from an ostrich egg in appearance (save for the color).  Something tells you it's more than just food.  For all you know, it could turn you into rubber!";
 	}
-	if(texts.indexOf("RidingC") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This riding crop appears to be made of black leather, and could be quite a painful (or exciting) weapon.  (ATK: +5) (Cost: 50)";
-		return;
+	if(texts.indexOf("RidingC") != -1) {			
+		toolTipText = "This riding crop appears to be made of black leather, and could be quite a painful (or exciting) weapon.  (ATK: +5) (Cost: 50)";
 	}
-	if(texts.indexOf("L. Axe ") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This massive axe once belonged to a minotaur.  It'd be hard for anyone smaller than a giant to wield effectively.  The axe is double-bladed and deadly-looking.  (ATK: +15) (Cost: 100)";
-		return;
+	if(texts.indexOf("L. Axe ") != -1) {			
+		toolTipText = "This massive axe once belonged to a minotaur.  It'd be hard for anyone smaller than a giant to wield effectively.  The axe is double-bladed and deadly-looking.  (ATK: +15) (Cost: 100)";
 	}
-	if(texts.indexOf("GelArmr") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This suit of interlocking plates is made from a strange green material.  It feels spongy to the touch but is amazingly resiliant.  (DEF: +10) (Cost: 150)";
-		return;
+	if(texts.indexOf("GelArmr") != -1) {			
+		toolTipText = "This suit of interlocking plates is made from a strange green material.  It feels spongy to the touch but is amazingly resiliant.  (DEF: +10) (Cost: 150)";
 	}
-	if(texts.indexOf("B.Sword") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This beautiful sword shines brilliantly in the light, showing the flawless craftsmanship of its blade.  The pommel and guard are heavily decorated in gold and brass.  Some craftsman clearly poured his heart and soul into this blade.  (ATK: +Varies) (Cost: 400)";
-		return;
+	if(texts.indexOf("B.Sword") != -1) {			
+		toolTipText = "This beautiful sword shines brilliantly in the light, showing the flawless craftsmanship of its blade.  The pommel and guard are heavily decorated in gold and brass.  Some craftsman clearly poured his heart and soul into this blade.  (ATK: +Varies) (Cost: 400)";
 	}
-	if(texts.indexOf("C.Cloth") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "These loose fitting and comfortable clothes allow you to move freely while protecting you from the elements.  (DEF: +0) (Cost: 0)";
-		return;
+	if(texts.indexOf("C.Cloth") != -1) {			
+		toolTipText = "These loose fitting and comfortable clothes allow you to move freely while protecting you from the elements.  (DEF: +0) (Cost: 0)";
 	}
-	if(texts.indexOf("ClssyCl") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A set of classy suitclothes.";
-		return;
+	if(texts.indexOf("ClssyCl") != -1) {			
+		toolTipText = "A set of classy suitclothes.";
 	}
-	if(texts.indexOf("RbbrClt") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A revealing set of fetish-wear.  Upgrades tease attack to seduce.";
-		return;
+	if(texts.indexOf("RbbrClt") != -1) {			
+		toolTipText = "A revealing set of fetish-wear.  Upgrades tease attack to seduce.";
 	}
-	if(texts.indexOf("FurLoin") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A pair of loincloths to cover your crotch and " + buttDescript() + ".  Typically worn by people named 'Conan'.";
-		return;
+	if(texts.indexOf("FurLoin") != -1) {			
+		toolTipText = "A pair of loincloths to cover your crotch and " + buttDescript() + ".  Typically worn by people named 'Conan'.";
 	}
-	if(texts.indexOf("AdvClth") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A set of comfortable green adventurer's clothes.  It even comes complete with a pointy hat!";
-		return;
+	if(texts.indexOf("AdvClth") != -1) {			
+		toolTipText = "A set of comfortable green adventurer's clothes.  It even comes complete with a pointy hat!";
 	}
-	if(texts.indexOf("TubeTop") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A clingy tube top and VERY short shorts.";
-		return;
+	if(texts.indexOf("TubeTop") != -1) {			
+		toolTipText = "A clingy tube top and VERY short shorts.";
 	}
-	if(texts.indexOf("Overall") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A simple white shirt and overalls.";
-		return;
+	if(texts.indexOf("Overall") != -1) {			
+		toolTipText = "A simple white shirt and overalls.";
 	}
 
-	if(texts.indexOf("B.Dress") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A long ballroom dress patterned with sequins.  Perfect for important occassions.";
-		return;
+	if(texts.indexOf("B.Dress") != -1) {			
+		toolTipText = "A long ballroom dress patterned with sequins.  Perfect for important occassions.";
 	}
-	if(texts.indexOf("T.BSuit") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A semi-transparent bodysuit.";
-		return;
+	if(texts.indexOf("T.BSuit") != -1) {			
+		toolTipText = "A semi-transparent bodysuit.";
 	}
-	if(texts.indexOf("M.Robes") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A set of modest robes, not dissimilar from what the monks back home would wear.";
-		return;
+	if(texts.indexOf("M.Robes") != -1) {			
+		toolTipText = "A set of modest robes, not dissimilar from what the monks back home would wear.";
 	}
-	if(texts.indexOf("LthrPnt") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "A flowing silk shirt and tight black leather pants.  Suave!";
-		return;
+	if(texts.indexOf("LthrPnt") != -1) {			
+		toolTipText = "A flowing silk shirt and tight black leather pants.  Suave!";
 	}
 	if(texts.indexOf("S.Swmwr") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "An impossibly skimpy black bikini. You feel dirty just looking at it… and a little aroused, actually.";
-		return;
+		toolTipText = "An impossibly skimpy black bikini. You feel dirty just looking at it… and a little aroused, actually.";
 	}
 	if(texts.indexOf("Red Dye") != -1 || texts.indexOf("Blond D") != -1 || 
         texts.indexOf("Black D") != -1 || texts.indexOf("Brown D") != -1 || 
 		texts.indexOf("AuburnD") != -1 || texts.indexOf("GrayDye") != -1 ||
 		texts.indexOf("PinkDye") != -1 || texts.indexOf("BlueDye") != -1 ||
-		texts.indexOf("OrangDy") != -1 || texts.indexOf("PurpDye") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.";
-		return;
+		texts.indexOf("OrangDy") != -1 || texts.indexOf("PurpDye") != -1) {			
+		toolTipText = "This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.";
 	}
 	//Combat
 	//COMBAT
 	//combat
-	if(texts == "Attack") {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Attempt to attack the enemy with your " + player.weaponName + ".  Damage done is determined by your strength and weapon.";
-		return;
+	if(texts == "Attack") {			
+		toolTipText = "Attempt to attack the enemy with your " + player.weaponName + ".  Damage done is determined by your strength and weapon.";
 	}
-	if(texts == "Kiss") {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Attempt to kiss your foe on the lips with drugged lipstick.  It has no effect on those without a penis.";
-		return;
+	if(texts == "Kiss") {			
+		toolTipText = "Attempt to kiss your foe on the lips with drugged lipstick.  It has no effect on those without a penis.";
 	}
-	if(texts.indexOf("LustStk") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This tube of golden lipstick is used by harpies to keep males aroused.  It has aphrodisiac properties on anyone with male genitalia and is most effective when applied to the lips or groin.";
-		return;
+	if(texts.indexOf("LustStk") != -1) {			
+		toolTipText = "This tube of golden lipstick is used by harpies to keep males aroused.  It has aphrodisiac properties on anyone with male genitalia and is most effective when applied to the lips or groin.";
 	}
-	if(texts == "Tease") {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Attempt to make an enemy more aroused by striking a seductive pose and exposing parts of your body.";
-		return;
+	if(texts == "Tease") {			
+		toolTipText = "Attempt to make an enemy more aroused by striking a seductive pose and exposing parts of your body.";
 	}
-	if(texts == "Kick") {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Attempt to kick an enemy using your powerful lower body.";
-		return;
+	if(texts == "Kick") {			
+		toolTipText = "Attempt to kick an enemy using your powerful lower body.";
 	}
-	if(texts == "Combo") {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Make a three-hit combo.  Each attack has an extra 33% chance to miss, unless the target is blind. (25 Fatigue)";
-		return;
+	if(texts == "Combo") {			
+		toolTipText = "Make a three-hit combo.  Each attack has an extra 33% chance to miss, unless the target is blind. (25 Fatigue)";
 	}
-	if(texts == "Vault") {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Make a vaulting attack for an extra 25% damage.  Automatically crits stunned foes.  (20 Fatigue)";
-		return;
+	if(texts == "Vault") {			
+		toolTipText = "Make a vaulting attack for an extra 25% damage.  Automatically crits stunned foes.  (20 Fatigue)";
 	}
-	if(texts == "Sidewinder") {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "An attack that hits for reduced damage but has a high chance of stunning. (10 Fatigue)";
-		return;
+	if(texts == "Sidewinder") {			
+		toolTipText = "An attack that hits for reduced damage but has a high chance of stunning. (10 Fatigue)";
 	}
-	if(texts == "Dirt Kick") {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Attempt to blind your foe with a spray of kicked dirt. (5 Fatigue)";
-		return;
+	if(texts == "Dirt Kick") {			
+		toolTipText = "Attempt to blind your foe with a spray of kicked dirt. (5 Fatigue)";
 	}
-	if(texts == "Metabolize") {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Convert 10% of your maximum HP into fatigue.";
-		return;
+	if(texts == "Metabolize") {			
+		toolTipText = "Convert 10% of your maximum HP into fatigue.";
 	}
-	if(texts == "SecondWind") {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Regain 50% of your HP, 50 fatigue, and reduce lust by 50 once per fight.";
-		return;
+	if(texts == "SecondWind") {			
+		toolTipText = "Regain 50% of your HP, 50 fatigue, and reduce lust by 50 once per fight.";
 	}
-	if(texts.indexOf("AnemoneSting") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Attempt to strike an opponent with the stinging tentacles growing from your scalp.  Reduces enemy speed and increases enemy lust.";
-		return;
+	if(texts.indexOf("AnemoneSting") != -1) {			
+		toolTipText = "Attempt to strike an opponent with the stinging tentacles growing from your scalp.  Reduces enemy speed and increases enemy lust.";
 	}
-	if(texts.indexOf("P. Specials") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Physical special attack menu.";
-		return;
+	if(texts.indexOf("P. Specials") != -1) {			
+		toolTipText = "Physical special attack menu.";
 	}
-	if(texts.indexOf("M. Specials") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Mental and supernatural special attack menu.";
-		return;
+	if(texts.indexOf("M. Specials") != -1) {			
+		toolTipText = "Mental and supernatural special attack menu.";
 	}
-	if(texts == "Berzerk") {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Throw yourself into a rage!  Greatly increases the strength of your weapon and increases lust resistance, but your armor defense is reduced to zero!";
-		return;
+	if(texts == "Berzerk") {			
+		toolTipText = "Throw yourself into a rage!  Greatly increases the strength of your weapon and increases lust resistance, but your armor defense is reduced to zero!";
 	}
-	if(texts.indexOf("Possess") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Attempt to temporarily possess a foe and force them to raise their own lusts.";
-		return;
+	if(texts.indexOf("Possess") != -1) {			
+		toolTipText = "Attempt to temporarily possess a foe and force them to raise their own lusts.";
 	}
-	if(texts.indexOf("Constrict") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Attempt to bind an enemy in your long snake-tail.";
-		return;
+	if(texts.indexOf("Constrict") != -1) {			
+		toolTipText = "Attempt to bind an enemy in your long snake-tail.";
 	}
-	if(texts.indexOf("Gore") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Lower your head and charge your opponent, attempting to gore them on your horns.  This attack is stronger and easier to land with large horns.";
-		return;
+	if(texts.indexOf("Gore") != -1) {			
+		toolTipText = "Lower your head and charge your opponent, attempting to gore them on your horns.  This attack is stronger and easier to land with large horns.";
 	}
-	if(texts.indexOf("Fantasize") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Fantasize about your opponent in a sexual way.  Its probably a pretty bad idea to do this unless you want to end up getting raped.";
-		return;
+	if(texts.indexOf("Fantasize") != -1) {			
+		toolTipText = "Fantasize about your opponent in a sexual way.  Its probably a pretty bad idea to do this unless you want to end up getting raped.";
 	}
-	if(texts.indexOf("Charge W.") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The Charge Weapon spell will surround your weapon in electrical energy, causing it to do even more damage.  The effect lasts for the entire combat.  (Fatigue Cost: " + spellCost(15) + ")";
-		return;
+	if(texts.indexOf("Charge W.") != -1) {			
+		toolTipText = "The Charge Weapon spell will surround your weapon in electrical energy, causing it to do even more damage.  The effect lasts for the entire combat.  (Fatigue Cost: " + spellCost(15) + ")";
 	}
-	if(texts.indexOf("Blind") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Blind is a fairly self-explanatory spell.  It will create a bright flash just in front of the victim's eyes, blinding them for a time.  However if they blink it will be wasted.  (Fatigue Cost: " + spellCost(20) + ")";
-		return;
+	if(texts.indexOf("Blind") != -1) {			
+		toolTipText = "Blind is a fairly self-explanatory spell.  It will create a bright flash just in front of the victim's eyes, blinding them for a time.  However if they blink it will be wasted.  (Fatigue Cost: " + spellCost(20) + ")";
 	}
-	if(texts.indexOf("Whitefire") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Whitefire is a potent fire based attack that will burn your foe with flickering white flames, ignoring their physical toughness and most armors.  (Fatigue Cost: " + spellCost(30) + ")";
-		return;
+	if(texts.indexOf("Whitefire") != -1) {			
+		toolTipText = "Whitefire is a potent fire based attack that will burn your foe with flickering white flames, ignoring their physical toughness and most armors.  (Fatigue Cost: " + spellCost(30) + ")";
 	}
 	if(texts.indexOf("Aroused") != -1) {
-		return;
 	}
-	if(texts.indexOf("Arouse") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The arouse spell draws on your own inner lust in order enflame the enemy's passions.  (Fatigue Cost: " + spellCost(15) + ")";
-		return;
+	if(texts.indexOf("Arouse") != -1) {			
+		toolTipText = "The arouse spell draws on your own inner lust in order enflame the enemy's passions.  (Fatigue Cost: " + spellCost(15) + ")";
 	}
-	if(texts == "Heal") {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  (Fatigue Cost: " + spellCost(20) + ")";
-		return;
+	if(texts == "Heal") {			
+		toolTipText = "Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  (Fatigue Cost: " + spellCost(20) + ")";
 	}
-	if(texts.indexOf("Might") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The Might spell draws upon your lust and uses it to fuel a temporary increase in muscle size and power.  It does carry the risk of backfiring and raising lust, like all black magic used on oneself.  (Fatigue Cost: " + spellCost(25) + ")";
-		return;
+	if(texts.indexOf("Might") != -1) {			
+		toolTipText = "The Might spell draws upon your lust and uses it to fuel a temporary increase in muscle size and power.  It does carry the risk of backfiring and raising lust, like all black magic used on oneself.  (Fatigue Cost: " + spellCost(25) + ")";
 	}
 	//Wait
-	if(texts.indexOf("Wait") != -1 && gameState > 0) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Take no action for this round.  Why would you do this.  This is a terrible idea.";
-		return;
+	if(texts.indexOf("Wait") != -1 && gameState > 0) {			
+		toolTipText = "Take no action for this round.  Why would you do this.  This is a terrible idea.";
 	}
 	//Sting
-	if(texts.indexOf("Sting") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Attempt to use your venomous bee stinger on an enemy.  Be aware it takes quite a while for your venom to build up, so depending on your abdomen's refractory period, you may have to wait quite a while between stings.  Venom: " + Math.floor(player.tailVenom) + "/100";
-		return;
+	if(texts.indexOf("Sting") != -1) {			
+		toolTipText = "Attempt to use your venomous bee stinger on an enemy.  Be aware it takes quite a while for your venom to build up, so depending on your abdomen's refractory period, you may have to wait quite a while between stings.  Venom: " + Math.floor(player.tailVenom) + "/100";
 	}
 	//Web
-	if(texts.indexOf("Web") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Attempt to use your abdomen to spray sticky webs at an enemy and greatly slow them down.  Be aware it takes a while for your webbing to build up.  Web Amount: " + Math.floor(player.tailVenom) + "/100";
-		return;
+	if(texts.indexOf("Web") != -1) {			
+		toolTipText = "Attempt to use your abdomen to spray sticky webs at an enemy and greatly slow them down.  Be aware it takes a while for your webbing to build up.  Web Amount: " + Math.floor(player.tailVenom) + "/100";
 	}
 	if(texts.indexOf("Infest") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The infest attack allows you to cum at will, launching a stream of semen and worms at your opponent in order to infest them.  Unless your foe is very aroused they are likely to simply avoid it.  Only works on males or herms.";
-		return;
+		toolTipText = "The infest attack allows you to cum at will, launching a stream of semen and worms at your opponent in order to infest them.  Unless your foe is very aroused they are likely to simply avoid it.  Only works on males or herms.";
 	}
-	if(texts.indexOf("Spells") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Opens your spells menu, where you can cast any spells you have learned.  Beware, casting spells increases your fatigue, and if you become exhausted you will be easier to defeat.";
-		return;
+	if(texts.indexOf("Spells") != -1) {			
+		toolTipText = "Opens your spells menu, where you can cast any spells you have learned.  Beware, casting spells increases your fatigue, and if you become exhausted you will be easier to defeat.";
 	}
-	if(texts.indexOf("Defend") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Selecting defend will reduce the damage you take by 66 percent, but will not affect any lust incurred by your enemy's actions.";
-		return;
+	if(texts.indexOf("Defend") != -1) {			
+		toolTipText = "Selecting defend will reduce the damage you take by 66 percent, but will not affect any lust incurred by your enemy's actions.";
 	}
-	if(texts == "Run") {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Choosing to run will let you try to escape from your enemy. However, it will be hard to escape enemies that are faster than you and if you fail, your enemy will get a free attack.";
-		return;
+	if(texts == "Run") {			
+		toolTipText = "Choosing to run will let you try to escape from your enemy. However, it will be hard to escape enemies that are faster than you and if you fail, your enemy will get a free attack.";
 	}
-	if(texts.indexOf("Inventory") != -1) {
-		positionMOB(e.target.x, e.target.y)		
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.";
-		return;
+	if(texts.indexOf("Inventory") != -1) {		
+		toolTipText = "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.";
 	}
-	if(texts.indexOf("AutoSav") != -1) {
-		positionMOB(e.target.x, e.target.y)		
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "When autosave is on the game will automatically save your character each night at midnight to the last slot it was saved in.";
-		if(texts.indexOf("ON") != -1) mouseOverText.htmlText += " Autosave is currently enabled.  Your game will be saved at midnight.";
-		if(texts.indexOf("OFF") != -1) mouseOverText.htmlText += " Autosave is currently off.  Your game will NOT be saved.";
-		return;
+	if(texts.indexOf("AutoSav") != -1) {		
+		toolTipText = "When autosave is on the game will automatically save your character each night at midnight to the last slot it was saved in.";
+		if(texts.indexOf("ON") != -1) toolTipText += " Autosave is currently enabled.  Your game will be saved at midnight.";
+		if(texts.indexOf("OFF") != -1) toolTipText += " Autosave is currently off.  Your game will NOT be saved.";
 	}
-	if(texts.indexOf("Retrieve") != -1) {
-		positionMOB(e.target.x, e.target.y)		
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Retrieve allows you to take an item from one of the reserve stacks in your camp's additional storage.";
-		return;
+	if(texts.indexOf("Retrieve") != -1) {		
+		toolTipText = "Retrieve allows you to take an item from one of the reserve stacks in your camp's additional storage.";
 	}
-	if(texts.indexOf("Storage") != -1) {
-		positionMOB(e.target.x, e.target.y)		
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Storage will allow you to dump a stack of items from your inventory into your storage chest.";
-		return;
+	if(texts.indexOf("Storage") != -1) {		
+		toolTipText = "Storage will allow you to dump a stack of items from your inventory into your storage chest.";
 	}
-	if(texts.indexOf("Sand Facial") != -1) {
-		positionMOB(e.target.x, e.target.y)		
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "The goblins promise this facial will give you a rough, handsome look thanks to their special, timeless sands.";
-		return;
+	if(texts.indexOf("Sand Facial") != -1) {		
+		toolTipText = "The goblins promise this facial will give you a rough, handsome look thanks to their special, timeless sands.";
 	}
-	if(texts.indexOf("Mud Facial") != -1) {
-		positionMOB(e.target.x, e.target.y)		
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This facial is supposed to enhance the softness of your face and enhance its femininity greatly.";
-		return;
+	if(texts.indexOf("Mud Facial") != -1) {		
+		toolTipText = "This facial is supposed to enhance the softness of your face and enhance its femininity greatly.";
 	}
 	//Masturbation Toys
 	if(texts == "Masturbate") {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Selecting this option will attempt to manually masturbate in order to relieve your lust buildup.";
-		return;
+		toolTipText = "Selecting this option will attempt to manually masturbate in order to relieve your lust buildup.";
 	}
 	if(texts == "Meditate") {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Selecting this option will attempt to meditate in order to reduce lust and corruption.";
-		return;
+		toolTipText = "Selecting this option will attempt to meditate in order to reduce lust and corruption.";
 	}
 	if(texts.indexOf("AN Stim-Belt") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This is an all-natural self-stimulation belt.  The methods used to create such a pleasure device are unknown.  It seems to be organic in nature.";
-		return;
+		toolTipText = "This is an all-natural self-stimulation belt.  The methods used to create such a pleasure device are unknown.  It seems to be organic in nature.";
 	}
 	if(texts.indexOf("Stim-Belt") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This is a self-stimulation belt.  Commonly referred to as stim-belts, these are clockwork devices designed to pleasure the female anatomy.";
-		return;
+		toolTipText = "This is a self-stimulation belt.  Commonly referred to as stim-belts, these are clockwork devices designed to pleasure the female anatomy.";
 	}
 	if(texts.indexOf("AN Onahole") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "An all-natural onahole, this device looks more like a bulbous creature than a sex-toy.  Never-the-less, the slick orifice it presents looks very inviting.";
-		return;
+		toolTipText = "An all-natural onahole, this device looks more like a bulbous creature than a sex-toy.  Never-the-less, the slick orifice it presents looks very inviting.";
 	}
 	if(texts.indexOf("D Onahole") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This is a deluxe onahole, made of exceptional materials and with the finest craftsmanship in order to bring its user to the height of pleasure.";
-		return;
+		toolTipText = "This is a deluxe onahole, made of exceptional materials and with the finest craftsmanship in order to bring its user to the height of pleasure.";
 	}
 	if(texts.indexOf("Onahole") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This is what is called an 'onahole'.  This device is a simple textured sleeve designed to fit around the male anatomy in a pleasurable way.";
-		return;
+		toolTipText = "This is what is called an 'onahole'.  This device is a simple textured sleeve designed to fit around the male anatomy in a pleasurable way.";
 	}
 	if(texts == "Jojo") {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		if(monk >= 5) mouseOverText.htmlText = "Call your corrupted pet into camp in order to relieve your desires in a variety of sexual positions?  He's ever so willing after your last encounter with him.";
-		else mouseOverText.htmlText = "Go find Jojo around the edges of your camp and meditate with him or talk about watch duty.";
-		return;
+		if(monk >= 5) toolTipText = "Call your corrupted pet into camp in order to relieve your desires in a variety of sexual positions?  He's ever so willing after your last encounter with him.";
+		else toolTipText = "Go find Jojo around the edges of your camp and meditate with him or talk about watch duty.";
 	}
 	if(texts == "Marble") {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Go to Marble the cowgirl for talk and companionship.";
-		return;
+		toolTipText = "Go to Marble the cowgirl for talk and companionship.";
 	}
 	//Books
 	if(texts.indexOf("Dangerous Plants") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This is a book titled 'Dangerous Plants'.  As explained by the title, this tome is filled with information on all manner of dangerous plants from this realm.";
-		return;
+		toolTipText = "This is a book titled 'Dangerous Plants'.  As explained by the title, this tome is filled with information on all manner of dangerous plants from this realm.";
 	}
 	if(texts.indexOf("Traveler's Guide") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This traveler's guide is more of a pamphlet than an actual book, but it still contains some useful information on avoiding local pitfalls.";
-		return;
+		toolTipText = "This traveler's guide is more of a pamphlet than an actual book, but it still contains some useful information on avoiding local pitfalls.";
 	}
 	if(texts.indexOf("Yoga Guide") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This leather-bound book is titled 'Yoga for Non-Humanoids.' It contains numerous illustrations of centaurs, nagas and various other oddly-shaped beings in a variety of poses.";
-		return;
+		toolTipText = "This leather-bound book is titled 'Yoga for Non-Humanoids.' It contains numerous illustrations of centaurs, nagas and various other oddly-shaped beings in a variety of poses.";
 	}
 	if(texts.indexOf("Hentai Comic") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "This oddly drawn comic book is filled with images of fornication, sex, and overly large eyeballs.";
-		return;
+		toolTipText = "This oddly drawn comic book is filled with images of fornication, sex, and overly large eyeballs.";
 	}
 	//CAMP STUFF
 	if(texts.indexOf("Followers") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Check up on any followers or companions who are joining you in or around your camp.  You'll probably just end up sleeping with them.";
-		return;
+		toolTipText = "Check up on any followers or companions who are joining you in or around your camp.  You'll probably just end up sleeping with them.";
 	}
 	//Marble
 	if(texts.indexOf("Marble (Sex)") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Get with marble for a quick cuddle and some sex.";
-		return;
+		toolTipText = "Get with marble for a quick cuddle and some sex.";
 	}
 	//Rathazul
 	if(texts.indexOf("Rathazul") != -1) {
-		positionMOB(e.target.x, e.target.y)
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Visit with Rathazul to see what alchemical supplies and services he has available at the moment.";
-		return;
+		toolTipText = "Visit with Rathazul to see what alchemical supplies and services he has available at the moment.";
 	}
 	//Title screen
-	if(texts.indexOf("Toggle Debug") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Turn on debug mode.  Debug mode is intended for testing purposes but can be thought of as a cheat mode.  Items are infinite and combat is easy to escape from.  Weirdness and bugs are to be expected.";
-		return;
+	if(texts.indexOf("Toggle Debug") != -1) {			
+		toolTipText = "Turn on debug mode.  Debug mode is intended for testing purposes but can be thought of as a cheat mode.  Items are infinite and combat is easy to escape from.  Weirdness and bugs are to be expected.";
 	}
-	if(texts.indexOf("Credits") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "See a list of all the cool people who have contributed to content for this game!";
-		return;
+	if(texts.indexOf("Credits") != -1) {			
+		toolTipText = "See a list of all the cool people who have contributed to content for this game!";
 	}
-	if(texts.indexOf("Instructions") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "How to play.  Starting tips.  And hotkeys for easy left-handed play...";
-		return;
+	if(texts.indexOf("Instructions") != -1) {			
+		toolTipText = "How to play.  Starting tips.  And hotkeys for easy left-handed play...";
 	}
-	if(texts.indexOf("Settings") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "Configure game settings and enable cheats.";
-		return;
+	if(texts.indexOf("Settings") != -1) {			
+		toolTipText = "Configure game settings and enable cheats.";
 	}
-	if(texts.indexOf("ASPLODE") != -1) {
-		positionMOB(e.target.x, e.target.y)			
-		mouseOverText.visible = true;
-		popUpBG.visible = true;
-		mouseOverText.htmlText = "MAKE SHIT ASPLODE";
-		return;
+	if(texts.indexOf("ASPLODE") != -1) {			
+		toolTipText = "MAKE SHIT ASPLODE";
 	}
-	mouseOverText.visible = false;
-	popUpBG.visible = false;
+
+	if( toolTipText ) {
+		//positionMOB(e.target.x, e.target.y);
+		//mouseOverText.text = toolTipText;
+		//mouseOverText.visible = true;
+		//popUpBG.visible = true;
+	}
+	else {
+		//mouseOverText.visible = false;
+		//popUpBG.visible = false;		
+	}
 }
 function positionMOB(Ex:Number, Why:Number):void {
 	if(!mobile) {
@@ -3666,8 +2580,7 @@ function addButton(pos:int, text:String = "", func1:Function = null, arg1 = -900
 	funcs[pos] = func1;
 	args[pos] = arg1;
 	buttonSetup(pos,text);
-	mainText.htmlText = currentText;
-	scrollBar.update();
+	this.mainView.setOutputText( currentText );
 }
 
 function buttonSetup(pos:int,text1:String = ""):void {
@@ -3988,8 +2901,8 @@ function menu(text1:String = "", func1:Function = null, arg1:Number = -9000, tex
 		b0Text.visible = true;
 		gButtons[9].visible = true;
 	}
-	mainText.htmlText = currentText;
-	scrollBar.update();
+
+	this.mainView.setOutputText( currentText );
 }
 
 
@@ -4060,8 +2973,7 @@ function choices(text1:String, butt1:*,
 
 	funcs = new Array();
 	args = new Array();
-	mainText.htmlText = currentText;
-	scrollBar.update();
+	this.mainView.setOutputText( currentText );
 }
 
 // simpleChoices and doYesNo are convenience functions. They shouldn't re-implement code from choices()
