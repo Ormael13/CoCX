@@ -12,206 +12,145 @@ planned syntax:
 
 */
 
+var singleArgConverters:Object = {
+		"armor"			: function():* {return player.armorName;},
+		"armorName"		: function():* {return player.armorName;},
+		"weapon"		: function():* {return player.weaponName;},
+		"weaponName"	: function():* {return player.weaponName;},
+		"name"			: function():* {return player.short;},
+		"pg"			: function():* {return "\n\n";},
+		"asshole"		: function():* {return assholeDescript();},
+		"butthole"		: function():* {return assholeDescript();},
+		"hair"			: function():* { return hairDescript(); },
+		"face"			: function():* { return player.face(); },
+		"legs"			: function():* { return player.legs(); },
+		"leg"			: function():* { return player.leg(); },
+		"feet"			: function():* { return player.feet(); },
+		"foot"			: function():* { return player.foot(); },
+		"sack"			: function():* { return sackDescript(); },
+		"balls"			: function():* { return ballsDescriptLight(); },
+		"sheath"		: function():* { return sheathDesc(); },
+		"chest"			: function():* { return chestDesc(); },
+		"fullChest"		: function():* { return allChestDesc(); },
+		"hips"			: function():* {return hipDescript();},
+		"butt"			: function():* { return buttDescript();},
+		"ass"			: function():* { return buttDescript();},
+		"nipple"		: function():* { return nippleDescript(0);},
+		"nipples"		: function():* { return nippleDescript(0) + "s";},
+		"tongue"		: function():* { return tongueDescript();},
+		"Evade"			: function():* { return "[Evade]"; },
+		"Misdirection"	: function():* { return "[Misdirection]"; },
+		"Agility"		: function():* { return "[Agility]"; },
+		"master"		: function():* { return player.mf("master","mistress"); },
+		"Master"		: function():* { return player.mf("Master","Mistress"); },
+		"his"			: function():* { return player.mf("his","her"); },
+		"His"			: function():* { return player.mf("His","Her"); },
+		"he"			: function():* { return player.mf("he","she"); },
+		"He"			: function():* { return player.mf("He","She"); },
+		"him"			: function():* { return player.mf("him","her"); },
+		"Him"			: function():* { return player.mf("Him","Her"); },
 
-function convertSingleArg(inStr:String):String
+		"cunt"			: function():* {if(player.hasVagina()) return vaginaDescript();
+										else return "<b>(Attempt to parse vagina when none present.)</b>";},
+		"cocks"			: function():* {if(player.hasCock()) return multiCockDescriptLight();
+										else return "<b>(Attempt to parse cocks when none present.)</b>";},
+		"pussy"			: function():* {if(player.hasVagina()) return vaginaDescript();
+										else return "<b>(Attempt to parse vagina when none present.)</b>";},
+		"vagina"		: function():* {if(player.hasVagina()) return vaginaDescript();
+										else return "<b>(Attempt to parse vagina when none present.)</b>";},
+		"vag"			: function():* {if(player.hasVagina()) return vaginaDescript();
+										else return "<b>(Attempt to parse vagina when none present.)</b>";},
+		"clit"			: function():* {if(player.hasVagina()) return clitDescript();
+										else return "<b>(Attempt to parse clit when none present.)</b>";},
+		"vagOrAss"		: function():* {if (player.hasVagina())return vaginaDescript();
+										else assholeDescript();},
+		"cock"			: function():* {if(player.hasCock()) return cockDescript(0);
+										else return "<b>(Attempt to parse cock when none present.)</b>";},
+		"eachCock"		: function():* {if(player.hasCock()) return sMultiCockDesc();
+										else return "<b>(Attempt to parse eachCock when none present.)</b>";},
+		"EachCock"		: function():* {if(player.hasCock()) return SMultiCockDesc();
+										else return "<b>(Attempt to parse eachCock when none present.)</b>";},
+		"oneCock"		: function():* {if(player.hasCock()) return oMultiCockDesc();
+										else return "<b>(Attempt to parse eachCock when none present.)</b>";},
+		"OneCock"		: function():* {if(player.hasCock()) return OMultiCockDesc();
+										else return "<b>(Attempt to parse eachCock when none present.)</b>";},
+		"cockHead"		: function():* {if(player.hasCock()) return cockHead(0);
+										else return "<b>(Attempt to parse cockhead when none present.)</b>";}
+
+
+}
+
+function convertSingleArg(arg:String):String
 {
+	var debug = true;
+	var argResult:String;
 
-	var retStr:String;
-	//Same as param tags, but without the param
-	switch(inStr)
+	if (arg in singleArgConverters)
 	{
-		case "armor":
-		case "armorName":
-			retStr = player.armorName;
-			break;
-		case "weapon":
-		case "weaponName":
-			retStr = player.weaponName;
-			break;
-		case "name":
-			retStr = player.short;
-			break;
-		case "pg":
-			retStr = "\n\n";
-			break;
-		case "asshole":
-			retStr = assholeDescript();
-			break;
-		case "butthole":
-			retStr = assholeDescript();
-			break;
-		case "cunt":
-			if(player.hasVagina()) 
-				retStr = vaginaDescript();
-			else 
-				retStr = "<b>(Attempt to parse vagina when none present.)</b>";
-			break;
-		case "cocks":
-			if(player.hasCock()) 
-				retStr = multiCockDescriptLight();
-			else 
-				retStr = "<b>(Attempt to parse cocks when none present.)</b>";
-			break;
-		case "pussy":
-			if(player.hasVagina()) 
-				retStr = vaginaDescript();
-			else 
-				retStr = "<b>(Attempt to parse vagina when none present.)</b>";
-			break;
-		case "vagina":
-			if(player.hasVagina()) 
-				retStr = vaginaDescript();
-			else 
-				retStr = "<b>(Attempt to parse vagina when none present.)</b>";
-			break;
-		case "vag":
-			if(player.hasVagina()) 
-				retStr = vaginaDescript();
-			else 
-				retStr = "<b>(Attempt to parse vagina when none present.)</b>";
-			break;
-		case "clit":
-			if(player.hasVagina()) 
-				retStr = clitDescript();
-			else 
-				retStr = "<b>(Attempt to parse clit when none present.)</b>";
-			break;
-		case "vagOrAss":
-			if (player.hasVagina())
-				retStr = vaginaDescript();
-			else
-				retStr = assholeDescript();
-			break;
-		case "hair":
-			retStr = hairDescript();
-			break;
-		case "face":
-			retStr = player.face();
-			break;
-		case "legs":
-			retStr = player.legs();
-			break;
-		case "leg":
-			retStr = player.leg();
-			break;
-		case "feet":
-			retStr = player.feet();
-			break;
-		case "foot":
-			retStr = player.foot();
-			break;
-		case "sack":
-			retStr = sackDescript();
-			break;
-		case "balls":
-			retStr = ballsDescriptLight();
-			break;
-		case "sheath":
-			retStr = sheathDesc();
-			break;
-		case "chest":
-			retStr = chestDesc();
-			break;
-		case "fullChest":
-			retStr = allChestDesc();
-			break;
-		case "hips":
-			retStr = hipDescript();
-			break;
-		case "butt":
-			retStr = buttDescript();
-			break;
-		case "ass":
-			retStr = buttDescript();
-			break;
-		case "nipple":
-			retStr = nippleDescript(0);
-			break;
-		case "nipples":
-			retStr = nippleDescript(0) + "s";
-			break;
-		case "tongue":
-			retStr = tongueDescript();
-			break;
-		case "cock":
-			if(player.hasCock()) 
-				retStr = cockDescript(0);
-			else 
-				retStr = "<b>(Attempt to parse cock when none present.)</b>";
-			break;
-		case "eachCock":
-			if(player.hasCock()) 
-				retStr = sMultiCockDesc();
-			else 
-				retStr = "<b>(Attempt to parse eachCock when none present.)</b>";
-			break;
-		case "EachCock":
-			if(player.hasCock()) 
-				retStr = SMultiCockDesc();
-			else 
-				retStr = "<b>(Attempt to parse eachCock when none present.)</b>";
-			break;
-		case "oneCock":
-			if(player.hasCock()) 
-				retStr = oMultiCockDesc();
-			else 
-				retStr = "<b>(Attempt to parse eachCock when none present.)</b>";
-			break;
-		case "OneCock":
-			if(player.hasCock()) 
-				retStr = OMultiCockDesc();
-			else 
-				retStr = "<b>(Attempt to parse eachCock when none present.)</b>";
-			break;
-		case "cockHead":
-			if(player.hasCock()) 
-				retStr = cockHead(0);
-			else 
-				retStr = "<b>(Attempt to parse cockhead when none present.)</b>";
-			break;
-		case "master":
-			retStr = player.mf("master","mistress");
-			break;
-		case "Master":
-			retStr = player.mf("Master","Mistress");
-			break;
-		case "his":
-			retStr = player.mf("his","her");
-			break;
-		case "His":
-			retStr = player.mf("His","Her");
-			break;
-		case "he":
-			retStr = player.mf("he","she");
-			break;
-		case "He":
-			retStr = player.mf("He","She");
-			break;
-		case "him":
-			retStr = player.mf("him","her");
-			break;
-		case "Him":
-			retStr = player.mf("Him","Her");
-			break;
-		case "Evade":
-			retStr = "[Evade]";
-			break;
-		case "Misdirection":
-			retStr = "[Misdirection]";
-			break;
-		case "Agility":
-			retStr = "[Agility]";
-			break;
-		default:
-			retStr = "<b>!Unknown tag \"" + inStr + "\"!</b>";
-			break;
+		if (debug) trace("Found corresponding anonymous function");
+		argResult = singleArgConverters[arg]();
+		if (debug) trace("Called, return = ", argResult);
 	}
-	return retStr;
+	else
+		return "<b>!Unknown tag \"" + arg + "\"!</b>";
+
+
+	return argResult;
 }	
+
+var conditionalOptions:Object = {
+		"strength"			: function():* {return  player.str;},
+		"toughness"			: function():* {return  player.tou;},
+		"speed"				: function():* {return  player.spe;},
+		"intelligence"		: function():* {return  player.inte;},
+		"libido"			: function():* {return  player.lib;},
+		"sensitivity"		: function():* {return  player.sens;},
+		"corruption"		: function():* {return  player.cor;},
+		"fatigue"			: function():* {return  player.fatigue;},
+		"hp"				: function():* {return  player.HP;},
+		"hour"				: function():* {return  hours;},
+		"days"				: function():* {return  days;},
+		"tallness"			: function():* {return  player.tallness;},
+		"hairlength"		: function():* {return  player.hairLength;},
+		"femininity"		: function():* {return  player.femininity;},
+		"masculinity"		: function():* {return  100 - player.femininity;},
+		"cocks"				: function():* {return  player.cockTotal();},
+		"breastrows"		: function():* {return  player.bRows();},
+		"biggesttitsize"	: function():* {return  player.biggestTitSize();},
+		"vagcapacity"		: function():* {return  player.vaginalCapacity();},
+		"analcapacity"		: function():* {return  player.analCapacity();},
+		"balls"				: function():* {return  player.balls;},
+		"cumquantity"		: function():* {return  player.cumQ();},
+		"biggesttitsize"	: function():* {return  player.biggestTitSize();},
+		"milkquantity"		: function():* {return  player.lactationQ();},
+		"hasvagina"			: function():* {return  player.hasVagina();},
+		"istaur"			: function():* {return  player.isTaur();},
+		"isnaga"			: function():* {return  player.isNaga();},
+		"isgoo"				: function():* {return  player.isGoo();},
+		"isbiped"			: function():* {return  player.isBiped();},
+		"hasbreasts"		: function():* {return  (player.biggestTitSize() >= 1);},
+		"hasballs"			: function():* {return  (player.balls > 0);},
+		"hascock"			: function():* {return  player.hasCock();},
+		"isherm"			: function():* {return  (player.gender == 3);},
+		"cumnormal"			: function():* {return  (player.cumQ() <= 150);},
+		"cummedium"			: function():* {return  (player.cumQ() > 150 && player.cumQ() <= 350);},
+		"cumhigh"			: function():* {return  (player.cumQ() > 350 && player.cumQ() <= 1000);},
+		"cumveryhigh"		: function():* {return  (player.cumQ() > 1000 && player.cumQ() <= 2500);},
+		"cumextreme"		: function():* {return  (player.cumQ() > 2500);},
+		"issquirter"		: function():* {return  (player.wetness() >= 4);},
+		"ispregnant"		: function():* {return  (player.pregnancyIncubation > 0);},
+		"isbuttpregnant"	: function():* {return  (player.buttPregnancyIncubation > 0);},
+		"hasnipplecunts"	: function():* {return  player.hasFuckableNipples();},
+		"canfly"			: function():* {return  player.canFly();},
+		"islactating"		: function():* {return  (player.lactationQ() > 0);},
+		"true"				: function():* {return  true;},
+		"false"				: function():* {return  false;}
+	}
+		
 
 function convertConditionalArgumentFromStr(arg:String):*
 {
-	var debug = true;
+	var debug = false;
 	// convert the string contents of a conditional argument into a meaningful variable.
 	arg = arg.toLowerCase()
 	var argResult;
@@ -225,152 +164,16 @@ function convertConditionalArgumentFromStr(arg:String):*
 		if (debug) trace("Converted to float. Number = ", Number(arg))
 		return Number(arg);
 	}
-	
-	switch(arg)	
-	{
-		case "strength":
-			argResult = player.str;
-			break;
-		case "toughness":
-			argResult = player.tou;
-			break;
-		case "speed":
-			argResult = player.spe;
-			break;
-		case "intelligence":
-			argResult = player.inte;
-			break;
-		case "libido":
-			argResult = player.lib;
-			break;
-		case "sensitivity":
-			argResult = player.sens;
-			break;
-		case "corruption":
-			argResult = player.cor;
-			break;
-		case "fatigue":
-			argResult = player.fatigue;
-			break;
-		case "hp":
-			argResult = player.HP;
-			break;
-		case "hour":
-			argResult = hours;
-			break;
-		case "days":
-			argResult = days;
-			break;
-		case "tallness":
-			argResult = player.tallness;
-			break;
-		case "hairlength":
-			argResult = player.hairLength;
-			break;
-		case "femininity":
-			argResult = player.femininity;
-			break;
-		case "masculinity":
-			argResult = 100 - player.femininity;
-			break;
-		case "cocks":
-			argResult = player.cockTotal();
-			break;
-		case "breastrows":
-			argResult = player.bRows();
-			break;
-		case "biggesttitsize":
-			argResult = player.biggestTitSize();
-			break;
-		case "vagcapacity":
-			argResult = player.vaginalCapacity();
-			break;
-		case "analcapacity":
-			argResult = player.analCapacity();
-			break;
-		case "balls":
-			argResult = player.balls;
-			break;
-		case "cumquantity":
-			argResult = player.cumQ();
-			break;
-		case "biggesttitsize":
-			argResult = player.biggestTitSize();
-			break;
-		case "milkquantity":
-			argResult = player.lactationQ();
-			break;
-		case "hasvagina":
-			argResult = player.hasVagina();
-			break;
-		case "istaur":
-			argResult = player.isTaur();
-			break;
-		case "isnaga":
-			argResult = player.isNaga();
-			break;
-		case "isgoo":
-			argResult = player.isGoo();
-			break;
-		case "isbiped":
-			argResult = player.isBiped();
-			break;
-		case "hasbreasts":
-			argResult = (player.biggestTitSize() >= 1);
-			break;
-		case "hasballs":
-			argResult = (player.balls > 0);
-			break;
-		case "hascock":
-			argResult = player.hasCock();
-			break;
-		case "isherm":
-			argResult = (player.gender == 3);
-			break;
-		case "cumnormal":
-			argResult = (player.cumQ() <= 150);
-			break;
-		case "cummedium":
-			argResult = (player.cumQ() > 150 && player.cumQ() <= 350);
-			break;
-		case "cumhigh":
-			argResult = (player.cumQ() > 350 && player.cumQ() <= 1000);
-			break;
-		case "cumveryhigh":
-			argResult = (player.cumQ() > 1000 && player.cumQ() <= 2500);
-			break;
-		case "cumextreme":
-			argResult = (player.cumQ() > 2500);
-			break;
-		case "issquirter":
-			argResult = (player.wetness() >= 4);
-			break;
-		case "ispregnant":
-			argResult = (player.pregnancyIncubation > 0);
-			break;
-		case "isbuttpregnant":
-			argResult = (player.buttPregnancyIncubation > 0);
-			break;
-		case "hasnipplecunts":
-			argResult = player.hasFuckableNipples();
-			break;
-		case "canfly":
-			argResult = player.canFly();
-			break;
-		case "islactating":
-			argResult = (player.lactationQ() > 0);
-			break;
-		case "true":
-			argResult = true;
-			break;
-		case "false":
-			argResult = false;
-			break;
 
-		default:
-			argResult = 0;
-			break;
+	if (arg in conditionalOptions)
+	{
+		if (debug) trace("Found corresponding anonymous function");
+		argResult = conditionalOptions[arg]();
+		if (debug) trace("Called, return = ", argResult);
+
+
 	}
+
 	if (debug) trace("Could not convert to float. Evaluated ", arg, " as", argResult)
 	return argResult;
 }
