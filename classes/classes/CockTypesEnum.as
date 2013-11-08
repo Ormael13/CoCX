@@ -20,6 +20,11 @@ package classes
 		   10 - displacer
 		   11 - Fox
 		 */
+
+		// TODO: Get rid of this legacy crap.
+		// I think this is entirely unneeded, and can be replaced by cockType.index
+		// Not sure how the enums work completely, really.
+		// Fake-Name
 		public static function legacySuportLoadCockType(cockType:*):CockTypesEnum
 		{
 			if (cockType is int)
