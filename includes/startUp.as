@@ -5,69 +5,7 @@ stage.addEventListener(KeyboardEvent.KEY_DOWN, keyboard);
 function hideThisButton(e:MouseEvent):void{
 	e.target.visible=false;
 }
-// Create a new instance of the Font1 symbol from the document's library.
 
-
-/* Create a new TextFormat object, and set the font property to the myFont
-   object's fontName property. 
-var myFormat:TextFormat = new TextFormat();
-myFormat.font = new buttonFont().fontName
-myFormat.bold = true;
-if(mobile) myFormat.size = 22;
-else myFormat.size = 18;
-
-	Create a new TextField object, assign the text format using the 
-   defaultTextFormat property, and set the embedFonts property to true.
-newGameText.defaultTextFormat = myFormat;
-newGameText.embedFonts = true;
-newGameText.text = "New Game";
-b1Text.defaultTextFormat = myFormat;
-b1Text.embedFonts = true;
-b1Text.text = "New Game";
-//b2Text.defaultTextFormat = myFormat;
-b2Text.embedFonts = true;
-b2Text.text = "New Game";
-b3Text.defaultTextFormat = myFormat;
-b3Text.embedFonts = true;
-b3Text.text = "New Game";
-b4Text.defaultTextFormat = myFormat;
-b4Text.embedFonts = true;
-b4Text.text = "New Game";
-b5Text.defaultTextFormat = myFormat;
-b5Text.embedFonts = true;
-b5Text.text = "New Game";
-b6Text.defaultTextFormat = myFormat;
-b6Text.embedFonts = true;
-b6Text.text = "New Game";
-b7Text.defaultTextFormat = myFormat;
-b7Text.embedFonts = true;
-b7Text.text = "New Game";
-b8Text.defaultTextFormat = myFormat;
-b8Text.embedFonts = true;
-b8Text.text = "New Game";
-b9Text.defaultTextFormat = myFormat;
-b9Text.embedFonts = true;
-b9Text.text = "New Game";
-b0Text.defaultTextFormat = myFormat;
-b0Text.embedFonts = true;
-b0Text.text = "New Game";
-dataText.defaultTextFormat = myFormat;
-dataText.embedFonts = true;
-dataText.text = "Data";
-levelText2.defaultTextFormat = myFormat;
-levelText2.embedFonts = true;
-levelText2.text = "Level Up";
-perksText.defaultTextFormat = myFormat;
-perksText.embedFonts = true;
-perksText.text = "Perks";
-appearanceText.defaultTextFormat = myFormat;
-appearanceText.embedFonts = true;
-appearanceText.text = "Appearance";
-statsText.defaultTextFormat = myFormat;
-statsText.embedFonts = true;
-statsText.text = "More Stats";
-mouseOverText.defaultTextFormat = myFormat;
-mouseOverText.embedFonts = true;*/
 mouseOverText.type = TextFieldType.DYNAMIC;
 textBGWhite.visible = false;
 textBGTan.visible = false;
@@ -136,11 +74,24 @@ function mainMenu(e:MouseEvent = undefined):void {
 	outputText("(Alternative) <b>Corruption of Champions (" + version + ")</b>\n(Formerly Unnamed Text Game)", true);
 	outputText("\n\n", false);
 	
-	outputText("[LOL[WUT]] [herp] [DERP] BLARGH [if (0 == 0)|HARBLE]\n\n", false);
+	outputText("[LOL[WUT]] [herp] [DERP] BLARGH [if (0 == 0) HARBLE]\n\n", false);
 	outputText("[r[e[c[u[r[s[i[v[e[lol]]t]a]g[rofl][copter]]b]o]m]i]n][a][t[io]n]\n", false);
-	outputText("[if [ [ (4==4)HERP|DERP]\n", false);
-	outputText("[if (4==7)HERP|DERP]\n", false);
-	outputText("[if (4==4)HERP|DERP]\n", false);
+	
+	outputText("[if [ [ (4==4) HERP|DERP]\n", false);
+	outputText("[if (4 == 7) HERP|DERP]\n", false);
+	
+	outputText("[if (4==(2+2)) HERP|DERP]\n", false);
+	outputText("[if (4==4) HERP|DERP]\n", false);
+
+	outputText("if (4==7) [if (4==7) HERP]\n", false);
+	outputText("if (4==7) [if (4==7) HERP|DERP]\n", false);
+	outputText("if (4=4) [if (4=4) HERP]\n", false);
+	outputText("if (4==4) [if (4==4) HERP]\n", false);
+	outputText("if (4==biggesttitsize) [if (4==biggesttitsize) HERP]\n", false);
+	outputText("if (analcapacity>3)    [if (analcapacity>3) HERP]\n", false);
+	outputText("if (analcapacity = 0)  [if (analcapacity = 0) HERP]\n", false);
+	outputText("if (analcapacity > 0)  [if (analcapacity > 0) HERP]\n", false);
+	outputText("Complex IF Statement thing: [if (hasCock = true) \"[cock] stiffening\"][if (isHerm = true) \" and \"][if (hasVagina = true) \"[vagina] starting to burn with need\"]");
 
 	/*
 	outputText("\n\n", false);
@@ -154,7 +105,7 @@ function mainMenu(e:MouseEvent = undefined):void {
 	outputText("\n-Try to keep your keyboard clean.  Think of the children!</b>", false);
 	outputText("\n\nFor more information see Fenoxo's Blog at <b><u><a href='http://www.fenoxo.com/'>fenoxo.com</a></u></b>.", false);
 	outputText("\n\nAlso go play <u><a href='http://www.furaffinity.net/view/9830293/'>Nimin</a></u> by Xadera on furaffinity.\n\n", false);
-
+	
 	
 	if(debug) 
 		outputText("\n\n<b>DEBUG MODE ENABLED:  ITEMS WILL NOT BE CONSUMED BY USE.</b>", false);

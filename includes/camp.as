@@ -383,8 +383,29 @@ function camp():void {
 	//outputText(images.showImage("camping"), false);
 	//Isabella upgrades camp level!
 	outputText("TESTING SHIT!\n")
-	outputText("[if (hasCock = true) \"[cock] stiffening\"][if (isHerm = true) \" and \"][if (hasVagina = true) \"[vagina] starting to burn with need\"] DERP [cock biggest] HERP [armor] LOLWUT  [balls] ");
+	outputText("[if (hasCock = true) [cock] stiffening][if (isHerm = true)  and ][if (hasVagina = true) [vagina] starting to burn with need] DERP [cock biggest] HERP [armor] LOLWUT  [balls] ");
 	outputText("[If (hours > 19) \"Hug\" else \"Cuddle\"]\n");
+	
+	outputText("\n\n", false);
+	
+	outputText("[LOL[WUT]] [herp] [DERP] BLARGH [if (0 == 0) HARBLE]\n\n", false);
+	outputText("[r[e[c[u[r[s[i[v[e[lol]]t]a]g[rofl][copter]]b]o]m]i]n][a][t[io]n]\n", false);
+	
+	outputText("[if [ [ (4==4) HERP|DERP]\n", false);
+	outputText("[if (4 == 7) HERP|DERP]\n", false);
+	
+	outputText("Parenthesis - [if (4==(2+2)) HERP|DERP]\n", false);
+	outputText("[if (4==4) HERP|DERP]\n", false);
+
+	outputText("if (4==7) [if (4==7) HERP]\n", false);
+	outputText("if (4==7) [if (4==7) HERP|DERP]\n", false);
+	outputText("if (4=4) [if (4=4) HERP]\n", false);
+	outputText("if (4==4) [if (4==4) HERP]\n", false);
+	outputText("if (4==biggesttitsize) [if (4==biggesttitsize) HERP]\n", false);
+	outputText("if (analcapacity>3)    [if (analcapacity>3) HERP]\n", false);
+	outputText("if (analcapacity = 0)  [if (analcapacity = 0) HERP]\n", false);
+	outputText("if (analcapacity > 0)  [if (analcapacity > 0) HERP]\n", false);
+
 	outputText("\n");
 	outputText("\n");
 
