@@ -958,9 +958,10 @@ function barTelAdre():void {
 	
 	//NIAMH
 	if(this.model.time.hours >= 8 && this.model.time.hours <= 16 && flags[NIAMH_STATUS] == 0) {
+	{
 		telAdreNiamh();
-		if(flags[MET_NIAMH] == 0) button = anotherButton(button,"Beer Cat",eventParser,3524);
-		else button = anotherButton(button,"Niamh",eventParser,3524);
+		if(flags[MET_NIAMH] == 0) button = anotherButton(button,"Beer Cat",approachNiamh);
+		else button = anotherButton(button,"Niamh",approachNiamh);
 	}
 	//ROGAR #1
 	if(flags[ROGAR_PHASE] == 3 && flags[ROGAR_DISABLED] == 0 && flags[ROGAR_FUCKED_TODAY] == 0) {
