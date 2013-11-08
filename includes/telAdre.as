@@ -957,10 +957,11 @@ function barTelAdre():void {
 	else outputText("\n\nIt doesn't look like there's a bartender working at the moment.", false);
 	
 	//NIAMH
-	if(hours >= 8 && hours <= 16 && flags[NIAMH_STATUS] == 0) {
+	if(hours >= 8 && hours <= 16 && flags[NIAMH_STATUS] == 0) 
+	{
 		telAdreNiamh();
-		if(flags[MET_NIAMH] == 0) button = anotherButton(button,"Beer Cat",eventParser,3524);
-		else button = anotherButton(button,"Niamh",eventParser,3524);
+		if(flags[MET_NIAMH] == 0) button = anotherButton(button,"Beer Cat",approachNiamh);
+		else button = anotherButton(button,"Niamh",approachNiamh);
 	}
 	//ROGAR #1
 	if(flags[ROGAR_PHASE] == 3 && flags[ROGAR_DISABLED] == 0 && flags[ROGAR_FUCKED_TODAY] == 0) {
