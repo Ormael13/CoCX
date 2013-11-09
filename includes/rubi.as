@@ -2912,7 +2912,7 @@ function giveRubiATFItem(short:String):void {
 				flags[RUBI_SKIN] = 3;
 			}
 			//(Anemone Penis, must have a penis)
-			else if(flags[RUBI_COCK_SIZE] > 0 && flags[RUBI_COCK_TYPE] != CockTypesEnum.TENTACLE) {
+			else if(flags[RUBI_COCK_SIZE] > 0 && flags[RUBI_COCK_TYPE] != CockTypesEnum.ANEMONE) {
 				outputText("\n\n" + rubiMF("His","Her") + " hands don't dally there long before darting down to " + rubiMF("his","her") + " crotch, groping at the " + rubiCock() + " betwixt " + rubiMF("his","her") + " legs.  The flesh seems to  ripple, with veins suddenly bulging.  A low, husky groan wrestles its way out of Rubi's throat as " + rubiMF("his","her") + " cock morphs");
 				if(flags[RUBI_COCK_TYPE] != CockTypesEnum.HUMAN) outputText(", first shifting towards a more human-like appearance");
 				outputText(".  Small nodules appear, around the crown of the penis, and around its base.  Rubi's delicate hands run across two of the nodules, and " + rubiMF("his","her") + " cock suddenly stiffens, harder than you've ever seen it!  Whatever those things are, they're quite sensitive.");
