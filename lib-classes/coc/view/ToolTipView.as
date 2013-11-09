@@ -4,14 +4,16 @@ package coc.view {
 	import flash.text.TextField;
 	import flash.text.TextFieldType;
 
+	import coc.model.GameModel;
+
 	public class ToolTipView extends Sprite {
 		public var
 			bg :Sprite,
 			tf :TextField;
 
-		protected var model :*; // TODO: Need an actual class type.
+		protected var model :GameModel;
 
-		public function ToolTipView( mainView :MovieClip, model :* ) :void {
+		public function ToolTipView( mainView :MovieClip, model :GameModel ) :void {
 			this.model = model;
 
 			this.bg = mainView.popUpBG;
@@ -23,12 +25,35 @@ package coc.view {
 			this.addChild( this.tf );
 		};
 
-		public function showForButton( ... args ) {
-			trace( "ToolTipView.showForButton: stub, args:", args.join( ", " ) );
+		public function showForButton( button :DisplayObject ) {
+			var bx = button.x,
+				by = button.y;
+
+			// TODO: Should we try to remove some of these numbers?
+			if( this.model.mobile ) {
+				bx = (bx >= 410 ? 405 : bx);
+				this.x = bx + 98;
+				this.y = by - 347;
+			}
+			else {
+				bx = (bx >= 708 ? 700 : bx);
+				this.x = bx - 13;
+				this.y = by - 232;
+			}
+
+			this.visible = true;
 		};
 
 		public function hide() {
-			trace( "ToolTipView.hide: stub" );
+			this.visible = false;
+		};
+
+		public function set text( newText ) :void {
+			this.tf.text = newText;
+		};
+
+		public function get text() :String {
+			return this.tf.text;
 		};
 	}
 }

@@ -4,6 +4,7 @@
 
 package coc.view {
 	import flash.display.MovieClip;
+	import flash.display.DisplayObject;
 	import flash.display.InteractiveObject;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -27,9 +28,9 @@ package coc.view {
 		public var toolTip :ToolTipView;
 		public var statsView :StatsView;
 
+		// TODO: Refactor so we don't need these vars.  That sounds so simple when you put it like that...
 		public var _executeButtomButtonClick :Function;
-
-		// protected var bottomButtonSettings :Array;
+		public var _getButtonToolTipText :Function;
 
 		protected var options :Object;
 		protected var allButtons :Array;
@@ -101,29 +102,28 @@ package coc.view {
 		// positions them,
 		// and also assigns their index to a bottomIndex property on them.
 		protected function createBottomButtons() :void {
-			var b :MovieClip, BCs :Array,
+			var b :MovieClip, bgClasses :Array,
 				bi :int, r :int, c: int,
 				backgroundChildIndex :int;
 
 			this.bottomButtonBGs = [];
 
-			BCs = [ buttonBackground0,
-					buttonBackground1,
-					buttonBackground2,
-					buttonBackground3,
-					buttonBackground4,
-					buttonBackground5,
-					buttonBackground6,
-					buttonBackground7,
-					buttonBackground8,
-					buttonBackground9 ];
-
-
+			bgClasses = [
+				buttonBackground0,
+				buttonBackground1,
+				buttonBackground2,
+				buttonBackground3,
+				buttonBackground4,
+				buttonBackground5,
+				buttonBackground6,
+				buttonBackground7,
+				buttonBackground8,
+				buttonBackground9 ];
 
 			backgroundChildIndex = this.getChildIndex( background );
 
 			for( bi = 0; bi < BOTTOM_BUTTON_COUNT; ++bi ) {
-				b = new (BCs[ bi ])();
+				b = new (bgClasses[ bi ])();
 				b.bottomIndex = bi;
 
 				r = (bi / BOTTOM_BUTTON_PER_ROW_COUNT) << 0;
@@ -158,25 +158,19 @@ package coc.view {
 
 
 
-		//////// Internal view update methods ////////
+		//////// Internal(?) view update methods ////////
 
-		protected function showBottomButton( index :int ) :void {
+		public function showBottomButton( index :int, label :String, callback :Function = null, toolTipText :String = '' ) :void {
 			var buttonTF :TextField = this.bottomButtonTexts[ index ] as TextField,
-				buttonBG :MovieClip = this.bottomButtonBGs[ index ] as MovieClip,
-				buttonSettings = this.bottomButtonSettings[ index ];
-
-			if( ! buttonSettings ) {
-				trace( "MainView/showBottomButton: Done penissed up, button's settings are null.  Tried to show button", index );
-				return;
-			}
+				buttonBG :MovieClip = this.bottomButtonBGs[ index ] as MovieClip;
 
 			this.bottomButtonBGs[ index ].visible = true;
 
-			buttonTF.text = buttonSettings.label;
+			buttonTF.text = label;
 			buttonTF.visible = true;
 		};
 
-		protected function hideBottomButton( index :int ) {
+		public function hideBottomButton( index :int ) {
 			this.bottomButtonBGs[ index ].visible = false;
 			this.bottomButtonTexts[ index ].visible = false;
 		};
@@ -195,40 +189,20 @@ package coc.view {
 				bottomButtonIndex = this.bottomButtonBGs.indexOf( bottomButton );
 				this._executeButtomButtonClick( bottomButtonIndex );
 			}
-
-			// var b :MovieClip, bi :int, buttonSettings :*;
-
-			// b = event.currentTarget as MovieClip;
-
-			// if( ! b ) {
-			// 	trace( "MainView.executeBottomButtonClick: Something done penissed up, button bg (event target) is not a movieclip:", event.currentTarget );
-			// }
-
-			// bi = b.bottomIndex;
-
-			// buttonSettings = this.bottomButtonSettings[ bi ];
-
-			// if( buttonSettings && buttonSettings.callback ) {
-			// 	if( (typeof buttonSettings.callback) == 'function' )
-			// 		buttonSettings.callback();
-			// 	else {
-			// 		trace( "Non-function event:", buttonSettings.callback, " Dropping on the ground for now." );
-			// 	}
-			// }
 		};
 
 		protected function hoverButton( event :MouseEvent ) {
 			event.currentTarget.alpha = 0.5;
-			trace( "MainView/hoverButton: Skipping showing toolTip" );
-			// this.toolTip.showForButton(
-			// 	event.currentTarget,
-			// 	this.bottomButtonSettings[ event.currentTarget.bottomIndex ].toolTip );
+
+			if( this._getButtonToolTipText ) {
+				this.toolTip.text = this._getButtonToolTipText( event.target.name );
+				this.toolTip.showForButton( event.target as DisplayObject );
+			}
 		};
 
 		protected function dimButton( event :MouseEvent ) {
 			event.currentTarget.alpha = 1.0;
-			trace( "MainView/dimButton: Skipping hiding toolTip" );
-			// this.toolTip.hide();
+			this.toolTip.hide();
 		};
 
 
@@ -261,30 +235,42 @@ package coc.view {
 			statsBG.visible = false;
 		};
 
-		// tool tip gets passed in?  MainView will have nothing to do with storing those.
-		// Ideally, the tool tips would be part of perks/items' definitions.
-		// Perhaps not even need to be passed in, merely referenced in some model.
-		public function setButton( index :int, label :String = null, callback :Function = null, toolTip :* = null ) {
+		// TODO: Refactor button set-up code to use callback and toolTipText here.
+		public function setButton( index :int, label :String = '', callback :Function = null, toolTipText :String = '' ) {
 			if( index < 0 || index >= BOTTOM_BUTTON_COUNT ) {
 				trace( "MainView.setButton called with out of range index:", index );
 				// throw new RangeError();
 				return;
 			}
 
-			if( callback ) {
-				this.bottomButtonSettings[ index ] = {
-					label: label,
-					callback: callback,
-					toolTip: toolTip
-				};
-
-				showBottomButton( index );
+			if( label ) {
+				this.showBottomButton( index, label, callback, toolTipText );
 			}
 			else {
-				this.bottomButtonSettings[ index ] = null;
-
-				hideBottomButton( index );
+				this.hideBottomButton( index );
 			}
+		};
+
+		public function hasButton( labelText :String ) :Boolean {
+			var b :TextField;
+
+			for each( b in this.bottomButtonTexts ) {
+				if( b.text == labelText )
+					return true;
+			}
+
+			return false;
+		};
+
+		public function indexOfButtonWithLabel( labelText :String ) :int {
+			var i :int;
+
+			for( i = 0; i < this.bottomButtonTexts.length; ++i ) {
+				if( this.bottomButtonTexts[ i ].text == labelText )
+					return i;
+			}
+
+			return -1;
 		};
 
 		public function clearBottomButtons() :void {
@@ -296,18 +282,15 @@ package coc.view {
 		};
 
 		public function selectSprite( index :Number = 0 ) :void {
-			if( choice < 0 || flags[ SHOW_SPRITES_FLAG ] )
-				sprite.visible = false;
+			// TODO: When flags goes away, if it goes away, replace this with the appropriate settings thing.
+			if( choice < 0 || model.flags[ SHOW_SPRITES_FLAG ] )
+				this.sprite.visible = false;
 			else {
-				sprite.visible = true;
-				sprite.gotoAndStop(choice);
-				sprite.scaleX = 3;
-				sprite.scaleY = 3;
+				this.sprite.visible = true;
+				this.sprite.gotoAndStop(choice);
+				this.sprite.scaleX = 3;
+				this.sprite.scaleY = 3;
 			}
-		};
-
-		public function outputText() :void {
-			// ...
 		};
 
 
@@ -351,6 +334,8 @@ package coc.view {
 			else if( /^b[0-9]Text$/.test( buttonName ) ) {
 				return this[ buttonName ].text;
 			}
+
+			return "";
 		};
 
 

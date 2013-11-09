@@ -10,7 +10,7 @@
 
 //DEBUG, used all over the place
 var debug:Boolean = false;
-this.model.debug = debug;
+//this.model.debug = debug; // TODO: Set on model?
 
 //Version NUMBER
 var ver:String = "0.8.3d1.1";
@@ -18,6 +18,7 @@ var version:String = "v0.8.3d1.1 (<b>Dick or Treat</b>)";
 
 //Indicates if building for mobile?
 var mobile:Boolean = false;
+this.model.mobile = mobile;
 
 var images:ImageManager = new ImageManager();
 //} endregion
@@ -51,6 +52,7 @@ var itemSwapping:Boolean = false;
 //The extreme flag state array. This needs to go. Holds information about everything, whether it be certain attacks for NPCs 
 //or state information to do with the game. 
 var flags = new DefaultDict();
+this.model.flags = flags;
 
 /*
 for (var i = 0; i < 3000; i++)

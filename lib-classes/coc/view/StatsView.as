@@ -32,9 +32,9 @@ package coc.view {
                     "libBar",     "libText",     "libNum",      // "libUp",      "libDown",
                     "sensBar",    "senText",     "senNum",      // "sensUp",     "sensDown",
                     "corBar",     "corText",     "corNum",      // "corUp",      "corDown",
+                    "lustBar",    "lustText",    "lustNum",     // "lustUp",     "lustDown",
                     "fatigueBar", "fatigueText", "fatigueNum",  // "fatigueUp",  "fatigueDown",
                     "HPBar",      "HPText",      "HPNum",       // "hpUp",       "hpDown",
-                    "lustBar",    "lustText",    "lustNum",     // "lustUp",     "lustDown",
                                   "levelText",   "levelNum",    // "levelUp",
                                    "xpText",     "xpNum",       // "xpUp",       "xpDown",
                     "coreStatsText",
@@ -85,8 +85,6 @@ package coc.view {
         // <- statsScreenRefresh
         public function refresh() :void {
             this.show();
-
-            //Make sure it's all visible
 
             setStatText( "coreStatsText",
                 "<b><u>Name : {NAME}</u>\nCore Stats</b>"
@@ -154,6 +152,33 @@ package coc.view {
             // children also need to be hidden because they're selectively shown on change.
             for( ci = 0; ci < cc; ++ci ) {
                 this.upDownsContainer.getChildAt( ci ).visible = false;
+            }
+        };
+
+        public function showUpDown() {
+            function _oldStatNameFor( statName :String ) {
+                return 'old' + statName.charAt( 0 ).toUpperCase() + statName.substr( 1 );
+            }
+
+            var statName :String,
+                oldStatName :String,
+                allStats :Array;
+
+            this.upDownsContainer.visible = true;
+
+            allStats = [ "str", "tou", "spe", "inte", "lib", "sens", "cor", "lust" ];
+
+            for each( statName in allStats ) {
+                oldStatName = _oldStatNameFor( statName );
+
+                if( this.model.player[ statName ] > this.model[ oldStatName ] ) {
+                    this[ statName + 'Up' ].visible = true;
+                    this[ statName + 'Down' ].visible = false;
+                }
+                if( this.model.player[ statName ] < this.model[ oldStatName ] ) {
+                    this[ statName + 'Up' ].visible = false;
+                    this[ statName + 'Down' ].visible = true;
+                }
             }
         };
     }
