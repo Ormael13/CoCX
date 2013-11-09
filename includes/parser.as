@@ -103,7 +103,7 @@ var singleArgConverters:Object = {
 
 function convertSingleArg(arg:String):String
 {
-	var debug = true;
+	var debug = false;
 	var argResult:String;
 
 	if (arg in singleArgConverters)
@@ -298,7 +298,7 @@ function splitConditionalResult(textCtnt:String): Array
 	return ret;
 }
 
-function parseConditional(textCtnt:String):String
+function parseConditional(textCtnt:String, depth:int):String
 {
 	// take the contents of an if statement:
 	// [if (condition) OUTPUT_IF_TRUE]
@@ -339,9 +339,9 @@ function parseConditional(textCtnt:String):String
 			{
 				// why the fuck was I parsing the "if"?
 				//ifText = recParser(textCtnt.substring(0, tmp));
-				conditional = recParser(textCtnt.substring(tmp+1, i));
+				conditional = recParser(textCtnt.substring(tmp+1, i), depth);
 				conditional = evalConditionalStatementStr(conditional);
-				output = recParser(textCtnt.substring(i+1, textCtnt.length));	// Parse the trailing text (if any)
+				output = recParser(textCtnt.substring(i+1, textCtnt.length), depth);	// Parse the trailing text (if any)
 				output = splitConditionalResult(output);
 
 				if (debug) trace("prefix = '", ret[0], "' conditional = ", conditional, " content = ", output);
@@ -359,7 +359,7 @@ function parseConditional(textCtnt:String):String
 		throw new Error("Invalid if statement!", textCtnt);
 	return "";
 }
-function evalBracketContents(textCtnt:String):String
+function evalBracketContents(textCtnt:String, depth:int):String
 {
 	var debug = false;
 	var ret:String;
@@ -368,7 +368,7 @@ function evalBracketContents(textCtnt:String):String
 	if (textCtnt.toLowerCase().indexOf("if") == 0)
 	{
 		if (debug) trace("It's an if-statement");
-		ret = parseConditional(textCtnt);
+		ret = parseConditional(textCtnt, depth);
 		if (debug) trace("IF Evaluated to ", ret);
 	}
 	else
@@ -381,8 +381,12 @@ function evalBracketContents(textCtnt:String):String
 
 import flash.utils.getQualifiedClassName;
 
-function recParser(textCtnt:String):String
+// Depth tracks our recursion depth
+// Basically, we need to handle things differently on the first execution, so we don't mistake single-word print-statements for 
+// a tag. Therefore, every call of recParsere increments depth by 1
+function recParser(textCtnt:String, depth:int):String
 {
+	depth += 1;
 	var debug = false;
 	textCtnt = String(textCtnt);
 	if (textCtnt.length == 0)	// Short circuit if we've been passed an empty string
@@ -414,12 +418,12 @@ function recParser(textCtnt:String):String
 				// We know there aren't any brackets in the section before the first opening bracket.
 				// therefore, we just add it to the returned string
 
-				retStr += evalBracketContents(recParser(textCtnt.substring(tmp+1, i)));
+				retStr += evalBracketContents(recParser(textCtnt.substring(tmp+1, i), depth), depth);
 				// First parse into the text in the brackets (to resolve any nested brackets)
 				// then, eval their contents, in case they're an if-statement or other control-flow thing
 				// I haven't implemented yet
 
-				retStr += recParser(textCtnt.substring(i+1, textCtnt.length));	// Parse the trailing text (if any)
+				retStr += recParser(textCtnt.substring(i+1, textCtnt.length), depth);	// Parse the trailing text (if any)
 				// lastly, run any text that trails the closing bracket through the parser
 				// needed for things like "string 1 [cock] [balls]"
 				
@@ -430,16 +434,13 @@ function recParser(textCtnt:String):String
 	}
 	else
 	{
-		// if we don't have any brackets present, we need to look to see if this is a tag or not.
-		// POTENTIAL BUG: single-word print statements may be incorrectly interpreted as a tag. 
-		// possible solution: ignore tags that don't match known tags? Seems like it could cause bugginess in the case of tag typos?
 		if (debug) trace("No brackets present", textCtnt);	
 
 		var tagRegExp:RegExp = /^\w+$/;
 		var expressionResult:Object = tagRegExp.exec(textCtnt);
 		if (debug) trace("Checking if single word = [" + expressionResult + "]", getQualifiedClassName(expressionResult));
 		if (debug) trace("string length = ", textCtnt.length);
-		if (expressionResult)
+		if (expressionResult && (depth > 1))
 		{
 			if (debug) trace("It's a single word!");
 			retStr += convertSingleArg(textCtnt);

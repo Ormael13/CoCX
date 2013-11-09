@@ -1384,8 +1384,10 @@ function rubiAppearance():void {
 	outputText(", " + rubiMF("his","her") + " ");
 	if(flags[RUBI_EYE_TYPE] == 1) outputText("slitted ");
 	if(flags[RUBI_EYE_TYPE] == 0 || rubiBimbo()) outputText("green");
-	else if(flags[RUBI_EYE_TYPE] == 1) outputText("purple");
-	else outputText("black");
+	else if(flags[RUBI_EYE_TYPE] == 1) 
+		outputText("purple");
+	else 
+		outputText("black");
 	outputText(" eyes framed with eyeliner, belying " + rubiMF("his","her") + " masculine origins.  ");
 	if(flags[RUBI_HORNTYPE] > 0) outputText("Two tiny horns extend upwards from " + rubiMF("his","her") + " hairline, solid black in color.  ");
 	outputText("A pair of ");
