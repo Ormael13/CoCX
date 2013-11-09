@@ -1,12 +1,12 @@
 package classes 
 {
-	import classes.creature;
+	import classes.Creature;
 	
 	/**
 	 * ...
 	 * @author Yoffy
 	 */
-	public class Monster extends creature 
+	public class Monster extends Creature 
 	{
 		//For enemies
 		public var bonusHP:Number = 0;

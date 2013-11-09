@@ -32,7 +32,7 @@ package classes
 		public function Player()
 		{
 			keyItems = new Array();
-		}
+		}	
 		
 		//Body Type
 		public function bodyType():String
@@ -223,8 +223,12 @@ package classes
 				if (balls > 0 && ballSize > 5)
 					race = "tanuki-morph";
 			}
-			if (dogScore() >= 4)
+			if (dogScore() >= 4)				
+			{	
 				race = "dog-morph";
+				if (faceType == 0)
+					race = "dog-" + mf("man", "girl");
+			}
 			if (foxScore() >= 4)
 			{
 				if (skinType == 1)

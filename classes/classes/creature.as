@@ -10,8 +10,8 @@ package classes
 	import classes.statusAffectClass;
 	import classes.keyItemClass;
 	
-	public class creature
-	{	
+	public class Creature
+	{
 		//Variables
 		
 		//Short refers to player name and monster name. BEST VARIABLE NAME EVA!
@@ -258,7 +258,7 @@ package classes
 		public var statusAffects:Array;
 		
 		//Constructor
-		public function creature()
+		public function Creature()
 		{
 			//cocks = new Array();
 			//The world isn't ready for typed Arrays just yet.
@@ -605,7 +605,7 @@ package classes
 			}
 		}
 		
-		
+		//TODO Change this to Boolean
 		public function hasStatusAffect(statusName:String):Number
 		{
 			var counter:Number = statusAffects.length;
@@ -794,11 +794,11 @@ package classes
 			return breastRows[index].breastRating;
 		}
 		
-		public function cockArea(cockNum:Number):Number
+		public function cockArea(i_cockIndex:Number):Number
 		{
-			if (cockNum >= cocks.length || cockNum < 0)
+			if (i_cockIndex >= cocks.length || i_cockIndex < 0)
 				return 0;
-			return (cocks[cockNum].cockThickness * cocks[cockNum].cockLength);
+			return (cocks[i_cockIndex].cockThickness * cocks[i_cockIndex].cockLength);
 		}
 		
 		public function biggestCockLength():Number
@@ -1048,50 +1048,50 @@ package classes
 		}
 		
 		//Find the biggest cock that fits inside a given value
-		public function cockThatFits(fits:Number = 0, type:String = "area"):Number
+		public function cockThatFits(i_fits:Number = 0, type:String = "area"):Number
 		{
 			if (cocks.length <= 0)
 				return -1;
-			var counter:Number = cocks.length;
+			var cockIdxPtr:int = cocks.length;
 			//Current largest fitter
-			var index:Number = -1;
-			while (counter > 0)
+			var cockIndex:int = -1;
+			while (cockIdxPtr > 0)
 			{
-				counter--;
+				cockIdxPtr--;
 				if (type == "area")
 				{
-					if (cockArea(counter) <= fits)
+					if (cockArea(cockIdxPtr) <= i_fits)
 					{
 						//If one already fits
-						if (index >= 0)
+						if (cockIndex >= 0)
 						{
 							//See if the newcomer beats the saved small guy
-							if (cockArea(counter) > cockArea(index))
-								index = counter;
+							if (cockArea(cockIdxPtr) > cockArea(cockIndex))
+								cockIndex = cockIdxPtr;
 						}
 						//Store the index of fitting dick
 						else
-							index = counter;
+							cockIndex = cockIdxPtr;
 					}
 				}
 				else if (type == "length")
 				{
-					if (cocks[counter].cockLength <= fits)
+					if (cocks[cockIdxPtr].cockLength <= i_fits)
 					{
 						//If one already fits
-						if (index >= 0)
+						if (cockIndex >= 0)
 						{
 							//See if the newcomer beats the saved small guy
-							if (cocks[counter].cockLength > cocks[index].cockLength)
-								index = counter;
+							if (cocks[cockIdxPtr].cockLength > cocks[cockIndex].cockLength)
+								cockIndex = cockIdxPtr;
 						}
 						//Store the index of fitting dick
 						else
-							index = counter;
+							cockIndex = cockIdxPtr;
 					}
 				}
 			}
-			return index;
+			return cockIndex;
 		}
 		
 		//Find the 2nd biggest cock that fits inside a given value
@@ -2040,7 +2040,7 @@ package classes
 				if (cocks[index].cockType == type)
 					return index;
 			}
-			//trace("creature.findFirstCockType ERROR - searched for cocktype: " + type + " and could not find it.");
+			//trace("Creature.findFirstCockType ERROR - searched for cocktype: " + type + " and could not find it.");
 			return 0;
 		}
 		
@@ -2055,7 +2055,7 @@ package classes
 				if (cocks[index].cockType == type)
 					return index;
 			}
-			//trace("creature.findFirstCockType ERROR - searched for cocktype: " + type + " and could not find it.");
+			//trace("Creature.findFirstCockType ERROR - searched for cocktype: " + type + " and could not find it.");
 			return 0;
 		}*/
 		
@@ -2157,7 +2157,7 @@ package classes
 		}
 		
 		//How many dogCocks
-		public function dogCocks():Number
+		public function dogCocks():int
 		{
 			var dogCockC:Number = 0;
 			var counter = cocks.length;
@@ -2171,7 +2171,7 @@ package classes
 		}
 		
 		//How many dragonCocks
-		public function dragonCocks():Number
+		public function dragonCocks():int
 		{
 			var dragonCockC:Number = 0;
 			var counter = cocks.length;
@@ -2184,8 +2184,22 @@ package classes
 			return dragonCockC;
 		}
 		
+		//How many dragonCocks
+		public function foxCocks():int
+		{
+			var foxCockCounter:int = 0;
+			var cockIdxPtr:int = cocks.length;
+			while (cockIdxPtr > 0)
+			{
+				cockIdxPtr--;
+				if (cocks[cockIdxPtr].cockType == CockTypesEnum.FOX)
+					foxCockCounter++;
+			}
+			return foxCockCounter;
+		}
+		
 		//How many normalCocks
-		public function normalCocks():Number
+		public function normalCocks():int
 		{
 			var normalCockC:Number = 0;
 			var counter = cocks.length;
@@ -2198,6 +2212,7 @@ package classes
 			return normalCockC;
 		}
 		
+		//TODO Seriously wtf. 1500+ calls to cockTotal, 340+ call to totalCocks. I'm scared to touch either.
 		//How many cocks?
 		public function cockTotal():Number
 		{
