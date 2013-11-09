@@ -2946,7 +2946,7 @@ function rubiGrowPlusBreasts():void {
 	outputText("You hand over the vial of blueish liquid.  Rubi takes a moment to look it over, before taking a deep breath and injecting half of the vial into one breast and the rest into " + rubiMF("his","her") + " other breast.");
 	
 	//(If breast increase)
-	if(flags[RUBI_BREAST_SIZE] < 7) {
+	if(flags[RUBI_BREAST_SIZE] < 7 || (flags[RUBI_BREAST_SIZE] < 30 && flags[HYPER_HAPPY])) {
 		outputText("\n\nRubi's breasts suddenly wobble of their own accord, swelling up like they're being inflated.  The little demon-morph shivers as pleasure wracks " + rubiMF("his","her") + " body, with " + rubiMF("his","her") + " breasts growing at least two cup sizes.  " + rubiMF("His","Her") + " fingers absently grope at " + rubiMF("his","her") + " new endowments, tweaking the flushed, sensitive flesh until the erotic heat from the transformation eventually dissipates, leaving " + rubiMF("him","her") + " panting on the floor before you.");
 		flags[RUBI_BREAST_SIZE] += 2 + rand(2);
 		if(flags[RUBI_BREAST_SIZE] > 7) flags[RUBI_BREAST_SIZE] = 7;
@@ -2964,7 +2964,7 @@ function rubiPenisGroPlus():void {
 	outputText("You hand over the vial of greenish liquid.  Rubi takes a moment to look it over before, before taking a deep breath and injecting the entire thing into the base of " + rubiMF("his","her") + " " + rubiCock() + ".");
 	
 	//(If Penis increase)
-	if(flags[RUBI_COCK_SIZE] < 12 || (flags[RUBI_COCK_TYPE] == CockTypesEnum.HORSE && flags[RUBI_COCK_SIZE] < 20)) {
+	if(flags[RUBI_COCK_SIZE] < 12 || (flags[RUBI_COCK_TYPE] == CockTypesEnum.HORSE && flags[RUBI_COCK_SIZE] < 20) || (flags[RUBI_COCK_SIZE] < 30 && flags[HYPER_HAPPY])) {
 		outputText("\n\nRubi grips " + rubiMF("his","her") + " cock as it suddenly hardens, visibly throbbing in " + rubiMF("his","her") + " grasp.  It surges, growing larger, gaining about two inches right before your eyes.");
 		flags[RUBI_COCK_SIZE] += 2 + rand(2);
 		if(flags[RUBI_COCK_TYPE] != CockTypesEnum.HORSE) {

@@ -101,6 +101,13 @@ var singleArgConverters:Object = {
 
 }
 
+// Does lookup of single argument tags ("[cock]", "[armor]", etc...)
+// Supported variables are the options listed in the above 
+// singleArgConverters object. If the passed argument is found in the above object,
+// the corresponding anonymous function is called, and it's return-value is returned.
+// If the arg is not present in the singleArgConverters object, an error message is
+// returned.
+// ALWAYS returns a string
 function convertSingleArg(arg:String):String
 {
 	var debug = false;
@@ -171,7 +178,11 @@ var conditionalOptions:Object = {
 		"false"				: function():* {return  false;}
 	}
 
-
+// converts a single argument to a conditional to 
+// the relevant value, either by simply converting to a Number, or 
+// through lookup in the above conditionalOptions oject, and then calling the
+// relevant function
+// Realistally, should only return either boolean or numbers.
 function convertConditionalArgumentFromStr(arg:String):*
 {
 	var debug = false;
@@ -202,9 +213,27 @@ function convertConditionalArgumentFromStr(arg:String):*
 }
 
 
-
+// Evaluates the conditional section of an if-statement.
+// Does the proper parsing and look-up of any of the special nouns
+// which can be present in the conditional
 function evalConditionalStatementStr(textCond:String):Boolean
 {	
+	// Evaluates a conditional statement:
+	// (varArg1 [conditional] varArg2)
+	// varArg1 & varArg2 can be either numbers, or any of the 
+	// strings in the "conditionalOptions" object above.
+	// numbers (which are in string format) are converted to a Number type
+	// prior to comparison.
+
+	// supports multiple comparison operators:
+	// "=", "=="  - Both are Equals or equivalent-to operators
+	// "<", ">    - Less-Than and Greater-Than
+	// "<=", ">=" - Less-than or equal, greater-than or equal
+	// "!="       - Not equal
+
+	// proper, nested parsing of statements is a WIP
+	// and not supported at this time.
+
 	var debug = false;
 
 	var isExp:RegExp = /(\w+)\s?(==|=|!=|<|>|<=|>=)\s?(\w+)/;
@@ -256,7 +285,9 @@ function evalConditionalStatementStr(textCond:String):Boolean
 	return retVal;
 }
 
-
+// Splits the result from an if-statement.
+// ALWAYS returns an array with two strings.
+// if there is no else, the second string is empty.
 function splitConditionalResult(textCtnt:String): Array
 {
 	// Splits the conditional section of an if-statemnt in to two results:
@@ -265,8 +296,6 @@ function splitConditionalResult(textCtnt:String): Array
 	// [if (condition) OUTPUT_IF_TRUE | OUTPUT_IF_FALSE]
 	//                 ^          This Bit            ^
 	// If there is no OUTPUT_IF_FALSE, returns an empty string for the second option.
-	// It's aware of brackets, so it will not split on a | in brackets
-	// This is necessary to allow nested ifs
 
 	var i:Number = 0;
 	var tmp:Number = 0;
@@ -293,21 +322,31 @@ function splitConditionalResult(textCtnt:String): Array
 		// Therefore, upper if statements shouldn't be able to tell they contained deeper 
 		// statements at all anyways, since the deeper statments will be evaluated to
 		// plain text before the upper statements even are parsed at all
+		// As always, more testing is needed.
 		throw new Error("Nested IF statements still a WIP")
 	}
 	return ret;
 }
 
+// Called to evaluate a if statment string, and return the evaluated result.
+// Returns an empty string ("") if the conditional rvaluates to false, and there is no else
+// option.
 function parseConditional(textCtnt:String, depth:int):String
-{
-	// take the contents of an if statement:
+{	
+	// NOTE: enclosing brackets are *not* included in the actual textCtnt string passed into this function
+	// they're shown in the below examples simply for clarity's sake.
+	// And because that's what the if-statements look like in the raw string passed into the parser
+	// The brackets are actually removed earlier on by the recParser() step.
+
+	// parseConditional():
+	// Takes the contents of an if statement:
 	// [if (condition) OUTPUT_IF_TRUE]
 	// [if (condition) OUTPUT_IF_TRUE | OUTPUT_IF_FALSE]
 	// and return the condition and output content as an array:
 	// ["condition", "OUTPUT_IF_TRUE"]
 	// ["condition", "OUTPUT_IF_TRUE | OUTPUT_IF_FALSE"]
 
-	// Allows nested parenthesis, because I'm masochistic
+	// (NOT YET) Allows nested condition parenthesis, because I'm masochistic
 
 	var debug = false;
 
@@ -339,9 +378,16 @@ function parseConditional(textCtnt:String, depth:int):String
 			{
 				// why the fuck was I parsing the "if"?
 				//ifText = recParser(textCtnt.substring(0, tmp));
+
+				// Pull out the conditional, and then evaluate it.
 				conditional = recParser(textCtnt.substring(tmp+1, i), depth);
 				conditional = evalConditionalStatementStr(conditional);
-				output = recParser(textCtnt.substring(i+1, textCtnt.length), depth);	// Parse the trailing text (if any)
+
+				// Make sure the contents of the if-statement have been evaluated to a plain-text string before trying to 
+				// split the base-level if-statement on the "|"
+				output = recParser(textCtnt.substring(i+1, textCtnt.length), depth);	
+
+				// And now do the actual splitting.
 				output = splitConditionalResult(output);
 
 				if (debug) trace("prefix = '", ret[0], "' conditional = ", conditional, " content = ", output);
@@ -359,12 +405,19 @@ function parseConditional(textCtnt:String, depth:int):String
 		throw new Error("Invalid if statement!", textCtnt);
 	return "";
 }
+
+// Called to determine if the contents of a bracket are a parseable statement or not
+// If the contents *are* a parseable, it calls the relevant function to evaluate it
+// if not, it simply returns the contents as passed
 function evalBracketContents(textCtnt:String, depth:int):String
 {
 	var debug = false;
 	var ret:String;
 	if (debug) trace("Evaluating string: ", textCtnt);
 
+	// POSSIBLE BUG: A actual statement starting with "if" could be misinterpreted as an if-statement
+	// It's unlikely, but I *could* see it happening.
+	// I need to do some testing ~~~~Fake-Name
 	if (textCtnt.toLowerCase().indexOf("if") == 0)
 	{
 		if (debug) trace("It's an if-statement");
@@ -381,11 +434,18 @@ function evalBracketContents(textCtnt:String, depth:int):String
 
 import flash.utils.getQualifiedClassName;
 
-// Depth tracks our recursion depth
-// Basically, we need to handle things differently on the first execution, so we don't mistake single-word print-statements for 
-// a tag. Therefore, every call of recParsere increments depth by 1
-function recParser(textCtnt:String, depth:int):String
+
+// Main parser function.
+// textCtnt is the text you want parsed, depth is a number, which should be 0
+// or not passed at all.
+// You pass in the string you want parsed, and the parsed result is returned as a string.
+function recParser(textCtnt:String, depth:int = 0):String
 {
+
+	// Depth tracks our recursion depth
+	// Basically, we need to handle things differently on the first execution, so we don't mistake single-word print-statements for 
+	// a tag. Therefore, every call of recParser increments depth by 1
+
 	depth += 1;
 	var debug = false;
 	textCtnt = String(textCtnt);
@@ -436,6 +496,7 @@ function recParser(textCtnt:String, depth:int):String
 	{
 		if (debug) trace("No brackets present", textCtnt);	
 
+		// Match a single word, with no leading or trailing space
 		var tagRegExp:RegExp = /^\w+$/;
 		var expressionResult:Object = tagRegExp.exec(textCtnt);
 		if (debug) trace("Checking if single word = [" + expressionResult + "]", getQualifiedClassName(expressionResult));
