@@ -59,7 +59,7 @@ function rapeImpWithDick():void {
 	var x:Number = player.cockThatFits(monster.analCapacity());
 	if(x < 0) x = 0;
 	//Single cock
-	outputText(images.showImage("imp-male-win-fuck"), false);
+	outputText(images.showImage("imp-win-male-fuck"), false);
 	if(player.cocks.length == 1) {
 		outputText("With a demonic smile you grab the insensible imp and lift him from the ground by his neck.  The reduced airflow doesn't seem to slow his feverish masturbation at all, and only serves to make him harder.", true);
 		if(player.lowerBody != 4) {
@@ -104,7 +104,7 @@ function rapeImpWithDick():void {
 }
 function rapeImpWithPussy():void {
 	outputText("", true);
-	outputText(images.showImage("imp-female-win-fuck"), false);
+	outputText(images.showImage("imp-win-female-fuck"), false);
 	slimeFeed();
 	outputText("You shed your " + player.armorName+ " without a thought and approach the masturbating imp, looming over him menacingly.  Your " + vaginaDescript(0) + " moistens in anticipation as you gaze down upon his splendid rod. With no hesitation, you lower yourself till your lips are spread wide by his demon-head, the hot pre-cum tingling deliciously.", false);
 	//Too small!

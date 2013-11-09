@@ -4,7 +4,7 @@
 	import classes.breastRowClass;
 	//import classes.cockClass;
 	import classes.Cock;
-	import classes.creature;
+	import classes.Creature;
 	import classes.itemSlotClass;
 	import classes.perkClass;
 	import classes.statusAffectClass;

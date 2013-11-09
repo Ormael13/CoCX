@@ -11,12 +11,12 @@ package classes
 		private var _width:int;
 		private var _height:int;		
 		
-		public function Image(id:String, url:String, w:String, h:String) 
+		public function Image(id:String, url:String, w:int, h:int) 
 		{
 			_id = id;
 			_url = url;
-			_width = int(w);
-			_height = int(h);
+			_width = w;
+			_height = h;
 		}
 		
 		public function get id():String 

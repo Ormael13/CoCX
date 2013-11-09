@@ -46,6 +46,19 @@ package classes
 			return constant;
 		}
 		
+		public static function ParseConstantByIndex(i_type:Class, i_constantIndex:int):Enum
+		{
+			var constants:EnumConstants = _enumDb[getQualifiedClassName(i_type)];
+			if (constants == null)
+				return null;
+				
+			var constant:Enum = constants.ByIndex[i_constantIndex];
+			if (constant != null && i_constantIndex != constant.Index)
+				return null;
+				
+			return constant;			
+		}
+		
 		/*-----------------------------------------------------------------*/
 		
 		/*protected*/
