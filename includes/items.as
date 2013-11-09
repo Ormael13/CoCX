@@ -3031,6 +3031,7 @@ function incubiDraft(tainted:Boolean):void {
 			player.createCock();
 			player.cocks[0].cockLength = rand(3) + 4;
 			player.cocks[0].cockThickness = 1;
+			player.cocks[0].cockType = CockTypesEnum.DEMON;
 			outputText("\n\nYou shudder as a pressure builds in your crotch, peaking painfully as a large bulge begins to push out from your body.  ", false);
 			outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  Eventually the orgasm ends as your " + cockDescript(0) + " fades to a more normal " + player.skinTone + " tone.", false);
 			if(tainted) stats(0,0,0,0,3,5,10,5);
@@ -3094,6 +3095,7 @@ function incubiDraft(tainted:Boolean):void {
 			player.createCock();
 			player.cocks[0].cockLength = rand(3) + 4;
 			player.cocks[0].cockThickness = 1;
+			player.cocks[0].cockType = CockTypesEnum.DEMON;
 			outputText("\n\nYou shudder as a pressure builds in your crotch, peaking painfully as a large bulge begins to push out from your body.  ", false);
 			outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  Eventually the orgasm ends as your " + cockDescript(0) + " fades to a more normal " + player.skinTone + " tone.", false);
 			if(tainted) stats(0,0,0,0,3,5,10,3);
@@ -9420,6 +9422,7 @@ function kangaFruit(type:Number = 0):void {
 	if(player.hasPerk("History: Alchemist") >= 0) changeLimit++;
 	//Used as a holding variable for biggest dicks and the like
 	var x:Number = 0;
+	var biggestCock:Number = 0;
 	//****************
 	//General Effects:
 	//****************
@@ -9514,16 +9517,17 @@ function kangaFruit(type:Number = 0):void {
 		changes++;
 	}
 	//Find biggest dick!
+	biggestCock = player.biggestCockIndex();
 	x = player.biggestCockIndex();
 	//-Shrink dicks down to 8\" max.
 	if(player.hasCock()) {
-		if(player.cocks[x].cockLength >= 16 && changes < changeLimit && rand(5) == 0) {
-			outputText("\n\nA roiling inferno of heat blazes in your " + cockDescript(x) + ", doubling you over in the dirt.  You rock back and forth while tears run unchecked down your cheeks.  Once the pain subsides and you're able to move again, you find the poor member has lost nearly half its size.", false);
-			player.cocks[x].cockLength /= 2;
-			player.cocks[x].cockThickness /= 1.5;
-			if(player.cocks[x].cockThickness * 6 > player.cocks[x].cockLength) player.cocks[x].cockThickness -= .2;
-			if(player.cocks[x].cockThickness * 8 > player.cocks[x].cockLength) player.cocks[x].cockThickness -= .2;
-			if(player.cocks[x].cockThickness < .5) player.cocks[x].cockThickness = .5;
+		if(player.cocks[biggestCock].cockLength >= 16 && changes < changeLimit && rand(5) == 0) {
+			outputText("\n\nA roiling inferno of heat blazes in your " + cockDescript(biggestCock) + ", doubling you over in the dirt.  You rock back and forth while tears run unchecked down your cheeks.  Once the pain subsides and you're able to move again, you find the poor member has lost nearly half its size.", false);
+			player.cocks[biggestCock].cockLength /= 2;
+			player.cocks[biggestCock].cockThickness /= 1.5;
+			if(player.cocks[biggestCock].cockThickness * 6 > player.cocks[biggestCock].cockLength) player.cocks[biggestCock].cockThickness -= .2;
+			if(player.cocks[biggestCock].cockThickness * 8 > player.cocks[biggestCock].cockLength) player.cocks[biggestCock].cockThickness -= .2;
+			if(player.cocks[biggestCock].cockThickness < .5) player.cocks[biggestCock].cockThickness = .5;
 			changes++;
 		}
 		//COCK TF!
@@ -9532,15 +9536,15 @@ function kangaFruit(type:Number = 0):void {
 			if(player.hasSheath()) outputText("your sheath", false);
 			else outputText("a sheath that forms at the base of it", false);
 			outputText(".  <b>You now have a kangaroo-penis!</b>", false);
-			x = 0;
-			//Find first roocock!
-			while(x < player.cockTotal()) {
-				if(player.cocks[x].cockType != CockTypesEnum.KANGAROO) {
-					player.cocks[x].cockType = CockTypesEnum.KANGAROO;
-					player.cocks[x].knotMultiplier = 1;
+			var cockIdx:int = 0;
+			//Find first non-roocock!
+			while(cockIdx < player.cockTotal()) {
+				if(player.cocks[cockIdx].cockType != CockTypesEnum.KANGAROO) {
+					player.cocks[cockIdx].cockType = CockTypesEnum.KANGAROO;
+					player.cocks[cockIdx].knotMultiplier = 1;
 					break;
 				}
-				x++;
+				cockIdx++;
 			}
 			changes++;
 		}
@@ -11597,7 +11601,7 @@ function lustyMaidenPaizuri():void {
 	if(monster.balls > 0) outputText(" and fondle " + monster.pronoun3 + " balls one-handed, squeezing the virile orbs to try and coax more of " + monster.pronoun3 + " dirty, perverted thoughts to distill into salty seed");
 	else if(monster.short == "anemone") outputText(" and stroke " + monster.pronoun3 + " taint, even brushing over the featureless spot where an asshole would be, if she had one, to try and coax more of " + monster.pronoun3 + " dirty, perverted thoughts to distill into salty seed");
 	else outputText(" and stroke " + monster.pronoun3 + " taint, even brushing close to " + monster.pronoun3 + " asshole to try and coax more of " + monster.pronoun3 + " dirty, perverted thoughts to distill into salty seed");
-	outputText(".  A startled moan slips out of " + monster.pronoun3 + " lips, but you're just getting warmed up.  You dive down onto " + monster.pronoun3 + " " + eCockDescript(x) + ", taking the " + eCockHead(0) + " straight into your mouth with a smooth gulp.");
+	outputText(".  A startled moan slips out of " + monster.pronoun3 + " lips, but you're just getting warmed up.  You dive down onto " + monster.pronoun3 + " " + eCockDescript(0) + ", taking the " + eCockHead(0) + " straight into your mouth with a smooth gulp.");
 	if(monster.cockArea(0) >= 80) outputText("  It's so big and strong that pushes right into your throat, stretching out your neck in the shape of the intruding cock.");
 	outputText("  The strong, pulsing cock feels so good inside your mouth, like it belongs there, and you can't help but think that you're doing a good deed by helping " + monster.a + monster.short + " empty every last perverse desire onto your purifying breasts.");
 	

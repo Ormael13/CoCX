@@ -32,7 +32,8 @@ function goblinRapesPlayer():void {
 	outputText("", true);
 	if(player.hasPerk("Bimbo Brains") >= 0) {
 		//[Female Bimbo Loss Against Goblin]
-		if(player.hasVagina()) {
+		if (player.hasVagina()) {
+			outputText(images.showImage("goblin-loss-female-bimbodildo"));
 			outputText("The goblin saunters up to you, wiggling her hips with a needy, sexual sway. She opens a small pouch, the sight of which instantly bombards your easy mind with thoughts of your lower lips being opened similarly, and pulls out a tube of lipstick, pausing to apply it to her lips. She caps off the tube and blows you a kiss with a wet smacking sound as she steps up to your trembling form. Your breath is knocked from your body as she drops all her weight onto your middle, making her ass and well-rounded tits jiggle just like yours do when you are bouncing on a cock. She reaches up to twist her nipple-studs, grinding the wetness of her crotch up and down your belly. You can't help but envy her piercings. Like, they totally turn you on!\n\n", false);
 			outputText("Your body is already hot and your " + nippleDescript(0) + "s harden involuntarily in response to the tiny slut's totally understandable display of desire. Your " + vaginaDescript(0) + " leaks enough girl-juice to form a puddle beneath you, doing it's best to show your fellow slut how ready you are. You 'subtly' (at least in your little mind) push your chest forward, making your " + nippleDescript(0) + "s easy targets for the goblin. She grabs hold of your breasts", false);
 			//--[If nipplecunts]
@@ -80,14 +81,16 @@ function goblinRapesPlayer():void {
 	else outputText("trembling", false);
 	outputText(" form.  Your breath is knocked from your body as she drops all her weight onto your middle, making her ass and well-rounded tits jiggle enticingly.   She reaches up to twist her nipple-studs, grinding the sopping wetness of her crotch up and down your belly.\n\n", false);
 	outputText("Your body grows hot, responding to the tiny fetish-slut's outrageous display of desire.  ", false);
-	if(player.cockTotal() > 0) {
+	if (player.cockTotal() > 0) {
+		outputText(images.showImage("goblin-loss-male-raped"));
 		outputText("The warmth spreads, growing larger ", false);
 		if(player.cocks[0].cockLength <= 7) outputText("as your bulge begins to press between her soft ass-cheeks", false);
 		else if(player.cocks[0].cockLength <= 14) outputText("as your bulge grows upwards between her ass-cheeks and lays against the small of her back", false);
 		else outputText("as your bulge grows up her back and creeps towards her shoulders steadily", false);
 		outputText(".  ", false);
 	}
-	if(player.hasVagina()) {
+	if (player.hasVagina()) {
+		outputText(images.showImage("goblin-loss-female-raped"));
 		if(player.vaginas[0].vaginalWetness <= 1) outputText("The lips of your sex engorge, becoming almost as puffy as the goblin's.  ", false);
 		else if(player.vaginas[0].vaginalWetness < 4) outputText("Feminine lubricant soaks into the back of your " + player.armorName + ".  ", false);
 		else outputText("It rapidly forms into a puddle as your " + vaginaDescript(0) + " does its best to show just how ready you are.  ", false);
@@ -249,6 +252,7 @@ function gobboButtSecks():void {
 	var x:Number = player.cockThatFits(monster.analCapacity());
 	if(x < 0) x = 0;
 	outputText("", true);
+	outputText(images.showImage("goblin-win-male-buttsex"));
 	outputText("As usual, you easily defeat another slutty goblin. Was there any doubt you could? Knowing what's about to happen, the goblin braces herself for the inevitable. Her face is flushed from arousal as she licks her lips. To goad you even further, she spreads her legs, revealing more of her sopping cunt.\n\n", false);
 	outputText("\"<i>Fuck me, stud!</i>\" she begs. Though defeated, she has to gall to make demands. \"<i>Pump me full of your baby batter!</i>\" Her defeat doesn't seem to do much to silence her tongue.\n\n", false);
 	outputText("You're insulted. Who emerged victorious from the prior battle? You could have left her there to wallow in a pool of her own juices if you weren't so damn horny yourself. So what do you do? After some silent pondering, you get a deliciously wicked idea.\n\n", false);
@@ -273,7 +277,8 @@ function gobboButtSecks():void {
 function gobboGetsRapedFem():void {
 	spriteSelect(24);
 	outputText("", true);
-	if(player.isTaur()) {
+	if (player.isTaur()) {
+		outputText(images.showImage("goblin-win-female-taur-rapedfem"));
 		outputText("You pick up the goblin, holding her tightly against your side with your arm. You tear a piece of supple leather off of her slutty garments and use it to bind her arms behind her back, just to be sure she can't do anything. She looks up at you, her eyes wide and frightened at the thought of being at the mercy of a much larger creature. In spite of it all, she seems more than a little turned on, if the juices staining your flank are any indication. You look down at her and remark, \"<i>So the little skank has a submissive streak huh?</i>\"\n\n", false);
 
 		outputText("She blushes red and the flow of feminine fluid thickens as she nods. You know she'll probably enjoy whatever sexual act you could perform with her, so you may as well surprise her. A cruel idea forms in the back of your mind – getting revenge for her attempts to drug you. You easily rip the pouches from her belt and pull out a few random bottles. The goblin, understanding your intent, begins struggling to free herself, but you easily restrain the smaller woman and force the drugs into her mouth, one after the another. When she tries to spit them out, you massage her throat, triggering her instinct to swallow.\n\n", false);
@@ -295,7 +300,8 @@ function gobboGetsRapedFem():void {
 		stats(0,0,0,0,0,0,-100,0);
 	}
 	//Goblin victory rape, female naga:
-	else if(player.isNaga()) {
+	else if (player.isNaga()) {
+		outputText(images.showImage("goblin-win-female-naga-rapedfem"));
 		outputText("You slither over to the helpless goblin, who watches you half in fear, half in curiosity. ", false);
 		//[Has fangs:
 		if(player.faceType == 5) outputText("You bare your fangs at her and the curiosity disappears. She turns to run, but your tail is faster than she is.", false);
@@ -341,6 +347,7 @@ function gobboGetsRapedFem():void {
 		stats(0,0,0,0,0,0,-100,0);
 	}
 	else {
+		outputText(images.showImage("goblin-win-female-rapedfem"));
 		outputText("You pick up the goblin, sitting her onto your knee and restraining both her arms behind her back with your left hand.  You tear a piece of supple leather off of her slutty garments and use it to bind her arms there.  She looks up at you, her eyes wide and frightened at the thought of being at the mercy of a larger creature.  In spite of it all, she seems more than a little turned on, if the juices staining your knee are any indication.  You look down at her and remark, \"<i>So the little skank has a submissive streak huh?</i>\"\n\n", false);
 		outputText("She blushes red and the flow of feminine fluid thickens as she nods.  You know she'll probably enjoy whatever sexual act you could perform with her, so you may as well surprise her.  A cruel idea forms in the back of your mind – getting revenge for her attempts to drug you.  You easily rip the pouches from her belt and pull out a few random bottles.  The goblin, understanding your intent, begins struggling to free herself, but you easily restrain the smaller woman and force the drugs into her mouth, one after the another.  When she tries to spit them out, you massage her throat, triggering her instinct to swallow.\n\n", false);
 		outputText("By the third bottle she's given up on struggling and is instead trying to grind her cunt into your knee.  Her mouth is open wide and her entire face is flushed reddish-purple with desire.  You finish force-feeding her the remaining bottles and shove her, catching her ankles to hold her over your leg with her ass in the air.  The scent of her arousal and the vapors from all the drugs and aphrodisiacs give you a bit of a 'contact high', at least in the sense that your " + vaginaDescript(0) + " ", false);
@@ -379,6 +386,7 @@ function rapeAGoblinCorruptTooBig():void {
 	var x:Number = player.biggestCockIndex();
 	outputText("", true);
 	spriteSelect(24);
+	outputText(images.showImage("goblin-win-male-corruptedfuck"));
 	outputText("You begin to remove your " + player.armorName + ", looking down on your helpless would-be-attacker and soon-to-be victim while licking your lips hungrily. Your " + multiCockDescriptLight(), false);
 	if(player.cockTotal() == 1) outputText(" is", false);
 	else outputText(" are all", false);
@@ -454,6 +462,7 @@ function rapeAGoblinCorruptTooBig():void {
 //(TOO BIG – pin the bitch to the ground with your cock, coat it in her potions, and make her lick it clean, then blow your load in her mouth, possible cum inflation.)
 function manRapesGoblinTooBig():void {
 	outputText("", true);
+	outputText(images.showImage("goblin-win-male-corruptedbj"));
 	var x:Number = player.biggestCockIndex();
 	spriteSelect(24);
 	outputText("You whip out your stiffening maleness, revealing its ", false);
@@ -492,6 +501,7 @@ function gobboGetsRapedMaleFits():void {
 	var x:Number = player.cockThatFits(monster.vaginalCapacity());
 	if(x < 0) x = player.biggestCockIndex();
 	outputText("", true);
+	outputText(images.showImage("goblin-win-male-getridden"));
 	//(FITS( barley) – Get ridden)
 	if(player.cockArea(x) > monster.vaginalCapacity() * .8) {
 		outputText("You pick up the defeated goblin, looking her over. She crosses her arms across her chest pitifully and asks, \"<i>What now?</i>\" with her eyes darting down when she thinks you won't notice. A grimace temporarily crossing her face at the size of your " + cockDescript(x) + ". You get the idea of giving her more cock than she can handle, and lower her down towards your " + cockDescript(x) + ". The tip slips between her moist and folds, stretching her and taking some of her weight off your arms. She winces slightly, wrapping her legs as far around your " + hipDescript() + " as possible.\n\n", false);
@@ -665,6 +675,7 @@ function goblinCondomed():void {
 	spriteSelect(24);
 	var x:Number = player.cockThatFits(monster.vaginalCapacity());
 	outputText("", true);
+	outputText(images.showImage("goblin-win-male-goblincondomed"));
 	outputText("Defeated, the goblin girl's knees give out and she sinks backward, lying on her back with her emerald ankles suspended above her head. \"Use me,\" she begs, \"humiliate, degrade, and debase me! Just, whatever you do, fill me!\" As you strip off your " + player.armorName + ", she spread her legs as wide as she can, the wanton girl presenting her drooling pussy to you, puffy green lips already dripping with beads of anxious sweat and eager lubrication. She wiggles in the dirt, gripping her plump rear with both hands and lifting her ass into the air for you, hopefully. You can practically feel the heat pouring off the small slut's cum-hungry cunt, her breeding-fever leaving her eyes glassy and unfocused. Standing over her, it's clear that the only things she's even aware of are the pulsing pussy between her legs and your burgeoning erection.\n\n", false);
 
 	outputText("Impatiently, she thrusts her legs out and hooks her toes around your lower body, trying to pull you closer while still keeping her needy hole accessible. Her olive feet clench around your flesh, her soles firm and muscular on your " + player.skinFurScales() + " as she slides up and down the outsides of your " + hipDescript() + ". Dragging her heels across your thighs, the goblin pushes her feet together on either side of your " + cockDescript(x) + ", the balls of her jade skin pressing against ", false);
@@ -690,7 +701,8 @@ function goblinCondomed():void {
 function gatsGoblinBoners():void {
 	outputText("", true);
 	var x:Number = player.cockThatFits(monster.analCapacity());
-	if(x < 0) x = player.smallestCockIndex();
+	if (x < 0) x = player.smallestCockIndex();
+	outputText(images.showImage("goblin-win-male-goblinboners"));
 	outputText("The goblin lies strewn across the ground upon her stomach, exhausted from the battle. Her plump legs are unintentionally spread open while her ass pokes up into the air, giving you a clear view of her wet pussy as she tries to get herself off.  It seems as if the green-skinned slut has already forgotten about you - too many fruitless encounters might've caused her to give up hope on finding a virile specimen to pump her full of cum.\n\n", false);
 
 	outputText("Luckily for her, you have every intention of changing that.\n\n", false);
@@ -729,6 +741,7 @@ function gatsGoblinBoners():void {
 
 function laySomeDriderEggsInGobboTwat():void {
 	clearOutput();
+	outputText(images.showImage("goblin-win-drider-egged"));
 	//Play standard goblin victory text
 	outputText("The pitiful struggling of the little green-skinned creature as she tries to scramble away from you gives you a rather generous view of her drooling box.  While you feel yourself ");
 	if(player.hasCock()) outputText("harden");
