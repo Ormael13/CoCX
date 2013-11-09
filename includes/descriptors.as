@@ -1365,10 +1365,17 @@ function breastCup(size:Number):String {
 }
 
 
-function NPCCockDescript(cockType:CockTypesEnum, cockLength:Number = 0, lust:Number = 50):String 
+function NPCCockDescript(cockType:*, cockLength:Number = 0, lust:Number = 50):String 
 {
 	var descript:String = "";
 	
+	// TODO: remove in a few months
+	// need to handle older saves where cockType is still a number
+	if (cockType is Number)
+	{
+		cockType = CockTypesEnum.ParseConstantByIndex(cockType);
+	}
+
 	if(cockType != CockTypesEnum.HUMAN)
 	{
 		descript += NPCCockAdjective(cockType,cockLength,lust);
