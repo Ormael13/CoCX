@@ -26,6 +26,7 @@ package classes
 		{
 			_cockLength = i_cockLength;
 			_cockThickness = i_cockThickness;
+			_cockType = CockTypesEnum.HUMAN;
 			_pierced = 0;
 			_knotMultiplier = 1;
 			_isPierced = false;
@@ -185,7 +186,7 @@ package classes
 				}
 			}
 			return amountGrown;
-		}
+		}	
 		
 		public function get cockLength():Number 
 		{
@@ -249,6 +250,7 @@ package classes
 		}
 		*/
 
+		//{ region Getter/Setters
 		public function get pShortDesc():String 
 		{
 			return _pShortDesc;
@@ -288,5 +290,14 @@ package classes
 		{
 			_pierced = value;
 		}
+		//} endregion
+		
+		//{ region Utility Functions
+		private static function rand(max:Number):Number
+		{
+			return int(Math.random() * max);
+		}
+		
+		//} endregion
 	}
 }

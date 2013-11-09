@@ -1,5 +1,4 @@
 ﻿//CAPACITY: 70
-
 //const KATHERINE_UNLOCKED:int = 398;
 //const KATHERINE_DICK_COUNT:int = 399;
 //const KATHERINE_DICK_LENGTH:int = 400;
@@ -8,27 +7,27 @@
 //const KATHERINE_TIMES_SEXED:int = 403;
 
 function kathCock():String {
-	return NPCCockDescript(2,flags[KATHERINE_DICK_LENGTH]);
+	return NPCCockDescript(CockTypesEnum.DOG,flags[KATHERINE_DICK_LENGTH]);
 }
 function kathCocks():String {
-	if(flags[KATHERINE_DICK_COUNT] < 2) return NPCCockDescript(2,flags[KATHERINE_DICK_LENGTH]);
-	else return NPCCockDescript(2,flags[KATHERINE_DICK_LENGTH]) + "s";
+	if(flags[KATHERINE_DICK_COUNT] < 2) return NPCCockDescript(CockTypesEnum.DOG,flags[KATHERINE_DICK_LENGTH]);
+	else return NPCCockDescript(CockTypesEnum.DOG,flags[KATHERINE_DICK_LENGTH]) + "s";
 }
 function eKathCock():String {
-	if(flags[KATHERINE_DICK_COUNT] < 2) return "her " + NPCCockDescript(2,flags[KATHERINE_DICK_LENGTH]);
-	else return "each of her " + NPCCockDescript(2,flags[KATHERINE_DICK_LENGTH]);
+	if(flags[KATHERINE_DICK_COUNT] < 2) return "her " + NPCCockDescript(CockTypesEnum.DOG,flags[KATHERINE_DICK_LENGTH]);
+	else return "each of her " + NPCCockDescript(CockTypesEnum.DOG,flags[KATHERINE_DICK_LENGTH]);
 }
 function EKathCock():String {
-	if(flags[KATHERINE_DICK_COUNT] < 2) return "Her " + NPCCockDescript(2,flags[KATHERINE_DICK_LENGTH]);
-	else return "Each of her " + NPCCockDescript(2,flags[KATHERINE_DICK_LENGTH]);
+	if(flags[KATHERINE_DICK_COUNT] < 2) return "Her " + NPCCockDescript(CockTypesEnum.DOG,flags[KATHERINE_DICK_LENGTH]);
+	else return "Each of her " + NPCCockDescript(CockTypesEnum.DOG,flags[KATHERINE_DICK_LENGTH]);
 }
 function oKathCock():String {
-	if(flags[KATHERINE_DICK_COUNT] < 2) return "her " + NPCCockDescript(2,flags[KATHERINE_DICK_LENGTH]);
-	else return "one of her " + NPCCockDescript(2,flags[KATHERINE_DICK_LENGTH]);
+	if(flags[KATHERINE_DICK_COUNT] < 2) return "her " + NPCCockDescript(CockTypesEnum.DOG,flags[KATHERINE_DICK_LENGTH]);
+	else return "one of her " + NPCCockDescript(CockTypesEnum.DOG,flags[KATHERINE_DICK_LENGTH]);
 }
 function OKathCock():String {
-	if(flags[KATHERINE_DICK_COUNT] < 2) return "Her " + NPCCockDescript(2,flags[KATHERINE_DICK_LENGTH]);
-	else return "One of her " + NPCCockDescript(2,flags[KATHERINE_DICK_LENGTH]);
+	if(flags[KATHERINE_DICK_COUNT] < 2) return "Her " + NPCCockDescript(CockTypesEnum.DOG,flags[KATHERINE_DICK_LENGTH]);
+	else return "One of her " + NPCCockDescript(CockTypesEnum.DOG,flags[KATHERINE_DICK_LENGTH]);
 }
 
 

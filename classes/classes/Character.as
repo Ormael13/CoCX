@@ -1,12 +1,12 @@
 package classes 
 {
-	import classes.creature;
+	import classes.Creature;
 	
 	/**
 	 * Character class for player and NPCs. Has subclasses Player and NonPlayer.
 	 * @author Yoffy
 	 */
-	public class Character extends creature 
+	public class Character extends Creature 
 	{
 		
 		public var femininity:Number = 50;
