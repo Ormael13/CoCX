@@ -75,9 +75,8 @@ function mainMenu(e:MouseEvent = undefined):void {
 	outputText("(Alternative) <b>Corruption of Champions (" + version + ")</b>\n(Formerly Unnamed Text Game)", true);
 	
 
-	/*
 	
-
+	/*
 	// This junk was for testing my new parser. It can be removed, I think. 
 	// I still have a few parser tweaks I want to do, though.
 	// Really, I should have a "test parser" button, but LAZY
