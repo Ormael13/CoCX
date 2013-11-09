@@ -1,4 +1,4 @@
-﻿// import flash.events.MouseEvent;
+// import flash.events.MouseEvent;
 
 //const DOUBLE_ATTACK_STYLE:int = 867;
 //const SPELLS_CAST:int = 868;
@@ -112,6 +112,7 @@ function speech(output:String, speaker:String):void {
 	outputText(speech, false);
 }
 
+/*
 function checkCondition(variable:String, op:String, test:String):Boolean
 {	
 	//Regex to check if something is a number
@@ -217,6 +218,10 @@ function checkCondition(variable:String, op:String, test:String):Boolean
 		else if(op == ">")
 		{
 			result = (a > b);
+		}
+		else if(op == "==")
+		{
+			result = (a == b);
 		}
 		else if(op == "<")
 		{
@@ -353,12 +358,22 @@ function checkCondition(variable:String, op:String, test:String):Boolean
 	
 	return result;
 }
+*/
 
 function parseText(text:String):String
 {
+	// Moved into external parser.
+	text = recParser(text, 0); 
+	return text;
+}
+
+	/*
+	var debug = true;
+
+
 	//PARSE DAT TEXT!
 	//Now with more awesome!
-	
+	if(debug) trace("Parsing Text");
 	//Regex to check if something is a number
 	var isNumber:RegExp = new RegExp("[0-9]+");
 	
@@ -377,9 +392,17 @@ function parseText(text:String):String
 	//Regex to match branch tags - You can't nest if's, and they MUST end with a space to make recursive parsing work
 	//var branchTag:RegExp = new RegExp("\\[if\\s\\(([a-zA-Z]+)\\s(=|!=|>|<|<=|>=)\\s(.*?)\\)\\s\\\"(.*?)\\\"\\]");
 	//var branchTag:RegExp = new RegExp("\\[if\\s\\((.*?)\\)\\s\\\"(.*?)\\\"\\]");
-	var branchTag:RegExp = new RegExp("\\[if\\s(.*?)\\s\\\"(.*?)\\\"\\]");
+	//
+	// Produces: [if (EXPRESSION) \"OUTPUT_TEXT\"]
+	// where OUTPUT_TEXT is passed recursively into parseText
+	//
+	var branchTag:RegExp = /\[if (.*?) \"(.*?)\"\]/i;		// unbreak my text editors highlighting "
+	
+	var branchTagElse:RegExp = /\[if (.*?) \"(.*?)\" else \"(.*?)\"\]/i; 		//"
 
-	var branchTagElse:RegExp = new RegExp("\\[if\\s(.*?)\\s\\\"(.*?)\\\"\\selse\\s\\\"(.*?)\\\"\\]");
+	// Old regexes
+	// var branchTag:RegExp = new RegExp("\\[if\\s(.*?)\\s\\\"(.*?)\\\"\\]");
+	// var branchTagElse:RegExp = new RegExp("\\[if\\s(.*?)\\s\\\"(.*?)\\\"\\selse\\s\\\"(.*?)\\\"\\]");
 
 	var rep:String;
 	//We parse the tags from most complex to most basic, as the basic tag has the most "greedy" regex
@@ -641,7 +664,7 @@ function parseText(text:String):String
 	//While we have basic tags
 	while (result != null)
 	{
-//		rep;
+	//	rep;
 		
 		//Same as param tags, but without the param
 		switch(result[1])
@@ -818,7 +841,7 @@ function parseText(text:String):String
 		
 		result = basicTag.exec(text);
 	}
-	
+	*/
 	
 	//Old stuff
 	
@@ -884,10 +907,13 @@ function parseText(text:String):String
 		output = output.split("[vagOrAss]").join(vaginaDescript());
 		output = output.split("[clit]").join(clitDescript());
 	}
-	else output = output.split("[vagOrAss]").join(assholeDescript());*/
+	else output = output.split("[vagOrAss]").join(assholeDescript());
 	
 	return text;
 }
+
+*/
+
 function clearOutput():void {
 	currentText = "";
 	mainText.htmlText = "";
