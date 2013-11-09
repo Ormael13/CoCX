@@ -610,12 +610,12 @@ function changeGooDick():void {
 	}
 	menu();
 	if(flags[GOO_DICK_LENGTH] > 0) {
-		if(hasItem("CanineP",1) && flags[GOO_DICK_TYPE] != 2) addButton(2,"Canine Pepper",latexyEatsADickItem,"CanineP");
-		if(hasItem("Equinum",1) && flags[GOO_DICK_TYPE] != 1) addButton(3,"Equinum",latexyEatsADickItem,"Equinum");
-		if(hasItem("P.Draft",1) && flags[GOO_DICK_TYPE] != 0) addButton(4,"Pure Draft",latexyEatsADickItem,"P.Draft");
-		if(hasItem("W.Fruit",1) && flags[GOO_DICK_TYPE] != 5) addButton(5,"Whisker Fruit",latexyEatsADickItem,"W.Fruit");
-		if(hasItem("IncubiD",1) && flags[GOO_DICK_TYPE] != 3) addButton(0,"Incubi Draft",latexyEatsADickItem,"IncubiD");
-		if(hasItem("MinoBlo",1) && flags[GOO_DICK_TYPE] != 1) addButton(1,"Mino Blood",latexyEatsADickItem,"MinoBlo");
+		if(hasItem("CanineP",1) && flags[GOO_DICK_TYPE] != CockTypesEnum.DOG) addButton(2,"Canine Pepper",latexyEatsADickItem,"CanineP");
+		if(hasItem("Equinum",1) && flags[GOO_DICK_TYPE] != CockTypesEnum.HORSE) addButton(3,"Equinum",latexyEatsADickItem,"Equinum");
+		if(hasItem("P.Draft",1) && flags[GOO_DICK_TYPE] != CockTypesEnum.HUMAN) addButton(4,"Pure Draft",latexyEatsADickItem,"P.Draft");
+		if(hasItem("W.Fruit",1) && flags[GOO_DICK_TYPE] != CockTypesEnum.CAT) addButton(5,"Whisker Fruit",latexyEatsADickItem,"W.Fruit");
+		if(hasItem("IncubiD",1) && flags[GOO_DICK_TYPE] != CockTypesEnum.DEMON) addButton(0,"Incubi Draft",latexyEatsADickItem,"IncubiD");
+		if(hasItem("MinoBlo",1) && flags[GOO_DICK_TYPE] != CockTypesEnum.HORSE) addButton(1,"Mino Blood",latexyEatsADickItem,"MinoBlo");
 		if(hasItem("GroPlus",1)) addButton(6,"Gro Plus",latexyEatsADickItem,"GroPlus");
 		if(hasItem("Reducto",1) && flags[GOO_DICK_LENGTH] >= 5) addButton(7,"Reducto",latexyEatsADickItem,"Reducto");
 	}	
@@ -639,7 +639,7 @@ function latexyEatsADickItem(item:String = ""):void {
 		if(item == "MinoBlo") {
 			outputText("On and on it comes.  She's truly going to be hung like a stallion at this rate!   ");
 			flags[GOO_DICK_LENGTH] = 13;
-			flags[GOO_DICK_TYPE] = 1;
+			flags[GOO_DICK_TYPE] = CockTypesEnum.HORSE;
 		}
 		outputText("Then, it begins to stiffen, arching up into full arousal.  The new-grown cock appears to have grown from her clit, but as you lean down to examine her vagina, you realize her cunt has shifted down slightly, and a new clit has grown to replace the old.");
 		outputText("\n\n\"<i>You're making it harder!</i>\" " + flags[GOO_NAME] + " whines, trying to cover it with her hands.  Of course, that only makes it harder, and a bead of oily pre-cum beads at the tip.  You could get used to this.  <b>" + flags[GOO_NAME] + " now has a " + num2Text(flags[GOO_DICK_LENGTH]) + "-inch ");
@@ -658,12 +658,12 @@ function latexyEatsADickItem(item:String = ""):void {
 		}
 		else {
 			outputText("Her " + gooCock() + " rapidly erects, rising to full tumescence in seconds.  The veins begin to shift, crawling around under her onyx skin like little worms as her penis reshapes it.  A muffled moan escapes from " + flags[GOO_NAME] + "'s lips along with a discharge of black pre-cum from her tip and slit.  Then, with a powerful flex, the latex woman's penis solidifies into a new shape.  <b>" + flags[GOO_NAME] + "'s maleness is now a ");
-			if(item == "CanineP") flags[GOO_DICK_TYPE] = 2;
-			if(item == "Equinum") flags[GOO_DICK_TYPE] = 1;
-			if(item == "P.Draft") flags[GOO_DICK_TYPE] = 0;
-			if(item == "W.Fruit") flags[GOO_DICK_TYPE] = 5;
-			if(item == "IncubiD") flags[GOO_DICK_TYPE] = 3;
-			if(item == "MinoBlo") flags[GOO_DICK_TYPE] = 1;
+			if(item == "CanineP") flags[GOO_DICK_TYPE] = CockTypesEnum.DOG;
+			if(item == "Equinum") flags[GOO_DICK_TYPE] = CockTypesEnum.HORSE;
+			if(item == "P.Draft") flags[GOO_DICK_TYPE] = CockTypesEnum.HUMAN;
+			if(item == "W.Fruit") flags[GOO_DICK_TYPE] = CockTypesEnum.CAT;
+			if(item == "IncubiD") flags[GOO_DICK_TYPE] = CockTypesEnum.DEMON;
+			if(item == "MinoBlo") flags[GOO_DICK_TYPE] = CockTypesEnum.HORSE;
 			outputText(gooCock() + "!</b>");
 		}
 		gooObedience(2);
@@ -1379,7 +1379,7 @@ function femalePCDomFucksLatexGooFuta():void {
 	outputText("\n\nYou bounce atop " + flags[GOO_NAME] + " faster and faster");
 	if(flags[GOO_DICK_LENGTH] * flags[GOO_DICK_LENGTH]/6 <= player.vaginalCapacity()) outputText(", your [butt] clapping wetly against her onyx thighs");
 	outputText(".  All too soon, you feel a telltale twitching of the " + gooCock() + " inside you, and before you can stop it, a thick, slick feeling of warmth radiates outward from your womb.  Accompanying the explosion of moisture and bodily heat, a gradual pressure wells up in your womb, culminating in an explosion of slick sable goop that ");
-	if(flags[GOO_DICK_TYPE] == 2) outputText("stays trapped inside you thanks to your pet's thick knot");
+	if(flags[GOO_DICK_TYPE] == CockTypesEnum.DOG) outputText("stays trapped inside you thanks to your pet's thick knot");
 	else outputText("sprays out of your [vagina]");
 	outputText(".  You look over your shoulder and scold, \"<i>I didn't give you permission to cum!</i>\"");
 	
@@ -1419,7 +1419,7 @@ function femalePCDomFucksLatexGooFuta():void {
 	if(player.hasCock()) outputText("  White erupts from your " + multiCockDescriptLight() + " with abandon.  You don't even care that it stains " + flags[GOO_NAME] + "'s " + gooTits() + ".  It feels so good and she looks so pretty with strands of icing spattering over top of her.");
 	if(player.hasCock() && player.cumQ() >= 750) outputText("  Of course, you quickly bury those strands in a wave of alabaster.");
 	outputText("\n\n" + flags[GOO_NAME] + " hugs you tight as she finishes unloading inside you.  Those last few squirts of sable spunk make your cunny feel like a mush of pleasure.  Sighing contentedly, you rise up off of your conquest");
-	if(flags[GOO_DICK_TYPE] == 2) outputText(", ignoring the loud 'pop' of her knot slipping free,");
+	if(flags[GOO_DICK_TYPE] == CockTypesEnum.DOG) outputText(", ignoring the loud 'pop' of her knot slipping free,");
 	outputText(" and present your stained vagina to her face.  She knows what to do, and immediately sets to cleaning it with her tongue.  Over two feet of flexible mouth muscle burrow into your [vagina], and the pleasant caresses let you know just much your pet enjoys this task.  She devours her sticky spunk and your female fluids with ardor, never slowing in her task.  Even when you're sure that you're clean, she keeps going, inciting tingles of fresh lust from your body.");
 	outputText("\n\nThat will not do.  You command her to stop");
 	if(flags[LATEX_GOO_TIMES_FEMDOMMED_BY_PC] > 0) outputText(", and obediently, she does.  To reward her for being a good pet, you give her a deep tongue kiss.");

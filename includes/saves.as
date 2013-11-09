@@ -33,7 +33,7 @@ function loadSaveDisplay(slot:String, slotName:String):String
 	//Initialize the save file
 	var saveFile = SharedObject.getLocal(slot, "/");
 	
-	var pfileHolding:creature;
+	var pfileHolding:Creature;
 	if (saveFile.data.exists)
 	{
 		if (saveFile.data.notes == undefined)
@@ -280,7 +280,6 @@ function saveGame(slot:String):void
 function loadGame(slot:String):void
 {
 	var saveFile = SharedObject.getLocal(slot, "/");
-	;
 	loadGameObject(saveFile, slot);
 	outputText("Game Loaded", true);
 	temp = 0;
@@ -483,7 +482,7 @@ function saveGameObject(slot:String, isFile:Boolean):void
 	{
 		saveFile.data.cocks[i].cockThickness = player.cocks[i].cockThickness;
 		saveFile.data.cocks[i].cockLength = player.cocks[i].cockLength;
-		saveFile.data.cocks[i].cockType = player.cocks[i].cockType.toString();
+		saveFile.data.cocks[i].cockType = player.cocks[i].cockType.Index;
 		saveFile.data.cocks[i].knotMultiplier = player.cocks[i].knotMultiplier;
 		saveFile.data.cocks[i].pierced = player.cocks[i].pierced;
 		saveFile.data.cocks[i].pShortDesc = player.cocks[i].pShortDesc;
@@ -640,6 +639,7 @@ function saveGameObject(slot:String, isFile:Boolean):void
 	saveFile.data.itemSlot1.shortName = itemSlot1.shortName;
 	saveFile.data.itemSlot1.unlocked = itemSlot1.unlocked;
 	saveFile.data.itemSlot2 = new Array();
+	saveFile.data.itemSlot2.quantity = itemSlot2.quantity;
 	saveFile.data.itemSlot2.quantity = itemSlot2.quantity;
 	saveFile.data.itemSlot2.shortName = itemSlot2.shortName;
 	saveFile.data.itemSlot2.unlocked = itemSlot2.unlocked;
@@ -1045,7 +1045,7 @@ function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		{
 			player.cocks[i].cockThickness = saveFile.data.cocks[i].cockThickness;
 			player.cocks[i].cockLength = saveFile.data.cocks[i].cockLength;
-			player.cocks[i].cockType = CockTypesEnum.legacySuportLoadCockType(saveFile.data.cocks[i].cockType);
+			player.cocks[i].cockType = CockTypesEnum.ParseConstantByIndex(saveFile.data.cocks[i].cockType);
 			player.cocks[i].knotMultiplier = saveFile.data.cocks[i].knotMultiplier;
 			if(saveFile.data.cocks[i].sock == undefined) player.cocks[i].sock = "";
 			else player.cocks[i].sock = saveFile.data.cocks[i].sock;

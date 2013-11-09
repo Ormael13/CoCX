@@ -1389,6 +1389,11 @@ function giveArianAnal():void {
 	flags[ARIAN_ANAL_XP] += 10;
 	if(flags[ARIAN_ANAL_XP] >= 100) flags[ARIAN_ANAL_XP] = 100;
 	flags[ARIAN_VIRGIN] += 1;
+	if (flags[ARIAN_VAGINA] > 0)	
+		outputText(images.showImage("arianfemale-home-giveArianAnal"));	
+	else	
+		outputText(images.showImage("arianmale-home-giveArianAnal"));	
+	
 	outputText("You tell Arian that, if " + arianMF("he","she") + "'s willing, you'd like to take " + arianMF("him","her") + " from behind.");
 	//AnalXP < 33
 	//Tight, sensitive enough to orgasm. (It hurts... but feels good)
@@ -1667,6 +1672,10 @@ function getBlownByArian():void {
 	clearOutput();
 	flags[ARIAN_VIRGIN] += 1;
 	arianHealth(3);
+	if (flags[ARIAN_VAGINA] > 0)	
+		outputText(images.showImage("arianfemale-home-getbj"));	
+	else	
+		outputText(images.showImage("arianmale-home-getbj"));
 	outputText("You trail your hand down your belly, pondering what to do.  Arian doesn't seem to notice, instead staring with anticipation at your erection.  You idly swing your hips from side to side, and notice with amusement that the lizan seems to follow it.  Building on that train of thought, you ask if " + arianMF("he","she") + " would be willing to suck you off.");
 	
 	//(if ArianHasBlown == 0)
@@ -1752,6 +1761,7 @@ function penetrateArian():void {
 	clearOutput();
 	flags[ARIAN_VIRGIN] += 1;
 	arianHealth(3);
+	outputText(images.showImage("arianfemale-home-penetrate"));
 	outputText("You admire the transgendered lizan's body, from her feminized features, down past her " + arianChest() + ", all the way to her shapely thighs.  You tell Arian that the change looks very good on her; few boys would really be so naturally pretty when turned into a ");
 	if(flags[ARIAN_COCK_SIZE] > 0) outputText("dick");
 	outputText("girl.");
@@ -1870,6 +1880,10 @@ function getButtWreckedByArian():void {
 	clearOutput();
 	flags[ARIAN_VIRGIN] += 1;
 	arianHealth(3);
+	if (flags[ARIAN_VAGINA] > 0)	
+		outputText(images.showImage("arianfemale-home-getArianAnal"));	
+	else	
+		outputText(images.showImage("arianmale-home-getArianAnal"));
 	outputText("With a lick of your lips with your tongue, you ask how Arian would like to be on the pitching end of anal?");
 	//(if AnalXP < 33)
 	if(flags[ARIAN_ANAL_XP] < 33) outputText("\n\n\"<i>I don't know... won't it hurt, are you sure?</i>\"");
@@ -2019,6 +2033,10 @@ function suckAriansDick():void {
 	clearOutput();
 	flags[ARIAN_VIRGIN] += 1;
 	arianHealth(3);
+	if (flags[ARIAN_VAGINA] > 0)	
+		outputText(images.showImage("arianfemale-home-suckariandick"));	
+	else	
+		outputText(images.showImage("arianmale-home-suckariandick"));
 	outputText("You make a show of lewdly licking your lips and ask Arian if " + arianMF("he","she") + "'d be willing to let you have a little taste of lizan essence...?");
 	outputText("\n\n\"<i>Are you sure?  I could do something for you if you feel like,</i>\" Arian offers.");
 	
@@ -2110,6 +2128,10 @@ function getPenetratedByArianAndHisHitlerMustache():void {
 	clearOutput();
 	flags[ARIAN_VIRGIN] += 1;
 	arianHealth(3);
+	if (flags[ARIAN_VAGINA] > 0)	
+		outputText(images.showImage("arianfemale-home-getpenetrated"));	
+	else	
+		outputText(images.showImage("arianmale-home-getpenetrated"));
 	outputText("You look at Arian's ");
 	if(flags[ARIAN_COCK_SIZE] < 3) outputText("slit, and think of what it's hiding in there");
 	else {
@@ -2263,6 +2285,7 @@ function doublePenetrateArian():void {
 	clearOutput();
 	flags[ARIAN_VIRGIN] += 1;
 	arianHealth(3);
+	outputText(images.showImage("arianfemale-home-doublepenetrate"));	
 	var x:int = player.cockThatFits(flags[ARIAN_CAPACITY]);
 	var y:int = player.cockThatFits2(flags[ARIAN_CAPACITY]);
 	outputText("You look over your feminine lizard lover, and feel your " + multiCockDescriptLight() + " starting to stir in your [armor].  Since you have enough tools for the job, and Arian has enough holes, you ask if Arian would be willing to let you fuck her in both her ass and pussy at the same time?");
@@ -2398,6 +2421,10 @@ function arianDocking():void {
 	clearOutput();
 	flags[ARIAN_VIRGIN] += 1;
 	arianHealth(3);
+	if (flags[ARIAN_VAGINA] > 0)	
+		outputText(images.showImage("arianfemale-home-docking"));	
+	else	
+		outputText(images.showImage("arianmale-home-docking"));
 	outputText("You set your eyes on Arian's genital slit, and then smile at " + arianMF("him","her") + ".  You ask how " + arianMF("he","she") + "'d feel about ‘hiding' your cock, rather than " + arianMF("his","hers") + ", inside " + arianMF("his","her") + " slit?");
 	
 	outputText("\n\nArian shudders a bit.  \"<i>That... would feel kinda weird, I think, but it's not unheard of among certain lizan couples.  If you want to try that, I'm okay with it.</i>\"");
@@ -3137,8 +3164,14 @@ function giveArianReptilum():void {
 	if(player.hasCock()) outputText("cock from base to tip");
 	else if(player.hasVagina()) outputText("pussy all the way from the back to the tip of your [clit]");
 	else outputText("your sweaty crotch");
-	outputText(".  \"<i>Yummy!  I could use seconds, but roleplay time is over; let's have... masturbate each other!</i>\"  " + arianMF("He","She") + " begins stroking " + arianMF("his","her") + " ");
-	if(flags[ARIAN_COCK_SIZE] == 1) {
+	outputText(".  \"<i>Yummy!  I could use seconds, but roleplay time is over; let's have... masturbate each other!</i>\"  " + arianMF("He", "She") + " begins stroking " + arianMF("his", "her") + " ");
+	
+	if (flags[ARIAN_VAGINA] > 0)	
+		outputText(images.showImage("arianfemale-home-mutualmasturbation"));	
+	else	
+		outputText(images.showImage("arianmale-home-mutualmasturbation"));
+	
+		if(flags[ARIAN_COCK_SIZE] == 1) {
 		outputText("quickly erecting lizan cock");
 		if(flags[ARIAN_DOUBLE_COCK] > 0) outputText("s");
 		if(flags[ARIAN_VAGINA] > 0) outputText(" and her ");
@@ -3492,6 +3525,11 @@ function dontTeaseHighAnalXPArian():void {
 //[=Tease=]
 function TeaseHighAnalXPArian():void {
 	clearOutput();
+	
+	if (flags[ARIAN_VAGINA] > 0)	
+		outputText(images.showImage("arianfemale-camp-dreamingArian"));	
+	else	
+		outputText(images.showImage("arianmale-camp-dreamingArian"));
 	flags[ARIAN_MORNING] = 1;
 	outputText("\n\nFirst, you decide to check what exactly is Arian dreaming about...");
 	outputText("\n\n\"<i>...[name]... no... don't stuff that turkey... stuff me....  I wanna be tasty too.</i>\"");
@@ -3532,7 +3570,11 @@ function TeaseHighAnalXPArian():void {
 //Outcome slightly modified by AnalXP.
 function wakeUpAfterArianSleep():void {
 	clearOutput();
-	if(player.hasCock()) {
+	if (player.hasCock()) {
+		if (flags[ARIAN_VAGINA] > 0)	
+			outputText(images.showImage("arianfemale-camp-dreamingArian"));	
+		else	
+			outputText(images.showImage("arianmale-camp-dreamingArian"));
 		//(if AnalXP < 33)
 		if(flags[ARIAN_ANAL_XP] < 33) {
 			//(PC tried but didn't manage to get their cocks in. Even tho you slept with it inside, you do go flaccid at some point in the night.)

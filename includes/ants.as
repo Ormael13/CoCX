@@ -97,7 +97,8 @@ function keepHidden():void {
 		return;
 	}
 	//►(If Over 41 - Male)
-	else if(player.hasCock()) {
+	else if (player.hasCock()) {
+		outputText(images.showImage("ants-desert-male-firstencounter"));
 		outputText("You know exactly that's going to happen once the demons 'subdue' their prey.  The growing throbbing in your loins begs for release, and you quickly and quietly take off your " + player.armorName + ", making sure the demons don't notice you.  You might as well watch the show as you're not gonna be able to leave unnoticed until the demons are done anyways.");
 		outputText("\n\nWatching from your hiding spot you start to stroke your " + cockDescript(0) + ".");
 		//Start Dick Size Check
@@ -138,6 +139,7 @@ function keepHidden():void {
 	}
 	//►If Over 41 - Female 
 	else {
+		outputText(images.showImage("ants-desert-female-firstencounter"));
 		outputText("Watching from your hiding spot, you consider what's going to happen and feel your pussy immediately moisten.  Your practiced hands move with deftness, slipping into your [armor].");
 		outputText("\n\nFeeling your heat through your [armor], you quickly and quietly strip, every now and then glancing down to make sure you're not seen.  Once you're completely nude, you find a nice vantage point to view the impending rape.  By the time you've gotten yourself ready, you realize the demons have already started.");
 		outputText("\n\nRunning your hands over your breasts, you pinch your [nipple] and give a soft coo, careful to keep your voice down.  Alas, your body's reactions start to overwhelm your senses and you slowly begin to forget that you're even trying to hide.");

@@ -14,8 +14,8 @@ stage.addEventListener(KeyboardEvent.KEY_DOWN, keyboard);
 mainView.textBGWhite.visible = false;
 mainView.textBGTan.visible = false;
 
-//Not exactly sure what the purpose of this is. I'm pretty sure there is no Serializing going on anywhere.
-registerClassAlias("creature", creature);
+//Not exactly sure what the purpose of this is.
+registerClassAlias("Creature", Creature);
 registerClassAlias("itemSlotClass", itemSlotClass);
 //registerClassAlias("cockClass", cockClass);
 registerClassAlias("Cock", Cock);

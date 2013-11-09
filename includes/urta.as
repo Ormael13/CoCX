@@ -593,9 +593,9 @@ function urtaFuckHer():void {
 	flags[URTA_TIME_SINCE_LAST_CAME] = 5;
 	var cocks:Number = player.cockTotal();
 	outputText("", true);
-	outputText(images.showImage("urta-behindbar-fuck"), false);
 	//(FUCK HER FEMALE/GENDERLESS)
-	if(player.totalCocks() == 0) {
+	if (player.totalCocks() == 0) {
+		outputText(images.showImage("urta-behindbar-female-fuckurta"), false);
 		slimeFeed();
 		outputText("You come out of the shadows, shedding your " + player.armorName + ".  ", false);
 		if(player.cor < 50) outputText("You blush furiously at exposing yourself in such a way.", false);
@@ -646,7 +646,8 @@ function urtaFuckHer():void {
 	else {
 		var x:Number = player.cockThatFits(urtaCapacity());
 		var y:Number = player.cockThatFits2(urtaCapacity());
-		if(x < 0) x = 0;
+		if (x < 0) x = 0;
+		outputText(images.showImage("urta-behindbar-male-fuckurta"), false);
 		outputText("You come out of the shadows, shedding your " + player.armorName + ".  ", false);
 		if(player.cor < 60) outputText("You blush furiously at exposing yourself in such a way", false);
 		else outputText("Smiling seductively; you revel in exposing yourself so suddenly", false);
@@ -803,7 +804,6 @@ function blowUrtaUnderTable():void {
 function takeUrtaInTheButtPublically():void {
 	spriteSelect(1);
 	outputText("", true);
-	outputText(images.showImage("urta-public-fuck"), false);
 	var tooBig:Boolean = false;
 	if(player.cor < 30 && flags[PC_FETISH] == 0) {
 		outputText("No way!  You're not going to do that in front of EVERYONE.", false);
@@ -815,6 +815,7 @@ function takeUrtaInTheButtPublically():void {
 	flags[TIMES_FUCKED_URTA]++;
 	urtaLove(2);
 	flags[URTA_TIME_SINCE_LAST_CAME] = 5;
+	outputText(images.showImage("urta-public-fuck"), false);
 	if(player.cor < 60 && flags[PC_FETISH] == 0) outputText("You can't believe you're doing it, but you undo the lower half of your " + player.armorName + ".  ", false);
 	else outputText("You happily remove the lower half of your " + player.armorName + ", more than a little excited at the prospect of putting on a show for the crowd.  ", false);
 	outputText("Urta casually flips up her skirt and ", false);
@@ -1227,13 +1228,13 @@ function fuckItAndLeave():void {
 function tenderTakeItUpTheAssFromUrta():void {
 	spriteSelect(1);
 	outputText("", true);
-	outputText(images.showImage("urta-home-anal"), false);
 	flags[PC_SEEN_URTA_SEX_TOYS]++;
 	urtaLove(1);
 	flags[TIMES_FUCKED_URTA]++;
 	flags[URTA_COMFORTABLE_WITH_OWN_BODY]++;
 	flags[URTA_TIME_SINCE_LAST_CAME] = 2 + rand(3);
 	var cocks:Number = player.totalCocks();
+	outputText(images.showImage("urta-home-anal"), false);
 	outputText("You give Urta's backside a playful slap and ask her to roll over.  She does so with a hesitant look on her face, wondering what you're about.  When you spread her legs and work your way forward to straddle her, a beaming smile breaks across her face and she says, \"<i>You really want me inside you, don't you " + player.short + "?</i>\"\n\n", false);
 	
 	outputText("Her cheeks color when you give her a nod and begin lowering your " + buttDescript() + " towards her pillar of horse-flesh.  She gasps quietly when the tip begins to push against your " + assholeDescript() + ".  ", false);
@@ -1604,7 +1605,7 @@ function rideUrtasCoochLoveyDovey():void {
 		return;
 	}
 	//(SHIT FITS)
-	outputText(images.showImage("urta-home-fuck"), false);
+	outputText(images.showImage("urta-home-female-fuck"), false);
 	outputText("Urta bursts into a wide smile at your suggestion and scooches over, making room for you on the bed.  ", false);
 	if(player.cockTotal() > 0) {
 		outputText("She tosses you ", false);
