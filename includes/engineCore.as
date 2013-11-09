@@ -1,4 +1,4 @@
-﻿// import flash.events.MouseEvent;
+// import flash.events.MouseEvent;
 
 //const DOUBLE_ATTACK_STYLE:int = 867;
 //const SPELLS_CAST:int = 868;
@@ -112,6 +112,7 @@ function speech(output:String, speaker:String):void {
 	outputText(speech, false);
 }
 
+/*
 function checkCondition(variable:String, op:String, test:String):Boolean
 {	
 	//Regex to check if something is a number
@@ -357,11 +358,15 @@ function checkCondition(variable:String, op:String, test:String):Boolean
 	
 	return result;
 }
+*/
 
 function parseText(text:String):String
 {
+	// Moved into external parser.
+	text = recParser(text); 
+	return text;
+}
 
-	text = recParser(text);
 	/*
 	var debug = true;
 
@@ -902,10 +907,13 @@ function parseText(text:String):String
 		output = output.split("[vagOrAss]").join(vaginaDescript());
 		output = output.split("[clit]").join(clitDescript());
 	}
-	else output = output.split("[vagOrAss]").join(assholeDescript());*/
+	else output = output.split("[vagOrAss]").join(assholeDescript());
 	
 	return text;
 }
+
+*/
+
 function clearOutput():void {
 	currentText = "";
 	mainText.htmlText = "";

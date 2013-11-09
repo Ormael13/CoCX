@@ -1,17 +1,39 @@
 
-
-
 /*
-planned syntax:
+syntax:
 
-[if (condition) OUTPUT_IF_TRUE]
-[if (condition) OUTPUT_IF_TRUE | OUTPUT_IF_FALSE]		// Note - Implicit else indicated by presence of the "|"
-[functionName|ButtonText]								// Jumps to a section with the label functionName
-[desc|DESC_NAME]										// queries a description parameter
+// Querying simple PC stat nouns:
+	[noun]
+
+
+Conditional statements:
+// Simple if statement:
+	[if (condition) OUTPUT_IF_TRUE]							
+// If-Else statement
+	[if (condition) OUTPUT_IF_TRUE | OUTPUT_IF_FALSE]		
+	// Note - Implicit else indicated by presence of the "|"
+
+Planned, but not implemented yet:
+	
+	[desc|DESC_NAME]										// queries a description parameter
+	// Get specific attribute of item/char/whatever "desc"
+	// Eventually, I want this to be able to use introspection to access class attributes directly
+	// Maybe even manipulate them, though I haven't thought that wout much at the moment.
+
+	[screen (SCREEN_NAME) | screen text]					
+	// creates a new screen/page. 
+
+	[change_screen (SCREEN_NAME)| button_text]
+	// Creates a button which jumps to SCREEN_NAME when clicked
 
 
 */
 
+// Lookup dictionary for converting any single argument brackets into it's corresponding string
+// basically [armor] results in the "[armor]" segment of the string being replaced with the 
+// results of the corresponding anonymous function, in this case: function():* {return player.armorName;}
+// tags not present in the singleArgConverters object return an error message.
+// 
 var singleArgConverters:Object = {
 		"armor"			: function():* {return player.armorName;},
 		"armorName"		: function():* {return player.armorName;},
@@ -77,7 +99,6 @@ var singleArgConverters:Object = {
 		"cockHead"		: function():* {if(player.hasCock()) return cockHead(0);
 										else return "<b>(Attempt to parse cockhead when none present.)</b>";}
 
-
 }
 
 function convertSingleArg(arg:String):String
@@ -94,10 +115,13 @@ function convertSingleArg(arg:String):String
 	else
 		return "<b>!Unknown tag \"" + arg + "\"!</b>";
 
-
 	return argResult;
 }	
 
+// Possible text arguments in the conditional of a if statement
+// First, there is an attempt to cast the argument to a Number. If that fails,
+// a dictionary lookup is performed to see if the argument is in the conditionalOptions[] 
+// object. If that fails, we just fall back to returning 0
 var conditionalOptions:Object = {
 		"strength"			: function():* {return  player.str;},
 		"toughness"			: function():* {return  player.tou;},
@@ -146,14 +170,14 @@ var conditionalOptions:Object = {
 		"true"				: function():* {return  true;},
 		"false"				: function():* {return  false;}
 	}
-		
+
 
 function convertConditionalArgumentFromStr(arg:String):*
 {
 	var debug = false;
 	// convert the string contents of a conditional argument into a meaningful variable.
 	arg = arg.toLowerCase()
-	var argResult;
+	var argResult = 0;
 
 	// Note: Case options MUST be ENTIRELY lower case. The comparaison string is converted to 
 	// lower case before the switch:case section
@@ -171,7 +195,6 @@ function convertConditionalArgumentFromStr(arg:String):*
 		argResult = conditionalOptions[arg]();
 		if (debug) trace("Called, return = ", argResult);
 
-
 	}
 
 	if (debug) trace("Could not convert to float. Evaluated ", arg, " as", argResult)
@@ -182,7 +205,7 @@ function convertConditionalArgumentFromStr(arg:String):*
 
 function evalConditionalStatementStr(textCond:String):Boolean
 {	
-	var debug = true;
+	var debug = false;
 
 	var isExp:RegExp = /(\w+)\s?(==|=|!=|<|>|<=|>=)\s?(\w+)/;
 	var expressionResult:Object = isExp.exec(textCond);
@@ -201,7 +224,6 @@ function evalConditionalStatementStr(textCond:String):Boolean
 	operator 		= expressionResult[2];
 	condArgStr2 	= expressionResult[3];
 
-
 	var retVal:Boolean = false;
 	
 	var condArg1;
@@ -212,37 +234,21 @@ function evalConditionalStatementStr(textCond:String):Boolean
 		
 	//Perform check
 	if(operator == "=")
-	{
 		retVal = (condArg1 == condArg2);
-	}
 	else if(operator == ">")
-	{
 		retVal = (condArg1 > condArg2);
-	}
 	else if(operator == "==")
-	{
 		retVal = (condArg1 == condArg2);
-	}
 	else if(operator == "<")
-	{
 		retVal = (condArg1 < condArg2);
-	}
 	else if(operator == ">=")
-	{
 		retVal = (condArg1 >= condArg2);
-	}
 	else if(operator == "<=")
-	{
 		retVal = (condArg1 <= condArg2);
-	}
 	else if(operator == "!=")
-	{
 		retVal = (condArg1 != condArg2);
-	}
 	else
-	{
 		retVal = (condArg1 != condArg2);
-	}
 
 	
 	if (debug) trace("Check: " + condArg1 + " " + operator + " " + condArg2 + " = " + retVal);
@@ -285,7 +291,8 @@ function splitConditionalResult(textCtnt:String): Array
 	{
 		// This *may* not be a problem, since IF statements should be evaluated depth-first.
 		// Therefore, upper if statements shouldn't be able to tell they contained deeper 
-		// statements at all anyways.
+		// statements at all anyways, since the deeper statments will be evaluated to
+		// plain text before the upper statements even are parsed at all
 		throw new Error("Nested IF statements still a WIP")
 	}
 	return ret;
@@ -302,13 +309,15 @@ function parseConditional(textCtnt:String):String
 
 	// Allows nested parenthesis, because I'm masochistic
 
+	var debug = false;
+
 	var ret:Array = new Array("", "", "");	// first string is conditional, second string is the output
 
 	var i:Number = 0;
 	var tmp:Number = 0;
 	var parenthesisCount:Number = 0;
 	
-	var ifText;
+	//var ifText;
 	var conditional;
 	var output;
 
@@ -328,14 +337,15 @@ function parseConditional(textCtnt:String):String
 			}
 			if (parenthesisCount == 0)	// We've found the matching closing bracket for the opening bracket at textCtnt[tmp]
 			{
-				ifText = recParser(textCtnt.substring(0, tmp));
+				// why the fuck was I parsing the "if"?
+				//ifText = recParser(textCtnt.substring(0, tmp));
 				conditional = recParser(textCtnt.substring(tmp+1, i));
 				conditional = evalConditionalStatementStr(conditional);
 				output = recParser(textCtnt.substring(i+1, textCtnt.length));	// Parse the trailing text (if any)
 				output = splitConditionalResult(output);
 
-				trace("prefix = '", ret[0], "' conditional = ", conditional, " content = ", output);
-				trace("Content Item 1 = ", output[0], "Item 2 = ", output[1]);
+				if (debug) trace("prefix = '", ret[0], "' conditional = ", conditional, " content = ", output);
+				if (debug) trace("Content Item 1 = ", output[0], "Item 2 = ", output[1]);
 
 				if (conditional)
 					return output[0]
@@ -351,14 +361,15 @@ function parseConditional(textCtnt:String):String
 }
 function evalBracketContents(textCtnt:String):String
 {
+	var debug = false;
 	var ret:String;
-	trace("Evaluating string: ", textCtnt);
+	if (debug) trace("Evaluating string: ", textCtnt);
 
 	if (textCtnt.toLowerCase().indexOf("if") == 0)
 	{
-		trace("It's an if-statement");
+		if (debug) trace("It's an if-statement");
 		ret = parseConditional(textCtnt);
-		trace("IF Evaluated to ", ret);
+		if (debug) trace("IF Evaluated to ", ret);
 	}
 	else
 	{
@@ -367,8 +378,13 @@ function evalBracketContents(textCtnt:String):String
 
 	return ret;
 }
+
+import flash.utils.getQualifiedClassName;
+
 function recParser(textCtnt:String):String
 {
+	var debug = false;
+	textCtnt = String(textCtnt);
 	if (textCtnt.length == 0)	// Short circuit if we've been passed an empty string
 		return "";
 
@@ -394,18 +410,82 @@ function recParser(textCtnt:String):String
 			}
 			if (bracketCnt == 0)	// We've found the matching closing bracket for the opening bracket at textCtnt[tmp]
 			{
-				retStr += textCtnt.substring(0, tmp);
+				retStr += textCtnt.substring(0, tmp);		
+				// We know there aren't any brackets in the section before the first opening bracket.
+				// therefore, we just add it to the returned string
+
 				retStr += evalBracketContents(recParser(textCtnt.substring(tmp+1, i)));
+				// First parse into the text in the brackets (to resolve any nested brackets)
+				// then, eval their contents, in case they're an if-statement or other control-flow thing
+				// I haven't implemented yet
+
 				retStr += recParser(textCtnt.substring(i+1, textCtnt.length));	// Parse the trailing text (if any)
+				// lastly, run any text that trails the closing bracket through the parser
+				// needed for things like "string 1 [cock] [balls]"
+				
 				return retStr;
+				// and return the parsed string
 			}
 		}
 	}
 	else
 	{
-		// Nothing to parse
-		//trace("No brackets present", textCtnt);
-		retStr = textCtnt;
+		// if we don't have any brackets present, we need to look to see if this is a tag or not.
+		// POTENTIAL BUG: single-word print statements may be incorrectly interpreted as a tag. 
+		// possible solution: ignore tags that don't match known tags? Seems like it could cause bugginess in the case of tag typos?
+		if (debug) trace("No brackets present", textCtnt);	
+
+		var tagRegExp:RegExp = /^\w+$/;
+		var expressionResult:Object = tagRegExp.exec(textCtnt);
+		if (debug) trace("Checking if single word = [" + expressionResult + "]", getQualifiedClassName(expressionResult));
+		if (debug) trace("string length = ", textCtnt.length);
+		if (expressionResult)
+		{
+			if (debug) trace("It's a single word!");
+			retStr += convertSingleArg(textCtnt);
+		}
+		else
+			retStr += textCtnt;
+		
 	}
-	return textCtnt;
+	return retStr;
 }
+
+// Stupid string utility functions, because actionscript doesn't have them (WTF?)
+
+function stripStr(str:String):String 
+{
+	return trimStrBack(trimStrFront(str, " "), " ");
+}
+
+function trimStr(str:String, char:String):String 
+{
+	return trimStrBack(trimStrFront(str, char), char);
+}
+
+function trimStrFront(str:String, char:String):String 
+{
+	char = stringToCharacter(char);
+	if (str.charAt(0) == char) {
+		str = trimStrFront(str.substring(1), char);
+	}
+	return str;
+}
+
+function trimStrBack(str:String, char:String):String 
+{
+	char = stringToCharacter(char);
+	if (str.charAt(str.length - 1) == char) {
+		str = trimStrBack(str.substring(0, str.length - 1), char);
+	}
+	return str;
+}
+function stringToCharacter(str:String):String 
+{
+	if (str.length == 1) 
+	{
+		return str;
+	}
+	return str.slice(0, 1);
+}
+

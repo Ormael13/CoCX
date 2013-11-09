@@ -311,14 +311,76 @@ def functionYoink():
 				print "	%s" % name
 
 
+# Woot! More recursion! I'm on a fucking roll!
+def refactorIfs(inStr):
+
+	# I feel dirty even having written this regex
+	ifExtr = re.compile(r"((\[if\W?\(\W?\w+\W?[><=!]+\W?\w+\W?\)\W*?\\\"[\w \[\].,]+?\\\")(\W?else\W?)?(\\\"[\w \[\].,]+?\\\")?\])")
+
+	retStr = ""
+
+	match = ifExtr.search(inStr)
+	if match:
+		start, length = match.start(), len(match.group(0))
+		print "Match start", start, "Length", length
+		prefix, call, postfix = inStr[:start], inStr[start:start+length], inStr[start+length:]
+		#print "Call = ", call
+		#print "Matches = ", match.groups()
+		newText = ""
+		newText += match.group(2).replace(r"\"", "")
+		if match.group(4):
+			# print match.groups()
+			# print match.group(2), match.group(4)
+			print "IF ELSE"
+			newText += "|"
+			newText += match.group(4).replace(r"\"", "")
+
+		newText += "]"
+		print call
+		print newText
+		retStr = prefix
+		retStr += newText
+		retStr += refactorIfs(postfix)
+			
+	else:
+		retStr = inStr
+	# searched = ifExtr.findall(inStr)
+	# if searched:
+	# 	for item in searched:
+
+	# 		print item
+
+	return retStr
+
+
+def modifyParserIfStatements():
+
+	
+	filelist = os.listdir("./includes")
+
+	for filename in filelist:
+		if filename.endswith(".as"):			#Iterate over all the .as files in ./includes
+			with open(os.path.join("./includes", filename), "r") as fileH:
+				tmp = fileH.read()
+			print "filename:", filename, "------------------------------------------------"
+			cleaned = refactorIfs(tmp)
+			if cleaned != tmp:
+				print "Changes!"
+				with open(os.path.join("./includes", filename), "w") as fileH:
+					fileH.write(cleaned)
+
+
+
 if __name__ == "__main__":
 
 	print "OMG WE'S BREAKIN STUF!!111one!"
 
-	cleanEventNumbers()
+	#cleanEventNumbers()
 	#cleanStaleDoEventIfs()
 
 	#cleanFlags()
 
 	#insertFlags()
 	#functionYoink()
+
+	modifyParserIfStatements()
