@@ -8,7 +8,7 @@ function eventParser(eventNo:*):void {
 	trace("EVENT CODE: " + eventNo);
 	if (eventNo is Function)
 	{
-		trace("It's a function");
+		//trace("It's a function");
 
 		eventNo();
 	}
