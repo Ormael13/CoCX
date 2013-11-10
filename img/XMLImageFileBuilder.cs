@@ -19,12 +19,12 @@ namespace XMLImageFileBuilder
             public String height;
         }
 
-        public static void BuildXMLFile()
+        public static void BuildXMLFile(String directory)
         {
             XmlWriterSettings settings = new XmlWriterSettings();
             settings.Indent = true;
             settings.IndentChars = "\t";
-            XmlWriter writer = XmlWriter.Create(".\\img\\images.xml", settings);
+            XmlWriter writer = XmlWriter.Create(directory + "images.xml", settings);
 
             writer.WriteStartDocument();
             writer.WriteStartElement("Images");
@@ -59,7 +59,7 @@ namespace XMLImageFileBuilder
 
                 if (fileName.Count == 0)
                 {
-                    Console.WriteLine("ERROR: Found no images. Is this program in the same folder as CoC.swf?");
+                    Console.WriteLine("ERROR: Found no images in " + searchFolder);
                     getFilesSuccess = false;
                 }
                 foreach (string file in fileName)
@@ -71,8 +71,8 @@ namespace XMLImageFileBuilder
             }
             catch (Exception e)
             {
-                Console.WriteLine("Failed get images");
-                Console.WriteLine(e.Message);
+                Console.WriteLine("Failed get images from " + searchFolder + ". Trying current directory...");
+                //Console.WriteLine(e.Message);
                 return getFilesSuccess = false;
             }
         }
@@ -92,9 +92,14 @@ namespace XMLImageFileBuilder
             String searchFolder = ".\\img\\";
             var filters = new String[] { "jpg", "jpeg", "png" };
             bool success = GetImages(searchFolder, filters);
+            if (!success)
+            {
+                searchFolder = ".\\";
+                success = GetImages(searchFolder, filters);
+            }
 
             if (success)
-                BuildXMLFile();
+                BuildXMLFile(searchFolder);
 
             Console.ReadKey();
         }
