@@ -453,7 +453,7 @@ function allNaturalStimBeltUse():void {
 
 //Jojo masturbation!
 function masturbateJojo():void {
-	spriteSelect(34);
+	jojoSprite();
 	outputText("", true);
 	stats(0,0,0,0,0,0,-100,.5);
 	if(player.totalCocks() > 0 && player.hasPerk("Whispered") >= 0 && rand(4) == 0) {

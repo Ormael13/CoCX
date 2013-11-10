@@ -4,6 +4,10 @@
 //const TIMES_EGGED_JOJO:int = 590;
 //const JOJO_EGGCUBATE_COUNT:int = 591;
 
+function jojoSprite():void {
+	if(tentacleJojo()) spriteSelect(81);
+	else spriteSelect(34);
+}
 
 function assholeOrPussy():String {
 	if(player.hasVagina()) return vaginaDescript(0);
@@ -51,7 +55,7 @@ function jojoMutationOfferNo():void {
 }
 //CORRUPT CAMP JOJO
 function corruptCampJojo():void {
-	spriteSelect(34);
+	jojoSprite();
 	//Corrupt Amily and Jojo sexings
 	if(flags[AMILY_FOLLOWER] == 2 && amilyFollower() && campCorruptJojo() && flags[AMILY_X_JOJO_COOLDOWN] <= 0 && rand(5) == 0) {
 		flags[AMILY_X_JOJO_COOLDOWN] = 7;
@@ -110,7 +114,7 @@ function corruptCampJojo():void {
 
 
 function jojoMutationOfferYes():void {
-	spriteSelect(34);
+	jojoSprite();
 	player.addKeyValue("Marae's Lethicite",2,1);
 	outputText("There's no question about it, this is a great idea.  It might be coming from the corruption in your blood, but why bother to fight it?  You take Marae's lethicite and grab a one of the larger crystalline protrusions.  With a hard yank, you break it off from the main cluster, sending tiny crystalline shards over the campsite.  They vanish into the ground before you have a chance to gather them.\n\n", true);
 	outputText("Whether by luck or some unconscious demonic magic, the smaller piece of lethicite is rather phallic. If it weren't for the sharp corners and hard edges, it would look like a large dildo with a pair of balls at the base.  You put away the larger piece, focusing this tool and your plans for your pet.\n\n", false);
@@ -138,7 +142,7 @@ function jojoMutationOfferYes():void {
 }
 
 function mutateJojo():void {
-	spriteSelect(34);
+	jojoSprite();
 	outputText("You call out, and Jojo obediently pads into the camp.  At some point he decided to switch to wearing a loin-cloth, for all the good it has done him – it drapes over his member, barely covering half of it as it twitches and throbs from your presence.   You gesture for him to remove that tiny cloth, and he does immediately.  When he gets within a few feet of you, he drops to his knees with his hands behind his back, his head down submissively.  You see little tics and twitches run through his body as he fights to resist touching himself, so you drag it out and see how long he can wait.\n\n", true);
 	outputText("It doesn't take long.  A plaintive whine escapes him as his hand creeps around his waist.  You grin and push him onto his back, stepping onto his wrist to pin his hand in place.  You drop the crystal dildo on to his chest with a single command, \"<i><i>Use it</i></i>\".\n\n", false);
 	outputText("Jojo shivers and takes your offering with his free hand, slowly hefting it and dragging it lower.  He looks up at you questioningly, and you gesture impatiently at him to quit wasting your time.  The dildo's crown presses against his sphincter, stopping for a second as the bitch-boy relaxes, and then begins its long journey inward.   Jojo's eyes roll up a bit and his prick starts pumping out a clear stream of his pre-cum, wetting most of his belly.  Finally the pinkish-hued balls press against his bum.  He's taken the whole thing.\n\n", false);
@@ -183,7 +187,7 @@ function mutateJojo():void {
 
 //[POST TENTACLE DICKINGS]
 function useTentacleJojo():void {
-	spriteSelect(34);
+	jojoSprite();
 	slimeFeed();
 	var nippleSucking:Boolean = false;
 	var clitSucking:Boolean = false;
@@ -461,7 +465,7 @@ function useTentacleJojo():void {
 
 //Jojo milk payments
 function jojoMilkPay(tentacle:Boolean = false):void {
-	spriteSelect(34);
+	jojoSprite();
 	flags[UNKNOWN_FLAG_NUMBER_00332] = 4;
 	outputText("A loud 'ding' chimes and a panel displays ", false);
 
@@ -520,7 +524,7 @@ function jojoCumQ():Number {
 
 //Jojo - First Time Milking (edited)
 function milkJojoFirst():void {
-	spriteSelect(34);
+	jojoSprite();
 	var x:Number = player.cockThatFits(40);
 	outputText("", true);
 	outputText("A wicked idea comes to mind, and you call for your favorite mousey ", false);
@@ -611,7 +615,7 @@ function milkJojoFirst():void {
 }
 
 function repeatMilkJojo(tentacle:Boolean = false):void {
-	spriteSelect(34);
+	jojoSprite();
 	outputText("", true);
 	//Jojo Repeat Milking - Non Tentacle (edited)
 	if(!tentacle || !tentacleJojo()) {
@@ -700,7 +704,7 @@ function repeatMilkJojo(tentacle:Boolean = false):void {
 }
 //Use Jojo to pay for Hair Care 
 function jojoPaysForPerms():void {
-	spriteSelect(34);
+	jojoSprite();
 	outputText("", true);
 	outputText("Lynnette the goblin answers the door and lets you in, waving you deeper into her shop.  Her shining black dress barely contains her fertile-hips and jiggling chest as she greets you, \"<i>Welcome back honey!  Who's the cutie?</i>\"\n\n", false);
 	
@@ -795,7 +799,7 @@ function stuffAmilysMouthWithPostBJCUM():void {
 }
 //Fill Jojo's Mouth (Z)
 function fillJojosMouthWithHotStickyCum():void {
-	spriteSelect(34);
+	jojoSprite();
 	clearOutput();
 	outputText("You point at Jojo and command, \"<i>Open wide.</i>\"  The former monk happily opens his muzzle broadly, so far open that his buck-teeth practically vanish into the roof of his mouth.  Amily looks disappointed, but then she consoles herself by [if (hasBalls = true) sinking down to covetously suck your swollen balls while ]tugging on your shaft, squeezing it from stem to stern with hard, fast pumps.  Jojo's tongue slips out to lick the beading pre-cum from your [cock biggest] as it flexes powerfully in the other slut's grip.  Warmth races through your loins as you feel your orgasm approaching.");
 	outputText("\n\nAn explosion of bliss burns in your head as [eachCock] spews its load.  Thick waves of pent-up jism spray out from your cum-slit, filling Jojo's mouth with honey-thick cream, and splatter across his nose and hair.  He gurgles as his mouth fills with your musky spunk and opens wider, keenly trying to catch as much of your seed as possible with his cum-dribbled face before he slurps it down in one sputtering gulp.[if (cumQuantity < 500) \"  You discharge your alabaster lacquer again and again, white-washing his already pale fur until his face seems little more than a glistening mask, dripping with your seething unguent.  Bound to your will, he patiently awaits your permission to swallow, his pacified mouth full to the brim, leaking out the sides in twin ivory cascades. You nod curtly and the tamed mouse-boy obeys happily, savoring the humbling salt of your overpowering jizz as it rolls down his throat.\" else \"  You spurt again and again, splattering heavy ropes of goo across his face and fur.  His mouth floods, too full of jizz to contain it all, giving the vanquished monk a thick glaze of cum that very quickly leaves his body with an oily sheen.\"][if (cumQuantity >= 1000)   He swallows, taking a blast of spunk across his brow, and opens up again, giving you another hole to aim for.  Another eruption of your virile seed rushes past his lips and coats the back of his throat in your fluid ivory, nearly drowning him as the column of jism gushes into his windpipe and up his nostrils, surging out of his nose.  The domesticated mouse gulps desperately at your slimy passion while your fountaining cum arcs to dump fat globs on his shuddering body.]  You finish and shove your [cock biggest] into his throat for cleaning.  Jojo happily obliges.");
@@ -806,7 +810,7 @@ function fillJojosMouthWithHotStickyCum():void {
 	
 //Scene 2: Amily And Jojo Fuck (w/o Tentacles) (Z)
 function amilyAndJojoFuck():void {
-	spriteSelect(34);
+	jojoSprite();
 	clearOutput();
 	outputText("You find a nearby rock to perch on as the two mice begin to get more lewd with their actions.  Amily uses her tail to sit Jojo down in front of her, squeezing his taut balls in her hand and gasping when he spews a thick stream of pre-cum.  You use the commotion as cover to squeeze out of your [armor] and get comfortable.  Thankfully, neither of them hears you, or if they do, they don't care.  Amily titters, \"<i>Wow, no wonder [master] keeps you around with a cum-fountain like that!</i>\"  She gently traces a fingertip along the swollen underside of Jojo's cock, giggling when he, over-stimulated, immediately starts dripping fluid on her fingers.");
 	outputText("\n\nJojo moans, \"<i>Ugh... stop... please Amily, please, can I cum?</i>\"  Amily jerks and shakes her head in disappointment.  She mouths, \"<i>Not yet,</i>\" and stands back up, turning around and pulling Jojo's muzzle into her slippery twat with her demonic tail.  The former monk's protests are muffled by Amily's sodden quim, and he soon begins to eagerly slurp at her drooling cunny.  With each enthusiastic lick, she reaches between her knees to caress Jojo's corruption-engorged cock, egging him on to please her more thoroughly.");
@@ -828,7 +832,7 @@ function amilyAndJojoFuck():void {
 this.semiglobalReferencer.jojoRape = jojoRape;
 
 function jojoRape():void {
-	spriteSelect(34);
+	jojoSprite();
 	slimeFeed();
 	//Track Jojo rapeage
 	if(player.hasStatusAffect("Ever Raped Jojo") < 0) player.createStatusAffect("Ever Raped Jojo",1,0,0,0);
