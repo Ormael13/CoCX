@@ -12,7 +12,6 @@ namespace AvailableImagesDict
     class AvailableImagesDict
     {
         public static List<string> imageIDs = new List<string>();
-        public static List<string> fileName = new List<string>();
 
         static void Main(string[] args)
         {
@@ -21,7 +20,7 @@ namespace AvailableImagesDict
 
             BuildXMLFile();
 
-            Console.WriteLine("Complete. Press any key to exit.");
+            Console.WriteLine("Complete. Found {0} unique items. Press any key to exit.", imageIDs.Count);
             for (int i = 10; i > 0; i--)
             {
                 Console.Write("\rAutomatically exiting in " + i + " seconds.");
@@ -46,10 +45,13 @@ namespace AvailableImagesDict
                 {
                     foreach (string line in File.ReadAllLines(f))
                     {
-                        foreach (Match match in Regex.Matches(line, "images\\.showImage\\(\"([^\"]*)\"\\)"))
+                        foreach (Match match in Regex.Matches(line, "images\\.showImage\\(\"([^\"]*)\""))
                         {
-                            Console.WriteLine("Found {0}", match.Groups[1].Value);
-                            imageIDs.Add(match.Groups[1].Value);
+                            if (!imageIDs.Contains(match.Groups[1].Value))
+                            {
+                                Console.WriteLine("Found {0}", match.Groups[1].Value);
+                                imageIDs.Add(match.Groups[1].Value);
+                            }
                         }
                     }
                 }
