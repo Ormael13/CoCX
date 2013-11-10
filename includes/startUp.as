@@ -1,4 +1,4 @@
-
+﻿
 //Keyboard listener!
 stage.addEventListener(KeyboardEvent.KEY_DOWN, keyboard);
 
@@ -15,8 +15,6 @@ registerClassAlias("Creature", Creature);
 registerClassAlias("itemSlotClass", itemSlotClass);
 //registerClassAlias("cockClass", cockClass);
 registerClassAlias("Cock", Cock);
-
-
 
 //Invert shit
 invertGo();
@@ -153,7 +151,7 @@ function settingsScreen():void {
 	outputText("<b>Settings toggles:</b>\n", true);
 
 	if(debug) 
-		outputText("Debug mode enabled: <b>Yes</b>\n	Items will not be consumed by use.", false);
+		outputText("Debug mode enabled: <b>Yes</b>\n	Items will not be consumed by use, fleeing always succeeds, and bad-ends can be ignored.", false);
 	else
 		outputText("Debug mode enabled: <b>No</b>\n	Items consumption will occur as normal.", false);
 
@@ -167,9 +165,9 @@ function settingsScreen():void {
 	outputText("\n\n", false);
 
 	if(flags[EASY_MODE_ENABLE_FLAG]) 
-		outputText("Easy Mode <b>On</b>\n	Bad-ends can be ignored.", false);
+		outputText("Easy Mode <b>On</b>\n	Bad-ends can be ignored and combat is easier.", false);
 	else
-		outputText("Easy Mode <b>Off</b>\n	You die, you're dead.", false);
+		outputText("Easy Mode <b>Off</b>\n	Bad-ends can ruin your game and combat is challenging.", false);
 		
 	outputText("\n\n", false);
 

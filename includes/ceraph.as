@@ -422,7 +422,7 @@ function agreeToBeABitchPt2():void {
 //[Initial Meeting Text]
 function ceraphFirstTime():void {
 	outputText("", true);
-	spriteSelect(24);
+	spriteSelect(88);
 	outputText("A cute goblin steps out of the bushes, holding a pair of green earrings up to the light.  She politely asks, \"<i><i>Hey cutey!  I've got some spare earrings I made the other day.  I was wondering if you want them?  As you can see, my ears are already full, and my daughters are a bunch of ungrateful cunts.</i></i>\"\n\n", false);
 	
 	outputText("The goblin's ears are covered in a dazzling array of piercings of all varieties.  She isn't dressed nearly as slutty as most of the goblins you've seen.\n\n", false);outputText("Do you let her put the earrings in your ears?", false);

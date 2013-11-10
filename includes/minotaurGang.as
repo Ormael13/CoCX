@@ -6,6 +6,7 @@
 
 function meetMinotaurSons():void {
 	outputText("", true);
+	spriteSelect(94);
 	stats(0,0,0,0,0,0,10,0);
 	flags[UNKNOWN_FLAG_NUMBER_00325]++;
 	//First Meeting
@@ -173,6 +174,7 @@ function meetMinotaurSons():void {
 //[Negotiate] (fucking Morton's fork, just add this to the end of the non-addict intro ~ but thou must!)
 function negotiate():void {
 	outputText("", true);
+	spriteSelect(94);
 	outputText("You calm down and warn them that you're no pushover, and you will defend yourself if necessary.  Your outburst shocks them, and they even seem a bit worried by your confidence and poise.\n\n", false);
 	
 	outputText("The second largest smirks and retorts, \"<i>Chill out, Mom... it'll be fine.  I know what your problem is.  You just haven't had enough cum yet... trust me, you'll love it!  Once we've each blown a few loads in your holes, you won't be able to get enough!  Promise!!</i>\"\n\n", false);
@@ -189,6 +191,7 @@ function negotiate():void {
 //[Run] 
 function runFromMinotaurs():void {
 	outputText("", true);
+	spriteSelect(94);
 	outputText("You turn tail and try to run, ", false);
 	if(player.canFly()) outputText("leaping from the small cliffs to take flight", false);
 	else outputText("fleeing down the mountainside", false);
@@ -208,6 +211,7 @@ function runFromMinotaurs():void {
 //[Fight]
 function fightOTaurs():void {
 	startCombat(41);
+	spriteSelect(94);
 	eventParser(5000);
 }
 //[Submit]
@@ -215,6 +219,7 @@ function submitToMinotaurMob():void {
 	player.lust = 100;
 	stats(0,0,0,0,0,0,1,0);
 	minotaurDeFeet();
+	spriteSelect(94);
 }
 
 function minotaurDeFeet():void {
@@ -247,6 +252,7 @@ function minotaurDeFeet():void {
 
 //[Loss – Non-Addict Gangbang] 
 function nonAddictMinotaurGangBang():void {
+	spriteSelect(94);
 	outputText("The minotaurs step closer, their hooves kicking up small clouds of dust as they approach your prone body.  You lift your head, nose twitching, and breathe their scent deeply while casting a coy look at the closest of the mob.  He smiles and squeezes his fingers around your jaw, pulling your mouth into a pouty 'o'.  His other hand holds the heavy mass of his stiff maleness - a turgid, flared shaft over two feet long with three prominent ridges along its length.  You shiver and lick your lips unconsciously, tasting the sweet smell of his pre in the air as it inches closer.\n\n", false);
 	
 	if(player.isTaur()) {
@@ -354,6 +360,7 @@ function nonAddictMinotaurGangBang():void {
 
 //*[Loss - Very Pregnant, Lots of BJs] 
 function loseToMinoMobVeryPregnant():void {
+	spriteSelect(94);
 	outputText("The largest stud grunts, \"<i>Heh.  Mom's body looks like it's about to pop.</i>\"  His brother pushes him aside and rubs his furred hand across the taut " + player.skin() + " of your belly as he says, \"<i>", false);
 	if(player.pregnancyType != 2) outputText("She doesn't know how to keep her hungry twat closed.  You can see the vermin squirming in her belly.  Disgusting.", false);
 	else outputText("I can feel our little brother.  It won't be long now.", false);
@@ -446,6 +453,7 @@ function loseToMinoMobVeryPregnant():void {
 //SEMI PREG
 //> 120 && <= 216
 function analSpearSemiPregMinotaurGangbang():void {
+	spriteSelect(94);
 	outputText("\"<i>Hey, check this out, Mom's a little pregnant,</i>\" quips your second-born son, letting his muscular digits play across the growing bulge on your belly.\n\n", false);
 	
 	outputText("The biggest brute slams the lesser beast away and gropes at your tits, grunting, \"<i>Who cares?  She's still a hot piece of ass.</i>\"  None-too-gentle in his rough handling", false);
@@ -548,6 +556,7 @@ function analSpearSemiPregMinotaurGangbang():void {
 //*[Victory - Generic Text] 
 function victoryMinotaurGang():void {
 	outputText("", true);
+	spriteSelect(94);
 	//(HP) 
 	if(monster.HP < 1) outputText("The last minotaur sinks to his knees, wobbling back and forth while fighting to stay upright. He gives up and slumps down onto his back, mooing in pain.  You exult in your victory as you look across the defeated beast-men.  Though they're strong and aided by potent natural aphrodisiacs, they were no match for you.  Amusingly enough, they're still hard, even in their semi-conscious state. The horse-like mino-cocks lift their loincloths to stab at the sky, dripping moisture.\n\n", false);
 	//(Lust) 
@@ -569,6 +578,7 @@ function victoryMinotaurGang():void {
 //*[Victory Tit-Fuck] (for only the fattest of fat bitch titties) 
 function victoryMinotaurGangTitFuck():void {
 	outputText("", true);
+	spriteSelect(94);
 	outputText("\"<i>Oh, boys,</i>\" you coo while you advance, hips swaying in a sinuous display of sexuality.  \"<i>I should have taught you some manners.</i>\"  You reach down and give the closest disobedient stud a tight squeeze between two of his rings of prepuce.  He grunts in pain while you watch the head become flared by the suddenly displaced blood.  You tease, \"<i>Now, I think it's time for some punishment.  Don't you think you deserve to be punished?</i>\"\n\n", false);
 	
 	outputText("\"<i>Y-Yes Mom,</i>\" rumbles the defeated beast.  You release him, watching as he slumps back and exhales a tired moo of relief.  The poor boy is so pent up, so needy, that you don't mind indulging him and his brothers a little bit.  ", false);
@@ -678,6 +688,7 @@ function victoryMinotaurGangTitFuck():void {
 //*[Victory - Double/Triple penetration] 
 function victoryAllThePenetrationsMinotaurGangBang():void {
 	outputText("", true);
+	spriteSelect(94);
 	outputText("Deciding you wanted the same thing as your sons, you strip out of your " + player.armorName + " and instruct the horny, defeated minotaurs to shed what's left of their loincloths.  They obey", false);
 	if(monster.lust > 99) outputText(" nearly instantly, too aroused to turn down the idea of their mother doing ANYTHING with their hard shafts.", false);
 	else outputText(" somewhat sluggishly as they work to get nude for you, despite their wounds.  As they finish, they start to move a bit faster, recovering from the battle quicker than you would have thought.", false);
@@ -772,6 +783,7 @@ function victoryAllThePenetrationsMinotaurGangBang():void {
 //*[Victory - Make minitaur oral (M/F/H)] 
 function forceMinitaurToGiveOral(choice:Number = 0):void {
 	outputText("", true);
+	spriteSelect(94);
 	outputText("You hastily remove the lower portions of your " + player.armorName + " to expose your " + vaginaDescript(), false);
 	if(player.hasCock()) outputText(" and " + multiCockDescriptLight(), false);
 	outputText(" to the air.  The defeated ", false);
@@ -887,6 +899,7 @@ function forceMinitaurToGiveOral(choice:Number = 0):void {
 //*[Victory- BJ + Nipplefucking] (boring, samey, not actually punishment again, could have been shoving very long nipples into urethras) (edited)
 function victoryBJNippleFuckMinotaurGang():void {
 	outputText("", true);
+	spriteSelect(94);
 	outputText("You pull down the top portion of your " + player.armorName + " and shake your " + chestDesc() + " back and forth.  \"<i>Would two of you strapping young lads like to play with your Mom's nipples?</i>\" you tease.  The minotaurs stir from their defeated poses with lust burning in their eyes as they rise and advance.  Giggling, you circle your areolae with your fingertip and moan lewdly, teasing the poor beasts until you tire of the stimulation and work a fingertip into ", false);
 	if(player.totalNipples() == 2) outputText("each", false);
 	else outputText("two", false);
@@ -955,6 +968,7 @@ function victoryBJNippleFuckMinotaurGang():void {
 //*Summary: Req's a ton of sons and the PC be addickted to minotaur spooge, also to have seen the random scene with a minotaur fucking a cowgirl in the mountains at least _ times. :3
 function minotaurGangBadEnd():void {
 	outputText("", true);
+	spriteSelect(94);
 	outputText("Slumping down to your knees, you look up at the crowd surrounding you.  There're dozens of horny, bestial figures, all of their bovine faces twisted into leering smiles at your state.   You can smell the thick musk in the air, hanging so heavily that it seems to fog your view.  Sniffing in great lungfuls of it, you slump back and let your " + player.legs() + " spread out of their own accord, utterly revealing the folds of your " + vaginaDescript() + " to the horny beast-men.  They cluster around you, their loincloths disappearing in a hurry in their rush to fuck their incestuous mother.  Images of all the other times you've been in a similar situation run through your head, the thoughts blurring together into a vision of one long, drug-fueled fuck.\n\n", false);
 	
 	outputText("Giggling, you realize a scene much like that is about to happen to you all over again.  A dribble of fem-slime leaks out from your " + vaginaDescript() + " into the dry mountain dirt, showing your boys just how excited you are to be on the receiving end of their dripping horse-cocks.  \"<i>Come to Momma,</i>\" you coo, already slipping into a haze of musky cum-lust.\n\n", false);
@@ -1001,6 +1015,7 @@ function minotaurGangBadEnd():void {
 //[Next]
 function minotaurGangBadEnd2():void {
 	outputText("", true);
+	spriteSelect(94);
 	outputText("<b>Some time later...\n</b>", false);
 	
 	outputText("You blink your eyes, trying to adjust to the daylight.  The hut full of pillows has been your home for the past few months, and you never once considered leaving it.  Most of your time has been spent on your back, on a lap, or on all fours.  Of course when you're pregnant you don't get quite as much sex, but they'll still jam a dick down your throat and pump your gut full of cum whenever you ask.  You blush and remember just how often you ask.  The other girls are still a little jealous of just how much love your sons shower you in.  They'll come around soon enough - the cow-girl is already your best friend.  Even though you don't know each other's names, both of you spend about as much time 69'ing as getting plowed by the tribe.\n\n", false);
@@ -1034,6 +1049,7 @@ function precumTease():void {
 	var teased:Boolean = false;
 	var damage:Number = 0;
 	var oldLust:Number = player.lust;
+	spriteSelect(94);
 	//(Big taur pre-cum tease)
 	if(rand(2) == 0) {
 		teased = true;
@@ -1114,6 +1130,7 @@ function precumTease():void {
 
 //Grope
 function minotaurGangGropeAttack():void {
+	spriteSelect(94);
 	outputText("Strong hands come from behind and slide under your equipment to squeeze your " + chestDesc() + ".  The brutish fingers immediately locate and pinch at your " + nippleDescript(0) + "s, the sensitive flesh on your chest lighting up with pain and pleasure.  You arch your back in surprise, utterly stunned by the violation of your body.  After a moment you regain your senses and twist away, but the damage is already done.  You're breathing a bit quicker now", false);
 	if(player.lust >= 80) outputText(", and your pussy is absolutely soaking wet", false);
 	outputText(".", false);
@@ -1122,6 +1139,7 @@ function minotaurGangGropeAttack():void {
 }
 //Gang Grope
 function minotaurGangGangGropeAttack():void {
+	spriteSelect(94);
 	outputText("Before you can react, hands reach out from multiple angles and latch onto your body.  One pair squeezes at your " + buttDescript() + ", the strong grip massaging your cheeks with loving touches.  Another set of hands are sliding along your tummy, reaching down for, but not quite touching, the juicy delta below.  Palms encircle your " + chestDesc() + " and caress them, gently squeezing in spite of the brutish hands holding you.  You wriggle and squirm in the collective grip of the many minotaurs for a few moments, growing more and more turned on by the treatment.  At last, you shake out of their hold and stand free, panting hard from exertion and desire.", false);
 	stats(0,0,0,0,0,0,(15 + player.sens/10),0);
 	combatRoundOver();
@@ -1129,11 +1147,13 @@ function minotaurGangGangGropeAttack():void {
 //Waste  a turn
 function minotaurGangWaste():void {
 	flags[UNKNOWN_FLAG_NUMBER_00329] = 1;
+	spriteSelect(94);
 	outputText("\"<i>Oh man I can't wait to go hilt-deep in that pussy... I'm going to wreck her,</i>\" promises one bull to his brother.  The other laughs and snorts, telling him how he'll have to do the deed during sloppy seconds.  It quickly escalates, and soon, every single one of the beast-men is taunting the others, bickering over how and when they'll get to have you.  While they're wasting their time, it's your chance to act!", false);
 	combatRoundOver();
 }
 
 function minoGangAI():void {
+	spriteSelect(94);
 	flags[UNKNOWN_FLAG_NUMBER_00329] = 0;
 	var select:Number = rand(7);
 	if(select <= 2) precumTease();
@@ -1145,6 +1165,7 @@ function minoGangAI():void {
 //[Discipline Eldest]
 function disciplineEldestMinotaurSon():void {
 	outputText("", true);
+	spriteSelect(94);
 	outputText("Your wayward sons thought that they could get the drop on you.  Their macho machismo blinded them to the fact that they were nowhere in your league.  You sigh as you realize they will probably try to coax you into fucking them next time.  What is a mother to do?  As you loom over their battered bodies, they look up to you with eyes full of longing and engorged, twitching dicks.  You return their gaze by cracking your knuckles, causing your brutish progeny to cringe in fear.  Scrambling to their hooves, they all begin to make a hasty retreat.  The largest of your minotaur sons trips over his own hooves in a desperate attempt to flee from his mother.  When he tries to get back up, you put your weight on him, holding him down.  He turns his head back, trembling at the sight of you standing on his tail.\n\n", false);
 
 	outputText("\"Are you the oldest?\" you ask him with crossed arms and a stern gaze.\n\n", false);
