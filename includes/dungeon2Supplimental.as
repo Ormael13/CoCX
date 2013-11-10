@@ -1492,7 +1492,7 @@ function chooseValaInBar():void {
 		
 		//Goto cleansedFirstRemeet();
 		//[Next]
-		addButton(0,"Next",eventParser,2622);
+		addButton(0,"Next",cleansedFirstRemeet);
 		return;
 	}
 	else if(flags[SHOULDRA_MET_VALA] == 1) {
@@ -1519,14 +1519,14 @@ function chooseValaInBar():void {
 		}
 		else simpleChoices("You",2625,"",0,"Cum Bath",cumBath,"",0,"Leave",2256)
 		if(flags[UNKNOWN_FLAG_NUMBER_00120] == 0)
-			addButton(1,"Faeries",eventParser,2626);		
+			addButton(1,"Faeries",faerieOrgyFuck);		
 	}
 	if(flags[SHOULDRA_MET_VALA] > 0 && followerShouldra())
 		addButton(3,"Big You",valaBigYou);
-	addButton(0,"You",eventParser,2625);
+	addButton(0,"You",cleansedValaRepeatBrainFucking);
 	if(cumBath > 0) 
 		addButton(2,"Cum Bath",eventParser,cumBath);
-	addButton(4,"Leave",eventParser,2256);
+	addButton(4,"Leave",barTelAdre);
 }
 
 function cleansedFirstRemeet():void {

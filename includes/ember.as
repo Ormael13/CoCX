@@ -183,7 +183,7 @@ function emberSexMenu(output:Boolean = true):void {
 	if(getPenetrated > 0) addButton(7,"Get Penetrated",eventParser,getPenetrated);
 	if(emberAffection() >= 95 && player.hasCock() && player.cockThatFits(emberVaginalCapacity()) >= 0 && (hasItem("L.Draft",1) || player.lib >= 50 || minLust() >= 40))
 		addButton(8,"LustyFuck",highAffectionEmberLustFuck);
-	addButton(9,"Leave",eventParser,3691);
+	addButton(9,"Leave",emberCampMenu);
 	
 }
 

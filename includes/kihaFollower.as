@@ -802,9 +802,9 @@ function warmLoverKihaIntro(output:Boolean = true):void {
 			//choices("Hang Out",hangOutWithKiha,"Hug",hugFriendWarmKiha,"InviteCamp",campo,"Sex",kihaSexMenu,"Spar",sparWithKiha,"",0,"",0,"",0,"",0,"Leave",leave);
 			menu();
 			addButton(0,"Hang Out",eventParser,3431);
-			addButton(1,"Hug",eventParser,3425);
-			addButton(3,"Sex",eventParser,3434);
-			addButton(4,"Spar",eventParser,3422);
+			addButton(1,"Hug",hugFriendWarmKiha);
+			addButton(3,"Sex",kihaSexMenu);
+			addButton(4,"Spar",sparWithKiha);
 			if(flags[KIHA_CAMP_WATCH] > 0) addButton(8,"Stop Guard",guardMyCampKiha);
 			else addButton(8,"Guard Camp",guardMyCampKiha);
 			addButton(9,"Leave",eventParser,leave);
