@@ -1,4 +1,4 @@
-﻿//  SLEEP_WITH:int = 701;
+//  SLEEP_WITH:int = 701;
 
 function camp():void {
 	trace("Current fertility: " + player.totalFertility());
@@ -374,11 +374,44 @@ function camp():void {
 	var masturbate:Number = 0;
 	var rest:Number = 0;
 	var explore:Number = 2;
-	if(player.fatigue > 50) rest = 11;
+	if(player.fatigue > 50) rest = 11;	
 	if(player.lust > 30) masturbate = 42;
 	outputText("", true);
 	//outputText(images.showImage("camping"), false);
 	//Isabella upgrades camp level!
+	/*
+
+	// This junk was for testing my new parser. It can be removed, I think. I still have a few parser tweaks I want to do, though.
+	outputText("TESTING SHIT!\n")
+	outputText("[if (hasCock = true) [cock] stiffening][if (isHerm = true)  and ][if (hasVagina = true) [vagina] starting to burn with need] DERP [cock biggest] HERP [armor] LOLWUT  [balls] ");
+	outputText("[If (hours > 19) \"Hug\" else \"Cuddle\"]\n");
+	
+	outputText("\n\n", false);
+	outputText("[if (hasBalls = true) and [balls]]");
+	outputText("[LOL [WUT WUT]] [herp] [DERP] BLARGH [if (0 == 0) HARBLE]\n\n", false);
+	outputText("[r[e[c[u[r[s[i[v[e[lol]]t]a]g[rofl][copter]]b]o]m]i]n][a][t[io]n]\n", false);
+	
+	outputText("[if [ [ (4==4) HERP|DERP]\n", false);
+	outputText("[if (4 == 7) HERP|DERP]\n", false);
+	
+	outputText("Parenthesis - [if (4==(2+2)) HERP|DERP]\n", false);
+	outputText("[if (4==4) HERP|DERP]\n", false);
+
+	outputText("if (4==7) [if (4==7) HERP]\n", false);
+	outputText("if (4==7) [if (4==7) HERP|DERP]\n", false);
+	outputText("if (4=4) [if (4=4) HERP]\n", false);
+	outputText("if (4==4) [if (4==4) HERP]\n", false);
+	outputText("if (4==biggesttitsize) [if (4==biggesttitsize) HERP]\n", false);
+	outputText("if (analcapacity>3)    [if (analcapacity>3) HERP]\n", false);
+	outputText("if (analcapacity = 0)  [if (analcapacity = 0) HERP]\n", false);
+	outputText("if (analcapacity > 0)  [if (analcapacity > 0) HERP]\n", false);
+	outputText("Complex IF Statement thing: [if (hasCock = true) [cock] stiffening][if (isHerm = true) and ][if (hasVagina = true) [vagina] starting to burn with need]");
+
+	outputText("\n");
+	outputText("\n");
+
+	*/
+
 	if(isabellaFollower()) {
 		outputText("Your campsite got a lot more comfortable once Isabella moved in.  Carpets cover up much of the barren ground, simple awnings tied to the rocks provide shade, and hand-made wooden furniture provides comfortable places to sit and sleep.", false);
 		if(this.model.time.days >= 20) outputText("  You've even managed to carve some artwork into the rocks around the camp's perimeter.", false);
@@ -596,6 +629,7 @@ function camp():void {
 		}
 	}
 	//Menu
+
 	choices("Explore", explore, "Places", placesNum, "Inventory", 1000, "Stash", storage, "Followers", followers, "Lovers", lovers, "Slaves",slaves, "", 0, baitText, masturbate, restName, restEvent);
 	//Lovers
 	//Followers

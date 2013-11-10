@@ -430,7 +430,7 @@ function bimboChampagne(clearScreen:Boolean,intro:Boolean):void {
 			player.createVagina();
 			genderCheck();
 			outputText("\n\nYou can feel ");
-			if(player.hasCock()) outputText("the flesh under your cock[if (hasBalls = true) \" and behind your [balls]\"]");
+			if(player.hasCock()) outputText("the flesh under your cock[if (hasBalls = true)  and behind your [balls]]");
 			else outputText("the blank expanse of flesh that is your crotch");
 			outputText(" start to tingle and squirm... mmm... that feels nice!  There's a sensation you, like, can't describe, and then your crotch feels all wet... but in a good, sticky sorta way.  Oh, wow!  <b>You've, like, just grown a new virgin pussy!</b>  Awesome!");
 			player.changeStatusValue("Bimbo Champagne",3,1);

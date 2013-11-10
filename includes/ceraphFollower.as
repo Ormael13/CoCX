@@ -11,7 +11,7 @@ function ceraphIsFollower():Boolean {
 //[Actually Ceraph] - 
 function ceraphFollowerAppearance(output:Boolean = true):void {
 	if(output) outputText("", true);
-	spriteSelect(7);
+	spriteSelect(87);
 	if(output) {
 		outputText("You move to a secluded portion of your camp and mentally call for your tamed Omnibus.\n\nCeraph strides from around a boulder, as if by magic.  The slave-demon wears her red-studded collar as always.  However, instead of prancing around naked like she used to, she's arrived wearing a scandalous latex outfit that's as concealing as it is titillating.  From the tips of her fingers all the way to her shoulders, she's sleeved in the glossy black material.  At her neck, the top opens up, exposing the purple curves of her breasts, even though her nipples are hidden away by a clingy, scandalous scarlet bra, also of latex.  It looks as though it would be effortless to tear away. A rubbery faux-corset hugs her waist, connected to the material over her arms and shoulders in the back. The crimson micro bikini bottom beneath it looks unfit for covering anything Ceraph has ever had between her legs, but it somehow seems to just barely be holding things together.", false);
 		if(flags[CERAPH_HIDING_DICK] == 0) outputText("  Her demonic prick forms a ridge in the tight fabric, its head peeking ever-so-slightly over the top", false);
@@ -235,7 +235,7 @@ function getCeraphFollowerPiercing():void {
 //*Decision to Display Demonic Dick or Demur (pretty sure Fen mentioned wanting this -Z)
 function cawkTawgle():void {
 	outputText("", true);
-	spriteSelect(7);
+	spriteSelect(87);
 	//Off
 	if(flags[CERAPH_HIDING_DICK] == 0) {
 		outputText("You tell Ceraph that you want her to hide her demonic cock when she's around you.  Your collared demoness nods, lowering her eyelids seductively.  She slides a hand up the front of her latex panties, stroking her defiled member through the material once before concealing its form with fingers pointed down.\n\n", false);
@@ -259,7 +259,7 @@ function cawkTawgle():void {
 //Volunteer for new fetishes!
 function CeraphHandsOutNewFetishesLikePervCandy():void {
 	outputText("", true);
-	spriteSelect(7);
+	spriteSelect(87);
 	//*Fetish level = 0
 	if(flags[PC_FETISH] == 0) {
 		outputText("Ceraph comes forward on your command, whispering calmly as she ", false);
@@ -370,7 +370,7 @@ function CeraphHandsOutNewFetishesLikePervCandy():void {
 //*Request Ceraph Remove a Fetish. (Zeddited)
 function unfetishifyYourselfWithFollowerCeraph():void {
 	outputText("", true);
-	spriteSelect(7);
+	spriteSelect(87);
 	outputText("You ask Ceraph to remove one of the fetishes she generously donated earlier.  She sighs and nods, saying, \"<i>" + player.mf("Master","Mistress") + ", are you sure? It isn't that easy to do, and I love knowing my owner is aroused by my piercings!</i>\"\n\n", false);
 	outputText("Growling in irritation, you tell her, \"<i>Yes, I would like a fetish removed.</i>\"\n\n", false);
 	outputText("The demoness slumps her shoulders and nods.  She explains, \"<i>I have to do them in the reverse order that I added them... just hold still, okay?</i>\"\n\n", false);
@@ -382,7 +382,7 @@ function unfetishifyYourselfWithFollowerCeraph():void {
 //*Ceraph Actually Removes The Fetish (Zeddited)
 function goThroughWithCeraphUnfetishification():void {
 	outputText("", true);
-	spriteSelect(7);
+	spriteSelect(87);
 	outputText("Ceraph steps closer, her shining outfit squeaking from the movement.  Her hands gently touch your forehead, though she tries to avoid meeting your gaze.  The submissive slut keeps her eyes downcast, as is proper for a slave, and she begins to rub at your temples, working her magic to undo her mischief.  Warmth surges out, rushing through your temples and leaving a slack looseness in its wake.  Ceraph grunts and lets go, staggering back and panting.  She mumbles, \"<i>So much harder... to take those without changing... something else.</i>\"\n\n", false);
 	outputText("After a few moments, she seems to recover, and she asks, \"<i>Was there something else you needed me here for, " + player.mf("Master","Mistress") + ", or did you just want to waste my time?</i>\"\n\n", false);
 	
@@ -404,7 +404,7 @@ function fuckFollowerCeraphsVagoo():void {
 	if(x < 0) x = 0;
 	var y:Number = player.cockThatFits2(115);
 	outputText("", true);
-	spriteSelect(7);
+	spriteSelect(87);
 	//*Summary: Bind Ceraph's arms behind her back and make her lie facedown in the dirt, then grab her ankles and wheelbarrow fuck her, with her face as the wheel.
 	outputText("You let Ceraph know that you'll be using her pussy.  She sighs and says, \"<i>Yes, " + player.mf("Master","Mistress") + ",</i>\" unable to hide the disappointment in her tone.  Ceraph shifts, the panties of her outfit fading away to reveal her dripping cunny", false);
 	if(flags[CERAPH_HIDING_DICK] == 0) outputText(" and half-erect, throbbing cock", false);
@@ -488,7 +488,7 @@ function fuckFollowerCeraphsVagoo():void {
 //*Ceraph TongueFucks The PC (Zeddited)
 function followerCeraphTongueFucking():void {
 	outputText("", true);
-	spriteSelect(7);
+	spriteSelect(87);
 
 	outputText("Desirous of being pleasured by your demonic slave, you spread out your " + player.legs() + " to allow easy access to your " + vaginaDescript(), false);
 	if(player.hasCock()) outputText(" and " + multiCockDescriptLight(), false);
@@ -537,7 +537,7 @@ function followerCeraphTongueFucking():void {
 //*Ceraph goes full tentacle and double penetrates herms (+ standard dick BJ if ceraph dick toggle is on) (Zeddited)
 function ceraphTentacleGrape():void {
 	outputText("", true);
-	spriteSelect(7);
+	spriteSelect(87);
 
 	outputText("You tear off your " + player.armorName + " and instruct Ceraph, \"<i>Please me.  All of me.</i>\"  To her credit, Ceraph only spends a moment eyeing you before she springs into action.  Her panties vanish into shreds of flying latex, utterly demolished by the sudden growth of a pair of purple, undulating tendrils, each tipped with a swollen cockhead.  Squeezing up behind them is a third, slower tentacle.  Unlike its brothers, this one is capped with a sucking orifice, drooling clear slime and ringed by nub-like nodules, peeking out from folds of skin that remind you of clitoral hoods.", false);
 	if(flags[CERAPH_HIDING_DICK] == 0) outputText("  You can vaguely see Ceraph's hard, demonic-dick underneath all the waving tentacles.  She must have taken your command to keep her dick out for your use quite literally, even though there's little chance you'll get to put it anywhere.", false);
@@ -593,7 +593,7 @@ function ceraphTentacleGrape():void {
 
 //[Punish Her]
 function punishCeraphForSurpriseThroatFuck():void {
-	spriteSelect(7);
+	spriteSelect(87);
 	flags[UNKNOWN_FLAG_NUMBER_00290] = 1;
 	outputText("", true);
 	outputText("You grab hold of Ceraph, bending the surprised demoness over a rock and laying into her ass.  She whimpers, but manages not to cry, even as you turn her purple butt into a black and blue canvas.  With each slap you deliver, you dictate that her cock is only allowed near your mouth at YOUR discretion, not a worthless slave's.  By the end, she's sniffling and nodding, murmuring, \"<i>Yes " + player.mf("Master","Mistress") + ",</i>\" over and over again.</i>\"\n\n", false);
@@ -668,7 +668,7 @@ function fuckCeraphsCatgirls():void {
 
 
 function ceraphUrtaRoleplay():void {
-	spriteSelect(1);
+	urtaSprite();
 	outputText("", true);
 	outputText("\"<i>Roleplay? My " + player.mf("Master","Mistress") + " is wonderfully exploitative with " + player.mf("his","her") + " pet's lewd body,</i>\" Ceraph purrs, lips curling into a sly smile. Holding your arms at your sides, you nod at the subjugated demon, indicating that she should strip you. Keeping her eyes averted, she obediently complies, removing your " + player.armorName + " piece by piece until you stand nude, in all your splendor. Turning upon her, you issue your curt command, briefly describing the form that she is to take. Surprisingly, she knows exactly who you're talking about. \"<i>Ah, the fox-bitch,</i>\" she muses, eyes flashing solid black again for a moment. \"<i>She's been such a thorn in my side for so long... letting you defile her will be a particularly intense pleasure, " + player.mf("Master","Mistress") + ".</i>\"\n\n", false);
 
@@ -689,7 +689,7 @@ function ceraphUrtaRoleplay():void {
 //[Drunk] (female/herm only. No centaurs)
 function ceraphUrtaRoleplayDrunk():void {
 	outputText("", true);
-	spriteSelect(1);
+	urtaSprite();
 	outputText("You wish her a cheerful 'bottom's up,' relief washing over her face as she seeks shelter in the blissful oblivion of alcohol. Lifting the bottle's fluted neck to her polished lips, Urta throws back her head and begins swallowing. Her throat bulges in rhythmic gulps, air bubbling up through the liquor as the whiskey steadily vanishes into her shame-thirsty gullet. Her face flushes deeper, the bitter sting of booze taking her mind off of the embarrassment of her equine attributes. Her cock throbs in the open air with each noisy glug, dollops of cum still drooling from her engorged member. Finishing the entire bottle, the fox-morph wetly sucks down a fresh lungful of air, her expression floating somewhere between stimulated joy and dazed confusion. She looks closely at the bottle and blinks several times. \"<i>Wh- what did you put in this?</i>\"\n\n", false);
  
 	outputText("With a shrug, you admit that you're impressed she noticed the little additive. It seemed unlikely she would've tasted much of anything with how quickly she slurped down her liquid vice.  Grinning, you ask her how the black egg tasted. Urta's mouth hangs open, inebriation sinking its talons into her brain one by one, but after a moment, the realization dawns on her. Before she can voice her outrage, the change begins, Urta's body cringing with twisting spasms. She drops the bottle and clutches at her stomach, but when she raises her hands again, strands of light grey fur scatter into the wind from between her fingers. Falling to her knees, she begins itching, frantically, more of her ashen hair sloughing off as if she were shedding uncontrollably. Watching the girl paw at herself wildly, you bend down, close to her face, and when her head turns up to speak, you give the vixen a flick across her nose. She snatches her sensitive muzzle with a whine, hands wrapping around it as she writhes on the ground, fur falling away with each trembling shake.\n\n", false);
@@ -703,7 +703,7 @@ function ceraphUrtaRoleplayDrunk():void {
 }
 function ceraphUrtaRoleplayDrunk2():void {
 	outputText("", true);
-	spriteSelect(1);
+	urtaSprite();
 	outputText("The cock sliding up your backside throbs in anticipation and you realize that Urta's over-stimulated herself. Lips parting in a whorish moan, she climaxes, her fingers digging into her soft, smooth skin as her massive shaft flares thicker than you've seen before, gouts of thick jizz arcing from her head. You can feel the voluminous loads surging between your cheeks before bursting from her tip and cresting through the air before splattering down in cords of creamy cum. All along your back, neck, hair, and face, sticky wads of spunk douse you in the fox-girl's excitement and you squeeze your rear as tightly as you can to massage out every last ladle of her rich seed. She bathes you a pale off-white but to your surprise, she's still moaning and stroking the skin of her changed body. \"<i>It's not enough,</i>\" she mumbles, \"<i>I need more.</i>\" You start to rise, but the drunk girl slams her palms onto your shoulders, planting you back into the ground, body horizontal beneath her. Sliding backwards, her engorged cockhead presses insistently against the juncture of your hips, still bubbling with dollops of cum.  \"<i>It's too sensitive,</i>\" she whines, pinning your lower body between her muscled legs.  Your struggles to get out from under the drunk, horny girl are fruitless, so you turn your head and see that her throbbing sac is- if anything- even larger than before, her cock still rock hard as she guides it up against your " + vaginaDescript() + ".\n\n", false);
  
 	outputText("\"<i>Oh damnit, damnit, damnit,</i>\" Utra chants as she presses her erection against your drooling slit, the equine inches slipping along the sweat-oiled plumpness of your thighs. Inching forward, she presses the flared tip of her head against your tender lips, the distended flesh struggling against the tightness of your snatch, lubricated depths unwillingly parting bit by bit until finally, the bulbous cockhead slips into you, your cunt tightening down around it, firmly locking the guard captain inside you. \"<i>Ah! Ffffffuck!</i>\" she curses.  \"<i>How are you always so tight?</i>\" she groans, happily. Unable to restrain herself, she begins bucking in place, sliding the first three inches of her throbbing member back and forth inside you, savoring the ripples her rocking motion sends through your " + buttDescript() + ", your hypnotic hips mesmerizing the girl riding you. Raising an amber hand, she cracks an open palm against your tender ass as she drives another two inches inside you, your gut lurching with the force. You try to ", false);
@@ -732,7 +732,7 @@ function ceraphUrtaRoleplayDrunk2():void {
 }
 //[Sober]
 function ceraphUrtaRoleplaySober():void {
-	spriteSelect(1);
+	urtaSprite();
 	outputText("", true);
 	outputText("You tell Urta to put the bottle down. She won't need that, not any more. She looks at you in confusion, setting the whiskey to one side, curling her tail between her legs to cover her throbbing member. Closing the distance between the two of you, she stiffens when you wrap an arm around the small of her back and bring the other hand up to her chin. She doesn't have to be ashamed any more, you explain, because you know the cure for her curse. The fox-morph's eyes light up, her mouth parting but not daring to speak or even breathe. Stroking a thumb along the line of her jaw, you close your eyes and nod slowly, pulling her into an embrace tight enough for you to feel the fluttering pulse of her body heat sinking through your " + player.skinFurScales() + ". You can tell by the wobbling of her lower lip that she is dying to ask how, but you merely brush the dappled-grey bangs from her eyes, staring into the guard's emerald irises. You can feel the soft intake of her breath as it catches in her throat and she leans toward you ever so slightly, blushing. You meet her halfway, obsidian-warm lips pressing against yours tentatively at first, before gaining confidence. She sinks deeper into the embrace, the tight tension knotting her back slowly easing as surrenders her self-conscious shame for unabashed passion, relishing the intimacy of your caress. When you draw back from the intoxicating fever of the fox girl, you whisper one word to her: \"<i>Love.</i>\"\n\n", false);
  
@@ -749,7 +749,7 @@ function ceraphUrtaRoleplaySober():void {
  
 function ceraphUrtaRoleplaySober2():void {
 	hideUpDown();
-	spriteSelect(1);
+	urtaSprite();
 	outputText("", true);
 	outputText("You rise and run your hands along the lighter fur of her toned abs. \"<i>Please,</i>\" she whispers, \"<i>I want to feel you inside me.</i>\"  Your " + cockDescript(0) + " is all too willing, throbbing meat sliding up and down her lubricated lips as you slowly rock back and forth. Bracing your tip at the pucker of her honey-slick passage, you take one of her hands in yours, entwining your fingers with a squeeze as you push into her. Urta jolts with a sharp intake of breath before relaxing herself and closing her eyes to focus on the sensation of your inflamed shaft parting her inner walls. You push in deeper, amazed at how wet she is already, the strength of her love for you intensifying every motion. Despite all the sexual encounters she's had before this moment, in this single instant, it's as if she's experiencing pleasure for the first time. Aching bliss coursing through her limbs, it's all she can do to gasp and slowly toss her head side to side as you sink deeper into the girl, her recesses filling with the almost liquid heat of your throbbing member.", false);
 	if(player.cockArea(0) > 150) outputText("  Even your tremendous size is no impediment to blessing the girl with your passion- every inch of her body gives way as you sink into her beyond the limits you would normally expect, as if her body were perfectly tailored to yours.", false);
@@ -1340,9 +1340,9 @@ function noZetsukoLoveToday():void {
 }
 
 function giveFollowerBodyBits():void {
-	spriteSelect(7);
+	spriteSelect(87);
 	clearOutput();
-	outputText("You ask Ceraph just what all giving up a body-part would entail.  Your submissive demonic slut presses herself against you, stroking her hands under your " + player.armorName + " as she answers, \"<i>Well, [Master], I would use my body-shifting black magics to remove a choice portion of your 'fun-bits', if you know my meaning.[if (hasCock = true) \"  I could take your cock.\"][if (hasVagina = true) \"  I could remove your snatch.  Don't worry, once it's off of you, anything I put in it won't wind up your womb.\"][if (hasBreasts = true) \"  I could even make off with your tits if you like.\"][if (gender = 0) && (hasBreasts = false) \"  Sadly, you don't have anything that would be worth taking right now.  A true shame, my [Master].\"]</i>\"");
+	outputText("You ask Ceraph just what all giving up a body-part would entail.  Your submissive demonic slut presses herself against you, stroking her hands under your " + player.armorName + " as she answers, \"<i>Well, [Master], I would use my body-shifting black magics to remove a choice portion of your 'fun-bits', if you know my meaning.[if (hasCock = true)   I could take your cock.][if (hasVagina = true) \"  I could remove your snatch.  Don't worry, once it's off of you, anything I put in it won't wind up your womb.\"][if (hasBreasts = true)   I could even make off with your tits if you like.][if (gender = 0) && (hasBreasts = false) \"  Sadly, you don't have anything that would be worth taking right now.  A true shame, my [Master].\"]</i>\"");
 	if(player.gender > 0 || player.biggestTitSize() > 0) {
 		outputText("\n\nYou scratch your head as she prattles on, growing more animated and a touch aroused. \"<i>Then, I can fly back to the harem and add them to my collection.  My pets do so love when I give them an exotic endowment and then spend all night teasing it.  Could you imagine it?  Going to bed at night and dreaming of all the debauched things my slaves and I are doing, over and over.</i>\"");
 		outputText("\n\nWell, that's quite the pitch she's put together.  Do you want to give her something?\n");
@@ -1353,7 +1353,7 @@ function giveFollowerBodyBits():void {
 		var breasts2:int = 0;
 		var breasts3:int = 0;
 		if(player.hasCock()) {
-			outputText("\nYou can give her your [if (cocks == 1) \"penis\" else \"biggest penis or smallest penis\"].");
+			outputText("\nYou can give her your [if (cocks == 1) penis|biggest penis or smallest penis].");
 			wang = 3463;
 			if(player.cockTotal() > 1) smallestWang = 3464;
 		}
@@ -1374,7 +1374,7 @@ function giveFollowerBodyBits():void {
 }
 
 function ceraphFollowerCockTaking(smallest:Boolean = false):void {
-	spriteSelect(7);
+	spriteSelect(87);
 	clearOutput();
 	var x:int = player.biggestCockIndex();
 	if(smallest) x = player.smallestCockIndex();
@@ -1401,7 +1401,7 @@ function ceraphFollowerCockTaking(smallest:Boolean = false):void {
 }
 
 function ceraphFollowerCuntTaking():void {
-	spriteSelect(7);
+	spriteSelect(87);
 	clearOutput();
 	outputText("You undress, just enough to point at your [vagina].  Ceraph smiles happily and muses, \"<i>I have just the troublesome slut that could learn a thing or two by having her mouth replaced by a pussy.  Face-fucking is such an effective discipline technique, thank you dear.</i>\"");
 	outputText("\n\nCeraph's fingernails stab at your " + player.skinDesc + " painfully, dragging them in a circular motion around your vulva.  The pain of the action fades to a gentle, throbbing heat while her fingers go deeper, corkscrewing through your flesh.  A second later she pulls back, a featureless pillar of flesh wrapped in skin and sitting in her hand, topped with your " + vaginaDescript() + ".  The other end is capped with a strange, arcane mark, seemingly tattooed into the skin.  You glance down, expecting to find your groin ruined, but the spot your vagina once occupied is replaced with bare, unmarked  skin.", false);
@@ -1417,7 +1417,7 @@ function ceraphFollowerCuntTaking():void {
 }
 
 function ceraphFollowerTitTaking(rowNum:int = 0):void {
-	spriteSelect(7);
+	spriteSelect(87);
 	clearOutput();
 	var x:Number = rowNum;
 	//Store nipplecuntz or milks
@@ -1470,7 +1470,7 @@ function ceraphFollowerTitTaking(rowNum:int = 0):void {
 
 //NippleCunt Stuffing (Ceraph grows dick-nipples to plow your lusty twats!)
 function stuffSomeNippleCunts():void {
-	spriteSelect(7);
+	spriteSelect(87);
 	clearOutput();
 	outputText("Wanting to take advantage of some of the more extreme of your body's changes, you pull down your [armor] to bare your hungry nipple-twats, the well-lubricated tips of your nipples slowly opening in anticipation of what's to come.  You kick the discarded gear aside and command, \"<i>Slave, fuck my nipples.</i>\"");
 	outputText("\n\nCeraph looks at you, then down at your chest, and finally back up at you with a look of incredulousness glinting in her eyes.  \"<i>You want... [Master] is... kinky,</i>\" she coos, peeling out of her tight outfit to bare her demonic bosom.  Your demonic slave approaches, hips swaying as her bottom falls away to display her puffy purple womanhood");
@@ -1484,7 +1484,7 @@ function stuffSomeNippleCunts():void {
 	if(player.hasCock()) outputText("  [EachCock] is so hard by this point that it's smearing its pre-cum all over Ceraph's belly, but she doesn't mind.");
 	if(player.hasVagina()) outputText("  As for your [vagina], you've grown more than wet enough for a hard dicking, but honestly, right now, all you want is your [nipples] to be perfectly and completely fucked.");
 	if(flags[CERAPH_HIDING_DICK] == 0) outputText("  The fetishistic slut's sloppy cock is dribbling on your hip, neglected and aroused.  Poor thing.");
-	outputText("\n\nSatisfied with her work, your submissive Omnibus steps back to look at you.  Your " + player.skin() + " is flushed.  Every inch of your underboob is wet with lubricant[if (isLactating = true) \" and milk\"].  Your [nipples] are a soggy, inflamed mess.  And worst of all, you're panting like some bitch in heat.  Your slave is just out of arm's reach, watching you with a knowing smile.  Her own purple-hued dermis is tinted rose, though she seems to be hiding her arousal better than you.  You growl, \"<i>I said, fuck my gods damned nipples!</i>\" at her and jiggle your dripping teats for emphasis.");
+	outputText("\n\nSatisfied with her work, your submissive Omnibus steps back to look at you.  Your " + player.skin() + " is flushed.  Every inch of your underboob is wet with lubricant[if (isLactating = true)  and milk].  Your [nipples] are a soggy, inflamed mess.  And worst of all, you're panting like some bitch in heat.  Your slave is just out of arm's reach, watching you with a knowing smile.  Her own purple-hued dermis is tinted rose, though she seems to be hiding her arousal better than you.  You growl, \"<i>I said, fuck my gods damned nipples!</i>\" at her and jiggle your dripping teats for emphasis.");
 	outputText("\n\nCeraph frowns with distaste, but she answers, \"<i>[Master], please, shapeshifting takes time and preparation.  However, I believe I am almost ready to serve you.  Watch me change, for you...</i>\"  Ceraph cups her own sizable breasts in her palms and begins to rub them.  Her nipples, while already hard, pop out further, elongating with a well-timed, breathy exhalation of pleasure from their owner.");
 	if(player.bRows() > 1) {
 		outputText("  A second later, ");
@@ -1510,7 +1510,7 @@ function stuffSomeNippleCunts():void {
 
 //Portal Fuck (AKA Ceraph Hung Out With Cinnabar, Req's PC dick)
 function portalFuckWithFollowerCeraph():void {
-	spriteSelect(7);
+	spriteSelect(87);
 	clearOutput();
 	var x:int = player.cockThatFits(100);
 	var y:int = x + 1;
@@ -1539,7 +1539,7 @@ function portalFuckWithFollowerCeraph():void {
 	outputText("\n\nExperimentally, you grab the ring and move it slightly.  Taking it up slides your dick partway out of her cunt, more flesh appearing by magic on your loins as the glyph is pushed away.  Moving it down diminishes your visible erection, but it also fucks Ceraph's twat.  The demoness's gaze is riveted on her magic-illuminated snatch, watching happily as you experimentally plunge in and out of her sodden box.");
 	if(flags[CERAPH_HIDING_DICK] == 0) outputText("\n\nNot one to be outdone, your pet takes the other ring and begins to force it down her nubby demonic dong.  The gold-gilt dick-jewelry settles quite firmly just above her creamy pussy, and with a matching flash of light, her own member disappears.  Surprisingly, it doesn't appear in any of your orifices.  A quick glance her way reveals just where her dick wound up - in her mouth.  Ceraphs glossy lips are spread in a wide 'o', a thick demon-dick holding them open as she bobs her head up and down.  Greedy slurps and muffled moans drift up from her through the autofellatio, and you watch excitedly while masturbating yourself with her cunt.");
 	outputText("\n\nYou make good use of your new toy, pulling it up to just below the head before slamming it down hard, all the way to your [sheath].  It feels every bit as good as fucking her normally, but without having to actually move your whole body, you're able to relax and enjoy the experience more.  As an added benefit, you can see the way your pet slut's purple nether-lips blush as she gets more aroused, moisture spilling out around your thickness to drizzle through her asscrack.  With your free hand, you grope one of the slave's contoured cheeks, feeling it's heft, it's softness, and it's lewd jiggles.  You begin to moan, enjoying this more than you ought to, yet helpless to slow your pumping hand.");
-	outputText("\n\nThere's no stopping the surging passion as it races through you, and with a throaty sigh, you release your seed.  It's amazing, from this vantage you can do more than just experience your orgasm, you can watch it happen.  You can see the underside of your disembodied cock bulging with each urethra-stretching load.[if (cumQuantity > 500) \"  Jizz foams at her lips as her belly rounds, and you're treated to the sight of Ceraph's bellybutton suddenly becoming an outtie.\"][if (cumQuantity > 1000) \"  A moment later, her stomach rounds further, taking on a positively pregnant appearance.\"][if (cumQuantity > 1500) \"  Spunky rivers pump from the demon's overfull womb as it loses its ability to stretch any further.\"]  You sigh and idly move the portal up and down, fucking through the sloshing, sperm-filled mess that the demon's cunt has turned into.  Delightful.");
+	outputText("\n\nThere's no stopping the surging passion as it races through you, and with a throaty sigh, you release your seed.  It's amazing, from this vantage you can do more than just experience your orgasm, you can watch it happen.  You can see the underside of your disembodied cock bulging with each urethra-stretching load.[if (cumQuantity > 500) \"  Jizz foams at her lips as her belly rounds, and you're treated to the sight of Ceraph's bellybutton suddenly becoming an outtie.\"][if (cumQuantity > 1000)   A moment later, her stomach rounds further, taking on a positively pregnant appearance.][if (cumQuantity > 1500) \"  Spunky rivers pump from the demon's overfull womb as it loses its ability to stretch any further.\"]  You sigh and idly move the portal up and down, fucking through the sloshing, sperm-filled mess that the demon's cunt has turned into.  Delightful.");
 	if(flags[CERAPH_HIDING_DICK] == 0) outputText("\n\nCeraph gurgles happily for a second, then her cheeks bulge.  Her throat begins working, and you realize she's cumming into her own mouth.  By the look of how squirrel-like her visage has become, she can barely manage to swallow a mouthful before the next is stuffing her full, dribbles of pearly cream running freely from the corners of her mouth.  Ceraph quietly gulps and swallows over and over until her dick finally begins to soften, spent at last.");
 	outputText("\n\nYou stand up and stretch, your cock still lodged tight in Ceraph's cooch.  Alas, all good things must come to an end, and with one slow tug, you remove the ring from your [cock " + y + "] (and your maleness from her cunt).  You toss the borrowed item back to her, letting it fall on your slave's heaving bosom as she tries to recover, a fucked-out mess in the dirt.  You turn to get dressed, and when you glance back, Ceraph is gone, until the next time you call for her.");
 	stats(0,0,0,0,0,0,-100,1);
@@ -1561,7 +1561,7 @@ function layEggsInSlaveCeraph():void {
 	outputText("\n\nYou command her to turn around and bend over.  Your demonic slave hastens to comply, presenting her latex-covered sex to you brazenly.  The shimmering scrap of fabric hovers on the bare edge of decency; the strip is so narrow, you can see her puffy outer lips bulging out on both sides.");
 	if(flags[CERAPH_HIDING_DICK] == 0) outputText("  The whole garment creaks and strains under the pressure of her hardening member.");
 	
-	outputText("\n\nYou frown.  Your slut knows that you're going to use her as an egg dump; how does she expect you to do that with panties in the way?  Growling, you grasp the shear latex around the waistband, right beneath her twisting tail, and [if (strength < 80) \"haul upwards.\" else \"pull upwards with such force that Ceraph is left dangling from the bikini bottom.\"]  The omnibus screams as the fabric cuts into the soft flesh of her sex");
+	outputText("\n\nYou frown.  Your slut knows that you're going to use her as an egg dump; how does she expect you to do that with panties in the way?  Growling, you grasp the shear latex around the waistband, right beneath her twisting tail, and [if (strength < 80) haul upwards.|pull upwards with such force that Ceraph is left dangling from the bikini bottom.]  The omnibus screams as the fabric cuts into the soft flesh of her sex");
 	if(flags[CERAPH_HIDING_DICK] == 0) outputText("; unable to keep it penned up, her demonic cock spills out the side, waving back and forth obscenely as you saw the offending garment into her crotch");
 	outputText(".");
 	
@@ -1600,7 +1600,7 @@ function layEggsInSlaveCeraph():void {
 //Adds "Submission" option to the roleplay menu.
 function sumissivenessToCeraphFollower():void {
 	clearOutput();
-	spriteSelect(7);
+	spriteSelect(87);
 	outputText("When you broach the idea of submitting to your fetish queen, delight washes across Ceraph's face.  Before another word can be spoken, she lashes out with her whip (where did she get that from?) and catches you around the neck with the taut leather, yanking hard enough to drag you to the ground and make you sputter for air.  The shining leather slides off as soon as your hands hit the ground, but the demoness is already standing above you, pushing on you with her stiletto-like heels to roll you aside.");
 	outputText("\n\n\"<i>That's a better place for a useless little " + player.mf("boy","girl") + " like you, down in the dirt where you belong,</i>\" the demoness declares, pacing back and forth.  She crouches next to you and whispers in your ear, \"<i>The safe word is 'apple', you pitiful pig.</i>\"");
 	outputText("\n\nYou nod meekly, awed by the demonic dominatrix's imposing, self-assured aura of command.");
@@ -1649,7 +1649,7 @@ function sumissivenessToCeraphFollower():void {
 //[Apple]
 function sayAppleToCeraph():void {
 	clearOutput();
-	spriteSelect(7);
+	spriteSelect(87);
 	outputText("Fuck this!  \"<i>Apple!</i>\"");
 	outputText("\n\nCeraph gets up with a shocked expression painted on her violet features.  \"<i>Didn't you have any fun?</i>\" she asks.  \"<i>We were just about to the good part!</i>\"");
 	outputText("\n\nYou tell her that it wasn't fun in the slightest, and you want out.");
@@ -1660,7 +1660,7 @@ function sayAppleToCeraph():void {
 //[Either Once]
 function barkToCeraphOnce(dog:Boolean = true):void {
 	clearOutput();
-	spriteSelect(7);
+	spriteSelect(87);
 	outputText("\"<i>");
 	if(dog) outputText("Arf!</i>\" you bark");
 	else outputText("Meowwwww!</i>\" you mew");
@@ -1793,7 +1793,7 @@ function barkToCeraphOnce(dog:Boolean = true):void {
 //[Either Twice]
 function barkOrMeowTwiceToCeraph(dog:Boolean = true):void {
 	clearOutput();
-	spriteSelect(7);
+	spriteSelect(87);
 	outputText("\"<i>");
 	if(dog) outputText("Arf! Arf!</i>\" you bark");
 	else outputText("Meow!  Meowwwww!</i>\" you mew");

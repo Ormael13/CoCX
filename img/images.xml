@@ -1,13 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Images>
-	<Image id="monster-anemone" width="480" height="360">.\img\puppy.jpg</Image>
-	<Image id="monster-goblin" width="624" height="800">.\img\jrpup1.jpg</Image>
-	<Image id="monster-GooGirl" width="480" height="360">.\img\puppy.jpg</Image>
-	<Image id="monster-GreenSlime" width="300" height="400">.\img\jrpup.jpg</Image>
-	<Image id="monster-imp" width="300" height="400">.\img\jrpup.jpg</Image>
-	<Image id="monster-naga" width="300" height="400">.\img\jrpup.jpg</Image>
-	<Image id="monster-sandtrap" width="480" height="360">.\img\puppy.jpg</Image>
-	<Image id="monster-sandwitch" width="624" height="800">.\img\jrpup1.jpg</Image>
-	<Image id="monster-shark-girl" width="480" height="360">.\img\puppy.jpg</Image>
-	<Image id="monster-Tamani" width="480" height="360">.\img\puppy.jpg</Image>
+	<Image id="Yoh-SL_Bee" width="792" height="1190">.\img\Yoh-SL_Bee.png</Image>
+	<Image id="Yoh-SL_Ceraph" width="900" height="1200">.\img\Yoh-SL_Ceraph.png</Image>
+	<Image id="Yoh-SL_Goo" width="1059" height="934">.\img\Yoh-SL_Goo.png</Image>
+	<Image id="Yoh-SL_Sand_Witch_Sandwitch" width="735" height="1163">.\img\Yoh-SL_Sand_Witch_Sandwitch.png</Image>
+	<Image id="Yoh-SL_Sand_Witch_Sandwitch_Sandwich" width="900" height="1200">.\img\Yoh-SL_Sand_Witch_Sandwitch_Sandwich.png</Image>
 </Images>

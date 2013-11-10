@@ -1384,8 +1384,10 @@ function rubiAppearance():void {
 	outputText(", " + rubiMF("his","her") + " ");
 	if(flags[RUBI_EYE_TYPE] == 1) outputText("slitted ");
 	if(flags[RUBI_EYE_TYPE] == 0 || rubiBimbo()) outputText("green");
-	else if(flags[RUBI_EYE_TYPE] == 1) outputText("purple");
-	else outputText("black");
+	else if(flags[RUBI_EYE_TYPE] == 1) 
+		outputText("purple");
+	else 
+		outputText("black");
 	outputText(" eyes framed with eyeliner, belying " + rubiMF("his","her") + " masculine origins.  ");
 	if(flags[RUBI_HORNTYPE] > 0) outputText("Two tiny horns extend upwards from " + rubiMF("his","her") + " hairline, solid black in color.  ");
 	outputText("A pair of ");
@@ -2912,7 +2914,7 @@ function giveRubiATFItem(short:String):void {
 				flags[RUBI_SKIN] = 3;
 			}
 			//(Anemone Penis, must have a penis)
-			else if(flags[RUBI_COCK_SIZE] > 0 && flags[RUBI_COCK_TYPE] != CockTypesEnum.TENTACLE) {
+			else if(flags[RUBI_COCK_SIZE] > 0 && flags[RUBI_COCK_TYPE] != CockTypesEnum.ANEMONE) {
 				outputText("\n\n" + rubiMF("His","Her") + " hands don't dally there long before darting down to " + rubiMF("his","her") + " crotch, groping at the " + rubiCock() + " betwixt " + rubiMF("his","her") + " legs.  The flesh seems to  ripple, with veins suddenly bulging.  A low, husky groan wrestles its way out of Rubi's throat as " + rubiMF("his","her") + " cock morphs");
 				if(flags[RUBI_COCK_TYPE] != CockTypesEnum.HUMAN) outputText(", first shifting towards a more human-like appearance");
 				outputText(".  Small nodules appear, around the crown of the penis, and around its base.  Rubi's delicate hands run across two of the nodules, and " + rubiMF("his","her") + " cock suddenly stiffens, harder than you've ever seen it!  Whatever those things are, they're quite sensitive.");
@@ -2944,7 +2946,7 @@ function rubiGrowPlusBreasts():void {
 	outputText("You hand over the vial of blueish liquid.  Rubi takes a moment to look it over, before taking a deep breath and injecting half of the vial into one breast and the rest into " + rubiMF("his","her") + " other breast.");
 	
 	//(If breast increase)
-	if(flags[RUBI_BREAST_SIZE] < 7) {
+	if(flags[RUBI_BREAST_SIZE] < 7 || (flags[RUBI_BREAST_SIZE] < 30 && flags[HYPER_HAPPY])) {
 		outputText("\n\nRubi's breasts suddenly wobble of their own accord, swelling up like they're being inflated.  The little demon-morph shivers as pleasure wracks " + rubiMF("his","her") + " body, with " + rubiMF("his","her") + " breasts growing at least two cup sizes.  " + rubiMF("His","Her") + " fingers absently grope at " + rubiMF("his","her") + " new endowments, tweaking the flushed, sensitive flesh until the erotic heat from the transformation eventually dissipates, leaving " + rubiMF("him","her") + " panting on the floor before you.");
 		flags[RUBI_BREAST_SIZE] += 2 + rand(2);
 		if(flags[RUBI_BREAST_SIZE] > 7) flags[RUBI_BREAST_SIZE] = 7;
@@ -2962,7 +2964,7 @@ function rubiPenisGroPlus():void {
 	outputText("You hand over the vial of greenish liquid.  Rubi takes a moment to look it over before, before taking a deep breath and injecting the entire thing into the base of " + rubiMF("his","her") + " " + rubiCock() + ".");
 	
 	//(If Penis increase)
-	if(flags[RUBI_COCK_SIZE] < 12 || (flags[RUBI_COCK_TYPE] == CockTypesEnum.HORSE && flags[RUBI_COCK_SIZE] < 20)) {
+	if(flags[RUBI_COCK_SIZE] < 12 || (flags[RUBI_COCK_TYPE] == CockTypesEnum.HORSE && flags[RUBI_COCK_SIZE] < 20) || (flags[RUBI_COCK_SIZE] < 30 && flags[HYPER_HAPPY])) {
 		outputText("\n\nRubi grips " + rubiMF("his","her") + " cock as it suddenly hardens, visibly throbbing in " + rubiMF("his","her") + " grasp.  It surges, growing larger, gaining about two inches right before your eyes.");
 		flags[RUBI_COCK_SIZE] += 2 + rand(2);
 		if(flags[RUBI_COCK_TYPE] != CockTypesEnum.HORSE) {

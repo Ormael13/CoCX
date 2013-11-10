@@ -28,7 +28,8 @@ Chance of waking the PC by whispering how much they need to fuck her in their sl
 Bimbo harpy pussy apparently tastes tangy with an undertone of sweet, almost peach-like flavor.
 */
 function sophieSprite():void {
-	spriteSelect(53);
+	if(flags[UNKNOWN_FLAG_NUMBER_00282] > 0 && flags[UNKNOWN_FLAG_NUMBER_00283] == 0) spriteSelect(83);
+	else spriteSelect(53);
 }
 
 function bimboSophie():Boolean {
@@ -229,7 +230,7 @@ function approachBimboSophieInCamp(output:Boolean = true):void {
 		}
 	}
 	//choices("Nice Fuck",vag2,"Mean Fuck",vag,"FuckHerAss",anal,"Get Licked",getLicked,"Ovi Elixer",ovi,"Titty-Fuck",titFuck,"",0,"",0,"",0,"Leave",campSlavesMenu);
-	addButton(9,"Leave",eventParser,120);
+	addButton(9,"Leave",campSlavesMenu);
 }
 
 
@@ -796,7 +797,7 @@ function rideDatSophieVag(nice:Boolean = false):void {
 		outputText("Before you can decide what, exactly, you're going to do with your harpy slut, Sophie jiggles her way over to you, the insides of her thighs dripping with every step.  You watch as the plump bird wobbles, too aroused and too damn big to walk straight, but eventually she does manage to make it to you.");
 		if(flags[SOPHIE_INCUBATION] > 0 && flags[SOPHIE_INCUBATION] <= 150) outputText("  Her pregnancy-imbued middle doesn't really help, either.");
 		outputText("\n\n\"<i>Like, hey, babe...</i>\" she coos, leaning forward and pressing her plushy, oversized breasts against you.  Her nipples in particular push hard against your [armor], the harpy completely aroused, and before you can do anything else - she leans in and kisses you, drug-ringed lips smacking desperately against yours again and again.");
-		outputText("\n\nFor a second you lose yourself in it as the drugged cocktail starts to run through you, making [eachCock] start to throb and pulse as [if (cocks >= 2) \"they grow\"][if (cocks = 1) \"it grows\"] hard inside of your [armor], and your arms slowly start to reach up to fondle the drug-laden harpy... before your eyes snap wide and you shove her off.");
+		outputText("\n\nFor a second you lose yourself in it as the drugged cocktail starts to run through you, making [eachCock] start to throb and pulse as [if (cocks >= 2) they grow][if (cocks = 1) it grows] hard inside of your [armor], and your arms slowly start to reach up to fondle the drug-laden harpy... before your eyes snap wide and you shove her off.");
 		outputText("\n\n\"<i>You bitch!</i>\" you curse her, glaring as she falls onto her fat rump.  The stupid bird boggles for a moment, trying to process what just happened, but you're having none of it.  \"<i>If I wanted to fuck you, I'd fucking do it!</i>\"  You berate her, slowly stripping off your [armor].  Despite your yelling, she only seems turned on; she licks her lips and begins to rub her drooling cunt as she watches you strip, and you glower at her the entire time, only being irritated by her encouraging moans.");
 		outputText("\n\n\"<i>Well, like, you totally want to fuck now, right?</i>\" Sophie asks you, voice hitching into a soft, squawky moan.  \"<i>So let's, y'know, let's fuck, okay?  Okay, babe?  We can fuck, r-right?</i>\"  Her fingers are digging farther into her soppy snatch now, and you can tell that either you're going to fuck her into a coma, or she's going to do it to herself.  And damn it, you <i>are</i> hard now, so it may as well be you.");
 		outputText("\n\nYou kick off the last of your [armor] with a grumble, [eachCock] bouncing as you do, and you make your way over to the gesticulating harpy as she beckons you with her free hand, squawking out little '<i>yeahs</i>' and '<i>come heres</i>'.  You shove the harpy down, onto her back, and watch with some amusement as her massive chest wobbles and bounces from the impact.");
@@ -836,7 +837,7 @@ function rideDatSophieVag(nice:Boolean = false):void {
 		}
 	}
 	else {
-		if(player.cumQ() < 250) outputText("\n\n[EachCock] twitches and sputters as your orgasm kicks off, the [cock " + (x+1) + "] inside Sophie's drooling cunt getting the first gout from your [balls], followed immediately by a second shot from the cock[if (cocks > 2) \"s\"] outside of her.  [EachCock] fire off a few more spurts and shots of your seed, getting Sophie's insides and thighs all sticky, and then you flop down with a sigh.");
+		if(player.cumQ() < 250) outputText("\n\n[EachCock] twitches and sputters as your orgasm kicks off, the [cock " + (x+1) + "] inside Sophie's drooling cunt getting the first gout from your [balls], followed immediately by a second shot from the cock[if (cocks > 2) s] outside of her.  [EachCock] fire off a few more spurts and shots of your seed, getting Sophie's insides and thighs all sticky, and then you flop down with a sigh.");
 		//{if (cocks >= 2) and (cumMedium = true)} 
 		else if(player.cumQ() < 500) outputText("\n\n[EachCock] throbs beneath of you as your orgasm kicks off, and your first few shots of semen get everywhere; Sophie's thighs and crotch and insides all get a liberal helping of your cream as you gush and shudder, emptying your [balls], and she coos happily, rubbing your back.  She reaches down and grabs your [cock " + (y+1) + "] with her other hand, stroking the smaller length as it shoots out a few more spurts all over her wrist, and she cradles you.");
 		//{if (cocks >= 2) and (cumHigh = true)} 

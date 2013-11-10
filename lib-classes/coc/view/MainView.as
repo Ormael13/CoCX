@@ -282,14 +282,18 @@ package coc.view {
 		};
 
 		public function selectSprite( index :Number = 0 ) :void {
+			var scale :Number;
+
 			// TODO: When flags goes away, if it goes away, replace this with the appropriate settings thing.
 			if( choice < 0 || model.flags[ SHOW_SPRITES_FLAG ] )
 				this.sprite.visible = false;
 			else {
 				this.sprite.visible = true;
 				this.sprite.gotoAndStop(choice);
-				this.sprite.scaleX = 3;
-				this.sprite.scaleY = 3;
+
+				scale = 80 / sprite.height;
+				this.sprite.scaleX = scale;
+				this.sprite.scaleY = scale;
 			}
 		};
 

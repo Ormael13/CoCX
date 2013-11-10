@@ -45,7 +45,7 @@ function doEvent(eventNo):void
 	//Meditate w/Jojo
 	else if (eventNo == 2003)
 	{
-		spriteSelect(34);
+		jojoSprite();
 		outputText("Jojo smiles and leads you off the path to a small peaceful clearing.  There is a stump in the center, polished smooth and curved in a way to be comfortable.  He gestures for you to sit, and instructs you to meditate.\n\nAn indeterminate amount of time passes, but you feel more in control of yourself.  Jojo congratulates you, but offers a warning as well.  \"<i>Be ever mindful of your current state, and seek me out before you lose yourself to the taints of this world.  Perhaps someday this tainted world can be made right again.</i>\"", true);
 		
 		stats(.5, .5, 0, .5, -1, 0, -5, -1);
@@ -98,7 +98,7 @@ function doEvent(eventNo):void
 	//Begin the jojo rapingz
 	else if (eventNo == 2004)
 	{
-		spriteSelect(34);
+		jojoSprite();
 		//jojoRape();
 		this.semiglobalReferencer.jojoRape();
 		doNext(13);
@@ -315,6 +315,7 @@ function doEvent(eventNo):void
 	{
 		trace("Tentacle event here");
 		outputText("", true);
+		spriteSelect(100);
 		//Tentacle Encounter - beware legalese!
 		/*
 		   LICENSE
@@ -410,6 +411,7 @@ function doEvent(eventNo):void
 		if (player.gender == 1)
 		{
 			outputText("You next feel the wretched sensation of another tentacle pushing its way past your anus and into your rectum. You cry more out of frustration and anger than pain as the foreign body settles a few inches inside your body. With a furious, coordinated rhythm, the monstrosity begins swelling the tentacle in your ass and ", true);
+			spriteSelect(100);
 			if (player.cockTotal() == 1)
 				outputText("using a sucking-stroking motion on your helpless " + multiCockDescriptLight() + ". The swelling of the ass tentacle pressures your prostate in a paradoxically pleasurable and painful manner. You realize, much to your terror, that this beast is MILKING you of your semen!", false);
 			else
@@ -424,6 +426,7 @@ function doEvent(eventNo):void
 		if (player.gender == 2)
 		{
 			outputText("The beast rears up to reveal a beak-like maw. It opens its massive jaws to reveal ", true);
+			spriteSelect(100);
 			if (player.vaginas.length == 1)
 				outputText("a tongue shaped like a large cock while its tongue, like any tentacle, immediately seeks out your defenseless pussy. It prods itself mockingly around your labia as you attempt to contract to keep it from violating you and depriving you of what dignity you have left. The creature flexes its appendage and easily forces its way into your vagina", false);
 			else
@@ -455,6 +458,7 @@ function doEvent(eventNo):void
 			if (player.cockTotal() == 1)
 			{
 				outputText("A sharp tug tells you that the creature has sealed itself upon your " + cockDescript(0) + ". You see " + player.totalBreasts() + " smaller tentacles latch onto your erect nipples. You feel milk begin to leak out as the creature makes a perfect seal around your areola. A thick, phallic tentacle probes underneath your trapped " + cockDescript(0) + " until it finds your vaginal opening. You cry out as the member punches past your opening and bottoms out in your womb. The tentacle swells up until it completely fills your " + vaginaDescript(0) + ".  ", true);
+				spriteSelect(100);
 				cuntChange(player.vaginalCapacity() * .76, true, false, true);
 				outputText("With freakish coordination, the beast sucks your " + cockDescript(0) + " and tits while hammering away at your " + vaginaDescript(0) + ". The overwhelming pleasure courses through your body and triggers an immediate orgasm, sending gouts of cum into the tentacle sealed around your " + cockDescript(0) + ". The sensation of your fluids entering the creature prompts it to suck your " + cockDescript(0) + " harder as well as hammer your " + vaginaDescript(0) + " faster, leading to a chain of orgasms.\n\n", false);
 				outputText("Drunk with pleasure, you revel in the sensation of cumming into the creature while it breast feeds from you. All you can do is drown in the experience of being milked from top to bottom. The creature begins piledriving your box faster and you feel like the creature is going to impale you with its phallic tentacle.\n\n", false);
@@ -464,6 +468,7 @@ function doEvent(eventNo):void
 			else
 			{
 				outputText("A sharp tug tells you that the creature has sealed itself upon your " + multiCockDescriptLight() + ". You see " + player.totalBreasts() + " smaller tentacles latch onto your erect nipples. You feel milk begin to leak out as the creature makes a perfect seal around your areola. A thick, phallic tentacle probes underneath your trapped cocks until it finds your vaginal opening. You cry out as the member punches past your opening and bottoms out in your womb. The tentacle swells up until it completely fills your " + vaginaDescript(0) + ".", true);
+				spriteSelect(100);
 				cuntChange(player.vaginalCapacity() * .76, true, true, false);
 				outputText("  With freakish coordination, the beast sucks your " + multiCockDescriptLight() + " and tits while hammering away at your " + vaginaDescript(0) + ". The overwhelming pleasure courses through your body and triggers an immediate orgasm, sending gouts of cum into the tentacles sealed around your pricks. The sensation of your fluids entering the creature prompts it to suck your throbbing cocks harder as well as hammer your " + vaginaDescript(0) + " faster, leading to a chain of orgasms.\n\n", false);
 				outputText("Drunk with pleasure, you revel in the sensation of cumming into the creature while it breast feeds from you. All you can do is drown in the experience of being milked from top to bottom. The creature begins piledriving your box faster and you feel like the creature is going to impale you with its phallic tentacle.\n\n", false);
@@ -488,6 +493,7 @@ function doEvent(eventNo):void
 		if (player.vaginas.length == 1)
 		{
 			outputText("Satisfied, the creature drops you smartly, withdraws its limbs from you, and lumbers away. Covered completely in cum, you see that your clitoris swelled up to ", true);
+			spriteSelect(100);
 			//Big clit girls get huge clits
 			if ((player.hasPerk("Big Clit") >= 0 && player.clitLength > 2) || player.clitLength > 3)
 				outputText("almost " + num2Text(Math.floor(player.clitLength * 1.75)) + " inches in length. ", false);
@@ -496,8 +502,10 @@ function doEvent(eventNo):void
 				outputText("almost four inches in length. ", false);
 			outputText("Bruised and sore, you pass into unconsciousness ", false);
 		}
-		else
+		else {
 			outputText("Satisfied, the creature drops you smartly and withdraws its limbs from you and lumbers away. Covered completely in cum, you see that your " + player.vaginas.length + " clits swelled up to almost four inches in length. Bruised and sore, you pass into unconsciousness, ", true);
+			spriteSelect(100);
+		}
 		//Not too corrupt
 		if (player.cor < 75)
 			outputText("too intoxicated with lust to fume over your violation. ", false);
@@ -545,6 +553,7 @@ function doEvent(eventNo):void
 			if (player.cocks.length == 1)
 			{
 				outputText("You grin to yourself as you decide to see just how close to a pussy these perverted little flowers are.  The thick stem bends with ease as you grasp it and bend it towards your groin, your other hand fumbling to open your " + player.armorName + ". In seconds you free yourself and gingerly bring the folds closer, the musky scent that fills the air rapidly bringing you to a full, throbbing hardness. The ", true);
+				spriteSelect(92);
 				outputText("first touch of petals to your skin slicks you with the flower's silky secretions, allowing you to easily slip between the petals. Though the flower looks fairly deep, you quickly feel yourself bottom out inside the petal's slippery grip. Shrugging, you decide to make the best of it and begin thrusting into the plant, enjoying the unusual sensations along the front-most parts of your " + cockDescript(0) + ". As ", false);
 				outputText("you pound away, you begin to notice a change in the rear of the flower.\n\n", false);
 				//New PG
@@ -580,6 +589,7 @@ function doEvent(eventNo):void
 			else
 			{
 				outputText("You grin to yourself as you decide to see just how close to a pussy these perverted little flowers are.  The thick stems bends with ease as you grab a few with your hand and pull them towards your groin, your other hand fumbling to open your " + player.armorName + ". In seconds you free yourself, and gingerly bring the folds closer.  The musky scent filling the air rapidly brings your " + multiCockDescriptLight() + " to a full, throbbing hardness. The first touch of petals to your skin slicks you with the flower's silky secretions, allowing you to easily slip between the petals. Though the flowers look fairly deep, you quickly feel yourself bottom out inside the petals' slippery grip. Shrugging, you decide to make the best of it and begin thrusting into the plant, enjoying the unusual sensations along the front-most parts of your " + multiCockDescriptLight() + ". As you pound away, you begin to notice a change in the rear of the flowers.\n\n", true);
+				spriteSelect(92);
 				outputText("They seem to be gradually opening up, allowing the smallest of your cock-tips to begin slipping through an opening in the backs of the flowers and into the stems.  Shocked by this unexpected development, you pull the bundle of flowers from your " + multiCockDescriptLight() + ", but whiplike tendrils shoot forth from deep within the flowers, wrapping tightly around your manhoods, painfully squeezing as they drag your " + multiCockDescriptLight() + " back into the tight vaginal openings.  They pull tighter as they force you deeper inside the plant, pulling the full length of each of your members into the constricting stalks.   Wrapped tightly around your base, the tendrils form effective cock-rings, making each of your " + multiCockDescriptLight() + " overfill with blood.\n\n", false);
 				outputText("You briefly try to free yourself but the pain it causes your groin overwhelms you.  Resigned to your fate, you allow the plants to wrap their petals fully around your groin, encapsulating all of your maleness.  With surprising gentleness, you feel a suction and squeezing building around each and every one of your dicks.  You feel a flood of fluids around each over-engorged member, making them tingle with unnatural sensitivity.  The squeezing and sucking of the plant's stalks, combined with the sudden onset of strange sensation, is too much to bear.  You feel a churning pressure at the base of your groin, liquid heat filling every member as your body makes ready to give these plants what they want.\n\n", false);
 				outputText("You cum, and cum, and cum, the evidence of your pleasure devoured by the plant's sucking, squeezing gullet. The orgasm drags on for what feels like forever, your " + player.legs() + " eventually giving out, your hips the only muscle that seems to work as they twitch into the air, as if begging for more. You are milked of a few last big spurts, at last collapsing.\n\n", false);
@@ -614,6 +624,7 @@ function doEvent(eventNo):void
 		else
 		{
 			outputText("You grin to yourself and decide to sample the fine smelling nectar of the flowers. You grip the unusually thick stalk as you lean down, taking in the bright red and iridescent purples of the pussy-flower's petals. You give it an experimental lick, gaining a feeling for the flavor of the nectar. It's delicious, but leaves your tongue tingling and sensitive. A small budding protrusion emerges from between the petals, slick with more of the plants fluid, cherry red and looking very much like an engorged clit.\n\n", true);
+			spriteSelect(92);
 			//New PG
 			outputText("Giddy from either the novelty of the situation or the chemicals in the flower's juices, you lick at the plant's bud-like clit and are immediately rewarded with a burst of fruity plant-nectar. The taste becomes the last thing on your mind as your tongue becomes even more sensitive, every touch and taste rapidly becoming highly erotic. You delve into it's folds, seeking more nectar, your tongue slurping and licking, noisily tongue-fucking the little plant. The taste deepens, losing some of the sweetness as that clitty swells bigger, drops of tangy moisture oozing from it.\n\n", false);
 			//New PG
@@ -633,6 +644,7 @@ function doEvent(eventNo):void
 		if (player.vaginas.length > 0 && rand(2) == 0)
 		{
 			outputText("You saunter over to a dangling group of perverted looking vines, discarding your " + player.armorName + " along the way. Running your fingertips along the bulbous-tipped tentacle-like vines, you find one that looks ", true);
+			spriteSelect(92);
 			//Big medium or small
 			temp = rand(3);
 			//Normal
@@ -732,6 +744,7 @@ function doEvent(eventNo):void
 		else
 		{
 			outputText("You approach the swollen vines, noting a drizzle of fluid leaking from one of the bulbous and mushroom-like tips.   Licking your lips as you approach, you feel your heart beat faster in anticipation of sampling the tainted flora of the glade.   Grasping one gently, you lift it up, noting the pebbly texture along the curvature of its head, and the soft nubs on the underside where it rejoins the stalk.  The whole thing feels moist, just barely lubricated with some fluid that the plant seems to sweat.\n\n", true);
+			spriteSelect(92);
 			//new PG
 			outputText("Pulling it closer, you open your mouth wide enough to take in the plant, slipping it between your lips.  The taste of the plant is starchy with a tangy aftertaste.  You run your tongue around it lewdly, your efforts swiftly rewarded by a spurt of salty cream.   The penis vine seems more receptive to your actions than the real thing, shifting color to a rapidly darkening pink.  You begin jacking the vine off with your hands, rubbing a fingertip where the 'bulb' joins the stalk.  In no time it starts spurting seed into your throat, bright crimson spreading back along the vine as thick bulges of goo are pumped down the vine.  The bulb in your mouth swells up like a balloon, wrenching your jaws apart and trapping itself behind your teeth.   You're forced to breathe through your nose as it rapidly plugs your oral opening, gulping down each load of throat-filling seed in an effort not to choke.\n\n", false);
 			//New PG
@@ -1738,7 +1751,7 @@ function doEvent(eventNo):void
 	//Jojo worm removal
 	else if (eventNo == 2083)
 	{
-		spriteSelect(34);
+		jojoSprite();
 		outputText("\"<i>Excellent, young one,</i>\" Jojo continues. \"<i>Your dedication to purification is admirable. Relax and know that the parasites will leave you soon.</i>\"\n\n", true);
 		outputText("Jojo gets up and walks over to a backpack hidden in the bushes. He removes a lacquered box. He removes and combines a rather noxious combination of herbs, oils and other concoctions into a mortar and grinds it with a pestle. After a few minutes, he ignites the mixture and uses a feathered fan to blow the fumes over you. The smell of the mix is nauseating and repugnant. Your stomach turns and you fight the urge to vomit. Eventually, you are no longer able to resist and you purge yourself onto the ground. Cramping from your vomiting fits, you wrack with discomfort, which slowly builds to genuine pain. As the pain sets in, you feel a stirring deep in your crotch. The worms inside you are stirring and thus are compelling another unwanted orgasm. Unable to control your body, your cock explodes, launching cum and worms everywhere. Jojo begins fanning faster as he sees the worms leave your body.\n\n", false);
 		outputText("\"<i>Further endurance is needed, young one,</i>\" Jojo says. \"<i>The root of your problem must leave before you may pursue further purification. Healing is always twice as uncomfortable as the illness requiring attention.</i>\"\n\n", false);
@@ -1759,6 +1772,7 @@ function doEvent(eventNo):void
 	else if (eventNo == 2084)
 	{
 		outputText("", true);
+		spriteSelect(92);
 		outputText("Stepping carefully around the other hazards of the glade, you close on the strange trees with equal parts curiosity and desire.  Up close, it's easy to see the strange growths that sprout from the bark – dozens of full ripe-looking breasts, each capped with a swollen and leaking nipple.  You touch one, marveling at the smooth texture of its chocolate-colored skin.   In response a runner of sap oozes free of the nipple and slides down the curved surface.\n\n", false);
 		outputText("You lean forwards and lick around the nipple's surface, sampling the sweetness of the trickling sap.   The stuff nearly overpowers you with a taste like syrupy cream as more sap drips free of the fully-erect tree-nipple.  Unable to resist testing this nonsensical oddity, you engulf the entire nipple between your lips, suckling hard.   The tree seems to oblige your efforts with a fresh discharge of the sticky sap.   Your tongue tingles and vibrates with the sinfully sweet taste in your mouth, dancing in circles around the nipple, coaxing yet more nectar from swollen plant-jug.  It's easy to lose yourself in that taste, falling into a rhythm of alternatively sucking, swallowing, and licking.\n\n", false);
 		outputText("In time you realize the breast has long since been emptied by your hungry mouth, and you pull free with a pop, letting your tongue run over your now over-sensitive lips.  It seems your entire mouth has been affected by the tree's sap, and is now as sensitive and receptive as a maiden's box.  You don't think you could drink any more sap with how full you feel, and you make ready to depart this perverted place.", false);
@@ -2107,34 +2121,34 @@ function doEvent(eventNo):void
 	else if (eventNo == 2134)
 	{
 		doNext(1);
-		spriteSelect(34);
+		jojoSprite();
 		jojoMutationOfferYes();
 		return;
 	}
 	else if (eventNo == 2135)
 	{
 		doNext(1);
-		spriteSelect(34);
+		jojoSprite();
 		jojoMutationOfferNo();
 		return;
 	}
 	else if (eventNo == 2136)
 	{
 		doNext(1);
-		spriteSelect(34);
+		jojoSprite();
 		mutateJojo();
 		return;
 	}
 	else if (eventNo == 2137)
 	{
 		doNext(1);
-		spriteSelect(34);
+		jojoSprite();
 		useTentacleJojo();
 		return;
 	}
 	else if (eventNo == 2138)
 	{
-		spriteSelect(34);
+		jojoSprite();
 		masturbateJojo();
 		return;
 	}
@@ -2265,7 +2279,7 @@ function doEvent(eventNo):void
 	//Move Jojo into camp
 	else if (eventNo == 2149)
 	{
-		spriteSelect(34);
+		jojoSprite();
 		if (player.hasStatusAffect("Ever Raped Jojo") >= 0 || flags[JOJO_MOVE_IN_DISABLED] == 1)
 		{
 			outputText("You offer Jojo the chance to stay at your camp, but before you can finish your sentance he shakes his head 'no' and stalks off into the woods, remembering.", false);
@@ -2280,7 +2294,7 @@ function doEvent(eventNo):void
 	//Jojo in camp
 	else if (eventNo == 2150)
 	{
-		spriteSelect(34);
+		jojoSprite();
 		//Amily meets Jojo:
 		if (flags[UNKNOWN_FLAG_NUMBER_00074] == 0 && flags[AMILY_FOLLOWER] == 1 && amilyFollower())
 		{
@@ -2321,7 +2335,7 @@ function doEvent(eventNo):void
 	//New meditate
 	else if (eventNo == 2151)
 	{
-		spriteSelect(34);
+		jojoSprite();
 		if (player.statusAffectv1("Meditated") > 0)
 		{
 			outputText("Jojo smiles and meditates with you.  The experience is calming, but it's so soon after your last session that you don't get much benefit from it.", true);
@@ -2364,7 +2378,7 @@ function doEvent(eventNo):void
 	//Jojo defense toggle
 	else if (eventNo == 2152)
 	{
-		spriteSelect(34);
+		jojoSprite();
 		clearOutput();
 		if (player.hasStatusAffect("JojoNightWatch") >= 0)
 		{
@@ -2382,7 +2396,7 @@ function doEvent(eventNo):void
 	//Take Jojo out and rape
 	else if (eventNo == 2153)
 	{
-		spriteSelect(34);
+		jojoSprite();
 		player.removeStatusAffect("JojoNightWatch");
 		player.removeStatusAffect("PureCampJojo");
 		outputText("You ask Jojo if he'd like to go on a hunt through the woods to clear out some of the corrupted creatures, and the mouse readily agrees.  He asks if you've been getting a bit stir-crazy from having your camp in one place as the two of you walk into the woods...", true);
@@ -4216,19 +4230,19 @@ function doEvent(eventNo):void
 	}
 	else if (eventNo == 2498)
 	{
-		spriteSelect(34);
+		jojoSprite();
 		agreeToHelpAmilyFixJojo();
 		return;
 	}
 	else if (eventNo == 2499)
 	{
-		spriteSelect(34);
+		jojoSprite();
 		tellAmilyToFuckOffRuinedJojo();
 		return;
 	}
 	else if (eventNo == 2500)
 	{
-		spriteSelect(34);
+		jojoSprite();
 		AmilyLeavesBirdJojoTentacles();
 		return;
 	}
@@ -4239,31 +4253,31 @@ function doEvent(eventNo):void
 	}
 	else if (eventNo == 2502)
 	{
-		spriteSelect(34);
+		jojoSprite();
 		stopJojoDeathInTheNameOfLove();
 		return;
 	}
 	else if (eventNo == 2503)
 	{
-		spriteSelect(34);
+		jojoSprite();
 		whyWouldDoThis();
 		return;
 	}
 	else if (eventNo == 2504)
 	{
-		spriteSelect(34);
+		jojoSprite();
 		tellRathazulYouOwnJojo();
 		return;
 	}
 	else if (eventNo == 2505)
 	{
-		spriteSelect(34);
+		jojoSprite();
 		tellRathazulYouCanHandleIt();
 		return;
 	}
 	else if (eventNo == 2506)
 	{
-		spriteSelect(34);
+		jojoSprite();
 		TellRathazulJojoIsHarmless();
 		return;
 	}

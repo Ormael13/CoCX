@@ -1172,7 +1172,7 @@ function receiveAllTheCowTOngues():void {
 	else outputText("Isabella nuzzles at your neck, your massive frame nearly crushing her into the chair.");
 	outputText("  Gently, the cow-girl slips her arms around your body, walking each of her fingers up your sides to your chest.  She cups your [chest], squeezing and caressing your sensitive flesh.  Her strong fingers sink into your tits until you let out a soft moan, gasping with pleasure as she stimulates your boobs.");
 
-	outputText("\n\nYou feel a surprisingly strong gush of fem-lube trickle out of your [pussy], staining your thighs and running onto Isabella's mottled skin.  Seeing your juices spatter onto her, Isabella gives your tits a particularly rough squeeze and pinches your nipples[if (isLactating = true) \", causing a squirt of thick, creamy breastmilk to pour out of you\"].   ");
+	outputText("\n\nYou feel a surprisingly strong gush of fem-lube trickle out of your [pussy], staining your thighs and running onto Isabella's mottled skin.  Seeing your juices spatter onto her, Isabella gives your tits a particularly rough squeeze and pinches your nipples[if (isLactating = true) , causing a squirt of thick, creamy breastmilk to pour out of you].   ");
 	if(isabellaAccent()) outputText("\"<i>I hope you are not zinking about cumming yet, mein friend,</i>\" she chides, kneading your titflesh a little more gently. \"<i>Ve have not even gotten zu ze pussy-licking yet, after all...</i>\"");
 	else outputText("\"<i>I hope you're not thinking about cumming yet, [name],</i>\" she chides, kneading your titflesh a little more gently. \"<i>We haven't even gotten to the good part yet...</i>\"");
 
@@ -1183,7 +1183,7 @@ function receiveAllTheCowTOngues():void {
 	outputText(" Isabella says, taking you by the shoulders and, displaying her impressive strength, flips the two of you around, so that you are sitting in her chair and she is atop you.  ");
 	if(isabellaAccent()) outputText("\"<i>Time fur ze main course,</i>\"");
 	else outputText("\"<i>Time for the main course,</i>\"");
-	outputText(" she adds, licking her lips with her big, wide cow-tongue.  She [if (isBiped = true) \"spreads your [legs]\" else \"adjusts your lower body\"] so that your [pussy] is on display, already drenched with your juices, begging to be filled or pleasured.");
+	outputText(" she adds, licking her lips with her big, wide cow-tongue.  She [if (isBiped = true) spreads your [legs]|adjusts your lower body] so that your [pussy] is on display, already drenched with your juices, begging to be filled or pleasured.");
 
 	outputText("\n\nGently, Isabella brings her face just over your groin and begins to blow, making you shiver as a wave of cool air brushes over you.  You gasp and shudder at the slight yet pleasant sensation, and your heart hammers in your chest as Isabella directs another breath to your [clit], washing your pleasure buzzer in warm, forceful air.  Simultaneously, Isabella puts her hands on either side of your cunt, pulling your lips taut - another trickle of fem-lube leaks out of your passage, leaving a stain in the fabric of her chair.");
 

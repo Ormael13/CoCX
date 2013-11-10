@@ -2,14 +2,6 @@
 //Keyboard listener!
 stage.addEventListener(KeyboardEvent.KEY_DOWN, keyboard);
 
-// unused.
-// function hideThisButton(e:MouseEvent):void{
-// 	e.target.visible=false;
-// }
-// Create a new instance of the Font1 symbol from the document's library.
-
-// mouseOverText.type = TextFieldType.DYNAMIC;
-
 // These are toggled between by the [home] key.
 mainView.textBGWhite.visible = false;
 mainView.textBGTan.visible = false;
@@ -20,9 +12,7 @@ registerClassAlias("itemSlotClass", itemSlotClass);
 //registerClassAlias("cockClass", cockClass);
 registerClassAlias("Cock", Cock);
 
-
-
-//Invert shit - Not referenced outside of this line or the func def.  Probably can be discarded.
+//Invert shit
 invertGo();
 //Hide sprites
 mainView.sprite.visible = false;
@@ -74,18 +64,58 @@ function mainMenu(e:MouseEvent = undefined):void {
 	statsText.visible = false;
 	//Sets game state to 3, used for determining back functionality of save/load menu.
 	gameState = 3;
-	outputText("(Alternative) <b>Corruption of Champions (" + version + ")</b>\n(Formerly Unnamed Text Game)", true);
-	outputText("\n\nCreated by: Fenoxo", false);
+
+	
+	outputText("<b>Corruption of Champions (" + version + ")</b>\n(Formerly Unnamed Text Game)", true);
+	
+
+	
+	/*
+	// This junk was for testing my new parser. It can be removed, I think. 
+	// I still have a few parser tweaks I want to do, though.
+	// Really, I should have a "test parser" button, but LAZY
+	
+	outputText("\n\n", false);
+	
+	outputText("[if (hasCock = true) [cock] stiffening][if (isHerm = true)  and ][if (hasVagina = true) [vagina] starting to burn with need] DERP [cock biggest] HERP [armor] LOLWUT  [balls] ");
+	outputText("[If (hours > 19) Hug | Cuddle]\n");
+	outputText("\n\n", false);
+
+	
+	outputText("[LOL[WUT]] [herp] [DERP] BLARGH [if (0 == 0) HARBLE]\n\n", false);
+	outputText("[r[e[c[u[r[s[i[v[e[lol][cock]]t]a]g[rofl][copter]]b]o]m]i]n][a][t[io]n]\n", false);
+	
+	outputText("[if [ [ (4==4) HERP|DERP]\n", false);
+	outputText("[if (4 == 7) HERP|DERP]\n", false);
+	
+	outputText("[if (4==(2+2)) HERP|DERP]\n", false);
+	outputText("[if (4==4) HERP|DERP]\n", false);
+
+	outputText("if (4==7) [if (4==7) HERP]\n", false);
+	outputText("if (4==7) [if (4==7) HERP|DERP]\n", false);
+	outputText("if (4=4) [if (4=4) HERP]\n", false);
+	outputText("if (4==4) [if (4==4) HERP]\n", false);
+	outputText("if (4==biggesttitsize) [if (4==biggesttitsize) [HERP [cock] [vagina] [balls]]]\n", false);
+	outputText("if (analcapacity>3)    [if (analcapacity>3) [HERP [cock] [vagina] [balls]]]\n", false);
+	outputText("if (analcapacity = 0)  [if (analcapacity = 0) [HERP [cock] [vagina] [balls]]]\n", false);
+	outputText("if (analcapacity > 0)  [if (analcapacity > 0) [HERP [cock] [vagina] [balls]]]\n", false);
+	outputText("Complex IF Statement thing: [if (hasCock = true) [cock] stiffening][if (isHerm = true) and ][if (hasVagina = true) [vagina] starting to burn with need]");
+
+
+	outputText("\n\n", false);
+	*/
+
+	outputText("\n\n<u>Created by: Fenoxo</u>", false);
 	outputText("\nEdited By: Ashi, SoS, Zeikfried, and Others", false);
-	outputText("\n\nOpen-source version modifications by: \nAmygdaloidnucleus/Amygdala, Hoffledop/Yoffy, Herp-a-derp/Fake-Name, Cmacleod42", false);
-	outputText("\n<u><a href='https://github.com/herp-a-derp/Corruption-of-Champions'>https://github.com/herp-a-derp/Corruption-of-Champions</a></u>", false);
+	outputText("\nOpen-source version modifications by: \nAmygdaloidnucleus/Amygdala, Hoffledop/Yoffy, Herp-a-derp/Fake-Name, Cmacleod42", false);
+	outputText("\n\n<u><a href='https://github.com/herp-a-derp/Corruption-of-Champions'>https://github.com/herp-a-derp/Corruption-of-Champions</a></u>", false);
 	outputText("\n\n<b><u>DISCLAIMER</u>\n\n-There are many strange and odd fetishes contained in this flash.  Peruse at own risk.", false);
 	outputText("\n-Please be 18 or the legal age to view porn before playing.", false);
 	outputText("\n-Try to keep your keyboard clean.  Think of the children!</b>", false);
 	outputText("\n\nFor more information see Fenoxo's Blog at <b><u><a href='http://www.fenoxo.com/'>fenoxo.com</a></u></b>.", false);
-	outputText("\n\nAlso go play <u><a href='http://www.furaffinity.net/view/9830293/'>Nimin</a></u> by Xadera on furaffinity.", false);
-
-
+	outputText("\n\nAlso go play <u><a href='http://www.furaffinity.net/view/9830293/'>Nimin</a></u> by Xadera on furaffinity.\n\n", false);
+	
+	
 	if(debug) 
 		outputText("\n\n<b>DEBUG MODE ENABLED:  ITEMS WILL NOT BE CONSUMED BY USE.</b>", false);
 	if(flags[SHOW_SPRITES_FLAG]) 
@@ -100,6 +130,7 @@ function mainMenu(e:MouseEvent = undefined):void {
 		outputText("\n\n<b>It's Valentine's!</b>");
 	if(isHeliaBirthday()) 
 		outputText("\n\n<b>It's Helia's Birthday Month!</b>");
+
 
 	var resume:Number = 0;
 	if(player.str > 0)  //we're in a game, allow resume.
@@ -116,13 +147,13 @@ function settingsScreen():void {
 	outputText("<b>Settings toggles:</b>\n", true);
 
 	if(debug) 
-		outputText("Debug mode enabled: <b>Yes</b>\n	Items will not be consumed by use.", false);
+		outputText("Debug mode enabled: <b>Yes</b>\n	Items will not be consumed by use, fleeing always succeeds, and bad-ends can be ignored.", false);
 	else
 		outputText("Debug mode enabled: <b>No</b>\n	Items consumption will occur as normal.", false);
 
 	outputText("\n\n", false);
 
-	if(flags[SHOW_SPRITES_FLAG]) 
+	if(flags[SHOW_SPRITES_FLAG] == 0) 
 		outputText("Sprites enabled: <b>Yes</b>.\n	You like to look at pretty pictures.", false);
 	else
 		outputText("Sprites enabled: <b>No</b>.\n	There are only words. Nothing else.", false);
@@ -130,9 +161,9 @@ function settingsScreen():void {
 	outputText("\n\n", false);
 
 	if(flags[EASY_MODE_ENABLE_FLAG]) 
-		outputText("Easy Mode <b>On</b>\n	Bad-ends can be ignored.", false);
+		outputText("Easy Mode <b>On</b>\n	Bad-ends can be ignored and combat is easier.", false);
 	else
-		outputText("Easy Mode <b>Off</b>\n	You die, you're dead.", false);
+		outputText("Easy Mode <b>Off</b>\n	Bad-ends can ruin your game and combat is challenging.", false);
 		
 	outputText("\n\n", false);
 

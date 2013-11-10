@@ -64,6 +64,7 @@
 	}
 	//Break Room
 	if(roomNo == 2) {
+		spriteSelect(96);
 		outputText("Stepping through the dark red doorway, you wander into an expansive break room. Tables surrounded by crude wooden chairs fill most of the floor space. Along the far eastern wall sits a small counter, complete with a strange ebony sculpture of a busty woman with 'Mrs. Coffee' printed on the side. Below the sculpture is a pot of steaming hot coffee, giving off an invigoratingly rich smell.", true);
 		//Hooks for succubi encounter
 		//(if succubus gone/defeated)
@@ -372,7 +373,7 @@
 		outputText("You step into a dank room, outfitted somewhere between a prison cell and a torture chamber. The ceiling of the sulfur-lined room is hung with an inventive variety of shackles, chains, and devices whose intent are not clear to you. Against the north wall, there appears to be an alchemy lab, laden with a dizzying collection of vials, flasks, and beakers. Against the south, there is a long, sinister-looking wooden rack bearing a sequence of progressively larger and thicker devices, carved to resemble monstrous cocks.  ", false);
 		//Vala here?
 		if(flags[UNKNOWN_FLAG_NUMBER_00119] == 0) {
-			spriteSelect(60);
+			spriteSelect(85);
 			//Not yet defeated zetaz
 			if(flags[UNKNOWN_FLAG_NUMBER_00114] == 0) {
 				//Intro:

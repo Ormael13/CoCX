@@ -114,6 +114,7 @@ function speech(output:String, speaker:String):void {
 	outputText(speech, false);
 }
 
+/*
 function checkCondition(variable:String, op:String, test:String):Boolean
 {	
 	//Regex to check if something is a number
@@ -219,6 +220,10 @@ function checkCondition(variable:String, op:String, test:String):Boolean
 		else if(op == ">")
 		{
 			result = (a > b);
+		}
+		else if(op == "==")
+		{
+			result = (a == b);
 		}
 		else if(op == "<")
 		{
@@ -355,12 +360,22 @@ function checkCondition(variable:String, op:String, test:String):Boolean
 	
 	return result;
 }
+*/
 
 function parseText(text:String):String
 {
+	// Moved into external parser.
+	text = recParser(text, 0); 
+	return text;
+}
+
+	/*
+	var debug = true;
+
+
 	//PARSE DAT TEXT!
 	//Now with more awesome!
-	
+	if(debug) trace("Parsing Text");
 	//Regex to check if something is a number
 	var isNumber:RegExp = new RegExp("[0-9]+");
 	
@@ -379,9 +394,17 @@ function parseText(text:String):String
 	//Regex to match branch tags - You can't nest if's, and they MUST end with a space to make recursive parsing work
 	//var branchTag:RegExp = new RegExp("\\[if\\s\\(([a-zA-Z]+)\\s(=|!=|>|<|<=|>=)\\s(.*?)\\)\\s\\\"(.*?)\\\"\\]");
 	//var branchTag:RegExp = new RegExp("\\[if\\s\\((.*?)\\)\\s\\\"(.*?)\\\"\\]");
-	var branchTag:RegExp = new RegExp("\\[if\\s(.*?)\\s\\\"(.*?)\\\"\\]");
+	//
+	// Produces: [if (EXPRESSION) \"OUTPUT_TEXT\"]
+	// where OUTPUT_TEXT is passed recursively into parseText
+	//
+	var branchTag:RegExp = /\[if (.*?) \"(.*?)\"\]/i;		// unbreak my text editors highlighting "
+	
+	var branchTagElse:RegExp = /\[if (.*?) \"(.*?)\" else \"(.*?)\"\]/i; 		//"
 
-	var branchTagElse:RegExp = new RegExp("\\[if\\s(.*?)\\s\\\"(.*?)\\\"\\selse\\s\\\"(.*?)\\\"\\]");
+	// Old regexes
+	// var branchTag:RegExp = new RegExp("\\[if\\s(.*?)\\s\\\"(.*?)\\\"\\]");
+	// var branchTagElse:RegExp = new RegExp("\\[if\\s(.*?)\\s\\\"(.*?)\\\"\\selse\\s\\\"(.*?)\\\"\\]");
 
 	var rep:String;
 	//We parse the tags from most complex to most basic, as the basic tag has the most "greedy" regex
@@ -643,7 +666,7 @@ function parseText(text:String):String
 	//While we have basic tags
 	while (result != null)
 	{
-	//		rep;
+	//	rep;
 		
 		//Same as param tags, but without the param
 		switch(result[1])
@@ -820,9 +843,12 @@ function parseText(text:String):String
 		
 		result = basicTag.exec(text);
 	}
+
 	return text;
 }
 
+	*/
+	
 function clearOutput():void {
 	currentText = "";
 	this.mainView.clearOutputText();
@@ -2672,7 +2698,7 @@ function simpleChoices(text1:String, butt1:*,
 						text5:String, butt5:*):void 
 {
 
-	trace("SimpleChoices");
+	//trace("SimpleChoices");
 	choices(text1,butt1,
 			text2,butt2,
 			text3,butt3,
@@ -2688,7 +2714,7 @@ function simpleChoices(text1:String, butt1:*,
 function doYesNo(eventYes:*, eventNo:*):void {
 	//Make buttons 1-2 visible and hide the rest.
 
-	trace("doYesNo");
+	//trace("doYesNo");
 	choices("Yes",eventYes,
 			"No",eventNo,
 			"",0,

@@ -111,6 +111,7 @@ function tentacleEntice():void {
 
 function tentacleVictoryRape():void {
 	outputText("", true);
+	spriteSelect(100);
 	//Male/Herm
 	if(player.gender == 1 || player.gender == 3) {
 		outputText("Seizing the opportunity, you rush the monster while it is stopped. You grab the fattest hollow tentacle you can find and summarily shit-kick the beast onto the ground. Holding the creature down with one foot, you take the hollow tentacle and poise it in front of your raging erection.\n\n", false); 
@@ -146,6 +147,7 @@ function tentacleVictoryRape():void {
 //[CONDITIONS: Futa/Herm, Corruption > 50, Lust Defeat Only, Obtained 3 previous Lust Defeats to Tentacle Monster.]
 function futaTentacleBadEnd():void {
 	outputText("", true);
+	spriteSelect(100);
 	outputText("Having repeatedly been ravaged by the tentacle beast in your travels, you surrender yourself to yet another savage session of forced pleasure. However, the beast lunges forward with its great maw open. Utterly surprised, you do not have time to react before the creature's tentacles seize you and swallow you whole!!!\n\n", false);
 	outputText("The last rays of light fade as the creature closes its beak, trapping you inside. You begin flailing and fighting in sheer panic at the prospect of being eaten alive. As you struggle, countless tentacles wrap around your arms and legs, essentially binding you inside the creature. A thick tentacle forces its way down your mouth and you feel the familiar sensation of salty lust emptied into your mouth. Your " + cockDescript(0) + " instantly becomes erect, triggering a tentacle to encapsulate your member completely. As this occurs, another limb buries itself deep within your ass.\n\n", false);
 	outputText("The beast then begins to milk your dick as fiercely as it ever has been in your entire life. You feel as if your prick will be ripped from your crotch as you immediately climax, dumping load after load of your semen into the horror. Your ejaculations only make the beast milk you harder, prompting an almost constant orgasmic cycle. After awhile, the shock and pain subside as you become utterly drunk off the sensation of the constant stream of cock milk you are producing.\n\n", false); 
@@ -157,6 +159,7 @@ function futaTentacleBadEnd():void {
 }
 function futaTentacleEpilogue():void {
 	outputText("", true);
+	spriteSelect(100);
 	//[Met Giacomo at least once]
 	if(giacomo > 0) {
 		outputText("\"<i>Well, well, well. You aren't a total loss, I see.</i>\", says a sharp, masculine voice.\n\n", false);
@@ -180,6 +183,7 @@ function futaTentacleEpilogue():void {
 }
 
 function tentacleLossRape():void {
+	spriteSelect(100);
 	//Genderless madness
 	if(player.gender == 0) {
 		//Taur madness
@@ -495,6 +499,7 @@ function tentacleLossRape():void {
 //Centaur v. Tentacle Monster: (display if pc is unsexed centaur)
 function centaurGenderlessRetardation():void {
 	outputText("", true);
+	spriteSelect(100);
 	if(flags[UNKNOWN_FLAG_NUMBER_00247] == 0 || player.balls == 0) {
 		flags[UNKNOWN_FLAG_NUMBER_00247] = 1;
 		outputText("Tentacles wrap around your legs before you can make a move to stop them, binding you tightly and coiling upwards.  One slides slowly along your underside, making you shiver in ", false);
@@ -561,6 +566,7 @@ function centaurGenderlessRetardation():void {
 //Naga v. Tentacle Monster:
 function genderlessHilarityForNagaKenDolls():void {
 	outputText("", true);
+	spriteSelect(100);
 	outputText("Out of nowhere tentacles bind your arms and tail, holding you firm in a matter of seconds.  You struggle to free yourself but can do nothing against the strength of the beast holding you in your current state.  More of the appendages start teasing around your body, as if looking for something.  A handful test the entrance to your " + assholeDescript() + " but evidently that's not what they're after.\n\n", false);
 
 	outputText("An oddly human voice comes from the undergrowth, catching you off-guard.  \"<i>Look, I'm really sorry about this, but I'm really not all that familiar with, uh, whatever it is you are.  Where do you keep the naughty bits?</i>\"\n\n", false);
@@ -580,6 +586,7 @@ function genderlessHilarityForNagaKenDolls():void {
 //Goo v. Tentacle Monster:
 function tentacularGenderGooTimes():void {
 	outputText("", true);
+	spriteSelect(100);
 	outputText("All of a sudden, tentacles come whipping out of the undergrowth to grab you.  Though, they're moving a little too fast, and manage to compress your body walls so far together that you're almost squeezed in half.\n\n", false);
 
 	outputText("\"<i>SHIT. SHIT. SHIT. SHIT.</i>\"  An oddly human voice is profaning loudly.  \"<i>Are you dead?</i>\"\n\n", false);
