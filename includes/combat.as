@@ -5646,9 +5646,7 @@ function startCombat(monsterNum:Number):void {
 		monster.short="sand witch";
 		monster.imageName="sandwitch";
 		monster.plural = false;
-		
-		//Depreciated display call: images.showImage("Yoh-SL_Sand_Witch_Sandwitch")
-		monster.long =  "<img src='img/Yoh-SL_Sand_Witch_Sandwitch.png' width='367.5' height='581.5'>A sand witch appears to be totally human, an oddity in this strange land.  She has dirty blonde hair and a very tanned complexion, choosing to cover most of her body with robes of the same color as the desert sands, making her impossible to spot from afar.";
+		monster.long = images.showImage("Yoh-SL_Sand_Witch_Sandwitch") + "A sand witch appears to be totally human, an oddity in this strange land.  She has dirty blonde hair and a very tanned complexion, choosing to cover most of her body with robes of the same color as the desert sands, making her impossible to spot from afar.";
 		monster.a ="the ";
 		monster.capitalA ="The ";
 		monster.temperment = 1;
@@ -6079,7 +6077,7 @@ function startCombat(monsterNum:Number):void {
 		monster.short="bee-girl";
 		monster.imageName="bee-girl";
 		monster.plural = false;
-		monster.long = "<img src='img/Yoh-SL_Bee.png' width='264' height='396.6'>A bee-girl buzzes around you, filling the air with intoxicatingly sweet scents and a buzz that gets inside your head.  She has a humanoid face with small antennae, black chitin on her arms and legs that looks like shiny gloves and boots, sizable breasts, and a swollen abdomen tipped with a gleaming stinger.";
+		monster.long = images.showImage("Yoh-SL_Bee") + "A bee-girl buzzes around you, filling the air with intoxicatingly sweet scents and a buzz that gets inside your head.  She has a humanoid face with small antennae, black chitin on her arms and legs that looks like shiny gloves and boots, sizable breasts, and a swollen abdomen tipped with a gleaming stinger.";
 		monster.a ="a ";
 		monster.capitalA ="A ";
 		monster.temperment = 3;
@@ -8465,9 +8463,8 @@ function startCombat(monsterNum:Number):void {
 	if(monsterNum == 23) {
 		monster.short="Ceraph";
 		monster.imageName="Ceraph";
-		monster.plural = false;
-		//images.showImage("Yoh-SL_Ceraph")
-		monster.long = "<img src='img/Yoh-SL_Ceraph.png' width='300' height='400'>Ceraph the Omnibus is totally nude and reveling in it.  Her large yet perky breasts jiggle heavily against her chest as she moves.  The flawless purple skin of her twin mounds glistens with a thin sheen of sweat, inviting you to touch and rub your fingers along their slippery surface.  Her eyes are solid black, but convey a mix of amusement and desire, in spite of their alien appearance.  The demon's crotch is a combination of both genders – a drooling cunt topped with a thick demonic shaft, sprouting from where a clit should be.";
+		monster.plural = false;		
+		monster.long = images.showImage("Yoh-SL_Ceraph") + "Ceraph the Omnibus is totally nude and reveling in it.  Her large yet perky breasts jiggle heavily against her chest as she moves.  The flawless purple skin of her twin mounds glistens with a thin sheen of sweat, inviting you to touch and rub your fingers along their slippery surface.  Her eyes are solid black, but convey a mix of amusement and desire, in spite of their alien appearance.  The demon's crotch is a combination of both genders – a drooling cunt topped with a thick demonic shaft, sprouting from where a clit should be.";
 		monster.a ="";
 		monster.capitalA ="";
 		monster.temperment = 2;

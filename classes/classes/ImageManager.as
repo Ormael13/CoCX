@@ -17,10 +17,14 @@
 		
 		//Maximum image box size
 		private const MAXSIZE:int = 400;
+		
 		public var xmlLoadError:Boolean = false;
 		
-
-
+		//The magic embedding sauce. Skips around sandbox issue by embedding the
+		//xml into the swf. Makes it possible to load images even from a browser.
+		[Embed(source="../../img/images.xml",mimeType="application/octet-stream")]
+		private static const XML_IMAGES:Class;
+		
 		public function ImageManager()
 		{
 			trace("Creating Image File hashmap");
@@ -28,58 +32,34 @@
 		}
 		
 		public function loadImageList():void
-		{
-			
-			var loader:URLLoader = new URLLoader();
-			loader.addEventListener(Event.COMPLETE, processXML);
-			loader.addEventListener(IOErrorEvent.IO_ERROR,ioErrorHandler);
-			loader.load(new URLRequest("./img/images.xml"));
-		}
-		
-		// you can't catch loader errors with a try/catch
-		private function ioErrorHandler(error:IOErrorEvent)
-		{
-			this.xmlLoadError = true;
-			trace("Could not find images.xml");
-		}
-
-		private function processXML(e:Event):void
-		{
-			var imgList:XML;
+		{			
+			var imgList:XML = new XML(new XML_IMAGES);
 			var imgLoader:Loader;
-
-
-			imgList = new XML(e.target.data);
-			trace("imglist = ", imgList);
 			
 			for (var i:int = 0; i < imgList.*.length(); i++)
 			{
 				imgLoader = new Loader();
 				imgLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, fileLoaded);
 				imgLoader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, fileNotFound);
-				var req = new URLRequest(imgList.Image[i]);
+				var req:URLRequest = new URLRequest(imgList.Image[i]);
 				trace("Loading: ", imgList.Image[i]);
 				trace("URLRequest = ", req);
-				imgLoader.load(req);
-				
+				imgLoader.load(req);				
 			}
 		}
 		
 		private function fileLoaded(e:Event):void
 		{
-
 			var extImage:Image;
-
-
 			// split the image name out from the image path.
-			var urlPattern:RegExp = /\.\/+img\/+(.*)\.\w+/
+			var urlPattern:RegExp = /\/+img\/+(.*)\.\w+/
 			var url:String = e.target.url;
 			var result:Object = urlPattern.exec(url);
 			
 			trace("Raw String", url, "Regex out = ", result);
 			trace("pic url: ", result[0], ", pic ID: ", result[1]);
-			// result[1]: pic url, result[0]: pic ID
-			extImage = new Image(result[1], result[0], e.target.width, e.target.height);
+			// result[0]: pic url, result[1]: pic ID
+			extImage = new Image(result[1], '.' + result[0], e.target.width, e.target.height);
 			_imageTable[extImage.id] = extImage;
 		}
 		
@@ -87,6 +67,7 @@
 		{
 			trace("File not Found: " + e);
 		}
+		
 		public function getLoadedImageCount():int
 		{
 			var cnt:int=0;
