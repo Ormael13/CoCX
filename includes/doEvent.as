@@ -8953,7 +8953,7 @@ function doEvent(eventNo):void
 		leaveKihaToSpoidahHorde();
 		return;
 	}
-	else if (eventNo == 3422)
+	else if ( false  == 3422)
 	{
 		sparWithKiha();
 		return;
@@ -8968,7 +8968,7 @@ function doEvent(eventNo):void
 		lieThere();
 		return;
 	}
-	else if (eventNo == 3425)
+	else if ( false  == 3425)
 	{
 		hugFriendWarmKiha();
 		return;
@@ -9013,7 +9013,7 @@ function doEvent(eventNo):void
 		blechKihaYourCooking();
 		return;
 	}
-	else if (eventNo == 3434)
+	else if ( false  == 3434)
 	{
 		kihaSexMenu();
 		return;
@@ -9318,7 +9318,7 @@ function doEvent(eventNo):void
 		QBsTalkExpack();
 		return;
 	}
-	else if (eventNo == 3495)
+	else if ( false  == 3495)
 	{
 		urtaDiscussesSelf();
 		return;
@@ -9328,7 +9328,7 @@ function doEvent(eventNo):void
 		urtaDialogueMenu();
 		return;
 	}
-	else if (eventNo == 3497)
+	else if ( false  == 3497)
 	{
 		urtaDiscussesEdryn();
 		return;
@@ -9338,7 +9338,7 @@ function doEvent(eventNo):void
 		urtaDiscussesTheWatch();
 		return;
 	}
-	else if (eventNo == 3499)
+	else if ( false  == 3499)
 	{
 		urtaDiscussesAlcholism();
 		return;
@@ -9478,7 +9478,7 @@ function doEvent(eventNo):void
 		drinkNiamhsBeerInTelAdre();
 		return;
 	}
-	else if (eventNo == 3527)
+	else if ( false  == 3527)
 	{
 		blackCatBeerToGo();
 		return;
@@ -9533,7 +9533,7 @@ function doEvent(eventNo):void
 		bazaarNiamh();
 		return;
 	}
-	else if (eventNo == 3538)
+	else if ( false  == 3538)
 	{
 		bazaardNiamhDrink();
 		return;
@@ -9548,7 +9548,7 @@ function doEvent(eventNo):void
 		getBimboChampFromNiamh();
 		return;
 	}
-	else if (eventNo == 3541)
+	else if ( false  == 3541)
 	{
 		bazaarSex();
 		return;
@@ -9748,7 +9748,7 @@ function doEvent(eventNo):void
 		buyFoxBerry();
 		return;
 	}
-	else if (eventNo == 3581)
+	else if ( false  == 3581)
 	{
 		lumiEnhanceFox();
 		return;
@@ -11285,12 +11285,12 @@ function doEvent(eventNo):void
 		giveRubiClothes("S.Swmwr");
 		return;
 	}
-	else if (eventNo == 3888)
+	else if ( false  == 3888)
 	{
 		//giveRubiBimboLiquer();
 		return;
 	}
-	else if (eventNo == 3889)
+	else if ( false  == 3889)
 	{
 		//giveIncubusDraftRubi();
 		return;
@@ -11360,7 +11360,7 @@ function doEvent(eventNo):void
 		releaseRubi();
 		return;
 	}
-	else if (eventNo == 3903)
+	else if ( false  == 3903)
 	{
 		pickAnItemToFeedRubi();
 		return;
@@ -11758,12 +11758,12 @@ function doEvent(eventNo):void
 		telHelToGetOffTheMInoCock();
 		return;
 	}
-	else if (eventNo == 3982)
+	else if ( false  == 3982)
 	{
 		pussyOutOfHelSexAmbush();
 		return;
 	}
-	else if (eventNo == 3983)
+	else if ( false  == 3983)
 	{
 		lumiEnhanceFoxJewel();
 		return;
@@ -11823,12 +11823,12 @@ function doEvent(eventNo):void
 		dungeons();
 		return;
 	}
-	else if (eventNo == 3995)
+	else if ( false  == 3995)
 	{
 		armorShops();
 		return;
 	}
-	else if (eventNo == 3996)
+	else if ( false  == 3996)
 	{
 		visitZeMagesTower();
 		return;

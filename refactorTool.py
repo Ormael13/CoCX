@@ -79,26 +79,30 @@ def cleanEventNumbers():
 #
 def cleanStaleDoEventIfs():
 
-	numExtr = re.compile(r"if\(eventNo == (\d*)\)")
+	numExtr = re.compile(r"if\s?\(eventNo == (\d*)\)")
 
 
 	with open("./includes/doEvent.as", "r") as eventF:
 		eventS = eventF.read()
 
-
+	print "Cleaning doEvent If statements"
 	filelist = os.listdir("./includes")
 	files = []
 
 	#Pull all the as files into memory. 
 	for filename in filelist:
+		print "Loading", filename
 		if filename.endswith(".as") and not filename.find("doEvent")+1:		
 			with open(os.path.join("./includes", filename), "r") as fileH:
 				tmp = fileH.read()
 			files.append(tmp)
 
 
-	for match in numExtr.finditer(eventS):
-		
+	matches = numExtr.finditer(eventS)
+
+	print "event = ", matches
+
+	for match in matches:
 		num = match.group(1)
 
 		numUnused = True
@@ -127,8 +131,8 @@ def cleanStaleDoEventIfs():
 				call = call.replace("eventNo", " false ")
 				eventS = prefix+call+postfix
 
-	with open("./includes/doEvent.as", "w") as eventF:
-		eventF.write(eventS)
+	#with open("./includes/doEvent.as", "w") as eventF:
+	#	eventF.write(eventS)
 
 def getFlagDict():
 	with open("FlagDictionary.txt", "r") as fd:
@@ -445,7 +449,7 @@ if __name__ == "__main__":
 	print "OMG WE'S BREAKIN STUF!!111one!"
 
 	#cleanEventNumbers()
-	cleanStaleDoEventIfs()
+	#cleanStaleDoEventIfs()
 
 	#cleanFlags()
 
