@@ -1714,9 +1714,9 @@ function izmaSexMenu():void {
 	if(vagoo > 0) addButton(4,"Izma's Vagina",eventParser,vagoo);
 	if(getVagooFucked > 0) addButton(5,"RideIzmaCock",eventParser,getVagooFucked);
 	if(sixty > 0) addButton(6,"Sixtynine",eventParser,sixty);
-	addButton(7,"Kids",eventParser,2945);
+	addButton(7,"Kids",childToggle);
 	if(flags[TIMES_IZMA_DOMMED_LATEXY] > 0 && flags[IZMA_NO_COCK] == 0 && latexGooFollower()) addButton(8,flags[GOO_NAME],izmaLatexySubmenu);
-	addButton(9,"Back",eventParser,2922);
+	addButton(9,"Back",izmaFollowerMenu);
 	
 }
 //[Izma mounts the PC]
@@ -2822,7 +2822,7 @@ function removeIzmasPenis():void {
 		outputText("\n\nShe isn't happy with the idea, but if you want, you could assert yourself as an Alpha to overcome it.");
 		flags[ASKED_IZMA_ABOUT_WANG_REMOVAL] = 1;
 		menu();
-		addButton(0,"Okay",eventParser,2922);
+		addButton(0,"Okay",izmaFollowerMenu);
 		addButton(1,"Force Her",forceIzmaPenis);
 		return;
 	}

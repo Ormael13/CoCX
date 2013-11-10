@@ -147,7 +147,7 @@ function theSlipperySqueeze():void {
 	
 	//simpleChoices("JoeyMassage",2857,"Androgyny",androgyny,"Joey'sOffer",milker,"",0,"Leave",2855);
 	menu();
-	addButton(0,"JoeyMassage",eventParser,2857);
+	addButton(0,"JoeyMassage",joeyMassage);
 	if(androgyny > 0) addButton(1,"Adrogyny",eventParser,androgyny);
 	if(milker > 0) addButton(2,"Joey'sOffer",eventParser,milker);
 	if(isEaster()) {

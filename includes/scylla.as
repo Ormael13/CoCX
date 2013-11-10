@@ -1417,7 +1417,7 @@ function scyllasFlyingSolo():void {
 	//[Feed] [Leave]
 	menu();
 	addButton(0,"Feed",feedScyllaSomeJizzDatJunkieNeedsIt);
-	addButton(4,"Back",eventParser,2256);
+	addButton(4,"Back",barTelAdre);
 }
  
 //[Feed]

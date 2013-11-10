@@ -92,7 +92,7 @@ function followerCeraphRoleplay():void {
 	if(marbles > 0) addButton(6,"Marble Play",eventParser,marbles);
 	if(urta > 0) addButton(7,"Urta Play",eventParser,urta);
 	//choices("Defeat Her",3050,"Lose to Her",3051,"",0,"",0,"",0,"",0,"Dominika P.",dominika,"Marble Play",marbles,"Urta Play",urta,"Back",3315);
-	addButton(9,"Back",eventParser,3315);
+	addButton(9,"Back",ceraphFollowerAppearance);
 }
 
 //*Ceraph is Defeated #4 - Offers Funtimes (Zeddited)

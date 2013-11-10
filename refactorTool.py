@@ -373,7 +373,7 @@ def modifyParserIfStatements():
 def cleanAddButtons():
 
 	funcFind = re.compile(r"(if\(eventNo == \d*?\) )\{\W*")
-	funcExtr = re.compile(r"if\(eventNo == (\d*)\) (\w*)\(\)")
+	funcExtr = re.compile(r"if\s?\(eventNo == (\d*)\)\W*?{\W*(\w+).*?\(\)")
 
 	eventF = open("./includes/doEvent.as", "r")
 	eventS = eventF.read()
@@ -397,7 +397,7 @@ def cleanAddButtons():
 	print filelist
 	for filename in filelist:
 		if filename.endswith(".as") and not filename.find("doEvent")+1:			#Iterate over all the .as files in ./includes, and skip the doEvent file
-			#print filename
+			print filename
 			with open(os.path.join("./includes", filename), "r") as fileH:
 				tmp = fileH.read()
 
@@ -416,13 +416,16 @@ def cleanAddButtons():
 
 					oldCall = call
 					for key, value in res.iteritems():
+
 						if key in call:
-							#print key, value
+							key = "eventParser,%s" % key
+							print key, value
 							call = call.replace(key, value)
 
 					if oldCall != call:		
 						print "Old:", oldCall
 						print "New:", call
+
 
 					tmp = prefix+call+postfix
 
@@ -442,7 +445,7 @@ if __name__ == "__main__":
 	print "OMG WE'S BREAKIN STUF!!111one!"
 
 	#cleanEventNumbers()
-	#cleanStaleDoEventIfs()
+	cleanStaleDoEventIfs()
 
 	#cleanFlags()
 
@@ -451,4 +454,4 @@ if __name__ == "__main__":
 
 	#modifyParserIfStatements()
 
-	cleanAddButtons()
+	#cleanAddButtons()

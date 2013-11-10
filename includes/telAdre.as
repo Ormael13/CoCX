@@ -162,22 +162,22 @@ function telAdreMenu():void {
 	if(homes) homeB = 3993;
 	choices("Shops",armorShops,"Bakery",bakeryuuuuuu,"Bar",barTelAdre,"Gym",gymDesc,"Homes",homeB,"Park",oswaldPawn,"Pawn",oswaldPawn,"Tower",visitZeMagesTower,"Weapons",weaponShop,"Leave",13);
 	menu();
-	addButton(0,"Shops",eventParser,3995);
-	addButton(1,"Bakery",eventParser,2836);
-	addButton(2,"Bar",eventParser,2256);
-	addButton(3,"Gym",eventParser,2783);
+	addButton(0,"Shops",armorShops);
+	addButton(1,"Bakery",bakeryuuuuuu);
+	addButton(2,"Bar",barTelAdre);
+	addButton(3,"Gym",gymDesc);
 	if(homeB > 0) addButton(4,"Homes",eventParser,homeB);
 	if(flags[ARIAN_PARK] > 0 && flags[ARIAN_PARK] < 4) addButton(5,"Park",visitThePark);
-	addButton(6,"Pawn",eventParser,2255);
-	addButton(7,"Tower",eventParser,3996);
-	addButton(8,"Weapons",eventParser,2553);
+	addButton(6,"Pawn",oswaldPawn);
+	addButton(7,"Tower",visitZeMagesTower);
+	addButton(8,"Weapons",weaponShop);
 	addButton(9,"Leave",eventParser,13);
 }
 
 function armorShops():void {
 	menu();
-	addButton(0,"Blacksmith",eventParser,2274);
-	addButton(1,"Piercing",eventParser,2212);
+	addButton(0,"Blacksmith",armorShop);
+	addButton(1,"Piercing",piercingStudio);
 	addButton(2,"Tailor",eventParser,1072);
 	addButton(4,"Back",telAdreMenu);
 }
@@ -197,7 +197,7 @@ function houses():void {
 	}
 	menu();
 	if(flags[ARIAN_PARK] >= 4 && !arianFollower()) addButton(0,"Arian's",visitAriansHouse);
-	if(orphanage) addButton(1,"Orphanage",eventParser,3975);
+	if(orphanage) addButton(1,"Orphanage",orphanageIntro);
 	if(urtaKids() > 0 && player.hasKeyItem("Spare Key to Urta's House") >= 0) addButton(2,"Urta's House",visitTheHouse);
 	addButton(9,"Back",telAdreMenu);
 }
@@ -903,11 +903,11 @@ function barTelAdre():void {
 	menu();	
 	//AMILY!
 	if(flags[AMILY_VISITING_URTA] == 1) {
-		button = anotherButton(button,"Ask4Amily",eventParser,3187);
+		button = anotherButton(button,"Ask4Amily",askAboutAmily);
 	}
 	//DOMINIKA
 	if(hours > 17 && hours < 20 && flags[UNKNOWN_FLAG_NUMBER_00150] != -1) {
-		button = anotherButton(button,"Dominika",eventParser,2739);
+		button = anotherButton(button,"Dominika",fellatrixBarApproach);
 	}
 	//EDRYN!
 	if(flags[EDRYN_BIRF_COUNTDOWN] == 0) {
@@ -940,19 +940,19 @@ function barTelAdre():void {
 				outputText("\n\nEdryn, the centauress you met at the gate, is here, sitting down at her table alone and sipping on a glass of wine.  You suppose you could go talk to her a bit.", false);
 			}
 			else outputText("\n\nEdryn the centauress is here, sipping wine at a table by herself.  She looks up and spots you, her eyes lighting up with happiness.  She gives you a wink and asks if you'll join her.", false);
-			button = anotherButton(button,"Edryn",eventParser,2257);
+			button = anotherButton(button,"Edryn",edrynBarTalk);
 		}
 	}
 	//HELIA
 	if(player.gender > 0 && hours >= 14 && rand(2) == 0 && hours < 20 && flags[HEL_FUCKBUDDY] == 1 && !(flags[HEL_FOLLOWER_LEVEL] == 1 && flags[HEL_HARPY_QUEEN_DEFEATED]== 0)) {
 		helAppearance();
-		button = anotherButton(button,"Helia",eventParser,3355);
+		button = anotherButton(button,"Helia",approachHelAtZeBitch);
 	}
 	//NANCY
 	if(auntNancy(false)) {
 		auntNancy(true);
-		if(flags[UNKNOWN_FLAG_NUMBER_00263] > 0) button = anotherButton(button,"Nancy",eventParser,2970);
-		else button = anotherButton(button,"Barkeep",eventParser,2970);
+		if(flags[UNKNOWN_FLAG_NUMBER_00263] > 0) button = anotherButton(button,"Nancy",interactWithAuntNancy);
+		else button = anotherButton(button,"Barkeep",interactWithAuntNancy);
 	}
 	else outputText("\n\nIt doesn't look like there's a bartender working at the moment.", false);
 	
@@ -965,13 +965,13 @@ function barTelAdre():void {
 	}
 	//ROGAR #1
 	if(flags[ROGAR_PHASE] == 3 && flags[ROGAR_DISABLED] == 0 && flags[ROGAR_FUCKED_TODAY] == 0) {
-		button = anotherButton(button,"HoodedFig",eventParser,3373);
+		button = anotherButton(button,"HoodedFig",rogarThirdPhase);
 		//Wet Bitch screen text when Ro'gar phase = 3:
 		outputText("\n\nYou notice a cloaked figure at the bar, though you're quite unable to discern anything else as its back is turned to you.", false);
 	}
 	//ROGAR #2
 	else if(flags[ROGAR_PHASE] >= 4 && flags[ROGAR_DISABLED] == 0 && flags[ROGAR_FUCKED_TODAY] == 0) {
-		button = anotherButton(button,"Rogar",eventParser,3374);
+		button = anotherButton(button,"Rogar",rogarPhaseFour);
 		//Wet Bitch bar text when Ro'gar phase = 4:
 		outputText("\n\nRo'gar is here with his back turned to the door, wearing his usual obscuring cloak.", false);
 	}
@@ -982,7 +982,7 @@ function barTelAdre():void {
 		if(player.longestCockLength() >= 12) {
 			if(flags[UNKNOWN_FLAG_NUMBER_00054] == 0) {
 				outputText("\n\nThere is one nun sitting in a corner booth who catches your eye.  She sits straight-backed against the dark, wood chair, her thin waist accentuating the supple curve of her breasts. She's dressed in a black robe that looks a few sizes too small for her hips and wears a black and white cloth over her head.", false);
-				button = anotherButton(button,"Nun",eventParser,2447);
+				button = anotherButton(button,"Nun",talkToScylla);
 			}
 			else if(flags[UNKNOWN_FLAG_NUMBER_00054] == 1 && rand(5) == 0) {
 				outputText("", true);
@@ -1002,24 +1002,24 @@ function barTelAdre():void {
 			//Round 6 - catscratch!
 			else if(flags[UNKNOWN_FLAG_NUMBER_00054] == 5 && rand(5) == 0) {
 				outputText("\n\nIt looks like Scylla is here but getting ready to leave.  You could check and see what the misguided nun is up to.", false);
-				button = anotherButton(button,"Scylla",eventParser,2705);
+				button = anotherButton(button,"Scylla",Scylla6);
 			}
 			//Round 5 - repeatable!
 			else if(flags[UNKNOWN_FLAG_NUMBER_00054] >= 4 && (hours == 18 || hours == 19)) {
 				outputText("\n\nYou see Scylla's white and black nun's habit poking above the heads of the other patrons. The tall woman seems unaware of her effect on those around her, but it's clear by the way people are crowding she's acquired a reputation by now. You're not sure what she's doing, but you could push your way through to find out.", false);
-				button = anotherButton(button,"Scylla",eventParser,2563);
+				button = anotherButton(button,"Scylla",scyllaAdictsAnonV);
 			}			
 			//Round 2.5 Repeatable
 			else if(flags[UNKNOWN_FLAG_NUMBER_00054] >= 2 && flags[FED_SCYLLA_TODAY] == 0 && hours >= 7 && hours <= 11) {
 				outputText("\n\nIt looks like Scylla is milling around here this morning, praying as she keeps an eye out for someone to 'help'.");
-				button = anotherButton(button,"Scylla",eventParser,3992);
+				button = anotherButton(button,"Scylla",scyllasFlyingSolo);
 			}
 		}
 	}
 	//Nun cat stuff!
 	if((hours > 8 || hours < 18) && player.hasKeyItem("Silver Kitty-Bell") >= 0) {
 		catMorphIntr();
-		button = anotherButton(button,"ScyllaCats",eventParser,3316);
+		button = anotherButton(button,"ScyllaCats",katherineGreeting);
 	}
 	//URTA	
 	if(!urtaBusy() && flags[AMILY_VISITING_URTA] != 1 && hours < 15) {
@@ -1045,11 +1045,11 @@ function barTelAdre():void {
 				urtaIsHappyAboutPregnancyAtTheBar();
 				return;
 			}
-			button = anotherButton(button,"Urta",eventParser,2284);
+			button = anotherButton(button,"Urta",urtaBarApproach);
 		}
 	}
 	//VALA
-	if(purifiedFaerieBitchBar()) button = anotherButton(button,"Vala",eventParser,2621);
+	if(purifiedFaerieBitchBar()) button = anotherButton(button,"Vala",chooseValaInBar);
 	
 	addButton(9,"Leave",telAdreMenu);		
 }
@@ -1507,7 +1507,7 @@ function weightLifting():void {
 	outputText("\n\nDo you want to hit the showers before you head back to camp?", false);
 	if(flags[BROOKE_MET] == 1) {
 		menu();
-		addButton(0,"\"Showers\"",eventParser,2827);
+		addButton(0,"\"Showers\"",exploreShowers);
 		addButton(1,"Showers",repeatChooseShower);
 		addButton(4,"Leave",eventParser,13);
 	}
@@ -1593,7 +1593,7 @@ function goJogging():void {
 	outputText("\n\nDo you want to hit the showers before you head back to camp?", false);
 	if(flags[BROOKE_MET] == 1) {
 		menu();
-		addButton(0,"\"Showers\"",eventParser,2827);
+		addButton(0,"\"Showers\"",exploreShowers);
 		addButton(1,"Showers",repeatChooseShower);
 		addButton(4,"Leave",eventParser,13);
 	}

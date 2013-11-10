@@ -14,7 +14,7 @@ function masturbateMenu():void {
 		if(player.hasStatusAffect("Exgartuan") >= 0 && player.statusAffectv2("Exgartuan") == 0)
 			addButton(button,"Masturbate",eventParser,10);
 		else 
-			addButton(button,"Meditate",eventParser,3409);
+			addButton(button,"Meditate",meditate);
 	}
 	else addButton(button,"Masturbate",eventParser,10);
 	button++;
@@ -36,11 +36,11 @@ function masturbateMenu():void {
 		button++;
 	}
 	if(player.canOvipositBee() && player.lust >= 33 && player.biggestCockArea() > 100) {
-		addButton(button,"LayInCock",eventParser,3851);
+		addButton(button,"LayInCock",getHugeEggsInCawk);
 		button++;
 	}
 	if(player.canOviposit() && player.hasFuckableNipples() && player.lust >= 33 && player.biggestTitSize() >= 21) {
-		addButton(button,"LayInTits",eventParser,3952);
+		addButton(button,"LayInTits",layEggsInYerTits);
 		button++;
 	}
 	if(button == 1 && !fappingItems(false)) {
