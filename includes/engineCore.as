@@ -4096,7 +4096,7 @@ function simpleChoices(text1:String, butt1:*,
 						text5:String, butt5:*):void 
 {
 
-	trace("SimpleChoices");
+	//trace("SimpleChoices");
 	choices(text1,butt1,
 			text2,butt2,
 			text3,butt3,
@@ -4112,7 +4112,7 @@ function simpleChoices(text1:String, butt1:*,
 function doYesNo(eventYes:*, eventNo:*):void {
 	//Make buttons 1-2 visible and hide the rest.
 
-	trace("doYesNo");
+	//trace("doYesNo");
 	choices("Yes",eventYes,
 			"No",eventNo,
 			"",0,
