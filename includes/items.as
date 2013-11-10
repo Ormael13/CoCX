@@ -3031,7 +3031,6 @@ function incubiDraft(tainted:Boolean):void {
 			player.createCock();
 			player.cocks[0].cockLength = rand(3) + 4;
 			player.cocks[0].cockThickness = 1;
-			player.cocks[0].cockType = CockTypesEnum.DEMON;
 			outputText("\n\nYou shudder as a pressure builds in your crotch, peaking painfully as a large bulge begins to push out from your body.  ", false);
 			outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  Eventually the orgasm ends as your " + cockDescript(0) + " fades to a more normal " + player.skinTone + " tone.", false);
 			if(tainted) stats(0,0,0,0,3,5,10,5);
@@ -3095,7 +3094,6 @@ function incubiDraft(tainted:Boolean):void {
 			player.createCock();
 			player.cocks[0].cockLength = rand(3) + 4;
 			player.cocks[0].cockThickness = 1;
-			player.cocks[0].cockType = CockTypesEnum.DEMON;
 			outputText("\n\nYou shudder as a pressure builds in your crotch, peaking painfully as a large bulge begins to push out from your body.  ", false);
 			outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  Eventually the orgasm ends as your " + cockDescript(0) + " fades to a more normal " + player.skinTone + " tone.", false);
 			if(tainted) stats(0,0,0,0,3,5,10,3);
