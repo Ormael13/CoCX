@@ -636,7 +636,7 @@ function encapsulationVictory():void {
 
 //[Use]
 function useVala():void {
-	spriteSelect(60);
+	spriteSelect(85);
 	outputText("", true);
 	stats(0,0,0,0,0,0,20,0);
 	//(Male)
@@ -670,7 +670,7 @@ function useVala():void {
 }
 
 function useValaPtII():void {
-	spriteSelect(60);
+	spriteSelect(85);
 	outputText("", true);
 	hideUpDown();
 	fatigue(5,0);
@@ -708,7 +708,7 @@ function useValaPtII():void {
 
 //[Free]
 function freeValazLooseCoochie():void {
-	spriteSelect(60);
+	spriteSelect(85);
 	outputText("", true);
 	outputText("You search the room for a way to free the fairy from her shackles and find an ugly, iron key that looks like a promising candidate. Opening the rusted metal with a teeth-clenching screech, the girl slumps to the ground in an ungainly heap. The fall seems to have roused her, at least, because she blinks, slowly, several times before lifting her head to stare blankly at you. You try to explain that she's free, but it's clear that thoughts are travelling through a pretty thick haze of abuse, so you take a moment to let her gather herself. When she's managed to assemble what wits are left to her, she slowly curls her mouth into a hopeful smile. \"<i>How can Bitch please Master?</i>\" she asks in an innocent voice tainted by husky desire.\n\n", false);
 
@@ -726,7 +726,7 @@ function freeValazLooseCoochie():void {
 
 //[Heal]
 function healVala():void {
-	spriteSelect(60);
+	spriteSelect(85);
 	outputText("", true);
 	if(hasItem("PurHony",1)) {
 		consumeItem("PurHony",1);
@@ -757,7 +757,7 @@ function healVala():void {
 	
 }
 function healValaPartTwoTheHealingHealsOfRevenge():void {
-	spriteSelect(60);
+	spriteSelect(85);
 	outputText("", true);
 	outputText("She tries to stand and falls back on her ass, the unbalancing weight of her corrupted breasts still surprising. She seems surprised at first, but her laughter is rich and eases your heart even just to hear it. \"<i>Oh my, I have changed a bit, haven't I? Still, any deformity is worth restoring my mind. Please, let me introduce myself.</i>\" She flaps her thin, fey wings rapidly and their lift is enough to allow her to stand. \"<i>I am Vala, and I used to be a fairy, like my sisters. I was captured by the demons of this place and used to amuse them between sexual releases. The lord of this place, in his dark designs, thought it would be better to use me for sexual release instead. They fed me such terrible drugs, to make me grow to a more pleasing size. They bound me in this room with these,</i>\" she cups her absurdly large tits, \"<i>weights. When my wings grew strong enough to carry my inflated body, they switched to chains instead. They used me terribly and, in time, I forgot who I was. Pleasure was all that mattered. But you have saved me, and now it is all but a bad dream.</i>\" She flutters up to kiss your forehead. \"<i>I must taste the sweet open air and return to my sisters, but please try to find me once you are done here. I wish to repay your kindness.</i>\"\n\n", false);
 
@@ -769,7 +769,7 @@ function healValaPartTwoTheHealingHealsOfRevenge():void {
 
 //[Sex]
 function ValaGetsSexed():void {
-	spriteSelect(60);
+	spriteSelect(85);
 	outputText("", true);
 	//(Herm/Male)
 	if(player.totalCocks() > 0) {
@@ -794,7 +794,7 @@ function ValaGetsSexed():void {
 }
 
 function valaGetsSexedPtDuece():void {
-	spriteSelect(60);
+	spriteSelect(85);
 	outputText("", true);
 	hideUpDown();
 	stats(0,0,0,0,0,0,-100,0);
@@ -852,7 +852,7 @@ function valaGetsSexedPtDuece():void {
 
 //[Reject]
 function rejectFuckingVala():void {
-	spriteSelect(60);
+	spriteSelect(85);
 	outputText("", true);
 	if(flags[UNKNOWN_FLAG_NUMBER_00126] == 0) {
 		outputText("The fairy's weak insistence has begun to get obnoxious. What kind of prisoner dry humps her rescuer? Actually, if the heavy flow of lubricating girl cum dripping out of her pussy is any indication, it's the wettest humping you've had with your " + player.armorName + " still on. You seize the girl's shoulders and hold her up, pushing her away from your goo-stained lower body. You assure the girl that you won't be having sex with her here. It's far too dangerous, you tell her, to leave yourself vulnerable right now. You'll take her to safety when the demons are defeated. You try to impress on her the importance of speed and stealth, but you might as well be talking to a big-breasted brick wall. When she makes a grab at your crotch, you've had enough and throw her back.\n\n", false);
@@ -945,7 +945,7 @@ function valaCombatDialogue():void {
 }
 
 function loseToVala():void {
-	spriteSelect(60);
+	spriteSelect(85);
 	if(player.gender == 3) loseToValaAsHerm();
 	if(player.gender == 1) loseToValaAsMale();
 	if(player.gender == 2) loseToValaFemale();
@@ -960,7 +960,7 @@ function loseToVala():void {
 //Fight Loss-
 //(Herm)
 function loseToValaAsHerm():void {
-	spriteSelect(60);
+	spriteSelect(85);
 	outputText("", true);
 	outputText("You collapse, no longer able to stand, and gasp weakly. The fairy took entirely too much delight in the fight, and her wet pussy is practically squirting with every heartbeat as she hovers over you, rubbing herself in anticipation. \"<i>The masters' will be happy. They will reward their Bitch with cum.</i>\" Her mouth drools as much as her slavering snatch. \"<i>Oh so much cum, and all for their good little pet.</i>\"\n\n", false);
 	
@@ -974,7 +974,7 @@ function loseToValaAsHerm():void {
 }
 
 function loseToValaAsHermPartII():void {
-	spriteSelect(60);
+	spriteSelect(85);
 	outputText("", true);
 	outputText("It proves to be so much worse than you thought. Even though the nozzle is at its lowest setting, you can feel hot spunk flowing into your cunt and colon, the hose jerking as globs of the jizz begin to ooze into your recesses. The fairy laughs with a voice that is all the more wicked from the pure, clean, crystal tones it carries. \"<i>The masters' love is so sweet inside us. More future masters for us to birth and so many orgasms.</i>\" She begins to tweak her clit and turns up the crank a notch, the trickle of slimy goo becoming a regular pumping. If not for the coldness of the metal inside you, the heat of the cum would be unbearable. You have the horrible realization that imps must be filling the hidden reservoir even as their fairy slave guides it into you. You scream in disgust and wriggle your " + buttDescript() + ", trying to get the cursed toy out of you.\n\n", false);
 
@@ -989,7 +989,7 @@ function loseToValaAsHermPartII():void {
 
 //Fight Loss-
 function loseToValaAsMale():void {
-	spriteSelect(60);
+	spriteSelect(85);
 	outputText("You collapse, no longer able to stand, and gasp weakly. The fairy took entirely too much delight in the fight, and her wet pussy is practically squirting with every heartbeat as she hovers over you, rubbing herself in anticipation. \"<i>Bitch will show you the masters' pleasures. They will reward it with cum.</i>\" Her mouth drools as much as her slavering snatch. \"<i>Oh so much cum, and all for their good little slut.</i>\"\n\n", false);
 
 	outputText("You are powerless to stop the fairy as she drags you to the south wall and up to the wooden rail secured a couple of feet off the ground. \"<i>When she was still growing, Bitch was too small and tight for the masters,</i>\" your captor tells you. \"<i>They blessed her with this ladder to make us big enough. You will feel their generosity.</i>\" Gripping you under the arms, the fairy's lust-fuelled strength lifts you off the ground and flies you directly over the bristling peg ladder.\n\n", false);
@@ -1001,7 +1001,7 @@ function loseToValaAsMale():void {
 }
 
 function loseToValaAsMaleIITight():void {
-	spriteSelect(60);
+	spriteSelect(85);
 	outputText("", true);
 	//(tight ass)
 //	if(player.ass.analLooseness <= 1) {
@@ -1013,7 +1013,7 @@ function loseToValaAsMaleIITight():void {
 }
 
 function loseToValaMaleIILoose():void {
-	spriteSelect(60);
+	spriteSelect(85);
 	outputText("", true);
 	//(loose ass)
 	outputText("\"<i>Sluts are trained well,</i>\" she sighs, happily. \"<i>This one knows only the pleasures of the masters, now.</i>\" The peg under you would be above average on a normal human- easily 7 inches long and two inches wide. Your " + assholeDescript() + " clenches and you writhe in the fairy's arms, but she lets gravity do her dirty work, lowering you onto the human-sized wooden cock, the varnished surface pulling apart your " + buttDescript() + " and sliding into your nethers with an uncomfortable tight sensation. Despite the humiliation of the rape, the pressure on your prostate begins pumping blood into your " + cockDescript(0) + ", turning your body into a traitor. You don't dare try to pull off, for fear of the damage it might do to your anus, and you are forced to sit in shame on the wooden erection. The girl flutters down and laps at your stiffening cock, trying as hard as she can not to mount you then and there. Her hungry tongue takes some of the building pain from you. Finally, she decides you've had enough and lifts you into the air, but to your dismay, she takes you another few notches down the line.", false);
@@ -1025,7 +1025,7 @@ function loseToValaMaleIILoose():void {
 
 //(Very loose ass)
 function loseToValaMaleIIVeryLoose():void {
-	spriteSelect(60);
+	spriteSelect(85);
 	outputText("", true);
 	outputText("The fairy suspends you over a bulbous cock, at least a foot long and three inches wide, carved to resemble an imp's barbed, demonic shaft. \"<i>The masters are very kind,</i>\" the girl promises, \"<i>They know a slut's limits and gladly help it exceed them. They will rebuild you to their liking.</i>\" The memory of her own training has overwhelmed her dulled expression and she can't help but mount you in the air, swinging her legs around your waist and guiding her slavering pussy to your " + cockDescript(0) + ". Just as your head slides into her cunt, however, she loses her grip and you fall from her arms, landing atop the imp dick, drawing an agonized scream of pain. The twelve inches of wood worn down to a polished gleam vanish up your " + assholeDescript() + " and distort your intestines. You are so full that you feel like you've been speared through the gut, but your prostate does not care about your misery. Full penetration drives your cock wild and it surges to life, pulsing with every heartbeat. You can feel an orgasm building, but all you care about is the crushing pressure in your nethers. Just before you can cum, the fairy lifts you off the terrible prong and you actually sigh in relief, despite being denied release. Your cock twitches in the open air and it feels like a weight has been lifted from your chest. She giggles and flies you all the way to the last prong.\n\n", false);
 	//[Player's ass widens and go to last]
@@ -1036,7 +1036,7 @@ function loseToValaMaleIIVeryLoose():void {
 
 //(Gaping asshole)
 function loseToValaMaleIIGape():void {
-	spriteSelect(60);
+	spriteSelect(85);
 	outputText("", true);
 	outputText("The fairy takes you to the final peg along the rail. It is a nightmarish mix of horse, dog, and minotaur cock. It has a flared head, to make the initial penetration all the more painful, a bulging knot on the end to utterly destroy your spincter, and the whole thing stands a foot and a half tall, nearly five inches wide at the tip. You beg the fairy. You plead. There is no way you can go onto that, you say, it will kill you. All dignity flees as you pitifully sob up to her. You'll do whatever the imps want- whatever the Masters want, you correct yourself. You'll be their toy and cum dump, you'll drink every last bit of your masters' love until you can't taste anything else. You will surrender yourself to them, body and soul. Whatever it takes, you implore, just not that peg! The fairy doesn't respond, her pupil-less eyes unchanging and unmoved by your agony, just swirling with pink lust and trained obedience. She lowers you just enough for you to feel the hard, flared tip of the monstrous thing press against your " + assholeDescript() + " and your resolve fails you. You promise the fairy everything. She lifts you up off the terrible final peg and you laugh in relief.\n\n", false);
 	
@@ -1049,7 +1049,7 @@ function loseToValaMaleIIGape():void {
 //Fight Loss-
 //(Female)
 function loseToValaFemale():void {
-	spriteSelect(60);
+	spriteSelect(85);
 	outputText("", true);
 	outputText("You collapse, no longer able to stand, and gasp weakly. The fairy took entirely too much delight in the fight, and her wet pussy is practically squirting with every heartbeat as she hovers over you, rubbing herself in anticipation. \"<i>It will show you the masters' pleasures. They will reward it with cum.</i>\" Her mouth drools as much as her slavering snatch. \"<i>Oh so much cum, and all for their good little Bitch.</i>\"\n\n", false);
 
@@ -1064,7 +1064,7 @@ function loseToValaFemale():void {
 }
 
 function loseToValueFemalePtII():void {
-	spriteSelect(60);
+	spriteSelect(85);
 	outputText("", true);
 	outputText("You shiver uncontrollably and hug yourself like a wounded animal. Your " + nippleDescript(0) + " and " + clitDescript() + " burn under the pale goop, rock hard and pulsing with demands for stimulation. The fairy bitch happily places a new bucket next to you, this one fuller than the first. \"<i>It wants a meal?</i>\" she inquires doubtfully, perhaps hoping to keep it for herself. You reluctantly reach for the bucket, nearly lunging when it looks like the fairy is about to pull the lever again. You look into the bucket and shiver as the stench of the spooge assails your nostrils, even more potent than the jizz bath rolling down your bare skin in cream bulbs. You reluctantly take a glob between your fingers and thumb and with a timid motion, you raise your fistful of the odious syrup and spread it over your lips like a soapy lather. Rubbing the vile goo so close to your nose makes you nearly convulse at the reek and you hug at your slime-soaked body, trying to curl up, away from the reeking bucket. Your lower torso becomes a sloppy mess of pale, nearly clear fluid rolling off of your curves in blobby clumps.", false);
 	
@@ -1079,7 +1079,7 @@ function loseToValueFemalePtII():void {
 //BAD END 1-
 //(Fairy)
 function badEndValaNumber1():void {
-	spriteSelect(60);
+	spriteSelect(85);
 	outputText("", true);
 	outputText("When you regain your senses, you're no longer in the cavernous dungeon you passed out in. You blink, trying to adjust to the bright light around you, but it doesn't help. Every sense is aflame and it's impossible for you to move without exciting some nerve ending, sending a thrill of pleasure radiating along your sensitive regions. You try to think, to reason out where you are, but holding a thought in your head for longer than a minute is extremely difficult, as if your mind was muffled by thick wool. You try to remember what happened, but that too is just out of your reach. All this mental exercise is giving you a headache, so you give up, and just drink in the sensations around your body. A shimmering, spritely face comes into view and a thought blazes a clear, white-hot path through your groggy brain. Recognition clears all your doubts and worries away. Your Mistress. This is your Mistress.\n\n", false);
 	
@@ -1095,7 +1095,7 @@ function badEndValaNumber1():void {
 
 //BAD END 2-
 function badEndValaNumber2():void {
-	spriteSelect(60);
+	spriteSelect(85);
 	//(Imp)
 	outputText("", true);
 	outputText("You come to with a splitting headache and the taste of something foul in your mouth. You struggle, but find that your limbs have been chained up and your " + player.legs() + " bound by a thick, rubber coating, squeezing your lower body painfully. You've been fitted with several rubber pieces of the same sort, in fact- the most notable is the black corset that makes breathing difficult and binds your waist to a hyper-feminine fantasy. You've also been fitted with large, rubber fairy wings attached by straps around your shoulders that pull your chest forward, painfully. An O-ring gag has been latched around your face, connected to a long, clear tube that's been fed a foot or two down your throat. You try to shake it loose, but it's far too deep for you to have a hope of removing it without help.\n\n", false);
@@ -1108,7 +1108,7 @@ function badEndValaNumber2():void {
 }
 
 function badEndValaNumber2Pt2():void {
-	spriteSelect(60);
+	spriteSelect(85);
 	outputText("", true);
 	outputText("\"<i>When we captured Vala, I entertained the thought of breaking her on my dick like a crystalline condom, but I'm rather glad I chose to raise her to be my pet instead.</i>\" The imp's voice is familiar and your mind lurches to the memory of that first violation you suffered when you stepped through the portal to this world. Zetaz. He said never to forget the name Zetaz. You eyes roll in panic, but he holds your chin, his leering face filling your vision. \"<i>As a reward to obedient little Vala, I've decided to remake you in her image. We'll crush all that fatty flesh from your waist, keep your torso bound until you're too weak to walk, and pump you so full of drugs and cum that even seeing your name is painful,</i>\" he taps the bronze plaque he's prepared for you, a mirror to the fairy's. \"<i>Why, in a few months, we'll be hard pressed to tell the two of you apart.</i>\" A fresh wave of fairy-lubricated imp-seed pumps into your abdomen and the rubber girdle strains, but holds, washing the spunk back up, into your throat, until it feels like you might drown in the frothing cream.\n\n", false);
 	
@@ -1129,7 +1129,7 @@ function badEndValaNumber2Pt2():void {
 
 //Fight Win-
 function fightValaVictory():void {
-	spriteSelect(60);
+	spriteSelect(85);
 	outputText("", true);
 	outputText("The fairy girl collapses, well-drilled obedience robbing her limbs of their fight. She squirms to a crouching bow, fully accepting you as her new " + player.mf("Master","Mistress") + ". The warped fae's empty eyes look up at you, her face a mask of rapture as she anxiously awaits her punishment, wagging her butt in the air as lubrication gushes down her thighs. It seems being defeated has excited the broken creature to a breeding frenzy. Her endurance must be incredible to be this frisky after your battle.", false);
 	flags[UNKNOWN_FLAG_NUMBER_00126]++;
@@ -1144,7 +1144,7 @@ function fightValaVictory():void {
 
 //[Fuck]
 function valaFightVictoryFuck():void {
-	spriteSelect(60);
+	spriteSelect(85);
 	outputText("", true);
 	//(Female) 
 	if(player.gender == 2) {
@@ -1186,7 +1186,7 @@ function valaFightVictoryFuck():void {
 
 //[Fuck]
 function valaFightVictoryFuckPtII():void {
-	spriteSelect(60);
+	spriteSelect(85);
 	outputText("", true);
 	//fem2
 	if(player.gender == 2) {
@@ -1233,7 +1233,7 @@ function valaFightVictoryFuckPtII():void {
 //Unpurified Fairy-
 //(Returning to fairy room for the first time)
 function leftValaAlone():void {
-	spriteSelect(60);
+	spriteSelect(85);
 	outputText("", true);
 	//first post meeting
 	if(flags[UNKNOWN_FLAG_NUMBER_00124] == 0 || flags[UNKNOWN_FLAG_NUMBER_00125] == 0) {
@@ -1264,7 +1264,7 @@ function leftValaAlone():void {
 
 //[Heal]
 function tryToHealVala():void {
-	spriteSelect(60);
+	spriteSelect(85);
 	outputText("", true);
 	//(Without Pure Honey)
 	if(!(hasItem("PurHony",1) || hasItem("P.Pearl",1))) {
@@ -1300,7 +1300,7 @@ function tryToHealVala():void {
 }
 
 function tryToHealValaWHoney2():void {
-	spriteSelect(60);
+	spriteSelect(85);
 	outputText("", true);
 	outputText("She tries to stand and falls back on her ass, the unbalancing weight of her corrupted breasts still surprising. She seems surprised at first, but her laughter is rich and eases your heart even just to hear it. \"<i>Oh my, I have changed a bit, haven't I? Still, any deformation is worth restoring my mind. Please, let me introduce myself.</i>\" She flaps her thin, fey wings rapidly and their lift is enough to allow her to stand. \"<i>I am Vala, and I used to be a fairy, like my sisters. I was captured by the demons of this place and used to amuse them between sexual releases. The leader of them, however, thought it would be better to use me for sexual release instead. They fed me such terrible drugs, to make me grow and to bind me with these,</i>\" she cups her absurdly large tits, \"<i>weights. They used me terribly and, in time, I forgot who I was. Pleasure was all that mattered. But you have saved me, and now it is all but a bad dream.</i>\" She flutters up to kiss your forehead.\n\n", false);;
 
@@ -1313,7 +1313,7 @@ function tryToHealValaWHoney2():void {
 
 //[Use]
 function useValaOHYEAHSNAPINTOASLIMJIM():void {
-	spriteSelect(60);
+	spriteSelect(85);
 	outputText("", true);
 	//(Male)
 	if(player.gender == 1) {
@@ -1340,7 +1340,7 @@ function useValaOHYEAHSNAPINTOASLIMJIM():void {
 }
 
 function useValaOHYEAHKOOLAIDPTII():void {
-	spriteSelect(60);
+	spriteSelect(85);
 	outputText("", true);
 	hideUpDown();
 	//m2
@@ -1374,7 +1374,7 @@ function useValaOHYEAHKOOLAIDPTII():void {
 
 //[Wake]
 function wakeValaUpBeforeYouGoGo():void {
-	spriteSelect(60);
+	spriteSelect(85);
 	outputText("", true);
 	//(Male)
 	if(player.gender == 1) {
@@ -1410,7 +1410,7 @@ function wakeValaUpBeforeYouGoGo():void {
 }
 
 function wakeMeUpBeforeValaGoGosPtII():void {
-	spriteSelect(60);
+	spriteSelect(85);
 	outputText("", true);
 	hideUpDown();
 	//m2
@@ -1480,7 +1480,7 @@ function purifiedFaerieBitchBar():Boolean {
 
 //[Vala]
 function chooseValaInBar():void {
-	spriteSelect(60);
+	spriteSelect(85);
 	var cumBath:Number = 0;
 	if(player.hasCock()) cumBath = 3449;
 	outputText("", true);

@@ -28,7 +28,8 @@ Chance of waking the PC by whispering how much they need to fuck her in their sl
 Bimbo harpy pussy apparently tastes tangy with an undertone of sweet, almost peach-like flavor.
 */
 function sophieSprite():void {
-	spriteSelect(53);
+	if(flags[UNKNOWN_FLAG_NUMBER_00282] > 0 && flags[UNKNOWN_FLAG_NUMBER_00283] == 0) spriteSelect(83);
+	else spriteSelect(53);
 }
 
 function bimboSophie():Boolean {

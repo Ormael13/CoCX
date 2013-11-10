@@ -224,6 +224,7 @@ function sophieDaughterDebimboUpdate():void {
 //BimboBody Sophie Follower, Main Screen
 function followerSophieMainScreen():void {
 	clearOutput();
+	sophieSprite();
 	//Sophie is in season
 	if(sophieIsInSeason() && player.hasCock()) {
 		//Replacement Greeting Screen For In Season

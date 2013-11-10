@@ -1,4 +1,4 @@
-// import flash.events.MouseEvent;
+﻿// import flash.events.MouseEvent;
 
 //const DOUBLE_ATTACK_STYLE:int = 867;
 //const SPELLS_CAST:int = 868;
@@ -4096,7 +4096,7 @@ function simpleChoices(text1:String, butt1:*,
 						text5:String, butt5:*):void 
 {
 
-	trace("SimpleChoices");
+	//trace("SimpleChoices");
 	choices(text1,butt1,
 			text2,butt2,
 			text3,butt3,
@@ -4112,7 +4112,7 @@ function simpleChoices(text1:String, butt1:*,
 function doYesNo(eventYes:*, eventNo:*):void {
 	//Make buttons 1-2 visible and hide the rest.
 
-	trace("doYesNo");
+	//trace("doYesNo");
 	choices("Yes",eventYes,
 			"No",eventNo,
 			"",0,
@@ -4884,10 +4884,13 @@ function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):void {
 function spriteSelect(choice:Number = 0):void {
 	if(choice < 0 || flags[SHOW_SPRITES_FLAG]) sprite.visible = false;
 	else {
+		sprite.scaleX = 1;
+		sprite.scaleY = 1;
 		sprite.visible = true;
 		sprite.gotoAndStop(choice);
-		sprite.scaleX = 3;
-		sprite.scaleY = 3;
+		var scale:Number = 80/sprite.height;
+		sprite.scaleX = scale;
+		sprite.scaleY = scale;
 	}
 }
 
