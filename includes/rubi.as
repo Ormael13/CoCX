@@ -250,7 +250,7 @@ function approachRubiScenes():void {
 		
 		var select:int = choices[rand(choices.length)];
 		
-		
+		//trace("Rubi outfit selection = ", select);
 		
 		//(Random outfit selection: Waitress Outfit (Normal))
 		if(select == 1) {
@@ -1405,7 +1405,8 @@ function rubiAppearance():void {
 
 	outputText("\n\nBetween " + rubiMF("his","her") + " legs is a ");
 	if(flags[RUBI_COCK_SIZE] > 0) {
-		outputText(rubiCock() + ", which starts to perk up under your scrutiny, under which sways a set of ");
+		outputText(rubiCock() + ", which starts to perk up under your scrutiny. From experience, you know it can reach a impressive " + flags[RUBI_COCK_SIZE] + " inches when erect.  ");
+		outputText("Under " + rubiMF("his","her") + " cock swings a set of ");
 		if(flags[RUBI_BLU_BALLS] >= 4 && flags[RUBI_BLU_BALLS] < 9) outputText("cum-swollen ");
 		else if(flags[RUBI_BLU_BALLS] >= 9) outputText("engorged, blue-tinged ");
 		outputText("testicles");
@@ -1457,7 +1458,7 @@ function playDressUp():void {
 		buttonNames[buttonNames.length] = "Bodysuit";
 	}
 	if(flags[RUBI_LONGDRESS] == 1) {
-		trace("PRE-CRASH");
+		//trace("PRE-CRASH");
 		closet[closet.length] = "A Long Dress";
 		buttonNames[buttonNames.length] = "Long Dress";
 	}
@@ -1501,11 +1502,11 @@ function playDressUp():void {
 		outputText("\n");
 	}
 	var button:int = 0;
-	trace("STARTING LOOP");
+	//trace("STARTING LOOP");
 	while(button < 9 && button < closet.length) {
 		if(button < 8 || closet.length < 9) addButton(button,buttonNames[button],dressUpRouter,closet[button]);
 		else addButton(8,"More",playDressUp2);
-		trace("LOOPED ONCE");
+		//trace("LOOPED ONCE");
 		button++;
 	}
 	addButton(9,"Back",rubiAppearance);
@@ -2949,7 +2950,16 @@ function rubiGrowPlusBreasts():void {
 	if(flags[RUBI_BREAST_SIZE] < 7 || (flags[RUBI_BREAST_SIZE] < 30 && flags[HYPER_HAPPY])) {
 		outputText("\n\nRubi's breasts suddenly wobble of their own accord, swelling up like they're being inflated.  The little demon-morph shivers as pleasure wracks " + rubiMF("his","her") + " body, with " + rubiMF("his","her") + " breasts growing at least two cup sizes.  " + rubiMF("His","Her") + " fingers absently grope at " + rubiMF("his","her") + " new endowments, tweaking the flushed, sensitive flesh until the erotic heat from the transformation eventually dissipates, leaving " + rubiMF("him","her") + " panting on the floor before you.");
 		flags[RUBI_BREAST_SIZE] += 2 + rand(2);
-		if(flags[RUBI_BREAST_SIZE] > 7) flags[RUBI_BREAST_SIZE] = 7;
+		if (flags[HYPER_HAPPY])
+		{
+			// trace("Hyper happy grow");
+			if(flags[RUBI_BREAST_SIZE] > 30) flags[RUBI_BREAST_SIZE] = 30;
+		}
+		else
+		{
+			// trace("Normal grow");
+			if(flags[RUBI_BREAST_SIZE] > 7) flags[RUBI_BREAST_SIZE] = 7;
+		}
 	}
 	//(If breasts already maxed)
 	else outputText("\n\nSadly, apart from making " + rubiMF("his","her") + " nipples particularly perky, they don't seem to have much effect on Rubi's already enormous rack.");
@@ -2967,17 +2977,30 @@ function rubiPenisGroPlus():void {
 	if(flags[RUBI_COCK_SIZE] < 12 || (flags[RUBI_COCK_TYPE] == CockTypesEnum.HORSE && flags[RUBI_COCK_SIZE] < 20) || (flags[RUBI_COCK_SIZE] < 30 && flags[HYPER_HAPPY])) {
 		outputText("\n\nRubi grips " + rubiMF("his","her") + " cock as it suddenly hardens, visibly throbbing in " + rubiMF("his","her") + " grasp.  It surges, growing larger, gaining about two inches right before your eyes.");
 		flags[RUBI_COCK_SIZE] += 2 + rand(2);
-		if(flags[RUBI_COCK_TYPE] != CockTypesEnum.HORSE) {
-			if(flags[RUBI_COCK_SIZE] > 12) flags[RUBI_COCK_SIZE] = 12;
+
+		if (flags[HYPER_HAPPY])
+		{
+
+			if(flags[RUBI_COCK_SIZE] > 30) 
+			{
+				// trace("Limiting Rubi's Cock-Size");
+				flags[RUBI_COCK_SIZE] = 30;
+			}
 		}
-		else {
-			if(flags[RUBI_COCK_SIZE] > 20) flags[RUBI_COCK_SIZE] = 20;
+		else
+		{
+			if(flags[RUBI_COCK_TYPE] != CockTypesEnum.HORSE) {
+				if(flags[RUBI_COCK_SIZE] > 12) flags[RUBI_COCK_SIZE] = 12;
+			}
+			else {
+				if(flags[RUBI_COCK_SIZE] > 20) flags[RUBI_COCK_SIZE] = 20;
+			}
 		}
 	}
 	else {
 		outputText("\n\nSadly, apart from making " + rubiMF("his","her") + " cock hard, it doesn't seem to have much of an effect on Rubi's ");
 		if(flags[RUBI_COCK_TYPE] == CockTypesEnum.HORSE) outputText("sheath-stuffing horse-dick");
-		else outputText("foot-long dick.");
+		else outputText("giant dick.");
 	}
 	consumeItem("GroPlus",1);
 	menu();
@@ -3042,7 +3065,7 @@ function pickAnItemToFeedRubi():void {
 		buttonNames[buttonNames.length] = "Bodysuit";
 	}
 	if(flags[RUBI_LONGDRESS] == 1) {
-		trace("PRE-CRASH");
+		// trace("PRE-CRASH");
 		closet[closet.length] = "A Long Dress";
 		buttonNames[buttonNames.length] = "Long Dress";
 	}

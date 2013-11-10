@@ -6484,6 +6484,8 @@ function purePearl():void {
 	stats(0,0,0,0,-5,0,-25,-10);
 	if(player.hasPerk("Purity Blessing") < 0) player.createPerk("Purity Blessing",0,0,0,0,"Reduces the rate at which your corruption, libido, and lust increase.");
 }
+
+//TODO FIX
 function growPlus():void {
 	var ballsEvent:Number = 0;
 	if(player.balls > 0) ballsEvent = 1039;
