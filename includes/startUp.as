@@ -70,7 +70,7 @@ function mainMenu(e:MouseEvent = undefined):void {
 	gameState = 3;
 
 	
-	outputText("(Alternative) <b>Corruption of Champions (" + version + ")</b>\n(Formerly Unnamed Text Game)", true);
+	outputText("<b>Corruption of Champions (" + version + ")</b>\n(Formerly Unnamed Text Game)", true);
 	
 
 	
@@ -109,10 +109,10 @@ function mainMenu(e:MouseEvent = undefined):void {
 	outputText("\n\n", false);
 	*/
 
-	outputText("\n\nCreated by: Fenoxo", false);
+	outputText("\n\n<u>Created by: Fenoxo</u>", false);
 	outputText("\nEdited By: Ashi, SoS, Zeikfried, and Others", false);
-	outputText("\n\nOpen-source version modifications by: \nAmygdaloidnucleus/Amygdala, Hoffledop/Yoffy, Herp-a-derp/Fake-Name, Cmacleod42", false);
-	outputText("\n<u><a href='https://github.com/herp-a-derp/Corruption-of-Champions'>https://github.com/herp-a-derp/Corruption-of-Champions</a></u>", false);
+	outputText("\nOpen-source version modifications by: \nAmygdaloidnucleus/Amygdala, Hoffledop/Yoffy, Herp-a-derp/Fake-Name, Cmacleod42", false);
+	outputText("\n\n<u><a href='https://github.com/herp-a-derp/Corruption-of-Champions'>https://github.com/herp-a-derp/Corruption-of-Champions</a></u>", false);
 	outputText("\n\n<b><u>DISCLAIMER</u>\n\n-There are many strange and odd fetishes contained in this flash.  Peruse at own risk.", false);
 	outputText("\n-Please be 18 or the legal age to view porn before playing.", false);
 	outputText("\n-Try to keep your keyboard clean.  Think of the children!</b>", false);
@@ -157,7 +157,7 @@ function settingsScreen():void {
 
 	outputText("\n\n", false);
 
-	if(flags[SHOW_SPRITES_FLAG]) 
+	if(flags[SHOW_SPRITES_FLAG] == 0) 
 		outputText("Sprites enabled: <b>Yes</b>.\n	You like to look at pretty pictures.", false);
 	else
 		outputText("Sprites enabled: <b>No</b>.\n	There are only words. Nothing else.", false);
