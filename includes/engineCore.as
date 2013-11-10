@@ -1,4 +1,4 @@
-// import flash.events.MouseEvent;
+﻿// import flash.events.MouseEvent;
 
 //const DOUBLE_ATTACK_STYLE:int = 867;
 //const SPELLS_CAST:int = 868;
@@ -4884,10 +4884,13 @@ function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):void {
 function spriteSelect(choice:Number = 0):void {
 	if(choice < 0 || flags[SHOW_SPRITES_FLAG]) sprite.visible = false;
 	else {
+		sprite.scaleX = 1;
+		sprite.scaleY = 1;
 		sprite.visible = true;
 		sprite.gotoAndStop(choice);
-		sprite.scaleX = 3;
-		sprite.scaleY = 3;
+		var scale:Number = 80/sprite.height;
+		sprite.scaleX = scale;
+		sprite.scaleY = scale;
 	}
 }
 

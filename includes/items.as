@@ -10929,6 +10929,7 @@ function eatEmberEgg():void {
 //Initial Intro
 function chickenHarpy():void {
 	clearOutput();
+	spriteSelect(90);
 	if(flags[TIMES_MET_CHICKEN_HARPY] == 0) {
 		outputText("Taking a stroll along the mountains, you come across a peculiar-looking harpy wandering around with a large wooden cart in tow.  She's far shorter and bustier than any regular harpy you've seen before, reaching barely 4' in height but managing to retain some semblance of their thick feminine asses.  In addition to the fluffy white feathers decorating her body, the bird-woman sports about three more combed back upon her forehead like a quiff, vividly red in colour.");
 		outputText("\n\nHaving a long, hard think at the person you're currently making uncomfortable with your observational glare, you've come to a conclusion - she must be a chicken harpy!");
@@ -10959,6 +10960,7 @@ function chickenHarpy():void {
 //If Give Two
 function giveTwoOviElix():void {
 	clearOutput();
+	spriteSelect(90);
 	consumeItem("OviElix",1);
 	consumeItem("OviElix",1);
 	outputText("You hand over two elixirs, the harpy more than happy to take them from you.  In return, she unties a corner of the sheet atop the cart, allowing you to take a look at her collection of eggs.");
@@ -10975,6 +10977,7 @@ function giveTwoOviElix():void {
 //If Give Three
 function giveThreeOviElix():void {
 	clearOutput();
+	spriteSelect(90);
 	consumeItem("OviElix",1);
 	consumeItem("OviElix",1);
 	consumeItem("OviElix",1);
@@ -10992,6 +10995,7 @@ function giveThreeOviElix():void {
 //All Text
 function getHarpyEgg(type:int = 0):void {
 	clearOutput();
+	spriteSelect(90);
 	if(type == 0) shortName = "BlackEg";
 	if(type == 5) shortName = "L.BlkEg";
 	if(type == 1) shortName = "BlueEgg";
@@ -11013,6 +11017,7 @@ function getHarpyEgg(type:int = 0):void {
 //If No
 function leaveChickenx():void {
 	clearOutput();
+	spriteSelect(90);
 	outputText("At the polite decline of her offer, the chicken harpy gives a warm smile before picking her cart back up and continuing along the path through the mountains.");
 	outputText("\n\nYou decide to take your own path, heading back to camp while you can.");
 	doNext(13);

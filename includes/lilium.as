@@ -24,6 +24,7 @@ function LiliumText(output:Boolean = false):Number {
 
 function approachLilium():void {
 	outputText("", true);
+	spriteSelect(93);
 	var pay:Number = 0;
 	//#########FIRST TIME INTRODUCTION#########
 	if(flags[UNKNOWN_FLAG_NUMBER_00267] == 0) {
@@ -49,6 +50,7 @@ function approachLilium():void {
 
 function payForLilium():void {
 	outputText("", true);
+	spriteSelect(93);
 	//#########GENDERLESS SCENE######### REQUIRES unsexed (hah)
 	if(player.gender == 0) {
 		outputText("You follow Lilium to a secluded spot. With a grin on her face she squats before you and helps you remove your " + player.armorName + ".  The grin is quickly replaced by a look of surprise and confusion as she looks at your flat, featureless crotch.\n\n", false);
@@ -91,6 +93,7 @@ function payForLilium():void {
 //- Leave:
 function leaveLilium():void {
 	outputText("", true);
+	spriteSelect(93);
 	if(flags[UNKNOWN_FLAG_NUMBER_00267] == 0) outputText("\"<i>I'm deathly allergic to fun, unfortunately,</i>\" you reply before moving on to examine more of the bazaar.", false);
 	else outputText("\"<i>Just passing through, and I thought I'd see how you were doing,</i>\" you reply, and leave Lilium alone at her post.", false);
 	doNext(2855);
@@ -99,6 +102,7 @@ function leaveLilium():void {
 //#########BUTTFUCK + TONGUEJOB SCENE######### REQUIRES PENIS AND LONG DEMONIC TONGUE
 function buttFuckTongueJeorb():void {
 	outputText("", true);
+	spriteSelect(93);
 	var x:Number = player.cockThatFits(40);
 	if(x < 0) x = 0;
 	outputText("The two of you find a secluded alley between two buildings.  Lilium removes her corset and skirt before moving to help you remove your " + player.armorName + ".\n\n", false);
@@ -139,6 +143,7 @@ function buttFuckTongueJeorb():void {
 //#########DICK RIDE SCENE######### REQUIRES VAGINA
 function liliumDickRidah():void {
 	outputText("", true);
+	spriteSelect(93);
 	outputText("Lilium takes you to a secluded spot away from the Bazaar.  She removes her corset and skirt and slips the lacy cock sock off her cock and you eagerly remove your own " + player.armorName + ".\n\n", false);
 
 	outputText("You gently push Lilium down onto her back and straddle her waist.  As she looks up at you with a demure expression you move your hands to her pert breasts and begin a slow circular massage of her chest.  With each pass you ever so slightly lighten your grip and move your fingers closer to her nipples until finally you are lightly trailing your index fingers around their rosy tips.  You can see Lilium's eyes close as she enjoys your touch on her body.  Gently you slip just the very tip of one finger into each of her fuckable nips and the woman beneath you arches her back, seeking to force your fingers into her heaving breasts further.  With a grin you tear your fingers away from her breasts and Lilium's eyes snap open and a look of disappointment crosses her face.  Quickly you lean down and plant a kiss on her dark, pouting lips, letting your tongue slip between them just the slightest bit to taste her.\n\n", false);
@@ -192,11 +197,11 @@ function liliumDickRidah():void {
 
 //#########NIPPLE FUCK SCENE######### REQUIRES PENIS
 function liliumNippleFuck():void {
-	outputText("", true);
 	var x:Number = player.cockThatFits(40);
 	if(x < 0) x = 0;
 	
 	outputText("", true);
+	spriteSelect(93);
 	
 	outputText("Lilium takes you to a secluded spot in the Bazaar for you to be able to enjoy each other's company. She kneels down before you and you strip out of your " + player.armorName + ", baring your naked body before her.\n\n", false);
 
