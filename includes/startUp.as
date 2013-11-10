@@ -1,4 +1,4 @@
-﻿
+
 //Keyboard listener!
 stage.addEventListener(KeyboardEvent.KEY_DOWN, keyboard);
 
@@ -142,10 +142,12 @@ function mainMenu(e:MouseEvent = undefined):void {
 	
 	//The world isn't quite ready for the ASPLODE button. Uncomment for easy bug reporter testing.
 	//choices("",  0, "Credits", creditsScreen, "Instructions", howToPlay, "", 0, "", 0, "ASPLODE", 9000000000, "", 0, "", 0, "Settings", settingsScreen, "Resume", resume);
-	choices("",  0, "Credits", creditsScreen, "Instructions", howToPlay, "", 0, "", 0, "", 0, "", 0, "", 0, "Settings", settingsScreen, "Resume", resume);
+	choices("",  0, "Credits", creditsScreen, "Instructions", howToPlay, "", 0, "", 0, "Debug Info", debugPane, "", 0, "", 0, "Settings", settingsScreen, "Resume", resume);
 		
 }
 
+import flash.system.SecurityDomain;
+import flash.system.Security;;
 
 function settingsScreen():void {
 	outputText("<b>Settings toggles:</b>\n", true);
@@ -201,7 +203,6 @@ function settingsScreen():void {
 
 
 
-
 	choices("Toggle Debug", toggleDebug, 
 			"Sprite Toggle", toggleSpritesFlag, 
 			"EZ Mode", toggleEasyModeFlag, 
@@ -214,6 +215,29 @@ function settingsScreen():void {
 			"Back", mainMenu);
 }
 
+function debugPane():void
+{
+	outputText("<b>Debug information!</b>\n", true);
+
+	outputText("\nPossible flash sandboxing contexts:");
+	outputText("<ul>");
+	outputText("<li><b>\"localWithNetwork\"</b> means images <b><u>will not work</u></b>!</li>");
+	outputText("<li><b>\"localWithFile\"</b> means images will work.</li>");
+	outputText("<li><b>\"localTrusted\"</b> means images will work, and you've somehow managed to install this swf into a flash trusted directory. How did you manage that?</li>");
+	outputText("</ul>");
+	outputText("\nCurrent Sandbox mode: <b>" + Security.sandboxType + "</b>");
+	if (images.xmlLoadError == false)
+		outputText("\n\nImage definiton file loaded successfully.");
+	else
+		outputText("\n\nImage definiton file failed to load!");
+	outputText("\nCurrently have " + images.getLoadedImageCount() + " images loaded into cache.");
+
+	//outputText("<img src='./img/Yoh-SL_Ceraph.png' width='300' height='400' align='left'>")
+	outputText(images.showImage("Yoh-SL_Ceraph"));
+	outputText("\nBottom of screen");
+	
+	doNext(mainMenu);
+}
 
 function toggleStandards():void
 {

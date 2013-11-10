@@ -17,7 +17,10 @@
 		
 		//Maximum image box size
 		private const MAXSIZE:int = 400;
+		public var xmlLoadError:Boolean = false;
 		
+
+
 		public function ImageManager()
 		{
 			trace("Creating Image File hashmap");
@@ -26,50 +29,72 @@
 		
 		public function loadImageList():void
 		{
-			var imgList:XML;
-			var extImage:Image;
-			var imgLoader:Loader;
+			
 			var loader:URLLoader = new URLLoader();
+			loader.addEventListener(Event.COMPLETE, processXML);
+			loader.addEventListener(IOErrorEvent.IO_ERROR,ioErrorHandler);
+			loader.load(new URLRequest("./img/images.xml"));
+		}
+		
+		// you can't catch loader errors with a try/catch
+		private function ioErrorHandler(error:IOErrorEvent)
+		{
+			this.xmlLoadError = true;
+			trace("Could not find images.xml");
+		}
+
+		private function processXML(e:Event):void
+		{
+			var imgList:XML;
+			var imgLoader:Loader;
+
+
+			imgList = new XML(e.target.data);
+			trace("imglist = ", imgList);
 			
-			try
+			for (var i:int = 0; i < imgList.*.length(); i++)
 			{
-				loader.addEventListener(Event.COMPLETE, processXML);
-				loader.load(new URLRequest("./img/images.xml"));
-			}
-			catch (error:Error)
-			{
-				trace("Could not find images.xml");
-			}
-			
-			function processXML(e:Event):void
-			{
-				imgList = new XML(e.target.data);
-				for (var i:int = 0; i < imgList.*.length(); i++)
-				{
-					imgLoader = new Loader();
-					imgLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, fileFound);
-					imgLoader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, fileNotFound);
-					imgLoader.load(new URLRequest(imgList.Image[i]));
-					
-				}
-			}
-			
-			function fileFound(e:Event):void
-			{
-				var urlPattern:RegExp = /\.\\img\\(.*)\.\w+/
-				var url:String = e.target.url;
-				var result:Object = urlPattern.exec(url);
-				//result[1]: pic url, result[0]: pic ID
-				extImage = new Image(result[1], result[0], e.target.width, e.target.height);
-				_imageTable[extImage.id] = extImage;
-			}
-			
-			function fileNotFound(e:IOErrorEvent):void
-			{
-				trace("File not Found: " + e);
+				imgLoader = new Loader();
+				imgLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, fileLoaded);
+				imgLoader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, fileNotFound);
+				var req = new URLRequest(imgList.Image[i]);
+				trace("Loading: ", imgList.Image[i]);
+				trace("URLRequest = ", req);
+				imgLoader.load(req);
+				
 			}
 		}
 		
+		private function fileLoaded(e:Event):void
+		{
+
+			var extImage:Image;
+
+
+			// split the image name out from the image path.
+			var urlPattern:RegExp = /\.\/+img\/+(.*)\.\w+/
+			var url:String = e.target.url;
+			var result:Object = urlPattern.exec(url);
+			
+			trace("Raw String", url, "Regex out = ", result);
+			trace("pic url: ", result[0], ", pic ID: ", result[1]);
+			// result[1]: pic url, result[0]: pic ID
+			extImage = new Image(result[1], result[0], e.target.width, e.target.height);
+			_imageTable[extImage.id] = extImage;
+		}
+		
+		private function fileNotFound(e:IOErrorEvent):void
+		{
+			trace("File not Found: " + e);
+		}
+		public function getLoadedImageCount():int
+		{
+			var cnt:int=0;
+			for (var s:String in _imageTable) cnt++;
+			return cnt;
+		}
+		
+
 		public function showImage(imageID:String, align:String = "left"):String
 		{
 			var imageString:String = "";

@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Images>
-	<Image id="Yoh-SL_Bee" width="792" height="1190">.\img\Yoh-SL_Bee.png</Image>
-	<Image id="Yoh-SL_Ceraph" width="900" height="1200">.\img\Yoh-SL_Ceraph.png</Image>
-	<Image id="Yoh-SL_Goo" width="1059" height="934">.\img\Yoh-SL_Goo.png</Image>
-	<Image id="Yoh-SL_Sand_Witch_Sandwitch" width="735" height="1163">.\img\Yoh-SL_Sand_Witch_Sandwitch.png</Image>
-	<Image id="Yoh-SL_Sand_Witch_Sandwitch_Sandwich" width="900" height="1200">.\img\Yoh-SL_Sand_Witch_Sandwitch_Sandwich.png</Image>
+	<Image id="Yoh-SL_Bee" width="792" height="1190">./img/Yoh-SL_Bee.png</Image>
+	<Image id="Yoh-SL_Ceraph" width="900" height="1200">./img/Yoh-SL_Ceraph.png</Image>
+	<Image id="Yoh-SL_Goo" width="1059" height="934">./img/Yoh-SL_Goo.png</Image>
+	<Image id="Yoh-SL_Sand_Witch_Sandwitch" width="735" height="1163">./img/Yoh-SL_Sand_Witch_Sandwitch.png</Image>
+	<Image id="Yoh-SL_Sand_Witch_Sandwitch_Sandwich" width="900" height="1200">./img/Yoh-SL_Sand_Witch_Sandwitch_Sandwich.png</Image>
 </Images>

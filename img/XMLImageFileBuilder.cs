@@ -89,12 +89,12 @@ namespace XMLImageFileBuilder
 
         static void Main(string[] args)
         {
-            String searchFolder = ".\\img\\";
+            String searchFolder = "./img/";
             var filters = new String[] { "jpg", "jpeg", "png", "gif" };
             bool success = GetImages(searchFolder, filters);
             if (!success)
             {
-                searchFolder = ".\\";
+                searchFolder = "./";
                 success = GetImages(searchFolder, filters);
             }
 
