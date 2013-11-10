@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Global Variables used across the whole game. I hope to whittle it down slowly.
  */
 
@@ -12,8 +12,8 @@
 var debug:Boolean = false;
 
 //Version NUMBER
-var ver:String = "0.8.3d1.1";
-var version:String = "v0.8.3d1.1 (<b>Dick or Treat</b>)";
+var ver:String = "0.8.3d2";
+var version:String = "v0.8.3d2 (<b>Open Source + Sprites!</b>)";
 
 //Indicates if building for mobile?
 var mobile:Boolean = false;
