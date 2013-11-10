@@ -67,7 +67,7 @@ function executeButtonClick(button:int = 0):void {
 
 //Hugeass keyboard parser
 function keyboard(e:KeyboardEvent):void {
-	if(eventTestInput.x == 207.5) return;
+	if(this.mainView.eventTestInput.x == 207.5) return;
 	if(nameBox.visible && stage.focus == nameBox) return;
     var saveFile;
 	var currEvent:Number = 0;

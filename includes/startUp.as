@@ -15,53 +15,25 @@ registerClassAlias("Cock", Cock);
 //Invert shit
 invertGo();
 //Hide sprites
-mainView.sprite.visible = false;
-//Hide second text window
-mainView.imageText.visible = false;
-//Hide stats
-hideStats();
-//Hide level up button and associate level up stuff
-levelBG.visible = false;
-levelText2.visible = false;
+mainView.hideSprite();
 //Hide up/down arrows
-hideUpDown();
+mainView.statsView.hideUpDown();
 //Hide choice buttons
 //choices("one", 0, "two", 0, "three", 0, "four", 0, "five", 0, "six", 0, "seven", 0, "eight", 0, "nine", 0, "ten", 0);
-//Hide mouseovertext
-mouseOverText.visible = false;
-//Hide sidebar and time backgrounds
-sideBarBG.visible = false;
-popUpBG.visible = false;
-timeBG.visible = false;
-nameBox.visible = false;
 //Call up the title screen
 mainMenu();
 
 
 //MainMenu - kicks player out to the main menu
 function mainMenu(e:MouseEvent = undefined):void {
-	eventTestInput.x = -10207.5;
-	eventTestInput.y = -1055.1;
+	this.mainView.eventTestInput.x = -10207.5;
+	this.mainView.eventTestInput.y = -1055.1;
 	hideStats();
 	//Reset newgame buttons
-	newGameText.removeEventListener(MouseEvent.CLICK, mainMenu);
-	newGameBG.removeEventListener(MouseEvent.CLICK, mainMenu);
-	newGameText.addEventListener(MouseEvent.CLICK, newGameGo);
-	newGameBG.addEventListener(MouseEvent.CLICK, newGameGo);
-	newGameText.text = "New Game";
-	//statBox.visible = false;
-	//statBox2.visible = false;
-	perksText.visible = false;
-	perksBG.visible = false;
-	appearanceText.visible = false;
-	appearanceBG.visible = false;
-	dataText.visible = true;
-	dataBG.visible = true;
-	levelText2.visible = false;
-	levelBG.visible = false;
-	levelUp.visible = false;
-	statsBG.visible = false;
-	statsText.visible = false;
+	this.mainView.setMenuButton( MainView.MENU_NEW_MAIN, "New Game", newGameGo );
+	this.mainView.hideAllMenuButtons();
+	this.mainView.showMenuButton( MainView.MENU_NEW_MAIN );
+	this.mainView.showMenuButton( MainView.MENU_DATA );
 	//Sets game state to 3, used for determining back functionality of save/load menu.
 	gameState = 3;
 
@@ -240,8 +212,8 @@ function toggleDebug():void
 		debug = false;
 	else 
 		debug = true;
-	dataBG.visible = true;
-	dataText.visible = true;
+		
+	this.mainView.showMenuButton( MainMenu.MENU_DATA );
 	settingsScreen();
 	return;
 }
@@ -253,8 +225,7 @@ function toggleEasyModeFlag():void
 	else 
 		flags[EASY_MODE_ENABLE_FLAG] = 0;
 	settingsScreen();
-	dataBG.visible = true;
-	dataText.visible = true;
+	this.mainView.showMenuButton( MainMenu.MENU_DATA );
 	settingsScreen();
 	return;	
 }
@@ -410,9 +381,9 @@ function howToPlay():void {
 
 function eventTester():void {
 	outputText("", true);
-	eventTestInput.x = 207.5;
-	eventTestInput.y = 55.1;
-	//eventTestInput.text = "Paste test event text here.";
+	this.mainView.eventTestInput.x = 207.5;
+	this.mainView.eventTestInput.y = 55.1;
+	//this.mainView.eventTestInput.text = "Paste test event text here.";
 	simpleChoices("Proceed",118,"",0,"",0,"",0,"Back",119);
 }
 	

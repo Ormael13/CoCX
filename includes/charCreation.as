@@ -3,20 +3,16 @@
 function newGameGo(e:MouseEvent):void {
 	funcs = new Array();
 	args = new Array();
-	eventTestInput.x = -10207.5;
-	eventTestInput.y = -1055.1;
+	this.mainView.eventTestInput.x = -10207.5;
+	this.mainView.eventTestInput.y = -1055.1;
 	hideStats();
 	hideUpDown();
 	nameBox.visible = true;
 	nameBox.width = 165;
-	appearanceText.visible = false;
-	appearanceBG.visible = false;
-	dataText.visible = false;
-	dataBG.visible = false;
-	levelBG.visible = false;
-	levelText2.visible = false;
-	perksText.visible = false;
-	perksBG.visible = false;
+	this.mainView.hideMenuButton( MainView.MENU_NEW_MAIN );
+	this.mainView.hideMenuButton( MainView.MENU_DATA );
+	this.mainView.hideMenuButton( MainView.MENU_LEVEL );
+	this.mainView.hideMenuButton( MainView.MENU_PERKS );
 	//Hide perk boxes
 	aCb.visible = false;
 	//If first PC, track status of EZ mode and other such nonsense.

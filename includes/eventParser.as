@@ -19,11 +19,7 @@ function eventParser(eventNo:*):void {
 		//Clear pic if not in combat
 		//if(!inCombat() && eventNo != 5007) clearImages();
 		//Reset newgame buttons till back at camp
-		newGameText.removeEventListener(MouseEvent.CLICK, mainMenu);
-		newGameBG.removeEventListener(MouseEvent.CLICK, mainMenu);
-		newGameText.addEventListener(MouseEvent.CLICK, newGameGo);
-		newGameBG.addEventListener(MouseEvent.CLICK, newGameGo);
-		newGameText.text = "New Game";
+		this.mainView.setMenuButton( MainView.MENU_NEW_MAIN, "New Game", newGameGo );
 		if(eventNo != 1) {
 			hideMenus();
 		}
@@ -699,15 +695,15 @@ function doSystem(eventNo:Number):void {
 		if(!monster.hasVagina()) monster.createVagina();
 		monster.vaginas[0].vaginalLooseness = 3;
 		monster.ass.analLooseness = 3;
-		outputText(eventTestInput.text, true, true);
+		outputText(this.mainView.eventTestInput.text, true, true);
 		simpleChoices("Again",117,"",0,"",0,"",0,"Quit",mainMenu);
-		eventTestInput.x = -10207.5;
-		eventTestInput.y = -1055.1;
+		this.mainView.eventTestInput.x = -10207.5;
+		this.mainView.eventTestInput.y = -1055.1;
 		return;
 	}
 	if(eventNo == 119) {
-		eventTestInput.x = -10207.5;
-		eventTestInput.y = -1055.1;
+		this.mainView.eventTestInput.x = -10207.5;
+		this.mainView.eventTestInput.y = -1055.1;
 		eventParser(mainMenu);
 		return;
 	}

@@ -2,8 +2,7 @@
 
 function camp():void {
 	trace("Current fertility: " + player.totalFertility());
-	newGameText.visible = true;
-	newGameBG.visible = true;
+	this.mainView.showMenuButton( MainView.MENU_NEW_MAIN );
 	if(player.hasStatusAffect("Post Akbal Submission") >= 0) {
 		player.removeStatusAffect("Post Akbal Submission");
 		akbalSubmissionFollowup();
@@ -16,10 +15,8 @@ function camp():void {
 	//make sure gameState is cleared if coming from combat or giacomo
 	gameState = 0;
 	if(inDungeon) {
-		dataBG.visible = true;
-		dataText.visible = true;
-		appearanceText.visible = true;
-		appearanceBG.visible = true;
+		this.mainView.showMenuButton( MainView.MENU_DATA );
+		this.mainView.showMenuButton( MainView.MENU_APPEARANCE );
 		dungeonRoom(dungeonLoc);
 		return;
 	}
@@ -340,35 +337,28 @@ function camp():void {
 	//Reset luststick display status (see event parser)
 	flags[UNKNOWN_FLAG_NUMBER_00095] = 0;
 	//Display Proper Buttons
-	appearanceText.visible = true;
-	appearanceBG.visible = true;
-	perksText.visible = true;
-	perksBG.visible = true;
-	statsBG.visible = true;
-	statsText.visible = true;
-	dataBG.visible = true;
-	dataText.visible = true;
+	this.mainView.showMenuButton( MainView.MENU_APPEARANCE );
+	this.mainView.showMenuButton( MainView.MENU_PERKS );
+	this.mainView.showMenuButton( MainView.MENU_STATS );
+	this.mainView.showMenuButton( MainView.MENU_DATA );
 	showStats();
 	//Change settings of new game buttons to go to main menu
-	newGameText.removeEventListener(MouseEvent.CLICK, newGameGo);
-	newGameBG.removeEventListener(MouseEvent.CLICK, newGameGo);
-	newGameText.addEventListener(MouseEvent.CLICK, mainMenu);
-	newGameBG.addEventListener(MouseEvent.CLICK, mainMenu);
-	newGameText.text = "Main Menu";
+	this.mainView.setMenuButton( MainView.MENU_NEW_MAIN, "Main Menu", mainMenu );
+
 	//clear up/down arrows
 	hideUpDown();
 	//Level junk
 	if(player.XP >= (player.level) * 100 || player.perkPoints > 0) {
-		if(player.XP < player.level * 100) levelText2.text = "Perk Up";
-		else levelText2.text = "Level Up";
-		levelText2.visible = true;
-		levelBG.visible = true;
-		levelUp.visible = true;
+		if(player.XP < player.level * 100)
+			this.mainView.setMenuButton( MainView.MENU_LEVEL, "Perk Up" );
+		else
+			this.mainView.setMenuButton( MainView.MENU_LEVEL, "Level Up" );
+		this.mainView.showMenuButton( MainView.MENU_LEVEL );
+		this.mainView.statsView.showLevelUp();
 	}
 	else {
-		levelText2.visible = false;
-		levelBG.visible = false;
-		levelUp.visible = false;
+		this.mainView.hideMenuButton( MainView.MENU_LEVEL );
+		this.mainView.statsView.hideLevelUp();
 	}
 	//Build main menu
 	var masturbate:Number = 0;

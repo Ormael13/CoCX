@@ -1423,8 +1423,7 @@ function doubleAttackOff():void {
 
 function levelUpGo(e:MouseEvent):void {
 	hideMenus();
-	newGameText.visible = false;
-	newGameBG.visible = false;
+	this.mainView.hideMenuButton( MainView.MENU_NEW_MAIN );
 	//Level up
 	if(player.XP >= (player.level) * 100) {
 		player.level++;
@@ -1472,8 +1471,7 @@ function perkBuyMenu():void {
 	outputText("Please select a perk from the drop-down list, then click 'Okay'.  You can press 'Skip' to save your perk point for later.\n\n", false);
 	aCb.move(210, 108);
 	aCb.visible = true;
-	newGameText.visible = false;
-	newGameBG.visible = false;
+	this.mainView.hideMenuButton( MainView.MENU_NEW_MAIN );
 	simpleChoices("Okay",0,"Skip",115,"",0,"",0,"",0);
 }
 function buildPerkList():void {
@@ -2757,7 +2755,7 @@ function hideStats():void {
 }
 
 function hideMenus():void {
-	mainView.hideMenuButtons();
+	mainView.hideAllMenuButtons();
 }
 
 //Hide the up/down indicators

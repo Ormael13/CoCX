@@ -13,6 +13,14 @@ package coc.view {
     import coc.model.GameModel;
 
 	public dynamic class MainView extends MovieClip {
+		// Menu button names.
+		public static const MENU_NEW_MAIN :String = 'newGame';
+		public static const MENU_DATA :String = 'data';
+		public static const MENU_STATS :String = 'stats';
+		public static const MENU_LEVEL :String = 'level';
+		public static const MENU_PERKS :String = 'perks';
+		public static const MENU_APPEARANCE :String = 'appearance';
+
 		private static const BOTTOM_BUTTON_COUNT :int = 10;
 		private static const BOTTOM_BUTTON_PER_ROW_COUNT :int = 5;
 
@@ -25,6 +33,9 @@ package coc.view {
 
 		public var bottomButtonTexts :Array; // <TextField>
 		public var bottomButtonBGs :Array; // <MovieClip>
+		public var menuButtonTexts :Array;
+		public var menuButtonBGs :Array;
+
 		public var toolTip :ToolTipView;
 		public var statsView :StatsView;
 
@@ -33,6 +44,7 @@ package coc.view {
 		public var _getButtonToolTipText :Function;
 
 		protected var options :Object;
+		protected var allButtonTexts :Array;
 		protected var allButtons :Array;
 		protected var callbacks :Object = {};
 
@@ -47,26 +59,42 @@ package coc.view {
 
 			super();
 
+			// Init subviews.
 			this.toolTipView = new ToolTipView( this, this.model );
-			this.addChild( this.toolTipview )
+			this.toolTipView.hide();
+			this.addChild( this.toolTipview );
 
 			this.statsView = new StatsView( this, this.model );
+			this.statsView.hide();
 			this.addChild( this.statsView );
 
-			this.bottomButtonSettings = [];
-
+			// button texts.  This part will eventually go away...
 			this.bottomButtonTexts = [
 				b1Text, b2Text, b3Text, b4Text, b5Text,
 				b6Text, b7Text, b8Text, b9Text, b0Text // wonky.
 				];
 
+			this.menuButtonTexts = [
+				newGameText, dataText, statsText, levelText2, perksText, appearanceText
+				];
+
+			this.allButtonTexts = this.bottomButtonTexts.concat( this.menuButtonTexts );
+
 			disableMouseForMostTextFields();
+
+			// button bgs.  This part too will eventually go away...
+			this.menuButtonBGs = [
+					newGameBG, dataBG, statsBG, levelBG, perksBG, appearanceBG
+				];
+				
 			createBottomButtons();
 
-			this.allButtons = this.bottomButtonBGs.concat([
-					newGameBG, dataBG, statsBG, levelBG, perksBG, appearanceBG
-				]);
+			this.allButtons = this.bottomButtonBGs.concat( this.menuButtonBGs );
 
+			// ...
+			imageText.visible = false; // TODO: Remove this TF?  It doesn't seem to be used anywhere.  I think it was from the first effort to put in images.
+
+			// hook!
 			hookBottomButtons();
 			hookAllButtons();
 		};
@@ -179,6 +207,17 @@ package coc.view {
 
 		//////// Internal event handlers ////////
 
+		protected function textForBG( bg :DisplayObject ) :TextField {
+			var textName :String;
+
+			textName = bg.name.replace( /BG$/, 'Text' );
+
+			if( bg.name == 'levelBG' )
+				textName += '2';
+
+			return this[ textName ] as TextField;
+		};
+
 		protected function executeBottomButtonClick( event :Event ) {
 			var bottomButton :InteractiveObject,
 				bottomButtonIndex :int;
@@ -195,7 +234,7 @@ package coc.view {
 			event.currentTarget.alpha = 0.5;
 
 			if( this._getButtonToolTipText ) {
-				this.toolTip.text = this._getButtonToolTipText( event.target.name );
+				this.toolTip.text = this._getButtonToolTipText( this.textForBG( event.target ).text );
 				this.toolTip.showForButton( event.target as DisplayObject );
 			}
 		};
@@ -207,33 +246,7 @@ package coc.view {
 
 
 
-		//////// Public methods ////////
-
-		public function showMenuButtons() {
-			dataBG.visible = true;
-			dataText.visible = true;
-			appearanceText.visible = true;
-			appearanceBG.visible = true;
-			levelText2.visible = true;
-			levelBG.visible = true;
-			perksBG.visible = true;
-			perksText.visible = true;
-			statsText.visible = true;
-			statsBG.visible = true;
-		};
-
-		public function hideMenuButtons() {
-			dataBG.visible = false;
-			dataText.visible = false;
-			appearanceText.visible = false;
-			appearanceBG.visible = false;
-			levelText2.visible = false;
-			levelBG.visible = false;
-			perksBG.visible = false;
-			perksText.visible = false;
-			statsText.visible = false;
-			statsBG.visible = false;
-		};
+		//////// Bottom Button Methods ////////
 
 		// TODO: Refactor button set-up code to use callback and toolTipText here.
 		public function setButton( index :int, label :String = '', callback :Function = null, toolTipText :String = '' ) {
@@ -281,20 +294,125 @@ package coc.view {
 			}
 		};
 
-		public function selectSprite( index :Number = 0 ) :void {
-			var scale :Number;
+		public function getButtonText( buttonName :String ) :String {
+			var matches :*,
+				buttonIndex :int;
 
-			// TODO: When flags goes away, if it goes away, replace this with the appropriate settings thing.
-			if( choice < 0 || model.flags[ SHOW_SPRITES_FLAG ] )
-				this.sprite.visible = false;
-			else {
-				this.sprite.visible = true;
-				this.sprite.gotoAndStop(choice);
-
-				scale = 80 / sprite.height;
-				this.sprite.scaleX = scale;
-				this.sprite.scaleY = scale;
+			if( /^buttons\[[0-9]\]/.test( buttonName ) ) {
+				matches = /^buttons\[([0-9])\]/.exec( buttonName );
+				buttonIndex = parseInt( matches[ 1 ], 10 );
+				return this.bottomButtonTexts[ buttonIndex ].text;
 			}
+			else if( /^b[0-9]Text$/.test( buttonName ) ) {
+				return this[ buttonName ].text;
+			}
+
+			return "";
+		};
+
+
+
+		//////// Menu Button Methods ////////
+
+		protected function setMenuButtonListener( button :InteractiveObject, callback :Function ) :void {
+			if( this.callbacks[ button.name ] )
+				button.removeEventListener( MouseEvent.CLICK, this.callbacks[ button.name ] );
+
+			this.callbacks[ button.name ] = callback;
+			button.addEventListener( MouseEvent.CLICK, callback );
+		};
+
+		protected function getMenuButtonParts( name :String ) :Object {
+			var tfName :String = name + 'Text',
+				bgName :String = name + 'BG';
+
+			if( name == 'level' )
+				tfName += '2';
+
+			return {
+				textField: this[ tfName ] as TextField,
+				background: this[ bgName ] as DisplayObject
+			};
+		};
+
+		////////
+
+		public function setMenuButton( name :String, label :String = '', callback :Function = null ) :void {
+			var buttonParts :Object = this.getMenuButtonParts( name );
+
+			if( ! (buttonParts.textField && buttonParts.background) ) {
+				throw new ArgumentError( "MainView.setMenuButton: Invalid menu button name: " + String( name ) );
+			}
+
+			if( label ) {
+				buttonParts.textField.text = label;
+			}
+
+			if( callback ) {
+				this.setMenuButtonListener( buttonParts.background, callback );
+			}
+		};
+
+		public function set onNewGameClick( callback :Function ) :void {
+			this.setMenuButtonListener( this.newGameBG, callback );
+		};
+
+		public function set onDataClick( callback :Function ) :void {
+			this.setMenuButtonListener( this.dataBG, callback );
+		};
+
+		public function set onStatsClick( callback :Function ) :void {
+			this.setMenuButtonListener( this.statsBG, callback );
+		};
+
+		public function set onLevelClick( callback :Function ) :void {
+			this.setMenuButtonListener( this.levelBG, callback );
+		};
+
+		public function set onPerksClick( callback :Function ) :void {
+			this.setMenuButtonListener( this.perksBG, callback );
+		};
+
+		public function set onAppearanceClick( callback :Function ) :void {
+			this.setMenuButtonListener( this.appearanceBG, callback );
+		};
+
+		public function showMenuButton( name :String ) :void {
+			var buttonParts = this.getMenuButtonParts( name );
+
+			buttonParts.textField.visible = true;
+			buttonParts.background.visible = true;
+		};
+
+		public function hideMenuButton( name :String ) :void {
+			var buttonParts = this.getMenuButtonParts( name );
+
+			buttonParts.textField.visible = false;
+			buttonParts.background.visible = false;
+		};
+
+		public function showAllMenuButtons() {
+			this.showMenuButton( MENU_NEW_MAIN );
+			this.showMenuButton( MENU_DATA );
+			this.showMenuButton( MENU_STATS );
+			this.showMenuButton( MENU_PERKS );
+			this.showMenuButton( MENU_APPEARANCE );
+		};
+
+		public function hideAllMenuButtons() {
+			this.hideMenuButton( MENU_NEW_MAIN );
+			this.hideMenuButton( MENU_DATA );
+			this.hideMenuButton( MENU_STATS );
+			this.hideMenuButton( MENU_PERKS );
+			this.hideMenuButton( MENU_APPEARANCE );
+		};
+
+		public function menuButtonIsVisible( name :String ) :Boolean {
+			return this.getMenuButtonParts( name ).background.visible;
+		};
+
+		public function menuButtonHasLabel( name :String, label :String ) :Boolean {
+			return this.getMenuButtonParts( name ).textField.text == label;
 		};
 
 
@@ -326,56 +444,24 @@ package coc.view {
 			this.scrollBar.update();
 		};
 
-		public function getButtonText( buttonName :String ) :String {
-			var matches :*,
-				buttonIndex :int;
+		public function selectSprite( index :Number = 0 ) :void {
+			var scale :Number;
 
-			if( /^buttons\[[0-9]\]/.test( buttonName ) ) {
-				matches = /^buttons\[([0-9])\]/.exec( buttonName );
-				buttonIndex = parseInt( matches[ 1 ], 10 );
-				return this.bottomButtonTexts[ buttonIndex ].text;
+			// TODO: When flags goes away, if it goes away, replace this with the appropriate settings thing.
+			if( choice < 0 || model.flags[ SHOW_SPRITES_FLAG ] )
+				this.sprite.visible = false;
+			else {
+				this.sprite.visible = true;
+				this.sprite.gotoAndStop(choice);
+
+				scale = 80 / sprite.height;
+				this.sprite.scaleX = scale;
+				this.sprite.scaleY = scale;
 			}
-			else if( /^b[0-9]Text$/.test( buttonName ) ) {
-				return this[ buttonName ].text;
-			}
-
-			return "";
 		};
 
-
-
-		//////// Setters ////////
-
-		protected function setMenuButtonListener( button :InteractiveObject, callback :Function ) :void {
-			if( this.callbacks[ button.name ] )
-				button.removeEventListener( MouseEvent.CLICK, this.callbacks[ button.name ] );
-
-			this.callbacks[ button.name ] = callback;
-			button.addEventListener( MouseEvent.CLICK, callback );
-		};
-
-		public function set onNewGameClick( callback :Function ) :void {
-			this.setMenuButtonListener( this.newGameBG, callback );
-		};
-
-		public function set onDataClick( callback :Function ) :void {
-			this.setMenuButtonListener( this.dataBG, callback );
-		};
-
-		public function set onStatsClick( callback :Function ) :void {
-			this.setMenuButtonListener( this.statsBG, callback );
-		};
-
-		public function set onLevelClick( callback :Function ) :void {
-			this.setMenuButtonListener( this.levelBG, callback );
-		};
-
-		public function set onPerksClick( callback :Function ) :void {
-			this.setMenuButtonListener( this.perksBG, callback );
-		};
-
-		public function set onAppearanceClick( callback :Function ) :void {
-			this.setMenuButtonListener( this.appearanceBG, callback );
+		public function hideSprite() :void {
+			this.selectSprite( -1 );
 		};
 	}
 }

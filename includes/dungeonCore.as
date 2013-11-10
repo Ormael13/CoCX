@@ -21,21 +21,17 @@
 	var masturbateMenu:Number = 10;
 		
 	//Display Proper Buttons
-	appearanceText.visible = true;
-	appearanceBG.visible = true;
-	perksText.visible = true;
-	perksBG.visible = true;
-	dataText.visible = false;
-	dataBG.visible = false;
+	this.mainView.showMenuButton( MainMenu.MENU_APPEARANCE );
+	this.mainView.showMenuButton( MainMenu.MENU_PERKS );
+	this.mainView.hideMenuButton( MainMenu.MENU_DATA );
 
 	
 	//clear up/down arrows
 	hideUpDown();
 	//Level junk
 	if(player.XP >= (player.level) * 100) {
-		levelText2.visible = true;
-		levelBG.visible = true;
-		levelUp.visible = true;
+		this.mainView.showMenuButton( MainMenu.MENU_LEVEL );
+		this.mainView.statsView.showLevelUp();
 	}
 	//Entry Room
 	if(roomNo == 0) {

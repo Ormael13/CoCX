@@ -179,12 +179,9 @@ function doCombat(eventNum:Number)
 	
 	if(eventNum == 5000) {
 		flags[IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 0;
-		dataBG.visible = false;
-		dataText.visible = false;
-		appearanceText.visible = false;
-		appearanceBG.visible = false;
-		perksBG.visible = false;
-		perksText.visible = false;
+		this.mainView.hideMenuButton( MainMenu.MENU_DATA );
+		this.mainView.hideMenuButton( MainMenu.MENU_APPEARANCE );
+		this.mainView.hideMenuButton( MainMenu.MENU_PERKS );
 		b1Text.visible = true;
 		gButtons[0].visible = true;
 		b1Text.htmlText = "Attack";
@@ -2614,14 +2611,10 @@ function doCombat(eventNum:Number)
 		outputText("<b>GAME OVER</b>", true);
 		if(flags[EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "",0,"NewGamePlus",10035,"",0,"CHEAT", 1);
 		else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus",10035, "BLAH", 0, "LULZ", 0);
-		dataBG.visible = true;
-		dataText.visible = true;
-		appearanceText.visible = false;
-		appearanceBG.visible = false;
-		levelText2.visible = false;
-		levelBG.visible = false;
-		perksText.visible = false;
-		perksBG.visible = false;
+		this.mainView.showMenuButton( MainMenu.MENU_DATA );
+		this.mainView.hideMenuButton( MainMenu.MENU_APPEARANCE );
+		this.mainView.hideMenuButton( MainMenu.MENU_LEVEL );
+		this.mainView.hideMenuButton( MainMenu.MENU_PERKS );
 		gameState = 0;
 		inDungeon = false;
 	}
@@ -2630,14 +2623,10 @@ function doCombat(eventNum:Number)
 		outputText("\n\n<b>GAME OVER</b>", false);
 		if(flags[EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "",0,"NewGamePlus",10035,"",0,"Debug Cheat", 1);
 		else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus", 10035, "BLAH", 0, "LULZ", 0);
-		dataBG.visible = true;
-		dataText.visible = true;
-		appearanceText.visible = false;
-		appearanceBG.visible = false;
-		levelText2.visible = false;
-		levelBG.visible = false;
-		perksText.visible = false;
-		perksBG.visible = false;
+		this.mainView.showMenuButton( MainMenu.MENU_DATA );
+		this.mainView.hideMenuButton( MainMenu.MENU_APPEARANCE );
+		this.mainView.hideMenuButton( MainMenu.MENU_LEVEL );
+		this.mainView.hideMenuButton( MainMenu.MENU_PERKS );
 		gameState = 0;
 		inDungeon = false;
 	}
@@ -5490,14 +5479,10 @@ function regeneration(combat:Boolean = true):void {
 	}
 }
 function startCombat(monsterNum:Number):void {
-	dataBG.visible = false;
-	dataText.visible = false;
-	appearanceText.visible = false;
-	appearanceBG.visible = false;
-	levelText2.visible = false;
-	levelBG.visible = false;
-	perksText.visible = false;
-	perksBG.visible = false;
+	this.mainView.hideMenuButton( MainMenu.MENU_DATA );
+	this.mainView.hideMenuButton( MainMenu.MENU_APPEARANCE );
+	this.mainView.hideMenuButton( MainMenu.MENU_LEVEL );
+	this.mainView.hideMenuButton( MainMenu.MENU_PERKS );
 	//Flag the game as being "in combat"
 	gameState = 1;
 	//Clear arrays in preparation

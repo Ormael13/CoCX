@@ -12,6 +12,7 @@ package coc.view {
         // add things from main view here?
         // yes because we'll need to update all the TFs and progress bars.
         public var upDownsContainer :Sprite;
+        public var levelUp :Sprite;
 
         protected var model :GameModel;
 
@@ -57,7 +58,7 @@ package coc.view {
                     "fatigueUp",  "fatigueDown",
                     "hpUp",       "hpDown",
                     "lustUp",     "lustDown",
-                    "levelUp",
+                    // "levelUp",
                     "xpUp",       "xpDown"
                 ];
 
@@ -72,6 +73,9 @@ package coc.view {
             for each( var statsUpDownDOName :* in statsUpDownsNames ) {
                 this.upDownsContainer.addChild( mainView.getChildByName( statsUpDownDOName ) );
             }
+
+            this.levelUp = mainView.getChildByName( 'levelUp' );
+            this.addChild( this.levelUp );
         };
 
         protected function setStatText( name :String, value :* ) {
@@ -153,6 +157,8 @@ package coc.view {
             for( ci = 0; ci < cc; ++ci ) {
                 this.upDownsContainer.getChildAt( ci ).visible = false;
             }
+
+            this.hideLevelUp();
         };
 
         public function showUpDown() {
@@ -180,6 +186,14 @@ package coc.view {
                     this[ statName + 'Down' ].visible = true;
                 }
             }
+        };
+
+        public function showLevelUp() :void {
+            this.levelUp.visible = true;
+        };
+
+        public function hideLevelUp() :void {
+            this.levelUp.visible = false;
         };
     }
 }

@@ -160,8 +160,8 @@ function saveScreen():void
 
 function saveLoad(e:MouseEvent):void
 {
-	eventTestInput.x = -10207.5;
-	eventTestInput.y = -1055.1;
+	this.mainView.eventTestInput.x = -10207.5;
+	this.mainView.eventTestInput.y = -1055.1;
 	//Hide the name box in case of backing up from save
 	//screen so it doesnt overlap everything.
 	nameBox.visible = false;
