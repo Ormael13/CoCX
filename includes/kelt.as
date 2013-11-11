@@ -330,6 +330,7 @@ function keltBlowjobRequirementShamefully(newl:Boolean = true):void {
 //Blowjob Requirement, Eagerly
 function keltBlowjobRequirementEagerly(newl:Boolean = true):void {
 	spriteSelect(35);
+	// This is never called with arguments, so newl will always be true. Can this be simplified?
 	if(newl) outputText("", true);
 	slimeFeed();
 	outputText(images.showImage("kelt-farm-eagerbj"));

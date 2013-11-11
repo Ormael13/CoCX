@@ -82,7 +82,9 @@ def cleanEventNumbers():
 						tmp = fileH.write(tmp)
 
 
-#
+# 
+
+
 def cleanStaleDoEventIfs():
 
 	numExtr = re.compile(r"if\s?\(eventNo == (\d*)\)")
@@ -140,6 +142,27 @@ def cleanStaleDoEventIfs():
 	if writeToFiles:
 		with open("./includes/doEvent.as", "w") as eventF:
 			eventF.write(eventS)
+
+
+
+def removeDisabledDoEventIfs():
+
+	numExtr = re.compile(r"(?://[\w\-\s]*\s*)*(?:else)?\s+if\s?\(\s*false\s* == \d+\)\s+\{[\w\s\(\)\;/]+\}")
+
+
+	with open("./includes/doEvent.as", "r") as eventF:
+		eventS = eventF.read()
+
+	print "Cleaning doEvent If statements"
+	
+
+	eventS = numExtr.sub("", eventS)
+
+
+	if writeToFiles:
+		with open("./includes/doEvent.as", "w") as eventF:
+			eventF.write(eventS)
+
 
 def getFlagDict():
 	with open("FlagDictionary.txt", "r") as fd:
@@ -460,7 +483,8 @@ if __name__ == "__main__":
 			print "Writing to files!"
 			writeToFiles = True
 	#cleanEventNumbers()
-	cleanStaleDoEventIfs()
+	#cleanStaleDoEventIfs()
+	removeDisabledDoEventIfs()
 
 	#cleanFlags()
 
