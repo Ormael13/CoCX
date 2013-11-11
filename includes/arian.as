@@ -3473,7 +3473,7 @@ function listenToLowAnalXPArian():void {
 //[=Sleep=]
 function dontListenToMediumAnalXPArian():void {
 	clearOutput();
-	outputText("You gently stroke the lizan's side and plant a soft, gentle kiss on his neck.  At your ministrations, Arian sighs and slowly falls still again.  You wait, but it seems that whatever dreams he was having have faded and he's truly asleep now, allowing you to go back to sleep yourself.");
+	outputText("You gently stroke the lizan's side and plant a soft, gentle kiss on " + arianMF("his","her") + " neck.  At your ministrations, Arian sighs and slowly falls still again.  You wait, but it seems that whatever dreams " + arianMF("he","she") + " was having have faded and " + arianMF("he","she") + "'s truly asleep now, allowing you to go back to sleep yourself.");
 	sleepRecovery(false);
 	menu();
 	addButton(0,"Next",sleepWrapper);

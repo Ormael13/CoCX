@@ -6,6 +6,8 @@
 	import flash.net.*;
 	import flash.events.*;
 	import classes.Image;
+
+	import flash.system.Security;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 		
@@ -32,8 +34,11 @@
 		public function ImageManager(stage:Stage)
 		{
 			mStage = stage;
+			if (Security.sandboxType != Security.REMOTE)
+			{
 			trace("Creating Image File hashmap");
 			loadImageList();
+		}
 		}
 		
 		public function loadImageList():void
@@ -207,6 +212,6 @@
 			}
 			
 			mainText.htmlText += padding;
-}
+		}
 	}
 }
