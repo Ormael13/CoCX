@@ -191,6 +191,7 @@ function birthFrogEggsAnal():void {
 	//[Anal moistness +2, Hips +1]
 	player.hipRating++;
 	player.ass.analWetness += 1;
+	if(player.ass.analWetness > 5) player.ass.analWetness = 5;
 	stats(0,0,0,0,0,1,-100,0);
 }
 //Superbonus Vaginal Eggs!
