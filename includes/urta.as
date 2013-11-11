@@ -385,7 +385,7 @@ function drinkUrtasBoozePtTwo():void {
 	outputText("She shakes her massive horse-meat more than a few times, shuddering lightly with pleasure as her tip flares a bit in response.  Urta stumbles over moaning, \"<i>This ish all your fault!  You damned... sexy... mmm... letsh fuck!</i>\"\n\n", false);
 	outputText("The stumbling hermaphrodite is openly rubbing herself as she closes in on you.  What do you do?", false);
 	//[RUN!] [LET HER]
-	simpleChoices("Run!",2287,"Let Her",2288,"",0,"",0,"",0);
+	simpleChoices("Run!",drinkUrtasBoozeRun,"Let Her",drinkUrtasBoozeLetHer,"",0,"",0,"",0);
 }
 
 function drinkUrtasBoozeRun(): void{

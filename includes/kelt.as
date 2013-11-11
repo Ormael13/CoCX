@@ -121,15 +121,15 @@ function keltRequiresNakedness():void {
 	outputText("Do you obey his demand?", false);
 	if(player.cor > 70 && player.inte > 40 && player.lowerBody != 4) {
 		outputText("\n\n<b>If you fight back and take him down a peg, you might never see him again...</b>");
-		simpleChoices("Reluctantly", 2114, "Eagerly", 2115, "Fight Back", keltResistance, "", 0, "Never", 2116);
+		simpleChoices("Reluctantly", keltReluctantlyGetNaked, "Eagerly", keltEagerlyGetNaked, "Fight Back", keltResistance, "", 0, "Never", keltRefuseNakedness);
 		return;
 	}
-	else simpleChoices("Reluctantly", 2114, "Eagerly", 2115, "", 0, "", 0, "Never", 2116);
+	else simpleChoices("Reluctantly", keltReluctantlyGetNaked, "Eagerly", keltEagerlyGetNaked, "", 0, "", 0, "Never", keltRefuseNakedness);
 	//(Corruption higher than 60 automatically chooses eagerly)
 	if(player.cor + player.lib + player.lust >= 180) {
 		outputText(" Of course you do.  You love putting on a show.", false);
 		// go eagerly.
-		doNext(2115);
+		doNext(keltEagerlyGetNaked);
 	}
 }
 
@@ -143,6 +143,7 @@ function keltRefuseNakedness():void {
 }
 //Naked Requirement, Eagerly
 function keltEagerlyGetNaked():void {
+	doNext(13);
 	spriteSelect(35);
 	outputText("", true);
 	outputText("You have no problem stripping down naked in front of Kelt, even enjoying the process a little bit.  Judging by his leer, Kelt is enjoying it too.  He seems aroused by his power over you more than anything else.  And you find yourself admitting that you're a little aroused by it as well.\r\r", false);
@@ -197,6 +198,8 @@ function keltEagerlyGetNaked():void {
 
 //Naked Requirement, Reluctantly
 function keltReluctantlyGetNaked():void {
+
+	doNext(13);
 	spriteSelect(35);
 	outputText("", true);
 	outputText("You are uncomfortable with the idea of being naked in front of this crude, cruel taskmaster.  But he is good at what he does, and if this is the only way to convince him to teach you, then you'll just have to get it over with.  You agree to his terms reluctantly, and begin to strip off your clothes.\r\r", false);		   
@@ -268,15 +271,15 @@ function keltRequiresBlowjobs():void {
 	//(Corruption higher than 80 automatically chooses Eagerly)
 	if(player.cor + player.lib + player.lust >= 200 && player.inte < 60) {
 		outputText("  Of course you do, slut that you are.", false);
-		doNext(2118);
+		doNext(keltBlowjobRequirementEagerly);
 		return;
 	}
 	//Never!			Shamefully			Eagerly
 	if(player.inte > 40 && player.cor > 70 && player.lowerBody != 4) {
 		outputText("\n\n<b>If you fight back and take him down a peg, you might never see him again...</b>");
-		simpleChoices("Shamefully",2117,"Eagerly",2118,"Fight Back",2262,"",0,"Never!",2119);
+		simpleChoices("Shamefully",keltBlowjobRequirementShamefully,"Eagerly",keltBlowjobRequirementEagerly,"Fight Back",keltResistance,"",0,"Never!",keltBlowjobRequirementNever);
 	}
-	else simpleChoices("Shamefully",2117,"Eagerly",2118,"Resist",0,"",0,"Never!",2119);
+	else simpleChoices("Shamefully",keltBlowjobRequirementShamefully,"Eagerly",keltBlowjobRequirementEagerly,"Resist",0,"",0,"Never!",keltBlowjobRequirementNever);
 }
 
 //Blowjob Requirement, Never
@@ -409,9 +412,9 @@ function keltMainEncounterAfterNakedReq():void {
 				
 				if(player.inte > 40 && player.cor > 70 && player.lowerBody != 4) {
 					outputText("\n\n<b>If you fight back and take him down a peg, you might never see him again...</b>");
-					simpleChoices("Yes",2114,"No",2116,"Fight Back",keltResistance,"",0,"",0);
+					simpleChoices("Yes",keltReluctantlyGetNaked,"No",keltRefuseNakedness,"Fight Back",keltResistance,"",0,"",0);
 				}
-				else doYesNo(2114,2116);
+				else doYesNo(keltReluctantlyGetNaked,keltRefuseNakedness);
 				return;
 			}
 		}
@@ -682,14 +685,14 @@ function keltMainEncounterPostBlowjob():void {
 		//(Submissiveness +80, or Corruption +80)
 		if(player.cor + player.lib + player.lust >= 220 && player.statusAffectv2("Kelt") >= 80) {
 			outputText("You try to resist the need.  You honestly try.  But this time, there is just no stopping it.  Your desire for Kelt to cum within you again is so great, you fall to your knees immediately before him, waiting hungrily for your treat.  A part of you wonders why you ever resisted in the first place... in fact, why not suck him off before every lesson?  Surely that would make him like you more...\r\r", false);
-			doNext(2120);
+			doNext(keltSubmitGivingBJ);
 			return;
 		}
 		//Otherwise)
 		else {
 			outputText("Despite the need, despite the desire, you are still in control of yourself enough to make a choice.  Do you submit to the centaur's will, and your own hunger?  Or will you somehow find the strength to walk away?", false);
 			//Submit				Resist!
-			simpleChoices("Submit",2120,"Resist",2121,"",0,"",0,"",0);
+			simpleChoices("Submit",keltSubmitGivingBJ,"Resist",keltResistGivingBJ,"",0,"",0,"",0);
 			return;
 		}
 	}
@@ -719,7 +722,7 @@ function keltSubmitGivingBJ():void {
 		player.createStatusAffect("BlowjobOn",0,0,0,0);
 	}
 	keltReluctantGivingBJ();
-	doNext(2122);
+	doNext(continueAfterBJ);
 }
 //Continue training post BJ
 function continueAfterBJ():void {
@@ -794,7 +797,7 @@ function keltCentaurBadEnd():void {
 		outputText("\"<i>As I thought,</i>\" he sneers, thrusting particularly hard and making you whimper with need.  \"<i>Archery... what a joke!  Breeding sluts don't shoot arrows.  They get fucked until they're pregnant, then get fucked again.  They kneel and suck me off when I say so, and their stomachs swell with my young.  Well, I could use another cumdump, slut.  So consider this your initiation.  You're mine now, to use whenever I feel like it.  Hope you like the feeling of my cock, bitch.  It's gonna be the only thing you feel for a long time.</i>\"\r\r", false);
 		outputText("He thrusts in once more ruthlessly, burying the whole length of his cock as he ruthlessly snarls, cumming forcefully deep within you.  You feel his warmth explode within you, seeking out your fertile eggs, ready to knock you up with your master's foals, and cum yourself.  As his hot seed pumps into your womb, the last resistance you had crumbles, and you moan like a mare in heat, praying for twins.  Kelt, never going soft, continues thrusting urgently, preparing to deliver a second load to his newest harem member.  Again and again, you beg him for more, embracing your new life without regret.", false);
 	}
-	doNext(2123);
+	doNext(keltBadEndEpilogue);
 }
 
 //(Human) bad end
@@ -810,7 +813,7 @@ function keltSubmissiveBadEnd():void {
 	outputText("You whimper with joy, thanking him over and over again.  A great weight has been lifted, your true purpose revealed.  How could you have not known it before?  Kelt is your master, and you are nothing but his needy slut!  The revelation fills you with ecstasy.  Eagerly you thrust back up against him, eager to be filled, desperate for satisfaction.  He grinds into you, grinning wickedly all the time.  Then, mercifully, he pulls back enough to line up his shot, and fills your ass with his cock.\r\r", false);
 	outputText("\"<i>Ungh!  There's a good bitch.  From now on, you're mine, and mine only.  If you dare to fuck another creature, I will kill you.  Be a good slut, though, and maybe I'll give you a few foals to fill that belly.  Now moan for me, bitch.  I wanna hear you scream as I make you mine.</i>\"\r\r", false);
 	outputText("Scream you do, but with pleasure, as his cock erupts deep within your bowels.  This is what you wanted... this is what you always wanted.  Kelt grunts with contented release, then begins thrusting again, cock still hard as he prepares to dump a second load into his newest harem member.  Again and again, you beg him for more, embracing your new life without regret.", false);
-	doNext(2123);
+	doNext(keltBadEndEpilogue);
 }
 
 //Bad End 2

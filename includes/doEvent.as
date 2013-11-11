@@ -98,9 +98,7 @@ function doEvent(eventNo):void
 	//Begin the jojo rapingz
 	else if (eventNo == 2004)
 	{
-		jojoSprite();
 		jojoRape();
-		//this.semiglobalReferencer.jojoRape();
 		doNext(13);
 		return;
 	}
@@ -1848,22 +1846,21 @@ function doEvent(eventNo):void
 		drinkMarbleMilk();
 		return;
 	}
-	else if (eventNo == 2091)
+	else if ( false  == 2091)
 	{
-		doNext(13);
 		playerRefusesMarbleMilk();
+		doNext(13);
 		return;
 	}
-	else if (eventNo == 2092)
+	else if ( false  == 2092)
 	{
-		doNext(13);
 		AcceptMarblesSexualAdvances();
 		return;
 	}
-	else if (eventNo == 2093)
+	else if ( false  == 2093)
 	{
-		doNext(13);
 		turnDownMarbleSexRepeat();
+		doNext(13);
 		return;
 	}
 	if (false == 2094)
@@ -1871,16 +1868,16 @@ function doEvent(eventNo):void
 		turnDownMarbleSexFirstTime();
 		return;
 	}
-	else if (eventNo == 2095)
+	else if ( false  == 2095)
 	{
-		doNext(13);
 		wantMarbleAddiction();
+		doNext(13);
 		return;
 	}
-	else if (eventNo == 2096)
+	else if ( false  == 2096)
 	{
-		doNext(13);
 		doNotWantMarbleAddiction();
+		doNext(13);
 		return;
 	}
 	if (false == 2097)
@@ -1893,10 +1890,10 @@ function doEvent(eventNo):void
 		playerRefusesToDrinkBottledMilk();
 		return;
 	}
-	else if (eventNo == 2099)
+	else if ( false  == 2099)
 	{
-		doNext(13);
 		playerDrinksMarbleMilk();
+		doNext(13);
 		return;
 	}
 	if (false == 2100)
@@ -1909,10 +1906,10 @@ function doEvent(eventNo):void
 		marbleChoreHelpChooseMilk();
 		return;
 	}
-	else if (eventNo == 2102)
+	else if ( false  == 2102)
 	{
-		doNext(13);
 		marbleChoreHelpChooseMarble();
+		doNext(13);
 		return;
 	}
 	if (false == 2103)
@@ -1975,64 +1972,63 @@ function doEvent(eventNo):void
 		doNext(13);
 		return;
 	}
-	else if (eventNo == 2114)
+	else if ( false  == 2114)
 	{
-		doNext(13);
 		keltReluctantlyGetNaked();
 		return;
 	}
-	else if (eventNo == 2115)
+	else if ( false  == 2115)
 	{
-		doNext(13);
 		keltEagerlyGetNaked();
+		doNext(13);
 		return;
 	}
-	else if (eventNo == 2116)
+	else if ( false  == 2116)
 	{
-		doNext(13);
 		keltRefuseNakedness();
+		doNext(13);
 		return;
 	}
-	else if (eventNo == 2117)
+	else if ( false  == 2117)
 	{
-		doNext(13);
 		keltBlowjobRequirementShamefully();
+		doNext(13);
 		return;
 	}
-	else if (eventNo == 2118)
+	else if ( false  == 2118)
 	{
-		doNext(13);
 		keltBlowjobRequirementEagerly();
+		doNext(13);
 		return;
 	}
-	else if (eventNo == 2119)
+	else if ( false  == 2119)
 	{
-		doNext(13);
 		keltBlowjobRequirementNever();
+		doNext(13);
 		return;
 	}
-	else if (eventNo == 2120)
+	else if ( false  == 2120)
 	{
-		doNext(13);
 		keltSubmitGivingBJ();
+		doNext(13);
 		return;
 	}
-	else if (eventNo == 2121)
+	else if ( false  == 2121)
 	{
-		doNext(13);
 		keltResistGivingBJ();
+		doNext(13);
 		return;
 	}
-	else if (eventNo == 2122)
+	else if ( false  == 2122)
 	{
-		doNext(13);
 		continueAfterBJ();
+		doNext(13);
 		return;
 	}
-	else if (eventNo == 2123)
+	else if ( false  == 2123)
 	{
-		doNext(13);
 		keltBadEndEpilogue();
+		doNext(13);
 		return;
 	}
 	else if (eventNo == 2124)
@@ -2050,14 +2046,14 @@ function doEvent(eventNo):void
 	}
 	if (false == 2126)
 	{
-		doNext(1);
 		marbleInfo();
+		doNext(1);
 		return;
 	}
 	else if (eventNo == 2127)
 	{
-		doNext(1);
 		marbleSexExpanded();
+		doNext(1);
 		return;
 	}
 	else if (eventNo == 2128)
@@ -2090,31 +2086,27 @@ function doEvent(eventNo):void
 	}
 	else if (eventNo == 2129)
 	{
-		doNext(1);
 		marbleGathered();
+		doNext(1);
 		return;
 	}
 	if (false == 2130)
 	{
-		doNext(1);
 		talkWithMarbleAtCamp();
 		return;
 	}
 	else if (eventNo == 2131)
 	{
-		doNext(1);
 		gotMilk();
 		return;
 	}
-	else if (eventNo == 2132)
+	else if ( false  == 2132)
 	{
-		doNext(1);
 		marbleAppearance();
 		return;
 	}
 	else if (eventNo == 2133)
 	{
-		doNext(1);
 		interactWithMarbleAtCamp();
 		return;
 	}
@@ -2783,7 +2775,7 @@ function doEvent(eventNo):void
 		telAdreMenu();
 		return;
 	}
-	else if (eventNo == 2212)
+	else if ( false  == 2212)
 	{
 		piercingStudio();
 		return;
@@ -2998,7 +2990,7 @@ function doEvent(eventNo):void
 		chooseCrimstone();
 		return;
 	}
-	else if (eventNo == 2255)
+	else if ( false  == 2255)
 	{
 		oswaldPawn();
 		return;
@@ -3033,7 +3025,7 @@ function doEvent(eventNo):void
 		fuckKeltsShitUp();
 		return;
 	}
-	else if (eventNo == 2262)
+	else if ( false  == 2262)
 	{
 		keltResistance();
 		return;
@@ -3164,12 +3156,12 @@ function doEvent(eventNo):void
 		drinkUrtasBoozePtTwo();
 		return;
 	}
-	else if (eventNo == 2287)
+	else if ( false  == 2287)
 	{
 		drinkUrtasBoozeRun();
 		return;
 	}
-	else if (eventNo == 2288)
+	else if ( false  == 2288)
 	{
 		drinkUrtasBoozeLetHer();
 		return;
@@ -3516,7 +3508,7 @@ function doEvent(eventNo):void
 		rideUrtaInButtAtHomeLove();
 		return;
 	}
-	else if (eventNo == 2357)
+	else if ( false  == 2357)
 	{
 		oralFiestyUberExplosionUrta();
 		return;
@@ -3938,27 +3930,27 @@ function doEvent(eventNo):void
 		lumiPurchase();
 		return;
 	}
-	else if (eventNo == 2441)
+	else if ( false  == 2441)
 	{
 		lumiEnhance();
 		return;
 	}
-	else if (eventNo == 2442)
+	else if ( false  == 2442)
 	{
 		lumiEnhanceLaBova();
 		return;
 	}
-	else if (eventNo == 2443)
+	else if ( false  == 2443)
 	{
 		lumiEnhanceSDelight();
 		return;
 	}
-	else if (eventNo == 2444)
+	else if ( false  == 2444)
 	{
 		lumiEnhanceOviElix();
 		return;
 	}
-	else if (eventNo == 2445)
+	else if ( false  == 2445)
 	{
 		lumiEnhanceDraft();
 		return;
@@ -4218,7 +4210,7 @@ function doEvent(eventNo):void
 		fuckPregEdryn();
 		return;
 	}
-	else if (eventNo == 2496)
+	else if ( false  == 2496)
 	{
 		jizzFromEatingPregdrynOut();
 		return;
@@ -4694,17 +4686,17 @@ function doEvent(eventNo):void
 		approachPonies();
 		return;
 	}
-	else if (eventNo == 2588)
+	else if ( false  == 2588)
 	{
 		derpPolitely();
 		return;
 	}
-	else if (eventNo == 2589)
+	else if ( false  == 2589)
 	{
 		derpCreepy();
 		return;
 	}
-	else if (eventNo == 2590)
+	else if ( false  == 2590)
 	{
 		derpyParty();
 		return;
@@ -4864,7 +4856,7 @@ function doEvent(eventNo):void
 		chooseValaInBar();
 		return;
 	}
-	else if (eventNo == 2622)
+	else if ( false  == 2622)
 	{
 		cleansedFirstRemeet();
 		return;
@@ -4884,7 +4876,7 @@ function doEvent(eventNo):void
 		cleansedValaRepeatBrainFucking();
 		return;
 	}
-	else if (eventNo == 2626)
+	else if ( false  == 2626)
 	{
 		faerieOrgyFuck();
 		return;
@@ -5315,12 +5307,12 @@ function doEvent(eventNo):void
 		Scylla6();
 		return;
 	}
-	else if (eventNo == 2706)
+	else if ( false  == 2706)
 	{
 		Scylla6DUCK();
 		return;
 	}
-	else if (eventNo == 2707)
+	else if ( false  == 2707)
 	{
 		Scylla6SLOW();
 		return;
@@ -5700,7 +5692,7 @@ function doEvent(eventNo):void
 		rapeTheBeeMultiCockStuff();
 		return;
 	}
-	else if (eventNo == 2783)
+	else if ( false  == 2783)
 	{
 		gymDesc();
 		return;
@@ -5920,7 +5912,7 @@ function doEvent(eventNo):void
 		jasunSecks();
 		return;
 	}
-	else if (eventNo == 2827)
+	else if ( false  == 2827)
 	{
 		exploreShowers();
 		return;
@@ -6238,12 +6230,12 @@ function doEvent(eventNo):void
 		roxanneDrinkingContest();
 		return;
 	}
-	else if (eventNo == 2885)
+	else if ( false  == 2885)
 	{
 		lumiEnhanceGoldenSeed();
 		return;
 	}
-	else if (eventNo == 2886)
+	else if ( false  == 2886)
 	{
 		lumiEnhanceKanga();
 		return;
@@ -7398,12 +7390,12 @@ function doEvent(eventNo):void
 		ewLottieNo();
 		return;
 	}
-	else if (eventNo == 3111)
+	else if ( false  == 3111)
 	{
 		lottieElleThreesomeFirstTime();
 		return;
 	}
-	else if (eventNo == 3112)
+	else if ( false  == 3112)
 	{
 		fuckElleInsteadOfThatFatSlutFirstTime();
 		return;
@@ -7833,7 +7825,7 @@ function doEvent(eventNo):void
 		missingoSex4();
 		return;
 	}
-	else if (eventNo == 3198)
+	else if ( false  == 3198)
 	{
 		missingoSex5();
 		return;
@@ -8098,12 +8090,12 @@ function doEvent(eventNo):void
 		izzyMilkingMeinMilkersMya2();
 		return;
 	}
-	else if (eventNo == 3251)
+	else if ( false  == 3251)
 	{
 		AllowIzzyMilkerUse();
 		return;
 	}
-	else if (eventNo == 3252)
+	else if ( false  == 3252)
 	{
 		noMilkingMilky();
 		return;
@@ -8788,17 +8780,17 @@ function doEvent(eventNo):void
 		boobgartuanSurprise3();
 		return;
 	}
-	else if (eventNo == 3389)
+	else if ( false  == 3389)
 	{
 		carnalityArmorIsCoolShitToo();
 		return;
 	}
-	else if (eventNo == 3390)
+	else if ( false  == 3390)
 	{
 		retributionArmorIsCoolShit();
 		return;
 	}
-	else if (eventNo == 3391)
+	else if ( false  == 3391)
 	{
 		noThankYouSirIDontWantAwesomeArmors();
 		return;
