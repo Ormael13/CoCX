@@ -5,6 +5,7 @@
 	import flash.net.*;
 	import flash.events.*;
 	import classes.Image;
+	import flash.system.Security;
 	
 	/**
 	 * ...
