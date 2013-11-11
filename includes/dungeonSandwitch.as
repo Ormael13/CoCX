@@ -4038,7 +4038,7 @@ function ladyFucks():void {
 	
 	outputText("\n\nYou lean back against the rim, putting your arms up against the lip and letting the girl put her skills to use on you, your chest soon heaving and quivering to her every touch.  You barely notice as the girl's other hand vanishes beneath the milky waves, surely going to tend to herself as her tongue and fingers squeeze and caress your ");
 	if(player.lactationQ() >= 200) outputText("milky ");
-	outputText("teats in the most incredible ways.  You moan and groan as she tweaks and massages, suckles and kisses your rock-hard peaks, sending electric shivers of pleasure through your chest until your entire body quivers.  Almost unconsciously your wrap your [legs] around the milky girl's waist, holding her tighter and tighter against your sodden body, forcing as much of your [nipple] into her so wonderfully skilled mouth as you can.");
+	outputText("teats in the most incredible ways.  You moan and groan as she tweaks and massages, suckles and kisses your rock-hard peaks, sending electric shivers of pleasure through your chest until your entire body quivers.  Almost unconsciously you wrap your [legs] around the milky girl's waist, holding her tighter and tighter against your sodden body, forcing as much of your [nipple] into her so wonderfully skilled mouth as you can.");
 	
 	outputText("\n\nSoon, you can feel a strange pressure welling up through your tits.  It takes you a moment to recognize the boobgasm, but when it hits, you throw your head back in animalistic pleasure");
 	if(player.lactationQ() >= 200) outputText(", spraying milk all over yourself and the milkmaid who caused your explosive pleasure");
@@ -4061,7 +4061,7 @@ function drinkNFap():void {
 	if(player.hasVagina()) outputText("[vagina] and idly stroke your puffy, lust-engorged vulva");
 	else outputText("[cock] and idly stroke the turgid mass");
 	outputText(", inadvertently drawing a lewd moan from yourself.  The fat nipple stuffed in your mouth does an adequate job of muffling your pleasurable vocalizations");
-	if(player.hasCock()) outputText(", but it does little hide the swelling of [eachCock] - you have the milk for that");
+	if(player.hasCock()) outputText(", but it does little to hide the swelling of [eachCock] - you have the milk for that");
 	outputText(".");
 	
 	outputText("\n\nAn excited moan worms out of the inky slave-girl's puffy lips, a testament to the raw sensitivity of her milk-bloated jugs.  As your tongue swirls over the leaky nozzle's pebbly skin, she releases another breathy pant of delight.  The vocal tremors seem to coo all the way down to your loins, joining with your fingers' caresses to stir you to aching, trembling arousal.");
