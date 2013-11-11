@@ -91,7 +91,7 @@ function comfortUrtaAfterFamFamTalk():void {
 	if(urtaDrunk()) outputText("boozy ");
 	outputText("kiss on your lips as she hugs you tight - tight enough that you feel every vein through the concealing silk of her outfit.  \"<i>I'm a lucky girl.</i>\"");
 	
-	outputText("\n\nYou return the hug with every fiber of your being, holding her tight.  Nuzzling at your neck, Urta lets her head come rest on your shoulder.  Her eyes slowly close as she says, \"<i>Just... hold me, " + player.short + ".</I>\"  As if you were going to do anything else.  You cradle the abused vixen for as long as she needs, which turns out to be long enough for her throbbing erection to actually recede, forgotten for the time being.");
+	outputText("\n\nYou return the hug with every fiber of your being, holding her tight.  Nuzzling at your neck, Urta lets her head come to rest on your shoulder.  Her eyes slowly close as she says, \"<i>Just... hold me, " + player.short + ".</I>\"  As if you were going to do anything else!  You cradle the abused vixen for as long as she needs, which turns out to be long enough for her throbbing erection to actually recede, forgotten for the time being.");
 	outputText("\n\n\"<i>Thanks, " + player.short + ",</i>\" Urta says as she pulls back, giving your hand a gentle squeeze, \"<i>I didn't know how badly I needed that.</i>\"  She sits back down and explains, \"<i>I'll be fine now, I think.  Thanks again.</i>\"");
 	
 	outputText("\n\nNodding, you give the girl a smile as you stand up to depart.  Her eyes twinkle happily as she watches you go.");
