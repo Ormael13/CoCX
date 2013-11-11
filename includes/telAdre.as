@@ -1426,31 +1426,48 @@ function gymDesc():void {
 
 function gymMenu():void {
 	
-	var membership:Number = 0;
-	var cotton:Number = 0;
+	var membership = 0;
+	var cotton = 0;
 	var cottonB:String = "Horsegirl";
-	var hyena:Number = 0;
+	var hyena = 0;
 	var hyenaB:String = "Hyena";
-	var ifris:Number = 0;
+	var ifris = 0;
 	var ifrisB:String = "Girl";
-	var lottie:Number = lottieAppearance(false);
+	var lottie = lottieAppearance(false);
 	var lottieB:String = "Pig-Lady";
-	var loppe:int = 0;
-	if(flags[UNKNOWN_FLAG_NUMBER_00281] > 0) lottieB = "Lottie";
-	if(ifrisIntro()) ifris = 2845;
-	if(flags[MET_IFRIS] > 0) ifrisB = "Ifris";
+	var loppe = 0;
+	if(flags[UNKNOWN_FLAG_NUMBER_00281] > 0) 
+		lottieB = "Lottie";
+	if(ifrisIntro()) 
+		ifris = approachIfris;
+	if(flags[MET_IFRIS] > 0) 
+		ifrisB = "Ifris";
 	if(hours > 9 && hours <= 15) {
-		hyena = 2844;
-		if(flags[MET_HECKEL] > 0) hyenaB = "Heckel";
+		hyena = greetHeckel;
+		if(flags[MET_HECKEL] > 0) 
+			hyenaB = "Heckel";
 	}
-	if(flags[UNKNOWN_FLAG_NUMBER_00167] == 0 && player.gems >= 500) membership = 2784;
+	if(flags[UNKNOWN_FLAG_NUMBER_00167] == 0 && player.gems >= 500) 
+		membership = buyGymLifeTimeMembership;
 	if(flags[PC_IS_A_DEADBEAT_COTTON_DAD] == 0) {
-		if(cottonsIntro()) cotton = 2808;
+		if(cottonsIntro()) 
+			cotton = cottonGreeting;
 	}
-	if(flags[UNKNOWN_FLAG_NUMBER_00177] > 0) cottonB = "Cotton";
-	if(flags[LOPPE_MET] > 0 && flags[LOPPE_DISABLED] == 0) loppe = 3976;
+	if(flags[UNKNOWN_FLAG_NUMBER_00177] > 0) 
+		cottonB = "Cotton";
+	if(flags[LOPPE_MET] > 0 && flags[LOPPE_DISABLED] == 0) 
+		loppe = loppeGenericMeetings;
 	
-	choices("ChangeRoom",changingRoom,cottonB,cotton,hyenaB,hyena,ifrisB,ifris,"Jog",goJogging,"LiftWeights",weightLifting,"Life Member",membership,"Lottie",lottie,"Loppe",loppe,"Leave",telAdreMenu);
+	choices("ChangeRoom",changingRoom,
+			cottonB,cotton,
+			hyenaB,hyena,
+			ifrisB,ifris,
+			"Jog",goJogging,
+			"LiftWeights",weightLifting,
+			"Life Member",membership,
+			"Lottie",lottie,
+			"Loppe",loppe,
+			"Leave",telAdreMenu);
 }
 
 function buyGymLifeTimeMembership():void {
