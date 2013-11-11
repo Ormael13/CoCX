@@ -829,7 +829,7 @@ function amilyAndJojoFuck():void {
 }
 
 // Hurray var/function hoisting.
-this.semiglobalReferencer.jojoRape = jojoRape;
+//this.semiglobalReferencer.jojoRape = jojoRape;
 
 function jojoRape():void {
 	jojoSprite();

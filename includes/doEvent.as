@@ -99,8 +99,8 @@ function doEvent(eventNo):void
 	else if (eventNo == 2004)
 	{
 		jojoSprite();
-		//jojoRape();
-		this.semiglobalReferencer.jojoRape();
+		jojoRape();
+		//this.semiglobalReferencer.jojoRape();
 		doNext(13);
 		return;
 	}
@@ -2308,7 +2308,7 @@ function doEvent(eventNo):void
 			return;
 		}
 		var jojoDefense:String = "N.Watch:";
-		var jojoRape:Number = 0;
+		var jojoRapeFuncNum:Number = 0;
 		outputText("You find Jojo sitting cross-legged on a flat rock with his staff leaning against his shoulder, thinking.  He looks to you and nods, \"<i>Greetings, " + player.short + ".  Is there something I could do to assist you?</i>\"\n\n", true);
 		if (player.hasStatusAffect("JojoNightWatch") >= 0)
 		{
@@ -2318,18 +2318,18 @@ function doEvent(eventNo):void
 		else
 			jojoDefense += "Off";
 		if (player.lust >= 33 && player.gender > 0)
-			jojoRape = 2153;
+			jojoRapeFuncNum = 2153;
 		//Menu with worm purge
 		if (player.hasStatusAffect("infested") >= 0)
 		{
 			outputText("As you approach the serene monk, you see his nose twitch.\n\n", false);
 			outputText("\"<i>It seems that the agents of corruption have taken residence within the temple that is your body,</i>\" Jojo says flatly, \"<i>This is a most unfortunate development. There is no reason to despair as there are always ways to fight the corruption. However, great effort will be needed to combat this form of corruption and may have a lasting impact upon you. If you are ready, we can purge your being of the rogue creatures of lust.</i>\"\n\n", false);
-			simpleChoices("Meditate", 2151, jojoDefense, 2152, "Purge", 2083, "Rape", jojoRape, "Leave", 74);
+			simpleChoices("Meditate", 2151, jojoDefense, 2152, "Purge", 2083, "Rape", jojoRapeFuncNum, "Leave", 74);
 			return;
 		}
 		//normal menu
 		else
-			simpleChoices("Meditate", 2151, jojoDefense, 2152, "", 0, "Rape", jojoRape, "Leave", 74);
+			simpleChoices("Meditate", 2151, jojoDefense, 2152, "", 0, "Rape", jojoRapeFuncNum, "Leave", 74);
 		return;
 	}
 	//New meditate
