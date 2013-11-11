@@ -233,7 +233,7 @@ function debugPane():void
 	outputText("\nCurrently have " + images.getLoadedImageCount() + " images loaded into cache.");
 
 	//outputText("<img src='./img/Yoh-SL_Ceraph.png' width='300' height='400' align='left'>")
-	outputText(images.showImage("Yoh-SL_Ceraph"));
+	outputText(images.showImage("monster-ceraph"));
 	outputText("\nBottom of screen");
 	
 	doNext(mainMenu);

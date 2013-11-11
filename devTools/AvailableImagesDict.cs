@@ -17,7 +17,7 @@ namespace AvailableImagesDict
         static void Main(string[] args)
         {
             DirSearch(@"../includes");
-            File.WriteAllLines(@"./allImages.txt", imageIDs);
+            File.WriteAllLines(@"./allImages.txt", imageIDs.Concat(monsterNames));
 
             BuildXMLFile();
 
@@ -60,7 +60,7 @@ namespace AvailableImagesDict
                             if (!imageIDs.Contains(match.Groups[1].Value))
                             {
                                 Console.WriteLine("Found {0}", match.Groups[1].Value);
-                                monsterNames.Add(match.Groups[1].Value);
+                                monsterNames.Add("monster-" + match.Groups[1].Value);
                             }
                         }
                     }
@@ -102,8 +102,8 @@ namespace AvailableImagesDict
                     foreach (string fileType in filters)
                     {
                         writer.WriteStartElement("Image");
-                        writer.WriteAttributeString("id", "monster-" + monsterNames[i]);
-                        writer.WriteString("./img/monster-" + monsterNames[i] + "." + fileType);
+                        writer.WriteAttributeString("id", monsterNames[i]);
+                        writer.WriteString("./img/" + monsterNames[i] + "." + fileType);
                         writer.WriteEndElement();
                     }
                 }
@@ -114,7 +114,8 @@ namespace AvailableImagesDict
             }
             catch (Exception e)
             {
-                
+                Console.WriteLine("Some broke while creating the XML file");
+                Console.WriteLine(e.Message);
             }
         }
     }
