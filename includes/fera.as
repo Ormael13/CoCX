@@ -361,7 +361,7 @@ function fuckDemCorruptFlowerLips():void {
 function dickBoostingFuntimes():void {
 	clearOutput();
 	outputText("You hang there, suspended, spread-eagled, and with your dick [sheath]-deep in a giant pair of fuck-hungry lips as the goddess circles you, running her dagger-sharp nails gently across your " + player.skinFurScales() + " until she stands behind you, arms wrapped around your [chest] and squeezing. She nips at your ear, biting it gently but getting no response from your blissed out, drug-ravaged body.");
-	outputText("\n\n\"<i>Suck,</i>\" the goddess commands authoritatively to the flower, and to you, she bades, \"<i>Fuck.</i>\"");
+	outputText("\n\n\"<i>Suck,</i>\" the goddess commands authoritatively to the flower, and to you, she bids, \"<i>Fuck.</i>\"");
 	outputText("\n\nThose beautifully plump flower-lips compress down more tightly, sealing perfectly around your length");
 	if(player.cockTotal() > 1) outputText("s");
 	outputText(" just in time to take the first thrust from your hips, burying yourself into them and immediately pulling back, setting an easy, average rhythm.  At the same time, the suction starts, causing your ");
