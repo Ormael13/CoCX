@@ -18,7 +18,7 @@ var version:String = "v0.8.3d3 (<b>Open Source Fixes + Image Pack Support</b>)";
 //Indicates if building for mobile?
 var mobile:Boolean = false;
 
-var images:ImageManager = new ImageManager();
+var images:ImageManager = new ImageManager(stage);
 //} endregion
 
 /**

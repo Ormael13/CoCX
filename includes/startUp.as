@@ -2,9 +2,8 @@
 //Keyboard listener!
 stage.addEventListener(KeyboardEvent.KEY_DOWN, keyboard);
 
-function hideThisButton(e:MouseEvent):void
-{
-	e.target.visible = false;
+function hideThisButton(e:MouseEvent):void{
+	e.target.visible=false;
 }
 
 mouseOverText.type = TextFieldType.DYNAMIC;
@@ -42,9 +41,9 @@ nameBox.visible = false;
 //Call up the title screen
 mainMenu();
 
+
 //MainMenu - kicks player out to the main menu
-function mainMenu(e:MouseEvent = undefined):void
-{
+function mainMenu(e:MouseEvent = undefined):void {
 	eventTestInput.x = -10207.5;
 	eventTestInput.y = -1055.1;
 	hideStats();
@@ -69,44 +68,47 @@ function mainMenu(e:MouseEvent = undefined):void
 	statsText.visible = false;
 	//Sets game state to 3, used for determining back functionality of save/load menu.
 	gameState = 3;
+
 	
 	outputText("<b>Corruption of Champions (" + version + ")</b>\n(Formerly Unnamed Text Game)", true);
 	
+
+	
 	/*
-	   // This junk was for testing my new parser. It can be removed, I think.
-	   // I still have a few parser tweaks I want to do, though.
-	   // Really, I should have a "test parser" button, but LAZY
+	// This junk was for testing my new parser. It can be removed, I think. 
+	// I still have a few parser tweaks I want to do, though.
+	// Really, I should have a "test parser" button, but LAZY
 	
-	   outputText("\n\n", false);
+	outputText("\n\n", false);
 	
-	   outputText("[if (hasCock = true) [cock] stiffening][if (isHerm = true)  and ][if (hasVagina = true) [vagina] starting to burn with need] DERP [cock biggest] HERP [armor] LOLWUT  [balls] ");
-	   outputText("[If (hours > 19) Hug | Cuddle]\n");
-	   outputText("\n\n", false);
+	outputText("[if (hasCock = true) [cock] stiffening][if (isHerm = true)  and ][if (hasVagina = true) [vagina] starting to burn with need] DERP [cock biggest] HERP [armor] LOLWUT  [balls] ");
+	outputText("[If (hours > 19) Hug | Cuddle]\n");
+	outputText("\n\n", false);
+
 	
+	outputText("[LOL[WUT]] [herp] [DERP] BLARGH [if (0 == 0) HARBLE]\n\n", false);
+	outputText("[r[e[c[u[r[s[i[v[e[lol][cock]]t]a]g[rofl][copter]]b]o]m]i]n][a][t[io]n]\n", false);
 	
-	   outputText("[LOL[WUT]] [herp] [DERP] BLARGH [if (0 == 0) HARBLE]\n\n", false);
-	   outputText("[r[e[c[u[r[s[i[v[e[lol][cock]]t]a]g[rofl][copter]]b]o]m]i]n][a][t[io]n]\n", false);
+	outputText("[if [ [ (4==4) HERP|DERP]\n", false);
+	outputText("[if (4 == 7) HERP|DERP]\n", false);
 	
-	   outputText("[if [ [ (4==4) HERP|DERP]\n", false);
-	   outputText("[if (4 == 7) HERP|DERP]\n", false);
-	
-	   outputText("[if (4==(2+2)) HERP|DERP]\n", false);
-	   outputText("[if (4==4) HERP|DERP]\n", false);
-	
-	   outputText("if (4==7) [if (4==7) HERP]\n", false);
-	   outputText("if (4==7) [if (4==7) HERP|DERP]\n", false);
-	   outputText("if (4=4) [if (4=4) HERP]\n", false);
-	   outputText("if (4==4) [if (4==4) HERP]\n", false);
-	   outputText("if (4==biggesttitsize) [if (4==biggesttitsize) [HERP [cock] [vagina] [balls]]]\n", false);
-	   outputText("if (analcapacity>3)    [if (analcapacity>3) [HERP [cock] [vagina] [balls]]]\n", false);
-	   outputText("if (analcapacity = 0)  [if (analcapacity = 0) [HERP [cock] [vagina] [balls]]]\n", false);
-	   outputText("if (analcapacity > 0)  [if (analcapacity > 0) [HERP [cock] [vagina] [balls]]]\n", false);
-	   outputText("Complex IF Statement thing: [if (hasCock = true) [cock] stiffening][if (isHerm = true) and ][if (hasVagina = true) [vagina] starting to burn with need]");
-	
-	
-	   outputText("\n\n", false);
-	 */
-	
+	outputText("[if (4==(2+2)) HERP|DERP]\n", false);
+	outputText("[if (4==4) HERP|DERP]\n", false);
+
+	outputText("if (4==7) [if (4==7) HERP]\n", false);
+	outputText("if (4==7) [if (4==7) HERP|DERP]\n", false);
+	outputText("if (4=4) [if (4=4) HERP]\n", false);
+	outputText("if (4==4) [if (4==4) HERP]\n", false);
+	outputText("if (4==biggesttitsize) [if (4==biggesttitsize) [HERP [cock] [vagina] [balls]]]\n", false);
+	outputText("if (analcapacity>3)    [if (analcapacity>3) [HERP [cock] [vagina] [balls]]]\n", false);
+	outputText("if (analcapacity = 0)  [if (analcapacity = 0) [HERP [cock] [vagina] [balls]]]\n", false);
+	outputText("if (analcapacity > 0)  [if (analcapacity > 0) [HERP [cock] [vagina] [balls]]]\n", false);
+	outputText("Complex IF Statement thing: [if (hasCock = true) [cock] stiffening][if (isHerm = true) and ][if (hasVagina = true) [vagina] starting to burn with need]");
+
+
+	outputText("\n\n", false);
+	*/
+
 	outputText("\n\n<u>Created by: Fenoxo</u>", false);
 	outputText("\nEdited By: Ashi, SoS, Zeikfried, and Others", false);
 	outputText("\nOpen-source version modifications by: \nAmygdaloidnucleus/Amygdala, Hoffledop/Yoffy, Herp-a-derp/Fake-Name, Cmacleod42", false);
@@ -117,227 +119,134 @@ function mainMenu(e:MouseEvent = undefined):void
 	outputText("\n\nFor more information see Fenoxo's Blog at <b><u><a href='http://www.fenoxo.com/'>fenoxo.com</a></u></b>.", false);
 	outputText("\n\nAlso go play <u><a href='http://www.furaffinity.net/view/9830293/'>Nimin</a></u> by Xadera on furaffinity.\n\n", false);
 	
-	if (debug)
-		outputText("\n\n<b>DEBUG MODE ENABLED:  ITEMS WILL NOT BE CONSUMED BY USE.</b>", false);
-	if (flags[SHOW_SPRITES_FLAG])
-		outputText("\n\n<b>Sprites disabled.</b>", false);
-	if (flags[EASY_MODE_ENABLE_FLAG])
-		outputText("\n\n<b>Easy Mode On:  Bad-ends can be ignored.</b>", false);
-	if (flags[SILLY_MODE_ENABLE_FLAG])
-		outputText("\n\n<b>SILLY MODE ENGAGED: Crazy, nonsensical, and possibly hilarious things may occur.</b>", false);
-	if (isEaster())
-		outputText("\n\n<b>It's Easter!  Enjoy the eggs!</b>");
-	if (isValentine())
-		outputText("\n\n<b>It's Valentine's!</b>");
-	if (isHeliaBirthday())
-		outputText("\n\n<b>It's Helia's Birthday Month!</b>");
 	
+	if(debug) 
+		outputText("\n\n<b>DEBUG MODE ENABLED:  ITEMS WILL NOT BE CONSUMED BY USE.</b>", false);
+	if(flags[SHOW_SPRITES_FLAG]) 
+		outputText("\n\n<b>Sprites disabled.</b>", false);
+	if(flags[EASY_MODE_ENABLE_FLAG]) 
+		outputText("\n\n<b>Easy Mode On:  Bad-ends can be ignored.</b>", false);
+	if(flags[SILLY_MODE_ENABLE_FLAG]) 
+		outputText("\n\n<b>SILLY MODE ENGAGED: Crazy, nonsensical, and possibly hilarious things may occur.</b>", false);
+	if(isEaster()) 
+		outputText("\n\n<b>It's Easter!  Enjoy the eggs!</b>");
+	if(isValentine()) 
+		outputText("\n\n<b>It's Valentine's!</b>");
+	if(isHeliaBirthday()) 
+		outputText("\n\n<b>It's Helia's Birthday Month!</b>");
+
+
 	var resume:Number = 0;
-	if (player.str > 0) //we're in a game, allow resume.
+	if(player.str > 0)  //we're in a game, allow resume.
 		resume = 1;
 	
+
 	// I really wanted to only have the "imageCreditsScreen" button if images were found, but it turns out
 	// that if you check if any images were found immediately when this screen is shown, you get 0
 	// since the images haven't loaded yet.
 	// Therefore, the imageCreditScreen will just have to say "No image pack" if you don't have any images
-	
+
 	//The world isn't quite ready for the ASPLODE button. Uncomment for easy bug reporter testing.
 	//choices("",  0, "Credits", creditsScreen, "Instructions", howToPlay, "", 0, "", 0, "ASPLODE", 9000000000, "", 0, "", 0, "Settings", settingsScreen, "Resume", resume);
-	choices("", 0, "Image Credits", imageCreditsScreen, "Credits", creditsScreen, "", 0, "Instructions", howToPlay, "Debug Info", debugPane, "", 0, "", 0, "Settings", settingsScreen, "Resume", resume);
-
+	choices("",  0, 
+			"Image Credits", imageCreditsScreen, 
+			"Credits", creditsScreen, 
+			"", 0, 
+			"Instructions", howToPlay, 
+			"Debug Info", debugPane, 
+			"", 0, 
+			"", 0, 
+			"Settings", settingsScreen, 
+			"Resume", resume);
+		
 }
 
-import flash.display.BitmapData;
-import flash.display.DisplayObject;
-import flash.display.Loader;
-import flash.events.Event;
-import flash.geom.Point;
-import flash.geom.Rectangle;
 import flash.system.SecurityDomain;
-import flash.system.Security;
-;
-import flash.text.TextFormat;
-import flash.text.TextLineMetrics;
+import flash.system.Security;;
 
-function settingsScreen():void
-{
+function settingsScreen():void {
 	outputText("<b>Settings toggles:</b>\n", true);
-	
-	if (debug)
+
+	if(debug) 
 		outputText("Debug mode enabled: <b>Yes</b>\n	Items will not be consumed by use, fleeing always succeeds, and bad-ends can be ignored.", false);
 	else
 		outputText("Debug mode enabled: <b>No</b>\n	Items consumption will occur as normal.", false);
-	
+
 	outputText("\n\n", false);
-	
-	if (flags[SHOW_SPRITES_FLAG] == 0)
+
+	if(flags[SHOW_SPRITES_FLAG] == 0) 
 		outputText("Sprites enabled: <b>Yes</b>.\n	You like to look at pretty pictures.", false);
 	else
 		outputText("Sprites enabled: <b>No</b>.\n	There are only words. Nothing else.", false);
-	
+
 	outputText("\n\n", false);
-	
-	if (flags[EASY_MODE_ENABLE_FLAG])
+
+	if(flags[EASY_MODE_ENABLE_FLAG]) 
 		outputText("Easy Mode <b>On</b>\n	Bad-ends can be ignored and combat is easier.", false);
 	else
 		outputText("Easy Mode <b>Off</b>\n	Bad-ends can ruin your game and combat is challenging.", false);
-	
+		
 	outputText("\n\n", false);
-	
-	if (flags[SILLY_MODE_ENABLE_FLAG])
+
+	if(flags[SILLY_MODE_ENABLE_FLAG]) 
 		outputText("Silly Mode <b>On</b>\n	Crazy, nonsensical, and possibly hilarious things may occur.", false);
 	else
 		outputText("Silly Mode <b>Off</b>\n	You're an incorrigable stick-in-the-mud with no sense of humor.", false);
-	
+
 	outputText("\n\n", false);
 	outputText("<b>The following flags are not fully implemeneted yet.</b>", false);
 	outputText("\n\n", false);
-	
-	if (flags[LOW_STANDARDS_FOR_ALL])
+
+	if(flags[LOW_STANDARDS_FOR_ALL]) 
 	{
 		outputText("Low standards Mode <b>On</b>\n	NPCs ignore body type preferences.", false);
 		outputText("\n	(Not gender preferences though. You still need the right hole.)", false);
 	}
 	else
 		outputText("Low standards Mode <b>Off</b>\n	NPCs have body-type preferences.", false);
-	
+
+
 	outputText("\n\n", false);
-	
-	if (flags[HYPER_HAPPY])
+
+	if(flags[HYPER_HAPPY]) 
 	{
 		outputText("Hyper Happy mode <b>On</b>\n	Only reducto and humus shrink endowments.", false);
 		outputText("\n	Incubus draft doesn't affect breasts, and succubi milk doesn't affect cocks.")
 	}
 	else
 		outputText("Hyper Happy mode <b>Off</b>\n	Male enhancement potions shrink female endowments, and vice versa.", false);
-	
-	choices("Toggle Debug", toggleDebug, "Sprite Toggle", toggleSpritesFlag, "EZ Mode", toggleEasyModeFlag, "Silly Toggle", toggleSillyFlag, "Null", 0, "Hyper Happy", toggleHyperHappy, "Low Standards", toggleStandards, "Null", 0, "Null", 0, "Back", mainMenu);
+
+	choices("Toggle Debug", toggleDebug, 
+			"Sprite Toggle", toggleSpritesFlag, 
+			"EZ Mode", toggleEasyModeFlag, 
+			"Silly Toggle", toggleSillyFlag, 
+			"Null", 0, 
+			"Hyper Happy", toggleHyperHappy, 
+			"Low Standards", toggleStandards, 
+			"Null", 0, 
+			"Null", 0, 
+			"Back", mainMenu);
 }
 
 function debugPane():void
 {
 	outputText("<b>Debug information!</b>\n", true);
-	
+
 	outputText("\nCurrent Sandbox mode: <b>" + Security.sandboxType + "</b>");
-	
+
 	outputText("\nCurrently have " + images.getLoadedImageCount() + " images loaded into cache.");
-	
-	outputText("\nBumping this image down for test purposes.");
-	outputText("\nBumping this image down for test purposes.");
-	outputText("\nBumping this image down for test purposes.");
-	outputText("\nBumping this image down for test purposes.");
-	outputText("\nBumping this image down for test purposes.");
-	outputText("\nBumping this image down for test purposes.");
-	outputText("\nBumping this image down for test purposes.");
-	outputText("\nBumping this image down for test purposes.");
-	outputText("\nBumping this image down for test purposes.");
-	outputText("\nBumping this image down for test purposes.");
-	outputText("\nBumping this image down for test purposes.");
-	
+
 	outputText(images.showImage("monster-ceraph"));
-	fixupImage();
-	
-	outputText("\nBumping this image down for test purposes.");
-	outputText("\nBumping this image down for test purposes.");
-	outputText("\nBumping this image down for test purposes.");
-	outputText("\nBumping this image down for test purposes.");
-	outputText("\nBumping this image down for test purposes.");
-	outputText("\nBumping this image down for test purposes.");
-	outputText("\nBumping this image down for test purposes.");
-	outputText("\nBumping this image down for test purposes.");
-	outputText("\nBumping this image down for test purposes.");
-	outputText("\nBumping this image down for test purposes.");
-	outputText("\nBumping this image down for test purposes.");
-	outputText("\nBumping this image down for test purposes.");
-	
-	outputText("\nThese lines should push the text past the bottom of the image, and not fuck up the padding.");
-	outputText("\nThese lines should push the text past the bottom of the image, and not fuck up the padding.");
-	outputText("\nThese lines should push the text past the bottom of the image, and not fuck up the padding.");
-	outputText("\nThese lines should push the text past the bottom of the image, and not fuck up the padding.");
-	outputText("\nThese lines should push the text past the bottom of the image, and not fuck up the padding.");
-	outputText("\nThese lines should push the text past the bottom of the image, and not fuck up the padding.");
-	outputText("\nThese lines should push the text past the bottom of the image, and not fuck up the padding.");
-	outputText("\nThese lines should push the text past the bottom of the image, and not fuck up the padding.");
-	outputText("\nThese lines should push the text past the bottom of the image, and not fuck up the padding.");
-	outputText("\nThese lines should push the text past the bottom of the image, and not fuck up the padding.");
 	
 	doNext(mainMenu);
-}
-
-// Checking for the image refernece immediately after adding it to the htmlText doesn't work (will return null)
-// Add a frame entry event that we can hang off of until we find the image
-function fixupImage():void
-{
-	stage.addEventListener(Event.ENTER_FRAME, fixupListener);
-}
-
-function fixupListener(e:Event)
-{
-	var gotImage:Boolean = false;
-	
-	if (mainText != null)
-	{
-		var imgRef = mainText.getImageReference("img");
-		if (imgRef != null)
-		{
-			imgRef.contentLoaderInfo.addEventListener(Event.COMPLETE, doFixup);
-			
-			gotImage = true;
-		}
-		else
-		{
-			trace("no image yet...");
-		}
-	}
-	
-	if (gotImage)
-	{
-		// We're done, toss the event listener
-		stage.removeEventListener(Event.ENTER_FRAME, fixupListener);
-	}
-}
-
-function doFixup(e:Event)
-{
-	// Remove the Completion event listener
-	e.target.removeEventListener(Event.COMPLETE, doFixup);
-	var imgRef:Loader = e.target.loader as Loader;
-	
-	var imgRefTopY:int = imgRef.getBounds(mainText).y; // 272
-	var imgHeight:int = images.getImageHeight(imgRef.contentLoaderInfo.url); // 400
-	var imgRefBottomY:int = imgRefTopY + imgHeight;
-	var totalTextHeight:int = mainText.textHeight; // 264 -- Total displayed pixel height of text
-	
-	if (totalTextHeight > imgRefBottomY)
-	{
-		// Total displayed text height should be larger than the image
-		return;
-	}
-	
-	// Here comes the bullshit... get ready
-	var txFormat:TextFormat = mainText.defaultTextFormat;
-	var lineHeight:int = txFormat.size as int;
-	lineHeight += 4;
-	var padLines:int = Math.ceil((imgRefBottomY - totalTextHeight) / lineHeight);
-	
-	trace("Need " + padLines + " padding lines");
-	
-	// Generate the paddings
-	var padding:String = "";
-	for (var i:int = 0; i < padLines; i++)
-	{
-		padding += "\n";
-	}
-	
-	mainText.htmlText += padding;
 }
 
 function toggleStandards():void
 {
 	//toggle debug
-	if (flags[LOW_STANDARDS_FOR_ALL])
+	if(flags[LOW_STANDARDS_FOR_ALL]) 
 		flags[LOW_STANDARDS_FOR_ALL] = false;
-	else
+	else 
 		flags[LOW_STANDARDS_FOR_ALL] = true;
 	settingsScreen();
 	return;
@@ -346,9 +255,9 @@ function toggleStandards():void
 function toggleHyperHappy():void
 {
 	//toggle debug
-	if (flags[HYPER_HAPPY])
+	if(flags[HYPER_HAPPY]) 
 		flags[HYPER_HAPPY] = false;
-	else
+	else 
 		flags[HYPER_HAPPY] = true;
 	settingsScreen();
 	return;
@@ -357,9 +266,9 @@ function toggleHyperHappy():void
 function toggleDebug():void
 {
 	//toggle debug
-	if (debug)
+	if(debug) 
 		debug = false;
-	else
+	else 
 		debug = true;
 	dataBG.visible = true;
 	dataText.visible = true;
@@ -369,22 +278,22 @@ function toggleDebug():void
 
 function toggleEasyModeFlag():void
 {
-	if (flags[EASY_MODE_ENABLE_FLAG] == 0)
+	if(flags[EASY_MODE_ENABLE_FLAG] == 0) 
 		flags[EASY_MODE_ENABLE_FLAG] = 1;
-	else
+	else 
 		flags[EASY_MODE_ENABLE_FLAG] = 0;
 	settingsScreen();
 	dataBG.visible = true;
 	dataText.visible = true;
 	settingsScreen();
-	return;
+	return;	
 }
 
 function toggleSpritesFlag():void
 {
-	if (flags[SHOW_SPRITES_FLAG])
+	if(flags[SHOW_SPRITES_FLAG]) 
 		flags[SHOW_SPRITES_FLAG] = false;
-	else
+	else 
 		flags[SHOW_SPRITES_FLAG] = true;
 	settingsScreen();
 	return;
@@ -392,18 +301,18 @@ function toggleSpritesFlag():void
 
 function toggleSillyFlag():void
 {
-	
-	if (flags[SILLY_MODE_ENABLE_FLAG])
+
+	if(flags[SILLY_MODE_ENABLE_FLAG])
 		flags[SILLY_MODE_ENABLE_FLAG] = false;
-	else
+	else 
 		flags[SILLY_MODE_ENABLE_FLAG] = true;
 	settingsScreen();
 	return;
-
+	
 }
 
-function creditsScreen():void
-{
+
+function creditsScreen():void {
 	outputText("<b>Coding and Main Events:</b>\n", true);
 	outputText("<ul>");
 	outputText("<li> Fenoxo</li>\n");
@@ -416,8 +325,7 @@ function creditsScreen():void
 	outputText("</ul>");
 	outputText("");
 	outputText("<b>Graphical Prettiness:</b>")
-	outputText("<ul>");
-	;
+	outputText("<ul>");;
 	outputText("<li> Dasutin (Background Images)</li>");
 	outputText("<li> Invader (Button Graphics, Font, and Other Hawtness)</li>");
 	outputText("</ul>");
@@ -468,7 +376,7 @@ function creditsScreen():void
 	outputText("<li> Foxxling (Akbal)</li>");
 	outputText("<li> Elfensyne (Phylla)</li>");
 	outputText("<li> Radar (Dominating Sand Witches, Some Phylla)</li>");
-	outputText("<li> Jokester (Sharkgirls, Izma, & Additional Amily Scenes)</li>");
+	outputText("<li> Jokester (Sharkgirls, Izma, & Additional Amily Scenes)</li>");	
 	outputText("<li> Lukadoc (Additional Izma, Ceraph Followers Corrupting Gangbang, Satyrs, Ember)</li>");
 	outputText("<li> Bob (Additional Izma)</li>");
 	outputText("<li> lh84 (Various Typos and Code-Suggestions)</li>");
@@ -527,18 +435,17 @@ function creditsScreen():void
 	outputText("<li> Eliria (Bee Laying Eggs in Bunny-Girls)</li>");
 	outputText("</ul>");
 	outputText("\nIf I'm missing anyone, please contact me ASAP!  I have done a terrible job keeping the credits up to date!");
-	doNext(mainMenu);
+	doNext(mainMenu);	
 }
 
-function imageCreditsScreen():void
+function imageCreditsScreen():void 
 {
-	
+
 	if (images.getLoadedImageCount() > 0)
 	{
 		outputText("<b>Bundled Image Credits:</b>\n", true);
 		outputText("<b>Yoh-SL</b>")
-		outputText("<ul>");
-		;
+		outputText("<ul>");;
 		outputText("<li> Bee-Girl Monster Image</li>");
 		outputText("<li> Goo-Girl Monster Image</li>");
 		outputText("<li> Ceraph Monster Image</li>");
@@ -549,11 +456,10 @@ function imageCreditsScreen():void
 	{
 		outputText("<b>No Image-Pack Found!</b>\n", true);
 	}
-	doNext(mainMenu);
+	doNext(mainMenu);	
 }
 
-function howToPlay():void
-{
+function howToPlay():void {
 	outputText("", true);
 	outputText("<b><u>How To Play:</u></b>\nClick the buttons corresponding to the actions you want to take.  Your 'goal' is to obviously put an end to the demonic corruption around you, but do whatever the hell you want.  There is a story but sometimes it's fun to ignore it.\n\n", false);
 	outputText("<b>Exploration:</b>\nThe lake is a safe zone when you start the game.  It's a good place to explore, and Whitney's farm can offer some nice stat boosts to help get you on your feet. Once you feel comfortable, the forest is probably the next safest area, but beware of tentacle monsters.  The desert is the next toughest area, and the mountains offer further challenges.  There are more areas beyond that, but that's a good way to get started.  You'll uncover plenty of new 'places' exploring, which can be accessed from the <b>Places</b> menu.  You'll also find some interesting characters when you try to discover new explorable locations by choosing <b>Explore</b> twice.\n\n", false);
@@ -563,12 +469,11 @@ function howToPlay():void
 	doNext(mainMenu);
 }
 
-function eventTester():void
-{
+function eventTester():void {
 	outputText("", true);
 	eventTestInput.x = 207.5;
 	eventTestInput.y = 55.1;
 	//eventTestInput.text = "Paste test event text here.";
-	simpleChoices("Proceed", 118, "", 0, "", 0, "", 0, "Back", 119);
+	simpleChoices("Proceed",118,"",0,"",0,"",0,"Back",119);
 }
-
+	
