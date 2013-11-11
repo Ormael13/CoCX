@@ -12,8 +12,8 @@
 var debug:Boolean = false;
 
 //Version NUMBER
-var ver:String = "0.8.3d3";
-var version:String = "v0.8.3d3 (<b>Open Source Fixes + Image Pack Support</b>)";
+var ver:String = "0.8.3d5";
+var version:String = "v0.8.3d5 (<b>Open Source Fixes + Image Pack Support</b>)";
 
 //Indicates if building for mobile?
 var mobile:Boolean = false;

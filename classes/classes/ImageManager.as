@@ -5,6 +5,7 @@
 	import flash.net.*;
 	import flash.events.*;
 	import classes.Image;
+	import flash.system.Security;
 	
 	/**
 	 * ...
@@ -27,8 +28,11 @@
 		
 		public function ImageManager()
 		{
-			trace("Creating Image File hashmap");
-			loadImageList();
+			if (Security.sandboxType != Security.REMOTE)
+			{
+				trace("Creating Image File hashmap");
+				loadImageList();
+			}
 		}
 		
 		public function loadImageList():void
