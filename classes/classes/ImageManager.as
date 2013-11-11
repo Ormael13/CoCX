@@ -27,8 +27,11 @@
 		
 		public function ImageManager()
 		{
-			trace("Creating Image File hashmap");
-			loadImageList();
+			if (Security.sandboxType != Security.REMOTE)
+			{
+				trace("Creating Image File hashmap");
+				loadImageList();
+			}
 		}
 		
 		public function loadImageList():void
