@@ -2145,7 +2145,7 @@ function getPenetratedByArianAndHisHitlerMustache():void {
 	
 	outputText("\n\nArian swallows audibly.  \"<i>Are you suggesting that we... and that I... put it in?</i>\"  Grinning, you nod in affirmation, telling " + arianMF("him","her") + " that there's no need to be shy about it... at least not since your relationship escalated to the current level.");
 	
-	outputText("\n\n\"<i>Ok... how do you want to this?</i>\"  You motion for the lizan to get up.  Arian eagerly complies and gets off " + arianMF("his","her") + " bed.  You teasingly take " + arianMF("his","her") + " place on the bed, looking up at " + arianMF("him","her") + " as you ");
+	outputText("\n\n\"<i>Ok... how do you want to do this?</i>\"  You motion for the lizan to get up.  Arian eagerly complies and gets off " + arianMF("his","her") + " bed.  You teasingly take " + arianMF("his","her") + " place on the bed, looking up at " + arianMF("him","her") + " as you ");
 	if(player.isBiped()) outputText("spread your [legs] and ");
 	outputText("expose your [vagina] to " + arianMF("his","her") + " viewing pleasure.  The reaction is almost instantaneous; Arian's ");
 	if(flags[ARIAN_COCK_SIZE] >= 3) outputText("exposed");
@@ -2159,7 +2159,7 @@ function getPenetratedByArianAndHisHitlerMustache():void {
 	
 	outputText("\n\nWith a smile, you tell " + arianMF("him","her") + " that despite " + arianMF("his","her") + " initial bout of shyness, " + arianMF("his","her") + " body seems to know exactly what to do.  Arian simply laughs in nervousness.  You wait for a short while, until finally you tell " + arianMF("him","her") + " that " + arianMF("he","she") + " should position " + arianMF("himself","herself") + " at your opening");
 	if(flags[ARIAN_DOUBLE_COCK] > 0) outputText("s");
-	outputText(" and get ready to thrust in; otherwise none of you are going to be feeling good any time soon.");
+	outputText(" and get ready to thrust in; otherwise neither of you are going to be feeling good any time soon.");
 	
 	outputText("\n\nSnapping to " + arianMF("his","her") + " senses, Arian quickly ");
 	outputText("kneels between your [legs]");
@@ -2228,7 +2228,7 @@ function getPenetratedByArianAndHisHitlerMustache():void {
 	
 	outputText("\n\nArian moans and shivers at the pleasure, but it doesn't stop " + arianMF("him","her") + " from catching on; indeed, " + arianMF("he","she") + " proves " + arianMF("him","her") + "self a quick study and starts to preempt your ‘instructions'.  \"<i>I-I can't tell you how incredible this is, [name].  You're so warm and wet inside,</i>\" " + arianMF("he","she") + " murmurs to you, too caught up in the sensations of sex to really flatter you.");
 	
-	outputText("\n\nYou moan alongside your lizan lover, replaying that " + arianMF("he","she") + " feels just as good.  " + arianMF("His","Her") + " ");
+	outputText("\n\nYou moan alongside your lizan lover, replying that " + arianMF("he","she") + " feels just as good.  " + arianMF("His","Her") + " ");
 	if(flags[ARIAN_DOUBLE_COCK] > 0) outputText("twin bulbous shafts feel");
 	else outputText("bulbous shaft feels");
 	outputText(" exquisite, and ");
