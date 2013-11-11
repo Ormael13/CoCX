@@ -140,6 +140,12 @@ function mainMenu(e:MouseEvent = undefined):void {
 	if(player.str > 0)  //we're in a game, allow resume.
 		resume = 1;
 	
+
+	// I really wanted to only have the "imageCreditsScreen" button if images were found, but it turns out
+	// that if you check if any images were found immediately when this screen is shown, you get 0
+	// since the images haven't loaded yet.
+	// Therefore, the imageCreditScreen will just have to say "No image pack" if you don't have any images
+
 	//The world isn't quite ready for the ASPLODE button. Uncomment for easy bug reporter testing.
 	//choices("",  0, "Credits", creditsScreen, "Instructions", howToPlay, "", 0, "", 0, "ASPLODE", 9000000000, "", 0, "", 0, "Settings", settingsScreen, "Resume", resume);
 	choices("",  0, 
@@ -209,8 +215,6 @@ function settingsScreen():void {
 	}
 	else
 		outputText("Hyper Happy mode <b>Off</b>\n	Male enhancement potions shrink female endowments, and vice versa.", false);
-
-
 
 	choices("Toggle Debug", toggleDebug, 
 			"Sprite Toggle", toggleSpritesFlag, 
@@ -434,15 +438,24 @@ function creditsScreen():void {
 	doNext(mainMenu);	
 }
 
-function imageCreditsScreen():void {
-	outputText("<b>Bundled Image Credits:</b>\n", true);
-	outputText("<b>Yoh-SL</b>")
-	outputText("<ul>");;
-	outputText("<li> Bee-Girl Monster Image</li>");
-	outputText("<li> Goo-Girl Monster Image</li>");
-	outputText("<li> Ceraph Monster Image</li>");
-	outputText("<li> Sand-Witch (and sandwich) Monster Images</li>");
-	outputText("</ul>");
+function imageCreditsScreen():void 
+{
+
+	if (images.getLoadedImageCount() > 0)
+	{
+		outputText("<b>Bundled Image Credits:</b>\n", true);
+		outputText("<b>Yoh-SL</b>")
+		outputText("<ul>");;
+		outputText("<li> Bee-Girl Monster Image</li>");
+		outputText("<li> Goo-Girl Monster Image</li>");
+		outputText("<li> Ceraph Monster Image</li>");
+		outputText("<li> Sand-Witch (and sandwich) Monster Images</li>");
+		outputText("</ul>");
+	}
+	else
+	{
+		outputText("<b>No Image-Pack Found!</b>\n", true);
+	}
 	doNext(mainMenu);	
 }
 
