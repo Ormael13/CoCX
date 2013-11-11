@@ -698,7 +698,7 @@ function talkToPigSlut():void {
 		//[Threesome][Elle][Oh I Get It]
 		comedy1 = 0;
 		if(silly()) comedy1 = 3113;
-		simpleChoices("Threesome",3111,"Just Elle",3112,"Oh,IGetIt!",comedy1,"",0,"",0);
+		simpleChoices("Threesome",lottieElleThreesomeFirstTime,"Just Elle",fuckElleInsteadOfThatFatSlutFirstTime,"Oh,IGetIt!",comedy1,"",0,"",0);
 	}
 	//[If Encouragement = 100, Figure = 100, first time]
 	else if(lottieMorale() == 100 && lottieTone() == 100 && flags[UNKNOWN_FLAG_NUMBER_00318] == 0) {

@@ -441,7 +441,7 @@ function exploreForest():void {
 			outputText("The angry visage of a lithe white mouse gazes down on your prone form with a look of confusion.", false);
 			outputText("\n\n\"<i>I'm sorry, I sensed a great deal of corruption, and thought a demon or monster had come to my woods,</i>\" says the mouse, \"<i>Oh, where are my manners!</i>\"\n\nHe helps you to your feet and introduces himself as Jojo.  Now that you have a good look at him, it is obvious this mouse is some kind of monk, dressed in robes, holy symbols, and draped with prayer beads.\n\nHe smiles knowingly, \"<i>Yes I am a monk, and yes this is a strange place for one such as I... this world was not always this way.  Long ago this world was home to many villages, including my own.  But then the demons came.  I'm not sure if they were summoned, created, or simply a perversion of magic or breeding, but they came swarming out of the mountains to destroy everything in their path.</i>\"", false);
 			outputText("\n\nJojo sighs sadly, \"<i>Enough of my woes.  You are very corrupted.  If you cannot be sufficiently purified you WILL become one of them in time.  Will you let me help you?", false);
-			if(player.gender > 0) simpleChoices("Accept", 2003, "Rape Him", 2004, "BWUH?", 0, "Decline", 13, "", 0);
+			if(player.gender > 0) simpleChoices("Accept", 2003, "Rape Him", jojoRape, "BWUH?", 0, "Decline", 13, "", 0);
 			else simpleChoices("Accept", 2003, "Rape Him", 0, "BWUH?", 0, "Decline", 13, "", 0);
 			return;
 		}
@@ -456,13 +456,13 @@ function exploreForest():void {
 				jojoSprite();
 				outputText("As you approach the serene monk, you see his nose twitch, disturbing his meditation.\n\n", true);
 				outputText("\"<i>It seems that the agents of corruption have taken residence within the temple that is your body.</i>\", Jojo says flatly. \"<i>This is a most unfortunate development. There is no reason to despair as there are always ways to fight the corruption. However, great effort will be needed to combat this form of corruption and may leave lasting impressions upon you. If you are ready, we can purge your being of the rogue creatures of lust.</i>\"\n\n", false);
-				if(player.gender > 0) simpleChoices("Purge",2083,"Meditate",2003,"Rape",2004,"",0,"Leave",13);
+				if(player.gender > 0) simpleChoices("Purge",2083,"Meditate",2003,"Rape",jojoRape,"",0,"Leave",13);
 				else simpleChoices("Purge",2083,"Meditate",2003,"Rape",0,"",0,"Leave",13);
 				return;
 			}
 			jojoSprite();
 			outputText("Jojo the monk appears before you, robes and soft white fur fluttering in the breeze.  He asks, \"<i>Are you ready for a meditation session?</i>\"", false);
-			if(player.gender > 0) simpleChoices("Yes", 2003, "No", 13, "BWUH", 0, "Rape Him", 2004, "", 0);
+			if(player.gender > 0) simpleChoices("Yes", 2003, "No", 13, "BWUH", 0, "Rape Him", jojoRape, "", 0);
 			else simpleChoices("Yes", 2003, "No", 13, "BWUH", 0, "Rape Him", 0, "", 0);
 		}
 		if(monk >= 2) {

@@ -1609,8 +1609,8 @@ function yaraSex(girl:Boolean = true):void {
 
 	outputText("She seems intent on getting some loving - would you like to turn her down, or will you let nature run its course?", false);
 	//[not at all] [yeah baby]
-	if(girl) simpleChoices("Turn down",2212,"Oh yeah!",3407,"",0,"",0,"",0);
-	else simpleChoices("Turn down",2212,"Oh yeah!",3408,"",0,"",0,"",0);
+	if(girl) simpleChoices("Turn down",piercingStudio,"Oh yeah!",3407,"",0,"",0,"",0);
+	else simpleChoices("Turn down",piercingStudio,"Oh yeah!",3408,"",0,"",0,"",0);
 }
 
 function letsDoYaraSex(girl:Boolean = true):void {

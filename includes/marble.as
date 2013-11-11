@@ -370,7 +370,7 @@ function encounterMarbleExploring():void {
 		//[if addiction is under 40]
 		if(player.statusAffectv2("Marble") < 40) {
 			"\n\nDo you drink her milk?"
-			doYesNo(drinkMarbleMilk,2091);
+			doYesNo(drinkMarbleMilk,playerRefusesMarbleMilk);
 			//player chooses yes/no
 			return;
 		}
@@ -471,14 +471,14 @@ function encounterMarbleExploring2():void {
 		if(player.hasStatusAffect("FuckedMarble") < 0) {
 			outputText("\n\nAs the two of you finish chatting, Marble gives you an intense look.  \"<i>You know that I really like you right, sweetie?  I'd like it if I can do something special with you,</i>\" she hesitates for a moment, \"<i>Will you come to my bed?</i>\"\n\nDo you accept her invitation?", false);
 			stats(0,0,0,0,0,0,10,0);
-			doYesNo(2092,turnDownMarbleSexFirstTime);
+			doYesNo(AcceptMarblesSexualAdvances,turnDownMarbleSexFirstTime);
 		}
 		//[affection >=60, player has had sex with Marble]
 		else {
 			outputText("\n\nAfter you finish talking, Marble gives you another intense look.  \"<i>Sweetie, will you come into my bed again?</i>\" You can feel a tingle in your groin at the thought of having sex with her again.\n\nDo you accept her invitation?", false);
 			//player chooses yes/no
 			stats(0,0,0,0,0,0,10,0);
-			doYesNo(2092,2093);
+			doYesNo(AcceptMarblesSexualAdvances,turnDownMarbleSexRepeat);
 		}
 	}
 }
@@ -517,6 +517,7 @@ function AcceptMarblesSexualAdvances():void {
 	marbleStatusChange(10,0);
 	//(increase player inte)
 	stats(0,0,0,1,0,0,0,0);
+	doNext(13);
 }
 
 //Help out Marble, version 1 (can occur anytime before the player becomes addicted):
@@ -608,7 +609,7 @@ function marbleAddiction(newPage:Boolean):void {
 	//(bold text)
 	outputText("<b>Marble's milk is addictive, and you are now addicted to it.</b>\n\n", false);
 	outputText("You pull back from her and look up into her eyes.  \"<i>Sweetie, how are you feeling?  Do you like drinking my milk?  Do you want to always drink my milk?</i>\" she says to you with uncertainty.  How do you reply?\n\n", false);
-	doYesNo(2095,2096);
+	doYesNo(wantMarbleAddiction,doNotWantMarbleAddiction);
 }
 
 //(player chose want)
@@ -680,7 +681,7 @@ function addictedEncounterHappy(clearS:Boolean = true):void {
 			if(player.inte >= 40) {
 				outputText("Will you drink her milk?", false);
 				//- player chooses yes/no
-				doYesNo(2099,playerDeclinesToDrinkMarbleMilk);
+				doYesNo(playerDrinksMarbleMilk,playerDeclinesToDrinkMarbleMilk);
 			}
 			else {
 				//DRINK MILK
@@ -691,7 +692,7 @@ function addictedEncounterHappy(clearS:Boolean = true):void {
 		else {
 			outputText("You find Marble in the midst of one of her chores.  She smiles at you and says that if you help her with her chores, she will give you a bottle of milk to soothe your nerves.  Do you do it for the milk, Marble, or refuse?", false);
 			//player chooses milk / Marble / refuse
-			simpleChoices("Marble",2102,"Milk",marbleChoreHelpChooseMilk,"",0,"",0,"Refuse",marbleChoreRefusal);
+			simpleChoices("Marble",marbleChoreHelpChooseMarble,"Milk",marbleChoreHelpChooseMilk,"",0,"",0,"Refuse",marbleChoreRefusal);
 		}
 	}
 }
@@ -802,6 +803,7 @@ function marbleChoreHelpChooseMarble():void {
 		player.addStatusValue("Bottled Milk",1,(1+rand(6)));
 	}
 	else player.createStatusAffect("Bottled Milk",3,0,0,0);
+	doNext(13);
 }
 
 //(player chose to refuse)
@@ -1602,7 +1604,7 @@ function interactWithMarbleAtCamp():void {
 	//appearnace/info - always there
 	//Sex
 	if(player.lust >= 33) sexEvent = 2127;
-	choices("Appearance",2132,"Talk",marbleTalkOverhaul,"Present",gatherEvent,"Give Item",giveItemEvent,"Get Milk",milkEvent,"Release",sexEvent,"Playtime",playtime,"Break Up",breakUpWithMarble,"",0,"Back",campLoversMenu);
+	choices("Appearance",marbleAppearance,"Talk",marbleTalkOverhaul,"Present",gatherEvent,"Give Item",giveItemEvent,"Get Milk",milkEvent,"Release",sexEvent,"Playtime",playtime,"Break Up",breakUpWithMarble,"",0,"Back",campLoversMenu);
 }
 
 function marbleTalkOverhaul():void {
@@ -1733,7 +1735,7 @@ function breakUpWithMarble():void {
 	clearOutput();
 	outputText("Are you sure you want to break up with Marble?  You won't be able to get her back if you do so.");
 	//player chooses yes or no, no simply returns to the last menu
-	doYesNo(definitelyBreakUpWithWithMarble,2133);
+	doYesNo(definitelyBreakUpWithWithMarble,interactWithMarbleAtCamp);
 }
 //[Yes]
 function definitelyBreakUpWithWithMarble():void {
@@ -1871,7 +1873,7 @@ function talkWithMarbleAtCamp():void {
 	//Nothing to advise!
 	else outputText("\"<i>Sweetie, you've finished all that there is in the main story of the game so far.  You'll have to wait for Fenoxo to add more,</i>\" she says to you winking. \"<i>In the meantime, explore! There's a lot in here that isn't a part of the main story.  You could also try changing your form and see how that changes each encounter.  Just don't get caught or lose your head, ok sweetie?<i/>\"", false);
 
-	doNext(2133);
+	doNext(interactWithMarbleAtCamp);
 }
 
 //do a sex scene, use the current camp one for now, this event advances the time by an hour.
@@ -1894,6 +1896,7 @@ function gotMilk():void {
 }
 
 function marbleGathered():void {
+	doNext(1);
 	spriteSelect(41);
 	doNext(1);
 	//If Marble has found an item, it is collected with this button
@@ -1942,7 +1945,7 @@ function marbleInfo():void {
 		outputText("So long as you don't drink milk from Marble's breasts again, you don't have to worry about getting addicted.  ", false)
 	}
 	outputText("Once camp improvements have been implemented, you will be able to get her to work on upgrading the camp instead of searching for supplies.", false);
-	doNext(2133);
+	doNext(interactWithMarbleAtCamp);
 }
 
 //The player gives Marble an item, right now only Lactaid will be here, and only if the player is fully addicted
@@ -3375,7 +3378,7 @@ function marbleAppearance():void {
 	//since I assume Marble may become ass fucked in the future, Boolean Marble.analVirgin:
 	if(player.statusAffectv1("MarbleSpecials") == 0) outputText("She has one virgin bum-hole, placed between her squeezable butt-cheeks where, you presume, it belongs.", false);
 	else outputText("She has one bum-hole, placed between her squeezable butt-cheeks where, you presume, it belongs.", false);
-	doNext(2133);
+	doNext(interactWithMarbleAtCamp);
 }
 
 

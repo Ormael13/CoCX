@@ -1,4 +1,5 @@
 
+import sys
 import re
 import os
 import os.path
@@ -8,10 +9,12 @@ import os.path
 
 # (choices[\(\)\w,\- \"]+?\W)(120)(\W)
 
+writeToFiles = False
+
 def cleanEventNumbers():
 
 	funcFind = re.compile(r"(if\(eventNo == \d*?\) )\{\W*")
-	funcExtr = re.compile(r"if\(eventNo == (\d*)\) (\w*)\(\)")
+	funcExtr = re.compile(r"if\s?\(eventNo == (\d*)\)\W*?{\W*(\w+).*?\(\);\W+(?:(?:return)|(?:doNext))")
 
 	eventF = open("./includes/doEvent.as", "r")
 	eventS = eventF.read()
@@ -23,19 +26,21 @@ def cleanEventNumbers():
 	#print eventS
 	res = funcExtr.findall(eventS)
 	res = dict(res)
-	print res
+	for key, value in res.iteritems():
+		print key, value
+	#print res
 	#Ok, now we have a eventNo <-> function name dictionary
 	
 
-	simpleCRe = re.compile(r"[ 	]simpleChoices\([\w\"\ \,\?]*?\);")
-	choicesRe = re.compile(r"choices\([\w\"\ \,\?]*?\);")
-	doYesNoRe = re.compile(r"doYesNo\([\w\"\ \,\?]*?\);")
+	simpleCRe = re.compile(r"[ 	]simpleChoices\([\w\"\ \,\?!]*?\);")
+	choicesRe = re.compile(r"choices\([\w\"\ \,\?!]*?\);")
+	doYesNoRe = re.compile(r"doYesNo\([\w\"\ \,\?!]*?\);")
 	doNextRe = re.compile(r"doNext\(\d*?\);")
 
 	searchREs = [simpleCRe, choicesRe, doYesNoRe, doNextRe]
 
 	filelist = os.listdir("./includes")
-	print filelist
+	#print filelist
 	for filename in filelist:
 		if filename.endswith(".as") and not filename.find("doEvent")+1:			#Iterate over all the .as files in ./includes, and skip the doEvent file
 			#print filename
@@ -72,8 +77,9 @@ def cleanEventNumbers():
 				print len(tmpO), len(tmp)
 				print "Length Delta", len(tmp)-len(tmpO) 
 
-				#with open(os.path.join("./includes", filename), "w") as fileH:
-				#	tmp = fileH.write(tmp)
+				if writeToFiles:
+					with open(os.path.join("./includes", filename), "w") as fileH:
+						tmp = fileH.write(tmp)
 
 
 #
@@ -92,7 +98,7 @@ def cleanStaleDoEventIfs():
 	#Pull all the as files into memory. 
 	for filename in filelist:
 		print "Loading", filename
-		if filename.endswith(".as") and not filename.find("doEvent")+1:		
+		if filename.endswith(".as") and not filename.find("doEvent")+1 and not filename.find("flagDefs")+1:		
 			with open(os.path.join("./includes", filename), "r") as fileH:
 				tmp = fileH.read()
 			files.append(tmp)
@@ -128,11 +134,12 @@ def cleanStaleDoEventIfs():
 			if (num in prefix) or (num in postfix):
 				print "used elsewhere in doEvent.as"
 			else:
+				print "Entirely Unused!", num
 				call = call.replace("eventNo", " false ")
 				eventS = prefix+call+postfix
-
-	#with open("./includes/doEvent.as", "w") as eventF:
-	#	eventF.write(eventS)
+	if writeToFiles:
+		with open("./includes/doEvent.as", "w") as eventF:
+			eventF.write(eventS)
 
 def getFlagDict():
 	with open("FlagDictionary.txt", "r") as fd:
@@ -268,9 +275,9 @@ def insertFlags():
 				print filename
 				print len(tmpO), len(tmp)
 				print "Length Delta", len(tmp)-len(tmpO) 
-
-			with open(os.path.join("./includes", filename), "w") as fileH:
-				tmp = fileH.write(tmp)
+			if writeToFiles:
+				with open(os.path.join("./includes", filename), "w") as fileH:
+					tmp = fileH.write(tmp)
 	'''
 				
 				insertionPoint = start+length
@@ -448,8 +455,12 @@ if __name__ == "__main__":
 
 	print "OMG WE'S BREAKIN STUF!!111one!"
 
+	if len(sys.argv) > 1:
+		if "--writeFiles" in sys.argv:
+			print "Writing to files!"
+			writeToFiles = True
 	#cleanEventNumbers()
-	#cleanStaleDoEventIfs()
+	cleanStaleDoEventIfs()
 
 	#cleanFlags()
 
