@@ -1126,7 +1126,7 @@ function doSleep(clrScreen:Boolean = true):void {
 		if(this.model.time.hours == 4) timeQ = 2;
 		if(this.model.time.hours == 5) timeQ = 1;
 		//Autosave stuff
-		if(player.slotName != "VOID" && player.autoSave && b1Text.text != "Game Over") {
+		if(player.slotName != "VOID" && player.autoSave && this.mainView.getButtonText( 0 ) != "Game Over") {
 			saveGame(player.slotName);
 		}
 		//Clear screen
@@ -1226,7 +1226,7 @@ function doSleep(clrScreen:Boolean = true):void {
 	
 	//else outputText("\nYou wake " + num2Text(restTime) + " hours later, feeling refreshed.", false);
 	//Autosave stuff
-	if(player.slotName != "VOID" && player.autoSave && b1Text.text != "Game Over") saveGame(player.slotName);
+	if(player.slotName != "VOID" && player.autoSave && this.mainView.getButtonText( 0 ) != "Game Over") saveGame(player.slotName);
 }
 //For shit that breaks normal sleep processing.
 function sleepWrapper():void {

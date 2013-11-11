@@ -1782,7 +1782,23 @@ function applyPerk(pName:String = ""):void {
 }
 
 function buttonText(buttonName:String):String {
-	return (this.mainView.getButtonText( buttonName ) || "NULL");
+	var matches :*,
+		buttonIndex :int;
+
+	if( buttonName is String ) {
+		if( /^buttons\[[0-9]\]/.test( buttonName ) ) {
+			matches = /^buttons\[([0-9])\]/.exec( buttonName );
+			buttonIndex = parseInt( matches[ 1 ], 10 );
+		}
+		else if( /^b[0-9]Text$/.test( buttonName ) ) {
+			matches = /^b([0-9])Text$/.exec( buttonName );
+			buttonIndex = parseInt( matches[ 1 ], 10 );
+
+			buttonIndex = buttonIndex === 0 ? 9 : buttonIndex - 1;
+		}
+	}
+
+	return (this.mainView.getButtonText( buttonIndex ) || "NULL");
 }
 
 this.mainView._getButtonToolTipText = getButtonToolTipText;
@@ -2728,7 +2744,7 @@ function doYesNo(eventYes:*, eventNo:*):void {
 
 function doNext(eventNo:*):void {
 	//Prevent new events in combat from automatically overwriting a game over. 
-	if(b1Text.text.indexOf("Game Over") != -1) {
+	if(this.mainView.getButtonText( 0 ).indexOf("Game Over") != -1) {
 		trace("Do next setup cancelled by game over");
 		return;
 	}

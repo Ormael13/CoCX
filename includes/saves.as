@@ -174,10 +174,10 @@ function saveLoad(e:MouseEvent):void
 	outputText("When I play from my HDD I have one set of saves, and when I play off your site I have a different set of saves.  Why?\n<i>Flash stores saved data relative to where it was accessed from.  Playing from your HDD will store things in a different location than fenoxo.com or FurAffinity.</i>\n\n", false);
 	outputText("If you want to be absolutely sure you don't lose a character, copy the .sol file for that slot out and back it up!\n\n<b>For more information, google flash shared objects.</b>", false);
 	//This is to clear the 'game over' block from stopping simpleChoices from working.  Loading games supercede's game over.
-	if (b1Text.text == "Game Over")
+	if (this.mainView.getButtonText( 0 ) == "Game Over")
 	{
 		temp = 777;
-		b1Text.text = "save/load";
+		this.mainView.setButtonText( 0, "save/load" );
 	}
 	if (temp == 777)
 	{

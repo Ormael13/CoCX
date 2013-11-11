@@ -1,5 +1,9 @@
 /****
 	coc.view.MainView
+
+	I have no real idea yet what eventTestInput is for,
+	but its coordinates get tested for in places, and set in others.
+	Perhaps some day I'll ask.
 ****/
 
 package coc.view {
@@ -264,6 +268,11 @@ package coc.view {
 			}
 		};
 
+		// There was one case where the label needed to be set but I could not determine from context whether the button should be shown or not...
+		public function setButtonText( index :int, label :String ) :void {
+			this.bottomButtonTexts[ index ].text = label;
+		};
+
 		public function hasButton( labelText :String ) :Boolean {
 			var b :TextField;
 
@@ -294,20 +303,25 @@ package coc.view {
 			}
 		};
 
-		public function getButtonText( buttonName :String ) :String {
+		public function getButtonText( index :int ) :String {
 			var matches :*,
 				buttonIndex :int;
 
-			if( /^buttons\[[0-9]\]/.test( buttonName ) ) {
-				matches = /^buttons\[([0-9])\]/.exec( buttonName );
-				buttonIndex = parseInt( matches[ 1 ], 10 );
+			if( index < 0 || index > BOTTOM_BUTTON_COUNT ) {
+				return '';
+			}
+			else {
 				return this.bottomButtonTexts[ buttonIndex ].text;
 			}
-			else if( /^b[0-9]Text$/.test( buttonName ) ) {
-				return this[ buttonName ].text;
-			}
+		};
 
-			return "";
+		public function isButtonVisible( index :int ) :String {
+			if( index < 0 || index > BOTTOM_BUTTON_COUNT ) {
+				return undefined;
+			}
+			else {
+				return this.bottomButtonBGs[ index ].visible;
+			}
 		};
 
 

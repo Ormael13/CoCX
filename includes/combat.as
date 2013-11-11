@@ -182,9 +182,7 @@ function doCombat(eventNum:Number)
 		this.mainView.hideMenuButton( MainMenu.MENU_DATA );
 		this.mainView.hideMenuButton( MainMenu.MENU_APPEARANCE );
 		this.mainView.hideMenuButton( MainMenu.MENU_PERKS );
-		b1Text.visible = true;
-		gButtons[0].visible = true;
-		b1Text.htmlText = "Attack";
+		this.mainView.setButton( 0, "Attack" );
 		var waitT:String = "Wait";
 		if(monster.hasStatusAffect("level") >= 0) waitT = "Climb";
 		outputText("", true);

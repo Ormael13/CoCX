@@ -86,7 +86,7 @@ function keyboard(e:KeyboardEvent):void {
 		if(e.keyCode == 37) flags[CHEAT_ENTERING_COUNTER]++;
 		else flags[CHEAT_ENTERING_COUNTER] = 0;
 	}
-	else if(flags[CHEAT_ENTERING_COUNTER] == 3 && player.str > 0 && b1Text.text.indexOf("Game Over") == -1) {
+	else if(flags[CHEAT_ENTERING_COUNTER] == 3 && player.str > 0 && this.mainView.getButtonText( 0 ).indexOf("Game Over") == -1) {
 		if(e.keyCode == 39) {
 			giveHumanizer();
 			return;
@@ -94,17 +94,17 @@ function keyboard(e:KeyboardEvent):void {
 		else flags[CHEAT_ENTERING_COUNTER] = 0;
 	}
 	//Stats Hotkey
-	if(e.keyCode == 83 && statsBG.visible && player.str > 0) {
+	if(e.keyCode == 83 && this.mainView.menuButtonIsVisible( MainView.MENU_STATS ) && player.str > 0) {
 		displayStats(f);
 		return;
 	}
 	//Level up Hotkey
-	if(e.keyCode == 76 && levelBG.visible && player.str > 0) {
+	if(e.keyCode == 76 && this.mainView.menuButtonIsVisible( MainView.MENU_LEVEL ) && player.str > 0) {
 		levelUpGo(f);
 		return;
 	}
 	//f1 pressed - save in slot 1
-	if(e.keyCode == 112 && dataBG.visible && player.str > 0) {
+	if(e.keyCode == 112 && this.mainView.menuButtonIsVisible( MainView.MENU_DATA ) && player.str > 0) {
 		nameBox.text = "";
 		saveGame("CoC_1");
 		outputText("Game saved to slot 1!", true);
@@ -112,7 +112,7 @@ function keyboard(e:KeyboardEvent):void {
 		return;
 	}
 	//f2 pressed - save in slot 2
-	if(e.keyCode == 113 && dataBG.visible && player.str > 0) {
+	if(e.keyCode == 113 && this.mainView.menuButtonIsVisible( MainView.MENU_DATA ) && player.str > 0) {
 		nameBox.text = "";
 		saveGame("CoC_2");
 		outputText("Game saved to slot 2!", true);
@@ -120,7 +120,7 @@ function keyboard(e:KeyboardEvent):void {
 		return;
 	}
 	//f3 pressed - save in slot 3
-	if(e.keyCode == 114 && dataBG.visible && player.str > 0) {
+	if(e.keyCode == 114 && this.mainView.menuButtonIsVisible( MainView.MENU_DATA ) && player.str > 0) {
 		nameBox.text = "";
 		saveGame("CoC_3");
 		outputText("Game saved to slot 3!", true);
@@ -128,7 +128,7 @@ function keyboard(e:KeyboardEvent):void {
 		return;
 	}
 	//f4 pressed - save in slot 4
-	if(e.keyCode == 115 && dataBG.visible && player.str > 0) {
+	if(e.keyCode == 115 && this.mainView.menuButtonIsVisible( MainView.MENU_DATA ) && player.str > 0) {
 		nameBox.text = "";
 		saveGame("CoC_4");
 		outputText("Game saved to slot 4!", true);
@@ -136,7 +136,7 @@ function keyboard(e:KeyboardEvent):void {
 		return;
 	}
 	//f5 pressed - save in slot 5
-	if(e.keyCode == 116 && dataBG.visible && player.str > 0) {
+	if(e.keyCode == 116 && this.mainView.menuButtonIsVisible( MainView.MENU_DATA ) && player.str > 0) {
 		nameBox.text = "";
 		saveGame("CoC_5");
 		outputText("Game saved to slot 5!", true);
@@ -144,7 +144,7 @@ function keyboard(e:KeyboardEvent):void {
 		return;
 	}
 	//f6 pressed - load slot 1
-	if(e.keyCode == 117 && dataBG.visible) {
+	if(e.keyCode == 117 && this.mainView.menuButtonIsVisible( MainView.MENU_DATA )) {
 		saveFile = SharedObject.getLocal("CoC_1","/");
 		if(saveFile.data.exists) {
 			if(loadGame("CoC_1")) {
@@ -156,7 +156,7 @@ function keyboard(e:KeyboardEvent):void {
 		}
 	}
 	//f7 pressed - load slot 2
-	if(e.keyCode == 118 && dataBG.visible) {
+	if(e.keyCode == 118 && this.mainView.menuButtonIsVisible( MainView.MENU_DATA )) {
 		saveFile = SharedObject.getLocal("CoC_2","/");
 		if(saveFile.data.exists) {
 			if(loadGame("CoC_2")) {
@@ -168,7 +168,7 @@ function keyboard(e:KeyboardEvent):void {
 		}
 	}
 	//f8 pressed - load slot 3
-	if(e.keyCode == 119 && dataBG.visible) {
+	if(e.keyCode == 119 && this.mainView.menuButtonIsVisible( MainView.MENU_DATA )) {
 		saveFile = SharedObject.getLocal("CoC_3","/");
 		if(saveFile.data.exists) {
 			if(loadGame("CoC_3")) {
@@ -180,7 +180,7 @@ function keyboard(e:KeyboardEvent):void {
 		}
 	}
 	//f9 pressed - load slot 4
-	if(e.keyCode == 120 && dataBG.visible) {
+	if(e.keyCode == 120 && this.mainView.menuButtonIsVisible( MainView.MENU_DATA )) {
 		saveFile = SharedObject.getLocal("CoC_4","/");
 		if(saveFile.data.exists) {
 			if(loadGame("CoC_4")) {
@@ -192,7 +192,7 @@ function keyboard(e:KeyboardEvent):void {
 		}
 	}
 	//f10 pressed - load slot 5
-	if(e.keyCode == 121 && dataBG.visible) {
+	if(e.keyCode == 121 && this.mainView.menuButtonIsVisible( MainView.MENU_DATA )) {
 		saveFile = SharedObject.getLocal("CoC_5","/");
 		if(saveFile.data.exists) {
 			if(loadGame("CoC_5")) {
@@ -204,30 +204,30 @@ function keyboard(e:KeyboardEvent):void {
 		}
 	}
 	//Backspace pressed! New Game!
-	if(e.keyCode == 8 && newGameBG.visible && newGameText.text == "Main Menu") {
+	if(e.keyCode == 8 && this.mainView.menuButtonIsVisible( MainView.MENU_NEW_MAIN ) && this.mainView.menuButtonHasLabel( MainView.MENU_NEW_MAIN, "Main Menu" )) {
 		//newGameGo(f);
 		mainMenu(f);
 		return;
 	}
 	//D Pressed! call data!"
-	if(e.keyCode == 68 && dataBG.visible) {
+	if(e.keyCode == 68 && this.mainView.menuButtonIsVisible( MainView.MENU_DATA )) {
 		saveLoad(f);
 		return;
 	}
 	//A pressed! call appearance!"
-	if(e.keyCode == 65 && appearanceBG.visible) {
+	if(e.keyCode == 65 && this.mainView.menuButtonIsVisible( MainView.MENU_APPEARANCE )) {
 		appearance(f);
 		return;
 	}
 	//N pressed! Equal to no!"
-	if(e.keyCode == 78 && b2Text.text == "No" && b2Text.visible == true) {
+	if(e.keyCode == 78 && this.mainView.getButtonText( 1 ) == "No" && this.mainView.isButtonVisible( 1 )) {
 		currEvent = button2Choice;
 		//eventParser(currEvent);
 		executeButtonClick(1);
 		return;
 	}
 	//Y pressed! Equal to Yes!"
-	if(e.keyCode == 89 && b1Text.text == "Yes" && b1Text.visible == true) {
+	if(e.keyCode == 89 && this.mainView.getButtonText( 0 ) == "Yes" && this.mainView.isButtonVisible( 0 )) {
 		currEvent = buttonEvents[0];
 		//eventParser(currEvent);
 		executeButtonClick(0);
