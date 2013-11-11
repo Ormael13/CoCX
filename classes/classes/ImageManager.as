@@ -6,6 +6,8 @@
 	import flash.net.*;
 	import flash.events.*;
 	import classes.Image;
+	import flash.text.TextField;
+	import flash.text.TextFormat;
 		
 	/**
 	 * ...
@@ -15,6 +17,7 @@
 	{
 		//Hashmap of all images
 		private static var _imageTable:Object = new Object();
+		private var mStage:Stage;
 		
 		//Maximum image box size
 		private const MAXSIZE:int = 400;
@@ -26,8 +29,9 @@
 		[Embed(source="../../img/images.xml",mimeType="application/octet-stream")]
 		private static const XML_IMAGES:Class;
 		
-		public function ImageManager()
+		public function ImageManager(stage:Stage)
 		{
+			mStage = stage;
 			trace("Creating Image File hashmap");
 			loadImageList();
 		}
@@ -133,7 +137,76 @@
 				}
 			}
 			trace("Loading image: " + imageID + ", html: " + imageString);
+			fixupImage();
 			return imageString;
 		}
+		
+		private function fixupImage():void
+		{
+			mStage.addEventListener(Event.ENTER_FRAME, fixupListener);
+		}
+		
+		private function fixupListener(e:Event)
+		{
+			var gotImage:Boolean = false;
+			var mainText:TextField = mStage.getChildByName("mainText") as TextField;
+			
+			if (mainText != null)
+			{
+				var imgRef = mainText.getImageReference("img");
+				if (imgRef != null)
+				{
+					imgRef.contentLoaderInfo.addEventListener(Event.COMPLETE, doFixup);
+					
+					gotImage = true;
+				}
+				else
+				{
+					trace("no image yet...");
+				}
+			}
+			
+			if (gotImage)
+			{
+				// We're done, toss the event listener
+				mStage.removeEventListener(Event.ENTER_FRAME, fixupListener);
+			}
+		}
+		
+		private function doFixup(e:Event)
+		{
+			// Remove the Completion event listener
+			e.target.removeEventListener(Event.COMPLETE, doFixup);
+			var imgRef:Loader = e.target.loader as Loader;
+			var mainText:TextField = mStage.getChildByName("mainText") as TextField;
+			
+			var imgRefTopY:int = imgRef.getBounds(mainText).y; 							// 272
+			var imgHeight:int = getImageHeight(imgRef.contentLoaderInfo.url); 			// 400
+			var imgRefBottomY:int = imgRefTopY + imgHeight;
+			var totalTextHeight:int = mainText.textHeight; 								// 264 -- Total displayed pixel height of text
+			
+			if (totalTextHeight > imgRefBottomY)
+			{
+				// Total displayed text height should be larger than the image
+				return;
+			}
+			
+			// Here comes the bullshit... get ready
+			var txFormat:TextFormat = mainText.defaultTextFormat;
+			var lineHeight:int = txFormat.size as int;
+			lineHeight += 4;
+			var padLines:int = Math.ceil((imgRefBottomY - totalTextHeight) / lineHeight);
+			
+			trace("Need " + padLines + " padding lines");
+			
+			// Generate the paddings
+			var padding:String = "";
+			for (var i:int = 0; i < padLines; i++)
+			{
+				padding += "\n";
+			}
+			
+			mainText.htmlText += padding;
+}
 	}
 }
