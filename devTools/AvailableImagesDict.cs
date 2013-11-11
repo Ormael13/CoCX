@@ -12,6 +12,7 @@ namespace AvailableImagesDict
     class AvailableImagesDict
     {
         public static List<string> imageIDs = new List<string>();
+        public static List<string> monsterNames = new List<string>();
 
         static void Main(string[] args)
         {
@@ -53,6 +54,15 @@ namespace AvailableImagesDict
                                 imageIDs.Add(match.Groups[1].Value);
                             }
                         }
+                        //monster.imageName="sandwitch";
+                        foreach (Match match in Regex.Matches(line, "monster\\.imageName\\s*=\\s*\"([^\"]*)\""))
+                        {
+                            if (!imageIDs.Contains(match.Groups[1].Value))
+                            {
+                                Console.WriteLine("Found {0}", match.Groups[1].Value);
+                                monsterNames.Add(match.Groups[1].Value);
+                            }
+                        }
                     }
                 }
             }
@@ -71,7 +81,7 @@ namespace AvailableImagesDict
                 settings.Indent = true;
                 settings.IndentChars = "\t";
                 XmlWriter writer = XmlWriter.Create("../img/images.xml", settings);
-                var filters = new String[] { "jpg", "jpeg", "png", "gif" };
+                var filters = new String[] { "jpg", "jpeg", "gif", "png" };
 
                 writer.WriteStartDocument();
                 writer.WriteStartElement("Images");
@@ -83,6 +93,17 @@ namespace AvailableImagesDict
                         writer.WriteStartElement("Image");
                         writer.WriteAttributeString("id", imageIDs[i]);
                         writer.WriteString("./img/" + imageIDs[i] + "." + fileType);
+                        writer.WriteEndElement();
+                    }
+                }
+
+                for (int i = 0; i < monsterNames.Count; i++)
+                {
+                    foreach (string fileType in filters)
+                    {
+                        writer.WriteStartElement("Image");
+                        writer.WriteAttributeString("id", "monster-" + monsterNames[i]);
+                        writer.WriteString("./img/monster-" + monsterNames[i] + "." + fileType);
                         writer.WriteEndElement();
                     }
                 }
