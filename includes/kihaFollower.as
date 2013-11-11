@@ -1254,7 +1254,7 @@ function boneTheShitOutofKihaHolesWithHorsecock():void {
 	if(player.balls > 0) outputText("[balls]");
 	else if(player.hasSheath()) outputText("sheath");
 	else outputText("cock");
-	outputText(" and sighs happily.  She reaches up to touch it, her hands reverently smearing her pussy-juices and your leftover cum all over your cock and her face.  She still seems to be quite out of it, but at least she's enthusiastic in her cocklust.  You wipe as much of the sexual slime from your dick off on her nose as possible, and then dry yourself with her hair.  Kiha purrs scoops some into her mouth as you rise, barely noting your departure as she begins to masturbate.");
+	outputText(" and sighs happily.  She reaches up to touch it, her hands reverently smearing her pussy-juices and your leftover cum all over your cock and her face.  She still seems to be quite out of it, but at least she's enthusiastic in her cocklust.  You wipe as much of the sexual slime from your dick off on her nose as possible, and then dry yourself with her hair.  Kiha purrs and scoops some into her mouth as you rise, barely noting your departure as she begins to masturbate.");
 	//(FIRST TIME ONLY:  
 	if(flags[KIHA_HORSECOCK_FUCKED] == 0) {
 		outputText("[pg]Once you get away from her intoxicating scent, you realize what you just did.  You clap a hand over your mouth");
