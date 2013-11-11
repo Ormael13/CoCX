@@ -142,7 +142,16 @@ function mainMenu(e:MouseEvent = undefined):void {
 	
 	//The world isn't quite ready for the ASPLODE button. Uncomment for easy bug reporter testing.
 	//choices("",  0, "Credits", creditsScreen, "Instructions", howToPlay, "", 0, "", 0, "ASPLODE", 9000000000, "", 0, "", 0, "Settings", settingsScreen, "Resume", resume);
-	choices("",  0, "Credits", creditsScreen, "Instructions", howToPlay, "", 0, "", 0, "Debug Info", debugPane, "", 0, "", 0, "Settings", settingsScreen, "Resume", resume);
+	choices("",  0, 
+			"Image Credits", imageCreditsScreen, 
+			"Credits", creditsScreen, 
+			"", 0, 
+			"Instructions", howToPlay, 
+			"Debug Info", debugPane, 
+			"", 0, 
+			"", 0, 
+			"Settings", settingsScreen, 
+			"Resume", resume);
 		
 }
 
@@ -219,22 +228,11 @@ function debugPane():void
 {
 	outputText("<b>Debug information!</b>\n", true);
 
-	outputText("\nPossible flash sandboxing contexts:");
-	outputText("<ul>");
-	outputText("<li><b>\"localWithNetwork\"</b> means images <b><u>will not work</u></b>!</li>");
-	outputText("<li><b>\"localWithFile\"</b> means images will work.</li>");
-	outputText("<li><b>\"localTrusted\"</b> means images will work, and you've somehow managed to install this swf into a flash trusted directory. How did you manage that?</li>");
-	outputText("</ul>");
 	outputText("\nCurrent Sandbox mode: <b>" + Security.sandboxType + "</b>");
-	if (images.xmlLoadError == false)
-		outputText("\n\nImage definiton file loaded successfully.");
-	else
-		outputText("\n\nImage definiton file failed to load!");
+
 	outputText("\nCurrently have " + images.getLoadedImageCount() + " images loaded into cache.");
 
-	//outputText("<img src='./img/Yoh-SL_Ceraph.png' width='300' height='400' align='left'>")
 	outputText(images.showImage("monster-ceraph"));
-	outputText("\nBottom of screen");
 	
 	doNext(mainMenu);
 }
@@ -309,120 +307,142 @@ function toggleSillyFlag():void
 	
 }
 
+
 function creditsScreen():void {
 	outputText("<b>Coding and Main Events:</b>\n", true);
-	outputText(" * Fenoxo\n\n", false);
-	outputText("<b>Typo Reporting</b>\n", false);
-	outputText("* SoS\n", false);
-	outputText("* Prisoner416\n");
-	outputText("* Chibodee\n");
-	outputText("\n");
-	outputText("<b>Graphical Prettiness:</b>\n", false);
-	outputText("* Dasutin (Background Images)\n", false);
-	outputText("* Invader (Button Graphics, Font, and Other Hawtness)\n", false);
-	outputText("\n", false);
-	outputText("<b>Supplementary Events:</b>\n", false);
-	outputText("* Dxasmodeus (Tentacles, Worms, Giacomo)\n", false);
-	outputText("* Kirbster (Christmas Bunny Trap)\n");
-	outputText("* nRage (Kami the Christmas Roo)\n");
-	outputText("* Abraxas (Alternate Naga Scenes w/Various Monsters, Tamani Anal, Female Shouldra Tongue Licking, Chameleon Girl, Christmas Harpy)\n", false);
-	outputText("* Astronomy (Fetish Cultist Centaur Footjob Scene)\n", false);
-	outputText("* Adjatha (Scylla the Cum Addicted Nun, Vala, Goo-girls, Bimbo Sophie Eggs, Ceraph Urta Roleplay, Gnoll with Balls Scene, Kiha futa scene, Goblin Web Fuck Scene, and 69 Bunny Scene)\n", false);
-	outputText("* ComfyCushion (Muff Wrangler)\n");
-	outputText("* B (Brooke)\n");
-	outputText("* Quiet Browser (Half of Niamh, Ember, Amily The Mouse-girl Breeder, Katherine, Urta's in-bar Dialogue Trees, some of Izma, Loppe)\n", false);
-	outputText("* Schpadoinkle (Victoria Sex)\n");
-	outputText("* Donto (Ro'gar the Orc, Polar Pete)\n", false);
-	outputText("* Angel (Additional Amily Scenes)\n", false);
-	outputText("* Firedragon (Additional Amily Scenes)\n", false);
-	outputText("* Danaume (Jojo masturbation texts)\n", false);
-	outputText("* LimitLax (Sand-Witch Bad-End)\n", false);
-	outputText("* KLN (Equinum Bad-End)\n", false);
-	outputText("* TheDarkTemplar11111 (Canine Pepper Bad End)\n", false);
-	outputText("* Silmarion (Canine Pepper Bad End)\n", false);
-	outputText("* Soretu (Original Minotaur Rape)\n", false);
-	outputText("* NinjArt (Small Male on Goblin Rape Variant)\n", false);
-	outputText("* Nightshade (Additional Minotaur Rape)\n", false);
-	outputText("* JCM (Imp Night Gangbang, Addition Minotaur Loss Rape - Oral)\n", false);
-	outputText("* Xodin (Nipplefucking paragraph of Imp GangBang, Encumbered by Big Genitals Exploration Scene, Big Bits Run Encumbrance, Player Getting Beer Tits, Sand Witch Dungeon Misc Scenes)\n", false);
-	outputText("* Blusox6 (Original Queen Bee Rape)\n", false);
-	outputText("* Thrext (Additional Masturbation Code, Faerie, Ivory Succubus)\n", false);
-	outputText("* XDumort (Genderless Anal Masturbation)\n", false);
-	outputText("* Uldego (Slime Monster)\n", false);
-	outputText("* Noogai, Reaper, and Numbers (Nipple-Fucking Victory vs Imp Rape)\n", false);
-	outputText("* Verse and IAMurow (Bee-Girl MultiCock Rapes)\n", false);
-	outputText("* Sombrero (Additional Imp Lust Loss Scene (Dick insertion ahoy!)\n", false);
-	outputText("* The Dark Master (Marble, Fetish Cultist, Fetish Zealot, Hellhound, Lumi, Some Cat Transformations, LaBova, Ceraph's Cat-Slaves, a Cum Witch Scene, Mouse Dreams, Forced Nursing:Imps&Goblins)\n", false);
-	outputText("* Mr. Fleshcage (Cat Transformation/Masturbation)\n", false);
-	outputText("* Spy (Cat Masturbation, Forced Nursing: Minotaur, Bee, & Cultist)\n", false);
-	outputText("* PostNuclearMan (Some Cat TF)\n", false);
-	outputText("* MiscChaos (Forced Nursing: Slime Monster)\n", false);
-	outputText("* Ourakun (Kelt the Centaur)\n", false);
-	outputText("* Rika_star25 (Desert Tribe Bad End)\n", false);
-	outputText("* Versesai (Additional Bee Rape)\n", false);
-	outputText("* Mallowman (Additional Bee Rape)\n", false);
-	outputText("* HypnoKitten (Additional Centaur x Imp Rape)\n", false);
-	outputText("* Ari (Minotaur Gloryhole Scene)\n", false);
-	outputText("* SpectralTime (Aunt Nancy)\n", false);
-	outputText("* Foxxling (Akbal)\n", false);
-	outputText("* Elfensyne (Phylla)\n");
-	outputText("* Radar (Dominating Sand Witches, Some Phylla)\n");
-	outputText("* Jokester (Sharkgirls, Izma, & Additional Amily Scenes)\n", false);	
-	outputText("* Lukadoc (Additional Izma, Ceraph Followers Corrupting Gangbang, Satyrs, Ember)\n", false);
-	outputText("* Bob (Additional Izma)\n", false);
-	outputText("* lh84 (Various Typos and Code-Suggestions)\n", false);
-	outputText("* Dextersinister (Gnoll girl in the plains)\n", false);
-	outputText("* ElAcechador, Bandichar, TheParanoidOne, Xoeleox (All Things Naga)\n", false);
-	outputText("* Symphonie (Dominika the Fellatrix, Ceraph RPing as Dominika, Tel'Adre Library)\n", false);
-	outputText("* Soulsemmer (Ifris)\n", false);
-	outputText("* WedgeSkyrocket (Zetsuko, Pure Amily Anal, Kitsunes)\n", false);
-	outputText("* Zeikfried (Anemone, Male Milker Bad End, Kanga TF, Raccoon TF, Minotaur Chef Dialogues, Sheila, and More)\n", false);
-	outputText("* User21 (Additional Centaur/Naga Scenes)\n", false);
-	outputText("* ~M~ (Bimbo + Imp loss scene)\n", false);
-	outputText("* Grype (Raping Hellhounds)\n", false);
-	outputText("* B-Side (Fentendo Entertainment Center Silly-Mode Scene)\n", false);
-	outputText("* Not Important (Face-fucking a defeated minotaur)\n", false);
-	outputText("* Third (Cotton, Rubi, Nieve, Urta Pet-play)\n", false);
-	outputText("* Gurumash (Parts of Nieve)\n");
-	outputText("* Kinathis (A Nieve Scene, Sophie Daughter Incest, Minerva)\n");
-	outputText("* Jibajabroar (Jasun)\n", false);
-	outputText("* Merauder (Raphael)\n", false);
-	outputText("* EdgeofReality (Gym fucking machine)\n", false);
-	outputText("* Bronycray (Heckel the Hyena)\n", false);
-	outputText("* Sablegryphon (Gnoll spear-thrower)\n", false);
-	outputText("* Nonesuch (Basilisk, Sandtraps, assisted with Owca/Vapula)\n", false);
-	outputText("* Anonymous Individual (Lilium, PC Birthing Driders)\n", false);
-	outputText("* PKD (Owca, Vapula, Fap Arena, Isabella Tentacle Sex, Lottie Tentacle Sex)\n", false);
-	outputText("* Shamblesworth (Half of Niamh, Shouldra the Ghost-Girl, Ceraph Roleplaying As Marble, Yara Sex, Shouldra Follow Expansion)\n", false);
-	outputText("* Kirbu (Exgartuan Expansion, Yara Sex, Shambles's Handler, Shouldra Follow Expansion)\n", false);
-	outputText("* 05095 (Shouldra Expansion, Tons of Editing)\n");
-	outputText("* Smidgeums (Shouldra + Vala threesome)\n");
-	outputText("* FC (Generic Shouldra talk scene)\n");
-	outputText("* Oak (Bro + Bimbo TF, Isabella's ProBova Burps)\n", false);
-	outputText("* Space (Victory Anal Sex vs Kiha)\n", false);
-	outputText("* Venithil (LippleLock w/Scylla & Additional Urta Scenes)\n");
-	outputText("* Butts McGee (Minotaur Hot-dogging PC loss, Tamani Lesbo Face-ride, Bimbo Sophie Mean/Nice Fucks)\n");
-	outputText("* Savin (Hel the Salamander, Valeria, Spanking Drunk Urta, Tower of the Phoenix, Drider Anal Victory, Hel x Isabella 3Some, Centaur Sextoys, Thanksgiving Turkey, Uncorrupt Latexy Recruitment, Assert Path for Direct Feeding Latexy, Sanura the Sphinx)\n", false);
-	outputText("* Gats (Lottie, Spirit & Soldier Xmas Event, Kiha forced masturbation, Goblin Doggystyle, Chicken Harpy Egg Vendor)\n", false);
-	outputText("* Aeron the Demoness (Generic Goblin Anal, Disciplining the Eldest Minotaur)\n", false);
-	outputText("* Gats, Shamblesworth, Symphonie, and Fenoxo (Corrupted Drider)\n", false);
-	outputText("* Bagpuss (Female Thanksgiving Event, Harpy Scissoring, Drider Bondage Fuck)\n", false);
-	outputText("* Fenoxo (Everything Else)\n", false);
-	outputText("\n<b>Oviposition Update Credits - Names in Order Appearance in Oviposition Document</b>\n");
-	outputText("* DCR (Idea, Drider Transformation, and Drider Impreg of: Goblins, Beegirls, Nagas, Harpies, and Basilisks)\n");
-	outputText("* Fenoxo (Bee Ovipositor Transformation, Bee Oviposition of Nagas and Jojo, Drider Oviposition of Tamani)\n");
-	outputText("* Smokescreen (Bee Oviposition of Basilisks)\n");
-	outputText("* Radar (Oviposition of Sand Witches)\n");
-	outputText("* OutlawVee (Bee Oviposition of Goo-Girls)\n");
-	outputText("* Zeikfried (Editing this mess, Oviposition of Anemones)\n");
-	outputText("* Woodrobin (Oviposition of Minotaurs)\n");
-	outputText("* Posthuman (Oviposition of Ceraph Follower)\n");
-	outputText("* Slywyn (Bee Oviposition of Gigantic PC Dick)\n");
-	outputText("* Shaxarok (Drider Oviposition of Large Breasted Nipplecunts)\n");
-	outputText("* Quiet Browser (Bee Oviposition of Urta)\n");
-	outputText("* Bagpuss (Laying Eggs In Pure Amily)\n");
-	outputText("* Eliria (Bee Laying Eggs in Bunny-Girls)\n");
-	outputText("\nIf I'm missing anyone, please contact me ASAP!  I have done a terrible job keeping the credits up to date!", false);
+	outputText("<ul>");
+	outputText("<li> Fenoxo</li>\n");
+	outputText("</ul>");
+	outputText("<b>Typo Reporting</b>\n");
+	outputText("<ul>");
+	outputText("<li> SoS</li>");
+	outputText("<li> Prisoner416</li>");
+	outputText("<li> Chibodee</li>");
+	outputText("</ul>");
+	outputText("");
+	outputText("<b>Graphical Prettiness:</b>")
+	outputText("<ul>");;
+	outputText("<li> Dasutin (Background Images)</li>");
+	outputText("<li> Invader (Button Graphics, Font, and Other Hawtness)</li>");
+	outputText("</ul>");
+	outputText("<b>Supplementary Events:</b>");
+	outputText("<ul>");
+	outputText("<li> Dxasmodeus (Tentacles, Worms, Giacomo)</li>");
+	outputText("<li> Kirbster (Christmas Bunny Trap)</li>");
+	outputText("<li> nRage (Kami the Christmas Roo)</li>");
+	outputText("<li> Abraxas (Alternate Naga Scenes w/Various Monsters, Tamani Anal, Female Shouldra Tongue Licking, Chameleon Girl, Christmas Harpy)</li>");
+	outputText("<li> Astronomy (Fetish Cultist Centaur Footjob Scene)</li>");
+	outputText("<li> Adjatha (Scylla the Cum Addicted Nun, Vala, Goo-girls, Bimbo Sophie Eggs, Ceraph Urta Roleplay, Gnoll with Balls Scene, Kiha futa scene, Goblin Web Fuck Scene, and 69 Bunny Scene)</li>");
+	outputText("<li> ComfyCushion (Muff Wrangler)</li>");
+	outputText("<li> B (Brooke)</li>");
+	outputText("<li> Quiet Browser (Half of Niamh, Ember, Amily The Mouse-girl Breeder, Katherine, Urta's in-bar Dialogue Trees, some of Izma, Loppe)</li>");
+	outputText("<li> Schpadoinkle (Victoria Sex)</li>");
+	outputText("<li> Donto (Ro'gar the Orc, Polar Pete)</li>");
+	outputText("<li> Angel (Additional Amily Scenes)</li>");
+	outputText("<li> Firedragon (Additional Amily Scenes)</li>");
+	outputText("<li> Danaume (Jojo masturbation texts)</li>");
+	outputText("<li> LimitLax (Sand-Witch Bad-End)</li>");
+	outputText("<li> KLN (Equinum Bad-End)</li>");
+	outputText("<li> TheDarkTemplar11111 (Canine Pepper Bad End)</li>");
+	outputText("<li> Silmarion (Canine Pepper Bad End)</li>");
+	outputText("<li> Soretu (Original Minotaur Rape)</li>");
+	outputText("<li> NinjArt (Small Male on Goblin Rape Variant)</li>");
+	outputText("<li> Nightshade (Additional Minotaur Rape)</li>");
+	outputText("<li> JCM (Imp Night Gangbang, Addition Minotaur Loss Rape - Oral)</li>");
+	outputText("<li> Xodin (Nipplefucking paragraph of Imp GangBang, Encumbered by Big Genitals Exploration Scene, Big Bits Run Encumbrance, Player Getting Beer Tits, Sand Witch Dungeon Misc Scenes)</li>");
+	outputText("<li> Blusox6 (Original Queen Bee Rape)</li>");
+	outputText("<li> Thrext (Additional Masturbation Code, Faerie, Ivory Succubus)</li>");
+	outputText("<li> XDumort (Genderless Anal Masturbation)</li>");
+	outputText("<li> Uldego (Slime Monster)</li>");
+	outputText("<li> Noogai, Reaper, and Numbers (Nipple-Fucking Victory vs Imp Rape)</li>");
+	outputText("<li> Verse and IAMurow (Bee-Girl MultiCock Rapes)</li>");
+	outputText("<li> Sombrero (Additional Imp Lust Loss Scene (Dick insertion ahoy!)</li>");
+	outputText("<li> The Dark Master (Marble, Fetish Cultist, Fetish Zealot, Hellhound, Lumi, Some Cat Transformations, LaBova, Ceraph's Cat-Slaves, a Cum Witch Scene, Mouse Dreams, Forced Nursing:Imps&Goblins)</li>");
+	outputText("<li> Mr. Fleshcage (Cat Transformation/Masturbation)</li>");
+	outputText("<li> Spy (Cat Masturbation, Forced Nursing: Minotaur, Bee, & Cultist)</li>");
+	outputText("<li> PostNuclearMan (Some Cat TF)</li>");
+	outputText("<li> MiscChaos (Forced Nursing: Slime Monster)</li>");
+	outputText("<li> Ourakun (Kelt the Centaur)</li>");
+	outputText("<li> Rika_star25 (Desert Tribe Bad End)</li>");
+	outputText("<li> Versesai (Additional Bee Rape)</li>");
+	outputText("<li> Mallowman (Additional Bee Rape)</li>");
+	outputText("<li> HypnoKitten (Additional Centaur x Imp Rape)</li>");
+	outputText("<li> Ari (Minotaur Gloryhole Scene)</li>");
+	outputText("<li> SpectralTime (Aunt Nancy)</li>");
+	outputText("<li> Foxxling (Akbal)</li>");
+	outputText("<li> Elfensyne (Phylla)</li>");
+	outputText("<li> Radar (Dominating Sand Witches, Some Phylla)</li>");
+	outputText("<li> Jokester (Sharkgirls, Izma, & Additional Amily Scenes)</li>");	
+	outputText("<li> Lukadoc (Additional Izma, Ceraph Followers Corrupting Gangbang, Satyrs, Ember)</li>");
+	outputText("<li> Bob (Additional Izma)</li>");
+	outputText("<li> lh84 (Various Typos and Code-Suggestions)</li>");
+	outputText("<li> Dextersinister (Gnoll girl in the plains)</li>");
+	outputText("<li> ElAcechador, Bandichar, TheParanoidOne, Xoeleox (All Things Naga)</li>");
+	outputText("<li> Symphonie (Dominika the Fellatrix, Ceraph RPing as Dominika, Tel'Adre Library)</li>");
+	outputText("<li> Soulsemmer (Ifris)</li>");
+	outputText("<li> WedgeSkyrocket (Zetsuko, Pure Amily Anal, Kitsunes)</li>");
+	outputText("<li> Zeikfried (Anemone, Male Milker Bad End, Kanga TF, Raccoon TF, Minotaur Chef Dialogues, Sheila, and More)</li>");
+	outputText("<li> User21 (Additional Centaur/Naga Scenes)</li>");
+	outputText("<li> ~M~ (Bimbo + Imp loss scene)</li>");
+	outputText("<li> Grype (Raping Hellhounds)</li>");
+	outputText("<li> B-Side (Fentendo Entertainment Center Silly-Mode Scene)</li>");
+	outputText("<li> Not Important (Face-fucking a defeated minotaur)</li>");
+	outputText("<li> Third (Cotton, Rubi, Nieve, Urta Pet-play)</li>");
+	outputText("<li> Gurumash (Parts of Nieve)</li>");
+	outputText("<li> Kinathis (A Nieve Scene, Sophie Daughter Incest, Minerva)</li>");
+	outputText("<li> Jibajabroar (Jasun)</li>");
+	outputText("<li> Merauder (Raphael)</li>");
+	outputText("<li> EdgeofReality (Gym fucking machine)</li>");
+	outputText("<li> Bronycray (Heckel the Hyena)</li>");
+	outputText("<li> Sablegryphon (Gnoll spear-thrower)</li>");
+	outputText("<li> Nonesuch (Basilisk, Sandtraps, assisted with Owca/Vapula)</li>");
+	outputText("<li> Anonymous Individual (Lilium, PC Birthing Driders)</li>");
+	outputText("<li> PKD (Owca, Vapula, Fap Arena, Isabella Tentacle Sex, Lottie Tentacle Sex)</li>");
+	outputText("<li> Shamblesworth (Half of Niamh, Shouldra the Ghost-Girl, Ceraph Roleplaying As Marble, Yara Sex, Shouldra Follow Expansion)</li>");
+	outputText("<li> Kirbu (Exgartuan Expansion, Yara Sex, Shambles's Handler, Shouldra Follow Expansion)</li>");
+	outputText("<li> 05095 (Shouldra Expansion, Tons of Editing)</li>");
+	outputText("<li> Smidgeums (Shouldra + Vala threesome)</li>");
+	outputText("<li> FC (Generic Shouldra talk scene)</li>");
+	outputText("<li> Oak (Bro + Bimbo TF, Isabella's ProBova Burps)</li>");
+	outputText("<li> Space (Victory Anal Sex vs Kiha)</li>");
+	outputText("<li> Venithil (LippleLock w/Scylla & Additional Urta Scenes)</li>");
+	outputText("<li> Butts McGee (Minotaur Hot-dogging PC loss, Tamani Lesbo Face-ride, Bimbo Sophie Mean/Nice Fucks)</li>");
+	outputText("<li> Savin (Hel the Salamander, Valeria, Spanking Drunk Urta, Tower of the Phoenix, Drider Anal Victory, Hel x Isabella 3Some, Centaur Sextoys, Thanksgiving Turkey, Uncorrupt Latexy Recruitment, Assert Path for Direct Feeding Latexy, Sanura the Sphinx)</li>");
+	outputText("<li> Gats (Lottie, Spirit & Soldier Xmas Event, Kiha forced masturbation, Goblin Doggystyle, Chicken Harpy Egg Vendor)</li>");
+	outputText("<li> Aeron the Demoness (Generic Goblin Anal, Disciplining the Eldest Minotaur)</li>");
+	outputText("<li> Gats, Shamblesworth, Symphonie, and Fenoxo (Corrupted Drider)</li>");
+	outputText("<li> Bagpuss (Female Thanksgiving Event, Harpy Scissoring, Drider Bondage Fuck)</li>");
+	outputText("<li> Fenoxo (Everything Else)</li>");
+	outputText("</ul>");
+	outputText("<b>Oviposition Update Credits - Names in Order Appearance in Oviposition Document</b>");
+	outputText("<ul>");
+	outputText("<li> DCR (Idea, Drider Transformation, and Drider Impreg of: Goblins, Beegirls, Nagas, Harpies, and Basilisks)</li>");
+	outputText("<li> Fenoxo (Bee Ovipositor Transformation, Bee Oviposition of Nagas and Jojo, Drider Oviposition of Tamani)</li>");
+	outputText("<li> Smokescreen (Bee Oviposition of Basilisks)</li>");
+	outputText("<li> Radar (Oviposition of Sand Witches)</li>");
+	outputText("<li> OutlawVee (Bee Oviposition of Goo-Girls)</li>");
+	outputText("<li> Zeikfried (Editing this mess, Oviposition of Anemones)</li>");
+	outputText("<li> Woodrobin (Oviposition of Minotaurs)</li>");
+	outputText("<li> Posthuman (Oviposition of Ceraph Follower)</li>");
+	outputText("<li> Slywyn (Bee Oviposition of Gigantic PC Dick)</li>");
+	outputText("<li> Shaxarok (Drider Oviposition of Large Breasted Nipplecunts)</li>");
+	outputText("<li> Quiet Browser (Bee Oviposition of Urta)</li>");
+	outputText("<li> Bagpuss (Laying Eggs In Pure Amily)</li>");
+	outputText("<li> Eliria (Bee Laying Eggs in Bunny-Girls)</li>");
+	outputText("</ul>");
+	outputText("\nIf I'm missing anyone, please contact me ASAP!  I have done a terrible job keeping the credits up to date!");
+	doNext(mainMenu);	
+}
+
+function imageCreditsScreen():void {
+	outputText("<b>Bundled Image Credits:</b>\n", true);
+	outputText("<b>Yoh-SL</b>")
+	outputText("<ul>");;
+	outputText("<li> Bee-Girl Monster Image</li>");
+	outputText("<li> Goo-Girl Monster Image</li>");
+	outputText("<li> Ceraph Monster Image</li>");
+	outputText("<li> Sand-Witch (and sandwich) Monster Images</li>");
+	outputText("</ul>");
 	doNext(mainMenu);	
 }
 
