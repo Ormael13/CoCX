@@ -11,16 +11,16 @@ import os.path
 
 writeToFiles = False
 
-def cleanEventNumbers():
+def getFuncDict():
 
-	funcFind = re.compile(r"(if\(eventNo == \d*?\) )\{\W*")
-	funcExtr = re.compile(r"if\s?\(eventNo == (\d*)\)\W*?{\W*(\w+).*?\(\);\W+(?:(?:return)|(?:doNext))")
+	funcFind = re.compile(r"(if\s?\(eventNo\s?==\s?\d*?\))\W*\{\W*")
+	funcExtr = re.compile(r"if\s?\(eventNo\s?==\s?(\d*)\)\W*?{\W*(\w+).*?\(\);\W+(?:(?:return;))")
 
 	eventF = open("./includes/doEvent.as", "r")
 	eventS = eventF.read()
 	eventF.close()
 
-	eventS = funcFind.sub(r"\1", eventS)
+	#eventS = funcFind.sub(r"\1", eventS)
 
 	print "done"
 	#print eventS
@@ -28,9 +28,17 @@ def cleanEventNumbers():
 	res = dict(res)
 	for key, value in res.iteritems():
 		print key, value
+	#print funcExtr.search(eventS).groups()
+	#print funcExtr.search(eventS).group(0)
 	#print res
 	#Ok, now we have a eventNo <-> function name dictionary
 	
+	return res
+
+def cleanEventNumbers():
+
+
+	res = getFuncDict()
 
 	simpleCRe = re.compile(r"[ 	]simpleChoices\([\w\"\ \,\?!]*?\);")
 	choicesRe = re.compile(r"choices\([\w\"\ \,\?!]*?\);")
@@ -81,11 +89,11 @@ def cleanEventNumbers():
 					with open(os.path.join("./includes", filename), "w") as fileH:
 						tmp = fileH.write(tmp)
 
-
+	return res
 # 
 
 
-def cleanStaleDoEventIfs():
+def cleanStaleDoEventIfs(evNumDict = {}):
 
 	numExtr = re.compile(r"if\s?\(eventNo == (\d*)\)")
 
@@ -95,7 +103,7 @@ def cleanStaleDoEventIfs():
 
 	print "Cleaning doEvent If statements"
 	filelist = os.listdir("./includes")
-	files = []
+	files = {}
 
 	#Pull all the as files into memory. 
 	for filename in filelist:
@@ -103,22 +111,29 @@ def cleanStaleDoEventIfs():
 		if filename.endswith(".as") and not filename.find("doEvent")+1 and not filename.find("flagDefs")+1:		
 			with open(os.path.join("./includes", filename), "r") as fileH:
 				tmp = fileH.read()
-			files.append(tmp)
+			files[filename] = tmp
 
 
 	matches = numExtr.finditer(eventS)
 
 	print "event = ", matches
 
+	uses = {}
+	
 	for match in matches:
 		num = match.group(1)
 
 		numUnused = True
 
-		for fContents in files:
+
+		for fName, fContents in files.iteritems():
 
 				if num in fContents:
-					#print "num exists", num
+					if fName in uses:
+						uses[fName].append(num)
+					else:
+						uses[fName] = [num]
+					#print "num exists", num, " in ", fName
 					numUnused = False
 					break
 
@@ -134,11 +149,30 @@ def cleanStaleDoEventIfs():
 			print start, length, num
 
 			if (num in prefix) or (num in postfix):
-				print "used elsewhere in doEvent.as"
+				#print "used elsewhere in doEvent.as"
+				pass
 			else:
-				print "Entirely Unused!", num
+				#print "Entirely Unused!", num
 				call = call.replace("eventNo", " false ")
 				eventS = prefix+call+postfix
+
+	keyList = []
+	
+	for key, value in uses.iteritems():
+		valueStr = ""
+		for num in value:
+			if num in evNumDict:
+				print "Have event number!"
+				valueStr += "%s (%s)," % (num, evNumDict[num])
+			else:
+				valueStr += "%s," % (num)
+		valueStr = valueStr.rstrip(", ")
+		keyList.append("%s = %s" % (key, valueStr))
+
+
+	keyList.sort()
+	for item in keyList:
+		print item
 	if writeToFiles:
 		with open("./includes/doEvent.as", "w") as eventF:
 			eventF.write(eventS)
@@ -483,7 +517,7 @@ if __name__ == "__main__":
 			print "Writing to files!"
 			writeToFiles = True
 	#cleanEventNumbers()
-	#cleanStaleDoEventIfs()
+	cleanStaleDoEventIfs(getFuncDict())
 	removeDisabledDoEventIfs()
 
 	#cleanFlags()

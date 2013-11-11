@@ -275,10 +275,10 @@ function turnDownYogaWifCottonFirstTime():void {
 function acceptYoga():void {
 	spriteSelect(12);
 	outputText("", true);
-	var fuckHer:Number = 0;
-	var getFucked:Number = 0;
-	var option3:Number = 0;
-	var option4:Number = 0;
+	var fuckHer = 0;
+	var getFucked = 0;
+	var option3 = 0;
+	var option4 = 0;
 	if(player.fatigue > 80) {
 		outputText("You're wayyy too tired to do any yoga right now.", false);
 		doNext(telAdreMenu);
@@ -304,8 +304,10 @@ function acceptYoga():void {
 		
 		outputText("Once you're done and about to hit the showers, Cotton pulls you aside and says with a grin, \"<i>Up for some post-workout exercises?</i>\"", false);
 		//[Shower Sex (Fuck Her) (As Male or Herm only)] [Shower Sex (Get Fucked)] [Tantric Sex (Only if Speed is 50+)] [Leave]
-		if(player.hasCock()) fuckHer = 2817;
-		if(player.gender > 0) getFucked = 2818;
+		if(player.hasCock()) 
+			fuckHer = fuckCottonInShowerRepeat;
+		if(player.gender > 0) 
+			getFucked = cottonFucksYouInShowerRepeat;
 		//if(player.spe >= 50 && !player.isTaur()) option3 = 2819;
 		simpleChoices("Fuck Her",fuckHer,"Get Fucked",getFucked,"Tantric Sex",option3,"",0,"Leave",leaveCotton);
 	}
@@ -335,9 +337,12 @@ function acceptYoga():void {
 
 		outputText("Once you're done and about to hit the showers, Cotton pulls you aside and says, \"<i>I know you weren't comfortable with our shower before, so I won't join you this time. But if you ever change your mind, just say the word.</i>\"", false);
 		//[Shower Sex (Fuck Her)] [Shower Sex (Get Fucked)] [Tantric Sex (Only if Speed is 50+)] [Leave]
-		if(player.hasCock()) fuckHer = 2817;
-		if(player.gender > 0) getFucked = 2818;
-		if(player.spe >= 50 && !player.isTaur()) option3 = 2819;
+		if(player.hasCock()) 
+			fuckHer = fuckCottonInShowerRepeat;
+		if(player.gender > 0) 
+			getFucked = cottonFucksYouInShowerRepeat;
+		if(player.spe >= 50 && !player.isTaur()) 
+			option3 = cottonTantricSex;
 		simpleChoices("Fuck Her",fuckHer,"Get Fucked",getFucked,"Tantric Sex",option3,"",0,"Leave",leaveCotton);
 	}
 	//(Repeat Encounter (Had Sex))
@@ -354,9 +359,12 @@ function acceptYoga():void {
 		
 		outputText("Once you're done and about to hit the showers, Cotton pulls you aside and says with a grin, \"<i>Up for some post-workout exercises?</i>\"", false);
 		//[Shower Sex (Fuck Her) (As Male or Herm only)] [Shower Sex (Get Fucked)] [Tantric Sex (Only if Speed is 50+)] [Leave]
-		if(player.hasCock()) fuckHer = 2817;
-		if(player.gender > 0) getFucked = 2818;
-		if(player.spe >= 50 && !player.isTaur()) option3 = 2819;
+		if(player.hasCock()) 
+			fuckHer = fuckCottonInShowerRepeat;
+		if(player.gender > 0) 
+			getFucked = cottonFucksYouInShowerRepeat;
+		if(player.spe >= 50 && !player.isTaur()) 
+			option3 = cottonTantricSex;
 		simpleChoices("Fuck Her",fuckHer,"Get Fucked",getFucked,"Tantric Sex",option3,"",0,"Leave",leaveCotton);
 	}
 	//(Increases muscle tone up to 50, speed and feminine features.)
@@ -370,15 +378,20 @@ function cottonChat():void {
 	spriteSelect(12);
 	var chats:Array = new Array();
 	//Urta chance
-	if(flags[TIMES_FUCKED_URTA] > 0) chats[chats.length] = 1;
+	if(flags[TIMES_FUCKED_URTA] > 0) 
+		chats[chats.length] = 1;
 	//Edryn chance
-	if(player.hasStatusAffect("Edryn") >= 0) chats[chats.length] = 2;
+	if(player.hasStatusAffect("Edryn") >= 0) 
+		chats[chats.length] = 2;
 	//(Scylla chat)
-	if(flags[UNKNOWN_FLAG_NUMBER_00054] > 0) chats[chats.length] = 2;
+	if(flags[UNKNOWN_FLAG_NUMBER_00054] > 0) 
+		chats[chats.length] = 2;
 	//VALA 
-	if(flags[UNKNOWN_FLAG_NUMBER_00119] != 0) chats[chats.length] = 3;
+	if(flags[UNKNOWN_FLAG_NUMBER_00119] != 0) 
+		chats[chats.length] = 3;
 	//(Jojo chat)
-	if(monk > 0) chats[chats.length] = 4;
+	if(monk > 0) 
+		chats[chats.length] = 4;
 	var choice:Number = chats[rand(chats.length)];
 	
 	//(Urta Chat)
@@ -433,9 +446,8 @@ function leaveAfterYoga():void {
 //(If Shower)
 function cottonShowerFunTimes():void {
 	spriteSelect(12);
-	var option1:Number = 0;
-	var option2:Number = 0;
-	var option3:Number = 0;
+	var option1 = 0;
+	var option2 = 0;
 	outputText("", true);
 	outputText("\"<i>Perfect! Let's go,</i>\" she takes you by the arm and leads you back into the lockers, and then into the nearby showers, which are apparently unisex. You both strip down and turn on a shower head. After a few moments of scrubbing up, you give your shower buddy a surreptitious glance.\n\n", false);
 
@@ -443,8 +455,10 @@ function cottonShowerFunTimes():void {
 
 	outputText("\"<i>Well? Care for a little... post-workout stretching?</i>\"", false);
 	//[Fuck Her (Male or Herm only)] [Get Fucked] [Service her] [Refuse]
-	if(player.hasCock()) option1 = 2813;
-	if(player.gender > 0) option2 = 2814;
+	if(player.hasCock()) 
+		option1 = cottonFirstTimeFuckHer;
+	if(player.gender > 0) 
+		option2 = cottonFucksYou;
 	simpleChoices("Fuck Her",option1,"Get Fucked",option2,"ServiceHer",serviceFirstTimeCotton,"",0,"Refuse",refuseFirstTimeCotton);
 }
 

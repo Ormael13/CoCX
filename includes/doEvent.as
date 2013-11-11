@@ -3232,71 +3232,23 @@ function doEvent(eventNo):void
 		return;
 	}
 	
-	else if (eventNo == 2784)
-	{
-		buyGymLifeTimeMembership();
-		return;
-	}
+	
 	else if (eventNo == 2800)
 	{
 		giveCorruptAmilySuccubusDelight();
 		return;
 	}
-	else if (eventNo == 2801)
-	{
-		corruptAmilyBuckFutter();
-		return;
-	}
-	else if (eventNo == 2802)
-	{
-		corruptAmilyCampBonesPCWithHerCock();
-		return;
-	}
-	else if (eventNo == 2803)
-	{
-		corruptAmilyOralSuckOff();
-		return;
-	}
-	else if (eventNo == 2804)
-	{
-		corruptAmilysPussyGetsMotherfuckingFucked();
-		return;
-	}
-	else if (eventNo == 2806)
-	{
-		corruptAmilyLickPussiesLikeAPro();
-		return;
-	}
-	else if (eventNo == 2807)
-	{
-		corruptAmilyScissorsLikeAPro();
-		return;
-	}
-	else if (eventNo == 2808)
-	{
-		cottonGreeting();
-		return;
-	}
-	else if (eventNo == 2813)
-	{
-		cottonFirstTimeFuckHer();
-		return;
-	}
-	else if (eventNo == 2814)
-	{
-		cottonFucksYou();
-		return;
-	}
-	else if (eventNo == 2817)
-	{
-		fuckCottonInShowerRepeat();
-		return;
-	}
-	else if (eventNo == 2818)
-	{
-		cottonFucksYouInShowerRepeat();
-		return;
-	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	else if (eventNo == 2819)
 	{
 		cottonTantricSex();
@@ -3371,11 +3323,7 @@ function doEvent(eventNo):void
 		greetHeckel();
 		return;
 	}
-	else if (eventNo == 2845)
-	{
-		approachIfris();
-		return;
-	}
+	
 	else if (eventNo == 2855)
 	{
 		if (hours == 19 || hours == 20)
@@ -3831,16 +3779,8 @@ function doEvent(eventNo):void
 		victoryVSDriderStickDickInSpinneret();
 		return;
 	}
-	else if (eventNo == 3023)
-	{
-		girlsRapeAkbal();
-		return;
-	}
-	else if (eventNo == 3025)
-	{
-		rapeAkbalForcedFemaleOral();
-		return;
-	}
+	
+	
 	else if (eventNo == 3028)
 	{
 		approachBimboSophieInCamp();
@@ -5141,11 +5081,7 @@ function doEvent(eventNo):void
 		herds();
 		return;
 	}
-	else if (eventNo == 3625)
-	{
-		zePit();
-		return;
-	}
+	
 	else if (eventNo == 3629)
 	{
 		rapeRebecc(false);
@@ -5156,11 +5092,7 @@ function doEvent(eventNo):void
 		rapeRebecc(true);
 		return;
 	}
-	else if (eventNo == 3631)
-	{
-		gangbangVillageStuff();
-		return;
-	}
+	
 	else if (eventNo == 3634)
 	{
 		owcaBuySetup("MinoCum");
@@ -6174,11 +6106,7 @@ function doEvent(eventNo):void
 		orphanageIntro();
 		return;
 	}
-	else if (eventNo == 3976)
-	{
-		loppeGenericMeetings();
-		return;
-	}
+	
 	else if (eventNo == 3978)
 	{
 		shareTentaclesWithScylla();
@@ -6231,11 +6159,7 @@ function doEvent(eventNo):void
 		houses();
 		return;
 	}
-	else if (eventNo == 3994)
-	{
-		dungeons();
-		return;
-	}
+	
 	
 	
 	else if (eventNo == 3997)
