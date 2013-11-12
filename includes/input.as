@@ -220,32 +220,33 @@ function keyboard(e:KeyboardEvent):void {
 		return;
 	}
 	//N pressed! Equal to no!"
-	if(e.keyCode == 78 && this.mainView.getButtonText( 1 ) == "No" && this.mainView.isButtonVisible( 1 )) {
+	if(e.keyCode == 78 && this.mainView.getButtonText( 1 ) == "No" && this.mainView.buttonIsVisible( 1 )) {
 		currEvent = button2Choice;
 		//eventParser(currEvent);
 		executeButtonClick(1);
 		return;
 	}
 	//Y pressed! Equal to Yes!"
-	if(e.keyCode == 89 && this.mainView.getButtonText( 0 ) == "Yes" && this.mainView.isButtonVisible( 0 )) {
+	if(e.keyCode == 89 && this.mainView.getButtonText( 0 ) == "Yes" && this.mainView.buttonIsVisible( 0 )) {
 		currEvent = buttonEvents[0];
 		//eventParser(currEvent);
 		executeButtonClick(0);
 		return;
 	}
-	if(e.keyCode == 80 && perksText.visible == true && perksBG.visible == true) {
+	if(e.keyCode == 80 && this.mainView.menuButtonIsVisible( MainView.MENU_PERKS ) ) {
 		displayPerks(f);
 		return;
 	}
 	//If 32 pressed or 13 pressed (enter/space) - NEXT
 	if(e.keyCode == 13 || e.keyCode == 32) {
-		if(b0Text.visible && ((b0Text.text == "Nevermind" || b0Text.text == "Abandon" || b0Text.text == "Next" || b0Text.text == "Return" || b0Text.text == "Back" || b0Text.text == "Leave" || b0Text.text == "Resume"))) {
+		// b0text is at index 9.  b0Text actually sorta means b10Text...
+		if( this.mainView.buttonIsVisible( 9 ) && this.mainView.buttonTextIsOneOf( 9, [ "Nevermind", "Abandon", "Next", "Return", "Back", "Leave", "Resume" ] )) {
 			mouseOverText.visible = false;
 			//eventParser(button0Choice);
 			executeButtonClick(9);
 			return;
 		}
-		if(b1Text.visible && ((b1Text.text == "Next" || b1Text.text == "Return" || b1Text.text == "Back"))) {
+		if( this.mainView.buttonIsVisible( 0 ) && this.mainView.buttonTextIsOneOf( 0, [ "Next", "Return", "Back" ] )) {
 			mouseOverText.visible = false;
 			//eventParser(button1Choice);
 			executeButtonClick(0);

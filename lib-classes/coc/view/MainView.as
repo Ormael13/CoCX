@@ -315,7 +315,18 @@ package coc.view {
 			}
 		};
 
-		public function isButtonVisible( index :int ) :String {
+		// This function checks if the button at index has text
+		// that matches at least one of the possible texts passed as an argument.
+		public function buttonTextIsOneOf( index :int, possibleLabels :Array ) :Boolean {
+			var label :String
+				buttonText :String;
+
+			buttonText = this.getButtonText( index );
+
+			return (possibleLabels.indexOf( buttonText ) != -1);
+		};
+
+		public function buttonIsVisible( index :int ) :String {
 			if( index < 0 || index > BOTTOM_BUTTON_COUNT ) {
 				return undefined;
 			}
