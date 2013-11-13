@@ -1,4 +1,6 @@
-﻿import classes.Player;
+﻿import classes.itemSlotClass;
+import classes.keyItemClass;
+import classes.Player;
 /**
  * Urta's Quest
  * @Author: 
@@ -25,8 +27,11 @@
 //You play as Urta, which copies everyone about you into this new variable. Very clumsy.
 //TODO: Figure out this whole thing. You play as Urta but the whole quest saves you state into this variable and swaps back and forth 
 //whenever you "leave" the quest 
-var player2:Player = new Player();
-var urtaQItems:Array = new Array();
+var urtaQItems1:itemSlotClass = new itemSlotClass();
+var urtaQItems2:itemSlotClass = new itemSlotClass();
+var urtaQItems3:itemSlotClass = new itemSlotClass();
+var urtaQItems4:itemSlotClass = new itemSlotClass();
+var urtaQItems5:itemSlotClass = new itemSlotClass();
 
 function urtaBusy():Boolean {
 	return (flags[EDRYN_BIRF_COUNTDOWN] > 0 || flags[URTA_QUEST_STATUS] == -1);
@@ -157,30 +162,31 @@ function infertilityQuestions():void {
 
 function resetToPC():void {
 	player = clone(player2);
-	itemSlot1 = clone(urtaQItems[0]);
-	itemSlot2 = clone(urtaQItems[1]);
-	itemSlot3 = clone(urtaQItems[2]);
-	itemSlot4 = clone(urtaQItems[3]);
-	itemSlot5 = clone(urtaQItems[4]);
+	itemSlot1 = clone(urtaQItems1);
+	itemSlot2 = clone(urtaQItems2);
+	itemSlot3 = clone(urtaQItems3);
+	itemSlot4 = clone(urtaQItems4);
+	itemSlot5 = clone(urtaQItems5);
 }
 
 
 //Urta Appearance Screen(C)*
 function startUrtaQuest():void {
 	clearOutput();
-	urtaQItems[0] = clone(itemSlot1);
-	urtaQItems[1] = clone(itemSlot2);
-	urtaQItems[2] = clone(itemSlot3);
-	urtaQItems[3] = clone(itemSlot4);
-	urtaQItems[4] = clone(itemSlot5);
+	
+	// *SERIALIZE* out the players current Player object + items
+	urtaQItems1 = clone(itemSlot1);
+	urtaQItems2 = clone(itemSlot2);
+	urtaQItems3 = clone(itemSlot3);
+	urtaQItems4 = clone(itemSlot4);
+	urtaQItems5 = clone(itemSlot5);
 	itemSlot1 = new itemSlotClass();
 	itemSlot2 = new itemSlotClass();
 	itemSlot3 = new itemSlotClass();
 	itemSlot4 = new itemSlotClass();
 	itemSlot5 = new itemSlotClass();
 	player2 = clone(player);
-	//var playerTwo:creature = new creature;
-	//var playerTwo:creature = Object(ObjectUtil.copy(player));
+
 	player = new Player();
 	player.short = "Urta";
 	player.tallness = 71;

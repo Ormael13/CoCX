@@ -6,6 +6,7 @@
 		public function assClass()
 		{
 		}
+		
 		//data
 		//butt wetness
 		public var analWetness:Number = 0;
