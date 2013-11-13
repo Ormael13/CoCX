@@ -15,6 +15,7 @@ registerClassAlias("assClass", assClass);
 registerClassAlias("Character", Character);
 registerClassAlias("Cock", Cock);
 registerClassAlias("CockTypesEnum", CockTypesEnum);
+registerClassAlias("Enum", Enum);
 registerClassAlias("Creature", Creature);
 registerClassAlias("itemSlotClass", itemSlotClass);
 registerClassAlias("keyItemClass", keyItemClass);
@@ -50,6 +51,7 @@ nameBox.visible = false;
 mainMenu();
 
 
+
 //MainMenu - kicks player out to the main menu
 function mainMenu(e:MouseEvent = undefined):void {
 	eventTestInput.x = -10207.5;
@@ -81,6 +83,52 @@ function mainMenu(e:MouseEvent = undefined):void {
 	outputText("<b>Corruption of Champions (" + version + ")</b>\n(Formerly Unnamed Text Game)", true);
 	
 
+	// This junk was for testing my new parser. It can be removed, I think. 
+	// I still have a few parser tweaks I want to do, though.
+	// Really, I should have a "test parser" button, but LAZY
+	
+	outputText("\n\n", false);
+	
+	/*
+
+	outputText("[if (hasCock = true) [cock] stiffening][if (isHerm = true)  and ][if (hasVagina = true) [vagina] starting to burn with need] DERP [cock biggest] HERP [armor] LOLWUT  [balls] ");
+	outputText("[If (hours > 19) Hug | Cuddle]\n");
+	outputText("\n\n", false);
+
+	
+	outputText("[LOL[WUT]] [herp] [DERP] BLARGH [if (0 == 0) HARBLE]\n\n", false);
+	outputText("[r[e[c[u[r[s[i[v[e[lol][cock]]t]a]g[rofl][copter]]b]o]m]i]n][a][t[io]n]\n", false);
+	
+	outputText("[if [ [ (4==4) HERP|DERP]\n", false);
+	outputText("[if (4 == 7) HERP|DERP]\n", false);
+	
+	outputText("[if (4==(2+2)) HERP|DERP]\n", false);
+	outputText("[if (4==4) HERP|DERP]\n", false);
+
+	outputText("if (4==7) [if (4==7) HERP]\n", false);
+	outputText("if (4==7) [if (4==7) HERP|DERP]\n", false);
+	outputText("if (4=4) [if (4=4) HERP]\n", false);
+	outputText("if (4==4) [if (4==4) HERP]\n", false);
+	outputText("if (4==biggesttitsize) [if (4==biggesttitsize) [HERP [cock] [vagina] [balls]]]\n", false);
+	outputText("if (analcapacity>3)    [if (analcapacity>3) [HERP [cock] [vagina] [balls]]]\n", false);
+	outputText("if (analcapacity = 0)  [if (analcapacity = 0) [HERP [cock] [vagina] [balls]]]\n", fals
+	outputText("if (analcapacity > 0)  [if (analcapacity > 0) [HERP [cock] [vagina] [balls]]]\n", false);
+
+	outputText("[cock] stiffening and [vagina] starting to burn with need");
+	outputText("\n\n");
+	outputText("Complex IF Statement thing: [if (hasCock = true) [cock] stiffening][if (isHerm = true) and ][if (hasVagina = true) [vagina] starting to burn with need]");
+
+
+	outputText("\n\n");
+	outputText("Gender Stuff! [His], [his], [Him], [him], [his], [His]\n");
+	outputText("Gender Stuff! [rubi eis], [rubi ey], [rubi eir], [rubi eirs], [rubi emself]]\n");
+	outputText("Gender Stuff! [rubi Eis], [rubi Ey], [rubi Eir], [rubi Eirs], [rubi Emself]]\n");
+	outputText("Gender Stuff! [arian eis], [arian ey], [arian eir], [arian eirs], [arian emself]]\n");
+	outputText("Gender Stuff! [arian Eis], [arian Ey], [arian Eir], [arian Eirs], [arian Emself]]\n");
+	outputText("\n\n");
+
+	*/
+	
 	outputText("\n\n<u>Created by: Fenoxo</u>", false);
 	outputText("\nEdited By: Ashi, SoS, Zeikfried, and Others", false);
 	outputText("\nOpen-source version modifications by: \nAmygdaloidnucleus/Amygdala, Hoffledop/Yoffy, Herp-a-derp/Fake-Name, Cmacleod42", false);
@@ -113,15 +161,12 @@ function mainMenu(e:MouseEvent = undefined):void {
 	var resume:Number = 0;
 	if(player.str > 0)  //we're in a game, allow resume.
 		resume = 1;
-	
 
 	// I really wanted to only have the "imageCreditsScreen" button if images were found, but it turns out
 	// that if you check if any images were found immediately when this screen is shown, you get 0
 	// since the images haven't loaded yet.
 	// Therefore, the imageCreditScreen will just have to say "No image pack" if you don't have any images
 
-	//The world isn't quite ready for the ASPLODE button. Uncomment for easy bug reporter testing.
-	//choices("",  0, "Credits", creditsScreen, "Instructions", howToPlay, "", 0, "", 0, "ASPLODE", 9000000000, "", 0, "", 0, "Settings", settingsScreen, "Resume", resume);
 	choices("",  0, 
 			"Image Credits", imageCreditsScreen, 
 			"Credits", creditsScreen, 
@@ -168,7 +213,7 @@ function settingsScreen():void {
 		outputText("Silly Mode <b>Off</b>\n	You're an incorrigable stick-in-the-mud with no sense of humor.", false);
 
 	outputText("\n\n", false);
-	outputText("<b>The following flags are not fully implemeneted yet.</b>", false);
+	outputText("<b>The following flags are not fully implemeneted yet (e.g. they don't apply in <i>all</i> cases where they could be relevant).</b>", false);
 	outputText("\n\n", false);
 
 	if(flags[LOW_STANDARDS_FOR_ALL]) 
