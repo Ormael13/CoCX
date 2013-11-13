@@ -8,31 +8,6 @@ package classes
 	 */
 	public class Character extends Creature 
 	{
-		override public function CopyFrom(s:Creature):void
-		{
-			var source:Character = s as Character;
-			super.CopyFrom(s);
-			
-			this.femininity = source.femininity;
-			this.eyeType = source.eyeType;
-			this.beardLength = source.beardLength;
-			this.beardStyle = source.beardStyle;
-			this.thickness = source.thickness;
-			this.tone = source.tone;
-			this.tongueType = source.tongueType;
-			this.antennae = source.antennae;
-			this.horns = source.horns;
-			this.armType = source.armType;
-			this.gills = source.gills;
-			this.pregnancyType = source.pregnancyType;
-			this.pregnancyIncubation = source.pregnancyIncubation;
-			this.buttPregnancyType = source.buttPregnancyType;
-			this.buttPregnancyIncubation = source.buttPregnancyIncubation;
-			
-			this.keyItems = source.keyItems;
-			source.keyItems = null;
-		}
-		
 		public var femininity:Number = 50;
 		
 		//Eyetype
