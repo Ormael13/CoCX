@@ -161,32 +161,32 @@ function infertilityQuestions():void {
 }
 
 function resetToPC():void {
-	player.CopyFrom(player2);
-	itemSlot1.CopyFrom(urtaQItems1)
-	itemSlot2.CopyFrom(urtaQItems2)
-	itemSlot3.CopyFrom(urtaQItems3)
-	itemSlot4.CopyFrom(urtaQItems4)
-	itemSlot5.CopyFrom(urtaQItems5)
+	player = clone(player2);
+	itemSlot1 = clone(urtaQItems1);
+	itemSlot2 = clone(urtaQItems2);
+	itemSlot3 = clone(urtaQItems3);
+	itemSlot4 = clone(urtaQItems4);
+	itemSlot5 = clone(urtaQItems5);
 }
 
 
 //Urta Appearance Screen(C)*
 function startUrtaQuest():void {
 	clearOutput();
-	urtaQItems1.CopyFrom(itemSlot1);
-	urtaQItems2.CopyFrom(itemSlot2);
-	urtaQItems3.CopyFrom(itemSlot3);
-	urtaQItems4.CopyFrom(itemSlot4);
-	urtaQItems5.CopyFrom(itemSlot5);
+	
+	// *SERIALIZE* out the players current Player object + items
+	urtaQItems1 = clone(itemSlot1);
+	urtaQItems2 = clone(itemSlot2);
+	urtaQItems3 = clone(itemSlot3);
+	urtaQItems4 = clone(itemSlot4);
+	urtaQItems5 = clone(itemSlot5);
 	itemSlot1 = new itemSlotClass();
 	itemSlot2 = new itemSlotClass();
 	itemSlot3 = new itemSlotClass();
 	itemSlot4 = new itemSlotClass();
 	itemSlot5 = new itemSlotClass();
-	player2.CopyFrom(player);
-	//player2 = clone(player) as Player;
-	//var playerTwo:creature = new creature;
-	//var playerTwo:creature = Object(ObjectUtil.copy(player));
+	player2 = clone(player);
+
 	player = new Player();
 	player.short = "Urta";
 	player.tallness = 71;
