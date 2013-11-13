@@ -537,7 +537,7 @@ function missingoSex4():void {
 	
 	outputText("\"@_o@_...\" o_o oooo, ##o@%7o @o oo_ o_@_o. \"o_@ o_o'o @o_ (ooo o=o( oo_ @o_ _o_@ o_@oo....\"", false);
 	//[Fuck this!]
-	simpleChoices("Fuck This!",3198,"",0,"",0,"",0,"",0);
+	simpleChoices("Fuck This!",missingoSex5,"",0,"",0,"",0,"",0);
 }
 
 //{Next Page}

@@ -6,13 +6,11 @@
 	import flash.net.*;
 	import flash.events.*;
 	import classes.Image;
-<<<<<<< HEAD
+
 	import flash.system.Security;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
-=======
->>>>>>> parent of ffe3bc2... Security imports
-	
+		
 	/**
 	 * ...
 	 * @author Yoffy
@@ -94,7 +92,7 @@
 			var startSlice:int = imageURL.lastIndexOf('/') + 1;
 			var endSlice:int = imageURL.lastIndexOf('.');
 			var imageIdent:String = imageURL.slice(startSlice, endSlice);
-
+			
 			var imageTarget:Image = _imageTable[imageIdent];
 			
 			if (imageTarget == null)
@@ -151,7 +149,7 @@
 		private function fixupImage():void
 		{
 			mStage.addEventListener(Event.ENTER_FRAME, fixupListener);
-	}
+		}
 		
 		private function fixupListener(e:Event)
 		{

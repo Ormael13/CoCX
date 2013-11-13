@@ -11,10 +11,18 @@ textBGWhite.visible = false;
 textBGTan.visible = false;
 
 //Not exactly sure what the purpose of this is.
+registerClassAlias("assClass", assClass);
+registerClassAlias("Character", Character);
+registerClassAlias("Cock", Cock);
+registerClassAlias("CockTypesEnum", CockTypesEnum);
 registerClassAlias("Creature", Creature);
 registerClassAlias("itemSlotClass", itemSlotClass);
+registerClassAlias("keyItemClass", keyItemClass);
+registerClassAlias("Monster", Monster);
+registerClassAlias("Player", Player);
+registerClassAlias("statusAffectClass", statusAffectClass);
+registerClassAlias("vaginaClass", vaginaClass);
 //registerClassAlias("cockClass", cockClass);
-registerClassAlias("Cock", Cock);
 
 //Invert shit
 invertGo();
@@ -73,46 +81,12 @@ function mainMenu(e:MouseEvent = undefined):void {
 	outputText("<b>Corruption of Champions (" + version + ")</b>\n(Formerly Unnamed Text Game)", true);
 	
 
-	
-	/*
-	// This junk was for testing my new parser. It can be removed, I think. 
-	// I still have a few parser tweaks I want to do, though.
-	// Really, I should have a "test parser" button, but LAZY
-	
-	outputText("\n\n", false);
-	
-	outputText("[if (hasCock = true) [cock] stiffening][if (isHerm = true)  and ][if (hasVagina = true) [vagina] starting to burn with need] DERP [cock biggest] HERP [armor] LOLWUT  [balls] ");
-	outputText("[If (hours > 19) Hug | Cuddle]\n");
-	outputText("\n\n", false);
-
-	
-	outputText("[LOL[WUT]] [herp] [DERP] BLARGH [if (0 == 0) HARBLE]\n\n", false);
-	outputText("[r[e[c[u[r[s[i[v[e[lol][cock]]t]a]g[rofl][copter]]b]o]m]i]n][a][t[io]n]\n", false);
-	
-	outputText("[if [ [ (4==4) HERP|DERP]\n", false);
-	outputText("[if (4 == 7) HERP|DERP]\n", false);
-	
-	outputText("[if (4==(2+2)) HERP|DERP]\n", false);
-	outputText("[if (4==4) HERP|DERP]\n", false);
-
-	outputText("if (4==7) [if (4==7) HERP]\n", false);
-	outputText("if (4==7) [if (4==7) HERP|DERP]\n", false);
-	outputText("if (4=4) [if (4=4) HERP]\n", false);
-	outputText("if (4==4) [if (4==4) HERP]\n", false);
-	outputText("if (4==biggesttitsize) [if (4==biggesttitsize) [HERP [cock] [vagina] [balls]]]\n", false);
-	outputText("if (analcapacity>3)    [if (analcapacity>3) [HERP [cock] [vagina] [balls]]]\n", false);
-	outputText("if (analcapacity = 0)  [if (analcapacity = 0) [HERP [cock] [vagina] [balls]]]\n", false);
-	outputText("if (analcapacity > 0)  [if (analcapacity > 0) [HERP [cock] [vagina] [balls]]]\n", false);
-	outputText("Complex IF Statement thing: [if (hasCock = true) [cock] stiffening][if (isHerm = true) and ][if (hasVagina = true) [vagina] starting to burn with need]");
-
-
-	outputText("\n\n", false);
-	*/
-
 	outputText("\n\n<u>Created by: Fenoxo</u>", false);
 	outputText("\nEdited By: Ashi, SoS, Zeikfried, and Others", false);
 	outputText("\nOpen-source version modifications by: \nAmygdaloidnucleus/Amygdala, Hoffledop/Yoffy, Herp-a-derp/Fake-Name, Cmacleod42", false);
-	outputText("\n\n<u><a href='https://github.com/herp-a-derp/Corruption-of-Champions'>https://github.com/herp-a-derp/Corruption-of-Champions</a></u>", false);
+	outputText("\n\nSource Code:\n<u><a href='https://github.com/herp-a-derp/Corruption-of-Champions'>https://github.com/herp-a-derp/Corruption-of-Champions</a></u>", false);
+	outputText("\nBug Tracker: \n<u><a href='https://github.com/herp-a-derp/Corruption-of-Champions/issues'>https://github.com/herp-a-derp/Corruption-of-Champions/issues</a></u>");
+	outputText("\n(requires an account, unfortunately)");
 	outputText("\n\n<b><u>DISCLAIMER</u>\n\n-There are many strange and odd fetishes contained in this flash.  Peruse at own risk.", false);
 	outputText("\n-Please be 18 or the legal age to view porn before playing.", false);
 	outputText("\n-Try to keep your keyboard clean.  Think of the children!</b>", false);

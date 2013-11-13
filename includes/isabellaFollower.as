@@ -737,7 +737,7 @@ function izzyMilkingMeinMilkersMya2():void {
 	outputText("  What do you say?", false);
 
 	//[I'll Allow It][Mine Mine MINE!]
-	simpleChoices("Allow It",3251,"MINE!",3252,"",0,"",0,"",0);
+	simpleChoices("Allow It",AllowIzzyMilkerUse,"MINE!",noMilkingMilky,"",0,"",0,"",0);
 }
 
 //[I'll Allow It]

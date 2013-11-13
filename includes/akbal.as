@@ -585,19 +585,19 @@ function victoryChoices():void
 		if (player.lust >= 33 && player.gender > 0)
 		{
 			outputText("You walk around Akbal's beaten and lust crazed form with a smile on your face. The demon's growl continues as he awaits your judgment.", false);
-			var vagoo:Number = 0;
-			var vagooLick:Number = 0;
-			var buttFuck:Number = 0;
-			var bikiniTits:int = 0;
+			var vagoo = 0;
+			var vagooLick = 0;
+			var buttFuck = 0;
+			var bikiniTits = 0;
 			if (player.hasVagina())
 			{
-				vagoo = 3023;
-				vagooLick = 3025;
+				vagoo = girlsRapeAkbal;
+				vagooLick = rapeAkbalForcedFemaleOral;
 			}
 			if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor")
-				bikiniTits = 3988;
+				bikiniTits = lustyMaidenPaizuri;
 			if (player.hasCock())
-				buttFuck = 5129;
+				buttFuck = rapeAkbal;
 			outputText("\n\nDo you rape him?", false);
 			//Rape / Don't Rape
 			simpleChoices("Butt-fuck", buttFuck, "Take Vaginally", vagoo, "Force Lick", vagooLick, "B.Titfuck", bikiniTits, "Leave", 5007);
