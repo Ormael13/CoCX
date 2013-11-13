@@ -22,6 +22,7 @@ registerClassAlias("Monster", Monster);
 registerClassAlias("Player", Player);
 registerClassAlias("statusAffectClass", statusAffectClass);
 registerClassAlias("vaginaClass", vaginaClass);
+//registerClassAlias("Enum", Enum);
 //registerClassAlias("cockClass", cockClass);
 
 //Invert shit
@@ -132,13 +133,14 @@ function mainMenu(e:MouseEvent = undefined):void {
 			"", 0, 
 			"Settings", settingsScreen, 
 			"Resume", resume);
-		
+	
 }
-
+	
 import flash.system.SecurityDomain;
 import flash.system.Security;;
 
-function settingsScreen():void {
+function settingsScreen():void 
+{	
 	outputText("<b>Settings toggles:</b>\n", true);
 
 	if(debug) 

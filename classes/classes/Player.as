@@ -31,7 +31,7 @@ package classes
 		
 		public function Player()
 		{
-			keyItems = new Array();
+
 		}	
 		
 		//Body Type
