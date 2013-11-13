@@ -11,10 +11,18 @@ textBGWhite.visible = false;
 textBGTan.visible = false;
 
 //Not exactly sure what the purpose of this is.
+registerClassAlias("assClass", assClass);
+registerClassAlias("Character", Character);
+registerClassAlias("Cock", Cock);
+registerClassAlias("CockTypesEnum", CockTypesEnum);
 registerClassAlias("Creature", Creature);
 registerClassAlias("itemSlotClass", itemSlotClass);
+registerClassAlias("keyItemClass", keyItemClass);
+registerClassAlias("Monster", Monster);
+registerClassAlias("Player", Player);
+registerClassAlias("statusAffectClass", statusAffectClass);
+registerClassAlias("vaginaClass", vaginaClass);
 //registerClassAlias("cockClass", cockClass);
-registerClassAlias("Cock", Cock);
 
 //Invert shit
 invertGo();
