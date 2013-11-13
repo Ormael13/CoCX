@@ -889,6 +889,10 @@ function anotherButton(button:int,nam:String,func,arg = -9000):int {
 	return button;
 }
 function barTelAdre():void {
+	// Dominka & Edryn both persist their sprites if you back out of doing anything with them -- I 
+	// I guess this is good a place as any to catch-all the sprite, because I don't think theres ever a case you get a sprite from just entering the bar?
+	spriteSelect( -1);
+	
 	hideUpDown();
 	var button:int = 0;
 	outputText("", true);
