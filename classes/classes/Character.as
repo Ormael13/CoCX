@@ -8,7 +8,6 @@ package classes
 	 */
 	public class Character extends Creature 
 	{
-		
 		public var femininity:Number = 50;
 		
 		//Eyetype
@@ -45,7 +44,7 @@ package classes
 		public var armType:Number = 0;
 		
 		//Gills
-		public var gills:Boolean = false;		;
+		public var gills:Boolean = false;
 		
 		//Preggos
 		//TODO: Document pregancy types. Both butt and normal. Mainly butts though.
@@ -69,7 +68,7 @@ package classes
 		
 		public function Character() 
 		{
-			
+			keyItems = new Array();
 		}
 		
 		//Return bonus fertility
@@ -1498,7 +1497,7 @@ package classes
 			return total;
 		}
 		
-				public function smallestTitSize():Number
+		public function smallestTitSize():Number
 		{
 			if (breastRows.length == 0)
 				return -1;
