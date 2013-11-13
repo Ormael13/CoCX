@@ -508,6 +508,67 @@ def cleanAddButtons():
 
 
 
+def cleanupChoiceSection(inStr):
+	cleanRE1 = re.compile(r"(?:rando|choice) = rand\(\d\);")
+	cleanRE2 = re.compile(r"(?:else )?(?:if\((?:rando|choice) == \d\) )?descript \+?= ")
+
+	cleanRE3 = re.compile(r"[\t\r\n]*")
+
+	cleaners = [cleanRE1, cleanRE2, cleanRE3]
+	#print "Old - ", inStr
+	new = inStr
+	for regex in cleaners:
+		new = regex.sub("", new)
+	new = new.replace(";", ", ")
+	new = new.rstrip(", ")
+	new = "descript += randomChoice(%s);" % new
+	print "New = ", new
+	return new
+def cleanupRandomChoices():
+
+	randomCleanupRE = re.compile(r"((?:rando|choice) = rand\((\d)\);(?:\s+(?:else )?(?:if\((?:rando|choice) == \d\) )?descript \+?= \"[a-zA-Z- ]+\";)+)")
+	
+
+	with open("./includes/descriptors.as", "r") as eventF:
+		eventS = eventF.read()
+	inStr = eventS
+	print "Cleaning descriptors If statements"
+	match = randomCleanupRE.search(inStr)
+
+	outStr = ""
+	matchStr = ""
+
+	while match:
+
+		print match.start(), match.end()
+		matches = match.groups()
+		print int(matches[1]) == matches[0].count("\n"), int(matches[1]), matches[0].count("\n")
+		
+		start, end = match.start(), match.end()
+
+		outStr += inStr[:start]
+		if int(matches[1]) == matches[0].count("\n"):
+			print "Replacing!"
+			outStr += cleanupChoiceSection(inStr[start:end])
+		else:
+			outStr += inStr[start:end]
+		
+		print inStr[start:end]
+		
+		inStr = inStr[end:]
+
+		match = randomCleanupRE.search(inStr)
+
+		if not match:
+			outStr += inStr
+	#eventS = disabledIfExtr.sub("", eventS)
+	
+	print len(eventS) == len(outStr), len(eventS), len(outStr)
+
+	if writeToFiles:
+		with open("./includes/descriptors.as", "w") as eventF:
+			eventF.write(outStr)
+
 
 if __name__ == "__main__":
 
@@ -518,8 +579,8 @@ if __name__ == "__main__":
 			print "Writing to files!"
 			writeToFiles = True
 	#cleanEventNumbers()
-	cleanStaleDoEventIfs(getFuncDict())
-	removeDisabledDoEventIfs()
+	#cleanStaleDoEventIfs(getFuncDict())
+	#removeDisabledDoEventIfs()
 
 	#cleanFlags()
 
@@ -529,3 +590,5 @@ if __name__ == "__main__":
 	#modifyParserIfStatements()
 
 	#cleanAddButtons()
+	
+	cleanupRandomChoices()
