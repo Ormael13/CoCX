@@ -41,8 +41,9 @@ package classes
 		public static const DRAGON:CockTypesEnum = new CockTypesEnum("reptile");
 		public static const DISPLACER:CockTypesEnum = new CockTypesEnum("other");
 		public static const FOX:CockTypesEnum = new CockTypesEnum("mammal");
-				
-		/* private */ function CockTypesEnum(i_group:String) { _group = i_group; }
+		public static const UNDEFINED:CockTypesEnum = new CockTypesEnum("");
+		
+		function CockTypesEnum(i_group:String = "") { _group = i_group; }
 		private var _group:String;
 		
 		public function get Group():String 
