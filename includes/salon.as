@@ -35,7 +35,16 @@ function salonPurchaseMenu():void {
 	else if(player.femininity > 20 && (player.gender == 0 || player.gender == 3))  sandFacial = 2837;
 	else if(player.femininity > 0 && player.hasPerk("Androgyny") >= 0) sandFacial = 2837;
 	
-	choices("Cut Short",cutShort,"Cut Med.",cutMedium,"Cut Long",cutLong,"Lengthen",lengthening,"Buy Products",2163,"Buy MinoCum",minoCum,"",0,"Mud Facial",mudFacial,"Sand Facial",sandFacial,"Leave",13);
+	choices("Cut Short",cutShort,
+			"Cut Med.",cutMedium,
+			"Cut Long",cutLong,
+			"Lengthen",lengthening,
+			"Buy Products",2163,
+			"Buy MinoCum",minoCum,
+			"",0,
+			"Mud Facial",mudFacial,
+			"Sand Facial",sandFacial,
+			"Leave",13);
 }
 
 function hairDresserGreeting():void {
