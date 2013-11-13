@@ -1,5 +1,4 @@
-﻿import classes.Player;
-/**
+﻿/**
  * Global Variables used across the whole game. I hope to whittle it down slowly.
  */
 
@@ -30,7 +29,6 @@ var images:ImageManager = new ImageManager(stage);
 
 //The Player object, used everywhere
 var player:Player = new Player();
-var player2:Player = new Player();
 
 //Used in perk selection, mainly eventParser, input and engineCore
 var tempPerk:String = "";
