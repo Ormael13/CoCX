@@ -43,7 +43,7 @@ function approachPonies():void {
 	//Option one: Leave Politely
 	//Option Two: Too creepy...
 	//Option three: Yay, party?
-	simpleChoices("Too creepy",2589,"Yay Party!",2590,"",0,"",0,"Leave",2588);
+	simpleChoices("Too creepy",derpCreepy,"Yay Party!",derpyParty,"",0,"",0,"Leave",derpPolitely);
 }
 
 function derpPolitely():void {
