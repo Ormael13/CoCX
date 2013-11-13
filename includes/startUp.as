@@ -1,4 +1,4 @@
-
+﻿
 //Keyboard listener!
 stage.addEventListener(KeyboardEvent.KEY_DOWN, keyboard);
 
@@ -372,6 +372,7 @@ function creditsScreen():void {
 	outputText("<li> Silmarion (Canine Pepper Bad End)</li>");
 	outputText("<li> Soretu (Original Minotaur Rape)</li>");
 	outputText("<li> NinjArt (Small Male on Goblin Rape Variant)</li>");
+	outputText("<li> DoubleRedd (\"Too Big\" Corrupt Goblin Fuck)</li>");
 	outputText("<li> Nightshade (Additional Minotaur Rape)</li>");
 	outputText("<li> JCM (Imp Night Gangbang, Addition Minotaur Loss Rape - Oral)</li>");
 	outputText("<li> Xodin (Nipplefucking paragraph of Imp GangBang, Encumbered by Big Genitals Exploration Scene, Big Bits Run Encumbrance, Player Getting Beer Tits, Sand Witch Dungeon Misc Scenes)</li>");
