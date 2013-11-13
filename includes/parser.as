@@ -72,18 +72,15 @@ var singleArgConverters:Object = {
 		"him"			: function():* { return player.mf("him","her"); },
 		"Him"			: function():* { return player.mf("Him","Her"); },
 
-		"cunt"			: function():* {if(player.hasVagina()) return vaginaDescript();
-										else return "<b>(Attempt to parse vagina when none present.)</b>";},
-		"cocks"			: function():* {if(player.hasCock()) return multiCockDescriptLight();
-										else return "<b>(Attempt to parse cocks when none present.)</b>";},
-		"pussy"			: function():* {if(player.hasVagina()) return vaginaDescript();
-										else return "<b>(Attempt to parse vagina when none present.)</b>";},
-		"vagina"		: function():* {if(player.hasVagina()) return vaginaDescript();
-										else return "<b>(Attempt to parse vagina when none present.)</b>";},
-		"vag"			: function():* {if(player.hasVagina()) return vaginaDescript();
-										else return "<b>(Attempt to parse vagina when none present.)</b>";},
-		"clit"			: function():* {if(player.hasVagina()) return clitDescript();
-										else return "<b>(Attempt to parse clit when none present.)</b>";},
+		// All the errors related to trying to parse stuff if not present are
+		// already handled in the various *Descript() functions.
+		// No need to duplicate them.
+		"cunt"			: function():* { return vaginaDescript(); },
+		"cocks"			: function():* { return multiCockDescriptLight(); },
+		"pussy"			: function():* { return vaginaDescript(); },
+		"vagina"		: function():* { return vaginaDescript(); },
+		"vag"			: function():* { return vaginaDescript(); },
+		"clit"			: function():* { return clitDescript(); },
 		"vagOrAss"		: function():* {if (player.hasVagina())return vaginaDescript();
 										else assholeDescript();},
 		"cock"			: function():* {if(player.hasCock()) return cockDescript(0);
@@ -124,6 +121,31 @@ function convertSingleArg(arg:String):String
 
 	return argResult;
 }	
+
+
+function convertDoubleArg(arg:String):String
+{
+	var debug = false;
+	var argResult:String;
+
+	if (arg in singleArgConverters)
+	{
+		if (debug) trace("Found corresponding anonymous function");
+		argResult = singleArgConverters[arg]();
+		if (debug) trace("Called, return = ", argResult);
+	}
+	else
+		return "<b>!Unknown tag \"" + arg + "\"!</b>";
+
+	return argResult;
+}	
+
+
+
+
+
+
+
 
 // Possible text arguments in the conditional of a if statement
 // First, there is an attempt to cast the argument to a Number. If that fails,
@@ -411,8 +433,8 @@ function parseConditional(textCtnt:String, depth:int):String
 // if not, it simply returns the contents as passed
 function evalBracketContents(textCtnt:String, depth:int):String
 {
-	var debug = false;
-	var ret:String;
+	var debug = true;
+	var retStr:String = "";
 	if (debug) trace("Evaluating string: ", textCtnt);
 
 	// POSSIBLE BUG: A actual statement starting with "if" could be misinterpreted as an if-statement
@@ -421,15 +443,37 @@ function evalBracketContents(textCtnt:String, depth:int):String
 	if (textCtnt.toLowerCase().indexOf("if") == 0)
 	{
 		if (debug) trace("It's an if-statement");
-		ret = parseConditional(textCtnt, depth);
-		if (debug) trace("IF Evaluated to ", ret);
+		retStr = parseConditional(textCtnt, depth);
+		if (debug) trace("IF Evaluated to ", retStr);
 	}
 	else
 	{
-		ret = textCtnt;
-	}
+		trace("Not an if statement")
+			// Match a single word, with no leading or trailing space
+		var singleWordTagRegExp:RegExp = /^\w+$/;
+		var doubleWordTagRegExp:RegExp = /^\w+\s\w+$/;
 
-	return ret;
+		var singleWordExpRes:Object = singleWordTagRegExp.exec(textCtnt);
+		var doubleWordExpRes:Object = doubleWordTagRegExp.exec(textCtnt);
+
+		if (debug) trace("Checking if single word = [" + singleWordExpRes + "]", getQualifiedClassName(singleWordExpRes));
+		if (debug) trace("string length = ", textCtnt.length);
+		if (singleWordExpRes)
+		{
+			if (debug) trace("It's a single word!");
+			retStr += convertSingleArg(textCtnt);
+		}
+		else if (doubleWordExpRes)
+		{
+			if (debug) trace("Two-word tag!")
+			retStr += convertDoubleArg(textCtnt);
+		}
+		else
+		{
+			retStr += "<b>!Unknown multi-word tag \"" + retStr + "\"!</b>";
+		}
+	}
+	return retStr;
 }
 
 import flash.utils.getQualifiedClassName;
@@ -474,7 +518,13 @@ function recParser(textCtnt:String, depth:int = 0):String
 			}
 			if (bracketCnt == 0)	// We've found the matching closing bracket for the opening bracket at textCtnt[tmp]
 			{
-				retStr += textCtnt.substring(0, tmp);		
+				var prefixTmp, postfixTmp;
+
+				// Only prepend the prefix if it actually has content.
+				prefixTmp = textCtnt.substring(0, tmp);
+				if (prefixTmp)
+					retStr += prefixTmp
+
 				// We know there aren't any brackets in the section before the first opening bracket.
 				// therefore, we just add it to the returned string
 
@@ -483,9 +533,22 @@ function recParser(textCtnt:String, depth:int = 0):String
 				// then, eval their contents, in case they're an if-statement or other control-flow thing
 				// I haven't implemented yet
 
-				retStr += recParser(textCtnt.substring(i+1, textCtnt.length), depth);	// Parse the trailing text (if any)
-				// lastly, run any text that trails the closing bracket through the parser
-				// needed for things like "string 1 [cock] [balls]"
+				// Only parse the trailing string if it has brackets in it.
+				// if not, we need to just return the string as-is.
+				// Parsing the trailing string if it doesn't have brackets could lead to it being 
+				// incorrectly interpreted as a multi-word tag (and shit would asplode and shit)
+				
+				postfixTmp = textCtnt.substring(i+1, textCtnt.length);
+				if (postfixTmp.indexOf("[") != -1)
+				{
+					trace("Need to parse trailing text", postfixTmp)
+					retStr += recParser(postfixTmp, depth);	// Parse the trailing text (if any)
+				}
+				else
+				{
+					trace("No brackets in trailing text", postfixTmp)
+					retStr += postfixTmp;
+				}
 				
 				return retStr;
 				// and return the parsed string
@@ -494,20 +557,12 @@ function recParser(textCtnt:String, depth:int = 0):String
 	}
 	else
 	{
+		// DERP. We should never have brackets around something that ISN'T a tag intended to be parsed. Therefore, we just need
+		// to determine what type of parsing should be done do the tag.
 		if (debug) trace("No brackets present", textCtnt);	
 
-		// Match a single word, with no leading or trailing space
-		var tagRegExp:RegExp = /^\w+$/;
-		var expressionResult:Object = tagRegExp.exec(textCtnt);
-		if (debug) trace("Checking if single word = [" + expressionResult + "]", getQualifiedClassName(expressionResult));
-		if (debug) trace("string length = ", textCtnt.length);
-		if (expressionResult && (depth > 1))
-		{
-			if (debug) trace("It's a single word!");
-			retStr += convertSingleArg(textCtnt);
-		}
-		else
-			retStr += textCtnt;
+	
+		retStr += textCtnt;
 		
 	}
 	return retStr;

@@ -181,7 +181,8 @@ def cleanStaleDoEventIfs(evNumDict = {}):
 
 def removeDisabledDoEventIfs():
 
-	numExtr = re.compile(r"(?://[\w\-\s]*\s*)*(?:else)?\s+if\s?\(\s*false\s* == \d+\)\s+\{[\w\s\(\)\;/]+\}")
+	disabledIfExtr = re.compile(r"(?://[\w\-\s]*\s*)*(?:else)?\s+if\s?\(\s*false\s* == \d+\)\s+\{[\w\s\(\)\;/]+\}")
+	emptyIfExtr = re.compile(r"(?://[\w\-\s]*\s*)*(?:else)?\s+if\s?\(\s*(?:(?:false)|(?:eventNo))\s* == \d+\)\s+\{\W+return;\W+\}")
 
 
 	with open("./includes/doEvent.as", "r") as eventF:
@@ -190,7 +191,7 @@ def removeDisabledDoEventIfs():
 	print "Cleaning doEvent If statements"
 	
 
-	eventS = numExtr.sub("", eventS)
+	eventS = disabledIfExtr.sub("", eventS)
 
 
 	if writeToFiles:

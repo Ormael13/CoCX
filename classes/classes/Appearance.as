@@ -1379,10 +1379,14 @@
 			else return "base";
 		}
 		
-		public static function vaginaDescription(i_creature:Creature, i_vaginaIndex:Number = 0):String {
-			if (i_vaginaIndex > (i_creature.vaginas.length - 1)) return "<B>Error: Invalid vagina number (" + i_vaginaIndex + ") passed to vaginaDescript()</b>";			
-			if (i_vaginaIndex < 0) return "<B>Error: Invalid vaginaNum (" + i_vaginaIndex + ") passed to vaginaDescript()</b>";
-			if (i_creature.vaginas.length <= 0) return "ERROR: Called vaginaDescription with no vaginas";
+		public static function vaginaDescription(i_creature:Creature, i_vaginaIndex:Number = 0):String 
+		{
+			if (i_vaginaIndex > (i_creature.vaginas.length - 1)) 
+				return "<B>Error: Invalid vagina number (" + i_vaginaIndex + ") passed to vaginaDescript()</b>";			
+			if (i_vaginaIndex < 0) 
+				return "<B>Error: Invalid vaginaNum (" + i_vaginaIndex + ") passed to vaginaDescript()</b>";
+			if (i_creature.vaginas.length <= 0) 
+				return "ERROR: Called vaginaDescription with no vaginas";
 			
 			var description:String = "";
 			var weighting:Number = 0;
@@ -1401,53 +1405,63 @@
 					if (i_creature.vaginas[i_vaginaIndex].virgin) description += "virgin";
 					else description += "tight";
 				}
-				if (i_creature.vaginas[i_vaginaIndex].vaginalLooseness == 2) description += "loose";
-				if (i_creature.vaginas[i_vaginaIndex].vaginalLooseness == 3) description += "very loose";
-				if (i_creature.vaginas[i_vaginaIndex].vaginalLooseness == 4) description += "gaping";
-				if (i_creature.vaginas[i_vaginaIndex].vaginalLooseness == 5) description += "gaping-wide";			
-				if (i_creature.vaginas[i_vaginaIndex].vaginalLooseness != 1) haveDescription = true;
+				if (i_creature.vaginas[i_vaginaIndex].vaginalLooseness == 2) 
+					description += "loose";
+				if (i_creature.vaginas[i_vaginaIndex].vaginalLooseness == 3) 
+					description += "very loose";
+				if (i_creature.vaginas[i_vaginaIndex].vaginalLooseness == 4) 
+					description += "gaping";
+				if (i_creature.vaginas[i_vaginaIndex].vaginalLooseness == 5) 
+					description += "gaping-wide";			
+				
 			}
 			//wetness descript - 30% display rate
 			if (rand(100) + weighting > 70)
 			{
-				if (haveDescription) description += ", ";
-				if (i_creature.vaginas[i_vaginaIndex].vaginalWetness == 0) description += "dry";
-				if (i_creature.vaginas[i_vaginaIndex].vaginalWetness == 1) description += "moist";
-				if (i_creature.vaginas[i_vaginaIndex].vaginalWetness == 2) description += "wet";
-				if (i_creature.vaginas[i_vaginaIndex].vaginalWetness == 3) description += "slick";
-				if (i_creature.vaginas[i_vaginaIndex].vaginalWetness == 4) description += "drooling";
-				if (i_creature.vaginas[i_vaginaIndex].vaginalWetness == 5) description += "slavering";
-				haveDescription = true;
+				if (description != "") description += ", ";
+				if (i_creature.vaginas[i_vaginaIndex].vaginalWetness == 0) 
+					description += "dry";
+				if (i_creature.vaginas[i_vaginaIndex].vaginalWetness == 1) 
+					description += "moist";
+				if (i_creature.vaginas[i_vaginaIndex].vaginalWetness == 2) 
+					description += "wet";
+				if (i_creature.vaginas[i_vaginaIndex].vaginalWetness == 3) 
+					description += "slick";
+				if (i_creature.vaginas[i_vaginaIndex].vaginalWetness == 4) 
+					description += "drooling";
+				if (i_creature.vaginas[i_vaginaIndex].vaginalWetness == 5) 
+					description += "slavering";
 			}
 			if (i_creature.vaginas[i_vaginaIndex].labiaPierced > 0 && rand(3) == 0)
 			{
-				if(haveDescription) description += ", ";
+				if(description != "") description += ", ";
 				description += "pierced";
-				haveDescription = true;
 			}
-			if (!haveDescription && i_creature.skinType == 3)
+			if (description == "" && i_creature.skinType == 3)
 			{
-				if(haveDescription) description += ", ";
-				if(rand(2) == 0) description += "gooey";
-				else description += "slimy";
-				haveDescription = true;
+				if(description != "") 
+					description += ", ";
+				if(rand(2) == 0) 
+					description += "gooey";
+				else 
+					description += "slimy";
 			}
 			if (i_creature.vaginaType() == 5 && Math.floor(Math.random() * 2) == 0)
 			{
 				if (haveDescription) description += ", ";
 				options = ["black",
-				"onyx",
-				"ebony",
-				"dusky",
-				"sable",
-				"obsidian",
-				"midnight-hued",
-				"jet black"];
+						"onyx",
+						"ebony",
+						"dusky",
+						"sable",
+						"obsidian",
+						"midnight-hued",
+						"jet black"];
 				description += randomChoice(options);
-				haveDescription = true;
 			}
 			
-			if (haveDescription) description += " ";
+			if (description != "") 
+				description += " ";
 			options = ["vagina",
 			"pussy",
 			"cooter",
