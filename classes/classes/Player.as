@@ -7,25 +7,6 @@ package classes
 	 */
 	public class Player extends Character
 	{
-		override public function CopyFrom(s:Creature):void
-		{
-			var source:Player = s as Player;
-			super.CopyFrom(s);
-			
-			// Tried to do this with property iteration but it doesn't want to play
-			this.slotName = source.slotName;
-			this.autoSave = source.autoSave;
-			this.lustVuln = source.lustVuln;
-			this.teaseLevel = source.teaseLevel;
-			this.teaseXP = source.teaseXP;
-			this.perkPoints = source.perkPoints;
-			this.explored = source.explored;
-			this.exploredForest = source.exploredForest;
-			this.exploredDesert = source.exploredDesert;
-			this.exploredMountain = source.exploredMountain;
-			this.exploredLake = source.exploredLake;
-		}
-		
 		//Autosave
 		public var slotName:String = "VOID";
 		public var autoSave:Boolean = false;
@@ -50,7 +31,7 @@ package classes
 		
 		public function Player()
 		{
-
+			keyItems = new Array();
 		}	
 		
 		//Body Type
