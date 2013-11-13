@@ -12,6 +12,117 @@ package classes
 	
 	public class Creature
 	{
+		public function CopyFrom(source:Creature):void
+		{
+			cocks = new Vector.<Cock>();
+			vaginas = new Array();
+			breastRows = new Array();
+			perks = new Array();
+			statusAffects = new Array();
+			
+			this.short = source.short;
+			this.a = source.a;
+			this.armorName = source.armorName;
+			this.weaponName = source.weaponName;
+			this.weaponVerb = source.weaponVerb;
+			this.armorDef = source.armorDef;
+			this.armorPerk = source.armorPerk;
+			this.weaponAttack = source.weaponAttack;
+			this.weaponPerk = source.weaponPerk;
+			this.weaponValue = source.weaponValue;
+			this.armorValue = source.armorValue;
+			
+			this.str = source.str;
+			this.tou = source.tou;
+			this.spe = source.spe;
+			this.inte = source.inte;
+			this.lib = source.lib;
+			this.sens = source.sens;
+			this.cor = source.cor;
+			this.fatigue = source.fatigue;
+			
+			this.HP = source.HP;
+			this.lust = source.lust;
+			this.XP = source.XP;
+			this.level = source.XP;
+			this.gems = source.gems;
+			this.gender = source.gender;
+			this.tallness = source.tallness;
+			
+			this.hairType = source.hairType;
+			this.hairColor = source.hairColor;
+			this.hairLength = source.hairLength;
+			
+			this.skinType = source.skinType;
+			this.skinTone = source.skinTone;
+			this.skinDesc = source.skinDesc;
+			this.skinAdj = source.skinAdj;
+			
+			this.faceType = source.faceType;
+			
+			this.earType = source.earType;
+			this.earValue = source.earValue;
+			
+			this.hornType = source.hornType;
+			
+			this.wingType = source.wingType;
+			this.wingDesc = source.wingDesc;
+			
+			this.lowerBody = source.lowerBody;
+			
+			this.tailType = source.tailType;
+			
+			this.tailVenom = source.tailVenom;
+			this.tailRecharge = source.tailRecharge;
+			
+			this.hipRating = source.hipRating;
+			
+			this.buttRating = source.buttRating;
+			
+			this.nipplesPierced = source.nipplesPierced;
+			this.nipplesPShort = source.nipplesPShort;
+			this.nipplesPLong = source.nipplesPLong;
+			this.lipPierced = source.lipPierced;
+			this.lipPShort = source.lipPShort;
+			this.lipPLong = source.lipPLong;
+			this.tonguePierced = source.tonguePierced;
+			this.tonguePLong = source.tonguePLong;
+			this.tonguePShort = source.tonguePShort;
+			this.eyebrowPierced = source.eyebrowPierced;
+			this.eyebrowPLong = source.eyebrowPLong;
+			this.eyebrowPShort = source.eyebrowPShort;
+			this.earsPierced = source.earsPierced;
+			this.earsPLong = source.earsPLong;
+			this.earsPShort = source.earsPShort;
+			this.nosePierced = source.nosePierced;
+			this.nosePShort = source.nosePShort;
+			this.nosePLong = source.nosePLong;
+			
+			// Copy container refs out of the parents over here
+			this.cocks = source.cocks;			
+			source.cocks = null;
+			this.balls = source.balls;
+			this.cumMultiplier = source.cumMultiplier;
+			this.ballSize = source.ballSize;
+			this.hoursSinceCum = source.hoursSinceCum;
+		
+			this.vaginas = source.vaginas;
+			source.vaginas = null;
+			this.fertility = source.fertility;
+			this.clitLength = source.clitLength;
+			this.nippleLength = source.nippleLength;
+			
+			this.breastRows = source.breastRows;
+			source.breastRows = null;
+			this.ass = source.ass;
+			source.ass = null;
+			
+			this.perks = source.perks;
+			source.perks = null;
+			this.statusAffects = source.statusAffects;
+			source.statusAffects = null;
+		}
+		
 		//Variables
 		
 		//Short refers to player name and monster name. BEST VARIABLE NAME EVA!
