@@ -4088,6 +4088,128 @@ function choices(text1:String, butt1:*,
 	scrollBar.update();
 }
 
+/****
+	This function is made for multipage menus of unpredictable length,
+	say a collection of items or places or people that can change
+	depending on certain events, past choices, the time of day, or whatever.
+
+	This is not the best for general menu use.  Use choices() for that.
+
+	This is a bit confusing, so here's usage instructions.
+	Pay attention to all the braces.
+
+	This is made to be used with an array that you create before calling it,
+	so that you can push as many items on to that array as you like
+	before passing that array off to this function.
+
+	So you can do something like this:
+		var itemsInStorage :Array = new Array();
+
+		// The extra square braces are important.
+		itemsInStorage.push( [ "Doohicky", useDoohickyFunc ] );
+		itemsInStorage.push( [ "Whatsit", useWhatsitFunc ] );
+		itemsInStorage.push( [ "BagOfDicks", eatBagOfDicks ] );
+		...
+
+		// see notes about cancelFunc
+		multipageChoices( cancelFunc, itemsInStorage );
+
+	cancelfunc is a function (A button event function, specifically)
+	that exits the menu.  Provide this if you want a Back button to appear
+	in the bottom right.
+
+	If you do not need a cancel function, perhaps because some or all
+	of the choices will exit the menu, then you can
+	pass null or 0 for the cancelFunction.
+
+		// This menu shows no Back button.
+		multipageChoices( null, itemsInStorage );
+
+	You can call it directly if you want, but that's ridiculous.
+		multipageChoices( justGoToCamp, [
+			[ "Do this", doThisEvent ],
+			[ "Do that", doThatEvent ],
+			[ "Do something", doSomethingEvent ],
+			[ "Fap", goFapEvent ],
+			[ "Rape Jojo", jojoRape ],
+			// ... more items here...
+			[ "What", goWhat ],
+			[ "Margle", gurgleFluidsInMouthEvent ] // no comma on last item.
+		]);
+****/
+function multipageChoices( cancelFunction :*, menuItems :Array ) :void {
+	const itemsPerPage :int = 8;
+
+	var currentPageIndex :int;
+	var pageCount :int;
+
+	function getPageOfItems( pageIndex :int ) :Array {
+		var startItemIndex = pageIndex * itemsPerPage;
+
+		return menuItems.slice( startItemIndex, startItemIndex + itemsPerPage );
+	}
+
+	function flatten( pageItems :Array ) :Array {
+		var i, l,
+			flattenedItems = [];
+
+		for( i = 0, l = pageItems.length; i < l; ++i ) {
+			flattenedItems = flattenedItems.concat( pageItems[ i ] );
+		}
+
+		return flattenedItems;
+	}
+
+	function showNextPage() :void {
+		showPage( (currentPageIndex + 1) % pageCount );
+	}
+
+	function showPage( pageIndex :int ) :void {
+		var currentPageItems :Array; // holds the current page of items.
+
+		if( pageIndex < 0 )
+			pageIndex = 0;
+		if( pageIndex >= pageCount )
+			pageIndex = pageCount - 1;
+
+		currentPageIndex = pageIndex;
+		currentPageItems = getPageOfItems( pageIndex );
+
+		// I did it this way so as to use only one actual menu setting function.
+		// I figured it was safer until the menu functions stabilize.
+
+		// insert page functions.
+		// First pad out the items so it's always in a predictable state.
+		while( currentPageItems.length < 8 ) {
+			currentPageItems.push( [ "", 0 ] );
+		}
+
+		// Insert next button.
+		currentPageItems.splice( 4, 0, [
+			"See page " +
+				String( ((currentPageIndex + 1) % pageCount) + 1 ) + // A compelling argument for 1-indexing?
+				'/' +
+				String( pageCount ),
+			pageCount > 1 ? showNextPage : 0
+			// "Next Page", pageCount > 1 ? showNextPage : 0
+			]);
+
+		// Cancel/Back button always appears in bottom right, like in the inventory.
+		currentPageItems.push([
+			"Back", cancelFunction || 0
+			]);
+
+		choices.apply( null, flatten( currentPageItems ) );
+	}
+
+	pageCount = Math.ceil( menuItems.length / itemsPerPage );
+
+	if( typeof cancelFunction != 'function' )
+		cancelFunction = 0;
+
+	showPage( 0 );
+}
+
 // simpleChoices and doYesNo are convenience functions. They shouldn't re-implement code from choices()
 function simpleChoices(text1:String, butt1:*, 
 						text2:String, butt2:*, 
