@@ -96,29 +96,29 @@ function breakZeChains():void {
 	outputText("\n\nThat raised more questions than it answered.  Taking things slow for now, you ask her name.\n\n\"<i>I... I am... I simply am.  What would Master call me?</i>\"");
 	
 	//[Display a textbox, into which the player can type in a name. This new value will be called " + flags[GAR_NAME] + ", henceforth. ] (Confidence +10)
-	nameBox.text = "";
+	this.mainView.nameBox.text = "";
 	menu();
 	addButton(0,"Next",nameZeGargoyle);
 }
 
 function nameZeGargoyle():void {
-	if(nameBox.text == "") {
+	if(this.mainView.nameBox.text == "") {
 		clearOutput();
 		outputText("<b>You must name her.</b>", false);
-		nameBox.text = "";
-		nameBox.visible = true;
-		nameBox.width = 165;
+		this.mainView.nameBox.text = "";
+		this.mainView.nameBox.visible = true;
+		this.mainView.nameBox.width = 165;
 		menu();
-		nameBox.x = mainText.x + 5;
+		this.mainView.nameBox.x = mainText.x + 5;
 		
-		nameBox.y = mainText.y + 3 + mainText.textHeight;
+		this.mainView.nameBox.y = mainText.y + 3 + mainText.textHeight;
 		
 		addButton(0,"Next",nameZeGargoyle);
 		return;
 	}
-	flags[GAR_NAME] = nameBox.text;
-	nameBox.text = "";
-	nameBox.visible = false;
+	flags[GAR_NAME] = this.mainView.nameBox.text;
+	this.mainView.nameBox.text = "";
+	this.mainView.nameBox.visible = false;
 	clearOutput();
 	outputText("\"<i>" + flags[GAR_NAME] + ",</i>\" she purrs, \"<i>" + flags[GAR_NAME] + ", " + flags[GAR_NAME] + ".  Master has interesting taste.</i>\"");
 	

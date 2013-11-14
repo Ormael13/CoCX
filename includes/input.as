@@ -68,7 +68,7 @@ function executeButtonClick(button:int = 0):void {
 //Hugeass keyboard parser
 function keyboard(e:KeyboardEvent):void {
 	if(this.mainView.eventTestInput.x == 207.5) return;
-	if(nameBox.visible && stage.focus == nameBox) return;
+	if(this.mainView.nameBox.visible && stage.focus == this.mainView.nameBox) return;
     var saveFile;
 	var currEvent:Number = 0;
 	var f:MouseEvent = undefined;
@@ -105,7 +105,7 @@ function keyboard(e:KeyboardEvent):void {
 	}
 	//f1 pressed - save in slot 1
 	if(e.keyCode == 112 && this.mainView.menuButtonIsVisible( MainView.MENU_DATA ) && player.str > 0) {
-		nameBox.text = "";
+		this.mainView.nameBox.text = "";
 		saveGame("CoC_1");
 		outputText("Game saved to slot 1!", true);
 		doNext(1);
@@ -113,7 +113,7 @@ function keyboard(e:KeyboardEvent):void {
 	}
 	//f2 pressed - save in slot 2
 	if(e.keyCode == 113 && this.mainView.menuButtonIsVisible( MainView.MENU_DATA ) && player.str > 0) {
-		nameBox.text = "";
+		this.mainView.nameBox.text = "";
 		saveGame("CoC_2");
 		outputText("Game saved to slot 2!", true);
 		doNext(1);
@@ -121,7 +121,7 @@ function keyboard(e:KeyboardEvent):void {
 	}
 	//f3 pressed - save in slot 3
 	if(e.keyCode == 114 && this.mainView.menuButtonIsVisible( MainView.MENU_DATA ) && player.str > 0) {
-		nameBox.text = "";
+		this.mainView.nameBox.text = "";
 		saveGame("CoC_3");
 		outputText("Game saved to slot 3!", true);
 		doNext(1);
@@ -129,7 +129,7 @@ function keyboard(e:KeyboardEvent):void {
 	}
 	//f4 pressed - save in slot 4
 	if(e.keyCode == 115 && this.mainView.menuButtonIsVisible( MainView.MENU_DATA ) && player.str > 0) {
-		nameBox.text = "";
+		this.mainView.nameBox.text = "";
 		saveGame("CoC_4");
 		outputText("Game saved to slot 4!", true);
 		doNext(1);
@@ -137,7 +137,7 @@ function keyboard(e:KeyboardEvent):void {
 	}
 	//f5 pressed - save in slot 5
 	if(e.keyCode == 116 && this.mainView.menuButtonIsVisible( MainView.MENU_DATA ) && player.str > 0) {
-		nameBox.text = "";
+		this.mainView.nameBox.text = "";
 		saveGame("CoC_5");
 		outputText("Game saved to slot 5!", true);
 		doNext(1);

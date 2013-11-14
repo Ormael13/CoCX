@@ -109,11 +109,11 @@ function loadScreen():void
 
 function saveScreen():void
 {
-	nameBox.x = 210;
-	nameBox.y = 620;
-	nameBox.width = 550;
-	nameBox.text = "";
-	nameBox.visible = true;
+	this.mainView.nameBox.x = 210;
+	this.mainView.nameBox.y = 620;
+	this.mainView.nameBox.width = 550;
+	this.mainView.nameBox.text = "";
+	this.mainView.nameBox.visible = true;
 	var test;
 	
 	outputText("", true);
@@ -164,7 +164,7 @@ function saveLoad(e:MouseEvent):void
 	this.mainView.eventTestInput.y = -1055.1;
 	//Hide the name box in case of backing up from save
 	//screen so it doesnt overlap everything.
-	nameBox.visible = false;
+	this.mainView.nameBox.visible = false;
 	outputText("", true);
 	outputText("<b>Frequently Asked Questions</b>:\nWhere are my saves located?\n", false);
 	outputText("<i>In Windows Vista/7 (IE/FireFox/Other): Users/[username]/Appdata/Roaming/Macromedia/Flash Player/#Shared Objects/[GIBBERISH]/\n", false, false);
@@ -343,14 +343,14 @@ function saveGameObject(slot:String, isFile:Boolean):void
 	//saveFile.data.pronoun3 = player.pronoun3;
 	
 	//Notes
-	if (nameBox.text != "")
+	if (this.mainView.nameBox.text != "")
 	{
-		saveFile.data.notes = nameBox.text;
-		notes = nameBox.text;
+		saveFile.data.notes = this.mainView.nameBox.text;
+		notes = this.mainView.nameBox.text;
 	}
 	else
 		saveFile.data.notes = notes;
-	nameBox.visible = false;
+	this.mainView.nameBox.visible = false;
 	
 	//flags
 	saveFile.data.flags = new Array();

@@ -65,7 +65,7 @@ function doSystem(eventNo:Number):void {
 		hideMenus();
 	}
 	if(eventNo == 1) {
-		nameBox.visible = false;
+		this.mainView.nameBox.visible = false;
 		if(gameState == 1) {
 			menuLoc = 0;
 			eventParser(5000);

@@ -633,33 +633,33 @@ function nameDatHelspawn():void {
 	outputText("\n\n\"<i>So... what do we name her, love?  I honestly hadn't put that much thought into girl names.  Kind of expected a boy, I guess, but... it's up to you, [name].  What do you think?</i>\"");
 	menu();
 	addButton(0,"Next",applyHelspawnName);
-	nameBox.text = "";
-	nameBox.visible = true;
-	nameBox.width = 165;
-	nameBox.x = mainText.x + 5;
-	nameBox.y = mainText.y + 3 + mainText.textHeight;
+	this.mainView.nameBox.text = "";
+	this.mainView.nameBox.visible = true;
+	this.mainView.nameBox.width = 165;
+	this.mainView.nameBox.x = mainText.x + 5;
+	this.mainView.nameBox.y = mainText.y + 3 + mainText.textHeight;
 }
 function applyHelspawnName():void {
 	spriteSelect(68);
 	//Easter Egg Names Hel WILL NOT ALLOW:
-	if(nameBox.text == "" || nameBox.text == "Hellgirl" || nameBox.text == "Kid" || nameBox.text == "Phoenix" || nameBox.text == "Savin" || nameBox.text == "Helia" || nameBox.text == "Mini-doofus") {
+	if(this.mainView.nameBox.text == "" || this.mainView.nameBox.text == "Hellgirl" || this.mainView.nameBox.text == "Kid" || this.mainView.nameBox.text == "Phoenix" || this.mainView.nameBox.text == "Savin" || this.mainView.nameBox.text == "Helia" || this.mainView.nameBox.text == "Mini-doofus") {
 		clearOutput();
-		if(nameBox.text == "") outputText("<b>You must select a name.</b>", false);
-		else if(nameBox.text == "Hellgirl") outputText("\"<i>Hey, that's copyright infringement.  Probably.</i>\"");
-		else if(nameBox.text == "Kid") outputText("\"<i>Wow, what are you, five?</i>\"");
-		else if(nameBox.text == "Phoenix") outputText("\"<i>Oh hell no.  You're not naming my little girl after one of those... things!  Sorry Kiri, but still!</i>\"");
-		else if(nameBox.text == "Savin") outputText("\"<i>That's a boy's name, dumbass.</i>\"");
-		else if(nameBox.text == "Helia") outputText("\"<i>My favorite name!  Except it's kinda taken, love.  Don't want things to get too confusing around here, do you?</i>\"");
-		else if(nameBox.text == "Mini-doofus") outputText("\"<i>Oh yeah, Kiha'll get a laugh out of that.  You ass.</i>\"");
+		if(this.mainView.nameBox.text == "") outputText("<b>You must select a name.</b>", false);
+		else if(this.mainView.nameBox.text == "Hellgirl") outputText("\"<i>Hey, that's copyright infringement.  Probably.</i>\"");
+		else if(this.mainView.nameBox.text == "Kid") outputText("\"<i>Wow, what are you, five?</i>\"");
+		else if(this.mainView.nameBox.text == "Phoenix") outputText("\"<i>Oh hell no.  You're not naming my little girl after one of those... things!  Sorry Kiri, but still!</i>\"");
+		else if(this.mainView.nameBox.text == "Savin") outputText("\"<i>That's a boy's name, dumbass.</i>\"");
+		else if(this.mainView.nameBox.text == "Helia") outputText("\"<i>My favorite name!  Except it's kinda taken, love.  Don't want things to get too confusing around here, do you?</i>\"");
+		else if(this.mainView.nameBox.text == "Mini-doofus") outputText("\"<i>Oh yeah, Kiha'll get a laugh out of that.  You ass.</i>\"");
 		//[Back to the name field you go!]
 		menu();
-		nameBox.x = mainText.x + 5;
-		nameBox.y = mainText.y + 3 + mainText.textHeight;
+		this.mainView.nameBox.x = mainText.x + 5;
+		this.mainView.nameBox.y = mainText.y + 3 + mainText.textHeight;
 		addButton(0,"Next",applyHelspawnName);
 		return;
 	}
-	flags[HELSPAWN_NAME] = nameBox.text;
-	nameBox.visible = false;
+	flags[HELSPAWN_NAME] = this.mainView.nameBox.text;
+	this.mainView.nameBox.visible = false;
 	//[Name Field]
 	//Easter Egg Names:
 	clearOutput();

@@ -72,6 +72,8 @@ package coc.view {
 			this.statsView.hide();
 			this.addChild( this.statsView );
 
+			this.formatMiscItems();
+
 			// button texts.  This part will eventually go away...
 			this.bottomButtonTexts = [
 				b1Text, b2Text, b3Text, b4Text, b5Text,
@@ -106,6 +108,10 @@ package coc.view {
 
 
 		//////// Initialization methods. /////////
+
+		protected function formatMiscItems() :void {
+			this.nameBox.maxChars = 54;
+		};
 
 		// Removes the need for some code in input.as and InitializeUI.as.
 		protected function disableMouseForMostTextFields() :void {

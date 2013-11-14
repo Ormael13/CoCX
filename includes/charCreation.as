@@ -7,8 +7,8 @@ function newGameGo(e:MouseEvent):void {
 	this.mainView.eventTestInput.y = -1055.1;
 	hideStats();
 	hideUpDown();
-	nameBox.visible = true;
-	nameBox.width = 165;
+	this.mainView.nameBox.visible = true;
+	this.mainView.nameBox.width = 165;
 	this.mainView.hideMenuButton( MainView.MENU_NEW_MAIN );
 	this.mainView.hideMenuButton( MainView.MENU_DATA );
 	this.mainView.hideMenuButton( MainView.MENU_LEVEL );
@@ -43,13 +43,13 @@ function newGameGo(e:MouseEvent):void {
 	
 	//mainText.autoSize = TextFieldAutoSize.LEFT;
 	simpleChoices("OK",10034,"",0,"",0,"",0,"",0);
-	nameBox.x = mainText.x + 5;
-	nameBox.y = mainText.y + 3 + mainText.textHeight;
+	this.mainView.nameBox.x = mainText.x + 5;
+	this.mainView.nameBox.y = mainText.y + 3 + mainText.textHeight;
 	
 	//OLD
-	//nameBox.x = 510;
-	//nameBox.y = 265;
-	nameBox.text = "";
+	//this.mainView.nameBox.x = 510;
+	//this.mainView.nameBox.y = 265;
+	this.mainView.nameBox.text = "";
 	
 	//Reset autosave
 	player.slotName = "VOID";
@@ -547,7 +547,7 @@ function doCreation(eventNo:Number):void {
 	}
 	//Choose name 
 	if(eventNo == 10034) {
-		if(nameBox.text == "") {
+		if(this.mainView.nameBox.text == "") {
 			//If part of newgame+, don't fully wipe.
 			if(player.XP > 0 && player.explored == 0) {
 				flags[NEW_GAME_PLUS_BONUS_STORED_XP] = player.XP;
@@ -562,17 +562,17 @@ function doCreation(eventNo:Number):void {
 			outputText("\n\n\n<b>You must select a name.</b>", false);
 			return;
 		}
-		else if(customName(nameBox.text)) {
+		else if(customName(this.mainView.nameBox.text)) {
 			clearOutput();
 			outputText("This name, like you, is special.  Do you live up to your name or continue on, assuming it to be coincidence?");
-			nameBox.visible = false;
+			this.mainView.nameBox.visible = false;
 			menu();
 			addButton(0,"SpecialName",useCustomProfile);
 			addButton(1,"Continue On",noCustomProfile);
 			return;
 		}
-		player.short = nameBox.text;
-		nameBox.visible = false;
+		player.short = this.mainView.nameBox.text;
+		this.mainView.nameBox.visible = false;
 		outputText("\n\n\n\nAre you a man or a woman?", true);
 		simpleChoices("Man", 10000, "Woman", 10001, "", 0, "", 0, "", 0); 
 	}
@@ -735,9 +735,9 @@ function doCreation(eventNo:Number):void {
 function useCustomProfile():void {
 	flags[CUSTOM_PC_ENABLED] = 1;
 	clearOutput();
-	player.short = nameBox.text;
-	nameBox.visible = false;
-	if(specialName(nameBox.text)) {
+	player.short = this.mainView.nameBox.text;
+	this.mainView.nameBox.visible = false;
+	if(specialName(this.mainView.nameBox.text)) {
 		outputText("Your name defines everything about you, and as such, it is time to wake...\n\n");
 		flags[CUSTOM_PC_ENABLED] = 0;
 		customPCSetup();
@@ -753,8 +753,8 @@ function useCustomProfile():void {
 function noCustomProfile():void {
 	clearOutput();
 	flags[CUSTOM_PC_ENABLED] = -1;
-	player.short = nameBox.text;
-	nameBox.visible = false;
+	player.short = this.mainView.nameBox.text;
+	this.mainView.nameBox.visible = false;
 	outputText("Your name carries little significance beyond it being your name.  What is your gender?");
 	simpleChoices("Male", 10000, "Female", 10001, "", 0, "", 0, "", 0); 
 }
