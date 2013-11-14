@@ -179,13 +179,9 @@ package coc.view {
 
                 if( this.model.player[ statName ] > this.model[ oldStatName ] ) {
                     this.showStatUp( statName );
-                    // this.getChildByName( statName + 'Up' ).visible = true;
-                    // this.getChildByName( statName + 'Down' ).visible = false;
                 }
                 if( this.model.player[ statName ] < this.model[ oldStatName ] ) {
                     this.showStatDown( statName );
-                    // this.getChildByName( statName + 'Up' ).visible = false;
-                    // this.getChildByName( statName + 'Down' ).visible = true;
                 }
             }
         };
