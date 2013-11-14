@@ -176,8 +176,9 @@ function hyenaJavelinAttack():void {
 			slow--;
 			player.addStatusValue("Gnoll Spear",1,1);
 			player.spe--;
-			speDown.visible = true;
-			speUp.visible = false;
+			this.mainView.statsView.showStatDown( 'spe' );
+			// speDown.visible = true;
+			// speUp.visible = false;
 		}
 	}
 	//<Hyena Attack 2 – Javelin – Successful – Player Not Entangled>

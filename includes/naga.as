@@ -147,8 +147,9 @@ function nagaPoisonBiteAttack():void {
 		if(player.spe > 4) {
 			//stats(0,0,-3,0,0,0,0,0);
 			player.spe -= 3;
-			speUp.visible = false;
-			speDown.visible = true;
+			this.mainView.statsView.showStatDown( 'spe' );
+			// speUp.visible = false;
+			// speDown.visible = true;
 			player.createStatusAffect("Naga Venom",3,0,0,0);		
 		}
 		else {
@@ -162,8 +163,9 @@ function nagaPoisonBiteAttack():void {
 		if(player.spe > 3) {
 			//stats(0,0,-2,0,0,0,0,0);
 			player.spe -= 2;
-			speUp.visible = false;
-			speDown.visible = true;
+			this.mainView.statsView.showStatDown( 'spe' );
+			// speUp.visible = false;
+			// speDown.visible = true;
 			player.addStatusValue("Naga Venom",1,2);		
 		}
 		else takeDamage(5+rand(5));

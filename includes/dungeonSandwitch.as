@@ -2401,7 +2401,8 @@ function explainYourSelfToZeSandBitch():void {
 		outputText("  \"<i>Your tale has the ring of truth to it, [name].  I am the Sand Mother of this coven, and it seems we are not enemies after all.  If you like I can instruct my daughters to let you pass through the sands unhindered.</i>\"  She spreads her arms graciously and asks, \"<i>Was there anything you would like to discuss?  It has been an age since I've had a new arrival to converse with.</i>\"\n\n(+200 XP)");
 		//(Award XP)
 		player.XP += 200;
-		xpUp.visible = true;
+		this.mainView.statsView.showStatUp( 'xp' );
+		//xpUp.visible = true;
 		statScreenRefresh();
 		//(Set friendly)
 		flags[SAND_WITCHES_FRIENDLY] = 1;
@@ -2552,7 +2553,8 @@ function talkDownTheMother():void {
 	
 	outputText("\n\n\"<i>Is there something you would like to discuss, or aid you would request?  It has been a great deal of time since I have had the pleasure of discourse with an outsider.</i>\"");
 	player.XP += 200;
-	xpUp.visible = true;
+	this.mainView.statsView.showStatUp( 'xp' );
+	// xpUp.visible = true;
 	statScreenRefresh();
 	//(Set friendly)
 	flags[SAND_WITCHES_FRIENDLY] = 1;

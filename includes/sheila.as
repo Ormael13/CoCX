@@ -218,8 +218,9 @@ function sheilaCorruptionUpdate():void {
 				else sheilaCorruption(1);
 			}
 			player.cor = Math.round(player.cor);
-			corUp.visible = false;
-			corDown.visible = true;
+			this.mainView.statsView.showStatDown( 'cor' );
+			// corUp.visible = false;
+			// corDown.visible = true;
 			statScreenRefresh();
 		}		
 	}
@@ -240,8 +241,9 @@ function sheilaCorruptionUpdate():void {
 				else sheilaCorruption(-1);
 			}
 			player.cor = Math.round(player.cor);
-			corUp.visible = true;
-			corDown.visible = false;
+			this.mainView.statsView.showStatUp( 'cor' );
+			// corUp.visible = true;
+			// corDown.visible = false;
 			statScreenRefresh();
 		}
 	}
@@ -4076,8 +4078,9 @@ function suspiciousGlint():void {
 		if(monster.hasStatusAffect("Twu Wuv") < 0) {
 			monster.createStatusAffect("Twu Wuv",0,0,0,0);
 			var counter:int = 40+rand(5);
-			inteDown.visible = true;
-			inteUp.visible = false;
+			this.mainView.statsView.showStatDown( 'inte' );
+			// inteDown.visible = true;
+			// inteUp.visible = false;
 			while(counter > 0) {
 				if(player.inte >= 2) {
 					player.inte--;

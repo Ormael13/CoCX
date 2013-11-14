@@ -85,7 +85,8 @@ function HPChange(changeNum:Number, display:Boolean) {
 		{
 			if(display) outputText("You gain " + int(changeNum) + " HP.\n", false);
 			player.HP += int(changeNum);
-			hpUp.visible = true;
+			this.mainView.statsView.showStatUp( 'hp' );
+			// hpUp.visible = true;
 		}
 	}
 	//Negative HP
@@ -2969,12 +2970,14 @@ function fatigue(mod:Number,type:Number  = 0):void {
 	}
 	player.fatigue += mod;
 	if(mod > 0) {
-		fatigueUp.visible = true;
-		fatigueDown.visible = false;
+		this.mainView.statsView.showStatUp( 'fatigue' );
+		// fatigueUp.visible = true;
+		// fatigueDown.visible = false;
 	}
 	if(mod < 0) {
-		fatigueDown.visible = true;
-		fatigueUp.visible = false;
+		this.mainView.statsView.showStatDown( 'fatigue' );
+		// fatigueDown.visible = true;
+		// fatigueUp.visible = false;
 	}
 	if(player.fatigue > 100) player.fatigue = 100;
 	if(player.fatigue < 0) player.fatigue = 0;

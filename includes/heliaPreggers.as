@@ -1412,8 +1412,9 @@ function calledShot():void {
 				affect--;
 				player.addStatusValue("Called Shot",1,1);
 				player.spe--;
-				speDown.visible = true;
-				speUp.visible = false;
+				this.mainView.statsView.showStatDown( 'spe' );
+				// speDown.visible = true;
+				// speUp.visible = false;
 			}
 		}
 		else {
@@ -1422,8 +1423,9 @@ function calledShot():void {
 				affect--;
 				player.addStatusValue("Called Shot",1,1);
 				player.spe--;
-				speDown.visible = true;
-				speUp.visible = false;
+				this.mainView.statsView.showStatDown( 'spe' );
+				// speDown.visible = true;
+				// speUp.visible = false;
 			}
 		}
 		damage = takeDamage(damage);
@@ -1482,8 +1484,9 @@ function sluttyMander():void {
 		outputText("\nDat ass.  You lean back, enjoying the show as the slutty little salamander slips right past your guard, practically grinding up against you until you can feel a fire boiling in your loins!");
 		var lustDelta:Number = player.lustVuln * (10 + player.lib/10);
 		player.lust += lustDelta;
-		lustDown.visible = false;
-		lustUp.visible = true;
+		this.mainView.statsView.showStatUp( 'lust' );
+		// lustDown.visible = false;
+		// lustUp.visible = true;
 		lustDelta = Math.round(lustDelta * 10)/10;
 		outputText(" (" + lustDelta + ")", false);
 	}
