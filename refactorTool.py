@@ -524,6 +524,7 @@ def cleanupChoiceSection(inStr):
 	new = "descript += randomChoice(%s);" % new
 	print "New = ", new
 	return new
+
 def cleanupRandomChoices():
 
 	randomCleanupRE = re.compile(r"((?:rando|choice) = rand\((\d)\);(?:\s+(?:else )?(?:if\((?:rando|choice) == \d\) )?descript \+?= \"[a-zA-Z- ]+\";)+)")
@@ -570,6 +571,27 @@ def cleanupRandomChoices():
 			eventF.write(outStr)
 
 
+def findFunctionsWithoutExit():
+
+	filelist = os.listdir("./includes")
+	print filelist
+	for filename in filelist:
+		if filename.endswith(".as") and "latex" in filename:
+			print filename
+			with open(os.path.join("./includes", filename), "r") as fileH:
+				tmp = fileH.read()
+			funcs = tmp.split("function")
+			
+			for func in funcs:
+				if not ("addButton" in func or "doNext" in func):
+					print "No Buttons!"
+					print func
+			
+
+
+
+
+
 if __name__ == "__main__":
 
 	print "OMG WE'S BREAKIN STUF!!111one!"
@@ -591,4 +613,6 @@ if __name__ == "__main__":
 
 	#cleanAddButtons()
 	
-	cleanupRandomChoices()
+	#cleanupRandomChoices()
+
+	findFunctionsWithoutExit()
