@@ -666,7 +666,7 @@ function sophieFucked(dicked:Boolean = true):void {
 
 
 
-function luststickApplication(this.model.time.hours:Number = 4):void {
+function luststickApplication(hours:Number = 4):void {
 	//Immune to luststick?
 	if(player.hasPerk("Luststick Adapted") >= 0) return;
 	//Increment luststick resistance

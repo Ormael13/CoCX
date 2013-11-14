@@ -2311,7 +2311,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 				return true;
 			}
 			//Exgartuan night time surprise!
-			else if(player.totalCocks() > 0 && player.statusAffectv1("Exgartuan") == 1 && rand(3) == 0 && player.this.model.time.hoursSinceCum >= 24) {
+			else if(player.totalCocks() > 0 && player.statusAffectv1("Exgartuan") == 1 && rand(3) == 0 && player.hoursSinceCum >= 24) {
 				outputText("\n", false);
 				exgartuanSleepSurprise();;
 				return true;

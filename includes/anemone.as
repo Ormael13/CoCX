@@ -96,8 +96,9 @@ function applyVenom(str:Number = 1):void {
 		if(player.str < 2) stats(0,0,0,0,0,0,2,0);
 		//Lose a point of str.
 		else {
-			strDown.visible = true;
-			strUp.visible = false;
+			this.mainView.statsView.showStatDown( "str" );
+			// strDown.visible = true;
+			// strUp.visible = false;
 			player.str--;
 			player.addStatusValue("Anemone Venom",1,1);			
 		}
@@ -105,8 +106,9 @@ function applyVenom(str:Number = 1):void {
 		if(player.spe < 2) stats(0,0,0,0,0,0,2,0);
 		//Lose a point of spe.
 		else {
-			speDown.visible = true;
-			speUp.visible = false;
+			this.mainView.statsView.showStatDown( "spe" );
+			// speDown.visible = true;
+			// speUp.visible = false;
 			player.spe--;
 			player.addStatusValue("Anemone Venom",2,1);			
 		}

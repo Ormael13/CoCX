@@ -2,6 +2,7 @@
 {
 	import flash.display.Loader;
 	import flash.display.Stage;
+	import flash.display.MovieClip;
 	import flash.errors.IOError;
 	import flash.net.*;
 	import flash.events.*;
@@ -158,7 +159,7 @@
 
 			if( ! mainText )
 			{
-				mainText = mStage.getChildByName("mainView").mainText;
+				mainText = (mStage.getChildByName("mainView") as MovieClip).mainText as TextField;
 			}
 			
 			if (mainText != null)

@@ -32,11 +32,8 @@ var images:ImageManager = new ImageManager(stage);
 
 //The Player object, used everywhere
 var player:Player = new Player();
-<<<<<<< HEAD
 model.player = player;
-=======
 var player2:Player = new Player();
->>>>>>> master
 
 //Used in perk selection, mainly eventParser, input and engineCore
 var tempPerk:String = "";

@@ -4492,7 +4492,8 @@ function takeDamage(damage:Number, noMod:Boolean = false):Number {
 	//Prevent negatives
 	if(player.HP - damage < 1) {
 		player.HP = 0;
-		hpDown.visible = true;
+		this.mainView.statsView.showStatDown( 'hp' );
+		// hpDown.visible = true;
 		if(gameState == 1 || gameState == 2) doNext(5010);
 		//Round
 		damage = Math.round(damage);
@@ -4507,7 +4508,8 @@ function takeDamage(damage:Number, noMod:Boolean = false):Number {
 	if(flags[MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
 		stats(0,0,0,0,0,0,int(damage/2),0);
 	}
-	hpDown.visible = true;
+	this.mainView.statsView.showStatDown( 'hp' );
+	// hpDown.visible = true;
 	return damage;
 }
 //ENEMYAI!
@@ -4799,8 +4801,9 @@ function enemyAI():void {
 function clearStatuses(visibility:Boolean):void {
 	while(player.hasStatusAffect("Web") >= 0) {
 		player.spe += player.statusAffectv1("Web");
-		speUp.visible = true;
-		speDown.visible = false;
+		this.mainView.statsView.showStatUp( 'spe' );
+		// speUp.visible = true;
+		// speDown.visible = false;
 		player.removeStatusAffect("Web");
 	}
 	if(player.hasStatusAffect("Shielding") >= 0) player.removeStatusAffect("Shielding");
@@ -4843,13 +4846,15 @@ function clearStatuses(visibility:Boolean):void {
 	if(monster.hasStatusAffect("Twu Wuv") >= 0) {
 		player.inte += monster.statusAffectv1("Twu Wuv");
 		statScreenRefresh();
-		inteDown.visible = false;
-		inteUp.visible = true;		
+		this.mainView.statsView.showStatUp( 'inte' );
+		// inteDown.visible = false;
+		// inteUp.visible = true;		
 	}
 	if(player.hasStatusAffect("Naga Venom") >= 0) {
 		player.spe += player.statusAffectv1("Naga Venom");
-		speUp.visible = true;
-		speDown.visible = false;
+		this.mainView.statsView.showStatUp( 'spe' );
+		// speUp.visible = true;
+		// speDown.visible = false;
 		//stats(0,0,player.statusAffectv1("Naga Venom"),0,0,0,0,0);
 		player.removeStatusAffect("Naga Venom");
 	}
@@ -4872,8 +4877,10 @@ function clearStatuses(visibility:Boolean):void {
 	if(player.hasStatusAffect("HarpyBind") >= 0) player.removeStatusAffect("HarpyBind");
 	if(player.hasStatusAffect("Called Shot") >= 0) {
 		player.spe += player.statusAffectv1("Called Shot");
-		speDown.visible = false;
-		speUp.visible = true;
+		
+		this.mainView.statsView.showStatUp( 'spe' );
+		// speDown.visible = false;
+		// speUp.visible = true;
 		player.removeStatusAffect("Called Shot");
 	}
 	if(player.hasStatusAffect("DemonSeed") >= 0) {
@@ -4913,23 +4920,28 @@ function clearStatuses(visibility:Boolean):void {
 		player.spe += player.statusAffectv2("Anemone Venom");
 		//Make sure nothing got out of bounds
 		stats(0,0,0,0,0,0,0,0);
-		speUp.visible = true;
-		strUp.visible = true;
+
+		this.mainView.statsView.showStatUp( 'spe' );
+		this.mainView.statsView.showStatUp( 'str' );
+		// speUp.visible = true;
+		// strUp.visible = true;
 		player.removeStatusAffect("Anemone Venom");
 	}
 	if(player.hasStatusAffect("Gnoll Spear") >= 0) {
 		player.spe += player.statusAffectv1("Gnoll Spear");
 		//Make sure nothing got out of bounds
 		stats(0,0,0,0,0,0,0,0);
-		speUp.visible = true;
-		speDown.visible = false;
+		this.mainView.statsView.showStatUp( 'spe' );
+		// speUp.visible = true;
+		// speDown.visible = false;
 		player.removeStatusAffect("Gnoll Spear");
 	}
 	if(player.hasStatusAffect("Basilisk Compulsion") >= 0) player.removeStatusAffect("Basilisk Compulsion");
 	if(player.hasStatusAffect("BasiliskSlow") >= 0) {
 		player.spe += player.statusAffectv1("BasiliskSlow");
-		speUp.visible = true;
-		speDown.visible = false;
+		this.mainView.statsView.showStatUp( 'spe' );
+		// speUp.visible = true;
+		// speDown.visible = false;
 		player.removeStatusAffect("BasiliskSlow");
 	}
 	while(player.hasStatusAffect("Izma Bleed") >= 0) player.removeStatusAffect("Izma Bleed");
@@ -5320,8 +5332,9 @@ function combatStatusesUpdate():void {
 		if(player.hasPerk("Medicine") >= 0 && rand(100) <= 14) {
 			outputText("You manage to cleanse the naga venom from your system with your knowledge of medicine!\n\n", false);
 			player.spe += player.statusAffectv1("Naga Venom");
-			speUp.visible = true;
-			speDown.visible = false;
+			this.mainView.statsView.showStatUp( 'spe' );
+			// speUp.visible = true;
+			// speDown.visible = false;
 			player.removeStatusAffect("Naga Venom");
 		}
 		else if(player.spe > 3) {
@@ -16716,10 +16729,12 @@ function spellMight():void {
 		player.changeStatusValue("Might",1,tempStr);
 		player.changeStatusValue("Might",2,tempTou);
 		if(player.str < 100) {
-			strUp.visible = true;
-			strDown.visible = false;
-			touUp.visible = true;
-			touDown.visible = false;
+			this.mainView.statsView.showStatUp( 'str' );
+			// strUp.visible = true;
+			// strDown.visible = false;
+			this.mainView.statsView.showStatUp( 'tou' );
+			// touUp.visible = true;
+			// touDown.visible = false;
 		}
 		player.str += player.statusAffectv1("Might");
 		player.tou += player.statusAffectv2("Might");

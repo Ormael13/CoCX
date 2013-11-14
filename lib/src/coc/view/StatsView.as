@@ -178,12 +178,14 @@ package coc.view {
                 oldStatName = _oldStatNameFor( statName );
 
                 if( this.model.player[ statName ] > this.model[ oldStatName ] ) {
-                    this[ statName + 'Up' ].visible = true;
-                    this[ statName + 'Down' ].visible = false;
+                    this.showStatUp( statName );
+                    // this.getChildByName( statName + 'Up' ).visible = true;
+                    // this.getChildByName( statName + 'Down' ).visible = false;
                 }
                 if( this.model.player[ statName ] < this.model[ oldStatName ] ) {
-                    this[ statName + 'Up' ].visible = false;
-                    this[ statName + 'Down' ].visible = true;
+                    this.showStatDown( statName );
+                    // this.getChildByName( statName + 'Up' ).visible = false;
+                    // this.getChildByName( statName + 'Down' ).visible = true;
                 }
             }
         };
@@ -194,6 +196,28 @@ package coc.view {
 
         public function hideLevelUp() :void {
             this.levelUp.visible = false;
+        };
+
+        public function showStatUp( statName :String ) :void {
+            var statUp :DisplayObject,
+                statDown :DisplayObject;
+
+            statUp = this.getChildByName( statName + 'Up' );
+            statDown = this.getChildByName( statName + 'Down' );
+
+            if( statUp ) statUp.visible = true;
+            if( statDown ) statUp.visible = false;
+        };
+
+        public function showStatDown( statName :String ) :void {
+            var statUp :DisplayObject,
+                statDown :DisplayObject;
+
+            statUp = this.getChildByName( statName + 'Up' );
+            statDown = this.getChildByName( statName + 'Down' );
+
+            if( statUp ) statUp.visible = false;
+            if( statDown ) statUp.visible = true;
         };
     }
 }
