@@ -23,6 +23,8 @@ oldStats.oldCor  = 0;
 oldStats.oldHP   = 0;
 oldStats.oldLust = 0;
 
+this.model.maxHP = maxHP;
+
 function maxHP():Number {
 	var max:Number = 0;
 	max += int(player.tou*2 + 50);
@@ -1469,8 +1471,8 @@ function perkBuyMenu():void {
 		return;
 	}
 	outputText("Please select a perk from the drop-down list, then click 'Okay'.  You can press 'Skip' to save your perk point for later.\n\n", false);
-	aCb.move(210, 108);
-	aCb.visible = true;
+	this.mainView.aCb.move(210, 108);
+	this.mainView.aCb.visible = true;
 	this.mainView.hideMenuButton( MainView.MENU_NEW_MAIN );
 	simpleChoices("Okay",0,"Skip",115,"",0,"",0,"",0);
 }
@@ -1644,7 +1646,7 @@ function buildPerkList():void {
 			perkList[perkList.length] = {label:"Resistance"};
 		}
 	}
-	aCb.dataProvider = new DataProvider(perkList); 
+	this.mainView.aCb.dataProvider = new DataProvider(perkList); 
 }
 
 function applyPerk(pName:String = ""):void {

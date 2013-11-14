@@ -38,6 +38,8 @@
 	classes.CoC: The Document class of Corruption of the Champions.
 ****/
 	
+	[SWF( width="1000", height="800", pageTitle="Corruption of Champions" )]
+	
 	public class CoC extends MovieClip
 	{
 		/****
@@ -51,13 +53,15 @@
 
 		public var mainView :MainView;
 
-		// TODO: We need a model class, and to replace this * with it.
 		public var model :GameModel;
 
 		public function CoC()
 		{
 			this.model = new GameModel();
 			this.mainView = new MainView({});
+			this.mainView.name = "mainView";
+			this.stage.addChild( this.mainView );
+
 			this.addFrameScript( 0, this.run );
 		}
 

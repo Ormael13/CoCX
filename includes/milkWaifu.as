@@ -135,8 +135,8 @@ function nameZeMilkBath():void {
 		addButton(0,"Next",nameZeMilkBath);
 		this.mainView.nameBox.visible = true;
 		this.mainView.nameBox.text = "Bath Slut";
-		this.mainView.nameBox.x = mainText.x + 5;
-		this.mainView.nameBox.y = mainText.y + 3 + mainText.textHeight;
+		this.mainView.nameBox.x = this.mainView.mainText.x + 5;
+		this.mainView.nameBox.y = this.mainView.mainText.y + 3 + this.mainView.mainText.textHeight;
 		return;
 	}
 	clearOutput();

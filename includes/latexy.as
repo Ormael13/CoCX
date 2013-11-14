@@ -193,15 +193,15 @@ function PCCarriedGooBackHomeII():void {
 	this.mainView.nameBox.text = "";
 	this.mainView.nameBox.visible = true;
 	this.mainView.nameBox.width = 165;
-	this.mainView.nameBox.x = mainText.x + 5;
-	this.mainView.nameBox.y = mainText.y + 3 + mainText.textHeight;
+	this.mainView.nameBox.x = this.mainView.mainText.x + 5;
+	this.mainView.nameBox.y = this.mainView.mainText.y + 3 + this.mainView.mainText.textHeight;
 }
 function nameZeLatexGoo():void {
 	if(this.mainView.nameBox.text == "") {
 		clearOutput();
 		outputText("<b>You must select a name.</b>", false);
-		this.mainView.nameBox.x = mainText.x + 5;
-		this.mainView.nameBox.y = mainText.y + 3 + mainText.textHeight;
+		this.mainView.nameBox.x = this.mainView.mainText.x + 5;
+		this.mainView.nameBox.y = this.mainView.mainText.y + 3 + this.mainView.mainText.textHeight;
 		menu();
 		addButton(0,"Next",nameZeLatexGoo);
 		return;
@@ -295,8 +295,8 @@ function encounterLeftBehindGooSlaveII():void {
 	this.mainView.nameBox.text = "";
 	this.mainView.nameBox.visible = true;
 	this.mainView.nameBox.width = 165;
-	this.mainView.nameBox.x = mainText.x + 5;
-	this.mainView.nameBox.y = mainText.y + 3 + mainText.textHeight;
+	this.mainView.nameBox.x = this.mainView.mainText.x + 5;
+	this.mainView.nameBox.y = this.mainView.mainText.y + 3 + this.mainView.mainText.textHeight;
 }
 
 //Pure Characters Intro(F):
@@ -383,8 +383,8 @@ function pureGooGalRecruitAftermathII():void {
 	this.mainView.nameBox.text = "";
 	this.mainView.nameBox.visible = true;
 	this.mainView.nameBox.width = 165;
-	this.mainView.nameBox.x = mainText.x + 5;
-	this.mainView.nameBox.y = mainText.y + 3 + mainText.textHeight;
+	this.mainView.nameBox.x = this.mainView.mainText.x + 5;
+	this.mainView.nameBox.y = this.mainView.mainText.y + 3 + this.mainView.mainText.textHeight;
 
 }
 
@@ -393,8 +393,8 @@ function nameZeLatexGooNice():void {
 	if(this.mainView.nameBox.text == "") {
 		clearOutput();
 		outputText("<b>You must select a name.</b>", false);
-		this.mainView.nameBox.x = mainText.x + 5;
-		this.mainView.nameBox.y = mainText.y + 3 + mainText.textHeight;
+		this.mainView.nameBox.x = this.mainView.mainText.x + 5;
+		this.mainView.nameBox.y = this.mainView.mainText.y + 3 + this.mainView.mainText.textHeight;
 		menu();
 		addButton(0,"Next",nameZeLatexGoo);
 		return;

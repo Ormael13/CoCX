@@ -14,6 +14,9 @@ package coc.view {
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 
+	import fl.controls.ComboBox; 
+	import fl.data.DataProvider; 
+
     import coc.model.GameModel;
 
 	public dynamic class MainView extends MovieClip {
@@ -34,6 +37,8 @@ package coc.view {
 		private static const BUTTON_Y_DELTA :Number = 52;
 		private static const BUTTON_REAL_WIDTH :Number = 150;
 		private static const BUTTON_REAL_HEIGHT :Number = 40;
+
+		public var aCb :ComboBox;
 
 		public var bottomButtonTexts :Array; // <TextField>
 		public var bottomButtonBGs :Array; // <MovieClip>
@@ -111,6 +116,13 @@ package coc.view {
 
 		protected function formatMiscItems() :void {
 			this.nameBox.maxChars = 54;
+
+			this.aCb = new ComboBox(); 
+			this.aCb.dropdownWidth = 200; 
+			this.aCb.width = 200; 
+			this.aCb.scaleY = 1.1;
+			this.aCb.move(-1250, -1550); 
+			this.aCb.prompt = "Choose a perk"; 
 		};
 
 		// Removes the need for some code in input.as and InitializeUI.as.
@@ -220,6 +232,10 @@ package coc.view {
 		protected function textForBG( bg :DisplayObject ) :TextField {
 			var textName :String;
 
+			if( ! bg ) {
+				throw new ArgumentError( "MainView.textForBG() must be called with a DisplayObject as its argument." );
+			}
+
 			textName = bg.name.replace( /BG$/, 'Text' );
 
 			if( bg.name == 'levelBG' )
@@ -244,7 +260,7 @@ package coc.view {
 			event.currentTarget.alpha = 0.5;
 
 			if( this._getButtonToolTipText ) {
-				this.toolTip.text = this._getButtonToolTipText( this.textForBG( event.target ).text );
+				this.toolTip.text = this._getButtonToolTipText( this.textForBG( event.target as DisplayObject ).text );
 				this.toolTip.showForButton( event.target as DisplayObject );
 			}
 		};
@@ -324,7 +340,7 @@ package coc.view {
 		// This function checks if the button at index has text
 		// that matches at least one of the possible texts passed as an argument.
 		public function buttonTextIsOneOf( index :int, possibleLabels :Array ) :Boolean {
-			var label :String
+			var label :String,
 				buttonText :String;
 
 			buttonText = this.getButtonText( index );
@@ -479,11 +495,11 @@ package coc.view {
 			var scale :Number;
 
 			// TODO: When flags goes away, if it goes away, replace this with the appropriate settings thing.
-			if( choice < 0 || model.flags[ SHOW_SPRITES_FLAG ] )
+			if( index < 0 || model.flags[ 273 ] ) // = SHOW_SPRITES_FLAG from flagDefs...
 				this.sprite.visible = false;
 			else {
 				this.sprite.visible = true;
-				this.sprite.gotoAndStop(choice);
+				this.sprite.gotoAndStop( index );
 
 				scale = 80 / sprite.height;
 				this.sprite.scaleX = scale;

@@ -109,9 +109,9 @@ function nameZeGargoyle():void {
 		this.mainView.nameBox.visible = true;
 		this.mainView.nameBox.width = 165;
 		menu();
-		this.mainView.nameBox.x = mainText.x + 5;
+		this.mainView.nameBox.x = this.mainView.mainText.x + 5;
 		
-		this.mainView.nameBox.y = mainText.y + 3 + mainText.textHeight;
+		this.mainView.nameBox.y = this.mainView.mainText.y + 3 + this.mainView.mainText.textHeight;
 		
 		addButton(0,"Next",nameZeGargoyle);
 		return;

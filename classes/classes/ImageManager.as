@@ -155,6 +155,11 @@
 		{
 			var gotImage:Boolean = false;
 			var mainText:TextField = mStage.getChildByName("mainText") as TextField;
+
+			if( ! mainText )
+			{
+				mainText = mStage.getChildByName("mainView").mainText;
+			}
 			
 			if (mainText != null)
 			{

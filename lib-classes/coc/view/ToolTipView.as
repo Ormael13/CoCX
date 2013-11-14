@@ -1,6 +1,7 @@
 package coc.view {
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
+	import flash.display.DisplayObject;
 	import flash.text.TextField;
 	import flash.text.TextFieldType;
 

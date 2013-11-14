@@ -14,7 +14,7 @@ function newGameGo(e:MouseEvent):void {
 	this.mainView.hideMenuButton( MainView.MENU_LEVEL );
 	this.mainView.hideMenuButton( MainView.MENU_PERKS );
 	//Hide perk boxes
-	aCb.visible = false;
+	this.mainView.aCb.visible = false;
 	//If first PC, track status of EZ mode and other such nonsense.
 	var silly:Boolean = false;
 	var easy:Boolean = false;
@@ -39,12 +39,12 @@ function newGameGo(e:MouseEvent):void {
 	AskQuestions._x = GeneralTextField._x;
 	AskQuestions._y = GeneralTextField._y + 3 + GeneralTextField._height;
 	again replace _x, _y, _width with x, y, width*/
-	//mainText.autoSize = true;
+	//this.mainView.mainText.autoSize = true;
 	
-	//mainText.autoSize = TextFieldAutoSize.LEFT;
+	//this.mainView.mainText.autoSize = TextFieldAutoSize.LEFT;
 	simpleChoices("OK",10034,"",0,"",0,"",0,"",0);
-	this.mainView.nameBox.x = mainText.x + 5;
-	this.mainView.nameBox.y = mainText.y + 3 + mainText.textHeight;
+	this.mainView.nameBox.x = this.mainView.mainText.x + 5;
+	this.mainView.nameBox.y = this.mainView.mainText.y + 3 + this.mainView.mainText.textHeight;
 	
 	//OLD
 	//this.mainView.nameBox.x = 510;

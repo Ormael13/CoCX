@@ -636,8 +636,8 @@ function nameDatHelspawn():void {
 	this.mainView.nameBox.text = "";
 	this.mainView.nameBox.visible = true;
 	this.mainView.nameBox.width = 165;
-	this.mainView.nameBox.x = mainText.x + 5;
-	this.mainView.nameBox.y = mainText.y + 3 + mainText.textHeight;
+	this.mainView.nameBox.x = this.mainView.mainText.x + 5;
+	this.mainView.nameBox.y = this.mainView.mainText.y + 3 + this.mainView.mainText.textHeight;
 }
 function applyHelspawnName():void {
 	spriteSelect(68);
@@ -653,8 +653,8 @@ function applyHelspawnName():void {
 		else if(this.mainView.nameBox.text == "Mini-doofus") outputText("\"<i>Oh yeah, Kiha'll get a laugh out of that.  You ass.</i>\"");
 		//[Back to the name field you go!]
 		menu();
-		this.mainView.nameBox.x = mainText.x + 5;
-		this.mainView.nameBox.y = mainText.y + 3 + mainText.textHeight;
+		this.mainView.nameBox.x = this.mainView.mainText.x + 5;
+		this.mainView.nameBox.y = this.mainView.mainText.y + 3 + this.mainView.mainText.textHeight;
 		addButton(0,"Next",applyHelspawnName);
 		return;
 	}

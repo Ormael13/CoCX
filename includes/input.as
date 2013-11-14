@@ -423,21 +423,21 @@ var perkList:Array = new Array(
                 data:3}*/
 ); 
  
-var aCb:ComboBox = new ComboBox(); 
-aCb.dropdownWidth = 200; 
-aCb.width = 200; 
-aCb.scaleY = 1.1;
-aCb.move(-1250, -1550); 
-aCb.prompt = "Choose a perk"; 
-aCb.dataProvider = new DataProvider(perkList); 
-aCb.addEventListener(Event.CHANGE, changeHandler); 
+//var this.mainView.aCb:ComboBox = new ComboBox(); 
+//this.mainView.aCb.dropdownWidth = 200; 
+//this.mainView.aCb.width = 200; 
+//this.mainView.aCb.scaleY = 1.1;
+//this.mainView.aCb.move(-1250, -1550); 
+//this.mainView.aCb.prompt = "Choose a perk"; 
+this.mainView.aCb.dataProvider = new DataProvider(perkList); 
+this.mainView.aCb.addEventListener(Event.CHANGE, changeHandler); 
  
-addChild(aCb);
+addChild(this.mainView.aCb);
 
 function changeHandler(event:Event):void { 
  	//Store perk name for later addition
  	tempPerk = ComboBox(event.target).selectedItem.label; 
-	aCb.move(210, 80);
+	this.mainView.aCb.move(210, 80);
 	outputText("You have selected the following perk:\n\n", true);
 	outputText("<b>" + tempPerk + ":</b> " + perkLongDescription(tempPerk) + "\n\nIf you would like to select this perk, click <b>Okay</b>.  Otherwise, select a new perk, or press <b>Skip</b> to make a decision later.", false);
 	simpleChoices("Okay",114,"Skip",115,"",0,"",0,"",0);
@@ -449,5 +449,5 @@ function changeHandler(event:Event):void {
     var request:URLRequest = new URLRequest(); 
     request.url = ComboBox(event.target).selectedItem.data; 
     navigateToURL(request); 
-    aCb.selectedIndex = -1; 
+    this.mainView.aCb.selectedIndex = -1; 
 }*/

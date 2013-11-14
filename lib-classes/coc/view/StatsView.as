@@ -74,7 +74,7 @@ package coc.view {
                 this.upDownsContainer.addChild( mainView.getChildByName( statsUpDownDOName ) );
             }
 
-            this.levelUp = mainView.getChildByName( 'levelUp' );
+            this.levelUp = mainView.getChildByName( 'levelUp' ) as Sprite;
             this.addChild( this.levelUp );
         };
 

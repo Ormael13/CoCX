@@ -315,12 +315,12 @@ function doSystem(eventNo:Number):void {
 		return;
 	}
 	if(eventNo == 114) {
-		aCb.visible = false;
+		this.mainView.aCb.visible = false;
 		applyPerk(tempPerk);
 		return;
 	}
 	if(eventNo == 115) {
-		aCb.visible = false;
+		this.mainView.aCb.visible = false;
 		eventParser(1);
 		return;
 	}
