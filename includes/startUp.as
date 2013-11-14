@@ -178,7 +178,85 @@ function mainMenu(e:MouseEvent = undefined):void {
 			"", 0, 
 			"Settings", settingsScreen, 
 			"Resume", resume);
-	
+
+	// TESTING multipageChoices
+	// Uncomment the following line to instead look at the multipageChoices crud.  I mean test.
+	// showMPChoicesMenu();
+
+	function traceItem( item :String ) {
+		return function() {
+			trace( "you clicked", item + "!" );
+		};
+	}
+
+	function showMultipageChoices( cancel :Function, items :Array ) {
+		return function() {
+			multipageChoices( cancel, items );
+		};
+	}
+
+	function showMPChoicesMenu() {
+		multipageChoices( 0, [
+			["LT Half Page",
+				// Less than half
+				showMultipageChoices( showMPChoicesMenu, [
+					[ "Item 1", traceItem( "1" ) ],
+					[ "Item 2", traceItem( "2" ) ],
+					[ "Item 3", traceItem( "3" ) ]
+					])],
+
+			["Half Page",
+				// Half
+				showMultipageChoices( showMPChoicesMenu, [
+					[ "Item 1", traceItem( "1" ) ],
+					[ "Item 2", traceItem( "2" ) ],
+					[ "Item 3", traceItem( "3" ) ],
+					[ "Item 4", traceItem( "4" ) ]
+					])],
+
+			["Not Full Page",
+				// Less than full...
+				showMultipageChoices( showMPChoicesMenu, [
+					[ "Item 1", traceItem( "1" ) ],
+					[ "Item 2", traceItem( "2" ) ],
+					[ "Item 3", traceItem( "3" ) ],
+					[ "Item 4", traceItem( "4" ) ],
+					[ "Item 5", traceItem( "5" ) ],
+					[ "Item 6", traceItem( "6" ) ]
+					])],
+
+			["1 Full Page",
+				// Full page
+				showMultipageChoices( showMPChoicesMenu, [
+					[ "Item 1", traceItem( "1" ) ],
+					[ "Item 2", traceItem( "2" ) ],
+					[ "Item 3", traceItem( "3" ) ],
+					[ "Item 4", traceItem( "4" ) ],
+					[ "Item 5", traceItem( "5" ) ],
+					[ "Item 6", traceItem( "6" ) ],
+					[ "Item 7", traceItem( "7" ) ],
+					[ "Item 8", traceItem( "8" ) ]
+					])],
+
+			["2 Pages",
+				// 2 pages
+				showMultipageChoices( showMPChoicesMenu, [
+					[ "Item 1",  traceItem( "1" ) ],
+					[ "Item 2",  traceItem( "2" ) ],
+					[ "Item 3",  traceItem( "3" ) ],
+					[ "Item 4",  traceItem( "4" ) ],
+					[ "Item 5",  traceItem( "5" ) ],
+					[ "Item 6",  traceItem( "6" ) ],
+					[ "Item 7",  traceItem( "7" ) ],
+					[ "Item 8",  traceItem( "8" ) ],
+					[ "Item 9",  traceItem( "9" ) ],
+					[ "Item 10", traceItem( "10" ) ],
+					[ "Item 11", traceItem( "11" ) ],
+					[ "Item 12", traceItem( "12" ) ]
+					])]
+		]);
+	}
+	// END TESTING multipageChoices
 }
 	
 import flash.system.SecurityDomain;
