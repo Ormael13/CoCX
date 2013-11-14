@@ -260,10 +260,20 @@ function talkBakeryMenu():void {
 	outputText("Who will you talk to?\n");
 	var rubiT:String = "Waitress";
 	if(flags[RUBI_INTRODUCED] > 0) rubiT = "Rubi";
-	var rubiB:Number = rubiIntros();
 	menu();
 	addButton(0,"Baker",talkToBaker);
-	addButton(1,rubiT,rubiWrapper,rubiB);
+	
+	// rubiIntros returns 0 if you've driven rubi away
+	// I'm actually not sure how this was *supposed* to work, since it would just call eventParser with a event of 0 
+	// I guess it just wouldn't do anything?
+	// FWIW, the flag that has to be set to get rubiIntros to return zero is set in a function that has the comment:
+	//(Will no longer encounter Rubi at the bakery.)
+	var rubiB:Number = rubiIntros();
+	if (rubiB > 0)
+	{
+		addButton(1,rubiT,rubiWrapper,rubiB);
+	}
+
 	if(isHolidays()) {
 		if(flags[KAMI_ENCOUNTER] > 0) {
 			outputText("\nYou could 'burn off some steam' with Kami during her lunch break, since you already know how that'll end up!\n");

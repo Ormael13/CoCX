@@ -360,20 +360,21 @@ function getCurrentStackTrace():String		// Fuck, stack-traces only work in the d
 function errorPrint(details:* = null)
 {
 	outputText("<b>Congratulations, you've found a bug!</b>", true);
-	outputText("\nError: Unknown event!", false);
-	outputText("\n\nPlease report that you had an issue with code: \"" + details + "\" ", false);
+	outputText("\nError: Unknown event!");
+	outputText("\n\nPlease report that you had an issue with code: \"" + details + "\" ");
+	outputText("\nIn game version: \"" + ver + "\" ");
 
 	var sTrace = getCurrentStackTrace();
 
 	if (sTrace)	// Fuck, stack-traces only work in the debug player.
-		outputText("and stack-trace: \n <pre>" + sTrace + "</pre>\n", false); 	
-	outputText("to fake-name on the forums or better yet, file a bug report on github: ", false);
-	outputText("\nhttps://github.com/herp-a-derp/Corruption-of-Champions", false);
+		outputText("and stack-trace: \n <pre>" + sTrace + "</pre>\n"); 	
+	outputText("to fake-name on the forums or better yet, file a bug report on github: ");
+	outputText("\nhttps://github.com/herp-a-derp/Corruption-of-Champions");
 
-	outputText("\nPlease try to include the details of what you were doing when you encountered this bug ", false);
+	outputText("\nPlease try to include the details of what you were doing when you encountered this bug ");
 	if (sTrace)
-		outputText(" (including the above stack trace copy&pasted into the details),", false);
-	outputText(" to make tracking the issue down easier. Thanks!", false);
+		outputText(" (including the above stack trace copy&pasted into the details),");
+	outputText(" to make tracking the issue down easier. Thanks!");
 
 	doNext(13);
 }
