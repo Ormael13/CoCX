@@ -2164,7 +2164,7 @@ package classes
 			while (counter > 0)
 			{
 				counter--;
-				if (cocks[counter].cockType == CockTypesEnum.DOG)
+				if (cocks[counter].cockType == CockTypesEnum.DOG || cocks[counter].cockType == CockTypesEnum.FOX)
 					dogCockC++;
 			}
 			return dogCockC;
@@ -2182,20 +2182,6 @@ package classes
 					dragonCockC++;
 			}
 			return dragonCockC;
-		}
-		
-		//How many dragonCocks
-		public function foxCocks():int
-		{
-			var foxCockCounter:int = 0;
-			var cockIdxPtr:int = cocks.length;
-			while (cockIdxPtr > 0)
-			{
-				cockIdxPtr--;
-				if (cocks[cockIdxPtr].cockType == CockTypesEnum.FOX)
-					foxCockCounter++;
-			}
-			return foxCockCounter;
 		}
 		
 		//How many normalCocks
