@@ -1,4 +1,6 @@
-﻿import classes.Player;
+﻿import classes.itemSlotClass;
+import classes.keyItemClass;
+import classes.Player;
 /**
  * Urta's Quest
  * @Author: 
@@ -25,8 +27,11 @@
 //You play as Urta, which copies everyone about you into this new variable. Very clumsy.
 //TODO: Figure out this whole thing. You play as Urta but the whole quest saves you state into this variable and swaps back and forth 
 //whenever you "leave" the quest 
-var player2:Player = new Player();
-var urtaQItems:Array = new Array();
+var urtaQItems1:itemSlotClass = new itemSlotClass();
+var urtaQItems2:itemSlotClass = new itemSlotClass();
+var urtaQItems3:itemSlotClass = new itemSlotClass();
+var urtaQItems4:itemSlotClass = new itemSlotClass();
+var urtaQItems5:itemSlotClass = new itemSlotClass();
 
 function urtaBusy():Boolean {
 	return (flags[EDRYN_BIRF_COUNTDOWN] > 0 || flags[URTA_QUEST_STATUS] == -1);
@@ -91,7 +96,7 @@ function comfortUrtaAfterFamFamTalk():void {
 	if(urtaDrunk()) outputText("boozy ");
 	outputText("kiss on your lips as she hugs you tight - tight enough that you feel every vein through the concealing silk of her outfit.  \"<i>I'm a lucky girl.</i>\"");
 	
-	outputText("\n\nYou return the hug with every fiber of your being, holding her tight.  Nuzzling at your neck, Urta lets her head come rest on your shoulder.  Her eyes slowly close as she says, \"<i>Just... hold me, " + player.short + ".</I>\"  As if you were going to do anything else.  You cradle the abused vixen for as long as she needs, which turns out to be long enough for her throbbing erection to actually recede, forgotten for the time being.");
+	outputText("\n\nYou return the hug with every fiber of your being, holding her tight.  Nuzzling at your neck, Urta lets her head come to rest on your shoulder.  Her eyes slowly close as she says, \"<i>Just... hold me, " + player.short + ".</I>\"  As if you were going to do anything else!  You cradle the abused vixen for as long as she needs, which turns out to be long enough for her throbbing erection to actually recede, forgotten for the time being.");
 	outputText("\n\n\"<i>Thanks, " + player.short + ",</i>\" Urta says as she pulls back, giving your hand a gentle squeeze, \"<i>I didn't know how badly I needed that.</i>\"  She sits back down and explains, \"<i>I'll be fine now, I think.  Thanks again.</i>\"");
 	
 	outputText("\n\nNodding, you give the girl a smile as you stand up to depart.  Her eyes twinkle happily as she watches you go.");
@@ -157,30 +162,31 @@ function infertilityQuestions():void {
 
 function resetToPC():void {
 	player = clone(player2);
-	itemSlot1 = clone(urtaQItems[0]);
-	itemSlot2 = clone(urtaQItems[1]);
-	itemSlot3 = clone(urtaQItems[2]);
-	itemSlot4 = clone(urtaQItems[3]);
-	itemSlot5 = clone(urtaQItems[4]);
+	itemSlot1 = clone(urtaQItems1);
+	itemSlot2 = clone(urtaQItems2);
+	itemSlot3 = clone(urtaQItems3);
+	itemSlot4 = clone(urtaQItems4);
+	itemSlot5 = clone(urtaQItems5);
 }
 
 
 //Urta Appearance Screen(C)*
 function startUrtaQuest():void {
 	clearOutput();
-	urtaQItems[0] = clone(itemSlot1);
-	urtaQItems[1] = clone(itemSlot2);
-	urtaQItems[2] = clone(itemSlot3);
-	urtaQItems[3] = clone(itemSlot4);
-	urtaQItems[4] = clone(itemSlot5);
+	
+	// *SERIALIZE* out the players current Player object + items
+	urtaQItems1 = clone(itemSlot1);
+	urtaQItems2 = clone(itemSlot2);
+	urtaQItems3 = clone(itemSlot3);
+	urtaQItems4 = clone(itemSlot4);
+	urtaQItems5 = clone(itemSlot5);
 	itemSlot1 = new itemSlotClass();
 	itemSlot2 = new itemSlotClass();
 	itemSlot3 = new itemSlotClass();
 	itemSlot4 = new itemSlotClass();
 	itemSlot5 = new itemSlotClass();
 	player2 = clone(player);
-	//var playerTwo:creature = new creature;
-	//var playerTwo:creature = Object(ObjectUtil.copy(player));
+
 	player = new Player();
 	player.short = "Urta";
 	player.tallness = 71;

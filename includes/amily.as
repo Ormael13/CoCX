@@ -2498,24 +2498,26 @@ function amilyMenu(output:Boolean = true):void {
 //Corrupt Amily Sex Options
 function amilyCorruptSexMenu():void {
 	amilySprite();
+	var anal = 0;
+	var penetrated = 0;
+	var fuckCunt = 0;
+	var oral = 0;
+	var oral2 = 0;
+	var scissor = 0;
+
 	outputText("", true);
 	if(player.gender > 0) {
 		outputText("Amily asks, \"<i>How would " + player.mf("master","mistress") + " like to use " + player.mf("his","her") + " cum-bucket today?", false);
-		var anal:Number = 0;
-		if(player.hasCock()) anal = 2801;
-		var penetrated:Number = 0;
-		if(player.hasVagina() && flags[AMILY_WANG_LENGTH] > 0) penetrated = 2802;
-		var fuckCunt:Number = 0;
-		var oral:Number = 0;
+		if(player.hasCock()) anal = corruptAmilyBuckFutter;
+		if(player.hasVagina() && flags[AMILY_WANG_LENGTH] > 0) 
+			penetrated = corruptAmilyCampBonesPCWithHerCock;
 		if(player.hasCock()) {
-			fuckCunt = 2804;
-			oral = 2803;
+			fuckCunt = corruptAmilysPussyGetsMotherfuckingFucked;
+			oral = corruptAmilyOralSuckOff;
 		}
-		var oral2:Number = 0;
-		var scissor:Number = 0;
 		if(player.hasVagina()) {
-			oral2 = 2806;
-			scissor = 2807;
+			oral2 = corruptAmilyLickPussiesLikeAPro;
+			scissor = corruptAmilyScissorsLikeAPro;
 		}
 		choices("Anal",anal,"Get BJ",oral,"Get Licked",oral2,"GetPen'ed",penetrated,"Scissor",scissor,"Vagina",fuckCunt,"",0,"",0,"",0,"Nevermind",2427);
 	}

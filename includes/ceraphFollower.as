@@ -92,7 +92,7 @@ function followerCeraphRoleplay():void {
 	if(marbles > 0) addButton(6,"Marble Play",eventParser,marbles);
 	if(urta > 0) addButton(7,"Urta Play",eventParser,urta);
 	//choices("Defeat Her",3050,"Lose to Her",3051,"",0,"",0,"",0,"",0,"Dominika P.",dominika,"Marble Play",marbles,"Urta Play",urta,"Back",3315);
-	addButton(9,"Back",eventParser,3315);
+	addButton(9,"Back",ceraphFollowerAppearance);
 }
 
 //*Ceraph is Defeated #4 - Offers Funtimes (Zeddited)
@@ -800,7 +800,7 @@ function makeCarephsLackeysLeave():void {
 	outputText("You wave the imps away and tell them that you're not interested.  One of the imps protests, \"<i>But, " + player.mf("Master","Mistress") + "-</i>\"  You cut him off before he has a chance to finish, saying that you wanted Ceraph, not some human girl!  Then, you toss the potion away and tell them to take the girl away.\n\n", false);
 
 	outputText("\"<i>Y-Yes, " + player.mf("Master","Mistress") + "...</i>\" the imps reply meekly, pulling on the collar to drag the girl away.", false);
-	doNext(120);
+	doNext(campSlavesMenu);
 }
 
 //[=Yes=]
@@ -1336,7 +1336,7 @@ function noZetsukoLoveToday():void {
 	outputText("You tell her to be gone; you wanted Ceraph, not some lowly slave that can't even be bothered to show you proper respect.  You order her to tell Ceraph not to waste your time with undisciplined servants that she's too inept to properly break.\n\n", false);
 
 	outputText("\"<i>Oohoh, Mistress is certain to be FURIOUS with Zetsuko...</i>\" she says, licking her lips and showing off the numerous studs that line her normal tongue as well.  \"<i>Zetsuko cannot wait...</i>\"", false);
-	doNext(120);
+	doNext(campSlavesMenu);
 }
 
 function giveFollowerBodyBits():void {

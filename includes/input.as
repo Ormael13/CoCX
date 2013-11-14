@@ -252,13 +252,13 @@ function keyboard(e:KeyboardEvent):void {
 			executeButtonClick(0);
 			return;
 		}
-		if(b5Text.visible && ((b5Text.text == "Nevermind" || b5Text.text == "Next" || b5Text.text == "Return" || b5Text.text == "Back" || b5Text.text == "Leave"))) {
+		if( this.mainView.buttonIsVisible( 4 ) && this.mainView.buttonTextIsOneOf( 4, [ "Nevermind", "Next", "Return", "Back", "Leave" ] )) {
 			mouseOverText.visible = false;
 			//eventParser(button5Choice);
 			executeButtonClick(4);
 			return;
 		}
-		if(b6Text.visible && ((b6Text.text == "Next" || b6Text.text == "Return" || b6Text.text == "Back"))) {
+		if( this.mainView.buttonIsVisible( 5 ) && this.mainView.buttonTextIsOneOf( 5, [ "Next", "Return", "Back" ] )) {
 			mouseOverText.visible = false;
 			//eventParser(button6Choice);
 			executeButtonClick(5);
@@ -278,111 +278,131 @@ function keyboard(e:KeyboardEvent):void {
 	}		
 	//If 1 key pressed!
 	if(e.keyCode == 49) {
-		if(b1Text.visible == false)
+		//if(b1Text.visible == false)
+		if( ! this.mainView.buttonIsVisible( 0 ) )
 		{
 			trace("Key 1 pressed while inactive.");
 			return;
 		}
-		mouseOverText.visible = false;
+		//mouseOverText.visible = false;
+		this.mainView.toolTip.hide();
 		//eventParser(currEvent);
 		executeButtonClick(0);
 		return;
 	}
 	//If 2 key pressed!
 	if(e.keyCode == 50) {
-		if(b2Text.visible == false)
+		//if(b2Text.visible == false)
+		if( ! this.mainView.buttonIsVisible( 1 ) )
 		{
 			trace("Key 2 pressed while inactive.");
 			return;
 		}
-		mouseOverText.visible = false;
+		//mouseOverText.visible = false;
+		this.mainView.toolTip.hide();
 		executeButtonClick(1);
 		return;
 	}
 	//If 3 key pressed!
 	if(e.keyCode == 51) {
-		if(b3Text.visible == false)
+		//if(b3Text.visible == false)
+		if( ! this.mainView.buttonIsVisible( 2 ) )
 		{
 			trace("Key 3 pressed while inactive.");
 			return;
 		}
-		mouseOverText.visible = false;
+		//mouseOverText.visible = false;
+		this.mainView.toolTip.hide();
 		executeButtonClick(2);
 		return;
 	}
 	//If 4 key pressed, or enter when text is "leave", "back", or "return".
 	if(e.keyCode == 52) {
-		if(b4Text.visible == false)
+		//if(b4Text.visible == false)
+		if( ! this.mainView.buttonIsVisible( 3 ) )
 		{
 			trace("Key 4 pressed while inactive.");
 			return;
 		}
-		mouseOverText.visible = false;
+		//mouseOverText.visible = false;
+		this.mainView.toolTip.hide();
 		executeButtonClick(3);
 		return;
 	}
 	if(e.keyCode == 53) {
-		if(b5Text.visible == false)
+		//if(b5Text.visible == false)
+		if( ! this.mainView.buttonIsVisible( 4 ) )
 		{
 			trace("Key 5 pressed while inactive.");
 			return;
 		}
-		mouseOverText.visible = false;
+		//mouseOverText.visible = false;
+		this.mainView.toolTip.hide();
 		executeButtonClick(4);
 		return;
 	}
 	if(e.keyCode == 54 || e.keyCode == 81) {
-		if(b6Text.visible == false)
+		//if(b6Text.visible == false)
+		if( ! this.mainView.buttonIsVisible( 5 ) )
 		{
 			trace("Key 6 pressed while inactive.");
 			return;
 		}
-		mouseOverText.visible = false;
+		//mouseOverText.visible = false;
+		this.mainView.toolTip.hide();
 		executeButtonClick(5);
 		return;
 	}
 	if(e.keyCode == 55 || e.keyCode == 87) {
-		if(b7Text.visible == false)
+		//if(b7Text.visible == false)
+		if( ! this.mainView.buttonIsVisible( 6 ) )
 		{
 			trace("Key 7 pressed while inactive.");
 			return;
 		}
-		mouseOverText.visible = false;
+		//mouseOverText.visible = false;
+		this.mainView.toolTip.hide();
 		executeButtonClick(6);
 		return;
 	}
 	if(e.keyCode == 56 || e.keyCode == 69) {
-		if(b8Text.visible == false)
+		//if(b8Text.visible == false)
+		if( ! this.mainView.buttonIsVisible( 7 ) )
 		{
 			trace("Key 8 pressed while inactive.");
 			return;
 		}
-		mouseOverText.visible = false;
+		//mouseOverText.visible = false;
+		this.mainView.toolTip.hide();
 		executeButtonClick(7);
 		return;
 	}
 	if(e.keyCode == 57 || e.keyCode == 82) {
-		if(b9Text.visible == false)
+		//if(b9Text.visible == false)
+		if( ! this.mainView.buttonIsVisible( 8 ) )
 		{
 			trace("Key 9 pressed while inactive.");
 			return;
 		}
-		mouseOverText.visible = false;
+		//mouseOverText.visible = false;
+		this.mainView.toolTip.hide();
 		executeButtonClick(8);
 		return;
 	}
 	if(e.keyCode == 48 || e.keyCode == 84) {
-		if(b0Text.visible == false)
+		//if(b0Text.visible == false)
+		if( ! this.mainView.buttonIsVisible( 9 ) )
 		{
 			trace("Key 0 pressed while inactive.");
 			return;
 		}
-		mouseOverText.visible = false;
+		//mouseOverText.visible = false;
+		this.mainView.toolTip.hide();
 		executeButtonClick(9);
 		return;
 	}
 	//Save box
-	if(e.keyCode == 68 && dataBG.visible == true) {
+	if(e.keyCode == 68 && this.mainView.menuButtonIsVisible( MainView.MENU_DATA )) {
 
 	}
 	

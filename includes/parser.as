@@ -34,11 +34,12 @@ Planned, but not implemented yet:
 // results of the corresponding anonymous function, in this case: function():* {return player.armorName;}
 // tags not present in the singleArgConverters object return an error message.
 // 
-var singleArgConverters:Object = {
+var singleArgConverters:Object = 
+{
 		"armor"			: function():* {return player.armorName;},
-		"armorName"		: function():* {return player.armorName;},
+		"armorname"		: function():* {return player.armorName;},
 		"weapon"		: function():* {return player.weaponName;},
-		"weaponName"	: function():* {return player.weaponName;},
+		"weaponname"	: function():* {return player.weaponName;},
 		"name"			: function():* {return player.short;},
 		"pg"			: function():* {return "\n\n";},
 		"asshole"		: function():* {return assholeDescript();},
@@ -53,51 +54,38 @@ var singleArgConverters:Object = {
 		"balls"			: function():* { return ballsDescriptLight(); },
 		"sheath"		: function():* { return sheathDesc(); },
 		"chest"			: function():* { return chestDesc(); },
-		"fullChest"		: function():* { return allChestDesc(); },
+		"fullchest"		: function():* { return allChestDesc(); },
 		"hips"			: function():* {return hipDescript();},
 		"butt"			: function():* { return buttDescript();},
 		"ass"			: function():* { return buttDescript();},
 		"nipple"		: function():* { return nippleDescript(0);},
 		"nipples"		: function():* { return nippleDescript(0) + "s";},
 		"tongue"		: function():* { return tongueDescript();},
-		"Evade"			: function():* { return "[Evade]"; },
-		"Misdirection"	: function():* { return "[Misdirection]"; },
-		"Agility"		: function():* { return "[Agility]"; },
+		"evade"			: function():* { return "[Evade]"; },
+		"misdirection"	: function():* { return "[Misdirection]"; },
+		"agility"		: function():* { return "[Agility]"; },
 		"master"		: function():* { return player.mf("master","mistress"); },
-		"Master"		: function():* { return player.mf("Master","Mistress"); },
+		"master"		: function():* { return player.mf("Master","Mistress"); },
 		"his"			: function():* { return player.mf("his","her"); },
-		"His"			: function():* { return player.mf("His","Her"); },
 		"he"			: function():* { return player.mf("he","she"); },
-		"He"			: function():* { return player.mf("He","She"); },
 		"him"			: function():* { return player.mf("him","her"); },
-		"Him"			: function():* { return player.mf("Him","Her"); },
 
-		"cunt"			: function():* {if(player.hasVagina()) return vaginaDescript();
-										else return "<b>(Attempt to parse vagina when none present.)</b>";},
-		"cocks"			: function():* {if(player.hasCock()) return multiCockDescriptLight();
-										else return "<b>(Attempt to parse cocks when none present.)</b>";},
-		"pussy"			: function():* {if(player.hasVagina()) return vaginaDescript();
-										else return "<b>(Attempt to parse vagina when none present.)</b>";},
-		"vagina"		: function():* {if(player.hasVagina()) return vaginaDescript();
-										else return "<b>(Attempt to parse vagina when none present.)</b>";},
-		"vag"			: function():* {if(player.hasVagina()) return vaginaDescript();
-										else return "<b>(Attempt to parse vagina when none present.)</b>";},
-		"clit"			: function():* {if(player.hasVagina()) return clitDescript();
-										else return "<b>(Attempt to parse clit when none present.)</b>";},
-		"vagOrAss"		: function():* {if (player.hasVagina())return vaginaDescript();
-										else assholeDescript();},
-		"cock"			: function():* {if(player.hasCock()) return cockDescript(0);
-										else return "<b>(Attempt to parse cock when none present.)</b>";},
-		"eachCock"		: function():* {if(player.hasCock()) return sMultiCockDesc();
-										else return "<b>(Attempt to parse eachCock when none present.)</b>";},
-		"EachCock"		: function():* {if(player.hasCock()) return SMultiCockDesc();
-										else return "<b>(Attempt to parse eachCock when none present.)</b>";},
-		"oneCock"		: function():* {if(player.hasCock()) return oMultiCockDesc();
-										else return "<b>(Attempt to parse eachCock when none present.)</b>";},
-		"OneCock"		: function():* {if(player.hasCock()) return OMultiCockDesc();
-										else return "<b>(Attempt to parse eachCock when none present.)</b>";},
-		"cockHead"		: function():* {if(player.hasCock()) return cockHead(0);
-										else return "<b>(Attempt to parse cockhead when none present.)</b>";}
+		// all the errors related to trying to parse stuff if not present are
+		// already handled in the various *Descript() functions.
+		// no need to duplicate them.
+		"cunt"			: function():* { return vaginaDescript(); },
+		"cocks"			: function():* { return multiCockDescriptLight(); },
+		"pussy"			: function():* { return vaginaDescript(); },
+		"vagina"		: function():* { return vaginaDescript(); },
+		"vag"			: function():* { return vaginaDescript(); },
+		"clit"			: function():* { return clitDescript(); },
+		"cock"			: function():* {return cockDescript(0);},
+		"eachcock"		: function():* {return sMultiCockDesc();},
+		"eachcock"		: function():* {return SMultiCockDesc();},
+		"onecock"		: function():* {return oMultiCockDesc();},
+		"onecock"		: function():* {return OMultiCockDesc();},
+		"cockhead"		: function():* {return cockHead(0);},
+		"vagorass"		: function():* {if (player.hasVagina())return vaginaDescript(); else assholeDescript();}
 
 }
 
@@ -112,7 +100,8 @@ function convertSingleArg(arg:String):String
 {
 	var debug = false;
 	var argResult:String;
-
+	var capitalize:Boolean = isUpperCase(arg.charAt(0));
+	arg = arg.toLowerCase()
 	if (arg in singleArgConverters)
 	{
 		if (debug) trace("Found corresponding anonymous function");
@@ -122,14 +111,84 @@ function convertSingleArg(arg:String):String
 	else
 		return "<b>!Unknown tag \"" + arg + "\"!</b>";
 
+	if (capitalize)
+		argResult = capitalizeFirstWord(argResult);
 	return argResult;
 }	
+
+// PRONOUNS: The parser uses Spivak Pronouns specifically to allow characters to be written with non-specific genders.
+// http://en.wikipedia.org/wiki/Spivak_pronoun
+//
+// Cheat Table:
+// Subject    | Object       | Possessive Adjective | Possessive Pronoun | Reflexive       |
+// ey laughs  | I hugged em  | eir heart warmed     | that is eirs       | ey loves emself |
+
+var arianLookups:Object = 
+{
+	"ey"		: function():* {return arianMF("he","she")},
+	"em"		: function():* {return arianMF("him","her")},
+	"eir"		: function():* {return arianMF("his","her")},
+	"eirs"		: function():* {return arianMF("his","hers")},
+	"emself"	: function():* {return arianMF("himself","herself")}
+}
+
+var rubiLookups:Object = 
+{
+	"ey"		: function():* {return rubiMF("he","she")},
+	"em"		: function():* {return rubiMF("him","her")},
+	"eir"		: function():* {return rubiMF("his","her")},
+	"eirs"		: function():* {return rubiMF("his","hers")},
+	"emself"	: function():* {return rubiMF("himself","herself")}
+}
+
+var charLookups:Object = 
+{
+	"rubi"		: rubiLookups,
+	"arian"		: arianLookups
+
+
+}
+
+function convertDoubleArg(arg:String):String
+{
+	var debug = false;
+	var argResult:String;
+
+	var capitalize:Boolean = isUpperCase(arg.charAt(0));
+	arg = arg.toLowerCase()
+
+	var argTemp = arg.split(" ");
+	trace("Argtemp = ", argTemp);
+
+	/*
+	if (arg in singleArgConverters)
+	{
+		if (debug) trace("Found corresponding anonymous function");
+		argResult = singleArgConverters[arg]();
+		if (debug) trace("Called, return = ", argResult);
+	}
+	else
+		return "<b>!Unknown tag \"" + arg + "\"!</b>";
+	*/
+
+	if (capitalize)
+		argResult = capitalizeFirstWord(argResult);
+	return argResult;
+}	
+
+
+
+
+
+
+
 
 // Possible text arguments in the conditional of a if statement
 // First, there is an attempt to cast the argument to a Number. If that fails,
 // a dictionary lookup is performed to see if the argument is in the conditionalOptions[] 
 // object. If that fails, we just fall back to returning 0
-var conditionalOptions:Object = {
+var conditionalOptions:Object = 
+{
 		"strength"			: function():* {return  player.str;},
 		"toughness"			: function():* {return  player.tou;},
 		"speed"				: function():* {return  player.spe;},
@@ -411,8 +470,8 @@ function parseConditional(textCtnt:String, depth:int):String
 // if not, it simply returns the contents as passed
 function evalBracketContents(textCtnt:String, depth:int):String
 {
-	var debug = false;
-	var ret:String;
+	var debug = true;
+	var retStr:String = "";
 	if (debug) trace("Evaluating string: ", textCtnt);
 
 	// POSSIBLE BUG: A actual statement starting with "if" could be misinterpreted as an if-statement
@@ -421,15 +480,37 @@ function evalBracketContents(textCtnt:String, depth:int):String
 	if (textCtnt.toLowerCase().indexOf("if") == 0)
 	{
 		if (debug) trace("It's an if-statement");
-		ret = parseConditional(textCtnt, depth);
-		if (debug) trace("IF Evaluated to ", ret);
+		retStr = parseConditional(textCtnt, depth);
+		if (debug) trace("IF Evaluated to ", retStr);
 	}
 	else
 	{
-		ret = textCtnt;
-	}
+		trace("Not an if statement")
+			// Match a single word, with no leading or trailing space
+		var singleWordTagRegExp:RegExp = /^\w+$/;
+		var doubleWordTagRegExp:RegExp = /^\w+\s\w+$/;
 
-	return ret;
+		var singleWordExpRes:Object = singleWordTagRegExp.exec(textCtnt);
+		var doubleWordExpRes:Object = doubleWordTagRegExp.exec(textCtnt);
+
+		if (debug) trace("Checking if single word = [" + singleWordExpRes + "]", getQualifiedClassName(singleWordExpRes));
+		if (debug) trace("string length = ", textCtnt.length);
+		if (singleWordExpRes)
+		{
+			if (debug) trace("It's a single word!");
+			retStr += convertSingleArg(textCtnt);
+		}
+		else if (doubleWordExpRes)
+		{
+			if (debug) trace("Two-word tag!")
+			retStr += convertDoubleArg(textCtnt);
+		}
+		else
+		{
+			retStr += "<b>!Unknown multi-word tag \"" + retStr + "\"!</b>";
+		}
+	}
+	return retStr;
 }
 
 import flash.utils.getQualifiedClassName;
@@ -474,7 +555,13 @@ function recParser(textCtnt:String, depth:int = 0):String
 			}
 			if (bracketCnt == 0)	// We've found the matching closing bracket for the opening bracket at textCtnt[tmp]
 			{
-				retStr += textCtnt.substring(0, tmp);		
+				var prefixTmp, postfixTmp;
+
+				// Only prepend the prefix if it actually has content.
+				prefixTmp = textCtnt.substring(0, tmp);
+				if (prefixTmp)
+					retStr += prefixTmp
+
 				// We know there aren't any brackets in the section before the first opening bracket.
 				// therefore, we just add it to the returned string
 
@@ -483,9 +570,22 @@ function recParser(textCtnt:String, depth:int = 0):String
 				// then, eval their contents, in case they're an if-statement or other control-flow thing
 				// I haven't implemented yet
 
-				retStr += recParser(textCtnt.substring(i+1, textCtnt.length), depth);	// Parse the trailing text (if any)
-				// lastly, run any text that trails the closing bracket through the parser
-				// needed for things like "string 1 [cock] [balls]"
+				// Only parse the trailing string if it has brackets in it.
+				// if not, we need to just return the string as-is.
+				// Parsing the trailing string if it doesn't have brackets could lead to it being 
+				// incorrectly interpreted as a multi-word tag (and shit would asplode and shit)
+				
+				postfixTmp = textCtnt.substring(i+1, textCtnt.length);
+				if (postfixTmp.indexOf("[") != -1)
+				{
+					trace("Need to parse trailing text", postfixTmp)
+					retStr += recParser(postfixTmp, depth);	// Parse the trailing text (if any)
+				}
+				else
+				{
+					trace("No brackets in trailing text", postfixTmp)
+					retStr += postfixTmp;
+				}
 				
 				return retStr;
 				// and return the parsed string
@@ -494,20 +594,12 @@ function recParser(textCtnt:String, depth:int = 0):String
 	}
 	else
 	{
+		// DERP. We should never have brackets around something that ISN'T a tag intended to be parsed. Therefore, we just need
+		// to determine what type of parsing should be done do the tag.
 		if (debug) trace("No brackets present", textCtnt);	
 
-		// Match a single word, with no leading or trailing space
-		var tagRegExp:RegExp = /^\w+$/;
-		var expressionResult:Object = tagRegExp.exec(textCtnt);
-		if (debug) trace("Checking if single word = [" + expressionResult + "]", getQualifiedClassName(expressionResult));
-		if (debug) trace("string length = ", textCtnt.length);
-		if (expressionResult && (depth > 1))
-		{
-			if (debug) trace("It's a single word!");
-			retStr += convertSingleArg(textCtnt);
-		}
-		else
-			retStr += textCtnt;
+	
+		retStr += textCtnt;
 		
 	}
 	return retStr;
@@ -551,3 +643,19 @@ function stringToCharacter(str:String):String
 	return str.slice(0, 1);
 }
 
+
+function isUpperCase(char:String):Boolean
+{
+	if (char == char.toUpperCase()) 
+	{
+		return true;
+	}
+	return false;
+}
+
+function capitalizeFirstWord(str:String):String
+{
+
+	str = str.charAt(0).toUpperCase()+str.slice(1);
+	return str;
+}

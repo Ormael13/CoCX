@@ -740,7 +740,7 @@ function pregdrynOffer(cs:Boolean = true):void {
 		addButton(0,"Preg. Fuck",eventParser,2495);
 		if(player.biggestCockArea() >= 300) {
 			outputText("  Since at least part of you isn't acceptable to her, you could eat her out until you get off from her pheromones alone.");
-			addButton(1,"NoFitEating",eventParser,2496);
+			addButton(1,"NoFitEating",jizzFromEatingPregdrynOut);
 		}
 		outputText("  Or, you could go down on her until you're in a frenzy, then fuck her wildly.");
 		addButton(2,"Eat,Rut,Fuck",eatEdrynPussyLikeABawss);

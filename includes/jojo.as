@@ -179,10 +179,10 @@ function mutateJojo():void {
 	outputText("The dildo is gone, leaving only a hot pink tinge on the fur around his pucker.  Whatever dark magic you managed to imbue it with was used up by the transformation.  Jojo is still out cold, probably unable to cope with the force of his altered orgasm, but his body is doing an admirable job of adjusting.  You even see his three tails curling together until they look like one larger tail.  Only close inspection would reveal the difference.\n\n", false);
 	outputText("You turn back to your tent, turned on beyond all measure, and needing to masturbate NOW.   You wonder what Jojo's new additions will feel like on your body when he wakes up, but for now you'll have to get off another way.", false);
 	stats(0,0,0,0,0,0,300,10);
-	doNext(1);
 	//(LIMITED MASTURBATE MENU – No Jojo)
 	player.createStatusAffect("noJojo",0,0,0,0);
 	player.createStatusAffect("Tentacle Jojo",0,0,0,0);
+	doNext(1);
 }
 
 //[POST TENTACLE DICKINGS]
@@ -457,10 +457,10 @@ function useTentacleJojo():void {
 	}
 	outputText(".  You moan in frustration, feeling the fluid soak into your skin, secretly wishing he could've fucked you into unconsciousness.  ", false);
 	outputText("The mouse kneels over you and begins licking your body, cleaning you with his tongue.  The tentacles join in, noisily slurping up every ounce of fluid from your form until you're clean and sated.  Sighing dreamily from the attention, you close your eyes and murmer, \"<i><i>Good boy.</i></i>\" When you open them, he's trotting away towards the forest, his tentacles well-hidden again...\n\n", false);
-	doNext(13);
 	buttChange(40, true);
 	cuntChange(40, true);
 	stats(0,0,0,0,0,0,-100,.5);
+	doNext(13);
 }
 
 //Jojo milk payments
@@ -475,7 +475,8 @@ function jojoMilkPay(tentacle:Boolean = false):void {
 	var cumQ:Number = 0;
 	//Ez mode cap doubles
 	if(flags[EASY_MODE_ENABLE_FLAG] == 1) cap *= 2;
-	if(debug) {
+	if(debug) 
+	{
 		flags[UNKNOWN_FLAG_NUMBER_00104] = 0;
 		cap = 9999;
 	}
@@ -710,19 +711,26 @@ function jojoPaysForPerms():void {
 	
 	outputText("You answer that your pet mouse, Jojo will be taking care of payment for you today.  Lynnette looks doubtful, but she quickly drops to her knees in front of the mouse, determined to get her payment one way or another.  Jojo's forearm-length erection immediately makes itself apparent.  The goblin matron coos at the sight, humming happily once she sees the rivulets of pre-cum streaming down your slut's cock.  In one smooth motion, she devours the heavy mouse-shaft, sliding her lips down all the way to the base.\n\n", false);
 	outputText("Jojo moans and reaches for Lynnette's hair, but you stop him with a sharp command.  He's paying for your services today, not getting a reward.  Big, lusty eyes look up at him from his loins, and he shudders, his heavy balls clenching and relaxing from the goblin's perfect throat-fuck.  She reaches up to caress them, ", false);
-	if(jojoCumQ() >= 4000) outputText("and releases a surprised gurgle when she feels just how heavy and full they've gotten.  All that time at the milker has clearly done Jojo's body good, and Lynette is likely to leave with a mouse-milk mustache.", false);
-	else if(jojoCumQ() >= 1000) outputText("and releases a surprised gurgle when she discovers their size.  Clearly all the trips to the milker have given Jojo an impressive set of testes.", false);
+	if(jojoCumQ() >= 4000) 
+		outputText("and releases a surprised gurgle when she feels just how heavy and full they've gotten.  All that time at the milker has clearly done Jojo's body good, and Lynette is likely to leave with a mouse-milk mustache.", false);
+	else if(jojoCumQ() >= 1000) 
+		outputText("and releases a surprised gurgle when she discovers their size.  Clearly all the trips to the milker have given Jojo an impressive set of testes.", false);
 	else outputText("and rolls them back and forth in her fingers, expertly pleasuring Jojo.", false);
 	outputText("  In no time flat he's reached the edge of his endurance.\n\n", false);
 	
 	outputText("Lynnette, for her part, has two wet stains on her blouse, but she ignores them as she gives the mouse's nuts a gentle squeeze.  He cums easily and hard from that little bit of extra stimulation.  The goblin's throat works to devour it all", false);
-	if(jojoCumQ() < 1000) outputText(", readily swallowing most of it.  After a short time, she pulls back and lets him finish by filling her mouth.  In turn, she spits the sticky mess into a funnel that leads to who-knows-where.", false);
-	else if(jojoCumQ() < 4000) outputText(", swallowing as much as she can.  Still, Jojo is pumping out enough that Lynette's belly quickly grows even more gravid, and the semen froths at the edges of her lips.  Eventually she just gives up and pulls off, aiming him at a funnel.  She keeps stroking his spit-slicked shaft as he's drained off that way, the goblin's grin growing a touch manic at the sight of that much seed being collected.", false);
-	else outputText(", but there's no way she can keep up with Jojo's ridiculous cum-production.  Two jets of seed leave her belly stretched to its limit, and the goblin matron quickly pulls back with a panicked look in her eyes, barely aiming Jojo's spunk-sprayer at the funnel in time for it to be filled by the next blast.  Watching with rapt attention, the green-skinned girl smiles wider and wider when she realizes just how much your pet can produce.  It's quite some time before his flow tapers off, but Lynnette doesn't seem to mind at all.", false);
+	if(jojoCumQ() < 1000) 
+		outputText(", readily swallowing most of it.  After a short time, she pulls back and lets him finish by filling her mouth.  In turn, she spits the sticky mess into a funnel that leads to who-knows-where.", false);
+	else if(jojoCumQ() < 4000) 
+		outputText(", swallowing as much as she can.  Still, Jojo is pumping out enough that Lynette's belly quickly grows even more gravid, and the semen froths at the edges of her lips.  Eventually she just gives up and pulls off, aiming him at a funnel.  She keeps stroking his spit-slicked shaft as he's drained off that way, the goblin's grin growing a touch manic at the sight of that much seed being collected.", false);
+	else 
+		outputText(", but there's no way she can keep up with Jojo's ridiculous cum-production.  Two jets of seed leave her belly stretched to its limit, and the goblin matron quickly pulls back with a panicked look in her eyes, barely aiming Jojo's spunk-sprayer at the funnel in time for it to be filled by the next blast.  Watching with rapt attention, the green-skinned girl smiles wider and wider when she realizes just how much your pet can produce.  It's quite some time before his flow tapers off, but Lynnette doesn't seem to mind at all.", false);
 	outputText("  Perhaps one of her daughters has the other end of that pipe jammed into her pussy?\n\n", false);
 	outputText("Lynnete pants", false);
-	if(jojoCumQ() >= 1000 && jojoCumQ() < 4000) outputText(" with a smile", false);
-	else if(jojoCumQ() >= 4000) outputText(" with a dazed, crazy-looking smile", false);
+	if(jojoCumQ() >= 1000 && jojoCumQ() < 4000) 
+		outputText(" with a smile", false);
+	else if(jojoCumQ() >= 4000) 
+		outputText(" with a dazed, crazy-looking smile", false);
 	outputText(", \"<i>What'll it be today?</i>\"\n\n", false);
 	salonPurchaseMenu();
 }
@@ -743,9 +751,14 @@ function amilyTeachingJojoBJ():void {
 	flags[TIMES_AMILY_AND_JOJO_PLAYED_TIMES]++;
 	//Universal Outro
 	outputText("  She seems visibly distracted by the mouse's boner, and will likely wind up fucking him soon.  [if (hasCock = true) \"Do you surprise them both by allowing Amily to demonstrate on you?\" else \"Do you want to watch them fuck?\"]");
-	var demon:Number = 0;
-	if(player.hasCock()) demon = 3452;
-	simpleChoices("Demonstrate",demon,"Watch",amilyAndJojoFuck,"",0,"",0,"Leave",1);
+	var demonstrate = 0;
+	if(player.hasCock()) 
+		demonstrate = 3452;
+	simpleChoices("Demonstrate",demonstrate,
+			"Watch",amilyAndJojoFuck,
+			"",0,
+			"",0,
+			"Leave",1);
 }
 //Scene 1 Result: Male Gets BJ (Z)
 function BJRidesGETYOUONE():void {
@@ -754,22 +767,30 @@ function BJRidesGETYOUONE():void {
 	outputText("You step into view and knowingly ask just what all the fuss is about.  Amily meekly prostrates herself before you, apologizing, \"<i>I'm sorry, [master], I merely wanted to help your boyslut learn to satisfy your needs better.</i>\"  You wait, just long enough to make her nervous.  The pregnant pause hangs in the air as both your murine whores look increasingly worried, their large, radar-like ears twitching fitfully about as they await your response.  Laughing, you undo your [armor] and ask Amily how she planned to teach without a proper 'teaching tool'.");
 	outputText("\n\nThe succubus-tainted mouse looks up at you with lust pooling in her large, languid eyes.  \"<i>As you command, [master],</i>\" she whispers eagerly as she rises her feet, her spaded tail curling behind Jojo's neck, dragging him closer to you.  Flopping free, [oneCock] dangles enticingly in the air before them, swaying back and forth to a rhythm that seems almost hypnotic to your poor, corrupted sluts.  They zero in on your [cock biggest] as if it were the only thing in the world.  Even Jojo's reluctant attitude evaporates when faced with the irresistable allure of your swinging manhood.  He sits at your [feet] as eagerly as his teacher, his expression an ecstatic portrait of mesmeric cock-worship.");
 	outputText("\n\nTaking your [cock biggest] in hand, Amily begins to caress it in adoring reverence before beginning her lecture.  \"<i>It's important to make sure you've gotten your [master]'s attention before really getting into it, particularly if [he] isn't fully hard yet.  As you can see, [name] is already pleased by my devotion to [his] cock.  Of course, the direct approach can often work just as w-</i>\"  Amily cuts herself off by jamming ");
-	if(player.biggestCockArea() > 50) outputText("as much of your [cock biggest] as possible");
-	else outputText("your entire [cock biggest]");
+	if(player.biggestCockArea() > 50) 
+		outputText("as much of your [cock biggest] as possible");
+	else 
+		outputText("your entire [cock biggest]");
 	outputText(" into her mouth and throat.  The tight warmth of your pet's puffy, corruption-engorged cock-sucker shoots tingling thrills of delight through your maleness, and as she's careful to guide the sensitive underside along her tongue as she swallows, [eachCock] soon stiffens to a full, throbbing erection.  You cannot help but groan at the skillful sucking, and when Amily pops off a moment later, she looks quite pleased with herself.");
 	outputText("\n\n\"<i>Our [master] very much enjoys the wet suction of a skilled mouth and gratifying [him] is a decadent pleasure in and of itself.  Just taking [him] inside my lips makes me so wet!</i>\" Amily cries as she resumes stroking you.  Jojo glances away from the handjob long enough to see the streamers of girl-honey hanging from Amily's nethers, and he moans lustily.  Amily barely notices, too intent on pleasuring your [cock biggest] to worry about Jojo's inattentiveness.  She jacks your spit-soaked tool with neat, even strokes all the way from [sheath] to [cockHead biggest].  Sighing, you edge your [hips] forwards to give her better access to and encouragement from your excited loins.");
 	outputText("\n\nSensing your need, Amily begins to pump faster as she continues her instruction, \"<i>You have to pay attention to your [master]'s body when you do this.  See the little twitches, how [his] [hips] and shaft are bouncing for [his] little slut?  That means I'm being a good cum-slut.  I made [his] cock happy.</i>\"  Jojo nods and licks at his lips, watching in rapt study as Amily enthusiastically tends to your throbbing tool.   \"<i>You can't slow down here,</i>\" Amily continues, before spitting on her other hand and raising it to fondle your long member.  Your glossed prick slides easily through Amily's pink palms, filling the air with a wet squishing that brings drool to the lips of your mice.");
 	outputText("\n\nJojo leans closer and closer to his female counterpart while that other works, nuzzling so close that they're soon cheek to cheek, ears flat against each other.  The feminine cum-junkie graciously points your [cock biggest] towards the former monk, and he nervously licks at your [cockHead biggest], each lap faster and more eager than the one before.  Soon he is slurping the entire tip into his maw and letting Amily squeeze the pre-cum onto his wiggling tongue.  Jojo's eyes cross to better watch the pumping passion under his nose, while your other cum-slut eggs him on with lewd, encouraging remarks. \"<i>You're a natural cock-sucker, Jojo.  The demons were right about us... we're meant to serve the powerful.</i>\"  She sighs and whispers, \"<i>...our [master].</i>\"");
 	outputText("\n\nYou groan at the dual sensations assaulting your [cock biggest].  Four eyes look up, happily twinkling as they service you, their eager devotion nearly drawing your orgasm right there, the temptation to gush your jetting spunk into their whorish little ");
-	if(flags[AMILY_NOT_FURRY] == 1) outputText("mouths ");
-	else outputText("muzzles ");
+	if(flags[AMILY_NOT_FURRY] == 1) 
+		outputText("mouths ");
+	else 
+		outputText("muzzles ");
 	outputText("almost too great to resist.  Amily seems to sense this, obediently offering their bodies for your release. \"<i>[Master], would you like to fill your cum-slut's pussy or mouth?  Or maybe you want to give your bitch-boy a taste?</i>\"");
 	//[Cum in Amily Mouth] [Cum in Amily Pussy] [Cum in Jojo Mouth]
 	outputText("\n\nWhere do you cum?");
 	//Pussy requires a minimum tallness?
 	var puss:Number = 0;
 	if(player.tallness > 55) puss = 3454;
-	simpleChoices("Amily's Mouth",3453,"Amily's Pussy",puss,"Jojo's Mouth",3455,"",0,"",0);
+	simpleChoices("Amily's Mouth",3453,
+					"Amily's Pussy",puss,
+					"Jojo's Mouth",3455,
+					"",0,
+					"",0);
 }
 //Fill Amily's Mouth (Z)
 function fillAmilysMouth():void {
@@ -829,7 +850,7 @@ function amilyAndJojoFuck():void {
 }
 
 // Hurray var/function hoisting.
-this.semiglobalReferencer.jojoRape = jojoRape;
+//this.semiglobalReferencer.jojoRape = jojoRape;
 
 function jojoRape():void {
 	jojoSprite();
@@ -1149,6 +1170,7 @@ function jojoRape():void {
 			}
 		}
 	}
+	doNext(13);
 }
 
 //Bee on C. Jojo: Finished (Fenoxo) (Zedit)

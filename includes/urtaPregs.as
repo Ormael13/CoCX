@@ -80,7 +80,7 @@ function urtaSexMenu():void {
 			if(flags[URTA_CUM_NO_CUM_DAYS] >= 5) addButton(0,"Hidden BJ",slurpFawkesCocksForFunAndInflation);
 			else addButton(0,"Hidden BJ",eventParser,2295);
 			addButton(1,"Urta's Place",eventParser,2300);
-			addButton(4,"Leave",eventParser,2256);
+			addButton(4,"Leave",barTelAdre);
 		}
 	}
 	//DRUNK
@@ -88,14 +88,14 @@ function urtaSexMenu():void {
 		//LOVER
 		if(urtaLove()) {
 			menu();
-			addButton(0,"Jerkoff",eventParser,2297);
+			addButton(0,"Jerkoff",getAPublicFacialFromUrta);
 			addButton(1,"Anal Ride",eventParser,2296);
 			if(temp > 0) addButton(2,"Lay Eggs",eventParser,temp);
 			if(spank > 0) addButton(3,"Spank Her",eventParser,spank);
 			if(flags[UNKNOWN_FLAG_NUMBER_00133] == -2 && RaphaelLikes() && flags[URTA_X_RAPHAEL_HAPPENED] == 0) {
 				addButton(8,"3SomeSurprise",urtaAndRaphaelSurprise);
 			}
-			addButton(9,"Leave",eventParser,2256);
+			addButton(9,"Leave",barTelAdre);
 		}
 		//FRIEND
 		else {
@@ -103,14 +103,14 @@ function urtaSexMenu():void {
 			if(player.canOviposit()) temp = 3840;
 			//simpleChoices("Jerkoff",2297,"Anal Ride",2296,"Lay Eggs",temp,"Spank Her",spank,"Leave",2256);
 			menu();
-			addButton(0,"Jerkoff",eventParser,2297);
+			addButton(0,"Jerkoff",getAPublicFacialFromUrta);
 			addButton(1,"Anal Ride",eventParser,2296);
 			if(temp > 0) addButton(2,"Lay Eggs",eventParser,temp);
 			if(spank > 0) addButton(3,"Spank Her",eventParser,spank);
 			if(flags[UNKNOWN_FLAG_NUMBER_00133] == -2 && RaphaelLikes() && flags[URTA_X_RAPHAEL_HAPPENED] == 0) {
 				addButton(8,"3SomeSurprise",urtaAndRaphaelSurprise);
 			}
-			addButton(9,"Leave",eventParser,2256);
+			addButton(9,"Leave",barTelAdre);
 			return;
 		}
 	}
@@ -144,7 +144,7 @@ function urtaPreggoApproached():void {
 			//Display Urta Sexings or Urta Talking as appropriate
 			addButton(0,"Talk",urtaDialogueMenu);
 		}
-		addButton(9,"Leave",eventParser,2256);
+		addButton(9,"Leave",barTelAdre);
 	}
 	//2: 
 	else if(flags[URTA_INCUBATION] < 96) {
@@ -154,7 +154,7 @@ function urtaPreggoApproached():void {
 		//Display both Urta Sex Options and Urta Talk Options
 		addButton(0,"Sex",urtaSexMenu);
 		addButton(1,"Talk",urtaDialogueMenu);
-		addButton(9,"Leave",eventParser,2256);
+		addButton(9,"Leave",barTelAdre);
 	}
 	//3: 
 	else if(flags[URTA_INCUBATION] < 144) {
@@ -165,7 +165,7 @@ function urtaPreggoApproached():void {
 		//Pregnant Sex options should probably start displaying either here or in the next stage.
 		addButton(0,"Sex",preggoUrtaSmexOrSomething);
 		addButton(1,"Talk",urtaDialogueMenu);
-		addButton(9,"Leave",eventParser,2256);
+		addButton(9,"Leave",barTelAdre);
 	}
 	//4:
 	else if(flags[URTA_INCUBATION] < 192) {
@@ -175,7 +175,7 @@ function urtaPreggoApproached():void {
 		else outputText("She places the glass down and licks her lips.  \"<i>Mmm... that stuff tastes a lot better than you think, especially when you're pregnant.  So, sexy, what brings you here?  Wanted to check up on us?</i>\"  She pats her belly with a smile.  \"<i>Or did you maybe want to talk?  ...Or perhaps <b>talk</b> a little?</i>\"  She grins wickedly.");
 		addButton(0,"Sex",preggoUrtaSmexOrSomething);
 		addButton(1,"Talk",urtaDialogueMenu);
-		addButton(9,"Leave",eventParser,2256);
+		addButton(9,"Leave",barTelAdre);
 	}
 	//5:
 	else if(flags[URTA_INCUBATION] < 240) {
@@ -185,7 +185,7 @@ function urtaPreggoApproached():void {
 		else outputText("\n\nShe's got a few glasses of milk next to her, but when she sees you, her expression turns a trifle embarrassed.   \"<i>Hey, [name].  You just missed me tending to my hormones,</i>\" she admits, more than a little sheepishly while pointing at the half-dozen glasses.  Your eyes widen when you realize just what the \"milk\" is.  Urta smirks, a little cockiness showing as she asks, \"<i>So did you want to talk, or see if we can fill up a few more?</i>\"");
 		addButton(0,"Sex",preggoUrtaSmexOrSomething);
 		addButton(1,"Talk",urtaDialogueMenu);
-		addButton(9,"Leave",eventParser,2256);
+		addButton(9,"Leave",barTelAdre);
 	}
 	//6: 
 	else if(flags[URTA_INCUBATION] < 288) {
@@ -193,7 +193,7 @@ function urtaPreggoApproached():void {
 		outputText("\n\nMore pre drips from her length, and she notices you with a start, \"<i>Oh, [name]!  I was just thinking of you!  I never knew pregnancy could make me feel so... sexual.  Being so full of life just seems to make my male half want to make even more, if you know what I mean.  Please, tell me you're here for a quickie?</i>\"  She fidgets.  \"<i>I guess we could talk too... if you want.</i>\"");
 		addButton(0,"Sex",preggoUrtaSmexOrSomething);
 		addButton(1,"Talk",urtaDialogueMenu);
-		addButton(9,"Leave",eventParser,2256);
+		addButton(9,"Leave",barTelAdre);
 	}
 	//7:
 	else if(flags[URTA_INCUBATION] < 336) {

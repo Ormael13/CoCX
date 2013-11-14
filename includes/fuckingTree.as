@@ -734,11 +734,11 @@ function askHolliToWatch():void {
 		//[Beg][Threaten][Back]
 		//simpleChoices("Beg",3868,"Threaten",0,"Assert Self",3974,"",0,"Back",3861);
 		menu();
-		addButton(0,"Beg",eventParser,3868);
+		addButton(0,"Beg",begHolli4Watches);
 		if(flags[THREATENED_HOLLI] == 0) addButton(1,"Threaten",threatenHolli);
 		else addButton(1,"Slap Her",slapDatHo);
 		addButton(2,"Assert Self",eventParser,3974);
-		addButton(4,"Back",eventParser,3861);
+		addButton(4,"Back",treeMenu);
 	}
 	//Stop Guarding (edited)(C)
 	else {

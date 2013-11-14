@@ -1,4 +1,5 @@
 
+import sys
 import re
 import os
 import os.path
@@ -8,34 +9,46 @@ import os.path
 
 # (choices[\(\)\w,\- \"]+?\W)(120)(\W)
 
-def cleanEventNumbers():
+writeToFiles = False
 
-	funcFind = re.compile(r"(if\(eventNo == \d*?\) )\{\W*")
-	funcExtr = re.compile(r"if\(eventNo == (\d*)\) (\w*)\(\)")
+def getFuncDict():
+
+	funcFind = re.compile(r"(if\s?\(eventNo\s?==\s?\d*?\))\W*\{\W*")
+	funcExtr = re.compile(r"if\s?\(eventNo\s?==\s?(\d*)\)\W*?{\W*(\w+).*?\(\);\W+(?:(?:return;))")
 
 	eventF = open("./includes/doEvent.as", "r")
 	eventS = eventF.read()
 	eventF.close()
 
-	eventS = funcFind.sub(r"\1", eventS)
+	#eventS = funcFind.sub(r"\1", eventS)
 
 	print "done"
 	#print eventS
 	res = funcExtr.findall(eventS)
 	res = dict(res)
-	print res
+	for key, value in res.iteritems():
+		print key, value
+	#print funcExtr.search(eventS).groups()
+	#print funcExtr.search(eventS).group(0)
+	#print res
 	#Ok, now we have a eventNo <-> function name dictionary
 	
+	return res
 
-	simpleCRe = re.compile(r"[ 	]simpleChoices\([\w\"\ \,\?]*?\);")
-	choicesRe = re.compile(r"choices\([\w\"\ \,\?]*?\);")
-	doYesNoRe = re.compile(r"doYesNo\([\w\"\ \,\?]*?\);")
+def cleanEventNumbers():
+
+
+	res = getFuncDict()
+
+	simpleCRe = re.compile(r"[ 	]simpleChoices\([\w\"\ \,\?!]*?\);")
+	choicesRe = re.compile(r"choices\([\w\"\ \,\?!]*?\);")
+	doYesNoRe = re.compile(r"doYesNo\([\w\"\ \,\?!]*?\);")
 	doNextRe = re.compile(r"doNext\(\d*?\);")
 
 	searchREs = [simpleCRe, choicesRe, doYesNoRe, doNextRe]
 
 	filelist = os.listdir("./includes")
-	print filelist
+	#print filelist
 	for filename in filelist:
 		if filename.endswith(".as") and not filename.find("doEvent")+1:			#Iterate over all the .as files in ./includes, and skip the doEvent file
 			#print filename
@@ -72,41 +85,55 @@ def cleanEventNumbers():
 				print len(tmpO), len(tmp)
 				print "Length Delta", len(tmp)-len(tmpO) 
 
-				#with open(os.path.join("./includes", filename), "w") as fileH:
-				#	tmp = fileH.write(tmp)
+				if writeToFiles:
+					with open(os.path.join("./includes", filename), "w") as fileH:
+						tmp = fileH.write(tmp)
+
+	return res
+# 
 
 
-#
-def cleanStaleDoEventIfs():
+def cleanStaleDoEventIfs(evNumDict = {}):
 
-	numExtr = re.compile(r"if\(eventNo == (\d*)\)")
+	numExtr = re.compile(r"if\s?\(eventNo == (\d*)\)")
 
 
 	with open("./includes/doEvent.as", "r") as eventF:
 		eventS = eventF.read()
 
-
+	print "Cleaning doEvent If statements"
 	filelist = os.listdir("./includes")
-	files = []
+	files = {}
 
 	#Pull all the as files into memory. 
 	for filename in filelist:
-		if filename.endswith(".as") and not filename.find("doEvent")+1:		
+		print "Loading", filename
+		if filename.endswith(".as") and not filename.find("doEvent")+1 and not filename.find("flagDefs")+1:		
 			with open(os.path.join("./includes", filename), "r") as fileH:
 				tmp = fileH.read()
-			files.append(tmp)
+			files[filename] = tmp
 
 
-	for match in numExtr.finditer(eventS):
-		
+	matches = numExtr.finditer(eventS)
+
+	print "event = ", matches
+
+	uses = {}
+	
+	for match in matches:
 		num = match.group(1)
 
 		numUnused = True
 
-		for fContents in files:
+
+		for fName, fContents in files.iteritems():
 
 				if num in fContents:
-					#print "num exists", num
+					if fName in uses:
+						uses[fName].append(num)
+					else:
+						uses[fName] = [num]
+					#print "num exists", num, " in ", fName
 					numUnused = False
 					break
 
@@ -122,13 +149,55 @@ def cleanStaleDoEventIfs():
 			print start, length, num
 
 			if (num in prefix) or (num in postfix):
-				print "used elsewhere in doEvent.as"
+				#print "used elsewhere in doEvent.as"
+				pass
 			else:
+				#print "Entirely Unused!", num
 				call = call.replace("eventNo", " false ")
 				eventS = prefix+call+postfix
 
-	with open("./includes/doEvent.as", "w") as eventF:
-		eventF.write(eventS)
+	keyList = []
+	
+	for key, value in uses.iteritems():
+		valueStr = ""
+		for num in value:
+			if num in evNumDict:
+				print "Have event number!"
+				valueStr += "%s (%s)," % (num, evNumDict[num])
+			else:
+				valueStr += "%s," % (num)
+		valueStr = valueStr.rstrip(", ")
+		keyList.append("%s = %s" % (key, valueStr))
+
+
+	keyList.sort()
+	for item in keyList:
+		print item
+	if writeToFiles:
+		with open("./includes/doEvent.as", "w") as eventF:
+			eventF.write(eventS)
+
+
+
+def removeDisabledDoEventIfs():
+
+	disabledIfExtr = re.compile(r"(?://[\w\-\s]*\s*)*(?:else)?\s+if\s?\(\s*false\s* == \d+\)\s+\{[\w\s\(\)\;/]+\}")
+	emptyIfExtr = re.compile(r"(?://[\w\-\s]*\s*)*(?:else)?\s+if\s?\(\s*(?:(?:false)|(?:eventNo))\s* == \d+\)\s+\{\W+return;\W+\}")
+
+
+	with open("./includes/doEvent.as", "r") as eventF:
+		eventS = eventF.read()
+
+	print "Cleaning doEvent If statements"
+	
+
+	eventS = disabledIfExtr.sub("", eventS)
+
+
+	if writeToFiles:
+		with open("./includes/doEvent.as", "w") as eventF:
+			eventF.write(eventS)
+
 
 def getFlagDict():
 	with open("FlagDictionary.txt", "r") as fd:
@@ -264,9 +333,9 @@ def insertFlags():
 				print filename
 				print len(tmpO), len(tmp)
 				print "Length Delta", len(tmp)-len(tmpO) 
-
-			with open(os.path.join("./includes", filename), "w") as fileH:
-				tmp = fileH.write(tmp)
+			if writeToFiles:
+				with open(os.path.join("./includes", filename), "w") as fileH:
+					tmp = fileH.write(tmp)
 	'''
 				
 				insertionPoint = start+length
@@ -373,7 +442,7 @@ def modifyParserIfStatements():
 def cleanAddButtons():
 
 	funcFind = re.compile(r"(if\(eventNo == \d*?\) )\{\W*")
-	funcExtr = re.compile(r"if\(eventNo == (\d*)\) (\w*)\(\)")
+	funcExtr = re.compile(r"if\s?\(eventNo == (\d*)\)\W*?{\W*(\w+).*?\(\)")
 
 	eventF = open("./includes/doEvent.as", "r")
 	eventS = eventF.read()
@@ -397,7 +466,7 @@ def cleanAddButtons():
 	print filelist
 	for filename in filelist:
 		if filename.endswith(".as") and not filename.find("doEvent")+1:			#Iterate over all the .as files in ./includes, and skip the doEvent file
-			#print filename
+			print filename
 			with open(os.path.join("./includes", filename), "r") as fileH:
 				tmp = fileH.read()
 
@@ -416,13 +485,16 @@ def cleanAddButtons():
 
 					oldCall = call
 					for key, value in res.iteritems():
+
 						if key in call:
-							#print key, value
+							key = "eventParser,%s" % key
+							print key, value
 							call = call.replace(key, value)
 
 					if oldCall != call:		
 						print "Old:", oldCall
 						print "New:", call
+
 
 					tmp = prefix+call+postfix
 
@@ -436,13 +508,79 @@ def cleanAddButtons():
 
 
 
+def cleanupChoiceSection(inStr):
+	cleanRE1 = re.compile(r"(?:rando|choice) = rand\(\d\);")
+	cleanRE2 = re.compile(r"(?:else )?(?:if\((?:rando|choice) == \d\) )?descript \+?= ")
+
+	cleanRE3 = re.compile(r"[\t\r\n]*")
+
+	cleaners = [cleanRE1, cleanRE2, cleanRE3]
+	#print "Old - ", inStr
+	new = inStr
+	for regex in cleaners:
+		new = regex.sub("", new)
+	new = new.replace(";", ", ")
+	new = new.rstrip(", ")
+	new = "descript += randomChoice(%s);" % new
+	print "New = ", new
+	return new
+def cleanupRandomChoices():
+
+	randomCleanupRE = re.compile(r"((?:rando|choice) = rand\((\d)\);(?:\s+(?:else )?(?:if\((?:rando|choice) == \d\) )?descript \+?= \"[a-zA-Z- ]+\";)+)")
+	
+
+	with open("./includes/descriptors.as", "r") as eventF:
+		eventS = eventF.read()
+	inStr = eventS
+	print "Cleaning descriptors If statements"
+	match = randomCleanupRE.search(inStr)
+
+	outStr = ""
+	matchStr = ""
+
+	while match:
+
+		print match.start(), match.end()
+		matches = match.groups()
+		print int(matches[1]) == matches[0].count("\n"), int(matches[1]), matches[0].count("\n")
+		
+		start, end = match.start(), match.end()
+
+		outStr += inStr[:start]
+		if int(matches[1]) == matches[0].count("\n"):
+			print "Replacing!"
+			outStr += cleanupChoiceSection(inStr[start:end])
+		else:
+			outStr += inStr[start:end]
+		
+		print inStr[start:end]
+		
+		inStr = inStr[end:]
+
+		match = randomCleanupRE.search(inStr)
+
+		if not match:
+			outStr += inStr
+	#eventS = disabledIfExtr.sub("", eventS)
+	
+	print len(eventS) == len(outStr), len(eventS), len(outStr)
+
+	if writeToFiles:
+		with open("./includes/descriptors.as", "w") as eventF:
+			eventF.write(outStr)
+
 
 if __name__ == "__main__":
 
 	print "OMG WE'S BREAKIN STUF!!111one!"
 
+	if len(sys.argv) > 1:
+		if "--writeFiles" in sys.argv:
+			print "Writing to files!"
+			writeToFiles = True
 	#cleanEventNumbers()
-	#cleanStaleDoEventIfs()
+	#cleanStaleDoEventIfs(getFuncDict())
+	#removeDisabledDoEventIfs()
 
 	#cleanFlags()
 
@@ -451,4 +589,6 @@ if __name__ == "__main__":
 
 	#modifyParserIfStatements()
 
-	cleanAddButtons()
+	#cleanAddButtons()
+	
+	cleanupRandomChoices()

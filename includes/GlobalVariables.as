@@ -1,4 +1,5 @@
-﻿/**
+﻿import classes.Player;
+/**
  * Global Variables used across the whole game. I hope to whittle it down slowly.
  */
 
@@ -13,14 +14,14 @@ var debug:Boolean = false;
 //this.model.debug = debug; // TODO: Set on model?
 
 //Version NUMBER
-var ver:String = "0.8.3d2";
-var version:String = "v0.8.3d2 (<b>Open Source + Sprites!</b>)";
+var ver:String = "0.8.3d5";
+var version:String = "v0.8.3d5 (<b>Open Source Fixes + Image Pack Support</b>)";
 
 //Indicates if building for mobile?
 var mobile:Boolean = false;
 this.model.mobile = mobile;
 
-var images:ImageManager = new ImageManager();
+var images:ImageManager = new ImageManager(stage);
 //} endregion
 
 /**
@@ -31,7 +32,11 @@ var images:ImageManager = new ImageManager();
 
 //The Player object, used everywhere
 var player:Player = new Player();
+<<<<<<< HEAD
 model.player = player;
+=======
+var player2:Player = new Player();
+>>>>>>> master
 
 //Used in perk selection, mainly eventParser, input and engineCore
 var tempPerk:String = "";

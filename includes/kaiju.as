@@ -41,7 +41,7 @@ function meetDatKaijuYo():void {
 	if(player.hasStatusAffect("FactoryOverload") >= 0) flags[KAIJU_COCK] = 1;
 	outputText("You step up onto the hill and slowly make your way to the top.  The rock seems to be unnaturally symmetrical, more like a large upside down oval.  Walking around, there seems to be little of interest to explore here.  You decide to head back for the boat when suddenly the island shifts and you are nearly knocked off your feet.  You look around, wondering if it was an earthquake or an attack when suddenly the island begins shaking violently.  You run for the boat, practically falling in as you almost lose your footing.  The island seems to be rising out of the water rapidly, until towering above you is a massive terrapin girl!  What you had mistaken for an island was really a large turtle shell!");
 	
-	outputText("\n\nShe takes in a tremendous gulp of air before stretching, arching her back as far her shell will let her while her green hands flutter near her monumental rack.  You take in the sight of the green giantess, from her wet yet curly red locks of hair, to her dark green, almost black lips, her massive mammaries which she’s currently fondling quite lewdly, to the hard turtle shell, the front of which covers her belly yet supports her exposed breasts like some kind of perverse hard corset.  She pinches a pert nipple, cooing in pleasure before finally opening her eyes and taking notice of you.");
+	outputText("\n\nShe takes in a tremendous gulp of air before stretching, arching her back as far her shell will let her while her green hands flutter near her monumental rack.  You take in the sight of the green giantess, from her wet yet curly red locks of hair, to her dark green, her almost black lips, her massive mammaries which she’s currently fondling quite lewdly, to the hard turtle shell, the front of which covers her belly yet supports her exposed breasts like some kind of perverse hard corset.  She pinches a pert nipple, cooing in pleasure before finally opening her eyes and taking notice of you.");
 	
 	outputText("\n\n\"<i>Oh my, a visitor?  Or just a sneaky voyeur?</i>\" she asks, cupping her breasts and laughing.  \"<i>What a little thing you are. Or maybe it's all this dreadful weight I've gained.  I was of a much smaller, petite stature before the demons began pumping all those yummy liquids into the lake.  I'm afraid I got a little gluttonous and gained a few pounds.  What do you think? Has little Venus gone overboard?</i>\"");
 
@@ -59,7 +59,7 @@ function insultTheKaijuFirstMeeting():void {
 	clearOutput();
 	if(kaijuCock()) {
 		//[If insult and Marae has been corrupted] 
-		outputText("Perhaps not your brightest idea, you decide to make fun of the giant green girl in front of you, mocking her obvious insecurity over her figure.  The word 'fat' barely exits your mouth before her face goes red in anger and you realize your mistake.");
+		outputText("In perhaps not your brightest idea, you decide to make fun of the giant green girl in front of you, mocking her obvious insecurity over her figure.  The word 'fat' barely exits your mouth before her face goes red in anger and you realize your mistake.");
 		outputText("\n\n\"<i>You are too rude,</i>\" she says in a huff.  \"<i>But I know how to fix you!</i>\" she begins to rise, standing to her full towering height.  Though much of her legs are still beneath the waves, her genitalia are in full display.  The lips of her feminine sex are moist, dripping with lake water and substantial moisture of their own.  They are surprisingly pink against the almost olive green of the rest of her.  But most shocking of all is that where a clit should be is instead a massive, gigantic green dong!");
 		outputText("\n\n\"<i>How about you put that mean mouth of yours to some good,</i>\" she tells you as she roughly picks you up between two large fingers and brings you to her stiffening cock.");
 		//[If player has learned the Whitefire spell]
@@ -453,9 +453,9 @@ function talkToKaiju():void {
 		
 		outputText("\n\nHer body seems to quiver in delight as she continues on.  \"<i>I'm not sure why they want to taint the waters or what it is they use, but I found the spot where the corruption enters the lake and is the strongest.  I go there daily to absorb the warmth and delicious taint of those chemicals.  It increased my lust, and over time my size.");
 		//[If factory has been shut down and Marae was left uncorrupted]
-		if(player.hasStatusAffect("DungeonShutDown") >= 0 && player.hasStatusAffect("FactoryOverload") < 0) outputText("  But the flow of yummy fluids has seems to have been stopped.");
+		if(player.hasStatusAffect("DungeonShutDown") >= 0 && player.hasStatusAffect("FactoryOverload") < 0) outputText("  But the flow of yummy fluids seems to have been stopped.");
 		//[If the Factory was shut down and Marae corrupted]
-		else if(kaijuCock()) outputText("  But the pouring of liquids has been stopped for some reason, but not before there was one final, huge burst of tainted fluids. It was so strong and changed me even further, making me grow this,</i>\" she says as she rises further out the lake's waters, revealing a large green cock.");
+		else if(kaijuCock()) outputText("  But the pouring of liquids has been stopped for some reason, but not before there was one final, huge burst of tainted fluids. It was so strong and changed me even further, making me grow this,</i>\" she says as she rises further out of the lake's waters, revealing a large green cock.");
 		
 		outputText("\n\nYou thank the giantess for her explanation as you row away.");
 	}
@@ -563,7 +563,7 @@ function mockDatTurtleGirl():void {
 	//[If genderless]
 	if(player.gender == 0) outputText("Your cheeks blush in arousal from all this heavy rubbing.  ");
 	if(player.cor < 33) outputText("You can't believe that you're being aroused by this.  Aren't you suppose to be a champion?");
-	else if(player.cor < 66) outputText("Wow this is arousing you.  You wonder if you really are a champion.");
+	else if(player.cor < 66) outputText("Wow, this is arousing you.  You wonder if you really are a champion.");
 	else outputText("You just want to get off now.");
 	
 	outputText("\n\n\"<i>See?  You make such a good little cock toy,</i>\" the giantess coos as she begins to stroke faster and faster.  \"<i>You’re making my dick feel so good!</i>\"");
@@ -690,7 +690,7 @@ function flyAwayFromBadEnd():void {
 function badEndPartTwo():void {
 	clearOutput();
 	outputText("The horny giantess makes short work of your [armor] and soon the green gal has you mashed against her puckered lips, doing her best to give a passionate kiss despite the size barrier.  Pulling you up towards eye level, her voice growls with lust as she says, \"<i>By Marae you get me so hot and bothered.  We've just been fucking so much lately I can't get you out of my mind!  You naughty, wonderful, glorious, perverted " + player.mf("boy","girl") + "!  I just don't think I can stand it without you any longer!</i>\"  Without further comment she places you at the tip of one of her great big green milk machines, shoving your face into a pink colossal nipple.  \"<i>Drink up now.</i>\"  It's apparent she wants to feed you her corrupted milk, and there doesn't appear to be much of a choice in the matter now.  Her nipple is larger than even some of the more massive cocks you've seen in this land, yet you manage to get your mouth around the very tip of it and begin to suck mercilessly at the milky teat as you bring your hands up to stroke and pinch at the base of the overly sensitive large nub.  \"<i>Oh goddess!</i>\" the giant slut moans above you.");
-	if(player.tongueType == 1) outputText("  Your snaky forked tongue begins lashing about, flicking at the nipple tip in your mouth at rubbing at the underside of it, urging the tender spot to give up a drop of the heavenly white liquid.");
+	if(player.tongueType == 1) outputText("  Your snaky forked tongue begins lashing about, flicking at the nipple tip in your mouth while rubbing at the underside of it, urging the tender spot to give up a drop of the heavenly white liquid.");
 	//[If PC has demonic/dragon tongue]
 	else if(player.tongueType > 0) {
 		outputText("  The long tongue in your mouth slowly crawls around the nipple tip clenched between your lips, wrapping around the milky nip and squeezing to urge a dollop of milk out.");

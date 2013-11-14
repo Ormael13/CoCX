@@ -1418,18 +1418,20 @@ function nightSuccubiRepeat():void {
 }
 //Places menu
 function places(display):Boolean {
-	var farmBarn:Number = 0;
-	var farmHouse:Number = 0;
-	var farm:Number = 0;
-	var boat:Number = 0;
-	var barber:Number = 0;
-	var telAdre:Number = 0;
-	var ruins:Number = 0;
-	var bazaar:Number = 0;
-	var owca:Number = 0;
-	var dungeons:Number = 0;
-	if(flags[UNKNOWN_FLAG_NUMBER_00113] > 0 || player.hasStatusAffect("Found Factory") >= 0 || flags[DISCOVERED_WITCH_DUNGEON] > 0) dungeons = 3994;
-	if(flags[OWCA_UNLOCKED] == 1) owca = 3631;
+	var farmBarn = 0;
+	var farmHouse = 0;
+	var farm = 0;
+	var boat = 0;
+	var barber = 0;
+	var telAdre = 0;
+	var ruins = 0;
+	var bazaar = 0;
+	var owca = 0;
+	var dungeonsArg = 0;
+	if(flags[UNKNOWN_FLAG_NUMBER_00113] > 0 || player.hasStatusAffect("Found Factory") >= 0 || flags[DISCOVERED_WITCH_DUNGEON] > 0) 
+		dungeonsArg = dungeons;
+	if(flags[OWCA_UNLOCKED] == 1) 
+		owca = gangbangVillageStuff;
 	
 	//turn on ruins
 	if(flags[AMILY_VILLAGE_ACCESSIBLE] > 0) ruins = 2371;
@@ -1447,11 +1449,13 @@ function places(display):Boolean {
 	if(flags[BAZAAR_ENTERED] > 0) bazaar = 2855;
 	//Return if there is anything enabled in places
 	if(!display) {
-		if(owca + flags[UNKNOWN_FLAG_NUMBER_00113] + telAdre + barber + farmBarn + farmHouse + farm + dungeons + boat + ruins + flags[BAZAAR_ENTERED] > 0) return true;
+		 
+		if(owca || flags[UNKNOWN_FLAG_NUMBER_00113] || telAdre || barber || farmBarn || farmHouse || farm || dungeonsArg || boat || ruins || flags[BAZAAR_ENTERED]) 
+			return true;
 		else return false;
 	}
 	//Make choices
-	choices("Bazaar",bazaar,"Boat", boat,"Dungeons",dungeons,"",0,"Farm",farm,"Owca",owca,"Salon", barber,"Tel'Adre", telAdre, "TownRuins",ruins,"Back",1);
+	choices("Bazaar",bazaar,"Boat", boat,"Dungeons",dungeonsArg,"",0,"Farm",farm,"Owca",owca,"Salon", barber,"Tel'Adre", telAdre, "TownRuins",ruins,"Back",1);
 	return true;
 }
 

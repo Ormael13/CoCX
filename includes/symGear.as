@@ -52,7 +52,7 @@ function inquisitorRobesDiscovery():void {
 
 	//if implying that Rathazul used to be an advisor to the queen before the fall, start by spelling his name correctly; else, proceed as normal
 	//[Retribution] [Carnality] [No]
-	simpleChoices("Retribution",3390,"Carnality",3389,"",0,"",0,"NOPE!",3391);
+	simpleChoices("Retribution",retributionArmorIsCoolShit,"Carnality",carnalityArmorIsCoolShitToo,"",0,"",0,"NOPE!",noThankYouSirIDontWantAwesomeArmors);
 }
 
 //[No]

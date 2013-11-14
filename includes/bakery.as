@@ -89,7 +89,7 @@ function checkBakeryMenu():void {
 	if(minoCum > 0) addButton(5,"SpecialEclair",eventParser,minoCum);
 	if(gcupcake > 0) addButton(6,"GiantCupcake",eventParser,gcupcake);
 	addButton(8,"Ingredients",ingredientsMenu);
-	addButton(9,"Leave",eventParser,2836);
+	addButton(9,"Leave",bakeryuuuuuu);
 }
 
 function ingredientsMenu():void {
@@ -195,7 +195,7 @@ function talkAboutFoxBerry():void {
 	
 	//[Yes][No]
 	menu();
-	addButton(0,"Yes",eventParser,3580);
+	addButton(0,"Yes",buyFoxBerry);
 	addButton(1,"No",talkToBaker);
 }
 

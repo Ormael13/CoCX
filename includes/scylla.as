@@ -983,7 +983,7 @@ function Scylla6():void {
 	outputText("The nun guides you down an alley, talking about how she saw a bunny the other day when a couple of felines rush past, jostling you as they do so. You pat your pockets and notice they're emptier than usual, so you let go of Scylla's hand and turn around to chase the thieves. As you do so, you hear a soft shuffling behind you and the nun gasps.\n\n", false);
 	var duck:Number = 0;
 	//[Next][Duck! (high int/speed only)]
-	simpleChoices("Next",2707,"Duck!",2706,"",0,"",0,"",0);
+	simpleChoices("Next",Scylla6SLOW,"Duck!",Scylla6DUCK,"",0,"",0,"",0);
 }
 //(super high Intelligence or speed) 
 function Scylla6DUCK():void {
@@ -1417,7 +1417,7 @@ function scyllasFlyingSolo():void {
 	//[Feed] [Leave]
 	menu();
 	addButton(0,"Feed",feedScyllaSomeJizzDatJunkieNeedsIt);
-	addButton(4,"Back",eventParser,2256);
+	addButton(4,"Back",barTelAdre);
 }
  
 //[Feed]

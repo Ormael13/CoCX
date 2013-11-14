@@ -167,6 +167,7 @@
 			include "../../includes/OnLoadVariables.as";
 			include "../../includes/ooze.as";
 			include "../../includes/parser.as";
+			include "../../includes/perkPicker.as";
 			include "../../includes/pregnancy.as";
 			include "../../includes/Raphael.as";
 			include "../../includes/rathazul.as";

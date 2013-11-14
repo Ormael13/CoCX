@@ -292,7 +292,7 @@ function urtaBarApproach():void {
 			//As per normal drunk-fawks
 			//simpleChoices("Jerkoff",2297,"Anal Ride",2296,"Lay Eggs",temp,"Spank Her",spank,"Leave",2256);
 			menu();
-			addButton(0,"Jerkoff",eventParser,2297);
+			addButton(0,"Jerkoff",getAPublicFacialFromUrta);
 			addButton(1,"Anal Ride",eventParser,2296);
 			if(temp > 0) addButton(2,"Lay Eggs",eventParser,temp);
 			if(spank > 0) addButton(3,"Spank Her",eventParser,spank);
@@ -300,7 +300,7 @@ function urtaBarApproach():void {
 				outputText("\n\nYou know Urta and Raphael get along about as well as cats and dogs, but it might be fun to have them double-team you in the dark.");
 				addButton(8,"3SomeSurprise",urtaAndRaphaelSurprise);
 			}
-			addButton(9,"Leave",eventParser,2256);
+			addButton(9,"Leave",barTelAdre);
 			return;
 		}
 	}
@@ -329,7 +329,7 @@ function urtaBarApproach():void {
 		}
 		//simpleChoices("Jerkoff",2297,"Anal Ride",2296,"Lay Eggs",temp,"Spank Her",spank,"Leave",2256);
 		menu();
-		addButton(0,"Jerkoff",eventParser,2297);
+		addButton(0,"Jerkoff",getAPublicFacialFromUrta);
 		addButton(1,"Anal Ride",eventParser,2296);
 		if(temp > 0) addButton(2,"Lay Eggs",eventParser,temp);
 		if(spank > 0) addButton(3,"Spank Her",eventParser,spank);
@@ -337,7 +337,7 @@ function urtaBarApproach():void {
 			outputText("\n\nYou know Urta and Raphael get along about as well as cats and dogs, but it might be fun to have them double-team you in the dark.");
 			addButton(8,"3SomeSurprise",urtaAndRaphaelSurprise);
 		}
-		addButton(9,"Leave",eventParser,2256);
+		addButton(9,"Leave",barTelAdre);
 		return;
 	}
 	//[URTA COMFORTABLE WITH HOR-COCK]
@@ -363,7 +363,7 @@ function urtaBarApproach():void {
 	if(flags[URTA_CUM_NO_CUM_DAYS] >= 5) addButton(0,"Hidden BJ",slurpFawkesCocksForFunAndInflation);
 	else addButton(0,"Hidden BJ",eventParser,2295);
 	addButton(1,"Urta's Place",eventParser,2300);
-	addButton(4,"Leave",eventParser,2256);
+	addButton(4,"Leave",barTelAdre);
 }
 
 function drinkUrtasBooze():void {
@@ -385,7 +385,7 @@ function drinkUrtasBoozePtTwo():void {
 	outputText("She shakes her massive horse-meat more than a few times, shuddering lightly with pleasure as her tip flares a bit in response.  Urta stumbles over moaning, \"<i>This ish all your fault!  You damned... sexy... mmm... letsh fuck!</i>\"\n\n", false);
 	outputText("The stumbling hermaphrodite is openly rubbing herself as she closes in on you.  What do you do?", false);
 	//[RUN!] [LET HER]
-	simpleChoices("Run!",2287,"Let Her",2288,"",0,"",0,"",0);
+	simpleChoices("Run!",drinkUrtasBoozeRun,"Let Her",drinkUrtasBoozeLetHer,"",0,"",0,"",0);
 }
 
 function drinkUrtasBoozeRun(): void{
@@ -1918,7 +1918,7 @@ function urtaHomeLuvLuvinsMenu():void {
 	addButton(1,"Ride Ass",eventParser,2356);
 	if(player.hasCock()) {
 		outputText("  Urta could 69 with you, let you fuck her pussy, or you could even fuck her cunt full of jizz and then lick her to a second cum.");
-		addButton(2,"69",eventParser,2357);
+		addButton(2,"69",oralFiestyUberExplosionUrta);
 		addButton(3,"Vag Fuck",eventParser,2367);
 		addButton(5,"FuckAndLick",lickOutUrtaAtHome);
 	}
@@ -2544,10 +2544,10 @@ function QBsTalkExpack():void {
 function urtaDialogueMenu():void {
 	//choices("Urta",urtaDiscussesSelf,"Edryn",urtaDiscussesEdryn,"The Watch",urtaDiscussesTheWatch,"Alcoholism",urtaDiscussesAlcholism,"",0);
 	menu();
-	addButton(0,"Urta",eventParser,3495);
-	addButton(1,"Edryn",eventParser,3497);
+	addButton(0,"Urta",urtaDiscussesSelf);
+	addButton(1,"Edryn",urtaDiscussesEdryn);
 	addButton(2,"The Watch",eventParser,3498);
-	addButton(3,"Alcoholism",eventParser,3499);
+	addButton(3,"Alcoholism",urtaDiscussesAlcholism);
 	if(urtaKids() > 0 && player.hasKeyItem("Spare Key to Urta's House") < 0) 
 		addButton(4,"Visit Kids",visitKidsFirstTime);
 	else 
