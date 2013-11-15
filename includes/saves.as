@@ -280,8 +280,13 @@ function saveGame(slot:String):void
 function loadGame(slot:String):void
 {
 	var saveFile = SharedObject.getLocal(slot, "/");
+
+	// I want to be able to write some debug stuff to the GUI during the loading process
+	// Therefore, we clear the display *before* calling loadGameObject
+	outputText("", true);
+
 	loadGameObject(saveFile, slot);
-	outputText("Game Loaded", true);
+	outputText("Game Loaded");
 	temp = 0;
 	statScreenRefresh();
 	doNext(1);
@@ -717,8 +722,12 @@ function onDataLoaded(evt:Event):void
 	//var fileObj = readObjectFromStringBytes(loader.data);
 	try
 	{
+		// I want to be able to write some debug stuff to the GUI during the loading process
+		// Therefore, we clear the display *before* calling loadGameObject
+		outputText("", true);
+
 		loadGameObject(loader.data.readObject());
-		outputText("Loaded Save", true);
+		outputText("Loaded Save");
 	}
 	catch (rangeError:RangeError)
 	{
@@ -1308,18 +1317,47 @@ function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			itemSlot4.shortName = "GroPlus";
 		if (itemSlot5.shortName.indexOf("Gro+") != -1)
 			itemSlot5.shortName = "GroPlus";
-		//Fixing shit!
-		if(player.hasPerk("Elven Bounty") >= 0) {
-			//CLear duplicates
-			while(player.perkDuplicated("Elven Bounty")) player.removePerk("Elven Bounty");
-			//Fix fudged preggers value
-			if(player.perkv1("Elven Bounty") == 15) {
-				player.changePerkValue("Elven Bounty",1,0);
-				player.addPerkValue("Elven Bounty",2,15);
-			}
-		}
+		
+		unFuckSave()
+		
 		doNext(1);
 	}
+}
+
+function unFuckSave():void
+{
+	//Fixing shit!
+
+	// Fix duplicate elven bounty perks
+	if(player.hasPerk("Elven Bounty") >= 0) {
+		//CLear duplicates
+		while(player.perkDuplicated("Elven Bounty")) player.removePerk("Elven Bounty");
+		//Fix fudged preggers value
+		if(player.perkv1("Elven Bounty") == 15) {
+			player.changePerkValue("Elven Bounty",1,0);
+			player.addPerkValue("Elven Bounty",2,15);
+		}
+	}
+
+
+	// Fix issues with corrupt cockTypes caused by a error in the serialization code.
+		
+	//trace("CockInfo = ", flags[RUBI_COCK_TYPE]);
+	//trace("getQualifiedClassName = ", getQualifiedClassName(flags[RUBI_COCK_TYPE]));
+	//trace("typeof = ", typeof(flags[RUBI_COCK_TYPE]));
+	//trace("is CockTypesEnum = ", flags[RUBI_COCK_TYPE] is CockTypesEnum);
+	//trace("instanceof CockTypesEnum = ", flags[RUBI_COCK_TYPE] instanceof CockTypesEnum);
+
+	if (!(flags[RUBI_COCK_TYPE] is CockTypesEnum || flags[RUBI_COCK_TYPE] is Number))	
+	{ // Valid contents of flags[RUBI_COCK_TYPE] are either a CockTypesEnum or a number
+
+		trace("Fixing save");
+		outputText("\n<b>Rubi's cockType is invalid. Defaulting him to human.</b>\n");
+		flags[RUBI_COCK_TYPE] = 0;
+	}
+
+
+
 }
 
 //This is just the save/load code - from it you can get 
