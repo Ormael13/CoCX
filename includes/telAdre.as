@@ -961,7 +961,6 @@ var barTelAdre = function barTelAdre():void {
 	
 	//NIAMH
 	if(model.time.hours >= 8 && model.time.hours <= 16 && flags[NIAMH_STATUS] == 0) {
-	{
 		telAdreNiamh();
 		if(flags[MET_NIAMH] == 0) button = anotherButton(button,"Beer Cat",approachNiamh);
 		else button = anotherButton(button,"Niamh",approachNiamh);
