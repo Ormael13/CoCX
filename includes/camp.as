@@ -1110,7 +1110,7 @@ function doWait():void {
 }
 
 function doSleep(clrScreen:Boolean = true):void {
-	if(flags[URTA_INCUBATION] >= 384 && hours >= 20 && hours < 2) {
+	if(flags[URTA_INCUBATION] >= 384 && this.model.time.hours >= 20 && this.model.time.hours < 2) {
 		preggoUrtaGivingBirth();
 		return;
 	}

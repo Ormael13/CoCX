@@ -2615,8 +2615,8 @@ function removeButton(arg):void {
 		buttonToRemove = Math.round(arg);
 	}
 	
-	_removeButtonAction( index );
-	this.mainView.hideBottomButton( index );
+	_removeButtonAction( buttonToRemove );
+	this.mainView.hideBottomButton( buttonToRemove );
 }
 
 

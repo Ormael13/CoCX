@@ -259,7 +259,7 @@ function toggleDebug():void
 	else 
 		debug = true;
 		
-	this.mainView.showMenuButton( MainMenu.MENU_DATA );
+	this.mainView.showMenuButton( MainView.MENU_DATA );
 	settingsScreen();
 	return;
 }
@@ -271,7 +271,7 @@ function toggleEasyModeFlag():void
 	else 
 		flags[EASY_MODE_ENABLE_FLAG] = 0;
 	settingsScreen();
-	this.mainView.showMenuButton( MainMenu.MENU_DATA );
+	this.mainView.showMenuButton( MainView.MENU_DATA );
 	settingsScreen();
 	return;	
 }

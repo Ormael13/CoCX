@@ -21,16 +21,16 @@
 	var masturbateMenu:Number = 10;
 		
 	//Display Proper Buttons
-	this.mainView.showMenuButton( MainMenu.MENU_APPEARANCE );
-	this.mainView.showMenuButton( MainMenu.MENU_PERKS );
-	this.mainView.hideMenuButton( MainMenu.MENU_DATA );
+	this.mainView.showMenuButton( MainView.MENU_APPEARANCE );
+	this.mainView.showMenuButton( MainView.MENU_PERKS );
+	this.mainView.hideMenuButton( MainView.MENU_DATA );
 
 	
 	//clear up/down arrows
 	hideUpDown();
 	//Level junk
 	if(player.XP >= (player.level) * 100) {
-		this.mainView.showMenuButton( MainMenu.MENU_LEVEL );
+		this.mainView.showMenuButton( MainView.MENU_LEVEL );
 		this.mainView.statsView.showLevelUp();
 	}
 	//Entry Room

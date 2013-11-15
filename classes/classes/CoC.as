@@ -21,8 +21,6 @@
 	import flash.display.Loader;
 	import flash.display.MovieClip;
 	import flash.events.*
-	// import flash.events.Event;
-	// import flash.events.MouseEvent;
 	import flash.net.FileReference;
 	import flash.net.navigateToURL; 
 	import flash.net.registerClassAlias;
@@ -39,7 +37,7 @@
 ****/
 	
 	[SWF( width="1000", height="800", pageTitle="Corruption of Champions" )]
-	
+
 	public class CoC extends MovieClip
 	{
 		/****

@@ -241,25 +241,29 @@ function keyboard(e:KeyboardEvent):void {
 	if(e.keyCode == 13 || e.keyCode == 32) {
 		// b0text is at index 9.  b0Text actually sorta means b10Text...
 		if( this.mainView.buttonIsVisible( 9 ) && this.mainView.buttonTextIsOneOf( 9, [ "Nevermind", "Abandon", "Next", "Return", "Back", "Leave", "Resume" ] )) {
-			mouseOverText.visible = false;
+			this.mainView.toolTip.hide();
+			//mouseOverText.visible = false;
 			//eventParser(button0Choice);
 			executeButtonClick(9);
 			return;
 		}
 		if( this.mainView.buttonIsVisible( 0 ) && this.mainView.buttonTextIsOneOf( 0, [ "Next", "Return", "Back" ] )) {
-			mouseOverText.visible = false;
+			this.mainView.toolTip.hide();
+			//mouseOverText.visible = false;
 			//eventParser(button1Choice);
 			executeButtonClick(0);
 			return;
 		}
 		if( this.mainView.buttonIsVisible( 4 ) && this.mainView.buttonTextIsOneOf( 4, [ "Nevermind", "Next", "Return", "Back", "Leave" ] )) {
-			mouseOverText.visible = false;
+			this.mainView.toolTip.hide();
+			//mouseOverText.visible = false;
 			//eventParser(button5Choice);
 			executeButtonClick(4);
 			return;
 		}
 		if( this.mainView.buttonIsVisible( 5 ) && this.mainView.buttonTextIsOneOf( 5, [ "Next", "Return", "Back" ] )) {
-			mouseOverText.visible = false;
+			this.mainView.toolTip.hide();
+			//mouseOverText.visible = false;
 			//eventParser(button6Choice);
 			executeButtonClick(5);
 			return;

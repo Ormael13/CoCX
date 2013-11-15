@@ -10,7 +10,6 @@
  */
 //{region PiercingVariables
 
-//0) **Clit (+2 sens)
 //1) **Dick (+2 lib) adds the word 'pierced' sometimes to the description
 //2) **Ears
 //3) **Eyebrow (-.5 def)
@@ -888,7 +887,7 @@ function anotherButton(button:int,nam:String,func,arg = -9000):int {
 	button++;
 	return button;
 }
-function barTelAdre():void {
+var barTelAdre = function barTelAdre():void {
 	// Dominka & Edryn both persist their sprites if you back out of doing anything with them -- I 
 	// I guess this is good a place as any to catch-all the sprite, because I don't think theres ever a case you get a sprite from just entering the bar?
 	spriteSelect( -1);

@@ -701,7 +701,7 @@ function barBeerOrgyTits():void {
 	//Third Paragraph
 	//===============
 	//IF player has pussy and Urta is in the bar and sex with her is unlocked.
-	if(hours < 15 && flags[URTA_COMFORTABLE_WITH_OWN_BODY] > 0 && player.hasVagina()) {
+	if(this.model.time.hours < 15 && flags[URTA_COMFORTABLE_WITH_OWN_BODY] > 0 && player.hasVagina()) {
 		outputText("\n\nA pair of familiar paws grab your ankles and spread your legs wide.  Your labia practically spurt out girl cum in anticipation of what's about to happen.  \"<i>Oh, looks like someone's overly eager.</i>\"  You struggle to look over the mounds of your own tits to see who's standing between your legs.  The familiar sight of an oversized horse-cock waving in the air catches your attention shortly before the grinning smile of Urta comes in to view.  \"<i>My aren't you going to get reamed, lover.</i>\"  No sooner than she says that than the flared head of her cock plunges with a wet squish between your nether lips.  You feel her stretching your entrance apart as her massive horse meat bores into your body.  Blissful screams of pleasure are heard and it isn't until the head of Urta's cock breaks into your womb that you realize it's you that's screaming in ecstasy.");
 		if(player.pregnancyIncubation == 0) outputText("  Some folks give yelps and cheers when they see the bulge that repeatedly forms in your abdomen each time Urta thrusts herself inside you.");
 		cuntChange(60,true,true,false);

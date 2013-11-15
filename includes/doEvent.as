@@ -3326,7 +3326,7 @@ function doEvent(eventNo):void
 	
 	else if (eventNo == 2855)
 	{
-		if (hours == 19 || hours == 20)
+		if (this.model.time.hours == 19 || this.model.time.hours == 20)
 		{
 			flags[COUNTDOWN_TO_NIGHT_RAPE]++;
 			if (flags[COUNTDOWN_TO_NIGHT_RAPE] % 4 == 0 && player.gender == 1)

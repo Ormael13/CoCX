@@ -1773,7 +1773,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			flags[ARIAN_LESSONS] = 0;
 			flags[ARIAN_TREATMENT] = 0;
 			flags[BROOKE_MET_TODAY] = 0;
-			if(daysdays % 2 == 0 && flags[KAIJU_BAD_END_COUNTER] > 0) {
+			if(this.model.time.days % 2 == 0 && flags[KAIJU_BAD_END_COUNTER] > 0) {
 				flags[KAIJU_BAD_END_COUNTER]--;
 				if(flags[KAIJU_BAD_END_COUNTER] < 0) flags[KAIJU_BAD_END_COUNTER] = 0;
 			}
