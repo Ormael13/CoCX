@@ -1217,16 +1217,6 @@ function doSleep(clrScreen:Boolean = true):void {
 	}
 	goNext(timeQ, true);
 	return;
-	
-	if(player.fatigue > 50) restTime = Math.ceil(player.fatigue/12);
-	if(restTime == 0) restTime = 4;
-	outputText("", true);
-	outputText("You go to sleep...", false);
-	
-	
-	//else outputText("\nYou wake " + num2Text(restTime) + " hours later, feeling refreshed.", false);
-	//Autosave stuff
-	if(player.slotName != "VOID" && player.autoSave && mainView.getButtonText( 0 ) != "Game Over") saveGame(player.slotName);
 }
 //For shit that breaks normal sleep processing.
 function sleepWrapper():void {
