@@ -11,7 +11,7 @@
 
 //DEBUG, used all over the place
 var debug:Boolean = false;
-//this.model.debug = debug; // TODO: Set on model?
+//model.debug = debug; // TODO: Set on model?
 
 //Version NUMBER
 var ver:String = "0.8.3d5";
@@ -19,7 +19,7 @@ var version:String = "v0.8.3d5 (<b>Open Source Fixes + Image Pack Support</b>)";
 
 //Indicates if building for mobile?
 var mobile:Boolean = false;
-this.model.mobile = mobile;
+model.mobile = mobile;
 
 var images:ImageManager = new ImageManager(stage);
 //} endregion
@@ -54,7 +54,7 @@ var itemSwapping:Boolean = false;
 //The extreme flag state array. This needs to go. Holds information about everything, whether it be certain attacks for NPCs 
 //or state information to do with the game. 
 var flags = new DefaultDict();
-this.model.flags = flags;
+model.flags = flags;
 
 /*
 for (var i = 0; i < 3000; i++)
@@ -116,7 +116,7 @@ var itemSubMenu:Boolean = false;
 
 //Holds the date and time display in the bottom left
 var time :TimeModel = new TimeModel();
-this.model.time = time;
+model.time = time;
 
 //The string holds all the "story" text, mainly used in engineCore
 var currentText:String = "";

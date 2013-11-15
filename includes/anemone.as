@@ -96,7 +96,7 @@ function applyVenom(str:Number = 1):void {
 		if(player.str < 2) stats(0,0,0,0,0,0,2,0);
 		//Lose a point of str.
 		else {
-			this.mainView.statsView.showStatDown( "str" );
+			mainView.statsView.showStatDown( "str" );
 			// strDown.visible = true;
 			// strUp.visible = false;
 			player.str--;
@@ -106,7 +106,7 @@ function applyVenom(str:Number = 1):void {
 		if(player.spe < 2) stats(0,0,0,0,0,0,2,0);
 		//Lose a point of spe.
 		else {
-			this.mainView.statsView.showStatDown( "spe" );
+			mainView.statsView.showStatDown( "spe" );
 			// speDown.visible = true;
 			// speUp.visible = false;
 			player.spe--;

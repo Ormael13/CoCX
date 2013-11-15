@@ -1462,7 +1462,7 @@ function purifiedFaerieBitchBar():Boolean {
 	//(Entering the Wet Bitch for the first time after Healing her)
 	//[Entering the bar description]
 	//(Works from 12:00 to 21:00)
-	if(this.model.time.hours >= 12 && this.model.time.hours <= 21) {
+	if(model.time.hours >= 12 && model.time.hours <= 21) {
 		//[Vala] (After sex encounter for the day)
 		if(flags[UNKNOWN_FLAG_NUMBER_00122] > 0) {
 			outputText("\n\nThe fluttering fairy drops a complimentary drink off at your table with a sly wink. You can't help but notice that she's leaving a clear trail of girl cum as she flies past, the cummy trail leaking from between her legs. Lingering testimony of the break you took with her, no doubt. She seems a bit busy right now, but maybe if you checked back tomorrow, she'd be able to take the time to thank you again, tomorrow.", false);
@@ -1505,7 +1505,7 @@ function chooseValaInBar():void {
 		outputText("\n\n\"<i>Now, what did you want today?</i>\"");
 		//"Big You" added to menu
 	}
-	else if(this.model.time.hours == 20 && rand(2) == 0 && player.hasCock()) {
+	else if(model.time.hours == 20 && rand(2) == 0 && player.hasCock()) {
 		kinathisValaStuff();
 		return;
 	}
@@ -2756,8 +2756,8 @@ function kinathisValaStuff():void {
 //[next]
 function valaPartIIWaifuLove():void {
 	clearOutput();
-	this.model.time.hours = 6;
-	this.model.time.days++;
+	model.time.hours = 6;
+	model.time.days++;
 	statScreenRefresh();
 	outputText("Letting out a yawn, you curl up in the warm covers of the bed.  You sigh and smile as the smell of food wafts over you; it reminds you of your time back home.  The scent of frying meat and eggs soon becomes too much for your sleeping mind and rouses you from your slumber.  Stretching your body out, you look around and remember your night with Vala; you must have fallen asleep in her bed.  Unable to help yourself, you follow the mouth watering aroma to the kitchen and find the loving fairy-girl there.  Her gossamer wings flutter as she hovers at the stove, naked save for the the apron she wears.  The sound of grease popping and crackling fills the air along with the smell of a savory, home cooked breakfast.");
 	

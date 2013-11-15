@@ -1380,11 +1380,11 @@ function updatePregnancy():Boolean {
 		satyrBirth(false);
 	}
 	if(player.pregnancyType == 18 && player.pregnancyIncubation <= 2) {
-		if(this.model.time.hours != 5 && this.model.time.hours != 6) {
+		if(model.time.hours != 5 && model.time.hours != 6) {
 			player.pregnancyIncubation = 3;
 		}
 		else {
-			if(this.model.time.hours == 5) player.pregnancyIncubation = 2;
+			if(model.time.hours == 5) player.pregnancyIncubation = 2;
 			player.pregnancyIncubation = 0;
 			player.pregnancyType = 0;
 			displayedUpdate = true;

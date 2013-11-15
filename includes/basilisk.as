@@ -47,7 +47,7 @@ function basiliskSpeed(amount:Number = 0):void {
 	player.spe -= amount;
 	if(player.hasStatusAffect("BasiliskSlow") >= 0) player.addStatusValue("BasiliskSlow",1,amount);
 	else player.createStatusAffect("BasiliskSlow",amount,0,0,0);
-	this.mainView.statsView.showStatDown( 'spe' );
+	mainView.statsView.showStatDown( 'spe' );
 	// speUp.visible = false;
 	// speDown.visible = true;
 }
@@ -222,7 +222,7 @@ function loseToBasilisk():void {
 	//Undo slow to determine if bad end time
 	if(player.hasStatusAffect("BasiliskSlow") >= 0) {
 		player.spe += player.statusAffectv1("BasiliskSlow");
-		this.mainView.statsView.showStatUp( 'spe' );
+		mainView.statsView.showStatUp( 'spe' );
 		// speUp.visible = true;
 		// speDown.visible = false;
 		player.removeStatusAffect("BasiliskSlow");

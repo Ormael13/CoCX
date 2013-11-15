@@ -53,7 +53,7 @@ function spiderMorphWebAttack():void {
 		}
 		//Apply changes, display arrows, and track speed lost
 		player.spe -= amount;
-		this.mainView.statsView.showStatDown( 'spe' );
+		mainView.statsView.showStatDown( 'spe' );
 		// speUp.visible = false;
 		// speDown.visible = true;
 		player.addStatusValue("Web",1,amount);

@@ -18,7 +18,7 @@ function LiliumText(output:Boolean = false):Number {
 		//After paying:
 		else outputText("\n\nYou can see Lilium standing in her usual spot.", false);
 	}
-	if(this.model.time.hours >= 17) return 2978;
+	if(model.time.hours >= 17) return 2978;
 	return 0;
 }
 

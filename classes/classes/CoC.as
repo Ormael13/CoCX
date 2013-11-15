@@ -56,7 +56,7 @@
 		public function CoC()
 		{
 			this.model = new GameModel();
-			this.mainView = new MainView({});
+			this.mainView = new MainView( this.model );
 			this.mainView.name = "mainView";
 			this.stage.addChild( this.mainView );
 
@@ -65,6 +65,9 @@
 
 		public function run()
 		{
+			var mainView :MainView = this.mainView;
+			var model :GameModel = this.model;
+			
 			// big splat of include lines here...
 			// These are relative to the current directory, which is /classes/classes.
 			include "../../includes/akbal.as";

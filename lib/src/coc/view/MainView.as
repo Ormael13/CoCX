@@ -19,7 +19,7 @@ package coc.view {
 
     import coc.model.GameModel;
 
-	public dynamic class MainView extends MovieClip {
+	public class MainView extends MovieClip {
 		// Menu button names.
 		public static const MENU_NEW_MAIN :String = 'newGame';
 		public static const MENU_DATA :String = 'data';
@@ -39,13 +39,14 @@ package coc.view {
 		private static const BUTTON_REAL_HEIGHT :Number = 40;
 
 		public var aCb :ComboBox;
+		// public var nameBox :TextField;
 
 		public var bottomButtonTexts :Array; // <TextField>
 		public var bottomButtonBGs :Array; // <MovieClip>
 		public var menuButtonTexts :Array;
 		public var menuButtonBGs :Array;
 
-		public var toolTip :ToolTipView;
+		public var toolTipView :ToolTipView;
 		public var statsView :StatsView;
 
 		// TODO: Refactor so we don't need these vars.  That sounds so simple when you put it like that...
@@ -57,9 +58,9 @@ package coc.view {
 		protected var allButtons :Array;
 		protected var callbacks :Object = {};
 
-		protected var model :GameModel; // TODO: Need an actual class type.
+		protected var model :GameModel;
 
-		public function MainView( model :*, options :Object = null ) :void {
+		public function MainView( model :GameModel, options :Object = null ) :void {
 			// Note: Currently we can't touch this on construction
 			// due to the code being a mess.  We'll fix that at some point.
 			// maybe even get like update events or some shit like real MV*s or something.
@@ -71,7 +72,7 @@ package coc.view {
 			// Init subviews.
 			this.toolTipView = new ToolTipView( this, this.model );
 			this.toolTipView.hide();
-			this.addChild( this.toolTipview );
+			this.addChild( this.toolTipView );
 
 			this.statsView = new StatsView( this, this.model );
 			this.statsView.hide();
@@ -115,6 +116,8 @@ package coc.view {
 		//////// Initialization methods. /////////
 
 		protected function formatMiscItems() :void {
+			// this.mainText = this.getChildByName( "mainText" );
+
 			this.nameBox.maxChars = 54;
 
 			this.aCb = new ComboBox(); 
@@ -123,6 +126,8 @@ package coc.view {
 			this.aCb.scaleY = 1.1;
 			this.aCb.move(-1250, -1550); 
 			this.aCb.prompt = "Choose a perk"; 
+
+			this.hideSprite();
 		};
 
 		// Removes the need for some code in input.as and InitializeUI.as.
@@ -137,8 +142,9 @@ package coc.view {
 				}
 
 				switch( t ) {
-					case mainText:
-					case imageText:
+					case this.mainText:
+					case this.imageText:
+					case this.nameBox:
 						break;
 
 					default:
@@ -175,6 +181,7 @@ package coc.view {
 			for( bi = 0; bi < BOTTOM_BUTTON_COUNT; ++bi ) {
 				b = new (bgClasses[ bi ])();
 				b.bottomIndex = bi;
+				b.name = 'b' + String( (bi + 1) % 10 ) + 'BG';
 
 				r = (bi / BOTTOM_BUTTON_PER_ROW_COUNT) << 0;
 				c = bi % BOTTOM_BUTTON_PER_ROW_COUNT;
@@ -201,8 +208,9 @@ package coc.view {
 			var b :MovieClip;
 
 			for each( b in this.allButtons ) {
-				this.addEventListener( MouseEvent.ROLL_OVER, this.hoverButton );
-				this.addEventListener( MouseEvent.ROLL_OUT, this.dimButton );
+				b.mouseChildren = false;
+				b.addEventListener( MouseEvent.ROLL_OVER, this.hoverButton );
+				b.addEventListener( MouseEvent.ROLL_OUT, this.dimButton );
 			}
 		};
 
@@ -210,7 +218,7 @@ package coc.view {
 
 		//////// Internal(?) view update methods ////////
 
-		public function showBottomButton( index :int, label :String, callback :Function = null, toolTipText :String = '' ) :void {
+		public function showBottomButton( index :int, label :String, callback :Function = null, toolTipViewText :String = '' ) :void {
 			var buttonTF :TextField = this.bottomButtonTexts[ index ] as TextField,
 				buttonBG :MovieClip = this.bottomButtonBGs[ index ] as MovieClip;
 
@@ -249,7 +257,7 @@ package coc.view {
 				bottomButtonIndex :int;
 
 			if( this._executeButtomButtonClick ) {
-				this.toolTip.hide();
+				this.toolTipView.hide();
 				bottomButton = (event.currentTarget as InteractiveObject);
 				bottomButtonIndex = this.bottomButtonBGs.indexOf( bottomButton );
 				this._executeButtomButtonClick( bottomButtonIndex );
@@ -257,25 +265,26 @@ package coc.view {
 		};
 
 		protected function hoverButton( event :MouseEvent ) {
-			event.currentTarget.alpha = 0.5;
+			event.target.alpha = 0.5;
 
 			if( this._getButtonToolTipText ) {
-				this.toolTip.text = this._getButtonToolTipText( this.textForBG( event.target as DisplayObject ).text );
-				this.toolTip.showForButton( event.target as DisplayObject );
+				this.toolTipView.text = this._getButtonToolTipText( this.textForBG( event.target as DisplayObject ).text );
+				if( this.toolTipView.text )
+					this.toolTipView.showForButton( event.target as DisplayObject );
 			}
 		};
 
 		protected function dimButton( event :MouseEvent ) {
-			event.currentTarget.alpha = 1.0;
-			this.toolTip.hide();
+			event.target.alpha = 1.0;
+			this.toolTipView.hide();
 		};
 
 
 
 		//////// Bottom Button Methods ////////
 
-		// TODO: Refactor button set-up code to use callback and toolTipText here.
-		public function setButton( index :int, label :String = '', callback :Function = null, toolTipText :String = '' ) {
+		// TODO: Refactor button set-up code to use callback and toolTipViewText here.
+		public function setButton( index :int, label :String = '', callback :Function = null, toolTipViewText :String = '' ) {
 			if( index < 0 || index >= BOTTOM_BUTTON_COUNT ) {
 				trace( "MainView.setButton called with out of range index:", index );
 				// throw new RangeError();
@@ -283,7 +292,7 @@ package coc.view {
 			}
 
 			if( label ) {
-				this.showBottomButton( index, label, callback, toolTipText );
+				this.showBottomButton( index, label, callback, toolTipViewText );
 			}
 			else {
 				this.hideBottomButton( index );
@@ -326,14 +335,13 @@ package coc.view {
 		};
 
 		public function getButtonText( index :int ) :String {
-			var matches :*,
-				buttonIndex :int;
+			var matches :*;
 
 			if( index < 0 || index > BOTTOM_BUTTON_COUNT ) {
 				return '';
 			}
 			else {
-				return this.bottomButtonTexts[ buttonIndex ].text;
+				return this.bottomButtonTexts[ index ].text;
 			}
 		};
 
@@ -442,6 +450,7 @@ package coc.view {
 			this.showMenuButton( MENU_NEW_MAIN );
 			this.showMenuButton( MENU_DATA );
 			this.showMenuButton( MENU_STATS );
+			this.showMenuButton( MENU_LEVEL );
 			this.showMenuButton( MENU_PERKS );
 			this.showMenuButton( MENU_APPEARANCE );
 		};
@@ -450,6 +459,7 @@ package coc.view {
 			this.hideMenuButton( MENU_NEW_MAIN );
 			this.hideMenuButton( MENU_DATA );
 			this.hideMenuButton( MENU_STATS );
+			this.hideMenuButton( MENU_LEVEL );
 			this.hideMenuButton( MENU_PERKS );
 			this.hideMenuButton( MENU_APPEARANCE );
 		};
@@ -486,7 +496,8 @@ package coc.view {
 		};
 
 		public function setOutputText( text :String ) :void {
-			trace( "MainView#setOutputText(): This is never called in the main outputText() function.  Possible bugs that were patched over by updating text manually?" );
+			// Commenting out for now, because this is annoying to see flooding the trace.
+			// trace( "MainView#setOutputText(): This is never called in the main outputText() function.  Possible bugs that were patched over by updating text manually?" );
 			this.mainText.htmlText = text;
 			this.scrollBar.update();
 		};
@@ -495,13 +506,15 @@ package coc.view {
 			var scale :Number;
 
 			// TODO: When flags goes away, if it goes away, replace this with the appropriate settings thing.
-			if( index < 0 || model.flags[ 273 ] ) // = SHOW_SPRITES_FLAG from flagDefs...
+			if( index < 0 || this.model.flags[ 273 ] ) // = SHOW_SPRITES_FLAG from flagDefs...
 				this.sprite.visible = false;
 			else {
 				this.sprite.visible = true;
 				this.sprite.gotoAndStop( index );
 
-				scale = 80 / sprite.height;
+				this.sprite.scaleX = 1;
+				this.sprite.scaleY = 1;
+				scale = 80 / this.sprite.height;
 				this.sprite.scaleX = scale;
 				this.sprite.scaleY = scale;
 			}

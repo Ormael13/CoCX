@@ -45,7 +45,7 @@ function enterTheBazaarAndMenu(demons:Boolean = true):void {
 	outputText("", true);
 	var rat:String = "Rat";
 	var lilium:String = "Demon";
-	if(this.model.time.hours >= 15 && this.model.time.hours <= 20 && flags[CINNABAR_NUMBER_ENCOUNTERS] > 0) rat = "Cinnabar";
+	if(model.time.hours >= 15 && model.time.hours <= 20 && flags[CINNABAR_NUMBER_ENCOUNTERS] > 0) rat = "Cinnabar";
 	//Make sure flags to allow entrance is set.
 	if(flags[BAZAAR_ENTERED] == 0) flags[BAZAAR_ENTERED] = 1;
 	outputText("You breeze past the crimson guard and enter the interior of the Bizarre Bazaar.  The ground is hard-packed, trampled as if walked over by hundreds of hooves, paws, and feet.  A massive bonfire rages in the center of the clearing, crackling and popping as it consumes its fuel gluttonously.  Surrounding the blazing behemoth are tiny, wheeled food-carts with vendors hawking everything from sausage to something called a 'marshmallow'.  Huge wagons ring the clearing, many set up to display exotic wares or services.  You can see everything from dancing centaurs to demons browsing the wares, but it seems an uneasy truce of sorts reigns here.  Then again, maybe the demons have just not had the chance to openly attack this place yet.", false);
@@ -56,7 +56,7 @@ function enterTheBazaarAndMenu(demons:Boolean = true):void {
 	var tent:Number = 0;
 	var benoit:Number = 0;
 	var benoitT:String = "MarketStall";
-	if(this.model.time.hours >= 9 && this.model.time.hours <= 17) {
+	if(model.time.hours >= 9 && model.time.hours <= 17) {
 		if(flags[TIMES_IN_BENOITS] == 0) outputText("\n\nYou notice a large market stall wedged between two wagons, swaddled in carpets and overflowing with all manner of objects.  On top of its looming fabric canopy is a wooden sign with the words \"<b>Geckos Garbidg</b>\" crudely scrawled upon them.  You wonder what that's all about.");
 		else {
 			outputText("\n\n" + benoitMF("Benoit","Benoite") + " the basilisk's stall looks open for business.  You could go see what's on offer.");
@@ -1136,8 +1136,8 @@ function finalGayFinallee(road:int = 0):void {
 		}
 		outputText(".  You redress yourself before realizing something.  You have acquired something extra: a lust draft potion with an orange ribbon tied to it.  A note at the end reads: \"<i>Thanks for bailing me out of buying booze.  Your ass was amazing even after that orc had it.</i>\"  There's no name on the note but you have a good idea who left it for you, judging by the drawn tiger paw print in the corner.  You pocket the lust draft and leave the tent to head back to the bazaar in the morning light.\n\n");
 		stats(0,0,0,0,0,5,-100,0);
-		this.model.time.days++;
-		this.model.time.hours = 6;
+		model.time.days++;
+		model.time.hours = 6;
 		//Lust sated
 		//Gained 1 lust draft, lost a few gems(9 or so?)
 		menuLoc = 2;
@@ -1169,8 +1169,8 @@ function finalGayFinallee(road:int = 0):void {
 		}
 		outputText(".  You redress yourself before realizing something.  You have acquired something extra: A lust draft potion with an brown ribbon tied to it.  A note at the end reads: \"<i>I'll always remember the face you made trying to wrap your cute lips around my giant dick.</i>\"  There's no name on the note but you have a good idea who left it for you, judging by the drawn bear paw print in the corner.  You pocket the lust draft and leave the tent to head back to the bazaar in the morning light.\n\n");
 		stats(0,0,0,0,0,5,-100,0);
-		this.model.time.days++;
-		this.model.time.hours = 6;
+		model.time.days++;
+		model.time.hours = 6;
 		//Lust sated
 		//Gained 1 lust draft, lost a few gems(9 or so?)
 		menuLoc = 2;
@@ -1201,9 +1201,9 @@ function finalGayFinallee(road:int = 0):void {
 		//Gained 1 Bimbo brew, lost a few gems(9 or so?)
 		//Time set to morning
 		stats(0,0,0,0,0,5,-100,0);
-		this.model.time.days++;
+		model.time.days++;
 		
-		this.model.time.hours = 6;
+		model.time.hours = 6;
 		//Lust sated
 		//Gained 1 lust draft, lost a few gems(9 or so?)
 		menuLoc = 2;

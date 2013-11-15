@@ -460,8 +460,8 @@ function nomOnMommaIzzysTits():void {
 			}
 			else {
 				outputText("She sleep-fucked you again!  You sigh and wipe your hand off on your " + player.leg() + ", bemused by the cow-girl who seems too shy to sleep with someone who's awake.  Still, you feel completely sated in every way.  It's going to be a good ", false);
-			   if(this.model.time.hours < 12) outputText("day", false);
-				else if(this.model.time.hours < 4) outputText("afternoon", false);
+			   if(model.time.hours < 12) outputText("day", false);
+				else if(model.time.hours < 4) outputText("afternoon", false);
 				else outputText("evening", false);
 				outputText(".", false);
 			}

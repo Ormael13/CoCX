@@ -17,8 +17,14 @@ package coc.view {
 		public function ToolTipView( mainView :MovieClip, model :GameModel ) :void {
 			this.model = model;
 
-			this.bg = mainView.popUpBG;
-			this.tf = mainView.mouseOverText;
+			this.bg = mainView.getChildByName( "popUpBG" ) as Sprite;
+			this.tf = mainView.getChildByName( "mouseOverText" ) as TextField;
+
+			this.bg.x = 0;
+			this.bg.y = 0;
+
+			this.tf.x = 22;
+			this.tf.y = 22;
 
 			this.tf.type = TextFieldType.DYNAMIC;
 
@@ -49,8 +55,8 @@ package coc.view {
 			this.visible = false;
 		};
 
-		public function set text( newText ) :void {
-			this.tf.text = newText;
+		public function set text( newText :String ) :void {
+			this.tf.text = newText || '';
 		};
 
 		public function get text() :String {

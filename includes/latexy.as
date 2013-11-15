@@ -190,24 +190,24 @@ function PCCarriedGooBackHomeII():void {
 	outputText("\n\nWhat will you name her?");
 	menu();
 	addButton(0,"Next",nameZeLatexGoo);
-	this.mainView.nameBox.text = "";
-	this.mainView.nameBox.visible = true;
-	this.mainView.nameBox.width = 165;
-	this.mainView.nameBox.x = this.mainView.mainText.x + 5;
-	this.mainView.nameBox.y = this.mainView.mainText.y + 3 + this.mainView.mainText.textHeight;
+	mainView.nameBox.text = "";
+	mainView.nameBox.visible = true;
+	mainView.nameBox.width = 165;
+	mainView.nameBox.x = mainView.mainText.x + 5;
+	mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
 }
 function nameZeLatexGoo():void {
-	if(this.mainView.nameBox.text == "") {
+	if(mainView.nameBox.text == "") {
 		clearOutput();
 		outputText("<b>You must select a name.</b>", false);
-		this.mainView.nameBox.x = this.mainView.mainText.x + 5;
-		this.mainView.nameBox.y = this.mainView.mainText.y + 3 + this.mainView.mainText.textHeight;
+		mainView.nameBox.x = mainView.mainText.x + 5;
+		mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
 		menu();
 		addButton(0,"Next",nameZeLatexGoo);
 		return;
 	}
-	flags[GOO_NAME] = this.mainView.nameBox.text;
-	this.mainView.nameBox.visible = false;
+	flags[GOO_NAME] = mainView.nameBox.text;
+	mainView.nameBox.visible = false;
 	//After Naming Her:
 	clearOutput();
 	outputText("\"<i>");
@@ -292,11 +292,11 @@ function encounterLeftBehindGooSlaveII():void {
 	//{To standard name prompts}
 	menu();
 	addButton(0,"Next",nameZeLatexGoo);
-	this.mainView.nameBox.text = "";
-	this.mainView.nameBox.visible = true;
-	this.mainView.nameBox.width = 165;
-	this.mainView.nameBox.x = this.mainView.mainText.x + 5;
-	this.mainView.nameBox.y = this.mainView.mainText.y + 3 + this.mainView.mainText.textHeight;
+	mainView.nameBox.text = "";
+	mainView.nameBox.visible = true;
+	mainView.nameBox.width = 165;
+	mainView.nameBox.x = mainView.mainText.x + 5;
+	mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
 }
 
 //Pure Characters Intro(F):
@@ -380,27 +380,27 @@ function pureGooGalRecruitAftermathII():void {
 	outputText("\n\nWhat will you name her?");
 	menu();
 	addButton(0,"Next",nameZeLatexGooNice);
-	this.mainView.nameBox.text = "";
-	this.mainView.nameBox.visible = true;
-	this.mainView.nameBox.width = 165;
-	this.mainView.nameBox.x = this.mainView.mainText.x + 5;
-	this.mainView.nameBox.y = this.mainView.mainText.y + 3 + this.mainView.mainText.textHeight;
+	mainView.nameBox.text = "";
+	mainView.nameBox.visible = true;
+	mainView.nameBox.width = 165;
+	mainView.nameBox.x = mainView.mainText.x + 5;
+	mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
 
 }
 
 //After Naming Latexy(F):
 function nameZeLatexGooNice():void {
-	if(this.mainView.nameBox.text == "") {
+	if(mainView.nameBox.text == "") {
 		clearOutput();
 		outputText("<b>You must select a name.</b>", false);
-		this.mainView.nameBox.x = this.mainView.mainText.x + 5;
-		this.mainView.nameBox.y = this.mainView.mainText.y + 3 + this.mainView.mainText.textHeight;
+		mainView.nameBox.x = mainView.mainText.x + 5;
+		mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
 		menu();
 		addButton(0,"Next",nameZeLatexGoo);
 		return;
 	}
-	flags[GOO_NAME] = this.mainView.nameBox.text;
-	this.mainView.nameBox.visible = false;
+	flags[GOO_NAME] = mainView.nameBox.text;
+	mainView.nameBox.visible = false;
 	clearOutput();
 	outputText("\"<i>");
 	if(flags[GOO_NAME] == "Cattleya") outputText("Cattleya, huh?  I don't know if my tits are big enough to live up to that name,");

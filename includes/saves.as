@@ -109,11 +109,11 @@ function loadScreen():void
 
 function saveScreen():void
 {
-	this.mainView.nameBox.x = 210;
-	this.mainView.nameBox.y = 620;
-	this.mainView.nameBox.width = 550;
-	this.mainView.nameBox.text = "";
-	this.mainView.nameBox.visible = true;
+	mainView.nameBox.x = 210;
+	mainView.nameBox.y = 620;
+	mainView.nameBox.width = 550;
+	mainView.nameBox.text = "";
+	mainView.nameBox.visible = true;
 	var test;
 	
 	outputText("", true);
@@ -160,11 +160,11 @@ function saveScreen():void
 
 function saveLoad(e:MouseEvent):void
 {
-	this.mainView.eventTestInput.x = -10207.5;
-	this.mainView.eventTestInput.y = -1055.1;
+	mainView.eventTestInput.x = -10207.5;
+	mainView.eventTestInput.y = -1055.1;
 	//Hide the name box in case of backing up from save
 	//screen so it doesnt overlap everything.
-	this.mainView.nameBox.visible = false;
+	mainView.nameBox.visible = false;
 	outputText("", true);
 	outputText("<b>Frequently Asked Questions</b>:\nWhere are my saves located?\n", false);
 	outputText("<i>In Windows Vista/7 (IE/FireFox/Other): Users/[username]/Appdata/Roaming/Macromedia/Flash Player/#Shared Objects/[GIBBERISH]/\n", false, false);
@@ -174,10 +174,10 @@ function saveLoad(e:MouseEvent):void
 	outputText("When I play from my HDD I have one set of saves, and when I play off your site I have a different set of saves.  Why?\n<i>Flash stores saved data relative to where it was accessed from.  Playing from your HDD will store things in a different location than fenoxo.com or FurAffinity.</i>\n\n", false);
 	outputText("If you want to be absolutely sure you don't lose a character, copy the .sol file for that slot out and back it up!\n\n<b>For more information, google flash shared objects.</b>", false);
 	//This is to clear the 'game over' block from stopping simpleChoices from working.  Loading games supercede's game over.
-	if (this.mainView.getButtonText( 0 ) == "Game Over")
+	if (mainView.getButtonText( 0 ) == "Game Over")
 	{
 		temp = 777;
-		this.mainView.setButtonText( 0, "save/load" );
+		mainView.setButtonText( 0, "save/load" );
 	}
 	if (temp == 777)
 	{
@@ -343,14 +343,14 @@ function saveGameObject(slot:String, isFile:Boolean):void
 	//saveFile.data.pronoun3 = player.pronoun3;
 	
 	//Notes
-	if (this.mainView.nameBox.text != "")
+	if (mainView.nameBox.text != "")
 	{
-		saveFile.data.notes = this.mainView.nameBox.text;
-		notes = this.mainView.nameBox.text;
+		saveFile.data.notes = mainView.nameBox.text;
+		notes = mainView.nameBox.text;
 	}
 	else
 		saveFile.data.notes = notes;
-	this.mainView.nameBox.visible = false;
+	mainView.nameBox.visible = false;
 	
 	//flags
 	saveFile.data.flags = new Array();
@@ -622,8 +622,8 @@ function saveGameObject(slot:String, isFile:Boolean):void
 	saveFile.data.gameState = gameState;
 	
 	//Time and Items
-	saveFile.data.hours = this.model.time.hours;
-	saveFile.data.days = this.model.time.days;
+	saveFile.data.hours = model.time.hours;
+	saveFile.data.days = model.time.days;
 	saveFile.data.autoSave = player.autoSave;
 	
 	//PLOTZ
@@ -768,6 +768,7 @@ function loadGameObject(saveData:Object, slot:String = "VOID"):void
 	{
 		//KILL ALL COCKS;
 		player = new Player();
+		model.player = player;		
 		
 		//trace("Type of saveFile.data = ", getClass(saveFile.data));
 		
@@ -1262,8 +1263,8 @@ function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		
 		//Days
 		//Time and Items
-		this.model.time.hours = saveFile.data.hours;
-		this.model.time.days = saveFile.data.days;
+		model.time.hours = saveFile.data.hours;
+		model.time.days = saveFile.data.days;
 		if (saveFile.data.autoSave == undefined)
 			player.autoSave = false;
 		else

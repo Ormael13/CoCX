@@ -79,7 +79,10 @@ package coc.view {
         };
 
         protected function setStatText( name :String, value :* ) {
-            (this.getChildByName( name ) as TextField).htmlText = String( Math.floor( value ) );
+            if( /Num$/.test( name ) )
+                (this.getChildByName( name ) as TextField).htmlText = String( Math.floor( value ) );
+            else
+                (this.getChildByName( name ) as TextField).htmlText = value;
         };
 
         protected function setStatBar( name :String, progress :Number ) {
@@ -88,7 +91,8 @@ package coc.view {
 
         // <- statsScreenRefresh
         public function refresh() :void {
-            this.show();
+            // this.show();
+            // this.visible = true;
 
             setStatText( "coreStatsText",
                 "<b><u>Name : {NAME}</u>\nCore Stats</b>"
@@ -177,10 +181,13 @@ package coc.view {
             for each( statName in allStats ) {
                 oldStatName = _oldStatNameFor( statName );
 
-                if( this.model.player[ statName ] > this.model[ oldStatName ] ) {
+                trace( "comparing player." + statName, "and oldStats." + oldStatName, "::",
+                    this.model.player[ statName ], "<?>", this.model.oldStats[ oldStatName ] );
+
+                if( this.model.player[ statName ] > this.model.oldStats[ oldStatName ] ) {
                     this.showStatUp( statName );
                 }
-                if( this.model.player[ statName ] < this.model[ oldStatName ] ) {
+                if( this.model.player[ statName ] < this.model.oldStats[ oldStatName ] ) {
                     this.showStatDown( statName );
                 }
             }
@@ -198,22 +205,22 @@ package coc.view {
             var statUp :DisplayObject,
                 statDown :DisplayObject;
 
-            statUp = this.getChildByName( statName + 'Up' );
-            statDown = this.getChildByName( statName + 'Down' );
+            statUp = this.upDownsContainer.getChildByName( statName + 'Up' );
+            statDown = this.upDownsContainer.getChildByName( statName + 'Down' );
 
-            if( statUp ) statUp.visible = true;
-            if( statDown ) statUp.visible = false;
+            statUp.visible = true;
+            statDown.visible = false;
         };
 
         public function showStatDown( statName :String ) :void {
             var statUp :DisplayObject,
                 statDown :DisplayObject;
 
-            statUp = this.getChildByName( statName + 'Up' );
-            statDown = this.getChildByName( statName + 'Down' );
+            statUp = this.upDownsContainer.getChildByName( statName + 'Up' );
+            statDown = this.upDownsContainer.getChildByName( statName + 'Down' );
 
-            if( statUp ) statUp.visible = false;
-            if( statDown ) statUp.visible = true;
+            statUp.visible = false;
+            statDown.visible = true;
         };
     }
 }

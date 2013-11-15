@@ -32,7 +32,7 @@ function gargoylesTheShowNowOnWBNetwork():void {
 	//[Next]
 	menu();
 	addButton(0,"Next",gargoyleMeeting2);
-	this.model.time.hours++;
+	model.time.hours++;
 }
 
 //(Advance time by 1 hour) 
@@ -96,29 +96,29 @@ function breakZeChains():void {
 	outputText("\n\nThat raised more questions than it answered.  Taking things slow for now, you ask her name.\n\n\"<i>I... I am... I simply am.  What would Master call me?</i>\"");
 	
 	//[Display a textbox, into which the player can type in a name. This new value will be called " + flags[GAR_NAME] + ", henceforth. ] (Confidence +10)
-	this.mainView.nameBox.text = "";
+	mainView.nameBox.text = "";
 	menu();
 	addButton(0,"Next",nameZeGargoyle);
 }
 
 function nameZeGargoyle():void {
-	if(this.mainView.nameBox.text == "") {
+	if(mainView.nameBox.text == "") {
 		clearOutput();
 		outputText("<b>You must name her.</b>", false);
-		this.mainView.nameBox.text = "";
-		this.mainView.nameBox.visible = true;
-		this.mainView.nameBox.width = 165;
+		mainView.nameBox.text = "";
+		mainView.nameBox.visible = true;
+		mainView.nameBox.width = 165;
 		menu();
-		this.mainView.nameBox.x = this.mainView.mainText.x + 5;
+		mainView.nameBox.x = mainView.mainText.x + 5;
 		
-		this.mainView.nameBox.y = this.mainView.mainText.y + 3 + this.mainView.mainText.textHeight;
+		mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
 		
 		addButton(0,"Next",nameZeGargoyle);
 		return;
 	}
-	flags[GAR_NAME] = this.mainView.nameBox.text;
-	this.mainView.nameBox.text = "";
-	this.mainView.nameBox.visible = false;
+	flags[GAR_NAME] = mainView.nameBox.text;
+	mainView.nameBox.text = "";
+	mainView.nameBox.visible = false;
 	clearOutput();
 	outputText("\"<i>" + flags[GAR_NAME] + ",</i>\" she purrs, \"<i>" + flags[GAR_NAME] + ", " + flags[GAR_NAME] + ".  Master has interesting taste.</i>\"");
 	
@@ -220,10 +220,10 @@ function returnToCathedral(woken:Boolean = false):void {
 	}
 	menu();
 	//[b]Cathedral Interior – 06:00 –> 09:00 & 18:00 –> 21:00[/b]
-	if(this.model.time.hours <= 9 || this.model.time.hours >= 18 || woken) {
+	if(model.time.hours <= 9 || model.time.hours >= 18 || woken) {
 		if(!woken) {
 			outputText("\n\nIn the dim ");
-			if(this.model.time.hours <= 9) outputText("early morning");
+			if(model.time.hours <= 9) outputText("early morning");
 			else outputText("late evening");
 			outputText(" light streaming in from the broken windows, you see " + flags[GAR_NAME] + " poking around some of the rubble, slowly but surely making efforts to repair the damage done to the Cathedral.  Seeing you, however, she immediately drops what she was doing and ");
 			if(gargoyleConfidence() < 70) outputText("kneels before you, head bowed low.");

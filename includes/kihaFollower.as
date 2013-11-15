@@ -325,13 +325,13 @@ function kihaFriendlyGreeting(output = true):void {
 		outputText("[pg]\"<i>I-I fucked up, alright?</i>\"  she finally says after a long silence, picking her head up to look you in the eye.  \"<i>That's... that's what you came here to hear, isn't it?  You want to hear me say it, don't you!?  Well fine: you were right, and I was wrong.  I can't just go kick down Lethice's door.  I-I couldn't even get close.</i>\"  You try to comfort her, but Kiha just turns her face sharply away, refusing to let you see her as she lets out what could have been a growl... or a sob.", false);
 		outputText("[pg]\"<i>Maybe you're right... maybe we can't win.  After all... Lethice already has.</i>\"", false);
 		outputText("[pg]A part of you wants to slap her, to shake her violently and tell her that no, she's wrong.  Instead, you squeeze her tight against you and look up to the heavens.  The dragoness's islet has a clear line of sight to the open air, a perfect place for the airborne predator to take off and land.  But from here, you can clearly see the ", false);
-		if(this.model.time.hours < 20) outputText("clouds", false);
+		if(model.time.hours < 20) outputText("clouds", false);
 		else outputText("stars", false);
 		outputText(" in the sky.  You point to them, telling Kiha to look.  The dragoness does as you ask, following your pointing finger up to the sky.  After a moment, though, she harrumphs and scowls at you.", false);
 		outputText("[pg]\"<i>What the hell am I supposed to be looking at?  It's just the sky.  So what?</i>\"", false);
 		outputText("[pg]God dammit Kiha.", false);
 		outputText("[pg]You shake your head and try to explain why the ", false);
-		if(this.model.time.hours < 20) outputText("clouds", false);
+		if(model.time.hours < 20) outputText("clouds", false);
 		else outputText("stars", false);
 		outputText(" are beautiful.  You spend a few minutes pointing to a few shapes and patterns in the sky, a warrior with a shield here, a proud centaur there - you even spot a dragon.  Kiha listens with disinterest, rolling her eyes as you try to show her one of the last, immutable things of beauty left in the world.  Even the demons, you say, cannot destroy the heavens.", false);
 		outputText("[pg]\"<i>Bah!  You just watch, " + player.short + ".  The queen bitch isn't just sitting on her ass; she won't rest until the whole world's ruined!  The demons already ruined the seasons, caused an endless drought.  Who's to say they can't shoot a giant dick into the sky, or make it rain corrupted cum forever, until we're all slavering monsters?  What's to stop them, huh?</i>\"", false);
@@ -873,21 +873,21 @@ function hangOutWithKiha():void {
 		//[if @ swamp: 
 		if(!followerKiha()) {
 			outputText("Looking up from the dragoness to the treetops, you notice that Kiha's little islet has a surprisingly spacious clearing above it - probably why the dragoness chose this spot to make her home in the first place, since it's easier to take off and land without branches crashing into you every time.  You notice the ");
-			if(this.model.time.hours < 21) outputText("particularly cloudy day above you, with great pink and purple clouds drifting across the demonically-tainted horizon");
+			if(model.time.hours < 21) outputText("particularly cloudy day above you, with great pink and purple clouds drifting across the demonically-tainted horizon");
 			else outputText("stars are out, a thousand thousand little pin-pricks in the heavens", false);
 			outputText(".");
 		}
 		else {
 			outputText("Looking up from your dragoness lover, you note the particularly clear ");
-			if(this.model.time.hours < 21) outputText("day around your camp - thick pink and purple clouds are rolling lazily over the wasteland, shimmering behind the great maw of the portal");
+			if(model.time.hours < 21) outputText("day around your camp - thick pink and purple clouds are rolling lazily over the wasteland, shimmering behind the great maw of the portal");
 			else outputText("night in the wastelands.  The stars are out, as they always are at night in your part of Mareth, a thousand thousand little pin-pricks in the heavens");
 			outputText(".");
 		}
 		outputText("[pg]With your dragoness friend close at hand, what might have been an average ");
-		if(this.model.time.hours < 21) outputText("day");
+		if(model.time.hours < 21) outputText("day");
 		else outputText("night");
 		outputText(" seems suddenly romantic.  With a playful grin, you wrap an arm around Kiha's supple waist, point up to the heavens and bid her look at the ");
-		if(this.model.time.hours < 21) outputText("clouds");
+		if(model.time.hours < 21) outputText("clouds");
 		else outputText("stars");
 		outputText(".  The dragoness does as you ask, following your pointing finger up to the sky.");
 		outputText("[pg]\"<i>Hey,</i>\" she says, snuggling close in your arms.  \"<i>I remember what you said a while ago, after I... when you and I first looked up at the sky.  I've been thinking about what you said, doofus.  You're stupid sometimes... but you're not wrong.</i>\"");

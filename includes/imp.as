@@ -179,7 +179,7 @@ function sprocketImp():void {
 	//new PG
 	outputText("Satisfied, his dick slides from you and he flies away as mixed seed continues to spill from your abused body. Your limbs grow weak, and you fall from the tree with a hard thud before losing consciousness.  ", false);
 	//Take some damage
-	this.mainView.statsView.showStatDown( 'hp' );
+	mainView.statsView.showStatDown( 'hp' );
 	// hpDown.visible = true;
 	player.HP -= 10;
 	if(player.HP < 1) player.HP = 1;

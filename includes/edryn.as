@@ -446,7 +446,7 @@ function fuckEdrynNonTaur():void {
 }
 
 function edrynBar():Boolean {
-	if(flags[UNKNOWN_FLAG_NUMBER_00070] == 0 && this.model.time.hours >= 14 && this.model.time.hours <= 19 && (this.model.time.hours < 17 || flags[UNKNOWN_FLAG_NUMBER_00069] == 0))
+	if(flags[UNKNOWN_FLAG_NUMBER_00070] == 0 && model.time.hours >= 14 && model.time.hours <= 19 && (model.time.hours < 17 || flags[UNKNOWN_FLAG_NUMBER_00069] == 0))
 		return true;
 	return false;
 }

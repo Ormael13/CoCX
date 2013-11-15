@@ -37,14 +37,14 @@ mainMenu();
 
 //MainMenu - kicks player out to the main menu
 function mainMenu(e:MouseEvent = undefined):void {
-	this.mainView.eventTestInput.x = -10207.5;
-	this.mainView.eventTestInput.y = -1055.1;
+	mainView.eventTestInput.x = -10207.5;
+	mainView.eventTestInput.y = -1055.1;
 	hideStats();
 	//Reset newgame buttons
-	this.mainView.setMenuButton( MainView.MENU_NEW_MAIN, "New Game", newGameGo );
-	this.mainView.hideAllMenuButtons();
-	this.mainView.showMenuButton( MainView.MENU_NEW_MAIN );
-	this.mainView.showMenuButton( MainView.MENU_DATA );
+	mainView.setMenuButton( MainView.MENU_NEW_MAIN, "New Game", newGameGo );
+	mainView.hideAllMenuButtons();
+	mainView.showMenuButton( MainView.MENU_NEW_MAIN );
+	mainView.showMenuButton( MainView.MENU_DATA );
 	//Sets game state to 3, used for determining back functionality of save/load menu.
 	gameState = 3;
 
@@ -259,7 +259,7 @@ function toggleDebug():void
 	else 
 		debug = true;
 		
-	this.mainView.showMenuButton( MainView.MENU_DATA );
+	mainView.showMenuButton( MainView.MENU_DATA );
 	settingsScreen();
 	return;
 }
@@ -271,7 +271,7 @@ function toggleEasyModeFlag():void
 	else 
 		flags[EASY_MODE_ENABLE_FLAG] = 0;
 	settingsScreen();
-	this.mainView.showMenuButton( MainView.MENU_DATA );
+	mainView.showMenuButton( MainView.MENU_DATA );
 	settingsScreen();
 	return;	
 }
@@ -459,9 +459,9 @@ function howToPlay():void {
 
 function eventTester():void {
 	outputText("", true);
-	this.mainView.eventTestInput.x = 207.5;
-	this.mainView.eventTestInput.y = 55.1;
-	//this.mainView.eventTestInput.text = "Paste test event text here.";
+	mainView.eventTestInput.x = 207.5;
+	mainView.eventTestInput.y = 55.1;
+	//mainView.eventTestInput.text = "Paste test event text here.";
 	simpleChoices("Proceed",118,"",0,"",0,"",0,"Back",119);
 }
 	

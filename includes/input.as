@@ -1,12 +1,12 @@
 ﻿// Hooking things to MainView.
-this.mainView.onNewGameClick = newGameGo;
-this.mainView.onAppearanceClick = appearance;
-this.mainView.onDataClick = saveLoad;
-this.mainView.onLevelClick = levelUpGo;
-this.mainView.onPerksClick = displayPerks;
-this.mainView.onStatsClick = displayStats;
+mainView.onNewGameClick = newGameGo;
+mainView.onAppearanceClick = appearance;
+mainView.onDataClick = saveLoad;
+mainView.onLevelClick = levelUpGo;
+mainView.onPerksClick = displayPerks;
+mainView.onStatsClick = displayStats;
 
-this.mainView._executeButtomButtonClick = executeButtonClick;
+mainView._executeButtomButtonClick = executeButtonClick;
 
 // function buttonEvent(e:MouseEvent):void {
 // 	mouseOverText.visible = false;
@@ -67,8 +67,8 @@ function executeButtonClick(button:int = 0):void {
 
 //Hugeass keyboard parser
 function keyboard(e:KeyboardEvent):void {
-	if(this.mainView.eventTestInput.x == 207.5) return;
-	if(this.mainView.nameBox.visible && stage.focus == this.mainView.nameBox) return;
+	if(mainView.eventTestInput.x == 207.5) return;
+	if(mainView.nameBox.visible && stage.focus == mainView.nameBox) return;
     var saveFile;
 	var currEvent:Number = 0;
 	var f:MouseEvent = undefined;
@@ -86,7 +86,7 @@ function keyboard(e:KeyboardEvent):void {
 		if(e.keyCode == 37) flags[CHEAT_ENTERING_COUNTER]++;
 		else flags[CHEAT_ENTERING_COUNTER] = 0;
 	}
-	else if(flags[CHEAT_ENTERING_COUNTER] == 3 && player.str > 0 && this.mainView.getButtonText( 0 ).indexOf("Game Over") == -1) {
+	else if(flags[CHEAT_ENTERING_COUNTER] == 3 && player.str > 0 && mainView.getButtonText( 0 ).indexOf("Game Over") == -1) {
 		if(e.keyCode == 39) {
 			giveHumanizer();
 			return;
@@ -94,57 +94,57 @@ function keyboard(e:KeyboardEvent):void {
 		else flags[CHEAT_ENTERING_COUNTER] = 0;
 	}
 	//Stats Hotkey
-	if(e.keyCode == 83 && this.mainView.menuButtonIsVisible( MainView.MENU_STATS ) && player.str > 0) {
+	if(e.keyCode == 83 && mainView.menuButtonIsVisible( MainView.MENU_STATS ) && player.str > 0) {
 		displayStats(f);
 		return;
 	}
 	//Level up Hotkey
-	if(e.keyCode == 76 && this.mainView.menuButtonIsVisible( MainView.MENU_LEVEL ) && player.str > 0) {
+	if(e.keyCode == 76 && mainView.menuButtonIsVisible( MainView.MENU_LEVEL ) && player.str > 0) {
 		levelUpGo(f);
 		return;
 	}
 	//f1 pressed - save in slot 1
-	if(e.keyCode == 112 && this.mainView.menuButtonIsVisible( MainView.MENU_DATA ) && player.str > 0) {
-		this.mainView.nameBox.text = "";
+	if(e.keyCode == 112 && mainView.menuButtonIsVisible( MainView.MENU_DATA ) && player.str > 0) {
+		mainView.nameBox.text = "";
 		saveGame("CoC_1");
 		outputText("Game saved to slot 1!", true);
 		doNext(1);
 		return;
 	}
 	//f2 pressed - save in slot 2
-	if(e.keyCode == 113 && this.mainView.menuButtonIsVisible( MainView.MENU_DATA ) && player.str > 0) {
-		this.mainView.nameBox.text = "";
+	if(e.keyCode == 113 && mainView.menuButtonIsVisible( MainView.MENU_DATA ) && player.str > 0) {
+		mainView.nameBox.text = "";
 		saveGame("CoC_2");
 		outputText("Game saved to slot 2!", true);
 		doNext(1);
 		return;
 	}
 	//f3 pressed - save in slot 3
-	if(e.keyCode == 114 && this.mainView.menuButtonIsVisible( MainView.MENU_DATA ) && player.str > 0) {
-		this.mainView.nameBox.text = "";
+	if(e.keyCode == 114 && mainView.menuButtonIsVisible( MainView.MENU_DATA ) && player.str > 0) {
+		mainView.nameBox.text = "";
 		saveGame("CoC_3");
 		outputText("Game saved to slot 3!", true);
 		doNext(1);
 		return;
 	}
 	//f4 pressed - save in slot 4
-	if(e.keyCode == 115 && this.mainView.menuButtonIsVisible( MainView.MENU_DATA ) && player.str > 0) {
-		this.mainView.nameBox.text = "";
+	if(e.keyCode == 115 && mainView.menuButtonIsVisible( MainView.MENU_DATA ) && player.str > 0) {
+		mainView.nameBox.text = "";
 		saveGame("CoC_4");
 		outputText("Game saved to slot 4!", true);
 		doNext(1);
 		return;
 	}
 	//f5 pressed - save in slot 5
-	if(e.keyCode == 116 && this.mainView.menuButtonIsVisible( MainView.MENU_DATA ) && player.str > 0) {
-		this.mainView.nameBox.text = "";
+	if(e.keyCode == 116 && mainView.menuButtonIsVisible( MainView.MENU_DATA ) && player.str > 0) {
+		mainView.nameBox.text = "";
 		saveGame("CoC_5");
 		outputText("Game saved to slot 5!", true);
 		doNext(1);
 		return;
 	}
 	//f6 pressed - load slot 1
-	if(e.keyCode == 117 && this.mainView.menuButtonIsVisible( MainView.MENU_DATA )) {
+	if(e.keyCode == 117 && mainView.menuButtonIsVisible( MainView.MENU_DATA )) {
 		saveFile = SharedObject.getLocal("CoC_1","/");
 		if(saveFile.data.exists) {
 			if(loadGame("CoC_1")) {
@@ -156,7 +156,7 @@ function keyboard(e:KeyboardEvent):void {
 		}
 	}
 	//f7 pressed - load slot 2
-	if(e.keyCode == 118 && this.mainView.menuButtonIsVisible( MainView.MENU_DATA )) {
+	if(e.keyCode == 118 && mainView.menuButtonIsVisible( MainView.MENU_DATA )) {
 		saveFile = SharedObject.getLocal("CoC_2","/");
 		if(saveFile.data.exists) {
 			if(loadGame("CoC_2")) {
@@ -168,7 +168,7 @@ function keyboard(e:KeyboardEvent):void {
 		}
 	}
 	//f8 pressed - load slot 3
-	if(e.keyCode == 119 && this.mainView.menuButtonIsVisible( MainView.MENU_DATA )) {
+	if(e.keyCode == 119 && mainView.menuButtonIsVisible( MainView.MENU_DATA )) {
 		saveFile = SharedObject.getLocal("CoC_3","/");
 		if(saveFile.data.exists) {
 			if(loadGame("CoC_3")) {
@@ -180,7 +180,7 @@ function keyboard(e:KeyboardEvent):void {
 		}
 	}
 	//f9 pressed - load slot 4
-	if(e.keyCode == 120 && this.mainView.menuButtonIsVisible( MainView.MENU_DATA )) {
+	if(e.keyCode == 120 && mainView.menuButtonIsVisible( MainView.MENU_DATA )) {
 		saveFile = SharedObject.getLocal("CoC_4","/");
 		if(saveFile.data.exists) {
 			if(loadGame("CoC_4")) {
@@ -192,7 +192,7 @@ function keyboard(e:KeyboardEvent):void {
 		}
 	}
 	//f10 pressed - load slot 5
-	if(e.keyCode == 121 && this.mainView.menuButtonIsVisible( MainView.MENU_DATA )) {
+	if(e.keyCode == 121 && mainView.menuButtonIsVisible( MainView.MENU_DATA )) {
 		saveFile = SharedObject.getLocal("CoC_5","/");
 		if(saveFile.data.exists) {
 			if(loadGame("CoC_5")) {
@@ -204,65 +204,65 @@ function keyboard(e:KeyboardEvent):void {
 		}
 	}
 	//Backspace pressed! New Game!
-	if(e.keyCode == 8 && this.mainView.menuButtonIsVisible( MainView.MENU_NEW_MAIN ) && this.mainView.menuButtonHasLabel( MainView.MENU_NEW_MAIN, "Main Menu" )) {
+	if(e.keyCode == 8 && mainView.menuButtonIsVisible( MainView.MENU_NEW_MAIN ) && mainView.menuButtonHasLabel( MainView.MENU_NEW_MAIN, "Main Menu" )) {
 		//newGameGo(f);
 		mainMenu(f);
 		return;
 	}
 	//D Pressed! call data!"
-	if(e.keyCode == 68 && this.mainView.menuButtonIsVisible( MainView.MENU_DATA )) {
+	if(e.keyCode == 68 && mainView.menuButtonIsVisible( MainView.MENU_DATA )) {
 		saveLoad(f);
 		return;
 	}
 	//A pressed! call appearance!"
-	if(e.keyCode == 65 && this.mainView.menuButtonIsVisible( MainView.MENU_APPEARANCE )) {
+	if(e.keyCode == 65 && mainView.menuButtonIsVisible( MainView.MENU_APPEARANCE )) {
 		appearance(f);
 		return;
 	}
 	//N pressed! Equal to no!"
-	if(e.keyCode == 78 && this.mainView.getButtonText( 1 ) == "No" && this.mainView.buttonIsVisible( 1 )) {
+	if(e.keyCode == 78 && mainView.getButtonText( 1 ) == "No" && mainView.buttonIsVisible( 1 )) {
 		currEvent = button2Choice;
 		//eventParser(currEvent);
 		executeButtonClick(1);
 		return;
 	}
 	//Y pressed! Equal to Yes!"
-	if(e.keyCode == 89 && this.mainView.getButtonText( 0 ) == "Yes" && this.mainView.buttonIsVisible( 0 )) {
+	if(e.keyCode == 89 && mainView.getButtonText( 0 ) == "Yes" && mainView.buttonIsVisible( 0 )) {
 		currEvent = buttonEvents[0];
 		//eventParser(currEvent);
 		executeButtonClick(0);
 		return;
 	}
-	if(e.keyCode == 80 && this.mainView.menuButtonIsVisible( MainView.MENU_PERKS ) ) {
+	if(e.keyCode == 80 && mainView.menuButtonIsVisible( MainView.MENU_PERKS ) ) {
 		displayPerks(f);
 		return;
 	}
 	//If 32 pressed or 13 pressed (enter/space) - NEXT
 	if(e.keyCode == 13 || e.keyCode == 32) {
 		// b0text is at index 9.  b0Text actually sorta means b10Text...
-		if( this.mainView.buttonIsVisible( 9 ) && this.mainView.buttonTextIsOneOf( 9, [ "Nevermind", "Abandon", "Next", "Return", "Back", "Leave", "Resume" ] )) {
-			this.mainView.toolTip.hide();
+		if( mainView.buttonIsVisible( 9 ) && mainView.buttonTextIsOneOf( 9, [ "Nevermind", "Abandon", "Next", "Return", "Back", "Leave", "Resume" ] )) {
+			mainView.toolTipView.hide();
 			//mouseOverText.visible = false;
 			//eventParser(button0Choice);
 			executeButtonClick(9);
 			return;
 		}
-		if( this.mainView.buttonIsVisible( 0 ) && this.mainView.buttonTextIsOneOf( 0, [ "Next", "Return", "Back" ] )) {
-			this.mainView.toolTip.hide();
+		if( mainView.buttonIsVisible( 0 ) && mainView.buttonTextIsOneOf( 0, [ "Next", "Return", "Back" ] )) {
+			mainView.toolTipView.hide();
 			//mouseOverText.visible = false;
 			//eventParser(button1Choice);
 			executeButtonClick(0);
 			return;
 		}
-		if( this.mainView.buttonIsVisible( 4 ) && this.mainView.buttonTextIsOneOf( 4, [ "Nevermind", "Next", "Return", "Back", "Leave" ] )) {
-			this.mainView.toolTip.hide();
+		if( mainView.buttonIsVisible( 4 ) && mainView.buttonTextIsOneOf( 4, [ "Nevermind", "Next", "Return", "Back", "Leave" ] )) {
+			mainView.toolTipView.hide();
 			//mouseOverText.visible = false;
 			//eventParser(button5Choice);
 			executeButtonClick(4);
 			return;
 		}
-		if( this.mainView.buttonIsVisible( 5 ) && this.mainView.buttonTextIsOneOf( 5, [ "Next", "Return", "Back" ] )) {
-			this.mainView.toolTip.hide();
+		if( mainView.buttonIsVisible( 5 ) && mainView.buttonTextIsOneOf( 5, [ "Next", "Return", "Back" ] )) {
+			mainView.toolTipView.hide();
 			//mouseOverText.visible = false;
 			//eventParser(button6Choice);
 			executeButtonClick(5);
@@ -283,13 +283,13 @@ function keyboard(e:KeyboardEvent):void {
 	//If 1 key pressed!
 	if(e.keyCode == 49) {
 		//if(b1Text.visible == false)
-		if( ! this.mainView.buttonIsVisible( 0 ) )
+		if( ! mainView.buttonIsVisible( 0 ) )
 		{
 			trace("Key 1 pressed while inactive.");
 			return;
 		}
 		//mouseOverText.visible = false;
-		this.mainView.toolTip.hide();
+		mainView.toolTipView.hide();
 		//eventParser(currEvent);
 		executeButtonClick(0);
 		return;
@@ -297,116 +297,116 @@ function keyboard(e:KeyboardEvent):void {
 	//If 2 key pressed!
 	if(e.keyCode == 50) {
 		//if(b2Text.visible == false)
-		if( ! this.mainView.buttonIsVisible( 1 ) )
+		if( ! mainView.buttonIsVisible( 1 ) )
 		{
 			trace("Key 2 pressed while inactive.");
 			return;
 		}
 		//mouseOverText.visible = false;
-		this.mainView.toolTip.hide();
+		mainView.toolTipView.hide();
 		executeButtonClick(1);
 		return;
 	}
 	//If 3 key pressed!
 	if(e.keyCode == 51) {
 		//if(b3Text.visible == false)
-		if( ! this.mainView.buttonIsVisible( 2 ) )
+		if( ! mainView.buttonIsVisible( 2 ) )
 		{
 			trace("Key 3 pressed while inactive.");
 			return;
 		}
 		//mouseOverText.visible = false;
-		this.mainView.toolTip.hide();
+		mainView.toolTipView.hide();
 		executeButtonClick(2);
 		return;
 	}
 	//If 4 key pressed, or enter when text is "leave", "back", or "return".
 	if(e.keyCode == 52) {
 		//if(b4Text.visible == false)
-		if( ! this.mainView.buttonIsVisible( 3 ) )
+		if( ! mainView.buttonIsVisible( 3 ) )
 		{
 			trace("Key 4 pressed while inactive.");
 			return;
 		}
 		//mouseOverText.visible = false;
-		this.mainView.toolTip.hide();
+		mainView.toolTipView.hide();
 		executeButtonClick(3);
 		return;
 	}
 	if(e.keyCode == 53) {
 		//if(b5Text.visible == false)
-		if( ! this.mainView.buttonIsVisible( 4 ) )
+		if( ! mainView.buttonIsVisible( 4 ) )
 		{
 			trace("Key 5 pressed while inactive.");
 			return;
 		}
 		//mouseOverText.visible = false;
-		this.mainView.toolTip.hide();
+		mainView.toolTipView.hide();
 		executeButtonClick(4);
 		return;
 	}
 	if(e.keyCode == 54 || e.keyCode == 81) {
 		//if(b6Text.visible == false)
-		if( ! this.mainView.buttonIsVisible( 5 ) )
+		if( ! mainView.buttonIsVisible( 5 ) )
 		{
 			trace("Key 6 pressed while inactive.");
 			return;
 		}
 		//mouseOverText.visible = false;
-		this.mainView.toolTip.hide();
+		mainView.toolTipView.hide();
 		executeButtonClick(5);
 		return;
 	}
 	if(e.keyCode == 55 || e.keyCode == 87) {
 		//if(b7Text.visible == false)
-		if( ! this.mainView.buttonIsVisible( 6 ) )
+		if( ! mainView.buttonIsVisible( 6 ) )
 		{
 			trace("Key 7 pressed while inactive.");
 			return;
 		}
 		//mouseOverText.visible = false;
-		this.mainView.toolTip.hide();
+		mainView.toolTipView.hide();
 		executeButtonClick(6);
 		return;
 	}
 	if(e.keyCode == 56 || e.keyCode == 69) {
 		//if(b8Text.visible == false)
-		if( ! this.mainView.buttonIsVisible( 7 ) )
+		if( ! mainView.buttonIsVisible( 7 ) )
 		{
 			trace("Key 8 pressed while inactive.");
 			return;
 		}
 		//mouseOverText.visible = false;
-		this.mainView.toolTip.hide();
+		mainView.toolTipView.hide();
 		executeButtonClick(7);
 		return;
 	}
 	if(e.keyCode == 57 || e.keyCode == 82) {
 		//if(b9Text.visible == false)
-		if( ! this.mainView.buttonIsVisible( 8 ) )
+		if( ! mainView.buttonIsVisible( 8 ) )
 		{
 			trace("Key 9 pressed while inactive.");
 			return;
 		}
 		//mouseOverText.visible = false;
-		this.mainView.toolTip.hide();
+		mainView.toolTipView.hide();
 		executeButtonClick(8);
 		return;
 	}
 	if(e.keyCode == 48 || e.keyCode == 84) {
 		//if(b0Text.visible == false)
-		if( ! this.mainView.buttonIsVisible( 9 ) )
+		if( ! mainView.buttonIsVisible( 9 ) )
 		{
 			trace("Key 0 pressed while inactive.");
 			return;
 		}
 		//mouseOverText.visible = false;
-		this.mainView.toolTip.hide();
+		mainView.toolTipView.hide();
 		executeButtonClick(9);
 		return;
 	}
 	//Save box
-	if(e.keyCode == 68 && this.mainView.menuButtonIsVisible( MainView.MENU_DATA )) {
+	if(e.keyCode == 68 && mainView.menuButtonIsVisible( MainView.MENU_DATA )) {
 
 	}
 	
@@ -427,21 +427,21 @@ var perkList:Array = new Array(
                 data:3}*/
 ); 
  
-//var this.mainView.aCb:ComboBox = new ComboBox(); 
-//this.mainView.aCb.dropdownWidth = 200; 
-//this.mainView.aCb.width = 200; 
-//this.mainView.aCb.scaleY = 1.1;
-//this.mainView.aCb.move(-1250, -1550); 
-//this.mainView.aCb.prompt = "Choose a perk"; 
-this.mainView.aCb.dataProvider = new DataProvider(perkList); 
-this.mainView.aCb.addEventListener(Event.CHANGE, changeHandler); 
+//var mainView.aCb:ComboBox = new ComboBox(); 
+//mainView.aCb.dropdownWidth = 200; 
+//mainView.aCb.width = 200; 
+//mainView.aCb.scaleY = 1.1;
+//mainView.aCb.move(-1250, -1550); 
+//mainView.aCb.prompt = "Choose a perk"; 
+mainView.aCb.dataProvider = new DataProvider(perkList); 
+mainView.aCb.addEventListener(Event.CHANGE, changeHandler); 
  
-addChild(this.mainView.aCb);
+addChild(mainView.aCb);
 
 function changeHandler(event:Event):void { 
  	//Store perk name for later addition
  	tempPerk = ComboBox(event.target).selectedItem.label; 
-	this.mainView.aCb.move(210, 80);
+	mainView.aCb.move(210, 80);
 	outputText("You have selected the following perk:\n\n", true);
 	outputText("<b>" + tempPerk + ":</b> " + perkLongDescription(tempPerk) + "\n\nIf you would like to select this perk, click <b>Okay</b>.  Otherwise, select a new perk, or press <b>Skip</b> to make a decision later.", false);
 	simpleChoices("Okay",114,"Skip",115,"",0,"",0,"",0);
@@ -453,5 +453,5 @@ function changeHandler(event:Event):void {
     var request:URLRequest = new URLRequest(); 
     request.url = ComboBox(event.target).selectedItem.data; 
     navigateToURL(request); 
-    this.mainView.aCb.selectedIndex = -1; 
+    mainView.aCb.selectedIndex = -1; 
 }*/

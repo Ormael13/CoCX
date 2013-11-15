@@ -14,7 +14,7 @@
 function lottieAppearance(display:Boolean = true):Number {
 	if(!player.hasCock()) return 0;
 	if(player.hasStatusAffect("Met Marae") < 0) return 0;
-	if(this.model.time.hours >= 15 && this.model.time.hours <= 23) {
+	if(model.time.hours >= 15 && model.time.hours <= 23) {
 		if(flags[UNKNOWN_FLAG_NUMBER_00281] == 0) {
 			if(display) outputText("\n\nA pale-skinned pig lady emerges from the pool nearby. Her small ears flop aimlessly on top of her pink-gray curls as she shakes any remaining water off of her pale, bikini-clad body - unintentionally jiggling her E-cup breasts and chubby ass in the process.", false);
 			return 3149;

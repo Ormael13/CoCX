@@ -176,7 +176,7 @@ function hyenaJavelinAttack():void {
 			slow--;
 			player.addStatusValue("Gnoll Spear",1,1);
 			player.spe--;
-			this.mainView.statsView.showStatDown( 'spe' );
+			mainView.statsView.showStatDown( 'spe' );
 			// speDown.visible = true;
 			// speUp.visible = false;
 		}

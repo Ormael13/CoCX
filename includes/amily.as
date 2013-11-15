@@ -2394,7 +2394,7 @@ function amilyFollowerEncounter():void {
 		amilyEggStuff();
 		return;
 	}
-	if(flags[AMILY_INCEST_COUNTDOWN_TIMER] >= 30 && flags[AMILY_FOLLOWER] == 2 && (this.model.time.hours >= 11 && this.model.time.hours <= 13)) {
+	if(flags[AMILY_INCEST_COUNTDOWN_TIMER] >= 30 && flags[AMILY_FOLLOWER] == 2 && (model.time.hours >= 11 && model.time.hours <= 13)) {
 		amilyIncest();
 		return;
 	}
@@ -5871,14 +5871,14 @@ function amilyDartGo():void {
 			temp--;
 			if(player.str >= 2) {
 				player.str--;
-				this.mainView.statsView.showStatDown( "str" );
+				mainView.statsView.showStatDown( "str" );
 				// strDown.visible = true;
 				// strUp.visible = false;
 				player.addStatusValue("Amily Venom",1,1);
 			}
 			if(player.spe >= 2) {
 				player.spe--;
-				this.mainView.statsView.showStatDown( "spe" );
+				mainView.statsView.showStatDown( "spe" );
 				// speDown.visible = true;
 				// speUp.visible = false;
 				player.addStatusValue("Amily Venom",2,1);

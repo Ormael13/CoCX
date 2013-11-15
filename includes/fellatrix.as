@@ -852,8 +852,8 @@ function dominikaBlowjobs2():void {
 	fatigue(-20);
 	flags[DOMINIKA_LAST_HYPNO_SUCK_COUNT] = timesFellatrixSucked();
 	flags[DOMINIKA_TIMES_HYPNO_BJ]++;
-	this.model.time.days++;
-	this.model.time.hours = 7;
+	model.time.days++;
+	model.time.hours = 7;
 	statScreenRefresh();
 	doNext(13);
 }

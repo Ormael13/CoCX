@@ -179,10 +179,10 @@ function doCombat(eventNum:Number)
 	
 	if(eventNum == 5000) {
 		flags[IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 0;
-		this.mainView.hideMenuButton( MainView.MENU_DATA );
-		this.mainView.hideMenuButton( MainView.MENU_APPEARANCE );
-		this.mainView.hideMenuButton( MainView.MENU_PERKS );
-		this.mainView.setButton( 0, "Attack" );
+		mainView.hideMenuButton( MainView.MENU_DATA );
+		mainView.hideMenuButton( MainView.MENU_APPEARANCE );
+		mainView.hideMenuButton( MainView.MENU_PERKS );
+		mainView.setButton( 0, "Attack" );
 		var waitT:String = "Wait";
 		if(monster.hasStatusAffect("level") >= 0) waitT = "Climb";
 		outputText("", true);
@@ -2609,10 +2609,10 @@ function doCombat(eventNum:Number)
 		outputText("<b>GAME OVER</b>", true);
 		if(flags[EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "",0,"NewGamePlus",10035,"",0,"CHEAT", 1);
 		else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus",10035, "BLAH", 0, "LULZ", 0);
-		this.mainView.showMenuButton( MainView.MENU_DATA );
-		this.mainView.hideMenuButton( MainView.MENU_APPEARANCE );
-		this.mainView.hideMenuButton( MainView.MENU_LEVEL );
-		this.mainView.hideMenuButton( MainView.MENU_PERKS );
+		mainView.showMenuButton( MainView.MENU_DATA );
+		mainView.hideMenuButton( MainView.MENU_APPEARANCE );
+		mainView.hideMenuButton( MainView.MENU_LEVEL );
+		mainView.hideMenuButton( MainView.MENU_PERKS );
 		gameState = 0;
 		inDungeon = false;
 	}
@@ -2621,10 +2621,10 @@ function doCombat(eventNum:Number)
 		outputText("\n\n<b>GAME OVER</b>", false);
 		if(flags[EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "",0,"NewGamePlus",10035,"",0,"Debug Cheat", 1);
 		else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus", 10035, "BLAH", 0, "LULZ", 0);
-		this.mainView.showMenuButton( MainView.MENU_DATA );
-		this.mainView.hideMenuButton( MainView.MENU_APPEARANCE );
-		this.mainView.hideMenuButton( MainView.MENU_LEVEL );
-		this.mainView.hideMenuButton( MainView.MENU_PERKS );
+		mainView.showMenuButton( MainView.MENU_DATA );
+		mainView.hideMenuButton( MainView.MENU_APPEARANCE );
+		mainView.hideMenuButton( MainView.MENU_LEVEL );
+		mainView.hideMenuButton( MainView.MENU_PERKS );
 		gameState = 0;
 		inDungeon = false;
 	}
@@ -4492,7 +4492,7 @@ function takeDamage(damage:Number, noMod:Boolean = false):Number {
 	//Prevent negatives
 	if(player.HP - damage < 1) {
 		player.HP = 0;
-		this.mainView.statsView.showStatDown( 'hp' );
+		mainView.statsView.showStatDown( 'hp' );
 		// hpDown.visible = true;
 		if(gameState == 1 || gameState == 2) doNext(5010);
 		//Round
@@ -4508,7 +4508,7 @@ function takeDamage(damage:Number, noMod:Boolean = false):Number {
 	if(flags[MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
 		stats(0,0,0,0,0,0,int(damage/2),0);
 	}
-	this.mainView.statsView.showStatDown( 'hp' );
+	mainView.statsView.showStatDown( 'hp' );
 	// hpDown.visible = true;
 	return damage;
 }
@@ -4801,7 +4801,7 @@ function enemyAI():void {
 function clearStatuses(visibility:Boolean):void {
 	while(player.hasStatusAffect("Web") >= 0) {
 		player.spe += player.statusAffectv1("Web");
-		this.mainView.statsView.showStatUp( 'spe' );
+		mainView.statsView.showStatUp( 'spe' );
 		// speUp.visible = true;
 		// speDown.visible = false;
 		player.removeStatusAffect("Web");
@@ -4846,13 +4846,13 @@ function clearStatuses(visibility:Boolean):void {
 	if(monster.hasStatusAffect("Twu Wuv") >= 0) {
 		player.inte += monster.statusAffectv1("Twu Wuv");
 		statScreenRefresh();
-		this.mainView.statsView.showStatUp( 'inte' );
+		mainView.statsView.showStatUp( 'inte' );
 		// inteDown.visible = false;
 		// inteUp.visible = true;		
 	}
 	if(player.hasStatusAffect("Naga Venom") >= 0) {
 		player.spe += player.statusAffectv1("Naga Venom");
-		this.mainView.statsView.showStatUp( 'spe' );
+		mainView.statsView.showStatUp( 'spe' );
 		// speUp.visible = true;
 		// speDown.visible = false;
 		//stats(0,0,player.statusAffectv1("Naga Venom"),0,0,0,0,0);
@@ -4878,7 +4878,7 @@ function clearStatuses(visibility:Boolean):void {
 	if(player.hasStatusAffect("Called Shot") >= 0) {
 		player.spe += player.statusAffectv1("Called Shot");
 		
-		this.mainView.statsView.showStatUp( 'spe' );
+		mainView.statsView.showStatUp( 'spe' );
 		// speDown.visible = false;
 		// speUp.visible = true;
 		player.removeStatusAffect("Called Shot");
@@ -4921,8 +4921,8 @@ function clearStatuses(visibility:Boolean):void {
 		//Make sure nothing got out of bounds
 		stats(0,0,0,0,0,0,0,0);
 
-		this.mainView.statsView.showStatUp( 'spe' );
-		this.mainView.statsView.showStatUp( 'str' );
+		mainView.statsView.showStatUp( 'spe' );
+		mainView.statsView.showStatUp( 'str' );
 		// speUp.visible = true;
 		// strUp.visible = true;
 		player.removeStatusAffect("Anemone Venom");
@@ -4931,7 +4931,7 @@ function clearStatuses(visibility:Boolean):void {
 		player.spe += player.statusAffectv1("Gnoll Spear");
 		//Make sure nothing got out of bounds
 		stats(0,0,0,0,0,0,0,0);
-		this.mainView.statsView.showStatUp( 'spe' );
+		mainView.statsView.showStatUp( 'spe' );
 		// speUp.visible = true;
 		// speDown.visible = false;
 		player.removeStatusAffect("Gnoll Spear");
@@ -4939,7 +4939,7 @@ function clearStatuses(visibility:Boolean):void {
 	if(player.hasStatusAffect("Basilisk Compulsion") >= 0) player.removeStatusAffect("Basilisk Compulsion");
 	if(player.hasStatusAffect("BasiliskSlow") >= 0) {
 		player.spe += player.statusAffectv1("BasiliskSlow");
-		this.mainView.statsView.showStatUp( 'spe' );
+		mainView.statsView.showStatUp( 'spe' );
 		// speUp.visible = true;
 		// speDown.visible = false;
 		player.removeStatusAffect("BasiliskSlow");
@@ -5332,7 +5332,7 @@ function combatStatusesUpdate():void {
 		if(player.hasPerk("Medicine") >= 0 && rand(100) <= 14) {
 			outputText("You manage to cleanse the naga venom from your system with your knowledge of medicine!\n\n", false);
 			player.spe += player.statusAffectv1("Naga Venom");
-			this.mainView.statsView.showStatUp( 'spe' );
+			mainView.statsView.showStatUp( 'spe' );
 			// speUp.visible = true;
 			// speDown.visible = false;
 			player.removeStatusAffect("Naga Venom");
@@ -5490,10 +5490,10 @@ function regeneration(combat:Boolean = true):void {
 	}
 }
 function startCombat(monsterNum:Number):void {
-	this.mainView.hideMenuButton( MainView.MENU_DATA );
-	this.mainView.hideMenuButton( MainView.MENU_APPEARANCE );
-	this.mainView.hideMenuButton( MainView.MENU_LEVEL );
-	this.mainView.hideMenuButton( MainView.MENU_PERKS );
+	mainView.hideMenuButton( MainView.MENU_DATA );
+	mainView.hideMenuButton( MainView.MENU_APPEARANCE );
+	mainView.hideMenuButton( MainView.MENU_LEVEL );
+	mainView.hideMenuButton( MainView.MENU_PERKS );
 	//Flag the game as being "in combat"
 	gameState = 1;
 	//Clear arrays in preparation
@@ -9544,7 +9544,7 @@ function startCombat(monsterNum:Number):void {
 		monster.short = "Zetaz";
 		monster.imageName = "zetaz";
 		monster.long="Zetaz has gone from a pipsqueak to the biggest imp you've seen!  Though he has the familiar red skin, curving pointed horns, and wings you would expect to find on an imp, his feet now end in hooves, and his body is covered with thick layers of muscle.  If the dramatic change in appearance is any indication, he's had to toughen up nearly as much as yourself over the past ";
-		if(this.model.time.days < 60) monster.long += "weeks";
+		if(model.time.days < 60) monster.long += "weeks";
 		else monster.long += "months";
 		monster.long += ".  Zetaz still wears the trademark imp loincloth, though it bulges and shifts with his movements in a way that suggest a considerable flaccid size and large, full sack.  His shoulders are wrapped with studded leather and his wrists are covered with metallic bracers.  The imp has clearly invested in at least a little additional protection.  It does not look like he carries a weapon.";
 		monster.plural = false;
@@ -16729,10 +16729,10 @@ function spellMight():void {
 		player.changeStatusValue("Might",1,tempStr);
 		player.changeStatusValue("Might",2,tempTou);
 		if(player.str < 100) {
-			this.mainView.statsView.showStatUp( 'str' );
+			mainView.statsView.showStatUp( 'str' );
 			// strUp.visible = true;
 			// strDown.visible = false;
-			this.mainView.statsView.showStatUp( 'tou' );
+			mainView.statsView.showStatUp( 'tou' );
 			// touUp.visible = true;
 			// touDown.visible = false;
 		}

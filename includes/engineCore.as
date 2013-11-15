@@ -12,7 +12,7 @@ var funcs:Array = new Array();
 
 //Used for stat tracking to keep up/down arrows correct.
 var oldStats = {};
-this.model.oldStats = oldStats;
+model.oldStats = oldStats;
 oldStats.oldStr  = 0;
 oldStats.oldTou  = 0;
 oldStats.oldSpe  = 0;
@@ -23,7 +23,7 @@ oldStats.oldCor  = 0;
 oldStats.oldHP   = 0;
 oldStats.oldLust = 0;
 
-this.model.maxHP = maxHP;
+model.maxHP = maxHP;
 
 function maxHP():Number {
 	var max:Number = 0;
@@ -85,7 +85,7 @@ function HPChange(changeNum:Number, display:Boolean) {
 		{
 			if(display) outputText("You gain " + int(changeNum) + " HP.\n", false);
 			player.HP += int(changeNum);
-			this.mainView.statsView.showStatUp( 'hp' );
+			mainView.statsView.showStatUp( 'hp' );
 			// hpUp.visible = true;
 		}
 	}
@@ -166,10 +166,10 @@ function checkCondition(variable:String, op:String, test:String):Boolean
 			a = player.HP;
 			break;
 		case "hour":
-			a = this.model.time.hours;
+			a = model.time.hours;
 			break;
 		case "days":
-			a = this.model.time.days;
+			a = model.time.days;
 			break;
 		case "tallness":
 			a = player.tallness;
@@ -854,7 +854,7 @@ function parseText(text:String):String
 	
 function clearOutput():void {
 	currentText = "";
-	this.mainView.clearOutputText();
+	mainView.clearOutputText();
 }
 
 function outputText(output:String, purgeText:Boolean = false, parse = true) {
@@ -873,7 +873,7 @@ function outputText(output:String, purgeText:Boolean = false, parse = true) {
 		//if(!debug) mainText.htmlText = currentText;
 	}
 	if(debug) {
-		this.mainView.appendOutputText( currentText );
+		mainView.appendOutputText( currentText );
 	}
 }
 function perkLongDescription(perkName:String = ""):String {
@@ -1426,7 +1426,7 @@ function doubleAttackOff():void {
 
 function levelUpGo(e:MouseEvent):void {
 	hideMenus();
-	this.mainView.hideMenuButton( MainView.MENU_NEW_MAIN );
+	mainView.hideMenuButton( MainView.MENU_NEW_MAIN );
 	//Level up
 	if(player.XP >= (player.level) * 100) {
 		player.level++;
@@ -1472,9 +1472,9 @@ function perkBuyMenu():void {
 		return;
 	}
 	outputText("Please select a perk from the drop-down list, then click 'Okay'.  You can press 'Skip' to save your perk point for later.\n\n", false);
-	this.mainView.aCb.move(210, 108);
-	this.mainView.aCb.visible = true;
-	this.mainView.hideMenuButton( MainView.MENU_NEW_MAIN );
+	mainView.aCb.move(210, 108);
+	mainView.aCb.visible = true;
+	mainView.hideMenuButton( MainView.MENU_NEW_MAIN );
 	simpleChoices("Okay",0,"Skip",115,"",0,"",0,"",0);
 }
 function buildPerkList():void {
@@ -1647,7 +1647,7 @@ function buildPerkList():void {
 			perkList[perkList.length] = {label:"Resistance"};
 		}
 	}
-	this.mainView.aCb.dataProvider = new DataProvider(perkList); 
+	mainView.aCb.dataProvider = new DataProvider(perkList); 
 }
 
 function applyPerk(pName:String = ""):void {
@@ -1801,10 +1801,10 @@ function buttonText(buttonName:String):String {
 		}
 	}
 
-	return (this.mainView.getButtonText( buttonIndex ) || "NULL");
+	return (mainView.getButtonText( buttonIndex ) || "NULL");
 }
 
-this.mainView._getButtonToolTipText = getButtonToolTipText;
+mainView._getButtonToolTipText = getButtonToolTipText;
 
 // Returns a string or undefined.
 function getButtonToolTipText( buttonText :String ) :String
@@ -2588,14 +2588,14 @@ function addButton(pos:int, text:String = "", func1:Function = null, arg1 = -900
 	//set dat shit up.
 	funcs[pos] = func1;
 	args[pos] = arg1;
-	this.mainView.showBottomButton( pos, text );
+	mainView.showBottomButton( pos, text );
 	//buttonSetup( pos, text );
-	this.mainView.setOutputText( currentText );
+	mainView.setOutputText( currentText );
 }
 
 function hasButton(arg):Boolean {
 	if( arg is String )
-		return this.mainView.hasButton( arg as String );
+		return mainView.hasButton( arg as String );
 	else
 		return false;
 }
@@ -2608,7 +2608,7 @@ function removeButton(arg):void {
 
 	var buttonToRemove:int = 0;
 	if(arg is String) {
-		buttonToRemove = this.mainView.indexOfButtonWithLabel( arg as String );
+		buttonToRemove = mainView.indexOfButtonWithLabel( arg as String );
 	}
 	if(arg is Number) {
 		if(arg < 0 || arg > 9) return;
@@ -2616,7 +2616,7 @@ function removeButton(arg):void {
 	}
 	
 	_removeButtonAction( buttonToRemove );
-	this.mainView.hideBottomButton( buttonToRemove );
+	mainView.hideBottomButton( buttonToRemove );
 }
 
 
@@ -2626,9 +2626,9 @@ function menu(text1:String = "", func1:Function = null, arg1:Number = -9000, tex
 		args[ index ] = arg;
 
 		if( callback )
-			this.mainView.showBottomButton( index, label );
+			mainView.showBottomButton( index, label );
 		else
-			this.mainView.hideBottomButton( index );
+			mainView.hideBottomButton( index );
 	}
 
 	//Clear funcs & args
@@ -2646,7 +2646,7 @@ function menu(text1:String = "", func1:Function = null, arg1:Number = -9000, tex
 	_conditionallyShowButton( 8, text9, func9, arg9 );
 	_conditionallyShowButton( 9, text0, func0, arg0 );
 
-	this.mainView.setOutputText( currentText );
+	mainView.setOutputText( currentText );
 }
 
 
@@ -2694,17 +2694,17 @@ function choices(text1:String, butt1:*,
 	for (j = 0; j < 10; j += 1)
 	{
 		if(buttonEvents[j] == 0) {
-			this.mainView.hideBottomButton( j );
+			mainView.hideBottomButton( j );
 		}
 		else {
-			this.mainView.showBottomButton( j, textLabels[ j ] );
+			mainView.showBottomButton( j, textLabels[ j ] );
 		}
 
 	}
 
 	funcs = new Array();
 	args = new Array();
-	this.mainView.setOutputText( currentText );
+	mainView.setOutputText( currentText );
 }
 
 /****
@@ -2869,7 +2869,7 @@ function doYesNo(eventYes:*, eventNo:*):void {
 
 function doNext(eventNo:*):void {
 	//Prevent new events in combat from automatically overwriting a game over. 
-	if(this.mainView.getButtonText( 0 ).indexOf("Game Over") != -1) {
+	if(mainView.getButtonText( 0 ).indexOf("Game Over") != -1) {
 		trace("Do next setup cancelled by game over");
 		return;
 	}
@@ -2879,7 +2879,7 @@ function doNext(eventNo:*):void {
 }
 
 function invertGo():void{ 
-	this.mainView.invert();
+	mainView.invert();
 }
 
 //Used to update the display of statistics
@@ -2970,12 +2970,12 @@ function fatigue(mod:Number,type:Number  = 0):void {
 	}
 	player.fatigue += mod;
 	if(mod > 0) {
-		this.mainView.statsView.showStatUp( 'fatigue' );
+		mainView.statsView.showStatUp( 'fatigue' );
 		// fatigueUp.visible = true;
 		// fatigueDown.visible = false;
 	}
 	if(mod < 0) {
-		this.mainView.statsView.showStatDown( 'fatigue' );
+		mainView.statsView.showStatDown( 'fatigue' );
 		// fatigueDown.visible = true;
 		// fatigueUp.visible = false;
 	}
@@ -3339,7 +3339,7 @@ function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:Number,
 	if(player.lust < 0) player.lust = 0;
 
 	//Refresh the stat pane with updated values
-	this.mainView.statsView.showUpDown();
+	mainView.statsView.showUpDown();
 	statScreenRefresh();
 }
 function rand(max:Number):Number
@@ -3390,5 +3390,5 @@ function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):void {
 }
 
 function spriteSelect(choice:Number = 0):void {
-	this.mainView.selectSprite( choice );
+	mainView.selectSprite( choice );
 }
