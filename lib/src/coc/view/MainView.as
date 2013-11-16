@@ -19,6 +19,17 @@ package coc.view {
 
     import coc.model.GameModel;
 
+    import buttonBackground0;
+    import buttonBackground1;
+    import buttonBackground2;
+    import buttonBackground3;
+    import buttonBackground4;
+    import buttonBackground5;
+    import buttonBackground6;
+    import buttonBackground7;
+    import buttonBackground8;
+    import buttonBackground9;
+
 	public class MainView extends MovieClip {
 		// Menu button names.
 		public static const MENU_NEW_MAIN :String = 'newGame';
@@ -182,6 +193,11 @@ package coc.view {
 				b = new (bgClasses[ bi ])();
 				b.bottomIndex = bi;
 				b.name = 'b' + String( (bi + 1) % 10 ) + 'BG';
+
+				trace( "createBottomButtons:", 'button', bi, 'has', b.numChildren, 'children' );
+				for( var bci :int = 0; bci < b.numChildren; ++bci ) {
+					trace( "\t", b.getChildAt( bci ), b.getChildAt( bci ).width, b.getChildAt( bci ).height );
+				}
 
 				r = (bi / BOTTOM_BUTTON_PER_ROW_COUNT) << 0;
 				c = bi % BOTTOM_BUTTON_PER_ROW_COUNT;
