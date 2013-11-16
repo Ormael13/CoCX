@@ -1,7 +1,9 @@
 *.swf
 RECOVER_*
 Corruption-of-Champions.as3proj
-/img/*
+/img/*.png
 /bin-debug
 /debugStuff
 /CoCEd 1.0.3
+/bin
+/obj
