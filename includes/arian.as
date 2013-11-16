@@ -831,7 +831,7 @@ function arianDialogue3():void {
 //=Yes=
 function yesArianShouldMagicTeach():void {
 	clearOutput();
-	outputText("You tell " + arianMF("him","her") + " that sounds fascinating.  You'd love to learn how to cast spells the way " + arianMF("he","her") + " can, and you're grateful he wants to take you on as an apprentice.  Especially when " + arianMF("he","she") + "'s already so busy with the ones " + arianMF("he","she") + " already has.  Arian rubs the back of his neck.  \"<i><i>Sorry, [name].  But I can't actually teach you how to cast spells the same way I do....  That would take years to teach, not to mention it's very dangerous; I mean, look at what it's done to me....</i></i>\"  " + arianMF("He","She") + " smiles at you.  \"<i><i>But I could still teach you about magic in general - how to cast more spells, how to make them more powerful, the principles behind every spell....  Basically, theory that might help you in the pursuit of magical studies.  I spent my whole childhood buried in books, so I'm sure I could help you out somehow.</i></i>\"");
+	outputText("You tell " + arianMF("him","her") + " that sounds fascinating.  You'd love to learn how to cast spells the way " + arianMF("he","she") + " can, and you're grateful he wants to take you on as an apprentice.  Especially when " + arianMF("he","she") + "'s already so busy with the ones " + arianMF("he","she") + " already has.  Arian rubs the back of his neck.  \"<i><i>Sorry, [name].  But I can't actually teach you how to cast spells the same way I do....  That would take years to teach, not to mention it's very dangerous; I mean, look at what it's done to me....</i></i>\"  " + arianMF("He","She") + " smiles at you.  \"<i><i>But I could still teach you about magic in general - how to cast more spells, how to make them more powerful, the principles behind every spell....  Basically, theory that might help you in the pursuit of magical studies.  I spent my whole childhood buried in books, so I'm sure I could help you out somehow.</i></i>\"");
 	
 	outputText("\n\nYou smirk and point out that's basically what you meant, but you're definitely still interested either way.  Arian nods happily.  \"<i><i>Okay, then, where to start....</i></i>\"");
 	
@@ -999,7 +999,7 @@ function arianMagicLessons():void {
 	
 	//(if ArianMLesson >= 4)
 	if(flags[ARIAN_LESSONS] >= 4) {
-		outputText("\n\nArian raises hi" + arianMF("s","r") + " hand, stopping you in your tracks.  \"<i><i>I appreciate your enthusiasm, [name].  But first you must rest and let the lessons of the day sink in.  I promise I'll teach you more tomorrow.</i></i>\"  Arian smiles at you.");
+		outputText("\n\nArian raises " + arianMF("his","her") + " hand, stopping you in your tracks.  \"<i><i>I appreciate your enthusiasm, [name].  But first you must rest and let the lessons of the day sink in.  I promise I'll teach you more tomorrow.</i></i>\"  Arian smiles at you.");
 		
 		outputText("\n\nMaybe " + arianMF("he","she") + "'s right... you tell " + arianMF("him","her") + " you'll ask " + arianMF("him","her") + " to teach you more tomorrow and excuse yourself.");
 		doNext(13);
@@ -1715,7 +1715,7 @@ function getBlownByArian():void {
 		outputText("\n\nYou moan, agreeing that, yes, this is far more important.");
 	}
 	else {
-		outputText("\n\nAs you gasp in pleasure, you cannot help but ask if Arian's been practicing by " + arianMF("him","she") + "self while you were away.");
+		outputText("\n\nAs you gasp in pleasure, you cannot help but ask if Arian's been practicing by " + arianMF("himself","herself") + " while you were away.");
 		outputText("\n\nArian lets go of your cock, kissing its [cockHead biggest] before replying, \"<i>No, I don't need to practice on myself anymore.  I got you to help with that now, right?</i>\"  Arian plants a kiss on your [cock biggest], before slowly wrapping it around " + arianMF("his","her") + " tongue and sucking you right back into " + arianMF("his","her") + " cock-hungry maw.");
 		outputText("\n\nYou moan and tell " + arianMF("him","her") + " that as long as " + arianMF("he","she") + " keeps giving you great head, you're more than happy to help " + arianMF("him","her") + " practice.");
 	}
@@ -2509,7 +2509,7 @@ function arianDocking():void {
 	
 	outputText("\n\nArian gives you a winning grin.  \"<i>I wonder why,</i>\"  " + arianMF("he","she") + " says, rubbing at " + arianMF("his","her") + " used slit.");
 	
-	outputText("\n\nYou tell " + arianMF("him","her") + " the sex is nice, but there's other things in " + arianMF("his","her") + " favor too.  Then, you kiss " + arianMF("him","her") + " again before " + arianMF("he","she") + " can ask what those are.  While " + arianMF("he","she") + "'s left reeling, blissed out and goofy from the sexual overwhelm, you quietly slip out of " + arianMF("his","she") + " bed, pull your clothes back on and slip away, blowing " + arianMF("him","her") + " a kiss before you depart.");
+	outputText("\n\nYou tell " + arianMF("him","her") + " the sex is nice, but there's other things in " + arianMF("his","her") + " favor too.  Then, you kiss " + arianMF("him","her") + " again before " + arianMF("he","she") + " can ask what those are.  While " + arianMF("he","she") + "'s left reeling, blissed out and goofy from the sexual overwhelm, you quietly slip out of " + arianMF("his","her") + " bed, pull your clothes back on and slip away, blowing " + arianMF("him","her") + " a kiss before you depart.");
 	
 	//Player returns to camp
 	stats(0,0,0,0,0,1,-100,0);
@@ -3064,7 +3064,7 @@ function useReductoOnAriansAsshole():void {
 		
 		outputText("\n\nArian groans as you finally manage to pull your fingers out.  \"<i>I don't think it'll feel that much different when you decide to put it back there again, but I hope it'll feel good for you anyway.  Just promise you'll be gentle, ok?</i>\"");
 		
-		outputText("\n\nYou promise " + arianMF("him","she") + " that you'll take care of " + arianMF("him","her") + ".  \"<i>So, anything else you'd like to do?</i>\"");
+		outputText("\n\nYou promise " + arianMF("him","her") + " that you'll take care of " + arianMF("him","her") + ".  \"<i>So, anything else you'd like to do?</i>\"");
 		flags[ARIAN_ANAL_XP] = 1;
 	}
 	else if (flags[ARIAN_ANAL_XP] < 66) {
