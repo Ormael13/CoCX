@@ -2800,76 +2800,6 @@ function consumeItem(itemName:String, amount:Number):Boolean {
 	if(amount == 0) consumed = true;
 	return consumed;
 }
-	
-/* OLD CONSUME ITEM
-{
-	if(itemSlot1.shortName == itemName) {
-		if(itemSlot1.quantity > 0) consumed = true;
-		//Store amount in temp
-		temp = amount;
-		//Lower about by how many are used, and set to 0 if there were extra
-		amount -= itemSlot1.quantity;
-		if(amount < 0) amount = 0;
-		//Lower item slot by amount or to 0, depending on how many
-		if(temp <= itemSlot1.quantity) itemSlot1.quantity -= temp;
-		else itemSlot1.quantity = 0;
-		//If the item slot was emptied, clear that shit.
-		if(itemSlot1.quantity == 0) itemSlot1.shortName = "NULL";
-	}
-	if(itemSlot2.shortName == itemName && amount > 0) {
-		if(itemSlot2.quantity > 0) consumed = true;
-		//Store amount in temp
-		temp = amount;
-		//Lower about by how many are used, and set to 0 if there were extra
-		amount -= itemSlot2.quantity;
-		if(amount < 0) amount = 0;
-		//Lower item slot by amount or to 0, depending on how many
-		if(temp <= itemSlot2.quantity) itemSlot2.quantity -= temp;
-		else itemSlot2.quantity = 0;
-		//If the item slot was emptied, clear that shit.
-		if(itemSlot2.quantity == 0) itemSlot2.shortName = "NULL";
-	}
-	if(itemSlot3.shortName == itemName && amount > 0) {
-		if(itemSlot3.quantity > 0) consumed = true;
-		//Store amount in temp
-		temp = amount;
-		//Lower about by how many are used, and set to 0 if there were extra
-		amount -= itemSlot3.quantity;
-		if(amount < 0) amount = 0;
-		//Lower item slot by amount or to 0, depending on how many
-		if(temp <= itemSlot3.quantity) itemSlot3.quantity -= temp;
-		else itemSlot3.quantity = 0;
-		//If the item slot was emptied, clear that shit.
-		if(itemSlot3.quantity == 0) itemSlot3.shortName = "NULL";
-	}
-	if(itemSlot4.shortName == itemName && amount > 0) {
-		if(itemSlot4.quantity > 0) consumed = true;
-		//Store amount in temp
-		temp = amount;
-		//Lower about by how many are used, and set to 0 if there were extra
-		amount -= itemSlot4.quantity;
-		if(amount < 0) amount = 0;
-		//Lower item slot by amount or to 0, depending on how many
-		if(temp <= itemSlot4.quantity) itemSlot4.quantity -= temp;
-		else itemSlot4.quantity = 0;
-		//If the item slot was emptied, clear that shit.
-		if(itemSlot4.quantity == 0) itemSlot4.shortName = "NULL";
-	}
-	if(itemSlot5.shortName == itemName && amount > 0) {
-		if(itemSlot5.quantity > 0) consumed = true;
-		//Store amount in temp
-		temp = amount;
-		//Lower about by how many are used, and set to 0 if there were extra
-		amount -= itemSlot5.quantity;
-		if(amount < 0) amount = 0;
-		//Lower item slot by amount or to 0, depending on how many
-		if(temp <= itemSlot5.quantity) itemSlot5.quantity -= temp;
-		else itemSlot5.quantity = 0;
-		//If the item slot was emptied, clear that shit.
-		if(itemSlot5.quantity == 0) itemSlot5.shortName = "NULL";
-	}
-	return consumed;
-}*/
 
 //Check for if the player has X item less than to Y quantity
 function hasLessItems(itemName:String, maxQuantity:Number):Boolean {
@@ -2882,6 +2812,7 @@ function hasLessItems(itemName:String, maxQuantity:Number):Boolean {
 	if(counted < maxQuantity) return true;
 	return false;
 }
+
 function destroyItems(itemName:String, minQuantity:Number):Boolean {
 	if(itemSlot1.shortName == itemName) {
 		while(itemSlot1.quantity > 0 && minQuantity > 0) {
@@ -2960,7 +2891,7 @@ function vitalityTincture():void {
 	//tou change
 	stats(0, temp, 0, 0, 0, 0, 0, 0);
 	//Chance of fitness change
-	if(HPChange(50), false) outputText("  Any aches, pains and bruises you have suffered no longer hurt and you feel much better.", false);
+	if(HPChange(50, false)) outputText("  Any aches, pains and bruises you have suffered no longer hurt and you feel much better.", false);
 	if(rand(3) == 0) outputText(player.modTone(95,3), false);
 }
 //Scholar's Tea
