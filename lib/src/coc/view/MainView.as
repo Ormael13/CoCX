@@ -71,6 +71,14 @@ package coc.view {
 
 		protected var model :GameModel;
 
+		public var
+			newGameBG :MovieClip, 
+			dataBG :MovieClip, 
+			statsBG :MovieClip, 
+			levelBG :MovieClip, 
+			perksBG :MovieClip, 
+			appearanceBG :MovieClip;
+
 		public function MainView( model :GameModel, options :Object = null ) :void {
 			// Note: Currently we can't touch this on construction
 			// due to the code being a mess.  We'll fix that at some point.
@@ -107,7 +115,7 @@ package coc.view {
 
 			// button bgs.  This part too will eventually go away...
 			this.menuButtonBGs = [
-					newGameBG, dataBG, statsBG, levelBG, perksBG, appearanceBG
+				newGameBG, dataBG, statsBG, levelBG, perksBG, appearanceBG
 				];
 				
 			createBottomButtons();
