@@ -2156,6 +2156,9 @@ package classes
 			return -1;
 		}
 		
+		// Note: DogCocks/FoxCocks are functionally identical. They actually change back and forth depending on some
+		// of the PC's attributes, and this is recaluculated every hour spent at camp.
+		// As such, delineating between the two is kind of silly.
 		//How many dogCocks
 		public function dogCocks():int
 		{
@@ -2164,12 +2167,21 @@ package classes
 			while (counter > 0)
 			{
 				counter--;
-				if (cocks[counter].cockType == CockTypesEnum.DOG)
+				if (cocks[counter].cockType == CockTypesEnum.DOG || cocks[counter].cockType == CockTypesEnum.FOX)
 					dogCockC++;
 			}
 			return dogCockC;
 		}
 		
+		//How many foxCocks
+		public function foxCocks():int
+		{
+			
+			return dogCocks();
+		}
+
+		
+
 		//How many dragonCocks
 		public function dragonCocks():int
 		{
@@ -2182,20 +2194,6 @@ package classes
 					dragonCockC++;
 			}
 			return dragonCockC;
-		}
-		
-		//How many dragonCocks
-		public function foxCocks():int
-		{
-			var foxCockCounter:int = 0;
-			var cockIdxPtr:int = cocks.length;
-			while (cockIdxPtr > 0)
-			{
-				cockIdxPtr--;
-				if (cocks[cockIdxPtr].cockType == CockTypesEnum.FOX)
-					foxCockCounter++;
-			}
-			return foxCockCounter;
 		}
 		
 		//How many normalCocks
@@ -2845,4 +2843,5 @@ package classes
 		}
 	}
 }
+
 

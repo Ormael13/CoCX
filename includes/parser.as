@@ -13,12 +13,13 @@ Conditional statements:
 	[if (condition) OUTPUT_IF_TRUE | OUTPUT_IF_FALSE]		
 	// Note - Implicit else indicated by presence of the "|"
 
-Planned, but not implemented yet:
-	
-	[desc|DESC_NAME]										// queries a description parameter
-	// Get specific attribute of item/char/whatever "desc"
+// Object aspect descriptions
+	[object aspect]										
+	// gets the description of aspect "aspect" of object/NPC/PC "object"
 	// Eventually, I want this to be able to use introspection to access class attributes directly
-	// Maybe even manipulate them, though I haven't thought that wout much at the moment.
+	// Maybe even manipulate them, though I haven't thought that out much at the moment.
+
+Planned, but not implemented yet:
 
 	[screen (SCREEN_NAME) | screen text]					
 	// creates a new screen/page. 
@@ -55,7 +56,7 @@ var singleArgConverters:Object =
 		"sheath"		: function():* { return sheathDesc(); },
 		"chest"			: function():* { return chestDesc(); },
 		"fullchest"		: function():* { return allChestDesc(); },
-		"hips"			: function():* {return hipDescript();},
+		"hips"			: function():* { return hipDescript();},
 		"butt"			: function():* { return buttDescript();},
 		"ass"			: function():* { return buttDescript();},
 		"nipple"		: function():* { return nippleDescript(0);},
@@ -74,18 +75,16 @@ var singleArgConverters:Object =
 		// already handled in the various *Descript() functions.
 		// no need to duplicate them.
 		"cunt"			: function():* { return vaginaDescript(); },
-		"cocks"			: function():* { return multiCockDescriptLight(); },
 		"pussy"			: function():* { return vaginaDescript(); },
 		"vagina"		: function():* { return vaginaDescript(); },
 		"vag"			: function():* { return vaginaDescript(); },
 		"clit"			: function():* { return clitDescript(); },
 		"cock"			: function():* {return cockDescript(0);},
-		"eachcock"		: function():* {return sMultiCockDesc();},
-		"eachcock"		: function():* {return SMultiCockDesc();},
-		"onecock"		: function():* {return oMultiCockDesc();},
-		"onecock"		: function():* {return OMultiCockDesc();},
-		"cockhead"		: function():* {return cockHead(0);},
-		"vagorass"		: function():* {if (player.hasVagina())return vaginaDescript(); else assholeDescript();}
+		"cocks"			: function():* { return multiCockDescriptLight(); },
+		"eachcock"		: function():* { return sMultiCockDesc();},
+		"onecock"		: function():* { return oMultiCockDesc();},
+		"cockhead"		: function():* { return cockHead(0);},
+		"vagorass"		: function():* { if (player.hasVagina())return vaginaDescript(); else assholeDescript();}
 
 }
 
@@ -116,14 +115,16 @@ function convertSingleArg(arg:String):String
 	return argResult;
 }	
 
-// PRONOUNS: The parser uses Spivak Pronouns specifically to allow characters to be written with non-specific genders.
+// PRONOUNS: The parser uses Elverson/Spivak Pronouns specifically to allow characters to be written with non-specific genders.
 // http://en.wikipedia.org/wiki/Spivak_pronoun
 //
 // Cheat Table:
-// Subject    | Object       | Possessive Adjective | Possessive Pronoun | Reflexive       |
-// ey laughs  | I hugged em  | eir heart warmed     | that is eirs       | ey loves emself |
+//           | Subject    | Object       | Possessive Adjective | Possessive Pronoun | Reflexive         |
+// Agendered | ey laughs  | I hugged em  | eir heart warmed     | that is eirs       | ey loves emself   |
+// Masculine | he laughs  | I hugged him | his heart warmed     | that is his        | he loves himself  |
+// Feminine  | she laughs | I hugged her | her heart warmed     | that is hers       | she loves herself |
 
-var arianLookups:Object = 
+var arianLookups:Object = // For subject: "arian" 
 {
 	"ey"		: function():* {return arianMF("he","she")},
 	"em"		: function():* {return arianMF("him","her")},
@@ -132,7 +133,7 @@ var arianLookups:Object =
 	"emself"	: function():* {return arianMF("himself","herself")}
 }
 
-var rubiLookups:Object = 
+var rubiLookups:Object = // For subject: "rubi"
 {
 	"ey"		: function():* {return rubiMF("he","she")},
 	"em"		: function():* {return rubiMF("him","her")},
@@ -141,12 +142,106 @@ var rubiLookups:Object =
 	"emself"	: function():* {return rubiMF("himself","herself")}
 }
 
-var charLookups:Object = 
+// PC ASCII Aspect lookups
+
+var cockLookups:Object = // For subject: "cock"
 {
+	"all"		: function():*{ return multiCockDescriptLight(); },
+	"each"		: function():*{ return sMultiCockDesc(); },
+	"one"		: function():*{ return oMultiCockDesc(); },
+	"largest"	: function():*{ return cockDescript(player.biggestCockIndex()); },
+	"biggest"	: function():*{ return cockDescript(player.biggestCockIndex()); },
+	"smallest"	: function():*{ return cockDescript(player.smallestCockIndex()); },
+	"longest"	: function():*{ return cockDescript(player.longestCock()); },
+	"shortest"	: function():*{ return cockDescript(player.shortestCockIndex()); }
+}
+
+
+var cockHeadLookups:Object = // For subject: "cockHead"
+{
+	"biggest"	: function():*{ return cockHead(player.biggestCockIndex()); },
+	"largest"	: function():*{ return cockHead(player.biggestCockIndex()); },
+	"smallest"	: function():*{ return cockHead(player.smallestCockIndex()); },
+	"longest"	: function():*{ return cockHead(player.longestCock()); },			// the *head* of a cock has a length? Wut?
+	"shortest"	: function():*{ return cockHead(player.shortestCockIndex()); }
+}
+
+
+// These tags take a two-word tag with a **numberic** attribute for lookup.
+// [object NUMERIC-attribute]
+// if "NUMERIC-attribute" can be cast to a Number, the parser looks for "object" in twoWordNumericTagsLookup.
+// If it finds twoWordNumericTagsLookup["object"], it calls the anonymous function stored with said key "object"
+// like so: twoWordNumericTagsLookup["object"](Number("NUMERIC-attribute"))
+//
+// if attribute cannot be case to a number, the parser looks for "object" in twoWordTagsLookup.
+var twoWordNumericTagsLookup:Object = 
+{
+		"cockfit":
+			function(aspect):*
+			{
+				if(!player.hasCock()) return "<b>(Attempt to parse cock when none present.)</b>";
+				else 
+				{
+					if(player.cockThatFits(aspect) >= 0) return cockDescript(player.cockThatFits(aspect));
+					else return cockDescript(player.smallestCockIndex());
+				}
+			},
+		"cockfit2":
+			function(aspect):*
+			{
+				if(!player.hasCock()) return "<b>(Attempt to parse cock when none present.)</b>";
+				else {
+					if(player.cockThatFits2(aspect) >= 0) return cockDescript(player.cockThatFits2(aspect));
+					else return cockDescript(player.smallestCockIndex());
+				}
+			},
+		"cockheadfit":
+			function(aspect):*
+			{
+			
+				if(!player.hasCock()) return "<b>(Attempt to parse cockhead when none present.)</b>";
+				else {
+					if(player.cockThatFits(aspect) >= 0) return cockHead(player.cockThatFits(aspect));
+					else return cockHead(player.smallestCockIndex());
+				}
+			},
+		"cockheadfit2":
+			function(aspect):*
+			{
+				if(!player.hasCock()) return "<b>(Attempt to parse cockhead when none present.)</b>";
+				else {
+					if(player.cockThatFits2(aspect) >= 0) return cockHead(player.cockThatFits2(aspect));
+					else return cockHead(player.smallestCockIndex());
+				}
+			},
+		"cock":
+			function(aspect):*
+			{
+				if(!player.hasCock()) return "<b>(Attempt to parse cock when none present.)</b>";
+				else
+				{
+					if(aspect-1 >= 0 && aspect-1 < player.cockTotal()) return cockDescript(aspect - 1);
+					else return "<b>(Attempt To Parse CockDescript for Invalid Cock)</b>";
+				}
+			}
+
+}
+
+// These tags take an ascii attribute for lookup.
+// [object attribute]
+// if attribute cannot be case to a number, the parser looks for "object" in twoWordTagsLookup,
+// and then uses the corresponding object to determine the value of "attribute", by looking for 
+// "attribute" twoWordTagsLookup["object"]["attribute"]
+var twoWordTagsLookup:Object = 
+{
+	// NPCs:
 	"rubi"		: rubiLookups,
-	"arian"		: arianLookups
+	"arian"		: arianLookups,
 
+	// PC Attributes:
 
+	"cock"		: cockLookups,
+	"cockHead"	: cockHeadLookups
 }
 
 function convertDoubleArg(arg:String):String
@@ -154,22 +249,61 @@ function convertDoubleArg(arg:String):String
 	var debug = false;
 	var argResult:String;
 
-	var capitalize:Boolean = isUpperCase(arg.charAt(0));
-	arg = arg.toLowerCase()
 
 	var argTemp = arg.split(" ");
-	trace("Argtemp = ", argTemp);
-
-	/*
-	if (arg in singleArgConverters)
+	if (argTemp.length != 2)
 	{
-		if (debug) trace("Found corresponding anonymous function");
-		argResult = singleArgConverters[arg]();
-		if (debug) trace("Called, return = ", argResult);
+		argResult = "<b>!Not actually a two-word tag!\"" + arg + "\"!</b>"
 	}
+	var subject = argTemp[0];
+	var aspect = argTemp[1];
+
+	// Figure out if we need to capitalize the resulting text
+	var capitalize:Boolean = isUpperCase(aspect.charAt(0));
+	subject = subject.toLowerCase()
+	aspect = aspect.toLowerCase()
+
+
+	var arg;
+
+	// Only perform lookup in twoWordNumericTagsLookup if aspect can be cast to a valid number
+	if (!isNaN(Number(aspect)))
+	{
+
+		if (subject in twoWordNumericTagsLookup)
+		{
+			aspect = Number(aspect);
+
+			if (debug) trace("Found corresponding anonymous function");
+			argResult = twoWordNumericTagsLookup[subject](aspect);
+			if (debug) trace("Called, return = ", argResult);
+		}
+		else
+			return "<b>!Unknown subject in two-word tag \"" + arg + "\"! Subject = \"" + subject + ", Numeric Aspect = " + aspect + "\</b>";
+	}
+	// aspect isn't a number. Look for subject in the normal twoWordTagsLookup
 	else
-		return "<b>!Unknown tag \"" + arg + "\"!</b>";
-	*/
+	{
+		if (subject in twoWordTagsLookup)
+		{
+			if (aspect in twoWordTagsLookup[subject])
+			{
+
+				if (debug) trace("Found corresponding anonymous function");
+				argResult = twoWordTagsLookup[subject][aspect]();
+				if (debug) trace("Called, return = ", argResult);
+			}
+			else
+				return "<b>!Unknown aspect in two-word tag \"" + arg + "\"! ASCII Aspect = \"" + aspect + "\"</b>";
+
+		}
+		else
+			return "<b>!Unknown subject in two-word tag \"" + arg + "\"! Subject = \"" + subject + ", ASCII Aspect = " + aspect + "\</b>";
+
+	}
+
+
+	
 
 	if (capitalize)
 		argResult = capitalizeFirstWord(argResult);
@@ -470,7 +604,7 @@ function parseConditional(textCtnt:String, depth:int):String
 // if not, it simply returns the contents as passed
 function evalBracketContents(textCtnt:String, depth:int):String
 {
-	var debug = true;
+	var debug = false;
 	var retStr:String = "";
 	if (debug) trace("Evaluating string: ", textCtnt);
 

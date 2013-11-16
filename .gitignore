@@ -2,4 +2,6 @@
 RECOVER_*
 Corruption-of-Champions.as3proj
 /img/*
-/bin-debug/
+/bin-debug
+/debugStuff
+/CoCEd 1.0.3

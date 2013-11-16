@@ -653,22 +653,28 @@ function rubiSexMenu():void {
 	var titfuck:int = 0;
 	var give:int = 0;
 	if(player.lust >= 33) {
-		if(player.hasCock() || (player.hasVagina() && player.clitLength >= 4)) fuck = 3899;
+		if(player.hasCock() || (player.hasVagina() && player.clitLength >= 4)) 
+			fuck = 3899;
 		if(player.hasKeyItem("Deluxe Dildo") >= 0) dildo = 3900;
 	}
 	if(flags[RUBI_BLU_BALLS] > 0 && flags[RUBI_ORGASM_DENIAL] > 0 && !rubiBimbo()) releas = 3902;
 	
 	menu();
-	if(fuck > 0) addButton(0,"Fuck",eventParser,fuck);
-	if(dildo > 0) addButton(1,"Dildo Fuck",eventParser,dildo);
+	if(fuck > 0) 
+		addButton(0,"Fuck",eventParser,fuck);
+	if(dildo > 0) 
+		addButton(1,"Dildo Fuck",eventParser,dildo);
 	addButton(2," Tease ",eventParser,3901);
-	if(releas > 0 && flags[RUBI_COCK_SIZE] > 0) addButton(3,"Release",eventParser,releas);
-	if(flags[RUBI_AFFECTION] >= 75 && rubiCapacity() < player.biggestCockArea() && player.hasCock()) addButton(4,"Train",anallyTrainYourBitchBoySlutHowToBeAnalForDCL);
+	if(releas > 0 && flags[RUBI_COCK_SIZE] > 0) 
+		addButton(3,"Release",eventParser,releas);
+	if(flags[RUBI_AFFECTION] >= 75 && rubiCapacity() < player.biggestCockArea() && player.hasCock()) 
+		addButton(4,"Train",anallyTrainYourBitchBoySlutHowToBeAnalForDCL);
 	//Get Fucked
 	//PC gets fucked by Rubi
 	//Rubi must have at least a 5" cock
 	//Requires 75 Affection
-	if(flags[RUBI_AFFECTION] >= 75 && flags[RUBI_COCK_SIZE] >= 5) addButton(5,"Get Fucked",getFuckedByRubi);
+	if(flags[RUBI_AFFECTION] >= 75 && flags[RUBI_COCK_SIZE] >= 5) 
+		addButton(5,"Get Fucked",getFuckedByRubi);
 	//Hotdogging
 	//PC hotdogs Rubi's ass
 	//PC must have a penis
