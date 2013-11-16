@@ -194,11 +194,6 @@ package coc.view {
 				b.bottomIndex = bi;
 				b.name = 'b' + String( (bi + 1) % 10 ) + 'BG';
 
-				trace( "createBottomButtons:", 'button', bi, 'has', b.numChildren, 'children' );
-				for( var bci :int = 0; bci < b.numChildren; ++bci ) {
-					trace( "\t", b.getChildAt( bci ), b.getChildAt( bci ).width, b.getChildAt( bci ).height );
-				}
-
 				r = (bi / BOTTOM_BUTTON_PER_ROW_COUNT) << 0;
 				c = bi % BOTTOM_BUTTON_PER_ROW_COUNT;
 
