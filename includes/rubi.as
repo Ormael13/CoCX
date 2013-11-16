@@ -257,7 +257,7 @@ function approachRubiScenes():void {
 			//(Waitress Outfit (Bimbo))
 			outputText(rubiMF("He","She") + "'s dressed in " + rubiMF("his","her") + " usual waitress uniform: a pink blouse and skirt covered by a frilly white apron.");
 			if(flags[RUBI_BREAST_SIZE] >= 4) outputText("  Rubi's breasts strain against the tight blouse, threatening to pop a button at any moment.");
-			if(flags[RUBI_COCK_SIZE] >= 9) outputText("  You notice Rubi holds " + rubiMF("himself","herself") + " a little awkwardly, and it's only when " + arianMF("he","she") + " sits down that you spy the slight bulge in " + arianMF("his","her") + " skirt.");
+			if(flags[RUBI_COCK_SIZE] >= 9) outputText("  You notice Rubi holds " + rubiMF("himself","herself") + " a little awkwardly, and it's only when " + rubiMF("he","she") + " sits down that you spy the slight bulge in " + rubiMF("his","her") + " skirt.");
 		}
 		//(Suit Clothes (Normal))
 		else if(select == 2) {
