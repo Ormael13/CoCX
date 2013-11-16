@@ -1,10 +1,9 @@
-
+﻿
 /*
-syntax:
+Parser Syntax:
 
 // Querying simple PC stat nouns:
 	[noun]
-
 
 Conditional statements:
 // Simple if statement:
@@ -18,6 +17,18 @@ Conditional statements:
 	// gets the description of aspect "aspect" of object/NPC/PC "object"
 	// Eventually, I want this to be able to use introspection to access class attributes directly
 	// Maybe even manipulate them, though I haven't thought that out much at the moment.
+
+// Gender Pronoun Weirdness:
+// PRONOUNS: The parser uses Elverson/Spivak Pronouns specifically to allow characters to be written with non-specific genders.
+// http://en.wikipedia.org/wiki/Spivak_pronoun
+//
+// Cheat Table:
+//           | Subject    | Object       | Possessive Adjective | Possessive Pronoun | Reflexive         |
+// Agendered | ey laughs  | I hugged em  | eir heart warmed     | that is eirs       | ey loves emself   |
+// Masculine | he laughs  | I hugged him | his heart warmed     | that is his        | he loves himself  |
+// Feminine  | she laughs | I hugged her | her heart warmed     | that is hers       | she loves herself |
+
+
 
 Planned, but not implemented yet:
 
@@ -67,9 +78,10 @@ var singleArgConverters:Object =
 		"agility"		: function():* { return "[Agility]"; },
 		"master"		: function():* { return player.mf("master","mistress"); },
 		"master"		: function():* { return player.mf("Master","Mistress"); },
-		"his"			: function():* { return player.mf("his","her"); },
+		
 		"he"			: function():* { return player.mf("he","she"); },
 		"him"			: function():* { return player.mf("him","her"); },
+		"his"			: function():* { return player.mf("his","hers"); },
 
 		// all the errors related to trying to parse stuff if not present are
 		// already handled in the various *Descript() functions.
@@ -124,23 +136,50 @@ function convertSingleArg(arg:String):String
 // Masculine | he laughs  | I hugged him | his heart warmed     | that is his        | he loves himself  |
 // Feminine  | she laughs | I hugged her | her heart warmed     | that is hers       | she loves herself |
 
+// (Is it bad that half my development time so far has been researching non-gendered nouns? ~~~~Fake-Name)
+
+
 var arianLookups:Object = // For subject: "arian" 
 {
+	"man"		: function():* {return arianMF("man","woman")},	
+	// argh! "Man" is the mass-noun for humanity, and I'm loathe to choose an even more esoteric variant. 
+	// Elverson/Spivak terminology is already esoteric enough, and it lacks a ungendered mass noun.
+
 	"ey"		: function():* {return arianMF("he","she")},
 	"em"		: function():* {return arianMF("him","her")},
 	"eir"		: function():* {return arianMF("his","her")},
 	"eirs"		: function():* {return arianMF("his","hers")},
-	"emself"	: function():* {return arianMF("himself","herself")}
+	"emself"	: function():* {return arianMF("himself","herself")},
+
+	"chestadj"	: function():* {return arianChestAdjective()},
+	"chest"		: function():* {return arianChest()}
 }
+// Arian unhandled terms (I have not decided how to support them yet):
+// arianMF("mas","mis") 
+// arianMF("master","mistress") 
+// arianMF("male","girly") 
+
+
 
 var rubiLookups:Object = // For subject: "rubi"
 {
+	"man"		: function():* {return rubiMF("man","woman")},	
+
 	"ey"		: function():* {return rubiMF("he","she")},
 	"em"		: function():* {return rubiMF("him","her")},
 	"eir"		: function():* {return rubiMF("his","her")},
 	"eirs"		: function():* {return rubiMF("his","hers")},
-	"emself"	: function():* {return rubiMF("himself","herself")}
+	"emself"	: function():* {return rubiMF("himself","herself")},
+
+	"cock"		: function():* {return rubiCock()},
+	"breasts"	: function():* {return rubiBreasts()}
+
 }
+//Rubi unhandled terms :
+// rubiMF("boy","girl")
+// rubiMF("demon","demoness")
+// rubiMF("gentleman","lady")
+
 
 // PC ASCII Aspect lookups
 
@@ -260,9 +299,9 @@ function convertDoubleArg(arg:String):String
 
 	// Figure out if we need to capitalize the resulting text
 	var capitalize:Boolean = isUpperCase(aspect.charAt(0));
+
 	subject = subject.toLowerCase()
 	aspect = aspect.toLowerCase()
-
 
 	var arg;
 
@@ -619,7 +658,7 @@ function evalBracketContents(textCtnt:String, depth:int):String
 	}
 	else
 	{
-		trace("Not an if statement")
+		if (debug) trace("Not an if statement")
 			// Match a single word, with no leading or trailing space
 		var singleWordTagRegExp:RegExp = /^\w+$/;
 		var doubleWordTagRegExp:RegExp = /^\w+\s\w+$/;
@@ -712,12 +751,12 @@ function recParser(textCtnt:String, depth:int = 0):String
 				postfixTmp = textCtnt.substring(i+1, textCtnt.length);
 				if (postfixTmp.indexOf("[") != -1)
 				{
-					trace("Need to parse trailing text", postfixTmp)
+					if (debug) trace("Need to parse trailing text", postfixTmp)
 					retStr += recParser(postfixTmp, depth);	// Parse the trailing text (if any)
 				}
 				else
 				{
-					trace("No brackets in trailing text", postfixTmp)
+					if (debug) trace("No brackets in trailing text", postfixTmp)
 					retStr += postfixTmp;
 				}
 				

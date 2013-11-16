@@ -173,7 +173,7 @@ function doThatTestingThang():void
 
 
 	outputText("\n\n");
-	outputText("Gender Stuff! [His], [his], [Him], [him], [his], [His]\n");
+	outputText("Gender Stuff! [He], [he], [His], [his], [Him], [him], [his], [His]\n");
 	outputText("Gender Stuff! [rubi ey], [rubi eir], [rubi eirs], [rubi emself]\n");
 	outputText("Gender Stuff! [rubi Ey], [rubi Eir], [rubi Eirs], [rubi Emself]\n");
 	outputText("Gender Stuff! [arian ey], [arian eir], [arian eirs], [arian emself]\n");
@@ -186,6 +186,9 @@ function doThatTestingThang():void
 	outputText("Complex IF Statement thing: [if (hasCock = true) [cock] stiffening IFSTUFF [if (hasVagina = true) [vagina] starting to burn with need] IFSTUFFDONE][if (isHerm = true) and ][if (hasVagina = true) [vagina] starting to burn with need]");
 	outputText("\n\n");
 
+	
+	outputText("[arian chest] , [arian chestAdj], [rubi breasts], [rubi cock]");
+	outputText("\n\n");
 	
 }
 
@@ -220,7 +223,8 @@ function settingsScreen():void
 		outputText("Silly Mode <b>Off</b>\n	You're an incorrigable stick-in-the-mud with no sense of humor.", false);
 
 	outputText("\n\n", false);
-	outputText("<b>The following flags are not fully implemeneted yet (e.g. they don't apply in <i>all</i> cases where they could be relevant).</b>", false);
+	outputText("<b>The following flags are not fully implemeneted yet (e.g. they don't apply in <i>all</i> cases where they could be relevant).</b>\n", false);
+	outputText("Additional note: You <b>must</b> be <i>in a game session</i> (e.g. load your save, hit \"Main Menu\", change the flag settings, and then hit \"Resume\") to change these flags. They're saved into the saveGame file, so if you load a save, it will clear them to the state in that save.", false);
 	outputText("\n\n", false);
 
 	if(flags[LOW_STANDARDS_FOR_ALL]) 

@@ -588,6 +588,73 @@ def findFunctionsWithoutExit():
 					print func
 			
 
+def pronouninate():
+	filelist = ["arian.as", "rubi.as"]
+
+
+
+
+
+
+
+
+
+
+	repDict = {
+
+
+
+		
+		re.compile(r"\"\s?\+\s?arianMF\(\"He\",\"She\"\)\s?\+\s?\"") : "[Arian Ey]",
+		re.compile(r"\"\s?\+\s?arianMF\(\"he\",\"she\"\)\s?\+\s?\"") : "[Arian ey]",
+		re.compile(r"\"\s?\+\s?arianMF\(\"He\",\"She\"\)\s?\+\s?\"") : "[Arian ey]",
+		re.compile(r"\"\s?\+\s?arianMF\(\"him\",\"her\"\)\s?\+\s?\"") : "[Arian em]",
+		re.compile(r"\"\s?\+\s?arianMF\(\"himself\",\"herself\"\)\s?\+\s?\"") : "[Arian emself]",
+		re.compile(r"\"\s?\+\s?arianMF\(\"His\",\"Her\"\)\s?\+\s?\"") : "[Arian Eir]",
+		re.compile(r"\"\s?\+\s?arianMF\(\"his\",\"her\"\)\s?\+\s?\"") : "[Arian eir]",
+		re.compile(r"\"\s?\+\s?arianMF\(\"His\",\"Hers\"\)\s?\+\s?\"") : "[Arian Eirs]",
+		re.compile(r"\"\s?\+\s?arianMF\(\"his\",\"hers\"\)\s?\+\s?\"") : "[Arian eirs]",
+		re.compile(r"\"\s?\+\s?arianMF\(\"man\",\"woman\"\)\s?\+\s?\"") : "[Arian man]",
+
+		re.compile(r"\"\s?\+\s?rubiMF\(\"he\",\"she\"\)\s?\+\s?\"") : "[rubi ey]",
+		re.compile(r"\"\s?\+\s?rubiMF\(\"He\",\"She\"\)\s?\+\s?\"") : "[rubi Ey]",
+		re.compile(r"\"\s?\+\s?rubiMF\(\"him\",\"her\"\)\s?\+\s?\"") : "[rubi em]",
+		re.compile(r"\"\s?\+\s?rubiMF\(\"himself\",\"herself\"\)\s?\+\s?\"") : "[rubi emself]",
+		re.compile(r"\"\s?\+\s?rubiMF\(\"his\",\"her\"\)\s?\+\s?\"") : "[rubi eir]",
+		re.compile(r"\"\s?\+\s?rubiMF\(\"His\",\"Her\"\)\s?\+\s?\"") : "[rubi Eir]",
+		re.compile(r"\"\s?\+\s?rubiMF\(\"man\",\"woman\"\)\s?\+\s?\"") : "[rubi man]"
+
+
+
+	}
+
+
+	print repDict
+
+	for filename in filelist:
+		
+		if filename.endswith(".as"):			#Iterate over all the .as files in ./includes
+			with open(os.path.join("./includes", filename), "r") as fileH:
+				tmp = fileH.read()
+			print "filename:", filename, "------------------------------------------------"
+			
+			cleaned = tmp
+			for regex, replacement in repDict.iteritems():
+				results = set()
+				print regex, replacement
+				for item in regex.findall(tmp):
+					results.add(item)
+					#print item
+				#for item in results:
+				#	print item
+				cleaned = regex.sub(replacement, cleaned)
+
+			if cleaned != tmp:
+				print "Changes!"
+				if writeToFiles:
+					print "Writing File!"
+					with open(os.path.join("./includes", filename), "w") as fileH:
+						fileH.write(cleaned)
 
 
 
@@ -615,4 +682,5 @@ if __name__ == "__main__":
 	
 	#cleanupRandomChoices()
 
-	findFunctionsWithoutExit()
+	#findFunctionsWithoutExit()
+	pronouninate()
