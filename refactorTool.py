@@ -607,7 +607,6 @@ def pronouninate():
 		
 		re.compile(r"\"\s?\+\s?arianMF\(\"He\",\"She\"\)\s?\+\s?\"") : "[Arian Ey]",
 		re.compile(r"\"\s?\+\s?arianMF\(\"he\",\"she\"\)\s?\+\s?\"") : "[Arian ey]",
-		re.compile(r"\"\s?\+\s?arianMF\(\"He\",\"She\"\)\s?\+\s?\"") : "[Arian ey]",
 		re.compile(r"\"\s?\+\s?arianMF\(\"him\",\"her\"\)\s?\+\s?\"") : "[Arian em]",
 		re.compile(r"\"\s?\+\s?arianMF\(\"himself\",\"herself\"\)\s?\+\s?\"") : "[Arian emself]",
 		re.compile(r"\"\s?\+\s?arianMF\(\"His\",\"Her\"\)\s?\+\s?\"") : "[Arian Eir]",
