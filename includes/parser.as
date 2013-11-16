@@ -32,12 +32,11 @@ Conditional statements:
 
 Planned, but not implemented yet:
 
-	[screen (SCREEN_NAME) | screen text]					
+	[screen (SCREEN_NAME) | screen text]
 	// creates a new screen/page. 
 
 	[change_screen (SCREEN_NAME)| button_text]
 	// Creates a button which jumps to SCREEN_NAME when clicked
-
 
 */
 
