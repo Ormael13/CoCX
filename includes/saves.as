@@ -1348,13 +1348,25 @@ function unFuckSave():void
 	//trace("is CockTypesEnum = ", flags[RUBI_COCK_TYPE] is CockTypesEnum);
 	//trace("instanceof CockTypesEnum = ", flags[RUBI_COCK_TYPE] instanceof CockTypesEnum);
 
+
+
 	if (!(flags[RUBI_COCK_TYPE] is CockTypesEnum || flags[RUBI_COCK_TYPE] is Number))	
 	{ // Valid contents of flags[RUBI_COCK_TYPE] are either a CockTypesEnum or a number
 
-		trace("Fixing save");
+		trace("Fixing save (goo girl)");
 		outputText("\n<b>Rubi's cockType is invalid. Defaulting him to human.</b>\n");
 		flags[RUBI_COCK_TYPE] = 0;
 	}
+
+
+	if (!(flags[GOO_DICK_TYPE] is CockTypesEnum || flags[GOO_DICK_TYPE] is Number))	
+	{ // Valid contents of flags[GOO_DICK_TYPE] are either a CockTypesEnum or a number
+
+		trace("Fixing save (goo girl)");
+		outputText("\n<b>Latex Goo-Girls's cockType is invalid. Defaulting him to human.</b>\n");
+		flags[GOO_DICK_TYPE] = 0;
+	}
+
 
 
 
