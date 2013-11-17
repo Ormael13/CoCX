@@ -76,7 +76,6 @@ var singleArgConverters:Object =
 		"misdirection"	: function():* { return "[Misdirection]"; },
 		"agility"		: function():* { return "[Agility]"; },
 		"master"		: function():* { return player.mf("master","mistress"); },
-		"master"		: function():* { return player.mf("Master","Mistress"); },
 		
 		"he"			: function():* { return player.mf("he","she"); },
 		"him"			: function():* { return player.mf("him","her"); },
@@ -279,7 +278,7 @@ var twoWordTagsLookup:Object =
 	// PC Attributes:
 
 	"cock"		: cockLookups,
-	"cockHead"	: cockHeadLookups
+	"cockhead"	: cockHeadLookups
 }
 
 function convertDoubleArg(arg:String):String
@@ -688,11 +687,10 @@ function evalBracketContents(textCtnt:String, depth:int):String
 import flash.utils.getQualifiedClassName;
 
 
-// Main parser function.
-// textCtnt is the text you want parsed, depth is a number, which should be 0
-// or not passed at all.
+// Actual internal parser function.
+// textCtnt is the text you want parsed, depth is a number that reflects the current recursion depth
 // You pass in the string you want parsed, and the parsed result is returned as a string.
-function recParser(textCtnt:String, depth:int = 0):String
+function recParser(textCtnt:String, depth):String
 {
 
 	// Depth tracks our recursion depth
@@ -706,12 +704,28 @@ function recParser(textCtnt:String, depth:int = 0):String
 		return "";
 
 	var i:Number = 0;
-	var tmp:Number = 0;
+
 	var bracketCnt:Number = 0;
+	
+	var tmp:Number = -1;
 	
 	var retStr:String = "";
 
-	tmp = textCtnt.indexOf("[");
+	do
+	{
+		tmp = textCtnt.indexOf("[", tmp+1);
+		if (textCtnt.charAt(tmp-1) == "\\")
+		{
+			// trace("bracket is escaped 1", tmp);
+		}
+		else if (tmp != -1)
+		{
+			// trace("need to parse bracket", tmp);
+			break;
+		}
+
+	} while (tmp != -1)
+
 
 	if (tmp != -1)		// If we have any open brackets
 	{
@@ -719,11 +733,19 @@ function recParser(textCtnt:String, depth:int = 0):String
 		{
 			if (textCtnt.charAt(i) == "[")
 			{
-				bracketCnt += 1;
+				if (textCtnt.charAt(i-1) != "\\")
+				{
+					//trace("bracket is not escaped - 2");
+					bracketCnt += 1;
+				}
 			}
 			else if (textCtnt.charAt(i) == "]")
 			{
-				bracketCnt -= 1;
+				if (textCtnt.charAt(i-1) != "\\")
+				{
+					//trace("bracket is not escaped - 3");
+					bracketCnt -= 1;
+				}
 			}
 			if (bracketCnt == 0)	// We've found the matching closing bracket for the opening bracket at textCtnt[tmp]
 			{
@@ -774,7 +796,35 @@ function recParser(textCtnt:String, depth:int = 0):String
 		retStr += textCtnt;
 		
 	}
+
 	return retStr;
+}
+
+
+// Main parser function.
+// textCtnt is the text you want parsed, depth is a number, which should be 0
+// or not passed at all.
+// You pass in the string you want parsed, and the parsed result is returned as a string.
+
+
+
+function recursiveParser(contents:String):String
+{
+	var ret:String = "";
+	// Run through the parser
+	ret = recParser(contents, 0);
+
+	// Disabling markdown for the moment, because it's fucking with the line-endings.
+	// and then the markdown parser
+	// import showdown.Showdown;
+	// ret = Showdown.makeHtml(ret);
+
+	// cleanup escaped brackets
+	ret = ret.replace(/\\\]/g, "]")
+	ret = ret.replace(/\\\[/g, "[")
+
+	return ret
+
 }
 
 // Stupid string utility functions, because actionscript doesn't have them (WTF?)

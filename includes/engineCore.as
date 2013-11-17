@@ -363,7 +363,7 @@ function checkCondition(variable:String, op:String, test:String):Boolean
 function parseText(text:String):String
 {
 	// Moved into external parser.
-	text = recParser(text, 0); 
+	text = recursiveParser(text); 
 	return text;
 }
 
