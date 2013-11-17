@@ -84,35 +84,8 @@ function mainMenu(e:MouseEvent = undefined):void {
 	outputText("<b>Corruption of Champions (" + version + ")</b>\n(Formerly Unnamed Text Game)", true);
 	
 	//doThatTestingThang();
-	
-	outputText("\n\n<u>Created by: Fenoxo</u>", false);
-	outputText("\nEdited By: Ashi, SoS, Zeikfried, and Others", false);
-	outputText("\nOpen-source version modifications by: \nAmygdaloidnucleus/Amygdala, Hoffledop/Yoffy, Herp-a-derp/Fake-Name, Cmacleod42", false);
-	outputText("\n\nSource Code:\n<u><a href='https://github.com/herp-a-derp/Corruption-of-Champions'>https://github.com/herp-a-derp/Corruption-of-Champions</a></u>", false);
-	outputText("\nBug Tracker: \n<u><a href='https://github.com/herp-a-derp/Corruption-of-Champions/issues'>https://github.com/herp-a-derp/Corruption-of-Champions/issues</a></u>");
-	outputText("\n(requires an account, unfortunately)");
-	outputText("\n\n<b><u>DISCLAIMER</u>\n\n-There are many strange and odd fetishes contained in this flash.  Peruse at own risk.", false);
-	outputText("\n-Please be 18 or the legal age to view porn before playing.", false);
-	outputText("\n-Try to keep your keyboard clean.  Think of the children!</b>", false);
-	outputText("\n\nFor more information see Fenoxo's Blog at <b><u><a href='http://www.fenoxo.com/'>fenoxo.com</a></u></b>.", false);
-	outputText("\n\nAlso go play <u><a href='http://www.furaffinity.net/view/9830293/'>Nimin</a></u> by Xadera on furaffinity.\n\n", false);
-	
-	
-	if(debug) 
-		outputText("\n\n<b>DEBUG MODE ENABLED:  ITEMS WILL NOT BE CONSUMED BY USE.</b>", false);
-	if(flags[SHOW_SPRITES_FLAG]) 
-		outputText("\n\n<b>Sprites disabled.</b>", false);
-	if(flags[EASY_MODE_ENABLE_FLAG]) 
-		outputText("\n\n<b>Easy Mode On:  Bad-ends can be ignored.</b>", false);
-	if(flags[SILLY_MODE_ENABLE_FLAG]) 
-		outputText("\n\n<b>SILLY MODE ENGAGED: Crazy, nonsensical, and possibly hilarious things may occur.</b>", false);
-	if(isEaster()) 
-		outputText("\n\n<b>It's Easter!  Enjoy the eggs!</b>");
-	if(isValentine()) 
-		outputText("\n\n<b>It's Valentine's!</b>");
-	if(isHeliaBirthday()) 
-		outputText("\n\n<b>It's Helia's Birthday Month!</b>");
 
+	startupScreenBody();
 
 	var resume:Number = 0;
 	if(player.str > 0)  //we're in a game, allow resume.
@@ -146,29 +119,34 @@ function doThatTestingThang():void
 	// Really, I should have a "test parser" button, but LAZY
 	
 	outputText("\n\n", false);
+
 	
 	outputText("[if (hasCock = true) [cock] stiffening][if (isHerm = true)  and ][if (hasVagina = true) [vagina] starting to burn with need] DERP [cock biggest] HERP [armor] LOLWUT  [balls] ");
 	outputText("[If (hours > 19) Hug | Cuddle]\n");
 	outputText("\n\n", false);
 
-	
-	outputText("[LOL[WUT]] [herp] [DERP] BLARGH [if (0 == 0) HARBLE]\n\n", false);
-	outputText("[r[e[c[u[r[s[i[v[e[lol][cock]]t]a]g[rofl][copter]]b]o]m]i]n][a][t[io]n]\n", false);
-	
-	outputText("[if [ [ (4==4) HERP|DERP]\n", false);
-	outputText("[if (4 == 7) HERP|DERP]\n", false);
-	
-	outputText("[if (4==(2+2)) HERP|DERP]\n", false);
-	outputText("[if (4==4) HERP|DERP]\n", false);
 
-	outputText("if (4==7) [if (4==7) HERP]\n", false);
-	outputText("if (4==7) [if (4==7) HERP|DERP]\n", false);
-	outputText("if (4=4) [if (4=4) HERP]\n", false);
-	outputText("if (4==4) [if (4==4) HERP]\n", false);
-	outputText("if (4==biggesttitsize) [if (4==biggesttitsize) [HERP [cock] [vagina] [balls]]]\n", false);
-	outputText("if (analcapacity>3)    [if (analcapacity>3) [HERP [cock] [vagina] [balls]]]\n", false);
-	outputText("if (analcapacity = 0)  [if (analcapacity = 0) [HERP [cock] [vagina] [balls]]]\n", false);
-	outputText("if (analcapacity > 0)  [if (analcapacity > 0) [HERP [cock] [vagina] [balls]]]\n", false);
+	outputText("Bracket escaping!\n", false);
+	outputText("\\\[cock\\\]\n", false);
+	outputText("[cock]\n", false);
+
+	outputText("\n\n", false);
+	
+	
+	outputText("1 [if [ [ (4==4) HERP|DERP]\n", false);
+	outputText("2 [if (4 == 7) HERP|DERP]\n", false);
+	
+	outputText("3 [if (4==(2+2)) HERP|DERP]\n", false);
+	outputText("4 [if (4==4) HERP|DERP]\n", false);
+
+	outputText("5 if (4==7) [if (4==7) HERP]\n", false);
+	outputText("6 if (4==7) [if (4==7) HERP|DERP]\n", false);
+	outputText("7 if (4=4) [if (4=4) HERP]\n", false);
+	outputText("8 if (4==4) [if (4==4) HERP]\n", false);
+	outputText("9 if (4==biggesttitsize) [if (4==biggesttitsize) [HERP [cock] [vagina] [balls]]]\n", false);
+	outputText("10 if (analcapacity>3)    [if (analcapacity>3) [HERP [cock] [vagina] [balls]]]\n", false);
+	outputText("11 if (analcapacity = 0)  [if (analcapacity = 0) [HERP [cock] [vagina] [balls]]]\n", false);
+	outputText("12 if (analcapacity > 0)  [if (analcapacity > 0) [HERP [cock] [vagina] [balls]]]\n", false);
 
 
 
@@ -182,14 +160,51 @@ function doThatTestingThang():void
 
 	outputText("[cock] stiffening [cock biggest] and [vagina] starting to burn with need\n");
 	outputText("[cock all] stiffening [cock each] and [cock 1] starting to burn with need\n");
+	outputText("[cockhead biggest] stiffening [cockhead smallest] and [cockhead longest] starting to burn with need\n");
+
 	outputText("\n\n");
 	outputText("Complex IF Statement thing: [if (hasCock = true) [cock] stiffening IFSTUFF [if (hasVagina = true) [vagina] starting to burn with need] IFSTUFFDONE][if (isHerm = true) and ][if (hasVagina = true) [vagina] starting to burn with need]");
 	outputText("\n\n");
 
 	
 	outputText("[arian chest] , [arian chestAdj], [rubi breasts], [rubi cock]");
+	
 	outputText("\n\n");
 	
+}
+
+function startupScreenBody():void
+{
+
+	outputText("\n\n<u>Created by: Fenoxo</u>", false);
+	outputText("\nEdited By: Ashi, SoS, Zeikfried, and Others", false);
+	outputText("\nOpen-source version modifications by: \nAmygdaloidnucleus/Amygdala, Hoffledop/Yoffy, Herp-a-derp/Fake-Name, Cmacleod42", false);
+	outputText("\n\nSource Code:\n<u><a href='https://github.com/herp-a-derp/Corruption-of-Champions'>https://github.com/herp-a-derp/Corruption-of-Champions</a></u>", false);
+	outputText("\nBug Tracker: \n<u><a href='https://github.com/herp-a-derp/Corruption-of-Champions/issues'>https://github.com/herp-a-derp/Corruption-of-Champions/issues</a></u>");
+	outputText("\n(requires an account, unfortunately)");
+	outputText("\n\n<b><u>DISCLAIMER</u>\n\n-There are many strange and odd fetishes contained in this flash.  Peruse at own risk.", false);
+	outputText("\n-Please be 18 or the legal age to view porn before playing.", false);
+	outputText("\n-Try to keep your keyboard clean.  Think of the children!</b>", false);
+	outputText("\n\nFor more information see Fenoxo's Blog at <b><u><a href='http://www.fenoxo.com/'>fenoxo.com</a></u></b>.", false);
+	outputText("\n\nAlso go play <u><a href='http://www.furaffinity.net/view/9830293/'>Nimin</a></u> by Xadera on furaffinity.\n\n", false);
+	
+	
+	if(debug) 
+		outputText("\n\n<b>DEBUG MODE ENABLED:  ITEMS WILL NOT BE CONSUMED BY USE.</b>", false);
+	if(flags[SHOW_SPRITES_FLAG]) 
+		outputText("\n\n<b>Sprites disabled.</b>", false);
+	if(flags[EASY_MODE_ENABLE_FLAG]) 
+		outputText("\n\n<b>Easy Mode On:  Bad-ends can be ignored.</b>", false);
+	if(flags[SILLY_MODE_ENABLE_FLAG]) 
+		outputText("\n\n<b>SILLY MODE ENGAGED: Crazy, nonsensical, and possibly hilarious things may occur.</b>", false);
+	if(isEaster()) 
+		outputText("\n\n<b>It's Easter!  Enjoy the eggs!</b>");
+	if(isValentine()) 
+		outputText("\n\n<b>It's Valentine's!</b>");
+	if(isHeliaBirthday()) 
+		outputText("\n\n<b>It's Helia's Birthday Month!</b>");
+
+
 }
 
 function settingsScreen():void 
