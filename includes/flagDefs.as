@@ -1,4 +1,4 @@
-const UNKNOWN_FLAG_NUMBER_00000:int                                   =    0;
+﻿const UNKNOWN_FLAG_NUMBER_00000:int                                   =    0;
 const MARBLE_PREGNACY_INCUBATION:int                                  =    1; // Marble Pregnancy Incubation
 const MARBLE_PREGNACY_TYPE:int                                        =    2; // Marble Pregnancy Type" Description="1 = cowgirl
 const MARBLE_LUST:int                                                 =    3; // Marble Lust
@@ -1018,7 +1018,7 @@ const BOG_EXPLORED:int                                                = 1016; //
 const TIMES_ENCOUNTERED_FROG:int                                      = 1017; // 
 const FERAS_GLADE_EXPLORED_YEAR:int                                   = 1018;
 const FERAS_TRAP_SPRUNG_YEAR:int                                      = 1019;
-const UNKNOWN_FLAG_NUMBER_01020:int                                   = 1020;
+const TIMES_VALERIA_GOO_THREESOMED:int                                = 1020;
 const UNKNOWN_FLAG_NUMBER_01021:int                                   = 1021;
 const UNKNOWN_FLAG_NUMBER_01022:int                                   = 1022;
 const UNKNOWN_FLAG_NUMBER_01023:int                                   = 1023;

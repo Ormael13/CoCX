@@ -463,6 +463,16 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 				needNext = true;
 			}
 		}
+		//Goo fuck stuff
+		if (player.statusAffectv1("gooStuffed") > 0) {
+			player.addStatusValue("gooStuffed",1,-1);
+			if (player.statusAffectv1("gooStuffed") <= 0) 
+			{
+				birthOutDatGooSlut();
+				needNext = true;
+			}
+			
+		}
 		//Ember fuck cooldown
 		if(player.statusAffectv1("ember fuck cooldown") > 0) {
 			player.addStatusValue("ember fuck cooldown",1,-1);
