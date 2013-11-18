@@ -15048,7 +15048,7 @@ function showMonsterLust():void {
 		//{Bonus Lust Desc (50-75)}
 		else if(monster.lust < 75) outputText("Wobbling dangerously, you can see her semi-hard shaft rustling the fabric as she moves, evidence of her growing needs.  ");
 		//{75+}
-		if(monster.lust >= 75) outputText("Swelling obscenely, the Cum Witch's thick cock stands out hard and proud, its bulbous tip rustling through the folds of her fabric as she moves and leaving dark smears it its wake.  ");
+		if(monster.lust >= 75) outputText("Swelling obscenely, the Cum Witch's thick cock stands out hard and proud, its bulbous tip rustling through the folds of her fabric as she moves and leaving dark smears in its wake.  ");
 		//(85+}
 		if(monster.lust >= 85) outputText("Every time she takes a step, those dark patches seem to double in size.  ");
 		//{93+}

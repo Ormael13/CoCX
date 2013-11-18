@@ -405,6 +405,10 @@ function appearance(e:MouseEvent):void {
 	if(player.hasPerk("Incorporeality") >= 0) outputText("  Of course, your " + player.legs() + " are partially transparent due to their ghostly nature.", false);
 	
 	outputText("\n", false);
+	if (player.hasStatusAffect("gooStuffed") >= 0)
+	{
+		outputText("\n<b>Your gravid-looking belly is absolutely stuffed full of goo. There's no way you can get pregnant like this, but at the same time, you look like some fat-bellied breeder.</b>\n");
+	}
 	//Pregnancy Shiiiiiitz
 	if((player.buttPregnancyType == 23 && player.buttPregnancyIncubation > 0) || (player.buttPregnancyType == 19 && player.buttPregnancyIncubation > 0) || (player.pregnancyType > 0 && player.pregnancyIncubation > 0)) {
 		if(player.pregnancyType == 5) {
