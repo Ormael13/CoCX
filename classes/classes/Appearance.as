@@ -1217,17 +1217,17 @@
 				{
 					if (i_withArticle) 
 					{
-						options = ["a single ",
-						"a solitary ",
-						"a lone ",
-						"an individual "];
+						options = ["a single",
+						"a solitary",
+						"a lone",
+						"an individual"];
 					}
 					else
 					{
-						options = ["single ",
-						"solitary ",
-						"lone ",
-						"individual "];
+						options = ["single",
+						"solitary",
+						"lone",
+						"individual"];
 					}
 					description += randomChoice(options);
 				}
@@ -1235,54 +1235,53 @@
 				{
 					if (i_withArticle)
 					{
-						options = ["a pair of ",
-						"two ",
-						"a duo of "];
+						options = ["a pair of",
+						"two",
+						"a duo of"];
 					}
 					else
 					{
-						options = ["pair of ",
-						"two ",
-						"duo of "];
+						options = ["pair of",
+						"two",
+						"duo of"];
 					}
 					description += randomChoice(options);
 				}
 				else if (i_creature.balls == 3) 
 				{
-					options = ["three ",
-					"triple "];
-					(i_withArticle) ? options.push("a trio of ") : options.push("trio of ");					
+					options = ["three",
+					"triple"];
+					(i_withArticle) ? options.push("a trio of") : options.push("trio of");
 					description += randomChoice(options);
 				}
 				else if (i_creature.balls == 4) 
 				{
-					options = ["four ",
-					"quadruple "];					
-					(i_withArticle) ? options.push("a quartette of ") : options.push("quartette of ");
+					options = ["four",
+					"quadruple"];					
+					(i_withArticle) ? options.push("a quartette of") : options.push("quartette of");
 					description += randomChoice(options);
 				}
 				else
 				{
 					if (i_withArticle)
 					{
-						options = ["a multitude of ",
-						"many ",
-						"a large handful of "];
+						options = ["a multitude of",
+						"many",
+						"a large handful of"];
 					}
 					else
 					{
-						options = ["multitude of ",
-						"many ",
-						"large handful of "];
+						options = ["multitude of",
+						"many",
+						"large handful of"];
 					}
 					description += randomChoice(options);
 				}
-				haveDescription = true;
 			}
 			//size!
 			if (i_creature.ballSize > 1 && (rand(3) <= 1 || i_forcedSize))
 			{
-				if(haveDescription) description += ", ";
+				if (description) description += ", ";
 				if (i_creature.ballSize > 1 && i_creature.ballSize < 2) description += "large";
 				if (i_creature.ballSize >= 2 && i_creature.ballSize < 3) description += "baseball-sized";
 				if (i_creature.ballSize >= 3 && i_creature.ballSize < 4) description += "apple-sized";
@@ -1293,62 +1292,62 @@
 				if (i_creature.ballSize >= 12 && i_creature.ballSize < 15) description += "watermelon-sized";
 				if (i_creature.ballSize >= 15 && i_creature.ballSize < 18) description += "beachball-sized";
 				if (i_creature.ballSize >= 18) description += "hideously swollen and oversized";
-				haveDescription = true;
+				
 			}
 			//UNIBALL
 			if(i_creature.hasStatusAffect("Uniball") >= 0) {
-				if (haveDescription) description += ", ";
+				if (description) description += ", ";
 				options = ["tightly-compressed",
-				"snug",
-				"cute",
-				"pleasantly squeezed",
-				"compressed-together"];
+							"snug",
+							"cute",
+							"pleasantly squeezed",
+							"compressed-together"];
 				description += randomChoice(options);
-				haveDescription = true;
+				
 			}
 			//Descriptive
 			if(i_creature.hoursSinceCum >= 48 && rand(2) == 0 && !i_forcedSize) {
-				if(haveDescription) description += ", ";
+				if(description) description += ", ";
 				options = ["overflowing",
-				"swollen",
-				"cum-engorged"];
+							"swollen",
+							"cum-engorged"];
 				description += randomChoice(options);
-				haveDescription = true;
+				
 			}
 			//lusty
-			if(i_creature.lust > 90 && !haveDescription && rand(2) == 0 && !i_forcedSize) {
+			if(i_creature.lust > 90 && (description == "") && rand(2) == 0 && !i_forcedSize) {
 				options = ["eager",
-				"full",
-				"needy",
-				"desperate",
-				"throbbing",
-				"heated",
-				"trembling",
-				"quivering",
-				"quaking"];
+						"full",
+						"needy",
+						"desperate",
+						"throbbing",
+						"heated",
+						"trembling",
+						"quivering",
+						"quaking"];
 				description += randomChoice(options);
-				haveDescription = true;
+				
 			}
 			//Slimy skin
 			if (i_creature.skinType == 3)
 			{
-				if(haveDescription) description += " ";
+				if(description) description += " ";
 				options = ["goopey",
 				"gooey",
 				"slimy"];
 				description += randomChoice(options);
-				haveDescription = true;
+				
 			}
-			if(haveDescription) description += " ";
+			if(description) description += " ";
 			
 			options = ["nut",
-			"gonad",
-			"teste",
-			"testicle",
-			"testicle",
-			"ball",
-			"ball",
-			"ball"];
+					"gonad",
+					"teste",
+					"testicle",
+					"testicle",
+					"ball",
+					"ball",
+					"ball"];
 			if (i_creature.balls == 4 && i_plural) options.push("quads", "quads", "quads");
 				
 			description += randomChoice(options);
