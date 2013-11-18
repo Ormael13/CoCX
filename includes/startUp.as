@@ -176,8 +176,6 @@ function doThatTestingThang():void
 function startupScreenBody():void
 {
 
-
-
 	// NO FUCKING DECENT MULTI-LINE STRING LITERALS BECAUSE FUCKING STUPID
 	// WTF ACTIONSCRIPT YOUR DEV'S ARE ON CRACK
 	outputText(<![CDATA["""
@@ -311,7 +309,9 @@ function debugPane():void
 
 	outputText(images.showImage("monster-ceraph"));
 
-	doNext(mainMenu);
+	menu();
+	addButton(0, "Event Tester", eventTestingPane);
+	addButton(9, "Back", mainMenu);
 }
 
 function toggleStandards():void
