@@ -1,4 +1,4 @@
-﻿//Event No's 2000 4999 use this function
+//Event No's 2000 4999 use this function
 
 function doEvent(eventNo):void
 {

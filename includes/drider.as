@@ -1,4 +1,4 @@
-﻿//VARS
+//VARS
 //9999 - times encountered
 //Skintone used for eyecolor
 //Hair for carapace/hair

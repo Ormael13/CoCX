@@ -1,4 +1,4 @@
-﻿// import flash.events.MouseEvent;
+// import flash.events.MouseEvent;
 
 //const DOUBLE_ATTACK_STYLE:int = 867;
 //const SPELLS_CAST:int = 868;
@@ -368,7 +368,7 @@ function checkCondition(variable:String, op:String, test:String):Boolean
 function parseText(text:String):String
 {
 	// Moved into external parser.
-	text = recParser(text, 0); 
+	text = recursiveParser(text); 
 	return text;
 }
 
@@ -850,7 +850,6 @@ function parseText(text:String):String
 	return text;
 }
 
-	*/
 	
 function clearOutput():void {
 	currentText = "";
@@ -2565,6 +2564,7 @@ function getButtonToolTipText( buttonText :String ) :String
 	if(buttonText.indexOf("ASPLODE") != -1) {			
 		toolTipText = "MAKE SHIT ASPLODE";
 	}
+	}
 
 	return toolTipText;
 }
@@ -2688,6 +2688,20 @@ function choices(text1:String, butt1:*,
 	buttonEvents[7] = butt8;
 	buttonEvents[8] = butt9;
 	buttonEvents[9] = butt0;
+
+
+	var bTextArr:Array = new Array( b1Text,
+									b2Text,
+									b3Text,
+									b4Text,
+									b5Text,
+									b6Text,
+									b7Text,
+									b8Text,
+									b9Text,
+									b0Text);
+
+	var j:int;
 
 	// iterate over the button options, and only enable the ones which have a corresponding event number
 
@@ -2867,11 +2881,20 @@ function doYesNo(eventYes:*, eventNo:*):void {
 
 }
 
+
+
 function doNext(eventNo:*):void {
 	//Prevent new events in combat from automatically overwriting a game over. 
 	if(mainView.getButtonText( 0 ).indexOf("Game Over") != -1) {
 		trace("Do next setup cancelled by game over");
 		return;
+	}
+	
+	trace("DoNext have item:", eventNo);
+	choices("Next", eventNo, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0); 
+}
+
+
 	}
 	
 	trace("DoNext have item:", eventNo);
@@ -3391,4 +3414,4 @@ function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):void {
 
 function spriteSelect(choice:Number = 0):void {
 	mainView.selectSprite( choice );
-}
+}*/

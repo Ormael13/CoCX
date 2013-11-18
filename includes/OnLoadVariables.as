@@ -1,4 +1,4 @@
-﻿/**
+/**
  * All the variables that have been left around but don't fit into the GlobalVariables file
  */
 

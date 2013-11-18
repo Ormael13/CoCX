@@ -1,4 +1,4 @@
-﻿
+
 function inCombat():Boolean {
 	if(gameState == 1 || gameState == 2) return true;
 	return false;

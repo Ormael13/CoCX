@@ -1,10 +1,11 @@
-﻿
+
 //Keyboard listener!
 stage.addEventListener(KeyboardEvent.KEY_DOWN, keyboard);
 
 // These are toggled between by the [home] key.
 mainView.textBGWhite.visible = false;
 mainView.textBGTan.visible = false;
+
 
 //Not exactly sure what the purpose of this is.
 registerClassAlias("assClass", assClass);
@@ -52,7 +53,78 @@ function mainMenu(e:MouseEvent = undefined):void {
 	outputText("<b>Corruption of Champions (" + version + ")</b>\n(Formerly Unnamed Text Game)", true);
 	
 	//doThatTestingThang();
+
+	startupScreenBody();
+}
 	
+import flash.system.SecurityDomain;
+import flash.system.Security;;
+
+function doThatTestingThang():void
+{
+
+	// This junk was for testing my new parser. It can be removed, I think. 
+	// I still have a few parser tweaks I want to do, though.
+	// Really, I should have a "test parser" button, but LAZY
+	
+	outputText("\n\n", false);
+
+	
+	outputText("[if (hasCock = true) [cock] stiffening][if (isHerm = true)  and ][if (hasVagina = true) [vagina] starting to burn with need] DERP [cock biggest] HERP [armor] LOLWUT  [balls] ");
+	outputText("[If (hours > 19) Hug | Cuddle]\n");
+	outputText("\n\n", false);
+
+
+	outputText("Bracket escaping!\n", false);
+	outputText("\\\[cock\\\]\n", false);
+	outputText("[cock]\n", false);
+
+	outputText("\n\n", false);
+	
+	
+	outputText("1 [if [ [ (4==4) HERP|DERP]\n", false);
+	outputText("2 [if (4 == 7) HERP|DERP]\n", false);
+	
+	outputText("3 [if (4==(2+2)) HERP|DERP]\n", false);
+	outputText("4 [if (4==4) HERP|DERP]\n", false);
+
+	outputText("5 if (4==7) [if (4==7) HERP]\n", false);
+	outputText("6 if (4==7) [if (4==7) HERP|DERP]\n", false);
+	outputText("7 if (4=4) [if (4=4) HERP]\n", false);
+	outputText("8 if (4==4) [if (4==4) HERP]\n", false);
+	outputText("9 if (4==biggesttitsize) [if (4==biggesttitsize) [HERP [cock] [vagina] [balls]]]\n", false);
+	outputText("10 if (analcapacity>3)    [if (analcapacity>3) [HERP [cock] [vagina] [balls]]]\n", false);
+	outputText("11 if (analcapacity = 0)  [if (analcapacity = 0) [HERP [cock] [vagina] [balls]]]\n", false);
+	outputText("12 if (analcapacity > 0)  [if (analcapacity > 0) [HERP [cock] [vagina] [balls]]]\n", false);
+
+
+
+	outputText("\n\n");
+	outputText("Gender Stuff! [He], [he], [His], [his], [Him], [him], [his], [His]\n");
+	outputText("Gender Stuff! [rubi ey], [rubi eir], [rubi eirs], [rubi emself]\n");
+	outputText("Gender Stuff! [rubi Ey], [rubi Eir], [rubi Eirs], [rubi Emself]\n");
+	outputText("Gender Stuff! [arian ey], [arian eir], [arian eirs], [arian emself]\n");
+	outputText("Gender Stuff! [arian Ey], [arian Eir], [arian Eirs], [arian Emself]\n");
+	outputText("\n\n");
+
+	outputText("[cock] stiffening [cock biggest] and [vagina] starting to burn with need\n");
+	outputText("[cock all] stiffening [cock each] and [cock 1] starting to burn with need\n");
+	outputText("[cockhead biggest] stiffening [cockhead smallest] and [cockhead longest] starting to burn with need\n");
+
+	outputText("\n\n");
+	outputText("Complex IF Statement thing: [if (hasCock = true) [cock] stiffening IFSTUFF [if (hasVagina = true) [vagina] starting to burn with need] IFSTUFFDONE][if (isHerm = true) and ][if (hasVagina = true) [vagina] starting to burn with need]");
+	outputText("\n\n");
+
+	
+	outputText("[arian chest] , [arian chestAdj], [rubi breasts], [rubi cock]");
+	
+	outputText("\n\n");
+	
+}
+
+function startupScreenBody():void
+{
+
 	outputText("\n\n<u>Created by: Fenoxo</u>", false);
 	outputText("\nEdited By: Ashi, SoS, Zeikfried, and Others", false);
 	outputText("\nOpen-source version modifications by: \nAmygdaloidnucleus/Amygdala, Hoffledop/Yoffy, Herp-a-derp/Fake-Name, Cmacleod42", false);
@@ -83,7 +155,6 @@ function mainMenu(e:MouseEvent = undefined):void {
 
 
 	var resume:Number = 0;
-	if(player.str > 0)  //we're in a game, allow resume.
 		resume = 1;
 
 	// I really wanted to only have the "imageCreditsScreen" button if images were found, but it turns out
@@ -188,7 +259,8 @@ function settingsScreen():void
 		outputText("Silly Mode <b>Off</b>\n	You're an incorrigable stick-in-the-mud with no sense of humor.", false);
 
 	outputText("\n\n", false);
-	outputText("<b>The following flags are not fully implemeneted yet (e.g. they don't apply in <i>all</i> cases where they could be relevant).</b>", false);
+	outputText("<b>The following flags are not fully implemeneted yet (e.g. they don't apply in <i>all</i> cases where they could be relevant).</b>\n", false);
+	outputText("Additional note: You <b>must</b> be <i>in a game session</i> (e.g. load your save, hit \"Main Menu\", change the flag settings, and then hit \"Resume\") to change these flags. They're saved into the saveGame file, so if you load a save, it will clear them to the state in that save.", false);
 	outputText("\n\n", false);
 
 	if(flags[LOW_STANDARDS_FOR_ALL]) 

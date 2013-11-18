@@ -6,6 +6,7 @@ mainView.onLevelClick = levelUpGo;
 mainView.onPerksClick = displayPerks;
 mainView.onStatsClick = displayStats;
 
+
 mainView._executeButtomButtonClick = executeButtonClick;
 
 // function buttonEvent(e:MouseEvent):void {

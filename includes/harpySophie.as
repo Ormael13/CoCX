@@ -1,4 +1,4 @@
-﻿//Harpy MILF.  Hellzyeah
+//Harpy MILF.  Hellzyeah
 //-More fertile than average harpy.
 //-In 'Upper Mountain' area (High Mountain?)
 //-Blurb about other harpies flying away as PC approaches.

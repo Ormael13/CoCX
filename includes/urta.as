@@ -1,4 +1,4 @@
-﻿//Urta variables 
+//Urta variables 
 //flags[TIMES_FUCKED_URTA] = times fucked
 //flags[URTA_COMFORTABLE_WITH_OWN_BODY] = urtas horsecock comfort level	
 	//-1 = PC pissed her off

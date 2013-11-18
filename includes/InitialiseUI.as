@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Initialises the "action" buttons at the bottom of the main screen
  *
  * gButtons is an array that holds the 10 buttons along the bottom of the screen

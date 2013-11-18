@@ -1,4 +1,4 @@
-﻿import flash.net.FileReference;
+import flash.net.FileReference;
 import flash.events.Event;
 import flash.net.URLRequest;
 import flash.utils.ByteArray;
@@ -167,8 +167,8 @@ function saveLoad(e:MouseEvent):void
 	mainView.nameBox.visible = false;
 	outputText("", true);
 	outputText("<b>Frequently Asked Questions</b>:\nWhere are my saves located?\n", false);
-	outputText("<i>In Windows Vista/7 (IE/FireFox/Other): Users/[username]/Appdata/Roaming/Macromedia/Flash Player/#Shared Objects/[GIBBERISH]/\n", false, false);
-	outputText("In Windows Vista/7 (Chrome): Users/[username]/AppData/Local/Google/Chrome/User Data/Default/Pepper Data/Shockwave Flash/WritableRoot/#SharedObjects/[GIBBERISH]/\n", false, false);
+	outputText("<i>In Windows Vista/7 (IE/FireFox/Other): <pre>Users/{username}/Appdata/Roaming/Macromedia/Flash Player/#Shared Objects/{GIBBERISH}/</pre>\n", false);
+	outputText("In Windows Vista/7 (Chrome): <pre>Users/{username}/AppData/Local/Google/Chrome/User Data/Default/Pepper Data/Shockwave Flash/WritableRoot/#SharedObjects/{GIBBERISH}/</pre>\n", false);
 	outputText("Inside that folder it will saved in a folder corresponding to where it was played from.  If you saved the CoC.swf to your HDD, then it will be in a folder called localhost.  If you played from my website, it will be in fenoxo.com.  The save files will be labelled CoC_1.sol, CoC_2.sol, CoC_3.sol, etc.</i>\n\n", false);
 	outputText("Why do my saves disappear all the time?\n<i>There are numerous things that will wipe out flash local shared files.  If your browser or player is set to delete flash cookies or data, that will do it.  CCleaner will also remove them.  CoC or its updates will never remove your savegames - if they disappear something else is wiping them out.</i>\n\n", false);
 	outputText("When I play from my HDD I have one set of saves, and when I play off your site I have a different set of saves.  Why?\n<i>Flash stores saved data relative to where it was accessed from.  Playing from your HDD will store things in a different location than fenoxo.com or FurAffinity.</i>\n\n", false);
@@ -1349,13 +1349,25 @@ function unFuckSave():void
 	//trace("is CockTypesEnum = ", flags[RUBI_COCK_TYPE] is CockTypesEnum);
 	//trace("instanceof CockTypesEnum = ", flags[RUBI_COCK_TYPE] instanceof CockTypesEnum);
 
+
+
 	if (!(flags[RUBI_COCK_TYPE] is CockTypesEnum || flags[RUBI_COCK_TYPE] is Number))	
 	{ // Valid contents of flags[RUBI_COCK_TYPE] are either a CockTypesEnum or a number
 
-		trace("Fixing save");
+		trace("Fixing save (goo girl)");
 		outputText("\n<b>Rubi's cockType is invalid. Defaulting him to human.</b>\n");
 		flags[RUBI_COCK_TYPE] = 0;
 	}
+
+
+	if (!(flags[GOO_DICK_TYPE] is CockTypesEnum || flags[GOO_DICK_TYPE] is Number))	
+	{ // Valid contents of flags[GOO_DICK_TYPE] are either a CockTypesEnum or a number
+
+		trace("Fixing save (goo girl)");
+		outputText("\n<b>Latex Goo-Girls's cockType is invalid. Defaulting him to human.</b>\n");
+		flags[GOO_DICK_TYPE] = 0;
+	}
+
 
 
 

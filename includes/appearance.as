@@ -1,4 +1,4 @@
-﻿function appearance(e:MouseEvent):void {
+function appearance(e:MouseEvent):void {
 	funcs = new Array();
 	args = new Array();
 	//Temp vars

@@ -1,4 +1,4 @@
-﻿//Used to jump the fuck out of pregnancy scenarios for menus.
+//Used to jump the fuck out of pregnancy scenarios for menus.
 //const EVENT_PARSER_ESCAPE:int = 800;
 //const PHYLLA_GEMS_HUNTED_TODAY:int = 893;
 

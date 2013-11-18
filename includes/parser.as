@@ -1,10 +1,9 @@
 
 /*
-syntax:
+Parser Syntax:
 
 // Querying simple PC stat nouns:
 	[noun]
-
 
 Conditional statements:
 // Simple if statement:
@@ -19,14 +18,25 @@ Conditional statements:
 	// Eventually, I want this to be able to use introspection to access class attributes directly
 	// Maybe even manipulate them, though I haven't thought that out much at the moment.
 
+// Gender Pronoun Weirdness:
+// PRONOUNS: The parser uses Elverson/Spivak Pronouns specifically to allow characters to be written with non-specific genders.
+// http://en.wikipedia.org/wiki/Spivak_pronoun
+//
+// Cheat Table:
+//           | Subject    | Object       | Possessive Adjective | Possessive Pronoun | Reflexive         |
+// Agendered | ey laughs  | I hugged em  | eir heart warmed     | that is eirs       | ey loves emself   |
+// Masculine | he laughs  | I hugged him | his heart warmed     | that is his        | he loves himself  |
+// Feminine  | she laughs | I hugged her | her heart warmed     | that is hers       | she loves herself |
+
+
+
 Planned, but not implemented yet:
 
-	[screen (SCREEN_NAME) | screen text]					
+	[screen (SCREEN_NAME) | screen text]
 	// creates a new screen/page. 
 
 	[change_screen (SCREEN_NAME)| button_text]
 	// Creates a button which jumps to SCREEN_NAME when clicked
-
 
 */
 
@@ -66,10 +76,10 @@ var singleArgConverters:Object =
 		"misdirection"	: function():* { return "[Misdirection]"; },
 		"agility"		: function():* { return "[Agility]"; },
 		"master"		: function():* { return player.mf("master","mistress"); },
-		"master"		: function():* { return player.mf("Master","Mistress"); },
-		"his"			: function():* { return player.mf("his","her"); },
+		
 		"he"			: function():* { return player.mf("he","she"); },
 		"him"			: function():* { return player.mf("him","her"); },
+		"his"			: function():* { return player.mf("his","hers"); },
 
 		// all the errors related to trying to parse stuff if not present are
 		// already handled in the various *Descript() functions.
@@ -124,23 +134,50 @@ function convertSingleArg(arg:String):String
 // Masculine | he laughs  | I hugged him | his heart warmed     | that is his        | he loves himself  |
 // Feminine  | she laughs | I hugged her | her heart warmed     | that is hers       | she loves herself |
 
+// (Is it bad that half my development time so far has been researching non-gendered nouns? ~~~~Fake-Name)
+
+
 var arianLookups:Object = // For subject: "arian" 
 {
+	"man"		: function():* {return arianMF("man","woman")},	
+	// argh! "Man" is the mass-noun for humanity, and I'm loathe to choose an even more esoteric variant. 
+	// Elverson/Spivak terminology is already esoteric enough, and it lacks a ungendered mass noun.
+
 	"ey"		: function():* {return arianMF("he","she")},
 	"em"		: function():* {return arianMF("him","her")},
 	"eir"		: function():* {return arianMF("his","her")},
 	"eirs"		: function():* {return arianMF("his","hers")},
-	"emself"	: function():* {return arianMF("himself","herself")}
+	"emself"	: function():* {return arianMF("himself","herself")},
+
+	"chestadj"	: function():* {return arianChestAdjective()},
+	"chest"		: function():* {return arianChest()}
 }
+// Arian unhandled terms (I have not decided how to support them yet):
+// arianMF("mas","mis") 
+// arianMF("master","mistress") 
+// arianMF("male","girly") 
+
+
 
 var rubiLookups:Object = // For subject: "rubi"
 {
+	"man"		: function():* {return rubiMF("man","woman")},	
+
 	"ey"		: function():* {return rubiMF("he","she")},
 	"em"		: function():* {return rubiMF("him","her")},
 	"eir"		: function():* {return rubiMF("his","her")},
 	"eirs"		: function():* {return rubiMF("his","hers")},
-	"emself"	: function():* {return rubiMF("himself","herself")}
+	"emself"	: function():* {return rubiMF("himself","herself")},
+
+	"cock"		: function():* {return rubiCock()},
+	"breasts"	: function():* {return rubiBreasts()}
+
 }
+//Rubi unhandled terms :
+// rubiMF("boy","girl")
+// rubiMF("demon","demoness")
+// rubiMF("gentleman","lady")
+
 
 // PC ASCII Aspect lookups
 
@@ -241,7 +278,7 @@ var twoWordTagsLookup:Object =
 	// PC Attributes:
 
 	"cock"		: cockLookups,
-	"cockHead"	: cockHeadLookups
+	"cockhead"	: cockHeadLookups
 }
 
 function convertDoubleArg(arg:String):String
@@ -260,9 +297,9 @@ function convertDoubleArg(arg:String):String
 
 	// Figure out if we need to capitalize the resulting text
 	var capitalize:Boolean = isUpperCase(aspect.charAt(0));
+
 	subject = subject.toLowerCase()
 	aspect = aspect.toLowerCase()
-
 
 	var arg;
 
@@ -332,8 +369,8 @@ var conditionalOptions:Object =
 		"corruption"		: function():* {return  player.cor;},
 		"fatigue"			: function():* {return  player.fatigue;},
 		"hp"				: function():* {return  player.HP;},
-		"hour"				: function():* {return  model.time.hours;},
-		"days"				: function():* {return  model.time.days;},
+		"hour"				: function():* {return  hours;},
+		"days"				: function():* {return  days;},
 		"tallness"			: function():* {return  player.tallness;},
 		"hairlength"		: function():* {return  player.hairLength;},
 		"femininity"		: function():* {return  player.femininity;},
@@ -619,7 +656,7 @@ function evalBracketContents(textCtnt:String, depth:int):String
 	}
 	else
 	{
-		trace("Not an if statement")
+		if (debug) trace("Not an if statement")
 			// Match a single word, with no leading or trailing space
 		var singleWordTagRegExp:RegExp = /^\w+$/;
 		var doubleWordTagRegExp:RegExp = /^\w+\s\w+$/;
@@ -650,11 +687,10 @@ function evalBracketContents(textCtnt:String, depth:int):String
 import flash.utils.getQualifiedClassName;
 
 
-// Main parser function.
-// textCtnt is the text you want parsed, depth is a number, which should be 0
-// or not passed at all.
+// Actual internal parser function.
+// textCtnt is the text you want parsed, depth is a number that reflects the current recursion depth
 // You pass in the string you want parsed, and the parsed result is returned as a string.
-function recParser(textCtnt:String, depth:int = 0):String
+function recParser(textCtnt:String, depth):String
 {
 
 	// Depth tracks our recursion depth
@@ -668,12 +704,28 @@ function recParser(textCtnt:String, depth:int = 0):String
 		return "";
 
 	var i:Number = 0;
-	var tmp:Number = 0;
+
 	var bracketCnt:Number = 0;
+	
+	var tmp:Number = -1;
 	
 	var retStr:String = "";
 
-	tmp = textCtnt.indexOf("[");
+	do
+	{
+		tmp = textCtnt.indexOf("[", tmp+1);
+		if (textCtnt.charAt(tmp-1) == "\\")
+		{
+			// trace("bracket is escaped 1", tmp);
+		}
+		else if (tmp != -1)
+		{
+			// trace("need to parse bracket", tmp);
+			break;
+		}
+
+	} while (tmp != -1)
+
 
 	if (tmp != -1)		// If we have any open brackets
 	{
@@ -681,11 +733,19 @@ function recParser(textCtnt:String, depth:int = 0):String
 		{
 			if (textCtnt.charAt(i) == "[")
 			{
-				bracketCnt += 1;
+				if (textCtnt.charAt(i-1) != "\\")
+				{
+					//trace("bracket is not escaped - 2");
+					bracketCnt += 1;
+				}
 			}
 			else if (textCtnt.charAt(i) == "]")
 			{
-				bracketCnt -= 1;
+				if (textCtnt.charAt(i-1) != "\\")
+				{
+					//trace("bracket is not escaped - 3");
+					bracketCnt -= 1;
+				}
 			}
 			if (bracketCnt == 0)	// We've found the matching closing bracket for the opening bracket at textCtnt[tmp]
 			{
@@ -712,12 +772,12 @@ function recParser(textCtnt:String, depth:int = 0):String
 				postfixTmp = textCtnt.substring(i+1, textCtnt.length);
 				if (postfixTmp.indexOf("[") != -1)
 				{
-					trace("Need to parse trailing text", postfixTmp)
+					if (debug) trace("Need to parse trailing text", postfixTmp)
 					retStr += recParser(postfixTmp, depth);	// Parse the trailing text (if any)
 				}
 				else
 				{
-					trace("No brackets in trailing text", postfixTmp)
+					if (debug) trace("No brackets in trailing text", postfixTmp)
 					retStr += postfixTmp;
 				}
 				
@@ -736,7 +796,35 @@ function recParser(textCtnt:String, depth:int = 0):String
 		retStr += textCtnt;
 		
 	}
+
 	return retStr;
+}
+
+
+// Main parser function.
+// textCtnt is the text you want parsed, depth is a number, which should be 0
+// or not passed at all.
+// You pass in the string you want parsed, and the parsed result is returned as a string.
+
+
+
+function recursiveParser(contents:String):String
+{
+	var ret:String = "";
+	// Run through the parser
+	ret = recParser(contents, 0);
+
+	// Disabling markdown for the moment, because it's fucking with the line-endings.
+	// and then the markdown parser
+	// import showdown.Showdown;
+	// ret = Showdown.makeHtml(ret);
+
+	// cleanup escaped brackets
+	ret = ret.replace(/\\\]/g, "]")
+	ret = ret.replace(/\\\[/g, "[")
+
+	return ret
+
 }
 
 // Stupid string utility functions, because actionscript doesn't have them (WTF?)

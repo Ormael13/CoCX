@@ -1,4 +1,4 @@
-﻿//Hours - 15+
+//Hours - 15+
 
 function ifrisIntro():Boolean {
 	if(model.time.hours >= 15) {

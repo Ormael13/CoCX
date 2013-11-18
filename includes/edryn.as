@@ -1,4 +1,4 @@
-﻿//VARS
+//VARS
 //player.statusAffectv1("Edryn") >= 4 = FREE SEX
 // EDRYN_TIMES_HEL_THREESOMED:int = 404;
 // HEL_EDRYN_OFFER:int = 405;

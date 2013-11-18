@@ -2,7 +2,10 @@
 {
 	import flash.display.Loader;
 	import flash.display.Stage;
+<<<<<<< HEAD
 	import flash.display.MovieClip;
+=======
+>>>>>>> master
 	import flash.errors.IOError;
 	import flash.net.*;
 	import flash.events.*;
@@ -156,11 +159,14 @@
 		{
 			var gotImage:Boolean = false;
 			var mainText:TextField = mStage.getChildByName("mainText") as TextField;
+<<<<<<< HEAD
 
 			if( ! mainText )
 			{
 				mainText = (mStage.getChildByName("mainView") as MovieClip).mainText as TextField;
 			}
+=======
+>>>>>>> master
 			
 			if (mainText != null)
 			{

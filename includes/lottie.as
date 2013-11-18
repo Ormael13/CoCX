@@ -1,4 +1,4 @@
-﻿//spriteSelect(36);
+//spriteSelect(36);
 //9999 - PUT IN SPRITES
 //FLAGS
 //278 - LOTTIE OFF - NEVER ENCOUNTER PIG BITCH AGAIN

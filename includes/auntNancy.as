@@ -1,4 +1,4 @@
-﻿//NECESSARY FLAGS:
+//NECESSARY FLAGS:
 //263 - Met nancy
 //264 - Nancy relationship level
 //265 - Talk Nancy

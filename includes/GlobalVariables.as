@@ -1,4 +1,4 @@
-﻿import classes.Player;
+import classes.Player;
 /**
  * Global Variables used across the whole game. I hope to whittle it down slowly.
  */

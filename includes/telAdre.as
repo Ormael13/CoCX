@@ -10,6 +10,7 @@
  */
 //{region PiercingVariables
 
+//0) **Clit (+2 sens)
 //1) **Dick (+2 lib) adds the word 'pierced' sometimes to the description
 //2) **Ears
 //3) **Eyebrow (-.5 def)

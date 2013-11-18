@@ -1,4 +1,4 @@
-﻿//Gnoll Entrance
+//Gnoll Entrance
 function gnollEncounter():void {
 	spriteSelect(11);
 	outputText("", true);
