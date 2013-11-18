@@ -277,7 +277,16 @@ function debugPane():void
 {
 	outputText("<b>Debug information!</b>\n", true);
 
-	outputText("\nCurrent Sandbox mode: <b>" + Security.sandboxType + "</b>");
+	outputText("\nPossible flash sandboxing contexts:");
+	outputText("<ul>");
+	outputText("<li><b>\"localWithNetwork\"</b> means images <b><u>will not work</u></b>!</li>");
+	outputText("<li><b>\"localWithFile\"</b> means images can work.</li>");
+	outputText("<li><b>\"localTrusted\"</b> means images can work, and you've somehow managed to install this swf into a flash trusted directory. How did you manage that?</li>");
+	outputText("</ul>");
+	outputText("\nNote that you still need the proper folder structure to have functional images.");
+
+	outputText("\n\nCurrent Sandbox mode: <b>" + Security.sandboxType + "</b>");
+	outputText("\n<hr /> ---------"); // HR Tag! WHY U NO WORK?
 
 	outputText("\nCurrently have " + images.getLoadedImageCount() + " images loaded into cache.");
 
