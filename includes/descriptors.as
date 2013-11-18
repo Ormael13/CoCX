@@ -142,6 +142,10 @@ function hairDescript():String {
 	return Appearance.hairDescription(player);
 }
 
+function hairOrFur():String {
+	return Appearance.hairOrFur(player);
+}
+
 function clitDescript():String {
 	return Appearance.clitDescription(player);
 }

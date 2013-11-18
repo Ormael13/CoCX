@@ -1761,7 +1761,7 @@ function talkWithCuntIMeanAmily(sexAfter:Boolean = false):void {
 		
 		outputText("Amily looks surprised... but pleased.  \"<i>I... You're really interested in hearing about me?  Well... okay.  What do you want to know?</i>\"\n\n", false);
 
-		outputText("You ask her, hesitantly, how she she managed to survive the destruction of her village, and how she's stayed alive ever since.\n\n", false);
+		outputText("You ask her, hesitantly, how she managed to survive the destruction of her village, and how she's stayed alive ever since.\n\n", false);
 
 		outputText("She looks not upset, like you feared, but confused.  \"<i>I haven't explained that already?</i>\" She asks.  \"<i>I ran.  I ran as fast as I could for my house - I ran for my hunting knife and my blowpipes.  And then, my parents ordered me to run into the wilderness and hide.  I didn't want to go, but I obeyed.  I just ran and ran all through the night, stopping only when I was exhausted - and even then, I crawled into a hollow at the roots of a tree to hide.  I slept until hunger woke me, foraged for something to eat, and then I crept back to my village.  I found it ruined, and I've lived here ever since.</i>\"\n\n", false);
 

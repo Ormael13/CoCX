@@ -25,6 +25,15 @@
 			return int(Math.random() * max);
 		}
 		
+
+		public static function hairOrFur(i_creature:Creature):String
+		{
+			if (i_creature.skinType == 1)
+				return "fur";
+			else
+				return "hair";
+		}
+
 		public static function hairDescription(i_creature:Creature):String
 		{
 			var description:String = "";
