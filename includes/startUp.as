@@ -80,9 +80,9 @@ function mainMenu(e:MouseEvent = undefined):void {
 	//Sets game state to 3, used for determining back functionality of save/load menu.
 	gameState = 3;
 
-	
-	outputText("<b>Corruption of Champions (" + version + ")</b>\n(Formerly Unnamed Text Game)", true);
-	
+
+	outputText("<b>Corruption of Champions (" + version + ")</b>", true);
+
 	//doThatTestingThang();
 
 	startupScreenBody();
@@ -96,31 +96,31 @@ function mainMenu(e:MouseEvent = undefined):void {
 	// since the images haven't loaded yet.
 	// Therefore, the imageCreditScreen will just have to say "No image pack" if you don't have any images
 
-	choices("",  0, 
-			"Image Credits", imageCreditsScreen, 
-			"Credits", creditsScreen, 
-			"", 0, 
-			"Instructions", howToPlay, 
-			"Debug Info", debugPane, 
-			"", 0, 
-			"", 0, 
-			"Settings", settingsScreen, 
+	choices("",  0,
+			"Image Credits", imageCreditsScreen,
+			"Credits", creditsScreen,
+			"", 0,
+			"Instructions", howToPlay,
+			"Debug Info", debugPane,
+			"", 0,
+			"", 0,
+			"Settings", settingsScreen,
 			"Resume", resume);
 }
-	
+
 import flash.system.SecurityDomain;
 import flash.system.Security;;
 
 function doThatTestingThang():void
 {
 
-	// This junk was for testing my new parser. It can be removed, I think. 
+	// This junk was for testing my new parser. It can be removed, I think.
 	// I still have a few parser tweaks I want to do, though.
 	// Really, I should have a "test parser" button, but LAZY
-	
+
 	outputText("\n\n", false);
 
-	
+
 	outputText("[if (hasCock = true) [cock] stiffening][if (isHerm = true)  and ][if (hasVagina = true) [vagina] starting to burn with need] DERP [cock biggest] HERP [armor] LOLWUT  [balls] ");
 	outputText("[If (hours > 19) Hug | Cuddle]\n");
 	outputText("\n\n", false);
@@ -130,27 +130,23 @@ function doThatTestingThang():void
 	outputText("\\\[cock\\\]\n", false);
 	outputText("[cock]\n", false);
 
-	outputText("[cock 1]\n", false);
-
-	outputText("[cockhead 1]\n", false);
-
 	outputText("\n\n", false);
-	
-	
-	//outputText("1 [if [ [ (4==4) HERP|DERP]\n", false);
-	//outputText("2 [if (4 == 7) HERP|DERP]\n", false);
-	//
-	//outputText("3 [if (4==(2+2)) HERP|DERP]\n", false);
-	//outputText("4 [if (4==4) HERP|DERP]\n", false);
-//
-	//outputText("5 if (4==7) [if (4==7) HERP]\n", false);
-	//outputText("6 if (4==7) [if (4==7) HERP|DERP]\n", false);
-	//outputText("7 if (4=4) [if (4=4) HERP]\n", false);
-	//outputText("8 if (4==4) [if (4==4) HERP]\n", false);
-	//outputText("9 if (4==biggesttitsize) [if (4==biggesttitsize) [HERP [cock] [vagina] [balls]]]\n", false);
-	//outputText("10 if (analcapacity>3)    [if (analcapacity>3) [HERP [cock] [vagina] [balls]]]\n", false);
-	//outputText("11 if (analcapacity = 0)  [if (analcapacity = 0) [HERP [cock] [vagina] [balls]]]\n", false);
-	//outputText("12 if (analcapacity > 0)  [if (analcapacity > 0) [HERP [cock] [vagina] [balls]]]\n", false);
+
+
+	outputText("1 [if [ [ (4==4) HERP|DERP]\n", false);
+	outputText("2 [if (4 == 7) HERP|DERP]\n", false);
+
+	outputText("3 [if (4==(2+2)) HERP|DERP]\n", false);
+	outputText("4 [if (4==4) HERP|DERP]\n", false);
+
+	outputText("5 if (4==7) [if (4==7) HERP]\n", false);
+	outputText("6 if (4==7) [if (4==7) HERP|DERP]\n", false);
+	outputText("7 if (4=4) [if (4=4) HERP]\n", false);
+	outputText("8 if (4==4) [if (4==4) HERP]\n", false);
+	outputText("9 if (4==biggesttitsize) [if (4==biggesttitsize) [HERP [cock] [vagina] [balls]]]\n", false);
+	outputText("10 if (analcapacity>3)    [if (analcapacity>3) [HERP [cock] [vagina] [balls]]]\n", false);
+	outputText("11 if (analcapacity = 0)  [if (analcapacity = 0) [HERP [cock] [vagina] [balls]]]\n", false);
+	outputText("12 if (analcapacity > 0)  [if (analcapacity > 0) [HERP [cock] [vagina] [balls]]]\n", false);
 
 
 
@@ -170,110 +166,129 @@ function doThatTestingThang():void
 	outputText("Complex IF Statement thing: [if (hasCock = true) [cock] stiffening IFSTUFF [if (hasVagina = true) [vagina] starting to burn with need] IFSTUFFDONE][if (isHerm = true) and ][if (hasVagina = true) [vagina] starting to burn with need]");
 	outputText("\n\n");
 
-	
+
 	outputText("[arian chest] , [arian chestAdj], [rubi breasts], [rubi cock]");
-	
+
 	outputText("\n\n");
-	
+
 }
 
 function startupScreenBody():void
 {
 
-	outputText("\n\n<u>Created by: Fenoxo</u>", false);
-	outputText("\nEdited By: Ashi, SoS, Zeikfried, and Others", false);
-	outputText("\nOpen-source version modifications by: \nAmygdaloidnucleus/Amygdala, Hoffledop/Yoffy, Herp-a-derp/Fake-Name, Cmacleod42", false);
-	outputText("\n\nSource Code:\n<u><a href='https://github.com/herp-a-derp/Corruption-of-Champions'>https://github.com/herp-a-derp/Corruption-of-Champions</a></u>", false);
-	outputText("\nBug Tracker: \n<u><a href='https://github.com/herp-a-derp/Corruption-of-Champions/issues'>https://github.com/herp-a-derp/Corruption-of-Champions/issues</a></u>");
-	outputText("\n(requires an account, unfortunately)");
-	outputText("\n\n<b><u>DISCLAIMER</u>\n\n-There are many strange and odd fetishes contained in this flash.  Peruse at own risk.", false);
-	outputText("\n-Please be 18 or the legal age to view porn before playing.", false);
-	outputText("\n-Try to keep your keyboard clean.  Think of the children!</b>", false);
-	outputText("\n\nFor more information see Fenoxo's Blog at <b><u><a href='http://www.fenoxo.com/'>fenoxo.com</a></u></b>.", false);
-	outputText("\n\nAlso go play <u><a href='http://www.furaffinity.net/view/9830293/'>Nimin</a></u> by Xadera on furaffinity.\n\n", false);
-	
-	
-	if(debug) 
-		outputText("\n\n<b>DEBUG MODE ENABLED:  ITEMS WILL NOT BE CONSUMED BY USE.</b>", false);
-	if(flags[SHOW_SPRITES_FLAG]) 
-		outputText("\n\n<b>Sprites disabled.</b>", false);
-	if(flags[EASY_MODE_ENABLE_FLAG]) 
-		outputText("\n\n<b>Easy Mode On:  Bad-ends can be ignored.</b>", false);
-	if(flags[SILLY_MODE_ENABLE_FLAG]) 
-		outputText("\n\n<b>SILLY MODE ENGAGED: Crazy, nonsensical, and possibly hilarious things may occur.</b>", false);
-	if(isEaster()) 
+
+
+	// NO FUCKING DECENT MULTI-LINE STRING LITERALS BECAUSE FUCKING STUPID
+	// WTF ACTIONSCRIPT YOUR DEV'S ARE ON CRACK
+	outputText(<![CDATA["""
+<br>(Formerly Unnamed Text Game)  
+<u>Created by: Fenoxo</u>
+
+Edited By: Ashi, SoS, Zeikfried, and Others
+
+Open-source version modifications by:  
+Amygdaloidnucleus/Amygdala, Hoffledop/Yoffy, Herp-a-derp/Fake-Name, Cmacleod42
+
+Source Code: <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions'>https://github.com/herp-a-derp/Corruption-of-Champions</a></u>
+
+Bug Tracker: <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions/issues'>https://github.com/herp-a-derp/Corruption-of-Champions/issues</a></u>  
+(requires an account, unfortunately)
+
+<b><u>DISCLAIMER</u>  
+
+- There are many strange and odd fetishes contained in this flash.  Peruse at own risk.
+- Please be 18 or the legal age to view porn before playing.
+- Try to keep your keyboard clean.  Think of the children!</b>
+
+<br>
+For more information see Fenoxo's Blog at <b><u><a href='http://www.fenoxo.com/'>fenoxo.com</a></u></b>.
+
+Also go play <u><a href='http://www.furaffinity.net/view/9830293/'>Nimin</a></u> by Xadera on furaffinity.
+
+	"""]]>, false, true);
+
+
+	if(debug)
+		outputText("\n\n<b>DEBUG MODE ENABLED:  ITEMS WILL NOT BE CONSUMED BY USE.</b>");
+	if(flags[SHOW_SPRITES_FLAG])
+		outputText("\n\n<b>Sprites disabled.</b>");
+	if(flags[EASY_MODE_ENABLE_FLAG])
+		outputText("\n\n<b>Easy Mode On:  Bad-ends can be ignored.</b>");
+	if(flags[SILLY_MODE_ENABLE_FLAG])
+		outputText("\n\n<b>SILLY MODE ENGAGED: Crazy, nonsensical, and possibly hilarious things may occur.</b>");
+	if(isEaster())
 		outputText("\n\n<b>It's Easter!  Enjoy the eggs!</b>");
-	if(isValentine()) 
+	if(isValentine())
 		outputText("\n\n<b>It's Valentine's!</b>");
-	if(isHeliaBirthday()) 
+	if(isHeliaBirthday())
 		outputText("\n\n<b>It's Helia's Birthday Month!</b>");
 
 
 }
 
-function settingsScreen():void 
-{	
+function settingsScreen():void
+{
 	outputText("<b>Settings toggles:</b>\n", true);
 
-	if(debug) 
-		outputText("Debug mode enabled: <b>Yes</b>\n	Items will not be consumed by use, fleeing always succeeds, and bad-ends can be ignored.", false);
+	if(debug)
+		outputText("Debug mode enabled: <b>Yes</b>\n	Items will not be consumed by use, fleeing always succeeds, and bad-ends can be ignored.");
 	else
-		outputText("Debug mode enabled: <b>No</b>\n	Items consumption will occur as normal.", false);
+		outputText("Debug mode enabled: <b>No</b>\n	Items consumption will occur as normal.");
 
-	outputText("\n\n", false);
+	outputText("\n\n");
 
-	if(flags[SHOW_SPRITES_FLAG] == 0) 
-		outputText("Sprites enabled: <b>Yes</b>.\n	You like to look at pretty pictures.", false);
+	if(flags[SHOW_SPRITES_FLAG] == 0)
+		outputText("Sprites enabled: <b>Yes</b>.\n	You like to look at pretty pictures.");
 	else
-		outputText("Sprites enabled: <b>No</b>.\n	There are only words. Nothing else.", false);
+		outputText("Sprites enabled: <b>No</b>.\n	There are only words. Nothing else.");
 
-	outputText("\n\n", false);
+	outputText("\n\n");
 
-	if(flags[EASY_MODE_ENABLE_FLAG]) 
-		outputText("Easy Mode <b>On</b>\n	Bad-ends can be ignored and combat is easier.", false);
+	if(flags[EASY_MODE_ENABLE_FLAG])
+		outputText("Easy Mode <b>On</b>\n	Bad-ends can be ignored and combat is easier.");
 	else
-		outputText("Easy Mode <b>Off</b>\n	Bad-ends can ruin your game and combat is challenging.", false);
-		
-	outputText("\n\n", false);
+		outputText("Easy Mode <b>Off</b>\n	Bad-ends can ruin your game and combat is challenging.");
 
-	if(flags[SILLY_MODE_ENABLE_FLAG]) 
-		outputText("Silly Mode <b>On</b>\n	Crazy, nonsensical, and possibly hilarious things may occur.", false);
+	outputText("\n\n");
+
+	if(flags[SILLY_MODE_ENABLE_FLAG])
+		outputText("Silly Mode <b>On</b>\n	Crazy, nonsensical, and possibly hilarious things may occur.");
 	else
-		outputText("Silly Mode <b>Off</b>\n	You're an incorrigable stick-in-the-mud with no sense of humor.", false);
+		outputText("Silly Mode <b>Off</b>\n	You're an incorrigable stick-in-the-mud with no sense of humor.");
 
-	outputText("\n\n", false);
-	outputText("<b>The following flags are not fully implemeneted yet (e.g. they don't apply in <i>all</i> cases where they could be relevant).</b>\n", false);
-	outputText("Additional note: You <b>must</b> be <i>in a game session</i> (e.g. load your save, hit \"Main Menu\", change the flag settings, and then hit \"Resume\") to change these flags. They're saved into the saveGame file, so if you load a save, it will clear them to the state in that save.", false);
-	outputText("\n\n", false);
+	outputText("\n\n");
+	outputText("<b>The following flags are not fully implemeneted yet (e.g. they don't apply in <i>all</i> cases where they could be relevant).</b>\n");
+	outputText("Additional note: You <b>must</b> be <i>in a game session</i> (e.g. load your save, hit \"Main Menu\", change the flag settings, and then hit \"Resume\") to change these flags. They're saved into the saveGame file, so if you load a save, it will clear them to the state in that save.");
+	outputText("\n\n");
 
-	if(flags[LOW_STANDARDS_FOR_ALL]) 
+	if(flags[LOW_STANDARDS_FOR_ALL])
 	{
-		outputText("Low standards Mode <b>On</b>\n	NPCs ignore body type preferences.", false);
-		outputText("\n	(Not gender preferences though. You still need the right hole.)", false);
+		outputText("Low standards Mode <b>On</b>\n	NPCs ignore body type preferences.");
+		outputText("\n	(Not gender preferences though. You still need the right hole.)");
 	}
 	else
-		outputText("Low standards Mode <b>Off</b>\n	NPCs have body-type preferences.", false);
+		outputText("Low standards Mode <b>Off</b>\n	NPCs have body-type preferences.");
 
 
-	outputText("\n\n", false);
+	outputText("\n\n");
 
-	if(flags[HYPER_HAPPY]) 
+	if(flags[HYPER_HAPPY])
 	{
-		outputText("Hyper Happy mode <b>On</b>\n	Only reducto and humus shrink endowments.", false);
+		outputText("Hyper Happy mode <b>On</b>\n	Only reducto and humus shrink endowments.");
 		outputText("\n	Incubus draft doesn't affect breasts, and succubi milk doesn't affect cocks.")
 	}
 	else
-		outputText("Hyper Happy mode <b>Off</b>\n	Male enhancement potions shrink female endowments, and vice versa.", false);
+		outputText("Hyper Happy mode <b>Off</b>\n	Male enhancement potions shrink female endowments, and vice versa.");
 
-	choices("Toggle Debug", toggleDebug, 
-			"Sprite Toggle", toggleSpritesFlag, 
-			"EZ Mode", toggleEasyModeFlag, 
-			"Silly Toggle", toggleSillyFlag, 
-			"Null", 0, 
-			"Hyper Happy", toggleHyperHappy, 
-			"Low Standards", toggleStandards, 
-			"Null", 0, 
-			"Null", 0, 
+	choices("Toggle Debug", toggleDebug,
+			"Sprite Toggle", toggleSpritesFlag,
+			"EZ Mode", toggleEasyModeFlag,
+			"Silly Toggle", toggleSillyFlag,
+			"Null", 0,
+			"Hyper Happy", toggleHyperHappy,
+			"Low Standards", toggleStandards,
+			"Null", 0,
+			"Null", 0,
 			"Back", mainMenu);
 }
 
@@ -295,16 +310,16 @@ function debugPane():void
 	outputText("\nCurrently have " + images.getLoadedImageCount() + " images loaded into cache.");
 
 	outputText(images.showImage("monster-ceraph"));
-	
+
 	doNext(mainMenu);
 }
 
 function toggleStandards():void
 {
 	//toggle debug
-	if(flags[LOW_STANDARDS_FOR_ALL]) 
+	if(flags[LOW_STANDARDS_FOR_ALL])
 		flags[LOW_STANDARDS_FOR_ALL] = false;
-	else 
+	else
 		flags[LOW_STANDARDS_FOR_ALL] = true;
 	settingsScreen();
 	return;
@@ -313,9 +328,9 @@ function toggleStandards():void
 function toggleHyperHappy():void
 {
 	//toggle debug
-	if(flags[HYPER_HAPPY]) 
+	if(flags[HYPER_HAPPY])
 		flags[HYPER_HAPPY] = false;
-	else 
+	else
 		flags[HYPER_HAPPY] = true;
 	settingsScreen();
 	return;
@@ -324,9 +339,9 @@ function toggleHyperHappy():void
 function toggleDebug():void
 {
 	//toggle debug
-	if(debug) 
+	if(debug)
 		debug = false;
-	else 
+	else
 		debug = true;
 	dataBG.visible = true;
 	dataText.visible = true;
@@ -336,22 +351,22 @@ function toggleDebug():void
 
 function toggleEasyModeFlag():void
 {
-	if(flags[EASY_MODE_ENABLE_FLAG] == 0) 
+	if(flags[EASY_MODE_ENABLE_FLAG] == 0)
 		flags[EASY_MODE_ENABLE_FLAG] = 1;
-	else 
+	else
 		flags[EASY_MODE_ENABLE_FLAG] = 0;
 	settingsScreen();
 	dataBG.visible = true;
 	dataText.visible = true;
 	settingsScreen();
-	return;	
+	return;
 }
 
 function toggleSpritesFlag():void
 {
-	if(flags[SHOW_SPRITES_FLAG]) 
+	if(flags[SHOW_SPRITES_FLAG])
 		flags[SHOW_SPRITES_FLAG] = false;
-	else 
+	else
 		flags[SHOW_SPRITES_FLAG] = true;
 	settingsScreen();
 	return;
@@ -362,11 +377,11 @@ function toggleSillyFlag():void
 
 	if(flags[SILLY_MODE_ENABLE_FLAG])
 		flags[SILLY_MODE_ENABLE_FLAG] = false;
-	else 
+	else
 		flags[SILLY_MODE_ENABLE_FLAG] = true;
 	settingsScreen();
 	return;
-	
+
 }
 
 
@@ -435,7 +450,7 @@ function creditsScreen():void {
 	outputText("<li> Foxxling (Akbal)</li>");
 	outputText("<li> Elfensyne (Phylla)</li>");
 	outputText("<li> Radar (Dominating Sand Witches, Some Phylla)</li>");
-	outputText("<li> Jokester (Sharkgirls, Izma, & Additional Amily Scenes)</li>");	
+	outputText("<li> Jokester (Sharkgirls, Izma, & Additional Amily Scenes)</li>");
 	outputText("<li> Lukadoc (Additional Izma, Ceraph Followers Corrupting Gangbang, Satyrs, Ember)</li>");
 	outputText("<li> Bob (Additional Izma)</li>");
 	outputText("<li> lh84 (Various Typos and Code-Suggestions)</li>");
@@ -494,10 +509,10 @@ function creditsScreen():void {
 	outputText("<li> Eliria (Bee Laying Eggs in Bunny-Girls)</li>");
 	outputText("</ul>");
 	outputText("\nIf I'm missing anyone, please contact me ASAP!  I have done a terrible job keeping the credits up to date!");
-	doNext(mainMenu);	
+	doNext(mainMenu);
 }
 
-function imageCreditsScreen():void 
+function imageCreditsScreen():void
 {
 
 	if (images.getLoadedImageCount() > 0)
@@ -515,7 +530,7 @@ function imageCreditsScreen():void
 	{
 		outputText("<b>No Image-Pack Found!</b>\n", true);
 	}
-	doNext(mainMenu);	
+	doNext(mainMenu);
 }
 
 function howToPlay():void {
@@ -535,4 +550,4 @@ function eventTester():void {
 	//eventTestInput.text = "Paste test event text here.";
 	simpleChoices("Proceed",118,"",0,"",0,"",0,"Back",119);
 }
-	
+

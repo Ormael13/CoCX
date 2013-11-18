@@ -878,13 +878,16 @@ function initializeGearStorage():void {
 // This lets you pre-construct the argument, to make things cleaner
 function randomChoice(...args):*
 {
+	var choice:Number;
 	if ((args.length == 1) && (args[0] is Array))
 	{
-		var i:Number = int(Math.round(Math.random() * (args[0].length - 1)));
-		return args[0][i];
+		choice = int(Math.round(Math.random() * (args[0].length - 1)));
+		return args[0][choice];
 	}
-
-	var i:Number = int(Math.round(Math.random() * (args.length - 1)));
-	return args[i];
+	else
+	{
+		choice = int(Math.round(Math.random() * (args.length - 1)));
+		return args[choice];
+	}
 
 }
