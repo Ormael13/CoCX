@@ -7,13 +7,13 @@ Parser Syntax:
 
 Conditional statements:
 // Simple if statement:
-	[if (condition) OUTPUT_IF_TRUE]							
+	[if (condition) OUTPUT_IF_TRUE]
 // If-Else statement
-	[if (condition) OUTPUT_IF_TRUE | OUTPUT_IF_FALSE]		
+	[if (condition) OUTPUT_IF_TRUE | OUTPUT_IF_FALSE]
 	// Note - Implicit else indicated by presence of the "|"
 
 // Object aspect descriptions
-	[object aspect]										
+	[object aspect]
 	// gets the description of aspect "aspect" of object/NPC/PC "object"
 	// Eventually, I want this to be able to use introspection to access class attributes directly
 	// Maybe even manipulate them, though I haven't thought that out much at the moment.
@@ -33,7 +33,7 @@ Conditional statements:
 Planned, but not implemented yet:
 
 	[screen (SCREEN_NAME) | screen text]
-	// creates a new screen/page. 
+	// creates a new screen/page.
 
 	[change_screen (SCREEN_NAME)| button_text]
 	// Creates a button which jumps to SCREEN_NAME when clicked
@@ -41,11 +41,11 @@ Planned, but not implemented yet:
 */
 
 // Lookup dictionary for converting any single argument brackets into it's corresponding string
-// basically [armor] results in the "[armor]" segment of the string being replaced with the 
+// basically [armor] results in the "[armor]" segment of the string being replaced with the
 // results of the corresponding anonymous function, in this case: function():* {return player.armorName;}
 // tags not present in the singleArgConverters object return an error message.
-// 
-var singleArgConverters:Object = 
+//
+var singleArgConverters:Object =
 {
 		// all the errors related to trying to parse stuff if not present are
 		// already handled in the various *Descript() functions.
@@ -75,7 +75,7 @@ var singleArgConverters:Object =
 		"fullchest"					: function():* { return allChestDesc(); },
 		"hair"						: function():* { return hairDescript(); },
 		"hairorfur"					: function():* { return hairOrFur(); },
-		"he"						: function():* { return player.mf("he","she"); },	
+		"he"						: function():* { return player.mf("he","she"); },
 		"him"						: function():* { return player.mf("him","her"); },
 		"hips"						: function():* { return hipDescript();},
 		"his"						: function():* { return player.mf("his","hers"); },
@@ -104,7 +104,7 @@ var singleArgConverters:Object =
 }
 
 // Does lookup of single argument tags ("[cock]", "[armor]", etc...)
-// Supported variables are the options listed in the above 
+// Supported variables are the options listed in the above
 // singleArgConverters object. If the passed argument is found in the above object,
 // the corresponding anonymous function is called, and it's return-value is returned.
 // If the arg is not present in the singleArgConverters object, an error message is
@@ -128,7 +128,7 @@ function convertSingleArg(arg:String):String
 	if (capitalize)
 		argResult = capitalizeFirstWord(argResult);
 	return argResult;
-}	
+}
 
 // PRONOUNS: The parser uses Elverson/Spivak Pronouns specifically to allow characters to be written with non-specific genders.
 // http://en.wikipedia.org/wiki/Spivak_pronoun
@@ -142,10 +142,10 @@ function convertSingleArg(arg:String):String
 // (Is it bad that half my development time so far has been researching non-gendered nouns? ~~~~Fake-Name)
 
 
-var arianLookups:Object = // For subject: "arian" 
+var arianLookups:Object = // For subject: "arian"
 {
-	"man"		: function():* {return arianMF("man","woman")},	
-	// argh! "Man" is the mass-noun for humanity, and I'm loathe to choose an even more esoteric variant. 
+	"man"		: function():* {return arianMF("man","woman")},
+	// argh! "Man" is the mass-noun for humanity, and I'm loathe to choose an even more esoteric variant.
 	// Elverson/Spivak terminology is already esoteric enough, and it lacks a ungendered mass noun.
 
 	"ey"		: function():* {return arianMF("he","she")},
@@ -158,15 +158,15 @@ var arianLookups:Object = // For subject: "arian"
 	"chest"		: function():* {return arianChest()}
 }
 // Arian unhandled terms (I have not decided how to support them yet):
-// arianMF("mas","mis") 
-// arianMF("master","mistress") 
-// arianMF("male","girly") 
+// arianMF("mas","mis")
+// arianMF("master","mistress")
+// arianMF("male","girly")
 
 
 
 var rubiLookups:Object = // For subject: "rubi"
 {
-	"man"		: function():* {return rubiMF("man","woman")},	
+	"man"		: function():* {return rubiMF("man","woman")},
 
 	"ey"		: function():* {return rubiMF("he","she")},
 	"em"		: function():* {return rubiMF("him","her")},
@@ -216,13 +216,13 @@ var cockHeadLookups:Object = // For subject: "cockHead"
 // like so: twoWordNumericTagsLookup["object"](Number("NUMERIC-attribute"))
 //
 // if attribute cannot be case to a number, the parser looks for "object" in twoWordTagsLookup.
-var twoWordNumericTagsLookup:Object = 
+var twoWordNumericTagsLookup:Object =
 {
 		"cockfit":
 			function(aspect):*
 			{
 				if(!player.hasCock()) return "<b>(Attempt to parse cock when none present.)</b>";
-				else 
+				else
 				{
 					if(player.cockThatFits(aspect) >= 0) return cockDescript(player.cockThatFits(aspect));
 					else return cockDescript(player.smallestCockIndex());
@@ -240,7 +240,7 @@ var twoWordNumericTagsLookup:Object =
 		"cockheadfit":
 			function(aspect):*
 			{
-			
+
 				if(!player.hasCock()) return "<b>(Attempt to parse cockhead when none present.)</b>";
 				else {
 					if(player.cockThatFits(aspect) >= 0) return cockHead(player.cockThatFits(aspect));
@@ -272,9 +272,9 @@ var twoWordNumericTagsLookup:Object =
 // These tags take an ascii attribute for lookup.
 // [object attribute]
 // if attribute cannot be case to a number, the parser looks for "object" in twoWordTagsLookup,
-// and then uses the corresponding object to determine the value of "attribute", by looking for 
+// and then uses the corresponding object to determine the value of "attribute", by looking for
 // "attribute" twoWordTagsLookup["object"]["attribute"]
-var twoWordTagsLookup:Object = 
+var twoWordTagsLookup:Object =
 {
 	// NPCs:
 	"rubi"		: rubiLookups,
@@ -345,12 +345,12 @@ function convertDoubleArg(arg:String):String
 	}
 
 
-	
+
 
 	if (capitalize)
 		argResult = capitalizeFirstWord(argResult);
 	return argResult;
-}	
+}
 
 
 
@@ -361,9 +361,9 @@ function convertDoubleArg(arg:String):String
 
 // Possible text arguments in the conditional of a if statement
 // First, there is an attempt to cast the argument to a Number. If that fails,
-// a dictionary lookup is performed to see if the argument is in the conditionalOptions[] 
+// a dictionary lookup is performed to see if the argument is in the conditionalOptions[]
 // object. If that fails, we just fall back to returning 0
-var conditionalOptions:Object = 
+var conditionalOptions:Object =
 {
 		"strength"			: function():* {return  player.str;},
 		"toughness"			: function():* {return  player.tou;},
@@ -413,8 +413,8 @@ var conditionalOptions:Object =
 		"false"				: function():* {return  false;}
 	}
 
-// converts a single argument to a conditional to 
-// the relevant value, either by simply converting to a Number, or 
+// converts a single argument to a conditional to
+// the relevant value, either by simply converting to a Number, or
 // through lookup in the above conditionalOptions oject, and then calling the
 // relevant function
 // Realistally, should only return either boolean or numbers.
@@ -425,7 +425,7 @@ function convertConditionalArgumentFromStr(arg:String):*
 	arg = arg.toLowerCase()
 	var argResult = 0;
 
-	// Note: Case options MUST be ENTIRELY lower case. The comparaison string is converted to 
+	// Note: Case options MUST be ENTIRELY lower case. The comparaison string is converted to
 	// lower case before the switch:case section
 
 	// Try to cast to a number. If it fails, go on with the switch/case statement.
@@ -452,10 +452,10 @@ function convertConditionalArgumentFromStr(arg:String):*
 // Does the proper parsing and look-up of any of the special nouns
 // which can be present in the conditional
 function evalConditionalStatementStr(textCond:String):Boolean
-{	
+{
 	// Evaluates a conditional statement:
 	// (varArg1 [conditional] varArg2)
-	// varArg1 & varArg2 can be either numbers, or any of the 
+	// varArg1 & varArg2 can be either numbers, or any of the
 	// strings in the "conditionalOptions" object above.
 	// numbers (which are in string format) are converted to a Number type
 	// prior to comparison.
@@ -489,13 +489,13 @@ function evalConditionalStatementStr(textCond:String):Boolean
 	condArgStr2 	= expressionResult[3];
 
 	var retVal:Boolean = false;
-	
+
 	var condArg1;
 	var condArg2;
-	
+
 	condArg1 = convertConditionalArgumentFromStr(condArgStr1);
 	condArg2 = convertConditionalArgumentFromStr(condArgStr2);
-		
+
 	//Perform check
 	if(operator == "=")
 		retVal = (condArg1 == condArg2);
@@ -514,9 +514,9 @@ function evalConditionalStatementStr(textCond:String):Boolean
 	else
 		retVal = (condArg1 != condArg2);
 
-	
+
 	if (debug) trace("Check: " + condArg1 + " " + operator + " " + condArg2 + " = " + retVal);
-	
+
 	return retVal;
 }
 
@@ -546,7 +546,7 @@ function splitConditionalResult(textCtnt:String): Array
 			ret = ["<b>Error! Too many options in if statement!</b>",
 					"<b>Error! Too many options in if statement!</b>"];
 
-		// If there was no "else" condition, add a 
+		// If there was no "else" condition, add a
 		if (ret.length == 1)
 			ret.push("");
 		// No nested brackets, just split
@@ -554,7 +554,7 @@ function splitConditionalResult(textCtnt:String): Array
 	else
 	{
 		// This *may* not be a problem, since IF statements should be evaluated depth-first.
-		// Therefore, upper if statements shouldn't be able to tell they contained deeper 
+		// Therefore, upper if statements shouldn't be able to tell they contained deeper
 		// statements at all anyways, since the deeper statments will be evaluated to
 		// plain text before the upper statements even are parsed at all
 		// As always, more testing is needed.
@@ -567,7 +567,7 @@ function splitConditionalResult(textCtnt:String): Array
 // Returns an empty string ("") if the conditional rvaluates to false, and there is no else
 // option.
 function parseConditional(textCtnt:String, depth:int):String
-{	
+{
 	// NOTE: enclosing brackets are *not* included in the actual textCtnt string passed into this function
 	// they're shown in the below examples simply for clarity's sake.
 	// And because that's what the if-statements look like in the raw string passed into the parser
@@ -590,7 +590,7 @@ function parseConditional(textCtnt:String, depth:int):String
 	var i:Number = 0;
 	var tmp:Number = 0;
 	var parenthesisCount:Number = 0;
-	
+
 	//var ifText;
 	var conditional;
 	var output;
@@ -618,9 +618,9 @@ function parseConditional(textCtnt:String, depth:int):String
 				conditional = recParser(textCtnt.substring(tmp+1, i), depth);
 				conditional = evalConditionalStatementStr(conditional);
 
-				// Make sure the contents of the if-statement have been evaluated to a plain-text string before trying to 
+				// Make sure the contents of the if-statement have been evaluated to a plain-text string before trying to
 				// split the base-level if-statement on the "|"
-				output = recParser(textCtnt.substring(i+1, textCtnt.length), depth);	
+				output = recParser(textCtnt.substring(i+1, textCtnt.length), depth);
 
 				// And now do the actual splitting.
 				output = splitConditionalResult(output);
@@ -636,7 +636,7 @@ function parseConditional(textCtnt:String, depth:int):String
 			}
 		}
 	}
-	else 
+	else
 		throw new Error("Invalid if statement!", textCtnt);
 	return "";
 }
@@ -699,7 +699,7 @@ function recParser(textCtnt:String, depth):String
 {
 
 	// Depth tracks our recursion depth
-	// Basically, we need to handle things differently on the first execution, so we don't mistake single-word print-statements for 
+	// Basically, we need to handle things differently on the first execution, so we don't mistake single-word print-statements for
 	// a tag. Therefore, every call of recParser increments depth by 1
 
 	depth += 1;
@@ -711,9 +711,9 @@ function recParser(textCtnt:String, depth):String
 	var i:Number = 0;
 
 	var bracketCnt:Number = 0;
-	
+
 	var tmp:Number = -1;
-	
+
 	var retStr:String = "";
 
 	do
@@ -771,9 +771,9 @@ function recParser(textCtnt:String, depth):String
 
 				// Only parse the trailing string if it has brackets in it.
 				// if not, we need to just return the string as-is.
-				// Parsing the trailing string if it doesn't have brackets could lead to it being 
+				// Parsing the trailing string if it doesn't have brackets could lead to it being
 				// incorrectly interpreted as a multi-word tag (and shit would asplode and shit)
-				
+
 				postfixTmp = textCtnt.substring(i+1, textCtnt.length);
 				if (postfixTmp.indexOf("[") != -1)
 				{
@@ -785,7 +785,7 @@ function recParser(textCtnt:String, depth):String
 					if (debug) trace("No brackets in trailing text", postfixTmp)
 					retStr += postfixTmp;
 				}
-				
+
 				return retStr;
 				// and return the parsed string
 			}
@@ -795,11 +795,11 @@ function recParser(textCtnt:String, depth):String
 	{
 		// DERP. We should never have brackets around something that ISN'T a tag intended to be parsed. Therefore, we just need
 		// to determine what type of parsing should be done do the tag.
-		if (debug) trace("No brackets present", textCtnt);	
+		if (debug) trace("No brackets present", textCtnt);
 
-	
+
 		retStr += textCtnt;
-		
+
 	}
 
 	return retStr;
@@ -813,38 +813,53 @@ function recParser(textCtnt:String, depth):String
 
 
 
-function recursiveParser(contents:String):String
+function recursiveParser(contents:String, parseAsMarkdown:Boolean = false):String
 {
 	var ret:String = "";
 	// Run through the parser
+	contents = contents.replace(/\\n/g, "\n")
 	ret = recParser(contents, 0);
 
-	// Disabling markdown for the moment, because it's fucking with the line-endings.
-	// and then the markdown parser
-	// import showdown.Showdown;
-	// ret = Showdown.makeHtml(ret);
+	// Currently, not parsing text as markdown by default because it's fucking with the line-endings.
+	import showdown.Showdown;
+	if (parseAsMarkdown)
+	{
+		trace("markdownificating");
+		ret = Showdown.makeHtml(ret);
+
+		// stupid-as-fuck workarounds because the flash html support is broken.
+		ret = ret.replace(/\n/g, "")
+		// Remove all the explicit \n's in the content, because
+		// flash is ridiculously stupid, and doesn't properly remove them like EVERY other html markup parser.
+
+		var regexPCloseTag:RegExp = /<\/p>/gi;
+		ret = ret.replace(regexPCloseTag,"</p>\n");
+		// Finally, add a additional newline after each closing P tag, because flash only
+		// outputs one newline per <p></p> tag, apparently flash again feels the need to be a special snowflake
+	}
 
 	// cleanup escaped brackets
 	ret = ret.replace(/\\\]/g, "]")
 	ret = ret.replace(/\\\[/g, "[")
 
+	//trace(ret);
 	return ret
 
 }
 
 // Stupid string utility functions, because actionscript doesn't have them (WTF?)
 
-function stripStr(str:String):String 
+function stripStr(str:String):String
 {
 	return trimStrBack(trimStrFront(str, " "), " ");
 }
 
-function trimStr(str:String, char:String):String 
+function trimStr(str:String, char:String):String
 {
 	return trimStrBack(trimStrFront(str, char), char);
 }
 
-function trimStrFront(str:String, char:String):String 
+function trimStrFront(str:String, char:String):String
 {
 	char = stringToCharacter(char);
 	if (str.charAt(0) == char) {
@@ -853,7 +868,7 @@ function trimStrFront(str:String, char:String):String
 	return str;
 }
 
-function trimStrBack(str:String, char:String):String 
+function trimStrBack(str:String, char:String):String
 {
 	char = stringToCharacter(char);
 	if (str.charAt(str.length - 1) == char) {
@@ -861,9 +876,9 @@ function trimStrBack(str:String, char:String):String
 	}
 	return str;
 }
-function stringToCharacter(str:String):String 
+function stringToCharacter(str:String):String
 {
-	if (str.length == 1) 
+	if (str.length == 1)
 	{
 		return str;
 	}
@@ -873,7 +888,7 @@ function stringToCharacter(str:String):String
 
 function isUpperCase(char:String):Boolean
 {
-	if (char == char.toUpperCase()) 
+	if (char == char.toUpperCase())
 	{
 		return true;
 	}

@@ -60,7 +60,7 @@ function outputList():String {
 		}
 	}
 	list = new Array();
-	return stuff;	
+	return stuff;
 }
 
 
@@ -98,7 +98,7 @@ function HPChange(changeNum:Number, display:Boolean) {
 	}
 	statScreenRefresh();
 }
-		
+
 function clone(source:Object):* {
 	var copier:ByteArray = new ByteArray();
 	copier.writeObject(source);
@@ -114,22 +114,22 @@ function speech(output:String, speaker:String):void {
 
 /*
 function checkCondition(variable:String, op:String, test:String):Boolean
-{	
+{
 	//Regex to check if something is a number
 	var isNumber:RegExp = new RegExp("[0-9]+");
-	
+
 	//Regex to check if something is a boolean
 	var isBoolean:RegExp = new RegExp("[true|false]");
-	
+
 	var result:Boolean = false;
-	
+
 	var a, b;
-	
+
 	if (isNumber.test(test))
 	{
 		//Number variables are handled in here
 		b = Number(test);
-		
+
 		//Case/Switch for the variable name
 		switch(variable)
 		{
@@ -209,7 +209,7 @@ function checkCondition(variable:String, op:String, test:String):Boolean
 			a = 0;
 			break;
 		}
-		
+
 		//Perform check
 		if(op == "=")
 		{
@@ -323,7 +323,7 @@ function checkCondition(variable:String, op:String, test:String):Boolean
 			a = false;
 			break;
 		}
-		
+
 		if(op == "=")
 		{
 			result = (a == b);
@@ -336,14 +336,14 @@ function checkCondition(variable:String, op:String, test:String):Boolean
 	else
 	{
 		//String variables here
-		
+
 		switch(variable)
 		{
 		default:
 			a = "";
 			break;
 		}
-		
+
 		if(op == "=")
 		{
 			result = (a == test);
@@ -353,17 +353,17 @@ function checkCondition(variable:String, op:String, test:String):Boolean
 			result = (a != test);
 		}
 	}
-	
+
 	trace("Check: " + variable + " " + op + " " + test + " = " + result);
-	
+
 	return result;
 }
 */
 
-function parseText(text:String):String
+function parseText(text:String, parseAsMarkdown:Boolean = false):String
 {
 	// Moved into external parser.
-	text = recursiveParser(text); 
+	text = recursiveParser(text, parseAsMarkdown);
 	return text;
 }
 
@@ -376,19 +376,19 @@ function parseText(text:String):String
 	if(debug) trace("Parsing Text");
 	//Regex to check if something is a number
 	var isNumber:RegExp = new RegExp("[0-9]+");
-	
+
 	//Regex to check if something is a boolean
 	var isBoolean:RegExp = new RegExp("[true|false]");
-	
+
 	//Regex to check if a string matches the expression format
 	var isExp:RegExp = new RegExp("\\(([A-Za-z0-9]+)\\s(==|=|!=|<|>|<=|>=)\\s([A-Za-z0-9]+)\\)");
-	
+
 	//Regex to match non-branch, param-free tags - Tag names can contain any letters and numbers. No spaces or special characters.
 	var basicTag:RegExp = new RegExp("\\[([a-zA-Z0-9]+)\\]");
-	
+
 	//Regex to match tags with a single parameter - Tag names can contain any letters and numbers. No spaces or special characters. Yes, I felt the need to repeat this.
 	var paramTag:RegExp = new RegExp("\\[([a-zA-Z0-9]+)\\s(.*?)\\]");
-	
+
 	//Regex to match branch tags - You can't nest if's, and they MUST end with a space to make recursive parsing work
 	//var branchTag:RegExp = new RegExp("\\[if\\s\\(([a-zA-Z]+)\\s(=|!=|>|<|<=|>=)\\s(.*?)\\)\\s\\\"(.*?)\\\"\\]");
 	//var branchTag:RegExp = new RegExp("\\[if\\s\\((.*?)\\)\\s\\\"(.*?)\\\"\\]");
@@ -397,7 +397,7 @@ function parseText(text:String):String
 	// where OUTPUT_TEXT is passed recursively into parseText
 	//
 	var branchTag:RegExp = /\[if (.*?) \"(.*?)\"\]/i;		// unbreak my text editors highlighting "
-	
+
 	var branchTagElse:RegExp = /\[if (.*?) \"(.*?)\" else \"(.*?)\"\]/i; 		//"
 
 	// Old regexes
@@ -406,36 +406,36 @@ function parseText(text:String):String
 
 	var rep:String;
 	//We parse the tags from most complex to most basic, as the basic tag has the most "greedy" regex
-	
+
 	//Grab the first branch tag
 	var result:Object = branchTagElse.exec(text);
-	
+
 	while (result != null)
 	{
 		//result[2] is the text to be displayed. Also gets parsed for tags.
 		rep = parseText(result[2]);
-		
+
 		var rep2:String = parseText(result[3]);
-		
+
 		var expTotal:String = result[1];
-		
+
 		var check;
-		
+
 		var exp:Object = isExp.exec(expTotal);
-		
+
 		while (exp != null)
 		{
 			var temp:Boolean = checkCondition(exp[1], exp[2], exp[3]);
-			
+
 			expTotal = expTotal.replace(isExp, "");
-			
+
 			expTotal = expTotal.replace(/^\s+|\s+$/g, "");
-			
+
 			if (check != undefined)
 			{
 				var oi = expTotal.indexOf("||");
 				var ai = expTotal.indexOf("&&");
-				
+
 				if (oi == 0)
 				{
 					check = (check || temp);
@@ -444,17 +444,17 @@ function parseText(text:String):String
 				{
 					check = (check && temp);
 				}
-				
+
 				expTotal = expTotal.slice(2, expTotal.length);
 			}
 			else
 			{
 				check = temp;
 			}
-			
+
 			exp = isExp.exec(expTotal);
 		}
-		
+
 		//If comparison is true, add in the text
 		if (check)
 		{
@@ -466,37 +466,37 @@ function parseText(text:String):String
 			text = text.replace(branchTagElse, rep2);
 			//9999text = text.replace(branchTagElse, rep2);
 		}
-		
+
 		//Go to next result. If null, loop ends.
 		check = undefined;
 		result = branchTagElse.exec(text);
 	}
-	
+
 	result = branchTag.exec(text);
-	
+
 	//While there are branch tags, parse them.
 	while (result != null)
 	{
 		//result[2] is the text to be displayed. Also gets parsed for tags.
 		rep = parseText(result[2]);
-		
+
 		expTotal = result[1];
-		
+
 		exp = isExp.exec(expTotal);
-		
+
 		while (exp != null)
 		{
 			var tempo:Boolean = checkCondition(exp[1], exp[2], exp[3]);
-			
+
 			expTotal = expTotal.replace(isExp, "");
-			
+
 			expTotal = expTotal.replace(/^\s+|\s+$/g, "");
-			
+
 			if (check != undefined)
 			{
 				oi = expTotal.indexOf("||");
 				ai = expTotal.indexOf("&&");
-				
+
 				if (oi == 0)
 				{
 					check = (check || tempo);
@@ -505,17 +505,17 @@ function parseText(text:String):String
 				{
 					check = (check && tempo);
 				}
-				
+
 				expTotal = expTotal.slice(2, expTotal.length);
 			}
 			else
 			{
 				check = tempo;
 			}
-			
+
 			exp = isExp.exec(expTotal);
 		}
-		
+
 		//If comparison is true, add in the text
 		if (check == true)
 		{
@@ -525,21 +525,21 @@ function parseText(text:String):String
 		{
 			text = text.replace(branchTag, "");
 		}
-		
+
 		//Go to next result. If null, loop ends.
 		check = undefined;
 		result = branchTag.exec(text);
 	}
-	
+
 	//Find first single param tag
 	result = paramTag.exec(text);
-	
+
 	//While we have single param tags, parse them
 	while (result != null)
 	{
 		//Convert param to an actual value if needed
 		var arg;
-		
+
 		if (isNumber.test(result[2]))
 		{
 			arg = Number(result[2]);
@@ -548,7 +548,7 @@ function parseText(text:String):String
 		{
 			arg = result[2];
 		}
-		
+
 		//Case/Switch for the tag name
 		//result[1] is the tag name
 		//rep is the text the tag is replaced with
@@ -651,21 +651,21 @@ function parseText(text:String):String
 			rep = "<u><b>!Unknown tag \"" + result[1] + "\"!</b></u>";
 			break;
 		}
-		
+
 		//Add text, try and jump to next
 		text = text.replace(paramTag, rep);
-		
+
 		result = paramTag.exec(text);
 	}
-	
+
 	//Find first basic tag
 	result = basicTag.exec(text);
-	
+
 	//While we have basic tags
 	while (result != null)
 	{
 	//	rep;
-		
+
 		//Same as param tags, but without the param
 		switch(result[1])
 		{
@@ -835,16 +835,16 @@ function parseText(text:String):String
 			rep = "<b>!Unknown tag \"" + result[1] + "\"!</b>";
 			break;
 		}
-		
+
 		//Standard replace & jump
 		text = text.replace(basicTag, rep);
-		
+
 		result = basicTag.exec(text);
 	}
 	*/
-	
+
 	//Old stuff
-	
+
 	/*output = output.split("{").join("<b>BRACE {</b>");
 	output = output.split("}").join("<b>} BRACE</b>");
 	if(player.hasCock()) {
@@ -908,7 +908,7 @@ function parseText(text:String):String
 		output = output.split("[clit]").join(clitDescript());
 	}
 	else output = output.split("[vagOrAss]").join(assholeDescript());
-	
+
 	return text;
 }
 
@@ -920,11 +920,10 @@ function clearOutput():void {
 	scrollBar.update();
 }
 
-function outputText(output:String, purgeText:Boolean = false, parse = true) {
-	if(parse)
-	{
-		output = parseText(output);
-	}
+function outputText(output:String, purgeText:Boolean = false, parseAsMarkdown = false)
+{
+	output = parseText(output, parseAsMarkdown);
+
 	//OUTPUT!
 	if(purgeText) {
 		//if(!debug) mainText.htmlText = output;
@@ -1498,7 +1497,7 @@ function levelUpGo(e:MouseEvent):void {
 		player.perkPoints++;
 		outputText("<b>You are now level " + player.level + "!</b>\n\nYou may now apply +5 to one attribute.  Which will you choose?", true);
 		player.XP -= (player.level-1) * 100;
-		simpleChoices("Strength", 44, "Toughness", 45, "Speed", 47, "Intelligence", 46, "", 0);		
+		simpleChoices("Strength", 44, "Toughness", 45, "Speed", 47, "Intelligence", 46, "", 0);
 	}
 	//Spend perk points
 	else if(player.perkPoints > 0) {
@@ -1713,7 +1712,7 @@ function buildPerkList():void {
 			perkList[perkList.length] = {label:"Resistance"};
 		}
 	}
-	aCb.dataProvider = new DataProvider(perkList); 
+	aCb.dataProvider = new DataProvider(perkList);
 }
 function applyPerk(pName:String = ""):void {
 	player.perkPoints--;
@@ -1933,11 +1932,11 @@ function buttonText(buttonName:String):String {
 	if(buttonName == "buttons[6]") return b7Text.text;
 	if(buttonName == "b7Text") return b7Text.text;
 	if(buttonName == "buttons[7]") return b8Text.text;
-	if(buttonName == "b8Text") return b8Text.text;	
+	if(buttonName == "b8Text") return b8Text.text;
 	if(buttonName == "buttons[8]") return b9Text.text;
 	if(buttonName == "b9Text") return b9Text.text;
 	if(buttonName == "buttons[9]") return b0Text.text;
-	if(buttonName == "b0Text") return b0Text.text;	
+	if(buttonName == "b0Text") return b0Text.text;
 	return "NULL";
 }
 function mouseOverTextin(e:MouseEvent, texts:String)
@@ -2421,7 +2420,7 @@ function mouseOverTextin(e:MouseEvent, texts:String)
 		mouseOverText.htmlText = "This looks like a normal shark tooth, though with an odd purple glow.";
 		return;
 	}
-	
+
 
 	if(texts.indexOf("KangaFt") != -1) {
 		positionMOB(e.target.x, e.target.y)
@@ -2471,7 +2470,7 @@ function mouseOverTextin(e:MouseEvent, texts:String)
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "This small bottle of liqueur is labelled 'Bimbo Liqueur'.  There's a HUGE warning label about the effects being strong and usually permanent, so you should handle this with care.";
 		return;
-	}	
+	}
 	if(texts.indexOf("H.Gaunt") != -1) {
 		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
@@ -2556,7 +2555,7 @@ function mouseOverTextin(e:MouseEvent, texts:String)
 		mouseOverText.htmlText = "This small, peach-sized fruit has tiny whisker-like protrusions growing from the sides.";
 		return;
 	}
-	
+
 	if(texts.indexOf("Gob.Ale") != -1 || texts == "GoblinAle") {
 		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
@@ -2572,7 +2571,7 @@ function mouseOverTextin(e:MouseEvent, texts:String)
 		mouseOverText.htmlText = "This pile of hummus doesn't look that clean, and you really don't remember where you got it from.  It looks bland.  So bland that you feel blander just by looking at it.";
 		return;
 	}
-	
+
 	if(texts.indexOf("LthrRob") != -1) {
 		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
@@ -2636,7 +2635,7 @@ function mouseOverTextin(e:MouseEvent, texts:String)
 		mouseOverText.htmlText = "An oddly bent piece of solid wood favored by spell-casters.  It is said to be made of from one of Marae's roots and allow for easier magic use. (ATK: 3) (Cost: 350)";
 		return;
 	}
-	
+
 	if(texts.indexOf("W.Stick") != -1 || texts.indexOf("Wingstick") != -1) {
 		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
@@ -2693,7 +2692,7 @@ function mouseOverTextin(e:MouseEvent, texts:String)
 		mouseOverText.htmlText = "This single metal gauntlet has the knuckles tipped with metal spikes.  Though it lacks the damaging potential of other weapons, the sheer pain of its wounds has a chance of stunning your opponent. (ATK: 5) (Cost: 400)";
 		return;
 	}
-	
+
 	if(texts.indexOf("FullChn") != -1) {
 		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
@@ -2708,7 +2707,7 @@ function mouseOverTextin(e:MouseEvent, texts:String)
 		mouseOverText.htmlText = "A revealing chainmail bikini that barely covers anything.  The bottom half is little more than a triangle of metal and a leather thong.";
 		return;
 	}
-	
+
 	if(texts.indexOf("SnakOil") != -1) {
 		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
@@ -2884,7 +2883,7 @@ function mouseOverTextin(e:MouseEvent, texts:String)
 		mouseOverText.htmlText = "A bottle containing a misty fluid with a grainy texture, it has a long neck and a ball-like base.  The label has a stylized picture of a well endowed cowgirl nursing two guys while they jerk themselves off.";
 		return;
 	}
-	
+
 	if(texts.indexOf("SDelite") != -1) {
 		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
@@ -2949,35 +2948,35 @@ function mouseOverTextin(e:MouseEvent, texts:String)
 		return;
 	}
 	if(texts.indexOf("SucMilk") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "This milk-bottle is filled to the brim with a creamy white milk of dubious origin.  A pink label proudly labels it as \"<i>Succubi Milk</i>\".  In small text at the bottom of the label it reads: \"<i>To bring out the succubus in YOU!</i>\"";
 		return;
 	}
 	if(texts.indexOf("P.S.Mlk") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "This milk-bottle is filled to the brim with a creamy white milk of dubious origin.  A pink label proudly labels it as \"<i>Succubi Milk</i>\".  In small text at the bottom of the label it reads: \"<i>To bring out the succubus in YOU!</i>\"  Purified by Rathazul to prevent corruption.";
 		return;
 	}
 	if(texts.indexOf("Cerul P") != -1 || texts.indexOf("Cerulean P.") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "This is a mysterious bottle filled with a sky-blue liquid that sloshes gently inside.  Supposedly it will make you irresistible, though to what or who you cannot say.";
 		return;
 	}
 	if(texts.indexOf("PeppWht") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "This tightly corked glass bottle gives of a pepperminty smell and reminds you of the winter holidays.  How odd.";
 		return;
 	}
 	if(texts.indexOf("IncubiD") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "The cork-topped flask swishes with a slimy looking off-white fluid, purported to give incubi-like powers.  A stylized picture of a humanoid with a huge penis is etched into the glass.";
@@ -2985,189 +2984,189 @@ function mouseOverTextin(e:MouseEvent, texts:String)
 	}
 	//"M. Milk"
 	if(texts.indexOf("M. Milk") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "A clear bottle of milk from Marble's breasts. It smells delicious.";
 		return;
 	}
 	if(texts.indexOf("P.Draft") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "The cork-topped flask swishes with a slimy looking off-white fluid, purported to give incubi-like powers.  A stylized picture of a humanoid with a huge penis is etched into the glass. Rathazul has purified this to prevent corruption upon use.";
 		return;
 	}
 	if(texts.indexOf("TScroll") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "This tattered scroll is written in strange symbols, yet you have the feeling that if you tried to, you could decipher it.";
 		return;
 	}
 	if(texts.indexOf("BrownEg") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "This is an oblong egg, not much different from a chicken egg in appearance (save for the color).  Something tells you it's more than just food.";
 		return;
 	}
 	if(texts.indexOf("L.BrnEg") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "This is an oblong egg, not much different from an ostrich egg in appearance (save for the color).  Something tells you it's more than just food.";
 		return;
 	}
 	if(texts.indexOf("PurplEg") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "This is an oblong egg, not much different from a chicken egg in appearance (save for the color).  Something tells you it's more than just food.";
 		return;
 	}
 	if(texts.indexOf("L.PrpEg") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "This is an oblong egg, not much different from an ostrich egg in appearance (save for the color).  Something tells you it's more than just food.";
 		return;
 	}
 	if(texts.indexOf("BlueEgg") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "This is an oblong egg, not much different from a chicken egg in appearance (save for the color).  Something tells you it's more than just food.";
 		return;
 	}
 	if(texts.indexOf("L.BluEg") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "This is an oblong egg, not much different from an ostrich egg in appearance (save for the color).  Something tells you it's more than just food.";
 		return;
 	}
 	if(texts.indexOf("PinkEgg") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "This is an oblong egg, not much different from a chicken egg in appearance (save for the color).  Something tells you it's more than just food.";
 		return;
 	}
 	if(texts.indexOf("NPnkEgg") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "This is an oblong egg with an unnatural neon pink coloration.  It tingles in your hand with odd energies that make you feel as if you could jump straight into the sky.";
 		return;
 	}
 	if(texts.indexOf("L.PnkEg") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "This is an oblong egg, not much different from an ostrich egg in appearance (save for the color).  Something tells you it's more than just food.";
 		return;
 	}
 	if(texts.indexOf("WhiteEg") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "This is an oblong egg, not much different from a chicken egg in appearance.  Something tells you it's more than just food.";
 		return;
 	}
 	if(texts.indexOf("L.WhtEg") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "This is an oblong egg, not much different from an ostrich egg in appearance.  Something tells you it's more than just food.";
 		return;
 	}
 	if(texts.indexOf("BlackEg") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "This is an oblong egg, not much different from a chicken egg in appearance (save for the color).  Something tells you it's more than just food.";
 		return;
 	}
 	if(texts.indexOf("L.BlkEg") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "This is an oblong egg, not much different from an ostrich egg in appearance (save for the color).  Something tells you it's more than just food.  For all you know, it could turn you into rubber!";
 		return;
 	}
 	if(texts.indexOf("RidingC") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "This riding crop appears to be made of black leather, and could be quite a painful (or exciting) weapon.  (ATK: +5) (Cost: 50)";
 		return;
 	}
 	if(texts.indexOf("L. Axe ") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "This massive axe once belonged to a minotaur.  It'd be hard for anyone smaller than a giant to wield effectively.  The axe is double-bladed and deadly-looking.  (ATK: +15) (Cost: 100)";
 		return;
 	}
 	if(texts.indexOf("GelArmr") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "This suit of interlocking plates is made from a strange green material.  It feels spongy to the touch but is amazingly resiliant.  (DEF: +10) (Cost: 150)";
 		return;
 	}
 	if(texts.indexOf("B.Sword") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "This beautiful sword shines brilliantly in the light, showing the flawless craftsmanship of its blade.  The pommel and guard are heavily decorated in gold and brass.  Some craftsman clearly poured his heart and soul into this blade.  (ATK: +Varies) (Cost: 400)";
 		return;
 	}
 	if(texts.indexOf("C.Cloth") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "These loose fitting and comfortable clothes allow you to move freely while protecting you from the elements.  (DEF: +0) (Cost: 0)";
 		return;
 	}
 	if(texts.indexOf("ClssyCl") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "A set of classy suitclothes.";
 		return;
 	}
 	if(texts.indexOf("RbbrClt") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "A revealing set of fetish-wear.  Upgrades tease attack to seduce.";
 		return;
 	}
 	if(texts.indexOf("FurLoin") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "A pair of loincloths to cover your crotch and " + buttDescript() + ".  Typically worn by people named 'Conan'.";
 		return;
 	}
 	if(texts.indexOf("AdvClth") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "A set of comfortable green adventurer's clothes.  It even comes complete with a pointy hat!";
 		return;
 	}
 	if(texts.indexOf("TubeTop") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "A clingy tube top and VERY short shorts.";
 		return;
 	}
 	if(texts.indexOf("Overall") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "A simple white shirt and overalls.";
@@ -3175,28 +3174,28 @@ function mouseOverTextin(e:MouseEvent, texts:String)
 	}
 
 	if(texts.indexOf("B.Dress") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "A long ballroom dress patterned with sequins.  Perfect for important occassions.";
 		return;
 	}
 	if(texts.indexOf("T.BSuit") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "A semi-transparent bodysuit.";
 		return;
 	}
 	if(texts.indexOf("M.Robes") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "A set of modest robes, not dissimilar from what the monks back home would wear.";
 		return;
 	}
 	if(texts.indexOf("LthrPnt") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "A flowing silk shirt and tight black leather pants.  Suave!";
@@ -3209,12 +3208,12 @@ function mouseOverTextin(e:MouseEvent, texts:String)
 		mouseOverText.htmlText = "An impossibly skimpy black bikini. You feel dirty just looking at it… and a little aroused, actually.";
 		return;
 	}
-	if(texts.indexOf("Red Dye") != -1 || texts.indexOf("Blond D") != -1 || 
-        texts.indexOf("Black D") != -1 || texts.indexOf("Brown D") != -1 || 
+	if(texts.indexOf("Red Dye") != -1 || texts.indexOf("Blond D") != -1 ||
+        texts.indexOf("Black D") != -1 || texts.indexOf("Brown D") != -1 ||
 		texts.indexOf("AuburnD") != -1 || texts.indexOf("GrayDye") != -1 ||
 		texts.indexOf("PinkDye") != -1 || texts.indexOf("BlueDye") != -1 ||
 		texts.indexOf("OrangDy") != -1 || texts.indexOf("PurpDye") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.";
@@ -3224,154 +3223,154 @@ function mouseOverTextin(e:MouseEvent, texts:String)
 	//COMBAT
 	//combat
 	if(texts == "Attack") {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "Attempt to attack the enemy with your " + player.weaponName + ".  Damage done is determined by your strength and weapon.";
 		return;
 	}
 	if(texts == "Kiss") {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "Attempt to kiss your foe on the lips with drugged lipstick.  It has no effect on those without a penis.";
 		return;
 	}
 	if(texts.indexOf("LustStk") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "This tube of golden lipstick is used by harpies to keep males aroused.  It has aphrodisiac properties on anyone with male genitalia and is most effective when applied to the lips or groin.";
 		return;
 	}
 	if(texts == "Tease") {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "Attempt to make an enemy more aroused by striking a seductive pose and exposing parts of your body.";
 		return;
 	}
 	if(texts == "Kick") {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "Attempt to kick an enemy using your powerful lower body.";
 		return;
 	}
 	if(texts == "Combo") {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "Make a three-hit combo.  Each attack has an extra 33% chance to miss, unless the target is blind. (25 Fatigue)";
 		return;
 	}
 	if(texts == "Vault") {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "Make a vaulting attack for an extra 25% damage.  Automatically crits stunned foes.  (20 Fatigue)";
 		return;
 	}
 	if(texts == "Sidewinder") {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "An attack that hits for reduced damage but has a high chance of stunning. (10 Fatigue)";
 		return;
 	}
 	if(texts == "Dirt Kick") {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "Attempt to blind your foe with a spray of kicked dirt. (5 Fatigue)";
 		return;
 	}
 	if(texts == "Metabolize") {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "Convert 10% of your maximum HP into fatigue.";
 		return;
 	}
 	if(texts == "SecondWind") {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "Regain 50% of your HP, 50 fatigue, and reduce lust by 50 once per fight.";
 		return;
 	}
 	if(texts.indexOf("AnemoneSting") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "Attempt to strike an opponent with the stinging tentacles growing from your scalp.  Reduces enemy speed and increases enemy lust.";
 		return;
 	}
 	if(texts.indexOf("P. Specials") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "Physical special attack menu.";
 		return;
 	}
 	if(texts.indexOf("M. Specials") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "Mental and supernatural special attack menu.";
 		return;
 	}
 	if(texts == "Berzerk") {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "Throw yourself into a rage!  Greatly increases the strength of your weapon and increases lust resistance, but your armor defense is reduced to zero!";
 		return;
 	}
 	if(texts.indexOf("Possess") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "Attempt to temporarily possess a foe and force them to raise their own lusts.";
 		return;
 	}
 	if(texts.indexOf("Constrict") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "Attempt to bind an enemy in your long snake-tail.";
 		return;
 	}
 	if(texts.indexOf("Gore") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "Lower your head and charge your opponent, attempting to gore them on your horns.  This attack is stronger and easier to land with large horns.";
 		return;
 	}
 	if(texts.indexOf("Fantasize") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "Fantasize about your opponent in a sexual way.  Its probably a pretty bad idea to do this unless you want to end up getting raped.";
 		return;
 	}
 	if(texts.indexOf("Charge W.") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "The Charge Weapon spell will surround your weapon in electrical energy, causing it to do even more damage.  The effect lasts for the entire combat.  (Fatigue Cost: " + spellCost(15) + ")";
 		return;
 	}
 	if(texts.indexOf("Blind") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "Blind is a fairly self-explanatory spell.  It will create a bright flash just in front of the victim's eyes, blinding them for a time.  However if they blink it will be wasted.  (Fatigue Cost: " + spellCost(20) + ")";
 		return;
 	}
 	if(texts.indexOf("Whitefire") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "Whitefire is a potent fire based attack that will burn your foe with flickering white flames, ignoring their physical toughness and most armors.  (Fatigue Cost: " + spellCost(30) + ")";
@@ -3381,21 +3380,21 @@ function mouseOverTextin(e:MouseEvent, texts:String)
 		return;
 	}
 	if(texts.indexOf("Arouse") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "The arouse spell draws on your own inner lust in order enflame the enemy's passions.  (Fatigue Cost: " + spellCost(15) + ")";
 		return;
 	}
 	if(texts == "Heal") {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  (Fatigue Cost: " + spellCost(20) + ")";
 		return;
 	}
 	if(texts.indexOf("Might") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "The Might spell draws upon your lust and uses it to fuel a temporary increase in muscle size and power.  It does carry the risk of backfiring and raising lust, like all black magic used on oneself.  (Fatigue Cost: " + spellCost(25) + ")";
@@ -3403,7 +3402,7 @@ function mouseOverTextin(e:MouseEvent, texts:String)
 	}
 	//Wait
 	if(texts.indexOf("Wait") != -1 && gameState > 0) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "Take no action for this round.  Why would you do this.  This is a terrible idea.";
@@ -3411,7 +3410,7 @@ function mouseOverTextin(e:MouseEvent, texts:String)
 	}
 	//Sting
 	if(texts.indexOf("Sting") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "Attempt to use your venomous bee stinger on an enemy.  Be aware it takes quite a while for your venom to build up, so depending on your abdomen's refractory period, you may have to wait quite a while between stings.  Venom: " + Math.floor(player.tailVenom) + "/100";
@@ -3419,7 +3418,7 @@ function mouseOverTextin(e:MouseEvent, texts:String)
 	}
 	//Web
 	if(texts.indexOf("Web") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "Attempt to use your abdomen to spray sticky webs at an enemy and greatly slow them down.  Be aware it takes a while for your webbing to build up.  Web Amount: " + Math.floor(player.tailVenom) + "/100";
@@ -3433,35 +3432,35 @@ function mouseOverTextin(e:MouseEvent, texts:String)
 		return;
 	}
 	if(texts.indexOf("Spells") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "Opens your spells menu, where you can cast any spells you have learned.  Beware, casting spells increases your fatigue, and if you become exhausted you will be easier to defeat.";
 		return;
 	}
 	if(texts.indexOf("Defend") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "Selecting defend will reduce the damage you take by 66 percent, but will not affect any lust incurred by your enemy's actions.";
 		return;
 	}
 	if(texts == "Run") {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "Choosing to run will let you try to escape from your enemy. However, it will be hard to escape enemies that are faster than you and if you fail, your enemy will get a free attack.";
 		return;
 	}
 	if(texts.indexOf("Inventory") != -1) {
-		positionMOB(e.target.x, e.target.y)		
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.";
 		return;
 	}
 	if(texts.indexOf("AutoSav") != -1) {
-		positionMOB(e.target.x, e.target.y)		
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "When autosave is on the game will automatically save your character each night at midnight to the last slot it was saved in.";
@@ -3470,28 +3469,28 @@ function mouseOverTextin(e:MouseEvent, texts:String)
 		return;
 	}
 	if(texts.indexOf("Retrieve") != -1) {
-		positionMOB(e.target.x, e.target.y)		
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "Retrieve allows you to take an item from one of the reserve stacks in your camp's additional storage.";
 		return;
 	}
 	if(texts.indexOf("Storage") != -1) {
-		positionMOB(e.target.x, e.target.y)		
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "Storage will allow you to dump a stack of items from your inventory into your storage chest.";
 		return;
 	}
 	if(texts.indexOf("Sand Facial") != -1) {
-		positionMOB(e.target.x, e.target.y)		
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "The goblins promise this facial will give you a rough, handsome look thanks to their special, timeless sands.";
 		return;
 	}
 	if(texts.indexOf("Mud Facial") != -1) {
-		positionMOB(e.target.x, e.target.y)		
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "This facial is supposed to enhance the softness of your face and enhance its femininity greatly.";
@@ -3617,35 +3616,35 @@ function mouseOverTextin(e:MouseEvent, texts:String)
 	}
 	//Title screen
 	if(texts.indexOf("Toggle Debug") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "Turn on debug mode.  Debug mode is intended for testing purposes but can be thought of as a cheat mode.  Items are infinite and combat is easy to escape from.  Weirdness and bugs are to be expected.";
 		return;
 	}
 	if(texts.indexOf("Credits") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "See a list of all the cool people who have contributed to content for this game!";
 		return;
 	}
 	if(texts.indexOf("Instructions") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "How to play.  Starting tips.  And hotkeys for easy left-handed play...";
 		return;
 	}
 	if(texts.indexOf("Settings") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "Configure game settings and enable cheats.";
 		return;
 	}
 	if(texts.indexOf("ASPLODE") != -1) {
-		positionMOB(e.target.x, e.target.y)			
+		positionMOB(e.target.x, e.target.y)
 		mouseOverText.visible = true;
 		popUpBG.visible = true;
 		mouseOverText.htmlText = "MAKE SHIT ASPLODE";
@@ -3920,7 +3919,7 @@ function menu(text1:String = "", func1:Function = null, arg1:Number = -9000, tex
 	args[args.length] = arg8;
 	args[args.length] = arg9;
 	args[args.length] = arg0;
-	
+
 	//Set button texts
 	if(text1 != null) b1Text.htmlText = text1;
 	if(text2 != null) b2Text.htmlText = text2;
@@ -4017,16 +4016,16 @@ function menu(text1:String = "", func1:Function = null, arg1:Number = -9000, tex
 }
 
 
-function choices(text1:String, butt1:*, 
-						text2:String, butt2:*, 
-						text3:String, butt3:*, 
-						text4:String, butt4:*, 
-						text5:String, butt5:*, 
-						text6:String, butt6:*, 
-						text7:String, butt7:*, 
-						text8:String, butt8:*, 
-						text9:String, butt9:*, 
-						text0:String, butt0:*):void 
+function choices(text1:String, butt1:*,
+						text2:String, butt2:*,
+						text3:String, butt3:*,
+						text4:String, butt4:*,
+						text5:String, butt5:*,
+						text6:String, butt6:*,
+						text7:String, butt7:*,
+						text8:String, butt8:*,
+						text9:String, butt9:*,
+						text0:String, butt0:*):void
 {
 	//Transfer event code to storage
 	buttonEvents[0] = butt1;
@@ -4211,11 +4210,11 @@ function multipageChoices( cancelFunction :*, menuItems :Array ) :void {
 }
 
 // simpleChoices and doYesNo are convenience functions. They shouldn't re-implement code from choices()
-function simpleChoices(text1:String, butt1:*, 
-						text2:String, butt2:*, 
-						text3:String, butt3:*, 
-						text4:String, butt4:*, 
-						text5:String, butt5:*):void 
+function simpleChoices(text1:String, butt1:*,
+						text2:String, butt2:*,
+						text3:String, butt3:*,
+						text4:String, butt4:*,
+						text5:String, butt5:*):void
 {
 
 	//trace("SimpleChoices");
@@ -4251,21 +4250,21 @@ function doYesNo(eventYes:*, eventNo:*):void {
 
 
 function doNext(eventNo:*):void {
-	//Prevent new events in combat from automatically overwriting a game over. 
+	//Prevent new events in combat from automatically overwriting a game over.
 	if(b1Text.text.indexOf("Game Over") != -1) {
 		trace("Do next setup cancelled by game over");
 		return;
 	}
-	
+
 	trace("DoNext have item:", eventNo);
-	choices("Next", eventNo, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0); 
+	choices("Next", eventNo, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0);
 }
 
 
-function invertGo():void{ 
+function invertGo():void{
 	if (blackBackground.visible == false){
 		blackBackground.visible = true;
-		
+
 	//	statBox.textColor = 0xFFFFFF;
 		/*statValuePane.textColor = 0xFFFFFF;
 		levelPane.textColor = 0xFFFFFF;
@@ -4287,7 +4286,7 @@ function invertGo():void{
 		DayValuePane.textColor = 0x000000;
 		clockPane.textColor = 0x000000;
 		outputWindow.textColor = 0x000000;
-		currentRegion.textColor = 0x000000;	
+		currentRegion.textColor = 0x000000;
 		region.textColor = 0x000000;*/
 	}
 }
@@ -4465,7 +4464,7 @@ function hideUpDown():void {
 	oldLib = 0;
 	oldSens = 0;
 	oldLust = 0;
-	oldCor = 0;	
+	oldCor = 0;
 }
 function physicalCost(mod:Number):Number {
 	var costPercent:Number = 100;
@@ -4479,18 +4478,18 @@ function spellCost(mod:Number):Number {
 	var costPercent:Number = 100;
 	if(player.hasPerk("Spellcasting Affinity") >= 0) costPercent -= player.perkv1("Spellcasting Affinity");
 	if(player.hasPerk("Wizard's Endurance") >= 0) costPercent -= player.perkv1("Wizard's Endurance");
-	
+
 	//Limiting it and multiplicative mods
 	if(player.hasPerk("Blood Mage") >= 0 && costPercent < 50) costPercent = 50;
-	
+
 	mod *= costPercent/100;
-	
+
 	if(player.hasPerk("History: Scholar") >= 0) {
 		if(mod > 2) mod *= .8;
 	}
 	if(player.hasPerk("Blood Mage") >= 0 && mod < 5) mod = 5;
 	else if(mod < 2) mod = 2;
-	
+
 	mod = Math.round(mod * 100)/100;
 	return mod;
 }
@@ -4503,13 +4502,13 @@ function fatigue(mod:Number,type:Number  = 0):void {
 	//Spell reductions
 	if(type == 1) {
 		mod = spellCost(mod);
-		
+
 		//Blood mages use HP for spells
 		if(player.hasPerk("Blood Mage") >= 0) {
 			takeDamage(mod);
 			statScreenRefresh();
 			return;
-		}		
+		}
 	}
 	//Physical special reductions
 	if(type == 2) {
@@ -4551,7 +4550,7 @@ function minLust():Number {
 	if(player.hasPerk("Omnibus' Gift") >= 0) {
 		if(min > 40) min += 10;
 		else if(min > 0) min += 20;
-		else min += 35;		
+		else min += 35;
 	}
 	//Nymph perk raises to 30
 	if(player.hasPerk("Nymphomania") >= 0) {
@@ -4572,7 +4571,7 @@ function minLust():Number {
 	}
 	if(player.hasPerk("Luststick Adapted") > 0) {
 		if(min < 50) min += 10;
-		else min += 5;		
+		else min += 5;
 	}
 	//Add points for Crimstone
 	min += player.perkv1("Pierced: Crimstone");
@@ -4604,11 +4603,11 @@ function displayStats(e:MouseEvent) {
 	outputText("<b>Spell Effect Multiplier: </b>" + (100 * spellMod()) + "%\n");
 	outputText("<b>Spell Cost: </b>" + spellCost(100) + "%\n");
 	outputText("<b>Tease Skill Level (Out of 5): </b> " + player.teaseLevel + "\n", false);
-	
+
 	outputText("\n<b><u>Hidden Stats</u></b>\n", false);
 	outputText("<b>Anal Capacity: </b>" + Math.round(player.analCapacity()) + "\n");
 	outputText("<b>Anal Looseness: </b>" + Math.round(player.ass.analLooseness) + "\n");
-	
+
 	outputText("<b>Fertility (Base) Rating: </b>" + Math.round(player.fertility) + "\n", false);
 	outputText("<b>Fertility (With Bonuses) Rating: </b>" + Math.round(player.totalFertility()) + "\n", false);
 	if(player.hasStatusAffect("Feeder") >= 0) {
@@ -4616,7 +4615,7 @@ function displayStats(e:MouseEvent) {
 		if(player.statusAffectv2("Feeder") >= 72) outputText(" (Too long! Sensitivity Increasing!)", false);
 		outputText("\n", false);
 	}
-	
+
 	outputText("<b>Cum Production:</b> " + Math.round(player.cumQ()) + "mL\n", false);
 	outputText("<b>Milk Production:</b> " + Math.round(player.lactationQ()) + "mL\n", false);
 	//MARBLE
@@ -4642,7 +4641,7 @@ function displayStats(e:MouseEvent) {
 		if(player.hasPerk("Magical Fertility") >= 0) preg++;
 		if(player.hasPerk("Fera's Boon - Wide Open") >= 0 || player.hasPerk("Fera's Boon - Milking Twat") >= 0) preg++;
 		outputText(preg + "\n", false);
-	}	
+	}
 	if(player.hasStatusAffect("Slime Craving") >= 0) {
 		if(player.statusAffectv1("Slime Craving") >= 18) outputText("<b>Slime Craving:  </b>Active! You are currently losing strength and speed.  You should find fluids.\n", false);
 		else {
@@ -4653,7 +4652,7 @@ function displayStats(e:MouseEvent) {
 	outputText("<b>Spells Cast: </b>" + flags[SPELLS_CAST] + "\n");
 	if(player.hasVagina()) outputText("<b>Vaginal Capacity: </b>" + Math.round(player.vaginalCapacity()) + "\n");
 	if(player.hasVagina()) outputText("<b>Vaginal Looseness: </b>" + Math.round(player.looseness()) + "\n");
-	
+
 	outputText("<b><u>\nInterpersonal Stats</u></b>\n", false);
 	if(flags[ARIAN_PARK] > 0) outputText("<b>Arian's Health: </b>" + Math.round(arianHealth()) + "\n");
 	if(flags[ARIAN_VIRGIN] > 0) outputText("<b>Arian Sex Counter: </b>" + Math.round(flags[ARIAN_VIRGIN]) + "\n");
@@ -4669,9 +4668,9 @@ function displayStats(e:MouseEvent) {
 	if(flags[PHYLLA_DRIDER_BABIES_COUNT] > 0) outputText("<b>Drider Children With Phylla:</b> " + flags[PHYLLA_DRIDER_BABIES_COUNT] + "\n");
 	if(flags[SHEILA_JOEYS] > 0) outputText("<b>Children With Sheila (Joeys):</b> " + flags[SHEILA_JOEYS] + "\n");
 	if(flags[SHEILA_IMPS] > 0) outputText("<b>Children With Sheila (Imps):</b> " + flags[SHEILA_IMPS] + "\n");
-	
-	if(flags[SOPHIE_ADULT_KID_COUNT] > 0 || flags[SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) 
-	{	
+
+	if(flags[SOPHIE_ADULT_KID_COUNT] > 0 || flags[SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0)
+	{
 		outputText("<b>Children With Sophie:</b> ");
 		var sophie:int = 0;
 		if(flags[SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) sophie++;
@@ -4725,14 +4724,14 @@ function displayStats(e:MouseEvent) {
 	}
 	if(rubiAffection() > 0) outputText("<b>Rubi's Affection:</b> " + Math.round(rubiAffection()) + "%\n");
 	if(rubiAffection() > 0) outputText("<b>Rubi's Orifice Capacity:</b> " + Math.round(rubiCapacity()) + "%\n");
-	
+
 	if(flags[URTA_COMFORTABLE_WITH_OWN_BODY] != 0) {
 		if(urtaLove()) outputText("<b>Urta Status: </b>Lover\n");
 		else if(flags[URTA_COMFORTABLE_WITH_OWN_BODY] == -1) outputText("<b>Urta Status: </b>Ashamed\n");
 		else if(flags[URTA_PC_AFFECTION_COUNTER] < 30) outputText("<b>Urta Status: </b>" + Math.round(flags[URTA_PC_AFFECTION_COUNTER] * 3.3333) + "% Affection\n");
 		else outputText("<b>Urta Status: </b>Ready To Confess Love\n");
 	}
-	
+
 	outputText("\n<b><u>Ongoing Status Effects</u></b>\n", false);
 	if(player.hasStatusAffect("heat") >= 0) outputText("Heat - " + Math.round(player.statusAffectv3("heat")) + " hours remaining.\n", false);
 	if(player.hasStatusAffect("rut") >= 0) outputText("Rut - " + Math.round(player.statusAffectv3("rut")) + " hours remaining.\n", false);
@@ -4748,7 +4747,7 @@ function lustPercent():Number {
 	//2.5% lust resistance per level - max 75.
 	if(player.level < 21) lust -= (player.level - 1) * 3;
 	else lust = 40;
-	
+
 	//++++++++++++++++++++++++++++++++++++++++++++++++++
 	//ADDITIVE REDUCTIONS
 	//THESE ARE FLAT BONUSES WITH LITTLE TO NO DOWNSIDE
@@ -4762,7 +4761,7 @@ function lustPercent():Number {
 	if(player.hasPerk("Purity Blessing") >= 0) lust -= 5;
 	//Resistance = 10%
 	if(player.hasPerk("Resistance") >= 0) lust -= 10;
-	
+
 	if(lust < 25) lust = 25;
 	if(player.statusAffectv1("Black Cat Beer") > 0) {
 		if(lust >= 80) lust = 100;
@@ -4795,7 +4794,7 @@ function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:Number,
 	if(flags[EASY_MODE_ENABLE_FLAG] == 1 && lust2 > 0 && resisted) lust2 /= 2;
 	//Set original values to begin tracking for up/down values if
 	//they aren't set yet.
-	//These are reset when up/down arrows are hidden with 
+	//These are reset when up/down arrows are hidden with
 	//hideUpDown();
 	//Just check str because they are either all 0 or real values
 	if(oldStr == 0) {
@@ -4864,17 +4863,17 @@ function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:Number,
 	else if(player.lib < 15 && player.gender > 0) player.lib = 15;
 	else if(player.lib < 10 && player.gender == 0) player.lib = 10;
 	if(player.lib < minLust() * 2/3) player.lib = minLust() * 2/3;
-	
-	
+
+
 	//Minimum sensitivity.
 	if(player.sens > 100) player.sens = 100;
 	if(player.sens < 10) player.sens = 10;
-	
+
 	//Add HP for toughness change.
 	HPChange(toug*2, false);
 	//Reduce hp if over max
 	if(player.HP > maxHP()) player.HP = maxHP();
-	
+
 	//Combat bounds
 	if(player.lust > 99) player.lust = 100;
 	//if(player.lust < player.lib) {
@@ -4960,7 +4959,7 @@ function rand(max:Number):Number
 {
 	return int(Math.random()*max);
 }
-function range(min:Number, max:Number, round:Boolean = false):Number 
+function range(min:Number, max:Number, round:Boolean = false):Number
 {
 	var num:Number = (min + Math.random() * (max - min));
 
@@ -4972,7 +4971,7 @@ function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):void {
 	if(player.vaginas[vIndex].virgin) {
 		if(display) outputText("\nYour " + vaginaDescript(vIndex) + " loses it's virginity!", false);
 		player.vaginas[vIndex].virgin = false;
-	}	
+	}
 	//If cock is bigger than unmodified vagina can hold - 100% stretch!
 	if(player.vaginas[vIndex].capacity() <= monster.cocks[cIndex].cArea()) {
 		if(player.vaginas[vIndex] < 5) {
@@ -5033,7 +5032,7 @@ function ImageLoaded(e:Event) {
 }
 /*The stuff below is a stupid experiment, all except the following line:
 <img src='artPack/white_devil_urta.jpg' width='400' height='514'/>
-Drop that into the text in a scene and BLAMMO! You got an Urta pic. It looks like you need to 
+Drop that into the text in a scene and BLAMMO! You got an Urta pic. It looks like you need to
 have the width and height both specified to do it
 
 //Deprecated. Using showImage from ImageManager now.
