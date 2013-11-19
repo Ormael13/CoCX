@@ -173,60 +173,6 @@ function startupScreenBody():void
 			"Settings", settingsScreen, 
 			"Resume", resume);
 }
-	
-import flash.system.SecurityDomain;
-import flash.system.Security;;
-
-function doThatTestingThang():void
-{
-
-	// This junk was for testing my new parser. It can be removed, I think. 
-	// I still have a few parser tweaks I want to do, though.
-	// Really, I should have a "test parser" button, but LAZY
-	
-	outputText("\n\n", false);
-	
-	outputText("[if (hasCock = true) [cock] stiffening][if (isHerm = true)  and ][if (hasVagina = true) [vagina] starting to burn with need] DERP [cock biggest] HERP [armor] LOLWUT  [balls] ");
-	outputText("[If (hours > 19) Hug | Cuddle]\n");
-	outputText("\n\n", false);
-
-	
-	outputText("[LOL[WUT]] [herp] [DERP] BLARGH [if (0 == 0) HARBLE]\n\n", false);
-	outputText("[r[e[c[u[r[s[i[v[e[lol][cock]]t]a]g[rofl][copter]]b]o]m]i]n][a][t[io]n]\n", false);
-	
-	outputText("[if [ [ (4==4) HERP|DERP]\n", false);
-	outputText("[if (4 == 7) HERP|DERP]\n", false);
-	
-	outputText("[if (4==(2+2)) HERP|DERP]\n", false);
-	outputText("[if (4==4) HERP|DERP]\n", false);
-
-	outputText("if (4==7) [if (4==7) HERP]\n", false);
-	outputText("if (4==7) [if (4==7) HERP|DERP]\n", false);
-	outputText("if (4=4) [if (4=4) HERP]\n", false);
-	outputText("if (4==4) [if (4==4) HERP]\n", false);
-	outputText("if (4==biggesttitsize) [if (4==biggesttitsize) [HERP [cock] [vagina] [balls]]]\n", false);
-	outputText("if (analcapacity>3)    [if (analcapacity>3) [HERP [cock] [vagina] [balls]]]\n", false);
-	outputText("if (analcapacity = 0)  [if (analcapacity = 0) [HERP [cock] [vagina] [balls]]]\n", false);
-	outputText("if (analcapacity > 0)  [if (analcapacity > 0) [HERP [cock] [vagina] [balls]]]\n", false);
-
-
-
-	outputText("\n\n");
-	outputText("Gender Stuff! [His], [his], [Him], [him], [his], [His]\n");
-	outputText("Gender Stuff! [rubi ey], [rubi eir], [rubi eirs], [rubi emself]\n");
-	outputText("Gender Stuff! [rubi Ey], [rubi Eir], [rubi Eirs], [rubi Emself]\n");
-	outputText("Gender Stuff! [arian ey], [arian eir], [arian eirs], [arian emself]\n");
-	outputText("Gender Stuff! [arian Ey], [arian Eir], [arian Eirs], [arian Emself]\n");
-	outputText("\n\n");
-
-	outputText("[cock] stiffening [cock biggest] and [vagina] starting to burn with need\n");
-	outputText("[cock all] stiffening [cock each] and [cock 1] starting to burn with need\n");
-	outputText("\n\n");
-	outputText("Complex IF Statement thing: [if (hasCock = true) [cock] stiffening IFSTUFF [if (hasVagina = true) [vagina] starting to burn with need] IFSTUFFDONE][if (isHerm = true) and ][if (hasVagina = true) [vagina] starting to burn with need]");
-	outputText("\n\n");
-
-	
-}
 
 function settingsScreen():void 
 {	
