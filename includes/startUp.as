@@ -79,23 +79,27 @@ function doThatTestingThang():void
 	outputText("\\\[cock\\\]\n", false);
 	outputText("[cock]\n", false);
 
+	outputText("[cock 1]\n", false);
+
+	outputText("[cockhead 1]\n", false);
+
 	outputText("\n\n", false);
 	
 	
-	outputText("1 [if [ [ (4==4) HERP|DERP]\n", false);
-	outputText("2 [if (4 == 7) HERP|DERP]\n", false);
-	
-	outputText("3 [if (4==(2+2)) HERP|DERP]\n", false);
-	outputText("4 [if (4==4) HERP|DERP]\n", false);
-
-	outputText("5 if (4==7) [if (4==7) HERP]\n", false);
-	outputText("6 if (4==7) [if (4==7) HERP|DERP]\n", false);
-	outputText("7 if (4=4) [if (4=4) HERP]\n", false);
-	outputText("8 if (4==4) [if (4==4) HERP]\n", false);
-	outputText("9 if (4==biggesttitsize) [if (4==biggesttitsize) [HERP [cock] [vagina] [balls]]]\n", false);
-	outputText("10 if (analcapacity>3)    [if (analcapacity>3) [HERP [cock] [vagina] [balls]]]\n", false);
-	outputText("11 if (analcapacity = 0)  [if (analcapacity = 0) [HERP [cock] [vagina] [balls]]]\n", false);
-	outputText("12 if (analcapacity > 0)  [if (analcapacity > 0) [HERP [cock] [vagina] [balls]]]\n", false);
+	//outputText("1 [if [ [ (4==4) HERP|DERP]\n", false);
+	//outputText("2 [if (4 == 7) HERP|DERP]\n", false);
+	//
+	//outputText("3 [if (4==(2+2)) HERP|DERP]\n", false);
+	//outputText("4 [if (4==4) HERP|DERP]\n", false);
+//
+	//outputText("5 if (4==7) [if (4==7) HERP]\n", false);
+	//outputText("6 if (4==7) [if (4==7) HERP|DERP]\n", false);
+	//outputText("7 if (4=4) [if (4=4) HERP]\n", false);
+	//outputText("8 if (4==4) [if (4==4) HERP]\n", false);
+	//outputText("9 if (4==biggesttitsize) [if (4==biggesttitsize) [HERP [cock] [vagina] [balls]]]\n", false);
+	//outputText("10 if (analcapacity>3)    [if (analcapacity>3) [HERP [cock] [vagina] [balls]]]\n", false);
+	//outputText("11 if (analcapacity = 0)  [if (analcapacity = 0) [HERP [cock] [vagina] [balls]]]\n", false);
+	//outputText("12 if (analcapacity > 0)  [if (analcapacity > 0) [HERP [cock] [vagina] [balls]]]\n", false);
 
 
 

@@ -265,6 +265,16 @@ var twoWordNumericTagsLookup:Object =
 					if(aspect-1 >= 0 && aspect-1 < player.cockTotal()) return cockDescript(aspect - 1);
 					else return "<b>(Attempt To Parse CockDescript for Invalid Cock)</b>";
 				}
+			},
+		"cockhead":
+			function(aspect):*
+			{
+				if(!player.hasCock()) return "<b>(Attempt to parse cockHead when none present.)</b>";
+				else
+				{
+					if(aspect-1 >= 0 && aspect-1 < player.cockTotal()) return cockHead(aspect - 1);
+					else return "<b>(Attempt To Parse CockHeadDescript for Invalid Cock)</b>";
+				}
 			}
 
 }
