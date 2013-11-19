@@ -79,7 +79,7 @@ package coc.view {
 			perksBG :MovieClip, 
 			appearanceBG :MovieClip;
 
-		public function MainView( model :GameModel, options :Object = null ) :void {
+		public function MainView( model :GameModel = null, options :Object = null ) :void {
 			// Note: Currently we can't touch this on construction
 			// due to the code being a mess.  We'll fix that at some point.
 			// maybe even get like update events or some shit like real MV*s or something.
@@ -87,6 +87,11 @@ package coc.view {
 			this.options = options || {};
 
 			super();
+
+			if( ! model ) {
+				trace( "MainView/constructor: Game model not passed in.  Don't publish MainView.fla with Ctrl-Enter/Cmd-Enter.  Rather, go to File > Publish to build the SWC." );
+				throw new ArgumentError( "MainView/constructor: MainView must be constructed with a GameModel as its first argument." );
+			}
 
 			// Init subviews.
 			this.toolTipView = new ToolTipView( this, this.model );
