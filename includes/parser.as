@@ -659,20 +659,73 @@ function parseConditional(textCtnt:String, depth:int):String
 	return "";
 }
 
+var buttonNum:Number;
+
+function enterParserScene(sceneName:String):void
+{
+	trace("Entering parser scene: \""+sceneName+"\"");
+	trace("Do we have the scene name?:", sceneName in thisParserState)
+	if (sceneName == "exit")
+	{
+		doNext(debugPane);
+	}
+	if (sceneName in thisParserState)
+	{	
+		trace("Have scene. setting up menu");
+		menu();
+		buttonNum = 0;
+		outputText(recParser(thisParserState[sceneName], 0), true, true);  // we have to actually parse the scene now, and then stick it on the display
+	}
+
+}
+
+
+
+function parseSceneTag(textCtnt:String):void
+{
+	var sceneName:String;
+	var sceneCont:String;
+	
+	sceneName = textCtnt.substring(textCtnt.indexOf(' ') ,textCtnt.indexOf('|'));
+	sceneCont = textCtnt.substr(textCtnt.indexOf('|')+1);
+
+	sceneName = stripStr(sceneName);
+
+	thisParserState[sceneName] = sceneCont;
+
+}
+function parseButtonTag(textCtnt:String):void
+{
+	var arr;
+	arr = textCtnt.split("|")
+	if (arr.len > 2)
+		throw new Error("Too many items in button")
+
+	trace("adding a button", arr);
+	var buttonName:String = stripStr(arr[1]);
+	var buttonFunc:String = stripStr(arr[0]);
+	addButton(buttonNum, buttonName, enterParserScene, buttonFunc);
+}
+
 // pushes the contents of the passed string into the scene list object if it's a scene, or instantiates the named button if it's a button
 // command and returns an empty string.
 // if the contents are not a button or scene contents, returns the contents.
 function evalForSceneControls(textCtnt:String):String
 {
 
+	var debug:Boolean = true;
+
+	if (debug) trace("Checking for scene tags.");
 	if (textCtnt.toLowerCase().indexOf("screen") == 0)
 	{
 		if (debug) trace("It's a scene");
-		return "";	
+		parseSceneTag(textCtnt);
+		return "";
 	}
 	else if (textCtnt.toLowerCase().indexOf("button") == 0)
 	{
 		if (debug) trace("It's a button add statement");
+		parseButtonTag(textCtnt);
 		return "";
 		
 	}
@@ -806,8 +859,8 @@ function recParser(textCtnt:String, depth):String
 				tmpStr = evalForSceneControls(tmpStr);		
 				// evalForSceneControls swallows scene controls, so they won't get parsed further now.
 				// therefore, you could *theoretically* have nested scene pages, though I don't know WHY you'd ever want that.
-
-				retStr += evalBracketContents(recParser(tmpStr, depth), depth);
+				if (tmpStr)
+					retStr += evalBracketContents(recParser(tmpStr, depth), depth);
 				
 				// First parse into the text in the brackets (to resolve any nested brackets)
 				// then, eval their contents, in case they're an if-statement or other control-flow thing
@@ -861,6 +914,8 @@ function recursiveParser(contents:String, parseAsMarkdown:Boolean = false):Strin
 {
 	// Reset the parser's internal state, since we're parsing a new string:
 	thisParserState = new Object();
+	// eventually, when this goes properly class-based, we'll add a period, and have this.parserState.
+
 
 	var ret:String = "";
 	// Run through the parser
@@ -889,6 +944,13 @@ function recursiveParser(contents:String, parseAsMarkdown:Boolean = false):Strin
 	ret = ret.replace(/\\\]/g, "]")
 	ret = ret.replace(/\\\[/g, "[")
 
+	for (var prop in thisParserState) 
+	{
+		trace("thisParserState."+prop+" = "+thisParserState[prop]); 
+	}
+
+	if ("startup" in thisParserState)
+		enterParserScene("startup");
 	//trace(ret);
 	return ret
 
@@ -896,17 +958,18 @@ function recursiveParser(contents:String, parseAsMarkdown:Boolean = false):Strin
 
 // Stupid string utility functions, because actionscript doesn't have them (WTF?)
 
+
 function stripStr(str:String):String
 {
 	return trimStrBack(trimStrFront(str, " "), " ");
 }
 
-function trimStr(str:String, char:String):String
+function trimStr(str:String, char:String = " "):String
 {
 	return trimStrBack(trimStrFront(str, char), char);
 }
 
-function trimStrFront(str:String, char:String):String
+function trimStrFront(str:String, char:String = " "):String
 {
 	char = stringToCharacter(char);
 	if (str.charAt(0) == char) {
@@ -915,7 +978,7 @@ function trimStrFront(str:String, char:String):String
 	return str;
 }
 
-function trimStrBack(str:String, char:String):String
+function trimStrBack(str:String, char:String = " "):String
 {
 	char = stringToCharacter(char);
 	if (str.charAt(str.length - 1) == char) {

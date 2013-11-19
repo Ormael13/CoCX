@@ -920,6 +920,25 @@ function clearOutput():void {
 	scrollBar.update();
 }
 
+function rawOutputText(output:String, purgeText:Boolean = false)
+{
+	
+	//OUTPUT!
+	if(purgeText) {
+		//if(!debug) mainText.htmlText = output;
+		clearOutput();
+		currentText = output;
+	}
+	else {
+		currentText += output;
+		//if(!debug) mainText.htmlText = currentText;
+	}
+	if(debug) {
+		mainText.htmlText = currentText;
+		scrollBar.update();
+	}
+}
+
 function outputText(output:String, purgeText:Boolean = false, parseAsMarkdown = false)
 {
 	output = parseText(output, parseAsMarkdown);
@@ -939,6 +958,7 @@ function outputText(output:String, purgeText:Boolean = false, parseAsMarkdown = 
 		scrollBar.update();
 	}
 }
+
 function perkLongDescription(perkName:String = ""):String {
 	switch(perkName) {
 		case "Pretend Strength Perk":
