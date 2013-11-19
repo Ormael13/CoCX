@@ -35,10 +35,18 @@ Planned, but not implemented yet:
 	[screen (SCREEN_NAME) | screen text]
 	// creates a new screen/page.
 
-	[change_screen (SCREEN_NAME)| button_text]
+	[button (SCREEN_NAME)| button_text]
 	// Creates a button which jumps to SCREEN_NAME when clicked
 
 */
+
+// horrible, messy hack
+// thisParserState is used to store the parser state.
+// it is cleared every time recursiveParser is called.
+// eventually, it should be properly refactored into this.parserState, but the parser would need to 
+// be properly class-based at that point.
+
+var thisParserState:Object = new Object();
 
 // Lookup dictionary for converting any single argument brackets into it's corresponding string
 // basically [armor] results in the "[armor]" segment of the string being replaced with the
@@ -641,12 +649,32 @@ function parseConditional(textCtnt:String, depth:int):String
 	return "";
 }
 
+// pushes the contents of the passed string into the scene list object if it's a scene, or instantiates the named button if it's a button
+// command and returns an empty string.
+// if the contents are not a button or scene contents, returns the contents.
+function evalForSceneControls(textCtnt:String):String
+{
+
+	if (textCtnt.toLowerCase().indexOf("screen") == 0)
+	{
+		if (debug) trace("It's a scene");
+		return "";	
+	}
+	else if (textCtnt.toLowerCase().indexOf("button") == 0)
+	{
+		if (debug) trace("It's a button add statement");
+		return "";
+		
+	}
+	return textCtnt;
+}
+
 // Called to determine if the contents of a bracket are a parseable statement or not
 // If the contents *are* a parseable, it calls the relevant function to evaluate it
 // if not, it simply returns the contents as passed
 function evalBracketContents(textCtnt:String, depth:int):String
 {
-	var debug = false;
+	var debug = true;
 	var retStr:String = "";
 	if (debug) trace("Evaluating string: ", textCtnt);
 
@@ -760,11 +788,17 @@ function recParser(textCtnt:String, depth):String
 				prefixTmp = textCtnt.substring(0, tmp);
 				if (prefixTmp)
 					retStr += prefixTmp
-
 				// We know there aren't any brackets in the section before the first opening bracket.
 				// therefore, we just add it to the returned string
 
-				retStr += evalBracketContents(recParser(textCtnt.substring(tmp+1, i), depth), depth);
+
+				var tmpStr:String = textCtnt.substring(tmp+1, i);
+				tmpStr = evalForSceneControls(tmpStr);		
+				// evalForSceneControls swallows scene controls, so they won't get parsed further now.
+				// therefore, you could *theoretically* have nested scene pages, though I don't know WHY you'd ever want that.
+
+				retStr += evalBracketContents(recParser(tmpStr, depth), depth);
+				
 				// First parse into the text in the brackets (to resolve any nested brackets)
 				// then, eval their contents, in case they're an if-statement or other control-flow thing
 				// I haven't implemented yet
@@ -815,6 +849,9 @@ function recParser(textCtnt:String, depth):String
 
 function recursiveParser(contents:String, parseAsMarkdown:Boolean = false):String
 {
+	// Reset the parser's internal state, since we're parsing a new string:
+	thisParserState = new Object();
+
 	var ret:String = "";
 	// Run through the parser
 	contents = contents.replace(/\\n/g, "\n")
