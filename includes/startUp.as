@@ -178,7 +178,7 @@ function startupScreenBody():void
 
 	// NO FUCKING DECENT MULTI-LINE STRING LITERALS BECAUSE FUCKING STUPID
 	// WTF ACTIONSCRIPT YOUR DEV'S ARE ON CRACK
-	outputText(<![CDATA["""
+	outputText(<![CDATA[
 <br>(Formerly Unnamed Text Game)  
 <u>Created by: Fenoxo</u>
 
@@ -203,7 +203,7 @@ For more information see Fenoxo's Blog at <b><u><a href='http://www.fenoxo.com/'
 
 Also go play <u><a href='http://www.furaffinity.net/view/9830293/'>Nimin</a></u> by Xadera on furaffinity.
 
-	"""]]>, false, true);
+	]]>, false, true);
 
 
 	if(debug)
