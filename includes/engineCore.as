@@ -145,30 +145,38 @@ function rawOutputText(output:String, purgeText:Boolean = false)
 		currentText += output;
 		mainText.htmlText += output;
 	}
-	trace(getCurrentStackTrace())
+	// trace(getCurrentStackTrace())
 	scrollBar.update();
 
 }
 
 function outputText(output:String, purgeText:Boolean = false, parseAsMarkdown = false)
 {
+	// we have to purge the output text BEFORE calling parseText, because if there are scene commands in 
+	// the parsed text, parseText() will write directly to the output
+
+	if (purgeText)
+	{
+		clearOutput();
+	}
+	
 	output = parseText(output, parseAsMarkdown);
 
 	//OUTPUT!
 	if(purgeText) {
 		//if(!debug) mainText.htmlText = output;
-		clearOutput();
 		currentText = output;
 	}
 	else {
 		currentText += output;
 		//if(!debug) mainText.htmlText = currentText;
 	}
-	if(debug) {
+	if(debug) 
+	{
 		mainText.htmlText = currentText;
 		scrollBar.update();
 	}
-	
+
 }
 
 function perkLongDescription(perkName:String = ""):String {

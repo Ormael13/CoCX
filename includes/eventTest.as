@@ -16,6 +16,7 @@ function eventTestingPane():void
 
 	]]>, true, true);
 
+	//trace("Maintext content @ eventTestingPane = ", mainText.htmlText.length)
 	//menu();
 	//addButton(9, "Back", debugPane)
 }

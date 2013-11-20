@@ -931,7 +931,7 @@ function recursiveParser(contents:String, parseAsMarkdown:Boolean = false):Strin
 	// Eventually, when this goes properly class-based, we'll add a period, and have this.parserState.
 
 	// Reset the parser's internal state, since we're parsing a new string:
-	trace("Purging scene parser contents")
+	// trace("Purging scene parser contents")
 	thisParserState = new Object();
 	
 
@@ -979,10 +979,12 @@ function recursiveParser(contents:String, parseAsMarkdown:Boolean = false):Strin
 		// the outputText call overwrites the window content with the exact same content.
 		
 		trace("Returning: ", ret);
-		
+		currentText = ret;
+
+
 	}
 	//trace(ret);
-
+	// trace("Maintext content @ recursiveParser = ", mainText.htmlText.length)
 	return ret
 
 }
