@@ -144,7 +144,7 @@ function executeButtonClick(button:int = 0):void {
 		var arg = args[button];
 		funcs = new Array();
 		args = new Array();
-		trace("FUNC: " + func + "ARG: " + arg);
+		trace("Calling Func: " + func + "ARG: " + arg);
 		if(arg == -9000) func();
 		else func(arg);
 	}

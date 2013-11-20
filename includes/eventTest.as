@@ -8,8 +8,8 @@ function eventTestingPane():void
 
 
 
-[screen startup | HERP A DERP [button next_step | Next Page]]
-[screen next_step | lawz [if (4==7) HERP|DERP] COPTER [button exit | Done! ]]
+[screen startup | THIS IS THE STARTUP SCREEN  [button next_step | Next Page][button exit | Done! ]]
+[screen next_step | THIS IS THE SECOND SCREEN [button exit | Done! ]]
 
 
 

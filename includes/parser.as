@@ -289,7 +289,7 @@ var twoWordNumericTagsLookup:Object =
 
 // These tags take an ascii attribute for lookup.
 // [object attribute]
-// if attribute cannot be case to a number, the parser looks for "object" in twoWordTagsLookup,
+// if attribute cannot be cast to a number, the parser looks for "object" in twoWordTagsLookup,
 // and then uses the corresponding object to determine the value of "attribute", by looking for
 // "attribute" twoWordTagsLookup["object"]["attribute"]
 var twoWordTagsLookup:Object =
@@ -303,6 +303,7 @@ var twoWordTagsLookup:Object =
 	"cock"		: cockLookups,
 	"cockhead"	: cockHeadLookups
 }
+
 
 function convertDoubleArg(arg:String):String
 {
@@ -659,26 +660,38 @@ function parseConditional(textCtnt:String, depth:int):String
 	return "";
 }
 
+
 var buttonNum:Number;
 
-function enterParserScene(sceneName:String):void
+function enterParserScene(sceneName:String):String
 {
-	trace("Entering parser scene: \""+sceneName+"\"");
-	trace("Do we have the scene name?:", sceneName in thisParserState)
+
+	trace("thisParserStateContents:")
+	for (var prop in thisParserState) 
+	{
+		trace("thisParserState."+prop+" = "+thisParserState[prop]); 
+	}
+
+
+	//trace("Entering parser scene: \""+sceneName+"\"");
+	//trace("Do we have the scene name? ", sceneName in thisParserState)
 	if (sceneName == "exit")
 	{
-		doNext(debugPane);
+		doNextClear(debugPane);
 	}
 	if (sceneName in thisParserState)
 	{	
-		trace("Have scene. setting up menu");
+		trace("Have scene \""+sceneName+"\". Parsing and setting up menu");
 		menu();
 		buttonNum = 0;
-		outputText(recParser(thisParserState[sceneName], 0), true, true);  // we have to actually parse the scene now, and then stick it on the display
+		var tmp1 = thisParserState[sceneName];
+		var tmp2 = recParser(tmp1, 0);
+		trace("Scene contents: \"" + tmp1 + "\" as parsed: \"" + tmp2 + "\"")
+		rawOutputText(tmp2, true);  // we have to actually parse the scene now, and then stick it on the display
 	}
+	return tmp2
 
 }
-
 
 
 function parseSceneTag(textCtnt:String):void
@@ -691,7 +704,9 @@ function parseSceneTag(textCtnt:String):void
 
 	sceneName = stripStr(sceneName);
 
-	thisParserState[sceneName] = sceneCont;
+	trace("Adding scene with name \"" + sceneName + "\"")
+
+	thisParserState[sceneName] = stripStr(sceneCont);
 
 }
 function parseButtonTag(textCtnt:String):void
@@ -701,10 +716,11 @@ function parseButtonTag(textCtnt:String):void
 	if (arr.len > 2)
 		throw new Error("Too many items in button")
 
-	trace("adding a button", arr);
 	var buttonName:String = stripStr(arr[1]);
-	var buttonFunc:String = stripStr(arr[0]);
+	var buttonFunc:String = stripStr(arr[0].substring(arr[0].indexOf(' ')));
+	//trace("adding a button with name\"" + buttonName + "\" and function \"" + buttonFunc + "\"");
 	addButton(buttonNum, buttonName, enterParserScene, buttonFunc);
+	buttonNum += 1;
 }
 
 // pushes the contents of the passed string into the scene list object if it's a scene, or instantiates the named button if it's a button
@@ -713,7 +729,7 @@ function parseButtonTag(textCtnt:String):void
 function evalForSceneControls(textCtnt:String):String
 {
 
-	var debug:Boolean = true;
+	var debug:Boolean = false;
 
 	if (debug) trace("Checking for scene tags.");
 	if (textCtnt.toLowerCase().indexOf("screen") == 0)
@@ -912,9 +928,12 @@ function recParser(textCtnt:String, depth):String
 
 function recursiveParser(contents:String, parseAsMarkdown:Boolean = false):String
 {
+	// Eventually, when this goes properly class-based, we'll add a period, and have this.parserState.
+
 	// Reset the parser's internal state, since we're parsing a new string:
+	trace("Purging scene parser contents")
 	thisParserState = new Object();
-	// eventually, when this goes properly class-based, we'll add a period, and have this.parserState.
+	
 
 
 	var ret:String = "";
@@ -944,14 +963,26 @@ function recursiveParser(contents:String, parseAsMarkdown:Boolean = false):Strin
 	ret = ret.replace(/\\\]/g, "]")
 	ret = ret.replace(/\\\[/g, "[")
 
+	// Finally, if we have a parser-based scene. enter the "startup" scene.
 	for (var prop in thisParserState) 
 	{
 		trace("thisParserState."+prop+" = "+thisParserState[prop]); 
 	}
 
 	if ("startup" in thisParserState)
-		enterParserScene("startup");
+	{
+		ret = enterParserScene("startup");
+
+		// HORRIBLE HACK
+		// since we're initially called via a outputText command, the content of the first page's text will be overwritten
+		// when we return. Therefore, in a horrible hack, we return the contents of mainTest.htmlText as the ret value, so 
+		// the outputText call overwrites the window content with the exact same content.
+		
+		trace("Returning: ", ret);
+		
+	}
 	//trace(ret);
+
 	return ret
 
 }
