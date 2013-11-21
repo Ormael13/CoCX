@@ -380,7 +380,7 @@ package coc.view {
 			return (possibleLabels.indexOf( buttonText ) != -1);
 		};
 
-		public function buttonIsVisible( index :int ) :String {
+		public function buttonIsVisible( index :int ) :Boolean {
 			if( index < 0 || index > BOTTOM_BUTTON_COUNT ) {
 				return undefined;
 			}
