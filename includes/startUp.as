@@ -527,17 +527,17 @@ function eventTester():void {
 function eventTesterGo():void 
 {
 		
-		outputText(eventTestInput.text, true, true);
+		outputText(mainView.eventTestInput.text, true, true);
 		//simpleChoices("Again",117,"",0,"",0,"",0,"Quit",mainMenu);
-		eventTestInput.x = -10207.5;
-		eventTestInput.y = -1055.1;
+		mainView.eventTestInput.x = -10207.5;
+		mainView.eventTestInput.y = -1055.1;
 		return;
 }
 
 function eventTesterExit():void 
 {
-	eventTestInput.x = -10207.5;
-	eventTestInput.y = -1055.1;
+	mainView.eventTestInput.x = -10207.5;
+	mainView.eventTestInput.y = -1055.1;
 	eventParser(debugPane);
 	return;
 }

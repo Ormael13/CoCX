@@ -139,16 +139,18 @@ function rawOutputText(output:String, purgeText:Boolean = false)
                 trace("Purging and writing Text", output);
                 clearOutput();
                 currentText = output;
-                mainText.htmlText = output;
+                mainView.setOutputText( output );
+                // mainText.htmlText = output;
         }
         else
         {
                 trace("Adding Text");
                 currentText += output;
-                mainText.htmlText += output;
+                mainView.appendOutputText( output );
+                // mainText.htmlText += output;
         }
         // trace(getCurrentStackTrace())
-        scrollBar.update();
+        // scrollBar.update();
 
 }
 
