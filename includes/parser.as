@@ -40,6 +40,12 @@ Planned, but not implemented yet:
 
 */
 
+
+var sceneParserDebug:Boolean = false;
+
+var mainParserDebug:Boolean = false;
+
+
 // horrible, messy hack
 // thisParserState is used to store the parser state.
 // it is cleared every time recursiveParser is called.
@@ -120,15 +126,14 @@ var singleArgConverters:Object =
 // ALWAYS returns a string
 function convertSingleArg(arg:String):String
 {
-	var debug = false;
 	var argResult:String;
 	var capitalize:Boolean = isUpperCase(arg.charAt(0));
 	arg = arg.toLowerCase()
 	if (arg in singleArgConverters)
 	{
-		if (debug) trace("Found corresponding anonymous function");
+		if (mainParserDebug) trace("Found corresponding anonymous function");
 		argResult = singleArgConverters[arg]();
-		if (debug) trace("Called, return = ", argResult);
+		if (mainParserDebug) trace("Called, return = ", argResult);
 	}
 	else
 		return "<b>!Unknown tag \"" + arg + "\"!</b>";
@@ -307,7 +312,6 @@ var twoWordTagsLookup:Object =
 
 function convertDoubleArg(arg:String):String
 {
-	var debug = false;
 	var argResult:String;
 
 
@@ -335,9 +339,9 @@ function convertDoubleArg(arg:String):String
 		{
 			aspect = Number(aspect);
 
-			if (debug) trace("Found corresponding anonymous function");
+			if (mainParserDebug) trace("Found corresponding anonymous function");
 			argResult = twoWordNumericTagsLookup[subject](aspect);
-			if (debug) trace("Called, return = ", argResult);
+			if (mainParserDebug) trace("Called, return = ", argResult);
 		}
 		else
 			return "<b>!Unknown subject in two-word tag \"" + arg + "\"! Subject = \"" + subject + ", Numeric Aspect = " + aspect + "\</b>";
@@ -350,9 +354,9 @@ function convertDoubleArg(arg:String):String
 			if (aspect in twoWordTagsLookup[subject])
 			{
 
-				if (debug) trace("Found corresponding anonymous function");
+				if (mainParserDebug) trace("Found corresponding anonymous function");
 				argResult = twoWordTagsLookup[subject][aspect]();
-				if (debug) trace("Called, return = ", argResult);
+				if (mainParserDebug) trace("Called, return = ", argResult);
 			}
 			else
 				return "<b>!Unknown aspect in two-word tag \"" + arg + "\"! ASCII Aspect = \"" + aspect + "\"</b>";
@@ -439,7 +443,6 @@ var conditionalOptions:Object =
 // Realistally, should only return either boolean or numbers.
 function convertConditionalArgumentFromStr(arg:String):*
 {
-	var debug = false;
 	// convert the string contents of a conditional argument into a meaningful variable.
 	arg = arg.toLowerCase()
 	var argResult = 0;
@@ -450,19 +453,19 @@ function convertConditionalArgumentFromStr(arg:String):*
 	// Try to cast to a number. If it fails, go on with the switch/case statement.
 	if (!isNaN(Number(arg)))
 	{
-		if (debug) trace("Converted to float. Number = ", Number(arg))
+		if (mainParserDebug) trace("Converted to float. Number = ", Number(arg))
 		return Number(arg);
 	}
 
 	if (arg in conditionalOptions)
 	{
-		if (debug) trace("Found corresponding anonymous function");
+		if (mainParserDebug) trace("Found corresponding anonymous function");
 		argResult = conditionalOptions[arg]();
-		if (debug) trace("Called, return = ", argResult);
+		if (mainParserDebug) trace("Called, return = ", argResult);
 
 	}
 
-	if (debug) trace("Could not convert to float. Evaluated ", arg, " as", argResult)
+	if (mainParserDebug) trace("Could not convert to float. Evaluated ", arg, " as", argResult)
 	return argResult;
 }
 
@@ -488,16 +491,15 @@ function evalConditionalStatementStr(textCond:String):Boolean
 	// proper, nested parsing of statements is a WIP
 	// and not supported at this time.
 
-	var debug = false;
 
 	var isExp:RegExp = /(\w+)\s?(==|=|!=|<|>|<=|>=)\s?(\w+)/;
 	var expressionResult:Object = isExp.exec(textCond);
 	if (!expressionResult)
 	{
-		if (debug) trace("Invalid conditional!")
+		if (mainParserDebug) trace("Invalid conditional!")
 		return false
 	}
-	if (debug) trace("Expression = ", textCond, "Expression result = [", expressionResult, "], length of = ", expressionResult.length);
+	if (mainParserDebug) trace("Expression = ", textCond, "Expression result = [", expressionResult, "], length of = ", expressionResult.length);
 
 	var condArgStr1;
 	var condArgStr2;
@@ -534,7 +536,7 @@ function evalConditionalStatementStr(textCond:String):Boolean
 		retVal = (condArg1 != condArg2);
 
 
-	if (debug) trace("Check: " + condArg1 + " " + operator + " " + condArg2 + " = " + retVal);
+	if (mainParserDebug) trace("Check: " + condArg1 + " " + operator + " " + condArg2 + " = " + retVal);
 
 	return retVal;
 }
@@ -602,7 +604,6 @@ function parseConditional(textCtnt:String, depth:int):String
 
 	// (NOT YET) Allows nested condition parenthesis, because I'm masochistic
 
-	var debug = false;
 
 	var ret:Array = new Array("", "", "");	// first string is conditional, second string is the output
 
@@ -644,8 +645,8 @@ function parseConditional(textCtnt:String, depth:int):String
 				// And now do the actual splitting.
 				output = splitConditionalResult(output);
 
-				if (debug) trace("prefix = '", ret[0], "' conditional = ", conditional, " content = ", output);
-				if (debug) trace("Content Item 1 = ", output[0], "Item 2 = ", output[1]);
+				if (mainParserDebug) trace("prefix = '", ret[0], "' conditional = ", conditional, " content = ", output);
+				if (mainParserDebug) trace("Content Item 1 = ", output[0], "Item 2 = ", output[1]);
 
 				if (conditional)
 					return output[0]
@@ -666,10 +667,10 @@ var buttonNum:Number;
 function enterParserScene(sceneName:String):String
 {
 
-	trace("thisParserStateContents:")
+	if (sceneParserDebug) trace("thisParserStateContents:")
 	for (var prop in thisParserState) 
 	{
-		trace("thisParserState."+prop+" = "+thisParserState[prop]); 
+		if (sceneParserDebug) trace("thisParserState."+prop+" = "+thisParserState[prop]); 
 	}
 
 
@@ -681,12 +682,12 @@ function enterParserScene(sceneName:String):String
 	}
 	if (sceneName in thisParserState)
 	{	
-		trace("Have scene \""+sceneName+"\". Parsing and setting up menu");
+		if (sceneParserDebug) trace("Have scene \""+sceneName+"\". Parsing and setting up menu");
 		menu();
 		buttonNum = 0;
 		var tmp1 = thisParserState[sceneName];
 		var tmp2 = recParser(tmp1, 0);
-		trace("Scene contents: \"" + tmp1 + "\" as parsed: \"" + tmp2 + "\"")
+		if (sceneParserDebug) trace("Scene contents: \"" + tmp1 + "\" as parsed: \"" + tmp2 + "\"")
 		rawOutputText(tmp2, true);  // we have to actually parse the scene now, and then stick it on the display
 	}
 	return tmp2
@@ -704,7 +705,7 @@ function parseSceneTag(textCtnt:String):void
 
 	sceneName = stripStr(sceneName);
 
-	trace("Adding scene with name \"" + sceneName + "\"")
+	if (sceneParserDebug) trace("Adding scene with name \"" + sceneName + "\"")
 
 	thisParserState[sceneName] = stripStr(sceneCont);
 
@@ -729,18 +730,18 @@ function parseButtonTag(textCtnt:String):void
 function evalForSceneControls(textCtnt:String):String
 {
 
-	var debug:Boolean = false;
+	
 
-	if (debug) trace("Checking for scene tags.");
+	if (sceneParserDebug) trace("Checking for scene tags.");
 	if (textCtnt.toLowerCase().indexOf("screen") == 0)
 	{
-		if (debug) trace("It's a scene");
+		if (sceneParserDebug) trace("It's a scene");
 		parseSceneTag(textCtnt);
 		return "";
 	}
 	else if (textCtnt.toLowerCase().indexOf("button") == 0)
 	{
-		if (debug) trace("It's a button add statement");
+		if (sceneParserDebug) trace("It's a button add statement");
 		parseButtonTag(textCtnt);
 		return "";
 		
@@ -753,22 +754,22 @@ function evalForSceneControls(textCtnt:String):String
 // if not, it simply returns the contents as passed
 function evalBracketContents(textCtnt:String, depth:int):String
 {
-	var debug = true;
+	
 	var retStr:String = "";
-	if (debug) trace("Evaluating string: ", textCtnt);
+	if (mainParserDebug) trace("Evaluating string: ", textCtnt);
 
 	// POSSIBLE BUG: A actual statement starting with "if" could be misinterpreted as an if-statement
 	// It's unlikely, but I *could* see it happening.
 	// I need to do some testing ~~~~Fake-Name
 	if (textCtnt.toLowerCase().indexOf("if") == 0)
 	{
-		if (debug) trace("It's an if-statement");
+		if (mainParserDebug) trace("It's an if-statement");
 		retStr = parseConditional(textCtnt, depth);
-		if (debug) trace("IF Evaluated to ", retStr);
+		if (mainParserDebug) trace("IF Evaluated to ", retStr);
 	}
 	else
 	{
-		if (debug) trace("Not an if statement")
+		if (mainParserDebug) trace("Not an if statement")
 			// Match a single word, with no leading or trailing space
 		var singleWordTagRegExp:RegExp = /^\w+$/;
 		var doubleWordTagRegExp:RegExp = /^\w+\s\w+$/;
@@ -776,16 +777,16 @@ function evalBracketContents(textCtnt:String, depth:int):String
 		var singleWordExpRes:Object = singleWordTagRegExp.exec(textCtnt);
 		var doubleWordExpRes:Object = doubleWordTagRegExp.exec(textCtnt);
 
-		if (debug) trace("Checking if single word = [" + singleWordExpRes + "]", getQualifiedClassName(singleWordExpRes));
-		if (debug) trace("string length = ", textCtnt.length);
+		if (mainParserDebug) trace("Checking if single word = [" + singleWordExpRes + "]", getQualifiedClassName(singleWordExpRes));
+		if (mainParserDebug) trace("string length = ", textCtnt.length);
 		if (singleWordExpRes)
 		{
-			if (debug) trace("It's a single word!");
+			if (mainParserDebug) trace("It's a single word!");
 			retStr += convertSingleArg(textCtnt);
 		}
 		else if (doubleWordExpRes)
 		{
-			if (debug) trace("Two-word tag!")
+			if (mainParserDebug) trace("Two-word tag!")
 			retStr += convertDoubleArg(textCtnt);
 		}
 		else
@@ -810,7 +811,6 @@ function recParser(textCtnt:String, depth):String
 	// a tag. Therefore, every call of recParser increments depth by 1
 
 	depth += 1;
-	var debug = false;
 	textCtnt = String(textCtnt);
 	if (textCtnt.length == 0)	// Short circuit if we've been passed an empty string
 		return "";
@@ -890,12 +890,12 @@ function recParser(textCtnt:String, depth):String
 				postfixTmp = textCtnt.substring(i+1, textCtnt.length);
 				if (postfixTmp.indexOf("[") != -1)
 				{
-					if (debug) trace("Need to parse trailing text", postfixTmp)
+					if (mainParserDebug) trace("Need to parse trailing text", postfixTmp)
 					retStr += recParser(postfixTmp, depth);	// Parse the trailing text (if any)
 				}
 				else
 				{
-					if (debug) trace("No brackets in trailing text", postfixTmp)
+					if (mainParserDebug) trace("No brackets in trailing text", postfixTmp)
 					retStr += postfixTmp;
 				}
 
@@ -908,7 +908,7 @@ function recParser(textCtnt:String, depth):String
 	{
 		// DERP. We should never have brackets around something that ISN'T a tag intended to be parsed. Therefore, we just need
 		// to determine what type of parsing should be done do the tag.
-		if (debug) trace("No brackets present", textCtnt);
+		if (mainParserDebug) trace("No brackets present", textCtnt);
 
 
 		retStr += textCtnt;

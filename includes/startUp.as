@@ -284,7 +284,7 @@ function debugPane():void
 
 	menu();
 	addButton(0, "Event Tester", eventTestingPane);
-	addButton(1, "Test Input", eventTester);
+	// addButton(1, "Test Input", eventTester);
 	addButton(9, "Back", mainMenu);
 }
 
@@ -516,6 +516,7 @@ function howToPlay():void {
 	doNext(mainMenu);
 }
 
+/*
 function eventTester():void {
 	outputText("", true);
 	mainView.eventTestInput.x = 207.5;
@@ -541,3 +542,4 @@ function eventTesterExit():void
 	eventParser(debugPane);
 	return;
 }
+*/
