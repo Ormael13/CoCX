@@ -315,6 +315,7 @@ function debugPane():void
 
 	menu();
 	addButton(0, "Event Tester", eventTestingPane);
+	addButton(1, "Test Input", eventTester);
 	addButton(9, "Back", mainMenu);
 }
 
@@ -552,6 +553,23 @@ function eventTester():void {
 	eventTestInput.x = 207.5;
 	eventTestInput.y = 55.1;
 	//eventTestInput.text = "Paste test event text here.";
-	simpleChoices("Proceed",118,"",0,"",0,"",0,"Back",119);
+	simpleChoices("Proceed",eventTesterGo,"",0,"",0,"",0,"Back",eventTesterExit);
 }
 
+function eventTesterGo():void 
+{
+		
+		outputText(eventTestInput.text, true, true);
+		//simpleChoices("Again",117,"",0,"",0,"",0,"Quit",mainMenu);
+		eventTestInput.x = -10207.5;
+		eventTestInput.y = -1055.1;
+		return;
+}
+
+function eventTesterExit():void 
+{
+	eventTestInput.x = -10207.5;
+	eventTestInput.y = -1055.1;
+	eventParser(debugPane);
+	return;
+}
