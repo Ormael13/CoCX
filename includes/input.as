@@ -46,6 +46,8 @@ var inputManager:InputManager = new InputManager(stage);
 
 function executeButtonClick(button:int = 0):void {
 	if(funcs.length == 0) {
+		trace("Calling eventParser on buttonEvents[" + String( button ) + "]:",
+			buttonEvents[ button ]);
 		eventParser(buttonEvents[button]);
 	}
 	else if(funcs.length - 1 < button) {
@@ -62,7 +64,7 @@ function executeButtonClick(button:int = 0):void {
 		var arg = args[button];
 		funcs = new Array();
 		args = new Array();
-		trace("FUNC: " + func + "ARG: " + arg);
+		trace("Calling Func: " + func + "ARG: " + arg);
 		if(arg == -9000) func();
 		else func(arg);
 	}
@@ -321,6 +323,9 @@ inputManager.AddBindableControl(
 		// Button 9
 		if (mainView.buttonIsVisible(9) && mainView.buttonTextIsOneOf(9, [ "Nevermind", "Abandon", "Next", "Return", "Back", "Leave", "Resume" ]))
 		{
+			trace( "keyboard(): processing space bar for button 9",
+				mainView.buttonIsVisible( 9 ) ? "(visible)" : "(hidden)",
+				mainView.getButtonText( 9 ) );
 			mainView.toolTipView.hide();
 			executeButtonClick(9);
 			return;
@@ -329,6 +334,9 @@ inputManager.AddBindableControl(
 		// Button 0
 		if (mainView.buttonIsVisible(0) && mainView.buttonTextIsOneOf(0, [ "Next", "Return", "Back" ]))
 		{
+			trace( "keyboard(): processing space bar for button 0",
+				mainView.buttonIsVisible( 0 ) ? "(visible)" : "(hidden)",
+				mainView.getButtonText( 0 ) );
 			mainView.toolTipView.hide();
 			executeButtonClick(0);
 			return;
@@ -337,6 +345,9 @@ inputManager.AddBindableControl(
 		// Button 4
 		if (mainView.buttonIsVisible(4) && mainView.buttonTextIsOneOf(4, [ "Nevermind", "Next", "Return", "Back", "Leave" ]))
 		{
+			trace( "keyboard(): processing space bar for button 4",
+				mainView.buttonIsVisible( 4 ) ? "(visible)" : "(hidden)",
+				mainView.getButtonText( 4 ) );
 			mainView.toolTipView.hide();
 			executeButtonClick(4);
 			return;
@@ -345,6 +356,9 @@ inputManager.AddBindableControl(
 		// Button 5
 		if (mainView.buttonIsVisible(5) && mainView.buttonTextIsOneOf(5, [ "Next", "Return", "Back" ]))
 		{
+			trace( "keyboard(): processing space bar for button 5",
+				mainView.buttonIsVisible( 5 ) ? "(visible)" : "(hidden)",
+				mainView.getButtonText( 5 ) );
 			mainView.toolTipView.hide();
 			executeButtonClick(5);
 			return;

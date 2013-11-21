@@ -1,4 +1,3 @@
-
 // import flash.events.MouseEvent;
 
 //const DOUBLE_ATTACK_STYLE:int = 867;
@@ -65,7 +64,7 @@ function outputList():String {
 		}
 	}
 	list = new Array();
-	return stuff;	
+	return stuff;        
 }
 
 
@@ -118,764 +117,71 @@ function speech(output:String, speaker:String):void {
 	outputText(speech, false);
 }
 
-/*
-function checkCondition(variable:String, op:String, test:String):Boolean
-{	
-	//Regex to check if something is a number
-	var isNumber:RegExp = new RegExp("[0-9]+");
-	
-	//Regex to check if something is a boolean
-	var isBoolean:RegExp = new RegExp("[true|false]");
-	
-	var result:Boolean = false;
-	
-	var a, b;
-	
-	if (isNumber.test(test))
-	{
-		//Number variables are handled in here
-		b = Number(test);
-		
-		//Case/Switch for the variable name
-		switch(variable)
-		{
-		case "strength":
-			a = player.str;
-			break;
-		case "toughness":
-			a = player.tou;
-			break;
-		case "speed":
-			a = player.spe;
-			break;
-		case "intelligence":
-			a = player.inte;
-			break;
-		case "libido":
-			a = player.lib;
-			break;
-		case "sensitivity":
-			a = player.sens;
-			break;
-		case "corruption":
-			a = player.cor;
-			break;
-		case "fatigue":
-			a = player.fatigue;
-			break;
-		case "HP":
-			a = player.HP;
-			break;
-		case "hour":
-			a = model.time.hours;
-			break;
-		case "days":
-			a = model.time.days;
-			break;
-		case "tallness":
-			a = player.tallness;
-			break;
-		case "hairLength":
-			a = player.hairLength;
-			break;
-		case "femininity":
-			a = player.femininity;
-			break;
-		case "masculinity":
-			a = 100 - player.femininity;
-			break;
-		case "cocks":
-			a = player.cockTotal();
-			break;
-		case "breastRows":
-			a = player.bRows();
-			break;
-		case "biggestTitSize":
-			a = player.biggestTitSize();
-			break;
-		case "vagCapacity":
-			a = player.vaginalCapacity();
-			break;
-		case "analCapacity":
-			a = player.analCapacity();
-			break;
-		case "balls":
-			a = player.balls;
-			break;
-		case "cumQuantity":
-			a = player.cumQ();
-			break;
-		case "biggestTitSize":
-			a = player.biggestTitSize();
-			break;
-		case "milkQuantity":
-			a = player.lactationQ();
-			break;
-		default:
-			a = 0;
-			break;
-		}
-		
-		//Perform check
-		if(op == "=")
-		{
-			result = (a == b);
-		}
-		else if(op == ">")
-		{
-			result = (a > b);
-		}
-		else if(op == "==")
-		{
-			result = (a == b);
-		}
-		else if(op == "<")
-		{
-			result = (a < b);
-		}
-		else if(op == ">=")
-		{
-			result = (a >= b);
-		}
-		else if(op == "<=")
-		{
-			result = (a <= b);
-		}
-		else if(op == "!=")
-		{
-			result = (a != b);
-		}
-		else
-		{
-			result = (a != b);
-		}
-	}
-	else if(isBoolean.test(test))
-	{
-		//Boolean variables handled here
-		//test = Boolean(result[3]);
-		if (test == "true")
-		{
-			b = true;
-		}
-		else
-		{
-			b = false;
-		}
-
-		switch(variable)
-		{
-		case "hasVagina":
-			a = player.hasVagina();
-			break;
-		case "isTaur":
-			a = player.isTaur();
-			break;
-		case "isNaga":
-			a = player.isNaga();
-			break;
-		case "isGoo":
-			a = player.isGoo();
-			break;
-		case "isBiped":
-			a = player.isBiped();
-			break;
-		case "hasBreasts":
-			a = (player.biggestTitSize() >= 1);
-			break;
-		case "hasBalls":
-			a = (player.balls > 0);
-			break;
-		case "hasCock":
-			a = player.hasCock();
-			break;
-		case "isHerm":
-			a = (player.gender == 3);
-			break;
-		case "cumNormal":
-			a = (player.cumQ() <= 150);
-			break;
-		case "cumMedium":
-			a = (player.cumQ() > 150 && player.cumQ() <= 350);
-			break;
-		case "cumHigh":
-			a = (player.cumQ() > 350 && player.cumQ() <= 1000);
-			break;
-		case "cumVeryHigh":
-			a = (player.cumQ() > 1000 && player.cumQ() <= 2500);
-			break;
-		case "cumExtreme":
-			a = (player.cumQ() > 2500);
-			break;
-		case "isSquirter":
-			a = (player.wetness() >= 4);
-			break;
-		case "isPregnant":
-			a = (player.pregnancyIncubation > 0);
-			break;
-		case "isButtPregnant":
-			a = (player.buttPregnancyIncubation > 0);
-			break;
-		case "hasNippleCunts":
-			a = player.hasFuckableNipples();
-			break;
-		case "canFly":
-			a = player.canFly();
-			break;
-		case "isLactating":
-			a = (player.lactationQ() > 0);
-			break;
-		default:
-			a = false;
-			break;
-		}
-		
-		if(op == "=")
-		{
-			result = (a == b);
-		}
-		else
-		{
-			result = (a != b);
-		}
-	}
-	else
-	{
-		//String variables here
-		
-		switch(variable)
-		{
-		default:
-			a = "";
-			break;
-		}
-		
-		if(op == "=")
-		{
-			result = (a == test);
-		}
-		else
-		{
-			result = (a != test);
-		}
-	}
-	
-	trace("Check: " + variable + " " + op + " " + test + " = " + result);
-	
-	return result;
-}
-*/
-
-function parseText(text:String):String
+function parseText(text:String, parseAsMarkdown:Boolean = false):String
 {
 	// Moved into external parser.
-	text = recursiveParser(text); 
+	text = recursiveParser(text, parseAsMarkdown);
 	return text;
 }
 
-	/*
-	var debug = true;
-
-
-	//PARSE DAT TEXT!
-	//Now with more awesome!
-	if(debug) trace("Parsing Text");
-	//Regex to check if something is a number
-	var isNumber:RegExp = new RegExp("[0-9]+");
-	
-	//Regex to check if something is a boolean
-	var isBoolean:RegExp = new RegExp("[true|false]");
-	
-	//Regex to check if a string matches the expression format
-	var isExp:RegExp = new RegExp("\\(([A-Za-z0-9]+)\\s(==|=|!=|<|>|<=|>=)\\s([A-Za-z0-9]+)\\)");
-	
-	//Regex to match non-branch, param-free tags - Tag names can contain any letters and numbers. No spaces or special characters.
-	var basicTag:RegExp = new RegExp("\\[([a-zA-Z0-9]+)\\]");
-	
-	//Regex to match tags with a single parameter - Tag names can contain any letters and numbers. No spaces or special characters. Yes, I felt the need to repeat this.
-	var paramTag:RegExp = new RegExp("\\[([a-zA-Z0-9]+)\\s(.*?)\\]");
-	
-	//Regex to match branch tags - You can't nest if's, and they MUST end with a space to make recursive parsing work
-	//var branchTag:RegExp = new RegExp("\\[if\\s\\(([a-zA-Z]+)\\s(=|!=|>|<|<=|>=)\\s(.*?)\\)\\s\\\"(.*?)\\\"\\]");
-	//var branchTag:RegExp = new RegExp("\\[if\\s\\((.*?)\\)\\s\\\"(.*?)\\\"\\]");
-	//
-	// Produces: [if (EXPRESSION) \"OUTPUT_TEXT\"]
-	// where OUTPUT_TEXT is passed recursively into parseText
-	//
-	var branchTag:RegExp = /\[if (.*?) \"(.*?)\"\]/i;		// unbreak my text editors highlighting "
-	
-	var branchTagElse:RegExp = /\[if (.*?) \"(.*?)\" else \"(.*?)\"\]/i; 		//"
-
-	// Old regexes
-	// var branchTag:RegExp = new RegExp("\\[if\\s(.*?)\\s\\\"(.*?)\\\"\\]");
-	// var branchTagElse:RegExp = new RegExp("\\[if\\s(.*?)\\s\\\"(.*?)\\\"\\selse\\s\\\"(.*?)\\\"\\]");
-
-	var rep:String;
-	//We parse the tags from most complex to most basic, as the basic tag has the most "greedy" regex
-	
-	//Grab the first branch tag
-	var result:Object = branchTagElse.exec(text);
-	
-	while (result != null)
-	{
-		//result[2] is the text to be displayed. Also gets parsed for tags.
-		rep = parseText(result[2]);
-		
-		var rep2:String = parseText(result[3]);
-		
-		var expTotal:String = result[1];
-		
-		var check;
-		
-		var exp:Object = isExp.exec(expTotal);
-		
-		while (exp != null)
-		{
-			var temp:Boolean = checkCondition(exp[1], exp[2], exp[3]);
-			
-			expTotal = expTotal.replace(isExp, "");
-			
-			expTotal = expTotal.replace(/^\s+|\s+$/g, "");
-			
-			if (check != undefined)
-			{
-				var oi = expTotal.indexOf("||");
-				var ai = expTotal.indexOf("&&");
-				
-				if (oi == 0)
-				{
-					check = (check || temp);
-				}
-				else if(ai == 0)
-				{
-					check = (check && temp);
-				}
-				
-				expTotal = expTotal.slice(2, expTotal.length);
-			}
-			else
-			{
-				check = temp;
-			}
-			
-			exp = isExp.exec(expTotal);
-		}
-		
-		//If comparison is true, add in the text
-		if (check)
-		{
-			text = text.replace(branchTagElse, rep);
-			//9999text = text.replace(branchTagElse, rep);
-		}
-		else
-		{
-			text = text.replace(branchTagElse, rep2);
-			//9999text = text.replace(branchTagElse, rep2);
-		}
-		
-		//Go to next result. If null, loop ends.
-		check = undefined;
-		result = branchTagElse.exec(text);
-	}
-	
-	result = branchTag.exec(text);
-	
-	//While there are branch tags, parse them.
-	while (result != null)
-	{
-		//result[2] is the text to be displayed. Also gets parsed for tags.
-		rep = parseText(result[2]);
-		
-		expTotal = result[1];
-		
-		exp = isExp.exec(expTotal);
-		
-		while (exp != null)
-		{
-			var tempo:Boolean = checkCondition(exp[1], exp[2], exp[3]);
-			
-			expTotal = expTotal.replace(isExp, "");
-			
-			expTotal = expTotal.replace(/^\s+|\s+$/g, "");
-			
-			if (check != undefined)
-			{
-				oi = expTotal.indexOf("||");
-				ai = expTotal.indexOf("&&");
-				
-				if (oi == 0)
-				{
-					check = (check || tempo);
-				}
-				else if(ai == 0)
-				{
-					check = (check && tempo);
-				}
-				
-				expTotal = expTotal.slice(2, expTotal.length);
-			}
-			else
-			{
-				check = tempo;
-			}
-			
-			exp = isExp.exec(expTotal);
-		}
-		
-		//If comparison is true, add in the text
-		if (check == true)
-		{
-			text = text.replace(branchTag, rep);
-		}
-		else
-		{
-			text = text.replace(branchTag, "");
-		}
-		
-		//Go to next result. If null, loop ends.
-		check = undefined;
-		result = branchTag.exec(text);
-	}
-	
-	//Find first single param tag
-	result = paramTag.exec(text);
-	
-	//While we have single param tags, parse them
-	while (result != null)
-	{
-		//Convert param to an actual value if needed
-		var arg;
-		
-		if (isNumber.test(result[2]))
-		{
-			arg = Number(result[2]);
-		}
-		else
-		{
-			arg = result[2];
-		}
-		
-		//Case/Switch for the tag name
-		//result[1] is the tag name
-		//rep is the text the tag is replaced with
-		//The rest is pretty basic param checking
-		switch(result[1])
-		{
-		case "cockFit":
-			if(!player.hasCock()) rep = "<b>(Attempt to parse cock when none present.)</b>";
-			else if(isNaN(arg)) rep = "<b>(Invalid argument for cockFit)</b>";
-			else {
-				if(player.cockThatFits(arg) >= 0) rep = cockDescript(player.cockThatFits(arg));
-				else rep = cockDescript(player.smallestCockIndex());
-			}
-			break;
-		case "cockFit2":
-			if(!player.hasCock()) rep = "<b>(Attempt to parse cock when none present.)</b>";
-			else if(isNaN(arg)) rep = "<b>(Invalid argument for cockFit2)</b>";
-			else {
-				if(player.cockThatFits2(arg) >= 0) rep = cockDescript(player.cockThatFits2(arg));
-				else rep = cockDescript(player.smallestCockIndex());
-			}
-			break;
-		case "cockHeadFit":
-			if(!player.hasCock()) rep = "<b>(Attempt to parse cockhead when none present.)</b>";
-			else if(isNaN(arg)) rep = "<b>(Invalid argument for cockHeadFit)</b>";
-			else {
-				if(player.cockThatFits(arg) >= 0) rep = cockHead(player.cockThatFits(arg));
-				else rep = cockHead(player.smallestCockIndex());
-			}
-			break;
-		case "cockHeadFit2":
-			if(!player.hasCock()) rep = "<b>(Attempt to parse cockhead when none present.)</b>";
-			else if(isNaN(arg)) rep = "<b>(Invalid argument for cockHeadFit2)</b>";
-			else {
-				if(player.cockThatFits2(arg) >= 0) rep = cockHead(player.cockThatFits2(arg));
-				else rep = cockHead(player.smallestCockIndex());
-			}
-			break;
-		case "cock":
-			if(!player.hasCock()) rep = "<b>(Attempt to parse cock when none present.)</b>";
-			else if (arg == "all")
-			{
-				rep = multiCockDescriptLight();
-			}
-			else if (arg == "each")
-			{
-				rep = sMultiCockDesc();
-			}
-			else if (arg == "one")
-			{
-				rep = oMultiCockDesc();
-			}
-			else if (arg == "largest" || arg == "biggest")
-			{
-				rep = cockDescript(player.biggestCockIndex())
-			}
-			else if (arg == "smallest")
-			{
-				rep = cockDescript(player.smallestCockIndex())
-			}
-			else if (arg == "longest")
-			{
-				rep = cockDescript(player.longestCock())
-			}
-			else if (arg == "shortest")
-			{
-				rep = cockDescript(player.shortestCockIndex())
-			}
-			else
-			{
-				if(arg-1 >= 0 && arg-1 < player.cockTotal()) rep = cockDescript(arg - 1);
-				else rep = "<b>(Attempt To Parse CockDescript for Invalid Cock)</b>";
-			}
-			break;
-		case "cockHead":
-			if(!player.hasCock()) rep = "<b>(Attempt to parse cock when none present.)</b>";
-			else if (arg == "largest" || arg == "biggest")
-			{
-				rep = cockHead(player.biggestCockIndex())
-			}
-			else if (arg == "smallest")
-			{
-				rep = cockHead(player.smallestCockIndex())
-			}
-			else if (arg == "longest")
-			{
-				rep = cockHead(player.longestCock())
-			}
-			else if (arg == "shortest")
-			{
-				rep = cockHead(player.shortestCockIndex())
-			}
-			else
-			{
-				if(arg-1 >= 0 && arg-1 < player.cockTotal()) rep = cockHead(arg - 1);
-				else rep = "<b>(Attempt to parse cockhead when none present.)</b>";
-			}
-			break;
-		default:
-			rep = "<u><b>!Unknown tag \"" + result[1] + "\"!</b></u>";
-			break;
-		}
-		
-		//Add text, try and jump to next
-		text = text.replace(paramTag, rep);
-		
-		result = paramTag.exec(text);
-	}
-	
-	//Find first basic tag
-	result = basicTag.exec(text);
-	
-	//While we have basic tags
-	while (result != null)
-	{
-	//	rep;
-		
-		//Same as param tags, but without the param
-		switch(result[1])
-		{
-		case "armor":
-		case "armorName":
-			rep = player.armorName;
-			break;
-		case "weapon":
-		case "weaponName":
-			rep = player.weaponName;
-			break;
-		case "name":
-			rep = player.short;
-			break;
-		case "pg":
-			rep = "\n\n";
-			break;
-		case "asshole":
-			rep = assholeDescript();
-			break;
-		case "butthole":
-			rep = assholeDescript();
-			break;
-		case "cunt":
-			if(player.hasVagina()) rep = vaginaDescript();
-			else rep = "<b>(Attempt to parse vagina when none present.)</b>";
-			break;
-		case "cocks":
-			if(player.hasCock()) rep = multiCockDescriptLight();
-			else rep = "<b>(Attempt to parse cocks when none present.)</b>";
-			break;
-		case "pussy":
-			if(player.hasVagina()) rep = vaginaDescript();
-			else rep = "<b>(Attempt to parse vagina when none present.)</b>";
-			break;
-		case "vagina":
-			if(player.hasVagina()) rep = vaginaDescript();
-			else rep = "<b>(Attempt to parse vagina when none present.)</b>";
-			break;
-		case "vag":
-			if(player.hasVagina()) rep = vaginaDescript();
-			else rep = "<b>(Attempt to parse vagina when none present.)</b>";
-			break;
-		case "clit":
-			if(player.hasVagina()) rep = clitDescript();
-			else rep = "<b>(Attempt to parse clit when none present.)</b>";
-			break;
-		case "vagOrAss":
-			if (player.hasVagina())
-			{
-				rep = vaginaDescript();
-			}
-			else
-			{
-				rep = assholeDescript();
-			}
-			break;
-		case "hair":
-			rep = hairDescript();
-			break;
-		case "face":
-			rep = player.face();
-			break;
-		case "legs":
-			rep = player.legs();
-			break;
-		case "leg":
-			rep = player.leg();
-			break;
-		case "feet":
-			rep = player.feet();
-			break;
-		case "foot":
-			rep = player.foot();
-			break;
-		case "sack":
-			rep = sackDescript();
-			break;
-		case "balls":
-			rep = ballsDescriptLight();
-			break;
-		case "sheath":
-			rep = sheathDesc();
-			break;
-		case "chest":
-			rep = chestDesc();
-			break;
-		case "fullChest":
-			rep = allChestDesc();
-			break;
-		case "hips":
-			rep = hipDescript();
-			break;
-		case "butt":
-			rep = buttDescript();
-			break;
-		case "ass":
-			rep = buttDescript();
-			break;
-		case "nipple":
-			rep = nippleDescript(0);
-			break;
-		case "nipples":
-			rep = nippleDescript(0) + "s";
-			break;
-		case "tongue":
-			rep = tongueDescript();
-			break;
-		case "cock":
-			if(player.hasCock()) rep = cockDescript(0);
-			else rep = "<b>(Attempt to parse cock when none present.)</b>";
-			break;
-		case "eachCock":
-			if(player.hasCock()) rep = sMultiCockDesc();
-			else rep = "<b>(Attempt to parse eachCock when none present.)</b>";
-			break;
-		case "EachCock":
-			if(player.hasCock()) rep = SMultiCockDesc();
-			else rep = "<b>(Attempt to parse eachCock when none present.)</b>";
-			break;
-		case "oneCock":
-			if(player.hasCock()) rep = oMultiCockDesc();
-			else rep = "<b>(Attempt to parse eachCock when none present.)</b>";
-			break;
-		case "OneCock":
-			if(player.hasCock()) rep = OMultiCockDesc();
-			else rep = "<b>(Attempt to parse eachCock when none present.)</b>";
-			break;
-		case "cockHead":
-			if(player.hasCock()) rep = cockHead(0);
-			else rep = "<b>(Attempt to parse cockhead when none present.)</b>";
-			break;
-		case "master":
-			rep = player.mf("master","mistress");
-			break;
-		case "Master":
-			rep = player.mf("Master","Mistress");
-			break;
-		case "his":
-			rep = player.mf("his","her");
-			break;
-		case "His":
-			rep = player.mf("His","Her");
-			break;
-		case "he":
-			rep = player.mf("he","she");
-			break;
-		case "He":
-			rep = player.mf("He","She");
-			break;
-		case "him":
-			rep = player.mf("him","her");
-			break;
-		case "Him":
-			rep = player.mf("Him","Her");
-			break;
-		case "Evade":
-			rep = "[Evade]";
-			break;
-		case "Misdirection":
-			rep = "[Misdirection]";
-			break;
-		case "Agility":
-			rep = "[Agility]";
-			break;
-		default:
-			rep = "<b>!Unknown tag \"" + result[1] + "\"!</b>";
-			break;
-		}
-		
-		//Standard replace & jump
-		text = text.replace(basicTag, rep);
-		
-		result = basicTag.exec(text);
-	}
-
-	return text;
-}
-*/
 	
 function clearOutput():void {
 	currentText = "";
 	mainView.clearOutputText();
 }
 
-function outputText(output:String, purgeText:Boolean = false, parse = true) {
-	if(parse)
-	{
-		output = parseText(output);
-	}
+function rawOutputText(output:String, purgeText:Boolean = false)
+{
+	
 	//OUTPUT!
 	if(purgeText) {
 		//if(!debug) mainText.htmlText = output;
+		trace("Purging and writing Text", output);
 		clearOutput();
+		currentText = output;
+		mainView.setOutputText( output );
+		// mainText.htmlText = output;
+	}
+	else
+	{
+		trace("Adding Text");
+		currentText += output;
+		mainView.appendOutputText( output );
+		// mainText.htmlText += output;
+	}
+	// trace(getCurrentStackTrace())
+	// scrollBar.update();
+
+}
+
+function outputText(output:String, purgeText:Boolean = false, parseAsMarkdown = false)
+{
+	// we have to purge the output text BEFORE calling parseText, because if there are scene commands in 
+	// the parsed text, parseText() will write directly to the output
+
+	if (purgeText)
+	{
+		clearOutput();
+	}
+	
+	output = parseText(output, parseAsMarkdown);
+
+	//OUTPUT!
+	if(purgeText) {
+		//if(!debug) mainText.htmlText = output;
 		currentText = output;
 	}
 	else {
 		currentText += output;
 		//if(!debug) mainText.htmlText = currentText;
 	}
-	if(debug) {
-		mainView.appendOutputText( currentText );
+	if(debug) 
+	{
+		mainView.setOutputText( currentText );
 	}
+
 }
+
 function perkLongDescription(perkName:String = ""):String {
 	switch(perkName) {
 		case "Pretend Strength Perk":
@@ -1433,7 +739,7 @@ function levelUpGo(e:MouseEvent):void {
 		player.perkPoints++;
 		outputText("<b>You are now level " + player.level + "!</b>\n\nYou may now apply +5 to one attribute.  Which will you choose?", true);
 		player.XP -= (player.level-1) * 100;
-		simpleChoices("Strength", 44, "Toughness", 45, "Speed", 47, "Intelligence", 46, "", 0);		
+		simpleChoices("Strength", 44, "Toughness", 45, "Speed", 47, "Intelligence", 46, "", 0);                
 	}
 	//Spend perk points
 	else if(player.perkPoints > 0) {
@@ -2042,7 +1348,7 @@ function getButtonToolTipText( buttonText :String ) :String
 	}
 	if(buttonText.indexOf("BimboLq") != -1) {
 		toolTipText = "This small bottle of liqueur is labelled 'Bimbo Liqueur'.  There's a HUGE warning label about the effects being strong and usually permanent, so you should handle this with care.";
-	}	
+	}        
 	if(buttonText.indexOf("H.Gaunt") != -1) {
 		toolTipText = "These metal gauntlets are covered in nasty looking hooks that are sure to tear at your foes flesh and cause them harm.";
 	}
@@ -2251,248 +1557,248 @@ function getButtonToolTipText( buttonText :String ) :String
 	if(buttonText.indexOf("CanineP") != -1) {
 		toolTipText = "The pepper is shiny and red, bulbous at the base but long and narrow at the tip.  It smells spicy.";
 	}
-	if(buttonText.indexOf("SucMilk") != -1) {			
+	if(buttonText.indexOf("SucMilk") != -1) {                        
 		toolTipText = "This milk-bottle is filled to the brim with a creamy white milk of dubious origin.  A pink label proudly labels it as \"<i>Succubi Milk</i>\".  In small text at the bottom of the label it reads: \"<i>To bring out the succubus in YOU!</i>\"";
 	}
-	if(buttonText.indexOf("P.S.Mlk") != -1) {			
+	if(buttonText.indexOf("P.S.Mlk") != -1) {                        
 		toolTipText = "This milk-bottle is filled to the brim with a creamy white milk of dubious origin.  A pink label proudly labels it as \"<i>Succubi Milk</i>\".  In small text at the bottom of the label it reads: \"<i>To bring out the succubus in YOU!</i>\"  Purified by Rathazul to prevent corruption.";
 	}
-	if(buttonText.indexOf("Cerul P") != -1 || buttonText.indexOf("Cerulean P.") != -1) {			
+	if(buttonText.indexOf("Cerul P") != -1 || buttonText.indexOf("Cerulean P.") != -1) {                        
 		toolTipText = "This is a mysterious bottle filled with a sky-blue liquid that sloshes gently inside.  Supposedly it will make you irresistible, though to what or who you cannot say.";
 	}
-	if(buttonText.indexOf("PeppWht") != -1) {			
+	if(buttonText.indexOf("PeppWht") != -1) {                        
 		toolTipText = "This tightly corked glass bottle gives of a pepperminty smell and reminds you of the winter holidays.  How odd.";
 	}
-	if(buttonText.indexOf("IncubiD") != -1) {			
+	if(buttonText.indexOf("IncubiD") != -1) {                        
 		toolTipText = "The cork-topped flask swishes with a slimy looking off-white fluid, purported to give incubi-like powers.  A stylized picture of a humanoid with a huge penis is etched into the glass.";
 	}
 	//"M. Milk"
-	if(buttonText.indexOf("M. Milk") != -1) {			
+	if(buttonText.indexOf("M. Milk") != -1) {                        
 		toolTipText = "A clear bottle of milk from Marble's breasts. It smells delicious.";
 	}
-	if(buttonText.indexOf("P.Draft") != -1) {			
+	if(buttonText.indexOf("P.Draft") != -1) {                        
 		toolTipText = "The cork-topped flask swishes with a slimy looking off-white fluid, purported to give incubi-like powers.  A stylized picture of a humanoid with a huge penis is etched into the glass. Rathazul has purified this to prevent corruption upon use.";
 	}
-	if(buttonText.indexOf("TScroll") != -1) {			
+	if(buttonText.indexOf("TScroll") != -1) {                        
 		toolTipText = "This tattered scroll is written in strange symbols, yet you have the feeling that if you tried to, you could decipher it.";
 	}
-	if(buttonText.indexOf("BrownEg") != -1) {			
+	if(buttonText.indexOf("BrownEg") != -1) {                        
 		toolTipText = "This is an oblong egg, not much different from a chicken egg in appearance (save for the color).  Something tells you it's more than just food.";
 	}
-	if(buttonText.indexOf("L.BrnEg") != -1) {			
+	if(buttonText.indexOf("L.BrnEg") != -1) {                        
 		toolTipText = "This is an oblong egg, not much different from an ostrich egg in appearance (save for the color).  Something tells you it's more than just food.";
 	}
-	if(buttonText.indexOf("PurplEg") != -1) {			
+	if(buttonText.indexOf("PurplEg") != -1) {                        
 		toolTipText = "This is an oblong egg, not much different from a chicken egg in appearance (save for the color).  Something tells you it's more than just food.";
 	}
-	if(buttonText.indexOf("L.PrpEg") != -1) {			
+	if(buttonText.indexOf("L.PrpEg") != -1) {                        
 		toolTipText = "This is an oblong egg, not much different from an ostrich egg in appearance (save for the color).  Something tells you it's more than just food.";
 	}
-	if(buttonText.indexOf("BlueEgg") != -1) {			
+	if(buttonText.indexOf("BlueEgg") != -1) {                        
 		toolTipText = "This is an oblong egg, not much different from a chicken egg in appearance (save for the color).  Something tells you it's more than just food.";
 	}
-	if(buttonText.indexOf("L.BluEg") != -1) {			
+	if(buttonText.indexOf("L.BluEg") != -1) {                        
 		toolTipText = "This is an oblong egg, not much different from an ostrich egg in appearance (save for the color).  Something tells you it's more than just food.";
 	}
-	if(buttonText.indexOf("PinkEgg") != -1) {			
+	if(buttonText.indexOf("PinkEgg") != -1) {                        
 		toolTipText = "This is an oblong egg, not much different from a chicken egg in appearance (save for the color).  Something tells you it's more than just food.";
 	}
-	if(buttonText.indexOf("NPnkEgg") != -1) {			
+	if(buttonText.indexOf("NPnkEgg") != -1) {                        
 		toolTipText = "This is an oblong egg with an unnatural neon pink coloration.  It tingles in your hand with odd energies that make you feel as if you could jump straight into the sky.";
 	}
-	if(buttonText.indexOf("L.PnkEg") != -1) {			
+	if(buttonText.indexOf("L.PnkEg") != -1) {                        
 		toolTipText = "This is an oblong egg, not much different from an ostrich egg in appearance (save for the color).  Something tells you it's more than just food.";
 	}
-	if(buttonText.indexOf("WhiteEg") != -1) {			
+	if(buttonText.indexOf("WhiteEg") != -1) {                        
 		toolTipText = "This is an oblong egg, not much different from a chicken egg in appearance.  Something tells you it's more than just food.";
 	}
-	if(buttonText.indexOf("L.WhtEg") != -1) {			
+	if(buttonText.indexOf("L.WhtEg") != -1) {                        
 		toolTipText = "This is an oblong egg, not much different from an ostrich egg in appearance.  Something tells you it's more than just food.";
 	}
-	if(buttonText.indexOf("BlackEg") != -1) {			
+	if(buttonText.indexOf("BlackEg") != -1) {                        
 		toolTipText = "This is an oblong egg, not much different from a chicken egg in appearance (save for the color).  Something tells you it's more than just food.";
 	}
-	if(buttonText.indexOf("L.BlkEg") != -1) {			
+	if(buttonText.indexOf("L.BlkEg") != -1) {                        
 		toolTipText = "This is an oblong egg, not much different from an ostrich egg in appearance (save for the color).  Something tells you it's more than just food.  For all you know, it could turn you into rubber!";
 	}
-	if(buttonText.indexOf("RidingC") != -1) {			
+	if(buttonText.indexOf("RidingC") != -1) {                        
 		toolTipText = "This riding crop appears to be made of black leather, and could be quite a painful (or exciting) weapon.  (ATK: +5) (Cost: 50)";
 	}
-	if(buttonText.indexOf("L. Axe ") != -1) {			
+	if(buttonText.indexOf("L. Axe ") != -1) {                        
 		toolTipText = "This massive axe once belonged to a minotaur.  It'd be hard for anyone smaller than a giant to wield effectively.  The axe is double-bladed and deadly-looking.  (ATK: +15) (Cost: 100)";
 	}
-	if(buttonText.indexOf("GelArmr") != -1) {			
+	if(buttonText.indexOf("GelArmr") != -1) {                        
 		toolTipText = "This suit of interlocking plates is made from a strange green material.  It feels spongy to the touch but is amazingly resiliant.  (DEF: +10) (Cost: 150)";
 	}
-	if(buttonText.indexOf("B.Sword") != -1) {			
+	if(buttonText.indexOf("B.Sword") != -1) {                        
 		toolTipText = "This beautiful sword shines brilliantly in the light, showing the flawless craftsmanship of its blade.  The pommel and guard are heavily decorated in gold and brass.  Some craftsman clearly poured his heart and soul into this blade.  (ATK: +Varies) (Cost: 400)";
 	}
-	if(buttonText.indexOf("C.Cloth") != -1) {			
+	if(buttonText.indexOf("C.Cloth") != -1) {                        
 		toolTipText = "These loose fitting and comfortable clothes allow you to move freely while protecting you from the elements.  (DEF: +0) (Cost: 0)";
 	}
-	if(buttonText.indexOf("ClssyCl") != -1) {			
+	if(buttonText.indexOf("ClssyCl") != -1) {                        
 		toolTipText = "A set of classy suitclothes.";
 	}
-	if(buttonText.indexOf("RbbrClt") != -1) {			
+	if(buttonText.indexOf("RbbrClt") != -1) {                        
 		toolTipText = "A revealing set of fetish-wear.  Upgrades tease attack to seduce.";
 	}
-	if(buttonText.indexOf("FurLoin") != -1) {			
+	if(buttonText.indexOf("FurLoin") != -1) {                        
 		toolTipText = "A pair of loincloths to cover your crotch and " + buttDescript() + ".  Typically worn by people named 'Conan'.";
 	}
-	if(buttonText.indexOf("AdvClth") != -1) {			
+	if(buttonText.indexOf("AdvClth") != -1) {                        
 		toolTipText = "A set of comfortable green adventurer's clothes.  It even comes complete with a pointy hat!";
 	}
-	if(buttonText.indexOf("TubeTop") != -1) {			
+	if(buttonText.indexOf("TubeTop") != -1) {                        
 		toolTipText = "A clingy tube top and VERY short shorts.";
 	}
-	if(buttonText.indexOf("Overall") != -1) {			
+	if(buttonText.indexOf("Overall") != -1) {                        
 		toolTipText = "A simple white shirt and overalls.";
 	}
 
-	if(buttonText.indexOf("B.Dress") != -1) {			
+	if(buttonText.indexOf("B.Dress") != -1) {                        
 		toolTipText = "A long ballroom dress patterned with sequins.  Perfect for important occassions.";
 	}
-	if(buttonText.indexOf("T.BSuit") != -1) {			
+	if(buttonText.indexOf("T.BSuit") != -1) {                        
 		toolTipText = "A semi-transparent bodysuit.";
 	}
-	if(buttonText.indexOf("M.Robes") != -1) {			
+	if(buttonText.indexOf("M.Robes") != -1) {                        
 		toolTipText = "A set of modest robes, not dissimilar from what the monks back home would wear.";
 	}
-	if(buttonText.indexOf("LthrPnt") != -1) {			
+	if(buttonText.indexOf("LthrPnt") != -1) {                        
 		toolTipText = "A flowing silk shirt and tight black leather pants.  Suave!";
 	}
 	if(buttonText.indexOf("S.Swmwr") != -1) {
 		toolTipText = "An impossibly skimpy black bikini. You feel dirty just looking at it… and a little aroused, actually.";
 	}
 	if(buttonText.indexOf("Red Dye") != -1 || buttonText.indexOf("Blond D") != -1 || 
-        buttonText.indexOf("Black D") != -1 || buttonText.indexOf("Brown D") != -1 || 
+	buttonText.indexOf("Black D") != -1 || buttonText.indexOf("Brown D") != -1 || 
 		buttonText.indexOf("AuburnD") != -1 || buttonText.indexOf("GrayDye") != -1 ||
 		buttonText.indexOf("PinkDye") != -1 || buttonText.indexOf("BlueDye") != -1 ||
-		buttonText.indexOf("OrangDy") != -1 || buttonText.indexOf("PurpDye") != -1) {			
+		buttonText.indexOf("OrangDy") != -1 || buttonText.indexOf("PurpDye") != -1) {                        
 		toolTipText = "This bottle of dye will allow you to change the color of your hair.  Of course if you don't have hair, using this would be a waste.";
 	}
 	//Combat
 	//COMBAT
 	//combat
-	if(buttonText == "Attack") {			
+	if(buttonText == "Attack") {                        
 		toolTipText = "Attempt to attack the enemy with your " + player.weaponName + ".  Damage done is determined by your strength and weapon.";
 	}
-	if(buttonText == "Kiss") {			
+	if(buttonText == "Kiss") {                        
 		toolTipText = "Attempt to kiss your foe on the lips with drugged lipstick.  It has no effect on those without a penis.";
 	}
-	if(buttonText.indexOf("LustStk") != -1) {			
+	if(buttonText.indexOf("LustStk") != -1) {                        
 		toolTipText = "This tube of golden lipstick is used by harpies to keep males aroused.  It has aphrodisiac properties on anyone with male genitalia and is most effective when applied to the lips or groin.";
 	}
-	if(buttonText == "Tease") {			
+	if(buttonText == "Tease") {                        
 		toolTipText = "Attempt to make an enemy more aroused by striking a seductive pose and exposing parts of your body.";
 	}
-	if(buttonText == "Kick") {			
+	if(buttonText == "Kick") {                        
 		toolTipText = "Attempt to kick an enemy using your powerful lower body.";
 	}
-	if(buttonText == "Combo") {			
+	if(buttonText == "Combo") {                        
 		toolTipText = "Make a three-hit combo.  Each attack has an extra 33% chance to miss, unless the target is blind. (25 Fatigue)";
 	}
-	if(buttonText == "Vault") {			
+	if(buttonText == "Vault") {                        
 		toolTipText = "Make a vaulting attack for an extra 25% damage.  Automatically crits stunned foes.  (20 Fatigue)";
 	}
-	if(buttonText == "Sidewinder") {			
+	if(buttonText == "Sidewinder") {                        
 		toolTipText = "An attack that hits for reduced damage but has a high chance of stunning. (10 Fatigue)";
 	}
-	if(buttonText == "Dirt Kick") {			
+	if(buttonText == "Dirt Kick") {                        
 		toolTipText = "Attempt to blind your foe with a spray of kicked dirt. (5 Fatigue)";
 	}
-	if(buttonText == "Metabolize") {			
+	if(buttonText == "Metabolize") {                        
 		toolTipText = "Convert 10% of your maximum HP into fatigue.";
 	}
-	if(buttonText == "SecondWind") {			
+	if(buttonText == "SecondWind") {                        
 		toolTipText = "Regain 50% of your HP, 50 fatigue, and reduce lust by 50 once per fight.";
 	}
-	if(buttonText.indexOf("AnemoneSting") != -1) {			
+	if(buttonText.indexOf("AnemoneSting") != -1) {                        
 		toolTipText = "Attempt to strike an opponent with the stinging tentacles growing from your scalp.  Reduces enemy speed and increases enemy lust.";
 	}
-	if(buttonText.indexOf("P. Specials") != -1) {			
+	if(buttonText.indexOf("P. Specials") != -1) {                        
 		toolTipText = "Physical special attack menu.";
 	}
-	if(buttonText.indexOf("M. Specials") != -1) {			
+	if(buttonText.indexOf("M. Specials") != -1) {                        
 		toolTipText = "Mental and supernatural special attack menu.";
 	}
-	if(buttonText == "Berzerk") {			
+	if(buttonText == "Berzerk") {                        
 		toolTipText = "Throw yourself into a rage!  Greatly increases the strength of your weapon and increases lust resistance, but your armor defense is reduced to zero!";
 	}
-	if(buttonText.indexOf("Possess") != -1) {			
+	if(buttonText.indexOf("Possess") != -1) {                        
 		toolTipText = "Attempt to temporarily possess a foe and force them to raise their own lusts.";
 	}
-	if(buttonText.indexOf("Constrict") != -1) {			
+	if(buttonText.indexOf("Constrict") != -1) {                        
 		toolTipText = "Attempt to bind an enemy in your long snake-tail.";
 	}
-	if(buttonText.indexOf("Gore") != -1) {			
+	if(buttonText.indexOf("Gore") != -1) {                        
 		toolTipText = "Lower your head and charge your opponent, attempting to gore them on your horns.  This attack is stronger and easier to land with large horns.";
 	}
-	if(buttonText.indexOf("Fantasize") != -1) {			
+	if(buttonText.indexOf("Fantasize") != -1) {                        
 		toolTipText = "Fantasize about your opponent in a sexual way.  Its probably a pretty bad idea to do this unless you want to end up getting raped.";
 	}
-	if(buttonText.indexOf("Charge W.") != -1) {			
+	if(buttonText.indexOf("Charge W.") != -1) {                        
 		toolTipText = "The Charge Weapon spell will surround your weapon in electrical energy, causing it to do even more damage.  The effect lasts for the entire combat.  (Fatigue Cost: " + spellCost(15) + ")";
 	}
-	if(buttonText.indexOf("Blind") != -1) {			
+	if(buttonText.indexOf("Blind") != -1) {                        
 		toolTipText = "Blind is a fairly self-explanatory spell.  It will create a bright flash just in front of the victim's eyes, blinding them for a time.  However if they blink it will be wasted.  (Fatigue Cost: " + spellCost(20) + ")";
 	}
-	if(buttonText.indexOf("Whitefire") != -1) {			
+	if(buttonText.indexOf("Whitefire") != -1) {                        
 		toolTipText = "Whitefire is a potent fire based attack that will burn your foe with flickering white flames, ignoring their physical toughness and most armors.  (Fatigue Cost: " + spellCost(30) + ")";
 	}
 	if(buttonText.indexOf("Aroused") != -1) {
 	}
-	if(buttonText.indexOf("Arouse") != -1) {			
+	if(buttonText.indexOf("Arouse") != -1) {                        
 		toolTipText = "The arouse spell draws on your own inner lust in order enflame the enemy's passions.  (Fatigue Cost: " + spellCost(15) + ")";
 	}
-	if(buttonText == "Heal") {			
+	if(buttonText == "Heal") {                        
 		toolTipText = "Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  (Fatigue Cost: " + spellCost(20) + ")";
 	}
-	if(buttonText.indexOf("Might") != -1) {			
+	if(buttonText.indexOf("Might") != -1) {                        
 		toolTipText = "The Might spell draws upon your lust and uses it to fuel a temporary increase in muscle size and power.  It does carry the risk of backfiring and raising lust, like all black magic used on oneself.  (Fatigue Cost: " + spellCost(25) + ")";
 	}
 	//Wait
-	if(buttonText.indexOf("Wait") != -1 && gameState > 0) {			
+	if(buttonText.indexOf("Wait") != -1 && gameState > 0) {                        
 		toolTipText = "Take no action for this round.  Why would you do this.  This is a terrible idea.";
 	}
 	//Sting
-	if(buttonText.indexOf("Sting") != -1) {			
+	if(buttonText.indexOf("Sting") != -1) {                        
 		toolTipText = "Attempt to use your venomous bee stinger on an enemy.  Be aware it takes quite a while for your venom to build up, so depending on your abdomen's refractory period, you may have to wait quite a while between stings.  Venom: " + Math.floor(player.tailVenom) + "/100";
 	}
 	//Web
-	if(buttonText.indexOf("Web") != -1) {			
+	if(buttonText.indexOf("Web") != -1) {                        
 		toolTipText = "Attempt to use your abdomen to spray sticky webs at an enemy and greatly slow them down.  Be aware it takes a while for your webbing to build up.  Web Amount: " + Math.floor(player.tailVenom) + "/100";
 	}
 	if(buttonText.indexOf("Infest") != -1) {
 		toolTipText = "The infest attack allows you to cum at will, launching a stream of semen and worms at your opponent in order to infest them.  Unless your foe is very aroused they are likely to simply avoid it.  Only works on males or herms.";
 	}
-	if(buttonText.indexOf("Spells") != -1) {			
+	if(buttonText.indexOf("Spells") != -1) {                        
 		toolTipText = "Opens your spells menu, where you can cast any spells you have learned.  Beware, casting spells increases your fatigue, and if you become exhausted you will be easier to defeat.";
 	}
-	if(buttonText.indexOf("Defend") != -1) {			
+	if(buttonText.indexOf("Defend") != -1) {                        
 		toolTipText = "Selecting defend will reduce the damage you take by 66 percent, but will not affect any lust incurred by your enemy's actions.";
 	}
-	if(buttonText == "Run") {			
+	if(buttonText == "Run") {                        
 		toolTipText = "Choosing to run will let you try to escape from your enemy. However, it will be hard to escape enemies that are faster than you and if you fail, your enemy will get a free attack.";
 	}
-	if(buttonText.indexOf("Inventory") != -1) {		
+	if(buttonText.indexOf("Inventory") != -1) {                
 		toolTipText = "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.";
 	}
-	if(buttonText.indexOf("AutoSav") != -1) {		
+	if(buttonText.indexOf("AutoSav") != -1) {                
 		toolTipText = "When autosave is on the game will automatically save your character each night at midnight to the last slot it was saved in.";
 		if(buttonText.indexOf("ON") != -1) toolTipText += " Autosave is currently enabled.  Your game will be saved at midnight.";
 		if(buttonText.indexOf("OFF") != -1) toolTipText += " Autosave is currently off.  Your game will NOT be saved.";
 	}
-	if(buttonText.indexOf("Retrieve") != -1) {		
+	if(buttonText.indexOf("Retrieve") != -1) {                
 		toolTipText = "Retrieve allows you to take an item from one of the reserve stacks in your camp's additional storage.";
 	}
-	if(buttonText.indexOf("Storage") != -1) {		
+	if(buttonText.indexOf("Storage") != -1) {                
 		toolTipText = "Storage will allow you to dump a stack of items from your inventory into your storage chest.";
 	}
-	if(buttonText.indexOf("Sand Facial") != -1) {		
+	if(buttonText.indexOf("Sand Facial") != -1) {                
 		toolTipText = "The goblins promise this facial will give you a rough, handsome look thanks to their special, timeless sands.";
 	}
-	if(buttonText.indexOf("Mud Facial") != -1) {		
+	if(buttonText.indexOf("Mud Facial") != -1) {                
 		toolTipText = "This facial is supposed to enhance the softness of your face and enhance its femininity greatly.";
 	}
 	//Masturbation Toys
@@ -2550,19 +1856,19 @@ function getButtonToolTipText( buttonText :String ) :String
 		toolTipText = "Visit with Rathazul to see what alchemical supplies and services he has available at the moment.";
 	}
 	//Title screen
-	if(buttonText.indexOf("Toggle Debug") != -1) {			
+	if(buttonText.indexOf("Toggle Debug") != -1) {                        
 		toolTipText = "Turn on debug mode.  Debug mode is intended for testing purposes but can be thought of as a cheat mode.  Items are infinite and combat is easy to escape from.  Weirdness and bugs are to be expected.";
 	}
-	if(buttonText.indexOf("Credits") != -1) {			
+	if(buttonText.indexOf("Credits") != -1) {                        
 		toolTipText = "See a list of all the cool people who have contributed to content for this game!";
 	}
-	if(buttonText.indexOf("Instructions") != -1) {			
+	if(buttonText.indexOf("Instructions") != -1) {                        
 		toolTipText = "How to play.  Starting tips.  And hotkeys for easy left-handed play...";
 	}
-	if(buttonText.indexOf("Settings") != -1) {			
+	if(buttonText.indexOf("Settings") != -1) {                        
 		toolTipText = "Configure game settings and enable cheats.";
 	}
-	if(buttonText.indexOf("ASPLODE") != -1) {			
+	if(buttonText.indexOf("ASPLODE") != -1) {                        
 		toolTipText = "MAKE SHIT ASPLODE";
 	}
 
@@ -2882,6 +2188,14 @@ function doNext(eventNo:*):void {
 	choices("Next", eventNo, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0); 
 }
 
+function doNextClear(eventNo:*):void 
+{
+	outputText("", true, true);
+	trace("DoNext Clearing display");
+	trace("DoNext have item:", eventNo);
+	choices("Next", eventNo, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0);
+}
+
 function invertGo():void{ 
 	mainView.invert();
 }
@@ -2915,7 +2229,7 @@ function hideUpDown():void {
 	oldStats.oldLib = 0;
 	oldStats.oldSens = 0;
 	oldStats.oldLust = 0;
-	oldStats.oldCor = 0;	
+	oldStats.oldCor = 0;        
 }
 
 function physicalCost(mod:Number):Number {
@@ -2948,8 +2262,8 @@ function spellCost(mod:Number):Number {
 
 //Modify fatigue
 //types:
-//	0 - normal
-//	1 - magic
+//        0 - normal
+//        1 - magic
 function fatigue(mod:Number,type:Number  = 0):void {
 	//Spell reductions
 	if(type == 1) {
@@ -2960,7 +2274,7 @@ function fatigue(mod:Number,type:Number  = 0):void {
 			takeDamage(mod);
 			statScreenRefresh();
 			return;
-		}		
+		}                
 	}
 	//Physical special reductions
 	if(type == 2) {
@@ -3004,7 +2318,7 @@ function minLust():Number {
 	if(player.hasPerk("Omnibus' Gift") >= 0) {
 		if(min > 40) min += 10;
 		else if(min > 0) min += 20;
-		else min += 35;		
+		else min += 35;                
 	}
 	//Nymph perk raises to 30
 	if(player.hasPerk("Nymphomania") >= 0) {
@@ -3025,7 +2339,7 @@ function minLust():Number {
 	}
 	if(player.hasPerk("Luststick Adapted") > 0) {
 		if(min < 50) min += 10;
-		else min += 5;		
+		else min += 5;                
 	}
 	//Add points for Crimstone
 	min += player.perkv1("Pierced: Crimstone");
@@ -3095,7 +2409,7 @@ function displayStats(e:MouseEvent) {
 		if(player.hasPerk("Magical Fertility") >= 0) preg++;
 		if(player.hasPerk("Fera's Boon - Wide Open") >= 0 || player.hasPerk("Fera's Boon - Milking Twat") >= 0) preg++;
 		outputText(preg + "\n", false);
-	}	
+	}        
 	if(player.hasStatusAffect("Slime Craving") >= 0) {
 		if(player.statusAffectv1("Slime Craving") >= 18) outputText("<b>Slime Craving:  </b>Active! You are currently losing strength and speed.  You should find fluids.\n", false);
 		else {
@@ -3124,7 +2438,7 @@ function displayStats(e:MouseEvent) {
 	if(flags[SHEILA_IMPS] > 0) outputText("<b>Children With Sheila (Imps):</b> " + flags[SHEILA_IMPS] + "\n");
 	
 	if(flags[SOPHIE_ADULT_KID_COUNT] > 0 || flags[SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) 
-	{	
+	{        
 		outputText("<b>Children With Sophie:</b> ");
 		var sophie:int = 0;
 		if(flags[SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) sophie++;
@@ -3331,7 +2645,7 @@ function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:Number,
 	//Combat bounds
 	if(player.lust > 99) player.lust = 100;
 	//if(player.lust < player.lib) {
-	//	player.lust=player.lib;
+	//        player.lust=player.lib;
 	//
 	//Update to minimum lust if lust falls below it.
 	if(player.lust < minLust()) player.lust = minLust();
@@ -3357,13 +2671,13 @@ function range(min:Number, max:Number, round:Boolean = false):Number
 	if (round) return Math.round(num);
 	return num;
 }
-/*
+
 function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):void {
 	//Virginity check
 	if(player.vaginas[vIndex].virgin) {
 		if(display) outputText("\nYour " + vaginaDescript(vIndex) + " loses it's virginity!", false);
 		player.vaginas[vIndex].virgin = false;
-	}	
+	}        
 	//If cock is bigger than unmodified vagina can hold - 100% stretch!
 	if(player.vaginas[vIndex].capacity() <= monster.cocks[cIndex].cArea()) {
 		if(player.vaginas[vIndex] < 5) {
@@ -3393,7 +2707,7 @@ function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):void {
 		}
 	}
 }
-*/
+
 function spriteSelect(choice:Number = 0):void {
 	mainView.selectSprite( choice );
 }

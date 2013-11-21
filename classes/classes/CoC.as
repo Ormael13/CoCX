@@ -108,6 +108,7 @@
 			include "../../includes/engineCore.as";
 			include "../../includes/essrayle.as";
 			include "../../includes/eventParser.as";
+			include "../../includes/eventTest.as";
 			include "../../includes/exgartuan.as";
 			include "../../includes/exploration.as";
 			include "../../includes/faerie.as";
