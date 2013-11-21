@@ -140,12 +140,14 @@ function rawOutputText(output:String, purgeText:Boolean = false)
 		clearOutput();
 		currentText = output;
 		mainView.setOutputText( output );
+		// mainText.htmlText = output;
 	}
 	else
 	{
 		trace("Adding Text");
 		currentText += output;
-		mainView.setOutputText( output );
+		mainView.appendOutputText( output );
+		// mainText.htmlText += output;
 	}
 	// trace(getCurrentStackTrace())
 	// scrollBar.update();

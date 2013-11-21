@@ -43,6 +43,8 @@ mainView._executeButtomButtonClick = executeButtonClick;
 
 function executeButtonClick(button:int = 0):void {
 	if(funcs.length == 0) {
+		trace("Calling eventParser on buttonEvents[" + String( button ) + "]:",
+			buttonEvents[ button ]);
 		eventParser(buttonEvents[button]);
 	}
 	else if(funcs.length - 1 < button) {
@@ -242,6 +244,9 @@ function keyboard(e:KeyboardEvent):void {
 	if(e.keyCode == 13 || e.keyCode == 32) {
 		// b0text is at index 9.  b0Text actually sorta means b10Text...
 		if( mainView.buttonIsVisible( 9 ) && mainView.buttonTextIsOneOf( 9, [ "Nevermind", "Abandon", "Next", "Return", "Back", "Leave", "Resume" ] )) {
+			trace( "keyboard(): processing space bar for button 9",
+				mainView.buttonIsVisible( 9 ) ? "(visible)" : "(hidden)",
+				mainView.getButtonText( 9 ) );
 			mainView.toolTipView.hide();
 			//mouseOverText.visible = false;
 			//eventParser(button0Choice);
@@ -249,6 +254,9 @@ function keyboard(e:KeyboardEvent):void {
 			return;
 		}
 		if( mainView.buttonIsVisible( 0 ) && mainView.buttonTextIsOneOf( 0, [ "Next", "Return", "Back" ] )) {
+			trace( "keyboard(): processing space bar for button 0",
+				mainView.buttonIsVisible( 0 ) ? "(visible)" : "(hidden)",
+				mainView.getButtonText( 0 ) );
 			mainView.toolTipView.hide();
 			//mouseOverText.visible = false;
 			//eventParser(button1Choice);
@@ -256,6 +264,9 @@ function keyboard(e:KeyboardEvent):void {
 			return;
 		}
 		if( mainView.buttonIsVisible( 4 ) && mainView.buttonTextIsOneOf( 4, [ "Nevermind", "Next", "Return", "Back", "Leave" ] )) {
+			trace( "keyboard(): processing space bar for button 4",
+				mainView.buttonIsVisible( 4 ) ? "(visible)" : "(hidden)",
+				mainView.getButtonText( 4 ) );
 			mainView.toolTipView.hide();
 			//mouseOverText.visible = false;
 			//eventParser(button5Choice);
@@ -263,6 +274,9 @@ function keyboard(e:KeyboardEvent):void {
 			return;
 		}
 		if( mainView.buttonIsVisible( 5 ) && mainView.buttonTextIsOneOf( 5, [ "Next", "Return", "Back" ] )) {
+			trace( "keyboard(): processing space bar for button 5",
+				mainView.buttonIsVisible( 5 ) ? "(visible)" : "(hidden)",
+				mainView.getButtonText( 5 ) );
 			mainView.toolTipView.hide();
 			//mouseOverText.visible = false;
 			//eventParser(button6Choice);
