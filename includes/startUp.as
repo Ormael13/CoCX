@@ -284,7 +284,7 @@ function debugPane():void
 
 	menu();
 	addButton(0, "Event Tester", eventTestingPane);
-	// addButton(1, "Test Input", eventTester);
+	addButton(1, "Test Input", eventTester);
 	addButton(9, "Back", mainMenu);
 }
 
@@ -516,30 +516,38 @@ function howToPlay():void {
 	doNext(mainMenu);
 }
 
-/*
+
 function eventTester():void {
 	outputText("", true);
-	mainView.eventTestInput.x = 207.5;
-	mainView.eventTestInput.y = 55.1;
+	showTestInputPanel();
 	//mainView.eventTestInput.text = "Paste test event text here.";
 	simpleChoices("Proceed",eventTesterGo,"",0,"",0,"",0,"Back",eventTesterExit);
 }
 
 function eventTesterGo():void 
 {
-		
-		outputText(mainView.eventTestInput.text, true, true);
-		//simpleChoices("Again",117,"",0,"",0,"",0,"Quit",mainMenu);
-		mainView.eventTestInput.x = -10207.5;
-		mainView.eventTestInput.y = -1055.1;
-		return;
+	hideTestInputPanel();
+	
+	outputText(mainView.eventTestInput.text, true, true);
+	//simpleChoices("Again",117,"",0,"",0,"",0,"Quit",mainMenu);
+	return;
 }
 
 function eventTesterExit():void 
 {
-	mainView.eventTestInput.x = -10207.5;
-	mainView.eventTestInput.y = -1055.1;
+	hideTestInputPanel();
 	eventParser(debugPane);
 	return;
 }
-*/
+
+function showTestInputPanel():void
+{
+	mainView.eventTestInput.x = 207.5;
+	mainView.eventTestInput.y = 55.1;
+}
+function hideTestInputPanel():void
+{
+
+	mainView.eventTestInput.x = -10207.5;
+	mainView.eventTestInput.y = -1055.1;
+}
