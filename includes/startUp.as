@@ -1,7 +1,3 @@
-
-//Keyboard listener!
-stage.addEventListener(KeyboardEvent.KEY_DOWN, keyboard);
-
 // These are toggled between by the [home] key.
 mainView.textBGWhite.visible = false;
 mainView.textBGTan.visible = false;
@@ -240,8 +236,15 @@ function settingsScreen():void
 			"Hyper Happy", toggleHyperHappy, 
 			"Low Standards", toggleStandards, 
 			"Null", 0, 
-			"Null", 0, 
+			"Controls", controlsMenu, 
 			"Back", mainMenu);
+}
+
+function controlsMenu():void
+{
+	outputText("Herp derp this is the controls menu", true);
+	
+	doNext(mainMenu);
 }
 
 function debugPane():void

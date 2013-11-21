@@ -1,4 +1,6 @@
-﻿// Hooking things to MainView.
+﻿import classes.InputManager;
+
+// Hooking things to MainView.
 mainView.onNewGameClick = newGameGo;
 mainView.onAppearanceClick = appearance;
 mainView.onDataClick = saveLoad;
@@ -6,8 +8,9 @@ mainView.onLevelClick = levelUpGo;
 mainView.onPerksClick = displayPerks;
 mainView.onStatsClick = displayStats;
 
-
 mainView._executeButtomButtonClick = executeButtonClick;
+
+var inputManager:InputManager = new InputManager(stage);
 
 // function buttonEvent(e:MouseEvent):void {
 // 	mouseOverText.visible = false;
@@ -66,352 +69,510 @@ function executeButtonClick(button:int = 0):void {
 }
 
 
-//Hugeass keyboard parser
-function keyboard(e:KeyboardEvent):void {
-	if(mainView.eventTestInput.x == 207.5) return;
-	if(mainView.nameBox.visible && stage.focus == mainView.nameBox) return;
-    var saveFile;
-	var currEvent:Number = 0;
-	var f:MouseEvent = undefined;
-	trace("Keyboard key inputted.  Keycode: " + e.keyCode);
-	//Cheat Code stuff!
-	if(flags[CHEAT_ENTERING_COUNTER] == 0) {
-		if(e.keyCode == 38) flags[CHEAT_ENTERING_COUNTER]++;
-		else flags[CHEAT_ENTERING_COUNTER] = 0;
-	}
-	else if(flags[CHEAT_ENTERING_COUNTER] == 1) {
-		if(e.keyCode == 40) flags[CHEAT_ENTERING_COUNTER]++;
-		else flags[CHEAT_ENTERING_COUNTER] = 0;
-	}
-	else if(flags[CHEAT_ENTERING_COUNTER] == 2) {
-		if(e.keyCode == 37) flags[CHEAT_ENTERING_COUNTER]++;
-		else flags[CHEAT_ENTERING_COUNTER] = 0;
-	}
-	else if(flags[CHEAT_ENTERING_COUNTER] == 3 && player.str > 0 && mainView.getButtonText( 0 ).indexOf("Game Over") == -1) {
-		if(e.keyCode == 39) {
-			giveHumanizer();
-			return;
+inputManager.AddBindableControl(
+	"Show Stats",
+	"Show the stats pane when available",
+	function():void {
+		if (mainView.menuButtonIsVisible(MainView.MENU_STATS) && player.str > 0)
+		{
+			displayStats(undefined);
 		}
-		else flags[CHEAT_ENTERING_COUNTER] = 0;
-	}
-	//Stats Hotkey
-	if(e.keyCode == 83 && mainView.menuButtonIsVisible( MainView.MENU_STATS ) && player.str > 0) {
-		displayStats(f);
-		return;
-	}
-	//Level up Hotkey
-	if(e.keyCode == 76 && mainView.menuButtonIsVisible( MainView.MENU_LEVEL ) && player.str > 0) {
-		levelUpGo(f);
-		return;
-	}
-	//f1 pressed - save in slot 1
-	if(e.keyCode == 112 && mainView.menuButtonIsVisible( MainView.MENU_DATA ) && player.str > 0) {
-		mainView.nameBox.text = "";
-		saveGame("CoC_1");
-		outputText("Game saved to slot 1!", true);
-		doNext(1);
-		return;
-	}
-	//f2 pressed - save in slot 2
-	if(e.keyCode == 113 && mainView.menuButtonIsVisible( MainView.MENU_DATA ) && player.str > 0) {
-		mainView.nameBox.text = "";
-		saveGame("CoC_2");
-		outputText("Game saved to slot 2!", true);
-		doNext(1);
-		return;
-	}
-	//f3 pressed - save in slot 3
-	if(e.keyCode == 114 && mainView.menuButtonIsVisible( MainView.MENU_DATA ) && player.str > 0) {
-		mainView.nameBox.text = "";
-		saveGame("CoC_3");
-		outputText("Game saved to slot 3!", true);
-		doNext(1);
-		return;
-	}
-	//f4 pressed - save in slot 4
-	if(e.keyCode == 115 && mainView.menuButtonIsVisible( MainView.MENU_DATA ) && player.str > 0) {
-		mainView.nameBox.text = "";
-		saveGame("CoC_4");
-		outputText("Game saved to slot 4!", true);
-		doNext(1);
-		return;
-	}
-	//f5 pressed - save in slot 5
-	if(e.keyCode == 116 && mainView.menuButtonIsVisible( MainView.MENU_DATA ) && player.str > 0) {
-		mainView.nameBox.text = "";
-		saveGame("CoC_5");
-		outputText("Game saved to slot 5!", true);
-		doNext(1);
-		return;
-	}
-	//f6 pressed - load slot 1
-	if(e.keyCode == 117 && mainView.menuButtonIsVisible( MainView.MENU_DATA )) {
-		saveFile = SharedObject.getLocal("CoC_1","/");
-		if(saveFile.data.exists) {
-			if(loadGame("CoC_1")) {
-				showStats();
-				statScreenRefresh();
-				outputText("Slot 1 Loaded!", true);
-				doNext(1);
+	});
+
+inputManager.AddBindableControl(
+	"Level Up",
+	"Show the level up page when available",
+	function():void {
+		if (mainView.menuButtonIsVisible(MainView.MENU_LEVEL) && player.str > 0)
+		{
+			levelUpGo(undefined);
+		}
+	});
+
+inputManager.AddBindableControl(
+	"Quicksave 1",
+	"Quicksave the current game to slot 1",
+	function():void {
+		if (mainView.menuButtonIsVisible(MainView.MENU_DATA) && player.str > 0)
+		{
+			mainView.nameBox.text = "";
+			saveGame("CoC_1");
+			outputText("Game saved to slot 1!", true);
+			doNext(1);
+		}
+	});
+	
+inputManager.AddBindableControl(
+	"Quicksave 2",
+	"Quicksave the current game to slot 2",
+	function():void {
+		if (mainView.menuButtonIsVisible(MainView.MENU_DATA) && player.str > 0)
+		{
+			mainView.nameBox.text = "";
+			saveGame("CoC_2");
+			outputText("Game saved to slot 2!", true);
+			doNext(1);
+		}
+	});
+	
+inputManager.AddBindableControl(
+	"Quicksave 3",
+	"Quicksave the current game to slot 2",
+	function():void {
+		if (mainView.menuButtonIsVisible(MainView.MENU_DATA) && player.str > 0)
+		{
+			mainView.nameBox.text = "";
+			saveGame("CoC_3");
+			outputText("Game saved to slot 3!", true);
+			doNext(1);
+		}
+	});
+	
+inputManager.AddBindableControl(
+	"Quicksave 4",
+	"Quicksave the current game to slot 4",
+	function():void {
+		if (mainView.menuButtonIsVisible(MainView.MENU_DATA) && player.str > 0)
+		{
+			mainView.nameBox.text = "";
+			saveGame("CoC_4");
+			outputText("Game saved to slot 4!", true);
+			doNext(1);
+		}
+	});
+	
+inputManager.AddBindableControl(
+	"Quicksave 5",
+	"Quicksave the current game to slot 5",
+	function():void {
+		if (mainView.menuButtonIsVisible(MainView.MENU_DATA) && player.str > 0)
+		{
+			mainView.nameBox.text = "";
+			saveGame("CoC_5");
+			outputText("Game saved to slot 5!", true);
+			doNext(1);
+		}
+	});
+	
+inputManager.AddBindableControl(
+	"Quickload 1",
+	"Quickload the current game from slot 1",
+	function():void {
+		if (mainView.menuButtonIsVisible(MainView.MENU_DATA))
+		{
+			var saveFile:* = SharedObject.getLocal("CoC_1", "/");
+			if (saveFile.data.exists)
+			{
+				if (loadGame("CoC_1"))
+				{
+					showStats();
+					statScreenRefresh();
+					outputText("Slot 1 Loaded!", true);
+					doNext(1);
+				}
 			}
 		}
-	}
-	//f7 pressed - load slot 2
-	if(e.keyCode == 118 && mainView.menuButtonIsVisible( MainView.MENU_DATA )) {
-		saveFile = SharedObject.getLocal("CoC_2","/");
-		if(saveFile.data.exists) {
-			if(loadGame("CoC_2")) {
-				showStats();
-				statScreenRefresh();
-				outputText("Slot 2 Loaded!", true);
-				doNext(1);
+	});
+
+inputManager.AddBindableControl(
+	"Quickload 2",
+	"Quickload the current game from slot 2",
+	function():void {
+		if (mainView.menuButtonIsVisible(MainView.MENU_DATA))
+		{
+			var saveFile:* = SharedObject.getLocal("CoC_2", "/");
+			if (saveFile.data.exists)
+			{
+				if (loadGame("CoC_2"))
+				{
+					showStats();
+					statScreenRefresh();
+					outputText("Slot 2 Loaded!", true);
+					doNext(1);
+				}
 			}
 		}
-	}
-	//f8 pressed - load slot 3
-	if(e.keyCode == 119 && mainView.menuButtonIsVisible( MainView.MENU_DATA )) {
-		saveFile = SharedObject.getLocal("CoC_3","/");
-		if(saveFile.data.exists) {
-			if(loadGame("CoC_3")) {
-				showStats();
-				statScreenRefresh();
-				outputText("Slot 3 Loaded!", true);
-				doNext(1);
+	});
+	
+inputManager.AddBindableControl(
+	"Quickload 3",
+	"Quickload the current game from slot 3",
+	function():void {
+		if (mainView.menuButtonIsVisible(MainView.MENU_DATA))
+		{
+			var saveFile:* = SharedObject.getLocal("CoC_3", "/");
+			if (saveFile.data.exists)
+			{
+				if (loadGame("CoC_3"))
+				{
+					showStats();
+					statScreenRefresh();
+					outputText("Slot 3 Loaded!", true);
+					doNext(1);
+				}
 			}
 		}
-	}
-	//f9 pressed - load slot 4
-	if(e.keyCode == 120 && mainView.menuButtonIsVisible( MainView.MENU_DATA )) {
-		saveFile = SharedObject.getLocal("CoC_4","/");
-		if(saveFile.data.exists) {
-			if(loadGame("CoC_4")) {
-				showStats();
-				statScreenRefresh();
-				outputText("Slot 4 Loaded!", true);
-				doNext(1);
+	});
+	
+inputManager.AddBindableControl(
+	"Quickload 4",
+	"Quickload the current game from slot 4",
+	function():void {
+		if (mainView.menuButtonIsVisible(MainView.MENU_DATA))
+		{
+			var saveFile:* = SharedObject.getLocal("CoC_4", "/");
+			if (saveFile.data.exists)
+			{
+				if (loadGame("CoC_4"))
+				{
+					showStats();
+					statScreenRefresh();
+					outputText("Slot 4 Loaded!", true);
+					doNext(1);
+				}
 			}
 		}
-	}
-	//f10 pressed - load slot 5
-	if(e.keyCode == 121 && mainView.menuButtonIsVisible( MainView.MENU_DATA )) {
-		saveFile = SharedObject.getLocal("CoC_5","/");
-		if(saveFile.data.exists) {
-			if(loadGame("CoC_5")) {
-				showStats();
-				statScreenRefresh();
-				outputText("Slot 5 Loaded!", true);
-				doNext(1);
+	});
+	
+inputManager.AddBindableControl(
+	"Quickload 5",
+	"Quickload the current game from slot 5",
+	function():void {
+		if (mainView.menuButtonIsVisible(MainView.MENU_DATA))
+		{
+			var saveFile:* = SharedObject.getLocal("CoC_5", "/");
+			if (saveFile.data.exists)
+			{
+				if (loadGame("CoC_5"))
+				{
+					showStats();
+					statScreenRefresh();
+					outputText("Slot 5 Loaded!", true);
+					doNext(1);
+				}
 			}
 		}
-	}
-	//Backspace pressed! New Game!
-	if(e.keyCode == 8 && mainView.menuButtonIsVisible( MainView.MENU_NEW_MAIN ) && mainView.menuButtonHasLabel( MainView.MENU_NEW_MAIN, "Main Menu" )) {
-		//newGameGo(f);
-		mainMenu(f);
-		return;
-	}
-	//D Pressed! call data!"
-	if(e.keyCode == 68 && mainView.menuButtonIsVisible( MainView.MENU_DATA )) {
-		saveLoad(f);
-		return;
-	}
-	//A pressed! call appearance!"
-	if(e.keyCode == 65 && mainView.menuButtonIsVisible( MainView.MENU_APPEARANCE )) {
-		appearance(f);
-		return;
-	}
-	//N pressed! Equal to no!"
-	if(e.keyCode == 78 && mainView.getButtonText( 1 ) == "No" && mainView.buttonIsVisible( 1 )) {
-		currEvent = button2Choice;
-		//eventParser(currEvent);
-		executeButtonClick(1);
-		return;
-	}
-	//Y pressed! Equal to Yes!"
-	if(e.keyCode == 89 && mainView.getButtonText( 0 ) == "Yes" && mainView.buttonIsVisible( 0 )) {
-		currEvent = buttonEvents[0];
-		//eventParser(currEvent);
-		executeButtonClick(0);
-		return;
-	}
-	if(e.keyCode == 80 && mainView.menuButtonIsVisible( MainView.MENU_PERKS ) ) {
-		displayPerks(f);
-		return;
-	}
-	//If 32 pressed or 13 pressed (enter/space) - NEXT
-	if(e.keyCode == 13 || e.keyCode == 32) {
-		// b0text is at index 9.  b0Text actually sorta means b10Text...
-		if( mainView.buttonIsVisible( 9 ) && mainView.buttonTextIsOneOf( 9, [ "Nevermind", "Abandon", "Next", "Return", "Back", "Leave", "Resume" ] )) {
+	});
+	
+inputManager.AddBindableControl(
+	"Show Menu",
+	"Show the main menu",
+	function():void {
+		if (mainView.menuButtonIsVisible(MainView.MENU_NEW_MAIN) && mainView.menuButtonHasLabel(MainView.MENU_NEW_MAIN, "Main Menu"))
+		{
+			mainMenu(undefined);
+		}
+	});
+
+inputManager.AddBindableControl(
+	"Data Menu",
+	"Show the save/load menu",
+	function():void {
+		if (mainView.menuButtonIsVisible(MainView.MENU_DATA))
+		{
+			saveLoad(undefined);
+		}
+	});
+	
+inputManager.AddBindableControl(
+	"Appearance Page",
+	"Show the appearance page",
+	function():void {
+		if (mainView.menuButtonIsVisible(MainView.MENU_APPEARANCE))
+		{
+			appearance(undefined);
+		}
+	});
+	
+inputManager.AddBindableControl(
+	"No",
+	"Respond no to any available prompt",
+	function():void {
+		if (mainView.getButtonText(1) == "No" && mainView.buttonIsVisible(1))
+		{
+			executeButtonClick(1);
+		}
+	});
+	
+inputManager.AddBindableControl(
+	"Yes",
+	"Respond yes to any available prompt",
+	function():void {
+		if (mainView.getButtonText(0) == "Yes" && mainView.buttonIsVisible(0))
+		{
+			executeButtonClick(0);
+		}
+	});
+	
+inputManager.AddBindableControl(
+	"Show Perks",
+	"Show the perks page",
+	function():void {
+		if (mainView.menuButtonIsVisible(MainView.MENU_PERKS))
+		{
+			displayPerks(undefined);
+		}
+	});
+
+inputManager.AddBindableControl(
+	"Continue",
+	"Respond to continue",
+	function():void {
+		// Button 9
+		if (mainView.buttonIsVisible(9) && mainView.buttonTextIsOneOf(9, [ "Nevermind", "Abandon", "Next", "Return", "Back", "Leave", "Resume" ]))
+		{
 			mainView.toolTipView.hide();
-			//mouseOverText.visible = false;
-			//eventParser(button0Choice);
 			executeButtonClick(9);
 			return;
 		}
-		if( mainView.buttonIsVisible( 0 ) && mainView.buttonTextIsOneOf( 0, [ "Next", "Return", "Back" ] )) {
+		
+		// Button 0
+		if (mainView.buttonIsVisible(0) && mainView.buttonTextIsOneOf(0, [ "Next", "Return", "Back" ]))
+		{
 			mainView.toolTipView.hide();
-			//mouseOverText.visible = false;
-			//eventParser(button1Choice);
 			executeButtonClick(0);
 			return;
 		}
-		if( mainView.buttonIsVisible( 4 ) && mainView.buttonTextIsOneOf( 4, [ "Nevermind", "Next", "Return", "Back", "Leave" ] )) {
+		
+		// Button 4
+		if (mainView.buttonIsVisible(4) && mainView.buttonTextIsOneOf(4, [ "Nevermind", "Next", "Return", "Back", "Leave" ]))
+		{
 			mainView.toolTipView.hide();
-			//mouseOverText.visible = false;
-			//eventParser(button5Choice);
 			executeButtonClick(4);
 			return;
 		}
-		if( mainView.buttonIsVisible( 5 ) && mainView.buttonTextIsOneOf( 5, [ "Next", "Return", "Back" ] )) {
+		
+		// Button 5
+		if (mainView.buttonIsVisible(5) && mainView.buttonTextIsOneOf(5, [ "Next", "Return", "Back" ]))
+		{
 			mainView.toolTipView.hide();
-			//mouseOverText.visible = false;
-			//eventParser(button6Choice);
 			executeButtonClick(5);
 			return;
 		}
-		
-		return;
-	}
-	//Home key cycles background presets!
-	if(e.keyCode == 36) {
-		if(!mainView.textBGWhite.visible) mainView.textBGWhite.visible = true;
-		else if(!mainView.textBGTan.visible) mainView.textBGTan.visible = true;
-		else {
-			mainView.textBGTan.visible = false;
-			mainView.textBGWhite.visible = false;
-		}
-	}		
-	//If 1 key pressed!
-	if(e.keyCode == 49) {
-		//if(b1Text.visible == false)
-		if( ! mainView.buttonIsVisible( 0 ) )
-		{
-			trace("Key 1 pressed while inactive.");
-			return;
-		}
-		//mouseOverText.visible = false;
-		mainView.toolTipView.hide();
-		//eventParser(currEvent);
-		executeButtonClick(0);
-		return;
-	}
-	//If 2 key pressed!
-	if(e.keyCode == 50) {
-		//if(b2Text.visible == false)
-		if( ! mainView.buttonIsVisible( 1 ) )
-		{
-			trace("Key 2 pressed while inactive.");
-			return;
-		}
-		//mouseOverText.visible = false;
-		mainView.toolTipView.hide();
-		executeButtonClick(1);
-		return;
-	}
-	//If 3 key pressed!
-	if(e.keyCode == 51) {
-		//if(b3Text.visible == false)
-		if( ! mainView.buttonIsVisible( 2 ) )
-		{
-			trace("Key 3 pressed while inactive.");
-			return;
-		}
-		//mouseOverText.visible = false;
-		mainView.toolTipView.hide();
-		executeButtonClick(2);
-		return;
-	}
-	//If 4 key pressed, or enter when text is "leave", "back", or "return".
-	if(e.keyCode == 52) {
-		//if(b4Text.visible == false)
-		if( ! mainView.buttonIsVisible( 3 ) )
-		{
-			trace("Key 4 pressed while inactive.");
-			return;
-		}
-		//mouseOverText.visible = false;
-		mainView.toolTipView.hide();
-		executeButtonClick(3);
-		return;
-	}
-	if(e.keyCode == 53) {
-		//if(b5Text.visible == false)
-		if( ! mainView.buttonIsVisible( 4 ) )
-		{
-			trace("Key 5 pressed while inactive.");
-			return;
-		}
-		//mouseOverText.visible = false;
-		mainView.toolTipView.hide();
-		executeButtonClick(4);
-		return;
-	}
-	if(e.keyCode == 54 || e.keyCode == 81) {
-		//if(b6Text.visible == false)
-		if( ! mainView.buttonIsVisible( 5 ) )
-		{
-			trace("Key 6 pressed while inactive.");
-			return;
-		}
-		//mouseOverText.visible = false;
-		mainView.toolTipView.hide();
-		executeButtonClick(5);
-		return;
-	}
-	if(e.keyCode == 55 || e.keyCode == 87) {
-		//if(b7Text.visible == false)
-		if( ! mainView.buttonIsVisible( 6 ) )
-		{
-			trace("Key 7 pressed while inactive.");
-			return;
-		}
-		//mouseOverText.visible = false;
-		mainView.toolTipView.hide();
-		executeButtonClick(6);
-		return;
-	}
-	if(e.keyCode == 56 || e.keyCode == 69) {
-		//if(b8Text.visible == false)
-		if( ! mainView.buttonIsVisible( 7 ) )
-		{
-			trace("Key 8 pressed while inactive.");
-			return;
-		}
-		//mouseOverText.visible = false;
-		mainView.toolTipView.hide();
-		executeButtonClick(7);
-		return;
-	}
-	if(e.keyCode == 57 || e.keyCode == 82) {
-		//if(b9Text.visible == false)
-		if( ! mainView.buttonIsVisible( 8 ) )
-		{
-			trace("Key 9 pressed while inactive.");
-			return;
-		}
-		//mouseOverText.visible = false;
-		mainView.toolTipView.hide();
-		executeButtonClick(8);
-		return;
-	}
-	if(e.keyCode == 48 || e.keyCode == 84) {
-		//if(b0Text.visible == false)
-		if( ! mainView.buttonIsVisible( 9 ) )
-		{
-			trace("Key 0 pressed while inactive.");
-			return;
-		}
-		//mouseOverText.visible = false;
-		mainView.toolTipView.hide();
-		executeButtonClick(9);
-		return;
-	}
-	//Save box
-	if(e.keyCode == 68 && mainView.menuButtonIsVisible( MainView.MENU_DATA )) {
-
-	}
+	});
 	
-}
+inputManager.AddBindableControl(
+	"Cycle Background",
+	"Cycle the background fill of the text display area",
+	function():void {
+		if (!mainView.textBGWhite.visible)
+		{
+			mainView.textBGWhite.visible = true;
+		}
+		else if (!mainView.textBGTan.visible)
+		{
+			mainView.textBGTan.visible = true;
+		}
+		else
+		{
+			mainView.textBGWhite.visible = false;
+			mainView.textBGTan.visible = false;
+		}
+		
+	});
+	
+inputManager.AddBindableControl(
+	"Button 1",
+	"Activate button 1",
+	function():void {
+		if (mainView.buttonIsVisible(0))
+		{
+			mainView.toolTipView.hide();
+			executeButtonClick(0);
+		}
+	});
+
+inputManager.AddBindableControl(
+	"Button 2",
+	"Activate button 2",
+	function():void {
+		if (mainView.buttonIsVisible(1))
+		{
+			mainView.toolTipView.hide();
+			executeButtonClick(1);
+		}
+	});
+	
+inputManager.AddBindableControl(
+	"Button 3",
+	"Activate button 3",
+	function():void {
+		if (mainView.buttonIsVisible(2))
+		{
+			mainView.toolTipView.hide();
+			executeButtonClick(2);
+		}
+	});
+	
+inputManager.AddBindableControl(
+	"Button 4",
+	"Activate button 4",
+	function():void {
+		if (mainView.buttonIsVisible(3))
+		{
+			mainView.toolTipView.hide();
+			executeButtonClick(3);
+		}
+	});
+	
+inputManager.AddBindableControl(
+	"Button 5",
+	"Activate button 5",
+	function():void {
+		if (mainView.buttonIsVisible(4))
+		{
+			mainView.toolTipView.hide();
+			executeButtonClick(4);
+		}
+	});
+	
+inputManager.AddBindableControl(
+	"Button 6",
+	"Activate button 6",
+	function():void {
+		if (mainView.buttonIsVisible(5))
+		{
+			mainView.toolTipView.hide();
+			executeButtonClick(5);
+		}
+	});
+	
+inputManager.AddBindableControl(
+	"Button 7",
+	"Activate button 7",
+	function():void {
+		if (mainView.buttonIsVisible(6))
+		{
+			mainView.toolTipView.hide();
+			executeButtonClick(6);
+		}
+	});
+	
+inputManager.AddBindableControl(
+	"Button 8",
+	"Activate button 8",
+	function():void {
+		if (mainView.buttonIsVisible(7))
+		{
+			mainView.toolTipView.hide();
+			executeButtonClick(7);
+		}
+	});
+	
+inputManager.AddBindableControl(
+	"Button 9",
+	"Activate button 9",
+	function():void {
+		if (mainView.buttonIsVisible(8))
+		{
+			mainView.toolTipView.hide();
+			executeButtonClick(8);
+		}
+	});
+	
+inputManager.AddBindableControl(
+	"Button 10",
+	"Activate button 10",
+	function():void {
+		if (mainView.buttonIsVisible(9))
+		{
+			mainView.toolTipView.hide();
+			executeButtonClick(9);
+		}
+	});
+
+inputManager.AddBindableControl(
+	"Cheat! Give Hummus",
+	"Cheat code to get free hummus",
+	function(keyCode:int):void {
+		if (flags[CHEAT_ENTERING_COUNTER] == 0)
+		{
+			if (keyCode == 38)
+			{
+				flags[CHEAT_ENTERING_COUNTER]++;
+			}
+			else
+			{
+				flags[CHEAT_ENTERING_COUNTER] = 0;
+			}
+		}
+		else if (flags[CHEAT_ENTERING_COUNTER] == 1)
+		{
+			if (keyCode == 40)
+			{
+				flags[CHEAT_ENTERING_COUNTER]++;
+			}
+			else
+			{
+				flags[CHEAT_ENTERING_COUNTER] = 0;
+			}
+		}
+		else if (flags[CHEAT_ENTERING_COUNTER] == 2)
+		{
+			if (keyCode == 37)
+			{
+				flags[CHEAT_ENTERING_COUNTER]++;
+			}
+			else
+			{
+				flags[CHEAT_ENTERING_COUNTER] = 0;
+			}
+		}
+		else if (flags[CHEAT_ENTERING_COUNTER] == 3)
+		{
+			if (keyCode == 39)
+			{
+				if (player.str > 0 && mainView.getButtonText(0).indexOf("Game Over") == -1)
+				{
+					giveHumanizer();
+				}
+			}
+			else
+			{
+				flags[CHEAT_ENTERING_COUNTER] = 0;
+			}
+		}
+	},
+	true);
+
+// Insert the default bindings
+inputManager.BindKeyToControl(83, "Show Stats");
+inputManager.BindKeyToControl(76, "Level Up");
+inputManager.BindKeyToControl(112, "Quicksave 1");
+inputManager.BindKeyToControl(113, "Quicksave 2");
+inputManager.BindKeyToControl(114, "Quicksave 3");
+inputManager.BindKeyToControl(115, "Quicksave 4");
+inputManager.BindKeyToControl(116, "Quicksave 5");
+inputManager.BindKeyToControl(117, "Quickload 1");
+inputManager.BindKeyToControl(118, "Quickload 2");
+inputManager.BindKeyToControl(119, "Quickload 3");
+inputManager.BindKeyToControl(120, "Quickload 4");
+inputManager.BindKeyToControl(121, "Quickload 5");
+inputManager.BindKeyToControl(8, "Show Menu");
+inputManager.BindKeyToControl(68, "Data Menu");
+inputManager.BindKeyToControl(65, "Appearance Page");
+inputManager.BindKeyToControl(78, "No");
+inputManager.BindKeyToControl(89, "Yes");
+inputManager.BindKeyToControl(80, "Show Perks");
+inputManager.BindKeyToControl(13, "Continue");
+inputManager.BindKeyToControl(32, "Continue");
+inputManager.BindKeyToControl(36, "Cycle Background");
+inputManager.BindKeyToControl(49, "Button 1");
+inputManager.BindKeyToControl(50, "Button 2");
+inputManager.BindKeyToControl(51, "Button 3");
+inputManager.BindKeyToControl(52, "Button 4");
+inputManager.BindKeyToControl(53, "Button 5");
+inputManager.BindKeyToControl(54, "Button 6");
+inputManager.BindKeyToControl(55, "Button 7");
+inputManager.BindKeyToControl(56, "Button 8");
+inputManager.BindKeyToControl(57, "Button 9");
+inputManager.BindKeyToControl(48, "Button 10");
+inputManager.BindKeyToControl(81, "Button 6");
+inputManager.BindKeyToControl(87, "Button 7");
+inputManager.BindKeyToControl(69, "Button 8");
+inputManager.BindKeyToControl(82, "Button 9");
+inputManager.BindKeyToControl(84, "Button 10");
+
 
 
 //DROPDOWN BOX STUFF
