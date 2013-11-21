@@ -1,4 +1,4 @@
-﻿//NECESSARY FLAGS:
+//NECESSARY FLAGS:
 //263 - Met nancy
 //264 - Nancy relationship level
 //265 - Talk Nancy
@@ -7,7 +7,7 @@
 //[Introduction Blurb:
 //(appears in the Wet Bitch between 6:00 and 14:00)]
 function auntNancy(display:Boolean = true):Boolean {
-	if(hours >= 6 && hours <= 14) {
+	if(model.time.hours >= 6 && model.time.hours <= 14) {
 		if(display) {
 			outputText("\n\nYou see a rather buxom woman with short, white hair in a neck- and sleeve-less black dress cleaning glasses with her bar towel.  She makes the task look simple, moreso because she has two pairs of arms, wrapped in what look like shiny black gloves.", false);
 			//[If MetNancy = 0]
@@ -27,7 +27,7 @@ function interactWithAuntNancy():void {
 	outputText("", true);
 	//[Interaction 2]
 	//[If Time = 1400, Relationship with Aunt Nancy >= 30, and PillowTalk= 0]
-	if(flags[UNKNOWN_FLAG_NUMBER_00264] >= 30 && hours == 14 && flags[UNKNOWN_FLAG_NUMBER_00266] == 0) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00264] >= 30 && model.time.hours == 14 && flags[UNKNOWN_FLAG_NUMBER_00266] == 0) {
 		outputText("As you enter the bar, looking forward to spending some time with Aunt Nancy, you see that she is cleaning up and getting ready to leave.  She spots you with one of her eyes and smiles, waving you closer with a single hand as the other three set glasses under the bar.\n\n", false);
 
 		outputText("\"<i>Afternoon, friend!</i>\" she says, cheerily.  \"<i>You've certainly been coming in a lot, and I can't say I don't appreciate your company.</i>\"  Aunt Nancy looks you over a little, smiling a little more wistfully and melancholically now.  \"<i>You remind me a little of my husband,</i>\" she admits, finishing up and skittering out from behind the bar on her many legs as the afternoon shift bartender takes her place.  \"<i>It's... nothing I can put my finger on.  Just, you have a certain... <b>quality</b> to you.</i>\"\n\n", false);
@@ -38,7 +38,7 @@ function interactWithAuntNancy():void {
 		simpleChoices("Agree",timeForAuntNancySpiderCooch,"Decline",declineAuntNancyMassage,"",0,"",0,"",0);
 	}
 	//[If Time >= 1400 - (100*(Relationship with Aunt Nancy/30), Relationship with Aunt Nancy >= 30, and PillowTalk= 1]
-	else if(flags[UNKNOWN_FLAG_NUMBER_00264] >= 30 && hours >= (14 - (flags[UNKNOWN_FLAG_NUMBER_00264]/30)) && flags[UNKNOWN_FLAG_NUMBER_00266] > 0) {
+	else if(flags[UNKNOWN_FLAG_NUMBER_00264] >= 30 && model.time.hours >= (14 - (flags[UNKNOWN_FLAG_NUMBER_00264]/30)) && flags[UNKNOWN_FLAG_NUMBER_00266] > 0) {
 		outputText("Aunt Nancy looks up as you walk over to her, and her eyes light up.  Happily, she greets you with a prim little hand atop yours, a bit of evidence of the intimacy you've shared.\n\n", false);
 
 		outputText("\"<i>Couldn't stay away, could you friend?</i>\" she asks, quietly, a sexy smile on her lovely face.  \"<i>What'll it be? Do you want a drink...</i>\"  The spider-lady leans her white-haired head next to your ear conspiratorially, and whispers, \"<i>Or, do you want me to get off early and give you a little... massage?</i>\"  You shiver at her words.\n\n", false);

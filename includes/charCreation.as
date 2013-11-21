@@ -3,22 +3,18 @@
 function newGameGo(e:MouseEvent):void {
 	funcs = new Array();
 	args = new Array();
-	eventTestInput.x = -10207.5;
-	eventTestInput.y = -1055.1;
+	mainView.eventTestInput.x = -10207.5;
+	mainView.eventTestInput.y = -1055.1;
 	hideStats();
 	hideUpDown();
-	nameBox.visible = true;
-	nameBox.width = 165;
-	appearanceText.visible = false;
-	appearanceBG.visible = false;
-	dataText.visible = false;
-	dataBG.visible = false;
-	levelBG.visible = false;
-	levelText2.visible = false;
-	perksText.visible = false;
-	perksBG.visible = false;
+	mainView.nameBox.visible = true;
+	mainView.nameBox.width = 165;
+	mainView.hideMenuButton( MainView.MENU_NEW_MAIN );
+	mainView.hideMenuButton( MainView.MENU_DATA );
+	mainView.hideMenuButton( MainView.MENU_LEVEL );
+	mainView.hideMenuButton( MainView.MENU_PERKS );
 	//Hide perk boxes
-	aCb.visible = false;
+	mainView.aCb.visible = false;
 	//If first PC, track status of EZ mode and other such nonsense.
 	var silly:Boolean = false;
 	var easy:Boolean = false;
@@ -30,7 +26,7 @@ function newGameGo(e:MouseEvent):void {
 		easy = true;
 	if(flags[SILLY_MODE_ENABLE_FLAG]) 
 		silly = true;
-	b1Text.text = "Newgame";
+	mainView.setButtonText( 0, "Newgame" ); // b1Text.text = "Newgame";
 	flags[CUSTOM_PC_ENABLED] = 0;
 	
 	outputText("You grew up in the small village of Ingnam, a remote village with rich traditions, buried deep in the wilds.  Every year for as long as you can remember, your village has chosen a champion to send to the cursed Demon Realm.  Legend has it that in years Ingnam has failed to produce a champion, chaos has reigned over the countryside.  Children disappear, crops wilt, and disease spreads like wildfire.  This year, <b>you</b> have been selected to be the champion.\n\nWhat is your name?", true);
@@ -43,17 +39,17 @@ function newGameGo(e:MouseEvent):void {
 	AskQuestions._x = GeneralTextField._x;
 	AskQuestions._y = GeneralTextField._y + 3 + GeneralTextField._height;
 	again replace _x, _y, _width with x, y, width*/
-	//mainText.autoSize = true;
+	//mainView.mainText.autoSize = true;
 	
-	//mainText.autoSize = TextFieldAutoSize.LEFT;
+	//mainView.mainText.autoSize = TextFieldAutoSize.LEFT;
 	simpleChoices("OK",10034,"",0,"",0,"",0,"",0);
-	nameBox.x = mainText.x + 5;
-	nameBox.y = mainText.y + 3 + mainText.textHeight;
+	mainView.nameBox.x = mainView.mainText.x + 5;
+	mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
 	
 	//OLD
-	//nameBox.x = 510;
-	//nameBox.y = 265;
-	nameBox.text = "";
+	//mainView.nameBox.x = 510;
+	//mainView.nameBox.y = 265;
+	mainView.nameBox.text = "";
 	
 	//Reset autosave
 	player.slotName = "VOID";
@@ -65,6 +61,7 @@ function newGameGo(e:MouseEvent):void {
 	var oldPlayer:Player = player;
 	//Reset all standard stats
 	player = new Player();
+	model.player = player;
 	player.str = 15;
 	player.tou = 15;
 	player.spe = 15;
@@ -194,8 +191,8 @@ function newGameGo(e:MouseEvent):void {
 	flags[UNKNOWN_FLAG_NUMBER_00102] = 1;
 	flags[UNKNOWN_FLAG_NUMBER_02999] = 3;
 	//Time reset
-	days = 0;
-	hours = 0;
+	model.time.days = 0;
+	model.time.hours = 0;
 	//Clear cocks
 	while(player.cocks.length > 0)
 	{
@@ -551,7 +548,7 @@ function doCreation(eventNo:Number):void {
 	}
 	//Choose name 
 	if(eventNo == 10034) {
-		if(nameBox.text == "") {
+		if(mainView.nameBox.text == "") {
 			//If part of newgame+, don't fully wipe.
 			if(player.XP > 0 && player.explored == 0) {
 				flags[NEW_GAME_PLUS_BONUS_STORED_XP] = player.XP;
@@ -566,17 +563,17 @@ function doCreation(eventNo:Number):void {
 			outputText("\n\n\n<b>You must select a name.</b>", false);
 			return;
 		}
-		else if(customName(nameBox.text)) {
+		else if(customName(mainView.nameBox.text)) {
 			clearOutput();
 			outputText("This name, like you, is special.  Do you live up to your name or continue on, assuming it to be coincidence?");
-			nameBox.visible = false;
+			mainView.nameBox.visible = false;
 			menu();
 			addButton(0,"SpecialName",useCustomProfile);
 			addButton(1,"Continue On",noCustomProfile);
 			return;
 		}
-		player.short = nameBox.text;
-		nameBox.visible = false;
+		player.short = mainView.nameBox.text;
+		mainView.nameBox.visible = false;
 		outputText("\n\n\n\nAre you a man or a woman?", true);
 		simpleChoices("Man", 10000, "Woman", 10001, "", 0, "", 0, "", 0); 
 	}
@@ -694,7 +691,7 @@ function doCreation(eventNo:Number):void {
 			return;
 		}
 		statScreenRefresh();
-		hours = 11
+		model.time.hours = 11
 		outputText("You are prepared for what is to come.  Most of the last year has been spent honing your body and mind to prepare for the challenges ahead.  You are the Champion of Ingnam.  The one who will journey to the demon realm and guarantee the safety of your friends and family, even though you'll never see them again.  You wipe away a tear as you enter the courtyard and see Elder Nomur waiting for you.  You are ready.\n\n", true);
 		outputText("The walk to the tainted cave is long and silent.  Elder Nomur does not speak.  There is nothing left to say.  The two of you journey in companionable silence.  Slowly the black rock of Mount Ilgast looms closer and closer, and the temperature of the air drops.   You shiver and glance at the Elder, noticing he doesn't betray any sign of the cold.  Despite his age of nearly 80, he maintains the vigor of a man half his age.  You're glad for his strength, as assisting him across this distance would be draining, and you must save your energy for the trials ahead.\n\n", false);
 		outputText("The entrance of the cave gapes open, sharp stalactites hanging over the entrance, giving it the appearance of a monstrous mouth.  Elder Nomur stops and nods to you, gesturing for you to proceed alone.\n\n", false);
@@ -739,9 +736,9 @@ function doCreation(eventNo:Number):void {
 function useCustomProfile():void {
 	flags[CUSTOM_PC_ENABLED] = 1;
 	clearOutput();
-	player.short = nameBox.text;
-	nameBox.visible = false;
-	if(specialName(nameBox.text)) {
+	player.short = mainView.nameBox.text;
+	mainView.nameBox.visible = false;
+	if(specialName(mainView.nameBox.text)) {
 		outputText("Your name defines everything about you, and as such, it is time to wake...\n\n");
 		flags[CUSTOM_PC_ENABLED] = 0;
 		customPCSetup();
@@ -757,8 +754,8 @@ function useCustomProfile():void {
 function noCustomProfile():void {
 	clearOutput();
 	flags[CUSTOM_PC_ENABLED] = -1;
-	player.short = nameBox.text;
-	nameBox.visible = false;
+	player.short = mainView.nameBox.text;
+	mainView.nameBox.visible = false;
 	outputText("Your name carries little significance beyond it being your name.  What is your gender?");
 	simpleChoices("Male", 10000, "Female", 10001, "", 0, "", 0, "", 0); 
 }
@@ -878,13 +875,16 @@ function initializeGearStorage():void {
 // This lets you pre-construct the argument, to make things cleaner
 function randomChoice(...args):*
 {
+	var choice:Number;
 	if ((args.length == 1) && (args[0] is Array))
 	{
-		var i:Number = int(Math.round(Math.random() * (args[0].length - 1)));
-		return args[0][i];
+		choice = int(Math.round(Math.random() * (args[0].length - 1)));
+		return args[0][choice];
 	}
-
-	var i:Number = int(Math.round(Math.random() * (args.length - 1)));
-	return args[i];
+	else
+	{
+		choice = int(Math.round(Math.random() * (args.length - 1)));
+		return args[choice];
+	}
 
 }

@@ -1,5 +1,9 @@
-.gitignore
-CoC_Fenoxo.swf
+*.swf
 RECOVER_*
 Corruption-of-Champions.as3proj
-*.swf
+/img/*
+/bin-debug
+/debugStuff
+/CoCEd 1.0.3
+/bin
+/obj

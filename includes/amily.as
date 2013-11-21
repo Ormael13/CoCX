@@ -113,9 +113,9 @@ function discoverAmilyVillage():void {
 
 //[No]
 function dontExploreAmilyVillage():void {
-    outputText("", true);
-    outputText("Standing up, you turn and walk away. You presume from the state of the pathway that the village at the other end must either be in dire straits, abandoned, or overwhelmed by demons. In other words, it's no safe place for a traveler like you.\n\n", false);
-    doNext(13);
+	outputText("", true);
+	outputText("Standing up, you turn and walk away. You presume from the state of the pathway that the village at the other end must either be in dire straits, abandoned, or overwhelmed by demons. In other words, it's no safe place for a traveler like you.\n\n", false);
+	doNext(13);
 }
 
 //[Yes]
@@ -1281,15 +1281,15 @@ function pregnancyIsScaryGoddamnMousePregnancyImNotWatchingThisShit():void {
 
 //[Watch]
 function heyIGotTicketsToMicePoppingOut():void {
-    outputText("", true);
-    amilySprite();
-    outputText("You don't want to just run away and leave her, but at the same time you think it would be best to respect her privacy. You stand a respectful distance away, watching as she strains. Her pink nether lips part and a small", false);
+	outputText("", true);
+	amilySprite();
+	outputText("You don't want to just run away and leave her, but at the same time you think it would be best to respect her privacy. You stand a respectful distance away, watching as she strains. Her pink nether lips part and a small", false);
 	//([horsecock]
 	if(flags[AMILY_NOT_FURRY] == 0) outputText(", mousy figure – pink, hairless and ", false);
 	else outputText(" figure –", false);
 	outputText(" maybe six inches tall – slips out, falling to the ground with a squeak. Fortunately, Amily has prepared a pile of rags and soft leaves to cushion its landing. It rolls around a bit, and then scrambles with surprising speed; which is good, as it is joined by company very quickly. A second infant falls onto the padding beside it, and then a third... a fourth...\n\n", false);
    
-    outputText("You watch as baby after baby slips free of its mother's womb and into the wider world. ", false);
+	outputText("You watch as baby after baby slips free of its mother's womb and into the wider world. ", false);
 	//([horsecock]
 	if(flags[AMILY_NOT_FURRY] == 0) outputText(" Though hairless like regular infant mice,", false);
 	else outputText(" Though remarkably similar to a regular infant - minus the ears and tail, of course -", false);
@@ -1299,8 +1299,8 @@ function heyIGotTicketsToMicePoppingOut():void {
 	else outputText(" maturing dramatically as you watch.", false);
 	outputText("  Their color patterns vary considerably; white, black and brown are most common, and you even see one or two with your hair color. Amily flops back onto her rump and then topples over onto her back, clearly too tired to stand up. Her offspring crowd around, cuddling up to her, and she gives them a tired but happy smile.\n\n", false);
    
-    outputText("Making sure that there doesn't seem to be any danger, you quietly let yourself out. It seems that she's too concerned about the children to notice you leave.", false);
-    doNext(13);
+	outputText("Making sure that there doesn't seem to be any danger, you quietly let yourself out. It seems that she's too concerned about the children to notice you leave.", false);
+	doNext(13);
 }
 
 //[Help]
@@ -1349,8 +1349,8 @@ function helpThatFukkinUngratefulBitchGiveBirth():void {
 		outputText("hair", false);
 		
 	outputText(" is the same color as your hair.\n\n", false);
-    outputText("Amily is tired, but she smiles at you happily. \"<i>I... thank you. For being here. For me – and them,</i>\" she says. You assure her that it was no problem. You sit there with her, letting your inquisitive offspring examine you and tussle with you while their mother regains her strength.\n\n", false);
-    outputText("As the rambunctious little mouselets burn up their energy and curl up beside Amily to sleep, you gently excuse yourself and return to camp.", false);
+	outputText("Amily is tired, but she smiles at you happily. \"<i>I... thank you. For being here. For me – and them,</i>\" she says. You assure her that it was no problem. You sit there with her, letting your inquisitive offspring examine you and tussle with you while their mother regains her strength.\n\n", false);
+	outputText("As the rambunctious little mouselets burn up their energy and curl up beside Amily to sleep, you gently excuse yourself and return to camp.", false);
 	//{Affection goes up}
 	flags[AMILY_AFFECTION] += 5;
 	doNext(13);
@@ -1761,7 +1761,7 @@ function talkWithCuntIMeanAmily(sexAfter:Boolean = false):void {
 		
 		outputText("Amily looks surprised... but pleased.  \"<i>I... You're really interested in hearing about me?  Well... okay.  What do you want to know?</i>\"\n\n", false);
 
-		outputText("You ask her, hesitantly, how she she managed to survive the destruction of her village, and how she's stayed alive ever since.\n\n", false);
+		outputText("You ask her, hesitantly, how she managed to survive the destruction of her village, and how she's stayed alive ever since.\n\n", false);
 
 		outputText("She looks not upset, like you feared, but confused.  \"<i>I haven't explained that already?</i>\" She asks.  \"<i>I ran.  I ran as fast as I could for my house - I ran for my hunting knife and my blowpipes.  And then, my parents ordered me to run into the wilderness and hide.  I didn't want to go, but I obeyed.  I just ran and ran all through the night, stopping only when I was exhausted - and even then, I crawled into a hollow at the roots of a tree to hide.  I slept until hunger woke me, foraged for something to eat, and then I crept back to my village.  I found it ruined, and I've lived here ever since.</i>\"\n\n", false);
 
@@ -1944,34 +1944,34 @@ function beSomeKindofNervousDoucheAndWaitForAmily():void {
 }
 //[=Kiss Her=]
 function kissAmilyInDaMoufFirstTimeIsSomehowBetterThatWay():void {
-    outputText("", true);
-    amilySprite();
+	outputText("", true);
+	amilySprite();
 	outputText(images.showImage("amily-forest-kissingfuck"), false);
-    outputText("While the scenery certainly isn't anything you'd call \"<i>romantic</i>\" or \"<i>arousing</i>\", the eager little mouse-girl in front of you is quite appealing, so you step up to her, take her in your arms and lightly kiss her. Seeing her eyes widen in surprise for a moment, she soon closes her eyes and returns the kiss. Continuing the kiss you two begin to explore each other. Along the way, you help each other out of your clothes and slowly, almost reluctantly step back so you can for the first time see each other without anything in the way.\n\n", false);
+	outputText("While the scenery certainly isn't anything you'd call \"<i>romantic</i>\" or \"<i>arousing</i>\", the eager little mouse-girl in front of you is quite appealing, so you step up to her, take her in your arms and lightly kiss her. Seeing her eyes widen in surprise for a moment, she soon closes her eyes and returns the kiss. Continuing the kiss you two begin to explore each other. Along the way, you help each other out of your clothes and slowly, almost reluctantly step back so you can for the first time see each other without anything in the way.\n\n", false);
 
-    //(If player has a penis 14" long or more)
-    if(player.cocks[0].cockLength >= 14) outputText("At the size of your penis, Amily's eyes widen, but she still seems to be almost mesmerized. Slowly, blushing furiously and avoiding your gaze, she touches it and begins stroking your member. It soon turns into a veritable hand-job. Not taking her hand away, the mouse-girl guides you to the 'bed' and asks you to lie down. She continues stroking your penis with her hand, but also uses her tail and her tongue to bring you closer and closer to orgasm. Just before you can't hold back anymore, she sits down on your legs and slowly guides the tip of your penis to her netherlips. Soon, this 'almost penetration' overwhelms you and sends you over the edge.\n\n", false);
-    else {
-        outputText("She looks down between your legs and, blushing, smiles. \"<i>It's nice to see a " + player.mf("man","woman") + " who hasn't gone insane about that part.</i>\" She murmurs to you, holding you tightly as she can. Despite the fact you can feel her hands pressed against your back, you suddenly become aware of something stroking your penis as well; it takes a bit of wriggling, which presses her small, perky breasts to your chest in the most interesting way, but you can see that she is using her tail. Working in synch as best you can, the two of you crabwalk over to the pile of bedding and topple over; you land on your back, and she lands on you.\n\n", false);
-       
-        outputText("By this point, your member is rock hard, and Amily pushes, somewhat reluctantly, against your grip, positioning herself so that the two of you are crotch to crotch. Looking up at her, you start to mouth the question \"<i>Are you okay with this?</i>\" to her, but she smiles, nods her head insistently, and then her lips seal themselves against yours again. Her vagina hovers almost teasingly against the tip of your cock as she works up the courage to make the final plunge... and plunge she does, suddenly skewering herself to the hilt upon you, to your shock. You can feel her pained wince, muscles clenching in pain all up her body, and you hold her tighter, kiss her deeper, in an effort to try and comfort her. You lie there, holding her, until she relaxes and unclenches, slowly beginning to work herself back and forth.\n\n", false);
-    }
-    outputText("Enjoying the sensations, you start caressing her to increase her pleasure, too. It doesn't take long for you both to orgasm, before Amily sinks down on you, looking into your eyes with a smile on her face.\n\n", false);
+	//(If player has a penis 14" long or more)
+	if(player.cocks[0].cockLength >= 14) outputText("At the size of your penis, Amily's eyes widen, but she still seems to be almost mesmerized. Slowly, blushing furiously and avoiding your gaze, she touches it and begins stroking your member. It soon turns into a veritable hand-job. Not taking her hand away, the mouse-girl guides you to the 'bed' and asks you to lie down. She continues stroking your penis with her hand, but also uses her tail and her tongue to bring you closer and closer to orgasm. Just before you can't hold back anymore, she sits down on your legs and slowly guides the tip of your penis to her netherlips. Soon, this 'almost penetration' overwhelms you and sends you over the edge.\n\n", false);
+	else {
+		outputText("She looks down between your legs and, blushing, smiles. \"<i>It's nice to see a " + player.mf("man","woman") + " who hasn't gone insane about that part.</i>\" She murmurs to you, holding you tightly as she can. Despite the fact you can feel her hands pressed against your back, you suddenly become aware of something stroking your penis as well; it takes a bit of wriggling, which presses her small, perky breasts to your chest in the most interesting way, but you can see that she is using her tail. Working in synch as best you can, the two of you crabwalk over to the pile of bedding and topple over; you land on your back, and she lands on you.\n\n", false);
+	   
+		outputText("By this point, your member is rock hard, and Amily pushes, somewhat reluctantly, against your grip, positioning herself so that the two of you are crotch to crotch. Looking up at her, you start to mouth the question \"<i>Are you okay with this?</i>\" to her, but she smiles, nods her head insistently, and then her lips seal themselves against yours again. Her vagina hovers almost teasingly against the tip of your cock as she works up the courage to make the final plunge... and plunge she does, suddenly skewering herself to the hilt upon you, to your shock. You can feel her pained wince, muscles clenching in pain all up her body, and you hold her tighter, kiss her deeper, in an effort to try and comfort her. You lie there, holding her, until she relaxes and unclenches, slowly beginning to work herself back and forth.\n\n", false);
+	}
+	outputText("Enjoying the sensations, you start caressing her to increase her pleasure, too. It doesn't take long for you both to orgasm, before Amily sinks down on you, looking into your eyes with a smile on her face.\n\n", false);
 
-    outputText("\"<i>...That was... wow. Uh, I mean.</i>\" She hastily corrects herself, blushing. \"<i>I guess you weren't so bad... I knew I had a good feeling about you.</i>\" She smiles. \"<i>You do know I'm not neccessarily pregnant, right? We're going to have to do this again.</i>\"\n\n", false);
+	outputText("\"<i>...That was... wow. Uh, I mean.</i>\" She hastily corrects herself, blushing. \"<i>I guess you weren't so bad... I knew I had a good feeling about you.</i>\" She smiles. \"<i>You do know I'm not neccessarily pregnant, right? We're going to have to do this again.</i>\"\n\n", false);
 
-    outputText("You smile, and tell her that you're happy to do it with her as often as it takes. She blushes so red ", false);
+	outputText("You smile, and tell her that you're happy to do it with her as often as it takes. She blushes so red ", false);
 	//([horsecock]
 	if(flags[AMILY_NOT_FURRY] == 0) 
 		outputText("it's almost like the fur on her cheeks has turned red.", false);
 	else 
 		outputText("she nearly resembles an imp!", false);
 	outputText("  Excusing herself, you get dressed, receiving a lazy wave goodbye and a happy smile as you head out of the door and head for the main street, from there finding the way back to your camp.\n\n", false);
-    //Affection boost?
-    flags[AMILY_AFFECTION] += 3;
-    stats(0,0,0,0,0,0,-100,0);
-    doNext(13);
-    amilyPreggoChance();
+	//Affection boost?
+	flags[AMILY_AFFECTION] += 3;
+	stats(0,0,0,0,0,0,-100,0);
+	doNext(13);
+	amilyPreggoChance();
 }
 
 function amilySexHappens():void {
@@ -2085,25 +2085,25 @@ function AmilyGetKissed():void {
 }
 //[Take the Kiss]
 function AmilyTakeTheKiss():void {
-    outputText("", true);
-    amilySprite();
-    outputText("Slowly, doing your best to convey that you will stop or back away if Amily is uncomfortable with this, you press your lips tenderly to Amily's.",false)
+	outputText("", true);
+	amilySprite();
+	outputText("Slowly, doing your best to convey that you will stop or back away if Amily is uncomfortable with this, you press your lips tenderly to Amily's.",false)
 	if(flags[AMILY_NOT_FURRY] == 0) 
 		outputText("  It's quite an unusual experience; though her lips proper are as naked as your own, there is fur around them, soft and fine and just close enough to tickle the edges of your own lips, to say nothing of the unusual sensation of kissing someone with a muzzle.  Amily doesn't seem bothered at all. In fact, she kisses you back, and quite eagerly so, too.", false);
 	outputText("\n\n", false);
-    continueAmilySmex();
-    stats(0,0,0,0,0,0,5,0);
+	continueAmilySmex();
+	stats(0,0,0,0,0,0,5,0);
 	//AffectionGAIN!
 	flags[AMILY_AFFECTION] += 1+rand(3);
 }
 
 function continueAmilySmex():void {
-    var x:Number = player.cockThatFits(61);
-    amilySprite();
+	var x:Number = player.cockThatFits(61);
+	amilySprite();
 	outputText(images.showImage("amily-forest-plainfuck"), false);
-    outputText("The time couldn't be any more right for either of you, and you both sink onto the bedding that Amily has prepared. Lying side by side, Amily guides you with surprising efficiency into her entry, and then, once you are comfortably inside, she begins to thrust, her cunt gripping your " + cockDescript(x) + " like a vice.\n\n", false);
+	outputText("The time couldn't be any more right for either of you, and you both sink onto the bedding that Amily has prepared. Lying side by side, Amily guides you with surprising efficiency into her entry, and then, once you are comfortably inside, she begins to thrust, her cunt gripping your " + cockDescript(x) + " like a vice.\n\n", false);
 
-    /*(If player chooses "Share The Pleasure":) 
+	/*(If player chooses "Share The Pleasure":) 
 	{
 		outputText("Determined to make this good for Amily too, you resume stroking and caressing her, doing your best to meet her thrusts with your own, and planting the odd kiss on the nape of her neck", false);
 		//([horsecock]
@@ -2112,11 +2112,11 @@ function continueAmilySmex():void {
 		outputText(". She is surprised, and tenses warily at first, but then melts under your ministrations, squeaking softly in her appreciation of your efforts.", false);
 	}
 	*/
-    outputText("But all good things must come to an end, and soon you both build to a mutual climax. Once you have regained your strength, you stop holding each other and begin to dress, ready to go your separate ways once more. At the door, though, Amily stops you.\n\n", false);
+	outputText("But all good things must come to an end, and soon you both build to a mutual climax. Once you have regained your strength, you stop holding each other and begin to dress, ready to go your separate ways once more. At the door, though, Amily stops you.\n\n", false);
 
-    outputText("\"<i>Thank you, that was... nice...,</i>\" the little mousegirl says with a blush. \"<i>Maybe... we can... do it again?</i>\"\n\n", false);
+	outputText("\"<i>Thank you, that was... nice...,</i>\" the little mousegirl says with a blush. \"<i>Maybe... we can... do it again?</i>\"\n\n", false);
 
-    outputText("She seems surprised that she actually enjoyed it (at least a little), but she's definitely willing to repeat the experience. You assure her that you'll come back, and then resume your travels.", false);
+	outputText("She seems surprised that she actually enjoyed it (at least a little), but she's definitely willing to repeat the experience. You assure her that you'll come back, and then resume your travels.", false);
 	//Knock up, PC stats, etc.
 	flags[AMILY_FUCK_COUNTER]++;
 	amilyPreggoChance();
@@ -2394,7 +2394,7 @@ function amilyFollowerEncounter():void {
 		amilyEggStuff();
 		return;
 	}
-	if(flags[AMILY_INCEST_COUNTDOWN_TIMER] >= 30 && flags[AMILY_FOLLOWER] == 2 && (hours >= 11 && hours <= 13)) {
+	if(flags[AMILY_INCEST_COUNTDOWN_TIMER] >= 30 && flags[AMILY_FOLLOWER] == 2 && (model.time.hours >= 11 && model.time.hours <= 13)) {
 		amilyIncest();
 		return;
 	}
@@ -3637,10 +3637,10 @@ function giveAmilySomePants():void {
 /*
 //[Lactaid]
 function makeTheMouseAMilkCowMoo():void {
-    outputText("", true);
-    outputText("\"<i>Lactaid? You really want to try drinking mouse milk?</i>\" Amily asks, a little uncertainly, a little playfully.  You nod and assure that you do.  \"<i>Alright, if you insist.</i>\" She proclaims, taking the pink bottle from you and drinking the creaminess to be found within.\n\n", false);
+	outputText("", true);
+	outputText("\"<i>Lactaid? You really want to try drinking mouse milk?</i>\" Amily asks, a little uncertainly, a little playfully.  You nod and assure that you do.  \"<i>Alright, if you insist.</i>\" She proclaims, taking the pink bottle from you and drinking the creaminess to be found within.\n\n", false);
 
-    //(If Amily does not lactate and has smaller than C-cup breasts: It's quite obvious when the lactaid kicks in; her (breastsize + breastdescript) suddenly puff out, swelling into proud C-cup breasts, milk flowing freely from her nipples, leaving her shirt both severely strained and soaked in milk.  She squeaks in dismay, and races away, clearly going to try and clean herself up.)
+	//(If Amily does not lactate and has smaller than C-cup breasts: It's quite obvious when the lactaid kicks in; her (breastsize + breastdescript) suddenly puff out, swelling into proud C-cup breasts, milk flowing freely from her nipples, leaving her shirt both severely strained and soaked in milk.  She squeaks in dismay, and races away, clearly going to try and clean herself up.)
 
 	(If Amily does not lactate and has C-cup or bigger breasts: "So...  when is this supposed to start- yeek!" She suddenly squeaks in shock as she realises her shirt is growing damp.  She hastily pulls her top open, grabbing at her dripping breasts.  "I, I just gotta go take care of this." She explains, blushing and then scampering away.
 
@@ -4092,7 +4092,7 @@ function corruptAmilyLickPussiesLikeAPro():void {
 	outputText("Amily excitedly slathers your netherlips with her saliva, licking all around your " + vaginaDescript() + "; every once in a while she'll stop her ministrations to give your ", false);
 	if(player.balls > 0) outputText("balls", false);
 	else outputText(clitDescript(), false);
-    outputText(" a quick kiss.  You pat her head, letting her know you're pleased with her ministrations, but also urging her to get on with it and start eating you out properly.  The silent order does not go unnoticed and Amily plunges her tongue as far into your love-hole as she can"+((flags[AMILY_NOT_FURRY]==0)?"; her fur tickles your labia pleasurably":""), false);
+	outputText(" a quick kiss.  You pat her head, letting her know you're pleased with her ministrations, but also urging her to get on with it and start eating you out properly.  The silent order does not go unnoticed and Amily plunges her tongue as far into your love-hole as she can"+((flags[AMILY_NOT_FURRY]==0)?"; her fur tickles your labia pleasurably":""), false);
 	//[(if PC has balls) 
 	if(player.balls > 0) outputText(" and her small horns gently massage your " + ballsDescriptLight(), false);
 	//[(if PC has a cock)
@@ -4101,14 +4101,14 @@ function corruptAmilyLickPussiesLikeAPro():void {
 	
 	outputText("You wonder, just how has Amily been practicing her pussy eating skills - she's really good at this, and her intimate knowledge of your insides combined with her agile tongue means she can lick your special spot frequently.   Each time her tongue brushes over your g-spot, you reward her with increasingly bigger streams of femcum.   Amily remains in a constant rhythm, and while it is pleasurable you're going to need more if you're to ever reach orgasm; when you look down to order her to get serious you see she's looking back at you with a mischievous look; you giggle and say, \"<i>So that's how it's gonna be huh? Clever little bitch.</i>\"\n\n", false);
 	// More [Horsecock]
-    outputText("You move back and push Amily back into the ground, she hits the ground with a <b>THUD</b> and grins at you.  You move quickly, you sit on top of Amily's face and begin using her mousy "+((flags[AMILY_NOT_FURRY]==0)?"muzzle":"nose")+" like a dildo, rubbing it all over your pussy; her tongue darts out to give little licks and enhance your pleasure.\n\n", false);
+	outputText("You move back and push Amily back into the ground, she hits the ground with a <b>THUD</b> and grins at you.  You move quickly, you sit on top of Amily's face and begin using her mousy "+((flags[AMILY_NOT_FURRY]==0)?"muzzle":"nose")+" like a dildo, rubbing it all over your pussy; her tongue darts out to give little licks and enhance your pleasure.\n\n", false);
 	//(if PC is loose enough [Horsecock] and has a muzzle to fuck with)
 	if(player.vaginalCapacity() >= 45 && flags[AMILY_NOT_FURRY]==0) {
 		outputText("You giggle and decide to take things one step further; you shove Amily's muzzle into your " + vaginaDescript() + "; Amily's eyes bulge with surprise once she feels her muzzle begin to slide inside you and you voice your pleasure with a long moan, \"<i>I'm not letting you breathe until you make me come, slut.</i>\"  With those words, you begin rising and lowering yourself into Amily's muzzle; her tongue darts out to taste your walls once in a while, but most of the time your clenching vagina keeps her muzzle shut, so Amily settles for muzzle-fucking you like the good little cumslut slave she is.\n\n", false);
 	}
 	else {
 		// BEGIN [Horsecock]
-        outputText("You giggle and decide to take things one step further; you ", false);
+		outputText("You giggle and decide to take things one step further; you ", false);
 		if (flags[AMILY_NOT_FURRY] == 0)
 			outputText("hold Amily's muzzle tightly closed and shove Amily's muzzle against your ", false);
 		else 
@@ -4220,7 +4220,7 @@ function corruptAmilysPussyGetsMotherfuckingFucked():void {
 	outputText("You tell Amily to spread her legs and begin undressing; peeling off your " + player.armorName + " piece by piece. Amily doesn't even bother to speak to you; she simply grins in delight, moisture already beginning to flow from her gaping pink vagina.\n\n", false);
 	//(If pregnant: 
 	if(flags[AMILY_INCUBATION] > 0 && flags[AMILY_INCUBATION] < 100) outputText("  Her gravid state doesn't faze her; indeed, she thrusts her bump forward proudly, a visible sign of your mastery over her.", false);
-    outputText("  She flops down onto her " + amilyButt() + " and rolls backwards, spreading her legs out eagerly for you to have access and waving them like hungry, groping limbs, reaching for you in her impatience to start.  You grin in delight, but decide to tease the slutty "+((flags[AMILY_NOT_FURRY]==0)?"mousette":"succubus")+" by staying just out of the reach of her "+((flags[AMILY_NOT_FURRY]==0)?"foot-claws":"shapely feet")+".  \"<i>If you want it, then tell me just how much you want it slut,</i>\" you tease her mockingly, stroking your " + cockDescript(0) + " into erection. "+((flags[AMILY_NOT_FURRY]==0)?" Just watch the heels, and don't dare injure your master.":""), false);
+	outputText("  She flops down onto her " + amilyButt() + " and rolls backwards, spreading her legs out eagerly for you to have access and waving them like hungry, groping limbs, reaching for you in her impatience to start.  You grin in delight, but decide to tease the slutty "+((flags[AMILY_NOT_FURRY]==0)?"mousette":"succubus")+" by staying just out of the reach of her "+((flags[AMILY_NOT_FURRY]==0)?"foot-claws":"shapely feet")+".  \"<i>If you want it, then tell me just how much you want it slut,</i>\" you tease her mockingly, stroking your " + cockDescript(0) + " into erection. "+((flags[AMILY_NOT_FURRY]==0)?" Just watch the heels, and don't dare injure your master.":""), false);
 	//[(if PC has a vagina) 
 	if(player.hasVagina()) outputText("  Your other hand probes your moist fuck-hole for lube to help with your stroking.", false);
 	outputText("\n\n", false);
@@ -5871,14 +5871,16 @@ function amilyDartGo():void {
 			temp--;
 			if(player.str >= 2) {
 				player.str--;
-				strDown.visible = true;
-				strUp.visible = false;
+				mainView.statsView.showStatDown( "str" );
+				// strDown.visible = true;
+				// strUp.visible = false;
 				player.addStatusValue("Amily Venom",1,1);
 			}
 			if(player.spe >= 2) {
 				player.spe--;
-				speDown.visible = true;
-				speUp.visible = false;
+				mainView.statsView.showStatDown( "spe" );
+				// speDown.visible = true;
+				// speUp.visible = false;
 				player.addStatusValue("Amily Venom",2,1);
 			}
 		}
@@ -6688,8 +6690,8 @@ function amilyNoFur():void {
 	amilySprite();
 	flags[AMILY_OFFERED_DEFURRY] = 1;
 	outputText("You shake your head gently and explain that your position has not changed. Amily looks annoyed, but respects your decision.  You interrupt her next thought with a clarification; you don't want to have sex with her because of her appearance.  \"<i>...What do you mean?</i>\" she asks, one of her hands idly moving up and tugging one of her mousey ears.  As gently as you can, you explain that mice (and rats, for that matter) are considered pests in your home world, and you can't find yourself inclined to mate with a walking version of them.\n\n",true);
-    outputText("There's a long pause while Amily digests your implication.  \"<i>You want me to... change?</i>\" she asks quietly.  \"<i>Would that... make you want to mate with me?</i>\"  You can't make any promises, but it would definitely change your considerations, you explain.\n\n",false);
-    outputText("After another long silence, she sighs.  \"<i>I don't know.  What would my family say if I just... went and made myself a completely different person, all for the sake of a human?</i>\"  You slowly move to her and lay a hand on her shoulder, forcing her to look once more into your eyes.  It's not the fact that she won't be a mouse, you insist.  It's the fact that she's moving on for the sake of her race.  She manages a little smile at that, her expression brightening just a bit.  \"<i>I'll think about it,</i>\" she finally decides.  \"<i>If you can find some non-demonic reagents, perhaps we can give it a try.  If anything bad happens, though,</i>\" she warns, wagging a finger at you threateningly.  She backs off and stands awkwardly for a second.\n\n",false);
+	outputText("There's a long pause while Amily digests your implication.  \"<i>You want me to... change?</i>\" she asks quietly.  \"<i>Would that... make you want to mate with me?</i>\"  You can't make any promises, but it would definitely change your considerations, you explain.\n\n",false);
+	outputText("After another long silence, she sighs.  \"<i>I don't know.  What would my family say if I just... went and made myself a completely different person, all for the sake of a human?</i>\"  You slowly move to her and lay a hand on her shoulder, forcing her to look once more into your eyes.  It's not the fact that she won't be a mouse, you insist.  It's the fact that she's moving on for the sake of her race.  She manages a little smile at that, her expression brightening just a bit.  \"<i>I'll think about it,</i>\" she finally decides.  \"<i>If you can find some non-demonic reagents, perhaps we can give it a try.  If anything bad happens, though,</i>\" she warns, wagging a finger at you threateningly.  She backs off and stands awkwardly for a second.\n\n",false);
 	outputText("\"<i>Well, uh... bye,</i>\" Amily concludes, whirling around and walking away.  You can't be sure, but it seems like she's exaggerating the sway of her hips a bit.  You don't think much of it, heading back toward camp and beginning to formulate a concoction to de-mouse your potential breeding partner.  Perhaps... a <b>golden seed</b> for a human face, a <b>black egg</b> to get rid of the fur, and some <b>purified succubus milk</b> to round things off.  You make a mental note to remember those ingredients, for they won't show up again and you'd feel positively silly if you somehow completely forgot them.\n\n",false);
 	doNext(13);
 }

@@ -2549,7 +2549,7 @@ function izmaKidsPlaytime():void {
 	choices[choices.length] = 5;
 	//Select correct scene!
 	var choice:Number = choices[rand(choices.length)];
-	if(hours < 10 && flags[ANEMONE_KID] > 0 && rand(2) == 0) {
+	if(model.time.hours < 10 && flags[ANEMONE_KID] > 0 && rand(2) == 0) {
 		kidAWatchesSharks();
 		return;
 	}

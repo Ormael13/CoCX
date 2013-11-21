@@ -1,4 +1,4 @@
-package classes 
+﻿package classes 
 {
 	import classes.Creature;
 	
@@ -809,12 +809,17 @@ package classes
 			}
 			return "foot";
 		}
-		
+		public function isPregnant():Boolean {
+			if (pregnancyIncubation == 0) return false;
+			return true;
+		}
 		//fertility must be >= random(0-beat)
 		public function knockUp(type:int = 0, incubation:int = 0, beat:int = 100, arg:int = 0):void
 		{
 			//Contraceptives cancel!
 			if (hasStatusAffect("Contraceptives") >= 0 && arg < 1)
+				return;
+			if (hasStatusAffect("gooStuffed") >= 0) 
 				return;
 			var bonus:int = 0;
 			//If arg = 1 (always pregnant), bonus = 9000
@@ -1693,7 +1698,7 @@ package classes
 		{
 			if (arg > cockTotal() - 1 || arg < 0)
 				return false;
-			return (cocks[arg].cockType == CockTypesEnum.DOG || cocks[arg].cockType == CockTypesEnum.DISPLACER);
+			return (cocks[arg].cockType == CockTypesEnum.DOG || cocks[arg].cockType == CockTypesEnum.FOX || cocks[arg].cockType == CockTypesEnum.DISPLACER);
 		}
 		
 		

@@ -1,4 +1,4 @@
-﻿/**
+/**
  * All the variables that have been left around but don't fit into the GlobalVariables file
  */
 
@@ -6,7 +6,7 @@
 
 //Used when save/loading
 var notes:String = "";
-nameBox.maxChars = 54;
+// nameBox.maxChars = 54;
 
 //Images for image pack!
 //NO! Images now work through ImageManager in GlobalVariables

@@ -1,4 +1,4 @@
-﻿//Harpy MILF.  Hellzyeah
+//Harpy MILF.  Hellzyeah
 //-More fertile than average harpy.
 //-In 'Upper Mountain' area (High Mountain?)
 //-Blurb about other harpies flying away as PC approaches.
@@ -670,10 +670,10 @@ function luststickApplication(hours:Number = 4):void {
 	//Immune to luststick?
 	if(player.hasPerk("Luststick Adapted") >= 0) return;
 	//Increment luststick resistance
-	flags[UNKNOWN_FLAG_NUMBER_00285] += Math.floor(hours/2);
+	flags[UNKNOWN_FLAG_NUMBER_00285] += Math.floor(model.time.hours/2);
 	if(!player.hasCock()) return;
 	//Max of 20.
-	if(hours > 20) hours = 20;
+	if(model.time.hours > 20) model.time.hours = 20;
 	//Add duration if under effects
 	if(player.hasStatusAffect("Luststick") >= 0) {
 		//Max?
@@ -682,15 +682,15 @@ function luststickApplication(hours:Number = 4):void {
 		//Not maxed - increase duration
 		else {
 			//lower hours if it pushes it too high.
-			if(player.statusAffectv1("Luststick") + hours > 20) {
-				hours = 20 - player.statusAffectv1("Luststick");
+			if(player.statusAffectv1("Luststick") + model.time.hours > 20) {
+				model.time.hours = 20 - player.statusAffectv1("Luststick");
 			}
 			//increase!
-			player.addStatusValue("Luststick",1,hours);
+			player.addStatusValue("Luststick",1,model.time.hours);
 		}
 	}
 	//Apply a little of doctor L (thats Dr Lipstick you tard!)
-	else player.createStatusAffect("Luststick",hours,0,0,0);
+	else player.createStatusAffect("Luststick",model.time.hours,0,0,0);
 }
 
 

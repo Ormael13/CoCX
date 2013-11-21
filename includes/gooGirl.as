@@ -396,6 +396,8 @@ function beatUpGoo():void {
 		var sex3N:Number = 0;
 		var sex4S:String = "";
 		var sex4N:Number = 0;
+		var valeria = valeriaAndGooThreeStuff;
+		if(player.armorName != "goo armor" || player.hasStatusAffect("gooStuffed") >= 0) valeria = 0;
 		var eggs:int = 0;
 		if(player.canOvipositBee()) eggs = 3848;
 		if(player.hasCock()) {
@@ -448,8 +450,12 @@ function beatUpGoo():void {
 				}
 			}
 		}
-		
-		choices(sex1S,sex1N,sex2S,sex2N,sex3S,sex3N,sex4S,sex4N,"Lay Eggs",eggs,"",0,"",0,"",0,"Make Slave",gooTF,"Leave",5007);
+		if(valeria != 0) {
+			outputText("\n\nValeria's armored form seems to ebb towards the puddled goo-woman before you, almost eager to close the distance with her despite her pledge to protect you. ");
+			if(flags[TIMES_VALERIA_GOO_THREESOMED] == 0) outputText("Do you offer a threesome with the girl to Valeria? It could get a little weird....");
+			else outputText("Do you offer a threesome with the girl to Valeria? She'll likely try flood with you with more sloshing, shuddering pleasure than your body can handle.");
+		}
+		choices(sex1S,sex1N,sex2S,sex2N,sex3S,sex3N,sex4S,sex4N,"Lay Eggs",eggs,"",0,"",0,"Valeria",valeria,"Make Slave",gooTF,"Leave",5007);
 	}
 }
 

@@ -875,7 +875,7 @@ function shouldraSexMenu():void {
 	spriteSelect(67);
 	outputText("Shouldra stirs from somewhere deep inside you, excitement evident in the swiftness of her reaction.  \"<i>Is it time for some fun, Champ?</i>\" she asks happily, her increased lust affecting you just a bit.  Do you oblige her?");
 	var vala:int = 0;
-	if(flags[UNKNOWN_FLAG_NUMBER_00119] != 0 && (hours >= 12 && hours <= 21)) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00119] != 0 && (model.time.hours >= 12 && model.time.hours <= 21)) {
 		outputText("\n\nVala might interest Shouldra.  You could go introduce them...");
 		vala = 3668;
 	}
@@ -1594,8 +1594,8 @@ function shouldraAndWormsYoureGonnaHaveABadTime():void {
 	if(player.cocks[0].cockLength < 48) outputText(" and cuts right to the chase, ballooning your [cock] into a rigid, wide, four-foot tall slab of meat");
 	outputText(".  Unable to contain her delight, she hastily hugs your enormous dick firmly against your body and squeezes vigorously, rubbing your face against your [cockHead].  A warm stream of pre oozes out and onto your possessed face.");
 	outputText("\n\nA strange sensation in the pleasant liquid slowly lures the phantom from her shaft-obsessed trance, your eyes slowly opening to discover what's at fault.  One of your worms managed to fall free of your loins and right onto the tip of your nose... much to Shouldra's chagrin.  The spirit slowly identifies the parasite, your body shuddering as she smacks it clear off your face.  She peers up at your large cockslit to find two more of the suckers lounging about in their makeshift hot tub, enjoying the brisk ");
-	if(hours <= 12) outputText("morning ");
-	else if(hours <= 5) outputText("afternoon");
+	if(model.time.hours <= 12) outputText("morning ");
+	else if(model.time.hours <= 5) outputText("afternoon");
 	else outputText("evening");
 	outputText("air.  Your hands clue the eidolon in to further activity, introducing her to your urethra all the way down to your [balls], every square wriggling inch chock-full of the little buggers, exploring their extended living quarters.");
 	outputText("\n\nWhat follows is an unearthly scream that may have killed any small nearby woodland creatures with its intensity.  It certainly does a number on your hearing, anyway.  Shouldra jumps to your [feet], wagging your monstrous meat every which way as your hands furiously pat away at your head.  A few worms slide free from your flailing penis, but not many.  Your body tenses up, trembling profusely as your pelvis is pushed as far ahead of you as possible.  The typically confident spectre now has you frozen in place, your entire body poised and jittering in fear as you're forced to watch for any more unwelcomed guests.");

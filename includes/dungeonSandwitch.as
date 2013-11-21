@@ -830,7 +830,7 @@ function turnIntoASammitch():void {
 	
 	outputText("\n\nKneeling before your helpless form, the mysterious witch sighs and whispers, \"<i>Why can't you just accept it?  You belong with us.  We're going to fix this desert - and Mareth.  The demons can't stop us.  The monsters won't stop us.  They CAN'T.</i>\"  She gently brushes her hand through your hair, smearing you with her sex-juices unthinkingly as she prattles on, \"<i>Just relax, babe.  Here, maybe this will help.</i>\"  The Witch's hands are suddenly holding you by your ears and her lips are moving in nonsensical ways.  Whatever she's saying you can't hear it with how she's holding you.");
 	
-	outputText("\n\nHer spell goes off like a gunshot, at least that's what it seems like to you.  It cracks through your consciousness with a booming ripple that stuns you into unthinking silence, your thought process momentarily short-circuited.  Your mouth lamely opens, your tongue slipping out and drooling as your whole body goes limp, uncontrolled. If it weren't for the Cum Witch's capable hands, you'd have fallen over into her some of her fluids, but she kindly keeps you up, even as she begins to remove your [armor].");
+	outputText("\n\nHer spell goes off like a gunshot, at least that's what it seems like to you.  It cracks through your consciousness with a booming ripple that stuns you into unthinking silence, your thought process momentarily short-circuited.  Your mouth lamely opens, your tongue slipping out and drooling as your whole body goes limp, uncontrolled. If it weren't for the Cum Witch's capable hands, you'd have fallen over into some of her fluids, but she kindly keeps you up, even as she begins to remove your [armor].");
 	
 	outputText("\n\n\"<i>There, there hun, isn't that better?</i>\" the sorceress asks, \"<i>It's always better to listen to me.</i>\"  You stare at her, unblinking.  \"<i>Right,</i>\" she giggles, \"<i>That's what I thought!  You're going to love being a Sand Witch, absolutely love it.</i>\"  A dark hand, lighter on the palm than the outside gently touches your cheek and guides your head into a little nod.  She quips, \"<i>That's right, being a Sand Witch is the best!  You'll get to have four big, milky tits to milk whenever you have free time, and two cunts that you can get filled any time you come visit.</i>\"  Each rambling explanation slips into your ears and settles over your dimmed mind, slipping into the thoughtless, crevices before your brain reasserts itself.");
 	
@@ -2401,7 +2401,8 @@ function explainYourSelfToZeSandBitch():void {
 		outputText("  \"<i>Your tale has the ring of truth to it, [name].  I am the Sand Mother of this coven, and it seems we are not enemies after all.  If you like I can instruct my daughters to let you pass through the sands unhindered.</i>\"  She spreads her arms graciously and asks, \"<i>Was there anything you would like to discuss?  It has been an age since I've had a new arrival to converse with.</i>\"\n\n(+200 XP)");
 		//(Award XP)
 		player.XP += 200;
-		xpUp.visible = true;
+		mainView.statsView.showStatUp( 'xp' );
+		//xpUp.visible = true;
 		statScreenRefresh();
 		//(Set friendly)
 		flags[SAND_WITCHES_FRIENDLY] = 1;
@@ -2552,7 +2553,8 @@ function talkDownTheMother():void {
 	
 	outputText("\n\n\"<i>Is there something you would like to discuss, or aid you would request?  It has been a great deal of time since I have had the pleasure of discourse with an outsider.</i>\"");
 	player.XP += 200;
-	xpUp.visible = true;
+	mainView.statsView.showStatUp( 'xp' );
+	// xpUp.visible = true;
 	statScreenRefresh();
 	//(Set friendly)
 	flags[SAND_WITCHES_FRIENDLY] = 1;
@@ -3494,7 +3496,7 @@ function friendlyCumWitchBlessing():void {
 function changeMindAboutBlessings():void {
 	clearOutput();
 	outputText("Thinking better of it, you grab your [armor] and get dressed, telling the jizz-obsessed enchantress that you don't need her gifts for now.");
-	outputText("\n\n\"<i>Awww, and I thought were going to have some fun,</i>\" the sable seductress purrs.  \"<i>Perhaps you'll see the error of your ways and come back for a proper blessing soon.</i>\"  She pumps her fat cock until thick dribbles of sperm-tinted pre-cum slobbers out of her drooling dick-tip once more.  \"<i>Don't be a stranger.</i>\"");
+	outputText("\n\n\"<i>Awww, and I thought we were going to have some fun,</i>\" the sable seductress purrs.  \"<i>Perhaps you'll see the error of your ways and come back for a proper blessing soon.</i>\"  She pumps her fat cock until thick dribbles of sperm-tinted pre-cum slobbers out of her drooling dick-tip once more.  \"<i>Don't be a stranger.</i>\"");
 	doNext(1);
 }
 

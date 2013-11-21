@@ -1,4 +1,4 @@
-﻿//VARS
+//VARS
 //player.statusAffectv1("Edryn") >= 4 = FREE SEX
 // EDRYN_TIMES_HEL_THREESOMED:int = 404;
 // HEL_EDRYN_OFFER:int = 405;
@@ -446,7 +446,7 @@ function fuckEdrynNonTaur():void {
 }
 
 function edrynBar():Boolean {
-	if(flags[UNKNOWN_FLAG_NUMBER_00070] == 0 && hours >= 14 && hours <= 19 && (hours < 17 || flags[UNKNOWN_FLAG_NUMBER_00069] == 0))
+	if(flags[UNKNOWN_FLAG_NUMBER_00070] == 0 && model.time.hours >= 14 && model.time.hours <= 19 && (model.time.hours < 17 || flags[UNKNOWN_FLAG_NUMBER_00069] == 0))
 		return true;
 	return false;
 }
@@ -1066,8 +1066,7 @@ function eatEdrynPussyLikeABawss():void {
 	
 	outputText("\n\nLike magic, the crushing pressure is gone, and you're free to plumb her depths with wanton abandon.  You groan throatily as you begin to hump her again, this time taking it slow enough not to rouse her ire, your hands wrapping halfway around her ");
 	if(flags[EDRYN_PREGNANCY_INCUBATION] > 0) outputText("baby-filled ");
-	outputText("middle for support, [legs] dangling slightly above the ground as you twist to ram your " + cockDescript(x));
-	if(y>= 0) outputText(" and " + cockDescript(y));
+	outputText("middle for support, [legs] dangling slightly above the ground as you twist to ram your [cocks]");
 	outputText(" inside.  Slurps and squishes echo through the small room while you work Edryn's gushing, well-lubed gash.  Moaning excitedly, the horse-girl is starting to get into it, and you gradually pick up your tempo until your [hips] are clapping wetly against her soaked haunches.  She whickers and glances back over her shoulder, blushing so red you briefly wonder if you're fucking a demoness.");
 	
 	outputText("\n\nWithout warning, her cunt abruptly squeezes down again, not as hard as before, but enough to cause you a modicum of pain as you saw through her drizzling nethers.  The 'splat-splat-splat' of her lusty moisture falling grows ever louder as you plow through her glittering gates.  She's getting wetter and wetter, soaked with girl-cum.  Her secretions combine with the increased tightness to overwhelm your endurance, and with her high body temperature, it feels like your dick is little more than a wax candle, melting into a puddle of white, orgasmic goo.");

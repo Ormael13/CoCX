@@ -1,4 +1,4 @@
-﻿
+
 function inCombat():Boolean {
 	if(gameState == 1 || gameState == 2) return true;
 	return false;
@@ -179,15 +179,10 @@ function doCombat(eventNum:Number)
 	
 	if(eventNum == 5000) {
 		flags[IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 0;
-		dataBG.visible = false;
-		dataText.visible = false;
-		appearanceText.visible = false;
-		appearanceBG.visible = false;
-		perksBG.visible = false;
-		perksText.visible = false;
-		b1Text.visible = true;
-		gButtons[0].visible = true;
-		b1Text.htmlText = "Attack";
+		mainView.hideMenuButton( MainView.MENU_DATA );
+		mainView.hideMenuButton( MainView.MENU_APPEARANCE );
+		mainView.hideMenuButton( MainView.MENU_PERKS );
+		mainView.setButton( 0, "Attack" );
 		var waitT:String = "Wait";
 		if(monster.hasStatusAffect("level") >= 0) waitT = "Climb";
 		outputText("", true);
@@ -2614,14 +2609,10 @@ function doCombat(eventNum:Number)
 		outputText("<b>GAME OVER</b>", true);
 		if(flags[EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "",0,"NewGamePlus",10035,"",0,"CHEAT", 1);
 		else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus",10035, "BLAH", 0, "LULZ", 0);
-		dataBG.visible = true;
-		dataText.visible = true;
-		appearanceText.visible = false;
-		appearanceBG.visible = false;
-		levelText2.visible = false;
-		levelBG.visible = false;
-		perksText.visible = false;
-		perksBG.visible = false;
+		mainView.showMenuButton( MainView.MENU_DATA );
+		mainView.hideMenuButton( MainView.MENU_APPEARANCE );
+		mainView.hideMenuButton( MainView.MENU_LEVEL );
+		mainView.hideMenuButton( MainView.MENU_PERKS );
 		gameState = 0;
 		inDungeon = false;
 	}
@@ -2630,14 +2621,10 @@ function doCombat(eventNum:Number)
 		outputText("\n\n<b>GAME OVER</b>", false);
 		if(flags[EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "",0,"NewGamePlus",10035,"",0,"Debug Cheat", 1);
 		else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus", 10035, "BLAH", 0, "LULZ", 0);
-		dataBG.visible = true;
-		dataText.visible = true;
-		appearanceText.visible = false;
-		appearanceBG.visible = false;
-		levelText2.visible = false;
-		levelBG.visible = false;
-		perksText.visible = false;
-		perksBG.visible = false;
+		mainView.showMenuButton( MainView.MENU_DATA );
+		mainView.hideMenuButton( MainView.MENU_APPEARANCE );
+		mainView.hideMenuButton( MainView.MENU_LEVEL );
+		mainView.hideMenuButton( MainView.MENU_PERKS );
 		gameState = 0;
 		inDungeon = false;
 	}
@@ -4505,7 +4492,8 @@ function takeDamage(damage:Number, noMod:Boolean = false):Number {
 	//Prevent negatives
 	if(player.HP - damage < 1) {
 		player.HP = 0;
-		hpDown.visible = true;
+		mainView.statsView.showStatDown( 'hp' );
+		// hpDown.visible = true;
 		if(gameState == 1 || gameState == 2) doNext(5010);
 		//Round
 		damage = Math.round(damage);
@@ -4520,7 +4508,8 @@ function takeDamage(damage:Number, noMod:Boolean = false):Number {
 	if(flags[MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
 		stats(0,0,0,0,0,0,int(damage/2),0);
 	}
-	hpDown.visible = true;
+	mainView.statsView.showStatDown( 'hp' );
+	// hpDown.visible = true;
 	return damage;
 }
 //ENEMYAI!
@@ -4812,8 +4801,9 @@ function enemyAI():void {
 function clearStatuses(visibility:Boolean):void {
 	while(player.hasStatusAffect("Web") >= 0) {
 		player.spe += player.statusAffectv1("Web");
-		speUp.visible = true;
-		speDown.visible = false;
+		mainView.statsView.showStatUp( 'spe' );
+		// speUp.visible = true;
+		// speDown.visible = false;
 		player.removeStatusAffect("Web");
 	}
 	if(player.hasStatusAffect("Shielding") >= 0) player.removeStatusAffect("Shielding");
@@ -4856,13 +4846,15 @@ function clearStatuses(visibility:Boolean):void {
 	if(monster.hasStatusAffect("Twu Wuv") >= 0) {
 		player.inte += monster.statusAffectv1("Twu Wuv");
 		statScreenRefresh();
-		inteDown.visible = false;
-		inteUp.visible = true;		
+		mainView.statsView.showStatUp( 'inte' );
+		// inteDown.visible = false;
+		// inteUp.visible = true;		
 	}
 	if(player.hasStatusAffect("Naga Venom") >= 0) {
 		player.spe += player.statusAffectv1("Naga Venom");
-		speUp.visible = true;
-		speDown.visible = false;
+		mainView.statsView.showStatUp( 'spe' );
+		// speUp.visible = true;
+		// speDown.visible = false;
 		//stats(0,0,player.statusAffectv1("Naga Venom"),0,0,0,0,0);
 		player.removeStatusAffect("Naga Venom");
 	}
@@ -4885,8 +4877,10 @@ function clearStatuses(visibility:Boolean):void {
 	if(player.hasStatusAffect("HarpyBind") >= 0) player.removeStatusAffect("HarpyBind");
 	if(player.hasStatusAffect("Called Shot") >= 0) {
 		player.spe += player.statusAffectv1("Called Shot");
-		speDown.visible = false;
-		speUp.visible = true;
+		
+		mainView.statsView.showStatUp( 'spe' );
+		// speDown.visible = false;
+		// speUp.visible = true;
 		player.removeStatusAffect("Called Shot");
 	}
 	if(player.hasStatusAffect("DemonSeed") >= 0) {
@@ -4926,23 +4920,28 @@ function clearStatuses(visibility:Boolean):void {
 		player.spe += player.statusAffectv2("Anemone Venom");
 		//Make sure nothing got out of bounds
 		stats(0,0,0,0,0,0,0,0);
-		speUp.visible = true;
-		strUp.visible = true;
+
+		mainView.statsView.showStatUp( 'spe' );
+		mainView.statsView.showStatUp( 'str' );
+		// speUp.visible = true;
+		// strUp.visible = true;
 		player.removeStatusAffect("Anemone Venom");
 	}
 	if(player.hasStatusAffect("Gnoll Spear") >= 0) {
 		player.spe += player.statusAffectv1("Gnoll Spear");
 		//Make sure nothing got out of bounds
 		stats(0,0,0,0,0,0,0,0);
-		speUp.visible = true;
-		speDown.visible = false;
+		mainView.statsView.showStatUp( 'spe' );
+		// speUp.visible = true;
+		// speDown.visible = false;
 		player.removeStatusAffect("Gnoll Spear");
 	}
 	if(player.hasStatusAffect("Basilisk Compulsion") >= 0) player.removeStatusAffect("Basilisk Compulsion");
 	if(player.hasStatusAffect("BasiliskSlow") >= 0) {
 		player.spe += player.statusAffectv1("BasiliskSlow");
-		speUp.visible = true;
-		speDown.visible = false;
+		mainView.statsView.showStatUp( 'spe' );
+		// speUp.visible = true;
+		// speDown.visible = false;
 		player.removeStatusAffect("BasiliskSlow");
 	}
 	while(player.hasStatusAffect("Izma Bleed") >= 0) player.removeStatusAffect("Izma Bleed");
@@ -5333,8 +5332,9 @@ function combatStatusesUpdate():void {
 		if(player.hasPerk("Medicine") >= 0 && rand(100) <= 14) {
 			outputText("You manage to cleanse the naga venom from your system with your knowledge of medicine!\n\n", false);
 			player.spe += player.statusAffectv1("Naga Venom");
-			speUp.visible = true;
-			speDown.visible = false;
+			mainView.statsView.showStatUp( 'spe' );
+			// speUp.visible = true;
+			// speDown.visible = false;
 			player.removeStatusAffect("Naga Venom");
 		}
 		else if(player.spe > 3) {
@@ -5490,14 +5490,10 @@ function regeneration(combat:Boolean = true):void {
 	}
 }
 function startCombat(monsterNum:Number):void {
-	dataBG.visible = false;
-	dataText.visible = false;
-	appearanceText.visible = false;
-	appearanceBG.visible = false;
-	levelText2.visible = false;
-	levelBG.visible = false;
-	perksText.visible = false;
-	perksBG.visible = false;
+	mainView.hideMenuButton( MainView.MENU_DATA );
+	mainView.hideMenuButton( MainView.MENU_APPEARANCE );
+	mainView.hideMenuButton( MainView.MENU_LEVEL );
+	mainView.hideMenuButton( MainView.MENU_PERKS );
 	//Flag the game as being "in combat"
 	gameState = 1;
 	//Clear arrays in preparation
@@ -9548,7 +9544,7 @@ function startCombat(monsterNum:Number):void {
 		monster.short = "Zetaz";
 		monster.imageName = "zetaz";
 		monster.long="Zetaz has gone from a pipsqueak to the biggest imp you've seen!  Though he has the familiar red skin, curving pointed horns, and wings you would expect to find on an imp, his feet now end in hooves, and his body is covered with thick layers of muscle.  If the dramatic change in appearance is any indication, he's had to toughen up nearly as much as yourself over the past ";
-		if(days < 60) monster.long += "weeks";
+		if(model.time.days < 60) monster.long += "weeks";
 		else monster.long += "months";
 		monster.long += ".  Zetaz still wears the trademark imp loincloth, though it bulges and shifts with his movements in a way that suggest a considerable flaccid size and large, full sack.  His shoulders are wrapped with studded leather and his wrists are covered with metallic bracers.  The imp has clearly invested in at least a little additional protection.  It does not look like he carries a weapon.";
 		monster.plural = false;
@@ -15052,7 +15048,7 @@ function showMonsterLust():void {
 		//{Bonus Lust Desc (50-75)}
 		else if(monster.lust < 75) outputText("Wobbling dangerously, you can see her semi-hard shaft rustling the fabric as she moves, evidence of her growing needs.  ");
 		//{75+}
-		if(monster.lust >= 75) outputText("Swelling obscenely, the Cum Witch's thick cock stands out hard and proud, its bulbous tip rustling through the folds of her fabric as she moves and leaving dark smears it its wake.  ");
+		if(monster.lust >= 75) outputText("Swelling obscenely, the Cum Witch's thick cock stands out hard and proud, its bulbous tip rustling through the folds of her fabric as she moves and leaving dark smears in its wake.  ");
 		//(85+}
 		if(monster.lust >= 85) outputText("Every time she takes a step, those dark patches seem to double in size.  ");
 		//{93+}
@@ -16733,10 +16729,12 @@ function spellMight():void {
 		player.changeStatusValue("Might",1,tempStr);
 		player.changeStatusValue("Might",2,tempTou);
 		if(player.str < 100) {
-			strUp.visible = true;
-			strDown.visible = false;
-			touUp.visible = true;
-			touDown.visible = false;
+			mainView.statsView.showStatUp( 'str' );
+			// strUp.visible = true;
+			// strDown.visible = false;
+			mainView.statsView.showStatUp( 'tou' );
+			// touUp.visible = true;
+			// touDown.visible = false;
 		}
 		player.str += player.statusAffectv1("Might");
 		player.tou += player.statusAffectv2("Might");

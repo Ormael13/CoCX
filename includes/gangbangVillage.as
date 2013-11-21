@@ -1,4 +1,4 @@
-﻿/* Written by Nonesuch and PKD, edited by Abraxas, Anzuaz, 05095coc and some helpful anons; ideas suggested by Abraxas, G3 and some helpful anons. */
+/* Written by Nonesuch and PKD, edited by Abraxas, Anzuaz, 05095coc and some helpful anons; ideas suggested by Abraxas, G3 and some helpful anons. */
 
 //const DECLINED_TO_VISIT_REBECCS_VILLAGE:int = 500;
 //const TIMES_IN_DEMON_PIT:int = 501;
@@ -176,9 +176,9 @@ function acceptRebeccsPlea(firstTime:Boolean = false, sacrificed:Boolean = false
 function intoTheDemonPit(sacrifice:Boolean = true):void {
 	clearOutput();
 	//N is the number of hours left before night
-	if(hours < 21) {
-		outputText("<b>" + Num2Text(21-hours) + " hours pass...</b>\n");
-		hours = 21;
+	if(model.time.hours < 21) {
+		outputText("<b>" + Num2Text(21-model.time.hours) + " hours pass...</b>\n");
+		model.time.hours = 21;
 		statScreenRefresh();
 	}
 	outputText("You are awakened by a sudden cackling, and open your eyes; you are almost entirely surrounded by darkness, and the dim light provided by the menacing red moon only makes the landscape bleaker.");
@@ -345,8 +345,8 @@ function loseOrSubmitToVapula():void {
 
 function wakeUpAfterDemonGangBangs():void {
 	clearOutput();
-	hours = 7;
-	days++;
+	model.time.hours = 7;
+	model.time.days++;
 	outputText("When you wake up, you are alone, and your restraints are broken.  You are sloshing in a pool of stinky juices; your mouth and ears are still full of it.  Your whole body is covered with a thin white layer that must certainly be dried spooge.  Underneath, you're nothing but bruises and every movement seems to hurt.  A few meters away, outside the pit, you notice your items and your gear.  The village itself appears to be empty... your best assumption is that the residents are hiding, either from shame at having sacrificed you or from awkwardness at the prospect of talking to a sloshing, crusty cumdumpster.  Wearily, you head back to your camp.");
 	//+med-high corruption, - libido, - toughness, - strength, +20 fatigue, high imp preg chance, slimefeed
 	fatigue(20);
@@ -522,8 +522,8 @@ function rapeZeVapula():void {
 		player.knockUp(1,432);
 	}
 	//PC is redirected to camp, next morning. No nightly camp scenes. 
-	hours = 7;
-	days++
+	model.time.hours = 7;
+	model.time.days++;
 	eventParser(5007);
 }
 
@@ -572,7 +572,7 @@ function owcaMainScreenOn():void {
 	var pit = 0;
 	var herd = 0;
 	var tavern = 0;
-	if(hours >= 16 && flags[OWCA_SACRIFICE_DISABLED] == 0) {
+	if(model.time.hours >= 16 && flags[OWCA_SACRIFICE_DISABLED] == 0) {
 		//Pit. Requires 16:00 or later. Leads to the night gangbang (with possible fight) scene, this time fully equipped and clothed. Attitude is raised by 3.
 		pit = zePit;
 	}

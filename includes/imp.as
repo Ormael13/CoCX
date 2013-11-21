@@ -179,7 +179,8 @@ function sprocketImp():void {
 	//new PG
 	outputText("Satisfied, his dick slides from you and he flies away as mixed seed continues to spill from your abused body. Your limbs grow weak, and you fall from the tree with a hard thud before losing consciousness.  ", false);
 	//Take some damage
-	hpDown.visible = true;
+	mainView.statsView.showStatDown( 'hp' );
+	// hpDown.visible = true;
 	player.HP -= 10;
 	if(player.HP < 1) player.HP = 1;
 	eventParser(5007);
@@ -313,7 +314,7 @@ function centaurOnImpMale(vape:Boolean = false):void {
 	}
 	//Tentacledicks!
 	//{{Player has 1+ very long (smallest 2+ feet) tentacle cocks}}
-	if(player.cockTotal() > 1 && player.cocks[biggestCockIndex()].cockLength >= 24) {
+	if(player.cockTotal() > 1 && player.cocks[player.biggestCockIndex()].cockLength >= 24) {
 		outputText("As your shadow falls over it, it looks with a hint of fear between your legs, and then its eyes widen in a mixture of apprehension and lust.  Before you can even more the little creatures scrambles forward between your hooves and wraps its hands around your " + cockDescript(player.biggestCockIndex()) + ".  Its tongue begins to trail all along the length of it as its small hands stroke it intensely.\n\n", false);
 		//<< Cor <50>>
 		if(player.cor < 50) {

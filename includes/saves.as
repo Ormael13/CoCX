@@ -1,4 +1,4 @@
-﻿import flash.net.FileReference;
+import flash.net.FileReference;
 import flash.events.Event;
 import flash.net.URLRequest;
 import flash.utils.ByteArray;
@@ -109,11 +109,11 @@ function loadScreen():void
 
 function saveScreen():void
 {
-	nameBox.x = 210;
-	nameBox.y = 620;
-	nameBox.width = 550;
-	nameBox.text = "";
-	nameBox.visible = true;
+	mainView.nameBox.x = 210;
+	mainView.nameBox.y = 620;
+	mainView.nameBox.width = 550;
+	mainView.nameBox.text = "";
+	mainView.nameBox.visible = true;
 	var test;
 	
 	outputText("", true);
@@ -160,24 +160,24 @@ function saveScreen():void
 
 function saveLoad(e:MouseEvent):void
 {
-	eventTestInput.x = -10207.5;
-	eventTestInput.y = -1055.1;
+	mainView.eventTestInput.x = -10207.5;
+	mainView.eventTestInput.y = -1055.1;
 	//Hide the name box in case of backing up from save
 	//screen so it doesnt overlap everything.
-	nameBox.visible = false;
+	mainView.nameBox.visible = false;
 	outputText("", true);
 	outputText("<b>Frequently Asked Questions</b>:\nWhere are my saves located?\n", false);
-	outputText("<i>In Windows Vista/7 (IE/FireFox/Other): Users/[username]/Appdata/Roaming/Macromedia/Flash Player/#Shared Objects/[GIBBERISH]/\n", false, false);
-	outputText("In Windows Vista/7 (Chrome): Users/[username]/AppData/Local/Google/Chrome/User Data/Default/Pepper Data/Shockwave Flash/WritableRoot/#SharedObjects/[GIBBERISH]/\n", false, false);
+	outputText("<i>In Windows Vista/7 (IE/FireFox/Other): <pre>Users/{username}/Appdata/Roaming/Macromedia/Flash Player/#Shared Objects/{GIBBERISH}/</pre>\n", false);
+	outputText("In Windows Vista/7 (Chrome): <pre>Users/{username}/AppData/Local/Google/Chrome/User Data/Default/Pepper Data/Shockwave Flash/WritableRoot/#SharedObjects/{GIBBERISH}/</pre>\n", false);
 	outputText("Inside that folder it will saved in a folder corresponding to where it was played from.  If you saved the CoC.swf to your HDD, then it will be in a folder called localhost.  If you played from my website, it will be in fenoxo.com.  The save files will be labelled CoC_1.sol, CoC_2.sol, CoC_3.sol, etc.</i>\n\n", false);
 	outputText("Why do my saves disappear all the time?\n<i>There are numerous things that will wipe out flash local shared files.  If your browser or player is set to delete flash cookies or data, that will do it.  CCleaner will also remove them.  CoC or its updates will never remove your savegames - if they disappear something else is wiping them out.</i>\n\n", false);
 	outputText("When I play from my HDD I have one set of saves, and when I play off your site I have a different set of saves.  Why?\n<i>Flash stores saved data relative to where it was accessed from.  Playing from your HDD will store things in a different location than fenoxo.com or FurAffinity.</i>\n\n", false);
 	outputText("If you want to be absolutely sure you don't lose a character, copy the .sol file for that slot out and back it up!\n\n<b>For more information, google flash shared objects.</b>", false);
 	//This is to clear the 'game over' block from stopping simpleChoices from working.  Loading games supercede's game over.
-	if (b1Text.text == "Game Over")
+	if (mainView.getButtonText( 0 ) == "Game Over")
 	{
 		temp = 777;
-		b1Text.text = "save/load";
+		mainView.setButtonText( 0, "save/load" );
 	}
 	if (temp == 777)
 	{
@@ -280,8 +280,13 @@ function saveGame(slot:String):void
 function loadGame(slot:String):void
 {
 	var saveFile = SharedObject.getLocal(slot, "/");
+
+	// I want to be able to write some debug stuff to the GUI during the loading process
+	// Therefore, we clear the display *before* calling loadGameObject
+	outputText("", true);
+
 	loadGameObject(saveFile, slot);
-	outputText("Game Loaded", true);
+	outputText("Game Loaded");
 	temp = 0;
 	statScreenRefresh();
 	doNext(1);
@@ -343,14 +348,14 @@ function saveGameObject(slot:String, isFile:Boolean):void
 	//saveFile.data.pronoun3 = player.pronoun3;
 	
 	//Notes
-	if (nameBox.text != "")
+	if (mainView.nameBox.text != "")
 	{
-		saveFile.data.notes = nameBox.text;
-		notes = nameBox.text;
+		saveFile.data.notes = mainView.nameBox.text;
+		notes = mainView.nameBox.text;
 	}
 	else
 		saveFile.data.notes = notes;
-	nameBox.visible = false;
+	mainView.nameBox.visible = false;
 	
 	//flags
 	saveFile.data.flags = new Array();
@@ -622,8 +627,8 @@ function saveGameObject(slot:String, isFile:Boolean):void
 	saveFile.data.gameState = gameState;
 	
 	//Time and Items
-	saveFile.data.hours = hours;
-	saveFile.data.days = days;
+	saveFile.data.hours = model.time.hours;
+	saveFile.data.days = model.time.days;
 	saveFile.data.autoSave = player.autoSave;
 	
 	//PLOTZ
@@ -717,8 +722,12 @@ function onDataLoaded(evt:Event):void
 	//var fileObj = readObjectFromStringBytes(loader.data);
 	try
 	{
+		// I want to be able to write some debug stuff to the GUI during the loading process
+		// Therefore, we clear the display *before* calling loadGameObject
+		outputText("", true);
+
 		loadGameObject(loader.data.readObject());
-		outputText("Loaded Save", true);
+		outputText("Loaded Save");
 	}
 	catch (rangeError:RangeError)
 	{
@@ -768,6 +777,7 @@ function loadGameObject(saveData:Object, slot:String = "VOID"):void
 	{
 		//KILL ALL COCKS;
 		player = new Player();
+		model.player = player;		
 		
 		//trace("Type of saveFile.data = ", getClass(saveFile.data));
 		
@@ -1262,8 +1272,8 @@ function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		
 		//Days
 		//Time and Items
-		hours = saveFile.data.hours;
-		days = saveFile.data.days;
+		model.time.hours = saveFile.data.hours;
+		model.time.days = saveFile.data.days;
 		if (saveFile.data.autoSave == undefined)
 			player.autoSave = false;
 		else
@@ -1308,18 +1318,59 @@ function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			itemSlot4.shortName = "GroPlus";
 		if (itemSlot5.shortName.indexOf("Gro+") != -1)
 			itemSlot5.shortName = "GroPlus";
-		//Fixing shit!
-		if(player.hasPerk("Elven Bounty") >= 0) {
-			//CLear duplicates
-			while(player.perkDuplicated("Elven Bounty")) player.removePerk("Elven Bounty");
-			//Fix fudged preggers value
-			if(player.perkv1("Elven Bounty") == 15) {
-				player.changePerkValue("Elven Bounty",1,0);
-				player.addPerkValue("Elven Bounty",2,15);
-			}
-		}
+		
+		unFuckSave()
+		
 		doNext(1);
 	}
+}
+
+function unFuckSave():void
+{
+	//Fixing shit!
+
+	// Fix duplicate elven bounty perks
+	if(player.hasPerk("Elven Bounty") >= 0) {
+		//CLear duplicates
+		while(player.perkDuplicated("Elven Bounty")) player.removePerk("Elven Bounty");
+		//Fix fudged preggers value
+		if(player.perkv1("Elven Bounty") == 15) {
+			player.changePerkValue("Elven Bounty",1,0);
+			player.addPerkValue("Elven Bounty",2,15);
+		}
+	}
+
+
+	// Fix issues with corrupt cockTypes caused by a error in the serialization code.
+		
+	//trace("CockInfo = ", flags[RUBI_COCK_TYPE]);
+	//trace("getQualifiedClassName = ", getQualifiedClassName(flags[RUBI_COCK_TYPE]));
+	//trace("typeof = ", typeof(flags[RUBI_COCK_TYPE]));
+	//trace("is CockTypesEnum = ", flags[RUBI_COCK_TYPE] is CockTypesEnum);
+	//trace("instanceof CockTypesEnum = ", flags[RUBI_COCK_TYPE] instanceof CockTypesEnum);
+
+
+
+	if (!(flags[RUBI_COCK_TYPE] is CockTypesEnum || flags[RUBI_COCK_TYPE] is Number))	
+	{ // Valid contents of flags[RUBI_COCK_TYPE] are either a CockTypesEnum or a number
+
+		trace("Fixing save (goo girl)");
+		outputText("\n<b>Rubi's cockType is invalid. Defaulting him to human.</b>\n");
+		flags[RUBI_COCK_TYPE] = 0;
+	}
+
+
+	if (!(flags[GOO_DICK_TYPE] is CockTypesEnum || flags[GOO_DICK_TYPE] is Number))	
+	{ // Valid contents of flags[GOO_DICK_TYPE] are either a CockTypesEnum or a number
+
+		trace("Fixing save (goo girl)");
+		outputText("\n<b>Latex Goo-Girls's cockType is invalid. Defaulting him to human.</b>\n");
+		flags[GOO_DICK_TYPE] = 0;
+	}
+
+
+
+
 }
 
 //This is just the save/load code - from it you can get 

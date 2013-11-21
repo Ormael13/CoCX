@@ -9,14 +9,18 @@
 	import classes.perkClass;
 	import classes.statusAffectClass;
 	import classes.vaginaClass;
+	import classes.ImageManager; // This line not necessary, but added because I'm pedantic like that.
+
+	import coc.view.MainView;
+
+	import coc.model.GameModel;
+	import coc.model.TimeModel;
 
 	import fl.controls.ComboBox; 
 	import fl.data.DataProvider; 
 	import flash.display.Loader;
 	import flash.display.MovieClip;
 	import flash.events.*
-	// import flash.events.Event;
-	// import flash.events.MouseEvent;
 	import flash.net.FileReference;
 	import flash.net.navigateToURL; 
 	import flash.net.registerClassAlias;
@@ -32,6 +36,8 @@
 	classes.CoC: The Document class of Corruption of the Champions.
 ****/
 	
+	[SWF( width="1000", height="800", pageTitle="Corruption of Champions" )]
+
 	public class CoC extends MovieClip
 	{
 		/****
@@ -43,13 +49,25 @@
 		****/
 		public var semiglobalReferencer :* = {};
 
+		public var mainView :MainView;
+
+		public var model :GameModel;
+
 		public function CoC()
 		{
+			this.model = new GameModel();
+			this.mainView = new MainView( this.model );
+			this.mainView.name = "mainView";
+			this.stage.addChild( this.mainView );
+
 			this.addFrameScript( 0, this.run );
 		}
 
 		public function run()
 		{
+			var mainView :MainView = this.mainView;
+			var model :GameModel = this.model;
+			
 			// big splat of include lines here...
 			// These are relative to the current directory, which is /classes/classes.
 			include "../../includes/akbal.as";
@@ -90,6 +108,7 @@
 			include "../../includes/engineCore.as";
 			include "../../includes/essrayle.as";
 			include "../../includes/eventParser.as";
+			include "../../includes/eventTest.as";
 			include "../../includes/exgartuan.as";
 			include "../../includes/exploration.as";
 			include "../../includes/faerie.as";
@@ -154,6 +173,7 @@
 			include "../../includes/OnLoadVariables.as";
 			include "../../includes/ooze.as";
 			include "../../includes/parser.as";
+			include "../../includes/perkPicker.as";
 			include "../../includes/pregnancy.as";
 			include "../../includes/Raphael.as";
 			include "../../includes/rathazul.as";

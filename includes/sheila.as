@@ -174,9 +174,9 @@ function sheilaEncounterRouter():void {
 		//XP1: Reconciliation encounter (sheila xp = 1 and demon sheila = 0):
 		else if(flags[SHEILA_XP] == 1) sheilaReconcile();
 		//XP2: Familiarizing (Sheila XP = 2; or Sheila XP = 3 AND time =/= 20:00 and demon sheila = 0):
-		else if(flags[SHEILA_XP] == 2 || (flags[SHEILA_XP] == 3 && hours != 20)) sheilaGettingFamiliar();
+		else if(flags[SHEILA_XP] == 2 || (flags[SHEILA_XP] == 3 && model.time.hours != 20)) sheilaGettingFamiliar();
 		//XP3: Sexy Time (sheila xp = 3 AND time = 20:00 and demon sheila = 0):
-		else if(flags[SHEILA_XP] == 3 && hours == 20) sheilaXPThreeSexyTime();
+		else if(flags[SHEILA_XP] == 3 && model.time.hours == 20) sheilaXPThreeSexyTime();
 		//XP4: Fancy meeting you here (sheila xp >= 4 and demon sheila = 0):
 		else if(flags[SHEILA_XP] == 4) fuckBuddySheilaMeeting();
 		else {
@@ -218,8 +218,9 @@ function sheilaCorruptionUpdate():void {
 				else sheilaCorruption(1);
 			}
 			player.cor = Math.round(player.cor);
-			corUp.visible = false;
-			corDown.visible = true;
+			mainView.statsView.showStatDown( 'cor' );
+			// corUp.visible = false;
+			// corDown.visible = true;
 			statScreenRefresh();
 		}		
 	}
@@ -240,8 +241,9 @@ function sheilaCorruptionUpdate():void {
 				else sheilaCorruption(-1);
 			}
 			player.cor = Math.round(player.cor);
-			corUp.visible = true;
-			corDown.visible = false;
+			mainView.statsView.showStatUp( 'cor' );
+			// corUp.visible = true;
+			// corDown.visible = false;
 			statScreenRefresh();
 		}
 	}
@@ -1197,8 +1199,8 @@ function shielaXPThreeSexyTimePostSexStayII():void {
 	//advance time to 6:00, gain 3 hours rest
 	fatigue(-20);
 	HPChange(maxHP()/2,false);
-	if(hours > 6) days++;
-	hours = 6;
+	if(model.time.hours > 6) model.time.days++;
+	model.time.hours = 6;
 	statScreenRefresh();
 	doNext(1);
 }
@@ -3448,7 +3450,7 @@ function normalSheilaPregNotifREPEATEDEDHelpABitchOut():void {
 	}
 	//pass 4 hours and reduce corruption or something, give 3 hrs rest if naga, increase archery skill and increase fatigue by a lot (50-60+) if angel of death
 	stats(0,0,0,0,0,0,0,-2);
-	if(hours + 4 < 21) doNext(15);
+	if(model.time.hours + 4 < 21) doNext(15);
 	else {
 		//(if time after adding 4 hours >= 21:00 or = 0:00, additionally output)
 		outputText("\n\n<b>\"<i>Oh, god dammit.</i>\"</b>");
@@ -3588,8 +3590,8 @@ function normalSheilaPregNotifREPEATEDEDHelpABitchOutANDSTAYDERE():void {
 		outputText("\n\nYou rub your smarting jaw, glaring back, and tell Sheila that it's her turn to watch.  Well, the adrenaline will keep her up, at least.");
 	}
 	if(!player.isTaur()) outputText("  She grudgingly repositions, allowing you to rest against her.");
-	days++;
-	hours = 2;
+	model.time.days++;
+	model.time.hours = 2;
 	statScreenRefresh();
 	//--Next--
 	menu();
@@ -3599,7 +3601,7 @@ function normalSheilaPregNotifREPEATEDEDHelpABitchOutANDSTAYDERE():void {
 //advance time to 5:00
 function normalSheilaPregNotifREPEATEDEDHelpABitchOutANDSTAYDERE2():void {
 	clearOutput();
-	hours = 5;
+	model.time.hours = 5;
 	statScreenRefresh();
 	outputText("Your sleep is fitful, but not totally useless, and you yawn and stir a few hours later when Sheila wakes you");
 	if(player.isGoo()) outputText("; she's already dressed and appears to have just been outside");
@@ -3684,7 +3686,7 @@ function normalSheilaPregNotifREPEATEDEDHelpABitchOutTOCAMP():void {
 	//if no nightwatch, 4 hours sleep and suppress any imp rapes
 	//lparchive.org/Deadly-Premonition
 	sleepRecovery(false);
-	hours = 7;
+	model.time.hours = 7;
 	doNext(1);
 }
 
@@ -4076,8 +4078,9 @@ function suspiciousGlint():void {
 		if(monster.hasStatusAffect("Twu Wuv") < 0) {
 			monster.createStatusAffect("Twu Wuv",0,0,0,0);
 			var counter:int = 40+rand(5);
-			inteDown.visible = true;
-			inteUp.visible = false;
+			mainView.statsView.showStatDown( 'inte' );
+			// inteDown.visible = true;
+			// inteUp.visible = false;
 			while(counter > 0) {
 				if(player.inte >= 2) {
 					player.inte--;
@@ -4223,10 +4226,10 @@ function loseToSheila(consensual:Boolean = false):void {
 	if(player.HP < 1 && !consensual) {
 		outputText("Your erstwhile opponent's eyes glimmer with excitement as you collapse from your injuries, and she runs over to you.  The demon strips off your [armor] eagerly, but you can't stay awake for the fun.  Consciousness slips away and you pass out.");
 		//--Next--
-		hours += 8;
-		if(hours > 23) {
-			hours -= 24;
-			days++;
+		model.time.hours += 8;
+		if(model.time.hours > 23) {
+			model.time.hours -= 24;
+			model.time.days++;
 		}
 		menu();
 		addButton(0,"Next",loseToDemonSheila);

@@ -1498,8 +1498,7 @@ function marbleGenderlessNoFuck():void {
 	//(be sure to do the after sex events for whatever sex scene triggered this one)
 	//(increase player lust)
 	stats(0,0,0,0,0,0,40,0);
-	mainText.htmlText = currentText;
-	scrollBar.update();
+	mainView.setOutputText( currentText );
 }
 
 function marbleStatusChange(affection:Number, addiction:Number, isAddicted:Number = -1):void {

@@ -181,7 +181,8 @@ def cleanStaleDoEventIfs(evNumDict = {}):
 
 def removeDisabledDoEventIfs():
 
-	numExtr = re.compile(r"(?://[\w\-\s]*\s*)*(?:else)?\s+if\s?\(\s*false\s* == \d+\)\s+\{[\w\s\(\)\;/]+\}")
+	disabledIfExtr = re.compile(r"(?://[\w\-\s]*\s*)*(?:else)?\s+if\s?\(\s*false\s* == \d+\)\s+\{[\w\s\(\)\;/]+\}")
+	emptyIfExtr = re.compile(r"(?://[\w\-\s]*\s*)*(?:else)?\s+if\s?\(\s*(?:(?:false)|(?:eventNo))\s* == \d+\)\s+\{\W+return;\W+\}")
 
 
 	with open("./includes/doEvent.as", "r") as eventF:
@@ -190,7 +191,7 @@ def removeDisabledDoEventIfs():
 	print "Cleaning doEvent If statements"
 	
 
-	eventS = numExtr.sub("", eventS)
+	eventS = disabledIfExtr.sub("", eventS)
 
 
 	if writeToFiles:
@@ -507,6 +508,155 @@ def cleanAddButtons():
 
 
 
+def cleanupChoiceSection(inStr):
+	cleanRE1 = re.compile(r"(?:rando|choice) = rand\(\d\);")
+	cleanRE2 = re.compile(r"(?:else )?(?:if\((?:rando|choice) == \d\) )?descript \+?= ")
+
+	cleanRE3 = re.compile(r"[\t\r\n]*")
+
+	cleaners = [cleanRE1, cleanRE2, cleanRE3]
+	#print "Old - ", inStr
+	new = inStr
+	for regex in cleaners:
+		new = regex.sub("", new)
+	new = new.replace(";", ", ")
+	new = new.rstrip(", ")
+	new = "descript += randomChoice(%s);" % new
+	print "New = ", new
+	return new
+
+def cleanupRandomChoices():
+
+	randomCleanupRE = re.compile(r"((?:rando|choice) = rand\((\d)\);(?:\s+(?:else )?(?:if\((?:rando|choice) == \d\) )?descript \+?= \"[a-zA-Z- ]+\";)+)")
+	
+
+	with open("./includes/descriptors.as", "r") as eventF:
+		eventS = eventF.read()
+	inStr = eventS
+	print "Cleaning descriptors If statements"
+	match = randomCleanupRE.search(inStr)
+
+	outStr = ""
+	matchStr = ""
+
+	while match:
+
+		print match.start(), match.end()
+		matches = match.groups()
+		print int(matches[1]) == matches[0].count("\n"), int(matches[1]), matches[0].count("\n")
+		
+		start, end = match.start(), match.end()
+
+		outStr += inStr[:start]
+		if int(matches[1]) == matches[0].count("\n"):
+			print "Replacing!"
+			outStr += cleanupChoiceSection(inStr[start:end])
+		else:
+			outStr += inStr[start:end]
+		
+		print inStr[start:end]
+		
+		inStr = inStr[end:]
+
+		match = randomCleanupRE.search(inStr)
+
+		if not match:
+			outStr += inStr
+	#eventS = disabledIfExtr.sub("", eventS)
+	
+	print len(eventS) == len(outStr), len(eventS), len(outStr)
+
+	if writeToFiles:
+		with open("./includes/descriptors.as", "w") as eventF:
+			eventF.write(outStr)
+
+
+def findFunctionsWithoutExit():
+
+	filelist = os.listdir("./includes")
+	print filelist
+	for filename in filelist:
+		if filename.endswith(".as") and "latex" in filename:
+			print filename
+			with open(os.path.join("./includes", filename), "r") as fileH:
+				tmp = fileH.read()
+			funcs = tmp.split("function")
+			
+			for func in funcs:
+				if not ("addButton" in func or "doNext" in func):
+					print "No Buttons!"
+					print func
+			
+
+def pronouninate():
+	filelist = ["arian.as", "rubi.as"]
+
+
+
+
+
+
+
+
+
+
+	repDict = {
+
+
+
+		
+		re.compile(r"\"\s?\+\s?arianMF\(\"He\",\"She\"\)\s?\+\s?\"") : "[Arian Ey]",
+		re.compile(r"\"\s?\+\s?arianMF\(\"he\",\"she\"\)\s?\+\s?\"") : "[Arian ey]",
+		re.compile(r"\"\s?\+\s?arianMF\(\"him\",\"her\"\)\s?\+\s?\"") : "[Arian em]",
+		re.compile(r"\"\s?\+\s?arianMF\(\"himself\",\"herself\"\)\s?\+\s?\"") : "[Arian emself]",
+		re.compile(r"\"\s?\+\s?arianMF\(\"His\",\"Her\"\)\s?\+\s?\"") : "[Arian Eir]",
+		re.compile(r"\"\s?\+\s?arianMF\(\"his\",\"her\"\)\s?\+\s?\"") : "[Arian eir]",
+		re.compile(r"\"\s?\+\s?arianMF\(\"His\",\"Hers\"\)\s?\+\s?\"") : "[Arian Eirs]",
+		re.compile(r"\"\s?\+\s?arianMF\(\"his\",\"hers\"\)\s?\+\s?\"") : "[Arian eirs]",
+		re.compile(r"\"\s?\+\s?arianMF\(\"man\",\"woman\"\)\s?\+\s?\"") : "[Arian man]",
+
+		re.compile(r"\"\s?\+\s?rubiMF\(\"he\",\"she\"\)\s?\+\s?\"") : "[rubi ey]",
+		re.compile(r"\"\s?\+\s?rubiMF\(\"He\",\"She\"\)\s?\+\s?\"") : "[rubi Ey]",
+		re.compile(r"\"\s?\+\s?rubiMF\(\"him\",\"her\"\)\s?\+\s?\"") : "[rubi em]",
+		re.compile(r"\"\s?\+\s?rubiMF\(\"himself\",\"herself\"\)\s?\+\s?\"") : "[rubi emself]",
+		re.compile(r"\"\s?\+\s?rubiMF\(\"his\",\"her\"\)\s?\+\s?\"") : "[rubi eir]",
+		re.compile(r"\"\s?\+\s?rubiMF\(\"His\",\"Her\"\)\s?\+\s?\"") : "[rubi Eir]",
+		re.compile(r"\"\s?\+\s?rubiMF\(\"man\",\"woman\"\)\s?\+\s?\"") : "[rubi man]"
+
+
+
+	}
+
+
+	print repDict
+
+	for filename in filelist:
+		
+		if filename.endswith(".as"):			#Iterate over all the .as files in ./includes
+			with open(os.path.join("./includes", filename), "r") as fileH:
+				tmp = fileH.read()
+			print "filename:", filename, "------------------------------------------------"
+			
+			cleaned = tmp
+			for regex, replacement in repDict.iteritems():
+				results = set()
+				print regex, replacement
+				for item in regex.findall(tmp):
+					results.add(item)
+					#print item
+				#for item in results:
+				#	print item
+				cleaned = regex.sub(replacement, cleaned)
+
+			if cleaned != tmp:
+				print "Changes!"
+				if writeToFiles:
+					print "Writing File!"
+					with open(os.path.join("./includes", filename), "w") as fileH:
+						fileH.write(cleaned)
+
+
+
 
 if __name__ == "__main__":
 
@@ -517,8 +667,8 @@ if __name__ == "__main__":
 			print "Writing to files!"
 			writeToFiles = True
 	#cleanEventNumbers()
-	cleanStaleDoEventIfs(getFuncDict())
-	removeDisabledDoEventIfs()
+	#cleanStaleDoEventIfs(getFuncDict())
+	#removeDisabledDoEventIfs()
 
 	#cleanFlags()
 
@@ -528,3 +678,8 @@ if __name__ == "__main__":
 	#modifyParserIfStatements()
 
 	#cleanAddButtons()
+	
+	#cleanupRandomChoices()
+
+	#findFunctionsWithoutExit()
+	pronouninate()

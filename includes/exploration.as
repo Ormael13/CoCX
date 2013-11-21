@@ -1456,7 +1456,7 @@ function explorePlains():void {
 	flags[UNKNOWN_FLAG_NUMBER_00131]++;
 	var select:Number = rand(6);
 	//Dem Kangasluts!  Force Sheila relationship phase!
-	if(flags[SHEILA_DEMON] == 0 && flags[SHEILA_XP] == 3 && hours == 20 && flags[SHEILA_CLOCK] >= 0) {
+	if(flags[SHEILA_DEMON] == 0 && flags[SHEILA_XP] == 3 && model.time.hours == 20 && flags[SHEILA_CLOCK] >= 0) {
 		sheilaXPThreeSexyTime();
 		return;
 	}
@@ -2103,7 +2103,7 @@ function joinBeingAMinoCumSlut():void {
 		player.changeStatusValue("Feeder",2,0);
 	}
 	//(Acquired minotaur cum!)
-	hours++;
+	model.time.hours++;
 	menuLoc = 2;
 	shortName = "MinoCum";
 	takeItem();

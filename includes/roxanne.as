@@ -36,7 +36,7 @@ WIN:
 //[Drinking Table Appearance]
 function RoxanneAppearance():Number {
 	//When she there?
-	if(hours > 12 && hours < 19) {
+	if(model.time.hours > 12 && model.time.hours < 19) {
 		//(Not Met) 
 		if(flags[UNKNOWN_FLAG_NUMBER_00221] == 0) outputText("\n\nThere's a table with a half-dozen oddly-dressed lizans not too far from the fire.  A keg is set up a few feet away and they seem to be having a good time.", false);
 		//Met) 
@@ -502,8 +502,9 @@ function applyHangover():void {
 			temp--;
 			//If PC has strength to lose
 			if(player.str >= 2) {
-				strDown.visible = true;
-				strUp.visible = false;
+				mainView.statsView.showStatDown( 'str' );
+				// strDown.visible = true;
+				// strUp.visible = false;
 				player.str--;
 				player.addStatusValue("Hangover",2,1);			
 			}
@@ -514,8 +515,9 @@ function applyHangover():void {
 			temp--;
 			//If PC has speed to lose
 			if(player.spe >= 2) {
-				speDown.visible = true;
-				speUp.visible = false;
+				mainView.statsView.showStatDown( 'spe' );
+				// speDown.visible = true;
+				// speUp.visible = false;
 				player.spe--;
 				player.addStatusValue("Hangover",3,1);
 			}
@@ -526,8 +528,9 @@ function applyHangover():void {
 			temp--;
 			//If PC has intelligence to lose
 			if(player.inte >= 2) {
-				inteDown.visible = true;
-				inteUp.visible = false;
+				mainView.statsView.showStatDown( 'inte' );
+				// inteDown.visible = true;
+				// inteUp.visible = false;
 				player.inte--;
 				player.addStatusValue("Hangover",4,1);
 			}

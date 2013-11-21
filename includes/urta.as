@@ -1,4 +1,4 @@
-﻿//Urta variables 
+//Urta variables 
 //flags[TIMES_FUCKED_URTA] = times fucked
 //flags[URTA_COMFORTABLE_WITH_OWN_BODY] = urtas horsecock comfort level	
 	//-1 = PC pissed her off
@@ -74,8 +74,8 @@ function urtaDrunk():Boolean {
 	if(flags[URTA_EGG_INCUBATION] > 0) return false;
 	if(flags[URTA_INCUBATION] > 0) return false;
 	if(flags[UNKNOWN_FLAG_NUMBER_00146] == -1) return false;
-	if(hours > 12 && flags[UNKNOWN_FLAG_NUMBER_00146] < 1) return true;
-	if(hours > 8 && flags[UNKNOWN_FLAG_NUMBER_00146] >= 1) return true;
+	if(model.time.hours > 12 && flags[UNKNOWN_FLAG_NUMBER_00146] < 1) return true;
+	if(model.time.hours > 8 && flags[UNKNOWN_FLAG_NUMBER_00146] >= 1) return true;
 	else return false;
 }
 function urtaOpenAboutEdryn():Boolean {
@@ -2336,14 +2336,12 @@ function makeUrtaSitOnYourLapWithScylla():void {
 	outputText("", true);
 	if(player.cockThatFits(urtaCapacity()) == -1) {
 		outputText("<b>Urta's pretty flexible but there's no way you'd get something that big inside her backdoor.</b>", false);
-		mainText.htmlText = currentText;
-		scrollBar.update();
+		mainView.setOutputText( currentText );
 		return;
 	}
 	if(player.lowerBody == 4) {
 		outputText("<b>There's no way for her to sit in a centaur's lap!</b>", false);
-		mainText.htmlText = currentText;
-		scrollBar.update();
+		mainView.setOutputText( currentText );
 		return;
 	}
 	var x:Number = player.cockThatFits(urtaCapacity());
@@ -4334,8 +4332,8 @@ function urtasRuinedOrgasmsFromGooPartII():void {
 	else outputText("a newly dressed Olivia");
 	outputText(" collapse onto the couch, exhausted.  \"<i>Gimme ten minutes, then we'll go on patrol,</i>\"  Urta says waving a hand tiredly.  You grin and take your leave, slipping out the front door and heading back to camp.  The sun blazes high in the sky, around noon, so you've lost about a day stuck inside one person or another.");
 	stats(0,0,0,0,0,2,-100,0);
-	days++;
-	hours = 11;
+	model.time.days++;
+	model.time.hours = 11;
 	
 	statScreenRefresh();
 	doNext(13);
@@ -4548,7 +4546,7 @@ function doggyStyle():void {
 
 function partTwoOfDoggieStyle():void {
 	clearOutput();
-	hours+=2;
+	model.time.hours+=2;
 	statScreenRefresh();
 	outputText("<b><u>Several hours later</u></b>\nYou awake in Urta's arms, tucked under the sheets of her bed.  You're free of your collar, which you can see now lays on a dresser nearby, but you're a little happy to see you still have a small, almost pregnant bulge in your belly where you know a large reservoir of cum now resides.  Urta gives you a shy smooch, saying, \"<i>Mm, I had so much fun, [name].  I... I don't know what got into me there, but I kinda liked it.  And I just adore you for going along with it.</i>\"");
 	
@@ -4656,7 +4654,7 @@ function getAPetReward():void {
 
 function feedTheBeastPartII():void {
 	clearOutput();
-	hours+=2;
+	model.time.hours+=2;
 	statScreenRefresh();
 	outputText("<b><u>Several hours later...</u></b>\nYou awake in Urta's arms, tucked under the sheets of her bed.  You're free of your collar, which you can see now lays on a dresser nearby.  Urta gives you a shy smooch, saying, \"<i>Mm, I had so much fun, [name].  I... I don't know what got into me there, but I kinda liked it.  And I just adore you for going along with it.</i>\"");
 	

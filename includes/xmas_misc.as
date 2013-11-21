@@ -786,35 +786,35 @@ function noNoKeepNieve():void {
 //Camp Description
 function nieveCampDescs():void {
 	//6:00
-	if(hours == 6) outputText("Nieve is sitting cross-legged in the snowdrift, munching on what looks to be icicles.  As you watch, " + nieveMF("he","she") + " reaches down into the glittering powder surrounding " + nieveMF("him","her") + " and produces another one.");
+	if(model.time.hours == 6) outputText("Nieve is sitting cross-legged in the snowdrift, munching on what looks to be icicles.  As you watch, " + nieveMF("he","she") + " reaches down into the glittering powder surrounding " + nieveMF("him","her") + " and produces another one.");
 	//7:00
-	else if(hours == 7) outputText("Nieve is giggling and laughing as a fresh flurry flutters down on " + nieveMF("him","her") + ".  You wonder idly if " + nieveMF("he","she") + "'s causing it to happen.");
+	else if(model.time.hours == 7) outputText("Nieve is giggling and laughing as a fresh flurry flutters down on " + nieveMF("him","her") + ".  You wonder idly if " + nieveMF("he","she") + "'s causing it to happen.");
 	//8:00
-	else if(hours == 8) outputText("Nieve is sitting in the white wintery wonderland, carefully constructing a snowman.  It strikes you as strange, and almost masturbatory in a way.  " + nieveMF("He","She") + " spots you and gives you a wave and a smile.  For a moment, you think the snowman has too, but you eventually conclude it's your imagination.");
+	else if(model.time.hours == 8) outputText("Nieve is sitting in the white wintery wonderland, carefully constructing a snowman.  It strikes you as strange, and almost masturbatory in a way.  " + nieveMF("He","She") + " spots you and gives you a wave and a smile.  For a moment, you think the snowman has too, but you eventually conclude it's your imagination.");
 	//9:00
-	else if(hours == 9) outputText("Nieve is sprawled out in the icy field, creating a series of snow angels without a care in the world.  When " + nieveMF("he","she") + " catches sight of you, she gives a friendly wave, then dives back into the snow.");
+	else if(model.time.hours == 9) outputText("Nieve is sprawled out in the icy field, creating a series of snow angels without a care in the world.  When " + nieveMF("he","she") + " catches sight of you, she gives a friendly wave, then dives back into the snow.");
 	//10:00
-	else if(hours == 10) outputText("Nieve, the ice spirit, sits quietly at the edge of the snowdrift, looking out at the landscape beyond.  When " + nieveMF("he","she") + " sees you looking, " + nieveMF("he","she") + " gives a somber wave.");
+	else if(model.time.hours == 10) outputText("Nieve, the ice spirit, sits quietly at the edge of the snowdrift, looking out at the landscape beyond.  When " + nieveMF("he","she") + " sees you looking, " + nieveMF("he","she") + " gives a somber wave.");
 	//11:00
-	else if(hours == 11) outputText("Nieve is in your camp, poking around your supplies and water barrels. You notice " + nieveMF("he","she") + " seems a little uncomfortable to be away from " + nieveMF("his","her") + " snowdrift.");
+	else if(model.time.hours == 11) outputText("Nieve is in your camp, poking around your supplies and water barrels. You notice " + nieveMF("he","she") + " seems a little uncomfortable to be away from " + nieveMF("his","her") + " snowdrift.");
 	//12:00
-	else if(hours == 12) outputText("Nieve is carefully compressing snowballs in " + nieveMF("his","her") + " little camp.  To your surprise, " + nieveMF("he","she") + " picks one up and begins eating it like you would an apple.  When " + nieveMF("he","she") + " catches you looking mid-bite, " + nieveMF("he","she") + " gives you a grin with her mouth full, " + nieveMF("his","her") + " cheeks puffed out.");
+	else if(model.time.hours == 12) outputText("Nieve is carefully compressing snowballs in " + nieveMF("his","her") + " little camp.  To your surprise, " + nieveMF("he","she") + " picks one up and begins eating it like you would an apple.  When " + nieveMF("he","she") + " catches you looking mid-bite, " + nieveMF("he","she") + " gives you a grin with her mouth full, " + nieveMF("his","her") + " cheeks puffed out.");
 	//13:00
-	else if(hours == 13) outputText("Nieve is sitting cross-legged, in the middle of what appears to be an argument with a snowman " + nieveMF("he","she") + "'s just made.");
+	else if(model.time.hours == 13) outputText("Nieve is sitting cross-legged, in the middle of what appears to be an argument with a snowman " + nieveMF("he","she") + "'s just made.");
 	//14:00
-	else if(hours == 14) outputText("Nieve is in " + nieveMF("his","her") + " usual spot, seemingly deep in concentration.  Around " + nieveMF("him","her") + " snow begins to fall slowly, then quicker and quicker, whipping " + nieveMF("his","her") + " hair around wildly.  Although strangely, the air is still where you are.");
+	else if(model.time.hours == 14) outputText("Nieve is in " + nieveMF("his","her") + " usual spot, seemingly deep in concentration.  Around " + nieveMF("him","her") + " snow begins to fall slowly, then quicker and quicker, whipping " + nieveMF("his","her") + " hair around wildly.  Although strangely, the air is still where you are.");
 	//15:00
-	else if(hours == 15) outputText("\n\nNieve the ice spirit is whirling around " + nieveMF("his","her") + " area, practicing with what appears to be a translucent blue spear.  " + nieveMF("He","She") + " jabs and thrusts, spins and swipes.  " + nieveMF("He","She") + " may be new to Mareth, but you've got to hand it to " + nieveMF("him","her") + ", it looks like " + nieveMF("he","she") + " could take care of " + nieveMF("him","her") + "self.");
+	else if(model.time.hours == 15) outputText("\n\nNieve the ice spirit is whirling around " + nieveMF("his","her") + " area, practicing with what appears to be a translucent blue spear.  " + nieveMF("He","She") + " jabs and thrusts, spins and swipes.  " + nieveMF("He","She") + " may be new to Mareth, but you've got to hand it to " + nieveMF("him","her") + ", it looks like " + nieveMF("he","she") + " could take care of " + nieveMF("him","her") + "self.");
 	//16:00
-	else if(hours == 16) outputText("\n\nNieve is at first nowhere to be seen.  Then you see " + nieveMF("his","her") + " head pop out of a snowdrift.  " + nieveMF("He","She") + " looks around quickly, then leaps into the air, diving head first into another pile of the powdery stuff.");
+	else if(model.time.hours == 16) outputText("\n\nNieve is at first nowhere to be seen.  Then you see " + nieveMF("his","her") + " head pop out of a snowdrift.  " + nieveMF("He","She") + " looks around quickly, then leaps into the air, diving head first into another pile of the powdery stuff.");
 	//17:00
-	else if(hours == 17) outputText("\n\nNieve appears to have constructed a firepit constructed from translucent blue logs and rocks.  A vivid blue flame roars in the pit, over which Nieve appears to be roasting... marshmallows?  As you watch " + nieveMF("he","she") + " peels the burnt black skin off a marshmallow, gobbles it down, and begins roasting the rest.");
+	else if(model.time.hours == 17) outputText("\n\nNieve appears to have constructed a firepit constructed from translucent blue logs and rocks.  A vivid blue flame roars in the pit, over which Nieve appears to be roasting... marshmallows?  As you watch " + nieveMF("he","she") + " peels the burnt black skin off a marshmallow, gobbles it down, and begins roasting the rest.");
 	//18:00
-	else if(hours == 18) outputText("\n\nNieve seems to be working on a spear, sharpening it with a jagged piece of ice.  When " + nieveMF("he","she") + " catches sight of you " + nieveMF("he","she") + " waves and gives a friendly smile.");
+	else if(model.time.hours == 18) outputText("\n\nNieve seems to be working on a spear, sharpening it with a jagged piece of ice.  When " + nieveMF("he","she") + " catches sight of you " + nieveMF("he","she") + " waves and gives a friendly smile.");
 	//19:00
-	else if(hours == 19) outputText("\n\nNieve is sitting at the edge of " + nieveMF("his","her") + " icy expanse, staring off at the distant mountains.  You wonder if " + nieveMF("he","she") + "'s looking for home.");
+	else if(model.time.hours == 19) outputText("\n\nNieve is sitting at the edge of " + nieveMF("his","her") + " icy expanse, staring off at the distant mountains.  You wonder if " + nieveMF("he","she") + "'s looking for home.");
 	//20:00
-	else if(hours == 20) outputText("\n\nNieve is, surprisingly, outside of " + nieveMF("his","her") + " cold camp.  " + nieveMF("He","She") + "'s dancing along the battered, parched ground, calling down snow.  Wherever a flake hits, it's immediately devoured by the thirsty earth.  Is Nieve perhaps trying to... water the ground?");
+	else if(model.time.hours == 20) outputText("\n\nNieve is, surprisingly, outside of " + nieveMF("his","her") + " cold camp.  " + nieveMF("He","She") + "'s dancing along the battered, parched ground, calling down snow.  Wherever a flake hits, it's immediately devoured by the thirsty earth.  Is Nieve perhaps trying to... water the ground?");
 	//21:00
 	else outputText("\n\nYou can hear Nieve sleeping soundly from within a small ice-fort.");
 }

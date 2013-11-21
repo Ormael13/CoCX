@@ -115,7 +115,7 @@ function comeToCampHeliaIWantTailInButt():void {
 	outputText("\n\nFinally, she breaks the kiss long enough to say, <i>\"Oh, I am going to enjoy living with you...\"</i>");
 	menu();
 	//place holder
-	hours++;
+	model.time.hours++;
 	addButton(0,"Next",afterMoveInBoningAnalFireTail);
 }
 
@@ -515,7 +515,7 @@ function heliaOptions():void {
 	}
 	menu();
 	addButton(0,"Discuss",talkToHel);
-	if(hours >= 21) addButton(1,"Cuddle",hugASmokeyTail);
+	if(model.time.hours >= 21) addButton(1,"Cuddle",hugASmokeyTail);
 	else addButton(2,"Hug",hugASmokeyTail);
 	if(flags[HELIA_ANAL_TRAINING_OFFERED] > 0 && flags[HELIA_ANAL_TRAINING] < 2 && player.biggestCockArea() > heliaAnalCapacity() && hasItem("Gob.Ale",1)) addButton(3,"Anal Train",heliaGapeSceneChoices);
 	addButton(5,"Bathe",takeABath);
@@ -872,7 +872,7 @@ function listenToHelTalkAboutGnolls():void {
 function hugASmokeyTail():void {
 	clearOutput();
 	//Cuddle with Hel (Replaces Hug @ 21:00+)
-	if(hours >= 21) {
+	if(model.time.hours >= 21) {
 		outputText("As the sun sets over the camp, you see Helia standing over her hammock, stretching and yawning, ready to turn in for the night.  You approach her, sliding your arms around her supple waist and burying your face in her soft crimson locks, holding your lover close.  Hel giggles girlishly as you give her a long hug, nuzzling into the nape of her neck.");
 		outputText("\n\nWith a bit of effort, Hel turns around in your embrace and starts to fiddle with your [armor], slowly pulling it off, leaving your bare flesh pressed against her own.  You breathe in the woodsmoke scent of her hair; rub your " + player.skinFurScales() + " along her smooth flesh; gasp lightly as her long tail wraps lovingly around your [legs], drawing you even closer, letting your face rest against her yielding chest.");
 		outputText("\n\nKissing and nipping along your arm and neck, Hel gently pulls you into the hammock, leaving you resting atop the salamander, your limbs and tail");

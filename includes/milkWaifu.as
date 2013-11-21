@@ -123,29 +123,29 @@ function arriveWithLacticWaifuAtCamp():void {
 	//[Name Field.  If left empty, defaults to "Bath Slut"]
 	menu();
 	addButton(0,"Next",nameZeMilkBath);
-	nameBox.text = "";
+	mainView.nameBox.text = "";
 }
 
 
 function nameZeMilkBath():void {
-	if(nameBox.text == "" || nameBox.text is Number) {
+	if(mainView.nameBox.text == "" || mainView.nameBox.text is Number) {
 		clearOutput();
 		outputText("<b>You must give her a name.</b>", false);
 		menu();
 		addButton(0,"Next",nameZeMilkBath);
-		nameBox.visible = true;
-		nameBox.text = "Bath Slut";
-		nameBox.x = mainText.x + 5;
-		nameBox.y = mainText.y + 3 + mainText.textHeight;
+		mainView.nameBox.visible = true;
+		mainView.nameBox.text = "Bath Slut";
+		mainView.nameBox.x = mainView.mainText.x + 5;
+		mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
 		return;
 	}
 	clearOutput();
-	flags[MILK_NAME] = nameBox.text;
-	nameBox.text = "";
-	nameBox.visible = false;
+	flags[MILK_NAME] = mainView.nameBox.text;
+	mainView.nameBox.text = "";
+	mainView.nameBox.visible = false;
 	//Call her Bath Slut (You Asshole)
-	if(nameBox.text == "Bath Slut") outputText("Fuck it, Bath Slut it is.  At least she won't get confused.");
-	else if(nameBox.text == "Biscuit") outputText("Fuck it, you may as well butter her buns!");
+	if(mainView.nameBox.text == "Bath Slut") outputText("Fuck it, Bath Slut it is.  At least she won't get confused.");
+	else if(mainView.nameBox.text == "Biscuit") outputText("Fuck it, you may as well butter her buns!");
 	//Variable: " + flags[MILK_NAME] + "
 	//Having Named the Girl (Didn't name her Bath Slut)
 	else {
@@ -646,7 +646,7 @@ function suckleDatMilk():void {
 	
 	outputText("\n\nIn response to your gentle suckles and the flicking of your tongue across her sensitive buds, " + flags[MILK_NAME] + " whimpers and shivers, your every touch electric to the ever-lactating girl.  Her slender arms wrap around your shoulders, holding herself to you as you greedily drink from her bountiful reserves.  She gasps as you reach down and sink your fingers into the full orbs of her ass, rubbing and kneading the soft, yielding flesh just as you did her breasts before.  Her cute gasps of pleasure fill the air, and she gives a shrill cry of surprise and ecstasy as you switch from one leaking teat to the other, which explodes a deluge of milk into your waiting mouth at the barest touch, flesh quivering in motherly release as you drink gallon after gallon.");
 	
-	outputText("\n\nOver a few short minutes, " + flags[MILK_NAME] + "'s breath becomes increasingly erratic, her chest heaving hard, pushing your face from her with every heavy breath she takes.  The girl's voice soon gives out, giving way to husky moans and whispers of praise to your oral skills, thanking you again and again for the gentle, tender release you're bringing her to.  She runs her fingers run through your hair as her body undulates atop you, responding to every suckle and caress with more milk and shudders of pleasure.");
+	outputText("\n\nOver a few short minutes, " + flags[MILK_NAME] + "'s breath becomes increasingly erratic, her chest heaving hard, pushing your face from her with every heavy breath she takes.  The girl's voice soon gives out, giving way to husky moans and whispers of praise to your oral skills, thanking you again and again for the gentle, tender release you're bringing her to.  She runs her fingers through your hair as her body undulates atop you, responding to every suckle and caress with more milk and shudders of pleasure.");
 	
 	outputText("\n\nHer orgasm is as powerful as it is inevitable.  " + flags[MILK_NAME] + " throws her head back, a silent cry escaping her lips as her fingers dig into your flesh, gripping you as tight as she can as the stream of milk passing your lips grows and grows and grows in power until you're nearly drowning.  White rivers from your mouth as you struggle to keep up with the unforgiving flow, swallowing fast to keep from drowning in her orgasmic release.  " + flags[MILK_NAME] + " cries and squeals as her body is rocked by boobgasm, the breast not firmly in your grasp spraying wildly, creating a lake around the two of you.  You can see her thin panties darken with fem-cum, a few of her fingers darting down to rub her hidden nub, masturbating to the rhythm of the cream spurting from her breasts.");
 	

@@ -1,4 +1,4 @@
-﻿//Used to jump the fuck out of pregnancy scenarios for menus.
+//Used to jump the fuck out of pregnancy scenarios for menus.
 //const EVENT_PARSER_ESCAPE:int = 800;
 //const PHYLLA_GEMS_HUNTED_TODAY:int = 893;
 
@@ -19,11 +19,7 @@ function eventParser(eventNo:*):void {
 		//Clear pic if not in combat
 		//if(!inCombat() && eventNo != 5007) clearImages();
 		//Reset newgame buttons till back at camp
-		newGameText.removeEventListener(MouseEvent.CLICK, mainMenu);
-		newGameBG.removeEventListener(MouseEvent.CLICK, mainMenu);
-		newGameText.addEventListener(MouseEvent.CLICK, newGameGo);
-		newGameBG.addEventListener(MouseEvent.CLICK, newGameGo);
-		newGameText.text = "New Game";
+		mainView.setMenuButton( MainView.MENU_NEW_MAIN, "New Game", newGameGo );
 		if(eventNo != 1) {
 			hideMenus();
 		}
@@ -55,12 +51,21 @@ function doSystem(eventNo:Number):void {
 	//@ camp
 	//(clear data/appearance buttons if not at camp
 	trace("System Event", eventNo)
+
+	// Perk options (and an array containing all the event-numbers that correspond to perks)
+	// are located in perkPicker.as
+	if (perkEventNums.indexOf(eventNo) > 0)
+	{
+		pickPerks(eventNo);
+		return;
+	}
+
 	if(eventNo != 1) 
 	{
 		hideMenus();
 	}
 	if(eventNo == 1) {
-		nameBox.visible = false;
+		mainView.nameBox.visible = false;
 		if(gameState == 1) {
 			menuLoc = 0;
 			eventParser(5000);
@@ -101,21 +106,6 @@ function doSystem(eventNo:Number):void {
 	if(eventNo == 6) 
 	{
 		exploreMountain();
-		return;
-	}
-	//Farm
-	if(eventNo == 7) 
-	{
-		return;
-	}
-	//Jojo
-	if(eventNo == 8) 
-	{
-		return;
-	}
-	//Key locations menu
-	if(eventNo == 9) 
-	{
 		return;
 	}
 	//Masturbate
@@ -272,128 +262,6 @@ function doSystem(eventNo:Number):void {
 		allNaturalStimBeltUse();
 		return;
 	}
-	//Strong Back Chosen (25 Str perk)
-	if(eventNo == 53) {
-		if(player.hasPerk("Strong Back") >= 0) {
-			outputText("You already have that perk!", true);
-			doNext(70);
-			return;
-		}
-		player.createPerk("Strong Back",0,0,0,0,"Enables fourth item slot.");
-		outputText("You choose the 'Strong Back' perk, enabling a fourth item slot.", true);
-		itemSlot4.unlocked = true;
-		doNext(1);
-		return;
-	}
-	//Perk Strong Back 2 Chosen (50 Str Perk)
-	if(eventNo == 54) {
-		if(player.hasPerk("Strong Back 2: Strong Harder") >= 0) {
-			outputText("You already have that perk!", true);
-			doNext(70);
-			return;
-		}
-		player.createPerk("Strong Back 2: Strong Harder",0,0,0,0, "Enables fifth item slot.");
-		outputText("You choose the 'Strong Back 2: Strong Harder' perk, enabling a fifth item slot.", true);
-		itemSlot5.unlocked = true;
-		doNext(1);
-		return;
-	}
-	//Perk Tank Chosen
-	if(eventNo == 55) {
-		if(player.hasPerk("Tank") >= 0) {
-			outputText("You already have that perk!", true);
-			doNext(70);
-			return;
-		}
-		player.createPerk("Tank",0,0,0,0,"Raises max HP by 50.");
-		outputText("You choose the 'Tank' perk, giving you an additional 50 hp!", true);
-		doNext(1);
-		stats(0,0,0,0,0,0,0,0);
-		return;
-	}
-	//Perk Regeneration
-	if(eventNo == 56) {
-		if(player.hasPerk("Regeneration") >= 0) {
-			outputText("You already have that perk!", true);
-			doNext(70);
-			return;
-		}
-		player.createPerk("Regeneration",0,0,0,0,"Regenerates 2 HP/hour and 1 HP/round.");
-		outputText("You choose the 'Regeneration' perk, allowing you to heal 2 HP every hour and 1 HP every round of combat!", true);
-		doNext(1);
-		return;
-	}
-	//Perk Evade CHosen
-	if(eventNo == 57) {
-		if(player.hasPerk("Evade") >= 0) {
-			outputText("You already have that perk!", true);
-			doNext(70);
-			return;
-		}
-		player.createPerk("Evade",0,0,0,0,"Increases avoidance chances.");
-		outputText("You choose the 'Evade' perk, allowing you to avoid enemy attacks more often!", true);
-		doNext(1);
-		return;
-	}
-	//Perk Runner Chosen
-	if(eventNo == 58) {
-		if(player.hasPerk("Runner") >= 0) {
-			outputText("You already have that perk!", true);
-			doNext(70);
-			return;
-		}
-		player.createPerk("Runner",0,0,0,0,"Increases chances of escaping combat.");
-		outputText("You choose the 'Runner' perk, allowing you to run away much faster!", true);
-		doNext(1);
-		return;
-	}		
-	//Fertility Perk Chosen
-	if(eventNo == 59) {
-		if(player.hasPerk("Fertility+") >= 0) {
-			outputText("You already have that perk!", true);
-			doNext(70);
-			return;
-		}
-		player.createPerk("Fertility+",15,1.75,0,0,"Increases pregnancy chance by 15% and cum volume by up to 50%.");
-		outputText("You choose the 'Fertility+' perk, making it easier to get pregnant by 15% and increase your cum volume by up to 50%(if appropriate)!", true);
-		doNext(1);
-	}
-	//Hot Blooded Perk Chosen
-	if(eventNo == 60) {
-		if(player.hasPerk("Hot Blooded") >= 0) {
-			outputText("You already have that perk!", true);
-			doNext(70);
-			return;
-		}
-		player.createPerk("Hot Blooded",20,0,0,0, "Raises minimum lust by up to 20.");
-		outputText("You choose the 'Hot Blooded' perk.  As a result of your enhanced libido, your lust no longer drops below 20!", true);
-		doNext(1);
-		return;
-	}
-	//Corrupted Libido Perk Chosen
-	if(eventNo == 61) {
-		if(player.hasPerk("Corrupted Libido") >= 0) {
-			outputText("You already have that perk!", true);
-			doNext(70);
-			return;
-		}
-		player.createPerk("Corrupted Libido",20,0,0,0, "Reduces lust gain by 10%.");
-		outputText("You choose the 'Corrupted Libido' perk.  As a result of your body's corruption, you've become a bit harder to turn on. (Lust gain reduced by 10%!)", true);
-		doNext(1);
-		return;
-	}
-	//Seduction perk Chosen
-	if(eventNo == 62) {
-		if(player.hasPerk("Seduction") >= 0) {
-			outputText("You already have that perk!", true);
-			doNext(70);
-			return;
-		}
-		player.createPerk("Seduction",0,0,0,0,"Upgrades your tease attack, making it more effective.");
-		outputText("You choose the 'Seduction' perk, replacing the 'tease' attack with a more powerful 'seduction' variant.", true);
-		doNext(1);
-		return;
-	}
 	//turn on/off autosave
 	if(eventNo == 65) {
 		var e:MouseEvent;
@@ -402,39 +270,10 @@ function doSystem(eventNo:Number):void {
 		saveLoad(e);
 		return;
 	}
-	if(eventNo == 70) 
-	{
-		//perkPicking();
-		return;
-	}
 	//Places menu
 	if(eventNo == 71) 
 	{
 		places(true);
-		return;
-	}
-	//Precision perk Chosen
-	if(eventNo == 72) {
-		if(player.hasPerk("Precision") >= 0) {
-			outputText("You already have that perk!", true);
-			doNext(70);
-			return;
-		}
-		player.createPerk("Precision",0,0,0,0,"Reduces enemy damage resistance by 10.");
-		outputText("You've chosen the 'Precision' perk.  Thanks to your intelligence, you're now more adept at finding and striking an enemy's weak points, reducing their damage resistance by 10.  If your intelligence ever drops below 25 you'll no longer be smart enough to benefit from this perk.", true);
-		doNext(1);
-		return;
-	}
-	//Nymphomania Chosen
-	if(eventNo == 73) {
-		if(player.hasPerk("Nymphomania") >= 0) {
-			outputText("You already have that perk!", true);
-			doNext(70);
-			return;
-		}
-		player.createPerk("Nymphomania",0,0,0,0,"Raises minimum lust by up to 30.");
-		outputText("You've chosen the 'Nymphomania' perk.  Due to the incredible amount of corruption you've been exposed to, you've begun to live in a state of minor constant arousal.  Your lust will never drop below 30.", true);
-		doNext(1);
 		return;
 	}
 	//Camp followers screen
@@ -442,51 +281,6 @@ function doSystem(eventNo:Number):void {
 		doNext(1);
 		campFollowers();
 		return;
-	}
-	//Spellpower Chosen
-	if(eventNo == 75) {
-		if(player.hasPerk("Spellpower") >= 0) {
-			outputText("You already have that perk!", true);
-			doNext(70);
-			return;
-		}
-		player.createPerk("Spellpower",0,0,0,0,"Increases the effects of your spells by up to 50%.");
-		outputText("You've chosen the 'Spellpower' perk.  Thanks to your sizeable intellect and willpower, you are able to more effectively use magic.", true);
-		doNext(1);
-		return;
-	}
-	//Mage Chosen
-	if(eventNo == 76) {
-		if(player.hasPerk("Mage") >= 0) {
-			outputText("You already have that perk!", true);
-			doNext(70);
-			return;
-		}
-		player.createPerk("Mage",0,0,0,0,"Increases the strength of your spells even more than 'Spellpower', up to 100%.");
-		outputText("Thanks in part to your incredible willpower and intellect, you are able to focus your magical abilities even more keenly, boosting your spells effects by up to 100%.", true);
-		doNext(1);
-		return;
-	}
-	if(eventNo == 77) {
-		if(player.hasPerk("Double Attack") >= 0) {
-			outputText("You already have that perk!", true);
-			doNext(70);
-			return;
-		}
-		player.createPerk("Double Attack",0,0,0,0,"Allows you to perform two melee attacks per round.");
-		outputText("Thanks to your incredible speed, you can land two regular attacks in one round!", true);
-		doNext(1);
-		return;
-	}
-	if(eventNo == 78) {
-		if(player.hasPerk("Acclimation") >= 0) {
-			outputText("You already have that perk!", true);
-			doNext(70);
-			return;
-		}
-		player.createPerk("Acclimation",0,0,0,0,"Reduces the rate at which your lust increases.");
-		outputText("Your body is now more acclimated to its heightened lusts!", true);
-		doNext(1);
 	}
 	if(eventNo == 79) {
 		deluxeDildo();
@@ -516,178 +310,17 @@ function doSystem(eventNo:Number):void {
 		explorePlains();
 		return;
 	}
-	//Perk: Thunderous Strikes
-	if(eventNo == 98) {
-		if(player.hasPerk("Thunderous Strikes") >= 0) {
-			outputText("You already have that perk!", true);
-			doNext(70);
-			return;
-		}
-		player.createPerk("Thunderous Strikes",0,0,0,0,"+20% 'Attack' damage while strength is at or above 80.");
-		outputText("You choose the 'Thunderous Strikes' perk, increasing normal damage by 20% while your strength is over 80.", true);
-		doNext(1);
-		return;
-	}
-	//Perk: "Weapon Mastery"
-	if(eventNo == 99) {
-		if(player.hasPerk("Weapon Mastery") >= 0) {
-			outputText("You already have that perk!", true);
-			doNext(70);
-			return;
-		}
-		player.createPerk("Weapon Mastery",0,0,0,0,"After getting so good at carrying large objects, you find large weapons much easier to handle (Double 'Large' weapon bonuses when equipped).");
-		outputText("You choose the 'Weapon Mastery' perk, doubling the effectiveness of large weapons.", true);
-		if(player.weaponPerk == "Large") player.weaponAttack *= 2;
-		doNext(1);
-		return;
-	}
-	//Perk: Tank 2
-	if(eventNo == 100) {
-		if(player.hasPerk("Tank 2") >= 0) {
-			outputText("You already have that perk!", true);
-			doNext(70);
-			return;
-		}
-		player.createPerk("Tank 2",0,0,0,0,"Your maximum HP is raised by an extra 1 point per point of toughness!");
-		outputText("You choose the 'Tank 2' perk, granting an extra maximum HP for each point of toughness.", true);
-		statScreenRefresh();
-		HPChange(player.tou, false);
-		doNext(1);
-		return;
-	}
-	//Perk: Regeneration 2
-	if(eventNo == 101) {
-		if(player.hasPerk("Regeneration 2") >= 0) {
-			outputText("You already have that perk!", true);
-			doNext(70);
-			return;
-		}
-		player.createPerk("Regeneration 2",0,0,0,0,"You regenerate an additional 3HP per round and heal faster out of combat");
-		outputText("You choose the 'Regeneration 2' perk, quadrupling the effectiveness of your regeneration abilities.", true);
-		doNext(1);
-		return;
-	}
-	//Speedy Recovery
-	if(eventNo == 102) {
-		if(player.hasPerk("Speedy Recovery") >= 0) {
-			outputText("You already have that perk!", true);
-			doNext(70);
-			return;
-		}
-		player.createPerk("Speedy Recovery",0,0,0,0,"Thanks to your impressive metabolism you regain fatigue 50% faster.");
-		outputText("You choose the 'Speedy Recovery' perk, boosting your fatigue recovery rate!", true);
-		doNext(1);
-		return;
-	}
-	//Perk: Agility
-	if(eventNo == 103) {
-		if(player.hasPerk("Agility") >= 0) {
-			outputText("You already have that perk!", true);
-			doNext(70);
-			return;
-		}
-		player.createPerk("Agility",0,0,0,0,"When wearing light or medium armor its effectiveness is increased by a portion of your speed.");
-		outputText("You choose the 'Agility' perk, increasing the effectiveness of Light/Medium armors by a portion of your speed.", true);
-		if(player.armorPerk == "Light") player.armorDef += Math.round(player.spe/10);
-		else if(player.armorPerk == "Medium") player.armorDef += Math.round(player.spe/15);
-		doNext(1);
-		return;
-	}
-	//Channeling
-	if(eventNo == 104) {
-		if(player.hasPerk("Channeling") >= 0) {
-			outputText("You already have that perk!", true);
-			doNext(70);
-			return;
-		}
-		player.createPerk("Channeling",0,0,0,0,"You've gotten even better at spellcasting, gaining up to 50% more effectiveness!");
-		outputText("You choose the 'Channeling' perk, boosting the strength of your spellcasting!", true);
-		doNext(1);
-		return;
-	}
-	//Medicine
-	if(eventNo == 105) {
-		if(player.hasPerk("Medicine") >= 0) {
-			outputText("You already have that perk!", true);
-			doNext(70);
-			return;
-		}
-		player.createPerk("Medicine",0,0,0,0,"You now have a 15% chance per round of cleansing poisons/drugs from your body.");
-		outputText("You choose the 'Medicine' perk, giving you a chance to remove debilitating poisons automatically!", true);
-		doNext(1);
-		return;
-	}
-	//Well Adjusted
-	if(eventNo == 106) {
-		if(player.hasPerk("Well Adjusted") >= 0) {
-			outputText("You already have that perk!", true);
-			doNext(70);
-			return;
-		}
-		player.createPerk("Well Adjusted",0,0,0,0,"You gain half as much lust as time passes in Mareth.");
-		outputText("You choose the 'Well Adjusted' perk, reducing the amount of lust you naturally gain over time while in this strange land!", true);
-		doNext(1);
-		return;
-	}
-	//Masochism
-	if(eventNo == 107) {
-		if(player.hasPerk("Masochist") >= 0) {
-			outputText("You already have that perk!", true);
-			doNext(70);
-			return;
-		}
-		player.createPerk("Masochist",0,0,0,0,"You have a masochism fetish and take 30 percent less damage, but you're lust goes up when struck (Requires 60+ Libido).");
-		outputText("You choose the 'Masochist' perk, reducing the damage you take but raising your lust each time!  This perk only functions while your libido is at or above 60!", true);
-		doNext(1);
-		return;
-	}
-	//Sadism
-	if(eventNo == 108) {
-		if(player.hasPerk("Sadist") >= 0) {
-			outputText("You already have that perk!", true);
-			doNext(70);
-			return;
-		}
-		player.createPerk("Sadist",0,0,0,0,"You have a sadism fetish and strike harder, but become aroused by the act of dealing damage.");
-		outputText("You choose the 'Sadist' perk, increasing damage by 20 percent but causing you to gain lust from dealing damage.", true);
-		doNext(1);
-		return;
-	}
-	//Arousing Aura
-	if(eventNo == 109) {
-		if(player.hasPerk("Arousing Aura") >= 0) {
-			outputText("You already have that perk!", true);
-			doNext(70);
-			return;
-		}
-		player.createPerk("Arousing Aura",0,0,0,0,"While your corruption is at or above 70, you exude an aura of lust.");
-		outputText("You choose the 'Arousing Aura' perk, causing you to radiate an aura of lust when your corruption is over 70.", true);
-		doNext(1);
-		return;
-	}
-	//Resistance
-	if(eventNo == 110) {
-		if(player.hasPerk("Resistance") >= 0) {
-			outputText("You already have that perk!", true);
-			doNext(70);
-			return;
-		}
-		player.createPerk("Resistance",0,0,0,0,"You've become resistant to the myriad ways your lust can be increased.");
-		outputText("You choose the 'Resistance' perk, reducing the rate at which your lust increases by 10%.", true);
-		doNext(1);
-		return;
-	}
 	if(eventNo == 111) {
 		exploreSwamp();
 		return;
 	}
 	if(eventNo == 114) {
-		aCb.visible = false;
+		mainView.aCb.visible = false;
 		applyPerk(tempPerk);
 		return;
 	}
 	if(eventNo == 115) {
-		aCb.visible = false;
+		mainView.aCb.visible = false;
 		eventParser(1);
 		return;
 	}
@@ -699,15 +332,15 @@ function doSystem(eventNo:Number):void {
 		if(!monster.hasVagina()) monster.createVagina();
 		monster.vaginas[0].vaginalLooseness = 3;
 		monster.ass.analLooseness = 3;
-		outputText(eventTestInput.text, true, true);
+		outputText(mainView.eventTestInput.text, true, true);
 		simpleChoices("Again",117,"",0,"",0,"",0,"Quit",mainMenu);
-		eventTestInput.x = -10207.5;
-		eventTestInput.y = -1055.1;
+		mainView.eventTestInput.x = -10207.5;
+		mainView.eventTestInput.y = -1055.1;
 		return;
 	}
 	if(eventNo == 119) {
-		eventTestInput.x = -10207.5;
-		eventTestInput.y = -1055.1;
+		mainView.eventTestInput.x = -10207.5;
+		mainView.eventTestInput.y = -1055.1;
 		eventParser(mainMenu);
 		return;
 	}
@@ -722,21 +355,22 @@ function getCurrentStackTrace():String		// Fuck, stack-traces only work in the d
 }
 function errorPrint(details:* = null)
 {
-	outputText("<b>Congratulations, you've found a bug!</b>", true);
-	outputText("\nError: Unknown event!", false);
-	outputText("\n\nPlease report that you had an issue with code: \"" + details + "\" ", false);
+	rawOutputText("<b>Congratulations, you've found a bug!</b>", true);
+	rawOutputText("\nError: Unknown event!");
+	rawOutputText("\n\nPlease report that you had an issue with code: \"" + details + "\" ");
+	rawOutputText("\nIn game version: \"" + ver + "\" ");
 
 	var sTrace = getCurrentStackTrace();
 
 	if (sTrace)	// Fuck, stack-traces only work in the debug player.
-		outputText("and stack-trace: \n <pre>" + sTrace + "</pre>\n", false); 	
-	outputText("to fake-name on the forums or better yet, file a bug report on github: ", false);
-	outputText("\nhttps://github.com/herp-a-derp/Corruption-of-Champions", false);
+		rawOutputText("and stack-trace: \n <pre>" + sTrace + "</pre>\n"); 	
+	rawOutputText("to fake-name on the forums or better yet, file a bug report on github: ");
+	rawOutputText("\nhttps://github.com/herp-a-derp/Corruption-of-Champions");
 
-	outputText("\nPlease try to include the details of what you were doing when you encountered this bug ", false);
+	rawOutputText("\nPlease try to include the details of what you were doing when you encountered this bug ");
 	if (sTrace)
-		outputText(" (including the above stack trace copy&pasted into the details),", false);
-	outputText(" to make tracking the issue down easier. Thanks!", false);
+		rawOutputText(" (including the above stack trace copy&pasted into the details),");
+	rawOutputText(" to make tracking the issue down easier. Thanks!");
 
 	doNext(13);
 }
@@ -756,7 +390,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 	var threshhold:Number = 0;
 	var temp2:Number = 0;
 	while(timeQ > threshhold) {
-		hours++;
+		model.time.hours++;
 		if(player.cumMultiplier > 19999) player.cumMultiplier = 19999;
 		if(player.ballSize > 400) player.ballSize = 400;
 		if(player.hasPerk("Strong Back") >= 0 && !itemSlot4.unlocked) {
@@ -814,7 +448,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(flags[UNKNOWN_FLAG_NUMBER_00274] > 300) flags[UNKNOWN_FLAG_NUMBER_00274] = 24;
 		}
 		//Urta Letters
-		if(flags[NEED_URTA_LETTER] == 1 && hours == 6) getUrtaLetter();
+		if(flags[NEED_URTA_LETTER] == 1 && model.time.hours == 6) getUrtaLetter();
 		//Urta Pregs
 		if(flags[URTA_INCUBATION] > 0) flags[URTA_INCUBATION]++;
 		if(flags[KELLY_INCUBATION] > 0) {
@@ -824,6 +458,16 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 				kellyPopsOutARunt();
 				needNext = true;
 			}
+		}
+		//Goo fuck stuff
+		if (player.statusAffectv1("gooStuffed") > 0) {
+			player.addStatusValue("gooStuffed",1,-1);
+			if (player.statusAffectv1("gooStuffed") <= 0) 
+			{
+				birthOutDatGooSlut();
+				needNext = true;
+			}
+			
 		}
 		//Ember fuck cooldown
 		if(player.statusAffectv1("ember fuck cooldown") > 0) {
@@ -954,11 +598,11 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 				flags[SOPHIE_HEAT_COUNTER] = 551;
 		}
 		if(flags[ANEMONE_KID] > 0) {
-			if(flags[KID_SITTER] == 0 && flags[MARBLE_KIDS] >= 5 && hours > 10 && hours < 18 && rand(4) == 0) {
+			if(flags[KID_SITTER] == 0 && flags[MARBLE_KIDS] >= 5 && model.time.hours > 10 && model.time.hours < 18 && rand(4) == 0) {
 				kidABabysitsCows();
 				needNext = true;
 			}
-			if(flags[KID_SITTER] == 1 && hours > 10 && hours < 18 && rand(4) == 0) {
+			if(flags[KID_SITTER] == 1 && model.time.hours > 10 && model.time.hours < 18 && rand(4) == 0) {
 				flags[KID_SITTER] = 2;
 			}
 			else if(flags[KID_SITTER] == 2) flags[KID_SITTER] = 1;
@@ -1058,7 +702,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 		//Increase Roxanne's growing dick size...
 		flags[UNKNOWN_FLAG_NUMBER_00225]++;
 		//Reset if she finds someone to take it (random at high values)
-		if(flags[UNKNOWN_FLAG_NUMBER_00225] >= 300 && hours == 1 && rand(5) == 0) flags[UNKNOWN_FLAG_NUMBER_00225] = 1;
+		if(flags[UNKNOWN_FLAG_NUMBER_00225] >= 300 && model.time.hours == 1 && rand(5) == 0) flags[UNKNOWN_FLAG_NUMBER_00225] = 1;
 		//hangover status stuff
 		if(player.hasStatusAffect("Hangover") >= 0) {
 			//Countdown
@@ -1265,7 +909,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 		//Countdown to urta freakout
 		if(flags[URTA_EGG_FORCE_EVENT] > 0) flags[URTA_EGG_FORCE_EVENT]--;
 		//Urta egg freak out
-		if(hours > 6 && hours < 18 && flags[URTA_EGG_FORCE_EVENT] < 12 && flags[URTA_EGG_FORCE_EVENT] > 0) {
+		if(model.time.hours > 6 && model.time.hours < 18 && flags[URTA_EGG_FORCE_EVENT] < 12 && flags[URTA_EGG_FORCE_EVENT] > 0) {
 			outputText("\n<b>You feel like you ought to see how Urta is dealing with your little 'donation', and head in to Tel'Adra for a quick checkup on her...</b>\n");
 			urtaChewsOutPC(false);
 		}
@@ -1333,7 +977,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 		//Mino cum update.
 		if(minoCumUpdate()) needNext = true;
 		//Repeated warnings!
-		else if(flags[MINOTAUR_CUM_ADDICTION_STATE] >= 2 && hours % 13 == 0 && flags[UNKNOWN_FLAG_NUMBER_00330] == 0) {
+		else if(flags[MINOTAUR_CUM_ADDICTION_STATE] >= 2 && model.time.hours % 13 == 0 && flags[UNKNOWN_FLAG_NUMBER_00330] == 0) {
 			if(flags[MINOTAUR_CUM_ADDICTION_STATE] == 2) outputText("\n<b>You shiver, feeling a little cold.  Maybe you ought to get some more minotaur cum?  You just don't feel right without that pleasant buzz in the back of your mind.</b>\n", false);
 			else if(flags[MINOTAUR_CUM_ADDICTION_STATE] == 3) outputText("\n<b>The steady fire of lust within you burns hot, making you shiver and grab at your head.  You're STILL in withdrawal after having gone so long without a dose of minotaur love.  You just know you're going to be horny and achy until you get some.</b>\n", false);
 			needNext = true;
@@ -1417,10 +1061,10 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 				if(player.eggs() < 10) {
 					player.addEggs(2);
 				}
-				else if(player.eggs() < 20 && hours % 2 == 0) {
+				else if(player.eggs() < 20 && model.time.hours % 2 == 0) {
 					player.addEggs(1);
 				}
-				else if(hours % 4 == 0) {
+				else if(model.time.hours % 4 == 0) {
 					player.addEggs(1);
 				}
 				if(player.hasPerk("Spider Ovipositor") >= 0) {
@@ -1505,9 +1149,9 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			//Otherwise pregger check
 			else if(player.pregnancyIncubation < 1 && player.hasVagina()) {
 				//Check once in the morning.
-				if(hours ==1) {
+				if(model.time.hours ==1) {
 					//every 15 days if high fertility get egg preg
-					if(player.totalFertility() > 50 && days % 15 == 0) {
+					if(player.totalFertility() > 50 && model.time.days % 15 == 0) {
 						outputText("\n<b>Somehow you know that eggs have begun to form inside you.  You wonder how long it will be before they start to show?</b>\n", false);
 						needNext = true;
 						player.knockUp(5,50,1,1);
@@ -1517,7 +1161,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 						player.createStatusAffect("eggs",rand(6),rand(2),(5+rand(3)),0);
 					}
 					//every 30 days if high fertility get egg preg
-					else if(days % 30 == 0) {
+					else if(model.time.days % 30 == 0) {
 						outputText("\n<b>Somehow you know that eggs have begun to form inside you.  You wonder how long it will be before they start to show?</b>\n", false);
 						needNext = true;
 						player.knockUp(5,50,1,1);
@@ -1727,7 +1371,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 				player.addStatusValue("Feeder",2,1);
 				trace("Feeder status: " + player.statusAffectv2("Feeder") + " (modded " + ((player.statusAffectv2("Feeder")) - 70) + ")");
 				//After 3 days without feeding someone sensitivity jumps.
-				if(player.statusAffectv2("Feeder") >= 72 && hours == 14) {
+				if(player.statusAffectv2("Feeder") >= 72 && model.time.hours == 14) {
 					outputText("\n<b>After having gone so long without feeding your milk to someone, you're starting to feel strange.  Every inch of your skin practically thrums with sensitivity, particularly your sore, dripping nipples.</b>\n", false);
 					temp = (2 + (((player.statusAffectv2("Feeder")) - 70) / 20));
 					stats(0,0,0,0,0,temp,0,0);
@@ -1809,7 +1453,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 					//Chick stuff
 					if(player.statusAffectv1("Exgartuan") == 2 && player.biggestTitSize() >= 12) {
 						//Only once every 9 hours or so.
-						if(hours % 9 == 0) {
+						if(model.time.hours % 9 == 0) {
 							// lactation messing with!
 							if(rand(3) == 0) {
 								outputText("\n<b>", false);
@@ -2084,7 +1728,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 				}
 			}
 		}
-		if(hours == 6 && player.armorName == "bimbo skirt" && rand(10) == 0) {
+		if(model.time.hours == 6 && player.armorName == "bimbo skirt" && rand(10) == 0) {
 			outputText("\n<b>As you wake up, you feel a strange tingling starting in your nipples that extends down into your breasts.  After a minute, the tingling dissipates in a soothing wave.  As you cup your tits, you realize they've gotten larger!</b>");
 			growTits(1,player.bRows(),false,2);
 			needNext = true;
@@ -2107,7 +1751,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			player.tailVenom += player.tailRecharge;
 			if(player.tailVenom > 100) player.tailVenom = 100;
 		}
-		if(hours == 3 && followerHel() && flags[SLEEP_WITH] == "Helia" && rand(10) == 0) {
+		if(model.time.hours == 3 && followerHel() && flags[SLEEP_WITH] == "Helia" && rand(10) == 0) {
 			sleepyNightMareHel();
 		}
 		//Luststick resistance unlock
@@ -2117,30 +1761,30 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(player.hasStatusAffect("Luststick") >= 0) player.removeStatusAffect("Luststick");
 		}
 		//Sophie's love
-		if((player.hasPerk("Luststick Adapted") < 0 || rand(3) == 0) && hours == 10 && bimboSophie() && flags[SOPHIE_INCUBATION] == 0 && !sophieIsInSeason() && flags[SOPHIE_EGG_COUNTER] == 0) {
+		if((player.hasPerk("Luststick Adapted") < 0 || rand(3) == 0) && model.time.hours == 10 && bimboSophie() && flags[SOPHIE_INCUBATION] == 0 && !sophieIsInSeason() && flags[SOPHIE_EGG_COUNTER] == 0) {
 			bimboSophieLustStickSurprise();
 			needNext = true;
 		}
 		if(flags[BIKINI_ARMOR_BONUS] > 0) {
 			if(player.armorName == "lusty maiden's armor") {
 				//Adjust for inflation
-				if(hours > 23) flags[BIKINI_ARMOR_BONUS]--;
+				if(model.time.hours > 23) flags[BIKINI_ARMOR_BONUS]--;
 				//Keep in bounds.
 				if(flags[BIKINI_ARMOR_BONUS] < 0) flags[BIKINI_ARMOR_BONUS] = 0;
 				if(flags[BIKINI_ARMOR_BONUS] > 8) flags[BIKINI_ARMOR_BONUS] = 8;
 			}
 			else flags[BIKINI_ARMOR_BONUS] = 0;
 		}
-		if(hours > 23) {
-			hours = 0;
-			days++;
-			if(flags[KELLY_REWARD_COOLDOWN] > 0 && days % 3 == 0) flags[KELLY_REWARD_COOLDOWN] = 0;
+		if(model.time.hours > 23) {
+			model.time.hours = 0;
+			model.time.days++;
+			if(flags[KELLY_REWARD_COOLDOWN] > 0 && model.time.days % 3 == 0) flags[KELLY_REWARD_COOLDOWN] = 0;
 			if(flags[HELSPAWN_GROWUP_COUNTER] > 0) flags[HELSPAWN_GROWUP_COUNTER]++;
 			if(arianFollower() && flags[ARIAN_VAGINA] > 0) flags[ARIAN_EGG_EVENT]++;
 			flags[ARIAN_LESSONS] = 0;
 			flags[ARIAN_TREATMENT] = 0;
 			flags[BROOKE_MET_TODAY] = 0;
-			if(days % 2 == 0 && flags[KAIJU_BAD_END_COUNTER] > 0) {
+			if(model.time.days % 2 == 0 && flags[KAIJU_BAD_END_COUNTER] > 0) {
 				flags[KAIJU_BAD_END_COUNTER]--;
 				if(flags[KAIJU_BAD_END_COUNTER] < 0) flags[KAIJU_BAD_END_COUNTER] = 0;
 			}
@@ -2224,7 +1868,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 				if(flags[UNKNOWN_FLAG_NUMBER_00120] < 0) flags[UNKNOWN_FLAG_NUMBER_00120] = 0;
 			}
 			//Clear Whitney's Weekly limit
-			if(days % 7 == 0) flags[UNKNOWN_FLAG_NUMBER_00104] = 0;
+			if(model.time.days % 7 == 0) flags[UNKNOWN_FLAG_NUMBER_00104] = 0;
 			//Clear 'has fucked milker today'
 			if(flags[UNKNOWN_FLAG_NUMBER_00112] > 0) flags[UNKNOWN_FLAG_NUMBER_00112] = 0;
 			//Reduce bad-end for cerulean herms number
@@ -2268,7 +1912,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			
 			//Lower daughter population by 1 every fourth day
 			//once population gets high
-			if(player.statusAffectv2("Tamani") > 40 && days % 4 == 0) {
+			if(player.statusAffectv2("Tamani") > 40 && model.time.days % 4 == 0) {
 				player.addStatusValue("Tamani",2,-1);
 			}
 			//Tamani pregnancy counting
@@ -2345,16 +1989,16 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			//Clear dragon breath cooldown!
 			if(player.hasStatusAffect("Dragon Breath Cooldown") >= 0) player.removeStatusAffect("Dragon Breath Cooldown");
 		}
-		if(hours > 20 && hours - 1 <= 20) {
+		if(model.time.hours > 20 && model.time.hours - 1 <= 20) {
 			outputText("\nThe sky darkens as a starless night falls.  The blood-red moon slowly rises up over the horizon.\n", false);
 			needNext = true;
 		}
-		if(hours >= 6 && hours-1 < 6) {
+		if(model.time.hours >= 6 && model.time.hours-1 < 6) {
 			outputText("\nThe sky begins to grow brighter as the moon descends over distant mountains, casting a few last ominous shadows before they burn away in the light.\n", false);
 			needNext = true;
 		}
 		//Amily stuff!
-		if(hours == 6) {
+		if(model.time.hours == 6) {
 			//Pure amily flips her shit and moves out!
 			if(flags[AMILY_FOLLOWER] == 1 && player.cor >= 66 && flags[UNKNOWN_FLAG_NUMBER_00173] > 0) {
 				farewellNote();
@@ -2384,39 +2028,39 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 				return true;
 			}
 		}
-		if(hours == 6 && flags[SOPHIE_FOLLOWER_PROGRESS] >= 5 && !bimboSophie() && !sophieFollower() && player.hasCock() && flags[NO_PURE_SOPHIE_RECRUITMENT] == 0) {
+		if(model.time.hours == 6 && flags[SOPHIE_FOLLOWER_PROGRESS] >= 5 && !bimboSophie() && !sophieFollower() && player.hasCock() && flags[NO_PURE_SOPHIE_RECRUITMENT] == 0) {
 			sophieFollowerIntro();
 			return true;
 		}
-		if(hours == 23 && followerHel() && flags[HEL_BONUS_POINTS] >= 150 && flags[HELIA_KIDS_CHAT] == 0) {
+		if(model.time.hours == 23 && followerHel() && flags[HEL_BONUS_POINTS] >= 150 && flags[HELIA_KIDS_CHAT] == 0) {
 			heliaBonusPointsAward();
 			return true;
 		}
-		if(hours == 8 && followerHel() && flags[HEL_NTR_TRACKER] == 1) {
+		if(model.time.hours == 8 && followerHel() && flags[HEL_NTR_TRACKER] == 1) {
 			helGotKnockedUp();
 			return true;
 		}
 		if(flags[HEL_FOLLOWER_LEVEL] == 1 && flags[HEL_HARPY_QUEEN_DEFEATED] > 0 && helAffection() >= 100 &&
-		   flags[HELIA_FOLLOWER_DISABLED] == 0 && hours == 2) {
+		   flags[HELIA_FOLLOWER_DISABLED] == 0 && model.time.hours == 2) {
 			heliaFollowerIntro();
 			return true;   
 		}
-		if(flags[HEL_FOLLOWER_LEVEL] == -1 && hours == 6) {
+		if(flags[HEL_FOLLOWER_LEVEL] == -1 && model.time.hours == 6) {
 			morningAfterHeliaDungeonAgreements();
 			return true;
 		}
 		//Helspawn night smex!
-		if(flags[HELSPAWN_AGE] == 2 && (hours == 2 || hours == 3 || hours == 4) && flags[HELSPAWN_GROWUP_COUNTER] == 7 && flags[HELSPAWN_FUCK_INTERRUPTUS] == 0) {
+		if(flags[HELSPAWN_AGE] == 2 && (model.time.hours == 2 || model.time.hours == 3 || model.time.hours == 4) && flags[HELSPAWN_GROWUP_COUNTER] == 7 && flags[HELSPAWN_FUCK_INTERRUPTUS] == 0) {
 			helspawnIsASlut();
 			return true;
 		}		
 		//Ghostgirl recruitment priority
-		if(flags[SHOULDRA_FOLLOWER_STATE] == .5 && hours == 6) {
+		if(flags[SHOULDRA_FOLLOWER_STATE] == .5 && model.time.hours == 6) {
 			morningShouldraAlert();
 			return true;
 		}
 		//Ghostgirl pissed off dreams
-		if(followerShouldra() && flags[SHOULDRA_SLEEP_TIMER] <= -236 && hours == 3 && player.gender > 0) {
+		if(followerShouldra() && flags[SHOULDRA_SLEEP_TIMER] <= -236 && model.time.hours == 3 && player.gender > 0) {
 			nightTimeShouldraRapesThePC();
 			return true;
 		}
@@ -2442,16 +2086,16 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 				return true;
 			}
 		}
-		if(rand(4) == 0 && isHolidays() && player.gender > 0 && hours == 6 && flags[XMAS_CHICKEN_YEAR] < date.fullYear) {
+		if(rand(4) == 0 && isHolidays() && player.gender > 0 && model.time.hours == 6 && flags[XMAS_CHICKEN_YEAR] < date.fullYear) {
 			getAChristmasChicken();
 			return true;
 		}
 		//Amily X Urta morning after.
-		if(!urtaBusy() && flags[AMILY_VISITING_URTA] == 2 && hours == 6) {
+		if(!urtaBusy() && flags[AMILY_VISITING_URTA] == 2 && model.time.hours == 6) {
 			amilyUrtaMorningAfter();
 			return true;
 		}
-		if(flags[VAPULA_FOLLOWER] >= 2.5 && hours == 6) {
+		if(flags[VAPULA_FOLLOWER] >= 2.5 && model.time.hours == 6) {
 			femaleVapulaRecruitmentPartII();
 			return true;
 		}
@@ -2466,7 +2110,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 		else if(temp >= 5) ceraph = 3;
 		//DREAMS
 		//Shouldra dreams here
-		if(followerShouldra() && flags[SHOULDRA_PLOT_COUNTDOWN] > 0 && hours == 3) {
+		if(followerShouldra() && flags[SHOULDRA_PLOT_COUNTDOWN] > 0 && model.time.hours == 3) {
 			flags[SHOULDRA_PLOT_COUNTDOWN]--;
 			if(flags[SHOULDRA_PLOT_COUNTDOWN] <= 0) {
 				shouldraDream1();
@@ -2474,7 +2118,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//Bee dreams proc
-		if(player.hasCock() && player.hasPerk("Bee Ovipositor") >= 0 && hours == 3 && (player.eggs() >= 20 && rand(6) == 0)) {
+		if(player.hasCock() && player.hasPerk("Bee Ovipositor") >= 0 && model.time.hours == 3 && (player.eggs() >= 20 && rand(6) == 0)) {
 			//happens at first sleep after hitting stage 3 unfertilized
 			//To Wong Foo, Thanks for Everything, Julie Newmar
 			outputText("\nYou sit atop your favorite flower, enjoying the smell of verdure and the sounds of the forest.  The sun is shining brightly and it feels wonderful on your chitin.  Your wings twitch happily in the soft breeze, and it feels good to be alive and doing the colony's work... the only sour note is your heavy, bloated abdomen, so full of unfertilized eggs that it droops, so full it strains your back and pinches your nerves.  Still, it's too nice a day to let that depress you, and you take up your customary song, humming tunelessly but mellifluously as you wait for passers-by.");
@@ -2499,7 +2143,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			return true;
 		}
 		//Drider dreams proc
-		if(player.hasCock() && player.hasPerk("Spider Ovipositor") >= 0 && hours == 3 && (player.eggs() >= 20 && rand(6) == 0)) {
+		if(player.hasCock() && player.hasPerk("Spider Ovipositor") >= 0 && model.time.hours == 3 && (player.eggs() >= 20 && rand(6) == 0)) {
 			//parser calls go to the player's attributes here
 			outputText("\nIn a moonlit forest, you hang upside down from a thick tree branch suspended by only a string of webbing.  You watch with rising lust as a hapless traveler strolls along below, utterly unaware of the trap you've set.  Your breath catches as " + player.mf("he","she") + " finally encounters your web, flailing against the sticky strands in a futile attempt to free " + player.mf("him","her") + "self.  Once the traveller's struggles slow in fatigue, you descend easily to the forest floor, wrapping " + player.mf("him","her") + " in an elegant silk cocoon before pulling " + player.mf("him","her") + " up into the canopy.  Positioning your catch against the tree's trunk, you sink your fangs through the web and into flesh, feeling " + player.mf("his","her") + " body heat with every drop of venom.  Cutting " + player.mf("his","her") + " crotch free of your webbing, you open " + player.mf("his","her") + " [armor] and release the ");
 			if(player.gender == 3) outputText(vaginaDescript(0) + " and ");
@@ -2521,9 +2165,9 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			//Hey whoever, maybe you write them? -Z
 			return true;
 		}
-		if(hours == 3) {
+		if(model.time.hours == 3) {
 			//Plot dreams here
-			if(ceraph > 0 && days % ceraph == 0) {
+			if(ceraph > 0 && model.time.days % ceraph == 0) {
 				ceraphBodyPartDreams();
 				doNext(1);
 				return true;
@@ -2536,7 +2180,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 				return true;
 			}
 			//Day 10 dream forcing
-			else if(player.gender > 0 && days == 10) {
+			else if(player.gender > 0 && model.time.days == 10) {
 				dayTenDreams();
 				doNext(1);
 				return true;
@@ -2552,19 +2196,19 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 				return true;
 			}
 			//Randomly generated dreams here
-			else if((player.lib > 50 || player.lust > 40) && hours == 3) 
+			else if((player.lib > 50 || player.lust > 40) && model.time.hours == 3) 
 			{
 				if(dreamSelect()) return true;
 			}	
 		}
 		//XMAS ELF
-		if(hours == 1 && isHolidays() && date.fullYear > flags[PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE]) {
+		if(model.time.hours == 1 && isHolidays() && date.fullYear > flags[PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE]) {
 			//Set it to remember the last year encountered
 			xmasBitchEncounter();
 			return true;
 		}
 		//TURKEY SURPRISE
-		if((hours == 18 || hours == 19) && date.fullYear > flags[TURKEY_FUCK_YEAR_DONE] && isThanksgiving() && player.gender > 0) {
+		if((model.time.hours == 18 || model.time.hours == 19) && date.fullYear > flags[TURKEY_FUCK_YEAR_DONE] && isThanksgiving() && player.gender > 0) {
 			datTurkeyRumpMeeting();
 			return true;
 		}
@@ -2575,8 +2219,8 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(player.hasPerk("Pierced: Lethite") >= 0) temp += 4;
 		if(player.hasStatusAffect("heat") >= 0) temp += 2;
 		if(vapulaSlave()) temp += 7;
-		if(hours == 2) {
-			if(days % 30 == 0 && flags[ANEMONE_KID] > 0 && player.hasCock() && flags[ANEMONE_WATCH] > 0 && player.statusAffectv2("Tamani") >= 40) {
+		if(model.time.hours == 2) {
+			if(model.time.days % 30 == 0 && flags[ANEMONE_KID] > 0 && player.hasCock() && flags[ANEMONE_WATCH] > 0 && player.statusAffectv2("Tamani") >= 40) {
 				goblinNightAnemone();
 				needNext = true;
 			}
@@ -2628,7 +2272,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//Chance of threesomes!
-		if(flags[HEL_FUCKBUDDY] == 1 && isabellaFollower() && hours == 2 && days % 11 == 0) {
+		if(flags[HEL_FUCKBUDDY] == 1 && isabellaFollower() && model.time.hours == 2 && model.time.days % 11 == 0) {
 			trace("ISABELLA/HELL TEST");
 			//Hell/Izzy threesome intro
 			if(flags[HEL_ISABELLA_THREESOME_ENABLED] == 0) {
@@ -2643,12 +2287,12 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 				return true;
 			}
 		}
-		if(hours == 2 && vapulaSlave() && flags[VAPULA_DAYS_SINCE_FED] >= 5 && (player.hasCock() || (player.hasKeyItem("Demonic Strap-On") >= 0 && player.hasVagina()))) {
+		if(model.time.hours == 2 && vapulaSlave() && flags[VAPULA_DAYS_SINCE_FED] >= 5 && (player.hasCock() || (player.hasKeyItem("Demonic Strap-On") >= 0 && player.hasVagina()))) {
 			vapulaForceFeeds();
 			return true;
 		}
 		//Dreams on hour 3.
-		if(hours == 4) {
+		if(model.time.hours == 4) {
 			if(player.hasStatusAffect("succubiNight") >= 0 && (player.totalCocks() >= 1 || (player.gender == 0))) {
 				//Call secksins!
 				if(player.hasStatusAffect("repeatSuccubi") >= 0) {
@@ -2691,19 +2335,19 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//MORNING FUX
-		if(hours == 6 && bimboSophie() && flags[SLEEP_WITH] == "Sophie" && rand(2) == 0 && player.hasCock() && player.cockThatFits(sophieCapacity()) >= 0) {
+		if(model.time.hours == 6 && bimboSophie() && flags[SLEEP_WITH] == "Sophie" && rand(2) == 0 && player.hasCock() && player.cockThatFits(sophieCapacity()) >= 0) {
 			outputText("\n<b><u>Something odd happens that morning...</u></b>");
 			if(flags[SOPHIE_INCUBATION] > 0 && flags[SOPHIE_INCUBATION] < 120) fuckYoPregnantHarpyWaifu(true);
 			else sophieFenCraftedSex(true);
 			return true;
 		}
-		if(hours == 6 && sophieFollower() && flags[SLEEP_WITH] == "Sophie" && player.lust >= 50 && player.hasCock() && player.smallestCockArea() <= 5) {
+		if(model.time.hours == 6 && sophieFollower() && flags[SLEEP_WITH] == "Sophie" && player.lust >= 50 && player.hasCock() && player.smallestCockArea() <= 5) {
 			sophieSmallDongTeases();
 			return true;
 		}
 		//MARBLE STUFF
 		//End addiction (occurs after the player wakes up when their addiction is under 25 && is not permanently addicted)
-		if(player.statusAffectv3("Marble") > 0 && player.statusAffectv2("Marble") < 25 && player.hasPerk("Marble's Milk") < 0 && player.hasPerk("Marble Resistant") < 0 && hours == 6) {
+		if(player.statusAffectv3("Marble") > 0 && player.statusAffectv2("Marble") < 25 && player.hasPerk("Marble's Milk") < 0 && player.hasPerk("Marble Resistant") < 0 && model.time.hours == 6) {
 			spriteSelect(41);
 			outputText("\nYou wake up feeling strangely at ease, having slept better than you have in a long while.  After a minute, you realize that you don't feel a need to drink Marble's milk anymore!  You are free of your addiction.  You hurry off to the farm to give her the news.\n\n", false);
 			outputText("You find Marble in her room.  When you come in she looks up at you and starts.  \"<i>What happened?</i>\" she asks, \"<i>Something about you is completely different from before...</i>\"  You explain to her that you've gotten over your addiction and no longer crave her milk.\n", false);
@@ -2787,7 +2431,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			return true;
 		}
 		//Become permanently addicted (occurs when the player goes to sleep with addiction 100, before it is reduced by the standard 1):
-		if(player.statusAffectv3("Marble") > 0 && player.statusAffectv2("Marble") >= 100 && player.hasPerk("Marble's Milk") < 0 && player.hasPerk("Marble Resistant") < 0 && hours == 6) {
+		if(player.statusAffectv3("Marble") > 0 && player.statusAffectv2("Marble") >= 100 && player.hasPerk("Marble's Milk") < 0 && player.hasPerk("Marble Resistant") < 0 && model.time.hours == 6) {
 			spriteSelect(41);
 			outputText("\nYou wake up feeling like something has changed.  With slightly chilling clarity, you realize that you have finally become completely and utterly dependent on Marble's milk; you must drink her milk every day, or you will die.  There is nothing that can be done to change that at this point.  You hurry over to the farm; you have to drink Marble's milk, NOW.\n\n", false);
 			outputText("You find Marble in her room.  When you come in she looks up at you and smiles deeply.  \"<i>What happened?</i>\" she asks, \"<i>Something about you feels so wonderful and right.</i>\"  You explain to her that you've finally become entirely dependent on her milk.\n", false);
@@ -2890,7 +2534,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		//END STUFF MOVED FROM doRest() & doSleep()
 		//Raphae, the Russet Rogue!
-		if(hours == 6 && flags[UNKNOWN_FLAG_NUMBER_00133] >= 0 && player.hasKeyItem("Camp - Chest") >= 0 && player.gems >= 5 && player.statusAffectv1("Tel'Adre") >= 1) {
+		if(model.time.hours == 6 && flags[UNKNOWN_FLAG_NUMBER_00133] >= 0 && player.hasKeyItem("Camp - Chest") >= 0 && player.gems >= 5 && player.statusAffectv1("Tel'Adre") >= 1) {
 			/*trace("RAPHAEL FINAL COUNTDOWN: " + flags[UNKNOWN_FLAG_NUMBER_00133]);
 			trace("RAPHAEL MET: " + flags[UNKNOWN_FLAG_NUMBER_00134]);
 			trace("RAPHAEL DRESS TIMER: " + flags[UNKNOWN_FLAG_NUMBER_00135]);
@@ -2948,19 +2592,19 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//Cotton's cereal overlapps marbleliciousness
-		if(hours == 6 && flags[UNKNOWN_FLAG_NUMBER_00245] == 1 && player.biggestLactation() >= 2) {
+		if(model.time.hours == 6 && flags[UNKNOWN_FLAG_NUMBER_00245] == 1 && player.biggestLactation() >= 2) {
 			flags[UNKNOWN_FLAG_NUMBER_00245] = 0;
 			nomSomeTitMilkCereal();
 			return true;
 		}
 		//Isabella's morning suckoffs!
-		if(hours == 6 && isabellaFollower() && flags[ISABELLA_BLOWJOBS_DISABLED] == 0 && player.hasCock() && (days % 2 == 0 || player.hasPerk("Marble's Milk") < 0) && player.shortestCockLength() <= 9) {
+		if(model.time.hours == 6 && isabellaFollower() && flags[ISABELLA_BLOWJOBS_DISABLED] == 0 && player.hasCock() && (model.time.days % 2 == 0 || player.hasPerk("Marble's Milk") < 0) && player.shortestCockLength() <= 9) {
 			spriteSelect(31);
 			isabellaMorningWakeupCall();
 			return true;
 		}
 		//Morning Marble Meetings
-		if(hours == 6 && player.hasPerk("Marble's Milk") >= 0) {
+		if(model.time.hours == 6 && player.hasPerk("Marble's Milk") >= 0) {
 			//Marble is at camp
 			if(player.hasStatusAffect("Camp Marble") >= 0) {
 				postAddictionCampMornings(false);
@@ -3299,10 +2943,10 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 function cheatTime(time:Number):void {
 	while(time > 0) {
 		time--;
-		hours++;
-		if(hours > 23) {
-			days++;
-			hours = 0;
+		model.time.hours++;
+		if(model.time.hours > 23) {
+			model.time.days++;
+			model.time.hours = 0;
 		}
 	}
 	statScreenRefresh();

@@ -1,4 +1,4 @@
-﻿//Gnoll Entrance
+//Gnoll Entrance
 function gnollEncounter():void {
 	spriteSelect(11);
 	outputText("", true);
@@ -464,8 +464,8 @@ function yoDawgHyenaBallz2():void {
 	outputText("Again and again, she rushes toward a release, and every time, her balls slosh with overflowing lust, unable to climax yet urging her to greater depravity until even words are too difficult to manage.  Your ravaged body aches under the endless rape.  It's all you can do to work your hands under your hips to masturbate in the blissful pauses while the gnoll's muscles clench in near orgasm, before she slams you back to the dirt for another round.  You lose track of time as your world narrows to the endlessly thrusting shaft of the hyena-girl's massive clitoris and the merciless weight of her ball-slapping, spunk-swollen pouch. Every time you climax, it fuels her mad frenzy until you silently beg your body to shut out the overwhelming sensations, to no avail.  Day fades into night and night into day as the amazon fucks your spasming, shuddering pucker without thought, or pity, or release.\n\n", false);
 	//[NEXT]
 	doNext(yoDawgHyenaBallz3);
-	hours = 7;
-	days++;
+	model.time.hours = 7;
+	model.time.days++;
 	statScreenRefresh();
 }
 function yoDawgHyenaBallz3():void {

@@ -1229,10 +1229,10 @@ function defeatHolli():void {
 		temp = 7;
 		while(temp > 0) {
 			temp--;
-			hours++;
-			if(hours > 23) {
-				days++;
-				hours = 0;
+			model.time.hours++;
+			if(model.time.hours > 23) {
+				model.time.days++;
+				model.time.hours = 0;
 			}
 		}
 		statScreenRefresh();
@@ -1244,10 +1244,10 @@ function defeatHolli():void {
 		temp = 3;
 		while(temp > 0) {
 			temp--;
-			hours++;
-			if(hours > 23) {
-				days++;
-				hours = 0;
+			model.time.hours++;
+			if(model.time.hours > 23) {
+				model.time.days++;
+				model.time.hours = 0;
 			}
 		}
 		statScreenRefresh();

@@ -1433,7 +1433,7 @@ function leaveIsabellaSallyBehind():void {
 	spriteSelect(68);
 	outputText("", true);
 	outputText("You decline the cow-girl's offer, but tell the redheads to have fun without you.  Though a bit disappointed, they both wave as you make your way back to camp.", false);
-	if(hours < 6) doNext(1);
+	if(model.time.hours < 6) doNext(1);
 	else doNext(13);
 }
 
@@ -1493,7 +1493,7 @@ function noThreesomeSexWithSallyAndIssyLastMinute():void {
 	outputText("With a chuckle, you head on back to camp with a full belly", false);
 	if(player.balls > 0) outputText(" and balls bluer than the lake", false);
 	outputText(".", false);
-	if(hours < 6) doNext(1);
+	if(model.time.hours < 6) doNext(1);
 	else doNext(13);
 }
 
@@ -1622,7 +1622,7 @@ function izzySallyThreeSomeFollowup():void {
 
 	outputText("\"<i>Yeah.  Resting is... resting is good,</i>\" Hel says, trying and failing to suppress a yawn of her own.  Smiling, you wrap your arms around your two beautiful, busty redheads and let sleep overcome you.", false);
 	//(Either return PC to camp or advance to the next day, if in plains or camp, respectively)
-	if(hours < 6) doNext(1);
+	if(model.time.hours < 6) doNext(1);
 	else doNext(15);
 }
 //VAGINA (edited)
@@ -1664,7 +1664,7 @@ function izzySallyThreeSomeVagoozlaz():void {
 	//Bump up follower tracking affection too
 	isabellaAffection(4);
 	helAffection(5);
-	if(hours < 6) doNext(1);
+	if(model.time.hours < 6) doNext(1);
 	else doNext(15);
 }
 //Fox Girls -- First Time Intro

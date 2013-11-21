@@ -1,4 +1,4 @@
-﻿import classes.Player;
+import classes.Player;
 /**
  * Global Variables used across the whole game. I hope to whittle it down slowly.
  */
@@ -11,6 +11,7 @@
 
 //DEBUG, used all over the place
 var debug:Boolean = false;
+//model.debug = debug; // TODO: Set on model?
 
 //Version NUMBER
 var ver:String = "0.8.3d5";
@@ -18,6 +19,7 @@ var version:String = "v0.8.3d5 (<b>Open Source Fixes + Image Pack Support</b>)";
 
 //Indicates if building for mobile?
 var mobile:Boolean = false;
+model.mobile = mobile;
 
 var images:ImageManager = new ImageManager(stage);
 //} endregion
@@ -30,6 +32,7 @@ var images:ImageManager = new ImageManager(stage);
 
 //The Player object, used everywhere
 var player:Player = new Player();
+model.player = player;
 var player2:Player = new Player();
 
 //Used in perk selection, mainly eventParser, input and engineCore
@@ -51,6 +54,7 @@ var itemSwapping:Boolean = false;
 //The extreme flag state array. This needs to go. Holds information about everything, whether it be certain attacks for NPCs 
 //or state information to do with the game. 
 var flags = new DefaultDict();
+model.flags = flags;
 
 /*
 for (var i = 0; i < 3000; i++)
@@ -111,8 +115,8 @@ var itemSubMenu:Boolean = false;
 //{ region DisplayVariables
 
 //Holds the date and time display in the bottom left
-var hours:Number = 0;
-var days:Number = 0;
+var time :TimeModel = new TimeModel();
+model.time = time;
 
 //The string holds all the "story" text, mainly used in engineCore
 var currentText:String = "";

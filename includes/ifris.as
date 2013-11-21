@@ -1,7 +1,7 @@
-﻿//Hours - 15+
+//Hours - 15+
 
 function ifrisIntro():Boolean {
-	if(hours >= 15) {
+	if(model.time.hours >= 15) {
 		if(flags[MET_IFRIS] > 0) outputText("\n\nIfris is standing in the corner of the room, wearing her usual black bikini and eyeing you as soon as you walk in.", false);
 		else outputText("\n\nIn the corner of the room stands a lone figure, her bright cherry-red skin making her stand out.  A long, spaded tail swishes behind her slowly, the length much thicker than most demon tails you've seen.  She couldn't be more than five feet tall, her slender, lithe form looking more athletic than muscular.  A black bikini covers just enough to be modest, her supple C-cup breasts more perky than they have a right to be.  She slowly rolls a lock of springy, curly hair around one index finger, her glowing crimson gaze set on a nearby weight-lifting machine incredulously.  Feeling your eyes on her glistening, oiled skin, she slowly turns them to you instead.", false);
 		return true;

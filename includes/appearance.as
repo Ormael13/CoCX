@@ -1,4 +1,4 @@
-﻿function appearance(e:MouseEvent):void {
+function appearance(e:MouseEvent):void {
 	funcs = new Array();
 	args = new Array();
 	//Temp vars
@@ -405,6 +405,10 @@
 	if(player.hasPerk("Incorporeality") >= 0) outputText("  Of course, your " + player.legs() + " are partially transparent due to their ghostly nature.", false);
 	
 	outputText("\n", false);
+	if (player.hasStatusAffect("gooStuffed") >= 0)
+	{
+		outputText("\n<b>Your gravid-looking belly is absolutely stuffed full of goo. There's no way you can get pregnant like this, but at the same time, you look like some fat-bellied breeder.</b>\n");
+	}
 	//Pregnancy Shiiiiiitz
 	if((player.buttPregnancyType == 23 && player.buttPregnancyIncubation > 0) || (player.buttPregnancyType == 19 && player.buttPregnancyIncubation > 0) || (player.pregnancyType > 0 && player.pregnancyIncubation > 0)) {
 		if(player.pregnancyType == 5) {
@@ -821,8 +825,8 @@
 	if(player.gems == 0) outputText("\n\n<b>Your money-purse is devoid of any currency.", false);
 	if(player.gems > 1) outputText("\n\n<b>You have " + player.gems + " shining gems, collected in your travels.", false);
 	if(player.gems == 1) outputText("\n\n<b>You have " + player.gems + " shining gem, collected in your travels.", false);
-	mainText.htmlText = currentText;
-	scrollBar.update();
+	trace( "Manually setting output text..." );
+	mainView.setOutputText( currentText );
 	//menu();
 	//addButton(0,"Next",camp);
 }

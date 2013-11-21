@@ -90,7 +90,7 @@ function meetBrookeFirstTime():void {
  
 function repeatChooseShower():void {
 	clearOutput();
-	if(hours < 16 || hours > 18 || player.tone < 30) {
+	if(model.time.hours < 16 || model.time.hours > 18 || player.tone < 30) {
 		//Before 16:00/after 18:00, affection <= 19
 		if(brookeAffection() <= 19) {
 			outputText("You head your way back to the showers, feeling the sweet ache of your muscles as you easily find your way there.  The showers are completely empty when you arrive.  On the one hand, you enjoy having the place to yourself and taking your time, but on the other, you can’t help but feel a little disappointed that the Shepherd girl Brooke wasn't there to greet you.");
@@ -1039,7 +1039,7 @@ function brookeSpecialMediumSceneContinued():void {
 		
 		outputText("\n\nBrooke moves fluidly, her own hands returning the favor, gently gliding over every muscle and admiring everything they find.  Her right hand travels around your back with her left runs and combs through your [hair].  Her body grinds against you, her breasts heaving and pressing against your [chest].  She humps her hips up and against you, letting her tight vagina run and rub against your hard " + cockDescript(x) + ".  All the while her mouth hungrily explores yours, her long, fat canine tongue dancing excitedly in your mouth, learning everything there is to know of your own.");
 		
-		outputText("\n\nShe's relentless.  You feel her every excited movement – the claws on her hands rake through your fur and the heat of her belly presses into yours, the strength of her six-pack abs making itself known.  Her mouth eventually, almost reluctantly, pulls away from yours, gasping for air, but she doesn't spend much time recovering as she immediately starts laving your neck with her tongue.  Her hands continue to explore, one gripping softly at your love-handles while the other dips lower, approaching the height of your [butt].  She's deliberately avoiding contact with your " + cockDescript(x) + ", save for teasing it roughly with her abdomen as she rocks against you.");
+		outputText("\n\nShe's relentless.  You feel her every excited movement – the claws on her hands rake through your [hairOrFur] and the heat of her belly presses into yours, the strength of her six-pack abs making itself known.  Her mouth eventually, almost reluctantly, pulls away from yours, gasping for air, but she doesn't spend much time recovering as she immediately starts laving your neck with her tongue.  Her hands continue to explore, one gripping softly at your love-handles while the other dips lower, approaching the height of your [butt].  She's deliberately avoiding contact with your " + cockDescript(x) + ", save for teasing it roughly with her abdomen as she rocks against you.");
  		
 		outputText("\n\nYour hands roam in time with hers, and just as she comes to the fat of your ass, you come to hers (as little fat as there is).  You grip, squeezing as much as you can into your palms, and you're simultaneously excited and disappointed when the tightness of her bottom prevents you from gripping much.  Not to be outdone, she pulls her claws against the skin of yours – knowing she unfortunately can't actually grip yours, she does the next best thing.  Wantonly, you slap both her ass-cheeks as hard as you can, making her yelp and jump, then immediately coo.");
 		

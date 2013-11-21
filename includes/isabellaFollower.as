@@ -1296,7 +1296,7 @@ function fuckIsabella():void {
 //(Chance to play when you EXPLORE the farm after Isabella moves to camp)
 function findIzzyMilking():void {
 	clearOutput();
-	outputText("As you wander around Whitney's farm, your exploration brings you back toward the barn.  Wiping the sweat from your brow after nearly an hour under the hot sun, you lean back against the hard wooden wall to take a breather - only to hear a faint, yet clearly cstatic, mooing coming from inside.  You step over to the nearest window and, peering inside, are surprised to see a familiar towering cowgirl leaning over a railing, a pair of oversized milkers chugging away at her massive mounds.  Seeing her mooing softly as the milkers suckle the thick cream from her teats soon has you well aroused at the sight... and you think could give her a sexy surprise while she's getting milked.");
+	outputText("As you wander around Whitney's farm, your exploration brings you back toward the barn.  Wiping the sweat from your brow after nearly an hour under the hot sun, you lean back against the hard wooden wall to take a breather - only to hear a faint, yet clearly cstatic, mooing coming from inside.  You step over to the nearest window and, peering inside, are surprised to see a familiar towering cowgirl leaning over a railing, a pair of oversized milkers chugging away at her massive mounds.  Seeing her mooing softly as the milkers suckle the thick cream from her teats soon has you well aroused at the sight... and you think you could give her a sexy surprise while she's getting milked.");
 	
 	menu();
 	flags[FOUND_ISABELLA_AT_FARM_TODAY] = 1;
@@ -1361,7 +1361,7 @@ function isabellaBarnFuckPartII():void {
 	}
 	//{If medium cock}
 	else if(player.smallestCockArea() < 40) {
-		outputText("  Your cock enters her, stretching Isabella's walls apart until your [cock smallest] comes to caress to closed mouth of her cervix, eagerly brushing up against the entrance to her womb.  ");
+		outputText("  Your cock enters her, stretching Isabella's walls apart until your [cock smallest] comes to caress the closed mouth of her cervix, eagerly brushing up against the entrance to her womb.  ");
 		if(isabellaAccent()) outputText("\"<i>Ach, so big</i>\"");
 		else outputText("\"<i>It's so big,</i>\"");
 		outputText(" Isabella grunts, her cunt already working hard to milk your prick.");
@@ -1379,7 +1379,7 @@ function isabellaBarnFuckPartII():void {
 	
 	outputText("\n\nShe breaks the short kiss for a moment, just long enough to grasp one of her huge, milky jugs and cup it up, letting her lips wrap around one of the little nubs.  You join, taking another of her four teats into your mouth, your lips close enough to touch as you each enjoy the sweet cream flowing freely from her bosom.  With every thrust, though, Isabella's ample chest quivers, boob-quakes rolling across her chest as you hammer her cunt, sending splashes of her vaginal lubricant arcing out even as trickles of milk run freely down her jiggling cleavage.");
 	
-	if(isabellaAccent()) outputText("\n\n\"<i>Ach, [name], do eet harder?  Fuck me like ze animal I am...");
+	if(isabellaAccent()) outputText("\n\n\"<i>Ach, [name], do eet harder!  Fuck me like ze animal I am...");
 	else outputText("\n\n\"<i>Oh, [name]!  Fuck me?  Fuck me harder, yeah, just like the animal I am...");
 	outputText("  Ahhhh, I'm cumming!</i>\"  You groan as Isabella shrieks her pleasure, her muscles squeezing and milking your [cock smallest] as they contract, her orgasm rocking her entire body, thighs quivering and tits bouncing.  She convulses wildly, screaming as you pound her harder, throwing every last ounce of power you have left into the final seconds until you, too, soar over the edge, the first jets of your hot jizz spurting into her, filling Isabella with your potent seed.  You nearly cry out as waves of orgasmic pleasure crash through your body, setting every nerve afire with an overload of sensation.");
 	

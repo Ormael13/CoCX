@@ -23,7 +23,7 @@ function cottonPregUpdates():void {
 		}
 	}
 	//Increment kid age
-	if(flags[COTTON_KID_COUNT] > 0 && hours == 23) flags[COTTON_OLDEST_KID_AGE]++;
+	if(flags[COTTON_KID_COUNT] > 0 && model.time.hours == 23) flags[COTTON_OLDEST_KID_AGE]++;
 }
 
 function pregCottonChance(bonusMult:Number = 1):void {
@@ -74,7 +74,7 @@ function cottonPregPCChance():void {
 //Been told of naga book quest?
 
 function cottonsIntro():Boolean {
-	if(hours >= 12 && hours <= 18) {
+	if(model.time.hours >= 12 && model.time.hours <= 18) {
 		//Gym intro scene (haven't met):
 		if(flags[UNKNOWN_FLAG_NUMBER_00177] == 0) outputText("\n\nYou see a tall, busty horse-girl doing some stretches over on a nearby mat.  Even from this far away, you can tell from the bulge in her pants that she's no ordinary 'girl'.", false);
 		//Gym intro scene (met, haven't had sex):

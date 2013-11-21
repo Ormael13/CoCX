@@ -218,8 +218,8 @@ function haveAKid():void {
 	stats(0,0,0,0,0,0,-100,0);
 	menu();
 	addButton(0,"Next",HaveAHellKidPartII);
-	hours = 6;
-	days++;
+	model.time.hours = 6;
+	model.time.days++;
 }
 
 function HaveAHellKidPartII():void {
@@ -633,33 +633,33 @@ function nameDatHelspawn():void {
 	outputText("\n\n\"<i>So... what do we name her, love?  I honestly hadn't put that much thought into girl names.  Kind of expected a boy, I guess, but... it's up to you, [name].  What do you think?</i>\"");
 	menu();
 	addButton(0,"Next",applyHelspawnName);
-	nameBox.text = "";
-	nameBox.visible = true;
-	nameBox.width = 165;
-	nameBox.x = mainText.x + 5;
-	nameBox.y = mainText.y + 3 + mainText.textHeight;
+	mainView.nameBox.text = "";
+	mainView.nameBox.visible = true;
+	mainView.nameBox.width = 165;
+	mainView.nameBox.x = mainView.mainText.x + 5;
+	mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
 }
 function applyHelspawnName():void {
 	spriteSelect(68);
 	//Easter Egg Names Hel WILL NOT ALLOW:
-	if(nameBox.text == "" || nameBox.text == "Hellgirl" || nameBox.text == "Kid" || nameBox.text == "Phoenix" || nameBox.text == "Savin" || nameBox.text == "Helia" || nameBox.text == "Mini-doofus") {
+	if(mainView.nameBox.text == "" || mainView.nameBox.text == "Hellgirl" || mainView.nameBox.text == "Kid" || mainView.nameBox.text == "Phoenix" || mainView.nameBox.text == "Savin" || mainView.nameBox.text == "Helia" || mainView.nameBox.text == "Mini-doofus") {
 		clearOutput();
-		if(nameBox.text == "") outputText("<b>You must select a name.</b>", false);
-		else if(nameBox.text == "Hellgirl") outputText("\"<i>Hey, that's copyright infringement.  Probably.</i>\"");
-		else if(nameBox.text == "Kid") outputText("\"<i>Wow, what are you, five?</i>\"");
-		else if(nameBox.text == "Phoenix") outputText("\"<i>Oh hell no.  You're not naming my little girl after one of those... things!  Sorry Kiri, but still!</i>\"");
-		else if(nameBox.text == "Savin") outputText("\"<i>That's a boy's name, dumbass.</i>\"");
-		else if(nameBox.text == "Helia") outputText("\"<i>My favorite name!  Except it's kinda taken, love.  Don't want things to get too confusing around here, do you?</i>\"");
-		else if(nameBox.text == "Mini-doofus") outputText("\"<i>Oh yeah, Kiha'll get a laugh out of that.  You ass.</i>\"");
+		if(mainView.nameBox.text == "") outputText("<b>You must select a name.</b>", false);
+		else if(mainView.nameBox.text == "Hellgirl") outputText("\"<i>Hey, that's copyright infringement.  Probably.</i>\"");
+		else if(mainView.nameBox.text == "Kid") outputText("\"<i>Wow, what are you, five?</i>\"");
+		else if(mainView.nameBox.text == "Phoenix") outputText("\"<i>Oh hell no.  You're not naming my little girl after one of those... things!  Sorry Kiri, but still!</i>\"");
+		else if(mainView.nameBox.text == "Savin") outputText("\"<i>That's a boy's name, dumbass.</i>\"");
+		else if(mainView.nameBox.text == "Helia") outputText("\"<i>My favorite name!  Except it's kinda taken, love.  Don't want things to get too confusing around here, do you?</i>\"");
+		else if(mainView.nameBox.text == "Mini-doofus") outputText("\"<i>Oh yeah, Kiha'll get a laugh out of that.  You ass.</i>\"");
 		//[Back to the name field you go!]
 		menu();
-		nameBox.x = mainText.x + 5;
-		nameBox.y = mainText.y + 3 + mainText.textHeight;
+		mainView.nameBox.x = mainView.mainText.x + 5;
+		mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
 		addButton(0,"Next",applyHelspawnName);
 		return;
 	}
-	flags[HELSPAWN_NAME] = nameBox.text;
-	nameBox.visible = false;
+	flags[HELSPAWN_NAME] = mainView.nameBox.text;
+	mainView.nameBox.visible = false;
 	//[Name Field]
 	//Easter Egg Names:
 	clearOutput();
@@ -1412,8 +1412,9 @@ function calledShot():void {
 				affect--;
 				player.addStatusValue("Called Shot",1,1);
 				player.spe--;
-				speDown.visible = true;
-				speUp.visible = false;
+				mainView.statsView.showStatDown( 'spe' );
+				// speDown.visible = true;
+				// speUp.visible = false;
 			}
 		}
 		else {
@@ -1422,8 +1423,9 @@ function calledShot():void {
 				affect--;
 				player.addStatusValue("Called Shot",1,1);
 				player.spe--;
-				speDown.visible = true;
-				speUp.visible = false;
+				mainView.statsView.showStatDown( 'spe' );
+				// speDown.visible = true;
+				// speUp.visible = false;
 			}
 		}
 		damage = takeDamage(damage);
@@ -1482,8 +1484,9 @@ function sluttyMander():void {
 		outputText("\nDat ass.  You lean back, enjoying the show as the slutty little salamander slips right past your guard, practically grinding up against you until you can feel a fire boiling in your loins!");
 		var lustDelta:Number = player.lustVuln * (10 + player.lib/10);
 		player.lust += lustDelta;
-		lustDown.visible = false;
-		lustUp.visible = true;
+		mainView.statsView.showStatUp( 'lust' );
+		// lustDown.visible = false;
+		// lustUp.visible = true;
 		lustDelta = Math.round(lustDelta * 10)/10;
 		outputText(" (" + lustDelta + ")", false);
 	}

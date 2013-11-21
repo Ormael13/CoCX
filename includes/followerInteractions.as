@@ -508,7 +508,7 @@ function amilyUrtaReaction():void {
 function askAboutAmily():void {
 	outputText("", true);
 	//after 1400 and Urta's on duty:
-	if(hours > 14) {
+	if(model.time.hours > 14) {
 		outputText("You ask the assembled bar patrons if anybody has seen either a strange mouse-woman or Urta around, but don't get much of a response.  One cat-boy drinking at the bar haltingly suggests he may have noticed someone like that earlier in the day, but that was before Urta went on duty.  You thank him for the info.", false);
 		doNext(barTelAdre);
 		return;
