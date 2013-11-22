@@ -1,13 +1,13 @@
 ﻿// Hooking things to MainView.
-mainView.onNewGameClick = newGameGo;
-mainView.onAppearanceClick = appearance;
-mainView.onDataClick = saveLoad;
-mainView.onLevelClick = levelUpGo;
-mainView.onPerksClick = displayPerks;
-mainView.onStatsClick = displayStats;
+// mainView.onNewGameClick = newGameGo;
+// mainView.onAppearanceClick = appearance;
+// mainView.onDataClick = saveLoad;
+// mainView.onLevelClick = levelUpGo;
+// mainView.onPerksClick = displayPerks;
+// mainView.onStatsClick = displayStats;
 
 
-mainView._executeButtomButtonClick = executeButtonClick;
+// mainView._executeButtomButtonClick = executeButtonClick;
 
 // function buttonEvent(e:MouseEvent):void {
 // 	mouseOverText.visible = false;
@@ -442,17 +442,6 @@ var perkList:Array = new Array(
                 data:3}*/
 ); 
  
-//var mainView.aCb:ComboBox = new ComboBox(); 
-//mainView.aCb.dropdownWidth = 200; 
-//mainView.aCb.width = 200; 
-//mainView.aCb.scaleY = 1.1;
-//mainView.aCb.move(-1250, -1550); 
-//mainView.aCb.prompt = "Choose a perk"; 
-mainView.aCb.dataProvider = new DataProvider(perkList); 
-mainView.aCb.addEventListener(Event.CHANGE, changeHandler); 
- 
-addChild(mainView.aCb);
-
 function changeHandler(event:Event):void { 
  	//Store perk name for later addition
  	tempPerk = ComboBox(event.target).selectedItem.label; 

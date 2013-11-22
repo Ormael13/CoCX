@@ -1,39 +1,4 @@
 
-//Keyboard listener!
-stage.addEventListener(KeyboardEvent.KEY_DOWN, keyboard);
-
-// These are toggled between by the [home] key.
-mainView.textBGWhite.visible = false;
-mainView.textBGTan.visible = false;
-
-
-//Not exactly sure what the purpose of this is.
-registerClassAlias("assClass", assClass);
-registerClassAlias("Character", Character);
-registerClassAlias("Cock", Cock);
-registerClassAlias("CockTypesEnum", CockTypesEnum);
-registerClassAlias("Enum", Enum);
-registerClassAlias("Creature", Creature);
-registerClassAlias("itemSlotClass", itemSlotClass);
-registerClassAlias("keyItemClass", keyItemClass);
-registerClassAlias("Monster", Monster);
-registerClassAlias("Player", Player);
-registerClassAlias("statusAffectClass", statusAffectClass);
-registerClassAlias("vaginaClass", vaginaClass);
-//registerClassAlias("Enum", Enum);
-//registerClassAlias("cockClass", cockClass);
-
-//Invert shit
-invertGo();
-//Hide sprites
-mainView.hideSprite();
-//Hide up/down arrows
-mainView.statsView.hideUpDown();
-//Hide choice buttons
-//choices("one", 0, "two", 0, "three", 0, "four", 0, "five", 0, "six", 0, "seven", 0, "eight", 0, "nine", 0, "ten", 0);
-//Call up the title screen
-mainMenu();
-
 
 
 //MainMenu - kicks player out to the main menu
@@ -103,30 +68,30 @@ function doThatTestingThang():void
 	outputText("\n\n", false);
 
 
-	// outputText("1 [if [ [ (4==4) HERP|DERP]\n", false);
-	// outputText("2 [if (4 == 7) HERP|DERP]\n", false);
+	outputText("1 [if [ [ (4==4) HERP|DERP]\n", false);
+	outputText("2 [if (4 == 7) HERP|DERP]\n", false);
 
-	// outputText("3 [if (4==(2+2)) HERP|DERP]\n", false);
-	// outputText("4 [if (4==4) HERP|DERP]\n", false);
+	outputText("3 [if (4==(2+2)) HERP|DERP]\n", false);
+	outputText("4 [if (4==4) HERP|DERP]\n", false);
 
-	// outputText("5 if (4==7) [if (4==7) HERP]\n", false);
-	// outputText("6 if (4==7) [if (4==7) HERP|DERP]\n", false);
-	// outputText("7 if (4=4) [if (4=4) HERP]\n", false);
-	// outputText("8 if (4==4) [if (4==4) HERP]\n", false);
-	// outputText("9 if (4==biggesttitsize) [if (4==biggesttitsize) [HERP [cock] [vagina] [balls]]]\n", false);
-	// outputText("10 if (analcapacity>3)    [if (analcapacity>3) [HERP [cock] [vagina] [balls]]]\n", false);
-	// outputText("11 if (analcapacity = 0)  [if (analcapacity = 0) [HERP [cock] [vagina] [balls]]]\n", false);
-	// outputText("12 if (analcapacity > 0)  [if (analcapacity > 0) [HERP [cock] [vagina] [balls]]]\n", false);
+	outputText("5 if (4==7) [if (4==7) HERP]\n", false);
+	outputText("6 if (4==7) [if (4==7) HERP|DERP]\n", false);
+	outputText("7 if (4=4) [if (4=4) HERP]\n", false);
+	outputText("8 if (4==4) [if (4==4) HERP]\n", false);
+	outputText("9 if (4==biggesttitsize) [if (4==biggesttitsize) [HERP [cock] [vagina] [balls]]]\n", false);
+	outputText("10 if (analcapacity>3)    [if (analcapacity>3) [HERP [cock] [vagina] [balls]]]\n", false);
+	outputText("11 if (analcapacity = 0)  [if (analcapacity = 0) [HERP [cock] [vagina] [balls]]]\n", false);
+	outputText("12 if (analcapacity > 0)  [if (analcapacity > 0) [HERP [cock] [vagina] [balls]]]\n", false);
 
 
 
-	// outputText("\n\n");
-	// outputText("Gender Stuff! [He], [he], [His], [his], [Him], [him], [his], [His]\n");
-	// outputText("Gender Stuff! [rubi ey], [rubi eir], [rubi eirs], [rubi emself]\n");
-	// outputText("Gender Stuff! [rubi Ey], [rubi Eir], [rubi Eirs], [rubi Emself]\n");
-	// outputText("Gender Stuff! [arian ey], [arian eir], [arian eirs], [arian emself]\n");
-	// outputText("Gender Stuff! [arian Ey], [arian Eir], [arian Eirs], [arian Emself]\n");
-	// outputText("\n\n");
+	outputText("\n\n");
+	outputText("Gender Stuff! [He], [he], [His], [his], [Him], [him], [his], [His]\n");
+	outputText("Gender Stuff! [rubi ey], [rubi eir], [rubi eirs], [rubi emself]\n");
+	outputText("Gender Stuff! [rubi Ey], [rubi Eir], [rubi Eirs], [rubi Emself]\n");
+	outputText("Gender Stuff! [arian ey], [arian eir], [arian eirs], [arian emself]\n");
+	outputText("Gender Stuff! [arian Ey], [arian Eir], [arian Eirs], [arian Emself]\n");
+	outputText("\n\n");
 
 	outputText("[cock] stiffening [cock biggest] and [vagina] starting to burn with need\n");
 	outputText("[cock all] stiffening [cock each] and [cock 1] starting to burn with need\n");

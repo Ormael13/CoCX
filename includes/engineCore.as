@@ -1,29 +1,29 @@
-// import flash.events.MouseEvent;
-
-//const DOUBLE_ATTACK_STYLE:int = 867;
-//const SPELLS_CAST:int = 868;
-
-//Fenoxo loves his temps
-var temp:int = 0;
-
-//Used to set what each action buttons displays and does.
-var args:Array = new Array();
-var funcs:Array = new Array();
-
-//Used for stat tracking to keep up/down arrows correct.
-var oldStats = {};
-model.oldStats = oldStats;
-oldStats.oldStr  = 0;
-oldStats.oldTou  = 0;
-oldStats.oldSpe  = 0;
-oldStats.oldInte = 0;
-oldStats.oldSens = 0;
-oldStats.oldLib  = 0;
-oldStats.oldCor  = 0;
-oldStats.oldHP   = 0;
-oldStats.oldLust = 0;
-
-model.maxHP = maxHP;
+// // import flash.events.MouseEvent;
+// 
+// //const DOUBLE_ATTACK_STYLE:int = 867;
+// //const SPELLS_CAST:int = 868;
+// 
+// //Fenoxo loves his temps
+// var temp:int = 0;
+// 
+// //Used to set what each action buttons displays and does.
+// var args:Array = new Array();
+// var funcs:Array = new Array();
+// 
+// //Used for stat tracking to keep up/down arrows correct.
+// var oldStats = {};
+// model.oldStats = oldStats;
+// oldStats.oldStr  = 0;
+// oldStats.oldTou  = 0;
+// oldStats.oldSpe  = 0;
+// oldStats.oldInte = 0;
+// oldStats.oldSens = 0;
+// oldStats.oldLib  = 0;
+// oldStats.oldCor  = 0;
+// oldStats.oldHP   = 0;
+// oldStats.oldLust = 0;
+// 
+// model.maxHP = maxHP;
 
 function maxHP():Number {
 	var max:Number = 0;
@@ -1110,7 +1110,6 @@ function buttonText(buttonName:String):String {
 	return (mainView.getButtonText( buttonIndex ) || "NULL");
 }
 
-mainView._getButtonToolTipText = getButtonToolTipText;
 
 // Returns a string or undefined.
 function getButtonToolTipText( buttonText :String ) :String
