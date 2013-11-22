@@ -8,7 +8,7 @@ function eventTestingPane():void
 
 
 
-[screen startup | THIS IS THE STARTUP SCREEN  [button next_step | Next Page][button exit | Done! ]]
+[screen startup | THIS IS THE STARTUP SCREEN  [button next_step | Next Page][button exit | Done! ][button amilyCorruptSexMenu | FuncCall ]]
 [screen next_step | THIS IS THE SECOND SCREEN [button exit | Done! ]]
 
 

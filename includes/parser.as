@@ -41,7 +41,7 @@ Planned, but not implemented yet:
 */
 
 
-var sceneParserDebug:Boolean = false;
+var sceneParserDebug:Boolean = true;
 
 var mainParserDebug:Boolean = false;
 
@@ -662,6 +662,8 @@ function parseConditional(textCtnt:String, depth:int):String
 }
 
 
+// SCENE PARSING ---------------------------------------------------------------------------------------------------------------
+
 public var buttonNum:Number;
 
 function enterParserScene(sceneName:String):String
@@ -678,17 +680,31 @@ function enterParserScene(sceneName:String):String
 	//trace("Do we have the scene name? ", sceneName in thisParserState)
 	if (sceneName == "exit")
 	{
+		if (sceneParserDebug) trace("Enter scene called to exit");
 		doNextClear(debugPane);
 	}
-	if (sceneName in thisParserState)
+	else if (sceneName in thisParserState)
 	{	
 		if (sceneParserDebug) trace("Have scene \""+sceneName+"\". Parsing and setting up menu");
 		menu();
-		buttonNum = 0;
+		
+		buttonNum = 0;		// Clear the button number, so we start adding buttons from button 0
+
 		var tmp1 = thisParserState[sceneName];
-		var tmp2 = recParser(tmp1, 0);
+		var tmp2 = recParser(tmp1, 0);		// we have to actually parse the scene now
+		rawOutputText(tmp2, true);			// and then stick it on the display
+
 		if (sceneParserDebug) trace("Scene contents: \"" + tmp1 + "\" as parsed: \"" + tmp2 + "\"")
-		rawOutputText(tmp2, true);  // we have to actually parse the scene now, and then stick it on the display
+	}
+	else if (this[sceneName])
+	{
+		if (sceneParserDebug) trace("Have function \""+sceneName+"\" in this!. Calling.");
+		this[sceneName]();
+	}
+	else
+	{
+		if (sceneParserDebug) trace("Enter scene called with unknown arg \""+sceneName+"\". falling back to the debug pane");
+		doNext(debugPane);
 	}
 	return tmp2
 
