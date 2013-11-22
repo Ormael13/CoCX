@@ -48,66 +48,196 @@ import flash.system.Security;;
 function doThatTestingThang():void
 {
 
-	// This junk was for testing my new parser. It can be removed, I think.
-	// I still have a few parser tweaks I want to do, though.
-	// Really, I should have a "test parser" button, but LAZY
+	// Excercise the parser. This should catch parser regressions, I think.
+	// 
+	// 
 
 	
-	outputText("\n\n", false);
+
+	outputText(<![CDATA[
+
+**Parser Tests!**
+
+##Bracket escaping!##
+
+* \\\[cock\\\]
+* [cock]
+
+**Single word nouns**
 
 
-	outputText("[if (hasCock = true) [cock] stiffening][if (isHerm = true)  and ][if (hasVagina = true) [vagina] starting to burn with need] DERP [cock biggest] HERP [armor] LOLWUT  [balls] ");
-	outputText("[If (hours > 19) Hug | Cuddle]\n");
-	outputText("\n\n", false);
+* \\\[armor\\\] - [armor]
+* \\\[armorname\\\] - [armorname]
+* \\\[weapon\\\] - [weapon]
+* \\\[weaponname\\\] - [weaponname]
+* \\\[name\\\] - [name]
+* \\\[asshole\\\] - [asshole]
+* \\\[butthole\\\] - [butthole]
+* \\\[hair\\\] - [hair]
+* \\\[face\\\] - [face]
+* \\\[legs\\\] - [legs]
+* \\\[leg\\\] - [leg]
+* \\\[feet\\\] - [feet]
+* \\\[foot\\\] - [foot]
+* \\\[sack\\\] - [sack]
+* \\\[balls\\\] - [balls]
+* \\\[sheath\\\] - [sheath]
+* \\\[chest\\\] - [chest]
+* \\\[fullchest\\\] - [fullchest]
+* \\\[hips\\\] - [hips]
+* \\\[butt\\\] - [butt]
+* \\\[ass\\\] - [ass]
+* \\\[nipple\\\] - [nipple]
+* \\\[nipples\\\] - [nipples]
+* \\\[tongue\\\] - [tongue]
+* \\\[evade\\\] - [evade]
+* \\\[misdirection\\\] - [misdirection]
+* \\\[agility\\\] - [agility]
+* \\\[master\\\] - [master]
+* \\\[master\\\] - [master]
+* \\\[he\\\] - [he]
+* \\\[him\\\] - [him]
+* \\\[his\\\] - [his]
+* \\\[pussy\\\] - [pussy]
+* \\\[vagina\\\] - [vagina]
+* \\\[vag\\\] - [vag]
+* \\\[clit\\\] - [clit]
+* \\\[cock\\\] - [cock]
+* \\\[cocks\\\] - [cocks]
+* \\\[eachcock\\\] - [eachcock]
+* \\\[onecock\\\] - [onecock]
+* \\\[cockhead\\\] - [cockhead]
+* \\\[vagorass\\\] - [vagorass]
+* \\\[hairorfur\\\] - [hairorfur]
+* \\\[pg\\\] - [pg] (This is a shortcut to two newlines. This should be two lines below the \\\[pg\\\])
 
 
-	outputText("Bracket escaping!\n", false);
-	outputText("\\\[cock\\\]\n", false);
-	outputText("[cock]\n", false);
+**Two word nouns**
 
-	outputText("\n\n", false);
-
-
-	outputText("1 [if [ [ (4==4) HERP|DERP]\n", false);
-	outputText("2 [if (4 == 7) HERP|DERP]\n", false);
-
-	outputText("3 [if (4==(2+2)) HERP|DERP]\n", false);
-	outputText("4 [if (4==4) HERP|DERP]\n", false);
-
-	outputText("5 if (4==7) [if (4==7) HERP]\n", false);
-	outputText("6 if (4==7) [if (4==7) HERP|DERP]\n", false);
-	outputText("7 if (4=4) [if (4=4) HERP]\n", false);
-	outputText("8 if (4==4) [if (4==4) HERP]\n", false);
-	outputText("9 if (4==biggesttitsize) [if (4==biggesttitsize) [HERP [cock] [vagina] [balls]]]\n", false);
-	outputText("10 if (analcapacity>3)    [if (analcapacity>3) [HERP [cock] [vagina] [balls]]]\n", false);
-	outputText("11 if (analcapacity = 0)  [if (analcapacity = 0) [HERP [cock] [vagina] [balls]]]\n", false);
-	outputText("12 if (analcapacity > 0)  [if (analcapacity > 0) [HERP [cock] [vagina] [balls]]]\n", false);
-
-
-
-	outputText("\n\n");
-	outputText("Gender Stuff! [He], [he], [His], [his], [Him], [him], [his], [His]\n");
-	outputText("Gender Stuff! [rubi ey], [rubi eir], [rubi eirs], [rubi emself]\n");
-	outputText("Gender Stuff! [rubi Ey], [rubi Eir], [rubi Eirs], [rubi Emself]\n");
-	outputText("Gender Stuff! [arian ey], [arian eir], [arian eirs], [arian emself]\n");
-	outputText("Gender Stuff! [arian Ey], [arian Eir], [arian Eirs], [arian Emself]\n");
-	outputText("\n\n");
-
-	outputText("[cock] stiffening [cock biggest] and [vagina] starting to burn with need\n");
-	outputText("[cock all] stiffening [cock each] and [cock 1] starting to burn with need\n");
-	outputText("[cockhead biggest] stiffening [cockhead smallest] and [cockhead longest] and [cockhead 1] starting to burn with need\n");
-
-	outputText("\n\n");
-	outputText("Complex IF Statement thing: [if (hasCock = true) [cock] stiffening IFSTUFF [if (hasVagina = true) [vagina] starting to burn with need] IFSTUFFDONE][if (isHerm = true) and ][if (hasVagina = true) [vagina] starting to burn with need]");
-	outputText("\n\n");
+* \\\[cock all\\\] - [cock all]
+* \\\[cock each\\\] - [cock each]
+* \\\[cock one\\\] - [cock one]
+* \\\[cock largest\\\] - [cock largest]
+* \\\[cock biggest\\\] - [cock biggest]
+* \\\[cock smallest\\\] - [cock smallest]
+* \\\[cock longest\\\] - [cock longest]
+* \\\[cock shortest\\\] - [cock shortest]
+* \\\[cock 0\\\] - [cock 0]  (This should always error)
+* \\\[cock 1\\\] - [cock 1]
+* \\\[cock 2\\\] - [cock 2]
+* \\\[cockHead biggest\\\] - [cockHead biggest]
+* \\\[cockHead largest\\\] - [cockHead largest]
+* \\\[cockHead smallest\\\] - [cockHead smallest]
+* \\\[cockHead longest\\\] - [cockHead longest]
+* \\\[cockHead shortest\\\] - [cockHead shortest]
+* \\\[cockHead 0\\\] - [cockHead 0]  (This should always error)
+* \\\[cockHead 1\\\] - [cockHead 1]
+* \\\[cockHead 2\\\] - [cockHead 2]
 
 
-	outputText("[arian chest] , [arian chestAdj], [rubi breasts], [rubi cock]");
 
-	outputText("\n\n");
+**Boolean tests**
+
+* 1 \\\[if (4==4) HERP|DERP\\\]
+* 1 [if (4==4) HERP|DERP]
+* 2 \\\[if (4 == 7) HERP|DERP\\\]
+* 2 [if (4 == 7) HERP|DERP]
+* 3 \\\[if (4==(2+2)) HERP|DERP\\\]
+* 3 [if (4==(2+2)) HERP|DERP]
+* 4 \\\[if (4==4) HERP|DERP\\\]
+* 4 [if (4==4) HERP|DERP]
+* 5 \\\[if (4==7) [if (4==7) HERP]\\\]
+* 5 [if (4==7) [if (4==7) HERP]]
+* 6 \\\[if (4==7) [if (4==7) HERP|DERP]\\\]
+* 6 [if (4==7) [if (4==7) HERP|DERP]]
+* 7 \\\[if (4=4) [if (4=4) HERP]\\\]
+* 7 [if (4=4) [if (4=4) HERP]]
+* 8 \\\[if (4==4) [if (4==4) HERP]\\\]
+* 8 [if (4==4) [if (4==4) HERP]]
+* 9 \\\[if (4==biggesttitsize) \\\]
+* 9 [if (4==biggesttitsize) ]
+* 10 \\\[if (4==biggesttitsize) HERP|DERP\\\]
+* 10 [if (4==biggesttitsize) HERP|DERP]
+* 11 \\\[if (analcapacity>3)    HERP|DERP\\\]
+* 11 [if (analcapacity>3)    HERP|DERP]
+* 12 \\\[if (analcapacity>3) HERP|DERP\\\]
+* 12 [if (analcapacity>3) HERP|DERP]
+* 13 \\\[if (analcapacity = 0)  HERP|DERP\\\]
+* 13 [if (analcapacity = 0)  HERP|DERP]
+* 14 \\\[if (analcapacity = 0) HERP|DERP\\\]
+* 14 [if (analcapacity = 0) HERP|DERP]
+* 15 \\\[if (analcapacity > 0)  HERP|DERP\\\]
+* 15 [if (analcapacity > 0)  HERP|DERP]
+* 16 \\\[if (analcapacity > 0) HERP|DERP\\\]
+* 16 [if (analcapacity > 0) HERP|DERP]
+
+**Gender tests**
+
+**PC**
+
+* \\\[He\\\]  - [He]
+* \\\[he\\\]  - [he]
+* \\\[His\\\]  - [His]
+* \\\[his\\\]  - [his]
+* \\\[Him\\\]  - [Him]
+* \\\[him\\\]  - [him]
+* \\\[his\\\]  - [his]
+* \\\[His\\\]  - [His]
+
+**NPC**
+
+**Rubi**
+
+
+* \\\[rubi ey\\\] - [rubi ey]
+* \\\[rubi eir\\\] - [rubi eir]
+* \\\[rubi eirs\\\] - [rubi eirs]
+* \\\[rubi emself\\\] - [rubi emself]
+* \\\[rubi Ey\\\] - [rubi Ey]
+* \\\[rubi Eir\\\] - [rubi Eir]
+* \\\[rubi Eirs\\\] - [rubi Eirs]
+* \\\[rubi Emself\\\] - [rubi Emself]
+
+
+**Arian**
+
+* \\\[arian ey\\\] - [arian ey]
+* \\\[arian eir\\\] - [arian eir]
+* \\\[arian eirs\\\] - [arian eirs]
+* \\\[arian emself\\\] - [arian emself]
+* \\\[arian Ey\\\] - [arian Ey]
+* \\\[arian Eir\\\] - [arian Eir]
+* \\\[arian Eirs\\\] - [arian Eirs]
+* \\\[arian Emself\\\] - [arian Emself]
+
+
+**NPC Aspect tests**
+
+* \\\[arian chest\\\] - [arian chest]
+* \\\[arian chestAdj\\\] - [arian chestAdj]
+* \\\[rubi breasts\\\] - [rubi breasts]
+* \\\[rubi cock\\\] - [rubi cock]
+
+
+**Typical Noun usages**
+
+* [cock] stiffening [cock biggest] and [vagina] starting to burn with need
+* [cock all] stiffening [cock each] and [cock 1] starting to burn with need
+* [cockhead biggest] stiffening [cockhead smallest] and [cockhead longest] and [cockhead 1] starting to burn with need
+
+
+**Complex IF Statement thing**
+
+
+\\\[if (hasCock = true) \\\[cock\\\] stiffening IFSTUFF \\\[if (hasVagina = true) \\\[vagina\\\] starting to burn with need\\\] IFSTUFFDONE\\\]\\\[if (isHerm = true) and \\\]\\\[if (hasVagina = true) \\\[vagina\\\] starting to burn with need\\\]   
+[if (hasCock = true) [cock] stiffening IFSTUFF [if (hasVagina = true) [vagina] starting to burn with need] IFSTUFFDONE][if (isHerm = true) and ][if (hasVagina = true) [vagina] starting to burn with need]
+
 	
+	]]>, true, true);
 
 
+	menu();
+	addButton(4, "Back", debugPane)
 
 }
 
@@ -250,6 +380,7 @@ function debugPane():void
 	menu();
 	addButton(0, "Event Tester", eventTestingPane);
 	addButton(1, "Test Input", eventTester);
+	addButton(4, "Parser Tests", doThatTestingThang);
 	addButton(9, "Back", mainMenu);
 }
 
