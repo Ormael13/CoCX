@@ -1,4 +1,4 @@
-// // import flash.events.MouseEvent;
+﻿// // import flash.events.MouseEvent;
 // 
 // //const DOUBLE_ATTACK_STYLE:int = 867;
 // //const SPELLS_CAST:int = 868;
@@ -180,6 +180,12 @@ function outputText(output:String, purgeText:Boolean = false, parseAsMarkdown = 
 		mainView.setOutputText( currentText );
 	}
 
+}
+
+function flushOutputTextToGUI():void
+{
+	
+	mainView.setOutputText( currentText );
 }
 
 function perkLongDescription(perkName:String = ""):String {

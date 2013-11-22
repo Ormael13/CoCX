@@ -65,7 +65,6 @@ function doThatTestingThang():void
 
 **Single word nouns**
 
-
 * \\\[armor\\\] - [armor]
 * \\\[armorname\\\] - [armorname]
 * \\\[weapon\\\] - [weapon]
@@ -111,7 +110,6 @@ function doThatTestingThang():void
 * \\\[hairorfur\\\] - [hairorfur]
 * \\\[pg\\\] - [pg] (This is a shortcut to two newlines. This should be two lines below the \\\[pg\\\])
 
-
 **Two word nouns**
 
 * \\\[cock all\\\] - [cock all]
@@ -133,8 +131,6 @@ function doThatTestingThang():void
 * \\\[cockHead 0\\\] - [cockHead 0]  (This should always error)
 * \\\[cockHead 1\\\] - [cockHead 1]
 * \\\[cockHead 2\\\] - [cockHead 2]
-
-
 
 **Boolean tests**
 
@@ -188,7 +184,6 @@ function doThatTestingThang():void
 
 **Rubi**
 
-
 * \\\[rubi ey\\\] - [rubi ey]
 * \\\[rubi eir\\\] - [rubi eir]
 * \\\[rubi eirs\\\] - [rubi eirs]
@@ -197,7 +192,6 @@ function doThatTestingThang():void
 * \\\[rubi Eir\\\] - [rubi Eir]
 * \\\[rubi Eirs\\\] - [rubi Eirs]
 * \\\[rubi Emself\\\] - [rubi Emself]
-
 
 **Arian**
 
@@ -210,7 +204,6 @@ function doThatTestingThang():void
 * \\\[arian Eirs\\\] - [arian Eirs]
 * \\\[arian Emself\\\] - [arian Emself]
 
-
 **NPC Aspect tests**
 
 * \\\[arian chest\\\] - [arian chest]
@@ -218,16 +211,13 @@ function doThatTestingThang():void
 * \\\[rubi breasts\\\] - [rubi breasts]
 * \\\[rubi cock\\\] - [rubi cock]
 
-
 **Typical Noun usages**
 
 * [cock] stiffening [cock biggest] and [vagina] starting to burn with need
 * [cock all] stiffening [cock each] and [cock 1] starting to burn with need
 * [cockhead biggest] stiffening [cockhead smallest] and [cockhead longest] and [cockhead 1] starting to burn with need
 
-
 **Complex IF Statement thing**
-
 
 \\\[if (hasCock = true) \\\[cock\\\] stiffening IFSTUFF \\\[if (hasVagina = true) \\\[vagina\\\] starting to burn with need\\\] IFSTUFFDONE\\\]\\\[if (isHerm = true) and \\\]\\\[if (hasVagina = true) \\\[vagina\\\] starting to burn with need\\\]   
 [if (hasCock = true) [cock] stiffening IFSTUFF [if (hasVagina = true) [vagina] starting to burn with need] IFSTUFFDONE][if (isHerm = true) and ][if (hasVagina = true) [vagina] starting to burn with need]
@@ -375,12 +365,18 @@ function debugPane():void
 
 	outputText("\nCurrently have " + images.getLoadedImageCount() + " images loaded into cache.");
 
+
+	outputText("\n\n<b>FUNCTIONALITY ON THIS PAGE IS IN ALPHA-RELEASE STATUS</b>\n");
+	outputText("<b>IF YOU DON'T KNOW WHAT YOU ARE DOING AND/OR HAVE UNSAVED GAME PROGRESS, DO NOT CLICK ANY BUTTON EXCEPT \"BACK\"</b>\n");
+
+	
 	outputText(images.showImage("monster-ceraph"));
+
 
 	menu();
 	addButton(0, "Event Tester", eventTestingPane);
 	addButton(1, "Test Input", eventTester);
-	addButton(4, "Parser Tests", doThatTestingThang);
+	addButton(5, "Parser Tests", doThatTestingThang);
 	addButton(9, "Back", mainMenu);
 }
 
@@ -581,19 +577,30 @@ function creditsScreen():void {
 	doNext(mainMenu);
 }
 
+
+
+	
+
+
+	
+
 function imageCreditsScreen():void
 {
 
 	if (images.getLoadedImageCount() > 0)
 	{
-		outputText("<b>Bundled Image Credits:</b>\n", true);
-		outputText("<b>Yoh-SL</b>")
-		outputText("<ul>");;
-		outputText("<li> Bee-Girl Monster Image</li>");
-		outputText("<li> Goo-Girl Monster Image</li>");
-		outputText("<li> Ceraph Monster Image</li>");
-		outputText("<li> Sand-Witch (and sandwich) Monster Images</li>");
-		outputText("</ul>");
+		outputText(<![CDATA[
+
+**Bundled Image Credits:**
+
+**Yoh-SL**
+
+* Bee-Girl Monster Image
+* Goo-Girl Monster Image
+* Ceraph Monster Image
+* Sand-Witch (and sandwich)
+
+		]]>, true, true);
 	}
 	else
 	{
@@ -612,38 +619,3 @@ function howToPlay():void {
 	doNext(mainMenu);
 }
 
-
-function eventTester():void {
-	outputText("", true);
-	showTestInputPanel();
-	//mainView.eventTestInput.text = "Paste test event text here.";
-	simpleChoices("Proceed",eventTesterGo,"",0,"",0,"",0,"Back",eventTesterExit);
-}
-
-function eventTesterGo():void 
-{
-	hideTestInputPanel();
-	
-	outputText(mainView.eventTestInput.text, true, true);
-	//simpleChoices("Again",117,"",0,"",0,"",0,"Quit",mainMenu);
-	return;
-}
-
-function eventTesterExit():void 
-{
-	hideTestInputPanel();
-	eventParser(debugPane);
-	return;
-}
-
-function showTestInputPanel():void
-{
-	mainView.eventTestInput.x = 207.5;
-	mainView.eventTestInput.y = 55.1;
-}
-function hideTestInputPanel():void
-{
-
-	mainView.eventTestInput.x = -10207.5;
-	mainView.eventTestInput.y = -1055.1;
-}
