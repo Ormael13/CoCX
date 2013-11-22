@@ -63,7 +63,7 @@
 			this.addFrameScript( 0, this.run );
 		}
 
-		public function run()
+		public function run():void
 		{
 			var mainView :MainView = this.mainView;
 			var model :GameModel = this.model;

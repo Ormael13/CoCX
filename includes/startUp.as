@@ -261,7 +261,8 @@ function settingsScreen():void
 
 function controlsMenu():void
 {
-	outputText("Herp derp this is the controls menu", true);
+	//outputText("Herp derp this is the controls menu", true);
+	outputText(inputManager.GenerateControlMenuText(), true);
 	
 	doNext(mainMenu);
 }

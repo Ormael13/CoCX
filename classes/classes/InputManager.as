@@ -6,6 +6,8 @@ package classes
 	import flash.events.KeyboardEvent;
 	import flash.utils.Dictionary;
 	import flash.display.MovieClip;
+	import flash.utils.describeType;
+	import flash.ui.Keyboard;
 	
 	/**
 	 * Generic input manager
@@ -26,6 +28,8 @@ package classes
 		
 		private var _keysToControlMethods:Object = new Object();
 		private var _mainView:MainView;
+		
+		private var _keyDict:Dictionary;
 
 		public function InputManager(stage:Stage) 
 		{
@@ -34,7 +38,22 @@ package classes
 			_availableControlMethods = 0;
 			_availableCheatControlMethods = 0;
 			
+			this.PopulateKeyboardDict();
+			
 			_stage.addEventListener(KeyboardEvent.KEY_DOWN, this.KeyHandler);
+		}
+		
+		private function PopulateKeyboardDict():void
+		{
+			var keyDescriptions:XML = describeType(Keyboard);
+			var keyNames:XMLList = keyDescriptions..constant.@name;
+			
+			_keyDict = new Dictionary();
+			
+			for (var i:int = 0; i < keyNames.length(); i++)
+			{
+				_keyDict[Keyboard[keyNames[i]]] = keyNames[i];
+			}
 		}
 		
 		// Add a new action that can be bound to keys -- this will (mostly) be static I guess
@@ -53,7 +72,7 @@ package classes
 			}
 		}
 		
-		public function BindKeyToControl(keyCode:int, funcName:String)
+		public function BindKeyToControl(keyCode:int, funcName:String):void
 		{
 			for (var i:int in _controlMethods)
 			{
@@ -99,6 +118,70 @@ package classes
 			{
 				_cheatControlMethods[i].ExecFunc(keyCode);
 			}
+		}
+		
+		public function GetAvailableFunctions():Array
+		{
+			var funcNames:Array = new Array();
+			
+			for (var i:int in _controlMethods)
+			{
+				funcNames.push(_controlMethods[i].Name);
+			}
+			
+			return funcNames;
+		}
+		
+		public function GetBoundKeyCodesForFunction(funcName:String):Array
+		{
+			var keyCodes:Array = new Array();
+			
+			for (var i:int in _keysToControlMethods)
+			{
+				if (funcName == _keysToControlMethods[i].Name)
+				{
+					keyCodes.push(i);
+				}
+			}
+			
+			return keyCodes;
+		}
+		
+		public function GenerateControlMenuText():String
+		{
+			var result:String = "";
+			
+			result = "<b>Currently bound controls:</b>\n\n";
+			
+			var funcNames:Array = GetAvailableFunctions();
+			
+			trace(funcNames.length + " Available Funcs");
+			
+			for (var i:int = 0; i < funcNames.length; i++)
+			{
+				var keyCodes:Array = GetBoundKeyCodesForFunction(funcNames[i]);
+				
+				result += "<b>" + funcNames[i] + ":</b>";
+				
+				if (keyCodes.length == 0)
+				{
+					result += " Unbound"
+				}
+				else
+				{
+					trace(keyCodes.length + " keys for " + funcNames[i]);
+					for (var k:int = 0; k < keyCodes.length; k++)
+					{
+						var charRep:String;
+						
+						result += " " + _keyDict[keyCodes[k]];
+					}
+				}
+				
+				result += "\n";
+			}
+			
+			return result;
 		}
 	}
 	

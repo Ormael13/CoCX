@@ -43,7 +43,7 @@
     <option linkReport="" />
     <option loadExterns="" />
     <option staticLinkRSL="True" />
-    <option additional="" />
+    <option additional="-show-actionscript-warnings=false&#xA;-show-binding-warnings=false&#xA;-show-unused-type-selector-warnings=false" />
     <option compilerConstants="" />
     <option minorVersion="" />
   </build>

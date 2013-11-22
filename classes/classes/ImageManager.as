@@ -155,7 +155,7 @@ package classes
 		}
 		
 		// Event listener hooks into the stage to find objects added to the display list at any point in the heirarchy
-		private function fixupListener(e:Event)
+		private function fixupListener(e:Event):void
 		{
 			// We're looking for Loader objects -- there /could/ be other types of loaders in future, but right now,
 			// the only thing that will create loaders is the mainText field when it parses an <img> tag
@@ -192,7 +192,7 @@ package classes
 		 * In summary. ADOBE DURR. This kind of stupid, half-implemented interaction between base UI components is systematic.
 		 * @param	e
 		 */
-		private function doFixup(e:Event)
+		private function doFixup(e:Event):void
 		{
 			// Remove the Completion event listener
 			e.target.removeEventListener(Event.COMPLETE, doFixup);
