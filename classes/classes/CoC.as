@@ -90,10 +90,10 @@
 			include "../../includes/ceraphFollower.as";
 			include "../../includes/chameleons.as";
 			include "../../includes/charCreation.as";
-			include "../../includes/customCharCreation.as";
 			include "../../includes/cinnabar.as";
 			include "../../includes/combat.as";
 			include "../../includes/cotton.as";
+			include "../../includes/customCharCreation.as";
 			include "../../includes/descriptors.as";
 			include "../../includes/doEvent.as";
 			include "../../includes/dreams.as";
@@ -120,7 +120,7 @@
 			include "../../includes/followerInteractions.as";
 			include "../../includes/froggirl.as";
 			include "../../includes/fuckingTree.as";
-			include "../../includes/gangBangVillage.as";
+			include "../../includes/gangbangVillage.as";
 			include "../../includes/gargoyle.as";
 			include "../../includes/GlobalVariables.as";
 			include "../../includes/gnoll.as";
