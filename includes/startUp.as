@@ -1,39 +1,4 @@
 
-//Keyboard listener!
-stage.addEventListener(KeyboardEvent.KEY_DOWN, keyboard);
-
-// These are toggled between by the [home] key.
-mainView.textBGWhite.visible = false;
-mainView.textBGTan.visible = false;
-
-
-//Not exactly sure what the purpose of this is.
-registerClassAlias("assClass", assClass);
-registerClassAlias("Character", Character);
-registerClassAlias("Cock", Cock);
-registerClassAlias("CockTypesEnum", CockTypesEnum);
-registerClassAlias("Enum", Enum);
-registerClassAlias("Creature", Creature);
-registerClassAlias("itemSlotClass", itemSlotClass);
-registerClassAlias("keyItemClass", keyItemClass);
-registerClassAlias("Monster", Monster);
-registerClassAlias("Player", Player);
-registerClassAlias("statusAffectClass", statusAffectClass);
-registerClassAlias("vaginaClass", vaginaClass);
-//registerClassAlias("Enum", Enum);
-//registerClassAlias("cockClass", cockClass);
-
-//Invert shit
-invertGo();
-//Hide sprites
-mainView.hideSprite();
-//Hide up/down arrows
-mainView.statsView.hideUpDown();
-//Hide choice buttons
-//choices("one", 0, "two", 0, "three", 0, "four", 0, "five", 0, "six", 0, "seven", 0, "eight", 0, "nine", 0, "ten", 0);
-//Call up the title screen
-mainMenu();
-
 
 
 //MainMenu - kicks player out to the main menu
@@ -83,66 +48,186 @@ import flash.system.Security;;
 function doThatTestingThang():void
 {
 
-	// This junk was for testing my new parser. It can be removed, I think.
-	// I still have a few parser tweaks I want to do, though.
-	// Really, I should have a "test parser" button, but LAZY
+	// Excercise the parser. This should catch parser regressions, I think.
+	// 
+	// 
 
 	
-	outputText("\n\n", false);
 
+	outputText(<![CDATA[
 
-	outputText("[if (hasCock = true) [cock] stiffening][if (isHerm = true)  and ][if (hasVagina = true) [vagina] starting to burn with need] DERP [cock biggest] HERP [armor] LOLWUT  [balls] ");
-	outputText("[If (hours > 19) Hug | Cuddle]\n");
-	outputText("\n\n", false);
+**Parser Tests!**
 
+##Bracket escaping!##
 
-	outputText("Bracket escaping!\n", false);
-	outputText("\\\[cock\\\]\n", false);
-	outputText("[cock]\n", false);
+* \\\[cock\\\]
+* [cock]
 
-	outputText("\n\n", false);
+**Single word nouns**
 
+* \\\[armor\\\] - [armor]
+* \\\[armorname\\\] - [armorname]
+* \\\[weapon\\\] - [weapon]
+* \\\[weaponname\\\] - [weaponname]
+* \\\[name\\\] - [name]
+* \\\[asshole\\\] - [asshole]
+* \\\[butthole\\\] - [butthole]
+* \\\[hair\\\] - [hair]
+* \\\[face\\\] - [face]
+* \\\[legs\\\] - [legs]
+* \\\[leg\\\] - [leg]
+* \\\[feet\\\] - [feet]
+* \\\[foot\\\] - [foot]
+* \\\[sack\\\] - [sack]
+* \\\[balls\\\] - [balls]
+* \\\[sheath\\\] - [sheath]
+* \\\[chest\\\] - [chest]
+* \\\[fullchest\\\] - [fullchest]
+* \\\[hips\\\] - [hips]
+* \\\[butt\\\] - [butt]
+* \\\[ass\\\] - [ass]
+* \\\[nipple\\\] - [nipple]
+* \\\[nipples\\\] - [nipples]
+* \\\[tongue\\\] - [tongue]
+* \\\[evade\\\] - [evade]
+* \\\[misdirection\\\] - [misdirection]
+* \\\[agility\\\] - [agility]
+* \\\[master\\\] - [master]
+* \\\[master\\\] - [master]
+* \\\[he\\\] - [he]
+* \\\[him\\\] - [him]
+* \\\[his\\\] - [his]
+* \\\[pussy\\\] - [pussy]
+* \\\[vagina\\\] - [vagina]
+* \\\[vag\\\] - [vag]
+* \\\[clit\\\] - [clit]
+* \\\[cock\\\] - [cock]
+* \\\[cocks\\\] - [cocks]
+* \\\[eachcock\\\] - [eachcock]
+* \\\[onecock\\\] - [onecock]
+* \\\[cockhead\\\] - [cockhead]
+* \\\[vagorass\\\] - [vagorass]
+* \\\[hairorfur\\\] - [hairorfur]
+* \\\[pg\\\] - [pg] (This is a shortcut to two newlines. This should be two lines below the \\\[pg\\\])
 
-	// outputText("1 [if [ [ (4==4) HERP|DERP]\n", false);
-	// outputText("2 [if (4 == 7) HERP|DERP]\n", false);
+**Two word nouns**
 
-	// outputText("3 [if (4==(2+2)) HERP|DERP]\n", false);
-	// outputText("4 [if (4==4) HERP|DERP]\n", false);
+* \\\[cock all\\\] - [cock all]
+* \\\[cock each\\\] - [cock each]
+* \\\[cock one\\\] - [cock one]
+* \\\[cock largest\\\] - [cock largest]
+* \\\[cock biggest\\\] - [cock biggest]
+* \\\[cock smallest\\\] - [cock smallest]
+* \\\[cock longest\\\] - [cock longest]
+* \\\[cock shortest\\\] - [cock shortest]
+* \\\[cock 0\\\] - [cock 0]  (This should always error)
+* \\\[cock 1\\\] - [cock 1]
+* \\\[cock 2\\\] - [cock 2]
+* \\\[cockHead biggest\\\] - [cockHead biggest]
+* \\\[cockHead largest\\\] - [cockHead largest]
+* \\\[cockHead smallest\\\] - [cockHead smallest]
+* \\\[cockHead longest\\\] - [cockHead longest]
+* \\\[cockHead shortest\\\] - [cockHead shortest]
+* \\\[cockHead 0\\\] - [cockHead 0]  (This should always error)
+* \\\[cockHead 1\\\] - [cockHead 1]
+* \\\[cockHead 2\\\] - [cockHead 2]
 
-	// outputText("5 if (4==7) [if (4==7) HERP]\n", false);
-	// outputText("6 if (4==7) [if (4==7) HERP|DERP]\n", false);
-	// outputText("7 if (4=4) [if (4=4) HERP]\n", false);
-	// outputText("8 if (4==4) [if (4==4) HERP]\n", false);
-	// outputText("9 if (4==biggesttitsize) [if (4==biggesttitsize) [HERP [cock] [vagina] [balls]]]\n", false);
-	// outputText("10 if (analcapacity>3)    [if (analcapacity>3) [HERP [cock] [vagina] [balls]]]\n", false);
-	// outputText("11 if (analcapacity = 0)  [if (analcapacity = 0) [HERP [cock] [vagina] [balls]]]\n", false);
-	// outputText("12 if (analcapacity > 0)  [if (analcapacity > 0) [HERP [cock] [vagina] [balls]]]\n", false);
+**Boolean tests**
 
+* 1 \\\[if (4==4) HERP|DERP\\\]
+* 1 [if (4==4) HERP|DERP]
+* 2 \\\[if (4 == 7) HERP|DERP\\\]
+* 2 [if (4 == 7) HERP|DERP]
+* 3 \\\[if (4==(2+2)) HERP|DERP\\\]
+* 3 [if (4==(2+2)) HERP|DERP]
+* 4 \\\[if (4==4) HERP|DERP\\\]
+* 4 [if (4==4) HERP|DERP]
+* 5 \\\[if (4==7) [if (4==7) HERP]\\\]
+* 5 [if (4==7) [if (4==7) HERP]]
+* 6 \\\[if (4==7) [if (4==7) HERP|DERP]\\\]
+* 6 [if (4==7) [if (4==7) HERP|DERP]]
+* 7 \\\[if (4=4) [if (4=4) HERP]\\\]
+* 7 [if (4=4) [if (4=4) HERP]]
+* 8 \\\[if (4==4) [if (4==4) HERP]\\\]
+* 8 [if (4==4) [if (4==4) HERP]]
+* 9 \\\[if (4==biggesttitsize) \\\]
+* 9 [if (4==biggesttitsize) ]
+* 10 \\\[if (4==biggesttitsize) HERP|DERP\\\]
+* 10 [if (4==biggesttitsize) HERP|DERP]
+* 11 \\\[if (analcapacity>3)    HERP|DERP\\\]
+* 11 [if (analcapacity>3)    HERP|DERP]
+* 12 \\\[if (analcapacity>3) HERP|DERP\\\]
+* 12 [if (analcapacity>3) HERP|DERP]
+* 13 \\\[if (analcapacity = 0)  HERP|DERP\\\]
+* 13 [if (analcapacity = 0)  HERP|DERP]
+* 14 \\\[if (analcapacity = 0) HERP|DERP\\\]
+* 14 [if (analcapacity = 0) HERP|DERP]
+* 15 \\\[if (analcapacity > 0)  HERP|DERP\\\]
+* 15 [if (analcapacity > 0)  HERP|DERP]
+* 16 \\\[if (analcapacity > 0) HERP|DERP\\\]
+* 16 [if (analcapacity > 0) HERP|DERP]
 
+**Gender tests**
 
-	// outputText("\n\n");
-	// outputText("Gender Stuff! [He], [he], [His], [his], [Him], [him], [his], [His]\n");
-	// outputText("Gender Stuff! [rubi ey], [rubi eir], [rubi eirs], [rubi emself]\n");
-	// outputText("Gender Stuff! [rubi Ey], [rubi Eir], [rubi Eirs], [rubi Emself]\n");
-	// outputText("Gender Stuff! [arian ey], [arian eir], [arian eirs], [arian emself]\n");
-	// outputText("Gender Stuff! [arian Ey], [arian Eir], [arian Eirs], [arian Emself]\n");
-	// outputText("\n\n");
+**PC**
 
-	outputText("[cock] stiffening [cock biggest] and [vagina] starting to burn with need\n");
-	outputText("[cock all] stiffening [cock each] and [cock 1] starting to burn with need\n");
-	outputText("[cockhead biggest] stiffening [cockhead smallest] and [cockhead longest] and [cockhead 1] starting to burn with need\n");
+* \\\[He\\\]  - [He]
+* \\\[he\\\]  - [he]
+* \\\[His\\\]  - [His]
+* \\\[his\\\]  - [his]
+* \\\[Him\\\]  - [Him]
+* \\\[him\\\]  - [him]
+* \\\[his\\\]  - [his]
+* \\\[His\\\]  - [His]
 
-	outputText("\n\n");
-	outputText("Complex IF Statement thing: [if (hasCock = true) [cock] stiffening IFSTUFF [if (hasVagina = true) [vagina] starting to burn with need] IFSTUFFDONE][if (isHerm = true) and ][if (hasVagina = true) [vagina] starting to burn with need]");
-	outputText("\n\n");
+**NPC**
 
+**Rubi**
 
-	outputText("[arian chest] , [arian chestAdj], [rubi breasts], [rubi cock]");
+* \\\[rubi ey\\\] - [rubi ey]
+* \\\[rubi eir\\\] - [rubi eir]
+* \\\[rubi eirs\\\] - [rubi eirs]
+* \\\[rubi emself\\\] - [rubi emself]
+* \\\[rubi Ey\\\] - [rubi Ey]
+* \\\[rubi Eir\\\] - [rubi Eir]
+* \\\[rubi Eirs\\\] - [rubi Eirs]
+* \\\[rubi Emself\\\] - [rubi Emself]
 
-	outputText("\n\n");
+**Arian**
+
+* \\\[arian ey\\\] - [arian ey]
+* \\\[arian eir\\\] - [arian eir]
+* \\\[arian eirs\\\] - [arian eirs]
+* \\\[arian emself\\\] - [arian emself]
+* \\\[arian Ey\\\] - [arian Ey]
+* \\\[arian Eir\\\] - [arian Eir]
+* \\\[arian Eirs\\\] - [arian Eirs]
+* \\\[arian Emself\\\] - [arian Emself]
+
+**NPC Aspect tests**
+
+* \\\[arian chest\\\] - [arian chest]
+* \\\[arian chestAdj\\\] - [arian chestAdj]
+* \\\[rubi breasts\\\] - [rubi breasts]
+* \\\[rubi cock\\\] - [rubi cock]
+
+**Typical Noun usages**
+
+* [cock] stiffening [cock biggest] and [vagina] starting to burn with need
+* [cock all] stiffening [cock each] and [cock 1] starting to burn with need
+* [cockhead biggest] stiffening [cockhead smallest] and [cockhead longest] and [cockhead 1] starting to burn with need
+
+**Complex IF Statement thing**
+
+\\\[if (hasCock = true) \\\[cock\\\] stiffening IFSTUFF \\\[if (hasVagina = true) \\\[vagina\\\] starting to burn with need\\\] IFSTUFFDONE\\\]\\\[if (isHerm = true) and \\\]\\\[if (hasVagina = true) \\\[vagina\\\] starting to burn with need\\\]   
+[if (hasCock = true) [cock] stiffening IFSTUFF [if (hasVagina = true) [vagina] starting to burn with need] IFSTUFFDONE][if (isHerm = true) and ][if (hasVagina = true) [vagina] starting to burn with need]
+
 	
+	]]>, true, true);
 
 
+	menu();
+	addButton(4, "Back", debugPane)
 
 }
 
@@ -280,11 +365,18 @@ function debugPane():void
 
 	outputText("\nCurrently have " + images.getLoadedImageCount() + " images loaded into cache.");
 
+
+	outputText("\n\n<b>FUNCTIONALITY ON THIS PAGE IS IN ALPHA-RELEASE STATUS</b>\n");
+	outputText("<b>IF YOU DON'T KNOW WHAT YOU ARE DOING AND/OR HAVE UNSAVED GAME PROGRESS, DO NOT CLICK ANY BUTTON EXCEPT \"BACK\"</b>\n");
+
+	
 	outputText(images.showImage("monster-ceraph"));
+
 
 	menu();
 	addButton(0, "Event Tester", eventTestingPane);
 	addButton(1, "Test Input", eventTester);
+	addButton(5, "Parser Tests", doThatTestingThang);
 	addButton(9, "Back", mainMenu);
 }
 
@@ -485,19 +577,30 @@ function creditsScreen():void {
 	doNext(mainMenu);
 }
 
+
+
+	
+
+
+	
+
 function imageCreditsScreen():void
 {
 
 	if (images.getLoadedImageCount() > 0)
 	{
-		outputText("<b>Bundled Image Credits:</b>\n", true);
-		outputText("<b>Yoh-SL</b>")
-		outputText("<ul>");;
-		outputText("<li> Bee-Girl Monster Image</li>");
-		outputText("<li> Goo-Girl Monster Image</li>");
-		outputText("<li> Ceraph Monster Image</li>");
-		outputText("<li> Sand-Witch (and sandwich) Monster Images</li>");
-		outputText("</ul>");
+		outputText(<![CDATA[
+
+**Bundled Image Credits:**
+
+**Yoh-SL**
+
+* Bee-Girl Monster Image
+* Goo-Girl Monster Image
+* Ceraph Monster Image
+* Sand-Witch (and sandwich)
+
+		]]>, true, true);
 	}
 	else
 	{
@@ -516,38 +619,3 @@ function howToPlay():void {
 	doNext(mainMenu);
 }
 
-
-function eventTester():void {
-	outputText("", true);
-	showTestInputPanel();
-	//mainView.eventTestInput.text = "Paste test event text here.";
-	simpleChoices("Proceed",eventTesterGo,"",0,"",0,"",0,"Back",eventTesterExit);
-}
-
-function eventTesterGo():void 
-{
-	hideTestInputPanel();
-	
-	outputText(mainView.eventTestInput.text, true, true);
-	//simpleChoices("Again",117,"",0,"",0,"",0,"Quit",mainMenu);
-	return;
-}
-
-function eventTesterExit():void 
-{
-	hideTestInputPanel();
-	eventParser(debugPane);
-	return;
-}
-
-function showTestInputPanel():void
-{
-	mainView.eventTestInput.x = 207.5;
-	mainView.eventTestInput.y = 55.1;
-}
-function hideTestInputPanel():void
-{
-
-	mainView.eventTestInput.x = -10207.5;
-	mainView.eventTestInput.y = -1055.1;
-}
