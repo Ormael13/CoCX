@@ -52,6 +52,15 @@ package coc.view {
 		public var aCb :ComboBox;
 		// public var nameBox :TextField;
 
+		//// Actual buttons.
+		public var bottomButtons :Array;
+		public var newGameButton :CoCButton;
+		public var dataButton :CoCButton;
+		public var statsButton :CoCButton;
+		public var levelButton :CoCButton;
+		public var perksButton :CoCButton;
+		public var appearanceButton :CoCButton;
+
 		public var bottomButtonTexts :Array; // <TextField>
 		public var bottomButtonBGs :Array; // <MovieClip>
 		public var menuButtonTexts :Array;
@@ -65,7 +74,7 @@ package coc.view {
 		public var _getButtonToolTipText :Function;
 
 		protected var options :Object;
-		protected var allButtonTexts :Array;
+		// protected var allButtonTexts :Array;
 		protected var allButtons :Array;
 		protected var callbacks :Object = {};
 
@@ -110,22 +119,22 @@ package coc.view {
 				b6Text, b7Text, b8Text, b9Text, b0Text // wonky.
 				];
 
-			this.menuButtonTexts = [
-				newGameText, dataText, statsText, levelText2, perksText, appearanceText
-				];
+			// this.menuButtonTexts = [
+			// 	newGameText, dataText, statsText, levelText2, perksText, appearanceText
+			// 	];
 
-			this.allButtonTexts = this.bottomButtonTexts.concat( this.menuButtonTexts );
-
-			disableMouseForMostTextFields();
+			// this.allButtonTexts = this.bottomButtonTexts.concat( this.menuButtonTexts );
 
 			// button bgs.  This part too will eventually go away...
-			this.menuButtonBGs = [
-				newGameBG, dataBG, statsBG, levelBG, perksBG, appearanceBG
-				];
+			// this.menuButtonBGs = [
+			// 	newGameBG, dataBG, statsBG, levelBG, perksBG, appearanceBG
+			// 	];
 				
 			createBottomButtons();
+			createMenuButtons();
 
-			this.allButtons = this.bottomButtonBGs.concat( this.menuButtonBGs );
+			// disable interaction for any remaining TFs.
+			disableMouseForMostTextFields();
 
 			// ...
 			imageText.visible = false; // TODO: Remove this TF?  It doesn't seem to be used anywhere.  I think it was from the first effort to put in images.
@@ -169,6 +178,7 @@ package coc.view {
 					case this.mainText:
 					case this.imageText:
 					case this.nameBox:
+					case this.eventTestInput:
 						break;
 
 					default:
@@ -184,9 +194,11 @@ package coc.view {
 		protected function createBottomButtons() :void {
 			var b :MovieClip, bgClasses :Array,
 				bi :int, r :int, c: int,
-				backgroundChildIndex :int;
+				backgroundChildIndex :int,
+				button :CoCButton;
 
 			this.bottomButtonBGs = [];
+			this.bottomButtons = [];
 
 			bgClasses = [
 				buttonBackground0,
@@ -215,16 +227,40 @@ package coc.view {
 				b.width = BUTTON_REAL_WIDTH;   //The button symbols are actually 135 wide
 				b.height = BUTTON_REAL_HEIGHT; //and 38 high. Not sure why the difference here.
 
+				button = new CoCButton( this.bottomButtonTexts[ bi ], b );
+
 				this.bottomButtonBGs.push( b );
-				this.addChildAt( b, backgroundChildIndex + 1 );
+				this.bottomButtons.push( button );
+				this.addChildAt( button, backgroundChildIndex + 1 );
 			}
+
+			this.allButtons = this.allButtons.concat( this.bottomButtons );
 		};
 
-		protected function hookBottomButtons() :void {
-			var bi :MovieClip;
+		protected function createMenuButtons() :void {
+			var btf :TextField, bbg :MovieClip,
+				bn :String,
+				backgroundChildIndex :int,
+				buttonNames :Array;
 
-			for each( bi in this.bottomButtonBGs ) {
-				bi.addEventListener( MouseEvent.CLICK, this.executeBottomButtonClick );
+			buttonNames = [
+				MENU_NEW_MAIN,
+				MENU_DATA,
+				MENU_STATS,
+				MENU_LEVEL,
+				MENU_PERKS,
+				MENU_APPEARANCE
+			];
+
+			for each( bn in buttonNames ) {
+				this[ bn + "Button" ] =
+					new CoCButton(
+						this[ bn + 'Text' ],
+						// second case is for levelBG.
+						this[ bn + 'BG' ] || this[ bn + 'BG2' ]
+					);
+
+				this.allButtons.push( this[ bn + "Button" ] );
 			}
 		};
 
@@ -243,18 +279,18 @@ package coc.view {
 		//////// Internal(?) view update methods ////////
 
 		public function showBottomButton( index :int, label :String, callback :Function = null, toolTipViewText :String = '' ) :void {
-			var buttonTF :TextField = this.bottomButtonTexts[ index ] as TextField,
-				buttonBG :MovieClip = this.bottomButtonBGs[ index ] as MovieClip;
+			// var buttonTF :TextField = this.bottomButtonTexts[ index ] as TextField,
+			// 	buttonBG :MovieClip = this.bottomButtonBGs[ index ] as MovieClip;
+			var button :CoCButton = this.bottomButtons[ index ] as CoCButton;
 
-			this.bottomButtonBGs[ index ].visible = true;
-
-			buttonTF.text = label;
-			buttonTF.visible = true;
+			button.labelText = label;
+			button.callback = callback;
+			button.toolTipText = toolTipViewText;
+			button.visible = true;
 		};
 
 		public function hideBottomButton( index :int ) {
-			this.bottomButtonBGs[ index ].visible = false;
-			this.bottomButtonTexts[ index ].visible = false;
+			button.visible = false;
 		};
 
 
@@ -276,30 +312,21 @@ package coc.view {
 			return this[ textName ] as TextField;
 		};
 
-		protected function executeBottomButtonClick( event :Event ) {
-			var bottomButton :InteractiveObject,
-				bottomButtonIndex :int;
-
-			if( this._executeButtomButtonClick ) {
-				this.toolTipView.hide();
-				bottomButton = (event.currentTarget as InteractiveObject);
-				bottomButtonIndex = this.bottomButtonBGs.indexOf( bottomButton );
-				this._executeButtomButtonClick( bottomButtonIndex );
-			}
-		};
-
 		protected function hoverButton( event :MouseEvent ) {
-			event.target.alpha = 0.5;
+			var button :CoCButton;
 
-			if( this._getButtonToolTipText ) {
-				this.toolTipView.text = this._getButtonToolTipText( this.textForBG( event.target as DisplayObject ).text );
-				if( this.toolTipView.text )
-					this.toolTipView.showForButton( event.target as DisplayObject );
+			button = event.target as CoCButton;
+
+			if( button && button.visible && button.toolTipText ) {
+				this.toolTipView.text = button.toolTipText;
+				this.toolTipView.showForButton( button );
+			}
+			else {
+				this.toolTipView.hide();
 			}
 		};
 
 		protected function dimButton( event :MouseEvent ) {
-			event.target.alpha = 1.0;
 			this.toolTipView.hide();
 		};
 
@@ -325,25 +352,20 @@ package coc.view {
 
 		// There was one case where the label needed to be set but I could not determine from context whether the button should be shown or not...
 		public function setButtonText( index :int, label :String ) :void {
-			this.bottomButtonTexts[ index ].text = label;
+			this.bottomButtons[ index ].labelText = label;
 		};
 
 		public function hasButton( labelText :String ) :Boolean {
 			var b :TextField;
 
-			for each( b in this.bottomButtonTexts ) {
-				if( b.text == labelText )
-					return true;
-			}
-
-			return false;
+			return this.indexOfButtonWithLabel( labelText ) !== -1;
 		};
 
 		public function indexOfButtonWithLabel( labelText :String ) :int {
 			var i :int;
 
-			for( i = 0; i < this.bottomButtonTexts.length; ++i ) {
-				if( this.bottomButtonTexts[ i ].text == labelText )
+			for( i = 0; i < this.bottomButtons.length; ++i ) {
+				if( this.getButtonText( i ) === labelText )
 					return i;
 			}
 
@@ -365,7 +387,7 @@ package coc.view {
 				return '';
 			}
 			else {
-				return this.bottomButtonTexts[ index ].text;
+				return this.bottomButtons[ index ].labelText;
 			}
 		};
 
@@ -385,7 +407,7 @@ package coc.view {
 				return undefined;
 			}
 			else {
-				return this.bottomButtonBGs[ index ].visible;
+				return this.bottomButtons[ index ].visible;
 			}
 		};
 
@@ -393,81 +415,60 @@ package coc.view {
 
 		//////// Menu Button Methods ////////
 
-		protected function setMenuButtonListener( button :InteractiveObject, callback :Function ) :void {
-			if( this.callbacks[ button.name ] )
-				button.removeEventListener( MouseEvent.CLICK, this.callbacks[ button.name ] );
-
-			this.callbacks[ button.name ] = callback;
-			button.addEventListener( MouseEvent.CLICK, callback );
-		};
-
-		protected function getMenuButtonParts( name :String ) :Object {
-			var tfName :String = name + 'Text',
-				bgName :String = name + 'BG';
-
-			if( name == 'level' )
-				tfName += '2';
-
-			return {
-				textField: this[ tfName ] as TextField,
-				background: this[ bgName ] as DisplayObject
-			};
+		protected function getMenuButtonByName( name :String ) :CoCButton {
+			return this[ name + 'Button' ] as CoCButton;
 		};
 
 		////////
 
 		public function setMenuButton( name :String, label :String = '', callback :Function = null ) :void {
-			var buttonParts :Object = this.getMenuButtonParts( name );
+			var button :CoCButton = this.getMenuButtonByName( name );
 
-			if( ! (buttonParts.textField && buttonParts.background) ) {
+			if( ! button ) {
 				throw new ArgumentError( "MainView.setMenuButton: Invalid menu button name: " + String( name ) );
 			}
 
 			if( label ) {
-				buttonParts.textField.text = label;
+				button.labelText = label;
 			}
 
 			if( callback ) {
-				this.setMenuButtonListener( buttonParts.background, callback );
+				button.callback = callback;
 			}
 		};
 
 		public function set onNewGameClick( callback :Function ) :void {
-			this.setMenuButtonListener( this.newGameBG, callback );
+			this.newGameButton.callback = callback;
 		};
 
 		public function set onDataClick( callback :Function ) :void {
-			this.setMenuButtonListener( this.dataBG, callback );
+			this.dataButton.callback = callback;
 		};
 
 		public function set onStatsClick( callback :Function ) :void {
-			this.setMenuButtonListener( this.statsBG, callback );
+			this.statsButton.callback = callback;
 		};
 
 		public function set onLevelClick( callback :Function ) :void {
-			this.setMenuButtonListener( this.levelBG, callback );
+			this.levelButton.callback = callback;
 		};
 
 		public function set onPerksClick( callback :Function ) :void {
-			this.setMenuButtonListener( this.perksBG, callback );
+			this.perksButton.callback = callback;
 		};
 
 		public function set onAppearanceClick( callback :Function ) :void {
-			this.setMenuButtonListener( this.appearanceBG, callback );
+			this.appearanceButton.callback = callback;
 		};
 
 		public function showMenuButton( name :String ) :void {
-			var buttonParts = this.getMenuButtonParts( name );
-
-			buttonParts.textField.visible = true;
-			buttonParts.background.visible = true;
+			var button :CoCButton = this.getMenuButtonByName( name );
+			button.visible = true;
 		};
 
 		public function hideMenuButton( name :String ) :void {
-			var buttonParts = this.getMenuButtonParts( name );
-
-			buttonParts.textField.visible = false;
-			buttonParts.background.visible = false;
+			var button :CoCButton = this.getMenuButtonByName( name );
+			button.visible = false;
 		};
 
 		public function showAllMenuButtons() {
@@ -489,11 +490,11 @@ package coc.view {
 		};
 
 		public function menuButtonIsVisible( name :String ) :Boolean {
-			return this.getMenuButtonParts( name ).background.visible;
+			return this.getMenuButtonByName( name ).visible;
 		};
 
 		public function menuButtonHasLabel( name :String, label :String ) :Boolean {
-			return this.getMenuButtonParts( name ).textField.text == label;
+			return this.getMenuButtonByName( name ).labelText == label;
 		};
 
 
