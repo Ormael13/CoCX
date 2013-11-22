@@ -54,6 +54,7 @@
   <!-- SWC Libraries -->
   <libraryPaths>
     <element path="lib\bin\MainView.swc" />
+    <element path="lib\bin\ScrollPane.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

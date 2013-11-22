@@ -261,10 +261,15 @@ function settingsScreen():void
 
 function controlsMenu():void
 {
-	//outputText("Herp derp this is the controls menu", true);
-	outputText(inputManager.GenerateControlMenuText(), true);
+	inputManager.DisplayBindingPane();
 	
-	doNext(mainMenu);
+	doNext(hideBindingPane);
+}
+
+function hideBindingPane():void
+{
+	inputManager.HideBindingPane();
+	settingsScreen();
 }
 
 function debugPane():void

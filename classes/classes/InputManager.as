@@ -1,9 +1,11 @@
 package classes 
 {
+	import classes.display.BindingPane;
 	import coc.view.MainView;
 	import flash.display.Stage;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
+	import flash.text.TextField;
 	import flash.utils.Dictionary;
 	import flash.display.MovieClip;
 	import flash.utils.describeType;
@@ -29,31 +31,32 @@ package classes
 		private var _keysToControlMethods:Object = new Object();
 		private var _mainView:MainView;
 		
-		private var _keyDict:Dictionary;
-
-		public function InputManager(stage:Stage) 
+		private var _bindingView:BindingPane;
+		private var _mainText:TextField;
+		
+		public function InputManager(stage:Stage)
 		{
 			_stage = stage;
 			_mainView = _stage.getChildByName("mainView") as MainView;
 			_availableControlMethods = 0;
 			_availableCheatControlMethods = 0;
 			
-			this.PopulateKeyboardDict();
-			
 			_stage.addEventListener(KeyboardEvent.KEY_DOWN, this.KeyHandler);
+			
+			_mainText = (_stage.getChildByName("mainView") as MovieClip).mainText as TextField;
+			_bindingView = new BindingPane(_mainText.x, _mainText.y, _mainText.width, _mainText.height);
 		}
 		
-		private function PopulateKeyboardDict():void
+		public function DisplayBindingPane():void
 		{
-			var keyDescriptions:XML = describeType(Keyboard);
-			var keyNames:XMLList = keyDescriptions..constant.@name;
-			
-			_keyDict = new Dictionary();
-			
-			for (var i:int = 0; i < keyNames.length(); i++)
-			{
-				_keyDict[Keyboard[keyNames[i]]] = keyNames[i];
-			}
+			_mainText.visible = false;
+			_stage.addChild(_bindingView);
+		}
+		
+		public function HideBindingPane():void
+		{
+			_stage.removeChild(_bindingView);
+			_mainText.visible = true;
 		}
 		
 		// Add a new action that can be bound to keys -- this will (mostly) be static I guess
@@ -102,6 +105,7 @@ package classes
 				return;
 			}
 			
+			// Made it this far, process the key and call the relevant (if any) function
 			this.ExecuteKeyCode(e.keyCode);
 		}
 		
@@ -147,15 +151,13 @@ package classes
 			return keyCodes;
 		}
 		
-		public function GenerateControlMenuText():String
+/*		public function GenerateControlMenuText():String
 		{
 			var result:String = "";
 			
 			result = "<b>Currently bound controls:</b>\n\n";
 			
 			var funcNames:Array = GetAvailableFunctions();
-			
-			trace(funcNames.length + " Available Funcs");
 			
 			for (var i:int = 0; i < funcNames.length; i++)
 			{
@@ -169,7 +171,6 @@ package classes
 				}
 				else
 				{
-					trace(keyCodes.length + " keys for " + funcNames[i]);
 					for (var k:int = 0; k < keyCodes.length; k++)
 					{
 						var charRep:String;
@@ -182,7 +183,7 @@ package classes
 			}
 			
 			return result;
-		}
+		}*/
 	}
 	
 	/**
