@@ -4,6 +4,9 @@
 	I have no real idea yet what eventTestInput is for,
 	but its coordinates get tested for in places, and set in others.
 	Perhaps some day I'll ask.
+
+	It's for allowing people to test stuff in the parser. It gets moved into view, and you 
+	can enter stuff in the text window, which then gets fed through the parser.
 ****/
 
 package coc.view {
@@ -13,6 +16,7 @@ package coc.view {
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
+	import flash.text.TextFieldType;
 
 	import fl.controls.ComboBox; 
 	import fl.data.DataProvider; 
@@ -572,5 +576,40 @@ package coc.view {
 		public function hideSprite() :void {
 			this.selectSprite( -1 );
 		};
+
+
+		public function showTestInputPanel():void
+		{
+			this.eventTestInput.x = 207.5;
+			this.eventTestInput.y = 55.1;
+			
+			this.mainText.x += 5000;
+			this.imageText.x += 5000;
+
+			this.eventTestInput.selectable = true;
+			this.eventTestInput.type = TextFieldType.INPUT;
+			this.eventTestInput.mouseEnabled = true;
+
+			this.scrollBar.scrollTarget = this.eventTestInput;
+
+		}
+		public function hideTestInputPanel():void
+		{
+
+			this.eventTestInput.x = -10207.5;
+			this.eventTestInput.y = -1055.1;
+			
+			this.mainText.x -= 5000;
+			this.imageText.x -= 5000;			
+
+
+			this.eventTestInput.selectable = false;
+			this.eventTestInput.type = TextFieldType.DYNAMIC;
+			this.eventTestInput.mouseEnabled = false;
+
+			this.scrollBar.scrollTarget = this.mainText;
+
+		}
+
 	}
 }

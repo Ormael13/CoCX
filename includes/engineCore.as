@@ -1,29 +1,29 @@
-// import flash.events.MouseEvent;
-
-//const DOUBLE_ATTACK_STYLE:int = 867;
-//const SPELLS_CAST:int = 868;
-
-//Fenoxo loves his temps
-var temp:int = 0;
-
-//Used to set what each action buttons displays and does.
-var args:Array = new Array();
-var funcs:Array = new Array();
-
-//Used for stat tracking to keep up/down arrows correct.
-var oldStats = {};
-model.oldStats = oldStats;
-oldStats.oldStr  = 0;
-oldStats.oldTou  = 0;
-oldStats.oldSpe  = 0;
-oldStats.oldInte = 0;
-oldStats.oldSens = 0;
-oldStats.oldLib  = 0;
-oldStats.oldCor  = 0;
-oldStats.oldHP   = 0;
-oldStats.oldLust = 0;
-
-model.maxHP = maxHP;
+﻿// // import flash.events.MouseEvent;
+// 
+// //const DOUBLE_ATTACK_STYLE:int = 867;
+// //const SPELLS_CAST:int = 868;
+// 
+// //Fenoxo loves his temps
+// var temp:int = 0;
+// 
+// //Used to set what each action buttons displays and does.
+// var args:Array = new Array();
+// var funcs:Array = new Array();
+// 
+// //Used for stat tracking to keep up/down arrows correct.
+// var oldStats = {};
+// model.oldStats = oldStats;
+// oldStats.oldStr  = 0;
+// oldStats.oldTou  = 0;
+// oldStats.oldSpe  = 0;
+// oldStats.oldInte = 0;
+// oldStats.oldSens = 0;
+// oldStats.oldLib  = 0;
+// oldStats.oldCor  = 0;
+// oldStats.oldHP   = 0;
+// oldStats.oldLust = 0;
+// 
+// model.maxHP = maxHP;
 
 function maxHP():Number {
 	var max:Number = 0;
@@ -136,7 +136,7 @@ function rawOutputText(output:String, purgeText:Boolean = false)
 	//OUTPUT!
 	if(purgeText) {
 		//if(!debug) mainText.htmlText = output;
-		trace("Purging and writing Text", output);
+		//trace("Purging and writing Text", output);
 		clearOutput();
 		currentText = output;
 		mainView.setOutputText( output );
@@ -144,7 +144,7 @@ function rawOutputText(output:String, purgeText:Boolean = false)
 	}
 	else
 	{
-		trace("Adding Text");
+		//trace("Adding Text");
 		currentText += output;
 		mainView.appendOutputText( output );
 		// mainText.htmlText += output;
@@ -180,6 +180,12 @@ function outputText(output:String, purgeText:Boolean = false, parseAsMarkdown = 
 		mainView.setOutputText( currentText );
 	}
 
+}
+
+function flushOutputTextToGUI():void
+{
+	
+	mainView.setOutputText( currentText );
 }
 
 function perkLongDescription(perkName:String = ""):String {
@@ -1110,7 +1116,6 @@ function buttonText(buttonName:String):String {
 	return (mainView.getButtonText( buttonIndex ) || "NULL");
 }
 
-mainView._getButtonToolTipText = getButtonToolTipText;
 
 // Returns a string or undefined.
 function getButtonToolTipText( buttonText :String ) :String
