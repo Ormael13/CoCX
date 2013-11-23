@@ -4,7 +4,7 @@ Corruption-of-Champions
 NOTE: CONTAINS MATURE CONTENT. ADULTS ONLY
 
 CoC source from Fenoxo.
-Modifications by everyone at:
+Modifications by everyone at:  
 https://github.com/herp-a-derp/Corruption-of-Champions/graphs/contributors
 
 Check out the wiki for for information and the FAQ.
