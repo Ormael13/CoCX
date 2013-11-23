@@ -112,7 +112,7 @@ function getBitten():void {
 			stats(0,0,0,0,0,0,50,0);
 		}
 		else {
-			outputText("You react too slowly, and before you can dodge, " + monster.mf("he","she") + "'s bitten you, leaving behind a burning venom that warms your blood and stokes yours lust.\n", false);
+			outputText("You react too slowly, and before you can dodge, " + monster.mf("he","she") + "'s bitten you, leaving behind a burning venom that warms your blood and stokes your lust.\n", false);
 			stats(0,0,0,0,0,0,30,0);
 		}
 	}

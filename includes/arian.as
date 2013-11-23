@@ -1620,7 +1620,7 @@ function giveArianAnal():void {
 		if(flags[ARIAN_COCK_SIZE] > 0) outputText("  [Arian Eir] throbbing cock flexes and shoots one last rope of lizan-cum against your belly.");
 		outputText("  [Arian Eir] ass grips you forcefully, forming a vacuum and finally loosens.  \"<i>That... that wash da best,</i>\"  Arian slurs, before finally collapsing on [Arian eir] bed.");
 		
-		outputText("\n\nYou find yourself collapsing on top of the collapsed lizan, heaving to regain your breath after such a vigorous fuck.  Finally, you regain sufficient energy to pull yourself free of the absent-minded sucking of his ass, which wetly slurps shut afterwards to hold your seed inside.  \"<i><i>I feel so empty when you're not inside,</i></i>\" Arian utters tiredly.");
+		outputText("\n\nYou find yourself collapsing on top of the collapsed lizan, heaving to regain your breath after such a vigorous fuck.  Finally, you regain sufficient energy to pull yourself free of the absent-minded sucking of [Arian eir] ass, which wetly slurps shut afterwards to hold your seed inside.  \"<i><i>I feel so empty when you're not inside,</i></i>\" Arian utters tiredly.");
 		
 		//(ArianAssChat == 0)
 		if(flags[ARIAN_ASS_CHAT] == 0) {
@@ -1628,7 +1628,7 @@ function giveArianAnal():void {
 			
 			outputText("\n\n\"<i>I... I'm not really trying to debase myself.  I guess I lose a bit of control when it comes to anal, because it really feels that good for me.  You're not mad at for being like that... for liking being fucked from behind.  Are you?</i>\"");
 			
-			outputText("\n\nYou tell him you certainly aren't; you were just making sure that he was really enjoying himself, that he's not under the conception he has to act that way for you to do this to him.  Arian breaths a sigh of relief.  \"<i>No, I... sorry if my being like that offends you.  I thought you enjoyed it too, since you were teasing me, but maybe I should change?</i>\"");
+			outputText("\n\nYou tell [Arian em] you certainly aren't; you were just making sure that [Arian ey] was really enjoying himself, that [Arian ey]'s not under the conception [Arian ey] has to act that way for you to do this to [Arian em].  Arian breaths a sigh of relief.  \"<i>No, I... sorry if my being like that offends you.  I thought you enjoyed it too, since you were teasing me, but maybe I should change?</i>\"");
 			
 			outputText("\n\nYou shake your head; [Arian ey] is who [Arian ey] is, and you're quite comfortable with it.  If you really didn't enjoy playing with [Arian em] like that, well, you'd stop sexing [Arian eir] ass, wouldn't you?  Arian bites [Arian eir] lower lip and smiles nervously at you. \"<i>So, you like my ass?</i>\"");
 			
@@ -2444,7 +2444,7 @@ function arianDocking():void {
 	if(flags[ARIAN_DOUBLE_COCK] > 0) outputText("s");
 	outputText(" from your prying eyes.");
 	
-	outputText("\n\nYou gently push away his hands, running your fingers over the strange, almost woman-like folds, rubbing against the soft, smooth scales that cover [Arian em] there.  You gently massage [Arian em], making [Arian em] groan softly at the stimulation, before working up the courage to begin gently probing inside.  It's wet and slick, the muscles squeezing your fingers tightly, and you don't have too far to go before you can feel yourself touching the bulbous, unmistakable shape");
+	outputText("\n\nYou gently push away [Arian eir] hands, running your fingers over the strange, almost woman-like folds, rubbing against the soft, smooth scales that cover [Arian em] there.  You gently massage [Arian em], making [Arian em] groan softly at the stimulation, before working up the courage to begin gently probing inside.  It's wet and slick, the muscles squeezing your fingers tightly, and you don't have too far to go before you can feel yourself touching the bulbous, unmistakable shape");
 	if(flags[ARIAN_DOUBLE_COCK] > 0) outputText("s");
 	outputText(" of Arian's dick");
 	if(flags[ARIAN_DOUBLE_COCK] > 0) outputText("s");
@@ -2493,7 +2493,7 @@ function arianDocking():void {
 	if(flags[ARIAN_DOUBLE_COCK] > 0) outputText("s");
 	outputText(" out before cumming.");
 	
-	outputText("\n\nArian groans in relief as a small white eruption comes out of [Arian eir] cumfilled of slit, soaking [Arian eir] white scales in your combined jism.  Then, a ");
+	outputText("\n\nArian groans in relief as a small white eruption comes out of [Arian eir] cum-filled slit, soaking [Arian eir] white scales in your combined jism.  Then, a ");
 	if(flags[ARIAN_DOUBLE_COCK] > 0) outputText("pair of cummy masts emerge");
 	else outputText("cummy mast emerges");
 	outputText(" to feebly shoot a couple more ropes of jism, before returning limply to ");
@@ -3128,7 +3128,7 @@ function giveArianReptilum():void {
 	outputText("\n\nYou tell [Arian em] [Arian ey]'ll just have to wait to find out, taking off [Arian eir] blindfold and smiling wryly at [Arian em].  \"<i>Umm... ok...</i>\"");
 	//(if ArianFirstRept == 1)
 	if(flags[ARIAN_FIRST_REPTILUM] == 0) {
-		outputText("\n\nThe two of you sit there in wait... but oddly nothing happens?  You ask Arian if he's feeling any different?");
+		outputText("\n\nThe two of you sit there in wait... but oddly nothing happens?  You ask Arian if [Arian ey]'s feeling any different?");
 		outputText("\n\n\"<i>No. I feel fine.</i>\"");
 		outputText("\n\nThat's weird... was it a bust then?");
 	}

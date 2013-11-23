@@ -3397,7 +3397,7 @@ function normalSheilaPregNotifREPEATEDEDHelpABitchOut():void {
 	else if(player.canFly() && player.hasKeyItem("Bow") >= 0) {
 		outputText("\n\n\"<i>Just wander around and flush game; point out animals you see.</i>\"");
 		
-		outputText("\n\nSheila looks her confusion, but glumly nods.  \"<i>Alright, [name]; we'll do it your way.</i>\"  She begins to walk, then turns back when you don't follow.  \"<i>Are you com-</i>\"");
+		outputText("\n\nSheila looks a little confused, but glumly nods.  \"<i>Alright, [name]; we'll do it your way.</i>\"  She begins to walk, then turns back when you don't follow.  \"<i>Are you com-</i>\"");
 		
 		outputText("\n\nHer question cuts off when she sees you, arrow nocked on your bow, beating your wings against the ground and pushing yourself into the air.  Without so much as a how-do-you do, you ascend until you're high in the sky with the sun on your quarter.  Almost imperceptibly, Sheila shrugs below you and resumes walking.");
 		
