@@ -171,7 +171,7 @@ function teachDatFrogALesson():void {
 
 function lessonFollowup():void {
 	clearOutput();
-	outputText("You wake up two hours later, floating alone in the pool, with a migraine and soggy clothes.  You slog your way out, clutching you head, and head back to camp.");
+	outputText("You wake up two hours later, floating alone in the pool, with a migraine and soggy clothes.  You slog your way out, clutching your head, and head back to camp.");
 	//[Toughness -1]
 	stats(0,-1,0,0,0,0,0,0);
 	doNext(14);

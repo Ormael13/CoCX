@@ -518,7 +518,8 @@ function getARoastPiggueOinkOinkOinkMotherfucker():void {
 	
 	outputText("\n\n");
 	if(player.hasVagina()) outputText("\n\nYour [vagina] drools pussy juice down your [legs] as y");
-	else outputText("Your nostrils flare, taking in great amounts of the salacious stench.");
+	else outputText("Y");
+	outputText("our nostrils flare, taking in great amounts of the salacious stench.");
 	
 	outputText("\n\nThen you see her, a jiggly piggy slut furiously frigging her juicy honey pot as syrupy, golden brown juices fly out, not stopping for even a second. Her pink, soft form jiggling and wobbling with just the right amount of fat. There's a paunch in her stomach that wiggles around, possibly a cream-filled belly from all the fun she's been having today. She's lying on her massive posterior, easily one of the biggest you've ever seen, hips flared out like a tried-and-true brood mother. An enormous pair of jugs adorns her plump body, bouncing and leaking what looks like honey as she enters the peak of her excitement.");
 
