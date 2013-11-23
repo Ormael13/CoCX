@@ -40,6 +40,7 @@ Planned, but not implemented yet:
 
 */
 
+import showdown.Showdown;
 
 var sceneParserDebug:Boolean = true;
 
@@ -635,7 +636,7 @@ function parseConditional(textCtnt:String, depth:int):String
 				//ifText = recParser(textCtnt.substring(0, tmp));
 
 				// Pull out the conditional, and then evaluate it.
-				conditional = recParser(textCtnt.substring(tmp+1, i), depth);
+				conditional = textCtnt.substring(tmp+1, i);
 				conditional = evalConditionalStatementStr(conditional);
 
 				// Make sure the contents of the if-statement have been evaluated to a plain-text string before trying to
@@ -669,11 +670,13 @@ public var buttonNum:Number;
 function enterParserScene(sceneName:String):String
 {
 
+	/*
 	if (sceneParserDebug) trace("thisParserStateContents:")
 	for (var prop in thisParserState) 
 	{
 		if (sceneParserDebug) trace("thisParserState."+prop+" = "+thisParserState[prop]); 
 	}
+	*/
 
 
 	//trace("Entering parser scene: \""+sceneName+"\"");
@@ -681,7 +684,8 @@ function enterParserScene(sceneName:String):String
 	if (sceneName == "exit")
 	{
 		if (sceneParserDebug) trace("Enter scene called to exit");
-		doNextClear(debugPane);
+		//doNextClear(debugPane);
+		debugPane();
 	}
 	else if (sceneName in thisParserState)
 	{	
@@ -692,9 +696,14 @@ function enterParserScene(sceneName:String):String
 
 		var tmp1 = thisParserState[sceneName];
 		var tmp2 = recParser(tmp1, 0);		// we have to actually parse the scene now
-		rawOutputText(tmp2, true);			// and then stick it on the display
+		var tmp3 = Showdown.makeHtml(tmp2)
 
-		if (sceneParserDebug) trace("Scene contents: \"" + tmp1 + "\" as parsed: \"" + tmp2 + "\"")
+		
+
+		rawOutputText(tmp3, true);			// and then stick it on the display
+
+		//if (sceneParserDebug) trace("Scene contents: \"" + tmp1 + "\" as parsed: \"" + tmp2 + "\"")
+		if (sceneParserDebug) trace("Scene contents after markdown: \"" + tmp3 + "\"");
 	}
 	else if (this[sceneName])
 	{
@@ -720,8 +729,12 @@ function parseSceneTag(textCtnt:String):void
 	sceneCont = textCtnt.substr(textCtnt.indexOf('|')+1);
 
 	sceneName = stripStr(sceneName);
-
 	if (sceneParserDebug) trace("Adding scene with name \"" + sceneName + "\"")
+
+	// Cleanup the scene content from spurious leading and trailing space.
+	sceneCont = trimStr(sceneCont, "\n");
+	sceneCont = trimStr(sceneCont, "	");
+
 
 	thisParserState[sceneName] = stripStr(sceneCont);
 
@@ -958,16 +971,12 @@ function recursiveParser(contents:String, parseAsMarkdown:Boolean = false):Strin
 	ret = recParser(contents, 0);
 
 	// Currently, not parsing text as markdown by default because it's fucking with the line-endings.
-	import showdown.Showdown;
+	
 	if (parseAsMarkdown)
 	{
 		trace("markdownificating");
 		ret = Showdown.makeHtml(ret);
 
-		// stupid-as-fuck workarounds because the flash html support is broken.
-		ret = ret.replace(/\n/g, "")
-		// Remove all the explicit \n's in the content, because
-		// flash is ridiculously stupid, and doesn't properly remove them like EVERY other html markup parser.
 
 		var regexPCloseTag:RegExp = /<\/p>/gi;
 		ret = ret.replace(regexPCloseTag,"</p>\n");
@@ -979,12 +988,14 @@ function recursiveParser(contents:String, parseAsMarkdown:Boolean = false):Strin
 	ret = ret.replace(/\\\]/g, "]")
 	ret = ret.replace(/\\\[/g, "[")
 
-	// Finally, if we have a parser-based scene. enter the "startup" scene.
+	/*
 	for (var prop in thisParserState) 
 	{
 		trace("thisParserState."+prop+" = "+thisParserState[prop]); 
 	}
+	*/
 
+	// Finally, if we have a parser-based scene. enter the "startup" scene.
 	if ("startup" in thisParserState)
 	{
 		ret = enterParserScene("startup");
@@ -1011,6 +1022,7 @@ function recursiveParser(contents:String, parseAsMarkdown:Boolean = false):Strin
 function stripStr(str:String):String
 {
 	return trimStrBack(trimStrFront(str, " "), " ");
+	return trimStrBack(trimStrFront(str, "	"), "	");
 }
 
 function trimStr(str:String, char:String = " "):String

@@ -166,6 +166,10 @@ function doThatTestingThang():void
 * 15 [if (analcapacity > 0)  HERP|DERP]
 * 16 \\\[if (analcapacity > 0) HERP|DERP\\\]
 * 16 [if (analcapacity > 0) HERP|DERP]
+* 17 \\\[if (hasCock == True) HERP|DERP\\\]
+* 17 [if (hasCock == True) HERP|DERP]
+* 18 \\\[if (hasVagina == True) HERP|DERP\\\]
+* 18 [if (hasVagina == True) HERP|DERP]
 
 **Gender tests**
 

@@ -136,7 +136,7 @@ function rawOutputText(output:String, purgeText:Boolean = false)
 	//OUTPUT!
 	if(purgeText) {
 		//if(!debug) mainText.htmlText = output;
-		trace("Purging and writing Text", output);
+		//trace("Purging and writing Text", output);
 		clearOutput();
 		currentText = output;
 		mainView.setOutputText( output );
@@ -144,7 +144,7 @@ function rawOutputText(output:String, purgeText:Boolean = false)
 	}
 	else
 	{
-		trace("Adding Text");
+		//trace("Adding Text");
 		currentText += output;
 		mainView.appendOutputText( output );
 		// mainText.htmlText += output;
