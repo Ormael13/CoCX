@@ -325,10 +325,12 @@ package coc.view {
 		protected function executeBottomButtonClick( event :Event ) {
 			var bottomButton :InteractiveObject,
 				bottomButtonIndex :int;
+				
+			this.toolTipView.hide();
+			bottomButton = (event.currentTarget as InteractiveObject);
 
-			if( this._executeButtomButtonClick ) {
-				this.toolTipView.hide();
-				bottomButton = (event.currentTarget as InteractiveObject);
+			// If it has a callback, the button handles the click event.
+			if( ! (bottomButton as CoCButton).callback && this._executeButtomButtonClick ) {
 				bottomButtonIndex = this.bottomButtons.indexOf( bottomButton );
 				this._executeButtomButtonClick( bottomButtonIndex );
 			}
