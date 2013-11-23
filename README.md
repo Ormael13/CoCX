@@ -12,5 +12,5 @@ Check out the wiki for for information and the FAQ.
 Everything is copyright Fenoxo (fenoxo.com).
 
 Latest builds are generally available in the CoC-Alpha repo:  
-https://github.com/herp-a-derp/CoC-Alpha
+https://github.com/herp-a-derp/CoC-Alpha  
 Note that these are alpha-quality builds, and likely may have bugs and other fun easter-eggs.
