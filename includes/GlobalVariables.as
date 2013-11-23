@@ -14,8 +14,8 @@ var debug:Boolean = false;
 //model.debug = debug; // TODO: Set on model?
 
 //Version NUMBER
-var ver:String = "0.8.3d5";
-var version:String = "v0.8.3d5 (<b>Open Source Fixes + Image Pack Support</b>)";
+var ver:String = "0.8.3dTURKEY";
+var version:String = "v0.8.3dTURKEY (<b>Open Source Fixes + Image Pack Support</b>)";
 
 //Indicates if building for mobile?
 var mobile:Boolean = false;

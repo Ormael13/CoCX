@@ -2208,7 +2208,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			return true;
 		}
 		//TURKEY SURPRISE
-		if((model.time.hours == 18 || model.time.hours == 19) && date.fullYear > flags[TURKEY_FUCK_YEAR_DONE] && isThanksgiving() && player.gender > 0) {
+		if((rand(5) == 0 && (model.time.hours == 18 || model.time.hours == 19)) && (date.fullYear > flags[TURKEY_FUCK_YEAR_DONE] || flags[MORE_TURKEY] > 0) && isThanksgiving() && player.gender > 0) {
 			datTurkeyRumpMeeting();
 			return true;
 		}
