@@ -240,6 +240,7 @@ function startupScreenBody():void
 
 	// NO FUCKING DECENT MULTI-LINE STRING LITERALS BECAUSE FUCKING STUPID
 	// WTF ACTIONSCRIPT YOUR DEV'S ARE ON CRACK
+	
 	outputText(<![CDATA[
 <br>(Formerly Unnamed Text Game)  
 <u>Created by: Fenoxo</u>
@@ -254,13 +255,13 @@ Source Code: <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions'
 Bug Tracker: <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions/issues'>https://github.com/herp-a-derp/Corruption-of-Champions/issues</a></u>  
 (requires an account, unfortunately)
 
-<b><u>DISCLAIMER</u>  
+**<u>DISCLAIMER</u>**
 
-- There are many strange and odd fetishes contained in this flash.  Peruse at own risk.
-- Please be 18 or the legal age to view porn before playing.
-- Try to keep your keyboard clean.  Think of the children!</b>
+- **There are many strange and odd fetishes contained in this flash.  Peruse at own risk.**
+- **Please be 18 or the legal age to view porn before playing.**
+- **Try to keep your keyboard clean.  Think of the children!**
 
-<br>
+
 For more information see Fenoxo's Blog at <b><u><a href='http://www.fenoxo.com/'>fenoxo.com</a></u></b>.
 
 Also go play <u><a href='http://www.furaffinity.net/view/9830293/'>Nimin</a></u> by Xadera on furaffinity.
