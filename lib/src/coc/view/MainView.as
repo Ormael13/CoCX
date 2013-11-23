@@ -565,6 +565,8 @@ package coc.view {
 			this.eventTestInput.type = TextFieldType.INPUT;
 			this.eventTestInput.mouseEnabled = true;
 
+			this.scrollBar.scrollTarget = this.eventTestInput;
+
 		}
 		public function hideTestInputPanel():void
 		{
@@ -575,9 +577,12 @@ package coc.view {
 			this.mainText.x -= 5000;
 			this.imageText.x -= 5000;			
 
+
 			this.eventTestInput.selectable = false;
 			this.eventTestInput.type = TextFieldType.DYNAMIC;
 			this.eventTestInput.mouseEnabled = false;
+
+			this.scrollBar.scrollTarget = this.mainText;
 
 		}
 
