@@ -563,17 +563,8 @@ package coc.view {
 
 			this.eventTestInput.selectable = true;
 			this.eventTestInput.type = TextFieldType.INPUT;
+			this.eventTestInput.mouseEnabled = true;
 
-			var thing = this.getChildByName("eventTestInput"); 
-			trace ("thing - ", thing);
-			trace ("Parent", thing.parent);
-			trace ("Parent Parent", this.parent);
-			trace ("Parent Parent", mainText.parent);
-
-			this.removeChild(thing);
-			this.addChild(thing);
-			this.parent.setChildIndex( this, this.parent.numChildren - 1); 
-			this.setChildIndex( thing, this.numChildren - 1); 
 		}
 		public function hideTestInputPanel():void
 		{
@@ -586,6 +577,7 @@ package coc.view {
 
 			this.eventTestInput.selectable = false;
 			this.eventTestInput.type = TextFieldType.DYNAMIC;
+			this.eventTestInput.mouseEnabled = false;
 
 		}
 
