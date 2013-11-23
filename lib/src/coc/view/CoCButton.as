@@ -74,6 +74,8 @@ package coc.view {
 		};
 
 		public function set labelField( value :TextField ) :void {
+			// TODO: Remove previous labelField?
+
 			this._labelField = value;
 
 			if( ! this._labelField ) return;
@@ -93,11 +95,13 @@ package coc.view {
 		};
 
 		public function set backgroundGraphic( value :MovieClip ) :void {
+			// TODO: Remove previous background graphic?
+
 			this._backgroundGraphic = value;
 
 			if( ! this._backgroundGraphic ) return;
 
-			this.addChild( this._backgroundGraphic );
+			this.addChildAt( this._backgroundGraphic, 0 );
 
 			this._backgroundGraphic.mouseEnabled = true;
 

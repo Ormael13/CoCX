@@ -113,22 +113,13 @@ package coc.view {
 
 			this.formatMiscItems();
 
+			this.allButtons = [];
+
 			// button texts.  This part will eventually go away...
 			this.bottomButtonTexts = [
 				b1Text, b2Text, b3Text, b4Text, b5Text,
 				b6Text, b7Text, b8Text, b9Text, b0Text // wonky.
 				];
-
-			// this.menuButtonTexts = [
-			// 	newGameText, dataText, statsText, levelText2, perksText, appearanceText
-			// 	];
-
-			// this.allButtonTexts = this.bottomButtonTexts.concat( this.menuButtonTexts );
-
-			// button bgs.  This part too will eventually go away...
-			// this.menuButtonBGs = [
-			// 	newGameBG, dataBG, statsBG, levelBG, perksBG, appearanceBG
-			// 	];
 				
 			createBottomButtons();
 			createMenuButtons();
@@ -216,7 +207,6 @@ package coc.view {
 
 			for( bi = 0; bi < BOTTOM_BUTTON_COUNT; ++bi ) {
 				b = new (bgClasses[ bi ])();
-				b.bottomIndex = bi;
 				b.name = 'b' + String( (bi + 1) % 10 ) + 'BG';
 
 				r = (bi / BOTTOM_BUTTON_PER_ROW_COUNT) << 0;
@@ -241,7 +231,8 @@ package coc.view {
 			var btf :TextField, bbg :MovieClip,
 				bn :String,
 				backgroundChildIndex :int,
-				buttonNames :Array;
+				buttonNames :Array,
+				button :CoCButton;
 
 			buttonNames = [
 				MENU_NEW_MAIN,
@@ -252,15 +243,26 @@ package coc.view {
 				MENU_APPEARANCE
 			];
 
+			backgroundChildIndex = this.getChildIndex( background );
+
 			for each( bn in buttonNames ) {
-				this[ bn + "Button" ] =
+				button =
 					new CoCButton(
-						this[ bn + 'Text' ],
 						// second case is for levelBG.
-						this[ bn + 'BG' ] || this[ bn + 'BG2' ]
+						(this.getChildByName( bn + 'Text2' ) || this.getChildByName( bn + 'Text' )) as TextField,
+						(this.getChildByName( bn + 'BG2' )   || this.getChildByName( bn + 'BG' )) as MovieClip
 					);
 
-				this.allButtons.push( this[ bn + "Button" ] );
+				this[ bn + "Button" ] = button
+				this.allButtons.push( button );
+				this.addChildAt( button, backgroundChildIndex + 1 );
+			}
+		};
+
+		protected function hookBottomButtons() :void {
+			var bi :MovieClip;
+			for each( bi in this.bottomButtons ) {
+				bi.addEventListener( MouseEvent.CLICK, this.executeBottomButtonClick );
 			}
 		};
 
@@ -283,6 +285,9 @@ package coc.view {
 			// 	buttonBG :MovieClip = this.bottomButtonBGs[ index ] as MovieClip;
 			var button :CoCButton = this.bottomButtons[ index ] as CoCButton;
 
+			// Should error.
+			if( ! button ) return;
+
 			button.labelText = label;
 			button.callback = callback;
 			button.toolTipText = toolTipViewText;
@@ -290,6 +295,11 @@ package coc.view {
 		};
 
 		public function hideBottomButton( index :int ) {
+			var button :CoCButton = this.bottomButtons[ index ] as CoCButton;
+
+			// Should error.
+			if( ! button ) return;
+
 			button.visible = false;
 		};
 
@@ -310,6 +320,18 @@ package coc.view {
 				textName += '2';
 
 			return this[ textName ] as TextField;
+		};
+
+		protected function executeBottomButtonClick( event :Event ) {
+			var bottomButton :InteractiveObject,
+				bottomButtonIndex :int;
+
+			if( this._executeButtomButtonClick ) {
+				this.toolTipView.hide();
+				bottomButton = (event.currentTarget as InteractiveObject);
+				bottomButtonIndex = this.bottomButtons.indexOf( bottomButton );
+				this._executeButtomButtonClick( bottomButtonIndex );
+			}
 		};
 
 		protected function hoverButton( event :MouseEvent ) {
