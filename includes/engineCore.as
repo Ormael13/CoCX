@@ -674,7 +674,7 @@ function perkDescription(perkName:String = ""):String {
 	}
 	return "broken.";
 }
-function displayPerks(e:MouseEvent):void {
+function displayPerks(e:MouseEvent = null):void {
 	temp = 0;
 	outputText("", true);
 	while(temp < player.perks.length) {
@@ -736,7 +736,7 @@ function doubleAttackOff():void {
 	doubleAttackOptions();
 }
 
-function levelUpGo(e:MouseEvent):void {
+function levelUpGo(e:MouseEvent = null):void {
 	hideMenus();
 	mainView.hideMenuButton( MainView.MENU_NEW_MAIN );
 	//Level up
@@ -1121,6 +1121,8 @@ function buttonText(buttonName:String):String {
 function getButtonToolTipText( buttonText :String ) :String
 {
 	var toolTipText :String;
+
+	buttonText = buttonText || '';
 
 	//Perkzzz
 	if(buttonText.indexOf("Strong Back") != -1) {
@@ -2378,7 +2380,7 @@ function minLust():Number {
 	return min;
 }
 
-function displayStats(e:MouseEvent) {
+function displayStats(e:MouseEvent = null) {
 	spriteSelect(-1);
 	outputText("", true);
 	outputText("<b><u>Combat Stats</u></b>\n", false);

@@ -181,9 +181,6 @@ package coc.view {
             for each( statName in allStats ) {
                 oldStatName = _oldStatNameFor( statName );
 
-                trace( "comparing player." + statName, "and oldStats." + oldStatName, "::",
-                    this.model.player[ statName ], "<?>", this.model.oldStats[ oldStatName ] );
-
                 if( this.model.player[ statName ] > this.model.oldStats[ oldStatName ] ) {
                     this.showStatUp( statName );
                 }

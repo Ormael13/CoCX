@@ -42,29 +42,7 @@
 // }
 
 function executeButtonClick(button:int = 0):void {
-	if(funcs.length == 0) {
-		trace("Calling eventParser on buttonEvents[" + String( button ) + "]:",
-			buttonEvents[ button ]);
-		eventParser(buttonEvents[button]);
-	}
-	else if(funcs.length - 1 < button) {
-		trace("ERROR: INVALID FUNCTION LOCATION");
-	}
-	else if(funcs[button] == null) {
-		trace("ERROR: NULL FUNCTION");
-	}
-	else {
-		//Store the arg and function and then clear those arrays so we can go back to regular
-		//codes if necessary.
-		hideMenus();
-		var func = funcs[button];
-		var arg = args[button];
-		funcs = new Array();
-		args = new Array();
-		trace("Calling Func: " + func + "ARG: " + arg);
-		if(arg == -9000) func();
-		else func(arg);
-	}
+	mainView.clickButton( button );
 }
 
 

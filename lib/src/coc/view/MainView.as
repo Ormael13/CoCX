@@ -7,6 +7,8 @@
 
 	It's for allowing people to test stuff in the parser. It gets moved into view, and you 
 	can enter stuff in the text window, which then gets fed through the parser.
+
+	That's good to know.  Cheers.
 ****/
 
 package coc.view {
@@ -174,6 +176,7 @@ package coc.view {
 					case this.imageText:
 					case this.nameBox:
 					case this.eventTestInput:
+						t.mouseEnabled = true;
 						break;
 
 					default:
@@ -419,6 +422,10 @@ package coc.view {
 			}
 		};
 
+		public function clickButton( index :int ) :void {
+			this.bottomButtons[ index ].click();
+		};
+
 		// This function checks if the button at index has text
 		// that matches at least one of the possible texts passed as an argument.
 		public function buttonTextIsOneOf( index :int, possibleLabels :Array ) :Boolean {
@@ -577,39 +584,38 @@ package coc.view {
 			this.selectSprite( -1 );
 		};
 
-
 		public function showTestInputPanel():void
 		{
 			this.eventTestInput.x = 207.5;
 			this.eventTestInput.y = 55.1;
 			
-			this.mainText.x += 5000;
-			this.imageText.x += 5000;
+			this.mainText.visible = false;
+			this.imageText.visible = false;
 
 			this.eventTestInput.selectable = true;
 			this.eventTestInput.type = TextFieldType.INPUT;
-			this.eventTestInput.mouseEnabled = true;
+			this.eventTestInput.visible = true;
 
 			this.scrollBar.scrollTarget = this.eventTestInput;
 
-		}
+		};
+
 		public function hideTestInputPanel():void
 		{
 
 			this.eventTestInput.x = -10207.5;
 			this.eventTestInput.y = -1055.1;
 			
-			this.mainText.x -= 5000;
-			this.imageText.x -= 5000;			
+			this.mainText.visible = true;
+			this.imageText.visible = true;
 
 
 			this.eventTestInput.selectable = false;
 			this.eventTestInput.type = TextFieldType.DYNAMIC;
-			this.eventTestInput.mouseEnabled = false;
+			this.eventTestInput.visible = false;
 
 			this.scrollBar.scrollTarget = this.mainText;
 
-		}
-
+		};
 	}
 }

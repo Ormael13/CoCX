@@ -158,7 +158,7 @@ function saveScreen():void
 	"Back", 30);
 }
 
-function saveLoad(e:MouseEvent):void
+function saveLoad(e:MouseEvent = null):void
 {
 	mainView.eventTestInput.x = -10207.5;
 	mainView.eventTestInput.y = -1055.1;

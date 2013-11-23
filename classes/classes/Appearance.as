@@ -13,11 +13,12 @@
 		{
 			if ((args.length == 1) && (args[0] is Array))
 			{
-				var i:Number = int(Math.round(Math.random() * (args[0].length - 1)));
-				return args[0][i];
+				return args[0][ Math.floor( Math.random() * args[0].length ) ];
 			}
 			else
-			throw Error("WUT");
+			{
+				return args[ Math.floor( Math.random() * args.length ) ];
+			}
 		}
 
 		public static function rand(max:Number):Number
