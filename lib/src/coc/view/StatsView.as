@@ -123,11 +123,7 @@ package coc.view {
             setStatText( "HPNum", model.player.HP );
             setStatText( "lustNum", model.player.lust );
             setStatText( "levelNum", model.player.level );
-
-            if( model.player.XP > 9999 )
-                setStatText( "xpNum", "++++" );
-            else
-                setStatText( "xpNum", model.player.XP );
+            setStatText( "xpNum", model.player.XP );
 
             setStatText( "timeText",
                 "<b><u>Day #: {DAYS}</u></b>\n<b>Time : {HOURS}:00</b>"
