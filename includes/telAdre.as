@@ -160,11 +160,11 @@ function telAdreMenu():void {
 	if(urtaKids() > 0 && player.hasKeyItem("Spare Key to Urta's House") >= 0) homes = true;
 	if(flags[ARIAN_PARK] >= 4 && !arianFollower()) homes = true;
 	if(homes) homeB = 3993;
-	choices("Shops",armorShops,"Bakery",bakeryuuuuuu,"Bar",barTelAdre,"Gym",gymDesc,"Homes",homeB,"Park",oswaldPawn,"Pawn",oswaldPawn,"Tower",visitZeMagesTower,"Weapons",weaponShop,"Leave",13);
+	choices("Shops",armorShops,"Bakery",bakeryuuuuuu,"Bar",enterBarTelAdre,"Gym",gymDesc,"Homes",homeB,"Park",oswaldPawn,"Pawn",oswaldPawn,"Tower",visitZeMagesTower,"Weapons",weaponShop,"Leave",13);
 	menu();
 	addButton(0,"Shops",armorShops);
 	addButton(1,"Bakery",bakeryuuuuuu);
-	addButton(2,"Bar",barTelAdre);
+	addButton(2,"Bar",enterBarTelAdre);
 	addButton(3,"Gym",gymDesc);
 	if(homeB > 0) addButton(4,"Homes",eventParser,homeB);
 	if(flags[ARIAN_PARK] > 0 && flags[ARIAN_PARK] < 4) addButton(5,"Park",visitThePark);
@@ -887,6 +887,10 @@ function anotherButton(button:int,nam:String,func,arg = -9000):int {
 	else addButton(button,nam,func,arg);
 	button++;
 	return button;
+}
+function enterBarTelAdre():void {
+	if(isThanksgiving()) pigSlutRoastingGreet();
+	else barTelAdre();
 }
 function barTelAdre():void {
 	// Dominka & Edryn both persist their sprites if you back out of doing anything with them -- I 

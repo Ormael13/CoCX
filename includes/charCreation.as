@@ -1,6 +1,6 @@
 ﻿// CUSTOM_PC_ENABLED:int = 759;
 
-function newGameGo(e:MouseEvent):void {
+function newGameGo(e:MouseEvent = null):void {
 	funcs = new Array();
 	args = new Array();
 	mainView.eventTestInput.x = -10207.5;

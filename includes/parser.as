@@ -40,8 +40,9 @@ Planned, but not implemented yet:
 
 */
 
+import showdown.Showdown;
 
-var sceneParserDebug:Boolean = false;
+var sceneParserDebug:Boolean = true;
 
 var mainParserDebug:Boolean = false;
 
@@ -67,53 +68,53 @@ var singleArgConverters:Object =
 
 		// Note: all key strings MUST be ENTIRELY lowercase.
 
-		"agility"					: function():* { return "[Agility]"; },
-		"armor"						: function():* { return player.armorName;},
-		"armorname"					: function():* { return player.armorName;},
-		"ass"						: function():* { return buttDescript();},
-		"asshole"					: function():* { return assholeDescript();},
-		"balls"						: function():* { return ballsDescriptLight(); },
-		"butt"						: function():* { return buttDescript();},
-		"butthole"					: function():* { return assholeDescript();},
-		"chest"						: function():* { return chestDesc(); },
-		"clit"						: function():* { return clitDescript(); },
-		"cock"						: function():* { return cockDescript(0);},
-		"cockhead"					: function():* { return cockHead(0);},
-		"cocks"						: function():* { return multiCockDescriptLight(); },
-		"cunt"						: function():* { return vaginaDescript(); },
-		"eachcock"					: function():* { return sMultiCockDesc();},
-		"evade"						: function():* { return "[Evade]"; },
-		"face"						: function():* { return player.face(); },
-		"feet"						: function():* { return player.feet(); },
-		"foot"						: function():* { return player.foot(); },
-		"fullchest"					: function():* { return allChestDesc(); },
-		"hair"						: function():* { return hairDescript(); },
-		"hairorfur"					: function():* { return hairOrFur(); },
-		"he"						: function():* { return player.mf("he","she"); },
-		"him"						: function():* { return player.mf("him","her"); },
-		"hips"						: function():* { return hipDescript();},
-		"his"						: function():* { return player.mf("his","hers"); },
-		"leg"						: function():* { return player.leg(); },
-		"legs"						: function():* { return player.legs(); },
-		"master"					: function():* { return player.mf("master","mistress"); },
-		"misdirection"				: function():* { return "[Misdirection]"; },
-		"multicockdescriptlight"	: function():* { return multiCockDescriptLight(); },
-		"name"						: function():* { return player.short;},
-		"nipple"					: function():* { return nippleDescript(0);},
-		"nipples"					: function():* { return nippleDescript(0) + "s";},
-		"onecock"					: function():* { return oMultiCockDesc();},
-		"pg"						: function():* { return "\n\n";},
-		"pussy"						: function():* { return vaginaDescript(); },
-		"sack"						: function():* { return sackDescript(); },
-		"sheath"					: function():* { return sheathDesc(); },
-		"skin"						: function():* { return player.skin(); },
-		"skinfurscales"				: function():* { return player.skinFurScales(); },
-		"tongue"					: function():* { return tongueDescript();},
-		"vag"						: function():* { return vaginaDescript(); },
-		"vagina"					: function():* { return vaginaDescript(); },
-		"vagorass"					: function():* { if (player.hasVagina())return vaginaDescript(); else assholeDescript();},
-		"weapon"					: function():* { return player.weaponName;},
-		"weaponname"				: function():* { return player.weaponName;}
+		"agility"					: function(thisPtr:*):* { return "[Agility]"; },
+		"armor"						: function(thisPtr:*):* { return thisPtr.player.armorName;},
+		"armorname"					: function(thisPtr:*):* { return thisPtr.player.armorName;},
+		"ass"						: function(thisPtr:*):* { return thisPtr.buttDescript();},
+		"asshole"					: function(thisPtr:*):* { return thisPtr.assholeDescript();},
+		"balls"						: function(thisPtr:*):* { return thisPtr.ballsDescriptLight(); },
+		"butt"						: function(thisPtr:*):* { return thisPtr.buttDescript();},
+		"butthole"					: function(thisPtr:*):* { return thisPtr.assholeDescript();},
+		"chest"						: function(thisPtr:*):* { return thisPtr.chestDesc(); },
+		"clit"						: function(thisPtr:*):* { return thisPtr.clitDescript(); },
+		"cock"						: function(thisPtr:*):* { return thisPtr.cockDescript(0);},
+		"cockhead"					: function(thisPtr:*):* { return thisPtr.cockHead(0);},
+		"cocks"						: function(thisPtr:*):* { return thisPtr.multiCockDescriptLight(); },
+		"cunt"						: function(thisPtr:*):* { return thisPtr.vaginaDescript(); },
+		"eachcock"					: function(thisPtr:*):* { return thisPtr.sMultiCockDesc();},
+		"evade"						: function(thisPtr:*):* { return "[Evade]"; },
+		"face"						: function(thisPtr:*):* { return thisPtr.player.face(); },
+		"feet"						: function(thisPtr:*):* { return thisPtr.player.feet(); },
+		"foot"						: function(thisPtr:*):* { return thisPtr.player.foot(); },
+		"fullchest"					: function(thisPtr:*):* { return thisPtr.allChestDesc(); },
+		"hair"						: function(thisPtr:*):* { return thisPtr.hairDescript(); },
+		"hairorfur"					: function(thisPtr:*):* { return thisPtr.hairOrFur(); },
+		"he"						: function(thisPtr:*):* { return thisPtr.player.mf("he","she"); },
+		"him"						: function(thisPtr:*):* { return thisPtr.player.mf("him","her"); },
+		"hips"						: function(thisPtr:*):* { return thisPtr.hipDescript();},
+		"his"						: function(thisPtr:*):* { return thisPtr.player.mf("his","hers"); },
+		"leg"						: function(thisPtr:*):* { return thisPtr.player.leg(); },
+		"legs"						: function(thisPtr:*):* { return thisPtr.player.legs(); },
+		"master"					: function(thisPtr:*):* { return thisPtr.player.mf("master","mistress"); },
+		"misdirection"				: function(thisPtr:*):* { return "[Misdirection]"; },
+		"multicockdescriptlight"	: function(thisPtr:*):* { return thisPtr.multiCockDescriptLight(); },
+		"name"						: function(thisPtr:*):* { return thisPtr.player.short;},
+		"nipple"					: function(thisPtr:*):* { return thisPtr.nippleDescript(0);},
+		"nipples"					: function(thisPtr:*):* { return thisPtr.nippleDescript(0) + "s";},
+		"onecock"					: function(thisPtr:*):* { return thisPtr.oMultiCockDesc();},
+		"pg"						: function(thisPtr:*):* { return "\n\n";},
+		"pussy"						: function(thisPtr:*):* { return thisPtr.vaginaDescript(); },
+		"sack"						: function(thisPtr:*):* { return thisPtr.sackDescript(); },
+		"sheath"					: function(thisPtr:*):* { return thisPtr.sheathDesc(); },
+		"skin"						: function(thisPtr:*):* { return thisPtr.player.skin(); },
+		"skinfurscales"				: function(thisPtr:*):* { return thisPtr.player.skinFurScales(); },
+		"tongue"					: function(thisPtr:*):* { return thisPtr.tongueDescript();},
+		"vag"						: function(thisPtr:*):* { return thisPtr.vaginaDescript(); },
+		"vagina"					: function(thisPtr:*):* { return thisPtr.vaginaDescript(); },
+		"vagorass"					: function(thisPtr:*):* { if (thisPtr.player.hasVagina())return thisPtr.vaginaDescript(); else thisPtr.assholeDescript();},
+		"weapon"					: function(thisPtr:*):* { return thisPtr.player.weaponName;},
+		"weaponname"				: function(thisPtr:*):* { return thisPtr.player.weaponName;}
 
 }
 
@@ -132,7 +133,7 @@ function convertSingleArg(arg:String):String
 	if (arg in singleArgConverters)
 	{
 		if (mainParserDebug) trace("Found corresponding anonymous function");
-		argResult = singleArgConverters[arg]();
+		argResult = singleArgConverters[arg](this);
 		if (mainParserDebug) trace("Called, return = ", argResult);
 	}
 	else
@@ -155,20 +156,20 @@ function convertSingleArg(arg:String):String
 // (Is it bad that half my development time so far has been researching non-gendered nouns? ~~~~Fake-Name)
 
 
-var arianLookups:Object = // For subject: "arian"
+public var arianLookups:Object = // For subject: "arian"
 {
-	"man"		: function():* {return arianMF("man","woman")},
+	"man"		: function(thisPtr:*):* {return thisPtr.arianMF("man","woman")},
 	// argh! "Man" is the mass-noun for humanity, and I'm loathe to choose an even more esoteric variant.
 	// Elverson/Spivak terminology is already esoteric enough, and it lacks a ungendered mass noun.
 
-	"ey"		: function():* {return arianMF("he","she")},
-	"em"		: function():* {return arianMF("him","her")},
-	"eir"		: function():* {return arianMF("his","her")},
-	"eirs"		: function():* {return arianMF("his","hers")},
-	"emself"	: function():* {return arianMF("himself","herself")},
+	"ey"		: function(thisPtr:*):* {return thisPtr.arianMF("he","she")},
+	"em"		: function(thisPtr:*):* {return thisPtr.arianMF("him","her")},
+	"eir"		: function(thisPtr:*):* {return thisPtr.arianMF("his","her")},
+	"eirs"		: function(thisPtr:*):* {return thisPtr.arianMF("his","hers")},
+	"emself"	: function(thisPtr:*):* {return thisPtr.arianMF("himself","herself")},
 
-	"chestadj"	: function():* {return arianChestAdjective()},
-	"chest"		: function():* {return arianChest()}
+	"chestadj"	: function(thisPtr:*):* {return thisPtr.arianChestAdjective()},
+	"chest"		: function(thisPtr:*):* {return thisPtr.arianChest()}
 }
 // Arian unhandled terms (I have not decided how to support them yet):
 // arianMF("mas","mis")
@@ -177,18 +178,18 @@ var arianLookups:Object = // For subject: "arian"
 
 
 
-var rubiLookups:Object = // For subject: "rubi"
+public var rubiLookups:Object = // For subject: "rubi"
 {
-	"man"		: function():* {return rubiMF("man","woman")},
+	"man"		: function(thisPtr:*):* {return thisPtr.rubiMF("man","woman")},
 
-	"ey"		: function():* {return rubiMF("he","she")},
-	"em"		: function():* {return rubiMF("him","her")},
-	"eir"		: function():* {return rubiMF("his","her")},
-	"eirs"		: function():* {return rubiMF("his","hers")},
-	"emself"	: function():* {return rubiMF("himself","herself")},
+	"ey"		: function(thisPtr:*):* {return thisPtr.rubiMF("he","she")},
+	"em"		: function(thisPtr:*):* {return thisPtr.rubiMF("him","her")},
+	"eir"		: function(thisPtr:*):* {return thisPtr.rubiMF("his","her")},
+	"eirs"		: function(thisPtr:*):* {return thisPtr.rubiMF("his","hers")},
+	"emself"	: function(thisPtr:*):* {return thisPtr.rubiMF("himself","herself")},
 
-	"cock"		: function():* {return rubiCock()},
-	"breasts"	: function():* {return rubiBreasts()}
+	"cock"		: function(thisPtr:*):* {return thisPtr.rubiCock()},
+	"breasts"	: function(thisPtr:*):* {return thisPtr.rubiBreasts()}
 
 }
 //Rubi unhandled terms :
@@ -199,26 +200,26 @@ var rubiLookups:Object = // For subject: "rubi"
 
 // PC ASCII Aspect lookups
 
-var cockLookups:Object = // For subject: "cock"
+public var cockLookups:Object = // For subject: "cock"
 {
-	"all"		: function():*{ return multiCockDescriptLight(); },
-	"each"		: function():*{ return sMultiCockDesc(); },
-	"one"		: function():*{ return oMultiCockDesc(); },
-	"largest"	: function():*{ return cockDescript(player.biggestCockIndex()); },
-	"biggest"	: function():*{ return cockDescript(player.biggestCockIndex()); },
-	"smallest"	: function():*{ return cockDescript(player.smallestCockIndex()); },
-	"longest"	: function():*{ return cockDescript(player.longestCock()); },
-	"shortest"	: function():*{ return cockDescript(player.shortestCockIndex()); }
+	"all"		: function(thisPtr:*):*{ return thisPtr.multiCockDescriptLight(); },
+	"each"		: function(thisPtr:*):*{ return thisPtr.sMultiCockDesc(); },
+	"one"		: function(thisPtr:*):*{ return thisPtr.oMultiCockDesc(); },
+	"largest"	: function(thisPtr:*):*{ return thisPtr.cockDescript(thisPtr.player.biggestCockIndex()); },
+	"biggest"	: function(thisPtr:*):*{ return thisPtr.cockDescript(thisPtr.player.biggestCockIndex()); },
+	"smallest"	: function(thisPtr:*):*{ return thisPtr.cockDescript(thisPtr.player.smallestCockIndex()); },
+	"longest"	: function(thisPtr:*):*{ return thisPtr.cockDescript(thisPtr.player.longestCock()); },
+	"shortest"	: function(thisPtr:*):*{ return thisPtr.cockDescript(thisPtr.player.shortestCockIndex()); }
 }
 
 
-var cockHeadLookups:Object = // For subject: "cockHead"
+public var cockHeadLookups:Object = // For subject: "cockHead"
 {
-	"biggest"	: function():*{ return cockHead(player.biggestCockIndex()); },
-	"largest"	: function():*{ return cockHead(player.biggestCockIndex()); },
-	"smallest"	: function():*{ return cockHead(player.smallestCockIndex()); },
-	"longest"	: function():*{ return cockHead(player.longestCock()); },			// the *head* of a cock has a length? Wut?
-	"shortest"	: function():*{ return cockHead(player.shortestCockIndex()); }
+	"biggest"	: function(thisPtr:*):*{ return thisPtr.cockHead(thisPtr.player.biggestCockIndex()); },
+	"largest"	: function(thisPtr:*):*{ return thisPtr.cockHead(thisPtr.player.biggestCockIndex()); },
+	"smallest"	: function(thisPtr:*):*{ return thisPtr.cockHead(thisPtr.player.smallestCockIndex()); },
+	"longest"	: function(thisPtr:*):*{ return thisPtr.cockHead(thisPtr.player.longestCock()); },			// the *head* of a cock has a length? Wut?
+	"shortest"	: function(thisPtr:*):*{ return thisPtr.cockHead(thisPtr.player.shortestCockIndex()); }
 }
 
 
@@ -229,63 +230,63 @@ var cockHeadLookups:Object = // For subject: "cockHead"
 // like so: twoWordNumericTagsLookup["object"](Number("NUMERIC-attribute"))
 //
 // if attribute cannot be case to a number, the parser looks for "object" in twoWordTagsLookup.
-var twoWordNumericTagsLookup:Object =
+public var twoWordNumericTagsLookup:Object =
 {
 		"cockfit":
-			function(aspect):*
+			function(thisPtr:*, aspect):*
 			{
-				if(!player.hasCock()) return "<b>(Attempt to parse cock when none present.)</b>";
+				if(!thisPtr.player.hasCock()) return "<b>(Attempt to parse cock when none present.)</b>";
 				else
 				{
-					if(player.cockThatFits(aspect) >= 0) return cockDescript(player.cockThatFits(aspect));
-					else return cockDescript(player.smallestCockIndex());
+					if(thisPtr.player.cockThatFits(aspect) >= 0) return thisPtr.cockDescript(thisPtr.player.cockThatFits(aspect));
+					else return thisPtr.cockDescript(thisPtr.player.smallestCockIndex());
 				}
 			},
 		"cockfit2":
-			function(aspect):*
+			function(thisPtr:*, aspect):*
 			{
-				if(!player.hasCock()) return "<b>(Attempt to parse cock when none present.)</b>";
+				if(!thisPtr.player.hasCock()) return "<b>(Attempt to parse cock when none present.)</b>";
 				else {
-					if(player.cockThatFits2(aspect) >= 0) return cockDescript(player.cockThatFits2(aspect));
-					else return cockDescript(player.smallestCockIndex());
+					if(thisPtr.player.cockThatFits2(aspect) >= 0) return thisPtr.cockDescript(thisPtr.player.cockThatFits2(aspect));
+					else return thisPtr.cockDescript(thisPtr.player.smallestCockIndex());
 				}
 			},
 		"cockheadfit":
-			function(aspect):*
+			function(thisPtr:*, aspect):*
 			{
 
-				if(!player.hasCock()) return "<b>(Attempt to parse cockhead when none present.)</b>";
+				if(!thisPtr.player.hasCock()) return "<b>(Attempt to parse cockhead when none present.)</b>";
 				else {
-					if(player.cockThatFits(aspect) >= 0) return cockHead(player.cockThatFits(aspect));
-					else return cockHead(player.smallestCockIndex());
+					if(thisPtr.player.cockThatFits(aspect) >= 0) return cockHead(thisPtr.player.cockThatFits(aspect));
+					else return cockHead(thisPtr.player.smallestCockIndex());
 				}
 			},
 		"cockheadfit2":
-			function(aspect):*
+			function(thisPtr:*, aspect):*
 			{
-				if(!player.hasCock()) return "<b>(Attempt to parse cockhead when none present.)</b>";
+				if(!thisPtr.player.hasCock()) return "<b>(Attempt to parse cockhead when none present.)</b>";
 				else {
-					if(player.cockThatFits2(aspect) >= 0) return cockHead(player.cockThatFits2(aspect));
-					else return cockHead(player.smallestCockIndex());
+					if(thisPtr.player.cockThatFits2(aspect) >= 0) return cockHead(thisPtr.player.cockThatFits2(aspect));
+					else return cockHead(thisPtr.player.smallestCockIndex());
 				}
 			},
 		"cock":
-			function(aspect):*
+			function(thisPtr:*, aspect):*
 			{
-				if(!player.hasCock()) return "<b>(Attempt to parse cock when none present.)</b>";
+				if(!thisPtr.player.hasCock()) return "<b>(Attempt to parse cock when none present.)</b>";
 				else
 				{
-					if(aspect-1 >= 0 && aspect-1 < player.cockTotal()) return cockDescript(aspect - 1);
+					if(aspect-1 >= 0 && aspect-1 < thisPtr.player.cockTotal()) return thisPtr.cockDescript(aspect - 1);
 					else return "<b>(Attempt To Parse CockDescript for Invalid Cock)</b>";
 				}
 			},
 		"cockhead":
-			function(aspect):*
+			function(thisPtr:*, aspect):*
 			{
-				if(!player.hasCock()) return "<b>(Attempt to parse cockHead when none present.)</b>";
+				if(!thisPtr.player.hasCock()) return "<b>(Attempt to parse cockHead when none present.)</b>";
 				else
 				{
-					if(aspect-1 >= 0 && aspect-1 < player.cockTotal()) return cockHead(aspect - 1);
+					if(aspect-1 >= 0 && aspect-1 < thisPtr.player.cockTotal()) return thisPtr.cockHead(aspect - 1);
 					else return "<b>(Attempt To Parse CockHeadDescript for Invalid Cock)</b>";
 				}
 			}
@@ -297,7 +298,7 @@ var twoWordNumericTagsLookup:Object =
 // if attribute cannot be cast to a number, the parser looks for "object" in twoWordTagsLookup,
 // and then uses the corresponding object to determine the value of "attribute", by looking for
 // "attribute" twoWordTagsLookup["object"]["attribute"]
-var twoWordTagsLookup:Object =
+public var twoWordTagsLookup:Object =
 {
 	// NPCs:
 	"rubi"		: rubiLookups,
@@ -340,7 +341,7 @@ function convertDoubleArg(arg:String):String
 			aspect = Number(aspect);
 
 			if (mainParserDebug) trace("Found corresponding anonymous function");
-			argResult = twoWordNumericTagsLookup[subject](aspect);
+			argResult = twoWordNumericTagsLookup[subject](this, aspect);
 			if (mainParserDebug) trace("Called, return = ", argResult);
 		}
 		else
@@ -355,7 +356,7 @@ function convertDoubleArg(arg:String):String
 			{
 
 				if (mainParserDebug) trace("Found corresponding anonymous function");
-				argResult = twoWordTagsLookup[subject][aspect]();
+				argResult = twoWordTagsLookup[subject][aspect](this);
 				if (mainParserDebug) trace("Called, return = ", argResult);
 			}
 			else
@@ -386,54 +387,54 @@ function convertDoubleArg(arg:String):String
 // First, there is an attempt to cast the argument to a Number. If that fails,
 // a dictionary lookup is performed to see if the argument is in the conditionalOptions[]
 // object. If that fails, we just fall back to returning 0
-var conditionalOptions:Object =
+public var conditionalOptions:Object =
 {
-		"strength"			: function():* {return  player.str;},
-		"toughness"			: function():* {return  player.tou;},
-		"speed"				: function():* {return  player.spe;},
-		"intelligence"		: function():* {return  player.inte;},
-		"libido"			: function():* {return  player.lib;},
-		"sensitivity"		: function():* {return  player.sens;},
-		"corruption"		: function():* {return  player.cor;},
-		"fatigue"			: function():* {return  player.fatigue;},
-		"hp"				: function():* {return  player.HP;},
-		"hour"				: function():* {return  model.time.hours;},
-		"days"				: function():* {return  model.time.days;},
-		"tallness"			: function():* {return  player.tallness;},
-		"hairlength"		: function():* {return  player.hairLength;},
-		"femininity"		: function():* {return  player.femininity;},
-		"masculinity"		: function():* {return  100 - player.femininity;},
-		"cocks"				: function():* {return  player.cockTotal();},
-		"breastrows"		: function():* {return  player.bRows();},
-		"biggesttitsize"	: function():* {return  player.biggestTitSize();},
-		"vagcapacity"		: function():* {return  player.vaginalCapacity();},
-		"analcapacity"		: function():* {return  player.analCapacity();},
-		"balls"				: function():* {return  player.balls;},
-		"cumquantity"		: function():* {return  player.cumQ();},
-		"biggesttitsize"	: function():* {return  player.biggestTitSize();},
-		"milkquantity"		: function():* {return  player.lactationQ();},
-		"hasvagina"			: function():* {return  player.hasVagina();},
-		"istaur"			: function():* {return  player.isTaur();},
-		"isnaga"			: function():* {return  player.isNaga();},
-		"isgoo"				: function():* {return  player.isGoo();},
-		"isbiped"			: function():* {return  player.isBiped();},
-		"hasbreasts"		: function():* {return  (player.biggestTitSize() >= 1);},
-		"hasballs"			: function():* {return  (player.balls > 0);},
-		"hascock"			: function():* {return  player.hasCock();},
-		"isherm"			: function():* {return  (player.gender == 3);},
-		"cumnormal"			: function():* {return  (player.cumQ() <= 150);},
-		"cummedium"			: function():* {return  (player.cumQ() > 150 && player.cumQ() <= 350);},
-		"cumhigh"			: function():* {return  (player.cumQ() > 350 && player.cumQ() <= 1000);},
-		"cumveryhigh"		: function():* {return  (player.cumQ() > 1000 && player.cumQ() <= 2500);},
-		"cumextreme"		: function():* {return  (player.cumQ() > 2500);},
-		"issquirter"		: function():* {return  (player.wetness() >= 4);},
-		"ispregnant"		: function():* {return  (player.pregnancyIncubation > 0);},
-		"isbuttpregnant"	: function():* {return  (player.buttPregnancyIncubation > 0);},
-		"hasnipplecunts"	: function():* {return  player.hasFuckableNipples();},
-		"canfly"			: function():* {return  player.canFly();},
-		"islactating"		: function():* {return  (player.lactationQ() > 0);},
-		"true"				: function():* {return  true;},
-		"false"				: function():* {return  false;}
+		"strength"			: function(thisPtr:*):* {return  thisPtr.player.str;},
+		"toughness"			: function(thisPtr:*):* {return  thisPtr.player.tou;},
+		"speed"				: function(thisPtr:*):* {return  thisPtr.player.spe;},
+		"intelligence"		: function(thisPtr:*):* {return  thisPtr.player.inte;},
+		"libido"			: function(thisPtr:*):* {return  thisPtr.player.lib;},
+		"sensitivity"		: function(thisPtr:*):* {return  thisPtr.player.sens;},
+		"corruption"		: function(thisPtr:*):* {return  thisPtr.player.cor;},
+		"fatigue"			: function(thisPtr:*):* {return  thisPtr.player.fatigue;},
+		"hp"				: function(thisPtr:*):* {return  thisPtr.player.HP;},
+		"hour"				: function(thisPtr:*):* {return  thisPtr.model.time.hours;},
+		"days"				: function(thisPtr:*):* {return  thisPtr.model.time.days;},
+		"tallness"			: function(thisPtr:*):* {return  thisPtr.player.tallness;},
+		"hairlength"		: function(thisPtr:*):* {return  thisPtr.player.hairLength;},
+		"femininity"		: function(thisPtr:*):* {return  thisPtr.player.femininity;},
+		"masculinity"		: function(thisPtr:*):* {return  100 - thisPtr.player.femininity;},
+		"cocks"				: function(thisPtr:*):* {return  thisPtr.player.cockTotal();},
+		"breastrows"		: function(thisPtr:*):* {return  thisPtr.player.bRows();},
+		"biggesttitsize"	: function(thisPtr:*):* {return  thisPtr.player.biggestTitSize();},
+		"vagcapacity"		: function(thisPtr:*):* {return  thisPtr.player.vaginalCapacity();},
+		"analcapacity"		: function(thisPtr:*):* {return  thisPtr.player.analCapacity();},
+		"balls"				: function(thisPtr:*):* {return  thisPtr.player.balls;},
+		"cumquantity"		: function(thisPtr:*):* {return  thisPtr.player.cumQ();},
+		"biggesttitsize"	: function(thisPtr:*):* {return  thisPtr.player.biggestTitSize();},
+		"milkquantity"		: function(thisPtr:*):* {return  thisPtr.player.lactationQ();},
+		"hasvagina"			: function(thisPtr:*):* {return  thisPtr.player.hasVagina();},
+		"istaur"			: function(thisPtr:*):* {return  thisPtr.player.isTaur();},
+		"isnaga"			: function(thisPtr:*):* {return  thisPtr.player.isNaga();},
+		"isgoo"				: function(thisPtr:*):* {return  thisPtr.player.isGoo();},
+		"isbiped"			: function(thisPtr:*):* {return  thisPtr.player.isBiped();},
+		"hasbreasts"		: function(thisPtr:*):* {return  (thisPtr.player.biggestTitSize() >= 1);},
+		"hasballs"			: function(thisPtr:*):* {return  (thisPtr.player.balls > 0);},
+		"hascock"			: function(thisPtr:*):* {return  thisPtr.player.hasCock();},
+		"isherm"			: function(thisPtr:*):* {return  (thisPtr.player.gender == 3);},
+		"cumnormal"			: function(thisPtr:*):* {return  (thisPtr.player.cumQ() <= 150);},
+		"cummedium"			: function(thisPtr:*):* {return  (thisPtr.player.cumQ() > 150 && thisPtr.player.cumQ() <= 350);},
+		"cumhigh"			: function(thisPtr:*):* {return  (thisPtr.player.cumQ() > 350 && thisPtr.player.cumQ() <= 1000);},
+		"cumveryhigh"		: function(thisPtr:*):* {return  (thisPtr.player.cumQ() > 1000 && thisPtr.player.cumQ() <= 2500);},
+		"cumextreme"		: function(thisPtr:*):* {return  (thisPtr.player.cumQ() > 2500);},
+		"issquirter"		: function(thisPtr:*):* {return  (thisPtr.player.wetness() >= 4);},
+		"ispregnant"		: function(thisPtr:*):* {return  (thisPtr.player.pregnancyIncubation > 0);},
+		"isbuttpregnant"	: function(thisPtr:*):* {return  (thisPtr.player.buttPregnancyIncubation > 0);},
+		"hasnipplecunts"	: function(thisPtr:*):* {return  thisPtr.player.hasFuckableNipples();},
+		"canfly"			: function(thisPtr:*):* {return  thisPtr.player.canFly();},
+		"islactating"		: function(thisPtr:*):* {return  (thisPtr.player.lactationQ() > 0);},
+		"true"				: function(thisPtr:*):* {return  true;},
+		"false"				: function(thisPtr:*):* {return  false;}
 	}
 
 // converts a single argument to a conditional to
@@ -460,7 +461,7 @@ function convertConditionalArgumentFromStr(arg:String):*
 	if (arg in conditionalOptions)
 	{
 		if (mainParserDebug) trace("Found corresponding anonymous function");
-		argResult = conditionalOptions[arg]();
+		argResult = conditionalOptions[arg](this);
 		if (mainParserDebug) trace("Called, return = ", argResult);
 
 	}
@@ -635,7 +636,7 @@ function parseConditional(textCtnt:String, depth:int):String
 				//ifText = recParser(textCtnt.substring(0, tmp));
 
 				// Pull out the conditional, and then evaluate it.
-				conditional = recParser(textCtnt.substring(tmp+1, i), depth);
+				conditional = textCtnt.substring(tmp+1, i);
 				conditional = evalConditionalStatementStr(conditional);
 
 				// Make sure the contents of the if-statement have been evaluated to a plain-text string before trying to
@@ -662,33 +663,57 @@ function parseConditional(textCtnt:String, depth:int):String
 }
 
 
-var buttonNum:Number;
+// SCENE PARSING ---------------------------------------------------------------------------------------------------------------
+
+public var buttonNum:Number;
 
 function enterParserScene(sceneName:String):String
 {
 
+	/*
 	if (sceneParserDebug) trace("thisParserStateContents:")
 	for (var prop in thisParserState) 
 	{
 		if (sceneParserDebug) trace("thisParserState."+prop+" = "+thisParserState[prop]); 
 	}
+	*/
 
 
 	//trace("Entering parser scene: \""+sceneName+"\"");
 	//trace("Do we have the scene name? ", sceneName in thisParserState)
 	if (sceneName == "exit")
 	{
-		doNextClear(debugPane);
+		if (sceneParserDebug) trace("Enter scene called to exit");
+		//doNextClear(debugPane);
+		debugPane();
 	}
-	if (sceneName in thisParserState)
+	else if (sceneName in thisParserState)
 	{	
 		if (sceneParserDebug) trace("Have scene \""+sceneName+"\". Parsing and setting up menu");
 		menu();
-		buttonNum = 0;
+		
+		buttonNum = 0;		// Clear the button number, so we start adding buttons from button 0
+
 		var tmp1 = thisParserState[sceneName];
-		var tmp2 = recParser(tmp1, 0);
-		if (sceneParserDebug) trace("Scene contents: \"" + tmp1 + "\" as parsed: \"" + tmp2 + "\"")
-		rawOutputText(tmp2, true);  // we have to actually parse the scene now, and then stick it on the display
+		var tmp2 = recParser(tmp1, 0);		// we have to actually parse the scene now
+		var tmp3 = Showdown.makeHtml(tmp2)
+
+		
+
+		rawOutputText(tmp3, true);			// and then stick it on the display
+
+		//if (sceneParserDebug) trace("Scene contents: \"" + tmp1 + "\" as parsed: \"" + tmp2 + "\"")
+		if (sceneParserDebug) trace("Scene contents after markdown: \"" + tmp3 + "\"");
+	}
+	else if (this[sceneName])
+	{
+		if (sceneParserDebug) trace("Have function \""+sceneName+"\" in this!. Calling.");
+		this[sceneName]();
+	}
+	else
+	{
+		if (sceneParserDebug) trace("Enter scene called with unknown arg \""+sceneName+"\". falling back to the debug pane");
+		doNext(debugPane);
 	}
 	return tmp2
 
@@ -704,8 +729,12 @@ function parseSceneTag(textCtnt:String):void
 	sceneCont = textCtnt.substr(textCtnt.indexOf('|')+1);
 
 	sceneName = stripStr(sceneName);
-
 	if (sceneParserDebug) trace("Adding scene with name \"" + sceneName + "\"")
+
+	// Cleanup the scene content from spurious leading and trailing space.
+	sceneCont = trimStr(sceneCont, "\n");
+	sceneCont = trimStr(sceneCont, "	");
+
 
 	thisParserState[sceneName] = stripStr(sceneCont);
 
@@ -942,16 +971,12 @@ function recursiveParser(contents:String, parseAsMarkdown:Boolean = false):Strin
 	ret = recParser(contents, 0);
 
 	// Currently, not parsing text as markdown by default because it's fucking with the line-endings.
-	import showdown.Showdown;
+	
 	if (parseAsMarkdown)
 	{
 		trace("markdownificating");
 		ret = Showdown.makeHtml(ret);
 
-		// stupid-as-fuck workarounds because the flash html support is broken.
-		ret = ret.replace(/\n/g, "")
-		// Remove all the explicit \n's in the content, because
-		// flash is ridiculously stupid, and doesn't properly remove them like EVERY other html markup parser.
 
 		var regexPCloseTag:RegExp = /<\/p>/gi;
 		ret = ret.replace(regexPCloseTag,"</p>\n");
@@ -963,12 +988,14 @@ function recursiveParser(contents:String, parseAsMarkdown:Boolean = false):Strin
 	ret = ret.replace(/\\\]/g, "]")
 	ret = ret.replace(/\\\[/g, "[")
 
-	// Finally, if we have a parser-based scene. enter the "startup" scene.
+	/*
 	for (var prop in thisParserState) 
 	{
 		trace("thisParserState."+prop+" = "+thisParserState[prop]); 
 	}
+	*/
 
+	// Finally, if we have a parser-based scene. enter the "startup" scene.
 	if ("startup" in thisParserState)
 	{
 		ret = enterParserScene("startup");
@@ -995,6 +1022,7 @@ function recursiveParser(contents:String, parseAsMarkdown:Boolean = false):Strin
 function stripStr(str:String):String
 {
 	return trimStrBack(trimStrFront(str, " "), " ");
+	return trimStrBack(trimStrFront(str, "	"), "	");
 }
 
 function trimStr(str:String, char:String = " "):String

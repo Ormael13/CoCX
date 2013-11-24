@@ -353,7 +353,7 @@ function approachRubiScenes():void {
 			outputText("  This outfit, as risque as it is, is clearly something Rubi never would have worn before [rubi ey] met you.  [rubi Ey] must be really comfortable in [rubi eir] body now!");
 		}
 		outputText("\n\n[rubi Ey] hands you the usual menu and says, \"<i>");
-		if(rubiBimbo() && !flags[RUBI_DEBIMBO] == 0) outputText("Like, h");
+		if(rubiBimbo() && flags[RUBI_DEBIMBO] == 0) outputText("Like, h");
 		else outputText("H");
 		outputText("ere's the menu, babe.  Think about what you want and let me know when you're ready.</i>\"  [rubi Ey] stands and moves to clean off a nearby table, [rubi eir] red spaded tail swishing behind [rubi em] sensually.");
 	
@@ -365,7 +365,7 @@ function approachRubiScenes():void {
 		//(Default Waitress Uniform)
 		if(select == 1) {
 			outputText("\n\nAs [rubi ey] bends over, you get a good look up [rubi eir] skirt, ");
-			if(rubiBimbo() && !flags[RUBI_DEBIMBO] == 0) {
+			if(rubiBimbo() && flags[RUBI_DEBIMBO] == 0) {
 				outputText("surprised to see [rubi ey]'s wearing nothing at all underneath, showing off [rubi eir] asshole");
 				if(flags[RUBI_NO_CUNT] == 0 && flags[RUBI_COCK_SIZE] == 0) outputText(" and wet cunt");
 				else if(flags[RUBI_NO_CUNT] > 0 && flags[RUBI_COCK_SIZE] > 0) outputText(" and limp cock");
@@ -391,7 +391,7 @@ function approachRubiScenes():void {
 		//(Nurse Uniform)
 		else if(select == 9) {
 			outputText("\n\nAs [rubi ey] bends over, you get a good look up [rubi eir] skirt, ");
-			if(rubiBimbo() && !flags[RUBI_DEBIMBO] == 0) {
+			if(rubiBimbo() && flags[RUBI_DEBIMBO] == 0) {
 				outputText("surprised to see [rubi ey]'s wearing nothing at all underneath, showing off [rubi eir] asshole");
 				if(flags[RUBI_NO_CUNT] == 0 && flags[RUBI_COCK_SIZE] == 0) outputText(" and wet cunt");
 				else if(flags[RUBI_NO_CUNT] > 0 && flags[RUBI_COCK_SIZE] > 0) outputText(" and limp cock");
@@ -404,7 +404,7 @@ function approachRubiScenes():void {
 		//(Rubber Fetish Outfit)
 		else if(select == 3) {
 			outputText("\n\nAs [rubi ey] bends over, you get a good look up [rubi eir] skirt, ");
-			if(rubiBimbo() && !flags[RUBI_DEBIMBO] == 0) {
+			if(rubiBimbo() && flags[RUBI_DEBIMBO] == 0) {
 				outputText("surprised to see [rubi ey]'s wearing nothing at all underneath, showing off [rubi eir] asshole");
 				if(flags[RUBI_NO_CUNT] == 0 && flags[RUBI_COCK_SIZE] == 0) outputText(" and wet cunt");
 				else if(flags[RUBI_NO_CUNT] > 0 && flags[RUBI_COCK_SIZE] > 0) outputText(" and limp cock");
@@ -429,7 +429,7 @@ function approachRubiScenes():void {
 		//(Bimbo Minidress)
 		else if(select == 11) {
 			outputText("\n\nAs [rubi ey] bends over, you get a good look up [rubi eir] dress, ");
-			if(rubiBimbo() && !flags[RUBI_DEBIMBO] == 0) {
+			if(rubiBimbo() && flags[RUBI_DEBIMBO] == 0) {
 				outputText("surprised to see [rubi ey]'s wearing nothing at all underneath, showing off [rubi eir] asshole");
 				if(flags[RUBI_NO_CUNT] == 0 && flags[RUBI_COCK_SIZE] == 0) outputText(" and wet cunt");
 				else if(flags[RUBI_NO_CUNT] > 0 && flags[RUBI_COCK_SIZE] > 0) outputText(" and limp cock");
@@ -456,7 +456,7 @@ function approachRubiScenes():void {
 		//(Risque Waitress Uniform)
 		else if(select == 14) {
 			outputText("\n\nAs [rubi ey] bends over, you get a good look up [rubi eir] sad excuse for a skirt, ");
-			if(rubiBimbo() && !flags[RUBI_DEBIMBO] == 0) {
+			if(rubiBimbo() && flags[RUBI_DEBIMBO] == 0) {
 				outputText("surprised to see [rubi ey]'s wearing nothing at all underneath, showing off [rubi eir] asshole");
 				if(flags[RUBI_NO_CUNT] == 0 && flags[RUBI_COCK_SIZE] == 0) outputText(" and wet cunt");
 				else if(flags[RUBI_NO_CUNT] > 0 && flags[RUBI_COCK_SIZE] > 0) outputText(" and limp cock");
@@ -865,7 +865,10 @@ function fuckRubi():void {
 	//(Player has clit?) 
 	else outputText("  Your " + clitDescript() + " throbs and engorges briefly as your " + vaginaDescript(0) + " reflexively contracts and a warm feeling rocks through your entire body.  Femjuices run down your [legs] and relief overtakes you like a powerful wave upon a beach.");
 	
-	outputText("\n\nYou stumble backwards, pulling your " + cockClit(x) + " out of Rubi and collapse on the bed next to [rubi em].  [rubi Ey] cuddles up next to you, in a mixed puddle of spunk, and hugs you close.  \"<i>That was absolutely fantastic babe,</i>\" [rubi ey] murmurs before drifting off into a sex-filled dreamland.");
+	outputText("\n\nYou stumble backwards, pulling your " + cockClit(x) + " out of Rubi and collapse on the bed next to [rubi em].  [rubi Ey] cuddles up next to you, in a mixed puddle of spunk, and hugs you close.  \"<i>That was ");
+	if(rubiBimbo() && flags[RUBI_DEBIMBO] == 0) outputText("like, totally ");
+	else outputText("absolutely ");
+	outputText("fantastic babe,</i>\" [rubi ey] murmurs before drifting off into a sex-filled dreamland.");
 	
 	outputText("\n\nYou're tempted to drift off as well, but as they say, you've got things to see and people to do.  So you peel yourself away from Rubi, grab a quick shower, and head off back to camp.");
 	stats(0,0,0,0,0,0,-100,0);
@@ -1026,7 +1029,7 @@ function teaseRubi():void {
 		else if(flags[RUBI_SKIN] == 2) outputText("furred");
 		else outputText("striped");
 		outputText(" skin seems to take an eternity.  In fact, [rubi ey] seems to take great delight in stripping, giving little twirls and tossing [rubi eir] clothes towards you, until [rubi ey]'s standing in front of you in naught but [rubi eir] birthday suit.");
-		outputText("\n\"[rubi Eir] snatch glistens with arousal, which doesn't surprise you.  [rubi Ey] seems to be horny 24/7 nowadays.  Standing, you move behind Rubi and sensually whisper into [rubi eir] ear, nibbling and kissing between words.  You tell [rubi em] that, until you specify otherwise, [rubi ey] is not to cum under any circumstances.  And if [rubi ey] does, there will be serious consequences.  [rubi Ey] giggles, but nods [rubi eir] assent.");
+		outputText("\n[rubi Eir] snatch glistens with arousal, which doesn't surprise you.  [rubi Ey] seems to be horny 24/7 nowadays.  Standing, you move behind Rubi and sensually whisper into [rubi eir] ear, nibbling and kissing between words.  You tell [rubi em] that, until you specify otherwise, [rubi ey] is not to cum under any circumstances.  And if [rubi ey] does, there will be serious consequences.  [rubi Ey] giggles, but nods [rubi eir] assent.");
 		//(Taller than 5') 
 		if(player.tallness > 60) outputText("\n\nYou smile and let your hands drape over Rubi's shoulders, letting your fingers trace invisible lines all along [rubi eir] [rubi breasts] and stomach.  One hand casually takes hold of a nipple, while the other drifts downwards, slipping into her soft, delicate folds.");
 		//(Under 5') 
@@ -1498,6 +1501,7 @@ function playDressUp():void {
 		closet[closet.length] = "A Risque Waitress's Uniform";
 		buttonNames[buttonNames.length] = "RisqueUniform";
 	}
+	closet[closet.length] = "Rubi's Waitress's Uniform";
 	if(closet.length > 0) {
 		outputText("<b>Rubi's Closet Contains:</b>\n");
 		temp = 0;
@@ -2740,6 +2744,7 @@ function giveRubiATFItem(short:String):void {
 			//(if flat-chested)
 			if(flags[RUBI_BREAST_SIZE] == 0) outputText("  Within seconds, Rubi has the chest of a pubescent girl, within a minute they're at least a B-cup.");
 			outputText("  You both sit with morbid curiosity, watching the flesh grow outwards, bit by bit and cup by cup.  After five minutes the growth stops, and Rubi carefully cradles [rubi eir] new enormous E-cup breasts.");
+			flags[RUBI_BREAST_SIZE] = 7;
 		}
 		outputText("\n\nThe silence is broken when Rubi shouts, \"<i>Oh fuck yes, this is more like it!</i>\"  [rubi Ey] stands and dances what can only be called the titty-dance, squeezing one breast and then the other in quick succession to some tune that exists only in [rubi eir] head.  It seems that, in addition to a new body, the liqueur also granted Rubi excessive amounts of energy!");
 			

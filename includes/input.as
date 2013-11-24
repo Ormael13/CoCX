@@ -1,14 +1,14 @@
 ﻿import classes.InputManager;
 
 // Hooking things to MainView.
-mainView.onNewGameClick = newGameGo;
-mainView.onAppearanceClick = appearance;
-mainView.onDataClick = saveLoad;
-mainView.onLevelClick = levelUpGo;
-mainView.onPerksClick = displayPerks;
-mainView.onStatsClick = displayStats;
+// mainView.onNewGameClick = newGameGo;
+// mainView.onAppearanceClick = appearance;
+// mainView.onDataClick = saveLoad;
+// mainView.onLevelClick = levelUpGo;
+// mainView.onPerksClick = displayPerks;
+// mainView.onStatsClick = displayStats;
 
-mainView._executeButtomButtonClick = executeButtonClick;
+// mainView._executeButtomButtonClick = executeButtonClick;
 
 var inputManager:InputManager = new InputManager(stage);
 
@@ -45,29 +45,7 @@ var inputManager:InputManager = new InputManager(stage);
 // }
 
 function executeButtonClick(button:int = 0):void {
-	if(funcs.length == 0) {
-		trace("Calling eventParser on buttonEvents[" + String( button ) + "]:",
-			buttonEvents[ button ]);
-		eventParser(buttonEvents[button]);
-	}
-	else if(funcs.length - 1 < button) {
-		trace("ERROR: INVALID FUNCTION LOCATION");
-	}
-	else if(funcs[button] == null) {
-		trace("ERROR: NULL FUNCTION");
-	}
-	else {
-		//Store the arg and function and then clear those arrays so we can go back to regular
-		//codes if necessary.
-		hideMenus();
-		var func = funcs[button];
-		var arg = args[button];
-		funcs = new Array();
-		args = new Array();
-		trace("Calling Func: " + func + "ARG: " + arg);
-		if(arg == -9000) func();
-		else func(arg);
-	}
+	mainView.clickButton( button );
 }
 
 
@@ -603,17 +581,6 @@ var perkList:Array = new Array(
                 data:3}*/
 ); 
  
-//var mainView.aCb:ComboBox = new ComboBox(); 
-//mainView.aCb.dropdownWidth = 200; 
-//mainView.aCb.width = 200; 
-//mainView.aCb.scaleY = 1.1;
-//mainView.aCb.move(-1250, -1550); 
-//mainView.aCb.prompt = "Choose a perk"; 
-mainView.aCb.dataProvider = new DataProvider(perkList); 
-mainView.aCb.addEventListener(Event.CHANGE, changeHandler); 
- 
-addChild(mainView.aCb);
-
 function changeHandler(event:Event):void { 
  	//Store perk name for later addition
  	tempPerk = ComboBox(event.target).selectedItem.label; 

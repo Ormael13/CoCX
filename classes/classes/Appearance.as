@@ -13,11 +13,12 @@
 		{
 			if ((args.length == 1) && (args[0] is Array))
 			{
-				var i:Number = int(Math.round(Math.random() * (args[0].length - 1)));
-				return args[0][i];
+				return args[0][ Math.floor( Math.random() * args[0].length ) ];
 			}
 			else
-			throw Error("WUT");
+			{
+				return args[ Math.floor( Math.random() * args.length ) ];
+			}
 		}
 
 		public static function rand(max:Number):Number
@@ -1964,7 +1965,7 @@
 			}
 			//25% tightness description
 			if(rand(4) == 0 || (i_creature.ass.analLooseness <= 1 && rand(4) <= 2)) {
-				if(i_creature.ass.analLooseness == 0) description += "virgin ";
+				if(i_creature.ass.analLooseness == 0) description += "virgin-tight ";
 				if(i_creature.ass.analLooseness == 1) description += "tight ";
 				if(i_creature.ass.analLooseness == 2) description += "loose ";
 				if(i_creature.ass.analLooseness == 3) description += "roomy ";

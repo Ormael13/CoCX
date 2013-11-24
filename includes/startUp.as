@@ -1,34 +1,3 @@
-// These are toggled between by the [home] key.
-mainView.textBGWhite.visible = false;
-mainView.textBGTan.visible = false;
-
-
-//Not exactly sure what the purpose of this is.
-registerClassAlias("assClass", assClass);
-registerClassAlias("Character", Character);
-registerClassAlias("Cock", Cock);
-registerClassAlias("CockTypesEnum", CockTypesEnum);
-registerClassAlias("Enum", Enum);
-registerClassAlias("Creature", Creature);
-registerClassAlias("itemSlotClass", itemSlotClass);
-registerClassAlias("keyItemClass", keyItemClass);
-registerClassAlias("Monster", Monster);
-registerClassAlias("Player", Player);
-registerClassAlias("statusAffectClass", statusAffectClass);
-registerClassAlias("vaginaClass", vaginaClass);
-//registerClassAlias("Enum", Enum);
-//registerClassAlias("cockClass", cockClass);
-
-//Invert shit
-invertGo();
-//Hide sprites
-mainView.hideSprite();
-//Hide up/down arrows
-mainView.statsView.hideUpDown();
-//Hide choice buttons
-//choices("one", 0, "two", 0, "three", 0, "four", 0, "five", 0, "six", 0, "seven", 0, "eight", 0, "nine", 0, "ten", 0);
-//Call up the title screen
-mainMenu();
 
 
 
@@ -45,9 +14,9 @@ function mainMenu(e:MouseEvent = undefined):void {
 	//Sets game state to 3, used for determining back functionality of save/load menu.
 	gameState = 3;
 
-	
+
 	outputText("<b>Corruption of Champions (" + version + ")</b>", true);
-	
+
 	//doThatTestingThang();
 
 	startupScreenBody();
@@ -72,73 +41,197 @@ function mainMenu(e:MouseEvent = undefined):void {
 			"Settings", settingsScreen,
 			"Resume", resume);
 }
-	
+
 import flash.system.SecurityDomain;
 import flash.system.Security;;
 
 function doThatTestingThang():void
 {
 
-	// This junk was for testing my new parser. It can be removed, I think. 
-	// I still have a few parser tweaks I want to do, though.
-	// Really, I should have a "test parser" button, but LAZY
-	
-	
-	outputText("\n\n", false);
+	// Excercise the parser. This should catch parser regressions, I think.
+	// 
+	// 
 
 	
-	outputText("[if (hasCock = true) [cock] stiffening][if (isHerm = true)  and ][if (hasVagina = true) [vagina] starting to burn with need] DERP [cock biggest] HERP [armor] LOLWUT  [balls] ");
-	outputText("[If (hours > 19) Hug | Cuddle]\n");
-	outputText("\n\n", false);
 
+	outputText(<![CDATA[
 
-	outputText("Bracket escaping!\n", false);
-	outputText("\\\[cock\\\]\n", false);
-	outputText("[cock]\n", false);
+**Parser Tests!**
 
-	outputText("\n\n", false);
+##Bracket escaping!##
+
+* \\\[cock\\\]
+* [cock]
+
+**Single word nouns**
+
+* \\\[armor\\\] - [armor]
+* \\\[armorname\\\] - [armorname]
+* \\\[weapon\\\] - [weapon]
+* \\\[weaponname\\\] - [weaponname]
+* \\\[name\\\] - [name]
+* \\\[asshole\\\] - [asshole]
+* \\\[butthole\\\] - [butthole]
+* \\\[hair\\\] - [hair]
+* \\\[face\\\] - [face]
+* \\\[legs\\\] - [legs]
+* \\\[leg\\\] - [leg]
+* \\\[feet\\\] - [feet]
+* \\\[foot\\\] - [foot]
+* \\\[sack\\\] - [sack]
+* \\\[balls\\\] - [balls]
+* \\\[sheath\\\] - [sheath]
+* \\\[chest\\\] - [chest]
+* \\\[fullchest\\\] - [fullchest]
+* \\\[hips\\\] - [hips]
+* \\\[butt\\\] - [butt]
+* \\\[ass\\\] - [ass]
+* \\\[nipple\\\] - [nipple]
+* \\\[nipples\\\] - [nipples]
+* \\\[tongue\\\] - [tongue]
+* \\\[evade\\\] - [evade]
+* \\\[misdirection\\\] - [misdirection]
+* \\\[agility\\\] - [agility]
+* \\\[master\\\] - [master]
+* \\\[master\\\] - [master]
+* \\\[he\\\] - [he]
+* \\\[him\\\] - [him]
+* \\\[his\\\] - [his]
+* \\\[pussy\\\] - [pussy]
+* \\\[vagina\\\] - [vagina]
+* \\\[vag\\\] - [vag]
+* \\\[clit\\\] - [clit]
+* \\\[cock\\\] - [cock]
+* \\\[cocks\\\] - [cocks]
+* \\\[eachcock\\\] - [eachcock]
+* \\\[onecock\\\] - [onecock]
+* \\\[cockhead\\\] - [cockhead]
+* \\\[vagorass\\\] - [vagorass]
+* \\\[hairorfur\\\] - [hairorfur]
+* \\\[pg\\\] - [pg] (This is a shortcut to two newlines. This should be two lines below the \\\[pg\\\])
+
+**Two word nouns**
+
+* \\\[cock all\\\] - [cock all]
+* \\\[cock each\\\] - [cock each]
+* \\\[cock one\\\] - [cock one]
+* \\\[cock largest\\\] - [cock largest]
+* \\\[cock biggest\\\] - [cock biggest]
+* \\\[cock smallest\\\] - [cock smallest]
+* \\\[cock longest\\\] - [cock longest]
+* \\\[cock shortest\\\] - [cock shortest]
+* \\\[cock 0\\\] - [cock 0]  (This should always error)
+* \\\[cock 1\\\] - [cock 1]
+* \\\[cock 2\\\] - [cock 2]
+* \\\[cockHead biggest\\\] - [cockHead biggest]
+* \\\[cockHead largest\\\] - [cockHead largest]
+* \\\[cockHead smallest\\\] - [cockHead smallest]
+* \\\[cockHead longest\\\] - [cockHead longest]
+* \\\[cockHead shortest\\\] - [cockHead shortest]
+* \\\[cockHead 0\\\] - [cockHead 0]  (This should always error)
+* \\\[cockHead 1\\\] - [cockHead 1]
+* \\\[cockHead 2\\\] - [cockHead 2]
+
+**Boolean tests**
+
+* 1 \\\[if (4==4) HERP|DERP\\\]
+* 1 [if (4==4) HERP|DERP]
+* 2 \\\[if (4 == 7) HERP|DERP\\\]
+* 2 [if (4 == 7) HERP|DERP]
+* 3 \\\[if (4==(2+2)) HERP|DERP\\\]
+* 3 [if (4==(2+2)) HERP|DERP]
+* 4 \\\[if (4==4) HERP|DERP\\\]
+* 4 [if (4==4) HERP|DERP]
+* 5 \\\[if (4==7) [if (4==7) HERP]\\\]
+* 5 [if (4==7) [if (4==7) HERP]]
+* 6 \\\[if (4==7) [if (4==7) HERP|DERP]\\\]
+* 6 [if (4==7) [if (4==7) HERP|DERP]]
+* 7 \\\[if (4=4) [if (4=4) HERP]\\\]
+* 7 [if (4=4) [if (4=4) HERP]]
+* 8 \\\[if (4==4) [if (4==4) HERP]\\\]
+* 8 [if (4==4) [if (4==4) HERP]]
+* 9 \\\[if (4==biggesttitsize) \\\]
+* 9 [if (4==biggesttitsize) ]
+* 10 \\\[if (4==biggesttitsize) HERP|DERP\\\]
+* 10 [if (4==biggesttitsize) HERP|DERP]
+* 11 \\\[if (analcapacity>3)    HERP|DERP\\\]
+* 11 [if (analcapacity>3)    HERP|DERP]
+* 12 \\\[if (analcapacity>3) HERP|DERP\\\]
+* 12 [if (analcapacity>3) HERP|DERP]
+* 13 \\\[if (analcapacity = 0)  HERP|DERP\\\]
+* 13 [if (analcapacity = 0)  HERP|DERP]
+* 14 \\\[if (analcapacity = 0) HERP|DERP\\\]
+* 14 [if (analcapacity = 0) HERP|DERP]
+* 15 \\\[if (analcapacity > 0)  HERP|DERP\\\]
+* 15 [if (analcapacity > 0)  HERP|DERP]
+* 16 \\\[if (analcapacity > 0) HERP|DERP\\\]
+* 16 [if (analcapacity > 0) HERP|DERP]
+* 17 \\\[if (hasCock == True) HERP|DERP\\\]
+* 17 [if (hasCock == True) HERP|DERP]
+* 18 \\\[if (hasVagina == True) HERP|DERP\\\]
+* 18 [if (hasVagina == True) HERP|DERP]
+
+**Gender tests**
+
+**PC**
+
+* \\\[He\\\]  - [He]
+* \\\[he\\\]  - [he]
+* \\\[His\\\]  - [His]
+* \\\[his\\\]  - [his]
+* \\\[Him\\\]  - [Him]
+* \\\[him\\\]  - [him]
+* \\\[his\\\]  - [his]
+* \\\[His\\\]  - [His]
+
+**NPC**
+
+**Rubi**
+
+* \\\[rubi ey\\\] - [rubi ey]
+* \\\[rubi eir\\\] - [rubi eir]
+* \\\[rubi eirs\\\] - [rubi eirs]
+* \\\[rubi emself\\\] - [rubi emself]
+* \\\[rubi Ey\\\] - [rubi Ey]
+* \\\[rubi Eir\\\] - [rubi Eir]
+* \\\[rubi Eirs\\\] - [rubi Eirs]
+* \\\[rubi Emself\\\] - [rubi Emself]
+
+**Arian**
+
+* \\\[arian ey\\\] - [arian ey]
+* \\\[arian eir\\\] - [arian eir]
+* \\\[arian eirs\\\] - [arian eirs]
+* \\\[arian emself\\\] - [arian emself]
+* \\\[arian Ey\\\] - [arian Ey]
+* \\\[arian Eir\\\] - [arian Eir]
+* \\\[arian Eirs\\\] - [arian Eirs]
+* \\\[arian Emself\\\] - [arian Emself]
+
+**NPC Aspect tests**
+
+* \\\[arian chest\\\] - [arian chest]
+* \\\[arian chestAdj\\\] - [arian chestAdj]
+* \\\[rubi breasts\\\] - [rubi breasts]
+* \\\[rubi cock\\\] - [rubi cock]
+
+**Typical Noun usages**
+
+* [cock] stiffening [cock biggest] and [vagina] starting to burn with need
+* [cock all] stiffening [cock each] and [cock 1] starting to burn with need
+* [cockhead biggest] stiffening [cockhead smallest] and [cockhead longest] and [cockhead 1] starting to burn with need
+
+**Complex IF Statement thing**
+
+\\\[if (hasCock = true) \\\[cock\\\] stiffening IFSTUFF \\\[if (hasVagina = true) \\\[vagina\\\] starting to burn with need\\\] IFSTUFFDONE\\\]\\\[if (isHerm = true) and \\\]\\\[if (hasVagina = true) \\\[vagina\\\] starting to burn with need\\\]   
+[if (hasCock = true) [cock] stiffening IFSTUFF [if (hasVagina = true) [vagina] starting to burn with need] IFSTUFFDONE][if (isHerm = true) and ][if (hasVagina = true) [vagina] starting to burn with need]
+
 	
-	
-	//outputText("1 [if [ [ (4==4) HERP|DERP]\n", false);
-	//outputText("2 [if (4 == 7) HERP|DERP]\n", false);
-
-	//outputText("3 [if (4==(2+2)) HERP|DERP]\n", false);
-	//outputText("4 [if (4==4) HERP|DERP]\n", false);
-
-	//outputText("5 if (4==7) [if (4==7) HERP]\n", false);
-	//outputText("6 if (4==7) [if (4==7) HERP|DERP]\n", false);
-	//outputText("7 if (4=4) [if (4=4) HERP]\n", false);
-	//outputText("8 if (4==4) [if (4==4) HERP]\n", false);
-	//outputText("9 if (4==biggesttitsize) [if (4==biggesttitsize) [HERP [cock] [vagina] [balls]]]\n", false);
-	//outputText("10 if (analcapacity>3)    [if (analcapacity>3) [HERP [cock] [vagina] [balls]]]\n", false);
-	//outputText("11 if (analcapacity = 0)  [if (analcapacity = 0) [HERP [cock] [vagina] [balls]]]\n", false);
-	//outputText("12 if (analcapacity > 0)  [if (analcapacity > 0) [HERP [cock] [vagina] [balls]]]\n", false);
+	]]>, true, true);
 
 
-
-	// outputText("\n\n");
-	// outputText("Gender Stuff! [He], [he], [His], [his], [Him], [him], [his], [His]\n");
-	// outputText("Gender Stuff! [rubi ey], [rubi eir], [rubi eirs], [rubi emself]\n");
-	// outputText("Gender Stuff! [rubi Ey], [rubi Eir], [rubi Eirs], [rubi Emself]\n");
-	// outputText("Gender Stuff! [arian ey], [arian eir], [arian eirs], [arian emself]\n");
-	// outputText("Gender Stuff! [arian Ey], [arian Eir], [arian Eirs], [arian Emself]\n");
-	// outputText("\n\n");
-
-	outputText("[cock] stiffening [cock biggest] and [vagina] starting to burn with need\n");
-	outputText("[cock all] stiffening [cock each] and [cock 1] starting to burn with need\n");
-	outputText("[cockhead biggest] stiffening [cockhead smallest] and [cockhead longest] and [cockhead 1] starting to burn with need\n");
-
-	outputText("\n\n");
-	outputText("Complex IF Statement thing: [if (hasCock = true) [cock] stiffening IFSTUFF [if (hasVagina = true) [vagina] starting to burn with need] IFSTUFFDONE][if (isHerm = true) and ][if (hasVagina = true) [vagina] starting to burn with need]");
-	outputText("\n\n");
-
-	
-	outputText("[arian chest] , [arian chestAdj], [rubi breasts], [rubi cock]");
-	
-	outputText("\n\n");
-	
-
-
+	menu();
+	addButton(4, "Back", debugPane)
 
 }
 
@@ -147,12 +240,13 @@ function startupScreenBody():void
 
 	// NO FUCKING DECENT MULTI-LINE STRING LITERALS BECAUSE FUCKING STUPID
 	// WTF ACTIONSCRIPT YOUR DEV'S ARE ON CRACK
+	
 	outputText(<![CDATA[
 <br>(Formerly Unnamed Text Game)  
 <u>Created by: Fenoxo</u>
-	
+
 Edited By: Ashi, SoS, Zeikfried, and Others
-	
+
 Open-source version modifications by:  
 Amygdaloidnucleus/Amygdala, Hoffledop/Yoffy, Herp-a-derp/Fake-Name, Cmacleod42
 
@@ -161,13 +255,13 @@ Source Code: <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions'
 Bug Tracker: <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions/issues'>https://github.com/herp-a-derp/Corruption-of-Champions/issues</a></u>  
 (requires an account, unfortunately)
 
-<b><u>DISCLAIMER</u>  
+**<u>DISCLAIMER</u>**
 
-- There are many strange and odd fetishes contained in this flash.  Peruse at own risk.
-- Please be 18 or the legal age to view porn before playing.
-- Try to keep your keyboard clean.  Think of the children!</b>
+- **There are many strange and odd fetishes contained in this flash.  Peruse at own risk.**
+- **Please be 18 or the legal age to view porn before playing.**
+- **Try to keep your keyboard clean.  Think of the children!**
 
-<br>
+
 For more information see Fenoxo's Blog at <b><u><a href='http://www.fenoxo.com/'>fenoxo.com</a></u></b>.
 
 Also go play <u><a href='http://www.furaffinity.net/view/9830293/'>Nimin</a></u> by Xadera on furaffinity.
@@ -175,50 +269,50 @@ Also go play <u><a href='http://www.furaffinity.net/view/9830293/'>Nimin</a></u>
 	]]>, false, true);
 
 
-	if(debug) 
+	if(debug)
 		outputText("\n\n<b>DEBUG MODE ENABLED:  ITEMS WILL NOT BE CONSUMED BY USE.</b>");
-	if(flags[SHOW_SPRITES_FLAG]) 
+	if(flags[SHOW_SPRITES_FLAG])
 		outputText("\n\n<b>Sprites disabled.</b>");
-	if(flags[EASY_MODE_ENABLE_FLAG]) 
+	if(flags[EASY_MODE_ENABLE_FLAG])
 		outputText("\n\n<b>Easy Mode On:  Bad-ends can be ignored.</b>");
-	if(flags[SILLY_MODE_ENABLE_FLAG]) 
+	if(flags[SILLY_MODE_ENABLE_FLAG])
 		outputText("\n\n<b>SILLY MODE ENGAGED: Crazy, nonsensical, and possibly hilarious things may occur.</b>");
-	if(isEaster()) 
+	if(isEaster())
 		outputText("\n\n<b>It's Easter!  Enjoy the eggs!</b>");
-	if(isValentine()) 
+	if(isValentine())
 		outputText("\n\n<b>It's Valentine's!</b>");
-	if(isHeliaBirthday()) 
+	if(isHeliaBirthday())
 		outputText("\n\n<b>It's Helia's Birthday Month!</b>");
 
 
 }
 
-function settingsScreen():void 
-{	
+function settingsScreen():void
+{
 	outputText("<b>Settings toggles:</b>\n", true);
 
-	if(debug) 
+	if(debug)
 		outputText("Debug mode enabled: <b>Yes</b>\n	Items will not be consumed by use, fleeing always succeeds, and bad-ends can be ignored.");
 	else
 		outputText("Debug mode enabled: <b>No</b>\n	Items consumption will occur as normal.");
 
 	outputText("\n\n");
 
-	if(flags[SHOW_SPRITES_FLAG] == 0) 
+	if(flags[SHOW_SPRITES_FLAG] == 0)
 		outputText("Sprites enabled: <b>Yes</b>.\n	You like to look at pretty pictures.");
 	else
 		outputText("Sprites enabled: <b>No</b>.\n	There are only words. Nothing else.");
 
 	outputText("\n\n");
 
-	if(flags[EASY_MODE_ENABLE_FLAG]) 
+	if(flags[EASY_MODE_ENABLE_FLAG])
 		outputText("Easy Mode <b>On</b>\n	Bad-ends can be ignored and combat is easier.");
 	else
 		outputText("Easy Mode <b>Off</b>\n	Bad-ends can ruin your game and combat is challenging.");
-		
+
 	outputText("\n\n");
 
-	if(flags[SILLY_MODE_ENABLE_FLAG]) 
+	if(flags[SILLY_MODE_ENABLE_FLAG])
 		outputText("Silly Mode <b>On</b>\n	Crazy, nonsensical, and possibly hilarious things may occur.");
 	else
 		outputText("Silly Mode <b>Off</b>\n	You're an incorrigable stick-in-the-mud with no sense of humor.");
@@ -228,7 +322,7 @@ function settingsScreen():void
 	outputText("Additional note: You <b>must</b> be <i>in a game session</i> (e.g. load your save, hit \"Main Menu\", change the flag settings, and then hit \"Resume\") to change these flags. They're saved into the saveGame file, so if you load a save, it will clear them to the state in that save.");
 	outputText("\n\n");
 
-	if(flags[LOW_STANDARDS_FOR_ALL]) 
+	if(flags[LOW_STANDARDS_FOR_ALL])
 	{
 		outputText("Low standards Mode <b>On</b>\n	NPCs ignore body type preferences.");
 		outputText("\n	(Not gender preferences though. You still need the right hole.)");
@@ -239,7 +333,7 @@ function settingsScreen():void
 
 	outputText("\n\n");
 
-	if(flags[HYPER_HAPPY]) 
+	if(flags[HYPER_HAPPY])
 	{
 		outputText("Hyper Happy mode <b>On</b>\n	Only reducto and humus shrink endowments.");
 		outputText("\n	Incubus draft doesn't affect breasts, and succubi milk doesn't affect cocks.")
@@ -247,29 +341,16 @@ function settingsScreen():void
 	else
 		outputText("Hyper Happy mode <b>Off</b>\n	Male enhancement potions shrink female endowments, and vice versa.");
 
-	choices("Toggle Debug", toggleDebug, 
-			"Sprite Toggle", toggleSpritesFlag, 
-			"EZ Mode", toggleEasyModeFlag, 
-			"Silly Toggle", toggleSillyFlag, 
-			"Null", 0, 
-			"Hyper Happy", toggleHyperHappy, 
-			"Low Standards", toggleStandards, 
-			"Null", 0, 
-			"Controls", controlsMenu, 
+	choices("Toggle Debug", toggleDebug,
+			"Sprite Toggle", toggleSpritesFlag,
+			"EZ Mode", toggleEasyModeFlag,
+			"Silly Toggle", toggleSillyFlag,
+			"Null", 0,
+			"Hyper Happy", toggleHyperHappy,
+			"Low Standards", toggleStandards,
+			"Null", 0,
+			"Null", 0,
 			"Back", mainMenu);
-}
-
-function controlsMenu():void
-{
-	inputManager.DisplayBindingPane();
-	
-	doNext(hideBindingPane);
-}
-
-function hideBindingPane():void
-{
-	inputManager.HideBindingPane();
-	settingsScreen();
 }
 
 function debugPane():void
@@ -289,20 +370,27 @@ function debugPane():void
 
 	outputText("\nCurrently have " + images.getLoadedImageCount() + " images loaded into cache.");
 
-	outputText(images.showImage("monster-ceraph"));
+
+	outputText("\n\n<b>FUNCTIONALITY ON THIS PAGE IS IN ALPHA-RELEASE STATUS</b>\n");
+	outputText("<b>IF YOU DON'T KNOW WHAT YOU ARE DOING AND/OR HAVE UNSAVED GAME PROGRESS, DO NOT CLICK ANY BUTTON EXCEPT \"BACK\"</b>\n");
+
 	
+	outputText(images.showImage("monster-ceraph"));
+
+
 	menu();
 	addButton(0, "Event Tester", eventTestingPane);
 	addButton(1, "Test Input", eventTester);
+	addButton(5, "Parser Tests", doThatTestingThang);
 	addButton(9, "Back", mainMenu);
 }
 
 function toggleStandards():void
 {
 	//toggle debug
-	if(flags[LOW_STANDARDS_FOR_ALL]) 
+	if(flags[LOW_STANDARDS_FOR_ALL])
 		flags[LOW_STANDARDS_FOR_ALL] = false;
-	else 
+	else
 		flags[LOW_STANDARDS_FOR_ALL] = true;
 	settingsScreen();
 	return;
@@ -311,9 +399,9 @@ function toggleStandards():void
 function toggleHyperHappy():void
 {
 	//toggle debug
-	if(flags[HYPER_HAPPY]) 
+	if(flags[HYPER_HAPPY])
 		flags[HYPER_HAPPY] = false;
-	else 
+	else
 		flags[HYPER_HAPPY] = true;
 	settingsScreen();
 	return;
@@ -322,9 +410,9 @@ function toggleHyperHappy():void
 function toggleDebug():void
 {
 	//toggle debug
-	if(debug) 
+	if(debug)
 		debug = false;
-	else 
+	else
 		debug = true;
 		
 	mainView.showMenuButton( MainView.MENU_DATA );
@@ -334,21 +422,21 @@ function toggleDebug():void
 
 function toggleEasyModeFlag():void
 {
-	if(flags[EASY_MODE_ENABLE_FLAG] == 0) 
+	if(flags[EASY_MODE_ENABLE_FLAG] == 0)
 		flags[EASY_MODE_ENABLE_FLAG] = 1;
-	else 
+	else
 		flags[EASY_MODE_ENABLE_FLAG] = 0;
 	settingsScreen();
 	mainView.showMenuButton( MainView.MENU_DATA );
 	settingsScreen();
-	return;	
+	return;
 }
 
 function toggleSpritesFlag():void
 {
-	if(flags[SHOW_SPRITES_FLAG]) 
+	if(flags[SHOW_SPRITES_FLAG])
 		flags[SHOW_SPRITES_FLAG] = false;
-	else 
+	else
 		flags[SHOW_SPRITES_FLAG] = true;
 	settingsScreen();
 	return;
@@ -359,11 +447,11 @@ function toggleSillyFlag():void
 
 	if(flags[SILLY_MODE_ENABLE_FLAG])
 		flags[SILLY_MODE_ENABLE_FLAG] = false;
-	else 
+	else
 		flags[SILLY_MODE_ENABLE_FLAG] = true;
 	settingsScreen();
 	return;
-	
+
 }
 
 
@@ -432,7 +520,7 @@ function creditsScreen():void {
 	outputText("<li> Foxxling (Akbal)</li>");
 	outputText("<li> Elfensyne (Phylla)</li>");
 	outputText("<li> Radar (Dominating Sand Witches, Some Phylla)</li>");
-	outputText("<li> Jokester (Sharkgirls, Izma, & Additional Amily Scenes)</li>");	
+	outputText("<li> Jokester (Sharkgirls, Izma, & Additional Amily Scenes)</li>");
 	outputText("<li> Lukadoc (Additional Izma, Ceraph Followers Corrupting Gangbang, Satyrs, Ember)</li>");
 	outputText("<li> Bob (Additional Izma)</li>");
 	outputText("<li> lh84 (Various Typos and Code-Suggestions)</li>");
@@ -491,28 +579,39 @@ function creditsScreen():void {
 	outputText("<li> Eliria (Bee Laying Eggs in Bunny-Girls)</li>");
 	outputText("</ul>");
 	outputText("\nIf I'm missing anyone, please contact me ASAP!  I have done a terrible job keeping the credits up to date!");
-	doNext(mainMenu);	
+	doNext(mainMenu);
 }
 
-function imageCreditsScreen():void 
+
+
+	
+
+
+	
+
+function imageCreditsScreen():void
 {
 
 	if (images.getLoadedImageCount() > 0)
 	{
-		outputText("<b>Bundled Image Credits:</b>\n", true);
-		outputText("<b>Yoh-SL</b>")
-		outputText("<ul>");;
-		outputText("<li> Bee-Girl Monster Image</li>");
-		outputText("<li> Goo-Girl Monster Image</li>");
-		outputText("<li> Ceraph Monster Image</li>");
-		outputText("<li> Sand-Witch (and sandwich) Monster Images</li>");
-		outputText("</ul>");
+		outputText(<![CDATA[
+
+**Bundled Image Credits:**
+
+**Yoh-SL**
+
+* Bee-Girl Monster Image
+* Goo-Girl Monster Image
+* Ceraph Monster Image
+* Sand-Witch (and sandwich)
+
+		]]>, true, true);
 	}
 	else
 	{
 		outputText("<b>No Image-Pack Found!</b>\n", true);
 	}
-	doNext(mainMenu);	
+	doNext(mainMenu);
 }
 
 function howToPlay():void {
@@ -525,38 +624,3 @@ function howToPlay():void {
 	doNext(mainMenu);
 }
 
-
-function eventTester():void {
-	outputText("", true);
-	showTestInputPanel();
-	//mainView.eventTestInput.text = "Paste test event text here.";
-	simpleChoices("Proceed",eventTesterGo,"",0,"",0,"",0,"Back",eventTesterExit);
-}
-
-function eventTesterGo():void 
-{
-	hideTestInputPanel();
-	
-	outputText(mainView.eventTestInput.text, true, true);
-	//simpleChoices("Again",117,"",0,"",0,"",0,"Quit",mainMenu);
-	return;
-}
-
-function eventTesterExit():void 
-{
-	hideTestInputPanel();
-	eventParser(debugPane);
-	return;
-}
-
-function showTestInputPanel():void
-{
-	mainView.eventTestInput.x = 207.5;
-	mainView.eventTestInput.y = 55.1;
-}
-function hideTestInputPanel():void
-{
-	
-	mainView.eventTestInput.x = -10207.5;
-	mainView.eventTestInput.y = -1055.1;
-}

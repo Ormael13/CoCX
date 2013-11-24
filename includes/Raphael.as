@@ -236,7 +236,7 @@ function RaphaelEncounterIIDressFollowup():void {
 	else {
 		outputText("When he catches sight of you, he spurts out the sip.\n\n", false);
 
-		outputText("\"<i>Mon Dieu!</i>\" He states shocked and stands up on top his well.\n\n", false);
+		outputText("\"<i>Mon Dieu!</i>\" he states in shock and stands up on top of his wall.\n\n", false);
 
 		outputText("\"<i>What terrible tragedy! The land has taken its toll on the once so beautiful.</i>\" He looks down on you.\n\n", false);
 

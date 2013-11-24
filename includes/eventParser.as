@@ -1,4 +1,4 @@
-//Used to jump the fuck out of pregnancy scenarios for menus.
+﻿//Used to jump the fuck out of pregnancy scenarios for menus.
 //const EVENT_PARSER_ESCAPE:int = 800;
 //const PHYLLA_GEMS_HUNTED_TODAY:int = 893;
 
@@ -2208,7 +2208,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			return true;
 		}
 		//TURKEY SURPRISE
-		if((model.time.hours == 18 || model.time.hours == 19) && date.fullYear > flags[TURKEY_FUCK_YEAR_DONE] && isThanksgiving() && player.gender > 0) {
+		if((rand(5) == 0 && (model.time.hours == 18 || model.time.hours == 19)) && (date.fullYear > flags[TURKEY_FUCK_YEAR_DONE] || flags[MORE_TURKEY] > 0) && isThanksgiving() && player.gender > 0) {
 			datTurkeyRumpMeeting();
 			return true;
 		}
@@ -2252,7 +2252,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 				}
 			}
 			//wormgasms
-			else if(flags[EVER_INFESTED] == 1 && rand(100) <= 4 && player.hasCock() && player.hasStatusAffect("Infested") < 0) {
+			else if(flags[EVER_INFESTED] == 1 && rand(100) <= 4 && player.hasCock() && player.hasStatusAffect("infested") < 0) {
 				if(player.hasCock() && (player.hasStatusAffect("JojoNightWatch") < 0 || player.hasStatusAffect("PureCampJojo") < 0) && (flags[HEL_GUARDING] == 0 || !followerHel()) && flags[ANEMONE_WATCH] == 0) {
 					nightTimeInfestation();
 					return true;

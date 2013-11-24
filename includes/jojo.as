@@ -1128,7 +1128,7 @@ function jojoRape():void {
 		}
 		if(player.gender == 2) {
 			outputText("You smack the back of his head hard, dazing him.  You spin him around as you take his feet out from under him, one hand pulling his pants while the other slashes his belt.  He literally 'falls out of his pants' and onto the soft earth of the forest.  You pounce on the stunned monk, shedding your own clothes and pinning him to the ground.  He begins to resist, squirming under you, ", false);
-			if(player.averageVaginalWetness() < 2) outputText("but the sensation of you grinding your folds against him momemtarily breaks his will.  ", false);
+			if(player.wetness() < 2) outputText("but the sensation of you grinding your folds against him momemtarily breaks his will.  ", false);
 			else outputText("but the feeling of your " + vaginaDescript(0) + " grinding against his hardening cock robs him of any will.  ", false);
 			outputText("You smile when you realize how large he is for his frame, and mount him, taking care to keep him pinned hard to the ground.", false);
 			cuntChange(12, true, true, false);

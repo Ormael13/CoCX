@@ -3,6 +3,8 @@
 	import classes.assClass;
 	import classes.breastRowClass;
 	//import classes.cockClass;
+	
+	import classes.Player;
 	import classes.Cock;
 	import classes.Creature;
 	import classes.itemSlotClass;
@@ -32,44 +34,17 @@
 	import flash.text.*;
 	import flash.utils.ByteArray;
 
-/****
+	/****
 	classes.CoC: The Document class of Corruption of the Champions.
-****/
+	****/
 	
 	[SWF( width="1000", height="800", pageTitle="Corruption of Champions" )]
 
 	public class CoC extends MovieClip
 	{
-		/****
-			This is used purely for bodges while we get things cleaned up.
-			Hopefully, anything you stick to this object can be removed eventually.
-			I only used it because for some reason the Flash compiler wasn't seeing
-			certain functions, even though they were in the same scope as the
-			function calling them.
-		****/
-		public var semiglobalReferencer :* = {};
 
-		public var mainView :MainView;
+		// Include the functions. ALL THE FUNCTIONS
 
-		public var model :GameModel;
-
-		public function CoC()
-		{
-			this.model = new GameModel();
-			this.mainView = new MainView( this.model );
-			this.mainView.name = "mainView";
-			this.stage.addChild( this.mainView );
-
-			this.addFrameScript( 0, this.run );
-		}
-
-		public function run():void
-		{
-			var mainView :MainView = this.mainView;
-			var model :GameModel = this.model;
-			
-			// big splat of include lines here...
-			// These are relative to the current directory, which is /classes/classes.
 			include "../../includes/akbal.as";
 			include "../../includes/amily.as";
 			include "../../includes/anemone.as";
@@ -105,7 +80,6 @@
 			include "../../includes/dungeonSandwitch.as";
 			include "../../includes/edryn.as";
 			include "../../includes/ember.as";
-			include "../../includes/engineCore.as";
 			include "../../includes/essrayle.as";
 			include "../../includes/eventParser.as";
 			include "../../includes/eventTest.as";
@@ -122,7 +96,6 @@
 			include "../../includes/fuckingTree.as";
 			include "../../includes/gangbangVillage.as";
 			include "../../includes/gargoyle.as";
-			include "../../includes/GlobalVariables.as";
 			include "../../includes/gnoll.as";
 			include "../../includes/gnoll_alternate.as";
 			include "../../includes/goblin.as";
@@ -139,7 +112,6 @@
 			include "../../includes/ifris.as";
 			include "../../includes/imp.as";
 			include "../../includes/InitialiseUI.as";
-			include "../../includes/input.as";
 			include "../../includes/isabella.as";
 			include "../../includes/isabellaFollower.as";
 			include "../../includes/items.as";
@@ -218,7 +190,12 @@
 			include "../../includes/xmas_misc.as";
 
 
+		// include "../../includes/GlobalVariables.as";
+
+		include "../../includes/input.as";
+		include "../../includes/engineCore.as";
 			
+		
 			include "../../includes/flagDefs.as";
 			
 			// we had two saves.as files. It was causing wierd issues.
@@ -229,6 +206,353 @@
 			// free of any non-packaged files. - amygdala
 			include "../../includes/saves.as";
 			
+
+		/****
+			This is used purely for bodges while we get things cleaned up.
+			Hopefully, anything you stick to this object can be removed eventually.
+			I only used it because for some reason the Flash compiler wasn't seeing
+			certain functions, even though they were in the same scope as the
+			function calling them.
+		****/
+		public var semiglobalReferencer :* = {};
+
+		public var mainView :MainView;
+
+		public var model :GameModel;
+
+		//public var mainView :MainView;
+		//public var model :GameModel;
+
+
+		// ALL THE VARIABLES:
+		// Declare the various global variables as class variables.
+		// Note that they're set up in the constructor, not here.
+		public var debug:Boolean;
+		public var ver:String;
+		public var version:String;
+		public var mobile:Boolean;
+		public var images:ImageManager;
+		public var player:Player;
+		public var player2:Player;
+		public var tempPerk:String;
+		public var monster:Monster;
+		public var itemSwapping:Boolean;
+		public var flags;
+		public var gameState:Number;
+		public var menuLoc:Number;
+		public var itemSubMenu:Boolean;
+		public var time :TimeModel;
+		public var currentText:String;
+
+		public var explored:Boolean;
+		public var foundForest:Boolean;
+		public var foundDesert:Boolean;
+		public var foundMountain:Boolean;
+		public var foundLake:Boolean;
+		public var whitney:Number;
+		public var monk:Number;
+		public var sand:Number;
+		public var giacomo:Number;
+		public var beeProgress:Number;
+		public var itemSlot1:itemSlotClass;
+		public var itemSlot2:itemSlotClass;
+		public var itemSlot3:itemSlotClass;
+		public var itemSlot4:itemSlotClass;
+		public var itemSlot5:itemSlotClass;
+		public var itemStorage:Array;
+		public var gearStorage:Array;
+		public var shortName:String;
+		public var temp:int;
+		public var args:Array;
+		public var funcs:Array;
+		public var oldStats;
+
+
+		public function CoC()
+		{
+			this.model = new GameModel();
+			this.mainView = new MainView( this.model );
+			this.mainView.name = "mainView";
+			this.stage.addChild( this.mainView );
+
+
+			// Hooking things to MainView.
+			this.mainView.onNewGameClick = newGameGo;
+			this.mainView.onAppearanceClick = appearance;
+			this.mainView.onDataClick = saveLoad;
+			this.mainView.onLevelClick = levelUpGo;
+			this.mainView.onPerksClick = displayPerks;
+			this.mainView.onStatsClick = displayStats;
+
+			this.mainView._executeButtomButtonClick = executeButtonClick;
+
+
+			// Set up all the messy global stuff:
+			
+			// ******************************************************************************************
+
+			var mainView :MainView = this.mainView;
+			var model :GameModel = this.model;
+			
+
+			/**
+			 * Global Variables used across the whole game. I hope to whittle it down slowly.
+			 */
+
+			/**
+			 * System Variables
+			 * Debug, Version, etc
+			 */
+			//{ region SystemVariables
+
+			//DEBUG, used all over the place
+			debug = false;
+			//model.debug = debug; // TODO: Set on model?
+
+			//Version NUMBER
+			ver = "0.8.3dTURKEY";
+			version = "v0.8.3dTURKEY (<b>Honey Ham and Gravy Basting</b>)";
+
+			//Indicates if building for mobile?
+			mobile = false;
+			model.mobile = mobile;
+
+			images = new ImageManager(stage);
+			//} endregion
+
+			/**
+			 * Player specific variables
+			 * The player object and variables associated with the player
+			 */
+			//{ region PlayerVariables
+
+			//The Player object, used everywhere
+			player = new Player();
+			model.player = player;
+			player2 = new Player();
+
+			//Used in perk selection, mainly eventParser, input and engineCore
+			tempPerk = "";
+
+			//Create monster, used all over the place
+			monster = new Monster();
+			//} endregion
+
+			/**
+			 * State Variables
+			 * They hold all the information about item states, menu states, game states, etc
+			 */
+			//{ region StateVariables
+
+			//User all over the place whenever items come up
+			itemSwapping = false;
+
+			//The extreme flag state array. This needs to go. Holds information about everything, whether it be certain attacks for NPCs 
+			//or state information to do with the game. 
+			flags = new DefaultDict();
+			model.flags = flags;
+
+			/*
+			for (var i = 0; i < 3000; i++)
+			{
+				flags.push(0);
+			}
+			*/
+
+			///Used everywhere to establish what the current game state is
+			// Key system variables
+			//0 = normal
+			//1 = in combat
+			//2 = in combat in grapple
+			//3 = at start or game over screen
+			//4 = at giacomo
+			//5 = getting succubi potion
+			//6 = at alchemist choices.
+			//7 = item duuuuump
+			//8 = worked at farm
+			gameState = 0;
+
+			//Another state variable used for menu display used everywhere
+			//menuLoc
+			//0 - normal
+			//1 - items menu - no heat statuses when leaving it in combat
+			//2 - needs to add an hour after grabbing item
+			//3 - In tease menu - no heat statuses when leaving it.
+			//8 - Find Farm Pepper - 2 hours wait
+			//9 - Armor shop
+			//10- Tailor shop
+			//11- Midsleep loot
+			//12 - lumi potions
+			//13 - lumi enhancements
+			//14 - late night receive item
+			//15 - Weapon shop in TelAdra
+			//16 - Incubus Shop
+			//17 - 4 hours wait
+			//18 - 8 hours wait
+			//19 - Bakery!
+			//20 - weapon rack stuffing
+			//21 - weapon rack taking
+			//24 - Niamh booze
+			//25 - Owca Shop
+			//26 - Benoit Shop
+			//27 - Chicken Harpy Shop
+			//28 - Items menu
+			menuLoc = 0;
+
+			//State variable used to indicate whether inside an item submenu
+			//The item sub menu
+			itemSubMenu = false;
+			//} endregion 
+
+			/**
+			 * Display Variables
+			 * Variables that hold display information like number of days and all the current displayed text
+			 */
+			//{ region DisplayVariables
+
+			//Holds the date and time display in the bottom left
+			time = new TimeModel();
+			model.time = time;
+
+			//The string holds all the "story" text, mainly used in engineCore
+			currentText = "";
+			//}endregion 
+
+			/**
+			 * Item variables
+			 * Holds all the information about items in your inventory and stashes away
+			 */
+			//{region ItemVariables
+
+			/**
+			 * Plot Variables
+			 * Booleans and numbers about whether you've found certain places
+			 */
+			//{ region PlotVariables
+
+			//Plot variables
+			explored = false;
+			foundForest = false;
+			foundDesert = false;
+			foundMountain = false;
+			foundLake = false;
+			whitney = 0;
+			monk = 0;
+			sand = 0;
+			giacomo = 0;
+			beeProgress = 0;
+
+			//Item things
+			itemSlot1 = new itemSlotClass();
+			itemSlot2 = new itemSlotClass();
+			itemSlot3 = new itemSlotClass();
+			itemSlot4 = new itemSlotClass();
+			itemSlot5 = new itemSlotClass();
+			itemStorage = new Array();
+			gearStorage = new Array();
+			shortName = "";
+			//}endregion
+
+			//Keyboard listener!
+			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyboard);
+
+			// These are toggled between by the [home] key.
+			mainView.textBGWhite.visible = false;
+			mainView.textBGTan.visible = false;
+
+			// *************************************************************************************
+
+			// import flash.events.MouseEvent;
+
+			//const DOUBLE_ATTACK_STYLE:int = 867;
+			//const SPELLS_CAST:int = 868;
+
+			//Fenoxo loves his temps
+			temp = 0;
+
+			//Used to set what each action buttons displays and does.
+			args = new Array();
+			funcs = new Array();
+
+			//Used for stat tracking to keep up/down arrows correct.
+			oldStats = {};
+			model.oldStats = oldStats;
+			oldStats.oldStr  = 0;
+			oldStats.oldTou  = 0;
+			oldStats.oldSpe  = 0;
+			oldStats.oldInte = 0;
+			oldStats.oldSens = 0;
+			oldStats.oldLib  = 0;
+			oldStats.oldCor  = 0;
+			oldStats.oldHP   = 0;
+			oldStats.oldLust = 0;
+
+			model.maxHP = maxHP;
+
+			// ******************************************************************************************
+
+
+			//var mainView.aCb:ComboBox = new ComboBox(); 
+			//mainView.aCb.dropdownWidth = 200; 
+			//mainView.aCb.width = 200; 
+			//mainView.aCb.scaleY = 1.1;
+			//mainView.aCb.move(-1250, -1550); 
+			//mainView.aCb.prompt = "Choose a perk"; 
+			mainView.aCb.dataProvider = new DataProvider(perkList); 
+			mainView.aCb.addEventListener(Event.CHANGE, changeHandler); 
+			 
+			//addChild(mainView.aCb);
+
+
+			// ******************************************************************************************
+
+
+			mainView._getButtonToolTipText = getButtonToolTipText;
+
+			// ******************************************************************************************
+
+
+			//Register the classes we need to be able to serialize and reconstitute so
+			// they'll get reconstituted into the correct class when deserialized
+			registerClassAlias("assClass", assClass);
+			registerClassAlias("Character", Character);
+			registerClassAlias("Cock", Cock);
+			registerClassAlias("CockTypesEnum", CockTypesEnum);
+			registerClassAlias("Enum", Enum);
+			registerClassAlias("Creature", Creature);
+			registerClassAlias("itemSlotClass", itemSlotClass);
+			registerClassAlias("keyItemClass", keyItemClass);
+			registerClassAlias("Monster", Monster);
+			registerClassAlias("Player", Player);
+			registerClassAlias("statusAffectClass", statusAffectClass);
+			registerClassAlias("vaginaClass", vaginaClass);
+			//registerClassAlias("Enum", Enum);
+			//registerClassAlias("cockClass", cockClass);
+
+			//Invert shit
+			invertGo();
+			//Hide sprites
+			mainView.hideSprite();
+			//Hide up/down arrows
+			mainView.statsView.hideUpDown();
+			//Hide choice buttons
+			//choices("one", 0, "two", 0, "three", 0, "four", 0, "five", 0, "six", 0, "seven", 0, "eight", 0, "nine", 0, "ten", 0);
+			//Call up the title screen
+
+
+
+
+			this.addFrameScript( 0, this.run );
+		}
+
+
+		public function run()
+		{
+
+		
+			mainMenu();
+
+
 			this.stop();
 		}
 	}

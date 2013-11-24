@@ -79,8 +79,22 @@ package coc.view {
         };
 
         protected function setStatText( name :String, value :* ) {
-            if( /Num$/.test( name ) )
-                (this.getChildByName( name ) as TextField).htmlText = String( Math.floor( value ) );
+            if ( /Num$/.test( name ) )
+			{
+				var fVal:* = Math.floor( value );
+				var dispText:String;
+				
+				if (fVal >= 10000)
+				{
+					dispText = "++++";
+				}
+				else
+				{
+					dispText = String( fVal );
+				}
+				
+                (this.getChildByName( name ) as TextField).htmlText = dispText
+			}
             else
                 (this.getChildByName( name ) as TextField).htmlText = value;
         };
@@ -109,11 +123,7 @@ package coc.view {
             setStatText( "HPNum", model.player.HP );
             setStatText( "lustNum", model.player.lust );
             setStatText( "levelNum", model.player.level );
-
-            if( model.player.XP > 9999 )
-                setStatText( "xpNum", "++++" );
-            else
-                setStatText( "xpNum", model.player.XP );
+            setStatText( "xpNum", model.player.XP );
 
             setStatText( "timeText",
                 "<b><u>Day #: {DAYS}</u></b>\n<b>Time : {HOURS}:00</b>"
@@ -130,11 +140,7 @@ package coc.view {
             setStatBar( "fatigueBar", model.player.fatigue/100 );
             setStatBar( "HPBar", model.player.HP/model.maxHP() );
             setStatBar( "lustBar", model.player.lust/100 );
-
-            if( model.player.gems > 9999 )
-                setStatText( "gemsNum", "++++" );
-            else
-                setStatText( "gemsNum", model.player.gems );
+            setStatText( "gemsNum", model.player.gems );
         };
 
         // <- showStats
@@ -180,9 +186,6 @@ package coc.view {
 
             for each( statName in allStats ) {
                 oldStatName = _oldStatNameFor( statName );
-
-                trace( "comparing player." + statName, "and oldStats." + oldStatName, "::",
-                    this.model.player[ statName ], "<?>", this.model.oldStats[ oldStatName ] );
 
                 if( this.model.player[ statName ] > this.model.oldStats[ oldStatName ] ) {
                     this.showStatUp( statName );

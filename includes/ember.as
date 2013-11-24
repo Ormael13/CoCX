@@ -1979,7 +1979,7 @@ function getMilkFromEmber():void {
 		outputText("\n\nEmber's frown deepens.  \"<i>Don't be silly!  I would never do that!</i>\" Ember finds a nice spot by the den's wall and plops down on a pile of leaves; then " + emberMF("he","she") + " opens " + emberMF("his","her") + " arms invitingly and says, \"<i>Come on then, let's get this over with.</i>\"");
 		outputText("\n\nWith a wide smile on your face, you approach and seat yourself, noting " + emberMF("his","her") + " nipples are already starting to dribble milk.  You wonder if you should play with " + emberMF("him","her") + " first or just start suckling...");
 		
-		outputText("\n\nYou don't need to wonder for long; a not-so-innocent caress on your [butt] is all the direction you could want.  You grin wickedly and start to squeeze " + emberMF("his","her") + " impressive bosom, telling " + emberMF("him","her") + " that she must be so proud to be so big and round, and yet so firm, without the slightest hint of sagging or flab in " + emberMF("his","her") + " breasts.");
+		outputText("\n\nYou don't need to wonder for long; a not-so-innocent caress on your [butt] is all the direction you could want.  You grin wickedly and start to squeeze " + emberMF("his","her") + " impressive bosom, telling " + emberMF("him","her") + " that " + emberMF("he","she") + " must be so proud to be so big and round, and yet so firm, without the slightest hint of sagging or flab in " + emberMF("his","her") + " breasts.");
 		outputText("\n\nEmber blows a puff of smoke in confidence.  \"<i>Of course I'm proud.  Bet you don't see girls with breasts as perfect as mine.</i>\"");
 		outputText("\n\nYou admit you don't, then lean in to kiss " + emberMF("his","her") + " seeping nipple, sucking the teat in between your lips and expertly rolling and sliding it between them, tickling its tip and savoring the hints of " + emberMF("his","her") + " sweet, cool, naturally-spiced milk.");
 		outputText("\n\nBut your focus is on playing with your dragon right now, rather than straightforward drinking, and so one hands creeps purposefully towards ");
@@ -1997,7 +1997,7 @@ function getMilkFromEmber():void {
 		else outputText("probe gently into her slick depths");
 		outputText(".  Ember squirms and moans, humming softly, while you suckle and tease, delighting as much in the pleasure you are giving as in the delicious milk cascading down your thirsty throat.");
 		
-		outputText("\n\n\"<i>S-so this is how it is, huh?</i>\"  Ember suddenly pulls your head up and delivers a kiss straight to your lips, forcing her tongue inside your mouth to lap up her own milk.  When " + emberMF("he","she") + "'s sure " + emberMF("he","she") + "'s got everything; Ember drops you again.");
+		outputText("\n\n\"<i>S-so this is how it is, huh?</i>\"  Ember suddenly pulls your head up and delivers a kiss straight to your lips, forcing " + emberMF("his","her") + " tongue inside your mouth to lap up " + emberMF("his","her") + " own milk.  When " + emberMF("he","she") + "'s sure " + emberMF("he","she") + "'s got everything; Ember drops you again.");
 		
 		outputText("\n\n\"<i>If you're not going to behave, then no more milk for you.</i>\"  The dragon smiles triumphantly.");
 		outputText("\n\nRepositioning yourself where " + emberMF("he","she") + " dropped you for greater comfort, you smile and adopt your most innocent expression, then go back to your drinking.");
@@ -2490,7 +2490,7 @@ function suckEmberCock():void {
 	}
 	outputText(".  Up and up it rises, until all 16 inches of ");
 	if(flags[EMBER_ROUNDFACE] == 0 || flags[EMBER_INTERNAL_DICK] == 1) outputText("dragon ");
-	outputText("dick are proudly lancing towards your face, pre-cum gently bubbling from the tip and flowing down its length as you massage and lubricate it for ease of swallowing.  You cast a coy look at the dragon, who is shivering from your ministrations, but stoically refuses to show how much you are affecting " + emberMF("him","her") + ".  Not willing to play any more if " + emberMF("he","she") + " isn't willing to cooperate, you open your mouth jaws and start to swallow " + emberMF("his","her") + " cock.");
+	outputText("dick are proudly lancing towards your face, pre-cum gently bubbling from the tip and flowing down its length as you massage and lubricate it for ease of swallowing.  You cast a coy look at the dragon, who is shivering from your ministrations, but stoically refuses to show how much you are affecting " + emberMF("him","her") + ".  Not willing to play any more if " + emberMF("he","she") + " isn't willing to cooperate, you open your mouth and start to swallow " + emberMF("his","her") + " cock.");
 
 	outputText("\n\nYou take the first three or four inches inside with ease, pausing to run your tongue across the glans and the urethra, savoring the taste of draconic pre-cum; rich and thick and tangy, cool and surprisingly refreshing.  You enjoy the taste for a few long seconds, the press on, swallowing inch after inch.");
 	

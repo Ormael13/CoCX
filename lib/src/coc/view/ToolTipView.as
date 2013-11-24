@@ -56,11 +56,11 @@ package coc.view {
 		};
 
 		public function set text( newText :String ) :void {
-			this.tf.text = newText || '';
+			this.tf.htmlText = newText || '';
 		};
 
 		public function get text() :String {
-			return this.tf.text;
+			return this.tf.htmlText;
 		};
 	}
 }

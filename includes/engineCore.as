@@ -1,29 +1,29 @@
-// import flash.events.MouseEvent;
-
-//const DOUBLE_ATTACK_STYLE:int = 867;
-//const SPELLS_CAST:int = 868;
-
-//Fenoxo loves his temps
-var temp:int = 0;
-
-//Used to set what each action buttons displays and does.
-var args:Array = new Array();
-var funcs:Array = new Array();
-
-//Used for stat tracking to keep up/down arrows correct.
-var oldStats = {};
-model.oldStats = oldStats;
-oldStats.oldStr  = 0;
-oldStats.oldTou  = 0;
-oldStats.oldSpe  = 0;
-oldStats.oldInte = 0;
-oldStats.oldSens = 0;
-oldStats.oldLib  = 0;
-oldStats.oldCor  = 0;
-oldStats.oldHP   = 0;
-oldStats.oldLust = 0;
-
-model.maxHP = maxHP;
+﻿// // import flash.events.MouseEvent;
+// 
+// //const DOUBLE_ATTACK_STYLE:int = 867;
+// //const SPELLS_CAST:int = 868;
+// 
+// //Fenoxo loves his temps
+// var temp:int = 0;
+// 
+// //Used to set what each action buttons displays and does.
+// var args:Array = new Array();
+// var funcs:Array = new Array();
+// 
+// //Used for stat tracking to keep up/down arrows correct.
+// var oldStats = {};
+// model.oldStats = oldStats;
+// oldStats.oldStr  = 0;
+// oldStats.oldTou  = 0;
+// oldStats.oldSpe  = 0;
+// oldStats.oldInte = 0;
+// oldStats.oldSens = 0;
+// oldStats.oldLib  = 0;
+// oldStats.oldCor  = 0;
+// oldStats.oldHP   = 0;
+// oldStats.oldLust = 0;
+// 
+// model.maxHP = maxHP;
 
 function maxHP():Number {
 	var max:Number = 0;
@@ -136,7 +136,7 @@ function rawOutputText(output:String, purgeText:Boolean = false)
 	//OUTPUT!
 	if(purgeText) {
 		//if(!debug) mainText.htmlText = output;
-		trace("Purging and writing Text", output);
+		//trace("Purging and writing Text", output);
 		clearOutput();
 		currentText = output;
 		mainView.setOutputText( output );
@@ -144,7 +144,7 @@ function rawOutputText(output:String, purgeText:Boolean = false)
 	}
 	else
 	{
-		trace("Adding Text");
+		//trace("Adding Text");
 		currentText += output;
 		mainView.appendOutputText( output );
 		// mainText.htmlText += output;
@@ -180,6 +180,12 @@ function outputText(output:String, purgeText:Boolean = false, parseAsMarkdown = 
 		mainView.setOutputText( currentText );
 	}
 
+}
+
+function flushOutputTextToGUI():void
+{
+	
+	mainView.setOutputText( currentText );
 }
 
 function perkLongDescription(perkName:String = ""):String {
@@ -668,7 +674,7 @@ function perkDescription(perkName:String = ""):String {
 	}
 	return "broken.";
 }
-function displayPerks(e:MouseEvent):void {
+function displayPerks(e:MouseEvent = null):void {
 	temp = 0;
 	outputText("", true);
 	while(temp < player.perks.length) {
@@ -730,7 +736,7 @@ function doubleAttackOff():void {
 	doubleAttackOptions();
 }
 
-function levelUpGo(e:MouseEvent):void {
+function levelUpGo(e:MouseEvent = null):void {
 	hideMenus();
 	mainView.hideMenuButton( MainView.MENU_NEW_MAIN );
 	//Level up
@@ -778,10 +784,11 @@ function perkBuyMenu():void {
 		return;
 	}
 	outputText("Please select a perk from the drop-down list, then click 'Okay'.  You can press 'Skip' to save your perk point for later.\n\n", false);
-	mainView.aCb.move(210, 108);
+	mainView.aCb.x = 210;
+	mainView.aCb.y = 108;
 	mainView.aCb.visible = true;
 	mainView.hideMenuButton( MainView.MENU_NEW_MAIN );
-	simpleChoices("Okay",0,"Skip",115,"",0,"",0,"",0);
+	simpleChoices("Okay",0,"Skip",115,"",0,"",0,"",0);	
 }
 function buildPerkList():void {
 	perkList = new Array();
@@ -1110,12 +1117,13 @@ function buttonText(buttonName:String):String {
 	return (mainView.getButtonText( buttonIndex ) || "NULL");
 }
 
-mainView._getButtonToolTipText = getButtonToolTipText;
 
 // Returns a string or undefined.
 function getButtonToolTipText( buttonText :String ) :String
 {
 	var toolTipText :String;
+
+	buttonText = buttonText || '';
 
 	//Perkzzz
 	if(buttonText.indexOf("Strong Back") != -1) {
@@ -1876,26 +1884,21 @@ function getButtonToolTipText( buttonText :String ) :String
 }
 
 function addButton(pos:int, text:String = "", func1:Function = null, arg1 = -9000):void {
+	var callback :Function,
+		toolTipText :String;
+
 	if(pos > 9) {
 		trace("INVALID BUTTON");
 		return;
 	}
-	//If the function/argument array isn't set up, fill it with blanks!
-	if(funcs.length < 10 || args.length < 10) {
-		funcs = new Array();
-		args = new Array();
-		var temp = 0;
-		while(temp < 10) {
-			funcs[funcs.length] = null;
-			args[args.length] = -9000;
-			temp++;
-		}
-	}
-	//set dat shit up.
-	funcs[pos] = func1;
-	args[pos] = arg1;
-	mainView.showBottomButton( pos, text );
-	//buttonSetup( pos, text );
+
+	if( arg1 == -9000 )
+		callback = func1;
+	else
+		callback = function _addButtonCallback() { return func1( arg1 ); };
+
+	toolTipText = getButtonToolTipText( text );
+	mainView.showBottomButton( pos, text, callback, toolTipText );
 	mainView.setOutputText( currentText );
 }
 
@@ -1908,8 +1911,8 @@ function hasButton(arg):Boolean {
 
 function removeButton(arg):void {
 	function _removeButtonAction( index :int ) {
-		funcs[ index ] = null;
-		args[ index ] = -9000;
+		// funcs[ index ] = null;
+		// args[ index ] = -9000;
 	}
 
 	var buttonToRemove:int = 0;
@@ -1921,25 +1924,31 @@ function removeButton(arg):void {
 		buttonToRemove = Math.round(arg);
 	}
 	
-	_removeButtonAction( buttonToRemove );
+	// _removeButtonAction( buttonToRemove );
 	mainView.hideBottomButton( buttonToRemove );
 }
 
 
 function menu(text1:String = "", func1:Function = null, arg1:Number = -9000, text2:String = null, func2:Function = null, arg2:Number = -9000, text3:String = null, func3:Function = null, arg3:Number = -9000, text4:String = null, func4:Function = null, arg4:Number = -9000, text5:String = null, func5:Function = null, arg5:Number = -9000, text6:String = null, func6:Function = null, arg6:Number = -9000, text7:String = null, func7:Function = null, arg7:Number = -9000, text8:String = null, func8:Function = null, arg8:Number = -9000, text9:String = null, func9:Function = null, arg9:Number = -9000, text0:String = null, func0:Function = null, arg0 = null):void {
-	function _conditionallyShowButton( index :int, label :String, callback :Function, arg :Number ) {
-		funcs[ index ] = callback;
-		args[ index ] = arg;
+	function _conditionallyShowButton( index :int, label :String, func :Function, arg :Number ) {
+		var callback :Function, toolTipText :String;
 
-		if( callback )
-			mainView.showBottomButton( index, label );
+		if( ! func || arg == -9000 )
+			callback = func;
+		else
+			callback = function _menuCallback() { return func( arg ); };
+
+		toolTipText = getButtonToolTipText( label );
+
+		if( func )
+			mainView.showBottomButton( index, label, callback, toolTipText );
 		else
 			mainView.hideBottomButton( index );
 	}
 
 	//Clear funcs & args
-	funcs = new Array();
-	args = new Array();
+	// funcs = new Array();
+	// args = new Array();
 	
 	_conditionallyShowButton( 0, text1, func1, arg1 );
 	_conditionallyShowButton( 1, text2, func2, arg2 );
@@ -1967,6 +1976,14 @@ function choices(text1:String, butt1:*,
 						text9:String, butt9:*, 
 						text0:String, butt0:*):void 
 {
+	function getCallback( butt :* ) {
+		return function _choicesCallback() {
+			return eventParser( butt );
+		}
+	}
+
+	var callback :Function, toolTipText :String;
+
 	var textLabels :Array,
 		j :int;
 
@@ -2005,13 +2022,15 @@ function choices(text1:String, butt1:*,
 			mainView.hideBottomButton( j );
 		}
 		else {
-			mainView.showBottomButton( j, textLabels[ j ] );
+			callback = getCallback( buttonEvents[ j ] );
+			toolTipText = getButtonToolTipText( textLabels[ j ] );
+			mainView.showBottomButton( j, textLabels[ j ], callback, toolTipText );
 		}
 
 	}
 
-	funcs = new Array();
-	args = new Array();
+	// funcs = new Array();
+	// args = new Array();
 	mainView.setOutputText( currentText );
 }
 
@@ -2362,7 +2381,7 @@ function minLust():Number {
 	return min;
 }
 
-function displayStats(e:MouseEvent) {
+function displayStats(e:MouseEvent = null) {
 	spriteSelect(-1);
 	outputText("", true);
 	outputText("<b><u>Combat Stats</u></b>\n", false);
