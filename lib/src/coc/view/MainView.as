@@ -109,13 +109,13 @@ package coc.view {
 			}
 
 			// Init subviews.
-			this.toolTipView = new ToolTipView( this, this.model );
-			this.toolTipView.hide();
-			this.addChild( this.toolTipView );
-
 			this.statsView = new StatsView( this, this.model );
 			this.statsView.hide();
 			this.addChild( this.statsView );
+			
+			this.toolTipView = new ToolTipView( this, this.model );
+			this.toolTipView.hide();
+			this.addChild( this.toolTipView );
 
 			this.formatMiscItems();
 
@@ -156,6 +156,7 @@ package coc.view {
 			this.aCb.scaleY = 1.1;
 			this.aCb.move(-1250, -1550); 
 			this.aCb.prompt = "Choose a perk"; 
+			this.addChild(this.aCb);
 
 			this.hideSprite();
 		};
