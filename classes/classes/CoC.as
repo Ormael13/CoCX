@@ -12,6 +12,7 @@
 	import classes.statusAffectClass;
 	import classes.vaginaClass;
 	import classes.ImageManager; // This line not necessary, but added because I'm pedantic like that.
+	import classes.InputManager;
 
 	import coc.view.MainView;
 
@@ -41,172 +42,156 @@
 	[SWF( width="1000", height="800", pageTitle="Corruption of Champions" )]
 
 	public class CoC extends MovieClip
-	{
-
+	{				
 		// Include the functions. ALL THE FUNCTIONS
-
-			include "../../includes/akbal.as";
-			include "../../includes/amily.as";
-			include "../../includes/anemone.as";
-			include "../../includes/ants.as";
-			include "../../includes/appearance.as";
-			include "../../includes/april_fools.as";
-			include "../../includes/arian.as";
-			include "../../includes/auntNancy.as";
-			include "../../includes/bakery.as";
-			include "../../includes/basilisk.as";
-			include "../../includes/bazaar.as";
-			include "../../includes/bee.as";
-			include "../../includes/benoit.as";
-			include "../../includes/brooke.as";
-			include "../../includes/bunbun.as";
-			include "../../includes/camp.as";
-			include "../../includes/ceraph.as";
-			include "../../includes/ceraphFollower.as";
-			include "../../includes/chameleons.as";
-			include "../../includes/charCreation.as";
-			include "../../includes/cinnabar.as";
-			include "../../includes/combat.as";
-			include "../../includes/cotton.as";
-			include "../../includes/customCharCreation.as";
-			include "../../includes/descriptors.as";
-			include "../../includes/doEvent.as";
-			include "../../includes/dreams.as";
-			include "../../includes/drider.as";
-			include "../../includes/dungeon2Supplimental.as";
-			include "../../includes/dungeonCore.as";
-			include "../../includes/dungeonEvents.as";
-			include "../../includes/dungeonHelSupplimental.as";
-			include "../../includes/dungeonSandwitch.as";
-			include "../../includes/edryn.as";
-			include "../../includes/ember.as";
-			include "../../includes/essrayle.as";
-			include "../../includes/eventParser.as";
-			include "../../includes/eventTest.as";
-			include "../../includes/exgartuan.as";
-			include "../../includes/exploration.as";
-			include "../../includes/faerie.as";
-			include "../../includes/fapArena.as";
-			include "../../includes/fellatrix.as";
-			include "../../includes/fera.as";
-			include "../../includes/fetishCultist.as";
-			include "../../includes/fetishZealot.as";
-			include "../../includes/followerInteractions.as";
-			include "../../includes/froggirl.as";
-			include "../../includes/fuckingTree.as";
-			include "../../includes/gangbangVillage.as";
-			include "../../includes/gargoyle.as";
-			include "../../includes/gnoll.as";
-			include "../../includes/gnoll_alternate.as";
-			include "../../includes/goblin.as";
-			include "../../includes/gooGirl.as";
-			include "../../includes/harpy.as";
-			include "../../includes/harpySophie.as";
-			include "../../includes/harpySophieBimbo.as";
-			include "../../includes/harpySophieFollower.as";
-			include "../../includes/heckel.as";
-			include "../../includes/heliaFollower.as";
-			include "../../includes/heliaPreggers.as";
-			include "../../includes/hellhound.as";
-			include "../../includes/hellhoundInfested.as";
-			include "../../includes/ifris.as";
-			include "../../includes/imp.as";
-			include "../../includes/InitialiseUI.as";
-			include "../../includes/isabella.as";
-			include "../../includes/isabellaFollower.as";
-			include "../../includes/items.as";
-			include "../../includes/izma.as";
-			include "../../includes/jasun.as";
-			include "../../includes/jojo.as";
-			include "../../includes/kaiju.as";
-			include "../../includes/katherine.as";
-			include "../../includes/kelly.as";
-			include "../../includes/kelt.as";
-			include "../../includes/kiha.as";
-			include "../../includes/kihaFollower.as";
-			include "../../includes/kitsunes.as";
-			include "../../includes/latexy.as";
-			include "../../includes/library.as";
-			include "../../includes/lilium.as";
-			include "../../includes/loppe.as";
-			include "../../includes/lottie.as";
-			include "../../includes/lumi.as";
-			include "../../includes/maddie.as";
-			include "../../includes/marae.as";
-			include "../../includes/marble.as";
-			include "../../includes/masturbation.as";
-			include "../../includes/milkWaifu.as";
-			include "../../includes/minerva.as";
-			include "../../includes/minotaur.as";
-			include "../../includes/minotaurGang.as";
-			include "../../includes/naga.as";
-			include "../../includes/niamh.as";
-			include "../../includes/oasis.as";
-			include "../../includes/OnLoadVariables.as";
-			include "../../includes/ooze.as";
-			include "../../includes/parser.as";
-			include "../../includes/perkPicker.as";
-			include "../../includes/pregnancy.as";
-			include "../../includes/Raphael.as";
-			include "../../includes/rathazul.as";
-			include "../../includes/rogar.as";
-			include "../../includes/roxanne.as";
-			include "../../includes/rubi.as";
-			include "../../includes/runa.as";
-			include "../../includes/salamander.as";
-			include "../../includes/salon.as";
-			include "../../includes/sandtrap.as";
-			include "../../includes/sandwitch.as";
-			include "../../includes/satyr.as";
-			include "../../includes/scylla.as";
-			include "../../includes/sexMachine.as";
-			include "../../includes/sharkgirls.as";
-			include "../../includes/sheila.as";
-			include "../../includes/shouldra.as";
-			include "../../includes/shouldraFollower.as";
-			include "../../includes/spiderMorph.as";
-			include "../../includes/spiderMorphMale.as";
-			include "../../includes/startUp.as";
-			include "../../includes/swordInStone.as";
-			include "../../includes/symGear.as";
-			include "../../includes/tamani.as";
-			include "../../includes/tamaniDildo.as";
-			include "../../includes/tamanisDaughters.as";
-			include "../../includes/telAdre.as";
-			include "../../includes/tentacle.as";
-			include "../../includes/thanksgiving.as";
-			include "../../includes/transform.as";
-			include "../../includes/urta.as";
-			include "../../includes/urtaPregs.as";
-			include "../../includes/urtaQuest.as";
-			include "../../includes/valaria.as";
-			include "../../includes/valentines.as";
-			include "../../includes/wanderer.as";
-			include "../../includes/whitneyFarm.as";
-			include "../../includes/worms.as";
-			include "../../includes/xmas_bitch.as";
-			include "../../includes/xmas_gats_not_an_angel.as";
-			include "../../includes/xmas_jack_frost.as";
-			include "../../includes/xmas_misc.as";
-
-
-		// include "../../includes/GlobalVariables.as";
-
+		include "../../includes/akbal.as";
+		include "../../includes/amily.as";
+		include "../../includes/anemone.as";
+		include "../../includes/ants.as";
+		include "../../includes/appearance.as";
+		include "../../includes/april_fools.as";
+		include "../../includes/arian.as";
+		include "../../includes/auntNancy.as";
+		include "../../includes/bakery.as";
+		include "../../includes/basilisk.as";
+		include "../../includes/bazaar.as";
+		include "../../includes/bee.as";
+		include "../../includes/benoit.as";
+		include "../../includes/brooke.as";
+		include "../../includes/bunbun.as";
+		include "../../includes/camp.as";
+		include "../../includes/ceraph.as";
+		include "../../includes/ceraphFollower.as";
+		include "../../includes/chameleons.as";
+		include "../../includes/charCreation.as";
+		include "../../includes/cinnabar.as";
+		include "../../includes/combat.as";
+		include "../../includes/cotton.as";
+		include "../../includes/customCharCreation.as";
+		include "../../includes/descriptors.as";
+		include "../../includes/doEvent.as";
+		include "../../includes/dreams.as";
+		include "../../includes/drider.as";
+		include "../../includes/dungeon2Supplimental.as";
+		include "../../includes/dungeonCore.as";
+		include "../../includes/dungeonEvents.as";
+		include "../../includes/dungeonHelSupplimental.as";
+		include "../../includes/dungeonSandwitch.as";
+		include "../../includes/edryn.as";
+		include "../../includes/ember.as";
+		include "../../includes/essrayle.as";
+		include "../../includes/eventParser.as";
+		include "../../includes/eventTest.as";
+		include "../../includes/exgartuan.as";
+		include "../../includes/exploration.as";
+		include "../../includes/faerie.as";
+		include "../../includes/fapArena.as";
+		include "../../includes/fellatrix.as";
+		include "../../includes/fera.as";
+		include "../../includes/fetishCultist.as";
+		include "../../includes/fetishZealot.as";
+		include "../../includes/followerInteractions.as";
+		include "../../includes/froggirl.as";
+		include "../../includes/fuckingTree.as";
+		include "../../includes/gangbangVillage.as";
+		include "../../includes/gargoyle.as";
+		include "../../includes/gnoll.as";
+		include "../../includes/gnoll_alternate.as";
+		include "../../includes/goblin.as";
+		include "../../includes/gooGirl.as";
+		include "../../includes/harpy.as";
+		include "../../includes/harpySophie.as";
+		include "../../includes/harpySophieBimbo.as";
+		include "../../includes/harpySophieFollower.as";
+		include "../../includes/heckel.as";
+		include "../../includes/heliaFollower.as";
+		include "../../includes/heliaPreggers.as";
+		include "../../includes/hellhound.as";
+		include "../../includes/hellhoundInfested.as";
+		include "../../includes/ifris.as";
+		include "../../includes/imp.as";
+		include "../../includes/InitialiseUI.as";
 		include "../../includes/input.as";
+		include "../../includes/isabella.as";
+		include "../../includes/isabellaFollower.as";
+		include "../../includes/items.as";
+		include "../../includes/izma.as";
+		include "../../includes/jasun.as";
+		include "../../includes/jojo.as";
+		include "../../includes/kaiju.as";
+		include "../../includes/katherine.as";
+		include "../../includes/kelly.as";
+		include "../../includes/kelt.as";
+		include "../../includes/kiha.as";
+		include "../../includes/kihaFollower.as";
+		include "../../includes/kitsunes.as";
+		include "../../includes/latexy.as";
+		include "../../includes/library.as";
+		include "../../includes/lilium.as";
+		include "../../includes/loppe.as";
+		include "../../includes/lottie.as";
+		include "../../includes/lumi.as";
+		include "../../includes/maddie.as";
+		include "../../includes/marae.as";
+		include "../../includes/marble.as";
+		include "../../includes/masturbation.as";
+		include "../../includes/milkWaifu.as";
+		include "../../includes/minerva.as";
+		include "../../includes/minotaur.as";
+		include "../../includes/minotaurGang.as";
+		include "../../includes/naga.as";
+		include "../../includes/niamh.as";
+		include "../../includes/oasis.as";
+		include "../../includes/OnLoadVariables.as";
+		include "../../includes/ooze.as";
+		include "../../includes/parser.as";
+		include "../../includes/perkPicker.as";
+		include "../../includes/pregnancy.as";
+		include "../../includes/Raphael.as";
+		include "../../includes/rathazul.as";
+		include "../../includes/rogar.as";
+		include "../../includes/roxanne.as";
+		include "../../includes/rubi.as";
+		include "../../includes/runa.as";
+		include "../../includes/salamander.as";
+		include "../../includes/salon.as";
+		include "../../includes/sandtrap.as";
+		include "../../includes/sandwitch.as";
+		include "../../includes/satyr.as";
+		include "../../includes/scylla.as";
+		include "../../includes/sexMachine.as";
+		include "../../includes/sharkgirls.as";
+		include "../../includes/sheila.as";
+		include "../../includes/shouldra.as";
+		include "../../includes/shouldraFollower.as";
+		include "../../includes/spiderMorph.as";
+		include "../../includes/spiderMorphMale.as";
+		include "../../includes/startUp.as";
+		include "../../includes/swordInStone.as";
+		include "../../includes/symGear.as";
+		include "../../includes/tamani.as";
+		include "../../includes/tamaniDildo.as";
+		include "../../includes/tamanisDaughters.as";
+		include "../../includes/telAdre.as";
+		include "../../includes/tentacle.as";
+		include "../../includes/thanksgiving.as";
+		include "../../includes/transform.as";
+		include "../../includes/urta.as";
+		include "../../includes/urtaPregs.as";
+		include "../../includes/urtaQuest.as";
+		include "../../includes/valaria.as";
+		include "../../includes/valentines.as";
+		include "../../includes/wanderer.as";
+		include "../../includes/whitneyFarm.as";
+		include "../../includes/worms.as";
+		include "../../includes/xmas_bitch.as";
+		include "../../includes/xmas_gats_not_an_angel.as";
+		include "../../includes/xmas_jack_frost.as";
+		include "../../includes/xmas_misc.as";
 		include "../../includes/engineCore.as";
-			
+		include "../../includes/flagDefs.as";
+		include "../../includes/saves.as";
 		
-			include "../../includes/flagDefs.as";
-			
-			// we had two saves.as files. It was causing wierd issues.
-			// I'm not sure how most of the files in /classes/classes/ are included
-			// anyways, lets manually include it here until I read up on the include mechanics
-			// of AS
-			// I moved saves.as back into includes, to keep the class directories
-			// free of any non-packaged files. - amygdala
-			include "../../includes/saves.as";
-			
-
 		/****
 			This is used purely for bodges while we get things cleaned up.
 			Hopefully, anything you stick to this object can be removed eventually.
@@ -217,12 +202,7 @@
 		public var semiglobalReferencer :* = {};
 
 		public var mainView :MainView;
-
 		public var model :GameModel;
-
-		//public var mainView :MainView;
-		//public var model :GameModel;
-
 
 		// ALL THE VARIABLES:
 		// Declare the various global variables as class variables.
@@ -266,8 +246,9 @@
 		public var args:Array;
 		public var funcs:Array;
 		public var oldStats;
+		public var inputManager:InputManager;
 
-
+		
 		public function CoC()
 		{
 			this.model = new GameModel();
@@ -288,7 +269,6 @@
 
 
 			// Set up all the messy global stuff:
-			
 			// ******************************************************************************************
 
 			var mainView :MainView = this.mainView;
@@ -318,6 +298,9 @@
 			model.mobile = mobile;
 
 			images = new ImageManager(stage);
+			inputManager = new InputManager(stage);
+			include "../../includes/ControlBindings.as";
+			
 			//} endregion
 
 			/**
@@ -453,9 +436,6 @@
 			shortName = "";
 			//}endregion
 
-			//Keyboard listener!
-			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyboard);
-
 			// These are toggled between by the [home] key.
 			mainView.textBGWhite.visible = false;
 			mainView.textBGTan.visible = false;
@@ -539,20 +519,12 @@
 			//choices("one", 0, "two", 0, "three", 0, "four", 0, "five", 0, "six", 0, "seven", 0, "eight", 0, "nine", 0, "ten", 0);
 			//Call up the title screen
 
-
-
-
 			this.addFrameScript( 0, this.run );
 		}
 
-
 		public function run()
 		{
-
-		
 			mainMenu();
-
-
 			this.stop();
 		}
 	}

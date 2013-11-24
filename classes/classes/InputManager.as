@@ -77,7 +77,7 @@ package classes
 		
 		public function BindKeyToControl(keyCode:int, funcName:String):void
 		{
-			for (var i:int in _controlMethods)
+			for (var i:int = 0; i < _availableControlMethods; i++)
 			{
 				if (funcName == _controlMethods[i].Name)
 				{
@@ -128,7 +128,7 @@ package classes
 		{
 			var funcNames:Array = new Array();
 			
-			for (var i:int in _controlMethods)
+			for (var i:int = 0; i < _availableControlMethods; i++)
 			{
 				funcNames.push(_controlMethods[i].Name);
 			}
@@ -140,11 +140,11 @@ package classes
 		{
 			var keyCodes:Array = new Array();
 			
-			for (var i:int in _keysToControlMethods)
+			for (var i:String in _keysToControlMethods)
 			{
 				if (funcName == _keysToControlMethods[i].Name)
 				{
-					keyCodes.push(i);
+					keyCodes.push(int(i));
 				}
 			}
 			
