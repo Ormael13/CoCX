@@ -1965,7 +1965,7 @@
 			}
 			//25% tightness description
 			if(rand(4) == 0 || (i_creature.ass.analLooseness <= 1 && rand(4) <= 2)) {
-				if(i_creature.ass.analLooseness == 0) description += "virgin ";
+				if(i_creature.ass.analLooseness == 0) description += "virgin-tight ";
 				if(i_creature.ass.analLooseness == 1) description += "tight ";
 				if(i_creature.ass.analLooseness == 2) description += "loose ";
 				if(i_creature.ass.analLooseness == 3) description += "roomy ";
