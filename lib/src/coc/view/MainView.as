@@ -109,13 +109,13 @@ package coc.view {
 			}
 
 			// Init subviews.
-			this.toolTipView = new ToolTipView( this, this.model );
-			this.toolTipView.hide();
-			this.addChild( this.toolTipView );
-
 			this.statsView = new StatsView( this, this.model );
 			this.statsView.hide();
 			this.addChild( this.statsView );
+			
+			this.toolTipView = new ToolTipView( this, this.model );
+			this.toolTipView.hide();
+			this.addChild( this.toolTipView );
 
 			this.formatMiscItems();
 
