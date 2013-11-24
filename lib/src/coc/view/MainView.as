@@ -156,6 +156,7 @@ package coc.view {
 			this.aCb.scaleY = 1.1;
 			this.aCb.move(-1250, -1550); 
 			this.aCb.prompt = "Choose a perk"; 
+			this.addChild(this.aCb);
 
 			this.hideSprite();
 		};

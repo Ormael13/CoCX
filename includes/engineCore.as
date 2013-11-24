@@ -784,10 +784,11 @@ function perkBuyMenu():void {
 		return;
 	}
 	outputText("Please select a perk from the drop-down list, then click 'Okay'.  You can press 'Skip' to save your perk point for later.\n\n", false);
-	mainView.aCb.move(210, 108);
+	mainView.aCb.x = 210;
+	mainView.aCb.y = 108;
 	mainView.aCb.visible = true;
 	mainView.hideMenuButton( MainView.MENU_NEW_MAIN );
-	simpleChoices("Okay",0,"Skip",115,"",0,"",0,"",0);
+	simpleChoices("Okay",0,"Skip",115,"",0,"",0,"",0);	
 }
 function buildPerkList():void {
 	perkList = new Array();

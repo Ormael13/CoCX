@@ -501,7 +501,7 @@
 			mainView.aCb.dataProvider = new DataProvider(perkList); 
 			mainView.aCb.addEventListener(Event.CHANGE, changeHandler); 
 			 
-			addChild(mainView.aCb);
+			//addChild(mainView.aCb);
 
 
 			// ******************************************************************************************
