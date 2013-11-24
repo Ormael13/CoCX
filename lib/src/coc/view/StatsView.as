@@ -79,8 +79,22 @@ package coc.view {
         };
 
         protected function setStatText( name :String, value :* ) {
-            if( /Num$/.test( name ) )
-                (this.getChildByName( name ) as TextField).htmlText = String( Math.floor( value ) );
+            if ( /Num$/.test( name ) )
+			{
+				var fVal:* = Math.floor( value );
+				var dispText:String;
+				
+				if (fVal >= 10000)
+				{
+					dispText = "++++";
+				}
+				else
+				{
+					dispText = String( fVal );
+				}
+				
+                (this.getChildByName( name ) as TextField).htmlText = dispText
+			}
             else
                 (this.getChildByName( name ) as TextField).htmlText = value;
         };
@@ -130,11 +144,7 @@ package coc.view {
             setStatBar( "fatigueBar", model.player.fatigue/100 );
             setStatBar( "HPBar", model.player.HP/model.maxHP() );
             setStatBar( "lustBar", model.player.lust/100 );
-
-            if( model.player.gems > 9999 )
-                setStatText( "gemsNum", "++++" );
-            else
-                setStatText( "gemsNum", model.player.gems );
+            setStatText( "gemsNum", model.player.gems );
         };
 
         // <- showStats
