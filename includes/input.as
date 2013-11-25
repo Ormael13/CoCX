@@ -33,3 +33,17 @@ function changeHandler(event:Event):void {
     navigateToURL(request); 
     mainView.aCb.selectedIndex = -1; 
 }*/
+
+function displayControls():void
+{
+	inputManager.DisplayBindingPane();
+	
+	doNext(hideControls);
+}
+
+function hideControls():void
+{
+	inputManager.HideBindingPane();
+	
+	settingsScreen();
+}

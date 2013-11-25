@@ -349,7 +349,7 @@ function settingsScreen():void
 			"Hyper Happy", toggleHyperHappy,
 			"Low Standards", toggleStandards,
 			"Null", 0,
-			"Null", 0,
+			"Controls", displayControls,
 			"Back", mainMenu);
 }
 

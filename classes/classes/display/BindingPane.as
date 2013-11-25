@@ -7,6 +7,7 @@ package classes.display
 	import flash.utils.Dictionary;
 	import flash.ui.Keyboard;
 	import flash.utils.describeType;
+	import classes.display.BindDisplay;
 	
 	/**
 	 * ...
@@ -19,6 +20,12 @@ package classes.display
 		private var _funcLabels:Array = new Array();
 		private var _bindLabels:Array = new Array();
 		
+		private var _functions:Array;
+		private var _binds:Array;
+		private var _requireUpdate:Boolean;
+		
+		private var _content:MovieClip;
+		
 		public function BindingPane(xPos:int, yPos:int, width:int, height:int) 
 		{
 			this.x = xPos;
@@ -26,27 +33,34 @@ package classes.display
 			this.width = width;
 			this.height = height;
 			
+			this._requireUpdate = true;
+			
 			// Cheap hack to remove the stupid styling elements of the stock ScrollPane
 			var blank:MovieClip = new MovieClip();
 			this.setStyle("upSkin", blank);
 			
 			this.PopulateKeyboardDict();
+			
+			_content = new MovieClip();
+			_content.name = "controlContent";
 		}
 		
-		public function ListBindingOptions(functions:Array, bindings:Array):void
+		public function ListBindingOptions():void
 		{
-			for (var i:int = 0; i < functions.length; i++)
+			trace("List bindings called");
+			
+			if (_requireUpdate)
 			{
-				var funcLabel:TextField = new TextField();
-				this.addChild(funcLabel);
-				
-				funcLabel.x = 4;
-				funcLabel.y = 4 + (20 * i);
-				
-				funcLabel.htmlText = "<b>" + functions[i].Name + ":</b>";
-				
-				_funcLabels.push(funcLabel);
+				for (var i:int = 0; i < _functions.length; i++)
+				{
+					var newLabel = new BindDisplay(this.width);
+					newLabel.x = 2;
+					newLabel.y = BindDisplay.BUTTON_Y_DELTA * i;
+					newLabel.htmlText = "<b>" + _functions[i] + ":</b>";
+					_content.addChild(newLabel);
+				}
 			}
+			this.source = _content;
 		}
 		
 		// Builds a dictionary to lookup keyCode values -> string representations of key name
@@ -54,6 +68,7 @@ package classes.display
 		// character.
 		private function PopulateKeyboardDict():void
 		{
+		
 			var keyDescriptions:XML = describeType(Keyboard);
 			var keyNames:XMLList = keyDescriptions..constant.@name;
 			
@@ -63,6 +78,33 @@ package classes.display
 			{
 				_keyDict[Keyboard[keyNames[i]]] = keyNames[i];
 			}
+		}
+		
+		public function set functions(funcs:Array):void
+		{
+			_functions = funcs;
+			_requireUpdate = true;
+		}
+		
+		public function get functions():Array
+		{
+			return _functions;
+		}
+		
+		public function set binds(bindings:Array):void
+		{
+			_binds = bindings;
+			_requireUpdate = true;
+		}
+		
+		public function get binds():Array
+		{
+			return _binds;
+		}
+		
+		public function get requireUpdate():Boolean
+		{
+			return _requireUpdate;
 		}
 	}
 

@@ -2,6 +2,8 @@ package classes
 {
 	import classes.display.BindingPane;
 	import coc.view.MainView;
+	import fl.controls.UIScrollBar;
+	import fl.containers.ScrollPane;
 	import flash.display.Stage;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
@@ -21,6 +23,8 @@ package classes
 	public class InputManager 
 	{
 		private var _stage:Stage;
+		
+		private var _keyDict:Dictionary;
 
 		private var _controlMethods:Object = new Object();
 		private var _availableControlMethods:int = 0;
@@ -30,9 +34,11 @@ package classes
 		
 		private var _keysToControlMethods:Object = new Object();
 		private var _mainView:MainView;
-		
-		private var _bindingView:BindingPane;
+
 		private var _mainText:TextField;
+		private var _mainTextScollBar:UIScrollBar;
+		
+		private var _bindingPane:BindingPane;
 		
 		public function InputManager(stage:Stage)
 		{
@@ -44,19 +50,24 @@ package classes
 			_stage.addEventListener(KeyboardEvent.KEY_DOWN, this.KeyHandler);
 			
 			_mainText = (_stage.getChildByName("mainView") as MovieClip).mainText as TextField;
-			_bindingView = new BindingPane(_mainText.x, _mainText.y, _mainText.width, _mainText.height);
+			_mainTextScollBar = (_stage.getChildByName("mainView") as MovieClip).scrollBar as UIScrollBar;
+			
+			_bindingPane = new BindingPane(_mainText.x, _mainText.y, _mainText.width, _mainText.height);
+			
+			this.PopulateKeyboardDict();
 		}
 		
-		public function DisplayBindingPane():void
+		private function PopulateKeyboardDict():void
 		{
-			_mainText.visible = false;
-			_stage.addChild(_bindingView);
-		}
-		
-		public function HideBindingPane():void
-		{
-			_stage.removeChild(_bindingView);
-			_mainText.visible = true;
+			var keyDescriptions:XML = describeType(Keyboard);
+			var keyNames:XMLList = keyDescriptions..constant.@name;
+			
+			_keyDict = new Dictionary();
+			
+			for (var i:int = 0; i < keyNames.length(); i++)
+			{
+				_keyDict[Keyboard[keyNames[i]]] = keyNames[i];
+			}
 		}
 		
 		// Add a new action that can be bound to keys -- this will (mostly) be static I guess
@@ -86,7 +97,7 @@ package classes
 				}
 			}
 			
-			trace("Failed to bind control method [" + funcName + "] to keyCode [" + keyCode);
+			trace("Failed to bind control method [" + funcName + "] to keyCode [" + keyCode + "]");
 		}
 		
 		// Core handler we attach to the stage to do our event/control processing
@@ -124,6 +135,25 @@ package classes
 			}
 		}
 		
+		public function DisplayBindingPane():void
+		{
+			_mainText.visible = false;
+			_mainTextScollBar.visible = false;
+			
+			_bindingPane.functions = this.GetAvailableFunctions();
+			_bindingPane.binds = this.GetBoundKeyCodesAsDisplayArray(_bindingPane.functions);
+			_bindingPane.ListBindingOptions();
+			
+			_stage.addChild(_bindingPane);
+		}
+		
+		public function HideBindingPane():void
+		{
+			_mainText.visible = true;
+			_mainTextScollBar.visible = true;
+			_stage.removeChild(_bindingPane);
+		}
+		
 		public function GetAvailableFunctions():Array
 		{
 			var funcNames:Array = new Array();
@@ -134,6 +164,35 @@ package classes
 			}
 			
 			return funcNames;
+		}
+		
+		public function GetBoundKeyCodesAsDisplayArray(functions:Array):Array
+		{
+			// Gonna pack keycodes as a series of pairs, a pair for each function
+			var keyCodes:Array = new Array();
+			
+			for (var i:int = 0; i < functions.length; i++)
+			{
+				var funcKeys:Array = GetBoundKeyCodesForFunction(functions[i]);
+				
+				if (funcKeys.length == 0)
+				{
+					funcKeys.push("Unbound");
+					funcKeys.push("Unbound");
+				}
+				else if (funcKeys.length == 1)
+				{
+					funcKeys.push("Unbound");
+				}
+				else if (funcKeys.length > 2)
+				{
+					funcKeys.splice(2, funcKeys.length - 1);
+				}
+				
+				keyCodes = keyCodes.concat(funcKeys);
+			}
+			
+			return keyCodes;
 		}
 		
 		public function GetBoundKeyCodesForFunction(funcName:String):Array
@@ -151,11 +210,9 @@ package classes
 			return keyCodes;
 		}
 		
-/*		public function GenerateControlMenuText():String
+		public function GenerateControlMenuText():String
 		{
 			var result:String = "";
-			
-			result = "<b>Currently bound controls:</b>\n\n";
 			
 			var funcNames:Array = GetAvailableFunctions();
 			
@@ -183,7 +240,7 @@ package classes
 			}
 			
 			return result;
-		}*/
+		}
 	}
 	
 	/**
