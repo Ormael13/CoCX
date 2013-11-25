@@ -94,11 +94,31 @@ consequatur aut perferendis doloribus asperiores repellat.
 	//addButton(9, "Back", debugPane)
 }
 
+/*
+
+	
+
+	
+
+*/
 
 function eventTester():void {
 	outputText("", true);
 	mainView.showTestInputPanel();
-	//mainView.eventTestInput.text = "Paste test event text here.";
+	mainView.eventTestInput.text = <![CDATA[
+
+
+[screen startup |
+
+"Paste test event text here."
+
+[button demonSheilaEncounter | Call]
+[button exit | Exit ]
+]
+
+]]>;
+
+	;
 	simpleChoices("Proceed",eventTesterGo,"",0,"",0,"",0,"Back",eventTesterExit);
 }
 
