@@ -530,7 +530,7 @@
 			//registerClassAlias("cockClass", cockClass);
 
 			//Invert shit
-			invertGo();
+			//invertGo();
 			//Hide sprites
 			mainView.hideSprite();
 			//Hide up/down arrows

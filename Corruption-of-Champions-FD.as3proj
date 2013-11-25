@@ -23,14 +23,14 @@
     <option accessible="False" />
     <option advancedTelemetry="False" />
     <option allowSourcePathOverlap="False" />
-    <option benchmark="False" />
+    <option benchmark="True" />
     <option es="False" />
     <option inline="False" />
     <option locale="" />
     <option loadConfig="" />
     <option optimize="True" />
     <option omitTraces="True" />
-    <option showActionScriptWarnings="True" />
+    <option showActionScriptWarnings="False" />
     <option showBindingWarnings="True" />
     <option showInvalidCSS="True" />
     <option showDeprecationWarnings="True" />
@@ -43,7 +43,7 @@
     <option linkReport="" />
     <option loadExterns="" />
     <option staticLinkRSL="True" />
-    <option additional="" />
+    <option additional="-show-actionscript-warnings=false&#xA;-show-binding-warnings=false&#xA;-show-unused-type-selector-warnings=false" />
     <option compilerConstants="" />
     <option minorVersion="" />
   </build>
@@ -54,6 +54,7 @@
   <!-- SWC Libraries -->
   <libraryPaths>
     <element path="lib\bin\MainView.swc" />
+    <element path="lib\bin\ScrollPane.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
