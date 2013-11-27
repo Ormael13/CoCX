@@ -18,21 +18,26 @@ package classes
 		private var _primaryKey:int;
 		private var _secondaryKey:int;
 		
+		private var _index:int;
+		
 		/**
 		 * Define a new bindable control method with "Unbound" keys.
-		 * 
-		 * @param	func	The function closure used by this BoundControlMethod
-		 * @param	name	The friendly name used for this BoundControlMethod
-		 * @param	desc	A Description of what the BoundControlMethod does
+		 * 	
+		 * @param	func			The function closure used by this BoundControlMethod
+		 * @param	name			The friendly name used for this BoundControlMethod
+		 * @param	desc			A Description of what the BoundControlMethod does
+		 * @param 	primaryKey		The primary bound key code
+		 * @param	secondarykey 	The secondary bound key code
 		 */
-		public function BoundControlMethod(func:Function, name:String, desc:String) 
+		public function BoundControlMethod(func:Function, name:String, desc:String, index:int, primaryKey:int = -1, secondaryKey:int = -1) 
 		{
 			_funcToCall = func;
 			_shortName = name;
 			_descript = desc;
+			_index = index;
 			
-			_primaryKey = -1;
-			_secondaryKey = -1;
+			_primaryKey = primaryKey;
+			_secondaryKey = secondaryKey;
 		}
 		
 		/**
@@ -55,7 +60,7 @@ package classes
 			return _descript;
 		}
 		
-		public function get ExeFunc():Function
+		public function get Func():Function
 		{
 			return _funcToCall;
 		}
@@ -78,6 +83,11 @@ package classes
 		public function set SecondaryKey(keyCode:int):void
 		{
 			_secondaryKey = keyCode;
+		}
+		
+		public function get Index():int
+		{
+			return _index;
 		}
 	}
 
