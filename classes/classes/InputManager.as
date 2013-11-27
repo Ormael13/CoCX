@@ -8,10 +8,14 @@ package classes
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.text.TextField;
+	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 	import flash.display.MovieClip;
 	import flash.utils.describeType;
 	import flash.ui.Keyboard;
+	import flash.utils.describeType;
+	import flash.utils.getDefinitionByName;
+	import flash.utils.getQualifiedClassName;
 	
 	/**
 	 * Generic input manager
@@ -22,26 +26,50 @@ package classes
 	 */
 	public class InputManager 
 	{
-		private var _stage:Stage;
+		// Declaring some consts for clarity when using some of the InputManager methods
+		public static const PRIMARYKEY:Boolean = true;
+		public static const SECONDARYKEY:Boolean = false;
+		public static const NORMALCONTROL:Boolean = false;
+		public static const CHEATCONTROL:Boolean = true;
+		public static const UNBOUNDKEY:int = -1;
 		
-		private var _keyDict:Dictionary;
+		private var _stage:Stage;
+		private var _debug:Boolean;
 
+		private var _defaultControlMethods:Object = new Object();
+		private var _defaultAvailableControlMethods:int = 0;
+		private var _defaultKeysToControlMethods:Object = new Object();
+		
+		// Basically, an associative list of Names -> Control Methods
+		// TODO: Actually conver this into being associative
 		private var _controlMethods:Object = new Object();
 		private var _availableControlMethods:int = 0;
 
+		// A list of cheat control methods that we can throw incoming keycodes against at will
 		private var _cheatControlMethods:Object = new Object();
 		private var _availableCheatControlMethods:int = 0;
 		
+		// The primary lookup method for finding what method an incoming keycode should belong too
 		private var _keysToControlMethods:Object = new Object();
+		
+		// Visual shit
 		private var _mainView:MainView;
-
 		private var _mainText:TextField;
 		private var _mainTextScollBar:UIScrollBar;
 		
+		// A new UI element that we can embed buttons into to facilitate key rebinding
 		private var _bindingPane:BindingPane;
 		
-		public function InputManager(stage:Stage)
+		// A flag to determine if we're listening for keyCodes to execute, or keyCodes to bind a method against
+		private var _bindingMode:Boolean;
+		private var _bindingFunc:String;
+		private var _bindingSlot:Boolean;
+		
+		public function InputManager(stage:Stage, debug:Boolean = true)
 		{
+			_bindingMode = false;
+			_debug = debug;
+			
 			_stage = stage;
 			_mainView = _stage.getChildByName("mainView") as MainView;
 			_availableControlMethods = 0;
@@ -52,26 +80,44 @@ package classes
 			_mainText = (_stage.getChildByName("mainView") as MovieClip).mainText as TextField;
 			_mainTextScollBar = (_stage.getChildByName("mainView") as MovieClip).scrollBar as UIScrollBar;
 			
-			_bindingPane = new BindingPane(_mainText.x, _mainText.y, _mainText.width, _mainText.height);
-			
-			this.PopulateKeyboardDict();
+			_bindingPane = new BindingPane(this, _mainText.x, _mainText.y, _mainText.width, _mainText.height);
 		}
 		
-		private function PopulateKeyboardDict():void
+		public function ListenForNewBind(funcName:String, isPrimary:Boolean = true):void
 		{
-			var keyDescriptions:XML = describeType(Keyboard);
-			var keyNames:XMLList = keyDescriptions..constant.@name;
-			
-			_keyDict = new Dictionary();
-			
-			for (var i:int = 0; i < keyNames.length(); i++)
+			if (_debug)
 			{
-				_keyDict[Keyboard[keyNames[i]]] = keyNames[i];
+				var slot:String = "";
+				
+				if (isPrimary)
+				{
+					slot = "Primary";
+				}
+				else
+				{
+					slot = "Secondary";
+				}
+				
+				trace("Listening for a new " + slot + " bind for " + funcName);
 			}
+			
+			_bindingMode = true;
+			_bindingFunc = funcName;
+			_bindingSlot = isPrimary;
+			
+			_mainText.htmlText = "<b>Hit the key that you want to bind " + funcName + " to!</b>";
+			HideBindingPane();
+		}
+		
+		public function StopListenForNewBind():void
+		{
+			_bindingMode = false;
+			DisplayBindingPane();
 		}
 		
 		// Add a new action that can be bound to keys -- this will (mostly) be static I guess
 		// Tempted to make this private and init all of the functors we want in the constructor for the manager
+		// but that would require arguing with getting access to the function calls we need to bind
 		public function AddBindableControl(name:String, desc:String, func:Function, isCheat:Boolean = false):void
 		{
 			if (isCheat)
@@ -86,18 +132,67 @@ package classes
 			}
 		}
 		
-		public function BindKeyToControl(keyCode:int, funcName:String):void
+		// Bind either the primary or secondary binding for the control method to a given keycode
+		public function BindKeyToControl(keyCode:int, funcName:String, isPrimary:Boolean = true):void
 		{
 			for (var i:int = 0; i < _availableControlMethods; i++)
 			{
+				// Find the method we want to bind the incoming key to
 				if (funcName == _controlMethods[i].Name)
 				{
-					_keysToControlMethods[keyCode] = _controlMethods[i];
-					return;
+					// Check if the incoming key is already bound to *something* and if it is, remove the bind.
+					this.RemoveExistingKeyBind(keyCode);
+					
+					// If we're binding the primary key of the method...
+					if (isPrimary)
+					{
+						// If the primary key of the method is already bound, removing the existing bind
+						if (_controlMethods[i].PrimaryKey != InputManager.UNBOUNDKEY)
+						{
+							delete _keysToControlMethods[_controlMethods[i].PrimaryKey];
+						}
+						
+						// Add the new bind
+						_keysToControlMethods[keyCode] = _controlMethods[i];
+						_controlMethods[i].PrimaryKey = keyCode;
+						return;
+					}
+					// We're doing the secondary key of the method
+					else
+					{
+						// If the secondary key is already bound, remove the existing bind
+						if (_controlMethods[i].SecondaryKey != InputManager.UNBOUNDKEY)
+						{
+							delete _keysToControlMethods[_controlMethods[i].SecondaryKey];
+						}
+						
+						// Add the new bind
+						_keysToControlMethods[keyCode] = _controlMethods[i];
+						_controlMethods[i].SecondaryKey = keyCode;
+						return;
+					}
 				}
 			}
 			
 			trace("Failed to bind control method [" + funcName + "] to keyCode [" + keyCode + "]");
+		}
+		
+		// Remove an existing key from BoundControlMethods, if present, and shuffle the remaining key as appropriate
+		private function RemoveExistingKeyBind(keyCode:int):void
+		{
+			// If the key is already bound to a method, remove it from that method
+			if (_keysToControlMethods[keyCode] != null)
+			{
+				if (_keysToControlMethods[keyCode].PrimaryKey == keyCode)
+				{
+					_keysToControlMethods[keyCode].PrimaryKey = _keysToControlMethods[keyCode].SecondaryKey;
+					_keysToControlMethods[keyCode].SecondaryKey = InputManager.UNBOUNDKEY;
+				}
+				else if (_keysToControlMethods[keyCode].SecondaryKey == keyCode)
+				{
+					_keysToControlMethods[keyCode].SecondaryKey = InputManager.UNBOUNDKEY;
+				}
+			}
 		}
 		
 		// Core handler we attach to the stage to do our event/control processing
@@ -116,8 +211,18 @@ package classes
 				return;
 			}
 			
-			// Made it this far, process the key and call the relevant (if any) function
-			this.ExecuteKeyCode(e.keyCode);
+			// If we're not in binding mode, listen for key inputs to act on
+			if (_bindingMode == false)
+			{
+				// Made it this far, process the key and call the relevant (if any) function
+				this.ExecuteKeyCode(e.keyCode);
+			}
+			// Otherwise, we're listening for a new keycode from the player
+			else
+			{
+				BindKeyToControl(e.keyCode, _bindingFunc, _bindingSlot);
+				StopListenForNewBind();
+			}
 		}
 		
 		private function ExecuteKeyCode(keyCode:int):void
@@ -135,18 +240,24 @@ package classes
 			}
 		}
 		
+		/**
+		 * Hide the mainText object and scrollbar, ensure the binding ScrollPane is up to date with the latest
+		 * data and then show the binding scrollpane.
+		 */
 		public function DisplayBindingPane():void
 		{
 			_mainText.visible = false;
 			_mainTextScollBar.visible = false;
 			
 			_bindingPane.functions = this.GetAvailableFunctions();
-			_bindingPane.binds = this.GetBoundKeyCodesAsDisplayArray(_bindingPane.functions);
 			_bindingPane.ListBindingOptions();
 			
 			_stage.addChild(_bindingPane);
 		}
 		
+		/**
+		 * Hide the binding ScrollPane, and re-display the mainText object + Scrollbar.
+		 */
 		public function HideBindingPane():void
 		{
 			_mainText.visible = true;
@@ -154,45 +265,33 @@ package classes
 			_stage.removeChild(_bindingPane);
 		}
 		
+		/**
+		 * Register the current methods, and their associated bindings, as the defaults.
+		 * TODO: Finish this shit off
+		 */
+		public function RegisterDefaults():void
+		{
+
+		}
+		
+		/**
+		 * Reset the bound keys to the defaults previously registered.
+		 */
+		public function ResetToDefaults():void
+		{
+
+		}
+
 		public function GetAvailableFunctions():Array
 		{
 			var funcNames:Array = new Array();
 			
 			for (var i:int = 0; i < _availableControlMethods; i++)
 			{
-				funcNames.push(_controlMethods[i].Name);
+				funcNames.push(_controlMethods[i]);
 			}
 			
 			return funcNames;
-		}
-		
-		public function GetBoundKeyCodesAsDisplayArray(functions:Array):Array
-		{
-			// Gonna pack keycodes as a series of pairs, a pair for each function
-			var keyCodes:Array = new Array();
-			
-			for (var i:int = 0; i < functions.length; i++)
-			{
-				var funcKeys:Array = GetBoundKeyCodesForFunction(functions[i]);
-				
-				if (funcKeys.length == 0)
-				{
-					funcKeys.push("Unbound");
-					funcKeys.push("Unbound");
-				}
-				else if (funcKeys.length == 1)
-				{
-					funcKeys.push("Unbound");
-				}
-				else if (funcKeys.length > 2)
-				{
-					funcKeys.splice(2, funcKeys.length - 1);
-				}
-				
-				keyCodes = keyCodes.concat(funcKeys);
-			}
-			
-			return keyCodes;
 		}
 		
 		public function GetBoundKeyCodesForFunction(funcName:String):Array
@@ -208,38 +307,6 @@ package classes
 			}
 			
 			return keyCodes;
-		}
-		
-		public function GenerateControlMenuText():String
-		{
-			var result:String = "";
-			
-			var funcNames:Array = GetAvailableFunctions();
-			
-			for (var i:int = 0; i < funcNames.length; i++)
-			{
-				var keyCodes:Array = GetBoundKeyCodesForFunction(funcNames[i]);
-				
-				result += "<b>" + funcNames[i] + ":</b>";
-				
-				if (keyCodes.length == 0)
-				{
-					result += " Unbound"
-				}
-				else
-				{
-					for (var k:int = 0; k < keyCodes.length; k++)
-					{
-						var charRep:String;
-						
-						result += " " + _keyDict[keyCodes[k]];
-					}
-				}
-				
-				result += "\n";
-			}
-			
-			return result;
 		}
 	}
 	
