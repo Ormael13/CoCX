@@ -41,15 +41,15 @@ package classes
 		private var _defaultKeysToControlMethods:Object = new Object();
 		
 		// Basically, an associative list of Names -> Control Methods
-		// TODO: Actually conver this into being associative
 		private var _controlMethods:Object = new Object();
 		private var _availableControlMethods:int = 0;
 
 		// A list of cheat control methods that we can throw incoming keycodes against at will
-		private var _cheatControlMethods:Object = new Object();
+		private var _cheatControlMethods:Array = new Array();
 		private var _availableCheatControlMethods:int = 0;
 		
 		// The primary lookup method for finding what method an incoming keycode should belong too
+		// Sparse array of keyCode -> BoundControlMethod.Name, used to look into _controlMethods
 		private var _keysToControlMethods:Object = new Object();
 		
 		// Visual shit
@@ -65,6 +65,11 @@ package classes
 		private var _bindingFunc:String;
 		private var _bindingSlot:Boolean;
 		
+		/**
+		 * Init the InputManager. Attach the keyboard event listener to the stage and prepare the subobjects for usage.
+		 * @param	stage	Reference to core stage on which to add display objects
+		 * @param	debug	Emit debugging trace statements
+		 */
 		public function InputManager(stage:Stage, debug:Boolean = true)
 		{
 			_bindingMode = false;
@@ -83,6 +88,14 @@ package classes
 			_bindingPane = new BindingPane(this, _mainText.x, _mainText.y, _mainText.width, _mainText.height);
 		}
 		
+		/**
+		 * Mode toggle - keyboard events recieved by the input manager will be used to associated the incoming keycode
+		 * with a new bound control method, removing the keycode from *other* bindings and updating data as appropriate.
+		 * Displays a message indicating the player should do the needful.
+		 * @param	funcName	BoundControlMethod name that they key is going to be associated with. Set by a button
+		 * 						callback function generated in BindingPane
+		 * @param	isPrimary	Specifies if the incoming bind will replace/set the primary or secondary bind for a control.
+		 */
 		public function ListenForNewBind(funcName:String, isPrimary:Boolean = true):void
 		{
 			if (_debug)
@@ -109,36 +122,51 @@ package classes
 			HideBindingPane();
 		}
 		
+		/**
+		 * Mode toggle - return to normal keyboard event listening mechanics. Shows the binding display again.
+		 */
 		public function StopListenForNewBind():void
 		{
 			_bindingMode = false;
 			DisplayBindingPane();
 		}
 		
-		// Add a new action that can be bound to keys -- this will (mostly) be static I guess
-		// Tempted to make this private and init all of the functors we want in the constructor for the manager
-		// but that would require arguing with getting access to the function calls we need to bind
+		/**
+		 * Add a new action that can be associated with incoming key codes.
+		 * This will mostly be static after first being initialized, this pattern was just easier to capture references
+		 * to the required game functions without having to make the InputManager truely global or doing any namespacing
+		 * shenanigans.
+		 * The closure can be declared with the rest of the game code, in the namespace where the functions are available,
+		 * and still work inside this object.
+		 * @param	name		Name to associate the BoundControlMethod with
+		 * @param	desc		A description of the activity that the BoundControlMethod does. (Unused, but implemented)
+		 * @param	func		A function object that defines the BoundControlMethods action
+		 * @param	isCheat		Differentiates between a cheat method (not displayed in the UI) and normal controls.
+		 */
 		public function AddBindableControl(name:String, desc:String, func:Function, isCheat:Boolean = false):void
 		{
 			if (isCheat)
 			{
-				_cheatControlMethods[_availableCheatControlMethods] = new BoundControlMethod(func, name, desc);
-				_availableCheatControlMethods++;
+				_cheatControlMethods.push(new BoundControlMethod(func, name, desc, _availableCheatControlMethods++));
 			}
 			else
 			{
-				_controlMethods[_availableControlMethods] = new BoundControlMethod(func, name, desc);
-				_availableControlMethods++;
+				_controlMethods[name] = new BoundControlMethod(func, name, desc, _availableControlMethods++);
 			}
 		}
 		
-		// Bind either the primary or secondary binding for the control method to a given keycode
+		/**
+		 * Set either the primary or secondary binding for a target control method to a given keycode.
+		 * @param	keyCode		The keycode to bind the method to.
+		 * @param	funcName	The name of the associated BoundControlMethod
+		 * @param	isPrimary	Specifies the primary or secondary binding slot
+		 */
 		public function BindKeyToControl(keyCode:int, funcName:String, isPrimary:Boolean = true):void
 		{
-			for (var i:int = 0; i < _availableControlMethods; i++)
+			for (var key:String in _controlMethods)
 			{
 				// Find the method we want to bind the incoming key to
-				if (funcName == _controlMethods[i].Name)
+				if (funcName == key)
 				{
 					// Check if the incoming key is already bound to *something* and if it is, remove the bind.
 					this.RemoveExistingKeyBind(keyCode);
@@ -147,28 +175,28 @@ package classes
 					if (isPrimary)
 					{
 						// If the primary key of the method is already bound, removing the existing bind
-						if (_controlMethods[i].PrimaryKey != InputManager.UNBOUNDKEY)
+						if (_controlMethods[key].PrimaryKey != InputManager.UNBOUNDKEY)
 						{
-							delete _keysToControlMethods[_controlMethods[i].PrimaryKey];
+							delete _keysToControlMethods[_controlMethods[key].PrimaryKey];
 						}
 						
 						// Add the new bind
-						_keysToControlMethods[keyCode] = _controlMethods[i];
-						_controlMethods[i].PrimaryKey = keyCode;
+						_keysToControlMethods[keyCode] = key;
+						_controlMethods[key].PrimaryKey = keyCode;
 						return;
 					}
 					// We're doing the secondary key of the method
 					else
 					{
 						// If the secondary key is already bound, remove the existing bind
-						if (_controlMethods[i].SecondaryKey != InputManager.UNBOUNDKEY)
+						if (_controlMethods[key].SecondaryKey != InputManager.UNBOUNDKEY)
 						{
-							delete _keysToControlMethods[_controlMethods[i].SecondaryKey];
+							delete _keysToControlMethods[_controlMethods[key].SecondaryKey];
 						}
 						
 						// Add the new bind
-						_keysToControlMethods[keyCode] = _controlMethods[i];
-						_controlMethods[i].SecondaryKey = keyCode;
+						_keysToControlMethods[keyCode] = key;
+						_controlMethods[key].SecondaryKey = keyCode;
 						return;
 					}
 				}
@@ -177,28 +205,37 @@ package classes
 			trace("Failed to bind control method [" + funcName + "] to keyCode [" + keyCode + "]");
 		}
 		
-		// Remove an existing key from BoundControlMethods, if present, and shuffle the remaining key as appropriate
+		/**
+		 * Remove an existing key from a BoundControlMethod, if present, and shuffle the remaining key as appropriate
+		 * @param	keyCode		The keycode to remove.
+		 */
 		private function RemoveExistingKeyBind(keyCode:int):void
 		{
 			// If the key is already bound to a method, remove it from that method
 			if (_keysToControlMethods[keyCode] != null)
 			{
-				if (_keysToControlMethods[keyCode].PrimaryKey == keyCode)
+				if (_controlMethods[_keysToControlMethods[keyCode]].PrimaryKey == keyCode)
 				{
-					_keysToControlMethods[keyCode].PrimaryKey = _keysToControlMethods[keyCode].SecondaryKey;
-					_keysToControlMethods[keyCode].SecondaryKey = InputManager.UNBOUNDKEY;
+					_controlMethods[_keysToControlMethods[keyCode]].PrimaryKey = _controlMethods[_keysToControlMethods[keyCode]].SecondaryKey;
+					_controlMethods[_keysToControlMethods[keyCode]].SecondaryKey = InputManager.UNBOUNDKEY;
 				}
-				else if (_keysToControlMethods[keyCode].SecondaryKey == keyCode)
+				else if (_controlMethods[_keysToControlMethods[keyCode]].SecondaryKey == keyCode)
 				{
-					_keysToControlMethods[keyCode].SecondaryKey = InputManager.UNBOUNDKEY;
+					_controlMethods[_keysToControlMethods[keyCode]].SecondaryKey = InputManager.UNBOUNDKEY;
 				}
 			}
 		}
 		
-		// Core handler we attach to the stage to do our event/control processing
+		/**
+		 * The core event handler we attach to the stage to capture incoming keyboard events.
+		 * @param	e		KeyboardEvent data
+		 */
 		public function KeyHandler(e:KeyboardEvent):void
 		{
-			trace("Got key input " + e.keyCode);
+			if (_debug)
+			{
+				trace("Got key input " + e.keyCode);
+			}
 			
 			// Ignore key input during certain phases of gamestate
 			if (_mainView.eventTestInput.x == 207.5)
@@ -225,16 +262,23 @@ package classes
 			}
 		}
 		
+		/**
+		 * Execute the BoundControlMethod's wrapped function associated with the given KeyCode
+		 * @param	keyCode		The KeyCode for which we wish to execute the BoundControlMethod for.
+		 */
 		private function ExecuteKeyCode(keyCode:int):void
 		{
 			if (_keysToControlMethods[keyCode] != null)
 			{
-				trace("Attempting to exec func [" + _keysToControlMethods[keyCode].Name + "]");
+				if (_debug)
+				{
+					trace("Attempting to exec func [" + _controlMethods[_keysToControlMethods[keyCode]].Name + "]");
+				}
 				
-				_keysToControlMethods[keyCode].ExecFunc();
+				_controlMethods[_keysToControlMethods[keyCode]].ExecFunc();
 			}
 			
-			for (var i:int = 0; i < _availableCheatControlMethods; i++)
+			for (var i:int = 0; i < _cheatControlMethods.length; i++)
 			{
 				_cheatControlMethods[i].ExecFunc(keyCode);
 			}
@@ -271,7 +315,25 @@ package classes
 		 */
 		public function RegisterDefaults():void
 		{
-
+			for (var key:String in _controlMethods)
+			{
+				_defaultControlMethods[key] = new BoundControlMethod(
+					_controlMethods[key].Func,
+					_controlMethods[key].Name,
+					_controlMethods[key].Description,
+					_controlMethods[key].Index,
+					_controlMethods[key].PrimaryKey,
+					_controlMethods[key].SecondaryKey);
+			}
+			
+			// Elbullshito mode -- 126 is the maximum keycode in as3 we're likely to see
+			for (var i:int = 0; i <= 126; i++)
+			{
+				if (_keysToControlMethods[i] != undefined)
+				{
+					_defaultKeysToControlMethods[i] = _keysToControlMethods[i];
+				}
+			}
 		}
 		
 		/**
@@ -279,34 +341,39 @@ package classes
 		 */
 		public function ResetToDefaults():void
 		{
-
+			for (var key:String in _controlMethods)
+			{
+				_controlMethods[key] = new BoundControlMethod(
+					_defaultControlMethods[key].Func,
+					_defaultControlMethods[key].Name,
+					_defaultControlMethods[key].Description,
+					_defaultControlMethods[key].Index,
+					_defaultControlMethods[key].PrimaryKey,
+					_defaultControlMethods[key].SecondaryKey);
+			}
+			
+			// Elbullshito mode -- 126 is the maximum keycode in as3 we're likely to see
+			for (var i:int = 0; i <= 126; i++)
+			{
+				if (_defaultKeysToControlMethods[i] != undefined)
+				{
+					_keysToControlMethods[i] = _defaultKeysToControlMethods[i];
+				}
+			}
 		}
 
 		public function GetAvailableFunctions():Array
 		{
-			var funcNames:Array = new Array();
+			var funcs:Array = new Array();
 			
-			for (var i:int = 0; i < _availableControlMethods; i++)
+			for (var key:String in _controlMethods)
 			{
-				funcNames.push(_controlMethods[i]);
+				funcs.push(_controlMethods[key]);
 			}
 			
-			return funcNames;
-		}
-		
-		public function GetBoundKeyCodesForFunction(funcName:String):Array
-		{
-			var keyCodes:Array = new Array();
+			funcs.sortOn( ["Index"], [Array.NUMERIC] );
 			
-			for (var i:String in _keysToControlMethods)
-			{
-				if (funcName == _keysToControlMethods[i].Name)
-				{
-					keyCodes.push(int(i));
-				}
-			}
-			
-			return keyCodes;
+			return funcs;
 		}
 	}
 	
