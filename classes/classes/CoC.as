@@ -298,7 +298,7 @@
 			model.mobile = mobile;
 
 			images = new ImageManager(stage);
-			inputManager = new InputManager(stage);
+			inputManager = new InputManager(stage, true);
 			include "../../includes/ControlBindings.as";
 			
 			//} endregion
