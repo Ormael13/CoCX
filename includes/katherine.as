@@ -1283,7 +1283,7 @@ function giveKatOralPenisWingWang():void {
 
 		outputText("The deed is done and you straighten your back, winking at the cat-girl.  Katherine purrs as she jumps down next to you and pulls you in for a kiss.  \"<i>You were amazing!</i>\" she exclaims, still short on breath.", false);
 		//([If demon tongue]
-		if(player.tongueType == 5) outputText("  She runs her fingers along your lips.  \"<i>I think I might be falling in love with the monster inside that pretty cave.</i>\"", false);
+		if(player.tongueType == 2) outputText("  She runs her fingers along your lips.  \"<i>I think I might be falling in love with the monster inside that pretty cave.</i>\"", false);
 		else outputText("  \"<i>I hope that if I ever get to repay the favor, I can do good as well as you.</i>\"", false);
 		outputText("\n\n", false);
 

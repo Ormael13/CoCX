@@ -2999,11 +2999,20 @@ const LOW_STANDARDS_FOR_ALL:int                                       = 2997;
 const HYPER_HAPPY:int                                                 = 2998;
 const UNKNOWN_FLAG_NUMBER_02999:int                                   = 2999; // ------------------------- Jojo Debug Flag?
 
+// The comment structure in the following section is very specific, as the comment contents
+// are actually parsed into regexes that are used by my refactoring tool to refactor
+// the relevant descriptions.
+
+// Description constants
+
+// skinType
 const SKIN_TYPE_PLAIN:int                                             =    0;
 const SKIN_TYPE_FUR:int                                               =    1;
 const SKIN_TYPE_SCALES:int                                            =    2;
 const SKIN_TYPE_GOO:int                                               =    3;
+const SKIN_TYPE_UNDEFINED:int                                         =    4;
 
+// faceType
 const FACE_HUMAN:int                                                  =    0;
 const FACE_HORSE:int                                                  =    1;
 const FACE_DOG:int                                                    =    2;
@@ -3022,15 +3031,18 @@ const FACE_RACCOON:int                                                =   14;
 const FACE_BUCKTEETH:int                                              =   15;
 const FACE_MOUSE:int                                                  =   16;
 
+// tongueType
 const TONUGE_HUMAN:int                                                =   0;
 const TONUGE_SNAKE:int                                                =   1;
 const TONUGE_DEMONIC:int                                              =   2;
 const TONUGE_DRACONIC:int                                             =   3;
 
+// eyeType
 const EYES_HUMAN:int                                                  =   0;
 const EYES_FOUR_SPIDER_EYES:int                                       =   1;
 const EYES_BLACK_EYES_SAND_TRAP:int                                   =   2;
 
+// earType
 const EARS_HUMAN:int                                                  =   0;
 const EARS_HORSE:int                                                  =   1;
 const EARS_DOG:int                                                    =   2;
@@ -3045,6 +3057,7 @@ const EARS_DRAGON:int                                                 =  10;
 const EARS_RACCOON:int                                                =  11;
 const EARS_MOUSE:int                                                  =  12;
 
+// hornType
 const HORNS_NONE:int                                                  =   0;
 const HORNS_DEMON:int                                                 =   1;
 const HORNS_COW_MINOTAUR:int                                          =   2;
@@ -3052,13 +3065,16 @@ const HORNS_DRACONIC_X2:int                                           =   3;
 const HORNS_DRACONIC_X4_12_INCH_LONG:int                              =   4;
 const HORNS_ANTLERS:int                                               =   5;
 
+// antennae
 const ANTENNAE_NONE:int                                               =   0;
 const ANTENNAE_BEE:int                                                =   2;
 
+// armType
 const ARM_TYPE_HUMAN:int                                              =   0;
 const ARM_TYPE_HARPY:int                                              =   1;
 const ARM_TYPE_SPIDER:int                                             =   2;
 
+// tailType
 const TAIL_TYPE_NONE:int                                              =   0;
 const TAIL_TYPE_HORSE:int                                             =   1;
 const TAIL_TYPE_DOG:int                                               =   2;
@@ -3077,10 +3093,12 @@ const TAIL_TYPE_DRACONIC:int                                          =  14;
 const TAIL_TYPE_RACCOON:int                                           =  15;
 const TAIL_TYPE_MOUSE:int                                             =  16;
 
-// wings:
+// wingType
 const WING_TYPE_NONE:int                                              =   0;
 const WING_TYPE_BEE_LIKE_SMALL:int                                    =   1;
 const WING_TYPE_BEE_LIKE_LARGE:int                                    =   2;
+const WING_TYPE_HARPY:int                                             =   4;
+const WING_TYPE_IMP:int                                               =   5;
 const WING_TYPE_BAT_LIKE_TINY:int                                     =   6;
 const WING_TYPE_BAT_LIKE_LARGE:int                                    =   7;
 const WING_TYPE_SHARK_FIN:int                                         =   8;
@@ -3089,7 +3107,7 @@ const WING_TYPE_DRACONIC_SMALL:int                                    =  10;
 const WING_TYPE_DRACONIC_LARGE:int                                    =  11;
 const WING_TYPE_GIANT_DRAGONFLY:int                                   =  12;
 
-// LowerBodyTypes
+// lowerBody
 const LOWER_BODY_TYPE_HUMAN:int                                       =   0;
 const LOWER_BODY_TYPE_HOOFED:int                                      =   1;
 const LOWER_BODY_TYPE_DOG:int                                         =   2;
@@ -3111,7 +3129,7 @@ const LOWER_BODY_TYPE_FOX:int                                         =  17;
 const LOWER_BODY_TYPE_DRAGON:int                                      =  18;
 const LOWER_BODY_TYPE_RACCOON:int                                     =  19;
 
-// PiercingTypes
+// piercingtypesNOPEDISABLED
 const PIERCING_TYPE_NONE:int                                          =   0;
 const PIERCING_TYPE_STUD:int                                          =   1;
 const PIERCING_TYPE_RING:int                                          =   2;
@@ -3119,25 +3137,27 @@ const PIERCING_TYPE_LADDER:int                                        =   3;
 const PIERCING_TYPE_HOOP:int                                          =   4;
 const PIERCING_TYPE_CHAIN:int                                         =   5;
 
-// VaginaTypes
+// vaginatypesNOPEDISABLED
 const VAGINA_TYPE_HUMAN:int                                           =   0;
 const VAGINA_TYPE_BLACK_SAND_TRAP:int                                 =   5;
 
-// VaginalWetnessLevels
+// vaginalWetness
 const VAGINA_WETNESS_DRY:int                                          =   0;
+const VAGINA_WETNESS_NORMAL:int                                       =   1;
 const VAGINA_WETNESS_WET:int                                          =   2;
 const VAGINA_WETNESS_SLICK:int                                        =   3;
 const VAGINA_WETNESS_DROOLING:int                                     =   4;
 const VAGINA_WETNESS_SLAVERING:int                                    =   5;
 
-// VaginalLoosenessLevels
+// vaginalLooseness
 const VAGINA_LOOSENESS_TIGHT:int                                      =   0;
 const VAGINA_LOOSENESS_NORMAL:int                                     =   1;
 const VAGINA_LOOSENESS_LOOSE:int                                      =   2;
 const VAGINA_LOOSENESS_GAPING:int                                     =   3;
 const VAGINA_LOOSENESS_GAPING_WIDE:int                                =   4;
+const VAGINA_LOOSENESS_LEVEL_CLOWN_CAR:int                            =   5;
 
-// AnalWetnessLevels
+// analwetnesslevelsNOPEDISABLED
 const ANAL_WETNESS_DRY:int                                            =   0;
 const ANAL_WETNESS_NORMAL:int                                         =   1;
 const ANAL_WETNESS_MOIST:int                                          =   2;
@@ -3145,13 +3165,15 @@ const ANAL_WETNESS_SLIMY:int                                          =   3;
 const ANAL_WETNESS_DROOLING:int                                       =   4;
 const ANAL_WETNESS_SLIME_DROOLING:int                                 =   5;
 
-// AnalLoosenessLevels
+// analloosenesslevelsNOPEDISABLED
 const ANAL_LOOSENESS_VIRGIN:int                                       =   0;
 const ANAL_LOOSENESS_TIGHT:int                                        =   1;
 const ANAL_LOOSENESS_NORMAL:int                                       =   2;
 const ANAL_LOOSENESS_LOOSE:int                                        =   3;
 const ANAL_LOOSENESS_STRETCHED:int                                    =   4;
 const ANAL_LOOSENESS_GAPING:int                                       =   5;
+
+// End Description constants
 
 /*
 
