@@ -372,9 +372,9 @@ package classes
 			
 			for (var key:String in _controlMethods)
 			{
+				trace(key);
 				funcs.push(_controlMethods[key]);
 			}
-			
 			funcs.sortOn( ["Index"], [Array.NUMERIC] );
 			
 			return funcs;
@@ -427,7 +427,7 @@ package classes
 		{
 			var controls:Object = new Object();
 			
-			for (var key:String in _controlMethods);
+			for (var key:String in _controlMethods)
 			{
 				trace(key);
 				var ctrlObj = new Object();
