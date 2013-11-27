@@ -18,7 +18,7 @@ function trapLevel(adjustment:Number = 0):Number {
 function encounterASandTarp():void {
 	clearOutput();
 	spriteSelect(97);
-	if(flags[SANDTRAP_LOSS_REPEATS] >= 2 && player.eyeType == 2 && player.wingType == 12) {
+	if(flags[SANDTRAP_LOSS_REPEATS] >= 2 && player.eyeType == EYES_BLACK_EYES_SAND_TRAP && player.wingType == WING_TYPE_GIANT_DRAGONFLY) {
 		sandTrapBadEnd();
 		return;
 	}
@@ -192,7 +192,7 @@ function sandTrapWait():void {
 }
 
 function sandtrapmentLoss(clear:Boolean = false):void {
-	if(flags[SANDTRAP_LOSS_REPEATS] >= 2 && player.eyeType == 2 && player.wingType == 12) {
+	if(flags[SANDTRAP_LOSS_REPEATS] >= 2 && player.eyeType == EYES_BLACK_EYES_SAND_TRAP && player.wingType == WING_TYPE_GIANT_DRAGONFLY) {
 		loseLastFightWithSandTrap();
 		return;
 	}
@@ -225,7 +225,7 @@ function pcBeatsATrap():void {
 	var bikiniTits:int = 0;
 	if(player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = 3988;
 	//Requirements: Player is naga with tail and fangs, has met desert naga as naga at least once
-	if(player.isNaga() && player.hasStatusAffect("Naga") >= 0 && player.gender > 0 && player.faceType == 5) nagaThreeSome = 3825;
+	if(player.isNaga() && player.hasStatusAffect("Naga") >= 0 && player.gender > 0 && player.faceType == FACE_SNAKE_FANGS) nagaThreeSome = 3825;
 	
 	//Requires: Penis and str requirement
 	if(player.hasCock() && player.str >= 60) putYourDickInIt = 3826;
@@ -622,7 +622,7 @@ function nagaThreesomeWithSandTrap():void {
 		//14 inches or more: 
 		else {
 			outputText("\n\nYour " + cockDescript(0) + " is bigger than what the sandtrap's mouth can accommodate, and it isn't long before you are beginning to push into the creature's tight throat.  It lavishes its oil and saliva onto your straining cock, lying its head back and opening its mouth as wide as it can to aid you in your task, and soon you are ");
-			if(player.skinType == 0) outputText("beading sweat, ");
+			if(player.skinType == SKIN_TYPE_PLAIN) outputText("beading sweat, ");
 			outputText("pistoning into its submissive opening with fervor, ");
 			if(player.balls > 0) outputText("your " + ballsDescriptLight() + " swinging heavily in front of the sandtrap's nose, ");
 			outputText("pushing as much of your lubricated dick down the creature's gullet as you can.");

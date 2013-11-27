@@ -3,7 +3,7 @@
 function infestedHellhoundEncounter():void {
 	outputText("", true);
 	outputText("A low snarl vibrates through your body, ", false);
-	if(player.lowerBody == 8) outputText("making your jello-like body jiggle", false);
+	if(player.lowerBody == LOWER_BODY_TYPE_GOO) outputText("making your jello-like body jiggle", false);
 	else outputText("rattling your teeth", false);
 	outputText(".  Peeking fearfully over your shoulder, you see the black-furred form of a hell-hound emerging from behind a rock.  Its eyes narrow as its gaze locks onto your " + assholeOrPussy() + ", a pair of black, shiny dog-cocks emerge underneath him, dangling freely.  His balls look bloated and distended, the skin around them crawling and wriggling.  A few worms drip from its over-sized peckers, crawling on the ground under the infested beast.\n\n", false);
 	outputText("Somehow you know this thing isn't going to let you just walk away.", false);
@@ -132,7 +132,7 @@ function infestedHellhoundLossRape():void {
 		return;
 	}
 	//[HAS PUSSY AND NO DICK BIG ENOUGH TO BE INFECTED]
-	else if(player.hasVagina() && player.biggestCockArea() < 40 && player.lowerBody != 3) {
+	else if(player.hasVagina() && player.biggestCockArea() < 40 && player.lowerBody != LOWER_BODY_TYPE_NAGA) {
 		//(LUST) 
 		if(player.lust > 99) {
 			outputText("No amount of shame from the act of submitting to such a beast can overpower the furnace of lust raging in your loins.  ", false);

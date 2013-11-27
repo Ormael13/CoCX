@@ -894,7 +894,7 @@ function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.femininity = saveFile.data.femininity;
 		//EYES
 		if (saveFile.data.eyeType == undefined)
-			player.eyeType = 0;
+			player.eyeType = EYES_HUMAN;
 		else
 			player.eyeType = saveFile.data.eyeType;
 		//BEARS
@@ -927,7 +927,7 @@ function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		else
 			player.gills = saveFile.data.gills;
 		if (saveFile.data.armType == undefined)
-			player.armType = 0;
+			player.armType = ARM_TYPE_HUMAN;
 		else
 			player.armType = saveFile.data.armType;
 		player.hairLength = saveFile.data.hairLength;
@@ -942,70 +942,70 @@ function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		if (player.skinDesc.indexOf("smooth") != -1)
 		{
 			player.skinAdj = "smooth";
-			if (player.skinType == 0)
+			if (player.skinType == SKIN_TYPE_PLAIN)
 				player.skinDesc = "skin";
-			if (player.skinType == 1)
+			if (player.skinType == SKIN_TYPE_FUR)
 				player.skinDesc = "fur";
-			if (player.skinType == 2)
+			if (player.skinType == SKIN_TYPE_SCALES)
 				player.skinDesc = "scales";
-			if (player.skinType == 3)
+			if (player.skinType == SKIN_TYPE_GOO)
 				player.skinDesc = "goo";
 		}
 		if (player.skinDesc.indexOf("thick") != -1)
 		{
 			player.skinAdj = "thick";
-			if (player.skinType == 0)
+			if (player.skinType == SKIN_TYPE_PLAIN)
 				player.skinDesc = "skin";
-			if (player.skinType == 1)
+			if (player.skinType == SKIN_TYPE_FUR)
 				player.skinDesc = "fur";
-			if (player.skinType == 2)
+			if (player.skinType == SKIN_TYPE_SCALES)
 				player.skinDesc = "scales";
-			if (player.skinType == 3)
+			if (player.skinType == SKIN_TYPE_GOO)
 				player.skinDesc = "goo";
 		}
 		if (player.skinDesc.indexOf("rubber") != -1)
 		{
 			player.skinAdj = "rubber";
-			if (player.skinType == 0)
+			if (player.skinType == SKIN_TYPE_PLAIN)
 				player.skinDesc = "skin";
-			if (player.skinType == 1)
+			if (player.skinType == SKIN_TYPE_FUR)
 				player.skinDesc = "fur";
-			if (player.skinType == 2)
+			if (player.skinType == SKIN_TYPE_SCALES)
 				player.skinDesc = "scales";
-			if (player.skinType == 3)
+			if (player.skinType == SKIN_TYPE_GOO)
 				player.skinDesc = "goo";
 		}
 		if (player.skinDesc.indexOf("latex") != -1)
 		{
 			player.skinAdj = "latex";
-			if (player.skinType == 0)
+			if (player.skinType == SKIN_TYPE_PLAIN)
 				player.skinDesc = "skin";
-			if (player.skinType == 1)
+			if (player.skinType == SKIN_TYPE_FUR)
 				player.skinDesc = "fur";
-			if (player.skinType == 2)
+			if (player.skinType == SKIN_TYPE_SCALES)
 				player.skinDesc = "scales";
-			if (player.skinType == 3)
+			if (player.skinType == SKIN_TYPE_GOO)
 				player.skinDesc = "goo";
 		}
 		if (player.skinDesc.indexOf("slimey") != -1)
 		{
 			player.skinAdj = "slimey";
-			if (player.skinType == 0)
+			if (player.skinType == SKIN_TYPE_PLAIN)
 				player.skinDesc = "skin";
-			if (player.skinType == 1)
+			if (player.skinType == SKIN_TYPE_FUR)
 				player.skinDesc = "fur";
-			if (player.skinType == 2)
+			if (player.skinType == SKIN_TYPE_SCALES)
 				player.skinDesc = "scales";
-			if (player.skinType == 3)
+			if (player.skinType == SKIN_TYPE_GOO)
 				player.skinDesc = "goo";
 		}
 		player.faceType = saveFile.data.faceType;
 		if (saveFile.data.tongueType == undefined)
-			player.tongueType = 0;
+			player.tongueType = TONUGE_HUMAN;
 		else
 			player.tongueType = saveFile.data.tongueType;
 		if (saveFile.data.earType == undefined)
-			player.earType = 0;
+			player.earType = EARS_HUMAN;
 		else
 			player.earType = saveFile.data.earType;
 		if (saveFile.data.earValue == undefined)
@@ -1013,12 +1013,12 @@ function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		else
 			player.earValue = saveFile.data.earValue;
 		if (saveFile.data.antennae == undefined)
-			player.antennae = 0;
+			player.antennae = ANTENNAE_NONE;
 		else
 			player.antennae = saveFile.data.antennae;
 		player.horns = saveFile.data.horns;
 		if (saveFile.data.hornType == undefined)
-			player.hornType = 0;
+			player.hornType = HORNS_NONE;
 		else
 			player.hornType = saveFile.data.hornType;
 		player.wingDesc = saveFile.data.wingDesc;

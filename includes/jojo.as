@@ -29,11 +29,11 @@ function vaginaOrDicksOrCrotch():String {
 	return "FUKK: ERROR";
 }
 function mouthMuzzle():String {
-	if(player.faceType >= 1) return "muzzle";
+	if(player.faceType >= FACE_HORSE) return "muzzle";
 	return "mouth";
 }
 function faceMuzzle():String {
-	if(player.faceType >= 1) return "muzzle";
+	if(player.faceType >= FACE_HORSE) return "muzzle";
 	return "face";
 }
 function tentacleJojo():Boolean {
@@ -298,9 +298,9 @@ function useTentacleJojo():void {
 	else {
 		//With cunt
 		if(player.hasVagina()) {
-			if(player.vaginas[0].vaginalLooseness >= 4) outputText(" practically falling into oversized cum-receptacles", false);
+			if(player.vaginas[0].vaginalLooseness >= VAGINA_LOOSENESS_GAPING_WIDE) outputText(" practically falling into oversized cum-receptacles", false);
 			else {
-				if(player.vaginas[0].vaginalWetness >= 3) outputText(" sliding inside easily thanks to your copious lubrication", false);
+				if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLICK) outputText(" sliding inside easily thanks to your copious lubrication", false);
 				else outputText("forcing their way inside your " + vaginaDescript(0) + " and " + assholeDescript(), false);
 			}
 		}
@@ -368,8 +368,8 @@ function useTentacleJojo():void {
 		if(player.pregnancyIncubation == 0) outputText("mildly pregnant", false);
 		else outputText("even more pregnant", false);
 		outputText(".  Your body spasms around them, locked in the throes of orgasm", false);
-		if(player.vaginas[0].vaginalWetness == 5) outputText(", and soaks him with a wave of puss juice.  ", false);
-		else if(player.vaginas[0].vaginalWetness >= 3) outputText(", as your drooling cunt forms a slick puddle.  ", false);
+		if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(", and soaks him with a wave of puss juice.  ", false);
+		else if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLICK) outputText(", as your drooling cunt forms a slick puddle.  ", false);
 		else outputText(".  ", false)
 		//(If big clit being sucked – 
 		if(player.cockTotal() <= 2 && player.balls == 0) {
@@ -908,7 +908,7 @@ function jojoRape():void {
 			outputText("The mousy once-monk kneels as you disrobe, his will nearly broken by desire.  ", false);
 			outputText("You touch his head softly, guiding him to your " + vaginaDescript(0) + ", lips breaking into a grin as he licks his mouth with desire.  You gasp at the feeling of his wet nose as it bumps against your groin, shooting thunderbolts of pleasure from your " + clitDescript() + ".  He attacks with his tongue, thrusting strikes practically attacking your " + vaginaDescript(0) + " with his long, practically serpentine, tongue.  You shudder, knowing a visible sign of corruption when you see it, moisture slicking the mouse's face.\n\n", false);
 			outputText("Jojo moans into your folds as his " + eCockDescript(0) + " brushes against your calf.  You get a devilish idea, ", false);
-			if(player.lowerBody == 8) outputText("and push his " + eCockDescript(0) + " in between folds of slime, sandwiching it in a mass of slippery, gooey tightness.  Holding his shoulder for balance, you slowly squeeze him, gently milking out small dribbles of pre.  He redoubles his efforts, burying his nose into your " + vaginaDescript(0) + ", tongue swirling over your folds and around your " + clitDescript() + ".  For every effort on his part you step up your own, squeezing and stroking him with your goo, doing your best to impart a fetish for being masturbated with someone's lower body on his slowly warping mind.  You feel a hot wetness in your slime, and it grows slicker and wetter every second. Jojo's cum drips out of you, glazing your jello-like form white.  ", false);
+			if(player.lowerBody == LOWER_BODY_TYPE_GOO) outputText("and push his " + eCockDescript(0) + " in between folds of slime, sandwiching it in a mass of slippery, gooey tightness.  Holding his shoulder for balance, you slowly squeeze him, gently milking out small dribbles of pre.  He redoubles his efforts, burying his nose into your " + vaginaDescript(0) + ", tongue swirling over your folds and around your " + clitDescript() + ".  For every effort on his part you step up your own, squeezing and stroking him with your goo, doing your best to impart a fetish for being masturbated with someone's lower body on his slowly warping mind.  You feel a hot wetness in your slime, and it grows slicker and wetter every second. Jojo's cum drips out of you, glazing your jello-like form white.  ", false);
 			else outputText("and push his " + eCockDescript(0) + " with your " + player.foot() + ", sandwiching it under one " + player.foot() + " and on top of the other.  Holding his shoulder for balance, you slowly squeeze him, gently milking out small dribbles of pre.  He redoubles his efforts, burying his nose into your " + vaginaDescript(0) + ", tongue swirling over your folds and around your " + clitDescript() + ".  For every effort on his part you step up your own, squeezing and stroking him with your " + player.feet() + ", doing your best to impart a " + player.foot() + " fetish on his slowly warping mind.  You feel a hot wetness on your " + player.feet() + ", and they grow slicker and wetter every second. Jojo's cum drips out from between them, glazing them white.  ", false);
 			if(player.averageVaginalWetness() <= 1) outputText("You clamp down on his muzzle as you writhe in orgasm.  ", false);
 			if(player.averageVaginalWetness() > 1 && player.averageVaginalWetness() <= 3) outputText("Your legs trap his muzzle in your " + vaginaDescript(0) + " as orgasm wracks your body.  ", false);
@@ -1020,8 +1020,8 @@ function jojoRape():void {
 			}
 			if(player.biggestLactation() >= 1.5 && player.biggestTitSize() > 2 && player.mostBreastsPerRow() >= 2 && player.breastRows.length >= 1) outputText("Every sensual peak within you is mirrored with small spurts of milk from your nipples.  It eventually trickles down to Jojo's tongue, spurring his efforts on.  ", false);
 			outputText("The mousey gets more and more in to eating your box, making it harder and harder to stave off an orgasm.  You wrap ", false);
-			if(player.lowerBody == 3) outputText("your coils ", false);
-			else if(player.lowerBody == 8) outputText("your jiggling goo ", false);
+			if(player.lowerBody == LOWER_BODY_TYPE_NAGA) outputText("your coils ", false);
+			else if(player.lowerBody == LOWER_BODY_TYPE_GOO) outputText("your jiggling goo ", false);
 			else outputText("your thighs ", false);
 			outputText("around his head and quiver with passion, ", false);
 			if(player.averageVaginalWetness() <= 1) outputText("squeezing him tightly into your " + vaginaDescript(0) + ".", false);

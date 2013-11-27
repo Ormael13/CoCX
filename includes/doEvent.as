@@ -223,7 +223,7 @@ function doEvent(eventNo):void
 			return;
 		}
 		outputText("Suddenly you're grabbed from behind, your arms held together by a single massive, furry hand. A heavy, snorting breath brushes the top of your head. You turn your neck to see a massive bull-man. His impressive dick presses ", false);
-		if (player.lowerBody == 4)
+		if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR)
 			outputText("against your buttocks", false);
 		else
 			outputText("into the small of your back", false);
@@ -249,7 +249,7 @@ function doEvent(eventNo):void
 			outputText("The bull-man roughly grabs your hair and repositions himself to press against your asshole, slowly building the pressure until suddenly, the flared head pops into you.  ", false);
 			buttChange(100, true);
 		}
-		if (player.lowerBody == 4)
+		if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR)
 			outputText("Grabbing your buttocks with his huge hands, he lifts your buttocks, and violently drive his shaft as far into you as he can manage. You cry out, your whole lower body in fire, as your rear legs dangle helplessly. Unhindered by your weight, he uses your lower body as a cock-sleeve, as you try your best to keep your front legs from buckling.  ", false);
 		else
 		{
@@ -531,8 +531,8 @@ function doEvent(eventNo):void
 		//Mention that clit doesn't grow if your big enough.
 		else
 			outputText("In time it returns to it's normal size, losing all the extra volume.", false);
-		if (player.vaginas[0].vaginalLooseness == 0)
-			player.vaginas[0].vaginalLooseness = 1;
+		if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_TIGHT)
+			player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
 		slimeFeed();
 		if (gameState > 0)
 			eventParser(5007);
@@ -650,17 +650,17 @@ function doEvent(eventNo):void
 			{
 				outputText("well suited to your ", false);
 				//determine size
-				if (player.vaginas[0].vaginalLooseness == 0)
+				if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_TIGHT)
 					temp2 = 3;
-				if (player.vaginas[0].vaginalLooseness == 1)
+				if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_NORMAL)
 					temp2 = 6.5;
-				if (player.vaginas[0].vaginalLooseness == 2)
+				if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LOOSE)
 					temp2 = 26;
-				if (player.vaginas[0].vaginalLooseness == 3)
+				if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING)
 					temp2 = 60;
-				if (player.vaginas[0].vaginalLooseness == 4)
+				if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE)
 					temp2 = 115;
-				if (player.vaginas[0].vaginalLooseness == 5)
+				if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LEVEL_CLOWN_CAR)
 					temp2 = 175;
 			}
 			//Small
@@ -668,17 +668,17 @@ function doEvent(eventNo):void
 			{
 				outputText("a little small for your ", false);
 				//determine size
-				if (player.vaginas[0].vaginalLooseness == 0)
+				if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_TIGHT)
 					temp2 = 0;
-				if (player.vaginas[0].vaginalLooseness == 1)
+				if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_NORMAL)
 					temp2 = 4;
-				if (player.vaginas[0].vaginalLooseness == 2)
+				if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LOOSE)
 					temp2 = 16;
-				if (player.vaginas[0].vaginalLooseness == 3)
+				if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING)
 					temp2 = 40;
-				if (player.vaginas[0].vaginalLooseness == 4)
+				if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE)
 					temp2 = 65;
-				if (player.vaginas[0].vaginalLooseness == 5)
+				if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LEVEL_CLOWN_CAR)
 					temp2 = 100;
 			}
 			//Large
@@ -686,17 +686,17 @@ function doEvent(eventNo):void
 			{
 				outputText("almost too big to cram in your ", false);
 				//determine size
-				if (player.vaginas[0].vaginalLooseness == 0)
+				if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_TIGHT)
 					temp2 = 6;
-				if (player.vaginas[0].vaginalLooseness == 1)
+				if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_NORMAL)
 					temp2 = 9;
-				if (player.vaginas[0].vaginalLooseness == 2)
+				if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LOOSE)
 					temp2 = 34;
-				if (player.vaginas[0].vaginalLooseness == 3)
+				if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING)
 					temp2 = 78;
-				if (player.vaginas[0].vaginalLooseness == 4)
+				if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE)
 					temp2 = 135;
-				if (player.vaginas[0].vaginalLooseness == 5)
+				if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LEVEL_CLOWN_CAR)
 					temp2 = 210;
 			}
 			//resume secksings
@@ -1935,7 +1935,7 @@ function doEvent(eventNo):void
 		outputText("", true);
 		outputText("You look at the thing in front of you and sigh, your " + multiCockDescriptLight() + " and " + vaginaDescript(0) + " dripping with fluids. With a nervous sigh you step into the underwear looking device and slip it up your legs, the cold metal feeling so good on your " + player.skinDesc + ", sending a rush of feelings up your body. You slip your " + cockDescript(0) + " down and into a hole on the front of the belt, the extra length sticking out on the other side of it. Underneath the hole and right above your pussy is another metal square with what feels like a small nub on the inside rubbing against your clit. Shivering from the feeling of it, you stay there for a moment, waiting in anticipation. Finally, you reach down to the side of the belt and flick the switch to the on position.\n\n", false);
 		outputText("The belt whirs to life, shaking on your waist, sending jolts of pleasure through your clit as the small inside nub hits it. \"<i>Ohh...</i>\" Suddenly, the ring around you cock vibrates and then tightens hard around your cock, the belt sinking onto your body and locking in place. Worry sets in instantly as you try to wiggle and take it off, but it is no use. You see something black bubble from the edges of the metal, worried even more that it might be some sort of acid. It begins to creep across your skin at a disturbing rate, going down your " + player.legs() + " and encasing them in the blackness, wrapping your cock, ", false);
-		if (player.tailType > 0)
+		if (player.tailType > TAIL_TYPE_NONE)
 			outputText("covering up your tail, ", false);
 		outputText("and then going up your body, covering your " + allBreastsDescript() + " and neck. The only part of your body unclad by the suit is your head. The blackness feels slick and smooth, almost cold, a strange type of feeling washes over you until your realize that it is a rubber suit.\n\n", false);
 		outputText("Before you can do anything else, the belt activates again and the latex covering of your " + cockDescript(0) + " begins to tighten and pulse around the meat, warming up to feel like a virgin cunt. A moan is dragged from your lips as it begins to ripple and pulse, simulating the feeling of fucking a tight hole as the entire suit molds itself to your body. Before you can get too used to the feeling of the suit milking your cock, the nub that had been teasing your clit suddenly expands and pushes out, the slick feeling of the latex pushing into your pussy.  The hardened black latex splits your tunnel and spreads you wide as it goes in deep. Your eyes widen for a moment as both stop, and then your world explodes in a flash of pleasure. The hardened lump begins to piston in and out of your " + vaginaDescript(0) + ", vibrating wildly as a lump grows in on top in precisely the right spot to rub back and forth on your g-spot.\n\n", false);

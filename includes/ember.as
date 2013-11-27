@@ -1392,31 +1392,31 @@ function emberTFs():void {
 		player.cocks[select].knotMultiplier = 1.3;
 	}
 	//Gain Dragon Head 
-	if(changes < changeLimit && rand(3) == 0 && player.faceType != 12 && flags[EMBER_ROUNDFACE] == 0) {
+	if(changes < changeLimit && rand(3) == 0 && player.faceType != FACE_DRAGON && flags[EMBER_ROUNDFACE] == 0) {
 		outputText("\n\nYou scream as your face is suddenly twisted; your facial bones begin rearranging themselves under your skin, restructuring into a long, narrow muzzle.  Spikes of agony rip through your jaws as your teeth are brutally forced from your gums, giving you new rows of fangs - long, narrow and sharp.  Your jawline begins to sprout strange growths; small spikes grow along the underside of your muzzle, giving you an increasingly inhuman visage.\n\nFinally, the pain dies down, and you look for a convenient puddle to examine your changed appearance.\n\nYour head has turned into a reptilian muzzle, with small barbs on the underside of the jaw.  <b>You now have a dragon's face.</b>");
-		player.faceType = 12;
+		player.faceType = FACE_DRAGON;
 		changes++;
 	}
 	//-Existing horns become draconic, max of 4, max length of 1'
-	if(player.hornType != 4 && changes < changeLimit && rand(5) == 0) 
+	if(player.hornType != HORNS_DRACONIC_X4_12_INCH_LONG && changes < changeLimit && rand(5) == 0) 
 	{
 		//No dragon horns yet.
-		if(player.hornType != 3 && player.hornType != 4) 
+		if(player.hornType != HORNS_DRACONIC_X2 && player.hornType != HORNS_DRACONIC_X4_12_INCH_LONG) 
 		{
 			//Already have horns
 			if(player.horns > 0) 
 			{
 				//High quantity demon horns
-				if(player.hornType == 1 && player.horns > 4) 
+				if(player.hornType == HORNS_DEMON && player.horns > 4) 
 				{
 					outputText("\n\nYour horns condense, twisting around each other and merging into larger, pointed protrusions.  By the time they finish you have four draconic-looking horns, each about twelve inches long.", false);
 					player.horns = 12;
-					player.hornType = 4;
+					player.hornType = HORNS_DRACONIC_X4_12_INCH_LONG;
 				}
 				else 
 				{
 					outputText("\n\nYou feel your horns changing and warping, and reach back to touch them.  They have a slight curve and a gradual taper.  They must look something like the horns the dragons in your village's legends always had.", false);
-					player.hornType = 3;
+					player.hornType = HORNS_DRACONIC_X2;
 					if(player.horns > 13) 
 					{
 						outputText("  The change seems to have shrunken the horns, they're about a foot long now.", false);
@@ -1431,7 +1431,7 @@ function emberTFs():void {
 				//-If no horns, grow a pair
 				outputText("\n\nWith painful pressure, the skin on the sides of your forehead splits around two tiny nub-like horns.  They're angled back in such a way as to resemble those you saw on the dragons in your village's legends.  A few inches of horn sprout from your head before stopping.  <b>You have about four inches of dragon-like horn.</b>", false);
 				player.horns = 4;
-				player.hornType = 3;
+				player.hornType = HORNS_DRACONIC_X2;
 
 				changes++;
 			}
@@ -1439,7 +1439,7 @@ function emberTFs():void {
 		//ALREADY DRAGON
 		else 
 		{
-			if(player.hornType == 3) 
+			if(player.hornType == HORNS_DRACONIC_X2) 
 			{
 				if(player.horns < 12) 
 				{
@@ -1460,38 +1460,38 @@ function emberTFs():void {
 				else {
 					//--Next horn growth adds second row and brings length up to 12\"
 					outputText("\n\nA second row of horns erupts under the first, and though they are narrower, they grow nearly as long as your first row before they stop.  A sense of finality settles over you.  <b>You have as many horns as a lizan can grow.</b>", false);
-					player.hornType = 4;
+					player.hornType = HORNS_DRACONIC_X4_12_INCH_LONG;
 					changes++;
 				}
 			}
 		}	
 	}
 	//Gain Dragon Ears 
-	if(changes < changeLimit && rand(3) == 0 && player.earType != 10) {
-		player.earType = 10;
+	if(changes < changeLimit && rand(3) == 0 && player.earType != EARS_DRAGON) {
+		player.earType = EARS_DRAGON;
 		outputText("\n\nA prickling sensation suddenly fills your ears; unpleasant, but hardly painful.  It grows and grows until you can't stand it any more, and reach up to scratch at them.  To your surprise, you find them melting away like overheated candles.  You panic as they fade into nothingness, leaving you momentarily deaf and dazed, stumbling around in confusion.  Then, all of a sudden, hearing returns to you.  Gratefully investigating, you find you now have a pair of reptilian ear-holes, one on either side of your head.  A sudden pain strikes your temples, and you feel bony spikes bursting through the sides of your head, three on either side, which are quickly sheathed in folds of skin to resemble fins.  With a little patience, you begin to adjust these fins just like ears to aid your hearing.\n\n<b>You now have dragon ears!</b>");
 		changes++;
 	}
 	//Gain Dragon Tongue 
-	if(changes < changeLimit && rand(3) == 0 && player.tongueType != 3) {
+	if(changes < changeLimit && rand(3) == 0 && player.tongueType != TONUGE_DRACONIC) {
 		outputText("\n\nYour tongue suddenly falls out of your mouth and begins undulating as it grows longer.  For a moment it swings wildly, completely out of control; but then settles down and you find you can control it at will, almost like a limb.  You're able to stretch it to nearly 4 feet and retract it back into your mouth to the point it looks like a normal human tongue.  <b>You now have a draconic tongue.</b>");
-		player.tongueType = 3;
+		player.tongueType = TONUGE_DRACONIC;
 		changes++;
 		//Note: This type of tongue should be eligible for all things you can do with demon tongue... Dunno if it's best attaching a boolean just to change the description or creating a whole new tongue type.
 	}
 	//(Pending Tongue Masturbation Variants; if we ever get around to doing that.)
 	//Gain Dragon Scales 
-	if(player.skinType != 2 && changes < changeLimit && rand(3) == 0) {
+	if(player.skinType != SKIN_TYPE_SCALES && changes < changeLimit && rand(3) == 0) {
 		outputText("\n\nPrickling discomfort suddenly erupts all over your body, like every last inch of your skin has suddenly developed pins and needles.  You scratch yourself, hoping for relief; and when you look at your hands you notice small fragments of your " + player.skinFurScales() + " hanging from your fingers.  Nevertheless you continue to scratch yourself, and when you're finally done, you look yourself over. New shield-like scales have grown to replace your peeled off " + player.skinFurScales() + ".  They are smooth and look nearly as tough as iron. <b>Your body is now covered in shield-shaped dragon scales.</b>");
-		player.skinType = 2;
+		player.skinType = SKIN_TYPE_SCALES;
 		player.skinAdj = "";
 		player.skinDesc = "scales";
 		//def bonus of scales
 	}
 	//Gain Dragon Legs 
-	if(player.lowerBody != 18 && changes < changeLimit && rand(3) == 0) {
+	if(player.lowerBody != LOWER_BODY_TYPE_DRAGON && changes < changeLimit && rand(3) == 0) {
 		//(if drider)
-		if(player.lowerBody == 16) 
+		if(player.lowerBody == LOWER_BODY_TYPE_DRIDER_LOWER_BODY) 
 			outputText("\n\nA disquieting feeling ripples through your arachnid abdomen, and you find yourself losing control of your body from the waist down.  Your spidery legs flail madly as your abdomen visibly swells, chitin cracking ominously as the pressure builds up inside of you... and then explodes!  You wipe the gore from your face in disgust, wondering why you feel no pain.  Rolling over, you see that, caked with spider-slime, you now have a new pair of legs, human-like save for the scales and the bestial paws that serve as feet.  <b>You now have dragon feet.</b>");
 		//(If naga)
 		else if(player.isNaga()) {
@@ -1502,7 +1502,7 @@ function emberTFs():void {
 			outputText("\n\nA strange tingling sensation fills you, and you watch as your gooey blob of a body begins to ripple and shudder; you try to make it stop, but you can't control it.  Before your eyes, it shapes itself into the appearance of legs, the colored slime growing denser and thicker, the surface membrane texturing itself to look like scales.  Before you've quite realized what's happened, the slime has set like water freezing, leaving you with humanoid legs once again, though tipped with claws and very reptilian in appearance.  <b>You now have dragon feet.</b>");
 		}
 		//(If hoofed legs)
-		else if(player.lowerBody == 1) {
+		else if(player.lowerBody == LOWER_BODY_TYPE_HOOFED) {
 			outputText("\n\nYou bellow in pain as your legs break and reform and your hooves seem to suddenly explode, the bones within twisting themselves into monstrous three-toed appendages, more like those of some terrible lizard-thing than anything else. <b>You now have dragon feet.</b>");
 		}
 		//(if centaur)
@@ -1513,16 +1513,16 @@ function emberTFs():void {
 		else {
 			outputText("\n\nYou scream in agony as you feel the bones in your feet suddenly break and restructure themselves, toes fusing together, bone swelling out of the merged masses of flesh.  When the pain is over, you realize that you still stand atop human-looking legs, but your feet have become like those of some bipedal reptilian killer, with powerful claws meant for gripping the ground. <b>You now have dragon feet.</b>");
 		}
-		player.lowerBody = 18;
+		player.lowerBody = LOWER_BODY_TYPE_DRAGON;
 		changes++;
 	}
 	//Gain Dragon Tail 
-	if(player.tailType != 14 && changes < changeLimit && rand(3) == 0) {
+	if(player.tailType != TAIL_TYPE_DRACONIC && changes < changeLimit && rand(3) == 0) {
 		//(If no tail)
-		if(player.tailType == 0) outputText("\n\nA sudden dull, throbbing pain in your " + buttDescript() + " forces your hands to it; you can feel an ominous lump over your tail bone, swelling bigger and bigger with every heartbeat.  All of a sudden, it seems to explode, jutting out and around until it hovers near your ankles, the skin under your flesh hard and scaly.  <b>You now have a dragon tail flicking at your back, flexible as a whip.</b>");
+		if(player.tailType == TAIL_TYPE_NONE) outputText("\n\nA sudden dull, throbbing pain in your " + buttDescript() + " forces your hands to it; you can feel an ominous lump over your tail bone, swelling bigger and bigger with every heartbeat.  All of a sudden, it seems to explode, jutting out and around until it hovers near your ankles, the skin under your flesh hard and scaly.  <b>You now have a dragon tail flicking at your back, flexible as a whip.</b>");
 		//(If tail)
 		else outputText("\n\nAn icy sensation fills your behind as your tail suddenly goes curiously numb.  Twisting your head around, you watch as it melts and transforms into a reptilian appendage, long and flexible, its tip adorned with wicked spikes.  <b>You now have a dragon tail.</b>");
-		player.tailType = 14;
+		player.tailType = TAIL_TYPE_DRACONIC;
 		changes++
 	}
 /*
@@ -1537,22 +1537,22 @@ Hit: Your tail slams against it/" + emberMF("him","her") + " with brutal force, 
 Miss: Unfortunately, you lose your sense of depth as you whirl, and the tip swings harmlessly through the air in front of your target.
 */
 	//Grow Dragon Wings 
-	if(player.wingType != 11 && changes < changeLimit && rand(3) == 0) {
-		if(player.wingType == 0) {
+	if(player.wingType != WING_TYPE_DRACONIC_LARGE && changes < changeLimit && rand(3) == 0) {
+		if(player.wingType == WING_TYPE_NONE) {
 			outputText("\n\nYou double over as waves of pain suddenly fill your shoulderblades; your back feels like it's swelling, flesh and muscles ballooning.  A sudden sound of tearing brings with it relief and you straighten up.  Upon your back now sit small, leathery wings, not unlike a bat's. <b>You now have small dragon wings.  They're not big enough to fly with, but they look adorable.</b>");
-			player.wingType = 10;
+			player.wingType = WING_TYPE_DRACONIC_SMALL;
 			player.wingDesc = "small, draconic";
 		}
 		//(If Small Dragon Wings Present)
-		else if(player.wingType == 10) {
+		else if(player.wingType == WING_TYPE_DRACONIC_SMALL) {
 			outputText("\n\nA not-unpleasant tingling sensation fills your wings, almost but not quite drowning out the odd, tickly feeling as they swell larger and stronger.  You spread them wide - they stretch further than your arms do - and beat them experimentally, the powerful thrusts sending gusts of wind, and almost lifting you off your feet.  <b>You now have fully-grown dragon wings, capable of winging you through the air elegantly!</b>");
-			player.wingType = 11;
+			player.wingType = WING_TYPE_DRACONIC_LARGE;
 			player.wingDesc = "large, draconic";
 		}
 		//(If other wings present)
 		else {
 			outputText("\n\nA sensation of numbness suddenly fills your wings.  When it dies away, they feel... different. Looking back, you realize that they have been replaced by new, small wings, ones that you can only describe as draconic.  <b>Your wings have changed into dragon wings.</b>");
-			player.wingType = 10;
+			player.wingType = WING_TYPE_DRACONIC_SMALL;
 			player.wingDesc = "small, draconic";
 		}
 		changes++;
@@ -1683,22 +1683,22 @@ function emberIsAnEggFactory():void {
 		outputText("\n\nYou tell her that you do, though you can't resist commenting that she's moving a little faster than usual.  Ember looks at you through half-lidded eyes.  \"<i>And you're not moving fast enough.</i>\"  With a grin at her unusual good humor, you approach her and take up station between her thighs.  You ask if she wants your hands or your tongue to 'help' her this time.");
 		outputText("\n\n\"<i>J-just get started... before I change my mind about this...</i>\"");
 		outputText("\n\nWell, no point leaving her hanging around.  You let your tongue roll out");
-		if(player.tongueType > 0) outputText(" and out... and out...");
+		if(player.tongueType > TONUGE_HUMAN) outputText(" and out... and out...");
 		outputText(" and then lean forward to give her a great, wet, sloppy lick, straight up the center of her pussy");
 		//(E.Herm: 
 		if(flags[EMBER_GENDER] == 3) outputText(" not stopping until you have slurped your way to the very tip of her cock");
 		outputText(", savoring the unmistakable taste of her intimate juices.");
 		outputText("\n\nEmber gasps and moans, leaning back to voice her pleasure to the skies; her legs quiver and her claws dig into the wood; her wings spread, beating gently to help her balance herself.  \"<i>D-don't stop...</i>\" she pleads.");
 		outputText("\n\nYou don't intend to, and continue to lick, playing your tongue as deeply into her depths as possible, ");
-		if(player.tongueType > 0) outputText("which is quite far indeed, ");
+		if(player.tongueType > TONUGE_HUMAN) outputText("which is quite far indeed, ");
 		outputText("caressing and stroking and playing all the tricks you can possibly think of to orally pleasure your draconic lover.  From the amount of juices beginning to seep onto your lapping tongue");
 		if(flags[EMBER_GENDER] == 3) outputText(" and dribbling down her painfully stiff dick");
 		outputText(", you think you're doing rather well.");
 		outputText("\n\nWhen your nose bumps into her little button of pleasure Ember nearly jumps; she closes her thighs around your head, smothering you on her dripping vagina.");
-		if(player.tongueType > 0) outputText("  Right at this time, you feel something round and smooth on the tip of your tongue, gently spreading Ember's walls.  Realizing that this can only be her egg, you start trying to worm your long, sinuous tongue between it and her innermost walls, hoping to coax it out of her.");
+		if(player.tongueType > TONUGE_HUMAN) outputText("  Right at this time, you feel something round and smooth on the tip of your tongue, gently spreading Ember's walls.  Realizing that this can only be her egg, you start trying to worm your long, sinuous tongue between it and her innermost walls, hoping to coax it out of her.");
 		outputText("\n\n\"<i>It's coming!  Ah!  I'm coming!!</i>\" Ember screams, shaking with barely contained pleasure.  A flood of juices threaten to drown you, as Ember's legs hold you snug.");
 		if(flags[EMBER_GENDER] == 3) outputText("  Her cock throbs and pumps out long streams of cum to paint the ground around you two; marking it as your special place.");
-		if(player.tongueType > 0) outputText("\n\nYou can really feel her egg now, and do your best to wrap it tightly in coils of inhuman tongue.  Gently you pull and slide and wriggle it until it plops wetly out of its mother into your waiting hands; your tongue is strong and flexible, but you don't quite trust it to hold your prize aloft on its own.");
+		if(player.tongueType > TONUGE_HUMAN) outputText("\n\nYou can really feel her egg now, and do your best to wrap it tightly in coils of inhuman tongue.  Gently you pull and slide and wriggle it until it plops wetly out of its mother into your waiting hands; your tongue is strong and flexible, but you don't quite trust it to hold your prize aloft on its own.");
 		else outputText("\n\nYou can feel the shell of Ember's egg pressing against your tongue, and you abandon your licking to start probing gently with your fingers.  Under your careful guidance, the egg slips freely from Ember's body into your grasp.");
 		
 		outputText("\n\nEmber's legs finally relax enough to let you escape... but her body slowly leans over in your direction, until she finally gives and collapses on top of you. Luckily you manage to move the egg out of the way, saving it from the pile of pleasured dragon before both of you crash into a sprawled pile on the ground.  You shake your head and smile at Ember, teasing her about how easily she just melts into a pile of mush from a little pleasure.");
@@ -2513,7 +2513,7 @@ function suckEmberCock():void {
 	if(flags[EMBER_GENDER] == 3 && (flags[EMBER_ROUNDFACE] == 0 || flags[EMBER_INTERNAL_DICK] > 0)) {
 		outputText("  Struck by perverse inspiration, you manage to wriggle your tongue under the base of " + emberMF("his","her") + " cock and thrust it into " + emberMF("his","her") + " genital slit.  You guide it as deep into the strangely pussy-like orifice as you can, tickling and caressing.");
 		//(DemonTongue: 
-		if(player.tongueType > 0) outputText("  Your inhuman length slithers deeper and deeper inside, and you realize you can feel two rounded objects; " + emberMF("his","her") + " balls! You're actually touching the testicles that are normally locked away inside " + emberMF("his","her") + " body, except when " + emberMF("he","she") + " reaches " + emberMF("his","her") + " most aroused states...");
+		if(player.tongueType > TONUGE_HUMAN) outputText("  Your inhuman length slithers deeper and deeper inside, and you realize you can feel two rounded objects; " + emberMF("his","her") + " balls! You're actually touching the testicles that are normally locked away inside " + emberMF("his","her") + " body, except when " + emberMF("he","she") + " reaches " + emberMF("his","her") + " most aroused states...");
 	}
 	
 	outputText("\n\n\"<i>Ah!  M-more... touch me more...</i>\" Ember pleads, surrendering to pleasure at your hands.");
@@ -2856,7 +2856,7 @@ function slurpDraggieCunnies():void {
 	outputText("\n\nEmber's enjoyment is very apparent, as each time you even breathe over her little pleasure bud, Ember bucks against you; her vaginal walls contract in hopes of gripping your tongue and pulling it deeper inside her, but your saliva combined with the ever-flowing dragon juice keeps it slick enough that Ember doesn't have a chance in heaven of holding your tongue back.  \"<i>Hmm... Ah!  A little more to the left...</i>\" Ember directs you.");
 	
 	outputText("\n\nYour tongue bends with all of the ");
-	if(player.tongueType > 0) outputText("inhuman ");
+	if(player.tongueType > TONUGE_HUMAN) outputText("inhuman ");
 	outputText("flexibility you can muster, wriggling into the dragon's depths and trying to caress and stroke every last one of her most intimate places.  At one point in your exploration of Ember's quivering depths, you discover a special spot, and every time you make contact with that little spongy spot Ember rewards you with a buck and renewed gush of fluids.");
 	
 	outputText("\n\n\"<i>Ah!  If you keep doing this I'm going to- Oh!</i>\" Ember gasps, tongue lolling out as she loses herself in the pleasurable sensations you're oh-so-responsible for.  You continue to wriggle and undulate your tongue, stroking that special point with as much care as you can manage");
@@ -3206,7 +3206,7 @@ function getPenetratedByEmberLastSexSceneWoooo():void {
 	outputText("\n\nYou strip down until you are unabashedly naked, drinking in the look of stunned rapturous lust that Ember is giving you.  Playing your fingers gently across your upper arms, you pout and ask if " + emberMF("he","she") + "'s going to keep you waiting, enjoying your emotional control over the horny dragon.");
 	
 	outputText("\n\nEmber flinches, " + emberMF("his","her") + " trance broken.  \"<i>I... umm... fine!  Come here!</i>\"  Ember steps toward you.  You open your arms, ready to wrap " + emberMF("him","her") + " in a hug, but instead find yourself swept off of your feet.  The dragon grins wickedly at you before suddenly plunging into a ferocious kiss, " + emberMF("his","her") + " long tongue worming its way around ");
-	if(player.tongueType == 0) outputText("yours ");
+	if(player.tongueType == TONUGE_HUMAN) outputText("yours ");
 	else outputText("your own inhumanly sinuous muscle ");
 	outputText("and slithering almost into your throat.  " + emberMF("He","She") + " kisses you madly, even as " + emberMF("he","she") + " sinks to " + emberMF("his","her") + " knees and gently lays you out on the ground, clearly ready to start the sexing.");
 	if(player.hasCock()) outputText("  As if " + emberMF("his","her") + " hands caressing your cock weren't evidence of that.");
@@ -4455,10 +4455,10 @@ function penetrateWithEmber(clear:Boolean = true):void {
 	
 	outputText("\n\n\"<i>I'm happy you enjoy my body... but did you know I enjoy yours too?  And I enjoy it a... lot...</i>\"  She whispers into your ear, licking around it with her elongated tongue.  Her roaming hands find ");
 	
-	if(player.tailType > 0) outputText("the base of your tail, tugging lightly on it and stroking it for a moment, then her hands move on to ");
+	if(player.tailType > TAIL_TYPE_NONE) outputText("the base of your tail, tugging lightly on it and stroking it for a moment, then her hands move on to ");
 	outputText("your [butt], grabbing the ");
 	outputText("cheeks.  You wriggle appreciatively under her grip, making it clear she's not half bad at this herself.  The she-dragon giggles at your compliment, coiling her tail around your [legs].  \"<i>I haven't even started playing with you properly yet, my mate, and you're already excited...</i>\"  She clicks her tongue in mock reproval.  \"<i>You're such a pervert aren't you, [name]?  Lucky for us, you are <b>my</b> pervert, and I enjoy being played with a lot... so go ahead and toy with my body as much as you want.  I'll make sure to return the favor,</i>\" she purrs lovingly, sliding her hands back up your back, ");
-	if(player.wingType > 0) outputText("stopping momentarily to stroke along your " + player.wingDesc + " wings before continuing up and ");
+	if(player.wingType > WING_TYPE_NONE) outputText("stopping momentarily to stroke along your " + player.wingDesc + " wings before continuing up and ");
 	outputText("stopping at the back of your head.");
 
 	outputText("\n\nSlowly she guides you towards one of her erect nipples.  \"<i>");

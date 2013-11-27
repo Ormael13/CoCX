@@ -559,7 +559,7 @@ function tenderizeDatPigSloot():void {
 	outputText("\n\n\"<i>Oink...</i>\" she moans, lustily as you manhandle her backside. The dirty little slut! She likes it! Well, you're not one to deprive a sexy strumpet of her pleasure.");
 	
 	outputText("\n\nYou begin to rapid-fire spank her ass, alternating your strikes between her two cheeks. ");
-	if(player.tailType > 0) outputText("You even bring your tail from behind your back to join in, the unfamiliar texture causing the sausage slut to let out surprised, high-pitched squeaks. ");
+	if(player.tailType > TAIL_TYPE_NONE) outputText("You even bring your tail from behind your back to join in, the unfamiliar texture causing the sausage slut to let out surprised, high-pitched squeaks. ");
 	outputText("You notice the pigslut moving backwards, her ass being pushed into the air as she attempts to feel the full power of your spanking, her pussy spraying juices onto the soaked sheets.");
 	
 	outputText("\n\nYour hands are a blur as they play some unknown rhythm on her bouncing booty, as if they were acting on their own. The piggy slut has her hands clenching down on a nearby pillow, teeth gritted as you have your way with her colossal ass. Tears streak down onto the pillow, staining the fabric wet. The sight of her weeping sex is all you need to know to continue; the desperately oinking whore turns out to be a bit of a masochist...");

@@ -380,8 +380,8 @@ function MaraeIIStageII():void {
 		}
 		outputText("\n\n", false);
 		
-		if(player.vaginas[0].vaginalWetness < 2) outputText("Sticky wetness glistens between your thighs", false);
-		else if(player.vaginas[0].vaginalWetness < 4) outputText("Drops of feminine arousal run down your thighs", false);
+		if(player.vaginas[0].vaginalWetness < VAGINA_WETNESS_WET) outputText("Sticky wetness glistens between your thighs", false);
+		else if(player.vaginas[0].vaginalWetness < VAGINA_WETNESS_DROOLING) outputText("Drops of feminine arousal run down your thighs", false);
 		else outputText("Trails of viscous feminine fluid leak from your " + vaginaDescript(0), false);
 		outputText(", reminding you of your unused femsex.  Marae grunts underneath you, and while at first you assume it's from the penetration, the prodding of two cock-like protrusions at your lusty holes corrects your misguided assumptions.  You pull back and begin to fuck her in earnest, and with each long rock back, you can see she's grown tentacles from underneath her ass, like two prehensile tails.  They push forwards and spear you, arresting your movement while you try to cope with the sudden stretching of two of your orifices.  Warmth radiates from the twin intruders along with a slippery fullness.  They're pumping something inside you that tingles and makes " + sMultiCockDesc() + " bounce and drip.", false);
 		cuntChange(12,true,true,false);

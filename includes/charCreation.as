@@ -76,10 +76,10 @@ function newGameGo(e:MouseEvent = null):void {
 	player.HP = maxHP();
 	player.gems = flags[NEW_GAME_PLUS_BONUS_STORED_ITEMS];
 	player.hairLength = 5;
-	player.skinType = 0;
-	player.faceType = 0;
-	player.tailType = 0;
-	player.tongueType = 0;
+	player.skinType = SKIN_TYPE_PLAIN;
+	player.faceType = FACE_HUMAN;
+	player.tailType = TAIL_TYPE_NONE;
+	player.tongueType = TONUGE_HUMAN;
 	player.femininity = 50;
 	player.beardLength = 0;
 	player.beardStyle = 0;
@@ -100,7 +100,7 @@ function newGameGo(e:MouseEvent = null):void {
 	player.tallness = 0;
 	player.tailVenom = 0;
 	player.tailRecharge = 0;
-	player.wingType = 0;
+	player.wingType = WING_TYPE_NONE;
 	player.wingDesc = "non-existant";
 	//Exploration
 	player.explored = 0;
@@ -541,7 +541,7 @@ function doCreation(eventNo:Number):void {
 		}
 		if(temp == 12) {
 			player.femininity += 7;
-			player.vaginas[0].vaginalWetness = 2;
+			player.vaginas[0].vaginalWetness = VAGINA_WETNESS_WET;
 			player.createPerk("Wet Pussy",2,0,0,0,"Keeps your pussy from ever being anything less than wet.");
 		}
 		eventParser(10036);
@@ -658,7 +658,7 @@ function doCreation(eventNo:Number):void {
 			historyPerk = "History: Slut";
 			if(player.hasVagina()) {
 				player.vaginas[0].virgin = false;
-				player.vaginas[0].vaginalLooseness = 2;
+				player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
 			}
 			player.ass.analLooseness = 1;
 		}
@@ -666,7 +666,7 @@ function doCreation(eventNo:Number):void {
 			historyPerk = "History: Whore";
 			if(player.hasVagina()) {
 				player.vaginas[0].virgin = false;
-				player.vaginas[0].vaginalLooseness = 2;
+				player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
 			}
 			player.ass.analLooseness = 1;
 		}

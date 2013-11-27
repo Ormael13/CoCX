@@ -591,18 +591,7 @@ def findFunctionsWithoutExit():
 def pronouninate():
 	filelist = ["arian.as", "rubi.as"]
 
-
-
-
-
-
-
-
-
-
 	repDict = {
-
-
 
 		
 		re.compile(r"\"\s?\+\s?arianMF\(\"He\",\"She\"\)\s?\+\s?\"") : "[Arian Ey]",
@@ -622,8 +611,6 @@ def pronouninate():
 		re.compile(r"\"\s?\+\s?rubiMF\(\"his\",\"her\"\)\s?\+\s?\"") : "[rubi eir]",
 		re.compile(r"\"\s?\+\s?rubiMF\(\"His\",\"Her\"\)\s?\+\s?\"") : "[rubi Eir]",
 		re.compile(r"\"\s?\+\s?rubiMF\(\"man\",\"woman\"\)\s?\+\s?\"") : "[rubi man]"
-
-
 
 	}
 
@@ -657,6 +644,120 @@ def pronouninate():
 
 
 
+def parseDefLine(line):
+	prefix, postfix = line.split("=", 1)
+	prefix = prefix.rstrip().lstrip().split()[-1].split(":")[0]
+	postfix = postfix.rstrip().lstrip().split(";")[0]
+	print postfix, prefix
+	return postfix, prefix
+
+
+
+def insertDescripts():
+
+	with open("./includes/flagDefs.as", "r") as flagsF:
+		content = flagsF.read()
+
+	prefix, content = content.split("// Description constants")
+	content, postfix = content.split("// End Description constants")
+	#lines = flagsF.readlines()
+
+	#print content
+	sections = content.split("//")
+
+	#print sections
+	descriptoSection = {}
+	for item in sections:
+		item = item.rstrip().lstrip()
+		lines = item.split("\n")
+		sectionKey = lines[0]
+		if sectionKey != "":
+			sectionKey = "\.%s\s?(?:==|=|!=|<|>|<=|>=)\s?(\d+)" % sectionKey
+			print "sectionKey", sectionKey
+			descriptoSection[sectionKey] = {}
+			for line in lines[1:]:
+				key, value = parseDefLine(line)
+				descriptoSection[sectionKey][key] = value
+
+	
+	print descriptoSection
+	filename = "appearance.as"
+
+
+		
+	for key, value in descriptoSection.iteritems():
+		print key, value
+	#sys.exit()
+	#Ok, now we have a eventNo <-> event number macro
+
+	#print flags
+	#flagRE = re.compile(r"flags\[(\d*?)\]")
+
+
+	
+
+
+	
+	filelist = os.listdir("./includes")
+	print filelist
+	flagNum = 0
+	for filename in filelist:
+		if filename.endswith(".as") and filename != "flagDefs.as":			#Iterate over all the .as files in ./includes, and skip the doEvent file
+			print "Processing file ", filename, " --------------------------------------------------------------"
+			with open(os.path.join("./includes", filename), "r") as fileH:
+				tmp = fileH.read()
+
+			# BRUTE FORCE IT. BECAUSE LAZY
+			tmpO = tmp
+
+			for reStr, lookupDict in descriptoSection.iteritems():
+				#print reStr, lookupDict
+
+				insertionPoint = 0
+				curRe = re.compile(reStr)
+				print "Re pattern = ", curRe.pattern
+				while tmp != None and curRe.search(tmp):
+				
+					m = curRe.search(tmp[insertionPoint:])
+					start, length = m.start(1)+insertionPoint, len(m.group(1))
+
+					#print m.group(), m.group(1)
+					insertionPoint = start+length
+					
+					prefix, call, postfix = tmp[:start], tmp[start:start+length], tmp[start+length:]
+
+					#print call, " replacement = ", lookupDict[call]
+					oldCall = call
+					call = call.replace(call, lookupDict[call])
+
+					if oldCall != call:		
+						print "Old:", oldCall
+						print "New:", call
+
+					tmp = prefix+call+postfix
+
+			if len(tmp)-len(tmpO) != 0:
+				print filename
+				print len(tmpO), len(tmp)
+				print "Length Delta", len(tmp)-len(tmpO) 
+			if writeToFiles:
+				with open(os.path.join("./includes", filename), "w") as fileH:
+					tmp = fileH.write(tmp)
+				
+	'''
+				
+				insertionPoint = start+length
+
+			print len(tmpO), len(tmp)
+			print "Length Delta", len(tmp)-len(tmpO) 
+
+
+	'''
+	print "Total Integer flag indices:", flagNum
+
+
+
+
 
 if __name__ == "__main__":
 
@@ -682,4 +783,5 @@ if __name__ == "__main__":
 	#cleanupRandomChoices()
 
 	#findFunctionsWithoutExit()
-	pronouninate()
+	#pronouninate()
+	insertDescripts()

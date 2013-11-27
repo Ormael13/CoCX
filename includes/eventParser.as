@@ -330,7 +330,7 @@ function doSystem(eventNo:Number):void {
 	}
 	if(eventNo == 118) {
 		if(!monster.hasVagina()) monster.createVagina();
-		monster.vaginas[0].vaginalLooseness = 3;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING;
 		monster.ass.analLooseness = 3;
 		outputText(mainView.eventTestInput.text, true, true);
 		simpleChoices("Again",117,"",0,"",0,"",0,"Quit",mainMenu);
@@ -645,7 +645,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		if(flags[FOX_BAD_END_WARNING] == 1) {
-			if(player.faceType != 11 || player.tailType != 13 || player.earType != 9 || player.lowerBody != 17 || player.skinType != 1) {
+			if(player.faceType != FACE_FOX || player.tailType != TAIL_TYPE_FOX || player.earType != EARS_FOX || player.lowerBody != LOWER_BODY_TYPE_FOX || player.skinType != SKIN_TYPE_FUR) {
 				flags[FOX_BAD_END_WARNING] = 0;
 			}
 		}
@@ -664,10 +664,10 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		//Wet pussy check!
 		if(player.hasPerk("Wet Pussy") >= 0 && player.vaginas.length > 0) {
-			if(player.vaginas[0].vaginalWetness < 2) {
+			if(player.vaginas[0].vaginalWetness < VAGINA_WETNESS_WET) {
 				outputText("\n<b>Your " + vaginaDescript(0) + " returns to its normal, wet state.</b>\n", false);
 				needNext = true;
-				player.vaginas[0].vaginalWetness = 2;
+				player.vaginas[0].vaginalWetness = VAGINA_WETNESS_WET;
 			}
 		}
 		//Fixing Egg Preg Preglocked Glitch
@@ -682,7 +682,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			needNext = true;
 		}		
 		//Make eggs big if harpied!
-		if(player.lowerBody == 13 && player.tailType == 11 && player.hasPerk("Harpy Womb") >= 0 && player.hasStatusAffect("eggs") >= 0) {
+		if(player.lowerBody == LOWER_BODY_TYPE_HARPY && player.tailType == TAIL_TYPE_HARPY && player.hasPerk("Harpy Womb") >= 0 && player.hasStatusAffect("eggs") >= 0) {
 			if(player.statusAffectv2("eggs") == 0) {
 				player.changeStatusValue("eggs",2,1);
 				outputText("\n<b>A familiar, motherly rumble lets you know that your harpy-like womb is growing your eggs nice and large.</b>\n", false);
@@ -919,7 +919,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(flags[UNKNOWN_FLAG_NUMBER_00087] < 0) flags[UNKNOWN_FLAG_NUMBER_00087] = 0; 
 		}
 		//Check for gain of cat agility - requires legs, tail, and ears
-		if(player.tailType == 8 && player.lowerBody == 9 && player.earType == 5) {
+		if(player.tailType == TAIL_TYPE_CAT && player.lowerBody == LOWER_BODY_TYPE_CAT && player.earType == EARS_CAT) {
 			if(player.hasPerk("Flexibility") < 0) {
 				outputText("\nWhile stretching, you notice that you're much more flexible than you were before.  Perhaps this will make it a bit easier to dodge attacks in battle?\n\n(<b>Gained Perk: Flexibility</b>)\n", false);
 				needNext = true;
@@ -986,10 +986,10 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 		//flags[UNKNOWN_FLAG_NUMBER_00330] prevents PC getting two of the same notices overnite
 		else if(flags[UNKNOWN_FLAG_NUMBER_00330] > 0) flags[UNKNOWN_FLAG_NUMBER_00330]--;
 		//Check for duplicate tails.
-		if(player.lowerBody == 3) {
-			if(player.tailType > 0) {
+		if(player.lowerBody == LOWER_BODY_TYPE_NAGA) {
+			if(player.tailType > TAIL_TYPE_NONE) {
 				outputText("\nYour tail squirms, wriggling against your larger naga tail as the scales part around it, absorbing it.  <b>Your form is completely scaly and smooth from the waist down.</b>\n", false);
-				player.tailType = 0;
+				player.tailType = TAIL_TYPE_NONE;
 				needNext = true;
 			}
 		}
@@ -1044,13 +1044,13 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 		//Spider Oviposits!
 		if(player.hasPerk("Spider Ovipositor") >= 0 || player.hasPerk("Bee Ovipositor") >= 0) {
 			//Remove dat shit!
-			if(player.hasPerk("Spider Ovipositor") >= 0 && (!player.isDrider() || player.tailType != 5)) {
+			if(player.hasPerk("Spider Ovipositor") >= 0 && (!player.isDrider() || player.tailType != TAIL_TYPE_SPIDER_ADBOMEN)) {
 				outputText("\nYour ovipositor (and eggs) vanish since your body has become less spider-like.</b>\n");
 				player.removePerk("Spider Ovipositor");
 				needNext = true;
 			}
 			//Remove dat shit!
-			else if(player.hasPerk("Bee Ovipositor") >= 0 && player.tailType != 6) {
+			else if(player.hasPerk("Bee Ovipositor") >= 0 && player.tailType != TAIL_TYPE_BEE_ABDOMEN) {
 				outputText("\nYour ovipositor (and eggs) vanish since your body has become less bee-like.</b>\n");
 				player.removePerk("Bee Ovipositor");
 				needNext = true;
@@ -1119,7 +1119,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		//Check ninetails perks!
 		if(player.hasPerk("Enlightened Nine-tails") >= 0 || player.hasPerk("Corrupted Nine-tails") >= 0) {
-			if(player.tailType != 13 || player.tailVenom < 9) {
+			if(player.tailType != TAIL_TYPE_FOX || player.tailVenom < 9) {
 				needNext = true;
 				outputText("\n<b>Without your tails, the magic power they once granted withers and dies, vanishing completely.</b>\n");
 				player.removePerk("Enlightened Nine-tails");
@@ -1618,26 +1618,26 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			player.addStatusValue("CuntStretched",1,1);
 			if(player.vaginas.length > 0) {
 				if(player.hasPerk("Fera's Boon - Wide Open") < 0) {
-				if(player.vaginas[0].vaginalLooseness == 2 && player.statusAffectv1("CuntStretched") >= 200) {
+				if(player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LOOSE && player.statusAffectv1("CuntStretched") >= 200) {
 					outputText("\nYour " + vaginaDescript(0) + " recovers from your ordeals, tightening up a bit.\n", false);
 					player.vaginas[0].vaginalLooseness--;
 					player.changeStatusValue("CuntStretched",1,0);
 					needNext = true;
 				}
-				if(player.vaginas[0].vaginalLooseness == 3 && player.statusAffectv1("CuntStretched") >= 100) {
+				if(player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING && player.statusAffectv1("CuntStretched") >= 100) {
 					outputText("\nYour " + vaginaDescript(0) + " recovers from your ordeals, tightening up a bit.\n", false);
 					player.vaginas[0].vaginalLooseness--;
 					player.changeStatusValue("CuntStretched",1,0);
 					needNext = true;
 				}
-				if(player.vaginas[0].vaginalLooseness == 4 && player.statusAffectv1("CuntStretched") >= 70) {
+				if(player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE && player.statusAffectv1("CuntStretched") >= 70) {
 					outputText("\nYour " + vaginaDescript(0) + " recovers from your ordeals and becomes tighter.\n", false);
 					player.vaginas[0].vaginalLooseness--;
 					player.changeStatusValue("CuntStretched",1,0);
 					needNext = true;
 				}
 				}
-				if(player.vaginas[0].vaginalLooseness == 5 && player.statusAffectv1("CuntStretched") >= 50) {
+				if(player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LEVEL_CLOWN_CAR && player.statusAffectv1("CuntStretched") >= 50) {
 					outputText("\nYour " + vaginaDescript(0) + " recovers from the brutal stretching it has received and tightens up a little bit, but not much.\n", false);
 					player.vaginas[0].vaginalLooseness--;
 					player.changeStatusValue("CuntStretched",1,0);
@@ -1675,7 +1675,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		//Lose slime core perk
 		if(player.hasPerk("Slime Core") >= 0) {
-			if(player.vaginalCapacity() < 9000 || player.skinAdj != "slimy" || player.skinDesc != "skin" || player.lowerBody != 8) {
+			if(player.vaginalCapacity() < 9000 || player.skinAdj != "slimy" || player.skinDesc != "skin" || player.lowerBody != LOWER_BODY_TYPE_GOO) {
 				//outputText("\n<b>Your slime core fades away inside of you, now lost forever.</b>\n", false);
 				outputText("\nYour form ripples, as if uncertain at the changes your body is undergoing.  The goo of your flesh cools, its sensitive, responsive membrane thickening into " + player.skin() + " while bones and muscles knit themselves into a cohesive torso, chest and hips gaining definition.  Translucent ooze clouds and the gushing puddle at your feet melts together, splitting into solid trunks as you regain your legs.  Before long, you can no longer see through your own body and, with an unsteady shiver, you pat yourself down, readjusting to solidity.  A lurching heat in your chest suddenly reminds you of the slime core that used to float inside you.  Gingerly touching your " + chestDesc() + ", you can feel a small, second heartbeat under your ribs that gradually seems to be sinking, past your belly. A lurching wave of warmth sparks through you, knocking you off your fresh legs and onto your " + buttDescript() + ".  A delicious pressure pulses in your abdomen and you loosen your " + player.armorName + " as sweat beads down your neck.  You clench your eyes, tongue lolling in your mouth, and the pressure builds and builds until, in ecstatic release, your body arches in an orgasmic release.\n\n", false);
  
@@ -1700,7 +1700,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		//Slime craving stuff
 		if(player.hasStatusAffect("Slime Craving") >= 0) {
-			if(player.vaginalCapacity() < 9000 || player.skinAdj != "slimy" || player.skinDesc != "skin" || player.lowerBody != 8) {
+			if(player.vaginalCapacity() < 9000 || player.skinAdj != "slimy" || player.skinDesc != "skin" || player.lowerBody != LOWER_BODY_TYPE_GOO) {
 				outputText("\n<b>You realize you no longer crave fluids like you once did.</b>\n", false);
 				needNext = true;
 				player.removeStatusAffect("Slime Craving");
@@ -1746,7 +1746,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			needNext = true;
 		}
 		//Bee Sting Recharge
-		if(player.tailType == 6 || player.tailType == 5) {
+		if(player.tailType == TAIL_TYPE_BEE_ABDOMEN || player.tailType == TAIL_TYPE_SPIDER_ADBOMEN) {
 			if(player.tailRecharge < 5) player.tailRecharge = 5;
 			player.tailVenom += player.tailRecharge;
 			if(player.tailVenom > 100) player.tailVenom = 100;
@@ -2066,7 +2066,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		//Ghostgirl madness
 		if(flags[UNKNOWN_FLAG_NUMBER_00365] > 0) {
-			if(player.cockTotal() > 1 || player.faceType != 0 || player.lowerBody != 0 || player.tailType > 0 || player.horns > 0 || player.cor > 15 || player.longestCockLength() > 10 || player.tallness < 65 || player.tallness > 78 || player.hasVagina()) flags[UNKNOWN_FLAG_NUMBER_00365] = 0;
+			if(player.cockTotal() > 1 || player.faceType != FACE_HUMAN || player.lowerBody != LOWER_BODY_TYPE_HUMAN || player.tailType > TAIL_TYPE_NONE || player.horns > 0 || player.cor > 15 || player.longestCockLength() > 10 || player.tallness < 65 || player.tallness > 78 || player.hasVagina()) flags[UNKNOWN_FLAG_NUMBER_00365] = 0;
 			else {
 				flags[UNKNOWN_FLAG_NUMBER_00365]--;
 				if(flags[UNKNOWN_FLAG_NUMBER_00365] == 0) {

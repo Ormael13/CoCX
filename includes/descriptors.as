@@ -887,22 +887,22 @@ function eVaginaDescript(vaginaNum):String {
 	//If no vaginas back the fuck out
 	if(keyNum < 0) return "VAGINA ERROR";
 	//tightness descript - 40% display rate
-	if(monster.vaginas[vaginaNum].vaginalLooseness == 0) rand = 61;
-	if(monster.vaginas[vaginaNum].vaginalLooseness == 4 || monster.vaginas[vaginaNum].vaginalLooseness == 5) rand = 10;
+	if(monster.vaginas[vaginaNum].vaginalLooseness == VAGINA_LOOSENESS_TIGHT) rand = 61;
+	if(monster.vaginas[vaginaNum].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE || monster.vaginas[vaginaNum].vaginalLooseness == VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) rand = 10;
 	if(int(Math.random()*100) + rand > 60) {
-		if(monster.vaginas[vaginaNum].vaginalLooseness == 0 || monster.vaginas[vaginaNum].virgin) vag+="virgin ";
-		if(monster.vaginas[vaginaNum].vaginalLooseness == 2) vag+="loose ";
-		if(monster.vaginas[vaginaNum].vaginalLooseness == 3) vag+="very loose ";
-		if(monster.vaginas[vaginaNum].vaginalLooseness == 4) vag+="gaping ";
-		if(monster.vaginas[vaginaNum].vaginalLooseness == 5) vag+="gaping-wide ";
+		if(monster.vaginas[vaginaNum].vaginalLooseness == VAGINA_LOOSENESS_TIGHT || monster.vaginas[vaginaNum].virgin) vag+="virgin ";
+		if(monster.vaginas[vaginaNum].vaginalLooseness == VAGINA_LOOSENESS_LOOSE) vag+="loose ";
+		if(monster.vaginas[vaginaNum].vaginalLooseness == VAGINA_LOOSENESS_GAPING) vag+="very loose ";
+		if(monster.vaginas[vaginaNum].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE) vag+="gaping ";
+		if(monster.vaginas[vaginaNum].vaginalLooseness == VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) vag+="gaping-wide ";
 	}
 	//wetness descript - 30% display rate
 	if(int(Math.random()*100 > 70)) {
-		if(monster.vaginas[vaginaNum].vaginalWetness == 0) vag+="dry ";
-		if(monster.vaginas[vaginaNum].vaginalWetness == 2) vag+="wet ";
-		if(monster.vaginas[vaginaNum].vaginalWetness == 3) vag+="slick ";
-		if(monster.vaginas[vaginaNum].vaginalWetness == 4) vag+="drooling ";
-		if(monster.vaginas[vaginaNum].vaginalWetness == 5) vag+="slavering ";
+		if(monster.vaginas[vaginaNum].vaginalWetness == VAGINA_WETNESS_DRY) vag+="dry ";
+		if(monster.vaginas[vaginaNum].vaginalWetness == VAGINA_WETNESS_WET) vag+="wet ";
+		if(monster.vaginas[vaginaNum].vaginalWetness == VAGINA_WETNESS_SLICK) vag+="slick ";
+		if(monster.vaginas[vaginaNum].vaginalWetness == VAGINA_WETNESS_DROOLING) vag+="drooling ";
+		if(monster.vaginas[vaginaNum].vaginalWetness == VAGINA_WETNESS_SLAVERING) vag+="slavering ";
 	}
 	//cunt names
 	rand = int(Math.random()*8);

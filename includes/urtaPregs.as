@@ -996,11 +996,11 @@ function massagePregnantUrtasBelly():void {
 	outputText("\n\nSmiling mischievously, you reach for the can and squirt some cream over her sensitive black nipples.   The vixen giggles and wriggles in place, \"<i>It feels like clouds tickling over my nipples,</i>\" she laughs.  It's evidently pleasurable in other ways, too; you can see precum beginning to distend the head of her condom out of the corner of your eye.  You begins spreading the cream over her breasts, just like her belly.  \"<i>Hey, now, what are you doing?  This is supposed to be a <b>belly</b> rub, lover,</i>\" Urta playfully scolds you, tail wagging all the same.");
 	
 	outputText("\n\nYou throw her a fake apology and tell her you'll clean it all up.  Then, you proceed to let your ");
-	if(player.tongueType == 1) outputText("forked ");
-	else if(player.tongueType == 2) outputText("demonic ");
-	else if(player.tongueType == 3) outputText("draconic ");
+	if(player.tongueType == TONUGE_SNAKE) outputText("forked ");
+	else if(player.tongueType == TONUGE_DEMONIC) outputText("demonic ");
+	else if(player.tongueType == TONUGE_DRACONIC) outputText("draconic ");
 	outputText("tongue hang and begin licking the cream off her breasts");
-	if(player.tongueType > 0) outputText(", a task that is made far easier due to your tongue's ability to stretch to a surprising length");
+	if(player.tongueType > TONUGE_HUMAN) outputText(", a task that is made far easier due to your tongue's ability to stretch to a surprising length");
 	outputText(".  You make sure to pay extra attention to her cream covered nubs.");
 	
 	outputText("\n\nUrta wiggles in pleasure at the stimulus, precum slowly bubbling into her condom, \"<i>[name], you're supposed to be rubbing me down, not eating me up!</i>\"  She laughs.  You quickly snatch the bottle in your hands and aim the lid at Urta's lips, covering them with cream.  Urta barely has time to react and by the time she gets over the shock, you're already laughing at her.  She looks like a rabid fox.");
@@ -1099,7 +1099,7 @@ function urtaBoobWorshipScene():void {
 	outputText("\n\nYou do as she asks, jumping to her bedside table and getting a condom.  You throw her the small package.  Surprisingly, she catches it without opening her eyes, easily fitting it across her mottled shaft, then smiling at you.  \"<i>Thank you, lover; you're so considerate... now, if you don't mind?</i>\"  She smirks and gestures at her breasts.");
 	
 	outputText("\n\nYou jump back at her, attacking her breasts with gusto.  She moans and squeals in surprised pleasure at the sudden ferocity, a hint of pain before she grows used to it.  You lean in and take one of her nipples into your mouth, biting it lightly");
-	if(player.faceType == 4 || player.faceType == 5 || player.faceType == 10) outputText(", always minding your sharp teeth");
+	if(player.faceType == FACE_SHARK_TEETH || player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SPIDER_FANGS) outputText(", always minding your sharp teeth");
 	outputText(".  She yelps loudly, but makes no move to push you off, so she's obviously enjoying it.  You alternate between biting and pulling, never repeating the same motion twice.  \"<i>I- I'm gonna...!</i>\"  She gasps out, bucking and wriggling under you.  You smile wickedly and bite her nipple one last time, pulling and sucking on it.");
 	
 	outputText("\n\nUrta lets out a shriek of equal parts pleasure and pain, arching her back as her cock suddenly explodes, bloating the hastily-applied condom with jet after jet of pregnant herm cum, swelling it into a misshapen, basketball-sized bubble of fluid-filled latex before she finally empties the last of herself into it.  With a long, drawn-out sigh she sinks back down, panting for air.  Finally, she musters the energy to say, \"<i>Nice massage, lover, but whose enjoyment was that for?  Mine or yours?</i>\"  The post-orgasmic glow on her face suggests she doesn't really care that much what your answer is.");
@@ -1166,11 +1166,11 @@ function nurseFromMommaUrtasBooBees():void {
 	outputText("\n\nUrta gently lays herself down on the bed, shuffling over so that you have ample room to join her, then smiles and carefully lifts up her breasts in clear invitation to you.");
 	
 	outputText("\n\nYou waste no time, settling yourself beside her and grabbing the offered breasts.  You note that a few droplets seem to have escaped and formed a thin stream of white, which you promptly lick off with your ");
-	if(player.tongueType == 1) outputText("forked ");
-	else if(player.tongueType == 2) outputText("demonic ");
-	else if(player.tongueType == 3) outputText("draconic ");
+	if(player.tongueType == TONUGE_SNAKE) outputText("forked ");
+	else if(player.tongueType == TONUGE_DEMONIC) outputText("demonic ");
+	else if(player.tongueType == TONUGE_DRACONIC) outputText("draconic ");
 	outputText("tongue.  Urta lets out a sigh of pleasure, yipping softly as your tongue tantalizes her over-sensitive black nipples.  Noticing that she seemed to enjoy the licking you keep doing so, slathering her soft mounds in a thin layer of saliva, alternating between breasts.");
-	if(player.tongueType > 0) outputText("  Every few licks you coil your tongue around one of her nipples and gently pull at it, milking a thin strand of white goodness straight on your tongue, much to the fox-herm's delight.");
+	if(player.tongueType > TONUGE_HUMAN) outputText("  Every few licks you coil your tongue around one of her nipples and gently pull at it, milking a thin strand of white goodness straight on your tongue, much to the fox-herm's delight.");
 	
 	outputText("\n\nUrta shivers and moans, but then looks at you, \"<i>As nice as this may feel, it's not really getting them any emptier, you know,</i>\" she points out.");
 	
@@ -1503,9 +1503,9 @@ function weirdUrtaCravingsConclusion():void {
 	outputText("  You gaze at her questioningly.  \"<i>I woke up before you and went and... shall we say cleaned myself up a little,</i>\" she replies, flicking her ears in the direction of the shower.");
 	
 	outputText("\n\nYou smile at her then draw her into another kiss, planting your lips to hers and invading her mouth with your ");
-	if(player.tongueType == 1) outputText("forked ");
-	else if(player.tongueType == 2) outputText("demonic ");
-	else if(player.tongueType == 3) outputText("draconic ");
+	if(player.tongueType == TONUGE_SNAKE) outputText("forked ");
+	else if(player.tongueType == TONUGE_DEMONIC) outputText("demonic ");
+	else if(player.tongueType == TONUGE_DRACONIC) outputText("draconic ");
 	outputText("tongue.  She yips in surprise, then moans as she eagerly sinks into your embrace, kissing you back with equal passion.  She suddenly breaks it, looking apologetic.  \"<i>Sorry, [name], but if we keep that up, I'll be wanting another round, and I have things to do.</i>\"  She pats your face apologetically and shifts herself, somewhat clumsily, out of the bed, gathering her clothes and starting to dress herself.");
 	outputText("\n\nTaking that as your cue, you do likewise, and the two of you go your separate ways after locking the apartment up behind you.");
 	stats(0,0,0,0,-.5,0,0,0);

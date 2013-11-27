@@ -116,7 +116,7 @@ function doDungeon(eventNo:Number):void {
 			//big clit
 			if(player.clitLength > 1 && player.clitLength < 4.5) outputText("A wave of pleasure erupts from between your legs as your " + clitDescript() + " pops free.    You squeeze your legs tightly together, hungry for the additional sensations.  ", false);
 			//slick
-			if(player.vaginas[0].vaginalWetness >= 3) outputText("Squishing wetly, your bottoms become soggy with the flood of fluids leaking from your " + vaginaDescript(0) + ".   Your legs spread apart on their own, begging for any kind of intrusion.  ", false);
+			if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLICK) outputText("Squishing wetly, your bottoms become soggy with the flood of fluids leaking from your " + vaginaDescript(0) + ".   Your legs spread apart on their own, begging for any kind of intrusion.  ", false);
 			//normal
 			else outputText("Groaning softly, you feel yourself getting wetter and wetter with arousal.  You wish your sticky bottoms were off so you could let something into your " + vaginaDescript(0) + ".  ", false); 
 		}
@@ -814,27 +814,27 @@ function doDungeon(eventNo:Number):void {
 	if(eventNo == 11050) {
 		spriteSelect(16);
 		outputText("", true);
-		if(player.horns > 0 || player.antennae > 0) {
+		if(player.horns > 0 || player.antennae > ANTENNAE_NONE) {
 			outputText("Your forehead itches intensely.  You cannot help but stratch madly at it.  ", false);
 			if(player.horns > 0) {
 				outputText("Your horns fall off, landing on the floor with a heavy thud.  ", false);
 				player.horns = 0;
-				player.hornType = 0;
+				player.hornType = HORNS_NONE;
 			}
-			if(player.antennae > 0) {
+			if(player.antennae > ANTENNAE_NONE) {
 				outputText("Antennae pop free, and float lightly down towards the floor.  ", false);
-				player.antennae = 0;
+				player.antennae = ANTENNAE_NONE;
 			}
 		}
 		//EARS
-		if(player.earType != 0) {
+		if(player.earType != EARS_HUMAN) {
 			outputText("Pain erupts from both sides of your head as your ears reform and move, returning to look like your old human ears!  ", false);
-			player.earType = 0;
+			player.earType = EARS_HUMAN;
 		}
 		//Face
-		if(player.faceType != 0) {
+		if(player.faceType != FACE_HUMAN) {
 			outputText("Your facial structure rearranges itself into a normal human visage, exactly like yours was before you came to this horrid place.", false);
-			player.faceType = 0;
+			player.faceType = FACE_HUMAN;
 		}
 		eventParser(11055);
 		return;
@@ -875,10 +875,10 @@ function doDungeon(eventNo:Number):void {
 			}
 		}
 		//Normal chest, normal nips
-		if(player.skinType != 0) {
+		if(player.skinType != SKIN_TYPE_PLAIN) {
 			outputText("The skin on your body itches intensely as it sheds it's " + player.skinDesc + ", revealing " + player.skinTone + " skin.  ", false);
 			player.skinDesc = "skin";
-			player.skinType = 0;
+			player.skinType = SKIN_TYPE_PLAIN;
 			temp++;
 		}
 		//Nothing changed
@@ -935,9 +935,9 @@ function doDungeon(eventNo:Number):void {
 		if(temp > 0) outputText("\n\n", false);
 		//Vajajay
 		if(player.vaginas.length > 0) {
-			if(player.vaginas[0].vaginalWetness >= 3) {
+			if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLICK) {
 				outputText("The constant fluids leaking from your " + vaginaDescript(0) + " slow down, then stop.  ", false);
-				player.vaginas[0].vaginalWetness = 2;
+				player.vaginas[0].vaginalWetness = VAGINA_WETNESS_WET;
 				temp++;
 			}		
 		}
@@ -952,12 +952,12 @@ function doDungeon(eventNo:Number):void {
 	if(eventNo == 11053) {
 		spriteSelect(16);
 		outputText("", true);
-		if(player.lowerBody == 0) outputText("You feel as if you should slap yourself for stupidy.  Your legs are already normal!  You flush hotly as the corrupt magics wash over you, changing nothing.", false);
+		if(player.lowerBody == LOWER_BODY_TYPE_HUMAN) outputText("You feel as if you should slap yourself for stupidy.  Your legs are already normal!  You flush hotly as the corrupt magics wash over you, changing nothing.", false);
 		else outputText("You collapse as your " + player.legs() + " are unable to support you.  The sounds of bones breaking and reshaping fills the room, but oddly you feel no pain, only mild arousal.  You blink your eyes and sigh, and when you look down again <b>you have normal human legs</b>!", false);
-		player.lowerBody = 0;
-		if(player.tailType > 0) {
+		player.lowerBody = LOWER_BODY_TYPE_HUMAN;
+		if(player.tailType > TAIL_TYPE_NONE) {
 			outputText("  A moment later, your feel something detach from above your backside.  <b>You no longer have a tail!</b>", false);
-			player.tailType = 0;
+			player.tailType = TAIL_TYPE_NONE;
 			player.tailVenom = 0;
 			player.tailRecharge = 5;
 		}

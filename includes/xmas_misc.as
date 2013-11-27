@@ -460,14 +460,14 @@ function getWinterPudding():void {
 	if(player.horns == 0 && rand(2) == 0) {
 		outputText("\n\nYou hear the sound of cracking branches erupting from the tip of your skull.  Small bulges on either side of your head advance outwards in a straight line, eventually spreading out in multiple directions like a miniature tree.  Investigating the exotic additions sprouting from your head, the situation becomes clear.  <b>You've grown antlers!</b>");
 		//[Player horn type changed to Antlers.]
-		player.hornType = 5;
+		player.hornType = HORNS_ANTLERS;
 		player.horns = 4 + rand(12);
 	}
 	//[Show this description instead if the player already had horns when the transformation occurred.] 
-	else if(player.horns > 0 && player.hornType != 5 && rand(2) == 0) {
+	else if(player.horns > 0 && player.hornType != HORNS_ANTLERS && rand(2) == 0) {
 		outputText("\n\nYou hear the sound of cracking branches erupting from the tip of your skull.  The horns on your head begin to twist and turn fanatically, their texture and size morphing considerably until they resemble something more like trees than anything else.  Branching out rebelliously, you've come to the conclusion that <b>you've somehow gained antlers!</b>");
 		//[Player horn type changed to Antlers.]
-		player.hornType = 5;
+		player.hornType = HORNS_ANTLERS;
 		player.horns = 4 + rand(12);
 	}
 	doNext(bakeryuuuuuu);
@@ -871,9 +871,9 @@ function lickNieve():void {
 	if(!silly()) {
 		outputText("\n\nNieve lets out little gasps and sighs as you assault her clit with your tongue.  Not content to leave it at that, you dive in to her frigid, slick cunt, lapping and licking.  ");
 		//(Normal/Snake Tongue: 
-		if(player.tongueType != 2) outputText("It doesn't get far, but elicits squeals of surprise and pleasure from your elemental slave who's already grasping at the snow surrounding her for support.");
+		if(player.tongueType != TONUGE_DEMONIC) outputText("It doesn't get far, but elicits squeals of surprise and pleasure from your elemental slave who's already grasping at the snow surrounding her for support.");
 		//Demon Tongue: 
-		else if(player.tongueType == 2) outputText("Her eyes widen as you snake your impressive, demonic tongue into her. She grunts and squeals with pleasure, hands grasping piles of snow, wishing they were bedsheets.");
+		else if(player.tongueType == TONUGE_DEMONIC) outputText("Her eyes widen as you snake your impressive, demonic tongue into her. She grunts and squeals with pleasure, hands grasping piles of snow, wishing they were bedsheets.");
 		outputText("  After a minute of this, you realize you've lost the feeling in your tongue!  Pulling it back into your mouth, you find it warms back up quickly, and then you're at it again.");
 		
 		outputText("\n\nNot quite willing to let your precious tongue go numb like that again, you focus your attention on her clitoris and all the little sensitive spots along the inner thighs.  While your mouth is drawing her attention elsewhere, you carefully bury two fingers knuckle deep into her frozen fuckhole.");

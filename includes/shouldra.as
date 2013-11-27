@@ -101,7 +101,7 @@ function shouldraGreeting():void {
 	outputText("", true);
 	if(silly() && flags[UNKNOWN_FLAG_NUMBER_00366] == 0) {
 		//NO MUTANTS ALLOWED
-		if(player.cockTotal() > 1 || player.faceType != 0 || player.lowerBody != 0 || player.tailType > 0 || player.horns > 0 || player.cor > 15 || player.longestCockLength() > 10 || player.tallness < 65 || player.tallness > 78 || player.hasVagina()) {}
+		if(player.cockTotal() > 1 || player.faceType != FACE_HUMAN || player.lowerBody != LOWER_BODY_TYPE_HUMAN || player.tailType > TAIL_TYPE_NONE || player.horns > 0 || player.cor > 15 || player.longestCockLength() > 10 || player.tallness < 65 || player.tallness > 78 || player.hasVagina()) {}
 		else {
 			superCoolPaladinSexStuffDudeGasmJizzMonkies();
 			return;
@@ -424,7 +424,7 @@ function slimeGinaFlation():void {
 	outputText("You're stuck on your back like an unlucky turtle, the weight of your still-ballooning belly pressing down on you. The goo in your gut sloshes impatiently, roiling under the skin like a quintuplet of angry minotaurs. A thought strikes you, and though it's a bit insane, you figure you might as well work with what you're given. You lean as far as your belly allows you to one side, then with an almighty heave, throw yourself the other way. The momentum carries you up and over until you're resting on your own squishy stomach. Your weight squishes your swollen body, and you can feel goo threatening to spurt back out of the gaping orifices that the stuff entered through. The substance inside you quakes happily from the pressure, and you're relieved to finally be making progress. You knead and press your tight-stretched skin furiously with your ", false);
 	if(player.isNaga()) outputText("snake-like lower body", false);
 	else if(player.isGoo()) outputText("undulating, gooey mass", false);
-	else if(player.tailType == 0) outputText("arms and " + player.legs(), false);
+	else if(player.tailType == TAIL_TYPE_NONE) outputText("arms and " + player.legs(), false);
 	else outputText("arms, " + player.legs() + ", and tail", false);
 	outputText(", taking pleasure in the distant cries and moans from the ghost girl inside. The ingested green slime begins rumbling, softly at first, but with increasing intensity. You're actually knocked from your tentative perch as the quake of flesh continues growing, landing heavily on your side. As abruptly as it began, the vibrations cease, but you continue to rub, feeling the worst is not yet over.\n\n", false);
 	

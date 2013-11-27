@@ -257,20 +257,20 @@ function nonAddictMinotaurGangBang():void {
 	
 	if(player.isTaur()) {
 		outputText("A sudden, forceful push rolls your equine body onto its flank, and a larger member is pressed against your clutching ", false);
-		if(player.tailType == 0) outputText("asshole", false);
+		if(player.tailType == TAIL_TYPE_NONE) outputText("asshole", false);
 		else outputText("tailhole", false);
 		outputText(".  ", false);
 	}
 	else if(player.isNaga()) outputText("A sudden, forceful yank stretches out your tail, and a larger member presses between your " + buttDescript() + " to prod at your clutching asshole.  ", false);
 	else if(player.isGoo()) {
 		outputText("A sudden, forceful push rolls you to your side, and you feel shaggy fur rubbing through your gooey folds while a larger member is pressed against your clutching ", false);
-		if(player.tailType == 0) outputText("asshole", false);
+		if(player.tailType == TAIL_TYPE_NONE) outputText("asshole", false);
 		else outputText("tailhole", false);
 		outputText(".  ", false);
 	}
 	else {
 		outputText("A sudden, powerful yank lifts one of your legs high into the air, and you feel a larger member pressing against your clutching ", false);
-		if(player.tailType == 0) outputText("asshole", false);
+		if(player.tailType == TAIL_TYPE_NONE) outputText("asshole", false);
 		else outputText("tailhole", false);
 		outputText(".  ", false);
 	}
@@ -383,7 +383,7 @@ function loseToMinoMobVeryPregnant():void {
 	outputText("Pain radiates through your " + buttDescript() + " as a strong impact rocks your body.  You'd glance back, but the penis in your mouth holds your head stationary while it begins to slide in and out of your throat.  Another cheek-reddening slap hits your ass, and this time you definitely feel the large, furred shape of a minotaur's hand as the source of your discomfort.  The cock in your mouth draws back, not far enough to empty your mouth, yet far enough for you to breathe in sweet, sweet air through your nose. It plunges back in, just in time for another butt-reddening smack to push you the last few inches back towards those sweaty balls.\n\n", false);
 	
 	outputText("You look up and oogle the " + num2Text((flags[UNKNOWN_FLAG_NUMBER_00326] - 1)) + " dicks hovering just inches away from you.  Even the minitaur is there, his smaller dick dripping the sweet cream of his need at the sight of his slutty, utterly debased mother.  It turns you on so much, even more than the cream in your belly.  You reach out and grab two of the dicks to stroke, lubricating fingers with hot, wet pre-cum.", false);
-	if(player.isNaga() || player.tailType == 3 || player.tailType == 4 || player.tailType == 7 || player.tailType == 9 || player.tailType == 12) outputText("  Even your tail reaches up to curl around a third, stroking the thick meat.", false);
+	if(player.isNaga() || player.tailType == TAIL_TYPE_DEMONIC || player.tailType == TAIL_TYPE_COW || player.tailType == TAIL_TYPE_SHARK || player.tailType == TAIL_TYPE_LIZARD || player.tailType == TAIL_TYPE_KANGAROO) outputText("  Even your tail reaches up to curl around a third, stroking the thick meat.", false);
 	outputText("\n\n", false);
 	
 	outputText("\"<i>It looks like Mom is really into it, huh?  Look at her, deep-throating and drooling like an addict.  What do you have to say for yourself, Mom?  Oh?  You'd rather keep sucking cock than talk?  Well, alright then; just keep sucking, I think my bro is about to have a present for you,</i>\" predicts the second-largest minotaur.\n\n", false);
@@ -800,7 +800,7 @@ function forceMinitaurToGiveOral(choice:Number = 0):void {
 		outputText("start licking Momma's pussy.</i>\"  As if to emphasize your point, you ", false);
 		if(player.isTaur()) {
 			outputText("turn ", false);
-			if(player.tailType > 0) outputText("and lift your tail ", false);
+			if(player.tailType > TAIL_TYPE_NONE) outputText("and lift your tail ", false);
 			outputText("to expose the glistening pinkness of your womanhood.", false);
 		}
 		//ELSE

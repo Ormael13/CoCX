@@ -1562,7 +1562,7 @@ function getAssFuckedByLoppeAsACentaur():void {
 	if(player.hasVagina()) outputText("  Your vagina contracts, trying to grip at a phantom member as you spill your fluids on the carpet beneath you.");
 	
 	outputText("\n\nThe scent of your orgasm and the feeling of your sphincter clenching around her cock as tightly as it can is too much for Loppe, who roughly slams into you one last time and whinnies with glee as she floods your ass with cum.  She continues to thrust and rut and buck as she fills you with splurt after gush of hot, thick herm spunk.  The liquid warmth of Loppe's orgasm only enhances your afterglow, and slowly you feel yourself filled until you");
-	if(player.skinType != 2) outputText(" have goosebumps all over your body");
+	if(player.skinType != SKIN_TYPE_SCALES) outputText(" have goosebumps all over your body");
 	else outputText("r scales are practically standing on end");
 	outputText(".");
 	
@@ -1818,12 +1818,12 @@ function boobjobLoppe():void {
 	outputText("\n\nEmboldened, you clasp your breasts firmer together and start to rise and fall, slowly scraping your " + player.skin() + " up and down the half-breed's prick.  It feels so hot and firm against your chest, growing increasingly damp as Loppe oozes gouts as voluminous as the cumshots of ordinary men, making your breasts and her prick alike equally slippery and enabling you to stroke her faster and faster. \"<i>K-keep that up and I'm gonna shoot anytime,</i>\" Loppe groans, trying to hump into your cleavage.");
 	
 	//[(Normal/Naga tongue)
-	if(player.tongueType < 2) outputText("\n\nYou bend your head and lean down, letting your tongue flick out of your lips and slide gently across the flared head of Loppe's horse-prick, seductively tasting the sweet-salty flavor of her pre.  \"<i>Ah!  Hmm... I seriously hope you like the taste, because you're getting a faceful anytime now!</i>\"  Loppe moans.");
+	if(player.tongueType < TONUGE_DEMONIC) outputText("\n\nYou bend your head and lean down, letting your tongue flick out of your lips and slide gently across the flared head of Loppe's horse-prick, seductively tasting the sweet-salty flavor of her pre.  \"<i>Ah!  Hmm... I seriously hope you like the taste, because you're getting a faceful anytime now!</i>\"  Loppe moans.");
 	//Demon/Dragon: 
 	else outputText("\n\nYour inhumanly long tongue slithers out of your mouth like a tentacle, swiping itself playfully across Loppe's flare to give you a taste of sweet and salty precum before you send it questing down, curling in a spiral pattern around her long shaft and burrowing into your cleavage to lap and squeeze and massage, filling your senses with the tang of her overheated cock.  \"<i>D-damn, sugar!  Such a wonderful tongue you have,</i>\" she groans, equine member throbbing against your hold.");
 	
 	outputText("\n\n\"<i>C-cumming!</i>\" is all the warning you get before Loppe's slit opens wide and she begins spewing rope upon rope of hot jism.  You ");
-	if(player.tongueType >= 2) outputText("retract your tongue into your mouth and ");
+	if(player.tongueType >= TONUGE_DEMONIC) outputText("retract your tongue into your mouth and ");
 	outputText("barely shut your eyes in time, continuing to pump and squeeze with your tits even as your lover paints your upper body white in fresh spooge.  You can't see anything; all you know is the wet splashing of cum against your face, the intimate smell of hot, musky cock-cream assaulting your nose with the subtlety of a battering ram, Loppe's ecstatic moans and gasps and howls filling your ears.  Finally, the deluge stops; your hair is soaked in spunk, dripping wetly onto the floor, and you shake your head to try and fling off some of the worst of the gooey gunk, allowing you to look the panting girl in the eyes.");
 	
 	outputText("\n\nShe looks back with the hungry stare of a predator eyeing a morsel.  \"<i>Boobies!</i>\" Loppe yells as she pounces you, trying to force you backward onto her bed.");
@@ -1836,7 +1836,7 @@ function boobjobLoppe():void {
 		outputText("\n\nYou open your mouth, about to say something - and Loppe promptly shoves her cock-head inside.  With a gag and a splutter at the sudden intrusion, your hands dart to her shaft, but she only feeds it deeper inside of you - she stops, however, before she enters your throat, letting you taste the cum still dripping from her flare.");
 		
 		outputText("\n\n\"<i>Tittyfuck AND oral!?  You're the best!  You're making me a very, very happy girl!</i>\"  Loppe exclaims, oblivious to any protests you might make as she begins rutting you even harder.  \"<i>I got a present coming for you riiiight now!  Ah!</i>\"  Groaning sharply, she fills your mouth with huge ropes of spunk, and you have no choice but to swallow...  Without any way to struggle, you do your best to lick at the part of her cock that's in your mouth, ");
-		if(player.tongueType > 0) outputText("looping your inhuman tongue around it and stroking for extra stimulus even while ");
+		if(player.tongueType > TONUGE_HUMAN) outputText("looping your inhuman tongue around it and stroking for extra stimulus even while ");
 		outputText("grabbing your breasts and squeezing the horsemeat between them.  The sooner you help her get over this frenzy, the sooner she'll get off of you... hopefully.  \"<i>Ah, sugar!  I knew you liked it rough!</i>\" your suddenly forceful lover shouts, ominously.");
 		outputText("\n\n<b>Many orgasms later...</b>");
 		
@@ -2041,7 +2041,7 @@ function teaseLoppeNSuck():void {
 	outputText("\n\nLoppe's legs grab you under your arms, pulling you closer to her tool.  \"<i>Please, sugar.  Stop teasing me and help me.  You have no idea how badly I want to put my dick between those wonderful lips of yours!</i>\"");
 	
 	outputText("\n\nWith a smile to yourself, you oblige");
-	if(player.tongueType > 0) outputText(", inhumanly long tongue looping out to coil wetly around the length");
+	if(player.tongueType > TONUGE_HUMAN) outputText(", inhumanly long tongue looping out to coil wetly around the length");
 	outputText(".  You suckle gently, letting the salty tang of hot spunk wash over your tastebuds, and then start to gulp and swallow your way down her prick's sizable length.");
 
 	outputText("\n\n\"<i>Ah!  Oh, yes!  That hits the spot!</i>\" Loppe cries in relief.");

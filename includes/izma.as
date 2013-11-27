@@ -1766,8 +1766,8 @@ function followerIzmaMountsPC(lastHalf:Boolean = false):void {
 	//[(if vagina)
 	if(player.hasVagina()) {
 		outputText(", your cunt ", false);
-		if(player.vaginas[0].vaginalWetness <= 3) outputText("dripping", false);
-		else if(player.vaginas[0].vaginalWetness <= 4) outputText("gushing", false);
+		if(player.vaginas[0].vaginalWetness <= VAGINA_WETNESS_SLICK) outputText("dripping", false);
+		else if(player.vaginas[0].vaginalWetness <= VAGINA_WETNESS_DROOLING) outputText("gushing", false);
 		else outputText("cascading", false);
 		outputText(" feminine fluids onto the sticky ground beneath you both", false);
 	}
@@ -1801,8 +1801,8 @@ function RadarIzmaLeaveHerWangUnWingWanged():void {
 	//[(if vagina)
 	if(player.hasVagina()) {
 		outputText(", your cunt ", false);
-		if(player.vaginas[0].vaginalWetness <= 3) outputText("dripping", false);
-		else if(player.vaginas[0].vaginalWetness <= 4) outputText("gushing", false);
+		if(player.vaginas[0].vaginalWetness <= VAGINA_WETNESS_SLICK) outputText("dripping", false);
+		else if(player.vaginas[0].vaginalWetness <= VAGINA_WETNESS_DROOLING) outputText("gushing", false);
 		else outputText("cascading", false);
 		outputText(" feminine fluids onto the sticky ground beneath you both", false);
 	}

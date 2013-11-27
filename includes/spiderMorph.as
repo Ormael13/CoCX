@@ -382,8 +382,8 @@ function defeatFemale():void {
 	outputText("To emphasize her point, the spider-girl bites down on your " + player.leg() + " and squirts a fresh load of her overwhelming, sexual venom deep inside you.  Another squirt gushes out, soaking the dominatrix's fingertip, and you pant and beg for release, knowing you'll do anything she asks at this point.  In response, the exoskeleton-covered legs spread further apart, lowering those midnight lips close enough to be within easy licking distance.  The first bead of moisture drops down to splat on your lips, and you lick it off unthinkingly, getting your first taste of your spidery mistress.\n\n", false);
 	
 	outputText("The arachnid sex tastes... sweet - unnaturally so, almost cloying in its intensity.  You lean up to lick at her slimy black box, and as soon as you make contact with her oozing nether-lips, her legs give out, dropping her weight fully on to you and smothering you in her honey-dripping cunt.  Grunting in discomfort from the change in pressure, your aphrodisiac-addled mind remembers that licking her pussy will get you release.  You thrust your tongue forward with every ounce of your strength, burying ", false);
-	if(player.tongueType == 1) outputText("the snake-like length the whole into her womb, slithering right past her cervix.", false);
-	else if(player.tongueType == 2) outputText("the massive, demonic length into her vagina, curling it around the walls and stroking them all with even motions.", false);
+	if(player.tongueType == TONUGE_SNAKE) outputText("the snake-like length the whole into her womb, slithering right past her cervix.", false);
+	else if(player.tongueType == TONUGE_DEMONIC) outputText("the massive, demonic length into her vagina, curling it around the walls and stroking them all with even motions.", false);
 	else outputText("all of your length as deep into her passage as possible, licking and lapping at it in an orgasm-seeking frenzy.", false);
 	outputText("  The hard nub of her clit bumps your lower lip, and you start to open and close your jaw as fast as possible to stroke that tiny pleasure-organ off.\n\n", false);
 	

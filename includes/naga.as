@@ -6,7 +6,7 @@ function nagaEncounter():void {
 	//Create status if needed
 	if(player.hasStatusAffect("Naga") < 0) player.createStatusAffect("Naga",0,0,0,0);
 	outputText("", true);
-	if(player.lowerBody == 3) {
+	if(player.lowerBody == LOWER_BODY_TYPE_NAGA) {
 		//Set 'last fuck as naga'
 		player.changeStatusValue("Naga",1,1);
 		//Not met as naga before
@@ -24,7 +24,7 @@ function nagaEncounter():void {
 		}
 		outputText("She lets out a soft moan and leans her head forward, pressing her lips against yours. You squeeze her body even more firmly against yours in response, the tips of your tails wrapping around one another. You open your mouth slightly and press your tongue against her lips. She offers no resistance and you begin caressing the inside of her mouth with your tongue, circling her fangs as she uses her own tongue to gently stroke ", false);
 		//[If player has fangs]
-		if(player.faceType == 5) outputText("your own.", false);
+		if(player.faceType == FACE_SNAKE_FANGS) outputText("your own.", false);
 		//[player has no fangs]
 		else outputText("the inside of your mouth.", false);
 		outputText("\n\n", false);
@@ -79,7 +79,7 @@ function nagaEncounter():void {
 		else if(player.hasVagina()) {
 			outputText("The kiss continues and you can feel your " + breastDescript(0) + " pressing against her own. You kiss her harder, pressing your body as close to her as you can, enjoying the feeling of your two bodies entwined together. You wrap your tail around hers, trying to make every part of your body touch every part of hers.  The feeling of her scaled tail rubbing against your body sends shivers of ecstasy down your spine. You pull away from her mouth and move your head to kiss at her neck, ", false);
 			//(if player has fangs)
-			if(player.faceType == 5) outputText("carefully nibbling at it so as to not break the skin.  ", false);
+			if(player.faceType == FACE_SNAKE_FANGS) outputText("carefully nibbling at it so as to not break the skin.  ", false);
 			else outputText("nibbling gently at it.  ", false);
 			outputText("Traveling down, you pause at her collarbone, letting go of her hips to bring your hands up to her perfectly rounded breasts. A moan escapes the naga's lips as you massage her erect nipples. Your mouth continues its trek down the naga's supple body and you make sure to pause on each breast, circling inward and stopping on each nipple to suck gently on them.\n\n", false);
  			outputText("Once more your hands move down the naga's body, making their way across her sides as your mouth simultaneously kisses at the smooth flesh of her exposed belly. Goose pimples slowly begin to appear, denoting how much she enjoys it. You pause at her hips, hovering over the slit at her crotch. One of your hands slide down to the slit and you start to stroke at it gently as you kiss at the area around it. Your partner shudders a bit, overcome by the sensations. Slowly you slide a finger into her, hearing a gasp of pleasure as you move it around inside her.  ", false);
@@ -278,13 +278,13 @@ function gooNagaRape():void {
 	else if(player.gender == 2) {
 		outputText("You shriek in delight as wave after wave of orgasms rush over you", false);
 		//(if squirter)
-		if(player.vaginas[0].vaginalWetness == 5) outputText(", your girlcum gushing out and pooling on the stomach of the naga", false);
+		if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(", your girlcum gushing out and pooling on the stomach of the naga", false);
 		outputText(".", false);
 	}
 	//(if herm)
 	if(player.gender == 3) {
 		outputText("You scream in ecstasy as you hit your peak, your girlcum ", false);
-		if(player.vaginas[0].vaginalWetness < 5) outputText("leaking out", false);
+		if(player.vaginas[0].vaginalWetness < VAGINA_WETNESS_SLAVERING) outputText("leaking out", false);
 		else outputText("gushing out to form a pool on the naga's stomach", false);
 		outputText(" and your " + multiCockDescriptLight(), false);
 		//(normal)
@@ -308,7 +308,7 @@ function nagaVictoryMale():void {
 	//Male or 50% herms
 	if(player.totalCocks() > 0) {
 		//Centaur
-		if(player.lowerBody == 4) {
+		if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) {
 			outputText("As your massive bulk looms over the defeated naga, your eyes gleam with desire. Your heart pounds in your ears as lusty thoughts echo in your head. You lift the snakewoman up into your arms, bringing her close before licking her neck and tasting her smooth scaly skin as her tail dangles down to the sand. As you touch her, she recovers, and her tail slowly wraps around your equine half to support her own weight. She returns your attentions by running her long forked tongue down your chest. Her scaly tail rubs sensually over your flesh as she continues to wind around you, caressing your " + cockDescript(0) + "  with her tip, making you hard in a flash. The naga wriggles free from your embrace and coils behind you. Her entire length is now wrapped around various portions of both your human and equine halves, and she uses her grip to dangle underneath you. Her hands reach out to take a firm hold of your " + cockDescript(0) + ".  You shiver as her tongue darts out and slides around your cock, pre-cum dripping from your head as she licks you. The agile naga lowers more of herself beneath you, spreading her pussy wide open before sliding onto your " + cockDescript(0) + " and letting out a hissy moan as you penetrate her. Your body tingles as her entire length quivers in pleasure, sending ripples over the flesh her tail is wrapped around.  Jolts of pleasure run through you as the naga woman grinds her hips against your " + cockDescript(0) + " , driving it into her as far as she can take.  With a loud and drawn-out moan, ", false);
 			//[normal cum load]
 			if(player.cumQ() < 250) outputText("you cum inside of her, ", false);
@@ -394,7 +394,7 @@ function nagaVictoryFemale():void {
 	//4) Victory female
 	if(player.hasVagina()) {
 		//c) Centaur
-		if(player.lowerBody == 4) {
+		if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) {
 			//For inspiration in this noble venture: 
 			//http://imagemacros.files.wordpress.com/2009/10/im_a_horse.jpg?w=402&h=604
    			//(Loss by HPs)
@@ -450,7 +450,7 @@ function nagaVictoryFemale():void {
 function nagaVictoryGenderless():void {
 	outputText("", true);
 	//c)Centaur
-	if(player.lowerBody == 4) {
+	if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) {
 		outputText("You prance over to the prone form of the snake woman, plotting just what you will do to her body before realizing the severe lack of parts to use on her. You let loose a snort of frustration and paw at the ground. This complicates things, but you aren't going to let a little thing like no genitalia stop you from having some fun.\n\n", false);
 		outputText("You position yourself over the uppermost part of her tail and lower yourself down onto her, the lower half of your body resting on her tail. You reach down to the scaly covering over her pussy and open it to reveal the soft folds inside. Gently you slide your tongue into her, making small circles every so often.\n\n", false);
 		outputText("A hiss of pleasure escapes from the naga's mouth as she brings her hands onto your head and grips you tightly. The lower portion of her tail wraps gently around you and she brings the tip of her tail up to your mouth. You shift your attention from her netherlips to start sucking on the tip of it, twirling your tongue around it sensually. After a moment, the naga takes her tongue out of your mouth and slides the now lubricated tail gently into your backside. You let out a slight gasp, but it is cut short as the naga brings your head back down to her pussy. You start licking again as the naga slides more of her tail into you, twitching the tip of it deep inside of you.\n\n", false);
@@ -471,7 +471,7 @@ function nagaVictoryGenderless():void {
   		outputText("But you can't give up now. You've gotten this far, now you need to finish the deed. At the end of this, there WILL be sex.\n\n", false);
         outputText("You thrust yourself on top of her and roughly open the scaly covering at her crotch, revealing her awaiting pussy. You bring your mouth over her opening and thrust your tongue deep inside. A mix between a whimper and a moan escapes the naga's lips as you twist your tongue deeper inside her, as though trying to taste every part of her.\n\n", false);
         //(If player has no fangs)
-		if(player.faceType != 5) {
+		if(player.faceType != FACE_SNAKE_FANGS) {
 			outputText("You feel her start to thrust her hips into your face to try to gain more pleasure, but you won't be having ANY of that. You quickly take your tongue out of her and move your way up to her breasts, groping at them and biting at her nipples. The naga cries out in pain and tries to push your head away. You give her one last bite, hard enough to draw blood from her before getting up.\n\n", false);
 	        outputText("The naga quickly slithers out from under you with an angry hiss, a hand pressed to her now bleeding breast. You chuckle at this and the naga turns to glare at you. There is a sudden pain on the back of your legs and your view shifts to looking at the sky above you. It takes a moment for you to realize that the scaly bitch has just tripped you with her tail before slithering away.\n\n", false);
 		}
@@ -545,7 +545,7 @@ function nagaFUCKSJOOOOOO():void {
 		else outputText("You fall to your knees, your battered body unable to hold itself up any longer.\n\n", false);
 		outputText("You hear the hiss of the naga's laughter as she slithers over to your prone form. Her long tail twists around you and tightens suddenly, pinning your arms to your sides", false);
 		//(if centaur)
-		if(player.lowerBody == 4) 
+		if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) 
 		{ 
 			outputText(" and clamping your legs to your stomach", false);
 		}
@@ -749,7 +749,7 @@ function nagaRapeChoice():void {
 	if(player.canOvipositBee() && player.gender > 0) eggs = 3846;
 	if(player.lust >= 33) {
 		outputText("Your body aches for further satisfaction - do you rape the snake woman?", false);
-		if(player.lowerBody == 8) {
+		if(player.lowerBody == LOWER_BODY_TYPE_GOO) {
 			if(player.gender == 0) simpleChoices("Yes",5115,"Gooey Rape",5122,"Lay Eggs",eggs,"",0,"Leave",5007);
 			if(player.gender == 1) simpleChoices("Yes",5113,"Gooey Rape",5122,"Lay Eggs",eggs,"",0,"Leave",5007);
 			if(player.gender == 2) simpleChoices("Yes",5114,"Gooey Rape",5122,"Lay Eggs",eggs,"",0,"Leave",5007);

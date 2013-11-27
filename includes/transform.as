@@ -2,10 +2,10 @@
 	if(player.vaginas.length == 0) return false;
 	var stretched:Boolean = false;
 	var devirgined:Boolean = false;
-	if(player.hasPerk("Fera's Boon - Milking Twat") < 0 || player.vaginas[0].vaginalLooseness <= 1) {
+	if(player.hasPerk("Fera's Boon - Milking Twat") < 0 || player.vaginas[0].vaginalLooseness <= VAGINA_LOOSENESS_NORMAL) {
 	//cArea > capacity = autostreeeeetch.
 	if(cArea >= player.vaginalCapacity()) {
-		if(player.vaginas[0].vaginalLooseness >= 5) {}
+		if(player.vaginas[0].vaginalLooseness >= VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) {}
 		else player.vaginas[0].vaginalLooseness++;
 		stretched = true;
 	}
@@ -46,12 +46,12 @@
 			}
 			//Non virgins as usual
 			else if(spacingsF) outputText("  ", false);
-			if(player.vaginas[0].vaginalLooseness == 5) outputText("<b>Your " + vaginaDescript(0) + " is stretched painfully wide, large enough to accomodate most beasts and demons.</b>", false);
-			if(player.vaginas[0].vaginalLooseness == 4) outputText("<b>Your " + vaginaDescript(0) + " is stretched so wide that it gapes continually.</b>", false);
-			if(player.vaginas[0].vaginalLooseness == 3) outputText("<b>Your " + vaginaDescript(0) + " painfully stretches, the lips now wide enough to gape slightly.</b>", false);
-			if(player.vaginas[0].vaginalLooseness == 2) outputText("<b>Your " + vaginaDescript(0) + " is now very loose.</b>", false);
-			if(player.vaginas[0].vaginalLooseness == 1) outputText("<b>Your " + vaginaDescript(0) + " is now a little loose.</b>", false);
-			if(player.vaginas[0].vaginalLooseness == 0) outputText("<b>Your " + vaginaDescript(0) + " is stretched out to a more normal size.</b>", false);
+			if(player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) outputText("<b>Your " + vaginaDescript(0) + " is stretched painfully wide, large enough to accomodate most beasts and demons.</b>", false);
+			if(player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + vaginaDescript(0) + " is stretched so wide that it gapes continually.</b>", false);
+			if(player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING) outputText("<b>Your " + vaginaDescript(0) + " painfully stretches, the lips now wide enough to gape slightly.</b>", false);
+			if(player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LOOSE) outputText("<b>Your " + vaginaDescript(0) + " is now very loose.</b>", false);
+			if(player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_NORMAL) outputText("<b>Your " + vaginaDescript(0) + " is now a little loose.</b>", false);
+			if(player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + vaginaDescript(0) + " is stretched out to a more normal size.</b>", false);
 			if(spacingsB) outputText("  ", false);
 		}
 	}
@@ -413,36 +413,36 @@ function lengthChange(temp2:Number, cocks:Number) {
 
 function demonChanges():void {
 	//Change tail if already horned.
-	if(player.tailType != 3 && player.horns > 0) {
-		if(player.tailType != 0) {
+	if(player.tailType != TAIL_TYPE_DEMONIC && player.horns > 0) {
+		if(player.tailType != TAIL_TYPE_NONE) {
 			outputText("\n\n", false);
-			if(player.tailType == 5 || player.tailType == 6) outputText("You feel a tingling in your insectile abdomen as it stretches, narrowing, the exoskeleton flaking off as it transforms into a flexible demon-tail, complete with a round spaded tip.  ", false);
+			if(player.tailType == TAIL_TYPE_SPIDER_ADBOMEN || player.tailType == TAIL_TYPE_BEE_ABDOMEN) outputText("You feel a tingling in your insectile abdomen as it stretches, narrowing, the exoskeleton flaking off as it transforms into a flexible demon-tail, complete with a round spaded tip.  ", false);
 			else outputText("You feel a tingling in your tail.  You are amazed to discover it has shifted into a flexible demon-tail, complete with a round spaded tip.  ", false);
 			outputText("<b>Your tail is now demonic in appearance.</b>", false);
 		}
 		else outputText("\n\nA pain builds in your backside... growing more and more pronounced.  The pressure suddenly disappears with a loud ripping and tearing noise.  <b>You realize you now have a demon tail</b>... complete with a cute little spade.", false);
 		stats(0, 0, 0, 0, 0, 0, 0, 4);
-		player.tailType = 3;	
+		player.tailType = TAIL_TYPE_DEMONIC;	
 	}
 	//grow horns!
 	if(player.horns == 0 || (rand(player.horns+3) == 0)) {
-		if(player.horns < 12 && (player.hornType == 0 || player.hornType == 1)) {
+		if(player.horns < 12 && (player.hornType == HORNS_NONE || player.hornType == HORNS_DEMON)) {
 			outputText("\n\n", false);
 			if(player.horns == 0) {
 				outputText("A small pair of demon horns erupts from your forehead.  They actually look kind of cute.  <b>You have horns!</b>", false);
 			}
 			else outputText("Another pair of demon horns, larger than the last, forms behind the first row.", false);
-			if(player.hornType == 0) player.hornType = 1;
+			if(player.hornType == HORNS_NONE) player.hornType = HORNS_DEMON;
 			player.horns++;
 			player.horns++;
 			stats(0, 0, 0, 0, 0, 0, 0, 3);
 		}
 		//Text for shifting horns
-		else if(player.hornType > 1) {
+		else if(player.hornType > HORNS_DEMON) {
 			outputText("\n\n", false);
 			outputText("Your horns shift, shrinking into two small demonic-looking horns.", false);
 			player.horns = 2;
-			player.hornType = 1;
+			player.hornType = HORNS_DEMON;
 			stats(0, 0, 0, 0, 0, 0, 0, 3);
 		}		
 	}
@@ -452,81 +452,81 @@ function demonChanges():void {
 		player.removeStatusAffect("Black Nipples");
 	}
 	//remove fur
-	if((player.faceType != 0 || player.skinType != 0) && rand(3) == 0) {
+	if((player.faceType != FACE_HUMAN || player.skinType != SKIN_TYPE_PLAIN) && rand(3) == 0) {
 		//Remove face before fur!
-		if(player.faceType != 0) {
+		if(player.faceType != FACE_HUMAN) {
 			outputText("\n\n", false);
 			outputText("Your visage twists painfully, returning to a more normal human shape, albeit with flawless skin.  <b>Your face is human again!</b>", false);
-			player.faceType = 0;
+			player.faceType = FACE_HUMAN;
 		}
 		//De-fur
-		else if(player.skinType != 0) {
+		else if(player.skinType != SKIN_TYPE_PLAIN) {
 			outputText("\n\n", false);
-			if(player.skinType == 1) outputText("Your skin suddenly feels itchy as your fur begins falling out in clumps, <b>revealing inhumanly smooth skin</b> underneath.", false);
-			if(player.skinType == 2) outputText("Your scales begin to itch as they begin falling out in droves, <b>revealing your inhumanly smooth " + player.skinTone + " skin</b> underneath.", false);
-			player.skinType = 0;
+			if(player.skinType == SKIN_TYPE_FUR) outputText("Your skin suddenly feels itchy as your fur begins falling out in clumps, <b>revealing inhumanly smooth skin</b> underneath.", false);
+			if(player.skinType == SKIN_TYPE_SCALES) outputText("Your scales begin to itch as they begin falling out in droves, <b>revealing your inhumanly smooth " + player.skinTone + " skin</b> underneath.", false);
+			player.skinType = SKIN_TYPE_PLAIN;
 			player.skinDesc = "skin";
 		}
 	}
 	//Demon tongue
-	if(player.tongueType == 1 && rand(3) == 0) {
+	if(player.tongueType == TONUGE_SNAKE && rand(3) == 0) {
 		outputText("\n\nYour snake-like tongue tingles, thickening in your mouth until it feels more like your old human tongue, at least for the first few inches.  It bunches up inside you, and when you open up your mouth to release it, roughly two feet of tongue dangles out.  You find it easy to move and control, as natural as walking.  <b>You now have a long demon-tongue.</b>", false);
-		player.tongueType = 2;
+		player.tongueType = TONUGE_DEMONIC;
 	}
 	//foot changes - requires furless
-	if(player.skinType == 0 && rand(4) == 0) {
+	if(player.skinType == SKIN_TYPE_PLAIN && rand(4) == 0) {
 		//Males/genderless get clawed feet
 		if(player.gender <= 1) {
-			if(player.lowerBody != 6) {
+			if(player.lowerBody != LOWER_BODY_TYPE_DEMONIC_CLAWS) {
 				outputText("\n\n", false);
 				outputText("Every muscle and sinew below your hip tingles and you begin to stagger. Seconds after you sit down, pain explodes in your " + player.feet() + ". Something hard breaks through your sole from the inside out as your toes splinter and curve cruelly. The pain slowly diminishes and your eyes look along a human leg that splinters at the foot into a claw with sharp black nails. When you relax, your feet grip the ground easily. <b>Your feet are now formed into demonic claws.</b>", false);
-				player.lowerBody = 6;
+				player.lowerBody = LOWER_BODY_TYPE_DEMONIC_CLAWS;
 			}
 		}
 		//Females/futa get high heels
-		else if(player.lowerBody != 5) {
+		else if(player.lowerBody != LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS) {
 			outputText("\n\n", false);
 			outputText("Every muscle and sinew below your hip tingles and you begin to stagger. Seconds after you sit down, pain explodes in your " + player.feet() + ". Something hard breaks through your sole from the inside out. The pain slowly diminishes and your eyes look along a human leg to a thin and sharp horn protruding from the heel. When you relax, your feet are pointing down and their old posture is only possible with an enormous effort. <b>Your feet are now formed into demonic high-heels.</b> Tentatively you stand up and try to take a few steps. To your surprise you feel as if you were born with this and stride vigorously forward, hips swaying.", false);	
-			player.lowerBody = 5;
+			player.lowerBody = LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
 		}
 	}
 	//Grow demon wings
-	if(player.wingType != 7 && rand(8) == 0 && player.cor >= 50) {
+	if(player.wingType != WING_TYPE_BAT_LIKE_LARGE && rand(8) == 0 && player.cor >= 50) {
 		//grow smalls to large
-		if(player.wingType == 6 && player.cor >= 75) {
+		if(player.wingType == WING_TYPE_BAT_LIKE_TINY && player.cor >= 75) {
 			outputText("\n\n", false);
 			outputText("Your small demonic wings stretch and grow, tingling with the pleasure of being attached to such a tainted body.  You stretch over your shoulder to stroke them as they unfurl, turning into full-sized demon-wings.  <b>Your demonic wings have grown!</b>", false);
-			player.wingType = 7;
+			player.wingType = WING_TYPE_BAT_LIKE_LARGE;
 			player.wingDesc = "large, bat-like";
 		}
-		else if(player.wingType == 8) {
+		else if(player.wingType == WING_TYPE_SHARK_FIN) {
 			outputText("\n\n", false);
 			outputText("The muscles around your shoulders bunch up uncomfortably, changing to support the new bat-like wings growing from your back.  You twist your head as far as you can for a look and realize your fin has changed into ", false);
 			outputText("small ", false);
-			player.wingType = 6;
+			player.wingType = WING_TYPE_BAT_LIKE_TINY;
 			player.wingDesc = "tiny, bat-like";
 			outputText("bat-like demon-wings!", false);
 		}
-		else if(player.wingType == 1 || player.wingType == 2) {
+		else if(player.wingType == WING_TYPE_BEE_LIKE_SMALL || player.wingType == WING_TYPE_BEE_LIKE_LARGE) {
 			outputText("\n\n", false);
 			outputText("The muscles around your shoulders bunch up uncomfortably, changing to support your wings as you feel their weight increasing.  You twist your head as far as you can for a look and realize they've changed into ", false);
-			if(player.wingType == 1) {
+			if(player.wingType == WING_TYPE_BEE_LIKE_SMALL) {
 				outputText("small ", false);
-				player.wingType = 6;
+				player.wingType = WING_TYPE_BAT_LIKE_TINY;
 				player.wingDesc = "tiny, bat-like";
 			}
 			else {
 				outputText("large ", false);
-				player.wingType = 7;
+				player.wingType = WING_TYPE_BAT_LIKE_LARGE;
 				player.wingDesc = "large, bat-like";
 			}
 			outputText("<b>bat-like demon-wings!</b>", false);
 		}
 		//No wings
-		else if(player.wingType == 0) {
+		else if(player.wingType == WING_TYPE_NONE) {
 			outputText("\n\n", false);
 			outputText("A knot of pain forms in your shoulders as they tense up.  With a surprising force, a pair of small demonic wings sprout from your back, ripping a pair of holes in the back of your " + player.armorName + ".  <b>You now have tiny demonic wings</b>.", false);
-			player.wingType = 6;
+			player.wingType = WING_TYPE_BAT_LIKE_TINY;
 			player.wingDesc = "tiny, bat-like";
 		}
 		

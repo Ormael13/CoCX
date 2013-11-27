@@ -331,7 +331,7 @@ function impGangGetsRapedByMale():void {
 function impGangGetsRapedByFemale():void {
 	outputText("", true);
 	outputText("You walk around to one of the demons and push him onto his back.  Your " + player.armorName + " falls to the ground around you as you disrobe, looking over your tiny conquest.  A quick ripping motion disposes of his tiny loincloth, leaving his thick demon-tool totally unprotected. You grab and squat down towards it, rubbing the corrupted tool between your legs ", false);
-	if(player.vaginas[0].vaginalWetness >= 3) outputText("and coating it with feminine drool ", false);
+	if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLICK) outputText("and coating it with feminine drool ", false);
 	outputText("as you become more and more aroused.  It parts your lips and slowly slides in.  The ring of tainted nodules tickles you just right as you take the oddly textured member further and further into your willing depths.", false);
 	cuntChange(15,true,true,false);
 	outputText("\n\n", false);
@@ -341,7 +341,7 @@ function impGangGetsRapedByFemale():void {
 	outputText("You begin riding the tiny demon, lifting up, and then dropping down, feeling each of the nodes gliding along your sex-lubed walls.   As time passes and your pleasure mounts, you pick up the pace, until you're bouncing happily atop your living demon-dildo.\n\n", false);
 	
 	outputText("The two of you cum together, though the demon's pleasure starts first.  A blast of his tainted seed pushes you over the edge.  You sink the whole way down, feeling him bump your cervix and twitch inside you, the bumps on his dick swelling in a pulsating wave in time with each explosion of fluid.  ", false);
-	if(player.vaginas[0].vaginalWetness >= 5) outputText("Cunt juices splatter him as you squirt explosively, leaving a puddle underneath him.  ", false);
+	if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLAVERING) outputText("Cunt juices splatter him as you squirt explosively, leaving a puddle underneath him.  ", false);
 	else outputText("Cunt juices drip down his shaft, oozing off his balls to puddle underneath him.  ", false);
 	outputText("The two of you lie together, trembling happily as you're filled to the brim with tainted fluids.\n\n", false);
 	
@@ -390,8 +390,8 @@ function setDescriptionForPlantPot():void {
 	//[Round 2 Description]
 	else if(monster.statusAffectv1("Round") == 2) {
 		monster.long = "You're still trapped inside the pod!  By now the walls are totally soaked with some kind of viscous slime.  The smell of it is unbearably sweet and you have to put a hand against the wall to steady yourself.  Warm tentacles are curling and twisting underneath your armor, caressing every ";
-		if(player.skinType == 1) monster.long += "furry ";
-		if(player.skinType == 2) monster.long += "scaley ";
+		if(player.skinType == SKIN_TYPE_FUR) monster.long += "furry ";
+		if(player.skinType == SKIN_TYPE_SCALES) monster.long += "scaley ";
 		monster.long += "inch of your " + player.legs() + ", crotch, and " + assDescript() + ".";
 	}
 	//[Round 3 Description]
@@ -694,7 +694,7 @@ function useValaPtII():void {
 	//HERPY DERPY HERMY
 	else if(player.gender == 3) {
 		outputText("She squeals in delight and her knees wobble, the force of your thrust almost knocking her head into the wall she's shackled next to. You work the frightful dildo further past the girl's gaping spincter until a mere 9 inches remains protruding from her bright pink hole. You smear more of the girl's lubrication along the exposed shaft and turn your back to the fairy. Bending down, you slowly rub your " + buttDescript() + " against the smaller, rounded base of the minotaur cock. Though your end is veiny and sheathed, it lacks the broad flare of the cock head, so you press your " + vaginaDescript(0) + " against it and brace your hands on your ", false);
-		if(player.lowerBody == 3) outputText("tail", false);
+		if(player.lowerBody == LOWER_BODY_TYPE_NAGA) outputText("tail", false);
 		else outputText("knees", false);
 		outputText(".  Rolling your ass up and down, you let your own excitement-thick lube smear the rounded end before you take a step backwards, toward the fairy. The bulb slides past your " + buttDescript() + " and presses against your " + vaginaDescript(0) + ", its girth exciting and frightening. You take a deep breath, but before you're ready, the impaled fairy bucks backward and drives the dildo into your unprepared cunt, provoking a cry of surprise.\n\n", false);
 
@@ -731,7 +731,7 @@ function healVala():void {
 	if(hasItem("PurHony",1)) {
 		consumeItem("PurHony",1);
 		outputText("You're not sure if Pure Honey will do the trick, but it seems like the most likely candidate. You set the broken girl down and step over to the alchemy table. She clings onto your ", false);
-		if(player.lowerBody == 3) outputText("tail", false);
+		if(player.lowerBody == LOWER_BODY_TYPE_NAGA) outputText("tail", false);
 		else outputText(player.leg(), false);
 		outputText(" as you walk, and you end up dragging her across the dungeon floor leaving a trail of her cum behind you. Before things can get too out of hand with the needy girl, you pull out the vial of Pure Honey and arrange the equipment in front of you. Using the cleanest of the pipettes, you take a small portion of the honey and mix it with what you hope to be water, diluting the rich mixture to a less viscous state. Working quickly, you manage to produce a draught that the weak girl can tolerate. By now, she's managed to work her way to a sitting position and is grinding her dripping sex against your " + player.foot() + ". You lean down and hold her nose to make her open her mouth. She gleefully opens wide, tongue thrashing about in anticipation. You pour the sweet-smelling concoction down her anxious throat and begin to re-cork the rest of your honey.\n\n", false);
 		
@@ -1152,7 +1152,7 @@ function valaFightVictoryFuck():void {
 
 		outputText("She needs no additional urging, and wraps her whip-thin arms around your " + buttDescript() + " with a grip like steel. Her corruption-strengthened dragonfly wings flutter uselessly for a moment, but as your excitement begins to drip warm fluid onto her tongue, she flaps like she means it.  ", false);
 		//(PC Has Wings: 
-		if(player.wingType > 0) outputText("You decide to give her a hand, and flap your " + player.wingDesc + " as hard as you can, the added thrust giving her the start she needs.  ", false);
+		if(player.wingType > WING_TYPE_NONE) outputText("You decide to give her a hand, and flap your " + player.wingDesc + " as hard as you can, the added thrust giving her the start she needs.  ", false);
 		
 		outputText("Like a hummingbird on coffee, the fairy's wings blur as she pulls the two of you into the air and a thrill of glee sends shivers down your spine as the two of you slowly circle the room, clinging to each other in a desperate 69. Under her well-practiced mouth, you can feel your " + vaginaDescript(0) + " drooling nearly as much as the fey girl's, your utter dominion of the fairy delighting you nearly to the verge of orgasm.\n\n", false);
 
@@ -1164,7 +1164,7 @@ function valaFightVictoryFuck():void {
 		
 		outputText("She needs no additional urging, and wraps her whip-thin legs around your " + hipDescript() + " with a grip like steel. Her corruption-strengthened dragonfly wings flutter uselessly for a moment, but as your excitement begins to leak globs of pre-cum into her sucking box, she flaps like she means it. ", false);
 		//(PC Has Wings: 
-		if(player.wingType > 0) outputText("You decide to give her a hand, and flap your " + player.wingDesc + " as hard as you can, the added thrust giving her the start she needs.  ", false);
+		if(player.wingType > WING_TYPE_NONE) outputText("You decide to give her a hand, and flap your " + player.wingDesc + " as hard as you can, the added thrust giving her the start she needs.  ", false);
 		outputText("Like a hummingbird on coffee, the fairy's wings blur as she pulls the two of you into the air and a thrill of glee sends shivers down your spine as the two of you slowly circle the room, you mounting her doggy-style, hands gripping her ribs as you lean over her. The tight clenching of her overburdened flight turns her loose pussy into a tight, clenching sphincter that practically milks your shaft with every heartbeat.\n\n", false); 
 		
 		outputText("She makes a short circuit around the room, slowing enough to savor each thrust, your pounding giving her a short burst of speed as you ride the bitch through the air, every muscle in both of your bodies tense with the effort. You're still not convinced she's been sufficiently humbled, however, so you thread your arms under her wings and loop your hands around the sides of her face. You slide your forefingers into her mouth and hook the fingers to pull her cheeks wide open. Like a horse's reins, you jerk the fairy's head back and wrap your other fingers under her jaw, fully controlling her head. She tries to speak, but slurs the words, drool gushing from her wrenched mouth. You guide her head up, and she rises, descending when you yank it down. Satisfied that she understands your commands, you decide that it's time to take your mare through her paces.", false);
@@ -1535,7 +1535,7 @@ function cleansedFirstRemeet():void {
 
 	outputText("When Vala finishes delivering drinks and making sure everybody is set, she lets the bartender know that she'll be taking a break and leaves her apron behind the bar. She leads you to a store room in back and closes the door behind you. Offering you the only chair in the room, a low, wide stool, she seems content to flutter in the air while the two of you talk, her obscene strength making constant flight trivial.  ", false);
 	//(NAGA/CENTAUR
-	if(player.lowerBody == 4 || player.lowerBody == 3) outputText("You eye the stool doubtfully, but she seems insistent, so you lower your body onto the wooden seat and are surprised when it manages to support your upper torso with only a small groan of protest. You fold the rest of your lower body behind you.  ", false);
+	if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR || player.lowerBody == LOWER_BODY_TYPE_NAGA) outputText("You eye the stool doubtfully, but she seems insistent, so you lower your body onto the wooden seat and are surprised when it manages to support your upper torso with only a small groan of protest. You fold the rest of your lower body behind you.  ", false);
 	outputText("She explains how, after coming to, she tried to return to the deepest section of the forest, where her sisters lived. Even though they were willing to take her in, it was clear she no longer belonged amongst them. It was sheer chance that she stumbled upon one of her sisters who was making a trip to Tel'Adre for unrelated business. When she followed the other girl into the Wet Bitch, the urge to reclaim her life surged in her gut and she asked for a job on the spot. It turned out her wings made the job much easier on packed nights, when the patrons get a little too clingy or the more endowed customers' engorged organs would trip a less aerial serving girl.\n\n", false);
 	
 	outputText("In turn, she listens to you relate your latest adventures eagerly, gazing a little too deeply into your eyes and laughing a little too hard at your jokes. Before too long, it's clear the girl has one thing on her mind. She reaches a hand out and touches your shoulder gently. \"<i>Surely you didn't think the drink would be your only reward?</i>\" she murmurs, windy voice husky with desire. Her pink eyes stare into yours, no longer lost to mindless lust, but full of want and intellect, a doll no longer.\n\n", false);
@@ -1864,11 +1864,11 @@ function gigaArouse():void {
 		if(player.lust >= 30 && player.lust < 60 && player.cocks.length == 1) outputText(SMultiCockDesc() + " hardens and twitches, distracting you further.  ", false);
 	}
 	if(player.vaginas.length > 0) {
-		if(player.lust >= 60 && player.vaginas[0].vaginalWetness == 1 && player.vaginas.length == 1) outputText("Your " + allVaginaDescript() + " dampens perceptibly, feeling very empty.  ", false);
-		if(player.lust >= 60 && player.vaginas[0].vaginalWetness == 2 && player.vaginas.length > 0) outputText("Your crotch becomes sticky with girl-lust, making it clear to " + monster.a + monster.short + " just how welcome your body finds the spell.  ", false);
-		if(player.lust >= 60 && player.vaginas[0].vaginalWetness == 3 && player.vaginas.length == 1) outputText("Your " + allVaginaDescript() + " becomes sloppy and wet, dribbling with desire to be mounted and fucked.  ", false);
-		if(player.lust >= 60 && player.vaginas[0].vaginalWetness == 4 && player.vaginas.length > 0) outputText("Thick runners of girl-lube stream down the insides of your thighs as your crotch gives into the demonic magics.  You wonder what " + monster.a + monster.short + "'s cock would feel like inside you?  ", false);
-		if(player.lust >= 60 && player.vaginas[0].vaginalWetness == 5 && player.vaginas.length == 1) outputText("Your " + allVaginaDescript() + " instantly soaks your groin with the heady proof of your need.  You wonder just how slippery you could " + monster.a + monster.short + "'s dick when it's rammed inside you?  ", false);
+		if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL && player.vaginas.length == 1) outputText("Your " + allVaginaDescript() + " dampens perceptibly, feeling very empty.  ", false);
+		if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET && player.vaginas.length > 0) outputText("Your crotch becomes sticky with girl-lust, making it clear to " + monster.a + monster.short + " just how welcome your body finds the spell.  ", false);
+		if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK && player.vaginas.length == 1) outputText("Your " + allVaginaDescript() + " becomes sloppy and wet, dribbling with desire to be mounted and fucked.  ", false);
+		if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING && player.vaginas.length > 0) outputText("Thick runners of girl-lube stream down the insides of your thighs as your crotch gives into the demonic magics.  You wonder what " + monster.a + monster.short + "'s cock would feel like inside you?  ", false);
+		if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING && player.vaginas.length == 1) outputText("Your " + allVaginaDescript() + " instantly soaks your groin with the heady proof of your need.  You wonder just how slippery you could " + monster.a + monster.short + "'s dick when it's rammed inside you?  ", false);
 	}
 	if(player.lust >= 100) doNext(5011)
 	else doNext(1);
@@ -2050,7 +2050,7 @@ function femaleZetazOver():void {
 	outputText(" you as you're thrown atop one of the tables.   You grunt as leather straps are produced and laid over your form to restrain you.  In the span of a minute you're completely immobilized from the neck down, and your " + player.legs() + " are kept spread to allow easy access to your " + vaginaDescript(0) + ".\n\n", false);
 	
 	outputText("Shuffling as they remove their garments, the entire gang of imps, as well as Zetaz, are completely nude.  They've all grown full and hard from the sight of your nubile, restrained body, and in spite of yourself you get ", false);
-	if(player.vaginas[0].vaginalWetness >= 4) outputText("even more wet ", false);
+	if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_DROOLING) outputText("even more wet ", false);
 	else outputText("a little wet ", false);
 	outputText("from the masculine scent the aroused penises are producing.  ", false);
 	if(player.cor < 33) outputText("How could you be turned on by such a repulsive situation?  You're going to be raped, brainwashed, and either kept as a pet or tossed in a milking tube for the rest of your life and your body is acting like some horny slut!", false);
@@ -2068,8 +2068,8 @@ function femaleZetazOver():void {
 	outputText("  Warm slipperiness slides over your lips again, feeling nearly as good as it would on your lower lips, and you pull your rebellious tongue back into your mouth with a gasp of pleasure.\n\n", false);
 	
 	outputText("This must be what Zetaz was waiting for, and the imp carefully injects the next chemical cocktail into the other side of your neck while you're distracted by orally masturbating your new mouth.  Your " + vaginaDescript(0) + " ", false);
-	if(player.vaginas[0].vaginalWetness >= 4) outputText("gushes fresh fluids into a puddle on the table", false);
-	else if(player.vaginas[0].vaginalWetness >= 2) outputText("drools a heavy flow of liquid arousal onto the hardwood table", false);
+	if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_DROOLING) outputText("gushes fresh fluids into a puddle on the table", false);
+	else if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_WET) outputText("drools a heavy flow of liquid arousal onto the hardwood table", false);
 	else outputText("begins to dribble a steady flow of liquid on to the table's girl-slicked boards", false);
 	outputText(".  ", false);
 	if(player.hasStatusAffect("heat") >= 0) outputText("D", false);
@@ -2123,7 +2123,7 @@ function zetazBadEndEpilogue():void {
 	else if(player.gender == 3) {
 		//[Epilogue]
 		outputText("The champion was fucked and brainwashed repeatedly for a few more days until Zetaz was sure she understood her place in the world.  Once rendered completely obedient, they released her from her bindings.  It was time she was turned over to Lethice.  ", false);
-		if(player.wingType != 6 || player.wingType != 7) outputText("Zetaz gave her one of the weaker imps to penetrate and taught her to fly with her new, demonic wings.  ", false);
+		if(player.wingType != WING_TYPE_BAT_LIKE_TINY || player.wingType != WING_TYPE_BAT_LIKE_LARGE) outputText("Zetaz gave her one of the weaker imps to penetrate and taught her to fly with her new, demonic wings.  ", false);
 		else outputText("Zetaz gave her one of the weaker imps to penetrate during the journey.  ", false);
 		outputText("With preparations complete, Zetaz, the champion, and a few dozen imps flew to the mountain peak.\n\n", false);
 		
@@ -2164,7 +2164,7 @@ function hermZetazOver():void {
 	outputText("The sounds of numerous footfalls and clinking glass signal that the mob of imps has returned, bringing what sounds like hundreds of vials worth of their foul concoctions.  Zetaz releases your tumescent member and reaches over for something, then returns to your view bearing a ring gag.  Even turned on, defeated, and immobilized on a table, you try your best to fight him, but all that gets you is slapped.  The imp's palm smacks you hard enough to stun you and leave your ears ringing, and when you blink the stars from your eyes, your mouth is forced open with your tongue hanging out lewdly.\n\n", false);
 	
 	outputText("Another of Zetaz's brothers, or perhaps sons, hands him a tube with a funnel, and he easily threads the funnel's tube through the ring gag.  Foul remnants of whatever it was used for last leave a sour taste on your tongue, but worse yet is the knowledge that you're going to be force-fed tainted, body-altering, mind-melting drugs.  A drop of pre-cum hits your belly and your thighs grow ", false);
-	if(player.vaginas[0].vaginalWetness < 4) outputText("sticky", false);
+	if(player.vaginas[0].vaginalWetness < VAGINA_WETNESS_DROOLING) outputText("sticky", false);
 	else outputText("soaked", false);
 	outputText(" from the thoughts.  ", false);
 	if(player.cor < 33) outputText("Are you really being turned on by such lewd, debased thoughts?", false);
@@ -2184,8 +2184,8 @@ function hermZetazOver():void {
 	if(player.horns > 0) outputText(" and adding to your existing pair", false);
 	else outputText(" and giving you an exotic, tainted appearance", false);
 	outputText(".  ", false);
-	if(player.lowerBody != 5) outputText("Your " + player.feet() + " have been changing throughout the ordeal, but you didn't notice your " + player.legs() + " becoming such lissom, lengthy legs, or your heels growing long, high-heel-like spikes.  ", false);
-	if(player.tailType != 3) outputText("A tail snakes around your leg and begins to caress your " + vaginaDescript(0) + ", then plunges in to fuck the squirting orifice while you drink.  ", false);
+	if(player.lowerBody != LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS) outputText("Your " + player.feet() + " have been changing throughout the ordeal, but you didn't notice your " + player.legs() + " becoming such lissom, lengthy legs, or your heels growing long, high-heel-like spikes.  ", false);
+	if(player.tailType != TAIL_TYPE_DEMONIC) outputText("A tail snakes around your leg and begins to caress your " + vaginaDescript(0) + ", then plunges in to fuck the squirting orifice while you drink.  ", false);
 	else outputText("Your tail snakes around your leg and begins to caress your " + vaginaDescript(0) + ", then plunges in to fuck the squirting orifice while you drink.  ", false);
 	outputText("The imps start hooting and cat-calling, laughing and prodding your body with their twisted demonic members as your mind starts to come apart in the seething oven of unnatural lust.\n\n", false);
 	//NEXT

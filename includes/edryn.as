@@ -120,12 +120,12 @@ function edrynBarTalk():void {
 		}
 	}
 	outputText("Edryn smiles pleasantly as you approach, ", false);
-	if(player.lowerBody == 4) outputText("offering you a spot at the table across from her.  You realize your companion isn't on any kind of seat at all, and is instead 'sitting' on her lower half.  You do the same, settling down across from her, thankful this bar was made to accommodate centaurs.", false);
+	if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) outputText("offering you a spot at the table across from her.  You realize your companion isn't on any kind of seat at all, and is instead 'sitting' on her lower half.  You do the same, settling down across from her, thankful this bar was made to accommodate centaurs.", false);
 	else outputText("gesturing to a nearby stool.  You grab the seat and realize that your centaur companion isn't sitting still at all, but is instead 'sitting' on her lower half, which currently lies on the floor.", false);
 	outputText("  Despite the oddity of the situation, you stay and enjoy a light conversation with her.  You find the conversation to be interesting, and the pair of you stay there to munch on a light meal of breads, cheeses, and a glass of wine.  While you find the time pleasant, you have a feeling that something is 'off'.\n\n", false);  
 	//New PG
 	outputText("You take a close look at your dinner companion, trying to puzzle out what you're picking up on, but you just can't place it.  Edryn burps quietly, apologizing for her rudeness, and excuses herself to the girl's room.  As she turns away to leave, you get a good look at her backside.  Her horse-like sex is huge and puffy, and glistening with moisture.  The gentle flicking of her tail from side to side pushes her musky scent into you like a wave, ", false);
-	if(player.lowerBody == 4 && player.totalCocks() > 0) {
+	if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR && player.totalCocks() > 0) {
 		outputText("and the potent female scent works its way into your blood, making you dizzy as your " + cockDescript(0) + " ", false);
 		if(player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("pours out of its sheath", false);
 		else outputText("fills near instantaneously", false);
@@ -214,7 +214,7 @@ function edrynOffer():void {
 	if(x < 0) x = 0;
 	
 	//(cont centaur)
-	if(player.lowerBody == 4 && player.totalCocks() > 0) {
+	if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR && player.totalCocks() > 0) {
 		//Too small
 		if(player.cockArea(x) < 24) {
 			outputText("Oh my, you're a little bit small for my tastes love.  Maybe you should try some of the local delicacies and trot back here so I can help you out ok?</i>\"\n\n", false);
@@ -783,7 +783,7 @@ function fuckPregEdryn():void {
 	if(x < 0) x = 0;
 	outputText("", true);
 	//NONTAUR
-	if(player.lowerBody != 4) {
+	if(player.lowerBody != LOWER_BODY_TYPE_CENTAUR) {
 		outputText("Edryn lurches forwards as soon as the door closes behind you, slamming her powerful frame into you with enough force to propel you several feet back onto a large pile of pillows in the corner.  The feeling of her massive, milk-drooling teats ", false);
 		if(player.tallness < 60) outputText("bouncing against the top of your head", false);
 		else if(player.tallness < 84) outputText("battering your face", false);
@@ -892,7 +892,7 @@ function jizzFromEatingPregdrynOut():void {
 	outputText("Squirming and writhing, Edryn moans, \"<i>Yessssss right-ahhh-there.  Mmmm I think you're hooked on my cunt aren't you?</i>\"  She stretches back to pat your head and coos, \"<i>Yes that's a good " + player.mf("boy","girl") + ", lap it allll up.  Oh my, you're dripping like a sieve just from eating me out!  Oooh yeah, lower, lick my cliiiiit-yes yes-ooooh... Mmm I bet the smell is just overwhelming you isn't it?  Why don't you suckle my clit and take a quick breather.  I bet you'll be spurting helplessly in no time.</i>\"\n\n", false);
 	
 	outputText("You tremble as you pull away, licking her lust from your lips and gasping for air as you shift to lick at her clit.", false);
-	if(player.lowerBody == 4) {
+	if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) {
 		outputText("  Your hooves twitch weekly on the floor, forgetten about as you focus entirely on your hands, mouth, and pulsating " + Appearance.cockNoun(CockTypesEnum.HUMAN), false);
 		if(player.cockTotal() > 1) outputText("s", false);
 		outputText(".", false);
@@ -902,7 +902,7 @@ function jizzFromEatingPregdrynOut():void {
 	outputText("Startled from your sexual fog, you jerk back and gasp.  The smell – it's like sex distilled into orgasm and fired straight into your brain.  Your " + hipDescript() + " shake uncontrollably, spasming wildly as your scent-addled mind sets off a full-body orgasm.  ", false);
 	if(player.hasVagina()) {
 		outputText("Your " + vaginaDescript(0) + " contracts and spasms with the rest of you, ", false);
-		if(player.vaginas[0].vaginalWetness == 5) outputText("squirting", false);
+		if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText("squirting", false);
 		else outputText("leaking", false);
 		outputText(" in a pale imitation of Edryn's box.  ", false);
 	}
@@ -1039,7 +1039,7 @@ function eatEdrynPussyLikeABawss():void {
 	outputText("\n\nEdryn trots closer and says, \"<i>Then you'd best eat up hon, 'cause I got you a four course meal.</i>\"  Her swollen pussy is just inches away from you now.  The black lips part slightly before you, winking slowly as moisture begins to run from the bestial entrance, visibly fogging the air before you.  A web of girlish goo hangs across the slightly-spread entrance, and after one last inhalation of her almost sweet scent, you dive on in.  Your nose is the first casualty of your aggressive war on centaur-cunt, slurped down by the hungry folds as soon as you're pushing up against them.  You keep pushing until your mouth has slipped through the moist, sticky veil that hangs across her vagina, kissing her fat-lipped horse-pussy with gusto while you let your tongue slither out to play.");
 	
 	outputText("\n\nAt the first lick, Edryn gets palpably wetter.  Sloppy juice washes out from inside her, covering your cheeks and chin before dripping off onto your [chest], leaving you marked with her feminine odor.  ");
-	if(player.tongueType > 0) outputText("She's not even begun to taste the fruits of your talents, and you let your long, long tongue spool out inside her, pressing hard on her walls and tenderly flicking across each sensitive fold inside her.  ");
+	if(player.tongueType > TONUGE_HUMAN) outputText("She's not even begun to taste the fruits of your talents, and you let your long, long tongue spool out inside her, pressing hard on her walls and tenderly flicking across each sensitive fold inside her.  ");
 	outputText("The busty, animalistic woman moans unashamedly, hands going to her breasts to squeeze them, her clit filling up to its full size.  You can feel the sensitive nodule plump up against the top of your mouth, so you open wide enough to give it a quick suck before returning to polishing her innards.  After that the equine pleasure-buzzer gets rock-hard and continues to bulge meaningfully against you, pulsing hotly in your mouth.");
 	outputText("\n\nYou sway dizzily on your [feet] as you try to focus on just basking in her pussy's delicious... potent... sexy aroma.  [EachCock] is lifting needily with every passing second.  ");
 	if(player.cockTotal() == 1) outputText("It's");

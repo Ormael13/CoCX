@@ -2341,7 +2341,7 @@ function fuckAmilyPreg():void {
 
 	outputText("She pulls your head in, your lips locking in a passionate display, her hands tracing a line down to your chest until she's gently fondling your cock.  ", false);
 	//(If player has a tail) 
-	if(player.tailType > 0) outputText("You even feel Amily wrap her mousy tail around your own, making you chuckle softly into your lovers mouth.  ", false);
+	if(player.tailType > TAIL_TYPE_NONE) outputText("You even feel Amily wrap her mousy tail around your own, making you chuckle softly into your lovers mouth.  ", false);
 	else outputText("A tickling sensation hits your body, making you snort and giggle, realising that Amily's tail is fondling your thigh.  ", false);
 	outputText("Your eyes catch sight of Amily's swollen breasts, seeing a few drops of milk on her stiff nipples. You smirk and fondle her breasts, breaking the kiss every few moments to get a taste of her milk. Amily moans in response, tightening her grip on you every time your lips return to her own.\n\n", false);
 	
@@ -3246,7 +3246,7 @@ function corruptAmilyGetsDickMaxxedOut():void {
 	outputText("", true);
 	amilySprite();
 	//(If PC has 2 feet that are not hooves)
-	if(player.isBiped() && player.lowerBody != 1) {
+	if(player.isBiped() && player.lowerBody != LOWER_BODY_TYPE_HOOFED) {
 		outputText("You're not satisfied; it needs to be bigger. You put your " + player.foot() + " on her cock and begin stroking it, drawing more pleasured moans from the slutty corrupt futa-mouse. You stroke her into a orgasm, milky white fluid flows out of her dick to hit her in the chest and in the face; but you don't stop, her cock throbs and spills pre-cum, making your movements easier. You keep stroking her cock with you " + player.foot() + " vigorously, willing it to grow more and more; each time her cock throbs and orgasms it grows a bit more.\n\n", false); 
 
 		outputText("Amily is already covered in her own cum, her juices pooling under her; but you never stop, you keep stroking until she comes again, her cock growing more and more. Finally when one final orgasm brings it to just about 15 inches long and three thick. You press on her cockhead with your " + player.foot() + " and she comes one last time, coating your " + player.foot() + " with spooge. \"<i>Clean this up,</i>\" you order her, presenting her with your messy " + player.foot() + ". She obediently begins licking at the mess, tasting herself in the process. After its clean you tell her you will call her when she you need her services again, that she is to practice with her new tool until you do so. \"<i>Yes... " + player.mf("Master","Mistress") + ",</i>\" she answers tiredly, panting.\n\n", false);
@@ -6336,7 +6336,7 @@ function rapeCorruptAmily4Male():void {
 
 	outputText("Her words please you, and you ", false);
 	if(player.isNaga()) outputText("coil your serpentine tail around her head.", false);
-	else if(player.lowerBody == 8) outputText("engulf her maw in slime.", false);
+	else if(player.lowerBody == LOWER_BODY_TYPE_GOO) outputText("engulf her maw in slime.", false);
 	else outputText("put a " + player.foot() + " on her head.", false);
 	outputText(" She falls silent and you say. \"<i>Very well. From now on I am your one and only " + player.mf("master","mistress") + ".  You will address me as such, always. My word is law, and you shall do whatever I tell you to, whenever I tell you to. Rise, it's time to break you into your new role as my cum-dumpster.</i>\"\n\n", false);
 
@@ -6414,7 +6414,7 @@ function rapeCorruptAmily4Female():void {
 
 	outputText("Her words please you, and you ", false);
 	if(player.isNaga()) outputText("coil your serpentine tail around her head.", false);
-	else if(player.lowerBody == 8) outputText("engulf her maw in slime.", false);
+	else if(player.lowerBody == LOWER_BODY_TYPE_GOO) outputText("engulf her maw in slime.", false);
 	else outputText("put a " + player.foot() + " on her head.", false);
 	outputText("  She falls silent and you say, \"<i>Very well. From now on I am your one and only mistress. You will address me as such, always. My word is law, and you shall do whatever I tell you to, whenever I tell you to. Rise, it's time to break you into your new role as my cum-dumpster.</i>\"\n\n", false);
 
@@ -6994,7 +6994,7 @@ function pureAmilyPutsItInYourRectumDamnNearKilledEm():void {
 	}
 	//(Merge):
 	outputText("Working delicately, she carefully coats her shaft in a generous layer of the green ointment, until her cock glistens with an odd greenish sheen.  You take your position on the ground, lowering yourself down onto your knees and elbows, resting your chin on top of your hands and raising your " + buttDescript() + " into the air", false);
-	if(player.tailType > 0) outputText(", moving your tail out of the way", false);
+	if(player.tailType > TAIL_TYPE_NONE) outputText(", moving your tail out of the way", false);
 	outputText(".\n\n", false);
 
 	outputText("Amily ", false);

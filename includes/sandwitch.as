@@ -90,7 +90,7 @@ function sandwitchRape():void {
 function sandwitchRaped():void {
 	spriteSelect(50);
 	outputText("", true);
-	if(player.lowerBody == 4) {
+	if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) {
 		doNext(13);
 		sandwitchCentaurBoning();
 		eventParser(5007);

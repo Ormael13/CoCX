@@ -264,17 +264,17 @@ function doCombat(eventNum:Number)
 		var button1Text:String = "Bite";
 		//Sting attack if bee butt
 		var buttText:String = "Sting";
-		if(player.tailType == 6) temp = 5037;
-		if(player.tailType == 5) {
+		if(player.tailType == TAIL_TYPE_BEE_ABDOMEN) temp = 5037;
+		if(player.tailType == TAIL_TYPE_SPIDER_ADBOMEN) {
 			temp = 5156;
 			buttText = "Web";
 		}
-		if(player.tailType == 15 || player.tailType == 7 || player.tailType == 9 || player.tailType == 14 || player.tailType == 12) {
+		if(player.tailType == TAIL_TYPE_RACCOON || player.tailType == TAIL_TYPE_SHARK || player.tailType == TAIL_TYPE_LIZARD || player.tailType == TAIL_TYPE_DRACONIC || player.tailType == TAIL_TYPE_KANGAROO) {
 			temp = 5165;
 			buttText = "Tail Whip";
 		}
 		//Gore if mino horns
-		if(player.hornType == 2 && player.horns >= 6) temp2 = 5038;
+		if(player.hornType == HORNS_COW_MINOTAUR && player.horns >= 6) temp2 = 5038;
 		//Infest if infested
 		if(player.hasStatusAffect("infested") >= 0 && player.hasCock()) {
 			if(player.statusAffects[player.hasStatusAffect("infested")].value1 == 5) {
@@ -286,18 +286,18 @@ function doCombat(eventNum:Number)
 			temp4 = 5079;
 		}
 		//Bitez
-		if(player.faceType == 4) temp5 = 5102;
-		if(player.faceType == 5) temp5 = 5117;
-		if(player.faceType == 10) temp5 = 5157;
+		if(player.faceType == FACE_SHARK_TEETH) temp5 = 5102;
+		if(player.faceType == FACE_SNAKE_FANGS) temp5 = 5117;
+		if(player.faceType == FACE_SPIDER_FANGS) temp5 = 5157;
 		//Kiss supercedes bite.
 		if(player.hasStatusAffect("Lust Stick Applied") >= 0) {
 			temp5 = 5158;
 			button1Text = "Kiss";
 		}
 		//Constrict
-		if(player.lowerBody == 3) temp6 = 5118;
+		if(player.lowerBody == LOWER_BODY_TYPE_NAGA) temp6 = 5118;
 		//Kick attackuuuu
-		else if(player.lowerBody == 4 || player.lowerBody == 1 || player.lowerBody == 12 || player.lowerBody == 14) {
+		else if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR || player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_BUNNY || player.lowerBody == LOWER_BODY_TYPE_KANGAROO) {
 			temp6 = 5150;
 			button3Text = "Kick";
 		}
@@ -2484,14 +2484,14 @@ function doCombat(eventNum:Number)
 			if(player.hasVagina()) outputText("  ", false);
 		}
 		if(player.vaginas.length > 0) {
-			if(player.lust >= 60 && player.vaginas[0].vaginalWetness == 1 && player.vaginas.length == 1) outputText("Your " + allVaginaDescript() + " dampens perceptibly.", false);
-			if(player.lust >= 60 && player.vaginas[0].vaginalWetness == 1 && player.vaginas.length > 1) outputText("Your " + allVaginaDescript() + " dampen perceptibly.", false);
-			if(player.lust >= 60 && player.vaginas[0].vaginalWetness == 2 && player.vaginas.length > 0) outputText("Your crotch becomes sticky with girl-lust.", false);
-			if(player.lust >= 60 && player.vaginas[0].vaginalWetness == 3 && player.vaginas.length == 1) outputText("Your " + allVaginaDescript() + " becomes sloppy and wet.", false);
-			if(player.lust >= 60 && player.vaginas[0].vaginalWetness == 3 && player.vaginas.length > 1) outputText("Your " + allVaginaDescript() + " become sloppy and wet.", false);
-			if(player.lust >= 60 && player.vaginas[0].vaginalWetness == 4 && player.vaginas.length > 0) outputText("Thick runners of girl-lube stream down the insides of your thighs.", false);
-			if(player.lust >= 60 && player.vaginas[0].vaginalWetness == 5 && player.vaginas.length == 1) outputText("Your " + allVaginaDescript() + " instantly soaks your groin.", false);
-			if(player.lust >= 60 && player.vaginas[0].vaginalWetness == 5 && player.vaginas.length > 1) outputText("Your " + allVaginaDescript() + " instantly soak your groin.", false);
+			if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL && player.vaginas.length == 1) outputText("Your " + allVaginaDescript() + " dampens perceptibly.", false);
+			if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL && player.vaginas.length > 1) outputText("Your " + allVaginaDescript() + " dampen perceptibly.", false);
+			if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET && player.vaginas.length > 0) outputText("Your crotch becomes sticky with girl-lust.", false);
+			if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK && player.vaginas.length == 1) outputText("Your " + allVaginaDescript() + " becomes sloppy and wet.", false);
+			if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK && player.vaginas.length > 1) outputText("Your " + allVaginaDescript() + " become sloppy and wet.", false);
+			if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING && player.vaginas.length > 0) outputText("Thick runners of girl-lube stream down the insides of your thighs.", false);
+			if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING && player.vaginas.length == 1) outputText("Your " + allVaginaDescript() + " instantly soaks your groin.", false);
+			if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING && player.vaginas.length > 1) outputText("Your " + allVaginaDescript() + " instantly soak your groin.", false);
 		}
 		outputText("\n", false);
 		if(player.lust > 99) doNext(5011)
@@ -5563,14 +5563,14 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "red";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 0;
 		monster.wingDesc = "small";
 		//Wingtype
@@ -5580,14 +5580,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 5;
+		monster.wingType = WING_TYPE_IMP;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -5596,7 +5596,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -5696,14 +5696,14 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "bronzed";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 0;
 		monster.wingDesc = "";
 		//Wingtype
@@ -5713,14 +5713,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -5729,7 +5729,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -5762,8 +5762,8 @@ function startCombat(monsterNum:Number):void {
 		monster.breastRows[1].breastRating = 5;
 		monster.breastRows[1].nipplesPerBreast = 1;
 		monster.createVagina();
-		monster.vaginas[0].vaginalWetness = 2;
-		monster.vaginas[0].vaginalLooseness = 2;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_WET;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
 		monster.vaginas[0].virgin = false;
 		monster.cumMultiplier = 3;
 		monster.hoursSinceCum = 20;
@@ -5827,14 +5827,14 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 1;
+		monster.skinType = SKIN_TYPE_FUR;
 		monster.skinTone = "white";
 		monster.skinDesc = "fur";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 0;
 		monster.wingDesc = "";
 		//Wingtype
@@ -5844,14 +5844,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -5860,7 +5860,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -5988,7 +5988,7 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 1;
+		monster.skinType = SKIN_TYPE_FUR;
 		monster.skinTone = "red";
 		monster.skinDesc = "shaggy fur";
 		//Facetype:
@@ -5996,7 +5996,7 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		//3 - cowface
-		monster.faceType = 3;
+		monster.faceType = FACE_COW_MINOTAUR;
 		monster.horns = 2;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -6006,14 +6006,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 1;
+		monster.lowerBody = LOWER_BODY_TYPE_HOOFED;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -6130,7 +6130,7 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "yellow";
 		monster.skinDesc = "skin";
 		//Facetype:
@@ -6138,8 +6138,8 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		//3 - cowface
-		monster.faceType = 3;
-		monster.antennae = 2;
+		monster.faceType = FACE_COW_MINOTAUR;
+		monster.antennae = ANTENNAE_BEE;
 		monster.horns = 0;
 		monster.wingDesc = "insect-like wings";
 		//Wingtype
@@ -6149,14 +6149,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 1;
+		monster.wingType = WING_TYPE_BEE_LIKE_SMALL;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -6166,7 +6166,7 @@ function startCombat(monsterNum:Number):void {
 		//5 - spider!
 		//6 - bee!
 		//7 - cow!
-		monster.tailType = 6;
+		monster.tailType = TAIL_TYPE_BEE_ABDOMEN;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 100;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -6197,8 +6197,8 @@ function startCombat(monsterNum:Number):void {
 		monster.breastRows[0].nipplesPerBreast = 1;
 		monster.createVagina();
 		monster.vaginas[0].virgin = false;
-		monster.vaginas[0].vaginalWetness = 5;
-		monster.vaginas[0].vaginalLooseness = 3;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLAVERING;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING;
 		monster.cumMultiplier = 1.5;
 		monster.hoursSinceCum = 10 + rand(100);
 		monster.ass.analLooseness = 4;
@@ -6261,14 +6261,14 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "green";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 0;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -6278,14 +6278,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -6294,7 +6294,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -6391,16 +6391,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "red";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 10;
-		monster.hornType = 1;
+		monster.hornType = HORNS_DEMON;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -6409,14 +6409,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -6425,7 +6425,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 3;
+		monster.tailType = TAIL_TYPE_DEMONIC;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -6461,8 +6461,8 @@ function startCombat(monsterNum:Number):void {
 		monster.cocks[1].cockType = CockTypesEnum.HUMAN;
 		monster.createVagina();
 		monster.vaginas[0].virgin = false;
-		monster.vaginas[0].vaginalWetness = 3;
-		monster.vaginas[0].vaginalLooseness = 2;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
 		monster.balls = 0;
 		monster.cumMultiplier = 3;
 		monster.ballSize = 1;
@@ -6528,16 +6528,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "white";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 0;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -6546,14 +6546,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -6562,7 +6562,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -6652,16 +6652,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "pale";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 0;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -6670,14 +6670,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -6686,7 +6686,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -6714,9 +6714,9 @@ function startCombat(monsterNum:Number):void {
 		//Create imp sex attributes
 		monster.balls = 0;
 		monster.createVagina();
-		monster.vaginas[0].vaginalLooseness = 3;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING;
 		monster.vaginas[0].virgin = false;
-		monster.vaginas[0].vaginalWetness = 2;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_WET;
 		monster.createBreastRow();
 		monster.breastRows[0].breastRating = 5;
 		monster.cumMultiplier = 3;
@@ -6783,16 +6783,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "black";
 		monster.skinDesc = "fur";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 0;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -6801,14 +6801,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -6817,7 +6817,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 2;
+		monster.tailType = TAIL_TYPE_DOG;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -6917,16 +6917,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "blue";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 12;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "tiny hidden";
 		//Wingtype
 		//0 - none
@@ -6935,7 +6935,7 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
@@ -6944,7 +6944,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - centaur!
 		//5 - demonic heels
 		//6 - demon foot-claws
-		monster.lowerBody = 5;
+		monster.lowerBody = LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -6953,7 +6953,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 3;
+		monster.tailType = TAIL_TYPE_DEMONIC;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -6983,8 +6983,8 @@ function startCombat(monsterNum:Number):void {
 		monster.createVagina();
 		monster.createBreastRow();
 		monster.breastRows[0].breastRating = 5;
-		monster.vaginas[0].vaginalWetness = 5;
-		monster.vaginas[0].vaginalLooseness = 1;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLAVERING;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
 		monster.vaginas[0].virgin = false;
 		monster.balls = 0;
 		monster.cumMultiplier = 3;
@@ -7054,16 +7054,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "light purple";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 14;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "tiny hidden";
 		//Wingtype
 		//0 - none
@@ -7072,7 +7072,7 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
@@ -7081,7 +7081,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - centaur!
 		//5 - demonic heels
 		//6 - demon foot-claws
-		monster.lowerBody = 6;
+		monster.lowerBody = LOWER_BODY_TYPE_DEMONIC_CLAWS;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -7090,7 +7090,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 3;
+		monster.tailType = TAIL_TYPE_DEMONIC;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -7189,16 +7189,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "light purple";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 18;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "tiny hidden";
 		//Wingtype
 		//0 - none
@@ -7207,7 +7207,7 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
@@ -7216,7 +7216,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - centaur!
 		//5 - demonic heels
 		//6 - demon foot-claws
-		monster.lowerBody = 5;
+		monster.lowerBody = LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -7225,7 +7225,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 3;
+		monster.tailType = TAIL_TYPE_DEMONIC;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -7254,8 +7254,8 @@ function startCombat(monsterNum:Number):void {
 		monster.createBreastRow();
 		monster.breastRows[0].breastRating = 0;
 		monster.createVagina();
-		monster.vaginas[0].vaginalWetness = 4;
-		monster.vaginas[0].vaginalLooseness = 1;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
 		monster.vaginas[0].virgin = false;
 		monster.cumMultiplier = 3;
 		monster.createCock();
@@ -7325,16 +7325,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "green";
 		monster.skinDesc = "bark";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 0;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -7343,7 +7343,7 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
@@ -7352,7 +7352,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - centaur!
 		//5 - demonic heels
 		//6 - demon foot-claws
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -7361,7 +7361,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 3;
+		monster.tailType = TAIL_TYPE_DEMONIC;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -7463,16 +7463,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "dark green";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 0;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -7481,7 +7481,7 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
@@ -7490,7 +7490,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - centaur!
 		//5 - demonic heels
 		//6 - demon foot-claws
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -7499,7 +7499,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -7529,8 +7529,8 @@ function startCombat(monsterNum:Number):void {
 		monster.breastRows[0].breastRating = 7;
 		monster.createVagina();
 		monster.createStatusAffect("Bonus vCapacity",40,0,0,0);
-		monster.vaginas[0].vaginalWetness = 4;
-		monster.vaginas[0].vaginalLooseness = 1;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
 		monster.vaginas[0].virgin = false;
 		monster.ass.analLooseness = 1;
 		monster.createStatusAffect("Bonus aCapacity",30,0,0,0);
@@ -7597,16 +7597,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "pale";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 0;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -7615,7 +7615,7 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
@@ -7624,7 +7624,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - centaur!
 		//5 - demonic heels
 		//6 - demon foot-claws
-		monster.lowerBody = 4;
+		monster.lowerBody = LOWER_BODY_TYPE_CENTAUR;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -7633,7 +7633,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 4;
+		monster.tailType = TAIL_TYPE_COW;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -7662,8 +7662,8 @@ function startCombat(monsterNum:Number):void {
 		monster.createBreastRow();
 		monster.breastRows[0].breastRating = 11;
 		monster.createVagina();
-		monster.vaginas[0].vaginalWetness = 1;
-		monster.vaginas[0].vaginalLooseness = 1;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_NORMAL;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
 		monster.vaginas[0].virgin = false;
 		monster.ass.analLooseness = 0;
 		monster.ass.analWetness = 0;
@@ -7729,16 +7729,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "greenish gray";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 0;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -7747,7 +7747,7 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
@@ -7756,7 +7756,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - centaur!
 		//5 - demonic heels
 		//6 - demon foot-claws
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -7765,7 +7765,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -7795,8 +7795,8 @@ function startCombat(monsterNum:Number):void {
 		monster.breastRows[0].breastRating = 7;
 		monster.createVagina();
 		monster.createStatusAffect("Bonus vCapacity",55,0,0,0);
-		monster.vaginas[0].vaginalWetness = 4;
-		monster.vaginas[0].vaginalLooseness = 1;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
 		monster.vaginas[0].virgin = false;
 		monster.ass.analLooseness = 1;
 		monster.createStatusAffect("Bonus aCapacity",40,0,0,0);
@@ -7862,16 +7862,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "gray";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 0;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -7880,7 +7880,7 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
@@ -7889,7 +7889,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - centaur!
 		//5 - demonic heels
 		//6 - demon foot-claws
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -7898,7 +7898,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -7928,8 +7928,8 @@ function startCombat(monsterNum:Number):void {
 		monster.breastRows[0].breastRating = 4;
 		monster.createVagina();
 		monster.createStatusAffect("Bonus vCapacity",15,0,0,0);
-		monster.vaginas[0].vaginalWetness = 4;
-		monster.vaginas[0].vaginalLooseness = 1;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
 		monster.vaginas[0].virgin = false;
 		monster.ass.analLooseness = 1;
 		monster.createStatusAffect("Bonus aCapacity",40,0,0,0);
@@ -7994,16 +7994,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "tan";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 0;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -8012,7 +8012,7 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
@@ -8021,7 +8021,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - centaur!
 		//5 - demonic heels
 		//6 - demon foot-claws
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -8030,7 +8030,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -8121,16 +8121,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "black";
 		monster.skinDesc = "fur";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 0;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -8139,14 +8139,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -8155,7 +8155,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 2;
+		monster.tailType = TAIL_TYPE_DOG;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -8252,16 +8252,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "mediterranean-toned";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 0;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -8270,7 +8270,7 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
@@ -8279,7 +8279,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - centaur!
 		//5 - demonic heels
 		//6 - demon foot-claws
-		monster.lowerBody = 8;
+		monster.lowerBody = LOWER_BODY_TYPE_GOO;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -8288,7 +8288,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -8318,8 +8318,8 @@ function startCombat(monsterNum:Number):void {
 		monster.breastRows[0].breastRating = 3;
 		monster.createVagina();
 		monster.createStatusAffect("Bonus vCapacity",40,0,0,0);
-		monster.vaginas[0].vaginalWetness = 5;
-		monster.vaginas[0].vaginalLooseness = 1;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLAVERING;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
 		monster.vaginas[0].virgin = false;
 		monster.ass.analLooseness = 1;
 		monster.createStatusAffect("Bonus aCapacity",10,0,0,0);
@@ -8384,14 +8384,14 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "spotted";
 		monster.skinDesc = "fur";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 0;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -8401,14 +8401,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -8417,7 +8417,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 2;
+		monster.tailType = TAIL_TYPE_DOG;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -8517,16 +8517,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "purple";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 2;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -8535,7 +8535,7 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
@@ -8544,7 +8544,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - centaur!
 		//5 - demonic heels
 		//6 - demon foot-claws
-		monster.lowerBody = 5;
+		monster.lowerBody = LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -8553,7 +8553,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -8583,8 +8583,8 @@ function startCombat(monsterNum:Number):void {
 		monster.breastRows[0].breastRating = 7;
 		monster.createVagina();
 		monster.createStatusAffect("Bonus vCapacity",20,0,0,0);
-		monster.vaginas[0].vaginalWetness = 5;
-		monster.vaginas[0].vaginalLooseness = 3;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLAVERING;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING;
 		monster.vaginas[0].virgin = false;
 		monster.ass.analLooseness = 4;
 		monster.createStatusAffect("Bonus aCapacity",15,0,0,0);
@@ -8656,16 +8656,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "greenish gray";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 0;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -8674,7 +8674,7 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
@@ -8683,7 +8683,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - centaur!
 		//5 - demonic heels
 		//6 - demon foot-claws
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -8692,7 +8692,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -8722,8 +8722,8 @@ function startCombat(monsterNum:Number):void {
 		monster.breastRows[0].breastRating = 4;
 		monster.createVagina();
 		monster.createStatusAffect("Bonus vCapacity",40,0,0,0);
-		monster.vaginas[0].vaginalWetness = 4;
-		monster.vaginas[0].vaginalLooseness = 0;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_TIGHT;
 		monster.vaginas[0].virgin = false;
 		monster.ass.analLooseness = 1;
 		monster.createStatusAffect("Bonus aCapacity",25,0,0,0);
@@ -8792,16 +8792,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "pink";
 		monster.skinDesc = "feathers";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 0;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "large feathery wings";
 		//Wingtype
 		//0 - none
@@ -8810,7 +8810,7 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 4;
+		monster.wingType = WING_TYPE_HARPY;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
@@ -8819,7 +8819,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - centaur!
 		//5 - demonic heels
 		//6 - demon foot-claws
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -8828,7 +8828,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -8858,8 +8858,8 @@ function startCombat(monsterNum:Number):void {
 		monster.breastRows[0].breastRating = 2;
 		monster.createVagina();
 		monster.createStatusAffect("Bonus vCapacity",40,0,0,0);
-		monster.vaginas[0].vaginalWetness = 3;
-		monster.vaginas[0].vaginalLooseness = 4;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING_WIDE;
 		monster.vaginas[0].virgin = false;
 		monster.ass.analLooseness = 1;
 		monster.createStatusAffect("Bonus aCapacity",20,0,0,0);
@@ -8927,16 +8927,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "pink";
 		monster.skinDesc = "feathers";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 0;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "large feathery wings";
 		//Wingtype
 		//0 - none
@@ -8945,7 +8945,7 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 4;
+		monster.wingType = WING_TYPE_HARPY;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
@@ -8954,7 +8954,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - centaur!
 		//5 - demonic heels
 		//6 - demon foot-claws
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -8963,7 +8963,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -8993,8 +8993,8 @@ function startCombat(monsterNum:Number):void {
 		monster.breastRows[0].breastRating = 5;
 		monster.createVagina();
 		monster.createStatusAffect("Bonus vCapacity",40,0,0,0);
-		monster.vaginas[0].vaginalWetness = 4;
-		monster.vaginas[0].vaginalLooseness = 4;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING_WIDE;
 		monster.vaginas[0].virgin = false;
 		monster.ass.analLooseness = 1;
 		monster.createStatusAffect("Bonus aCapacity",10,0,0,0);
@@ -9063,16 +9063,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "red";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 0;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "imp wings";
 		//Wingtype
 		//0 - none
@@ -9081,7 +9081,7 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
@@ -9090,7 +9090,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - centaur!
 		//5 - demonic heels
 		//6 - demon foot-claws
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -9099,7 +9099,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -9197,16 +9197,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "purple";
 		monster.skinDesc = "covering";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 0;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "";
 		//Wingtype
 		//0 - none
@@ -9215,7 +9215,7 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
@@ -9224,7 +9224,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - centaur!
 		//5 - demonic heels
 		//6 - demon foot-claws
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -9233,7 +9233,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -9319,16 +9319,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "purple";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 2;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -9337,7 +9337,7 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
@@ -9346,7 +9346,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - centaur!
 		//5 - demonic heels
 		//6 - demon foot-claws
-		monster.lowerBody = 5;
+		monster.lowerBody = LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -9355,7 +9355,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -9385,8 +9385,8 @@ function startCombat(monsterNum:Number):void {
 		monster.breastRows[0].breastRating = 7;
 		monster.createVagina();
 		monster.createStatusAffect("Bonus vCapacity",5,0,0,0);
-		monster.vaginas[0].vaginalWetness = 3;
-		monster.vaginas[0].vaginalLooseness = 2;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
 		monster.vaginas[0].virgin = false;
 		monster.ass.analLooseness = 2;
 		monster.createStatusAffect("Bonus aCapacity",10,0,0,0);
@@ -9464,16 +9464,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "fair";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 2;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "shimmering wings";
 		//Wingtype
 		//0 - none
@@ -9482,7 +9482,7 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 2;
+		monster.wingType = WING_TYPE_BEE_LIKE_LARGE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
@@ -9491,7 +9491,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - centaur!
 		//5 - demonic heels
 		//6 - demon foot-claws
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -9500,7 +9500,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -9530,8 +9530,8 @@ function startCombat(monsterNum:Number):void {
 		monster.breastRows[0].breastRating = 7;
 		monster.createVagina();
 		monster.createStatusAffect("Bonus vCapacity",25,0,0,0);
-		monster.vaginas[0].vaginalWetness = 3;
-		monster.vaginas[0].vaginalLooseness = 4;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING_WIDE;
 		monster.vaginas[0].virgin = false;
 		monster.ass.analLooseness = 4;
 		monster.createStatusAffect("Bonus aCapacity",10,0,0,0);
@@ -9600,14 +9600,14 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "red";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 0;
 		monster.wingDesc = "small";
 		//Wingtype
@@ -9617,14 +9617,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 5;
+		monster.wingType = WING_TYPE_IMP;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -9633,7 +9633,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -9735,16 +9735,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "tawny";
 		monster.skinDesc = "fur";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 2;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -9753,7 +9753,7 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
@@ -9762,7 +9762,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - centaur!
 		//5 - demonic heels
 		//6 - demon foot-claws
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -9771,7 +9771,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -9800,8 +9800,8 @@ function startCombat(monsterNum:Number):void {
 		monster.createBreastRow();
 		monster.breastRows[0].breastRating = 3;
 		monster.createVagina();
-		monster.vaginas[0].vaginalWetness = 4;
-		monster.vaginas[0].vaginalLooseness = 2;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
 		monster.vaginas[0].virgin = false;
 		monster.ass.analLooseness = 4;
 		monster.createStatusAffect("Bonus aCapacity",25,0,0,0);
@@ -9869,16 +9869,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 1;
+		monster.skinType = SKIN_TYPE_FUR;
 		monster.skinTone = "tawny";
 		monster.skinDesc = "fur";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 2;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -9887,7 +9887,7 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
@@ -9896,7 +9896,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - centaur!
 		//5 - demonic heels
 		//6 - demon foot-claws
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -9905,7 +9905,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -9934,8 +9934,8 @@ function startCombat(monsterNum:Number):void {
 		monster.createBreastRow();
 		monster.breastRows[0].breastRating = 3;
 		monster.createVagina();
-		monster.vaginas[0].vaginalWetness = 1;
-		monster.vaginas[0].vaginalLooseness = 1;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_NORMAL;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
 		monster.vaginas[0].virgin = false;
 		monster.ass.analLooseness = 0;
 		monster.createStatusAffect("Bonus vCapacity",48,0,0,0);
@@ -10003,16 +10003,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "tawny";
 		monster.skinDesc = "fur";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 2;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -10021,7 +10021,7 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
@@ -10030,7 +10030,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - centaur!
 		//5 - demonic heels
 		//6 - demon foot-claws
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -10039,7 +10039,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -10068,8 +10068,8 @@ function startCombat(monsterNum:Number):void {
 		monster.createBreastRow();
 		monster.breastRows[0].breastRating = 3;
 		monster.createVagina();
-		monster.vaginas[0].vaginalWetness = 4;
-		monster.vaginas[0].vaginalLooseness = 2;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
 		monster.vaginas[0].virgin = false;
 		monster.ass.analLooseness = 4;
 		monster.createStatusAffect("Bonus aCapacity",25,0,0,0);
@@ -10135,16 +10135,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "striped orange";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 2;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -10153,7 +10153,7 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
@@ -10162,7 +10162,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - centaur!
 		//5 - demonic heels
 		//6 - demon foot-claws
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -10171,7 +10171,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -10201,8 +10201,8 @@ function startCombat(monsterNum:Number):void {
 		monster.breastRows[0].breastRating = 7;
 		monster.createVagina();
 		monster.createStatusAffect("Bonus vCapacity",45,0,0,0);
-		monster.vaginas[0].vaginalWetness = 3;
-		monster.vaginas[0].vaginalLooseness = 2;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
 		monster.vaginas[0].virgin = false;
 		monster.ass.analLooseness = 2;
 		monster.createStatusAffect("Bonus aCapacity",30,0,0,0);
@@ -10271,16 +10271,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "dusky";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 2;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -10289,7 +10289,7 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
@@ -10298,7 +10298,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - centaur!
 		//5 - demonic heels
 		//6 - demon foot-claws
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -10307,7 +10307,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 4;
+		monster.tailType = TAIL_TYPE_COW;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -10337,8 +10337,8 @@ function startCombat(monsterNum:Number):void {
 		monster.breastRows[0].breastRating = 10;
 		monster.createVagina();
 		monster.createStatusAffect("Bonus vCapacity",45,0,0,0);
-		monster.vaginas[0].vaginalWetness = 4;
-		monster.vaginas[0].vaginalLooseness = 3;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING;
 		monster.vaginas[0].virgin = false;
 		monster.ass.analLooseness = 0;
 		monster.createStatusAffect("Bonus aCapacity",38,0,0,0);
@@ -10404,16 +10404,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "dusky";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 2;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -10422,7 +10422,7 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
@@ -10431,7 +10431,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - centaur!
 		//5 - demonic heels
 		//6 - demon foot-claws
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -10440,7 +10440,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 4;
+		monster.tailType = TAIL_TYPE_COW;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -10470,8 +10470,8 @@ function startCombat(monsterNum:Number):void {
 		monster.breastRows[0].breastRating = 8;
 		monster.createVagina();
 		monster.createStatusAffect("Bonus vCapacity",40,0,0,0);
-		monster.vaginas[0].vaginalWetness = 4;
-		monster.vaginas[0].vaginalLooseness = 2;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
 		monster.vaginas[0].virgin = false;
 		monster.ass.analLooseness = 0;
 		monster.createStatusAffect("Bonus aCapacity",30,0,0,0);
@@ -10537,16 +10537,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "dusky";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 2;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -10555,7 +10555,7 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
@@ -10564,7 +10564,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - centaur!
 		//5 - demonic heels
 		//6 - demon foot-claws
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -10573,7 +10573,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 4;
+		monster.tailType = TAIL_TYPE_COW;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -10668,16 +10668,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 2;
+		monster.skinType = SKIN_TYPE_SCALES;
 		monster.skinTone = "gray";
 		monster.skinDesc = "scales";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 2;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -10686,7 +10686,7 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
@@ -10695,7 +10695,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - centaur!
 		//5 - demonic heels
 		//6 - demon foot-claws
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -10704,7 +10704,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 4;
+		monster.tailType = TAIL_TYPE_COW;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -10802,7 +10802,7 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		//SKINTONE USED FOR EYES ON DRIDAH!
 		temp = rand(4);
 		if(temp == 0) monster.skinTone = "yellow";
@@ -10814,9 +10814,9 @@ function startCombat(monsterNum:Number):void {
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 0;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -10825,7 +10825,7 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
@@ -10834,7 +10834,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - centaur!
 		//5 - demonic heels
 		//6 - demon foot-claws
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -10843,7 +10843,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -10891,8 +10891,8 @@ function startCombat(monsterNum:Number):void {
 		monster.cocks[0].cockLength = 9;
 		monster.cocks[0].cockThickness = 2;
 		monster.createVagina();
-		monster.vaginas[0].vaginalWetness = 4;
-		monster.vaginas[0].vaginalLooseness = 3;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING;
 		monster.ass.analLooseness = 1;
 		monster.createStatusAffect("Bonus aCapacity",70,0,0,0);
 		monster.createStatusAffect("Bonus vCapacity",70,0,0,0);
@@ -10964,7 +10964,7 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 1;
+		monster.skinType = SKIN_TYPE_FUR;
 		monster.skinTone = "red";
 		monster.skinDesc = "shaggy fur";
 		//Facetype:
@@ -10972,7 +10972,7 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		//3 - cowface
-		monster.faceType = 3;
+		monster.faceType = FACE_COW_MINOTAUR;
 		monster.horns = 2;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -10982,14 +10982,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 1;
+		monster.lowerBody = LOWER_BODY_TYPE_HOOFED;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -10999,7 +10999,7 @@ function startCombat(monsterNum:Number):void {
 		//5 - spider!
 		//6 - bee!
 		//7 - cow!
-		monster.tailType = 7;
+		monster.tailType = TAIL_TYPE_SHARK;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -11098,7 +11098,7 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 2;
+		monster.skinType = SKIN_TYPE_SCALES;
 		monster.skinTone = "dark";
 		monster.skinDesc = "skin and scales";
 		//Facetype:
@@ -11106,7 +11106,7 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		//3 - cowface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 2;
 		monster.wingDesc = "huge";
 		//Wingtype
@@ -11116,14 +11116,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 5;
+		monster.wingType = WING_TYPE_IMP;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 1;
+		monster.lowerBody = LOWER_BODY_TYPE_HOOFED;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -11133,7 +11133,7 @@ function startCombat(monsterNum:Number):void {
 		//5 - spider!
 		//6 - bee!
 		//7 - cow!
-		monster.tailType = 9;
+		monster.tailType = TAIL_TYPE_LIZARD;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -11163,8 +11163,8 @@ function startCombat(monsterNum:Number):void {
 		monster.breastRows[0].breastRating = 4;
 		monster.breastRows[0].nipplesPerBreast = 1;
 		monster.createVagina();
-		monster.vaginas[0].vaginalWetness = 4;
-		monster.vaginas[0].vaginalLooseness = 1;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
 		monster.balls = 0;
 		monster.cumMultiplier = 1.5;
 		monster.hoursSinceCum = player.ballSize * 10;
@@ -11231,7 +11231,7 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "white";
 		monster.skinDesc = "skin";
 		//Facetype:
@@ -11239,7 +11239,7 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		//3 - cowface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 2;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -11249,14 +11249,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -11266,7 +11266,7 @@ function startCombat(monsterNum:Number):void {
 		//5 - spider!
 		//6 - bee!
 		//7 - cow!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -11296,8 +11296,8 @@ function startCombat(monsterNum:Number):void {
 		monster.breastRows[0].breastRating = 4;
 		monster.breastRows[0].nipplesPerBreast = 1;
 		monster.createVagina();
-		monster.vaginas[0].vaginalWetness = 2;
-		monster.vaginas[0].vaginalLooseness = 1;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_WET;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
 		monster.balls = 0;
 		monster.ass.analLooseness = 1;
 		monster.ass.analWetness = 0;
@@ -11363,7 +11363,7 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		temp = rand(3);
 		if(temp == 0) monster.skinTone = "blue";
 		else if(temp == 1) monster.skinTone = "purple";
@@ -11374,7 +11374,7 @@ function startCombat(monsterNum:Number):void {
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 0;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -11384,14 +11384,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -11400,7 +11400,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -11427,8 +11427,8 @@ function startCombat(monsterNum:Number):void {
 		monster.buttRating = 8;
 		//Create imp sex attributes
 		monster.createVagina();
-		monster.vaginas[0].vaginalWetness = 5;
-		monster.vaginas[0].vaginalLooseness = 1;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLAVERING;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
 		monster.balls = 0;
 		monster.ass.analLooseness = 1;
 		monster.ass.analWetness = 5;
@@ -11502,16 +11502,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "dusky";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 2;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -11520,7 +11520,7 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
@@ -11529,7 +11529,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - centaur!
 		//5 - demonic heels
 		//6 - demon foot-claws
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -11538,7 +11538,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 4;
+		monster.tailType = TAIL_TYPE_COW;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -11568,8 +11568,8 @@ function startCombat(monsterNum:Number):void {
 		monster.breastRows[0].breastRating = 8;
 		monster.createVagina();
 		monster.createStatusAffect("Bonus vCapacity",85,0,0,0);
-		monster.vaginas[0].vaginalWetness = 1;
-		monster.vaginas[0].vaginalLooseness = 1;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_NORMAL;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
 		monster.vaginas[0].virgin = false;
 		monster.ass.analLooseness = 0;
 		monster.createStatusAffect("Bonus aCapacity",85,0,0,0);
@@ -11638,16 +11638,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "red";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 10;
-		monster.hornType = 1;
+		monster.hornType = HORNS_DEMON;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -11656,14 +11656,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -11672,7 +11672,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 3;
+		monster.tailType = TAIL_TYPE_DEMONIC;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -11704,8 +11704,8 @@ function startCombat(monsterNum:Number):void {
 		monster.cocks[0].cockType = CockTypesEnum.HUMAN;
 		monster.createVagina();
 		monster.vaginas[0].virgin = false;
-		monster.vaginas[0].vaginalWetness = 3;
-		monster.vaginas[0].vaginalLooseness = 2;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
 		monster.balls = 0;
 		monster.cumMultiplier = 3;
 		monster.ballSize = 1;
@@ -11774,16 +11774,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "red";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 10;
-		monster.hornType = 1;
+		monster.hornType = HORNS_DEMON;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -11792,14 +11792,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -11808,7 +11808,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 3;
+		monster.tailType = TAIL_TYPE_DEMONIC;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -11836,8 +11836,8 @@ function startCombat(monsterNum:Number):void {
 		//Create imp sex attributes
 		monster.createVagina();
 		monster.vaginas[0].virgin = false;
-		monster.vaginas[0].vaginalWetness = 5;
-		monster.vaginas[0].vaginalLooseness = 4;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLAVERING;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING_WIDE;
 		monster.balls = 0;
 		monster.cumMultiplier = 3;
 		monster.ballSize = 1;
@@ -11904,16 +11904,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "red";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 10;
-		monster.hornType = 1;
+		monster.hornType = HORNS_DEMON;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -11922,14 +11922,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -11938,7 +11938,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 3;
+		monster.tailType = TAIL_TYPE_DEMONIC;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -11966,8 +11966,8 @@ function startCombat(monsterNum:Number):void {
 		//Create imp sex attributes
 		monster.createVagina();
 		monster.vaginas[0].virgin = false;
-		monster.vaginas[0].vaginalWetness = 5;
-		monster.vaginas[0].vaginalLooseness = 4;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLAVERING;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING_WIDE;
 		monster.balls = 0;
 		monster.cumMultiplier = 3;
 		monster.ballSize = 1;
@@ -12034,16 +12034,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "red";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 10;
-		monster.hornType = 1;
+		monster.hornType = HORNS_DEMON;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -12052,14 +12052,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -12068,7 +12068,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 3;
+		monster.tailType = TAIL_TYPE_DEMONIC;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -12096,8 +12096,8 @@ function startCombat(monsterNum:Number):void {
 		//Create imp sex attributes
 		monster.createVagina();
 		monster.vaginas[0].virgin = false;
-		monster.vaginas[0].vaginalWetness = 5;
-		monster.vaginas[0].vaginalLooseness = 2;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLAVERING;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
 		monster.balls = 0;
 		monster.cumMultiplier = 3;
 		monster.ballSize = 1;
@@ -12164,16 +12164,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "red";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 10;
-		monster.hornType = 1;
+		monster.hornType = HORNS_DEMON;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -12182,14 +12182,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -12198,7 +12198,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 3;
+		monster.tailType = TAIL_TYPE_DEMONIC;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -12227,8 +12227,8 @@ function startCombat(monsterNum:Number):void {
 		monster.createCock();
 		monster.createVagina();
 		monster.vaginas[0].virgin = false;
-		monster.vaginas[0].vaginalWetness = 5;
-		monster.vaginas[0].vaginalLooseness = 2;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLAVERING;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
 		monster.balls = 0;
 		monster.cumMultiplier = 3;
 		monster.ballSize = 1;
@@ -12295,16 +12295,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "red";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 10;
-		monster.hornType = 1;
+		monster.hornType = HORNS_DEMON;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -12313,14 +12313,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -12329,7 +12329,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 3;
+		monster.tailType = TAIL_TYPE_DEMONIC;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -12357,8 +12357,8 @@ function startCombat(monsterNum:Number):void {
 		//Create imp sex attributes
 		monster.createVagina();
 		monster.vaginas[0].virgin = false;
-		monster.vaginas[0].vaginalWetness = 5;
-		monster.vaginas[0].vaginalLooseness = 2;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLAVERING;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
 		monster.balls = 0;
 		monster.cumMultiplier = 3;
 		monster.ballSize = 1;
@@ -12425,16 +12425,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "red";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 10;
-		monster.hornType = 1;
+		monster.hornType = HORNS_DEMON;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -12443,14 +12443,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -12459,7 +12459,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 3;
+		monster.tailType = TAIL_TYPE_DEMONIC;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -12491,8 +12491,8 @@ function startCombat(monsterNum:Number):void {
 		monster.cocks[0].cockType = CockTypesEnum.HUMAN;
 		monster.createVagina();
 		monster.vaginas[0].virgin = false;
-		monster.vaginas[0].vaginalWetness = 3;
-		monster.vaginas[0].vaginalLooseness = 2;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
 		monster.balls = 0;
 		monster.cumMultiplier = 3;
 		monster.ballSize = 1;
@@ -12559,16 +12559,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "red";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 10;
-		monster.hornType = 1;
+		monster.hornType = HORNS_DEMON;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -12577,14 +12577,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -12593,7 +12593,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 3;
+		monster.tailType = TAIL_TYPE_DEMONIC;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -12622,8 +12622,8 @@ function startCombat(monsterNum:Number):void {
 		if(flags[EMBER_GENDER] >= 2) {
 			monster.createVagina();
 			monster.vaginas[0].virgin = false;
-			monster.vaginas[0].vaginalWetness = 5;
-			monster.vaginas[0].vaginalLooseness = 2;
+			monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLAVERING;
+			monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
 		}
 		if(flags[EMBER_GENDER] == 1 || flags[EMBER_GENDER] == 3) {
 			monster.balls = 2;
@@ -12731,15 +12731,15 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 0;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -12748,14 +12748,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -12764,7 +12764,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -12791,8 +12791,8 @@ function startCombat(monsterNum:Number):void {
 		monster.buttRating = 8;
 		monster.createVagina();
 		monster.vaginas[0].virgin = false;
-		monster.vaginas[0].vaginalWetness = 5;
-		monster.vaginas[0].vaginalLooseness = 2;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLAVERING;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
 		monster.cumMultiplier = 3;
 		monster.ass.analLooseness = 2;
 		monster.ass.analWetness = 0;
@@ -12860,16 +12860,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "fair";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 10;
-		monster.hornType = 1;
+		monster.hornType = HORNS_DEMON;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -12878,14 +12878,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -12894,7 +12894,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 3;
+		monster.tailType = TAIL_TYPE_DEMONIC;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -12990,7 +12990,7 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "tan";
 		monster.skinDesc = "skin";
 		//Facetype:
@@ -12998,7 +12998,7 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		//3 - cowface
-		monster.faceType = 3;
+		monster.faceType = FACE_COW_MINOTAUR;
 		monster.horns = 2;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -13008,14 +13008,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 1;
+		monster.lowerBody = LOWER_BODY_TYPE_HOOFED;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -13025,7 +13025,7 @@ function startCombat(monsterNum:Number):void {
 		//5 - spider!
 		//6 - bee!
 		//7 - cow!
-		monster.tailType = 7;
+		monster.tailType = TAIL_TYPE_SHARK;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -13131,7 +13131,7 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "pale";
 		monster.skinDesc = "skin";
 		//Facetype:
@@ -13139,7 +13139,7 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		//3 - cowface
-		monster.faceType = 3;
+		monster.faceType = FACE_COW_MINOTAUR;
 		monster.horns = 2;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -13149,14 +13149,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -13166,7 +13166,7 @@ function startCombat(monsterNum:Number):void {
 		//5 - spider!
 		//6 - bee!
 		//7 - cow!
-		monster.tailType = 13;
+		monster.tailType = TAIL_TYPE_FOX;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -13208,8 +13208,8 @@ function startCombat(monsterNum:Number):void {
 		monster.ass.analLooseness = 1;
 		monster.ass.analWetness = 1;
 		monster.createVagina();
-		monster.vaginas[0].vaginalWetness = 3;
-		monster.vaginas[0].vaginalLooseness = 1;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
 		monster.createStatusAffect("Bonus aCapacity",20,0,0,0);
 		monster.createStatusAffect("Bonus vCapacity",20,0,0,0);
 		doNext(1);
@@ -13272,16 +13272,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "mediterranean-toned";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 0;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -13290,7 +13290,7 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
@@ -13299,7 +13299,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - centaur!
 		//5 - demonic heels
 		//6 - demon foot-claws
-		monster.lowerBody = 8;
+		monster.lowerBody = LOWER_BODY_TYPE_GOO;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -13308,7 +13308,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -13401,7 +13401,7 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 1;
+		monster.skinType = SKIN_TYPE_FUR;
 		monster.skinTone = "red";
 		monster.skinDesc = "shaggy fur";
 		//Facetype:
@@ -13409,7 +13409,7 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		//3 - cowface
-		monster.faceType = 3;
+		monster.faceType = FACE_COW_MINOTAUR;
 		monster.horns = 2;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -13419,14 +13419,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 1;
+		monster.lowerBody = LOWER_BODY_TYPE_HOOFED;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -13436,7 +13436,7 @@ function startCombat(monsterNum:Number):void {
 		//5 - spider!
 		//6 - bee!
 		//7 - cow!
-		monster.tailType = 7;
+		monster.tailType = TAIL_TYPE_SHARK;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -13538,16 +13538,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "blue";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 4;
-		monster.hornType = 3;
+		monster.hornType = HORNS_DRACONIC_X2;
 		monster.wingDesc = "tiny hidden";
 		//Wingtype
 		//0 - none
@@ -13556,7 +13556,7 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
@@ -13565,7 +13565,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - centaur!
 		//5 - demonic heels
 		//6 - demon foot-claws
-		monster.lowerBody = 5;
+		monster.lowerBody = LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -13574,7 +13574,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 3;
+		monster.tailType = TAIL_TYPE_DEMONIC;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -13604,8 +13604,8 @@ function startCombat(monsterNum:Number):void {
 		monster.createVagina();
 		monster.createBreastRow();
 		monster.breastRows[0].breastRating = 15;
-		monster.vaginas[0].vaginalWetness = 5;
-		monster.vaginas[0].vaginalLooseness = 1;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLAVERING;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
 		monster.vaginas[0].virgin = false;
 		monster.balls = 0;
 		monster.cumMultiplier = 3;
@@ -13672,7 +13672,7 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "tan";
 		monster.skinDesc = "skin";
 		//Facetype:
@@ -13680,7 +13680,7 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		//3 - cowface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 0;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -13690,14 +13690,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 4;
+		monster.lowerBody = LOWER_BODY_TYPE_CENTAUR;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -13707,7 +13707,7 @@ function startCombat(monsterNum:Number):void {
 		//5 - spider!
 		//6 - bee!
 		//7 - cow!
-		monster.tailType = 1;
+		monster.tailType = TAIL_TYPE_HORSE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -13810,7 +13810,7 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "tan";
 		monster.skinDesc = "skin";
 		//Facetype:
@@ -13818,7 +13818,7 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		//3 - cowface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 0;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -13828,14 +13828,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -13845,7 +13845,7 @@ function startCombat(monsterNum:Number):void {
 		//5 - spider!
 		//6 - bee!
 		//7 - cow!
-		monster.tailType = 1;
+		monster.tailType = TAIL_TYPE_HORSE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -13875,8 +13875,8 @@ function startCombat(monsterNum:Number):void {
 		monster.breastRows[0].breastRating = 0;
 		monster.breastRows[0].nipplesPerBreast = 1;
 		monster.createVagina();
-		monster.vaginas[0].vaginalWetness = 3;
-		monster.vaginas[0].vaginalLooseness = 1;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
 		monster.ass.analLooseness = 1;
 		monster.ass.analWetness = 0;
 		monster.createStatusAffect("Bonus aCapacity",20,0,0,0);
@@ -13968,16 +13968,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "blue";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 0;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "fluffy feathery";
 		//Wingtype
 		//0 - none
@@ -13986,7 +13986,7 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 4;
+		monster.wingType = WING_TYPE_HARPY;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
@@ -13995,7 +13995,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - centaur!
 		//5 - demonic heels
 		//6 - demon foot-claws
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -14004,7 +14004,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -14036,8 +14036,8 @@ function startCombat(monsterNum:Number):void {
 		monster.cocks[0].cockThickness = 3;
 		monster.createBreastRow();
 		monster.breastRows[0].breastRating = 5;
-		monster.vaginas[0].vaginalWetness = 3;
-		monster.vaginas[0].vaginalLooseness = 1;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
 		monster.vaginas[0].virgin = false;
 		monster.balls = 2;
 		monster.cumMultiplier = 3;
@@ -14103,14 +14103,14 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "red";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 0;
 		monster.wingDesc = "small";
 		//Wingtype
@@ -14120,14 +14120,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 5;
+		monster.wingType = WING_TYPE_IMP;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -14136,7 +14136,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -14241,14 +14241,14 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "bronzed";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 0;
 		monster.wingDesc = "";
 		//Wingtype
@@ -14258,14 +14258,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -14274,7 +14274,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -14307,8 +14307,8 @@ function startCombat(monsterNum:Number):void {
 		monster.breastRows[1].breastRating = 5;
 		monster.breastRows[1].nipplesPerBreast = 1;
 		monster.createVagina();
-		monster.vaginas[0].vaginalWetness = 2;
-		monster.vaginas[0].vaginalLooseness = 2;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_WET;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
 		monster.vaginas[0].virgin = false;
 		monster.cumMultiplier = 3;
 		monster.hoursSinceCum = 20;
@@ -14375,14 +14375,14 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "black";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 0;
 		monster.wingDesc = "";
 		//Wingtype
@@ -14392,14 +14392,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -14408,7 +14408,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -14439,8 +14439,8 @@ function startCombat(monsterNum:Number):void {
 		monster.breastRows[0].nipplesPerBreast = 1;
 		monster.createVagina();
 		monster.createStatusAffect("Bonus vCapacity",20,0,0,0);
-		monster.vaginas[0].vaginalWetness = 2;
-		monster.vaginas[0].vaginalLooseness = 2;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_WET;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
 		monster.vaginas[0].virgin = false;
 		monster.cumMultiplier = 3;
 		monster.hoursSinceCum = 20;
@@ -14513,14 +14513,14 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "bronzed";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 0;
 		monster.wingDesc = "";
 		//Wingtype
@@ -14530,14 +14530,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -14546,7 +14546,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -14579,8 +14579,8 @@ function startCombat(monsterNum:Number):void {
 		monster.breastRows[1].breastRating = 5;
 		monster.breastRows[1].nipplesPerBreast = 1;
 		monster.createVagina();
-		monster.vaginas[0].vaginalWetness = 2;
-		monster.vaginas[0].vaginalLooseness = 2;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_WET;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
 		monster.vaginas[0].virgin = false;
 		monster.createStatusAffect("Bonus vCapacity",70,0,0,0);
 		monster.createStatusAffect("Bonus aCapacity",50,0,0,0);
@@ -14652,14 +14652,14 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "black";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 0;
 		monster.wingDesc = "";
 		//Wingtype
@@ -14669,14 +14669,14 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
 		//2 - paws
 		//3 - snakelike body
 		//4 - centaur!
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -14685,7 +14685,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 0;
+		monster.tailType = TAIL_TYPE_NONE;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -14716,8 +14716,8 @@ function startCombat(monsterNum:Number):void {
 		monster.breastRows[0].nipplesPerBreast = 1;
 		monster.createVagina();
 		monster.createStatusAffect("Bonus vCapacity",20,0,0,0);
-		monster.vaginas[0].vaginalWetness = 2;
-		monster.vaginas[0].vaginalLooseness = 2;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_WET;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
 		monster.vaginas[0].virgin = false;
 		monster.cumMultiplier = 3;
 		monster.hoursSinceCum = 20;
@@ -14787,16 +14787,16 @@ function startCombat(monsterNum:Number):void {
 		//0 - skin
 		//1 - furry
 		//2 - scaley
-		monster.skinType = 0;
+		monster.skinType = SKIN_TYPE_PLAIN;
 		monster.skinTone = "helspawn";
 		monster.skinDesc = "skin";
 		//Facetype:
 		//0 - human
 		//1 - horse
 		//2 - dogface
-		monster.faceType = 0;
+		monster.faceType = FACE_HUMAN;
 		monster.horns = 2;
-		monster.hornType = 0;
+		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -14805,7 +14805,7 @@ function startCombat(monsterNum:Number):void {
 		//3 - faerie?
 		//4 - avian
 		//5 - dragoooon?
-		monster.wingType = 0;
+		monster.wingType = WING_TYPE_NONE;
 		//lowerBody:
 		//0 - normal
 		//1 - hooves
@@ -14814,7 +14814,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - centaur!
 		//5 - demonic heels
 		//6 - demon foot-claws
-		monster.lowerBody = 0;
+		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
 		//tailType:
 		//0 - none
 		//1 - horse
@@ -14823,7 +14823,7 @@ function startCombat(monsterNum:Number):void {
 		//4 - cow!
 		//5 - spider!
 		//6 - bee!
-		monster.tailType = 4;
+		monster.tailType = TAIL_TYPE_COW;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		monster.tailVenom = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -14853,8 +14853,8 @@ function startCombat(monsterNum:Number):void {
 		monster.breastRows[0].breastRating = 8;
 		monster.createVagina();
 		monster.createStatusAffect("Bonus vCapacity",85,0,0,0);
-		monster.vaginas[0].vaginalWetness = 1;
-		monster.vaginas[0].vaginalLooseness = 1;
+		monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_NORMAL;
+		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
 		monster.vaginas[0].virgin = false;
 		monster.ass.analLooseness = 0;
 		monster.createStatusAffect("Bonus aCapacity",85,0,0,0);
@@ -15435,7 +15435,7 @@ function tease():void {
 		if(player.ass.analLooseness >= 5) choices[choices.length] = 16;
 	}		
 	//17 Bee abdomen tease
-	if(player.tailType == 6) {
+	if(player.tailType == TAIL_TYPE_BEE_ABDOMEN) {
 		choices[choices.length] = 17;
 		choices[choices.length] = 17;
 	}
@@ -15463,7 +15463,7 @@ function tease():void {
 		choices[choices.length] = 21;
 	}
 	//22 SPOIDAH SILK
-	if(player.tailType == 5) {
+	if(player.tailType == TAIL_TYPE_SPIDER_ADBOMEN) {
 		choices[choices.length] = 22;
 		choices[choices.length] = 22;
 		choices[choices.length] = 22;
@@ -15582,7 +15582,7 @@ function tease():void {
 	//38 Kitsune Tease
 	//39 Kitsune Tease
 	//40 Kitsune Tease
-	if(player.kitsuneScore() >= 2 && player.tailType == 13) {
+	if(player.kitsuneScore() >= 2 && player.tailType == TAIL_TYPE_FOX) {
 		choices[choices.length] = 37;
 		choices[choices.length] = 37;
 		choices[choices.length] = 37;
@@ -15601,7 +15601,7 @@ function tease():void {
 		choices[choices.length] = 40;
 	}
 	//41 Kitsune Gendered Tease
-	if(player.kitsuneScore() >= 2 && player.tailType == 13) {
+	if(player.kitsuneScore() >= 2 && player.tailType == TAIL_TYPE_FOX) {
 		choices[choices.length] = 41;
 		choices[choices.length] = 41;
 		choices[choices.length] = 41;
@@ -15620,7 +15620,7 @@ function tease():void {
 		choices[choices.length] = 42;
 	}
 	//43 - special mino + cowgirls
-	if(player.hasVagina() && player.lactationQ() >= 500 && player.biggestTitSize() >= 6 && player.cowScore() >= 3 && player.tailType == 4) {
+	if(player.hasVagina() && player.lactationQ() >= 500 && player.biggestTitSize() >= 6 && player.cowScore() >= 3 && player.tailType == TAIL_TYPE_COW) {
 		choices[choices.length] = 43;
 		choices[choices.length] = 43;
 		choices[choices.length] = 43;
@@ -15655,7 +15655,7 @@ function tease():void {
 	select = choices[rand(choices.length)];
 	if(monster.short.indexOf("minotaur") != -1) 
 	{
-		if(player.hasVagina() && player.lactationQ() >= 500 && player.biggestTitSize() >= 6 && player.cowScore() >= 3 && player.tailType == 4)
+		if(player.hasVagina() && player.lactationQ() >= 500 && player.biggestTitSize() >= 6 && player.cowScore() >= 3 && player.tailType == TAIL_TYPE_COW)
 			select = 43;
 	}
 	//Lets do zis!
@@ -16634,18 +16634,18 @@ function spellArouse():void {
 	}
 	if(monster.vaginas.length > 0) {
 		if(monster.plural) {
-			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == 1) outputText(monster.capitalA + monster.short + "'s " + eVaginaDescript(0) + "s dampen perceptibly.  ", false);
-			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == 2) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ", false);
-			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == 3) outputText(monster.capitalA + monster.short + "'s " + eVaginaDescript(0) + "s become sloppy and wet.  ", false);
-			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == 4) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ", false);
-			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == 5) outputText(monster.capitalA + monster.short + "'s " + eVaginaDescript(0) + "s instantly soak " + monster.pronoun2 + " groin.  ", false);
+			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + eVaginaDescript(0) + "s dampen perceptibly.  ", false);
+			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotches become sticky with girl-lust.  ", false);
+			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + eVaginaDescript(0) + "s become sloppy and wet.  ", false);
+			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ", false);
+			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + eVaginaDescript(0) + "s instantly soak " + monster.pronoun2 + " groin.  ", false);
 		}
 		else {
-			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == 1) outputText(monster.capitalA + monster.short + "'s " + eVaginaDescript(0) + " dampens perceptibly.  ", false);
-			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == 2) outputText(monster.capitalA + monster.short + "'s crotch becomes sticky with girl-lust.  ", false);
-			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == 3) outputText(monster.capitalA + monster.short + "'s " + eVaginaDescript(0) + " becomes sloppy and wet.  ", false);
-			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == 4) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ", false);
-			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == 5) outputText(monster.capitalA + monster.short + "'s " + eVaginaDescript(0) + " instantly soaks her groin.  ", false);
+			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText(monster.capitalA + monster.short + "'s " + eVaginaDescript(0) + " dampens perceptibly.  ", false);
+			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText(monster.capitalA + monster.short + "'s crotch becomes sticky with girl-lust.  ", false);
+			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText(monster.capitalA + monster.short + "'s " + eVaginaDescript(0) + " becomes sloppy and wet.  ", false);
+			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of " + monster.a + monster.short + "'s thighs.  ", false);
+			if(monster.lust >= 60 && monster.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + eVaginaDescript(0) + " instantly soaks her groin.  ", false);
 		}
 	}
 	outputText("\n\n", false);
@@ -16945,18 +16945,18 @@ function kick():void {
 	}
 	fatigue(15,2);
 	//Variant start messages!
-	if(player.lowerBody == 14) {
+	if(player.lowerBody == LOWER_BODY_TYPE_KANGAROO) {
 		//(tail)
-		if(player.tailType == 12) outputText("You balance on your flexible kangaroo-tail, pulling both legs up before slamming them forward simultaneously in a brutal kick.  ", false);
+		if(player.tailType == TAIL_TYPE_KANGAROO) outputText("You balance on your flexible kangaroo-tail, pulling both legs up before slamming them forward simultaneously in a brutal kick.  ", false);
 		//(no tail) 
 		else outputText("You balance on one leg and cock your powerful, kangaroo-like leg before you slam it forward in a kick.  ", false);
 	}
 	//(bunbun kick) 
-	else if(player.lowerBody == 12) outputText("You leap straight into the air and lash out with both your furred feet simultaneously, slamming forward in a strong kick.  ", false);
+	else if(player.lowerBody == LOWER_BODY_TYPE_BUNNY) outputText("You leap straight into the air and lash out with both your furred feet simultaneously, slamming forward in a strong kick.  ", false);
 	//(centaur kick)
-	else if(player.lowerBody == 4) outputText("You lurch up onto your backlegs, lifting your forelegs from the ground a split-second before you lash them out in a vicious kick.  ", false);
+	else if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) outputText("You lurch up onto your backlegs, lifting your forelegs from the ground a split-second before you lash them out in a vicious kick.  ", false);
 	//(bipedal hoof-kick) 
-	else if(player.lowerBody == 1) outputText("You twist and lurch as you raise a leg and slam your hoof forward in a kick.  ", false);
+	else if(player.lowerBody == LOWER_BODY_TYPE_HOOFED) outputText("You twist and lurch as you raise a leg and slam your hoof forward in a kick.  ", false);
 
 	if(flags[PC_FETISH] >= 3) {
 		outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  Ceraph's piercings have made normal attack impossible!  Maybe you could try something else?\n\n", false);
@@ -17012,10 +17012,10 @@ function kick():void {
 	damage = player.str;
 	//Leg bonus
 	//Bunny - 20, Kangaroo - 35, 1 hoof = 30, 2 hooves = 40
-	if(player.lowerBody == 4) damage += 40;
-	else if(player.lowerBody == 1) damage += 30;
-	else if(player.lowerBody == 12) damage += 20;
-	else if(player.lowerBody == 14) damage += 35;
+	if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) damage += 40;
+	else if(player.lowerBody == LOWER_BODY_TYPE_HOOFED) damage += 30;
+	else if(player.lowerBody == LOWER_BODY_TYPE_BUNNY) damage += 20;
+	else if(player.lowerBody == LOWER_BODY_TYPE_KANGAROO) damage += 35;
 	//Start figuring enemy damage resistance
 	var reduction:Number = rand(monster.tou);
 	//Add in enemy armor if needed
@@ -17620,7 +17620,7 @@ function runAway():void {
 	var escapeMod:Number = 20 + monster.level * 3;
 	if(debug) escapeMod -= 300;
 	if(player.canFly()) escapeMod -= 20;
-	if(player.tailType == 15 && player.earType == 11 && player.hasPerk("Runner") >= 0) escapeMod -= 25;
+	if(player.tailType == TAIL_TYPE_RACCOON && player.earType == EARS_RACCOON && player.hasPerk("Runner") >= 0) escapeMod -= 25;
 	
 	//Big tits doesn't matter as much if ya can fly!
 	else {
@@ -17686,7 +17686,7 @@ function runAway():void {
 		//Fliers flee!
 		if(player.canFly()) outputText(monster.capitalA + monster.short + " can't catch you.", false);
 		//sekrit benefit: if you have coon ears, coon tail, and Runner perk, change normal Runner escape to flight-type escape
-		else if(player.tailType == 15 && player.earType == 11 && player.hasPerk("Runner") >= 0) {
+		else if(player.tailType == TAIL_TYPE_RACCOON && player.earType == EARS_RACCOON && player.hasPerk("Runner") >= 0) {
 			outputText("Using your running skill, you build up a head of steam and jump, then spread your arms and flail your tail wildly; your opponent dogs you as best " + monster.pronoun1 + " can, but stops and stares dumbly as your spastic tail slowly propels you several meters into the air!  You leave " + monster.pronoun2 + " behind with your clumsy, jerky, short-range flight.");
 		}		
 		//Non-fliers flee
@@ -17722,7 +17722,7 @@ function runAway():void {
 			else outputText(monster.capitalA + monster.short + " manages to grab your " + player.legs() + " and drag you back to the ground before you can fly away!", false);
 		}
 		//fail
-		else if(player.tailType == 15 && player.earType == 11 && player.hasPerk("Runner") >= 0) outputText("Using your running skill, you build up a head of steam and jump, but before you can clear the ground more than a foot, your opponent latches onto you and drags you back down with a thud!");
+		else if(player.tailType == TAIL_TYPE_RACCOON && player.earType == EARS_RACCOON && player.hasPerk("Runner") >= 0) outputText("Using your running skill, you build up a head of steam and jump, but before you can clear the ground more than a foot, your opponent latches onto you and drags you back down with a thud!");
 		//Nonflyer messages
 		else {
 			//Huge balls messages
@@ -17899,10 +17899,10 @@ function physicalSpecials():void {
 		butt1 = 5162;
 	}
 	//Bitez
-	if(player.faceType == 4 || player.faceType == 5 || player.faceType == 10) {
-		if(player.faceType == 4) butt2 = 5102;
-		else if(player.faceType == 5) butt2 = 5117;
-		else if(player.faceType == 10) butt2 = 5157;
+	if(player.faceType == FACE_SHARK_TEETH || player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SPIDER_FANGS) {
+		if(player.faceType == FACE_SHARK_TEETH) butt2 = 5102;
+		else if(player.faceType == FACE_SNAKE_FANGS) butt2 = 5117;
+		else if(player.faceType == FACE_SPIDER_FANGS) butt2 = 5157;
 		b2T = "Bite";
 	}
 	//Bow attack
@@ -17911,17 +17911,17 @@ function physicalSpecials():void {
 		b3T = "Bow";
 	}
 	//Constrict
-	if(player.lowerBody == 3) {
+	if(player.lowerBody == LOWER_BODY_TYPE_NAGA) {
 		butt4 = 5118;
 		b4T = "Constrict";
 	}
 	//Kick attackuuuu
-	else if(player.isTaur() || player.lowerBody == 4 || player.lowerBody == 1 || player.lowerBody == 12 || player.lowerBody == 14) {
+	else if(player.isTaur() || player.lowerBody == LOWER_BODY_TYPE_CENTAUR || player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_BUNNY || player.lowerBody == LOWER_BODY_TYPE_KANGAROO) {
 		butt4 = 5150;
 		b4T = "Kick";
 	}
 	//Gore if mino horns
-	if(player.hornType == 2 && player.horns >= 6) {
+	if(player.hornType == HORNS_COW_MINOTAUR && player.horns >= 6) {
 		b5T = "Gore";
 		butt5 = 5038;
 	}
@@ -17938,15 +17938,15 @@ function physicalSpecials():void {
 		b7T = "Kiss";
 	}	
 	//Sting attack if bee butt
-	if(player.tailType == 6) {
+	if(player.tailType == TAIL_TYPE_BEE_ABDOMEN) {
 		butt8 = 5037;
 		b8T = "Sting";
 	}
-	if(player.tailType == 5) {
+	if(player.tailType == TAIL_TYPE_SPIDER_ADBOMEN) {
 		butt8 = 5156;
 		b8T = "Web";
 	}
-	if(player.tailType == 15 || player.tailType == 7 || player.tailType == 9 || player.tailType == 14 || player.tailType == 12) {
+	if(player.tailType == TAIL_TYPE_RACCOON || player.tailType == TAIL_TYPE_SHARK || player.tailType == TAIL_TYPE_LIZARD || player.tailType == TAIL_TYPE_DRACONIC || player.tailType == TAIL_TYPE_KANGAROO) {
 		butt8 = 5165;
 		b8T = "Tail Whip";
 	}
@@ -18150,7 +18150,7 @@ function tailWhipAttack():void {
 			temp--;
 		}
 		monster.addStatusValue("Coon Whip",2,2);
-		if(player.tailType == 15) monster.addStatusValue("Coon Whip",2,2);
+		if(player.tailType == TAIL_TYPE_RACCOON) monster.addStatusValue("Coon Whip",2,2);
 	}
 	outputText("\n\n");
 	enemyAI();

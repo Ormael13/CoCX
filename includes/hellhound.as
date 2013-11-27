@@ -106,18 +106,18 @@ function hellhoundRapesPlayer():void {
 	if(player.lust >= 100) outputText("Overcome by sexual desire, you submit to the hungry hellhound.\n\n", true);
 	else outputText("Too weak to continue fighting, you fall to your knees.\n\n", true);
 	outputText("The heads of the hellhound grin with desire as he rises onto his hind legs. As the hellhound stands before you, your eyes widen at the sight of its equipment: a pair of eight-inch long black rods, one above the other, with a sack containing a quad of flaming balls underneath. As the hound swaggers closer, you gulp at the thought of what those fiery balls are going to be pumping into you. You are helpless against the hellhound as he pushes you onto your ", false);
-	if(player.lowerBody == 4) outputText("hocks and knees", false);
+	if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) outputText("hocks and knees", false);
 	else outputText("hands and knees", false);
 	outputText(" and positions himself behind you. He grips you with his clawed hands on your shoulders and easily holds you in place. The powerful creature is easily able to get past your "+player.armorName+" and you feel one of his rods brush against your "+buttDescript()+".  A shudder shoots through your body as he brings his two heads down to either side of your own, his hot canine breath blowing past your ears. He stays there for a few moments, completely still... before suddenly pulling his heads back and ",false); 
-	if(player.vaginas.length > 0 && player.lowerBody != 3) outputText("slamming his twin dicks into your " + vaginaDescript(0) + " and your " + assholeDescript() + ".  ", false);
+	if(player.vaginas.length > 0 && player.lowerBody != LOWER_BODY_TYPE_NAGA) outputText("slamming his twin dicks into your " + vaginaDescript(0) + " and your " + assholeDescript() + ".  ", false);
     else outputText("slamming his lower dick into your " + assholeDescript() + " , while rubbing the other between the cheeks of your " + buttDescript() + ".  ", false);
-	if(player.vaginas.length > 0 && player.lowerBody != 3) {
+	if(player.vaginas.length > 0 && player.lowerBody != LOWER_BODY_TYPE_NAGA) {
 		if(player.vaginalCapacity() < monster.cockArea(0)) outputText("You feel an intense mixture of sensations in your lower body as your " + assholeDescript() + " feels like it is being torn apart, while your " + vaginaDescript(0) + " is filled with an intense pleasure at being filled with the creature's large member.  ", false);
 		else outputText("Your lower body explodes with pain as the hellhound forces himself in too quickly for either your " + assholeDescript() + " or your " + vaginaDescript(0) + " to handle.  ", false);
 		if(player.vaginas[0].virgin) outputText("<b>You are no longer a virgin!  </b>", false);
 		if(cuntChange(monster.cockArea(0), false)) outputText("The beast howls as your " + vaginaDescript(0) + " is stretched to accommodate the large shaft.  ", false);
 		outputText("The hellhound pants for a few seconds before continuing.  ", false);
-		if(player.vaginas[0].vaginalWetness < 2) outputText("The pause gives your " + vaginaDescript(0) + " time to moisten, ensuring so the next thrust won't be quite as rough.  ", false); 
+		if(player.vaginas[0].vaginalWetness < VAGINA_WETNESS_WET) outputText("The pause gives your " + vaginaDescript(0) + " time to moisten, ensuring so the next thrust won't be quite as rough.  ", false); 
 		outputText("This time the beast starts pumping in and out more gently, only a short distance at a time as the hellhound continues panting.  As the pain in your " + assholeDescript() + " fades, you start feeling pleasure to match the sensations rising from your " + vaginaDescript(0) + ". Each thrust of the beast's twin manhoods bring you closer and closer to your peak.\n\n", false);
 		//Cum
 		outputText("As you reach your climax, the beast howls and you feel its incredibly hot seed pour into you.  ", false);
@@ -332,7 +332,7 @@ function giveALLTHELETHICITES():void {
 				outputText("Relieving both your virgin holes of their virginity in one thrust.\n\n", false);
 			}
 			//stretch vag to very loose
-			player.vaginas[0].vaginalLooseness = 3;
+			player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING;
 			outputText("Your two cunts quickly stretch larger to accommodate the intruders.\n\n", false);
 		}
 		outputText("You let out a moan of pleasure from the pleasure of being filled.  The hound doesn't hesitate at all, and just thrusts into you with abandon.  You can believe the feral feeling of it all, and that your twin womanhoods manage to so easily take the members and flow around them.\n\n", false);

@@ -388,7 +388,7 @@ function nomOnMommaIzzysTits():void {
 		outputText("Her areolae are large, maybe two or three inches across, though perched as they are atop such glorious globes, they still seem small.  Each of them has four nipples protruding nearly an inch up from the surface, and each of them is starting to bead with tiny drops of milk.  You lean closer, a little hesitantly, and watch the beads slowly grow to droplets before they roll down the dark-skinned arc of the cow-girl's chest.  It smells very sweet... sweeter than you'd expect, but there is another smell in the air coming from lower on Isabella's body that indicates a whole other type of need.  There are faint, muffled wet squelches at the edge of your hearing, and it's then that you notice one of her hands has disappeared below her skirt.\n\n", false);
 		
 		outputText("Before you can comment, her other hand is grabbing ", false);
-		if(player.horns > 0 && player.hornType > 0) outputText("your horns", false);
+		if(player.horns > 0 && player.hornType > HORNS_NONE) outputText("your horns", false);
 		else outputText("the back of your head", false);
 		outputText(" and smashing your face into her leaky milk-spouts.  You react fast enough to open wide, and all four of the nipples slide into your mouth.  Their tips press together and leave a steady stream of milk on your tongue as you lick and slurp around the needy nipples, relieving Isabella's desire to breastfeed while sating your own thirst.  The surface of the large, rounded breast wraps around most of your head, practically molding to your face from how hard Isabella's pulling on you.  Without light, you close your eyes and drink, sucking deeply as the flow intensifies.  It even seems to get sweeter with each gulp of the cow-girl's breast-milk.\n\n", false);
 		
@@ -402,7 +402,7 @@ function nomOnMommaIzzysTits():void {
 		outputText("Milk runs down the curvature of the unused tit in a slow waterfall until your lips are sealed around the 'spring'.  Just like before, she pushes harder and harder until her milk is squirting into your throat and the blushing bronzed tit is wrapped around you.  The cow-girl's delicious nectar is better than you remember, and it's still getting sweeter!  Her flared hips and curvy thighs keep bumping you, getting faster and harder as the noise of Isabella's masturbation grows louder.  Yet rather than being roused by the racket, you block it out and continue to drink deeply, savoring the thickening milk as it blasts into your throat.\n\n", false);  
 	
 		outputText("Isabella lets out a thunderous scream of pleasure, but you just sigh in between swallows, devouring the thick, candy-sweet cream she's pouring into you.  Her arms wrap around your shoulders", false);
-		if(player.wingType > 0 && player.wingType != 8) outputText(" and stroke your wings", false);
+		if(player.wingType > WING_TYPE_NONE && player.wingType != WING_TYPE_SHARK_FIN) outputText(" and stroke your wings", false);
 		outputText(", lulling you into a state of peaceful relaxation where the only things you feel are her soft flesh enveloping you and her wonderful cream filling your belly until it's fit to burst.  You pop off with a sigh and snuggle into her neck, starting to doze as she croons hypnotically into your ear.\n\n", false);
 		
 		//(Male and it fits end)
@@ -950,7 +950,7 @@ function IsabellaPostSpankFeedSex():void {
 	outputText(", pushing your torso so hard it sinks an inch or two into mud that reeks of Isabella's sex-juices.  You lie there, immobilized and defeated while you're forcibly raped, used like a small, disposable dildo.\n\n", false);
 	
 	outputText("The cow-girl lets some of the pressure off in order to tweak one of your " + nippleDescript(0) + "s, but as you gasp, her tongue is forced into your mouth, smothering your ", false);
-	if(player.tongueType == 0) outputText("smaller", false);
+	if(player.tongueType == TONUGE_HUMAN) outputText("smaller", false);
 	else outputText("longer", false);
 	outputText(" one with the slippery smoothness of her cow-like organ.  It slides over the top, curls around squeezing, and then it's underneath yours, beckoning you to venture past Isabella's naturally darker lips.  Her fingers find her way into your hair, pulling on it to keep you exactly where she wants you, like a dog on a leash.  You groan helplessly into her mouth, your voice melding with her frenzied moans as she splatters mud, milk, and girl-cum from each thigh-jiggling impact.\n\n", false);
 	

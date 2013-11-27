@@ -193,17 +193,17 @@ function startUrtaQuest():void {
 	player.tallness = 71;
 	player.hairColor = "gray";
 	player.hairLength = 12;
-	player.skinType = 1;
+	player.skinType = SKIN_TYPE_FUR;
 	player.skinAdj = "silky";
 	player.skinDesc = "fur";
 	player.createBreastRow();
 	player.breastRows[0].breastRating = 7;
 	player.nippleLength = .75;
 	player.skinTone = "black";
-	player.lowerBody = 17;
-	player.earType = 9;
-	player.faceType = 11;
-	player.tailType = 13;
+	player.lowerBody = LOWER_BODY_TYPE_FOX;
+	player.earType = EARS_FOX;
+	player.faceType = FACE_FOX;
+	player.tailType = TAIL_TYPE_FOX;
 	player.tailVenom = 1;
 	player.createCock();
 	player.cocks[0].cockType = CockTypesEnum.HORSE;
@@ -220,8 +220,8 @@ function startUrtaQuest():void {
 	player.ass.analLooseness = 2;
 	player.createStatusAffect("Bonus vCapacity",58,0,0,0);
 	player.createVagina();
-	player.vaginas[0].vaginalWetness = 4;
-	player.vaginas[0].vaginalLooseness = 1;
+	player.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
+	player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
 	player.clitLength = 1;
 	player.str = 75;
 	player.tou = 80;
@@ -726,7 +726,7 @@ function putUrtasWangInPCsCunt():void {
 	if(player2.isTaur()) 
 	{
 		outputText("and climb off the 'taur-woman.  She smirks up at you, until you bid her to rise, telling her that you plan to mount her like the fertile filly she is. Reluctantly, " + player2.short + " clatters up onto her hooves.");
-		if(player2.tailType > 0) outputText("  You stroke her tail as you shift it aside");
+		if(player2.tailType > TAIL_TYPE_NONE) outputText("  You stroke her tail as you shift it aside");
 		else outputText("  You stroke her swollen sex as you admire it");
 		outputText(", making sure you've got the perfect view of her lube-slimed horse-cunt.  Unbidden, your cock thickens, disgorging a potent trail of animal-pre down its underside in anticipation.");
 		if(player2.wetness() >= 4) outputText("  Fuck, she's wetter than Edryn!  Just look at those heavy trails of slick moisture as they run down her rump and hindlegs.");
@@ -3059,7 +3059,7 @@ function getKnockedUpWithGodChild():void {
 	}
 	//{CONTINUE HERE}
 	outputText("\n\nPulling out, Urta swats your [butt], lingering just long enough to give it a familiar squeeze.  She commands, \"<i>Ass up in the air, I'm going to take you like an animal!</i>\"  Holding it one-handed, the furry hermaphrodite slaps her equine phallus against you, encouraging you to roll over.  You're horny as hell, your [vagina] hanging open in the shape of the recently departed animal dong, and you willingly assume the position, [butt] up in the air");
-	if(player.tailType > 0) outputText(", though getting your tail angled right to allow her entrance is a bit of a challenge");
+	if(player.tailType > TAIL_TYPE_NONE) outputText(", though getting your tail angled right to allow her entrance is a bit of a challenge");
 	else if(player.isTaur()) outputText(", though getting down on your hands and forelegs is a bit challenging for you");
 	else outputText(", [face] buried in your blankets soaked with Urta's musky fluid");
 	outputText(".");

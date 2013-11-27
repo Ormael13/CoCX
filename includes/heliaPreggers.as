@@ -882,7 +882,7 @@ function snipermanders():void {
 	if(flags[HELSPAWN_DADDY] == 0) outputText("your");
 	else outputText("Hel's");
 	outputText(" eager daughter. " + flags[HELSPAWN_NAME] + " takes them up with surprising reverence, holding them as gingerly as glass.  Grinning, you clasp her shoulder and tell her how to put the quiver on, and get her stance right for shooting.  It takes her a moment to get set up: her scaled, reptilian legs don't naturally stand in the shooting pose you've adopted");
-	if(player.lowerBody == 10) outputText(", even with your own lizard legs");
+	if(player.lowerBody == LOWER_BODY_TYPE_LIZARD) outputText(", even with your own lizard legs");
 	outputText(", and you find yourself having to correct her grip on the haft several times.  But, finally, you get her ready to shoot.");
 	
 	outputText("\n\nYou slip behind " + flags[HELSPAWN_NAME] + ", putting your arms on hers as you guide her through nocking an arrow, head resting on her fist, a lone finger outstretched toward the dessicated dummy.");

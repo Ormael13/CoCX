@@ -74,7 +74,7 @@ function maleFuckCeraphsPussy():void {
 	spriteSelect(7);
 	outputText("", true);
 	//UBER-Fullbodypenetration
-	if(player.lowerBody != 4 && player.biggestCockArea() > 500 && (player.statusAffectv1("Exgartuan")==1 || monk >= 5)) {
+	if(player.lowerBody != LOWER_BODY_TYPE_CENTAUR && player.biggestCockArea() > 500 && (player.statusAffectv1("Exgartuan")==1 || monk >= 5)) {
 		hugeCorruptionForceFuckCeraph();
 		return;
 	}
@@ -401,7 +401,7 @@ function agreeToBecomeCeraphsFuckpetBondageToyBitchSlut():void {
 	outputText("What the hell?  Did you just call yourself pet?  You struggle internally, thinking, \"<i><i>When did pet start thinking of " + player.mf("him","her") + "self as pet?</i></i>\"  A tingle of new arousal shivers through you – Mistress Ceraph has made it impossible for you to think or call yourself anything other than pet!  What else is she going to do to you?\n\n", false);
 	
 	outputText("\"<i><i>Oh it's so cute watching my pets and toys truly learn their new names.  Now come here pet, a good pet wears a collar so everyone knows who " + player.mf("he","she") + " belongs to,</i></i>\" says Mistress as she pulls a thick black collar off a hook on the wall.  Compliant, you allow her to fasten it around your neck, waggling your ", false);
-	if(player.tailType == 0) outputText("backside", false);
+	if(player.tailType == TAIL_TYPE_NONE) outputText("backside", false);
 	else outputText("tail", false);
 	outputText(" back and forth to show Mistress how happy you are.  Obedience slowly crowds your mind, rolling over your other thoughts and concerns inexorably.  Your worries, cares, and troubles slide away, replaced with an all-consuming need to please.", false);
 	doNext(agreeToBeABitchPt2);
@@ -1071,8 +1071,8 @@ function friendlyNeighborhoodSpiderManCeraph():void {
 	else if(player.cor > 33) outputText("and you squirm and writhe within your " + player.armorName + ", the material itching on your skin.  Ultimately, you manage to resist.", false);
 	else outputText("and you stifle a laugh at the ridiculous thought, ignoring your fingers while they scratch at the itch under your gear.", false);
 	outputText("  Your ", false);
-	if(player.skinType <= 1) outputText("skin burns", false);
-	else if(player.skinType == 2) outputText("scales burn", false);
+	if(player.skinType <= SKIN_TYPE_FUR) outputText("skin burns", false);
+	else if(player.skinType == SKIN_TYPE_SCALES) outputText("scales burn", false);
 	else outputText(player.skinDesc + " burns", false);
 	outputText(" hot, raging from fetish-enhanced lust and daydreams, but you shake your head in time to see a pair of inky black orbs rising from behind a nearby boulder.\n\n", false);
 	

@@ -58,9 +58,9 @@ function faerieRAEP():void {
 		if(player.clitLength >= 3) {
 			outputText("The tiny fae begins jerking your clit like a cock, squeezing her arms tightly around you and sliding in and out of your " + vaginaDescript(0) + ". Her motions are frenetic and unpredictable, but incredibly pleasurable.  She starts licking at your " + clitDescript() + " as your femcum runs down it, which only serves to make her more excited. She gets so excited that her legs start kicking wildly as she screams \"<i>Swim! Swim! Swim! Swim!</i>\" over and over again.  ", false);
 			//[Small amount of cum:
-			if(player.vaginas[0].vaginalWetness <= 2) outputText("The fae giggles more and more as the fluid seeps about her and your " + vaginaDescript(0) + " ripples. She hugs your " + clitDescript() + " tighter and starts gently gnawing at it, such a peculiar sensation that you cum suddenly, and wetly.  Her giggles quickly become all-out laughter, and she loses her grip on your clit, sprawling to the ground into a small puddle of femcum.\n\n", false);
+			if(player.vaginas[0].vaginalWetness <= VAGINA_WETNESS_WET) outputText("The fae giggles more and more as the fluid seeps about her and your " + vaginaDescript(0) + " ripples. She hugs your " + clitDescript() + " tighter and starts gently gnawing at it, such a peculiar sensation that you cum suddenly, and wetly.  Her giggles quickly become all-out laughter, and she loses her grip on your clit, sprawling to the ground into a small puddle of femcum.\n\n", false);
 			//[Normal amount of cum:
-			else if(player.vaginas[0].vaginalWetness <= 4) outputText("The fae giggles more and more as the fluid squirts about her and your " + vaginaDescript(0) + " ripples. She hugs your " + clitDescript() + " tighter and starts gently gnawing at it, such a peculiar sensation that you cum suddenly, and wetly.  Her giggles quickly become all-out laughter, and she loses her grip on your clit, sprawling to the ground into a puddle of femcum.\n\n", false);
+			else if(player.vaginas[0].vaginalWetness <= VAGINA_WETNESS_DROOLING) outputText("The fae giggles more and more as the fluid squirts about her and your " + vaginaDescript(0) + " ripples. She hugs your " + clitDescript() + " tighter and starts gently gnawing at it, such a peculiar sensation that you cum suddenly, and wetly.  Her giggles quickly become all-out laughter, and she loses her grip on your clit, sprawling to the ground into a puddle of femcum.\n\n", false);
 			//[Huge amount of cum:
 			else outputText("The fae giggles more and more as the fluid sprays about her and your " + vaginaDescript(0) + " ripples. She hugs your " + clitDescript() + " tighter and starts gently gnawing at it, such a peculiar sensation that you cum suddenly, and wetly.  Her giggles quickly become all-out laughter, and she loses her grip on your clit, sprawling to the ground into a huge puddle of femcum, her giggling frame floating on the surface as her legs kick about erratically.\n\n", false);
 		}
@@ -68,9 +68,9 @@ function faerieRAEP():void {
 		else {
 			outputText("The tiny fae rubs her hands around your " + clitDescript() + " as if entranced by it. Your body responds by pumping out more femcum, which she laps up happily.  She starts laughing maniacally and banging on your clit like a drum, periodically yelling out \"<i>CONGA!</i>\" for some reason. The strange ministrations feel incredible though, and you feel your love canal squeezing down on the faerie's tiny body.  ", false);
 			//[Small amount of cum:
-			if(player.vaginas[0].vaginalWetness <= 2) outputText("You cum suddenly, and wetly. The fae giggles more and more as the fluid seeps about her and your " + vaginaDescript(0) + " ripples. Her giggles quickly become all-out laughter, and she loses her grip on your innards, sprawling to the ground into a small puddle of femcum.\n\n", false);
+			if(player.vaginas[0].vaginalWetness <= VAGINA_WETNESS_WET) outputText("You cum suddenly, and wetly. The fae giggles more and more as the fluid seeps about her and your " + vaginaDescript(0) + " ripples. Her giggles quickly become all-out laughter, and she loses her grip on your innards, sprawling to the ground into a small puddle of femcum.\n\n", false);
 			//[Normal amount of cum:
-			else if(player.vaginas[0].vaginalWetness <= 4) outputText("You cum suddenly, and wetly. The fae giggles more and more as the fluid squirts around her and your " + vaginaDescript(0) + " ripples. Her giggles quickly become all-out laughter, and she loses her grip on your innards, sprawling to the ground into a puddle of femcum.\n\n", false);
+			else if(player.vaginas[0].vaginalWetness <= VAGINA_WETNESS_DROOLING) outputText("You cum suddenly, and wetly. The fae giggles more and more as the fluid squirts around her and your " + vaginaDescript(0) + " ripples. Her giggles quickly become all-out laughter, and she loses her grip on your innards, sprawling to the ground into a puddle of femcum.\n\n", false);
 			//[Huge amount of cum:
 			else outputText("You cum suddenly, and wetly. The fae tries desperately to hold on to your " + clitDescript() + " but the amount of fluid overwhelms her and she's sent spiralling to the ground into a huge puddle of your fluid, her giggling frame floating on the surface as her legs kick about erratically.\n\n", false);		
 		}
@@ -81,9 +81,9 @@ function faerieRAEP():void {
 		if(player.statusAffectv1("Faerie Fem Fuck") < 4) outputText("Her mood immediately shifts from panic to desire, and she licks her lips hungrily, locking her eyes onto your feminine folds.", false);
 		else outputText("Her eyes open wide, like a junkie seeing a fix.  She licks her lips hungrily and humps the inside of your hand, ready for action.", false);
 		outputText("  You release the faerie, letting the pussy-entranced fae buzz down to your sensitive nether-regions.  She lands softly, her tiny feet and hands prancing over your vulva.  You gasp in delight, ", false);
-		if(player.vaginas[0].vaginalWetness >= 5) outputText("releasing a tiny squirt", false);
-		else if(player.vaginas[0].vaginalWetness >= 4) outputText("dribbling juices", false);
-		else if(player.vaginas[0].vaginalWetness >= 2) outputText("growing so slippery the faerie nearly loses her footing", false);
+		if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLAVERING) outputText("releasing a tiny squirt", false);
+		else if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_DROOLING) outputText("dribbling juices", false);
+		else if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_WET) outputText("growing so slippery the faerie nearly loses her footing", false);
 		else outputText("feeling yourself moistening with need", false);
 		outputText(" from the tiny touches.\n\n", false);
 		
@@ -157,7 +157,7 @@ function faerieDoNothing():void {
 	}
 	if (player.clitLength >= 1.0 && player.clitLength <= 4.5 && player.hasVagina() && rand(2) == 0) {
 		outputText("A smile crosses her face and she flutters down to your crotch. She starts by scissoring you despite the size difference, driving your clit into her despite its erect state. Compared to her, it looks massive. She swings one leg over it and starts impaling herself on it. Your taut clitoris barely fits inside her, and the tight confines on your sensitive nub are enough to make you weak in the knees. Staggering to the ground, you grab hold of her frail body in your fist and thrust her roughly on your engorged button. She wails in both pain and pleasure, being crushed and stretched open at once. Her cries of pain combined with the intense stimulation on your most sensitive part bring you to a quick orgasm.\n\n", false);
-		if(player.vaginas[0].vaginalWetness >= 4) outputText("You drench the poor faerie completely in your female juices, soaking her hair and body. Overwhelmed and spent, you drop her to the ground and catch your breath. She licks up what's around her face, but is too weak to do anything else but lie in the dirt.\n\n", false);
+		if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_DROOLING) outputText("You drench the poor faerie completely in your female juices, soaking her hair and body. Overwhelmed and spent, you drop her to the ground and catch your breath. She licks up what's around her face, but is too weak to do anything else but lie in the dirt.\n\n", false);
 		else outputText("Shuddering, you maintain your composure and keep going, trying to ride the high for another. Eventually you look down and you can see the faerie's eyes have glazed over and rolled to the back of her head. Her cunt has started clamping down on you a lot harder, evidence of her state of near-constant orgasm. The random clenching brings you off again very quickly and you have an intense orgasm, joining your fae cohort.\n\n", false);
 		outputText("Time skips a beat and you eventually come down, gently relaxing your grip and disengaging the worn out faerie from your softening female parts. The faerie regains consciousness slowly and thanks you before flying off.", false);
 		stats(0, 0, 0, 0, -1, 0, -100, 0);

@@ -1090,9 +1090,9 @@ function sophieVictoryPussyGrind():void {
 		else outputText("  Jism rains everywhere until she's thoroughly glazed with spooge and the nest is brimming with your spunk-puddle.", false);
 	}
 	outputText("  Sophie grunts and moans as your measured grinding turns into a seizure-like spasm.   The frenzy of friction pushes her over the edge, making her thighs convulse and her legs splay wide.  ", false);
-	if(player.vaginas[0].vaginalWetness >= 5) outputText("Juices squirt from the joined pussies", false);
-	else if(player.vaginas[0].vaginalWetness >= 3) outputText("Juices soak the nesting material", false);
-	else if(player.vaginas[0].vaginalWetness >= 2) outputText("Juice trickles from the paired pussies", false);
+	if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLAVERING) outputText("Juices squirt from the joined pussies", false);
+	else if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLICK) outputText("Juices soak the nesting material", false);
+	else if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_WET) outputText("Juice trickles from the paired pussies", false);
 	else outputText("Sophie's pussy soaks your own with her juices", false);
 	outputText(" until you fall away from each other, spent and rubbing your tender cunts.  The older bird-woman reluctantly admits, \"<i>", false);
 	if(flags[UNKNOWN_FLAG_NUMBER_00098] == 0) outputText("Cutey, you sure know your way around a pussy, but I just don't like to do this kind of thing.  Don't expect me to be some lesbo bird-slut who'll lick your slit at the drop of a hat.", false);
@@ -1139,7 +1139,7 @@ function fuckDatClit():void {
 	outputText("She's breathing hard but hardly close to getting off, and she purrs, \"<i>I'm not done with you yet, cutey.  Just keep that clitty hard inside me and let me squeeze until I cum.  You can pass out if its too much for you.</i>\"\n\n", false);
 	
 	outputText("She's not... not done yet?  You try to pull out, but with the compulsion and the exhaustion of your orgasm, it's impossible.  Ah!  She squeezes again and your eyes cross for a moment.  Everything is still so sensitive!  You can't stand this for long.  ", false);
-	if(player.vaginas[0].vaginalWetness >= 4) outputText("Juice dribbles down your " + player.legs() + " as your body enjoys the treatment.  ", false);
+	if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_DROOLING) outputText("Juice dribbles down your " + player.legs() + " as your body enjoys the treatment.  ", false);
 	outputText("Sophie's managed to take control of the situation, and your helplessness only compounds the pleasure you're forced to endure.  The harpy wiggles her hips and curves her wings over-top of you, holding you tightly as she forces another climax upon you.  Your eyes roll back into your head and you start to drool, knocked out by the harpy.\n\n", false);
 	
 	outputText("It's several hours later when you wake up at the base of the mountain.   Your " + player.armorName + " is back on, and your gem-pouch feels a little lighter.  Maybe you'll think twice about jamming something as sensitive in as your " + clitDescript() + " into a slick vice next time?  Then again, you might have to go visit her again.  You're still tingling from the aftereffects of those orgasms.", false);

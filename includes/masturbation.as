@@ -856,23 +856,23 @@ function masturbateGo():void {
 			if(player.lib < 45) outputText("You touch and play with your " + vaginaDescript(0) + ", ", false);
 			if(player.lib >= 45 && player.lib < 70) outputText("You slap your pussy softly, ", false)
 			if(player.lib >= 70) outputText("You touch your enflamed and aroused " + vaginaDescript(0) + ", ", false);
-			if(player.vaginas[0].vaginalWetness == 0) outputText("expertly arousing your female parts.  ", false);
-			if(player.vaginas[0].vaginalWetness == 1) outputText("sighing as it quickly becomes moist.  ", false)
-			if(player.vaginas[0].vaginalWetness == 2) outputText("giggling as your fingers get a little wet.  ", false);
-			if(player.vaginas[0].vaginalWetness == 3) outputText("smiling as your fingers become coated in your slick fluids.  ", false);
-			if(player.vaginas[0].vaginalWetness == 4) outputText("slicking your fingers in the juices that constantly dribble from " + vaginaDescript(0) + "  ", false);
-			if(player.vaginas[0].vaginalWetness == 5) outputText("licking your lips as a small spurt of fluid squirts from your nethers.", false);
+			if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) outputText("expertly arousing your female parts.  ", false);
+			if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText("sighing as it quickly becomes moist.  ", false)
+			if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText("giggling as your fingers get a little wet.  ", false);
+			if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText("smiling as your fingers become coated in your slick fluids.  ", false);
+			if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("slicking your fingers in the juices that constantly dribble from " + vaginaDescript(0) + "  ", false);
+			if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText("licking your lips as a small spurt of fluid squirts from your nethers.", false);
 		}
 		if(player.vaginas.length > 1) {
 			if(player.lib < 45) outputText("You touch and play with your many folds, ", false);
 			if(player.lib >= 45 && player.lib < 70) outputText("You slap your pussies softly, ", false)
 			if(player.lib >= 70) outputText("Touch your enflamed and aroused " + vaginaDescript(0) + "s, ", false);
-			if(player.vaginas[0].vaginalWetness == 0) outputText("expertly arousing your female parts.  ", false);
-			if(player.vaginas[0].vaginalWetness == 1) outputText("sighing as it quickly becomes moist.  ", false)
-			if(player.vaginas[0].vaginalWetness == 2) outputText("giggling as your fingers get a little wet.  ", false);
-			if(player.vaginas[0].vaginalWetness == 3) outputText("smile as your fingers become coated in your slick fluids.  ", false);
-			if(player.vaginas[0].vaginalWetness == 4) outputText("slicking your fingers in the juices that constantly dribble from " + vaginaDescript(0) + "s  ", false);
-			if(player.vaginas[0].vaginalWetness == 5) outputText("licking your lips as a small spurt of fluid squirts from your nethers.", false);
+			if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) outputText("expertly arousing your female parts.  ", false);
+			if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText("sighing as it quickly becomes moist.  ", false)
+			if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText("giggling as your fingers get a little wet.  ", false);
+			if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText("smile as your fingers become coated in your slick fluids.  ", false);
+			if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("slicking your fingers in the juices that constantly dribble from " + vaginaDescript(0) + "s  ", false);
+			if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText("licking your lips as a small spurt of fluid squirts from your nethers.", false);
 		}
 	}
 	/*******************************
@@ -1233,19 +1233,19 @@ function masturbateGo():void {
 			//Big clits
 			if(player.clitLength >= 1.5 && player.clitLength < 4.5) {
 				outputText("Your large clit is already poking out from your ", false);
-				if(player.vaginas[0].vaginalWetness > 0) outputText("glistening ", false);
+				if(player.vaginas[0].vaginalWetness > VAGINA_WETNESS_DRY) outputText("glistening ", false);
 				outputText("lips.  You gently stroke and touch it until it grows as large as a tiny cock.  ", false);
 			}
 			//Cock-sized clits 
 			if(player.clitLength >= 4.5) {
 				outputText("Your cock-sized clit is already fully engorged and deliciously sensitive.  You touch it softly, eliciting a quiet moan from your throat.  ", false);
 			}
-			if(player.vaginas[0].vaginalWetness == 0) outputText("You have some difficulty with your relatively dry pussy, but you manage to gently and pleasurably masturbate by taking it slowly.  ", false);
-			if(player.vaginas[0].vaginalWetness == 1) outputText("Your horny puss is aching for attention and you oblige it, dipping your fingers into the moist honeypot, and jilling yourself vigorously.  ", false);
-			if(player.vaginas[0].vaginalWetness == 2) outputText("The moistened cleft on your groin demands your full attention, drawing your fingers deep inside to explore the wet passage.  ", false);
-			if(player.vaginas[0].vaginalWetness == 3) outputText("The sweltering heat of your slick cunt aches for something to fill it, and you oblige, dipping your fingers into your slippery cunt.  ", false);
-			if(player.vaginas[0].vaginalWetness == 4) outputText("Warm wetness runs down your legs in thick streams, pouring from your " + vaginaDescript(0) + ".  You smile sheepishly and stroke up your now slickened legs to your pussy-lips, parting them and letting your fingers dive inside the wet channel.  ", false);
-			if(player.vaginas[0].vaginalWetness == 5) outputText("The heavy scent of female arousal fills the air as your steamy sexpot drizzles girl-lube everywhere.  You gasp in surprise as your fingers find their way inside, vigorously fingerfucking your passage, spurts of girlcum squirting out with each penetration.  ", false);
+			if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) outputText("You have some difficulty with your relatively dry pussy, but you manage to gently and pleasurably masturbate by taking it slowly.  ", false);
+			if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) outputText("Your horny puss is aching for attention and you oblige it, dipping your fingers into the moist honeypot, and jilling yourself vigorously.  ", false);
+			if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) outputText("The moistened cleft on your groin demands your full attention, drawing your fingers deep inside to explore the wet passage.  ", false);
+			if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) outputText("The sweltering heat of your slick cunt aches for something to fill it, and you oblige, dipping your fingers into your slippery cunt.  ", false);
+			if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) outputText("Warm wetness runs down your legs in thick streams, pouring from your " + vaginaDescript(0) + ".  You smile sheepishly and stroke up your now slickened legs to your pussy-lips, parting them and letting your fingers dive inside the wet channel.  ", false);
+			if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText("The heavy scent of female arousal fills the air as your steamy sexpot drizzles girl-lube everywhere.  You gasp in surprise as your fingers find their way inside, vigorously fingerfucking your passage, spurts of girlcum squirting out with each penetration.  ", false);
 		}
 	}
 	//ORGASM GOES HERE
@@ -1848,7 +1848,7 @@ function orgazmo(selfSucking:Boolean, nippleFuck:Boolean):void {
 			if(player.clitLength > 1.5  && player.clitLength < 4.5) outputText("Every muscle-twitch seems to stretch your big oversensitive clitty larger, causing you to squeal with delight at every bump and touch against it.  ", false);
 			if(player.clitLength >= 4.5) outputText("A hand finds your cock-like clit, squeezing and caressing it as the cunt-wrenching orgasm wracks your body, the over-sized joy-buzzer nearly making you black out from the sensations it generates.  ", false);
 			//Wet orgasms
-			if(player.vaginas[0].vaginalWetness == 5) outputText("A veritable gush of fluid explodes from your nethers, pulsing in time with the ripples of your " + vaginaDescript(0) + ".  ", false);
+			if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText("A veritable gush of fluid explodes from your nethers, pulsing in time with the ripples of your " + vaginaDescript(0) + ".  ", false);
 		}
 		//MultiCunt UNFINISHED
 		else {
@@ -1932,9 +1932,9 @@ function deluxeDildo():void {
 		outputText("  You splay your " + player.legs() + " and lie there with it inside you, feeling it respond to your wetness, becoming more and more turned on by the second.\n\n", false);
 	
 		//(Kinda dry)
-		if(player.vaginas[0].vaginalWetness < 3) outputText("The thickness of the toy gradually increases, filling you more and more effectively as it reacts to your bodily fluids.  You grab it two-handed and start slamming it into your " + vaginaDescript(0) + ", vigorously fucking yourself with the swelling dong.  The sensations just keep getting better and better as more and more of the goblin's sex-drug leaks into you.  Even your " + clitDescript() + " and cunt-lips tingle with need.  You answer that need by picking up the pace, pistoning faster and faster.\n\n", false); 
+		if(player.vaginas[0].vaginalWetness < VAGINA_WETNESS_SLICK) outputText("The thickness of the toy gradually increases, filling you more and more effectively as it reacts to your bodily fluids.  You grab it two-handed and start slamming it into your " + vaginaDescript(0) + ", vigorously fucking yourself with the swelling dong.  The sensations just keep getting better and better as more and more of the goblin's sex-drug leaks into you.  Even your " + clitDescript() + " and cunt-lips tingle with need.  You answer that need by picking up the pace, pistoning faster and faster.\n\n", false); 
 		//(Pretty wet)
-		else if(player.vaginas[0].vaginalWetness < 5) {
+		else if(player.vaginas[0].vaginalWetness < VAGINA_WETNESS_SLAVERING) {
 			outputText("The toy's girth seems to pulse and swell within you, spreading you wide open as it sops up your natural wetness and grows larger.  You grab it in a two-handed grip and begin working it in and out of your " + vaginaDescript(0) + ", gasping and twitching as every ridge and feature of the dildo rubs you just right.  Every inch of your nethers tingles with a desire to be touched, rubbed, and squeezed. ", false);
 			if(player.cockTotal() > 0) {
 				outputText("Even your " + multiCockDescript() + " ache", false);

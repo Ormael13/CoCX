@@ -89,7 +89,7 @@ function ackbalRepeatAfterWin():void
 	spriteSelect(2);
 	outputText("", true);
 	outputText("As you walk through the forest, you hear a snarl and look up just in time to dodge a surprise attack by the jaguar demon, Akbal.  Your ", false);
-	if (player.lowerBody == 4)
+	if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR)
 		outputText("equine leap places you a good distance away from him.  Do you fight or flee?\n\n", false);
 	else
 		outputText("dodging roll places you a good distance away from him.  Do you fight or flee?\n\n", false);
@@ -135,7 +135,7 @@ function akbalSubmit():void
 	}
 	outputText("", true);
 	//Naga variant goez here
-	if (player.lowerBody == 3)
+	if (player.lowerBody == LOWER_BODY_TYPE_NAGA)
 	{
 		outputText(images.showImage("akbal-deepwoods-naga-sumbitanal"));
 		outputText("After a few moments of thinking you nod to Akbal and the masculine voice in your head commands you to disrobe. You take off your " + player.armorName + ", setting it aside moments before the demon is upon you.\n\n", false);
@@ -196,7 +196,7 @@ function akbalSubmit():void
 		return;
 	}
 	//Taur variant goez here
-	if (player.lowerBody == 4)
+	if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR)
 	{
 		outputText(images.showImage("akbal-deepwoods-taur-sumbitanal"));
 		outputText("After a few moments of thinking you nod to Akbal.  The deep voice in your head commands you to disrobe.  You take off your " + player.armorName + ", setting it aside while mentally preparing yourself for whatever this demon has in mind.\n\n", false);
@@ -204,7 +204,7 @@ function akbalSubmit():void
 		outputText("You watch with fascination as Akbal rises onto his hind legs, his body melting into a more humanoid form.  His long, demonic cat-dick is already rock-hard and jutting out of his sheath.  He walks past your top half, moving around your body while sliding his hand across your haunch.  His hands are oddly warm.", false);
 		
 		//(if centaur player has a tail)
-		if (player.tailType > 0)
+		if (player.tailType > TAIL_TYPE_NONE)
 			outputText("  As he makes his way to your hind quarters he grabs you by the tail, pulling it up and out the way with a feral, jaguar grin.  His free hand slides a finger across your " + assholeDescript() + " making you paw the ground with your hooves.", false);
 		
 		//(No tail) 
@@ -679,7 +679,7 @@ function rapeAkbal():void
 		primary = 0;
 	outputText("", true);
 	//Naga RAPPUUUUUU
-	if (player.lowerBody == 3)
+	if (player.lowerBody == LOWER_BODY_TYPE_NAGA)
 	{
 		outputText("You slither around the demon cat's form, wrapping him up until a scared whimper rises from his chest.  You continue to tighten your coils around Akbal until he's gasping for breath.  You ask him if he's going to be a good little demon for you.  He nods.\n\n", false);
 		
@@ -753,7 +753,7 @@ function rapeAkbal():void
 			//END NAGA STUFF
 	}
 	//Centaur RAPPUUUUU
-	else if (player.lowerBody == 4)
+	else if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR)
 	{
 		outputText("You roughly grab the scruff of the demon's neck, aiming a gut crushing blow to his stomach and causing him to call out in pain.\n\n", false);
 		
@@ -1137,7 +1137,7 @@ function loseToAckballllllz():void
 		return;
 	}
 	//[Defeat via Lust]
-	else if (player.lowerBody != 4)
+	else if (player.lowerBody != LOWER_BODY_TYPE_CENTAUR)
 	{
 		outputText(images.showImage("akbal-deepwoods-losslust-analed"));
 		outputText("You fall to your knees and begin to feverishly masturbate.  Akbal rises onto his two hind legs, his body shifting into more humanoid as he stands.  His long cock swings ominously between legs as he walks towards you.  The first thing he does is pull his massive 15-inch cock to your lips, slapping the shaft against your chin.\n\n", false);
@@ -1145,7 +1145,7 @@ function loseToAckballllllz():void
 		outputText("\"<i>Defiance repaid,</i>\" is all you hear from the chorus of voices in your head as Akbal displays his massive length to you.  Your eyes widen in horror, counting a dozen wicked-looking barbs on the head of his overtly thick and over-sized cock.\n\n", false);
 	}
 	//Centaurs R SPECIALZ
-	else if (player.lowerBody == 4)
+	else if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR)
 	{
 		outputText(images.showImage("akbal-deepwoods-losslust-taur-analed"));
 		outputText("You stumble like a drunken pony as your lust goes into the red zone and you know in the pit of your stomach that you are at this wicked demon's mercy.\n\n", false);

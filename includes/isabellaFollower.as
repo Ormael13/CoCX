@@ -581,7 +581,7 @@ function tentacleBoneFollowerIzzy():void {
 	outputText("After toying with her for a while, you decide to bring your other tentacle dicks into the game; with expert precision, you move your " + cockDescript(t3) + " to her face.  Moaning under your gentle ministrations, she doesn't even notice the protruding mammoth about to lodge inside her drooling mouth. With a ferocious thrust you slam it all the way between her pulpy lips. Her sighs of pleasure are abruptly muffled as you block her windpipe with vegetal dickflesh. You start ramming your meat up and down her throat, its raw musk making her dizzy.  She tries to accommodate the monster stretching her mouth by moving her tongue around your erect " + cockDescript(t3) + ", squeezing it there and there, fondling your veins and milking your urethra of your pre-cum. You groan from the tongue-teasing and start filling her stomach with oozing fluid; the intimate contact makes her squirm a little more under the almost unbearable arousal. She's doing an expert job with her mouth, and her throat feels so good, so tender...  You try to stuff more of your " + cockDescript(t3) + " inside her, always wanting more pleasure; the additional pressure almost sends her over the edge as she eagerly gobbles your vegetal rod.\n\n", false);
 	
 	//[if demon tongue]
-	if(player.tongueType == 2 || player.tongueType == 1 || player.tongueType == 3) {
+	if(player.tongueType == TONUGE_DEMONIC || player.tongueType == TONUGE_SNAKE || player.tongueType == TONUGE_DRACONIC) {
 		outputText("Using your long, extensible tongue, you decide to take a lick at her body.  Your tongue darts forward and gently locates her supple tits; you bring Isabelle closer with your vigorous tentacle dicks and start suckling at her breasts, drinking drops of her tasty milk one at a time.  Your constant stimulations arouse her more and more, and soon her nipples are releasing a regular trickle of her essence. You mercilessly drink her, probing your tongue around either of her udders as if to dig deeper to the source of this wonderful ambrosia. You keep gulping milk until you reach satiation, and then you drink some more. It's sweet, savoury and invigorating; you could feed off her breasts for days.  You suckle her until her body shakes from the steady tactile provocation, before darting your tongue back.\n\n", false);
 		//end d-tongue inset
 	}
@@ -960,30 +960,30 @@ function getIzzyBurped():void {
 		
 		var changed:Boolean = false;
 		//no new paragraph, but this obviously shouldn't happen with characters who already have hooves, cow/bull horns, lactating breasts, or a penis smaller than 8 inches. If you want to simply disable the following for those with the first two while simply adding a 'more' to the lactation or an 'even smaller' to the wang growing, I don't blame you, but if you could go in and 'if cow feet don't look at this shit' and whatever with each individual part, it'd probably read the best. Your call, you probably want to get done with this sooner than later. tl;dr it would be cool if you could make it fit as many of the criteria that apply at once.
-		if(player.lowerBody != 1 || player.horns <= 0 || player.hornType != 2) {
+		if(player.lowerBody != LOWER_BODY_TYPE_HOOFED || player.horns <= 0 || player.hornType != HORNS_COW_MINOTAUR) {
 			outputText("  With that whole affair over with, you go to stand... and find yourself falling once more.", false);
 		}
-		if(player.lowerBody != 1) {
+		if(player.lowerBody != LOWER_BODY_TYPE_HOOFED) {
 			//[if no hooves present already]
 			if(player.isTaur()) outputText("  Confused, you quickly inspect yourself before your gaze settles on your hooves – or should you say, your SINGLE PAIR of hooves.  Triggered by what you surmise are the Pro Bova's fumes, your centaur body has vanished, leaving you with a single pair of cow-like hooves.", false);
 			else outputText("  Confused, you quickly inspect yourself before your gaze settles on your " + player.feet() + " – or should you say, former " + player.feet() + ".  Triggered by what you surmise are the Pro Bova's fumes, your " + player.feet() + " have quickly and painlessly refashioned themselves into cloven hooves – not unlike those Isabella is currently sporting.", false);
 			changed = true;
 		}
 		//[if no cow horns present]
-		if(player.horns <= 0 || player.hornType != 2) {
-			if(player.horns > 0 && player.hornType > 0) outputText("  Your existing horns quiver, then reform into those of a " + player.mf("bull","cow"), false);
+		if(player.horns <= 0 || player.hornType != HORNS_COW_MINOTAUR) {
+			if(player.horns > 0 && player.hornType > HORNS_NONE) outputText("  Your existing horns quiver, then reform into those of a " + player.mf("bull","cow"), false);
 			else outputText("  Two nubs sprout from your forehead, swiftly thickening and growing into a large pair of curved bovine horns", false);
 			outputText(", throwing your center of balance off and aborting yet another attempt to right yourself.", false);
 			changed = true;
 		}
 		//[if no cow ears]
-		if(player.earType != 3) {
+		if(player.earType != EARS_COW) {
 			outputText("  Your ears wiggle a bit, then simply migrate higher up your head, lengthening and widening as they go.  Before you know it, you have cow ears.", false);
 			changed = true;
 		}
 		//[if no cow tail]
-		if(player.tailType != 4) {
-			if(player.tailType > 0) outputText("  The tip of your tail reshapes into a burst of fur, the entire length changing to match.", false);
+		if(player.tailType != TAIL_TYPE_COW) {
+			if(player.tailType > TAIL_TYPE_NONE) outputText("  The tip of your tail reshapes into a burst of fur, the entire length changing to match.", false);
 			else outputText("  A tail creeps out of your " + player.armorName + ", perking up and growing rapidly.  A flare of fur bursts from the tip, the rest of the length changing to match.", false);
 			changed = true;
 		}
@@ -1057,7 +1057,7 @@ function getIzzyBurped():void {
 		outputText("She rewards you by freeing one of her arms and wrapping it around your head, pulling you in between her gleaming ebony melons.  Shaking about and wrapping your head in a marshmallowy shroud of comfort, Isabella continues to force burps out, not content until all of the gas is gone.  She pulls you out of your fleshy prison after the oral venting subsides, dragging you down to the ground with her as her gassy magic begins to take hold.\n\n", false);
 		
 		//if meets any requirements for cow-y TF
-		if(player.lowerBody != 1 || player.horns <= 0 || player.hornType != 2 || player.earType != 3 || player.tailType != 4 || (player.hasCock() && player.longestCockLength() < 18)) {
+		if(player.lowerBody != LOWER_BODY_TYPE_HOOFED || player.horns <= 0 || player.hornType != HORNS_COW_MINOTAUR || player.earType != EARS_COW || player.tailType != TAIL_TYPE_COW || (player.hasCock() && player.longestCockLength() < 18)) {
 			outputText("You're not surprised when you take the now-familiar cow-" + player.mf("boy","girl") + " form, ", false);
 			if((!player.hasCock() || rand(2) == 0) && player.hasVagina()) outputText("Isabella beaming with eagerness at your sloshing and swelling bosom.\n\n", false);
 			else if(player.hasCock()) outputText("Isabella not able to keep a little frustration from her face as your dick grows to enviable size.\n\n", false);

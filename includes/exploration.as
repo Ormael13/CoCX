@@ -81,10 +81,10 @@ function tryDiscover():void {
 		}
 		if(player.exploredLake >= 1 && rand(3) == 0 && player.exploredDesert == 0) {
 			outputText("You stumble as the ground shifts a bit underneath you.  Groaning in frustration, you straighten up and discover the rough feeling of sand ", true);
-			if(player.lowerBody == 0) outputText("inside your footwear, between your toes", false);
-			if(player.lowerBody == 1) outputText("in your hooves", false);
-			if(player.lowerBody == 2) outputText("in your paws", false);
-			if(player.lowerBody == 3) outputText("in your scales", false);
+			if(player.lowerBody == LOWER_BODY_TYPE_HUMAN) outputText("inside your footwear, between your toes", false);
+			if(player.lowerBody == LOWER_BODY_TYPE_HOOFED) outputText("in your hooves", false);
+			if(player.lowerBody == LOWER_BODY_TYPE_DOG) outputText("in your paws", false);
+			if(player.lowerBody == LOWER_BODY_TYPE_NAGA) outputText("in your scales", false);
 			outputText(".\n\n<b>You've discovered the Desert!</b>", false);
 			player.exploredDesert = 1;
 			player.explored++;
@@ -829,7 +829,7 @@ function exploreMountain():void {
 		if(flags[UNKNOWN_FLAG_NUMBER_00141] < 3) {
 			trace("CHANCE AT HELLHOUND GAO");
 			//Requires canine face, [either two dog dicks, or a vag and pregnant with a hellhound], at least two other hellhound features (black fur, dog legs, dog tail), and corruption >=60.
-			if(player.faceType == 2 && (player.dogCocks() >= 2 || (player.hasVagina() && player.pregnancyType == 6 && player.pregnancyIncubation > 0)) && player.cor >= 60 && player.tailType == 2 && (player.lowerBody == 2 || player.hairColor == "midnight black")) {
+			if(player.faceType == FACE_DOG && (player.dogCocks() >= 2 || (player.hasVagina() && player.pregnancyType == 6 && player.pregnancyIncubation > 0)) && player.cor >= 60 && player.tailType == TAIL_TYPE_DOG && (player.lowerBody == LOWER_BODY_TYPE_DOG || player.hairColor == "midnight black")) {
 				trace("PASS BODYCHECK");
 				if(flags[UNKNOWN_FLAG_NUMBER_00141] == 0) {
 					HellHoundMasterEncounter();
@@ -952,7 +952,7 @@ function exploreMountain():void {
 		}
 		//Mino gangbang
 		if(player.hasStatusAffect("Mino + Cowgirl") < 0 || rand(10) == 0) {
-			if(flags[HAS_SEEN_MINO_AND_COWGIRL] == 1 && player.horns > 0 && player.hornType == 2 && player.earType == 3 && player.tailType == 4 && player.lactationQ() >= 200 && player.biggestTitSize() >= 3 && minotaurAddicted()) {
+			if(flags[HAS_SEEN_MINO_AND_COWGIRL] == 1 && player.horns > 0 && player.hornType == HORNS_COW_MINOTAUR && player.earType == EARS_COW && player.tailType == TAIL_TYPE_COW && player.lactationQ() >= 200 && player.biggestTitSize() >= 3 && minotaurAddicted()) {
 				//PC must be a cowmorph (horns, legs, ears, tail, lactating, breasts at least C-cup)
 				//Must be addicted to minocum
 				outputText("As you pass a shadowy cleft in the mountainside, you hear the now-familiar call of a cowgirl echoing from within.  Knowing what's in store, you carefully inch closer and peek around the corner.");
@@ -1584,7 +1584,7 @@ function bigJunkDesertScene():void {
         {
 			outputText("  Your " + vaginaDescript() + " and " + clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the " + buttDescript() + " above.", false);
 			//IF CHARACTER HAS A DROOLING PUSSY ADD SENTENCE
-			if(player.vaginas[0].vaginalWetness >= 4) outputText("  Juices stream from your womanhood and begin pooling on the hot sand beneath you.  Wisps of steam rise up into the air only to tease your genitals further.  ", false);
+			if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_DROOLING) outputText("  Juices stream from your womanhood and begin pooling on the hot sand beneath you.  Wisps of steam rise up into the air only to tease your genitals further.  ", false);
 		}
 	}
 	//FOR CENTAURS
@@ -1600,7 +1600,7 @@ function bigJunkDesertScene():void {
 		{
 				outputText("  Your " + vaginaDescript() + " and " + clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the " + buttDescript() + " above.", false);
 				//IF CHARACTER HAS A DROOLING PUSSY ADD SENTENCE
-				if(player.vaginas[0].vaginalWetness >= 4) outputText("  The desert sun beats down on your body, its fiery heat inflaming the senses of your vaginal lips.  Juices stream from your womanhood and begin pooling on the hot sand beneath you.", false);
+				if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_DROOLING) outputText("  The desert sun beats down on your body, its fiery heat inflaming the senses of your vaginal lips.  Juices stream from your womanhood and begin pooling on the hot sand beneath you.", false);
 		}
 	}
 	outputText("\n\n", false);
@@ -1666,7 +1666,7 @@ function bigJunkForestScene(lake:Boolean = false):void {
 		{
 			outputText("  Your " + vaginaDescript() + " and " + clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the " + buttDescript() + " above.", false);
 			//IF CHARACTER HAS A DROOLING PUSSY ADD SENTENCE
-			if(player.vaginas[0].vaginalWetness >= 4) {
+			if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_DROOLING) {
 				outputText("  Juices stream from your womanhood and begin pooling on the dirt and twigs beneath you.  ", false);
 				if(lake) outputText("The drooling fem-spunk only makes the ground more muddy.", false);
 				else outputText("The sticky fem-spunk immediately soaks down into the rich soil.", false);
@@ -1674,7 +1674,7 @@ function bigJunkForestScene(lake:Boolean = false):void {
 		}
 	}
 	//FOR CENTAURS
-	else if(player.lowerBody == 4)
+	else if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR)
 	{
 		outputText("  The impending erection can't seem to be stopped.  Your sexual frustration forces stiffness into your " + multiCockDescriptLight() + ", which forces the barrel of your horse-like torso to the ground.  Normally your erection would merely hover above the ground in between your centaurian legs, but your genitals have grown too large and heavy for your " + hipDescript() + " to hold them aloft.  Instead, you feel your body forcibly pulled down at your hind legs until your equine body is resting on top of your " + multiCockDescriptLight() + ".", false);
 		//IF CHARACTER HAS GIANT BREASTS ADD SENTENCE
@@ -1693,7 +1693,7 @@ function bigJunkForestScene(lake:Boolean = false):void {
 		{
 			outputText("  Your " + vaginaDescript() + " and " + clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the " + buttDescript() + " above.", false);
 			//IF CHARACTER HAS A DROOLING PUSSY ADD SENTENCE
-			if(player.vaginas[0].vaginalWetness >= 4) {
+			if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_DROOLING) {
 				if(lake) outputText("  A leaf falls from a tree and lands on the wet lips of your cunt, its light touch teasing your sensitive skin.  Like a mare or cow in heat, your juices stream from your womanhood and pool in the mud beneath you.  The sloppy fem-spunk only makes the ground more muddy.", false);
 				else outputText("  A leaf falls from a tree and lands on the wet lips of your cunt, its light touch teasing your sensitive skin.  Like a mare or cow in heat, your juices stream from your womanhood and pool in the dirt and twigs beneath you.", false);
 			}
@@ -1712,7 +1712,7 @@ function bigJunkForestScene(lake:Boolean = false):void {
 		//SCENE END = IF CHARACTER HAS FULL WINGS ADD SENTENCE
 		if(player.canFly()) outputText("  You extend your wings and flap as hard as you can until at last, you manage to lighten the bulk of your body.  It helps just enough to let you drag your genitals out of the mud and back to camp.  The ordeal takes nearly an hour for you to return and deal with.", false);
 		//Taurs
-		else if(player.lowerBody == 4) outputText("  You struggle and work your equine legs against the wet ground.  Your " + player.feet() + " have consistent trouble finding footing as the mud fails to provide enough leverage to lift your bulk.  You breath in deeply and lean side to side, trying to find some easier vertical leverage beneath your feet.  Eventually, with a crude crawl, your centaur legs manages to push the bulk of your body onto more solid ground.  With great difficulty, you spend the next hour shuffling your genitals back to camp.", false);
+		else if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) outputText("  You struggle and work your equine legs against the wet ground.  Your " + player.feet() + " have consistent trouble finding footing as the mud fails to provide enough leverage to lift your bulk.  You breath in deeply and lean side to side, trying to find some easier vertical leverage beneath your feet.  Eventually, with a crude crawl, your centaur legs manages to push the bulk of your body onto more solid ground.  With great difficulty, you spend the next hour shuffling your genitals back to camp.", false);
 		//SCENE END = FOR ALL OTHER CHARACTERS
 		else outputText("  You struggle and push with your " + player.legs() + " as hard as you can, but it's no use.  You do the only thing you can and begin stroking your " + multiCockDescriptLight() + " with as much vigor as you can muster.  Eventually, your body tenses and a light load of jizz erupts from your body, but the orgasm is truly mild compared to what you need.  You're far too weary from struggling to give yourself the masturbation you truly need, but you continue to try.  Nearly an hour later, " + sMultiCockDesc() + " has softened enough to allow you to stand again, and you make your way back to camp, still dragging your genitals through the mud.", false);
 	}
@@ -1720,7 +1720,7 @@ function bigJunkForestScene(lake:Boolean = false):void {
 		//SCENE END = IF CHARACTER HAS FULL WINGS ADD SENTENCE
 		if(player.canFly()) outputText("  You extend your wings and flap as hard as you can, until at last, you manage to lighten the bulk of your body.  It helps just enough to let you drag your genitals out of the forest and back to camp.  The ordeal takes nearly an hour for you to return and deal with.", false);
 		//SCENE END IF CHARACTER HAS CENTAUR BODY
-		else if(player.lowerBody == 4) outputText("  You struggle and work your equine legs against the soft dirt.  Your " + player.feet() + " have consistent trouble finding footing as the ground fails to provide enough leverage to lift your bulk.  You breath in deeply and lean side to side, until eventually, your feet brace against the various roots of the trees around you.  With a crude crawl, your centaur legs manage to shuffle your body and genitals out of the forest and back to camp.", false);
+		else if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) outputText("  You struggle and work your equine legs against the soft dirt.  Your " + player.feet() + " have consistent trouble finding footing as the ground fails to provide enough leverage to lift your bulk.  You breath in deeply and lean side to side, until eventually, your feet brace against the various roots of the trees around you.  With a crude crawl, your centaur legs manage to shuffle your body and genitals out of the forest and back to camp.", false);
 		//SCENE END = FOR ALL OTHER CHARACTERS
 		else outputText("  You struggle and push with your " + player.legs() + " as hard as you can, but it's no use.  You do the only thing you can and begin stroking your " + multiCockDescriptLight() + " with as much vigor as you can muster.  Eventually, your body tenses and a light load of jizz erupts from your loins, but the orgasm is truly mild compared to what you need.  You're far too weary from struggling to give yourself the masturbation you truly need, but you continue to try.  Nearly an hour later, " + sMultiCockDesc() + " has softened enough to allow you to stand again, and you make your way back to camp, still dragging your genitals across the forest floor.", false);
 	}
@@ -1921,7 +1921,7 @@ function ottersForGals():void {
 	outputText("\n\nYou know full well that you could get out of this if you wanted to, however the scent of the girl's musky mustelid muff is just too powerful, too intoxicating, too heavenly to ignore.  Instead of struggling you go to town, rubbing your face in it as you lick, slurp and suck at the lips pressed against your mouth.  Up and down your tongue goes, in and out, teasing her soft, swollen lips and pressing hard against her hard, aching clit as you gorge yourself on her pussy.");
 	
 	//(Demonic tongue)
-	if(player.tongueType == 2) outputText("\n\nYou extend your abnormal tongue, plunging it deep into Callu's depths. This actually elicits a little squeak from the fisherwoman, who shifts from side to side in shock.  You let your tongue push further in, as if it were a cock.  Spreading her as you delve deep, you taste the otter from the inside out, reveling in the taste of her sweet, tight hole.  Eventually your tongue comes to an obstruction, a tight ring that bars your way forward.  You grin, or at least try as hard as you can to do so, what with the weight of an otter-girl sitting on your face and 12 inches of tongue sticking out of your mouth.  The tip of your tongue whirls around her cervix before finding the center and slowly pushing inside.  Another \"<i>eep</i>\" arises from Callu, though this one turns into a contented sigh.  With the tip of your tongue in her womb, you begin to slather her walls with saliva.  Every tender flick of your tongue makes the girl riding your face shiver with pleasure.  All good things must come to an end, however, and your tongue eventually gets so tired you have no choice but to draw it back in.");
+	if(player.tongueType == TONUGE_DEMONIC) outputText("\n\nYou extend your abnormal tongue, plunging it deep into Callu's depths. This actually elicits a little squeak from the fisherwoman, who shifts from side to side in shock.  You let your tongue push further in, as if it were a cock.  Spreading her as you delve deep, you taste the otter from the inside out, reveling in the taste of her sweet, tight hole.  Eventually your tongue comes to an obstruction, a tight ring that bars your way forward.  You grin, or at least try as hard as you can to do so, what with the weight of an otter-girl sitting on your face and 12 inches of tongue sticking out of your mouth.  The tip of your tongue whirls around her cervix before finding the center and slowly pushing inside.  Another \"<i>eep</i>\" arises from Callu, though this one turns into a contented sigh.  With the tip of your tongue in her womb, you begin to slather her walls with saliva.  Every tender flick of your tongue makes the girl riding your face shiver with pleasure.  All good things must come to an end, however, and your tongue eventually gets so tired you have no choice but to draw it back in.");
 	
 	outputText("\n\nThis goes on for the better part of an hour.  You find yourself hunting for the little spots that make your sexy little friend jump and squeal, all while she reels in fish after fish.  Several orgasms, half a dozen fish and one extremely messy face later, you hear Callu reel in her line for the last time before setting it off to the side with a clatter.  She rises from your face, allowing you to breathe the fresh air once more.");
 	
@@ -2044,9 +2044,9 @@ function joinBeingAMinoCumSlut():void {
 	outputText("\n\nA giggle comes from your side, as you see the cow-girl is back up onto her knees, having recovered from her exalted orgasm.  She crawls forward, kneeling just over your head and leaning in to kiss her minotaur lover.  The two whisper sweet nothings to each other, too vague and indistinct to hear, but it doesn't matter.  All you can focus on is the dick lodged firmly inside of you... that, and the soaking cunt of the cow-girl just inches from your face.  Alabaster droplets drip down her legs, one even landing on your lips.  Before you can stop yourself, you lick them clean, savoring the taste of the second-hand cum.");
 	
 	outputText("\n\nSome part of your mind voices a complaint at what comes next, a voice that's quickly squelched inside the addiction-fueled haze of your brain.  You pull your head upwards and extend your tongue, slurping a large glob of cum from the cow-girl's snatch.  There's a surprised yelp from above you, followed by a coo of pleasure.  To your surprise, the cow-girl actually lowers her cunt down onto your face, giggling madly, filling your nostrils with the scent of her muff, with the scent of recent sex.  Not letting this opportunity go to waste, you repay her actions from earlier, slipping your ");
-	if(player.tongueType == 1) outputText("serpentine ");
-	else if(player.tongueType == 2) outputText("demonic ");
-	else if(player.tongueType == 3) outputText("draconic ");
+	if(player.tongueType == TONUGE_SNAKE) outputText("serpentine ");
+	else if(player.tongueType == TONUGE_DEMONIC) outputText("demonic ");
+	else if(player.tongueType == TONUGE_DRACONIC) outputText("draconic ");
 	outputText("tongue inside her, eagerly licking out and guzzling down the remnants of the minotaur's present.");
 
 	outputText("\n\nThe minotaur, for his part, is in no rush to give you a cream pie of your own. His thrusts are slow and deliberate, with a rhythm that has you writhing with pleasure.  The three of you moan together like some kind of erotic pyramid.  The bull's assault on your ");

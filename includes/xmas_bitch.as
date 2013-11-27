@@ -211,8 +211,8 @@ function vagFuckXmasElf():void {
 	outputText("Determined to get off, you wiggle against her, mashing your " + clitDescript() + " into her own.  She squirms and cries out, actually getting off before you!  You muse that elves must have extraordinarily sensitive clitorises, but before you can act on it, you feel a sudden stirring in your loins.   The dildo is starting to spin!  You prop yourself up and watch, unbelieving as the elf's orgasmic contractions visibly contort her belly, moving more and more quickly as the spinning speeds up.  In seconds the twirling assault has placed you back on the edge of orgasm, and you're groaning and rubbing against your insensate lover for more.\n\n", false);
 
 	outputText("You cum, ", false);
-	if(player.vaginas[0].vaginalWetness == 5) outputText("gushing fluids", false);
-	else if(player.vaginas[0].vaginalWetness >= 3) outputText("dripping fluids", false);
+	if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText("gushing fluids", false);
+	else if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLICK) outputText("dripping fluids", false);
 	else outputText("squishing wetly", false);
 	outputText(" as your " + vaginaDescript(0) + " is drilled by the elf's double-ended dong.   It feels beyond good, like having a cock inside you that rubs against each part of your pussy over and over and over without the barest hint of mercy.  Your gasp and pant, glancing back up at the elf.  She's already recovered from her orgasm, though she has an intense look of concentration on her face while she focuses on twisting the dildo inside you.\n\n", false);
 

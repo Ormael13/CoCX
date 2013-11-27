@@ -417,7 +417,7 @@ function girlRapeAMinotaur():void {
 	}
 	//Resume sexings, p2
 	outputText("\n\nAt last you feel the minotaur's meaty hands grab you by the ", false);
-	if(player.lowerBody == 4) outputText("hindquarters, forcefully grinding your vagina along his length like a toy.  ", false);
+	if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) outputText("hindquarters, forcefully grinding your vagina along his length like a toy.  ", false);
 	else outputText(hipDescript() + ", forcefully grinding up and down along his length like a cheap sex-toy.  ", false);
 	//Size variants
 	//Too small
@@ -448,8 +448,8 @@ function minotaurGetsRapedByHerms():void {
 	outputText("With a twisted grin and a grunt of pain, you push forward, slipping his " + eCockDescript(0) + " into your " + vaginaDescript(0) + " as your " + cockDescript(0) + " penetrates his tight but accommodating back-door.  You immediately feel a surge of his pre-cum squirt into you as you push forward, forcefully spearing yourself AND him at the same time.  The slick fluids spread warmth through your groin, making you feel light-headed and horny at the same time, spurring you to force the last of both cock-lengths into their respective holes.\n\n", false);
 	temp = player.vaginas[0].vaginalLooseness;
 	cuntChange(monster.cockArea(0), true);
-	if(player.vaginas[0].vaginalLooseness < 3) outputText("A small suppressed part of your mind dimly registers that this should be fairly painful, but the lust and drug-like pre-cum wash that thought away with waves of pleasure.  ", false);
-	if(player.vaginas[0].vaginalLooseness >= 3) outputText("The intense feelings seem to grow more and more powerful as he stays inside you, his drug-like pre-cum making your " + vaginaDescript(0) + " tingle from the inside-out.", false);
+	if(player.vaginas[0].vaginalLooseness < VAGINA_LOOSENESS_GAPING) outputText("A small suppressed part of your mind dimly registers that this should be fairly painful, but the lust and drug-like pre-cum wash that thought away with waves of pleasure.  ", false);
+	if(player.vaginas[0].vaginalLooseness >= VAGINA_LOOSENESS_GAPING) outputText("The intense feelings seem to grow more and more powerful as he stays inside you, his drug-like pre-cum making your " + vaginaDescript(0) + " tingle from the inside-out.", false);
 	outputText("Your " + cockDescript(0) + " quivers from his tightness, each beat of his powerful heart squeezing you tightly in his rear passage.   Through your foggy mind, you come to realize that your hips are pistoning against him with disturbing speed, burning away what's left of your reason with white-hot lust and minotaur spunk.  You slap his ass as you fuck him, humiliating the beast, leering down at him as he moos and moans hopelessly.   At last the pleasure overwhelms you, and you fire your spunk into him like a cannon, your hips still fucking him with unthinking determination.   Jizz sputters from his tail-hole with each thrust, splattering over his ass-cheeks.  A sudden blast of inhuman warmth fills you as the beast begins to cum, huge blasts pouring directly into your womb with every thrust of monstrous meat into your " + vaginaDescript(0) + ".\n\n", false);
 	outputText("Your orgasms drag on, until at last your belly is distended with the stuff and his ass is full of your cum.  With a lurch and a pop, you stagger free of him, barely able to walk with so much of his heavenly spunk inside you.  Even now your body tingles with unnatural pleasure and warmth.  Giggling, you realize the beast is passed out at your feet, his balls half as big as before. ", false);
 	stats(0,0,-.5,-.5,0,1.5,-100,1);
@@ -498,7 +498,7 @@ function getRapedByMinotaur():void {
 		return;
 	}
 	//Oral rape chance
-	if(rand(2) == 0 && player.lowerBody != 4) {
+	if(rand(2) == 0 && player.lowerBody != LOWER_BODY_TYPE_CENTAUR) {
 		getOralRapedByMinotaur();
 		return;
 	}
@@ -518,7 +518,7 @@ function getRapedByMinotaur():void {
 		buttChange(monster.cockArea(0), true);
 		minoCumAddiction(15);
 	}
-	if(player.lowerBody == 4) outputText("\n\nHe positions himself behind your rear legs, and roughly impales you onto his shaft, forcing himself as far into you as he can manage. You cry out, and you feel your stomach distending to accommodate his incredible size. Grabbing your ass, he begins to violently pound your backside with his massive member.  ", false);
+	if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) outputText("\n\nHe positions himself behind your rear legs, and roughly impales you onto his shaft, forcing himself as far into you as he can manage. You cry out, and you feel your stomach distending to accommodate his incredible size. Grabbing your ass, he begins to violently pound your backside with his massive member.  ", false);
 	else outputText("\n\nHe lifts you into the air, with little effort hefting your insignificant weight, and roughly impales you onto his shaft, forcing himself as far into you as he can manage. You cry out, and looking down you can see your stomach distending to accommodate his incredible size. Using you like a human cock-sleeve, he simply holds you by the torso and begins lifting you up and down.  ", false);
 	//Vag stretch texts
 	if(player.hasVagina()) cuntChange((24*3), true, false, true);
@@ -1065,7 +1065,7 @@ function getMinoHawtDawged():void {
 	outputText("\n\nYou let out a low whine as you try, helplessly, to grab for your crotch, but between the constant fucking and the minotaur's big arm blocking the way, you can't grab on long enough to masturbate.  Thankfully, it doesn't take the minotaur long to cum after that; there's a few more shuddering, insistent thrusts...");
 	outputText("\n\n...and then his head pushes out the top of your ass again, fountaining with his spunk. Gout after gout of it rains down on you, painting your butt, ");
 	//[if (hasTail = true)
-	if(player.tailType > 0) outputText("your tail, ");
+	if(player.tailType > TAIL_TYPE_NONE) outputText("your tail, ");
 	outputText("your back, and even your hair with gushes of his sticky, musk-smothered seed. Your entire backside flushes with the heat of his orgasm as it starts to die down, a few last drools of the hot stuff spilling out of his cock, and he withdraws from your butt, leaving you one last gift of a single spurt lodged between your fat cheeks and slowly dripping out. The Minotaur's cum seems to make your head swim, and everything starts to go foggy...");
 	//{Loss message 'when you wake up you'll be missing gems' blah blah}
 	stats(0,0,0,0,0,0,15+rand(player.lib/2),0);

@@ -21,10 +21,10 @@ function customPCSetup():void {
 		notes = "No Notes Available.";
 		player.HP = maxHP();
 		player.hairLength=10;
-		player.skinType = 0;
-		player.faceType = 0;
-		player.tailType = 0;
-		player.tongueType = 0;
+		player.skinType = SKIN_TYPE_PLAIN;
+		player.faceType = FACE_HUMAN;
+		player.tailType = TAIL_TYPE_NONE;
+		player.tongueType = TONUGE_HUMAN;
 		player.femininity = 70;
 		player.beardLength = 0;
 		player.beardStyle = 0;
@@ -47,17 +47,17 @@ function customPCSetup():void {
 		player.tallness = 67;
 		player.tailVenom = 0;
 		player.tailRecharge = 0;
-		player.wingType = 0;
+		player.wingType = WING_TYPE_NONE;
 		player.wingDesc = "non-existant";
-		player.earType = 5;
-		player.lowerBody = 9;
-		player.tailType = 8;
+		player.earType = EARS_CAT;
+		player.lowerBody = LOWER_BODY_TYPE_CAT;
+		player.tailType = TAIL_TYPE_CAT;
 		player.createPerk("Incorporeality",0,0,0,0,"You seem to have inherited some of the spiritual powers of the residents of the afterlife!  While you wouldn't consider doing it for long due to its instability, you can temporarily become incorporeal for the sake of taking over enemies and giving them a taste of ghostly libido.");
-		player.wingType = 9;
-		player.armType = 1;
-		player.hornType = 3;
+		player.wingType = WING_TYPE_FEATHERED_LARGE;
+		player.armType = ARM_TYPE_HARPY;
+		player.hornType = HORNS_DRACONIC_X2;
 		player.horns = 4;
-		player.faceType = 10;
+		player.faceType = FACE_SPIDER_FANGS;
 		player.hairLength = 69.2;
 		player.hairColor = "dark blue";
 		player.hairType = 2;
@@ -102,7 +102,7 @@ function customPCSetup():void {
 		player.createPerk("Dragonfire",0,0,0,0,"You're a cheater, cheater.")
 		player.createPerk("Brood Mother",0,0,0,0,"Pregnancy moves twice as fast as a normal woman's.");
 		player.createPerk("Fertile",1.5,0,0,0,"CHEATER JACKASS JERKFACE");
-		player.vaginas[0].vaginalWetness = 2;
+		player.vaginas[0].vaginalWetness = VAGINA_WETNESS_WET;
 		player.createPerk("Wet Pussy",2,0,0,0,"Keeps your pussy from ever being anything less than wet.");
 		player.createPerk("Tough", 0.25, 0, 0, 0,"Gain toughness 25% faster.");
 		player.createPerk("Strong", 0.25, 0, 0, 0,"Gain strength 25% faster.");
@@ -154,10 +154,10 @@ function customPCSetup():void {
 		notes = "No Notes Available.";
 		player.HP = maxHP();
 		player.hairLength=13;
-		player.skinType = 0;
-		player.faceType = 0;
-		player.tailType = 0;
-		player.tongueType = 0;
+		player.skinType = SKIN_TYPE_PLAIN;
+		player.faceType = FACE_HUMAN;
+		player.tailType = TAIL_TYPE_NONE;
+		player.tongueType = TONUGE_HUMAN;
 		player.femininity = 85;
 		player.beardLength = 0;
 		player.beardStyle = 0;
@@ -180,7 +180,7 @@ function customPCSetup():void {
 		player.tallness = 67;
 		player.tailVenom = 0;
 		player.tailRecharge = 0;
-		player.wingType = 0;
+		player.wingType = WING_TYPE_NONE;
 		player.wingDesc = "non-existant";
 		player.tone = 30;
 		player.thickness = 65;
@@ -215,12 +215,12 @@ function customPCSetup():void {
 		notes = "No Notes Available.";
 		player.HP = maxHP();
 		player.hairLength = 1;
-		player.skinType = 0;
+		player.skinType = SKIN_TYPE_PLAIN;
 		player.skinTone = "light";
 		player.hairColor = "brown";
-		player.faceType = 0;
-		player.tailType = 0;
-		player.tongueType = 0;
+		player.faceType = FACE_HUMAN;
+		player.tailType = TAIL_TYPE_NONE;
+		player.tongueType = TONUGE_HUMAN;
 		player.femininity = 50;
 		player.beardLength = 0;
 		player.beardStyle = 0;
@@ -236,17 +236,17 @@ function customPCSetup():void {
 		player.horns = 0;
 		player.tailVenom = 0;
 		player.tailRecharge = 0;
-		player.wingType = 0;
+		player.wingType = WING_TYPE_NONE;
 		player.wingDesc = "non-existant";
 		//"dog face, dog ears, draconic tail, blue fur.
-		player.faceType = 2;
-		player.earType = 2;
-		player.tailType = 14;
-		player.skinType = 1;
+		player.faceType = FACE_DOG;
+		player.earType = EARS_DOG;
+		player.tailType = TAIL_TYPE_DRACONIC;
+		player.skinType = SKIN_TYPE_FUR;
 		player.hairColor = "blue";
 		player.skinDesc = "fur";
 		player.tone = 88;
-		player.tongueType = 3;
+		player.tongueType = TONUGE_DRACONIC;
 		//gel plate armor, warhammer, 88 body tone, 1 breast row, flat manly breasts, 0.2 inch nipples, 1 on each breast, draconic tongue, short hair-blue, light skin."	Lukaz
 		player.createPerk("History: Fighter",0,0,0,0);
 		player.createPerk("Messy Orgasms", 1.25, 0, 0, 0,"Produces 50% more cum volume.");
@@ -254,9 +254,9 @@ function customPCSetup():void {
 	if(player.short == "Sora") {
 		//Character Creation	Female,virgin	A kitsune with a snake-like tongue	Sora
 		if(player.hasVagina()) player.vaginas[0].virgin = true;
-		player.tongueType = 1;
-		player.earType = 9;
-		player.tailType = 13;
+		player.tongueType = TONUGE_SNAKE;
+		player.earType = EARS_FOX;
+		player.tailType = TAIL_TYPE_FOX;
 		player.tailVenom = 2;
 		player.inte = 30;
 		if(player.hasStatusAffect("Bonus vCapacity") < 0) player.createStatusAffect("Bonus vCapacity",0,0,0,0);
@@ -293,7 +293,7 @@ function customPCSetup():void {
 		player.balls = 0;
 		player.createBreastRow();
 		player.createVagina();
-		player.vaginas[0].vaginalWetness = 2;
+		player.vaginas[0].vaginalWetness = VAGINA_WETNESS_WET;
 		//1 pair DD's, 0.5"" nipples"
 		player.breastRows[0].breastRating = 5;
 		player.nippleLength = 0.5;
@@ -311,10 +311,10 @@ function customPCSetup():void {
 		notes = "No Notes Available.";
 		player.HP = maxHP();
 		
-		player.skinType = 0;
-		player.faceType = 0;
-		player.tailType = 0;
-		player.tongueType = 0;
+		player.skinType = SKIN_TYPE_PLAIN;
+		player.faceType = FACE_HUMAN;
+		player.tailType = TAIL_TYPE_NONE;
+		player.tongueType = TONUGE_HUMAN;
 		player.femininity = 85;
 		player.beardLength = 0;
 		player.beardStyle = 0;
@@ -323,7 +323,7 @@ function customPCSetup():void {
 		//25 thickness
 		player.thickness = 25;
 		player.skinDesc = "fur";
-		player.skinType = 1;
+		player.skinType = SKIN_TYPE_FUR;
 		player.skinTone = "light";
 		player.hairColor = "silver";
 		player.hairLength=10;
@@ -343,13 +343,13 @@ function customPCSetup():void {
 		player.tallness = 82;
 		player.tailVenom = 0;
 		player.tailRecharge = 0;
-		player.wingType = 0;
+		player.wingType = WING_TYPE_NONE;
 		player.wingDesc = "non-existant";
 		//6' 10"" german-shepherd morph, face ears hands feet tail, the whole nine yards
-		player.faceType = 2;
-		player.lowerBody = 2;
-		player.tailType = 2;
-		player.earType = 2;
+		player.faceType = FACE_DOG;
+		player.lowerBody = LOWER_BODY_TYPE_DOG;
+		player.tailType = TAIL_TYPE_DOG;
+		player.earType = EARS_DOG;
 		////"	"I'm picturing a tall, feminine German-Shepherd morph, solid white and gorgeous. She has both sets of genitals, with no balls, and a large set of breasts. She wields a large claymore and is dressed in a full chain vest and pants. 
 		//large claymore (and the strength to use it)
 		player.weaponName = "large claymore";
@@ -431,7 +431,7 @@ function customPCSetup():void {
 		player.clitLength = 0.25;
 		//has a self-repairing hymen in her cunt"	"Angel
 		//(means feathered wings on her back)
-		player.wingType = 4;
+		player.wingType = WING_TYPE_HARPY;
 		//Halo (Flaming)
 		//D-cups
 		player.createBreastRow();
@@ -457,7 +457,7 @@ function customPCSetup():void {
 		player.weaponAttack = 8;
 
 		//Elfin ears
-		player.earType = 4;
+		player.earType = EARS_ELFIN;
 		//tight asshole
 		//human tongue
 		//human face
@@ -473,8 +473,8 @@ function customPCSetup():void {
 		//Character Creation	
 		//herm, canine cock - 8", virgin, tight, wet	
 		//fox ears, tails, A cup breasts with normal nipples	Betram															
-		player.earType = 9;
-		player.tailType = 13;
+		player.earType = EARS_FOX;
+		player.tailType = TAIL_TYPE_FOX;
 		player.tailVenom = 1;
 		if(player.biggestTitSize() > 1) player.breastRows[0].breastRating = 1;
 		if(!player.hasCock()) {
@@ -486,7 +486,7 @@ function customPCSetup():void {
 		}
 		if(!player.hasVagina()) {
 			player.createVagina();
-			player.vaginas[0].vaginalWetness = 2;
+			player.vaginas[0].vaginalWetness = VAGINA_WETNESS_WET;
 			player.clitLength = 0.25;
 		}
 		player.gender = 3;
@@ -563,21 +563,21 @@ function customPCSetup():void {
 		//Looseness- Normal Starting Value
 		//Clit-size- Normal Value"
 		player.createVagina();
-		player.vaginas[0].vaginalWetness = 3;
+		player.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
 		player.clitLength = 0.25;
 		player.vaginas[0].type = 5;
 		player.vaginas[0].virgin = false;
 		player.ass.analLooseness = 1;
 		//Face- Canine
-		player.faceType = 2;
+		player.faceType = FACE_DOG;
 		//Ears- Canine
-		player.earType = 2;
+		player.earType = EARS_DOG;
 		//Tail- Canine
-		player.tailType = 2;
+		player.tailType = TAIL_TYPE_DOG;
 		//Lower body- Canine
-		player.lowerBody = 2;
+		player.lowerBody = LOWER_BODY_TYPE_DOG;
 		//White Fur (if possible)
-		player.skinType = 1;
+		player.skinType = SKIN_TYPE_FUR;
 		player.hairColor = "white";
 	 	player.skinDesc = "fur";
 		//Body Thickness/breastsize/- As if I had selected the ""Average"" body type from the start.
@@ -651,9 +651,9 @@ function customPCSetup():void {
 		player.hairColor = "deep red";
 		player.femininity = 90;
 		//She has a demonic tail and small demonic wings thanks to some encounters early on with succubus milk (that stuff is delicious!) but is otherwise still human.
-		player.wingType = 7;
+		player.wingType = WING_TYPE_BAT_LIKE_LARGE;
 		player.wingDesc = "large, bat-like";
-		player.tailType = 3;
+		player.tailType = TAIL_TYPE_DEMONIC;
 		//I feel really weird talking about all this, so if there's anything you need to change or can't do, or if I totally misinterpreted this, just shoot me an email! jordie.wierenga@gmail.com . Thanks in advance... I'm a big fan. "	Prismere
 	}
 	if(player.short == "Mihari") {
@@ -677,19 +677,19 @@ function customPCSetup():void {
 		player.breastRows[0].breastRating = 5;
 		player.buttRating = 2;
 		player.createVagina();
-		player.vaginas[0].vaginalLooseness = 0;
-		player.vaginas[0].vaginalWetness = 5;
+		player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_TIGHT;
+		player.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLAVERING;
 		player.vaginas[0].virgin = true;
 		player.clitLength = 0.2;
-		player.earType = 5;
-		player.faceType = 6;
+		player.earType = EARS_CAT;
+		player.faceType = FACE_CAT;
 		player.femininity = 100;
 		player.fertility = 85;
 		player.gender = 2;
 		player.hairColor = "blonde";
 		player.hairLength = 24;
 		player.hipRating = 6;
-		player.lowerBody = 9;
+		player.lowerBody = LOWER_BODY_TYPE_CAT;
 		player.nippleLength = 0.5;
 		//perks:
 		player.createPerk("Agility",0,0,0,0,"CHEATER JACKASS JERKFACE");
@@ -702,13 +702,13 @@ function customPCSetup():void {
 
 		player.skinDesc = "fur";
 		player.skinTone = "ashen";
-		player.skinType = 1;
-		player.tailType = 8;
+		player.skinType = SKIN_TYPE_FUR;
+		player.tailType = TAIL_TYPE_CAT;
 		player.tallness = 55;
 		player.teaseLevel = 4;
 		player.thickness = 10;
 		player.tone = 75;
-		player.tongueType = 0;
+		player.tongueType = TONUGE_HUMAN;
 		
 		//Posted everything above sorry if it wasn't supposed to go there.
 		//starting equipment: black leather armor surrounded by voluminous robes
@@ -730,14 +730,14 @@ function customPCSetup():void {
 		if(player.femininity < 80) player.femininity = 80;
 		player.createPerk("Bimbo Body",0,0,0,0,"Cheater.");
 		player.createPerk("Bimbo Brains",0,0,0,0,"Cheater.");
-		player.tailType = 13;
+		player.tailType = TAIL_TYPE_FOX;
 		player.tailVenom = 9;
 		player.createPerk("Enlightened Nine-tails",0,0,0,0);
 		player.breastRows[0].breastRating = 5;
 		player.femininity = 100;
-		player.lowerBody = 5;
+		player.lowerBody = LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
 		player.skinTone = "pink";
-		player.skinType = 1;
+		player.skinType = SKIN_TYPE_FUR;
 		player.skinDesc = "fur";
 		player.hairColor = "pink";
 		player.hairLength = 50;
@@ -778,12 +778,12 @@ function customPCSetup():void {
 		//428347355782040	Character Creation	Female,wetness=wet, Looseness=normal,not a virgin, Fertility high i guess i dont really care can be up to you.	for her face normal human, ears i want Elvin, no tails, just normal skin, body thickness i want to be slender, body tone kinda athletic but not too much, hair i want really long i think like a 30 on the codex number i think and her hair color light blonde, i want her to have normal D size breast with you can choose how you want them really though i dont think i really care, nipple size i dont care, her skin color a fair light light color but not too pale, for her starting equipment i want im not sure what i want her to wear but basically i want a Elvin archer with a bow. so maybe you can do something about the clothing. i just want a Elvin character in the game since theres goblins plus another archer besides kelt a female one add to that.	Lucina
 		outputText("You're a blond, fair-skinned lass with a well-made bow and the skills to use it.  You have D-cup breasts and a very moist cunt that's seen a little action.  You're fit and trim, but not too thin, nor too well-muscled.  All in all, you're a good fit for championing your village's cause.");
 		if(!player.hasVagina()) player.createVagina();
-		player.vaginas[0].vaginalWetness = 3;
-		player.vaginas[0].vaginalLooseness = 2;
+		player.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
+		player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
 		player.vaginas[0].virgin = false;
 		if(player.femininity < 80) player.femininity = 80;
 		player.fertility = 40;
-		player.earType = 4;
+		player.earType = EARS_ELFIN;
 		player.thickness = 25;
 		player.tone = 60;
 		player.hairLength = 30;
@@ -806,7 +806,7 @@ function customPCSetup():void {
 		player.hairColor = "red";
 		player.skinTone = "light";
 		player.skinDesc = "skin";
-		player.skinType = 0;
+		player.skinType = SKIN_TYPE_PLAIN;
 		player.femininity = 100;
 		player.thickness = 25;
 		player.tone = 65;
@@ -825,15 +825,15 @@ function customPCSetup():void {
 		player.balls = 0;
 		player.ballSize = 2;
 		player.cumMultiplier = 7500;
-		player.vaginas[0].vaginalWetness = 5;
+		player.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLAVERING;
 		player.clitLength = 0.5;
 		player.fertility = 15;
-		player.tailType = 13;
+		player.tailType = TAIL_TYPE_FOX;
 		player.tailVenom = 9;
 		player.createPerk("Enlightened Nine-tails",0,0,0,0);
 		//if possible with fur, Hair color: "midnight black", Skin/Fur color: "ashen grayish-blue",  Height: 65", Tone: 100, Thickness: 0, Hip rating: 6, Butt rating: 3,Feminimity: 50,  ( 4 rows of breasts (Descending from the top ones: D,C,B,A), nipple length: 0.1", Fuckable, 1 nipple per breast, Tongue type: demon
 		player.hairColor = "midnight black";
-		player.skinType = 1;
+		player.skinType = SKIN_TYPE_FUR;
 		player.skinDesc = "fur";
 		player.skinTone = "ashen grayish-blue";
 		player.tallness = 65;
@@ -853,7 +853,7 @@ function customPCSetup():void {
 		player.breastRows[2].fuckable = true;
 		player.breastRows[3].breastRating = 1;
 		player.breastRows[3].fuckable = true;
-		player.tongueType = 2;
+		player.tongueType = TONUGE_DEMONIC;
 		player.nippleLength = 0.1;
 		//Starting with an Inscribed Spellblade and Bondage Straps.	Charaun
 		player.armorName = "barely-decent bondage straps";
@@ -893,11 +893,11 @@ function customPCSetup():void {
 		//Appearence: 7ft 9in tall covered in thick shining silver fur, has a vulpine head and ears, eight breast all the same size at DD, dragon like wings, tail, and legs. With a large mare like pussy, 6 dicks, two equine, two dragon, two vulpine, all 15in long and 3 in wide, and four nuts 5 in across
 		player.tallness = 93;
 		player.skinTone = "black";
-		player.skinType = 1;
+		player.skinType = SKIN_TYPE_FUR;
 		player.skinDesc = "fur";
 		player.hairColor = "silver";
-		player.faceType = 11;
-		player.earType = 9;
+		player.faceType = FACE_FOX;
+		player.earType = EARS_FOX;
 		player.createBreastRow();
 		player.createBreastRow();
 		player.createBreastRow();
@@ -953,15 +953,15 @@ function customPCSetup():void {
 		player.tone = 75;
 		//for wetness a squirter, looseness a 2 and capacity at 140.
 		if(!player.hasVagina()) player.createVagina();
-		player.vaginas[0].vaginalWetness = 5;
+		player.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLAVERING;
 		player.createStatusAffect("Bonus vCapacity",132,0,0,0);
 		//Virgin, high fertility like in the email I sent before.  dragon wings, nine fox tails,  dragon legs, eight DD breasts with four fuckable nipples each, dragon tongue, waist length hair, large dragon wings.
-		player.wingType = 11;
+		player.wingType = WING_TYPE_DRACONIC_LARGE;
 		player.wingDesc = "large, draconic";
-		player.tailType = 13;
+		player.tailType = TAIL_TYPE_FOX;
 		player.tailVenom = 9;
-		player.lowerBody = 18;
-		player.tongueType = 3;
+		player.lowerBody = LOWER_BODY_TYPE_DRAGON;
+		player.tongueType = TONUGE_DRACONIC;
 		player.hairLength = 45;
 		player.createPerk("Enlightened Nine-tails",0,0,0,0);
 		player.gender = 3;
@@ -1027,11 +1027,11 @@ function customPCSetup():void {
 		player.hairColor = "silver-white";
 		//- human face
 		//- fox ears 
-		player.earType = 9;
+		player.earType = EARS_FOX;
 		//- olive complexion
 		player.skinTone = "olive";
 		//- demon tongue (oral fetish ;d)
-		player.tongueType = 2;
+		player.tongueType = TONUGE_DEMONIC;
 		//- 5 foot 9 inch tall
 		player.tallness = 69;
 		//- average build
@@ -1043,7 +1043,7 @@ function customPCSetup():void {
 		player.nippleLength = 0.2;
 		player.createBreastRow();
 		//- three fox tails
-		player.tailType = 13;
+		player.tailType = TAIL_TYPE_FOX;
 		player.tailVenom = 3;
 		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		//equipment;
@@ -1067,7 +1067,7 @@ function customPCSetup():void {
 		if(player.hasVagina()) player.removeVagina();
 		player.gender = 0;
 		player.femininity = 50;
-		player.faceType = 4;
+		player.faceType = FACE_SHARK_TEETH;
 	}
 	if(player.short == "Katti") {
 		outputText("You have big breasts with big, fuckable nipples on them, and no matter what, your vagina always seems to be there to keep you company.");
@@ -1077,9 +1077,9 @@ function customPCSetup():void {
 			genderCheck();
 		}
 		//"Ears: Bunny
-		player.earType = 7;
+		player.earType = EARS_BUNNY;
 		//Tail: Bunny
-		player.tailType = 10;
+		player.tailType = TAIL_TYPE_RABBIT;
 		//Face: Human
 		//Breasts: H-cup with 4.5 inch fuckable nipples"
 		player.breastRows[0].breastRating = 19;
@@ -1091,7 +1091,7 @@ function customPCSetup():void {
 		//well to start off the name would be Cody
 		//-Cat with (black and orange tiger fur if possible) if not just Orange fur
 		player.hairColor = "black and orange";
-		player.skinType = 1;
+		player.skinType = SKIN_TYPE_FUR;
 		player.skinDesc = "fur";
 		//-Chainmail armor
 		player.armorName = "full-body chainmail";
@@ -1130,16 +1130,16 @@ function customPCSetup():void {
 		player.hairLength = 30;
 		player.hairColor = "orange";
 		//Face: Elf ears, 4x demonic horns
-		player.earType = 4;
+		player.earType = EARS_ELFIN;
 		player.horns = 4;
-		player.hornType = 1;
+		player.hornType = HORNS_DEMON;
 		//Body: Plump, no muscle tone, wide thighs, badonkulous ass, demon tail, demonic high heels
 		player.thickness = 75;
 		player.tone = 0;
 		player.hipRating = 17;
 		player.buttRating = 17;
-		player.tailType = 3;
-		player.lowerBody = 5;
+		player.tailType = TAIL_TYPE_DEMONIC;
+		player.lowerBody = LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
 		//Breasts: J-cups with 5 inch fuckable nipples, leaking milk
 		player.breastRows[0].breastRating = 28;
 		player.nippleLength = 5;
@@ -1164,8 +1164,8 @@ function customPCSetup():void {
 		//Vagina: Ridiculously loose, 3 inch clitoris, dripping constantly, fertile like a bunny on steroids and non-virgin
 		player.createVagina();
 		player.clitLength = 3;
-		player.vaginas[0].vaginalWetness = 4;
-		player.vaginas[0].vaginalLooseness = 5;
+		player.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
+		player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LEVEL_CLOWN_CAR;
 		player.vaginas[0].virgin = false;
 		player.fertility = 50;
 		//Butt: Just as loose
@@ -1177,15 +1177,15 @@ function customPCSetup():void {
 		player.hairColor = "red";
 		//Face: Gorgeous Feminine, long demonic tongue, cat ears
 		player.femininity = 100;
-		player.tongueType = 2;
-		player.earType = 5;
+		player.tongueType = TONUGE_DEMONIC;
+		player.earType = EARS_CAT;
 		//Body: Very muscular, average weight, plump ass, above average thighs, cat tail and cat paws
 		player.tone = 80;
 		player.thickness = 50;
 		player.buttRating = 12;
 		player.hipRating = 10;
-		player.tailType = 8;
-		player.lowerBody = 9;
+		player.tailType = TAIL_TYPE_CAT;
+		player.lowerBody = LOWER_BODY_TYPE_CAT;
 		//Breasts: 2 E-cups on top, 2 DD-cups mid, 2 D-cups bottom, 3.5 inch nipples
 		player.createBreastRow();
 		player.createBreastRow();
@@ -1231,7 +1231,7 @@ function customPCSetup():void {
 		player.buttRating = 5;
 		player.teaseLevel = 1;
 		//Large feathered wings (Any chance in heck I could get 'angel' as the race descriptor? Just asking. I'm fine if the answer is 'no')
-		player.wingType = 9;
+		player.wingType = WING_TYPE_FEATHERED_LARGE;
 		player.wingDesc = "large, feathered";
 		
 		//While we're on the subject, would glowing eyes be possible? I'll take normal eyes if not.
@@ -1342,8 +1342,8 @@ function customPCSetup():void {
 		player.createPerk("Messy Orgasms", 1.25, 0, 0, 0,"Produces 50% more cum volume.");
 		player.createPerk("History: Scholar",0,0,0,0,"");
 		//Apperance: Cat Ears, Large Bat Like Wings, 3 Rows of breasts (C cub, 0,2 nipples)
-		player.earType = 5;
-		player.wingType = 7;
+		player.earType = EARS_CAT;
+		player.wingType = WING_TYPE_BAT_LIKE_LARGE;
 		player.wingDesc = "large, bat-like";
 		//Items: Katana, Leather Armor
 		player.weaponName = "katana";
@@ -1373,8 +1373,8 @@ function customPCSetup():void {
 		player.createCock();
 		player.tallness = 73;
 		player.breastRows[0].breastRating = 5;
-		player.vaginas[0].vaginalWetness = 3;
-		player.vaginas[0].vaginalLooseness = 2;
+		player.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
+		player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
 		player.vaginas[0].virgin = false;
 		player.tone = 20;
 		player.hipRating = 8;
@@ -1386,24 +1386,24 @@ function customPCSetup():void {
 		//Mirvanna;
 		//Gender = Herm
 		//Ears = Horse
-		player.earType = 1;
+		player.earType = EARS_HORSE;
 		//Horns = Dragon
-		player.hornType = 4;
+		player.hornType = HORNS_DRACONIC_X4_12_INCH_LONG;
 		player.horns = 12;
 		//Face = Horse
-		player.faceType = 1;
+		player.faceType = FACE_HORSE;
 		//Skin type = Black Fur
 		player.skinTone = "brown";
-		player.skinType = 1;
+		player.skinType = SKIN_TYPE_FUR;
 		player.hairColor = "black";
 		player.skinDesc = "fur";
 		//Legs/Feet = Digigrade hooved 
-		player.lowerBody = 1;
+		player.lowerBody = LOWER_BODY_TYPE_HOOFED;
 		//Wing type = Dragon
-		player.wingType = 11;
+		player.wingType = WING_TYPE_DRACONIC_LARGE;
 		player.wingDesc = "large, draconic";
 		//Tail type = Dragon
-		player.tailType = 14;
+		player.tailType = TAIL_TYPE_DRACONIC;
 		//Cock type = Equine
 		player.cocks[0].cockType = CockTypesEnum.HORSE;
 		player.cocks[0].cockLength = 14;
@@ -1444,7 +1444,7 @@ function customPCSetup():void {
 		player.createVagina();
 		player.tallness = 67;
 		player.breastRows[0].breastRating = 7;
-		player.vaginas[0].vaginalWetness = 3;
+		player.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
 		player.vaginas[0].virgin = false;
 		player.tone = 20;
 		player.hipRating = 12;
@@ -1455,8 +1455,8 @@ function customPCSetup():void {
 		player.createPerk("Bimbo Body",0,0,0,0,"");
 		player.createPerk("Bimbo Brains",0,0,0,0,"");
 		player.createPerk("Big Tits", 1.5, 0, 0, 0,"Makes your tits grow larger more easily.");
-		player.earType = 7;
-		player.tailType = 10;
+		player.earType = EARS_BUNNY;
+		player.tailType = TAIL_TYPE_RABBIT;
 		player.skinTone = "tan";
 		player.hairColor = "platinum blonde";
 		player.teaseLevel = 3;
