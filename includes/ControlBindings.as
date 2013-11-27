@@ -474,7 +474,7 @@ inputManager.AddBindableControl(
 			}
 		}
 	},
-	true);
+	InputManager.CHEATCONTROL);
 
 // Insert the default bindings
 inputManager.BindKeyToControl(83, "Show Stats");
@@ -496,7 +496,7 @@ inputManager.BindKeyToControl(78, "No");
 inputManager.BindKeyToControl(89, "Yes");
 inputManager.BindKeyToControl(80, "Show Perks");
 inputManager.BindKeyToControl(13, "Continue");
-inputManager.BindKeyToControl(32, "Continue");
+inputManager.BindKeyToControl(32, "Continue", InputManager.SECONDARYKEY);
 inputManager.BindKeyToControl(36, "Cycle Background");
 inputManager.BindKeyToControl(49, "Button 1");
 inputManager.BindKeyToControl(50, "Button 2");
@@ -508,8 +508,10 @@ inputManager.BindKeyToControl(55, "Button 7");
 inputManager.BindKeyToControl(56, "Button 8");
 inputManager.BindKeyToControl(57, "Button 9");
 inputManager.BindKeyToControl(48, "Button 10");
-inputManager.BindKeyToControl(81, "Button 6");
-inputManager.BindKeyToControl(87, "Button 7");
-inputManager.BindKeyToControl(69, "Button 8");
-inputManager.BindKeyToControl(82, "Button 9");
-inputManager.BindKeyToControl(84, "Button 10");
+inputManager.BindKeyToControl(81, "Button 6", InputManager.SECONDARYKEY);
+inputManager.BindKeyToControl(87, "Button 7", InputManager.SECONDARYKEY);
+inputManager.BindKeyToControl(69, "Button 8", InputManager.SECONDARYKEY);
+inputManager.BindKeyToControl(82, "Button 9", InputManager.SECONDARYKEY);
+inputManager.BindKeyToControl(84, "Button 10", InputManager.SECONDARYKEY);
+
+inputManager.RegisterDefaults();
