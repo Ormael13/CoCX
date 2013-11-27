@@ -6,6 +6,7 @@ package classes.display
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
 	import flash.display.Stage;
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	import flash.utils.Dictionary;
@@ -21,6 +22,7 @@ package classes.display
 	public class BindingPane extends ScrollPane
 	{	
 		private var _inputManager:InputManager;
+		private var _stage:Stage;
 		
 		// A lookup for integer keyCodes -> string representations
 		private var _keyDict:Dictionary;
@@ -61,6 +63,36 @@ package classes.display
 			_content = new MovieClip();
 			_content.name = "controlContent";
 			_contentChildren = 0;
+			
+			// Hook into some stuff so that we can fix some bugs that ScrollPane has
+			this.addEventListener(Event.ADDED_TO_STAGE, AddedToStage);
+		}
+		
+		/**
+		 * Cleanly get us a reference to the stage to add/remove other event listeners
+		 * @param	e
+		 */
+		private function AddedToStage(e:Event):void
+		{
+			this.removeEventListener(Event.ADDED_TO_STAGE, AddedToStage);
+			this.addEventListener(Event.REMOVED_FROM_STAGE, RemovedFromStage);
+			
+			_stage = this.stage;
+			
+			_stage.addEventListener(MouseEvent.MOUSE_WHEEL, MouseScrollEvent);
+		}
+		
+		private function RemovedFromStage(e:Event):void
+		{
+			this.removeEventListener(Event.REMOVED_FROM_STAGE, RemovedFromStage);
+			this.addEventListener(Event.ADDED_TO_STAGE, AddedToStage);
+			
+			_stage.removeEventListener(MouseEvent.MOUSE_WHEEL, MouseScrollEvent);
+		}
+		
+		private function MouseScrollEvent(e:MouseEvent):void
+		{
+			this.verticalScrollPosition += -( e.delta * 8 );
 		}
 		
 		public function ListBindingOptions():void
@@ -94,7 +126,7 @@ package classes.display
 				var newLabel = new BindDisplay(this.width);
 				newLabel.name = _functions[i].Name;
 				newLabel.x = 2;
-				newLabel.y = BindDisplay.BUTTON_Y_DELTA * i;
+				newLabel.y = BindDisplay.BUTTON_Y_DELTA * i + 7;
 				newLabel.htmlText = "<b>" + _functions[i].Name + ":</b>";
 				newLabel.button1Text = _keyDict[_functions[i].PrimaryKey];
 				newLabel.button2Text = _keyDict[_functions[i].SecondaryKey];
