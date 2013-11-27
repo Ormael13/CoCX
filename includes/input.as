@@ -36,6 +36,7 @@ function changeHandler(event:Event):void {
 
 function displayControls():void
 {
+	mainView.hideAllMenuButtons();
 	inputManager.DisplayBindingPane();
 	
 	choices("Reset Ctrls", resetControls,
