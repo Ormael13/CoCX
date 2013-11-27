@@ -23,14 +23,14 @@
     <option accessible="False" />
     <option advancedTelemetry="False" />
     <option allowSourcePathOverlap="False" />
-    <option benchmark="False" />
+    <option benchmark="True" />
     <option es="False" />
     <option inline="False" />
     <option locale="" />
     <option loadConfig="" />
     <option optimize="True" />
     <option omitTraces="True" />
-    <option showActionScriptWarnings="True" />
+    <option showActionScriptWarnings="False" />
     <option showBindingWarnings="True" />
     <option showInvalidCSS="True" />
     <option showDeprecationWarnings="True" />

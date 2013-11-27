@@ -4563,7 +4563,7 @@ function getAPetReward():void {
 	else outputText("tailplug");
 	outputText(" enthusiastically.");
 	
-	outputText("\n\nUrta holds up a hand at you and says in a quite commanding voice, \"<i>Sit.</i>\"  You immediately drop your butt to the floor, getting a little thrill from obeying.  \"<i>Good " + player.mf("boy","girl") + ".  Now stay.</i>\"  Once she's satisfied you're staying put, your Owner walks out of the room, swaying her ass tantalizing before disappearing around the corner.  You wait, naked and with your legs and butt resting on the floor, for several minutes.  You find yourself actually getting a little ");
+	outputText("\n\nUrta holds up a hand at you and says in a quite commanding voice, \"<i>Sit.</i>\"  You immediately drop your butt to the floor, getting a little thrill from obeying.  \"<i>Good " + player.mf("boy","girl") + ".  Now stay.</i>\"  Once she's satisfied you're staying put, your Owner walks out of the room, her ass swaying tantalizingly as she disappears around the corner.  You wait, naked and with your legs and butt resting on the floor, for several minutes.  You find yourself actually getting a little ");
 	if(player.hasCock()) outputText("hard");
 	if(player.gender == 3) outputText(" and ");
 	if(player.hasVagina()) outputText("wet");
