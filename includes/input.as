@@ -38,7 +38,16 @@ function displayControls():void
 {
 	inputManager.DisplayBindingPane();
 	
-	doNext(hideControls);
+	choices("Reset Ctrls", resetControls,
+			"Null", 0,
+			"Null", 0,
+			"Null", 0,
+			"Null", 0,
+			"Null", 0,
+			"Null", 0,
+			"Null", 0,
+			"Null", 0,
+			"Back", hideControls);
 }
 
 function hideControls():void
@@ -46,4 +55,23 @@ function hideControls():void
 	inputManager.HideBindingPane();
 	
 	settingsScreen();
+}
+
+function resetControls():void
+{
+	inputManager.HideBindingPane();
+	
+	outputText("Are you sure you want to reset all of the currently bound controls to their defaults?", true);
+	
+	doYesNo(resetControlsYes, displayControls);
+}
+
+function resetControlsYes():void
+{
+	inputManager.ResetToDefaults();
+	
+	outputText("Controls have been reset to defaults!\n\n", true);
+	outputText("TODO: Actually make resetting work!");
+	
+	doNext(displayControls);
 }

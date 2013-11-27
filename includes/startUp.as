@@ -582,13 +582,6 @@ function creditsScreen():void {
 	doNext(mainMenu);
 }
 
-
-
-	
-
-
-	
-
 function imageCreditsScreen():void
 {
 
