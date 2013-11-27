@@ -361,7 +361,11 @@ package classes
 				}
 			}
 		}
-
+		
+		/**
+		 * Get an array of the available functions.
+		 * @return	Array of available BoundControlMethods.
+		 */
 		public function GetAvailableFunctions():Array
 		{
 			var funcs:Array = new Array();
@@ -374,6 +378,66 @@ package classes
 			funcs.sortOn( ["Index"], [Array.NUMERIC] );
 			
 			return funcs;
+		}
+		
+		/**
+		 * Clear all currently bound keys.
+		 */
+		public function ClearAllBinds():void
+		{
+			for (var key:String in _controlMethods)
+			{
+				_controlMethods[key].PrimaryKey = InputManager.UNBOUNDKEY;
+				_controlMethods[key].SecondaryKey = InputManager.UNBOUNDKEY;
+			}
+			
+			_keysToControlMethods = new Object();
+		}
+		
+		/**
+		 * Load bindings from a source "Object" retrieved from a game save file.
+		 * @param	source	Source object to enumerate for binding data.
+		 */
+		public function LoadBindsFromObj(source:Object):void
+		{
+			this.ClearAllBinds();
+			
+			for (var key:String in source)
+			{
+				var pKeyCode:int = source[key].PrimaryKey;
+				var sKeyCode:int = source[key].SecondaryKey;
+				
+				if (pKeyCode != InputManager.UNBOUNDKEY)
+				{
+					this.BindKeyToControl(pKeyCode, key, InputManager.PRIMARYKEY);
+				}
+				
+				if (sKeyCode != InputManager.UNBOUNDKEY)
+				{
+					this.BindKeyToControl(sKeyCode, key, InputManager.SECONDARYKEY);
+				}
+			}
+		}
+		
+		/**
+		 * Create an associative object that can serialise the bindings to the users save file.
+		 * @return	Dynamic object of control bindings.
+		 */
+		public function SaveBindsToObj():Object
+		{
+			var controls:Object = new Object();
+			
+			for (var key:String in _controlMethods);
+			{
+				trace(key);
+				var ctrlObj = new Object();
+				ctrlObj.PrimaryKey = _controlMethods[key].PrimaryKey;
+				ctrlObj.SecondaryKey = _controlMethods[key].SecondaryKey;
+				
+				controls[key] = ctrlObj;
+			}
+			
+			return controls;
 		}
 	}
 	

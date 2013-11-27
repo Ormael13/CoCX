@@ -309,6 +309,7 @@ function saveGameObject(slot:String, isFile:Boolean):void
 	import classes.assClass;
 	import classes.perkClass;
 	import classes.statusAffectClass;
+	import classes.BoundControlMethod;
 	
 	//Autosave stuff
 	if (player.slotName != "VOID")
@@ -660,6 +661,10 @@ function saveGameObject(slot:String, isFile:Boolean):void
 	saveFile.data.itemSlot5.quantity = itemSlot5.quantity;
 	saveFile.data.itemSlot5.shortName = itemSlot5.shortName;
 	saveFile.data.itemSlot5.unlocked = itemSlot5.unlocked;
+	
+	// Keybinds
+	saveFile.data.controls = inputManager.SaveBindsToObj();
+
 	trace("done saving");
 	if (isFile)
 	{
@@ -1320,6 +1325,12 @@ function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			itemSlot5.shortName = "GroPlus";
 		
 		unFuckSave()
+		
+		// Control Bindings
+		if (saveFile.data.controls != undefined)
+		{
+			inputManager.LoadBindsFromObj(saveFile.data.controls);
+		}
 		
 		doNext(1);
 	}

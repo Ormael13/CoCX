@@ -39,7 +39,7 @@ function displayControls():void
 	inputManager.DisplayBindingPane();
 	
 	choices("Reset Ctrls", resetControls,
-			"Null", 0,
+			"Clear Ctrls", clearControls,
 			"Null", 0,
 			"Null", 0,
 			"Null", 0,
@@ -71,7 +71,24 @@ function resetControlsYes():void
 	inputManager.ResetToDefaults();
 	
 	outputText("Controls have been reset to defaults!\n\n", true);
-	outputText("TODO: Actually make resetting work!");
+	
+	doNext(displayControls);
+}
+
+function clearControls():void
+{
+	inputManager.HideBindingPane();
+	
+	outputText("Are you sure you want to clear all of the currently bound controls?", true);
+	
+	doYesNo(clearControlsYes, displayControls);
+}
+
+function clearControlsYes():void
+{
+	inputManager.ClearAllBinds();
+	
+	outputText("Controls have been cleared!", true);
 	
 	doNext(displayControls);
 }
