@@ -53,7 +53,8 @@
   </includeLibraries>
   <!-- SWC Libraries -->
   <libraryPaths>
-    <!-- example: <element path="..." /> -->
+    <element path="lib\bin\MainView.swc" />
+    <element path="lib\bin\ScrollPane.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
