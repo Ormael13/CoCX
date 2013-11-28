@@ -12,6 +12,9 @@ package classes
 	
 	public class Creature
 	{
+
+		include "../../includes/appearanceDefs.as";
+
 		//Variables
 		
 		//Short refers to player name and monster name. BEST VARIABLE NAME EVA!
@@ -51,6 +54,7 @@ package classes
 				
 		//Appearance Variables
 		//Gender 1M, 2F, 3H
+		//public var gender:Number = GENDER_MALE;
 		public var gender:Number = 0;
 		public var tallness:Number = 0;
 		
@@ -69,6 +73,7 @@ package classes
 		1 - furry
 		2 - scaley
 		3 - goopey*/
+		//public var skinType:Number = SKIN_TYPE_PLAIN;
 		public var skinType:Number = 0;
 		public var skinTone:String = "albino";
 		public var skinDesc:String = "skin";
@@ -92,7 +97,8 @@ package classes
 		14 - fullcoon
 		15 - halfmouse
 		16 - fullmouse*/
-		public var faceType:Number = 0;
+		//public var faceType:Number = FACE_HUMAN;
+		public var faceType:Number = FACE_HUMAN;
 		
 		/*EarType
 		-1 - none!
@@ -109,6 +115,7 @@ package classes
 		10 - dragon
 		11 - coon
 		12 - mouse*/
+		//public var earType:Number = EARS_HUMAN;
 		public var earType:Number = 0;
 		public var earValue:Number = 0;
 		
@@ -118,6 +125,7 @@ package classes
 		3 - Draconic/Lizard
 		4 - Double draconic
 		5 - Antlers*/
+		//public var hornType:Number = HORNS_NONE;
 		public var hornType:Number = 0;
 		
 		/*Wingtype
@@ -134,6 +142,7 @@ package classes
 		10 - small dagron
 		11 - trogdor wings
 		12 - sandtrap wings*/
+		//public var wingType:Number = WING_TYPE_NONE;
 		public var wingType:Number = 0;
 		public var wingDesc:String = "non-existant";
 		
@@ -158,6 +167,7 @@ package classes
 		17 - foxpaws
 		18 - dragonfeet
 		19 - raccoonfeet*/
+		//public var lowerBody:Number = LOWER_BODY_TYPE_HUMAN;
 		public var lowerBody:Number = 0;
 		
 		/*tailType:
@@ -178,6 +188,7 @@ package classes
 		14 - dagron tail
 		15 - raccoon tail
 		16 - mousetail*/
+		//public var tailType:Number = TAIL_TYPE_NONE;
 		public var tailType:Number = 0;
 		
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.

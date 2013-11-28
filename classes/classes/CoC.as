@@ -1,5 +1,6 @@
 ﻿package classes
 {
+	
 	import classes.assClass;
 	import classes.breastRowClass;
 	//import classes.cockClass;
@@ -12,6 +13,8 @@
 	import classes.statusAffectClass;
 	import classes.vaginaClass;
 	import classes.ImageManager; // This line not necessary, but added because I'm pedantic like that.
+
+	import classes.Monsters.*;		// import all the various monsters
 
 	import coc.view.MainView;
 
@@ -34,6 +37,7 @@
 	import flash.text.*;
 	import flash.utils.ByteArray;
 
+
 	/****
 		classes.CoC: The Document class of Corruption of the Champions.
 	****/
@@ -42,6 +46,7 @@
 
 	public class CoC extends MovieClip
 	{
+
 
 		// Include the functions. ALL THE FUNCTIONS
 
@@ -191,12 +196,13 @@
 
 
 		// include "../../includes/GlobalVariables.as";
+		include "../../includes/flagDefs.as";
+		include "../../includes/appearanceDefs.as";
 
 		include "../../includes/input.as";
 		include "../../includes/engineCore.as";
 			
 		
-		include "../../includes/flagDefs.as";
 		
 		// we had two saves.as files. It was causing wierd issues.
 		// I'm not sure how most of the files in /classes/classes/ are included

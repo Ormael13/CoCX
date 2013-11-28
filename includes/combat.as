@@ -4,6 +4,7 @@ function inCombat():Boolean {
 	return false;
 }
 function baseXP():Number {
+	trace("LEGACY CODE FIX DIS SHIT");
 	var xp:Number = 0;
 	var lev:Number = Math.round(monster.level);
 	switch(lev) {
@@ -5510,131 +5511,7 @@ function startCombat(monsterNum:Number):void {
 	//load enemy based on number.
 	//LOAD IMP
 	if(monsterNum == 1) {
-		monster.short="imp";
-		monster.imageName="imp";
-		monster.plural = false;
-		monster.long = "An imp is short, only a few feet tall.  An unkempt mane of shaggy black hair hangs from his head, parted by two short curved horns.  His eyes are solid black, save for tiny red irises which glow with evil intent.  His skin is bright red, and unencumbered by clothing or armor, save for a small loincloth at his belt.  His feet are covered by tiny wooden sandals, and his hands tipped with sharp claws.  A pair of tiny but functional wings occasionally flap from his back.";
-		monster.a ="the ";
-		monster.capitalA ="The ";
-		monster.temperment = 1;
-		monster.special1 = 5019;
-		monster.special2 = 0;
-		monster.special3 = 0;
-		monster.pronoun1 = "he";
-		monster.pronoun2 = "him";
-		monster.pronoun3 = "his";
-		
-		//Clothing/Armor
-		monster.armorName = "leathery skin";
-		monster.weaponName = "claws";
-		monster.weaponVerb = "claw-slash";
-		monster.armorDef = 0;
-		monster.armorPerk = "";
-		monster.weaponAttack = 0;
-		monster.weaponPerk = "";
-		monster.weaponValue = 0;
-		monster.armorValue = 0;
-		//Primary stats
-		monster.str = 20;
-		monster.tou = 10;
-		monster.spe = 25;
-		monster.inte = 12;
-		monster.lib = 45;
-		monster.sens = 45;
-		monster.cor = 100;
-		monster.fatigue = 0;
-		
-		//Combat Stats
-		monster.HP = monster.tou * 2 + 50;
-		monster.lust = 40;
-		
-		//Level Stats
-		monster.level = 1;
-		monster.XP = totalXP();
-		monster.gems = rand(5) + 5;
-		
-		//Appearance Variables
-		//Gender 1M, 2F, 3H
-		monster.gender = 1;
-		monster.tallness = rand(24) + 25;
-		monster.hairColor = "black";
-		monster.hairLength = 5;
-		//Skintype
-		//0 - skin
-		//1 - furry
-		//2 - scaley
-		monster.skinType = SKIN_TYPE_PLAIN;
-		monster.skinTone = "red";
-		monster.skinDesc = "skin";
-		//Facetype:
-		//0 - human
-		//1 - horse
-		//2 - dogface
-		monster.faceType = FACE_HUMAN;
-		monster.horns = 0;
-		monster.wingDesc = "small";
-		//Wingtype
-		//0 - none
-		//1 - bee
-		//2 - large bee
-		//3 - faerie?
-		//4 - avian
-		//5 - dragoooon?
-		monster.wingType = WING_TYPE_IMP;
-		//lowerBody:
-		//0 - normal
-		//1 - hooves
-		//2 - paws
-		//3 - snakelike body
-		//4 - centaur!
-		monster.lowerBody = LOWER_BODY_TYPE_HUMAN;
-		//tailType:
-		//0 - none
-		//1 - horse
-		//2 - dog
-		//3 - demon
-		//4 - cow!
-		//5 - spider!
-		//6 - bee!
-		monster.tailType = TAIL_TYPE_NONE;
-		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
-		monster.tailVenom = 0;
-		//Tail recharge determines how fast venom/webs comes back per hour.
-		monster.tailRecharge = 5;
-		//hipRating
-		//0 - boyish
-		//2 - slender
-		//4 - average
-		//6 - noticable/ample
-		//10 - curvy//flaring
-		//15 - child-bearing/fertile
-		//20 - inhumanly wide
-		monster.hipRating = 0;
-		//buttRating
-		//0 - buttless
-		//2 - tight
-		//4 - average
-		//6 - noticable
-		//8 - large
-		//10 - jiggly
-		//13 - expansive
-		//16 - huge
-		//20 - inconceivably large/big/huge etc
-		monster.buttRating = 2;
-		//Create imp sex attributes
-		monster.createBreastRow();
-		monster.breastRows[0].breastRating = 0;
-		monster.breastRows[0].nipplesPerBreast = 0;
-		monster.createCock();
-		monster.cocks[0].cockLength = rand(2) + 11;
-		monster.cocks[0].cockThickness = 2.5;
-		monster.cocks[0].cockType = CockTypesEnum.HUMAN;
-		monster.balls = 2;
-		monster.cumMultiplier = 3;
-		monster.ballSize = 1;
-		monster.hoursSinceCum = 20;
-		monster.ass.analLooseness = 4;
-		monster.ass.analWetness = 1;
+		monster = new classes.Monsters.Imp(player);
 		doNext(1);
 	}
 	//LOAD Sand witch
@@ -5704,7 +5581,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 0;
 		monster.wingDesc = "";
 		//Wingtype
 		//0 - none
@@ -5835,7 +5711,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 0;
 		monster.wingDesc = "";
 		//Wingtype
 		//0 - none
@@ -5997,7 +5872,6 @@ function startCombat(monsterNum:Number):void {
 		//2 - dogface
 		//3 - cowface
 		monster.faceType = FACE_COW_MINOTAUR;
-		monster.horns = 2;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -6140,7 +6014,6 @@ function startCombat(monsterNum:Number):void {
 		//3 - cowface
 		monster.faceType = FACE_COW_MINOTAUR;
 		monster.antennae = ANTENNAE_BEE;
-		monster.horns = 0;
 		monster.wingDesc = "insect-like wings";
 		//Wingtype
 		//0 - none
@@ -6269,7 +6142,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 0;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -6399,7 +6271,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 10;
 		monster.hornType = HORNS_DEMON;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -6536,7 +6407,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 0;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -6660,7 +6530,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 0;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -6791,7 +6660,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 0;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -6925,7 +6793,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 12;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "tiny hidden";
 		//Wingtype
@@ -7062,7 +6929,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 14;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "tiny hidden";
 		//Wingtype
@@ -7197,7 +7063,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 18;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "tiny hidden";
 		//Wingtype
@@ -7333,7 +7198,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 0;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -7471,7 +7335,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 0;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -7605,7 +7468,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 0;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -7737,7 +7599,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 0;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -7870,7 +7731,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 0;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -8002,7 +7862,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 0;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -8129,7 +7988,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 0;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -8260,7 +8118,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 0;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -8392,7 +8249,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 0;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -8525,7 +8381,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 2;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -8664,7 +8519,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 0;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -8800,7 +8654,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 0;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "large feathery wings";
 		//Wingtype
@@ -8935,7 +8788,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 0;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "large feathery wings";
 		//Wingtype
@@ -9071,7 +8923,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 0;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "imp wings";
 		//Wingtype
@@ -9205,7 +9056,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 0;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "";
 		//Wingtype
@@ -9327,7 +9177,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 2;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -9472,7 +9321,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 2;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "shimmering wings";
 		//Wingtype
@@ -9608,7 +9456,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 0;
 		monster.wingDesc = "small";
 		//Wingtype
 		//0 - none
@@ -9743,7 +9590,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 2;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -9877,7 +9723,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 2;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -10011,7 +9856,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 2;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -10143,7 +9987,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 2;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -10279,7 +10122,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 2;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -10412,7 +10254,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 2;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -10545,7 +10386,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 2;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -10676,7 +10516,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 2;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -10815,7 +10654,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 0;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -10973,7 +10811,6 @@ function startCombat(monsterNum:Number):void {
 		//2 - dogface
 		//3 - cowface
 		monster.faceType = FACE_COW_MINOTAUR;
-		monster.horns = 2;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -11107,7 +10944,6 @@ function startCombat(monsterNum:Number):void {
 		//2 - dogface
 		//3 - cowface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 2;
 		monster.wingDesc = "huge";
 		//Wingtype
 		//0 - none
@@ -11240,7 +11076,6 @@ function startCombat(monsterNum:Number):void {
 		//2 - dogface
 		//3 - cowface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 2;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -11375,7 +11210,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 0;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -11510,7 +11344,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 2;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -11646,7 +11479,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 10;
 		monster.hornType = HORNS_DEMON;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -11782,7 +11614,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 10;
 		monster.hornType = HORNS_DEMON;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -11912,7 +11743,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 10;
 		monster.hornType = HORNS_DEMON;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -12042,7 +11872,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 10;
 		monster.hornType = HORNS_DEMON;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -12172,7 +12001,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 10;
 		monster.hornType = HORNS_DEMON;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -12303,7 +12131,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 10;
 		monster.hornType = HORNS_DEMON;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -12433,7 +12260,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 10;
 		monster.hornType = HORNS_DEMON;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -12567,7 +12393,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 10;
 		monster.hornType = HORNS_DEMON;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -12738,7 +12563,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 0;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -12868,7 +12692,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 10;
 		monster.hornType = HORNS_DEMON;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -12999,7 +12822,6 @@ function startCombat(monsterNum:Number):void {
 		//2 - dogface
 		//3 - cowface
 		monster.faceType = FACE_COW_MINOTAUR;
-		monster.horns = 2;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -13140,7 +12962,6 @@ function startCombat(monsterNum:Number):void {
 		//2 - dogface
 		//3 - cowface
 		monster.faceType = FACE_COW_MINOTAUR;
-		monster.horns = 2;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -13280,7 +13101,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 0;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
@@ -13410,7 +13230,6 @@ function startCombat(monsterNum:Number):void {
 		//2 - dogface
 		//3 - cowface
 		monster.faceType = FACE_COW_MINOTAUR;
-		monster.horns = 2;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -13546,7 +13365,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 4;
 		monster.hornType = HORNS_DRACONIC_X2;
 		monster.wingDesc = "tiny hidden";
 		//Wingtype
@@ -13681,7 +13499,6 @@ function startCombat(monsterNum:Number):void {
 		//2 - dogface
 		//3 - cowface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 0;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -13819,7 +13636,6 @@ function startCombat(monsterNum:Number):void {
 		//2 - dogface
 		//3 - cowface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 0;
 		monster.wingDesc = "non-existant";
 		//Wingtype
 		//0 - none
@@ -13976,7 +13792,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 0;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "fluffy feathery";
 		//Wingtype
@@ -14111,7 +13926,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 0;
 		monster.wingDesc = "small";
 		//Wingtype
 		//0 - none
@@ -14249,7 +14063,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 0;
 		monster.wingDesc = "";
 		//Wingtype
 		//0 - none
@@ -14383,7 +14196,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 0;
 		monster.wingDesc = "";
 		//Wingtype
 		//0 - none
@@ -14521,7 +14333,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 0;
 		monster.wingDesc = "";
 		//Wingtype
 		//0 - none
@@ -14660,7 +14471,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 0;
 		monster.wingDesc = "";
 		//Wingtype
 		//0 - none
@@ -14795,7 +14605,6 @@ function startCombat(monsterNum:Number):void {
 		//1 - horse
 		//2 - dogface
 		monster.faceType = FACE_HUMAN;
-		monster.horns = 2;
 		monster.hornType = HORNS_NONE;
 		monster.wingDesc = "non-existant";
 		//Wingtype
