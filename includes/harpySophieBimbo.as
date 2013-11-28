@@ -8,7 +8,7 @@
 //const SOPHIE_BROACHED_SLEEP_WITH:int = 739;
 //const SOPHIE_ADULT_KID_COUNT:int = 740;
 //const SOPHIE_DAUGHTER_MATURITY_COUNTER:int = 741;
-//const SOPHIE_EGG_COUNTER:int = 742;
+//const SOPHIE_CAMP_EGG_COUNTDOWN:int = 742;
 //const SOPHIE_FAMILY_INCEST:int = 743;
 //const DAUGHTER_ONE_BIMBO:int = 750;
 //const DAUGHTER_TWO_BIMBO:int = 751;
@@ -123,13 +123,13 @@ function acceptBimboSophie():void {
 	
 	if(player.hasStatusAffect("Camp Rathazul") >= 0) outputText("  Afterwards, she offers to suck Rathazul's cock.  The old rat looked about ready to have a heart attack, but he managed to decline her offer with some amount of dignity, after a few moments of stammering.", false);
 	else if(flags[UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("  Afterwards, she offers to suck Izma's cock.  Izma looks at you for a moment before shaking her head, no.  Her skirt rises visibly in spite of her negative response.  Maybe she'll like having someone lower on the food chain to boss around?", false);
-	else if(flags[AMILY_FOLLOWER] > 0 && flags[UNKNOWN_FLAG_NUMBER_00078] == 0) {
+	else if(flags[AMILY_FOLLOWER] > 0 && flags[AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0) {
 		outputText("  Afterwards, she offers to lick Amily's twat, if Amily will do the same to her.  Amily ", false);
 		if(flags[AMILY_FOLLOWER] == 1) outputText("flushes hotly and denies the bimbo's request with a terse 'no'.", false);
 		else outputText("flushes hotly and wiggles her hips Sophie's way.  The slutty, corrupted mouse and Sophie will clearly be helping to sate each other's needs in your absence.", false);
 	}
 	//(After, she offers to lick Marble's cunt.  Marble doesn't even answer her.  She just turns to you and says, \"<i>Really?  Sweetie... just... keep her away from me.  She's so far gone, I guess you can keep her around if you need to, but don't let her bug me.</i>\")  
-	else if(monk >= 5 && player.hasStatusAffect("noJojo") < 0 && flags[UNKNOWN_FLAG_NUMBER_00080] == 0) 
+	else if(monk >= 5 && player.hasStatusAffect("noJojo") < 0 && flags[JOJO_DEAD_OR_GONE] == 0) 
 		outputText("  Afterwards, she offers to suck Jojo's cock.  The corrupted slut-mouse nods and stiffens in delight, though he keeps glancing back your way.  Those two will probably spend a lot of time together...", false);
 	else if(player.hasStatusAffect("PureCampJojo") >= 0) outputText("  Afterwards, she offers to suck Jojo's cock.  The chaste mouse's jaw drops, but when he picks it up, he answers, \"<i>Never.  My body is as pure as my soul!</i>\"", false);
 	else if(isabellaFollower()) 
@@ -215,7 +215,7 @@ function approachBimboSophieInCamp(output:Boolean = true):void {
 		addButton(4,"Debimbo",unbimboSophie);
 		if(output) outputText("\n\n<b>You could use the bottle of debimbo to return Sophie's intellect...</b>");
 	}
-	if(flags[SOPHIE_EGG_COUNTER] > 0 && output) outputText("\n\n<b>Sophie's egg is sitting nearby.</b>");
+	if(flags[SOPHIE_CAMP_EGG_COUNTDOWN] > 0 && output) outputText("\n\n<b>Sophie's egg is sitting nearby.</b>");
 	if(flags[SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) {
 		addButton(7,"Daughter",daughterCheckup);
 	}
@@ -1458,12 +1458,12 @@ function sophieBirthsEgg():void {
 	else outputText("  Just how many harpies can your camp hold?\n");
 	stats(0,0,0,0,0,0,(10+player.lib/10),0);
 	flags[SOPHIE_INCUBATION] = 0;
-	flags[SOPHIE_EGG_COUNTER] = 150 + rand(30);
+	flags[SOPHIE_CAMP_EGG_COUNTDOWN] = 150 + rand(30);
 }
 	
 //Egg Hatched Notification
 function sophiesEggHatches():void {
-	flags[SOPHIE_EGG_COUNTER] = 0;
+	flags[SOPHIE_CAMP_EGG_COUNTDOWN] = 0;
 	sophieSprite();
 	outputText("\nThe quiet of your camp is suddenly broken by loud bird-like cries and squawks.  What on earth could have gotten Sophie so worked up?  Letting out a sigh, you head over to where your feathery ");
 	if(bimboSophie()) outputText("bimbo ");

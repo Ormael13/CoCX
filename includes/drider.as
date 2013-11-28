@@ -386,7 +386,7 @@ function winDriderPCDickInSpiderCunt2():void {
 	monster.lust = 98;
 	monster.HP = 2;
 	player.lust = 100;
-	flags[UNKNOWN_FLAG_NUMBER_00089] = monster.XP;
+	flags[COMBAT_BONUS_XP_VALUE] = monster.XP;
 	eventParser(5007);
 	stats(0,0,0,0,1,1,-100,0);
 }

@@ -1,7 +1,7 @@
 ﻿ //[Amily meets pure Jojo - ]
 function amilyMeetsPureJojo():void {
 	//set flag for amily met pure jojo
-	flags[UNKNOWN_FLAG_NUMBER_00074]++;
+	flags[AMILY_MET_PURE_JOJO]++;
 	outputText("", true);
 	outputText("Amily appears to have located Jojo, and the two of them are actually hugging!  The smaller female mouse is crying, and Jojo looks a little misty-eyed as well.  They break apart as you approach; when out of the blue, Amily socks Jojo with a right hook!  He stumbles back, rubbing at his jaw as she yells, \"<i>That's for not coming back to the village and finding me!  Oh sure, you could fight demons in the forest for years, but Marae forbid you come back to look for survivors!</i>\"\n\n", false);
 	
@@ -19,7 +19,7 @@ function amilyMeetsPureJojo():void {
 //[Amily and Pure Jojo spar – occurs when going to amily, requires 'amily meets jojo']
 function pureJojoAndAmilySpar():void {
 	outputText("", true);
-	flags[UNKNOWN_FLAG_NUMBER_00075]++;
+	flags[AMILY_SPAR_WITH_PURE_JOJO]++;
 	outputText("Amily and Jojo appear to be sparring.  Amily has a pair of knives in her hands, and Jojo has a staff.  The twin blurs of fur are whirling about in a frenzy of movement.  Jojo is deflecting most of the smaller mouse's strikes, and even manages to get in the occasional strike with his staff.  He's undone the top of his robe, and sweat is pouring off of his fur.  It's clear he's working himself harder than the female.  The match-up is remarkably even, but they spot you and wrap up the intense sparring session for now.  Jojo gives you a respectful nod and departs, guzzling water from a skin as he pulls his robes back into their normal places.\n\n", false);
 		
 	//[To amily screen]
@@ -29,7 +29,7 @@ function pureJojoAndAmilySpar():void {
 //[Amily rages at what you've done to jojo (corrupted after she met pure jojo) – encountered when visiting corrupt jojo for faps]
 function amilyIsPissedAtYouForRuiningJojo():void {
 	outputText("", true);
-	flags[UNKNOWN_FLAG_NUMBER_00076]++;
+	flags[AMILY_PISSED_PC_CORRUPED_JOJO]++;
 	outputText("You call for your personal fuck-pet to come take care of your needs, but he doesn't answer.  You call again, and once more, the mouse does not appear.  Irritated, you get up and walk towards the woods.  At the edge you find Jojo.  He's unconscious and humping the ground, with a dart stuck in his ass.  You pluck the drugged dart from his furry cheek and examine it.  It's one of Amily's!\n\n", false);
 	
 	outputText("\"<i>What did you DO TO HIM!?</i>\" her voice shrieks.  She's behind you!  You pivot, praying the enraged mouse doesn't hit you with the same dart, and you see Amily half-hidden behind a rock.  Her blowgun is clutched in a trembling hand as she sobs with grief.  So she figured it out...\n\n", false);
@@ -74,7 +74,7 @@ function agreeToHelpAmilyFixJojo():void {
 	//(-5 cor
 	stats(0,0,0,0,0,0,0,-5);
 	// Amily won't sex.  Jojo sex still available)
-	flags[UNKNOWN_FLAG_NUMBER_00077] = 1;
+	flags[AMILY_WAIT_FOR_PC_FIX_JOJO] = 1;
 	doNext(1);
 }
 
@@ -93,21 +93,21 @@ function fixJojoOOOOHYEEEEAHSNAPINTOASLIMJIM():void {
 	else outputText("glad the damage you did to Jojo wasn't permanent", false);
 	outputText(".", false);
 	//(Jojo leaves, never encountered again.)
-	flags[UNKNOWN_FLAG_NUMBER_00080] = 1;		
+	flags[JOJO_DEAD_OR_GONE] = 1;		
 	//(-5 corruption)
 	stats(0,0,0,0,0,0,0,-5);
 	//(Amily not encounterable for 4 hours)
-	flags[UNKNOWN_FLAG_NUMBER_00078] = 4;
+	flags[AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] = 4;
 	//Amily fuckable again
-	flags[UNKNOWN_FLAG_NUMBER_00077] = 0;
+	flags[AMILY_WAIT_FOR_PC_FIX_JOJO] = 0;
 	//Jojo 'fixed'
-	flags[UNKNOWN_FLAG_NUMBER_00079] = 1;
+	flags[JOJO_FIXED_STATUS] = 1;
 	doNext(13);
 }
 	
 //[Find note from jojo @ followers menu after pufying him]
 function findJojosNote():void {
-	flags[UNKNOWN_FLAG_NUMBER_00079] = 2;
+	flags[JOJO_FIXED_STATUS] = 2;
 	outputText("", true);
 	outputText("There is a note left on your bedroll. You pick it up and unseal it – it's from Jojo!\n\n", false);
 	outputText("\"<i>After the things that have transpired between us, I felt I ought to give this chapter of our lives some closure.   What you did to me was inexcusable.  It was a violation of everything that I am and was.  But, even though I wasn't able to help you tame your inner corruption, I'm glad that Amily was able to do so in my place.  And although I shall never again be able to return to my life as a chaste monk due to the changes you made to my body and libido, I take solace in the fact that Amily was able to repopulate our people.  Perhaps I'll even get married; its impossible to hide how 'large' I've gotten and the girls all seem to want to see what I've got under my robes.  In any event, good-bye 'Champion'.</i>\"", false);
@@ -118,7 +118,7 @@ function findJojosNote():void {
 //[Amily finds tentacle Jojo]
 function amilyDiscoversJojoWithTentaclesAndShitOhBoy():void {
 	outputText("", true);
-	flags[UNKNOWN_FLAG_NUMBER_00081]++;
+	flags[AMILY_DISCOVERED_TENTATLE_JOJO]++;
 	outputText("You settle down for a nice fuck with your tentacle-mousey, but your pet doesn't answer your calls.  Snarling in irritation, you set off towards the woods to find your corrupted fuck-toy.  It does not take long.  Jojo's body is face-down in the dirt, unconscious.  You can see his hips pumping weakly as his cum-oozing tentacles fuck each other.  There's a dart in his neck, and with great trepidation, you pluck the needle-tipped weapon from the horror-rodent.  It's one of Amily's!\n\n", false);
 	
 	outputText("\"<i>What did you DO TO HIM!?</i>\" her voice shrieks.  She's behind you!  You pivot, praying the enraged mouse doesn't hit you with the same dart, and you see Amily half-hidden behind a rock.  Her blowgun is clutched in a trembling hand as she sobs with grief.  So she figured it out...\n\n", false);
@@ -188,7 +188,7 @@ function stopJojoDeathInTheNameOfLove():void {
 		//(-80 lust)
 		stats(0,0,0,0,0,0,-99,0);
 		//(You suck and Jojo died.)
-		flags[UNKNOWN_FLAG_NUMBER_00080] = 1;		
+		flags[JOJO_DEAD_OR_GONE] = 1;		
 	}
 
 	//(SMART)
@@ -210,14 +210,14 @@ function whyWouldDoThis():void {
 	//(-99 lust)
 	stats(0,0,0,0,0,0,-99,0);
 	//(You suck and Jojo died.)
-	flags[UNKNOWN_FLAG_NUMBER_00080] = 1;	
+	flags[JOJO_DEAD_OR_GONE] = 1;	
 	doNext(13);
 }
 
 //[Amily introduces herself to Rathazul – happens at Rathazul]
 function AmilyIntroducesSelfToRathazul():void {
 	outputText("", true);
-	flags[UNKNOWN_FLAG_NUMBER_00082]++;
+	flags[AMILY_MET_RATHAZUL]++;
 	outputText("Amily is here with the elderly rodent alchemist and carrying on a rather deep conversation.  They have not noticed you yet, and the two are currently discussing the medicinal properties of the various herbs and materials in Mareth.  Amily pays rapt attention as the old rat concludes his lecture on the effects of imp grass.  She thanks him, \"<i>I really appreciate this, Rathazul.  I know our tribes never saw eye to eye, but you've done a lot.  My father was an alchemist like you, and I know he'd be happy to know someone like you was continuing to teach me the craft.</i>\"\n\n", false);
 	
 	outputText("The wise rat strokes his frazzled whiskers as he listens, clearly pleased with the younger rodent's words.  \"<i>The pleasure is mine.  It's not often I find such a rapt and attentive listener,</i>\" he replies.\n\n", false);
@@ -245,14 +245,14 @@ function amilyIngredientDelivery():void {
 	//[To rathazul, +4 lust]
 	stats(0,0,0,0,0,0,4,0);
 	//[Prices reduced for reducto!
-	flags[UNKNOWN_FLAG_NUMBER_00082]++;
+	flags[AMILY_MET_RATHAZUL]++;
 	doNext(2070);
 }
 
 //[Amily ask Rathazul what happened to his village]
 function amilyAsksAboutRathazulsVillage():void {
 	outputText("", true);
-	flags[UNKNOWN_FLAG_NUMBER_00082]++;
+	flags[AMILY_MET_RATHAZUL]++;
 	outputText("Amily is once again at Rathazul's lab.  She just finished asking him what happened to his village.  Rathazul's expression clouds with anger as he thinks on it.  His response is slow and measured as he explains, \"<i>We were sold out.  Our elders knew we couldn't triumph by strength of arms, and rather than join the others they sold us out in exchange for the safety of the council.  The demons gave the elders corrupted agents to lace into the village's well, and my people fell prey to the demons in a single night.  The elders were rewarded and 'raised' to full demon-hood.  I survived because I was at the lake at the time.  The sounds of the orgy were all the warning I needed to keep hidden.  I can't help but think that things would have been different if less selfish rats had been in charge.</i>\"\n\n", false);
 	
 	outputText("Rathazul sighs and shuffles around uncomfortably as he wraps it up, \"<i>'What-ifs' will get us nowhere.  Our villages are gone, and we must look to the future, child.</i>\"\n\n", false);
@@ -264,7 +264,7 @@ function amilyAsksAboutRathazulsVillage():void {
 //[Rathazul and Corrupt/Tentacle Jojo] – Occurs instead of camp
 function rathazulFreaksOverJojo():void {
 	outputText("", true);
-	flags[UNKNOWN_FLAG_NUMBER_00083]++;
+	flags[RATHAZUL_CORRUPT_JOJO_FREAKOUT]++;
 	outputText("Rathazul comes up to you with a serious, worried expression.  You ask him what's wrong, and he explains, \"<i>There is a creature in the woods.  I've seen glimpses of it numerous times, and I believe it to be some kind of demon-tainted mouse.  We must deal with it, lest it strike while we are unawares!</i>\"\n\n", false);
 	
 	outputText("You work hard to keep a straight face.  The 'creature' is clearly your fuck-pet, Jojo.  What do you tell the old mouse?  ", false);
@@ -311,7 +311,7 @@ function TellRathazulJojoIsHarmless():void {
 //[Rathazul and non-corrupt Jojo]
 function jojoOffersRathazulMeditation():void {
 	outputText("", true);
-	flags[UNKNOWN_FLAG_NUMBER_00084]++;
+	flags[JOJO_RATHAZUL_INTERACTION_COUNTER]++;
 	outputText("Jojo is at Rathazul's lab.  The smaller, white mouse is asking the elderly rodent if he would like to meditate.  Rathazul considers for a moment and agrees, \"<i>I'll have to try it when I have some time.  A little reflection would do my old soul some good.  However we cannot now; " + player.short + " has need of me.</i>\"\n\n", false);
 	
 	outputText("Jojo turns to you, gives a quick bow, and departs.", false);
@@ -322,7 +322,7 @@ function jojoOffersRathazulMeditation():void {
 function catchRathazulNapping():void {
 	outputText("", true);
 	//(Occurs when visiting Jojo)
-	flags[UNKNOWN_FLAG_NUMBER_00084]++;
+	flags[JOJO_RATHAZUL_INTERACTION_COUNTER]++;
 	outputText("Rathazul and Jojo look to be engaged in some intensive meditation, so you hang back.  The two rodents are sitting cross-legged on a pair of flat rocks with their eyes closed and reflecting on something.  The air is eerily silent until a loud snore escapes from the rat's muzzle.  He's fallen asleep!  Jojo cracks one eye and sighs, \"<i>The old ones always fall asleep.</i>\"\n\n", false);
 	
 	outputText("The mouse quietly rises and walks a fair distance away from the sleeping rat, letting his elder rest.  He motions for you to follow and leave Rathazul in peace.", false);
@@ -332,9 +332,9 @@ function catchRathazulNapping():void {
 
 function marbleVsAmilyFreakout():void {
 	outputText("", true);
-	flags[UNKNOWN_FLAG_NUMBER_00086]++;
+	flags[AMILY_NOT_FREAKED_OUT]++;
 	//Marble is in camp first
-	if(flags[UNKNOWN_FLAG_NUMBER_00085] <= 1) outputText("As you bring Amily into your camp, you see Marble look towards you with a smile for a moment, before that smile turns into a frown.  You realize that this might not have been such a good idea...\n\n", false);
+	if(flags[MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] <= 1) outputText("As you bring Amily into your camp, you see Marble look towards you with a smile for a moment, before that smile turns into a frown.  You realize that this might not have been such a good idea...\n\n", false);
 	////Amily is in camp first
 	else outputText("As you bring Marble back to your camp, you see Amily sitting there as Marble asks while frowning, \"<i>Sweetie, who is that?</i>\"  Uh-oh, this could get bad.\n\n", false);
 	

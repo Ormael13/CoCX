@@ -17,7 +17,7 @@ function edrynBarTalk():void {
 	if(x < 0) x = 0;
 	
 	//Talk about latest birth
-	if(flags[UNKNOWN_FLAG_NUMBER_00072] == 1) {
+	if(flags[EDRYN_NEEDS_TO_TALK_ABOUT_KID] == 1) {
 		var kidGender:Number = rand(2);
 		if(rand(10) < 2) kidGender = 3;
 		outputText("Edryn cracks into a beautiful smile and gushes, \"<i>We had a ", false);
@@ -28,22 +28,22 @@ function edrynBarTalk():void {
 		if(kidGender == 0) outputText("son", false);
 		else outputText("daughter", false);
 		outputText(" trying to stand up for the first time.  It was incredible!  ", false);
-		if(flags[UNKNOWN_FLAG_NUMBER_00069] == 1) {
+		if(flags[EDRYN_NUMBER_OF_KIDS] == 1) {
 			outputText("I'm going to have to spend less time around here so I can raise ", false);
 			if(kidGender == 0) outputText("him", false);
 			else outputText("her", false); 
 			outputText(" right, but I'd be more than happy to 'help' you with your needs if you can catch me during a free moment.", false);
 		}
 		else {
-			outputText("I can't believe we've had " + num2Text(flags[UNKNOWN_FLAG_NUMBER_00069]) + " kids together!  You better come see me later on - ", false);
-			if(flags[UNKNOWN_FLAG_NUMBER_00069] < 3) outputText("I miss the way you fill me", false);
+			outputText("I can't believe we've had " + num2Text(flags[EDRYN_NUMBER_OF_KIDS]) + " kids together!  You better come see me later on - ", false);
+			if(flags[EDRYN_NUMBER_OF_KIDS] < 3) outputText("I miss the way you fill me", false);
 			else outputText("I want you to make me pregnant again", false);
 		}
 		outputText(".</i>\"\n\n", false);
 		
 		outputText("You stay with her and chat, learning more about your newborn child and otherwise having a pleasant time with your quadruped lover.", false);
 		cheatTime(1);
-		flags[UNKNOWN_FLAG_NUMBER_00072] = 0;
+		flags[EDRYN_NEEDS_TO_TALK_ABOUT_KID] = 0;
 		doNext(barTelAdre);
 		return;
 	}
@@ -56,7 +56,7 @@ function edrynBarTalk():void {
 		return;
 	}
 	//Post kids talk
-	else if(flags[UNKNOWN_FLAG_NUMBER_00069] > 0) {
+	else if(flags[EDRYN_NUMBER_OF_KIDS] > 0) {
 		outputText("Edryn gestures for you to take a seat, and motions for a waitress to bring you a drink.  You sit with the busty centaur and chat her up for a little bit, recounting your latest adventures and sexual exploits.  She laughs at some, blushes at others, and comforts you at times, but by the time you've finished her child-birth-enlarged nipples are like two hard bullets under her tunic and her face is flushed.  Edryn picks at her food for a moment and excuses herself, \"<i>Sorry dear, but I'm feeling a little flushed.  I'm going to head back to my room and lie down a while...</i>\"\n\n", false);
 		
 		//(NO WANGUUU) 
@@ -79,14 +79,14 @@ function edrynBarTalk():void {
 			outputText("She looks down, eyes fixating on your crotch for a moment.  Edryn asks, \"<i>When did you get so small?  We can't fuck like this!  ", false);
 			//(Chance of equinum,gro+(twice only),minotaur blood, or purified incubus draft)
 			menuLoc = 2;
-			if(flags[UNKNOWN_FLAG_NUMBER_00073] < 2) {
+			if(flags[EDRYN_GIFT_COUNTER] < 2) {
 				outputText("Here, take some of this stuff.  We confiscated it off one of the miscreants we kicked out the other day, and I KNOW it'll get you to be big enough for me.  Just don't go too nuts with it, okay?</i>\"\n\n", false);
 				shortName = "GroPlus";
-				flags[UNKNOWN_FLAG_NUMBER_00073]++;
+				flags[EDRYN_GIFT_COUNTER]++;
 			}
-			else if(flags[UNKNOWN_FLAG_NUMBER_00073] < 5) {
+			else if(flags[EDRYN_GIFT_COUNTER] < 5) {
 				outputText("Here, take some of this stuff.  We confiscated it off one of the miscreants we kicked out the other day, and I KNOW it'll get you to be big enough for me.  Just don't go too nuts with it, okay?</i>\"\n\n", false);
-				flags[UNKNOWN_FLAG_NUMBER_00073]++;
+				flags[EDRYN_GIFT_COUNTER]++;
 				if(rand(2) == 0) shortName = "MinoBlo";
 				else shortName = "IncubiD";
 			}
@@ -102,10 +102,10 @@ function edrynBarTalk():void {
 		//(Too big) 
 		else {
 			outputText("She looks down and gasps, \"<i>Holy shit!  Why do you have a monster like that!?  When a centaur is shocked by how big you are it's time to go easy on the dick enlargement pills, dear.</i>\"\n\n", false);
-			if(flags[UNKNOWN_FLAG_NUMBER_00073] < 2) {
+			if(flags[EDRYN_GIFT_COUNTER] < 2) {
 				menuLoc = 2;
 				outputText("Her eyes light up and she suggests, \"<i>Take some of this; it ought to take down some of that swelling.</i>\"\n\n", false);
-				flags[UNKNOWN_FLAG_NUMBER_00073]++;
+				flags[EDRYN_GIFT_COUNTER]++;
 				shortName = "Reducto";
 				takeItem();
 				return;
@@ -446,7 +446,7 @@ function fuckEdrynNonTaur():void {
 }
 
 function edrynBar():Boolean {
-	if(flags[UNKNOWN_FLAG_NUMBER_00070] == 0 && model.time.hours >= 14 && model.time.hours <= 19 && (model.time.hours < 17 || flags[UNKNOWN_FLAG_NUMBER_00069] == 0))
+	if(flags[EDRYN_NEVER_SEE_AGAIN] == 0 && model.time.hours >= 14 && model.time.hours <= 19 && (model.time.hours < 17 || flags[EDRYN_NUMBER_OF_KIDS] == 0))
 		return true;
 	return false;
 }
@@ -631,7 +631,7 @@ function beAnAssholeToPregdryn():void {
 	outputText("Everyone in the bar turns to watch the commotion, and with an angry, hormonal centaur and this many eyes on you, it would be best to depart.\n\n", false);
 	
 	outputText("<b>(Edryn will no longer speak with you.)</b>", false);
-	flags[UNKNOWN_FLAG_NUMBER_00070] = 1;
+	flags[EDRYN_NEVER_SEE_AGAIN] = 1;
 	//Use the 1 hour cheat thinger
 	doNext(barTelAdre);
 }
@@ -726,7 +726,7 @@ function pregdrynOffer(cs:Boolean = true):void {
 	if(x < 0) x = 0;
 	if(player.cockArea(x) >= 24 && player.cockArea(x) < 300) {
 		outputText("Edryn is smiling radiantly as she continues to caress you under the table.  She asks, \"<i>", false);
-		if(flags[UNKNOWN_FLAG_NUMBER_00069] == 0) outputText("Does my scent have an even stronger effect on you now", false);
+		if(flags[EDRYN_NUMBER_OF_KIDS] == 0) outputText("Does my scent have an even stronger effect on you now", false);
 		else outputText("Are you going to cum just from sniffing at my cunt", false);
 		outputText("?</i>\"  You try to deny it, but she pumps at your shaft and continues, \"<i>Don't lie dear, I can feel how hard you are now, and I DEFINITELY saw how dazed you were when I came back out.  Let's go back to my room so you can get another whiff, okay?</i>\"\n\n", false);
 		
@@ -954,7 +954,7 @@ function edrynPregChance():void {
 	else trace("Edryn not knocked up!");
 	if(preg) {
 		flags[EDRYN_PREGNANCY_INCUBATION] = 500;
-		flags[UNKNOWN_FLAG_NUMBER_00071] = 0;
+		flags[EDRYN_PREGNAT_AND_NOT_TOLD_PC_YET] = 0;
 	}
 }
 
@@ -995,7 +995,7 @@ function edrynFucktroduction():void {
 	}
 	if(!player.isTaur()) {
 		if(cost > 0) outputText("Coins exchange hands and her arm finds its way back inside your " + player.armorName + ", pulling you towards a back room.  A round of chuckles chases you through the bar room until they're silenced by the heavy thud of a door closing behind you.  You're pushed against the wall hard enough to make your teeth click.  The stars gradually clear from your view, revealing a massive gash, drooling with clear feminine slime.  The scent assails you, ", false);
-		else if(flags[UNKNOWN_FLAG_NUMBER_00069] == 0) outputText("Her arm finds its way back inside your " + player.armorName + ", pulling you towards a back room.  A round of chuckles chases you through the bar room until they're silenced by the heavy thud of a door closing behind you.  You're pushed against the wall hard enough to make your teeth click.  The stars gradually clear from your view, revealing a massive gash, drooling with clear feminine slime.  The scent assails you, ", false);
+		else if(flags[EDRYN_NUMBER_OF_KIDS] == 0) outputText("Her arm finds its way back inside your " + player.armorName + ", pulling you towards a back room.  A round of chuckles chases you through the bar room until they're silenced by the heavy thud of a door closing behind you.  You're pushed against the wall hard enough to make your teeth click.  The stars gradually clear from your view, revealing a massive gash, drooling with clear feminine slime.  The scent assails you, ", false);
 		else outputText("A round of chuckles chases you through the bar room until they're silenced by the heavy thud of a door closing behind you.  You're pushed against the wall hard enough to make your teeth click.  The stars gradually clear from your view, revealing a massive gash, drooling with clear feminine slime.  The scent assails you, ", false);
 		if(player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("making your " + cockDescript(x) + " twitch and ache.  It floods your body with animalistic desires, overpowering any sense of propriety you might have once had.", false);
 		else outputText("overpowering you with strange lust.  As turned on as you are, it's difficult not to enjoy this.", false);

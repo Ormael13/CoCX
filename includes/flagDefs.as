@@ -51,60 +51,60 @@ const AMILY_HIP_RATING:int                                            =   49; //
 const AMILY_ASS_SIZE:int                                              =   50; // Can increase ass from "unremarkable ass" to "delightfully jiggly" - Default=12
 const AMILY_LACTATION_RATE:int                                        =   51; // Amily Lactation Rate. Default=0
 const AMILY_CLOTHING:int                                              =   52; // Amily Clothing. Default="sexy rags"
-const UNKNOWN_FLAG_NUMBER_00053:int                                   =   53; // Lumi Met
+const LUMI_MET:int                                   =   53; // Lumi Met
 const NUMBER_OF_TIMES_MET_SCYLLA:int                                  =   54; // Met Scylla:   -1 = decline.  0 = not met.  1 = sucked once, 2 = sucked twice, etc
-const UNKNOWN_FLAG_NUMBER_00055:int                                   =   55; // Times encountered Tamani's Daughters
-const UNKNOWN_FLAG_NUMBER_00056:int                                   =   56; // Tamani Hypno Level" Description="increases by 1 for each hypno event.  1-3 slight lust raises, 4-9 medium lust raises, 10-19 super high lust raises, 20+ high chance of autorape with special scene.
-const UNKNOWN_FLAG_NUMBER_00057:int                                   =   57; // Daughter Pregnancy Counter" Description="they will not return until this countdown timer is 0.  Same length as Tamani's incubation &#x2014; approx 1 week.
+const TIMES_ENCOUNTED_TAMANIS_DAUGHTERS:int                                   =   55; // Times encountered Tamani's Daughters
+const TAMANI_TIMES_HYPNOTISED:int                                   =   56; // Tamani Hypno Level" Description="increases by 1 for each hypno event.  1-3 slight lust raises, 4-9 medium lust raises, 10-19 super high lust raises, 20+ high chance of autorape with special scene.
+const TAMANI_DAUGHTER_PREGGO_COUNTDOWN:int                                   =   57; // Daughter Pregnancy Counter" Description="they will not return until this countdown timer is 0.  Same length as Tamani's incubation &#x2014; approx 1 week.
 const UNKNOWN_FLAG_NUMBER_00058:int                                   =   58; // Times In Goblin Daughter 'CHAIR'
-const UNKNOWN_FLAG_NUMBER_00059:int                                   =   59; // TimeSleptWithDaughters
-const UNKNOWN_FLAG_NUMBER_00060:int                                   =   60; // Fail Masturbation As Centaur?
-const UNKNOWN_FLAG_NUMBER_00061:int                                   =   61; // Cerulean Potion Bad-End Futa Count
-const UNKNOWN_FLAG_NUMBER_00062:int                                   =   62; // Cerulean Potion Neuter Attempted
+const TIMES_FUCKED_TAMANIS_DAUGHTERS:int                                   =   59; // TimeSleptWithDaughters
+const UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR:int                                   =   60; // Fail Masturbation As Centaur?
+const CERULEAN_POTION_BAD_END_FUTA_COUNTER:int                                   =   61; // Cerulean Potion Bad-End Futa Count
+const CERULEAN_POTION_NEUTER_ATTEMPTED:int                                   =   62; // Cerulean Potion Neuter Attempted
 const TEMP_STORAGE_SAVE_DELETION:int                                  =   63; // Used as temp storage for deleting save slots
-const UNKNOWN_FLAG_NUMBER_00064:int                                   =   64; // Marble not sleeping with you due to worms
-const UNKNOWN_FLAG_NUMBER_00065:int                                   =   65; // Force Bee Honey Drop - Found Bee Honey.	1=Found
-const UNKNOWN_FLAG_NUMBER_00066:int                                   =   66; // Hair no longer grows due to lizard
-const UNKNOWN_FLAG_NUMBER_00067:int                                   =   67; // CAT: Autofellated
+const MARBLE_GROSSED_OUT_BECAUSE_WORM_INFESTATION:int                                   =   64; // Marble not sleeping with you due to worms
+const FORCE_BEE_TO_PRODUCE_HONEY:int                                   =   65; // Force Bee Honey Drop - Found Bee Honey.	1=Found
+const HAIR_GROWTH_STOPPED_BECAUSE_LIZARD:int                                   =   66; // Hair no longer grows due to lizard
+const TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY:int                                   =   67; // CAT: Autofellated
 const EDRYN_PREGNANCY_INCUBATION:int                                  =   68; // 
-const UNKNOWN_FLAG_NUMBER_00069:int                                   =   69; // EDRYN: Kids
-const UNKNOWN_FLAG_NUMBER_00070:int                                   =   70; // EDRYN: NEVER SEE AGAIN
-const UNKNOWN_FLAG_NUMBER_00071:int                                   =   71; // EDRYN: Pregnancy Panic happen?
-const UNKNOWN_FLAG_NUMBER_00072:int                                   =   72; // EDRYN: Gotta talk about kid
-const UNKNOWN_FLAG_NUMBER_00073:int                                   =   73; // EDRYN: GOOD HAND OUTS
-const UNKNOWN_FLAG_NUMBER_00074:int                                   =   74; // AMILY: Met pure jojo
-const UNKNOWN_FLAG_NUMBER_00075:int                                   =   75; // AMILY: Spar with Jojo
-const UNKNOWN_FLAG_NUMBER_00076:int                                   =   76; // AMILY: Knew pure Jojo and is pissed that you 'broke' him.
-const UNKNOWN_FLAG_NUMBER_00077:int                                   =   77; // AMILY: PC agreed to 'fix' jojo.  No sex until this is reset to 0.
-const UNKNOWN_FLAG_NUMBER_00078:int                                   =   78; // AMILY: Jojo fixing countdown - no encounters with amily till it reaches 0.
-const UNKNOWN_FLAG_NUMBER_00079:int                                   =   79; // JOJO: 'FIXED' = 1, 'FIXED + NOTE READ = 2
-const UNKNOWN_FLAG_NUMBER_00080:int                                   =   80; // JOJO DEAD OR GONE = 1
-const UNKNOWN_FLAG_NUMBER_00081:int                                   =   81; // AMILY: Discovered tentacle Jojo happened
-const UNKNOWN_FLAG_NUMBER_00082:int                                   =   82; // AMILY: Met Rathazul
-const UNKNOWN_FLAG_NUMBER_00083:int                                   =   83; // RATHAZUL: Corrupt Jojo freakout!
-const UNKNOWN_FLAG_NUMBER_00084:int                                   =   84; // RATHAZUL: NON CORRUPT JOJO STUFF
-const UNKNOWN_FLAG_NUMBER_00085:int                                   =   85; // Which came first?  Marble(1) or Amily(2) - Freakout at Camp if both Marble and Amily present.	1=true, 2=No freakout
-const UNKNOWN_FLAG_NUMBER_00086:int                                   =   86; // Amily Freakout Session
-const UNKNOWN_FLAG_NUMBER_00087:int                                   =   87; // Rathazul inter-follower countdown timer
-const UNKNOWN_FLAG_NUMBER_00088:int                                   =   88; // DISCOVER HIGH MOUNTAIN (Rangers, what a terrible TV show)
-const UNKNOWN_FLAG_NUMBER_00089:int                                   =   89; // Sekrit Bonus XP Pass
-const UNKNOWN_FLAG_NUMBER_00090:int                                   =   90; // Met Sophie?
-const UNKNOWN_FLAG_NUMBER_00091:int                                   =   91; // Times Had Sex With Sophie
-const UNKNOWN_FLAG_NUMBER_00092:int                                   =   92; // Times Breastfed Sophie
-const UNKNOWN_FLAG_NUMBER_00093:int                                   =   93; // Sophie's Egg Countdown Timer
-const UNKNOWN_FLAG_NUMBER_00094:int                                   =   94; // Sophie eggs laid
-const UNKNOWN_FLAG_NUMBER_00095:int                                   =   95; // N
-const UNKNOWN_FLAG_NUMBER_00096:int                                   =   96; // Sophie Pissed Off Counter
-const UNKNOWN_FLAG_NUMBER_00097:int                                   =   97; // Times Pissed Off Sophie
-const UNKNOWN_FLAG_NUMBER_00098:int                                   =   98; // Times Lesbo-Sexed
+const EDRYN_NUMBER_OF_KIDS:int                                   =   69; // EDRYN: Kids
+const EDRYN_NEVER_SEE_AGAIN:int                                   =   70; // EDRYN: NEVER SEE AGAIN
+const EDRYN_PREGNAT_AND_NOT_TOLD_PC_YET:int                                   =   71; // EDRYN: Pregnancy Panic happen?
+const EDRYN_NEEDS_TO_TALK_ABOUT_KID:int                                   =   72; // EDRYN: Gotta talk about kid
+const EDRYN_GIFT_COUNTER:int                                   =   73; // EDRYN: GOOD HAND OUTS
+const AMILY_MET_PURE_JOJO:int                                   =   74; // AMILY: Met pure jojo
+const AMILY_SPAR_WITH_PURE_JOJO:int                                   =   75; // AMILY: Spar with Jojo
+const AMILY_PISSED_PC_CORRUPED_JOJO:int                                   =   76; // AMILY: Knew pure Jojo and is pissed that you 'broke' him.
+const AMILY_WAIT_FOR_PC_FIX_JOJO:int                                   =   77; // AMILY: PC agreed to 'fix' jojo.  No sex until this is reset to 0.
+const AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO:int                                   =   78; // AMILY: Jojo fixing countdown - no encounters with amily till it reaches 0.
+const JOJO_FIXED_STATUS:int                                   =   79; // JOJO: 'FIXED' = 1, 'FIXED + NOTE READ = 2
+const JOJO_DEAD_OR_GONE:int                                   =   80; // JOJO DEAD OR GONE = 1
+const AMILY_DISCOVERED_TENTATLE_JOJO:int                                   =   81; // AMILY: Discovered tentacle Jojo happened
+const AMILY_MET_RATHAZUL:int                                   =   82; // AMILY: Met Rathazul
+const RATHAZUL_CORRUPT_JOJO_FREAKOUT:int                                   =   83; // RATHAZUL: Corrupt Jojo freakout!
+const JOJO_RATHAZUL_INTERACTION_COUNTER:int                                   =   84; // RATHAZUL: NON CORRUPT JOJO STUFF
+const MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT:int                                   =   85; // Which came first?  Marble(1) or Amily(2) - Freakout at Camp if both Marble and Amily present.	1=true, 2=No freakout
+const AMILY_NOT_FREAKED_OUT:int                                   =   86; // Amily Freakout Session
+const RATHAZUL_CAMP_INTERACTION_COUNTDOWN:int                                   =   87; // Rathazul inter-follower countdown timer
+const DISCOVERED_HIGH_MOUNTAIN:int                                   =   88; // DISCOVER HIGH MOUNTAIN (Rangers, what a terrible TV show)
+const COMBAT_BONUS_XP_VALUE:int                                   =   89; // Sekrit Bonus XP Pass
+const MET_SOPHIE_COUNTER:int                                   =   90; // Met Sophie?
+const FUCKED_SOPHIE_COUNTER:int                                   =   91; // Times Had Sex With Sophie
+const BREASTFEAD_SOPHIE_COUNTER:int                                   =   92; // Times Breastfed Sophie
+const SOPHIE_WILD_EGG_COUNTDOWN_TIMER:int                                   =   93; // Sophie's Egg Countdown Timer
+const SOPHIE_EGGS_LAID:int                                   =   94; // Sophie eggs laid
+const PC_CURRENTLY_LUSTSTICK_AFFECTED:int                                   =   95; // N
+const SOPHIE_ANGRY_AT_PC_COUNTER:int                                   =   96; // Sophie Pissed Off Counter
+const TIMES_PISSED_OFF_SOPHIE_COUNTER:int                                   =   97; // Times Pissed Off Sophie
+const TIMES_FUCKED_SOPHIE_LESBIAN:int                                   =   98; // Times Lesbo-Sexed
 const EASY_MODE_ENABLE_FLAG:int                                       =   99; // Invincibility On - Easy Mode.	0=false, 1=true
-const UNKNOWN_FLAG_NUMBER_00100:int                                   =  100; // Corrupt Marae Followups
-const UNKNOWN_FLAG_NUMBER_00101:int                                   =  101; // Found Wizard Staff
+const CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE:int                                   =  100; // Corrupt Marae Followups
+const FOUND_WIZARD_STAFF:int                                   =  101; // Found Wizard Staff
 const UNKNOWN_FLAG_NUMBER_00102:int                                   =  102; // Has extra jojo time been cleared? - Jojo Debug Flag
-const UNKNOWN_FLAG_NUMBER_00103:int                                   =  103; // Times Autofellated Exgartuan
-const UNKNOWN_FLAG_NUMBER_00104:int                                   =  104; // Whitney Gems Paid Out That Week
+const TIMES_AUTOFELLATIOED_EXGARTUAN:int                                   =  103; // Times Autofellated Exgartuan
+const WHITNEY_GEMS_PAID_THIS_WEEK:int                                   =  104; // Whitney Gems Paid Out That Week
 const TIMES_MET_SCYLLA_IN_ADDICTION_GROUP:int                         =  105; // SCYLLA:  Times met Addiction Group
-const UNKNOWN_FLAG_NUMBER_00106:int                                   =  106; // SCYLLA: Times addict group taken advantage of
+const TIMES_SCYLLA_ADDICT_GROUP_EXPLOITED:int                                   =  106; // SCYLLA: Times addict group taken advantage of
 const UNKNOWN_FLAG_NUMBER_00107:int                                   =  107; // SCYLLA: Times given the option to 'share' something
 const UNKNOWN_FLAG_NUMBER_00108:int                                   =  108; // SCYLLA: Milk therapy times
 const UNKNOWN_FLAG_NUMBER_00109:int                                   =  109; // SCYLLA: Cum therapy times
@@ -740,7 +740,7 @@ const SOPHIE_INCUBATION:int                                           =  738; //
 const SOPHIE_BROACHED_SLEEP_WITH:int                                  =  739; // 
 const SOPHIE_ADULT_KID_COUNT:int                                      =  740; // 
 const SOPHIE_DAUGHTER_MATURITY_COUNTER:int                            =  741; // 
-const SOPHIE_EGG_COUNTER:int                                          =  742; // 
+const SOPHIE_CAMP_EGG_COUNTDOWN:int                                          =  742; // 
 const SOPHIE_FAMILY_INCEST:int                                        =  743; // 
 const RATHAZUL_DEBIMBO_OFFERED:int                                    =  744; // 
 const SOPHIE_DEBIMBOED:int                                            =  745; // 

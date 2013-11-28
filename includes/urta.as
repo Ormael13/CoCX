@@ -2580,7 +2580,7 @@ function urtaFertilityDiscussion():void {
 	if(flags[URTA_PREG_EVERYBODY] == 1) outputText("  Or did you come to ask me not to be fertile and virile around anyone else?");
 	else {
 		outputText("  Would you mind me being able to put a bun in Edryn's oven?  Imagine all the lil foxtaurs running around!");
-		if(flags[UNKNOWN_FLAG_NUMBER_00069] > 0) outputText("  After all, you already had a turn!  Fair's fair!");
+		if(flags[EDRYN_NUMBER_OF_KIDS] > 0) outputText("  After all, you already had a turn!  Fair's fair!");
 	}
 	outputText("</i>\"  She winks at you before blowing you a playful raspberry.\n");
 	menu();
@@ -2956,7 +2956,7 @@ function urtaDiscussesEdrynRomance():void {
 			if(player.statusAffectv1("Edryn") >= 5) {
 				outputText("  \"<i>Of course, you know that firsthand, don't you?</i>\" she grins.  \"<i>Did hearing that I was having sex with her make you curious about what it was like?");
 				//(If player has fathered at least 1 child on Edryn: 
-				if(flags[UNKNOWN_FLAG_NUMBER_00069] > 0) outputText("  Still, I can't believe you actually knocked her up - I had to pick my jaw up off the floor when she told me that the foal kicking inside her ballooning gut was yours.  I mean, those herbs are supposed to be foolproof...</i>\" She shakes her head, half in disbelief of your sheer virility, half in awe of it.");
+				if(flags[EDRYN_NUMBER_OF_KIDS] > 0) outputText("  Still, I can't believe you actually knocked her up - I had to pick my jaw up off the floor when she told me that the foal kicking inside her ballooning gut was yours.  I mean, those herbs are supposed to be foolproof...</i>\" She shakes her head, half in disbelief of your sheer virility, half in awe of it.");
 				else outputText("</i>\"");
 				if(flags[URTA_FERTILE] == 0) outputText("  \"<i>Still, I hope you don't have any idle thoughts in your head about knocking me up; there's a difference between overwhelming contraceptives and sowing seed where the field's barren,</i>\" she states, patting her flat belly for emphasis.  Despite how flippant she tries to sound when she says this, you can tell that it's something of a sore subject for her.");
 			}
@@ -2990,7 +2990,7 @@ function urtaDiscussesEdrynRomance():void {
 			//(If Edryn is doing the player for free: 
 			if(player.statusAffectv1("Edryn") >= 5) outputText("  \"<i>Though I have to admit I was still a little jealous when Edryn told me you were having sex with her too.  Still, I guess that's just another thing we have in common, yeah?  A mutual taste in sexy ladies.</i>\"  She laughs, and mockingly shapes her hands through the air as if caressing Edryn's sizable boobs.");
 			//(If Edryn has had at least one baby: 
-			if(flags[UNKNOWN_FLAG_NUMBER_00069] > 0) {
+			if(flags[EDRYN_NUMBER_OF_KIDS] > 0) {
 				if(flags[URTA_QUEST_STATUS] == 1) {
 					if(urtaKids() == 0) outputText("  \"<i>...I still can't believe that you actually get her pregnant, though.  It's just not fair that Edryn's got little hooves running around, and after everything I went through, I don't have kits of my own... yet.</i>\" She gives you a slightly predatory smile along with the last word.");
 					else outputText("  \"<i>...I still can't believe that you actually got her pregnant, though.  I guess I'll have to keep you busy in the sack if we're going to keep up, huh?</i>\" She gives you a slightly predatory smile along with the last word.");

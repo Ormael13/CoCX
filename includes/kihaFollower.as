@@ -1350,7 +1350,7 @@ function kihaPlaysWithBigassCocksFemDomAhoy():void {
 		else outputText("  You wonder what would happen if she got jumped by your tigershark children.");
 	}
 	outputText("[pg]Wiping up as best you can, you don your [armor] and walk back");
-	if(monk >= 5 && player.hasStatusAffect("noJojo") < 0 && flags[UNKNOWN_FLAG_NUMBER_00080] == 0) {
+	if(monk >= 5 && player.hasStatusAffect("noJojo") < 0 && flags[JOJO_DEAD_OR_GONE] == 0) {
 		if(!tentacleJojo()) outputText(", ignoring the sounds of Jojo feverishly masturbating in the woods");
 		else outputText(", ignoring the sound of Jojo vigorously fucking himself with all his tentacles in the trees");
 	}

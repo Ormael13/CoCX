@@ -188,7 +188,7 @@ function tamaniMaleRepeatEncounter():void {
 	if(player.statusAffectv1("Tamani") != -500 || player.statusAffectv2("Tamani") > 0) outputText("While exploring, you're startled by the feeling of tiny hands stroking the insides of your thighs.  You look down and find Tamani there, grinning wolfishly,  \"<i>Ready for another fuck, big " + player.boyGirl() + "?\"\n\n", false);
 	//(ELSE) 
 	else outputText("While exploring, you're startled by the feeling of tiny hands stroking the insides of your thighs.  You look down and find Tamani the goblin there, grinning with desire, \"<i>Ready to stuff me with cum?  I'm not taking no for an answer this time.</i>\"\n\n", false);
-	if(flags[UNKNOWN_FLAG_NUMBER_00056] > 19 && rand(2) == 0) {
+	if(flags[TAMANI_TIMES_HYPNOTISED] > 19 && rand(2) == 0) {
 		getRapedByTamaniYouHypnoSlut();
 		return;
 	}
@@ -702,14 +702,14 @@ function tamaniHypnoTease():void {
 	
 	//REACTIONS
 	//LOW HYPNO VALUE:
-	if(flags[UNKNOWN_FLAG_NUMBER_00056] < 5) {
+	if(flags[TAMANI_TIMES_HYPNOTISED] < 5) {
 		selector = rand(3);
 		if(selector == 0) outputText("You reluctantly pull your stare away from the heavenly entrance between her legs.  There's an urge to walk over to her and plunge yourself inside her over and over, but you dismiss it.", false);
 		if(selector == 1) outputText("You find it hard to pull your gaze from her inviting twat, but you manage.  You shake your head, clearing away thoughts of fertilizing your wife.  Her rhetoric must be getting to you.", false);
 		if(selector == 2) outputText("No matter the case, her actions shifted a fair bit of your blood-flow to your groin.", false);
 	}
 	//MEDIUM HYPNO VALUE:
-	else if(flags[UNKNOWN_FLAG_NUMBER_00056] < 10) {
+	else if(flags[TAMANI_TIMES_HYPNOTISED] < 10) {
 		selector = rand(2);
 		if(selector == 0) {
 			outputText("With effort you manage to wrench your eyes away from the inviting folds of Tamani's vagina.  ", false);
@@ -748,7 +748,7 @@ function tamaniHypnoTease():void {
 			outputText("our " + multiCockDescriptLight() + " pulses and dribbles pre-cum, aching to do its duty and fire load after load into Tamani's perfect pussy.", false);
 		}
 	}
-	stats(0,0,0,0,0,0,(rand(player.lib/5)+3+(flags[UNKNOWN_FLAG_NUMBER_00056])),0);
+	stats(0,0,0,0,0,0,(rand(player.lib/5)+3+(flags[TAMANI_TIMES_HYPNOTISED])),0);
 	combatRoundOver();
 }
 

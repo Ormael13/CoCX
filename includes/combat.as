@@ -418,10 +418,10 @@ function doCombat(eventNum:Number)
 				player.gems -= temp;
 				gameState = 0;
 				//BUNUS XPZ
-				if(flags[UNKNOWN_FLAG_NUMBER_00089] > 0) {
-					player.XP += flags[UNKNOWN_FLAG_NUMBER_00089];
-					outputText("  Somehow you managed to gain " + flags[UNKNOWN_FLAG_NUMBER_00089] + " XP from the situation.", false);
-					flags[UNKNOWN_FLAG_NUMBER_00089] = 0;
+				if(flags[COMBAT_BONUS_XP_VALUE] > 0) {
+					player.XP += flags[COMBAT_BONUS_XP_VALUE];
+					outputText("  Somehow you managed to gain " + flags[COMBAT_BONUS_XP_VALUE] + " XP from the situation.", false);
+					flags[COMBAT_BONUS_XP_VALUE] = 0;
 				}
 				//Bonus lewts
 				if(flags[UNKNOWN_FLAG_NUMBER_00234] != "") {
@@ -2218,7 +2218,7 @@ function doCombat(eventNum:Number)
 		if(monster.short == "Tamani") {
 			if(player.totalCocks() > 0) {
 				//hypnoslut loss scene
-				if(flags[UNKNOWN_FLAG_NUMBER_00056] > 19 && rand(2) == 0) {
+				if(flags[TAMANI_TIMES_HYPNOTISED] > 19 && rand(2) == 0) {
 					getRapedByTamaniYouHypnoSlut();
 					return;
 				}

@@ -51,60 +51,60 @@ flagReplacements =  [
 ["AMILY_ASS_SIZE",                                                  "AMILY_ASS_SIZE"],                                 # Can increase ass from "unremarkable ass" to "delightfully jiggly" - Default=12
 ["AMILY_LACTATION_RATE",                                            "AMILY_LACTATION_RATE"],                           # Amily Lactation Rate. Default=0
 ["AMILY_CLOTHING",                                                  "AMILY_CLOTHING"],                                 # Amily Clothing. Default="sexy rags"
-["UNKNOWN_FLAG_NUMBER_00053",                                       "LUMI_MET"],                                       # Lumi Met
+["LUMI_MET",                                                        "LUMI_MET"],                                       # Lumi Met
 ["NUMBER_OF_TIMES_MET_SCYLLA",                                      "NUMBER_OF_TIMES_MET_SCYLLA"],                     # Met Scylla:   -1 = decline.  0 = not met.  1 = sucked once, 2 = sucked twice, etc
-["UNKNOWN_FLAG_NUMBER_00055",                                       "TIMES_ENCOUNTED_TAMANIS_DAUGHTERS"],              # Times encountered Tamani's Daughters
-["UNKNOWN_FLAG_NUMBER_00056",                                       "TAMANI_TIMES_HYPNOTISED"],                        # Tamani Hypno Level" Description="increases by 1 for each hypno event.  1-3 slight lust raises, 4-9 medium lust raises, 10-19 super high lust raises, 20+ high chance of autorape with special scene.
-["UNKNOWN_FLAG_NUMBER_00057",                                       "TAMANI_DAUGHTER_PREGGO_COUNTDOWN"],               # Daughter Pregnancy Counter" Description="they will not return until this countdown timer is 0.  Same length as Tamani's incubation &#x2014; approx 1 week.
+["TIMES_ENCOUNTED_TAMANIS_DAUGHTERS",                               "TIMES_ENCOUNTED_TAMANIS_DAUGHTERS"],              # Times encountered Tamani's Daughters
+["TAMANI_TIMES_HYPNOTISED",                                         "TAMANI_TIMES_HYPNOTISED"],                        # Tamani Hypno Level" Description="increases by 1 for each hypno event.  1-3 slight lust raises, 4-9 medium lust raises, 10-19 super high lust raises, 20+ high chance of autorape with special scene.
+["TAMANI_DAUGHTER_PREGGO_COUNTDOWN",                                "TAMANI_DAUGHTER_PREGGO_COUNTDOWN"],               # Daughter Pregnancy Counter" Description="they will not return until this countdown timer is 0.  Same length as Tamani's incubation &#x2014; approx 1 week.
 ["UNKNOWN_FLAG_NUMBER_00058",                                       "UNKNOWN_FLAG_NUMBER_00058"],                      # Times In Goblin Daughter 'CHAIR'
-["UNKNOWN_FLAG_NUMBER_00059",                                       "TIMES_FUCKED_TAMANIS_DAUGHTERS"],                 # TimeSleptWithDaughters
-["UNKNOWN_FLAG_NUMBER_00060",                                       "UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR"],           # Fail Masturbation As Centaur?
-["UNKNOWN_FLAG_NUMBER_00061",                                       "CERULEAN_POTION_BAD_END_FUTA_COUNTER"],           # Cerulean Potion Bad-End Futa Count
-["UNKNOWN_FLAG_NUMBER_00062",                                       "CERULEAN_POTION_NEUTER_ATTEMPTED"],               # Cerulean Potion Neuter Attempted
+["TIMES_FUCKED_TAMANIS_DAUGHTERS",                                  "TIMES_FUCKED_TAMANIS_DAUGHTERS"],                 # TimeSleptWithDaughters
+["UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR",                            "UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR"],           # Fail Masturbation As Centaur?
+["CERULEAN_POTION_BAD_END_FUTA_COUNTER",                            "CERULEAN_POTION_BAD_END_FUTA_COUNTER"],           # Cerulean Potion Bad-End Futa Count
+["CERULEAN_POTION_NEUTER_ATTEMPTED",                                "CERULEAN_POTION_NEUTER_ATTEMPTED"],               # Cerulean Potion Neuter Attempted
 ["TEMP_STORAGE_SAVE_DELETION",                                      "TEMP_STORAGE_SAVE_DELETION"],                     # Used as temp storage for deleting save slots
-["UNKNOWN_FLAG_NUMBER_00064",                                       "MARBLE_GROSSED_OUT_BECAUSE_WORM_INFESTATION"],    # Marble not sleeping with you due to worms
-["UNKNOWN_FLAG_NUMBER_00065",                                       "FORCE_BEE_TO_PRODUCE_HONEY"],                     # Force Bee Honey Drop - Found Bee Honey.	1=Found
-["UNKNOWN_FLAG_NUMBER_00066",                                       "HAIR_GROWTH_STOPPED_BECAUSE_LIZARD"],             # Hair no longer grows due to lizard
-["UNKNOWN_FLAG_NUMBER_00067",                                       "TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY"],      # CAT: Autofellated
+["MARBLE_GROSSED_OUT_BECAUSE_WORM_INFESTATION",                     "MARBLE_GROSSED_OUT_BECAUSE_WORM_INFESTATION"],    # Marble not sleeping with you due to worms
+["FORCE_BEE_TO_PRODUCE_HONEY",                                      "FORCE_BEE_TO_PRODUCE_HONEY"],                     # Force Bee Honey Drop - Found Bee Honey.	1=Found
+["HAIR_GROWTH_STOPPED_BECAUSE_LIZARD",                              "HAIR_GROWTH_STOPPED_BECAUSE_LIZARD"],             # Hair no longer grows due to lizard
+["TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY",                       "TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY"],      # CAT: Autofellated
 ["EDRYN_PREGNANCY_INCUBATION",                                      "EDRYN_PREGNANCY_INCUBATION"],
-["UNKNOWN_FLAG_NUMBER_00069",                                       "EDRYN_NUMBER_OF_KIDS"],                           # EDRYN: Kids
-["UNKNOWN_FLAG_NUMBER_00070",                                       "EDRYN_NEVER_SEE_AGAIN"],                          # EDRYN: NEVER SEE AGAIN
-["UNKNOWN_FLAG_NUMBER_00071",                                       "EDRYN_PREGNAT_AND_NOT_TOLD_PC_YET"],              # EDRYN: Pregnancy Panic happen?
-["UNKNOWN_FLAG_NUMBER_00072",                                       "EDRYN_NEEDS_TO_TALK_ABOUT_KID"],                  # EDRYN: Gotta talk about kid
-["UNKNOWN_FLAG_NUMBER_00073",                                       "EDRYN_GIFT_COUNTER"],                             # EDRYN: GOOD HAND OUTS
-["UNKNOWN_FLAG_NUMBER_00074",                                       "AMILY_MET_PURE_JOJO"],                            # AMILY: Met pure jojo
-["UNKNOWN_FLAG_NUMBER_00075",                                       "AMILY_SPAR_WITH_PURE_JOJO"],                      # AMILY: Spar with Jojo
-["UNKNOWN_FLAG_NUMBER_00076",                                       "AMILY_PISSED_PC_CORRUPED_JOJO"],                  # AMILY: Knew pure Jojo and is pissed that you 'broke' him.
-["UNKNOWN_FLAG_NUMBER_00077",                                       "AMILY_WAIT_FOR_PC_FIX_JOJO"],                     # AMILY: PC agreed to 'fix' jojo.  No sex until this is reset to 0.
-["UNKNOWN_FLAG_NUMBER_00078",                                       "AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO"],   # AMILY: Jojo fixing countdown - no encounters with amily till it reaches 0.
-["UNKNOWN_FLAG_NUMBER_00079",                                       "JOJO_FIXED_STATUS"],                              # JOJO: 'FIXED' = 1, 'FIXED + NOTE READ = 2
-["UNKNOWN_FLAG_NUMBER_00080",                                       "JOJO_DEAD_OR_GONE"],                              # JOJO DEAD OR GONE = 1
-["UNKNOWN_FLAG_NUMBER_00081",                                       "AMILY_DISCOVERED_TENTATLE_JOJO"],                 # AMILY: Discovered tentacle Jojo happened
-["UNKNOWN_FLAG_NUMBER_00082",                                       "AMILY_MET_RATHAZUL"],                             # AMILY: Met Rathazul
-["UNKNOWN_FLAG_NUMBER_00083",                                       "RATHAZUL_CORRUPT_JOJO_FREAKOUT"],                 # RATHAZUL: Corrupt Jojo freakout!
-["UNKNOWN_FLAG_NUMBER_00084",                                       "JOJO_RATHAZUL_INTERACTION_COUNTER"],              # RATHAZUL: NON CORRUPT JOJO STUFF
-["UNKNOWN_FLAG_NUMBER_00085",                                       "MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT"],             # Which came first?  Marble(1) or Amily(2) - Freakout at Camp if both Marble and Amily present.	1=true, 2=No freakout
-["UNKNOWN_FLAG_NUMBER_00086",                                       "AMILY_NOT_FREAKED_OUT"],                          # Amily Freakout Session
-["UNKNOWN_FLAG_NUMBER_00087",                                       "RATHAZUL_CAMP_INTERACTION_COUNTDOWN"],            # Rathazul inter-follower countdown timer
-["UNKNOWN_FLAG_NUMBER_00088",                                       "DISCOVERED_HIGH_MOUNTAIN"],                       # DISCOVER HIGH MOUNTAIN (Rangers, what a terrible TV show)
-["UNKNOWN_FLAG_NUMBER_00089",                                       "COMBAT_BONUS_XP_VALUE"],                          # Sekrit Bonus XP Pass
-["UNKNOWN_FLAG_NUMBER_00090",                                       "MET_SOPHIE_COUNTER"],                             # Met Sophie?
-["UNKNOWN_FLAG_NUMBER_00091",                                       "FUCKED_SOPHIE_COUNTER"],                          # Times Had Sex With Sophie
-["UNKNOWN_FLAG_NUMBER_00092",                                       "BREASTFEAD_SOPHIE_COUNTER"],                      # Times Breastfed Sophie
-["UNKNOWN_FLAG_NUMBER_00093",                                       "SOPHIE_WILD_EGG_COUNTDOWN_TIMER"],                # Sophie's Egg Countdown Timer
-["UNKNOWN_FLAG_NUMBER_00094",                                       "SOPHIE_EGGS_LAID"],                      # Sophie eggs laid
-["UNKNOWN_FLAG_NUMBER_00095",                                       "PC_CURRENTLY_LUSTSTICK_AFFECTED"],                  # N
-["UNKNOWN_FLAG_NUMBER_00096",                                       "SOPHIE_ANGRY_AT_PC_COUNTER"],                      # Sophie Pissed Off Counter
-["UNKNOWN_FLAG_NUMBER_00097",                                       "TIMES_PISSED_OFF_SOPHIE_COUNTER"],                      # Times Pissed Off Sophie
-["UNKNOWN_FLAG_NUMBER_00098",                                       "TIMES_FUCKED_SOPHIE_LESBIAN"],                      # Times Lesbo-Sexed
+["EDRYN_NUMBER_OF_KIDS",                                            "EDRYN_NUMBER_OF_KIDS"],                           # EDRYN: Kids
+["EDRYN_NEVER_SEE_AGAIN",                                           "EDRYN_NEVER_SEE_AGAIN"],                          # EDRYN: NEVER SEE AGAIN
+["EDRYN_PREGNAT_AND_NOT_TOLD_PC_YET",                               "EDRYN_PREGNAT_AND_NOT_TOLD_PC_YET"],              # EDRYN: Pregnancy Panic happen?
+["EDRYN_NEEDS_TO_TALK_ABOUT_KID",                                   "EDRYN_NEEDS_TO_TALK_ABOUT_KID"],                  # EDRYN: Gotta talk about kid
+["EDRYN_GIFT_COUNTER",                                              "EDRYN_GIFT_COUNTER"],                             # EDRYN: GOOD HAND OUTS
+["AMILY_MET_PURE_JOJO",                                             "AMILY_MET_PURE_JOJO"],                            # AMILY: Met pure jojo
+["AMILY_SPAR_WITH_PURE_JOJO",                                       "AMILY_SPAR_WITH_PURE_JOJO"],                      # AMILY: Spar with Jojo
+["AMILY_PISSED_PC_CORRUPED_JOJO",                                   "AMILY_PISSED_PC_CORRUPED_JOJO"],                  # AMILY: Knew pure Jojo and is pissed that you 'broke' him.
+["AMILY_WAIT_FOR_PC_FIX_JOJO",                                      "AMILY_WAIT_FOR_PC_FIX_JOJO"],                     # AMILY: PC agreed to 'fix' jojo.  No sex until this is reset to 0.
+["AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO",                    "AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO"],   # AMILY: Jojo fixing countdown - no encounters with amily till it reaches 0.
+["JOJO_FIXED_STATUS",                                               "JOJO_FIXED_STATUS"],                              # JOJO: 'FIXED' = 1, 'FIXED + NOTE READ = 2
+["JOJO_DEAD_OR_GONE",                                               "JOJO_DEAD_OR_GONE"],                              # JOJO DEAD OR GONE = 1
+["AMILY_DISCOVERED_TENTATLE_JOJO",                                  "AMILY_DISCOVERED_TENTATLE_JOJO"],                 # AMILY: Discovered tentacle Jojo happened
+["AMILY_MET_RATHAZUL",                                              "AMILY_MET_RATHAZUL"],                             # AMILY: Met Rathazul
+["RATHAZUL_CORRUPT_JOJO_FREAKOUT",                                  "RATHAZUL_CORRUPT_JOJO_FREAKOUT"],                 # RATHAZUL: Corrupt Jojo freakout!
+["JOJO_RATHAZUL_INTERACTION_COUNTER",                               "JOJO_RATHAZUL_INTERACTION_COUNTER"],              # RATHAZUL: NON CORRUPT JOJO STUFF
+["MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT",                              "MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT"],             # Which came first?  Marble(1) or Amily(2) - Freakout at Camp if both Marble and Amily present.	1=true, 2=No freakout
+["AMILY_NOT_FREAKED_OUT",                                           "AMILY_NOT_FREAKED_OUT"],                          # Amily Freakout Session
+["RATHAZUL_CAMP_INTERACTION_COUNTDOWN",                             "RATHAZUL_CAMP_INTERACTION_COUNTDOWN"],            # Rathazul inter-follower countdown timer
+["DISCOVERED_HIGH_MOUNTAIN",                                        "DISCOVERED_HIGH_MOUNTAIN"],                       # DISCOVER HIGH MOUNTAIN (Rangers, what a terrible TV show)
+["COMBAT_BONUS_XP_VALUE",                                           "COMBAT_BONUS_XP_VALUE"],                          # Sekrit Bonus XP Pass
+["MET_SOPHIE_COUNTER",                                              "MET_SOPHIE_COUNTER"],                             # Met Sophie?
+["FUCKED_SOPHIE_COUNTER",                                           "FUCKED_SOPHIE_COUNTER"],                          # Times Had Sex With Sophie
+["BREASTFEAD_SOPHIE_COUNTER",                                       "BREASTFEAD_SOPHIE_COUNTER"],                      # Times Breastfed Sophie
+["SOPHIE_WILD_EGG_COUNTDOWN_TIMER",                                 "SOPHIE_WILD_EGG_COUNTDOWN_TIMER"],                # Sophie's Egg Countdown Timer
+["SOPHIE_EGGS_LAID",                                                "SOPHIE_EGGS_LAID"],                      # Sophie eggs laid
+["PC_CURRENTLY_LUSTSTICK_AFFECTED",                                 "PC_CURRENTLY_LUSTSTICK_AFFECTED"],                  # N
+["SOPHIE_ANGRY_AT_PC_COUNTER",                                      "SOPHIE_ANGRY_AT_PC_COUNTER"],                      # Sophie Pissed Off Counter
+["TIMES_PISSED_OFF_SOPHIE_COUNTER",                                 "TIMES_PISSED_OFF_SOPHIE_COUNTER"],                      # Times Pissed Off Sophie
+["TIMES_FUCKED_SOPHIE_LESBIAN",                                     "TIMES_FUCKED_SOPHIE_LESBIAN"],                      # Times Lesbo-Sexed
 ["EASY_MODE_ENABLE_FLAG",                                           "EASY_MODE_ENABLE_FLAG"],                          # Invincibility On - Easy Mode.	0=false, 1=true
-["UNKNOWN_FLAG_NUMBER_00100",                                       "CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE"],                      # Corrupt Marae Followups
-["UNKNOWN_FLAG_NUMBER_00101",                                       "FOUNT_WIZARD STAFF"],                      # Don't forget to put on your robe and wizard hat.
+["CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE",                          "CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE"],                      # Corrupt Marae Followups
+["FOUND_WIZARD_STAFF",                                              "FOUND_WIZARD_STAFF"],                      # Don't forget to put on your robe and wizard hat.
 ["UNKNOWN_FLAG_NUMBER_00102",                                       "UNKNOWN_FLAG_NUMBER_00102"],                      # Has extra jojo time been cleared? - Jojo Debug Flag
-["UNKNOWN_FLAG_NUMBER_00103",                                       "TIMES_AUTOFELLATIOED_EXGARTUAN"],                      # Times Autofellated Exgartuan
-["UNKNOWN_FLAG_NUMBER_00104",                                       "WHITNEY_GEMS_PAID_THIS_WEEK"],                      # Whitney Gems Paid Out That Week
+["TIMES_AUTOFELLATIOED_EXGARTUAN",                                  "TIMES_AUTOFELLATIOED_EXGARTUAN"],                      # Times Autofellated Exgartuan
+["WHITNEY_GEMS_PAID_THIS_WEEK",                                     "WHITNEY_GEMS_PAID_THIS_WEEK"],                      # Whitney Gems Paid Out That Week
 ["TIMES_MET_SCYLLA_IN_ADDICTION_GROUP",                             "TIMES_MET_SCYLLA_IN_ADDICTION_GROUP"],            # SCYLLA:  Times met Addiction Group
-["UNKNOWN_FLAG_NUMBER_00106",                                       "TIMES_SCYLLA_ADDICT_GROUP_EXPLOITED"],                      # SCYLLA: Times addict group taken advantage of
+["TIMES_SCYLLA_ADDICT_GROUP_EXPLOITED",                             "TIMES_SCYLLA_ADDICT_GROUP_EXPLOITED"],                      # SCYLLA: Times addict group taken advantage of
 ["UNKNOWN_FLAG_NUMBER_00107",                                       "UNKNOWN_FLAG_NUMBER_00107"],                      # SCYLLA: Times given the option to 'share' something
 ["UNKNOWN_FLAG_NUMBER_00108",                                       "UNKNOWN_FLAG_NUMBER_00108"],                      # SCYLLA: Milk therapy times
 ["UNKNOWN_FLAG_NUMBER_00109",                                       "UNKNOWN_FLAG_NUMBER_00109"],                      # SCYLLA: Cum therapy times
@@ -740,7 +740,7 @@ flagReplacements =  [
 ["SOPHIE_BROACHED_SLEEP_WITH",                                      "SOPHIE_BROACHED_SLEEP_WITH"],                     # 739;
 ["SOPHIE_ADULT_KID_COUNT",                                          "SOPHIE_ADULT_KID_COUNT"],                         # 740;
 ["SOPHIE_DAUGHTER_MATURITY_COUNTER",                                "SOPHIE_DAUGHTER_MATURITY_COUNTER"],               # 741;
-["SOPHIE_EGG_COUNTER",                                              "SOPHIE_CAMP_EGG_COUNTDOWN"],                             # 742;
+["SOPHIE_CAMP_EGG_COUNTDOWN",                                              "SOPHIE_CAMP_EGG_COUNTDOWN"],                             # 742;
 ["SOPHIE_FAMILY_INCEST",                                            "SOPHIE_FAMILY_INCEST"],                           # 743;
 ["RATHAZUL_DEBIMBO_OFFERED",                                        "RATHAZUL_DEBIMBO_OFFERED"],                       # 744;
 ["SOPHIE_DEBIMBOED",                                                "SOPHIE_DEBIMBOED"],                               # 745;

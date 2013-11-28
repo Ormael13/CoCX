@@ -1029,7 +1029,7 @@ function doEvent(eventNo):void
 			outputText("The Succubus stops, turns and points to you in derision. \"<i>And YOU! You no-cock, no-cunt having pissant! Take your ass back to the lab before they find out you escaped!!!!!</i>\"\n\n", false);
 			
 			outputText("The Succubus resumes her stormy exit. You look at the bottle of Cerulean Potion and wonder if it REALLY had some psychotropics in it. What the hell just happened?!", false);
-			flags[UNKNOWN_FLAG_NUMBER_00062] = 1;
+			flags[CERULEAN_POTION_NEUTER_ATTEMPTED] = 1;
 			doNext(1);
 			return;
 		}
@@ -2015,13 +2015,13 @@ function doEvent(eventNo):void
 	{
 		jojoSprite();
 		//Amily meets Jojo:
-		if (flags[UNKNOWN_FLAG_NUMBER_00074] == 0 && flags[AMILY_FOLLOWER] == 1 && amilyFollower())
+		if (flags[AMILY_MET_PURE_JOJO] == 0 && flags[AMILY_FOLLOWER] == 1 && amilyFollower())
 		{
 			amilyMeetsPureJojo();
 			return;
 		}
 		//Rathazul & Jojo
-		if (flags[UNKNOWN_FLAG_NUMBER_00084] == 1 && rand(2) == 0)
+		if (flags[JOJO_RATHAZUL_INTERACTION_COUNTER] == 1 && rand(2) == 0)
 		{
 			catchRathazulNapping();
 			return;

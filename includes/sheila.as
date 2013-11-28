@@ -2799,7 +2799,7 @@ function forcedSheilaOral(dick:Boolean = true):void {
 		
 		outputText("\n\nYour [vagOrAss] squeezes around Sheila's hesitant tongue, turned on more by the spectacle of selling her body than by any of her poor efforts.  She squirms under you, rubbing her thighs together as you paint the worst pictures of her future you can imagine, and you climax");
 		//[(PC has met Lumi or Lynette)
-		if(player.hasStatusAffect("hairdresser meeting") >= 0 || flags[UNKNOWN_FLAG_NUMBER_00053] > 0) {
+		if(player.hasStatusAffect("hairdresser meeting") >= 0 || flags[LUMI_MET] > 0) {
 			outputText(" while imagining her turned over to the goblins for experiments, forced to drink potion after potion - most would be dedicated to growing cocks on her or increasing semen production, of course");
 		}
 		outputText(".  Your hole clenches and drools on her, and the woman's rude tongue retreats from the pressure, leaving you painfully empty.");
@@ -4985,7 +4985,7 @@ function jojoRuinsTheAnalHateFuck(clear:Boolean = true):void {
 	//set lust to 100, huge corruption gain (like it matters), set sheilapreg to -3 and disable Jojo unless and until new corrupted content is written to reflect changes
 	stats(0,0,0,0,0,0,100,10,false);
 	flags[SHEILA_PREG] = -3;
-	flags[UNKNOWN_FLAG_NUMBER_00080] = 1;
+	flags[JOJO_DEAD_OR_GONE] = 1;
 	if(inCombat()) eventParser(5007);
 	else doNext(13);
 }

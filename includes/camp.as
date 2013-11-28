@@ -167,7 +167,7 @@ function camp():void {
 			}
 		}
 	}
-	if(flags[FUCK_FLOWER_KILLED] == 0 && flags[UNKNOWN_FLAG_NUMBER_00100] > 0) {
+	if(flags[FUCK_FLOWER_KILLED] == 0 && flags[CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] > 0) {
 		if(flags[FUCK_FLOWER_LEVEL] == 0 && flags[FUCK_FLOWER_GROWTH_COUNTER] >= 8) {
 			getASprout();
 			hideMenus();
@@ -257,13 +257,13 @@ function camp():void {
 		return;
 	}
 	//Find jojo's note!
-	if(flags[UNKNOWN_FLAG_NUMBER_00079] == 1 && flags[UNKNOWN_FLAG_NUMBER_00078] == 0) {
+	if(flags[JOJO_FIXED_STATUS] == 1 && flags[AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0) {
 		findJojosNote();
 		hideMenus();
 		return;
 	}
 	//Rathazul freaks out about jojo
-	if(flags[UNKNOWN_FLAG_NUMBER_00083] == 0 && rand(5) == 0 && player.hasStatusAffect("Camp Rathazul") >= 0 && campCorruptJojo()) {
+	if(flags[RATHAZUL_CORRUPT_JOJO_FREAKOUT] == 0 && rand(5) == 0 && player.hasStatusAffect("Camp Rathazul") >= 0 && campCorruptJojo()) {
 		rathazulFreaksOverJojo();
 		hideMenus();
 		return;
@@ -281,7 +281,7 @@ function camp():void {
 		return;
 	}
 	//Amily/Marble Freakout
-	if(flags[UNKNOWN_FLAG_NUMBER_00086] == 0 && player.hasStatusAffect("Camp Marble") >= 0 && flags[AMILY_FOLLOWER] == 1 && amilyFollower()) {
+	if(flags[AMILY_NOT_FREAKED_OUT] == 0 && player.hasStatusAffect("Camp Marble") >= 0 && flags[AMILY_FOLLOWER] == 1 && amilyFollower()) {
 		marbleVsAmilyFreakout();
 		hideMenus();
 		return;
@@ -335,7 +335,7 @@ function camp():void {
 	//Clear stuff
 	if(player.hasStatusAffect("Slime Craving Output") >= 0) player.removeStatusAffect("Slime Craving Output");
 	//Reset luststick display status (see event parser)
-	flags[UNKNOWN_FLAG_NUMBER_00095] = 0;
+	flags[PC_CURRENTLY_LUSTSTICK_AFFECTED] = 0;
 	//Display Proper Buttons
 	mainView.showMenuButton( MainView.MENU_APPEARANCE );
 	mainView.showMenuButton( MainView.MENU_PERKS );
@@ -578,7 +578,7 @@ function camp():void {
 		if(player.hasStatusAffect("dysfunction") >= 0) {
 			outputText("<b>You are debilitatingly aroused, but your sexual organs are so numbed the only way to get off would be to find something tight to fuck or get fucked...</b>\n\n", false);
 		}
-		else if(flags[UNKNOWN_FLAG_NUMBER_00060] > 0 && player.isTaur()) {
+		else if(flags[UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR] > 0 && player.isTaur()) {
 			outputText("<b>You are delibitatingly aroused, but your sex organs are so difficult to reach that masturbation isn't at the forefront of your mind.</b>\n\n", false);
 		}
 		else {
@@ -847,9 +847,9 @@ function campLoversMenu():void {
 				izzyCreeps[izzyCreeps.length] = 0;
 			if(player.hasStatusAffect("PureCampJojo") >= 0)
 				izzyCreeps[izzyCreeps.length] = 1;
-			if(amilyFollower() && flags[AMILY_FOLLOWER] == 1 && flags[UNKNOWN_FLAG_NUMBER_00078] == 0)
+			if(amilyFollower() && flags[AMILY_FOLLOWER] == 1 && flags[AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0)
 				izzyCreeps[izzyCreeps.length] = 2;
-			if(amilyFollower() && flags[AMILY_FOLLOWER] == 2 && flags[UNKNOWN_FLAG_NUMBER_00078] == 0)
+			if(amilyFollower() && flags[AMILY_FOLLOWER] == 2 && flags[AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0)
 				izzyCreeps[izzyCreeps.length] = 3;
 			if(flags[UNKNOWN_FLAG_NUMBER_00238] == 1)
 				izzyCreeps[izzyCreeps.length] = 4;
@@ -903,7 +903,7 @@ function campLoversMenu():void {
 		outputText("\n\n", false);
 	}
 	//AMILY
-	if(amilyFollower() && flags[AMILY_FOLLOWER] == 1 && flags[UNKNOWN_FLAG_NUMBER_00078] == 0) {
+	if(amilyFollower() && flags[AMILY_FOLLOWER] == 1 && flags[AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0) {
 		outputText("Amily is currently strolling around your camp, ", false);
 		temp = rand(6);
 		if(temp == 0) {
@@ -966,7 +966,7 @@ function campSlavesMenu():void {
 		jojoEvent = 43;
 	}
 	//Modified Camp/Follower List Description:
-	if(amilyFollower() && flags[AMILY_FOLLOWER] == 2 && flags[UNKNOWN_FLAG_NUMBER_00078] == 0) {
+	if(amilyFollower() && flags[AMILY_FOLLOWER] == 2 && flags[AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0) {
 		outputText("Sometimes you hear a faint moan from not too far away. No doubt the result of your slutty toy mouse playing with herself.\n\n", false);
 		amilyEvent = 2427;
 	}
@@ -1270,7 +1270,7 @@ function sleepRecovery(display:Boolean = false):void {
 function nightSuccubiRepeat():void {
 	spriteSelect(8);
 	if(player.gender == 0) {
-		if(flags[UNKNOWN_FLAG_NUMBER_00062] == 0) {
+		if(flags[CERULEAN_POTION_NEUTER_ATTEMPTED] == 0) {
 			outputText("\nAs you sleep, your rest becomes increasingly disturbed. You feel a great weight on top of you and you find it difficult to breathe. Stirred to consciousness, your eyes are greeted by an enormous pair of blue-tinged breasts. The nipples are quite long and thick and are surrounded by large, round areola. A deep, feminine voice breaks the silence, \"<i>I was wondering if you would wake up.</i>\" You turn your head to the voice to see the visage of a sharp featured, attractive woman. The woman grins mischievously and speaks again, \"<i>I was hoping that idiot, Giacomo, did not dilute the 'potion' again.</i>\" Your campfire reflects off the woman's face and her beauty contains some sharply contrasting features. The pupils of her eyes are slit like a cat's. As she grins, she bares her teeth, which contain two pairs of long and short fangs. This woman is clearly NOT human! In shock, you attempt to get up, only prompting the woman to prove her inhuman nature by grabbing your shoulders and pinning you to the ground. You see that each finger on her hand also contains a fourth joint, further proving her status. Before you can speak a word, the woman begins mocking your fear and places her face in front of yours. Her face is almost certainly demonic in nature.\n\n", false);
 			outputText("She quickly moves down to your crotch…only to discover no organs down there.\n\n", false);
 			outputText("*record scratch*\n\n", false);
@@ -1296,7 +1296,7 @@ function nightSuccubiRepeat():void {
 			outputText("The Succubus stops, turns and points to you in derision. \"<i>And YOU! You no-cock, no-cunt having pissant! Take your ass back to the lab before they find out you escaped!!!!!</i>\"\n\n", false);
 	
 			outputText("The Succubus resumes her stormy exit. You look at the bottle of Cerulean Potion and wonder if it REALLY had some psychotropics in it. What the hell just happened?!", false);
-			flags[UNKNOWN_FLAG_NUMBER_00062] = 1;
+			flags[CERULEAN_POTION_NEUTER_ATTEMPTED] = 1;
 		}
 		//REPEAT
 		else {
@@ -1363,7 +1363,7 @@ function nightSuccubiRepeat():void {
 	else if(player.gender == 3) {
 		//Bad End-Cerulean Succubus Futa/herm
 		//[Conditions: Corruption >50. Drink 10 Cerulean potions over the course of 20 Days. (Other stipulations as required that prevent interference with other events-to be determined)]
-		if(flags[UNKNOWN_FLAG_NUMBER_00061] > 10 && player.cor > 50) {
+		if(flags[CERULEAN_POTION_BAD_END_FUTA_COUNTER] > 10 && player.cor > 50) {
 			outputText("\nAs the Succubus mounts you, an uncontrollable urge takes over your mind and body. Without any thought, you quickly thrust one of her nipples in your mouth and begin suckling wildly like a newborn child. The Succubus cries in shock and pleasure as you begin feeding from her and quickly begins her ritualistic milking of your dong. The warm milk passes into your mouth and down your throat, where it settles peacefully in your stomach. The sensation of fulfillment from her tits is only eclipsed by the massive load of semen you feel cramping your prostate.", false);
 			//[ (Herm-Dickgirl variant only)
 			if(player.balls > 0) outputText("  Even your nuts are unbearably sore.", false);
@@ -1384,7 +1384,7 @@ function nightSuccubiRepeat():void {
 		}
 		else {
 			flags[UNKNOWN_FLAG_NUMBER_00111]++;
-			flags[UNKNOWN_FLAG_NUMBER_00061]++;
+			flags[CERULEAN_POTION_BAD_END_FUTA_COUNTER]++;
 			outputText("\nAs you begin to relax from a long day of adventuring, the succubus returns and lands squarely in your lap, just missing your throbbing erection. The succubus growls in arousal as she thrusts one of her fat nipples into your mouth. Reflexively, you begin suckling the teat with neither shame nor restraint. Milk floods into your mouth as you sense the weight of the succubus descend upon your cock. The familiar warmth and snugness of her cunt greet your hungry prick as her muscles begin the savory churning to coax your body into producing the 'milk' she needs to sate her own hunger. Your eyes roll back into your head as the torrent of milk pouring down your throat increases the sensitivity in all of your organs, compelling your hips to reflexively buck to press your dick deeper.\n\n", false);
 			
 			outputText("The Succubus restrains you without missing a stroke or disrupting your breastfeeding as the pangs of orgasmic pleasure swell up at the base of your cock. You wrap your arms forcefully around the succubus as you bear down upon your crotch, releasing the painfully stockpiled load of lust into the demoness' cunt for her own sustenance. The succubus lets out an inhuman howl of pleasure as her own orgasm begins to crush your cock, draining every last drop out of you.\n\n", false);
@@ -1392,7 +1392,7 @@ function nightSuccubiRepeat():void {
 			outputText("Your consciousness begins to fade as the orgasm subsides. The succubus pops her tit out of your mouth and squeezes more of her essence into the empty bottle. She licks your lips and flies away just in time for you to pass out.  ", false);
 			//Clear out any queue'ed events if bad-end
 			//coming.  PC has to dig his own grave.
-			if(flags[UNKNOWN_FLAG_NUMBER_00061] > 10) {
+			if(flags[CERULEAN_POTION_BAD_END_FUTA_COUNTER] > 10) {
 				player.removeStatusAffect("succubiNight");
 			}
 			fatigue(20);

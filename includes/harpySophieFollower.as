@@ -270,7 +270,7 @@ function followerSophieMainScreen():void {
 		addButton(8,"NoSleepWith",sleepWithSophieToggle);
 		outputText("\n\nYou're currently sharing your bed with Sophie at night, but you could kick her out, if you wanted.");
 	}
-	if(flags[SOPHIE_EGG_COUNTER] > 0) outputText("\n\n<b>Sophie's egg is sitting nearby.</b>");
+	if(flags[SOPHIE_CAMP_EGG_COUNTDOWN] > 0) outputText("\n\n<b>Sophie's egg is sitting nearby.</b>");
 	if(flags[SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) {
 		addButton(7,"Daughter",daughterCheckup);
 	}

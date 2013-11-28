@@ -495,18 +495,18 @@ function scyllaPtVTakeAdvantage():void {
 	scyllaSprite();
 	if(player.hasStatusAffect("Exgartuan") >= 0 && player.statusAffectv2("Exgartuan") == 0) {
 		flags[TIMES_MET_SCYLLA_IN_ADDICTION_GROUP]++;
-		flags[UNKNOWN_FLAG_NUMBER_00106]++;
+		flags[TIMES_SCYLLA_ADDICT_GROUP_EXPLOITED]++;
 		scyllaVTakeAdvantageWithExgartuan();
 		return;
 	}
 	if(player.totalCocks() >= 3) {
 		flags[TIMES_MET_SCYLLA_IN_ADDICTION_GROUP]++;
-		flags[UNKNOWN_FLAG_NUMBER_00106]++;
+		flags[TIMES_SCYLLA_ADDICT_GROUP_EXPLOITED]++;
 		addictionAdvantageMultiDickGreatTimeParty();
 		return;
 	}
 	flags[TIMES_MET_SCYLLA_IN_ADDICTION_GROUP]++;
-	flags[UNKNOWN_FLAG_NUMBER_00106]++;
+	flags[TIMES_SCYLLA_ADDICT_GROUP_EXPLOITED]++;
 	outputText("", true);
 	//[Corruption up]
 	stats(0,0,0,0,0,0,0,1);

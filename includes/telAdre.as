@@ -921,19 +921,19 @@ function barTelAdre():void {
 	if(flags[EDRYN_BIRF_COUNTDOWN] == 0) {
 		if(edrynBar()) {
 			//Edryn panic appearance!
-			if(flags[UNKNOWN_FLAG_NUMBER_00071] == 0 && flags[EDRYN_PREGNANCY_INCUBATION] > 0 && flags[UNKNOWN_FLAG_NUMBER_00069] == 0) {
+			if(flags[EDRYN_PREGNAT_AND_NOT_TOLD_PC_YET] == 0 && flags[EDRYN_PREGNANCY_INCUBATION] > 0 && flags[EDRYN_NUMBER_OF_KIDS] == 0) {
 				outputText("\n\nEdryn smiles when she sees you and beckons you towards her.  Fear and some kind of frantic need are painted across her face, imploring you to come immediately.  Whatever the problem is, it doesn't look like it can wait.", false);
 				doNext(findOutEdrynIsPregnant);
-				flags[UNKNOWN_FLAG_NUMBER_00071]++;
+				flags[EDRYN_PREGNAT_AND_NOT_TOLD_PC_YET]++;
 				return;
 			}
 			//Edryn re-preggers appearance!
-			if(flags[UNKNOWN_FLAG_NUMBER_00071] == 0 && flags[UNKNOWN_FLAG_NUMBER_00069] > 0) {
-				flags[UNKNOWN_FLAG_NUMBER_00071]++;
+			if(flags[EDRYN_PREGNAT_AND_NOT_TOLD_PC_YET] == 0 && flags[EDRYN_NUMBER_OF_KIDS] > 0) {
+				flags[EDRYN_PREGNAT_AND_NOT_TOLD_PC_YET]++;
 				outputText("\n\nEdryn smiles at you and yells, \"<i>Guess what " + player.short + "?  I'm pregnant again!</i>\"  There are some hoots and catcalls but things quickly die down.  You wonder if her scent will be as potent as before?", false);
 			}
 			//Edryn just had a kid and hasn't talked about it!
-			else if(flags[UNKNOWN_FLAG_NUMBER_00072] == 1) {
+			else if(flags[EDRYN_NEEDS_TO_TALK_ABOUT_KID] == 1) {
 				outputText("\n\nEdryn the centaur isn't pregnant anymore!  She waves excitedly at you, beckoning you over to see her.  It looks like she's already given birth to your child!", false);
 			}
 			//Mid-pregnancy appearance
@@ -941,7 +941,7 @@ function barTelAdre():void {
 				outputText("\n\nEdryn is seated at her usual table, and chowing down with wild abandon.  A stack of plates is piled up next to her.  Clearly she has been doing her best to feed her unborn child.  She notices you and waves, blushing heavily.", false); 
 			}
 			//Appearance changes if has had kids
-			else if(flags[UNKNOWN_FLAG_NUMBER_00069] > 0) {
+			else if(flags[EDRYN_NUMBER_OF_KIDS] > 0) {
 				outputText("\n\nEdryn is seated at her usual place, picking at a plate of greens and sipping a mug of the local mead.  She looks bored until she sees you.  Her expression brightens immediately, and Edryn fiddles with her hair and changes her posture slightly.  You aren't sure if she means to, but her cleavage is prominently displayed in an enticing manner.", false);
 			}
 			else if(player.statusAffectv1("Edryn") < 3) {
@@ -1079,19 +1079,19 @@ function oldbarTelAdre():void {
 	if(!urtaBusy()) {
 		if(edrynBar()) {
 			//Edryn panic appearance!
-			if(flags[UNKNOWN_FLAG_NUMBER_00071] == 0 && flags[EDRYN_PREGNANCY_INCUBATION] > 0 && flags[UNKNOWN_FLAG_NUMBER_00069] == 0) {
+			if(flags[EDRYN_PREGNAT_AND_NOT_TOLD_PC_YET] == 0 && flags[EDRYN_PREGNANCY_INCUBATION] > 0 && flags[EDRYN_NUMBER_OF_KIDS] == 0) {
 				outputText("\n\nEdryn smiles when she sees you and beckons you towards her.  Fear and some kind of frantic need are painted across her face, imploring you to come immediately.  Whatever the problem is, it doesn't look like it can wait.", false);
 				doNext(findOutEdrynIsPregnant);
-				flags[UNKNOWN_FLAG_NUMBER_00071]++;
+				flags[EDRYN_PREGNAT_AND_NOT_TOLD_PC_YET]++;
 				return;
 			}
 			//Edryn re-preggers appearance!
-			if(flags[UNKNOWN_FLAG_NUMBER_00071] == 0 && flags[UNKNOWN_FLAG_NUMBER_00069] > 0) {
-				flags[UNKNOWN_FLAG_NUMBER_00071]++;
+			if(flags[EDRYN_PREGNAT_AND_NOT_TOLD_PC_YET] == 0 && flags[EDRYN_NUMBER_OF_KIDS] > 0) {
+				flags[EDRYN_PREGNAT_AND_NOT_TOLD_PC_YET]++;
 				outputText("\n\nEdryn smiles at you and yells, \"<i>Guess what " + player.short + "?  I'm pregnant again!</i>\"  There are some hoots and catcalls but things quickly die down.  You wonder if her scent will be as potent as before?", false);
 			}
 			//Edryn just had a kid and hasn't talked about it!
-			else if(flags[UNKNOWN_FLAG_NUMBER_00072] == 1) {
+			else if(flags[EDRYN_NEEDS_TO_TALK_ABOUT_KID] == 1) {
 				outputText("\n\nEdryn the centaur isn't pregnant anymore!  She waves excitedly at you, beckoning you over to see her.  It looks like she's already given birth to your child!", false);
 			}
 			//Mid-pregnancy appearance
@@ -1099,7 +1099,7 @@ function oldbarTelAdre():void {
 				outputText("\n\nEdryn is seated at her usual table, and chowing down with wild abandon.  A stack of plates is piled up next to her.  Clearly she has been doing her best to feed her unborn child.  She notices you and waves, blushing heavily.", false); 
 			}
 			//Appearance changes if has had kids
-			else if(flags[UNKNOWN_FLAG_NUMBER_00069] > 0) {
+			else if(flags[EDRYN_NUMBER_OF_KIDS] > 0) {
 				outputText("\n\nEdryn is seated at her usual place, picking at a plate of greens and sipping a mug of the local mead.  She looks bored until she sees you.  Her expression brightens immediately, and Edryn fiddles with her hair and changes her posture slightly.  You aren't sure if she means to, but her cleavage is prominently displayed in an enticing manner.", false);
 			}
 			else if(player.statusAffectv1("Edryn") < 3) {

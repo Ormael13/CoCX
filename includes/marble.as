@@ -2724,9 +2724,9 @@ function marbleNightSleepFlavor():Boolean {
 	//boring
 	//PC has worms kills everything.
 	if(player.hasStatusAffect("infested") >= 0) {
-		if(flags[UNKNOWN_FLAG_NUMBER_00064] != 1) {
+		if(flags[MARBLE_GROSSED_OUT_BECAUSE_WORM_INFESTATION] != 1) {
 			outputText("As you go to lie down for the night, you find that Marble has gotten there before you.  You lie down next to her, but you can't help wishing that the two of you could have sex.  Suddenly, you feel Marble's hand grab ahold of your " + cockDescript(0) + ".  She give a bit of a squeal as one of the worms starts to move around inside the shaft.  She pulls open the blankets and looks closely at your dick for a few moments before picking up her bedroll and moving to a different part of the camp saying, \"<i>" + player.short + ", you get rid of those or I'm not going to sleep next to you or with you.</i>\"\n\n", false);
-			flags[UNKNOWN_FLAG_NUMBER_00064] = 1;
+			flags[MARBLE_GROSSED_OUT_BECAUSE_WORM_INFESTATION] = 1;
 		}
 		return false;
 	}

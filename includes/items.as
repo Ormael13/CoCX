@@ -517,10 +517,10 @@ function dropItem(monsterName:String):void {
 		else if(temp == 6) shortName = "W. Book";
 		else if(temp == 7) shortName = "B.Chitn";
 		//force honey drop if milked
-		if(flags[UNKNOWN_FLAG_NUMBER_00065] == 1) {
+		if(flags[FORCE_BEE_TO_PRODUCE_HONEY] == 1) {
 			if(rand(2) == 0) shortName = "BeeHony";
 			else shortName = "PurHony";
-			flags[UNKNOWN_FLAG_NUMBER_00065] = 0;
+			flags[FORCE_BEE_TO_PRODUCE_HONEY] = 0;
 		}
 	}
 	if(monsterName == "demons") {
@@ -2070,9 +2070,9 @@ function doItems(eventNo:Number):void {
 	if(eventNo == 1058) {
 		spriteSelect(49);
 		outputText("", true);
-		if(player.gems >= 100 || (player.gems >= 50 && flags[UNKNOWN_FLAG_NUMBER_00082] >= 2)) {
+		if(player.gems >= 100 || (player.gems >= 50 && flags[AMILY_MET_RATHAZUL] >= 2)) {
 			outputText("Rathazul hands you the Reducto with a nod before returning to his work.\n\n", false);
-			if(flags[UNKNOWN_FLAG_NUMBER_00082] >= 2) player.gems -= 50;
+			if(flags[AMILY_MET_RATHAZUL] >= 2) player.gems -= 50;
 			else player.gems -= 100;
 			shortName = "Reducto";
 			takeItem();
@@ -2856,7 +2856,7 @@ function destroyItems(itemName:String, minQuantity:Number):Boolean {
 function ceruleanPotion():void {
 	slimeFeed();
 	//Repeat genderless encounters
-	if(player.gender == 0 && flags[UNKNOWN_FLAG_NUMBER_00062] > 0) {
+	if(player.gender == 0 && flags[CERULEAN_POTION_NEUTER_ATTEMPTED] > 0) {
 		outputText("You take another sip of the Cerulean Potion.  You find it soothing and become very excited about the possibility of another visit from the succubus.", true);
 	}
 	else if(player.gender == 3 && flags[UNKNOWN_FLAG_NUMBER_00111] > 0) {
@@ -7768,8 +7768,8 @@ function extensionSerum():void {
 		outputText("\n\nThe tingling on your scalp is intolerable!  It's like your head is a swarm of angry ants, though you could swear your hair is growing so fast that you can feel it weighing you down more and more!", false);
 		flags[INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED]++;
 	}
-	if(flags[UNKNOWN_FLAG_NUMBER_00066] > 0 && player.hairType != 4) {
-		flags[UNKNOWN_FLAG_NUMBER_00066] = 0;
+	if(flags[HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] > 0 && player.hairType != 4) {
+		flags[HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
 		outputText("\n\n<b>Somehow you know that your " + hairDescript() + " is growing again.</b>", false);
 	}
 	if(flags[INCREASED_HAIR_GROWTH_TIME_REMAINING] < 7) flags[INCREASED_HAIR_GROWTH_TIME_REMAINING] = 7;
@@ -8531,11 +8531,11 @@ function reptilum():void {
 		}	
 	}
 	//-Hair stops growing!
-	if(flags[UNKNOWN_FLAG_NUMBER_00066] == 0 && changes < changeLimit && rand(4) == 0) {
+	if(flags[HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0 && changes < changeLimit && rand(4) == 0) {
 		outputText("\n\nYour scalp tingles oddly.  In a panic, you reach up to your " + hairDescript() + ", but thankfully it appears unchanged.\n\n", false);
 		outputText("(<b>Your hair has stopped growing.</b>)", false);
 		changes++;
-		flags[UNKNOWN_FLAG_NUMBER_00066]++;
+		flags[HAIR_GROWTH_STOPPED_BECAUSE_LIZARD]++;
 	}	
 	//Big physical changes:
 	//-Legs – Draconic, clawed feet
@@ -10172,9 +10172,9 @@ function shriveledTentacle():void {
 		outputText("\n\nYour balance slides way off, and you plop down on the ground as mass concentrates on your head.  Reaching up, you give a little shriek as you feel a disturbingly thick, squirming thing where your hair should be.  Pulling it down in front of your eyes, you notice it's still attached to your head; what's more, it's the same color as your hair used to be.  <b>You now have squirming tentacles in place of hair!</b>  As you gaze at it, a gentle heat starts to suffuse your hand.  The tentacles must be developing their characteristic stingers!  You quickly let go; you'll have to take care to keep them from rubbing on your skin at all hours.  On the other hand, they're quite short and you find you can now flex and extend them as you would any other muscle, so that shouldn't be too hard.  You settle on a daring, windswept look for now.", false);
 		player.hairType = 4;
 		player.hairLength = 5;
-		if(flags[UNKNOWN_FLAG_NUMBER_00066] == 0) {
+		if(flags[HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) {
 			outputText("  <b>(Your hair has stopped growing.)</b>", false);
-			flags[UNKNOWN_FLAG_NUMBER_00066] = 1;
+			flags[HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 1;
 		}
 		changes++;		
 		changes++;		

@@ -507,9 +507,9 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 					needNext = true;
 				}
 			}
-			if(flags[SOPHIE_EGG_COUNTER] > 0) {
-				flags[SOPHIE_EGG_COUNTER]--;
-				if(flags[SOPHIE_EGG_COUNTER] <= 0) {
+			if(flags[SOPHIE_CAMP_EGG_COUNTDOWN] > 0) {
+				flags[SOPHIE_CAMP_EGG_COUNTDOWN]--;
+				if(flags[SOPHIE_CAMP_EGG_COUNTDOWN] <= 0) {
 					sophiesEggHatches();
 					needNext = true;
 				}
@@ -830,9 +830,9 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(flags[UNKNOWN_FLAG_NUMBER_00125] < 0) flags[UNKNOWN_FLAG_NUMBER_00125] = 0;
 		}	
 		//Sophie PO'ed countdown
-		if(flags[UNKNOWN_FLAG_NUMBER_00096] > 0) {
-			flags[UNKNOWN_FLAG_NUMBER_00096]--;
-			if(flags[UNKNOWN_FLAG_NUMBER_00096] < 0) flags[UNKNOWN_FLAG_NUMBER_00096] = 0;
+		if(flags[SOPHIE_ANGRY_AT_PC_COUNTER] > 0) {
+			flags[SOPHIE_ANGRY_AT_PC_COUNTER]--;
+			if(flags[SOPHIE_ANGRY_AT_PC_COUNTER] < 0) flags[SOPHIE_ANGRY_AT_PC_COUNTER] = 0;
 		}
 		//PO countdown
 		if(flags[UNKNOWN_FLAG_NUMBER_00260] > 0) {
@@ -864,11 +864,11 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//Egg laying countdown for Sophie
-		if(flags[UNKNOWN_FLAG_NUMBER_00093] > 0) {
-			flags[UNKNOWN_FLAG_NUMBER_00093]--;
-			if(flags[UNKNOWN_FLAG_NUMBER_00093] < 0) flags[UNKNOWN_FLAG_NUMBER_00093] = 0;
+		if(flags[SOPHIE_WILD_EGG_COUNTDOWN_TIMER] > 0) {
+			flags[SOPHIE_WILD_EGG_COUNTDOWN_TIMER]--;
+			if(flags[SOPHIE_WILD_EGG_COUNTDOWN_TIMER] < 0) flags[SOPHIE_WILD_EGG_COUNTDOWN_TIMER] = 0;
 			//Lay an egg
-			if(flags[UNKNOWN_FLAG_NUMBER_00093] == 0) flags[UNKNOWN_FLAG_NUMBER_00094]++;
+			if(flags[SOPHIE_WILD_EGG_COUNTDOWN_TIMER] == 0) flags[SOPHIE_EGGS_LAID]++;
 		}
 		//Luststic countdown
 		if(player.hasStatusAffect("Luststick") >= 0) {
@@ -876,9 +876,9 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			//50% chance to lust spike
 			if(rand(2) == 0 && player.hasCock()) {
 				//Display if havent displayed
-				if(flags[UNKNOWN_FLAG_NUMBER_00095] == 0) {
+				if(flags[PC_CURRENTLY_LUSTSTICK_AFFECTED] == 0) {
 					outputText("\nYour body tingles, practically a slave to the effects of harpy lipstick.  Blood surges to " + sMultiCockDesc() + ", making you groan out loud with forced pleasure.  Unasked-for fantasies assault you, and you spend a few moments fantasizing about fucking feathery women before you come to your senses.\n", false);
-					flags[UNKNOWN_FLAG_NUMBER_00095]++;
+					flags[PC_CURRENTLY_LUSTSTICK_AFFECTED]++;
 					needNext = true;
 				}
 				stats(0,0,0,0,0,0,.1,0);
@@ -914,9 +914,9 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			urtaChewsOutPC(false);
 		}
 		//Count down rathazul event timers
-		if(flags[UNKNOWN_FLAG_NUMBER_00087] > 0) {
-			flags[UNKNOWN_FLAG_NUMBER_00087]--;
-			if(flags[UNKNOWN_FLAG_NUMBER_00087] < 0) flags[UNKNOWN_FLAG_NUMBER_00087] = 0; 
+		if(flags[RATHAZUL_CAMP_INTERACTION_COUNTDOWN] > 0) {
+			flags[RATHAZUL_CAMP_INTERACTION_COUNTDOWN]--;
+			if(flags[RATHAZUL_CAMP_INTERACTION_COUNTDOWN] < 0) flags[RATHAZUL_CAMP_INTERACTION_COUNTDOWN] = 0; 
 		}
 		//Check for gain of cat agility - requires legs, tail, and ears
 		if(player.tailType == TAIL_TYPE_CAT && player.lowerBody == LOWER_BODY_TYPE_CAT && player.earType == EARS_CAT) {
@@ -1012,23 +1012,23 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			needNext = true;
 		}
 		//Update Amily's Jojo fixing counter
-		if(flags[UNKNOWN_FLAG_NUMBER_00078] > 0) {
-			flags[UNKNOWN_FLAG_NUMBER_00078]--;
-			if(flags[UNKNOWN_FLAG_NUMBER_00078] < 0) flags[UNKNOWN_FLAG_NUMBER_00078] = 0;
+		if(flags[AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] > 0) {
+			flags[AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO]--;
+			if(flags[AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] < 0) flags[AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] = 0;
 		}
 		//Update Edryn's preggo counter
 		if(flags[EDRYN_PREGNANCY_INCUBATION] > 0) {
 			//Pregnancy only starts counting down once PC discovers it.
-			if(flags[UNKNOWN_FLAG_NUMBER_00071] > 0) flags[EDRYN_PREGNANCY_INCUBATION]--;
+			if(flags[EDRYN_PREGNAT_AND_NOT_TOLD_PC_YET] > 0) flags[EDRYN_PREGNANCY_INCUBATION]--;
 			//BIRF
 			if(flags[EDRYN_PREGNANCY_INCUBATION] <= 0) {
 				//Clear incubation
 				flags[EDRYN_PREGNANCY_INCUBATION] = 0;
 				//Add one kid
-				flags[UNKNOWN_FLAG_NUMBER_00069]++;
+				flags[EDRYN_NUMBER_OF_KIDS]++;
 				//Set 'needs to talk to edryn about
 				//da kid.
-				flags[UNKNOWN_FLAG_NUMBER_00072] = 1;
+				flags[EDRYN_NEEDS_TO_TALK_ABOUT_KID] = 1;
 			}
 		}
 		//Eggs in tits!
@@ -1232,7 +1232,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		//Remove marble anti-worm sex
 		if(player.hasStatusAffect("infested") < 0)
-			flags[UNKNOWN_FLAG_NUMBER_00064] = 0;
+			flags[MARBLE_GROSSED_OUT_BECAUSE_WORM_INFESTATION] = 0;
 		//Futa checks
 		if(player.hasPerk("Futa Form") >= 0) {
 			//(Dick regrowth) 
@@ -1761,7 +1761,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(player.hasStatusAffect("Luststick") >= 0) player.removeStatusAffect("Luststick");
 		}
 		//Sophie's love
-		if((player.hasPerk("Luststick Adapted") < 0 || rand(3) == 0) && model.time.hours == 10 && bimboSophie() && flags[SOPHIE_INCUBATION] == 0 && !sophieIsInSeason() && flags[SOPHIE_EGG_COUNTER] == 0) {
+		if((player.hasPerk("Luststick Adapted") < 0 || rand(3) == 0) && model.time.hours == 10 && bimboSophie() && flags[SOPHIE_INCUBATION] == 0 && !sophieIsInSeason() && flags[SOPHIE_CAMP_EGG_COUNTDOWN] == 0) {
 			bimboSophieLustStickSurprise();
 			needNext = true;
 		}
@@ -1811,7 +1811,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(flags[HEL_RAPED_TODAY] == 1) flags[HEL_RAPED_TODAY] = 0;
 			if(flags[FOUND_ISABELLA_AT_FARM_TODAY] == 1) flags[FOUND_ISABELLA_AT_FARM_TODAY] = 0;
 			//Marae met 2nd time?
-			if(flags[UNKNOWN_FLAG_NUMBER_00100] > 0) {
+			if(flags[CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] > 0) {
 				//If flower hasn't been burned down yet
 				if(flags[FUCK_FLOWER_KILLED] == 0) {
 					//Grow flower if it isn't fully grown.
@@ -1868,11 +1868,11 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 				if(flags[UNKNOWN_FLAG_NUMBER_00120] < 0) flags[UNKNOWN_FLAG_NUMBER_00120] = 0;
 			}
 			//Clear Whitney's Weekly limit
-			if(model.time.days % 7 == 0) flags[UNKNOWN_FLAG_NUMBER_00104] = 0;
+			if(model.time.days % 7 == 0) flags[WHITNEY_GEMS_PAID_THIS_WEEK] = 0;
 			//Clear 'has fucked milker today'
 			if(flags[UNKNOWN_FLAG_NUMBER_00112] > 0) flags[UNKNOWN_FLAG_NUMBER_00112] = 0;
 			//Reduce bad-end for cerulean herms number
-			if(flags[UNKNOWN_FLAG_NUMBER_00061] > 0) flags[UNKNOWN_FLAG_NUMBER_00061] -= 0.5;
+			if(flags[CERULEAN_POTION_BAD_END_FUTA_COUNTER] > 0) flags[CERULEAN_POTION_BAD_END_FUTA_COUNTER] -= 0.5;
 			//Update Urta's luv counter
 			if(flags[URTA_PC_AFFECTION_COUNTER] > 0) {
 				flags[URTA_PC_AFFECTION_COUNTER] -= .5;
@@ -1893,18 +1893,18 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 			//Tamani's Daughters stuff
 			//Lower countdown till next event
-			if(flags[UNKNOWN_FLAG_NUMBER_00057] > 0) {
-				flags[UNKNOWN_FLAG_NUMBER_00057]--;
-				trace("DAUGHTER PREGGO COUNTER: " + flags[UNKNOWN_FLAG_NUMBER_00057]);
+			if(flags[TAMANI_DAUGHTER_PREGGO_COUNTDOWN] > 0) {
+				flags[TAMANI_DAUGHTER_PREGGO_COUNTDOWN]--;
+				trace("DAUGHTER PREGGO COUNTER: " + flags[TAMANI_DAUGHTER_PREGGO_COUNTDOWN]);
 			}
 			//Decrease egg-laying time out.
 			if(flags[TAMANI_TIME_OUT] > 0) {
 				flags[TAMANI_TIME_OUT]--;
 				if(flags[TAMANI_TIME_OUT] < 0) flags[TAMANI_TIME_OUT] = 0;
 			}
-			if(flags[UNKNOWN_FLAG_NUMBER_00057] < 0) flags[UNKNOWN_FLAG_NUMBER_00057] = 0;
+			if(flags[TAMANI_DAUGHTER_PREGGO_COUNTDOWN] < 0) flags[TAMANI_DAUGHTER_PREGGO_COUNTDOWN] = 0;
 			//Put a cap on daughters if they havent been met yet.
-			if(flags[UNKNOWN_FLAG_NUMBER_00055] == 0) {
+			if(flags[TIMES_ENCOUNTED_TAMANIS_DAUGHTERS] == 0) {
 				if(player.statusAffectv2("Tamani") > 30)
 					player.changeStatusValue("Tamani",2,30);
 				
@@ -1972,15 +1972,15 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 					needNext = true;
 					outputText("<b>\nThe tingling on your scalp slowly fades away as the hair extension serum wears off.  Maybe it's time to go back to the salon for more?</b>", false);
 					//Restart hair growth if wuz lizard-stopped
-					if(flags[UNKNOWN_FLAG_NUMBER_00066] > 0) {
-						flags[UNKNOWN_FLAG_NUMBER_00066] = 0;
+					if(flags[HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] > 0) {
+						flags[HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
 						outputText("  <b>You hair is now growing normally again.</b>", false);
 					}
 					outputText("\n", false);
 				}
 			}
 			//Hair grows if not disabled by lizardness
-			if(flags[UNKNOWN_FLAG_NUMBER_00066] == 0) {
+			if(flags[HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) {
 				if(!needNext) needNext = growHair(.1);
 				else growHair(.1);
 			}
@@ -2377,13 +2377,13 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 					if(isabellaFollower()) flags[ISABELLA_MURBLE_BLEH] = 1;
 					//if amily is there, tag it for freakout
 					if(flags[AMILY_FOLLOWER] > 0) {
-						flags[UNKNOWN_FLAG_NUMBER_00085] = 2;
+						flags[MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 2;
 					}
 					//if Izma is there, tag for freakout!
 					if(flags[UNKNOWN_FLAG_NUMBER_00238] == 1) {
 						flags[UNKNOWN_FLAG_NUMBER_00237] = 1;
 					}
-					else flags[UNKNOWN_FLAG_NUMBER_00085] = 1;
+					else flags[MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 1;
 					player.createStatusAffect("No More Marble",0,0,0,0);
 				}
 			}
@@ -2416,13 +2416,13 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 					if(isabellaFollower()) flags[ISABELLA_MURBLE_BLEH] = 1;
 					//if amily is there, tag it for freakout
 					if(flags[AMILY_FOLLOWER] > 0) {
-						flags[UNKNOWN_FLAG_NUMBER_00085] = 2;
+						flags[MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 2;
 					}
 					//if Izma is there, tag for freakout!
 					if(flags[UNKNOWN_FLAG_NUMBER_00238] == 1) {
 						flags[UNKNOWN_FLAG_NUMBER_00237] = 1;
 					}
-					else flags[UNKNOWN_FLAG_NUMBER_00085] = 1;
+					else flags[MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 1;
 					player.createStatusAffect("No More Marble",0,0,0,0);
 				}
 			}
@@ -2481,9 +2481,9 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 					//(every morning, the player goes to Marble for milk, since she is at the camp, it does not cost them the first hour of the day)
 					//if amily is there, tag it for freakout
 					if(flags[AMILY_FOLLOWER] > 0) {
-						flags[UNKNOWN_FLAG_NUMBER_00085] = 2;
+						flags[MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 2;
 					}
-					else flags[UNKNOWN_FLAG_NUMBER_00085] = 1;
+					else flags[MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 1;
 					//if Izma is there, tag for freakout!
 					if(flags[UNKNOWN_FLAG_NUMBER_00238] == 1) {
 						flags[UNKNOWN_FLAG_NUMBER_00237] = 1;
@@ -2519,13 +2519,13 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 					//(every morning, the player goes to Marble for milk, since she is at the camp, it does not cost them the first hour of the day)
 					//if amily is there, tag it for freakout
 					if(flags[AMILY_FOLLOWER] > 0) {
-						flags[UNKNOWN_FLAG_NUMBER_00085] = 2;
+						flags[MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 2;
 					}
 					//if Izma is there, tag for freakout!
 					if(flags[UNKNOWN_FLAG_NUMBER_00238] == 1) {
 						flags[UNKNOWN_FLAG_NUMBER_00237] = 1;
 					}
-					else flags[UNKNOWN_FLAG_NUMBER_00085] = 1;
+					else flags[MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 1;
 				}
 			}
 			outputText("\n(You gain the <b>Marble's Milk</b> perk.  It boosts your strength and toughness, but requires that you drink Marble's Milk every day.)\n", false);

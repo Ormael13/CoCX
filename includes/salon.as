@@ -224,7 +224,7 @@ function hairGrow():void {
 	}
 	outputText("Lynnette grabs a bottle and squirts a white fluid into your hair.  You really hope it isn't your payment.  But it must not be, as within short order you feel the added weight of ", true);
 	temp = rand(3) + 3;
-	flags[UNKNOWN_FLAG_NUMBER_00066] = 0;
+	flags[HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
 	player.hairLength += temp;
 	outputText(num2Text(temp) + " more inches of " + player.hairColor + " hair.", false);
 	doNext(13);

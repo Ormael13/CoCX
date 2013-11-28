@@ -406,9 +406,9 @@ function cottonChat():void {
 	//(Edryn chat)
 	else if(choice == 2) {
 		//(If Edryn has been knocked up, and PC rejected it) 
-		if(flags[UNKNOWN_FLAG_NUMBER_00070] > 0) outputText("While you're doing your stretches, you find yourself chatting about the folks of Tel'Adre. \"<i>Edryn?</i>\" Cotton says, \"<i>I hear you knocked her up, then left her with the kid. Well, I think she'll make a great mom by herself, but really pet, what were you thinking? It was awfully cruel of you.</i>\" The rest of the workout is filled with more painful stretches, and Cotton assists you more roughly than normal.\n\n", false);
+		if(flags[EDRYN_NEVER_SEE_AGAIN] > 0) outputText("While you're doing your stretches, you find yourself chatting about the folks of Tel'Adre. \"<i>Edryn?</i>\" Cotton says, \"<i>I hear you knocked her up, then left her with the kid. Well, I think she'll make a great mom by herself, but really pet, what were you thinking? It was awfully cruel of you.</i>\" The rest of the workout is filled with more painful stretches, and Cotton assists you more roughly than normal.\n\n", false);
 		//(If Edryn has been knocked up, and PC didn't reject it)
-		else if(flags[UNKNOWN_FLAG_NUMBER_00069] > 0) outputText("While you're doing your stretches, you find yourself chatting about the folks of Tel'Adre. \"<i>Edryn?</i>\" Cotton says and giggles, \"<i>I hear you knocked her up, good on you. I think she'll make a great mom, and you " + player.mf("a great dad","as well") + ".</i>\"  She gives you a kiss on the cheek and continues the stretches.\n\n", false);
+		else if(flags[EDRYN_NUMBER_OF_KIDS] > 0) outputText("While you're doing your stretches, you find yourself chatting about the folks of Tel'Adre. \"<i>Edryn?</i>\" Cotton says and giggles, \"<i>I hear you knocked her up, good on you. I think she'll make a great mom, and you " + player.mf("a great dad","as well") + ".</i>\"  She gives you a kiss on the cheek and continues the stretches.\n\n", false);
 		//(If Edryn hasn't been knocked up) 
 		else outputText("While you're doing your stretches, you find yourself chatting about the folks of Tel'Adre. \"<i>Edryn?</i>\" Cotton says, \"<i>I've seen her around the Wet Bitch late at night. I hear she sells herself for money, though I've never purchased her services. She's a good guardswoman though. Saves a lot of lives.</i>\"\n\n", false);
 	}
@@ -1181,9 +1181,9 @@ function cottonPregnantAlertII():void {
 	outputText("\"<i>Hello, pet,</i>\" she says, and you notice worry in her voice.  There are slight bags under her eyes, and her crimson ponytail is a little unkempt, with hair jutting out at odd angles.  Something clearly has her frazzled.");
 	outputText("\n\n\"<i>I'll just come right out with it. I went to the Covenant today...  I'm pregnant,</i>\" she says, matter-of-factly, \"<i>and it's yours.</i>\"");
 	outputText("\n\n\"<i>I'd been taking some herbs to counteract pregnancy, but I guess it was just no match for you.");
-	if(flags[UNKNOWN_FLAG_NUMBER_00069] > 0 || flags[UNKNOWN_FLAG_NUMBER_00071] > 0) outputText("  Should have figured as much after you got Edryn pregnant.");
+	if(flags[EDRYN_NUMBER_OF_KIDS] > 0 || flags[EDRYN_PREGNAT_AND_NOT_TOLD_PC_YET] > 0) outputText("  Should have figured as much after you got Edryn pregnant.");
 	outputText("</i>\"  She wrenches her hands nervously and looks you in the eye. The cool, confident yoga instructor has clearly melted away, revealing the real her.  \"<i>I know we're not serious, but ");
-	if(flags[UNKNOWN_FLAG_NUMBER_00070] == 0) outputText("you'll stick with me through this, right?");
+	if(flags[EDRYN_NEVER_SEE_AGAIN] == 0) outputText("you'll stick with me through this, right?");
 	else outputText("you won't abandon me like you did Edryn, will you?");
 	outputText("</i>\"");
 	//[Leave Her] [Stay]
@@ -1197,10 +1197,10 @@ function beABadCottonDad():void {
 	outputText("You shake your head.  You certainly can't deal with a kid.  You tell her point blank that you want nothing to do with the child.  Tears well up in her eyes, and her mouth opens and closes several times, without a single sound coming out.");
 	outputText("\n\nAfter a moment, she squares her jaw, and a determined look comes over her face.  The confident woman you first met seems to reappear.  She wipes the tears from each eye, and states, \"<i>Fine then.  I can do this on my own.</i>\"");
 	outputText("\n\nShe turns to walk away, then stops, swivels back towards you ");
-	if(flags[UNKNOWN_FLAG_NUMBER_00070] == 0) outputText("and slaps you as hard as she can");
+	if(flags[EDRYN_NEVER_SEE_AGAIN] == 0) outputText("and slaps you as hard as she can");
 	else outputText("and punches you as hard as she can");
 	outputText(". \"<i>Fuck you 'pet'.");
-	if(flags[UNKNOWN_FLAG_NUMBER_00070] > 0) outputText("  That was for Edryn too.");
+	if(flags[EDRYN_NEVER_SEE_AGAIN] > 0) outputText("  That was for Edryn too.");
 	outputText("</i>\"  With that, she turns on her hoof and leaves.");
 	//bold
 	outputText("<b>(Cotton will no longer speak with you.)</b>");

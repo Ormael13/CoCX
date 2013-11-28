@@ -2448,7 +2448,7 @@ function displayStats(e:MouseEvent = null) {
 	if(flags[BROOKE_MET] > 0) outputText("<b>Brooke Affection: </b>" + Math.round(brookeAffection()) + "\n");
 	if(flags[UNKNOWN_FLAG_NUMBER_00218]+flags[UNKNOWN_FLAG_NUMBER_00219]+flags[UNKNOWN_FLAG_NUMBER_00220] > 0) outputText("<b>Body Parts Taken By Ceraph: </b>" + (flags[UNKNOWN_FLAG_NUMBER_00218]+flags[UNKNOWN_FLAG_NUMBER_00219]+flags[UNKNOWN_FLAG_NUMBER_00220]) + "\n", false);
 	if(flags[COTTON_KID_COUNT] > 0) outputText("<b>Children With Cotton: </b>" + flags[COTTON_KID_COUNT] + "\n");
-	if(flags[UNKNOWN_FLAG_NUMBER_00069] > 0) outputText("<b>Children With Edryn: </b>" + flags[UNKNOWN_FLAG_NUMBER_00069] + "\n", false);
+	if(flags[EDRYN_NUMBER_OF_KIDS] > 0) outputText("<b>Children With Edryn: </b>" + flags[EDRYN_NUMBER_OF_KIDS] + "\n", false);
 	if(flags[UNKNOWN_FLAG_NUMBER_00251]+flags[UNKNOWN_FLAG_NUMBER_00252] > 0) outputText("<b>Children With Izma: </b>" + (flags[UNKNOWN_FLAG_NUMBER_00251]+flags[UNKNOWN_FLAG_NUMBER_00252]) + "\n", false);
 	if(flags[MARBLE_KIDS] > 0) outputText("<b>Children With Marble:</b> " + flags[MARBLE_KIDS] + "\n", false);
 	if(flags[ANT_KIDS] > 0) outputText("<b>Ant Children With Phylla:</b> " + flags[ANT_KIDS] + "\n");
@@ -2462,12 +2462,12 @@ function displayStats(e:MouseEvent = null) {
 		var sophie:int = 0;
 		if(flags[SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) sophie++;
 		sophie += flags[SOPHIE_ADULT_KID_COUNT];
-		if(flags[SOPHIE_EGG_COUNTER] > 0) sophie++;
+		if(flags[SOPHIE_CAMP_EGG_COUNTDOWN] > 0) sophie++;
 		outputText(sophie + "\n");
 	}
 	if(player.statusAffectv2("Tamani") > 0) outputText("<b>Children With Tamani: </b>" + player.statusAffectv2("Tamani") + " (after all forms of natural selection)\n", false);
 	if(urtaKids() > 0) outputText("<b>Children With Urta: </b>" + urtaKids() + "\n");
-	if(flags[UNKNOWN_FLAG_NUMBER_00094] > 0) outputText("<b>Eggs Fertilized For Sophie: </b>" + (flags[UNKNOWN_FLAG_NUMBER_00094] + sophie) + "\n", false);
+	if(flags[SOPHIE_EGGS_LAID] > 0) outputText("<b>Eggs Fertilized For Sophie: </b>" + (flags[SOPHIE_EGGS_LAID] + sophie) + "\n", false);
 	if(emberAffection() > 0) outputText("<b>Ember Affection:</b> " + Math.round(emberAffection()) + "%\n");
 	if(emberChildren() > 0) {
 		outputText("<b>Ember Offspring (Males): </b>" + flags[EMBER_CHILDREN_MALES] + "\n");

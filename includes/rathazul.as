@@ -41,22 +41,22 @@ function campRathazul():void {
 		return;
 	}
 	//Special rathazul/follower scenes scenes.
-	if(rand(6) == 0 && flags[UNKNOWN_FLAG_NUMBER_00087] == 0) {
-		flags[UNKNOWN_FLAG_NUMBER_00087] = 3;
+	if(rand(6) == 0 && flags[RATHAZUL_CAMP_INTERACTION_COUNTDOWN] == 0) {
+		flags[RATHAZUL_CAMP_INTERACTION_COUNTDOWN] = 3;
 		//Pure jojo
-		if(flags[UNKNOWN_FLAG_NUMBER_00084] == 0 && player.hasStatusAffect("PureCampJojo") >= 0 && flags[UNKNOWN_FLAG_NUMBER_00080] == 0) {
+		if(flags[JOJO_RATHAZUL_INTERACTION_COUNTER] == 0 && player.hasStatusAffect("PureCampJojo") >= 0 && flags[JOJO_DEAD_OR_GONE] == 0) {
 			jojoOffersRathazulMeditation();
 			return;
 		}
-		if(flags[UNKNOWN_FLAG_NUMBER_00082] == 0 && flags[AMILY_FOLLOWER] == 1 && amilyFollower()) {
+		if(flags[AMILY_MET_RATHAZUL] == 0 && flags[AMILY_FOLLOWER] == 1 && amilyFollower()) {
 			AmilyIntroducesSelfToRathazul();
 			return;
 		}
-		if(flags[UNKNOWN_FLAG_NUMBER_00082] == 1 && flags[AMILY_FOLLOWER] == 1 && amilyFollower()) {
+		if(flags[AMILY_MET_RATHAZUL] == 1 && flags[AMILY_FOLLOWER] == 1 && amilyFollower()) {
 			amilyIngredientDelivery();
 			return;
 		}
-		if(flags[UNKNOWN_FLAG_NUMBER_00082] == 2 && flags[AMILY_FOLLOWER] == 1 && amilyFollower()) {
+		if(flags[AMILY_MET_RATHAZUL] == 2 && flags[AMILY_FOLLOWER] == 1 && amilyFollower()) {
 			amilyAsksAboutRathazulsVillage();
 			return;
 		}
@@ -162,7 +162,7 @@ function rathazulWorkOffer():Boolean {
 	var reductos:Number = 0;
 	if(player.hasStatusAffect("Camp Rathazul") >= 0 && player.statusAffectv2("metRathazul") >= 4) {
 		outputText("The rat hurries over to his supplies and produces a container of paste, looking rather proud of himself, \"<i>Good news everyone!  I've developed a paste you could use to shrink down any, ah, oversized body parts.  The materials are expensive though, so I'll need ", false);
-		if(flags[UNKNOWN_FLAG_NUMBER_00082] >= 2) outputText("50", false);
+		if(flags[AMILY_MET_RATHAZUL] >= 2) outputText("50", false);
 		else outputText("100", false);
 		outputText(" gems for each jar of ointment you want.</i>\"\n\n", false);
 		totalOffers++;

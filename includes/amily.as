@@ -1432,9 +1432,9 @@ function thisFunctionProbablySucksTooOhYeahAmilyFunction():void {
 	flags[AMILY_CLOTHING] = "rags";
 	//if marble is there, tag it for freakout
 	if(player.hasStatusAffect("Camp Marble") >= 0) {
-		flags[UNKNOWN_FLAG_NUMBER_00085] = 1;
+		flags[MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 1;
 	}
-	else flags[UNKNOWN_FLAG_NUMBER_00085] = 2;
+	else flags[MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 2;
 	//if Izma is there, tag for freekout!
 	if(flags[UNKNOWN_FLAG_NUMBER_00238] == 1) {
 		flags[UNKNOWN_FLAG_NUMBER_00236] = 1;
@@ -2416,12 +2416,12 @@ function amilyFollowerEncounter():void {
 		return;
 	}	
 	//Jojo + Amily Spar
-	if(flags[AMILY_FOLLOWER] == 1 && flags[UNKNOWN_FLAG_NUMBER_00074] == 1 && flags[UNKNOWN_FLAG_NUMBER_00075] == 0 && player.hasStatusAffect("PureCampJojo") >= 0) {
+	if(flags[AMILY_FOLLOWER] == 1 && flags[AMILY_MET_PURE_JOJO] == 1 && flags[AMILY_SPAR_WITH_PURE_JOJO] == 0 && player.hasStatusAffect("PureCampJojo") >= 0) {
 		pureJojoAndAmilySpar();
 		return;
 	}
 	//Amily
-	if(flags[AMILY_FOLLOWER] == 1 && flags[UNKNOWN_FLAG_NUMBER_00077] == 1 && hasItem("PurHony",1) && flags[UNKNOWN_FLAG_NUMBER_00078] == 0 && flags[UNKNOWN_FLAG_NUMBER_00079] == 0) 
+	if(flags[AMILY_FOLLOWER] == 1 && flags[AMILY_WAIT_FOR_PC_FIX_JOJO] == 1 && hasItem("PurHony",1) && flags[AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0 && flags[JOJO_FIXED_STATUS] == 0) 
 	{
 		fixJojoOOOOHYEEEEAHSNAPINTOASLIMJIM();
 		return;
@@ -2631,7 +2631,7 @@ function fuckTheMouseBitch():void {
 	var babies:Number = 0;
 	var bText:String = "";
 	//[Amily rejects sex]
-	if(flags[UNKNOWN_FLAG_NUMBER_00077] > 0) {
+	if(flags[AMILY_WAIT_FOR_PC_FIX_JOJO] > 0) {
 		outputText("Amily pushes you away and says, \"<i>Not until we fix Jojo.</i>\"  You sigh and grumble.  No sex today!", false);
 		doNext(amilyFollowerEncounter);
 		return;
@@ -4239,7 +4239,7 @@ function corruptAmilysPussyGetsMotherfuckingFucked():void {
 
 	outputText("\"<i>Torturing myself you say? I think you're right. Maybe I should see if ", false);
 	//[(if Jojo's corrupt)
-	if(monk >= 5 && flags[UNKNOWN_FLAG_NUMBER_00080] == 0) outputText("Jojo wants to play,", false);
+	if(monk >= 5 && flags[JOJO_DEAD_OR_GONE] == 0) outputText("Jojo wants to play,", false);
 	//(else)
 	else outputText("I can't find someone else to play with,", false);
 	outputText("</i>\" you say, nonchalantly attempting to pull away from her. \"<i>No!</i>\" Amily screams; her legs tighten about your waist with such force that she actually lifts herself off of the ground in her eagerness to plant herself firmly against your crotch, rubbing her slavering pussy against you. \"<i>Mine! My fuck! Mine!</i>\" she squeaks indignantly. You laugh at how far you've pushed your little mouse slave.  Sliding your " + cockDescript(0) + " against her pussy, you bend down and grope her breasts roughly, drawing a desperate moan from her; slowly you get closer to her ears, then whisper, \"<i>Go ahead,</i>\" while humping against her to further excite her.\n\n", false);
@@ -6466,9 +6466,9 @@ function rapeCorruptAmily4Epilogue():void {
 	}
 	//if marble is there, tag it for freakout
 	if(player.hasStatusAffect("Camp Marble") >= 0) {
-		flags[UNKNOWN_FLAG_NUMBER_00085] = 1;
+		flags[MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 1;
 	}
-	else flags[UNKNOWN_FLAG_NUMBER_00085] = 2;
+	else flags[MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 2;
 	//Disable amily encounters in the village!
 	flags[AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 1;
 	doNext(13);	

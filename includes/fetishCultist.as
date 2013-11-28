@@ -582,7 +582,7 @@ function swimsuitVibrators():void {
 		monster.lust = 98;
 		monster.HP = 2;
 		player.lust = 100;
-		flags[UNKNOWN_FLAG_NUMBER_00089] = monster.XP;
+		flags[COMBAT_BONUS_XP_VALUE] = monster.XP;
 		eventParser(5007);
 		stats(0,0,0,0,1,-3,-100,0);
 	}
@@ -682,7 +682,7 @@ function fetishCultistHasAMilkFetish():void {
 
 	outputText("You see the cultist is sleeping on the ground, still in the fantasy she created.", false);
 	//[You have found 1xBee Honey]
-	flags[UNKNOWN_FLAG_NUMBER_00065] = 1;
+	flags[FORCE_BEE_TO_PRODUCE_HONEY] = 1;
 	//set lust to 0, increase sensitivity slightly
 	stats(0,0,0,0,.2,0,-100,0);
 	//You've now been milked, reset the timer for that

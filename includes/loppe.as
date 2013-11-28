@@ -368,7 +368,7 @@ function askLoppeAboutChildren():void {
 	outputText("\n\nIt makes sense she wouldn't want to be a mother right now... but, what about being a father?  How can she control that?");
 	outputText("\n\nLoppe grins at you.  \"<i>I have taken special measures to ensure neither my partners nor I will end up with an unexpected package.</i>\"");
 	//(If EdrynKids or CottonKids =>1: 
-	if(flags[UNKNOWN_FLAG_NUMBER_00069] + flags[COTTON_KID_COUNT] > 0) outputText("\n\nYou warn her that might not be enough, as you've learned the hard way you're a bit too potent for most herbal contraceptives to handle.");
+	if(flags[EDRYN_NUMBER_OF_KIDS] + flags[COTTON_KID_COUNT] > 0) outputText("\n\nYou warn her that might not be enough, as you've learned the hard way you're a bit too potent for most herbal contraceptives to handle.");
 	
 	outputText("\n\nLoppe winks.  \"<i>I know herbs aren't totally reliable for a fact, plus I've been around, so I realized I needed something a bit more... permanent... some time ago.  I've had a local wizard place a spell on me to make me completely sterile; and if I ever want to have kids, all I need to do is say a small incantation and the spell vanishes.</i>\"");
 	

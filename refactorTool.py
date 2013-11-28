@@ -761,7 +761,11 @@ def updateFlagNames():
 	import flagRefactor
 	changeList = flagRefactor.getChangedFlags()
 
-	
+	if not changeList:
+		print "You have no changes in flagRefactor.py!"
+		print "Exiting early because there are no changes to be made"
+		return
+
 	filelist = os.listdir("./includes")
 	print filelist
 	flagNum = 0
@@ -785,6 +789,19 @@ def updateFlagNames():
 					tmp = fileH.write(tmp)
 				
 
+	# finally, clean out the changes from the script so we'll not try to replace them again in the future.
+
+
+	with open("flagRefactor.py", "r") as fileH:
+		tmp = fileH.read()
+
+	tmpO = tmp
+
+	for oldVal, newVal in changeList:
+		tmp = tmp.replace(oldVal, newVal)
+	if writeToFiles:
+		with open("flagRefactor.py", "w") as fileH:
+			tmp = fileH.write(tmp)
 
 
 if __name__ == "__main__":
@@ -793,7 +810,7 @@ if __name__ == "__main__":
 
 	if len(sys.argv) > 1:
 		if "--writeFiles" in sys.argv:
-			print "Writing to files!"
+			print "This run will write to files!"
 			writeToFiles = True
 	#cleanEventNumbers()
 	#cleanStaleDoEventIfs(getFuncDict())
@@ -814,3 +831,9 @@ if __name__ == "__main__":
 	#pronouninate()
 	#insertDescripts()
 	updateFlagNames()
+
+	if not writeToFiles:
+		print "Did not write files because"
+		print "--writeFiles not specified"
+
+	print "Complete"

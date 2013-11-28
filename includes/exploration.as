@@ -52,7 +52,7 @@ function doExplore():void {
 function explorePageII():void {
 	flags[EXPLORATION_PAGE] = 2;
 	var highMountain:Number = 0;
-	if(flags[UNKNOWN_FLAG_NUMBER_00088] > 0) highMountain = 95;
+	if(flags[DISCOVERED_HIGH_MOUNTAIN] > 0) highMountain = 95;
 	menu();
 	if(highMountain > 0) addButton(0,"High Mountain",eventParser,highMountain);
 	if(flags[BOG_EXPLORED] > 0) addButton(1,"Bog",exploreBog);
@@ -215,7 +215,7 @@ function exploreDeepwoods():void {
 	}
 	//Tamani 20% encounter rate
 	if(flags[TAMANI_TIME_OUT] == 0 && rand(5) == 0 && player.gender > 0 && (player.totalCocks() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)) {
-		if(player.totalCocks() > 0 && flags[UNKNOWN_FLAG_NUMBER_00057] == 0 && int(player.statusAffectv2("Tamani")/2) >= 12) {
+		if(player.totalCocks() > 0 && flags[TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0 && int(player.statusAffectv2("Tamani")/2) >= 12) {
 			encounterTamanisDaughters();
 		}
 		else
@@ -335,7 +335,7 @@ function exploreForest():void {
 		chooser = 1;
 	}
 	//If Jojo lives in camp, never encounter him
-	if(player.hasStatusAffect("PureCampJojo") >= 0 || flags[UNKNOWN_FLAG_NUMBER_00080] == 1) {
+	if(player.hasStatusAffect("PureCampJojo") >= 0 || flags[JOJO_DEAD_OR_GONE] == 1) {
 		chooser = rand(3);
 		if(chooser >= 1) chooser++;
 	}
@@ -401,7 +401,7 @@ function exploreForest():void {
 		else {
 			//Tamani 25% of all goblin encounters encounter rate
 			if(rand(4) <= 0 && flags[TAMANI_TIME_OUT] == 0 && player.gender > 0 && (player.totalCocks() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)) {
-				if(player.totalCocks() > 0 && flags[UNKNOWN_FLAG_NUMBER_00057] == 0 && int(player.statusAffectv2("Tamani")/2) >= 12) {
+				if(player.totalCocks() > 0 && flags[TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0 && int(player.statusAffectv2("Tamani")/2) >= 12) {
 					encounterTamanisDaughters();
 				}
 				else
@@ -617,13 +617,13 @@ function exploreDesert():void {
 		return;
 	}
 	//int over 50?  Chance of alice encounter!
-	if(rand(4)==0 && player.inte > 50 && flags[UNKNOWN_FLAG_NUMBER_00101] == 0) {
+	if(rand(4)==0 && player.inte > 50 && flags[FOUND_WIZARD_STAFF] == 0) {
 		outputText("", true);
 		outputText("While exploring the desert, you see a plume of smoke rising in the distance.  You change direction and approach the soot-cloud carefully.  It takes a few moments, but after cresting your fourth dune, you locate the source.  You lie low, so as not to be seen, and crawl closer for a better look.\n\n", false);
 		outputText("A library is burning up, sending flames dozens of feet into the air.  It doesn't look like any of the books will survive, and most of the structure has already been consumed by the hungry flames.  The source of the inferno is curled up next to it.  It's a naga!  She's tall for a naga, at least seven feet if she stands at her full height.  Her purplish-blue skin looks quite exotic, and she wears a flower in her hair.  The naga is holding a stick with a potato on the end, trying to roast the spud on the library-fire.  It doesn't seem to be going well, and the potato quickly lights up from the intense heat.\n\n", false);
 		outputText("The snake-woman tosses the burnt potato away and cries, \"<i>Hora hora.</i>\"  She suddenly turns and looks directly at you.  Her gaze is piercing and intent, but she vanishes before you can react.  The only reminder she was ever there is a burning potato in the sand.   Your curiosity overcomes your caution, and you approach the fiery inferno.  There isn't even a trail in the sand, and the library is going to be an unsalvageable wreck in short order.   Perhaps the only item worth considering is the stick with the burning potato.  It's quite oddly shaped, and when you reach down to touch it you can feel a resonant tingle.  Perhaps it was some kind of wizard's staff?\n\n", false);
 		shortName = "W.Staff";
-		flags[UNKNOWN_FLAG_NUMBER_00101]++;
+		flags[FOUND_WIZARD_STAFF]++;
 		menuLoc = 2;
 		takeItem();
 		return;
@@ -715,7 +715,7 @@ function walkingDesertStatBoost():void {
 }
 //Explore High Mountain
 function exploreHighMountain():void {
-	flags[UNKNOWN_FLAG_NUMBER_00088]++;
+	flags[DISCOVERED_HIGH_MOUNTAIN]++;
 	doNext(1);
 	var chooser:Number = rand(3);
 	//Boosts mino and hellhound rates!
@@ -733,7 +733,7 @@ function exploreHighMountain():void {
 		return;
 	}
 	//Minerva
-	if(flags[UNKNOWN_FLAG_NUMBER_00088] % 8 == 0) {
+	if(flags[DISCOVERED_HIGH_MOUNTAIN] % 8 == 0) {
 		encounterMinerva();
 		return;
 	}
@@ -792,7 +792,7 @@ function exploreHighMountain():void {
 			return;
 		}
 		else {
-			if(flags[UNKNOWN_FLAG_NUMBER_00090] == 0) meetSophie();
+			if(flags[MET_SOPHIE_COUNTER] == 0) meetSophie();
 			else meetSophieRepeat();
 		}
 	}
@@ -807,9 +807,9 @@ function exploreMountain():void {
 		return;
 	}
 	//Discover 'high mountain' at level 5 or 40 explores of mountain
-	if((player.level >= 5 || player.exploredMountain >= 40) && flags[UNKNOWN_FLAG_NUMBER_00088] == 0) {
+	if((player.level >= 5 || player.exploredMountain >= 40) && flags[DISCOVERED_HIGH_MOUNTAIN] == 0) {
 		outputText("While exploring the mountain, you come across a relatively safe way to get at its higher reaches.  You judge that with this route you'll be able to get about two thirds of the way up the mountain.  With your newfound discovery fresh in your mind, you return to camp.\n\n(<b>High Mountain exploration location unlocked!</b>)", true);
-		flags[UNKNOWN_FLAG_NUMBER_00088]++;
+		flags[DISCOVERED_HIGH_MOUNTAIN]++;
 		doNext(13);
 		return;
 	}
@@ -1331,7 +1331,7 @@ function boatExplore():void {
 		return;
 	}
 	//10% chance of corrupt Marae followups
-	if((debug || rand(10) == 0) && flags[UNKNOWN_FLAG_NUMBER_00100] == 0 && player.hasStatusAffect("Met Corrupt Marae") >= 0 && player.gender > 0) {
+	if((debug || rand(10) == 0) && flags[CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] == 0 && player.hasStatusAffect("Met Corrupt Marae") >= 0 && player.gender > 0) {
 		level2MaraeEncounter();
 		return;
 	}

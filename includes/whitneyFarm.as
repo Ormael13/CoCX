@@ -592,7 +592,7 @@ function getMilked():void {
 	//Ez mode cap doubles
 	if(flags[EASY_MODE_ENABLE_FLAG] == 1) cap *= 2;
 	if(debug) {
-		flags[UNKNOWN_FLAG_NUMBER_00104] = 0;
+		flags[WHITNEY_GEMS_PAID_THIS_WEEK] = 0;
 		cap = 9999;
 	}
 	liters = int(player.lactationQ()* (rand(10) + 90) / 100)/1000;
@@ -601,18 +601,18 @@ function getMilked():void {
 	payout = int(liters*2*4);
 	outputText("The machinery displays " + liters + " liters of milk", false);
 	//If already at cap
-	if(flags[UNKNOWN_FLAG_NUMBER_00104] >= cap) {
+	if(flags[WHITNEY_GEMS_PAID_THIS_WEEK] >= cap) {
 		outputText(" and displays a warning that <b>you're producing more than Whitney can pay for</b>", false);
 		payout = 0;		
 	}
 	if(payout > 0) {
 		//If over cap reduce payout to the difference
-		if(payout + flags[UNKNOWN_FLAG_NUMBER_00104] > cap) payout = cap - flags[UNKNOWN_FLAG_NUMBER_00104];
+		if(payout + flags[WHITNEY_GEMS_PAID_THIS_WEEK] > cap) payout = cap - flags[WHITNEY_GEMS_PAID_THIS_WEEK];
 		//Keep track of how much is paid
-		flags[UNKNOWN_FLAG_NUMBER_00104] += payout;
+		flags[WHITNEY_GEMS_PAID_THIS_WEEK] += payout;
 		outputText(" and automatically dispenses " + num2Text(payout) + " gems.  Whitney really went all out with this setup!", false);
 		//Display a warning that you've capped out.
-		if(flags[UNKNOWN_FLAG_NUMBER_00104] >= cap) outputText("  <b>The machinery warns you that Whitney can't afford any more this week!</b>", false);
+		if(flags[WHITNEY_GEMS_PAID_THIS_WEEK] >= cap) outputText("  <b>The machinery warns you that Whitney can't afford any more this week!</b>", false);
 		player.gems += payout;
 	}
 	else outputText(".", false);
@@ -882,7 +882,7 @@ function cockPumping():void {
 	//Ez mode cap doubles
 	if(flags[EASY_MODE_ENABLE_FLAG] == 1) cap *= 2;
 	if(debug) {
-		flags[UNKNOWN_FLAG_NUMBER_00104] = 0;
+		flags[WHITNEY_GEMS_PAID_THIS_WEEK] = 0;
 		cap = 9999;
 	}
 	//Get rid of extra digits
@@ -895,18 +895,18 @@ function cockPumping():void {
 		payout = 2 + int(cumQ/200)*2;
 	}
 	//If over cap!
-	if(flags[UNKNOWN_FLAG_NUMBER_00104] >= cap) {
+	if(flags[WHITNEY_GEMS_PAID_THIS_WEEK] >= cap) {
 		payout = 0;
 		outputText("It also shows a warning: <b>FUNDS EXHAUSTED.</b>  ", false);
 	}
 	//Reduce payout if it would push past
-	else if(flags[UNKNOWN_FLAG_NUMBER_00104] + payout >= cap) {
-		payout = cap - flags[UNKNOWN_FLAG_NUMBER_00104];
+	else if(flags[WHITNEY_GEMS_PAID_THIS_WEEK] + payout >= cap) {
+		payout = cap - flags[WHITNEY_GEMS_PAID_THIS_WEEK];
 		outputText("It also shows a warning: <b>Not enough gems for full payment.  GEMS NOW EXHAUSTED.</b>  ", false);
 	}	
 	if(payout > 0) {
 		player.gems += payout;
-		flags[UNKNOWN_FLAG_NUMBER_00104] += payout;
+		flags[WHITNEY_GEMS_PAID_THIS_WEEK] += payout;
 		statScreenRefresh();
 		if(player.cumQ() < 1000) player.cumMultiplier++;
 		if(payout == 1) outputText(Num2Text(payout) + " gem rolls out into a collection plate.  Whitney really put a lot of work into this!  You pocket the gem and g", false);

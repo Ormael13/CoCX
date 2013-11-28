@@ -167,7 +167,7 @@ function getASprout():void {
 	clearOutput();
 	outputText("Around the edge of your camp, you spot some plant-life beginning to sprout.  The barren, wasteland crust is fractured and broken, giving up a leafy green shoot.  It only reaches up to your knee, but the plant looks healthy and young.  Perhaps it will grow larger?  There is a central stem that supports most of the weight, but a dozen branches fork off, supporting a bevy of shiny green leaves.");
 	outputText("\n\nYou briefly wonder how something could take root in such soil and be so successful, but then you recall the corrupt goddess, Marae.  She mentioned something about having roots through this world, didn't she?");
-	if(flags[UNKNOWN_FLAG_NUMBER_00100] == 2) outputText("  She even promised to plant a tree in your camp...");
+	if(flags[CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] == 2) outputText("  She even promised to plant a tree in your camp...");
 	outputText("  You look closer and see purple veins on the undersides of the leaves, throbbing with what can only be the tainted liquids that suffuse much of this planet.  Fully grown, it might spread its corruption to your camp.\n\n<b>Do you destroy it?</b>");
 	flags[FUCK_FLOWER_LEVEL] = 1;
 	flags[FUCK_FLOWER_GROWTH_COUNTER] = 0;

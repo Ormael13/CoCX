@@ -41,7 +41,7 @@ function tentacleJojo():Boolean {
 	return false;
 }
 function campCorruptJojo():Boolean {
-	if(monk >= 5 && player.hasStatusAffect("noJojo") < 0 && flags[UNKNOWN_FLAG_NUMBER_00080] == 0) return true;
+	if(monk >= 5 && player.hasStatusAffect("noJojo") < 0 && flags[JOJO_DEAD_OR_GONE] == 0) return true;
 	return false;
 }
 function jojoMutationOffer():void {
@@ -64,12 +64,12 @@ function corruptCampJojo():void {
 		return;
 	}
 	//Oh shit goes down! (Wiv Tentacles)
-	if(amilyFollower && flags[UNKNOWN_FLAG_NUMBER_00081] == 0 && rand(10) <= 1 && flags[AMILY_FOLLOWER] == 1 && player.hasStatusAffect("Tentacle Jojo") >= 0) {
+	if(amilyFollower && flags[AMILY_DISCOVERED_TENTATLE_JOJO] == 0 && rand(10) <= 1 && flags[AMILY_FOLLOWER] == 1 && player.hasStatusAffect("Tentacle Jojo") >= 0) {
 		amilyDiscoversJojoWithTentaclesAndShitOhBoy();
 		return;
 	}
 	//Oh shit goes down! (No tentacles)
-	else if(flags[UNKNOWN_FLAG_NUMBER_00076] == 0 && rand(10) <= 1 && flags[AMILY_FOLLOWER] == 1 && amilyFollower() && player.hasStatusAffect("Tentacle Jojo") < 0) {
+	else if(flags[AMILY_PISSED_PC_CORRUPED_JOJO] == 0 && rand(10) <= 1 && flags[AMILY_FOLLOWER] == 1 && amilyFollower() && player.hasStatusAffect("Tentacle Jojo") < 0) {
 		amilyIsPissedAtYouForRuiningJojo();
 		return;
 	}
@@ -477,7 +477,7 @@ function jojoMilkPay(tentacle:Boolean = false):void {
 	if(flags[EASY_MODE_ENABLE_FLAG] == 1) cap *= 2;
 	if(debug) 
 	{
-		flags[UNKNOWN_FLAG_NUMBER_00104] = 0;
+		flags[WHITNEY_GEMS_PAID_THIS_WEEK] = 0;
 		cap = 9999;
 	}
 	//Get rid of extra digits
@@ -495,18 +495,18 @@ function jojoMilkPay(tentacle:Boolean = false):void {
 		payout = 2 + int(cumQ/200)*2;
 	}
 	//Reduce payout if it would push past
-	if(flags[UNKNOWN_FLAG_NUMBER_00104] + payout >= cap) {
-		payout = cap - flags[UNKNOWN_FLAG_NUMBER_00104];
+	if(flags[WHITNEY_GEMS_PAID_THIS_WEEK] + payout >= cap) {
+		payout = cap - flags[WHITNEY_GEMS_PAID_THIS_WEEK];
 		outputText("It also shows a warning: <b>Not enough gems for full payment.  GEMS NOW EXHAUSTED.</b>  ", false);
 	}
 	//If over cap!
-	else if(flags[UNKNOWN_FLAG_NUMBER_00104] >= cap) {
+	else if(flags[WHITNEY_GEMS_PAID_THIS_WEEK] >= cap) {
 		payout = 0;
 		outputText("It also shows a warning: <b>FUNDS EXHAUSTED.</b>  ", false);
 	}
 	if(payout > 0) {
 		player.gems += payout;
-		flags[UNKNOWN_FLAG_NUMBER_00104] += payout;
+		flags[WHITNEY_GEMS_PAID_THIS_WEEK] += payout;
 		statScreenRefresh();
 		flags[UNKNOWN_FLAG_NUMBER_00331]++;
 		if(payout == 1) outputText(Num2Text(payout) + " gem rolls out into a collection plate.  Whitney really put a lot of work into this!  You pocket the gem and g", false);
