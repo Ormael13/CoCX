@@ -302,7 +302,7 @@ function acceptFellatrixOral():void {
 	}
 	//After 3+ blowjobs
 	if(timesFellatrixSucked() >= 3 && flags[UNKNOWN_FLAG_NUMBER_00157] == 0) {
-		if(flags[UNKNOWN_FLAG_NUMBER_00054] > 0) {
+		if(flags[NUMBER_OF_TIMES_MET_SCYLLA] > 0) {
 			outputText("The familiar slick and slurping brutality is enacted by Dominika's mouth upon you. Those lips engulf you, devour you, inhale you, and in the haze of pleasure you love every single moment. They shine in your mind, glamorized, an immaculate altar to which you can only cum, and cum, and cum, and....\n\n", false);
 	
 			outputText("As you regain your composure, gasping on her bed, your mind wanders. The idle conversation that passes between you two is casual – Dominika is noncommittal for much of it, busy wiping off her chest. Glancing over you see her tongue slip over her lips in a final clean and shiver. As you stare at the pillows you have grown intimate with a thought occurs to you. Dominika is not the first traveller you have met with such a hunger, but she seems more than any other to be in control of it. It's possible that she could know something that would be helpful to Scylla. You ask her if she's ever met the nun.\n\n", false);
@@ -569,7 +569,7 @@ function agreeWithDominika():void {
 	outputText("", true);
 	//(Corruption increases)
 	stats(0,0,0,0,0,0,0,2);
-	if(flags[UNKNOWN_FLAG_NUMBER_00054] > 0) {
+	if(flags[NUMBER_OF_TIMES_MET_SCYLLA] > 0) {
 		outputText("You pause for a moment, then nod. Dominika's lips curl in a grin that manages to be both sinister and playful at the same time, running a hand over your shoulder before suddenly and aggressively straddling your lap. She bends down to you, biting your lip just barely lightly enough to not draw blood. Her hand caresses down the side of your head and your neck almost possessively.  The action turns into a kiss of some small passion, the smell of your crotch still fresh on her breath as those slippery ebon pillows graze over your own inferior display. She breathes heavily over you, looking in your eyes and filling your vision with her own blue eyes.\n\n", false);
 	
 		outputText("\"<i>I knew you were strong when I saw you,</i>\" she purrs softly. Though the folds of her skirt cover the belt you can feel its steel firmness pressing into your lap. \"<i>And through you, I can recover the strength stolen from me.</i>\" Her hand runs along your " + hairDescript() + " before she climbs off you, glancing out the window. \"<i>You should go though,</i>\" she says, \"<i>It's late.</i>\" There's a pause, before she says something she's never said before. \"<i>I look forward to seeing you again.</i>\"\n\n", false);
@@ -614,7 +614,7 @@ function disagreeDominika():void {
 	//(Corruption decrease)
 	stats(0,0,0,0,0,0,0,-2);
 	flags[UNKNOWN_FLAG_NUMBER_00157] = 3;
-	if(flags[UNKNOWN_FLAG_NUMBER_00054] > 0) {
+	if(flags[NUMBER_OF_TIMES_MET_SCYLLA] > 0) {
 		outputText("That seems like a ridiculous thing to say, and you tell her so. Her nose wrinkles slightly and she seems to hold herself a little higher. \"<i>Well, it's the sort of thing you ponder,</i>\" she says after a short wait. \"<i>The city has... many who don't pull their weight.</i>\" She offers a half-smile, then turns back to her mirror, fixing her hair once more. You get the sense that she's not interested in pursuing the conversation.\n\n", false);
 	
 		outputText("On the streets of Tel'Adre, you wonder about what she said. Should you tell someone about that? You're not certain how much of it was bluster and how much was genuine malice. There seems to be far more to the sorceress-fellatrix than you first thought, but you're not sure you want to learn the rest. You don't want to push an issue without justification, though...\n\n", false);

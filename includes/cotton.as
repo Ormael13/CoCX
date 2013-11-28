@@ -384,7 +384,7 @@ function cottonChat():void {
 	if(player.hasStatusAffect("Edryn") >= 0) 
 		chats[chats.length] = 2;
 	//(Scylla chat)
-	if(flags[UNKNOWN_FLAG_NUMBER_00054] > 0) 
+	if(flags[NUMBER_OF_TIMES_MET_SCYLLA] > 0) 
 		chats[chats.length] = 2;
 	//VALA 
 	if(flags[UNKNOWN_FLAG_NUMBER_00119] != 0) 
@@ -415,9 +415,9 @@ function cottonChat():void {
 	//(Scylla chat)
 	else if(choice == 3) {
 		//(if Scylla hasn't formed support group) 
-		if(flags[UNKNOWN_FLAG_NUMBER_00054] < 5 && player.hasCock() && player.balls > 0 && player.hasStatusAffect("DungeonShutDown") >= 0) outputText("While you're doing your stretches, you find yourself chatting about the folks of Tel'Adre. \"<i>Scylla?</i>\" Cotton says, \"<i>She's the oddly dressed woman at the Wet Bitch, right? Can't say I know much about her. She's so secretive.</i>\"\n\n", false);
+		if(flags[NUMBER_OF_TIMES_MET_SCYLLA] < 5 && player.hasCock() && player.balls > 0 && player.hasStatusAffect("DungeonShutDown") >= 0) outputText("While you're doing your stretches, you find yourself chatting about the folks of Tel'Adre. \"<i>Scylla?</i>\" Cotton says, \"<i>She's the oddly dressed woman at the Wet Bitch, right? Can't say I know much about her. She's so secretive.</i>\"\n\n", false);
 		//(if Scylla has formed support group)
-		else if(flags[UNKNOWN_FLAG_NUMBER_00054] >= 5 && player.hasCock() && player.balls > 0 && player.hasStatusAffect("DungeonShutDown") >= 0) outputText("While you're doing your stretches, you find yourself chatting about the folks of Tel'Adre. \"<i>Scylla?</i>\" Cotton says, \"<i>I hear she formed an addiction support group. Good on her, there's a lot of people in and around town who need help. I'm glad she's stepping up.</i>\"\n\n", false);
+		else if(flags[NUMBER_OF_TIMES_MET_SCYLLA] >= 5 && player.hasCock() && player.balls > 0 && player.hasStatusAffect("DungeonShutDown") >= 0) outputText("While you're doing your stretches, you find yourself chatting about the folks of Tel'Adre. \"<i>Scylla?</i>\" Cotton says, \"<i>I hear she formed an addiction support group. Good on her, there's a lot of people in and around town who need help. I'm glad she's stepping up.</i>\"\n\n", false);
 	}
 	//(Vala chat)
 	else if(choice == 4) {

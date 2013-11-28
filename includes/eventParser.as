@@ -358,7 +358,7 @@ function errorPrint(details:* = null)
 	rawOutputText("<b>Congratulations, you've found a bug!</b>", true);
 	rawOutputText("\nError: Unknown event!");
 	rawOutputText("\n\nPlease report that you had an issue with code: \"" + details + "\" ");
-	rawOutputText("\nIn game version: \"" + ver + "\" ");
+	rawOutputText("\nGame version: \"" + ver + "\" (<b>THIS IS IMPORTANT! Please be sure you include it!</b>) ");
 
 	var sTrace = getCurrentStackTrace();
 

@@ -757,6 +757,34 @@ def insertDescripts():
 
 
 
+def updateFlagNames():
+	import flagRefactor
+	changeList = flagRefactor.getChangedFlags()
+
+	
+	filelist = os.listdir("./includes")
+	print filelist
+	flagNum = 0
+	for filename in filelist:
+		if filename.endswith(".as"):			#Iterate over all the .as files in ./includes, and skip the doEvent file
+			print "Processing file ", filename, " --------------------------------------------------------------"
+			with open(os.path.join("./includes", filename), "r") as fileH:
+				tmp = fileH.read()
+
+			tmpO = tmp
+
+			for oldVal, newVal in changeList:
+				tmp = tmp.replace(oldVal, newVal)
+
+			if len(tmp)-len(tmpO) != 0:
+				print filename
+				print len(tmpO), len(tmp)
+				print "Length Delta", len(tmp)-len(tmpO) 
+			if writeToFiles:
+				with open(os.path.join("./includes", filename), "w") as fileH:
+					tmp = fileH.write(tmp)
+				
+
 
 
 if __name__ == "__main__":
@@ -784,4 +812,5 @@ if __name__ == "__main__":
 
 	#findFunctionsWithoutExit()
 	#pronouninate()
-	insertDescripts()
+	#insertDescripts()
+	updateFlagNames()

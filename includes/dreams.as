@@ -73,7 +73,7 @@ function dreamSelect():Boolean {
 		choices[choices.length] = 11;
 	}
 	//Dom + Scylla
-	if(flags[UNKNOWN_FLAG_NUMBER_00054] > 0 && flags[UNKNOWN_FLAG_NUMBER_00150] > 0) {
+	if(flags[NUMBER_OF_TIMES_MET_SCYLLA] > 0 && flags[UNKNOWN_FLAG_NUMBER_00150] > 0) {
 		choices[choices.length] = 12;
 		choices[choices.length] = 12;
 		choices[choices.length] = 12;

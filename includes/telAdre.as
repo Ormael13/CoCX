@@ -114,7 +114,7 @@ function telAdreTour():void {
 }
 
 function telAdreMenu():void {
-	if(flags[VALENTINES_EVENT_YEAR] < date.fullYear && player.balls > 0 && player.hasCock() && flags[UNKNOWN_FLAG_NUMBER_00054] >= 4 && flags[UNKNOWN_FLAG_NUMBER_00105] > 0 && isValentine()) {
+	if(flags[VALENTINES_EVENT_YEAR] < date.fullYear && player.balls > 0 && player.hasCock() && flags[NUMBER_OF_TIMES_MET_SCYLLA] >= 4 && flags[TIMES_MET_SCYLLA_IN_ADDICTION_GROUP] > 0 && isValentine()) {
 		crazyVDayShenanigansByVenithil();
 		return;
 	}
@@ -987,37 +987,37 @@ function barTelAdre():void {
 		//Scylla repeat
 		//big dick!
 		if(player.longestCockLength() >= 12) {
-			if(flags[UNKNOWN_FLAG_NUMBER_00054] == 0) {
+			if(flags[NUMBER_OF_TIMES_MET_SCYLLA] == 0) {
 				outputText("\n\nThere is one nun sitting in a corner booth who catches your eye.  She sits straight-backed against the dark, wood chair, her thin waist accentuating the supple curve of her breasts. She's dressed in a black robe that looks a few sizes too small for her hips and wears a black and white cloth over her head.", false);
 				button = anotherButton(button,"Nun",talkToScylla);
 			}
-			else if(flags[UNKNOWN_FLAG_NUMBER_00054] == 1 && rand(5) == 0) {
+			else if(flags[NUMBER_OF_TIMES_MET_SCYLLA] == 1 && rand(5) == 0) {
 				outputText("", true);
 				scyllaRoundII();
 				return;
 			}
-			else if(flags[UNKNOWN_FLAG_NUMBER_00054] == 2 && rand(5) == 0) {
+			else if(flags[NUMBER_OF_TIMES_MET_SCYLLA] == 2 && rand(5) == 0) {
 				outputText("", true);
 				scyllaRoundThreeCUM()
 				return;
 			}
 			//Round 4 goes here
-			else if(flags[UNKNOWN_FLAG_NUMBER_00054] == 3 && rand(5) == 0) {
+			else if(flags[NUMBER_OF_TIMES_MET_SCYLLA] == 3 && rand(5) == 0) {
 				scyllaRoundIVGo();
 				return;
 			}
 			//Round 6 - catscratch!
-			else if(flags[UNKNOWN_FLAG_NUMBER_00054] == 5 && rand(5) == 0) {
+			else if(flags[NUMBER_OF_TIMES_MET_SCYLLA] == 5 && rand(5) == 0) {
 				outputText("\n\nIt looks like Scylla is here but getting ready to leave.  You could check and see what the misguided nun is up to.", false);
 				button = anotherButton(button,"Scylla",Scylla6);
 			}
 			//Round 5 - repeatable!
-			else if(flags[UNKNOWN_FLAG_NUMBER_00054] >= 4 && (model.time.hours == 18 || model.time.hours == 19)) {
+			else if(flags[NUMBER_OF_TIMES_MET_SCYLLA] >= 4 && (model.time.hours == 18 || model.time.hours == 19)) {
 				outputText("\n\nYou see Scylla's white and black nun's habit poking above the heads of the other patrons. The tall woman seems unaware of her effect on those around her, but it's clear by the way people are crowding she's acquired a reputation by now. You're not sure what she's doing, but you could push your way through to find out.", false);
 				button = anotherButton(button,"Scylla",scyllaAdictsAnonV);
 			}			
 			//Round 2.5 Repeatable
-			else if(flags[UNKNOWN_FLAG_NUMBER_00054] >= 2 && flags[FED_SCYLLA_TODAY] == 0 && model.time.hours >= 7 && model.time.hours <= 11) {
+			else if(flags[NUMBER_OF_TIMES_MET_SCYLLA] >= 2 && flags[FED_SCYLLA_TODAY] == 0 && model.time.hours >= 7 && model.time.hours <= 11) {
 				outputText("\n\nIt looks like Scylla is milling around here this morning, praying as she keeps an eye out for someone to 'help'.");
 				button = anotherButton(button,"Scylla",scyllasFlyingSolo);
 			}
@@ -1032,7 +1032,7 @@ function barTelAdre():void {
 	if(!urtaBusy() && flags[AMILY_VISITING_URTA] != 1 && model.time.hours < 15) {
 		//Scylla + Urta sitting in a tree
 		// SOME COMFORT     FUCKED URTA      NOT PISSED      DRUNK TIME    SCYLLA TO LV4    RANDOM CHANCE  HAS THIS HAPPENED BEFORE? SCYLLA REQS ->
-		if(flags[URTA_TIME_SINCE_LAST_CAME] == 0 && flags[URTA_COMFORTABLE_WITH_OWN_BODY] > 2 && flags[TIMES_FUCKED_URTA] > 0 && flags[URTA_ANGRY_AT_PC_COUNTDOWN] < 1 && (urtaDrunk() || flags[UNKNOWN_FLAG_NUMBER_00143] > 0) && flags[UNKNOWN_FLAG_NUMBER_00054] >= 3 && rand(3) == 0 && (flags[UNKNOWN_FLAG_NUMBER_00143] == 0 || (flags[UNKNOWN_FLAG_NUMBER_00147] == 0 && flags[UNKNOWN_FLAG_NUMBER_00145] > 0)) && ((flags[UNKNOWN_FLAG_NUMBER_00143] > 0 && !urtaDrunk()) || player.balls > 0) && player.totalCocks() > 0 && !hasButton("Scylla") && !hasButton("ScyllaCats")) {
+		if(flags[URTA_TIME_SINCE_LAST_CAME] == 0 && flags[URTA_COMFORTABLE_WITH_OWN_BODY] > 2 && flags[TIMES_FUCKED_URTA] > 0 && flags[URTA_ANGRY_AT_PC_COUNTDOWN] < 1 && (urtaDrunk() || flags[UNKNOWN_FLAG_NUMBER_00143] > 0) && flags[NUMBER_OF_TIMES_MET_SCYLLA] >= 3 && rand(3) == 0 && (flags[UNKNOWN_FLAG_NUMBER_00143] == 0 || (flags[UNKNOWN_FLAG_NUMBER_00147] == 0 && flags[UNKNOWN_FLAG_NUMBER_00145] > 0)) && ((flags[UNKNOWN_FLAG_NUMBER_00143] > 0 && !urtaDrunk()) || player.balls > 0) && player.totalCocks() > 0 && !hasButton("Scylla") && !hasButton("ScyllaCats")) {
 			if(flags[UNKNOWN_FLAG_NUMBER_00143] > 0) {
 				outputText("\n\nUrta's usual place is vacant, though her table still holds a half-drank glass of water.  If it's anything like the last time this happened, she's snuck into a back room with Scylla to relieve some pressure.  It might not hurt to join in...", false);
 			}
@@ -1120,40 +1120,40 @@ function oldbarTelAdre():void {
 		//Scylla repeat
 		//big dick!
 		if(player.longestCockLength() >= 12) {
-			if(flags[UNKNOWN_FLAG_NUMBER_00054] == 0) {
+			if(flags[NUMBER_OF_TIMES_MET_SCYLLA] == 0) {
 				outputText("\n\nThere is one nun sitting in a corner booth who catches your eye.  She sits straight-backed against the dark, wood chair, her thin waist accentuating the supple curve of her breasts. She's dressed in a black robe that looks a few sizes too small for her hips and wears a black and white cloth over her head.", false);
 				misc1 = 2447;
 				misc1Name = "Nun";
 			}
-			else if(flags[UNKNOWN_FLAG_NUMBER_00054] == 1 && rand(5) == 0) {
+			else if(flags[NUMBER_OF_TIMES_MET_SCYLLA] == 1 && rand(5) == 0) {
 				outputText("", true);
 				scyllaRoundII();
 				return;
 			}
-			else if(flags[UNKNOWN_FLAG_NUMBER_00054] == 2 && rand(5) == 0) {
+			else if(flags[NUMBER_OF_TIMES_MET_SCYLLA] == 2 && rand(5) == 0) {
 				outputText("", true);
 				scyllaRoundThreeCUM()
 				return;
 			}
 			//Round 4 goes here
-			else if(flags[UNKNOWN_FLAG_NUMBER_00054] == 3 && rand(5) == 0) {
+			else if(flags[NUMBER_OF_TIMES_MET_SCYLLA] == 3 && rand(5) == 0) {
 				scyllaRoundIVGo();
 				return;
 			}
 			//Round 6 - catscratch!
-			else if(flags[UNKNOWN_FLAG_NUMBER_00054] == 5 && rand(5) == 0) {
+			else if(flags[NUMBER_OF_TIMES_MET_SCYLLA] == 5 && rand(5) == 0) {
 				outputText("\n\nIt looks like Scylla is here but getting ready to leave.  You could check and see what the misguided nun is up to.", false);
 				misc1Name = "Scylla";
 				misc1 = 2705;
 			}
 			//Round 5 - repeatable!
-			else if(flags[UNKNOWN_FLAG_NUMBER_00054] >= 4 && (model.time.hours == 18 || model.time.hours == 19)) {
+			else if(flags[NUMBER_OF_TIMES_MET_SCYLLA] >= 4 && (model.time.hours == 18 || model.time.hours == 19)) {
 				outputText("\n\nYou see Scylla's white and black nun's habit poking above the heads of the other patrons. The tall woman seems unaware of her effect on those around her, but it's clear by the way people are crowding she's acquired a reputation by now. You're not sure what she's doing, but you could push your way through to find out.", false);
 				misc1Name = "Scylla";
 				misc1 = 2563;
 			}			
 			//Round 2.5 Repeatable
-			else if(flags[UNKNOWN_FLAG_NUMBER_00054] >= 2 && flags[FED_SCYLLA_TODAY] == 0 && model.time.hours >= 7 && model.time.hours <= 11) {
+			else if(flags[NUMBER_OF_TIMES_MET_SCYLLA] >= 2 && flags[FED_SCYLLA_TODAY] == 0 && model.time.hours >= 7 && model.time.hours <= 11) {
 				outputText("\n\nIt looks like Scylla is milling around here this morning, praying as she keeps an eye out for someone to 'help'.");
 				misc1Name = "Scylla";
 				misc1 = 3992;
@@ -1180,7 +1180,7 @@ function oldbarTelAdre():void {
 	if(!urtaBusy() && flags[AMILY_VISITING_URTA] != 1 && model.time.hours < 15) {
 		//Scylla + Urta sitting in a tree
 		// SOME COMFORT     FUCKED URTA      NOT PISSED      DRUNK TIME    SCYLLA TO LV4    RANDOM CHANCE  HAS THIS HAPPENED BEFORE? SCYLLA REQS ->
-		if(flags[URTA_TIME_SINCE_LAST_CAME] == 0 && flags[URTA_COMFORTABLE_WITH_OWN_BODY] > 2 && flags[TIMES_FUCKED_URTA] > 0 && flags[URTA_ANGRY_AT_PC_COUNTDOWN] < 1 && (urtaDrunk() || flags[UNKNOWN_FLAG_NUMBER_00143] > 0) && flags[UNKNOWN_FLAG_NUMBER_00054] >= 3 && rand(3) == 0 && (flags[UNKNOWN_FLAG_NUMBER_00143] == 0 || (flags[UNKNOWN_FLAG_NUMBER_00147] == 0 && flags[UNKNOWN_FLAG_NUMBER_00145] > 0)) && ((flags[UNKNOWN_FLAG_NUMBER_00143] > 0 && !urtaDrunk()) || player.balls > 0) && player.totalCocks() > 0 && misc1Name != "Scylla") {
+		if(flags[URTA_TIME_SINCE_LAST_CAME] == 0 && flags[URTA_COMFORTABLE_WITH_OWN_BODY] > 2 && flags[TIMES_FUCKED_URTA] > 0 && flags[URTA_ANGRY_AT_PC_COUNTDOWN] < 1 && (urtaDrunk() || flags[UNKNOWN_FLAG_NUMBER_00143] > 0) && flags[NUMBER_OF_TIMES_MET_SCYLLA] >= 3 && rand(3) == 0 && (flags[UNKNOWN_FLAG_NUMBER_00143] == 0 || (flags[UNKNOWN_FLAG_NUMBER_00147] == 0 && flags[UNKNOWN_FLAG_NUMBER_00145] > 0)) && ((flags[UNKNOWN_FLAG_NUMBER_00143] > 0 && !urtaDrunk()) || player.balls > 0) && player.totalCocks() > 0 && misc1Name != "Scylla") {
 			if(flags[UNKNOWN_FLAG_NUMBER_00143] > 0) {
 				outputText("\n\nUrta's usual place is vacant, though her table still holds a half-drank glass of water.  If it's anything like the last time this happened, she's snuck into a back room with Scylla to relieve some pressure.  It might not hurt to join in...", false);
 			}

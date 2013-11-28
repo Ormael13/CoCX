@@ -52,7 +52,7 @@ const AMILY_ASS_SIZE:int                                              =   50; //
 const AMILY_LACTATION_RATE:int                                        =   51; // Amily Lactation Rate. Default=0
 const AMILY_CLOTHING:int                                              =   52; // Amily Clothing. Default="sexy rags"
 const UNKNOWN_FLAG_NUMBER_00053:int                                   =   53; // Lumi Met
-const UNKNOWN_FLAG_NUMBER_00054:int                                   =   54; // Met Scylla:   -1 = decline.  0 = not met.  1 = sucked once, 2 = sucked twice, etc
+const NUMBER_OF_TIMES_MET_SCYLLA:int                                  =   54; // Met Scylla:   -1 = decline.  0 = not met.  1 = sucked once, 2 = sucked twice, etc
 const UNKNOWN_FLAG_NUMBER_00055:int                                   =   55; // Times encountered Tamani's Daughters
 const UNKNOWN_FLAG_NUMBER_00056:int                                   =   56; // Tamani Hypno Level" Description="increases by 1 for each hypno event.  1-3 slight lust raises, 4-9 medium lust raises, 10-19 super high lust raises, 20+ high chance of autorape with special scene.
 const UNKNOWN_FLAG_NUMBER_00057:int                                   =   57; // Daughter Pregnancy Counter" Description="they will not return until this countdown timer is 0.  Same length as Tamani's incubation &#x2014; approx 1 week.
@@ -103,7 +103,7 @@ const UNKNOWN_FLAG_NUMBER_00101:int                                   =  101; //
 const UNKNOWN_FLAG_NUMBER_00102:int                                   =  102; // Has extra jojo time been cleared? - Jojo Debug Flag
 const UNKNOWN_FLAG_NUMBER_00103:int                                   =  103; // Times Autofellated Exgartuan
 const UNKNOWN_FLAG_NUMBER_00104:int                                   =  104; // Whitney Gems Paid Out That Week
-const UNKNOWN_FLAG_NUMBER_00105:int                                   =  105; // SCYLLA:  Times met Addiction Group
+const TIMES_MET_SCYLLA_IN_ADDICTION_GROUP:int                         =  105; // SCYLLA:  Times met Addiction Group
 const UNKNOWN_FLAG_NUMBER_00106:int                                   =  106; // SCYLLA: Times addict group taken advantage of
 const UNKNOWN_FLAG_NUMBER_00107:int                                   =  107; // SCYLLA: Times given the option to 'share' something
 const UNKNOWN_FLAG_NUMBER_00108:int                                   =  108; // SCYLLA: Milk therapy times

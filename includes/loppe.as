@@ -460,7 +460,7 @@ function gossipWithLoppe():void {
 	//Urta
 	addButton(0,"Urta",gossipWithLoppeAboutUrta);
 	//Scylla (Must have helped her enough times to know she needs cum to survive.)
-	if(flags[UNKNOWN_FLAG_NUMBER_00054] > 0) addButton(1,"Scylla",gossipWithLoppeAboutScylla);
+	if(flags[NUMBER_OF_TIMES_MET_SCYLLA] > 0) addButton(1,"Scylla",gossipWithLoppeAboutScylla);
 	//Jasun
 	if(flags[UNKNOWN_FLAG_NUMBER_00179] > 0) addButton(2,"Jasun",gossipWithLoppeAboutJasun);
 	//Heckel
