@@ -289,6 +289,8 @@ Also go play <u><a href='http://www.furaffinity.net/view/9830293/'>Nimin</a></u>
 
 function settingsScreen():void
 {
+	mainView.showAllMenuButtons();
+	
 	outputText("<b>Settings toggles:</b>\n", true);
 
 	if(debug)
@@ -349,7 +351,7 @@ function settingsScreen():void
 			"Hyper Happy", toggleHyperHappy,
 			"Low Standards", toggleStandards,
 			"Null", 0,
-			"Null", 0,
+			"Controls", displayControls,
 			"Back", mainMenu);
 }
 
@@ -581,13 +583,6 @@ function creditsScreen():void {
 	outputText("\nIf I'm missing anyone, please contact me ASAP!  I have done a terrible job keeping the credits up to date!");
 	doNext(mainMenu);
 }
-
-
-
-	
-
-
-	
 
 function imageCreditsScreen():void
 {

@@ -1,6 +1,5 @@
 ﻿package classes
 {
-	
 	import classes.assClass;
 	import classes.breastRowClass;
 	//import classes.cockClass;
@@ -13,9 +12,9 @@
 	import classes.statusAffectClass;
 	import classes.vaginaClass;
 	import classes.ImageManager; // This line not necessary, but added because I'm pedantic like that.
+	import classes.InputManager;
 
 	import classes.Monsters.*;		// import all the various monsters
-
 	import coc.view.MainView;
 
 	import coc.model.GameModel;
@@ -37,7 +36,6 @@
 	import flash.text.*;
 	import flash.utils.ByteArray;
 
-
 	/****
 		classes.CoC: The Document class of Corruption of the Champions.
 	****/
@@ -46,7 +44,6 @@
 
 	public class CoC extends MovieClip
 	{
-
 
 		// Include the functions. ALL THE FUNCTIONS
 
@@ -117,6 +114,7 @@
 		include "../../includes/ifris.as";
 		include "../../includes/imp.as";
 		include "../../includes/InitialiseUI.as";
+		include "../../includes/input.as";
 		include "../../includes/isabella.as";
 		include "../../includes/isabellaFollower.as";
 		include "../../includes/items.as";
@@ -194,24 +192,12 @@
 		include "../../includes/xmas_jack_frost.as";
 		include "../../includes/xmas_misc.as";
 
-
-		// include "../../includes/GlobalVariables.as";
-		include "../../includes/flagDefs.as";
-		include "../../includes/appearanceDefs.as";
-
-		include "../../includes/input.as";
 		include "../../includes/engineCore.as";
-			
-		
-		
-		// we had two saves.as files. It was causing wierd issues.
-		// I'm not sure how most of the files in /classes/classes/ are included
-		// anyways, lets manually include it here until I read up on the include mechanics
-		// of AS
-		// I moved saves.as back into includes, to keep the class directories
-		// free of any non-packaged files. - amygdala
 		include "../../includes/saves.as";
 		
+		// Lots of constants
+		include "../../includes/flagDefs.as";
+		include "../../includes/appearanceDefs.as";
 
 		/****
 			This is used purely for bodges while we get things cleaned up.
@@ -272,6 +258,7 @@
 		public var args:Array;
 		public var funcs:Array;
 		public var oldStats;
+		public var inputManager:InputManager;
 
 
 		public function CoC()
@@ -324,6 +311,8 @@
 			model.mobile = mobile;
 
 			images = new ImageManager(stage);
+			inputManager = new InputManager(stage, true);
+			include "../../includes/ControlBindings.as";
 			//} endregion
 
 			/**
@@ -460,7 +449,7 @@
 			//}endregion
 
 			//Keyboard listener!
-			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyboard);
+			// stage.addEventListener(KeyboardEvent.KEY_DOWN, keyboard);
 
 			// These are toggled between by the [home] key.
 			mainView.textBGWhite.visible = false;

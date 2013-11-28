@@ -7,15 +7,6 @@
 		{
 		}
 		
-		public function CopyFrom(source:keyItemClass):void
-		{
-			this.keyName = source.keyName;
-			this.value1 = source.value1;
-			this.value2 = source.value2;
-			this.value3 = source.value3;
-			this.value4 = source.value4;
-		}
-		
 		//data
 		public var keyName:String = "";
 		//v1-v4 for storing extra stuff.
