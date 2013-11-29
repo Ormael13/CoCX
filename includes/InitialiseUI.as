@@ -9,7 +9,7 @@
 // const NUM_OF_BUTTONS:int = 10; //Total number of buttons in the bottom section of the screen.
 
 // var gButtons:Array = new Array();
-var buttonEvents:Array = new Array();
+public var buttonEvents:Array = new Array();
 
 // gButtons[0] = new buttonBackground0();
 // gButtons[1] = new buttonBackground1();

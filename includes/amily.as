@@ -2498,12 +2498,12 @@ public function amilyMenu(output:Boolean = true):void {
 //Corrupt Amily Sex Options
 public function amilyCorruptSexMenu():void {
 	amilySprite();
-	var anal = 0;
-	var penetrated = 0;
-	var fuckCunt = 0;
-	var oral = 0;
-	var oral2 = 0;
-	var scissor = 0;
+	var anal:* = 0;
+	var penetrated:* = 0;
+	var fuckCunt:* = 0;
+	var oral:* = 0;
+	var oral2:* = 0;
+	var scissor:* = 0;
 
 	outputText("", true);
 	if(player.gender > 0) {

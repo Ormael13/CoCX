@@ -275,10 +275,10 @@ public function turnDownYogaWifCottonFirstTime():void {
 public function acceptYoga():void {
 	spriteSelect(12);
 	outputText("", true);
-	var fuckHer = 0;
-	var getFucked = 0;
-	var option3 = 0;
-	var option4 = 0;
+	var fuckHer:* = 0;
+	var getFucked:* = 0;
+	var option3:* = 0;
+	var option4:* = 0;
 	if(player.fatigue > 80) {
 		outputText("You're wayyy too tired to do any yoga right now.", false);
 		doNext(telAdreMenu);
@@ -446,8 +446,8 @@ public function leaveAfterYoga():void {
 //(If Shower)
 public function cottonShowerFunTimes():void {
 	spriteSelect(12);
-	var option1 = 0;
-	var option2 = 0;
+	var option1:* = 0;
+	var option2:* = 0;
 	outputText("", true);
 	outputText("\"<i>Perfect! Let's go,</i>\" she takes you by the arm and leads you back into the lockers, and then into the nearby showers, which are apparently unisex. You both strip down and turn on a shower head. After a few moments of scrubbing up, you give your shower buddy a surreptitious glance.\n\n", false);
 

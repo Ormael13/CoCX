@@ -27,11 +27,11 @@ import classes.Player;
 //You play as Urta, which copies everyone about you into this new variable. Very clumsy.
 //TODO: Figure out this whole thing. You play as Urta but the whole quest saves you state into this variable and swaps back and forth 
 //whenever you "leave" the quest 
-var urtaQItems1:itemSlotClass = new itemSlotClass();
-var urtaQItems2:itemSlotClass = new itemSlotClass();
-var urtaQItems3:itemSlotClass = new itemSlotClass();
-var urtaQItems4:itemSlotClass = new itemSlotClass();
-var urtaQItems5:itemSlotClass = new itemSlotClass();
+public var urtaQItems1:itemSlotClass = new itemSlotClass();
+public var urtaQItems2:itemSlotClass = new itemSlotClass();
+public var urtaQItems3:itemSlotClass = new itemSlotClass();
+public var urtaQItems4:itemSlotClass = new itemSlotClass();
+public var urtaQItems5:itemSlotClass = new itemSlotClass();
 
 public function urtaBusy():Boolean {
 	return (flags[EDRYN_BIRF_COUNTDOWN] > 0 || flags[URTA_QUEST_STATUS] == -1);

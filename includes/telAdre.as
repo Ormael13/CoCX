@@ -19,7 +19,7 @@
 //6) **Nose (+.5 attack)
 //7) **Tongue (+1 sens)
 //8) **Vulva (+1 sens)
-var piercingLoc:Number = 0;
+public var piercingLoc:Number = 0;
 
 //1. Amethyst (+1 int, +1 lib)
 //2. Diamond (+2 int, -1 cor)
@@ -29,14 +29,14 @@ var piercingLoc:Number = 0;
 //6. Onyx (+1 tou, -1 spe)
 //7. Ruby (+1 lib, +1 sens)
 //8. Steel (+2 str, -2 int)
-var piercingMat:Number = 0;
+public var piercingMat:Number = 0;
 
 //1. Stud
 //2. Ring (Called prince albert on dick)
 //3. Jacobs Ladder (dick only)
 //4. Hoop (ears/nipples/clit)
 //5. Chain (nipples only)
-var piercingType:Number = 0;
+public var piercingType:Number = 0;
 //}endregion
 
 public function discoverTelAdre():void {
@@ -881,7 +881,7 @@ public function oswaldPawn():void {
 }
 
 
-public function anotherButton(button:int,nam:String,func,arg = -9000):int {
+public function anotherButton(button:int,nam:String,func:*,arg:* = -9000):int {
 	if(button > 8) return 9;
 	if(arg == -9000) addButton(button,nam,func);
 	else addButton(button,nam,func,arg);
@@ -1433,16 +1433,16 @@ public function gymDesc():void {
 
 public function gymMenu():void {
 	
-	var membership = 0;
-	var cotton = 0;
+	var membership:* = 0;
+	var cotton:* = 0;
 	var cottonB:String = "Horsegirl";
-	var hyena = 0;
+	var hyena:* = 0;
 	var hyenaB:String = "Hyena";
-	var ifris = 0;
+	var ifris:* = 0;
 	var ifrisB:String = "Girl";
-	var lottie = lottieAppearance(false);
+	var lottie:* = lottieAppearance(false);
 	var lottieB:String = "Pig-Lady";
-	var loppe = 0;
+	var loppe:* = 0;
 	if(flags[UNKNOWN_FLAG_NUMBER_00281] > 0) 
 		lottieB = "Lottie";
 	if(ifrisIntro()) 

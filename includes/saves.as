@@ -7,10 +7,10 @@ import flash.net.SharedObject;
 
 import classes.DefaultDict;
 
-var file:FileReference;
-var loader:URLLoader;
+public var file:FileReference;
+public var loader:URLLoader;
 
-var saveFileNames = ["CoC_1", "CoC_2", "CoC_3", "CoC_4", "CoC_5", "CoC_6", "CoC_7", "CoC_8", "CoC_9"];
+public var saveFileNames:Array = ["CoC_1", "CoC_2", "CoC_3", "CoC_4", "CoC_5", "CoC_6", "CoC_7", "CoC_8", "CoC_9"];
 
 public function cloneObj(obj:Object):Object
 {
@@ -31,7 +31,7 @@ public function loadSaveDisplay(slot:String, slotName:String):String
 {
 	var holding:String = "";
 	//Initialize the save file
-	var saveFile = SharedObject.getLocal(slot, "/");
+	var saveFile:* = SharedObject.getLocal(slot, "/");
 	
 	var pfileHolding:Creature;
 	if (saveFile.data.exists)
@@ -61,13 +61,13 @@ public function loadSaveDisplay(slot:String, slotName:String):String
 
 public function loadScreen():void
 {
-	var test;
+	var test:*;
 	
-	var slots = new Array(saveFileNames.length);
+	var slots:Array = new Array(saveFileNames.length);
 		
 	outputText("<b><u>Slot: Sex,  Game Days Played</u></b>\r", true);
 	
-	for (var i = 0; i < saveFileNames.length; i += 1)
+	for (var i:int = 0; i < saveFileNames.length; i += 1)
 	{
 		outputText(loadSaveDisplay(saveFileNames[i], String(i + 1)), false);
 		
@@ -76,7 +76,7 @@ public function loadScreen():void
 		if (test.data.exists)
 		{
 			//trace("Creating function with indice = ", i);
-			(function(i)		// messy hack to work around closures. See: http://en.wikipedia.org/wiki/Immediately-invoked_function_expression
+			(function(i:int):void		// messy hack to work around closures. See: http://en.wikipedia.org/wiki/Immediately-invoked_function_expression
 			{
 				slots[i] = function() : void 		// Anonymous functions FTW
 				{
@@ -114,7 +114,8 @@ public function saveScreen():void
 	mainView.nameBox.width = 550;
 	mainView.nameBox.text = "";
 	mainView.nameBox.visible = true;
-	var test;
+	
+	// var test; // Disabling this variable because it seems to be unused.
 	
 	outputText("", true);
 	if (player.slotName != "VOID")
@@ -216,7 +217,7 @@ public function deleteScreen():void
 	var delFuncs:Array = new Array();
 	
 	
-	for (var i = 0; i < saveFileNames.length; i += 1)
+	for (var i:int = 0; i < saveFileNames.length; i += 1)
 	{
 		outputText(loadSaveDisplay(saveFileNames[i], String(i + 1)), false);
 		
@@ -227,7 +228,7 @@ public function deleteScreen():void
 			//slots[i] = loadFuncs[i];
 
 			trace("Creating function with indice = ", i);
-			(function(i)		// messy hack to work around closures. See: http://en.wikipedia.org/wiki/Immediately-invoked_function_expression
+			(function(i:int):void		// messy hack to work around closures. See: http://en.wikipedia.org/wiki/Immediately-invoked_function_expression
 			{
 				delFuncs[i] = function() : void 		// Anonymous functions FTW
 				{
@@ -263,7 +264,7 @@ public function confirmDelete():void
 
 public function purgeTheMutant():void
 {
-	var test = SharedObject.getLocal(flags[TEMP_STORAGE_SAVE_DELETION], "/");
+	var test:* = SharedObject.getLocal(flags[TEMP_STORAGE_SAVE_DELETION], "/");
 	trace("DELETING SLOT: " + flags[TEMP_STORAGE_SAVE_DELETION]);
 	var blah:Array = new Array("been virus bombed", "been purged", "been vaped", "been nuked from orbit", "taken an arrow to the knee", "fallen on its sword", "lost its reality matrix cohesion", "been cleansed", "suffered the following error: (404) Porn Not Found");
 	
@@ -281,7 +282,7 @@ public function saveGame(slot:String):void
 
 public function loadGame(slot:String):void
 {
-	var saveFile = SharedObject.getLocal(slot, "/");
+	var saveFile:* = SharedObject.getLocal(slot, "/");
 
 	// I want to be able to write some debug stuff to the GUI during the loading process
 	// Therefore, we clear the display *before* calling loadGameObject
@@ -319,7 +320,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 	
 	var counter:Number = player.cocks.length;
 	//Initialize the save file
-	var saveFile;
+	var saveFile:*;
 	if (isFile)
 	{
 		saveFile = new Object();
@@ -362,7 +363,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 	
 	//flags
 	saveFile.data.flags = new Array();
-	for (var i = 0; i < flags.length; i++)
+	for (var i:int = 0; i < flags.length; i++)
 	{
 		saveFile.data.flags[i] = flags[i];
 	}
@@ -710,7 +711,7 @@ public function onFileLoaded(evt:Event):void
 	loader.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler)
 	try
 	{
-		var req = new URLRequest(tempFileRef.name);
+		var req:* = new URLRequest(tempFileRef.name);
 		loader.load(req);
 	}
 	catch (error:Error)
@@ -779,7 +780,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 	var counter:Number = player.cocks.length;
 	//Initialize the save file
 	//var saveFile:Object = loader.data.readObject();
-	var saveFile = saveData;
+	var saveFile:* = saveData;
 	if (saveFile.data.exists)
 	{
 		//KILL ALL COCKS;
@@ -805,7 +806,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		
 		//flags
 		
-		for (var i = 0; i < flags.length; i++)
+		for (var i:int = 0; i < flags.length; i++)
 		{
 			if (saveFile.data.flags == undefined)
 			{
@@ -1397,8 +1398,8 @@ public function unFuckSave():void
 //using the file saving code, else it uses slot saving.
 
 //Arrays for converting a byte array into a string
-const encodeChars:Array = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '/'];
-const decodeChars:Array = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 62, -1, -1, -1, 63, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -1, -1, -1, -1, -1, -1, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, -1, -1, -1, -1, -1, -1, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, -1, -1, -1, -1, -1];
+public const encodeChars:Array = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '/'];
+public const decodeChars:Array = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 62, -1, -1, -1, 63, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -1, -1, -1, -1, -1, -1, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, -1, -1, -1, -1, -1, -1, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, -1, -1, -1, -1, -1];
 
 //ByteArray > String
 public function b64e(data:ByteArray):String

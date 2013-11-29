@@ -122,7 +122,7 @@ public function genderCheck():void {
 }
 
 //Many transformations are part of items, see items.as
-public function growTits(amount:Number, rowsGrown:Number, display:Boolean, growthType:Number) {
+public function growTits(amount:Number, rowsGrown:Number, display:Boolean, growthType:Number):void {
 	if(player.breastRows.length == 0) return;
 	//GrowthType 1 = smallest grows
 	//GrowthType 2 = Top Row working downward
@@ -320,7 +320,7 @@ public function shrinkTits():void {
 	}
 }
 
-public function lengthChange(temp2:Number, cocks:Number) {
+public function lengthChange(temp2:Number, cocks:Number):void {
 	//DIsplay the degree of length change.
 	if(temp2 <= 1 && temp2 > 0) {
 		if(player.cocks.length == 1) outputText("Your " + cockDescript(0) + " has grown slightly longer.", false);
@@ -533,7 +533,7 @@ public function demonChanges():void {
 	}
 }
 
-public function killCocks(deadCock):void {
+public function killCocks(deadCock:Number):void {
 	//Count removal for text bits
 	var removed:Number = 0;
 	//Holds cock index

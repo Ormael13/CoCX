@@ -599,7 +599,7 @@ public function tamaniPregnantFuck():void {
 //[Birth Encounter]
 public function tamaniPoopsOutBabies():void {
 	spriteSelect(56);
-	var daughters = player.statusAffectv3("Tamani");
+	var daughters:* = player.statusAffectv3("Tamani");
 	outputText("", true);
 	outputText("You hear orgiastic screams in the distance as you explore.  You turn to investigate, and as you go, they become even louder and higher pitched.  You crest a rise and find Tamani ", false);
 	if(player.statusAffectv2("Tamani") > 0) {

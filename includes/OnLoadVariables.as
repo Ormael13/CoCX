@@ -5,7 +5,7 @@
 // import classes.creature;
 
 //Used when save/loading
-var notes:String = "";
+public var notes:String = "";
 // nameBox.maxChars = 54;
 
 //Images for image pack!
@@ -13,7 +13,7 @@ var notes:String = "";
 //var images = new Array();
 
 //System time
-var date = new Date();
+public var date:Date = new Date();
 
 //Used to set what each action buttons displays and does. I don't know why it is initialized here.
 //var args:Array = new Array();
@@ -25,23 +25,23 @@ var date = new Date();
 //if ( ApplicationDomain.currentDomain.hasDefinition("Creature")) trace("Class exists");
 
 //dungeoneering variables
-var inDungeon:Boolean = false;
-var dungeonLoc:Number = 0;
+public var inDungeon:Boolean = false;
+public var dungeonLoc:Number = 0;
 
 //Used to restrict random drops from overlapping uniques
-var plotFight:Boolean = false;
-var timeQ:Number = 0;
-var campQ:Boolean = false;
+public var plotFight:Boolean = false;
+public var timeQ:Number = 0;
+public var campQ:Boolean = false;
 
 //Possibly redundant, not used anywhere else.
 //Input vars
-var button0Choice:Number = 0;
-var button1Choice:Number = 0;
-var button2Choice:Number = 0;
-var button3Choice:Number = 0;
-var button4Choice:Number = 0;
-var button5Choice:Number = 0;
-var button6Choice:Number = 0;
-var button7Choice:Number = 0;
-var button8Choice:Number = 0;
-var button9Choice:Number = 0;
+public var button0Choice:Number = 0;
+public var button1Choice:Number = 0;
+public var button2Choice:Number = 0;
+public var button3Choice:Number = 0;
+public var button4Choice:Number = 0;
+public var button5Choice:Number = 0;
+public var button6Choice:Number = 0;
+public var button7Choice:Number = 0;
+public var button8Choice:Number = 0;
+public var button9Choice:Number = 0;

@@ -314,17 +314,17 @@ public function camp():void {
 	flags[CAME_WORMS_AFTER_COMBAT] = 0;
 	campQ = false;
 	//Build explore menus
-	var desert:Number = 0;
-	var lake:Number = 0;
-	var forest:Number = 0;
-	var mountain:Number = 0;
-	var farm:Number = 0;
-	var jojo:Number = 0;
-	var placesNum:Number = 0;
-	var followers:Number = 0;
-	var lovers = 0;
-	var slaves = 0;
-	var storage:Number = 0;
+	var desert:* = 0;
+	var lake:* = 0;
+	var forest:* = 0;
+	var mountain:* = 0;
+	var farm:* = 0;
+	var jojo:* = 0;
+	var placesNum:* = 0;
+	var followers:* = 0;
+	var lovers:* = 0;
+	var slaves:* = 0;
+	var storage:* = 0;
 	if(stash()) storage = 2951;
 	if(places(false)) placesNum = 71; 
 	if(foundDesert) desert = 3;
@@ -361,9 +361,9 @@ public function camp():void {
 		mainView.statsView.hideLevelUp();
 	}
 	//Build main menu
-	var masturbate:Number = 0;
-	var rest:Number = 0;
-	var explore:Number = 2;
+	var masturbate:* = 0;
+	var rest:* = 0;
+	var explore:* = 2;
 	if(player.fatigue > 50) rest = 11;	
 	if(player.lust > 30) masturbate = 42;
 	outputText("", true);
@@ -841,7 +841,7 @@ public function campLoversMenu():void {
 		else if(model.time.hours == 13) {
 			outputText("Isabella ", false);
 			var izzyCreeps:Array = new Array();
-			var choice = 0;
+			var choice:* = 0;
 			//Build array of choices for izzy to talk to
 			if(player.hasStatusAffect("Camp Rathazul") >= 0)
 				izzyCreeps[izzyCreeps.length] = 0;
@@ -1407,17 +1407,17 @@ public function nightSuccubiRepeat():void {
 	stats(rand(2), rand(2), rand(2), rand(2), 0, 0, -100, 1);
 }
 //Places menu
-public function places(display):Boolean {
-	var farmBarn = 0;
-	var farmHouse = 0;
-	var farm = 0;
-	var boat = 0;
-	var barber = 0;
-	var telAdre = 0;
-	var ruins = 0;
-	var bazaar = 0;
-	var owca = 0;
-	var dungeonsArg = 0;
+public function places(display:Boolean):Boolean {
+	var farmBarn:* = 0;
+	var farmHouse:* = 0;
+	var farm:* = 0;
+	var boat:* = 0;
+	var barber:* = 0;
+	var telAdre:* = 0;
+	var ruins:* = 0;
+	var bazaar:* = 0;
+	var owca:* = 0;
+	var dungeonsArg:* = 0;
 	if(flags[UNKNOWN_FLAG_NUMBER_00113] > 0 || player.hasStatusAffect("Found Factory") >= 0 || flags[DISCOVERED_WITCH_DUNGEON] > 0) 
 		dungeonsArg = dungeons;
 	if(flags[OWCA_UNLOCKED] == 1) 
