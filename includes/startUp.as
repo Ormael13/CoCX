@@ -378,23 +378,6 @@ function debugPane():void
 
 	
 	outputText(images.showImage("monster-ceraph"));
-	
-	
-	outputText("Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. ");
-	outputText("Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. ");
-	outputText("Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. ");
-	outputText("Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. ");
-	outputText("Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. ");
-	outputText("Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. ");
-	outputText("Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. ");
-	outputText("Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. ");
-	outputText("Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. ");
-	outputText("Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. ");
-	outputText("Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. ");
-	outputText("Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. ");
-	outputText("Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. ");
-	outputText("Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. ");
-
 
 	menu();
 	addButton(0, "Event Tester", eventTestingPane);

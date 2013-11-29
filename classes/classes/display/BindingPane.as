@@ -9,10 +9,12 @@ package classes.display
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
+	import flash.text.TextFormat;
 	import flash.utils.Dictionary;
 	import flash.ui.Keyboard;
 	import flash.utils.describeType;
 	import classes.display.BindDisplay;
+	import flash.text.TextFieldAutoSize;
 	
 	/**
 	 * Defines a new UI element, providing a scrollable container to be used for display of bound
@@ -43,14 +45,21 @@ package classes.display
 		 * @param	width			Fixed width of the containing ScrollPane
 		 * @param	height			Fixed height of the containing ScrollPane
 		 */
-		public function BindingPane(inputManager:InputManager, xPos:int, yPos:int, width:int, height:int) 
+		public function BindingPane(inputManager:InputManager, xPos:int, yPos:int, width:int, height:int, uiscrollwidth:int) 
 		{
 			_inputManager = inputManager;
 			
-			this.x = xPos;
+			/* This is a super super fucking annoying fix. The TextField class, whilst it supports being bound to a
+			*  doesn't include a scrollbar by default, it has to be attached as a sperate, distinct component. It's
+			*  literally bolted onto the side, and isn't part of the sizing information of the TextField itself.
+			*  ScrollPanes on the other hand, DO feature a scrollbar as a core part of their functionality. And
+			*  for ScrollPanes, the UIScrollBar is included in the total sizing information. Whoever wrote this shit
+			*  was literally on crack, I SWEAR TO GOD. */
+			this.width = width + uiscrollwidth + 3;
+			this.height = height - 3;
+			
+			this.x = xPos - 1;
 			this.y = yPos;
-			this.width = width;
-			this.height = height;
 			
 			// Cheap hack to remove the stupid styling elements of the stock ScrollPane
 			var blank:MovieClip = new MovieClip();
@@ -119,14 +128,38 @@ package classes.display
 		 */
 		private function InitContentObjects():void
 		{
+			// Add a nice little instructional field at the top of the display.
+			var _textFormatLabel:TextFormat = new TextFormat();
+			_textFormatLabel.size = 20;
+			
+			var helpLabel:TextField = new TextField();
+			helpLabel.name = "helpLabel";
+			helpLabel.x = 10;
+			helpLabel.width = this.width - 40;
+			helpLabel.defaultTextFormat = _textFormatLabel;			
+			helpLabel.multiline = true;
+			helpLabel.wordWrap = true;
+			helpLabel.autoSize = TextFieldAutoSize.LEFT; // With multiline enabled, this SHOULD force the textfield to resize itself vertically dependant on content.
+			helpLabel.htmlText = "<b>Keyboard Control Bindings:</b>\n\n";
+			helpLabel.htmlText += "Click a button next to the action you wish to bind to a new key, then hit the key you want to bind the selected action to.\n\n"
+			helpLabel.htmlText += "Custom bindings are stored inside your save game files.\n\n";
+			helpLabel.htmlText += "Duplicate keys are automatically unbound from their old control action.\n\n";
+			helpLabel.htmlText += "<b>Reset Ctrls</b> will reset all of the control bindings to their defaults.\n\n";
+			helpLabel.htmlText += "<b>Clear Ctrls</b> will remove all of the current control bindings, leaving everything Unbound.\n\n";
+			
+			//helpLabel.height *= 2; 
+			
+			_contentChildren++;
+			_content.addChild(helpLabel);
+			
 			for (var i:int = 0; i < _functions.length; i++)
 			{
 				_contentChildren++;
 				
-				var newLabel = new BindDisplay(this.width);
+				var newLabel:BindDisplay = new BindDisplay(this.width);
 				newLabel.name = _functions[i].Name;
 				newLabel.x = 2;
-				newLabel.y = BindDisplay.BUTTON_Y_DELTA * i + 7;
+				newLabel.y = ( BindDisplay.BUTTON_Y_DELTA * i ) + ( 7 + helpLabel.textHeight );
 				newLabel.htmlText = "<b>" + _functions[i].Name + ":</b>";
 				newLabel.button1Text = _keyDict[_functions[i].PrimaryKey];
 				newLabel.button2Text = _keyDict[_functions[i].SecondaryKey];

@@ -82,10 +82,11 @@ package classes
 			
 			_stage.addEventListener(KeyboardEvent.KEY_DOWN, this.KeyHandler);
 			
+			_mainView = _stage.getChildByName("mainView") as MainView;
 			_mainText = (_stage.getChildByName("mainView") as MovieClip).mainText as TextField;
 			_mainTextScollBar = (_stage.getChildByName("mainView") as MovieClip).scrollBar as UIScrollBar;
 			
-			_bindingPane = new BindingPane(this, _mainText.x, _mainText.y, _mainText.width, _mainText.height);
+			_bindingPane = new BindingPane(this, _mainText.x, _mainText.y, _mainText.width, _mainText.height, _mainTextScollBar.width);
 		}
 		
 		/**
@@ -119,6 +120,10 @@ package classes
 			_bindingSlot = isPrimary;
 			
 			_mainText.htmlText = "<b>Hit the key that you want to bind " + funcName + " to!</b>";
+			
+			// hide some buttons that will fuck shit up
+			_mainView.hideCurrentBottomButtons();
+			
 			HideBindingPane();
 		}
 		
@@ -128,6 +133,7 @@ package classes
 		public function StopListenForNewBind():void
 		{
 			_bindingMode = false;
+			_mainView.showCurrentBottomButtons();
 			DisplayBindingPane();
 		}
 		
