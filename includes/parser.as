@@ -311,15 +311,15 @@ public var twoWordTagsLookup:Object =
 }
 
 
-function convertDoubleArg(arg:String):String
+function convertDoubleArg(inputArg:String):String
 {
 	var argResult:String;
 
 
-	var argTemp = arg.split(" ");
+	var argTemp = inputArg.split(" ");
 	if (argTemp.length != 2)
 	{
-		argResult = "<b>!Not actually a two-word tag!\"" + arg + "\"!</b>"
+		argResult = "<b>!Not actually a two-word tag!\"" + inputArg + "\"!</b>"
 	}
 	var subject = argTemp[0];
 	var aspect = argTemp[1];
@@ -330,7 +330,7 @@ function convertDoubleArg(arg:String):String
 	subject = subject.toLowerCase()
 	aspect = aspect.toLowerCase()
 
-	var arg;
+	var inputArg;
 
 	// Only perform lookup in twoWordNumericTagsLookup if aspect can be cast to a valid number
 	if (!isNaN(Number(aspect)))
@@ -345,7 +345,7 @@ function convertDoubleArg(arg:String):String
 			if (mainParserDebug) trace("Called, return = ", argResult);
 		}
 		else
-			return "<b>!Unknown subject in two-word tag \"" + arg + "\"! Subject = \"" + subject + ", Numeric Aspect = " + aspect + "\</b>";
+			return "<b>!Unknown subject in two-word tag \"" + inputArg + "\"! Subject = \"" + subject + ", Numeric Aspect = " + aspect + "\</b>";
 	}
 	// aspect isn't a number. Look for subject in the normal twoWordTagsLookup
 	else
@@ -360,11 +360,11 @@ function convertDoubleArg(arg:String):String
 				if (mainParserDebug) trace("Called, return = ", argResult);
 			}
 			else
-				return "<b>!Unknown aspect in two-word tag \"" + arg + "\"! ASCII Aspect = \"" + aspect + "\"</b>";
+				return "<b>!Unknown aspect in two-word tag \"" + inputArg + "\"! ASCII Aspect = \"" + aspect + "\"</b>";
 
 		}
 		else
-			return "<b>!Unknown subject in two-word tag \"" + arg + "\"! Subject = \"" + subject + ", ASCII Aspect = " + aspect + "\</b>";
+			return "<b>!Unknown subject in two-word tag \"" + inputArg + "\"! Subject = \"" + subject + ", ASCII Aspect = " + aspect + "\</b>";
 
 	}
 

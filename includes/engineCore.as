@@ -2012,19 +2012,19 @@ function choices(text1:String, butt1:*,
 	buttonEvents[8] = butt9;
 	buttonEvents[9] = butt0;
 
-	var j:int;
+	var tmpJ:int;
 
 	// iterate over the button options, and only enable the ones which have a corresponding event number
 
-	for (j = 0; j < 10; j += 1)
+	for (tmpJ = 0; tmpJ < 10; tmpJ += 1)
 	{
-		if(buttonEvents[j] == 0) {
-			mainView.hideBottomButton( j );
+		if(buttonEvents[tmpJ] == 0) {
+			mainView.hideBottomButton( tmpJ );
 		}
 		else {
-			callback = getCallback( buttonEvents[ j ] );
-			toolTipText = getButtonToolTipText( textLabels[ j ] );
-			mainView.showBottomButton( j, textLabels[ j ], callback, toolTipText );
+			callback = getCallback( buttonEvents[ tmpJ ] );
+			toolTipText = getButtonToolTipText( textLabels[ tmpJ ] );
+			mainView.showBottomButton( tmpJ, textLabels[ tmpJ ], callback, toolTipText );
 		}
 
 	}
