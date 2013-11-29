@@ -9,7 +9,6 @@ function doEvent(eventNo):void
 	var temp6:Number = 0;
 	var temp7:Number = 0;
 	var temp8:Number = 0;
-	
 	//New game gooooooo!
 	if (eventNo == 2000)
 	{
@@ -1511,8 +1510,6 @@ function doEvent(eventNo):void
 		if (gameState > 0)
 			eventParser(5007);
 	}
-	
-	
 	//Free honey event!
 	
 	//Bee rapes you
@@ -1539,11 +1536,7 @@ function doEvent(eventNo):void
 		outputText("", true);
 		beeEncounterLevel3();
 	}
-	
-	
 	//Do you help the wanderer?
-	
-	
 	
 	//Generic farm encounter
 	else if (eventNo == 2068)
@@ -1771,14 +1764,6 @@ function doEvent(eventNo):void
 		return;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
 	else if (eventNo == 2112)
 	{
 		outputText("", true);
@@ -1793,16 +1778,6 @@ function doEvent(eventNo):void
 		doNext(13);
 		return;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	else if (eventNo == 2124)
 	{
 		outputText("Rathazul smiles happily back at you and begins packing up his equipment.  He mutters over his shoulder, \"<i>It will take me a while to get my equipment moved over, but you head on back and I'll see you within the hour.  Oh my, yes.</i>\"\n\nHe has the look of someone experiencing hope for the first time in a long time.", true);
@@ -1993,8 +1968,6 @@ function doEvent(eventNo):void
 		return;
 	}
 	
-	
-	
 	//Move Jojo into camp
 	else if (eventNo == 2149)
 	{
@@ -2127,10 +2100,6 @@ function doEvent(eventNo):void
 		goblinHairDresserFacefuck();
 		return;
 	}
-	
-	
-	
-	
 	//Cut short
 	else if (eventNo == 2159)
 	{
@@ -2216,20 +2185,12 @@ function doEvent(eventNo):void
 		}
 	}
 	
-	
-	
-	
-	
 	//Hook up cock milker
 	else if (eventNo == 2175)
 	{
 		whitneyMilkerHookup(false);
 		return;
 	}
-	
-	
-	
-	
 	//Rathazul Armor Crafting
 	else if (eventNo == 2180)
 	{
@@ -2265,12 +2226,6 @@ function doEvent(eventNo):void
 			stats(0, 0, 0, .5, 0, 0, 0, 0);
 		return;
 	}
-	
-	
-	
-	
-	
-	
 	//Continuing mino voyeurism
 	else if (eventNo == 2190)
 	{
@@ -2519,8 +2474,6 @@ function doEvent(eventNo):void
 		urtaBarApproach();
 		return;
 	}
-	
-	
 	else if (eventNo == 2295)
 	{
 		blowUrtaUnderTable();
@@ -2566,7 +2519,11 @@ function doEvent(eventNo):void
 		rideCeraphsCockLikeaBAWSSexclamation11eleven();
 		return;
 	}
-	else if (eventNo == 2320)
+	
+	// ....Yeah. Too many if-elses cause flashDevelop's mxmlc to shit itself.
+	// Therefore, split this into two big if-statem
+
+	if (eventNo == 2320)
 	{
 		loseToCeraphAndGetPiercingsInEarsOrSomethingSomehow();
 		return;
@@ -2666,10 +2623,6 @@ function doEvent(eventNo):void
 		lumiLabChoices();
 		return;
 	}
-	
-	
-	
-	
 	
 	else if (eventNo == 2447)
 	{
@@ -2949,8 +2902,6 @@ function doEvent(eventNo):void
 		return;
 	}
 	
-	
-	
 	else if (eventNo == 2591)
 	{
 		rapeAnemoneWithPussy();
@@ -3144,8 +3095,6 @@ function doEvent(eventNo):void
 		Scylla6();
 		return;
 	}
-	
-	
 	else if (eventNo == 2708)
 	{
 		lactateAndKickAss();
@@ -3231,23 +3180,11 @@ function doEvent(eventNo):void
 		rapeTheBeeMultiCockStuff();
 		return;
 	}
-	
-	
 	else if (eventNo == 2800)
 	{
 		giveCorruptAmilySuccubusDelight();
 		return;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	else if (eventNo == 2819)
 	{
@@ -3409,8 +3346,6 @@ function doEvent(eventNo):void
 		roxanneDrinkingContest();
 		return;
 	}
-	
-	
 	else if (eventNo == 2887)
 	{
 		joeyAndrogyny();
@@ -3779,8 +3714,6 @@ function doEvent(eventNo):void
 		victoryVSDriderStickDickInSpinneret();
 		return;
 	}
-	
-	
 	else if (eventNo == 3028)
 	{
 		approachBimboSophieInCamp();
@@ -3913,8 +3846,6 @@ function doEvent(eventNo):void
 		ewLottieNo();
 		return;
 	}
-	
-	
 	else if (eventNo == 3113)
 	{
 		charlottesWebComedyBullshit();
@@ -4211,8 +4142,6 @@ function doEvent(eventNo):void
 		tentacleBoneFollowerIzzy();
 		return;
 	}
-	
-	
 	else if (eventNo == 3253)
 	{
 		getMilk();
@@ -4569,8 +4498,6 @@ function doEvent(eventNo):void
 		return;
 	}
 	
-	
-	
 	else if (eventNo == 3392)
 	{
 		swimsuitVibrators();
@@ -4636,8 +4563,6 @@ function doEvent(eventNo):void
 		lottiesThirtyMinutePigGasm();
 		return;
 	}
-	
-	
 	else if (eventNo == 3426)
 	{
 		talkToFriendlyKiha();
@@ -4898,8 +4823,6 @@ function doEvent(eventNo):void
 		bazaarNiamh();
 		return;
 	}
-	
-	
 	else if (eventNo == 3542)
 	{
 		seanBimboBrewing();
@@ -5448,7 +5371,10 @@ function doEvent(eventNo):void
 		teaseVapula();
 		return;
 	}
-	else if (eventNo == 3776)
+	
+	// See other comment about mxmlc shitting on big if-statements
+	
+	if (eventNo == 3776)
 	{
 		emberBreedingAfterMathWatchOutForRadioactiveFallout(true);
 		return;
@@ -5840,8 +5766,6 @@ function doEvent(eventNo):void
 		giveRubiClothes("S.Swmwr");
 		return;
 	}
-	
-	
 	else if (eventNo == 3893)
 	{
 		cheatingRubi();
@@ -6112,8 +6036,6 @@ function doEvent(eventNo):void
 		shareTentaclesWithScylla();
 		return;
 	}
-	
-	
 	else if (eventNo == 3985)
 	{
 		infertilityQuestions();
@@ -6160,8 +6082,6 @@ function doEvent(eventNo):void
 		return;
 	}
 	
-	
-	
 	else if (eventNo == 3997)
 	{
 		ingredientsMenu();
@@ -6173,5 +6093,6 @@ function doEvent(eventNo):void
 		//the 2000 EventNo imp meeting stuff after choosing your history. This needs some tinkering to get working correctly.
 		//errorPrint(eventNo); // Dump the system state to the window so the player can file a decent bug-report
 	}
+
 }
 

@@ -8,10 +8,10 @@
     <movie fps="30" />
     <movie width="800" />
     <movie height="600" />
-    <movie version="10" />
-    <movie minorVersion="1" />
+    <movie version="11" />
+    <movie minorVersion="9" />
     <movie platform="Flash Player" />
-    <movie background="#FFFFFF" />
+    <movie background="#000000" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
@@ -39,11 +39,11 @@
     <option useNetwork="True" />
     <option useResourceBundleMetadata="True" />
     <option warnings="True" />
-    <option verboseStackTraces="False" />
+    <option verboseStackTraces="True" />
     <option linkReport="" />
     <option loadExterns="" />
     <option staticLinkRSL="True" />
-    <option additional="-show-actionscript-warnings=false&#xA;-show-binding-warnings=false&#xA;-show-unused-type-selector-warnings=false" />
+    <option additional="-show-actionscript-warnings=true&#xA;-show-binding-warnings=true&#xA;-show-unused-type-selector-warnings=true" />
     <option compilerConstants="" />
     <option minorVersion="" />
   </build>

@@ -46,18 +46,49 @@
 	{
 
 		// Include the functions. ALL THE FUNCTIONS
+		include "../../includes/charCreation.as";
+		include "../../includes/customCharCreation.as";
+		
+		include "../../includes/descriptors.as";
+		include "../../includes/appearance.as";
 
+		include "../../includes/InitialiseUI.as";
+		include "../../includes/input.as";
+		include "../../includes/OnLoadVariables.as";
+		include "../../includes/startUp.as";
+		
+		include "../../includes/combat.as";
+		include "../../includes/doEvent.as";
+		include "../../includes/eventParser.as";
+		
+		include "../../includes/exploration.as";
+		include "../../includes/followerInteractions.as";
+		include "../../includes/telAdre.as";
+		
+		include "../../includes/bazaar.as";
+		
+		include "../../includes/eventTest.as";
+		
+		
+		include "../../includes/transform.as";
+		
+		include "../../includes/engineCore.as";
+		include "../../includes/saves.as";
+		
+		// Lots of constants
+		include "../../includes/flagDefs.as";
+		include "../../includes/appearanceDefs.as";
+
+		
 		include "../../includes/akbal.as";
 		include "../../includes/amily.as";
 		include "../../includes/anemone.as";
 		include "../../includes/ants.as";
-		include "../../includes/appearance.as";
 		include "../../includes/april_fools.as";
 		include "../../includes/arian.as";
 		include "../../includes/auntNancy.as";
 		include "../../includes/bakery.as";
 		include "../../includes/basilisk.as";
-		include "../../includes/bazaar.as";
 		include "../../includes/bee.as";
 		include "../../includes/benoit.as";
 		include "../../includes/brooke.as";
@@ -66,13 +97,8 @@
 		include "../../includes/ceraph.as";
 		include "../../includes/ceraphFollower.as";
 		include "../../includes/chameleons.as";
-		include "../../includes/charCreation.as";
 		include "../../includes/cinnabar.as";
-		include "../../includes/combat.as";
 		include "../../includes/cotton.as";
-		include "../../includes/customCharCreation.as";
-		include "../../includes/descriptors.as";
-		include "../../includes/doEvent.as";
 		include "../../includes/dreams.as";
 		include "../../includes/drider.as";
 		include "../../includes/dungeon2Supplimental.as";
@@ -83,17 +109,13 @@
 		include "../../includes/edryn.as";
 		include "../../includes/ember.as";
 		include "../../includes/essrayle.as";
-		include "../../includes/eventParser.as";
-		include "../../includes/eventTest.as";
 		include "../../includes/exgartuan.as";
-		include "../../includes/exploration.as";
 		include "../../includes/faerie.as";
 		include "../../includes/fapArena.as";
 		include "../../includes/fellatrix.as";
 		include "../../includes/fera.as";
 		include "../../includes/fetishCultist.as";
 		include "../../includes/fetishZealot.as";
-		include "../../includes/followerInteractions.as";
 		include "../../includes/froggirl.as";
 		include "../../includes/fuckingTree.as";
 		include "../../includes/gangbangVillage.as";
@@ -113,8 +135,6 @@
 		include "../../includes/hellhoundInfested.as";
 		include "../../includes/ifris.as";
 		include "../../includes/imp.as";
-		include "../../includes/InitialiseUI.as";
-		include "../../includes/input.as";
 		include "../../includes/isabella.as";
 		include "../../includes/isabellaFollower.as";
 		include "../../includes/items.as";
@@ -145,7 +165,6 @@
 		include "../../includes/naga.as";
 		include "../../includes/niamh.as";
 		include "../../includes/oasis.as";
-		include "../../includes/OnLoadVariables.as";
 		include "../../includes/ooze.as";
 		include "../../includes/parser.as";
 		include "../../includes/perkPicker.as";
@@ -169,16 +188,13 @@
 		include "../../includes/shouldraFollower.as";
 		include "../../includes/spiderMorph.as";
 		include "../../includes/spiderMorphMale.as";
-		include "../../includes/startUp.as";
 		include "../../includes/swordInStone.as";
 		include "../../includes/symGear.as";
 		include "../../includes/tamani.as";
 		include "../../includes/tamaniDildo.as";
 		include "../../includes/tamanisDaughters.as";
-		include "../../includes/telAdre.as";
 		include "../../includes/tentacle.as";
 		include "../../includes/thanksgiving.as";
-		include "../../includes/transform.as";
 		include "../../includes/urta.as";
 		include "../../includes/urtaPregs.as";
 		include "../../includes/urtaQuest.as";
@@ -191,14 +207,8 @@
 		include "../../includes/xmas_gats_not_an_angel.as";
 		include "../../includes/xmas_jack_frost.as";
 		include "../../includes/xmas_misc.as";
-
-		include "../../includes/engineCore.as";
-		include "../../includes/saves.as";
+	
 		
-		// Lots of constants
-		include "../../includes/flagDefs.as";
-		include "../../includes/appearanceDefs.as";
-
 		/****
 			This is used purely for bodges while we get things cleaned up.
 			Hopefully, anything you stick to this object can be removed eventually.
