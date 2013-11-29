@@ -378,6 +378,22 @@ function debugPane():void
 
 	
 	outputText(images.showImage("monster-ceraph"));
+	
+	
+	outputText("Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. ");
+	outputText("Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. ");
+	outputText("Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. ");
+	outputText("Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. ");
+	outputText("Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. ");
+	outputText("Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. ");
+	outputText("Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. ");
+	outputText("Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. ");
+	outputText("Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. ");
+	outputText("Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. ");
+	outputText("Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. ");
+	outputText("Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. ");
+	outputText("Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. ");
+	outputText("Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. Testing layout shit. ");
 
 
 	menu();
