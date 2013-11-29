@@ -1,4 +1,4 @@
-﻿/****
+/****
 	coc.view.MainView
 
 	I have no real idea yet what eventTestInput is for,
@@ -71,6 +71,7 @@ package coc.view {
 		public var bottomButtonBGs :Array; // <MovieClip>
 		public var menuButtonTexts :Array;
 		public var menuButtonBGs :Array;
+		private var currentActiveButtons:Array;
 
 		public var toolTipView :ToolTipView;
 		public var statsView :StatsView;
@@ -133,6 +134,9 @@ package coc.view {
 			// disable interaction for any remaining TFs.
 			disableMouseForMostTextFields();
 
+			// ...
+			imageText.visible = false; // TODO: Remove this TF?  It doesn't seem to be used anywhere.  I think it was from the first effort to put in images.
+
 			// hook!
 			hookBottomButtons();
 			hookAllButtons();
@@ -171,6 +175,7 @@ package coc.view {
 
 				switch( t ) {
 					case this.mainText:
+					case this.imageText:
 					case this.nameBox:
 					case this.eventTestInput:
 						t.mouseEnabled = true;
@@ -307,7 +312,35 @@ package coc.view {
 			button.visible = false;
 		};
 
-
+			public function hideCurrentBottomButtons():void
+			{
+				this.currentActiveButtons = new Array();
+				
+				for (var i:int = 0; i < BOTTOM_BUTTON_COUNT; i++)
+				{
+					var button:CoCButton = this.bottomButtons[i] as CoCButton;
+					
+					if (button.visible == true)
+					{
+						this.currentActiveButtons.push(i);
+						button.visible = false;
+					}
+				}
+			}
+			
+			public function showCurrentBottomButtons():void
+			{
+				if (!this.currentActiveButtons) return;
+				if (currentActiveButtons.length == 0) return;
+				
+				for (var i:int = 0; i < currentActiveButtons.length; i++)
+				{
+					var btnIdx = currentActiveButtons[i];
+					var button:CoCButton = this.bottomButtons[btnIdx] as CoCButton;
+					
+					button.visible = true;
+				}
+			}
 
 		//////// Internal event handlers ////////
 
@@ -587,6 +620,7 @@ package coc.view {
 			this.eventTestInput.y = 55.1;
 			
 			this.mainText.visible = false;
+			this.imageText.visible = false;
 
 			this.eventTestInput.selectable = true;
 			this.eventTestInput.type = TextFieldType.INPUT;
@@ -603,6 +637,7 @@ package coc.view {
 			this.eventTestInput.y = -1055.1;
 			
 			this.mainText.visible = true;
+			this.imageText.visible = true;
 
 
 			this.eventTestInput.selectable = false;

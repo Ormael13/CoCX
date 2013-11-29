@@ -379,7 +379,6 @@ function debugPane():void
 	
 	outputText(images.showImage("monster-ceraph"));
 
-
 	menu();
 	addButton(0, "Event Tester", eventTestingPane);
 	addButton(1, "Test Input", eventTester);
