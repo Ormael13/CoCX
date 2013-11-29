@@ -27,7 +27,7 @@ Carries bottles of aphrodisiacs and drugs.
 Dressed in leather straps that support her chest (in a lewd way) while leaving her pierced nipples exposed and slightly parting her ass to expose her pucker & femmy funbits.  Pierced pointed ears.
 */
 //RAEP TEXT 1
-function goblinRapesPlayer():void {
+public function goblinRapesPlayer():void {
 	spriteSelect(24);
 	outputText("", true);
 	if(player.hasPerk("Bimbo Brains") >= 0) {
@@ -182,7 +182,7 @@ function goblinRapesPlayer():void {
 }
 
 //[WIN RAEPZ]
-function gobboRapeIntro():void {
+public function gobboRapeIntro():void {
 	spriteSelect(24);
 	outputText("", true);
 	//[HP Intro]
@@ -247,7 +247,7 @@ function gobboRapeIntro():void {
 	}
 	else eventParser(5007);
 }
-function gobboButtSecks():void {
+public function gobboButtSecks():void {
 	spriteSelect(24);
 	var x:Number = player.cockThatFits(monster.analCapacity());
 	if(x < 0) x = 0;
@@ -274,7 +274,7 @@ function gobboButtSecks():void {
 }
 
 //[FEMSAUCE]
-function gobboGetsRapedFem():void {
+public function gobboGetsRapedFem():void {
 	spriteSelect(24);
 	outputText("", true);
 	if (player.isTaur()) {
@@ -382,7 +382,7 @@ function gobboGetsRapedFem():void {
 	return;
 }
 //Corrupt too big fuck
-function rapeAGoblinCorruptTooBig():void {
+public function rapeAGoblinCorruptTooBig():void {
 	var x:Number = player.biggestCockIndex();
 	outputText("", true);
 	spriteSelect(24);
@@ -460,7 +460,7 @@ function rapeAGoblinCorruptTooBig():void {
 }
 
 //(TOO BIG – pin the bitch to the ground with your cock, coat it in her potions, and make her lick it clean, then blow your load in her mouth, possible cum inflation.)
-function manRapesGoblinTooBig():void {
+public function manRapesGoblinTooBig():void {
 	outputText("", true);
 	outputText(images.showImage("goblin-win-male-corruptedbj"));
 	var x:Number = player.biggestCockIndex();
@@ -496,7 +496,7 @@ function manRapesGoblinTooBig():void {
 }
 
 //[DUDEGASM]
-function gobboGetsRapedMaleFits():void {
+public function gobboGetsRapedMaleFits():void {
 	spriteSelect(24);
 	var x:Number = player.cockThatFits(monster.vaginalCapacity());
 	if(x < 0) x = player.biggestCockIndex();
@@ -575,7 +575,7 @@ function gobboGetsRapedMaleFits():void {
 	return;
 }
 
-function goblinDrugAttack():void {
+public function goblinDrugAttack():void {
 	var temp2:Number = rand(2);
 	if(monster.short == "Tamani") temp2 = rand(5);
 	if(monster.short == "Tamani's daughters") temp2 = rand(5);
@@ -656,7 +656,7 @@ function goblinDrugAttack():void {
 		return;
 	}	
 }
-function goblinTeaseAttack():void {
+public function goblinTeaseAttack():void {
 	if(monster.short == "Tamani" && flags[TAMANI_TIMES_HYPNOTISED] > 0) {
 		tamaniHypnoTease();
 		return;
@@ -671,7 +671,7 @@ function goblinTeaseAttack():void {
 }
 
 //Spider goblin condom
-function goblinCondomed():void {
+public function goblinCondomed():void {
 	spriteSelect(24);
 	var x:Number = player.cockThatFits(monster.vaginalCapacity());
 	outputText("", true);
@@ -698,7 +698,7 @@ function goblinCondomed():void {
 }
 
 //REQUIRES: AT LEAST ONE DICK AND A COPY OF ATLAS SHRUGGED - MUST NOT BE MONSTROUSLY HUGE
-function gatsGoblinBoners():void {
+public function gatsGoblinBoners():void {
 	outputText("", true);
 	var x:Number = player.cockThatFits(monster.analCapacity());
 	if (x < 0) x = player.smallestCockIndex();
@@ -739,7 +739,7 @@ function gatsGoblinBoners():void {
 	eventParser(5007);
 }
 
-function laySomeDriderEggsInGobboTwat():void {
+public function laySomeDriderEggsInGobboTwat():void {
 	clearOutput();
 	outputText(images.showImage("goblin-win-drider-egged"));
 	//Play standard goblin victory text

@@ -2,7 +2,7 @@
 //const HAS_SEEN_MINO_AND_COWGIRL:int = 892;
 //const EXPLORATION_PAGE:int = 1015;
 //const BOG_EXPLORED:int = 1016;
-function doExplore():void {
+public function doExplore():void {
 	//vars for menu building
 	var forest:Number = 0;
 	var lake:Number = 0;
@@ -49,7 +49,7 @@ function doExplore():void {
 	addButton(9,"Back",eventParser,1);
 	//choices("Explore", 12, "Desert", desert, "Forest", forest, "Lake", lake, "Mountain", mountain, "Plains", plains, "Swamp", swamp, "Deepwoods", deepwoods, "H. Mountain", highMountain, "Back", 1);
 }
-function explorePageII():void {
+public function explorePageII():void {
 	flags[EXPLORATION_PAGE] = 2;
 	var highMountain:Number = 0;
 	if(flags[DISCOVERED_HIGH_MOUNTAIN] > 0) highMountain = 95;
@@ -59,14 +59,14 @@ function explorePageII():void {
 	addButton(4,"Previous",goBackToPageI);
 	addButton(9,"Back",eventParser,1);
 }
-function goBackToPageI():void {
+public function goBackToPageI():void {
 	flags[EXPLORATION_PAGE] = 1;
 	doExplore();
 }
 
 
 //Try to find a new location - called from doExplore once the first location is found
-function tryDiscover():void {
+public function tryDiscover():void {
 	if(flags[PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !followerHel()) {
 		helSexualAmbush();
 		return;
@@ -177,7 +177,7 @@ function tryDiscover():void {
 	player.explored++;
 	doNext(13);
 }
-function exploreDeepwoods():void {
+public function exploreDeepwoods():void {
 	player.addStatusValue("exploredDeepwoods",1,1);
 	var chooser:Number = rand(5);
 	var temp2:Number = 0;
@@ -309,7 +309,7 @@ function exploreDeepwoods():void {
 
 
 //Explore forest
-function exploreForest():void {
+public function exploreForest():void {
 	player.exploredForest++;
 	
 	trace("FOREST EVENT CALLED");
@@ -585,7 +585,7 @@ function exploreForest():void {
 	}
 }
 //Explore desert
-function exploreDesert():void {
+public function exploreDesert():void {
 	player.exploredDesert++;
 	if(player.level >= 4 && player.exploredDesert % 15 == 0 && flags[DISCOVERED_WITCH_DUNGEON] == 0) {
 		inDungeon = true;
@@ -688,14 +688,14 @@ function exploreDesert():void {
 	}
 	else choices[select](args[select]);
 }
-function mirageDesert():void {
+public function mirageDesert():void {
 	clearOutput();
 	outputText("While exploring the desert, you see a shimmering tower in the distance.  As you rush towards it, it vanishes completely.  It was a mirage!   You sigh, depressed at wasting your time.", true);
 	stats(0,0,0,0,0,0,-15,0);
 	doNext(13);
 	return;
 }
-function walkingDesertStatBoost():void {
+public function walkingDesertStatBoost():void {
 	clearOutput();
 	outputText("You walk through the shifting sands for an hour, finding nothing.\n\n", true);
 	//Chance of boost == 50%
@@ -714,7 +714,7 @@ function walkingDesertStatBoost():void {
 	doNext(13);
 }
 //Explore High Mountain
-function exploreHighMountain():void {
+public function exploreHighMountain():void {
 	flags[DISCOVERED_HIGH_MOUNTAIN]++;
 	doNext(1);
 	var chooser:Number = rand(3);
@@ -798,7 +798,7 @@ function exploreHighMountain():void {
 	}
 }
 //Explore Mountain
-function exploreMountain():void {
+public function exploreMountain():void {
 	player.exploredMountain++;
 	var chooser:Number = rand(4);
 	//Helia monogamy fucks
@@ -1051,7 +1051,7 @@ function exploreMountain():void {
 	}
 }
 //Explore Lake
-function exploreLake():void {
+public function exploreLake():void {
 	//Increment exploration count
 	player.exploredLake++;
 	if(poniesYN()) return;
@@ -1308,7 +1308,7 @@ function exploreLake():void {
 	}
 }
 
-function boatExplore():void {
+public function boatExplore():void {
 	//Helia monogamy fucks
 	if(flags[PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !followerHel()) {
 		helSexualAmbush();
@@ -1372,7 +1372,7 @@ function boatExplore():void {
 
 }
 
-function exploreBog():void {
+public function exploreBog():void {
 	flags[BOG_EXPLORED]++;
 	//Helia monogamy fucks
 	if(flags[PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !followerHel()) {
@@ -1387,7 +1387,7 @@ function exploreBog():void {
 		doNext(13);
 	}
 }
-function exploreSwamp():void {
+public function exploreSwamp():void {
 	//Discover 'Bog' at after 25 explores of swamp
 	if((flags[UNKNOWN_FLAG_NUMBER_00272] >= 25) && flags[BOG_EXPLORED] == 0) {
 		outputText("While exploring the swamps, you find yourself into a particularly dark, humid area of this already fetid biome.  You judge that you could find your way back here pretty easily in the future, if you wanted to.  With your newfound discovery fresh in your mind, you return to camp.\n\n(<b>Bog exploration location unlocked! (Page 2)</b>)", true);
@@ -1451,7 +1451,7 @@ function exploreSwamp():void {
 			break;
 	}
 }
-function explorePlains():void {
+public function explorePlains():void {
 	outputText("", true);
 	flags[UNKNOWN_FLAG_NUMBER_00131]++;
 	var select:Number = rand(6);
@@ -1530,7 +1530,7 @@ function explorePlains():void {
 	choices[rand(choices.length)]();
 	return;
 }
-function plainsLoot():void {
+public function plainsLoot():void {
 	//OVI
 	if(rand(2) == 0) {
 		outputText("While exploring the plains you nearly trip over a discarded, hexagonal bottle.  ", false);
@@ -1549,7 +1549,7 @@ function plainsLoot():void {
 	}
 }
 
-function debugOptions():void {
+public function debugOptions():void {
 	shortName = "W.Fruit";
 	takeItem();
 }
@@ -1558,7 +1558,7 @@ function debugOptions():void {
 //[DESERT]
 //[RANDOM SCENE IF CHARACTER HAS AT LEAST ONE COCK LARGER THAN THEIR HEIGHT, 
 //AND THE TOTAL COMBINED WIDTH OF ALL THEIR COCKS IS TWELVE INCHES OR GREATER]
-function bigJunkDesertScene():void {
+public function bigJunkDesertScene():void {
 	outputText("", true);
 	var x:Number = player.longestCock();
 	//PARAGRAPH 1
@@ -1624,7 +1624,7 @@ function bigJunkDesertScene():void {
 
 //[FOREST]
 //[RANDOM SCENE IF CHARACTER HAS AT LEAST ONE COCK LARGER THAN THEIR HEIGHT, AND THE TOTAL COMBINED WIDTH OF ALL THEIR COCKS IS TWELVE INCHES OR GREATER]
-function bigJunkForestScene(lake:Boolean = false):void {
+public function bigJunkForestScene(lake:Boolean = false):void {
 	outputText("", true);
 	var x:Number = player.longestCock();
 
@@ -1732,7 +1732,7 @@ function bigJunkForestScene(lake:Boolean = false):void {
 
 
 //Just want to do a quick Ottergirl event submission after you mentioned it!
-function ottahGirl():void {
+public function ottahGirl():void {
 	clearOutput();
 	flags[MET_OTTERGIRL]++;
 	//First Time
@@ -1788,7 +1788,7 @@ function ottahGirl():void {
 }
 
 //For Dicks
-function ottergirlLikesDongs():void {
+public function ottergirlLikesDongs():void {
 	clearOutput();
 	outputText("The moment you agree, a sly smile spreads across her face.  She jams the end of her fishing pole into the sand like a post, to prevent it from going anywhere, and stands up.  There's no tease, no ceremony as she strips out of her bikini bottoms and tosses them aside.  Her newly revealed mound has only the barest tuft of pubic hair, a little wisp of blonde hair amongst the sparse brown fur.");
 	
@@ -1898,7 +1898,7 @@ function ottergirlLikesDongs():void {
 }
 
 //For Chicks
-function ottersForGals():void {
+public function ottersForGals():void {
 	clearOutput();
 	outputText("The moment you agree, a sly smile spreads across her face.  She jams the end of her fishing pole into the sand like a post, to prevent it from going anywhere, and stands up.  There's no tease, no ceremony as she strips out of her bikini bottoms and tosses them aside.  Her newly revealed mound has only the barest tuft of pubic hair, a little wisp of blonde hair amongst the sparse brown fur.");
 	
@@ -1957,7 +1957,7 @@ function ottersForGals():void {
 }
 
 //For Pansies
-function avoidZeOtterPussy():void {
+public function avoidZeOtterPussy():void {
 	clearOutput();
 	outputText("You shake your head and explain you can't.  She simply shrugs, \"<i>Ain't no skin off my back.</i>\"");
 	
@@ -1966,7 +1966,7 @@ function avoidZeOtterPussy():void {
 }
 
 //For Fatties
-function getSomeFishYaFatty():void {
+public function getSomeFishYaFatty():void {
 	clearOutput();
 	outputText("You tell Callu you're a little more interested in the fish than the fuck, at least for today.  She shrugs once before jamming the end of her fishing pole into the sand like a post and turning towards her pack.");
 	
@@ -1981,7 +1981,7 @@ function getSomeFishYaFatty():void {
 }
 
 //addButton(0,"Join",joinBeingAMinoCumSlut);
-function joinBeingAMinoCumSlut():void {
+public function joinBeingAMinoCumSlut():void {
 	clearOutput();
 	outputText("The prospect of getting a huge dose of that fresh minotaur cum is just too much to bear.  Before you realize what's happening, you're moving out of your rocky hiding spot and making your way down to the two bovine creatures, stripping your [armor] as you go.  By the time you reach the two figures, you're as naked as they are.  You shiver softly, whether due to some chill in the air or desperate anticipation, you can't say.");
 	outputText("\n\nThe cow-girl is bent over, her hands on a low ledge with the minotaurs hands on either side of her ample ass.  She moans, more like a moo than a human groan, as the minotaur plunges into her quaking depths.  As you step forward, suddenly unsure of yourself, both the bull and the cow turn their sharp gazes on to you.  You feel very small");
@@ -2111,7 +2111,7 @@ function joinBeingAMinoCumSlut():void {
 
 //Watch
 //addButton(1,"Watch",watchAMinoCumSlut);
-function watchAMinoCumSlut():void {
+public function watchAMinoCumSlut():void {
 	clearOutput();
 	outputText("Deciding not to risk it, you settle back into your nook in the rocks and watch on eagerly.  The cow-girl turns and places her hands on a low ledge, causing her to bend over, her ample ass facing the minotaur.  The minotaur closes the distance between them in a single step.");
 	outputText("\n\nShe bellows, almost moaning, as the minotaur grabs her cushiony ass-cheeks with both massive hands.  Her tail raises to expose a glistening wet snatch, its lips already parted with desire.  She moos again as his rapidly hardening bull-cock brushes her crotch. You can't tear your eyes away as he positions himself, his flaring, mushroom-like cock-head eliciting another moan as it pushes against her nether lips.");
@@ -2122,7 +2122,7 @@ function watchAMinoCumSlut():void {
 	menu();
 	addButton(0,"Next",watchMinoCumSlutII);
 }
-function watchMinoCumSlutII():void {
+public function watchMinoCumSlutII():void {
 	clearOutput();
 	outputText("They go at it for nearly an hour, oblivious to you watching them, before their intensity heightens as they near orgasm.  The results are almost explosive, both of them crying out as they begin twitching uncontrollably.  Clinging desperately to the cow-girl's ass, the minotaur pumps so much cum into her depths that it begins spurting out.  This accidental lubrication releases his grip and the pair collapse to the ground.  Yet the minotaur isn't finished, his man-milk spraying into the air almost like his still-erect dick is a hose and splattering down onto both of them.");
 	outputText("\n\nAs you look at the two cum-covered creatures laying there in their exhausted sex-induced stupors, the minotaur's thick horse-cock now slowly deflating, you realize that you've been touching yourself.  You make yourself stop in disgust.");

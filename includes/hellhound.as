@@ -11,13 +11,13 @@ Rape:
 Upon defeat, the flames in the hellhound's mouth goes out. It submits to its foe by licking their gear.
 */
 
-function hellhoundEncounter():void {
+public function hellhoundEncounter():void {
 	outputText("You hear a fiery howl as a demonic, two-headed beast-man leaps out in front of you!", true);
 	doNext(1);
 	startCombat(10);
 	spriteSelect(27);
 }
-function hellhoundFire():void {
+public function hellhoundFire():void {
 	//Blind dodge change
 	if(monster.hasStatusAffect("Blind") >= 0) {
 		outputText(monster.capitalA + monster.short + " completely misses you with a wave of dark fire! Thank the gods it's blind!", false);
@@ -58,7 +58,7 @@ function hellhoundFire():void {
 	}
 	doNext(1);	
 }
-function hellhoundScent():void {
+public function hellhoundScent():void {
 	if(player.hasStatusAffect("NoFlee") >= 0) {
 		if(monster.spe == 100) {
 			hellhoundFire();
@@ -101,7 +101,7 @@ function hellhoundScent():void {
 }
 
 
-function hellhoundRapesPlayer():void {
+public function hellhoundRapesPlayer():void {
 	//Lust or HP loss texts here
 	if(player.lust >= 100) outputText("Overcome by sexual desire, you submit to the hungry hellhound.\n\n", true);
 	else outputText("Too weak to continue fighting, you fall to your knees.\n\n", true);
@@ -145,7 +145,7 @@ function hellhoundRapesPlayer():void {
 	eventParser(5007);
 }
 
-function hellHoundGetsRaped():void {
+public function hellHoundGetsRaped():void {
 	outputText("", true);
 	//(Raped by player)
 	//[if player has only one dick and no vagina]
@@ -164,7 +164,7 @@ function hellHoundGetsRaped():void {
 
 
 //HELLHOUND MASTER+ BAD ENDZZZZZ
-function HellHoundMasterEncounter():void {
+public function HellHoundMasterEncounter():void {
 	outputText("", true);
 	//Initial encounter (A)
 	//Requires canine face, [either two dog dicks, or a vag and pregnant with a hellhound], at least two other hellhound features (black fur, dog legs, dog tail), and corruption >=60.
@@ -183,14 +183,14 @@ function HellHoundMasterEncounter():void {
 }
 
 //choose no (B)
-function declineCrazyPresences():void {
+public function declineCrazyPresences():void {
 	outputText("", true);
 	outputText("You force the presence out of your mind.  You feel almost a bit lost after it disappears, but giving yourself over to foreign control can never be a good idea, can it?", false);
 	//end event, A can repeat later.
 	doNext(13);
 }
 //choose yes (C)
-function acceptCrazyPresences():void {
+public function acceptCrazyPresences():void {
 	outputText("", true);
 	outputText("You relax your mind and allow the presence to fill your mind.  It takes control of your consciousness, and guides your thoughts.  You feel like you should go home, your master probably wants to meet you for the first time.  Instinctively you navigate the many twists and turns of the mountains, a path you can't remember, and don't have the presence of mind to chart.  Some time later, you emerge from the crags and passes to find an elaborate vale, filled with hellhounds.\n\n", false);
 
@@ -201,7 +201,7 @@ function acceptCrazyPresences():void {
 	doNext(acceptCrazyPresencesII);
 }
 
-function acceptCrazyPresencesII():void {
+public function acceptCrazyPresencesII():void {
 	outputText("", true);
 	outputText("The interior of the fort is obviously just the outer fortifications of a much bigger complex that goes deep inside a cave system.  As you move further inside, you find yourself stopping in front of the kenels.  These seem to be for the strongest of the hellhounds, and those that have their own demon masters.  You see a few other incubi and succubi playing with their hellhound pets.  For the most part though, you don't pay attention to the details of the fortress.  You're far too excited to get to the deepest part and meet up with your master, so you hurry on past.\n\n", false);
 
@@ -218,7 +218,7 @@ function acceptCrazyPresencesII():void {
 }
 
 //Choose no (E)
-function declineGivingAwayLethicite():void {
+public function declineGivingAwayLethicite():void {
 	outputText("", true);
 	outputText("You push the presence out of your mind.  Maybe later you'll collect the hellfire, but for now you'd rather keep the lethicite.", false);
 	//end event, D can repeat.
@@ -226,7 +226,7 @@ function declineGivingAwayLethicite():void {
 }
 
 //Choose yes (F)
-function giveUpLethicite():void {
+public function giveUpLethicite():void {
 	outputText("", true);
 	outputText("You once again allow the master's will to fill you and bring you to his home.  Once again you pass through the many crags and passes of the mountains and find yourself in the hellhound valley.  The place is just as it was the last time you were here, but you don't take in the views, you have other pressing matters to deal with.  You quickly make your way across the valley to the entrance to the master's lair.\n\n", false);
 
@@ -239,7 +239,7 @@ function giveUpLethicite():void {
 	else doNext(giveLethicitePiece);
 }
 //Regular Lethicite
-function giveLethicitePiece():void {
+public function giveLethicitePiece():void {
 	outputText("", true);
 	//Give a single piece of Lethicite, get hellfire
 	outputText("You produce the pink crystal and hand it to the master.  As the crystal touches his hand, he gives a low growl of pleasure and holds the crystal up to his eyes.  \"<i>Ah yes, excellent!  Thank you so much for this tasty treat of power.</i>\"\n\n", false);
@@ -274,7 +274,7 @@ function giveLethicitePiece():void {
 }
 
 //Merae's Lethicite
-function giveALLTHELETHICITES():void {
+public function giveALLTHELETHICITES():void {
 	outputText("", true);
 	//Give him Merae's Lethicite, now he's got enough power for a major upheaval in the demon hierarchy.  You don't get to keep being a champion.
 	//Max player's lust for genital descriptions.
@@ -350,7 +350,7 @@ function giveALLTHELETHICITES():void {
 	eventParser(5035);
 }
 
-function hellHoundPropahRape():void {
+public function hellHoundPropahRape():void {
 	outputText("", true);
 	if(monster.HP < 1) outputText("The hellhound's flames dim and the heads let out a whine before the creature slumps down, defeated and barely conscious. After all the trouble you had with him, you want to have some fun in exchange. \"<i>Bad boy, roll over!</i>\" you command as if the hellhound was just an ordinary domestic dog. To your surprise the creature actually does as you say. Accepting your victory he rolls onto his back, exposing his human-like abs and throat, signalling submissiveness. Looking down on your foe, your lustful gaze rests upon his privates. You examine the unusual ballsack with its quadruple testes, but the real treasure is yet to be found. Pulling on his sheath you reveal his twin dog members. An obsessive idea comes to your mind and you are determined to put his magnificent tools to a good use.\n\n", false);
 	else outputText("Unable to bear hurting you anymore, the hellhound's flames dim as he stops its attack. The two heads look at you, whining plaintively. After all the trouble you had with him, you want to have some fun in exchange. \"<i>Bad boy, roll over!</i>\" you command as if the hellhound was just an ordinary domestic dog. To your surprise the creature actually does as you say. Accepting your victory he rolls onto his back, exposing his human-like abs and throat, signalling submissiveness. Looking down on your foe, your lustful gaze rests upon his privates. You examine the unusual ballsack with its quadruple testes, but the real treasures are pulsating just above it. Pulling on his sheath, you smile as his twin members twitch in response. An obsessive idea comes to your mind and you are determined to put his magnificent tools to a good use.\n\n", false);

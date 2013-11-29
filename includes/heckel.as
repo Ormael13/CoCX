@@ -14,13 +14,13 @@ genderless, since most of it would make no sense.
 Requirements for anal: ass 'a little loose'
 */
 //Intro:
-function heckelAppearance():void {
+public function heckelAppearance():void {
 	if(flags[MET_HECKEL] == 0) outputText("\n\nYou can see a brown hyena running around an indoor track, her tongue lolling out of her mouth as she runs. She spares a glance towards you before returning to her workout, her legs a blur of motion beneath her.", false);
 	else outputText("\n\nYou can see Heckel is here, running laps on an indoor track again.", false);
 }
 
 //Greeting scene:
-function greetHeckel():void {
+public function greetHeckel():void {
 	outputText("", true);
 	if(flags[MET_HECKEL] == 0) {
 		outputText("As you approach the edge of the track, the hyena comes around the bend towards you.  Her fur is a light brown mottled with spots of dark brown and black, with a thicker and longer black mane passing for hair.  You get a good view of her B-cup breasts bouncing inside her shirt, black workout bra straps sticking out on her shoulders.  She has simple black shorts on that hug her firm ass, and you can't help but admire her toned legs as they move beneath her.  As she stops running and turns toward you, you see something else entirely bouncing around in her groin.  Her body reminds you of a coiled spring, too much power and tension in too small a frame.\n\n", false);
@@ -44,7 +44,7 @@ function greetHeckel():void {
 }
 
 //First time Sex
-function heckelTraining():void {
+public function heckelTraining():void {
 	outputText("", true);
 	var dom:int = 0;
 	//Rejection
@@ -110,7 +110,7 @@ function heckelTraining():void {
 }
 
 //oral
-function heckelOrallyFixated():void {
+public function heckelOrallyFixated():void {
 	outputText("", true);
 	if(flags[TIMES_FUCKED_HECKEL_BLOWJOB] == 0) {
 		outputText("You walk over to Heckel and fall to your knees, already licking your lips. Heckel throws her head back in a barking laugh as she scoots forward, one paw coming around the back of your head. Without needing further encouragement, you grab the flaccid dog cock and give it an experimental pump.\n\n", false);
@@ -166,7 +166,7 @@ function heckelOrallyFixated():void {
 	flags[TIMES_FUCKED_HECKEL_BLOWJOB]++;
 }
 
-function heckelOralFixationII():void {
+public function heckelOralFixationII():void {
 	outputText("", true);
 	outputText("You look up her body at her scowling face, wondering what you did wrong. \"<i>None of that, little meat. I'm top dog here, which means you don't go near there. But if you keep sucking this well, I might just let you keep that hand.</i>\" Heckel clearly isn't amused, but she hasn't pulled you away either. Whether from her threat or your lust, you aren't about to let this hard cock out of your mouth any time soon anyway. Your next bob is echoed by a thrust from Heckel, as is the next and the next after that. Her thrusts start coming faster than your head can keep up, and then her hands in your " + hairDescript() + " tighten their grip to hold your mouth in place. Before you know it she's fucking your throat more than you're giving her head. All you can do is watch her furry groin and stomach pumping towards you, and you have ample time to watch a knot start forming at the base of her dick. Your eyes begin to tear up as her cock pushes your throat open again and again, her thrusts getting faster and faster. It's all you can do to keep one hand stroking her shaft without gagging on her dick.\n\n", false);
 
@@ -180,7 +180,7 @@ function heckelOralFixationII():void {
 }
 
 //anal
-function heckelLovesDaAnal(loss:Boolean = false):void {
+public function heckelLovesDaAnal(loss:Boolean = false):void {
 	outputText("", true);
 	//rejection - ass not loose enough
 	if(player.analCapacity() <= 20 && !loss) {
@@ -220,7 +220,7 @@ function heckelLovesDaAnal(loss:Boolean = false):void {
 	flags[TIMES_FUCKED_HECKEL_ANAL]++;
 }
 
-function heckelLovesAnal2():void {
+public function heckelLovesAnal2():void {
 	outputText("", true);
 	outputText("Her legs bump against yours as she pulls herself up, the contact sending shivers through your sensitive body. \"<i>Even better than I thought,</i>\" she mumbles as you hear the sound of her stroking herself. Before the wetness around your ass can dry up, you feel something hard and slightly pointed poking the entrance of your " + assholeDescript() + ".\n\n", false);
 
@@ -276,7 +276,7 @@ function heckelLovesAnal2():void {
 }
 
 
-function dominateHeckel():void {
+public function dominateHeckel():void {
 	clearOutput();
 	outputText("Smirking, you fold your arms and tell her to bend over - ");
 	if(flags[TIMES_DOMMED_HECKEL] == 0) outputText("there's a new top dog just waiting to claim the town bitch");
@@ -318,7 +318,7 @@ function dominateHeckel():void {
 }
 	
 //[Fuck Heckel]
-function dominateHeckelConclusion():void {
+public function dominateHeckelConclusion():void {
 	clearOutput();
 	var x:int = player.cockThatFits(70);
 	if(x < 0) x = player.smallestCockIndex();

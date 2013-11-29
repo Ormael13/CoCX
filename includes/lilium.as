@@ -11,7 +11,7 @@
 //267 Times Bought Smexin'
 
 //#########AREA TEXT#########
-function LiliumText(output:Boolean = false):Number {
+public function LiliumText(output:Boolean = false):Number {
 	if(output) {
 		//Before paying:
 		if(flags[UNKNOWN_FLAG_NUMBER_00267] == 0) outputText("\n\nYou can see a pale, scantily clad demon woman leaning casually against the wall of a building.", false);
@@ -22,7 +22,7 @@ function LiliumText(output:Boolean = false):Number {
 	return 0;
 }
 
-function approachLilium():void {
+public function approachLilium():void {
 	outputText("", true);
 	spriteSelect(93);
 	var pay:Number = 0;
@@ -48,7 +48,7 @@ function approachLilium():void {
 }
 
 
-function payForLilium():void {
+public function payForLilium():void {
 	outputText("", true);
 	spriteSelect(93);
 	//#########GENDERLESS SCENE######### REQUIRES unsexed (hah)
@@ -91,7 +91,7 @@ function payForLilium():void {
 }
 
 //- Leave:
-function leaveLilium():void {
+public function leaveLilium():void {
 	outputText("", true);
 	spriteSelect(93);
 	if(flags[UNKNOWN_FLAG_NUMBER_00267] == 0) outputText("\"<i>I'm deathly allergic to fun, unfortunately,</i>\" you reply before moving on to examine more of the bazaar.", false);
@@ -100,7 +100,7 @@ function leaveLilium():void {
 }
 
 //#########BUTTFUCK + TONGUEJOB SCENE######### REQUIRES PENIS AND LONG DEMONIC TONGUE
-function buttFuckTongueJeorb():void {
+public function buttFuckTongueJeorb():void {
 	outputText("", true);
 	spriteSelect(93);
 	var x:Number = player.cockThatFits(40);
@@ -141,7 +141,7 @@ function buttFuckTongueJeorb():void {
 }
 
 //#########DICK RIDE SCENE######### REQUIRES VAGINA
-function liliumDickRidah():void {
+public function liliumDickRidah():void {
 	outputText("", true);
 	spriteSelect(93);
 	outputText("Lilium takes you to a secluded spot away from the Bazaar.  She removes her corset and skirt and slips the lacy cock sock off her cock and you eagerly remove your own " + player.armorName + ".\n\n", false);
@@ -196,7 +196,7 @@ function liliumDickRidah():void {
 }
 
 //#########NIPPLE FUCK SCENE######### REQUIRES PENIS
-function liliumNippleFuck():void {
+public function liliumNippleFuck():void {
 	var x:Number = player.cockThatFits(40);
 	if(x < 0) x = 0;
 	

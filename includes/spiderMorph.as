@@ -1,4 +1,4 @@
-﻿function spiderAI():void {
+﻿public function spiderAI():void {
 	if(player.spe >= 2 && rand(2) == 0) {
 		spiderMorphWebAttack();
 	}
@@ -13,7 +13,7 @@
 }
 //-Web - lowers speed by 25 each application and disables 
 //flight once hit.
-function spiderMorphWebAttack():void {
+public function spiderMorphWebAttack():void {
 	outputText("Turning to the side, " + monster.a + monster.short + " raises " + monster.mf("his","her") + " abdomen and unleashes a spray of webbing in your direction!  ", false);
 	//Blind dodge change
 	if(monster.hasStatusAffect("Blind") >= 0 && rand(3) < 2) {
@@ -63,7 +63,7 @@ function spiderMorphWebAttack():void {
 }
 
 //-Bite - Raises arousal by 30
-function getBitten():void {
+public function getBitten():void {
 	//-Languid Bite - Inflicted on PC's who have been reduced to 1 speed by webbing, raises arousal by 60.
 	if(player.spe < 2 && player.hasStatusAffect("Web") >= 0) {
 		outputText("The arachnid aggressor slowly saunters forward while you struggle under the heaps of webbing, gently placing " + monster.mf("his","her") + " arms around your back in a tender hug.  " + monster.mf("His","Her") + " fangs slide into your neck with agonizing slowness, immediately setting off a burning heat inside you that makes you dizzy and weak.  ", false);
@@ -121,7 +121,7 @@ function getBitten():void {
 
 //-Disarm - hits the PC's weapon with web and sticks it to a 
 //nearby tree, reducing PC's attack to 0 for the rest of the fight.
-function spiderDisarm():void {
+public function spiderDisarm():void {
 	outputText(monster.capitalA + monster.short + " shifts and sprays webbing, aiming a tight strand of it at your " + player.weaponName + ".  ", false);
 	//Blind dodge change
 	if(monster.hasStatusAffect("Blind") >= 0 && rand(3) < 2) {
@@ -160,7 +160,7 @@ function spiderDisarm():void {
 }
 
 //-Silence - sprays webs on the PC's mouth, silencing them for 1 to 3 turns.
-function spiderSilence():void {
+public function spiderSilence():void {
 	outputText(monster.capitalA + monster.short + " squirts a concentrated spray of " + monster.mf("his","her") + " webs directly at your face!  ", false);
 	//Blind dodge change
 	if(monster.hasStatusAffect("Blind") >= 0 && rand(3) < 2) {
@@ -188,7 +188,7 @@ function spiderSilence():void {
 	}
 	combatRoundOver();
 }
-function fSpiderMorphGreeting():void {
+public function fSpiderMorphGreeting():void {
 	outputText("", true);
 	spriteSelect(73);
 	//Egg sack sometimes
@@ -212,13 +212,13 @@ function fSpiderMorphGreeting():void {
 }
 
 //Selecting fight starts combat and eventParsers to 1 to display the combat menu and enemy description.
-function fightFSpiderMorph():void {
+public function fightFSpiderMorph():void {
 	startCombat(37);
 	spriteSelect(73);
 	eventParser(1);
 }
 //Run
-function runFromFSpiderMorph():void {
+public function runFromFSpiderMorph():void {
 	outputText("", true);
 	spriteSelect(73);
 	//Selecting has a 50% chance of displaying the following:
@@ -233,7 +233,7 @@ function runFromFSpiderMorph():void {
 	}
 }
 //*Try to Talk
-function talkToFSpiderMorph():void {
+public function talkToFSpiderMorph():void {
 	outputText("", true);
 	spriteSelect(73);
 	if(rand(2) == 0) {
@@ -268,14 +268,14 @@ function talkToFSpiderMorph():void {
 	}
 }
 //*OPTION 1 Yes - Let Her Fuck You
-function voluntaryFemaleSpiderMorphRapesYou():void {
+public function voluntaryFemaleSpiderMorphRapesYou():void {
 	startCombat(37);
 	spriteSelect(73);
 	gameState = 0;
 	loseToFemaleSpiderMorph();
 }
 //*OPTION 1 No (Declined sex)
-function declinedCrazyFemaleSpiderMorphSexFunTimes():void {
+public function declinedCrazyFemaleSpiderMorphSexFunTimes():void {
 	outputText("", true);
 	outputText("You tell the lusty spider-morph that you're not interested in having sex with her now, and though she looks crestfallen, she nods understandingly and zips up a line of webbing into the trees before the situation can become any more awkward.", false);
 	doNext(13);
@@ -285,7 +285,7 @@ function declinedCrazyFemaleSpiderMorphSexFunTimes():void {
 
 //*Defeat Female
 //*Summary: Webs PC down, suckles nipple and injects aphrodisiac into each breast, then sixty-nine's, ending with webbing bukkake?
-function defeatFemale():void {
+public function defeatFemale():void {
 	outputText("", true);
 	spriteSelect(73);
 	//(Noncombat Intro)
@@ -409,7 +409,7 @@ function defeatFemale():void {
 	else eventParser(5007);
 }
 //*Defeat Male
-function spiderMorphFemaleRidesACawk():void {
+public function spiderMorphFemaleRidesACawk():void {
 	//*SUMMARY:  PC is tied down and has a web-condom sprayed around their dick, then a webbing cock-ring.  The PC is then ridden hard, bit numerous times, and never able to cum until pain lances through his (balls/cock) from the lack of release.  Finally, she bites PC's neck and the PC cums, inflating web-condom of various size.
 	outputText("", true);
 	spriteSelect(73);
@@ -512,7 +512,7 @@ function spiderMorphFemaleRidesACawk():void {
 
 //*Defeat Male - Too Big
 //Summary: web-spooling around dick, then webjob.  
-function femaleSpiderMorphTooBigWebRape():void {
+public function femaleSpiderMorphTooBigWebRape():void {
 	outputText("", true);
 	spriteSelect(73);
 	var x:Number = player.cockThatFits(monster.vaginalCapacity());
@@ -583,7 +583,7 @@ function femaleSpiderMorphTooBigWebRape():void {
 	else eventParser(5007);
 }
 	
-function loseToFemaleSpiderMorph():void {
+public function loseToFemaleSpiderMorph():void {
 	if(player.hasCock()) {
 		if(player.cockThatFits(monster.vaginalCapacity()) == -1) femaleSpiderMorphTooBigWebRape();
 		else spiderMorphFemaleRidesACawk();
@@ -596,7 +596,7 @@ function loseToFemaleSpiderMorph():void {
 }	
 
 //*Victory Intro
-function defeatASpiderBitch():void {
+public function defeatASpiderBitch():void {
 	outputText("", true);
 	spriteSelect(73);
 	outputText("The spider-girl drops to her knees and wobbles unsteadily", false);
@@ -621,7 +621,7 @@ function defeatASpiderBitch():void {
 	
 //*Victory Female
 //*Summary: Make her bite herself in the tit and inject aphrodisiac venom, then scissor (or brief clit-fuck)
-function fSpiderMorphRape():void {
+public function fSpiderMorphRape():void {
 	outputText("", true);
 	spriteSelect(73);
 	outputText("You laugh at her and push her down with your " + player.legs() + ", enjoying the view of the pale maiden's unblemished skin and dark, fetishy-looking exoskeleton when she bounces in swamp loam.  Her legs scissor closed nervously, a weak effort to conceal her sex from you", false);
@@ -678,7 +678,7 @@ function fSpiderMorphRape():void {
 }
 //*Victory Male
 //Summary:  Bind her hands with vines and fuck the immobilized spider-girl. BORING
-function fSpiderMorphRapeDude():void {
+public function fSpiderMorphRapeDude():void {
 	var x:Number = player.cockThatFits(monster.vaginalCapacity());
 	if(x < 0) x = 0;
 	outputText("", true);
@@ -743,7 +743,7 @@ function fSpiderMorphRapeDude():void {
 
 //*Victory Anal:
 //Summary: Fuck her ass until she loses control of her spinnerets and starts spraying webs willy-nilly. 
-function evilSpiderGirlVictoryAnal():void {
+public function evilSpiderGirlVictoryAnal():void {
 	var x:Number = player.cockThatFits(monster.analCapacity());
 	if(x == -1) x = 0;
 	var y:Number = player.cockThatFits2(monster.analCapacity());
@@ -808,7 +808,7 @@ function evilSpiderGirlVictoryAnal():void {
 	else eventParser(5007);
 }
 //*Egg Sack Find
-function findASpiderMorphEggSack():void {
+public function findASpiderMorphEggSack():void {
 	outputText("", true);
 	spriteSelect(73);
 	outputText("You stumble upon a huge, webbed sack hanging from a tree.  Examining it closer, you see that bound up inside it are nearly a dozen webs, each containing a wriggling form.  They start moving faster and faster, perhaps reacting to the nearby movement, before the shells finally shatter and unleash their cargo.  Inside each is a tiny, six inch tall humanoid figure, each resembling a child in miniature.  Remarkably, their features remind you of your own, and before the significance of that fact settles in, they drop to the ground and scurry away on their tiny, carapace-covered legs.\n\n", false);

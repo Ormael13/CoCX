@@ -1,9 +1,9 @@
 
-function inCombat():Boolean {
+public function inCombat():Boolean {
 	if(gameState == 1 || gameState == 2) return true;
 	return false;
 }
-function baseXP():Number {
+public function baseXP():Number {
 	trace("LEGACY CODE FIX DIS SHIT");
 	var xp:Number = 0;
 	var lev:Number = Math.round(monster.level);
@@ -74,7 +74,7 @@ function baseXP():Number {
 	}
 	return xp;
 }
-function bonusXP():Number {
+public function bonusXP():Number {
 	var xp:Number = 0;
 	var lev:Number = Math.round(monster.level);
 	switch(lev) {
@@ -144,7 +144,7 @@ function bonusXP():Number {
 	}
 	return rand(xp);
 }
-function totalXP():Number {
+public function totalXP():Number {
 	//Nerf xp gains by 20% per level over.
 	var difference:Number = player.level - monster.level;
 	//No bonuses for underlevel!
@@ -164,7 +164,7 @@ function totalXP():Number {
 
 
 //5000 6999
-function doCombat(eventNum:Number)
+public function doCombat(eventNum:Number)
 {
 	var temp2:Number = 0;
 	var temp3:Number = 0;
@@ -3707,7 +3707,7 @@ function doCombat(eventNum:Number)
 	}
 }
 //Fantasize
-function fantasize():void {
+public function fantasize():void {
 	var temp2:Number = 0;
 	outputText("", true);
 	if(player.armorName == "goo armor") {
@@ -3752,7 +3752,7 @@ function fantasize():void {
 }
 //Mouf Attack
 // (Similar to the bow attack, high damage but it raises your fatigue).
-function bite():void {
+public function bite():void {
 	if(player.fatigue + physicalCost(25) > 100) {
 		outputText("You're too fatigued to use your shark-like jaws!", true);
 		doNext(5000);
@@ -3819,14 +3819,14 @@ function bite():void {
 	}
 }
 
-function fatigueRecovery():void {
+public function fatigueRecovery():void {
 	fatigue(-1);
 	if(player.hasPerk("Enlightened Nine-tails") >= 0 || player.hasPerk("Corrupted Nine-tails") >= 0) fatigue(-(1+rand(3)));
 }
 
 
 //ATTACK
-function attack():void {
+public function attack():void {
 	if(player.hasStatusAffect("FirstAttack") < 0) {
 		outputText("", true);
 		fatigueRecovery();
@@ -4100,7 +4100,7 @@ function attack():void {
 	}
 }
 //Gore Attack - uses 15 fatigue!
-function goreAttack():void {
+public function goreAttack():void {
 	if(player.fatigue + physicalCost(15) > 100) {
 		outputText("You're too fatigued to use a charge attack!", true);
 		doNext(5000);
@@ -4193,7 +4193,7 @@ function goreAttack():void {
 	}
 }
 //Player sting attack
-function playerStinger():void {
+public function playerStinger():void {
 	menuLoc = 0;
 	//Clear Text
 	outputText("", true);
@@ -4250,26 +4250,26 @@ function playerStinger():void {
 	if(monster.HP > 0 && monster.lust < 100) enemyAI();
 	else doNext(5009);
 }
-function combatMiss():Boolean {
+public function combatMiss():Boolean {
 	if(player.spe - monster.spe > 0 && int(Math.random()*(((player.spe-monster.spe)/4)+80)) > 80) return true;
 	return false;
 }
-function combatEvade():Boolean {
+public function combatEvade():Boolean {
 	if(monster.short != "Kiha" && player.hasPerk("Evade") >= 0 && rand(100) < 10) return true;
 	return false;
 }
-function combatFlexibility():Boolean {
+public function combatFlexibility():Boolean {
 	if(player.hasPerk("Flexibility") >= 0 && rand(100) < 6) return true;
 	return false;
 }
-function combatMisdirect():Boolean {
+public function combatMisdirect():Boolean {
 	if(player.hasPerk("Misdirection") >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") 
 		return true;
 	return false;
 }
 
 
-function eAttack():void {
+public function eAttack():void {
 	//Gnolls do their own shit
 	if(monster.short == "gnoll spear-thrower" || monster.short == "alpha gnoll") {
 		hyenaPhysicalAttack();
@@ -4443,7 +4443,7 @@ function eAttack():void {
 }
 
 //DEAL DAMAGE
-function doDamage(damage:Number):Number {
+public function doDamage(damage:Number):Number {
 	if(player.hasPerk("Sadist") >= 0) {
 		damage *= 1.2;
 		stats(0,0,0,0,0,0,3,0);
@@ -4468,7 +4468,7 @@ function doDamage(damage:Number):Number {
 	if(monster.HP < 0) monster.HP = 0;
 	return damage;
 }
-function takeDamage(damage:Number, noMod:Boolean = false):Number {
+public function takeDamage(damage:Number, noMod:Boolean = false):Number {
 	//EZ MOAD half damage
 	if(flags[EASY_MODE_ENABLE_FLAG] == 1) damage /= 2;
 	if(player.hasStatusAffect("Shielding") >= 0) {
@@ -4514,7 +4514,7 @@ function takeDamage(damage:Number, noMod:Boolean = false):Number {
 	return damage;
 }
 //ENEMYAI!
-function enemyAI():void {
+public function enemyAI():void {
 	if(monster.skinTone == "helspawn") {
 		helSpawnAI();
 		return;
@@ -4799,7 +4799,7 @@ function enemyAI():void {
 	if(rando == 3) eventParser(monster.special3);
 }
 //Clear statuses
-function clearStatuses(visibility:Boolean):void {
+public function clearStatuses(visibility:Boolean):void {
 	while(player.hasStatusAffect("Web") >= 0) {
 		player.spe += player.statusAffectv1("Web");
 		mainView.statsView.showStatUp( 'spe' );
@@ -4948,7 +4948,7 @@ function clearStatuses(visibility:Boolean):void {
 	while(player.hasStatusAffect("Izma Bleed") >= 0) player.removeStatusAffect("Izma Bleed");
 }
 //Update combat status effects
-function combatStatusesUpdate():void {
+public function combatStatusesUpdate():void {
 	//old outfit used for fetish cultists
 	var oldOutfit:String = "";
 	var changed:Boolean = false;
@@ -5465,7 +5465,7 @@ function combatStatusesUpdate():void {
 	if(player.HP <= 0) doNext(5010);
 }
 
-function regeneration(combat:Boolean = true):void {
+public function regeneration(combat:Boolean = true):void {
 	var healingPercent:int = 0;
 	if(combat) {
 		//Regeneration
@@ -5490,7 +5490,7 @@ function regeneration(combat:Boolean = true):void {
 		HPChange(Math.round(maxHP() * healingPercent / 100), false);
 	}
 }
-function startCombat(monsterNum:Number):void {
+public function startCombat(monsterNum:Number):void {
 	mainView.hideMenuButton( MainView.MENU_DATA );
 	mainView.hideMenuButton( MainView.MENU_APPEARANCE );
 	mainView.hideMenuButton( MainView.MENU_LEVEL );
@@ -14676,10 +14676,10 @@ function startCombat(monsterNum:Number):void {
 		else monster.armorDef -= 10;
 	}
 }
-function eMaxHP():Number {
+public function eMaxHP():Number {
 	return monster.tou * 2 + 50 + monster.bonusHP;
 }
-function display():void {
+public function display():void {
 	var percent:String = "";
 	var math:Number = monster.HP/eMaxHP();
 	if(monster.short == "worms") math = monster.HP/40;
@@ -14724,7 +14724,7 @@ function display():void {
 		showMonsterLust();
 	}
 }
-function enemyTeaseReaction(lustDelta:Number):void {
+public function enemyTeaseReaction(lustDelta:Number):void {
 	lustDelta = monster.lustVuln * lustDelta;
 	if(monster.short == "demons") {
 		outputText("\n", false);
@@ -14802,7 +14802,7 @@ function enemyTeaseReaction(lustDelta:Number):void {
 	lustDelta = Math.round(lustDelta * 10)/10;
 	outputText(" (" + lustDelta + ")", false);
 }
-function showMonsterLust():void {
+public function showMonsterLust():void {
 	//Entrapped
 	if(monster.hasStatusAffect("Constricted") >= 0) {
 		outputText(monster.capitalA + monster.short + " is currently wrapped up in your tail-coils!  ", false);
@@ -14940,7 +14940,7 @@ function showMonsterLust():void {
 	}
 }
 
-function tease():void {
+public function tease():void {
 	outputText("", true);
 	//You cant tease a blind guy!
 	if(monster.hasStatusAffect("Blind") >= 0) {
@@ -16270,7 +16270,7 @@ function tease():void {
 	outputText("\n\n", false);
 }
 
-function teaseXP(XP:Number = 0):void {
+public function teaseXP(XP:Number = 0):void {
 	while(XP > 0) {
 		XP--;
 		player.teaseXP++;
@@ -16286,7 +16286,7 @@ function teaseXP(XP:Number = 0):void {
 
 
 //VICTORY OR DEATH?
-function combatRoundOver():Boolean {
+public function combatRoundOver():Boolean {
 	statScreenRefresh();
 	player.weaponAttack = fixedDamage(player.weaponName);
 	applyArmorStats(player.armorName, false);
@@ -16320,7 +16320,7 @@ function combatRoundOver():Boolean {
 	doNext(1);
 	return false;
 }
-function hasSpells():Boolean {
+public function hasSpells():Boolean {
 	if(player.hasStatusAffect("Knows Arouse") >= 0) return true;
 	if(player.hasStatusAffect("Knows Heal") >= 0) return true;
 	if(player.hasStatusAffect("Knows Might") >= 0) return true;
@@ -16329,7 +16329,7 @@ function hasSpells():Boolean {
 	if(player.hasStatusAffect("Knows Whitefire") >= 0) return true;
 	return false;
 }
-function spellCount():Number {
+public function spellCount():Number {
 	var count:Number = 0;
 	if(player.hasStatusAffect("Knows Arouse") >= 0) count++;
 	if(player.hasStatusAffect("Knows Heal") >= 0) count++;
@@ -16339,7 +16339,7 @@ function spellCount():Number {
 	if(player.hasStatusAffect("Knows Whitefire") >= 0) count++;
 	return count;
 }
-function magicMenu():void {
+public function magicMenu():void {
 	menuLoc = 3;
 	var arouseEvent:Number = 0;
 	var healEvent:Number = 0;
@@ -16379,7 +16379,7 @@ function magicMenu():void {
 	}
 	choices("Charge W.",chargeEvent,"Blind",blindEvent,"Whitefire",whitefireEvent,"",0,"",0,"Arouse",arouseEvent,"Heal",healEvent,"Might",mightEvent,"",0,"Back",5000);
 }
-function spellMod():Number {
+public function spellMod():Number {
 	var mod:Number = 1;
 	if(player.hasPerk("Archmage") >= 0 && player.inte >= 75) mod += .5;
 	if(player.hasPerk("Channeling") >= 0 && player.inte >= 60) mod += .5;
@@ -16390,7 +16390,7 @@ function spellMod():Number {
 	}
 	return mod;
 }
-function spellArouse():void {
+public function spellArouse():void {
 	if(player.hasPerk("Blood Mage") < 0 && player.fatigue + spellCost(15) > 100) {
 		outputText("You are too tired to cast this spell.", true);
 		doNext(5002);
@@ -16465,7 +16465,7 @@ function spellArouse():void {
 	else enemyAI();
 	return;	
 }
-function spellHeal():void {
+public function spellHeal():void {
 	if(player.hasPerk("Blood Mage") < 0 && player.fatigue + spellCost(20) > 100) {
 		outputText("You are too tired to cast this spell.", true);
 		doNext(5002);
@@ -16504,7 +16504,7 @@ function spellHeal():void {
 //(25) Might – increases strength/toughness by 5 * spellMod, up to a 
 //maximum of 15, allows it to exceed the maximum.  Chance of backfiring 
 //and increasing lust by 15.
-function spellMight():void {
+public function spellMight():void {
 	if(player.hasPerk("Blood Mage") < 0 && player.fatigue + spellCost(25) > 100) {
 		outputText("You are too tired to cast this spell.", true);
 		doNext(5002);
@@ -16558,7 +16558,7 @@ function spellMight():void {
 }
 
 //(15) Charge Weapon – boosts your weapon attack value by 10 * SpellMod till the end of combat.
-function spellChargeWeapon():void {
+public function spellChargeWeapon():void {
 	if(player.hasPerk("Blood Mage") < 0 && player.fatigue + spellCost(15) > 100) {
 		outputText("You are too tired to cast this spell.", true);
 		doNext(5002);
@@ -16575,7 +16575,7 @@ function spellChargeWeapon():void {
 	enemyAI();
 }
 //(20) Blind – reduces your opponent's accuracy, giving an additional 50% miss chance to physical attacks.
-function spellBlind():void {
+public function spellBlind():void {
 	outputText("", true);
 	if(player.hasPerk("Blood Mage") < 0 && player.fatigue + spellCost(20) > 100) {
 		outputText("You are too tired to cast this spell.", true);
@@ -16612,7 +16612,7 @@ function spellBlind():void {
 	enemyAI();
 }
 //(30) Whitefire – burns the enemy for int/5 * spellMod + rand(int/2*spellMod).
-function spellWhitefire():void {
+public function spellWhitefire():void {
 	outputText("", true);
 	if(player.hasPerk("Blood Mage") < 0 && player.fatigue + spellCost(30) > 100) {
 		outputText("You are too tired to cast this spell.", true);
@@ -16647,7 +16647,7 @@ function spellWhitefire():void {
 	else enemyAI();
 }
 
-function spellPerkUnlock():void {
+public function spellPerkUnlock():void {
 	if(flags[SPELLS_CAST] >= 5 && player.hasPerk("Spellcasting Affinity") < 0) {
 		outputText("<b>You've become more comfortable with your spells, unlocking the Spellcasting Affinity perk and reducing fatigue cost of spells by 20%!</b>\n\n");
 		player.createPerk("Spellcasting Affinity",20,0,0,0);
@@ -16666,7 +16666,7 @@ function spellPerkUnlock():void {
 //player gains hellfire perk.  
 //Hellfire deals physical damage to completely pure foes, 
 //lust damage to completely corrupt foes, and a mix for those in between.  Its power is based on the PC's corruption and level.  Appearance is slightly changed to mention that the PC's eyes and mouth occasionally show flicks of fire from within them, text could possibly vary based on corruption.
-function hellFire():void {
+public function hellFire():void {
 	outputText("", true);
 	if(player.fatigue + 20 > 100) {
 		outputText("You are too tired to breathe fire.\n", true);
@@ -16745,7 +16745,7 @@ function hellFire():void {
 	else enemyAI();
 }
 
-function kick():void {
+public function kick():void {
 	outputText("", true);
 	if(player.fatigue + physicalCost(15) > 100) {
 		outputText("You're too fatigued to use a charge attack!", true);
@@ -16863,7 +16863,7 @@ function kick():void {
 	else enemyAI();
 }
 
-function PCWebAttack():void {
+public function PCWebAttack():void {
 	outputText("", true);
 	//Keep logic sane if this attack brings victory
 	if(player.tailVenom < 33) {
@@ -16907,7 +16907,7 @@ function PCWebAttack():void {
 	if(monster.HP < 1 || monster.lust > 99) combatRoundOver();
 	else enemyAI();
 }
-function nagaBiteAttack():void {
+public function nagaBiteAttack():void {
 	outputText("", true);
 	//FATIIIIGUE
 	if(player.fatigue + physicalCost(10) > 100) {
@@ -16947,7 +16947,7 @@ function nagaBiteAttack():void {
 	if(monster.HP < 1 || monster.lust > 99) combatRoundOver();
 	else enemyAI();
 }
-function spiderBiteAttack():void {
+public function spiderBiteAttack():void {
 	outputText("", true);
 	//FATIIIIGUE
 	if(player.fatigue + physicalCost(10) > 100) {
@@ -16993,7 +16993,7 @@ function spiderBiteAttack():void {
 //New Abilities and Items
 //[Abilities]
 //Whisper 
-function superWhisperAttack():void {
+public function superWhisperAttack():void {
 	outputText("", true);
 	if(player.fatigue + 10 > 100) {
 		outputText("You are too tired to focus this ability.", true);
@@ -17047,7 +17047,7 @@ function superWhisperAttack():void {
 //This attack has a cooldown and is more dramatic when used by the PC, it should be some sort of last ditch attack for emergencies. Don't count on using this whenever you want.
 	//once a day or something
 	//Effect of attack: Damages and stuns the enemy for the turn you used this attack on, plus 2 more turns. High chance of success.
-function dragonBreath():void {
+public function dragonBreath():void {
 	clearOutput();
 	if(player.fatigue + 20 > 100) {
 		outputText("You are too tired to breathe fire.", true);
@@ -17135,7 +17135,7 @@ function dragonBreath():void {
 
 
 //* Terrestrial Fire
-function fireballuuuuu():void {
+public function fireballuuuuu():void {
 	outputText("", true);
 	if(player.fatigue + 20 > 100) {
 		outputText("You are too tired to breathe fire.", true);
@@ -17218,7 +17218,7 @@ function fireballuuuuu():void {
 	else enemyAI();
 }
 
-function kissAttack():void {
+public function kissAttack():void {
 	if(player.hasStatusAffect("Blind") >= 0) {
 		outputText("There's no way you'd be able to find their lips while you're blind!", true);
 		menuLoc = 3;
@@ -17319,7 +17319,7 @@ function kissAttack():void {
 	if(!combatRoundOver()) enemyAI();
 	return;
 }
-function possess():void {
+public function possess():void {
 	outputText("", true);
 	if(monster.short == "plain girl" || monster.hasPerk("Incorporeality") >= 0) {
 		outputText("With a smile and a wink, your form becomes completely intangible, and you waste no time in throwing yourself toward the opponent's frame.  Sadly, it was doomed to fail, as you bounce right off your foe's ghostly form.", false);
@@ -17343,7 +17343,7 @@ function possess():void {
 	if(!combatRoundOver()) enemyAI();
 }
 
-function runAway():void {
+public function runAway():void {
 	outputText("", true);
 	if(inCombat() && player.hasStatusAffect("Sealed") >= 0 && player.statusAffectv2("Sealed") == 4) {
 		clearOutput();
@@ -17583,7 +17583,7 @@ function runAway():void {
 	return;
 }
 
-function anemoneSting():void {
+public function anemoneSting():void {
 	outputText("", true);
 	//-sting with hair (combines both bee-sting effects, but weaker than either one separately):
 	//Fail!
@@ -17630,7 +17630,7 @@ function anemoneSting():void {
 	if(!combatRoundOver()) enemyAI();
 }
 
-function magicalSpecials():void {
+public function magicalSpecials():void {
 	if(inCombat() && player.hasStatusAffect("Sealed") >= 0 && player.statusAffectv2("Sealed") == 6) {
 		clearOutput();
 		outputText("You try to ready a special ability, but wind up stumbling dizzily instead.  <b>Your ability to use magical special attacks was sealed, and now you've wasted a chance to attack!</b>\n\n");
@@ -17672,7 +17672,7 @@ function magicalSpecials():void {
 	if(player.hasStatusAffect("Immolation Spell") >= 0) addButton(8,"Immolation",immolationSpell);
 	addButton(9,"Back",eventParser,5000);
 }
-function physicalSpecials():void {
+public function physicalSpecials():void {
 	if(isUrta()) {
 		urtaSpecials();
 		return;
@@ -17762,7 +17762,7 @@ function physicalSpecials():void {
 	choices(b1T,butt1,b2T,butt2,b3T,butt3,b4T,butt4,b5T,butt5,b6T,butt6,b7T,butt7,b8T,butt8,b9T,butt9,"Back",5000);
 }
 
-function berzerk():void {
+public function berzerk():void {
 	clearOutput();
 	if(player.hasStatusAffect("Berzerking") >= 0) {
 		outputText("You're already pretty goddamn mad!", true);
@@ -17783,7 +17783,7 @@ function berzerk():void {
 
 
 //Corrupted Fox Fire
-function corruptedFoxFire():void {
+public function corruptedFoxFire():void {
 	clearOutput();
 	if(player.hasPerk("Blood Mage") < 0 && player.fatigue + spellCost(35) > 100) {
 		outputText("You are too tired to use this ability.", true);
@@ -17818,7 +17818,7 @@ function corruptedFoxFire():void {
 	else enemyAI();
 }
 //Fox Fire
-function foxFire():void {
+public function foxFire():void {
 	clearOutput();
 	if(player.hasPerk("Blood Mage") < 0 && player.fatigue + spellCost(35) > 100) {
 		outputText("You are too tired to use this ability.", true);
@@ -17857,7 +17857,7 @@ function foxFire():void {
 }
 
 //Terror
-function kitsuneTerror():void {
+public function kitsuneTerror():void {
 	clearOutput();
 	//Fatigue Cost: 25
 	if(player.hasPerk("Blood Mage") < 0 && player.fatigue + spellCost(20) > 100) {
@@ -17898,7 +17898,7 @@ function kitsuneTerror():void {
 }
 
 //Illusion
-function kitsuneIllusion():void {
+public function kitsuneIllusion():void {
 	clearOutput();
 	//Fatigue Cost: 25
 	if(player.hasPerk("Blood Mage") < 0 && player.fatigue + spellCost(25) > 100) {
@@ -17942,7 +17942,7 @@ function kitsuneIllusion():void {
 //special attack: tail whip? could unlock button for use by dagrons too
 //tiny damage and lower monster armor by ~75% for one turn
 //hit
-function tailWhipAttack():void {
+public function tailWhipAttack():void {
 	clearOutput();
 	//miss
 	if((player.hasStatusAffect("Blind") >= 0 && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80)) {
@@ -17967,7 +17967,7 @@ function tailWhipAttack():void {
 
 //Arian's stuff
 //Using the Talisman in combat
-function immolationSpell():void {
+public function immolationSpell():void {
 	clearOutput();
 	outputText("You gather energy in your Talisman and unleash the spell contained within.  A wave of burning flames gathers around " + monster.a + monster.short + ", slowly burning " + monster.pronoun2 + ".");
 	var temp:int = int(75+(player.inte/3 + rand(player.inte/2)) * spellMod());
@@ -17978,7 +17978,7 @@ function immolationSpell():void {
 	enemyAI();
 }
 
-function shieldingSpell():void {
+public function shieldingSpell():void {
 	clearOutput();
 	outputText("You gather energy in your Talisman and unleash the spell contained within.  A barrier of light engulfs you, before turning completely transparent.  Your defense has been increased.\n\n");
 	player.createStatusAffect("Shielding",0,0,0,0);

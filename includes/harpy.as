@@ -5,7 +5,7 @@
 //so it should be fitting, right? Or you could just 
 //dump it out altogether. It'd cause severe damage, 
 //in the 150 region if you don't wise up.*
-function harpyAI():void {
+public function harpyAI():void {
 	var select:Number=1;
 	var rando:Number=1;
 
@@ -24,7 +24,7 @@ function harpyAI():void {
 	if(rando == 2) eventParser(monster.special2);
 	if(rando == 3) eventParser(monster.special3);
 }
-function harpyUberCharge():void {
+public function harpyUberCharge():void {
 	//(Harpy special attack 1, part one)
 	if(monster.hasStatusAffect("Uber") < 0) {
 		monster.createStatusAffect("Uber",0,0,0,0);
@@ -49,7 +49,7 @@ function harpyUberCharge():void {
 }
 
 //(Harpy special attack 2, lust increase)
-function harpyTease():void {
+public function harpyTease():void {
 	outputText("The harpy charges at you carelessly, her body striking you with the full weight of her motherly hips.  The pair of you go crashing backwards onto the ground.  You grapple with her weighty ass, trying your best not to think dirty thoughts, but the way she's maniacally flapping and writhing her curvy body against you makes it impossible! After a brief, groping wrestle on the ground, she pushes you away and takes flight again.", false);
 	stats(0,0,0,0,0,0,(12 + rand(player.sens/5)),0);
 	combatRoundOver();
@@ -59,7 +59,7 @@ function harpyTease():void {
 //*If female, rape options are Finger Her, Forced Cunnilingus, 69*
 //*If hermaphrodite, rape options are Pussy, Ass, Breasts, Forced Cunnilingus, 69*
 //*If genderless, rape options are Finger Her*
-function harpyVictoryuuuuu():void {
+public function harpyVictoryuuuuu():void {
 	outputText("", true);
 	//(Enemy defeated by damage) 
 	if(monster.HP < 1) outputText("The harpy screams out in one last, pained cry before her wings give way, the feathered woman collapsing into a weary heap.", true);
@@ -96,7 +96,7 @@ function harpyVictoryuuuuu():void {
 	else eventParser(5007);
 }
 
-function harpyLossU():void {
+public function harpyLossU():void {
 	//NO MALE RAPE IF DICK TOO BIG
 	var x:Number = -1;
 	if(player.hasCock()) x = player.cockThatFits(monster.vaginalCapacity());
@@ -118,7 +118,7 @@ function harpyLossU():void {
 	}
 }
 
-function harpyGooGenderlessLoss():void {
+public function harpyGooGenderlessLoss():void {
 	outputText("", true);
 	outputText("The triumphant harpy looks down at your goopy form, ready to take you.  She seems a little confused though, and begins poking at your gelatinous body.\n\n", false);
 
@@ -140,7 +140,7 @@ function harpyGooGenderlessLoss():void {
 }
 
 //Requires pussy or cock small enough for harpy!
-function harpyLossLust():void {
+public function harpyLossLust():void {
 	outputText("", true);
 	//Merauder wroted.
 	var x:Number = -1;
@@ -198,7 +198,7 @@ function harpyLossLust():void {
 }
 
 //No genderless folks.
-function harpyDamageLoss():void {
+public function harpyDamageLoss():void {
 	outputText("", true);
 
 	var x:Number = -1;
@@ -320,7 +320,7 @@ function harpyDamageLoss():void {
 	stats(-1,-1,0,0,1,2,-100,0);
 }
 
-function victoryHarpyGetsHerPussyRaped():void {
+public function victoryHarpyGetsHerPussyRaped():void {
 	var x:Number = -1;
 	if(player.hasCock()) x = player.cockThatFits(monster.vaginalCapacity());
 	if(x < 0) x = 0;
@@ -395,7 +395,7 @@ function victoryHarpyGetsHerPussyRaped():void {
 	stats(0,0,0,0,0,0,-100,0);
 }
 
-function winAndRapeHarpyAnally():void {
+public function winAndRapeHarpyAnally():void {
 	outputText("", true);
 	var x:Number = -1;
 	if(player.hasCock()) x = player.cockThatFits(monster.vaginalCapacity());
@@ -453,7 +453,7 @@ function winAndRapeHarpyAnally():void {
 }
 
 
-function WinOnHarpyAndOralRape():void {
+public function WinOnHarpyAndOralRape():void {
 	outputText("", true);
 	var x:Number = -1;
 	if(player.hasCock()) x = player.cockThatFits(monster.analCapacity());
@@ -555,7 +555,7 @@ function WinOnHarpyAndOralRape():void {
 	stats(0,0,0,0,1,0,-100,0);
 }
 
-function harpyScissorSurprise():void {
+public function harpyScissorSurprise():void {
 	clearOutput();
 	outputText("You stare down at the defeated harpy, watching as ");
 	if(monster.HP < 1) outputText("her arms tremble from the effort of trying to keep her body from collapsing to the floor.");
@@ -587,7 +587,7 @@ function harpyScissorSurprise():void {
 	stats(0,0,0,0,0,0,100,0);
 }
 //{New page}
-function harpyScissorSurprisePtII():void {
+public function harpyScissorSurprisePtII():void {
 	clearOutput();
 	outputText("Planting your [foot] squarely on her chest you push her onto her back, her tongue still vainly lapping at the air in a lust-filled daze on the way down.  Before she has time to recover you remove the remainder of your [armor] and grab her wrists, coming down on top of her yourself and pinning her arms above her head as you straddle her [if (isHerm = true) your cock resting on her toned stomach].  Her tits heave gently as she squirms, desperately trying to stimulate her soaked pussy.  She starts to rub her legs together but you stop her almost immediately, grabbing a leg just above the talon with your free hand and yanking it away, revealing her obscenely puffy sex and drenched thighs.  She whimpers pathetically at you, virtually begging for release, the desperation and desire in her eyes clear to see.");
  
@@ -614,7 +614,7 @@ function harpyScissorSurprisePtII():void {
 	eventParser(5007);
 }
 
-function spoidahsLegEggsInHarpeis():void {
+public function spoidahsLegEggsInHarpeis():void {
 	clearOutput();
 	//requires spiderbite or naga bite
 	outputText("Perched above the downed bird-bitch, you look her over as you weigh up your options.  Your eyes slide across her petite breasts, tracing her curves till your gaze rests upon her flared hips and curvaceous ass.  Unfortunately your appreciation of the finer things in life is interrupted by the feather-brained eyecandy; she simply will not stop squawking.");
@@ -677,7 +677,7 @@ function spoidahsLegEggsInHarpeis():void {
 }
 
 //Fuck a harpy with the players throbbing clit.
-function clitFuckAHarpy():void {
+public function clitFuckAHarpy():void {
 	clearOutput();
 	outputText("Eyeing the hapless bird-woman up and down, you feel your lusts kindling.  Moisture seeps from your [vagina] as you watch the harpy ");
 	if(monster.lust > 99) outputText("moan and masturbate, dipping her fingers into her honey-pot with wild abandon.");

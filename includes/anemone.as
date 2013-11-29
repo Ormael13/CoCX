@@ -39,10 +39,10 @@
 //  KID_SITTER:int = 757; //0 = no sitter, 1 = possible, 2 = doing dat shit
 //  HAD_KID_A_DREAM:int = 758;
 
-function anemonePreg():void {
+public function anemonePreg():void {
 	player.knockUp(10,256,101);
 }
-function kidAXP(diff:Number = 0):Number {
+public function kidAXP(diff:Number = 0):Number {
 	if(diff == 0) return flags[KID_A_XP];
 	flags[KID_A_XP] += diff;
 	if(flags[KID_A_XP] < 0) flags[KID_A_XP] = 0;
@@ -51,7 +51,7 @@ function kidAXP(diff:Number = 0):Number {
 }
 
 
-function mortalAnemoneeeeee():void {
+public function mortalAnemoneeeeee():void {
 	spriteSelect(4);
 	outputText("", true);
 	if(flags[TIMES_MET_ANEMONE] == 0 || hasItem("MinoCum",1)) {
@@ -83,7 +83,7 @@ function mortalAnemoneeeeee():void {
 }
 
 //Apply the effects of AnemoneVenom()
-function applyVenom(str:Number = 1):void {
+public function applyVenom(str:Number = 1):void {
 	//First application
 	if(player.hasStatusAffect("Anemone Venom") < 0) player.createStatusAffect("Anemone Venom",0,0,0,0);
 	//Gain some lust
@@ -118,7 +118,7 @@ function applyVenom(str:Number = 1):void {
 
 
 //victory:
-function defeatAnemone():void {
+public function defeatAnemone():void {
 	outputText("", true);
 	//Win by HP:
 	if(monster.HP < 1) outputText("The anemone's knees buckle and she collapses, planting her hands behind her with a splash.  You stand over her, victorious.\n\n", false);
@@ -146,7 +146,7 @@ function defeatAnemone():void {
 }
 
 //anal: -requires butthole
-function victoryButtholeRape():void {
+public function victoryButtholeRape():void {
 	spriteSelect(4);
 	outputText("", true);
 	outputText(images.showImage("anemone-getanal"), false);
@@ -191,7 +191,7 @@ function victoryButtholeRape():void {
 }
 
 
-function rapeAnemoneWithDick():void {
+public function rapeAnemoneWithDick():void {
 	spriteSelect(4);
 	outputText("", true);
 	outputText(images.showImage("anemone-male-fuck"), false);
@@ -295,7 +295,7 @@ function rapeAnemoneWithDick():void {
 		
 
 //using pussy:
-function rapeAnemoneWithPussy():void {
+public function rapeAnemoneWithPussy():void {
 	spriteSelect(4);
 	outputText("", true);
 	outputText(images.showImage("anemone-female-fuck"), false);
@@ -364,7 +364,7 @@ function rapeAnemoneWithPussy():void {
 }
 
 //loss rapes:
-function loseToAnemone():void {
+public function loseToAnemone():void {
 	spriteSelect(4);
 	var x:Number = player.cockThatFits(36);
 	outputText("", true);
@@ -578,7 +578,7 @@ function loseToAnemone():void {
 
 //Minotaur Cum combat circumvention:
 //(if PC has 1 or more Mino Cum, replaces last paragraph of initial encounter)
-function minoCumForAnemonieeeeez():void {
+public function minoCumForAnemonieeeeez():void {
 	spriteSelect(4);
 	outputText("The initial surprise subsides to wooly-headedness and a feeling of mild arousal as the stingers in her tentacles find exposed flesh.  In panic of drowning you pull free of the ropy mass and backpaddle away from the girl until your " + player.feet() + " reassuringly touch the shallows of the lakebed.  As you shake your head to clear the haze, you notice a few of your items have fallen out of your pouches and are floating in the water.  The anemone has picked one in particular up and is examining it; a bottle of minotaur cum.  Her eyes light up in recognition as the fluid sloshes back and forth and she looks beseechingly at you, cradling it next to her cheek.  \"<i>Gimme?</i>\" she asks, trying to look as sweet as possible.\n\n", false);
 
@@ -604,7 +604,7 @@ function minoCumForAnemonieeeeez():void {
 }
 
 //'Don't Give':
-function dontGiveMino():void {
+public function dontGiveMino():void {
 	spriteSelect(4);
 	outputText("", true);
 	outputText("You look sternly at the blue girl and hold out your hand.  As she realizes you don't intend to let her have the bottle, her face changes to a half-pout, half-frown.  When you don't react, she throws the bottle at your feet and shouts, \"<i>Mean!</i>\"  You bend down to pick it, and the other items, up, and when you straighten back up, she looks quite angry and her tentacles are waving all over the place.  Uh-oh.  You raise your weapon as the anemone giggles sadistically and attacks!\n\n", false);
@@ -615,7 +615,7 @@ function dontGiveMino():void {
 	applyVenom(1);	
 }
 //'Give':
-function giveMino():void {
+public function giveMino():void {
 	spriteSelect(4);
 	outputText("", true);
 	consumeItem("MinoCum",1);
@@ -644,7 +644,7 @@ function giveMino():void {
 }
 
 //anal
-function anemoneButtPlugginz():void {
+public function anemoneButtPlugginz():void {
 	clearOutput();
 	//victory sex choice for males with cock fit 48 or females with clit >7": "her anus"
 	//(change "If you do, which of your parts" to "If you do, which part" in pre-sex choice menu)
@@ -703,7 +703,7 @@ function anemoneButtPlugginz():void {
 }
 
 //[FUCK IT] (if cock fit 48, use cock; else use clit scenes)
-function anemoneQuoteUnquoteAnal():void {
+public function anemoneQuoteUnquoteAnal():void {
 	clearOutput();
 	var dick:Boolean = (player.cockThatFits(48) >= 0 && player.hasCock());
 	var x:int = 0;
@@ -784,7 +784,7 @@ function anemoneQuoteUnquoteAnal():void {
 }
 
 //[Hotdog!]
-function hotdogTheAnemone():void {
+public function hotdogTheAnemone():void {
 	clearOutput();
 	outputText(images.showImage("anemone-doggy"), false);
 	var dick:Boolean = (player.cockThatFits(48) >= 0 && player.hasCock());
@@ -836,7 +836,7 @@ function hotdogTheAnemone():void {
 }
 
 //[Fuck Off]
-function fuckingAssholelessAnemoneeeez():void {
+public function fuckingAssholelessAnemoneeeez():void {
 	clearOutput();
 	outputText("Dammit all.  Your fun is completely ruined and you're limp as toast in milk now.  You abruptly pull yourself upright, tucking away your goodies.");
 	
@@ -852,7 +852,7 @@ function fuckingAssholelessAnemoneeeez():void {
 //Bee on Anemone: Finished (Zeik)
 //madzeikfried@gmail.com
 //[Ovipositor] option in rape menu
-function anemoneGetsLayedByBeePositor():void {
+public function anemoneGetsLayedByBeePositor():void {
 	if(player.canOvipositSpider()) {
 		spiderOvipositAnAnemone();
 		return;
@@ -929,7 +929,7 @@ function anemoneGetsLayedByBeePositor():void {
 
 //Drider on Anemone: Finished (Zeik)
 //[Ovipositor] option with spiderbutts
-function spiderOvipositAnAnemone():void {
+public function spiderOvipositAnAnemone():void {
 	clearOutput();
 	outputText(images.showImage("anemone-egg"), false);
 	outputText("As the girl's resistance ebbs, ");
@@ -1006,7 +1006,7 @@ function spiderOvipositAnAnemone():void {
 
 
 
-function anemoneKidBirthPtII():void {
+public function anemoneKidBirthPtII():void {
 	clearOutput();
 	spriteSelect(71);
 	outputText("You awake and look skyward to the sun for a hint at the time.  What greets you is more of an eclipse; a shape impedes your view.  As your eyes adjust to the light, it resolves into an upside-down blue-eyed, blue-skinned face wreathed with snubby, shoulder-length tentacles of purple and green hue.  The silence continues as you stare into it, until you move to push yourself off the hard ground.  At the first sign of activity, the head disappears into the water barrel with a sloshing sound.  You push yourself to your " + player.feet() + " and look back toward it; the eyes, now right side-up, peek over the rim bashfully atop a set of blue fingers.");
@@ -1025,7 +1025,7 @@ function anemoneKidBirthPtII():void {
 	//[yesno]
 }
 //[yes, i am allergic to fun. sweep the leg, johnny! get 'em a body bag!]
-function getRidOfAnemone():void {
+public function getRidOfAnemone():void {
 	clearOutput();
 	spriteSelect(71);
 	outputText("Enough of this.  Summoning your backbone, you grasp the anemone's upper arm and pull her to her feet; she's light as a decorative feather and twice as blue once she grasps your intention and her camouflage reflex takes over.  Putting one arm under her, you carry her legs out from underneath and lift her bodily out of the barrel, then set her down on the hard ground.  She turns a teary pout on you, but you look away.  Picking up the nearly-empty container and setting it atop your shoulder, you begin the walk to the stream.  The girl stumbles along behind you, unsteady on her feet.");
@@ -1035,7 +1035,7 @@ function getRidOfAnemone():void {
 	doNext(1);
 }
 //[no, bonsai anemone is awesome and fuck the haters]
-function keepAnemoneKid():void {
+public function keepAnemoneKid():void {
 	clearOutput();
 	spriteSelect(71);
 	outputText("You frown as you stare into the opaque eyes.  You can't think of any way to get her out of the barrel, short of manhandling her into the wilderness where she'll flourish or expire depending on fate, and you haven't the heart for such endeavors.  Ah... she looks so happy sitting there with her head resting on her hands, too.  Well, worse things could happen - but probably not stranger.");
@@ -1056,7 +1056,7 @@ function keepAnemoneKid():void {
 //KID A FOLLOWER STUFF
 //tion camp
 //[Barrel] button in [Stash] menu (appears whenever Kidswag flag >= 1)
-function approachAnemoneBarrel():void {
+public function approachAnemoneBarrel():void {
 	var item:Number = 0;
 	var weaponT:String = "Give Weapon";
 	var weaponB:int = 3548;
@@ -1114,7 +1114,7 @@ function approachAnemoneBarrel():void {
 }
 
 //[Item](only appears if hourssinceKiditem flag >= 16)
-function getAnemoneItem():void {
+public function getAnemoneItem():void {
 	clearOutput();
 	spriteSelect(71);
 	var choice:Number;
@@ -1173,7 +1173,7 @@ function getAnemoneItem():void {
 }
 
 //[Give Weapon]
-function giveAnemoneWeapon():void {
+public function giveAnemoneWeapon():void {
 	clearOutput();
 	spriteSelect(71);
 	outputText("What do you want to give her?");
@@ -1193,7 +1193,7 @@ function giveAnemoneWeapon():void {
 	choices((itemSlot1.shortName + " x" + itemSlot1.quantity), temp1, (itemSlot2.shortName + " x" + itemSlot2.quantity), temp2, (itemSlot3.shortName + " x" + itemSlot3.quantity), temp3, (itemSlot4.shortName + " x" + itemSlot4.quantity), temp4, (itemSlot5.shortName + " x" + itemSlot5.quantity), temp5, "", 0, "", 0, "", 0, "", 0, "Back", 2951);
 }
 
-function placeInAnemone(slot:Number = 1):void {
+public function placeInAnemone(slot:Number = 1):void {
 	clearOutput();
 	outputText("You leave the item by her barrel.");
 	spriteSelect(71);
@@ -1227,7 +1227,7 @@ function placeInAnemone(slot:Number = 1):void {
 }
 
 //[Take Weapon]
-function takeOutOfAnemone():void {
+public function takeOutOfAnemone():void {
 	clearOutput();
 	spriteSelect(71);
 	outputText("You take the item back.  ");
@@ -1243,7 +1243,7 @@ function takeOutOfAnemone():void {
 }
 
 //[N.Watch]
-function anemoneWatchToggle():void {
+public function anemoneWatchToggle():void {
 	clearOutput();
 	spriteSelect(71);
 	//toggles Kid A's night watch; unusuable unless she's armed
@@ -1265,7 +1265,7 @@ function anemoneWatchToggle():void {
 }
 
 //[Tutor](only appears if Kid A is armed and present)
-function tutorAnemoneKid():void {
+public function tutorAnemoneKid():void {
 	clearOutput();
 	//(if lust > 99, output)
 	if(player.lust > 99) {
@@ -1450,7 +1450,7 @@ function tutorAnemoneKid():void {
 	}
 }
 
-function kidASex(cont:Boolean = true):Boolean {
+public function kidASex(cont:Boolean = true):Boolean {
 	if(!cont) {
 		clearOutput();
 		outputText("Smiling lustily at Kid A, you run your hand through her hair, inhaling deep breaths as you allow her venom to affect you more and more.  She blushes, but watches eagerly.  Soon, the tingling lust has you overwhelmed...");
@@ -1605,7 +1605,7 @@ function kidASex(cont:Boolean = true):Boolean {
 }
 
 //[Evict]
-function evictANemone():void {
+public function evictANemone():void {
 	clearOutput();
 	outputText("Really evict the anemone?");
 	spriteSelect(71);
@@ -1613,7 +1613,7 @@ function evictANemone():void {
 	doYesNo(reallyEvictDaAnemone,approachAnemoneBarrel);
 }
 //Yes]
-function reallyEvictDaAnemone():void {
+public function reallyEvictDaAnemone():void {
 	clearOutput();
 	spriteSelect(71);
 	outputText("Time to reclaim your barrel.   Gesturing to get her attention, you grab the anemone by her upper arm and lift her to her feet.  She looks her confusion, but you set your face and drag her along with you as you make your way to the lake.");
@@ -1629,7 +1629,7 @@ function reallyEvictDaAnemone():void {
 
 //dreams: possible once KidXP >= 40; function as visible notice of sex-readiness
 //if KidXP drops below threshold for sex due to bad training, no more dreams and no more sex
-function kidADreams():void {
+public function kidADreams():void {
 	outputText("\n<b><u>In the middle of the night...</u></b>");
 	//if male:
 	if (player.hasCock() && (!player.hasVagina() || player.femininity < 50)) {
@@ -1672,7 +1672,7 @@ function kidADreams():void {
 //Kid-and-kid interaction scenes:
 //Cows one-time scene(plays the first time Kidswag > 0, Kidweapon is populated, and PC has 5+ delicious well-Marbled steak children)
 //set Kidsitter flag = 1; 'unlocks' repeat babysitting, making Kid A unavailable with a 25% chance during daylight hours
-function kidABabysitsCows():void {
+public function kidABabysitsCows():void {
 	outputText("\n<b>\"<i>Come on, get out of your little hole and help!</i>\"</b>");
 	outputText("\n\nThe sound of a voice being raised in frustration turns your head.  Marble is standing in front of your occupied water barrel with several of your rambunctious children in tow, berating the anemone cornered inside.  You advance a few feet and the blue girl turns toward you beseechingly, but Marble starts talking again before you're close enough to say anything.");
 	
@@ -1694,7 +1694,7 @@ function kidABabysitsCows():void {
 	
 //Cow repeat
 //triggered when PC selects the Kids option in Marble menu while Kid A is babysitting
-function repeatCowSitting():void {
+public function repeatCowSitting():void {
 	outputText("Marble looks up from her work and regards you warmly.  \"<i>I appreciate the offer, [name].  I've already got someone on it, but if you want to go help, I'm sure there's something you could do.</i>\"  She gestures in a direction over your shoulder.");
 	
 	outputText("\n\nTurning that way, you walk along her line of sight to discover your brood, who are currently tormenting your anemone.  Kid A is trying to keep one from throwing small rocks at another, while a third is following her, tugging on her hand and constantly begging her to read a tattered book aloud.  Seeing the most obvious way to help out the nearly-mute anemone, you intercept this last kid, taking her hand and steering her away.  Kid A manages a glance at you before her attention is pulled back to the hellion with the stones.");
@@ -1711,7 +1711,7 @@ function repeatCowSitting():void {
 
 //Sharks (get the fuck in the boat)
 //repeatable, trigger possible when visiting 2+ Izma kids
-function kidAWatchesSharks():void {
+public function kidAWatchesSharks():void {
 	clearOutput();
 	outputText("As you look over your shark family playing in the shallow stream, a soft, wet footstep sounds behind you.  Kid A is there when you turn around, holding empty waterskins and looking desperately at the running water.");
 	//[(KidXP < 40 or Kidweapon is empty)
@@ -1737,7 +1737,7 @@ function kidAWatchesSharks():void {
 //goblins at night:
 //req PC cocks > 0, Kid A watch on, and Tamani daughters encounter unlocked
 //repeatable for now, but semi-rare
-function goblinNightAnemone():void {
+public function goblinNightAnemone():void {
 	outputText("\n<b>That night...</b>");
 	outputText("\nA noisy clump of gabbling green in the distance awakens you and attracts your attention.  As it draws closer to your camp, you can make out tufts of shockingly-colored hair atop it, and then distinct shapes.  The blot on the landscape resolves into a glob of goblins, clearly intent on reaching your camp's perimeter.  Your anemone notices as well, and, attempting to fulfill the terms of her lease, picks up her " + itemLongName(flags[ANEMONE_WEAPON]) + " and moves to intercept them.  You follow at a good distance and tuck yourself behind some cover, already suspecting the identities of the invaders.");
 	

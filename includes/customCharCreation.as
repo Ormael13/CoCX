@@ -1,5 +1,5 @@
 ﻿//Set custom stats and display a blurb about them.  No need to set up buttons, handled outside in 10045
-function customPCSetup():void {
+public function customPCSetup():void {
 	//Set as having history perk
 	flags[UNKNOWN_FLAG_NUMBER_00418] = 1;
 	if(player.short == "Vahdunbrii") {

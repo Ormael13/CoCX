@@ -2,7 +2,7 @@
 // const SANDTRAP_NAGA_3SOME:int = 579;
 //const SANDTRAP_LOSS_REPEATS:int = 812;
 
-function trapLevel(adjustment:Number = 0):Number {
+public function trapLevel(adjustment:Number = 0):Number {
 	if(monster.hasStatusAffect("level") < 0) monster.createStatusAffect("level",4,0,0,0);
 	if(adjustment != 0) {
 		monster.addStatusValue("level",1,adjustment);
@@ -15,7 +15,7 @@ function trapLevel(adjustment:Number = 0):Number {
 
 //Encounters (Z)
 //First Encounter: (requires having met a Sand Witch)
-function encounterASandTarp():void {
+public function encounterASandTarp():void {
 	clearOutput();
 	spriteSelect(97);
 	if(flags[SANDTRAP_LOSS_REPEATS] >= 2 && player.eyeType == EYES_BLACK_EYES_SAND_TRAP && player.wingType == WING_TYPE_GIANT_DRAGONFLY) {
@@ -61,7 +61,7 @@ function encounterASandTarp():void {
 //[Save]:
 //go to fight after either save scene
 //silly mode idea: return to camp and go directly to save menu, subsequent sandtrap encounters as per normal -Z
-function saveTheSandTarps():void {
+public function saveTheSandTarps():void {
 	clearOutput();
 	spriteSelect(97);
 	//(femininity <= 65): 
@@ -84,7 +84,7 @@ function saveTheSandTarps():void {
 }
 
 //[Don't Save]: 
-function dontSaveTheTarps():void {
+public function dontSaveTheTarps():void {
 	clearOutput();
 	spriteSelect(97);
 	outputText("You carefully step backwards from the quicksand, not taking your eyes off the stricken ");
@@ -112,14 +112,14 @@ function dontSaveTheTarps():void {
 }
 
 
-function startSandTarpFight():void {
+public function startSandTarpFight():void {
 	startCombat(55);
 	spriteSelect(97);
 	monster.createStatusAffect("level",4,0,0,0);
 	eventParser(1);
 }
 
-function sandTrapAI():void {
+public function sandTrapAI():void {
 	if(trapLevel() == 4 && monster.hasStatusAffect("Climbed") < 0) nestleQuikSandAttack();
 	else sandTrapPheremones();
 	
@@ -133,7 +133,7 @@ function sandTrapAI():void {
 }
 
 //sandtrap pheromone attack: 
-function sandTrapPheremones():void {
+public function sandTrapPheremones():void {
 	spriteSelect(97);
 	outputText("The sandtrap puckers its lips.  For one crazed moment you think it's going to blow you a kiss... but instead it spits clear fluid at you!   You desperately try to avoid it, even as your lower half is mired in sand.");
 	if(player.spe/10 + rand(20) > 10 || combatEvade() || combatFlexibility()) {
@@ -149,7 +149,7 @@ function sandTrapPheremones():void {
 }
 
 //sandtrap quicksand attack: 
-function nestleQuikSandAttack():void {
+public function nestleQuikSandAttack():void {
 	spriteSelect(97);
 	outputText("The sandtrap smiles at you winningly as it thrusts its hands into the sifting granules.  The sand beneath you suddenly seems to lose even more of its density; you're sinking up to your thighs!");
 	//Quicksand attack fail: 
@@ -166,7 +166,7 @@ function nestleQuikSandAttack():void {
 }
 
 //Wait: 
-function sandTrapWait():void {
+public function sandTrapWait():void {
 	clearOutput();
 	spriteSelect(97);
 	if(monster.hasStatusAffect("Climbed") < 0) monster.createStatusAffect("Climbed",0,0,0,0);
@@ -191,7 +191,7 @@ function sandTrapWait():void {
 	//combatRoundOver();
 }
 
-function sandtrapmentLoss(clear:Boolean = false):void {
+public function sandtrapmentLoss(clear:Boolean = false):void {
 	if(flags[SANDTRAP_LOSS_REPEATS] >= 2 && player.eyeType == EYES_BLACK_EYES_SAND_TRAP && player.wingType == WING_TYPE_GIANT_DRAGONFLY) {
 		loseLastFightWithSandTrap();
 		return;
@@ -209,7 +209,7 @@ function sandtrapmentLoss(clear:Boolean = false):void {
 	else doNext(genderlessLoss);
 }
 
-function pcBeatsATrap():void {
+public function pcBeatsATrap():void {
 	clearOutput();
 	spriteSelect(97);
 	flags[SANDTRAP_LOSS_REPEATS] = 0;
@@ -245,7 +245,7 @@ function pcBeatsATrap():void {
 }
 
 //Male/Herm loss (Z)
-function dickwieldersLoseToSandTarps():void {
+public function dickwieldersLoseToSandTarps():void {
 	clearOutput();
 	spriteSelect(97);
 	outputText("\"<i>You're probably wondering what part of you I want to use,</i>\" purrs the sandtrap, pushing itself further upwards using your shoulders and drawing you closer until your face is pressed against where its human torso and insect abdomen join.  You are helpless to ignore the fact it has a genital slit where its human cock would be, particularly as the sandtrap places its hands behind your head and proceeds to rub your face into it.  Its smooth, supple human flesh trades with its rough, leathery insect hide against your cheeks and forehead, and as its excitement grows you feel the slit slide open and something long, warm and oily press insistently into your face.  The creature pulls back momentarily, and with a feeling of deep trepidation you take it in... a black ten-inch insect prong, thicker at the base than its dull tip, dripping with a clear, viscous fluid.");
@@ -293,7 +293,7 @@ function dickwieldersLoseToSandTarps():void {
 }
 
 //Female loss (Z)
-function chicksLoseToSandTarp():void {
+public function chicksLoseToSandTarp():void {
 	clearOutput();
 	spriteSelect(97);
 	outputText("The sandtrap holds your hands whilst it pushes you further down with its other set of arms, until only your head is above the sand.  Below the surface you try to weakly move your limbs, try to work yourself out of this situation, but it is impossible; the sand feels impossibly heavy and is packed against you.  The sandtrap seems to have no such difficulty.  It sinks gracefully downwards until its face is almost level with yours.  You feel something wet touch your thigh and you try to flinch, but aside from flexing your muscles you cannot move.");
@@ -326,7 +326,7 @@ function chicksLoseToSandTarp():void {
 }
 
 //Unsexed (Z)
-function genderlessLoss():void {
+public function genderlessLoss():void {
 	clearOutput();
 	spriteSelect(97);
 	outputText("\n\nThe sandtrap holds your hands whilst it pushes you further down with its other set of arms, until only your head is above the sand.  Below the surface you try to weakly move your limbs, try to work yourself out of this situation but it is impossible; the sand feels impossibly heavy and is packed against you.  The sandtrap seems to have no such difficulty.  It towers above you, moving with sinuous grace.  You feel something wet touch your thigh and you try to flinch, but aside from flexing your muscles you cannot move.");
@@ -359,7 +359,7 @@ function genderlessLoss():void {
 	eventParser(5007);
 }
 
-function sandTrapPregChance():void {
+public function sandTrapPregChance():void {
 	//Only happens if PC aint already buttpregged
 	if(player.buttPregnancyIncubation == 0) {
 		if(monster.hasStatusAffect("Fertilized") >= 0) {
@@ -370,7 +370,7 @@ function sandTrapPregChance():void {
 	}
 }
 
-function birfSandTarps():void {
+public function birfSandTarps():void {
 	spriteSelect(97);
 	outputText("\nYour eyes widen as a gout of oil suddenly gushes from your ass.  Before panic can set in, an incredible light-headedness overtakes you.  Dreamily, you discard your [armor] and squat.  More oil oozes out of you, and in your hazy euphoria, you scoop some of it up and rub it dreamily into your " + nippleDescript(0) + "s.  Part of you is disgusted at yourself, questioning what you are doing, but that is one voice in a million-strong chorus crooning you into total relaxation... the oil clings to your skin and seems to radiate warmth and softness.  Something round stretches your rectum wide, but in your state the sensation is practically orgasmic.");
 	//[Male: 
@@ -408,7 +408,7 @@ function birfSandTarps():void {
 
 //\"<i>Hands</i>\" (Z)
 //Requires: Genitals
-function useSandTarpsHands():void {
+public function useSandTarpsHands():void {
 	clearOutput();
 	spriteSelect(97);
 	outputText("You bend into the sand and allow the slope to slowly carry you down to the bottom and the defeated sandtrap.  Its six eyes regard you with a mixture of lust and resentment, and as the soft powder delivers you to its side it tries to curl one pair of its hands around your thighs.  Whether this is one last attempt to drag you down or because it is trying to curry your favour somehow you don't know, but you aren't having any of it.  You catch its hands, easily overpowering it.  The monster uses its other pair of hands to try to pathetically prise itself out of your grasp; you find that its wrists are thin enough for you to reach your hands around both and hold all four of its arms quite comfortably.  You beam triumphantly at the helpless sandtrap, who glowers in response, then take a moment to look your strange conquest over.  Even up close you can't tell from its thin, fey beauty whether it is male or female.  Although it is affecting to look angry at you, its sculpted cheeks are quite flushed and there is a definite undercurrent of desire in its eyes; you suspect your display of strength and dominance appeals to it on some perverse, animalistic level.  Although its hidden, insect half shifts around threateningly beneath the sand, you know that you must be holding the only usable limbs it has because it has made no attempt to move away from or kick out at you.  You look at its hands speculatively.  They are like its frame in miniature; long, slender, yet obviously nimble.  You smile again and then, looking into its face, force its hands downwards.  It tries to resist at first but it no longer has the strength, and you easily compel its quartet of hands to move where you want them to.  You make them touch your [armor], and then, moving downwards and inwards, your thigh, this time on your own terms.");
@@ -522,7 +522,7 @@ function useSandTarpsHands():void {
 
 
 //\"<i>Ride</i>\" (Z)
-function rideDatSandTarpLikeIts1999():void {
+public function rideDatSandTarpLikeIts1999():void {
 	clearOutput();
 	spriteSelect(97);
 	//Requirement: Vagina
@@ -548,7 +548,7 @@ function rideDatSandTarpLikeIts1999():void {
 	eventParser(5007);
 }
 //\"<i>Vagina</i>\" (Z)
-function stickWangInSandgina():void {
+public function stickWangInSandgina():void {
 	clearOutput();
 	spriteSelect(97);
 	//Requires: Penis and str requirement
@@ -590,7 +590,7 @@ function stickWangInSandgina():void {
 }
 
 //Naga Threesome (Z)
-function nagaThreesomeWithSandTrap():void {
+public function nagaThreesomeWithSandTrap():void {
 	clearOutput();
 	spriteSelect(97);
 	//Requirements: Player is naga with tail and fangs, has met desert naga as naga at least once
@@ -656,7 +656,7 @@ function nagaThreesomeWithSandTrap():void {
 //Requirements
 //*Has insect wings and insect eyes
 //*Lost to a Sandtrap twice in a row
-function sandTrapBadEnd():void {
+public function sandTrapBadEnd():void {
 	clearOutput();
 	spriteSelect(97);
 	outputText("Once again you find yourself wandering back to the desert.  For all that it is a treacherous, barren wasteland, you feel an odd allure to the place; your feet seem to know where to take you as you walk far from the relative sanctuary of Tel'Adre, far from the slithering grounds of the Naga, your mind somewhere in the mercilessly clear sky.  Your thoughts bubble and seethe into a froth high up there above your vacant body; there is an odd... swarming sensation to them, as if they were reaching out to touch the tips of other consciences just like your own.  You feel an awakening yearning to join, a loneliness, a want to become more than the tiny speck in the desert that you are.");
@@ -676,7 +676,7 @@ function sandTrapBadEnd():void {
 }
 
 //Fight: 
-function sandTrapBadEndFight():void {
+public function sandTrapBadEndFight():void {
 	clearOutput();
 	spriteSelect(97);
 	outputText("You shake yourself out of your fug, clench your [weapon] and grit your teeth.  You are your own person, dammit, and you will show this creature just what that means!  The Sandtrap slowly lowers its arms and looks at you with almost parental disappointment as you march into its pit with the obvious intention of beating the crap out of it.  \"<i>You want to dance again, Flytrap?</i>\" it sighs.  \"<i>I would prefer that you look at yourself and accept what you are, but I will force you to accept it if that is what you wish.</i>\"");
@@ -685,7 +685,7 @@ function sandTrapBadEndFight():void {
 }
 
 //Leave:
-function leaveSandTrapBadEnd():void {
+public function leaveSandTrapBadEnd():void {
 	clearOutput();
 	spriteSelect(97);
 	outputText("With some effort you break your stare with the Sandtrap, turn away and step back towards camp, resolving to leave this disturbing scenario with its disturbing thoughts behind.");
@@ -694,7 +694,7 @@ function leaveSandTrapBadEnd():void {
 }
 
 //Desztiny:
-function desztiny():void {
+public function desztiny():void {
 	clearOutput();
 	spriteSelect(97);
 	outputText("The Sandtrap is right.  What your body and subconscious are telling you are so right.  At your acceptance of what the creature is saying warmth floods through your body; your mind bubbles as blood rushes towards your skin, making you feel incredibly sensitive, incredibly sexual.  ");
@@ -708,7 +708,7 @@ function desztiny():void {
 }
 
 //Lose fight:
-function loseLastFightWithSandTrap():void {
+public function loseLastFightWithSandTrap():void {
 	clearOutput();
 	spriteSelect(97);
 	outputText("\"<i>Hhhhhyou are brave, little Flytrap, and hyou dance well,</i>\" says the Sandtrap, colour high in its cheeks as it strokes your face, the rest of you buried securely underneath the sand.  \"<i>But it is time to put reckless foolishnessz behind you.</i>\"  Don't you think?  \"<i>After all, hyou have much important wwwork to do.</i>\"  Isn't that right?  You blink.  How is it doing that?  Did it...open its mouth at all?  The Sandtrap smiles at you with terrible understanding in its black eyes as you struggle.  You may deny it, \"<i>but hhhyou are one of usz, now.  In body,</i>\" and in mind.  You shake your head and try and focus, but it is impossible.  The trance-like state you felt out in the desert has returned, and you can't focus on anything except that feeling of loneliness... of lacking a purpose.  That is what is wrong here, you lack a purpose and you feel so empty, a vessel that needs to be filled, in need of a warm, loving hand upon you, turning you and pointing where you need to go... like the hand brushing your face now.  You look up at the Sandtrap, trying to beg it with your eyes to explain what is going on, and it answers you by taking your head into its hands, bending in and kissing you deeply.");
@@ -716,7 +716,7 @@ function loseLastFightWithSandTrap():void {
 }
 
 //Both go to: 
-function sandTrapBadEndFinale():void {
+public function sandTrapBadEndFinale():void {
 	spriteSelect(97);
 	outputText("\n\nIts lips move a slippery friction against yours as it twines its tongue around yours and begins to work glands deep in its gourd, trickling oil into your mouth.  It holds the back of your head kindly yet firmly as it does this, as if it were feeding you, but there is no need for it to apply any pressure at all.  You are nothing but a vessel for it, accepting what it is doing to you without question; you know nothing but the texture of oil and the creature's tongue pushing into you.  Your willingness is rewarded by making the Sandtrap's fluids flow swifter; it smiles against your face before gushing oil into your mouth in a torrent.  At the very edge of your awareness, you feel the sand parting around your feet, of the Sandtrap pushing you slowly downwards, of the delicious feeling of an infinity of warm particles against your “thighs”; but this is as nothing to the warm ooze sliding down your throat, intensifying your sensitivity, making you gasp and pull away and gush fluids of your own against the Sandtrap, before being pushed back into its dripping mouth with that insistent, loving pressure.  You drink, and drink, and drink, transfixed by a kiss which is more like suckling at a teat...");
 	outputText("\n\nYou start and wake.  Groggily you get to your feet, and look around.  You are out in a featureless tract of the desert; there doesn't seem to be anyone around, and the sun is sinking slowly towards the dunes.  The Sandtrap let you go! You are free to return to your quest.  What was that again? You strain your mind against the layers of wooziness which cosset you, and you feel your thoughts once again flow into the high sky above you, throb and meld with others.  You feel a deep urge seize you from somewhere else, encompass your soft thoughts and thrust into you with a dominant demand and you gasp");

@@ -5,7 +5,7 @@
 This license grants Fenoxo, creator of this game usage of the works of
 Dxasmodeus in this product. Dxasmodeus grants Fenoxo and the coders assigned by him
 to this project permission to alter the text to conform with current and new game
-functions, only. Dxasmodeus grants exclusive rights to Fenoxo to add upon events to meet with 
+public functions, only. Dxasmodeus grants exclusive rights to Fenoxo to add upon events to meet with 
 suggestions made by consumers as to new content. Dxasmodeus retains exclusive rights to alter 
 or change the core contents of the events and no other developer may alter, change or use the events without
 permission from dxasmodeus except where otherwise specified in this license. Fenoxo agrees to 
@@ -40,7 +40,7 @@ ENFORCEMENT
 
 This license supercedes all previous licenses and remains in force.
 */
-function tentaclePhysicalAttack():void {
+public function tentaclePhysicalAttack():void {
 	outputText("The shambling horror throws its tentacles at you with a murderous force.\n", false);
 	temp = int((monster.str + monster.weaponAttack) - Math.random()*(player.tou) - player.armorDef);
 	if(temp < 0) temp = 0;
@@ -55,7 +55,7 @@ function tentaclePhysicalAttack():void {
 	}
 	combatRoundOver();
 }
-function tentacleEntwine():void {
+public function tentacleEntwine():void {
 	outputText("The beast lunges its tentacles at you from all directions in an attempt to immobilize you.\n", false);
 	//Not Trapped yet
 	if(player.hasStatusAffect("TentacleBind") < 0) {
@@ -80,7 +80,7 @@ function tentacleEntwine():void {
 }
 
 
-function tentacleEntice():void {
+public function tentacleEntice():void {
 	//Spoiler for Entice Attack Male/Herm: 
 	if(player.gender == 1 || player.gender == 3) {
 		if(rand(2) == 0) {
@@ -109,7 +109,7 @@ function tentacleEntice():void {
 	combatRoundOver();
 }
 
-function tentacleVictoryRape():void {
+public function tentacleVictoryRape():void {
 	outputText("", true);
 	spriteSelect(100);
 	//Male/Herm
@@ -145,7 +145,7 @@ function tentacleVictoryRape():void {
 
 //Spoiler for Bad End-Tentacle Monster: 
 //[CONDITIONS: Futa/Herm, Corruption > 50, Lust Defeat Only, Obtained 3 previous Lust Defeats to Tentacle Monster.]
-function futaTentacleBadEnd():void {
+public function futaTentacleBadEnd():void {
 	outputText("", true);
 	spriteSelect(100);
 	outputText("Having repeatedly been ravaged by the tentacle beast in your travels, you surrender yourself to yet another savage session of forced pleasure. However, the beast lunges forward with its great maw open. Utterly surprised, you do not have time to react before the creature's tentacles seize you and swallow you whole!!!\n\n", false);
@@ -157,7 +157,7 @@ function futaTentacleBadEnd():void {
 	//Goto rape #2
 	doNext(5076);
 }
-function futaTentacleEpilogue():void {
+public function futaTentacleEpilogue():void {
 	outputText("", true);
 	spriteSelect(100);
 	//[Met Giacomo at least once]
@@ -182,7 +182,7 @@ function futaTentacleEpilogue():void {
 	doNext(5035);
 }
 
-function tentacleLossRape():void {
+public function tentacleLossRape():void {
 	spriteSelect(100);
 	//Genderless madness
 	if(player.gender == 0) {
@@ -497,7 +497,7 @@ function tentacleLossRape():void {
 
 
 //Centaur v. Tentacle Monster: (display if pc is unsexed centaur)
-function centaurGenderlessRetardation():void {
+public function centaurGenderlessRetardation():void {
 	outputText("", true);
 	spriteSelect(100);
 	if(flags[UNKNOWN_FLAG_NUMBER_00247] == 0 || player.balls == 0) {
@@ -564,7 +564,7 @@ function centaurGenderlessRetardation():void {
 }
 
 //Naga v. Tentacle Monster:
-function genderlessHilarityForNagaKenDolls():void {
+public function genderlessHilarityForNagaKenDolls():void {
 	outputText("", true);
 	spriteSelect(100);
 	outputText("Out of nowhere tentacles bind your arms and tail, holding you firm in a matter of seconds.  You struggle to free yourself but can do nothing against the strength of the beast holding you in your current state.  More of the appendages start teasing around your body, as if looking for something.  A handful test the entrance to your " + assholeDescript() + " but evidently that's not what they're after.\n\n", false);
@@ -584,7 +584,7 @@ function genderlessHilarityForNagaKenDolls():void {
 }
 
 //Goo v. Tentacle Monster:
-function tentacularGenderGooTimes():void {
+public function tentacularGenderGooTimes():void {
 	outputText("", true);
 	spriteSelect(100);
 	outputText("All of a sudden, tentacles come whipping out of the undergrowth to grab you.  Though, they're moving a little too fast, and manage to compress your body walls so far together that you're almost squeezed in half.\n\n", false);

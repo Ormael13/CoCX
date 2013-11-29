@@ -1,4 +1,4 @@
-﻿function executeButtonClick(button:int = 0):void {
+﻿public function executeButtonClick(button:int = 0):void {
 	mainView.clickButton( button );
 }
 
@@ -16,7 +16,7 @@ var perkList:Array = new Array(
                 data:3}*/
 ); 
  
-function changeHandler(event:Event):void { 
+public function changeHandler(event:Event):void { 
  	//Store perk name for later addition
  	tempPerk = ComboBox(event.target).selectedItem.label; 
 	mainView.aCb.move(210, 80);
@@ -27,14 +27,14 @@ function changeHandler(event:Event):void {
 
 
  /*HOLY SHIT THIS HOW TO DO URL LINKS!
-function changeHandler(event:Event):void { 
+public function changeHandler(event:Event):void { 
     var request:URLRequest = new URLRequest(); 
     request.url = ComboBox(event.target).selectedItem.data; 
     navigateToURL(request); 
     mainView.aCb.selectedIndex = -1; 
 }*/
 
-function displayControls():void
+public function displayControls():void
 {
 	mainView.hideAllMenuButtons();
 	inputManager.DisplayBindingPane();
@@ -51,14 +51,14 @@ function displayControls():void
 			"Back", hideControls);
 }
 
-function hideControls():void
+public function hideControls():void
 {
 	inputManager.HideBindingPane();
 	
 	settingsScreen();
 }
 
-function resetControls():void
+public function resetControls():void
 {
 	inputManager.HideBindingPane();
 	
@@ -67,7 +67,7 @@ function resetControls():void
 	doYesNo(resetControlsYes, displayControls);
 }
 
-function resetControlsYes():void
+public function resetControlsYes():void
 {
 	inputManager.ResetToDefaults();
 	
@@ -76,7 +76,7 @@ function resetControlsYes():void
 	doNext(displayControls);
 }
 
-function clearControls():void
+public function clearControls():void
 {
 	inputManager.HideBindingPane();
 	
@@ -85,7 +85,7 @@ function clearControls():void
 	doYesNo(clearControlsYes, displayControls);
 }
 
-function clearControlsYes():void
+public function clearControlsYes():void
 {
 	inputManager.ClearAllBinds();
 	

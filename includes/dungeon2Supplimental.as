@@ -10,7 +10,7 @@
 // TIMES_VALA_CONSENSUAL_BIG:int = 767;
 // TIMES_VAPULA_AND_GIANT_VALA:int = 768;
 
-function impGangAI():void {
+public function impGangAI():void {
 	if(monster.hasStatusAffect("ImpUber") >= 0) impGangUber();
 	else if(monster.lust > 50 && rand(2) == 0) impGangBukkake();
 	else {
@@ -27,7 +27,7 @@ function impGangAI():void {
 }
 
 //IMP GANG [ATTACKS!]  
-function imtacularMultiHitzilla():void {
+public function imtacularMultiHitzilla():void {
 	//Multiattack:
 	if(monster.hasStatusAffect("Blind") < 0) outputText("The imps come at you in a wave, tearing at you with claws!\n", false);
 	//(ALT BLINDED TEXT)
@@ -81,7 +81,7 @@ function imtacularMultiHitzilla():void {
 }
 
 //Bukkake:
-function impGangBukkake():void {
+public function impGangBukkake():void {
 	outputText("Many of the imps are overcome by the lust you've inspired.  They hover in the air around you, pumping their many varied demonic rods as they bring themselves to orgasm.\n", false);
 	
 	//(2-6 hits)
@@ -147,7 +147,7 @@ function impGangBukkake():void {
 }
 
 //Mass Arousal
-function impGangUber():void {
+public function impGangUber():void {
 	if(monster.hasStatusAffect("ImpUber") < 0) {
 		outputText("Three imps on the far side of the room close their eyes and begin murmuring words of darkness and power.  Your eyes widen, recognizing the spell.  Anything but that!  They're building up a massive arousal spell!  They keep muttering and gesturing, and you realize you've got one round to stop them!\n", false);
 		monster.createStatusAffect("ImpUber",0,0,0,0);
@@ -175,7 +175,7 @@ function impGangUber():void {
 	}
 }
 		
-function loseToImpMob():void {
+public function loseToImpMob():void {
 	outputText("", true);
 	//(HP) 
 	if(player.HP < 1) outputText("Unable to handle your myriad wounds, you collapse with your strength exhausted.\n\n", false);
@@ -253,7 +253,7 @@ function loseToImpMob():void {
 	doNext(11080);
 }
 //[IMP GANGBANG VOL 2]
-function loseToImpMobII():void {
+public function loseToImpMobII():void {
 	outputText("", true);
 	outputText("You wake up, sore from the previous activity and a bit groggy.  You try to move, but find yourself incapable.  Struggling futilely, you thrash around until you realize your arms and legs are strapped down with heavy iron restraints.  You gasp out loud when you look down and discover your ", false);
 	if(player.biggestTitSize() < 1) outputText("new", false);
@@ -286,7 +286,7 @@ function loseToImpMobII():void {
 }
 
 //WIN
-function impGangVICTORY():void {
+public function impGangVICTORY():void {
 	outputText("", true);
 	//Flag them defeated!
 	flags[UNKNOWN_FLAG_NUMBER_00116] = 1;
@@ -302,7 +302,7 @@ function impGangVICTORY():void {
 }
 
 //RAEP -M
-function impGangGetsRapedByMale():void {
+public function impGangGetsRapedByMale():void {
 	outputText("", true);
 	outputText("You walk around and pick out three of the demons with the cutest, girliest faces.  You set them on a table and pull aside your " + player.armorName + ", revealing your " + multiCockDescriptLight() + ".  You say, \"<i>Lick,</i>\" in a tone that brooks no argument.  The feminine imps nod and open wide, letting their long tongues free.   Narrow and slightly forked at the tips, the slippery tongues wrap around your " + cockDescript(0) + ", slurping wetly as they pass over each other in their attempts to please you.\n\n", false);
 	
@@ -328,7 +328,7 @@ function impGangGetsRapedByMale():void {
 	eventParser(5007);
 }
 //RAEP-F
-function impGangGetsRapedByFemale():void {
+public function impGangGetsRapedByFemale():void {
 	outputText("", true);
 	outputText("You walk around to one of the demons and push him onto his back.  Your " + player.armorName + " falls to the ground around you as you disrobe, looking over your tiny conquest.  A quick ripping motion disposes of his tiny loincloth, leaving his thick demon-tool totally unprotected. You grab and squat down towards it, rubbing the corrupted tool between your legs ", false);
 	if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLICK) outputText("and coating it with feminine drool ", false);
@@ -356,7 +356,7 @@ function impGangGetsRapedByFemale():void {
 
 //Encapsulation Start
 //[Get it]
-function getSwordAndGetTrapped():void {
+public function getSwordAndGetTrapped():void {
 	outputText("", true);
 	outputText("You start to walk over to the corpse and its discarded weapon, but halfway through your journey, the unexpected happens.   The leaf-like petals shift underfoot, snapping up with lightning-quick speed.  You ", false);
 	if(player.spe < 50) outputText("fall flat on your " + assDescript() + ", slipping on the slick, shifting surface.", false);
@@ -365,7 +365,7 @@ function getSwordAndGetTrapped():void {
 	getTrappedContinuation();
 }
 //[Fly-Get It]
-function flyToSwordAndGetTrapped():void {
+public function flyToSwordAndGetTrapped():void {
 	outputText("", true);
 	outputText("You start to fly over to the corpse and its discarded weapon, but about halfway through your flight, the unexpected happens.  One of the leaf-like petals springs up and slaps into your face with stunning force, dropping you to the ground.  You try to pick yourself up, but slip on the shifting, slick surface of another pad.", false);
 	//[ADD 'CONTINUE' ON]
@@ -373,7 +373,7 @@ function flyToSwordAndGetTrapped():void {
 }
 	
 //[CONTINUE ON] 
-function getTrappedContinuation():void {
+public function getTrappedContinuation():void {
 	outputText("\n\nA loud 'slap' nearly deafens you, and the visible light instantly diminishes to a barely visible, purple glow.  The fungal 'leaves' have completely encapsulated you, sealing you inside a fleshy, purple pod.  No light can penetrate the thick sheath surrounding you, but muted illumination pulses from the flexing walls of your new prison, oscillating in strength with the subtle shifts of the organic chamber.\n\n", false);
 	
 	outputText("The sweet aroma that you smelled before is much, MUCH stronger when enclosed like this.  It's strong enough to make you feel a little dizzy and light-headed.  Deciding that you had best escape from this impromptu prison with all possible speed, you try to find a joint to force your way out through, but the pod's walls appear completely seamless.  You pound on the mushy surface, but your repeated blows have little effect.  Each impact brings with it a burst of violet radiance, but the fungus seems built to resist such struggles.  Moisture beads on the capsule's walls in larger and larger quantities, drooling into a puddle around your feet.\n\n", false);
@@ -384,7 +384,7 @@ function getTrappedContinuation():void {
 	startCombat(28);
 }
 
-function setDescriptionForPlantPot():void {
+public function setDescriptionForPlantPot():void {
 	//[Round 1 Description]
 	if(monster.hasStatusAffect("Round") < 0) monster.long = "You're totally trapped inside a pod!  The walls are slimy and oozing moisture that makes the air sickeningly sweet.  It makes you feel a little dizzy.  Tentacles are climbing up your " + player.legs() + " towards your crotch, doing their best to get under you " + player.armorName + ".  There's too many to try to pull away.  You're only chance of escape is to create a way out!";
 	//[Round 2 Description]
@@ -431,7 +431,7 @@ function setDescriptionForPlantPot():void {
 	}
 }
 
-function encapsulationPodAI():void {
+public function encapsulationPodAI():void {
 	//[Round 1 Action]
 	if(monster.hasStatusAffect("Round") < 0) {
 		outputText("You shiver from the feeling of warm wetness crawling up your " + player.legs() + ".   Tentacles brush against your ", false);
@@ -552,7 +552,7 @@ function encapsulationPodAI():void {
 	combatRoundOver();
 }
 
-function loseToThisShitPartII():void {
+public function loseToThisShitPartII():void {
 	hideUpDown();
 	outputText("", true);
 	//[OPTIONAL CUM ESCAPE]
@@ -621,7 +621,7 @@ function loseToThisShitPartII():void {
 	}
 }
 
-function encapsulationVictory():void {
+public function encapsulationVictory():void {
 	if(monster.HP <= 0) {
 		flags[UNKNOWN_FLAG_NUMBER_00117]++;
 		outputText("", true);
@@ -635,7 +635,7 @@ function encapsulationVictory():void {
 //Vala, the Broken 'Fairy'
 
 //[Use]
-function useVala():void {
+public function useVala():void {
 	spriteSelect(85);
 	outputText("", true);
 	stats(0,0,0,0,0,0,20,0);
@@ -669,7 +669,7 @@ function useVala():void {
 	
 }
 
-function useValaPtII():void {
+public function useValaPtII():void {
 	spriteSelect(85);
 	outputText("", true);
 	hideUpDown();
@@ -707,7 +707,7 @@ function useValaPtII():void {
 }
 
 //[Free]
-function freeValazLooseCoochie():void {
+public function freeValazLooseCoochie():void {
 	spriteSelect(85);
 	outputText("", true);
 	outputText("You search the room for a way to free the fairy from her shackles and find an ugly, iron key that looks like a promising candidate. Opening the rusted metal with a teeth-clenching screech, the girl slumps to the ground in an ungainly heap. The fall seems to have roused her, at least, because she blinks, slowly, several times before lifting her head to stare blankly at you. You try to explain that she's free, but it's clear that thoughts are travelling through a pretty thick haze of abuse, so you take a moment to let her gather herself. When she's managed to assemble what wits are left to her, she slowly curls her mouth into a hopeful smile. \"<i>How can Bitch please Master?</i>\" she asks in an innocent voice tainted by husky desire.\n\n", false);
@@ -725,7 +725,7 @@ function freeValazLooseCoochie():void {
 }
 
 //[Heal]
-function healVala():void {
+public function healVala():void {
 	spriteSelect(85);
 	outputText("", true);
 	if(hasItem("PurHony",1)) {
@@ -756,7 +756,7 @@ function healVala():void {
 	}
 	
 }
-function healValaPartTwoTheHealingHealsOfRevenge():void {
+public function healValaPartTwoTheHealingHealsOfRevenge():void {
 	spriteSelect(85);
 	outputText("", true);
 	outputText("She tries to stand and falls back on her ass, the unbalancing weight of her corrupted breasts still surprising. She seems surprised at first, but her laughter is rich and eases your heart even just to hear it. \"<i>Oh my, I have changed a bit, haven't I? Still, any deformity is worth restoring my mind. Please, let me introduce myself.</i>\" She flaps her thin, fey wings rapidly and their lift is enough to allow her to stand. \"<i>I am Vala, and I used to be a fairy, like my sisters. I was captured by the demons of this place and used to amuse them between sexual releases. The lord of this place, in his dark designs, thought it would be better to use me for sexual release instead. They fed me such terrible drugs, to make me grow to a more pleasing size. They bound me in this room with these,</i>\" she cups her absurdly large tits, \"<i>weights. When my wings grew strong enough to carry my inflated body, they switched to chains instead. They used me terribly and, in time, I forgot who I was. Pleasure was all that mattered. But you have saved me, and now it is all but a bad dream.</i>\" She flutters up to kiss your forehead. \"<i>I must taste the sweet open air and return to my sisters, but please try to find me once you are done here. I wish to repay your kindness.</i>\"\n\n", false);
@@ -768,7 +768,7 @@ function healValaPartTwoTheHealingHealsOfRevenge():void {
 }
 
 //[Sex]
-function ValaGetsSexed():void {
+public function ValaGetsSexed():void {
 	spriteSelect(85);
 	outputText("", true);
 	//(Herm/Male)
@@ -793,7 +793,7 @@ function ValaGetsSexed():void {
 	doNext(valaGetsSexedPtDuece);
 }
 
-function valaGetsSexedPtDuece():void {
+public function valaGetsSexedPtDuece():void {
 	spriteSelect(85);
 	outputText("", true);
 	hideUpDown();
@@ -851,7 +851,7 @@ function valaGetsSexedPtDuece():void {
 }
 
 //[Reject]
-function rejectFuckingVala():void {
+public function rejectFuckingVala():void {
 	spriteSelect(85);
 	outputText("", true);
 	if(flags[UNKNOWN_FLAG_NUMBER_00126] == 0) {
@@ -872,7 +872,7 @@ function rejectFuckingVala():void {
 }
 
 //Vala AI
-function valaAI():void {
+public function valaAI():void {
 	//VALA SPEAKS!
 	valaCombatDialogue();
 	outputText("\n\n", false);
@@ -885,7 +885,7 @@ function valaAI():void {
 }
 
 //Blood magic?
-function valaSpecial1():void {
+public function valaSpecial1():void {
 	outputText("Vala dabs at one of her wounds and swoons.  Is she actually getting off from the wounds?  Damn she's damaged!  Vala licks the blood from her fingers, winks, and blows pink mist from her mouth.", false);
 	//Lightly wounded.
 	if(monster.HP/eMaxHP() > .7) {
@@ -903,7 +903,7 @@ function valaSpecial1():void {
 	combatRoundOver();
 }
 //Milk magic
-function valaSpecial2():void {
+public function valaSpecial2():void {
 	outputText("With a look of ecstasy on her face, Vala throws back her head and squeezes her pillowy chest with her hands, firing gouts of thick faerie milk from her over-sized bosom!  You try to dodge, but she's squirting so much it's impossible to dodge it all, and in no time you're drenched with a thick coating of Vala's milk.", false);
 	outputText("  She releases her breasts, shaking them back and forth for your benefit, and flutters her wings, blowing shiny, glitter-like flakes at you.  They stick to the milk on your skin, leaving you coated in milk and faerie-dust.", false);
 	outputText("\nVala says, \"<i>Now you can be sexy like Vala!</i>\"\n", false);
@@ -920,7 +920,7 @@ function valaSpecial2():void {
 	combatRoundOver();
 }
 //Masturbation
-function valaMasturbate():void {
+public function valaMasturbate():void {
 	outputText("The mind-fucked faerie spreads her alabaster thighs and dips a finger into the glistening slit between her legs, sliding in and out, only pausing to circle her clit.  She brazenly masturbates, putting on quite the show.  Vala slides another two fingers inside herself and finger-fucks herself hard, moaning and panting lewdly.  Then she pulls them out and asks, \"<i>Did you like that?  Will you fuck Vala now?</i>\"", false);
 	stats(0,0,0,0,0,0,4 + player.cor/10,0);
 	combatRoundOver();
@@ -928,7 +928,7 @@ function valaMasturbate():void {
 
 
 //[Fight dialog]
-function valaCombatDialogue():void {
+public function valaCombatDialogue():void {
 	if(monster.hasStatusAffect("vala") < 0) {
 		outputText("\"<i>Sluts needs to service the masters!</i>\" the fairy wails, flying high. \"<i>If they are not pleased, Bitch doesn't get any cum!</i>\"", false);
 		monster.createStatusAffect("vala",0,0,0,0);
@@ -944,7 +944,7 @@ function valaCombatDialogue():void {
 	}
 }
 
-function loseToVala():void {
+public function loseToVala():void {
 	spriteSelect(85);
 	if(player.gender == 3) loseToValaAsHerm();
 	if(player.gender == 1) loseToValaAsMale();
@@ -959,7 +959,7 @@ function loseToVala():void {
 }
 //Fight Loss-
 //(Herm)
-function loseToValaAsHerm():void {
+public function loseToValaAsHerm():void {
 	spriteSelect(85);
 	outputText("", true);
 	outputText("You collapse, no longer able to stand, and gasp weakly. The fairy took entirely too much delight in the fight, and her wet pussy is practically squirting with every heartbeat as she hovers over you, rubbing herself in anticipation. \"<i>The masters' will be happy. They will reward their Bitch with cum.</i>\" Her mouth drools as much as her slavering snatch. \"<i>Oh so much cum, and all for their good little pet.</i>\"\n\n", false);
@@ -973,7 +973,7 @@ function loseToValaAsHerm():void {
 	doNext(loseToValaAsHermPartII);
 }
 
-function loseToValaAsHermPartII():void {
+public function loseToValaAsHermPartII():void {
 	spriteSelect(85);
 	outputText("", true);
 	outputText("It proves to be so much worse than you thought. Even though the nozzle is at its lowest setting, you can feel hot spunk flowing into your cunt and colon, the hose jerking as globs of the jizz begin to ooze into your recesses. The fairy laughs with a voice that is all the more wicked from the pure, clean, crystal tones it carries. \"<i>The masters' love is so sweet inside us. More future masters for us to birth and so many orgasms.</i>\" She begins to tweak her clit and turns up the crank a notch, the trickle of slimy goo becoming a regular pumping. If not for the coldness of the metal inside you, the heat of the cum would be unbearable. You have the horrible realization that imps must be filling the hidden reservoir even as their fairy slave guides it into you. You scream in disgust and wriggle your " + buttDescript() + ", trying to get the cursed toy out of you.\n\n", false);
@@ -988,7 +988,7 @@ function loseToValaAsHermPartII():void {
 }
 
 //Fight Loss-
-function loseToValaAsMale():void {
+public function loseToValaAsMale():void {
 	spriteSelect(85);
 	outputText("You collapse, no longer able to stand, and gasp weakly. The fairy took entirely too much delight in the fight, and her wet pussy is practically squirting with every heartbeat as she hovers over you, rubbing herself in anticipation. \"<i>Bitch will show you the masters' pleasures. They will reward it with cum.</i>\" Her mouth drools as much as her slavering snatch. \"<i>Oh so much cum, and all for their good little slut.</i>\"\n\n", false);
 
@@ -1000,7 +1000,7 @@ function loseToValaAsMale():void {
 	else doNext(loseToValaMaleIIGape);
 }
 
-function loseToValaAsMaleIITight():void {
+public function loseToValaAsMaleIITight():void {
 	spriteSelect(85);
 	outputText("", true);
 	//(tight ass)
@@ -1012,7 +1012,7 @@ function loseToValaAsMaleIITight():void {
 	doNext(loseToValaMaleIILoose);
 }
 
-function loseToValaMaleIILoose():void {
+public function loseToValaMaleIILoose():void {
 	spriteSelect(85);
 	outputText("", true);
 	//(loose ass)
@@ -1024,7 +1024,7 @@ function loseToValaMaleIILoose():void {
 }
 
 //(Very loose ass)
-function loseToValaMaleIIVeryLoose():void {
+public function loseToValaMaleIIVeryLoose():void {
 	spriteSelect(85);
 	outputText("", true);
 	outputText("The fairy suspends you over a bulbous cock, at least a foot long and three inches wide, carved to resemble an imp's barbed, demonic shaft. \"<i>The masters are very kind,</i>\" the girl promises, \"<i>They know a slut's limits and gladly help it exceed them. They will rebuild you to their liking.</i>\" The memory of her own training has overwhelmed her dulled expression and she can't help but mount you in the air, swinging her legs around your waist and guiding her slavering pussy to your " + cockDescript(0) + ". Just as your head slides into her cunt, however, she loses her grip and you fall from her arms, landing atop the imp dick, drawing an agonized scream of pain. The twelve inches of wood worn down to a polished gleam vanish up your " + assholeDescript() + " and distort your intestines. You are so full that you feel like you've been speared through the gut, but your prostate does not care about your misery. Full penetration drives your cock wild and it surges to life, pulsing with every heartbeat. You can feel an orgasm building, but all you care about is the crushing pressure in your nethers. Just before you can cum, the fairy lifts you off the terrible prong and you actually sigh in relief, despite being denied release. Your cock twitches in the open air and it feels like a weight has been lifted from your chest. She giggles and flies you all the way to the last prong.\n\n", false);
@@ -1035,7 +1035,7 @@ function loseToValaMaleIIVeryLoose():void {
 }
 
 //(Gaping asshole)
-function loseToValaMaleIIGape():void {
+public function loseToValaMaleIIGape():void {
 	spriteSelect(85);
 	outputText("", true);
 	outputText("The fairy takes you to the final peg along the rail. It is a nightmarish mix of horse, dog, and minotaur cock. It has a flared head, to make the initial penetration all the more painful, a bulging knot on the end to utterly destroy your spincter, and the whole thing stands a foot and a half tall, nearly five inches wide at the tip. You beg the fairy. You plead. There is no way you can go onto that, you say, it will kill you. All dignity flees as you pitifully sob up to her. You'll do whatever the imps want- whatever the Masters want, you correct yourself. You'll be their toy and cum dump, you'll drink every last bit of your masters' love until you can't taste anything else. You will surrender yourself to them, body and soul. Whatever it takes, you implore, just not that peg! The fairy doesn't respond, her pupil-less eyes unchanging and unmoved by your agony, just swirling with pink lust and trained obedience. She lowers you just enough for you to feel the hard, flared tip of the monstrous thing press against your " + assholeDescript() + " and your resolve fails you. You promise the fairy everything. She lifts you up off the terrible final peg and you laugh in relief.\n\n", false);
@@ -1048,7 +1048,7 @@ function loseToValaMaleIIGape():void {
 
 //Fight Loss-
 //(Female)
-function loseToValaFemale():void {
+public function loseToValaFemale():void {
 	spriteSelect(85);
 	outputText("", true);
 	outputText("You collapse, no longer able to stand, and gasp weakly. The fairy took entirely too much delight in the fight, and her wet pussy is practically squirting with every heartbeat as she hovers over you, rubbing herself in anticipation. \"<i>It will show you the masters' pleasures. They will reward it with cum.</i>\" Her mouth drools as much as her slavering snatch. \"<i>Oh so much cum, and all for their good little Bitch.</i>\"\n\n", false);
@@ -1063,7 +1063,7 @@ function loseToValaFemale():void {
 	doNext(loseToValueFemalePtII);
 }
 
-function loseToValueFemalePtII():void {
+public function loseToValueFemalePtII():void {
 	spriteSelect(85);
 	outputText("", true);
 	outputText("You shiver uncontrollably and hug yourself like a wounded animal. Your " + nippleDescript(0) + " and " + clitDescript() + " burn under the pale goop, rock hard and pulsing with demands for stimulation. The fairy bitch happily places a new bucket next to you, this one fuller than the first. \"<i>It wants a meal?</i>\" she inquires doubtfully, perhaps hoping to keep it for herself. You reluctantly reach for the bucket, nearly lunging when it looks like the fairy is about to pull the lever again. You look into the bucket and shiver as the stench of the spooge assails your nostrils, even more potent than the jizz bath rolling down your bare skin in cream bulbs. You reluctantly take a glob between your fingers and thumb and with a timid motion, you raise your fistful of the odious syrup and spread it over your lips like a soapy lather. Rubbing the vile goo so close to your nose makes you nearly convulse at the reek and you hug at your slime-soaked body, trying to curl up, away from the reeking bucket. Your lower torso becomes a sloppy mess of pale, nearly clear fluid rolling off of your curves in blobby clumps.", false);
@@ -1078,7 +1078,7 @@ function loseToValueFemalePtII():void {
 
 //BAD END 1-
 //(Fairy)
-function badEndValaNumber1():void {
+public function badEndValaNumber1():void {
 	spriteSelect(85);
 	outputText("", true);
 	outputText("When you regain your senses, you're no longer in the cavernous dungeon you passed out in. You blink, trying to adjust to the bright light around you, but it doesn't help. Every sense is aflame and it's impossible for you to move without exciting some nerve ending, sending a thrill of pleasure radiating along your sensitive regions. You try to think, to reason out where you are, but holding a thought in your head for longer than a minute is extremely difficult, as if your mind was muffled by thick wool. You try to remember what happened, but that too is just out of your reach. All this mental exercise is giving you a headache, so you give up, and just drink in the sensations around your body. A shimmering, spritely face comes into view and a thought blazes a clear, white-hot path through your groggy brain. Recognition clears all your doubts and worries away. Your Mistress. This is your Mistress.\n\n", false);
@@ -1094,7 +1094,7 @@ function badEndValaNumber1():void {
 }
 
 //BAD END 2-
-function badEndValaNumber2():void {
+public function badEndValaNumber2():void {
 	spriteSelect(85);
 	//(Imp)
 	outputText("", true);
@@ -1107,7 +1107,7 @@ function badEndValaNumber2():void {
 	doNext(badEndValaNumber2Pt2);
 }
 
-function badEndValaNumber2Pt2():void {
+public function badEndValaNumber2Pt2():void {
 	spriteSelect(85);
 	outputText("", true);
 	outputText("\"<i>When we captured Vala, I entertained the thought of breaking her on my dick like a crystalline condom, but I'm rather glad I chose to raise her to be my pet instead.</i>\" The imp's voice is familiar and your mind lurches to the memory of that first violation you suffered when you stepped through the portal to this world. Zetaz. He said never to forget the name Zetaz. You eyes roll in panic, but he holds your chin, his leering face filling your vision. \"<i>As a reward to obedient little Vala, I've decided to remake you in her image. We'll crush all that fatty flesh from your waist, keep your torso bound until you're too weak to walk, and pump you so full of drugs and cum that even seeing your name is painful,</i>\" he taps the bronze plaque he's prepared for you, a mirror to the fairy's. \"<i>Why, in a few months, we'll be hard pressed to tell the two of you apart.</i>\" A fresh wave of fairy-lubricated imp-seed pumps into your abdomen and the rubber girdle strains, but holds, washing the spunk back up, into your throat, until it feels like you might drown in the frothing cream.\n\n", false);
@@ -1128,7 +1128,7 @@ function badEndValaNumber2Pt2():void {
 }
 
 //Fight Win-
-function fightValaVictory():void {
+public function fightValaVictory():void {
 	spriteSelect(85);
 	outputText("", true);
 	outputText("The fairy girl collapses, well-drilled obedience robbing her limbs of their fight. She squirms to a crouching bow, fully accepting you as her new " + player.mf("Master","Mistress") + ". The warped fae's empty eyes look up at you, her face a mask of rapture as she anxiously awaits her punishment, wagging her butt in the air as lubrication gushes down her thighs. It seems being defeated has excited the broken creature to a breeding frenzy. Her endurance must be incredible to be this frisky after your battle.", false);
@@ -1143,7 +1143,7 @@ function fightValaVictory():void {
 }
 
 //[Fuck]
-function valaFightVictoryFuck():void {
+public function valaFightVictoryFuck():void {
 	spriteSelect(85);
 	outputText("", true);
 	//(Female) 
@@ -1185,7 +1185,7 @@ function valaFightVictoryFuck():void {
 }
 
 //[Fuck]
-function valaFightVictoryFuckPtII():void {
+public function valaFightVictoryFuckPtII():void {
 	spriteSelect(85);
 	outputText("", true);
 	//fem2
@@ -1232,7 +1232,7 @@ function valaFightVictoryFuckPtII():void {
 //REPEATABLES
 //Unpurified Fairy-
 //(Returning to fairy room for the first time)
-function leftValaAlone():void {
+public function leftValaAlone():void {
 	spriteSelect(85);
 	outputText("", true);
 	//first post meeting
@@ -1263,7 +1263,7 @@ function leftValaAlone():void {
 }
 
 //[Heal]
-function tryToHealVala():void {
+public function tryToHealVala():void {
 	spriteSelect(85);
 	outputText("", true);
 	//(Without Pure Honey)
@@ -1299,7 +1299,7 @@ function tryToHealVala():void {
 	}
 }
 
-function tryToHealValaWHoney2():void {
+public function tryToHealValaWHoney2():void {
 	spriteSelect(85);
 	outputText("", true);
 	outputText("She tries to stand and falls back on her ass, the unbalancing weight of her corrupted breasts still surprising. She seems surprised at first, but her laughter is rich and eases your heart even just to hear it. \"<i>Oh my, I have changed a bit, haven't I? Still, any deformation is worth restoring my mind. Please, let me introduce myself.</i>\" She flaps her thin, fey wings rapidly and their lift is enough to allow her to stand. \"<i>I am Vala, and I used to be a fairy, like my sisters. I was captured by the demons of this place and used to amuse them between sexual releases. The leader of them, however, thought it would be better to use me for sexual release instead. They fed me such terrible drugs, to make me grow and to bind me with these,</i>\" she cups her absurdly large tits, \"<i>weights. They used me terribly and, in time, I forgot who I was. Pleasure was all that mattered. But you have saved me, and now it is all but a bad dream.</i>\" She flutters up to kiss your forehead.\n\n", false);;
@@ -1312,7 +1312,7 @@ function tryToHealValaWHoney2():void {
 }
 
 //[Use]
-function useValaOHYEAHSNAPINTOASLIMJIM():void {
+public function useValaOHYEAHSNAPINTOASLIMJIM():void {
 	spriteSelect(85);
 	outputText("", true);
 	//(Male)
@@ -1339,7 +1339,7 @@ function useValaOHYEAHSNAPINTOASLIMJIM():void {
 	doNext(useValaOHYEAHKOOLAIDPTII);
 }
 
-function useValaOHYEAHKOOLAIDPTII():void {
+public function useValaOHYEAHKOOLAIDPTII():void {
 	spriteSelect(85);
 	outputText("", true);
 	hideUpDown();
@@ -1373,7 +1373,7 @@ function useValaOHYEAHKOOLAIDPTII():void {
 }
 
 //[Wake]
-function wakeValaUpBeforeYouGoGo():void {
+public function wakeValaUpBeforeYouGoGo():void {
 	spriteSelect(85);
 	outputText("", true);
 	//(Male)
@@ -1409,7 +1409,7 @@ function wakeValaUpBeforeYouGoGo():void {
 	doNext(wakeMeUpBeforeValaGoGosPtII);
 }
 
-function wakeMeUpBeforeValaGoGosPtII():void {
+public function wakeMeUpBeforeValaGoGosPtII():void {
 	spriteSelect(85);
 	outputText("", true);
 	hideUpDown();
@@ -1456,7 +1456,7 @@ function wakeMeUpBeforeValaGoGosPtII():void {
 }
 
 //Purified Fairy
-function purifiedFaerieBitchBar():Boolean {
+public function purifiedFaerieBitchBar():Boolean {
 	//Is Vala freed?  If not boot out
 	if(flags[UNKNOWN_FLAG_NUMBER_00119] == 0) return false;
 	//(Entering the Wet Bitch for the first time after Healing her)
@@ -1479,7 +1479,7 @@ function purifiedFaerieBitchBar():Boolean {
 }
 
 //[Vala]
-function chooseValaInBar():void {
+public function chooseValaInBar():void {
 	spriteSelect(85);
 	var cumBath:Number = 0;
 	if(player.hasCock()) cumBath = 3449;
@@ -1529,7 +1529,7 @@ function chooseValaInBar():void {
 	addButton(4,"Leave",barTelAdre);
 }
 
-function cleansedFirstRemeet():void {
+public function cleansedFirstRemeet():void {
 	spriteSelect(60);
 	outputText("", true);
 
@@ -1546,7 +1546,7 @@ function cleansedFirstRemeet():void {
 }
 
 //[You] 
-function cleansedValaFuckHerBrainsOut():void {
+public function cleansedValaFuckHerBrainsOut():void {
 	spriteSelect(60);
 	outputText("", true);
 	//[Male/Herm Growth scene]
@@ -1604,7 +1604,7 @@ function cleansedValaFuckHerBrainsOut():void {
 }
 
 //Part 2
-function cleansedValaFuckHerBrainsOutPtII():void {
+public function cleansedValaFuckHerBrainsOutPtII():void {
 	spriteSelect(60);
 	outputText("", true);
 	//dicks + growth
@@ -1667,7 +1667,7 @@ function cleansedValaFuckHerBrainsOutPtII():void {
 
 
 //[You]
-function cleansedValaRepeatBrainFucking():void {
+public function cleansedValaRepeatBrainFucking():void {
 	spriteSelect(60);
 	outputText("", true);
 	outputText("She flashes a beautiful smile and tells the bartender that she'll be taking her break early. Grabbing you by the hand, she rushes to the stockroom and sheds her dress without any trace of her former shame about her tattooed back. When you're too slow taking off your " + player.armorName + ", she helps, deft hands made all the quicker by eagerness. When the two of you are naked, she pushes you onto the well-worn stool and sits in your lap, staring into your eyes with a small smile.", false);
@@ -1676,7 +1676,7 @@ function cleansedValaRepeatBrainFucking():void {
 }
 
 //[Fairies]
-function faerieOrgyFuck():void {
+public function faerieOrgyFuck():void {
 	spriteSelect(60);
 	outputText("", true);
 	outputText("Vala giggles and nods to the bartender to indicate she'll be taking her break. Taking you by the hand, she flutters upstairs to one of the far rooms of the tavern. When she opens the door, you're startled to find the room is virtually filled with fairies. Unlike Vala, they're the type you're more used to seeing- three to four inches tall, the girls are clothed in shiny black leather straps and wear tiny sable stockings tipped with crystalline heels. There's quite a variety of them and dozens of eyes settle on you as Vala pulls you into the room, closing the door behind you. \"<i>These are my sisters, from the deep forest,</i>\" she introduces. \"<i>In my state, a monster or other predator of the woods would surely catch me or, worse, use me to lure my sisters to danger. But with a few complimentary bottles of whiskey, the captain of Tel'Adre's city guard was willing to give them passage to visit me in the city once a week, as long as they stay out of mischief.</i>\" The fairies lift off and buzz around you, teeny voices introducing themselves, asking your name, marveling at your huge muscles, or otherwise fawning over you. It's a bit much, truth be told.\n\n", false);
@@ -1693,7 +1693,7 @@ function faerieOrgyFuck():void {
 }
 	
 //[Male]
-function faerieOrgyFuckMaleContinue():void {
+public function faerieOrgyFuckMaleContinue():void {
 	spriteSelect(60);
 	outputText("", true);
 	outputText("The fairy girl lands at the edge of the bed, settling on her knees and resting her weighty chest on the mattress. Leaning in, she spreads your " + player.legs() + " with warm, delicate hands, fingertips stroking the insides of your thighs. You shiver and squeeze the bedspread between your fingers, a little nervous about this 'forest magic.' One of the fairies flutters down to Vala and hands her a pale white lily petal with a tittering giggle. The larger fairy takes the soft white bloom and, whispering a silken word to it, licks the cream-colored surface. Slithering further between your legs, she reaches your " + cockDescript(0) + " and brushes the petal against your throbbing glans with a teasing caress. Then, much to your surprise, she places it on the tip of her forefinger and places it on the base of your cock. You gasp, the petal's soft surface rubbing sensitive skin with a warmth you were unprepared for. After the briefest delay, you lose your breath as the tremor of a small, barely contained orgasm rumbles through your gut. Without hesitation, the fairy barmaid takes a rose petal and repeats the process, another almost-orgasm seizing you and leaving you panting. \"<i>Normally we only need the one petal, but since you and I are so much larger than the average fairy, I had my sisters bring lots. All for you,</i>\" she whispers, coyly.\n\n", false);
@@ -1720,7 +1720,7 @@ function faerieOrgyFuckMaleContinue():void {
 }
 
 //[Female]
-function faerieOrgyFuckFemaleContinue():void {
+public function faerieOrgyFuckFemaleContinue():void {
 	spriteSelect(60);
 	outputText("", true);
 	outputText("The fairy girl lands at the edge of the bed, settling on her knees and resting her weighty chest on the mattress. Leaning in, she spreads your " + player.legs() + " with warm, delicate hands, fingertips stroking the insides of your thighs. You shiver and hug your arms under your breasts, a little nervous about this 'forest magic.' One of the fairies flutters down to Vala and hands her a pale white lily petal with a tittering giggle. The larger fairy takes the soft white bloom and, whispering a silken word to it, licks the cream-colored surface. Slithering further between your legs, she reaches your " + vaginaDescript(0) + " and brushes the petal against your " + clitDescript() + " with a teasing caress. Then, much to your surprise, she places it on the tip of her forefinger and slides it into your pussy. You gasp, the petal's soft surface rubbing your inner walls with a warmth you were unprepared for. Vala presses lightly on a spot inside your vagina and you lose your breath as the tremor of a small orgasm rumbles through your gut. Without explanation, the fairy barmaid takes a rose petal and repeats the process, another orgasm seizing you and leaving you panting. \"<i>Normally we only need the one petal, but since you and I are so much larger than the average fairy, I had my sisters bring lots. All for you,</i>\" she whispers, coyly.\n\n", false);
@@ -1739,7 +1739,7 @@ function faerieOrgyFuckFemaleContinue():void {
 }
 
 //ZETAZ START
-function zetazTaunt():void {
+public function zetazTaunt():void {
 	if(monster.hasStatusAffect("round") < 0) {
 		monster.createStatusAffect("round",1,0,0,0);
 		outputText("Zetaz asks, \"<i>Do you even realize how badly you fucked up my life, ", false);
@@ -1761,7 +1761,7 @@ function zetazTaunt():void {
 }
 	
 //ZETAZ AI:
-function zetazAI():void {
+public function zetazAI():void {
 	//Zetaz taunts.
 	zetazTaunt();
 	outputText("\n\n", false);
@@ -1853,7 +1853,7 @@ function zetazAI():void {
 	combatRoundOver();
 }
 
-function gigaArouse():void {
+public function gigaArouse():void {
 	outputText("You see " + monster.a + monster.short + " make familiar arcane gestures at you, but his motions seem a lot more over the top than you'd expect from an imp.\n\n", false);
 	stats(0,0,0,0,0,0,rand(player.lib/10)+player.cor/10+15,0);
 	if(player.lust < 30) outputText("Your nethers pulse with pleasant warmth that brings to mind pleasant sexual memories.  ", false);
@@ -1875,7 +1875,7 @@ function gigaArouse():void {
 }
 
 
-function defeatZetaz():void {
+public function defeatZetaz():void {
 	flags[UNKNOWN_FLAG_NUMBER_00114]++;
 	outputText("", true);
 	//[VICTORY HP]
@@ -1894,7 +1894,7 @@ function defeatZetaz():void {
 }
 
 //[Release Zetaz 4 Info Win]
-function releaseZForInfo():void {
+public function releaseZForInfo():void {
 	outputText("", true);
 	outputText("You look the pathetic imp up and down and smirk.  He closes his eyes, expecting a summary execution, but you present him with an offer instead.  If he gives you more information on Lethice and where to find her, you'll let him go scot-free and avoid him if he doesn't make a nuisance of himself.\n\n", false);
 	
@@ -1925,7 +1925,7 @@ function releaseZForInfo():void {
 }
 	
 //[Sexual Interrogation]
-function sexualInterrogation():void {
+public function sexualInterrogation():void {
 	outputText("", true);
 	outputText("You lean down until your face hovers over Zetaz, looking him square in the eyes, and explain, \"<i>I can't have someone who knows the way to the demons' headquarters dying before they tell me how to get there, can I?</i>\"\n\n", false);
 	
@@ -1961,7 +1961,7 @@ function sexualInterrogation():void {
 }
 
 //[Release Him]
-function sexualTortureReleaseZetaz():void {
+public function sexualTortureReleaseZetaz():void {
 	outputText("", true);
 	outputText("In a moment of kindness", false);
 	if(player.lust > 60 || player.lib > 60 || player.cor > 60) outputText(", or perhaps perversion,", false);
@@ -1983,7 +1983,7 @@ function sexualTortureReleaseZetaz():void {
 }
 
 //[Tighten Strap] 
-function sexualTortureTightenZetaz():void {
+public function sexualTortureTightenZetaz():void {
 	outputText("", true);
 	outputText("\"<i>Idiot,</i>\" you taunt while you tighten the strap further.  Zetaz actually starts to bawl in anguish while another orgasm worth of cum backs up inside him.  You don't want him to get out of the binding while you search for his map, so you pull the cord under his leg and use the free end to bind his wrists together behind his back.  Fondling his turgid prick one last time for good luck, you leave him to struggle with his need as you search for your map.  It's difficult to blank out all the whines and cries, but you manage.\n\n", false);
 	
@@ -2001,7 +2001,7 @@ function sexualTortureTightenZetaz():void {
 }
 
 //[END HIM – Ew death!]
-function endZetaz():void {
+public function endZetaz():void {
 	outputText("", true);
 	outputText("You grab his head in both hands and twist violently, popping his neck in an instant.  Glaring down at the corpse of your first demonic foe, you utter, \"<i>Wish granted.</i>\"\n\n", false);
 	
@@ -2017,7 +2017,7 @@ function endZetaz():void {
 }
 
 //[Lose to Zetaz]
-function loseToZetaz():void {
+public function loseToZetaz():void {
 	outputText("", true);
 	outputText("\"<i>Well, isn't this familiar?</i>\" asks Zetaz as he watches your ", false);
 	if(player.lust > 99) outputText("masturbating", false);
@@ -2037,7 +2037,7 @@ function loseToZetaz():void {
 	if(player.gender == 3) hermZetazOver();
 }
 
-function femaleZetazOver():void {
+public function femaleZetazOver():void {
 	//F-drugged up and tied to the table in the main room.  Cum in by all the imps till pregnant.  Daily fuckings with accompanying mind-fuck.
 		
 	outputText("With your resistance ", false);
@@ -2087,7 +2087,7 @@ function femaleZetazOver():void {
 	doNext(femaleZetazOverPtII);
 }
 
-function femaleZetazOverPtII():void {
+public function femaleZetazOverPtII():void {
 	outputText("", true);
 	hideUpDown();
 	outputText("While you're gathering your thoughts, Zetaz staggers back down the table and accepts a flask from one of his lackeys.  He guzzles down the bubbling pink fluid in seconds, and the effect is immediate and greatly pleasing to your fuck-happy worldview.  The imp's cock, which had been slowly retracting, thickens at the base and rapidly fills until it's hard and twitching with sexual need.  He glances down at your exposed " + vaginaDescript(0) + " with a hungry look and drops to his knees, lining the nodule-ringed crown of his wondrous dick up with your lust-juiced slit.\n\n", false);
@@ -2113,7 +2113,7 @@ function femaleZetazOverPtII():void {
 	//[Epilogue]
 	doNext(zetazBadEndEpilogue);
 }
-function zetazBadEndEpilogue():void {
+public function zetazBadEndEpilogue():void {
 	outputText("", true);
 	if(player.gender == 2) {
 		outputText("The once-champion, " + player.short + " was raped repeatedly by every imp that survived her initial assault.  Her mind never recovered from the initial orgy, and she found herself happy to be named 'Fuck-cow'.  She quickly became a favorite of Zetaz's ever growing brood, and surprised them all with her fertility and rapidly decreasing incubation times.  Within a few months, she was popping out litters of tiny masters even faster than Vala.  Within a year, her body was so well trained and her womb so stretched that she could keep multiple litters growing within at all times.\n\n", false);
@@ -2143,7 +2143,7 @@ function zetazBadEndEpilogue():void {
 }
 
 //[HERMS]
-function hermZetazOver():void {
+public function hermZetazOver():void {
 	//H-fed incubi and succubi potions repeatedly until demonic and even more over-endowed, knocked up while dick is milked by factory like milker + MC?
 	outputText("With your resistance ", false);
 	if(player.HP < 1) outputText("beaten out of you", false);
@@ -2193,7 +2193,7 @@ function hermZetazOver():void {
 	doNext(hermZetazOverPtII);
 }
 
-function hermZetazOverPtII():void {
+public function hermZetazOverPtII():void {
 	hideUpDown();
 	outputText("", true);
 	outputText("You awaken midway through a loud moan and nearly jump out of your " + player.skinDesc + " in surprise, but the fire of your unnaturally stoked libido immediately reasserts yourself.  You twitch your hips to and fro, thrusting against a ", false);
@@ -2227,7 +2227,7 @@ function hermZetazOverPtII():void {
 	
 //M-Males – drugged & pegged, slowly have their memories erased/brainwashed.
 //[Males]
-function malesZetazOver():void {
+public function malesZetazOver():void {
 	outputText("You've been so thoroughly ", false);
 	if(player.HP < 1) outputText("beaten", false);
 	else outputText("teased", false);
@@ -2258,7 +2258,7 @@ function malesZetazOver():void {
 	doNext(malesZetazOverPtII);
 }
 
-function malesZetazOverPtII():void {
+public function malesZetazOverPtII():void {
 	outputText("", true);
 	outputText("You wake to a desert-dry, sandpapery feeling in the back of your throat as yet another moan escapes your mouth.   The ring gag is still there, and easily thwarts your tongues attempts to lick at your parched lips, but the jolts of pleasure exploding up your spine make it hard to get upset about it.  Hips rocking, you keep squirting and squirting from your orgasm, feeling each hot blast burst from your manhood until the wave of lust passes and you open your eyes.  You're in a dim cave, the one they used to hold Vala, and chained up to the wall in a similar manner.\n\n", false);
 	
@@ -2298,7 +2298,7 @@ function malesZetazOverPtII():void {
 
 
 
-function theSeanShopOffer():void {
+public function theSeanShopOffer():void {
 	spriteSelect(52);
 	outputText("", true);
 	outputText("You try to sneak closer to get a closer look at him, but the demon immediately stops what he's doing and stares straight at you.  He laughs, \"<i>Well now I know what happened to all the demons inside.  I really would've expected a bunch of renegades like them to put up a better fight.</i>\"\n\n", false);
@@ -2312,7 +2312,7 @@ function theSeanShopOffer():void {
 	simpleChoices("Deal",2640,"No Deal",2641,"",0,"",0,"",0);
 }
 
-function incubusDeal():void {
+public function incubusDeal():void {
 	spriteSelect(52);
 	outputText("", true);
 	outputText("\"<i>Excellent!  Give me a few moments to gather my things and I'll be open for business!</i>\" exclaims the strange demon.  If his story is true it's no wonder he doesn't get along with the rest of his kind.", false);
@@ -2322,7 +2322,7 @@ function incubusDeal():void {
 	doNext(1);
 }
 
-function incubusNoDeal():void {
+public function incubusNoDeal():void {
 	spriteSelect(52);
 	outputText("", true);
 	flags[UNKNOWN_FLAG_NUMBER_00130] = -1;
@@ -2330,7 +2330,7 @@ function incubusNoDeal():void {
 	doNext(1);
 }
 
-function incubusShop():void {
+public function incubusShop():void {
 	spriteSelect(52);
 	if(flags[NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] == 1) {
 		getBimboozeFromSean();
@@ -2347,7 +2347,7 @@ function incubusShop():void {
 	choices("Numb Rox",2643,"Sens. Draft",2644,"Reducto",2645,"Demon Whip",2653,"Bimbo Liq",bimbo,"",0,"",0,"",0,"",0,"Leave",1);
 }
 
-function incubusBuy():void {
+public function incubusBuy():void {
 	spriteSelect(52);
 	outputText("", true);
 	outputText("The incubus lifts " + itemLongName(shortName) + " from his shelves and says, \"<i>That will be " + (itemValue(shortName) * 3) + " gems.  Are you sure you want to buy it?</i>\"", false);
@@ -2359,7 +2359,7 @@ function incubusBuy():void {
 	doYesNo(2646,2642);
 }
 
-function incubusTransact():void {
+public function incubusTransact():void {
 	spriteSelect(52);
 	outputText("", true);
 	player.gems -= itemValue(shortName) * 3;
@@ -2369,7 +2369,7 @@ function incubusTransact():void {
 }
 
 //[Cum Bath]
-function valaCumBath():void {
+public function valaCumBath():void {
 	spriteSelect(60);
 	clearOutput();
 	//FIRST TIME INTRO
@@ -2406,7 +2406,7 @@ function valaCumBath():void {
 	doNext(valaCumBath2);
 }
 
-function valaCumBath2():void {
+public function valaCumBath2():void {
 	spriteSelect(60);
 	clearOutput();
 	outputText("Vala tries to compose herself before you, but the girl is too antsy to go slowly, impatient hands wrapping around your [ass] and pulling you toward her lithe body, her wings aflutter with restless gaiety.  The buoyant pixie leans in to lap at the pout of your cockhead with the tip of her pink tongue while her thumbs work fervently between the junction of her legs, stroking her glistening clit like she were polishing a precious jewel.  Her fingers curl into the slavering depths of her pussy, stroking her fey folds with trembling pleasure.  Leaving one hand to continue jilling herself, Vala takes the other and uses her honey-drenched palm to polish the quivering flesh of your swelling shaft.  She encircles the crest of your fairy-slick cock with her eager pucker, sucking the steady dribble of your pre-cum as she pumps vigorously.  Before long, the twitching bliss rushing to your loins tell you that her voracious efforts have coaxed the thickening semen bubbling inside you to the edge of your restraint.  Gently, you push her off of your member, your urethra dilating as your orgasm gushes forth.");
@@ -2437,7 +2437,7 @@ function valaCumBath2():void {
 }
 
 //Big Vala Intro
-function valaBigYou():void {
+public function valaBigYou():void {
 	clearOutput();
 	flags[TIMES_VALA_CONSENSUAL_BIG]++;
 	//{FIRST TIME}
@@ -2472,7 +2472,7 @@ function valaBigYou():void {
 }
 //Big Vala: Dom Me
 //Put PC on ground to make serve her orally.
-function bigValaDomsPC():void {
+public function bigValaDomsPC():void {
 	clearOutput();
 	outputText("Vala tilts her head to the side, causing a gust of displaced air to blow your " + hairDescript() + " wildly.  \"<i>Giving the maiden a chance to lead?  You're so sweet!</i>\"  She tickles your chin with one immense fingertip.  \"<i>But you had better give it your all, you adorable rascal, you.</i>\"");
 	outputText("\n\nYou're gently placed on the ground between Vala's legs.  Looking back, you see her cross her ankles behind you while her thighs swing closer.  With no escape and the walls of your prison rapidly closing around you, the only way you can go is forward.  You slip and slide on the torrent of girl-cum that drizzles out from the gigantic faerie's cave-sized twat, holding onto her thighs to stay upright during your trek, lest you faceplant into cum-mud.");
@@ -2522,7 +2522,7 @@ function bigValaDomsPC():void {
 }
 
 //Big Vala: Lick Me (Requires Penor)
-function bigValaLicksOffDudes():void {
+public function bigValaLicksOffDudes():void {
 	clearOutput();
 	outputText("Giant Vala cocks an eyebrow at your request in surprise.  \"<i>But, what if I accidentally swallow?  I couldn't live with myself if something should happen to my big... er, little Hero.</i>\"  She pats you on the head affectionately, unsure of how to handle herself with all of her newfound size.");
 	outputText("\n\nYou comfortingly stroke her hand and reassure her that you want nothing more than to slide yourself in her mouth and feel her gigantic tongue sliding all over you, licking all of you like a popsicle until you can't take it anymore.");
@@ -2575,7 +2575,7 @@ function bigValaLicksOffDudes():void {
 }
 
 //Intro to Vala + Vapula Threesomes
-function valaVapulaThreesome():void {
+public function valaVapulaThreesome():void {
 	//{First Meeting} 
 	flags[TIMES_VAPULA_AND_GIANT_VALA]++;
 	if(flags[TIMES_VAPULA_AND_GIANT_VALA] == 1) {
@@ -2595,7 +2595,7 @@ function valaVapulaThreesome():void {
 }
 	
 //Giant Vala + Vapula Threesome - Vala Dommy
-function valaDommyVapula3Some():void {
+public function valaDommyVapula3Some():void {
 	clearOutput();
 	valaVapulaThreesome();
 	outputText("\n\nWith her mind made up, Vala grabs hold of the surly demoness.  Then, leaning over your camp, she grabs a length of rope from your supplies, holding it as you would a length of twine.  She quickly loops it around the demoness, tightly restraining Vapula from her pointed heels up to her big, bouncy succubi-tits.  The tainted tart's arms are lashed tightly to her sides before she's caught on to what exactly is going on, crude rope compressing her forgiving flesh erotically, setting Vapula's glorious, corrupted cunt to dripping.");
@@ -2638,7 +2638,7 @@ function valaDommyVapula3Some():void {
 	doNext(13);
 }
 //Giant Vala + Vapula Threesome - Vala Lovey Dovey
-function valaLoveyVapula3Some():void {
+public function valaLoveyVapula3Some():void {
 	clearOutput();
 	valaVapulaThreesome();
 	outputText("\n\nVala smiles tenderly and says, \"<i>Oh, I'll be far gentler than the demons were with me.  Besides, you're way prettier than any imp!</i>\"  She stretches out to touch Vapula, running a narrow fingertip (for a giantess) around each of the succubus's heavy breasts.  \"<i>A cutie like you can't be nearly that mean...</i>\"");
@@ -2670,7 +2670,7 @@ function valaLoveyVapula3Some():void {
 	doNext(13);
 }
 
-function kinathisValaStuff():void {
+public function kinathisValaStuff():void {
 	clearOutput();
 	var x:int = player.cockThatFits(50);
 	if(x < 0) x = player.smallestCockIndex();
@@ -2754,7 +2754,7 @@ function kinathisValaStuff():void {
 }
 
 //[next]
-function valaPartIIWaifuLove():void {
+public function valaPartIIWaifuLove():void {
 	clearOutput();
 	model.time.hours = 6;
 	model.time.days++;

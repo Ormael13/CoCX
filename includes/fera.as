@@ -1,11 +1,11 @@
 ﻿//const PUMPKIN_FUCK_YEAR_DONE:int = 522;
 
-function isHalloween():Boolean {
+public function isHalloween():Boolean {
 	return ((date.date >= 28 && date.month == 9) || (date.date < 2 && date.month == 10));
 }
 
 
-function pumpkinFuckEncounter():void {
+public function pumpkinFuckEncounter():void {
 	clearOutput();
 	outputText("Just ahead, in the middle of the path, lies a seeming innocuous gourd - a pumpkin to be precise.  The growth is oddly out of place.  Nothing else grows on the soft animal-forged path you now tread, and the pumpkin and its vines are moist, as if wet with morning dew.  They are the only plants in the vicinity to bear such moisture, gleaming dully in the muted arboreal light.");
 	if(flags[PUMPKIN_FUCK_YEAR_DONE] > 0) outputText("  An old, haunting memory surfaces, and you realizes this seems... familiar.  Did you find this last year?  Yes... it could have been this very same pumpkin...");
@@ -34,7 +34,7 @@ function pumpkinFuckEncounter():void {
 }
 
 //[HOLY SHIT YOU BE FUCKING A PUMPKIN]
-function pumpkinFuck():void {
+public function pumpkinFuck():void {
 	clearOutput();
 	flags[PUMPKIN_FUCK_YEAR_DONE] = date.fullYear;
 	outputText("Well, fuck it.  You're horny, and this little pumpkin doesn't look like it could stop you from fucking that gushing gourd-pussy.  As you shed your [armor], a few of the rough, slime-sweating vines feebly rise up to embrace you, but you brush them away, having no time for corrupt foolishness.  You're going to bust a nut in this fruit's sweet, supple folds, not let some malformed tentacle-horror molest you.");
@@ -73,7 +73,7 @@ function pumpkinFuck():void {
 	}
 }
 //[Next]
-function pumpkinFuckPartII():void {
+public function pumpkinFuckPartII():void {
 	clearOutput();
 	outputText("The titanic rent shivers, flaps of fruit-flesh smacking wetly for a second before splitting along their length.  The crack goes up the height of the six-foot pumpkin until it looks on the verge of splitting in two.  Suddenly, the gap widens, strings of orangey-purple goo hanging wetly between them for a moment.  Soon, the bisected fruit falls apart, at last revealing the corrupt core.  No trace of your mammoth insemination remains.");
 	outputText("\n\nStanding in the middle of the vegetational carnage is a human figure, shrouded in slime and pumpkin, but clearly alive.  Her waist-length hair shimmers, orange as the goop that drips from it as she turns to face you.  She casually brushes a wash of the filth from her head, revealing a achingly beautiful visage - pale skin, a button nose, and full, blood-red lips that glitter in the suddenly-dim light.  Burning crimson eyes lock onto you, and a voice as smooth as a razor's edge intones, \"<i>So... YOU are my savior, hrmmm?</i>\"");
@@ -106,7 +106,7 @@ function pumpkinFuckPartII():void {
 	doNext(pumpkinFuckPartIII);
 }
 
-function pumpkinFuckPartIII():void {
+public function pumpkinFuckPartIII():void {
 	clearOutput();
 	outputText("SLAP!  The crack of a palm on your face rouses you, a red handprint left on your cheek.  Fera smirks at you as you stir woozily in your plant-woven prison.  \"<i>Did you enjoy yourself?</i>\"  You slowly nod, feeling... liberated, free.  The situation is less worrying than before.  Fera just wanted to thank you, right?");
 	outputText("\n\nThe sultry orange-haired maiden ");
@@ -122,7 +122,7 @@ function pumpkinFuckPartIII():void {
 	doNext(13);
 }
 
-function mountPumpkin():void {
+public function mountPumpkin():void {
 	clearOutput();
 	flags[PUMPKIN_FUCK_YEAR_DONE] = date.fullYear;
 	//>Yes [Player is pregnant, has low vaginal wetness, or has low fertility and is not in heat]
@@ -169,7 +169,7 @@ function mountPumpkin():void {
 }
 
 //>Next
-function pumpkinMountingLevelII():void {
+public function pumpkinMountingLevelII():void {
 	clearOutput();
 	outputText("The pumpkin's titanic stem shivers, the mighty shaft trembling immensely before the pumpkin splits from the top causing it to topple.  The crack goes around the rind in multiple directions, causing it to split open like a flower as strings of orangey-purple goo hang wetly between the pieces for a moment.  A moment later, the sectioned fruit falls apart, at last revealing the corrupt core.  No trace of the mammoth copulation remains.");
 	outputText("\n\nStanding in the middle of the vegetational carnage is a human figure, shrouded in slime and pumpkin, but clearly alive.  Her waist-length hair shimmers, orange as the goop that drips from it as she turns to face you.  She casually brushes a wash of the filth from her head, revealing a achingly beautiful visage - pale skin, a button nose, and full, blood-red lips that glitter in the suddenly-dim light.  Burning crimson eyes lock onto you, and a voice as smooth as a razor's edge intones, <i>\"So... YOU are my savior, hmmm?\"</i>");
@@ -203,7 +203,7 @@ function pumpkinMountingLevelII():void {
 	doNext(mountPumpkinsIII);
 }
 
-function mountPumpkinsIII():void {
+public function mountPumpkinsIII():void {
 	clearOutput();
 	outputText("SLAP!  The crack of a palm on your face rouses you, a red handprint left on your cheek.  Fera smirks at you as you stir woozy in your plant-woven prison.  <i>\"Did you enjoy yourself?\"</i>  You slowly nod, feeling... liberated... free.  The situation is less worrying than before.  Fera just wanted to thank you, right?");
 	outputText("\n\nThe sultry orange-haired maiden pats your sloshing middle as the vines unwind, allowing you to stand on your own feet.  You go to wipe the cum from your nose and upper lip as soon as you're free.  It's dry.  Did any of that even happen?");
@@ -223,7 +223,7 @@ function mountPumpkinsIII():void {
 //But I had to fix all the tags you tried to fix
 //You are just as much of a failure as he is.
 //Introduction
-function feraSceneTwoIntroduction():void {
+public function feraSceneTwoIntroduction():void {
 	clearOutput();
 	outputText("While you're walking through the deepest, darkest parts of these overgrown woodlands, you come across a wild glade, filled with hundreds and hundreds of the most beautiful blossoming flowers. They cover the hundred or so feet across the clearing densely, some small, like dandelions and orchids, others enormous, on stalks as thick as small tree-trunks, blooming so vibrantly that you find yourself rubbing your eyes after gazing at them, dazzled by their many hued palettes. Sweet aromas of a thousand types of flowers blend together into a symphony of nasal delight, and you breathe deep, laughing loudly and openly at this wondrous find.");
 	outputText("\n\nYou flop back into the soft grasses that ring this overwhelmingly sweet glade. The nectar-sweet ambrosia that's carried through the air on clouds of pollen ought to be attracting some insects, shouldn't it? You glance around, looking for the bees and butterflies you would normally expect to thrive in such a place, but there are none. No bugs, no gnats, no aphids... just flowers... flowers everywhere. You get up and wander around a little bit, looking this way and that, hunting for any proof of life while simultaneously taking in the cacophony of dazzling colors.");
@@ -236,7 +236,7 @@ function feraSceneTwoIntroduction():void {
 	addButton(4,"Leave",leaveFerasWonderland);
 }
 //Leave
-function leaveFerasWonderland():void {
+public function leaveFerasWonderland():void {
 	clearOutput();
 	outputText("Nah, that whole place is probably some kind of giant venus fly trap. Fuck that.");
 	flags[FERAS_GLADE_EXPLORED_YEAR] = date.fullYear;
@@ -244,7 +244,7 @@ function leaveFerasWonderland():void {
 }
 
 //Explore Das Trees
-function exploreFerasWonderland():void {
+public function exploreFerasWonderland():void {
 	clearOutput();
 	flags[FERAS_GLADE_EXPLORED_YEAR] = date.fullYear;
 	outputText("Straightening to your full height, you take a few experimental sniffs and begin to walk back towards the middle of the meadow, brushing aside garish pink blooms that rise up past your waist.  That smell is getting stronger now.  How could you have missed it when you first arrived? It's heavenly, like a combination of every sweet treat you like with an undercurrent of passionate sexual musk blended in underneath.  You close in, " + player.mf("[hips] swaggering excitedly","[hips] sashaying excitedly") + ", " + player.skin() + " flushing.  A few baby blue sunflowers bump your shoulders as you muscle past them to hone in your new favorite aroma.  You've just got to know what bloom could possibly release such a heavenly scent!");
@@ -289,13 +289,13 @@ function exploreFerasWonderland():void {
 }
 
 //Leave
-function leaveAfterFlowerHuffing():void {
+public function leaveAfterFlowerHuffing():void {
 	clearOutput();
 	outputText("The farther you get from that glade, the more your head clears and the more you realize how close you came to disaster.  You resolve to avoid it in the future, lest you fall prey to that entrancing pollen and the hypnotic petals once more.");
 	doNext(13);
 }
 //Fuck the Lips
-function fuckDemCorruptFlowerLips():void {
+public function fuckDemCorruptFlowerLips():void {
 	clearOutput();
 	flags[FERAS_TRAP_SPRUNG_YEAR] = date.fullYear;
 	outputText("You dazedly stagger forward, putting one [foot] after another on the supple flesh of the gigantic, color-swirling petal that leads to your goal: the plush, nectar-leaking lips at the center of the bloom.  With each plodding movement, the hues become more vibrant, the intoxicating scent becomes thicker, and the less well-reasoned your thoughts become, shutting down in the avalanche of sensory overload.  Soon, your thoughts are little more than: <i>Scent. Sex. Horny. Fuck.</i>");
@@ -358,7 +358,7 @@ function fuckDemCorruptFlowerLips():void {
 	addButton(0,"Next",dickBoostingFuntimes);
 }
 //Get a Boosted Dick!
-function dickBoostingFuntimes():void {
+public function dickBoostingFuntimes():void {
 	clearOutput();
 	outputText("You hang there, suspended, spread-eagled, and with your dick [sheath]-deep in a giant pair of fuck-hungry lips as the goddess circles you, running her dagger-sharp nails gently across your " + player.skinFurScales() + " until she stands behind you, arms wrapped around your [chest] and squeezing. She nips at your ear, biting it gently but getting no response from your blissed out, drug-ravaged body.");
 	outputText("\n\n\"<i>Suck,</i>\" the goddess commands authoritatively to the flower, and to you, she bids, \"<i>Fuck.</i>\"");
@@ -404,7 +404,7 @@ function dickBoostingFuntimes():void {
 	addButton(0,"Next",postSeederUpgrade);
 }
 
-function postSeederUpgrade():void {
+public function postSeederUpgrade():void {
 	clearOutput();
 	outputText("You awaken fully dressed with a familiar ache between your legs.  Damn, that was a good nap.  You rise, scratching [oneCock] and smiling as you feel how hard and sensitive it is.  You're already feeling pretty anxious for a fuck, especially after the crazy wet dreams you had last night, and you resolve to find a nice hole to dump a few loads into before too long.  First, you had better go check back up on your camp.  You've got to bring your A-game if you're going to fuck stronger babies into every weak pussy you come across.  Besides, the wait will only make your eventual sexual enjoyment that much messier.");
 	//Add ten more corruption.
@@ -414,7 +414,7 @@ function postSeederUpgrade():void {
 }
 
 //Stick a Stamen in It!
-function stickAStamenInIt():void {
+public function stickAStamenInIt():void {
 	clearOutput();
 	flags[FERAS_TRAP_SPRUNG_YEAR] = date.fullYear;
 	outputText("You dazedly stagger forward, one [foot] after another falling on the supple flesh of the gigantic, color-shifting petal that rises up towards the flower's center like steps on an ancient ziggurat.  The closer you get, the more vibrant the hues become, the thicker the scent becomes, and the simpler and more instinctive your thought processes become.  <i>Flower. Fuck. Sex. Need. Ache.</i>");
@@ -453,7 +453,7 @@ function stickAStamenInIt():void {
 }
 
 //Gape
-function gapeMePleaseFera():void {
+public function gapeMePleaseFera():void {
 	clearOutput();
 	outputText("Fera smiles as you announce your choice.  \"<i>I thought you might say that, little champion.  Now, you simply relax and enjoy the pleasure that only my normal weak-willed prey are allowed to experience.  You will be the first to taste it and be allowed free.  How wonderful!</i>\"  She pets your forehead.");
 	outputText("\n\nMeanwhile, you hear a squelching, slithering sound down below as Fera pulls away, kneeling down beside you so that her lips are at your ear, washing her hot breath across it and occasionally letting her soft, pillow-like mouth press against your aural opening.  \"<i>Relllaaaax,</i>\" she commands, and you do.  Your body sags bonelessly into its organic cradle as a writhing mass of tentacle-like stamen contort just shy of your mons, their squirming shapes dripping almost as eagerly as you.");
@@ -497,7 +497,7 @@ function gapeMePleaseFera():void {
 	addButton(0,"Next",gapeByFeraEpilogue);
 }
 
-function gapeByFeraEpilogue():void {
+public function gapeByFeraEpilogue():void {
 	clearOutput();
 	outputText("You awaken fully dressed with a familiar ache between your legs. Damn, that was a good nap.  You rise, stretching as you rub your back, sore from lying against a tree for so long.  You suppose you could hunt down a tentacle monster and see if it'd really give you a filling");
 	if(player.pregnancyIncubation == 0) outputText(", but you'd rather fuck something that'll get you good and pregnant with a well-hung fuck-monster, like a minotaur!");
@@ -510,7 +510,7 @@ function gapeByFeraEpilogue():void {
 }
 
 //Tight
-function tightLikeAToigar():void {
+public function tightLikeAToigar():void {
 	clearOutput();
 	outputText("Fera smiles.  \"<i>I had hoped we might do that, little champion.  Now, you simply relax and enjoy the pleasure that only my normal weak-willed prey are allowed to experience.  You will be the first to taste it and be allowed free.  How wonderful!</i>\"  She pets your forehead.");
 	outputText("\n\nMeanwhile, one of the tentacles that had been holding you decides to disentangle itself from its brethren, swaying over towards Fera like a snake to a snake-charmer.  The goddess grabs the tentacle in her hands and smiles, tickling it just behind its exoticly-shaped glans in a way that makes it drip sweet-goo everywhere.  She stops before it can cum and changes posture, gripping the stalk tightly in her hand and curling her fingers inward until the tips of her nails pierce the plant-beast's skin.  It stiffens as if in pain and then goes limp, pinpricks of inky blackness spreading from where it's been punctured.  The inky coloration doesn't appear to be decay but rather an almost latex-like sheen.");
@@ -552,7 +552,7 @@ function tightLikeAToigar():void {
 	menu();
 	addButton(0,"Next",tightnessEpilogue);
 }
-function tightnessEpilogue():void {
+public function tightnessEpilogue():void {
 	clearOutput();
 	outputText("You awaken fully dressed with a familiar ache between your legs.  Damn, that was a good nap.  You rise, stretching as you rub your back, sore from lying against a tree for so long.  You suppose you could find yourself something to fight and fuck, but you ought to head back to camp first.  You idly reach into your [armor] and slip a finger into your [vagina], feeling your tight walls instinctively clamp down and squeeze it.  It's nice, but it's just so much better when you can do that to a captive cock until it has no choice but to impregnate you with its hot seed.  What better way to save the world than by making sure that the strongest get to breed as often as possible?");
 	outputText("\n\nAs you head back to camp to prepare for your next adventure, you realize that you had some really, really fucked up dreams.  You hope you have more tomorrow night.");
@@ -562,7 +562,7 @@ function tightnessEpilogue():void {
 }
 
 //Grow a Dick!
-function growADickForFera():void {
+public function growADickForFera():void {
 	clearOutput();
 	outputText("Fera's luscious lips twist up into a knowing smile as you announce your decision.  \"<i>Really? You're a girl after my own heart.  You're going to miss out on experiencing the pleasure I normally give my prey,</i>\" she says with a gesture to one of the tentacle-like stamen as it rises up above your face, dripping its sweet nectar across the bridge of your nose.  \"<i>But, you'll get to feel the bliss of cumming like a man, filling a nice, tight hole with a steaming-hot load of spunk again and again, and you'll even get to play with your cunt while you do it.  Prepare yourself, pet, for the experience of your lifetime.</i>\"");
 	outputText("\n\nA juicy-sounding 'schluck' sounds from below your [butt] when she finishes her proclamation, and a tendril far different from its flowery brethren rises up above your [legs], angling down towards your groin with an unflinching, almost robotic attention.  The tip is clearly hollow and lined with thousands of tiny, wiggling cilia, all slick and slimy with some kind of clear ooze, but that isn't what catches your eye.  No, there is something far more menacing protruding from the stalk's opening - a needle-like spike at least four inches long, though only an inch sticks past the lips of the cup-like tendril.");
@@ -587,7 +587,7 @@ function growADickForFera():void {
 	addButton(0,"Next",afterFeraGivesYouACawk);
 }
 
-function afterFeraGivesYouACawk():void {
+public function afterFeraGivesYouACawk():void {
 	clearOutput();
 	outputText("You awaken fully dressed with a familiar ache between your legs.  Damn, that was a good nap. You rise, scratching your [cock] and smiling as you feel how hard and sensitive it is.  You're already feeling pretty anxious for a fuck, especially after the fucked up wet dreams you had last night, and you resolve to find a nice hole to dump a few loads into before too long.  First, you had better go check back up on your camp.  You've got to bring your A-game if you're going to fuck stronger babies into every weak pussy you come across.");
 	//Add ten more corruption.

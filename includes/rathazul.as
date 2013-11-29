@@ -3,7 +3,7 @@
 	//Rathazul the Alchemist
 	//Encounter, random text for potential uses, choices.
 	//After he has crafted 3 things for the player, option to move into camp.
-function encounterRathazul():void {
+public function encounterRathazul():void {
 	spriteSelect(49);
 	var offered:Boolean = false;
 	//Rat is definitely not sexy!
@@ -34,7 +34,7 @@ function encounterRathazul():void {
 	}
 }
 
-function campRathazul():void {
+public function campRathazul():void {
 	spriteSelect(49);
 	if(flags[UNKNOWN_FLAG_NUMBER_00274] == 1 && flags[UNKNOWN_FLAG_NUMBER_00275] > 0) {
 		collectRathazulArmor();
@@ -78,7 +78,7 @@ function campRathazul():void {
 	}
 
 }
-function rathazulWorkOffer():Boolean {
+public function rathazulWorkOffer():Boolean {
 	spriteSelect(49);
 	var totalOffers:Number = 0;
 	var spoken:Boolean = false;
@@ -228,7 +228,7 @@ function rathazulWorkOffer():Boolean {
 	return false;
 }
 
-function purifySomething():void {
+public function purifySomething():void {
 	spriteSelect(49);
 	clearOutput();
 	outputText("Rathazul asks, \"<i>What would you like me to purify?</i>\"");
@@ -254,7 +254,7 @@ function purifySomething():void {
 }
 
 
-function rathazulDebimboOffer():void {
+public function rathazulDebimboOffer():void {
 	spriteSelect(49);
 	clearOutput();
 	if(flags[RATHAZUL_DEBIMBO_OFFERED] == 0) {
@@ -277,7 +277,7 @@ function rathazulDebimboOffer():void {
 }
 
 //Creation Of The Draft:*
-function makeADeBimboDraft():void {
+public function makeADeBimboDraft():void {
 	clearOutput();
 	spriteSelect(49);
 	outputText("Rathazul takes the teas and the gems into his wizened palms, shuffling the glittering jewels into a pouch and the teas into a large decanter.  He promptly sets the combined brews atop a flame and shuffles over to his workbench, where he picks up numerous pouches and vials of every color and description, adding them to the mix one after the other.  The mixture roils and bubbles atop the open flame like a monstrous, eerie thing, but quickly simmers down to a quiet boil.  Rathazul leaves it going for a while, stirring occasionally as he pulls out a smaller vial.  Once most of the excess liquid has evaporated, he pours the concoction into the glass container and corks it, holding it up to the light to check its coloration.");
@@ -292,7 +292,7 @@ function makeADeBimboDraft():void {
 }
 
 
-function RathazulArmorMenu():void {
+public function RathazulArmorMenu():void {
 	spriteSelect(49);
 	var gelArmor:Number = 0;
 	var silk:Number = 0;
@@ -311,7 +311,7 @@ function RathazulArmorMenu():void {
 	}
 	simpleChoices("BeeArmor",beeArmor,"GelArmor",gelArmor,"SpiderSilk",silk,"",0,"Back",2070);
 }
-function craftSilkArmor():void {
+public function craftSilkArmor():void {
 	spriteSelect(49);
 	outputText("", true);
 	outputText("You hand the bundled webbing to Rathazul carefully, lest you damage the elderly mouse.  He gives you a bemused smile and snatches the stuff from your grasp while he mutters, \"<i>I'm not falling apart you know.</i>\"\n\n", false);
@@ -336,7 +336,7 @@ function craftSilkArmor():void {
 	//[Yes] [No]
 	doYesNo(commissionSilkArmorForReal,declineSilkArmorCommish);
 }
-function commissionSilkArmorForReal():void {
+public function commissionSilkArmorForReal():void {
 	spriteSelect(49);
 	outputText("", true);
 	outputText("You sort 500 gems into a pouch and toss them to Rathazul, along with the rest of the webbing.  The wizened alchemist snaps the items out of the air with lightning-fast movements and goes to work immediately.  He bustles about with enormous energy, invigorated by the challenging task before him.  It seems Rathazul has completely forgotten about you, but as you turn to leave, he calls out, \"<i>What did you want me to make?  A mage's robe or some nigh-impenetrable armor?</i>\"\n\n", false);
@@ -346,20 +346,20 @@ function commissionSilkArmorForReal():void {
 	//[Armor][Robes]
 	simpleChoices("Armor",3002,"Robes",3004,"",0,"",0,"",0);
 }
-function declineSilkArmorCommish():void {
+public function declineSilkArmorCommish():void {
 	spriteSelect(49);
 	outputText("", true);
 	outputText("You take the silk back from Rathazul and let him know that you can't spend 500 gems on a project like that right now.  He sighs, giving you a crestfallen look and a slight nod of his hooded muzzle.", false);
 	doNext(2070);
 }
-function chooseArmorOrRobes():void {
+public function chooseArmorOrRobes():void {
 	spriteSelect(49);
 	outputText("Rathazul grunts in response and goes back to work.  You turn back to the center of your camp, wondering if the old rodent will actually deliver the wondrous item that he's promised you.", true);
 	doNext(13);
 	flags[UNKNOWN_FLAG_NUMBER_00274] = 24;
 	trace("274: " + flags[UNKNOWN_FLAG_NUMBER_00274]);
 }
-function collectRathazulArmor():void {
+public function collectRathazulArmor():void {
 	spriteSelect(49);
 	outputText("", true);
 	outputText("Rathazul beams and ejaculates, \"<i>Good news everyone!  Your ", false);
@@ -387,7 +387,7 @@ function collectRathazulArmor():void {
 	takeItem();
 }
 
-function craftOozeArmor():void {
+public function craftOozeArmor():void {
 	spriteSelect(49);
 	destroyItems("GreenGl", 5);
 	outputText("Rathazul takes the green gel from you and drops it into an empty cauldron.  With speed well beyond what you'd expect from such an elderly creature, he nimbly unstops a number of vials and pours them into the cauldron.  He lets the mixture come to a boil, readying a simple humanoid-shaped mold from what you had thought was piles of junk material.  In no time at all, he has cast the boiling liquid into the mold, and after a few more minutes he cracks it open, revealing a suit of glistening armor.\n\n", true);
@@ -397,7 +397,7 @@ function craftOozeArmor():void {
 	if(player.hasStatusAffect("RathazulArmor") < 0) player.createStatusAffect("RathazulArmor",0,0,0,0);
 }
 
-function buyDyes():void {
+public function buyDyes():void {
 	spriteSelect(49);
 	outputText("Rathazul smiles and pulls forth several vials of colored fluids.  Which type of dye would you like?", true);
 	outputText("\n\n<b>(-50 Gems)</b>", false);
@@ -406,13 +406,13 @@ function buyDyes():void {
 	choices("Auburn", 1017, "Black", 1018, "Blond", 1019, "Brown", 1020, "Red", 1021,"White",1044,"Gray",1084,"",0,"",0,"Nevermind",2486);
 }
 
-function carapaceFind():void {
+public function carapaceFind():void {
 	outputText("You find a large piece of insectile carapace obscured in the ferns to your left.  It's mostly black with a thin border of bright yellow along the outer edge.  There's still a fair portion of yellow fuzz clinging to the chitinous shard.  It feels strong and flexible - maybe someone can make something of it.  ", true);
 	shortName = "B.Chitn";
 	takeItem();
 }
 
-function craftCarapace():void {
+public function craftCarapace():void {
 	spriteSelect(49);
 	outputText("The rat takes the scales and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHe hands you the armor.  ", true);
 	outputText("The plates shine and shimmer like black steel.  He has used the yellow chitin to add accents and embroidery to the plates with a level of detail and craftsmanship rarely seen back home. A yellow fur neck lining has been fashioned from hairs found on the pieces.  The armor includes a breastplate, shoulder guards, full arm guards, and knee high boots.  You notice there are no pants.  As you turn to ask him where the pants are, you see him scratching his head and hastily rustling in drawers.  He mutters under his breath, \"<i>I'm sorry, I'm sorry, I got so focused on working on the pauldrons that I forgot to make any leg coverings!  Here, this should look good with it, and it won't restrict your movements.</i>\"  He hands you a silken loincloth", false);

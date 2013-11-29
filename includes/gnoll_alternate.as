@@ -11,7 +11,7 @@ Italicized Text – This text should appear as Italicized in the game.
 */
 
 //Female Gnoll.  First Page.
-function gnoll2Encounter():void {
+public function gnoll2Encounter():void {
 	spriteSelect(54);
 	outputText("", true);
 	//<First Encounter>
@@ -44,7 +44,7 @@ function gnoll2Encounter():void {
 	startCombat(34);
 }
 
-function hyenaPhysicalAttack():void {
+public function hyenaPhysicalAttack():void {
 	var damage:Number = 0;
 	//return to combat menu when finished
 	doNext(1);
@@ -135,7 +135,7 @@ function hyenaPhysicalAttack():void {
 }
 
 //<Writers note: I recommend that the javelin have a chance to greatly decrease speed for the remaining battle.  I am writing the flavor text for this event if you choose to include it>
-function hyenaJavelinAttack():void {
+public function hyenaJavelinAttack():void {
 	var damage:Number = 0;
 	var slow:Number = 0;
 	//<Hyena Attack 2 – Javelin – Unsuccessful – Dodged>
@@ -190,7 +190,7 @@ function hyenaJavelinAttack():void {
 }
 
 //<Writer's Note: With the third attack, I intend that the damage be increased based on the breast size of the player.  Thus, the text will vary if the player is flat-chested as indicated by colored text.>
-function hyenaSnapKicku():void {
+public function hyenaSnapKicku():void {
 	var damage:Number = 0;
 	//Blind dodge change
 	if(monster.hasStatusAffect("Blind") >= 0 && rand(3) < 2) {
@@ -233,7 +233,7 @@ function hyenaSnapKicku():void {
 	combatRoundOver();
 }
 
-function hyenaArousalAttack():void {
+public function hyenaArousalAttack():void {
 	//Success = cor+lib > rand(150)
 	var chance:Number = rand(150);
 	//<Hyena Attack 4 – Arousal Attack – Highly Successful>
@@ -254,7 +254,7 @@ function hyenaArousalAttack():void {
 }
 
 //<Hyena Victorious – Anal> 
-function hyenaSpearLossAnal():void {
+public function hyenaSpearLossAnal():void {
 	spriteSelect(54);
 	//Oh shit get anal raped.
 	if(hasItem("S.Dream",1)) {
@@ -343,7 +343,7 @@ function hyenaSpearLossAnal():void {
 	eventParser(5007);
 }
 
-function hyenaVictory():void {
+public function hyenaVictory():void {
 	spriteSelect(54);
 	outputText("", true);
 	outputText("The gnoll draws one final javelin, the sharp point distinct as it points at you.  The javelin drops, sticking deep into the dry ground, as the amazon is too dazed and aroused to fight further.  One spotted paw holds tight to the shaft while the tawny warrior slowly falls to her knees, the will to fight completely gone.  Her head bows to you in submission as you slowly approach the defeated hyena.", false);
@@ -358,7 +358,7 @@ function hyenaVictory():void {
 	else doNext(5007);
 }
 //<Hyena Defeat - Fellatio>
-function hyenaVictoryRapeFellatio():void {
+public function hyenaVictoryRapeFellatio():void {
 	spriteSelect(54);
 	var x:Number = player.cockThatFits(40);
 	if(x < 0) x = 0;
@@ -427,7 +427,7 @@ function hyenaVictoryRapeFellatio():void {
 }
 
 //<Hyena Defeat – Cunnilingus>
-function victoryRapeHyenaCunnilingus():void {
+public function victoryRapeHyenaCunnilingus():void {
 	spriteSelect(54);
 	outputText("", true);
 	outputText("Dark brown eyes watch your approach, already slightly glazed in lust.  Slowly, the tawny head bows before you, acknowledging you as dominant.  It amazes you that this powerful, feral woman who fought so hard would now be so meek, but part of you knows that this submission will not last forever.\n\n", false);

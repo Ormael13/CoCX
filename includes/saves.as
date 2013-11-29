@@ -12,7 +12,7 @@ var loader:URLLoader;
 
 var saveFileNames = ["CoC_1", "CoC_2", "CoC_3", "CoC_4", "CoC_5", "CoC_6", "CoC_7", "CoC_8", "CoC_9"];
 
-function cloneObj(obj:Object):Object
+public function cloneObj(obj:Object):Object
 {
 	var temp:ByteArray = new ByteArray();
 	temp.writeObject(obj);
@@ -20,14 +20,14 @@ function cloneObj(obj:Object):Object
 	return temp.readObject();
 }
 
-function getClass(obj:Object):Class
+public function getClass(obj:Object):Class
 {
 	return Class(flash.utils.getDefinitionByName(flash.utils.getQualifiedClassName(obj)));
 }
 
 //ASSetPropFlags(Object.prototype, ["clone"], 1);
 
-function loadSaveDisplay(slot:String, slotName:String):String
+public function loadSaveDisplay(slot:String, slotName:String):String
 {
 	var holding:String = "";
 	//Initialize the save file
@@ -59,7 +59,7 @@ function loadSaveDisplay(slot:String, slotName:String):String
 	return slotName + ":  <b>EMPTY</b>\r     \r";
 }
 
-function loadScreen():void
+public function loadScreen():void
 {
 	var test;
 	
@@ -107,7 +107,7 @@ function loadScreen():void
 	"Back", 30);
 }
 
-function saveScreen():void
+public function saveScreen():void
 {
 	mainView.nameBox.x = 210;
 	mainView.nameBox.y = 620;
@@ -158,7 +158,7 @@ function saveScreen():void
 	"Back", 30);
 }
 
-function saveLoad(e:MouseEvent = null):void
+public function saveLoad(e:MouseEvent = null):void
 {
 	mainView.eventTestInput.x = -10207.5;
 	mainView.eventTestInput.y = -1055.1;
@@ -207,7 +207,7 @@ function saveLoad(e:MouseEvent = null):void
 	}
 }
 
-function deleteScreen():void
+public function deleteScreen():void
 {
 	var test;
 	outputText("Slot,  Race,  Sex,  Game Days Played\n", true);
@@ -255,13 +255,13 @@ function deleteScreen():void
 			"Back", 30);
 }
 
-function confirmDelete():void
+public function confirmDelete():void
 {
 	outputText("You are about to delete the following save: <b>" + flags[TEMP_STORAGE_SAVE_DELETION] + "</b>\n\nAre you sure you want to delete it?", true);
 	simpleChoices("No", deleteScreen, "Yes", purgeTheMutant, "", 0, "", 0, "", 0);
 }
 
-function purgeTheMutant():void
+public function purgeTheMutant():void
 {
 	var test = SharedObject.getLocal(flags[TEMP_STORAGE_SAVE_DELETION], "/");
 	trace("DELETING SLOT: " + flags[TEMP_STORAGE_SAVE_DELETION]);
@@ -274,12 +274,12 @@ function purgeTheMutant():void
 	doNext(deleteScreen);
 }
 
-function saveGame(slot:String):void
+public function saveGame(slot:String):void
 {
 	saveGameObject(slot, false);
 }
 
-function loadGame(slot:String):void
+public function loadGame(slot:String):void
 {
 	var saveFile = SharedObject.getLocal(slot, "/");
 
@@ -301,7 +301,7 @@ OH GOD SOMEONE FIX THIS DISASTER!!!!111one1ONE!
 
 */
 //FURNITURE'S JUNK
-function saveGameObject(slot:String, isFile:Boolean):void
+public function saveGameObject(slot:String, isFile:Boolean):void
 {
 
 	//import classes.cockClass
@@ -686,7 +686,7 @@ function saveGameObject(slot:String, isFile:Boolean):void
 	}
 }
 
-function openSave():void
+public function openSave():void
 {
 	file = new FileReference();
 	file.browse();
@@ -695,13 +695,13 @@ function openSave():void
 	//loadGameFile(fileObj);
 }
 
-function onFileSelected(evt:Event):void
+public function onFileSelected(evt:Event):void
 {
 	file.load();
 	file.addEventListener(Event.COMPLETE, onFileLoaded);
 }
 
-function onFileLoaded(evt:Event):void
+public function onFileLoaded(evt:Event):void
 {
 	var tempFileRef:FileReference = FileReference(evt.target);
 	loader = new URLLoader();
@@ -719,12 +719,12 @@ function onFileLoaded(evt:Event):void
 	}
 }
 
-function ioErrorHandler(e:IOErrorEvent):void
+public function ioErrorHandler(e:IOErrorEvent):void
 {
 	outputText("<b>!</b> Save file not found, check that it is in the same directory as the CoC_" + ver + ".swf file.\r\rLoad from file is not available when playing directly from a website like furaffinity or fenoxo.com.", true);
 }
 
-function onDataLoaded(evt:Event):void
+public function onDataLoaded(evt:Event):void
 {
 	//var fileObj = readObjectFromStringBytes(loader.data);
 	try
@@ -748,7 +748,7 @@ function onDataLoaded(evt:Event):void
 	//eventParser(1);
 }
 
-function loadGameObject(saveData:Object, slot:String = "VOID"):void
+public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 {
 	dungeonLoc = 0;
 	inDungeon = false;
@@ -1338,7 +1338,7 @@ function loadGameObject(saveData:Object, slot:String = "VOID"):void
 	}
 }
 
-function unFuckSave():void
+public function unFuckSave():void
 {
 	//Fixing shit!
 
@@ -1401,7 +1401,7 @@ const encodeChars:Array = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'
 const decodeChars:Array = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 62, -1, -1, -1, 63, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -1, -1, -1, -1, -1, -1, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, -1, -1, -1, -1, -1, -1, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, -1, -1, -1, -1, -1];
 
 //ByteArray > String
-function b64e(data:ByteArray):String
+public function b64e(data:ByteArray):String
 {
 	var out:Array = [];
 	var i:int = 0;
@@ -1428,7 +1428,7 @@ function b64e(data:ByteArray):String
 }
 
 //String > ByteArray
-function b64d(str:String):ByteArray
+public function b64d(str:String):ByteArray
 {
 	var c1:int;
 	var c2:int;
@@ -1500,7 +1500,7 @@ function b64d(str:String):ByteArray
 }
 
 //This loads the game from the string
-function loadText(saveText:String):void
+public function loadText(saveText:String):void
 {
 	//Get the byte array from the string
 	var rawSave:ByteArray = b64d(saveText);

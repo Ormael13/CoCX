@@ -45,7 +45,7 @@
 //21- 40 DD
 //41 –60 E
 //30+ - F mother fucker!
-function tdCup():String {
+public function tdCup():String {
 	var gobs:Number = player.statusAffectv2("Tamani");
 	if(gobs < 20) return "C";
 	else if(gobs < 30) return "D";
@@ -58,7 +58,7 @@ function tdCup():String {
 
 
 //ENCOUNTER:
-function encounterTamanisDaughters():void {
+public function encounterTamanisDaughters():void {
 	spriteSelect(57);
 	flags[TIMES_ENCOUNTED_TAMANIS_DAUGHTERS]++;
 	outputText("", true);
@@ -88,7 +88,7 @@ function encounterTamanisDaughters():void {
 }
 
 //[Play Dumb]
-function playDumbToTamanisDaughters():void {
+public function playDumbToTamanisDaughters():void {
 	spriteSelect(57);
 	outputText("", true);
 	outputText("You shrug and ask, \"<i>What exactly is it you want again?  I'm not sure you have the right " + player.mf("guy","person") + ".</i>\"\n\n", false);
@@ -110,7 +110,7 @@ function playDumbToTamanisDaughters():void {
 }
 
 //[Fight Them]
-function fightTamanisDaughters(tamani:Boolean = false):void {
+public function fightTamanisDaughters(tamani:Boolean = false):void {
 	outputText("", true);
 	
 	outputText("You whirl around threateningly, intent on putting Tamani's wayward brood back in their place.\n\n", false);
@@ -135,7 +135,7 @@ function fightTamanisDaughters(tamani:Boolean = false):void {
 //(Combat is 1 attack per 10 girls + 1x Tamani attack)
 
 //[Fuck them]
-function fuckYoDaughtersHomie():void {
+public function fuckYoDaughtersHomie():void {
 	spriteSelect(57);
 	flags[TIMES_FUCKED_TAMANIS_DAUGHTERS]++;
 	var cocks:Number = player.totalCocks();
@@ -316,7 +316,7 @@ function fuckYoDaughtersHomie():void {
 }
 
 //[Let them]
-function legTamanisDaughtersRAEPYou():void {
+public function legTamanisDaughtersRAEPYou():void {
 	spriteSelect(57);
 	flags[TIMES_FUCKED_TAMANIS_DAUGHTERS]++;
 	var cocks:Number = player.totalCocks();
@@ -669,7 +669,7 @@ function legTamanisDaughtersRAEPYou():void {
 }
 
 //[Lose Combat, Get Your Dick DRAINED]
-function tamaniDaughtersCombatLossDrain():void {
+public function tamaniDaughtersCombatLossDrain():void {
 	spriteSelect(57);
 	flags[TIMES_FUCKED_TAMANIS_DAUGHTERS]++;
 	outputText("", true);
@@ -808,7 +808,7 @@ function tamaniDaughtersCombatLossDrain():void {
 	stats(-.5,0,0,-.5,1,0,-100,1);
 }
 
-function tamaniDaughtersBadEndChoice():void {
+public function tamaniDaughtersBadEndChoice():void {
 	spriteSelect(57);
 	outputText("The next morning your unfocused eyes blink open, and you find yourself in the same situation as before.  Thankfully your orgasm has been allowed to end, though you still feel dopey and unfocused from whatever is flowing into you.  You manage to twist your head around to get a better look at the situation and discover a pair of IV's lodged in your arms.  Twisting your body, you realize you can still feel the drug-enema tube lodged in your " + assholeDescript() + ".  Oddly, it's hard to feel worried or concerned about the situation.\n\n", false);
 	
@@ -820,7 +820,7 @@ function tamaniDaughtersBadEndChoice():void {
 	simpleChoices("Yes",tamaniDaughtersYesBadEndMePlease,"No",tamaniDaughtersDeclineBadEnd,"Individual",tamanisDaughtersFillIndividuallyBADEND,"",0,"",0);
 }
 //[Yes]
-function tamaniDaughtersYesBadEndMePlease():void {
+public function tamaniDaughtersYesBadEndMePlease():void {
 	spriteSelect(57);
 	outputText("", true);
 	outputText("\"<i>Wonderful!</i>\" cries the excited pregnant slut.   She gives you a quick peck on the cheek as she prances back over to the machine.  You brace yourself in anticipation, eager to lose yourself to an eternal orgasm.  A switch clicks, and a dial whirs as it's turned up to the maximum.  The fluids pumping into your backside and directly into your veins suddenly jump in pressure, stinging painfully for a moment before the pleasure returns.  Your eyes slowly roll back, your jaw goes slack, and your " + multiCockDescriptLight() + " spew", false);
@@ -833,7 +833,7 @@ function tamaniDaughtersYesBadEndMePlease():void {
 }
 
 //[NO]
-function tamaniDaughtersDeclineBadEnd():void {
+public function tamaniDaughtersDeclineBadEnd():void {
 	spriteSelect(57);
 	outputText("", true);
 	outputText("\"<i>Seriously!?</i>\" exclaims the pregnant slut, \"<i>What kind of person wouldn't want to cum all the time?  Fuck, just the idea of it is making me drip!</i>\"\n\n", false);
@@ -846,7 +846,7 @@ function tamaniDaughtersDeclineBadEnd():void {
 	eventParser(5007);
 }
 //[Rather Fill Individually]
-function tamanisDaughtersFillIndividuallyBADEND():void {
+public function tamanisDaughtersFillIndividuallyBADEND():void {
 	spriteSelect(57);
 	outputText("", true);
 	outputText("\"<i>Really?</i>\" asks the pregnant goblin before she exclaims, \"<i>You do love us!  Oh Dad, once mom comes home will you fuck all of us?  I want to feel you make love to my drippy, pregnant pussy while she watches!</i>\"\n\n", false);
@@ -871,7 +871,7 @@ function tamanisDaughtersFillIndividuallyBADEND():void {
 }
 
 //[Lose to Daughters With Tamani There]
-function loseToDaughtersWithTamaniThere():void {
+public function loseToDaughtersWithTamaniThere():void {
 	spriteSelect(57);
 	outputText("", true);
 	flags[TIMES_FUCKED_TAMANIS_DAUGHTERS]++;
@@ -979,7 +979,7 @@ function loseToDaughtersWithTamaniThere():void {
 	else doNext(13);
 }
 
-function tamanisDaughtersAI():void {
+public function tamanisDaughtersAI():void {
 	var select:Number=1;
 	var rando:Number=1;	
 	//mid-round madness!
@@ -1001,7 +1001,7 @@ function tamanisDaughtersAI():void {
 	combatRoundOver();
 }
 
-function knockUpDaughters():void {
+public function knockUpDaughters():void {
 	//Already preggers
 	if(flags[TAMANI_DAUGHTER_PREGGO_COUNTDOWN] > 0) {
 		
@@ -1024,7 +1024,7 @@ function knockUpDaughters():void {
 	}
 }
 
-function combatWinAgainstDaughters():void {
+public function combatWinAgainstDaughters():void {
 	spriteSelect(57);
 	if(monster.HP < 1) {
 		outputText("You smile in satisfaction as " + monster.a + monster.short + " collapses, unable to continue fighting.", true);
@@ -1047,7 +1047,7 @@ function combatWinAgainstDaughters():void {
 	}
 }
 
-function loseToDaughters():void {
+public function loseToDaughters():void {
 	spriteSelect(57);
 	if(player.lust > 99) {
 		//worms r gross mmmmkay?
@@ -1093,7 +1093,7 @@ function loseToDaughters():void {
 	}
 }
 
-function midRoundMadness():void {
+public function midRoundMadness():void {
 	var selector:Number = rand(4);
 	if(selector == 0) {
 		outputText("A slender hand reaches inside your " + player.armorName + " and gives your ", false);
@@ -1115,7 +1115,7 @@ function midRoundMadness():void {
 	stats(0,0,0,0,0,0,1 + player.lib/15+rand(player.cor/30),0);
 }
 
-function tamaniShowsUp():void {
+public function tamaniShowsUp():void {
 	if(monster.hasStatusAffect("Tamani") < 0 && rand(6) == 0) {
 		monster.createStatusAffect("Tamani",0,0,0,0);
 		outputText("A high-pitched yet familiar voice calls out, \"<i><b>So this is where you skanks ran off to---wait a second.  Are you trying to poach Tamani's man!?</b></i>\"\n\n", false);

@@ -1,6 +1,6 @@
 ﻿//[INTRO – 50% chance split with regular hellhound if worms 
 //turned on and over level 2]
-function infestedHellhoundEncounter():void {
+public function infestedHellhoundEncounter():void {
 	outputText("", true);
 	outputText("A low snarl vibrates through your body, ", false);
 	if(player.lowerBody == LOWER_BODY_TYPE_GOO) outputText("making your jello-like body jiggle", false);
@@ -12,7 +12,7 @@ function infestedHellhoundEncounter():void {
 }
 
 //[Extra special attack]
-function hellHoundWormCannon():void {
+public function hellHoundWormCannon():void {
 	outputText("The thing rears up onto its hind legs, revealing its more humanoid stature, and allowing it to use its flexible paws to caress its twinned-penises.  It lurches forwards powerfully, its thickness twitching and flaring as it launches a wave of worm-filled canine cum at you.", false);
 	outputText("\n", false);
 	if(rand(2) == 0) {
@@ -55,7 +55,7 @@ function hellHoundWormCannon():void {
 	combatRoundOver();
 }
 
-function infestedHellhoundLossRape():void {
+public function infestedHellhoundLossRape():void {
 	outputText("", true);
 	//[BOTH INFESTED]
 	if(player.totalCocks() > 0 && player.hasStatusAffect("infested") >= 0) {

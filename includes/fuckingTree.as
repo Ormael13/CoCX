@@ -36,12 +36,12 @@
 		-Domineering Personality.  Can be overpowered and treated like a bitch. (future update?)
 	*/
 
-function fightHolli():void {
+public function fightHolli():void {
 	startCombat(68);
 	eventParser(1);
 }
 
-function treeMenu(output:Boolean = true):void {
+public function treeMenu(output:Boolean = true):void {
 	if(output) clearOutput();
 	var ride:int = 0;
 	var fuck:int = 0;
@@ -136,7 +136,7 @@ function treeMenu(output:Boolean = true):void {
 	}
 }
 
-function fertilizeHolli(cock:Boolean = true):void {
+public function fertilizeHolli(cock:Boolean = true):void {
 	//20% chance per sexing.  Up to bonus 20% for jizz or fertility!
 	var odds = 20;
 	if(cock && player.hasCock()) {
@@ -163,7 +163,7 @@ function fertilizeHolli(cock:Boolean = true):void {
 
 
 //Sprout Phase: (edited)
-function getASprout():void {
+public function getASprout():void {
 	clearOutput();
 	outputText("Around the edge of your camp, you spot some plant-life beginning to sprout.  The barren, wasteland crust is fractured and broken, giving up a leafy green shoot.  It only reaches up to your knee, but the plant looks healthy and young.  Perhaps it will grow larger?  There is a central stem that supports most of the weight, but a dozen branches fork off, supporting a bevy of shiny green leaves.");
 	outputText("\n\nYou briefly wonder how something could take root in such soil and be so successful, but then you recall the corrupt goddess, Marae.  She mentioned something about having roots through this world, didn't she?");
@@ -175,7 +175,7 @@ function getASprout():void {
 	simpleChoices("Yes",destroyDatFukkinTree,"No",letZeFuckingSproutLive,"",0,"",0,"",0);
 }
 //[Yes] Destroy Tree (edited)
-function destroyDatFukkinTree():void {
+public function destroyDatFukkinTree():void {
 	clearOutput();
 	outputText("You reach down and begin to excavate meticulously around the tainted sapling.  It has one central root that seems to go down forever, but after you've uncovered half a foot of taproot, you grab hold of it and yank.  At first, your straining seems unnoticed by the plant, the leaves rustling as it shakes and strains under your grip.  Then, all at once, it gives with a violent SNAP.  You tumble end over end, clutching to the demon-flora tightly to your [chest].  Sighing and grumbling, you get up and toss the leafy demon into your fire.");
 	outputText("\n\nSparks and smoke issue; the fire burns purple and low as it struggles to consume the resilient plant.  Fading slowly, the wilting flames look as though they're about to go out; you scramble to add fuel to the guttering fire before it dies entirely.  Each chunk of dry wood that you add seems to help, and soon the rosy red of all-consuming heat has returned.  The plant's stem withers away into charred, black ash.");
@@ -186,7 +186,7 @@ function destroyDatFukkinTree():void {
 	doNext(13);
 }
 //[No] (edited)
-function letZeFuckingSproutLive():void {
+public function letZeFuckingSproutLive():void {
 	clearOutput();
 	outputText("Looking down at the sapling, you stay your wrath.  It may be corrupt, but it hasn't done anything to harm you just yet.  You give it a little pat on the uppermost leaves and leave it be.  It's not like it's going anywhere.");
 	outputText("\n\n(<b>'Plant' added to your items menu</b>.  It's too small to know what it will grow into yet.  You can currently remove it at your leisure.)");
@@ -194,7 +194,7 @@ function letZeFuckingSproutLive():void {
 }
 
 //Phase 2: Pussy Tentacle Flower Phase (edited)
-function fuckPlantGrowsToLevel2():void {
+public function fuckPlantGrowsToLevel2():void {
 	clearOutput();
 	flags[FUCK_FLOWER_LEVEL] = 2;
 	flags[FUCK_FLOWER_GROWTH_COUNTER] = 0;
@@ -221,7 +221,7 @@ function fuckPlantGrowsToLevel2():void {
 
 
 //Destroy It (edited)
-function destroyDatFuckingPlantAtP2():void {
+public function destroyDatFuckingPlantAtP2():void {
 	clearOutput();
 	outputText("You know that letting this thing continue to grow would only threaten the safety of your camp.  Sighing, you trudge over to your supplies, gathering up some dry wood to stack around the invading foilage.  The plant, as if knowing what you're about to do, begins to wiggle from side to side, petals quivering in a panic.  However, your course is set, and this plant must die.  You take a burning log from your fire and torch the pile, feeling a little better about yourself as the blaze slowly consumes the wilting demon-plant.");
 	outputText("\n\nThe fire flutters, smoky purple sparks shooting into the air, blotting out the sky.  You cough and step back from the conflagration, waiting until it burns itself out and nothing but ash remains.  You have a hunch you won't be seeing any more of those plants... hopefully.");
@@ -232,7 +232,7 @@ function destroyDatFuckingPlantAtP2():void {
 }
 
 //Fuck It (skimmed)
-function fuckFuckingFuckFlowerP2():void {
+public function fuckFuckingFuckFlowerP2():void {
 	clearOutput();
 	var x:int = player.cockThatFits(100);
 	if(x < 0) x = player.smallestCockIndex();
@@ -263,7 +263,7 @@ function fuckFuckingFuckFlowerP2():void {
 }
 
 //Ride It (skimmed)(coded)
-function rideDatFuckingFukkFlowerP2():void {
+public function rideDatFuckingFukkFlowerP2():void {
 	clearOutput();
 	outputText("You shuck your [armor] and slowly ease yourself towards the violet-hued creature.  As soon as you get within a few feet, the flower's bulb angles toward you, the petals wiggling slightly along with the stamen inside.  A few of them even stretch out towards you like longing fingertips, shaking slightly from the effort before sliding back inside.  The dull ache in your [vagina] grows a few degrees hotter at the display, your body growing flush with excitement for the coming copulation.  Throwing caution to the wind, you move forward with a confident sway of your [hips].  It's time to get pollinated.");
 	outputText("\n\nGrabbing hold of the plant, you tug it up against your mons and sigh.  The silky-smooth petals flatten against your thighs, the tips curling over to touch the sides of your [butt], slicking it with lubricating moisture.  You let go, and the flower holds fast to your [hips], firmly embracing you as its stamen begin to roam across your vulva.  Slowly, an intrepid tentacle ventures between your labia, into the slick passageway you're so ready to fill with wiggly delight.  A dribble of fresh fluid rushes out at those first, hesitant touches, and encouraged by its success, the stamen's brothers join in on the slippery party, plunging into your box and immediately swirling over your inner walls.");
@@ -307,7 +307,7 @@ function rideDatFuckingFukkFlowerP2():void {
 }
 
 //Phase 3 Intro: (edited)
-function flowerGrowsToP3():void {
+public function flowerGrowsToP3():void {
 	clearOutput();
 	outputText("Again, you hear odd noises coming from a corner of your camp - the corner where you let that tainted shrubbery grow.");
 	if(flags[TIMES_FUCKED_FLOWER] + flags[TIMES_RIDDEN_FLOWER] > 0) outputText("  The fucking probably only helped it to grow faster.");
@@ -331,7 +331,7 @@ function flowerGrowsToP3():void {
 }
 
 //Fuck Flower (skimmed)
-function fuckTheFlower():void {
+public function fuckTheFlower():void {
 	clearOutput();
 	var x:int = player.biggestCockIndex();
 	//(Similar to stage 2 fuck, but no cock limits, wetter, and more aggressive.
@@ -385,7 +385,7 @@ function fuckTheFlower():void {
 }
 
 //Drink Sap (edited)
-function drinkThePlantGirlsSap():void {
+public function drinkThePlantGirlsSap():void {
 	clearOutput();
 	//Regain 50 fatigue but gain 1 corruption, .5 libido, 15 lust, and 1 sensitivity.
 	stats(0,0,0,0,.5,1,15,1);
@@ -399,7 +399,7 @@ function drinkThePlantGirlsSap():void {
 }
 
 //Ride Tentacles (C)
-function rideTheWalrusP3():void {
+public function rideTheWalrusP3():void {
 	clearOutput();
 	//(Let them pull you into the tree and bang, battering you with cum repeatedly.)
 	outputText("You eye the tentacles hiding amongst the leafy branches above, writhing obscenely around each other as they snake through the foilage.  You shed your [armor] into a worthless pile and bare your body, cupping your [chest] enticingly as you whistle up at the tree.  Your calls seem to fall on deaf ears; the whirling vines stay put up in their perch.  They're ignoring your delicious, feminine flesh!  Irritated, you stomp up to the trunk's flower and plunge your fist inside it.  Fresh fluid gushes out over your armor, releasing a spray of sweet, musky lubricants.  You blindly feel around inside the pliant plant-pussy with your fingers, giggling to yourself whenever the soft cavity clenches tightly to your arm.  Whatever this is, it can feel pleasure.");
@@ -423,7 +423,7 @@ function rideTheWalrusP3():void {
 }
 
 //Torch It (edited)(C)
-function torchP3Tree():void {
+public function torchP3Tree():void {
 	clearOutput();
 	//Requires fire-based attack and fatigue at or below 30.  Maxes fatigue and removes the tree.
 	outputText("This has gone on long enough!  This thing cannot continue to grow in your camp any longer, and you have just the means to remove it: fire.  ");
@@ -445,7 +445,7 @@ function torchP3Tree():void {
 
 
 //Phase Four (edited)
-function treePhaseFourGo():void {
+public function treePhaseFourGo():void {
 	clearOutput();
 	outputText("An unfamiliar female voice calls out your name, high-pitched and lilting.  Unflinchingly, you respond to the call, winding your way through your camp towards the fringe, where the corrupt fuck-tree was growing.  Did a faerie get caught in it? A tiny creature like that would probably wind up as a tentacle condom before it got free.  Still, you redouble your pace and ready your [weapon].  You know well enough that a fair voice doesn't always match up to a fair demeanor - in Ingnam OR Mareth.");
 	outputText("\n\n\"Oh, [name]!  Where are yoooouuu?</i>\" the voice croons.  You turn the bend to a sight both familiar and haunting.  There, in the middle of a wide, ancient-looking tree trunk, is a woman.  She's emerged from a split in the center of the wood, and she appears to be made of flesh, blood, and bone the same as anyone else.  However, she's obviously some kind of demon.  The corruption is most visible in her brown-gold eyes, tainting the sclera a solid black.  Above, a pair of gnarled oak horns sprout from her forehead, parting the woman's generous, dark green curls.  Her skin is a pale jade and as smooth as buttered glass, and her lips are full and pouty, curved in a knowing smile.");
@@ -470,7 +470,7 @@ function treePhaseFourGo():void {
 }
 
 //ojo Rolls Out -Z
-function JojoTransformAndRollOut():void {
+public function JojoTransformAndRollOut():void {
 	clearOutput();
 	//triggers if both puru jojo and shoe tree are in camp
 	outputText("\"<i>[name], come here please.</i>\"");
@@ -507,7 +507,7 @@ function JojoTransformAndRollOut():void {
 //Amily Hates Trees -Z
 //new overriding line for Amily's camp descript if tree is there
 //PC Fucked Adult Tree, Amily Leaves -Z
-function amilyHatesTreeFucking():void {
+public function amilyHatesTreeFucking():void {
 	clearOutput();
 	outputText("Your mousey cohabitant tramps up to you, irritation plain on her expression.");
 	outputText("\n\n\"<i>[name], I saw what you did with that that... tree.  I thought that was just one of those perverted plants you find in the forest, but there's an actual demon in it?!  I can't believe your poor judgement!  You do know what happens to people who give themselves to demons, right?  It hasn't slipped your mind that they rape and suck souls out of everyone they come across?  I don't even feel safe anymore with you bringing trash like that into camp!</i>\"");
@@ -517,7 +517,7 @@ function amilyHatesTreeFucking():void {
 	simpleChoices("Stay Quiet",stayQuietWhileAmilyBitchesAboutFuckingArborday,"Slap Her",slapAmilysWhoreFace,"",0,"",0,"",0);
 }
 //[Stay Quiet]
-function stayQuietWhileAmilyBitchesAboutFuckingArborday():void {
+public function stayQuietWhileAmilyBitchesAboutFuckingArborday():void {
 	clearOutput();
 	outputText("Amily berates you for some while longer, then eyeballs you.  Just as you begin to speak, she cuts you off again.");
 	outputText("\n\n\"<i>I'm not staying here anymore.  Maybe if you move or clean this place up, I'll return... maybe not.  Depends how many demons you insist on bringing home and fucking, I suspect.</i>\"");
@@ -536,7 +536,7 @@ function stayQuietWhileAmilyBitchesAboutFuckingArborday():void {
 }
 
 //[Slapaho]
-function slapAmilysWhoreFace():void {
+public function slapAmilysWhoreFace():void {
 	clearOutput();
 	outputText("You slap Amily across the ");
 	if(flags[AMILY_NOT_FURRY] == 0) outputText("nose");
@@ -559,7 +559,7 @@ function slapAmilysWhoreFace():void {
 
 
 //(FUCK DAT TREE BITCH)
-function fuckHolliInZeFlowerPuss():void {
+public function fuckHolliInZeFlowerPuss():void {
 	clearOutput();
 	var x:int = player.biggestCockIndex();
 	outputText("With a knowing smile, you toss your [armor] aside and say, \"<i>Let's do this.</i>\"  [EachCock] juts out, hard and proud from your body, pointed straight towards the entrancing woman before you.  She leans down from her perch in the tree and rolls her shoulders from side to side, jiggling her pale green assets back and forth, traces of syrup hanging from her pendulous melons.");
@@ -630,7 +630,7 @@ function fuckHolliInZeFlowerPuss():void {
 }
 
 //Drink From Her (edited)(C)
-function haveAMapleSyrupSnack():void {
+public function haveAMapleSyrupSnack():void {
 	clearOutput();
 	outputText("You approach Holli with a hungry smile plastered across your [face], licking your chops as you eye the arboreal slut with unrestrained desire.  Of course, your gaze fixes on her heavy chest, with its distended, dripping nipples.  They leak sweet sap as you stare; the demon seems eager to feel your mouth on her slick, almond-colored buds.  Looking at you ");
 	if(flags[HOLLI_SUBMISSIVE] == 0) outputText("knowingly, Holli asks, \"<i>Come for a little pick-me-up?  Well, go on; drink deeply of my nectar, </i>champion.\"  The last word is inundated with malicious, mocking tones.");
@@ -650,7 +650,7 @@ function haveAMapleSyrupSnack():void {
 }
 	
 //Tentacle Ride (looks ok)(C)
-function level4RideHollisTentacruels():void {
+public function level4RideHollisTentacruels():void {
 	clearOutput();
 	//(PC voluntary gets tentacle pounded, and high from flower pussy spores.  clitoral BJ?  Nipple suckers!}
 	outputText("You smirk knowingly and suggest to Holli that she take you for a ride... if she knows what you mean.  This earns you a pleased applause from the delighted demon dryad, and she immediately sets to helping you undress, her eager tentacles lowering from the tree and arching up like searching snakes.  You let her remove your [armor] with the patience of a goddess, shivering slightly when the sticky gear is peeled away from your eager undercarriage.");
@@ -686,7 +686,7 @@ function level4RideHollisTentacruels():void {
 }
 
 //Bear Fruit(C)
-function eatHolliFruit():void {
+public function eatHolliFruit():void {
 	clearOutput();
 	outputText("You reach up into Holli's branches and pluck ");
 	if(flags[HOLLI_FRUIT] == 1) outputText("the fruit");
@@ -724,7 +724,7 @@ function eatHolliFruit():void {
 //Beg Her To Guard (edited)(C)
 
 //PC can beg or not beg?
-function askHolliToWatch():void {
+public function askHolliToWatch():void {
 	clearOutput();
 	if(flags[HOLLI_DEFENSE_ON] == 0) {
 		outputText("You ask Holli if she would mind using her tentacles to help guard the camp at night.  She rolls her eyes and taunts, \"<i>I don't know; maybe if you get down on your knees and beg me.  ...And I mean </i>really<i> beg, with plenty of whimpering.  Lick my roots too.  After all, I should get something out of this.</i>\"");
@@ -749,7 +749,7 @@ function askHolliToWatch():void {
 }
 
 //Actually beg: (edited)(C)
-function begHolli4Watches():void {
+public function begHolli4Watches():void {
 	clearOutput();
 	outputText("You swallow your pride and drop down prostrate on the ground.  Sighing, you grudgingly say, \"<i>Please, Holli, guard my camp at night.  I don't want to be raped by monsters.</i>\"");
 	outputText("\n\nThe devilish dryad grips her tit and squirts some sap at you, taunting, \"<i>You'll have to do better than that.  I don't think you really mean it.  It's like you're just going through the motions... pretending.  And you're not licking my roots; get to it.</i>\"");
@@ -769,7 +769,7 @@ function begHolli4Watches():void {
 //Assert Self:
 //Success/Fail dependant on: Level, height, tone, width.
 
-function domUpSomeHolli():void {
+public function domUpSomeHolli():void {
 	clearOutput();
 	outputText("You swagger up to the tree and put your hand on the bark beside Holli.  Glancing over, she quips, \"<i>Is that supposed to be intimidating?</i>\"  The dryad smirks ingratiatingly.  \"<i>I'm the offshoot of a demon goddess.  I don't think you thought this through.</i>\"");
 	outputText("\n\nSlapping your palm down on the other side, you look her right in her oddly gold and black eyes and tell her in no uncertain terms that she is going to serve and service you at your slightest whim.  Any choice she thinks she has is nothing more than an illusion.");
@@ -793,7 +793,7 @@ function domUpSomeHolli():void {
 }
 
 //Guard Camp
-function askBrokenHolliToGuard():void {
+public function askBrokenHolliToGuard():void {
 	clearOutput();
 	outputText("Holli bows her head when you mention her guarding camp.  She asks, \"<i>Shall I keep watch for foes to drain or let them into camp for you to have the pleasure of dealing with, [name]?  <b>I've been ");
 	if(flags[HOLLI_DEFENSE_ON] == 1) outputText("keeping watch");
@@ -808,7 +808,7 @@ function askBrokenHolliToGuard():void {
 }
 
 //Guard On
-function toggleBrokenHolliGuard():void {
+public function toggleBrokenHolliGuard():void {
 	clearOutput();
 	if(flags[HOLLI_DEFENSE_ON] == 0) {
 		outputText("\"<i>All right, I'll get to have some fun then,</i>\" Holli quips while rubbing her palms together in anticipation.");
@@ -826,7 +826,7 @@ function toggleBrokenHolliGuard():void {
 }
 
 //Dom Her With a Dick
-function holliGetsDickDommed():void {
+public function holliGetsDickDommed():void {
 	clearOutput();
 	outputText("Tossing your [armor] aside, you expose your " + multiCockDescriptLight() + ".  Holli's eyes fixate on [oneCock], her attention rapturously contained by a single phallus.  You grip your maleness in hand and bounce it up and down into your other palm.  The solid slaps of genital impacts echo off the surrounding rocks, each sending a pleasant tingle of pleasure through the root of your manhood.  Before long, you're completely erect and throbbingly hard, bouncing unbidden with each and every thrum of your heart.");
 	outputText("\n\nHolli leans forward, entranced by the sight.  Her head and shoulders slip through the surprisingly pliant bark as she bends down to view the show.  Swaying beneath her, Holli's weighty tits dangle unrestrained and unbound.  Sappy moisture clings to her almond nipples like morning dew, dripping in small drops onto the wasted ground.  The tips of her teats have gone rigid, engorged with whatever strange substance passes for blood.  Similarly, the dryad's flower is in full bloom, with its vibrant petals spread open, welcomingly.  The constant lubricants make the slick lips glitter like diamonds in the light, until their owner's shadow eclipses the illumination.");
@@ -872,7 +872,7 @@ function holliGetsDickDommed():void {
 }
 
 //.PC Has 10 Tentacle Go Full On Monster With Her
-function fullOnTentacleTasticGangBangForHolli():void {
+public function fullOnTentacleTasticGangBangForHolli():void {
 	clearOutput();
 	outputText("You remove your [armor] and expose your writhing mass of wriggling tendrils to the tree-tart.  She places a hand over her mouth and exhales, \"<i>Oh my, Mother Marae sure knows how to pick them, doesn't she?</i>\"");
 	outputText("\n\nExercising considerable control over your vegetative peckers, you extend one forward, the phallic tentacle lurching out to silence the troublesome tree in a split-second.  Holli gives up a strangled, \"<i>h-urk!</i>\" and rocks back into her tree's entrances, eyes crossed to look at the green snake protruding from her lips.  Her mouth feels good around the purple-tinged cock-tip you've forced inside, but you think her throat would feel better.   Your tentacle tool stretches, lengthening with supernatural agility, and you push the fresh flesh down Holli's gullet, distending her throat with the imprint of your length.  Her esophagus instinctively works to swallow the obstruction, which serves you just fine.  The tight oral pleasure has you oozing droplets of pre-seed directly into her belly, but you're far from ready to blow.  After all, with nine more penises, satisfaction remains a good ways away.");
@@ -903,7 +903,7 @@ function fullOnTentacleTasticGangBangForHolli():void {
 	doNext(13);
 }
 //Vaginally Dominate Tentacles
-function vaginalDomHollisTentacruels():void {
+public function vaginalDomHollisTentacruels():void {
 	clearOutput();
 	outputText("You sashay over to your favorite tentacular tree and trace your finger through Holli's cleavage, purring, \"<i>I'm feeling a little randy.  Do me a favor and bring your 'little' friends down to play, would you?</i>\"  The commanding tone of your voice leaves little doubt that the question is anything but.  With a little bit of fear in her black, tainted eyes, Holli nods meekly.  A rain of green, phallic tentacles pours out of the robust canopy above, hanging behind you idly, though a few of them arch up like snakes sensing prey.  You hold your immobilized pet's chin in your hand and tilt her head up slightly so she sees you eye to eye.");
 	outputText("\n\n\"<i>Good pet,</i>\" you coo, releasing her and turning about, making sure to sway your [hips] hypnotically and remind her just what she's going to get.  The closest tentacle sways in your direction to nuzzle on your " + player.skinFurScales() + ".  You raise your palm to support it, gliding your palm along the underside while you shrug out of your [armor].  The phallic vine eagerly rubs against you like an affectionate pet, though clear sap leaks from the moist slit at its tip.  You squeeze it just behind the purple-tinged tip and pull, dragging it over toward Holli.");
@@ -949,7 +949,7 @@ function vaginalDomHollisTentacruels():void {
 	doNext(13);
 }
 
-function threatenHolli():void {
+public function threatenHolli():void {
 	clearOutput();
 	outputText("You snarl and threaten to burn the barked bitch to the ground if she won't make herself useful after you ask politely.");
 	outputText("\n\n\"<i>You threaten me with fire?!  Now?  [name], you could have uprooted my sapling and tossed it in the fire.  You could have made a bonfire to char my flower to cinders.  You could even have called upon magic to torch my tree while it was still young.  Now?  My bark is stronger than iron and flush with the power of an invigorated goddess.  You had opportunities to rid yourself of me before Marae had invested this much time and energy into your gift.  Trying to destroy such a personal present now would draw her attention... and her ire.</i>\"");
@@ -973,7 +973,7 @@ function threatenHolli():void {
 
 //Hit Her With Your Hand (requires failing to threaten) -Z
 //replaces Threaten button once PC fails threaten
-function slapDatHo():void {
+public function slapDatHo():void {
 	clearOutput();
 	outputText("You slap the slut in the tree on the thighs, sending a ripple up her body; she regards you with a sneer, confident that her previous implication, that between her and her mother, only a fool would attack, will be enough to stop you from removing her by force.  You might still be able to if you're powerful enough, but... she has the energy of a demon 'goddess' flowing into her.  You should be <b>very</b> sure of yourself before you resort to open confrontation, lest you make your campsite uninhabitable.");
 	outputText("\n\n\"<i>What do you want, meat?  Come to play?</i>\"");
@@ -987,7 +987,7 @@ function slapDatHo():void {
 }
 
 //[Cut Her Down]
-function cutHerDown():void {
+public function cutHerDown():void {
 	clearOutput();
 	outputText("\"<i>Are you serious?  You really want to be broken that badly, my little toy?</i>\"  The demon folds her arms over her hefty chest, her earlier, suggestive posture completely absent now.  \"<i>You know my bark is as strong as any armor, right?  That Marae herself - the land itself - bolsters me?  Take that back right now, and I'll let you return to my good graces... if you put your face in the dirt and plead for the duty to pleasure me whenever I want.</i>\"");
 	
@@ -1005,7 +1005,7 @@ function cutHerDown():void {
 }
 
 //[Call Jojo]
-function callDatJojo():void {
+public function callDatJojo():void {
 	clearOutput();
 	player.removeKeyItem("Jojo's Talisman");
 	outputText("You take out the small talisman you got from the mouse monk, wondering just how to summon him with it.  A small string dangles from the side; when you pull it, you can feel a stitch coming undone and the weight of the talisman shifts toward the bottom.  A thick, billowing yellow smoke begins to pour out.  God, this reeks!  You hurl it away before the smell can permeate your clothing, and it sets off an echoing bang when it hits the ground!  It's not long before Jojo appears from the edge of the forest and calls to you.");
@@ -1037,7 +1037,7 @@ stats:
 
 //attack noun: lash
 //Failing to Escape -Z
-function escapeFailWithHolli():void {
+public function escapeFailWithHolli():void {
 	clearOutput();
 	outputText("You ");
 	if(player.canFly()) outputText("beat your wings and ");
@@ -1051,7 +1051,7 @@ function escapeFailWithHolli():void {
 }
 
 //End of Round, if no Jojo Fire -Z
-function holliBonusHealing():void {
+public function holliBonusHealing():void {
 	//(monster hp < 100%)
 	if(monster.hasStatusAffect("Holli Burning") < 0) {
 		if(monster.HP < eMaxHP() && monster.HP > 1) {
@@ -1104,7 +1104,7 @@ function holliBonusHealing():void {
 }
 
 //if player uses whitefire/firebreath successfully, suppress these, go to 'Fire Lit' EOR events, and output additional line after the attack:
-function lightHolliOnFireMagically():void {
+public function lightHolliOnFireMagically():void {
 	if(monster.hasStatusAffect("Jojo Is Assisting") >= 0) {
 		if(monster.hasStatusAffect("Holli Burning") < 0) {
 			outputText("The magical fire effectively ignites a wide swath of Jojo's tinder, and the demon howls in rage.  Seeing this, Jojo drops the burning torch he carries and turns back toward the forest to fetch more tinder.\n\n");
@@ -1115,7 +1115,7 @@ function lightHolliOnFireMagically():void {
 	
 //Monster Specials -Z
 //fuckin' Jumanji flower darts -Z
-function fuckinJamanjiFlowerDarts():void {
+public function fuckinJamanjiFlowerDarts():void {
 	outputText("A blossom opens up on a high branch of the tree, revealing an evil-looking eye surrounded by vicious spines.  With a gesture, " + monster.short + " fires several at you!");
 	
 	//Blinded - no hit penalty
@@ -1140,7 +1140,7 @@ function fuckinJamanjiFlowerDarts():void {
 }
 
 //constrict -Z
-function holliConstrictAttack():void {
+public function holliConstrictAttack():void {
 	outputText("A forest of thick roots bursts from the ground and several lash toward your [legs], trying to ensnare you!");
 	//Blinded - hit penalty, but not 100%
 	if(monster.hasStatusAffect("Blind") >= 0 && rand(6) == 0) {
@@ -1163,7 +1163,7 @@ function holliConstrictAttack():void {
 	combatRoundOver();
 }
 
-function struggleOutOfHolli():void {
+public function struggleOutOfHolli():void {
 	clearOutput();
 	//Boost odds of success. Round 3 guaranteed.
 	player.addStatusValue("Holli Constrict",1,9);
@@ -1188,7 +1188,7 @@ function struggleOutOfHolli():void {
 	combatRoundOver();
 }
 
-function waitForHolliConstrict(newScreen:Boolean = true) {
+public function waitForHolliConstrict(newScreen:Boolean = true) {
 	if(newScreen) clearOutput();
 	outputText("The ominous roseate shaft hovers over you, and its owner strokes the base lewdly, moaning.  \"<i>Oooh, gonna... cum!</i>\" she shrieks.  As a low moan escapes her, the stalk bloats and begins to spill milky-white sap into your mouth!  Held rigid, you're eventually forced to swallow just to breathe; the sap slides into your stomach and warmth radiates to your midsection and groin, making you feel flushed and hot.  Holli sighs in satisfaction, evidently more relaxed after her climax.");
 	//lower monster lust by medium-lots and apply med sens-based lust damage
@@ -1199,7 +1199,7 @@ function waitForHolliConstrict(newScreen:Boolean = true) {
 }
 //heal -Z
 //used if monster HP < some level
-function healHolli():void {
+public function healHolli():void {
 	clearOutput();
 	outputText("The bark splits part way and the woman's mouth suddenly explodes with color, her lips folding out into a rather yonic-looking orchid.  Copious white-tinted sap oozes from the bloom, coating her bark and healing the lesions.  Petals rustle as she speaks wetly through it.  \"<i>Your efforts are nothing!  Throw yourself on my mercy; be my slave and do my bidding!</i>\"");
 	//heal some fuckin' hp
@@ -1208,7 +1208,7 @@ function healHolli():void {
 	combatRoundOver();
 }
 
-function holliAI():void {
+public function holliAI():void {
 	if(monster.HP < 50 && rand(2) == 0) healHolli();
 	else if(rand(4) == 0 && player.hasStatusAffect("Holli Constrict") < 0) holliConstrictAttack();
 	else if(rand(2) == 0) fuckinJamanjiFlowerDarts();
@@ -1218,7 +1218,7 @@ function holliAI():void {
 
 
 
-function defeatHolli():void {
+public function defeatHolli():void {
 	clearOutput();
 	flags[FUCK_FLOWER_KILLED] = 1;
 	//Win without Jojo -Z
@@ -1267,7 +1267,7 @@ function defeatHolli():void {
 }
 	
 //[yes gimme monk pls]
-function recruitJojoToCamp():void {
+public function recruitJojoToCamp():void {
 	clearOutput();
 	outputText("Jojo nods eagerly at you when you invite him to share your camp.  \"<i>Excellent idea.  If you'll excuse me, I wish to attempt to purify the spot where the creature grew, and then I will fetch my things.</i>\"");
 	outputText("\n\nBowing neatly, he takes his leave.");
@@ -1278,7 +1278,7 @@ function recruitJojoToCamp():void {
 }
 
 //[no want]
-function dontRecruitJojoToCamp():void {
+public function dontRecruitJojoToCamp():void {
 	clearOutput();
 	outputText("You hold your tongue, allowing Jojo to make his way back to the forest.");
 	outputText("\n\n(Key Item Gained: Holli's Ashes)");
@@ -1287,7 +1287,7 @@ function dontRecruitJojoToCamp():void {
 }
 	
 //>Lose
-function enjoyYourBadEndBIYAAAATCH():void {
+public function enjoyYourBadEndBIYAAAATCH():void {
 	clearOutput();
 	outputText("Screeching in triumph, the demon holds your defeated form aloft and begins to shake you.  ");
 	if(monster.hasStatusAffect("Jojo Is Assisting") >= 0) {
@@ -1418,7 +1418,7 @@ function enjoyYourBadEndBIYAAAATCH():void {
 }
 
 //female champ for weiner-based bad end
-function holliPlaysWithPenisesBadEnd():void {
+public function holliPlaysWithPenisesBadEnd():void {
 	clearOutput();
 	outputText("The young, brown-haired woman steps from the swirling portal, and the vortex collapses behind her.  Casting her eyes around the blasted, cracked landscape, she's surprised by the presence of two trees a short distance away, apparently healthy despite the lack of water and clouds of dust.  At first leery, she changes her mind when she cautiously edges closer and sees the huge, juicy fruits hanging from the branches of the leftmost tree.  Deciding that it <i>would</i> be wise to gather and use what she can find before dipping into her reserve, the brown-haired girl begins walking toward the strange trees.");
 	
@@ -1468,7 +1468,7 @@ function holliPlaysWithPenisesBadEnd():void {
 	eventParser(5035);
 }
 
-function girlsGetANiceManToBadEnd():void {
+public function girlsGetANiceManToBadEnd():void {
 	clearOutput();
 	outputText("The weedy-looking young man steps out of the swirling, violet pool of the portal.  As the flickering shadows of its chaotic light recede, the lush glade that greets him is reminiscent of Ingnam's wilderness... apart from the nude bodies woven into the trees, bearing sundry and random erect animal cocks, voluptuous racks, wet pussies, and patches of smooth, trembling flesh - occasionally a tree will present all four.  A tent begins to form in his comfortable pants as he surveys the lewd greenery for a means to proceed.");
 	
@@ -1596,7 +1596,7 @@ function girlsGetANiceManToBadEnd():void {
 	eventParser(5035);
 }
 
-function holliAndGenderlessSittingInATree():void {
+public function holliAndGenderlessSittingInATree():void {
 	clearOutput();
 	outputText("The tall, fit traveler steps through the portal, and its swirling colors dissolve to empty air behind him.  The blasted red landscape that welcomes him does so grudgingly, filling his face with a cloud of blown dust that sets him to coughing and sputtering.  Peering through a teary squint, the man looks around for a place that might provide some shelter from the wind and allow him to get his bearings, and a pair of scraggly trees nearby would seem to fill the bill.");
 	
@@ -1635,7 +1635,7 @@ function holliAndGenderlessSittingInATree():void {
 	eventParser(5035);
 }
 
-function amilyComesBack():void {
+public function amilyComesBack():void {
 	clearOutput();
 	outputText("Amily arrives with her belongings over her shoulder and a smile on her face.  \"<i>I knew you'd do the right thing, [name].  I'll get my nest set back up.</i>\"\n\n(<b>Amily has moved back in!  She can be found in the lovers tab.</b>)");
 	//flags[AMILY_TREE_FLIPOUT] = 1;

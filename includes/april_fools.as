@@ -1,7 +1,7 @@
 ﻿//for all april fools gags
 
 // Encounter Chance 1 out of 40 and only if you're a centaur
-function poniesYN():Boolean {
+public function poniesYN():Boolean {
 	if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR && date.date == 1 && date.month == 3 && flags[UNKNOWN_FLAG_NUMBER_00118] == 0) {
 		outputText("", true);
 		outputText("While walking around the lake, you hear the sound of feminine voices laughing and talking, accompanied by the distinctive clip-clop of hooves. Stepping lightly through the overgrowth you stumble across a group of small brightly colored ponies. The strange part about them isn't so much their size, but rather the shape of their bodies.  They almost look cartoonish in nature, a few even sport fluttery, feathery looking wings.\n\n", false);
@@ -14,12 +14,12 @@ function poniesYN():Boolean {
 }
 
 //----------Next Page-----------
-function leavePonies():void {
+public function leavePonies():void {
 	outputText("", true);
 	outputText("Deciding it must be some demonic trick, you decide to retreat from the scene before they notice your presence.", false);
 	doNext(13);
 }
-function approachPonies():void {
+public function approachPonies():void {
 	outputText("", true);
 	outputText("You slowly begin your approach, though you are spotted almost immediately by the pink one.\n\n", false);
 
@@ -46,20 +46,20 @@ function approachPonies():void {
 	simpleChoices("Too creepy",derpCreepy,"Yay Party!",derpyParty,"",0,"",0,"Leave",derpPolitely);
 }
 
-function derpPolitely():void {
+public function derpPolitely():void {
 	outputText("", true);
 	outputText("You hold out your arms and stop the ponies.  Once you have their attention you let them know you have something important you need to do for now, but will come back soon.  With a wave you turn and walk back into the trees to a chorus of disappointed \"<i>ahhhs</i>\", mostly from the pink one.", false);
 	doNext(13);
 }
 	
-function derpCreepy():void {
+public function derpCreepy():void {
 	outputText("", true);
 	outputText("Cocks, horns and slavering vaginas is one thing, but this is almost too much cute to process.  You determine to leave this grove and never EVER come back again.  Still disturbed by the mental images running through your head, as you make your way back to camp, you callously slaughter an imp. Yeah that feels better.\n\n(+10 XP!  +5 Gems!)", false);
 	player.XP += 10;
 	player.gems += 5;
 	doNext(13);
 }
-function derpyParty():void {
+public function derpyParty():void {
 	outputText("", true);
 	outputText("You watch in amazement as the flying horses string up banners, while the purple one sets a table with snacks and drinks using glowy powers coming from the horn on her head.  Whilst they set up, you discuss your home village with the orange one who compares it with working on an apple farm and you try to ignore  the white one as she primps and fusses around you, obviously unwilling to let you stay in, to quote her own words, \"<i>Hideous attire, lacking any grace or style.</i>\"\n\n", false);
 	

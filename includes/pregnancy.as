@@ -5,7 +5,7 @@
 //21 == URTA
 //22 == SAND WITCH
 //23 == FROG BUTT EGG
-function updatePregnancy():Boolean {
+public function updatePregnancy():Boolean {
 	var displayedUpdate:Boolean = false;
 	var pregText = "";
 	if((player.pregnancyIncubation <= 0 && player.buttPregnancyIncubation <= 0) ||
@@ -1875,7 +1875,7 @@ function updatePregnancy():Boolean {
 	return displayedUpdate;
 }
 
-function eggDescript(plural:Boolean = true):String {
+public function eggDescript(plural:Boolean = true):String {
 	var descript:String = "";
 	if(player.hasStatusAffect("eggs") >= 0) {
 		descript += num2Text(player.statusAffects[player.hasStatusAffect("eggs")].value3) + " ";

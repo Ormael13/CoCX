@@ -18,18 +18,18 @@
 //const VAPULA_TEASE_COUNT:int = 552;
 //const VAPULA_EARNED_A_SPANK:int = 634;
 
-function vapulaSlave():Boolean {
+public function vapulaSlave():Boolean {
 	if(flags[VAPULA_FOLLOWER] == 1) return true;
 	return false;
 }
 
-function gangbangVillageStuff():void {
+public function gangbangVillageStuff():void {
 	clearOutput();
 	if(flags[OWCA_UNLOCKED] == 1) owcaMainScreenOn();
 	else gangbangVillageFirstGoRound()
 }
 //First encounter (Z)
-function gangbangVillageFirstGoRound():void {
+public function gangbangVillageFirstGoRound():void {
 	clearOutput();
 	/*if(flags[OWCAS_ATTITUDE] < 5) {
 		desperateVillages();
@@ -67,13 +67,13 @@ function gangbangVillageFirstGoRound():void {
 		doNext(gangbangVillageStuff);
 	}
 }
-function dontGoToZeVillage():void {
+public function dontGoToZeVillage():void {
 	clearOutput();
 	flags[DECLINED_TO_VISIT_REBECCS_VILLAGE]++;
 	eventParser(13);
 }
 //First plea (Z)
-function agreeToFollowRebecFirstTime():void {
+public function agreeToFollowRebecFirstTime():void {
 	clearOutput();
 	if(flags[TIMES_REFUSED_REBECCS_OFFER] == 0) {
 		outputText("How could you refuse an invitation from such an alluring girl?  You eagerly agree to go to her village; everyone sets out at once, chatting with each other jovially, but your attention is squarely focused on Rebecc.  She seems impressed by the tales of your adventures and has nothing but praise for your endless bravery, delivered while clinging to your arm and pressing her body against yours.  Her sweet scent is invigorating, and a significant amount of blood flows toward your ");
@@ -139,7 +139,7 @@ function agreeToFollowRebecFirstTime():void {
 	else doYesNo(3608,declineRebeccsPlea);
 }
 //Refuse plea (Z)
-function declineRebeccsPlea():void {
+public function declineRebeccsPlea():void {
 	clearOutput();
 	outputText("You can't give in to her demand; you are a proud warrior fighting demons.  You were certainly not meant to serve as a scapegoat or sex-toy.  She sighs in disappointment.  \"<i>Well, I should have expected that.  I wasn't full of hope either.  No hard feelings.</i>\"  Everyone is looking at you with sad or apathetically hostile eyes, making you feel uncomfortable.  You quickly leave the village and return to your camp.");
 	//[if more than 40 int, a warning after 4 consecutive refusals]
@@ -150,7 +150,7 @@ function declineRebeccsPlea():void {
 	doNext(13);
 }
 //Accept plea (Z)
-function acceptRebeccsPlea(firstTime:Boolean = false, sacrificed:Boolean = false):void {
+public function acceptRebeccsPlea(firstTime:Boolean = false, sacrificed:Boolean = false):void {
 	clearOutput();
 	flags[OWCAS_ATTITUDE] += 10;
 	if(flags[OWCAS_ATTITUDE] > 100) flags[OWCAS_ATTITUDE] = 100;
@@ -173,7 +173,7 @@ function acceptRebeccsPlea(firstTime:Boolean = false, sacrificed:Boolean = false
 	//Dusk transition text (Z)
 	doNext(3610);
 }
-function intoTheDemonPit(sacrifice:Boolean = true):void {
+public function intoTheDemonPit(sacrifice:Boolean = true):void {
 	clearOutput();
 	//N is the number of hours left before night
 	if(model.time.hours < 21) {
@@ -212,7 +212,7 @@ function intoTheDemonPit(sacrifice:Boolean = true):void {
 	else simpleChoices("Submit",loseOrSubmitToVapula,"Fight",3613,"",0,"",0,"",0);
 }
 //Submit/Fight
-function fightZeDemons(sacrifice:Boolean = true):void {
+public function fightZeDemons(sacrifice:Boolean = true):void {
 	clearOutput();
 	//Fight leads to the Horde Fight
 	//When acting as sacrifice, Item button is disabled; Fight, Run, and Phys Special buttons are disabled unless PC has str >= 80; Run is furthermore prevented entirely if PC is non-winged; outputs text: \"<i>You'd like to run, but you can't scale the walls of the pit with so many demonic hands pulling you down!</i>\"
@@ -247,7 +247,7 @@ function fightZeDemons(sacrifice:Boolean = true):void {
 	eventParser(1);
 }
 
-function vapulaAI():void {
+public function vapulaAI():void {
 	monster.str = 40;
 	monster.weaponAttack = 10;
 	monster.createStatusAffect("attacks",4,0,0,0);
@@ -260,7 +260,7 @@ function vapulaAI():void {
 
 	
 //Loss scene/Submit (gangrape) (Z)
-function loseOrSubmitToVapula():void {
+public function loseOrSubmitToVapula():void {
 	clearOutput();
 	outputText("Vapula taunts you as she circles around you.  \"<i>Look at the slutty pet!  Ain't you a slutty pet?  Yes, you are!  Don't pretend you're not hungry for some fat demon cock, I know you are.</i>\"  As she speaks, the crowd gathers closer.  A few creatures show some temerity, giving you pinches and gropes as they near.  The cock-belted imp unties his tentacle; the horror wriggles and squirms as it drops to the ground and slithers toward you.  The tip of the absurdly long pecker inspects your body, pressing itself against your flesh, massaging you in the most sensual places, wetting you with sap-like pre-cum and teasingly grinding itself against your mouth, and then your " +assholeDescript());
 	if(player.hasVagina()) outputText(", followed by your "+vaginaDescript(0));
@@ -343,7 +343,7 @@ function loseOrSubmitToVapula():void {
 	stats(0,0,0,0,1,2,-100,3);
 }
 
-function wakeUpAfterDemonGangBangs():void {
+public function wakeUpAfterDemonGangBangs():void {
 	clearOutput();
 	model.time.hours = 7;
 	model.time.days++;
@@ -358,7 +358,7 @@ function wakeUpAfterDemonGangBangs():void {
 }
 	
 //Victory (Z)
-function defeetVapulasHorde():void {
+public function defeetVapulasHorde():void {
 	clearOutput();
 	if(flags[VAPULA_SUBMISSIVENESS] <= 0) {
 		subdueVapula();
@@ -389,14 +389,14 @@ function defeetVapulasHorde():void {
 	}
 	
 }
-function noVapulaSex():void {
+public function noVapulaSex():void {
 	clearOutput();
 	flags[VAPULA_SUBMISSIVENESS] -= 5;
 	eventParser(5007);
 }
 //Yes/
 //[Yes: submissiveness is lowered by 10. No or auto-reject: submissiveness is lowered by 5.]
-function rapeZeVapula():void {
+public function rapeZeVapula():void {
 	flags[VAPULA_SUBMISSIVENESS] -= 10;
 	//Victory rape with penis [Anal Orgy and Bukkake] (NTR Vapula) (Z)
 	if(player.hasCock()) {
@@ -529,7 +529,7 @@ function rapeZeVapula():void {
 
 //Main Owca Village menu (Z)
 //[displayed after the second encounter text and right away in subsequent encounters]
-function owcaMainScreenOn():void {
+public function owcaMainScreenOn():void {
 	clearOutput();
 	if(flags[REBECCS_LAST_PLEA] == 1 && !vapulaSlave()) {
 		rebeccsLastPlea();
@@ -592,7 +592,7 @@ function owcaMainScreenOn():void {
 	simpleChoices("Pit",pit,"Herds",herd,"Rebecc",rebeccMenu,"Tavern",tavern,"Leave",13);
 }
 //Tavern (Z)
-function owcaTavern():void {
+public function owcaTavern():void {
 	clearOutput();
 	outputText("The tavern is nice and cozy; there are a few tables and chairs scattered around in no ordered pattern, and most clients here appear to belong to the same species.  By the crude wooden bar, you see a list of all the current drinks on sale:\n<i>");
 	//SheepMk
@@ -618,13 +618,13 @@ function owcaTavern():void {
 	simpleChoices("Sheep Milk",milk,"Goblin Ale",goblin,"Bro Brew",brew,"MinotaurCum",cum,"Back",gangbangVillageStuff);
 }
 
-function owcaBuySetup(item:String = "MinoCum"):void {
+public function owcaBuySetup(item:String = "MinoCum"):void {
 	if(item == "SheepMk") buyOwcaShit(item,(180 - flags[OWCAS_ATTITUDE]));
 	else if(item == "Gob.Ale") buyOwcaShit(item,(60 - Math.round(flags[OWCAS_ATTITUDE]/2)));
 	else if(item == "BroBrew") buyOwcaShit(item,2000);
 	else buyOwcaShit(item,(300 - flags[OWCAS_ATTITUDE]));
 }
-function buyOwcaShit(bleh:String = "MinoCum",price:Number = 0):void {
+public function buyOwcaShit(bleh:String = "MinoCum",price:Number = 0):void {
 	clearOutput();
 	player.gems -= price;
 	statScreenRefresh();
@@ -635,7 +635,7 @@ function buyOwcaShit(bleh:String = "MinoCum",price:Number = 0):void {
 }
 	
 //Herds (Z)
-function herds():void {
+public function herds():void {
 	clearOutput();
 	outputText("The herders greet you warmly.  \"<i>Welcome, champion!  It is indeed a pleasure to have the honor to talk to such a noble and revered hero.</i>\"  You reply with equal grace and ask in a more formal tone if there's anything you can do to help them out.");
 	outputText("\n\n\"<i>Well, our sheep badly need to be sheared and we could really use an extra pair of hands to get the work done.</i>\"  The herder proceeds to hand you some tools, and redirects you to a group of villagers working actively.  You rapidly join them and soon enough you are having a pleasant conversation, chatting and laughing as you collect the wool, so much so that you don't see where time goes; in what seems like minutes you're already done.");
@@ -654,7 +654,7 @@ function herds():void {
 }
 
 //Pit (Z)
-function zePit():void {
+public function zePit():void {
 	clearOutput();
 	outputText("You announce to all the villagers present that you're going to guard the pit as well as the village's entrance against the demons, trusting them to spread the news; they seem glad that you took this initiative on your own.  Checking your equipment, you head toward the pit, ready to stand your ground against the lewd horde.");
 	//Redirects to the Dusk Transition Scene, then to a combat with full equipment and weapons. Loss/Victory scenes as usual.
@@ -662,7 +662,7 @@ function zePit():void {
 }
 
 //Rebecc Menu (Z)
-function rebeccMenu():void {
+public function rebeccMenu():void {
 	clearOutput();
 	outputText("You knock and step into the old shack, accustoming yourself to the meager light.  As soon as you close the door behind you, you spot Rebecc stepping out of a little backroom.");
 	outputText("\n\n\"<i>"+player.short+ "!  You came!  I was just preparing a hot bath.  My poor darling, you must have gone through a really perilous ordeal.  Here, do you want to get cleaned up?</i>\"");
@@ -679,7 +679,7 @@ function rebeccMenu():void {
 	simpleChoices("Appearance",rebeccAppearance,"Bath",rebeccBathScene,"",0,"Surprise Sex",sex,"Back",gangbangVillageStuff);
 }
 //Rebecc Appearance (Z)
-function rebeccAppearance():void {
+public function rebeccAppearance():void {
 	clearOutput();
 	outputText("Rebecc is a 5-foot, 7-inch sheep-girl, with a cute human visage decorated by two little nubby horn protrusions and plush and fuzzy curled white hair that cascades down over her shoulders.  Her face is expressive, with her glinting blue eyes and avid mouth accurately reflecting her whole range of emotions.  Her complexion is extremely pale, although the exposed parts of her body are rather tanned due to hours of labour under the scorching sun.  She is currently wearing a coarse peasant dress, a layer of thin white cloth that clearly outlines her appealing curves.  Her fine hips and legs sway with elegance when she walks and you can guess a bountiful wiggly rump hides behind the back of her gown.");
 	outputText("\n\nShe has a pair of ample, barely concealed breasts.  Although you can't see them outright, her thin clothing leaves little doubt that they're D-cups.  Her 0.5 inch nipples point through her dress whenever she's aroused.");
@@ -688,7 +688,7 @@ function rebeccAppearance():void {
 	doNext(rebeccMenu);
 }
 //Rebecc Bath scene (Z)
-function rebeccBathScene():void {
+public function rebeccBathScene():void {
 	clearOutput();
 	outputText("She grabs your hand and leads you to her bathroom, a tiny place almost entirely occupied by an enormous circular container acting as a bathtub, full of hot steaming milk.  You watch her, puzzled.");
 	outputText("\n\n\"<i>What?  Don't you bathe in milk in your village?  We have plenty of it here in Owca, you know; more than clean water.  We use it for everything; it has curing properties.</i>\"  Whispering seductively, she adds, \"<i>It's also ideal for purging brave demon fighters from any taint they may have caught.</i>\"");
@@ -716,7 +716,7 @@ function rebeccBathScene():void {
 	doNext(13);
 }
 //Rebecc Rape scene (for discerning penises) (Z)
-function rapeRebecc(outside:Boolean = false):void {
+public function rapeRebecc(outside:Boolean = false):void {
 	clearOutput();
 	if(player.hasCock()) {
 		outputText("Within three strides you are upon Rebecc; you slap her twice on her cheeks, brutally yank her hair and in a harsh gesture, you turn her around.  The woman yells, \"<i>W-what are you doing?  No, please stop!</i>\"  Completely caught unaware, she gasps and jolts in surprise, crying loudly until you slap her again to shut her up.");
@@ -774,7 +774,7 @@ function rapeRebecc(outside:Boolean = false):void {
 
 //Desperate Villagers (Z)
 //[Dialogue once Attitude reaches 0 or less, pops automatically as you go to the village]
-function desperateVillages():void {
+public function desperateVillages():void {
 	clearOutput();
 	outputText("As you approach the group of huts, you hear a vague rumble, as if many people were talking at the same time.  Walking closer, you see all the villagers gathering outside and arguing violently; among them you spot your friend, Rebecc.  As soon as she sees you she hurries over with desperate, wet eyes.");
 	outputText("\n\n\"<i>They want to put you back into the pit by force!  I and some others have tried arguing with them but they won't hear anything!  The demons have been harassing us a lot due to the lack of sacrifices, please do something!</i>\"");
@@ -785,7 +785,7 @@ function desperateVillages():void {
 	doYesNo(3608,fightZeVillagers);
 }
 //Villagers Fight (Z, but pretty barebones)
-function fightZeVillagers():void {
+public function fightZeVillagers():void {
 	clearOutput();
 	//You are fighting the villagers (level 14):
 	startCombat(52);
@@ -793,7 +793,7 @@ function fightZeVillagers():void {
 	eventParser(1);
 	//~500 HP, 6 different attacks at 20 hp, can't run, 100% lust resistance (can't arouse), ~200 xp
 }
-function farmersAI():void {
+public function farmersAI():void {
 	monster.createStatusAffect("attacks",4,0,0,0);
 	eAttack();
 	combatRoundOver();
@@ -801,7 +801,7 @@ function farmersAI():void {
 
 
 //Defeat Villagers (only displayed if corruption >= 60ish) (Z)
-function beatUpOwca():void {
+public function beatUpOwca():void {
 	clearOutput();
 	outputText("The last of the villagers drops his improvised weapon.  They are all lying defenseless before you.  At last, you notice Rebecc, the only one still conscious, curled upas she weeps uncontrollably.  She is clearly oblivious of her surroundings, undoubtedly shocked by the violent fight.  Even if she calls herself your friend, you don't think you'd be able to reason with her after pummeling her kin.  What do you do?");
 	//Rape Rebbecc/Torch Village (needs Akbal's fire or Whitefire)/Leave
@@ -813,13 +813,13 @@ function beatUpOwca():void {
 	simpleChoices("Rape Rebbecc",rape,"Torch Village",torch,"",0,"",0,"Leave",leaveOwcaAfterWhupping);
 }
 //"Leave" redirects the PC to camp; next encounter is Rebecc's Last Plea.
-function leaveOwcaAfterWhupping():void {
+public function leaveOwcaAfterWhupping():void {
 	//tag for calling last plea
 	flags[REBECCS_LAST_PLEA] = 1;
 	eventParser(5007);
 }
 //Village Torching scene - requires a fire skill (Z)
-function torchOwcaMotherFuckers():void {
+public function torchOwcaMotherFuckers():void {
 	clearOutput();
 	outputText("These ignorant folks deserve to be punished for trying to take you by force.  You muster your strength and release a wave of magical flame.  The raw heat and energy is enough to set entire thatched roofs ablaze.  You ignite house after house, the poor constructions unable to withstand your fiery might, until there are enough burning that the wind can carry the flames to all other buildings nearby.  A few minutes later, the entire village is ablaze; hovels are crumbling under their own weight and the crude roads are being littered with fallen debris.  You watch Owca burn silently, arms crossed.  Finally, when the last building has been thoroughly reduced to a pile of rubble and ashes, you quickly search for any valuables among the villagers' belongings.  Fortunately their gems haven't been melted; you pack a substantial amount of them away before leaving.  You cast a thoughtful glance at the remains of what used to be a peaceful village; ironically enough, the only structure you preserved was the pole in the pit, an ultimate mockery of their futile struggles against forces that ridiculously outmatch them.");
 	flags[OWCA_UNLOCKED] = -1;
@@ -832,7 +832,7 @@ function torchOwcaMotherFuckers():void {
 }
 	
 //Fuck off village
-function torchUpVillagersAndLeave():void {
+public function torchUpVillagersAndLeave():void {
 	clearOutput();
 	outputText("You don't think you're going to see these villagers again, and you don't really want to.");
 	//Corruption +15 (plus extra for rape), ~ 1000 gems, fatigue set to 100
@@ -843,7 +843,7 @@ function torchUpVillagersAndLeave():void {
 }
 //End of quest
 //Lose to Villagers (Z)
-function loseToOwca():void {
+public function loseToOwca():void {
 	clearOutput();
 	outputText("You kneel down and then fall, overwhelmed by the villagers' fury and numbers.  Without hesitation, the angry mob jumps on you; you recoil in terror, persuaded that you're going to be beaten to death.  Instead, you are carelessly lifted and completely stripped off; ");
 	if(player.weaponName != "fists") outputText("your " + player.weaponName + " is taken away and ");
@@ -856,7 +856,7 @@ function loseToOwca():void {
 	player.createStatusAffect("lostVillagerSpecial",0,0,0,0);
 }
 //Post-Mob Encounter (Z)
-function morningAfterRape():void {
+public function morningAfterRape():void {
 	player.removeStatusAffect("lostVillagerSpecial");
 	clearOutput();
 	outputText("The village is utterly silent and almost deserted.  The few people you see look away when they spot you, probably ashamed of what they did last time.  Doors are locked and windows are closed as you pass by; everyone is obviously afraid of directly confronting their victim.  You head toward Rebecc's house, your last friend.  As you open her door, you hear a muffled wail; you recognize the pretty farmer's voice.  She is laying on her bed, weeping uncontrollably; once she finally notices your presence, she looks up to you with tear-filled eyes, sobbing convulsively as she talks.");
@@ -868,7 +868,7 @@ function morningAfterRape():void {
 	simpleChoices("Forgive",forgiveOwca,"Rape",3629,"",0,"",0,"Leave",fuckThisShit);
 }
 //Option: Forgive (Z)
-function forgiveOwca():void {
+public function forgiveOwca():void {
 	clearOutput();
 	outputText("Swallowing your pride, you tell her that it's all right and that you hold no grudge against her; the villagers were obviously desperate, to have resorted to such extreme measures.  You assure her");
 	if(player.cor >= 50) outputText(", lying through your teeth,");
@@ -882,14 +882,14 @@ function forgiveOwca():void {
 	doNext(gangbangVillageStuff);
 }
 //Option: Leave (Z)
-function fuckThisShit():void {
+public function fuckThisShit():void {
 	clearOutput();
 	outputText("You stare at the wretched, whimpering creature before you for a moment.  There's nothing to say.  Without a word, you head back to your camp, carefully closing Rebecc's door behind you as you leave.");
 	flags[REBECCS_LAST_PLEA] = 1;
 	doNext(13);
 }
 //Rebecc's Last Plea (Z)
-function rebeccsLastPlea():void {
+public function rebeccsLastPlea():void {
 	clearOutput();
 	outputText("As you arrive on the border of the cursed village, you see someone is running in your direction.  You recognize Rebecc instantly; she seems to stumble and stagger at every step, and her face is tear-stricken.  Intrigued, you catch the crying woman by the waist as she runs past you sightlessly; she falls into your arms, nearly tripping as she abandons herself to your embrace.  Unsure of what to do, you ask her why she is panicking, though it takes a while before your words reach her.");
 	outputText("\n\n\"<i>They... they chose me!</i>\" she wails, choking back.  \"<i>They voted and I was chosen to be thrown in the pit!  They're angry at me for befriending you and I was blamed for the recent troubles with the demons!  They think you've abandoned us and I'm responsible for all this... they hate me!  They hate you too!  I'm going to be tied up, abused and broken... and everyone will pretend nothing happened!  I don't want to go to the pit; I don't know what to do!</i>\"");
@@ -900,7 +900,7 @@ function rebeccsLastPlea():void {
 	simpleChoices("Rape Her",3630,"Face Them All",faceDownHordes,"",0,"",0,"Leave",leaveRebeccToBeRaped);
 }
 //Option: Leave (Z)
-function leaveRebeccToBeRaped():void {
+public function leaveRebeccToBeRaped():void {
 	clearOutput();
 	outputText("You tell Rebecc you don't want to have anything to do with her or her sick people and promptly turn around.  She wails and begs you at first but you're faster than the tear-blinded girl, and she soon falls behind.  Your safe, simple camp looms large in your thoughts, pushing out any desire to return to this wicked village and its wicked people.");
 	//[Owca Village removed from "Places" menu.]
@@ -909,7 +909,7 @@ function leaveRebeccToBeRaped():void {
 	doNext(13);
 }
 //Option: Face Down the World (Z)
-function faceDownHordes():void {
+public function faceDownHordes():void {
 	clearOutput();
 	outputText("You tell Rebecc to go hide on the plains; you're going to handle the villagers as well as the demon horde on your own.  She cries, \"<i>But " + player.short + "!  You stand no chance against this ruthless horde!  Besides, the villagers won't trust you.  They'll think you want to cheat them... they'll tie you up to prevent you from getting away!</i>\"");
 	outputText("\n\nYou tell her not to worry and before her whining protestations can begin, you're already marching toward the village.  As you walk between the tiny houses, people keep staring at you with hostile or even despising eyes.  Some start following you as you walk to the pit, ignoring all the whispers and rumours rumbling about you.  When you're finally standing before the pole, with the whole town gathered around you, you speak in a loud, clear voice.");
@@ -919,7 +919,7 @@ function faceDownHordes():void {
 	doNext(3613);
 }
 //Slave to Vapula - Bad End (Z)
-function slaveToVapulaBadEnd():void {
+public function slaveToVapulaBadEnd():void {
 	clearOutput();
 	//[Displayed if Vapula Submissiveness reaches 100]
 	outputText("When you wake up, you find yourself tied and gagged in a strange cave.  A pair of smelly red fruits dangle before your eyes, dripping sap.  Chattering and moaning sounds come from everywhere, and your crotch feels numb.  You come back to your senses and realize your mouth is full of cock - the red 'fruits' are actually an imp's balls, and the 'sap' the drippings of a pussy just behind them!  You struggle to remove the rod of dickflesh but there's not much you can do, bound as you are.  Your constant writhing only makes the hermaphrodite imp harder and she grabs a fistful of your hair as she cums, hard.  Her balls shrink even as the sticky vaginal wetness running along their underside swells, and you can feel the veins in her dong pulsate as she unloads an enormous deposit of spooge in your throat; you are forced to swallow the unnaturally hot globs just to clear room to breathe.  Gods, it is so humiliating... yet, somehow, it's also strangely habit-forming.  Each gulp is easier than the last.  You hear an inhuman snicker as the shaft is pulled out, wiped clean of any residual cum by your lips.  The glittering pair of balls is removed from your sight as the imp is pushed aside.");
@@ -945,7 +945,7 @@ function slaveToVapulaBadEnd():void {
 
 //Subdue Vapula Scene - begins Vapula Follower Content(Z)
 //[Triggered if submissiveness reaches 0 when beating the horde.] 
-function subdueVapula():void {
+public function subdueVapula():void {
 	clearOutput();
 	outputText("And at last, the final demon falls, ");
 	if(monster.HP < 1) outputText("overwhelmed by your might");
@@ -961,7 +961,7 @@ function subdueVapula():void {
 	simpleChoices("Disband",disbandHorde,"EnslaveVapula",enslave,"JustFuckEm",fuck,"",0,"Skip Out",5007);
 }
 //Option: Disband (Z)
-function disbandHorde():void {
+public function disbandHorde():void {
 	clearOutput();
 	outputText("You start speaking in a calm, measured voice.  \"<i>Here we are again.  I cannot count how often we've been in this same situation: you struggling before me, powerless.  How often do you need to be reminded your place?  Back off.  We don't want your kind here.  Go find some other prey; fuck each other for all I care.  Just stop bothering us.  If I see you or your minions hanging around this village again, you will regret it.  All of you.</i>\"");
 	
@@ -975,7 +975,7 @@ function disbandHorde():void {
 	eventParser(5007);
 }
 //Option: Enslave - penis version (requires D2 completion and libido >= 60 and corr >= 70) (Z)
-function enslaveVapulaWithYourWang():void {
+public function enslaveVapulaWithYourWang():void {
 	clearOutput();
 	if(!player.hasCock()) {
 		enslaveVapulaAsACuntWielder();
@@ -1005,7 +1005,7 @@ function enslaveVapulaWithYourWang():void {
 }
 //Option: Enslave - vagina version (requires D2 completion and libido >= 60 and corr >= 70 and, apparently, no centaurs)(Z)
 //NOTE: No Centaurs. Fuck Centaurs.
-function enslaveVapulaAsACuntWielder():void {
+public function enslaveVapulaAsACuntWielder():void {
 	clearOutput();
 	outputText("You speak in a feverish voice.  \"<i>You're such a bitch.  Damn, why did you ever think you were going to make me your slut?  How many times do you need to be shown that I'm not the bottom in our relationship?  You deserve to be turned in to Lethice so she can make you her personal fuck-toy; at least you'll remember your place.</i>\"");
 	outputText("\n\nAs soon as you mention the name of the demon lord, the struggling woman in your grasp recoils, her purple eyes widening in fright.  She whimpers, terrified, \"<i>Please don't!  You don't know her!  She's going to kill me, or worse!  She hates me!  If you do this, she will... she will...</i>\"  Her voice breaks as she keeps muttering unintelligible words, half-paralyzed in horror.");
@@ -1028,7 +1028,7 @@ function enslaveVapulaAsACuntWielder():void {
 }
 	
 //Two nights after "vagina enslave", if PC still meets initial requirements (else defer until she does)(Z)
-function femaleVapulaRecruitmentPartII():void {
+public function femaleVapulaRecruitmentPartII():void {
 	outputText("\nYou are awoken by long fingers inching up your inner thighs, testing and caressing your soft flesh. You sigh, open your eyes, and are confronted by an excited, purple face looming over you.");
 	outputText("\n\n\"<i>I have found you, mistress,</i>\" Vapula whispers.  \"<i>And I have done what I promised!  Look.</i>\"  She proudly produces an obscene-looking device, replete with rounded nodules and hanging straps.");
 	outputText("\n\nYou rub your eyes, accept the thing off the succubus and examine it.  It's a double dildo fitted with a harness: a strap-on that is evidently designed to fuck the user whilst they themselves are fucking. One end is relatively small, pink and fleshy-looking, the other is an eight inch purple monster covered in ludicrous orange leopard spots.  Vapula draws in close to you and eagerly points out its features as you turn it around in your hands.");
@@ -1043,7 +1043,7 @@ function femaleVapulaRecruitmentPartII():void {
 	doNext(1);
 }
 
-function vapulaGivesPCAPresent():void {
+public function vapulaGivesPCAPresent():void {
 	outputText("\nVapula walks up to you and frowns, clearly disappointed.  \"<i>Since you got rid of the only way you could properly feed me, I got you this.</i>\"\n\nShe drops a strap-on into your hand as she explains, \"<i>It can convert the lust of a woman into something that will be palatable to my... appetites.  You're welcome.</i>\"");
 	outputText("\n\nShe walks away without another word.  It might be time for some discipline.");
 	player.createKeyItem("Demonic Strap-On",0,0,0,0);
@@ -1053,7 +1053,7 @@ function vapulaGivesPCAPresent():void {
 
 //Slave Vapula
 //Camp lines
-function vapulaSlaveFlavorText():void {
+public function vapulaSlaveFlavorText():void {
 	var choice:int = rand(11);
 	if(choice == 0) outputText("Vapula is currently resting on a very rough bed of leaves she's gathered herself.  She sleeps quietly, her hand absent-mindedly laid on her vagina and the other one resting on her breasts.  A thin trickle of her juice is leaking out of her crotch.");
 	if(choice == 1) outputText("Your succubus slut, Vaplua, is furiously stroking herself on her bed of leaves, her purple body shining in sweat.  She moans raggedly, often looking up to you with lust-consumed eyes.");
@@ -1104,7 +1104,7 @@ function vapulaSlaveFlavorText():void {
 
 //Vapula-Followers interaction: Puru Puru Mouse (Z)
 //switch follower names depending on conditions
-function mouseWaifuFreakout(amily:Boolean = false, jojo:Boolean = false) {
+public function mouseWaifuFreakout(amily:Boolean = false, jojo:Boolean = false) {
 	clearOutput();
 	if(amily) {
 		outputText("Amily ");
@@ -1160,7 +1160,7 @@ function mouseWaifuFreakout(amily:Boolean = false, jojo:Boolean = false) {
 
 //tion camp
 //Follower Summoning text (Z)
-function callSlaveVapula(output:Boolean = true):void {
+public function callSlaveVapula(output:Boolean = true):void {
 	if(output) {
 		clearOutput();
 		outputText("You gently tap Vapula on her shoulder and tell her you intend to put her goddess-like body to use.  She grunts at first but quickly smiles at you kinkily, letting you see her fangs as she voraciously stares at your crotch. You tear open the rags she's stitched together and cup her bouncy breasts. She swiftly responds with a passionate kiss, moaning in lust and quickly undressing you as you literally tongue-fuck each other. One of her hands darts at your crotch, slowly massaging it as she presses her body against your own, letting you feel the warmth of her jiggly bosom against your chest. You decide to return the favor; moving your own hands down, you slap her firm-yet-ample ass, getting a good grope of her purple flesh; your other hand starts exploring the depth of her vaginal recesses. She pulls back and openly cries in pleasure, her whole body shaking between your arms, a trickle of delicious succubus-saliva hanging between your lips.  After a few minutes of playful teasing, you release her; she stares at you with longing and flirtatious eyes.");
@@ -1195,7 +1195,7 @@ function callSlaveVapula(output:Boolean = true):void {
 }
 
 //Vapula Appearance - this bitch is purpler than a Nigerian (Z)
-function fapulaFapfapfapAppearance():void {
+public function fapulaFapfapfapAppearance():void {
 	clearOutput();
 	outputText("Vapula is a 6 foot 1 inch-tall succubus with a voluptuously curvy build.  Her entire skin is purple, only growing darker whenever she's aroused.  She has a fairly human face with a surprising lack of horns; were it not for her skin, the only sign betraying her demonic origins would be her pair of fangs that are revealed whenever she smiles.  Her eyes are purple as well, often glinting with lust.  Her dark-purple hair grows luxuriously around her head, giving her a fierce, almost lion-like aspect, but it's offset by her majestic aquiline wings, leaving you wondering about her origins.  Two normal, well-formed legs grow down from her squeezable hips, swaying hypnotically as she walks.  She is wearing rags that cover only a tiny fraction of her body, concealing just her naughty bits to make the whole display more erotic.");
 	outputText("\n\nShe has a pair of jiggly, perky H-cup breasts, each one adorned with a 1-inch nipple.");
@@ -1205,7 +1205,7 @@ function fapulaFapfapfapAppearance():void {
 	callSlaveVapula(false);
 }
 //Talk (Z)
-function talkToVapulaForSomeReason():void {
+public function talkToVapulaForSomeReason():void {
 	clearOutput();
 	outputText("\"<i>You want to talk?  Well it's quite rare to see " + player.mf("studs","girls") + " looking for conversation with the likes of me, but go ahead.  What do you want to talk about?</i>\"");
 	//Option: Stop Fucking Harem OR Fucking Harem OK (if toggled on off)
@@ -1237,7 +1237,7 @@ function talkToVapulaForSomeReason():void {
 	simpleChoices(haremT,haremB,threesomeT,threesomeB,"",0,"",0,"Back",callSlaveVapula);
 }
 
-function toggleCeruleanVapulaAssist():void {
+public function toggleCeruleanVapulaAssist():void {
 	clearOutput();
 	//Cerulean Threesome On (Z)
 	if(flags[VAPULA_THREESOMES] == 0) {
@@ -1253,7 +1253,7 @@ function toggleCeruleanVapulaAssist():void {
 	//Return to talk menu
 	doNext(talkToVapulaForSomeReason);
 }
-function toggleVapulaHaremFucks():void {
+public function toggleVapulaHaremFucks():void {
 	clearOutput();
 	//Stop Fucking Harem
 	if(flags[VAPULA_HAREM_FUCK] == 1) {
@@ -1273,7 +1273,7 @@ function toggleVapulaHaremFucks():void {
 	doNext(talkToVapulaForSomeReason);
 }
 //Feed
-function feedVapulaACupOfJizz():void {
+public function feedVapulaACupOfJizz():void {
 	clearOutput();
 	outputText("You tell Vapula you're going to reward her for being such a good slut; idly stroking [oneCock] into erection, you command her to get on her knees so she can receive her meal.  The demoness eagerly complies and grabs hold of [oneCock].  She then proceeds to lick it, coating the entirety of your junk with her warm, sweet saliva. With an expert precision, she massages all your most sensitive points, pumping pre-cum up your urethra with ruthless efficiency.  As drops of your juices dribble from the tip of your " + cockDescript(0) + " she voraciously slurps them with a gourmand's smile.");
 	outputText("\n\nHer ministrations feel good, but she keeps tickling you with her soft hands and pulpy lips, and her flexible tongue gives you the most infuriating tingles of pleasure.  With a groan of impatience, you grab her head and stuff your whole " + cockDescript(0) + " into her mouth, literally stuffing her full of your junk.  She nearly chokes at first but her old reflexes acquired from a whole life devoted to lewdness and licentiousness start kicking in; Vapula gluttonously deepthroats your meat, softly moaning as she fingers herself with one hand and caresses your ");
@@ -1294,7 +1294,7 @@ function feedVapulaACupOfJizz():void {
 }
 
 //Threesome
-function vapulaThreesomeMenu():void {
+public function vapulaThreesomeMenu():void {
 	clearOutput();
 	outputText("Who do you invite?");
 	//Option: Amily
@@ -1318,7 +1318,7 @@ function vapulaThreesomeMenu():void {
 }
 
 //Vapula-Ceraph threesome
-function vapulaCeraphThreesome():void {
+public function vapulaCeraphThreesome():void {
 	clearOutput();
 	outputText("Using your magical talisman you summon Ceraph, your omnibus slut; she seems to appear out of nowhere and gleefully strides toward you as you are lasciviously holding Vapula in your arms and caressing her. The naked omnibus watches your unholy embrace, bemused: \"<i>I see you're quite busy, " + player.mf("Master","Mistress") + ". I won't disturb you further.</i>\"  You point a finger at Ceraph while your other hand keeps stroking Vapula's tender ass and tell her to come immediately, your voice sounding almost breathless in your lust.  Startled by the imperiousness of your tone, the omnibus comes closer, not sure what to do as you keep toying with your purple wanton bitch.  You impatiently yank Ceraph's arm and pull her closer to Vapula in such a way that both hell-girls are now practically pressing their lush bodies against each other.  You tell your sluts that you will have your way with both of them; you feel your ");
 	if(player.hasCock()) outputText("dick");
@@ -1330,7 +1330,7 @@ function vapulaCeraphThreesome():void {
 	simpleChoices("Please Both",vapulaCeraphThreesomePleaseBoth,"AnalTrain",vapulaAndCeraphButtfuckTrainYeehaw,"",0,"",0,"",0);
 }
 //Option: Please both.
-function vapulaCeraphThreesomePleaseBoth():void {
+public function vapulaCeraphThreesomePleaseBoth():void {
 	clearOutput();
 	var x:int = player.cockThatFits(100);
 	if(x < 0) x = player.smallestCockIndex();
@@ -1393,7 +1393,7 @@ function vapulaCeraphThreesomePleaseBoth():void {
 }
 //Option: Butt-fuck train. Requires Ceraph to be herm.
 //Ceraph-Vapula Buttfuck train
-function vapulaAndCeraphButtfuckTrainYeehaw():void {
+public function vapulaAndCeraphButtfuckTrainYeehaw():void {
 	clearOutput();
 	var x:int = player.cockThatFits(100);
 	if(x < 0) x = player.smallestCockIndex();
@@ -1423,11 +1423,11 @@ function vapulaAndCeraphButtfuckTrainYeehaw():void {
 }
 
 //Vapula-Sophie threesome
-function vapulaSophieThreesomeSelect():void {
+public function vapulaSophieThreesomeSelect():void {
 	if(player.hasCock()) vapulaSophieThreeSome();
 	else vapulaSophieThreesomeCunts();
 }
-function vapulaSophieThreeSome():void {
+public function vapulaSophieThreeSome():void {
 	clearOutput();
 	outputText("You call Sophie insistently, panting in anticipation.  The blond-feathered bimbo doesn't come at first - perhaps the dumb slut forgot her name again - but as you grow more impatient you finally notice the platinum-headed woman, her enormous boobs bouncing hypnotically and her luscious thighs swaying lustfully as she walks.  She grins beatifically and coos: \"<i>Yes?  Is there anything I can, like, do for...ooooh, but who's this?  She's sooooooo beautiful!  She's got, like, big boobs and stuff!</i>\"  Vapula sighs in consternation.  \"<i>What can you do with her, " + player.short + "? I'm sure she's going to forget my presence by next hour.</i>\"");
 	outputText("\n\nYou hush her up and tell to follow you.  You walk toward the harpy bimbo as she idly fingers her twat; her eyes lighten up as you approach, always longing for some action.  \"<i>Wanna fuck?</i>\" You smirk and lunge toward your bird slut, engulfing your head in her bountiful bosom and sucking on her hard nipples.  Sophie moans softly and starts stroking your head;  you move your head up and kiss her gluttonously, enjoying the potent effect of her lipstick as it flows through your veins and brings [eachCock] to a fully aroused state.  You pull back and stare at Sophie for a moment, her eyes gleaming in adoration as she giggles and kisses you everywhere, invigorating you more and more.  You tell Vapula to come over and help you out.  With a mighty torsion, you both turn over that bountiful avian body, forcibly putting her on all fours and ignoring her complaints.  Her enormous ass is now fully exposed, wobbling and blushing in arousal, and her blond wings keep flapping aimlessly as the bimbo croons in incomprehension.  You dig Sophie's plush ass-cheeks with your fingers, bracing yourself for an imminent butt-fucking.");
@@ -1466,7 +1466,7 @@ function vapulaSophieThreeSome():void {
 	doNext(13);
 }
 //Vapula-Sophie threesome (as female)
-function vapulaSophieThreesomeCunts():void {
+public function vapulaSophieThreesomeCunts():void {
 	clearOutput();
 	outputText("You call Sophie insistently, panting in anticipation as you slide into your strap-on's harness.  The blond-feathered bimbo doesn't show at first - perhaps the dumb slut forgot her name again - but as you grow more impatient you finally notice the platinum-headed woman, her enormous boobs bouncing hypnotically and her luscious thighs swaying lustfully as she walks.  She grins beatifically and coos, \"<i>Yes? Is there anything I can, like, do for... ooooh, but who's this?  She's sooooooo beautiful!  She's got, like, big boobs and stuff!</i>\"  She claps her hands with even greater excitement as she turns her attention to you, or rather your crotch.  \"<i>And you've grown a cock!  I've made a new friend and I've, like, got a nice big cock to play with!  This is the best day of my life!</i>\" You think she genuinely means it.");
 	outputText("\n\nVapula sighs in consternation.  \"<i>What can you do with her, " + player.short + "? I'm sure she's going to forget who I am in an hour.</i>\"");
@@ -1487,7 +1487,7 @@ function vapulaSophieThreesomeCunts():void {
 	doNext(13);
 }
 //Vapula-Amily threesome
-function vapulaAndAmilyThreesome():void {
+public function vapulaAndAmilyThreesome():void {
 	clearOutput();
 	var x:int = player.cockThatFits(100);
 	if(x < 0) x = player.smallestCockIndex();
@@ -1522,7 +1522,7 @@ function vapulaAndAmilyThreesome():void {
 }
 
 //Vapula/Night Succubus
-function vapulaAssistsCeruleanSuccubus():void {
+public function vapulaAssistsCeruleanSuccubus():void {
 	var x:int = player.cockThatFits(100);
 	if(x < 0) x = player.smallestCockIndex();
 	//[automatically triggers once the option Night Fuck is toggled and Cerulean potion is drunk, can't be selected from menu. Requires Cerulean potion to have been drunk once]
@@ -1566,7 +1566,7 @@ function vapulaAssistsCeruleanSuccubus():void {
 	takeItem();
 }
 //Vapula/Jojo threesome
-function vapulaJojoThreesomes():void {
+public function vapulaJojoThreesomes():void {
 	clearOutput();
 	outputText("You call out in the jungle, \"<i>Slut!</i>\"  Vapula snickers, \"<i>I'm here, you know.</i>\"  You slap her ass to shut her up and quickly explain that you don't call her slut because she doesn't care, being a succubus.  There is only one fucktoy you call by that name, because he's in denial.  By Lethice you intend to have your way with him, and Vapula will get to participate too.  As she eagerly listens to you, her tongue inadvertently licking her lips, you hear soft steps behind you.  You look back and see Jojo walking hesitantly, intimidated by your unholy presence and the towering ex-dominatrix.  \"<i>You were right, he's such a cute shy slut.  I bet he secretly wants some nice cock to ram his every hole.  Don't you, little pet?</i>\"  The mousy monk huddles up little by little, bowing his head uncomfortably.");
 	outputText("\n\nYou walk up to Jojo and slap him in the face, making him whimper.  \"<i>Hey, your mistress Vapula is talking to you.  Show some respect, look at her and answer.</i>\"");
@@ -1591,7 +1591,7 @@ function vapulaJojoThreesomes():void {
 //Netorare
 //Butt-fuck train
 //Vapula/Jojo Netorare
-function NTRSomeJojos():void {
+public function NTRSomeJojos():void {
 	clearOutput();
 	if(player.hasCock()) {
 		var x:int = player.cockThatFits(100);
@@ -1669,7 +1669,7 @@ function NTRSomeJojos():void {
 }
 
 //Vapula/Jojo Butt-fuck train
-function jojoButtFuckTrain():void {
+public function jojoButtFuckTrain():void {
 	clearOutput();
 	var x:int = player.cockThatFits(100);
 	if(x < 0) x = player.smallestCockIndex();
@@ -1732,13 +1732,13 @@ function jojoButtFuckTrain():void {
 }
 
 
-function vapulaAndIzmaThreeSome():void {
+public function vapulaAndIzmaThreeSome():void {
 	clearOutput();
 	if(player.hasCock()) vapulaAndIzma(false);
 	else vapulaAndIzma(true);
 }
 //Vapula/Izma threesome(F)
-function vapulaAndIzma(girls:Boolean = true):void {
+public function vapulaAndIzma(girls:Boolean = true):void {
 	clearOutput();
 	if(!girls) {
 		outputText("You call your beta tigershark, telling her you'll have some use for her body.  Izma eagerly approaches you, although she frowns a bit when she sees the towering succubus accompanying you.  \"<i>What can I do for my alp-...wait, what are you doing with her?</i>\"  Vapula only smirks at Izma's puzzled reaction.");
@@ -1781,7 +1781,7 @@ function vapulaAndIzma(girls:Boolean = true):void {
 	doNext(13);
 }
 //Feed (as female)
-function chixFeedVapulaBlehblehIVantToZuckYourSpooo():void {
+public function chixFeedVapulaBlehblehIVantToZuckYourSpooo():void {
 	clearOutput();
 	outputText("You produce the demonic dildo and hold it by the hilt of its giant purple end, wagging it lazily by your side with a playful grin.  Vapula knows what that means; she is on her knees in an instant, staring at you with wolfish anticipation.");
 	//Feed/Tease
@@ -1790,7 +1790,7 @@ function chixFeedVapulaBlehblehIVantToZuckYourSpooo():void {
 	simpleChoices("Feed",chicksFeedVapula,"Tease",tease,"",0,"",0,"",0);
 }
 //Tease
-function teaseVapula():void {
+public function teaseVapula():void {
 	clearOutput();
 	//Requires: Vapula not fucking harem
 	if(flags[VAPULA_HAREM_FUCK] == 0 && (flags[VAPULA_DAYS_SINCE_FED] == 0)) {
@@ -1867,7 +1867,7 @@ function teaseVapula():void {
 }
 	
 //Feed (as female)
-function chicksFeedVapula():void {
+public function chicksFeedVapula():void {
 	clearOutput();
 	//[Teased once or twice: 
 	if(flags[VAPULA_TEASE_COUNT] > 1) {
@@ -1888,7 +1888,7 @@ function chicksFeedVapula():void {
 }
 
 //Forcefeed
-function vapulaForceFeeds():void {
+public function vapulaForceFeeds():void {
 	if(player.hasVagina() && player.hasKeyItem("Demonic Strap-On") >= 0 && !player.hasCock()) {
 		outputText("\n<b>In the night...</b>\nArousal blooms in your dreams, and you are relentlessly pushed into increasingly juicier and filthier fantasies; feeling hopelessly wet, you half awaken and hazily slide a hand down towards your crotch, to try and find release and rest.  Your fingers touch leather and latex where your vagina should be; bewildered, you rise to see Vapula working around your crotch, tightening the final harnesses of your strap-on, locking you into the pink dildo throbbing in your " + vaginaDescript(0) + " whilst she licks hungrily at the tip of the opposite end.  You try to sit up but the ferocious succubus pins you down ruthlessly, her strength increased by her state of hunger.  She smirks at you wickedly and whispers, \"<i>So you don't want me to use any dick but the one I gave you, yet you won't feed me?  That's very bad of you, " + player.short + "... really, really bad...  Do you want to starve me?  Do you want me to beg you for cum?  You naughty slut, you better be ready because I'm going to get what is rightfully mine.  I'm HUNGRY!</i>\"");
 		outputText("\n\nWith a wolfish groan she swallows the purple dildo up to the hilt and begins to work it savagely, slurping and grunting obscenely.  Before you can properly react, she catches the base of the dildo with her teeth and pushes it into you as hard as you can.  You gasp as the pink end reacts, growing by several inches and sliding further into your moist cunt.  In and out Vapula drags the dildo, slapping it into your groin as she fucks you whilst blowing the purple end for all she is worth, her saliva running down your thighs.  For a moment you think about getting up, asserting your authority and making her stop... but then the warm length wedged in your depths makes you coo with pleasure as Vapula shakes the cock in her mouth around like a bear with a salmon, making your end twist and spasm delightfully.  Deciding it is worth taking advantage of her insane hunger, ");
@@ -1930,7 +1930,7 @@ function vapulaForceFeeds():void {
 //Requires Vapula force herself on you for food.
 //Requires dick or vapula dildo!
 //Requires bipedal-ness
-function spankVapulaLikeABoss():void {
+public function spankVapulaLikeABoss():void {
 	clearOutput();
 	outputText("Without any warning, you grab the lusty succubus by the wrists and pull her into you, easily manhandling her surprised form until she's bent over your [leg], vulnerable and squealing like the gutter-slut she is.  Her wings batter at your face and chest, but after a little wrangling, you pin them flat against her back.  The best she can manage now is a few weak twitches at her wing-tips.  Her large, well-formed breasts jiggle and shake as she struggles, but all the trembling purple mountains accomplish is bringing a ready flush to your " + player.skin());
 	if(player.hasCock()) outputText(" and a healthy surge of blood to [eachCock]");

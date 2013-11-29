@@ -2,7 +2,7 @@
 //const TIMES_EGGED_IN_COCK:int = 593;
 
 //Masturbate Menu
-function masturbateMenu():void {
+public function masturbateMenu():void {
 	menu();
 	var button:int = 0;
 	if(fappingItems(false)) {
@@ -58,7 +58,7 @@ function masturbateMenu():void {
 	addButton(9,"Back",eventParser,1);
 }
 
-function fappingItems(menus:Boolean = true):Boolean {
+public function fappingItems(menus:Boolean = true):Boolean {
 	if(menus) menu();
 	var button:int = 0;
 	var hasItems:Boolean = false;
@@ -224,7 +224,7 @@ function fappingItems(menus:Boolean = true):Boolean {
 */
 
 //onaHole use - game should already have checked if player has a cock! CHECK BEFORE CALLING
-function onaholeUse():void
+public function onaholeUse():void
 {
 	var onaholeText:Boolean = false;
 	//Clear text for new stuff
@@ -274,7 +274,7 @@ function onaholeUse():void
 		doNext(13);
 	}
 }
-function deluxeOnaholeUse():void {
+public function deluxeOnaholeUse():void {
 	outputText("", true);
 	//Deluxe!
 	if(player.hasKeyItem("Deluxe Onahole") >= 0) {
@@ -335,7 +335,7 @@ function deluxeOnaholeUse():void {
 		}
 	}
 }
-function allNaturalOnaholeUse():void {
+public function allNaturalOnaholeUse():void {
 	outputText("", true);
 	//All-natural!
 	if(player.hasKeyItem("All-Natural Onahole") >= 0) {
@@ -390,7 +390,7 @@ function allNaturalOnaholeUse():void {
 		}
 	}
 }
-function stimBeltUse():void {
+public function stimBeltUse():void {
 	outputText("", true);
 	//FIRST TIME USAGE
 	if((player.hasKeyItem("Self-Stimulation Belt") >= 0)) {
@@ -415,7 +415,7 @@ function stimBeltUse():void {
 		cuntChange(1, true, true, false);
 	}
 }
-function allNaturalStimBeltUse():void {
+public function allNaturalStimBeltUse():void {
 	outputText("", true);
 	if(player.hasKeyItem("All-Natural Self-Stimulation Belt") >= 0) {
 		//First time!
@@ -452,7 +452,7 @@ function allNaturalStimBeltUse():void {
 }
 
 //Jojo masturbation!
-function masturbateJojo():void {
+public function masturbateJojo():void {
 	jojoSprite();
 	outputText("", true);
 	stats(0,0,0,0,0,0,-100,.5);
@@ -707,7 +707,7 @@ function masturbateJojo():void {
 	doNext(13);
 }
 //Genderless people suck!
-function genderlessMasturbate():void {
+public function genderlessMasturbate():void {
 	//first time as a genderless person - 
 	outputText("", true);
 	//Early prep
@@ -786,7 +786,7 @@ function genderlessMasturbate():void {
 }
 
 //Non-shitty masturbation
-function masturbateGo():void {
+public function masturbateGo():void {
 	outputText("", true);
 	if(inDungeon) {
 		outputText("There is no way you could get away with masturbating in a place like this!  You'd better find your way back to camp if you want to take care of that.", false);
@@ -1288,7 +1288,7 @@ function masturbateGo():void {
 	doNext(13);
 }
 
-function titForeplay() {
+public function titForeplay() {
 	//Ok lets touch our boobies if we haz them and they are big enough
 	if(player.breastRows.length == 1 && player.biggestTitSize() > 3)
 	{
@@ -1364,17 +1364,17 @@ function titForeplay() {
 }
 
 //A relic of old code, just pass on too titFuckSingle()
-function horseTitFuckSingle():void
+public function horseTitFuckSingle():void
 {
 	titFuckSingle();
 }
 //A relic of old code, just pass on too titFuckSingle()
-function dogTitFuckSingle():void
+public function dogTitFuckSingle():void
 {
 	titFuckSingle();
 }
 
-function titFuckSingle():void
+public function titFuckSingle():void
 {
 	/*DUPLICATE WITH SCENE BELOW)
 	//different based on libido
@@ -1568,7 +1568,7 @@ function titFuckSingle():void
 	}
 }
 
-function multiTitFuck():Boolean
+public function multiTitFuck():Boolean
 {			
 	var holeTotal:Number = player.totalNipples();
 	var fittableCocks:Number = player.cocks.length;
@@ -1701,7 +1701,7 @@ function multiTitFuck():Boolean
 	return true;
 }
 
-function multiNippleFuckPrep(randomCock:Number):void {
+public function multiNippleFuckPrep(randomCock:Number):void {
 	//Start with some detail on one random cock
 	//different based on libido
 	if(player.lib < 70) outputText("Shivering with anticipation, you place the ", false);
@@ -1757,7 +1757,7 @@ function multiNippleFuckPrep(randomCock:Number):void {
 }
 
 //ORGASM COOOOAD
-function orgazmo(selfSucking:Boolean, nippleFuck:Boolean):void {
+public function orgazmo(selfSucking:Boolean, nippleFuck:Boolean):void {
 	outputText("\n\n", false);
 	if(player.cockTotal() > 0) {
 		if(player.cockTotal() == 1) {
@@ -1866,7 +1866,7 @@ function orgazmo(selfSucking:Boolean, nippleFuck:Boolean):void {
 	stats(0,0,0,0,0,(-0.5),-100,0);	
 	player.hoursSinceCum = 0;
 }
-function titCum(cumQuantity:Number = 3):void
+public function titCum(cumQuantity:Number = 3):void
 {
 	//var tempSize:Number = Math.round((nippleLength + baseCockLength/2)*100)/100;
 	//var nippleCockDescript:String = nippleCockDescript(tempSize);
@@ -1903,7 +1903,7 @@ function titCum(cumQuantity:Number = 3):void
 }
 
 //(D. Dildo) – a floppy pink dildo with aphrodisiac reservoir
-function deluxeDildo():void {
+public function deluxeDildo():void {
 	slimeFeed();
 	outputText("", true);
 	//[USE FEMALE]
@@ -1974,7 +1974,7 @@ function deluxeDildo():void {
 	}
 }
 
-function centaurMasturbation():Boolean {
+public function centaurMasturbation():Boolean {
 	outputText("", true);
 	var plural:Boolean = false;
 	var primary:Number = -1;
@@ -2206,7 +2206,7 @@ function centaurMasturbation():Boolean {
 	else return true;
 }
 
-function lickYerGirlParts():void {
+public function lickYerGirlParts():void {
 	clearOutput();
 	if(player.hasPerk("Flexibility") < 0) {
 		outputText("You undress from your " + player.armorName + " and take a seat down on the ground. You spread your legs and look down at your sex. It's aching for something more than just your fingers, and you have a craving to taste the lustful juices leaking out. A very perverted idea of cats flashes through your brain, putting a naughty smile on your face. You lay on your side and spread your legs, giving you a perfect view of your " + vaginaDescript(0) + " You lean your head down towards the pleasure-hole, only to be stopped half-way there. You stick your tongue out, trying to add a few more inches, but this doesn't do anything except increase your appetite and your lust as a drop of warm saliva falls onto your " + vaginaDescript(0) + ". You stretch and wriggle your tongue out in a fruitless effort to taste your dripping wet cunt, craving the feeling of your tongue caressing your lips and penetrating into your depths... but it is not to be. You sit back up, frustrated and even more aroused than you were before.", false);
@@ -2236,7 +2236,7 @@ function lickYerGirlParts():void {
 	stats(0,0,0,0,0,(-0.5),-100,0);	
 	doNext(13);
 }
-function catAutoLick():void {
+public function catAutoLick():void {
 	outputText("", true);
 	//NOT FEXIBLE
 	if(player.hasPerk("Flexibility") < 0) {
@@ -2276,7 +2276,7 @@ function catAutoLick():void {
 	doNext(13);
 }
 
-function meditate():void {
+public function meditate():void {
 	outputText("", true);
 	outputText("You find a flat, comfortable rock to sit down on and meditate.  As always, meditation brings a sense of peace and calm to you, but it eats up two hours of the day.", false);
 	stats(0,0,0,0,0,0,-50,-.3);
@@ -2284,7 +2284,7 @@ function meditate():void {
 }
 
 //[Maturbate] -- [Fake Mare] (Cock Centaurs Only)
-function centaurDudesGetHorseAids():void {
+public function centaurDudesGetHorseAids():void {
 	var x:Number = player.biggestCockIndex();
 	outputText("", true);
 	if(player.keyItemv1("Fake Mare") == 0) {
@@ -2319,7 +2319,7 @@ function centaurDudesGetHorseAids():void {
 }
 
 //[Masturbate] -- [CentaurPole] -- [Fem/Herm Centaurs]
-function centaurGirlsGetHorseAids():void {
+public function centaurGirlsGetHorseAids():void {
 	outputText("", true);
 	if(player.keyItemv1("Centaur Pole") == 0) {
 		//[If low Corruption:] 
@@ -2351,7 +2351,7 @@ function centaurGirlsGetHorseAids():void {
 
 //Self/Exgartuan
 //Bee Eggs in Huge Cock: Finished (Slywyn) (edited)
-function getHugeEggsInCawk():void {
+public function getHugeEggsInCawk():void {
 	clearOutput();
 	//Bee Eggs in Huge Cock + Exgartuan: Finished (Slywyn)(edited)
 	if(player.statusAffectv1("Exgartuan") == 1 && player.statusAffectv2("Exgartuan") == 0 && flags[TIMES_EGGED_IN_COCK] == 0) {
@@ -2487,7 +2487,7 @@ function getHugeEggsInCawk():void {
 	doNext(13);
 }
 //Birth Bee Eggs Out Your Wang: Finished (Slywyn)(edited)
-function birthBeeEggsOutYourWang():void {
+public function birthBeeEggsOutYourWang():void {
 	outputText("\nYou feel more lusty and aroused than usual.  As you notice the feeling, it gets worse and worse; though you try to continue on with whatever it is that you're doing, by now you're far too distracted to continue.  All you can do is plop right down on the ground and prepare to masturbate, as it seems to be the only thing your body's going to allow you to do at this point.");
 	
 	outputText("\n\nQuickly shedding your [armor] and plopping down on your [ass], you make sure not to smash your abdomen in the process.  Your ");
@@ -2544,7 +2544,7 @@ function birthBeeEggsOutYourWang():void {
 //I Regret Nothing/Exgartuan:
 //Don't know the formatting well, so going to make some mistakes I suppose.
 //Scene Requires Fuckable Nipples, I'm going to aim at breasts around HH Cup or higher, since Exgartuan will push you over that from the bare minimum breast size - I'm thinking that breast pregnancy chance without Exgartuan will be nil/low and with Exgartuan will be extant/reasonable
-function layEggsInYerTits():void {
+public function layEggsInYerTits():void {
 	clearOutput();
 	if(player.statusAffectv1("Exgartuan") == 2 && player.statusAffectv2("Exgartuan") == 0) {
 		//Exgartuan; breasts should be HH or larger, fuckable nipples, only if Exgartuan is awake
@@ -2643,7 +2643,7 @@ function layEggsInYerTits():void {
 //Normal intro.
 //Segue into tentacle-faps.
 //Pick biggest tentacle that can possible fit into 'gina
-function tentacleSelfFuck():void {
+public function tentacleSelfFuck():void {
 	var x:int = -1;
 	var y:int = -1;
 	temp = 0;
@@ -2809,7 +2809,7 @@ function tentacleSelfFuck():void {
 
 //Upon selecting the option to masturbate you should have the option to fuck your own ass if you have a tentacle dick
 //Replace n with the tentacle cock number
-function tentacleGoesUpYerPooperNewsAtEleven():void {
+public function tentacleGoesUpYerPooperNewsAtEleven():void {
 	var x:int = -1;
 	temp = 0;
 	while(temp < player.cockTotal()) {
@@ -2880,7 +2880,7 @@ function tentacleGoesUpYerPooperNewsAtEleven():void {
 
 //Unique Masturbation Scene (by Frogapus)
 //Select [Gilded Sock] from Masturbation menu
-function gildedCockTurbate():void {
+public function gildedCockTurbate():void {
 	clearOutput();
 	var x:int = -1;
 	temp = 0;

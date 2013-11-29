@@ -46,44 +46,44 @@
 // TIMES_EMBER_LUSTY_FUCKED:int = 824;
 
 
-function emberAffection(changes:Number = 0):Number {
+public function emberAffection(changes:Number = 0):Number {
 	flags[EMBER_AFFECTION] += changes;
 	if(flags[EMBER_AFFECTION] > 100) flags[EMBER_AFFECTION] = 100;
 	else if(flags[EMBER_AFFECTION] < 0) flags[EMBER_AFFECTION] = 0;
 	return flags[EMBER_AFFECTION];
 }
-function emberCorruption(changes:Number = 0):Number {
+public function emberCorruption(changes:Number = 0):Number {
 	flags[EMBER_COR] += changes;
 	if(flags[EMBER_COR] > 100) flags[EMBER_COR] = 100;
 	else if(flags[EMBER_COR] < 0) flags[EMBER_COR] = 0;
 	return flags[EMBER_COR];
 }
-function followerEmber():Boolean {
+public function followerEmber():Boolean {
 	if(flags[EMBER_HATCHED] > 0) return true;
 	return false;
 }
-function emberMF(man:String,woman:String):String {
+public function emberMF(man:String,woman:String):String {
 	if(flags[EMBER_GENDER] == 1) return man;
 	else return woman;
 }
-function emberVaginalCapacity():int {
+public function emberVaginalCapacity():int {
 	return 60;
 }
-function emberAnalCapacity():int {
+public function emberAnalCapacity():int {
 	return 60;
 }
-function emberHasCock():Boolean {
+public function emberHasCock():Boolean {
 	return (flags[EMBER_GENDER] == 1 || flags[EMBER_GENDER] == 3);
 }
-function emberChildren():int {
+public function emberChildren():int {
 	return (flags[EMBER_CHILDREN_MALES] + flags[EMBER_CHILDREN_FEMALES] + flags[EMBER_CHILDREN_HERMS]);
 }
-function emberInternalDick():Boolean {
+public function emberInternalDick():Boolean {
 	return (flags[EMBER_ROUNDFACE] == 0 || flags[EMBER_INTERNAL_DICK] > 0);
 }
 
 //Approaching Ember (Z)
-function emberCampMenu():void {
+public function emberCampMenu():void {
 	clearOutput();
 	//Low Affection: 
 	if(emberAffection() <= 25) outputText("Ember sighs as you approach, and doesn't even look you in the eye before speaking.  \"<i>What do you want?</i>\"");
@@ -106,7 +106,7 @@ Spar (fight Ember)*/
 }
 
 //Approach for sex - initial output when selecting [Sex] menu (Z)
-function emberSexMenu(output:Boolean = true):void {
+public function emberSexMenu(output:Boolean = true):void {
 	if(output) {
 		clearOutput();
 		outputText("You ogle Ember, checking out the nuances of " + emberMF("his","her") + " body.");
@@ -189,7 +189,7 @@ function emberSexMenu(output:Boolean = true):void {
 
 //Finding the Egg (Z)
 //Triggers randomly on exploration in Swamp
-function findEmbersEgg():void {
+public function findEmbersEgg():void {
 	clearOutput();
 	if(flags[TIMES_FOUND_EMBERS_EGG] == 0) {
 		outputText("You spot a cave entrance partially hidden behind mossy vegetation and decide to investigate.");
@@ -213,7 +213,7 @@ function findEmbersEgg():void {
 }
 
 //[=Leave=] (Z)
-function leaveEmbersAssOutToDry():void {
+public function leaveEmbersAssOutToDry():void {
 	clearOutput();
 	outputText("You can't decide what to do right now, so you leave the egg where it is and return to your camp.");
 	//(You can restart this quest by randomly encountering this chamber again. It continues to reappear until you either Destroy or Take the egg.)
@@ -221,7 +221,7 @@ function leaveEmbersAssOutToDry():void {
 }
 
 //[=Destroy it=] (Z)
-function destroyBabyEmberYouMonster():void {
+public function destroyBabyEmberYouMonster():void {
 	clearOutput();
 	outputText("Raising your [weapon], you rain down blow after blow upon the egg.  The shell is freakishly tough, taking a lot of punishment before it shatters apart to spill a wave of egg white onto your " + player.feet() + "; a great pulpy mass of weirdly bluish-red yolk remains in the broken shell.");
 	outputText("\n\nYou have sealed the fate of an entire species... you feel guilty, but this was for the best.  There was no way of knowing what this dragon could do once it hatched.");
@@ -232,7 +232,7 @@ function destroyBabyEmberYouMonster():void {
 }
 
 //[=Eat=]
-function eatEmbersYolkLikeAnEvenBiggerDick():void {
+public function eatEmbersYolkLikeAnEvenBiggerDick():void {
 	clearOutput();
 	outputText("Unsure of where the impulse comes from, but uncaring, you crouch over the ruined shell of your 'kill' and begin messily scooping handfuls of yolk into your mouth.");
 	outputText("\n\nThe taste is incredible; a tinge of bitterness, but rich and velvety, sliding down your throat like the most savory of delicacies.  Each scoop you eat fills you with energy and power, you can almost feel yourself growing stronger.");
@@ -251,7 +251,7 @@ function eatEmbersYolkLikeAnEvenBiggerDick():void {
 
 
 //[Yes]
-function getSomeStuff():void {
+public function getSomeStuff():void {
 	clearOutput();
 	outputText("Your mouth tightens in consternation, and you pull out the shell of the so-called 'dragon egg', passing it over and asking if she can use it.");
 	outputText("\n\n\"<i>What is this?  An egg?  Eggs aren't much good for armor, cutie, no matter how big.  One good blow and POW!</i>\"  To demonstrate, she raises her hand, then strikes the shell with the blade of her palm - and pulls it away, smarting.  \"<i>My gods!  It's so hard!  Ok... maybe we can do this.</i>\"");
@@ -273,7 +273,7 @@ function getSomeStuff():void {
 //You raise your shield and block the onrushing liquid.  The porous shell quickly absorbs the fluid, wicking it away to who-knows-where and rendering the attack completely useless.
 
 //[=Take=] (Z)
-function takeEmbersEggHomeInADoggieBag():void {
+public function takeEmbersEggHomeInADoggieBag():void {
 	clearOutput();
 	outputText("You decide to take the egg, figuring that perhaps this dragon could aid you in your quest.");
 	//(If player is shorter than 7 feet)
@@ -311,7 +311,7 @@ function takeEmbersEggHomeInADoggieBag():void {
 
 
 //Modified Camp Description (Z)
-function emberCampDesc():void {
+public function emberCampDesc():void {
 	//Iz Ember an egg?
 	if(flags[EMBER_HATCHED] == 0) outputText("\nThat mysterious egg that you brought back to the camp is sitting in the crude nest you made.\n");
 	//NOT AN EGG! HAHA!
@@ -323,7 +323,7 @@ function emberCampDesc():void {
 	}
 }
 //Followers Descriptor (Z)
-function emberFollowerDesc():void {
+public function emberFollowerDesc():void {
 	outputText("The mysterious egg you found in the cave sits in the grass nest you assembled for it; it is three feet tall and nearly two feet in circumference.  The nest itself isn't very pretty, but at least it's sturdy enough to keep the egg from rolling around.\n\n");
 }
 
@@ -374,7 +374,7 @@ function emberFollowerDesc():void {
 //if EmberType has been altered, forget corruption. Hybrid forms have no corruption variants.
 
 //General Egg Interaction (Z)
-function emberEggInteraction():void {
+public function emberEggInteraction():void {
 	clearOutput();
 	outputText("You approach the egg you found in that illusion-concealed cave. Though the light continues to pulse with its heartbeat overtones, it still just sits there, doing nothing.");
 	//(If the egg Corruption level is 0-25, aka \"<i>Pure</i>\")
@@ -443,7 +443,7 @@ function emberEggInteraction():void {
 }
 
 //[= No =]
-function dontEggFap():void {
+public function dontEggFap():void {
 	clearOutput();
 	outputText("Shaking your head, confused and startled by these strange impulses, you step away for a moment. Once away from the egg, its pattern of pulsations returns to normal and you feel the urges disappear.");
 	//If PC picks No and qualifies for item use, display the text below.
@@ -477,14 +477,14 @@ function dontEggFap():void {
 }
 
 //Leave Without Using Item (Z)
-function leaveWithoutUsingAnEmberItem():void {
+public function leaveWithoutUsingAnEmberItem():void {
 	clearOutput();
 	outputText("You shake your head; it would probably be best not to tamper with it. Returning the items to your pockets, you leave the egg alone.  As you put them away, the egg's glow slows down dramatically, almost as if it were feeling... disappointment?");
 	doNext(1000);
 }
 
 //Incubus Draft/Purified Incubus Draft (Z)
-function useIncubusDraftOnEmber(purified:Boolean = false):void {
+public function useIncubusDraftOnEmber(purified:Boolean = false):void {
 	clearOutput();
 	if(purified) {
 		consumeItem("P.Draft",1);
@@ -510,7 +510,7 @@ function useIncubusDraftOnEmber(purified:Boolean = false):void {
 }
 			
 //Succubi Milk/Purified Succubi Milk (Z)
-function useSuccubiMilkOnEmber(purified:Boolean = false):void {
+public function useSuccubiMilkOnEmber(purified:Boolean = false):void {
 	clearOutput();
 	if(purified) {
 		consumeItem("P.S.Mlk",1);
@@ -538,7 +538,7 @@ function useSuccubiMilkOnEmber(purified:Boolean = false):void {
 }
 
 //Ovi Elixir (Z)
-function useOviElixerOnEmber():void {
+public function useOviElixerOnEmber():void {
 	clearOutput();
 	consumeItem("OviElix",1);
 	//max uses 1
@@ -549,7 +549,7 @@ function useOviElixerOnEmber():void {
 }
 
 //Lactaid (Z)
-function useLactaidOnEmber():void {
+public function useLactaidOnEmber():void {
 	clearOutput();
 	consumeItem("Lactaid",1);
 	//max uses 1
@@ -560,7 +560,7 @@ function useLactaidOnEmber():void {
 }
 
 //Hair Extension Serum (Z)
-function hairExtensionSerum():void {
+public function hairExtensionSerum():void {
 	clearOutput();
 	consumeItem("ExtSerm",1);
 	//max uses 2
@@ -579,7 +579,7 @@ function hairExtensionSerum():void {
 }
 
 //Your Blood (Z)
-function giveEmberBludSausages():void {
+public function giveEmberBludSausages():void {
 	clearOutput();
 	//max uses 2
 	outputText("Examining your hand and the egg's reaction to it, you wonder if this is what the book meant by \"<i>sharing your essence</i>\".  Could be worth trying.  Wincing in pain as you bite the skin on your thumb, you smear the bloody digit along the surface of the egg, marking its exterior in crimson.  Shortly thereafter the blood is absorbed, leaving only a stain.  You wait expectantly for something else to happen");
@@ -602,7 +602,7 @@ function giveEmberBludSausages():void {
 
 //Masturbate Onto the Egg (Z)
 //Genderless Version (Z)
-function masturbateOntoAnEgg():void {
+public function masturbateOntoAnEgg():void {
 	clearOutput();
 	if(player.gender == 0) {
 		outputText("The light pulses decrease in speed as you disrobe and expose your bare crotch, leaving you disappointed after summoning your perversity to bring you this far.  You feel as if you've let it down somehow...  This is confusing!  You decide to go away and deal with this fickle egg another time.");
@@ -674,7 +674,7 @@ function masturbateOntoAnEgg():void {
 }
 
 //HATCH DAT BITCH
-function hatchZeMuzzles():void {
+public function hatchZeMuzzles():void {
 	clearOutput();
 	outputText("Resting bonelessly on the ground and re-examining the motivations that led up to cumming on the strange egg, you are startled when it shines brilliantly.  Then just as suddenly, it goes dark.  Unnerved, you creep over to your erstwhile sextoy to examine it.  As you lean in, a very slight trembling manifests itself in the egg.  Cracking, breaking noises fill the air as tiny fractures begin to show across the egg's surface.  Warned just in time by them, you turn your face away and cover your head as the shell erupts into a cloud of tiny fragments!  As you huddle against the storm of eggshell shards, you hear a loud roar.");
 	outputText("\n\nLifting your head, you find the egg gone; in its place is an unfamiliar figure wrapped in thin wisps of ");
@@ -762,7 +762,7 @@ function hatchZeMuzzles():void {
 }
 
 //Aftermath (Z)
-function meetEmberAftermath():void {
+public function meetEmberAftermath():void {
 	clearOutput();
 	outputText("You can only stand there and stare at this strange creature, supposedly a dragon, for what feels like hours.");
 	outputText("\n\nIt's the first to break the silence, frowning at you.  \"<i>Who are you?  Where am I?</i>\" it inquires, growling.");
@@ -776,7 +776,7 @@ function meetEmberAftermath():void {
 }
 
 //Appearance (shows Ember's appearance, always available)
-function embersAppearance():void {
+public function embersAppearance():void {
 	clearOutput();
 	//Anthro Ember's Appearance (Z)
 	if(flags[EMBER_ROUNDFACE] == 0) {
@@ -880,7 +880,7 @@ function embersAppearance():void {
 }
 
 //Talk 
-function talkToEmber():void {
+public function talkToEmber():void {
 	//Checks for special scenes go here!
 	//If the PC fulfills one of the requirements for the Special Scenes, they occur the moment the player picks the talk option.
 	if(flags[EMBER_OVI_BITCHED_YET] == 0 && player.pregnancyType == 5) {
@@ -912,7 +912,7 @@ function talkToEmber():void {
 }
 
 //Talk about Dragons (Z)
-function talkToEmberAboutDragonzzz():void {
+public function talkToEmberAboutDragonzzz():void {
 	clearOutput();
 	outputText("You ask Ember to tell you more about " + emberMF("his","her") + " species.");
 	var choice:Number = rand(5);
@@ -955,7 +955,7 @@ function talkToEmberAboutDragonzzz():void {
 	doNext(13);
 }
 //Exploration (Z)
-function discussExplorationWithEmber():void {
+public function discussExplorationWithEmber():void {
 	clearOutput();
 	var choice:int = rand(4);
 	var subChoice:int = 0;
@@ -1027,7 +1027,7 @@ function discussExplorationWithEmber():void {
 }
   		
 //Talk about Yourself (Z)
-function talkToEmberAboutYourself():void {
+public function talkToEmberAboutYourself():void {
 	clearOutput();
 	var points:Number = 0;
 	outputText("You ask Ember what " + emberMF("he","she") + " thinks about you.");
@@ -1133,7 +1133,7 @@ function talkToEmberAboutYourself():void {
 //PC must be pregnant with something besides Ember's child/egg to get this scene.
 //Occurs once per pregnancy.
 //To be implimented once preggers is set up.
-function manEmberBitchesAboutPCPregnancy():void {
+public function manEmberBitchesAboutPCPregnancy():void {
 	clearOutput();
 	flags[EMBER_BITCHES_ABOUT_PREGNANT_PC] = 1;
 	//(Low Affection) 
@@ -1148,7 +1148,7 @@ function manEmberBitchesAboutPCPregnancy():void {
 //This scene only appears if the PC is pregnant with Ember's child.
 //Occurs only once.
 //To be implimented once preggers is set up.
-function emberTalksToPCAboutPCDragoNPregnancy():void {
+public function emberTalksToPCAboutPCDragoNPregnancy():void {
 	clearOutput();
 	flags[EMBER_TALKS_TO_PC_ABOUT_PC_MOTHERING_DRAGONS] = 1;
 	outputText("You notice Ember's eyes are fixated on your swollen belly, and cautiously ask what " + emberMF("he","she") + "'s looking at.");
@@ -1165,7 +1165,7 @@ function emberTalksToPCAboutPCDragoNPregnancy():void {
 //Scene appears when selecting [Talk]
 //This scene only appears if Ember is pregnant.
 //Occurs once during Ember's first pregnancy.
-function emberIsPregnantFirstTimeTalkScene():void {
+public function emberIsPregnantFirstTimeTalkScene():void {
 	clearOutput();
 	flags[EMBER_PREGNANT_TALK] = 1;
 	outputText("You can't help but stare at Ember's swollen belly; it's still so hard to take in that you have actually fathered a child with a creature of legend.  Especially given that there are times when it's hard to be entirely certain that Ember genuinely likes you.");
@@ -1193,7 +1193,7 @@ function emberIsPregnantFirstTimeTalkScene():void {
 //This scene only appears if the PC is pregnant with eggs due to using Ovi Elixir/Oviposition.
 //It doesn't matter if Ember doesn't have the parts, imagination is there for a reason.
 //Yup, you guessed it, only once.
-function emberBitchesAboutPCBeingFullOfEggs():void {
+public function emberBitchesAboutPCBeingFullOfEggs():void {
 	clearOutput();
 	outputText("As you try and think of a topic to talk about, you realize Ember is staring at your egg-swollen stomach - not with anger or disdain, but with interest.  With a smirk, you place one hand on your belly and ask if " + emberMF("he","she") + " finds you interesting to look at like this.");
 	outputText("\n\n\"<i>Huh?  I wasn't staring!  Who would find a bunch of your unfertilized eggs interesting?</i>\" Ember blurts out, averting her gaze.");
@@ -1205,7 +1205,7 @@ function emberBitchesAboutPCBeingFullOfEggs():void {
 
 //Occurs if PC spends too much time at 100 Lust.
 //counter triggered when PC starts an hour in camp at 100 Lust, output when reaching 10 counters
-function emberBitchesAtYouAboutLustiness():void {
+public function emberBitchesAtYouAboutLustiness():void {
 	outputText("\nYou strive to keep your mind focused, but... your libido is screaming at you, ");
 	if(player.hasCock()) {
 		outputText("your " + num2Text(player.cockTotal()) + " stiff as iron");
@@ -1227,7 +1227,7 @@ function emberBitchesAtYouAboutLustiness():void {
 //This scene only appears if the player is suffering from Minotaur Cum addiction, and only before PC develops addicted perk.
 //Output automatically when PC enters camp while conditions are met
 //This should reduce the chance of meeting minotaurs.
-function minotaurJizzFreakout():void {
+public function minotaurJizzFreakout():void {
 	outputText("\nYou try to hold a conversation with Ember, but it's hard for you to concentrate; you keep thinking about the delicious, soul-burning taste of hot, salty minotaur cum, straight from the bull-man's cock.  Inevitably, Ember asks you what the matter is and, salivating, you paint the picture for her.");
 	outputText("\n\nEmber suddenly throws back " + emberMF("his","her") + " head with a terrible roar of fury that rattles the very rocks underfoot.  \"<i>I'll kill them!  I'll bash their brains out - I'll rip off their stinking hairy hides!  I'll gorge myself on their flesh and pick my teeth with their horns!  Nobody will poison you like that - nobody!</i>\"");
 	outputText("\n\nBefore you can do anything, the livid dragon spreads " + emberMF("his","her") + " wings.  \"<i>When I return I will watch you carefully, to see that you beat this... addiction.</i>\" " + emberMF("He","She") + " flies away, heading in the direction of the mountains.  You've never seen " + emberMF("him","her") + " so mad before...");
@@ -1239,7 +1239,7 @@ function minotaurJizzFreakout():void {
 //Scene 
 //This plays automatically when the PC gets over " + emberMF("his","her") + " temporary addiction to minotaur cum
 //Normal note for PC getting over mino cum addiction plays first
-function emberGetOverFreakingOutAboutMinoJizz():void {
+public function emberGetOverFreakingOutAboutMinoJizz():void {
 	flags[EMBER_CURRENTLY_FREAKING_ABOUT_MINOCUM] = 0;
 	outputText("\nYou should probably let Ember know that you are no longer plagued by thoughts of minotaurs... if only to prevent ecological collapse.  Fortunately enough, you find " + emberMF("him","her") + " landing in front of " + emberMF("his","her") + " den just then.  " + emberMF("he","she") + " throws another minotaur's skull on the smallest pile, then turns to face you.  \"<i>What's got you so cheerful?</i>\" " + emberMF("he","she") + " asks.");
 	
@@ -1282,7 +1282,7 @@ function emberGetOverFreakingOutAboutMinoJizz():void {
 //Drinking only a bit will boost 3 of the PC's status randomly (Strength, Toughness, Intelligence, Speed), a random amount between 1-5.
 //Drinking more blood, will in addition to the status boost, TF the player into a dragon, gaining the respective skills that come attached to each part.
 //PCs that are dragony enough might be bestowed with Tainted Ember's signature breath weapon.
-function bloodForTheBloodGod():void {
+public function bloodForTheBloodGod():void {
 	clearOutput();
 	outputText("You ask Ember if " + emberMF("he","she") + " would be willing to give you a taste of " + emberMF("his","her") + " blood, desirous of the power that lies within it.");
 	//(If Ember hasn't recovered from the last time " + emberMF("he","she") + " shared her blood)
@@ -1330,7 +1330,7 @@ function bloodForTheBloodGod():void {
 }
 
 //[=Stop=]
-function noMoDagronBlud():void {
+public function noMoDagronBlud():void {
 	clearOutput();
 	if(emberAffection() < 75) {
 		outputText("You decide to stop for now and pull away.  Ember licks " + emberMF("his","her") + " own wound " + emberMF("him","her") + "self and you thank " + emberMF("him","her") + " for sharing.");
@@ -1344,7 +1344,7 @@ function noMoDagronBlud():void {
 	doNext(13);
 }
 
-function drinkDeeplyOfDagronBlud():void {
+public function drinkDeeplyOfDagronBlud():void {
 	clearOutput();
 	if(emberAffection() < 75) {
 		outputText("You decide to continue drinking Ember's blood; intent on acquiring all the power it can bring out from within you.");
@@ -1364,7 +1364,7 @@ function drinkDeeplyOfDagronBlud():void {
 }
 
 //TF messages (Z)
-function emberTFs():void {
+public function emberTFs():void {
 	var changes:int = 0;
 	var changeLimit:int = 2;
 	//Gain Dragon Dick 
@@ -1624,7 +1624,7 @@ Miss: Unfortunately, you lose your sense of depth as you whirl, and the tip swin
 //Get Egg (Ovilixer Ember) (Z)
 //Spying or watching Ember lay, increases lust by a small amount, while helping Ember lay, increases lust by a moderate amount.
 //Player always gets the egg.
-function emberIsAnEggFactory():void {
+public function emberIsAnEggFactory():void {
 	clearOutput();
 	outputText("You ask Ember if she would be willing to lay an egg for you.");
 	//(Low Affection)
@@ -1715,7 +1715,7 @@ function emberIsAnEggFactory():void {
 }
 
 //[Fob Off]
-function dontWatchEmberLayEgg():void {
+public function dontWatchEmberLayEgg():void {
 	clearOutput();
 	outputText("You take her hand and tell her that you wouldn't dream of intruding on her privacy, but ask her to think of you if she needs the inspiration.  She looks away shyly, and the barest hint of a smile breaks on her face.  Seems like she's already following your instructions.");
 	outputText("\n\nShe sashays off, with a sheen of moisture between her thighs, and you seat yourself on a rock to await the result.  Over thirty minutes later, the panting dragon reappears and hands you an egg, still sticky.");
@@ -1728,7 +1728,7 @@ function dontWatchEmberLayEgg():void {
 }
 
 //[Watch]
-function watchMediumAffectionEmberEggLay():void {
+public function watchMediumAffectionEmberEggLay():void {
 	clearOutput();
 	outputText("Ember fails to hide her arousal when you accept.  \"<i>Okay, then follow me.</i>\"  The two of you move into a secluded spot.  Once she is certain nobody is around to spy, Ember turns to face you");
 	//(if Ember has a cock:
@@ -1777,7 +1777,7 @@ function watchMediumAffectionEmberEggLay():void {
 }
 
 //Get Milk 
-function getMilkFromEmber():void {
+public function getMilkFromEmber():void {
 	clearOutput();
 	outputText("You think for a few moments, then find your gaze drawn to Ember's round, firm");
 	if(flags[EMBER_ROUNDFACE] == 0) outputText(", scaly");
@@ -2096,7 +2096,7 @@ function getMilkFromEmber():void {
 //Sparring text outputs (Z) (FENCODED TO HERE)
 //PC shouldn't get gems for this fight, XP shouldn't be a problem with the new level scaled encounter system.
 //Winning gets you affection.
-function decideToSparEmbra():void {
+public function decideToSparEmbra():void {
 	clearOutput();
 	outputText("You feel like you could use some practice; just to be ready for whatever you stumble upon when adventuring, and ask Ember how " + emberMF("he","she") + "'d feel about sparring with you.");
 	//(Low Affection)
@@ -2119,7 +2119,7 @@ function decideToSparEmbra():void {
 	startCombat(53);
 }
 
-function beatEmberSpar():void {
+public function beatEmberSpar():void {
 	clearOutput();
 	if(emberAffection() <= 25) {
 		outputText("Ember lies on "+ emberMF("his","her") + " back, while you stand over the defeated dragon triumphantly.  You extend a helping hand, intent on pulling " + emberMF("him","her") + " up, but " + emberMF("he","she") + " bats it away, flinching in shame at "+ emberMF("his","her") + " defeat.");
@@ -2154,7 +2154,7 @@ function beatEmberSpar():void {
 	eventParser(5007);
 }
 
-function loseToEmberSpar():void {
+public function loseToEmberSpar():void {
 	clearOutput();
 	//Low affection
 	if(emberAffection() <= 25) {
@@ -2191,7 +2191,7 @@ function loseToEmberSpar():void {
 //It doesn't make sense to affect Ember's lust due to the nature of the combat, however it IS possible and encouraged to use lust moves when fighting Bimbo or Corrupt Ember.
 
 //PC shouldn't lose their turn for doing this, unless you want to penalize them Fen.
-function emberReactsToLustiness():void {
+public function emberReactsToLustiness():void {
 	//(if PC uses any attack designed to increase Ember's lust)
 	outputText("The dragon moans, weaving softly from side to side, eyes glazed and tongue lolling at the intimate prospect of sex... but then, to your surprise, " + emberMF("he","she") + " visibly shakes it off and recomposes " + emberMF("him","her") + "self, frowning at you.");
 	outputText("\n\n\"<i>W-what do you think you're doing!?  I'm not some ordinary monster!  Don't think you can seduce me out of a battle!</i>\"");
@@ -2204,7 +2204,7 @@ function emberReactsToLustiness():void {
 }
 
 //Ember Attacks:
-function emberAttack():void {
+public function emberAttack():void {
 	//Basic attack, average damage, average accuracy
 	outputText("With a growl, the dragon lashes out in a ferocious splay-fingered slash, "+ emberMF("his","her") + " claws poised to rip into your flesh.  ");
 	//Blind dodge change
@@ -2226,7 +2226,7 @@ function emberAttack():void {
 }
 
 //Dragon Breath: Very rare attack, very high damage
-function embersSupahSpecialDragonBreath():void {
+public function embersSupahSpecialDragonBreath():void {
 	if(monster.hasStatusAffect("Blind") >= 0 && rand(2) == 0) {
 		//Blind Ember: 
 		outputText("The blinded dragon tracks you with difficulty as you sprint around the landscape; seeing an opportunity, you strafe around " + emberMF("his","her") + " side, planting yourself behind a large flat boulder near " + emberMF("him","her") + " and pelting " + emberMF("him","her") + " with a small rock.  The scream as the dragon turns the magical conflagration toward you, only to have it hit the rock and blow up in " + emberMF("his","her") + " face, is quite satisfying.");
@@ -2247,7 +2247,7 @@ function embersSupahSpecialDragonBreath():void {
 }
 
 //Tailslap: Rare attack, high damage, low accuracy
-function emberTailSlap():void {
+public function emberTailSlap():void {
 	//Blind dodge change
 	if(monster.hasStatusAffect("Blind") >= 0) {
 		outputText(monster.capitalA + monster.short + " completely misses you with a blind tail-slap!", false);
@@ -2271,7 +2271,7 @@ function emberTailSlap():void {
 }
 		
 //Dragon Force: Tainted Ember only
-function dragonFarce():void {
+public function dragonFarce():void {
 	//Effect: Stuns the PC for one turn and deals some damage, not much though. (Note: PC's version of this does something different and Ember has no cooldown to use this again. Obviously do not spam or peeps will rage.)
 	//Description:
 	outputText("Ember bares "+ emberMF("his","her") + " teeth and releases a deafening roar; a concussive blast of force heads straight for you!");
@@ -2288,7 +2288,7 @@ function dragonFarce():void {
 	combatRoundOver();
 }
 
-function emberAI():void {
+public function emberAI():void {
 	if(monster.lust >= 40) {
 		emberReactsToLustiness();
 		return;
@@ -2309,7 +2309,7 @@ function emberAI():void {
 
 
 //[Catch Anal] - a dragon coq up the date (Z)
-function catchAnal():void {
+public function catchAnal():void {
 	clearOutput();
 	outputText("You contemplate Ember's somewhat dominant streak in bed and ask if " + emberMF("he","she") + " feels in the mood to ride your ass.");
 	//(Low affection)
@@ -2450,7 +2450,7 @@ function catchAnal():void {
 	doNext(13);
 }
 //[Blow Ember] - your shipment of dragon dildoes has arrived
-function suckEmberCock():void {
+public function suckEmberCock():void {
 	clearOutput();
 	outputText("You stare at Ember's crotch, imagining the taste of draconic cum on your tongue.  The thought makes you lick your lips in eagerness, and you ask if Ember would enjoy having you suck on " + emberMF("his","her") + " cock.");
 	
@@ -2552,7 +2552,7 @@ function suckEmberCock():void {
 }
 
 //Get Blown - put your dick in the knife drawer, it'll be fun! (Z, with reservation)
-function stickDickInKnifeDrawer():void {
+public function stickDickInKnifeDrawer():void {
 	clearOutput();
 	outputText("Trying to appear confident and a little aloof, you suggest that maybe Ember would be willing to put " + emberMF("his","her") + " kinky tongue to work on your cock.");
 	
@@ -2663,7 +2663,7 @@ function stickDickInKnifeDrawer():void {
 
 
 //Pitch Anal - horses are terrible people, so no centaurs unless rewritten (Z)
-function stickItInEmbersButt():void {
+public function stickItInEmbersButt():void {
 	clearOutput();
 	outputText("Your eyes are drawn to Ember's butt like iron filings to a magnet.  Haunted by the temptation to see " + emberMF("him","her") + " bent over and offering " + emberMF("his","her") + " ass to your hungry touch, you ask if Ember would be willing to be the catcher in a bout of anal sex.");
 	
@@ -2815,7 +2815,7 @@ function stickItInEmbersButt():void {
 }
 
 //Eat Ember Out - b-baka! (Z)
-function slurpDraggieCunnies():void {
+public function slurpDraggieCunnies():void {
 	clearOutput();
 	outputText("You contemplate the possibilities, and then offer to get down on your knees before the dragon and pleasure her orally.  You would love to have a taste of some dragon juice.");
 	
@@ -2894,7 +2894,7 @@ function slurpDraggieCunnies():void {
 }
 
 //Get Eaten Out - actually halfway likeable 
-function getEatenOutByEmbra():void {
+public function getEatenOutByEmbra():void {
 	clearOutput();
 	outputText("You think about Ember's long tongue and the many advantages it must have, when you suddenly get an idea of what you'd like to do. You ask Ember if " + emberMF("he","she") + "'d be willing to put that tongue of " + emberMF("his","hers") + " to use and eat you out.");
 	//(Low Affection)
@@ -2960,7 +2960,7 @@ function getEatenOutByEmbra():void {
 }
 
 //Penetrate Her - seems not to accommodate centaurs, more's the pity (Z)
-function penetrateEmbrah():void {
+public function penetrateEmbrah():void {
 	clearOutput();
 	//Besides emptying the PC's lust, this scene is also capable of increasing Cum output, I'll leave the decision of how much and how far the threshold should go to you Fen.
 	//Don't know if you should make this increase libido. Probably not unless one of Ember's scenes is able to reduce it as well
@@ -3148,7 +3148,7 @@ function penetrateEmbrah():void {
 }
 
 //PART II!
-function penetrateEmbrahPartII():void {
+public function penetrateEmbrahPartII():void {
 	clearOutput();
 	outputText("You wake up to find Ember's face hovering over you with a smile; once she realizes you're awake, she quickly averts her gaze.");
 	outputText("\n\n\"<i>Oh, good!  You finally woke up!  Now, let's hear your excuse for your lack of self-control; I'm going to be sore down there for a while, thanks to you!</i>\" Ember scolds you, snorting a small puff of smoke.");
@@ -3175,7 +3175,7 @@ function penetrateEmbrahPartII():void {
 }
 
 //Get Penetrated - also horse-proof, sorry folks! (Z)
-function getPenetratedByEmberLastSexSceneWoooo():void {
+public function getPenetratedByEmberLastSexSceneWoooo():void {
 	clearOutput();
 	outputText("Your eyes are drawn to the 16 inches of cool, throbbing ");
 	if(flags[EMBER_ROUNDFACE] == 0 || flags[EMBER_INTERNAL_DICK] > 0) outputText("dragon");
@@ -3280,7 +3280,7 @@ function getPenetratedByEmberLastSexSceneWoooo():void {
 	doNext(getPenetratedByEmberLastSexSceneWooooPartII);
 }
 //Part II
-function getPenetratedByEmberLastSexSceneWooooPartII():void {
+public function getPenetratedByEmberLastSexSceneWooooPartII():void {
 	clearOutput();
 	outputText("You manage to wake up before your sleeping draconic lover; it seems at some point in " + emberMF("his","her") + " sleep Ember saw it fit to wrap you tightly in " + emberMF("his","her") + " arms, tail and even legs.  You snuggle deeper into the dragon's embrace and enjoy it; " + emberMF("he","she") + "'s usually too emotionally cowardly to treat you like this.  Unfortunately the embrace doesn't last long... Ember soon wakes up, yawning groggily and slowly disentangling " + emberMF("him","her") + "self in order to stretch.  The dragon's face lights in pain and " + emberMF("he","she") + " quickly moves " + emberMF("his","her") + " hand to hold " + emberMF("his","her") + " crotch.");
 	outputText("\n\n\"<i>Ow...</i>\"  Ember looks at you accusingly.  \"<i>I feel sore all over... especially down here...</i>\" Ember says, massaging " + emberMF("his","her") + " ");
@@ -3317,7 +3317,7 @@ function getPenetratedByEmberLastSexSceneWooooPartII():void {
 	//PC not pregnant, Ember has dick, PC is in heat.
 	//Male scene
 	//PC has dick, ember not pregnant, PC is in rut*/
-function emberRapesYourHeatness():void {
+public function emberRapesYourHeatness():void {
 	outputText("\nA pair of scaly, clawed hands suddenly grab your [hips] and you feel Ember take a big whiff of your scent. \"<i>So good... you smell so good, y'know [name]?</i>\"");
 	
 	outputText("\n\nYou don't even start at " + emberMF("his","her") + " actions; all you can think of is the deep need burning in your crotch, ");
@@ -3338,7 +3338,7 @@ function emberRapesYourHeatness():void {
 }
 
 //[=Deny=]
-function fuckOffEmberIWantANap():void {
+public function fuckOffEmberIWantANap():void {
 	clearOutput();
 	stats(0,0,0,0,0,0,10 + player.lib/10,0);
 	outputText("Oh, your ");
@@ -3362,7 +3362,7 @@ function fuckOffEmberIWantANap():void {
 }
 	
 //[=Accept=]
-function timeToPuffTheMagicDragon():void {
+public function timeToPuffTheMagicDragon():void {
 	clearOutput();
 	outputText("Dazed and befuddled, you sniff Ember right back.  Mmm... " + emberMF("He","She") + " smells delicious too, you tell " + emberMF("him","her") + ".");
 	outputText("\n\n\"<i>I know, rrrrriggghhht?</i>\" Ember purrs in your ear, stealing a teasing lick. \"<i>Oh by Marae, take off your [armor] and let's do it!  I don't care if we're in the middle of the camp!</i>\"");
@@ -3394,7 +3394,7 @@ function timeToPuffTheMagicDragon():void {
 //Only occurs if the PC has a pussy and is in heat; Ember must have a dick; both must not be pregnant.
 //In case Ember and the PC are herms, both being able to impregnate and be impregnated. One of the scenes will be randomly choosen.
 //Ember never fails to impregnate the PC or be impregnated.
-function getKnockedUpByEmbrahBroBaby():void {
+public function getKnockedUpByEmbrahBroBaby():void {
 	clearOutput();
 	outputText("Ember grabs you and rolls you around, pinning you under " + emberMF("his","her") + " weight, whilst kissing you.  You allow the dragon to press you into the ground, rubbing your hands across ");
 	if(flags[EMBER_GENDER] == 1) outputText("his flat, muscular chest");
@@ -3485,7 +3485,7 @@ function getKnockedUpByEmbrahBroBaby():void {
 	doNext(3777);
 }
 //Breeding Ember 
-function breedEmberPregnantAsIfThereWasAnyOtherKindOfBreeding():void {
+public function breedEmberPregnantAsIfThereWasAnyOtherKindOfBreeding():void {
 	clearOutput();
 	//Silently steal her virginity.
 	flags[EMBER_PUSSY_FUCK_COUNT]++;
@@ -3588,7 +3588,7 @@ function breedEmberPregnantAsIfThereWasAnyOtherKindOfBreeding():void {
 }
 
 //Bred/Breeding Aftermath 
-function emberBreedingAfterMathWatchOutForRadioactiveFallout(emberPregged:Boolean = true):void {
+public function emberBreedingAfterMathWatchOutForRadioactiveFallout(emberPregged:Boolean = true):void {
 	clearOutput();
 	var x:int = player.cockThatFits(emberVaginalCapacity());
 	if(x < 0) x = player.smallestCockIndex();
@@ -3639,7 +3639,7 @@ function emberBreedingAfterMathWatchOutForRadioactiveFallout(emberPregged:Boolea
 	doNext(1);
 }
 
-function emberPregUpdate():Boolean {
+public function emberPregUpdate():Boolean {
 	//trace("EMBER PREG: " + flags[EMBER_INCUBATION] + "EMBER AFF: " + emberAffection());
 	var pregText = "";
 	if(flags[EMBER_INCUBATION] <= 0) return false;
@@ -3740,7 +3740,7 @@ function emberPregUpdate():Boolean {
 }
 
 
-function emberGivesBirth():void {
+public function emberGivesBirth():void {
 	//Ember Gives Live Birth 
 	if(flags[EMBER_OVIPOSITION] == 0) {
 		outputText("\nA roar interrupts your daily routine and you quickly run to check its source.  You see Ember doubling over and sitting inside her den, her face twisted in pain. She suddenly looks up at you.");
@@ -3863,7 +3863,7 @@ function emberGivesBirth():void {
 }
 
 
-function giveBirthToEmberKids():void {
+public function giveBirthToEmberKids():void {
 	var roll:int = rand(100);
 	outputText("\n");
 	//PC Gives Live Birth 
@@ -4022,7 +4022,7 @@ function giveBirthToEmberKids():void {
 
 //Note: This scene is meant for Tainted Ember after you've been through the lost dragon city dungeon. While we do not have the dungeon and post-quest Ember, this scene may be accessed from regular Ember's pool of scenes if her affection is High.
 
-function highAffectionEmberLustFuck():void {
+public function highAffectionEmberLustFuck():void {
 	clearOutput();
 	var x:int = player.cockThatFits(emberVaginalCapacity());
 	if(x < 0) x = player.smallestCockIndex();
@@ -4317,7 +4317,7 @@ function highAffectionEmberLustFuck():void {
 //[=No=]
 //Less time used (Only 1 hour.)
 //Fatigue stays gained, whereupon it's lost if PC stays and rests? (Sure!)
-function noStayingForCuddlesPostLustFuck():void {
+public function noStayingForCuddlesPostLustFuck():void {
 	clearOutput();
 	outputText("You tell Ember that you can't stay, you have to get going now.  " + emberMF("He","She") + " looks a bit disappointed, but forces " + emberMF("him","her") + "self to smile all the same.  \"<i>I understand, you have other things to do... just know that I'll always be here for you, for better or worse.</i>\"  You ");
 	//50 or less Corruption:
@@ -4328,7 +4328,7 @@ function noStayingForCuddlesPostLustFuck():void {
 }
 
 //[=Yes=]
-function stayWithEmberAfterLustFuck():void {
+public function stayWithEmberAfterLustFuck():void {
 	clearOutput();
 	var x:int = player.cockThatFits(emberVaginalCapacity());
 	if(x < 0) x = player.smallestCockIndex();
@@ -4374,21 +4374,21 @@ function stayWithEmberAfterLustFuck():void {
 }
 
 //[=Frotting=]
-function frottingWithFrottingEmberHerm():void {
+public function frottingWithFrottingEmberHerm():void {
 	clearOutput();
 	outputText("You think the matter over, and then slowly rub your [cock biggest] against Ember's to answer her question.  The dragon-herm gasps, then smiles lewdly at you.");
 	frottingWithEmber(false);
 }
 
 //[=Penetrate=]
-function penetrateEmberHerm():void {
+public function penetrateEmberHerm():void {
 	clearOutput();
 	outputText("You decide you'd rather use her once more, so you finger her pussy once more.  \"<i>Ooh... go ahead, I belong to you, my mate,</i>\" she says, opening her legs slightly to give you better access.  You slide yourself around to properly position yourself at her entrance, and then hold yourself there, ready to begin.");
 	penetrateWithEmber(false);
 }
 
 //Frotting:
-function frottingWithEmber(clear:Boolean = true):void {
+public function frottingWithEmber(clear:Boolean = true):void {
 	if(clear) clearOutput();
 	else outputText("\n\n");
 	outputText("Ember thrusts against your shaft, the ridges of " + emberMF("his","her") + " dick stimulate your " + cockDescript(x) + " and you moan at the feeling.  \"<i>Come on, [name].  Are you going to make me do all the work?</i>\" " + emberMF("he","she") + " teases you.  You slowly stroke your shaft against " + emberMF("his","hers") + ", asking just what " + emberMF("he","she") + " has in mind; wasn't " + emberMF("he","she") + " planning on taking a breather?");
@@ -4430,7 +4430,7 @@ function frottingWithEmber(clear:Boolean = true):void {
 }
 	
 //Penetrate:
-function penetrateWithEmber(clear:Boolean = true):void {
+public function penetrateWithEmber(clear:Boolean = true):void {
 	if(clear) clearOutput();
 	else outputText("\n\n");
 	var x:int = player.cockThatFits(emberVaginalCapacity());
@@ -4494,7 +4494,7 @@ function penetrateWithEmber(clear:Boolean = true):void {
 }
 
 //Frotting and Penetrate connect here.
-function emberJizzbangbangEnding():void {
+public function emberJizzbangbangEnding():void {
 	clearOutput();
 	outputText("You moan as consciousness returns, dimly aware of something wet and cool wrapped around your dick, something firm and muscular wrapped around and squeezing you in the most pleasant of ways.  You open your eyes and sit up, allowing you to see Ember kneeling before you, mouth wrapped eagerly around your cock.");
 	

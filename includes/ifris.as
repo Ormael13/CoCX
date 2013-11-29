@@ -1,6 +1,6 @@
 //Hours - 15+
 
-function ifrisIntro():Boolean {
+public function ifrisIntro():Boolean {
 	if(model.time.hours >= 15) {
 		if(flags[MET_IFRIS] > 0) outputText("\n\nIfris is standing in the corner of the room, wearing her usual black bikini and eyeing you as soon as you walk in.", false);
 		else outputText("\n\nIn the corner of the room stands a lone figure, her bright cherry-red skin making her stand out.  A long, spaded tail swishes behind her slowly, the length much thicker than most demon tails you've seen.  She couldn't be more than five feet tall, her slender, lithe form looking more athletic than muscular.  A black bikini covers just enough to be modest, her supple C-cup breasts more perky than they have a right to be.  She slowly rolls a lock of springy, curly hair around one index finger, her glowing crimson gaze set on a nearby weight-lifting machine incredulously.  Feeling your eyes on her glistening, oiled skin, she slowly turns them to you instead.", false);
@@ -11,7 +11,7 @@ function ifrisIntro():Boolean {
 }
 
 //2-Approach and Greeting-
-function approachIfris():void {
+public function approachIfris():void {
 	spriteSelect(28);
 	outputText("", true);
 	if(flags[MET_IFRIS] == 0) {
@@ -46,7 +46,7 @@ function approachIfris():void {
 	simpleChoices("Work Out",workOutForIfris,"Join Me?",askIfrisToJoinYou,"",0,"",0,"Leave",gymDesc);
 }
 //3a-PC responds they want to work out-
-function workOutForIfris():void {
+public function workOutForIfris():void {
 	spriteSelect(28);
 	outputText("", true);
 	if(player.fatigue > 70) {
@@ -63,7 +63,7 @@ function workOutForIfris():void {
 	simpleChoices("Work Out",liftWhileIfrisWatches,"Show Off",showOffForIfris,"",0,"",0,"",0);
 }
 //3b-PC asks if she'd like to join them-
-function askIfrisToJoinYou():void {
+public function askIfrisToJoinYou():void {
 	spriteSelect(28);
 	outputText("", true);
 	if(player.fatigue > 70) {
@@ -81,7 +81,7 @@ function askIfrisToJoinYou():void {
 }
 
 //4a-PC does a modest work out-
-function liftWhileIfrisWatches():void {
+public function liftWhileIfrisWatches():void {
 	spriteSelect(28);
 	flags[IFRIS_SHOWED_OFF]++;
 	outputText("", true);
@@ -106,7 +106,7 @@ function liftWhileIfrisWatches():void {
 	doNext(13);
 }
 //4b-PC decides to show off, possible strength requirement?-
-function showOffForIfris():void {
+public function showOffForIfris():void {
 	spriteSelect(28);
 	flags[IFRIS_SHOWED_OFF]++;
 	fatigue(30);
@@ -253,7 +253,7 @@ function showOffForIfris():void {
 }
 
 //Ifrs double-penetrates herself on you while you work out.
-function ifrisDP():void {
+public function ifrisDP():void {
 	outputText("You set the machine to an impressive weight that you're sure you can handle and set to work, your muscles rippling and tightening as they repeatedly raise and lower the weight for the demonic-looking woman's amusement.  Feeling Ifris' glowing, crimson visage devouring in your workout, you push yourself harder, working up a sheen of sweat that drips from your body.  Your arms haven't yet begun to burn, but deep inside your chest, your heart is beating faster, either from the oiled gym-junky's gaze or the constant, heavy lifting - perhaps both.\n\n", false);
 	outputText("With the first set finished, you lower the bar until the weight is released from your well-developed musculature.  The demonic beauty is leaning down, over your " + chestDesc() + ", drinking in every sweat-slicked part of you.  With her breasts wobbling dangerously, her glossy, dark lips slowly part to blow you a kiss.  Then, the onyx pillows open to purr, \"<i>Mmmm... marvelous work darling.</i>\"  She leans a little lower, letting her slick breasts rub over the crotch of your " + player.armorName + " as she asks, \"<i>Do you think... you could lift more?  Enough to truly handle anything the world might throw at you?</i>\"  Ifris trails her fingers over your " + player.armorName + ", slowly undoing the equipment with each enunciated syllable.\n\n", false);
 	

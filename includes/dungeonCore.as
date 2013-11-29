@@ -1,4 +1,4 @@
-﻿function dungeonRoom(roomNo:Number):void {
+﻿public function dungeonRoom(roomNo:Number):void {
 	//Dungeon Choices!
 	var choice1:Number = 0;
 	var text1:String = "";
@@ -932,7 +932,7 @@
 	choices(text1,choice1,text2,choice2,text3,choice3,text4,choice4,text5,choice5,text6,choice6,text7,choice7,text8,choice8,"Items",itemMenu,"Masturbate",masturbateMenu);
 }
 
-function factoryFinisher():void {
+public function factoryFinisher():void {
 	outputText("", true);
 	outputText("You crack your sleep-fuzzed eyes, blinking at the sudden light as you try to get your bearings and remember where you are.  A nearby voice is moaning like a bitch in heat, or a drunk slut.  You giggle a bit at the thought as you work at focusing your eyes.  You feel warm and happy, particularly in your chest and groin.  The cobwebs of sleep clear from your mind with agonizing slowness, but you find it hard to worry about with how warm and wonderful you feel.  It's almost like hot wet mouths are latched onto your crotch and breasts, licking and sucking in perfect rhythm.  ", false);
 	if(player.cocks.length == 0 || player.biggestTitSize() <= 1) {
@@ -967,7 +967,7 @@ function factoryFinisher():void {
 	eventParser(5035);
 }
 
-function succubusLossRape():void {
+public function succubusLossRape():void {
 	outputText("", true);
 	if(player.cocks.length > 0) {
 		if(player.lust > 99) outputText("Driven half mad with lust, you drop to your knees. Your fingers fly over your body as you pry off every last piece of your " + player.armorName + ", displaying just how hard your alluring opponent has gotten you.  The succubus saunters over, every sinuous step radiating the inhuman sexuality that pours off her skin like heat from a bonfire.\n\n", false);
@@ -1029,7 +1029,7 @@ function succubusLossRape():void {
 		doNext(11025);
 	}
 }
-function succubusVictoryRape():void {
+public function succubusVictoryRape():void {
 	slimeFeed();
 	outputText("", true);
 	//MALE
@@ -1106,7 +1106,7 @@ function succubusVictoryRape():void {
 		}
 	}
 }
-function dungeonSuccubusForceScissor():void {
+public function dungeonSuccubusForceScissor():void {
 	outputText("You shiver with anticipation as you hook your leg under her thick thighs, lining up your " + vaginaDescript(0) + " as you press forwards.  The anticipation builds as your matched honeypots grow ever closer.  Making contact, your folds part as her purplish-red clit slips betwixt your nether-lips, vibrating slightly in tune with the succubus' heartbeats.  You gasp, feeling your own " + clitDescript() + " erecting and rubbing against her smooth mound.\n\n", false);
 	if(player.clitLength >= 3) outputText("You groan with wanton desire as your " + clitDescript() + " continues to grow and grow until reaching full size and slipping inside the defeated slut's sloppy pleasure-hole.  ", false);
 	outputText("It takes only a few seconds to get the succubus' juices really flowing, the sounds of your grinding hips dissolving into a cacophony of liquid squelches.  The gooey corrupt fem-cum tingles, spreading warmth through every patch of skin it touches.  Your locked hips writhe and twist with her's, eliciting pants and squeals from the both of you.  In no time flat, you find yourself cumming and feel your " + vaginaDescript(0) + "'s muscles clench hungrily with an unquenchable desire to be filled.  The succubus shivers in pleasure, probably feeding off your orgasm.  You back off, fingering your " + vaginaDescript(0) + " languidly and denying her a full meal.  Pouting, the succubus dips her fingers back in, determined to cum.", false);
@@ -1115,7 +1115,7 @@ function dungeonSuccubusForceScissor():void {
 	eventParser(5007);
 }
 
-function dungeonSuccubusForceFeed():void {
+public function dungeonSuccubusForceFeed():void {
 	outputText("", true);
 	outputText("You chuckle as you decide to release some of the pent up pressure in your " + allBreastsDescript() + ".  Laying down over your conquest, you grasp her wrists and pin them to the floor as you shove your tits in her face", false);
 	if(player.biggestTitSize() > 6) outputText(", nearly smothering the succubus with the swell of tit-flesh", false);
@@ -1163,7 +1163,7 @@ function dungeonSuccubusForceFeed():void {
 	stats(0,0,0,0,0,0,-50,0);
 	eventParser(5007);
 }
-function incubusLossRape():void {
+public function incubusLossRape():void {
 	slimeFeed();
 	outputText("", true);
 	//Nipplefuck city
@@ -1261,7 +1261,7 @@ function incubusLossRape():void {
 	}
 }
 
-function incubusVictoryRapeBackdoor():void {
+public function incubusVictoryRapeBackdoor():void {
 	outputText("Every day you've spent in this corrupted landscape has made you stronger and hornier, the evidence of which now kneels at your feet.\n\n", true);
 	outputText("The fight over, your eyes begin to wander. You find you cannot resist staring at the huge swinging cock exposed by the incubus' crotchless overalls. The sight ignites desire that has been building within you ever since you arrived in this corrupted land. With an unnatural hunger, you knock the defeated incubus onto his back. He closes his eyes and groans, lost in his own world of lust and pain and unable to resist as you wantonly straddle him. His tool is hot in your hand as you tease it and his cock begins to grow slick with pre-cum. You lick your lips at the sight of his now glistening member, but not for hunger of food or drink. It is another kind of hunger that longs for satisfaction, a hole that needs to be filled. Eagerly, you position his swollen glans against your " + assholeDescript() + " and begin to ease yourself down over the massive tool. You start slowly, but the pleasure it's giving feels so good you ram the rest of the incubus' cock deep into your " + assholeDescript() + ".  ", false);
 	outputText("His eyes flash open as if you'd just sent a jolt of electricity through him and he regains his senses, becoming hyper-aware of what you're doing. The incubus instinctively moves to control your " + hipDescript() + " and " + buttDescript() + " as they grind against him, guiding his cock towards pleasurable areas up your " + assholeDescript() + " that you would never have guessed were there a short while ago.\n\n", false);
@@ -1272,7 +1272,7 @@ function incubusVictoryRapeBackdoor():void {
 	stats(0,0,0,0,0,0,-100,2);
 	eventParser(5007);
 }
-function incubusVictoryRapeSex():void {
+public function incubusVictoryRapeSex():void {
 	outputText("", true);
 	//RAPE THE DEMON -
 	//(BUTTRAPE - Requires Penis)
@@ -1343,7 +1343,7 @@ function incubusVictoryRapeSex():void {
 
 
 //Service the incubus after winning (WHY DO THIS?  BECAUSE ITS HOT!)
-function incubusVictoryService():void {
+public function incubusVictoryService():void {
 	slimeFeed();
 	outputText("", true);
 	outputText("You lick your lips, moistening them as you decide that the demon will provide your next 'snack'.  Touching the defeated incubus' soft skin, you grab him by the wrists and yank him to his clawed feet. Leaning him back against the wall as he sways unsteadily, you tenderly slide down his body and take the measure of his monstrous meat with your hands. The smooth skin and tiny bumps slide between each finger as his manhood firms and twitches in response.  You glance up and grab his baseball size nuts, caressing the smooth hairless sack that contains them, watching the demon-man sigh and relax with equal parts desire and relief.\n\n", false);
@@ -1356,7 +1356,7 @@ function incubusVictoryService():void {
 	eventParser(5007);
 	return;
 }
-function omnibusVictoryEvent():void {
+public function omnibusVictoryEvent():void {
 	outputText("", true);
 	if(monster.lust > 99) {
 		outputText("The omnibus trembles where she stands, her proud demonic dick twitching and pulsating as her desires totally overwhelm her.  The tainted nodules covering the purplish hermaphrodite's member ripple and swell from the base towards the tip, culminating with an explosive eruption of sticky, white demon-seed.  She moans with shame and pleasure, pumping larger and larger volumes of cum onto her office's floor.  She drops to her knees, too exhausted and ashamed by her premature orgasm to continue fighting.\n\n", false);
@@ -1369,7 +1369,7 @@ function omnibusVictoryEvent():void {
 	outputText("What do you do?  You could use her boon increase the size of your endowments or maybe regain some of your lost humanity!  Or you could play it safe and turn down her offer.  Although then you'd have to decide to let her go or kill her.", false);
 	choices("GrowBreasts",11048,"GrowDick",11049,"Normal-Face",11050,"Normal-Chest",11051,"Normal-Groin",11052,"Normal-Legs",11053,"",0,"",0,"No (Let go)",11054, "No (Kill Her)",11056);
 }
-function omnibusLossRape():void {
+public function omnibusLossRape():void {
 	outputText("", true);
 	if(player.HP < 1) outputText("You stagger into the desk, clutching tightly just to stay upright.  ", false);
 	else outputText("Forgetting about the fight, you lean on the desk and slide your free hand under your " + player.armorName + ", seeking any pleasure you can get.  ", false);
@@ -1382,7 +1382,7 @@ function omnibusLossRape():void {
 	outputText(" She opens one of the desk drawers, and searches briefly before her eyes light up with recognition.  \"<i>Here we are,</i>\" she says as she pulls something free...", false);
 	doNext(11047);
 }
-function omnibusLossRape2():void {
+public function omnibusLossRape2():void {
 	outputText("", true);
 	//(Multi dicks)
 	if(player.cocks.length > 1) {
@@ -1521,7 +1521,7 @@ function omnibusLossRape2():void {
 	}
 }
 //[Turn Demon]
-function demonBadEnd():void {
+public function demonBadEnd():void {
 	outputText("", true);
 	outputText("Advancing slowly, the succubus gives you a hungry look.  She extends a hand, allowing her fingers to lengthen into razor-sharp claws.  With a single expert slash, she cuts away everything holding together your " + player.armorName + ".  They fall into a discarded pile, already forgotten as your ", false);
 	//[genderless]
@@ -1649,7 +1649,7 @@ function demonBadEnd():void {
 	doNext(demonBadEnd2);
 }
 //epilogues
-function demonBadEnd2():void {
+public function demonBadEnd2():void {
 	outputText("", true);
 	if(player.gender == 1) outputText("As a demon, you rapidly moved up the ranks, eventually taking command of the factory and its inhabitants.  The previous commander was reduced to a willing cock-sleeve, ever-eager to obey your slightest order.  By the time the next year has come around, you've managed to earn the coveted honor of collecting the next champion.", false);
 	else if(player.gender == 2) outputText("Now a full-fledged demon, you leave the factory, setting off on your own.  Over the next year you capture many foolish mortals, and even convince more than a few of them to give up their souls.  With your rapid gain in power, it's easy to rise in the demonic ranks, and in no time flat your power far exceeds that of the succubus that 'turned' you.  You live in luxury, surrounded by a harem of slaves, waiting in your camp for the next victim to step through...", false);

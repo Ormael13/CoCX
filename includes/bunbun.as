@@ -1,4 +1,4 @@
-﻿function isEaster():Boolean {
+﻿public function isEaster():Boolean {
 	if((date.date >= 30 && date.date <= 31 && date.month == 2) || (date.month == 3 && date.date <= 1)) return true;
 	return false;
 }
@@ -8,7 +8,7 @@
 //14" Human dick with a pointed head.  A pair of egg-shaped testes.
 //Egg preg changes – Bunny Ears, Bunny Tail, Bunny Legs?, Hot pink nose & whiskers?
 
-function bunnbunbunMeet():void {
+public function bunnbunbunMeet():void {
 	outputText("", true);
 	spriteSelect(13);
 	if(flags[UNKNOWN_FLAG_NUMBER_00132] == 0) {
@@ -72,7 +72,7 @@ function bunnbunbunMeet():void {
 	}
 }
 //[Talk]
-function talkToBunnyBunBun():void {
+public function talkToBunnyBunBun():void {
 	spriteSelect(13);
 	flags[UNKNOWN_FLAG_NUMBER_00132]++;
 	outputText("", true);
@@ -111,7 +111,7 @@ function talkToBunnyBunBun():void {
 	stats(0,0,0,0,0,0,5+player.lib/20,0);
 }
 //[Rape Her]
-function rapeBunBun():void {
+public function rapeBunBun():void {
 	spriteSelect(13);
 	outputText("", true);
 	if(player.spe < 60) {
@@ -158,7 +158,7 @@ function rapeBunBun():void {
 }
 
 //[Take Dick in Vag Fukked]
-function bunbunFucksYourVag():void {
+public function bunbunFucksYourVag():void {
 	spriteSelect(13);
 	outputText("", true);
 	outputText("A anticipatory grin widens across your " + player.face() + " as you speedily disrobe, discarding your " + player.armorName, false);
@@ -242,7 +242,7 @@ function bunbunFucksYourVag():void {
 }
 
 //[Take Dick In A] 
-function bunbunFucksPCInAss():void {
+public function bunbunFucksPCInAss():void {
 	spriteSelect(13);
 	outputText("", true);
 	outputText("You get a very naughty idea and silently discard your " + player.armorName + ", tossing it aside as you turn around and present your " + assDescript() + " to the bunny-girl.  With a lewd shake, you tease her and give her a good view of your " + assholeDescript() + " while it lowers closer and closer to the turgid bunny-cock, just inches away.  Drops of clear pre-cum roll down her shaft as it twitches eagerly, and the girl watches you through a gleam of sexual excitement while her shaft gets closer and closer to your rear entrance.  You let your " + player.legs() + " relax a little until it's pressing tightly against your sphincter, feeling it slather pre-cum in preparation for the coming penetration.\n\n", false);
@@ -333,7 +333,7 @@ function bunbunFucksPCInAss():void {
 }
 
 //FUCK DAT BUNNYBUNBUNBUN.
-function bunbunGetsFucked():void {
+public function bunbunGetsFucked():void {
 	spriteSelect(13);
 	outputText("", true);
 	//Requires wang that fits
@@ -415,7 +415,7 @@ function bunbunGetsFucked():void {
 	takeItem();
 }
 
-function bunbun69():void {
+public function bunbun69():void {
 	spriteSelect(13);
 	outputText("", true);
 	//Centaur
@@ -615,7 +615,7 @@ function bunbun69():void {
 //Bee on Bunny, by Eliria
 //Coded or questionable parts are in {}.
 //Thank you for your time! Scene as follows (also in attachment):
-function layEggsInBunbuns():void {
+public function layEggsInBunbuns():void {
 	clearOutput();
 	outputText("The displayed lapin in front of you has you excited, but not for a simple roll in the grass.  Your ");
 	if(player.eggs() < 20) outputText("eager egg-tube slips free, ready to show the rabbit you can play the egg game too.");
@@ -663,7 +663,7 @@ function layEggsInBunbuns():void {
 }
 
 
-function ovipositBunnyEaster():void {
+public function ovipositBunnyEaster():void {
 	clearOutput();
 	outputText("Smiling a little over-eagerly, you suggest, \"<i>You know, if you really like eggs, I know where you can get a few...</i>\"");
 	outputText("\n\n\"<i>Oh?  Where's that?</i>\" she responds, both her floppy ears standing up stock-straight and quivering with excitement.  She hops over to you, unconsciously letting her dripping phallus bob ponderously with each jump, the inertia turning it into a sexual pendulum of ridiculous, fourteen-inch proportions.  \"<i>Are they behind you?</i>\"");
@@ -716,7 +716,7 @@ function ovipositBunnyEaster():void {
 //Bunny Girl Eggsplosion 
 //Additional, low chance encounter in the plains. Options in parentheses should be adjusted to the following format: (Normal text/ Easter text)
  //-----------
-function adjathaEggsplosions():void {
+public function adjathaEggsplosions():void {
 	clearOutput();
 	outputText("Your trek through the plains is interrupted by a shrill, piercing cry that jolts you out of the daydreams that were floating through your mind.  The piercing wail of a woman in distress grabs your attention and you hurry over the rising hills to the source of the howling bluster.  You weren't sure exactly what to expect, but as the source of the commotion comes into view, you have to admit this wasn't exactly what you thought you'd find.");
 	
@@ -757,7 +757,7 @@ function adjathaEggsplosions():void {
 }
  
 //[Free Her] (Any gender)
-function freeHerOhGodWhyDidYouDoThis():void {
+public function freeHerOhGodWhyDidYouDoThis():void {
 	clearOutput();
 	outputText("Taking a chance, you step up to the wriggling bunny and inspect her bonds.  The girl's body is covered in a ");
 	if(!isEaster()) outputText("sheen of sweat");
@@ -802,7 +802,7 @@ function freeHerOhGodWhyDidYouDoThis():void {
 }
 
 //[Fuck Her] (Male/Futa Only)
-function fuckTheEggBoundBun():void {
+public function fuckTheEggBoundBun():void {
 	clearOutput();
 	outputText("It's not often you find a treat gift wrapped so neatly for you; what kind of ingrate would you be if you just turned it down?  You step up to the wriggling bunny and inspect her carefully.  The girl's body is covered in a ");
 	if(!isEaster()) outputText("sheen of sweat");
@@ -856,7 +856,7 @@ function fuckTheEggBoundBun():void {
 }
 
 //[Get Egged] (Female/Futa only)
-function getEggflated():void {
+public function getEggflated():void {
 	clearOutput();
 	outputText("Deciding it'd be too cruel to leave her like this, you resolve to put the bunny-girl at ease. However, you're not so foolish that you're willing to just untie her - if that hungry look in her eyes is any warning.  Stepping up to the wriggling bunny, you inspect her carefully.  The girl's body is covered in a ");
 	if(!isEaster()) outputText("sheen of sweat");

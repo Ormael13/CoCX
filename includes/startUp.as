@@ -2,7 +2,7 @@
 
 
 //MainMenu - kicks player out to the main menu
-function mainMenu(e:MouseEvent = undefined):void {
+public function mainMenu(e:MouseEvent = undefined):void {
 	mainView.eventTestInput.x = -10207.5;
 	mainView.eventTestInput.y = -1055.1;
 	hideStats();
@@ -45,7 +45,7 @@ function mainMenu(e:MouseEvent = undefined):void {
 import flash.system.SecurityDomain;
 import flash.system.Security;;
 
-function doThatTestingThang():void
+public function doThatTestingThang():void
 {
 
 	// Excercise the parser. This should catch parser regressions, I think.
@@ -235,7 +235,7 @@ function doThatTestingThang():void
 
 }
 
-function startupScreenBody():void
+public function startupScreenBody():void
 {
 
 	// NO FUCKING DECENT MULTI-LINE STRING LITERALS BECAUSE FUCKING STUPID
@@ -287,7 +287,7 @@ Also go play <u><a href='http://www.furaffinity.net/view/9830293/'>Nimin</a></u>
 
 }
 
-function settingsScreen():void
+public function settingsScreen():void
 {
 	mainView.showAllMenuButtons();
 	
@@ -355,7 +355,7 @@ function settingsScreen():void
 			"Back", mainMenu);
 }
 
-function debugPane():void
+public function debugPane():void
 {
 	outputText("<b>Debug information!</b>\n", true);
 
@@ -386,7 +386,7 @@ function debugPane():void
 	addButton(9, "Back", mainMenu);
 }
 
-function toggleStandards():void
+public function toggleStandards():void
 {
 	//toggle debug
 	if(flags[LOW_STANDARDS_FOR_ALL])
@@ -397,7 +397,7 @@ function toggleStandards():void
 	return;
 }
 
-function toggleHyperHappy():void
+public function toggleHyperHappy():void
 {
 	//toggle debug
 	if(flags[HYPER_HAPPY])
@@ -408,7 +408,7 @@ function toggleHyperHappy():void
 	return;
 }
 
-function toggleDebug():void
+public function toggleDebug():void
 {
 	//toggle debug
 	if(debug)
@@ -421,7 +421,7 @@ function toggleDebug():void
 	return;
 }
 
-function toggleEasyModeFlag():void
+public function toggleEasyModeFlag():void
 {
 	if(flags[EASY_MODE_ENABLE_FLAG] == 0)
 		flags[EASY_MODE_ENABLE_FLAG] = 1;
@@ -433,7 +433,7 @@ function toggleEasyModeFlag():void
 	return;
 }
 
-function toggleSpritesFlag():void
+public function toggleSpritesFlag():void
 {
 	if(flags[SHOW_SPRITES_FLAG])
 		flags[SHOW_SPRITES_FLAG] = false;
@@ -443,7 +443,7 @@ function toggleSpritesFlag():void
 	return;
 }
 
-function toggleSillyFlag():void
+public function toggleSillyFlag():void
 {
 
 	if(flags[SILLY_MODE_ENABLE_FLAG])
@@ -456,7 +456,7 @@ function toggleSillyFlag():void
 }
 
 
-function creditsScreen():void {
+public function creditsScreen():void {
 	outputText("<b>Coding and Main Events:</b>\n", true);
 	outputText("<ul>");
 	outputText("<li> Fenoxo</li>\n");
@@ -583,7 +583,7 @@ function creditsScreen():void {
 	doNext(mainMenu);
 }
 
-function imageCreditsScreen():void
+public function imageCreditsScreen():void
 {
 
 	if (images.getLoadedImageCount() > 0)
@@ -608,7 +608,7 @@ function imageCreditsScreen():void
 	doNext(mainMenu);
 }
 
-function howToPlay():void {
+public function howToPlay():void {
 	outputText("", true);
 	outputText("<b><u>How To Play:</u></b>\nClick the buttons corresponding to the actions you want to take.  Your 'goal' is to obviously put an end to the demonic corruption around you, but do whatever the hell you want.  There is a story but sometimes it's fun to ignore it.\n\n", false);
 	outputText("<b>Exploration:</b>\nThe lake is a safe zone when you start the game.  It's a good place to explore, and Whitney's farm can offer some nice stat boosts to help get you on your feet. Once you feel comfortable, the forest is probably the next safest area, but beware of tentacle monsters.  The desert is the next toughest area, and the mountains offer further challenges.  There are more areas beyond that, but that's a good way to get started.  You'll uncover plenty of new 'places' exploring, which can be accessed from the <b>Places</b> menu.  You'll also find some interesting characters when you try to discover new explorable locations by choosing <b>Explore</b> twice.\n\n", false);

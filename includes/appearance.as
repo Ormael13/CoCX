@@ -1,4 +1,4 @@
-function appearance(e:MouseEvent = null):void 
+public function appearance(e:MouseEvent = null):void 
 {
 	funcs = new Array();
 	args = new Array();
@@ -1224,7 +1224,7 @@ function appearance(e:MouseEvent = null):void
 	//addButton(0,"Next",camp);
 }
 
-function sockDescript(index:int):void 
+public function sockDescript(index:int):void 
 {
 	outputText("  ");
 	if(player.cocks[index].sock == "wool") 

@@ -1,6 +1,6 @@
 ﻿// CUSTOM_PC_ENABLED:int = 759;
 
-function newGameGo(e:MouseEvent = null):void {
+public function newGameGo(e:MouseEvent = null):void {
 	funcs = new Array();
 	args = new Array();
 	mainView.eventTestInput.x = -10207.5;
@@ -223,7 +223,7 @@ function newGameGo(e:MouseEvent = null):void {
 }
 
 
-function doCreation(eventNo:Number):void {
+public function doCreation(eventNo:Number):void {
 	var e:MouseEvent;
 	var historyPerk:String = "";
 	//MAN
@@ -733,7 +733,7 @@ function doCreation(eventNo:Number):void {
 	
 }
 
-function useCustomProfile():void {
+public function useCustomProfile():void {
 	flags[CUSTOM_PC_ENABLED] = 1;
 	clearOutput();
 	player.short = mainView.nameBox.text;
@@ -751,7 +751,7 @@ function useCustomProfile():void {
 	}
 }
 
-function noCustomProfile():void {
+public function noCustomProfile():void {
 	clearOutput();
 	flags[CUSTOM_PC_ENABLED] = -1;
 	player.short = mainView.nameBox.text;
@@ -761,7 +761,7 @@ function noCustomProfile():void {
 }
 
 //Determines if has character creation bonuses
-function customName(arg:String):Boolean {
+public function customName(arg:String):Boolean {
 	switch(arg) {
 		case "Mara":
 		case "Mirvanna":
@@ -799,7 +799,7 @@ function customName(arg:String):Boolean {
 	return false;
 }
 //Does PC skip creation?
-function specialName(arg:String):Boolean {
+public function specialName(arg:String):Boolean {
 	switch(arg) {
 		case "Ceveo":
 		case "Mara":
@@ -828,14 +828,14 @@ function specialName(arg:String):Boolean {
 
 
 //Create a storage slot
-function createStorage():Boolean {
+public function createStorage():Boolean {
 	if(itemStorage.length >= 16) return false;
 	var newSlot = new itemSlotClass();
 	itemStorage.push(newSlot);
 	return true;
 }
 //Clear storage slots
-function clearStorage():void {
+public function clearStorage():void {
 	//Various Errors preventing action
 	if(itemStorage.length == 0) trace("ERROR: Cannot clear storage because storage does not exist.");
 	else {
@@ -843,7 +843,7 @@ function clearStorage():void {
 		itemStorage.splice(0, itemStorage.length);
 	}
 }
-function clearGearStorage():void {
+public function clearGearStorage():void {
 	//Various Errors preventing action
 	if(gearStorage.length == 0) trace("ERROR: Cannot clear storage because storage does not exist.");
 	else {
@@ -852,7 +852,7 @@ function clearGearStorage():void {
 	}
 }
 
-function initializeGearStorage():void {
+public function initializeGearStorage():void {
 	//Completely empty storage array
 	if(gearStorage.length == 0) trace("ERROR: Cannot clear gearStorage because storage does not exist.");
 	else {
@@ -873,7 +873,7 @@ function initializeGearStorage():void {
 // Accepts any type.
 // Can also accept a *single* array of items, in which case it picks from the array instead.
 // This lets you pre-construct the argument, to make things cleaner
-function randomChoice(...args):*
+public function randomChoice(...args):*
 {
 	var choice:Number;
 	if ((args.length == 1) && (args[0] is Array))

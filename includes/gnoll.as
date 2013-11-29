@@ -1,12 +1,12 @@
 //Gnoll Entrance
-function gnollEncounter():void {
+public function gnollEncounter():void {
 	spriteSelect(11);
 	outputText("", true);
 	outputText("The sound of distant laughter comes across the plains, then seems to die off suddenly.  A moment later, a gnoll comes bounding from the nearest scrap of cover and barrels into you.  The monstrous thing giggles as it bounces back and forth before you, looking for an opening to exploit.", false);
 	startCombat(32);
 }
 
-function gnollAI():void {
+public function gnollAI():void {
 	if(monster.hasStatusAffect("Stunned") >= 0) {
 		if(monster.plural) outputText("Your foes are too dazed from your last hit to strike back!", false);
 		else outputText("Your foe is too dazed from your last hit to strike back!", false);
@@ -74,7 +74,7 @@ function gnollAI():void {
 }
 
 //Gnoll Description
-function gnollAttackText():void {
+public function gnollAttackText():void {
 	var damage:Number = 0;
 	var attack:Number = rand(6);
 	//return to combat menu when finished
@@ -153,7 +153,7 @@ function gnollAttackText():void {
 	}
 }
 
-function gnollTease():void {
+public function gnollTease():void {
 	var tease:Number = rand(6);
 	var bonus:Number = 0;
 	//Gnoll Tease #1
@@ -188,7 +188,7 @@ function gnollTease():void {
 }
 
 //Gnoll Rape
-function getRapedByGnoll():void {
+public function getRapedByGnoll():void {
 	//Oh shit get anal raped.
 	if(hasItem("S.Dream",1)) {
 		yoDawgIHeardULiekGNollBallzzzdahdakjldh();
@@ -262,7 +262,7 @@ function getRapedByGnoll():void {
 }
 
 
-function defeatHyena():void {
+public function defeatHyena():void {
 	outputText("", true);
 	var dickDownClit:Number = 0;
 	//Gnoll Defeat (HP)	
@@ -303,7 +303,7 @@ function defeatHyena():void {
 }
 
 //DickDownClit
-function dickDownGnollClit():void {
+public function dickDownGnollClit():void {
 	outputText("", true);
 	outputText("This is not an opportunity you can pass up.  You roughly roll her onto her back and pull her long clit up to vertical.  She moans softly, and the rough skin beneath your fingers pulses as her arousal brings it harder and taller.  The end bloats larger, fuller, until finally it looks nearly wide enough.  You don't wait any further; you position the head of your dick against the end of hers and jam it inside.\n\n", false);
 	outputText("Inch by inch, you sink your dick down into the warm tunnel of her monstrous clitoris.  The interior, you are happy to find, is not as rough as the exterior, and in fact is just slick enough to make your invasion possible.  After a few thrusts, you find it easiest to adopt a sort of reverse-cowgirl position, facing her feet as you roll your hips forward and shove more and more of your dick inside her.   Beneath you, the gnoll is clutching at the ground and making little submissive whimpers.\n\n", false);
@@ -328,7 +328,7 @@ function dickDownGnollClit():void {
 	eventParser(5007);
 }
 //DickInAss
-function dickInGnollAss():void {
+public function dickInGnollAss():void {
 	outputText("", true);
 	var x:Number = player.cockThatFits(monster.analCapacity());
 	if(x < 0) x = 0;
@@ -403,7 +403,7 @@ function dickInGnollAss():void {
 }
 
 //SuckHerClit
-function suckGnollClit():void {
+public function suckGnollClit():void {
 	outputText("", true);
 	outputText("Since you first saw this strange anatomy, you knew it needed to be inside you.  You roughly roll her onto her back and pull her long clit up to vertical.  She moans softly, and the rough skin beneath your fingers pulses as her arousal brings it harder and taller.  The end bloats larger, fuller, until it might be too wide for your purposes.  Without losing any more time, you lean forward and stuff the clit's end into your mouth.\n\n", false);
 	outputText("The gnoll yelps in surprise and then moans appreciatively as your mouth and tongue roam across her sensitive skin.  Her hips squirm against the hard-baked dirt, tentatively pushing her clit deeper into your mouth.\n\n", false);
@@ -415,7 +415,7 @@ function suckGnollClit():void {
 	eventParser(5007);
 }
 //TakeHerClit
-function takeGnollClit():void {
+public function takeGnollClit():void {
 	outputText("", true);
 	outputText("You roughly roll her onto her back and pull her long clit up to vertical.  She moans softly, and the rough skin beneath your fingers pulses as her arousal brings it harder and taller.  The end bloats larger, fuller, until it might be too wide for your purposes.  You line up your " + vaginaDescript(0) + " and lower yourself onto the long, narrow faux-cock.", false);
 	cuntChange(9,true,true,false);
@@ -428,7 +428,7 @@ function takeGnollClit():void {
 	eventParser(5007);
 }
    
-function yoDawgIHeardULiekGNollBallzzzdahdakjldh():void {
+public function yoDawgIHeardULiekGNollBallzzzdahdakjldh():void {
 	outputText("", true);
 	consumeItem("S.Dream",1);
 	//[either Gnoll loss, if the player has a succubi's dream in inventory]
@@ -445,7 +445,7 @@ function yoDawgIHeardULiekGNollBallzzzdahdakjldh():void {
 	//[NEXT]
 	doNext(yoDawgHyenaBallz2);
 }
-function yoDawgHyenaBallz2():void {
+public function yoDawgHyenaBallz2():void {
 	outputText("", true);
 	outputText("Using the distraction, you roll onto your belly, crawling towards your " + player.armorName + ", hoping to use the distraction to make an escape.  Baring your " + buttDescript() + ", however, proves to be a mistake, as the gnoll fixates on the wobbling orbs, lunging desperately.  She lands atop you, her paws pinning your head and shoulders to the ground as the warmth of her impatient shaft slides between your cheeks, her new scrotum slapping wetly against ", false);
 	if(player.balls > 0) outputText("your own " + ballsDescriptLight(), false);
@@ -468,7 +468,7 @@ function yoDawgHyenaBallz2():void {
 	model.time.days++;
 	statScreenRefresh();
 }
-function yoDawgHyenaBallz3():void {
+public function yoDawgHyenaBallz3():void {
 	outputText("", true);
 	outputText("Finally, you feel the gnoll's clit slide out of your anus as the overly-endowed girl collapses at your side.  Broken utterly, she pants with depraved exhaustion, no strength left to continue pounding your body into the dirt.  Even now, she strokes her massive clit with one spotted paw as the other helplessly massages the basketball-sized testicles that audibly churn with gallons of the girl's jizz.  Finding a reserve of strength you didn't know you had, you rise tenderly and gather your belongings, creeping away before the hyena-girl can get her second wind.", false);
 	//[24 hours pass, player asshole size increased, sensitivity significantly lowered, toughness lowered temporarily, fatigue maxed, remove one succubi's dream]

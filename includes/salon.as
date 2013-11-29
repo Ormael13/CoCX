@@ -1,17 +1,17 @@
 ﻿//const SALON_PAID:int = 441;
-function hairDresser():void {
+public function hairDresser():void {
 	outputText("While exploring the mountain, you find a cleverly concealed doorway.  From inside you can hear the sound of blades being sharpened.  Do you enter the doorway?", true);
 	doYesNo(2169,13);
 }
 
-function salonPaymentMenu():void {
+public function salonPaymentMenu():void {
 	var blow:Number = 0;
 	if(player.hasCock()) blow = 2154;
 	var minoCum:Number = 0;
 	if(flags[UNKNOWN_FLAG_NUMBER_00142] > 0) minoCum = 2696;
 	choices("Goblin Blow",blow,"Canine",gloryholeDoggie,"Imp",gloryholeImp,"Minotaur",gloryholeMinotaur,"Incubus",gloryholeIncubus,"",0,"",0,"",0,"Buy MinoCum",minoCum,"Leave",13);
 }
-function salonPurchaseMenu():void {
+public function salonPurchaseMenu():void {
 	flags[SALON_PAID] = 1;
 	spriteSelect(38);
 	var cutShort:Number = 0;
@@ -47,7 +47,7 @@ function salonPurchaseMenu():void {
 			"Leave",13);
 }
 
-function hairDresserGreeting():void {
+public function hairDresserGreeting():void {
 	spriteSelect(38);
 	outputText("You step inside the cave, and are greeted by a sight you did not expect.  The cave's floor is covered with smooth wood panelling and the walls are nearly entirely covered with hanging mirrors.  The few stalactites have hooks drilled into them, from which hang hundreds of scissors, shears, razors, combs, and other hairstyling impliments.  It reminds you of the hair-cutter's shop in your hometown.", true);
 	outputText("\n\nThere are a few chairs along the wall and goblins with latex dresses and gloves looking bored.  At the sight of you they perk up and clamor around you excitedly, until one with a gravity-defying chest pushes them apart and greets you.", false);
@@ -62,7 +62,7 @@ function hairDresserGreeting():void {
 	salonPaymentMenu();
 	outputText("\n\n<b>(Salon unlocked in 'places' menu from camp)</b>", false);
 }
-function hairDresserRepeatGreeting():void {
+public function hairDresserRepeatGreeting():void {
 	spriteSelect(38);
 	var minoCum:Number = 0;
 	//Chance for mino craziness here
@@ -79,7 +79,7 @@ function hairDresserRepeatGreeting():void {
 	}
 	salonPaymentMenu();
 }
-function gloryholeImp():void {
+public function gloryholeImp():void {
 	slimeFeed();
 	outputText("", true);
 	outputText("You walk over to the hole in the wall, looking at the erect demon-member you'll have to service.  Judging by the height and constant bobbling up it down it does, the imp must be hovering on the other side, trying pretty damn hard to stay in the hole.\n\n", true);
@@ -101,7 +101,7 @@ function gloryholeImp():void {
 
 
 
-function gloryholeDoggie():void {
+public function gloryholeDoggie():void {
 	slimeFeed();
 	outputText("", true);
 	outputText("You sigh and kneel down to bring yourself level with the dog-dick hanging out of the wall.  It's pointed at the tip with a swollen circular bulb at the base.  As a matter of fact, the dog-dick's owner must be pretty excited to be here - it's dripping cum and the knot has swollen so large that it can't fit back through the hole.\n\n", true);
@@ -120,7 +120,7 @@ function gloryholeDoggie():void {
 	outputText("A young goblin comes by with a bowl for you to make your payment into.  You spit out the gunk and wipe your mouth, as the goblin carries the seed away.  You notice a trail of clear drops on the ground behind her.  She must be anticipating something...", false);
 	doNext(2168);
 }
-function gloryholeIncubus():void {
+public function gloryholeIncubus():void {
 	slimeFeed();
 	outputText("", true);
 	outputText("You kneel down in front of the throbbing demonic dick, ready to earn your pay.\n\n", false);
@@ -139,7 +139,7 @@ function gloryholeIncubus():void {
 	doNext(2168);
 }
 
-function gloryholeMinotaur(): void {
+public function gloryholeMinotaur(): void {
 	slimeFeed();
 	outputText("Your eyes are drawn to the huge minotaur cock, and you instinctively kneel down in front of it.\n\n", true );
 	outputText("It's the largest available member in the room by a considerable margin, and from your position on your knees, it looks even more massive; it's over two feet long, and has three rings of prepuce spaced around its length. You can just barely span your entire hand around its thickness. You open your mouth wide and lean forward, taking the thick, spongy head into your mouth. The taste is incredibly strong, and its musk is as thick as the minotaur's dick itself. You moan in pleasure, and start bobbing your head back and forth, taking more and more of the dick into your mouth. You stroke the rest of the cock in time with your sucking. You can hear muffled grunting and snorting coming from the other side of the wall, obvious sounds of approval from your partner.\n\n", false);
@@ -153,7 +153,7 @@ function gloryholeMinotaur(): void {
 	doNext(2168);
 }
 
-function goblinHairDresserFacefuck():void {
+public function goblinHairDresserFacefuck():void {
 	spriteSelect(38);
 	outputText("Lynnette licks her lips and practically tears her way into your " + player.armorName + ", having your crotch exposed in seconds.  Your " + cockDescript(0) + " flops out immediately, slapping her on the nose as it grows hard.  She wraps both hands around you and begins pumping with practiced ease, flicking her tongue over your crown and wrapping her lips ", true);
 	if(player.cocks[0].cockThickness >= 4) outputText("around as much of you as she can", false);
@@ -166,7 +166,7 @@ function goblinHairDresserFacefuck():void {
 	stats(0,0,0,0,0,0,-100,0);
 	hairDressingMainMenu();
 }
-function hairDressingMainMenu():void {
+public function hairDressingMainMenu():void {
 	spriteSelect(38);
 	outputText("Lynnette offers and explains their options, \"<i>So what'll it be hun?  We could cut it down or give you a lengthening treatment. Or you can get a hair-dye to use on your own.  Just remember to come back in a few days for a touchup.</i>\"", false);
 	if(flags[UNKNOWN_FLAG_NUMBER_00142] > 0) {
@@ -175,7 +175,7 @@ function hairDressingMainMenu():void {
 	salonPurchaseMenu();
 }
 
-function cutShort():void {
+public function cutShort():void {
 	spriteSelect(38);
 	//-trying to get a goblin to cut tentacle hair:
 	if(player.hairType == 4) {
@@ -188,7 +188,7 @@ function cutShort():void {
 	outputText(hairDescript() + ".", false);
 	doNext(13);
 }
-function cutMedium():void {
+public function cutMedium():void {
 	spriteSelect(38);
 	//-trying to get a goblin to cut tentacle hair:
 	if(player.hairType == 4) {
@@ -201,7 +201,7 @@ function cutMedium():void {
 	outputText(hairDescript() + ".", false);
 	doNext(13);
 }
-function cutLong():void {
+public function cutLong():void {
 	spriteSelect(38);
 	//-trying to get a goblin to cut tentacle hair:
 	if(player.hairType == 4) {
@@ -214,7 +214,7 @@ function cutLong():void {
 	outputText(hairDescript() + ".", false);
 	doNext(13);
 }
-function hairGrow():void {
+public function hairGrow():void {
 	spriteSelect(38);
 	//-asking for a lengthening treatment with tentacle hair:
 	if(player.hairType == 4) {
@@ -229,7 +229,7 @@ function hairGrow():void {
 	outputText(num2Text(temp) + " more inches of " + player.hairColor + " hair.", false);
 	doNext(13);
 }
-function dyeMenu():void {
+public function dyeMenu():void {
 	spriteSelect(38);
 	outputText("", true);
 	outputText("Lynnette pulls open a cabinet in the corner, displaying a wide array of exotic hair-dyes.  Which kind do you want?", false);
@@ -241,7 +241,7 @@ function dyeMenu():void {
 	if(shortName1 == "OrangDy") return "a vial of brilliant orange hair dye";*/
 }
 
-function giveGoblinAMilkMustache():void {
+public function giveGoblinAMilkMustache():void {
 	outputText("", true);
 	outputText("You slowly walk up to the downed goblin, gently telling her that everything will be all right now. She looks at you a bit incredulously and spreads her legs, obviously hoping that you will satisfy the urges that she has. You shake your head at her and instead cup your hands under your " + biggestBreastSizeDescript() + " and tell her that it's feeding time. The goblin looks at you annoyed and says, \"<i>I don't want your breasts! I want your naughty bits!</i>\" You laugh at her and grab her arms, pulling them behind her head.\n\n", false);
 	
@@ -256,7 +256,7 @@ function giveGoblinAMilkMustache():void {
 	eventParser(5007);
 }
 
-function minotaurCumBukkakeInSalon():void {
+public function minotaurCumBukkakeInSalon():void {
 	outputText("", true);
 	minoCumAddiction(10);
 	slimeFeed();
@@ -339,7 +339,7 @@ function minotaurCumBukkakeInSalon():void {
 	stats(0,0,0,0,2,2,-100,2);
 	doNext(minotaurSalonFollowUp);
 }
-function minotaurSalonFollowUp():void {
+public function minotaurSalonFollowUp():void {
 	spriteSelect(38);
 	outputText("", true);
 	if(flags[UNKNOWN_FLAG_NUMBER_00142] == 0) {
@@ -356,7 +356,7 @@ function minotaurSalonFollowUp():void {
 	salonPurchaseMenu();
 }
 
-function mudFacial():void {
+public function mudFacial():void {
 	spriteSelect(38);
 	outputText("", true);
 	outputText("You sit back in a comfortable chair and pull on a lever to recline it.  The goblins buzz around you, gathering up 'special mud'.  You close your eyes, letting them plaster your " + player.face() + " with the stuff in hopes that it will improve your complexion as much as you've been promised.  A pair of cucumber slices are laid out on your eyes, obscuring your view.\n\n", false);
@@ -366,7 +366,7 @@ function mudFacial():void {
 	doNext(13);
 }
 
-function sandFacial():void {
+public function sandFacial():void {
 	spriteSelect(38);
 	outputText("", true);
 	outputText("You sit back in a comfortable chair and pull on a lever to recline it.  The goblins buzz around you, gathering up 'special sand'.  You close your eyes, letting them splatter your " + player.face() + " with the rough, textured goop.  It doesn't feel very good, but that won't matter if it makes you as handsome as it's supposed to.\n\n", false);

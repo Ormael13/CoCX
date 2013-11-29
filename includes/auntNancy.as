@@ -6,7 +6,7 @@
 
 //[Introduction Blurb:
 //(appears in the Wet Bitch between 6:00 and 14:00)]
-function auntNancy(display:Boolean = true):Boolean {
+public function auntNancy(display:Boolean = true):Boolean {
 	if(model.time.hours >= 6 && model.time.hours <= 14) {
 		if(display) {
 			outputText("\n\nYou see a rather buxom woman with short, white hair in a neck- and sleeve-less black dress cleaning glasses with her bar towel.  She makes the task look simple, moreso because she has two pairs of arms, wrapped in what look like shiny black gloves.", false);
@@ -23,7 +23,7 @@ function auntNancy(display:Boolean = true):Boolean {
 	else return false;
 }
 
-function interactWithAuntNancy():void {
+public function interactWithAuntNancy():void {
 	outputText("", true);
 	//[Interaction 2]
 	//[If Time = 1400, Relationship with Aunt Nancy >= 30, and PillowTalk= 0]
@@ -59,7 +59,7 @@ function interactWithAuntNancy():void {
 }
 
 //[Strong:]
-function strongStuff():void {
+public function strongStuff():void {
 	outputText("", true);
 	//[Lose 5 Gems.]
 	if(player.gems < 5) {
@@ -92,7 +92,7 @@ function strongStuff():void {
 	doNext(13);
 }
 //[Light:]
-function lightStuff():void {
+public function lightStuff():void {
 	outputText("", true);
 	//[Lose 5 Gems.]
 	if(player.gems < 5) {
@@ -161,7 +161,7 @@ function lightStuff():void {
 }
 
 //[If Decline]
-function declineAuntNancyMassage():void {
+public function declineAuntNancyMassage():void {
 	outputText("", true);
 	outputText("Aunt Nancy listens as you politely turn her down, and nods her head, the hungry look fading from her eyes.  \"<i>I understand completely.  Sorry to have bothered you.</i>\"  She starts to walk out of the bar, stops, and turns back to size you up again.  \"<i>Of course,</i>\" she says, \"<i>if you ever change your mind... just come by whenever my shift's over.</i>\"\n\n", false);
 
@@ -171,7 +171,7 @@ function declineAuntNancyMassage():void {
 }
 
 //[If Agree]
-function timeForAuntNancySpiderCooch():void {
+public function timeForAuntNancySpiderCooch():void {
 	outputText("", true);
 	outputText("You look the still-beautiful spider-lady in the eye, and, half-mesmerized, nod in agreement.  She smiles broadly (and, you can't help but notice, quite lewdly) and puts one of her lower arms through one of yours, while putting the upper one on your shoulder.  \"<i>Well then,</i>\" Aunt Nancy says, \"<i>I suppose we should be off.</i>\"\n\n", false);
 
@@ -187,7 +187,7 @@ function timeForAuntNancySpiderCooch():void {
 	stats(0,0,0,0,0,0,1,0);
 	doNext(auntNancyPoonPartII);
 }
-function auntNancyPoonPartII():void {
+public function auntNancyPoonPartII():void {
 	outputText("", true);
 	outputText("Slowly, you follow Aunt Nancy into her home. Inside, the building is fairly dark and gloomy, even in the middle of the day, with thick curtains of unidentifiable white matter keeping most of the sun outside. Blinded, your vision still attuned to the bright desert, you can discern little of the house's insides before you hear a sudden skittering sound behind you and, as you turn to face it, are pushed further into the gloom. Your heel is caught by a thick strand of what feels like rope, and you fall flat onto your back, arms and legs splayed out to either side of you, as you land on some sort of taut net.\n\n", false);
 
@@ -342,7 +342,7 @@ function auntNancyPoonPartII():void {
 	doNext(auntNancyPoonPartIII);
 }
 
-function auntNancyPoonPartIII():void {
+public function auntNancyPoonPartIII():void {
 	outputText("", true);
 	//[If PC has a cock]
 	if(player.hasCock()) {
@@ -437,7 +437,7 @@ function auntNancyPoonPartIII():void {
 	//[Next Page, Time += 200]
 	doNext(auntNancyPoonPartIV);
 }
-function auntNancyPoonPartIV():void {
+public function auntNancyPoonPartIV():void {
 	outputText("", true);
 	outputText("<b>Two passionate, sticky hours pass...</b>\n\n", false);
 	

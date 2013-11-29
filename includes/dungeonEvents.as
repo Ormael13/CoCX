@@ -1,5 +1,5 @@
 ﻿//Dungeon events from 11000+
-function doDungeon(eventNo:Number):void {
+public function doDungeon(eventNo:Number):void {
 	if(eventNo == 11000) dungeonLoc = 0;
 	if(eventNo == 11001) {
 		if(player.hasKeyItem("Iron Key") < 0) {

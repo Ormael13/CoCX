@@ -5,7 +5,7 @@
 //const TOOK_KITSUNE_STATUE:int = 709;
 
 //[Enter the Trickster] (Coded)
-function enterTheTrickster():void {
+public function enterTheTrickster():void {
 	if(flags[MET_KITSUNES] > 0) {
 		willOWisp();
 		return;
@@ -23,7 +23,7 @@ function enterTheTrickster():void {
 }
 
 //Lose:
-function loseKitsuneImpFight():void {
+public function loseKitsuneImpFight():void {
 	clearOutput();
 	//randomly assign hair color
 	if(rand(3) == 0) monster.hairColor = "blonde";
@@ -38,7 +38,7 @@ function loseKitsuneImpFight():void {
 	addButton(0,"Next",loseToKitsunes);
 }
 //Win:
-function winKitsuneImpFight():void {
+public function winKitsuneImpFight():void {
 	clearOutput();
 	//randomly assign hair color
 	if(rand(3) == 0) monster.hairColor = "blonde";
@@ -83,7 +83,7 @@ function winKitsuneImpFight():void {
 
 
 //[Will 'O Wisp](C)
-function willOWisp():void {
+public function willOWisp():void {
 	clearOutput();
 	//randomly assign hair color
 	if(rand(3) == 0) monster.hairColor = "blonde";
@@ -103,7 +103,7 @@ function willOWisp():void {
 }
 
 //[Turn Back] (C)
-function turnBackFromWillOWisp():void {
+public function turnBackFromWillOWisp():void {
 	clearOutput();
 	outputText("There's no way you're going to go gallivanting off into the woods after some flame.  You shake your head to clear your thoughts, and warily turn away to head back toward camp.  You could almost swear for a moment the flame looked disappointed, and you chuckle lightly at such a silly thought." );
 	//Advance time 1 hour, return to camp.
@@ -112,7 +112,7 @@ function turnBackFromWillOWisp():void {
 }
 
 //[Follow] (C)
-function followTheWillOWisp(firstTime:Boolean = false):void {
+public function followTheWillOWisp(firstTime:Boolean = false):void {
 	clearOutput();
 	if(!firstTime) {
 		outputText("The flame suddenly darts off into the darkness of the trees, and you find yourself unable to resist giving chase.  It feels as though you are being drawn to it by some otherworldly force, but every time your suspicions begin to grow, the flame pauses to float around you, tickling your erogenous zones and then pressing onward." );
@@ -146,7 +146,7 @@ function followTheWillOWisp(firstTime:Boolean = false):void {
 
 
 //[Talk] (C)
-function talkAfterResistingKitsunellusion():void {
+public function talkAfterResistingKitsunellusion():void {
 	clearOutput();
 	outputText("Odd as she is, she doesn't seem to be overtly threatening, so you decide to try to talk to her.  Searching for something to say, you end up simply asking her why she led you here.\n\n");
 	
@@ -174,7 +174,7 @@ function talkAfterResistingKitsunellusion():void {
 	simpleChoices("Follow",3921,"",0,"",0,"",0,"Leave",3920);
 }
 //[Leave] (C)
-function leaveKitsune(talked:Boolean = true):void {
+public function leaveKitsune(talked:Boolean = true):void {
 	clearOutput();
 	//if PC was Talking to the kitsune
 	if(talked) outputText( "Nervously, you thank her for her generous offer, but decline, turning to leave." );
@@ -199,7 +199,7 @@ function leaveKitsune(talked:Boolean = true):void {
 }
 
 //Illusory Mansion (C)
-function mansion(willing:Boolean, firstTime:Boolean = false):void {
+public function mansion(willing:Boolean, firstTime:Boolean = false):void {
 	clearOutput();
 	if(willing) {
 		if(!firstTime) outputText( "Curiosity and lust get the better of you, and you decide to throw caution to the wind and take her up on her offer.  If her sisters are any bit as stunning as she is, then you know you're in for a real treat.  She seems pleased with your decision, teasing the underside of your chin with one of her tails and beckoning you to follow her.\n\n" );
@@ -239,7 +239,7 @@ function mansion(willing:Boolean, firstTime:Boolean = false):void {
 }
 
 //NON-TENTACLE PC SCENES:
-function nonTentaclePCMansion(willing:Boolean):void {
+public function nonTentaclePCMansion(willing:Boolean):void {
 	clearOutput();
 	outputText( "\"<i>We hope you enjoyed the feast we prepared,</i>\" says the one with jet-black hair, as she and her sisters crowd around you in the water, fully nude.  \"<i>Now, it's </i>our<i> turn.</i>\"\n\n");
 	outputText("\"<i>Just relax,</i>\" the redhead whispers into your ear in a warm tone that seems to demolish any vestige of resistance.  \"<i>We'll take care of everything...</i>\"  Up to your waist in the warm water of the hot springs, you can't help but surrender to their will, your worries flowing out of you.  Enveloped on all sides by their unearthly warm flesh, you lean into their arms and sigh blissfully as every touch and caress sends shivers down your spine.\n\n" );
@@ -259,7 +259,7 @@ function nonTentaclePCMansion(willing:Boolean):void {
 }
 
 //Formerly maleOrHerm()
-function kitsuneMaleOrHermMansion(willing:Boolean):void {
+public function kitsuneMaleOrHermMansion(willing:Boolean):void {
 	clearOutput();
 	outputText("\"<i>Let's just see what we have here,</i>\" the blonde says, sliding herself up to gently lift [eachCock] while licking her lips.  \"<i>Oh my, such vigor!</i>\"  the blonde exclaims, eagerly watching your " + ((player.cocks.length > 1) ? "shafts swell to their" : "shaft swell to its") + " full length and girth after just a little bit of stroking from her skillful hands.\n\n");
 	outputText("Soft, velvety fur caresses your erogenous zones, more tails than you can count wrapping around every limb as plush lips kiss your exposed flesh.  Tongues of blue flame spark to life with a crackle like striking flint, licking along your body, sending ripples of pleasure coursing through you with every touch, drawing out more lust with each passing second.\n\n");
@@ -283,7 +283,7 @@ function kitsuneMaleOrHermMansion(willing:Boolean):void {
 
 // end function
 //fomerly letHer()
-function kitSuneLetHerMansion(willing:Boolean):void {
+public function kitSuneLetHerMansion(willing:Boolean):void {
 	clearOutput();
 	outputText(((willing) ? "You decide to let her have her fun, focusing your attention instead on her two lovely sisters.  While you were distracted with the redhead's \"assets\", it appears the precocious blonde and ravenette went ahead and started without you!" : "Your slurred protests fall on deaf ears, your head swimming with the haze of the many decanters of liquor you imbibed.  You move to push her away, but she catches your tipsy assault and gently leans up to give you a disarming peck on the cheek.  Though you try to mentally cling to the dispute, you find your cares gradually slipping away, until all you can focus on is the girl's two sisters, who appear to have started without you.") + "  The black-haired girl lies back, her face buried deep in the rippling flesh of the blonde's behind, slurping away at her dripping folds, while the blonde reciprocates from on top, pounding her sister's puffy pussy with her first two fingers.\n\n");
 	outputText("The blonde's prodigious posterior bounces and jiggles as she pumps her hips up and down instinctively.  The quivering cheeks entice you, drawing you in almost hypnotizingly, and before you know it your " + cockDescript(player.biggestCockIndex()) + " is already " + ((player.balls > 0) ? "balls" : "hip") + "-deep in her slippery snatch.\n\n");
@@ -344,7 +344,7 @@ function kitSuneLetHerMansion(willing:Boolean):void {
 } //End letHer() 	
 
 //Formerly shoveHer()
-function kitsuneShoveHerMansion(willing:Boolean):void {
+public function kitsuneShoveHerMansion(willing:Boolean):void {
 	clearOutput();
 	outputText("In spite of your drunken stupor, you are just lucid enough to realize what is going on in time to stop her.  You plant your arm against her chest with a push, and she loses balance and tumbles into the water, kicking up foam.  She breaches the water with a rambunctious cry, inadvertently knocking her sisters off as she grapples with you in the steamy spring.  The surprised pair laughs and shields their eyes as you roll around in the water, tossing hot foam into the air.  When the crashing waves finally die down, you have the boisterous redhead pinned under your elbow against the side of the bath, [eachCock] grinding lewdly against the pillowy cheeks of her upthrust ass.  She struggles for a bit, but once she accepts that you have overpowered her, she slowly relaxes into a submissive state, her muscles relaxing and her ears slouching against the top of her head.\n\n");
 	outputText("\"<i>F-fine...</i>\" she says quietly, rolling her eyes back in pleasure as you scratch behind her ears and run a finger coercively down her cheek." + ( flags[redheadIsFuta] > 0 ? "" : "  Reaching down between her legs, you nod in satisfaction as you feel her cock slowly receding, shrinking down into a pert, solid pleasure bud between her puffy lips.") + "\n\n");
@@ -412,7 +412,7 @@ function kitsuneShoveHerMansion(willing:Boolean):void {
 } // End shoveHer()
 
 //formerly
-function kitsuneStillHungryMansion():void
+public function kitsuneStillHungryMansion():void
 {
 	clearOutput();
 	outputText("Just as you are about to slip out of consciousness, you are roused by the feeling of the kitsune pulling you from her sister's grasp, sliding you onto your back, and bending low over you.\n\n");
@@ -444,7 +444,7 @@ function kitsuneStillHungryMansion():void
 
 
 //formerly femaleOrGenderless()
-function kitsuneFemaleOrGenderless(willing:Boolean):void {
+public function kitsuneFemaleOrGenderless(willing:Boolean):void {
 	clearOutput();
 	outputText("\"<i>Just relax, darling,</i>\" the blonde says in a crooning tone, sliding her hand down along your " + hipDescript() + " under the water.  Her silky-soft fingertips gently circles your " + ((player.gender >=2) ? clitDescript() : assholeDescript() ) +", making you shudder.  Any reservations you still had are naught but memories now as you" + ((player.isBiped()) ? " spread your legs and" : "" ) +" give yourself over completely to her tender touch.\n\n");
 	outputText("Your erogenous zones are caressed by numerous velvety tails, a few of them curling around your limbs to keep you from squirming around too much.  Plush lips kiss every inch of exposed flesh, while blue flames spark to life with the sound of striking flint to gently lick and swirl along your body, sending ripples of pleasure coursing through you.  Your liquor-addled mind is too foggy by now to resist their advances, their disarming caresses breaking down your inhibitions and replacing them with lust and desire.\n\n");
@@ -462,7 +462,7 @@ function kitsuneFemaleOrGenderless(willing:Boolean):void {
 	}
 }
 
-function kitsunesGenderlessLetHer(willing:Boolean) {
+public function kitsunesGenderlessLetHer(willing:Boolean) {
 	clearOutput();
 	outputText(((willing) ? "You decide to let the girl have her fun, allowing her to shift positions to begin rubbing her throbbing shaft against your " + ((player.gender == 2) ? vaginaDescript() : "featureless groin") + " eagerly." : "You shake your head sluggishly, but your slurred protests fall on deaf ears.  She easily sidesteps your " + player.leg() + " as you try to shove her away, sliding forward to lay a disarming kiss on your cheek.  A bright blue wisp of flame crackles from her lips, and that is that - the resulting spark of pleasure that arcs up your spine shatters the last of your resistance, and your cares melt like butter.") + "  While she grinds her pulsating shaft against you slowly, her sisters close in around you to join in the fun.\n\n");
 	outputText("Your head is drawn into the blonde's lap, fingers softly gliding " + ((player.hairLength > 0) ? "through your " + hairDescript() : "across the sides of your face") + ", brushing you lightly with her mystical flames.  A pair of large, shapely ass cheeks emblazoned with a sun-shaped tattoo enters your field of vision, and soon your view is entirely blocked by the black-haired girl's expansive behind, save for a sliver of light filtering down between her and the blonde.  Her slick pussy glides across your lips, coaxing your tongue from your mouth as she bends down, pulling the redhead's cock into her mouth for a moment to slather it with saliva, spreading your " + ((player.gender == 2) ? "labia" : "butt cheeks") + " with her first two fingers, egging her on.\n\n");
@@ -484,7 +484,7 @@ function kitsunesGenderlessLetHer(willing:Boolean) {
 } // end letHer()
 
 //fomerly shoveHer()
-function kitsunesGenderlessShoverHer(willing:Boolean):void {
+public function kitsunesGenderlessShoverHer(willing:Boolean):void {
 	clearOutput();
 	outputText("In spite of your drunken stupor, you are just lucid enough to realize what is going on in time to stop her.  You plant your arm against her chest with a push, and she loses balance and tumbles into the water, kicking up foam.  She breaches the water with a rambunctious cry, inadvertently knocking her sisters off as she grapples with you in the steamy spring.  The surprised pair laughs and shields their eyes as you roll around in the water, tossing hot foam into the air.  When the crashing waves finally die down, you have the boisterous redhead pinned under your elbow against the side of the bath, crotch grinding lewdly against the pillowy cheeks of her upthrust ass.  She struggles for a bit, but once she accepts that you have overpowered her, she slowly relaxes into a submissive state, her muscles relaxing and her ears slouching against the top of her head.\n\n");
 	outputText("\"<i>F-fine...</i>\" she says quietly, rolling her eyes back in pleasure as you scratch behind her ears and run a finger coercively down her cheek." + ( flags[redheadIsFuta] > 0 ? "" : "  Reaching down between her legs, you nod in satisfaction as you feel her cock slowly receding, shrinking down into a pert, solid pleasure bud between her puffy lips.") + "\n\n");
@@ -516,7 +516,7 @@ function kitsunesGenderlessShoverHer(willing:Boolean):void {
 } // end shoveHer()
 
 //formerly stillHungry()
-function genderlessKitsuneStillHungry(willing:Boolean):void {
+public function genderlessKitsuneStillHungry(willing:Boolean):void {
 	clearOutput();
 	outputText("Just as you are about to slip out of consciousness, you are roused by the feeling of the black-haired kitsune pulling you from her sister's grasp, sliding you onto your back, and bending low over you.\n\n");
 	outputText("\"<i>Still hungry...</i>\" she says softly, rubbing her chubby stomach gently, a quiet rumble issuing forth.\n\n");
@@ -543,7 +543,7 @@ function genderlessKitsuneStillHungry(willing:Boolean):void {
 
 
 //3+ Tentacle cocks of 30" or longer
-function tentacleKitsuneWingWangs():void {
+public function tentacleKitsuneWingWangs():void {
 	clearOutput();
 	outputText("\"<i>Oh my!  It looks like we're in for a real treat tonight, sisters...</i>\" the blonde says as she runs her hands along your impressive prehensile endowments.\n\n");
 	outputText("\"<i>Mmm...  tentacles...  my favorite flavor,</i>\" the black-haired one chimes in, rubbing her pudgy belly and licking her lips hungrily.  Slipping into the water next to you, each of them takes one of your hulking tentacles into her hands, grinning eagerly.  Working together, they weave their tails through your brace of writhing appendages, cinching tight around the base of each one as their fingers slide along the flexible shafts.  Trails of blue fire dance across each writhing tentacle, sending you into a shivering, shuddering frenzy, and the three sisters cast each other knowing grins.  Your liquor-addled mind is too foggy by now to resist their advances, " + ((player.lib<50) ? "slurred protests falling on deaf ears." : "though who would want to?") + "\n\n");
@@ -580,7 +580,7 @@ outputText( "Thick streams of cum arc through the air, raining down on the three
 	stats(0,0,0,0,0,0,-100,0);
 }
 
-function outro(tentacles:Boolean = false):void {
+public function outro(tentacles:Boolean = false):void {
 	fatigue(15);
 	stats(0,-2,0,0,0,0,0,0);
 	if(player.fatigue > 80 && player.fatigue < 100)
@@ -618,7 +618,7 @@ function outro(tentacles:Boolean = false):void {
 	}
 }
 
-function mansionBadEnd():void {
+public function mansionBadEnd():void {
 	clearOutput();
 	// Kitsune's Thrall Bad End
 	outputText( "Your dreams are cut short as you awaken with a start, launching yourself bolt upright.  You are drenched in a frigid sweat, panting from an unexplained sense of dread that still has you in a panic.  The dread only worsens when you take stock of your surroundings.  For a moment you think you are back in Ingnam, but the unfamiliar surroundings push the notion from your mind as soon as it forms.  Neither are you in your bedroll in camp, however.  Gradually, you piece together the events of the previous night through the miserable pounding in your skull.\n\n");
@@ -638,7 +638,7 @@ function mansionBadEnd():void {
 	doNext(kitSuneMansionBadEndII);
 }
 
-function kitSuneMansionBadEndII():void {
+public function kitSuneMansionBadEndII():void {
 	clearOutput();
 	outputText("It is difficult to say how much time has passed since you came to reside here.  Time holds no meaning in this place, entrapped for all eternity in the space between worlds.  Now and again, a glimmer of your former self bubbles to the surface of the constant murky haze that is your mind now, and you have a faint recollection of a purpose beyond serving your mistresses.\n\n");
 	outputText("Though it is only the vaguest shadow of a memory, on nights such as this it compels you to search for a way to leave, shambling through the maze of eternally shifting corridors and twisting hallways that make up the manor.  Your search is never-ending, each new room warping reality in new ways, your paths looping back on each other and winding their way through eldritch realms not fit to be seen by mortal eyes.  No matter how convoluted your route, your journey always ends in the same place.\n\n");
@@ -657,7 +657,7 @@ function kitSuneMansionBadEndII():void {
 
 
 //[Fight]
-function fightSomeKitsunes():void {
+public function fightSomeKitsunes():void {
 	clearOutput();
 	outputText("Something just doesn't sit right with you about this woman, and you cautiously raise your " + player.weaponName + ", watching her carefully.\n\n");
 	startCombat(57);
@@ -679,7 +679,7 @@ function fightSomeKitsunes():void {
 	doNext(1);
 }
 
-function kitsuneAI():void {
+public function kitsuneAI():void {
 	var moves:Array = new Array();
 	if(player.hasStatusAffect("Sealed") < 0) moves[moves.length] = kitsuneSealAttack;
 	if(player.hasStatusAffect("Sealed") < 0) moves[moves.length] = kitsuneSealAttack;
@@ -696,7 +696,7 @@ function kitsuneAI():void {
 // Combat Abilities:
 // the kitsune are an almost purely magical mob, relying mainly on tease attacks and spells that raise lust.
 //Entwine:
-function kitsuneEntwine():void {
+public function kitsuneEntwine():void {
 	outputText("The kitsune closes in on you with a mischievous glint in her eyes.  You raise your guard, keeping your eyes trained on her to ensure that she doesn't try to pull anything.  Suddenly, you feel something coiling around your " + player.leg() + ", and let out a yelp as you are suddenly lifted into the air, entangled in the kitsune's tails!");
 	outputText("\n\nYour limbs are bound tightly while coils of delightfully soft fur caress you on all sides.  You can do little besides struggle against your furry bonds as the constant writhing of her tails sends shudders flying up and down your spine.");
 	monster.createStatusAffect("PCTailTangle",0,0,0,0);
@@ -704,7 +704,7 @@ function kitsuneEntwine():void {
 	combatRoundOver();
 }
 //Struggle - event 5077 in combat.as
-function kitsuneStruggle():void {
+public function kitsuneStruggle():void {
 	clearOutput();
 	//Struggle:
 	outputText("You struggle against the kitsune's tails with all your might, desperately trying to free yourself before she has her way with you.");
@@ -723,7 +723,7 @@ function kitsuneStruggle():void {
 		combatRoundOver();
 	}
 }
-function kitsuneWait():void {
+public function kitsuneWait():void {
 	clearOutput();
 	outputText("Happily, you slump deeper into the fluffy tails, eliciting an amused giggle from the kitsune.");
 	if(silly()) outputText("  You're so glad you got to touch fluffy tail.");
@@ -733,7 +733,7 @@ function kitsuneWait():void {
 }
 
 //Fox Fire: - Low piercing damage, +10-15 LUST
-function foxFireAttack():void {
+public function foxFireAttack():void {
 	outputText("The kitsune makes a small circle in the air with her fingers, conjuring up a pale blue flame into her palm with the sound of flint striking against steel.  Pursing her lips, she blows it toward you with a kiss.");
 	outputText("\n\nThe flames burn furiously, but leave you with an incredibly pleasant tingling sensation all over your body.  Your skin flushes with excitement, and you can feel blood rushing to your extremities, making you shudder with pleasure.")
 	var damage:int = 5+rand(20);
@@ -746,7 +746,7 @@ function foxFireAttack():void {
 //Illusion: - Raises enemy evasion, but can be resisted.
 //Factors affecting resist: INT (1% per point, max 70%), "Whispered" perk (20% flat bonus), "Religious" background and < 20 corruption (20% bonus at 0, losing 1% per point of corruption.)
 //Success:
-function illusionKitsuneAttack():void {
+public function illusionKitsuneAttack():void {
 	outputText("You struggle to keep your eyes on the kitsune, ghostly laughter echoing all around you as you turn to and fro, trying to track her movements.  It almost seems like the edges of reality are blurring around her, severely distorting your perceptions and making it hard to follow her.  It's going to be much harder to hit her if she keeps this up!");
 	//Resist: - successfully resisting deals small health & lust damage to kitsune
 	var resist:int = 0;
@@ -766,7 +766,7 @@ function illusionKitsuneAttack():void {
 	
 //Seal: - cancels and disables whatever command the player uses this round. Lasts 3 rounds, cannot seal more than one command at a time.
 //PCs with "Religious" background and < 20 corruption have up to 20% resistance to sealing at 0 corruption, losing 1% per corruption.
-function kitsuneSealAttack():void {
+public function kitsuneSealAttack():void {
 	var resist:int = 0;
 	if(player.inte < 30) resist = Math.round(player.inte);
 	else resist = 30;
@@ -823,7 +823,7 @@ function kitsuneSealAttack():void {
 }
 
 //Tease Texts:
-function kitSuneTeases():void {
+public function kitSuneTeases():void {
 	var select:int = rand(3);
 	if(monster.hairColor == "red" && rand(2) == 0) select = 3;
 	if(select == 0) outputText("You rub your eyes, suddenly seeing triple as you find yourself in the midst of a crowd of kitsune doppelgangers.  They run their hands all over you, teasing and doting on you as their tails caress every inch of your body.  Taken by surprise, you forget to fight back until they have already dispersed, blending back into a single fox-woman.");
@@ -835,7 +835,7 @@ function kitSuneTeases():void {
 	combatRoundOver();
 }
 
-function loseToKitsunes():void {
+public function loseToKitsunes():void {
 	var scene:Array = new Array();
 	//[LOSE FIGHT]
 	//Shared Scenes
@@ -881,7 +881,7 @@ function loseToKitsunes():void {
 //[LOSE FIGHT]
 //Shared Scenes
 // For Males and Herms
-function loseFightToHerms():void {
+public function loseFightToHerms():void {
 	clearOutput();
 	var biggest:int = player.biggestCockIndex();
 	outputText("\"<i>If you were going to give up that easily, you could have said so in the beginning and saved yourself the trouble!</i>\"\n\n");
@@ -933,7 +933,7 @@ function loseFightToHerms():void {
 }
 
 // For Females and Genderless
-function femalesAndNuetersLoseToKitsunes():void {
+public function femalesAndNuetersLoseToKitsunes():void {
 	clearOutput();
 	outputText( "\"<i>My, oh my, finished already?</i>\"  the kitsune says as she leans over your slumped form, grinning coyly.  \"<i>If you were going to give up that easily, you could have said so in the beginning and saved yourself the trouble!</i>\"\n\n");
 	outputText("Her tittering laughter rings in your ears, broken momentarily as she grunts with the effort of rolling you onto your back.\n\n");
@@ -967,7 +967,7 @@ function femalesAndNuetersLoseToKitsunes():void {
 
 //Blonde-exclusive
 //Single cock < 9 inches long
-function blondeKitsuneRapesSmallWangs():void {
+public function blondeKitsuneRapesSmallWangs():void {
 	clearOutput();
 	outputText("The precocious kitsune closes in on you with a predatory smirk as you fall to the ground, panting furiously.  You look up at her, fearing for whatever she has in store for you.  Mustering up every bit of willpower you have left, you scramble backward, but as you try to drag yourself up to your feet, you find your face pressing into something incredibly soft.  Six shimmering golden tails curl around your body, and you look up from between the kitsune's sizeable breasts to see her grinning down at you, her expression somewhere between doting and hungry.\n\n");
 	outputText("\"<i>Shh...  It'll be easier if you don't resist,</i>\" she whispers, her warm voice melting down your resistance almost instantly.\n\n");
@@ -1025,7 +1025,7 @@ function blondeKitsuneRapesSmallWangs():void {
 
 //Black-hair-exclusive
 //Lose while lactating
-function loseToBlackHairLatexWhileMilky():void {
+public function loseToBlackHairLatexWhileMilky():void {
 	clearOutput();
 	outputText("You drop to the ground, struggling to support yourself as your muscles shudder with ");
 	if(player.HP < 1) outputText("fatigue");
@@ -1055,7 +1055,7 @@ function loseToBlackHairLatexWhileMilky():void {
 }
 	
 // lose, requires balls and cumQ() > 1000
-function loseToKitsunesWithBallsAndHighCumQ():void {
+public function loseToKitsunesWithBallsAndHighCumQ():void {
 	clearOutput();
 	outputText( "Summarily beaten, you fall to the ground, propping yourself up in one final fleeting moment of defiance.  As you collapse in defeat, the fox-woman skips merrily over to your prone form, pausing momentarily to bend down and give you a patronizing kiss on the forehead.  Gripping you under the shoulders, she drags you bodily toward a fallen log" + ((player.tallness > 96) ? ", her face going beet red with the strain as she finally heaves your half-comatose frame into position" : ((player.tallness > 60) ? ", openly grunting with effort" : "") ) + ".\n\n");
 	outputText("\"<i>Let's just see...</i>\"  she quietly muses to herself, slipping her hands under your " + player.armorName + ", <i>\"what we have here...\"</i>\n\n");
@@ -1099,7 +1099,7 @@ function loseToKitsunesWithBallsAndHighCumQ():void {
 
 //Redhead-exclusive
 //Futa rape - chance increases as redhead's lust increases
-function getRapedByRedHeadFutaKitsune():void {
+public function getRapedByRedHeadFutaKitsune():void {
 	clearOutput();
 	outputText( "You collapse on the ground, too weakened to fight back anymore.  With a mischievous grin, the redhead playfully saunters up to you, crouching down and prodding you in the side.\n\n");
 	outputText("\"<i>Finished already?  I thought a big strong " + player.mf("boy","girl") + " like you would put up more of a fight.</i>\"\n\n");
@@ -1151,7 +1151,7 @@ function getRapedByRedHeadFutaKitsune():void {
 
 //[WIN FIGHT]
 //Damage victory
-function defeatTheKitsunes(display:Boolean = true):void {
+public function defeatTheKitsunes(display:Boolean = true):void {
 	if(display) {
 		clearOutput();
 		if(monster.HP < 1) {
@@ -1244,7 +1244,7 @@ function defeatTheKitsunes(display:Boolean = true):void {
 	addButton(9,"Leave",eventParser,5007);
 }
 
-function kitsuneButton(button:int,nam:String,func):int {
+public function kitsuneButton(button:int,nam:String,func):int {
 	if(button > 8) return 9;
 	addButton(button,nam,func);
 	button++;
@@ -1254,7 +1254,7 @@ function kitsuneButton(button:int,nam:String,func):int {
 
 //Shared Scenes
 //[Vaginal] - requires cock
-function fuckAKitsuneVaginally():void {
+public function fuckAKitsuneVaginally():void {
 	clearOutput();
 	outputText( "You approach the downed kitsune cautiously, wary of any tricks she might have hiding up her sleeve.  She makes a feeble attempt to scurry to her feet and run off, but you catch her by the " + ((player.cor < 40) ? "collar of her robes" : "tail") + " and pull her back, spinning her around and pinning her to a tree, leaning in close.\n\n");
 	
@@ -1324,7 +1324,7 @@ function fuckAKitsuneVaginally():void {
 }
 
 //[Anal] - requires cock area 144 or less
-function putItInAKitsunesAssWin():void {
+public function putItInAKitsunesAssWin():void {
 	clearOutput();
 	var x:int = player.cockThatFits(144);
 	outputText( "Your gaze cascades up and down her lovely form, taking in every voluptuous curve and line.  Finally, your eyes come to rest on her expansive, jiggling ass, carefully scrutinizing the large colorful tattoo emblazoned on the right cheek.  Heat surges to [eachCock] as you stare at it, almost entranced by the smooth globes.  Rubbing your hands together and grinning lecherously, you reach down and position the kitsune on her hands and knees, lifting her deliciously plump derriere into the air and tugging her robes apart, tossing them unceremoniously to the side." + ((monster.hairColor == "red" && flags[redheadIsFuta] == 1) ? "  Her half-flaccid cock dangles in between her thighs, a thin trickle of precum hanging from the tip as it swings back and forth." : "" ) + "\n\n");
@@ -1395,7 +1395,7 @@ function putItInAKitsunesAssWin():void {
 }
 
 //[Tribbing] - requires vagina
-function tribbingWithAKitsune():void {
+public function tribbingWithAKitsune():void {
 	clearOutput();
 	outputText("You eye her suspiciously for a bit, cautiously edging closer to her prone form.  The proverbial bag of tricks seems to be spent, however, and she allows you to close the distance without further harassment, slowly crawling backward across the grass.  Her cautious retreat is unable to outpace your approach, and before long you are planting your hips squarely atop hers, pinning her to the ground" + ((monster.hairColor == "red" && flags[redheadIsFuta] > 0) ? ", her cock pressed to her stomach" : "") + ".\n\n");
 	
@@ -1434,7 +1434,7 @@ function tribbingWithAKitsune():void {
 }
 
 //[Tail Job] - requires cock
-function tailJobKitsuneWin():void {
+public function tailJobKitsuneWin():void {
 	clearOutput();
 	outputText( "Eying her silky tails, you come up with a wonderful plan to relieve some tension.  Working quickly, you untie the sash around the kitsune's waist and then retie it so that her arms are pinned to her sides.  Turning her onto her back, you prop her up against a tree and then begin to strip out of your " + player.armorName + ", reaching down to gather up her six tails in your arms.  She looks up at you curiously, watching as you wrap one of the fluffy coils around [eachCock], slowly dragging your fingertips through the lustrous fur.  As your fingers slide across their fluffy surface, she gives an involuntary shudder, her cheeks flushing a slight pink.  The tail seems to constrict around you automatically, and without any further encouragement needed the tight ring of fur begins to slide up and down, squeezing and massaging your shaft" + ((player.cocks.length > 1) ? "s" : "" ) + " sensually.\n\n");
 	
@@ -1478,7 +1478,7 @@ function tailJobKitsuneWin():void {
 }
 
 //[Tentacles] - requires 3+ tentacles of 30" or longer
-function kitsunesGetBonedBy3PlusTentacles():void {
+public function kitsunesGetBonedBy3PlusTentacles():void {
 	clearOutput();
 	outputText("You slowly approach the fallen fox-woman, eying her warily and keeping a safe distance in case of any tricks she still has up her sleeve.  She slowly edges away from you with each step you take toward her, yelping in surprise when you swoop down to grab her by the arms.  She tries to scramble to safety, but her struggles only succeed in sprawling her flat on the ground as she gets tangled in her robes.\n\n");
 	
@@ -1556,7 +1556,7 @@ function kitsunesGetBonedBy3PlusTentacles():void {
 //Blonde-exclusive
 //[Fuck Draft]
 //{all " + cockDescript(0) + " calls for this scene should prioritize dog cocks; if PC is in Rut, prioritize other animal dicks second, otherwise use the biggest cock.}
-function fuckDraftBlond():void {
+public function fuckDraftBlond():void {
 	clearOutput();
 	var x:int = -1;
 	var temp = 0;
@@ -1663,7 +1663,7 @@ function fuckDraftBlond():void {
 
 
 //[Ovi Elixir]
-function doseAKitsuneWithOviElixirs():void {
+public function doseAKitsuneWithOviElixirs():void {
 	clearOutput();
 	var x:int = player.cockThatFits(100);
 	if(x < 0) x = player.biggestCockIndex();
@@ -1747,7 +1747,7 @@ function doseAKitsuneWithOviElixirs():void {
 }
 
 //[Lactaid]
-function lactaidDoseAKitSune():void {
+public function lactaidDoseAKitSune():void {
 	clearOutput();
 	outputText( "You lick your lips hungrily, staring at her voluptuous tits, just barely contained in her robes.  Reaching into your pouch, you pull out a bottle of Lactaid and swirl it around in your hand, grinning darkly.  As you lean down over her, the kitsune eyes you suspiciously, her gaze moving back and forth between the bottle and you.  She makes a halfhearted attempt to crawl away, letting out a cry when you grab her by the " + ((player.cor < 33) ? "hem of her robe" : "tail") + ", pulling her back.\n\n");
 	
@@ -1811,7 +1811,7 @@ function lactaidDoseAKitSune():void {
 
 //Black-hair-exclusive
 //[Hotdog Anal] - replaces regular Anal option only for the black-haired girl.
-function hotdogAnalInKitsuneButtDontLetTailTickleYourNose():void {
+public function hotdogAnalInKitsuneButtDontLetTailTickleYourNose():void {
 	clearOutput();
 	var x:int = player.cockThatFits( 144 );
 
@@ -1883,7 +1883,7 @@ function hotdogAnalInKitsuneButtDontLetTailTickleYourNose():void {
 
 
 //[Feeder]
-function feederTheKitsunes():void {
+public function feederTheKitsunes():void {
 	clearOutput();
 	outputText( "As you stand over the beaten trickster, you pick up the faint sound of a groan coming from her stomach.  Her hands rest on the pudgy curve of her stomach, rubbing it idly and grimacing.\n\n");
 	
@@ -1938,7 +1938,7 @@ function feederTheKitsunes():void {
 }
 
 //[GetBJ] - requires cock 108 area or less
-function getABJFromAFoxGirl():void {
+public function getABJFromAFoxGirl():void {
 	clearOutput();
 	var x:int = player.cockThatFits(108);
 
@@ -2025,7 +2025,7 @@ function getABJFromAFoxGirl():void {
 }
 
 //[GetLicked] - requires a vagina
-function getLickedByKitsunes():void {
+public function getLickedByKitsunes():void {
 	clearOutput();
 	outputText( "Wary of further trickery, you slowly make your way forward, keeping your eyes trained on her in case she decides to pull a fast one.  You must be in luck, as she only backs herself into a tree, crying out and wincing as the back of her skull hits bark with a sickening thump.  As she rubs the tender spot on the back of her head, your eyes wander across her form, an aching need building up in your feminine nethers.  As you drop low to face her eye to eye, you lift her chin gently and lean forward to kiss her, moaning lightly as her pillowy soft pink lips part to accept your tongue.\n\n");
 	
@@ -2056,7 +2056,7 @@ function getLickedByKitsunes():void {
 	
 //Redhead-exclusive
 //[Ride] - requires vagina
-function rideDatRedheadKitsuneCockIntoTheSkyDiamonds():void {
+public function rideDatRedheadKitsuneCockIntoTheSkyDiamonds():void {
 	clearOutput();
 	outputText("You watch the downed kitsune closely, strafing around her as you close in.  One never can be too careful, and you certainly have reason to suspect that this may just be another trick.  Thankfully, it appears the clever seductress' trickery has run its course.");
 	
@@ -2097,7 +2097,7 @@ function rideDatRedheadKitsuneCockIntoTheSkyDiamonds():void {
 
 //[Helix] - requires herm
 //REDHEAD KITSUNE
-function helixZeKitsunes():void {
+public function helixZeKitsunes():void {
 	clearOutput();
 	outputText( "You eye the sulking kitsune warily, wondering if this is just another one of her tricks, but as you edge closer to her, it seems she's resigned herself to her fate.  She stares up at you with a half-defiant pout, arms crossed over her chest, but makes no attempt to resist you other than to let out a startled \"<i>Eep!</i>\"  when you grab her by the shoulders and toss her onto her hands and knees.\n\n");
 	
@@ -2168,7 +2168,7 @@ function helixZeKitsunes():void {
 
 //[Remove Dick]
 //AKA Lose the dick, schweethaat AKA put that thing away
-function redheadsDontDeserveToHavePenisesBecauseTheyreTooGayForPenisOrSomethingIDontReallyKnowHowThisWorksOrWhyThisFunctionNameIsSoFuckingLong():void {
+public function redheadsDontDeserveToHavePenisesBecauseTheyreTooGayForPenisOrSomethingIDontReallyKnowHowThisWorksOrWhyThisFunctionNameIsSoFuckingLong():void {
 	clearOutput();
 	outputText( "You squint slightly, leering at the bulge between the kitsune's legs with a slight frown.  Your gaze travels up and down her voluptuous form, eying the girl's lovely curves carefully.  It's decided - if you're going to be having fun with her, that thing has got to go.\n\n");
 	
@@ -2191,7 +2191,7 @@ function redheadsDontDeserveToHavePenisesBecauseTheyreTooGayForPenisOrSomethingI
 }
 
 //[Bring Back Dick] // AKA you don't know dick about dick AKA the dickening
-function bringBackDick():void {
+public function bringBackDick():void {
 	clearOutput();
 	outputText( "You look her over contemplatively, rubbing your chin in thought as you stare at her crotch.  Somehow, it seems...  empty.  Something is missing.\n\n");
 	
@@ -2207,7 +2207,7 @@ function bringBackDick():void {
 }
 
 //Non-Futa Redhead: [Some sort of lapsitting handjob thing, I don't know]
-function nonFutaRedHeadIsWorstRedheadLapsittingHandjobThingIDontKnow():void {
+public function nonFutaRedHeadIsWorstRedheadLapsittingHandjobThingIDontKnow():void {
 	clearOutput();
 	outputText( "The beaten girl makes no effort to resist or even to escape as you close in on her.  She watches you carefully as you approach, having lost much of the fire in her glistening green eyes and replaced it with a reverent submissiveness.  Her ears droop to the sides when you reach out to stroke the top of her head, and she lowers her cheek against your hip, a light pink blush spreading across her face.\n\n");
 	
@@ -2263,7 +2263,7 @@ function nonFutaRedHeadIsWorstRedheadLapsittingHandjobThingIDontKnow():void {
 }
 
 //Non-futa Redhead: [Bondage] - requires a cock with area <= 144 due to some anal
-function nonFutaRedHeadBondageIGuessYouTieHerUpWithYourPenisThenHuh():void {
+public function nonFutaRedHeadBondageIGuessYouTieHerUpWithYourPenisThenHuh():void {
 	clearOutput();
 	outputText( "As you close in on your fallen prey, she seems to be quite resigned to her fate.  She makes a token attempt to flee, but the moment your hand touches one of her crimson tails, she falls flat and rolls over in submission.  You drop low over her, pinning her down by the hips as you run your fingertips up the side of her cheek, tousling her hair gently and teasing the edge of her ear.  Her ear flicks lightly, then lies flat against the sides of her head, a bright pink blush spreading across her face.\n\n");
 	
@@ -2350,7 +2350,7 @@ Before you can say anything, she disappears below the water, leaving you alone w
 
 //[The Shrine of the Ninetails]
 //Discovery
-function kitsuneShrine():void {
+public function kitsuneShrine():void {
 	clearOutput();
 	if(flags[KITSUNE_SHRINE_VISIT] == 0) {
 		outputText( "Your travels take you down a winding path through the forest today, deep in the heart of the woods.  Each step you take makes it feel even more like the dense foliage is creeping in even closer, the rough-hewn dirt path dwindling down to almost nothing up ahead.  Whatever the trail was used for long ago, it is in the late stages of being reclaimed by the wilderness now.\n\n");
@@ -2378,7 +2378,7 @@ function kitsuneShrine():void {
 }
 
 //[Read Books]
-function readKitsuneBooks():void {
+public function readKitsuneBooks():void {
 	clearOutput();
 	outputText( "You decide to peruse the selection of old tomes on the bookshelf.  To your dismay, many of them seem to be written in a strange script that you can't understand.  After a bit of searching, though, you find a couple that you can read, carefully thumbing through the old, dusty pages.\n\n" );
 	var choice:int = rand(3);
@@ -2404,7 +2404,7 @@ function readKitsuneBooks():void {
 }
 
 //[Meditate]
-function meditateLikeAKitsuneEhQuestionMark():void {
+public function meditateLikeAKitsuneEhQuestionMark():void {
 	clearOutput();
 	if(hasItem("FoxJewl",1) && player.tailType == TAIL_TYPE_FOX && player.tailVenom < 9 && player.tailVenom + 1 <= player.level && player.tailVenom + 1 <= player.inte/10 && player.earType == EARS_FOX && player.hasPerk("Corrupted Nine-tails") < 0 && player.hasPerk("Enlightened Nine-tails") < 0) {
 		//20% chance if PC has fox ears, 1 or more fox tails, carries a Fox Jewel, and meets level & INT requirements for the next tail:
@@ -2441,7 +2441,7 @@ function meditateLikeAKitsuneEhQuestionMark():void {
 }
 	
 //[Steal Statue]
-function stealAStatue():void {
+public function stealAStatue():void {
 	clearOutput();
 	menu();
 	if(flags[TOOK_KITSUNE_STATUE] == 0) {
@@ -2457,7 +2457,7 @@ function stealAStatue():void {
 }
 
 //[Take it]
-function takeAKitsuneStatue():void {
+public function takeAKitsuneStatue():void {
 	clearOutput();
 	outputText( "The thought of how many gems you'll be able to get for it is enough to quickly suppress those feelings, avarice winning out over guilt.");
 	//+10 COR, add Gold Statue to inventory, Advance 1hr and return to camp
@@ -2469,7 +2469,7 @@ function takeAKitsuneStatue():void {
 }
 
 //[Put it Back]
-function putKitsuneStatueBack():void {
+public function putKitsuneStatueBack():void {
 	clearOutput();
 	outputText( "Regretting your decision, you replace the statue on the pedestal, your guilty conscience winning out over greed today." );
 	//Advance 1hr and return to camp.
@@ -2479,7 +2479,7 @@ function putKitsuneStatueBack():void {
 }
 
 //Use:
-function kitsuneStatue():void {
+public function kitsuneStatue():void {
 	clearOutput();
 	outputText( "You pull out the gold statue and turn it around in your hands a few times, carefully examining the intricate filigree and inscriptions covering the masterfully crafted idol.  Whoever made this certainly put a lot of time and love into their craft." + ((player.cor < 50) ? "  Examining the painstaking detail that went into it, you feel a slight pang of guilt for having stolen it from its rightful place.  You push the thoughts away, reasoning that it won't be missed - after all, the owner was long gone before you arrived." : "") + "\n\n");
 	outputText("It's not much use to you other than decoration, but based on the craftsmanship alone you judge that you could get a fair price for it if you pawned it off." );

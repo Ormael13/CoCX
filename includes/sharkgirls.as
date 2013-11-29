@@ -29,7 +29,7 @@ Sex Life: The shark girls treat sex like a game or a sport, constantly battling 
 ----------------------------------
 */
 //[Explore Lake]
-function sharkGirlEncounter(exploreLoc:Number = 0) {
+public function sharkGirlEncounter(exploreLoc:Number = 0) {
 	//Set 'PC met Sharkgirls' for Izma stuff
 	if(flags[UNKNOWN_FLAG_NUMBER_00230] == 0) flags[UNKNOWN_FLAG_NUMBER_00230] = 1;
 	if(player.hasStatusAffect("Shark-Girl") < 0) player.createStatusAffect("Shark-Girl",0,0,0,0);
@@ -57,7 +57,7 @@ function sharkGirlEncounter(exploreLoc:Number = 0) {
 }
 
 //Lust-based attacks:
-function sharkTease():void {
+public function sharkTease():void {
 	spriteSelect(70);
 	if(rand(2) == 0) {
 		outputText("You charge at the shark girl, prepared to strike again, but stop dead in your tracks when she bends over and wiggles her toned ass towards you. It distracts you long enough for her tail to swing out and smack you to the ground. She coos, \"<i>Aw... You really do like me!</i>\"", false);
@@ -75,7 +75,7 @@ function sharkTease():void {
 }
 
 //Victory Sex. Herms should get a choice between the two scenes:
-function sharkWinChoices():void {
+public function sharkWinChoices():void {
 	spriteSelect(70);
 	//HP Win
 	if(monster.HP < 1) {
@@ -103,7 +103,7 @@ function sharkWinChoices():void {
 }
 
 //Male and Herm: 
-function sharkgirlDickFuck():void {
+public function sharkgirlDickFuck():void {
 	player.addStatusValue("Shark-Girl",1,1);
 	outputText("", true);
 	spriteSelect(70);
@@ -138,7 +138,7 @@ function sharkgirlDickFuck():void {
 	if(player.cor < 33) stats(0,0,0,0,0,0,0,1);
 }
 
-function sharkgirlSixtyNine():void {
+public function sharkgirlSixtyNine():void {
 	outputText("", true);
 	spriteSelect(70);
 	//Nagas don't actually get to 69!
@@ -177,7 +177,7 @@ function sharkgirlSixtyNine():void {
 //Shark girl Bad End.
 //Requirements: Have vaginal sex with 7 Shark girls in one day (Loss rape for males also counts toward this)
 //Scene triggers automatically after the seventh Shark girl
-function sharkBadEnd():void {
+public function sharkBadEnd():void {
 	outputText("", true);
 	spriteSelect(70);
 	outputText("Several weeks pass by and you once again find yourself at the lake, your loins aching for another shark girl to swim by. Just thinking of their incredible sexual organs and the sense of domination you get from them makes you feel aroused. Sadly though, there's no sign of one, so you instead decide to take a nap.\n\n", false);
@@ -189,7 +189,7 @@ function sharkBadEnd():void {
 }
 
 //[Next]
-function sharkBadEnd2():void {
+public function sharkBadEnd2():void {
 	outputText("", true);
 	spriteSelect(70);
 	outputText("Several months and mutations later...\n\n", false);
@@ -256,7 +256,7 @@ Putting it on: (Lust increases)
 [If dick is 7+ inches OR balls are apple-sized] You do your best to put the thong on, and while the material is very stretchy, it's simply far too uncomfortable to even try. Maybe if you shrunk your male parts down a little... [/]  
 -------------------------------*/
 //Loss Rape scenes:
-function sharkLossRape():void {
+public function sharkLossRape():void {
 	outputText("", true);
 	spriteSelect(70);
 	//Genderless:

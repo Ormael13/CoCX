@@ -6,40 +6,40 @@
 //const KATHERINE_BALL_SIZE:int = 402;
 //const KATHERINE_TIMES_SEXED:int = 403;
 
-function kathCock():String {
+public function kathCock():String {
 	return NPCCockDescript(CockTypesEnum.DOG,flags[KATHERINE_DICK_LENGTH]);
 }
-function kathCocks():String {
+public function kathCocks():String {
 	if(flags[KATHERINE_DICK_COUNT] < 2) return NPCCockDescript(CockTypesEnum.DOG,flags[KATHERINE_DICK_LENGTH]);
 	else return NPCCockDescript(CockTypesEnum.DOG,flags[KATHERINE_DICK_LENGTH]) + "s";
 }
-function eKathCock():String {
+public function eKathCock():String {
 	if(flags[KATHERINE_DICK_COUNT] < 2) return "her " + NPCCockDescript(CockTypesEnum.DOG,flags[KATHERINE_DICK_LENGTH]);
 	else return "each of her " + NPCCockDescript(CockTypesEnum.DOG,flags[KATHERINE_DICK_LENGTH]);
 }
-function EKathCock():String {
+public function EKathCock():String {
 	if(flags[KATHERINE_DICK_COUNT] < 2) return "Her " + NPCCockDescript(CockTypesEnum.DOG,flags[KATHERINE_DICK_LENGTH]);
 	else return "Each of her " + NPCCockDescript(CockTypesEnum.DOG,flags[KATHERINE_DICK_LENGTH]);
 }
-function oKathCock():String {
+public function oKathCock():String {
 	if(flags[KATHERINE_DICK_COUNT] < 2) return "her " + NPCCockDescript(CockTypesEnum.DOG,flags[KATHERINE_DICK_LENGTH]);
 	else return "one of her " + NPCCockDescript(CockTypesEnum.DOG,flags[KATHERINE_DICK_LENGTH]);
 }
-function OKathCock():String {
+public function OKathCock():String {
 	if(flags[KATHERINE_DICK_COUNT] < 2) return "Her " + NPCCockDescript(CockTypesEnum.DOG,flags[KATHERINE_DICK_LENGTH]);
 	else return "One of her " + NPCCockDescript(CockTypesEnum.DOG,flags[KATHERINE_DICK_LENGTH]);
 }
 
 
 //(small/moderate/huge)
-function katBalls():String {
+public function katBalls():String {
 	if(flags[KATHERINE_BALL_SIZE] <= 1) return "small";
 	else if(flags[KATHERINE_BALL_SIZE] <= 3) return "moderate";
 	else return "huge";
 }
 //[average/long]
 //(average/long/huge)
-function katCock():String {
+public function katCock():String {
 	if(flags[KATHERINE_DICK_LENGTH] <= 10) return "average";
 	else if(flags[KATHERINE_DICK_LENGTH] <= 14) return "long";
 	else return "huge";
@@ -49,11 +49,11 @@ function katCock():String {
 
 //If player has Silver Bell key item and is at Wet Bitch when Scylla is not busy with her Addicts Anonymous group
 
-function catMorphIntr():void {
+public function catMorphIntr():void {
 	outputText("\n\nThe cum-drinking nun Scylla is here, apparently resting up between one of her missions.  Recalling the last 'mission' you went on, your hand unthinkingly touches the silver bell you received from that strange herm cat-morph.  Scylla could probably help you find her again.", false);
 }
 
-function katherineGreeting():void {
+public function katherineGreeting():void {
 	outputText("", true);
 	//[If Player chooses 'Scylla' button]
 	outputText("Scylla smiles when she sees you approaching, and politely greets you.  \"<i>Why, hello, " + player.short + "; it's good to see you.  Do you need something?</i>\"\n\n", false);
@@ -97,7 +97,7 @@ function katherineGreeting():void {
 }
 	
 //Seeing Katherine
-function visitKatherine():void {
+public function visitKatherine():void {
 	outputText("", true);
 	//If Back Alley button is selected
 	outputText("The back alley behind Oswald's pawnshop is quite unremarkable, except that it's reasonably clean.  A number of empty crates, old blankets and torn strips of cloth have been assembled into a makeshift \"<i>nest</i>\", the kind of place that a homeless vagrant would use as a resting place.\n\n", false);
@@ -112,14 +112,14 @@ function visitKatherine():void {
 	outputText(", and she smiles when she sees you.  \"<i>" + player.short + "!  Did you come to see me?</i>\"", false);
 	katherineMenu();
 }
-function katherineMenu():void {
+public function katherineMenu():void {
 	//[Sex] [Talk] [Appearance] [Give Item]
 	var sex:int = 0;
 	if(player.lust >= 33) sex = 3335;
 	simpleChoices("Sex",sex,"Talk",talkToKatherine,"Appearance",katherinesAppearance,"Give Item",giveKatherineAnItem,"Back",telAdreMenu);
 }
 //Talk
-function talkToKatherine():void {
+public function talkToKatherine():void {
 	outputText("", true);
 	outputText("You tell Katherine that you'd like to talk.  The pink-haired black cat looks shy, but excited at that.  \"<i>Okay... what do you want to talk about?</i>\" she asks, nervously looking at her feet.", false);
 
@@ -129,7 +129,7 @@ function talkToKatherine():void {
 
 //Talk Scenes
 //Racial Tension
-function katherineDefur():void {
+public function katherineDefur():void {
 	outputText("", true);
 	outputText("You comment to Katherine that you can't help but notice that she and all of her.... ah, 'friends' are cats, and the city seems to be mainly populated by dogs.  Does that have anything to do with her basically being a vagrant?\n\n", false);
 
@@ -145,7 +145,7 @@ function katherineDefur():void {
 }
 
 //Her History
-function katherinesHistory():void {
+public function katherinesHistory():void {
 	outputText("", true);
 	outputText("You tell Katherine you're curious about her.  How did she end up on the streets?  Was she born there - or did she simply lose her family?\n\n", false);
 
@@ -165,7 +165,7 @@ function katherinesHistory():void {
 }
 
 //Gang
-function askKatherineAboutGang():void {
+public function askKatherineAboutGang():void {
 	outputText("", true);
 	outputText("You ask Katherine if she can tell you anything about the gang of cats you found her running with.\n\n", false);
 
@@ -199,7 +199,7 @@ function askKatherineAboutGang():void {
 }
 
 //Dog Cock
-function askKatherineAboutDogCock():void {
+public function askKatherineAboutDogCock():void {
 	outputText("", true);
 	outputText("You confess to Katherine that you're curious about her dog cock.  How did a cat end up with a canine penis?\n\n", false);
 
@@ -221,7 +221,7 @@ function askKatherineAboutDogCock():void {
 }
 
 //Vagrancy
-function askKatherineAboutVagrancy():void {
+public function askKatherineAboutVagrancy():void {
 	outputText("", true);
 	outputText("You ask Katherine to explain to you how exactly she and her friends can be vagrants; with all the empty houses left in the city, you'd think it would be easy for them to find a house in.\n\n", false);
 
@@ -233,7 +233,7 @@ function askKatherineAboutVagrancy():void {
 }
 
 //Love & Lust
-function askKatherineAboutLoveAndLust():void {
+public function askKatherineAboutLoveAndLust():void {
 	outputText("", true);
 	outputText("Trying to phrase your question politely, you ask why it was that Katherine wanted to see you again, particularly given the circumstances under which you met.\n\n", false);
 
@@ -249,7 +249,7 @@ function askKatherineAboutLoveAndLust():void {
 }
 
 //Katherine Appearance:
-function katherinesAppearance():void {
+public function katherinesAppearance():void {
 	outputText("", true);
 	outputText("Katherine stands before you, nervously watching as you scrutinize her form.  \"<i>Um... do you like what you see?</i>\"  Nervously trying to break the ice and amateurishly trying to flaunt her body, she strikes what might be a sexy pose... in her mind.\n\n", false);
 
@@ -273,7 +273,7 @@ function katherinesAppearance():void {
 }
 
 //Give Item:
-function giveKatherineAnItem():void {
+public function giveKatherineAnItem():void {
 	outputText("", true);
 	outputText("You tell Katherine that you have a present for her.\n\n", false);
 	outputText("The cat-morph's face lights up, but then she guiltily lowers her eyes.  \"<i>I can't - you're too good to me already...</i>\"  You cut her off, insisting that you want to give it to her.  \"<i>Okay, if you're sure... what is it?</i>\"\n\n", false);
@@ -290,7 +290,7 @@ function giveKatherineAnItem():void {
 }
 
 //Reducto
-function useReductoOnKat():void {
+public function useReductoOnKat():void {
 	outputText("", true);
 	if(flags[KATHERINE_DICK_LENGTH] <= 8 && flags[KATHERINE_KNOT_THICKNESS] <= 2 && flags[KATHERINE_BALL_SIZE] <= 1) {
 		//If min size on all Kat parts reached:
@@ -317,7 +317,7 @@ function useReductoOnKat():void {
 	}
 	
 }
-function useRedoctoOnKatsKnot():void {
+public function useRedoctoOnKatsKnot():void {
 	outputText("", true);
 	outputText("You gently reach out and start to stroke her sheath up and down, feeling the long bone of ", false);
 	if(flags[KATHERINE_DICK_COUNT] > 1) outputText("each of her canine cocks, and rubbing one finger across the exposed tips.  The cat wriggles and squirms, and quickly blooms under your care, until all " + flags[KATHERINE_DICK_LENGTH] + " inches of both shafts are exposed.  Knot just barely visible as a bulge at the base of each cock, you start to stroke them next.  Katherine coos and moans as your fingers glide up and down, and the responsive flesh starts to swell like red, hard balloons.  They puff up and up, swelling to full size, " + flags[KATHERINE_KNOT_THICKNESS] + " inches in diameter.  With subjects prepared, you stop, leaving Katherine hovering at the edge of release.\n\n", false);
@@ -346,7 +346,7 @@ function useRedoctoOnKatsKnot():void {
 	katSexMenu();
 }
 //[Cock Length] (unavailable unless Kat cocklength is >8)
-function useReductoOnKatsKock():void {
+public function useReductoOnKatsKock():void {
 	outputText("", true);
 	outputText("With a gesture, you indicate for her to expose herself.  In obedience, she begins to stroke her sheath and expose its contents, bashfully at first but with increasing vigor as her erection takes hold.  Soon she's masturbating happily with her eyes closed and her head rolled back on her neck, having nearly forgotten what she was doing in the first place.  You ", false);
 	if(player.lib > 50) outputText("allow her to continue until her scrotum tightens up and it looks like she'll blow her load with one more touch, and then ", false);
@@ -398,7 +398,7 @@ function useReductoOnKatsKock():void {
 }
 
 //[Ball Size](unavailable until Kat balls >1</i>\")
-function reductoBallSize():void {
+public function reductoBallSize():void {
 	outputText("", true);
 	outputText("You extract the small jar of salve and offer it to her.  Her face lights up in delight.  \"<i>Reducto?!  For me?  It's so expensive!</i>\"  At your nod, she yowls happily and snatches it up, yanking down her shorts to expose her sheath.  All of a sudden, she stops abruptly and looks up at you, a dangerous gleam in her eye.  \"<i>Would you like to... help me apply it?</i>\" she asks, softly.  You nod your head", false);
 	if(player.lib > 50) outputText(" with a salacious grin", false);
@@ -418,7 +418,7 @@ function reductoBallSize():void {
 }
 
 //Bulbous Pepper
-function giveKatABulbousPepper():void {
+public function giveKatABulbousPepper():void {
 	outputText("", true);
 	outputText("You hold out your bulbous canine pepper and ask if she'd like to eat it.\n\n", false);
 
@@ -440,7 +440,7 @@ function giveKatABulbousPepper():void {
 }
 
 //Double Pepper
-function giveKatADoublePepper():void {
+public function giveKatADoublePepper():void {
 	outputText("", true);
 	//(if Kat has only 1 cock so far)
 	if(flags[KATHERINE_DICK_COUNT] == 1) {
@@ -466,7 +466,7 @@ function giveKatADoublePepper():void {
 }
 	
 //Overly Large Pepper
-function giveKatAOverlyLargePepper():void {
+public function giveKatAOverlyLargePepper():void {
 	outputText("", true);
 	//(if Kat is not yet capped on size at 16 inches)
 	if(flags[KATHERINE_DICK_LENGTH] < 16) {
@@ -493,7 +493,7 @@ function giveKatAOverlyLargePepper():void {
 }
 
 //Sex
-function katherineSex():void {
+public function katherineSex():void {
 	outputText("", true);
 	outputText("You ask Katherine if she feels in the mood to have sex.\n\n", false);
 
@@ -501,7 +501,7 @@ function katherineSex():void {
 	katSexMenu();
 }
 
-function katSexMenu():void {
+public function katSexMenu():void {
 	//[Penetrate] [Get Penetrated] [Oral] [Double Helix] [Suckle]
 	var penetrate:Number = 0;
 	var getPen:Number = 0;
@@ -520,7 +520,7 @@ function katSexMenu():void {
 }
 
 //Penetrate
-function katPenetrate():void {
+public function katPenetrate():void {
 	outputText("", true);
 	outputText("You suggest that maybe you could try penetrating one of Katherine's holes.  Without further ado, she strips herself off until she's wearing nothing but a lecherous grin.  She then turns around and leans on a crate, waving her tail to freely show off both her tailhole and her already-dripping cunt above her dangling balls.  \"<i>So, come on in,</i>\" she purrs.\n\n", false);
 	//[Vagina] [Anus] [Both(not yet implemented)] [Suck 'n' Fuck]
@@ -534,7 +534,7 @@ function katPenetrate():void {
 
 
 //PC Penetrates Kath: Vaginal (doin' a cat doggy-style)
-function penetrateKatsVag():void {
+public function penetrateKatsVag():void {
 	var x:Number = player.cockThatFits(70);
 	outputText("", true);
 	outputText("You don't even need to think about it.  Your eyes are locked on the cat-herm's silken, sopping wet pussycat pussy, which is already dribbling femlube down her ", false);
@@ -574,7 +574,7 @@ function penetrateKatsVag():void {
 }
 
 //PC Penetrates Kath: Anal
-function pcPenetratesKatAnally():void {
+public function pcPenetratesKatAnally():void {
 	outputText("", true);
 	var x:Number = player.cockThatFits(70);
 	outputText("Thinking it over, your gaze falls upon the cat's ebony pucker, and you smile to yourself before telling Katherine that you want a shot at her back door.  Her eyes widen and she swallows hard, then she nods.  \"<i>O-Okay... if you're into that sort of thing...</i>\"\n\n", false);
@@ -619,7 +619,7 @@ function pcPenetratesKatAnally():void {
 }
 
 //Suck 'n' Fuck (unavailable if knot > 4</i>\")
-function suckNFuck():void {
+public function suckNFuck():void {
 	var x:Number = player.cockThatFits(70);
 	outputText("", true);
 	outputText("You think it over, then find your gaze drifting to Katherine's sheath and the canine cockflesh within.  Recalling how you helped the poor herm shrink down her monster knot", false);
@@ -685,7 +685,7 @@ function suckNFuck():void {
 }
 
 //Get Penetrated
-function letKatKnotYou():void {
+public function letKatKnotYou():void {
 	var x:Number = player.biggestCockIndex();
 	outputText("", true);
 	outputText("You ask Katherine if she'd like to penetrate you.  She looks startled, then grins like the proverbial cat that ate the canary.  \"<i>Well, all right then...</i>\" she declares, swiftly stripping off her clothes.  \"<i>Get undressed, turn around and kneel on the ground.</i>\"  Her canine cock", false);
@@ -712,7 +712,7 @@ function letKatKnotYou():void {
 }
 
 //Get Penetrated (Vaginal)
-function letKatKnotYourCuntPussyFuck():void {
+public function letKatKnotYourCuntPussyFuck():void {
 	var x:Number = player.biggestCockIndex();
 	outputText("", true);
 	outputText("You indicate to Katherine that you want it in your " + vaginaDescript() + ".\n\n", false);
@@ -809,7 +809,7 @@ function letKatKnotYourCuntPussyFuck():void {
 }
 
 //Get Penetrated (Anal)
-function getPenetrated():void {
+public function getPenetrated():void {
 	var x:Number = player.biggestCockIndex();
 	outputText("", true);
 	outputText("You indicate to Katherine that you want it in your " + assholeDescript() + ".\n\n", false);
@@ -903,7 +903,7 @@ function getPenetrated():void {
 }
 
 //Get Penetrated (Double)
-function getDoublePennedByKat():void {
+public function getDoublePennedByKat():void {
 	var x:Number = player.biggestCockIndex();
 	outputText("", true);
 	outputText("You indicate to Katherine that you want it in both holes.\n\n", false);
@@ -970,7 +970,7 @@ function getDoublePennedByKat():void {
 
 //Sucked 'n' Fucked
 //This scene requires the PC has a penis and has fucked Kat at least once since moving her
-function suckedNFuckedByKat():void {
+public function suckedNFuckedByKat():void {
 	var x:Number = player.biggestCockIndex();
 	outputText("", true);
 	outputText("As you crouch, trying to figure out how you want your herm lover to take you, you start when you feel Katherine's fingers suddenly caressing your " + cockDescript(x) + ".\n\n", false);
@@ -1058,7 +1058,7 @@ function suckedNFuckedByKat():void {
 }
 
 //Oral
-function oralKatherineChoices():void {
+public function oralKatherineChoices():void {
 	outputText("", true);
 	outputText("With a smirk, you suggest a taste test.  Katherine blinks, then smiles. \"<i>Fine by me... but who's going to be the taster?</i>\"\n\n", false);
 	var getOral:Number = 0;
@@ -1067,7 +1067,7 @@ function oralKatherineChoices():void {
 	simpleChoices("PC Sucks",3349,"Kath.Laps",getOral,"",0,"",0,"",0);
 }
 //Give Katherine Oral scene, single cock
-function giveKatOralPenisWingWang():void {
+public function giveKatOralPenisWingWang():void {
 	var x:Number = player.biggestCockIndex();
 	outputText("", true);
 	if(flags[KATHERINE_DICK_COUNT] == 1) {
@@ -1297,7 +1297,7 @@ function giveKatOralPenisWingWang():void {
 }
 
 //Katherine performs Oral on PC:
-function katherineGivesPCOralAllDayLongDotJPG():void {
+public function katherineGivesPCOralAllDayLongDotJPG():void {
 	outputText("", true);
 	outputText("You tell Katherine you'd like to see what she can do with her tongue.  The black cat blinks in surprise, then grins widely.  \"<i>Well, that can be arranged...</i>\"  She purrs, taking you by the arm and leading you around to a specific crate.  Once you are seated and both of you are naked, she kneels in front of you.  \"<i>Now, let's see what you have, my dear...</i>\" she says, tail waving in the way that only a happy cat's does.\n\n", false);
 	if(player.hasCock() && (player.gender == 1 || rand(2) == 0)) doNext(katherineLicksAllTheBoyPenises);
@@ -1305,7 +1305,7 @@ function katherineGivesPCOralAllDayLongDotJPG():void {
 	
 }
 //[Female]
-function katherineGoesDownOnTheGirlsOhYahBabyLesbo():void {
+public function katherineGoesDownOnTheGirlsOhYahBabyLesbo():void {
 	outputText("", true);
 	outputText("She gently strokes the lips of your " + vaginaDescript() + ", then leans in and gives it a deep, wet lick.  You can't restrain a shiver at the sensation; Katherine's tongue is unlike anything you've seen in this world so far, broad and bristly, but not so hard that it hurts.  It's like lots of little tongues all licking you at the same time.\n\n", false);
 
@@ -1321,7 +1321,7 @@ function katherineGoesDownOnTheGirlsOhYahBabyLesbo():void {
 	stats(0,0,0,0,0,0,-100,0);
 }
 //[Male/Herm]
-function katherineLicksAllTheBoyPenises():void {
+public function katherineLicksAllTheBoyPenises():void {
 	var x:Number = player.biggestCockIndex();
 	outputText("", true);
 	outputText("She takes your shaft eagerly, gently stroking it with her fingers to coax it erect, then leaning in to lick the head with her softly bristled tongue, caressing and suckling at the " + cockHead(x) + ".", false);
@@ -1359,7 +1359,7 @@ function katherineLicksAllTheBoyPenises():void {
 }
 
 //Double Helix
-function katDoubleHelixCraziness():void {
+public function katDoubleHelixCraziness():void {
 	var x:Number = player.cockThatFits(70);
 	if(x < 0) x = 0;
 	outputText("", true);
@@ -1481,7 +1481,7 @@ function katDoubleHelixCraziness():void {
 
 //Suckle
 //PC must lactate to have this option
-function suckleTacularKats():void {
+public function suckleTacularKats():void {
 	outputText("", true);
 	outputText("Feeling your " + chestDesc() + " and the milky goodness within, you ask Katherine if she likes milk the way her fellows do.  When the cat-morph gives you a puzzled look, you remove the upper part of your " + player.armorName + " and, fondling your tits with a smirk, tell her that you could use a little relief.\n\n", false);
 

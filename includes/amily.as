@@ -83,7 +83,7 @@
 // NEW EVENTS:
 // 3172 = Ask to defur Amily
 // 3174 = Defur Amily at camp (both corrupt/noncorrupt)
-function amilyFollower():Boolean {
+public function amilyFollower():Boolean {
 	if(flags[AMILY_FOLLOWER] > 0) {
 		//Amily not a follower while visiting Urta
 		if(flags[AMILY_VISITING_URTA] == 1 || flags[AMILY_VISITING_URTA] == 2) return false;
@@ -91,11 +91,11 @@ function amilyFollower():Boolean {
 	}
 	else return false;
 }
-function amilyCorrupt():Boolean {
+public function amilyCorrupt():Boolean {
 	if(flags[AMILY_FOLLOWER] == 2) return true;
 	else return false;
 }
-function amilySprite():void {
+public function amilySprite():void {
 	if(flags[AMILY_NOT_FURRY] == 0) spriteSelect(3);
 	else spriteSelect(65);
 }
@@ -103,7 +103,7 @@ function amilySprite():void {
 //Encounters
 //[Ruined Village]
 //[Exploring the Lake]
-function discoverAmilyVillage():void {
+public function discoverAmilyVillage():void {
 	outputText("", true);
 	outputText("As you roam the shores of the lake, you find your footsteps echoing as though you were stepping on wood rather than squishing in the sandy mud of the shore. Curious, you squat down and brush the soil away, revealing the rotting form of a wooden plank. Looking carefully at the ground underfoot, you realize that it is part of a pathway – the kind that villages make to provide easier access to and from muddy rivers, lakes and beaches. You believe you can make out the rest of the path clearly enough to follow it to its end.\n\n", false);
 	outputText("Do you follow the pathway?", false);
@@ -112,14 +112,14 @@ function discoverAmilyVillage():void {
 }
 
 //[No]
-function dontExploreAmilyVillage():void {
+public function dontExploreAmilyVillage():void {
 	outputText("", true);
 	outputText("Standing up, you turn and walk away. You presume from the state of the pathway that the village at the other end must either be in dire straits, abandoned, or overwhelmed by demons. In other words, it's no safe place for a traveler like you.\n\n", false);
 	doNext(13);
 }
 
 //[Yes]
-function exploreAmilyVillage():void {
+public function exploreAmilyVillage():void {
 	outputText("", true);
 	outputText("You follow the overgrown path inland, away from the shore of the lake. You pass through thick trees, struggling not to lose the path, before finally reaching what is clearly the end.  In front of you lie crumbling walls, broken and scattered by the wind and rain... and by other forces entirely. Beyond them are houses that have been torn apart, burned or collapsed. This was clearly once a village, but it was devastated at some point in the past. Demon attack is the first possibility that leaps into your mind. You examine the ruins for a time, and then decide to head back to camp. You don't think it would be wise to investigate here without preparing first.\n\n", false);
 	outputText("(<b>\"TownRuins\" added to Places menu.</b>)", false);
@@ -129,7 +129,7 @@ function exploreAmilyVillage():void {
 }
 
 //[Exploring the Ruined Village] 
-function exploreVillageRuin():void {
+public function exploreVillageRuin():void {
 	outputText("", true);
 	//50% chance of ghost-girl
 	if((flags[UNKNOWN_FLAG_NUMBER_00365] == 0 && flags[UNKNOWN_FLAG_NUMBER_00254] > 0 && flags[UNKNOWN_FLAG_NUMBER_00255] > 0 && rand(10) <= 3) && !followerShouldra() && flags[SHOULDRA_FOLLOWER_STATE] != .5) {
@@ -602,7 +602,7 @@ function exploreVillageRuin():void {
 	return;*/
 }
 
-function determineAmilySexEvent(forced:Boolean = false):Number {
+public function determineAmilySexEvent(forced:Boolean = false):Number {
 	var sex:Number = 0;
 	if(!forced && player.lust < 35) return 0;
 	//If Amily is lesbo lover!
@@ -684,7 +684,7 @@ function determineAmilySexEvent(forced:Boolean = false):Number {
 }
 
 //[Accept Eagerly]
-function acceptAmilysOfferEagerly():void {
+public function acceptAmilysOfferEagerly():void {
 	outputText("", true);
 	amilySprite();
 	outputText("You grin lecherously, unable to help it. It's rare when someone in this world wants to fuck and actually asks you, rather than just trying to beat you senseless and then rape you. You tell Amily that if she wants you to fuck her, you'll be happy to do so.\n\n", false);
@@ -707,7 +707,7 @@ function acceptAmilysOfferEagerly():void {
 }
 
 //[Accept Hesitantly]
-function acceptAmilyOfferHesitantly():void {
+public function acceptAmilyOfferHesitantly():void {
 	outputText("", true);
 	amilySprite();
 	outputText("The offer is shocking... and yet, strangely enticing. You cannot help but think that it's nice to meet somebody who, even if they are more sexually explicit than in your village, actually approaches the matter with some decorum. You are still surprised and even embarrassed by the invitation, but you can't help but think it might be worthwhile to accept. It's for a good cause, and she's clearly not entirely comfortable with it herself. And maybe you've been too long in this world of beast-people and monsters, but she actually is kind of cute.\n\n", false);
@@ -732,7 +732,7 @@ function acceptAmilyOfferHesitantly():void {
 }
 	
 //[Refuse]
-function refuseAmilysOffer():void {
+public function refuseAmilysOffer():void {
 	outputText("", true);
 	amilySprite();
 	outputText("You shake your head in refusal.\n\n", false);
@@ -755,7 +755,7 @@ function refuseAmilysOffer():void {
 }
 
 //[Announce yourself]
-function remeetingAmilyAnnounceSelf():void {
+public function remeetingAmilyAnnounceSelf():void {
 	outputText("", true);
 	amilySprite();
 	outputText("Reasoning that it's best not to scare someone like Amily, you clear your throat nosily. Amily whirls around to face you and immediately draws her knife into a defensive position. When she sees that it's you, she blinks a few times before grinning in surprise. \"<i>Why hello, " + player.short + "; good to see you again! It's nice to be reminded that there's another person out here who hasn't become a brainless fuck-puppet.</i>\" Her mood then sobers.\n\n", false);
@@ -763,7 +763,7 @@ function remeetingAmilyAnnounceSelf():void {
 }
 
 //[Scare her]
-function remeetingAmilyScare():void {
+public function remeetingAmilyScare():void {
 	outputText("", true);
 	amilySprite();
 	outputText("Grinning with mischief, you carefully sneak up behind her. Suddenly grabbing her shoulders, you shout, \"<i>Gotcha!</i>\" She jolts with a panicked squeal and whirls around, bringing along a scything slash from her dagger!\n\n", false);
@@ -780,7 +780,7 @@ function remeetingAmilyScare():void {
 	doNext(amilyRemeetingContinued);
 }
 
-function amilyRemeetingContinued():void {
+public function amilyRemeetingContinued():void {
 	outputText("", true);
 	amilySprite();
 	outputText("\"<i>So, have you changed your mind? Have you come to help me out?</i>\" Amily asks curiously.\n\n", false);
@@ -789,7 +789,7 @@ function amilyRemeetingContinued():void {
 }
 
 //[Accept]
-function secondTimeAmilyOfferedAccepted():void {
+public function secondTimeAmilyOfferedAccepted():void {
 	outputText("", true);
 	amilySprite();
 	outputText("You tell her that, yes – you'll give her the children she wants. She smiles pleasantly and tells you to follow her.\n\n", false);
@@ -801,7 +801,7 @@ function secondTimeAmilyOfferedAccepted():void {
 
 
 //[Politely refuse]
-function secondTimeAmilyRefuseAgain():void {
+public function secondTimeAmilyRefuseAgain():void {
 	outputText("", true);
 	amilySprite();
 	outputText("You shake your head gently and explain that your position has not changed. Amily looks annoyed, but respects your decision.\n\n", false);
@@ -813,7 +813,7 @@ function secondTimeAmilyRefuseAgain():void {
 }
 
 //[Here to talk]
-function repeatAmilyTalk():void {
+public function repeatAmilyTalk():void {
 	outputText("", true);
 	amilySprite();
 	outputText("You tell her that you only wanted to talk.\n\n", false);
@@ -823,7 +823,7 @@ function repeatAmilyTalk():void {
 }
 
 //[Get Lost]
-function tellAmilyToGetLost():void {
+public function tellAmilyToGetLost():void {
 	amilySprite();
 	outputText("You jeer at Amily that you have no interest in a hypocrite who claims to be pure but is really just like everything else in this tainted world; no higher purpose other than her next fuck.\n\n", false);
 	
@@ -839,7 +839,7 @@ function tellAmilyToGetLost():void {
 
 
 //[Sex]
-function sexWithAmily():void {
+public function sexWithAmily():void {
 	outputText("", true);
 	amilySprite();
 	outputText("You tell Amily that you came here because you wanted to have sex with her.\n\n", false);
@@ -940,7 +940,7 @@ function sexWithAmily():void {
 }
 
 //[Talk]
-function talkToAmily():void {
+public function talkToAmily():void {
 	outputText("", true);
 	amilySprite();
 	if(flags[AMILY_MET_AS] == 2 && player.gender == 2) outputText("You tell Amily that you came here because you wanted to talk with her.\n\n", false);
@@ -975,7 +975,7 @@ function talkToAmily():void {
 }
 
 //[Talk then sex]
-function talkThenSexWithAmily():void {
+public function talkThenSexWithAmily():void {
 	outputText("", true);
 	amilySprite();
 	outputText("You tell Amily that you came here because you wanted to talk with her.  If she feels like having sex when you are done, though, you would be happy to oblige.\n\n", false);
@@ -1065,7 +1065,7 @@ function talkThenSexWithAmily():void {
 }
 
 //[Announce yourself]
-function sneakyUberAmilyRemeetingsAnnounce():void {
+public function sneakyUberAmilyRemeetingsAnnounce():void {
 	outputText("", true);
 	amilySprite();
 	outputText("Reasoning that it's best not to scare someone like Amily, you clear your throat nosily. Amily whirls around to face you and immediately draws her knife into a defensive position. When she sees that it's you, she blinks a few times.\n\n", false);
@@ -1103,7 +1103,7 @@ function sneakyUberAmilyRemeetingsAnnounce():void {
 }
 
 //[Scare her]
-function scareAmilyRemeetingsProBaws():void {
+public function scareAmilyRemeetingsProBaws():void {
 	outputText("", true);
 	amilySprite();
 	outputText("Grinning with mischief, you carefully sneak up behind her. Suddenly grabbing her shoulders, you shout, \"<i>Gotcha!</i>\" She jolts with a panicked squeal and whirls around, bringing along a scything slash from her dagger!\n\n", false);
@@ -1167,14 +1167,14 @@ function scareAmilyRemeetingsProBaws():void {
 //[Desperate Plea]
 
 //[Announce yourself]
-function announceSelfOnDesperatePleaMeeting():void {
+public function announceSelfOnDesperatePleaMeeting():void {
 	outputText("", true);
 	amilySprite();
 	outputText("Reasoning that it's best not to scare someone like Amily, you clear your throat nosily. Amily whirls around to face you and immediately draws her knife into a defensive position. When she sees that it's you, she blinks a few times before grinning in surprise. \"<i>Why hello, " + player.short + "; good to see you again! It's nice to be reminded that there's another person out here who hasn't become a brainless fuck-puppet.</i>\" Her mood then takes a nervous turn. \"<i>Ah... do you have time to talk? There's something I want to get off my chest,</i>\" she tells you, hardly daring to look you in the eye.\n\n", false);
 	desperateFinallyAmily();
 }
 //[Scare her]
-function scareAmilyOnDesperatePleaMeeting():void {
+public function scareAmilyOnDesperatePleaMeeting():void {
 	outputText("", true);
 	amilySprite();
 	outputText("Grinning with mischief, you carefully sneak up behind her. Suddenly grabbing her shoulders, you shout, \"<i>Gotcha!</i>\" She jolts with a panicked squeal and whirls around, bringing along a scything slash from her dagger!\n\n", false);
@@ -1191,7 +1191,7 @@ function scareAmilyOnDesperatePleaMeeting():void {
 	}
 	desperateFinallyAmily();
 }
-function desperateFinallyAmily():void {
+public function desperateFinallyAmily():void {
 	amilySprite();
 	outputText("Curious what she has to say, you agree.\n\n", false);
 
@@ -1202,7 +1202,7 @@ function desperateFinallyAmily():void {
 }
 
 //[Accept her]
-function desperateAmilyPleaAcceptHer():void {
+public function desperateAmilyPleaAcceptHer():void {
 	outputText("", true);
 	amilySprite();
 	//set accepted flag
@@ -1215,7 +1215,7 @@ function desperateAmilyPleaAcceptHer():void {
 }
 
 //[Turn her down gently]
-function desperateAmilyPleaTurnDown():void {
+public function desperateAmilyPleaTurnDown():void {
 	outputText("", true);
 	amilySprite();
 	outputText("You softly tell her that you're sorry, but it just can't be helped. You have a quest to fulfill, and you don't even know if you'll be staying around instead of going home when it's over. That's even assuming you succeed, and don't end up dead in a ditch somewhere. You can't countenance taking a lover with something like that hanging over your head. Besides, you tell Amily that she should have more respect for her body than what this plan of hers entails, anyway.\n\n", false);
@@ -1234,7 +1234,7 @@ function desperateAmilyPleaTurnDown():void {
 }
 
 //[Turn her down bluntly]
-function desperateAmilyPleaTurnDownBlunt():void {
+public function desperateAmilyPleaTurnDownBlunt():void {
 	amilySprite();
 	outputText("", true);
 	outputText("Without mercy or hesitation, you tell her that there is indeed something wrong with her: You could never be attracted to a woman that looks like a pest and should be hiding in a granary.\n\n", false);
@@ -1255,7 +1255,7 @@ function desperateAmilyPleaTurnDownBlunt():void {
 }
 
 //[Birth]
-function fuckingMouseBitchPopsShitOut():void {
+public function fuckingMouseBitchPopsShitOut():void {
 	amilySprite();
 	outputText("You head into the ruined village, wondering how Amily is doing. You can't be sure, but you think that it will soon be time for her to give birth. Right as that thought sinks in, you hear a squeaking wail of pain in the distance. You hurriedly take off to find the source, and you soon find her; Amily, squatting naked in the shelter of a building. She squeals softly with exertion as her swollen abdomen visibly ripples, and fluids drip from her swollen pink vagina. She is definitely in labor.\n\n", false);
 	
@@ -1267,7 +1267,7 @@ function fuckingMouseBitchPopsShitOut():void {
 }
 
 //[Leave]
-function pregnancyIsScaryGoddamnMousePregnancyImNotWatchingThisShit():void {
+public function pregnancyIsScaryGoddamnMousePregnancyImNotWatchingThisShit():void {
 	outputText("", true);
 	amilySprite();
 	outputText("You make a hasty retreat. You aren't sure why; maybe it was fear, maybe it was memories of the way the midwives always chased the men away when one of the women back in the village went into labor. Reassuring yourself that she will be fine, you head back to camp.\n\n", false);
@@ -1280,7 +1280,7 @@ function pregnancyIsScaryGoddamnMousePregnancyImNotWatchingThisShit():void {
 
 
 //[Watch]
-function heyIGotTicketsToMicePoppingOut():void {
+public function heyIGotTicketsToMicePoppingOut():void {
 	outputText("", true);
 	amilySprite();
 	outputText("You don't want to just run away and leave her, but at the same time you think it would be best to respect her privacy. You stand a respectful distance away, watching as she strains. Her pink nether lips part and a small", false);
@@ -1304,7 +1304,7 @@ function heyIGotTicketsToMicePoppingOut():void {
 }
 
 //[Help]
-function helpThatFukkinUngratefulBitchGiveBirth():void {
+public function helpThatFukkinUngratefulBitchGiveBirth():void {
 	outputText("", true);
 	amilySprite();
 	outputText("You move forward instinctively. Amily is in labor – she needs help. The fact that you are the father only makes it more natural for you to want to help her.\n\n", false);
@@ -1357,7 +1357,7 @@ function helpThatFukkinUngratefulBitchGiveBirth():void {
 }
 
 //[Bad End]
-function thisIsAReallyShittyBadEnd():void {
+public function thisIsAReallyShittyBadEnd():void {
 	outputText("", true);
 	amilySprite();
 	outputText("You wander through the empty streets of the ruined village, wondering where Amily is. For all her many faults, she's an acceptable fuck. The sudden sound of footsteps catches your attention, and you ready yourself for battle; Amily never makes her presence felt so clumsily.\n\n", false);
@@ -1385,7 +1385,7 @@ function thisIsAReallyShittyBadEnd():void {
 
 
 //Good End:
-function thisFunctionProbablySucksTooOhYeahAmilyFunction():void {
+public function thisFunctionProbablySucksTooOhYeahAmilyFunction():void {
 	outputText("", true);
 	amilySprite();
 	outputText("As you wander through the empty streets of the ruined village, you wonder where Amily is. Even beyond what she means to you, now, you simply enjoy knowing that there's someone else in this twisted place you can talk to.\n\n", false);
@@ -1445,7 +1445,7 @@ function thisFunctionProbablySucksTooOhYeahAmilyFunction():void {
 }
 
 //Conversations - talk wif da bitch.
-function talkWithCuntIMeanAmily(sexAfter:Boolean = false):void {
+public function talkWithCuntIMeanAmily(sexAfter:Boolean = false):void {
 	outputText("", true);
 	amilySprite();
 	var convo:Number = rand(15);
@@ -1853,7 +1853,7 @@ function talkWithCuntIMeanAmily(sexAfter:Boolean = false):void {
 }
 
 //First Time Sekksin:
-function stickItInMouseTwatForTheFirstTimeNOTWORTHALLBULLSHIT():void {
+public function stickItInMouseTwatForTheFirstTimeNOTWORTHALLBULLSHIT():void {
 	outputText("", true);
 	amilySprite();
 	outputText("Amily leads you on a convulated route through the ruins of the village. Up streets, down streets, around corners, even straight through some ruins.  ", false);
@@ -1871,7 +1871,7 @@ function stickItInMouseTwatForTheFirstTimeNOTWORTHALLBULLSHIT():void {
 }
 
 //[=Take Charge=]
-function FirstTimeAmilyTakeCharge():void {
+public function FirstTimeAmilyTakeCharge():void {
 	outputText("", true);
 	outputText(images.showImage("amily-forest-takecharge"), false);
 	amilySprite();
@@ -1922,7 +1922,7 @@ function FirstTimeAmilyTakeCharge():void {
 	doNext(13);
 }
 //[=Wait for Her=]
-function beSomeKindofNervousDoucheAndWaitForAmily():void {
+public function beSomeKindofNervousDoucheAndWaitForAmily():void {
 	outputText("", true);
 	outputText(images.showImage("amily-forest-plainfuck"), false);
 	amilySprite();
@@ -1943,7 +1943,7 @@ function beSomeKindofNervousDoucheAndWaitForAmily():void {
 	doNext(13);
 }
 //[=Kiss Her=]
-function kissAmilyInDaMoufFirstTimeIsSomehowBetterThatWay():void {
+public function kissAmilyInDaMoufFirstTimeIsSomehowBetterThatWay():void {
 	outputText("", true);
 	amilySprite();
 	outputText(images.showImage("amily-forest-kissingfuck"), false);
@@ -1974,7 +1974,7 @@ function kissAmilyInDaMoufFirstTimeIsSomehowBetterThatWay():void {
 	amilyPreggoChance();
 }
 
-function amilySexHappens():void {
+public function amilySexHappens():void {
 	outputText("", true);
 	amilySprite();
 	var x:Number = player.cockThatFits(61);
@@ -2018,7 +2018,7 @@ function amilySexHappens():void {
 }
 
 //[Straight To Business]
-function amilySexBusiness():void {
+public function amilySexBusiness():void {
 	outputText("", true);
 	amilySprite();
 	outputText("Allowing Amily to take care of her clothes, you hastily remove your own " + player.armorName + ". Once the two of you are naked in front of each other, Amily looks you up and down, and then sniffs - not in disdain, but honestly trying to get a good scent of you. You speculate that this is some kind of check to see that you haven't somehow managed to become corrupted since last you met.\n\n", false);
@@ -2026,7 +2026,7 @@ function amilySexBusiness():void {
 }
 
 //[Playtime First]
-function amilySexPlaytimeFirst():void {
+public function amilySexPlaytimeFirst():void {
 	outputText("", true);
 	amilySprite();
 	outputText("As Amily begins reaching for her clothes, rather than start stripping off yourself, you close the distance between the two of you and take hold of her hands.\n\n", false);
@@ -2042,7 +2042,7 @@ function amilySexPlaytimeFirst():void {
 	amilySexPtII();	
 }
 
-function amilySexPtII():void {
+public function amilySexPtII():void {
 	amilySprite();
 	
 	//worm infested reaction
@@ -2058,7 +2058,7 @@ function amilySexPtII():void {
 }
 
 //[Sit & Watch]
-function sitAndWatchAmilySex():void {
+public function sitAndWatchAmilySex():void {
 	outputText("", true);
 	amilySprite();
 	var x:Number = player.cockThatFits(61);
@@ -2068,14 +2068,14 @@ function sitAndWatchAmilySex():void {
 }
 
 //[Caress Her]
-function caressAmilyHaveSex():void {
+public function caressAmilyHaveSex():void {
 	outputText("", true);
 	amilySprite();
 	outputText("Watching Amily masturbate and tease herself in front of you is definitely erotic... but you want something more to this session than that. Licking your lips with a combination of arousal and nervousness, you tentatively reach out one hand and brush a feather-light touch against her fingers.  Her eyes, which she had previously been keeping closed, suddenly spring open, and you ready yourself to withdraw and apologize if she protests. But, for whatever reason, she does not protest and, emboldened, you continue to touch and caress her. You keep your touches gentle, light and restricted to non-intimate regions, but she seems to be enjoying this; she draws a little closer, and reaches out to brush your cheek, absentmindedly using the very hand she had been stroking her netherlips with before, and so the scent of her intimate regions drifts to your nostrils from where her fingers lay. Her eyes have rolled almost completely shut, the gaze she is giving you is a very languid one, but something about the set of her lips, only just starting to open, entices you to kiss them.\n\n", false);
 	simpleChoices("Refuse Kiss",AmilyGetKissed,"Kiss Her",AmilyTakeTheKiss,"",0,"",0,"",0);	
 }
 //[Refuse the Kiss]
-function AmilyGetKissed():void {
+public function AmilyGetKissed():void {
 	outputText("", true);
 	amilySprite();
 	outputText("You pull your mind back from that thought. That's taking things in directions you're not sure that either you or Amily are actually comfortable with.\n\n", false);
@@ -2084,7 +2084,7 @@ function AmilyGetKissed():void {
 	flags[AMILY_AFFECTION] -= 3;
 }
 //[Take the Kiss]
-function AmilyTakeTheKiss():void {
+public function AmilyTakeTheKiss():void {
 	outputText("", true);
 	amilySprite();
 	outputText("Slowly, doing your best to convey that you will stop or back away if Amily is uncomfortable with this, you press your lips tenderly to Amily's.",false)
@@ -2097,7 +2097,7 @@ function AmilyTakeTheKiss():void {
 	flags[AMILY_AFFECTION] += 1+rand(3);
 }
 
-function continueAmilySmex():void {
+public function continueAmilySmex():void {
 	var x:Number = player.cockThatFits(61);
 	amilySprite();
 	outputText(images.showImage("amily-forest-plainfuck"), false);
@@ -2128,7 +2128,7 @@ function continueAmilySmex():void {
 
 
 //[Enjoy The Show]
-function amilyEnjoyShow():void {
+public function amilyEnjoyShow():void {
 	outputText("", true);
 	amilySprite();
 	outputText("Surprised, curious and aroused in equal measures, you decide to sit back and watch the show. Amily seems very happy to perform for you, and does her best to make it as intriguing as possible.", false);
@@ -2138,14 +2138,14 @@ function amilyEnjoyShow():void {
 }
 
 //[Step In]
-function amilyStepTheFuckIn():void {
+public function amilyStepTheFuckIn():void {
 	outputText("", true);
 	amilySprite();
 	outputText("Eager, confused and feeling impatient, you rise from your seat to help Amily undress. She accepts your help, and does seem to enjoy your touches and help, but at the same time she seems disappointed... maybe even a little hurt? Almost as if she had been wanting you to watch her efforts?\n\n", false);
 	AmilyMidSexLevel2();
 }
 
-function AmilyMidSexLevel2():void {
+public function AmilyMidSexLevel2():void {
 	stats(0,0,0,0,0,0,5,0);
 	amilySprite();
 	outputText("By the time Amily is completely naked, she is clearly excited about what is coming up; you even think she's wet already. She stares at you with a mischievous, turned-on smile, waiting to see what you will do now that it is your turn to strip.\n\n", false);
@@ -2155,7 +2155,7 @@ function AmilyMidSexLevel2():void {
 }
 
 //[Fair Is Fair]
-function StripForAmilyYouSlut():void {
+public function StripForAmilyYouSlut():void {
 	outputText("", true);
 	amilySprite();
 	var x:Number = player.cockThatFits(61);
@@ -2164,7 +2164,7 @@ function StripForAmilyYouSlut():void {
 }
 
 //[Straight To Business]
-function getDownWithSexTiem():void {
+public function getDownWithSexTiem():void {
 	outputText("", true);
 	amilySprite();
 	var x:Number = player.cockThatFits(61);
@@ -2172,14 +2172,14 @@ function getDownWithSexTiem():void {
 	continueWithMoreMidLevelAmilySex();
 }
 
-function continueWithMoreMidLevelAmilySex():void {
+public function continueWithMoreMidLevelAmilySex():void {
 	stats(0,0,0,0,0,0,5,0);
 	amilySprite();
 	outputText("Once you are both naked, you embrace and begin with a deep kiss. Slowly you two sink down and start exploring each other's body. You feel Amily's hands caressing you while you lightly kiss her breasts, one of your hands slowly drifting down to her cute ass and lightly squeezing it. Looking into her eyes, you see a sparkle in them before she surprises you and somehow manages to turn you onto your back. Now she's sitting on your belly, with your already hard cock being fondled by her rather flexible tail. Grinning at you, she seems to plan on teasing you as long as possible before allowing you to enter her.\n\n", false);
 	simpleChoices("Play Along",playAlongWithAmilyWhataDumbBitch,"Please Her",workToPleaseTheCunt,"",0,"",0,"",0);	
 }
 //[Play Along]
-function playAlongWithAmilyWhataDumbBitch():void {
+public function playAlongWithAmilyWhataDumbBitch():void {
 	outputText("",true);
 	amilySprite();
 	outputText(images.showImage("amily-forest-reverse-cowgirl"), false);
@@ -2189,14 +2189,14 @@ function playAlongWithAmilyWhataDumbBitch():void {
 }
 
 //[Work To Please Her]
-function workToPleaseTheCunt():void {
+public function workToPleaseTheCunt():void {
 	outputText("", true);
 	amilySprite();
 	outputText("You decide to take a more active role and start caressing her, kneading her breasts and making sure she enjoys it just as much as you do. Soon, Amily can't hold herself back and sinks down on you, beginning to ride you for all she's worth. It doesn't take you two long to reach the climax.\n\n", false);
 	stats(0,0,0,0,0,-1,-100,0);
 	AmilyMiddleGradeSexOver();
 }
-function AmilyMiddleGradeSexOver():void {
+public function AmilyMiddleGradeSexOver():void {
 	amilySprite();
 	outputText("Quite spent from your lovemaking, Amily sinks down on your breast, smiles at you and slowly dozes off. You also drift off to sleep soon after. Some time later, you wake up to find her already putting on her clothes again.\n\n", false);
 	//Affection gain here?
@@ -2207,7 +2207,7 @@ function AmilyMiddleGradeSexOver():void {
 }
 
 //[Say Goodbye]
-function sayGoodByeToAmilyPostSecks():void {
+public function sayGoodByeToAmilyPostSecks():void {
 	amilySprite();
 	outputText("", true);
 	outputText("You smile at her and give her a kiss before saying goodbye and returning to your camp.", false);
@@ -2215,7 +2215,7 @@ function sayGoodByeToAmilyPostSecks():void {
 }
 
 //[Stay A While]
-function stayAfterAmilyMiddleGradeSecks():void {
+public function stayAfterAmilyMiddleGradeSecks():void {
 	amilySprite();
 	outputText("", true);
 	outputText("You decide you'd rather stay with her a little longer, so you get up, go to her and with a kiss and some caresses draw her down again. She doesn't really put up any resistance, so you two lie there kissing and caressing each other for some time before you finally say goodbye and return to your camp.", false);
@@ -2227,7 +2227,7 @@ function stayAfterAmilyMiddleGradeSecks():void {
 
 
 //[High Affection - Non-Pregnant/Slightly Pregnant]
-function amilyHighAffectionSecks():void {
+public function amilyHighAffectionSecks():void {
 	amilySprite();
 	var x:Number = player.cockThatFits(61);
 	outputText("Amily really didn't waste any time getting to her hidden bedroom, sprinting as fast as she could with you in tow.", false);
@@ -2327,7 +2327,7 @@ function amilyHighAffectionSecks():void {
 }
 
 //[High Affection- Heavily Pregnant]
-function fuckAmilyPreg():void {
+public function fuckAmilyPreg():void {
 	amilySprite();
 	outputText("", true);
 	outputText(images.showImage("amily-forest-fuckpreg"), false);
@@ -2369,7 +2369,7 @@ function fuckAmilyPreg():void {
 	amilyPreggoChance();
 }
 
-function amilyPreggoChance():void {
+public function amilyPreggoChance():void {
 	//Is amily a chaste follower?
 	if(flags[AMILY_FOLLOWER] == 1) {
 		//If pregnancy not enabled, GTFO
@@ -2389,7 +2389,7 @@ function amilyPreggoChance():void {
 //----------=============================------------
 //Approach Amily:
 // EVENT 2427
-function amilyFollowerEncounter():void {
+public function amilyFollowerEncounter():void {
 	if(!amilyCorrupt() && player.eggs() >= 20 && player.canOviposit() && flags[AMILY_OVIPOSITION_UNLOCKED] == 0) {
 		amilyEggStuff();
 		return;
@@ -2469,7 +2469,7 @@ function amilyFollowerEncounter():void {
 	amilyMenu(true);
 }
 
-function amilyMenu(output:Boolean = true):void {
+public function amilyMenu(output:Boolean = true):void {
 	var date:Number = 0;
 	//If no fight yet, have option to introduce Urta and Amily
 	if(player.gender > 0 && flags[AMILY_FOLLOWER] == 1 && flags[AMILY_VISITING_URTA] == 0 && (flags[URTA_COMFORTABLE_WITH_OWN_BODY] >= 5 || urtaLove()) && !urtaBusy()) 
@@ -2496,7 +2496,7 @@ function amilyMenu(output:Boolean = true):void {
 }
 
 //Corrupt Amily Sex Options
-function amilyCorruptSexMenu():void {
+public function amilyCorruptSexMenu():void {
 	amilySprite();
 	var anal = 0;
 	var penetrated = 0;
@@ -2535,7 +2535,7 @@ function amilyCorruptSexMenu():void {
 
 
 //Appearance:
-function amilyAppearance():void {
+public function amilyAppearance():void {
 	amilySprite();
 	outputText("", true);
 	// [HORSECOCK]
@@ -2610,7 +2610,7 @@ function amilyAppearance():void {
 }
 
 // EVENT 2429: Talk to Amily in camp
-function talkToAmilyCamp():void {
+public function talkToAmilyCamp():void {
 	amilySprite();
 	outputText("", true);
 	outputText("You tell Amily you'd like to talk about things. She grins, happy at the prospect, and takes a seat, inviting you to sit down as well.\n\n", false);
@@ -2620,7 +2620,7 @@ function talkToAmilyCamp():void {
 }
 
 //Make Love:
-function fuckTheMouseBitch():void {
+public function fuckTheMouseBitch():void {
 	amilySprite();
 	//Corrupt Amily has her own shit
 	if(flags[AMILY_FOLLOWER] == 2) {
@@ -2685,7 +2685,7 @@ function fuckTheMouseBitch():void {
 }
 
 //[=Take Charge=]
-function amilyTakesChargeSex():void {
+public function amilyTakesChargeSex():void {
 	amilySprite();
 	outputText("", true);
 	var fuck:* = 0;
@@ -2722,7 +2722,7 @@ function amilyTakesChargeSex():void {
 	
 	
 //Take Charge 1: Fuck
-function takeChargeAmilyFuck():void{
+public function takeChargeAmilyFuck():void{
 	amilySprite();
 	var x:Number = player.cockThatFits(61);
 	outputText("", true);
@@ -2752,7 +2752,7 @@ function takeChargeAmilyFuck():void{
 	return;
 }
 //Take Charge 2: Mousemilk
-function takeChargeAmilyMouseMilk():void {
+public function takeChargeAmilyMouseMilk():void {
 	amilySprite();
 	outputText("", true);
 	outputText("You ponder for a second what it is that you want to do, running your hands gently down Amily's body. At one point, you squeeze one of her breasts - a little too hard, because the smell of milk promptly fills the air. Smiling, you sit down on the nest and coax a confused Amily into also being seated. Confusion gives way to understanding when you start to remove her shirt, and she happily helps you, letting her " + amilyTits() + " hang freely. The wind is chill, but you are sure it's also arousal to blame for the perky erectness of her " + amilyNipples() + "s, and you playfully tweak each of them in turn, which prompts a blush and a somewhat indignant squeak from your mousy lover. Her arms gently reach up to snake around your neck and pull you in closer, which you need little encouragement for.\n\n", false);
@@ -2780,7 +2780,7 @@ function takeChargeAmilyMouseMilk():void {
 	return;
 }
 //Take Charge 3: - eat out
-function takeChargeAmilyEatOut():void {
+public function takeChargeAmilyEatOut():void {
 	amilySprite();
 	outputText("", true);
 	outputText("With a smile, you gently place the tip of a finger on her nose, then slowly run it down along her body, over her lip, between her breasts, across her stomach, and finally stopping between her legs, where you playfully circle her secret spot with the tip of your finger.", false);
@@ -2812,7 +2812,7 @@ function takeChargeAmilyEatOut():void {
 	return;
 }
 //Take Charge 4 - amily sucks off
-function takeChargeAmilyGetSucked():void {
+public function takeChargeAmilyGetSucked():void {
 	amilySprite();
 	var hands:String = (flags[AMILY_NOT_FURRY] == 0) ? "paws":"hands"; // [Horsecocks]
 	outputText("", true);
@@ -2843,7 +2843,7 @@ function takeChargeAmilyGetSucked():void {
 	return;
 }
 //Take charge 5: scissor me timbers!
-function takeChargeAmilyScissorMeTimbers():void {
+public function takeChargeAmilyScissorMeTimbers():void {
 	amilySprite();
 	//Camp Sex Scene: Scissor
 	outputText("", true);
@@ -2861,7 +2861,7 @@ function takeChargeAmilyScissorMeTimbers():void {
 }
 
 //Take Charge: Mount Amily
-function takeChargeAmilyMountHer():void {
+public function takeChargeAmilyMountHer():void {
 	amilySprite();
 	outputText("", true);
 	outputText("With a smile, you gently place the tip of a finger on her nose, then slowly run it down along her body, over her lip, between her breasts, across her stomach, and finally stopping between her legs, where you begin to teasingly stroke and caress her " + amilyCock() + " through her pants, letting it tent her clothing.\n\n", false);
@@ -2911,7 +2911,7 @@ function takeChargeAmilyMountHer():void {
 }
 
 //[=Let Amily Lead=]
-function letAmilyLead():void {
+public function letAmilyLead():void {
 	amilySprite();
 	outputText("", true);
 	outputText("Not saying anything, you simply grin at her. After a moment, Amily realizes what you want her to do (or maybe what you're offering her). She blushes a little, but then answers your grin with one of her own, before grabbing your hand and leading you to her nest. You're not completely sure, but you think you notice a certain spring in her step - and her tail seems to almost have a mind of its own, weaving back and forth and occasionally caressing your " + player.leg() + ".\n\n", false);
@@ -3077,7 +3077,7 @@ function letAmilyLead():void {
 }
 
 //Give Present:
-function giveAmilyAPresent():void {
+public function giveAmilyAPresent():void {
 	amilySprite();
 	outputText("", true);
 	if(flags[AMILY_FOLLOWER] == 1) {
@@ -3147,7 +3147,7 @@ function giveAmilyAPresent():void {
 }
 
 //[Purified Incubus Draft - If Amily is a Female]
-function giveAmilyPureIncubusDraft():void {
+public function giveAmilyPureIncubusDraft():void {
 	amilySprite();
 	outputText("", true);
 	//PURE AMILY
@@ -3236,13 +3236,13 @@ function giveAmilyPureIncubusDraft():void {
 		}
 	}
 }
-function corruptAmilyYouDeclineMaxxingHerDick():void {
+public function corruptAmilyYouDeclineMaxxingHerDick():void {
 	outputText("", true);
 	amilySprite();
 	outputText("You decide to leave her as she is. If you want her to have a bigger dick you can always give her more drafts. \"<i>I want you to practice using your new tool, so you'll be ready whenever I need you,</i>\" you order Amily. \"<i>Yes, " + player.mf("master","mistress") + ",</i>\" she answers. You leave her on the floor and go about your business.", false);
 	doNext(amilyFollowerEncounter);
 }
-function corruptAmilyGetsDickMaxxedOut():void {
+public function corruptAmilyGetsDickMaxxedOut():void {
 	outputText("", true);
 	amilySprite();
 	//(If PC has 2 feet that are not hooves)
@@ -3264,7 +3264,7 @@ function corruptAmilyGetsDickMaxxedOut():void {
 }
 
 //(If the player says Yes): 
-function giveAmilyPureIncubusDraft4Realz():void {
+public function giveAmilyPureIncubusDraft4Realz():void {
 	outputText("", true);
 	amilySprite();
 	consumeItem("P.Draft",1);
@@ -3278,7 +3278,7 @@ function giveAmilyPureIncubusDraft4Realz():void {
 	doNext(amilyFollowerEncounter);
 }
 
-function amilyDickGrow():void {
+public function amilyDickGrow():void {
 	//flags[AMILY_WANG_LENGTH] - length
 	//flags[AMILY_WANG_GIRTH] - girth
 	//If no wang, grow.
@@ -3301,7 +3301,7 @@ function amilyDickGrow():void {
 }
 	
 //(If the player says No): 
-function declineToMakeAmilyFuta():void {
+public function declineToMakeAmilyFuta():void {
 	outputText("", true);
 	amilySprite();
 	outputText("On second thought, you decide against giving it to her. Amily looks relieved as you apologize and put it back in your pocket. \"<i>So, what did you really want to ask me about?</i>\" She says, eager to change the subject.\n\nYou don't really have anything to say and walk away, embarrassed.", false);
@@ -3309,7 +3309,7 @@ function declineToMakeAmilyFuta():void {
 }
 
 //[Purified Succubi Milk]
-function giveAmilyPurifiedSuccubusMilk():void {
+public function giveAmilyPurifiedSuccubusMilk():void {
 	outputText("", true);
 	amilySprite();
 	//DAH PURE
@@ -3367,7 +3367,7 @@ function giveAmilyPurifiedSuccubusMilk():void {
 
 
 //Drink succubus delight
-function amilyDrinksSuccubusDelight():void {
+public function amilyDrinksSuccubusDelight():void {
 	outputText("", true);
 	amilySprite();
 	// [HORSECOCKS] - Since I'm fucking lazy, that's why
@@ -3417,7 +3417,7 @@ function amilyDrinksSuccubusDelight():void {
 }
 
 //[Give Succubus' Delight]
-function giveCorruptAmilySuccubusDelight():void {
+public function giveCorruptAmilySuccubusDelight():void {
 	outputText("", true);
 	amilySprite();
 	//Doesn't matter if purified or not, she takes it the same way.
@@ -3433,7 +3433,7 @@ function giveCorruptAmilySuccubusDelight():void {
 }
 
 //[Pink Egg - Requires Amily be a Herm]
-function giveAmilyAPinkEgg():void {
+public function giveAmilyAPinkEgg():void {
 	outputText("", true);
 	amilySprite();
 	//PUREZ
@@ -3453,7 +3453,7 @@ function giveAmilyAPinkEgg():void {
 	doNext(amilyFollowerEncounter);
 }
 //[White Egg]
-function giveAmilyAWhiteEgg():void {
+public function giveAmilyAWhiteEgg():void {
 	outputText("", true);
 	amilySprite();
 	outputText("You hold out a white egg, telling her that it will make her nipples grow.\n\n", false);
@@ -3500,7 +3500,7 @@ function giveAmilyAWhiteEgg():void {
 }
 
 //[Brown Egg]
-function giveAmilyABrownEgg():void {
+public function giveAmilyABrownEgg():void {
 	outputText("", true);
 	amilySprite();
 	outputText("You hold out a brown egg, telling her that it will make her butt grow.\n\n", false);
@@ -3557,7 +3557,7 @@ function giveAmilyABrownEgg():void {
 }
 
 //[Purple Egg]
-function giveAmilyAPurpleEgg():void {
+public function giveAmilyAPurpleEgg():void {
 	outputText("", true);
 	amilySprite();
 	outputText("You hold out a purple egg, telling her that it will make her hips grow.\n\n", false);
@@ -3615,7 +3615,7 @@ Grimacing at the smell - it must be awful, for her sensitive nose - she starts s
 */
 
 //[Clothes]
-function giveAmilySomePants():void {
+public function giveAmilySomePants():void {
 	outputText("", true);
 	amilySprite();
 	outputText("You offer her a set of comfortable clothes, asking if she'd like to wear these instead of her " + flags[AMILY_CLOTHING] + " she's wearing.\n\n", false);
@@ -3636,7 +3636,7 @@ function giveAmilySomePants():void {
 }
 /*
 //[Lactaid]
-function makeTheMouseAMilkCowMoo():void {
+public function makeTheMouseAMilkCowMoo():void {
 	outputText("", true);
 	outputText("\"<i>Lactaid? You really want to try drinking mouse milk?</i>\" Amily asks, a little uncertainly, a little playfully.  You nod and assure that you do.  \"<i>Alright, if you insist.</i>\" She proclaims, taking the pink bottle from you and drinking the creaminess to be found within.\n\n", false);
 
@@ -3656,7 +3656,7 @@ function makeTheMouseAMilkCowMoo():void {
 	The two of you head to the stream, where Amily strips down and dives into the water, to ensure she's scrubbed as clean as possible.  When she swims back, you join her in the water's edge, where you open the bottle of dye and begin the long process of massaging it into her ([horsecock] fur.  You worry for a moment that there's not enough to cover her, but, at the end, you manage to make it work/hair).  Helping her wash the excess out with the cool water, you both leave the water, where Amily slowly twirls around to let you admire her new (dyecolor) ([horsecock]fur/'do).  Quite pleased with it herself, she grabs her (clothesdescript) and wanders off back to camp, with you following her.
 */
 
-function amilyHips():String {
+public function amilyHips():String {
 	var desc:String = "";
 	var rando:Number = 0;
 	if(flags[AMILY_HIP_RATING] <= 1)
@@ -3715,7 +3715,7 @@ function amilyHips():String {
 	return desc;
 }
 
-function amilyButt():String {
+public function amilyButt():String {
 	var desc:String = "";
 	var rando:Number = 0;
 	if(flags[AMILY_ASS_SIZE] <= 1)
@@ -3777,7 +3777,7 @@ function amilyButt():String {
 	return desc;
 }
 
-function amilyBalls():String {
+public function amilyBalls():String {
 	if(flags[AMILY_HAS_BALLS_AND_SIZE] == 0) return "prostate";
 	var descripted:Boolean = false;
 	var rando:Number = 0;
@@ -3811,7 +3811,7 @@ function amilyBalls():String {
 	return desc;
 }
 
-function amilyTits():String
+public function amilyTits():String
 {
 	var temp:int = Math.random()*3;
 	var descript:String = "";
@@ -3888,7 +3888,7 @@ function amilyTits():String
 	return descript;
 }
 
-function amilyCock():String {
+public function amilyCock():String {
 	var descript:String = "";
 	var descripted:Boolean = false;
 	var rando:Number;
@@ -3923,7 +3923,7 @@ function amilyCock():String {
 
 	return descript;
 }
-function amilyNipples():String {
+public function amilyNipples():String {
 	var descripted:Boolean = false;
 	var description:String = "";
 	var rando:Number = 0;
@@ -4026,7 +4026,7 @@ function amilyNipples():String {
 }
 
 //Oral
-function corruptAmilyOralSuckOff():void {
+public function corruptAmilyOralSuckOff():void {
 	amilySprite();
 	outputText("", true);
 	outputText("\"<i>Come and suck me off,</i>\" you order. Amily wastes no time and scrambles to nuzzle your crotch affectionately", false);
@@ -4057,7 +4057,7 @@ function corruptAmilyOralSuckOff():void {
 	stats(0,0,0,0,0,1,-100,1);
 	doNext(13);	
 }
-function corruptAmilyLickPussiesLikeAPro():void {
+public function corruptAmilyLickPussiesLikeAPro():void {
 	amilySprite();
 	outputText("", true);
 	//[Oral sex]
@@ -4133,7 +4133,7 @@ function corruptAmilyLickPussiesLikeAPro():void {
 }
 
 //Corrupt scissortastrophie!
-function corruptAmilyScissorsLikeAPro():void {
+public function corruptAmilyScissorsLikeAPro():void {
 	amilySprite();
 	outputText("", true);
 	outputText("You grin as an interesting idea comes to your mind; you order Amily to lay down and spread her legs; she complies and you undress and gently set yourself between her legs, aligning your pussy with hers,", false);
@@ -4210,7 +4210,7 @@ function corruptAmilyScissorsLikeAPro():void {
 	doNext(13);
 }
 //Fuck corrupt Amily's pussaaaaaayyyyy
-function corruptAmilysPussyGetsMotherfuckingFucked():void {
+public function corruptAmilysPussyGetsMotherfuckingFucked():void {
 	amilySprite();
 	outputText("", true);
 	outputText("You tell Amily that you're feeling playful and tell her you'd like to do some role-playing; you tell Amily to play the role of a demon out to seduce you. \"<i>But I could never do that " + player.mf("master","mistress") + ", the only role I'm fit for is being your adoring slave!</i>\"\n\n", false);
@@ -4305,7 +4305,7 @@ function corruptAmilysPussyGetsMotherfuckingFucked():void {
 }
 
 //Let corrupt Amily bone you with her cock
-function corruptAmilyCampBonesPCWithHerCock():void {
+public function corruptAmilyCampBonesPCWithHerCock():void {
 	amilySprite();
 	outputText("", true);
 	outputText("Your gaze sets upon Amily's cock and an idea forms in your head. You wonder how much Amily can resist her own lust... perhaps you should test this now; see if she is truly the ideal fucktoy; an obedient cumslut that lives only for your pleasure, that will follow your orders no matter what.\n\n", false);
@@ -4376,7 +4376,7 @@ function corruptAmilyCampBonesPCWithHerCock():void {
 
 
 //CAMP CORRUPT AMILY SEX
-function corruptAmilyBuckFutter():void {
+public function corruptAmilyBuckFutter():void {
 	amilySprite();
 	outputText("", true);
 	//[Anal - non-mutant]
@@ -4429,7 +4429,7 @@ function corruptAmilyBuckFutter():void {
 //Amily Female Stuff Start
 //Lesbian Love Confession:
 //(Replaces the Meet & Talk scene for a female PC who has gotten Amily's Affection to Moderate)
-function amilyIsTotallyALesbo():void {
+public function amilyIsTotallyALesbo():void {
 	amilySprite();
 	outputText("", true);
 	outputText("Strangely, you don't need to seek Amily out this time; she's waiting for you. You ask her if something is wrong, and she shakes her head... but she looks kind of embarrassed as she does so.\n\n", false);
@@ -4442,7 +4442,7 @@ function amilyIsTotallyALesbo():void {
 	simpleChoices("Stop Her",amilyLesboStopHer,"Let Her Go",amilyLesboLetHerGo,"",0,"",0,"",0);
 }
 //[=Stop Her=]
-function amilyLesboStopHer():void {
+public function amilyLesboStopHer():void {
 	amilySprite();
 	outputText("", true);
 	outputText("Before she can get too far, though, your hand shoots out and clasps her shoulder. She starts to question what you're doing, but you spin her around and pull her into a tight embrace, telling her that you feel the same way. Shyly, she offers her lips to you, and you kiss them eagerly. When you seperate for breath, you ask if she wants to see what it's like with another woman. Her eyes glazed, she nods at you wordlessly and starts leading you away down the street.\n\n", false);
@@ -4452,7 +4452,7 @@ function amilyLesboStopHer():void {
 }
 
 //[=Let Her Go=]
-function amilyLesboLetHerGo():void {
+public function amilyLesboLetHerGo():void {
 	amilySprite();
 	outputText("", true);
 	/*(If player is already locked into a relationship): 
@@ -4470,7 +4470,7 @@ function amilyLesboLetHerGo():void {
 
 //Amily's Surprise:
 //(Replaces the Remeeting Scene for a female player has had the Lesbian Love Confession scene and gotten Amily's Affection to High)
-function amilyPostConfessionGirlRemeeting():void {
+public function amilyPostConfessionGirlRemeeting():void {
 	amilySprite();
 	outputText("", true);
 	outputText("Amily looks happy to see you, as usual, but shy as well. \"<i>Ah... " + player.short + "... it's good to see you again.</i>\"\n\n", false);
@@ -4487,7 +4487,7 @@ function amilyPostConfessionGirlRemeeting():void {
 	simpleChoices("Accept",amilyOnGirlSurpriseBonerAcceptance,"Reject",amilyOnGirlSurpriseBonerREJECT,"",0,"",0,"",0);
 }
 //[=Accept=]
-function amilyOnGirlSurpriseBonerAcceptance():void {
+public function amilyOnGirlSurpriseBonerAcceptance():void {
 	amilySprite();
 	outputText("", true);
 	outputText("Her increasingly nervous, high-pitched tone is cut off when you press a finger to her lips, smiling affectionately at her. You tell her that you understand what she is saying and why she did this, and you're happy to be with her in that way. Putting on a saucy grin, you stage-whisper into her ear about giving her new appendage a trial-run, and she blushes bright red.\n\n", false);
@@ -4497,7 +4497,7 @@ function amilyOnGirlSurpriseBonerAcceptance():void {
 	doNext(hermilyOnFemalePC);
 }
 //[=Reject=]
-function amilyOnGirlSurpriseBonerREJECT():void {
+public function amilyOnGirlSurpriseBonerREJECT():void {
 	amilySprite();
 	outputText("", true);
 	outputText("You scowl and take a pointed step back. You cared about her because she was another woman, alone and lost in this twisted world full of horny freaks that seem to be nothing but dicks and lust; now she's turned herself into one of them? She couldn't accept the pure love that the two of you already had?\n\n", false);
@@ -4509,7 +4509,7 @@ function amilyOnGirlSurpriseBonerREJECT():void {
 }
 
 //Yuri:
-function girlyGirlMouseSex():void {
+public function girlyGirlMouseSex():void {
 	amilySprite();
 	outputText("", true);
 	outputText("You take Amily by the hand and allow her to lead you to where it is she plans on having sex with you. Soon enough, through many twists and turns, you are in a makeshift bedroom in an otherwise gutted building.\n\n", false);
@@ -4542,7 +4542,7 @@ function girlyGirlMouseSex():void {
 }
 
 //Herm Amily on Female:
-function hermilyOnFemalePC():void {
+public function hermilyOnFemalePC():void {
 	amilySprite();
 	outputText("", true);
 	outputText("Amily's efforts at leading you to a place to make love are a bit hampered by the erection tenting her pants, which she is clearly still having a bit of difficulty adjusting to. Finally, though, you have reached her current den, where you waste no time in removing your " + player.armorName + ".\n\n", false);
@@ -4588,7 +4588,7 @@ function hermilyOnFemalePC():void {
 }
 
 //Player gives Birth (quest version):
-function pcBirthsAmilysKidsQuestVersion():void {
+public function pcBirthsAmilysKidsQuestVersion():void {
 	amilySprite();
 	flags[PC_TIMES_BIRTHED_AMILYKIDS]++;
 	//In camp version:
@@ -4630,7 +4630,7 @@ function pcBirthsAmilysKidsQuestVersion():void {
 	outputText("\"<i>Look at them all. You... I never thought it would turn out this way, but you're helping my dream to come true. Thank you,</i>\" Amily tells you sincerely. You're too exhausted to keep your eyes open for long, but she promises to stay in touch and, even as you fall asleep, she's gathering up your children and taking them away.", false);
 }
 
-function postBirthingEndChoices():void {
+public function postBirthingEndChoices():void {
 	amilySprite();
 	outputText("", true);
 	outputText("When you awake, the children are gone, and Amily has prepared something for you to eat. You eagerly start to feed yourself as Amily, looking grave, begins to speak.\n\n", false);
@@ -4647,7 +4647,7 @@ function postBirthingEndChoices():void {
 }
 
 //[=Accept=]
-function acceptAmilyAsYourFemaleWaifu():void {
+public function acceptAmilyAsYourFemaleWaifu():void {
 	amilySprite();
 	outputText("", true);
 	outputText("You stare at her in surprise. Then, you take hold of her hands and smile at her. You tell her that nothing would make you happier than to have her here, living with you, being with her. Amily squeaks loudly with joy and passionately embraces you, kissing you as deeply as she can. When she finally lets you go for lack of air, she takes a good long look around the camp, as if she's seeing it for the first time.\n\n", false);
@@ -4667,7 +4667,7 @@ function acceptAmilyAsYourFemaleWaifu():void {
 }
 
 //[=Stay Friends=]
-function declineButBeFriends():void {
+public function declineButBeFriends():void {
 	amilySprite();
 	outputText("", true);
 	outputText("You think about it, and then shake your head. You tell her that you do appreciate her feelings, but you're not sure the two of you are ready to make the committment that living together entails. Besides, your camp is set up to guard the portal leading back to your world; that makes it a magnet for demons. You can't imagine exposing her to the danger that moving to camp would entail for her.\n\n", false);
@@ -4678,7 +4678,7 @@ function declineButBeFriends():void {
 }
 //Shoot the bitch down!
 //[=Not Interested=]
-function notInterestedInDumbshitMouseBitches():void {
+public function notInterestedInDumbshitMouseBitches():void {
 	amilySprite();
 	outputText("", true);
 	outputText("You stare at her coldly, and inform her that you have no interest in any kind of relationship with her on that level. You decided to let her plant her brats in you out of pity, but now that she no longer needs your womb, you have no more intention of renting it out to her.\n\n", false);
@@ -4690,7 +4690,7 @@ function notInterestedInDumbshitMouseBitches():void {
 }
 
 //Gender Modified:
-function amilyNewGenderConfrontation():void {
+public function amilyNewGenderConfrontation():void {
 	amilySprite();
 	outputText("", true);
 	var sex:Number = 0;
@@ -4955,7 +4955,7 @@ function amilyNewGenderConfrontation():void {
 	doNext(13);
 }
 //"Why Not Herms?" (Req medium 'like')
-function whyNotHerms():void {
+public function whyNotHerms():void {
 	amilySprite();
 	outputText("", true);
 	outputText("As you head into the ruined village to find Amily, your thoughts drift yet again to the strange conundrum that has been puzzling you. You haven't failed to realise that Amily initially seemed to want to talk to you about her plans for reviving her people, but after realizing your bi-gendered nature, she insists on dropping the subject if it ever comes up.", false);
@@ -4986,7 +4986,7 @@ function whyNotHerms():void {
 }
 
 //"Maybe Herms Aren't So Bad":
-function maybeHermsAintAllBadBITCH():void {
+public function maybeHermsAintAllBadBITCH():void {
 	amilySprite();
 	outputText("", true);
 	outputText("Yet again, you find yourself wandering through the ruined village where Amily stalks. Not entirely sure if you want to speak to her, you turn and are about to leave when you hear the sound of a rock plinking off of a wall. Looking around, you find Amily has joined you, looking apologetic.\n\n", false);
@@ -5004,7 +5004,7 @@ function maybeHermsAintAllBadBITCH():void {
 }
 
 //[=Yes=]
-function beAmilysDadAsAHerm():void {
+public function beAmilysDadAsAHerm():void {
 	amilySprite();
 	outputText("", true);
 	flags[AMILY_HERM_QUEST] = 2;
@@ -5013,7 +5013,7 @@ function beAmilysDadAsAHerm():void {
 	doNext(amilySexHappens);
 }
 //[=No=]
-function fuckNoYouWontBeAmilysHermDaddy():void {
+public function fuckNoYouWontBeAmilysHermDaddy():void {
 	amilySprite();
 	outputText("", true);
 	outputText("You scoff at her, and tell her that she called you a freak of nature, an unnatural demon-crafted thing. You have no interest in having sex with somebody who thinks of you as some kind of breeding toy.\n\n", false);
@@ -5027,7 +5027,7 @@ function fuckNoYouWontBeAmilysHermDaddy():void {
 
 //Conversation: Efficiency
 //(Requires: Player is a herm, player has at least one Purified Incubus Draft, chose the "Talk" or "Talk & Sex" option from the Remeeting scene, Amily is High Affection)
-function makeAmilyAHerm():void {
+public function makeAmilyAHerm():void {
 	amilySprite();
 	outputText("", true);
 	outputText("You talk to Amily about how she and you have grown to know each other well, so well that she has been willing to have sex with you despite her aversion to hermaphrodites.\n\n", false);
@@ -5056,7 +5056,7 @@ function makeAmilyAHerm():void {
 
 //ENHANCED CAMP FOLLOWER SHIT
 //Player gives Birth (camp follower version):
-function playerBirthsWifAmilyMiceInCamp():void {
+public function playerBirthsWifAmilyMiceInCamp():void {
 	amilySprite();
 	outputText("You wake up suddenly to strong pains and pressures in your gut. As your eyes shoot wide open, you look down to see your belly absurdly full and distended. You can feel movement underneath the skin, and watch as it is pushed out in many places, roiling and squirming in disturbing ways. The feelings you get from inside are just as disconcerting. You count not one, but many little things moving around inside you. There are so many, you can't keep track of them.\n\n", false);
 
@@ -5083,7 +5083,7 @@ function playerBirthsWifAmilyMiceInCamp():void {
 }
 
 //Amily gives Birth (camp follower version):
-function amilyPopsOutKidsInCamp():void {
+public function amilyPopsOutKidsInCamp():void {
 	amilySprite();
 	flags[AMILY_BIRTH_TOTAL]++;
 	//Uncorrupt
@@ -5173,7 +5173,7 @@ function amilyPopsOutKidsInCamp():void {
 }
 
 //"Make Children" Lovemaking Option:
-function makeChildren():void {
+public function makeChildren():void {
 	amilySprite();
 	outputText("", true);
 	if(flags[AMILY_ALLOWS_FERTILITY] == 1) {
@@ -5192,7 +5192,7 @@ function makeChildren():void {
 
 //[Revised Corrupt Meeting]
 //Requires PC have done first meeting and be corrupt
-function meetAmilyAsACorruptAsshat():void {
+public function meetAmilyAsACorruptAsshat():void {
 	amilySprite();
 	outputText("", true);
 	
@@ -5246,7 +5246,7 @@ function meetAmilyAsACorruptAsshat():void {
 //Only once.
 //Potent Mixture key-item added to inventory.
 //Takes 1 hour.
-function cookAmilyASnack():void {
+public function cookAmilyASnack():void {
 	outputText("", true);
 	//[Cooking the drug - repeat]
 	if(flags[UNKNOWN_FLAG_NUMBER_00169] > 0) {
@@ -5352,7 +5352,7 @@ function cookAmilyASnack():void {
 	stats(0,0,0,0,0,0,-100,0);
 	doNext(13);
 }
-function talkWithCORRUPTCUNT(sexAfter:Boolean = false):void {
+public function talkWithCORRUPTCUNT(sexAfter:Boolean = false):void {
 	outputText("", true);
 	amilySprite();
 	var convo:Number = rand(13);
@@ -5661,7 +5661,7 @@ function talkWithCORRUPTCUNT(sexAfter:Boolean = false):void {
 
 //COMBAT AMILY STUFF
 //(Has regular attack)
-function amilyAttack():void {
+public function amilyAttack():void {
 	var dodged:Number = 0;
 	var damage:Number = 0;
 	//return to combat menu when finished
@@ -5739,7 +5739,7 @@ function amilyAttack():void {
 
 //(Special Attacks)
 //-Double Attack: Same as a normal attack, but hits twice.
-function amilyDoubleAttack():void {
+public function amilyDoubleAttack():void {
 	var dodged:Number = 0;
 	var damage:Number = 0;
 	//return to combat menu when finished
@@ -5789,7 +5789,7 @@ function amilyDoubleAttack():void {
 }
 
 //Concentrate: always avoids the next attack. Can be disrupted by tease/seduce.
-function amilyConcentration():void {
+public function amilyConcentration():void {
 	outputText("Amily takes a deep breath and attempts to concentrate on your movements.", false);
 	monster.createStatusAffect("Concentration",0,0,0,0);
 	combatRoundOver();
@@ -5797,7 +5797,7 @@ function amilyConcentration():void {
 
 //(if PC uses tease/seduce after this)
 //Deals big lust increase, despite her resistance.
-function amilyTeaseConcentration():Boolean {
+public function amilyTeaseConcentration():Boolean {
 	if(monster.hasStatusAffect("Concentration") >= 0) {
 		outputText("Amily flushes hotly; her concentration only makes her pay more attention to your parts!", false);
 		monster.lust += 25;
@@ -5806,7 +5806,7 @@ function amilyTeaseConcentration():Boolean {
 	}
 	return false;
 }
-function amilyAI():void {
+public function amilyAI():void {
 	if(monster.hasStatusAffect("Concentration") < 0 && rand(4) == 0) amilyConcentration();
 	else if(rand(3) == 0) amilyDartGo();
 	else if(rand(2) == 0) amilyDoubleAttack();
@@ -5814,7 +5814,7 @@ function amilyAI():void {
 }
 
 //-Poison Dart: Deals speed and str damage to the PC. (Not constant)
-function amilyDartGo():void {
+public function amilyDartGo():void {
 	var dodged:Number = 0;
 	//Blind dodge change
 	if(monster.hasStatusAffect("Blind") >= 0 && rand(3) < 2) {
@@ -5894,7 +5894,7 @@ function amilyDartGo():void {
 }
 
 //(Winning Messages)
-function conquerThatMouseBitch():void {
+public function conquerThatMouseBitch():void {
 	amilySprite();
 	outputText("", true);
 	//By HP: 
@@ -5905,7 +5905,7 @@ function conquerThatMouseBitch():void {
 	chooseYourAmilyRape();
 }
 
-function chooseYourAmilyRape():void {
+public function chooseYourAmilyRape():void {
 	amilySprite();
 	if(flags[UNKNOWN_FLAG_NUMBER_00170] == 0) {
 		doNext(rapeCorruptAmily1);
@@ -5929,7 +5929,7 @@ function chooseYourAmilyRape():void {
 }
 
 //Rape Amily 1
-function rapeCorruptAmily1():void {
+public function rapeCorruptAmily1():void {
 	amilySprite();
 	flags[UNKNOWN_FLAG_NUMBER_00170]++;
 	outputText("", true);
@@ -5973,7 +5973,7 @@ function rapeCorruptAmily1():void {
 	else doNext(rapeCorruptAmily1Female);
 }
 //[Male]
-function rapeCorruptAmily1Male():void {
+public function rapeCorruptAmily1Male():void {
 	amilySprite();
 	var x:Number = player.cockThatFits(61);
 	if(x < 0) x = 0;
@@ -5994,7 +5994,7 @@ function rapeCorruptAmily1Male():void {
 	else doNext(13);
 }
 //[Female]
-function rapeCorruptAmily1Female():void {
+public function rapeCorruptAmily1Female():void {
 	amilySprite();
 	outputText("", true);
 	player.removeKeyItem("Potent Mixture");
@@ -6034,7 +6034,7 @@ function rapeCorruptAmily1Female():void {
 //[Raping Amily 2]
 //Lock in from first scene?
 //[Male]
-function rapeCorruptAmily2Male():void {
+public function rapeCorruptAmily2Male():void {
 	amilySprite();
 	outputText("", true);
 	var x:Number = player.cockThatFits(61);
@@ -6086,7 +6086,7 @@ function rapeCorruptAmily2Male():void {
 }
 
 //[Female]
-function rapeCorruptAmily2Female():void {
+public function rapeCorruptAmily2Female():void {
 	amilySprite();
 	outputText("", true);
 	outputText("You roughly grab a hold of Amily's ears and shove her face on your " + vaginaDescript() + ".", false);
@@ -6117,7 +6117,7 @@ function rapeCorruptAmily2Female():void {
 	rapeCorruptAmily2Epilogue();
 }
 		
-function rapeCorruptAmily2Epilogue():void {
+public function rapeCorruptAmily2Epilogue():void {
 	amilySprite();
 	flags[UNKNOWN_FLAG_NUMBER_00170]++;
 	//Both variations link into this next paragraph
@@ -6134,7 +6134,7 @@ function rapeCorruptAmily2Epilogue():void {
 //[Raping Amily 3]
 //Herms will get to pick how to fuck her.
 //[Male]
-function rapeCorruptAmily3Male():void {
+public function rapeCorruptAmily3Male():void {
 	amilySprite();
 	outputText("", true);
 	outputText("You strip off while Amily watches hungrily. Finally naked, you order the mouse to come closer and use her breasts to pleasure you. Amily quickly scoots closer on her knees and press her breasts around your " + cockDescript(0) + ".", false);
@@ -6185,7 +6185,7 @@ function rapeCorruptAmily3Male():void {
 	rapeCorruptAmily3Epilogue();
 }
 //[Female]
-function rapeCorruptAmily3Female():void {
+public function rapeCorruptAmily3Female():void {
 	amilySprite();
 	outputText("", true);
 	outputText("You strip off while Amily watches hungrily.  Finally naked, you order the mouse to come closer and use her breasts to pleasure you. Amily scoots closer on her knees and presses her breasts against your " + vaginaDescript() + ", one orb at a time. You smile and moan softly as her erect nipple stimulates your labia; ", false);
@@ -6229,7 +6229,7 @@ function rapeCorruptAmily3Female():void {
 }
 
 //Both variants link here
-function rapeCorruptAmily3Epilogue():void {
+public function rapeCorruptAmily3Epilogue():void {
 	amilySprite();
 	flags[UNKNOWN_FLAG_NUMBER_00170]++;
 	outputText("Amily falls on her back, licking her lips and rubbing her bulging belly. Then she begins moaning as something starts changing. Her tail thrashes madly between her legs, and you watch enraptured as a spade-like tip forms on the tip of her tail. On top of her head a pair of small bumps appear, then develop into small cute demonic horns... Just like you imagined. Could it be that the true source of Amily's transformation was you, and not the mixture?\n\n", false);
@@ -6252,7 +6252,7 @@ function rapeCorruptAmily3Epilogue():void {
 
 //[Raping Amily 4]
 //Herms will get to pick how to fuck her.
-function rapeCorruptAmily4Meeting():void {
+public function rapeCorruptAmily4Meeting():void {
 	amilySprite();
 	outputText("", true);
 	//(if PC is genderless)
@@ -6278,7 +6278,7 @@ function rapeCorruptAmily4Meeting():void {
 }
 
 //[Male]
-function rapeCorruptAmily4Male():void {
+public function rapeCorruptAmily4Male():void {
 	amilySprite();
 	outputText("", true);
 	outputText("You slowly strip off your " + player.armorName + ", while Amily pants in anticipation. When you're done you present to her your erect " + cockDescript(0) + "; she quickly nuzzles and kisses along your length, rubbing her breasts along your length", false);
@@ -6357,7 +6357,7 @@ function rapeCorruptAmily4Male():void {
 	rapeCorruptAmily4Epilogue();
 }
 //[Female]
-function rapeCorruptAmily4Female():void {
+public function rapeCorruptAmily4Female():void {
 	amilySprite();
 	outputText("", true);
 	outputText("You slowly strip off your " + player.armorName + ", while Amily pants in anticipation. When you're done you present to her your dripping " + vaginaDescript() + "; she quickly nuzzles and kisses your clit.", false);
@@ -6433,7 +6433,7 @@ function rapeCorruptAmily4Female():void {
 	rapeCorruptAmily4Epilogue();
 }
 //Both variations link here.
-function rapeCorruptAmily4Epilogue():void {
+public function rapeCorruptAmily4Epilogue():void {
 	amilySprite();
 	outputText("Your cum is completely absorbed by her and she doubles over in pleasure as she screams. Her biggest orgasm yet rocking her to the core; her eyes roll back and you see her begin to change.\n\n", false);
 
@@ -6478,7 +6478,7 @@ function rapeCorruptAmily4Epilogue():void {
 //[Stalking Amily (Corrupt)]
 //This event takes about 3 hours.
 //Only happens if the PC has the Potent Mixture and is >= 25 Corruption.
-function stalkingZeAmiliez():void {
+public function stalkingZeAmiliez():void {
 	outputText("", true);
 	outputText("You step into the ruined village and set out to look for Amily.\n\n", false);
 
@@ -6528,7 +6528,7 @@ function stalkingZeAmiliez():void {
 
 
 //[Stalking Amily 2 (Corrupt)]
-function stalkingZeAmiliez2():void {
+public function stalkingZeAmiliez2():void {
 	outputText("", true);
 	//(if PC is genderless)
 	if(player.gender == 0) {
@@ -6590,7 +6590,7 @@ function stalkingZeAmiliez2():void {
 }
 
 //[Stalking Amily 3 (Corrupt)]
-function stalkingZeAmiliez3():void {
+public function stalkingZeAmiliez3():void {
 	outputText("", true);
 	//(if PC is genderless)
 	if(player.gender == 0) {
@@ -6630,7 +6630,7 @@ function stalkingZeAmiliez3():void {
 }
 
 //Warning of Taint:
-function amilyTaintWarning():void {
+public function amilyTaintWarning():void {
 	outputText("", true);
 	amilySprite();
 	outputText("Amily approaches you, looking concerned.  \"<i>Darling... I don't know what's been going on, but you need to start taking better care of yourself.  I can smell the corruption taking root in you - if you don't stop, you'll soon start acting like any other demon.</i>\"\n\n", false);
@@ -6640,7 +6640,7 @@ function amilyTaintWarning():void {
 }
 
 //Farewell Note:
-function farewellNote():void {
+public function farewellNote():void {
 	amilySprite();
 	outputText("\nWhen you awaken this morning, you find Amily gone and a small message left for you.\n\n", false);
 
@@ -6666,7 +6666,7 @@ function farewellNote():void {
 }
 
 //Amily's Return:
-function amilyReturns():void {
+public function amilyReturns():void {
 	amilySprite();
 	outputText("\nYou awaken to the sensation of limbs wrapped blissfully around your body, and discover Amily has curled up to you. She quickly wakes, and gives you a joyous smile.\n\n", false);
 
@@ -6686,7 +6686,7 @@ function amilyReturns():void {
 
 
 // [EVENT 3174: Ask Emily to ditch the fuzz]
-function amilyNoFur():void {
+public function amilyNoFur():void {
 	amilySprite();
 	flags[AMILY_OFFERED_DEFURRY] = 1;
 	outputText("You shake your head gently and explain that your position has not changed. Amily looks annoyed, but respects your decision.  You interrupt her next thought with a clarification; you don't want to have sex with her because of her appearance.  \"<i>...What do you mean?</i>\" she asks, one of her hands idly moving up and tugging one of her mousey ears.  As gently as you can, you explain that mice (and rats, for that matter) are considered pests in your home world, and you can't find yourself inclined to mate with a walking version of them.\n\n",true);
@@ -6696,7 +6696,7 @@ function amilyNoFur():void {
 	doNext(13);
 }
 // Check if we have all the shit we need
-function amilyCanHaveTFNow():Boolean
+public function amilyCanHaveTFNow():Boolean
 {
 	//<b>golden seed</b> for a human face
 	// <b>black egg</b> to get rid of the fur
@@ -6708,7 +6708,7 @@ function amilyCanHaveTFNow():Boolean
 	&& (hasItem("P.S.Mlk",1) || (amilyCorrupt() && hasItem("SucMilk",1)));
 }
 // Arrive with all the stuff you need to make Amily not look completely rediculous.
-function amilyDefurrify():void 
+public function amilyDefurrify():void 
 {
 	consumeItem("GldSeed",1);
 	if(hasItem("BlackEg",1)) consumeItem("BlackEg",1);
@@ -6734,7 +6734,7 @@ function amilyDefurrify():void
 
 // NOTE: Not sure how this ties in.
 // Be a humongous asshole to Amily and tell her that she's, in effect, a whiny bitch.  Or something.
-function amilySufferNotTheFurryToLive():void
+public function amilySufferNotTheFurryToLive():void
 {
 	amilySprite();
 	flags[AMILY_NOT_FURRY] = 1;
@@ -6742,7 +6742,7 @@ function amilySufferNotTheFurryToLive():void
 	outputText("You laugh spitefully as you look at the now humanized mouse girl. You tell her, with a grin on your face, that you did all this to screw with her; she should really trust her gut next time. Continuing with your tirade, you tell her that she's a complete fool, as well as a hypocrite that pretends to be noble, but is just a whore deep down inside. Pausing only to savour the look of betrayal on her face, you remark that her clinging to some twisted ideal of repopulating her people is just a depraved pipe dream; one that will never happen. You smirk and taunt her, implying that she should \"enjoy\" her new body as you depart, leaving your words to ring through her as she visibly tears up. The faint sounds of sniffling are all that echo behind you as you head back to camp.",true);
 }
 
-function amilyDefurryOfferAtCamp():void
+public function amilyDefurryOfferAtCamp():void
 {
 	amilySprite();
 	if(flags[AMILY_OFFERED_DEFURRY] <= 0) flags[AMILY_OFFERED_DEFURRY] = 1;
@@ -6798,7 +6798,7 @@ function amilyDefurryOfferAtCamp():void
 //Must have Lover Urta?
 //(Add a new option to Amily's screen: \"<i>Date Night</i>\" during the evening)
 //(PC chooses option: \"<i>Date Night</i>\")
-function dateNightFirstTime():void {
+public function dateNightFirstTime():void {
 	outputText("", true);
 	outputText("Sitting Amily down, you ask her what she'd think about taking a \"<i>little trip</i>\" with you into town.\n\n", false);
 	if(flags[AMILY_INCUBATION] > 0) {
@@ -6839,7 +6839,7 @@ function dateNightFirstTime():void {
 }
 
 //Amily/Urta -- LEAVE
-function amilyXUrtaRunAWAY():void {
+public function amilyXUrtaRunAWAY():void {
 	outputText("", true);
 	outputText("You watch Urta take a nice long drink from the proffered bottle, but before she gets well and truly smashed, you politely excuse yourself and, helping an inebriated Amily to her feet, exit the Wet Bitch.  The two of you make your way back to camp and, putting the drunken mouse-girl to bed, you give her a kiss on the cheek and soon fall asleep.", false);
 	//Disable threesomes between them forever.
@@ -6848,7 +6848,7 @@ function amilyXUrtaRunAWAY():void {
 }
 
 //Amily/Urta -- DRINK!
-function liqueurUpTheWaifus():void {
+public function liqueurUpTheWaifus():void {
 	outputText("", true);
 	outputText("You encourage Urta to drink up, and watch with a perverse delight as she starts knocking back the liquor.  You sip at your drink, taking things nice and slow as the fox-girl drowns her issues in booze.  More than once, Urta tries to start a conversation with the two of you, but each time she does, you merrily refill her stein and Amily is quick to urge her on.  You give the mouse-girl a look, trying to gauge her reception of the situation: you can see, through the mist of intoxication in her eyes, a lustful gaze aimed straight at Urta's ample bosom.\n\n", false); 
 
@@ -6885,7 +6885,7 @@ function liqueurUpTheWaifus():void {
 }
 
 //Amily/Urta -- Use Cock
-function threesomeAmilUrtaCAWKS():void {
+public function threesomeAmilUrtaCAWKS():void {
 	outputText("", true);
 	var x:Number = player.cockThatFits(60);
 	if(x < 0) x = player.smallestCockIndex();
@@ -6929,7 +6929,7 @@ function threesomeAmilUrtaCAWKS():void {
 	doNext(urtaXAmilyAfterMurrrath);
 }
 //Urta/Amily -- [Use Vag]
-function urtaXAmilyCuntPussyVagSQUICK():void {
+public function urtaXAmilyCuntPussyVagSQUICK():void {
 	outputText("", true);
 	outputText("You leap into bed with the girls, wrapping Amily tight in your arms, and give her a long, drawn-out kiss.  Before Urta can start complaining, however, you give her ass a playful swat and tell her to put that big, meaty horse-cock of hers to good use.  She nods eagerly and gets on her knees behind the two of you, stroking her horse-cock as she readies herself for the threesome ahead.\n\n", false); 
 
@@ -6961,12 +6961,12 @@ function urtaXAmilyCuntPussyVagSQUICK():void {
 	doNext(urtaXAmilyAfterMurrrath);
 }
 //Urta/Amily -- Parting (First & Repeat)
-function urtaXAmilyAfterMurrrath():void {
+public function urtaXAmilyAfterMurrrath():void {
 	outputText("", true);
 	outputText("You wake up later, still entwined with your cum-soaked lovers, smelling entirely of sex and sweat.  It's wonderful, in its own way. You gently wake the girls, and give each a kiss.  They giggle and moan, still sexually sensitive and not a little hungover.  All three of you spend the rest of the hour getting dressed, teasing and playing with each other until you finally must part ways.  You give the Captain of the Guard one last, long kiss before you and Amily make your way back to camp.", false);
 	doNext(15);
 }
-function pureAmilyPutsItInYourRectumDamnNearKilledEm():void {
+public function pureAmilyPutsItInYourRectumDamnNearKilledEm():void {
 	outputText("", true);
 	var x:Number = player.biggestCockIndex();
 	outputText("You pause and flash her a coy smirk, then you gently place the tip of a finger on her nose, slowly running it down along her body, over her lip, between her breasts, across her stomach, finally stopping in between her legs, where you start to teasingly stroke her cock through her pants, letting it tent her clothing.\n\n", false);
@@ -7051,7 +7051,7 @@ function pureAmilyPutsItInYourRectumDamnNearKilledEm():void {
 	doNext(13);
 }
 
-function fuckPureAmilysHeiny():void {
+public function fuckPureAmilysHeiny():void {
 	outputText("", true);
 	var x:Number = player.cockThatFits(50);
 	if(x < 0) x = 0;
@@ -7129,7 +7129,7 @@ function fuckPureAmilysHeiny():void {
 }
 
 //Scene 2: Amily Teaches Grown Corrupt Mice How To Sex (Z)
-function amilyIncest():void {
+public function amilyIncest():void {
 	clearOutput();
 	amilySprite();
 	//AKA: 
@@ -7160,7 +7160,7 @@ function amilyIncest():void {
 	simpleChoices("Fuck Cunts",cunts,"Fuck Em All",all,"",0,"",0,"Leave",1);
 }
 //Fuck Cunts/All (extra pg or two) (Z)
-function fuckIncestCunts(all:Boolean = false):void {
+public function fuckIncestCunts(all:Boolean = false):void {
 	var x:Number = player.cockThatFits(61);
 	if(x < 0) x = 0;
 	var y:Number = x + 1;
@@ -7221,7 +7221,7 @@ function fuckIncestCunts(all:Boolean = false):void {
 
 //First talk: Finished (Bagpuss)(Zedited, but no followups are ready yet)
 //Scene triggers the first time you approach Amily with eggs to lay
-function amilyEggStuff():void {
+public function amilyEggStuff():void {
 	clearOutput();
 	outputText("As you approach the mouse-woman, her big, hairless ears twitch and she turns to face you with a smile.  However, before she can open her mouth to greet you her eyes settle on your slightly bulging abdomen.");
 	outputText("\n\n\"<i>[name], are you alright? You're looking a little... bigger back there.</i>\"  As if on cue you feel your abdomen throb slightly, sending a shudder of pleasure up your back as it lets you know that you're more than ready to lay your next clutch of eggs.  Amily's mouth scrunches up as you steady yourself, apparently finding your predicament a little puzzling.  \"<i>You know, you don't have to eat <b>everything</b> you find out there; it looks like it's starting to have quite the effect on you.</i>\"");
@@ -7252,7 +7252,7 @@ function amilyEggStuff():void {
 }
 
 //Eggs
-function layEggsInAmily():void {
+public function layEggsInAmily():void {
 	clearOutput();
 	outputText("Feeling your ");
 	if(player.eggs() < 20) outputText("engorged");
@@ -7268,7 +7268,7 @@ function layEggsInAmily():void {
 	doNext(layEggsInAmilysCorruptedHole);
 }
 
-function layEggsInAmilysCorruptedHole():void {
+public function layEggsInAmilysCorruptedHole():void {
 	clearOutput();
 	outputText("Still groaning as Amily caresses your body, you make sure that you have a good grip around her waist before suddenly pulling her down to the ground.  She squeaks as you descend, though her hand doesn't leave your leggings.  Lying on your back, Amily props herself up on your chest with her free arm, trying to frown but unable to keep a playful smile off her lips.");
 	outputText("\n\nYou set to work freeing her from her trousers whilst she loosens your own leggings, dragging them down to reveal your [if (hasCock = true) \"rock-hard cock\"][if (isHerm = true)  and your ][if (hasVagina = true) swollen pussy]");
@@ -7355,14 +7355,14 @@ function layEggsInAmilysCorruptedHole():void {
 	
 }
 
-function layEggsInAmilysButtPt2():void {
+public function layEggsInAmilysButtPt2():void {
 	clearOutput();
 	outputText("You wake up almost an hour later, Amily still dozing on top of you.  Gently picking her up, you take her to her nest and lay the girl down in the soft bedding, smiling at the bulge in her stomach.  It takes you a little while to clean yourself off and redress, though you can't help but feel that getting a little bit of slime on your [armor] was a price worth paying.");
 	doNext(13);
 }
 
 //Amily Laying
-function amilyLaysEggsLikeABitch():void {
+public function amilyLaysEggsLikeABitch():void {
 	outputText("\nWhilst wandering around your camp, you heard a flurry of soft squeaks from the direction of Amily's nest.  Intrigued, you sidle over to see what the commotion is.  When you get there, your eyes widen at the sight of your oft-restrained lover relaxing in her soft bedding, completely bottomless.  Her legs are spread wide, giving you a perfect view of both her holes as she rapidly ");
 	if(flags[AMILY_WANG_LENGTH] == 0) outputText("teases her clit");
 	else outputText("squeezes her shaft");
@@ -7383,7 +7383,7 @@ function amilyLaysEggsLikeABitch():void {
 }
 
 
-function amilySwimFuckIntro():void {
+public function amilySwimFuckIntro():void {
 	clearOutput();
 	if(flags[AMILY_TIMES_SWIMFUCKED] == 0) {
 		outputText("Pulling out the sexy black two piece, you offer it up to the mouse-girl with a smile");
@@ -7426,7 +7426,7 @@ function amilySwimFuckIntro():void {
 }
 
 //Go 'Swimming'
-function amilySwimFuckPartII():void {
+public function amilySwimFuckPartII():void {
 	clearOutput();
 	outputText("The stream isn't far away, and the two of you reach it in practically no time.  The journey is slowed by the occasional teasing touches and whispered compliments between you and your lover.  Amily is giggling and flushed by the time you arrive, fanning herself with her hand even though it isn't THAT hot out.  Turning to face you, she sensually glides up against your [armor] and begins to rub your ");
 	if(player.hasCock()) outputText("package");
@@ -7487,7 +7487,7 @@ function amilySwimFuckPartII():void {
 //PC - dicked.
 //Amily + Izma – some kind of lust boosting, cum boosting, preg-chance boosting potion that causes a three-way! (silly mode cum out rear and mouse launch requested)
 //all pretty much just an excuse for the belly bulging cumshot though 
-function amilyXIzmaSuperPregOptions():void {
+public function amilyXIzmaSuperPregOptions():void {
 	clearOutput();
 	outputText("You smile winningly at Amily, and tell her you have something a little different in mind. You want to have another litter with her.");
 	outputText("\n\n\"<i>Oh?  You want me to get pregnant... again?</i>\" the mouse asks, nervously holding her tail in her hands.  \"<i>You know I ran out of the goblin pregnancy drugs right?  So, my fertility won't be nearly what it was before.</i>\"");
@@ -7502,7 +7502,7 @@ function amilyXIzmaSuperPregOptions():void {
 }
 
 //Try The Potion
-function drinkThePotion():void {
+public function drinkThePotion():void {
 	clearOutput();
 	flags[AMILY_X_IZMA_POTION_3SOME]++;
 	if(flags[AMILY_X_IZMA_POTION_3SOME] == 1) {
@@ -7564,7 +7564,7 @@ function drinkThePotion():void {
 
 //Start Ze Fucking!
 //flags[UNKNOWN_FLAG_NUMBER_00250]
-function izmaAmilyDrugThreeWaySex():void {
+public function izmaAmilyDrugThreeWaySex():void {
 	clearOutput();
 	outputText("The amorous embrace's effects on you are more than telling.  [EachCock] has swollen up, long and proud, as thick with arousal as ");
 	if(player.cockTotal() == 1) outputText("it's");
@@ -7648,7 +7648,7 @@ function izmaAmilyDrugThreeWaySex():void {
 	addButton(0,"Next",izmaAmilyDrugThreeWaySex2);
 }
 
-function izmaAmilyDrugThreeWaySex2():void {
+public function izmaAmilyDrugThreeWaySex2():void {
 	clearOutput();
 	outputText("Time goes hazy, for a bit, but the cool air on your sopping boner is enough to rouse you back to full consciousness.  The scene is unreal.  Amily rolled off of Izma at some point and is laying flat on her back, cradling her ");
 	if(flags[UNKNOWN_FLAG_NUMBER_00250] == 0) outputText("cum-");
@@ -7744,7 +7744,7 @@ function izmaAmilyDrugThreeWaySex2():void {
 	addButton(0,"Next",izmaAmilyDrugThreeWaySex3);
 }
 	
-function izmaAmilyDrugThreeWaySex3():void {
+public function izmaAmilyDrugThreeWaySex3():void {
 	clearOutput();
 	stats(0,0,0,0,0,-3,-100,0);
 	outputText("<b>Some time later...</b>\n");
@@ -7776,7 +7776,7 @@ function izmaAmilyDrugThreeWaySex3():void {
 
 //Give It To Her/Repeat Sex Option
 //[NurseCheckup]
-function amilyNurseCheckup():void {
+public function amilyNurseCheckup():void {
 	clearOutput();
 	//First Time
 	if(flags[GIVEN_AMILY_NURSE_OUTFIT] == 0) {
@@ -7801,7 +7801,7 @@ function amilyNurseCheckup():void {
 }
 
 //[Next] - both merge here
-function amilyNurseCheckupV2(repeat:Boolean):void {
+public function amilyNurseCheckupV2(repeat:Boolean):void {
 	clearOutput();
 	var x:int = player.cockThatFits(61);
 	outputText("You step in to Amily's office, as it were.  It's really just a cluster of boulders, but with the way the mouse-girl is looking about imperiously and gesturing for you to sit on a flat rock, you really do feel like you're back at the village doctor, getting checked on to make sure you're okay.  As for Amily, she's looking fine... mighty fine indeed.  Her " + amilyTits() + " nicely fill the tight, cleavage exposing top, while her ");

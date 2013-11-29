@@ -14,7 +14,7 @@
 //Tail – Barely touches the ground, but is prehensile and capable of being lengthened at will.
 
 //Appearnace
-function cinnabarAppearance(output:Boolean = true):Number {
+public function cinnabarAppearance(output:Boolean = true):Number {
 	//Send back 0 for 'closed'.
 	if(model.time.hours < 15 || model.time.hours > 20) return 0;
 	if(output) {
@@ -26,7 +26,7 @@ function cinnabarAppearance(output:Boolean = true):Number {
 	return 2860;
 }
 //Approach 
-function cinnabarGreeting():void {
+public function cinnabarGreeting():void {
 	outputText("", true);
 	spriteSelect(91);
 	//1st Time:
@@ -98,7 +98,7 @@ function cinnabarGreeting():void {
 
 
 //[Buy an Hour]
-function cinnabarNonHugeDickings():void {
+public function cinnabarNonHugeDickings():void {
 	flags[CINNABAR_HOUSE_VISITED]++;
 	flags[CINNABAR_NUMBER_TIMES_FUCKED]++;
 	flags[CINNABAR_FUCKED_CORRUPT_PREVIOUSLY] = 0;
@@ -209,7 +209,7 @@ function cinnabarNonHugeDickings():void {
 }
 	
 //[FUCK] – tracks if last fuck was huger + corrupteded version
-function cinnabarGetsFUKKKKED():void {
+public function cinnabarGetsFUKKKKED():void {
 	flags[CINNABAR_HOUSE_VISITED]++;
 	flags[CINNABAR_NUMBER_TIMES_FUCKED]++;
 	flags[CINNABAR_FUCKED_CORRUPT_PREVIOUSLY] = 0;
@@ -277,7 +277,7 @@ function cinnabarGetsFUKKKKED():void {
 }
 	
 //(Huger and Corrupteder) (75+ corr)
-function fuckCinnabarHugerAndCorruptedEr():void {
+public function fuckCinnabarHugerAndCorruptedEr():void {
 	flags[CINNABAR_FUCKED_CORRUPT_PREVIOUSLY] = 1;
 	var x:Number = player.biggestCockIndex();
 	var y:Number = player.biggestCockIndex2();
@@ -344,7 +344,7 @@ function fuckCinnabarHugerAndCorruptedEr():void {
 }
 
 //(HUGER)
-function cinnabarHuger():void {
+public function cinnabarHuger():void {
 	flags[CINNABAR_FUCKED_CORRUPT_PREVIOUSLY] = 0;
 	var x:Number = player.biggestCockIndex();
 	var y:Number = player.biggestCockIndex2();
@@ -396,7 +396,7 @@ function cinnabarHuger():void {
 }
 
 //(HUGE)
-function cinnabarHuge():void {
+public function cinnabarHuge():void {
 	flags[CINNABAR_FUCKED_CORRUPT_PREVIOUSLY] = 0;
 	var x:Number = player.biggestCockIndex();
 	var y:Number = player.biggestCockIndex2();
@@ -452,7 +452,7 @@ function cinnabarHuge():void {
 //setting two mirrors on the bed before she sits on them and fellates one on the wall.
 //surprise – at the end she moves the portal when you pull back and makes you cum in her
 //and in your own ass.
-function cinnabarMultiCockPortalFuckFest():void {
+public function cinnabarMultiCockPortalFuckFest():void {
 	flags[CINNABAR_HOUSE_VISITED]++;
 	flags[CINNABAR_NUMBER_TIMES_FUCKED]++;
 	flags[CINNABAR_FUCKED_CORRUPT_PREVIOUSLY] = 0;

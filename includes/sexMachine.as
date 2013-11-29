@@ -1,4 +1,4 @@
-﻿function exploreShowers():void {
+﻿public function exploreShowers():void {
 	outputText("", true);
 	/*if(flags[UNKNOWN_FLAG_NUMBER_00167] == 0) {
 		outputText("You toss ten gems to centaur and head towards the back.\n\n", false);
@@ -26,13 +26,13 @@
 }
 
 //[If you decide to leave.]
-function leaveShowers():void {
+public function leaveShowers():void {
 	outputText("", true);
 	outputText("You shake your head.  You've had enough of a workout for the day, and you remember you're in a land where curiosity almost certainly kills (well, more thoroughly rapes) the cat.  You leave the room and continue to search for the showers, eventually finding them and heading back to camp.", false);
 	doNext(13);
 }
 
-function useTheSexMachine():void {
+public function useTheSexMachine():void {
 	outputText("", true);
 	flags[UNKNOWN_FLAG_NUMBER_00182] = 2;
 	//[If you decide to mess with the machine: Male]

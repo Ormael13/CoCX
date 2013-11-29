@@ -5,7 +5,7 @@
 //const EGGS_BOUGHT:int = 653;
 //const BIKINI_ARMOR_BONUS:int = 769;
 
-function itemLongName(shortName1:String):String {
+public function itemLongName(shortName1:String):String {
 	
 	if(shortName1 == "DryTent") return "a shriveled tentacle";
 	if(shortName1 == "IzyMilk") return "a bottle of Isabella's milk";
@@ -190,7 +190,7 @@ function itemLongName(shortName1:String):String {
 	return "ERROR";
 	
 }
-function itemUse(shortName1:String):void {
+public function itemUse(shortName1:String):void {
 	itemSubMenu = false;
 	if(shortName1 == "DryTent") shriveledTentacle();
 	if(shortName1 == "IzyMilk") isabellaMilk();
@@ -360,7 +360,7 @@ function itemUse(shortName1:String):void {
 	if(shortName1 == "MouseCo") mouseCocoa();
 }
 
-function dropItem(monsterName:String):void {
+public function dropItem(monsterName:String):void {
 	shortName = "NULL";
 	if(monster.short == "Hel" || monster.short == "salamander") {
 		if(rand(10) < 7) shortName = "Reptlum";
@@ -625,7 +625,7 @@ function dropItem(monsterName:String):void {
 		takeItem();
 	}
 }
-function isWeapon(shortName):Boolean {
+public function isWeapon(shortName):Boolean {
 	if(shortName == "E.Staff") return true;
 	if(shortName == "L.Daggr") return true;
 	if(shortName == "Claymor") return true;
@@ -647,7 +647,7 @@ function isWeapon(shortName):Boolean {
 	if(shortName == "S.Blade") return true;
 	return false;
 }
-function isArmor(shortName):Boolean {
+public function isArmor(shortName):Boolean {
 	if(shortName == "LMArmor") return true;
 	if(shortName == "GelArmr") return true;
 	if(shortName == "C.Cloth") return true;
@@ -682,7 +682,7 @@ function isArmor(shortName):Boolean {
 	if(shortName == "BimboSk") return true;
 	return false;
 }
-function fixedDamage(weaponName):Number {
+public function fixedDamage(weaponName):Number {
 	var attack:Number = 0;
 	if(weaponName == "halberd") attack = 11;
 	if(weaponName == "lust-enchanted dagger") attack = 3;
@@ -731,7 +731,7 @@ function fixedDamage(weaponName):Number {
 	attack += player.statusAffectv1("Charge Weapon");
 	return attack;
 }
-function equipWeapon(weaponName:String):void {
+public function equipWeapon(weaponName:String):void {
 	if(debug) {
 		outputText("You cannot equip anything in debug mode.  Please restart the game in normal mode to equip items.", false);
 		return;
@@ -932,7 +932,7 @@ function equipWeapon(weaponName:String):void {
 	}
 	return;
 }
-function lootWeaponName(oldWeaponName:String):String {
+public function lootWeaponName(oldWeaponName:String):String {
 	var wName:String = "";	
 	if(oldWeaponName == "eldritch staff") wName = "E.Staff";
 	if(oldWeaponName == "dragon-shell shield") wName = "DrgnShl";
@@ -958,7 +958,7 @@ function lootWeaponName(oldWeaponName:String):String {
 }
 
 
-function applyArmorStats(armorName:String, output:Boolean = true):void {
+public function applyArmorStats(armorName:String, output:Boolean = true):void {
 	player.armorDef = 0;
 	//Add stats!
 	if(armorName == "scandalously seductive armor") {
@@ -1302,7 +1302,7 @@ function applyArmorStats(armorName:String, output:Boolean = true):void {
 	}
 }
 
-function equipArmor(armorName:String, output:Boolean = true):void {
+public function equipArmor(armorName:String, output:Boolean = true):void {
 	//Strip old armor perks
 	while(player.hasPerk("Slutty Seduction") >= 0) player.removePerk("Slutty Seduction");
 	while(player.hasPerk("Bulge Armor") >= 0) player.removePerk("Bulge Armor");
@@ -1497,7 +1497,7 @@ function equipArmor(armorName:String, output:Boolean = true):void {
 	}
 	return;
 }
-function doItems(eventNo:Number):void {
+public function doItems(eventNo:Number):void {
 	var temp1:Number = 0;
 	var temp2:Number = 0;
 	var temp3:Number = 0;
@@ -2471,7 +2471,7 @@ function doItems(eventNo:Number):void {
 		itemGoNext();
 	}
 }
-function itemValue(item:String):Number {
+public function itemValue(item:String):Number {
 	if(item == "lusty maiden's armor" || item == "LMArmor") return 400;
 	if(item == "Debimbo") return 250;
 	if(item == "PurPeac") return 10;
@@ -2603,7 +2603,7 @@ function itemValue(item:String):Number {
 
 
 //Finds the first slot with room and returns the slot num.
-function roomInExistingStack():Number {
+public function roomInExistingStack():Number {
 	if(itemSlot1.shortName == shortName && itemSlot1.quantity != 0 && itemSlot1.quantity < 5) return 1;
 	if(itemSlot2.shortName == shortName && itemSlot2.quantity != 0 && itemSlot2.quantity < 5) return 2;
 	if(itemSlot3.shortName == shortName && itemSlot3.quantity != 0 && itemSlot3.quantity < 5) return 3;
@@ -2611,7 +2611,7 @@ function roomInExistingStack():Number {
 	if(itemSlot5.shortName == shortName && itemSlot5.quantity != 0 && itemSlot5.quantity < 5) return 5;
 	return 0;
 }
-function takeItem():void {
+public function takeItem():void {
 	var done:Boolean = false;
 	//Check for an existing stack with room in the inventory and return the value for it.
 	temp = roomInExistingStack();
@@ -2727,7 +2727,7 @@ function takeItem():void {
 	trace("MENULOC: " + menuLoc);
 }
 //Check for if the player has X item greater than or equal to Y quantity
-function hasItem(itemName:String, minQuantity:Number):Boolean {
+public function hasItem(itemName:String, minQuantity:Number):Boolean {
 	var counted:Number = 0;
 	if(itemSlot1.shortName == itemName) counted += itemSlot1.quantity;
 	if(itemSlot2.shortName == itemName) counted += itemSlot2.quantity;
@@ -2737,7 +2737,7 @@ function hasItem(itemName:String, minQuantity:Number):Boolean {
 	if(counted >= minQuantity) return true;
 	return false;
 }
-function itemCount(itemName:String):int {
+public function itemCount(itemName:String):int {
 	var counted:Number = 0;
 	if(itemSlot1.shortName == itemName) counted += itemSlot1.quantity;
 	if(itemSlot2.shortName == itemName) counted += itemSlot2.quantity;
@@ -2747,7 +2747,7 @@ function itemCount(itemName:String):int {
 	return counted;
 }
 
-function getLowestSlot(itemName:String):itemSlotClass {
+public function getLowestSlot(itemName:String):itemSlotClass {
 	var slot = itemSlot1;
 	var slotCounter = itemSlot1;
 	while (slotCounter != undefined)
@@ -2774,7 +2774,7 @@ function getLowestSlot(itemName:String):itemSlotClass {
 	}
 	return slot;
 }
-function consumeItem(itemName:String, amount:Number):Boolean {
+public function consumeItem(itemName:String, amount:Number):Boolean {
 	var consumed:Boolean = false;
 	var slot;
 	while (amount > 0) 
@@ -2802,7 +2802,7 @@ function consumeItem(itemName:String, amount:Number):Boolean {
 }
 
 //Check for if the player has X item less than to Y quantity
-function hasLessItems(itemName:String, maxQuantity:Number):Boolean {
+public function hasLessItems(itemName:String, maxQuantity:Number):Boolean {
 	var counted:Number = 0;
 	if(itemSlot1.shortName == itemName) counted += itemSlot1.quantity;
 	if(itemSlot2.shortName == itemName) counted += itemSlot2.quantity;
@@ -2813,7 +2813,7 @@ function hasLessItems(itemName:String, maxQuantity:Number):Boolean {
 	return false;
 }
 
-function destroyItems(itemName:String, minQuantity:Number):Boolean {
+public function destroyItems(itemName:String, minQuantity:Number):Boolean {
 	if(itemSlot1.shortName == itemName) {
 		while(itemSlot1.quantity > 0 && minQuantity > 0) {
 			itemSlot1.quantity--;
@@ -2853,7 +2853,7 @@ function destroyItems(itemName:String, minQuantity:Number):Boolean {
 	else return false;
 }
 //Cerulean P.
-function ceruleanPotion():void {
+public function ceruleanPotion():void {
 	slimeFeed();
 	//Repeat genderless encounters
 	if(player.gender == 0 && flags[CERULEAN_POTION_NEUTER_ATTEMPTED] > 0) {
@@ -2876,7 +2876,7 @@ function ceruleanPotion():void {
 	else player.createStatusAffect("succubiNight",1,0,0,0);
 }
 //Vitality Tincture
-function vitalityTincture():void {
+public function vitalityTincture():void {
 	slimeFeed();
 	outputText("You down the contents of the bottle. The liquid is thick and tastes remarkably like cherries. Within moments, you feel much more fit and healthy.", true);
 	//str change
@@ -2895,7 +2895,7 @@ function vitalityTincture():void {
 	if(rand(3) == 0) outputText(player.modTone(95,3), false);
 }
 //Scholar's Tea
-function scholarsTea():void {
+public function scholarsTea():void {
 	slimeFeed();
 	outputText("Following the merchant's instructions, you steep and drink the tea. Its sharp taste fires up your palate and in moments, you find yourself more alert and insightful. As your mind wanders, a creative, if somewhat sordid, story comes to mind. It is a shame that you do not have writing implements as you feel you could make a coin or two off what you have conceived. The strange seller was not lying about the power of the tea.", true);
 	if(rand(3) == 0) outputText(player.modTone(15,1), false);
@@ -2903,7 +2903,7 @@ function scholarsTea():void {
 }
 
 /* ITEMZZZZZ FUNCTIONS GO HERE */
-function incubiDraft(tainted:Boolean):void {
+public function incubiDraft(tainted:Boolean):void {
 	slimeFeed();
 	var temp2:Number = 0;
 	var temp3:Number = 0;
@@ -3059,7 +3059,7 @@ function incubiDraft(tainted:Boolean):void {
 	if(rand(4) == 0 && tainted) outputText(player.modThickness(30,2), false);
 }
 
-function growDemonCock(growCocks:Number):void {
+public function growDemonCock(growCocks:Number):void {
 	temp = 0;
 	while(growCocks > 0) {
 		player.createCock();
@@ -3080,7 +3080,7 @@ function growDemonCock(growCocks:Number):void {
 	if(temp > 4) outputText("Your tender bundle of new cocks feels deliciously sensitive, and you cannot stop yourself from wrapping your hands around the slick demonic bundle and pleasuring them.\n\nNearly an hour later, you finally pull your slick body away from the puddle you left on the ground.  When you look back, you notice it has already been devoured by the hungry earth.", false);
 	stats(0,0,0,0,0,0,-100,0);
 }
-function tatteredScroll():void {
+public function tatteredScroll():void {
 	outputText("Your wobbly " + player.legs() + " give out underneath you as your body's willpower seems to evaporate, your mouth reading the words on the scroll with a backwards sounding sing-song voice.\n\n", true);	
 	if(player.hairColor == "sandy blonde") {
 		outputText("Your mouth forms a smile of its own volition, reading, \"<i>Tresed eht retaw llahs klim ruoy.</i>\"\n\n", false); 
@@ -3143,7 +3143,7 @@ function tatteredScroll():void {
 		slimeFeed();
 	}
 }
-function minotaurCum():void {
+public function minotaurCum():void {
 	slimeFeed();
 	//Minotaur cum addiction
 	minoCumAddiction(7);
@@ -3193,7 +3193,7 @@ function minotaurCum():void {
 		outputText("\n\n<b>Your body feels so amazing and sensitive.  Experimentally you pinch yourself and discover that even pain is turning you on!</b>", false);
 	}
 }
-function minotaurBlood():void {
+public function minotaurBlood():void {
 	slimeFeed();
 	//Changes done
 	var changes:Number = 0;
@@ -3605,7 +3605,7 @@ function minotaurBlood():void {
 	}
 	
 }
-function equinum():void {
+public function equinum():void {
 	slimeFeed();
 	//Changes done
 	var changes:Number = 0;
@@ -4114,7 +4114,7 @@ function equinum():void {
 	}
 	
 }
-function succubiMilk(tainted:Boolean):void {
+public function succubiMilk(tainted:Boolean):void {
 	slimeFeed();
 	var temp2:Number = 0;
 	var temp3:Number = 0;
@@ -4320,7 +4320,7 @@ function succubiMilk(tainted:Boolean):void {
 //3-Black Pepper (Dark Fur, +corruption/libido)
 //4-Knotty Pepper (+Knot + Cum Multiplier)
 //5-Bulbous Pepper (+ball size or fresh balls)
-function caninePepper(type:Number = 0):void {
+public function caninePepper(type:Number = 0):void {
 	var temp2:Number = 0;
 	var temp3:Number = 0;
 	var crit:Number = 1;
@@ -5019,7 +5019,7 @@ function caninePepper(type:Number = 0):void {
 	}
 	
 }
-function impFood():void {
+public function impFood():void {
 	outputText("", true);
 	if(player.cocks.length > 0) {
 		outputText("The food tastes strange and corrupt - you can't really think of a better word for it, but it's unclean.", false);
@@ -5066,7 +5066,7 @@ function impFood():void {
 		player.tallness -= 1 + rand(3);		
 	}	
 }
-function pureHoney(pure:Boolean):void {
+public function pureHoney(pure:Boolean):void {
 	slimeFeed();
 	outputText("", true);
 	var changes:Number = 0;
@@ -5231,7 +5231,7 @@ function pureHoney(pure:Boolean):void {
 	}	
 }
 
-function succubisDelight(tainted:Boolean):void {
+public function succubisDelight(tainted:Boolean):void {
 	slimeFeed();
 	var changes:Number = 0;
 	var crit:Number = 1;
@@ -5304,7 +5304,7 @@ function succubisDelight(tainted:Boolean):void {
 		outputText(player.modFem(12,3), false);
 	}
 }
-function succubisDream():void {
+public function succubisDream():void {
 	slimeFeed();
 	var changes:Number = 0;
 	var crit:Number = 1;
@@ -5390,7 +5390,7 @@ function succubisDream():void {
 	}
 }
 
-function greenGel():void {
+public function greenGel():void {
 	var changes:Number = 0;
 	outputText("You examine the gel thoroughly, noting it is tough and resiliant, yet extremely pliable.  Somehow you know eating it would not be a good idea.", true);
 	//You can't use it!
@@ -5400,7 +5400,7 @@ function greenGel():void {
 		itemSwapping = true;
 	}
 }
-function toughSpiderSilk():void {
+public function toughSpiderSilk():void {
 	var changes:Number = 0;
 	outputText("You look over the tough webbing, confusion evident in your expression.  There's really nothing practical you can do with these yourself.  It might be best to find someone more familiar with the odd materials in this land to see if they can make sense of it.", true);
 	//You can't use it!
@@ -5411,7 +5411,7 @@ function toughSpiderSilk():void {
 	}
 }
 
-function chitinUseless():void {
+public function chitinUseless():void {
 	outputText("You look over the scale carefully but cannot find a use for it.  Maybe someone else will know how to use it.  ", true);
 	//You can't use it!
 	if(!debug) {
@@ -5434,7 +5434,7 @@ EGG TYPES-
 5 - rubbery black
 6 - 
 */
-function ovipositionElixer():void {
+public function ovipositionElixer():void {
 	slimeFeed();
 	var changes:Number = 0;
 	//Females!
@@ -5490,7 +5490,7 @@ function ovipositionElixer():void {
 	}
 }
 //butt expansion
-function brownEgg(large:Boolean):void {
+public function brownEgg(large:Boolean):void {
 	outputText("You devour the egg, momentarily sating your hunger.\n\n", true);
 	if(!large) {
 		outputText("You feel a bit of additional weight on your backside as your " + buttDescript() + " gains a bit more padding.", true);
@@ -5506,7 +5506,7 @@ function brownEgg(large:Boolean):void {
 	}
 }
 //hip expansion
-function purpleEgg(large:Boolean):void {
+public function purpleEgg(large:Boolean):void {
 	outputText("You devour the egg, momentarily sating your hunger.\n\n", true);
 	if(!large || player.hipRating > 20) {
 		outputText("You stumble as you feel your " + hipDescript() + " widen, altering your gait slightly.", false);
@@ -5522,7 +5522,7 @@ function purpleEgg(large:Boolean):void {
 	}
 }
 //Femminess
-function pinkEgg(large:Boolean):void {
+public function pinkEgg(large:Boolean):void {
 	outputText("You devour the egg, momentarily sating your hunger.\n\n", true);
 	if(!large) {
 		//Remove a dick
@@ -5574,7 +5574,7 @@ function pinkEgg(large:Boolean):void {
 	}
 }
 //Maleness
-function blueEgg(large:Boolean):void {
+public function blueEgg(large:Boolean):void {
 	var temp2:Number = 0;
 	var temp3:Number = 0;
 	outputText("You devour the egg, momentarily sating your hunger.", true);
@@ -5725,7 +5725,7 @@ function blueEgg(large:Boolean):void {
 }
 
 //Nipplezzzzz
-function whiteEgg(large:Boolean):void {
+public function whiteEgg(large:Boolean):void {
 	var temp2:Number = 0;
 	outputText("You devour the egg, momentarily sating your hunger.", true);
 	if(!large) {
@@ -5760,7 +5760,7 @@ function whiteEgg(large:Boolean):void {
 	}
 }
 
-function blackRubberEgg(large:Boolean):void {
+public function blackRubberEgg(large:Boolean):void {
 	outputText("You devour the egg, momentarily sating your hunger.", true);
 	//Small
 	if(!large) {
@@ -5849,7 +5849,7 @@ function blackRubberEgg(large:Boolean):void {
 		}
 	}
 }
-function hairDye(color:String):void {
+public function hairDye(color:String):void {
 	if(player.hairColor.indexOf("rubbery") != -1 || player.hairColor.indexOf("latex-textured") != -1) {
 		outputText("You massage the dye into your " + hairDescript() + " but the dye cannot penetrate the impermeable material your hair is composed of.", true);
 		return;
@@ -5867,7 +5867,7 @@ function hairDye(color:String):void {
 	}
 }
 //Store - let you select an item slot, then a storage slot.
-function pickItemToStorage():void {
+public function pickItemToStorage():void {
 	var temp2:Number = 0;
 	var temp1:Number = 0;
 	var temp3:Number = 0;
@@ -5886,7 +5886,7 @@ function pickItemToStorage():void {
 	menuLoc = 7;
 }
 //Retrieval List - lets you select the correct slot
-function chooseRetrievalSlot():void {
+public function chooseRetrievalSlot():void {
 	if(!hasItemsInStorage()) {
 		eventParser(1);
 		return;
@@ -5921,7 +5921,7 @@ function chooseRetrievalSlot():void {
 	menuLoc = 7;
 }
 //Grab an item from the selected slot.
-function retrieveFromStorage(slotNum:Number):void {
+public function retrieveFromStorage(slotNum:Number):void {
 	if(itemStorage[slotNum].quantity == 0) {
 		outputText("That slot is empty.", true);
 		return;
@@ -5935,7 +5935,7 @@ function retrieveFromStorage(slotNum:Number):void {
 	takeItem();
 }
 //Check to see if anything is stored
-function hasItemsInStorage():Boolean {
+public function hasItemsInStorage():Boolean {
 	temp = itemStorage.length;
 	while(temp > 0) {
 		temp--;
@@ -5943,7 +5943,7 @@ function hasItemsInStorage():Boolean {
 	}
 	return false;
 }
-function hasItemInStorage(item:String = ""):Boolean {
+public function hasItemInStorage(item:String = ""):Boolean {
 	temp = itemStorage.length;
 	while(temp > 0) {
 		temp--;
@@ -5951,7 +5951,7 @@ function hasItemInStorage(item:String = ""):Boolean {
 	}
 	return false;
 }
-function consumeItemInStorage(item:String = ""):Boolean {
+public function consumeItemInStorage(item:String = ""):Boolean {
 	temp = itemStorage.length;
 	while(temp > 0) {
 		temp--;
@@ -5964,7 +5964,7 @@ function consumeItemInStorage(item:String = ""):Boolean {
 	return false;
 }
 //Place item slot into the first dump spot.
-function placeInStorage(slotNum:Number):void {
+public function placeInStorage(slotNum:Number):void {
 	outputText("", true);
 	var shortStorage:String = "";
 	var shortQuantity:Number = 0;
@@ -6060,7 +6060,7 @@ function placeInStorage(slotNum:Number):void {
 }
 
 //Place item slot into the first dump spot.
-function placeInRacks(slotNum:Number, armor:Boolean = false):void {
+public function placeInRacks(slotNum:Number, armor:Boolean = false):void {
 	outputText("", true);
 	var shortStorage:String = "";
 	var shortQuantity:Number = 0;
@@ -6171,7 +6171,7 @@ function placeInRacks(slotNum:Number, armor:Boolean = false):void {
 }
 
 //Check to see if anything is stored in racks
-function hasItemsInRacks(armor:Boolean = false):Boolean {
+public function hasItemsInRacks(armor:Boolean = false):Boolean {
 	var goal:Number = 0;
 	if(armor) goal = 9;
 	temp = gearStorage.length;
@@ -6183,7 +6183,7 @@ function hasItemsInRacks(armor:Boolean = false):Boolean {
 	return false;
 }
 //Grab an item from the selected weapon slot.
-function retrieveFromRacks(slotNum:Number,armor:Boolean = false):void {
+public function retrieveFromRacks(slotNum:Number,armor:Boolean = false):void {
 	if(armor) slotNum += 9;
 	if(gearStorage[slotNum].quantity == 0) {
 		outputText("That slot is empty.", true);
@@ -6205,7 +6205,7 @@ function retrieveFromRacks(slotNum:Number,armor:Boolean = false):void {
 }
 
 //Retrieval List - lets you select the correct gear slot
-function chooseRacksSlot(armor:Boolean = false):void {
+public function chooseRacksSlot(armor:Boolean = false):void {
 	/*if(!hasItemsInGearStorage()) {
 		eventParser(1);
 		return;
@@ -6259,7 +6259,7 @@ function chooseRacksSlot(armor:Boolean = false):void {
 	else menuLoc = 23;
 }
 //Store - let you select an item slot, then a weapon slot.
-function pickItemToRacks(armor:Boolean = false):void {
+public function pickItemToRacks(armor:Boolean = false):void {
 	var temp2:Number = 0;
 	var temp1:Number = 0;
 	var temp3:Number = 0;
@@ -6294,7 +6294,7 @@ function pickItemToRacks(armor:Boolean = false):void {
 
 
 //Determine how to continue after using items or running from the items menu. 
-function itemGoNext():void {
+public function itemGoNext():void {
 	trace("ITEM GO NEXT HAPPENZ BITCHES" + String(itemSwapping));
 	//If at giacomo go back to him afterwards
 	if(gameState == 4) {
@@ -6410,14 +6410,14 @@ function itemGoNext():void {
 	else doNext(1);
 }
 
-function purePearl():void {
+public function purePearl():void {
 	outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your core.", true);
 	stats(0,0,0,0,-5,0,-25,-10);
 	if(player.hasPerk("Purity Blessing") < 0) player.createPerk("Purity Blessing",0,0,0,0,"Reduces the rate at which your corruption, libido, and lust increase.");
 }
 
 //TODO FIX
-function growPlus():void {
+public function growPlus():void {
 	var ballsEvent:Number = 0;
 	if(player.balls > 0) ballsEvent = 1039;
 	var clitEvent:Number = 0;
@@ -6432,7 +6432,7 @@ function growPlus():void {
 	outputText("You ponder the needle in your hand knowing it will enlarge the injection site.  What part of your body will you use it on?  ", true);
 	choices("Balls", ballsEvent, "Breasts",breastEvent,"Clit",clitEvent,"Cock", cockEvent,"Nipples", nipplesEvent,"",0,"",0,"",0,"",0,"Nevermind",1038);
 }
-function reducto():void {
+public function reducto():void {
 	var ballsEvent:Number = 0;
 	if(player.balls > 0 && player.ballSize > 1) ballsEvent = 1054;
 	var clitEvent:Number = 0;
@@ -6453,7 +6453,7 @@ function reducto():void {
 }
 
 
-function lactaid():void {
+public function lactaid():void {
 	slimeFeed();
 	var i:Number = 0
 	outputText("You gulp down the bottle of lactaid, easily swallowing the creamy liquid.", true);
@@ -6495,7 +6495,7 @@ EGG TYPES-
 3 - pink - dick removal and/or fertility increase.
 4 - white - breast growth.  If lactating increases lactation.
 5 - rubbery black*/
-function eggShifter(eggCode:Number):void {
+public function eggShifter(eggCode:Number):void {
 	if(player.hasStatusAffect("eggs") >= 0) {
 		player.statusAffects[player.hasStatusAffect("eggs")].value1 = eggCode;
 	}
@@ -6504,7 +6504,7 @@ function eggShifter(eggCode:Number):void {
 	}
 }
 
-function useMarbleMilk():void {
+public function useMarbleMilk():void {
 	slimeFeed();
 	//Bottle of Marble's milk - item
 	//Description: "A clear bottle of milk from Marble's breasts.  It smells delicious.  "
@@ -6561,7 +6561,7 @@ Mostly the same, but some of the effects can be more pronounced.  Ie, more str g
 If the player's nipples are larger than 1 inch in length, this item is guaranteed to give them quad nipples.  This applies to all their breasts; seems like it ould be a good compromise on whether or not cowgirls should have 4 breasts.
 Very small chance to increase fertility (normally this increase would only happen when the player forces a creature to drink their milk).
 */
-function laBova(tainted:Boolean = true, enhanced:Boolean = false):void {
+public function laBova(tainted:Boolean = true, enhanced:Boolean = false):void {
 	slimeFeed();
 	//Changes done
 	var changes:Number = 0;
@@ -6969,7 +6969,7 @@ function laBova(tainted:Boolean = true, enhanced:Boolean = false):void {
 }
 
 
-function blackSpellbook():void {
+public function blackSpellbook():void {
 	outputText("You open the small black book, and discover it to be an instructional book on the use of black magic.  Most of it is filled with generic information about black magic - how it is drawn from emotions (typically lust), and how it has the power to affect bodies and emotions.  It also warns against using it on oneself, as it is difficult to draw on your emotions while meddling with your own body.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.", true);
 	if(player.inte < 30) {
 		outputText("\n\nYou feel greatly enlightened by your time spent reading.", false);
@@ -7007,7 +7007,7 @@ function blackSpellbook():void {
 	}
 }
 
-function whiteSpellbook():void {
+public function whiteSpellbook():void {
 	outputText("You open the white tome, and discover it to be an instructional book on the use of white magic.  Most of it is filled with generic information about white magic - how it is drawn for mental focus, is difficult to use when tired or aroused, and can be used to create and control energy.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.", true);
 	if(player.inte < 30) {
 		outputText("\n\nYou feel greatly enlightened by your time spent reading.", false);
@@ -7045,7 +7045,7 @@ function whiteSpellbook():void {
 	}
 }
 
-function lustDraft(fuck:Boolean = false):void {
+public function lustDraft(fuck:Boolean = false):void {
 	slimeFeed();
 	outputText("You drink the ", true);
 	if(fuck) outputText("red", false);
@@ -7117,7 +7117,7 @@ function lustDraft(fuck:Boolean = false):void {
 	if(player.lust > 100) player.lust = 100;
 	outputText("\n\n", false);
 }
-function goblinAle():void {
+public function goblinAle():void {
 	slimeFeed();
 	var changes:Number = 0;
 	var changeLimit:Number = 1;
@@ -7314,7 +7314,7 @@ function goblinAle():void {
 	}
 }
 
-function gooGasmic():void {
+public function gooGasmic():void {
 	outputText("You take the wet cloth in hand and rub it over your body, smearing the strange slime over your " + player.skinDesc + " slowly.", true);
 	//Stat changes
 	//libido up to 80
@@ -7450,7 +7450,7 @@ function gooGasmic():void {
 	if(rand(2) == 0) outputText(player.modTone(15,5), false);
 }
 
-function slimeBadEnd():void {
+public function slimeBadEnd():void {
 	outputText("One year later...", true);
 	outputText("\n\nThe new champion has managed to escape imprisonment in the demons' sick plots, but the monsters and trials of this land have taken their toll on him.  He undresses and slips into the water, hesitant around his newly enlarged member, but once he slips beneath the soothing waters he forgets all about it all and just relaxes.", false); 
 	outputText("\n\nHis reprieve is rudely interrupted as something thick and viscous wraps around his legs, gripping them with vicelike tightness.  He kicks futilely, accomplishing nothing but making the once-champion's goopey body jiggle as it slowly envelops more and more of the young man.  Suspended so that his head barely breaks the surface of the water, his entire body is wrapped up in more and more of the slime.  It curls around his member, slick and moist, gently massaging away his desire to resist.  The new champion relaxes and accepts it, twitching as the slime manages to caress a particularly tender spot.", false);  
@@ -7463,7 +7463,7 @@ function slimeBadEnd():void {
 
 
 //Slime feeding
-function slimeFeed():void {
+public function slimeFeed():void {
 	if(player.hasStatusAffect("Slime Craving") >= 0) {
 		//Reset craving value
 		player.changeStatusValue("Slime Craving",1,0);
@@ -7479,7 +7479,7 @@ function slimeFeed():void {
 }
 
 
-function sharkTooth(type:Number = 0):void {
+public function sharkTooth(type:Number = 0):void {
 	var changes:Number = 0;
 	var changeLimit:Number = 2;
 	if(rand(2) == 0) changeLimit++;
@@ -7658,7 +7658,7 @@ This also means that someone who's already reached the maximum numbers of dicks 
 "A vial the size of your fist made of dark brown glass. It contains what appears to be an oily, yellowish liquid. The odor is abominable."
 */
 
-function snakeOil():void {
+public function snakeOil():void {
 	slimeFeed();
 	outputText("", true);
 	var changes:Number = 0;
@@ -7744,7 +7744,7 @@ function snakeOil():void {
 	if(changes == 0) outputText("\n\nRemakarbly, the snake-oil has no effect.  Should you really be surprised at snake-oil NOT doing anything?", false);
 }
 
-function extensionSerum():void {
+public function extensionSerum():void {
 	outputText("", true);
 	if(flags[INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED] > 2) {
 		outputText("<b>No way!</b>  Your head itches like mad from using the rest of these, and you will NOT use another.\n", false);
@@ -7774,7 +7774,7 @@ function extensionSerum():void {
 	}
 	if(flags[INCREASED_HAIR_GROWTH_TIME_REMAINING] < 7) flags[INCREASED_HAIR_GROWTH_TIME_REMAINING] = 7;
 }
-function Hummus():void {
+public function Hummus():void {
 	outputText("", true);
 	if(debug) {
 		outputText("You're about to eat the humus when you see it has bugs in it. Not wanting to eat bugged humus or try to debug it you throw it into the portal and find something else to eat.", false);
@@ -7877,7 +7877,7 @@ function Hummus():void {
 }
 
 
-function giveHumanizer():void {
+public function giveHumanizer():void {
 	if(flags[TIMES_CHEATED_COUNTER] > 0) {
 		outputText("<b>I was a cheater until I took an arrow to the knee...</b>", true);
 		eventParser(5035);
@@ -7889,7 +7889,7 @@ function giveHumanizer():void {
 	flags[TIMES_CHEATED_COUNTER]++;
 }
 
-function coal():void {
+public function coal():void {
 	var changes:Number = 0;
 	outputText("", true);
 	outputText("You handle the coal rocks experimentally and they crumble to dust in your hands!  You cough as you breathe in the cloud, sputtering and wheezing.  After a minute of terrible coughing, you recover and realize there's no remaining trace of the rocks, not even a sooty stain on your hands!", false);
@@ -7950,7 +7950,7 @@ function coal():void {
 	}
 }
 
-function catTransformation():void {
+public function catTransformation():void {
 	var changes:Number = 0;
 	var changeLimit:Number = 1;
 	var temp2:Number = 0;
@@ -8256,7 +8256,7 @@ function catTransformation():void {
 	}
 }
 
-function reptilum():void {
+public function reptilum():void {
 	slimeFeed();
 	//init variables
 	var changes:Number = 0;
@@ -8642,7 +8642,7 @@ function reptilum():void {
 }
 
 
-function wingStick():void {
+public function wingStick():void {
 	if(gameState != 1 && gameState != 2) {
 		outputText("There's no one to throw it at!", true);
 		if(debug) {}
@@ -8669,7 +8669,7 @@ function wingStick():void {
 	return;
 }
 
-function neonPinkEgg(pregnantChange:Boolean = false):void {
+public function neonPinkEgg(pregnantChange:Boolean = false):void {
 	var changes:Number = 0;
 	var changeLimit:Number = 1;
 	if(rand(2) == 0) changeLimit++;
@@ -9004,7 +9004,7 @@ function neonPinkEgg(pregnantChange:Boolean = false):void {
 	}
 }
 
-function goldenSeed(type:Number = 0):void {
+public function goldenSeed(type:Number = 0):void {
 	//'type' refers to the variety of seed.  
 	//0 == standard.
 	//1 == enhanced - increase change limit and no pre-reqs for TF
@@ -9341,7 +9341,7 @@ Big Roo Tfs:
 -Roo footsies
 -Fur
 -Roo face*/
-function kangaFruit(type:Number = 0):void {
+public function kangaFruit(type:Number = 0):void {
 	outputText("", true);
 	outputText("You squeeze the pod around the middle, forcing the end open.  Scooping out a handful of the yeasty-smelling seeds, you shovel them in your mouth.  Blech!  Tastes like soggy burnt bread... and yet, you find yourself going for another handful...", false);
 	//Used to track changes and the max
@@ -9561,7 +9561,7 @@ function kangaFruit(type:Number = 0):void {
 }
 
 //[Giant Chocolate Cupcake] – 500 gems
-function giantChocolateCupcake():void {
+public function giantChocolateCupcake():void {
 	outputText("", true);
 	outputText("You look down at the massive chocolate cupcake and wonder just how you can possibly eat it all.  It fills the over-sized wrapper and bulges out over the top, somehow looking obscene even though it's merely a baked treat.  There is a single candle positioned atop its summit, and it bursts into flame as if by magic.  Eight red gumdrops ring the outer edge of the cupcake, illuminated by the flame.\n\n", false);
 	outputText("You hesitantly take a bite.  It's sweet, as you'd expect, but there's also a slightly salty, chocolaty undercurrent of flavor.  Even knowing what the minotaur put in Maddie's mix, you find yourself grateful that this new creation doesn't seem to have any of his 'special seasonings'.  It wouldn't do to be getting drugged up while you're slowly devouring the massive, muffin-molded masterpiece. Before you know it, most of the cupcake is gone and you polish off the last chocolaty bites before licking your fingers clean.\n\n", false);
@@ -9571,7 +9571,7 @@ function giantChocolateCupcake():void {
 	outputText(player.modThickness(100,100), false);
 }
 
-function sweetGossamer(type:Number = 0):void {
+public function sweetGossamer(type:Number = 0):void {
 	outputText("", true);
 	var changes:Number = 0;
 	var changeLimit:Number = 1;
@@ -9836,7 +9836,7 @@ function sweetGossamer(type:Number = 0):void {
 	}
 }
 
-function applyLustStick():void {
+public function applyLustStick():void {
 	outputText("", true);
 	if(!player.hasCock() || player.hasPerk("Luststick Adapted") >= 0) {
 		if(player.hasStatusAffect("Lust Stick Applied") >= 0) {
@@ -9863,7 +9863,7 @@ function applyLustStick():void {
 	}
 }
 
-function broBrew():void {
+public function broBrew():void {
 	outputText("", true);
 	//no drink for bimbos!
 	if(player.hasPerk("Bimbo Body") >= 0) {
@@ -10028,7 +10028,7 @@ function broBrew():void {
 //Mouseover script: \"The green-tinted, hardly corporeal substance flows like a liquid inside its container. It makes you feel...uncomfortable, as you observe it.\"
 
 //Bottle of Ectoplasm Text
-function ectoplasm():void {
+public function ectoplasm():void {
 	outputText("", true);
 	outputText("You grimace and uncork the bottle, doing your best to ignore the unearthly smell drifting up to your nostrils. Steeling yourself, you raise the container to your lips and chug the contents, shivering at the feel of the stuff sliding down your throat.  Its taste, at least, is unexpectedly pleasant.  Almost tastes like oranges.", false);
 	var changes:Number = 0;
@@ -10112,7 +10112,7 @@ function ectoplasm():void {
 	//Failure:  With a smile and a wink, your form becomes completely intangible, and you waste no time in throwing yourself into the opponent's frame. Unfortunately, it seems they were more mentally prepared than you hoped, and you're summarily thrown out of their body before you're even able to have fun with them. Darn, you muse. Gotta get smarter.
 }
 
-function isabellaMilk():void {
+public function isabellaMilk():void {
 	outputText("", true);
 	outputText("You swallow down the bottle of Isabella's milk.", false);
 	if(player.fatigue > 0) outputText("  You feel much less tired! (-33 fatigue)", false);
@@ -10122,7 +10122,7 @@ function isabellaMilk():void {
 
 //TF item - Shriveled Tentacle
 //tooltip: 
-function shriveledTentacle():void {
+public function shriveledTentacle():void {
 	outputText("", true);
 	outputText("You chew on the rubbery tentacle; its texture and taste are somewhat comparable to squid, but the half-dormant nematocysts cause your mouth to tingle sensitively.", false);
 	var changes:Number = 0;
@@ -10206,7 +10206,7 @@ function shriveledTentacle():void {
 }
 
 //ITEMS START
-function bimboLiquer():void {
+public function bimboLiquer():void {
 	outputText("", true);
 	if(player.hasPerk("Futa Form") >= 0) {
 		outputText("Ugh.  This stuff is so, like... last year.  Maybe you can find someone else to feed it to?\n\n", false);
@@ -10392,7 +10392,7 @@ function bimboLiquer():void {
 }
 
 //Numb Rocks
-function numbRocks():void {
+public function numbRocks():void {
 	outputText("", true);
 	//Numb rocks lower lust significantly but have a chance of inducing the masturbation preventing effect from minotaur.
 	outputText("You pop open the package of numb rocks and dump it into your waiting mouth.  The strange candy fizzes and pops, leaving the nerves on your tongue feeling a bit deadened as you swallow the sweet mess.", false);
@@ -10440,7 +10440,7 @@ function numbRocks():void {
 }
 
 //2. Sensitivity Draft
-function sensitivityDraft():void {
+public function sensitivityDraft():void {
 	outputText("", true);
 	outputText("You pop the cork on this small vial and drink down the clear liquid.  It makes your lips and tongue tingle strangely, letting you feel each globule of spit in your mouth and each breath of air as it slides past your lips.", false);
 	
@@ -10464,7 +10464,7 @@ function sensitivityDraft():void {
 	stats(0,0,0,0,0,10,5,0);
 }
 
-function foxTF(enhanced:Boolean = false):void {
+public function foxTF(enhanced:Boolean = false):void {
 	clearOutput();
 	if(!enhanced) outputText("You examine the berry a bit, rolling the orangish-red fruit in your hand for a moment before you decide to take the plunge and chow down.  It's tart and sweet at the same time, and the flavors seem to burst across your tongue with potent strength.  Juice runs from the corners of your lips as you finish the tasty snack.");
 	else outputText("You pop the cap on the enhanced \"Vixen's Vigor\" and decide to take a swig of it.  Perhaps it will make you as cunning as the crude fox Lumi drew on the front?");
@@ -10805,7 +10805,7 @@ function foxTF(enhanced:Boolean = false):void {
 	}
 }
 
-function godMead():void {
+public function godMead():void {
 	clearOutput();
 	outputText("You take a hearty swig of mead, savoring the honeyed taste on your tongue.  Emboldened by the first drink, you chug the remainder of the horn's contents in no time flat.  You wipe your lips, satisfied, and let off a small belch as you toss the empty horn aside.");
 
@@ -10830,7 +10830,7 @@ function godMead():void {
 	//Grow hair: Your scalp is beset by pins and needles as your hair grows out, stopping after it reaches [medium/long] length.}
 }
 
-function sheepMilk():void {
+public function sheepMilk():void {
 	outputText("You gulp the bottle's contents, and its sweet taste immediately invigorates you, making you feel calm and concentrated", true);
 	//-30 fatigue, -2 libido, -10 lust]
 	fatigue(-30);
@@ -10840,7 +10840,7 @@ function sheepMilk():void {
 //Item: Dragon Egg (Z) (FEN CODED TO HERE - OR AT LEAST COPIED INTO THE CODE FOR FUTURE CODING)
 //Itemdescription - "A large, solid egg, easily the size of your clenched fist.  Its shell color is reddish-white, with blue splotches."
 
-function eatEmberEgg():void {
+public function eatEmberEgg():void {
 	clearOutput();
 	//Effect:
 	//Boosts the special effect of Dragonbreath by 20% for 1 use. ie: if Tainted's breath weapon has a 80% chance to stun on hit, +20% equals 100% chance to stun.
@@ -10858,7 +10858,7 @@ function eatEmberEgg():void {
 
 //\"<i>Chicken Harpy</i>\" by Jay Gatsby and not Savin he didn't do ANYTHING
 //Initial Intro
-function chickenHarpy():void {
+public function chickenHarpy():void {
 	clearOutput();
 	spriteSelect(90);
 	if(flags[TIMES_MET_CHICKEN_HARPY] == 0) {
@@ -10889,7 +10889,7 @@ function chickenHarpy():void {
 }
 
 //If Give Two
-function giveTwoOviElix():void {
+public function giveTwoOviElix():void {
 	clearOutput();
 	spriteSelect(90);
 	consumeItem("OviElix",1);
@@ -10906,7 +10906,7 @@ function giveTwoOviElix():void {
 }
 
 //If Give Three
-function giveThreeOviElix():void {
+public function giveThreeOviElix():void {
 	clearOutput();
 	spriteSelect(90);
 	consumeItem("OviElix",1);
@@ -10924,7 +10924,7 @@ function giveThreeOviElix():void {
 }
 	
 //All Text
-function getHarpyEgg(type:int = 0):void {
+public function getHarpyEgg(type:int = 0):void {
 	clearOutput();
 	spriteSelect(90);
 	if(type == 0) shortName = "BlackEg";
@@ -10946,7 +10946,7 @@ function getHarpyEgg(type:int = 0):void {
 }
 
 //If No
-function leaveChickenx():void {
+public function leaveChickenx():void {
 	clearOutput();
 	spriteSelect(90);
 	outputText("At the polite decline of her offer, the chicken harpy gives a warm smile before picking her cart back up and continuing along the path through the mountains.");
@@ -10959,7 +10959,7 @@ function leaveChickenx():void {
 //Fox Jewel (Magatama)
 
 //Consume:
-function foxJewel(mystic:Boolean = false):void {
+public function foxJewel(mystic:Boolean = false):void {
 	clearOutput();
 	var changes:int = 0;
 	var changeLimit:int = 1;
@@ -11222,7 +11222,7 @@ function foxJewel(mystic:Boolean = false):void {
 }
 
 //Kitsune's Gift
-function kitsunesGift():void {
+public function kitsunesGift():void {
 	clearOutput();
 	if(inCombat()) {
 		outputText("You cannot use this item in combat.  ");
@@ -11241,7 +11241,7 @@ function kitsunesGift():void {
 	
 }
 
-function kitsuneGiftResult(clear:Boolean = true):void {
+public function kitsuneGiftResult(clear:Boolean = true):void {
 	if(clear)clearOutput();
 	else outputText("\n\n");
 	itemSubMenu = true;
@@ -11418,7 +11418,7 @@ outputText( "You find yourself unable to stifle a flirtatious giggle, waggling y
 */
 
 //Unbimbo Yourself:*
-function deBimbo():void {
+public function deBimbo():void {
 	clearOutput();
 	if(player.hasPerk("Bimbo Brains") < 0 && player.hasPerk("Futa Faculties") < 0) {
 		outputText("You can't use this right now, and it's too expensive to waste!\n\n");
@@ -11441,7 +11441,7 @@ function deBimbo():void {
 	}
 }
 	
-function lustyMaidensArmor():void {
+public function lustyMaidensArmor():void {
 	clearOutput();
 	//{No titties}
 	if(player.biggestTitSize() < 1) {
@@ -11518,7 +11518,7 @@ function lustyMaidensArmor():void {
 }
 
 //"Chaste" Paizuri - works for most foes with penises.
-function lustyMaidenPaizuri():void {
+public function lustyMaidenPaizuri():void {
 	clearOutput();
 	outputText("You make sure " + monster.a + monster.short + " is comfortably lying down, " + monster.pronoun3 + " " + eCockDescript(0) + " exposed to the air");
 	if(monster.lust < 50) outputText(", soft and not yet ready.  You purr throatily as you touch the burgeoning boner, tracing your thumb across the sensitive urethral bulge.  It pulses slowly at your touch, and the base begins to fill with blood, thickening against your palm.  You splay your remaining fingers just under the " + eCockHead(0) + ", tickling around the glans until that too is flooding with blood, expanding under your caresses until it slowly lifts away from " + monster.pronoun3 + " abdomen.");
@@ -11574,7 +11574,7 @@ function lustyMaidenPaizuri():void {
 
 
 //Fish Fillet
-function fishFillet():void {
+public function fishFillet():void {
 	clearOutput();
 	if(!inCombat()) outputText("You sit down and unwrap your fish fillet. It's perfectly flaky, allowing you to break it off in bite-sized chunks.  The salty meal disappears quickly, and your stomach gives an appreciative gurgle.");
 	//(In combat?) 
@@ -11590,7 +11590,7 @@ function fishFillet():void {
 
 //Trap Oil
 //Flavour Description: A round, opaque glass vial filled with a clear, viscous fluid.  It has a symbol inscribed on it, a circle with a cross and arrow pointing out of it in opposite directions.  It looks and smells entirely innocuous. 
-function trapOil():void {
+public function trapOil():void {
 	clearOutput();
 	var changes:int = 0;
 	var changeLimit:int = 1;
@@ -11859,7 +11859,7 @@ function trapOil():void {
 
 //PurPeac
 //Purity Peach - Inventory
-function purityPeach():void {
+public function purityPeach():void {
 	clearOutput();
 	outputText("You bite into the sweet, juicy peach, feeling a sensation of energy sweeping through your limbs and your mind.  You feel revitalized, refreshed, and somehow cleansed.");
 	fatigue(-15);
@@ -11870,7 +11870,7 @@ function purityPeach():void {
 //This sweet-smelling produce looks like an eggplant but feels almost squishy, and rubbery to the touch. Holding it to your ear, you think you can hear some fluid sloshing around inside.
 
 //>When Used
-function purpleFruitEssrayle():void {
+public function purpleFruitEssrayle():void {
 	clearOutput();
 	outputText("You bite into the fruit Essrayle gave you with little hesitation.  It's amazingly sweet, with a texture that's rather gummy.  The juice is a candied grape syrup that fills your cheeks and flows down your throat with far more fluid than the size of the plant should allow.  You hastily devour the entire thing, unable to stop yourself once you've started.");
 	outputText("\n\nA tingling warmth shifts to a roaring inferno in your veins, your heart-rate spiking abruptly.  The intensity of it almost makes your body feel molten!  But, as quickly as it came, the sensation fades into merely a pleasing warmth that settles in your chest.");
@@ -11893,7 +11893,7 @@ function purpleFruitEssrayle():void {
 //tooltip:
 //A dried fig with two lobes and thin dark rings just below its stem.  The skin is wrinkly and it looks vaguely like a bulging scrotum.
 
-function ringtailFig():void {
+public function ringtailFig():void {
 	clearOutput();
 	//eat it:
 	outputText("You split the fruit and scoop out the pulp, eating it greedily.  It's sweet and slightly gritty with seeds, and you quickly finish both halves.");
@@ -12064,7 +12064,7 @@ function ringtailFig():void {
 
 
 //Mouse Cocoa/MousCoco (you can change the name if you're saddlesore I guess but I'll make fun of you for having no plausible source of chocolate for your bakery if you do)
-function mouseCocoa():void {
+public function mouseCocoa():void {
 	clearOutput();
 	
 	var changes:int = 0;

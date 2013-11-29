@@ -3,7 +3,7 @@
 //const MALI_TAKEN_BLADE:int = 862;
 
 //[Mage's Tower]
-function visitZeMagesTower():void {
+public function visitZeMagesTower():void {
 	
 	if(flags[TIMES_BEEN_TO_LIBRARY] == 0) firstTowerVisit();
 	else towerFollowUpVisits();
@@ -20,7 +20,7 @@ function visitZeMagesTower():void {
 
 
 //(first visit)
-function firstTowerVisit():void {
+public function firstTowerVisit():void {
 	clearOutput();
 	outputText("You make your way to the largest fixture of the city, the impressive tower in the center.  The large spire could easily hold everyone you know ten times over and still have room to spare.  It is far too large for a city with Tel'adre's population – but then, you reflect, so is Tel'adre itself.");
 	
@@ -41,7 +41,7 @@ function firstTowerVisit():void {
 }
 
 
-function towerFollowUpVisits():void {
+public function towerFollowUpVisits():void {
 	clearOutput();
 	//(follow-up visits, 6:00 – 17:00)
 	if(model.time.hours <= 17) {
@@ -59,7 +59,7 @@ function towerFollowUpVisits():void {
 	}
 }
 //[Study]
-function studyInTA():void {
+public function studyInTA():void {
 	clearOutput();
 	//[Study, 6:00-17:00]
 	if(model.time.hours <= 17) {
@@ -118,7 +118,7 @@ function studyInTA():void {
 }
 
 //[You OK?]
-function youOkayBuddy():void {
+public function youOkayBuddy():void {
 	clearOutput();
 	outputText("A bit perturbed by Quinn's countenance and apparent exhaustion you can't help but inquire as to his well-being.");
 	
@@ -133,7 +133,7 @@ function youOkayBuddy():void {
 }
 
 //[Mali]
-function talkToMali():void {
+public function talkToMali():void {
 	clearOutput();
 	if(flags[TIMES_VISITED_MALI] == 0) {
 		outputText("You mention to Quinn that you're looking to speak with Mali.  \"<i>Ah, Asa Mali, our very own Alissyn del Aliana.</i>\"  Quinn chuckles and rubs his chin.  You think you're talking about the same person.  \"<i>How mysterious that she of all people should have a visitor.  Am I setting up a forbidden tryst?  A secret rendezvous?  Or perhaps, given the nature of her work, something far more... ominous.</i>\"  He looms curiously, but you clear your throat and ask if she's in.  Disappointed, he sighs and gestures up the stairs.  \"<i>Yes, our sylvan sorceress is not that much of a socialite.</i>\"");

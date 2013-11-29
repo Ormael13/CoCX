@@ -39,7 +39,7 @@ var piercingMat:Number = 0;
 var piercingType:Number = 0;
 //}endregion
 
-function discoverTelAdre():void {
+public function discoverTelAdre():void {
 	outputText("", true);
 	if(player.hasStatusAffect("Tel'Adre") < 0) {
 		outputText("The merciless desert sands grind uncomfortably under your " + player.feet() + " as you walk the dunes, searching the trackless sands to uncover their mysteries.  All of a sudden, you can see the outline of a small city in the distance, ringed in sandstone walls.  Strangely it wasn't there a few moments before.  It's probably just a mirage brought on by the heat.  Then again, you don't have any specific direction you're heading, what could it hurt to go that way?", false);
@@ -52,7 +52,7 @@ function discoverTelAdre():void {
 }
 
 //player chose to approach the city in the distance
-function encounterTelAdre():void {
+public function encounterTelAdre():void {
 	outputText("", true);
 	if(player.hasStatusAffect("Tel'Adre") < 0) {
 		outputText("You slog through the shifting sands for a long time, not really seeming to get that close.  Just when you're about to give up, you crest a large dune and come upon the walls of the city you saw before.  It's definitely NOT a mirage.  There are sandstone walls at least fifty feet tall ringing the entire settlement, and the only entrance you can see is a huge gate with thick wooden doors.  The entrance appears to be guarded by a female gray fox who's more busy sipping on something from a bottle than watching the desert.\n\n", false);
@@ -72,7 +72,7 @@ function encounterTelAdre():void {
 }
 
 //Alignment crystal goooooo
-function telAdreCrystal():void {
+public function telAdreCrystal():void {
 	if(player.hasStatusAffect("Tel'Adre") < 0) player.createStatusAffect("Tel'Adre",0,0,0,0);
 	//-70+ corruption, or possessed by exgartuan
 	if(player.hasStatusAffect("Exgartuan") >= 0 || player.cor >= 70) {
@@ -98,7 +98,7 @@ function telAdreCrystal():void {
 	doNext(telAdreTour);
 }
 
-function telAdreTour():void {
+public function telAdreTour():void {
 	player.changeStatusValue("Tel'Adre",1,1);
 	outputText("", true);
 	urtaSprite();
@@ -113,7 +113,7 @@ function telAdreTour():void {
 	doNext(telAdreMenu);
 }
 
-function telAdreMenu():void {
+public function telAdreMenu():void {
 	if(flags[VALENTINES_EVENT_YEAR] < date.fullYear && player.balls > 0 && player.hasCock() && flags[NUMBER_OF_TIMES_MET_SCYLLA] >= 4 && flags[TIMES_MET_SCYLLA_IN_ADDICTION_GROUP] > 0 && isValentine()) {
 		crazyVDayShenanigansByVenithil();
 		return;
@@ -174,7 +174,7 @@ function telAdreMenu():void {
 	addButton(9,"Leave",eventParser,13);
 }
 
-function armorShops():void {
+public function armorShops():void {
 	menu();
 	addButton(0,"Blacksmith",armorShop);
 	addButton(1,"Piercing",piercingStudio);
@@ -182,7 +182,7 @@ function armorShops():void {
 	addButton(4,"Back",telAdreMenu);
 }
 
-function houses():void {
+public function houses():void {
 	clearOutput();
 	outputText("Whose home will you visit?");
 	var orphanage:int = 0;
@@ -202,7 +202,7 @@ function houses():void {
 	addButton(9,"Back",telAdreMenu);
 }
 
-function piercingStudio():void {
+public function piercingStudio():void {
 	spriteSelect(63);
 	var about:Number = 0;
 	if(player.hasStatusAffect("Yara") < 0) about = 2239;
@@ -211,7 +211,7 @@ function piercingStudio():void {
 	outputText("She introduces herself, \"<i>Hello there " + player.mf("sir","cutie") + ", my name is Yara.  Would you like to get a piercing?</i>\"", false);
 	simpleChoices("Pierce",pierceMenu,"Remove",piercingRemove,"About Her",about,"",0,"Leave",telAdreMenu);
 }
-function aboutYara():void {
+public function aboutYara():void {
 	spriteSelect(63);
 	player.createStatusAffect("Yara",0,0,0,0);
 	outputText("You introduce yourself and ask Yara about her past, noting that ", true);
@@ -221,7 +221,7 @@ function aboutYara():void {
 	stats(0,0,0,2,0,0,-5,-1);
 	doNext(piercingStudio);
 }
-function pierceMenu():void {
+public function pierceMenu():void {
 	spriteSelect(63);
 	hideUpDown();
 	var clit:Number = 0;
@@ -257,7 +257,7 @@ function pierceMenu():void {
 	}
 }
 
-function dickPierce():void {
+public function dickPierce():void {
 	spriteSelect(63);
 	if(player.totalCocks() > 0) outputText("\"<i>Ok, this is gonna hurt a LOT, but I've heard good things about it.  What kind of piercing do you want done?</i>\" Yara asks.", true);
 	else {
@@ -269,7 +269,7 @@ function dickPierce():void {
 	piercingLoc = 1;
 }
 
-function clitPierce():void {
+public function clitPierce():void {
 	spriteSelect(63);
 	if(player.hasVagina()) outputText("\"<i>Ohhh that's going to be suckably cute!</i>\" exclaims Yara, blushing more than a little. \"<i>What kind of piercing would you like?</i>", true);
 	else {
@@ -281,48 +281,48 @@ function clitPierce():void {
 	simpleChoices("Stud",chooseStud,"Ring",chooseRing,"",0,"Back",pierceMenu,"Nevermind",piercingStudio);
 }
 
-function earPierce():void {
+public function earPierce():void {
 	spriteSelect(63);
 	piercingLoc = 2;
 	outputText("\"<i>Okay, just let me get my supplies and we can get started.  What kind of jewelry do you want in them?</i>\" asks Yara.", true)
 	simpleChoices("Stud",chooseStud,"Ring",chooseRing,"Hoop",chooseHoop,"Back",pierceMenu,"Nevermind",piercingStudio);
 }
 
-function eyebrowPierce():void {
+public function eyebrowPierce():void {
 	spriteSelect(63);
 	piercingLoc = 3;
 	outputText("\"<i>Ah, that's a good look!  What do you want there?</i>\" asks Yara.", true);
 	simpleChoices("Stud",chooseStud,"Ring",chooseRing,"",0,"Back",pierceMenu,"Nevermind",piercingStudio);
 }
 
-function lipPierce():void {
+public function lipPierce():void {
 	spriteSelect(63);
 	piercingLoc = 4;
 	outputText("\"<i>Oh my, that'll be HAWT!  What kind of jewelry do you want there?</i>\" asks Yara.", true);
 	simpleChoices("Stud",chooseStud,"Ring",chooseRing,"",0,"Back",pierceMenu,"Nevermind",piercingStudio);
 }
 
-function nipplePierce():void {
+public function nipplePierce():void {
 	spriteSelect(63);
 	piercingLoc = 5;
 	outputText("\"<i>Yeah sure I can do those!  What kind of jewelry do you want there?  I'm partial to nipple-chains myself,</i>\" admits Yara, blushing bright red.", true);
 	simpleChoices("Studs",chooseStud,"Rings",chooseRing,"Chain",chooseChain,"Back",pierceMenu,"Nevermind",piercingStudio);
 }
 
-function nosePierce():void {
+public function nosePierce():void {
 	spriteSelect(63);
 	piercingLoc = 6;
 	outputText("Yara wrinkles her nose in distaste, \"<i>Really?  Well ok, what do you want there?</i>\"", true);
 	simpleChoices("Stud",chooseStud,"Ring",chooseRing,"",0,"Back",pierceMenu,"Nevermind",piercingStudio);
 }
 
-function tonguePierce():void {
+public function tonguePierce():void {
 	spriteSelect(63);
 	piercingLoc = 7;
 	outputText("Yara happily purrs, \"<i>Oh my, I bet that'll fun!  I'm afraid I can only put a stud there though, ok?</i>\"", true);
 	simpleChoices("Ok",chooseStud,"",0,"",0,"Back",pierceMenu,"Nevermind",piercingStudio);
 }
-function vulvaPierce():void {
+public function vulvaPierce():void {
 	spriteSelect(63);
 	piercingLoc = 8;
 	if(player.hasVagina()) outputText("Yara explains, \"<i>This is gonna hurt a lot, but I think you'll love how it feels after.  I know I do!  Now what kind of jewelry do you want down-town?</i>\"", true);
@@ -333,28 +333,28 @@ function vulvaPierce():void {
 	}
 	simpleChoices("Stud",chooseStud,"Ring",chooseRing,"",0,"Back",pierceMenu,"Nevermind",piercingStudio);
 }
-function chooseStud():void {
+public function chooseStud():void {
 	piercingType = 1;
 	chooseMaterials();	
 }
-function chooseRing():void {
+public function chooseRing():void {
 	piercingType = 2;
 	chooseMaterials();
 }
-function chooseLadder():void {
+public function chooseLadder():void {
 	piercingType = 3;
 	chooseMaterials();	
 }
-function chooseHoop():void {
+public function chooseHoop():void {
 	piercingType = 4;
 	chooseMaterials();	
 }
-function chooseChain():void {
+public function chooseChain():void {
 	piercingType = 5;
 	chooseMaterials();	
 }
 
-function chooseMaterials():void {
+public function chooseMaterials():void {
 	spriteSelect(63);
 	outputText("Yara gathers up her materials and says, \"<i>Ok, now what type of material do you want it made from?  Don't worry about price, none of these are that rare, so the piercing will only be 100 gems.  Though I do have some rarer materials; you'll need 1000 gems to spend if you want to check them out.</i>\"", true);
 	if(player.gems < 100) {
@@ -366,56 +366,56 @@ function chooseMaterials():void {
 	if(player.gems >= 1000) rare = 2250;
 	choices("Amethyst",chooseAmethyst,"Diamond",chooseDiamond,"Gold",chooseGold,"Emerald",chooseEmerald,"Jade",chooseJade,"Onyx",chooseOnyx,"Ruby",chooseRuby,"Steel",chooseSteel,"Rare Menu",rare,"Nevermind",piercingStudio);
 }
-function chooseAmethyst():void {
+public function chooseAmethyst():void {
 	piercingMat = 1;
 	areYouSure();
 }
-function chooseDiamond():void {
+public function chooseDiamond():void {
 	piercingMat = 2;
 	areYouSure();
 }
-function chooseGold():void {
+public function chooseGold():void {
 	piercingMat = 3;
 	areYouSure();
 }
-function chooseEmerald():void {
+public function chooseEmerald():void {
 	piercingMat = 4;
 	areYouSure();
 }
-function chooseJade():void {
+public function chooseJade():void {
 	piercingMat = 5;
 	areYouSure();
 }
-function chooseOnyx():void {
+public function chooseOnyx():void {
 	piercingMat = 6;
 	areYouSure();
 }
-function chooseRuby(): void {
+public function chooseRuby(): void {
 	piercingMat = 7;
 	areYouSure();
 }
-function chooseSteel():void {
+public function chooseSteel():void {
 	piercingMat = 8;
 	areYouSure();
 }
-function chooseLethite():void {
+public function chooseLethite():void {
 	piercingMat = 9;
 	areYouSure();
 }
-function chooseFertite():void {
+public function chooseFertite():void {
 	piercingMat = 10;
 	areYouSure();
 }
-function chooseFurrite():void {
+public function chooseFurrite():void {
 	piercingMat = 11;
 	areYouSure();
 }
-function chooseCrimstone():void {
+public function chooseCrimstone():void {
 	piercingMat = 12;
 	areYouSure();
 }
 
-function areYouSure():void {
+public function areYouSure():void {
 	spriteSelect(63);
 	outputText("Yara says, \"<i>Ok, last chance to back out, are you sure you want to go ahead with this?  Remember, once I put it in, it's permanent.</i>\"", true);
 	doYesNo(normalPierceAssemble,piercingStudio);
@@ -424,7 +424,7 @@ function areYouSure():void {
 	//10. Fertite (Fertility Booster)
 	//11. Furrite (Attracts Furries)
 	//12. Crimstone - + min lust
-function chooseAdvancedMaterials():void {
+public function chooseAdvancedMaterials():void {
 	spriteSelect(63);
 	outputText("Yara goes back into the back and comes out with a gilded tray full of exotic materials.  She hands you a brochure and asks, \"<i>Ok, now what am I going to be working with?</i>\"", true);
 	outputText("\n\nThere's a number of materials listed here:", false);
@@ -436,7 +436,7 @@ function chooseAdvancedMaterials():void {
 	simpleChoices("Lethite",chooseLethite,"Fertite",chooseFertite,"Furrite",chooseFurrite,"Crimstone",chooseCrimstone,"Back",chooseMaterials);
 }
 
-function normalPierceAssemble():void {
+public function normalPierceAssemble():void {
 	spriteSelect(63);
 	outputText("Yara makes you comfortable and has you look away while she uses her piercing tools.  It hurts, but she's skilled and before you know it, your piercing is done!", true);
 	//1. Amethyst (+1 int, +1 lib)
@@ -702,12 +702,12 @@ function normalPierceAssemble():void {
 	doNext(piercingStudio);
 }
 
-function specialPierceAssemble():void {
+public function specialPierceAssemble():void {
 	
 	
 }
 
-function piercingRemove():void {
+public function piercingRemove():void {
 	spriteSelect(63);
 	hideUpDown();
 	var clit:Number = 0;
@@ -753,7 +753,7 @@ function piercingRemove():void {
 	choices("Clit",clit,"Dick",dick,"Ears",ears,"Eyebrow",eyebrow,"Lip",lip,"Nipples",nipples,"Nose",nose,"Tongue",tongue,"Labia",vulva,"Back",piercingStudio);
 }
 
-function removeClitPierce():void {
+public function removeClitPierce():void {
 	spriteSelect(63);
 	outputText("Yara gives you something to drink and you swiftly black out.  You awake about an hour later, sore and weak, though thankfully not bleeding.", true);
 	player.vaginas[0].clitPierced = 0;
@@ -765,7 +765,7 @@ function removeClitPierce():void {
 	doNext(piercingStudio);
 }
 
-function removeCockPierce():void {
+public function removeCockPierce():void {
 	spriteSelect(63);
 	outputText("Yara gives you something to drink and you swiftly black out.  You awake about an hour later, sore and weak, though thankfully not bleeding.", true);
 	player.cocks[0].pierced = 0;
@@ -777,7 +777,7 @@ function removeCockPierce():void {
 	doNext(piercingStudio);
 }
 
-function removeEarsPierce():void {
+public function removeEarsPierce():void {
 	spriteSelect(63);
 	outputText("Yara gives you something to drink and you swiftly black out.  You awake about an hour later, sore and weak, though thankfully not bleeding.", true);
 	player.earsPierced = 0;
@@ -789,7 +789,7 @@ function removeEarsPierce():void {
 	doNext(piercingStudio);
 }
 
-function removeEyebrowPierce():void {
+public function removeEyebrowPierce():void {
 	spriteSelect(63);
 	outputText("Yara gives you something to drink and you swiftly black out.  You awake about an hour later, sore and weak, though thankfully not bleeding.", true);
 	player.eyebrowPierced = 0;
@@ -801,7 +801,7 @@ function removeEyebrowPierce():void {
 	doNext(piercingStudio);
 }
 
-function removeLipPierce():void {
+public function removeLipPierce():void {
 	spriteSelect(63);
 	outputText("Yara gives you something to drink and you swiftly black out.  You awake about an hour later, sore and weak, though thankfully not bleeding.", true);
 	player.lipPierced = 0;
@@ -813,7 +813,7 @@ function removeLipPierce():void {
 	doNext(piercingStudio);
 }
 
-function removeNipplesPierce():void {
+public function removeNipplesPierce():void {
 	spriteSelect(63);
 	outputText("Yara gives you something to drink and you swiftly black out.  You awake about an hour later, sore and weak, though thankfully not bleeding.", true);
 	player.nipplesPierced = 0;
@@ -825,7 +825,7 @@ function removeNipplesPierce():void {
 	doNext(piercingStudio);
 }
 
-function removeNosePierce():void {
+public function removeNosePierce():void {
 	spriteSelect(63);
 	outputText("Yara gives you something to drink and you swiftly black out.  You awake about an hour later, sore and weak, though thankfully not bleeding.", true);
 	player.nosePierced = 0;
@@ -837,7 +837,7 @@ function removeNosePierce():void {
 	doNext(piercingStudio);
 }
 
-function removeTonguePierce():void {
+public function removeTonguePierce():void {
 	spriteSelect(63);
 	outputText("Yara gives you something to drink and you swiftly black out.  You awake about an hour later, sore and weak, though thankfully not bleeding.", true);
 	player.tonguePierced = 0;
@@ -849,7 +849,7 @@ function removeTonguePierce():void {
 	doNext(piercingStudio);
 }
 
-function removeVulvaPierce():void {
+public function removeVulvaPierce():void {
 	spriteSelect(63);
 	outputText("Yara gives you something to drink and you swiftly black out.  You awake about an hour later, sore and weak, though thankfully not bleeding.", true);
 	player.vaginas[0].labiaPierced = 0;
@@ -861,7 +861,7 @@ function removeVulvaPierce():void {
 	doNext(piercingStudio);
 }
 
-function oswaldPawn():void {
+public function oswaldPawn():void {
 	spriteSelect(47);
 	outputText("", true);
 	if(player.hasStatusAffect("Oswald") < 0) {
@@ -881,18 +881,18 @@ function oswaldPawn():void {
 }
 
 
-function anotherButton(button:int,nam:String,func,arg = -9000):int {
+public function anotherButton(button:int,nam:String,func,arg = -9000):int {
 	if(button > 8) return 9;
 	if(arg == -9000) addButton(button,nam,func);
 	else addButton(button,nam,func,arg);
 	button++;
 	return button;
 }
-function enterBarTelAdre():void {
+public function enterBarTelAdre():void {
 	if(isThanksgiving()) pigSlutRoastingGreet();
 	else barTelAdre();
 }
-function barTelAdre():void {
+public function barTelAdre():void {
 	// Dominka & Edryn both persist their sprites if you back out of doing anything with them -- I 
 	// I guess this is good a place as any to catch-all the sprite, because I don't think theres ever a case you get a sprite from just entering the bar?
 	spriteSelect( -1);
@@ -1061,7 +1061,7 @@ function barTelAdre():void {
 	addButton(9,"Leave",telAdreMenu);		
 }
 
-function oldbarTelAdre():void {
+public function oldbarTelAdre():void {
 	hideUpDown();
 	var edryn:Number = 0;
 	var urta:Number = 0;
@@ -1244,7 +1244,7 @@ function oldbarTelAdre():void {
 	choices("Dominika",dominika,"Edryn",edryn,"Hel",hel,misc1Name,misc1,nancyText,nancy,rogarT,rogarB,"Urta",urta,"Vala",vala,"Backroom",backroom,"Leave",telAdreMenu);
 }
 
-function tailorShoppe():void {
+public function tailorShoppe():void {
 	outputText("", true);
 	spriteSelect(61);
 	outputText("The inside of the tailor's shop is far cleaner than anything else you've seen in the city.  The walls are painted muted gray, and the floor is carpeted with a sprawling, royal blue rug.  After glancing around, you realize WHY the walls and floor are so muted – the quiet backdrop makes the merchandise look even more amazing.  There are racks and racks of clothing, but much of it is plain comfortable clothing, and not worth spending much time investigating.  A high-pitched voice pipes up, \"<i>Can I help you?</i>\"\n\n", false);
@@ -1266,7 +1266,7 @@ function tailorShoppe():void {
 }
 
 
-function buyClothes():void {
+public function buyClothes():void {
 	outputText("", true);
 	spriteSelect(61);
 	outputText("Victoria nods and pulls a measuring tape off her shoulder.  She moves around you with practiced ease, taking measurements from every conceivable angle.  Thanks to her small stature, it's quite easy for her to take your inseam measurement, though Vicky manages to ", false);
@@ -1287,7 +1287,7 @@ function buyClothes():void {
 	else doYesNo(1074,1072);
 }
 
-function debitClothes():void {
+public function debitClothes():void {
 	spriteSelect(61);
 	player.gems -= itemValue(shortName);
 	statScreenRefresh();
@@ -1295,7 +1295,7 @@ function debitClothes():void {
 	takeItem();
 }
 
-function armorShop():void {
+public function armorShop():void {
 	outputText("", true);
 	spriteSelect(64);
 	outputText("The interior of the armory is blisteringly hot, filled with intense heat from the massive forge dominating the far side of the shop.  The bellows are blowing hard as a tall german-shepherd woman works the forge.  Incredibly, she's wearing nothing aside from a ragged leather apron.  It bulges from the front, barely containing her obscene proportions as it protects them from the heat of her forge.  She pulls a piece of metal from the forge and strikes it a few times with a hammer bigger than your head, then tosses it in a bucket filled with water, steam boiling out of it from the hot metal.  At last, the sweating forgemistress notices you and turns around, her breasts jiggling wildly.\n\n", true);
@@ -1313,7 +1313,7 @@ function armorShop():void {
 	choices("ChBikni",2276,"FullChn",2277,"FullPlt",2278,"IndecSt",2279,"LthrRob",2280,"ScaleMl",2281,"",0,"Eggshell",egg,"Flirt",yvonneFlirt,"Leave",telAdreMenu);
 }
 
-function weaponShop():void {
+public function weaponShop():void {
 	outputText("", true);
 	spriteSelect(80);
 	outputText("The high pitched ring of a steel hammer slamming into hot metal assaults your ears as you walk up to the stand.  Sparks are flying with every blow the stand's owner strikes on his current work.  The metal is glowing red hot, and the hammer falls with the relentless, practiced precision of an experienced blacksmith's guiding hand.  Thick gray and white fur ruffles as the blacksmith stands up, revealing the details of his form to you.  He's one of the dog-people that inhabits this city, though his fur and ears remind you of a dog one of your friends had growing up called a husky.  The blacksmith is anything but husky.  He's fairly short, but lean and whip-cord tough.  His right arm is far more thickly muscled than his left thanks to his trade, and he walks with a self-assured gait that can only come with age and experience.\n\n", false);
@@ -1322,7 +1322,7 @@ function weaponShop():void {
 	
 	choices("Wingstick",2556,"L.Claymore",2557,"Warhammer",2558,"Katana",2559,"Spear",2560,"Whip",2561,"W. Staff",2554,"S.Gauntlet",2562,"",0,"Leave",2211);
 }
-function weaponBuy():void {
+public function weaponBuy():void {
 	outputText("", true);
 	spriteSelect(80);
 	outputText("The gruff metal-working husky gives you a slight nod and slams the weapon down on the edge of his stand.  He grunts, \"<i>That'll be " + itemValue(shortName) + " gems.</i>\"", false);
@@ -1336,14 +1336,14 @@ function weaponBuy():void {
 	//Go to debit/update function or back to shop window
 	doYesNo(debitWeapon,weaponShop);
 }
-function debitWeapon():void {
+public function debitWeapon():void {
 	spriteSelect(80);
 	player.gems -= itemValue(shortName);
 	statScreenRefresh();
 	menuLoc = 15;
 	takeItem();
 }
-function armorBuy():void {
+public function armorBuy():void {
 	spriteSelect(64)
 	outputText("", true);
 	outputText("Yvonne gives you a serious look, then nods.  She pulls the armor off a rack and makes a few adjustments, banging away with her massive hammer to ensure a perfect fit.  The entire time, she's oblivious to the movements of her massive breasts, accidentally exposing her impressive nipples multiple times.\n\n", false);
@@ -1359,7 +1359,7 @@ function armorBuy():void {
 	doYesNo(debitArmor,armorShop);
 }
 
-function debitArmor():void {
+public function debitArmor():void {
 	spriteSelect(64)
 	outputText("", true);
 	player.gems -= itemValue(shortName);
@@ -1368,7 +1368,7 @@ function debitArmor():void {
 	takeItem();
 }
 
-function urtaIsABadass():void {
+public function urtaIsABadass():void {
 	flags[PC_SEEN_URTA_BADASS_FIGHT] = 1;
 	outputText("", true);
 	outputText("There's a commotion in the streets of Tel'Adre.  A dense crowd of onlookers has formed around the center of the street, massed together so tightly that you're unable to see much, aside from the backs the other onlookers' heads.  The sound of blows impacting on flesh can be heard over the crowd's murmuring, alerting you of the fight at the gathering's core.", false);
@@ -1376,7 +1376,7 @@ function urtaIsABadass():void {
 }
 
 //[Invetigate]
-function watchUrtaBeABadass():void {
+public function watchUrtaBeABadass():void {
 	outputText("", true);
 	urtaSprite();
 	outputText("You shoulder past the bulky centaurs, ignore the rough fur of the nearby wolves and hounds as it brushes against you, and press your way through to the center of the crowd.  Eventually the throng parts, revealing the embattled combatants.  A snarling wolf, nearly eight feet tall, towers over Urta.  The comparatively diminutive fox-woman is girded in light leather armor and dripping with sweat.  The larger wolf-man is staggering about, and his dark brown fur is matted with blood.\n\n", false);
@@ -1396,7 +1396,7 @@ function watchUrtaBeABadass():void {
 	doNext(telAdreMenu);
 }
 
-function gymDesc():void {
+public function gymDesc():void {
 	//PREGGO ALERT!
 	if(flags[PC_IS_A_GOOD_COTTON_DAD] + flags[PC_IS_A_DEADBEAT_COTTON_DAD] == 0 && flags[COTTON_PREGNANCY_INCUBATION] > 0) {
 		cottonPregnantAlert();
@@ -1431,7 +1431,7 @@ function gymDesc():void {
 	gymMenu();
 }
 
-function gymMenu():void {
+public function gymMenu():void {
 	
 	var membership = 0;
 	var cotton = 0;
@@ -1477,7 +1477,7 @@ function gymMenu():void {
 			"Leave",telAdreMenu);
 }
 
-function buyGymLifeTimeMembership():void {
+public function buyGymLifeTimeMembership():void {
 	outputText("", true);
 	//[Buy LifeTime Membership]
 	outputText("You fish into your pouches and pull out 500 gems, dumping them into the centaur's hands.  Her eyes widen as she turns and trots towards a counter in the back.  She leans over as she counts, giving you a generous view down her low-cut top at the cleavage she barely bothers to conceal.", false);
@@ -1492,7 +1492,7 @@ function buyGymLifeTimeMembership():void {
 	gymMenu();
 }
 
-function weightLifting():void {
+public function weightLifting():void {
 	outputText("", true);
 	//Too tired?  Fuck off.
 	if(player.fatigue > 75) {
@@ -1538,7 +1538,7 @@ function weightLifting():void {
 	else doYesNo(exploreShowers,13);
 }
 
-function goJogging():void {
+public function goJogging():void {
 	outputText("", true);
 	//Too tired?  Fuck off.
 	if(player.fatigue > 70) {
@@ -1624,7 +1624,7 @@ function goJogging():void {
 	else doYesNo(exploreShowers,13);
 }
 
-function yaraSex(girl:Boolean = true):void {
+public function yaraSex(girl:Boolean = true):void {
 	spriteSelect(63);
 	outputText("", true);
 	outputText("Yara makes you comfortable and has you look away while she uses her piercing tools.  It hurts, but she's skilled. Before you know it, your piercing is done!  You move to rise, retaining a bit of modesty", false);
@@ -1637,7 +1637,7 @@ function yaraSex(girl:Boolean = true):void {
 	else simpleChoices("Turn down",piercingStudio,"Oh yeah!",3408,"",0,"",0,"",0);
 }
 
-function letsDoYaraSex(girl:Boolean = true):void {
+public function letsDoYaraSex(girl:Boolean = true):void {
 	spriteSelect(63);
 	outputText("", true);
 	var x:Number = player.cockThatFits(36);
@@ -1706,7 +1706,7 @@ function letsDoYaraSex(girl:Boolean = true):void {
 
 
 //[Flirt]
-function yvonneFlirt():void {
+public function yvonneFlirt():void {
 	spriteSelect(64)
 	clearOutput();
 	outputText("You step closer, glancing from her bulging, barely contained tits to her pouting lips and expressive, violet eyes.  A shock of sweat-matted auburn hair obscures part of her face, but the tall, buxom blacksmith nervously brushes it aside as she watches.  Once you're close enough to touch, you quietly and sincerely proclaim, \"<i>You're the most beautiful piece of craftsmanship in this entire store.</i>\"");
@@ -1725,14 +1725,14 @@ function yvonneFlirt():void {
 	simpleChoices("Fuck Her",fuckYvonneInZeBlacksmith,"Nevermind",backOutOfYvonneFuck,"",0,"",0,"",0);
 }
 //[Nevermind]
-function backOutOfYvonneFuck():void {
+public function backOutOfYvonneFuck():void {
 	spriteSelect(64)
 	clearOutput();
 	outputText("You politely decline, not wanting to interrupt her work.  Yvonne sighs and begins to pump the bellows, muttering, \"<i>Then you'd better be buying something!</i>\"");
 	doNext(armorShop);
 }
 //[Fuck]
-function fuckYvonneInZeBlacksmith():void {
+public function fuckYvonneInZeBlacksmith():void {
 	spriteSelect(64)
 	clearOutput();
 	//X = cock that fits!
@@ -1769,7 +1769,7 @@ function fuckYvonneInZeBlacksmith():void {
 
 //*Typical buy text goes here. Options are now Yes/No/Flirt*
 //[Flirt]
-function flirtWithVictoria():void {
+public function flirtWithVictoria():void {
 	clearOutput();
 	var x:Number = player.cockThatFits(70);
 	//if(x < 0) x = player.smallestCockIndex();

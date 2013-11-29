@@ -4,12 +4,12 @@
 //Capacity = 115;
 
 //Is Ceraph a follower?
-function ceraphIsFollower():Boolean {
+public function ceraphIsFollower():Boolean {
 	if(flags[UNKNOWN_FLAG_NUMBER_00286] > 0 || flags[UNKNOWN_FLAG_NUMBER_00287] > 0) return true;
 	return false;
 }
 //[Actually Ceraph] - 
-function ceraphFollowerAppearance(output:Boolean = true):void {
+public function ceraphFollowerAppearance(output:Boolean = true):void {
 	if(output) outputText("", true);
 	spriteSelect(87);
 	if(output) {
@@ -39,7 +39,7 @@ function ceraphFollowerAppearance(output:Boolean = true):void {
 	else sexMenu = 3471;
 	choices("Sex",sexMenu,"",0,"",0,"",0,"Partswap",giveFollowerBodyBits,"Roleplay",rp,"Get Fetish",gainFetish,"RemoveFetish",loseFetish,dickToggle,cawkTawgle,"Leave",campSlavesMenu);
 }
-function ceraphSexMenu():void {
+public function ceraphSexMenu():void {
 	clearOutput();
 	var maleFuck:Number = 0;
 	var femaleFuck:Number = 0;
@@ -73,7 +73,7 @@ function ceraphSexMenu():void {
 }
 
 
-function followerCeraphRoleplay():void {
+public function followerCeraphRoleplay():void {
 	outputText("", true);
 	outputText("You tell Ceraph you'd like to do a little roleplaying.  Her nipples turn hard under their latex bindings as she asks, \"<i>What will it be, " + player.mf("Master","Mistress") + "?  Shall I pretend you've just teased me into sexual submission, or would you like to switch things up and have your bottom play at being top again?  Or maybe... you'd like me to shapeshift into some other girl, and do all the dirty, depraved things she never would?</i>\"", false);
 	outputText("\n\nShe makes a gesture, and the surroundings take on a mountainous look.  Of course, she can probably change that on a whim.  What do you have Ceraph roleplay?", false);
@@ -96,7 +96,7 @@ function followerCeraphRoleplay():void {
 }
 
 //*Ceraph is Defeated #4 - Offers Funtimes (Zeddited)
-function submissiveCeraphOffer():void {
+public function submissiveCeraphOffer():void {
 	spriteSelect(7);
 	outputText("", true);
 	outputText("Once again, Ceraph ", false);
@@ -137,7 +137,7 @@ function submissiveCeraphOffer():void {
 }
 
 //Collar Ceraph After 4th Defeat + Rape: (Zeddited)
-function collarCeraph():void {
+public function collarCeraph():void {
 	outputText("", true);
 	spriteSelect(7);
 	outputText("You reach down and snatch the collar from Ceraph's shaking hand.  Turning it over in your grip, you get a feel for the soft, supple leather.  Blood-red studs poke out around the black strap's surface, vaguely reminding you of a dog's collar, though with the aggression cranked up to max.  The snap mechanism looks simple enough to connect, but you can't see any way to release the latch.  It makes sense that Ceraph would have one-way collars; slaves shouldn't be able to remove the symbol of their station.\n\n", false);
@@ -164,7 +164,7 @@ function collarCeraph():void {
 	simpleChoices("Carry",carryCarephsToken,"Pierce",getCeraphFollowerPiercing,"",0,"",0,"",0);
 }
 //[Carry]
-function carryCarephsToken():void {
+public function carryCarephsToken():void {
 	outputText("", true);
 	spriteSelect(7);
 	outputText("You inform your living property that you've heard quite enough about her piercings and snatch the token from her hand.  Ceraph's eyes go wide and she nods, more than a little fearfully.  Seeing the Omnibus so cowed brings a smile to your face.\n\n", false);
@@ -197,7 +197,7 @@ function carryCarephsToken():void {
 }
 
 //[Pierce] 
-function getCeraphFollowerPiercing():void {
+public function getCeraphFollowerPiercing():void {
 	outputText("", true);
 	spriteSelect(7);
 	//Set belly button pierced as active
@@ -233,7 +233,7 @@ function getCeraphFollowerPiercing():void {
 }
 	
 //*Decision to Display Demonic Dick or Demur (pretty sure Fen mentioned wanting this -Z)
-function cawkTawgle():void {
+public function cawkTawgle():void {
 	outputText("", true);
 	spriteSelect(87);
 	//Off
@@ -257,7 +257,7 @@ function cawkTawgle():void {
 }
 
 //Volunteer for new fetishes!
-function CeraphHandsOutNewFetishesLikePervCandy():void {
+public function CeraphHandsOutNewFetishesLikePervCandy():void {
 	outputText("", true);
 	spriteSelect(87);
 	//*Fetish level = 0
@@ -368,7 +368,7 @@ function CeraphHandsOutNewFetishesLikePervCandy():void {
 	doNext(ceraphFollowerAppearance);
 }
 //*Request Ceraph Remove a Fetish. (Zeddited)
-function unfetishifyYourselfWithFollowerCeraph():void {
+public function unfetishifyYourselfWithFollowerCeraph():void {
 	outputText("", true);
 	spriteSelect(87);
 	outputText("You ask Ceraph to remove one of the fetishes she generously donated earlier.  She sighs and nods, saying, \"<i>" + player.mf("Master","Mistress") + ", are you sure? It isn't that easy to do, and I love knowing my owner is aroused by my piercings!</i>\"\n\n", false);
@@ -380,7 +380,7 @@ function unfetishifyYourselfWithFollowerCeraph():void {
 	simpleChoices("Yes",goThroughWithCeraphUnfetishification,"",0,"",0,"",0,"Leave",ceraphFollowerAppearance);
 }
 //*Ceraph Actually Removes The Fetish (Zeddited)
-function goThroughWithCeraphUnfetishification():void {
+public function goThroughWithCeraphUnfetishification():void {
 	outputText("", true);
 	spriteSelect(87);
 	outputText("Ceraph steps closer, her shining outfit squeaking from the movement.  Her hands gently touch your forehead, though she tries to avoid meeting your gaze.  The submissive slut keeps her eyes downcast, as is proper for a slave, and she begins to rub at your temples, working her magic to undo her mischief.  Warmth surges out, rushing through your temples and leaving a slack looseness in its wake.  Ceraph grunts and lets go, staggering back and panting.  She mumbles, \"<i>So much harder... to take those without changing... something else.</i>\"\n\n", false);
@@ -399,7 +399,7 @@ function goThroughWithCeraphUnfetishification():void {
 }
 
 //*Fuck Ceraph's Pussy (Zeddited)
-function fuckFollowerCeraphsVagoo():void {
+public function fuckFollowerCeraphsVagoo():void {
 	var x:Number = player.cockThatFits(115);
 	if(x < 0) x = 0;
 	var y:Number = player.cockThatFits2(115);
@@ -486,7 +486,7 @@ function fuckFollowerCeraphsVagoo():void {
 }
 	
 //*Ceraph TongueFucks The PC (Zeddited)
-function followerCeraphTongueFucking():void {
+public function followerCeraphTongueFucking():void {
 	outputText("", true);
 	spriteSelect(87);
 
@@ -535,7 +535,7 @@ function followerCeraphTongueFucking():void {
 }
 
 //*Ceraph goes full tentacle and double penetrates herms (+ standard dick BJ if ceraph dick toggle is on) (Zeddited)
-function ceraphTentacleGrape():void {
+public function ceraphTentacleGrape():void {
 	outputText("", true);
 	spriteSelect(87);
 
@@ -592,7 +592,7 @@ function ceraphTentacleGrape():void {
 }
 
 //[Punish Her]
-function punishCeraphForSurpriseThroatFuck():void {
+public function punishCeraphForSurpriseThroatFuck():void {
 	spriteSelect(87);
 	flags[UNKNOWN_FLAG_NUMBER_00290] = 1;
 	outputText("", true);
@@ -602,7 +602,7 @@ function punishCeraphForSurpriseThroatFuck():void {
 }
 
 //Siamese Catgirl Twins - TDM (Zeddited, nya)
-function catgirlEncounter():void {
+public function catgirlEncounter():void {
 	outputText("", true);
 	//requires that the PC have a cock, just to keep it simple, no centaurs and probably not slimes
 	outputText("You call on Ceraph, but are a bit taken aback when she doesn't appear right away.  You look around to see if you might have missed her, then spot something else streaking towards you from the wastes.  It is kicking up so much dust that you don't have time to see what it is before it ", false);
@@ -619,7 +619,7 @@ function catgirlEncounter():void {
 	simpleChoices("Sex",fuckCeraphsCatgirls,"",0,"",0,"",0,"Leave",declineCeraphsCatgirls);
 }
 //No sex
-function declineCeraphsCatgirls():void {
+public function declineCeraphsCatgirls():void {
 	outputText("", true);
 	outputText("You shake your head at the kitty sisters and tell them that you aren't interested in fucking cats; you wanted the sexy demoness you were promised.  The two mewl meekly before slumping away.", false);
 	//to camp menu
@@ -627,7 +627,7 @@ function declineCeraphsCatgirls():void {
 }
 
 //SEX!
-function fuckCeraphsCatgirls():void {
+public function fuckCeraphsCatgirls():void {
 	outputText("", true);
 	var x:Number = player.biggestCockIndex();
 	outputText("You smile at them and say that you'd be happy to have them for your pleasure; their horns suggest that they'll be quite a trip.  The two purr happily and instruct you to lie on your back to start the fun.  You relax as directed and the cat slaves unfasten your " + player.armorName + " from your body.  As they work, they make sure to gently stroke every inch of your newly exposed flesh with their soft furry hands as it's revealed; all the while moving closer and closer to your most personal parts.  When " + oMultiCockDesc() + " finally tastes the air, it gets even more attention.\n\n", false);
@@ -667,7 +667,7 @@ function fuckCeraphsCatgirls():void {
 }
 
 
-function ceraphUrtaRoleplay():void {
+public function ceraphUrtaRoleplay():void {
 	urtaSprite();
 	outputText("", true);
 	outputText("\"<i>Roleplay? My " + player.mf("Master","Mistress") + " is wonderfully exploitative with " + player.mf("his","her") + " pet's lewd body,</i>\" Ceraph purrs, lips curling into a sly smile. Holding your arms at your sides, you nod at the subjugated demon, indicating that she should strip you. Keeping her eyes averted, she obediently complies, removing your " + player.armorName + " piece by piece until you stand nude, in all your splendor. Turning upon her, you issue your curt command, briefly describing the form that she is to take. Surprisingly, she knows exactly who you're talking about. \"<i>Ah, the fox-bitch,</i>\" she muses, eyes flashing solid black again for a moment. \"<i>She's been such a thorn in my side for so long... letting you defile her will be a particularly intense pleasure, " + player.mf("Master","Mistress") + ".</i>\"\n\n", false);
@@ -687,7 +687,7 @@ function ceraphUrtaRoleplay():void {
 }
 //DRANK AS FCUK
 //[Drunk] (female/herm only. No centaurs)
-function ceraphUrtaRoleplayDrunk():void {
+public function ceraphUrtaRoleplayDrunk():void {
 	outputText("", true);
 	urtaSprite();
 	outputText("You wish her a cheerful 'bottom's up,' relief washing over her face as she seeks shelter in the blissful oblivion of alcohol. Lifting the bottle's fluted neck to her polished lips, Urta throws back her head and begins swallowing. Her throat bulges in rhythmic gulps, air bubbling up through the liquor as the whiskey steadily vanishes into her shame-thirsty gullet. Her face flushes deeper, the bitter sting of booze taking her mind off of the embarrassment of her equine attributes. Her cock throbs in the open air with each noisy glug, dollops of cum still drooling from her engorged member. Finishing the entire bottle, the fox-morph wetly sucks down a fresh lungful of air, her expression floating somewhere between stimulated joy and dazed confusion. She looks closely at the bottle and blinks several times. \"<i>Wh- what did you put in this?</i>\"\n\n", false);
@@ -701,7 +701,7 @@ function ceraphUrtaRoleplayDrunk():void {
 	//[Next]
 	doNext(ceraphUrtaRoleplayDrunk2);
 }
-function ceraphUrtaRoleplayDrunk2():void {
+public function ceraphUrtaRoleplayDrunk2():void {
 	outputText("", true);
 	urtaSprite();
 	outputText("The cock sliding up your backside throbs in anticipation and you realize that Urta's over-stimulated herself. Lips parting in a whorish moan, she climaxes, her fingers digging into her soft, smooth skin as her massive shaft flares thicker than you've seen before, gouts of thick jizz arcing from her head. You can feel the voluminous loads surging between your cheeks before bursting from her tip and cresting through the air before splattering down in cords of creamy cum. All along your back, neck, hair, and face, sticky wads of spunk douse you in the fox-girl's excitement and you squeeze your rear as tightly as you can to massage out every last ladle of her rich seed. She bathes you a pale off-white but to your surprise, she's still moaning and stroking the skin of her changed body. \"<i>It's not enough,</i>\" she mumbles, \"<i>I need more.</i>\" You start to rise, but the drunk girl slams her palms onto your shoulders, planting you back into the ground, body horizontal beneath her. Sliding backwards, her engorged cockhead presses insistently against the juncture of your hips, still bubbling with dollops of cum.  \"<i>It's too sensitive,</i>\" she whines, pinning your lower body between her muscled legs.  Your struggles to get out from under the drunk, horny girl are fruitless, so you turn your head and see that her throbbing sac is- if anything- even larger than before, her cock still rock hard as she guides it up against your " + vaginaDescript() + ".\n\n", false);
@@ -731,7 +731,7 @@ function ceraphUrtaRoleplayDrunk2():void {
 	doNext(13);
 }
 //[Sober]
-function ceraphUrtaRoleplaySober():void {
+public function ceraphUrtaRoleplaySober():void {
 	urtaSprite();
 	outputText("", true);
 	outputText("You tell Urta to put the bottle down. She won't need that, not any more. She looks at you in confusion, setting the whiskey to one side, curling her tail between her legs to cover her throbbing member. Closing the distance between the two of you, she stiffens when you wrap an arm around the small of her back and bring the other hand up to her chin. She doesn't have to be ashamed any more, you explain, because you know the cure for her curse. The fox-morph's eyes light up, her mouth parting but not daring to speak or even breathe. Stroking a thumb along the line of her jaw, you close your eyes and nod slowly, pulling her into an embrace tight enough for you to feel the fluttering pulse of her body heat sinking through your " + player.skinFurScales() + ". You can tell by the wobbling of her lower lip that she is dying to ask how, but you merely brush the dappled-grey bangs from her eyes, staring into the guard's emerald irises. You can feel the soft intake of her breath as it catches in her throat and she leans toward you ever so slightly, blushing. You meet her halfway, obsidian-warm lips pressing against yours tentatively at first, before gaining confidence. She sinks deeper into the embrace, the tight tension knotting her back slowly easing as surrenders her self-conscious shame for unabashed passion, relishing the intimacy of your caress. When you draw back from the intoxicating fever of the fox girl, you whisper one word to her: \"<i>Love.</i>\"\n\n", false);
@@ -747,7 +747,7 @@ function ceraphUrtaRoleplaySober():void {
 	doNext(ceraphUrtaRoleplaySober2);
 }
  
-function ceraphUrtaRoleplaySober2():void {
+public function ceraphUrtaRoleplaySober2():void {
 	hideUpDown();
 	urtaSprite();
 	outputText("", true);
@@ -773,7 +773,7 @@ function ceraphUrtaRoleplaySober2():void {
 
 //NOTE: This will probably need an alternate version for centaurs. Goo and Nagas should be fine.
 //NOTE2: Fen you might want to store the variable for the PC's cock type and cock size.
-function carephCorruptionSlaves():void {
+public function carephCorruptionSlaves():void {
 	outputText("", true);
 	outputText("You call on Ceraph, but rather than the familiar sight of the purple omnibus, you see a human girl being brought into the camp by a gang of imps.  They approach you and pull the girl's collar down, forcing her to kneel before you.\n\n", false);
 
@@ -795,7 +795,7 @@ function carephCorruptionSlaves():void {
 }
 
 //[=No=]
-function makeCarephsLackeysLeave():void {
+public function makeCarephsLackeysLeave():void {
 	outputText("", true);
 	outputText("You wave the imps away and tell them that you're not interested.  One of the imps protests, \"<i>But, " + player.mf("Master","Mistress") + "-</i>\"  You cut him off before he has a chance to finish, saying that you wanted Ceraph, not some human girl!  Then, you toss the potion away and tell them to take the girl away.\n\n", false);
 
@@ -804,7 +804,7 @@ function makeCarephsLackeysLeave():void {
 }
 
 //[=Yes=]
-function ceraphLackeyCorruption():void {
+public function ceraphLackeyCorruption():void {
 	outputText("", true);
 	outputText("You grin and tell the imps that you will accept Ceraph's offering.  Then you circle the girl, appraising her.\n\n", false);
 
@@ -887,7 +887,7 @@ function ceraphLackeyCorruption():void {
 }
 
 //[=Never Again - Fuck this nerd shit=]
-function iQuitCeraphCorruptionDemons():void {
+public function iQuitCeraphCorruptionDemons():void {
 	outputText("", true);
 	outputText("You tell her, loudly and in no uncertain terms, that you have no interest in playing make-believe with her, and that next time Ceraph can come herself or have an ACTUAL innocent brought for you to corrupt.\n\n", false);
 
@@ -897,7 +897,7 @@ function iQuitCeraphCorruptionDemons():void {
 	doNext(13);
 }
 //[=No=]
-function declineCeraphFauxCorruption():void {
+public function declineCeraphFauxCorruption():void {
 	outputText("", true);
 	outputText("You tell her you have no interest in granting release to lowly imps.  If they want pleasure, then they should earn it themselves.\n\n", false);
 
@@ -905,7 +905,7 @@ function declineCeraphFauxCorruption():void {
 	doNext(13);
 }
 //[=Yes=]
-function acceptMoreCeraphFauxCorruption():void {
+public function acceptMoreCeraphFauxCorruption():void {
 	outputText("", true);
 	outputText("You smirk, seeing that this might be interesting... so you order her to pleasure the imps, all of them at the same time.\n\n", false);
 
@@ -924,7 +924,7 @@ function acceptMoreCeraphFauxCorruption():void {
 
 //(not optimized in any way for centaur)
 //(should probably add a cock-limit of like, whatever you want, cuz you're fucking her butt)
-function sweetieNOOOO():void {
+public function sweetieNOOOO():void {
 	spriteSelect(41);
 	outputText("", true);
 	//requires PC to have Marble as follower or have removed Marble from game via rape attempt and confrontation
@@ -962,7 +962,7 @@ function sweetieNOOOO():void {
 }
 
 //[in a pig's eye, pal]  
-function noUdderPlz(perm:Boolean = false):void {
+public function noUdderPlz(perm:Boolean = false):void {
 	outputText("", true);
 	spriteSelect(41);
 	if(perm) flags[UNKNOWN_FLAG_NUMBER_00295] = 1;
@@ -971,7 +971,7 @@ function noUdderPlz(perm:Boolean = false):void {
 	postUdderChoice();
 }
 //[of course honey-buns] 
-function yesUdderPWEASE():void {
+public function yesUdderPWEASE():void {
 	outputText("", true);
 	spriteSelect(41);
 	outputText("A brightening of your eyes and a slight part of your lips clues her in to your answer.  She pulls her blouse up over her belly, tucking it into her cleavage to keep it out of the way.  As you watch, Ceraph pinches two spots right above her belly button, and she moves her fingers away to reveal... nipples!  She repeats the process a few inches lower, then frames the four nubs with her thumb and forefinger, taking a deep breath in anticipation.  The demoness flexes her belly muscles, and a familiar bulge pops up, nipples lengthening to match.  Liquid can also be heard splashing around her pink protrusion, and she can't help but give the thing a little slap.  Both of you delight in the subsequent jostling and splashing of the milk inside.  Her cheeks bulge with exertion as the milk-sack grows, burgeoning larger and wider with more and more milk before finally flopping heavily down above her crotch.  She sighs in relief, then slips her top back over her new udder, taking apparent pride in the four small stains forming in the fabric.\n\n", false);
@@ -979,7 +979,7 @@ function yesUdderPWEASE():void {
 	postUdderChoice();
 }
 
-function postUdderChoice(newl:Boolean = false):void {
+public function postUdderChoice(newl:Boolean = false):void {
 	spriteSelect(41);
 	if(newl) outputText("", true);
 	outputText("That out of the way, she pulls her overall back over her shoulders and turns her back to you, waiting several seconds before turning around.  \"<i>Sweetie!?</i>\" she exclaims in horror, eyes wide and arms flung in front of her as she cowers from you.  \"<i>What-... what are you doing...</i>\"\n\n", false);
@@ -1041,7 +1041,7 @@ function postUdderChoice(newl:Boolean = false):void {
 //NOTES:
 //Ceraph roleplay. [Dominika] option. There is text for the first time you do it, then transformation text that is intended to play at the front of every scene.
 //After that is a scene tailored more specifically for the PC. Intention is to give nagas and centaurs and all that their own scene. Currently only scene is for PCs with a dick - should be naga-compatible.
-function cerminika():void {
+public function cerminika():void {
 	spriteSelect(58);
 	outputText("", true);
 	//[first time]
@@ -1161,7 +1161,7 @@ function cerminika():void {
 [Introduction]*/
 
 //(First Time):
-function encounterZetsuko():void {
+public function encounterZetsuko():void {
 	outputText("", true);
 	flags[ZETSUKO_MET]++;
 	var banana:Number = 0;
@@ -1214,7 +1214,7 @@ function encounterZetsuko():void {
 }
 
 //▶[FuckVagina] requires penis
-function fuckZetsukosTonguepussy():void {
+public function fuckZetsukosTonguepussy():void {
 	outputText("", true);
 	var x:Number = player.biggestCockIndex();
 	outputText("Your lust and curiosity get the best of you as the sight of that licentious tongue wriggling around between her legs sends a heat to your groin, blood rushing into your " + multiCockDescriptLight() + ".  Zetsuko lays flat on her back, grinning up at you as her pussy licks itself in anticipation, and as you lower yourself down, her tongue snakes out even more, beginning to wrap itself around " + oMultiCockDesc() + " and slathering it with her saliva-like juices.  Your sensitive member can feel that the surface of her tongue is covered in hundreds of tiny bumps and nubs that massage your shaft, and the multiple studs that line it rub you sensually as the bizarre organ coils around your " + cockDescript(x) + " like a snake, the very tip gently stimulating around the edges of your urethra.\n\n", false);
@@ -1255,7 +1255,7 @@ function fuckZetsukosTonguepussy():void {
 	doNext(13);
 }
 //▶[GetTongued] requires vagina
-function getTonguedByZetsuko():void {
+public function getTonguedByZetsuko():void {
 	outputText("", true);
 	var x:Number = -1;
 	if(player.hasCock()) x = player.biggestCockIndex();
@@ -1307,7 +1307,7 @@ function getTonguedByZetsuko():void {
 	doNext(13);
 }
 //▶[Banana?] silly mode
-function zetsukoBanana():void {
+public function zetsukoBanana():void {
 	outputText("", true);
 	outputText("Banana? What the flying fuck is a banana?\n\n", false);
 	outputText("Banana.\n\nBanana banana banana.  Just saying it feels kind of funny, so you say it a few more times just to be sure.  Yep, still funny.\n\n", false);
@@ -1331,7 +1331,7 @@ function zetsukoBanana():void {
 	outputText("You'll take that as a yes.\n\n", false);
 	doNext(13);
 }
-function noZetsukoLoveToday():void {
+public function noZetsukoLoveToday():void {
 	outputText("", true);
 	outputText("You tell her to be gone; you wanted Ceraph, not some lowly slave that can't even be bothered to show you proper respect.  You order her to tell Ceraph not to waste your time with undisciplined servants that she's too inept to properly break.\n\n", false);
 
@@ -1339,7 +1339,7 @@ function noZetsukoLoveToday():void {
 	doNext(campSlavesMenu);
 }
 
-function giveFollowerBodyBits():void {
+public function giveFollowerBodyBits():void {
 	spriteSelect(87);
 	clearOutput();
 	outputText("You ask Ceraph just what all giving up a body-part would entail.  Your submissive demonic slut presses herself against you, stroking her hands under your " + player.armorName + " as she answers, \"<i>Well, [Master], I would use my body-shifting black magics to remove a choice portion of your 'fun-bits', if you know my meaning.[if (hasCock = true) I could take your cock.][if (hasVagina = true)  I could remove your snatch.  Don't worry, once it's off of you, anything I put in it won't wind up your womb.][if (hasBreasts = true) I could even make off with your tits if you like.][if (gender = 0) [if  (hasBreasts = false) Sadly, you don't have anything that would be worth taking right now.  A true shame, my [Master].]</i>\"");
@@ -1373,7 +1373,7 @@ function giveFollowerBodyBits():void {
 	else doNext(3041);
 }
 
-function ceraphFollowerCockTaking(smallest:Boolean = false):void {
+public function ceraphFollowerCockTaking(smallest:Boolean = false):void {
 	spriteSelect(87);
 	clearOutput();
 	var x:int = player.biggestCockIndex();
@@ -1400,7 +1400,7 @@ function ceraphFollowerCockTaking(smallest:Boolean = false):void {
 	doNext(13);
 }
 
-function ceraphFollowerCuntTaking():void {
+public function ceraphFollowerCuntTaking():void {
 	spriteSelect(87);
 	clearOutput();
 	outputText("You undress, just enough to point at your [vagina].  Ceraph smiles happily and muses, \"<i>I have just the troublesome slut that could learn a thing or two by having her mouth replaced by a pussy.  Face-fucking is such an effective discipline technique, thank you dear.</i>\"");
@@ -1416,7 +1416,7 @@ function ceraphFollowerCuntTaking():void {
 	doNext(13);
 }
 
-function ceraphFollowerTitTaking(rowNum:int = 0):void {
+public function ceraphFollowerTitTaking(rowNum:int = 0):void {
 	spriteSelect(87);
 	clearOutput();
 	var x:Number = rowNum;
@@ -1469,7 +1469,7 @@ function ceraphFollowerTitTaking(rowNum:int = 0):void {
 }
 
 //NippleCunt Stuffing (Ceraph grows dick-nipples to plow your lusty twats!)
-function stuffSomeNippleCunts():void {
+public function stuffSomeNippleCunts():void {
 	spriteSelect(87);
 	clearOutput();
 	outputText("Wanting to take advantage of some of the more extreme of your body's changes, you pull down your [armor] to bare your hungry nipple-twats, the well-lubricated tips of your nipples slowly opening in anticipation of what's to come.  You kick the discarded gear aside and command, \"<i>Slave, fuck my nipples.</i>\"");
@@ -1509,7 +1509,7 @@ function stuffSomeNippleCunts():void {
 }
 
 //Portal Fuck (AKA Ceraph Hung Out With Cinnabar, Req's PC dick)
-function portalFuckWithFollowerCeraph():void {
+public function portalFuckWithFollowerCeraph():void {
 	spriteSelect(87);
 	clearOutput();
 	var x:int = player.cockThatFits(100);
@@ -1547,7 +1547,7 @@ function portalFuckWithFollowerCeraph():void {
 	doNext(13);
 }
 
-function layEggsInSlaveCeraph():void {
+public function layEggsInSlaveCeraph():void {
 	clearOutput();
 	//Either Type on Ceraph Follower: Finished (Posthuman) (Zedit)
 	outputText("You ");
@@ -1598,7 +1598,7 @@ function layEggsInSlaveCeraph():void {
 
 //Ceraph Pegging + Bonus Petplay!
 //Adds "Submission" option to the roleplay menu.
-function sumissivenessToCeraphFollower():void {
+public function sumissivenessToCeraphFollower():void {
 	clearOutput();
 	spriteSelect(87);
 	outputText("When you broach the idea of submitting to your fetish queen, delight washes across Ceraph's face.  Before another word can be spoken, she lashes out with her whip (where did she get that from?) and catches you around the neck with the taut leather, yanking hard enough to drag you to the ground and make you sputter for air.  The shining leather slides off as soon as your hands hit the ground, but the demoness is already standing above you, pushing on you with her stiletto-like heels to roll you aside.");
@@ -1647,7 +1647,7 @@ function sumissivenessToCeraphFollower():void {
 }
 
 //[Apple]
-function sayAppleToCeraph():void {
+public function sayAppleToCeraph():void {
 	clearOutput();
 	spriteSelect(87);
 	outputText("Fuck this!  \"<i>Apple!</i>\"");
@@ -1658,7 +1658,7 @@ function sayAppleToCeraph():void {
 }
 
 //[Either Once]
-function barkToCeraphOnce(dog:Boolean = true):void {
+public function barkToCeraphOnce(dog:Boolean = true):void {
 	clearOutput();
 	spriteSelect(87);
 	outputText("\"<i>");
@@ -1791,7 +1791,7 @@ function barkToCeraphOnce(dog:Boolean = true):void {
 }
 
 //[Either Twice]
-function barkOrMeowTwiceToCeraph(dog:Boolean = true):void {
+public function barkOrMeowTwiceToCeraph(dog:Boolean = true):void {
 	clearOutput();
 	spriteSelect(87);
 	outputText("\"<i>");

@@ -1,6 +1,6 @@
 //  SLEEP_WITH:int = 701;
 
-function camp():void {
+public function camp():void {
 	trace("Current fertility: " + player.totalFertility());
 	mainView.showMenuButton( MainView.MENU_NEW_MAIN );
 	if(player.hasStatusAffect("Post Akbal Submission") >= 0) {
@@ -628,7 +628,7 @@ function camp():void {
 }
 
 
-function stash(exists:Boolean = true):Boolean {
+public function stash(exists:Boolean = true):Boolean {
 	
 	//Use to know if to show/hide stash.
 	if(exists) {
@@ -727,14 +727,14 @@ function stash(exists:Boolean = true):Boolean {
 	return true;
 }
 	
-function hasCompanions():Boolean {
+public function hasCompanions():Boolean {
 	if(companionsCount() > 0) return true;
 	return false;
 }
-function companionsCount():Number {
+public function companionsCount():Number {
 	return followersCount() + slavesCount() + loversCount();
 }
-function followersCount():Number {
+public function followersCount():Number {
 	var counter:Number = 0;
 	if(followerEmber()) counter++;
 	if(flags[VALARIA_AT_CAMP] == 1) counter++;
@@ -745,11 +745,11 @@ function followersCount():Number {
 	if(helspawnFollower()) counter++;
 	return counter;
 }
-function hasFollowers():Boolean {
+public function hasFollowers():Boolean {
 	if(followersCount() > 0) return true;
 	return false;
 }
-function slavesCount():Number {
+public function slavesCount():Number {
 	var counter:Number = 0;
 	if(latexGooFollower()) counter++;
 	if(vapulaSlave()) counter++;
@@ -761,11 +761,11 @@ function slavesCount():Number {
 	if(milkSlave()) counter++;
 	return counter;
 }
-function hasSlaves():Boolean {
+public function hasSlaves():Boolean {
 	if(slavesCount() > 0) return true;
 	return false;
 }
-function loversCount():Number {
+public function loversCount():Number {
 	var counter:Number = 0;
 	if(arianFollower()) counter++;
 	if(followerHel()) counter++;
@@ -779,11 +779,11 @@ function loversCount():Number {
 	if(flags[ANT_WAIFU] > 0) counter++;
 	return counter;
 }
-function hasLovers():Boolean {
+public function hasLovers():Boolean {
 	if(loversCount() > 0) return true;
 	return false;
 }
-function campLoversMenu():void {
+public function campLoversMenu():void {
 	var isabellaButt:Number = 0;
 	var marbleEvent:Number = 0;
 	var izmaEvent:Number = 0;
@@ -936,7 +936,7 @@ function campLoversMenu():void {
 	if(flags[ANT_WAIFU] > 0) addButton(8,"Phylla",introductionToPhyllaFollower);
 	addButton(9,"Back",eventParser,1);
 }
-function campSlavesMenu():void {
+public function campSlavesMenu():void {
 	clearOutput();
 	var vapula:Number = 0;
 	var amilyEvent:Number = 0;
@@ -986,7 +986,7 @@ function campSlavesMenu():void {
 	addButton(9,"Back",eventParser,1);
 }
 
-function campFollowers():void {
+public function campFollowers():void {
 	var rathazulEvent:Number = 0;
 	var jojoEvent:Number = 0;
 	var valeria:Number = 0;
@@ -1054,7 +1054,7 @@ function campFollowers():void {
 }
 
 
-function rest():void {
+public function rest():void {
 	campQ = true;
 	if(timeQ == 0) {
 		outputText("You lie down to rest for four hours.\n", true);
@@ -1082,7 +1082,7 @@ function rest():void {
 	}
 	goNext(timeQ,true);
 }
-function doWait():void {
+public function doWait():void {
 	campQ = true;
 	outputText("", true);
 	if(timeQ == 0) {
@@ -1109,7 +1109,7 @@ function doWait():void {
 	goNext(timeQ,true);
 }
 
-function doSleep(clrScreen:Boolean = true):void {
+public function doSleep(clrScreen:Boolean = true):void {
 	if(flags[URTA_INCUBATION] >= 384 && model.time.hours >= 20 && model.time.hours < 2) {
 		preggoUrtaGivingBirth();
 		return;
@@ -1219,7 +1219,7 @@ function doSleep(clrScreen:Boolean = true):void {
 	return;
 }
 //For shit that breaks normal sleep processing.
-function sleepWrapper():void {
+public function sleepWrapper():void {
 	if(model.time.hours == 16) timeQ = 14;
 	if(model.time.hours == 17) timeQ = 13;
 	if(model.time.hours == 18) timeQ = 12;
@@ -1241,7 +1241,7 @@ function sleepWrapper():void {
 	goNext(timeQ, true);
 }
 
-function sleepRecovery(display:Boolean = false):void {
+public function sleepRecovery(display:Boolean = false):void {
 	//Marble withdrawl
 	if(player.hasStatusAffect("MarbleWithdrawl") >= 0) {
 		if(display) outputText("\nYour sleep is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n", false);
@@ -1267,7 +1267,7 @@ function sleepRecovery(display:Boolean = false):void {
 }
 
 
-function nightSuccubiRepeat():void {
+public function nightSuccubiRepeat():void {
 	spriteSelect(8);
 	if(player.gender == 0) {
 		if(flags[CERULEAN_POTION_NEUTER_ATTEMPTED] == 0) {
@@ -1407,7 +1407,7 @@ function nightSuccubiRepeat():void {
 	stats(rand(2), rand(2), rand(2), rand(2), 0, 0, -100, 1);
 }
 //Places menu
-function places(display):Boolean {
+public function places(display):Boolean {
 	var farmBarn = 0;
 	var farmHouse = 0;
 	var farm = 0;
@@ -1449,7 +1449,7 @@ function places(display):Boolean {
 	return true;
 }
 
-function dungeons():void {
+public function dungeons():void {
 	menu();
 	//Turn on d2
 	if(flags[UNKNOWN_FLAG_NUMBER_00113] > 0) addButton(0,"Deep Cave",eventParser,11076);
@@ -1459,7 +1459,7 @@ function dungeons():void {
 	addButton(9,"Back",eventParser,71);
 }
 
-function exgartuanCampUpdate():void {
+public function exgartuanCampUpdate():void {
 	//Update Exgartuan stuff
 	if(player.hasStatusAffect("Exgartuan") >= 0) 
 	{
@@ -1484,7 +1484,7 @@ function exgartuanCampUpdate():void {
 	doNext(1);
 }
 
-function fixHistory():void {
+public function fixHistory():void {
 	outputText("<b>New history perks are available during creation.  Since this character was created before they were available, you may choose one now!</b>", true);
 	flags[UNKNOWN_FLAG_NUMBER_00418] = 2;
 	doNext(10036);

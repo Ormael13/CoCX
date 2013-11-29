@@ -1,4 +1,4 @@
-﻿function cuntChange(cArea:Number, display:Boolean, spacingsF:Boolean = false, spacingsB:Boolean = true):Boolean {
+﻿public function cuntChange(cArea:Number, display:Boolean, spacingsF:Boolean = false, spacingsB:Boolean = true):Boolean {
 	if(player.vaginas.length == 0) return false;
 	var stretched:Boolean = false;
 	var devirgined:Boolean = false;
@@ -57,7 +57,7 @@
 	}
 	return stretched;
 }
-function buttChange(cArea:Number, display:Boolean, spacingsF:Boolean = true, spacingsB:Boolean = true):Boolean {
+public function buttChange(cArea:Number, display:Boolean, spacingsF:Boolean = true, spacingsB:Boolean = true):Boolean {
 	var stretched:Boolean = false;
 	//cArea > capacity = autostreeeeetch half the time.
 	if(cArea >= player.analCapacity() && rand(2) == 0) {
@@ -108,7 +108,7 @@ function buttChange(cArea:Number, display:Boolean, spacingsF:Boolean = true, spa
 
 
 //Updates the player's gender
-function genderCheck():void {
+public function genderCheck():void {
 	if(player.cocks.length > 0) {
 		if(player.vaginas.length > 0) player.gender = 3;
 		else player.gender = 1;
@@ -122,7 +122,7 @@ function genderCheck():void {
 }
 
 //Many transformations are part of items, see items.as
-function growTits(amount:Number, rowsGrown:Number, display:Boolean, growthType:Number) {
+public function growTits(amount:Number, rowsGrown:Number, display:Boolean, growthType:Number) {
 	if(player.breastRows.length == 0) return;
 	//GrowthType 1 = smallest grows
 	//GrowthType 2 = Top Row working downward
@@ -274,7 +274,7 @@ function growTits(amount:Number, rowsGrown:Number, display:Boolean, growthType:N
 	}
 }
 				
-function shrinkTits():void {
+public function shrinkTits():void {
 	var temp2:Number = 0;
 	var temp3:Number = 0;
 	if(player.breastRows.length == 1) {
@@ -320,7 +320,7 @@ function shrinkTits():void {
 	}
 }
 
-function lengthChange(temp2:Number, cocks:Number) {
+public function lengthChange(temp2:Number, cocks:Number) {
 	//DIsplay the degree of length change.
 	if(temp2 <= 1 && temp2 > 0) {
 		if(player.cocks.length == 1) outputText("Your " + cockDescript(0) + " has grown slightly longer.", false);
@@ -411,7 +411,7 @@ function lengthChange(temp2:Number, cocks:Number) {
 	}
 }
 
-function demonChanges():void {
+public function demonChanges():void {
 	//Change tail if already horned.
 	if(player.tailType != TAIL_TYPE_DEMONIC && player.horns > 0) {
 		if(player.tailType != TAIL_TYPE_NONE) {
@@ -533,7 +533,7 @@ function demonChanges():void {
 	}
 }
 
-function killCocks(deadCock):void {
+public function killCocks(deadCock):void {
 	//Count removal for text bits
 	var removed:Number = 0;
 	//Holds cock index

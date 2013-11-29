@@ -25,7 +25,7 @@
 // 
 // model.maxHP = maxHP;
 
-function maxHP():Number {
+public function maxHP():Number {
 	var max:Number = 0;
 	max += int(player.tou*2 + 50);
 	if(player.hasPerk("Tank") >= 0) max += 50;
@@ -37,19 +37,19 @@ function maxHP():Number {
 	return max;
 }
 
-function silly():Boolean {
+public function silly():Boolean {
 	if(flags[SILLY_MODE_ENABLE_FLAG] == 1) return true;
 	return false
 }
 
-function clearList():void {
+public function clearList():void {
 	list = new Array();
 }
 var list:Array = new Array();
-function addToList(arg):void {
+public function addToList(arg):void {
 	list[list.length] = arg;
 }
-function outputList():String {
+public function outputList():String {
 	var stuff:String = "";
 	for(var x:int = 0; x < list.length; x++) {
 		stuff += list[x];
@@ -68,7 +68,7 @@ function outputList():String {
 }
 
 
-function HPChange(changeNum:Number, display:Boolean) {
+public function HPChange(changeNum:Number, display:Boolean) {
 	if(changeNum == 0) return;
 	if(changeNum > 0) {
 		//Increase by 20%!
@@ -104,20 +104,20 @@ function HPChange(changeNum:Number, display:Boolean) {
 	statScreenRefresh();
 }
 		
-function clone(source:Object):* {
+public function clone(source:Object):* {
 	var copier:ByteArray = new ByteArray();
 	copier.writeObject(source);
 	copier.position = 0;
 	return(copier.readObject());
 }
 
-function speech(output:String, speaker:String):void {
+public function speech(output:String, speaker:String):void {
 	var speech:String = "";
 	speech = speaker + " says, \"<i>" + output + "</i>\"\n";
 	outputText(speech, false);
 }
 
-function parseText(text:String, parseAsMarkdown:Boolean = false):String
+public function parseText(text:String, parseAsMarkdown:Boolean = false):String
 {
 	// Moved into external parser.
 	text = recursiveParser(text, parseAsMarkdown);
@@ -125,12 +125,12 @@ function parseText(text:String, parseAsMarkdown:Boolean = false):String
 }
 
 	
-function clearOutput():void {
+public function clearOutput():void {
 	currentText = "";
 	mainView.clearOutputText();
 }
 
-function rawOutputText(output:String, purgeText:Boolean = false)
+public function rawOutputText(output:String, purgeText:Boolean = false)
 {
 	
 	//OUTPUT!
@@ -154,7 +154,7 @@ function rawOutputText(output:String, purgeText:Boolean = false)
 
 }
 
-function outputText(output:String, purgeText:Boolean = false, parseAsMarkdown = false)
+public function outputText(output:String, purgeText:Boolean = false, parseAsMarkdown = false)
 {
 	// we have to purge the output text BEFORE calling parseText, because if there are scene commands in 
 	// the parsed text, parseText() will write directly to the output
@@ -182,13 +182,13 @@ function outputText(output:String, purgeText:Boolean = false, parseAsMarkdown = 
 
 }
 
-function flushOutputTextToGUI():void
+public function flushOutputTextToGUI():void
 {
 	
 	mainView.setOutputText( currentText );
 }
 
-function perkLongDescription(perkName:String = ""):String {
+public function perkLongDescription(perkName:String = ""):String {
 	switch(perkName) {
 		case "Pretend Strength Perk":
 			return "Pretend I am telling you about how this works.";
@@ -285,7 +285,7 @@ function perkLongDescription(perkName:String = ""):String {
 	}
 	return "broken.";
 }
-function perkDescription(perkName:String = ""):String {
+public function perkDescription(perkName:String = ""):String {
 	switch(perkName) {
 		case "History: Whore":
 			return "Seductive experience causes your tease attacks to be 15% more effective.";
@@ -674,7 +674,7 @@ function perkDescription(perkName:String = ""):String {
 	}
 	return "broken.";
 }
-function displayPerks(e:MouseEvent = null):void {
+public function displayPerks(e:MouseEvent = null):void {
 	temp = 0;
 	outputText("", true);
 	while(temp < player.perks.length) {
@@ -695,7 +695,7 @@ function displayPerks(e:MouseEvent = null):void {
 	addButton(0,"Next",eventParser,1);
 }
 
-function doubleAttackOptions():void {
+public function doubleAttackOptions():void {
 	clearOutput();
 	menu();
 	if(flags[DOUBLE_ATTACK_STYLE] == 0) {
@@ -723,20 +723,20 @@ function doubleAttackOptions():void {
 	addButton(4,"Back",displayPerks,e);
 }
 
-function doubleAttackForce():void {
+public function doubleAttackForce():void {
 	flags[DOUBLE_ATTACK_STYLE] = 0;
 	doubleAttackOptions();
 }
-function doubleAttackDynamic():void {
+public function doubleAttackDynamic():void {
 	flags[DOUBLE_ATTACK_STYLE] = 1;
 	doubleAttackOptions();
 }
-function doubleAttackOff():void {
+public function doubleAttackOff():void {
 	flags[DOUBLE_ATTACK_STYLE] = 2;
 	doubleAttackOptions();
 }
 
-function levelUpGo(e:MouseEvent = null):void {
+public function levelUpGo(e:MouseEvent = null):void {
 	hideMenus();
 	mainView.hideMenuButton( MainView.MENU_NEW_MAIN );
 	//Level up
@@ -773,7 +773,7 @@ function levelUpGo(e:MouseEvent = null):void {
 	*/
 }
 
-function perkBuyMenu():void {
+public function perkBuyMenu():void {
 	outputText("", true);
 	buildPerkList();
 	if(perkList.length == 0) {
@@ -790,7 +790,7 @@ function perkBuyMenu():void {
 	mainView.hideMenuButton( MainView.MENU_NEW_MAIN );
 	simpleChoices("Okay",0,"Skip",115,"",0,"",0,"",0);	
 }
-function buildPerkList():void {
+public function buildPerkList():void {
 	perkList = new Array();
 	//STRENGTH PERKS
 	if(player.hasPerk("Strong Back") < 0 && player.str >= 25) {
@@ -963,7 +963,7 @@ function buildPerkList():void {
 	mainView.aCb.dataProvider = new DataProvider(perkList); 
 }
 
-function applyPerk(pName:String = ""):void {
+public function applyPerk(pName:String = ""):void {
 	player.perkPoints--;
 	//Apply perk here.
 	outputText("<b>" + tempPerk + "</b> gained!", true);
@@ -1097,7 +1097,7 @@ function applyPerk(pName:String = ""):void {
 	doNext(1);
 }
 
-function buttonText(buttonName:String):String {
+public function buttonText(buttonName:String):String {
 	var matches :*,
 		buttonIndex :int;
 
@@ -1119,7 +1119,7 @@ function buttonText(buttonName:String):String {
 
 
 // Returns a string or undefined.
-function getButtonToolTipText( buttonText :String ) :String
+public function getButtonToolTipText( buttonText :String ) :String
 {
 	var toolTipText :String;
 
@@ -1883,7 +1883,7 @@ function getButtonToolTipText( buttonText :String ) :String
 	return toolTipText;
 }
 
-function addButton(pos:int, text:String = "", func1:Function = null, arg1 = -9000):void {
+public function addButton(pos:int, text:String = "", func1:Function = null, arg1 = -9000):void {
 	var callback :Function,
 		toolTipText :String;
 
@@ -1902,14 +1902,14 @@ function addButton(pos:int, text:String = "", func1:Function = null, arg1 = -900
 	mainView.setOutputText( currentText );
 }
 
-function hasButton(arg):Boolean {
+public function hasButton(arg):Boolean {
 	if( arg is String )
 		return mainView.hasButton( arg as String );
 	else
 		return false;
 }
 
-function removeButton(arg):void {
+public function removeButton(arg):void {
 	function _removeButtonAction( index :int ) {
 		// funcs[ index ] = null;
 		// args[ index ] = -9000;
@@ -1929,7 +1929,7 @@ function removeButton(arg):void {
 }
 
 
-function menu(text1:String = "", func1:Function = null, arg1:Number = -9000, text2:String = null, func2:Function = null, arg2:Number = -9000, text3:String = null, func3:Function = null, arg3:Number = -9000, text4:String = null, func4:Function = null, arg4:Number = -9000, text5:String = null, func5:Function = null, arg5:Number = -9000, text6:String = null, func6:Function = null, arg6:Number = -9000, text7:String = null, func7:Function = null, arg7:Number = -9000, text8:String = null, func8:Function = null, arg8:Number = -9000, text9:String = null, func9:Function = null, arg9:Number = -9000, text0:String = null, func0:Function = null, arg0 = null):void {
+public function menu(text1:String = "", func1:Function = null, arg1:Number = -9000, text2:String = null, func2:Function = null, arg2:Number = -9000, text3:String = null, func3:Function = null, arg3:Number = -9000, text4:String = null, func4:Function = null, arg4:Number = -9000, text5:String = null, func5:Function = null, arg5:Number = -9000, text6:String = null, func6:Function = null, arg6:Number = -9000, text7:String = null, func7:Function = null, arg7:Number = -9000, text8:String = null, func8:Function = null, arg8:Number = -9000, text9:String = null, func9:Function = null, arg9:Number = -9000, text0:String = null, func0:Function = null, arg0 = null):void {
 	function _conditionallyShowButton( index :int, label :String, func :Function, arg :Number ) {
 		var callback :Function, toolTipText :String;
 
@@ -1965,7 +1965,7 @@ function menu(text1:String = "", func1:Function = null, arg1:Number = -9000, tex
 }
 
 
-function choices(text1:String, butt1:*, 
+public function choices(text1:String, butt1:*, 
 						text2:String, butt2:*, 
 						text3:String, butt3:*, 
 						text4:String, butt4:*, 
@@ -2083,7 +2083,7 @@ function choices(text1:String, butt1:*,
 			[ "Margle", gurgleFluidsInMouthEvent ] // no comma on last item.
 		]);
 ****/
-function multipageChoices( cancelFunction :*, menuItems :Array ) :void {
+public function multipageChoices( cancelFunction :*, menuItems :Array ) :void {
 	const itemsPerPage :int = 8;
 
 	var currentPageIndex :int;
@@ -2157,7 +2157,7 @@ function multipageChoices( cancelFunction :*, menuItems :Array ) :void {
 }
 
 // simpleChoices and doYesNo are convenience functions. They shouldn't re-implement code from choices()
-function simpleChoices(text1:String, butt1:*, 
+public function simpleChoices(text1:String, butt1:*, 
 						text2:String, butt2:*, 
 						text3:String, butt3:*, 
 						text4:String, butt4:*, 
@@ -2177,7 +2177,7 @@ function simpleChoices(text1:String, butt1:*,
 			"",0);
 }
 
-function doYesNo(eventYes:*, eventNo:*):void {
+public function doYesNo(eventYes:*, eventNo:*):void {
 	//Make buttons 1-2 visible and hide the rest.
 
 	//trace("doYesNo");
@@ -2196,7 +2196,7 @@ function doYesNo(eventYes:*, eventNo:*):void {
 
 
 
-function doNext(eventNo:*):void {
+public function doNext(eventNo:*):void {
 	//Prevent new events in combat from automatically overwriting a game over. 
 	if(mainView.getButtonText( 0 ).indexOf("Game Over") != -1) {
 		trace("Do next setup cancelled by game over");
@@ -2207,7 +2207,7 @@ function doNext(eventNo:*):void {
 	choices("Next", eventNo, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0); 
 }
 
-function doNextClear(eventNo:*):void 
+public function doNextClear(eventNo:*):void 
 {
 	outputText("", true, true);
 	trace("DoNext Clearing display");
@@ -2215,29 +2215,29 @@ function doNextClear(eventNo:*):void
 	choices("Next", eventNo, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0);
 }
 
-function invertGo():void{ 
+public function invertGo():void{ 
 	mainView.invert();
 }
 
 //Used to update the display of statistics
-function statScreenRefresh():void {
+public function statScreenRefresh():void {
 	mainView.statsView.show(); // show() method refreshes.
 }
 
-function showStats():void {
+public function showStats():void {
 	mainView.statsView.show();
 }
 
-function hideStats():void {
+public function hideStats():void {
 	mainView.statsView.hide();
 }
 
-function hideMenus():void {
+public function hideMenus():void {
 	mainView.hideAllMenuButtons();
 }
 
 //Hide the up/down indicators
-function hideUpDown():void {
+public function hideUpDown():void {
 	mainView.statsView.hideUpDown();
 
 	//Clear storage values so up/down arrows can be properly displayed
@@ -2251,14 +2251,14 @@ function hideUpDown():void {
 	oldStats.oldCor = 0;        
 }
 
-function physicalCost(mod:Number):Number {
+public function physicalCost(mod:Number):Number {
 	var costPercent:Number = 100;
 	if(player.hasPerk("Iron Man") >= 0) costPercent -= 50;
 	mod *= costPercent/100;
 	return mod;
 }
 
-function spellCost(mod:Number):Number {
+public function spellCost(mod:Number):Number {
 	//Addiditive mods
 	var costPercent:Number = 100;
 	if(player.hasPerk("Spellcasting Affinity") >= 0) costPercent -= player.perkv1("Spellcasting Affinity");
@@ -2283,7 +2283,7 @@ function spellCost(mod:Number):Number {
 //types:
 //        0 - normal
 //        1 - magic
-function fatigue(mod:Number,type:Number  = 0):void {
+public function fatigue(mod:Number,type:Number  = 0):void {
 	//Spell reductions
 	if(type == 1) {
 		mod = spellCost(mod);
@@ -2321,11 +2321,11 @@ function fatigue(mod:Number,type:Number  = 0):void {
 	statScreenRefresh();
 }
 //function changeFatigue
-function changeFatigue(changeF:Number):void {
+public function changeFatigue(changeF:Number):void {
 	fatigue(changeF);
 }
 //Determine minimum lust
-function minLust():Number {
+public function minLust():Number {
 	var min:Number = 0;
 	//Bimbo body boosts minimum lust by 40
 	if(player.hasStatusAffect("Bimbo Champagne") >= 0 || player.hasPerk("Bimbo Body") >= 0 || player.hasPerk("Bro Body") >= 0 || player.hasPerk("Futa Form") >= 0) {
@@ -2381,7 +2381,7 @@ function minLust():Number {
 	return min;
 }
 
-function displayStats(e:MouseEvent = null) {
+public function displayStats(e:MouseEvent = null) {
 	spriteSelect(-1);
 	outputText("", true);
 	outputText("<b><u>Combat Stats</u></b>\n", false);
@@ -2529,7 +2529,7 @@ function displayStats(e:MouseEvent = null) {
 	doNext(1);
 }
 
-function lustPercent():Number {
+public function lustPercent():Number {
 	var lust:Number = 100;
 	//2.5% lust resistance per level - max 75.
 	if(player.level < 21) lust -= (player.level - 1) * 3;
@@ -2576,7 +2576,7 @@ function lustPercent():Number {
 
 //TODO stats function with dynamic arguments so you don't have to specify all those zeros each time.
 //Modify stats
-function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:Number, sens:Number, lust2:Number, corr:Number, resisted:Boolean = true) {
+public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:Number, sens:Number, lust2:Number, corr:Number, resisted:Boolean = true) {
 	//Easy mode cuts lust gains!
 	if(flags[EASY_MODE_ENABLE_FLAG] == 1 && lust2 > 0 && resisted) lust2 /= 2;
 	//Set original values to begin tracking for up/down values if
@@ -2679,11 +2679,11 @@ function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:Number,
 	mainView.statsView.showUpDown();
 	statScreenRefresh();
 }
-function rand(max:Number):Number
+public function rand(max:Number):Number
 {
 	return int(Math.random()*max);
 }
-function range(min:Number, max:Number, round:Boolean = false):Number 
+public function range(min:Number, max:Number, round:Boolean = false):Number 
 {
 	var num:Number = (min + Math.random() * (max - min));
 
@@ -2691,7 +2691,7 @@ function range(min:Number, max:Number, round:Boolean = false):Number
 	return num;
 }
 
-function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):void {
+public function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):void {
 	//Virginity check
 	if(player.vaginas[vIndex].virgin) {
 		if(display) outputText("\nYour " + vaginaDescript(vIndex) + " loses it's virginity!", false);
@@ -2727,6 +2727,6 @@ function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):void {
 	}
 }
 
-function spriteSelect(choice:Number = 0):void {
+public function spriteSelect(choice:Number = 0):void {
 	mainView.selectSprite( choice );
 }

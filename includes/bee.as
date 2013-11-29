@@ -3,7 +3,7 @@
 //The Queen Bee
 //location: Forest
 //add to exploreForest
-function beeEncounter():void {
+public function beeEncounter():void {
 	spriteSelect(6);
 	//Intro text...
 	outputText("As you approach the edge of the forest, a sweet scent wafts into your nose. Tantalizing, teasing, alluring. As you sniff the air, you find yourself following it, as if an invisible hand is pulling you toward its origin.  Little do you know, that is essentially what's happening. The further and further you go, the more heavy the scent grows, as well as a sound. A sound of a buzz, but not in a maddening tone, as if someone is humming. It's a lovely tune, one that would stick in the back of the mind, but not in a bad way.\n\n", true);
@@ -17,7 +17,7 @@ function beeEncounter():void {
 	else beeEncounterLevel2();
 }
 
-function beeEncounterLevel2():void {
+public function beeEncounterLevel2():void {
 	spriteSelect(6);
 	//Bee appears!
 	outputText("That's when she comes into view. A great woman, yellow and black, a Bee-like handmaiden would be the best comparison. She sits atop a great flower while humming her tune, happily picking the petals off of another flower.  Her body is thin, save her abdomen. Her head is more humanoid than bee, with black eyes, antennae, and luscious black lips that glimmer wetly, bending into a smile as she sees you approach. Standing, she welcomes you in, her wings giving a small buzz as her arms spread open for a welcoming embrace.\n\n", false);
@@ -46,7 +46,7 @@ function beeEncounterLevel2():void {
 	}
 	else beeEncounterLevel3();
 }
-function beeEncounterLevel3():void {
+public function beeEncounterLevel3():void {
 	spriteSelect(6);
 	//Give into the beeee
 	//TAUR SPECIAL!
@@ -265,7 +265,7 @@ function beeEncounterLevel3():void {
 }
 
 //Talk to the bee-girl
-function beeTalk():void {
+public function beeTalk():void {
 	spriteSelect(6);
 	//The first time you only get the option to have eggs laid in your bum ;)
 	if(beeProgress == 0) {
@@ -295,14 +295,14 @@ function beeTalk():void {
 	}
 }
 
-function declineBeeTalk():void {
+public function declineBeeTalk():void {
 	spriteSelect(6);
 	outputText("She pouts and returns to her sing-song buzzing.  Her fingers trace circles between her thighs and the sweet scent intensifies.  You beat a hasty retreat before her efforts overcome your reason.", true);
 	stats(0,0,0,0,0,0,(20+player.lib/15),0);
 	doNext(13);
 }
 
-function freeHoneyEvent():void {
+public function freeHoneyEvent():void {
 	spriteSelect(6);
 	slimeFeed();
 	outputText("You mull her offer over for a moment before deciding to pursue the sweet nectar dripping from her exposed sex.  She leans back in her flower, spreading her legs obscenely and pulling an empty vial out from a tiny pack that sits on the ground.\n\n", true);
@@ -314,7 +314,7 @@ function freeHoneyEvent():void {
 	shortName = "PurHony";
 	takeItem();
 }
-function seduceBeeGirl():void {
+public function seduceBeeGirl():void {
 	spriteSelect(6);
 	//UNFINISHED - low priority male/female variants
 	if(player.gender == 3) {
@@ -338,7 +338,7 @@ function seduceBeeGirl():void {
 	doNext(13);
 }
 
-function beeRapesYou():void {
+public function beeRapesYou():void {
 	spriteSelect(6);
 	outputText("", true);
 	var sexed:Boolean = false;
@@ -613,7 +613,7 @@ function beeRapesYou():void {
 	}
 }
 
-function rapeTheBeeGirl():void {
+public function rapeTheBeeGirl():void {
 	spriteSelect(6);
 	var sexed:Boolean = false;
 	outputText("With your mind made up, you approach the ", true);
@@ -662,7 +662,7 @@ function rapeTheBeeGirl():void {
 	
 	
 	
-function rapeTheBeeMultiCockStuff():void {
+public function rapeTheBeeMultiCockStuff():void {
 	spriteSelect(6);
 	outputText("", true);
 	//Doubledick special
@@ -695,7 +695,7 @@ function rapeTheBeeMultiCockStuff():void {
 	return;
 }
 //MALE sometimes herm
-function rapeTheBeeGirlWithADick():void {
+public function rapeTheBeeGirlWithADick():void {
 	spriteSelect(6);
 	outputText("", true);
 	var x:Number = player.cockThatFits(monster.vaginalCapacity());
@@ -848,7 +848,7 @@ function rapeTheBeeGirlWithADick():void {
 }
 	
 //FEMALE sometimes herm
-function rapeABeeGirlWithYourVagina():void {
+public function rapeABeeGirlWithYourVagina():void {
 	spriteSelect(6);
 	outputText("", true);
 	if(player.isTaur()) {
@@ -917,7 +917,7 @@ function rapeABeeGirlWithYourVagina():void {
 	eventParser(5007);
 }
 //FUTA Fallback
-function futaRapesBeeGirl():void {
+public function futaRapesBeeGirl():void {
 	spriteSelect(6);
 	outputText("", true);
 	outputText("Firmly grasping her thighs at the joining of her smooth carapace and soft skin, you force them open, revealing the source of her irresistible scent.   She buzzes pitifully in protest ", false);
@@ -994,7 +994,7 @@ function futaRapesBeeGirl():void {
 }
 
 //(can replace normal rape victory scenes if corruption>75, and strength>60, and while player has naga tongue, dick, vagina, or d-cup or larger breasts)
-function beeGirlRapeForTheDistinguishedGentleman():void {
+public function beeGirlRapeForTheDistinguishedGentleman():void {
 	spriteSelect(6);
 	outputText("", true);
 	//(if win via HP)
@@ -1062,7 +1062,7 @@ function beeGirlRapeForTheDistinguishedGentleman():void {
 }
 
 
-function beeAlternate():void {
+public function beeAlternate():void {
 	spriteSelect(6);
 	var x:Number = player.biggestCockIndex();
 	var y:Number = player.biggestCockIndex2();
@@ -1128,7 +1128,7 @@ function beeAlternate():void {
 	eventParser(5007);
 }
 //Naga on Bee Scene
-function corruptNagaBitchesRapeABee():void {
+public function corruptNagaBitchesRapeABee():void {
 	spriteSelect(6);
 	outputText("", true);
 	
@@ -1145,7 +1145,7 @@ function corruptNagaBitchesRapeABee():void {
 	outputText("It takes a few minutes, but you relish every second of the bee-girl's conscious mind slipping away. You unwind your tail from around her, never breaking your gaze for even a second. To your pleasure, your captive continues to stand still on her own volition.", false);
 	doNext(nagaRapesPt2TheExtremeContinuationOfAwesome);
 }
-function nagaRapesPt2TheExtremeContinuationOfAwesome():void {
+public function nagaRapesPt2TheExtremeContinuationOfAwesome():void {
 	spriteSelect(6);
 	outputText("", true);
 	//[Player is male]
@@ -1253,7 +1253,7 @@ function nagaRapesPt2TheExtremeContinuationOfAwesome():void {
 	eventParser(5007);
 }
 
-function milkAndHoneyAreKindaFunny():void {
+public function milkAndHoneyAreKindaFunny():void {
 	spriteSelect(6);
 	outputText("", true);
 	slimeFeed();
@@ -1297,7 +1297,7 @@ function milkAndHoneyAreKindaFunny():void {
 
 //requires spiderbite or nagabite
 //Play standard victory text
-function layEggsInABeeSpiderLike():void {
+public function layEggsInABeeSpiderLike():void {
 	clearOutput();
 	outputText("You stand over the defeated bee, sizing up your latest catch.  She watches you fearfully as your gaze slides down her prone form, taking in every inch of her body.  Your eyes stop over her abdomen as you notice the girl's dripping, barely concealed ovipositor.  A wide");
 	if(player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SPIDER_FANGS) outputText(", fanged");

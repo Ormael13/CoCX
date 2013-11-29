@@ -3,89 +3,89 @@ import classes.CockTypesEnum;
 import classes.Appearance;
 import classes.Player;
 
-function sackDescript():String
+public function sackDescript():String
 {
 	return Appearance.sackDescription(player);
 }
 
-function cockClit(number:int = 0):String {
+public function cockClit(number:int = 0):String {
 	if(player.hasCock() && number >= 0 && number < player.cockTotal()) return cockDescript(number);
 	else return clitDescript();
 }
-function balls(balls,noballs):String {
+public function balls(balls,noballs):String {
 	if(player.balls > 0) return balls;
 	return noballs;
 }
-function sheathDesc():String {
+public function sheathDesc():String {
 	return Appearance.sheathDescription(player);
 }
-function chestDesc():String {
+public function chestDesc():String {
 	if(player.biggestTitSize() < 1) return "chest";
 	else return biggestBreastSizeDescript();
 }
-function allChestDesc():String {
+public function allChestDesc():String {
 	if(player.biggestTitSize() < 1) return "chest";
 	else return allBreastsDescript();
 }
-function sMultiCockDesc():String {
+public function sMultiCockDesc():String {
 	return Appearance.cockMultiDesc(player, false, false);
 }
-function SMultiCockDesc():String {
+public function SMultiCockDesc():String {
 	return Appearance.cockMultiDesc(player, true, false);
 }
-function oMultiCockDesc():String {
+public function oMultiCockDesc():String {
 	return Appearance.cockMultiDesc(player, false, true);
 }
-function OMultiCockDesc():String {
+public function OMultiCockDesc():String {
 	return Appearance.cockMultiDesc(player, true, true);
 }
-function tongueDescript():String {
+public function tongueDescript():String {
 	return Appearance.tongueDescription(player);
 }
 
-function ballsDescriptLight(forcedSize:Boolean = true):String {
+public function ballsDescriptLight(forcedSize:Boolean = true):String {
 	return Appearance.ballsDescription(forcedSize, true, player);
 }
 
-function ballDescript():String {
+public function ballDescript():String {
 	return Appearance.ballsDescription(false, false, player);
 }
 
-function eBallsDescriptLight():String {
+public function eBallsDescriptLight():String {
 	return Appearance.ballsDescription(true, true, monster);
 }
-function eBallsDescript():String {
+public function eBallsDescript():String {
 	return Appearance.ballsDescription(true, true, monster, true);
 }
 
-function ballsDescript():String {
+public function ballsDescript():String {
 	return Appearance.ballsDescription(false, true, player, true);
 }
-function simpleBallsDescript():String {
+public function simpleBallsDescript():String {
 	return Appearance.ballsDescription(false, true, player);
 }
 
-function assholeDescript():String {
+public function assholeDescript():String {
 	return Appearance.assholeDescription(player);
 }
-function eAssholeDescript():String {
+public function eAssholeDescript():String {
 	return Appearance.assholeDescription(monster);
 }
 		
-function hipDescript():String {
+public function hipDescript():String {
 	return Appearance.hipDescription(player);
 }
-function assDescript():String {
+public function assDescript():String {
 	return buttDescript();
 }
-function buttDescript():String {
+public function buttDescript():String {
 	return Appearance.buttDescription(player);
 }
-function eButtDescript():String {
+public function eButtDescript():String {
 	return Appearance.buttDescriptionShort(monster);	
 }
 
-function num2TextBest(number:int, capitalised:Boolean = false, positional:Boolean = false):String
+public function num2TextBest(number:int, capitalised:Boolean = false, positional:Boolean = false):String
 {
 	var returnVar:String = "";
 	var numAsWords:Array; 
@@ -125,43 +125,43 @@ function num2TextBest(number:int, capitalised:Boolean = false, positional:Boolea
 	return returnVar;
 }
 
-function num2Text(number:int):String {
+public function num2Text(number:int):String {
 	return num2TextBest(number);
 }
-function num2Text2(number:int):String {
+public function num2Text2(number:int):String {
 	return num2TextBest(number, false, true);
 }
-function Num2Text(number:int):String {
+public function Num2Text(number:int):String {
 	return num2TextBest(number, true);
 }
-function nippleDescript(rowNum:Number):String {
+public function nippleDescript(rowNum:Number):String {
 	return Appearance.nippleDescription(player, rowNum);
 }
 
-function hairDescript():String {
+public function hairDescript():String {
 	return Appearance.hairDescription(player);
 }
 
-function hairOrFur():String {
+public function hairOrFur():String {
 	return Appearance.hairOrFur(player);
 }
 
-function clitDescript():String {
+public function clitDescript():String {
 	return Appearance.clitDescription(player);
 }
 
 //Vaginas + Descript
-function vaginaDescript(vaginaNum:Number = 0):String {
+public function vaginaDescript(vaginaNum:Number = 0):String {
 	return Appearance.vaginaDescription(player, vaginaNum);
 }
 
 //Allvagina descript
-function allVaginaDescript():String {
+public function allVaginaDescript():String {
 	if (player.vaginas.length == 1) return vaginaDescript(rand(player.vaginas.length - 1));
 	if (player.vaginas.length > 1) return (vaginaDescript(rand(player.vaginas.length - 1)) + "s");
 	return "ERROR: allVaginaDescript called with no vaginas.";
 }
-function multiCockDescript():String {
+public function multiCockDescript():String {
 	if(player.cocks.length < 1) return "<B>Error: multiCockDescript() called with no penises present.</B>";
 	//Get cock counts
 	var descript:String="";
@@ -299,7 +299,7 @@ function multiCockDescript():String {
 	return descript;
 }
 
-function multiCockDescriptLight():String {
+public function multiCockDescriptLight():String {
 	if(player.cocks.length < 1) return "<B>Error: multiCockDescriptLight() called with no penises present.</B>";
 	//Get cock counts
 	var descript:String="";
@@ -422,7 +422,7 @@ function multiCockDescriptLight():String {
 	}	
 	return descript;
 }
-function eMultiCockDescriptLight():String {
+public function eMultiCockDescriptLight():String {
 	if(monster.cocks.length < 1) return "<B>Error: eMultiCockDescriptLight() called with no penises present.</B>";
 	//Get cock counts
 	var descript:String="";
@@ -546,7 +546,7 @@ function eMultiCockDescriptLight():String {
 	return descript;
 }
 
-function eCockHead(cockNum:Number = 0):String {
+public function eCockHead(cockNum:Number = 0):String {
 	if(cockNum < 0) return "ERROR";
 	if(cockNum > monster.cocks.length-1) return "ERROR";
 	if(monster.cocks[cockNum].cockType == CockTypesEnum.HORSE) {
@@ -587,11 +587,11 @@ function eCockHead(cockNum:Number = 0):String {
 }
 
 //Used in multiCockDescript and potentially elsewhere - barebones cock names
-function eCockNoun(i_cockType:CockTypesEnum):String {
+public function eCockNoun(i_cockType:CockTypesEnum):String {
 	return Appearance.cockMultiNoun(i_cockType);
 }
 //Used in multiCockDescript to avoid duplicate code
-function eCockAdjectives(cLength:Number, thickness:Number, type:CockTypesEnum):String {
+public function eCockAdjectives(cLength:Number, thickness:Number, type:CockTypesEnum):String {
 	var descript:String = "";
 	var rando:Number = 0;
 	var descripted:Boolean = false;
@@ -709,12 +709,12 @@ function eCockAdjectives(cLength:Number, thickness:Number, type:CockTypesEnum):S
 
 
 //New cock adjectives.  The old one sucked dicks
-function cockAdjective(cockNum:Number = -1) {
+public function cockAdjective(cockNum:Number = -1) {
 	return Appearance.cockAdjective(player, cockNum);
 }
 
 //Used in multiCockDescript to avoid duplicate code
-function cockAdjectives(i_cockLength:Number, i_cockThickness:Number, i_cockType:Number):String 
+public function cockAdjectives(i_cockLength:Number, i_cockThickness:Number, i_cockType:Number):String 
 {
 	//Just in case...
 	//TODO Remove if never called
@@ -724,12 +724,12 @@ function cockAdjectives(i_cockLength:Number, i_cockThickness:Number, i_cockType:
 }
 
 
-function cockDescript(cockNum:Number):String 
+public function cockDescript(cockNum:Number):String 
 {
 	return Appearance.cockDescription(player, cockNum);
 }
 
-function humanDescript(cockNum:Number):String 
+public function humanDescript(cockNum:Number):String 
 {
 	var descript:String = "";
 	if(player.totalCocks() == 0) return "<b>ERROR: humanDescript Called But No Cock Present</b>";
@@ -741,7 +741,7 @@ function humanDescript(cockNum:Number):String
 	return descript;
 }
 
-function kangaDescript(cockNum:Number):String 
+public function kangaDescript(cockNum:Number):String 
 {
 	var descript:String = "";
 	if(player.totalCocks() == 0) return "<b>ERROR: kangaDescript Called But No Cock Present</b>";
@@ -752,7 +752,7 @@ function kangaDescript(cockNum:Number):String
 	descript += Appearance.cockNoun(player.cocks[cockNum].cockType);
 	return descript;
 }
-function dogDescript(cockNum:Number):String 
+public function dogDescript(cockNum:Number):String 
 {
 	var descript:String = "";
 	if(player.totalCocks() == 0) return "<b>ERROR: CockDescript Called But No Cock Present</b>";
@@ -763,7 +763,7 @@ function dogDescript(cockNum:Number):String
 	descript += Appearance.cockNoun(CockTypesEnum.DOG);
 	return descript;
 }
-function foxDescript(cockNum:Number):String 
+public function foxDescript(cockNum:Number):String 
 {
 	var descript:String = "";
 	if(player.totalCocks() == 0) return "<b>ERROR: CockDescript Called But No Cock Present</b>";
@@ -774,7 +774,7 @@ function foxDescript(cockNum:Number):String
 	descript += Appearance.cockNoun(CockTypesEnum.FOX);
 	return descript;
 }
-function tentacleDescript(cockNum:Number):String 
+public function tentacleDescript(cockNum:Number):String 
 {
 	var descript:String = "";
 	if(player.totalCocks() == 0) return "<b>ERROR: CockDescript Called But No Cock Present</b>";
@@ -787,7 +787,7 @@ function tentacleDescript(cockNum:Number):String
 	descript += Appearance.cockNoun(player.cocks[cockNum].cockType);
 	return descript;
 }
-function demonDescript(cockNum:Number):String 
+public function demonDescript(cockNum:Number):String 
 {
 	var descript:String = "";
 	if(player.totalCocks() == 0) 
@@ -808,7 +808,7 @@ function demonDescript(cockNum:Number):String
 
 
 //Horsecock + Descript
-function horseDescript(cockNum:Number):String 
+public function horseDescript(cockNum:Number):String 
 {
 	var descript:String = "";
 	if(player.totalCocks() == 0) return "<b>ERROR: CockDescript Called But No Cock Present</b>";
@@ -820,7 +820,7 @@ function horseDescript(cockNum:Number):String
 	return descript;
 }
 
-function catDescript(cockNum:Number):String 
+public function catDescript(cockNum:Number):String 
 {
 	var descript:String = "";
 	if(player.totalCocks() == 0) return "<b>ERROR: catDescript Called But No Cock Present</b>";
@@ -832,7 +832,7 @@ function catDescript(cockNum:Number):String
 	return descript;
 }
 
-function anemoneDescript(cockNum:Number):String 
+public function anemoneDescript(cockNum:Number):String 
 {
 	var descript:String = "";
 	if(player.totalCocks() == 0) return "<b>ERROR: anemoneDescript Called But No Cock Present</b>";
@@ -843,7 +843,7 @@ function anemoneDescript(cockNum:Number):String
 	descript += Appearance.cockNoun(player.cocks[cockNum].cockType);
 	return descript;
 }
-function dragonDescript(cockNum:Number):String 
+public function dragonDescript(cockNum:Number):String 
 {
 	var descript:String = "";
 	if(player.totalCocks() == 0) return "<b>ERROR: dragonDescript Called But No Cock Present</b>";
@@ -855,7 +855,7 @@ function dragonDescript(cockNum:Number):String
 	return descript;
 }
 
-function displacerDescript(cockNum:Number):String 
+public function displacerDescript(cockNum:Number):String 
 {
 	var descript:String = "";
 	if(player.totalCocks() == 0) return "<b>ERROR: dragonDescript Called But No Cock Present</b>";
@@ -868,7 +868,7 @@ function displacerDescript(cockNum:Number):String
 }
 
 
-function snakeDescript(cockNum:Number):String 
+public function snakeDescript(cockNum:Number):String 
 {
 	var descript:String = "";
 	if(player.totalCocks() == 0) return "<b>ERROR: snakeDescript Called But No Cock Present</b>";
@@ -880,7 +880,7 @@ function snakeDescript(cockNum:Number):String
 	return descript;
 }
 //Vaginas + Descript
-function eVaginaDescript(vaginaNum):String {
+public function eVaginaDescript(vaginaNum):String {
 	var vag:String="";
 	var keyNum:Number = monster.vaginas.length-1;
 	var rand:Number = 0;
@@ -914,10 +914,10 @@ function eVaginaDescript(vaginaNum):String {
 }
 
 //Enemy cock description - value of random cock or 1000 for normal, 1001 horse, 1002 dog.
-function eCockDescript(cockIndex:Number):String {
+public function eCockDescript(cockIndex:Number):String {
 	return Appearance.cockDescriptionShort(cockIndex, monster);
 }
-function allBreastsDescript():String {
+public function allBreastsDescript():String {
 	var storage:String = "";
 	if(player.breastRows.length == 0) return "unremarkable chest muscles ";
 	if(player.breastRows.length == 2) {
@@ -940,7 +940,7 @@ function allBreastsDescript():String {
 	return storage;
 }
 	
-function biggestBreastSizeDescript():String {
+public function biggestBreastSizeDescript():String {
 	var temp14:int = Math.random()*3;
 	var descript:String = "";
 	var temp142:int = player.biggestTitRow();
@@ -985,7 +985,7 @@ function biggestBreastSizeDescript():String {
 	return descript;
 }
 
-function breastSize(val:Number):String {
+public function breastSize(val:Number):String {
 	var descript:String = "";
 	var choice:Number = 0;
 	//Catch all for dudes.
@@ -1024,7 +1024,7 @@ function breastSize(val:Number):String {
 	}
 	return descript;
 }
-function breastDescript(rowNum:Number):String
+public function breastDescript(rowNum:Number):String
 {
 	//ERROR PREVENTION
 	if(player.breastRows.length - 1 < rowNum) return "<b>ERROR, breastDescript() working with invalid breastRow</b>";
@@ -1068,7 +1068,7 @@ function breastDescript(rowNum:Number):String
 	}
 	return descript;
 }
-function cockHead(cockNum:Number = 0):String {
+public function cockHead(cockNum:Number = 0):String {
 	var temp:int;
 	if(cockNum < 0) return "ERROR";
 	if(cockNum > player.cocks.length-1) return "ERROR";
@@ -1118,7 +1118,7 @@ function cockHead(cockNum:Number = 0):String {
 }
 
 
-function npcBreastDescript(size:Number):String
+public function npcBreastDescript(size:Number):String
 {
 	//ERROR PREVENTION
 	var temp14:int = Math.random()*3;
@@ -1153,7 +1153,7 @@ function npcBreastDescript(size:Number):String
 	return descript;
 }
 
-function breastCup(size:Number):String {
+public function breastCup(size:Number):String {
 	if(size < 1) return "flat, manly breast";
 	else if(size < 2) return "A-cup";
 	else if(size < 3) return "B-cup";
@@ -1257,7 +1257,7 @@ function breastCup(size:Number):String {
 }
 
 
-function NPCCockDescript(cockType:*, cockLength:Number = 0, lust:Number = 50):String 
+public function NPCCockDescript(cockType:*, cockLength:Number = 0, lust:Number = 50):String 
 {
 	var descript:String = "";
 	
@@ -1284,13 +1284,13 @@ function NPCCockDescript(cockType:*, cockLength:Number = 0, lust:Number = 50):St
 }
 	
 //Modular NPC dicks!
-function NPCCockNoun(i_cockType:CockTypesEnum):String
+public function NPCCockNoun(i_cockType:CockTypesEnum):String
 {
 	return Appearance.cockNoun(i_cockType);
 }
 
 //Multipurpose NPC cock descs
-function NPCCockAdjective(cockType:CockTypesEnum, cockLength:Number = 5, lust:Number = 50):String 
+public function NPCCockAdjective(cockType:CockTypesEnum, cockLength:Number = 5, lust:Number = 50):String 
 {	
 	var descript:String = "";
 	var rando:Number = 0;

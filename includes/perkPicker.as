@@ -8,7 +8,7 @@
 // if (perkEventNums.indexOf(eventNo) > 0)
 var perkEventNums = [53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 72, 73, 75, 76, 77, 78, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110];
 
-function pickPerks(eventNo:*)
+public function pickPerks(eventNo:*)
 {
 	
 	//Strong Back Chosen (25 Str perk)

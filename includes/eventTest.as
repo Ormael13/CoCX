@@ -1,6 +1,6 @@
 
 
-function eventTestingPane():void
+public function eventTestingPane():void
 {
 	
 
@@ -102,7 +102,7 @@ consequatur aut perferendis doloribus asperiores repellat.
 
 */
 
-function eventTester():void {
+public function eventTester():void {
 	outputText("", true);
 	mainView.showTestInputPanel();
 	mainView.eventTestInput.text = <![CDATA[
@@ -122,7 +122,7 @@ function eventTester():void {
 	simpleChoices("Proceed",eventTesterGo,"",0,"",0,"",0,"Back",eventTesterExit);
 }
 
-function eventTesterGo():void 
+public function eventTesterGo():void 
 {
 	mainView.hideTestInputPanel();
 	
@@ -139,7 +139,7 @@ function eventTesterGo():void
 	return;
 }
 
-function eventTesterExit():void 
+public function eventTesterExit():void 
 {
 	mainView.hideTestInputPanel();
 	eventParser(debugPane);

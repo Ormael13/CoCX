@@ -21,7 +21,7 @@ Males:
 	-If the player loses to the 'brood', brood encounters become more frequent.
 	-If the player lose 3 times, game over as breeding stud.
 */
-function tamaniChest():String {
+public function tamaniChest():String {
 	var descript:String = "";
 	if(player.statusAffectv4("Tamani") <= 1) {
 		if(rand(2) == 0) descript = "ample ";
@@ -60,7 +60,7 @@ function tamaniChest():String {
 }
 
 //[Encounter Tamani – female]
-function tamaniFemaleEncounter():void {
+public function tamaniFemaleEncounter():void {
 	spriteSelect(56);
 	player.createStatusAffect("Tamani Female Encounter",0,0,0,0);
 	outputText("", true);
@@ -71,7 +71,7 @@ function tamaniFemaleEncounter():void {
 }
 
 //(Umm OK?)
-function tamaniFemaleYes():void {
+public function tamaniFemaleYes():void {
 	spriteSelect(56);
 	outputText("", true);
 	outputText("\"<i>That's what I thought,</i>\" says the goblin as she fishes around in her pouches, \"<i>but I'm not cruel, I'll give you my best dildo so you can keep your hot little box stuffed all the time.</i>\"\n\n", false);
@@ -84,7 +84,7 @@ function tamaniFemaleYes():void {
 	doNext(13);
 }
 //[No] 
-function tamaniFemaleNo(): void {
+public function tamaniFemaleNo(): void {
 	spriteSelect(56);
 	outputText("", true);
 	outputText("The goblin harrumphs, \"<i>We'll see about that slut.  I'll be knocked up from every monster and stud this side of the mountain.  Hell, just grow one dick, and see how fast Tamani's legs get wrapped around you!</i>\"\n\n", false);
@@ -96,7 +96,7 @@ function tamaniFemaleNo(): void {
 }
 //[Encounter Tamani – HAZ COCK]
 //[First Time]
-function tamaniMaleFirstEncounter():void {
+public function tamaniMaleFirstEncounter():void {
 	spriteSelect(56);
 	player.createStatusAffect("Tamani",-500,0,0,0);
 	outputText("", true);
@@ -106,7 +106,7 @@ function tamaniMaleFirstEncounter():void {
 	simpleChoices("Fuck Her",tamaniFirstTimeConsentual,"Refuse",tamaniFirstTimeRefusal,"",0,"",0,"",0);
 }
 //[Fuck Her – Consentual First Time]
-function tamaniFirstTimeConsentual():void {
+public function tamaniFirstTimeConsentual():void {
 	spriteSelect(56);
 	tamaniKnockUp();
 	outputText("", true);
@@ -162,7 +162,7 @@ function tamaniFirstTimeConsentual():void {
 }
 
 //[Refuse – First Time Meeting]
-function tamaniFirstTimeRefusal():void {
+public function tamaniFirstTimeRefusal():void {
 	spriteSelect(56);
 	outputText("", true);
 	outputText("Tamani's eyes widen in surprise, \"<i>Don't let the size fool you, big " + player.boyGirl() + ". I can take more than you think,</i>\" she says while her hands begins playing with her box, \"<i>Are you sure you don't want to just let off a little steam?</i>\"\n\n", false);
@@ -172,7 +172,7 @@ function tamaniFirstTimeRefusal():void {
 	stats(0,0,0,0,0,0,5,0);
 }
 //[No Means No]
-function tamaniSecondRefusal(): void {
+public function tamaniSecondRefusal(): void {
 	spriteSelect(56);
 	outputText("", true);
 	outputText("The goblin pouts, anger clouding her cute little features.  She turns and storms off, clearly pissed at you, \"<i>Think about it.  Next time that dick better ache for me, or I'll MAKE you want it.</i>\"\n\n", false);
@@ -181,7 +181,7 @@ function tamaniSecondRefusal(): void {
 }
 
 //[REPEAT MALE ENCOUNTER]
-function tamaniMaleRepeatEncounter():void {
+public function tamaniMaleRepeatEncounter():void {
 	spriteSelect(56);
 	outputText("", true);
 	//(IF FUCKED - check to see if she's pregnant or has given birth) 
@@ -202,7 +202,7 @@ function tamaniMaleRepeatEncounter():void {
 
 //[Let Her (Or Combat Rape)]
 //[let her]
-function tamaniSexLetHer():void {
+public function tamaniSexLetHer():void {
 	spriteSelect(56);
 	tamaniKnockUp();
 	outputText("", true);
@@ -412,7 +412,7 @@ function tamaniSexLetHer():void {
 }
 
 //[NORMAL COMBAT – LOSS TEXT]
-function tamaniSexLost():void {
+public function tamaniSexLost():void {
 	spriteSelect(56);
 	tamaniKnockUp();
 	outputText("", true);
@@ -456,7 +456,7 @@ function tamaniSexLost():void {
 	
 //[NORMAL COMBAT – VICTORY RAEEP]
 //Shove her face in the mud and fuck her
-function tamaniSexWon():void {
+public function tamaniSexWon():void {
 	spriteSelect(56);
 	tamaniKnockUp();
 	var x:Number = player.cockThatFits(90);
@@ -531,7 +531,7 @@ function tamaniSexWon():void {
 }
 
 //[REPEAT MALE PREGNANT ENCOUNTER]
-function tamaniPregnantEncounter():void {
+public function tamaniPregnantEncounter():void {
 	spriteSelect(56);
 	outputText("", true);
 	outputText("Tamani strolls out from behind a boulder, and wow is she ever pregnant.  It doesn't diminish the look of lust in her eyes when she meets your gaze, but her hands do keep rubbing the outside of her belly, only pausing to squeeze drops of milk from her nipples.  Her leather straps seem to fit her even better than before, accentuating her expanding curves and looking fantastic on her pregnant form.\n\n", false);
@@ -541,14 +541,14 @@ function tamaniPregnantEncounter():void {
 }
 
 //[Refuse]
-function tamaniPregnantRefusal():void {
+public function tamaniPregnantRefusal():void {
 	spriteSelect(56);
 	outputText("", true);
 	outputText("She bursts into tears and waddles away crying.  You aren't sure if you should feel bad or not.", false);
 	doNext(13);
 }
 //[FUCK HER PREGGERS – Consentual]
-function tamaniPregnantFuck():void {
+public function tamaniPregnantFuck():void {
 	spriteSelect(56);
 	outputText("", true);
 	outputText("Tamani's eyes light up and she pounces you, somehow managing to jump up and latch onto your chest despite the weight of her burgeoning pregnancy.  The two of you overbalance as her weight carries you to the ground, flat on your back.   Your " + buttDescript() + " hurts a little from the impact but it's the last thing on your mind.  More important are the milk-dribbling twin mounds pressing tightly against your ", false);
@@ -597,7 +597,7 @@ function tamaniPregnantFuck():void {
 }
 
 //[Birth Encounter]
-function tamaniPoopsOutBabies():void {
+public function tamaniPoopsOutBabies():void {
 	spriteSelect(56);
 	var daughters = player.statusAffectv3("Tamani");
 	outputText("", true);
@@ -641,7 +641,7 @@ function tamaniPoopsOutBabies():void {
 	doNext(13);
 }
 
-function tamaniKnockUp():void {
+public function tamaniKnockUp():void {
 	//Already preggers
 	if(player.statusAffectv1("Tamani") > -500) {
 		
@@ -665,7 +665,7 @@ function tamaniKnockUp():void {
 	}
 }
 
-function encounterTamani():void {
+public function encounterTamani():void {
 	//Fems:
 	if(player.totalCocks() <= 0) tamaniFemaleEncounter();
 	//Dudezillaz:
@@ -693,7 +693,7 @@ function encounterTamani():void {
 }
 //TAMANI HYPNO SHIT
 //New Tease option:
-function tamaniHypnoTease():void {
+public function tamaniHypnoTease():void {
 	var selector:Number = rand(3);
 	//Choose 1 of 3 variations
 	if(selector == 0) outputText("Tamani smiles and shifts her leather straps, pulling one into the puffy gash that is her vagina.  She groans out loud, sliding the studded leather band into her outer lips and sawing it along her clit.  Her whole body blushes as she pulls it free, running a fingertip up the now wet strip of leather, \"<i>Mmm, can't you see how much my pussy needs a man inside it?  Be a good husband and fuck Tamani full!  You know you want to.</i>\"\n\n", false);
@@ -753,7 +753,7 @@ function tamaniHypnoTease():void {
 }
 
 //[GIVE IN TO TAMANI'S HYPNO SHENANIGANS]
-function getRapedByTamaniYouHypnoSlut():void {
+public function getRapedByTamaniYouHypnoSlut():void {
 	spriteSelect(56);
 	outputText("", true);
 	//Find a dick that fits
@@ -885,7 +885,7 @@ function getRapedByTamaniYouHypnoSlut():void {
 	else doNext(13);
 }
 
-function tamaniAnalShits():void {
+public function tamaniAnalShits():void {
 	spriteSelect(56);
 	var x:Number = player.cockThatFits(monster.analCapacity());
 	outputText("", true);
@@ -905,7 +905,7 @@ function tamaniAnalShits():void {
 	eventParser(5007);
 }
 
-function tamaniBeaten():void {
+public function tamaniBeaten():void {
 	clearOutput();
 	outputText("With the goblin defeated, you're finally free to tend to your body's true desires, even if they may be different than the ones the goblin was intent on stoking.  You shed your [armor] like a second skin, shrugging out of the offending garments with ease.  With your nude form revealed, Tamani ");
 	if(player.hasCock()) outputText("licks her lips in anticipation, eyes locked on [eachCock]");
@@ -941,7 +941,7 @@ function tamaniBeaten():void {
 }
 	
 //Butts McGee Facesitting Tamaniz
-function preferTamaniFemdom():void {
+public function preferTamaniFemdom():void {
 	clearOutput();
 	//Tamani Facesit
 	//===========Tamani============
@@ -953,7 +953,7 @@ function preferTamaniFemdom():void {
 	addButton(1,"Refuse",declineZeFacesits);
 }
 //(("Refuse" choice))
-function declineZeFacesits():void {
+public function declineZeFacesits():void {
 	clearOutput();
 	outputText("You tell her you're not interested.");
 	outputText("\n\nThe curvy goblin kicks you with a snarl, making you instinctively grab at one [leg] and hop around on the other - until she kicks it too, knocking you down.  \"<i>Fine, bitch. Have it your way. But if I find you taking <b>my</b> cocks again, you're going to be in trouble!</i>\"  She darts off before you can get a word in edgewise, leaving you alone.");
@@ -962,7 +962,7 @@ function declineZeFacesits():void {
 }
 
 //(("Accept" choice))
-function acceptTamaniFacesits():void {
+public function acceptTamaniFacesits():void {
 	clearOutput();
 	outputText("You eye the goblin's wide hips again before you nod, anticipating the idea.");
 	outputText("\n\nTamani's impish smirk blooms into a wide grin, and the little goblin gently shoves you.  \"<i>Lay down, then!</i>\" she tells you.  You decide to comply, reaching for your [armor] - but she stops your hand.  \"<i>No need to strip, skank. Just lay down,</i>\" she tells you, pushing again.  You shrug and comply with her request, finding a comfortable spot on the ground to lay on, and then look over at her.");

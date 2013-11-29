@@ -1,4 +1,4 @@
-﻿function fapAppearance(display:Boolean = true):void {
+﻿public function fapAppearance(display:Boolean = true):void {
 	if(display) {
 		//[Paragraph: Bazaar description, 1st time]
 		if(flags[UNKNOWN_FLAG_NUMBER_00339] == 0) outputText("\n\nThere is a gigantic tent standing in the clearing, with a large crowd gathering around it.   Perhaps you could investigate and see what is going on inside.", false);
@@ -8,7 +8,7 @@
 	}
 }
 //Option labeled "Arena» is available.
-function fapArenaGOOOO():void {
+public function fapArenaGOOOO():void {
 	outputText("", true);
 	//(set X = longest cock)
 	var x:Number = player.longestCock();
@@ -79,7 +79,7 @@ function fapArenaGOOOO():void {
 	//end of condition about PC's first time, display the following
 }
 	
-function fapArenaPageII():void {
+public function fapArenaPageII():void {
 	outputText("", true);
 	var x:Number = player.longestCock();
 	
@@ -134,7 +134,7 @@ function fapArenaPageII():void {
 	else doNext(3169);
 }
 
-function fapResults(place:Number = 3):void {
+public function fapResults(place:Number = 3):void {
 	outputText("", true);
 	var num = rand(50) + 5;
 	var tent:Boolean = false;
@@ -424,7 +424,7 @@ function fapResults(place:Number = 3):void {
 }
 
 //[SPECIAL: if player has an extra tentacle dick more than 40 inches long OR if the player has lost and has a unique tentacle dick, add this paragraph before the PC cums]
-function tentacleFapSpecial(place:Number):void {
+public function tentacleFapSpecial(place:Number):void {
 	temp = player.cocks.length;
 	while(temp > 0) {
 		temp--;
@@ -451,7 +451,7 @@ function tentacleFapSpecial(place:Number):void {
 	}
 }
 //[in both cases, special paragraph for cumming with tentacle dick]
-function tentacleFapCum():Boolean {
+public function tentacleFapCum():Boolean {
 	temp = player.cocks.length;
 	while(temp > 0) {
 		temp--;

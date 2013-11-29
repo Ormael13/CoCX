@@ -17,7 +17,7 @@
 
 //Special1: Tease
 //See Costumes section for text
-function zealotSpecial1():void {
+public function zealotSpecial1():void {
 	//Costumes
 	//This foe periodically switches between outfits; this determines what text is displayed when they use tease.
 	
@@ -56,7 +56,7 @@ function zealotSpecial1():void {
 //Special2: Lust transfer spell, it becomes more and 
 //more likely that he will use this power as his lust gets 
 //higher, but he can use it at any time (like the cultist).
-function zealotSpecial2():void {
+public function zealotSpecial2():void {
 	outputText("The zealot suddenly cries out and extends his arms towards you; your mind is suddenly overwhelmed with a massive wave of arousal as images of every kind of fetish you can imagine wash over you, all blended together.  After a moment you are able to recover, but you notice that the Zealot doesn't seem to be as aroused as before.", false);
 	stats(0,0,0,0,0,0,monster.lust/2,0);
 	monster.lust /= 2;
@@ -80,7 +80,7 @@ Comfortable clothes (same as Cultist drop, and the starting armour of the player
 //Scenes
 //Boat encounter
 //After the cultists arrive at the Lake, a zealot will be found guarding the player's boat.  Once defeated, there is a 50% chance he will be guarding it the next time the PC goes to the boat, until the swamp is added.  When that happens, repeat encounters will not occur anymore.
-function zealotBoat():void {
+public function zealotBoat():void {
 	if(player.statusAffectv1("fetishON") == 1) {
 		zealotRepeat();
 		return;
@@ -94,7 +94,7 @@ function zealotBoat():void {
 }
 //Regular encounter
 //This is the regular pre combat text for wandering zealots (they'll be a regular mob at the swamp)
-function zealotRepeat():void {
+public function zealotRepeat():void {
 	outputText("", true);
 	outputText("While exploring, you hear someone cry out behind you \"<i>This is sacred land!  You WILL be punished for trespassing!</i>\"  It seems you've managed to stumble upon whatever land this zealot has been tasked to guard, and now you must fight him.", false);
 	startCombat(19);
@@ -102,7 +102,7 @@ function zealotRepeat():void {
 }
 	
 //Raping the player
-function zealotLossRape():void {
+public function zealotLossRape():void {
 	outputText("", true);
 	var broseph:String = player.mf("dude","chick");
 	//Pre Rape Scene - lose by hp
@@ -277,7 +277,7 @@ function zealotLossRape():void {
 	stats(0,0,0,0,0,0,player.cor/20+player.lib/10,0);
 	eventParser(5007);
 }
-function zealotDefeated():void {
+public function zealotDefeated():void {
 	//Defeated by health
 	if(monster.HP < 1) outputText("The zealot collapses from his wounds, too hurt to continue controlling his powers.", false);
 	//Defeated by lust
@@ -293,7 +293,7 @@ function zealotDefeated():void {
 
 
 //Raped by the player
-function zealotWinRape():void {
+public function zealotWinRape():void {
 	outputText("", true);
 	//Religious Costume Rape
 	outputText("The zealot's attire seems to have settled on an outfit similar to those commonly worn by members of religious orders.  Though you aren't too surprised to see that it has a slit running down the front and back of the outfit that gives you full access to his sizable cock and asshole.\n\n", false);

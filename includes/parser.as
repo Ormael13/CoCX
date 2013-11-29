@@ -125,7 +125,7 @@ var singleArgConverters:Object =
 // If the arg is not present in the singleArgConverters object, an error message is
 // returned.
 // ALWAYS returns a string
-function convertSingleArg(arg:String):String
+public function convertSingleArg(arg:String):String
 {
 	var argResult:String;
 	var capitalize:Boolean = isUpperCase(arg.charAt(0));
@@ -311,7 +311,7 @@ public var twoWordTagsLookup:Object =
 }
 
 
-function convertDoubleArg(inputArg:String):String
+public function convertDoubleArg(inputArg:String):String
 {
 	var argResult:String;
 
@@ -442,7 +442,7 @@ public var conditionalOptions:Object =
 // through lookup in the above conditionalOptions oject, and then calling the
 // relevant function
 // Realistally, should only return either boolean or numbers.
-function convertConditionalArgumentFromStr(arg:String):*
+public function convertConditionalArgumentFromStr(arg:String):*
 {
 	// convert the string contents of a conditional argument into a meaningful variable.
 	arg = arg.toLowerCase()
@@ -474,7 +474,7 @@ function convertConditionalArgumentFromStr(arg:String):*
 // Evaluates the conditional section of an if-statement.
 // Does the proper parsing and look-up of any of the special nouns
 // which can be present in the conditional
-function evalConditionalStatementStr(textCond:String):Boolean
+public function evalConditionalStatementStr(textCond:String):Boolean
 {
 	// Evaluates a conditional statement:
 	// (varArg1 [conditional] varArg2)
@@ -545,7 +545,7 @@ function evalConditionalStatementStr(textCond:String):Boolean
 // Splits the result from an if-statement.
 // ALWAYS returns an array with two strings.
 // if there is no else, the second string is empty.
-function splitConditionalResult(textCtnt:String): Array
+public function splitConditionalResult(textCtnt:String): Array
 {
 	// Splits the conditional section of an if-statemnt in to two results:
 	// [if (condition) OUTPUT_IF_TRUE]
@@ -588,7 +588,7 @@ function splitConditionalResult(textCtnt:String): Array
 // Called to evaluate a if statment string, and return the evaluated result.
 // Returns an empty string ("") if the conditional rvaluates to false, and there is no else
 // option.
-function parseConditional(textCtnt:String, depth:int):String
+public function parseConditional(textCtnt:String, depth:int):String
 {
 	// NOTE: enclosing brackets are *not* included in the actual textCtnt string passed into this function
 	// they're shown in the below examples simply for clarity's sake.
@@ -667,7 +667,7 @@ function parseConditional(textCtnt:String, depth:int):String
 
 public var buttonNum:Number;
 
-function enterParserScene(sceneName:String):String
+public function enterParserScene(sceneName:String):String
 {
 
 	/*
@@ -720,7 +720,7 @@ function enterParserScene(sceneName:String):String
 }
 
 
-function parseSceneTag(textCtnt:String):void
+public function parseSceneTag(textCtnt:String):void
 {
 	var sceneName:String;
 	var sceneCont:String;
@@ -739,7 +739,7 @@ function parseSceneTag(textCtnt:String):void
 	thisParserState[sceneName] = stripStr(sceneCont);
 
 }
-function parseButtonTag(textCtnt:String):void
+public function parseButtonTag(textCtnt:String):void
 {
 	var arr;
 	arr = textCtnt.split("|")
@@ -756,7 +756,7 @@ function parseButtonTag(textCtnt:String):void
 // pushes the contents of the passed string into the scene list object if it's a scene, or instantiates the named button if it's a button
 // command and returns an empty string.
 // if the contents are not a button or scene contents, returns the contents.
-function evalForSceneControls(textCtnt:String):String
+public function evalForSceneControls(textCtnt:String):String
 {
 
 	
@@ -781,7 +781,7 @@ function evalForSceneControls(textCtnt:String):String
 // Called to determine if the contents of a bracket are a parseable statement or not
 // If the contents *are* a parseable, it calls the relevant function to evaluate it
 // if not, it simply returns the contents as passed
-function evalBracketContents(textCtnt:String, depth:int):String
+public function evalBracketContents(textCtnt:String, depth:int):String
 {
 	
 	var retStr:String = "";
@@ -832,7 +832,7 @@ import flash.utils.getQualifiedClassName;
 // Actual internal parser function.
 // textCtnt is the text you want parsed, depth is a number that reflects the current recursion depth
 // You pass in the string you want parsed, and the parsed result is returned as a string.
-function recParser(textCtnt:String, depth):String
+public function recParser(textCtnt:String, depth):String
 {
 
 	// Depth tracks our recursion depth
@@ -955,7 +955,7 @@ function recParser(textCtnt:String, depth):String
 
 
 
-function recursiveParser(contents:String, parseAsMarkdown:Boolean = false):String
+public function recursiveParser(contents:String, parseAsMarkdown:Boolean = false):String
 {
 	// Eventually, when this goes properly class-based, we'll add a period, and have this.parserState.
 
@@ -1019,18 +1019,18 @@ function recursiveParser(contents:String, parseAsMarkdown:Boolean = false):Strin
 // Stupid string utility functions, because actionscript doesn't have them (WTF?)
 
 
-function stripStr(str:String):String
+public function stripStr(str:String):String
 {
 	return trimStrBack(trimStrFront(str, " "), " ");
 	return trimStrBack(trimStrFront(str, "	"), "	");
 }
 
-function trimStr(str:String, char:String = " "):String
+public function trimStr(str:String, char:String = " "):String
 {
 	return trimStrBack(trimStrFront(str, char), char);
 }
 
-function trimStrFront(str:String, char:String = " "):String
+public function trimStrFront(str:String, char:String = " "):String
 {
 	char = stringToCharacter(char);
 	if (str.charAt(0) == char) {
@@ -1039,7 +1039,7 @@ function trimStrFront(str:String, char:String = " "):String
 	return str;
 }
 
-function trimStrBack(str:String, char:String = " "):String
+public function trimStrBack(str:String, char:String = " "):String
 {
 	char = stringToCharacter(char);
 	if (str.charAt(str.length - 1) == char) {
@@ -1047,7 +1047,7 @@ function trimStrBack(str:String, char:String = " "):String
 	}
 	return str;
 }
-function stringToCharacter(str:String):String
+public function stringToCharacter(str:String):String
 {
 	if (str.length == 1)
 	{
@@ -1057,7 +1057,7 @@ function stringToCharacter(str:String):String
 }
 
 
-function isUpperCase(char:String):Boolean
+public function isUpperCase(char:String):Boolean
 {
 	if (char == char.toUpperCase())
 	{
@@ -1066,7 +1066,7 @@ function isUpperCase(char:String):Boolean
 	return false;
 }
 
-function capitalizeFirstWord(str:String):String
+public function capitalizeFirstWord(str:String):String
 {
 
 	str = str.charAt(0).toUpperCase()+str.slice(1);

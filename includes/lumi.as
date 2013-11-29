@@ -1,4 +1,4 @@
-﻿function lumiEncounter():void {
+﻿public function lumiEncounter():void {
 	outputText("", true);
 	//1st time lumi meeting
 	if(flags[LUMI_MET] == 0) {
@@ -15,7 +15,7 @@
 //end of placeholder text
 }
 
-function lumiLabChoices():void {
+public function lumiLabChoices():void {
 	spriteSelect(37);
 	outputText("", true);
 	//First time meeting
@@ -40,7 +40,7 @@ function lumiLabChoices():void {
 	simpleChoices("Shop",lumiShop,"Enhance",enhance,"",0,"",0,"Leave",13);
 }
 
-function lumiShop():void {
+public function lumiShop():void {
 	spriteSelect(37);
 	//Set item handling to lumi shop
 	menuLoc = 12;
@@ -53,7 +53,7 @@ function lumiShop():void {
 }
 
 //Lust Draft
-function lumiLustDraftPitch():void {
+public function lumiLustDraftPitch():void {
 	spriteSelect(37);
 	outputText("", true);
 	outputText("You point at the bottle filled with bubble-gum pink fluid.\n\n\"<i>De lust dwaft? Always a favowite, with it you nevar have to worwy about not bein weady for sexy time; one of my fiwst creations. 15 gems each.</i>\"\n\n", false);
@@ -62,7 +62,7 @@ function lumiLustDraftPitch():void {
 	doYesNo(lumiPurchase,lumiShop);
 }
 //Goblin Ale
-function lumiPitchGobboAle():void {
+public function lumiPitchGobboAle():void {
 	spriteSelect(37);
 	outputText("", true);
 	outputText("You point at the flagon. \"<i>Oh? Oh thats Lumi's... actually no, dat tispsy stuff for 20 gems. You'll like if you want to be like Lumi. Do you like it?</i>\"\n\n", false);
@@ -71,7 +71,7 @@ function lumiPitchGobboAle():void {
 	doYesNo(lumiPurchase,lumiShop);
 }
 //Ovi Elixir
-function lumiPitchOviElixer():void {
+public function lumiPitchOviElixer():void {
 	spriteSelect(37);
 	outputText("", true);
 	outputText("You point at the curious hexagonal bottle. \"<i>De Oviposar Elixir? Made baithsed on da giant bee's special stuff dey give deir queen. It will help make de burfing go faster, an if you dwink it while you awen pweggy, iw will give you some eggs to burf later. More dwinks, eqwals more and biggar eggs. Lumi charges 45 gems for each dose.</i>\"\n\n", false);
@@ -81,7 +81,7 @@ function lumiPitchOviElixer():void {
 }
 
 
-function lumiPurchase():void {
+public function lumiPurchase():void {
 	spriteSelect(37);
 	outputText("", true);
 	//After choosing, and PC has enough gems
@@ -109,7 +109,7 @@ function lumiPurchase():void {
 	}
 }
 
-function lumiEnhance(justCheck:Boolean = false):Boolean {
+public function lumiEnhance(justCheck:Boolean = false):Boolean {
 	spriteSelect(37);
 	var fox = 0;
 	if(hasItem("FoxBery",1)) 
@@ -158,40 +158,40 @@ function lumiEnhance(justCheck:Boolean = false):Boolean {
 	}
 	return false;
 }
-function lumiEnhanceLaBova():void {
+public function lumiEnhanceLaBova():void {
 	shortName = "LaBova ";
 	lumiEnhanceGo();
 }
-function lumiEnhanceSDelight():void {
+public function lumiEnhanceSDelight():void {
 	shortName = "SDelite";
 	lumiEnhanceGo();
 }
-function lumiEnhanceOviElix():void {
+public function lumiEnhanceOviElix():void {
 	shortName = "OviElix";
 	lumiEnhanceGo();
 }
-function lumiEnhanceDraft():void {
+public function lumiEnhanceDraft():void {
 	shortName = "L.Draft";
 	lumiEnhanceGo();
 }
-function lumiEnhanceGoldenSeed():void {
+public function lumiEnhanceGoldenSeed():void {
 	shortName = "GldSeed";
 	lumiEnhanceGo();
 }
-function lumiEnhanceKanga():void {
+public function lumiEnhanceKanga():void {
 	shortName = "KangaFt";
 	lumiEnhanceGo();
 }
-function lumiEnhanceFox():void {
+public function lumiEnhanceFox():void {
 	shortName = "FoxBery";
 	lumiEnhanceGo();
 }
-function lumiEnhanceFoxJewel():void {
+public function lumiEnhanceFoxJewel():void {
 	shortName = "FoxJewl";
 	lumiEnhanceGo();
 }
 
-function lumiEnhanceGo():void {
+public function lumiEnhanceGo():void {
 	spriteSelect(37);
 	trace("LUMI ENHANCE");
 	var nextItem:String = "";

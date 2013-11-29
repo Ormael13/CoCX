@@ -13,7 +13,7 @@
 //-----
 //GO TO GYM (FROM TEL'ADRE)
 
-function changingRoom():void {
+public function changingRoom():void {
 	//Charge for gym if no lifetime member!
 	outputText("", true);
 	if(flags[UNKNOWN_FLAG_NUMBER_00167] == 0) {
@@ -35,7 +35,7 @@ function changingRoom():void {
 }
 
 //AT CHANGING ROOM (SELECTING TO SEE THE SHARK OR LOOK AROUND IF FIRST TIME)
-function meetJasun():void {
+public function meetJasun():void {
 	outputText("", true);
 	spriteSelect(33);
 	if(flags[UNKNOWN_FLAG_NUMBER_00179] == 0) {
@@ -152,7 +152,7 @@ function meetJasun():void {
 	}
 }
 
-function meetJasun2():void {
+public function meetJasun2():void {
 	outputText("", true);
 	spriteSelect(33);
 	outputText("You and he walk together for what can't be a very long time. He winds around the back side of the gym, avoiding the weightlifting room and going past the track altogether. You didn't even know that there were areas of the gym beyond what you had previously seen. He easily pushes aside a very thick door with one arm ", false);
@@ -166,7 +166,7 @@ function meetJasun2():void {
 }
 
 //IF YOU TURN AWAY
-function turnAwayFromAdj():void {
+public function turnAwayFromAdj():void {
 	outputText("", true);
 	spriteSelect(33);
 	outputText("\"<i>I understand,</i>\" he says dejectedly. He steps up and walks back toward the door. He perks up at the last minute, not letting his being rejected hurt his pride in the least, and says, \"<i>If you ever would like to swim, you know where to find me. Farewell.</i>\" He stands at the door and waits for you to leave before leaping into the water alone, as he has done no doubt many times in the past.\n\n", false);
@@ -177,7 +177,7 @@ function turnAwayFromAdj():void {
 }
 
 //IF YOU ACCEPT
-function acceptJasunsAdvances():void {
+public function acceptJasunsAdvances():void {
 	outputText("", true);
 	spriteSelect(33);
 	outputText("He smiles wider as you put your hand into his. He leaps into the pool with a finesse unrivaled and lets go of you just as you're over the edge and dive in yourself. You giggle and throw about your hair in the water, gleeful at being able to swim somewhere without fear of being attacked by assorted demons, slimes, or what-have-you. You swim swiftly through the water and manage to catch up to him as he rounds the second corner of his first lap. He's completely shocked at your adroitness in the water, and smiles a wicked and toothed grin as he speeds up, no longer content to hold back. You struggle to keep up, but find that he is simply designed for this kind of thing. Seeing that you are trying so hard, he lets up again, content with the challenge you've provided as you round out your first lap. He isn't even panting when he holds up and turns toward you. You're so focused on your swimming that you ram right into his chest, bonking your head and causing you to scowl a little and contort in the water to come up. As you come up, rubbing your head, you find that you are intimately close to Jasun and immediately blush.\n\n", false);
@@ -189,7 +189,7 @@ function acceptJasunsAdvances():void {
 	doNext(jasunSecks);
 }
 
-function jasunSecks():void {
+public function jasunSecks():void {
 	outputText("", true);
 	spriteSelect(33);
 	//Increment 'times had sex'

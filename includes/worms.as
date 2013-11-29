@@ -25,21 +25,21 @@ As Fenoxo has made his game code open source, this license DOES NOT transfer to 
 
 For further information and license requests, Dxasmodeus may be contacted through private message at the Futanari Palace. http://www.futanaripalace.com/forum.php. */
 
-function wormToggle():void {
+public function wormToggle():void {
 	spriteSelect(76);
 	outputText("While wandering, you come across a crudely illustrated sign.  It depicts an imp in obvious discomfort, covered in white little worms.  It looks as if one of them is even crawling into the imp's penis!\n\nHow do you feel about that?", true);
 	simpleChoices("Aroused",5058,"Grossed Out",5059,"Who Cares?",5061,"",0,"",0);
 }
 
-function wormsOn():void {
+public function wormsOn():void {
 	player.createStatusAffect("wormsOn",0,0,0,0);	
 }
-function wormsOff():void {
+public function wormsOff():void {
 	player.createStatusAffect("wormsOff",0,0,0,0);	
 }
 
 	
-function wormsFirstTime():void {
+public function wormsFirstTime():void {
 	spriteSelect(76);
 	outputText("As you are exploring, a rather pungent, peaty smell assails your nostrils. You hear a strange rustling and an off-kilter squishing noise in the distance. As you explore the area you come upon a most grotesque sight. Before you is a cohesive mass of writhing, wriggling worms! While normally solitary creatures, these appear to have coalesced into a monstrous living colony!\n\n", true);
 	outputText("You have never before seen such a bizarre freak of nature. You see the mass of annelids creep about across your path. It stops and spreads slightly in your direction before halting. The stench of the mass is indescribable and a thick, viscous slime covers each of the countless worms forming the collective.\n\n", false);
@@ -49,19 +49,19 @@ function wormsFirstTime():void {
 	player.createStatusAffect("metWorms",0,0,0,0);
 }
 
-function wormsFemale():void {
+public function wormsFemale():void {
 	spriteSelect(76);
 	outputText("Making your way, you stumble on another gross mass of worms. The countless struggling creatures bar the path before you. Again, you freeze in place as the horror gropes about on the ground. It appears to have no real interest in your presence and it makes its way in a direction other than yours, much to your relief.", true);	
 	doNext(13);
 }
 
-function wormsMale():void {
+public function wormsMale():void {
 	spriteSelect(76);
 	outputText("Minding your own business, you make your way through the mountain and you find yourself stopped by another mass of the sickly worms. The collective stops, apparently sensing your presence and briefly ebbs in your direction. After a few tense moments, the mass begins moving again…straight towards you at an alarming rate.\n\n", true);
 	outputText("What do you do?", false);
 	simpleChoices("Confront", 5056, "Do Nothing",5057,"",0,"",0,"Run",5053);
 }
-function wormsRun():void {
+public function wormsRun():void {
 	if(player.spe > rand(35)) {
 		outputText("Your instincts overwhelm you and you immediately turn around and run like hell in the opposite direction. You look behind you as your heart feels as if it is about to burst only to discover that the creature did not follow you. You take a moment to catch your breath and consider yourself fortunate.", true);
 		doNext(13);
@@ -73,7 +73,7 @@ function wormsRun():void {
 	}
 }
 
-function infest1():void {
+public function infest1():void {
 	spriteSelect(76);
 	outputText("Trapped within the mass of worms, you are utterly helpless. The constant moving all over your body provides naught but unwanted stimulation. Your cock, not knowing any better, springs to attention, creating a peak in the mass. The worms immediately recognize what has happened to you. One particularly fat worm finds itself perched on top of your dick's throbbing glans. You feel it prodding about your urethral opening and come to a horrible realization that your precious penis is completely vulnerable to thousands of creatures capable of invading your body!!! Before you can react or curse your fate, the fat worm quickly forces open your urethra and begins to push its way inside your dick!\n\n", false);
 	outputText("Crying out in shock, you feel the fat worm push its way, inch by inch, into your urethra. Your nerves light up like a Christmas tree as each individual cell tells you of the creature's presence and movement deeper into your body. The fat beast easily finds its way into your prostate and settles within the organ. As it settles, it begins flailing inside your sex. The sensations shift from shock to grotesque pleasure as your body only senses the stimulation conductive to orgasmic response. Your groin cramps and bloats quickly by the torrent of semen building within you and the invader's presence. Obviously sensitive to your fluids, you feel the worm thrash around some more, causing your body to respond by making more semen. The flopping creature quickly erodes any orgasmic discipline you are capable of and with a great shrill cry, you force lances of cum into the air, launching goo and worms alike in a sick display of forced pleasure. After you empty your body of spunk, the remaining worms become hyperaggressive.\n\n", false);
@@ -93,7 +93,7 @@ function infest1():void {
 }
 
 //spontaneous orgasm - chance to avoid being raped by monsters who would care.
-function infestOrgasm():void {
+public function infestOrgasm():void {
 	spriteSelect(76);
 	outputText("The ceaseless squirming of your uninvited guests send your body into paroxysms. Collapsing to your knees, you immediately begin pushing gouts of dick milk out of your body. You feel tremendous pressure in your pelvis and in your cock as you realize that you are pushing worms out with each torrent of cum! Stream upon stream of cum breaks free from the prison of your body, carrying some of the worms inside you with it. Once the orgasm passes, you collapse to the ground, totally spent. Before you pass out, you feel the unfortunate presence of the fat worm still in your body.", true);
 	stats(0,0,0,0,0,0,-100,0);
@@ -122,7 +122,7 @@ function infestOrgasm():void {
 	
 }
 
-function wormAttack():void {
+public function wormAttack():void {
 	spriteSelect(76);
 	//Dodged!
 	if(player.spe - monster.spe > 0 && int(Math.random()*(((player.spe-monster.spe)/4)+80)) > 80) {
@@ -148,7 +148,7 @@ function wormAttack():void {
 	return;
 }
 
-function wormsEntice():void {
+public function wormsEntice():void {
 	spriteSelect(76);
 	//FAIL
 	if(rand(2) == 0) {
@@ -179,7 +179,7 @@ function wormsEntice():void {
 	combatRoundOver();
 }
 
-function playerInfest():void {
+public function playerInfest():void {
 	spriteSelect(76);
 	if(player.fatigue + physicalCost(40) > 100) {
 		outputText("You try to summon up an orgasm, but you're too tired and waste your time trying!");
@@ -240,7 +240,7 @@ function playerInfest():void {
 }
 
 
-function nightTimeInfestation():void {
+public function nightTimeInfestation():void {
 	outputText("\n<b><u>Something odd happens that night...</u></b>\n");
 	outputText("You're dreaming of the time you were infected with the worms... the way their comforting bulk sat so heavily in your body, constantly keeping your horny and potent, jism and slippery white parasites practically dripping from your cum-slit with every heated moment.  It felt so good to let them in, to let them claim you, and to become the worm-packing carrier you were meant to be.  You can remember how it felt to have one slithering up your urethra even now, the tiny body trailing slime as it squirmed through your shaft towards its goal.");
 	outputText("\n\nMmmm, the way that little annelid rubbed your insides felt so good, and it only got better from there on.  After you let them get comfortable inside, you were also so horny, and it was so easy to get off.  You could just... think about squirting worms into some unsuspecting demon's vulnerable holes, and your little pets would coax your [balls] to climax.  They made you cum so fast and so hard!  You can still feel the squirming inside you, though it's getting deeper and deeper, just like the first time...");

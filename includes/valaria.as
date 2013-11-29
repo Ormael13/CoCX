@@ -1,7 +1,7 @@
 ﻿//const VELARIA_FUTA:int = 499;
 
 //Camp Menu -- [Followers] -- [Valeria]
-function valeriaFollower():void {
+public function valeriaFollower():void {
 	spriteSelect(79);
 	clearOutput();
 	outputText("You walk over to Valeria.  Seeing you approach, the armor-goo turns a slightly brighter shade of blue beneath her plates and grins.");
@@ -13,7 +13,7 @@ function valeriaFollower():void {
 }
 
 //[Valeria] -- [Appearance]
-function valeriaAppearance():void {
+public function valeriaAppearance():void {
 	clearOutput();
 	spriteSelect(79);
 	outputText("Valeria is a 6 foot tall goo-girl composed of a viscous blue goop.  She is currently wearing a suit of plated armor, and wields her gooey greatsword as a weapon.  She has a beautiful feminine face with strong, angular features, and has affected short-cropped gooey hair, hanging just past her cheeks.  Her hips are average, with a muscular, gropable bum.  Unlike most goos, Valeria has formed two normal human legs ending in normal human feet out of her gooey lower body.");
@@ -25,7 +25,7 @@ function valeriaAppearance():void {
 	doNext(valeriaFollower);
 }
 //Valeria] -- [Spar]
-function valeriaSpar():void {
+public function valeriaSpar():void {
 	clearOutput();
 	spriteSelect(79);
 	outputText("You ask Valeria if she would be up for a bit of battle practice.");
@@ -39,7 +39,7 @@ function valeriaSpar():void {
 }
 
 //[Valeria] -- [Spar] -- PC Victorious
-function pcWinsValeriaSpar():void {
+public function pcWinsValeriaSpar():void {
 	clearOutput();
 	spriteSelect(79);
 	outputText("\"<i>Oof!</i>\" Valeria grunts, nearly losing her human shape as she tumbles to the hard-packed dirt.  \"<i>All right, all right, you win!  Take it easy, partner,</i>\" she laughs, letting her greatsword dissipate back into her body.");
@@ -48,7 +48,7 @@ function pcWinsValeriaSpar():void {
 }
 
 //[Valeria] -- [Spar] -- PC Defeated
-function pcWinsValeriaSparDefeat():void {
+public function pcWinsValeriaSparDefeat():void {
 	clearOutput();
 	spriteSelect(79);
 	outputText("You collapse, ");
@@ -74,7 +74,7 @@ function pcWinsValeriaSparDefeat():void {
 }
 
 //Followers -- [Valeria] -- [Sex]
-function followersValeriaSex(display:Boolean = true):void {
+public function followersValeriaSex(display:Boolean = true):void {
 	spriteSelect(79);
 	if(display) {
 		clearOutput();
@@ -103,7 +103,7 @@ function followersValeriaSex(display:Boolean = true):void {
 }
 
 //Valeria -- [Sex] -- [Dick/No Dick]
-function valeriaDickToggle():void {
+public function valeriaDickToggle():void {
 	spriteSelect(79);
 	clearOutput();
 	//[If Valeria has a dick:] 
@@ -141,7 +141,7 @@ function valeriaDickToggle():void {
 }
 
 //Valeria -- [Sex] -- [Get Fucked]
-function valeriaGetFucked():void {
+public function valeriaGetFucked():void {
 	spriteSelect(79);
 	clearOutput();
 	outputText("You disrobe and, ");
@@ -227,7 +227,7 @@ function valeriaGetFucked():void {
 	doNext(13);
 }
 
-function gooFlation(clearText:Boolean = true):void {
+public function gooFlation(clearText:Boolean = true):void {
 	spriteSelect(79);
 	if(clearText) {
 		clearOutput();
@@ -257,7 +257,7 @@ function gooFlation(clearText:Boolean = true):void {
 }
 
 //Valeria -- [Sex] -- [Penetrate Her] (Dickwielders only)
-function penetrateValeria():void {
+public function penetrateValeria():void {
 	spriteSelect(79);
 	clearOutput();
 	outputText("\"<i>Mmm, that's a tasty-looking cock,</i>\" Valeria says as you disrobe, letting your " + cockDescript(0) + " flop free.  \"<i>I just might have to get a sample,</i>\" she chuckles, squatting down before you and taking your shaft in hand.  Rather than giving you a simple handy, however, the goo-girl places her palm against the head of your cock and presses forward.");
@@ -280,7 +280,7 @@ function penetrateValeria():void {
 }
 
 //[Valeria] -- [Sex] -- [Get Dominated]
-function valeriaSexDominated():void {
+public function valeriaSexDominated():void {
 	spriteSelect(79);
 	clearOutput();
 	outputText("Making a show of playing hesitant and nervous, you tell Valeria you'd like her to take charge.  A wide grin quickly spreads across her girlish features.  \"<i>Mmm, feeling subby today, partner?  Good, good... You just let Valeria take good care of you, " + player.mf("handsome","cutie") + ".</i>\"");
@@ -342,7 +342,7 @@ function valeriaSexDominated():void {
 }
 
 //Followers -- [Valeria] -- [Talk]
-function talkWithValeria():void {
+public function talkWithValeria():void {
 	spriteSelect(79);
 	clearOutput();
 	outputText("You ask Valeria if she wouldn't mind just talking for a little bit.");
@@ -362,7 +362,7 @@ function talkWithValeria():void {
 }
 
 //[Flirt]
-function flirtWithValeria():void {
+public function flirtWithValeria():void {
 	spriteSelect(79);
 	clearOutput();
 	outputText("You slip an arm around Valeria's slender shoulders and pull her close.  Patting your crotch, you tell her you're practically a gourmet chef for a girl like her.  She giggles and slips a hand easily into your [armor], ");
@@ -376,7 +376,7 @@ function flirtWithValeria():void {
 }
 
 //[Accept]
-function acceptValeriasNeeds():void {
+public function acceptValeriasNeeds():void {
 	spriteSelect(79);
 	clearOutput();
 	outputText("You smile and tell Valeria that you're perfectly all right with her special needs");
@@ -387,7 +387,7 @@ function acceptValeriasNeeds():void {
 	doNext(valeriaFollower);
 }
 //[Gross]
-function declineValeriasNeeds():void {
+public function declineValeriasNeeds():void {
 	spriteSelect(79);
 	clearOutput();
 	outputText("You grimace and push the goo-girl away.  You've got no interest in her corrupted 'needs,' especially with a look like that on her face.  She gasps as you push her, nearly falling over; she catches herself and glowers angrily.");
@@ -396,13 +396,13 @@ function declineValeriasNeeds():void {
 	doNext(13);
 }
 
-function takeValeria():void {
+public function takeValeria():void {
 	spriteSelect(79);
 	doNext(1);
 	equipArmor("goo armor");
 }
 
-function valeriaAndGooThreeStuff():void {
+public function valeriaAndGooThreeStuff():void {
 	clearOutput();
 	outputText("You cautiously approach with Valeria's voice egging you on, \"<i>We gonna fuck her? We're gonna fuck her, ain't we, [name]?</i>\" She affectionately fondles your ");
 	clearList();
@@ -454,7 +454,7 @@ function valeriaAndGooThreeStuff():void {
 	menu();
 	addButton(0,"Next",valeriaGooRapeII);
 }
-function valeriaGooRapeII():void {
+public function valeriaGooRapeII():void {
 	clearOutput();
 	outputText("The lump that bumped you earlier smacks off ");
 	if(player.biggestTitSize() >= 3) outputText("the valley of your cleavage");
@@ -601,7 +601,7 @@ function valeriaGooRapeII():void {
 }
 
 //Random Goo-girl Cum-Out:
-function birthOutDatGooSlut():void {
+public function birthOutDatGooSlut():void {
 	outputText("\n<b>Something odd happens...</b>\nA sudden, violent lurch in your gut nearly knocks you off your [feet]! You lower yourself to the ground before the quaking in your middle can upend you and cradle your slime-bloated belly, wondering if you're finally going to get relief from walking around with a gutful of goo.");
 	if(player.statusAffectv4("gooStuffed") > 0) outputText(" Your tits are even wobbling around wildly, shaking and jiggling obscenely inside your [armor] in a way that makes you your [nipples] more than a little leaky.");
 	outputText("\n\nYou get your answer when your [asshole] opens up to expose the goo-girl's slick core, forcing you to shudder with ecstasy as it gradually slips through your stretching anus and unleashes a torrent of slime. You bend down onto your hands, letting it pass, cumming unexpectedly at the way it caresses you as it exits your body and moaning like a some ");

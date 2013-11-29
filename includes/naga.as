@@ -1,7 +1,7 @@
 ﻿//NAGA STATUS
 //v1 - players last fuck was as naga - 1 = true, 0 = false
 //v2 - player has ever fucked as a naga.  1 = true, 0 = false
-function nagaEncounter():void {
+public function nagaEncounter():void {
 	spriteSelect(45);
 	//Create status if needed
 	if(player.hasStatusAffect("Naga") < 0) player.createStatusAffect("Naga",0,0,0,0);
@@ -138,7 +138,7 @@ function nagaEncounter():void {
 }
 
 //2a)  Ability -  Poison Bite - poisons player
-function nagaPoisonBiteAttack():void {
+public function nagaPoisonBiteAttack():void {
 	//(Deals damage over 4-5 turns, invariably reducing 
 	//your speed. It wears off once combat is over.)
 	outputText("The naga strikes with the speed of a cobra, sinking her fangs into your flesh!  ", false);
@@ -176,7 +176,7 @@ function nagaPoisonBiteAttack():void {
 
 //2b)  Ability - Constrict - entangles player, raises lust 
 //every turn until you break free
-function nagaConstrict():void {
+public function nagaConstrict():void {
 	outputText("The naga draws close and suddenly wraps herself around you, binding you in place! You can't help but feel strangely aroused by the sensation of her scales rubbing against your body. All you can do is struggle as she begins to squeeze tighter!", false);
 	player.createStatusAffect("Naga Bind",0,0,0,0); 
 	takeDamage(2+rand(4));
@@ -185,7 +185,7 @@ function nagaConstrict():void {
 
 //2c) Abiliy - Tail Whip - minus ??? HP 
 //(base it on toughness?)
-function nagaTailWhip():void {
+public function nagaTailWhip():void {
 	outputText("The naga tenses and twists herself forcefully.  ", false);
 	//[if evaded]
 	if((player.hasPerk("Evade") && rand(6) == 0)) {
@@ -207,7 +207,7 @@ function nagaTailWhip():void {
 	}
 	combatRoundOver();
 }
-function gooNagaRape():void {
+public function gooNagaRape():void {
 	outputText("", true);
 	stats(0,0,0,0,0,0,-100,0);
 	outputText("You look over at the prone form of the naga lying in the sand, her ", false);
@@ -302,7 +302,7 @@ function gooNagaRape():void {
 }
 
 //3) Victory male
-function nagaVictoryMale():void {
+public function nagaVictoryMale():void {
 	outputText("", true);
 	stats(0,0,0,0,0,0,-100,0);
 	//Male or 50% herms
@@ -389,7 +389,7 @@ function nagaVictoryMale():void {
 	return;
 }
 
-function nagaVictoryFemale():void {
+public function nagaVictoryFemale():void {
 	outputText("", true);
 	//4) Victory female
 	if(player.hasVagina()) {
@@ -447,7 +447,7 @@ function nagaVictoryFemale():void {
 	return;
 }
 
-function nagaVictoryGenderless():void {
+public function nagaVictoryGenderless():void {
 	outputText("", true);
 	//c)Centaur
 	if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) {
@@ -487,7 +487,7 @@ function nagaVictoryGenderless():void {
 	return;    	
 }
 
-function nagaFUCKSJOOOOOO():void {
+public function nagaFUCKSJOOOOOO():void {
 	outputText("", true);
 	//BIMBO!  LIKE, TOTALLY AWESOME AND CUM!
 	//[Naga-on-Female Bimbo Loss Scene]
@@ -740,7 +740,7 @@ function nagaFUCKSJOOOOOO():void {
 	eventParser(5007);
 }
 
-function nagaRapeChoice():void {
+public function nagaRapeChoice():void {
 	if(monster.HP < 1) outputText("You've defeated the naga!  ", true);
 	else outputText("The naga writhes in the sand, masturbating feverishly!  She's completely forgotten about fighting you.  ", true);
 	
@@ -767,7 +767,7 @@ function nagaRapeChoice():void {
 	eventParser(5007);
 }
 
-function nagaPlayerConstrict():void {
+public function nagaPlayerConstrict():void {
 	outputText("", true);
 	if(player.fatigue + physicalCost(10) > 100) {
 		outputText("You just don't have the energy to wrap yourself so tightly around someone right now...", true);
@@ -820,7 +820,7 @@ function nagaPlayerConstrict():void {
 	enemyAI();
 }
 
-function naggaSqueeze():void {
+public function naggaSqueeze():void {
 	outputText("", true);
 	//Squeeze - 
 	outputText("Your coils wrap tighter around your prey, leaving " + monster.pronoun2 + " short of breath. You can feel it in your tail as " + monster.pronoun3 + " struggles are briefly intensified.", false);
@@ -838,7 +838,7 @@ function naggaSqueeze():void {
 	enemyAI();
 }
 //Tease
-function naggaTease():void {
+public function naggaTease():void {
 	outputText("", true);
 	//(if poisoned) 
 	if(monster.hasStatusAffect("Naga Venom") >= 0) 
@@ -962,7 +962,7 @@ function naggaTease():void {
 	enemyAI();
 }
 
-function nagaLeggoMyEggo():void {
+public function nagaLeggoMyEggo():void {
 	outputText("", true);
 	outputText("You release " + monster.a + monster.short + " from " + monster.pronoun3 + " bonds, and " + monster.pronoun1 + " drops to the ground, catching " + monster.pronoun3 + " breath before " + monster.pronoun1 + " stands back up, apparently prepared to fight some more.", false);
 	outputText("\n\n", false);
@@ -971,7 +971,7 @@ function nagaLeggoMyEggo():void {
 }
 
 
-function eggUpANagaSpiderLike():void {
+public function eggUpANagaSpiderLike():void {
 	clearOutput();
 	outputText("As the shiny-scaled girl collapses against the sand, you scramble forward, panting not so much with the exertion of the fight as with lust and excitement.  Surely a creature as large as her has enough room to fit all your eggs?  You feel so full, and it's been so long since you last had release.");
 	
@@ -1006,7 +1006,7 @@ function eggUpANagaSpiderLike():void {
 }
 
 //Bee Naga Scene: Finished (Fenoxo) (edited)
-function beePositANagaPlease():void {
+public function beePositANagaPlease():void {
 	clearOutput();
 	outputText("You advance on the snake-woman before you with barely-concealed lust, a gradual trickle of your fluid drooling from the ovipositor slit behind you.  She recoils away in fear of your alien appearance, but in her current state she's unfit to put up more than a token resistance.  You round on her and help her up into a tender embrace, looking into her eyes as if to say, \"<i>It's okay, this won't hurt.</i>\"  She doesn't understand the words, but her searching, reptilian eyes slowly lose their fire at your reassuring gaze.");
 	outputText("\n\nGingerly, you caress her sinuous, scaled body, exploring the curvy flow of muscle as scales down to the slight, almost imperceptible flare of her humanoid waist.  She squirms against you, her tail lashing in the sands to either side, thumping anxiously.  Soon, your curious fingers find her soft opening, hidden amongst the scales, and as you press inside, you find a second set of wet lips along with a harder, pill-shaped organ that can only be a clit.  The woman's fanged mouth parts in a wordless expression of pleasure, and as you have her distracted, you let your stinger slide through the scales on her underbelly.");

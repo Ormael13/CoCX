@@ -2,7 +2,7 @@
 //const EVENT_PARSER_ESCAPE:int = 800;
 //const PHYLLA_GEMS_HUNTED_TODAY:int = 893;
 
-function eventParser(eventNo:*):void {
+public function eventParser(eventNo:*):void {
 	//Clear banked buttons
 
 	trace("EVENT CODE: " + eventNo);
@@ -47,7 +47,7 @@ function eventParser(eventNo:*):void {
 }
 
 
-function doSystem(eventNo:Number):void {
+public function doSystem(eventNo:Number):void {
 	//@ camp
 	//(clear data/appearance buttons if not at camp
 	trace("System Event", eventNo)
@@ -347,13 +347,13 @@ function doSystem(eventNo:Number):void {
 
 	errorPrint(eventNo);		// Dump the system state to the window so the player can file a decent bug-report
 }
-function getCurrentStackTrace():String		// Fuck, stack-traces only work in the debug player.
+public function getCurrentStackTrace():String		// Fuck, stack-traces only work in the debug player.
 {
 	var tempError:Error = new Error();
 	var stackTrace:String = tempError.getStackTrace();
 	return stackTrace;
 }
-function errorPrint(details:* = null)
+public function errorPrint(details:* = null)
 {
 	rawOutputText("<b>Congratulations, you've found a bug!</b>", true);
 	rawOutputText("\nError: Unknown event!");
@@ -378,7 +378,7 @@ function errorPrint(details:* = null)
 
 
 //Argument is time passed.  Pass to event parser if nothing happens.
-function goNext(time:Number, defNext:Boolean):Boolean  {
+public function goNext(time:Number, defNext:Boolean):Boolean  {
 	//Update system time
 	//date = new Date();
 	//trace ("MONTH: " + date.month + " DATE: " + date.date + " MINUTES: " + date.minutes);
@@ -2940,7 +2940,7 @@ function goNext(time:Number, defNext:Boolean):Boolean  {
 	return false;
 }
 
-function cheatTime(time:Number):void {
+public function cheatTime(time:Number):void {
 	while(time > 0) {
 		time--;
 		model.time.hours++;
@@ -2952,7 +2952,7 @@ function cheatTime(time:Number):void {
 	statScreenRefresh();
 }
 
-function growHair(amount:Number = .1):Boolean {
+public function growHair(amount:Number = .1):Boolean {
 	//Grow hair!
 	temp = player.hairLength;
 	player.hairLength += amount;

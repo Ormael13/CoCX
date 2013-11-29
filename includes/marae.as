@@ -1,4 +1,4 @@
-﻿function discoverBoat():void {
+﻿public function discoverBoat():void {
 	player.createStatusAffect("Boat Discovery",0,0,0,0);
 	outputText("You journey around the lake, seeking demons to fight", true);
 	if(player.cor > 60) outputText(" or fuck", false);
@@ -6,7 +6,7 @@
 	outputText("<b>You have discovered the lake boat!</b>\n(You may return and use the boat to explore the lake's interior by using the 'places' menu.)", false);
 	doNext(13);
 }
-function encounterMarae():void {
+public function encounterMarae():void {
 	spriteSelect(40);
 	outputText("Like a hidden emerald jewel, a small island appears in the distance.  You wager that you're somewhere near the center of this lake.  How coincidental.   You row closer, eager to get out of the boat and stretch your " + player.legs() + ".  The rowboat grounds itself in the moist earth of the island, coming to a dead stop.   You climb out, noting that this island is little more than a raised mound of earth and grass, with a small tree perched atop its apex.  ", false);
 	//Dungeon operational
@@ -115,7 +115,7 @@ function encounterMarae():void {
 	}	
 }
 
-function maraeBadEnd():void {
+public function maraeBadEnd():void {
 	spriteSelect(40);
 	outputText("", true);
 	if(player.hasStatusAffect("Met Corrupt Marae") < 0) outputText("The goddess flows out of the tree, stepping away from it as a living woman, curvy and nude.\n\n", false);
@@ -164,7 +164,7 @@ function maraeBadEnd():void {
 	eventParser(5035);
 }
 
-function maraeStealLethicite():void {
+public function maraeStealLethicite():void {
 	spriteSelect(40);
 	outputText("", true);
 	//(SUCCESS) 
@@ -226,7 +226,7 @@ function maraeStealLethicite():void {
 	}
 }
 
-function level2MaraeEncounter():void {
+public function level2MaraeEncounter():void {
 	spriteSelect(40);
 	flags[CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] = 1;
 	outputText("", true);
@@ -278,7 +278,7 @@ function level2MaraeEncounter():void {
 	}
 }
 	
-function MaraeIIStageII():void {
+public function MaraeIIStageII():void {
 	spriteSelect(40);
 	outputText("", true);
 	flags[CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] = 2;
@@ -418,7 +418,7 @@ function MaraeIIStageII():void {
 	doNext(MaraePt2RoundIIIPrizes);
 }
 
-function MaraePt2RoundIIIPrizes():void {
+public function MaraePt2RoundIIIPrizes():void {
 	spriteSelect(40);
 	outputText("", true);
 	//[EPILOGUE]
@@ -519,7 +519,7 @@ function MaraePt2RoundIIIPrizes():void {
 	doNext(14);
 }
 
-function MaraeIIFlyAway():void {
+public function MaraeIIFlyAway():void {
 	spriteSelect(40);
 	outputText("", true);
 	outputText("You launch into the air and beat your wings, taking to the skies.  The tentacle-tree lashes at you, but comes up short.  You've escaped!  Something large whooshes by, and you glance up to see your boat sailing past you.  She must have hurled it at you!  It lands with a splash near the mooring, somehow surviving the impact.  You dive down and drag it back to the dock before you return to camp.  That was close!", false);

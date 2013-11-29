@@ -10,7 +10,7 @@
 //const KIHA_CHOKED_OUT_PC:int = 432;
 
 //Encounter Dragon-Gal 
-function encounterKiha():void {
+public function encounterKiha():void {
 	outputText("", true);
 	spriteSelect(72);
 	if(followerKiha() && flags[KIHA_NEEDS_TO_REACT_TO_HORSECOCKING] == 1) {
@@ -111,7 +111,7 @@ function encounterKiha():void {
 	}
 }
 //[Buy Passage] 
-function offerToBuyPassageFromKiha():void {
+public function offerToBuyPassageFromKiha():void {
 	outputText("", true);
 	spriteSelect(72);
 	outputText("You jingle your gem pouch and ask if you could pay her to allow you passage.  Kiha shoulders her axe and scratches at one of her horns, mulling the idea over.  She stops and abruptly shakes her head.  \"<i>Not today.  Now scram, before I change my mind!</i>\"\n\n", false);
@@ -121,14 +121,14 @@ function offerToBuyPassageFromKiha():void {
 	simpleChoices("Fight",meetKihaAndFight,"",0,"",0,"",0,"Leave",leaveWhenMeetingAgressiveKiha);
 }
 //[Leave] 
-function leaveWhenMeetingAgressiveKiha():void {
+public function leaveWhenMeetingAgressiveKiha():void {
 	outputText("", true);
 	spriteSelect(72);
 	outputText("You nod and step back, retreating back towards camp.  You've no desire to fight such a fiery opponent.", false);
 	doNext(13);
 }
 //[Fight]
-function meetKihaAndFight():void {
+public function meetKihaAndFight():void {
 	outputText("", true);
 	spriteSelect(72);
 	outputText("You step closer and proclaim that you go where you please.  Kiha snorts and says, \"<i>Cute.  Sadly, misplaced confidence will only make this hurt that much more.</i>\"", false);
@@ -136,7 +136,7 @@ function meetKihaAndFight():void {
 	startCombat(42);
 }
 //[Ask Why]
-function askWhy():void {
+public function askWhy():void {
 	outputText("", true);
 	spriteSelect(72);
 	outputText("You ask why she's trying to drive you off.  Confusion breaks out across Kiha's brow for a moment before her visage hardens back into a confident sneer.  \"<i>I don't need to explain myself to you.  I was strong enough to break out of Lethice's base, and I've been strong enough to murder every lackey she's sent after me.</i>\"\n\n", false);
@@ -147,7 +147,7 @@ function askWhy():void {
 	startCombat(42);
 }
 //[Pay]
-function payKihaTribute():void {
+public function payKihaTribute():void {
 	outputText("", true);
 	spriteSelect(72);
 	outputText("You sigh and pay her 200 gems.  She doesn't even mention that it was originally your idea, but still, you're getting what you want - the ability to explore her territory unhindered.  Of course, you have no idea how long this 200 gems will last.\n\n", false);
@@ -160,7 +160,7 @@ function payKihaTribute():void {
 	//(do a 'Kiha' exploration with chances of fantabulous prizes)
 	doNext(kihaExplore);	
 }
-function kihaExplore(clearScreen:Boolean = true):void {
+public function kihaExplore(clearScreen:Boolean = true):void {
 	if(clearScreen) outputText("", true);
 	//spriteSelect(72);
 	flags[KIHA_TOLL_DURATION]--;
@@ -186,7 +186,7 @@ function kihaExplore(clearScreen:Boolean = true):void {
 }
 
 //[This was my idea!]
-function tellKihaTributeWasYourIdea():void {
+public function tellKihaTributeWasYourIdea():void {
 	outputText("", true);
 	spriteSelect(72);
 	outputText("You ask why she changed her mind about your idea.  Kiha's face screws up for a moment, her chocolate-hued visage distorting into an irritated grimace.  This may have been a mistake.  She screams, \"<i>As if someone like you would have an idea worthy of being adopted by me!  I forgot about your insignificant offer as soon as I was away from you.  This tribute was devised solely with my own sizable wit and cunning!</i>\"\n\n", false);
@@ -196,7 +196,7 @@ function tellKihaTributeWasYourIdea():void {
 }
 
 //*Generic PC Victory Introduction: 
-function kihaVictoryIntroduction():void {
+public function kihaVictoryIntroduction():void {
 	flags[PC_WIN_LAST_KIHA_FIGHT] = 1;
 	outputText("", true);
 	spriteSelect(72);
@@ -249,7 +249,7 @@ function kihaVictoryIntroduction():void {
 	choices("Masturbate ",forceMasturbate,"Use Tail",useHerTail,"FuckHerPussy",fuckHer,"FuckHerAss",buttFuck,"Talk",wordRape,"",0,"",0,"",0,"",0,"Leave",5007);
 }
 //*Generic PC Loss Intro 
-function kihaLossIntro():void {
+public function kihaLossIntro():void {
 	outputText("", true);	
 	spriteSelect(72);
 	//(Lust)
@@ -287,7 +287,7 @@ function kihaLossIntro():void {
 }
 
 //*Milky Tit Humiliation - Fen
-function kihaMilkTitHumiliation():void {
+public function kihaMilkTitHumiliation():void {
 	//(Does not use the defeat intro - clear screen)
 	outputText("", true);
 	spriteSelect(72);
@@ -327,7 +327,7 @@ function kihaMilkTitHumiliation():void {
 	eventParser(5007);
 }
 //Genderless - Lukadoc (Zed)
-function kihaGenderlessBeating():void {
+public function kihaGenderlessBeating():void {
 	spriteSelect(72);
 	outputText("\"<i>What a pussy!</i>\" she yells at you, noticing your lack of any gender upon denuding you.  \"<i>What's the problem, runt? Too scared that evil imps and goblins will abuse you?</i>\"  She hits the ground with her tail in frustration and grabs her axe. \"<i>What a waste of time. You're useless both in battle and out of it.</i>\"  She begins kicking you, eventually hitting you hard enough to knock you unconscious.", false);
 	takeDamage(1000);
@@ -335,7 +335,7 @@ function kihaGenderlessBeating():void {
 }
 
 //*Male - Adj
-function kihaRapesMen():void {
+public function kihaRapesMen():void {
 	outputText("", true);
 	spriteSelect(72);
 	var x:Number = player.cockThatFits(monster.vaginalCapacity());
@@ -374,7 +374,7 @@ function kihaRapesMen():void {
 	eventParser(5007);
 }
 //*Herm - Adj
-function kihaRapesHerms():void {
+public function kihaRapesHerms():void {
 	outputText("", true);
 	spriteSelect(72);
 	outputText("The dragoness rolls her eyes and closes the distance between the two of you with a slow, deliberate pace.  She easily bats away your weakened defenses until she is standing inches from you, her tail whipping back and forth as a cold smile curls on her dusky lips.  \"<i>Strip,</i>\" she commands, her voice a quiet whisper.  When you fail to comply, a crimson thunderbolt cracks across your sight and your face explodes with pain.  Blinking, you stagger back a few steps, Kiha's backhand still raised.  Annoyance playing over her face, she holds you in a smoldering glare as she hisses, \"<i>I don't repeat myself,</i>\" from between clenched teeth.  Rather than antagonize the dragon girl further, you comply, shedding your " + player.armorName + " to bare your exposed body to her.  A flash of delight flickers across her mouth but is quickly quelled by her mask of disdain.  \"<i>Weak, puny, and utterly incapable.  Tch, I suppose it can't be helped,</i>\" she mutters, loudly enough for you to hear.  Advancing on you once again, she places a clawed hand on your " + chestDesc() + ", almost tenderly.  Then, in a swift motion, she punches the heel of her palm against your sternum, abruptly knocking you to the ground.  Bending over your prone body, she lowers herself to straddle your " + hipDescript() + ", her muscular, scaled legs squeezing your lower body in a clenching grip.\n\n", false);
@@ -410,7 +410,7 @@ function kihaRapesHerms():void {
 }
 
 //Mutual Masturbation - A Tsundere Masturbation Christmas Carol, by Gats Dickings
-function tsundereMasturbationChristmasCarol():void {
+public function tsundereMasturbationChristmasCarol():void {
 	outputText("", true);
 	spriteSelect(72);
 	outputText("You walk towards the draconic woman, removing your " + player.armorName + " as you observe her firm, ", false);
@@ -462,7 +462,7 @@ function tsundereMasturbationChristmasCarol():void {
 	eventParser(5007);
 }
 //*Victory Tail-dildo, for girls - Fencrafted for maximum pomf (Zed)
-function kihaVictoryPomfTail():void {
+public function kihaVictoryPomfTail():void {
 	outputText("", true);
 	spriteSelect(72);
 	outputText("You approach the ", false);
@@ -513,7 +513,7 @@ function kihaVictoryPomfTail():void {
 	eventParser(5007);
 }
 //*Victory Dicking - Fencrafted
-function victoryDickKiha():void {
+public function victoryDickKiha():void {
 	spriteSelect(72);
 	var x:Number = player.cockThatFits(monster.vaginalCapacity());
 	var y:Number = player.cockThatFits2(monster.vaginalCapacity());
@@ -611,7 +611,7 @@ function victoryDickKiha():void {
 	eventParser(5007);
 }
 
-function kihaRapesLittleGirlsISawItOnTheNews():void {
+public function kihaRapesLittleGirlsISawItOnTheNews():void {
 	outputText("", true);
 	spriteSelect(72);
 	outputText("\"<i>Well, well... what a cute vagina you have here!</i>\" she exclaims mockingly, pushing her palm against your moist sex.  With a wicked smile, the dragon girl forcibly shoves a pair of fingers inside you, their long, hard tips parting your sensitive flesh mercilessly.  You yelp in both pain and pleasure at her forced entrance, squirming uncomfortably on her hand.  \"<i>Haha!  You're enjoying this?  Don't fret slut, we're just getting started.</i>\"  Pulling back ever so slightly, Kiha slides another finger in, stretching your pussy with the thickness of her digits, furiously working them in and out of your snatch, relishing the gasping blush that spreads across your face.\n\n", false);
@@ -639,7 +639,7 @@ function kihaRapesLittleGirlsISawItOnTheNews():void {
 }
 
 //Conversation Only - Emotional Rape! (40- Corruption! PUREBABIES ONLY) (Zed)
-function rapeKihaWithWORDS():void {
+public function rapeKihaWithWORDS():void {
 	outputText("", true);
 	spriteSelect(72);
 	if(flags[KIHA_TALK_STAGE] == 0) {
@@ -689,7 +689,7 @@ function rapeKihaWithWORDS():void {
 Slowly, the conversation winds back around to the story of her origin.  You casually mention that she owes you at least the attempt to remember more now since you met the terms of your agreement, a claim she meets with more than the expected skepticism.  Cocking an eyebrow at her protest, you raise your face skyward and, cupping hands around 
 */
 
-function kihaAI():void {
+public function kihaAI():void {
 	var select:Number = rand(5);
 	if(select <= 1) eAttack();
 	else if(select == 2) {
@@ -700,7 +700,7 @@ function kihaAI():void {
 	else kihaTimeWaster();
 	
 }
-function kihaTimeWaster():void {
+public function kihaTimeWaster():void {
 	spriteSelect(72);
 	outputText("She supports the axe on a shoulder, cracking her neck and arching her back to stretch herself, giving you an unintended show.  ", false);
 	stats(0,0,0,0,0,0,5,0);
@@ -708,7 +708,7 @@ function kihaTimeWaster():void {
 }
 
 //This could be silly mode worthy! Should Expand? oh ok
-function sillyModeKihaAttack():void {
+public function sillyModeKihaAttack():void {
 	spriteSelect(72);
 	outputText("Before you can stop to think, the dragon-woman steps back - throwing her axe into the air before she starts sprinting towards you. In seconds she's reached a hair's distance between her lithe form and your own, her fist recoiling and time seemingly stopping to allow you to note the powerful energy seeping from her arms.  ", false);
 	//Miss: 
@@ -731,7 +731,7 @@ function sillyModeKihaAttack():void {
 	combatRoundOver();
 }
 
-function kihaFirePunch():void {
+public function kihaFirePunch():void {
 	spriteSelect(72);
 	outputText("The draconic girl throws her trusty weapon into the sodden ground, using the distraction to build up balls of flame around her fists.  She runs towards you, launching herself in your direction with a flurry of punches.\n", false);
 	
@@ -762,7 +762,7 @@ function kihaFirePunch():void {
 
 
 //Fire breath
-function kihaFireBreath():void {
+public function kihaFireBreath():void {
 	spriteSelect(72);
 	outputText("Kiha throws her arms back and roars, exhaling a swirling tornado of fire directly at you!\n", false);
 	//Miss: 
@@ -797,7 +797,7 @@ Miss: You nimbly turn aside and roll her off your shoulder at the last moment, l
 */
 
 //Kiha PC victory anal scene - by Space.
-function analRapuzulaKiha():void {
+public function analRapuzulaKiha():void {
 	//Requires at least one penis with area <= 20
 	outputText("", true);
 	spriteSelect(72);

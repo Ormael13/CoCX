@@ -6,7 +6,7 @@
 //2. AKBAL'S MY BITCH
 
 //[First Encounter]
-function supahAkabalEdition():void
+public function supahAkabalEdition():void
 {
 	spriteSelect(2);
 	//Make sure that the buttchange is set correctly
@@ -52,7 +52,7 @@ function supahAkabalEdition():void
 }
 
 //[Talk]
-function superAkbalioTalk():void
+public function superAkbalioTalk():void
 {
 	spriteSelect(2);
 	outputText("", true);
@@ -63,7 +63,7 @@ function superAkbalioTalk():void
 }
 
 //[Encounter if previously submitted]
-function repeatAkbalPostSubmission():void
+public function repeatAkbalPostSubmission():void
 {
 	spriteSelect(2);
 	outputText("", true);
@@ -74,7 +74,7 @@ function repeatAkbalPostSubmission():void
 }
 
 //[Deny]
-function akbalDeny():void
+public function akbalDeny():void
 {
 	spriteSelect(2);
 	outputText("", true);
@@ -84,7 +84,7 @@ function akbalDeny():void
 }
 
 //[Encounter if previously fought and won/raped him]
-function ackbalRepeatAfterWin():void
+public function ackbalRepeatAfterWin():void
 {
 	spriteSelect(2);
 	outputText("", true);
@@ -98,7 +98,7 @@ function ackbalRepeatAfterWin():void
 }
 
 //[Encounter if previously fought and lost]
-function ackbalRepeatAfterLoss():void
+public function ackbalRepeatAfterLoss():void
 {
 	spriteSelect(2);
 	outputText("", true);
@@ -109,7 +109,7 @@ function ackbalRepeatAfterLoss():void
 }
 
 //[Fight]
-function startuAkabalFightomon():void
+public function startuAkabalFightomon():void
 {
 	spriteSelect(2);
 	outputText("", true);
@@ -120,7 +120,7 @@ function startuAkabalFightomon():void
 }
 
 //[Submit]
-function akbalSubmit():void
+public function akbalSubmit():void
 {
 	spriteSelect(2);
 	slimeFeed();
@@ -354,7 +354,7 @@ function akbalSubmit():void
 //[General End]
 //Set flag after submitting, then clear it and run
 //this before going to camp?
-function akbalSubmissionFollowup():void
+public function akbalSubmissionFollowup():void
 {
 	spriteSelect(2);
 	outputText("", true);
@@ -400,7 +400,7 @@ function akbalSubmissionFollowup():void
 }
 
 //[Abilities]
-function akabalAttack():void
+public function akabalAttack():void
 {
 	//Chances to miss:
 	var damage:Number = 0;
@@ -475,7 +475,7 @@ function akabalAttack():void
 	combatRoundOver();
 }
 
-function akbalLustAttack():void
+public function akbalLustAttack():void
 {
 	//*Lust Attack - 
 	if (player.hasStatusAffect("Whispered") < 0)
@@ -494,7 +494,7 @@ function akbalLustAttack():void
 	combatRoundOver();
 }
 
-function akbalSpecial():void
+public function akbalSpecial():void
 {
 	//*Special Attack A - 
 	if (rand(2) == 0 && player.spe > 20)
@@ -546,7 +546,7 @@ function akbalSpecial():void
 }
 
 //*Support ability - 
-function akbalHeal():void
+public function akbalHeal():void
 {
 	if (monster.HP == eMaxHP())
 		outputText("Akbal licks himself, ignoring you for now.", false);
@@ -563,7 +563,7 @@ function akbalHeal():void
 
 //Victory/Defeat Scenes
 //[Victory via HP]
-function victoryChoices():void
+public function victoryChoices():void
 {
 	flags[AKBAL_SUBMISSION_STATE] = 1;
 	//[General Victory]
@@ -607,7 +607,7 @@ function victoryChoices():void
 	eventParser(5007);
 }
 
-function rapeAkbalForcedFemaleOral():void
+public function rapeAkbalForcedFemaleOral():void
 {
 	flags[AKBAL_BITCH_Q]++;
 	outputText("", true);
@@ -671,7 +671,7 @@ function rapeAkbalForcedFemaleOral():void
 }
 
 //Standard rapes - buttfucks and oral
-function rapeAkbal():void
+public function rapeAkbal():void
 {
 	flags[AKBAL_BITCH_Q]++;
 	var primary:Number = player.cockThatFits(50);
@@ -897,7 +897,7 @@ function rapeAkbal():void
 	eventParser(5007);
 }
 
-function girlsRapeAkbal():void
+public function girlsRapeAkbal():void
 {
 	flags[AKBAL_BITCH_Q]++;
 	outputText("", true);
@@ -983,7 +983,7 @@ function girlsRapeAkbal():void
 	doNext(girlsRapeAkbalPart2);
 }
 
-function girlsRapeAkbalPart2():void
+public function girlsRapeAkbalPart2():void
 {
 	outputText("", true);
 	hideUpDown();
@@ -1124,7 +1124,7 @@ function girlsRapeAkbalPart2():void
 	eventParser(5007);
 }
 
-function loseToAckballllllz():void
+public function loseToAckballllllz():void
 {
 	flags[AKBAL_SUBMISSION_STATE] = -1;
 	flags[AKBAL_BITCH_Q] = 0;
@@ -1222,7 +1222,7 @@ function loseToAckballllllz():void
 //Extra Scenes
 //[Jojo Whispered Sex scene]
 //(Requires the Whispered perk and Jojo as follower)
-function whisperJojobait():void
+public function whisperJojobait():void
 {
 	outputText("", true);
 	outputText(images.showImage("akbal-deepwoods-male-jojosex"));
@@ -1289,7 +1289,7 @@ function whisperJojobait():void
    Evasion+5
  */
 
-function akbalBigButtSubmit():void
+public function akbalBigButtSubmit():void
 {
 	clearOutput();
 	outputText(images.showImage("akbal-deepwoods-bigbuttanaled"));
@@ -1372,7 +1372,7 @@ function akbalBigButtSubmit():void
 //By Foxxling
 //Akbal’s My Bitch Expansion
 //Auto Rape Intro Scene
-function akbitchEncounter():void
+public function akbitchEncounter():void
 {
 	clearOutput();
 	outputText("As you explore the deep woods you begin to hear a soft slurping sound. In this world you know that any strange sound, especially the wet ones, most likely means something dangerous is up ahead... or something dangerous is fucking something a little less dangerous.  As you cautiously advance you spy the pelt of the jaguar demon, Akbal.  The demon jaguar sits in the middle of the clearing with one leg extended as he repeatedly swipes his wide tongue against his hole, probably cleaning up imp spunk thanks to you.  He is so utterly focused on the task that he doesn’t notice your approach.");
@@ -1390,7 +1390,7 @@ function akbitchEncounter():void
 	}
 }
 
-function akbitchNoThnx(clear:Boolean = true):void
+public function akbitchNoThnx(clear:Boolean = true):void
 {
 	if (clear)
 		clearOutput();
@@ -1403,7 +1403,7 @@ function akbitchNoThnx(clear:Boolean = true):void
 }
 
 //{Choose Rape}
-function takeAdvantageOfAkbitch():void
+public function takeAdvantageOfAkbitch():void
 {
 	clearOutput();
 	outputText("You creep behind the many woods trees surrounding Akbal’s clearing until your eyes chance upon a vine.  It’s spongy, long, and hard to rip apart - in other words: perfect.");
@@ -1458,7 +1458,7 @@ function takeAdvantageOfAkbitch():void
 }
 
 //Basic AMB Scene (no +70 stats)
-function basicAkbitchScene():void
+public function basicAkbitchScene():void
 {
 	clearOutput();
 	outputText("With a grin, you tug on Akbal’s collar, and he lets out a barely suppressed purr.  ");
@@ -1476,7 +1476,7 @@ function basicAkbitchScene():void
 }
 
 //Butt Fuck - Vaginal - Anal
-function buttFuckbuttFuckbuttFuckAkbal():void
+public function buttFuckbuttFuckbuttFuckAkbal():void
 {
 	clearOutput();
 	outputText(images.showImage("akbal-deepwoods-male-buttfuck"));
@@ -1504,7 +1504,7 @@ function buttFuckbuttFuckbuttFuckAkbal():void
 }
 
 //- page turn -
-function fuckAkbitchsButt():void
+public function fuckAkbitchsButt():void
 {
 	clearOutput();
 	outputText(images.showImage("akbal-deepwoods-male-buttfuck2"));
@@ -1538,7 +1538,7 @@ function fuckAkbitchsButt():void
 	doNext(13);
 }
 
-function topAkbitchFromDaBottom():void
+public function topAkbitchFromDaBottom():void
 {
 	clearOutput();
 	outputText(images.showImage("akbal-deepwoods-male-akbalonback"));
@@ -1561,7 +1561,7 @@ function topAkbitchFromDaBottom():void
 	addButton(0, "Next", topAkbitchFromBottomDuex);
 }
 
-function topAkbitchFromBottomDuex():void
+public function topAkbitchFromBottomDuex():void
 {
 	clearOutput();
 	outputText(images.showImage("akbal-deepwoods-male-akbalonback2"));
@@ -1606,7 +1606,7 @@ function topAkbitchFromBottomDuex():void
 
 //AMB Strength Scene
 //70+
-function akbitchHighStrengthVariant():void
+public function akbitchHighStrengthVariant():void
 {
 	clearOutput();
 	outputText("With a wicked grin, you rip off your [armor] and grab the bound demon by the scruff on his neck.  He does this sexy little wiggle as you hoist him until he reaches eye level, easily manipulating his light weight as you inspect his slim, toned body.  His chest heaves, his nipples stand at attention, and his erect demon-cat dick drools a heavy river of thick cream, darkening the fur on his sack and inner thighs.  This is going to be fun.");
@@ -1728,7 +1728,7 @@ function akbitchHighStrengthVariant():void
 
 //AMB Speed Scene
 //70
-function akbalBitchSpeed():void
+public function akbalBitchSpeed():void
 {
 	clearOutput();
 	outputText("Akbal groans as he lies face first in the dirt.  His body has already morphed into a more humanoid form.  You smile as you watch him hump the grass, two hollows forming in his ass cheeks as they clench and unclench.  The sight of him futilely trying to stimulate himself gets you so hot you practically rip off your [armor] and grab the tied up demon with a grin.");
@@ -1826,7 +1826,7 @@ function akbalBitchSpeed():void
 
 //AMB Toughness Scene
 //70
-function akbitchToughness():void
+public function akbitchToughness():void
 {
 	clearOutput();
 	//[if (toughness > 70)]

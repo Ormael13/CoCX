@@ -22,7 +22,7 @@ Item Use Scenes Intro (Victory) (Z edited)
 
 // TIMES_MET_CHAMELEON:int = 561;
 
-function encounterChameleon():void {
+public function encounterChameleon():void {
 	clearOutput();
 	startCombat(54);
 	spriteSelect(89);
@@ -48,7 +48,7 @@ function encounterChameleon():void {
 	doNext(1);
 }
 
-function chameleonAI():void {
+public function chameleonAI():void {
 	spriteSelect(89);
 	var select:int = rand(3);
 	if(select == 0) rollKickClawWhatTheFuckComboIsThisShit();
@@ -56,7 +56,7 @@ function chameleonAI():void {
 	else chameleonClaws();
 	
 }
-function chameleonTongueAttack():void {
+public function chameleonTongueAttack():void {
 	monster.weaponName = "tongue";
 	monster.weaponVerb = "tongue-slap";
 	monster.weaponAttack = 10;
@@ -69,7 +69,7 @@ function chameleonTongueAttack():void {
 }
 
 //Ignores armor
-function chameleonClaws():void {
+public function chameleonClaws():void {
 	//Blind dodge change
 	if(monster.hasStatusAffect("Blind") >= 0 && rand(3) < 1) {
 		outputText(monster.capitalA + monster.short + " completely misses you with a blind claw-attack!\n", false);
@@ -89,7 +89,7 @@ function chameleonClaws():void {
 }
 
 //Attack 3: 
-function rollKickClawWhatTheFuckComboIsThisShit():void {
+public function rollKickClawWhatTheFuckComboIsThisShit():void {
 	//Blind dodge change
 	if(monster.hasStatusAffect("Blind") >= 0 && rand(3) < 1) {
 		outputText(monster.capitalA + monster.short + " completely misses you with a blind roll-kick!\n", false);
@@ -115,7 +115,7 @@ function rollKickClawWhatTheFuckComboIsThisShit():void {
 
 
 //LOSS SCENES (Intro) (Z edited)
-function loseToChameleonGirl():void {
+public function loseToChameleonGirl():void {
 	clearOutput();
 	spriteSelect(89);
 	//-Lose by lust
@@ -139,7 +139,7 @@ function loseToChameleonGirl():void {
 
 
 //Herm Loss (Z edited)
-function loseToChameleonWithCockAnBallsAnCunt():void {
+public function loseToChameleonWithCockAnBallsAnCunt():void {
 	var x:int = player.biggestCockIndex();
 	spriteSelect(89);
 	outputText("\n\n\"<i>Hah! You didn't think you could beat me in </i>my<i> bog, did you?</i>\" the haughty chameleon laughs. She stalks towards you, swaying her wide hips in an exaggerated imitation of a dominatrix, shedding her spare clothing as she approaches.  She stops and stands before you, trying her best to look intimidating.  Wondering what exactly she has planned for you, you await your fate.  From the worried look in her eyes, you can tell she has no idea what she's doing.");
@@ -170,7 +170,7 @@ function loseToChameleonWithCockAnBallsAnCunt():void {
 
 
 //-Male Loss (Z edited)
-function dudesLoseToChamChams():void {
+public function dudesLoseToChamChams():void {
 	var x:int = rand(player.totalCocks());
 	spriteSelect(89);
 	outputText("\n\nRecognizing that you're no danger, her skin shifts back into its natural " + monster.skinTone + " coloration as she walks towards you.  She swings her hips seductively as she splashes slowly through the water and licks her lips with a loud smack of her tongue, then reaches out and forcefully pulls your " + player.armorName + " above your waist before you can even try to resist her advances, and pushes you back against a tree.  With a few quick pulls of fabric she's stripped her own clothes, and she tosses her thong over a low-hanging branch.  The other band of silk she uses to quickly bind your wrists.  Were you in any shape to fight back you could pull free, but you're too ");
@@ -202,7 +202,7 @@ function dudesLoseToChamChams():void {
 }
 
 //-Female Loss (Z edited)
-function loseToChamChamWithPCCunt():void {
+public function loseToChamChamWithPCCunt():void {
 	spriteSelect(89);
 	outputText("\n\n\"<i>Hah! You didn't think you could beat me in </i>my<i> bog, did you?</i>\"  She stalks toward you, swaying her wide hips in an exaggerated imitation of a dominatrix, shedding her clothes as she approaches.   Positioning her glistening sex right in front of your face, she looks down and makes the cruellest smile she can manage.  Too busy stifling laughter at the awkward display, you make no move to pleasure her.  Looking bewildered that you aren't following along, the chameleon girl opens and closes her mouth, trying to find words.  She finally stammers out, \"<i>W-well?  Get... to it?</i>\"  You resist the urge to ask her for a detailed explanation of what she wants and resolve yourself to play along.  You'd be too exhausted to resist if she really tried to force you, and this may lessen the severity of the experience.");
 	
@@ -221,7 +221,7 @@ function loseToChamChamWithPCCunt():void {
 }
 
 //VICTORY SCENES INTRO(Z edited)
-function defeatChameleonGirl():void {
+public function defeatChameleonGirl():void {
 	clearOutput();
 	spriteSelect(89);
 	//-Win by lust
@@ -253,7 +253,7 @@ function defeatChameleonGirl():void {
 }
 
 //-Herm Victory (Z edited)
-function fuckDatChameleonAsACoolGuyGirlHerm():void {
+public function fuckDatChameleonAsACoolGuyGirlHerm():void {
 	clearOutput();
 	spriteSelect(89);
 	var x:Number = player.cockThatFits(monster.vaginalCapacity());
@@ -279,7 +279,7 @@ function fuckDatChameleonAsACoolGuyGirlHerm():void {
 
 //-Male (Z edited)
 //(Savin's note: This only makes a lot of sense for biggus dickus characters; consider an alternative for traps/weany dick characters. We don't all have even footlongs) (yuh)
-function manFucksChameleonWithBiggishWang():void {
+public function manFucksChameleonWithBiggishWang():void {
 	clearOutput();
 	spriteSelect(89);
 	var x:int = player.biggestCockIndex();
@@ -306,7 +306,7 @@ function manFucksChameleonWithBiggishWang():void {
 }
 
 //-Female (for herms without dicks) (Z edited)
-function femaleHasWinSexWithChamCham():void {
+public function femaleHasWinSexWithChamCham():void {
 	clearOutput();
 	spriteSelect(89);
 	outputText("You shed your " + player.armorName + " and approach the fallen chameleon girl");
@@ -332,7 +332,7 @@ function femaleHasWinSexWithChamCham():void {
 }
 
 //Item Use Scenes Intro (Victory) (Z edited)
-function useAnItemOnTheChamcham():void {
+public function useAnItemOnTheChamcham():void {
 	clearOutput();
 	spriteSelect(89);
 	outputText("Looking at the poor girl kneeling pathetically before you, you almost feel sorry for her.  But, she did try to rape you and claim that you were on 'her' territory.  You rummage through your bags, trying to find a fun way to punish her.  Fun for you, at least.");
@@ -351,7 +351,7 @@ function useAnItemOnTheChamcham():void {
 
 //-P. Succubi Milk or Succubi Milk (Z edited)
 //Prerequisite: at least one dick
-function giveTheChameleonASuccubiMilk():void {
+public function giveTheChameleonASuccubiMilk():void {
 	clearOutput();
 	spriteSelect(89);
 	outputText("You find a bottle of Succubi Milk tucked away in a pouch.  A wicked smile comes to your face as you imagine filling her so full of the stuff that her tits grow to the point where she can't even move, but you ultimately decide that just one dose will suffice for now.");
@@ -381,7 +381,7 @@ function giveTheChameleonASuccubiMilk():void {
 }
 
 //-Lust and Sens Draft (you you you you you need to find more ways to start sentences without using pronouns, she?) (Z edited)
-function doseDatChameleonWithLustAndSensitivityDrafts():void {
+public function doseDatChameleonWithLustAndSensitivityDrafts():void {
 	clearOutput();
 	spriteSelect(89);
 	outputText("You dig through your bags and come across a particularly tortuous combination of fluids.  With a Lust Draft in one hand and a Sensitivity Draft in the other, you return to the chameleon girl, swirling them and smiling at her menacingly.  She starts to protest, but you cut her off by shoving the opening of the Lust Draft vial into her open mouth.");

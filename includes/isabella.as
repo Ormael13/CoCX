@@ -8,7 +8,7 @@
 //-Has PC raped her?
 
 //IZZY AI:
-function isabellaAI():void {
+public function isabellaAI():void {
 	//-If below 70% HP, 50% chance of milk drinking
 	if(monster.HP / eMaxHP() * 100 < 70 && rand(3) == 0) drankMalkYaCunt();
 	//if PC has spells and isn't silenced, 1/3 chance of silence.
@@ -23,7 +23,7 @@ function isabellaAI():void {
 }
 
 //Isabella Combat texttttttsss
-function isabellaAttack():void {
+public function isabellaAttack():void {
 	//[Standard attack] 
 	outputText("Isabella snorts and lowers a shield a moment before she begins to charge towards you. Her hooves tear huge divots out of the ground as she closes the distance with surprising speed!  ", false);
 	
@@ -62,7 +62,7 @@ function isabellaAttack():void {
 	combatRoundOver();
 }
 
-function isabellaStun():void {
+public function isabellaStun():void {
 	//[Stunning Impact] 
 	outputText("Isabella spins her shield back at you in a potent, steel-assisted backhand.  ", false);
 	
@@ -106,7 +106,7 @@ function isabellaStun():void {
 	combatRoundOver();	
 }
 
-function isabellaThroatPunch():void {
+public function isabellaThroatPunch():void {
 	outputText("Isabella punches out from behind her shield in a punch aimed right at your throat!  ", false);
 	
 	//Blind dodge change
@@ -150,7 +150,7 @@ function isabellaThroatPunch():void {
 }
 
 //[Milk Self-Heal]
-function drankMalkYaCunt():void {
+public function drankMalkYaCunt():void {
 	outputText("Isabella pulls one of her breasts out of her low-cut shirt and begins to suckle at one of the many-tipped nipples. Her cheeks fill and hollow a few times while you watch with spellbound intensity.  She finishes and tucks the weighty orb away, blushing furiously.  The quick drink seems to have reinvigorated her, and watching it has definitely aroused you.", false);
 	monster.HP += 100;
 	monster.lust += 5;
@@ -158,7 +158,7 @@ function drankMalkYaCunt():void {
 	combatRoundOver();
 }
 
-function isabellaGreeting():void {
+public function isabellaGreeting():void {
 	spriteSelect(31);
 	outputText("", true);
 	var suck:Number = 0;
@@ -287,14 +287,14 @@ function isabellaGreeting():void {
 	//outputText("ISABELLA HAS BROKEN.  PLEASE TELL FENOXO.", true);
 }
 //Leave]	
-function leaveAngryIzzy():void {
+public function leaveAngryIzzy():void {
 	spriteSelect(31);
 	outputText("", true);
 	outputText("You shrug and make it quite clear you're leaving.  Crazy cow.  She shouts, \"<i>And stay avay, demon!  Izabella has no need of your foul tricks!</i>\"", false);
 	doNext(13);
 }
 //[Fight]
-function unwelcomeFightCowGal():void {
+public function unwelcomeFightCowGal():void {
 	outputText("", true);
 	outputText("You ready your " + player.weaponName + " and adopt a fighting pose.  No cow is going to chase you away!", false);
 	if(!isabellaFollower()) isabellaAffection(-5);
@@ -304,7 +304,7 @@ function unwelcomeFightCowGal():void {
 	doNext(1);
 }
 //Fuck-fight
-function fightIsabella():void {
+public function fightIsabella():void {
 	outputText("", true);
 	if(!isabellaFollower()) isabellaAffection(-5);
 	outputText("You smirk at Isabella, and ready your " + player.weaponName + ", telling her you intend to have you way with her.  She turns beet red and grabs her shield, announcing, \"<i>You von't find me such easy prey, and I vill punish you for being so naughty!</b>\"", false);
@@ -314,7 +314,7 @@ function fightIsabella():void {
 	doNext(1);
 }
 //[Talk] 
-function tryToTalkDownAngryCow():void {
+public function tryToTalkDownAngryCow():void {
 	outputText("", true);
 	spriteSelect(31);
 	//(int below 25)
@@ -357,7 +357,7 @@ function tryToTalkDownAngryCow():void {
 }
 
 
-function nomOnMommaIzzysTits():void {
+public function nomOnMommaIzzysTits():void {
 	outputText("", true);
 	spriteSelect(31);
 	var x:Number = player.cockThatFits(20);
@@ -491,7 +491,7 @@ function nomOnMommaIzzysTits():void {
 }
 
 //[GET ORAL'ED AS A SMALL MALE]
-function izzyGivesSmallWangsFreeOral():void {
+public function izzyGivesSmallWangsFreeOral():void {
 	spriteSelect(31);
 	var x:Number = player.smallestCockIndex();
 	var y:Number = player.smallestCockIndex2();
@@ -632,7 +632,7 @@ function izzyGivesSmallWangsFreeOral():void {
 }
 
 //[Give Isy Oral]
-function volunteerToSlurpCowCunt():void {
+public function volunteerToSlurpCowCunt():void {
 	spriteSelect(31);
 	outputText("", true);
 	outputText("You indicate to Isabella that you're actually more interested in tasting HER, not her milk.  The dusky cow-girl looks at you dumbly, not comprehending what you mean.  Before you can explain, her cheeks bloom with crimson - she finally figured out what you meant.  The red-head quietly asks, ");
@@ -704,7 +704,7 @@ function volunteerToSlurpCowCunt():void {
 	}
 }
 
-function IsabellaWinsAndSpanks():void {
+public function IsabellaWinsAndSpanks():void {
 	outputText("", true);
 	//[Lose and get Spanked - Small]
 	if(player.tallness <= 78) {
@@ -830,7 +830,7 @@ function IsabellaWinsAndSpanks():void {
 }
 
 //[Isabella rapes you with her ass]
-function isabellaRapesYouWithHerAss():void {
+public function isabellaRapesYouWithHerAss():void {
 	outputText("", true);
 	var x:Number = player.cockThatFits(38);
 	if(x < 0) x = 0;
@@ -936,7 +936,7 @@ function isabellaRapesYouWithHerAss():void {
 }
 
 //[OPTIONAL GET RAPED AFTER SPANKING/FEEDING]
-function IsabellaPostSpankFeedSex():void {
+public function IsabellaPostSpankFeedSex():void {
 	var x:Number = player.smallestCockIndex();
 	outputText("", true);
 	outputText("<b>Squish... squish... squish...</b>\n", false);
@@ -972,7 +972,7 @@ function IsabellaPostSpankFeedSex():void {
 }
 
 //LOSS
-function isabellaDefeats():void {
+public function isabellaDefeats():void {
 	if(monster.statusAffectv1("sparring") <= 1) {
 		if(player.hasCock() && rand(2) == 0) isabellaRapesYouWithHerAss()
 		else IsabellaWinsAndSpanks();
@@ -983,7 +983,7 @@ function isabellaDefeats():void {
 }
 
 //[VICTORY!]
-function defeatIsabella():void {
+public function defeatIsabella():void {
 	outputText("", true);
 	if(monster.statusAffectv1("sparring") == 2) {
 		outputText("You give the ", false);
@@ -1031,7 +1031,7 @@ function defeatIsabella():void {
 	choices("Lactation69",lactation,"Buttsex",buttsex,"Sixty-Nine",sixtyNine,"Vaginal",vaginalSex,"Big Titfuck", bigTitFuck,"Small Titfuck", smallTitFuck, "", 0, "", 0, "", 0, "Leave",5007);
 }
 //[LACTATION 69]
-function victoryLactation69():void {
+public function victoryLactation69():void {
 	outputText("", true);
 	outputText("Well, now that she's mentioned milk, your " + allBreastsDescript() + " do feel a little full, swollen with the weight of your own lactic cargo.  Even your " + nippleDescript(0) + "s feel bloated and ready to be suckled.  With a devilish grin, you pace around the prone, bovine belle and taunt her, suggesting quite lewdly how you'll drain her tits dry while forcing her to guzzle your own pearly liquid.  Her eyes go wide, first with shock, then with increasing lust.  The cow-girl's features soften into submissive acceptance when you stop at her head and undo the bindings of your " + player.armorName + ".\n\n", false);
 	
@@ -1110,7 +1110,7 @@ function victoryLactation69():void {
 	eventParser(5007);
 }
 //[VICTORY BUTTSEX]
-function PCVictoryOnIsabellaButtsex():void {
+public function PCVictoryOnIsabellaButtsex():void {
 	var x:Number = player.cockThatFits(monster.analCapacity());
 	var y:Number = player.cockThatFits2(monster.analCapacity());
 	outputText("", true);
@@ -1201,7 +1201,7 @@ function PCVictoryOnIsabellaButtsex():void {
 }
 
 //[Victory 69]
-function victoryAgainstIzzzzzySixtyNine():void {
+public function victoryAgainstIzzzzzySixtyNine():void {
 	var x:Number = player.cockThatFits(38);
 	if(x < 0) x = 0;
 	outputText("", true);
@@ -1318,7 +1318,7 @@ function victoryAgainstIzzzzzySixtyNine():void {
 }
 
 //['Too Big' Victory Titfucking Funtimes With Milk]
-function tooBigVictoryTittyFuckingFuntimesWithMilk():void {
+public function tooBigVictoryTittyFuckingFuntimesWithMilk():void {
 	outputText("", true);
 	outputText("You toss aside your " + player.armorName + " to reveal your " + cockDescript(x) + " to the ", false);
 	if(monster.lust > 99) outputText("lusty", false);
@@ -1391,7 +1391,7 @@ function tooBigVictoryTittyFuckingFuntimesWithMilk():void {
 }
 
 //[VAGINAL PROD N' POKE]
-function vaginalProdNPokeIsabella():void {
+public function vaginalProdNPokeIsabella():void {
 	var x:Number = player.cockThatFits(monster.vaginalCapacity());
 	if(x < 0) x = 0;
 	outputText("", true);
@@ -1454,7 +1454,7 @@ function vaginalProdNPokeIsabella():void {
 }
 
 //[Small dick tit-fucking] (Dicks less than 9 inches)
-function tinyVictoryTittyFuckingFuntimesWithMilk():void {
+public function tinyVictoryTittyFuckingFuntimesWithMilk():void {
 	var x:Number = player.smallestCockIndex();
 	outputText("", true);
 	outputText("You toss aside your " + player.armorName + " to reveal your " + cockDescript(x) + " to the ", false);
@@ -1500,7 +1500,7 @@ function tinyVictoryTittyFuckingFuntimesWithMilk():void {
 }
 
 //[Discuss Isabella]
-function talkWithIsabella():void {
+public function talkWithIsabella():void {
 	spriteSelect(31);
 	outputText("", true);
 	flags[UNKNOWN_FLAG_NUMBER_00262]++;

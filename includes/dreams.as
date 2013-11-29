@@ -1,5 +1,5 @@
 ﻿//Returns true if needs to END SHIT
-function dreamSelect():Boolean {
+public function dreamSelect():Boolean {
 	var daydream:Number = 0;
 	var choices:Array = new Array();
 	//dream quantity
@@ -353,7 +353,7 @@ function dreamSelect():Boolean {
 	return false;
 }
 
-function dayTenDreams():void {
+public function dayTenDreams():void {
 	outputText("\n", false);
 	if(player.hasCock()) {
 		if(player.cor < 50) {
@@ -427,7 +427,7 @@ function dayTenDreams():void {
 	else stats(0,0,0,0,0,0,25,0);
 }
 
-function fuckedUpCockDreamChange():void {
+public function fuckedUpCockDreamChange():void {
 	//Cock Transformation Dream!
 	outputText("\n<b>Your dreams come fast and vivid that night...</b>\nYour body feels odd, misshapen... you find yourself walking on all fours.  No, wait, all <i>sixes</i> you correct yourself.  Six large, furry paws and limbs hold you up over a smooth, silvery metallic floor.  The floor is so shiny, in fact, you can make out your reflection.");
 	outputText("\n\nYour body is not at all how you remember it... although those memories are fast fading.  Perhaps you were dreaming?  Of course this is your normal body.  You've always had six legs, a powerful furred body, long bushy tail, a wolf-like head... and of course you've always had the two tentacle-like appendages that sprout from your shoulders.  Though your body seems alien at first, you quickly find your mind adapting.  Taking the chance to explore, you pad around the room, your movements flowing naturally as if you'd been in this body your entire life.  Of course you have, you were born this way!");
@@ -444,7 +444,7 @@ function fuckedUpCockDreamChange():void {
 	menu();
 	addButton(0,"Next",displacerDreamII);
 }
-function displacerDreamII():void {
+public function displacerDreamII():void {
 	clearOutput();
 	outputText("<b>The dream shifts once more.</b>  Gone are the alien woman's clothes.  She now lays naked on the cool metal floor.  A light covering of midnight blue fur runs down her back and sides, but her front is completely smooth tanned skin.  The wolf-like alien giggles softly, clearly trying to keep her voice down.  There must be others like her, or like you around.");
 	outputText("\n\nYou urge her to remain quiet before clamping your lips around one of her perky nipples, lavishing it with your tongue.  The alien woman coo's, murmuring, \"<i>Oh, Captain</i>\" repeatedly.  You run your tongue down her body, stopping at her moist cunt... which looks somehow different than you expected.  Rather than pink folds, her slick pussy is colored a cobalt blue.  You blink your eyes a couple times, just to make sure you're not seeing double.  Two hard, dark blue clits peek out from two separate hoods... this woman has two clitorises!");
@@ -470,7 +470,7 @@ function displacerDreamII():void {
 	addButton(0,"Next",displacerDreamIII);
 }
 
-function displacerDreamIII():void {
+public function displacerDreamIII():void {
 	clearOutput();
 	outputText("The details of the dream immediately begin to slip away.  You strain your brain, trying to commit everything to memory, but it slips out of your mind like water through a sieve.");
 	

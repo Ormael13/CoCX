@@ -8,14 +8,14 @@ Rape: The cultist's outfit shifts into that of something submissive and helpless
 Loot: Could drop a random set of clothing or a costume on death.
 */
 
-function fetishCultistEncounter():void {
+public function fetishCultistEncounter():void {
 	outputText("You see a largely human-looking young woman in the distance in a strange, whorish outfit, seemingly lost in prayers that sound like nonsense to you.  Finally noticing your presence, she confronts you with a lewd smile on her face.\n\nShe has clearly lost her grasp on sanity, and filled the void with pure perversion.", true);
 	startCombat(9);
 	spriteSelect(19);
 	doNext(1);
 }
 
-function cultistRaisePlayerLust():void {
+public function cultistRaisePlayerLust():void {
 	//Two text variants!
 	if(rand(2) == 0) {
 		if(monster.armorName == "pervy nun's clothing") outputText("She suddenly stops chanting and spreads her legs, opening her loose pussy wide with one hand while moaning like a whore.  She toys with her breasts and fondles one of her nipples with her other hand.\n\nDespite yourself,  you can't help but be aroused by the scene.", false);
@@ -32,7 +32,7 @@ function cultistRaisePlayerLust():void {
 	if(player.lust >= 100) doNext(5011);
 	else doNext(5000);
 }
-function cultistLustTransfer():void {
+public function cultistLustTransfer():void {
 	if(monster.lust <= 30 || rand(2) == 0) {
 		outputText("Her eyes glaze over, ", false);
 		if(player.cor < 40) outputText("and you're almost afraid to know ", false);
@@ -57,7 +57,7 @@ function cultistLustTransfer():void {
 	if(player.lust >= 100) doNext(5011);
 	else doNext(5000);
 }
-function cultistRapesYou():void {
+public function cultistRapesYou():void {
 	monster.lust = 1;
 	monster.HP = 10;
 	var changed:Boolean = false;
@@ -405,7 +405,7 @@ function cultistRapesYou():void {
 		}
 	}
 }
-function playerRapesCultist():void {
+public function playerRapesCultist():void {
 	//(nun worship version, this one looks like it will be a little shorter then the other one was, only two variations again)
 	if(monster.armorName == "pervy nun's clothing") {
 		outputText("You see that the cultist's outfit has fixed on a naughty nun outfit with specially placed holes over her sexual parts.  As you get close to her, she goes down on her hands and knees and says to you, \"<i>Mighty sex god, who have shown me your power; please, take my body!</i>\"\n\n", false);
@@ -521,7 +521,7 @@ function playerRapesCultist():void {
 }
 
 //PC goes for the vagina
-function plugSwimsuitVag():void {
+public function plugSwimsuitVag():void {
 	var x:Number = player.biggestCockIndex();
 	outputText("", true);
 	if(player.hasVagina()) outputText("You decline the vibrators; you'd much rather take her incredibly wet pussy.  ", false);
@@ -554,7 +554,7 @@ function plugSwimsuitVag():void {
 }
 
 //PC goes for the vagina vibrators
-function swimsuitVibrators():void {
+public function swimsuitVibrators():void {
 	outputText("", true);
 	outputText("You suggest that you're interested in trying the vaginal vibrators she offered.  The cultist nods, and turns to face you holding two surprisingly large toys in her hands.  They're shaped like a long tube, with a small arm on the side near the handle that points towards the end.  You aren't sure where they came from, but you'd guess she used the same magic that she uses to shift her clothing to get them.\n\n", false);
 	if(player.vaginalCapacity() <= 30) {//PC does not have a very loose or looser vagina)
@@ -610,13 +610,13 @@ function swimsuitVibrators():void {
 	}
 }
 
-function cultistBadEnd():void {
+public function cultistBadEnd():void {
 	//This ending is caused from having too low of inte when losing to the cultist (say under 15) or it could be after losing too many times to them.  You chose which you would prefer.
 	//(after being raped, do not show regular recovery message, skip here)
 	outputText("\n\nYour mind is not able to recover from the fantasy, and instead moves on to another one, and another, and another...", false);
 	doNext(5070);
 }
-function cultistBadEnd2():void {
+public function cultistBadEnd2():void {
 	var genderTag:String = "";
 	outputText("On a hill sits a large cathedral overlooking a river that feeds into a massive lake.  It is a surprisingly grand structure in a land almost devoid of any signs of civilization in any direction.  The design is quite clear; its entrance lined with statues of lewd naked figures and its windows are made of stain glass depicting acts of sexuality.  Even without hearing the sounds of ecstasy that usually emanate from inside, it is quite clear this is a place of debauchery.\n\n", true);
 	outputText("Within, a ", false);
@@ -631,7 +631,7 @@ function cultistBadEnd2():void {
 	eventParser(5035);
 }
 
-function fetishCultistHasAMilkFetish():void {
+public function fetishCultistHasAMilkFetish():void {
 	outputText("", true);
 	outputText("You remove your " + player.armorName + ", standing naked in front of the beaten fetish-girl with your lactating " + breastDescript(0) + " dripping milk. You pick the cultist up and sit down on the ground with her resting on your lap, her soft warm ass up against your thighs. You hold the nipple up to her mouth; she suckles on it without the slightest sign of rebellion.\n\n", false);
 	

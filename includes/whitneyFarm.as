@@ -1,6 +1,6 @@
 ﻿//const FARM_DISABLED:int = 464;
 
-function farmExploreEncounter():void {
+public function farmExploreEncounter():void {
 	var temporary:Number = 0;
 	//Farm not yet discovered
 	if(player.statusAffectv1("Met Whitney") < 2) {
@@ -67,7 +67,7 @@ function farmExploreEncounter():void {
 	}		
 }
 //[YES]
-function whitneyMilkerHookup(breast:Boolean = true):void {
+public function whitneyMilkerHookup(breast:Boolean = true):void {
 	spriteSelect(62);
 	outputText("Whitney takes the gear back to her farm after promising to have it working within the hour.  She did leave you with a cryptic warning to \"<i><i>leave the milkings to the beasts, lest you become one</i>.</i>\"\n\nYou shrug and head back to check up on camp.", true);
 	if(breast) {
@@ -81,14 +81,14 @@ function whitneyMilkerHookup(breast:Boolean = true):void {
 	doNext(13);
 }
 //[NO]
-function whitneyMilkerRefusal():void {
+public function whitneyMilkerRefusal():void {
 	spriteSelect(62);
 	clearOutput();
 	outputText("Whitney shrugs and the two of you resume your conversation.  But like all good things, it has to come to an end.  The two of you go your separate ways.");
 	doNext(13);
 }
 //TALK
-function talkWhitney():void {
+public function talkWhitney():void {
 	spriteSelect(62);
 	//[FIND WHITNEY TXT]
 	outputText("", true);
@@ -162,7 +162,7 @@ function talkWhitney():void {
 	//+3 int if less than 15, +2 int if less 20, +1 int if less than 30, +.5 int if less than 40.
 }
 
-function workFarm():void {
+public function workFarm():void {
 	var marbling:Number = 0;
 	outputText("", true);
 	//In withdrawl odds are higher.
@@ -263,7 +263,7 @@ function workFarm():void {
 	takeItem();
 }
 
-function meetMarble():void {
+public function meetMarble():void {
 	var marbling:Number = 0;
 	//Pre-addiction events(explore events take 1 hour, working ones take 3)
 	if(player.statusAffectv3("Marble") == 0) {
@@ -302,7 +302,7 @@ function meetMarble():void {
 	}
 }
 
-function exploreFarm():void {
+public function exploreFarm():void {
 	var marbling:Number = 0;
 	var explore:Number = 0;
 	
@@ -417,7 +417,7 @@ function exploreFarm():void {
 	}
 }
 
-function getMilked():void {
+public function getMilked():void {
 	/*MILK YOU TIT-PUMPZ ONLY
 	(Milk production TOTAL= breastSize x 10 * lactationMultiplier * breast total * milking-endurance (1- default, maxes at 2.  Builds over time as milking as done)
 	(Small – 0.01 mLs – Size 1 + 1 Multi)
@@ -662,7 +662,7 @@ function getMilked():void {
 	doNext(13);
 }
 
-function cockPumping():void {
+public function cockPumping():void {
 	var cumQ:Number = player.cumQ() * (rand(10) + 90) / 100;
 	outputText("", true);
 	//First time barn entrance
@@ -918,14 +918,14 @@ function cockPumping():void {
 	doNext(13);
 }
 
-function cowBadEnd1():void {
+public function cowBadEnd1():void {
 	outputText("You moo with delight, fondling your dripping " + allBreastsDescript() + " as you relax in your stall.   You know there was something uh, important or something that you were going to do - besides getting your udders milked!  Mmmmm, all your worries about that other thing just melt away when you're in your harness, spraying out milk...\n\n", true);
 	outputText("You stop, trying to put your remaining wits to work and remember what you were going to do.   Let's see, you were coming here because your tits were so full that they made you ache, and you got hooked up and pumped like a good cow.  Another soft moo escapes your lips.  Now you're turned on and masturbating your drippy udders.  So the next step would be...\n\n", false);
 	outputText("...finding someone to fuck you silly while you get something to eat.  It's so simple!  You crawl out of your stall, feeling your ponderous breasts jiggle as they drag on the ground.  A trail of white cream clearly marks your passage out into the fields, eventually passing beyond the edges of Whitney's farm and into the mountains.", false);
 	doNext(cowBadEnd2);
 }
 
-function cowBadEnd2():void {
+public function cowBadEnd2():void {
 	outputText("", true);
 	outputText("A day later, you slosh back into the barn with your breasts painfully full and ready to be emptied.  Your cum-filled belly joins your tits in dragging on the floor while you daydream about your time in the minotaur caves last night.  The first one claimed your " + assholeDescript() + ", brutalizing it over and over while the beast emptied his vast reservoirs of seed into your rectum.  Before the beast's equine-like cock could be stuffed halfway inside you, a slightly smaller minotaur was in front of your face, smearing your lips with a thick coating of his tasty pre.  Like a good cow, you opened wide for the bull and gratefully accepted his thick loads, feeling the narcotic-like spunk shut down your ability to think about anything but sex.\n\n", false);
 	outputText("You moo happily, shivering at the intensity of the fond memories and in anticipation of tonight's activities.  But first you need to get your swollen nipples emptied!  The straps to the harness hang there in front of you – how do you work them again?  Your happy moos turn to moos of confusion and stress, but thankfully Whitney pads into the barn before you have a chance to panic.  She looks down and sighs, filling you with confusion.  You weren't a bad cow, were you?\n\n", false);
@@ -933,7 +933,7 @@ function cowBadEnd2():void {
 	outputText("You nod happily, determined to find someone or something that can stuff you as full as your bulls did.  Whitney gives a resigned sigh as she turns the machine turn on, watching your determined stare melt into a dopey painting of relief...", false);
 	eventParser(5035);
 }
-function milkerBadEnd1():void {
+public function milkerBadEnd1():void {
 	var cumQ:Number = player.cumQ();
 	outputText("", true);
 	outputText("As you roll onto your back the machine delivers an encore performance on your swollen " + multiCockDescriptLight() + ", down to the very same orgasm denial.  Wracked by pleasure but now freed to move, you find yourself trying to thrust aganst the tubes, as best as your feeble grip and exhaustion will allow, in order to try to override the machine's will and achieve release.  Nevertheless, the suction expertly mainpulates your arousal and you can do little except endure it as another oversized batch of cum wells up", false);
@@ -1052,7 +1052,7 @@ function milkerBadEnd1():void {
 }
 
 //Introduction: Finding the Toys @ The Farm
-function centaurToysHoooooo():void {
+public function centaurToysHoooooo():void {
 	spriteSelect(62);
 	outputText("", true);
 	//[Places] - [Farm] - [Talk] If PC = Centaur

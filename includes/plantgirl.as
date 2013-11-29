@@ -1,5 +1,5 @@
 ﻿//Encounter with the Plant Woman (Intro 1, requires having seen corrupted glade) 
-function encounterPlantWoman():void {
+public function encounterPlantWoman():void {
 	if(rand(2) == 0) {
 		monster.createStatusAffect("happy",0,0,0,0);
 	}
@@ -36,7 +36,7 @@ function encounterPlantWoman():void {
 }
 
 //(Intro 1.1: See what happens)
-function plantyLadySeeWhatHappens():void {
+public function plantyLadySeeWhatHappens():void {
 	clearOutput();
 	outputText("You decide to not offer any resistance as the vines begin to tighten around your body.  When they have you nearly constricted, they stop suddenly.  Looking downward confirms the vines relaxing and slowly uncoiling from around your legs." + (player.cor >= 66 ? "  A sense of disappointment comes to you at the sight of the retreating vegetation, robbing you of potential fun." : "") + "  Standing there in utter confusion, you scratch the back of your head and survey the thick bush that now surrounds you, when a creature appears with a soft rustle to the left!");
 	outputText("\n\nThe form you gaze upon is covered in plant matter; in fact, it looks just like the same matter that strung you up earlier.  Though, a surprisingly sleek and feminine body becomes visible as it slowly closes the distance.  The woman sports a pair of average breasts; your best guess would be B-cups.  Her eyes are jewel red and she looks your body up and down, she flushes a bit; clearly she likes what she sees.  Trying her best to seduce you through body language and the swaying of her curved hips, she seductively closes the distance and grins at you with a confident, flirty smile.  Feeling a sudden touch at your waistline, you look down to see that the creature is playfully tugging at your [armor], almost in a probing fashion as if to non-verbally ask if you are into this just as much as she is.");
@@ -50,7 +50,7 @@ function plantyLadySeeWhatHappens():void {
 }
 
 //[Let's fuck!]
-function plantLadyLetsFuck(from:Number = 1.1):void {
+public function plantLadyLetsFuck(from:Number = 1.1):void {
 	clearOutput();
 	outputText("Throwing caution to the wind, you decide to engage in a little 'carnal' pleasure with this creature. How to do you want to sex the plant woman?");
 	//(let's fuck scenes lead to victory/loss sex scenes (depending on dominant/submission choices, with variations)
@@ -90,7 +90,7 @@ function plantLadyLetsFuck(from:Number = 1.1):void {
 }
 
 //(Intro 1.2: Struggle) (leads to Intro: 1.2.1, or  1.2.2 scenes, depending on PC stats)
-function plantWomanStruggle():void {
+public function plantWomanStruggle():void {
 	clearOutput();
 	//(struggle success, or Intro 1.2.1)
 	if(player.str >= 40) {
@@ -142,7 +142,7 @@ function plantWomanStruggle():void {
 }
 
 //[Sex: failure intro, or 1.2.3 sex intro]
-function sexFailureIntro():void {
+public function sexFailureIntro():void {
 	clearOutput();
 	outputText("With you tightly confined in your vine prison, the plant woman shifts forward through the bush and comes face to face with you.  She smirks playfully and begins to take your [armor] off.  Your musings about what this creature has in mind are interrupted when the plant woman starts caressing your face and necking you.  Starting at the lower base of your neck, she slowly licks upwards until she reaches your ear, intimately exploring the insides.   Her breathing heavy and sporadic as she caresses your earlobe, aroused to no end as she intimately explores your body. She then proceeds back down to your lower neck, suckling around the base, as she makes her way to your other ear. It's obvious she's getting off on this, the intimate act causing her to shudder repeatedly.");
 	outputText("\n\nThis goes on for a few moments before she brings her face back to yours, and begins to tease you by going in for a kiss and pulling away. She looks into your eyes and is waiting for you to reciprocate.");
@@ -155,7 +155,7 @@ function sexFailureIntro():void {
 }
 
 //[Decline, or Decline 1.0]
-function declinePlantSmex():void {
+public function declinePlantSmex():void {
 	clearOutput();
 	outputText("As she returns to teasing you again with a pseudo-kiss, you pull back and shake your head.  The rejection apparent in your facial features, the plant woman stops and stares at you with glassy eyes.  You signal (as best as you can while constricted) that you aren't into this and that you need to leave. Her eyes become watery as she turns away, quietly sobbing as her vines loosen up a bit.");
 	//(depending on mood, scene will progress to Decline 1.1 or 1.2)
@@ -173,7 +173,7 @@ function declinePlantSmex():void {
 }
 
 //[Seriously, get lost!, or GL 1.0]
-function seriouslyGetLostPlantLady():void {
+public function seriouslyGetLostPlantLady():void {
 	clearOutput();
 	outputText("Going in for a pseudo-kiss, the plant woman closes her eyes to relish the moment when her lips press against yours; a mistake that she will regret later as you buck your head back and smash into her leafy skull. Reeling from the sudden and painful blow, the plant woman groans and staggers dizzily to the ground. The vines that hold you lose their grip, and summoning your strength, you rip free of them at last. Cautiously, you back away from the creature and put some distance between you two. Aggression washes over her slumped form and she rises to her feet, sappy blood running down her face as she furiously glares at you. She takes a step towards you and arches her right arm  over her left shoulder, protruding a vine from her wrist and tensing it up into a whip. It's on!");
 	//(proceeds to Fight 1.0, with the plant woman having 290-270 HP instead of 300, depending on the PC having horns and the like).
@@ -184,7 +184,7 @@ function seriouslyGetLostPlantLady():void {
 }
 
 //[Sex failure: Do it! (Trapped sex Intro (TsI))]
-function struggleFailDoItPlantSmex():void {
+public function struggleFailDoItPlantSmex():void {
 	clearOutput();
 	outputText("As she goes in for another pseudo kiss you lurch forward and connect with your lips, pressing them hard against her and fiercely returning her intimate gesture. She responds by snaking her tongue in your mouth, slapping hers against yours and twisting them around like a frustrated child with a knotted shoe lace.");
 	//(If PC doesn't have long tongue, skip to Otherwise TsI
@@ -216,7 +216,7 @@ function struggleFailDoItPlantSmex():void {
 
 
 //Player escapes the plant woman's trap and refuses sex
-function escapeFromPlantWomanAndDeclineSex():void {
+public function escapeFromPlantWomanAndDeclineSex():void {
 	clearOutput();
 	//(Success: decline, SD 1.1) 
 	//(Chance that the plant woman will attack you if you try to leave.  (Reactions to the plant woman are based on corruption;  light side (pure) is listed first, the second is corrupted)
@@ -251,7 +251,7 @@ function escapeFromPlantWomanAndDeclineSex():void {
 }
 
 //[She wants your ass, or TsI: 1.1 intro]
-function plantRapingAssTrappedSexIntro():void {
+public function plantRapingAssTrappedSexIntro():void {
 	clearOutput();
 	outputText("The plant woman stops and looks around at the surrounding foliage, smiling.  You look at her with a hunger in your eyes and moan, snapping her attention back to you.  She uses the vines to flip you around and expose your [butt] to her.  With a snap of her fingers,  phallic stamen sprout out of her body, and she proceeds to walk behind you...  Wait... is she going for your ass?  The confusion on your face gives the creature pause as she awaits a response from you.");
 	//[fuck my ass (leads to TsI: 1.1a]  [hey, exit only! (leads to TsI: 1.1r]
@@ -259,7 +259,7 @@ function plantRapingAssTrappedSexIntro():void {
 }
 
 //[Failure anal: considerate of your needs, or TsI: 1.1r]
-function plantRapingAssTrappedSexIntroExitOnly():void {
+public function plantRapingAssTrappedSexIntroExitOnly():void {
 	clearOutput();
 	outputText("The fact she's planning to plant her cock in your ass gives you cause to thrash in your vine prison.  Taken out of the moment, she stops and considers your wishes to not have some bulbous penis rammed up your [butt].  With a smile, she spins you around and kisses your cheek.  It looks like she got the message that you aren't into anal sex right now (if ever).");
 	//(Taken back to tied sex menu)
@@ -267,7 +267,7 @@ function plantRapingAssTrappedSexIntroExitOnly():void {
 }
 
 //[fuck my ass, or TsI: 1.1a]
-function fuckMyAssPlantLadyWhileImTrapped():void {
+public function fuckMyAssPlantLadyWhileImTrapped():void {
 	clearOutput();
 	outputText("You look up into the plant girl's eyes and smile, signalling that you're ready for what she has in mind.  She returns your lustful leer and presses her lips against yours, tongues once again darting around in search of each other as the plant girl reaches down to both your chest and ");
 	if(player.hasCock()) outputText(multiCockDescriptLight());
@@ -338,7 +338,7 @@ shudder from the sensation of your [asshole]'s tightness.  Once the floral creat
 }
 
 //(Failure: Blowjob, or TsI: 1.2 intro) 
-function trappedFlowerSexBlowjob():void {
+public function trappedFlowerSexBlowjob():void {
 	clearOutput();
 	outputText("The plant woman smiles at you and places your hand on her breast, and in turn places her hand on your chest.  You feel uneasy as the plant-like vines in her arms start wriggling around, and begin to envelope you.");
 	//(//You're not sure what this act is supposed to mean exactly, but you hope that it doesn't involve impaling your heart.)
@@ -348,7 +348,7 @@ function trappedFlowerSexBlowjob():void {
 }
 
 //(Failure blowjob: or TsI 1.2r)
-function trappedFlowerSexBlowjobRejection():void {
+public function trappedFlowerSexBlowjobRejection():void {
 	outputText("You push against the plant girl's thighs and shake your head, telling her that you are interested in THAT. You comment on how you wouldn't mind playing with something else though, as you begin to stroke your finger around the plant woman's labia.  She stops and ponders for a moment, and then giggles as her appendage disappears back into her body.");
 	outputText("\n\nIt looks like it's up to you how you want to be sexed.");
 	//(Taken back to tied sex menu)
@@ -356,7 +356,7 @@ function trappedFlowerSexBlowjobRejection():void {
 }
 
 //(Failure blowjob: I. Said. OPEN. WIDE!, or TsI: 1.2a)
-function trappedFlowerSexBlowjobAhoy():void {
+public function trappedFlowerSexBlowjobAhoy():void {
 	clearOutput();
 	outputText("\"<i>MHHMMpffffrmPH!</i>\ you mumble as her cock hits the back of your mouth, the plant creature clearly intent on jumping into the rougher sex sooner rather than later. The plant girl giggles as you struggle to breathe and not vomit from the violent intrusion. Placing both of her hands on the back of your head she begins to pump her hips, gliding her cock along your (tongue descript). You gasp for air as you try to push yourself off of the girl and get some room to breathe, but she has a pretty firm grip. She continues thrusting, but is increasingly annoyed that you aren't putting much effort into it right now.  A pair a vines ");
 	//(If PC has balls: 
@@ -378,7 +378,7 @@ function trappedFlowerSexBlowjobAhoy():void {
 }
 
 //[Failure: She wants to fuck your cock with her pussy, or TsI: 1.3 Intro]
-function trappedPlantSexPussy():void {
+public function trappedPlantSexPussy():void {
 	clearOutput();
 	outputText("Staring down at your " + multiCockDescriptLight() + ", the plant woman's eyes become fixated and betray a sense of longing, of curiosity, and eagerness.  Approaching your well restrained body, she takes [oneCock] into her soft hand and brushes it's sensitive head against her smooth pelvis, fairly close to the creature's moist and sweet smelling pussy.  Proceeding to wrap its arms around you, the plant woman takes [oneCock] in-between her legs and against her clit, signaling the creature's intent to plunge its hungry cunt down on your dick.");
 	//(Leads to TsI: 1.3a or TsI: 1.3r)
@@ -387,7 +387,7 @@ function trappedPlantSexPussy():void {
 }
 
 //[Protest (TsI: 1.3r): 
-function protestTrappedPlantPussySex():void {
+public function protestTrappedPlantPussySex():void {
 	clearOutput();
 	outputText("For whatever reason, you don't want this plant woman's cunt anywhere near your " + multiCockDescriptLight() + ".  Pulling your pelvis back, you try to show that you don't want to be mating in the traditional sense.  Stopping her efforts to mount you, she stares at your display and attempts to convince you, through more cock on clit teasing, that you'll enjoy this and to give it a chance.  Your mind is made up however, and you once again attempt to pull away.  Realizing that you are dead set against this the plant woman withdraws and crosses her arms.  The plant woman glares out of the corner of her eye as she rifles her fingers along her forearms... as if she is waiting for you to make up your mind.");
 	//(Taken back to tied sex menu)
@@ -396,7 +396,7 @@ function protestTrappedPlantPussySex():void {
 
 //Failure: Straddle fuck 
 //(TsI: 1.3a) (less than 24 inches]
-function trappedPlantSexPussyGOOO():void {
+public function trappedPlantSexPussyGOOO():void {
 	clearOutput();
 	outputText("The vines around you begin to shift, and you fear that she might have misinterpreted your preferences for sex, gritting your teeth as you await the inevitable violation of your body.  The continuing sound of cracking vines and growth intrigues you enough to open your eyes, witnessing both yourself and the plant woman being lifted off of the ground by her cabal of creepers.  Lifting you further and further into the air, the vegetation draw her close to your restrained, naked body.  The floral beauty's petal like vagina is soaked in anticipation and glistening in the warm glow of the sun.");
 	var x:int = player.cockThatFits(9999); //Undefined capacity for now.
@@ -462,7 +462,7 @@ function trappedPlantSexPussyGOOO():void {
 }
 
 //[Failure: she wants to blow you, TsI: 1.4 intro]   
-function trappedPlantSexWantsToBlowYa():void {
+public function trappedPlantSexWantsToBlowYa():void {
 	clearOutput();
 	outputText("The plant woman looks your body up and down, seemingly torn between what tickles her fancy and how she can take your body.  Her almost childlike darting of her eyes stops when she lays her sight on your multiCockDescriptLight(), sending an aroused shiver through her body as she appears to finalize her decision.  Like a child walking to the local stream for a swim, she proceeds towards you in an almost skipping like fashion.  Reaching your naked body, she promptly sinks to her knees and takes your " + multiCockDescriptLight() + " into her hand");
 	//(if more than 4 cocks or PC cocks are more than 10 inches in diameter combined:
@@ -474,7 +474,7 @@ function trappedPlantSexWantsToBlowYa():void {
 }
 
 //[Nope, TsI: 1.4r]
-function trappedPlantSexDontBlowMe():void {
+public function trappedPlantSexDontBlowMe():void {
 	clearOutput();
 	outputText("It may seem she wants to take your [oneCock] and suck on it like a sugar cane, but you aren't keen on her choice of how to pleasure you.  Remaining flaccid, you stare down at the plant woman and tell her you aren't interest in a little oral love for your " + multiCockDescriptLight() + ", aware of the fact that she can't understand you.  Despite your words likely sounding like jibberish, the plant woman understands your intent and motions for you to make up your mind; given the slightly annoyed expression on her face, you had better make it quick.");
 	//(taken back to sex menu)
@@ -482,7 +482,7 @@ function trappedPlantSexDontBlowMe():void {
 }
 
 //[Blow me!, TsI: 1.4a] 
-function trappedPlantSexBlowMe():void {
+public function trappedPlantSexBlowMe():void {
 	clearOutput();
 	outputText("The thought of getting a blowjob from this rather attractive... um... plant lady excites you greatly, springing your flaccid maleness from it's slumber.  Before the plant woman's very eyes, [eachCock] expands like heated metal; only in a much more dramatic and erotic fashion.");
 	//(if cock(s) are 3-24 inches:)
@@ -636,7 +636,7 @@ function trappedPlantSexBlowMe():void {
 
 //[Failure: She wants you in her ass (TsI: 1.5) 
 //(requires a cock 24 by 4 inches or less, 2 cocks less than 4 inches in width total, or one-two Tentacle Dicks 4 inches in width or less]
-function strugglePlantLadyFailAnal():void {
+public function strugglePlantLadyFailAnal():void {
 	clearOutput();
 	outputText("The plant woman stares obsessively at your " + multiCockDescriptLight() + " like a fox eying a chicken, causing you some level of discomfort and uncertainty as her face betrays a unnerving sense of lust.  The creepiness is made worse when your vine prison is abruptly pulled towards the lady of nature.  Propping herself against a tree trunk, she bends over and exposes her ample bottom to you , waving it around in an attempt to entice you.  The vines slow in speed as you approach, gradually edging you closer to her rump... almost like the plant woman is teasing you with what could be an agonizingly slow penetration for a person or creature overcome with lust.  “A little presumptuous,” you think to yourself.  Does she really think you're into anal sex?");
 	//[No thanks! (Leads to TsI: 1.5r]    [Fuck her ass (leads to TsI: 1.5a]
@@ -645,7 +645,7 @@ function strugglePlantLadyFailAnal():void {
 	addButton(1,"Fuck Ass",plantAnalGivingTheDick);
 }
 //[No thanks, or TsI: 1.5r)
-function noThanksPlantAnalGiving():void {
+public function noThanksPlantAnalGiving():void {
 	clearOutput();
 	outputText("Maybe you just don't want to take her back door, but the thought of fucking this creature anally isn't one that sits well with you.  Given that you don't know much about these creatures, any number of things could go wrong if you stuck your " + cockDescript(0) + " in her ass.  You attempt to stretch your legs out to catch the ground, but you hover just out of reach.  Your impromptu struggling causes the plant woman to turn around and see what the fuss is all about.  Seeing you trying to get AWAY from her ass confuses the woman of nature.  You make it clear through your limited body language that you are willing to fuck her... maybe... just, not in the ass.");
 	outputText("\n\nCrossing her arms, she rolls her eyes and leaves it up to you on how she will fuck you.");
@@ -654,7 +654,7 @@ function noThanksPlantAnalGiving():void {
 }
 
 //[Fuck her ass, or TsI: 1.5a)
-function plantAnalGivingTheDick():void {
+public function plantAnalGivingTheDick():void {
 	clearOutput();
 	outputText("The sight of this nice, ample ass and the thought of fucking a supple  little pucker piques your " + multiCockDescriptLight() + ", causing ");
 	if(player.cockTotal() == 1) outputText("it");
@@ -712,7 +712,7 @@ function plantAnalGivingTheDick():void {
 }
 
 //[Failure: 69! (TsI: 1.6)] (cock(s)less than 24 inches in length, or 4 inches width total if PC has tentacle dicks.
-function failStruggle69():void {
+public function failStruggle69():void {
 	clearOutput();
 	//(Options are a combination of pussy eating and performing oral on the plant woman; Scenes in the TsI:1.6 section has support for PC's with a cock(s) only, and genderless characters.)
 	outputText("With a loud sniff at the air around her, the plant woman closes her eyes and nods her head back and forth. It seems an aroma unknown to you enters her nostrils as she enjoys the flow of it through her being.  Looking around, you try to determine where this mystery smell is coming from; all your eyes see is the bush surrounding you, the vines that hold you, the sky, and the advancing plant woman.  With a disarming grin, the plant woman descends to her knees and inhales once more, shuddering as her forehead lazily comes to rest on your pelvis.  Your perplexing confusion is subdued as you discern that the enigmatic scent she smells is your own; specifically, your ");
@@ -736,7 +736,7 @@ function failStruggle69():void {
 	addButton(3,"69 EatAll",struggle69Plant,3);
 }
 //[No way!, TsI. 1.6r]
-function nowayStruggle69Plant():void {
+public function nowayStruggle69Plant():void {
 	clearOutput();
 	outputText("The dizzying sensation of being hung upside down like a hunter's catch in a tree is bad enough; the idea of this thing forcing her fuck hole against your face and licking your genitalia is more than enough for you to try and break free.  Thrashing around in the vine prison like a fly caught in a spider web, you try to show the plant woman that you are not okay with her choice in 'having fun' with you.  Your erratic and frenzied rejection dawns on the plant woman, and she pouts as she dejectedly flips you up right.  Her stare carries with it a plea for you to reconsider, but you ensure that you will not be swayed on this matter.  With a sad expression on her face, she stares down at the ground, lamenting your denial; raising an eyebrow, you call out the plant creature and assure her through your ");
 	if(player.hasCock()) outputText(multiCockDescriptLight);
@@ -747,7 +747,7 @@ function nowayStruggle69Plant():void {
 }
 
 //[69! pussy, service both, leads to TsI: 1.6a]
-function struggle69Plant(pt:int = 1):void {
+public function struggle69Plant(pt:int = 1):void {
 	clearOutput();
 	//(Plant woman will randomly decide what to service on your body if herm; if male, she will suck your dick; if female, she will eat out your vag)
 	var target:int = 0;
@@ -867,7 +867,7 @@ function struggle69Plant(pt:int = 1):void {
 }
 
 //TsI 1.7: She fucks you in the pussy (Oops Radar fucked up edition).
-function struggleFailPlantFucksPussy():void {
+public function struggleFailPlantFucksPussy():void {
 	clearOutput();
 	outputText("Giving the air a few quick sniffs, the plant woman draws a deep breath into her body, shaking ever so slightly as whatever she inhaled worms its way through her being.  Resolved to her decision, she enticingly saunters over to you. As you contemplate how she is going to sex you the leafy texture of her pelvis erupts forward, ushering forth what appears to be a large, bulbous penis.  You can't help but feel surprised at what what has just unfolded between your eyes and quickly snap back to attention as you feel a pairs of hands tugging at your groin coverings.  Eagerly, the plant woman attempts to free your sex");
 	if(player.gender > 0) outputText("es");
@@ -881,7 +881,7 @@ function struggleFailPlantFucksPussy():void {
 }
 
 //[No way!, TsI. 1.7r]
-function struggleFailPlantPussyFuckNoWay():void {
+public function struggleFailPlantPussyFuckNoWay():void {
 	clearOutput();
 	outputText("Whether it's because you ");
 	//PC is virgin: 
@@ -893,7 +893,7 @@ function struggleFailPlantPussyFuckNoWay():void {
 }
 
 //[Allow her, TsI. 1.7a]
-function struggleFailPlantPussyFuckAllow():void {
+public function struggleFailPlantPussyFuckAllow():void {
 	clearOutput();
 	outputText("The thought of having this hermaphrodite woman fuck your  [vagina] and bounce you off her meat until you cream is one that is too enticing to pass up. As the last piece of your kit is removed, you attempt to spread your legs, hoping to show your soon to be intimate lover that you like how she thinks.  The vines do not yield to your efforts, but the force behind them certainly gets her attention as she spreads your legs apart. Leaving you hanging in the air, she closes in and plants a wet kiss on your lips, the soft texture dancing along and teases your own as you return her intimate gesture.  Ecstatic that you're on board with what she has in mind, she works a vine up against your  [clit], gently caressing it as she begins to place kisses down your cheek and neck; clearly, she wants to work you into a mean flurry of sexual desire before she gives you what you want.");
 	
@@ -909,7 +909,7 @@ function struggleFailPlantPussyFuckAllow():void {
 
 //Victory and Dominant section
 //[Victory and Dominant Let's fuck!: Vaginal w/ cock (light sided)]
-function victoryVsPlant():void
+public function victoryVsPlant():void
 {
 	clearOutput();
 	//(Victory, V 1.1L):
@@ -927,7 +927,7 @@ function victoryVsPlant():void
 }
 
 //(Dominant Let's Fuck, D 1.1:
-function dominateVsPlant():void {
+public function dominateVsPlant():void {
 	clearOutput();
 	outputText("With arousal overtaking your body, you walk towards the plant woman with a cool and confident strut.  Taking her curved hips in your hands, you bring your face to hers and grin lustfully, an expression that the plant woman reciprocates by raising her eye brows suggestively.  Her flirty demeanor fills your loins with a need for satisfaction, and you lower her to the ground.  As you lay on top of her you begin to remove your [armor], but it won't come off!  Struggling, you grind your teeth in frustration at the stubborn part of your gear.  Staring at your display with an amused grin, the plant woman lowers her hands to your belt and eases your hands out of the way.  Using only a little bit of force, she manages to undo your the bothersome part of your [armor] with no difficulty.  Your bemused stare at her upstaging and embarrassment of you only causes her to giggle loudly.  Rolling your eyes, you shake your head and lower your lips to hers, while you work your genitalia closer to her tight button.");
 	//(Next scene is V & D 1.1).
@@ -935,7 +935,7 @@ function dominateVsPlant():void {
 }
 
 //(Victory and Dominant scenes converge here) (V & D 1.1):
-function defeatOrDomPlantAndCuntFuck():void {
+public function defeatOrDomPlantAndCuntFuck():void {
 	clearOutput();
 	outputText("Taking your " + cockDescript(x) + " in hand, you angle yourself appropriately and slip it against her labia, soliciting a light gasp from the plant woman as your cock slowly slides across her clitty, the sudden sensation igniting a flame of lust as she wraps her arms around your neck.  Your teasing of her button doesn't abate, continuing to rub your cock across the outside of her vulva before prodding her fuck-hole.  You don't penetrate her just yet; you want her to show you that she NEEDS it.  Sensing your 'cruel' intentions, she wraps her legs around you and pulls herself toward you, intent on impaling her sex on your shaft.  Amused, you place your elbows beside her head and lay your arms out straight, increasing the force ever so slightly behind your cock with the added leverage.  The sensation of pushing past her clit and into her increases and intensifies until you feel a yielding from her sex, signaling your successful penetration.  A pleasurable moan escapes her lips as her hands clench the dirt on the ground, and she closes her eyes to relish the warmth of your member inside of her.  You lower your face to hers and plant a kiss on the her lips, something she's happy to reciprocate as she darts her tongue in your mouth, holding your face close to hers and wanting to keep you right where you are for as long as she can.");
 	//If PC has vagina: 
@@ -987,7 +987,7 @@ function defeatOrDomPlantAndCuntFuck():void {
 }
 
 //[Victory: Vaginal w/ cock (corrupted), Vc 1.1] 
-function victoryOverPlantGalWithPCCockCorrupted():void {
+public function victoryOverPlantGalWithPCCockCorrupted():void {
 	clearOutput();
 	outputText("You gloat down at your defeated foe and laugh at her audacity to try and force you to fuck her.  With a devilish smile on your face, you remark to her that things didn't work out the way she planned.  The plant woman, on all fours, turns her head towards you and looks at you with a desperate, fearful expression on her face.  You continue as you tell her that it's time she learned a valuable lesson about trying to have her way with you.  The plant woman can't understand what you are saying, but the malice that radiates from you is clear enough.  You grab an assortment of vines from the bush behind you and begin to wrap them around the feminine creature.  She struggles, unsure if what you have planned for her will be pleasurable or painful.  A few twists of vines later, you successfully bind her arms behind her back and then knot her bindings up. You push her ample bottom up in the air and crack a smirk as you disrobe.  The plant woman stares intently at you, now understanding what you plan to do as she coyfully waves her rear in the air.  With little warning, you plunge your " + cockDescript(x) + " into her pussy.");
 	outputText("\n\nThe plant woman howls at the sudden intrusion and squirms under you.  As you tower over her, you lower your mouth to her ear.  You maliciously exclaim that she likely had a similar idea and to get ready for the fun part to start.  The creature moans as you slide your " + cockDescript(x) + " in and out of her pussy, and you grab her hair and pin her head down against the cold dirt.  Each thrust in her fuck hole makes loud slapping noises as thighs smash off one another, the feeling of dominating this woman driving you forward as you savagely hone her vagina.  You can feel something brushing past your " + cockDescript(x) + " with every savage thrust;  Given the nature of this creature, you reckon that the walls of her pussy are similar to that of the barbed internode on a plant without any cutting or pain, pure pleasure instead in their place.  Taking the time to pull out on occasion, you smash her clit with your " + cockDescript(x) + " and pinching her nipples in the process.  She cries out in a mix of pain and ecstasy with every strike, and a little more pussy juice runs out of her each time.  You place a few fingers in her mouth, and she begins to suck them sensually in-between moans.  Deciding that slapping her clit has gone on long enough, you ram your " + cockDescript(x) + " back into her, soliciting yet another flurry of moans and thrashing.");
@@ -1004,14 +1004,14 @@ function victoryOverPlantGalWithPCCockCorrupted():void {
 	else victoryOverPlantGalWithPCCockCorrupted(false);	
 }
 //[Yes] - goofuck
-function corruptDomWinFuckGooGal():void {
+public function corruptDomWinFuckGooGal():void {
 	clearOutput();
 	outputText("Taking the slimy mass that is your lower body, you push against her tight ass and let it ooze into her anus.  The wet and sloppy intrusion at her pucker causes a cry of fulfilled desire to escape from her mouth.  Her tongue - not content with being the odd one out - hangs past her open mouth as she giggles like a whore, the creature overwhelmed and utterly obedient to your desires as you fuck her roughly and cause her to leak her sexual fluids like a boat with a hole in it.");
 	victoryOverPlantGalWithPCCockCorrupted(false);
 }
 	
 //End scene for Vc 1.1
-function victoryOverPlantGalWithPCCockCorrupted(newl:Boolean = false):void {
+public function victoryOverPlantGalWithPCCockCorrupted(newl:Boolean = false):void {
 	if(newl) clearOutput();
 	else outputText("\n\n");
 	outputText("After an eternity of ravaging her pussy, you feel your load building up pressure and getting ready to explode.  You tighten your grip on the plant woman's hair and with one last thrust fill her womb with your corrupted semen.  You jerk her hair back, forcing her head back towards your mouth as you begin to neck her.  \"<i>AuuughhhAHHHHHHHHHHHHHHH!</i>\" she screams out as you pull on her hair, with her pussy clamping down on your " + cockDescript(x) + ".  Her fuck hole ever so eager to receive your seed, her body convulses violently as you continue to fire more semen into the floral vixen's cervix.  The excretion is too much, and with a groan, you pass out on top of her.");
@@ -1022,7 +1022,7 @@ function victoryOverPlantGalWithPCCockCorrupted(newl:Boolean = false):void {
 }
 	
 //(Victory (light side) or Dominant Let's Fuck!: Get BJ) 
-function victoryDefeatPlantGirlGetBJ():void {
+public function victoryDefeatPlantGirlGetBJ():void {
 	clearOutput();
 	//(Victory, V 1.2: 
 	outputText("As you approach the plant creature you feel a twitch in your pants; you can't help but blush at the fact that after all that fighting you're sporting a big tent.  With a smile on your face you walk over to the plant woman, who is knelt over and trying to catch her breath.  You place a hand on the creature's shoulder and whistle;  The plant woman quickly sits up right and turns, accidentally hitting her head on your " + multiCockDescriptLight() + ".  She pulls back, uncertain of the thing that just jabbed her in the side of the head.  You let out an amused laugh, and cross your arms as the creature stares at you for a few moments while trying to assess the situation.  It isn't until she looks down at your crotch does she realize just what she hit and why you are standing there with a perverted grin on your face.  Her mouth opens slightly, and an expression of curiosity appears on her face. She looks up at you with puppy dog eyes, and then grins herself.  You nod at her and beckon her to come to you.  The plant woman raises an eyebrow in interest and then darts over to you.");
@@ -1031,7 +1031,7 @@ function victoryDefeatPlantGirlGetBJ():void {
 }
 
 //(Dominant Let's Fuck!, D 1.2: 
-function victoryDefeatPlantGirlGetBJDARKVADER():void {
+public function victoryDefeatPlantGirlGetBJDARKVADER():void {
 	clearOutput();
 	outputText("Your " + multiCockDescriptLight() + " become");
 	if(player.cockTotal() == 1) outputText("s");
@@ -1041,7 +1041,7 @@ function victoryDefeatPlantGirlGetBJDARKVADER():void {
 }
 
 //(Victory and Dominant scenes converge here, V and D 1.2: 
-function victoryDefeatPlantGirlGetBJMainSCREENON():void 
+public function victoryDefeatPlantGirlGetBJMainSCREENON():void 
 {
 	clearOutput();
 	outputText("She quickly grabs a hold of your [cock biggest] through your [armor] and begins stroking it lovingly.  The plant woman starts at the base of your shaft and strokes upwards towards the head, twisting her hand around it while using her palm to massage the underside of your glans.  She alternates this with jerking your cock for a few moments until you begin to disrobe, the plant creature licking her lips in anticipation as you slowly remove your [armor].");
@@ -1094,7 +1094,7 @@ function victoryDefeatPlantGirlGetBJMainSCREENON():void
 
 //[Victory: oral (tentacle dick that is longer than 24 inches)] (V and D 1.2tc, respectively)
 //(Follows normal oral scenes (V 1.2 or D 1.2) until the plant woman tries to take your cock down her throat for the first time)
-function plantGirlPCWinGetTentacleBJ():void {
+public function plantGirlPCWinGetTentacleBJ():void {
 	outputText("\n\nYour " + cockDescript(x) + " hits her tonsils like a boulder, and then contorts into an angle down her throat.  The plant girl giggles as your rod works its way down into her, which sends vibrations through your member.  Shuttering, you grab the creature's head and thrust your pelvis towards her, intending to ram your cock even further.  The plant creature shoots you with a condescending look, and you begin to pull out; you don't want to suffocate the poor thing after all.");
 	//[If cock is shorter than 48 inches]
 	if(player.cocks[x].cockLength < 48) {
@@ -1131,7 +1131,7 @@ function plantGirlPCWinGetTentacleBJ():void {
 
 //[Victory (light side)  or Dominant Let's Fuck!: Anal 
 //(cock(s) less than 24 inches in length, and 4 inches in width. Ignore length check is PC has Ten. Dick(s))] (V 1.3 and   D 1.3, respectively)
-function beatPlantGirlDomLetsFuckAnal():void {
+public function beatPlantGirlDomLetsFuckAnal():void {
 	clearOutput();
 	//Dominant is also included here, but I am having formatting issues with headers
 	//(Victory, V 1.3)
@@ -1204,7 +1204,7 @@ function beatPlantGirlDomLetsFuckAnal():void {
 }
 
 //[Victory: Anal (corrupted), Vc 1.3] 
-function pcBeatsPlantgirlAndCorruptAssFuck():void {
+public function pcBeatsPlantgirlAndCorruptAssFuck():void {
 	clearOutput();
 	outputText("The plant woman lays on the ground in a heap, utterly defeated; unable to try and have her way with you anymore.  You glower at the plant creature as she whimpers and begin to disrobe in front of the creature.  She looks up  as you do this with humiliation and fear in her eyes. Descending down on top of her, you whisper in an authoritative voice, “What part of 'no' don't you understand, you cunt? Did you think you could have your way with me and I would be okay with that?”  The plant woman lies against the ground, not daring to move, with only her breast occasionally brushing against you as she breathes.  You grab the plant woman by the hips and fall backwards on your [butt], bringing her up from a prone position into a suitable one for straddling. Staring into her eyes you chidingly tell her that she wanted sex, so she's going to get what she craves  You spin her around and lift her up by her thighs, with your " + cockDescript(x) + " pressed against her ass. She stares at you out of the corner of her eye while blushing, eager to have you inside of her.");
 	
@@ -1242,13 +1242,13 @@ function pcBeatsPlantgirlAndCorruptAssFuck():void {
 }
 
 //[Penetrate her]
-function nagaPenetrateWithTailDuringPlantGirlMeanAnalPCWin():void {
+public function nagaPenetrateWithTailDuringPlantGirlMeanAnalPCWin():void {
 	clearOutput();
 	outputText("With a twist of your sleek snake tail, you angle your tip to thrust up into her.  The plant woman doesn't see your tail coming and shrieks as you dart up into her clit, tip pushing her pussy lips aside as you work as much tail end into her as possible.  Thrashing manically, the plant woman moans theatrically as you start the process of double pumping her pussy and ass.");
 	pcBeatsPlantgirlAndCorruptAssFuckPt2(true);
 }
 
-function pcBeatsPlantgirlAndCorruptAssFuckPt2(tail:Boolean = false):void {
+public function pcBeatsPlantgirlAndCorruptAssFuckPt2(tail:Boolean = false):void {
 	//Orgasm] 
 	outputText("\n\nThe urge to cum rises, but you muster all of your self control in order to not orgasm too early; you want her to 'suffer' for her actions.");
 	
@@ -1263,7 +1263,7 @@ function pcBeatsPlantgirlAndCorruptAssFuckPt2(tail:Boolean = false):void {
 }
 
 //Victory (light side) or Dominant Let's Fuck!: Suck her dick
-function victorySuckPlantgirlsDick():void {
+public function victorySuckPlantgirlsDick():void {
 	clearOutput();
 	// V 1.4 and D 1.4, respectively
 	//(Victory intro, V 1.4: 
@@ -1301,7 +1301,7 @@ function victorySuckPlantgirlsDick():void {
 
 //Victory (light side) or Dominant Let's Fuck!: anal ride (light side)
 //V 1.5 and D 1.5, respectively]
-function beatPlantGirlAndTakePlantCockInButt():void {
+public function beatPlantGirlAndTakePlantCockInButt():void {
 	clearOutput();
 	//(Victory, V 1.5: 
 	if(inCombat()) outputText("Lowering your [weapon], you study the creature that you have just defeated.  As she pants and struggles to get up, you note the corruptive nature the local ecology has had on her body, warping and shaping her sexual features to be more plant-like.  Looking around the battle sight you see the vines that she intended to use to trap you, and an idea crosses your mind.  If she had control over the vines, maybe she can sex your ass with them.  Or maybe she can morph. Who knows?");
@@ -1372,7 +1372,7 @@ function beatPlantGirlAndTakePlantCockInButt():void {
 }
 
 //[Victory: Blowjob and Anal (corrupted), both Vc 1.4 and 1.5]
-function defeatPlantgirlBlowAndButtfuckCorrupt():void {
+public function defeatPlantgirlBlowAndButtfuckCorrupt():void {
 	clearOutput();
 	if(flags[TIMES_GOT_CORRUPT_BJ_ANAL_PLANTGIRL_SCENE] >= 2) {
 		
@@ -1386,7 +1386,7 @@ function defeatPlantgirlBlowAndButtfuckCorrupt():void {
 }
 
 //Victory and Dominant: Fuck her cock w/ your pussy (light side)
-function defeatPlantgirlBlowAndButtfuckPure():void {
+public function defeatPlantgirlBlowAndButtfuckPure():void {
 	//V 1.6 and D 1.6
 	clearOutput();
 	outputText("With your hands on your hips you " + player.mf("walk","sway"));
@@ -1400,7 +1400,7 @@ function defeatPlantgirlBlowAndButtfuckPure():void {
 }
 
 //(Victory and Dominant scenes converge here, V and D 1.6):
-function defeatPlantgirlBlowAndButtfuckPure():void {
+public function defeatPlantgirlBlowAndButtfuckPure():void {
 	outputText("\n\nAmused, you disrobe and scan the plant woman's body for something penile to stuff your vagina with; however, much to your chagrin, it appears that this creature DOES NOT have a cock.  Rolling your eyes you gaze across the bush to find something to satiate your needs, and your gaze meets one of the vines that the creature used to try and trap you.  “Well, it will have to do” you say to yourself as you grab the vine and press it against your ");
 	if(player.isNaga()) outputText("now exposed ");
 	outputText(clitDescript() + ".  The plant woman yelps in surprise as the vine makes contact with your labia, causing you to jump a little.  You turn to face the plant woman, who is blushing profusely and resting her hand on her pussy.  Looking at the vegetation, you deduce that she must be able to feel you along her vines and that these creepers may also function as penile appendages.  A grin spreads across your face as the realization hits you, and you bring the vine back to your sex and tease your vulva.  Soft moans escape the plant girl as the head of the perverted vegetation brushes past your clit, and you ");
@@ -1419,7 +1419,7 @@ function defeatPlantgirlBlowAndButtfuckPure():void {
 	
 }
 //[Vines and cock, V and D 1.6vc]
-function vineAndCockWithPlantGirlPCWin(scene:int = 1):void {
+public function vineAndCockWithPlantGirlPCWin(scene:int = 1):void {
 	//[Sticking with the vine(s), Vine in pussy/Vines in pussy, ass, and mouth, V and D 1.6v, V and D 1.6vp and V and D 1.6mvp, respectively]
 	clearOutput();
 	//(Sticking with the vines, V and D 1.6v:

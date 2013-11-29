@@ -1,5 +1,5 @@
 ﻿//Greeting
-function greetMaleSpiderMorph():void {
+public function greetMaleSpiderMorph():void {
 	outputText("", true);
 	spriteSelect(74);
 	outputText("A spider-morph drops out of a tree in front of you, hanging by a single thread of sparkling webbing.  His purple eyes gaze deeply into your own while he looks you up and down.  ", false);
@@ -19,7 +19,7 @@ function greetMaleSpiderMorph():void {
 }
 
 //Talk
-function talkToSpiderBoy():void {
+public function talkToSpiderBoy():void {
 	outputText("", true);
 	spriteSelect(74);
 	outputText("The male spider-morph grins even wider, displaying the partially retracted tips of his two fangs.  You smile back nervously while he rotates about and drops lightly onto his feet, gleefully approaching you in spite of his nudity.  Sensing your discomfort, he stops a few yards away and pulls some food from a pouch on his hip, offering you some dried meats and fruits.  You take one of the more harmless looking ones and sit down with him.  He starts talking first, telling of how his people were a young race of transformed off-worlders.  The demons put a quick end to that, and recruited a large amount of the more aggressive driders and arachnes from his tribe.  He quickly explains that arachne are like him, but with chitinous exoskeletons covering their whole body, except for the face.  Driders on the other hand, have the body of a human from the hips up but a giant spider body below.\n\n", false);
@@ -31,7 +31,7 @@ function talkToSpiderBoy():void {
 	takeItem();
 }
 //*Victory Pretext:rr
-function defeatSpiderBoy():void {
+public function defeatSpiderBoy():void {
 	outputText("", true);
 	spriteSelect(74);
 	var mount:Number = 0;
@@ -55,7 +55,7 @@ function defeatSpiderBoy():void {
 	else eventParser(5007);
 }
 //Loss selector
-function loseToMaleSpiderMorph():void {
+public function loseToMaleSpiderMorph():void {
 	var choices:Array = new Array();
 	if(player.hasCock()) choices[choices.length] = 0;
 	if(player.hasVagina()) choices[choices.length] = 1;
@@ -72,7 +72,7 @@ function loseToMaleSpiderMorph():void {
 }
 
 //*Victory Buttfucko
-function victoryButtFuck():void {
+public function victoryButtFuck():void {
 	outputText("", true);
 	spriteSelect(74);
 	//*Summary:  Reaming some anus.
@@ -130,7 +130,7 @@ function victoryButtFuck():void {
 	eventParser(5007);
 }
 //*Victory Frotting? (too biggo)
-function victoryFrotTheSpoidah():void {
+public function victoryFrotTheSpoidah():void {
 	outputText("", true);
 	spriteSelect(74);
 	outputText("You push the ", false);
@@ -168,7 +168,7 @@ function victoryFrotTheSpoidah():void {
 }
 
 //*Victory Cowgirl
-function victoryCowgirlRidingOnSpiderBoi():void {
+public function victoryCowgirlRidingOnSpiderBoi():void {
 	//*Summary: Throw him on his back and mount up on that throbbing, ebon piece of uncut spidercock as he looks to you meekly, panting, needing something to tend to his foreskinned dick so badly...
 	outputText("", true);
 	spriteSelect(74);
@@ -218,7 +218,7 @@ function victoryCowgirlRidingOnSpiderBoi():void {
 	
 //*Loss: Get butt-fucked
 //*Summary: Male only scene for maximum prostate pounding - possible random choice between two positions, plain doggy style or the 'lucky' one, where he will curl you over yourself and fuck you so you can watch his foreskinned spiderboy cock slam your asshole -while- you drip all over your face.
-function spiderBoyLossMaleButtfuck():void {
+public function spiderBoyLossMaleButtfuck():void {
 	outputText("", true);
 	spriteSelect(74);
 	outputText("You collapse", false);
@@ -295,7 +295,7 @@ function spiderBoyLossMaleButtfuck():void {
 
 //*Loss: Impregnation?
 //*Summary: Vagoozles only!
-function loseToSpiderBoyVagFucked():void {
+public function loseToSpiderBoyVagFucked():void {
 	outputText("", true);
 	spriteSelect(74);
 	outputText("As your ", false);
@@ -358,7 +358,7 @@ function loseToSpiderBoyVagFucked():void {
 	eventParser(5007);
 }
 
-function spiderPregVagBirth():void {
+public function spiderPregVagBirth():void {
 	outputText("\n", false);
 	spriteSelect(74);
 	if(player.vaginas.length == 0) {
