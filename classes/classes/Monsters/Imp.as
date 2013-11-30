@@ -14,7 +14,7 @@
 	{
 		
 
-		public function Imp(playerPtr:*) 
+		public function Imp(mainClassPtr:*) 
 		{
 			
 			trace("Imp Constructor!");
@@ -58,7 +58,7 @@
 			
 			//Level Stats
 			this.level                          = 1;
-			this.XP                             = this.totalXP(playerPtr.level);
+			this.XP                             = this.totalXP(mainClassPtr.player.level);
 			this.gems                           = rand(5) + 5;
 			
 			//Appearance Variables

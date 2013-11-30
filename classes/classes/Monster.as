@@ -5,7 +5,7 @@
 	
 	/**
 	 * ...
-	 * @author Yoffy
+	 * @author Yoffy, Fake-Name
 	 */
 	public class Monster extends Creature 
 	{
@@ -50,6 +50,10 @@
 		}
 		
 
+		public function eMaxHP():Number 
+		{
+			return this.tou * 2 + 50 + this.bonusHP;
+		}
 
 		protected function totalXP(playerLevel:Number):Number 
 		{
