@@ -353,14 +353,14 @@ public function getCurrentStackTrace():String		// Fuck, stack-traces only work i
 	var stackTrace:String = tempError.getStackTrace();
 	return stackTrace;
 }
-public function errorPrint(details:* = null)
+public function errorPrint(details:* = null):void
 {
 	rawOutputText("<b>Congratulations, you've found a bug!</b>", true);
 	rawOutputText("\nError: Unknown event!");
 	rawOutputText("\n\nPlease report that you had an issue with code: \"" + details + "\" ");
 	rawOutputText("\nGame version: \"" + ver + "\" (<b>THIS IS IMPORTANT! Please be sure you include it!</b>) ");
 
-	var sTrace = getCurrentStackTrace();
+	var sTrace:String = getCurrentStackTrace();
 
 	if (sTrace)	// Fuck, stack-traces only work in the debug player.
 		rawOutputText("and stack-trace: \n <pre>" + sTrace + "</pre>\n"); 	

@@ -229,7 +229,7 @@ flagReplacements =  [
 ["UNKNOWN_FLAG_NUMBER_00228",                                       "UNKNOWN_FLAG_NUMBER_00228"],                      # Diapause fluid store
 ["UNKNOWN_FLAG_NUMBER_00229",                                       "UNKNOWN_FLAG_NUMBER_00229"],                      # Diapause gain need displayed?
 ["UNKNOWN_FLAG_NUMBER_00230",                                       "UNKNOWN_FLAG_NUMBER_00230"],                      # Sharkgirls met? (Izma counter)
-["UNKNOWN_FLAG_NUMBER_00231",                                       "UNKNOWN_FLAG_NUMBER_00231"],                      # Izma fight
+["UNKNOWN_FLAG_NUMBER_00231",                                       "IZMA_TIMES_FOUGHT_AND_WON"],                      # Izma fight
 ["UNKNOWN_FLAG_NUMBER_00232",                                       "UNKNOWN_FLAG_NUMBER_00232"],                      # Times Talked At shark pussy
 ["UNKNOWN_FLAG_NUMBER_00233",                                       "UNKNOWN_FLAG_NUMBER_00233"],                      # Izma worm scare (1 = Izma has been scared off by worms)
 ["UNKNOWN_FLAG_NUMBER_00234",                                       "UNKNOWN_FLAG_NUMBER_00234"],                      # Izma loot storage - Izma saved loot status

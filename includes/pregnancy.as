@@ -7,7 +7,7 @@
 //23 == FROG BUTT EGG
 public function updatePregnancy():Boolean {
 	var displayedUpdate:Boolean = false;
-	var pregText = "";
+	var pregText:String = "";
 	if((player.pregnancyIncubation <= 0 && player.buttPregnancyIncubation <= 0) ||
 		(player.pregnancyType == 0 && player.buttPregnancyType == 0)) {
 		return false;

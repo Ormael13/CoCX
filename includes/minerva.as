@@ -1248,7 +1248,7 @@ public function pcGetsEatenOutByMinerva():void {
 //Shark-bite:
 public function minervaBite():void {
 	outputText("The siren paces around you in circles, waiting for the right moment to strike.  Unexpectedly quick thanks to her clawed feet, she propels herself toward you at full speed.  Her maw opens wide to chomp on you, showing off multiple rows of glinting, razor-sharp teeth.");
-	var damage = int((monster.str + 85) - rand(player.tou) - player.armorDef);
+	var damage:int = int((monster.str + 85) - rand(player.tou) - player.armorDef);
 	if(combatMiss() && combatEvade() && combatFlexibility() && combatMisdirect()) {
 		outputText("  You get out of the way just in time, Minerva making a loud chomping sound as she only catches the air.");
 	}
@@ -1267,7 +1267,7 @@ public function minervaBite():void {
 public function minervaKnowsKungfu():void {
 	outputText("The blue beauty flaps her wings and launches herself into the air.  Once she's gained as much altitude as she can, she dive-bombs you, her demon-clawed feet leading the attack.");
 	
-	var damage = int((monster.str + monster.weaponAttack+100) - rand(player.tou) - player.armorDef);
+	var damage:int = int((monster.str + monster.weaponAttack+100) - rand(player.tou) - player.armorDef);
 	monster.spe -= 70;
 	if(combatMiss() && combatEvade() && combatFlexibility() && combatMisdirect()) {
 		outputText("  You jump out of the landing zone just in time, piles of dirt exploding in all directions as Minerva slams into the ground.");
@@ -1286,7 +1286,7 @@ public function minervaKnowsKungfu():void {
 
 //Tail-whip
 public function tailWhip():void {
-	var damage = int((monster.str+35) - rand(player.tou) - player.armorDef);
+	var damage:int = int((monster.str+35) - rand(player.tou) - player.armorDef);
 
 	outputText("She runs at you, holding the weapon like she's about to chop into your side.  You brace yourself, but when she's only a few feet away, she starts to turn her body.");
 	//[else block] 
@@ -1308,7 +1308,7 @@ public function tailWhip():void {
 //Halberd stab:
 public function minervaUsesHalberdStab():void {
 	outputText("Minerva charges at you, brandishing her halberd's sharp tip toward you.");
-	var damage = int((monster.str+monster.weaponAttack) - rand(player.tou));
+	var damage:int = int((monster.str+monster.weaponAttack) - rand(player.tou));
 
 	if(combatMiss() && combatEvade() && combatFlexibility() && combatMisdirect()) outputText("  You sidestep the attack just as she thrusts the point past your face.");
 	
@@ -1327,7 +1327,7 @@ public function minervaUsesHalberdStab():void {
 //Halberd CHOP:
 public function minervaUsesHalberdCHOP():void {
 	outputText("She moves in close, practically right in front of you and raises the halberd.");
-	var damage = int((monster.str+100) - rand(player.tou) - player.armorDef);
+	var damage:int = int((monster.str+100) - rand(player.tou) - player.armorDef);
 
 	if(combatMiss() && combatEvade() && combatFlexibility() && combatMisdirect()) outputText("  You get out of the way quickly, her attack chopping deeply into the earth. ");
 	
@@ -1346,7 +1346,7 @@ public function minervaUsesHalberdCHOP():void {
 //White Fire
 public function kiteFire():void {
 	outputText("The siren holds her hand out, flashing you a cunning smirk and snapping her fingers.  Your entire body is engulfed in white-hot flames, searing flesh and burning your [armor].  The sudden flash of heat and fire elicit panic from deep within you, causing you to cry out and roll on the ground to put the fires out.  The burns aren't too severe, but you know you can't keep getting hit like that!");
-	var damage = int(10+(monster.inte/3 + rand(monster.inte/2)) * 1.5);
+	var damage:int = int(10+(monster.inte/3 + rand(monster.inte/2)) * 1.5);
 	damage = takeDamage(damage);
 	outputText(" (" + damage + ")");
 	combatRoundOver();

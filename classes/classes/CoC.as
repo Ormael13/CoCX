@@ -239,7 +239,7 @@
 		public var tempPerk:String;
 		public var monster:Monster;
 		public var itemSwapping:Boolean;
-		public var flags;
+		public var flags:DefaultDict;
 		public var gameState:Number;
 		public var menuLoc:Number;
 		public var itemSubMenu:Boolean;
@@ -267,7 +267,7 @@
 		public var temp:int;
 		public var args:Array;
 		public var funcs:Array;
-		public var oldStats;
+		public var oldStats:*; // I *think* this is a generic object
 		public var inputManager:InputManager;
 
 
@@ -551,7 +551,7 @@
 		}
 
 
-		public function run()
+		public function run():void
 		{
 
 		

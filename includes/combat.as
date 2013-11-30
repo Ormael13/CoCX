@@ -164,7 +164,7 @@ public function totalXP():Number {
 
 
 //5000 6999
-public function doCombat(eventNum:Number)
+public function doCombat(eventNum:Number):void
 {
 	var temp2:Number = 0;
 	var temp3:Number = 0;
@@ -17801,7 +17801,7 @@ public function corruptedFoxFire():void {
 	outputText("Holding out your palm, you conjure corrupted purple flame that dances across your fingertips.  You launch it at " + monster.a + monster.short + " with a ferocious throw, and it bursts on impact, showering dazzling lavender sparks everywhere.");
 	
 	
-	var dmg = int(10+(player.inte/3 + rand(player.inte/2)) * spellMod());
+	var dmg:int = int(10+(player.inte/3 + rand(player.inte/2)) * spellMod());
 	if(monster.cor >= 66) dmg = Math.round(dmg * .66);
 	else if(monster.cor >= 50) dmg = Math.round(dmg * .8);
 	//High damage to goes.
@@ -17839,7 +17839,7 @@ public function foxFire():void {
 	}
 	//Deals direct damage and lust regardless of enemy defenses.  Especially effective against corrupted targets.
 	outputText("Holding out your palm, you conjure an ethereal blue flame that dances across your fingertips.  You launch it at " + monster.a + monster.short + " with a ferocious throw, and it bursts on impact, showering dazzling azure sparks everywhere.");
-	var dmg = int(10+(player.inte/3 + rand(player.inte/2)) * spellMod());
+	var dmg:int = int(10+(player.inte/3 + rand(player.inte/2)) * spellMod());
 	if(monster.cor < 33) dmg = Math.round(dmg * .66);
 	else if(monster.cor < 50) dmg = Math.round(dmg * .8);
 	//High damage to goes.

@@ -138,7 +138,7 @@ public function treeMenu(output:Boolean = true):void {
 
 public function fertilizeHolli(cock:Boolean = true):void {
 	//20% chance per sexing.  Up to bonus 20% for jizz or fertility!
-	var odds = 20;
+	var odds:Number = 20;
 	if(cock && player.hasCock()) {
 		odds += player.cumQ()/300;
 		if(odds > 40) odds = 40;
@@ -1188,7 +1188,8 @@ public function struggleOutOfHolli():void {
 	combatRoundOver();
 }
 
-public function waitForHolliConstrict(newScreen:Boolean = true) {
+public function waitForHolliConstrict(newScreen:Boolean = true) : void
+{
 	if(newScreen) clearOutput();
 	outputText("The ominous roseate shaft hovers over you, and its owner strokes the base lewdly, moaning.  \"<i>Oooh, gonna... cum!</i>\" she shrieks.  As a low moan escapes her, the stalk bloats and begins to spill milky-white sap into your mouth!  Held rigid, you're eventually forced to swallow just to breathe; the sap slides into your stomach and warmth radiates to your midsection and groin, making you feel flushed and hot.  Holli sighs in satisfaction, evidently more relaxed after her climax.");
 	//lower monster lust by medium-lots and apply med sens-based lust damage

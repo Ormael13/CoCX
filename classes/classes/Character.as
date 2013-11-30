@@ -56,12 +56,12 @@
 		//6 = hellhound
 		//7 = centaur
 		//8 = MARBLZ
-		public var pregnancyType = 0;
-		public var pregnancyIncubation = 0;
+		public var pregnancyType:Number = 0;
+		public var pregnancyIncubation:Number = 0;
 		
 		//2 = bee
-		public var buttPregnancyType = 0;
-		public var buttPregnancyIncubation = 0;
+		public var buttPregnancyType:Number = 0;
+		public var buttPregnancyIncubation:Number = 0;
 		
 		//Key items
 		public var keyItems:Array;
@@ -200,7 +200,7 @@
 			return output;
 		}
 		
-		public function modThickness(goal:Number, strength:Number = 1)
+		public function modThickness(goal:Number, strength:Number = 1):String
 		{
 			var oldN:Number = thickness;
 			if (goal == thickness)
@@ -231,7 +231,7 @@
 			return "";
 		}
 		
-		public function modTone(goal:Number, strength:Number = 1)
+		public function modTone(goal:Number, strength:Number = 1):String
 		{
 			var oldN:Number = tone;
 			if (goal == tone)
@@ -978,7 +978,7 @@
 		//Create a keyItem
 		public function createKeyItem(keyName:String, value1:Number, value2:Number, value3:Number, value4:Number):void
 		{
-			var newKeyItem = new keyItemClass();
+			var newKeyItem:* = new keyItemClass();
 			//used to denote that the array has already had its new spot pushed on.
 			var arrayed:Boolean = false;
 			//used to store where the array goes
@@ -1083,7 +1083,7 @@
 			}
 		}
 		
-		public function addKeyValue(statusName:String, statusValueNum:Number = 1, newNum:Number = 0)
+		public function addKeyValue(statusName:String, statusValueNum:Number = 1, newNum:Number = 0):void
 		{
 			var counter:Number = keyItems.length;
 			//Various Errors preventing action

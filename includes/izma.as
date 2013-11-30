@@ -483,7 +483,7 @@ public function loseToIzma():void {
 		else outputText("pucker", false);
 		outputText(" of yours!</i>\"  ", false);
 		//[(If Izmafight is -1 or -2)
-		if(flags >= -2) outputText("With some reluctance, but driven by your promise, you remove pieces of your " + player.armorName + " until you stand naked before the hungrily ogling tigershark.", false);
+		if(flags[UNKNOWN_FLAG_NUMBER_00231] >= -2) outputText("With some reluctance, but driven by your promise, you remove pieces of your " + player.armorName + " until you stand naked before the hungrily ogling tigershark.", false);
 		//(If Izmafight is -3 or less)
 		else outputText("You are already undressed before Izma has finished speaking.  The tigershark is clearly surprised, and, to be honest, a part of you is surprised too... but it's drowned out by the need to give yourself over to Izma's lusts.", false);
 		outputText("\n\n", false);
@@ -1365,7 +1365,8 @@ public function izmaLakeDominate():void {
 	doNext(13);
 }
 
-public function izmaLakeDominateContinueVanilla(vanilla:Boolean = true) {
+public function izmaLakeDominateContinueVanilla(vanilla:Boolean = true) :void
+{
 	spriteSelect(32);
 	var cockIndex:Number = player.cockThatFits(65);
 	if(cockIndex < 0) cockIndex = 0;
@@ -2935,7 +2936,7 @@ public function fuckIzmasPussyDominate():void {
 	spriteSelect(32);
 	var x:Number = player.cockThatFits(65);
 	if(x < 0) x = 0;
-	var y = x + 1;
+	var y:Number = x + 1;
 	outputText("Fixating on Izma's ");
 	if(flags[IZMA_NO_COCK] == 0) outputText("cock ");
 	else outputText("cunt ");

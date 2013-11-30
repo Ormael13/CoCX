@@ -204,7 +204,7 @@ public function spiderStandardAttack():void {
 	else {
 		outputText("A number of spiders rush at you, trying to claw and bite you.  You manage to knock most of them away, but a few nasty hits manage to punch through your [armorName].  ", false);
 		//Determine damage - str modified by enemy toughness!
-		var damage = int((monster.str + monster.weaponAttack) - rand(player.tou) - player.armorDef) + 20;
+		var damage:int = int((monster.str + monster.weaponAttack) - rand(player.tou) - player.armorDef) + 20;
 		if(damage > 0) damage = takeDamage(damage);
 		if(damage <= 0) {
 			damage = 0;
@@ -304,7 +304,7 @@ public function loseToSpiderMob():void {
 }
 
 //Meeting Kiha - \"<i>Friendly</i>\" State (Z)
-public function kihaFriendlyGreeting(output = true):void {
+public function kihaFriendlyGreeting(output:Boolean = true):void {
 	if(output) clearOutput();
 	spriteSelect(72);;
 	if(output && flags[KIHA_AFFECTION_LEVEL] == 1 && flags[KIHA_TALK_STAGE] >= 7) {
@@ -787,7 +787,7 @@ public function lovingHugsForRetards():void {
 //\"<i>Warm</i>\"/Lover Kiha Intro
 public function warmLoverKihaIntro(output:Boolean = true):void {
 	var campo:Number = 0;
-	var leave = 13;
+	var leave:* = 13;
 	if(output) {
 		clearOutput();
 		spriteSelect(72);;

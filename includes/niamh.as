@@ -51,7 +51,7 @@ public function approachNiamh():void {
 	if(flags[MET_NIAMH] > 0) outputText("Niamh gives you a friendly, but professional, smile as you draw near.  She smiles and shakes her head knowingly as your gaze inevitably falls to her chest, obviously as full of booze as ever.  Small puddles of alcoholic fluid slowly accumulate from the steady drip of her swollen nipples.  \"<i>Well, hello, consumer - yes, up here - hello, consumer.  Did ye want to try more o' me Black Cat Beer?  Just remember the rules; two bits a glass, treat me gentle, and no sneakin' a drink from 'the tap'.</i>\"");
 	else outputText("You approach the burdened woman, hailing her politely.  Her ears twitch at the sound, and she sends a crooked smile your way.  \"<i>What can I do ya for?</i>\" she asks somewhat tiredly, the lilt of her words hinting at an accent.  \"<i>Up for a bit o' the brew, perhaps?</i>\"  Your question regarding why she's peddling alcohol dies in your throat as your gaze inevitably drops to her dusky-toned bosom.  As you watch, a small droplet of cloudy golden liquid forms at her engorged teat and splashes into the growing puddle under the nipple.  From the array of top-bearing beer mugs placed within reaching distance on the ground, you begin to put the pieces together.  Is she actually... lactating beer?  You glance back up at her; she smirks knowingly, casually resting her forearms against her expansive breast-flesh and using them to push together and amplify the already-incredible cleavage.  She takes a deep breath, then chants in a singsong voice, \"<i>Black cat beer, two bits a glass.  Get it quick, for it's goin' fast.  Just treat me gentle, or you're in for a slap, and no, you can't have it 'straight from the tap'.</i>\"  After a couple moments, you shrug, figuring stranger things have happened in Mareth.");
 	
-	var beer = 0;
+	var beer:* = 0;
 	if(player.gems >= 2) 
 		beer = 3525;
 	else outputText("\n\n<b>You're too poor for beer.</b>");
@@ -93,7 +93,7 @@ public function getANiamhBeer():void {
 	player.gems -= 2;
 	statScreenRefresh();
 	//[Here][To Go]
-	var togo = 0;
+	var togo:* = 0;
 	if(player.gems >= 2) togo = blackCatBeerToGo;
 	else outputText("\n\n<b>You're too poor to buy the mug.</b>");
 	flags[GOT_NIAMH_BEER]++;
@@ -205,7 +205,7 @@ public function talkToNiamh():void {
 		}
 	}
 	//[Beer] [Leave]
-	var beer = 0;
+	var beer:* = 0;
 	if(player.gems >= 2) 
 		beer = getANiamhBeer
 	simpleChoices("Beer",beer,"",0,"",0,"",0,"Leave",13);
@@ -286,7 +286,7 @@ public function corruptOrBimboNiamhIntro():void {
 public function maybeLaterNiamh():void {
 	clearOutput();
 	outputText("You chuckle nervously and shake your head, citing your ignorance of all things alcoholic.  Niamh sighs resignedly, reaching forward and grabbing one of her elongated nipples.  With practiced ease, she fills her flagon and takes a deep swig of it.  \"<i>Can't blame me for wantin' a change of pace,</i>\" she mutters.  \"<i>Now, would ye like your own glass of Black Cat Beer, or are ya gonna keep starin' at me tits?</i>\"");
-	var beer = 0;
+	var beer:* = 0;
 	if(player.gems >= 2) beer = getANiamhBeer;
 	else outputText("\n\n<b>You're too poor for beer.</b>");
 	//[Talk] [Get Beer] [Leave]
@@ -492,11 +492,11 @@ public function bazaarNiamh():void {
 	}
 	flags[TIMES_NIAMH_BAZAAR_MET]++;
 	//[Bizarre Bazaar, beer purchase, bimbo and corrupted version]
-	var drink = 0;
+	var drink:* = 0;
 	if(player.gems >= 2) 
 		drink = bazaardNiamhDrink;
 	else outputText("\n\n<b>You're too poor to get a drink.</b>");
-	var fuck = 0;
+	var fuck:* = 0;
 	if(player.hasCock()) 
 		fuck = bazaarSex;
 	simpleChoices("Get A Drink",drink,"Tit-Fuck",fuck,"",0,"",0,"Back",2855);

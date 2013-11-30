@@ -51,7 +51,7 @@
 		
 
 
-		protected function totalXP(playerLevel):Number 
+		protected function totalXP(playerLevel:Number):Number 
 		{
 			//Nerf xp gains by 20% per level over.
 			var difference:Number = playerLevel - this.level;

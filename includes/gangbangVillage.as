@@ -569,9 +569,9 @@ public function owcaMainScreenOn():void {
 	else if(flags[DAYS_SINCE_LAST_DEMON_DEALINGS] > 7 && flags[OWCA_SACRIFICE_DISABLED] == 0) outputText("  More than a week");
 	if(flags[DAYS_SINCE_LAST_DEMON_DEALINGS] >= 7 && flags[OWCA_SACRIFICE_DISABLED] == 0) outputText(" has passed since the last offering to the demons; guarding the pit would certainly help improve your relations with the little town's denizens.");
 	//Option: 
-	var pit = 0;
-	var herd = 0;
-	var tavern = 0;
+	var pit:* = 0;
+	var herd:* = 0;
+	var tavern:* = 0;
 	if(model.time.hours >= 16 && flags[OWCA_SACRIFICE_DISABLED] == 0) {
 		//Pit. Requires 16:00 or later. Leads to the night gangbang (with possible fight) scene, this time fully equipped and clothed. Attitude is raised by 3.
 		pit = zePit;
@@ -1104,7 +1104,8 @@ public function vapulaSlaveFlavorText():void {
 
 //Vapula-Followers interaction: Puru Puru Mouse (Z)
 //switch follower names depending on conditions
-public function mouseWaifuFreakout(amily:Boolean = false, jojo:Boolean = false) {
+public function mouseWaifuFreakout(amily:Boolean = false, jojo:Boolean = false) :void
+{
 	clearOutput();
 	if(amily) {
 		outputText("Amily ");

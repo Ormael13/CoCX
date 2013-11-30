@@ -719,7 +719,7 @@ public function sillyModeKihaAttack():void {
 	}
 	else {
 		//Determine damage - str modified by enemy toughness!
-		var damage = int((monster.str + monster.weaponAttack) - rand(player.tou) - player.armorDef);
+		var damage:int = int((monster.str + monster.weaponAttack) - rand(player.tou) - player.armorDef);
 		damage += 5;
 		damage = takeDamage(damage);
 		outputText("A torrent of heat bursts from between her fingertips as she thrusts her clenched fist forward, the ball of intense flame writhing and burning with a fury unknown to mankind. With one fell swoop, the combined power of her love, anger, and sorrow pushes you backward, launching you out of the swamp and into Marble's pillowy chest. \"<i>Ara ara,</i>\" she begins, but you've already pushed yourself away from the milky hell-prison as you run back towards ");
@@ -753,7 +753,7 @@ public function kihaFirePunch():void {
 	}
 	//HIT!
 	else {
-		var damage = int((monster.str) - (player.armorDef * 1));
+		var damage:int = int((monster.str) - (player.armorDef * 1));
 		damage = takeDamage(damage);
 		outputText("Before you can react, you're struck by the power of her blows, feeling an intense pain in your chest as each fist makes contact.  With a final thrust, you're pushed backwards onto the ground; the dragoness smiles as she pulls her axe out of the ground, her hands still steaming from the fingertips. (" + damage + ")\n", false);
 	}

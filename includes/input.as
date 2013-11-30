@@ -7,7 +7,7 @@
 // import fl.data.DataProvider; 
 // import flash.net.navigateToURL; 
  
-var perkList:Array = new Array( 
+public var perkList:Array = new Array( 
     {label:"Pretend Strength Perk"},
     {label:"Pretend Speed Perk"}
  	/*{label:"Pretend Strength Perk",  

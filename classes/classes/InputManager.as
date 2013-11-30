@@ -436,7 +436,7 @@ package classes
 			for (var key:String in _controlMethods)
 			{
 				trace(key);
-				var ctrlObj = new Object();
+				var ctrlObj:* = new Object();
 				ctrlObj.PrimaryKey = _controlMethods[key].PrimaryKey;
 				ctrlObj.SecondaryKey = _controlMethods[key].SecondaryKey;
 				

@@ -125,13 +125,13 @@ public function saveScreen():void
 	var saveFuncs:Array = new Array();
 	
 	
-	for (var i = 0; i < saveFileNames.length; i += 1)
+	for (var i:int = 0; i < saveFileNames.length; i += 1)
 	{
 		outputText(loadSaveDisplay(saveFileNames[i], String(i + 1)), false);
 		
 		
 		trace("Creating function with indice = ", i);
-		(function(i)		// messy hack to work around closures. See: http://en.wikipedia.org/wiki/Immediately-invoked_function_expression
+		(function(i:int) : void		// messy hack to work around closures. See: http://en.wikipedia.org/wiki/Immediately-invoked_function_expression
 		{
 			saveFuncs[i] = function() : void 		// Anonymous functions FTW
 			{
@@ -210,7 +210,7 @@ public function saveLoad(e:MouseEvent = null):void
 
 public function deleteScreen():void
 {
-	var test;
+	var test:*;
 	outputText("Slot,  Race,  Sex,  Game Days Played\n", true);
 	
 

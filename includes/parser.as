@@ -42,9 +42,9 @@ Planned, but not implemented yet:
 
 import showdown.Showdown;
 
-var sceneParserDebug:Boolean = true;
+public var sceneParserDebug:Boolean = true;
 
-var mainParserDebug:Boolean = false;
+public var mainParserDebug:Boolean = false;
 
 
 // horrible, messy hack
@@ -53,14 +53,14 @@ var mainParserDebug:Boolean = false;
 // eventually, it should be properly refactored into this.parserState, but the parser would need to 
 // be properly class-based at that point.
 
-var thisParserState:Object = new Object();
+public var thisParserState:Object = new Object();
 
 // Lookup dictionary for converting any single argument brackets into it's corresponding string
 // basically [armor] results in the "[armor]" segment of the string being replaced with the
 // results of the corresponding anonymous function, in this case: function():* {return player.armorName;}
 // tags not present in the singleArgConverters object return an error message.
 //
-var singleArgConverters:Object =
+public var singleArgConverters:Object =
 {
 		// all the errors related to trying to parse stuff if not present are
 		// already handled in the various *Descript() functions.
@@ -233,7 +233,7 @@ public var cockHeadLookups:Object = // For subject: "cockHead"
 public var twoWordNumericTagsLookup:Object =
 {
 		"cockfit":
-			function(thisPtr:*, aspect):*
+			function(thisPtr:*, aspect:*):*
 			{
 				if(!thisPtr.player.hasCock()) return "<b>(Attempt to parse cock when none present.)</b>";
 				else
@@ -243,7 +243,7 @@ public var twoWordNumericTagsLookup:Object =
 				}
 			},
 		"cockfit2":
-			function(thisPtr:*, aspect):*
+			function(thisPtr:*, aspect:*):*
 			{
 				if(!thisPtr.player.hasCock()) return "<b>(Attempt to parse cock when none present.)</b>";
 				else {
@@ -252,7 +252,7 @@ public var twoWordNumericTagsLookup:Object =
 				}
 			},
 		"cockheadfit":
-			function(thisPtr:*, aspect):*
+			function(thisPtr:*, aspect:*):*
 			{
 
 				if(!thisPtr.player.hasCock()) return "<b>(Attempt to parse cockhead when none present.)</b>";
@@ -262,7 +262,7 @@ public var twoWordNumericTagsLookup:Object =
 				}
 			},
 		"cockheadfit2":
-			function(thisPtr:*, aspect):*
+			function(thisPtr:*, aspect:*):*
 			{
 				if(!thisPtr.player.hasCock()) return "<b>(Attempt to parse cockhead when none present.)</b>";
 				else {
@@ -271,7 +271,7 @@ public var twoWordNumericTagsLookup:Object =
 				}
 			},
 		"cock":
-			function(thisPtr:*, aspect):*
+			function(thisPtr:*, aspect:*):*
 			{
 				if(!thisPtr.player.hasCock()) return "<b>(Attempt to parse cock when none present.)</b>";
 				else
@@ -281,7 +281,7 @@ public var twoWordNumericTagsLookup:Object =
 				}
 			},
 		"cockhead":
-			function(thisPtr:*, aspect):*
+			function(thisPtr:*, aspect:*):*
 			{
 				if(!thisPtr.player.hasCock()) return "<b>(Attempt to parse cockHead when none present.)</b>";
 				else
@@ -316,13 +316,13 @@ public function convertDoubleArg(inputArg:String):String
 	var argResult:String;
 
 
-	var argTemp = inputArg.split(" ");
+	var argTemp:Array = inputArg.split(" ");
 	if (argTemp.length != 2)
 	{
 		argResult = "<b>!Not actually a two-word tag!\"" + inputArg + "\"!</b>"
 	}
-	var subject = argTemp[0];
-	var aspect = argTemp[1];
+	var subject:* = argTemp[0];
+	var aspect:* = argTemp[1];
 
 	// Figure out if we need to capitalize the resulting text
 	var capitalize:Boolean = isUpperCase(aspect.charAt(0));
@@ -330,7 +330,7 @@ public function convertDoubleArg(inputArg:String):String
 	subject = subject.toLowerCase()
 	aspect = aspect.toLowerCase()
 
-	var inputArg;
+	var inputArg:*;
 
 	// Only perform lookup in twoWordNumericTagsLookup if aspect can be cast to a valid number
 	if (!isNaN(Number(aspect)))
@@ -446,7 +446,7 @@ public function convertConditionalArgumentFromStr(arg:String):*
 {
 	// convert the string contents of a conditional argument into a meaningful variable.
 	arg = arg.toLowerCase()
-	var argResult = 0;
+	var argResult:* = 0;
 
 	// Note: Case options MUST be ENTIRELY lower case. The comparaison string is converted to
 	// lower case before the switch:case section
@@ -502,9 +502,9 @@ public function evalConditionalStatementStr(textCond:String):Boolean
 	}
 	if (mainParserDebug) trace("Expression = ", textCond, "Expression result = [", expressionResult, "], length of = ", expressionResult.length);
 
-	var condArgStr1;
-	var condArgStr2;
-	var operator;
+	var condArgStr1:String;
+	var condArgStr2:String;
+	var operator:String;
 
 	condArgStr1 	= expressionResult[1];
 	operator 		= expressionResult[2];
@@ -512,8 +512,8 @@ public function evalConditionalStatementStr(textCond:String):Boolean
 
 	var retVal:Boolean = false;
 
-	var condArg1;
-	var condArg2;
+	var condArg1:*;
+	var condArg2:*;
 
 	condArg1 = convertConditionalArgumentFromStr(condArgStr1);
 	condArg2 = convertConditionalArgumentFromStr(condArgStr2);
@@ -613,8 +613,8 @@ public function parseConditional(textCtnt:String, depth:int):String
 	var parenthesisCount:Number = 0;
 
 	//var ifText;
-	var conditional;
-	var output;
+	var conditional:*;
+	var output:*;
 
 	tmp = textCtnt.indexOf("(");
 
@@ -694,9 +694,9 @@ public function enterParserScene(sceneName:String):String
 		
 		buttonNum = 0;		// Clear the button number, so we start adding buttons from button 0
 
-		var tmp1 = thisParserState[sceneName];
-		var tmp2 = recParser(tmp1, 0);		// we have to actually parse the scene now
-		var tmp3 = Showdown.makeHtml(tmp2)
+		var tmp1:String = thisParserState[sceneName];
+		var tmp2:String = recParser(tmp1, 0);		// we have to actually parse the scene now
+		var tmp3:String = Showdown.makeHtml(tmp2)
 
 		
 
@@ -741,7 +741,7 @@ public function parseSceneTag(textCtnt:String):void
 }
 public function parseButtonTag(textCtnt:String):void
 {
-	var arr;
+	var arr:Array;
 	arr = textCtnt.split("|")
 	if (arr.len > 2)
 		throw new Error("Too many items in button")
@@ -832,7 +832,7 @@ import flash.utils.getQualifiedClassName;
 // Actual internal parser function.
 // textCtnt is the text you want parsed, depth is a number that reflects the current recursion depth
 // You pass in the string you want parsed, and the parsed result is returned as a string.
-public function recParser(textCtnt:String, depth):String
+public function recParser(textCtnt:String, depth:Number):String
 {
 
 	// Depth tracks our recursion depth
@@ -890,7 +890,7 @@ public function recParser(textCtnt:String, depth):String
 			}
 			if (bracketCnt == 0)	// We've found the matching closing bracket for the opening bracket at textCtnt[tmp]
 			{
-				var prefixTmp, postfixTmp;
+				var prefixTmp:String, postfixTmp:String;
 
 				// Only prepend the prefix if it actually has content.
 				prefixTmp = textCtnt.substring(0, tmp);

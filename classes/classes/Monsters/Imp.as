@@ -14,7 +14,7 @@
 	{
 		
 
-		public function Imp(playerPtr) 
+		public function Imp(playerPtr:*) 
 		{
 			
 			trace("Imp Constructor!");

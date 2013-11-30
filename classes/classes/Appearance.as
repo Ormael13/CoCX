@@ -670,7 +670,7 @@
 			return description;
 		}
 
-		public static function cockAdjective(i_creature:Creature, i_cockIndex:Number = -1)
+		public static function cockAdjective(i_creature:Creature, i_cockIndex:Number = -1):String
 		{
 			var description:String = "";
 			var multi:Boolean = false;
@@ -990,7 +990,7 @@
 			return description;
 		}
 
-		public static function cockMultiNoun(cockType:*)
+		public static function cockMultiNoun(cockType:*):String
 		{
 			if (cockType is int)
 			{

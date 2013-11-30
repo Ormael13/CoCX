@@ -180,7 +180,7 @@ public function newGameGo(e:MouseEvent = null):void {
 		player.armorValue= 0;
 	}
 	//Clear plot storage array!
-	for(var i=0;i < 3000;i++) {
+	for(var i:int=0;i < 3000;i++) {
 		flags[i] = 0;
 	}
 	//Remember silly/sprite/etc
@@ -830,7 +830,7 @@ public function specialName(arg:String):Boolean {
 //Create a storage slot
 public function createStorage():Boolean {
 	if(itemStorage.length >= 16) return false;
-	var newSlot = new itemSlotClass();
+	var newSlot:* = new itemSlotClass();
 	itemStorage.push(newSlot);
 	return true;
 }
@@ -860,7 +860,7 @@ public function initializeGearStorage():void {
 		gearStorage.splice(0, gearStorage.length);
 	}
 	//Rebuild a new one!
-	var newSlot;
+	var newSlot:*;
 	while(gearStorage.length < 18) {
 		newSlot = new itemSlotClass();
 		gearStorage.push(newSlot);

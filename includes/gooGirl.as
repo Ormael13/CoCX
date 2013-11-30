@@ -396,7 +396,7 @@ public function beatUpGoo():void {
 		var sex3N:Number = 0;
 		var sex4S:String = "";
 		var sex4N:Number = 0;
-		var valeria = valeriaAndGooThreeStuff;
+		var valeria:* = valeriaAndGooThreeStuff;
 		if(player.armorName != "goo armor" || player.hasStatusAffect("gooStuffed") >= 0) valeria = 0;
 		var eggs:int = 0;
 		if(player.canOvipositBee()) eggs = 3848;

@@ -1,6 +1,6 @@
 //Event No's 2000 4999 use this function
 
-public function doEvent(eventNo):void
+public function doEvent(eventNo:Number):void
 {
 	var temp2:Number = 0;
 	var temp3:Number = 0;

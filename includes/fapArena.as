@@ -117,9 +117,9 @@ public function fapArenaPageII():void {
 	else if(player.cocks[x].cockType == CockTypesEnum.LIZARD) c = 3;
 	else if(player.cocks[x].cockType == CockTypesEnum.HORSE) c = 2;
 	//R the player's lust resistance (0<R<1)
-	var r = lustPercent()/100;
+	var r:Number = lustPercent()/100;
 	//The game does a roll between 0 and 100, call it N.
-	var n = rand(100);
+	var n:Number = rand(100);
 	//We define the PC's stamina as ST = (N-S*R-4*D)/(D+1) + C
 	var st:Number = c + (n-s*r-4*d)/(1.2+(d/10));
 	//outputText("<B>CHEAT: " + st + "</b> N: " + n + " c: " + c + " s: " + s + " r: " + r + " D: " + d + "\n", false);
@@ -136,7 +136,7 @@ public function fapArenaPageII():void {
 
 public function fapResults(place:Number = 3):void {
 	outputText("", true);
-	var num = rand(50) + 5;
+	var num:Number = rand(50) + 5;
 	var tent:Boolean = false;
 	//Loses
 	if(place == 3) {

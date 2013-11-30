@@ -1177,7 +1177,7 @@ public function appearance(e:MouseEvent = null):void
 	
 	
 	//BUNGHOLIO
-	if(player.ass != undefined) 
+	if(player.ass) 
 	{
 		outputText("\n", false);
 		outputText("You have one " + assholeDescript() + ", placed between your " + buttDescript() + "-cheeks where it belongs.\n", false);

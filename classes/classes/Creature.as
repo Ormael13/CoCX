@@ -434,7 +434,7 @@ package classes
 			}
 		}
 		
-		public function addPerkValue(statusName:String, statusValueNum:Number = 1, newNum:Number = 0)
+		public function addPerkValue(statusName:String, statusValueNum:Number = 1, newNum:Number = 0): void
 		{
 			var counter:Number = perks.length;
 			//Various Errors preventing action
@@ -469,7 +469,7 @@ package classes
 			return;
 		}
 		
-		public function changePerkValue(statusName:String, statusValueNum:Number = 1, newNum:Number = 0)
+		public function changePerkValue(statusName:String, statusValueNum:Number = 1, newNum:Number = 0): void
 		{
 			var counter:Number = perks.length;
 			//Various Errors preventing action
@@ -584,7 +584,7 @@ package classes
 		//Create a status
 		public function createStatusAffect(statusName:String, value1:Number, value2:Number, value3:Number, value4:Number):void
 		{
-			var newStatusAffect = new statusAffectClass();
+			var newStatusAffect:* = new statusAffectClass();
 			statusAffects.push(newStatusAffect);
 			statusAffects[statusAffects.length - 1].statusAffectName = statusName;
 			statusAffects[statusAffects.length - 1].value1 = value1;
@@ -634,7 +634,7 @@ package classes
 		//}endregion
 		
 		
-		public function changeStatusValue(statusName:String, statusValueNum:Number = 1, newNum:Number = 0)
+		public function changeStatusValue(statusName:String, statusValueNum:Number = 1, newNum:Number = 0):void
 		{
 			var counter:Number = statusAffects.length;
 			//Various Errors preventing action
@@ -669,7 +669,7 @@ package classes
 			return;
 		}
 		
-		public function addStatusValue(statusName:String, statusValueNum:Number = 1, newNum:Number = 0)
+		public function addStatusValue(statusName:String, statusValueNum:Number = 1, newNum:Number = 0):void
 		{
 			var counter:Number = statusAffects.length;
 			//Various Errors preventing action
@@ -1988,7 +1988,7 @@ package classes
 		public function tentacleCocks():Number
 		{
 			var tentacleCockC:Number = 0;
-			var counter = cocks.length;
+			var counter:Number = cocks.length;
 			while (counter > 0)
 			{
 				counter--;
@@ -2002,7 +2002,7 @@ package classes
 		public function demonCocks():Number
 		{
 			var demonCockC:Number = 0;
-			var counter = cocks.length;
+			var counter:Number = cocks.length;
 			while (counter > 0)
 			{
 				counter--;
@@ -2016,7 +2016,7 @@ package classes
 		public function catCocks():Number
 		{
 			var catCockC:Number = 0;
-			var counter = cocks.length;
+			var counter:Number = cocks.length;
 			while (counter > 0)
 			{
 				counter--;
@@ -2030,7 +2030,7 @@ package classes
 		public function lizardCocks():Number
 		{
 			var lizCockC:Number = 0;
-			var counter = cocks.length;
+			var counter:Number = cocks.length;
 			while (counter > 0)
 			{
 				counter--;
@@ -2073,7 +2073,7 @@ package classes
 		public function displacerCocks():Number
 		{
 			var displacerWang:Number = 0;
-			var counter = cocks.length;
+			var counter:Number = cocks.length;
 			while (counter > 0)
 			{
 				counter--;
@@ -2087,7 +2087,7 @@ package classes
 		public function kangaCocks():Number
 		{
 			var kangaWang:Number = 0;
-			var counter = cocks.length;
+			var counter:Number = cocks.length;
 			while (counter > 0)
 			{
 				counter--;
@@ -2101,7 +2101,7 @@ package classes
 		public function horseCocks():Number
 		{
 			var horseCockC:Number = 0;
-			var counter = cocks.length;
+			var counter:Number = cocks.length;
 			while (counter > 0)
 			{
 				counter--;
@@ -2115,7 +2115,7 @@ package classes
 		public function anemoneCocks():Number
 		{
 			var anemoneCockC:Number = 0;
-			var counter = cocks.length;
+			var counter:Number = cocks.length;
 			while (counter > 0)
 			{
 				counter--;
@@ -2129,7 +2129,7 @@ package classes
 		//Return number of affected cock, otherwise -1
 		public function addHorseCock():Number
 		{
-			var counter = cocks.length;
+			var counter:Number = cocks.length;
 			while (counter > 0)
 			{
 				counter--;
@@ -2174,7 +2174,7 @@ package classes
 		public function dogCocks():int
 		{
 			var dogCockC:Number = 0;
-			var counter = cocks.length;
+			var counter:Number = cocks.length;
 			while (counter > 0)
 			{
 				counter--;
@@ -2197,7 +2197,7 @@ package classes
 		public function dragonCocks():int
 		{
 			var dragonCockC:Number = 0;
-			var counter = cocks.length;
+			var counter:Number = cocks.length;
 			while (counter > 0)
 			{
 				counter--;
@@ -2211,7 +2211,7 @@ package classes
 		public function normalCocks():int
 		{
 			var normalCockC:Number = 0;
-			var counter = cocks.length;
+			var counter:Number = cocks.length;
 			while (counter > 0)
 			{
 				counter--;

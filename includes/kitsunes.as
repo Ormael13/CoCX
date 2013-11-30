@@ -462,7 +462,8 @@ public function kitsuneFemaleOrGenderless(willing:Boolean):void {
 	}
 }
 
-public function kitsunesGenderlessLetHer(willing:Boolean) {
+public function kitsunesGenderlessLetHer(willing:Boolean): void 
+{
 	clearOutput();
 	outputText(((willing) ? "You decide to let the girl have her fun, allowing her to shift positions to begin rubbing her throbbing shaft against your " + ((player.gender == 2) ? vaginaDescript() : "featureless groin") + " eagerly." : "You shake your head sluggishly, but your slurred protests fall on deaf ears.  She easily sidesteps your " + player.leg() + " as you try to shove her away, sliding forward to lay a disarming kiss on your cheek.  A bright blue wisp of flame crackles from her lips, and that is that - the resulting spark of pleasure that arcs up your spine shatters the last of your resistance, and your cares melt like butter.") + "  While she grinds her pulsating shaft against you slowly, her sisters close in around you to join in the fun.\n\n");
 	outputText("Your head is drawn into the blonde's lap, fingers softly gliding " + ((player.hairLength > 0) ? "through your " + hairDescript() : "across the sides of your face") + ", brushing you lightly with her mystical flames.  A pair of large, shapely ass cheeks emblazoned with a sun-shaped tattoo enters your field of vision, and soon your view is entirely blocked by the black-haired girl's expansive behind, save for a sliver of light filtering down between her and the blonde.  Her slick pussy glides across your lips, coaxing your tongue from your mouth as she bends down, pulling the redhead's cock into her mouth for a moment to slather it with saliva, spreading your " + ((player.gender == 2) ? "labia" : "butt cheeks") + " with her first two fingers, egging her on.\n\n");
@@ -1244,7 +1245,7 @@ public function defeatTheKitsunes(display:Boolean = true):void {
 	addButton(9,"Leave",eventParser,5007);
 }
 
-public function kitsuneButton(button:int,nam:String,func):int {
+public function kitsuneButton(button:int,nam:String,func:*):int {
 	if(button > 8) return 9;
 	addButton(button,nam,func);
 	button++;
@@ -1559,7 +1560,7 @@ public function kitsunesGetBonedBy3PlusTentacles():void {
 public function fuckDraftBlond():void {
 	clearOutput();
 	var x:int = -1;
-	var temp = 0;
+	var temp:int = 0;
 	while(temp < player.cockTotal() && x < 0) {
 		if(player.cocks[temp].cockType == CockTypesEnum.DOG) x = temp;
 		temp++;

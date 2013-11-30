@@ -1946,7 +1946,7 @@ public function cookingDate():void {
 }
 
 //Dates
-public function dateIntro(date):void {
+public function dateIntro(date:*):void {
 	clearOutput();
 	//(First Time)
 	if(flags[TIMES_RUBI_DATED] == 0) {

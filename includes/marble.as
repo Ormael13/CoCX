@@ -1290,7 +1290,8 @@ public function standardSex(newpage:Boolean = true):void {
 	doNext(13);
 }
 
-public function marbleSex2Continued(genders:Number) {
+public function marbleSex2Continued(genders:Number) : void
+{
 	spriteSelect(41);
 	//(player is male)
 	if(genders == 1) {

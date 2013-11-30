@@ -625,7 +625,7 @@ public function dropItem(monsterName:String):void {
 		takeItem();
 	}
 }
-public function isWeapon(shortName):Boolean {
+public function isWeapon(shortName:String):Boolean {
 	if(shortName == "E.Staff") return true;
 	if(shortName == "L.Daggr") return true;
 	if(shortName == "Claymor") return true;
@@ -647,7 +647,7 @@ public function isWeapon(shortName):Boolean {
 	if(shortName == "S.Blade") return true;
 	return false;
 }
-public function isArmor(shortName):Boolean {
+public function isArmor(shortName:String):Boolean {
 	if(shortName == "LMArmor") return true;
 	if(shortName == "GelArmr") return true;
 	if(shortName == "C.Cloth") return true;
@@ -682,7 +682,7 @@ public function isArmor(shortName):Boolean {
 	if(shortName == "BimboSk") return true;
 	return false;
 }
-public function fixedDamage(weaponName):Number {
+public function fixedDamage(weaponName:String):Number {
 	var attack:Number = 0;
 	if(weaponName == "halberd") attack = 11;
 	if(weaponName == "lust-enchanted dagger") attack = 3;
@@ -2748,8 +2748,8 @@ public function itemCount(itemName:String):int {
 }
 
 public function getLowestSlot(itemName:String):itemSlotClass {
-	var slot = itemSlot1;
-	var slotCounter = itemSlot1;
+	var slot:* = itemSlot1;
+	var slotCounter:* = itemSlot1;
 	while (slotCounter != undefined)
 	{
 		//If the slot has the item
@@ -2776,7 +2776,7 @@ public function getLowestSlot(itemName:String):itemSlotClass {
 }
 public function consumeItem(itemName:String, amount:Number):Boolean {
 	var consumed:Boolean = false;
-	var slot;
+	var slot:*;
 	while (amount > 0) 
 	{
 		if(!hasItem(itemName,1)) {

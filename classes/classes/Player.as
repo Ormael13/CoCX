@@ -23,11 +23,11 @@ package classes
 		public var perkPoints:Number = 0;
 		
 		//Number of times explored for new areas
-		public var explored = 0;
-		public var exploredForest = 0;
-		public var exploredDesert = 0;
-		public var exploredMountain = 0;
-		public var exploredLake = 0;
+		public var explored:Number = 0;
+		public var exploredForest:Number = 0;
+		public var exploredDesert:Number = 0;
+		public var exploredMountain:Number = 0;
+		public var exploredLake:Number = 0;
 		
 		public function Player()
 		{

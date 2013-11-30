@@ -1288,7 +1288,8 @@ public function masturbateGo():void {
 	doNext(13);
 }
 
-public function titForeplay() {
+public function titForeplay()  : void
+{
 	//Ok lets touch our boobies if we haz them and they are big enough
 	if(player.breastRows.length == 1 && player.biggestTitSize() > 3)
 	{

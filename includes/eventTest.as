@@ -126,7 +126,7 @@ public function eventTesterGo():void
 {
 	mainView.hideTestInputPanel();
 	
-	var temp = mainView.eventTestInput.text
+	var temp:String = mainView.eventTestInput.text
 
 	trace("Temp = ", temp);
 

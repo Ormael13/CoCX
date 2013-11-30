@@ -9,10 +9,10 @@
 		public var breasts:Number = 2;
 		public var nipplesPerBreast:Number = 1;
 		public var breastRating:Number = 0;
-		public var lactationMultiplier = 0;
+		public var lactationMultiplier:Number = 0;
 		//Fullness used for lactation....if 75 or greater warning bells start going off!
 		//If it reaches 100 it reduces lactation multiplier.
-		public var milkFullness = 0;
+		public var milkFullness:Number = 0;
 		public var fullness:Number = 0;
 		public var fuckable:Boolean = false
 		/*

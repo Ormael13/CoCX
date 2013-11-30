@@ -12,7 +12,7 @@ public function cockClit(number:int = 0):String {
 	if(player.hasCock() && number >= 0 && number < player.cockTotal()) return cockDescript(number);
 	else return clitDescript();
 }
-public function balls(balls,noballs):String {
+public function balls(balls:*,noballs:*):String {
 	if(player.balls > 0) return balls;
 	return noballs;
 }
@@ -709,7 +709,8 @@ public function eCockAdjectives(cLength:Number, thickness:Number, type:CockTypes
 
 
 //New cock adjectives.  The old one sucked dicks
-public function cockAdjective(cockNum:Number = -1) {
+public function cockAdjective(cockNum:Number = -1) : String
+{
 	return Appearance.cockAdjective(player, cockNum);
 }
 
@@ -880,7 +881,7 @@ public function snakeDescript(cockNum:Number):String
 	return descript;
 }
 //Vaginas + Descript
-public function eVaginaDescript(vaginaNum):String {
+public function eVaginaDescript(vaginaNum:Number):String {
 	var vag:String="";
 	var keyNum:Number = monster.vaginas.length-1;
 	var rand:Number = 0;

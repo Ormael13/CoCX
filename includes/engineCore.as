@@ -45,8 +45,8 @@ public function silly():Boolean {
 public function clearList():void {
 	list = new Array();
 }
-var list:Array = new Array();
-public function addToList(arg):void {
+public var list:Array = new Array();
+public function addToList(arg:*):void {
 	list[list.length] = arg;
 }
 public function outputList():String {
@@ -68,7 +68,8 @@ public function outputList():String {
 }
 
 
-public function HPChange(changeNum:Number, display:Boolean) {
+public function HPChange(changeNum:Number, display:Boolean):void
+{
 	if(changeNum == 0) return;
 	if(changeNum > 0) {
 		//Increase by 20%!
@@ -130,7 +131,7 @@ public function clearOutput():void {
 	mainView.clearOutputText();
 }
 
-public function rawOutputText(output:String, purgeText:Boolean = false)
+public function rawOutputText(output:String, purgeText:Boolean = false):void
 {
 	
 	//OUTPUT!
@@ -154,7 +155,7 @@ public function rawOutputText(output:String, purgeText:Boolean = false)
 
 }
 
-public function outputText(output:String, purgeText:Boolean = false, parseAsMarkdown = false)
+public function outputText(output:String, purgeText:Boolean = false, parseAsMarkdown:Boolean = false):void
 {
 	// we have to purge the output text BEFORE calling parseText, because if there are scene commands in 
 	// the parsed text, parseText() will write directly to the output
@@ -1883,7 +1884,7 @@ public function getButtonToolTipText( buttonText :String ) :String
 	return toolTipText;
 }
 
-public function addButton(pos:int, text:String = "", func1:Function = null, arg1 = -9000):void {
+public function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000):void {
 	var callback :Function,
 		toolTipText :String;
 
@@ -1895,22 +1896,23 @@ public function addButton(pos:int, text:String = "", func1:Function = null, arg1
 	if( arg1 == -9000 )
 		callback = func1;
 	else
-		callback = function _addButtonCallback() { return func1( arg1 ); };
+		callback = function _addButtonCallback():* { return func1( arg1 ); };
 
 	toolTipText = getButtonToolTipText( text );
 	mainView.showBottomButton( pos, text, callback, toolTipText );
 	mainView.setOutputText( currentText );
 }
 
-public function hasButton(arg):Boolean {
+public function hasButton(arg:*):Boolean {
 	if( arg is String )
 		return mainView.hasButton( arg as String );
 	else
 		return false;
 }
 
-public function removeButton(arg):void {
-	function _removeButtonAction( index :int ) {
+public function removeButton(arg:*):void {
+	function _removeButtonAction( index :int ):void	// Uh... should this function be empty?
+	{
 		// funcs[ index ] = null;
 		// args[ index ] = -9000;
 	}
@@ -1928,19 +1930,35 @@ public function removeButton(arg):void {
 	mainView.hideBottomButton( buttonToRemove );
 }
 
+// AFICT, menu() isn't called with arguments ANYWHERE in the codebase.
+// WHRYYYYYYY
+public function menu(text1:String = "", func1:Function = null, arg1:Number = -9000, 
+					text2:String = null, func2:Function = null, arg2:Number = -9000, 
+					text3:String = null, func3:Function = null, arg3:Number = -9000, 
+					text4:String = null, func4:Function = null, arg4:Number = -9000, 
+					text5:String = null, func5:Function = null, arg5:Number = -9000, 
+					text6:String = null, func6:Function = null, arg6:Number = -9000, 
+					text7:String = null, func7:Function = null, arg7:Number = -9000, 
+					text8:String = null, func8:Function = null, arg8:Number = -9000, 
+					text9:String = null, func9:Function = null, arg9:Number = -9000, 
+					text0:String = null, func0:Function = null, arg0:Number = -9000):void 
+{
 
-public function menu(text1:String = "", func1:Function = null, arg1:Number = -9000, text2:String = null, func2:Function = null, arg2:Number = -9000, text3:String = null, func3:Function = null, arg3:Number = -9000, text4:String = null, func4:Function = null, arg4:Number = -9000, text5:String = null, func5:Function = null, arg5:Number = -9000, text6:String = null, func6:Function = null, arg6:Number = -9000, text7:String = null, func7:Function = null, arg7:Number = -9000, text8:String = null, func8:Function = null, arg8:Number = -9000, text9:String = null, func9:Function = null, arg9:Number = -9000, text0:String = null, func0:Function = null, arg0 = null):void {
-	function _conditionallyShowButton( index :int, label :String, func :Function, arg :Number ) {
+	function _conditionallyShowButton( index :int, label :String, func :Function, arg :Number ) :void
+	{
 		var callback :Function, toolTipText :String;
 
-		if( ! func || arg == -9000 )
+		if( func == null || arg == -9000 )
 			callback = func;
 		else
-			callback = function _menuCallback() { return func( arg ); };
+			callback = function _menuCallback():* 
+			{ 
+				return func( arg ); 
+			};
 
 		toolTipText = getButtonToolTipText( label );
 
-		if( func )
+		if( func != null )
 			mainView.showBottomButton( index, label, callback, toolTipText );
 		else
 			mainView.hideBottomButton( index );
@@ -1976,8 +1994,10 @@ public function choices(text1:String, butt1:*,
 						text9:String, butt9:*, 
 						text0:String, butt0:*):void 
 {
-	function getCallback( butt :* ) {
-		return function _choicesCallback() {
+	function getCallback( butt :* ):*
+	{
+		return function _choicesCallback():* 
+		{
 			return eventParser( butt );
 		}
 	}
@@ -2090,14 +2110,14 @@ public function multipageChoices( cancelFunction :*, menuItems :Array ) :void {
 	var pageCount :int;
 
 	function getPageOfItems( pageIndex :int ) :Array {
-		var startItemIndex = pageIndex * itemsPerPage;
+		var startItemIndex:int = pageIndex * itemsPerPage;
 
 		return menuItems.slice( startItemIndex, startItemIndex + itemsPerPage );
 	}
 
 	function flatten( pageItems :Array ) :Array {
-		var i, l,
-			flattenedItems = [];
+		var i:int, l:int;
+		var flattenedItems:Array = [];
 
 		for( i = 0, l = pageItems.length; i < l; ++i ) {
 			flattenedItems = flattenedItems.concat( pageItems[ i ] );
@@ -2381,7 +2401,8 @@ public function minLust():Number {
 	return min;
 }
 
-public function displayStats(e:MouseEvent = null) {
+public function displayStats(e:MouseEvent = null):void
+{
 	spriteSelect(-1);
 	outputText("", true);
 	outputText("<b><u>Combat Stats</u></b>\n", false);
@@ -2576,7 +2597,8 @@ public function lustPercent():Number {
 
 //TODO stats function with dynamic arguments so you don't have to specify all those zeros each time.
 //Modify stats
-public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:Number, sens:Number, lust2:Number, corr:Number, resisted:Boolean = true) {
+public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:Number, sens:Number, lust2:Number, corr:Number, resisted:Boolean = true):void
+{
 	//Easy mode cuts lust gains!
 	if(flags[EASY_MODE_ENABLE_FLAG] == 1 && lust2 > 0 && resisted) lust2 /= 2;
 	//Set original values to begin tracking for up/down values if

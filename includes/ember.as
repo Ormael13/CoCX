@@ -2214,7 +2214,7 @@ public function emberAttack():void {
 	//Miss/dodge
 	else if(combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) outputText("You dodge aside at the last second and Ember's claws whistle past you.");
 	else {
-		var damage = int((monster.str + monster.weaponAttack) - rand(player.tou) - player.armorDef);
+		var damage:int = int((monster.str + monster.weaponAttack) - rand(player.tou) - player.armorDef);
 		if(damage <= 0) outputText("Ember's claws scrape noisily but harmlessly off your [armor].");
 		else {
 			damage = takeDamage(damage);
@@ -2262,7 +2262,7 @@ public function emberTailSlap():void {
 		outputText(" the tail at the last moment, causing Ember to lose control of "+ emberMF("his","her") + " own momentum and stumble.");
 	}
 	else {
-		var damage = int((monster.str + monster.weaponAttack + 100) - rand(player.tou) - player.armorDef);
+		var damage:int = int((monster.str + monster.weaponAttack + 100) - rand(player.tou) - player.armorDef);
 		outputText("  The tail slams into you with bone-cracking force, knocking you heavily to the ground even as the spines jab you wickedly.  You gasp for breath in pain and shock, but manage to struggle to your feet again.");
 		damage = takeDamage(damage);
 		outputText(" (" + damage + ")");
@@ -3641,7 +3641,7 @@ public function emberBreedingAfterMathWatchOutForRadioactiveFallout(emberPregged
 
 public function emberPregUpdate():Boolean {
 	//trace("EMBER PREG: " + flags[EMBER_INCUBATION] + "EMBER AFF: " + emberAffection());
-	var pregText = "";
+	var pregText:String = "";
 	if(flags[EMBER_INCUBATION] <= 0) return false;
 	else flags[EMBER_INCUBATION]--;
 	//Ember's Pregnancy: Egg Laying 

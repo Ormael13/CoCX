@@ -34,7 +34,7 @@ public function lumiLabChoices():void {
 	else {
 		outputText("Once more, you step into Lumi's lab.  She's still working on her experiments. Before you even have a chance to call out to her, she has already pivoted to watch you.  In a flash her apron hits the floor and she is standing on her desk, asking, \"<i>Stho, what can Lumi the Aochomist Extwaordinaire do fo you today?</i>\"", false);
 	}
-	var enhance = 0;
+	var enhance:* = 0;
 	if(lumiEnhance(true)) 
 		enhance = lumiEnhance;
 	simpleChoices("Shop",lumiShop,"Enhance",enhance,"",0,"",0,"Leave",13);
@@ -111,28 +111,28 @@ public function lumiPurchase():void {
 
 public function lumiEnhance(justCheck:Boolean = false):Boolean {
 	spriteSelect(37);
-	var fox = 0;
+	var fox:* = 0;
 	if(hasItem("FoxBery",1)) 
 		fox = lumiEnhanceFox;
-	var laBova = 0;
+	var laBova:* = 0;
 	if(hasItem("LaBova ",1)) 
 		laBova = lumiEnhanceLaBova;
-	var succuDelight = 0;
+	var succuDelight:* = 0;
 	if(hasItem("SDelite",1)) 
 		succuDelight = lumiEnhanceSDelight;
-	var oviElix = 0;
+	var oviElix:* = 0;
 	//if(hasItem("OviElix",1)) 
 	//	oviElix = lumiEnhanceOviElix;
-	var lustDraft = 0;
+	var lustDraft:* = 0;
 	if(hasItem("L.Draft",1)) 
 		lustDraft = lumiEnhanceDraft;
-	var seed = 0;
+	var seed:* = 0;
 	if(hasItem("GldSeed",1)) 
 		seed = lumiEnhanceGoldenSeed;
-	var kanga = 0;
+	var kanga:* = 0;
 	if(hasItem("KangaFt",1)) 
 		kanga = lumiEnhanceKanga;
-	var kitsune = 0;
+	var kitsune:* = 0;
 	if(hasItem("FoxJewl",1)) 
 		kitsune = lumiEnhanceFoxJewel;
 	if(justCheck) {
