@@ -182,13 +182,15 @@ public function exploreDeepwoods():void {
 	var chooser:Number = rand(5);
 	var temp2:Number = 0;
 	//Every tenth exploration finds a pumpkin if eligible!
-	if(player.statusAffectv1("exploredDeepwoods")% 10 == 0 && isHalloween()) {
+	if(player.statusAffectv1("exploredDeepwoods")% 10 == 0 && isHalloween()) 
+	{
 		//If Fera isn't free yet...
 		if(player.hasPerk("Fera's Boon - Breeding Bitch") < 0 && player.hasPerk("Fera's Boon - Alpha") < 0) {
-			if(date.fullYear > flags[PUMPKIN_FUCK_YEAR_DONE]) {
-		pumpkinFuckEncounter();
-		return;
-	}
+			if(date.fullYear > flags[PUMPKIN_FUCK_YEAR_DONE]) 
+			{
+				pumpkinFuckEncounter();
+				return;
+			}
 		}
 		//Fera is free!
 		else {

@@ -1420,7 +1420,7 @@ public function thisFunctionProbablySucksTooOhYeahAmilyFunction():void {
 
 	outputText("You spend over an hour getting to know your many sons and daughters, helping them pack up their meagre supplies and wishing them well as they set off. Then, with Amily's hand in yours, you return to your camp, leaving behind this empty village to be reclaimed by the wilderness.\n\n", false);
 	//Oh boy.  So excited.  wee.  Blech.
-	outputText("[<b>Amily has joined you as a lover.</b>]\n\n", false);
+	outputText("\\[<b>Amily has joined you as a lover.</b>\\]\n\n", false);
 	//Set amily follower flag
 	flags[AMILY_FOLLOWER] = 1;
 	flags[AMILY_CUP_SIZE] = 1;
