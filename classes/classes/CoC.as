@@ -313,8 +313,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.8.3dTURKEY";
-			version = "v0.8.3dTURKEY (<b>Honey Ham and Gravy Basting</b>)";
+			ver = "0.8.3dTURKEY3";
+			version = "v0.8.3dTURKEY3 (<b>Honey Ham and Gravy Basting</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

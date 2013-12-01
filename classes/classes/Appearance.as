@@ -1974,17 +1974,10 @@
 			}
 			//asshole descriptor
 			options = ["ass",
-			"posterior",
-			"arse",
 			"anus",
-			"keester",
-			"bottom",
 			"pucker",
-			"backside",
+			"backdoor",
 			"asshole",
-			"behind",
-			"gluteus maximus",
-			"bum",
 			"butthole"];
 			description += randomChoice(options);
 
