@@ -6,6 +6,11 @@
 #
 # this is the actual call to mxmlc that builds a complete swf
 
+# pull out the version so we can use it for the filename.
+export COC_VERSION=`gawk 'match($0, /^[\s\t]+ver = \"(.+)\";/, n) { print n[1] }' < classes/classes/CoC.as`
+
+echo "Build version = ${COC_VERSION}"
+
 # Clean up old build-artifacts (probably unnecessary with buildbot's build mechanisms)
 rm -f CoC*.swf
 
@@ -23,5 +28,5 @@ git submodule update --init
 -source-path+=classes \
 -library-path+=./lib/bin/MainView.swc \
 -library-path+=./lib/bin/ScrollPane.swc \
--o CoC-${COC_VERSION}-`date +%s`.swf \
+-o CoC-${COC_VERSION}.swf \
 classes/classes/CoC.as
