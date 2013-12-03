@@ -314,12 +314,14 @@ public function doSystem(eventNo:Number):void {
 		exploreSwamp();
 		return;
 	}
-	if(eventNo == 114) {
+	if (eventNo == 114) {
+		stage.focus = null;
 		mainView.aCb.visible = false;
 		applyPerk(tempPerk);
 		return;
 	}
-	if(eventNo == 115) {
+	if (eventNo == 115) {
+		stage.focus = null;
 		mainView.aCb.visible = false;
 		eventParser(1);
 		return;
