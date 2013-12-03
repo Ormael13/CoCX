@@ -1,5 +1,10 @@
 #!/bin/bash 
-export COC_VERSION=`gawk 'match($0, /^[\s\t]+ver = \"(.+)\";/, n) { print n[1] }' < classes/classes/CoC.as`
+
+
+# This is one of several utility scripts used by Fake-Name's automated build setup
+# to automatically create compiled versions of the CoC codebase
+#
+# this is the actual call to mxmlc that builds a complete swf
 
 # Clean up old build-artifacts (probably unnecessary with buildbot's build mechanisms)
 rm -f CoC*.swf
