@@ -100,7 +100,7 @@ public function meetIzmaAtLake():void {
 		}
 		//Follower choice
 		//[After 5 consecutive wins against Izma] (encountered with Izmafight >= 5)
-		else if(flags[UNKNOWN_FLAG_NUMBER_00231] >= 6 && flags[UNKNOWN_FLAG_NUMBER_00238] == 0) {
+		else if(flags[IZMA_TIMES_FOUGHT_AND_WON] >= 6 && flags[UNKNOWN_FLAG_NUMBER_00238] == 0) {
 			outputText("You walk the lakeshore, hoping to encounter the slutty shark Izma again, and you set your sights on her makeshift camp soon enough.  From what you can see, the girl is looking out from the lakeshore as if in deep thought.  As you draw closer, you see that her hands are constantly fidgeting on her lap, a telltale sign of her nerves.  Now, just what could be on her mind that has her so riled up?\n\n", false);
 			
 			outputText("You step on a brittle shell as you advance and it crunches loudly beneath your feet, drawing Izma's attention.  She looks at you and her mood seems to instantly brighten, though her hands are still fidgeting nervously.  Smirking, you hold up a hand as a greeting and ask what's up.\n\n", false);
@@ -299,13 +299,13 @@ public function fightSharkCunt():void {
 	flags[UNKNOWN_FLAG_NUMBER_00230]++;
 	outputText("Izma smiles widely and retrieves a pair of hooked metal gauntlets from her chest, donning them and clenching her fist a few times.  ", false);
 	//(If Izmafight = 0) 
-	if(flags[UNKNOWN_FLAG_NUMBER_00231] == 0) outputText("\"<i>All right, show me just what a Champion can do!</i>\" she says, entering a fighting stance.", false);
+	if(flags[IZMA_TIMES_FOUGHT_AND_WON] == 0) outputText("\"<i>All right, show me just what a Champion can do!</i>\" she says, entering a fighting stance.", false);
 	//(If Izmafight = 1-2) 
-	else if(flags[UNKNOWN_FLAG_NUMBER_00231] > 0 && flags[UNKNOWN_FLAG_NUMBER_00231] <= 2) outputText("Izma's eyes narrow at you, and she assumes a fighting stance.  \"<i>You won't get so lucky this time.</i>\"", false);
+	else if(flags[IZMA_TIMES_FOUGHT_AND_WON] > 0 && flags[IZMA_TIMES_FOUGHT_AND_WON] <= 2) outputText("Izma's eyes narrow at you, and she assumes a fighting stance.  \"<i>You won't get so lucky this time.</i>\"", false);
 	//(If Izmafight = 3+)
-	else if(flags[UNKNOWN_FLAG_NUMBER_00231] > 2) outputText("Izma seems uncertain with herself as she prepares for battle. \"<i>Go a little easier on me this time... please?</i>\"", false);
+	else if(flags[IZMA_TIMES_FOUGHT_AND_WON] > 2) outputText("Izma seems uncertain with herself as she prepares for battle. \"<i>Go a little easier on me this time... please?</i>\"", false);
 	//(If Izmafight = -1 or -2 )
-	else if(flags[UNKNOWN_FLAG_NUMBER_00231] < 0 && flags[UNKNOWN_FLAG_NUMBER_00231] >= -2) outputText("\"<i>Hm, really?  Well, maybe you'll get lucky this time,</i>\" she mocks, gesturing at you to strike first.", false);
+	else if(flags[IZMA_TIMES_FOUGHT_AND_WON] < 0 && flags[IZMA_TIMES_FOUGHT_AND_WON] >= -2) outputText("\"<i>Hm, really?  Well, maybe you'll get lucky this time,</i>\" she mocks, gesturing at you to strike first.", false);
 	//(If Izmafight = -3 to -4)
 	else outputText("Izma laughs slightly and shakes her head.  \"<i>If you insist.  At least TRY this time, will ya?</i>\"", false);
 	startCombat(35);
@@ -407,15 +407,15 @@ public function IzmaAI():void {
 public function defeatIzma():void {
 	outputText("", true);
 	//(Izmafight = 0) 
-	if(flags[UNKNOWN_FLAG_NUMBER_00231] <= 0) {
+	if(flags[IZMA_TIMES_FOUGHT_AND_WON] <= 0) {
 		outputText("Izma falls back into the sand, her ", false);
 		if(monster.HP < 1) outputText("injuries", false);
 		else outputText("lust", false);
 		outputText(" preventing her from fighting on.  She growls at you in annoyance,  \"<i>Fine.  You win... this time.</i>\"\n\n", false);
 	}
-	else if(flags[UNKNOWN_FLAG_NUMBER_00231] > 0) {
+	else if(flags[IZMA_TIMES_FOUGHT_AND_WON] > 0) {
 		//(Izmafight = 1 or 2) 
-		if(flags[UNKNOWN_FLAG_NUMBER_00231] < 3) {
+		if(flags[IZMA_TIMES_FOUGHT_AND_WON] < 3) {
 			outputText("Having incapacitated Izma through ", false);
 			if(monster.HP < 1) outputText("physical", false);
 			else outputText("sexual", false);
@@ -449,9 +449,9 @@ public function IzmaWins():void {
 	//(without worms)
 	else {
 		//(Izmafight =0)
-		if(flags[UNKNOWN_FLAG_NUMBER_00231] >= 0) outputText("Izma chuckles slightly as she prowls around your defeated form.  \"<i>Well, as far as things around here stand, you made for a decent fight.  Still no match for me, though.</i>\"", false);
+		if(flags[IZMA_TIMES_FOUGHT_AND_WON] >= 0) outputText("Izma chuckles slightly as she prowls around your defeated form.  \"<i>Well, as far as things around here stand, you made for a decent fight.  Still no match for me, though.</i>\"", false);
 		//(Izmafight = -1 or -2) 
-		else if(flags[UNKNOWN_FLAG_NUMBER_00231] >= -2) outputText("\"<i>Ya know, just because we're friends doesn't mean you need to hold back... you were holding back, right?</i>\" Izma asks, placing her hands on her hips.", false);
+		else if(flags[IZMA_TIMES_FOUGHT_AND_WON] >= -2) outputText("\"<i>Ya know, just because we're friends doesn't mean you need to hold back... you were holding back, right?</i>\" Izma asks, placing her hands on her hips.", false);
 		//(Izmafight = -3 or -4) 
 		else outputText("Izma sighs and shakes her head at you, letting a foot rest on your stomach  \"<i>You're doing this on purpose, aren't you?  Hm, fine.  If you love my cock so much, I think you'd make for a decent mate...</i>\"", false);
 		//TO THE SECKS!
@@ -463,7 +463,7 @@ public function IzmaWins():void {
 public function loseToIzma():void {
 	outputText("", true);
 	//Final izma submission!
-	if(flags[UNKNOWN_FLAG_NUMBER_00231] <= -5) {
+	if(flags[IZMA_TIMES_FOUGHT_AND_WON] <= -5) {
 		finalIzmaSubmission();
 		return;
 	}
@@ -483,7 +483,7 @@ public function loseToIzma():void {
 		else outputText("pucker", false);
 		outputText(" of yours!</i>\"  ", false);
 		//[(If Izmafight is -1 or -2)
-		if(flags[UNKNOWN_FLAG_NUMBER_00231] >= -2) outputText("With some reluctance, but driven by your promise, you remove pieces of your " + player.armorName + " until you stand naked before the hungrily ogling tigershark.", false);
+		if(flags[IZMA_TIMES_FOUGHT_AND_WON] >= -2) outputText("With some reluctance, but driven by your promise, you remove pieces of your " + player.armorName + " until you stand naked before the hungrily ogling tigershark.", false);
 		//(If Izmafight is -3 or less)
 		else outputText("You are already undressed before Izma has finished speaking.  The tigershark is clearly surprised, and, to be honest, a part of you is surprised too... but it's drowned out by the need to give yourself over to Izma's lusts.", false);
 		outputText("\n\n", false);
@@ -511,7 +511,7 @@ public function loseToIzma():void {
 			
 			outputText("\n\n\"<i>Holy-!  Think I better take it easy on this...</i>\" you hear Izma proclaim.  \"<i>For my own safety moreso than anything else!</i>\"  Her efforts become more gentle.  She still forces her way into you, inch by painstaking inch, but she does so at a slower, steady pace, allowing your pucker time to adjust to the fierce stretching she is subjecting it to and using her hot pre-cum like lubricant.", false);
 			//(If Izmafight <= -4)
-			if(flags[UNKNOWN_FLAG_NUMBER_00231] <= -4) outputText("  You find yourself pushing back to speed up the process, desperate for Izma to fill you again.", false);
+			if(flags[IZMA_TIMES_FOUGHT_AND_WON] <= -4) outputText("  You find yourself pushing back to speed up the process, desperate for Izma to fill you again.", false);
 			buttChange(monster.cockArea(0),true,true,false);
 		}
 		//(If player has middling anus:) 
@@ -520,7 +520,7 @@ public function loseToIzma():void {
 			
 			outputText("\"<i>Ahhhh... now that's a nice little hole!  Did you lose on purpose?</i>\" she asks, and you can hear the grin in her voice.", false);
 			//(If the player has lost 4+ times)  
-			if(flags[UNKNOWN_FLAG_NUMBER_00231] <= -4) outputText("  You find yourself wondering that as well...", false);
+			if(flags[IZMA_TIMES_FOUGHT_AND_WON] <= -4) outputText("  You find yourself wondering that as well...", false);
 			buttChange(monster.cockArea(0),true,true,false);
 		}
 		//(If player has a loosey goosey:)
@@ -538,7 +538,7 @@ public function loseToIzma():void {
 
 		outputText("\"<i>Oh, somebody likes it, eh?  Well, don't worry, you wanted to test your luck, so I'm not going to hold back!  You're getting the whole experience, sweetheart!</i>\" Izma growls.  Her hands suddenly shift from squeezing your buttocks to holding onto your back, and you howl in a mixture of pain and pleasure as Izma suddenly bites you - hard enough that you can feel it, but not hard enough to draw blood, especially given her shark teeth are retracted.  Her other teeth fix themselves in your side as she ruts with you, and you can't help but back and thrust yourself back against her.", false);
 		//(If Izmafight = -4)  
-		if(flags[UNKNOWN_FLAG_NUMBER_00231] <= -4) outputText("  If this is how the sharks do it, you could really get used to it...", false);
+		if(flags[IZMA_TIMES_FOUGHT_AND_WON] <= -4) outputText("  If this is how the sharks do it, you could really get used to it...", false);
 		outputText("\n\n", false);
 		
 		outputText("\"<i>That's it, weakling, moan for me; make this sweeter!  I'd be moaning if you had won, so the least you can do is give me the same courtesy - fair's fair!</i>\" she mumbles.  \"<i>Oh, yes, yes, yes!  Good little fuck, good!  I...I'm.... here... it... comes!</i>\"  She roars, releasing her grip on your shoulder to bellow her exultation to the sky, the climax that has been churning and thrashing her mighty balls finally erupting from within her.\n\n", false);
@@ -562,7 +562,7 @@ public function loseToIzma():void {
 
 		outputText("You remain where you are, waiting for the strength to flow into your limbs and for some of the abundance of sexual fluids to vacate your stuffed entrails before you dress yourself and leave.  You had no idea that Izma could take charge in such a fierce manner... but, at the same time, you find yourself actually liking it.  A part of you wonders if you could see her that way again...", false);
 		//(Izmafight - 1)
-		flags[UNKNOWN_FLAG_NUMBER_00231]--;
+		flags[IZMA_TIMES_FOUGHT_AND_WON]--;
 	}
 	//Female Loss:
 	else if(player.gender == 2) {
@@ -575,7 +575,7 @@ public function loseToIzma():void {
 			else outputText("That's tight!", false);
 			outputText("  Don't worry kiddo; I'll go easy on you... at least for the first few thrusts.</i>\"  Surprisingly she's telling the truth, and her efforts become more gentle.  She still forces her way into you, inch by painstaking inch, but she does so at a slower, steady pace, allowing your pussy time to adjust to the fierce stretching she is subjecting it to, using her hot pre-cum like lubricant.", false);
 			//(If Izmafight <= -4)
-			if(flags[UNKNOWN_FLAG_NUMBER_00231] <= -4) outputText("  You find yourself pushing back to speed up the process, desperate for Izma to fill you again.", false);
+			if(flags[IZMA_TIMES_FOUGHT_AND_WON] <= -4) outputText("  You find yourself pushing back to speed up the process, desperate for Izma to fill you again.", false);
 			cuntChange(monster.cockArea(0),true,true,false);
 		}
 		//(If player has ordinary, everyday cunt:)
@@ -584,7 +584,7 @@ public function loseToIzma():void {
 			
 			outputText("\"<i>Ahhhh~  Now that's a nice little hole!  Did you lose on purpose?</i>\" she asks, and you can hear the grin in her voice.", false);
 			//(If the player has lost 4+ times)  
-			if(flags[UNKNOWN_FLAG_NUMBER_00231] <= -4) outputText("  You find yourself wondering that as well...", false);
+			if(flags[IZMA_TIMES_FOUGHT_AND_WON] <= -4) outputText("  You find yourself wondering that as well...", false);
 			cuntChange(monster.cockArea(0),true,true,false);
 		}
 		//(If player is loose:)
@@ -599,7 +599,7 @@ public function loseToIzma():void {
 
 		outputText("\"<i>Oh, somebody likes it, eh?  Well, don't worry, you wanted to test your luck, so I'm not going to hold back!  You're getting the whole experience, sweetheart!</i>\" Izma growls.  Her hands suddenly shift from your buttocks to holding onto your " + chestDesc() + ", and you howl in a mixture of pain and pleasure as Izma suddenly gives your " + nippleDescript(0) + "s a good hard tug.  \"<i>Stiff nipples?  You so wanted this...</i>\" Izma teases, licking at your neck and causing you to moan in pleasure.", false);
 		//(If the player has lost 4+ times) 
-		if(flags[UNKNOWN_FLAG_NUMBER_00231] <= -4) outputText("  If this is how the sharks do it, you could really get used to it...", false);
+		if(flags[IZMA_TIMES_FOUGHT_AND_WON] <= -4) outputText("  If this is how the sharks do it, you could really get used to it...", false);
 		outputText("\n\n", false);
 
 		outputText("\"<i>That's it, weakling, moan for me; make this sweeter!  I'd be moaning if you had won, so the least you can do is give me the same courtesy - fair's fair!</i>\" she mutters.  \"<i>Oh, yes, yes, yes! Good little fuck, good!  I...I'm.... here... it... comes!</i>\"  She roars, releasing her grip on your tormented breasts to bellow her exultation to the sky, the climax that has been churning and thrashing her mighty balls finally erupting from within her.\n\n", false);
@@ -613,7 +613,7 @@ public function loseToIzma():void {
 
 		outputText("You remain where you are, waiting for the strength to flow into your limbs and for some of the abundance of sexual fluids to vacate your " + vaginaDescript(0) + " before you dress yourself and leave.  You had no idea that Izma could take charge in such a fierce manner... but, at the same time, you find yourself actually liking it.  A part of you wonders if you could see her that way again...", false);
 		//(Izmafight minus 1)
-		flags[UNKNOWN_FLAG_NUMBER_00231]--;
+		flags[IZMA_TIMES_FOUGHT_AND_WON]--;
 	}
 	//Loss Scene- Herm 
 	else {
@@ -664,7 +664,7 @@ public function loseToIzma():void {
 
 		outputText("She starts thrusting in and out of you, gradually increasing the speed and force, her hot pre-cum and your feminine juices acting like a lubricant to make things easier.  \"<i>Ahh~  You're a lovely cock-sleeve... you like being treated like this, don't ya, weakling?</i>\" Izma taunts, slamming in and out of your " + vaginaDescript(0) + ".", false);
 		//(If Izmafight <= -4) 
-		if(flags[UNKNOWN_FLAG_NUMBER_00231] <= -4) outputText("  You're not even really ashamed to admit that such is the case anymore.", false);
+		if(flags[IZMA_TIMES_FOUGHT_AND_WON] <= -4) outputText("  You're not even really ashamed to admit that such is the case anymore.", false);
 		outputText("\n\n", false);
 		
 		outputText("Every thrust pushes you deeper into the sands, and eventually you find yourself pumping your hips upward against Izma's own, eager to pleasure her and yourself.  Izma seems to notice this and laughs loudly.  \"<i>Oh?  You really like being dominated?  Ha, I thought as much.</i>\"  She continues to taunt you as she pounds into you, her balls smacking against you every time.  Your mind is too clouded with lust to hear even half of what she says.  Right now all you care about is getting off.\n\n", false);
@@ -681,18 +681,18 @@ public function loseToIzma():void {
 		else outputText("\n\n");
 		outputText("She gives you a wink and tosses the promised tooth at your feet before diving into the water, presumably to clean herself off.  Several minutes later, you wash up as well and stagger back to camp, sore from the ordeal.  Izma sure can be rough when she wants.  A part of you wonders if you could see her that way again...", false);
 		//(Izmafight minus 1
-		flags[UNKNOWN_FLAG_NUMBER_00231]--;
+		flags[IZMA_TIMES_FOUGHT_AND_WON]--;
 	}
 	stats(0,0,0,0,0,2,-100,0);
 	//[Post-loss submissiveness blurb, checks Izmafight AFTER any changes from the sex]
 	//zmafight -1: 
-	if(flags[UNKNOWN_FLAG_NUMBER_00231] >= -1) outputText("  You realize what you're thinking and shudder, forcing the submission-tinged desires down. Where did they come from, anyway?", false);
+	if(flags[IZMA_TIMES_FOUGHT_AND_WON] >= -1) outputText("  You realize what you're thinking and shudder, forcing the submission-tinged desires down. Where did they come from, anyway?", false);
 	//Izmafight -2; 
-	else if(flags[UNKNOWN_FLAG_NUMBER_00231] >= -2) outputText("  Though you manage to force them away, the dreams of submitting to Izma are starting to haunt you, their power and seductive allure growing. But, still, you can control them.", false);
+	else if(flags[IZMA_TIMES_FOUGHT_AND_WON] >= -2) outputText("  Though you manage to force them away, the dreams of submitting to Izma are starting to haunt you, their power and seductive allure growing. But, still, you can control them.", false);
 	//Izmafight -3: 
-	else if(flags[UNKNOWN_FLAG_NUMBER_00231] >= -3) outputText("  You hum idly to yourself and enjoy the mental visions for a while, then, with some reluctance, you push them aside. Still, you're sure you can bring them out again when you want to enjoy them.", false);
+	else if(flags[IZMA_TIMES_FOUGHT_AND_WON] >= -3) outputText("  You hum idly to yourself and enjoy the mental visions for a while, then, with some reluctance, you push them aside. Still, you're sure you can bring them out again when you want to enjoy them.", false);
 	//Izmafight -4: 
-	else if(flags[UNKNOWN_FLAG_NUMBER_00231] >= -4) outputText("  You have only the vaguest thought that maybe you shouldn't be thinking about Izma in that way, but it's so tempting to just immerse yourself in the sexiness of having a hot herm shark-girl dominate you so thoroughly. After all, it's not as if there's any harm in doing so, is there?", false);
+	else if(flags[IZMA_TIMES_FOUGHT_AND_WON] >= -4) outputText("  You have only the vaguest thought that maybe you shouldn't be thinking about Izma in that way, but it's so tempting to just immerse yourself in the sexiness of having a hot herm shark-girl dominate you so thoroughly. After all, it's not as if there's any harm in doing so, is there?", false);
 	//Izmafight -5: 
 	else outputText("  You embrace the dreams fully, desperate to cling to them as long as you can. It's getting so hard to care about your former mission anymore; why fight the demons when you can just give it up and surrender yourself to Izma? Yes... such a strong, powerful, worthy alpha she is; Izma is all you need. Let her take control of your life, why don't you?", false);
 	flags[UNKNOWN_FLAG_NUMBER_00234] = "TSTooth";
@@ -779,7 +779,7 @@ public function victoryPenisIzma():void {
 	
 	outputText("Not wanting to waste any time on foreplay, you push your " + cockDescript(cockIndex) + " into Izma's slit as far as you can manage, making Izma gasp sharply and writhe against you.  You snicker and start thrusting into her, the odd little tendrils inside her cunt teasing and massaging your cock.  The walls themselves are so tight and smooth that her pussy conforms to you like a glove.  It almost feels like Izma's snatch was made just for you.", false);
 	//[(If Izmafight = 3+)
-	if(flags[UNKNOWN_FLAG_NUMBER_00231] >= 3) outputText("  Hell, maybe it was made for you, given just how eager Izma seems to be whenever she sees you.  It's like she loses to you on purpose.", false);
+	if(flags[IZMA_TIMES_FOUGHT_AND_WON] >= 3) outputText("  Hell, maybe it was made for you, given just how eager Izma seems to be whenever she sees you.  It's like she loses to you on purpose.", false);
 	outputText("\n\n", false);
 
 	outputText("You start to pick up speed as you mash your hips against Izma's own, earning moans from the pretty tigershark which only seem to get louder with every subsequent thrust.  Izma quickly starts to return the gesture, moving her hips up to meet your own thrusts every time.  It's while she's doing this that you notice her throbbingly erect cock wobbling around.\n\n", false);
@@ -819,14 +819,14 @@ public function victoryPenisIzma():void {
 	}
 	stats(0,0,0,0,0,0,-100,0);
 	//[(if Izmafight <=4)
-	if(flags[UNKNOWN_FLAG_NUMBER_00231] <= 4 || flags[UNKNOWN_FLAG_NUMBER_00235] > 0) {
+	if(flags[IZMA_TIMES_FOUGHT_AND_WON] <= 4 || flags[UNKNOWN_FLAG_NUMBER_00235] > 0) {
 		outputText("You say your goodbyes to the pretty tigershark and leave once she hands you your tooth-shaped reward.", false);
 		flags[UNKNOWN_FLAG_NUMBER_00234] = "TSTooth";
 		eventParser(5007);
 	}
 	//(if Izmafight >=5 then go to [Victor's Choice]] (Izmafight +1)
 	else victorzChoice();
-	flags[UNKNOWN_FLAG_NUMBER_00231]++;
+	flags[IZMA_TIMES_FOUGHT_AND_WON]++;
 }
 
 //[Victory scene- use vagino]
@@ -864,14 +864,14 @@ public function eatIzmasLeafAfterRapinHer():void {
 	//Set loot
 	flags[UNKNOWN_FLAG_NUMBER_00234] = "TSTooth";
 	//[(if Izmafight <=4) 
-	if(flags[UNKNOWN_FLAG_NUMBER_00231] <= 4 || flags[UNKNOWN_FLAG_NUMBER_00235] > 0) {
+	if(flags[IZMA_TIMES_FOUGHT_AND_WON] <= 4 || flags[UNKNOWN_FLAG_NUMBER_00235] > 0) {
 		outputText("  You say your goodbyes to the pretty tigershark and leave once she hands you your tooth-shaped reward.", false);
 		eventParser(5007);
 	}
 	//(if Izmafight >=5 then go to [Victor's Choice]]
 	else victorzChoice();
 	//(Izmafight +1)
-	flags[UNKNOWN_FLAG_NUMBER_00231]++;
+	flags[IZMA_TIMES_FOUGHT_AND_WON]++;
 }
 
 //[No]
@@ -885,7 +885,7 @@ public function dontEatIzamsLeafAfterRape():void {
 	player.knockUp(12,300);
 	eventParser(5007);
 	//(Izmafight +1)
-	flags[UNKNOWN_FLAG_NUMBER_00231]++;
+	flags[IZMA_TIMES_FOUGHT_AND_WON]++;
 }
 
 //[Victory scene- it feels good in my butt]
@@ -907,7 +907,7 @@ public function takeItInZeButtVictoryLikeFromIzma():void {
 	outputText("The shark grits her teeth and gives a roar as she cums, blowing a massive, hot load straight up your " + assholeDescript() + ", bloating you slightly as she empties her quads inside you.  Your muscles twitch and contract, and you can swear you see stars as she ejaculates.  It takes you a while to catch your breath as you slide off her slowly softening meat pole and crawl onto the sand.\n\n", false);
 	stats(0,0,0,0,0,0,-100,0);
 	//[(if Izmafight <=4)
-	if(flags[UNKNOWN_FLAG_NUMBER_00231] <= 4 || flags[UNKNOWN_FLAG_NUMBER_00235] > 0) {
+	if(flags[IZMA_TIMES_FOUGHT_AND_WON] <= 4 || flags[UNKNOWN_FLAG_NUMBER_00235] > 0) {
 		outputText("You say your goodbyes to the pretty tigershark and leave once she hands you your tooth-shaped reward.", false);
 		flags[UNKNOWN_FLAG_NUMBER_00234] = "TSTooth";
 		eventParser(5007);
@@ -915,7 +915,7 @@ public function takeItInZeButtVictoryLikeFromIzma():void {
 	//(if Izmafight >=5 then go to [Victor's Choice]]
 	else victorzChoice();
 	//(Izmafight +1)
-	flags[UNKNOWN_FLAG_NUMBER_00231]++;
+	flags[IZMA_TIMES_FOUGHT_AND_WON]++;
 }
 
 //[Victory scene – Leave her]
@@ -934,7 +934,7 @@ public function leaveIzmaVictoryTease():void {
 	outputText("\"<i>Oh, I'm sorry,</i>\" you retort.  \"<i>Which one of us won the fight?  That's what I thought,</i>\" you add as she manages to nod contritely.  Seems like her hierarchical instincts are accepting this form of submission readily enough.  \"<i>Well, that's that, then!  Be a good girl and I'll be back... before too long!</i>\"  She nods and hands you your prize.  You wave gaily as you depart the tigershark's presence, her enormous erection still sticking up in plain view and throbbing as if protesting the lack of attention.", false);
 	//(Izmafight +1)
 	
-	flags[UNKNOWN_FLAG_NUMBER_00231]++;
+	flags[IZMA_TIMES_FOUGHT_AND_WON]++;
 	flags[UNKNOWN_FLAG_NUMBER_00234] = "TSTooth";
 	eventParser(5007);
 }

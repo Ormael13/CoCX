@@ -1997,7 +1997,7 @@ public function goWithHelia():void {
 	if(flags[HARPY_QUEEN_EXECUTED] > 0) outputText("finally killing that bitch of a queen");
 	else outputText("setting the queen right, but leaving her alive for when it's finally time to bring the fight to Lethice");
 	outputText(".  You nod at his thanks, and his hand is soon replaced by Helia's as she grabs you on her way toward the gigantic cake.  The towering white confectionary seems more than big enough to feed everyone in the group, a huge extravagance on the part of her family.  You hear a quiet whisper about ");
-	if(flags[UNKNOWN_FLAG_NUMBER_00119] == 1) outputText("a certain waitress fairy having... supplied the icing herself");
+	if(flags[FREED_VALA] == 1) outputText("a certain waitress fairy having... supplied the icing herself");
 	else outputText("a certain minotaur chef having supplied the icing himself");
 	outputText(" as Hel is handed an oversized knife and urged to blow out the candles atop it, arranged into a perfect 23.");
 	

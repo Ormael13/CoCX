@@ -875,7 +875,7 @@ public function shouldraSexMenu():void {
 	spriteSelect(67);
 	outputText("Shouldra stirs from somewhere deep inside you, excitement evident in the swiftness of her reaction.  \"<i>Is it time for some fun, Champ?</i>\" she asks happily, her increased lust affecting you just a bit.  Do you oblige her?");
 	var vala:int = 0;
-	if(flags[UNKNOWN_FLAG_NUMBER_00119] != 0 && (model.time.hours >= 12 && model.time.hours <= 21)) {
+	if(flags[FREED_VALA] != 0 && (model.time.hours >= 12 && model.time.hours <= 21)) {
 		outputText("\n\nVala might interest Shouldra.  You could go introduce them...");
 		vala = 3668;
 	}
