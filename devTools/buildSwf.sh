@@ -28,5 +28,5 @@ git submodule update --init
 -source-path+=classes \
 -library-path+=./lib/bin/MainView.swc \
 -library-path+=./lib/bin/ScrollPane.swc \
--o CoC-${COC_VERSION}.swf \
+-o ../binRepo/CoC-${COC_VERSION}.swf \
 classes/classes/CoC.as
