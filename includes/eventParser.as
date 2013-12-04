@@ -5,7 +5,7 @@
 public function eventParser(eventNo:*):void {
 	//Clear banked buttons
 
-	trace("EVENT CODE: " + eventNo);
+	//trace("EVENT CODE: " + eventNo);
 	if (eventNo is Function)
 	{
 		//trace("It's a function");
@@ -50,7 +50,7 @@ public function eventParser(eventNo:*):void {
 public function doSystem(eventNo:Number):void {
 	//@ camp
 	//(clear data/appearance buttons if not at camp
-	trace("System Event", eventNo)
+	//trace("System Event", eventNo)
 
 	// Perk options (and an array containing all the event-numbers that correspond to perks)
 	// are located in perkPicker.as
@@ -1371,7 +1371,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				}
 				//Increase 'time since breastfed'
 				player.addStatusValue("Feeder",2,1);
-				trace("Feeder status: " + player.statusAffectv2("Feeder") + " (modded " + ((player.statusAffectv2("Feeder")) - 70) + ")");
+				//trace("Feeder status: " + player.statusAffectv2("Feeder") + " (modded " + ((player.statusAffectv2("Feeder")) - 70) + ")");
 				//After 3 days without feeding someone sensitivity jumps.
 				if(player.statusAffectv2("Feeder") >= 72 && model.time.hours == 14) {
 					outputText("\n<b>After having gone so long without feeding your milk to someone, you're starting to feel strange.  Every inch of your skin practically thrums with sensitivity, particularly your sore, dripping nipples.</b>\n", false);

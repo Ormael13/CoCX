@@ -1,7 +1,7 @@
 //  SLEEP_WITH:int = 701;
 
 public function camp():void {
-	trace("Current fertility: " + player.totalFertility());
+	//trace("Current fertility: " + player.totalFertility());
 	mainView.showMenuButton( MainView.MENU_NEW_MAIN );
 	if(player.hasStatusAffect("Post Akbal Submission") >= 0) {
 		player.removeStatusAffect("Post Akbal Submission");
@@ -202,7 +202,6 @@ public function camp():void {
 		hideMenus();
 		return;
 	}
-	trace("FUCK FLOWER KILLED: " + flags[FUCK_FLOWER_KILLED] + " TREE FLIPOUT: " + flags[AMILY_TREE_FLIPOUT] + " FOLLOWER: " + flags[AMILY_FOLLOWER]);
 	if(flags[FUCK_FLOWER_KILLED] == 1 && flags[AMILY_TREE_FLIPOUT] == 1 && !amilyFollower() && flags[AMILY_VISITING_URTA] == 0) {
 		amilyComesBack();
 		flags[AMILY_TREE_FLIPOUT] = 2;
@@ -1125,8 +1124,11 @@ public function doSleep(clrScreen:Boolean = true):void {
 		if(model.time.hours == 3) timeQ = 3;
 		if(model.time.hours == 4) timeQ = 2;
 		if(model.time.hours == 5) timeQ = 1;
-		//Autosave stuff
-		if(player.slotName != "VOID" && player.autoSave && mainView.getButtonText( 0 ) != "Game Over") {
+		//Autosave stuff		
+		if (player.slotName != "VOID" && player.autoSave && mainView.getButtonText( 0 ) != "Game Over") 
+		{
+			trace("Autosaving to slot: " + player.slotName);
+			
 			saveGame(player.slotName);
 		}
 		//Clear screen

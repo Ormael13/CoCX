@@ -715,7 +715,6 @@ public function minoCumAddiction(raw:Number = 10):void {
 public function minoCumUpdate():Boolean {
 	if(flags[MINOTAUR_CUM_ADDICTION_TRACKER] == 0) return false;
 	var output:Boolean = false;
-	trace("MINO CUM ADDICTION %: " + flags[MINOTAUR_CUM_ADDICTION_TRACKER]);
 	//Your addicted enough for it to be official!
 	if(flags[MINOTAUR_CUM_ADDICTION_STATE] == 0 && flags[MINOTAUR_CUM_ADDICTION_TRACKER] >= 50) {
 		outputText("\nYou find yourself becoming aroused at the merest thought of minotaurs and their delicious cum.  Immediately you remember how great it made you feel, and you want more.  <b>You're now addicted to minotaur cum!</b>\n", false);

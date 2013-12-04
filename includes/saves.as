@@ -277,6 +277,7 @@ public function purgeTheMutant():void
 
 public function saveGame(slot:String):void
 {
+	player.slotName = slot;
 	saveGameObject(slot, false);
 }
 
@@ -292,6 +293,13 @@ public function loadGame(slot:String):void
 	outputText("Game Loaded");
 	temp = 0;
 	statScreenRefresh();
+	
+	if (player.slotName == "VOID")
+	{
+		trace("Setting in-use save slot to: " + slot);
+		player.slotName = slot;
+	}
+	
 	doNext(1);
 }
 

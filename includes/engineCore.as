@@ -2223,15 +2223,15 @@ public function doNext(eventNo:*):void {
 		return;
 	}
 	
-	trace("DoNext have item:", eventNo);
+	//trace("DoNext have item:", eventNo);
 	choices("Next", eventNo, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0); 
 }
 
 public function doNextClear(eventNo:*):void 
 {
 	outputText("", true, true);
-	trace("DoNext Clearing display");
-	trace("DoNext have item:", eventNo);
+	//trace("DoNext Clearing display");
+	//trace("DoNext have item:", eventNo);
 	choices("Next", eventNo, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0);
 }
 
