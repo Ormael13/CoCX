@@ -427,7 +427,6 @@ public function exploreForest():void {
 		}
 	}
 	if(chooser == 1) {
-		trace("MOJO JOJO!");
 		doNext(13);
 		outputText("", true);
 		if(monk == 0) {
@@ -443,8 +442,16 @@ public function exploreForest():void {
 			outputText("The angry visage of a lithe white mouse gazes down on your prone form with a look of confusion.", false);
 			outputText("\n\n\"<i>I'm sorry, I sensed a great deal of corruption, and thought a demon or monster had come to my woods,</i>\" says the mouse, \"<i>Oh, where are my manners!</i>\"\n\nHe helps you to your feet and introduces himself as Jojo.  Now that you have a good look at him, it is obvious this mouse is some kind of monk, dressed in robes, holy symbols, and draped with prayer beads.\n\nHe smiles knowingly, \"<i>Yes I am a monk, and yes this is a strange place for one such as I... this world was not always this way.  Long ago this world was home to many villages, including my own.  But then the demons came.  I'm not sure if they were summoned, created, or simply a perversion of magic or breeding, but they came swarming out of the mountains to destroy everything in their path.</i>\"", false);
 			outputText("\n\nJojo sighs sadly, \"<i>Enough of my woes.  You are very corrupted.  If you cannot be sufficiently purified you WILL become one of them in time.  Will you let me help you?", false);
-			if(player.gender > 0) simpleChoices("Accept", 2003, "Rape Him", jojoRape, "BWUH?", 0, "Decline", 13, "", 0);
-			else simpleChoices("Accept", 2003, "Rape Him", 0, "BWUH?", 0, "Decline", 13, "", 0);
+			if (player.gender > 0) 
+			{
+				trace("Gender != 0");
+				simpleChoices("Accept", 2003, "Rape Him", jojoRape, "BWUH?", 0, "Decline", 13, "", 0);
+			}
+			else 
+			{
+				trace("Gender == 0");
+				simpleChoices("Accept", 2003, "Rape Him", 0, "BWUH?", 0, "Decline", 13, "", 0);
+			}
 			return;
 		}
 		if(monk == 1) {

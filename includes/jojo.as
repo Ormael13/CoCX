@@ -853,6 +853,8 @@ public function amilyAndJojoFuck():void {
 //this.semiglobalReferencer.jojoRape = jojoRape;
 
 public function jojoRape():void {
+	trace("jojoRape called");
+	
 	jojoSprite();
 	slimeFeed();
 	//Track Jojo rapeage
@@ -1107,66 +1109,120 @@ public function jojoRape():void {
 		}
 	}
 	//First rape;
-	if(monk == 1) {
+	if (monk == 1) 
+	{		
 		outputText("You pretend to agree, and follow Jojo into the woods.  You bide your time, waiting for him to relax.  Eventually the mouse stumbles, and you have your chance!\n\n", true);
-		if(player.gender == 1) {
+		
+		if (player.gender == 1) 
+		{	
 			outputText("You push him hard, following through to pin his small frame.  He struggles but you twist his arm expertly and hold him down with your larger bodyweight.  He squirms as you tear off the bottom of his outfit, protesting mightily as you force him into the dirt and expose his toned bottom.\n\n", false);
-			if(player.cockTotal() == 1) {
+			if (player.cockTotal() == 1) 
+			{
 				outputText("You grin and press your " + cockDescript(0) + " against him, making him squeal in protest.  You press on, eager to violate his puckered asshole, reveling in the crushing tightness.  His muscles quiver nervelessly as you pound him raw, his muted protests getting weaker as you notice a rapidly swelling bulge under him.  You reach around and begin jerking him off as you fuck him, fantasizing about pouring him full of corruptive demon power, making him your slave.  The dirty thoughts make your balls feel full; a pulsing, squeezing tightness builds in your nethers as your " + cockDescript(0) + " flexes and bulges inside your prey.  You cum hard, pressing his muzzle into the dirt as you pump glob after glob of cum up his ass, violating him to his core.\n\n", false);
 				outputText("With a satisfied sigh, you pull your " + cockDescript(0) + " out with an audible 'pop'.  Your cum begins leaking out, pooling under him and mixing with his own.  The little guy must have cum hard; he seems fairly comatose.  As you leave your senseless victim, you realize  you feel more satisfied than you have in a while, almost like you've cum so hard it took some of your libido with it.", false);
 				stats(0,0,0,0,-10,0,-100,4);
 				monk++;
-				return;
 			}
-			else {
+			else 
+			{
 				outputText("You grin and press your " + multiCockDescriptLight() + " against him, making him squeal in protest.  You press on, eager to violate his tight asshole, reveling in the crushing tightness.  His muscles quiver nervelessly as you pound him raw, his muted protests getting weaker as you notice a rapidly swelling bulge under him.  You reach around and begin jerking him off as you fuck him, fantasizing about pouring him full of corruptive demon power, making him your slave.  The dirty thoughts make your balls feel full, a pulsing squeezing tightness building in your nethers as your " + cockDescript(0) + " flexes and bulges inside your prey.  You cum hard, pressing his muzzle into the dirt as you pump glob after glob of cum up his ass, violating him to his core.  Cum sprays over his ass, the rest of your equipment soaking him as it cums as hard as the one you sank up into the mouse-hole.\n\n", false);
 				outputText("With a satisfied sigh, you pull your " + cockDescript(0) + " out with an audible 'pop'.  Your cum begins leaking out, pooling under him and mixing with his own.  The little guy must have cum hard, he seems fairly comatose.  As you leave your senseless victim, you realize  you feel more satisfied than you have in a while, almost like you've cum so hard it took some of your libido with it.", false);
 				stats(0,0,0,0,-10,0,-100,4);
 				monk++;
-				return;
 			}
 		}
-		if(player.gender == 2) {
+		else if (player.gender == 2) 
+		{
 			outputText("You smack the back of his head hard, dazing him.  You spin him around as you take his feet out from under him, one hand pulling his pants while the other slashes his belt.  He literally 'falls out of his pants' and onto the soft earth of the forest.  You pounce on the stunned monk, shedding your own clothes and pinning him to the ground.  He begins to resist, squirming under you, ", false);
-			if(player.wetness() < 2) outputText("but the sensation of you grinding your folds against him momemtarily breaks his will.  ", false);
-			else outputText("but the feeling of your " + vaginaDescript(0) + " grinding against his hardening cock robs him of any will.  ", false);
+			
+			if (player.wetness() < 2) 
+			{
+				outputText("but the sensation of you grinding your folds against him momemtarily breaks his will.  ", false);
+			}
+			else 
+			{
+				outputText("but the feeling of your " + vaginaDescript(0) + " grinding against his hardening cock robs him of any will.  ", false);
+			}
+			
 			outputText("You smile when you realize how large he is for his frame, and mount him, taking care to keep him pinned hard to the ground.", false);
+			
 			cuntChange(12, true, true, false);
+			
 			outputText("\n\n", false);
 			
 			outputText("He lets out little grunts and whines of protest as you ride him hard, but quickly cums.  The flood of warmth inside your canal only serves to spur you on, slamming your " + vaginaDescript(0) + " down on him with brutal force.  You envision yourself raping others, corrupting all those you come across with your needy pussy.  You imagine what it must be like to be a succubus, fucking poor monks like this, your magics making your victim's manhood ever larger.  The thought breaks over you like a wave and you cum, hard; your " + vaginaDescript(0) + " clamps down hard on Jojo's cock as he finds himself cumming again, eyes rolling back in his head.  You shudder and moan, cum squirting out of your fuck-hole with each bounce on the poor mouse.", false);
-			if(player.biggestLactation() >= 1 && player.biggestLactation() < 2) outputText("  Milk squirts from  your nipples, spraying him down with small droplets of your creamy tit-treat.", false);
-			if(player.biggestLactation() >= 2 && player.biggestLactation() < 3) outputText("  Streams of milk spray from your nipples in time with your pussy contractions, hosing the poor mouse down and puddling on his fur.", false);
-			if(player.biggestLactation() >= 3) outputText("  Gouts of milk erupt from your nipples, spraying continually as you cum.  The poor mouse is soaked from head to toe, your cream utterly drenching the monk.", false);
+			
+			if (player.biggestLactation() >= 1 && player.biggestLactation() < 2)
+			{
+				outputText("  Milk squirts from  your nipples, spraying him down with small droplets of your creamy tit-treat.", false);
+			}
+			
+			if (player.biggestLactation() >= 2 && player.biggestLactation() < 3)
+			{
+				outputText("  Streams of milk spray from your nipples in time with your pussy contractions, hosing the poor mouse down and puddling on his fur.", false);
+			}
+			
+			if (player.biggestLactation() >= 3)
+			{
+				outputText("  Gouts of milk erupt from your nipples, spraying continually as you cum.  The poor mouse is soaked from head to toe, your cream utterly drenching the monk.", false);
+			}
 			
 			outputText("\n\nYou stand on wobbly legs, happy to have so thoroughly fucked such a chaste and good-natured creature.  You vow to do it again soon, realizing you feel more clearheaded, if a bit more evil.", false);
+			
 			stats(0, 0, 0, 0, -10, 0, -100, 4);
 			monk++;
+			
 			//Preggers chance!
 			player.knockUp(4,432);
-			return;
 		}
-		if(player.gender == 3) {
+		else if (player.gender == 3) 
+		{
+			trace("gender3");
+			
 			outputText("You push him hard, following through to pin his small frame.  He struggles but you twist his arm expertly and hold him down with your larger bodyweight.  He squirms as you tear off the bottom of his outfit, protesting mightily as you force him into the dirt and expose his toned bottom.\n\n", false);
-			if(player.cockTotal() == 1) {
+			if (player.cockTotal() == 1) 
+			{
 				outputText("You grin and press your " + cockDescript(0) + " against him, making him squeal in protest.  You press on, eager to violate his tight asshole, reveling in the crushing tightness.  His muscles quiver nervelessly as you pound him raw, his muted protests getting weaker as you notice a rapidly swelling bulge under him.  You reach around and begin jerking him off as you fuck him, fantasizing about pouring him full of corruptive demon power, making him your slave.  The dirty thoughts make your balls feel full, a pulsing squeezing tightness building in your nethers as your " + cockDescript(0) + " flexes and bulges inside your prey.  You cum hard, pressing his muzzle into the dirt as you pump glob after glob of cum up his ass, violating him to his core.  Your pussy quivers, cumming as well, feeling empty.  You resolve to take his cock's virginity next time.", false);
-				if(player.biggestLactation() >= 1 && player.biggestLactation() < 2) outputText("  Milk squirts from  your nipples, spraying him down with small droplets of your creamy tit-treat.  ", false);
-				if(player.biggestLactation() >= 2 && player.biggestLactation() < 3) outputText("  Streams of milk spray from your nipples in time with your pussy contractions, hosing the poor mouse down and puddling on his fur.  ", false);
-				if(player.biggestLactation() >= 3) outputText("  Gouts of milk erupt from your nipples, spraying continually as you cum.  The poor mouse is soaked from head to toe, your cream utterly drenching the monk.  ", false);
+				if (player.biggestLactation() >= 1 && player.biggestLactation() < 2)
+				{
+					outputText("  Milk squirts from  your nipples, spraying him down with small droplets of your creamy tit-treat.  ", false);
+				}
+				
+				if (player.biggestLactation() >= 2 && player.biggestLactation() < 3)
+				{
+					outputText("  Streams of milk spray from your nipples in time with your pussy contractions, hosing the poor mouse down and puddling on his fur.  ", false);
+				}
+				
+				if (player.biggestLactation() >= 3)
+				{
+					outputText("  Gouts of milk erupt from your nipples, spraying continually as you cum.  The poor mouse is soaked from head to toe, your cream utterly drenching the monk.  ", false);
+				}
+				
 				outputText("\n\nWith a satisfied sigh, you pull your " + cockDescript(0) + " out with an audible 'pop'.  Your cum begins leaking out, pooling under him and mixing with his own.  The little guy must have cum hard, he seems fairly comatose.  As you leave your senseless victim, you realize  you feel more satisfied than you have in a while, almost like you've cum so hard it took some of your libido with it.", false);
 				stats(0,0,0,0,-10,0,-100,4);
 				monk++;
-				return;
 			}
-			else {
+			else 
+			{
 				outputText("You grin and press your " + multiCockDescriptLight() + " against him, making him squeal in protest.  You press on, eager to violate his tight asshole, reveling in the crushing tightness.  His muscles quiver nervelessly as you pound him raw, his muted protests getting weaker as you notice a rapidly swelling bulge under him.  You reach around and begin jerking him off as you fuck him, fantasizing about pouring him full of corruptive demon power, making him your slave.  The dirty thoughts make your balls feel full, a pulsing squeezing tightness building in your nethers as your " + cockDescript(0) + " flexes and bulges inside your prey.  You cum hard, pressing his muzzle into the dirt as you pump glob after glob of cum up his ass, violating him to his core.  Cum sprays over his ass, the rest of your equipment soaking him as it cums as hard as the one you sank up into the mouse-hole.  Your pussy quivers, cumming as well, feeling empty.  Mentally you resolve to take his cock's virginity next time.", false);
-				if(player.biggestLactation() >= 1 && player.biggestLactation() < 2) outputText("  Milk squirts from  your nipples, spraying him down with small droplets of your creamy tit-treat.  ", false);
-				if(player.biggestLactation() >= 2 && player.biggestLactation() < 3) outputText("  Streams of milk spray from your nipples in time with your pussy contractions, hosing the poor mouse down and puddling on his fur.  ", false);
-				if(player.biggestLactation() >= 3) outputText("  Gouts of milk erupt from your nipples, spraying continually as you cum.  The poor mouse is soaked from head to toe, your cream utterly drenching the monk.  ", false);
+				if (player.biggestLactation() >= 1 && player.biggestLactation() < 2)
+				{
+					outputText("  Milk squirts from  your nipples, spraying him down with small droplets of your creamy tit-treat.  ", false);
+				}
+				
+				if (player.biggestLactation() >= 2 && player.biggestLactation() < 3)
+				{
+					outputText("  Streams of milk spray from your nipples in time with your pussy contractions, hosing the poor mouse down and puddling on his fur.  ", false);
+				}
+				
+				if (player.biggestLactation() >= 3)
+				{
+					outputText("  Gouts of milk erupt from your nipples, spraying continually as you cum.  The poor mouse is soaked from head to toe, your cream utterly drenching the monk.  ", false);
+				}
+				
 				outputText("\n\nWith a satisfied sigh, you pull your " + cockDescript(0) + " out with an audible 'pop'.  Your cum begins leaking out, pooling under him and mixing with his own.  The little guy must have cum hard, he seems fairly comatose.  As you leave your senseless victim, you realize  you feel more satisfied than you have in a while, almost like you've cum so hard it took some of your libido with it.", false);
 				stats(0,0,0,0,-10,0,-100,4);
 				monk++;
-				return;
 			}
 		}
 	}
