@@ -315,7 +315,6 @@ public function convertDoubleArg(inputArg:String):String
 {
 	var argResult:String;
 
-
 	var argTemp:Array = inputArg.split(" ");
 	if (argTemp.length != 2)
 	{
@@ -329,8 +328,6 @@ public function convertDoubleArg(inputArg:String):String
 
 	subject = subject.toLowerCase()
 	aspect = aspect.toLowerCase()
-
-	var inputArg:*;
 
 	// Only perform lookup in twoWordNumericTagsLookup if aspect can be cast to a valid number
 	if (!isNaN(Number(aspect)))
