@@ -3636,6 +3636,7 @@ public function giveAmilySomePants():void {
 }
 /*
 //[Lactaid]
+// TODO: Implement?
 public function makeTheMouseAMilkCowMoo():void {
 	outputText("", true);
 	outputText("\"<i>Lactaid? You really want to try drinking mouse milk?</i>\" Amily asks, a little uncertainly, a little playfully.  You nod and assure that you do.  \"<i>Alright, if you insist.</i>\" She proclaims, taking the pink bottle from you and drinking the creaminess to be found within.\n\n", false);
@@ -6909,6 +6910,7 @@ public function threesomeAmilUrtaCAWKS():void {
 	outputText(".  She lets out a startled squeak at the sudden double-penetration.  You grab Amily's " + amilyTits() + " and start to pound her ass, burying your shaft in her at the apex of her grind atop Urta so that she's never without a nice cock deep inside her.\n\n", false);
 
 	outputText("Urta is close to orgasm, and now under a twin-dick assault, Amily won't last much longer either.  Urta lets out a harsh growl and, grabbing Amily's hips, thrusts until her balls slap the bottom of your " + cockDescript(x) + ".  You feel the force of her orgasm, the sudden heat inside Amily's fuckhole spreading right to your cock as Urta's foxy spunk starts spewing back out of Amily's twat.  You follow her example, plunging yourself as far into the mouse-girl as you can and cum, shooting your load straight up her ass until her tight, velvety walls are running white with your spooge.  Overwhelmed by the two jets shooting into her at once, Amily rolls her head back and screams, clamping down hard on the cocks inside her", false);
+	
 	//if Futamily: 
 	if(flags[AMILY_WANG_LENGTH] > 0) outputText(" as her cock orgasms, too, spurting a nice, thick trail of mousecum all over Urta's face and tits", false);
 	outputText(".\n\n", false);
@@ -6920,12 +6922,7 @@ public function threesomeAmilUrtaCAWKS():void {
 	outputText("\"<i>Mmm,</i>\" Urta purrs, giving her ass a playful slap. \"<i>We gotta do this again sometime.</i>\"\n\n", false);
 
 	outputText("You couldn't agree more.", false);
-	//Enable threesome mode!
-	if(flags[AMILY_VISITING_URTA] == 0) {
-		outputText("\n\n(<b>Urta unlocked in Amily's sex menu!</b>)", false);
-		flags[AMILY_VISITING_URTA] = 4;
-	}
-	stats(0,0,0,0,0,-2,-100,0);
+
 	doNext(urtaXAmilyAfterMurrrath);
 }
 //Urta/Amily -- [Use Vag]
@@ -6948,22 +6945,31 @@ public function urtaXAmilyCuntPussyVagSQUICK():void {
 	outputText("You grit your teeth as she makes one last brutal thrust into your eager womb and cums, spurting her scalding-hot horsemilk inside you. The sudden heat and force of her thick spunk flooding inside you sends you right over the edge - you cum, squeezing down on her deflating cock until it dribbles out its last drops of cum into you.\n\n", false);
 
 	outputText("Now filled with cum, you roll onto your side, taking a now-sleeping Amily with you.  Urta crawls into bed after you, gently stroking your cheek and giving you little kisses on the shoulders and neck.  You don't even mind as her cum drips out of you onto the floor, mixed lewdly with your girlcum and Amily's.  Exhausted, you close your eyes to a final kiss from Urta.\n\n", false);
-
+	
 	outputText("\"<i>Mmm,</i>\" she purrs, giving your cheek a last stroke with her thumb.  \"<i>We gotta do this again sometime.</i>\"\n\n", false);
 
 	outputText("You couldn't agree more.", false);
+
+	doNext(urtaXAmilyAfterMurrrath);
+}
+//Urta/Amily -- Parting (First & Repeat)
+public function urtaXAmilyAfterMurrrath():void 
+{
+	outputText("", true);
+	outputText("You wake up later, still entwined with your cum-soaked lovers, smelling entirely of sex and sweat.  It's wonderful, in its own way. You gently wake the girls, and give each a kiss.  They giggle and moan, still sexually sensitive and not a little hungover.  All three of you spend the rest of the hour getting dressed, teasing and playing with each other until you finally must part ways.  You give the Captain of the Guard one last, long kiss before you and Amily make your way back to camp.", false);
+	
+	// Do all the shared shit here
+	
+	// Reset urta cumtimer
+	flags[URTA_CUM_NO_CUM_DAYS] = 0;
+	
 	stats(0,0,0,0,0,-2,-100,0);
 	//Enable threesome mode!
 	if(flags[AMILY_VISITING_URTA] == 0) {
 		outputText("\n\n(<b>Urta unlocked in Amily's sex menu!</b>)", false);
 		flags[AMILY_VISITING_URTA] = 4;
 	}
-	doNext(urtaXAmilyAfterMurrrath);
-}
-//Urta/Amily -- Parting (First & Repeat)
-public function urtaXAmilyAfterMurrrath():void {
-	outputText("", true);
-	outputText("You wake up later, still entwined with your cum-soaked lovers, smelling entirely of sex and sweat.  It's wonderful, in its own way. You gently wake the girls, and give each a kiss.  They giggle and moan, still sexually sensitive and not a little hungover.  All three of you spend the rest of the hour getting dressed, teasing and playing with each other until you finally must part ways.  You give the Captain of the Guard one last, long kiss before you and Amily make your way back to camp.", false);
+	
 	doNext(15);
 }
 public function pureAmilyPutsItInYourRectumDamnNearKilledEm():void {
