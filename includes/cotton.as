@@ -387,7 +387,7 @@ public function cottonChat():void {
 	if(flags[NUMBER_OF_TIMES_MET_SCYLLA] > 0) 
 		chats[chats.length] = 2;
 	//VALA 
-	if(flags[UNKNOWN_FLAG_NUMBER_00119] != 0) 
+	if(flags[FREED_VALA] != 0) 
 		chats[chats.length] = 3;
 	//(Jojo chat)
 	if(monk > 0) 
@@ -422,7 +422,7 @@ public function cottonChat():void {
 	//(Vala chat)
 	else if(choice == 4) {
 		//(Only if Vala has been freed) 
-		if(flags[UNKNOWN_FLAG_NUMBER_00119] != 0) outputText("While you're doing your stretches, you find yourself chatting about the folks of Tel'Adre. \"<i>Vala?</i>\" Cotton says, \"<i>That's the new waitress at the Wet Bitch, right? She's cute. A shame what she's gone through. Sometimes I wish we could wipe out every last imp.</i>\"\n\n", false);
+		if(flags[FREED_VALA] != 0) outputText("While you're doing your stretches, you find yourself chatting about the folks of Tel'Adre. \"<i>Vala?</i>\" Cotton says, \"<i>That's the new waitress at the Wet Bitch, right? She's cute. A shame what she's gone through. Sometimes I wish we could wipe out every last imp.</i>\"\n\n", false);
 	}
 	//(Jojo chat)
 	else if(choice == 5) {

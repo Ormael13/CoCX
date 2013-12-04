@@ -92,44 +92,44 @@ flagReplacements =  [
 ["FUCKED_SOPHIE_COUNTER",                                           "FUCKED_SOPHIE_COUNTER"],                          # Times Had Sex With Sophie
 ["BREASTFEAD_SOPHIE_COUNTER",                                       "BREASTFEAD_SOPHIE_COUNTER"],                      # Times Breastfed Sophie
 ["SOPHIE_WILD_EGG_COUNTDOWN_TIMER",                                 "SOPHIE_WILD_EGG_COUNTDOWN_TIMER"],                # Sophie's Egg Countdown Timer
-["SOPHIE_EGGS_LAID",                                                "SOPHIE_EGGS_LAID"],                      # Sophie eggs laid
-["PC_CURRENTLY_LUSTSTICK_AFFECTED",                                 "PC_CURRENTLY_LUSTSTICK_AFFECTED"],                  # N
-["SOPHIE_ANGRY_AT_PC_COUNTER",                                      "SOPHIE_ANGRY_AT_PC_COUNTER"],                      # Sophie Pissed Off Counter
-["TIMES_PISSED_OFF_SOPHIE_COUNTER",                                 "TIMES_PISSED_OFF_SOPHIE_COUNTER"],                      # Times Pissed Off Sophie
-["TIMES_FUCKED_SOPHIE_LESBIAN",                                     "TIMES_FUCKED_SOPHIE_LESBIAN"],                      # Times Lesbo-Sexed
+["SOPHIE_EGGS_LAID",                                                "SOPHIE_EGGS_LAID"],                               # Sophie eggs laid
+["PC_CURRENTLY_LUSTSTICK_AFFECTED",                                 "PC_CURRENTLY_LUSTSTICK_AFFECTED"],                # N
+["SOPHIE_ANGRY_AT_PC_COUNTER",                                      "SOPHIE_ANGRY_AT_PC_COUNTER"],                     # Sophie Pissed Off Counter
+["TIMES_PISSED_OFF_SOPHIE_COUNTER",                                 "TIMES_PISSED_OFF_SOPHIE_COUNTER"],                # Times Pissed Off Sophie
+["TIMES_FUCKED_SOPHIE_LESBIAN",                                     "TIMES_FUCKED_SOPHIE_LESBIAN"],                    # Times Lesbo-Sexed
 ["EASY_MODE_ENABLE_FLAG",                                           "EASY_MODE_ENABLE_FLAG"],                          # Invincibility On - Easy Mode.	0=false, 1=true
-["CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE",                          "CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE"],                      # Corrupt Marae Followups
-["FOUND_WIZARD_STAFF",                                              "FOUND_WIZARD_STAFF"],                      # Don't forget to put on your robe and wizard hat.
+["CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE",                          "CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE"],         # Corrupt Marae Followups
+["FOUND_WIZARD_STAFF",                                              "FOUND_WIZARD_STAFF"],                             # Don't forget to put on your robe and wizard hat.
 ["UNKNOWN_FLAG_NUMBER_00102",                                       "UNKNOWN_FLAG_NUMBER_00102"],                      # Has extra jojo time been cleared? - Jojo Debug Flag
-["TIMES_AUTOFELLATIOED_EXGARTUAN",                                  "TIMES_AUTOFELLATIOED_EXGARTUAN"],                      # Times Autofellated Exgartuan
-["WHITNEY_GEMS_PAID_THIS_WEEK",                                     "WHITNEY_GEMS_PAID_THIS_WEEK"],                      # Whitney Gems Paid Out That Week
+["TIMES_AUTOFELLATIOED_EXGARTUAN",                                  "TIMES_AUTOFELLATIOED_EXGARTUAN"],                 # Times Autofellated Exgartuan
+["WHITNEY_GEMS_PAID_THIS_WEEK",                                     "WHITNEY_GEMS_PAID_THIS_WEEK"],                    # Whitney Gems Paid Out That Week
 ["TIMES_MET_SCYLLA_IN_ADDICTION_GROUP",                             "TIMES_MET_SCYLLA_IN_ADDICTION_GROUP"],            # SCYLLA:  Times met Addiction Group
-["TIMES_SCYLLA_ADDICT_GROUP_EXPLOITED",                             "TIMES_SCYLLA_ADDICT_GROUP_EXPLOITED"],                      # SCYLLA: Times addict group taken advantage of
-["UNKNOWN_FLAG_NUMBER_00107",                                       "UNKNOWN_FLAG_NUMBER_00107"],                      # SCYLLA: Times given the option to 'share' something
-["UNKNOWN_FLAG_NUMBER_00108",                                       "UNKNOWN_FLAG_NUMBER_00108"],                      # SCYLLA: Milk therapy times
-["UNKNOWN_FLAG_NUMBER_00109",                                       "UNKNOWN_FLAG_NUMBER_00109"],                      # SCYLLA: Cum therapy times
-["UNKNOWN_FLAG_NUMBER_00110",                                       "UNKNOWN_FLAG_NUMBER_00110"],                      # SCYLLA: Sex therapy times
+["TIMES_SCYLLA_ADDICT_GROUP_EXPLOITED",                             "TIMES_SCYLLA_ADDICT_GROUP_EXPLOITED"],            # SCYLLA: Times addict group taken advantage of
+["SCYLLA_TIMES_SHARED_IN_ADDICT_GROUP",                             "SCYLLA_TIMES_SHARED_IN_ADDICT_GROUP"],            # SCYLLA: Times given the option to 'share' something
+["SCYLLA_MILK_THERAPY_TIMES",                                       "SCYLLA_MILK_THERAPY_TIMES"],                      # SCYLLA: Milk therapy times
+["SCYLLA_CUM_THERAPY_TIMES",                                        "SCYLLA_CUM_THERAPY_TIMES"],                       # SCYLLA: Cum therapy times
+["SCYLLA_SEX_THERAPY_TIMES",                                        "SCYLLA_SEX_THERAPY_TIMES"],                       # SCYLLA: Sex therapy times
 ["UNKNOWN_FLAG_NUMBER_00111",                                       "UNKNOWN_FLAG_NUMBER_00111"],                      # Cerulean Succubus: Herm times used
-["UNKNOWN_FLAG_NUMBER_00112",                                       "UNKNOWN_FLAG_NUMBER_00112"],                      # Used milkers today?
-["UNKNOWN_FLAG_NUMBER_00113",                                       "UNKNOWN_FLAG_NUMBER_00113"],                      # Discovered Dungeon 2 (Zetaz's Lair)
-["UNKNOWN_FLAG_NUMBER_00114",                                       "UNKNOWN_FLAG_NUMBER_00114"],                      # Zetaz Defeated
-["UNKNOWN_FLAG_NUMBER_00115",                                       "UNKNOWN_FLAG_NUMBER_00115"],                      # Zetaz' Door unlocked
-["UNKNOWN_FLAG_NUMBER_00116",                                       "UNKNOWN_FLAG_NUMBER_00116"],                      # Imp Horde Defooted
-["UNKNOWN_FLAG_NUMBER_00117",                                       "UNKNOWN_FLAG_NUMBER_00117"],                      # Fungus Room Defeated (1 = yes)
+["USED_MILKER_TODAY",                                               "USED_MILKER_TODAY"],                              # Used milkers today?
+["DISCOVERED_DUNGEON_2_ZETAZ",                                      "DISCOVERED_DUNGEON_2_ZETAZ"],                     # Discovered Dungeon 2 (Zetaz's Lair)
+["DEFEATED_ZETAZ",                                                  "DEFEATED_ZETAZ"],                                 # Zetaz Defeated
+["ZETAZ_DOOR_UNLOCKED",                                             "ZETAZ_DOOR_UNLOCKED"],                            # Zetaz' Door unlocked
+["ZETAZ_IMP_HORDE_DEFEATED",                                        "ZETAZ_IMP_HORDE_DEFEATED"],                       # Imp Horde Defooted
+["ZETAZ_FUNGUS_ROOM_DEFEATED",                                      "ZETAZ_FUNGUS_ROOM_DEFEATED"],                     # Fungus Room Defeated (1 = yes)
 ["UNKNOWN_FLAG_NUMBER_00118",                                       "UNKNOWN_FLAG_NUMBER_00118"],                      # PONIES?!?!?!
-["UNKNOWN_FLAG_NUMBER_00119",                                       "UNKNOWN_FLAG_NUMBER_00119"],                      # Vala Released?
-["UNKNOWN_FLAG_NUMBER_00120",                                       "UNKNOWN_FLAG_NUMBER_00120"],                      # Weekly Faerie Orgy Countdown
-["UNKNOWN_FLAG_NUMBER_00121",                                       "UNKNOWN_FLAG_NUMBER_00121"],                      # Vala Met At Bar?
-["UNKNOWN_FLAG_NUMBER_00122",                                       "UNKNOWN_FLAG_NUMBER_00122"],                      # Fucked Vala Today @ Bar?
-["UNKNOWN_FLAG_NUMBER_00123",                                       "UNKNOWN_FLAG_NUMBER_00123"],                      # Times Vala Used IN Dungeon
-["UNKNOWN_FLAG_NUMBER_00124",                                       "UNKNOWN_FLAG_NUMBER_00124"],                      # Investigated Vala Since Zetaz downed?
-["UNKNOWN_FLAG_NUMBER_00125",                                       "UNKNOWN_FLAG_NUMBER_00125"],                      # rape attempt
-["UNKNOWN_FLAG_NUMBER_00126",                                       "UNKNOWN_FLAG_NUMBER_00126"],                      # Times beaten Vala into the dirt
-["UNKNOWN_FLAG_NUMBER_00127",                                       "UNKNOWN_FLAG_NUMBER_00127"],                      # Times beat AND raped vala
-["UNKNOWN_FLAG_NUMBER_00128",                                       "UNKNOWN_FLAG_NUMBER_00128"],                      # Zetaz Killed
-["UNKNOWN_FLAG_NUMBER_00129",                                       "UNKNOWN_FLAG_NUMBER_00129"],                      # Bondage Straps Taken
-["UNKNOWN_FLAG_NUMBER_00130",                                       "UNKNOWN_FLAG_NUMBER_00130"],                      # Sean Demon Vendor Here
-["UNKNOWN_FLAG_NUMBER_00131",                                       "UNKNOWN_FLAG_NUMBER_00131"],                      # Times Explored Plains
+["FREED_VALA",                                                      "FREED_VALA"],                                     # Vala Released?
+["WEEKLY_FAIRY_ORGY_COUNTDOWN",                                     "WEEKLY_FAIRY_ORGY_COUNTDOWN"],                    # Weekly Faerie Orgy Countdown
+["ENCOUNTERED_VALA_AT_BAR",                                         "ENCOUNTERED_VALA_AT_BAR"],                        # Vala Met At Bar?
+["FUCKED_VALA_AT_BAR_TODAY",                                        "FUCKED_VALA_AT_BAR_TODAY"],                       # Fucked Vala Today @ Bar?
+["TIMES_FUCKED_VALA_IN_DUNGEON",                                    "TIMES_FUCKED_VALA_IN_DUNGEON"],                   # Times Vala Used IN Dungeon
+["INVESTIGATED_VALA_AFTER_ZETAZ_DEFEATED",                          "INVESTIGATED_VALA_AFTER_ZETAZ_DEFEATED"],         # Investigated Vala Since Zetaz downed?
+["TIME_SINCE_VALA_ATTEMPTED_RAPE_PC",                               "TIME_SINCE_VALA_ATTEMPTED_RAPE_PC"],              # rape attempt
+["TIMES_PC_DEFEATED_VALA",                                          "TIMES_PC_DEFEATED_VALA"],                         # Times beaten Vala into the dirt
+["TIMES_PC_DEFEATED_VALA_AND_RAEPED",                               "TIMES_PC_DEFEATED_VALA_AND_RAEPED"],              # Times beat AND raped vala
+["ZETAZ_DEFEATED_AND_KILLED",                                       "ZETAZ_DEFEATED_AND_KILLED"],                      # Zetaz Killed
+["ZETAZ_LAIR_TOOK_BONDAGE_STRAPS",                                  "ZETAZ_LAIR_TOOK_BONDAGE_STRAPS"],                 # Bondage Straps Taken
+["ZETAZ_LAIR_DEMON_VENDOR_PRESENT",                                 "ZETAZ_LAIR_DEMON_VENDOR_PRESENT"],                # Sean Demon Vendor Here
+["TIMES_EXPLORED_PLAINS",                                           "TIMES_EXPLORED_PLAINS"],                          # Times Explored Plains
 ["UNKNOWN_FLAG_NUMBER_00132",                                       "UNKNOWN_FLAG_NUMBER_00132"],                      # Met Bunbun
 ["UNKNOWN_FLAG_NUMBER_00133",                                       "UNKNOWN_FLAG_NUMBER_00133"],                      # Raphael Countdown (Time till Quiksilver Fawkes.  Set to -1 betrayed, set to -2 if covered for.
 ["UNKNOWN_FLAG_NUMBER_00134",                                       "UNKNOWN_FLAG_NUMBER_00134"],                      # Raphael Met? (1 = Y)
@@ -229,7 +229,7 @@ flagReplacements =  [
 ["UNKNOWN_FLAG_NUMBER_00228",                                       "UNKNOWN_FLAG_NUMBER_00228"],                      # Diapause fluid store
 ["UNKNOWN_FLAG_NUMBER_00229",                                       "UNKNOWN_FLAG_NUMBER_00229"],                      # Diapause gain need displayed?
 ["UNKNOWN_FLAG_NUMBER_00230",                                       "UNKNOWN_FLAG_NUMBER_00230"],                      # Sharkgirls met? (Izma counter)
-["UNKNOWN_FLAG_NUMBER_00231",                                       "IZMA_TIMES_FOUGHT_AND_WON"],                      # Izma fight
+["IZMA_TIMES_FOUGHT_AND_WON",                                       "IZMA_TIMES_FOUGHT_AND_WON"],                      # Izma fight
 ["UNKNOWN_FLAG_NUMBER_00232",                                       "UNKNOWN_FLAG_NUMBER_00232"],                      # Times Talked At shark pussy
 ["UNKNOWN_FLAG_NUMBER_00233",                                       "UNKNOWN_FLAG_NUMBER_00233"],                      # Izma worm scare (1 = Izma has been scared off by worms)
 ["UNKNOWN_FLAG_NUMBER_00234",                                       "UNKNOWN_FLAG_NUMBER_00234"],                      # Izma loot storage - Izma saved loot status

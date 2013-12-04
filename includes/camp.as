@@ -1418,7 +1418,7 @@ public function places(display:Boolean):Boolean {
 	var bazaar:* = 0;
 	var owca:* = 0;
 	var dungeonsArg:* = 0;
-	if(flags[UNKNOWN_FLAG_NUMBER_00113] > 0 || player.hasStatusAffect("Found Factory") >= 0 || flags[DISCOVERED_WITCH_DUNGEON] > 0) 
+	if(flags[DISCOVERED_DUNGEON_2_ZETAZ] > 0 || player.hasStatusAffect("Found Factory") >= 0 || flags[DISCOVERED_WITCH_DUNGEON] > 0) 
 		dungeonsArg = dungeons;
 	if(flags[OWCA_UNLOCKED] == 1) 
 		owca = gangbangVillageStuff;
@@ -1440,7 +1440,7 @@ public function places(display:Boolean):Boolean {
 	//Return if there is anything enabled in places
 	if(!display) {
 		 
-		if(owca || flags[UNKNOWN_FLAG_NUMBER_00113] || telAdre || barber || farmBarn || farmHouse || farm || dungeonsArg || boat || ruins || flags[BAZAAR_ENTERED]) 
+		if(owca || flags[DISCOVERED_DUNGEON_2_ZETAZ] || telAdre || barber || farmBarn || farmHouse || farm || dungeonsArg || boat || ruins || flags[BAZAAR_ENTERED]) 
 			return true;
 		else return false;
 	}
@@ -1452,7 +1452,7 @@ public function places(display:Boolean):Boolean {
 public function dungeons():void {
 	menu();
 	//Turn on d2
-	if(flags[UNKNOWN_FLAG_NUMBER_00113] > 0) addButton(0,"Deep Cave",eventParser,11076);
+	if(flags[DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(0,"Deep Cave",eventParser,11076);
 	//Turn on dungeon
 	if(player.hasStatusAffect("Found Factory") >= 0) addButton(1,"Factory",eventParser,11057);
 	if(flags[DISCOVERED_WITCH_DUNGEON] > 0) addButton(2,"Desert Cave",enterBoobsDungeon);

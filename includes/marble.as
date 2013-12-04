@@ -1820,7 +1820,7 @@ public function talkWithMarbleAtCamp():void {
 		flags[MARBLE_CAMPTALK_LEVEL] = 4;
 	}
 	//(story) Talk about Zetaz's unexplored lair(Z)
-	else if(flags[UNKNOWN_FLAG_NUMBER_00113] > 0 && flags[MARBLE_CAMPTALK_LEVEL] < 5) {
+	else if(flags[DISCOVERED_DUNGEON_2_ZETAZ] > 0 && flags[MARBLE_CAMPTALK_LEVEL] < 5) {
 		outputText("You tell Marble about the cave you found deep in the forest.  For some reason, this seems to bother Marble, but when you ask her what is wrong, she claims it's just a feeling and tells you not to worry about it.  Maybe you should make sure you're ready before you go back there?");
 		flags[MARBLE_CAMPTALK_LEVEL] = 5;
 	}
@@ -1830,7 +1830,7 @@ public function talkWithMarbleAtCamp():void {
 		flags[MARBLE_TELADRE_STORY] = 1;
 	}
 	//(story) Talk about defeating Zetaz(Z)
-	else if(flags[UNKNOWN_FLAG_NUMBER_00114] > 0 && flags[MARBLE_CAMPTALK_LEVEL] < 6) {
+	else if(flags[DEFEATED_ZETAZ] > 0 && flags[MARBLE_CAMPTALK_LEVEL] < 6) {
 		outputText("You tell Marble about your run-in with an old foe in the forest cave.  She tenses up at first, but the obvious fact that you've made it out of there alright relaxes her.  Marble admits that for some reason she felt like you were in great danger, but couldn't figure out why she felt that.  \"<i>Anyway, I'm glad that you managed to take care of your old nemesis... that map sounds interesting, too.  Think it really leads to the demon lord's lair?  It is a bit overwhelming, sweetie, to think that you might actually defeat the demon lord!  Part of me wants to beg you not to go, but I know how driven you are, and I won't stop you from going to fulfill your mission.  Just promise me that you'll make absolutely sure you're ready before you follow that map, okay?</i>\"");
 		flags[MARBLE_CAMPTALK_LEVEL] = 6;
 	}
@@ -1859,16 +1859,16 @@ public function talkWithMarbleAtCamp():void {
 	else if(player.hasStatusAffect("DungeonShutDown") >= 0 && player.hasStatusAffect("Marae Complete") < 0 && player.hasStatusAffect("Met Corrupt Marae") < 0)
 		outputText("\"<i>You haven't gone back to Marae yet have you?</i>\"  You shake your head.  \"<i>Well then go see her!  I'm sure she really wants to thank you.</i>\"", false);
 	//If PC has not yet discovered Zetaz's lair or Tel'Adre (Z)
-	else if(flags[UNKNOWN_FLAG_NUMBER_00113] < 0 || player.statusAffectv1("Tel'Adre") == 0)
+	else if(flags[DISCOVERED_DUNGEON_2_ZETAZ] < 0 || player.statusAffectv1("Tel'Adre") == 0)
 		outputText("\"<i>Well sweetie, maybe you should explore the world more?  From what I've heard from the centaurs who stop by the farm, I'm sure you could find something interesting in the deep forest, or maybe the desert,</i>\" she suggests.");
 	//(suggestion) If PC has found Tel'Adre, but not Zetaz's lair(Z)
-	else if(flags[UNKNOWN_FLAG_NUMBER_00113] < 0 && player.statusAffectv1("Tel'Adre") >= 1)
+	else if(flags[DISCOVERED_DUNGEON_2_ZETAZ] < 0 && player.statusAffectv1("Tel'Adre") >= 1)
 		outputText("\"<i>I was thinking that the deep woods probably still hide secrets from you, sweetie... a few times I've been there, I've noticed large numbers of imps carrying supplies.  Think there could be something to that?</i>\" she asks.");
 	//(suggestion) if PC has discovered Zetaz's lair, but has not yet found Tel'Adre(Z)
-	else if(flags[UNKNOWN_FLAG_NUMBER_00113] > 0 && player.statusAffectv1("Tel'Adre") == 0)
+	else if(flags[DISCOVERED_DUNGEON_2_ZETAZ] > 0 && player.statusAffectv1("Tel'Adre") == 0)
 		outputText("\"<i>Well... I've seen patrols around the camp before.  They were all wearing the same uniform, so maybe there's some kind of city or armed force out there?  Come to think of it, one time I found some sand where they were standing when they moved on - I bet they're holed up in the desert somewhere!</i>\" she says with conviction.");
 	//(suggestion) if PC has discovered Zetaz's lair but has not cleared the cave(Z)
-	else if(flags[UNKNOWN_FLAG_NUMBER_00113] > 0 && flags[UNKNOWN_FLAG_NUMBER_00114] == 0)
+	else if(flags[DISCOVERED_DUNGEON_2_ZETAZ] > 0 && flags[DEFEATED_ZETAZ] == 0)
 		outputText("\"<i>Well, you haven't finished exploring that cave in the woods yet, have you?  Why don't you go there?</i>\" she offers.  She still seems to be a bit bothered by something, but doesn't voice it.");
 	//Nothing to advise!
 	else outputText("\"<i>Sweetie, you've finished all that there is in the main story of the game so far.  You'll have to wait for Fenoxo to add more,</i>\" she says to you winking. \"<i>In the meantime, explore! There's a lot in here that isn't a part of the main story.  You could also try changing your form and see how that changes each encounter.  Just don't get caught or lose your head, ok sweetie?<i/>\"", false);

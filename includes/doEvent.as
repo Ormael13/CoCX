@@ -2988,7 +2988,7 @@ public function doEvent(eventNo:Number):void
 	{
 		outputText("", true);
 		shortName = "BonStrp";
-		flags[UNKNOWN_FLAG_NUMBER_00129]++;
+		flags[ZETAZ_LAIR_TOOK_BONDAGE_STRAPS]++;
 		takeItem();
 		return;
 	}

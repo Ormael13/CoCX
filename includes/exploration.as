@@ -18,7 +18,7 @@ public function doExplore():void {
 	
 	if(player.exploredLake > 0) lake = 5;
 	if(player.exploredDesert > 0) desert = 3;
-	if(flags[UNKNOWN_FLAG_NUMBER_00131] > 0) plains = 97;
+	if(flags[TIMES_EXPLORED_PLAINS] > 0) plains = 97;
 	if(player.explored == 0) {
 		outputText("You tentatively step away from your campsite, alert and scanning the ground and sky for danger.  You walk for the better part of an hour, marking the rocks you pass for a return trip to your camp.  It worries you that the portal has an opening on this side, and it was totally unguarded...\n\n...Wait a second, why is your campsite in front of you? The portal's glow is clearly visible from inside the tall rock formation.   Looking carefully you see your footprints leaving the opposite side of your camp, then disappearing.  You look back the way you came and see your markings vanish before your eyes.  The implications boggle your mind as you do your best to mull over them.  Distance, direction, and geography seem to have little meaning here, yet your campsite remains exactly as you left it.  A few things click into place as you realize you found your way back just as you were mentally picturing the portal!  Perhaps memory influences travel here, just like time, distance, and speed would in the real world!\n\nThis won't help at all with finding new places, but at least you can get back to camp quickly.  You are determined to stay focused the next time you explore and learn how to traverse this gods-forsaken realm.", true);
 		tryDiscover();
@@ -98,15 +98,15 @@ public function tryDiscover():void {
 			doNext(13);
 			return;
 		}
-		if(player.exploredMountain >= 1 && rand(3) == 0 && flags[UNKNOWN_FLAG_NUMBER_00131] == 0) {
-			flags[UNKNOWN_FLAG_NUMBER_00131] = 1;
+		if(player.exploredMountain >= 1 && rand(3) == 0 && flags[TIMES_EXPLORED_PLAINS] == 0) {
+			flags[TIMES_EXPLORED_PLAINS] = 1;
 			player.explored++;
 			outputText("You find yourself standing in knee-high grass, surrounded by flat plains on all sides.  Though the mountain, forest, and lake are all visible from here, they seem quite distant.\n\n<b>You've discovered the plains!</b>", true);
 			doNext(13);
 			return;
 		}
 		//EXPLOOOOOOORE
-		if(flags[UNKNOWN_FLAG_NUMBER_00272] == 0 && flags[UNKNOWN_FLAG_NUMBER_00131] > 0 && rand(3) == 0) {
+		if(flags[UNKNOWN_FLAG_NUMBER_00272] == 0 && flags[TIMES_EXPLORED_PLAINS] > 0 && rand(3) == 0) {
 			flags[UNKNOWN_FLAG_NUMBER_00272] = 1;
 			player.explored++;
 			outputText("", true);
@@ -208,11 +208,11 @@ public function exploreDeepwoods():void {
 		return;
 	}
 	//Every 5th exploration encounters d2 if hasnt been met yet and factory done
-	if(flags[UNKNOWN_FLAG_NUMBER_00113] == 0 && player.statusAffectv1("exploredDeepwoods") % 5 == 0 && player.hasStatusAffect("DungeonShutDown") >= 0) {
+	if(flags[DISCOVERED_DUNGEON_2_ZETAZ] == 0 && player.statusAffectv1("exploredDeepwoods") % 5 == 0 && player.hasStatusAffect("DungeonShutDown") >= 0) {
 		outputText("While you explore the deepwoods, you do your best to forge into new, unexplored locations.  While you're pushing away vegetation and slapping at plant-life, you spot a half-overgrown orifice buried in the side of a ravine.  There's a large number of imp-tracks around the cavern's darkened entryway.  Perhaps this is where the imp, Zetaz, makes his lair?  In any event, it's past time you checked back on the portal.  You make a mental note of the cave's location so that you can return when you're ready.", true);
 		outputText("\n\n<b>You've discovered the location of Zetaz's lair!</b>", false);
 		simpleChoices("Enter",11076,"",0,"",0,"",0,"Leave",13);
-		flags[UNKNOWN_FLAG_NUMBER_00113]++;
+		flags[DISCOVERED_DUNGEON_2_ZETAZ]++;
 		return;
 	}
 	//Tamani 20% encounter rate
@@ -1462,7 +1462,7 @@ public function exploreSwamp():void {
 }
 public function explorePlains():void {
 	outputText("", true);
-	flags[UNKNOWN_FLAG_NUMBER_00131]++;
+	flags[TIMES_EXPLORED_PLAINS]++;
 	var select:Number = rand(6);
 	//Dem Kangasluts!  Force Sheila relationship phase!
 	if(flags[SHEILA_DEMON] == 0 && flags[SHEILA_XP] == 3 && model.time.hours == 20 && flags[SHEILA_CLOCK] >= 0) {
@@ -1490,17 +1490,17 @@ public function explorePlains():void {
 		return;
 	}
 	//Find Owca
-	if(player.level >= 8 && flags[UNKNOWN_FLAG_NUMBER_00131] % 25 == 0 && flags[OWCA_UNLOCKED] == 0) {
+	if(player.level >= 8 && flags[TIMES_EXPLORED_PLAINS] % 25 == 0 && flags[OWCA_UNLOCKED] == 0) {
 		gangbangVillageStuff();
 		return;
 	}
 	//Bazaar!
-	if(flags[UNKNOWN_FLAG_NUMBER_00131] % 10 == 0 && flags[BAZAAR_ENTERED] == 0) {
+	if(flags[TIMES_EXPLORED_PLAINS] % 10 == 0 && flags[BAZAAR_ENTERED] == 0) {
 		findBazaar();
 		return;
 	}
 	//Chance of threesomes!
-	if(flags[UNKNOWN_FLAG_NUMBER_00256] != 0 && flags[UNKNOWN_FLAG_NUMBER_00257] != 0 && flags[HEL_FUCKBUDDY] == 1 && flags[UNKNOWN_FLAG_NUMBER_00260] == 0 && !isabellaFollower() && flags[UNKNOWN_FLAG_NUMBER_00131] % 21 == 0 && !(player.tallness > 78 && flags[UNKNOWN_FLAG_NUMBER_00258] == 0)) {
+	if(flags[UNKNOWN_FLAG_NUMBER_00256] != 0 && flags[UNKNOWN_FLAG_NUMBER_00257] != 0 && flags[HEL_FUCKBUDDY] == 1 && flags[UNKNOWN_FLAG_NUMBER_00260] == 0 && !isabellaFollower() && flags[TIMES_EXPLORED_PLAINS] % 21 == 0 && !(player.tallness > 78 && flags[UNKNOWN_FLAG_NUMBER_00258] == 0)) {
 		//Hell/Izzy threesome intro
 		if(flags[HEL_ISABELLA_THREESOME_ENABLED] == 0) {
 			salamanderXIsabellaPlainsIntro();

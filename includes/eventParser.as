@@ -827,9 +827,9 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(flags[UNKNOWN_FLAG_NUMBER_00250] > 300) flags[UNKNOWN_FLAG_NUMBER_00250] = 300;
 		}
 		//Vala post-rape countdown
-		if(flags[UNKNOWN_FLAG_NUMBER_00125] > 0) {
-			flags[UNKNOWN_FLAG_NUMBER_00125]--;
-			if(flags[UNKNOWN_FLAG_NUMBER_00125] < 0) flags[UNKNOWN_FLAG_NUMBER_00125] = 0;
+		if(flags[TIME_SINCE_VALA_ATTEMPTED_RAPE_PC] > 0) {
+			flags[TIME_SINCE_VALA_ATTEMPTED_RAPE_PC]--;
+			if(flags[TIME_SINCE_VALA_ATTEMPTED_RAPE_PC] < 0) flags[TIME_SINCE_VALA_ATTEMPTED_RAPE_PC] = 0;
 		}	
 		//Sophie PO'ed countdown
 		if(flags[SOPHIE_ANGRY_AT_PC_COUNTER] > 0) {
@@ -1865,14 +1865,14 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			//Fix 'hangs' - PC is at the bottom of the dress countdown
 			if(flags[UNKNOWN_FLAG_NUMBER_00135] == 1 && flags[UNKNOWN_FLAG_NUMBER_00133] == 0 && RaphaelLikes()) flags[UNKNOWN_FLAG_NUMBER_00135] = 4;
 			//Countdown to next faerie orgy
-			if(flags[UNKNOWN_FLAG_NUMBER_00120] > 0) {
-				flags[UNKNOWN_FLAG_NUMBER_00120]--;
-				if(flags[UNKNOWN_FLAG_NUMBER_00120] < 0) flags[UNKNOWN_FLAG_NUMBER_00120] = 0;
+			if(flags[WEEKLY_FAIRY_ORGY_COUNTDOWN] > 0) {
+				flags[WEEKLY_FAIRY_ORGY_COUNTDOWN]--;
+				if(flags[WEEKLY_FAIRY_ORGY_COUNTDOWN] < 0) flags[WEEKLY_FAIRY_ORGY_COUNTDOWN] = 0;
 			}
 			//Clear Whitney's Weekly limit
 			if(model.time.days % 7 == 0) flags[WHITNEY_GEMS_PAID_THIS_WEEK] = 0;
 			//Clear 'has fucked milker today'
-			if(flags[UNKNOWN_FLAG_NUMBER_00112] > 0) flags[UNKNOWN_FLAG_NUMBER_00112] = 0;
+			if(flags[USED_MILKER_TODAY] > 0) flags[USED_MILKER_TODAY] = 0;
 			//Reduce bad-end for cerulean herms number
 			if(flags[CERULEAN_POTION_BAD_END_FUTA_COUNTER] > 0) flags[CERULEAN_POTION_BAD_END_FUTA_COUNTER] -= 0.5;
 			//Update Urta's luv counter

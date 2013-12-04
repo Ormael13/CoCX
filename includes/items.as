@@ -387,7 +387,7 @@ public function dropItem(monsterName:String):void {
 		else shortName = "Brown D";
 	}
 	if(monsterName == "Vala") {
-		if(flags[UNKNOWN_FLAG_NUMBER_00126] == 0) shortName = "NumbRox";
+		if(flags[TIMES_PC_DEFEATED_VALA] == 0) shortName = "NumbRox";
 	}
 	if(monsterName == "plain girl") {
 		if(rand(3) == 0) shortName = "EctoPls";

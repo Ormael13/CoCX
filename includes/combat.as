@@ -9011,22 +9011,22 @@ public function startCombat(monsterNum:Number):void {
 		monster.cor = 50;
 		monster.fatigue = 0;
 		monster.lustVuln = .5;
-		if(flags[UNKNOWN_FLAG_NUMBER_00126] > 0) monster.lustVuln += .25;
-		if(flags[UNKNOWN_FLAG_NUMBER_00126] > 2) monster.lustVuln += .5;
+		if(flags[TIMES_PC_DEFEATED_VALA] > 0) monster.lustVuln += .25;
+		if(flags[TIMES_PC_DEFEATED_VALA] > 2) monster.lustVuln += .5;
 		
 		//Combat Stats
 		monster.bonusHP = 350;
 		monster.HP = eMaxHP();
 		
-		monster.lust = 30 + flags[UNKNOWN_FLAG_NUMBER_00126] * 10;
+		monster.lust = 30 + flags[TIMES_PC_DEFEATED_VALA] * 10;
 		if(monster.lust > 80) monster.lust = 80;
 		
 		
 		//Level Stats
 		monster.level = 11;
 		monster.XP = totalXP() + 50;
-		if(flags[UNKNOWN_FLAG_NUMBER_00126] > 0) monster.XP = 5;
-		if(flags[UNKNOWN_FLAG_NUMBER_00126] > 2) monster.XP = 1;
+		if(flags[TIMES_PC_DEFEATED_VALA] > 0) monster.XP = 5;
+		if(flags[TIMES_PC_DEFEATED_VALA] > 2) monster.XP = 1;
 		monster.gems = 1;
 		
 		

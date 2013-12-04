@@ -612,7 +612,7 @@ public function scyllaPtVShare():void {
 	scyllaSprite();
 	outputText("", true);
 	//FIRST TIEM
-	if(flags[UNKNOWN_FLAG_NUMBER_00107] == 0) {
+	if(flags[SCYLLA_TIMES_SHARED_IN_ADDICT_GROUP] == 0) {
 		outputText("With a blush of embarrassment, you push the door open and step inside. \"<i>I'm " + player.short + " and I'm an addict,</i>\" you admit, keeping your eyes cast down.\n\n", false);
 		
 		outputText("The girls look surprised by your entry, but Scylla is welcoming all the same. \"<i>Oh, " + player.short + ", I'm so glad you could join us after all,</i>\" she fibs, covering the fact that you were obviously spying on them. \"<i>Pastie, Abby, this is my dear friend. Please, take a seat here,</i>\" she offers you her chair and daintily takes a place on the edge of the room's bed. \"<i>Please, tell us more about yourself.</i>\"\n\n", false);
@@ -624,7 +624,7 @@ public function scyllaPtVShare():void {
 		outputText("You resolve to be on your best behavior, mentally noting that your 'best' isn't what it used to be. What would you like to talk about today?\n\n", false);
 	}
 	//Increment times met share group
-	flags[UNKNOWN_FLAG_NUMBER_00107]++;
+	flags[SCYLLA_TIMES_SHARED_IN_ADDICT_GROUP]++;
 	//Increment overall meetings
 	flags[TIMES_MET_SCYLLA_IN_ADDICTION_GROUP]++;
 	outputText("What addiction would you like to discuss?", false);
@@ -650,7 +650,7 @@ public function scyllaPtVNoDiscussion():void {
 //[Marble's Milk]	(First time and Repeat)
 public function scyllaPtVMilk():void {
 	scyllaSprite();
-	flags[UNKNOWN_FLAG_NUMBER_00108]++;
+	flags[SCYLLA_MILK_THERAPY_TIMES]++;
 	outputText("", true);
 	outputText("You tell the girls about Whitney's farm and how you help out when you can. You relate how you met Marble and the relationship that blossomed. Eventually, you get to the topic of her milk. Your mouth begins to water and you can almost see those big, beautiful udders as you describe your first taste- the warm flavor spraying on your mouth as you stroked her nipple with your tongue, her skin earthy and moist with matronly excitement. You talk about the feel of her arms cradling your head as you nursed one teat, then the other, drinking in her sighs of relief as much as the nectar of her body.\n\n", false);
 	
@@ -723,7 +723,7 @@ public function scyllaPtVMilkV():void {
 public function scyllaPtVCum():void {
 	scyllaSprite();
 	outputText("", true);
-	flags[UNKNOWN_FLAG_NUMBER_00109]++;
+	flags[SCYLLA_CUM_THERAPY_TIMES]++;
 	outputText("You take a moment to collect your thoughts before beginning. You're not exactly sure when it was that you first heard of minotaurs, but you remember in crystal-clear detail the first time you smelled one. Every rippling muscle on their monstrous body reeking of their musk, you found it impossible not to get light-headed each time you tangled with one. Even worse, they knew exactly how their stench affected their prey and those horrible beasts used it against you in the worst ways. Every time you see them, your resistance crumbles, your mind turns off, and there's nothing but your pounding heart and the promise of their release. The helplessness and the weakness that drains you is all the worse for how... relieved... you feel when at last their hot, thick cum whitewashes your body, inside and out. Every drop of the tingling heat wraps iron bands around your lungs and electrifies your muscles into jelly. Even afterwards, the odor lingers like a collar around your neck, marking you as their property, humiliating and exciting you all at once.\n\n", false);
 	
 	outputText("You bury your face in your hands as you admit that you've never even seriously tried to quit. How could you? Can the dirt stop trees from drinking its nutrients? Does sand rebel when clams encase it in alabaster to produce pearls? Being used time and time again is all you deserve. It's what you need. You're not strong enough to stop and you never will be.\n\n", false);
@@ -797,7 +797,7 @@ public function scyllaPtVCumV():void {
 public function scyllaPtVSex():void {
 	scyllaSprite();
 	outputText("", true);
-	flags[UNKNOWN_FLAG_NUMBER_00110]++;
+	flags[SCYLLA_SEX_THERAPY_TIMES]++;
 	stats(0,0,0,0,0,0,10,0);
 	outputText("You're a little uncomfortable talking about this in front of the nun, but you push through the embarrassment and admit that you like sex. Abylon snorts, rolling her eyes. You clarify that you really, really, REALLY like sex. Ever since you lost your virginity, you just haven't been able to get enough. Imps, hell hounds, naga - if it's got a pulse, you'll jump it. Sometimes, you'll even let yourself be beaten in battle - just to let them have their way with you, with bestial dicks stuffing your every orifice and monstrous cunts milking your seed. But it's not just beasts. All the people who've been so kind to you, all you can do is think about fucking them silly. The heat, the sweat, the cum; despite the importance of your mission, it's too much to resist. You worry that maybe it's warping how you see the world. Will you be able to return home without trying to suck and fuck your way through all the people you knew and loved? Are you even capable of real love anymore?\n\n", false);
 	

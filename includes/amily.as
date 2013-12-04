@@ -6829,7 +6829,7 @@ public function dateNightFirstTime():void {
 	//(OLD: Urta is either too dense to catch the hint or simply ignores it. You sigh and ask Amily if it's alright if Urta joins you.
 	//outputText("\"<i>Huh? Oh yeah, ish fiiine,</i>\" Amily drawls, half-drunk. Oh, this is going to end well.)
 	outputText("The fox-girl grabs a chair from an adjacent table and brings it over, sitting reverse and leaning heavily on the back rest.  Before she can say anything more than a simple greeting, however, Amily grabs a bottle from ", false);
-	if(flags[UNKNOWN_FLAG_NUMBER_00121] == 0) outputText("a passing waitress", false);
+	if(flags[ENCOUNTERED_VALA_AT_BAR] == 0) outputText("a passing waitress", false);
 	else outputText("a rather alarmed Vala as she flutters by", false);
 	outputText(". \"<i>Herr, ish gud,</i>\" Amily slurs, pawing off the bottle to a surprised Urta.\n\n", false);
 
