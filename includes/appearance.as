@@ -1200,7 +1200,9 @@ public function appearance(e:MouseEvent = null):void
 	if(player.totalCocks() > 0) 
 	{
 		if(player.cocks[0].pierced > 0) 
+		{
 			outputText("\nLooking positively perverse, a " + player.cocks[0].pShortDesc + " adorns your " + cockDescript(0) + ".", false);
+		}
 	}
 	if(flags[UNKNOWN_FLAG_NUMBER_00286] == 1) 
 		outputText("\nA magical, ruby-studded bar pierces your belly button, allowing you to summon Ceraph on a whim.", false);

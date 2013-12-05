@@ -225,33 +225,45 @@ public function pierceMenu():void {
 	spriteSelect(63);
 	hideUpDown();
 	var clit:Number = 0;
-	if(player.hasVagina()) {
-		if(player.vaginas[0].clitPierced == 0) clit = 2215;
+	if(player.hasVagina()) 
+	{
+		if(player.vaginas[0].clitPierced == 0) 
+		clit = 2215;
 	}
 	var dick:Number = 0;
-	if(player.totalCocks() > 0) {
-		if(player.cocks[0].pierced == 0) dick = 2216;
+	if(player.totalCocks() > 0) 
+	{
+		if(player.cocks[0].pierced == 0) 
+			dick = 2216;
 	}
 	var ears:Number = 0;
-	if(player.earsPierced == 0) ears = 2217;
+	if(player.earsPierced == 0) 
+		ears = 2217;
 	var eyebrow:Number = 0;
-	if(player.eyebrowPierced == 0) eyebrow = 2218;
+	if(player.eyebrowPierced == 0) 
+		eyebrow = 2218;
 	var lip:Number = 0;
-	if(player.lipPierced == 0) lip = 2219;
+	if(player.lipPierced == 0) 
+		lip = 2219;
 	var nipples:Number = 0;
-	if(player.nipplesPierced == 0) nipples = 2220;
+	if(player.nipplesPierced == 0) 
+		nipples = 2220;
 	var nose:Number = 0;
-	if(player.nosePierced == 0) nose = 2221;
+	if(player.nosePierced == 0) 
+		nose = 2221;
 	var tongue:Number = 0;
-	if(player.tonguePierced == 0) tongue = 2222;
+	if(player.tonguePierced == 0) 
+		tongue = 2222;
 	var vulva:Number = 0;
-	if(player.hasVagina()) {
+	if(player.hasVagina()) 
+	{
 		if(player.vaginas[0].labiaPierced == 0) vulva = 2223;
 	}
 	outputText("Yara asks, \"<i>Ok then, what would you like pierced " + player.mf("sir","cutie") + "?  Just keep in mind my piercings are special - they're permanent and CAN'T be removed.</i>\"", true);
 	if(clit + dick + ears + eyebrow + lip + nipples + nose + tongue + vulva > 0) 
 		choices("Clit",clit,"Dick",dick,"Ears",ears,"Eyebrow",eyebrow,"Lip",lip,"Nipples",nipples,"Nose",nose,"Tongue",tongue,"Labia",vulva,"Back",piercingStudio);
-	else {
+	else 
+	{
 		outputText("\n\nYou give yourself a quick once-over and realize there's nowhere left for her to pierce you.  Oh well.", false);
 		doNext(piercingStudio);
 	}
