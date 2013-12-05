@@ -1604,7 +1604,16 @@ public function interactWithMarbleAtCamp():void {
 	//appearnace/info - always there
 	//Sex
 	if(player.lust >= 33) sexEvent = 2127;
-	choices("Appearance",marbleAppearance,"Talk",marbleTalkOverhaul,"Present",gatherEvent,"Give Item",giveItemEvent,"Get Milk",milkEvent,"Release",sexEvent,"Playtime",playtime,"Break Up",breakUpWithMarble,"",0,"Back",campLoversMenu);
+	choices("Appearance",marbleAppearance,
+			"Talk",marbleTalkOverhaul,
+			"Present",gatherEvent,
+			"Give Item",giveItemEvent,
+			"Get Milk",milkEvent,
+			"Release",sexEvent,
+			"Playtime",playtime,
+			"Break Up",breakUpWithMarble,
+			"",0,
+			"Back",campLoversMenu);
 }
 
 public function marbleTalkOverhaul():void {
@@ -1793,8 +1802,10 @@ public function talkWithMarbleAtCamp():void {
 	else if(player.hasStatusAffect("DungeonShutDown") >= 0 && flags[MARBLE_CAMPTALK_LEVEL] < 3) 
 	{
 		outputText("You tell Marble about what you found inside the factory.  She is horrified at what was being done to the other champions and assures you that no one should ever <i>belong</i> in a place like that. You continue and tell of the overseer and her fate. Marble reacts with surprise, ", false); 
-		if(player.hasPerk("Omnibus' Gift") >= 0) outputText("and hopes that you've learned your lesson about accepting <i>gifts</i> from demons.  ", false);
-		else outputText("but concludes that what you did was probably for the best.  At least you didn't fall for her trick.  ", false);
+		if(player.hasPerk("Omnibus' Gift") >= 0) 
+			outputText("and hopes that you've learned your lesson about accepting <i>gifts</i> from demons.  ", false);
+		else 
+			outputText("but concludes that what you did was probably for the best.  At least you didn't fall for her trick.  ", false);
 		outputText("Finally, you tell her how you shut down the factory and what happened to the captured champions.  Marble is shocked that some stayed, but says she doesn't think there is much the two of you could do to help them if they're already addicted. \"<i>You should probably just leave them be, for now.</i>\"", false);
 		flags[MARBLE_CAMPTALK_LEVEL] = 3;
 	}
@@ -1809,12 +1820,15 @@ public function talkWithMarbleAtCamp():void {
 	else if(player.hasStatusAffect("Marae Complete") >= 0 && player.hasStatusAffect("FactoryOverload") >= 0 && flags[MARBLE_CAMPTALK_LEVEL] < 4) 
 	{
 		outputText("Your story about what had happened to Marae seems to have shaken up Marble a little.  Though, you notice that she seems to be getting more and more aroused as you relate your story.  ", false);
-		if(player.hasPerk("Marae's Gift - Fertility") >= 0) outputText("You continue and tell her how your attempt to get Marae's Lithicite turned out.  Marble can't believe you tried that, but when she hears what happened next, her eyes go wide and she actually starts masturbating in front of you.  At the end of your tale, however, Marble looks more concerned than aroused.  She hopes you won't have too much trouble with pregnancies. That seemed to have killed the mood for her, too.", false);
+		if(player.hasPerk("Marae's Gift - Fertility") >= 0) 
+			outputText("You continue and tell her how your attempt to get Marae's Lithicite turned out.  Marble can't believe you tried that, but when she hears what happened next, her eyes go wide and she actually starts masturbating in front of you.  At the end of your tale, however, Marble looks more concerned than aroused.  She hopes you won't have too much trouble with pregnancies. That seemed to have killed the mood for her, too.", false);
 		//[[EDITOR'S NOTE: The original said "I can't believe that tried that." I was unsure about the context, if it originally meant 'you tried that' or 'it tried that', so I went with the former. If I'm wrong here, my bad.]]
-		else if (player.hasPerk("Marae's Gift - Stud") >= 0) outputText("You continue and tell her how your attempt to get Marae's Lithicite turned out.  Marble can't believe you tried that, but when she hears what happened next, her eyes go wide and she actually starts masturbating in front of you.  At the end of your tale, Marble looks at you a bit nervously and asks, \"<i>So sweetie, does that mean you're going to breed with me?</i>\" <i>Hmm, </i> you think, <i>might not be a bad idea.</i>", false);
+		else if (player.hasPerk("Marae's Gift - Stud") >= 0) 
+			outputText("You continue and tell her how your attempt to get Marae's Lithicite turned out.  Marble can't believe you tried that, but when she hears what happened next, her eyes go wide and she actually starts masturbating in front of you.  At the end of your tale, Marble looks at you a bit nervously and asks, \"<i>So sweetie, does that mean you're going to breed with me?</i>\" <i>Hmm, </i> you think, <i>might not be a bad idea.</i>", false);
 		//increase the player's lust by 35 if they are under 50, so they can breed right away
 		if(player.lust<50) stats(0,0,0,0,0,0,35,0);
-		if(player.hasPerk("Marae's Gift - Fertility") < 0 && player.hasPerk("Marae's Gift - Stud") < 0) {
+		if(player.hasPerk("Marae's Gift - Fertility") < 0 && 
+				player.hasPerk("Marae's Gift - Stud") < 0) {
 			outputText("You finish your tale by recounting how you ran away.  She isn't really sure how to respond to your decision, but Marble does thank you for not leaving her behind and joining Marae.", false);
 		}
 		flags[MARBLE_CAMPTALK_LEVEL] = 4;
