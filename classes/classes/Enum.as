@@ -6,6 +6,7 @@ package classes
 	 */
 	import flash.utils.*;
 	
+	// This whole thing is a fucking abomination and it needs to die in a horrible fucking fire.
 	public /*abstract*/class Enum implements IExternalizable
 	{
 		public function get Name():String

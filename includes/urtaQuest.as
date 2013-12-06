@@ -168,6 +168,9 @@ public function resetToPC():void {
 	itemSlot4 = clone(urtaQItems4);
 	itemSlot5 = clone(urtaQItems5);
 	model.player = player;
+	
+	// See called method comment.
+	player.fixFuckingCockTypesEnum();
 }
 
 

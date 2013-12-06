@@ -2852,6 +2852,20 @@ package classes
 				}
 			}
 		}
+		
+		// This is placeholder shit whilst I work out a good way of BURNING ENUM TO THE FUCKING GROUND
+		// and replacing it with something that will slot in and work with minimal changes and not be
+		// A FUCKING SHITSTAIN when it comes to intelligent de/serialization.
+		public function fixFuckingCockTypesEnum():void
+		{
+			if (this.cocks.length > 0)
+			{
+				for (var i:int = 0; i < this.cocks.length; i++)
+				{
+					this.cocks[i].cockType = CockTypesEnum.ParseConstantByIndex(this.cocks[i].cockType.Index);
+				}
+			}
+		}
 	}
 }
 
