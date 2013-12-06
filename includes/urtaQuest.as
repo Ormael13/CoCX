@@ -361,7 +361,14 @@ public function towerOfTheCovenantII():void {
 	outputText("\n\nYou give him a kiss on the nose and head for the door, equal parts excited and terrified by the opportunity you've been given.  Now, before you leave on your search you should visit " + player2.short + ".  You could tell " + player2.mf("him","her") + " everything, or you could simply spend an evening with " + player2.mf("him","her") + " without letting " + player2.mf("him","her") + " know the danger you're about to get into.  Though, Gul did urge you to make haste, maybe it would be best for everyone if you embarked sooner and returned to " + player2.short + " healthy.");
 	//[?Get a Drink][Visit Truth] [Visit] [Embark]
 	menu();
-	addButton(0,"Stop4ADrink",getHelBangedAsUrta);
+	
+	// The description of the getHelBangedAsUrta scene seems to specify that it should only be available to players 
+	// at fuckbuddy status with Firebutt.
+	if (flags[HEL_FUCKBUDDY] > 0)
+	{
+		addButton(0, "Stop4ADrink", getHelBangedAsUrta);
+	}
+	
 	addButton(1,"Visit",visitPCPreUrtaQuest,false);
 	addButton(2,"Visit Truth",visitPCPreUrtaQuest,true);
 	addButton(3,"Embark",runIntoAGoblin);
