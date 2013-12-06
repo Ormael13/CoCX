@@ -3493,7 +3493,7 @@ public function listenToMediumAnalXPArian():void {
 	if(player.hasCock()) {
 		outputText("\n\nWell, if this is what [Arian ey] wants, you're happy to oblige.  Your hand slips under the covers to start stroking your [cock smallest], gently coaxing yourself to erection.  Once you've gotten yourself sufficiently stiff, you wrap your arms around the lizan's waist for balance and start pushing yourself in.");
 		outputText("\n\nArian moans.  \"<i>Such a familiar flavor.  Why didn't you tell me you were [name] flavoured?  I love muffins.  I love [name] muffins.</i>\"");
-		outputText("\n\nYou blink in surprise; is Arian really asleep, you wonder?  No, [Arian ey]'s got to be awake, otherwise how could [Arian ey] realise you're actually fucking his ass?  \"<i>Hmm... tasty...</i>\"  You lean over the lizan, ");
+		outputText("\n\nYou blink in surprise; is Arian really asleep, you wonder?  No, [Arian ey]'s got to be awake, otherwise how could [Arian ey] realise you're actually fucking [Arian eir] ass?  \"<i>Hmm... tasty...</i>\"  You lean over the lizan, ");
 		if(player.hasCock()) outputText("cock");
 		else outputText("finger");
 		outputText(" still worming its way into [Arian eir] fuckable ass, but it really does look like [Arian ey]'s fast asleep.  Weird.  \"<i>So many muffins... all [name] flavoured...</i>\"  [Arian ey] calms down and begins snoring lightly.");
