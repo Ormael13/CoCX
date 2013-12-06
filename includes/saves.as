@@ -1085,6 +1085,13 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				player.cocks[i].pierced = saveFile.data.cocks[i].pierced;
 				player.cocks[i].pShortDesc = saveFile.data.cocks[i].pShortDesc;
 				player.cocks[i].pLongDesc = saveFile.data.cocks[i].pLongDesc;
+				
+				if (player.cocks[i].pShortDest == "null" || player.cocks[i].pLongDesc == "null")
+				{
+					player.cocks[i].pierced = false;
+					player.cocks[i].pShortDesc = "";
+					player.cocks[i].pLongDesc = "";
+				}
 			}
 				//trace("LoadOne Cock i(" + i + ")");
 		}
