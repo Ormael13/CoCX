@@ -167,6 +167,7 @@ public function resetToPC():void {
 	itemSlot3 = clone(urtaQItems3);
 	itemSlot4 = clone(urtaQItems4);
 	itemSlot5 = clone(urtaQItems5);
+	model.player = player;
 }
 
 
