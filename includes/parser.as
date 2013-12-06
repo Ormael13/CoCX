@@ -254,10 +254,12 @@ public var twoWordNumericTagsLookup:Object =
 		"cockheadfit":
 			function(thisPtr:*, aspect:*):*
 			{
-
-				if(!thisPtr.player.hasCock()) return "<b>(Attempt to parse cockhead when none present.)</b>";
+				if (!thisPtr.player.hasCock())
+				{
+					return "<b>(Attempt to parse cockhead when none present.)</b>";
+				}
 				else {
-					if(thisPtr.player.cockThatFits(aspect) >= 0) return thisPtr.player.cockHead(thisPtr.player.cockThatFits(aspect));
+					if(thisPtr.player.cockThatFits(aspect) >= 0) return thisPtr.cockDescript(thisPtr.player.cockThatFits(aspect));
 					else return cockHead(thisPtr.player.smallestCockIndex());
 				}
 			},
@@ -266,7 +268,7 @@ public var twoWordNumericTagsLookup:Object =
 			{
 				if(!thisPtr.player.hasCock()) return "<b>(Attempt to parse cockhead when none present.)</b>";
 				else {
-					if(thisPtr.player.cockThatFits2(aspect) >= 0) return cockHead(thisPtr.player.cockThatFits2(aspect));
+					if(thisPtr.player.cockThatFits2(aspect) >= 0) return thisPtr.cockDescript(thisPtr.player.cockThatFits2(aspect));
 					else return cockHead(thisPtr.player.smallestCockIndex());
 				}
 			},
