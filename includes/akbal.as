@@ -1315,13 +1315,13 @@ public function akbalBigButtSubmit():void
 		outputText("  [EachCock] is drooling freely by this point, and though Akbal doesn't bother to touch, the feeling of his warm pole inside you seems to reach all the way to your [cockHead].");
 	else if (player.hasVagina())
 		outputText("  Your [vagina] is dripping freely by this point, and though Akbal doesn't bother with it, the feelings radiating from his warm pole seem to reach all the way through your pulsing pussy to your [clit], rigid and soaked as it is.");
-	outputText("  Suddenly, that blessed tool departs from your over-sensitive innards, only to return a moment later, plunged back in with a firm, measured stroke.   You squeal when he bottoms out in your [asshole] again and cum");
+	outputText("  Suddenly, that blessed tool departs from your over-sensitive innards, only to return a moment later, plunged back in with a firm, measured stroke.   You squeal as another precision stroke of the demonic jaguar shaft bottoms out into your [asshole] once more, the thrust teasing an orgasm from your pleasure wracked body");
 	if (player.hasCock())
 	{
-		outputText(", your [cock] freely spurting into the mud until it stinks of your wasted cum");
+		outputText(", your [cock] freely unleashing its load into the mud beneath you and tainting the ground with your wasted cum");
 		if (player.cumQ() >= 500)
 		{
-			outputText(" and puddles around you");
+			outputText(" as it puddles around you");
 			if (player.cumQ() >= 1000)
 			{
 				if (player.cumQ() < 3000)
