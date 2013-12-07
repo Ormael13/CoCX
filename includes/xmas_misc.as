@@ -659,7 +659,7 @@ public function nieveCoalEyes():void {
 	clearOutput();
 	consumeItem("Coal   ",1);
 	outputText("Luckily, you happen to have two lumps of coal.");
-	outputText("\n\nYou split the coal into smaller chunks, and place them evenly around the Snowman's face, creating a nice, vacant smile.  It still needs a nose, however, and for that, you'll need a carrot.  Perhaps there's a farm nearby?");
+	outputText("\n\nYou split the coal into smaller chunks, and place them evenly around the Snowman's face, creating a nice, vacant smile.  It still needs a nose, however, and for that, you'll need a carrot.  Perhaps there's a farm nearby, or maybe you could buy one somewhere?");
 	flags[NIEVE_MOUTH] = "coal";
 	flags[NIEVE_STAGE] = 3;
 	doNext(13);
@@ -1178,8 +1178,6 @@ public function nieveIsOver():void {
 		outputText("You wake up with a yawn and a stretch. It feels just like any other day, though a bit warmer.  Quite a bit warmer in fact.  It feels like winter's grasp on Mareth has slipped, and it's entering Spring.  Curiously, you glance over towards the snow which had been recently deposited in your camp, and note it's melting away before your eyes.");
 		outputText("\n\nOh well, not a huge loss, you figure.  It was fun while it lasted.");
 		flags[NIEVE_STAGE] = 0;
-		flags[NIEVE_GENDER] = 0;
-		flags[NIEVE_MOUTH] = "";
 	}
 	//Nieve Completed
 	else {
@@ -1204,10 +1202,68 @@ public function nieveIsOver():void {
 			player.createKeyItem("Nieve's Tear",1,0,0,0);
 		}
 		flags[NIEVE_STAGE] = 0;
-		flags[NIEVE_GENDER] = 0;
-		flags[NIEVE_MOUTH] = "";
 	}
 	doNext(1);
+}
+
+function fixNieve():void {
+	if(flags[NIEVE_GENDER] == 0) {
+		clearOutput();
+		outputText("(There was an error with stat tracking that cleared Nieve's stats out at the end of last year's event. <b>What gender do you want Nieve to be?</b>)");
+		menu();
+		addButton(0,"Male",fixNieveGender,1);
+		addButton(1,"Female",fixNieveGender,2);
+	}
+	else if(flags[NIEVE_MOUTH] == "" || flags[NIEVE_MOUTH] == 0) {
+		clearOutput();
+		outputText("(There was an error with stat tracking that cleared Nieve's stats out at the end of last year's event. <b>What was Nieve's mouth made out of?</b>)");
+		menu();
+		addButton(0,"Gems",fixNieveMouth,0);
+		addButton(1,"Coal",fixNieveMouth,1);
+	}
+	else nieveReturnsPartII();
+}
+
+function fixNieveGender(arg:int = 1):void {
+	flags[NIEVE_GENDER] = arg;
+	fixNieve();
+}
+function fixNieveMouth(arg:int = 1):void {
+	if(arg == 0) flags[NIEVE_MOUTH] = "gems";
+	else flags[NIEVE_MOUTH] = "coal";
+	fixNieve();
+}
+
+//The Return of Nieve
+//Occurs during winter if the PC has Nieve's tear.
+function returnOfNieve():void {
+	clearOutput();
+	outputText("As you awake in the morning you find yourself shivering slightly.  A cool breeze sweeps over your camp, while in the distance jingling bells can be heard.  How odd.  You haven't heard bells like that since...");
+	outputText("\n\nYour heart skips a beat.");
+	outputText("\n\n<i>You haven't heard bells like that since Nieve left you</i>.");
+	outputText("\n\nYou quickly glance around the campsite until your eyes fall upon a glittering patch of white: fresh fallen snow.  The pure white almost hurts your eyes against the hellish red of the surrounding landscape.  You make a mad dash into the snow, which comes up to your ankles.  Little snowflakes continue to drift slowly down as the jingling noise fades away into nothingness.  But you can't see anything...  No familiar snow " + nieveMF("man","woman") + " to greet you.  Perhaps Nieve really is gone forever?");
+	outputText("\n\nYou sink down into the snow, clutching Nieve's tear close and remember " + nieveMF("his","her") + " last words to you.  \"<i>You were the best master I could have hoped for.</i>\"  The voice rings through your head. \"<i>And...  And I’ll mi--...</i>\"  Though " + nieveMF("he","she") + " was cut off, you knew what " + nieveMF("he","she") + " was saying.");
+	outputText("\n\n\"<i>I miss you too,</i>\" you whisper to the tear, before closing your fist around it.  Your vision blurs as your own eyes begin to tear up.");
+	outputText("\n\nThere really is nothing left of " + nieveMF("him","her") + ".  Nothing but this lost fragment.  An echo of a friend.");
+	//[Next]
+	menu();
+	addButton(0,"Next",fixNieve);
+}
+
+function nieveReturnsPartII():void {
+	clearOutput();
+	outputText("You sigh, resigning yourself to your companion's fate.  However, as you rise from the snow to return to camp, you hear a soft, muffled voice.  Perplexed, you crawl forward in the snow, frantically seeking out the source.");
+	outputText("\n\nThat's when you see it, a small mound of snow, practically invisible among the white mass surrounding it.  You plunge your hands into the freezing cold stuff and find something solid.  Something large.  Something about the size of a person.  You move to pull the person up and forward, but it doesn't take much.");
+	outputText("\n\nThe figure moves on its own, bursting from its snowy blanket.  All you catch is a brief flash of blue before the creature wraps its arms around you in a tight hug.  You can make out soft sobbing from the person... One glance down is all you need to confirm your suspicions.  That frozen, blue skin and pert squeezable ass.  It's definitely Nieve.");
+	outputText("\n\n\"<i>Oh master!</i>\" " + nieveMF("he","she") + " cries, breaking the hug to look you in the eyes.  " + nieveMF("His","Her") + " ");
+	if(flags[NIEVE_MOUTH] == "coal") outputText("coal black");
+	else outputText("glittering purple");
+	outputText(" eyes shine with crystallizing tears, not entirely unlike the ones " + nieveMF("he","she") + " left with you on your last meeting.  \"<i>I'm so glad to be back!  I was worried I would be sent somewhere else, but I had so much fun here, and I told the big man that, and then Winter came and I wasn't sure you were still here, and then it turned out I might have gone to someone else, but oh my goodness I'm so happy I came back!</i>\" Nieve belts out without pause for breath before wrapping " + nieveMF("his","her") + " arms around you once again.");
+	outputText("\n\nYou hold " + nieveMF("him","her") + " close, thankful to whoever this \"big man\" is for sending Nieve back to you.");
+	outputText("\n\n\"<i>I... I can still only stay the winter, at least for now, but it's something, right?</i>\" the snow spirit says, clasping your hand in theirs.");
+	outputText("\n\nYou nod.  You'll take what you can get, even if it is such a brief moment.  The two of you share stories, well, you share stories while Nieve listens with rapt attention, for the next hour or so.  It's been a long time since you've seen each other, and there's a lot to catch up on...");
+	flags[NIEVE_STAGE] = 5;
+	doNext(13);
 }
 
 /*Credits

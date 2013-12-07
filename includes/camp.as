@@ -1,4 +1,4 @@
-//  SLEEP_WITH:int = 701;
+﻿//  SLEEP_WITH:int = 701;
 
 public function camp():void {
 	//trace("Current fertility: " + player.totalFertility());
@@ -54,7 +54,13 @@ public function camp():void {
 		return;
 	}
 	if(nieveHoliday() && model.time.hours == 6) {
-		if(flags[NIEVE_STAGE] == 0) {
+		if(player.hasKeyItem("Nieve's Tear") >= 0 && flags[NIEVE_STAGE] != 5)
+		{
+			returnOfNieve();
+			hideMenus();
+			return;
+		}
+		else if(flags[NIEVE_STAGE] == 0) {
 			hideMenus();
 			snowLadyActive();
 			return;

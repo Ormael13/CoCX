@@ -889,7 +889,29 @@ public function oswaldPawn():void {
 		outputText("You see Oswald fiddling with a top hat as you approach his stand again.  He looks up and smiles, padding up to you and rubbing his furry hands together.  He asks, \"<i>Have any merchandise for me " + player.mf("sir","dear") + "?</i>\"\n\n", false);
 		outputText("(You can sell an item here, but Oswald will not let you buy them back, so be sure of your sales.)", false);		
 	}
-	eventParser(1065);
+	if(player.hasKeyItem("Carrot") < 0 && flags[NIEVE_STAGE] == 3)
+	{
+		outputText("\n\nIn passing, you mention that you're looking for a carrot.\n\nOswald's tophat tips precariously as his ears perk up, and he gladly announces, \"<i>I happen to have come across one recently - something of a rarity in these dark times, you see.  I could let it go for 500 gems, if you're interested.</i>\"");
+		if(player.gems < 500) {
+			outputText("\n\n<b>You can't afford that!</b>");
+			eventParser(1065);
+		}
+		else {
+			menu();
+			addButton(0,"Sell",eventParser,1065);
+			addButton(1,"BuyCarrot",buyCarrotFromOswald);
+		}
+	}
+	else eventParser(1065);
+}
+function buyCarrotFromOswald():void {
+	player.gems -= 500;
+	statScreenRefresh();
+	player.createKeyItem("Carrot",0,0,0,0);
+	clearOutput();
+	outputText("Gems change hands in a flash, and you're now the proud owner of a bright orange carrot!\n\n(<b>Acquired Key Item: Carrot</b>)");
+	menu();
+	addButton(0,"Next",oswaldPawn);
 }
 
 
