@@ -1922,6 +1922,8 @@ public function getButtWreckedByArian():void {
 	
 	outputText("\n\nWell, that would be a shame; it might be a little rough, but you'll have to make do with what you've got.  With that in mind, you cease your stroking, and start sliding yourself up Arian's body, until your [ass] is positioned above [Arian eir] jutting prick.  With slow, deliberate motions, you slowly start to impale yourself upon it...");
 	
+	buttChange(arianCockSize(),true,true,false);
+	
 	outputText("\n\n\"<i>Argh!  T-this is too much!</i>\"  With a groan of pleasure Arian shoots [Arian eir] cum into your bowels, lubricating it enough to allow you to easily slide down onto [Arian eir] shaft.");
 	if(flags[ARIAN_DOUBLE_COCK] > 0) {
 		outputText("  His other shaft twiches and sprays your ");
