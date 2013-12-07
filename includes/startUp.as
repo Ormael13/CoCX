@@ -289,7 +289,8 @@ Also go play <u><a href='http://www.furaffinity.net/view/9830293/'>Nimin</a></u>
 
 public function settingsScreen():void
 {
-	mainView.showAllMenuButtons();
+	mainView.showMenuButton( MainView.MENU_NEW_MAIN );
+	mainView.showMenuButton( MainView.MENU_DATA );
 	
 	outputText("<b>Settings toggles:</b>\n", true);
 
