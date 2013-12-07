@@ -130,15 +130,15 @@ flagReplacements =  [
 ["ZETAZ_LAIR_TOOK_BONDAGE_STRAPS",                                  "ZETAZ_LAIR_TOOK_BONDAGE_STRAPS"],                 # Bondage Straps Taken
 ["ZETAZ_LAIR_DEMON_VENDOR_PRESENT",                                 "ZETAZ_LAIR_DEMON_VENDOR_PRESENT"],                # Sean Demon Vendor Here
 ["TIMES_EXPLORED_PLAINS",                                           "TIMES_EXPLORED_PLAINS"],                          # Times Explored Plains
-["UNKNOWN_FLAG_NUMBER_00132",                                       "UNKNOWN_FLAG_NUMBER_00132"],                      # Met Bunbun
-["UNKNOWN_FLAG_NUMBER_00133",                                       "UNKNOWN_FLAG_NUMBER_00133"],                      # Raphael Countdown (Time till Quiksilver Fawkes.  Set to -1 betrayed, set to -2 if covered for.
-["UNKNOWN_FLAG_NUMBER_00134",                                       "UNKNOWN_FLAG_NUMBER_00134"],                      # Raphael Met? (1 = Y)
-["UNKNOWN_FLAG_NUMBER_00135",                                       "UNKNOWN_FLAG_NUMBER_00135"],                      # Dress TImer (Set when dress acquired, will proc event when dress is worn to bed or when counter is up (quiksilver fawkes!))
-["UNKNOWN_FLAG_NUMBER_00136",                                       "UNKNOWN_FLAG_NUMBER_00136"],                      # Raphael Reject?
-["UNKNOWN_FLAG_NUMBER_00137",                                       "UNKNOWN_FLAG_NUMBER_00137"],                      # Raphael Rapier Training - OR? - Weapon strength post-newgame.
-["UNKNOWN_FLAG_NUMBER_00138",                                       "UNKNOWN_FLAG_NUMBER_00138"],                      # Raphael Intelligence Training
-["UNKNOWN_FLAG_NUMBER_00139",                                       "UNKNOWN_FLAG_NUMBER_00139"],                      # Raphael Disgusted by PC appearance
-["UNKNOWN_FLAG_NUMBER_00140",                                       "UNKNOWN_FLAG_NUMBER_00140"],                      # Raphael 2nd Date Happen?
+["MET_BUNBUN",                                                      "MET_BUNBUN"],                                     # Met Bunbun
+["RAPHEAL_COUNTDOWN_TIMER",                                         "RAPHEAL_COUNTDOWN_TIMER"],                        # Raphael Countdown (Time till Quiksilver Fawkes.  Set to -1 betrayed, set to -2 if covered for.
+["RAPHAEL_MET",                                                     "RAPHAEL_MET"],                                    # Raphael Met? (1 = Y)
+["RAPHAEL_DRESS_TIMER",                                             "RAPHAEL_DRESS_TIMER"],                            # Dress TImer (Set when dress acquired, will proc event when dress is worn to bed or when counter is up (quiksilver fawkes!))
+["REJECTED_RAPHAEL",                                                "REJECTED_RAPHAEL"],                               # Raphael Reject?
+["RAPHAEL_RAPIER_TRANING",                                          "RAPHAEL_RAPIER_TRANING"],                         # Raphael Rapier Training - OR? - Weapon strength post-newgame.
+["RAPHAEL_INTELLIGENCE_TRAINING",                                   "RAPHAEL_INTELLIGENCE_TRAINING"],                  # Raphael Intelligence Training
+["RAPHAEL_DISGUSTED_BY_PC_APPEARANCE",                              "RAPHAEL_DISGUSTED_BY_PC_APPEARANCE"],             # Raphael Disgusted by PC appearance
+["RAPHAEL_SECOND_DATE",                                             "RAPHAEL_SECOND_DATE"],                            # Raphael 2nd Date Happen?
 ["UNKNOWN_FLAG_NUMBER_00141",                                       "UNKNOWN_FLAG_NUMBER_00141"],                      # Hellhound Progression
 ["UNKNOWN_FLAG_NUMBER_00142",                                       "UNKNOWN_FLAG_NUMBER_00142"],                      # Can buy minotaur cum from goblins?
 ["UNKNOWN_FLAG_NUMBER_00143",                                       "UNKNOWN_FLAG_NUMBER_00143"],                      # How Many Times Have You Caught Urta + Scylla?

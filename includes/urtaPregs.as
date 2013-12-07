@@ -92,7 +92,7 @@ public function urtaSexMenu():void {
 			addButton(1,"Anal Ride",eventParser,2296);
 			if(temp > 0) addButton(2,"Lay Eggs",eventParser,temp);
 			if(spank > 0) addButton(3,"Spank Her",eventParser,spank);
-			if(flags[UNKNOWN_FLAG_NUMBER_00133] == -2 && RaphaelLikes() && flags[URTA_X_RAPHAEL_HAPPENED] == 0) {
+			if(flags[RAPHEAL_COUNTDOWN_TIMER] == -2 && RaphaelLikes() && flags[URTA_X_RAPHAEL_HAPPENED] == 0) {
 				addButton(8,"3SomeSurprise",urtaAndRaphaelSurprise);
 			}
 			addButton(9,"Leave",barTelAdre);
@@ -107,7 +107,7 @@ public function urtaSexMenu():void {
 			addButton(1,"Anal Ride",eventParser,2296);
 			if(temp > 0) addButton(2,"Lay Eggs",eventParser,temp);
 			if(spank > 0) addButton(3,"Spank Her",eventParser,spank);
-			if(flags[UNKNOWN_FLAG_NUMBER_00133] == -2 && RaphaelLikes() && flags[URTA_X_RAPHAEL_HAPPENED] == 0) {
+			if(flags[RAPHEAL_COUNTDOWN_TIMER] == -2 && RaphaelLikes() && flags[URTA_X_RAPHAEL_HAPPENED] == 0) {
 				addButton(8,"3SomeSurprise",urtaAndRaphaelSurprise);
 			}
 			addButton(9,"Leave",barTelAdre);

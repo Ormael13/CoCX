@@ -130,15 +130,15 @@ public const ZETAZ_DEFEATED_AND_KILLED:int                                   =  
 public const ZETAZ_LAIR_TOOK_BONDAGE_STRAPS:int                                   =  129; // Bondage Straps Taken
 public const ZETAZ_LAIR_DEMON_VENDOR_PRESENT:int                                   =  130; // Sean Demon Vendor Here
 public const TIMES_EXPLORED_PLAINS:int                                   =  131; // Times Explored Plains
-public const UNKNOWN_FLAG_NUMBER_00132:int                                   =  132; // Met Bunbun
-public const UNKNOWN_FLAG_NUMBER_00133:int                                   =  133; // Raphael Countdown (Time till Quiksilver Fawkes.  Set to -1 betrayed, set to -2 if covered for.
-public const UNKNOWN_FLAG_NUMBER_00134:int                                   =  134; // Raphael Met? (1 = Y)
-public const UNKNOWN_FLAG_NUMBER_00135:int                                   =  135; // Dress TImer (Set when dress acquired, will proc event when dress is worn to bed or when counter is up (quiksilver fawkes!))
-public const UNKNOWN_FLAG_NUMBER_00136:int                                   =  136; // Raphael Reject?
-public const UNKNOWN_FLAG_NUMBER_00137:int                                   =  137; // Raphael Rapier Training - OR? - Weapon strength post-newgame.
-public const UNKNOWN_FLAG_NUMBER_00138:int                                   =  138; // Raphael Intelligence Training
-public const UNKNOWN_FLAG_NUMBER_00139:int                                   =  139; // Raphael Disgusted by PC appearance
-public const UNKNOWN_FLAG_NUMBER_00140:int                                   =  140; // Raphael 2nd Date Happen?
+public const MET_BUNBUN:int                                   =  132; // Met Bunbun
+public const RAPHEAL_COUNTDOWN_TIMER:int                                   =  133; // Raphael Countdown (Time till Quiksilver Fawkes.  Set to -1 betrayed, set to -2 if covered for.
+public const RAPHAEL_MET:int                                   =  134; // Raphael Met? (1 = Y)
+public const RAPHAEL_DRESS_TIMER:int                                   =  135; // Dress TImer (Set when dress acquired, will proc event when dress is worn to bed or when counter is up (quiksilver fawkes!))
+public const REJECTED_RAPHAEL:int                                   =  136; // Raphael Reject?
+public const RAPHAEL_RAPIER_TRANING:int                                   =  137; // Raphael Rapier Training - OR? - Weapon strength post-newgame.
+public const RAPHAEL_INTELLIGENCE_TRAINING:int                                   =  138; // Raphael Intelligence Training
+public const RAPHAEL_DISGUSTED_BY_PC_APPEARANCE:int                                   =  139; // Raphael Disgusted by PC appearance
+public const RAPHAEL_SECOND_DATE:int                                   =  140; // Raphael 2nd Date Happen?
 public const UNKNOWN_FLAG_NUMBER_00141:int                                   =  141; // Hellhound Progression
 public const UNKNOWN_FLAG_NUMBER_00142:int                                   =  142; // Can buy minotaur cum from goblins?
 public const UNKNOWN_FLAG_NUMBER_00143:int                                   =  143; // How Many Times Have You Caught Urta + Scylla?

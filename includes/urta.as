@@ -105,7 +105,7 @@ public function urtaBarDescript():Boolean {
 		return true;		
 	}
 	//Raphael betrayed reward
-	if(flags[UNKNOWN_FLAG_NUMBER_00133] == -1 && flags[UNKNOWN_FLAG_NUMBER_00148] == 0) {
+	if(flags[RAPHEAL_COUNTDOWN_TIMER] == -1 && flags[UNKNOWN_FLAG_NUMBER_00148] == 0) {
 		outputText("Urta has an ecstatic grin plastered across her muzzle, and it only gets wider when she sees you.  Perhaps you should see what all the fuss is about?", false);
 		return true;
 	}
@@ -180,7 +180,7 @@ public function urtaBarApproach():void {
 	outputText("", true);
 	outputText(images.showImage("urta-bar"), false);
 	//Raphael Reward
-	if(flags[UNKNOWN_FLAG_NUMBER_00133] == -1 && flags[UNKNOWN_FLAG_NUMBER_00148] == 0) {
+	if(flags[RAPHEAL_COUNTDOWN_TIMER] == -1 && flags[UNKNOWN_FLAG_NUMBER_00148] == 0) {
 		flags[UNKNOWN_FLAG_NUMBER_00148] = 1;
 		player.gems += 1000;
 		statScreenRefresh();
@@ -296,7 +296,7 @@ public function urtaBarApproach():void {
 			addButton(1,"Anal Ride",eventParser,2296);
 			if(temp > 0) addButton(2,"Lay Eggs",eventParser,temp);
 			if(spank > 0) addButton(3,"Spank Her",eventParser,spank);
-			if(flags[UNKNOWN_FLAG_NUMBER_00133] == -2 && RaphaelLikes() && flags[URTA_X_RAPHAEL_HAPPENED] == 0) {
+			if(flags[RAPHEAL_COUNTDOWN_TIMER] == -2 && RaphaelLikes() && flags[URTA_X_RAPHAEL_HAPPENED] == 0) {
 				outputText("\n\nYou know Urta and Raphael get along about as well as cats and dogs, but it might be fun to have them double-team you in the dark.");
 				addButton(8,"3SomeSurprise",urtaAndRaphaelSurprise);
 			}
@@ -333,7 +333,7 @@ public function urtaBarApproach():void {
 		addButton(1,"Anal Ride",eventParser,2296);
 		if(temp > 0) addButton(2,"Lay Eggs",eventParser,temp);
 		if(spank > 0) addButton(3,"Spank Her",eventParser,spank);
-		if(flags[UNKNOWN_FLAG_NUMBER_00133] == -2 && RaphaelLikes() && flags[URTA_X_RAPHAEL_HAPPENED] == 0) {
+		if(flags[RAPHEAL_COUNTDOWN_TIMER] == -2 && RaphaelLikes() && flags[URTA_X_RAPHAEL_HAPPENED] == 0) {
 			outputText("\n\nYou know Urta and Raphael get along about as well as cats and dogs, but it might be fun to have them double-team you in the dark.");
 			addButton(8,"3SomeSurprise",urtaAndRaphaelSurprise);
 		}

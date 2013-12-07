@@ -148,7 +148,7 @@ public function telAdreMenu():void {
 	outputText("A sign depicting a hermaphroditic centaur covered in piercings hangs in front of one of the sandstone buildings, and bright pink lettering declares it to be the 'Piercing Studio'.  You glance over and see the wooden facade of Urta's favorite bar, 'The Wet Bitch'.  How strange that those would be what she talks about during a tour.  In any event you can also spot some kind of wolf-man banging away on an anvil in a blacksmith's stand, and a foppishly-dressed dog-man with large floppy ears seems to be running some kind of pawnshop in his stand.  Steam boils from the top of a dome-shaped structure near the far end of the street, and simple lettering painted on the dome proclaims it to be a bakery.  Perhaps those shops will be interesting as well.", false);
 	var homes:Boolean = false;
 	var homeB:int = 0;
-	if(flags[UNKNOWN_FLAG_NUMBER_00133] == -2) {
+	if(flags[RAPHEAL_COUNTDOWN_TIMER] == -2) {
 		if(RaphaelLikes())
 		{
 			homes = true;
@@ -186,7 +186,7 @@ public function houses():void {
 	clearOutput();
 	outputText("Whose home will you visit?");
 	var orphanage:int = 0;
-	if(flags[UNKNOWN_FLAG_NUMBER_00133] == -2) {
+	if(flags[RAPHEAL_COUNTDOWN_TIMER] == -2) {
 		if(RaphaelLikes())
 		{
 			orphanage = 3975;

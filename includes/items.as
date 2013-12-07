@@ -692,8 +692,8 @@ public function fixedDamage(weaponName:String):Number {
 	if(weaponName == "deadly spear") attack = 8;
 	if(weaponName == "coiled whip") attack = 5;
 	if(weaponName == "succubi whip") attack = 10;
-	if(weaponName == "jeweled rapier") attack = (13 + flags[UNKNOWN_FLAG_NUMBER_00137]*2);
-	if(weaponName == "Raphael's rapier" || weaponName == "vulpine rapier") attack = 8 + flags[UNKNOWN_FLAG_NUMBER_00137]*2;
+	if(weaponName == "jeweled rapier") attack = (13 + flags[RAPHAEL_RAPIER_TRANING]*2);
+	if(weaponName == "Raphael's rapier" || weaponName == "vulpine rapier") attack = 8 + flags[RAPHAEL_RAPIER_TRANING]*2;
 	if(weaponName == "spiked gauntlet") attack = 5;
 	if(weaponName == "hooked gauntlets") attack = 8;
 	//CHEATAHN'

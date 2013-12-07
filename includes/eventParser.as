@@ -1860,10 +1860,10 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			//Reset Izma tooth hand outs
 			if(flags[UNKNOWN_FLAG_NUMBER_00246] > 0) flags[UNKNOWN_FLAG_NUMBER_00246] = 0;
 			//Move Raphael Countdowns
-			if(flags[UNKNOWN_FLAG_NUMBER_00135] > 1 && player.gems >= 5) flags[UNKNOWN_FLAG_NUMBER_00135]--;
-			if(flags[UNKNOWN_FLAG_NUMBER_00133] > 1 && player.gems >= 5) flags[UNKNOWN_FLAG_NUMBER_00133]--;
+			if(flags[RAPHAEL_DRESS_TIMER] > 1 && player.gems >= 5) flags[RAPHAEL_DRESS_TIMER]--;
+			if(flags[RAPHEAL_COUNTDOWN_TIMER] > 1 && player.gems >= 5) flags[RAPHEAL_COUNTDOWN_TIMER]--;
 			//Fix 'hangs' - PC is at the bottom of the dress countdown
-			if(flags[UNKNOWN_FLAG_NUMBER_00135] == 1 && flags[UNKNOWN_FLAG_NUMBER_00133] == 0 && RaphaelLikes()) flags[UNKNOWN_FLAG_NUMBER_00135] = 4;
+			if(flags[RAPHAEL_DRESS_TIMER] == 1 && flags[RAPHEAL_COUNTDOWN_TIMER] == 0 && RaphaelLikes()) flags[RAPHAEL_DRESS_TIMER] = 4;
 			//Countdown to next faerie orgy
 			if(flags[WEEKLY_FAIRY_ORGY_COUNTDOWN] > 0) {
 				flags[WEEKLY_FAIRY_ORGY_COUNTDOWN]--;
@@ -2536,18 +2536,18 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		//END STUFF MOVED FROM doRest() & doSleep()
 		//Raphae, the Russet Rogue!
-		if(model.time.hours == 6 && flags[UNKNOWN_FLAG_NUMBER_00133] >= 0 && player.hasKeyItem("Camp - Chest") >= 0 && player.gems >= 5 && player.statusAffectv1("Tel'Adre") >= 1) {
-			/*trace("RAPHAEL FINAL COUNTDOWN: " + flags[UNKNOWN_FLAG_NUMBER_00133]);
-			trace("RAPHAEL MET: " + flags[UNKNOWN_FLAG_NUMBER_00134]);
-			trace("RAPHAEL DRESS TIMER: " + flags[UNKNOWN_FLAG_NUMBER_00135]);
-			trace("RAPHAEL DISGUSTED: " + flags[UNKNOWN_FLAG_NUMBER_00139]);*/
+		if(model.time.hours == 6 && flags[RAPHEAL_COUNTDOWN_TIMER] >= 0 && player.hasKeyItem("Camp - Chest") >= 0 && player.gems >= 5 && player.statusAffectv1("Tel'Adre") >= 1) {
+			/*trace("RAPHAEL FINAL COUNTDOWN: " + flags[RAPHEAL_COUNTDOWN_TIMER]);
+			trace("RAPHAEL MET: " + flags[RAPHAEL_MET]);
+			trace("RAPHAEL DRESS TIMER: " + flags[RAPHAEL_DRESS_TIMER]);
+			trace("RAPHAEL DISGUSTED: " + flags[RAPHAEL_DISGUSTED_BY_PC_APPEARANCE]);*/
 			
 			//Countdown to finale not currently engaged!
-			if(flags[UNKNOWN_FLAG_NUMBER_00133] == 0) {
+			if(flags[RAPHEAL_COUNTDOWN_TIMER] == 0) {
 				//If the PC meets his criteria!
 				if(RaphaelLikes()) {
 					//Not yet met!  MEETING TIEM!
-					if(flags[UNKNOWN_FLAG_NUMBER_00134] == 0) {
+					if(flags[RAPHAEL_MET] == 0) {
 						outputText("<b>\nSomething unusual happens that morning...</b>\n", false);
 						doNext(meetRaphael);
 						return true;
@@ -2555,13 +2555,13 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					//Already met!
 					else {
 						//Not given dress yet
-						if(flags[UNKNOWN_FLAG_NUMBER_00135] == 0 && flags[UNKNOWN_FLAG_NUMBER_00140] == 0) {
+						if(flags[RAPHAEL_DRESS_TIMER] == 0 && flags[RAPHAEL_SECOND_DATE] == 0) {
 							outputText("<b>\nSomething unusual happens that morning...</b>\n", false);
 							doNext(RaphaelDress);
 							return true;
 						}
 						//Dress followup - Call picnic date prologue!
-						if(player.armorName == "red, high-society bodysuit"  && (flags[UNKNOWN_FLAG_NUMBER_00135] > 1 && flags[UNKNOWN_FLAG_NUMBER_00135] <= 4)) {
+						if(player.armorName == "red, high-society bodysuit"  && (flags[RAPHAEL_DRESS_TIMER] > 1 && flags[RAPHAEL_DRESS_TIMER] <= 4)) {
 							outputText("<b>\nSomething unusual happens that morning...</b>\n", false);
 							doNext(RaphaelEncounterIIDressFollowup);
 							return true;
@@ -2572,13 +2572,13 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				else {
 					//Dress countdown - if pc isn't wearing it yet, kick out to
 					//Finale!
-					if(flags[UNKNOWN_FLAG_NUMBER_00135] == 1) {
-						flags[UNKNOWN_FLAG_NUMBER_00135] = -1;
-						flags[UNKNOWN_FLAG_NUMBER_00133] = 7;
+					if(flags[RAPHAEL_DRESS_TIMER] == 1) {
+						flags[RAPHAEL_DRESS_TIMER] = -1;
+						flags[RAPHEAL_COUNTDOWN_TIMER] = 7;
 					}
 					//PC get ready for the 2nd encounter and hasn't been
 					//shot down yet?
-					if(flags[UNKNOWN_FLAG_NUMBER_00139] == 0 && player.armorName == "red, high-society bodysuit") {
+					if(flags[RAPHAEL_DISGUSTED_BY_PC_APPEARANCE] == 0 && player.armorName == "red, high-society bodysuit") {
 						outputText("<b>\nSomething unusual happens that morning...</b>\n", false);
 						doNext(RaphaelEncounterIIDressFollowup);
 						return true;
@@ -2587,7 +2587,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				}
 			}
 			//FINALE
-			else if(flags[UNKNOWN_FLAG_NUMBER_00133] == 1) {
+			else if(flags[RAPHEAL_COUNTDOWN_TIMER] == 1) {
 				outputText("<b>\nSomething unusual happens that morning...</b>\n", false);
 				doNext(quiksilverFawkesEndGame);
 				return true;

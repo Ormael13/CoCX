@@ -155,7 +155,7 @@ public function newGameGo(e:MouseEvent = null):void {
 	if(flags[NEW_GAME_PLUS_BONUS_STORED_XP] + flags[NEW_GAME_PLUS_BONUS_STORED_ITEMS] > 0) {
 		//Clear Raphael's training variable so it does not effect
 		//Weapon strength post-newgame.
-		flags[UNKNOWN_FLAG_NUMBER_00137] = 0;
+		flags[RAPHAEL_RAPIER_TRANING] = 0;
 		player.armorName= oldPlayer.armorName;
 		player.weaponName= oldPlayer.weaponName;
 		player.weaponVerb= oldPlayer.weaponVerb;
