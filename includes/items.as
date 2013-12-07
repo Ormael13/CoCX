@@ -2697,35 +2697,324 @@ public function takeItem():void {
 	//OH NOES! No room! Call replacer functions!
 	outputText("There is no room for " + itemLongName(shortName) + " in your inventory.  You may replace the contents of a pouch with " + itemLongName(shortName) + " or abandon it.", false);
 	//If at giacomo abandon goes differently...
-	if(gameState == 4) choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, (itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, (itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, (itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, (itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, "", 0, "", 0, "", 0, "Use Now", 1016, "Abandon", 2015);
-	else if(gameState == 6) choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, (itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, (itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, (itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, (itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, "", 0, "", 0, "", 0, "Use Now", 1016, "Abandon", 2070);
-	else if(menuLoc == 7) choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, (itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, (itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, (itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, (itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, "", 0, "", 0, "", 0, "Use Now", 1016, "Abandon", 1029);
+	if (gameState == 4)
+	{
+		choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, 
+				(itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, 
+				(itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, 
+				(itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, 
+				(itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, 
+				"", 0, 
+				"", 0, 
+				"", 0, 
+				"Use Now", 1016, 
+				"Abandon", 2015);
+	}
+	else if (gameState == 6) 
+	{
+		choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002,
+				(itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, 
+				(itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, 
+				(itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, 
+				(itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, 
+				"", 0, 
+				"", 0, 
+				"", 0, 
+				"Use Now", 1016, 
+				"Abandon", 2070);
+	}
+	else if (menuLoc == 7)
+	{
+		choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, 
+				(itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, 
+				(itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, 
+				(itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, 
+				(itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, 
+				"", 0, 
+				"", 0, 
+				"", 0, 
+				"Use Now", 1016, 
+				"Abandon", 1029);
+	}
 	//Tailor
-	else if(menuLoc == 10) choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, (itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, (itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, (itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, (itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, "", 0, "", 0, "", 0, "Use Now", 1016, "Abandon", 1072);
+	else if (menuLoc == 10)
+	{
+		choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, 
+				(itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, 
+				(itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, 
+				(itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, 
+				(itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, 
+				"", 0, 
+				"", 0, 
+				"", 0, 
+				"Use Now", 1016, 
+				"Abandon", 1072);
+	}
 	//Armor
-	else if(menuLoc == 9) choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, (itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, (itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, (itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, (itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, "", 0, "", 0, "", 0, "Use Now", 1016, "Abandon", 2274);
-	else if(menuLoc == 11) choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, (itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, (itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, (itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, (itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, "", 0, "", 0, "", 0, "Use Now", 1016, "Abandon", 41);
-	else if(menuLoc == 12 || menuLoc == 13) choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, (itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, (itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, (itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, (itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, "", 0, "", 0, "", 0, "Use Now", 1016, "Abandon", 2435);
-	else if(menuLoc == 14) choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, (itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, (itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, (itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, (itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, "", 0, "", 0, "", 0, "Use Now", 1016, "Abandon", 1);
-	else if(menuLoc == 15) choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, (itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, (itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, (itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, (itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, "", 0, "", 0, "", 0, "Use Now", 1016, "Abandon", 2553);
-	else if(menuLoc == 16) choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, (itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, (itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, (itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, (itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, "", 0, "", 0, "", 0, "Use Now", 1016, "Abandon", 2642);
-	else if(menuLoc == 17) choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, (itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, (itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, (itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, (itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, "", 0, "", 0, "", 0, "Use Now", 1016, "Abandon", 15);
-	else if(menuLoc == 18) choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, (itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, (itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, (itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, (itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, "", 0, "", 0, "", 0, "Use Now", 1016, "Abandon", 16);
-	else if(menuLoc == 19) choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, (itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, (itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, (itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, (itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, "", 0, "", 0, "", 0, "Use Now", 1016, "Abandon", 2836);
-	else if(menuLoc == 20) choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, (itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, (itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, (itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, (itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, "", 0, "", 0, "", 0, "Use Now", 1016, "Abandon", 1090);
-	else if(menuLoc == 21) choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, (itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, (itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, (itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, (itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, "", 0, "", 0, "", 0, "Use Now", 1016, "Abandon", 1091);
-	else if(menuLoc == 22) choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, (itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, (itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, (itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, (itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, "", 0, "", 0, "", 0, "Use Now", 1016, "Abandon", 1106);
-	else if(menuLoc == 23) choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, (itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, (itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, (itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, (itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, "", 0, "", 0, "", 0, "Use Now", 1016, "Abandon", 1107);
-	else if(menuLoc == 24) choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, (itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, (itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, (itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, (itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, "", 0, "", 0, "", 0, "Use Now", 1016, "Abandon", 2256);
-	else if(menuLoc == 25) choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, (itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, (itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, (itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, (itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, "", 0, "", 0, "", 0, "Use Now", 1016, "Abandon", 3618);
-	else if(menuLoc == 26) choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, (itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, (itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, (itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, (itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, "", 0, "", 0, "", 0, "Use Now", 1016, "Abandon", 3787);
-	else if(menuLoc == 27) choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, (itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, (itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, (itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, (itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, "", 0, "", 0, "", 0, "Use Now", 1016, "Abandon", 3968);
-	else if(menuLoc == 28) choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, (itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, (itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, (itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, (itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, "", 0, "", 0, "", 0, "Use Now", 1016, "Abandon", 1000);
-	else if(menuLoc == 29) choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, (itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, (itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, (itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, (itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, "", 0, "", 0, "", 0, "Use Now", 1016, "Abandon", 3997);
+	else if (menuLoc == 9) 
+	{
+		choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, 
+				(itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, 
+				(itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, 
+				(itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, 
+				(itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, 
+				"", 0, 
+				"", 0, 
+				"", 0, 
+				"Use Now", 1016, 
+				"Abandon", 2274);
+	}
+	else if (menuLoc == 11) 
+	{
+		choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, 
+				(itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, 
+				(itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, 
+				(itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, 
+				(itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, 
+				"", 0, 
+				"", 0, 
+				"", 0, 
+				"Use Now", 1016, 
+				"Abandon", 41);
+	}
+	else if (menuLoc == 12 || menuLoc == 13)
+	{
+		choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, 
+				(itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, 
+				(itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, 
+				(itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, 
+				(itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, 
+				"", 0, 
+				"", 0, 
+				"", 0, 
+				"Use Now", 1016, 
+				"Abandon", 2435);
+	}
+	else if (menuLoc == 14)
+	{
+		choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, 
+				(itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, 
+				(itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, 
+				(itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, 
+				(itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, 
+				"", 0, 
+				"", 0, 
+				"", 0, 
+				"Use Now", 1016, 
+				"Abandon", 1);
+	}
+	else if (menuLoc == 15)
+	{
+		choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, 
+				(itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, 
+				(itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, 
+				(itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, 
+				(itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, 
+				"", 0, 
+				"", 0,
+				"", 0, 
+				"Use Now", 1016, 
+				"Abandon", 2553);
+	}
+	else if (menuLoc == 16)
+	{
+		choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, 
+				(itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, 
+				(itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, 
+				(itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, 
+				(itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, 
+				"", 0, 
+				"", 0, 
+				"", 0, 
+				"Use Now", 1016, 
+				"Abandon", 2642);
+	}
+	else if (menuLoc == 17)
+	{
+		choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, 
+				(itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, 
+				(itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, 
+				(itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, 
+				(itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, 
+				"", 0, 
+				"", 0, 
+				"", 0, 
+				"Use Now", 1016, 
+				"Abandon", 15);
+	}
+	else if (menuLoc == 18)
+	{
+		choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, 
+				(itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, 
+				(itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, 
+				(itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, 
+				(itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, 
+				"", 0, 
+				"", 0, 
+				"", 0, 
+				"Use Now", 1016, 
+				"Abandon", 16);
+	}
+	else if (menuLoc == 19)
+	{
+		choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, 
+				(itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, 
+				(itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, 
+				(itemSlot4.shortName + " x" + itemSlot4.quantity), slot4,
+				(itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, 
+				"", 0, 
+				"", 0, 
+				"", 0, 
+				"Use Now", 1016, 
+				"Abandon", 2836);
+	}
+	else if (menuLoc == 20)
+	{
+		choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, 
+				(itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, 
+				(itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, 
+				(itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, 
+				(itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, 
+				"", 0, 
+				"", 0, 
+				"", 0, 
+				"Use Now", 1016, 
+				"Abandon", 1090);
+	}
+	else if (menuLoc == 21)
+	{
+		choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, 
+				(itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, 
+				(itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, 
+				(itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, 
+				(itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, 
+				"", 0, 
+				"", 0, 
+				"", 0, 
+				"Use Now", 1016, 
+				"Abandon", 1091);
+	}
+	else if (menuLoc == 22)
+	{
+		choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, 
+				(itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, 
+				(itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, 
+				(itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, 
+				(itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, 
+				"", 0, 
+				"", 0, 
+				"", 0, 
+				"Use Now", 1016, 
+				"Abandon", 1106);
+	}
+	else if (menuLoc == 23)
+	{
+		choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, 
+				(itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, 
+				(itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, 
+				(itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, 
+				(itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, 
+				"", 0, 
+				"", 0, 
+				"", 0, 
+				"Use Now", 1016, 
+				"Abandon", 1107);
+	}
+	else if (menuLoc == 24)
+	{
+		choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, 
+				(itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, 
+				(itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, 
+				(itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, 
+				(itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, 
+				"", 0, 
+				"", 0, 
+				"", 0, 
+				"Use Now", 1016, 
+				"Abandon", 2256);
+	}
+	else if (menuLoc == 25)
+	{
+		choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, 
+				(itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, 
+				(itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, 
+				(itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, 
+				(itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, 
+				"", 0, 
+				"", 0, 
+				"", 0, 
+				"Use Now", 1016, 
+				"Abandon", 3618);
+	}
+	else if (menuLoc == 26)
+	{
+		choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, 
+				(itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, 
+				(itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, 
+				(itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, 
+				(itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, 
+				"", 0, 
+				"", 0,
+				"", 0, 
+				"Use Now", 1016, 
+				"Abandon", 3787);
+	}
+	else if (menuLoc == 27)
+	{
+		choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, 
+				(itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, 
+				(itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, 
+				(itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, 
+				(itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, 
+				"", 0,
+				"", 0, 
+				"", 0, 
+				"Use Now", 1016, 
+				"Abandon", 3968);
+	}
+	else if (menuLoc == 28)
+	{
+		choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, 
+				(itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, 
+				(itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, 
+				(itemSlot4.shortName + " x" + itemSlot4.quantity), slot4,
+				(itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, 
+				"", 0, 
+				"", 0, 
+				"", 0, 
+				"Use Now", 1016, 
+				"Abandon", 1000);
+	}
+	else if (menuLoc == 29)
+	{
+		choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, 
+				(itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, 
+				(itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, 
+				(itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, 
+				(itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, 
+				"", 0, 
+				"", 0, 
+				"", 0, 
+				"Use Now", 1016, 
+				"Abandon", 3997);
+	}
 	//otherwise business as usual!
-	else choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, (itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, (itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, (itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, (itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, "", 0, "", 0, "", 0, "Use Now", 1016, "Abandon", 13);
-	trace("MENULOC: " + menuLoc);
+	else
+	{
+		choices((itemSlot1.shortName + " x" + itemSlot1.quantity), 1002, 
+				(itemSlot2.shortName + " x" + itemSlot2.quantity), 1003, 
+				(itemSlot3.shortName + " x" + itemSlot3.quantity), 1004, 
+				(itemSlot4.shortName + " x" + itemSlot4.quantity), slot4, 
+				(itemSlot5.shortName + " x" + itemSlot5.quantity), slot5, 
+				"", 0, 
+				"", 0, 
+				"", 0, 
+				"Use Now", 1016, 
+				"Abandon", 13);
+	}
+	trace("TakeItem Menuloc: " + menuLoc);
 }
+
 //Check for if the player has X item greater than or equal to Y quantity
 public function hasItem(itemName:String, minQuantity:Number):Boolean {
 	var counted:Number = 0;

@@ -1910,7 +1910,6 @@ public function gotMilk():void {
 }
 
 public function marbleGathered():void {
-	doNext(1);
 	spriteSelect(41);
 	doNext(1);
 	//If Marble has found an item, it is collected with this button

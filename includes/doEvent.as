@@ -1828,7 +1828,6 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 2129)
 	{
 		marbleGathered();
-		doNext(1);
 		return;
 	}
 	else if (eventNo == 2131)
