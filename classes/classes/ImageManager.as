@@ -54,8 +54,6 @@ package classes
 				imgLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, fileLoaded);
 				imgLoader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, fileNotFound);
 				var req:URLRequest = new URLRequest(imgList.Image[i]);
-				//trace("Loading: ", imgList.Image[i]);
-				//trace("URLRequest = ", req);
 				imgLoader.load(req);				
 			}
 		}
@@ -68,9 +66,6 @@ package classes
 			var url:String = e.target.url;
 			var result:Object = urlPattern.exec(url);
 			
-			//trace("Raw String", url, "Regex out = ", result);
-			//trace("pic url: ", result[0], ", pic ID: ", result[1]);
-			// result[0]: pic url, result[1]: pic ID
 			extImage = new Image(result[1], '.' + result[0], e.target.width, e.target.height);
 			_imageTable[extImage.id] = extImage;
 		}

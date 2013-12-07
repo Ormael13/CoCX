@@ -243,7 +243,7 @@ package classes
 		//MALE STUFF
 		//public var cocks:Array;
 		//TODO: Tuck away into Male genital class?
-		public var cocks:Vector.<Cock>;
+		public var cocks:Array;
 		//balls
 		public var balls:Number = 0;
 		public var cumMultiplier:Number = 1;
@@ -273,7 +273,7 @@ package classes
 		{
 			//cocks = new Array();
 			//The world isn't ready for typed Arrays just yet.
-			cocks = new Vector.<Cock>();
+			cocks = new Array();
 			vaginas = new Array();
 			//vaginas: Vector.<Vagina> = new Vector.<Vagina>();
 			breastRows = new Array();
