@@ -6922,6 +6922,9 @@ public function threesomeAmilUrtaCAWKS():void {
 	outputText("\"<i>Mmm,</i>\" Urta purrs, giving her ass a playful slap. \"<i>We gotta do this again sometime.</i>\"\n\n", false);
 
 	outputText("You couldn't agree more.", false);
+	
+	stats(0,0,0,0,0,-2,-100,0);
+
 
 	doNext(urtaXAmilyAfterMurrrath);
 }
@@ -6947,7 +6950,7 @@ public function urtaXAmilyCuntPussyVagSQUICK():void {
 	outputText("Now filled with cum, you roll onto your side, taking a now-sleeping Amily with you.  Urta crawls into bed after you, gently stroking your cheek and giving you little kisses on the shoulders and neck.  You don't even mind as her cum drips out of you onto the floor, mixed lewdly with your girlcum and Amily's.  Exhausted, you close your eyes to a final kiss from Urta.\n\n", false);
 	
 	outputText("\"<i>Mmm,</i>\" she purrs, giving your cheek a last stroke with her thumb.  \"<i>We gotta do this again sometime.</i>\"\n\n", false);
-
+	stats(0,0,0,0,0,-2,-100,0);
 	outputText("You couldn't agree more.", false);
 
 	doNext(urtaXAmilyAfterMurrrath);
@@ -6962,14 +6965,12 @@ public function urtaXAmilyAfterMurrrath():void
 	
 	// Reset urta cumtimer
 	flags[URTA_CUM_NO_CUM_DAYS] = 0;
-	
-	stats(0,0,0,0,0,-2,-100,0);
+	flags[URTA_TIME_SINCE_LAST_CAME] = 3+rand(4);
 	//Enable threesome mode!
 	if(flags[AMILY_VISITING_URTA] == 0) {
 		outputText("\n\n(<b>Urta unlocked in Amily's sex menu!</b>)", false);
 		flags[AMILY_VISITING_URTA] = 4;
 	}
-	
 	doNext(15);
 }
 public function pureAmilyPutsItInYourRectumDamnNearKilledEm():void {
