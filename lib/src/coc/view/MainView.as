@@ -1,4 +1,4 @@
-/****
+﻿/****
 	coc.view.MainView
 
 	I have no real idea yet what eventTestInput is for,
@@ -134,9 +134,6 @@ package coc.view {
 			// disable interaction for any remaining TFs.
 			disableMouseForMostTextFields();
 
-			// ...
-			imageText.visible = false; // TODO: Remove this TF?  It doesn't seem to be used anywhere.  I think it was from the first effort to put in images.
-
 			// hook!
 			hookBottomButtons();
 			hookAllButtons();
@@ -175,7 +172,6 @@ package coc.view {
 
 				switch( t ) {
 					case this.mainText:
-					case this.imageText:
 					case this.nameBox:
 					case this.eventTestInput:
 						t.mouseEnabled = true;
@@ -620,7 +616,6 @@ package coc.view {
 			this.eventTestInput.y = 55.1;
 			
 			this.mainText.visible = false;
-			this.imageText.visible = false;
 
 			this.eventTestInput.selectable = true;
 			this.eventTestInput.type = TextFieldType.INPUT;
@@ -637,7 +632,6 @@ package coc.view {
 			this.eventTestInput.y = -1055.1;
 			
 			this.mainText.visible = true;
-			this.imageText.visible = true;
 
 
 			this.eventTestInput.selectable = false;
