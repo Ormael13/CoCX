@@ -1,4 +1,4 @@
-
+﻿
 
 
 //MainMenu - kicks player out to the main menu
@@ -245,7 +245,7 @@ public function startupScreenBody():void
 <br>(Formerly Unnamed Text Game)  
 <u>Created by: Fenoxo</u>
 
-Edited By: Ashi, SoS, Zeikfried, and Others
+Edited By: SoS, Zeikfried, Prisoner416, Ashi, and Others
 
 Open-source version modifications by:  
 Amygdaloidnucleus/Amygdala, Hoffledop/Yoffy, Herp-a-derp/Fake-Name, Cmacleod42, Gedan
@@ -256,10 +256,9 @@ Bug Tracker: <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions/
 (requires an account, unfortunately)
 
 **<u>DISCLAIMER</u>**
-
-- **There are many strange and odd fetishes contained in this flash.  Peruse at own risk.**
-- **Please be 18 or the legal age to view porn before playing.**
-- **Try to keep your keyboard clean.  Think of the children!**
+<br>- **There are many strange and odd fetishes contained in this flash.  Peruse at own risk.**
+<br>- **Please be 18 or the legal age to view porn before playing.**
+<br>- **Try to keep your keyboard clean.  Think of the children!**
 
 
 For more information see Fenoxo's Blog at <b><u><a href='http://www.fenoxo.com/'>fenoxo.com</a></u></b>.

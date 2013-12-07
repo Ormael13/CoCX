@@ -1078,7 +1078,9 @@ public function impGangabangaEXPLOSIONS():void {
 			if(player.cor < 50) outputText("you punch and kick wildly, determined not to let them take you", false);
 			//(High Corruption)
 			else outputText("you twist and struggle in their grips, determined to make them work for their fun", false);
-			outputText("! They pull you down over a fallen log, ass resting above your head. Two imps sit on your arms, their gonads rubbing against your biceps, and rub their hands over your shoulders and chest. Others stretch your " + player.legs() +" wide apart, holding them against the log.\n\n", false);
+			outputText("! They pull you down over a fallen log, ass resting above your head. Two imps sit on your arms, their gonads rubbing against your biceps, and rub their hands over your shoulders and chest. Others stretch your ");
+			if(player.isNaga()) outputText("coils out, twisting them around a log to hold you still.\n\n");
+			else outputText(player.legs() +" wide apart, holding them against the log.\n\n", false);
 			
 			outputText("The " + monster.short + " makes short work of your " + player.armorName + ", unbuckling straps and stripping you quickly. ", false);
 			//(If the player has breasts)
@@ -1107,7 +1109,10 @@ public function impGangabangaEXPLOSIONS():void {
 				growTits(2, player.breastRows.length, false, 1);
 				player.boostLactation(.5);
 			}
-			outputText("The master of this " + monster.short + " steps up between your " + player.legs() + ", leering down at your trapped body. Four feet tall and broader and stronger than any imp in the pack, with a face as much dog as imp, this new imp has grey fur, broad black demon wings, two long demon-horns on his head, and a " + Appearance.cockNoun(CockTypesEnum.DOG) + " big enough to choke a minotaur. Pre-cum drips from the broad tip of it, dripping down onto your ", false);
+			outputText("The master of this " + monster.short + " steps up ");
+			if(player.isNaga()) outputText("alongside your taut tail");
+			else outputText("between your " + player.legs());
+			outputText(", leering down at your trapped body. Four feet tall and broader and stronger than any imp in the pack, with a face as much dog as imp, this new imp has grey fur, broad black demon wings, two long demon-horns on his head, and a " + Appearance.cockNoun(CockTypesEnum.DOG) + " big enough to choke a minotaur. Pre-cum drips from the broad tip of it, dripping down onto your ", false);
 			//(If the player has a cock)
 			if(player.cockTotal() > 0) outputText(multiCockDescriptLight(), false);
 			//(If the player doesn't have a cock)
