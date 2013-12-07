@@ -255,10 +255,6 @@ public function encounterKamiTheChristmasRoo():void {
 	}
 }
 
-
-
-
-
 //[Player chooses Kangaroo girl]
 public function approachKamiTheChristmasRoo():void {
 	clearOutput();

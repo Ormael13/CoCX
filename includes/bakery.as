@@ -32,7 +32,7 @@ public function bakeryuuuuuu():void {
 	//[Repeat approach]
 	else {
 		//Kanga christmas!
-		if(isHolidays()) {
+		if(nieveHoliday()) {
 			encounterKamiTheChristmasRoo();
 			if(flags[KAMI_ENCOUNTER] == 1) addButton(3,"Pudding",getWinterPudding);
 		}
