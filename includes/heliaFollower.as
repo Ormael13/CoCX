@@ -687,18 +687,18 @@ public function talkToHel():void {
 		outputText("\n\n<i>\"Sure,\"</i> you say, following Hel over to her still.");
 		
 		outputText("\n\nShe pours out two tankards of ");
-		if(helPregnant()) output("beer ");
-		else output("fizzy, non-alcoholic beer ");
-		output("and, swinging onto your lap, clinks her glass against yours.  <i>\"To loving friends and an awesome new home,\"</i> she says, raising her tankard high before knocking it back.   Before you can finish yours, Hel belches loudly and violently shakes her head");
+		if(helPregnant()) outputText("beer ");
+		else outputText("fizzy, non-alcoholic beer ");
+		outputText("and, swinging onto your lap, clinks her glass against yours.  <i>\"To loving friends and an awesome new home,\"</i> she says, raising her tankard high before knocking it back.   Before you can finish yours, Hel belches loudly and violently shakes her head");
 		if(!helPregnant()) outputText(", her eyes crossing a little.   Looks like she was dipping in before you got here...");
-		else output(".");
+		else outputText(".");
 		
 		outputText("\n\nHel laughs ");
-		if(!helPregnant()) output("drunkenly");
-		else output("happily");
+		if(!helPregnant()) outputText("drunkenly");
+		else outputText("happily");
 		if(!helPregnant()) 
 		{ 
-			output(", filling her cup up again and, with a wide smile, jumping out of your lap.  <i>\"Hey, lover, check this out!\"</i> she shouts, grabbing her fiery tail in one hand and swirling a mouth-full of alcohol.   You have just enough time to take cover before Hel swings her tail around and spits a stream of pure-grain over it, resulting in a great gout of flame that streaks into the heavens.");
+			outputText(", filling her cup up again and, with a wide smile, jumping out of your lap.  <i>\"Hey, lover, check this out!\"</i> she shouts, grabbing her fiery tail in one hand and swirling a mouth-full of alcohol.   You have just enough time to take cover before Hel swings her tail around and spits a stream of pure-grain over it, resulting in a great gout of flame that streaks into the heavens.");
 			//if Kiha is in camp: 
 			if(followerKiha()) outputText("  From across camp, you hear a certain dusky dragoness shout <i>\"HEY! That's MY trick, firebutt!\"</i>");
 		
@@ -709,7 +709,7 @@ public function talkToHel():void {
 			outputText("shooting up like a beacon over the wasteland.");
 		}
 		else {
-			output(" and launches into a series of debauched jokes. You answer her, lewd jest for jest.");
+			outputText(" and launches into a series of debauched jokes. You answer her, lewd jest for jest.");
 		}
 		outputText("\n\n<i>\"Hehehe.  Nice one, lover,\"</i> Hel laughs, pulling you ");
 		if(player.tallness < 60) outputText("up ");

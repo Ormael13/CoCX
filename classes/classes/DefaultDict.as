@@ -14,14 +14,14 @@ package classes
 	public dynamic class DefaultDict extends Proxy 
 	{
 		// Actual key<->value pairs are stored in _dict
-		private var _dict:Dictionary;
+		private var _dict:Object;
 
 		// Set to true to print any access to defaultDict members
 		private var debugPrintDict:Boolean = false;		
 
 		public function DefaultDict()		// Constructor
 		{
-			_dict = new Dictionary();
+			_dict = new Object();
 			if (debugPrintDict) trace("Instantiating default dict class");
 		}
 
@@ -66,17 +66,17 @@ package classes
 		{
 			if (value != 0)
 			{
-				if (debugPrintDict) trace("setProperty", name, value);
+				if (debugPrintDict) trace("setProperty ", name, value);
 				_dict[name] = value;
 			}
 			else
 				if (name in _dict)
 				{
-					if (debugPrintDict) trace("setProperty" + name + " to " + value + " Deleting key");
+					if (debugPrintDict) trace("setProperty " + name + " to " + value + " Deleting key");
 					delete _dict[name];
 				}
 				else
-					if (debugPrintDict) trace("setProperty" + name + " to " + value + " Ignoring");
+					if (debugPrintDict) trace("setProperty " + name + " to " + value + " Ignoring");
 		}
 	
 		// callProperly is called when functions are called on instances of defaultDict, 

@@ -1,4 +1,5 @@
-﻿// CUSTOM_PC_ENABLED:int = 759;
+﻿import classes.DefaultDict;
+// CUSTOM_PC_ENABLED:int = 759;
 
 public function newGameGo(e:MouseEvent = null):void {
 	funcs = new Array();
@@ -180,9 +181,8 @@ public function newGameGo(e:MouseEvent = null):void {
 		player.armorValue= 0;
 	}
 	//Clear plot storage array!
-	for(var i:int=0;i < 3000;i++) {
-		flags[i] = 0;
-	}
+	flags = new DefaultDict();
+	
 	//Remember silly/sprite/etc
 	if(sprite) flags[SHOW_SPRITES_FLAG] = 1;
 	if(easy) flags[EASY_MODE_ENABLE_FLAG] = 1;
