@@ -373,8 +373,13 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 	saveFile.data.flags = new Array();
 	for (var i:int = 0; i < flags.length; i++)
 	{
-		saveFile.data.flags[i] = flags[i];
+		// Don't save unset/default flags
+		if (flags[i] != 0)
+		{
+			saveFile.data.flags[i] = flags[i];
+		}
 	}
+	
 	//CLOTHING/ARMOR
 	saveFile.data.armorName = player.armorName;
 	saveFile.data.weaponName = player.weaponName;
@@ -816,18 +821,10 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		
 		for (var i:int = 0; i < flags.length; i++)
 		{
-			if (saveFile.data.flags == undefined)
-			{
-				flags[i] = 0;
-			}
-			else
-			{
-				if (saveFile.data.flags[i] == undefined)
-					flags[i] = 0;
-				else
-					flags[i] = saveFile.data.flags[i];
-			}
+			if (saveFile.data.flags[i] != undefined)
+				flags[i] = saveFile.data.flags[i];
 		}
+		
 		//If at initial title
 		if (sprite)
 			flags[SHOW_SPRITES_FLAG] = true;
