@@ -686,18 +686,31 @@ public function talkToHel():void {
 		outputText("<i>\"Hey, [name],\"</i> Hel says, slipping out of your grasp with a come-hither wag of her finger, <i>\"wanna have a drink with me?\"</i>");
 		outputText("\n\n<i>\"Sure,\"</i> you say, following Hel over to her still.");
 		
-		outputText("\n\nShe pours out two tankards of beer and, swinging onto your lap, clinks her glass against yours.  <i>\"To loving friends and an awesome new home,\"</i> she says, raising her tankard high before knocking it back.   Before you can finish yours, Hel belches loudly and violently shakes her head, her eyes crossing a little.   Looks like she was dipping in before you got here...");
+		outputText("\n\nShe pours out two tankards of ");
+		if(helPregnant()) output("beer ");
+		else output("fizzy, non-alcoholic beer ");
+		output("and, swinging onto your lap, clinks her glass against yours.  <i>\"To loving friends and an awesome new home,\"</i> she says, raising her tankard high before knocking it back.   Before you can finish yours, Hel belches loudly and violently shakes her head");
+		if(!helPregnant()) outputText(", her eyes crossing a little.   Looks like she was dipping in before you got here...");
+		else output(".");
 		
-		outputText("\n\nHel laughs drunkenly, filling her cup up again and, with a wide smile, jumping out of your lap.  <i>\"Hey, lover, check this out!\"</i> she shouts, grabbing her fiery tail in one hand and swirling a mouth-full of alcohol.   You have just enough time to take cover before Hel swings her tail around and spits a stream of pure-grain over it, resulting in a great gout of flame that streaks into the heavens.");
-		//if Kiha is in camp: 
-		if(followerKiha()) outputText("  From across camp, you hear a certain dusky dragoness shout <i>\"HEY! That's MY trick, firebutt!\"</i>");
+		outputText("\n\nHel laughs ");
+		if(!helPregnant()) output("drunkenly");
+		else output("happily");
+		if(!helPregnant()) 
+		{ 
+			output(", filling her cup up again and, with a wide smile, jumping out of your lap.  <i>\"Hey, lover, check this out!\"</i> she shouts, grabbing her fiery tail in one hand and swirling a mouth-full of alcohol.   You have just enough time to take cover before Hel swings her tail around and spits a stream of pure-grain over it, resulting in a great gout of flame that streaks into the heavens.");
+			//if Kiha is in camp: 
+			if(followerKiha()) outputText("  From across camp, you hear a certain dusky dragoness shout <i>\"HEY! That's MY trick, firebutt!\"</i>");
 		
-		outputText("\n\nHel giggles, and spews another fireball into the sky.   <i>\"Heh.   Hey, this is pretty fun.  C'mere, [name], try it!\"</i>");
+			outputText("\n\nHel giggles, and spews another fireball into the sky.   <i>\"Heh.   Hey, this is pretty fun.  C'mere, [name], try it!\"</i>");
 		
-		outputText("\n\nWith a little encouragement from your salamander lover, you gulp down a bit of booze and, lining your mouth up with her tail, spit out a combustible spray.  You stumble back as the sky alights with fire, ");
-		if(followerKiha()) outputText("further pissing off Kiha, who throws a rock at Hel, and ");
-		outputText("shooting up like a beacon over the wasteland.");
-		
+			outputText("\n\nWith a little encouragement from your salamander lover, you gulp down a bit of booze and, lining your mouth up with her tail, spit out a combustible spray.  You stumble back as the sky alights with fire, ");
+			if(followerKiha()) outputText("further pissing off Kiha, who throws a rock at Hel, and ");
+			outputText("shooting up like a beacon over the wasteland.");
+		}
+		else {
+			output(" and launches into a series of debauched jokes. You answer her, lewd jest for jest.");
+		}
 		outputText("\n\n<i>\"Hehehe.  Nice one, lover,\"</i> Hel laughs, pulling you ");
 		if(player.tallness < 60) outputText("up ");
 		else outputText("down ");

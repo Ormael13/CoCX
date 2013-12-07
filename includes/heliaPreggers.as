@@ -49,6 +49,10 @@ public function helspawnFollower():Boolean {
 	return flags[HELSPAWN_AGE] == 3;
 }
 
+public function helPregnant():Boolean {
+	return (flags[HEL_PREGNANCY_INCUBATION] > 0);
+}
+
 //Hel’s New Appearance Screen: Taking Things Into Account
 public function heliasAppearanceScreen():void {
 	clearOutput();
