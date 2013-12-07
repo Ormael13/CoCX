@@ -259,7 +259,7 @@ public var twoWordNumericTagsLookup:Object =
 					return "<b>(Attempt to parse cockhead when none present.)</b>";
 				}
 				else {
-					if(thisPtr.player.cockThatFits(aspect) >= 0) return thisPtr.cockDescript(thisPtr.player.cockThatFits(aspect));
+					if(thisPtr.player.cockThatFits(aspect) >= 0) return thisPtr.cockHead(thisPtr.player.cockThatFits(aspect));
 					else return cockHead(thisPtr.player.smallestCockIndex());
 				}
 			},
@@ -268,7 +268,7 @@ public var twoWordNumericTagsLookup:Object =
 			{
 				if(!thisPtr.player.hasCock()) return "<b>(Attempt to parse cockhead when none present.)</b>";
 				else {
-					if(thisPtr.player.cockThatFits2(aspect) >= 0) return thisPtr.cockDescript(thisPtr.player.cockThatFits2(aspect));
+					if(thisPtr.player.cockThatFits2(aspect) >= 0) return thisPtr.cockHead(thisPtr.player.cockThatFits2(aspect));
 					else return cockHead(thisPtr.player.smallestCockIndex());
 				}
 			},
@@ -1058,7 +1058,11 @@ public function stringToCharacter(str:String):String
 
 public function isUpperCase(char:String):Boolean
 {
-	if (char == char.toUpperCase())
+	if (!isNaN(Number(char)))
+	{
+		return false;
+	}
+	else if (char == char.toUpperCase())
 	{
 		return true;
 	}
