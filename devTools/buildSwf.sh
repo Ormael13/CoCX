@@ -41,5 +41,5 @@ classes/classes/CoC.as
 -storepass testpassword \
 ../binRepo/CoC-${COC_VERSION}.apk \
 application.xml \
--C bin . \
+-C ../binRepo . \
 -C icons/android .
