@@ -274,7 +274,7 @@ public function talkBakeryMenu():void {
 		addButton(1,rubiT,rubiWrapper,rubiB);
 	}
 
-	if(isHolidays()) {
+	if(nieveHoliday()) {
 		if(flags[KAMI_ENCOUNTER] > 0) {
 			outputText("\nYou could 'burn off some steam' with Kami during her lunch break, since you already know how that'll end up!\n");
 			addButton(2,"Kami",approachKamiTheChristmasRoo);
