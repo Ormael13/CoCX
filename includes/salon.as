@@ -16,12 +16,12 @@ public function salonFavoritesPaymentMenu():void {
 	if(flags[UNKNOWN_FLAG_NUMBER_00142] > 0) minoCum = 2696;
 	menu();
 	if(flags[LYNNETTE_PREGNANCY_CYCLE] >= 4 && player.hasCock()) addButton(5,"Fuck Goblin",fuckLynnette);
-	addButton(0,"Goblin Blow",eventParser,blow);
+	if(blow > 0) addButton(0,"Goblin Blow",eventParser,blow);
 	addButton(1,"Canine",gloryholeDoggie);
 	addButton(2,"Imp",gloryholeImp);
 	addButton(3,"Minotaur",gloryholeMinotaur);
 	addButton(4,"Incubus",gloryholeIncubus);
-	addButton(8,"Buy MinoCum",eventParser,minoCum);
+	if(minoCum > 0) addButton(8,"Buy MinoCum",eventParser,minoCum);
 	addButton(9,"Back",favoriteSalonMenu);
 }
 
@@ -33,12 +33,12 @@ public function salonPaymentMenu():void {
 	if(flags[UNKNOWN_FLAG_NUMBER_00142] > 0) minoCum = 2696;
 	menu();
 	if(flags[LYNNETTE_PREGNANCY_CYCLE] >= 4 && player.hasCock()) addButton(5,"Fuck Goblin",fuckLynnette);
-	addButton(0,"Goblin Blow",eventParser,blow);
+	if(blow > 0) addButton(0,"Goblin Blow",eventParser,blow);
 	addButton(1,"Canine",gloryholeDoggie);
 	addButton(2,"Imp",gloryholeImp);
 	addButton(3,"Minotaur",gloryholeMinotaur);
 	addButton(4,"Incubus",gloryholeIncubus);
-	addButton(8,"Buy MinoCum",eventParser,minoCum);
+	if(minoCum > 0) addButton(8,"Buy MinoCum",eventParser,minoCum);
 	addButton(9,"Leave",eventParser,13);
 	//choices("Goblin Blow",blow,"Canine",gloryholeDoggie,"Imp",gloryholeImp,"Minotaur",gloryholeMinotaur,"Incubus",gloryholeIncubus,"",0,"",0,"",0,"Buy MinoCum",minoCum,"Leave",13);
 }
@@ -540,8 +540,8 @@ function fuckLynnette():void {
 	else outputText("[sheath]");
 	outputText(" with hunger in her eyes.");
 	
-	outputText("\n\nTossing your discarded [armor] over her shoulder, Lynnette starts off towards a cleverly concealed side room, dragging you along by the [cock biggest] in her wake.  Her plush, wobbling ass ticks back and forth like a lascivious metronome with each step, shaking just enough that your eyes are held almost spellbound, tracking the reflections as they play across the shimmering dress that's trying and failing to contain the inhuman juiciness of her bootylicious derriere.  Catching you staring, she gives you a gentler, more comforting squeeze.  \"<i>Just wait till you see me out of this thing, honey... and try to keep from blowing until we get you inside you.</i>\"");
-	outputText("\n\nYou nod and kick the door to Lynnette's room closed behind you. The bedroom, much like its owner, is a compact little thing, hewn in by four close cave walls, but the ceiling rises up at least ten feet, ensuring that the space is comfortable for everything from a goblin to a minotaur.  Lynnette's big is oversized to the extreme, filling the entire room almost entirely by itself.  The goblin matron finally lets you go and bounces up onto her bed, turning to face you.");
+	outputText("\n\nTossing your discarded [armor] over her shoulder, Lynnette starts off towards a cleverly concealed side room, dragging you along by the [cock biggest] in her wake.  Her plush, wobbling ass ticks back and forth like a lascivious metronome with each step, shaking just enough that your eyes are held almost spellbound, tracking the reflections as they play across the shimmering dress that's trying and failing to contain the inhuman juiciness of her bootylicious derriere.  Catching you staring, she gives you a gentler, more comforting squeeze.  \"<i>Just wait till you see me get out of this thing, honey... and try to keep from blowing until we get you inside you.</i>\"");
+	outputText("\n\nYou nod and kick the door to Lynnette's room closed behind you. The bedroom, much like its owner, is a compact little thing, hewn in by four close cave walls, but the ceiling rises up at least ten feet, ensuring that the space is comfortable for everything from a goblin to a minotaur.  Lynnette's bed is oversized to the extreme, filling the entire room almost entirely by itself.  The goblin matron finally lets you go and bounces up onto her bed, turning to face you.");
 	outputText("\n\nStarting with one loose shoulder strap, Lynnette eases the edge of her top down, exposing her rich emerald areola without quite letting you see the rigid tip of her nipple.  The clingy fabric shrouding it darkens slightly, stained with a spurt of eager lactation, slicked down so that it reveals the entire shape of the curvacious beauty's teat.  She repeats the action on the other side, letting both sides of her dress hang entirely off her lewdly jutting nipples, the pebbly areolas' top halves wantonly displayed to your roving eyes as she shakes back and forth.  Her tits bounce and shake like lewd toys, colliding with boob-rippling force before bouncing apart, each hit causing the hem to sink lower until her protruding nubs pop free.");
 	outputText("\n\nLike a balloon with all the air let out, Lynnette's gauzy dress wobbles and collapses downward towards her obscenely flared hips, collecting in a ring of folded fabric around her waist.  She bounces on the bed, sending her unsupported mammaries to undulate in a licentious display that culminates in sudden sprays of creamy, alabaster milk from each freed nipple.  She rolls her hips around with the skill of a belly dancer while trickles of white roll across her shaking viridian middle, letting the dress slip lower and lower, eventually revealing the dark-flushed skin just above her cleft.  With a wink, she peels the milk-damp fabric away from her dark, passion inflamed mound, the sound of the separation clearly audible.  Long strands of feminine wetness connect the threads to Lynnette's body for the briefest moment before breaking to fall upon her thick, curvaceous thighs.");
 	outputText("\n\nLynnette's bed bounces as she lets herself fall back into her pillows, and you watch her cowgirl-sized knockers flatten slightly under the own weight, showing just how big they truly are.  Everything below her neck and above her belly-button is covered in an ocean of jade breast-flesh, one the goblin is happy to highlight by digging her fingers into it, letting her digits vanish into the oh-so-soft love-cushions.  She moans and spreads her legs, giving you a better view while she bats her eyelashes in the most ravenous come-hither look you've ever seen.  Her lower lips, wet and plump with love-juices, part slightly, inviting you to fill them.  You know full well that she's had many daughters, but the flawless, malachite swell of her snatch shows no sign of wear, and rather, glistens as evidence of her race's natural elasticity.");

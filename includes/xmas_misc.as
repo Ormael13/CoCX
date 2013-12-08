@@ -1212,7 +1212,7 @@ function fixNieve():void {
 	}
 	else if(flags[NIEVE_MOUTH] == "" || flags[NIEVE_MOUTH] == 0) {
 		clearOutput();
-		outputText("(There was an error with stat tracking that cleared Nieve's stats out at the end of last year's event. <b>What was Nieve's mouth made out of?</b>)");
+		outputText("(There was an error with stat tracking that cleared Nieve's stats out at the end of last year's event. <b>What were Nieve's eyes and mouth made out of?</b>)");
 		menu();
 		addButton(0,"Gems",fixNieveMouth,0);
 		addButton(1,"Coal",fixNieveMouth,1);
