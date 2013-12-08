@@ -30,3 +30,16 @@ git submodule update --init
 -library-path+=./lib/bin/ScrollPane.swc \
 -o ../binRepo/CoC-${COC_VERSION}.swf \
 classes/classes/CoC.as
+
+# Build the Android package
+
+/opt/flex/bin/adt \
+-package \
+-target apk \
+-storetype pkcs12 \
+-keystore ./cert/CorruptionOfChampionsAIR.p12 \
+-storepass testpassword \
+../binRepo/CoC-${COC_VERSION}.apk \
+application.xml \
+-C bin . \
+-C icons/android .
