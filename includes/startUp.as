@@ -15,7 +15,7 @@ public function mainMenu(e:MouseEvent = undefined):void {
 	gameState = 3;
 
 
-	outputText("<b>Corruption of Champions (" + version + ") API v11.9</b>", true);
+	outputText("<b>Corruption of Champions (" + version + ")</b>", true);
 
 	//doThatTestingThang();
 
