@@ -40,6 +40,6 @@ classes/classes/CoC.as
 -keystore ./devTools/cert/CorruptionofChampionsAIR.p12 \
 -storepass testpassword \
 ../binRepo/CoC-${COC_VERSION}.apk \
-application.xml \
+./devTools/application.xml \
 -C ../binRepo . \
 -C ./devTools/icons/android .
