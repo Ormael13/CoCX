@@ -1190,7 +1190,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(player.statusAffects[player.hasStatusAffect("heat")].value3 <= 1 || player.vaginas.length == 0) 
 			{
 				//Remove bonus libido from heat
-				stats(0,0,0,0,-player.statusAffects[player.hasStatusAffect("heat")].value2,0,0,0);
+				stats(0,0,0,0,-player.statusAffects[player.hasStatusAffect("heat")].value2,0,0,0,false,true);
 				//remove heat
 				player.removeStatusAffect("heat");
 				if(player.lib < 1) player.lib = 1;
@@ -1221,7 +1221,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(player.statusAffectv3("rut") <= 1 || player.totalCocks() == 0) 
 			{
 				//Remove bonus libido from rut
-				stats(0,0,0,0,-player.statusAffectv2("rut"),0,0,0);
+				stats(0,0,0,0,-player.statusAffectv2("rut"),0,0,0,false,true);
 				//remove heat
 				player.removeStatusAffect("rut");
 				if(player.lib < 10) player.lib = 10;

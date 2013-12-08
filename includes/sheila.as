@@ -4812,7 +4812,7 @@ public function sheilaAnalHateFuckAGoGo():void {
 	outputText("\n\n\"<i>[name]!  Finish in my pussy, please!  I want to raise your baby!  You're the only one that suits me!</i>\"");
 	
 	//if corruption >= 80 and PC has worms, present choices 
-	if(player.cor >= 80 && player.hasStatusAffect("Infested") >= 0) {
+	if(player.cor >= 80 && player.hasStatusAffect("infested") >= 0) {
 		menu();
 		//[No][Worms Suit You], else auto-output text from [No]
 		addButton(0,"No",sheilaAnalHateFuckAGoGoNO);
