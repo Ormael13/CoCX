@@ -47,7 +47,9 @@
 	
 	<initialWindow>
 		<title>Corruption of Champions</title>
-		<content>CorruptionofChampionsFD.swf</content>
+		<!-- Please don't change the following line -->
+		<!-- Some of the automated build tools match against it to insert the proper swf name at compile-time -->
+		<content>CoC.swf</content>
 		<visible>true</visible>
 		<fullScreen>true</fullScreen>
 		<autoOrients>false</autoOrients>

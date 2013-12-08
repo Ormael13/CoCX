@@ -12,7 +12,7 @@ export COC_VERSION=`gawk 'match($0, /^[\s\t]+ver = \"(.+)\";/, n) { print n[1] }
 echo "Build version = ${COC_VERSION}"
 
 # Clean up old build-artifacts (probably unnecessary with buildbot's build mechanisms)
-rm -f CoC*.swf
+rm -f ../binRepo/CoC*.swf
 
 # Force the submodules to be up to date.
 git submodule update --init
@@ -32,6 +32,12 @@ git submodule update --init
 classes/classes/CoC.as
 
 # Build the Android package
+echo Patching xml file to build android package
+
+export SWF_NAME=`ls ../binRepo/ | grep -i ^CoC.*\.swf$`
+
+/bin/sed -i -r "s/^<content>CoC.swf<\/content>/<content>${SWF_NAME}<\/content>/" ./devTools/application.xml
+
 
 /opt/flex/bin/adt \
 -package \
