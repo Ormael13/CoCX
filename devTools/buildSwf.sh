@@ -36,7 +36,9 @@ echo Patching xml file to build android package
 
 export SWF_NAME=`ls ../binRepo/ | grep -i ^CoC.*\.swf$`
 
-/bin/sed -i -r "s/^<content>CoC.swf<\/content>/<content>${SWF_NAME}<\/content>/" ./devTools/application.xml
+echo Current SWF file name = $SWF_NAME
+
+/bin/sed -i -r "s/<content>CoC.swf<\/content>/<content>${SWF_NAME}<\/content>/" ./devTools/application.xml
 
 
 /opt/flex/bin/adt \

@@ -17,6 +17,7 @@ echo Done. Splicing in release info
 
 #cat ./classes/classes/CoC.as
 echo 
-echo File modified. Current version string:
-cat ./classes/classes/CoC.as | grep "version\s\="
+echo File modified. Current version strings:
+cat ./classes/classes/CoC.as | grep "ver\s?\="
+cat ./classes/classes/CoC.as | grep "version\s?\="
 
