@@ -112,7 +112,7 @@ public var singleArgConverters:Object =
 		"tongue"					: function(thisPtr:*):* { return thisPtr.tongueDescript();},
 		"vag"						: function(thisPtr:*):* { return thisPtr.vaginaDescript(); },
 		"vagina"					: function(thisPtr:*):* { return thisPtr.vaginaDescript(); },
-		"vagorass"					: function(thisPtr:*):* { if (thisPtr.player.hasVagina())return thisPtr.vaginaDescript(); else thisPtr.assholeDescript();},
+		"vagorass"					: function(thisPtr:*):* { return(thisPtr.player.hasVagina() ? thisPtr.vaginaDescript() : thisPtr.assholeDescript()); },
 		"weapon"					: function(thisPtr:*):* { return thisPtr.player.weaponName;},
 		"weaponname"				: function(thisPtr:*):* { return thisPtr.player.weaponName;}
 
