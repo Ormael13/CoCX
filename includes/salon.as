@@ -4,12 +4,43 @@ public function hairDresser():void {
 	doYesNo(2169,13);
 }
 
+public function favoriteSalonMenu():void {
+	salonPurchaseMenu();
+	addButton(6,"Payments",salonFavoritesPaymentMenu);
+}
+
+public function salonFavoritesPaymentMenu():void {
+	var blow:Number = 0;
+	if(player.hasCock()) blow = 2154;
+	var minoCum:Number = 0;
+	if(flags[UNKNOWN_FLAG_NUMBER_00142] > 0) minoCum = 2696;
+	menu();
+	if(flags[LYNNETTE_PREGNANCY_CYCLE] >= 4 && player.hasCock()) addButton(5,"Fuck Goblin",fuckLynnette);
+	addButton(0,"Goblin Blow",eventParser,blow);
+	addButton(1,"Canine",gloryholeDoggie);
+	addButton(2,"Imp",gloryholeImp);
+	addButton(3,"Minotaur",gloryholeMinotaur);
+	addButton(4,"Incubus",gloryholeIncubus);
+	addButton(8,"Buy MinoCum",eventParser,minoCum);
+	addButton(9,"Back",favoriteSalonMenu);
+}
+
+
 public function salonPaymentMenu():void {
 	var blow:Number = 0;
 	if(player.hasCock()) blow = 2154;
 	var minoCum:Number = 0;
 	if(flags[UNKNOWN_FLAG_NUMBER_00142] > 0) minoCum = 2696;
-	choices("Goblin Blow",blow,"Canine",gloryholeDoggie,"Imp",gloryholeImp,"Minotaur",gloryholeMinotaur,"Incubus",gloryholeIncubus,"",0,"",0,"",0,"Buy MinoCum",minoCum,"Leave",13);
+	menu();
+	if(flags[LYNNETTE_PREGNANCY_CYCLE] >= 4 && player.hasCock()) addButton(5,"Fuck Goblin",fuckLynnette);
+	addButton(0,"Goblin Blow",eventParser,blow);
+	addButton(1,"Canine",gloryholeDoggie);
+	addButton(2,"Imp",gloryholeImp);
+	addButton(3,"Minotaur",gloryholeMinotaur);
+	addButton(4,"Incubus",gloryholeIncubus);
+	addButton(8,"Buy MinoCum",eventParser,minoCum);
+	addButton(9,"Leave",eventParser,13);
+	//choices("Goblin Blow",blow,"Canine",gloryholeDoggie,"Imp",gloryholeImp,"Minotaur",gloryholeMinotaur,"Incubus",gloryholeIncubus,"",0,"",0,"",0,"Buy MinoCum",minoCum,"Leave",13);
 }
 public function salonPurchaseMenu():void {
 	flags[SALON_PAID] = 1;
@@ -35,16 +66,16 @@ public function salonPurchaseMenu():void {
 	else if(player.femininity > 20 && (player.gender == 0 || player.gender == 3))  sandFacial = 2837;
 	else if(player.femininity > 0 && player.hasPerk("Androgyny") >= 0) sandFacial = 2837;
 	
-	choices("Cut Short",cutShort,
-			"Cut Med.",cutMedium,
-			"Cut Long",cutLong,
-			"Lengthen",lengthening,
-			"Buy Products",2163,
-			"Buy MinoCum",minoCum,
-			"",0,
-			"Mud Facial",mudFacial,
-			"Sand Facial",sandFacial,
-			"Leave",13);
+	menu();
+	if(cutShort > 0) addButton(0,"Cut Short",eventParser,cutShort);
+	if(cutMedium > 0) addButton(1,"Cut Med.",eventParser,cutMedium);
+	if(cutLong > 0) addButton(2,"Cut Long",eventParser,cutLong);
+	if(lengthening > 0) addButton(3,"Lengthen",eventParser,lengthening);
+	addButton(4,"Buy Products",eventParser,2163);
+	if(minoCum > 0) addButton(5,"Buy MinoCum",eventParser,minoCum);
+	if(mudFacial > 0) addButton(7,"Mud Facial",eventParser,mudFacial);
+	if(sandFacial > 0) addButton(8,"Sand Facial",eventParser,sandFacial);
+	addButton(9,"Leave",eventParser,13);
 }
 
 public function hairDresserGreeting():void {
@@ -63,6 +94,7 @@ public function hairDresserGreeting():void {
 	outputText("\n\n<b>(Salon unlocked in 'places' menu from camp)</b>", false);
 }
 public function hairDresserRepeatGreeting():void {
+	clearOutput();
 	spriteSelect(38);
 	var minoCum:Number = 0;
 	//Chance for mino craziness here
@@ -70,12 +102,91 @@ public function hairDresserRepeatGreeting():void {
 		minotaurCumBukkakeInSalon();	
 		return;
 	}
-	outputText("Lynnette the goblin answers the door and lets you in, waving you deeper into her shop.  Her shining black dress barely contains her fertile-hips and jiggling chest as she greets you, \"<i>Welcome back honey!  ", true);
-	if(player.cockTotal() == 0) {
-		outputText("I see you still can't make payment for our services on your own.  No worries, the glory holes in the back are pretty popular with the demons and monsters, just go back there and catch some spooge and we'll see about helping with your hair, ok?</i>\"\n\n(There are a number of dicks in the glory hole, which do you want to deal with (if you're willing at all)?", false);
+	//Had babies announcement!
+	if(flags[LYNNETTE_PREGNANCY_CYCLE] == 4 && flags[LYNNETTE_CARRYING_COUNT] > 0) {
+		outputText("As soon as you enter the Salon, Lynnette is beaming ");
+		if(player.tallness >= 48) outputText("up ");
+		outputText("at you. \"<i>Hey there, honey. Come for some more service or to check up on the kids?</i>\" She pats her now-flat midsection. \"<i>I popped them out last night. We had " + num2Text(flags[LYNNETTE_CARRYING_COUNT]) + " kids... all girls, of course.</i>\" She tucks a lock of beautifully styled hair behind an elfin ear. \"<i>Now you be sure and let me know when you want to contribute to my baby-bank again.</i>\"");
+		if(flags[LYNNETTE_BABY_COUNT] > 0) outputText("\n\nA few new, green faces can be seen looking your way and blushing as they work the gloryholes,probably from a previous litter. They grow up so fast.");
+		flags[LYNNETTE_BABY_COUNT] += flags[LYNNETTE_CARRYING_COUNT];
+		flags[LYNNETTE_CARRYING_COUNT] = 0;
+		//If favorite!
+		if(flags[LYNNETTE_ANNOUNCED_APPROVAL] == 1) {
+			favoriteSalonMenu();
+			return;
+		}
+		else {
+			if(player.cockTotal() == 0) {
+				outputText("\n\nShe taps her chin in thought. \"<i>A real shame you aren't packing any more.  No worries, the glory holes in the back are pretty popular with the demons and monsters, just go back there and catch some spooge and we'll see about helping with your hair, ok?</i>\"\n\n(There are a number of dicks in the glory hole, which do you want to deal with (if you're willing at all)?", false);
+			}
+			else {
+				outputText("\n\nShe taps her chin in thought. \"<i>Will you be getting our normal services?  Just one BJ per hair treatment!  Maybe you wanted to be a repeat customer at Lynnette's womb?  No appointment neccessary.  Or would you rather get our fee from the gloryholes in back?</i>\"", false);
+			}
+		}
 	}
+	//Favorite Announcement
+	else if(flags[LYNNETTE_APPROVAL] >= 100 && flags[LYNNETTE_ANNOUNCED_APPROVAL] == 0) {
+		outputText("Lynnette practically beams at your appearance, chasing you into the lobby of her shop before you can change your mind. You look quizzically at her, wondering just what's gotten her so excited, when she announces, \"<i>Look, honey, you've done such a great job knocking me up that I've decided you ought to have a little reward - besides stuffing me silly.</i>\" Her nipples seem to harden a touch through her dress at that. \"<i>You can get any of our regular services for free, my studly, virile... mmm....</i>\" Her eyes drift closed ever so briefly as a hand vanishes under a slit in her dress. A moment later, she jolts and withdraws it, sheepishly admitting. \"<i>We'll do your hair for free! Just don't forget to knock me up from time to time, okay?</i>\"");
+		outputText("\n\nThis seems like quite the deal!");
+		flags[LYNNETTE_ANNOUNCED_APPROVAL] = 1;
+		//Custom menu with options to "pay anyway"
+		favoriteSalonMenu();
+		return;
+	}
+	//Favorite Greeting 
+	else if(flags[LYNNETTE_ANNOUNCED_APPROVAL] == 1) {
+		//(Pregnant With Your Babies)
+		if(flags[LYNNETTE_PREGNANCY_CYCLE] < 4 && flags[LYNNETTE_CARRYING_COUNT] > 0) 
+		{
+			outputText("Lynnette has a little difficulty ushering you in with her swollen belly in the way. She's tremendously heavy with child already, likely due to some goblin-engineered chemicals that accelerate her pregnancy. Her tremendously fertile hips roll back and forth as she waddles a little deeper into the salon, greeting, \"<i>Welcome back, honey-bunch. Here to make a donation to the cause or get some freebies from your favorite pregnant slut?</i>\" She twists her ass in your direction and slaps it, making it jiggle in her sheer dress.");
+		}
+		//Pregnant with other babies
+		else if(flags[LYNNETTE_PREGNANCY_CYCLE] < 4) {
+			outputText("Lynnette the goblin answers the door and lets you in, waving you deeper into her shop.  Her shining black dress barely contains her fertile-hips and jiggling chest as she greets you, \"<i>Welcome back, honey-bunch!  You should've stopped by to stuff my oven.  I wound up having to dip into our reserves.</i>\"  She affectionally wraps an arm around your waist and rubs your midsection.  \"<i>I would've much rather had my Champion's babies.</i>\"  She smiles up at you and says, \"<i>I'm sure you didn't just come here to visit.  Did you need a trim, or didja just want to make a donation do my little business?</i>\"  The word 'donation' is rolled as slowly and sensuously from her mouth as possible.");
+		}
+		//Nonpreggers
+		else {
+			outputText("Pulling the door the rest of the way open before you've the latch more than half-turned, Lynnette has you inside with disorienting speed.  She presses her well-endowed, dress-straining tits against your ");
+			if(player.tallness <= 48) outputText("side");
+			else if(player.tallness <= 68) outputText("[hips]");
+			else outputText("[leg]");
+			outputText(", compressing her mountainous mammaries against you hard enough to leave milky stains in her wake.\n\n\"<i>How's my favorite breeder doing?</i>\" comes the honeyed words from her mouth, and as she begins to feel at the crotch of your [armor], she asks, \"<i>I can cut your hair, if you like, but why do that when there's a woman with a quim in front of you, waiting to get stuffed?</i>\"  She smirks. \"<i>So what'll it be?</i>\"");
+		}
+		if(player.cockTotal() == 0) {
+			outputText("\n\nHer expression drops when she realizes you're no longer packing. \"<i>You should really grow a cock back, honey. It's a little shameful for such a perfect stud to be so under-equipped.</i>\"", false);
+		}
+		favoriteSalonMenu();
+		return;
+	}
+	//Non-Pregnant Greetings:
+	else if(flags[LYNNETTE_PREGNANCY_CYCLE] >= 4) 
+	{
+		if(flags[LYNNETTE_MET_UNPREGNANT] == 0) {
+			flags[LYNNETTE_MET_UNPREGNANT] = 1;
+			outputText("Lynnette's familiar face greets you at the door to her salon once more, and she waves you in with a beatific smile plastered upon her face. Clinging to her like a second skin, the businessgoblin's dress highlights her surprisingly flat midsection; she's not pregnant!");
+			outputText("\n\n\"<i>Noticing something you like, honey-bunches?</i>\" the goblin coos with a sashy of her baby-bearing hips. \"<i>A girl can't be pregnant ALL the time, after all.</i>\" She dabs at one of the many spots of moisture her prominent nipples have left on her top and smiles a bit overbroadly.");
+			//Normal offers with a bit hinting at knocking her up when appropriate
+		}
+		else {
+			outputText("Lynnette opens the door for you, ushering in before you have more than a few moments to take in her curvy voluptuousness. Her dress is sheer and tight to her relatively flat belly, indicated that her womb is free for the moment, and judging by the way she beams at your entrance, she's still feeling a little bit of post-birth euphoria. \"<i>Welcome back, honey! Here for a bit of fun, a haircut, or both?</i>\"");
+			//Normal offers with a bit hinting at knocking her up when appropriate
+		}
+		if(player.cockTotal() == 0) {
+			outputText("\n\nShe taps her chin in thought. \"<i>I see you still can't make payment for our services on your own.  No worries, the glory holes in the back are pretty popular with the demons and monsters, just go back there and catch some spooge and we'll see about helping with your hair, ok?</i>\"\n\n(There are a number of dicks in the glory hole, which do you want to deal with (if you're willing at all)?", false);
+		}
+		else {
+			outputText("\n\nShe taps her chin in thought. \"<i>Will you be getting our normal services?  Just one BJ per hair treatment!  Maybe you wanted to take a try at Lynnette's womb?  Or would you rather get our fee from the gloryholes in back?</i>\"", false);
+		}
+	}
+	//Standard repeats
 	else {
-		outputText("Will you be getting our normal services?  Just one BJ per hair treatment!  Or would you rather get it from the gloryholes in back?</i>\"", false);
+		outputText("Lynnette the goblin answers the door and lets you in, waving you deeper into her shop.  Her shining black dress barely contains her fertile-hips and jiggling chest as she greets you, \"<i>Welcome back, honey!  ", true);
+		if(player.cockTotal() == 0) {
+			outputText("I see you still can't make payment for our services on your own.  No worries, the glory holes in the back are pretty popular with the demons and monsters, just go back there and catch some spooge and we'll see about helping with your hair, ok?</i>\"\n\n(There are a number of dicks in the glory hole, which do you want to deal with (if you're willing at all)?", false);
+		}
+		else {
+			outputText("Will you be getting our normal services?  Just one BJ per hair treatment!  Or would you rather get it from the gloryholes in back?</i>\"", false);
+		}
 	}
 	salonPaymentMenu();
 }
@@ -281,7 +392,7 @@ public function minotaurCumBukkakeInSalon():void {
 	}
 	outputText("\n\n", false);
 	
-	outputText("Time passes in a slow, torturous manner, but you turn the corner and sigh.  Salvation is at hand – you've reached the glory-holes, and to your delight there's nearly a dozen hard, dripping, delicious… mmmm… minotaur cocks crammed through the holes, some bulging out around the seams and leaking with need.  You saunter forwards, hips swaying sensually as the drug-like desire of potent minotaur musk pulls you ever closer.  Mewling happily, you take one of them in hand and stroke along its length, giggling as it pulses and leaks a stream of heavenly goo down your arm.   You lick it from your arm in one long, languid motion before pursing your lips around the minotaur's flared tip and sucking it hard as you quest for more of its heady ambrosia.\n\n", false); 
+	outputText("Time passes in a slow, torturous manner, but you turn the corner and sigh.  Salvation is at hand – you've reached the glory-holes, and to your delight there's nearly a dozen hard, dripping, delicious... mmmm... minotaur cocks crammed through the holes, some bulging out around the seams and leaking with need.  You saunter forwards, hips swaying sensually as the drug-like desire of potent minotaur musk pulls you ever closer.  Mewling happily, you take one of them in hand and stroke along its length, giggling as it pulses and leaks a stream of heavenly goo down your arm.   You lick it from your arm in one long, languid motion before pursing your lips around the minotaur's flared tip and sucking it hard as you quest for more of its heady ambrosia.\n\n", false); 
 	
 	outputText("You hear a deep, strangled sigh as more and more delicious pre floods your mouth, lighting your senses up with a fireworks show of pleasure", false);
 	if(player.gender > 0) outputText(" and increasing the size of the puddle you're leaving on the floor", false);
@@ -374,4 +485,185 @@ public function sandFacial():void {
 	outputText("After a while the goblin girls come back and clean the stuff from your face. (+10 masculinity)", false);
 	player.modFem(0,10);
 	doNext(13);
+}
+/*
+public const LYNNETTE_PREGNANCY_CYCLE:int                                    = 1022; //0-3 = pregnant. 4-6 = not.
+public const LYNNETTE_APPROVAL:int		                                     = 1023;
+public const LYNNETTE_BABY_COUNT:int                                         = 1024;
+public const LYNNETTE_CARRYING_COUNT:int                                     = 1025;
+*/
+
+//Impregnate
+function fuckLynnette():void {
+	clearOutput();
+	//Checks to see if you've cum withint hte past 24 hours.
+	if(flags[LYNNETTE_FUCK_COUNTER] == 0) {
+		outputText("At your suggestion, Lynnette's eyelashes flutter dangerously low. She gives you a smokey look and asks, \"<i>Is that so so?</i>\" She circles around you, looking you up and down with eyes that seem to bore right through your [armor]. She must see something she likes, because she dips forward, parting her weighty melons around your ");
+		if(player.tallness >= 72) outputText("[leg]");
+		else if(player.tallness >= 55) outputText("[hips]");
+		else outputText("side");
+		outputText(" so that she can slip a manicured hand inside your underclothes. She handles [eachCock] ");
+		if(player.cockTotal() > 1) outputText("in turn ");
+		outputText("with the skill of a practiced snake-charmer before ");
+		if(player.balls == 0) outputText("pressing down near the [sheath]");
+		else outputText("curling her petite fingers around your [sack] to heft it");
+		outputText(".");
+		//IF FAIL!
+		if(player.hoursSinceCum < 24) {
+			outputText("\n\nA feminine giggle slips free of her lips.  \"<i>I'm sorry [name], but I don't get knocked up unless I'm going to get knocked up with a dozen daughters.</i>\"  She gives your package a longing squeeze and extricates her hand, letting her palm caress your sensitive groin and belly on the way out.  \"<i>I need thick, sticky, pent-up jism that's going to be desperate to inseminate every egg it can get its hands on.</i>\"  She shivers at the thought, saying, \"<i>Come back when you've let yourself go a full twenty four hours without cumming.  Then you can get me pregnant... assuming some other lucky stud hasn't already.</i>\"");
+			outputText("\n\nShe licks your scent from her fingers and asks, \"<i>Now, was there another way you wanted to pay?</i>\"");
+			salonPaymentMenu();
+			return;
+		}
+	}
+	//Repeat cum within 24 hours check
+	else {
+		outputText("Lynnette licks her lips at your decision and sashays forward, her immense hips rocking with enough sensuality that her plush ass is practically having a sexquake.  \"<i>You'll understand if we do a quick check then, right, [name]?</i>\" She doesn't wait for an answer, pressing herself against you so that you can get a good feel of her soft, sopping-wet tits conform to the shape of your body, letting the moist heat that seems to radiate from every pore of Lynnette's petite shape soak into your exposed " + player.skinFurScales() + ".  Her hand dives right into your underwear without asking, seizing tight around [oneCock] to heft it.");
+		outputText("\n\nYou give up an appreciative groan, [eachCock] twitching in lewd enjoyment as ");
+		if(player.lust <= 75) outputText("it fills to full size almost immediately");
+		else outputText("it's fully-erect state makes itself known");
+		outputText(". Lynnette strokes a few times to make sure you're suitably engorged and then shifts lower, squeezing ");
+		if(player.balls == 0) outputText("around your [sheath] to get a feel for how pent-up you are");
+		else outputText("gently at your [balls], weighing them in her palm to get a feel for just how pent-up you are");
+		outputText(".");
+		//NOT ENOUGH!
+		if(player.hoursSinceCum < 24) 
+		{
+			outputText("\n\nA frown slowly spreads across her face.  \"<i>[name], this just won't do. I need anxious, needy little sperm that will scream out of your cock with enough force to impregnate my ovaries.  I can't get that if you're getting off all the time.  Come back after you've gone without blowing a load for twenty four hours, and I'll give you a proper place to do it... if someone else hasn't beaten you to it.  Did you want to stick around and pay another way?</i>\"");
+			salonPaymentMenu();
+			return;
+		}
+	}
+	//There is enough!
+	outputText("\n\nLynnette coos, \"<i>There it is... that yummy, nasty seed that you've let wait and bake for hour after hour.</i>\" She shivers in anticipation.  \"<i>You're going to stuff every single drop of that sticky stuff straight inside me, and it's going to be so thick it glues my snatch shut until it's time for birthing.  Got it?</i>\"  She squeezes down on [oneCock] with near-painful firmness, holding you completely and totally erect in the palm of her hand as she easily works off your [armor].  \"<i>Yes you are.... Oh, this is just what I needed today,</i>\" the green woman sighs while rubbing your ");
+	if(player.balls > 0) outputText("[balls]");
+	else outputText("[sheath]");
+	outputText(" with hunger in her eyes.");
+	
+	outputText("\n\nTossing your discarded [armor] over her shoulder, Lynnette starts off towards a cleverly concealed side room, dragging you along by the [cock biggest] in her wake.  Her plush, wobbling ass ticks back and forth like a lascivious metronome with each step, shaking just enough that your eyes are held almost spellbound, tracking the reflections as they play across the shimmering dress that's trying and failing to contain the inhuman juiciness of her bootylicious derriere.  Catching you staring, she gives you a gentler, more comforting squeeze.  \"<i>Just wait till you see me out of this thing, honey... and try to keep from blowing until we get you inside you.</i>\"");
+	outputText("\n\nYou nod and kick the door to Lynnette's room closed behind you. The bedroom, much like its owner, is a compact little thing, hewn in by four close cave walls, but the ceiling rises up at least ten feet, ensuring that the space is comfortable for everything from a goblin to a minotaur.  Lynnette's big is oversized to the extreme, filling the entire room almost entirely by itself.  The goblin matron finally lets you go and bounces up onto her bed, turning to face you.");
+	outputText("\n\nStarting with one loose shoulder strap, Lynnette eases the edge of her top down, exposing her rich emerald areola without quite letting you see the rigid tip of her nipple.  The clingy fabric shrouding it darkens slightly, stained with a spurt of eager lactation, slicked down so that it reveals the entire shape of the curvacious beauty's teat.  She repeats the action on the other side, letting both sides of her dress hang entirely off her lewdly jutting nipples, the pebbly areolas' top halves wantonly displayed to your roving eyes as she shakes back and forth.  Her tits bounce and shake like lewd toys, colliding with boob-rippling force before bouncing apart, each hit causing the hem to sink lower until her protruding nubs pop free.");
+	outputText("\n\nLike a balloon with all the air let out, Lynnette's gauzy dress wobbles and collapses downward towards her obscenely flared hips, collecting in a ring of folded fabric around her waist.  She bounces on the bed, sending her unsupported mammaries to undulate in a licentious display that culminates in sudden sprays of creamy, alabaster milk from each freed nipple.  She rolls her hips around with the skill of a belly dancer while trickles of white roll across her shaking viridian middle, letting the dress slip lower and lower, eventually revealing the dark-flushed skin just above her cleft.  With a wink, she peels the milk-damp fabric away from her dark, passion inflamed mound, the sound of the separation clearly audible.  Long strands of feminine wetness connect the threads to Lynnette's body for the briefest moment before breaking to fall upon her thick, curvaceous thighs.");
+	outputText("\n\nLynnette's bed bounces as she lets herself fall back into her pillows, and you watch her cowgirl-sized knockers flatten slightly under the own weight, showing just how big they truly are.  Everything below her neck and above her belly-button is covered in an ocean of jade breast-flesh, one the goblin is happy to highlight by digging her fingers into it, letting her digits vanish into the oh-so-soft love-cushions.  She moans and spreads her legs, giving you a better view while she bats her eyelashes in the most ravenous come-hither look you've ever seen.  Her lower lips, wet and plump with love-juices, part slightly, inviting you to fill them.  You know full well that she's had many daughters, but the flawless, malachite swell of her snatch shows no sign of wear, and rather, glistens as evidence of her race's natural elasticity.");
+	outputText("\n\n\"<i>Mount me,</i>\" the goblin growls as she displays her nude body to you, \"<i>I want to feel you inside, [name].  I want to make you cum for me.</i>\"  She smiles lecherously.  \"<i>You WILL cum for me.</i>\"  The glittering look of promise in her eyes leaves no room for doubt in your heart.  She's going to wind up with a cuntful of cum, and all you can do is provide it for her.");
+	outputText("\n\nBefore you can crawl into bed after her and give her the loving she deserves, you catch a whiff of something sweet and undeniably... fertile in the air. It's obviously the pheromone-laden scent of the green matron's arousal, hanging in about in a fog and working its way into your system. Twitching unsubtly, your maleness");
+	if(player.cockTotal() > 1) outputText("es have");
+	else outputText(" has");
+	outputText(" begun to bead clear droplets of precum. They run down the underside of your distended, eager cumvein");
+	if(player.cockTotal() > 1) outputText("s");
+	outputText(" and race down towards your ");
+	if(player.balls > 0) outputText("[balls]");
+	else outputText("[sheath]");
+	outputText(", leaving a glossy, sexual shine in their wake, and they're only coming on faster and faster the longer you gaze upon Lynnette's emerald twat and inhale her prick-stiffening scent.");
+	
+	outputText("\n\n\"<i>Fuck me,</i>\" the pregnancy-obsessed slut begs as she moves a hand down to her cunny, spreading the lips wide-open with reveal a glittering amethyst tunnel that promises sublime pleasure to all who enter.");
+	outputText("\n\nYou climb up onto the bed with one hand wrapped around [oneCock] and your eyes leering down over your jade prize, your dick oozing droplets of molten-hot pre onto your waiting conquest's slick thighs as you climb into position. She looks up at you imploringly as she awaits the inevitable penetration, grabbing your hand and pressing down on her sodden box. The sensation reminds you vaguely of holding your hand above a pot of boiling water, the steaming heat collecting into condensation upon your hand. That settles it; you absolutely need to fuck her NOW! Your dick");
+	if(player.cockTotal() > 1) outputText("s");
+	outputText(" won't take no for an answer.");
+	var x:int = player.cockThatFits(80);
+	if(x < 0) x = player.smallestCockIndex();
+	outputText("\n\nGrunting as you aggressively move yourself into place, you lock eyes with the shameless slut, letting her know with a single look just how hard you are going to fuck her, how perfectly pounded her pussy is going to be.  That one expression leaves her unequivocally sure of her impending bowleggedness, and the little tart just grins.  You thrust forward with all the subtleness of a rampaging bull, battering your " + cockHead(x) + " right through her slobbering delta, feeling the lips cling to your girth as they're stretched out into an o-ring of cock-squeezing pleasure, somehow incredibly tight around you but with more give than any woman ought to have.");
+	if(player.cockArea(x) > 50) 
+	{
+		outputText("  Her tummy bulges with the outline of your swollen mass, clearly displaying the shape of your bitch-breaking dong as it travels up ");
+		if(player.cockArea(x) <= 80) outputText("her belly");
+		else outputText("into her ribcage, penetrating farther than any lesser race could ever hope to handle");
+	}
+	outputText(". The breeder grabs hold of your [hips] and tugs as hard as her meager strength will allow.  ");
+	if(player.cockArea(x) <= 90) {
+		outputText("Slapping against her hard enough to release a splash of girlish cum, you hilt yourself completely");
+		if(player.balls > 0) outputText(", [balls] resting on her soaked, juicy ass-cheeks.");
+	}
+	else {
+		outputText("Eventually stopping, you look down to realize that she hasn't taken all of you. Going any farther would likely hurt her and ruin the fun, so you'll have to make to with partial strokes.");
+		if(player.balls > 0) outputText("  Her feet wrap around your [sack] to squeeze your [balls] affectionately, compensating quite nicely for her own shortcomings.");
+	}
+	
+	outputText("\n\nLynette is so goddamned wet! Her twat is a sopping-wet furnace around your " + cockDescript(x) + ", clenching down tightly to hold you still while she adjusts to the shape and size of hard-throbbing inseminator.  A happy, brainless smile spreads across her face in reaction to the mounting, though her hands remain stubbornly on your hips, helping to keep you from pounding away until she's ready.  While you're immobilized, you decide to avail yourself of the goblin's other features, gripping as much of one titanic tit as you possibility can.  Your hand barely covers a quarter of the swollen bosom, and your fingers sink deeply into the forgiving green flesh, eliciting a gasp of pleasure from the hairdresser when you shift your grope to place her nipple within your reach.");
+	outputText("\n\nLosing control of her abdominal muscles from the forcible, nipple-bound bliss, Lynnette's cock-arresting grip collapses, and you're free to saw away at her gushing nethers, dragging your " + cockDescript(x) + " out until only the head remains embedded within her purple-tinged interior and then, slamming it back in just as hard as your initial penetration.  Her hands slip off your [hips] and down to the sheets, where they gather up fistfuls of of the increasingly sex-stained fabric and clench.  The honey hole around you flutters uncontrollably, clenching wildly as you thrust powerfully through it, mixing your pre-cum with its own copious leavings until there's a whitish slurry leaking from the increasingly puffy entrance.");
+	outputText("\n\nThe blissed-out goblin's eyelids droop closed a second after her eyes roll back, and she calls out, \"<i>Oh fuck yessssssss, that's the spot!  Fuck me!  Fuck me!  YES!</i>\"  Her body shudders, accompanied by a screech of pleasure.  \"<i>You're making me c-c-c-cum...!</i>\"  Lynnette's wonderfully fertile thighs roll with the waves of passion she's riding, rhythmically squeezing down on your dick with inadvertent muscular contractions that feel so good they almost suck the cum straight out of your [balls].");
+	outputText("\n\nSomehow, you don't blow your load into the dick-massaging goblin twat right then and there. Compelled by an urgent, instinctive need, you continue to saw your raging-hard phallus into Lynnette's musky cunt, splattering love-juices everywhere. The seed trapped inside your [balls] churns and roils as your body does its damnedest to maximize its output");
+	if(player.balls > 0) outputText(", making your sack feel tight and your testes bloated and tender.");
+	else outputText(", making your gut clench and spasm with near-orgasmic contractions.");
+	outputText("  There's a tsunami of sperm building up inside you to the point where holding it in is actually starting to hurt you, but at the same time, your body refuses to give in and climax yet either.");
+	outputText("\n\nLynnette's huge, milk-dripping nipples erupt like the verdant volcano peaks they resemble, spraying gushes of ivory cream in lewd cascades that wash over you both, acting as a sweet, slick lubricant that allows her thighs to slip and slide over your own with ease.  She whimpers when your hands attach themselves to her leaky teats, attracted to the mounds as if by magnetism, and you squeeze down on them, pinching off the flow only to release the pressure, making her release her lactic load in huge, pulsing sprays.  She cries out, \"<i>Milk me!  Milk me like a dirty, bova slut!</i>\"  Her back lifts to press those squirting nubs more firmly between your fingers as another orgasm, smaller than the first, wracks her tender, tiny body.");
+	outputText("\n\nYour thrusts transform from powerful lunges into a frenzied jackhammering so powerful that the impact ripples along her considerable thighs and ass.  Even her squirting tits shake and jostle with the pussy-plowing impacts as you mount the goblin like a rutting beast, battering your " + cockHead(x) + " ");
+	if(player.cockArea(x) > 24) outputText("up against her slightly-yielding cervix");
+	else outputText("in as close to the cervix as you possibly can");
+	outputText(", grunting and growling as you lose yourself in the feel of her soaked, velvet tunnel.  Your focus collapses entirely down to the feel of that slick tunnel around you and how far you can push into it, how strongly you can make it climax and squeeze around you.");
+	outputText("\n\nLooking up at you in between reason-deadening orgasms, Lynnette purses her considerably puffy, cock-sucking lips to lick them.  She reaches up with both arms to grab you firmly about the neck, surprising you with her strength as she pulls you down, guiding your mouth to her moistened puckers for an eager kiss.  Her lips slip and slide across yours as you nuzzle mouth to mouth, your hips still working, and you trade saliva, sparring your tongues back and forth between your paired oral orifices.  One of her hands grabs your [hair] in a tight grip, breaking the kiss long enough for her to growl, \"<i>Cum.  Now.</i>\"");
+	
+	outputText("\n\nYour body has been ready to go off for some time now, and the words act like an irresistible trigger for your climax, causing you to lurch your " + cockDescript(x) + " ");
+	if(player.cockArea(x) <= 90) outputText("completely inside once more");
+	else outputText("as deeply inside as you can");
+	outputText(" and hold it there.");
+	if(player.cockTotal() > 1) {
+		outputText("  Your other member");
+		if(player.cockTotal() > 2) outputText("s are");
+		else outputText(" is");
+		outputText(" spasming ");
+		if(player.longestCockLength() <= 12) outputText("on the greedy green slut's belly");
+		else outputText("in the milk-stained valley between her tits, absolutely buried in squishy-soft breast");
+		outputText(", jizzing in wild spurts.  The cum mixes with all the goblin-cream into a sticky-slick morass that paints Lynnette white.");
+	}
+	outputText("  Screaming with relief, you can feel the cum rushing out from your [balls], through your middle, and down the length of your quim-buried tool, distending it as blobs of cum roll through the honeyed folds to explode against the well-endowed goblin's cervix. The touch of cum on at womb's entrance sends your lover back into another body-shaking climax; her eyes roll back, her pussy clamps down, and most importantly, her cervix dilates into a wide-open hole, sucking the cum straight into her womb as fast as you can shoot it.");
+	outputText("\n\nTiny hands latch onto your shoulders as you pour your distilled lusts the lucky woman's womb, digging deeply into your " + player.skinFurScales() + ". Lynnette's lips crash back against yours, her tongue borrowing into your mouth before she traps your lower lip, biting it painfully hard. Her eyes roll back, and her body shakes with so much pleasure that she almost looks to be having a seizure.  Your cock doesn't care about that any more than her sperm-hungry uterus does, the two organs far too busy exchanging genetic material to care what state their owners are in.");
+	//Baby's first cumflation
+	if(player.cumQ() < 1000) outputText("\n\nIn no time flat, you've finished cumming, and Lynnette's womb has swallowed every single drop.  Her luscious slit's juices run clear, leading you to believe that her gluttonous womb swallowed it all.");
+	//One liter minor cumflate
+	else if(player.cumQ() < 3000) outputText("\n\nThere's enough cum pouring out of you that Lynnette's briefly-taut tummy plumps with impregnating weight, filled just enough to give her a tiny, jiggling paunch of baby-making delight.  You empty your last few ropes into her, noting that not even a single drop escapes her luscious slit, and smile, completely satiated.");
+	//Three liter good cumflate
+	else if(player.cumQ() < 6000) outputText("\n\nThere's so much cum flowing out of your " + cockHead(x) + " that Lynnette's once-taut tummy immediately plumps up with spermy weight, filled into a jiggly paunch by your first few blasts.  As you continue to flood her womb with your slurry of baby-making goodness, her belly continues to rise up between you, eventually arcing up into a gravid dome.  Somehow, her body holds it all inside, and only a small trickle of spunk leaks out of her luscious slit as you finish.");
+	//Six liter major cumflate
+	else if(player.cumQ() < 10000) outputText("\n\nOh gods, there's so much cum! It's rushing out of you like a river, bloating the poor goblin's once-narrow abdomen into a small, pregnant-looking dome.  Each successive womb-filling makes the rounded bulge jostle cutely before bulging bigger, expanding under the weight of your immense virility until her emerald distention is covered in shiny, taut skin.  Her belly-button pops out into an outtie, and the goblin's sultry slit finally fails to contain the pressure, allowing what feels like a liter of your cum to backwash out over you.");
+	//10 liter ludicrous cumflate!
+	else outputText("\n\nOh gods!  Every torrential outflow of cum is substantial that it's literally stretching the poor goblin out as it rushes into her womb.  The first two blasts are enough to turn her once-taut middle into sperm-stuffed dome, and you just keep shooting after that, each time making her gravid tummy jiggle and swell, rounding fuller and fuller until her bulging midsection seems almost as big as her.  Her belly button long ago popped out into an outtie, and the smooth, emerald skin shines with its overstretched tightness.  Lynnette whimpers softly, and a sudden torrent of spunk rolls out around your " + cockDescript(x) + ".  It seems she just couldn't hold it all in, and you aren't even done cumming yet!  You resume sliding in and out as you jizz, washing your soon-to-be-pregnant fucktoy's tunnel with generous waves of spooge until you finally exhaust yourself.");
+	outputText("\n\nLynnette holds you tight until she's absolutely sure you've spent every drop");
+	if(player.cumQ() >= 3000) {
+		outputText(", even if ");
+		if(player.cumQ() >= 10000) outputText("most");
+		else outputText("some");
+		outputText(" of it is on the bed at this point");
+	}
+	outputText(".  Only then does she release you, allowing you to slide out");
+	if(player.hasKnot(x)) outputText(" with a wet-sounding 'pop'.  Your knot does a terrific job of gaping her lips during its exit, and you cannot help but marvel at how well you've broken this bitch in.  A shame she'll probably tighten up again in short order");
+	else outputText(" with a gush of girlspunk to chase you");
+	outputText(".  She groans, ");
+	//BELOW ONE LITER!
+	if(player.cumQ() < 1000) {
+		outputText("\"<i>[name], that was fun, but you barely even came!  How am I supposed to birth a dozen daughters at once if you barely coat the surface of my womb!?</i>\"  She shudders.  \"<i>Go on. I've got to find some drugs to fix this, else I won't get a decent brood out of this term.</i>\"\n\nYou leave her feeling a little underappreciated.  Maybe you could find some cum-boosting supplements out there?  Still, you are owed a haircut...");
+		lynnetteApproval(-2);
+	}
+	//"GOOD"
+	else if(player.cumQ() <= 10000) {
+		if(flags[LYNNETTE_ANNOUNCED_APPROVAL] == 1) outputText("\"<i>Wow, [name].  You cum like a minotaur... and without drugging me out of my mind to boot!  Gods, I can feel the little swimmers hunting down my eggs already.</i>\"  She giggles and retrieves a vial, downing it in a single gulp.  \"<i>I better make sure there's enough eggs for them all, huh?</i>\"\n\nYou leave with a happy smile. It seems Lynnette approves of you as a mate.");
+		//"GOOD + LYNNETTE FAVORITE"
+		else outputText("\"<i>Mmmm, [name], I love the way you pack me full.</i>\"  She tosses back a vial of fertility-boosting chemicals and sighs.  \"<i>Do me a favor and come back soon.  I'd rather be pouring out swarms of your babies than a slurry of weakling sluts.</i>\"");
+		lynnetteApproval(10);
+	}
+	//"UBUR"
+	else {
+		if(flags[LYNNETTE_ANNOUNCED_APPROVAL] == 0) outputText("\"<i>Ohhh... oh gods....  W-wha?  How...?  I'm so fucking full, [name]!  I can feel it, like I'm pregnant and about to pop already, and I haven't even given my babies a chance to fertilize!</i>\"  She gathers some of your leaking spooge to smear across the titanic dome with one hand and a bottle of fertility enhancers with the other.  \"<i>Go on baby, I'm just going to soak in it for a little while and make sure I get as many girls out of this as I can.</i>\"  Lynnette knocks back the vial and drops it at her side, focusing entirely on wallowing in your cum.\n\nYou swagger out into the main room with a happy smile, noting the envious looks you get from her daughters when they try to offer you 'services'.");
+		//"UBUR + LYNNETTE FAVORITE"
+		else outputText("\"<i>Fuck me, honey! I... you're the only one that can fill me like this, you know?  Short of a machine, I mean.</i>\"  Lynnette colors a deep green as she struggles to reach for a bottle of a fertility-enhancing chemical, half-pinned by her own cum-stuffed weight.  You easily hand it to her with a smile, and she downs it before gazing gratefully your way.  \"<i>I fucking love just lying here, fucking into oblivion, lying in a lake of my stud's lusts, wallowing in it until I pass out from pleasure.</i>\"\n\nShe sounds almost lovey-dovey in her declaration and must realize it, because her tone changes when she says, \"<i>Just make sure you come back in a few days to give me another proper fucking.  You'll do it if you know what's good for your dick!</i>\"\n\nYou silence her with a kiss that leaves her swooning and stroll out, dressing on the way.  Lynnette's satiated moans seem to haunt you the entire time you remain in the salon.");
+		lynnetteApproval(25);
+	}
+	flags[LYNNETTE_FUCK_COUNTER]++;
+	stats(0,0,0,0,0,0,-100,0);
+	flags[LYNNETTE_CARRYING_COUNT] = 3 + rand(3);
+	if(player.cumQ() >= 1000) flags[LYNNETTE_CARRYING_COUNT] += 1 + rand(3);
+	if(player.cumQ() >= 2000) flags[LYNNETTE_CARRYING_COUNT] += 1 + rand(3);
+	if(player.cumQ() >= 3000) flags[LYNNETTE_CARRYING_COUNT] += 2 + rand(3);
+	if(player.cumQ() >= 4000) flags[LYNNETTE_CARRYING_COUNT] += 2 + rand(3);
+	if(player.cumQ() >= 6000) flags[LYNNETTE_CARRYING_COUNT] += 2 + rand(3);
+	if(player.cumQ() >= 10000) flags[LYNNETTE_CARRYING_COUNT] += 2 + rand(3);
+	
+	flags[LYNNETTE_PREGNANCY_CYCLE] = 0;
+	salonPurchaseMenu();
+}
+function lynnetteApproval(arg:int = 0):Number {
+	if(arg != 0) flags[LYNNETTE_APPROVAL] += arg;
+	if(flags[LYNNETTE_APPROVAL] < -100) flags[LYNNETTE_APPROVAL] = -100;
+	else if(flags[LYNNETTE_APPROVAL] > 100) flags[LYNNETTE_APPROVAL] = 100;
+	return flags[LYNNETTE_APPROVAL];
 }

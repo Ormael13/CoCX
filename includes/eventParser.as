@@ -1780,6 +1780,13 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(model.time.hours > 23) {
 			model.time.hours = 0;
 			model.time.days++;
+			if(flags[LYNNETTE_CARRYING_COUNT] == 0 || flags[LYNNETTE_PREGNANCY_CYCLE] != 4)
+			{
+				flags[LYNNETTE_PREGNANCY_CYCLE]++;
+			}
+			if(flags[LYNNETTE_PREGNANCY_CYCLE] == 7) {
+				flags[LYNNETTE_PREGNANCY_CYCLE] = 0;				
+			}
 			if(flags[KELLY_REWARD_COOLDOWN] > 0 && model.time.days % 3 == 0) flags[KELLY_REWARD_COOLDOWN] = 0;
 			if(flags[HELSPAWN_GROWUP_COUNTER] > 0) flags[HELSPAWN_GROWUP_COUNTER]++;
 			if(arianFollower() && flags[ARIAN_VAGINA] > 0) flags[ARIAN_EGG_EVENT]++;

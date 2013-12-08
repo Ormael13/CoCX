@@ -2516,6 +2516,10 @@ public function displayStats(e:MouseEvent = null):void
 		outputText("<b>Lottie's Encouragement: </b>" + lottieMorale() + " (higher is better)\n", false);
 		outputText("<b>Lottie's Figure: </b>" + lottieTone() + " (higher is better)\n", false);
 	}
+	if(lynnetteApproval() != 0) {
+		outputText("<b>Lynnette's Approval: </b>" + lynnetteApproval() + "\n");
+		outputText("<b>Lynnette Children: </b>" + flags[LYNNETTE_BABY_COUNT] + "\n");
+	}
 	//Mino sons
 	if(flags[UNKNOWN_FLAG_NUMBER_00326] > 0) {
 		outputText("<b>Number of Adult Minotaur Offspring: </b>" + flags[UNKNOWN_FLAG_NUMBER_00326] + "\n", false);

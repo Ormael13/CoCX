@@ -313,8 +313,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.8.3e1";
-			version = "v0.8.3e1 (<b>Nieve Cleanup</b>)";
+			ver = "0.8.3e2";
+			version = "v0.8.3e2 (<b>Pregnant Lynnette</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
