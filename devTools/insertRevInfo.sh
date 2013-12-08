@@ -9,8 +9,10 @@
 echo Reverting any local changes to CoC.as file
 git checkout -- ./classes/classes/CoC.as
 
+export GIT_REV=`git rev-parse  --short HEAD`
+
 echo Done. Splicing in release info
-/bin/sed -i -r "s/^([\s\\t]+version\s?=\s?\".+)\";/\1\\\\nALPHA RELEASE Compiled: $(date -u) UTC by buildbot\"/" ./classes/classes/CoC.as
+/bin/sed -i -r "s/^([\s\\t]+version\s?=\s?\".+)\";/\1\\\\nALPHA RELEASE Rev: ${GIT_REV}\\\\n Compiled by buildbot\"/" ./classes/classes/CoC.as
 
 #cat ./classes/classes/CoC.as
 echo 
