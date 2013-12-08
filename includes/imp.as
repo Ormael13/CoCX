@@ -584,6 +584,8 @@ public function impGangabangaEXPLOSIONS():void {
 	monster.createCock(25,2.5);
 	monster.cocks[2].cockType = CockTypesEnum.DOG;
 	monster.cocks[2].knotMultiplier = 2;
+	monster.balls = 2;
+	monster.ballSize = 3;
 	monster.a = "a mob of imps";
 	monster.short = "imp gang";
 	monster.capitalA = "gang of imps";

@@ -828,7 +828,7 @@ public function exploreMountain():void {
 			gatsSpectacularRouter();
 			return;
 		}
-		if(rand(6) == 0 && flags[JACK_FROST_YEAR] < date.fullYear) {
+		if(rand(6) == 0 && flags[JACK_FROST_YEAR] < date.fullYear && silly()) {
 			meetJackFrostInTheMountains();
 			return;
 		}
@@ -1474,7 +1474,7 @@ public function explorePlains():void {
 		candyCaneTrapDiscovery();
 		return;
 	}
-	if(isHolidays() && date.fullYear > flags[POLAR_PETE_YEAR_MET] && rand(4) == 0) {
+	if(isHolidays() && date.fullYear > flags[POLAR_PETE_YEAR_MET] && rand(4) == 0 && silly()) {
 		polarPete();
 		flags[POLAR_PETE_YEAR_MET] = date.fullYear;
 		return;

@@ -3746,12 +3746,12 @@ public function minotaurBlood():void {
 			player.addStatusValue("rut",2,5);
 			outputText("\n\nYour " + cockDescript(0) + " throbs and dribbles as your desire to mate intensifies.  You know that <b>you've sunken deeper into rut</b>, but all that really matters is unloading into a cum-hungry cunt.", false);
 			player.addStatusValue("rut",3,48);
-			stats(0,0,0,0,5,0,0,0);
+			stats(0,0,0,0,5,0,0,0,false,true);
 		}
 		else {
 			player.createStatusAffect("rut",150,5,100,0);
 			outputText("\n\nYou stand up a bit straighter and look around, sniffing the air and searching for a mate.  Wait, what!?  It's hard to shake the thought from your head - you really could use a nice fertile hole to impregnate.  You slap your forehead and realize <b>you've gone into rut</b>!", false);
-			stats(0,0,0,0,5,0,0,0);
+			stats(0,0,0,0,5,0,0,0,false,true);
 		}
 	}
 	//Anti-masturbation status
@@ -4252,13 +4252,13 @@ public function equinum():void {
 				player.statusAffects[temp].value1 += 5;
 				player.statusAffects[temp].value2 += 5;
 				player.statusAffects[temp].value3 += 48;
-				stats(0,0,0,0,5,0,0,0);
+				stats(0,0,0,0,5,0,0,0,false,true);
 			}
 			//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
 			if(player.hasStatusAffect("heat") < 0) {
 				outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as <b>you realize you have gone into heat!</b>", false);
 				player.createStatusAffect("heat", 10, 15, 48, 0);
-				stats(0,0,0,0,15,0,0,0);
+				stats(0,0,0,0,15,0,0,0,false,true);
 			}
 			changes++;
 		}
@@ -5114,13 +5114,13 @@ public function caninePepper(type:Number = 0):void {
 			player.statusAffects[temp].value1 += 5;
 			player.statusAffects[temp].value2 += 5;
 			player.statusAffects[temp].value3 += 48;
-			stats(0,0,0,0,5,0,0,0);
+			stats(0,0,0,0,5,0,0,0,false,true);
 		}
 		//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
 		if(player.hasStatusAffect("heat") < 0) {
 			outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as you realize you have gone into heat!", false);
 			player.createStatusAffect("heat", 10, 15, 72, 0);
-			stats(0,0,0,0,15,0,0,0);
+			stats(0,0,0,0,15,0,0,0,false,true);
 		}
 		changes++;
 	}
@@ -7355,13 +7355,13 @@ public function lustDraft(fuck:Boolean = false):void {
 					player.statusAffects[temp].value1 += 10;
 					player.statusAffects[temp].value2 += 10;
 					player.statusAffects[temp].value3 += 96;
-					stats(0,0,0,0,10,0,0,0);
+					stats(0,0,0,0,10,0,0,0,false,true);
 				}
 				//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
 				if(player.hasStatusAffect("heat") < 0) {
 					outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as you realize you have gone into heat!\n", false);
 					player.createStatusAffect("heat", 20, 20, 96, 0);
-					stats(0,0,0,0,20,0,0,0);
+					stats(0,0,0,0,20,0,0,0,false,true);
 				}
 			}
 		}
@@ -7377,11 +7377,11 @@ public function lustDraft(fuck:Boolean = false):void {
 				player.addStatusValue("rut",2,5);
 				player.addStatusValue("rut",3,48);
 				outputText("\n\nYour " + cockDescript(0) + " throbs and dribbles as your desire to mate intensifies.  You know that <b>you've sunken deeper into rut</b>, but all that really matters is unloading into a cum-hungry cunt.", false);
-				stats(0,0,0,0,5,0,0,0);
+				stats(0,0,0,0,5,0,0,0,false,true);
 			}
 			else {
 				player.createStatusAffect("rut",150,5,100,0);
-				stats(0,0,0,0,5,0,0,0);
+				stats(0,0,0,0,5,0,0,0,false,true);
 				outputText("\n\nYou stand up a bit straighter and look around, sniffing the air and searching for a mate.  Wait, what!?  It's hard to shake the thought from your head - you really could use a nice fertile hole to impregnate.  You slap your forehead and realize <b>you've gone into rut</b>!", false);
 			}
 		}
@@ -8193,13 +8193,13 @@ public function coal():void {
 				player.statusAffects[temp].value1 += 10;
 				player.statusAffects[temp].value2 += 10;
 				player.statusAffects[temp].value3 += 96;
-				stats(0,0,0,0,10,0,0,0);
+				stats(0,0,0,0,10,0,0,0,false,true);
 			}
 			//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
 			if(player.hasStatusAffect("heat") < 0) {
 				outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as you realize you have gone into heat!\n", false);
 				player.createStatusAffect("heat", 20, 20, 96, 0);
-				stats(0,0,0,0,20,0,0,0);
+				stats(0,0,0,0,20,0,0,0,false,true);
 			}
 			changes++;
 		}
@@ -8216,12 +8216,12 @@ public function coal():void {
 			player.addStatusValue("rut",2,5);
 			player.addStatusValue("rut",3,48);
 			outputText("\n\nYour " + cockDescript(0) + " throbs and dribbles as your desire to mate intensifies.  You know that <b>you've sunken deeper into rut</b>, but all that really matters is unloading into a cum-hungry cunt.", false);
-			stats(0,0,0,0,5,0,0,0);
+			stats(0,0,0,0,5,0,0,0,false,true);
 		}
 		else {
 			player.createStatusAffect("rut",150,5,100,0);
 			outputText("\n\nYou stand up a bit straighter and look around, sniffing the air and searching for a mate.  Wait, what!?  It's hard to shake the thought from your head - you really could use a nice fertile hole to impregnate.  You slap your forehead and realize <b>you've gone into rut</b>!", false);
-			stats(0,0,0,0,5,0,0,0);
+			stats(0,0,0,0,5,0,0,0,false,true);
 		}
 		changes++;
 	}
@@ -8342,7 +8342,7 @@ public function catTransformation():void {
 			else outputText("fill ", false);
 			outputText(" your mind.  Lithe cat-boys with their perfect, spine-covered cocks line up behind you, and you bend over to present your needy pussy to them.  You tremble with the desire to feel the exotic texture of their soft barbs rubbing your inner walls, smearing your " + vaginaDescript(0) + " with their cum as you're impregnated.  Shivering, you recover from the fantasy and pull your fingers from your aroused sex.  <b>It would seem you've gone into heat!</b>", false);
 			player.createStatusAffect("heat", 10, 15, 48, 0);
-			stats(0,0,0,0,15,0,15,0);
+			stats(0,0,0,0,15,0,15,0,false,true);
 
 		}
 		//Intensify cat heat
@@ -8353,7 +8353,7 @@ public function catTransformation():void {
 			player.statusAffects[temp].value1 += 5;
 			player.statusAffects[temp].value2 += 5;
 			player.statusAffects[temp].value3 += 48;
-			stats(0,0,0,0,5,0,5,0);
+			stats(0,0,0,0,5,0,5,0,false,true);
 
 		}
 		changes++;
@@ -10993,13 +10993,13 @@ public function foxTF(enhanced:Boolean = false):void {
 			player.statusAffects[temp].value1 += 5;
 			player.statusAffects[temp].value2 += 5;
 			player.statusAffects[temp].value3 += 48;
-			stats(0,0,0,0,5,0,0,0);
+			stats(0,0,0,0,5,0,0,0,false,true);
 		}
 		//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
 		if(player.hasStatusAffect("heat") < 0) {
 			outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as <b>you realize you have gone into heat!</b>", false);
 			player.createStatusAffect("heat", 10, 15, 48, 0);
-			stats(0,0,0,0,15,0,0,0);
+			stats(0,0,0,0,15,0,0,0,false,true);
 		}
 		changes++;
 	}
@@ -11746,7 +11746,7 @@ public function lustyMaidensArmor():void {
 	}
 	//{Too small titties}  
 	if(player.biggestTitSize() < 4) {
-		outputText("You slide the bikini top over your chest, shivering when the cold chains catch on your nipples, stiffening them nicely. The material nicely accentuates your chest, but there's a definite problem.  You're [chest] aren't big enough!  Sure, they look nice done up in glittering silver and gold trim.  If only the metal wasn't hanging loosely around your underbust, flopping around whenever you move.  It doesn't even look that sexy on you!  You'll need a bigger chest to truly make use of this armor.  For now, you switch back to your old equipment.");
+		outputText("You slide the bikini top over your chest, shivering when the cold chains catch on your nipples, stiffening them nicely. The material nicely accentuates your chest, but there's a definite problem.  Your [chest] aren't big enough!  Sure, they look nice done up in glittering silver and gold trim.  If only the metal wasn't hanging loosely around your underbust, flopping around whenever you move.  It doesn't even look that sexy on you!  You'll need a bigger chest to truly make use of this armor.  For now, you switch back to your old equipment.");
 		if(debug) {}
 		else {
 			itemSwapping = true;
@@ -12440,13 +12440,13 @@ public function mouseCocoa():void {
 			player.statusAffects[temp].value1 += 5;
 			player.statusAffects[temp].value2 += 5;
 			player.statusAffects[temp].value3 += 48;
-			stats(0,0,0,0,5,0,0,0);
+			stats(0,0,0,0,5,0,0,0,false,true);
 		}
 		//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
 		if(player.hasStatusAffect("heat") < 0) {
 			outputText("\n\nYour insides feel... roomy.  Accomodating, even.  You could probably carry a whole litter of little [name]s right now.  Filled with a sudden flush of desire, you look around furtively for any fertile males.  With a shake of your head, you try to clear your thoughts, but daydreams of being stuffed with seed creep right back in - it looks like your body is intent on probing the limits of your new fertility.  <b>You're in heat, and pregnable in several senses of the word!</b>", false);
 			player.createStatusAffect("heat", 10, 15, 48, 0);
-			stats(0,0,0,0,15,0,0,0);
+			stats(0,0,0,0,15,0,0,0,false,true);
 			player.fertility++;
 		}
 		changes++;

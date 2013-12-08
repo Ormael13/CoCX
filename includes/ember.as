@@ -1592,11 +1592,11 @@ Miss: Unfortunately, you lose your sense of depth as you whirl, and the tip swin
 				player.addStatusValue("rut",1,100);
 				player.addStatusValue("rut",2,5);
 				player.addStatusValue("rut",3,48);
-				stats(0,0,0,0,5,0,0,0);
+				stats(0,0,0,0,5,0,0,0,false,true);
 			}
 			else {
 				player.createStatusAffect("rut",150,5,100,0);
-				stats(0,0,0,0,5,0,0,0);
+				stats(0,0,0,0,5,0,0,0,false,true);
 			}
 			changes++;
 		}
@@ -1608,12 +1608,12 @@ Miss: Unfortunately, you lose your sense of depth as you whirl, and the tip swin
 				player.statusAffects[temp].value1 += 5;
 				player.statusAffects[temp].value2 += 5;
 				player.statusAffects[temp].value3 += 48;
-				stats(0,0,0,0,5,0,0,0);
+				stats(0,0,0,0,5,0,0,0,false,true);
 			}
 			//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
 			if(player.hasStatusAffect("heat") < 0) {
 				player.createStatusAffect("heat", 10, 15, 48, 0);
-				stats(0,0,0,0,15,0,0,0);
+				stats(0,0,0,0,15,0,0,0,false,true);
 			}
 			changes++;
 		}
@@ -1857,11 +1857,11 @@ public function getMilkFromEmber():void {
 					player.addStatusValue("rut",1,100);
 					player.addStatusValue("rut",2,5);
 					player.addStatusValue("rut",3,48);
-					stats(0,0,0,0,5,0,0,0);
+					stats(0,0,0,0,5,0,0,0,false,true);
 				}
 				else {
 					player.createStatusAffect("rut",150,5,100,0);
-					stats(0,0,0,0,5,0,0,0);
+					stats(0,0,0,0,5,0,0,0,false,true);
 				}
 			}
 			else {
@@ -1872,12 +1872,12 @@ public function getMilkFromEmber():void {
 					player.statusAffects[temp].value1 += 5;
 					player.statusAffects[temp].value2 += 5;
 					player.statusAffects[temp].value3 += 48;
-					stats(0,0,0,0,5,0,0,0);
+					stats(0,0,0,0,5,0,0,0,false,true);
 				}
 				//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
 				if(player.hasStatusAffect("heat") < 0) {
 					player.createStatusAffect("heat", 10, 15, 48, 0);
-					stats(0,0,0,0,15,0,0,0);
+					stats(0,0,0,0,15,0,0,0,false,true);
 				}
 			}
 			outputText("!</b>");
@@ -1939,11 +1939,11 @@ public function getMilkFromEmber():void {
 					player.addStatusValue("rut",1,100);
 					player.addStatusValue("rut",2,5);
 					player.addStatusValue("rut",3,48);
-					stats(0,0,0,0,5,0,0,0);
+					stats(0,0,0,0,5,0,0,0,false,true);
 				}
 				else {
 					player.createStatusAffect("rut",150,5,100,0);
-					stats(0,0,0,0,5,0,0,0);
+					stats(0,0,0,0,5,0,0,0,false,true);
 				}
 			}
 			else {
@@ -1954,12 +1954,12 @@ public function getMilkFromEmber():void {
 					player.statusAffects[temp].value1 += 5;
 					player.statusAffects[temp].value2 += 5;
 					player.statusAffects[temp].value3 += 48;
-					stats(0,0,0,0,5,0,0,0);
+					stats(0,0,0,0,5,0,0,0,false,true);
 				}
 				//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
 				if(player.hasStatusAffect("heat") < 0) {
 					player.createStatusAffect("heat", 10, 15, 48, 0);
-					stats(0,0,0,0,15,0,0,0);
+					stats(0,0,0,0,15,0,0,0,false,true);
 				}
 			}
 			outputText("!</b>");
@@ -2059,11 +2059,11 @@ public function getMilkFromEmber():void {
 					player.addStatusValue("rut",1,100);
 					player.addStatusValue("rut",2,5);
 					player.addStatusValue("rut",3,48);
-					stats(0,0,0,0,5,0,0,0);
+					stats(0,0,0,0,5,0,0,0,false,true);
 				}
 				else {
 					player.createStatusAffect("rut",150,5,100,0);
-					stats(0,0,0,0,5,0,0,0);
+					stats(0,0,0,0,5,0,0,0,false,true);
 				}
 			}
 			else {
@@ -2074,12 +2074,12 @@ public function getMilkFromEmber():void {
 					player.statusAffects[temp].value1 += 5;
 					player.statusAffects[temp].value2 += 5;
 					player.statusAffects[temp].value3 += 48;
-					stats(0,0,0,0,5,0,0,0);
+					stats(0,0,0,0,5,0,0,0,false,true);
 				}
 				//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
 				if(player.hasStatusAffect("heat") < 0) {
 					player.createStatusAffect("heat", 10, 15, 48, 0);
-					stats(0,0,0,0,15,0,0,0);
+					stats(0,0,0,0,15,0,0,0,false,true);
 				}
 			}
 			outputText("!</b>");

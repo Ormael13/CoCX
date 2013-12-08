@@ -489,6 +489,9 @@ public function heliaFollowerMenu(display:Boolean = true):void {
 		if(flags[HEL_PREGNANCY_INCUBATION] == 0) addButton(5,"Spar",sparWithHeliaFirebuttsAreHot);
 		else outputText("\n\n<b>Helia will not spar or box while pregnant.</b>");
 		if(flags[HEL_PREGNANCY_INCUBATION] == 0) addButton(6,"Box",boxWithInCampHel);
+		if(flags[HEL_LOVE] == 1 || flags[HEL_LOVE] == -1) {
+			if(player.hasCock() && player.cockThatFits(heliaCapacity()) >= 0 && player.lust >= 33 && !helPregnant() && flags[HELSPAWN_AGE] == 0) addButton(7,"Have A Kid",haveAKid);
+		}
 		addButton(9,"Back",campLoversMenu)
 	}
 	else if(flags[HEL_FOLLOWER_LEVEL] == 1) {

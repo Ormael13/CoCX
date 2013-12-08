@@ -2516,6 +2516,10 @@ public function displayStats(e:MouseEvent = null):void
 		outputText("<b>Lottie's Encouragement: </b>" + lottieMorale() + " (higher is better)\n", false);
 		outputText("<b>Lottie's Figure: </b>" + lottieTone() + " (higher is better)\n", false);
 	}
+	if(lynnetteApproval() != 0) {
+		outputText("<b>Lynnette's Approval: </b>" + lynnetteApproval() + "\n");
+		outputText("<b>Lynnette Children: </b>" + flags[LYNNETTE_BABY_COUNT] + "\n");
+	}
 	//Mino sons
 	if(flags[UNKNOWN_FLAG_NUMBER_00326] > 0) {
 		outputText("<b>Number of Adult Minotaur Offspring: </b>" + flags[UNKNOWN_FLAG_NUMBER_00326] + "\n", false);
@@ -2597,7 +2601,7 @@ public function lustPercent():Number {
 
 //TODO stats function with dynamic arguments so you don't have to specify all those zeros each time.
 //Modify stats
-public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:Number, sens:Number, lust2:Number, corr:Number, resisted:Boolean = true):void
+public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:Number, sens:Number, lust2:Number, corr:Number, resisted:Boolean = true, noBimbo:Boolean = false):void
 {
 	//Easy mode cuts lust gains!
 	if(flags[EASY_MODE_ENABLE_FLAG] == 1 && lust2 > 0 && resisted) lust2 /= 2;
@@ -2618,13 +2622,16 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	}
 	//MOD CHANGES FOR PERKS
 	//Bimbos learn slower
-	if(player.hasPerk("Futa Faculties") >= 0 || player.hasPerk("Bimbo Brains") >= 0  || player.hasPerk("Bro Brains") >= 0) {
-		if(intel > 0) intel /= 2;
-		if(intel < 0) intel *= 2;
-	}
-	if(player.hasPerk("Futa Form") >= 0 || player.hasPerk("Bimbo Body") >= 0  || player.hasPerk("Bro Body") >= 0) {
-		if(libi > 0) libi *= 2;
-		if(libi < 0) libi /= 2;
+	if(!noBimbo)
+	{
+		if(player.hasPerk("Futa Faculties") >= 0 || player.hasPerk("Bimbo Brains") >= 0  || player.hasPerk("Bro Brains") >= 0) {
+			if(intel > 0) intel /= 2;
+			if(intel < 0) intel *= 2;
+		}
+		if(player.hasPerk("Futa Form") >= 0 || player.hasPerk("Bimbo Body") >= 0  || player.hasPerk("Bro Body") >= 0) {
+			if(libi > 0) libi *= 2;
+			if(libi < 0) libi /= 2;
+		}
 	}
 	//If orgasm, set hours since cum to 0.
 	if(lust2 <= -100) player.hoursSinceCum = 0;
