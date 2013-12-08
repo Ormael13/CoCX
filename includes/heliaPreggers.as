@@ -1396,7 +1396,7 @@ public function helSpawnAI():void {
 public function helspawnTwinStrikes():void {
 	//if Bowmander
 	if(flags[HELSPAWN_WEAPON] == "bow") outputText(flags[HELSPAWN_NAME] + " leaps back out of your reach and nocks a pair of blunted arrows, drawing them back together and loosing them at once!\n");
-	else outputText(flags[HELSPAWN_NAME] + " lunges at you, scimitar cleavig through the air toward your throat!\n");
+	else outputText(flags[HELSPAWN_NAME] + " lunges at you, scimitar cleaving through the air toward your throat!\n");
 	monster.createStatusAffect("attacks",0,0,0,0);
 	eAttack();
 }
