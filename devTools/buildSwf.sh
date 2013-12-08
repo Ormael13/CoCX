@@ -37,9 +37,9 @@ classes/classes/CoC.as
 -package \
 -target apk \
 -storetype pkcs12 \
--keystore ./cert/CorruptionofChampionsAIR.p12 \
+-keystore ./devTools/cert/CorruptionofChampionsAIR.p12 \
 -storepass testpassword \
 ../binRepo/CoC-${COC_VERSION}.apk \
 application.xml \
 -C ../binRepo . \
--C icons/android .
+-C ./devTools/icons/android .
