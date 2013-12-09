@@ -522,12 +522,45 @@ package classes.content
 		/**
 		 * Available Accupucture Types
 		 */
+		// TODO: Actually implement the perk bonuses throughout the codebase.
 		public static const NEEDLEWORK_UNDO:int = -1;
 		public static const NEEDLEWORK_SPEED:int = 0;
 		public static const NEEDLEWORK_LUST:int = 1;
 		public static const NEEDLEWORK_DEFENSE:int = 2;
 		public static const NEEDLEWORK_MAGIC:int = 3;
 		public static const NEEDLEWORK_ATTACK:int = 4;
+		
+		public static const NEEDLEWORK_SPEED_PERK_NAME:String = "Chi Reflow - Speed";
+		public static const NEEDLEWORK_SPEED_PERK_DESC:String = "Uma's Accupuncture Needlework has gifted you with the 'Chi Reflow - Speed' perk. As a result your strength is capped but speed reductions are halved.";
+		public static const NEEDLEWORK_SPEED_PERK_SHORT_DESC:String = "Speed reductions are halved but caps strength";
+		public static const NEEDLEWORK_SPEED_STRENGTH_CAP:int = 60;
+		public static const NEEDLEWORK_SPEED_SPEED_MULTI:Number = 0.5;
+		
+		public static const NEEDLEWORK_LUST_PERK_NAME:String = "Chi Reflow - Lust";
+		public static const NEEDLEWORK_LUST_PERK_DESC:String = "Uma's Accupuncture Needlework has gifted you with the 'Chi Reflow - Lust' perk. As a result your Lust resistance and Tease attack are enhanced, but Libido and Sensetivity gains are increased.";
+		public static const NEEDLEWORK_LUST_PERK_SHORT_DESC:String = "Lust resistance and Tease are enhanced, but Libido and Sensetivity gains increased.";
+		public static const NEEDLEWORK_LUST_LUST_RESIST:int = 10;
+		public static const NEEDLEWORK_LUST_TEASE_MULTI:Number = 1.1;
+		public static const NEEDLEWORK_LUST_LIBSENSE_MULTI:Number = 1.1;
+		
+		public static const NEEDLEWORK_DEFENSE_PERK_NAME:String = "Chi Reflow - Defense";
+		public static const NEEDLEWORK_DEFENSE_PERK_DESC:String = "Uma's Accupuncture Needlework has gifted you with the 'Chi Reflow - Defense' perk. As a result your body has gained passive damage resistance and extra health, but speed is capped.";
+		public static const NEEDLEWORK_DEFENSE_PERK_SHORT_DESC:String = "Passive damage resistance, but caps speed";
+		public static const NEEDLEWORK_DEFENSE_DEFENSE_MULTI:Number = 1.1;
+		public static const NEEDLEWORK_DEFENSE_EXTRA_HP:int = 50;
+		public static const NEEDLEWORK_DEFENSE_SPEED_CAP:int = 60;
+		
+		public static const NEEDLEWORK_MAGIC_PERK_NAME:String = "Chi Reflow - Magic";
+		public static const NEEDLEWORK_MAGIC_PERK_DESC:String = "Uma's Accupuncture Needlework has gifted you with the 'Chi Reflow - Magic' perk. As a result your spells are now more powerful, but regular attacks are weaker.";
+		public static const NEEDLEWORK_MAGIC_PERK_SHORT_DESC:String = "Magic attacks boosted, but regular attacks are weaker.";
+		public static const NEEDLEWORK_MAGIC_SPELL_MULTI:Number = 1.25;
+		public static const NEEDLEWORK_MAGIC_REGULAR_MULTI:Number = 0.75;
+		
+		public static const NEEDLEWORK_ATTACK_PERK_NAME:String = "Chi Reflow - Attack";
+		public static const NEEDLEWORK_ATTACK_PERK_DESC:String = "Uma's Accupuncture Needlework has fited you with the 'Chi Reflow - Attack' perk. As a result your regular attacks are more powerful, but your damage reduction is decreased.";
+		public static const NEEDLEWORK_ATTACK_PERK_SHORT_DESC:String = "Regular attacks boosted, but damage resistance decreased.";
+		public static const NEEDLEWORK_ATTACK_REGULAR_MULTI:Number = 1.25;
+		public static const NEEDLEWORK_ATTACK_DEFENSE_MULTI:Number = 0.9;
 		
 		public function needleworkString(needleworkType:int):String
 		{
@@ -572,12 +605,79 @@ package classes.content
 			return baseCost;
 		}
 		
+		public function hasNeeleworkPerk():Boolean
+		{
+			if (this.getNeedleworkPerkName() != "")
+			{
+				return true;
+			}
+			
+			return false;
+		}
+		
+		public function getNeedleworkPerkName():String
+		{
+			if (player.hasPerk(NEEDLEWORK_SPEED_PERK_NAME))
+			{
+				return NEEDLEWORK_SPEED_PERK_NAME;
+			}
+			else if (player.hasPerk(NEEDLEWORK_LUST_PERK_NAME))
+			{
+				return NEEDLEWORK_LUST_PERK_NAME;
+			}
+			else if (player.hasPerk(NEEDLEWORK_DEFENSE_PERK_NAME))
+			{
+				return NEEDLEWORK_DEFENSE_PERK_NAME;
+			}
+			else if (player.hasPerk(NEEDLEWORK_MAGIC_PERK_NAME))
+			{
+				return NEEDLEWORK_MAGIC_PERK_NAME;
+			}
+			else if (player.hasPerk(NEEDLEWORK_ATTACK_PERK_NAME))
+			{
+				return NEEDLEWORK_ATTACK_PERK_NAME;
+			}
+			else
+			{
+				return "";
+			}
+		}
+		
 		/**
 		 * Apply a Needlework perk to the player
 		 */
 		public function applyNeedlework(selectedSession:int):void
 		{
-			
+			if (selectedSession == NEEDLEWORK_UNDO)
+			{
+				player.removePerk(this.getNeedleworkPerkName());
+				flags[kFLAGS.UMA_TIMES_ACCUPUNCTURE_UNDO]++;
+			}
+			else if (selectedSession == NEEDLEWORK_SPEED)
+			{
+				player.createPerk(NEEDLEWORK_SPEED_PERK_NAME, 0, 0, 0, 0, NEEDLEWORK_SPEED_PERK_SHORT_DESC);
+				outputText("<b>" + NEEDLEWORK_SPEED_PERK_DESC + "</b>");
+			}
+			else if (selectedSession == NEEDLEWORK_LUST)
+			{
+				player.createPerk(NEEDLEWORK_LUST_PERK_NAME, 0, 0, 0, 0, NEEDLEWORK_LUST_PERK_SHORT_DESC);
+				outputText("<b>" + NEEDLEWORK_LUST_PERK_DESC + "</b>");
+			}
+			else if (selectedSession == NEEDLEWORK_DEFENSE)
+			{
+				player.createPerk(NEEDLEWORK_DEFENSE_PERK_NAME, 0, 0, 0, 0, NEEDLEWORK_DEFENSE_PERK_SHORT_DESC);
+				outputText("<b>" + NEEDLEWORK_DEFENSE_PERK_DESC + "</b>");
+			}
+			else if (selectedSession == NEEDLEWORK_MAGIC)
+			{
+				player.createPerk(NEEDLEWORK_MAGIC_PERK_NAME, 0, 0, 0, 0, NEEDLEWORK_MAGIC_PERK_SHORT_DESC);
+				outputText("<b>" + NEEDLEWORK_MAGIC_PERK_DESC + "</b>");
+			}
+			else if (selectedSession == NEEDLEWORK_ATTACK)
+			{
+				player.createPerk(NEEDLEWORK_ATTACK_PERK_NAME, 0, 0, 0, 0, NEEDLEWORK_ATTACK_PERK_SHORT_DESC);
+				outputText("<b>" + NEEDLEWORK_ATTACK_PERK_DESC + "</b>");
+			}
 		}
 		 
 		public function accupunctureMenu():void
@@ -606,10 +706,20 @@ package classes.content
 
 			outputText("“<i>Finally, I can use my needles to rearrange your chi flow and optimise your offense; your blows will be far more powerful, but your natural defense will be impaired, making you more vulnerable to strikes by the enemy.</i>”\n\n");
 
-			outputText("The mare tries to remember any other types of needlework that might be useful to you... but ultimately, she can’t think of anything else.  “<i>That’s all you might use, I think...</i>”  She then pauses.  “<i>As for a price, given you’re my little Loppe’s special someone, shall we say 125 gems?  That’s half-price of what I’d usually charge.</i>”\n\n");
-
+			var sessionCost:int = 125;
+			
+			// Calculate the cost of a session
+			if (this.hasNeeleworkPerk())
+			{
+				// We're removing so use an increased cost.
+				sessionCost = this.needleworkUndoCost();
+			}
+			
+			outputText("The mare tries to remember any other types of needlework that might be useful to you... but ultimately, she can’t think of anything else.  “<i>That’s all you might use, I think...</i>”  She then pauses.  “<i>As for a price, given you’re my little Loppe’s special someone, shall we say " + String(sessionCost) + " gems?  That’s half-price of what I’d usually charge.</i>”\n\n");
+						
+			
 			// Cashmonies time
-			if (player.gems < 125)
+			if (player.gems < sessionCost)
 			{
 				outputText("You click your tongue and apologise to Uma, but you don’t have enough gems to pay for your treatment...\n\n");
 
@@ -624,12 +734,19 @@ package classes.content
 
 			menu();
 			
-			addButton(0, "Speed", needleworkSession, NEEDLEWORK_SPEED);
-			addButton(1, "Lust", needleworkSession, NEEDLEWORK_LUST);
-			addButton(2, "Defense", needleworkSession, NEEDLEWORK_DEFENSE);
-			addButton(3, "Magic", needleworkSession, NEEDLEWORK_MAGIC);
-			addButton(4, "Attack", needleworkSession, NEEDLEWORK_ATTACK);
-			addButton(5, "Undo", needleworkSession, NEEDLEWORK_UNDO);
+			if (!this.hasNeeleworkPerk())
+			{
+				addButton(0, "Speed", needleworkSession, NEEDLEWORK_SPEED);
+				addButton(1, "Lust", needleworkSession, NEEDLEWORK_LUST);
+				addButton(2, "Defense", needleworkSession, NEEDLEWORK_DEFENSE);
+				addButton(3, "Magic", needleworkSession, NEEDLEWORK_MAGIC);
+				addButton(4, "Attack", needleworkSession, NEEDLEWORK_ATTACK);
+			}
+			else
+			{
+				addButton(0, "Undo", needleworkSession, NEEDLEWORK_UNDO);
+			}
+			
 			addButton(9, "Leave", needleworkTurnDown);
 		}
 		
@@ -650,19 +767,22 @@ package classes.content
 		{
 			clearOutput();
 			
-			// Pay up
-			// TODO: Mentions of this getting more expensive the more you do it			
+			// Pay up		
 			if (selectedSession == NEEDLES_UNDO)
 			{
 				outputText("You tell Uma that you’d like her to remove the effects of your last acupuncture session from your body.  Then hand over the gems.\n\n");
 				
 				outputText("“<i>Alright, dear,</i>”  Uma replies, pocketing the gems.  “<i>It might take some time, but I think I can help you with that... follow me.</i>”\n\n");
+				
+				player.gems -= this.needleworkUndoCost();
 			}
 			else
 			{
 				outputText("You tell her you would like her to give you the " + this.needleworkString(selectedSession) + " acupuncture session, please. Then hand over the gems.\n\n");
 				
 				outputText("“<i>Alright, dear.</i>”  Uma replies, pocketing the gems.  “<i>Let’s go then.</i>”  She motions for you to follow her.");
+				
+				player.gems -= 125;
 			}
 			
 			menu();
