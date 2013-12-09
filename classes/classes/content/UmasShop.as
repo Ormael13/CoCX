@@ -482,6 +482,7 @@ package classes.content
 				if (bonusValue != undefined)
 				{
 					player.createStatusAffect(MASSAGE_BONUS_NAME, selectedMassage, bonusValue, MAX_MASSAGE_BONUS_DURATION, 0);
+					flags[kFLAGS.UMA_TIMES_MASSAGED]++;
 				}
 			}
 		}
@@ -517,9 +518,189 @@ package classes.content
 		/**
 		 * ACCUPUNCTURO
 		 */
-		public function accupunctureMenu():void
+		
+		/**
+		 * Available Accupucture Types
+		 */
+		public static const NEEDLEWORK_UNDO:int = -1;
+		public static const NEEDLEWORK_SPEED:int = 0;
+		public static const NEEDLEWORK_LUST:int = 1;
+		public static const NEEDLEWORK_DEFENSE:int = 2;
+		public static const NEEDLEWORK_MAGIC:int = 3;
+		public static const NEEDLEWORK_ATTACK:int = 4;
+		
+		public function needleworkString(needleworkType:int):String
+		{
+			if (needleworkType == NEEDLEWORK_SPEED)
+			{
+				return "\"Speed\"";
+			}
+			else if (needleworkType == NEEDLEWORK_LUST)
+			{
+				return "\"Lust\"";
+			}
+			else if (needleworkType == NEEDLEWORK_DEFENSE)
+			{
+				return "\"Defense\"";
+			}
+			else if (needleworkType == NEEDLEWORK_MAGIC)
+			{
+				return "\"Magic\"";
+			}
+			else if (needleworkType == NEEDLEWORK_ATTACK)
+			{
+				return "\"Attack\"";
+			}
+			
+			return "<b>Somethin' dun fucked up.  Please insert bugreport!</b> ";
+		}
+		
+		/**
+		 * Calculate the current undo cost of the players needlework
+		 * @return	calculated cost
+		 */
+		public function needleworkUndoCost():int
+		{
+			var baseCost:int = 125;
+			
+			if (flags[kFLAGS.UMA_TIMES_ACCUPUNCTURE_UNDO] != 0)
+			{
+				// 25 per undo?
+				baseCost += (25 * flags[kFLAGS.UMA_TIMES_ACCUPUNCTURE_UNDO]);
+			}
+			
+			return baseCost;
+		}
+		
+		/**
+		 * Apply a Needlework perk to the player
+		 */
+		public function applyNeedlework(selectedSession:int):void
 		{
 			
+		}
+		 
+		public function accupunctureMenu():void
+		{
+			clearOutput();
+			
+			outputText("You tell her that you want to try one of those acupuncture sessions of hers.\n\n");
+
+			outputText("“<i>Are you sure, dear?  While the effects of a Do-in massage will fade eventually, acupuncture is fairly... permanent.  Though I can only give you the effects of one type of needlework at once...</i>”\n\n");
+
+			outputText("You tell her you understand what she’s saying, and thank her for warning you.  So, what kinds of needlework can she do?  What effects can her \"acupuncture\" have on you?  ...Also, how much will it cost?");
+
+			outputText("“<i>Well, fine.  So long as you’re sure.  Normally, I would just show you a catalogue, but I suppose you’d prefer needlework that can be used for combat, yes?</i>”\n\n");
+
+			outputText("You tell her that would probably be most useful to you, yes.\n\n");
+
+			outputText("“<i>Bear in mind that while they have beneficial effects, due to the disruption they cause within the chi flow inside your body... they’d also cause a penalty.  So here are the types of needlework you’d find helpful.</i>” She takes a deep breath, clearly checks her mental list, and then begins to speak.\n\n");
+
+			outputText("“<i>First of all, if you focus on speed over strength,  I can increase your innate swiftness, making you less vulnerable to attacks or transformations that reduce your speed.  The drawback of this is that the maximum possible strength you can possess is lowered - though, as this prevents your muscles from growing so large they interfere with your speed, I think you’ll agree that it’s an easy sacrifice to make.”</i>  The mare masseur notes.\n\n");
+
+			outputText("“<i>I understand that lust plays an important part in fighting, so I could make you more resistant to the advances of the creatures outside, as well as augment your ability to... well... entice them.  However this comes with a cost, you will constantly need to have sex, or your chi flow will begin to burn up, increasing your sensitivity as well as your libido.</i>”\n\n");
+
+			outputText("“<i>If you are uncertain of your toughness, your ability to resist the damage inflicted upon you by the creatures that prowl the wilderness, I can bolster that.  However, modifying the chi flow in such a manner causes your limbs to lose some of their power; you will be slower, and find it harder to escape from enemies that even your newfound resilience cannot protect you against.</i>”\n\n");
+
+			outputText("“<i>One of my special needleworks favored by mages will redirect chi from your muscles to your mind; your blows will be weaker, but your spells will be far more potent.</i>”\n\n");
+
+			outputText("“<i>Finally, I can use my needles to rearrange your chi flow and optimise your offense; your blows will be far more powerful, but your natural defense will be impaired, making you more vulnerable to strikes by the enemy.</i>”\n\n");
+
+			outputText("The mare tries to remember any other types of needlework that might be useful to you... but ultimately, she can’t think of anything else.  “<i>That’s all you might use, I think...</i>”  She then pauses.  “<i>As for a price, given you’re my little Loppe’s special someone, shall we say 125 gems?  That’s half-price of what I’d usually charge.</i>”\n\n");
+
+			// Cashmonies time
+			if (player.gems < 125)
+			{
+				outputText("You click your tongue and apologise to Uma, but you don’t have enough gems to pay for your treatment...\n\n");
+
+				outputText("Uma sighs.  “It’s okay, dear.  Just come back when you do, my doors are always open.”  She smiles at you.");
+				
+				menu();
+				doNext(13);
+				return;
+			}
+
+			outputText("You nod in understanding... now you stop and consider your options, wondering which one you should choose..."); 
+
+			menu();
+			
+			addButton(0, "Speed", needleworkSession, NEEDLEWORK_SPEED);
+			addButton(1, "Lust", needleworkSession, NEEDLEWORK_LUST);
+			addButton(2, "Defense", needleworkSession, NEEDLEWORK_DEFENSE);
+			addButton(3, "Magic", needleworkSession, NEEDLEWORK_MAGIC);
+			addButton(4, "Attack", needleworkSession, NEEDLEWORK_ATTACK);
+			addButton(5, "Undo", needleworkSession, NEEDLEWORK_UNDO);
+			addButton(9, "Leave", needleworkTurnDown);
+		}
+		
+		public function needleworkTurnDown():void
+		{
+			clearOutput();
+			
+			ouputText("You shake your head and tell Uma that you’d actually rather not get one of her acupuncture treatments at this point in time.\n\n");
+			
+			outputText("“<i>Very well, dear.  It’s important that you think this through, they’re not easy to undo.</i>”");
+			
+			menu();
+			
+			doNext(0, "Next", enterClinic, true);
+		}
+
+		public function needleworkSession(selectedSession:int):void
+		{
+			clearOutput();
+			
+			// Pay up
+			// TODO: Mentions of this getting more expensive the more you do it			
+			if (selectedSession == NEEDLES_UNDO)
+			{
+				outputText("You tell Uma that you’d like her to remove the effects of your last acupuncture session from your body.  Then hand over the gems.\n\n");
+				
+				outputText("“<i>Alright, dear,</i>”  Uma replies, pocketing the gems.  “<i>It might take some time, but I think I can help you with that... follow me.</i>”\n\n");
+			}
+			else
+			{
+				outputText("You tell her you would like her to give you the " + this.needleworkString(selectedSession) + " acupuncture session, please. Then hand over the gems.\n\n");
+				
+				outputText("“<i>Alright, dear.</i>”  Uma replies, pocketing the gems.  “<i>Let’s go then.</i>”  She motions for you to follow her.");
+			}
+			
+			menu();
+			addButton(0, "Next", doNeedleworkSession, selectedSession);
+		}
+		
+		public function doNeedleworkSession(selectedSession:int):void
+		{
+			clearOutput();
+			
+			outputText("The room is light, but not overwhelmingly bright, with cool breezes gently wafting through, tingling deliciously on your exposed [skin] and setting the chimes hanging from the rafters gently a-tinkle. A number of large potted plants occupy the corners of the room, and there’s even a tiny fountain with stones in it, the tumble of water over rocks creating a strangely soothing melody.  A small brazier produces a sweet, calming smell from incense burning in it.  The pride of the room is a sizable table, made from bamboo; it is covered in a white cloth, and has an upraised headboard with a hole in it that looks like it’s big enough to fit your head through.\n\n");
+
+			outputText("“<i>I want you to strip and lay face down on my table, while I go fetch my needles and some numbing cream.  Unless you’d like me to stick needles in your body without anything to dull the pain?”</i>  Uma asks jokingly.\n\n");
+
+			outputText("You quickly shake your head, and indicate she should go, promising to be properly undressed and ready by the time she gets back.  As the mare heads off to fetch your things, you do as you were instructed; sticking your head in the table’s hole is a little awkward, and makes you feel rather vulnerable... which is natural, given what Uma mentioned about needles.\n\n");
+
+			outputText("It only takes moments before Uma returns with a small cart containing a small container and a vial of what you presume to be the numbing cream.  Out of the cart’s drawer, Uma pulls a pair of gloves which she fits nicely, then opens the small container.  From your current position it’s hard to tell what it contains, but from the clicking sounds you hear, you assume it to be where she keeps her needles.\n\n");
+
+			outputText("“<i>Are you comfortable, dear?  May I start?</i>”  She asks.\n\n");
+
+			outputText("You tell her that you’re as ready as you’ll ever be, so she may as well start.  “<i>Ok, now try to relax.</i>”  She says, gently touching your exposed back and lightly massaging it with her fingers.  The combination of nerves and her touch sends static through your skin.\n\n");
+
+			outputText("“<i>I’ll be applying the cream now.</i>”  She notifies you, slowly pouring the, rather cold, cream on your back and rubbing it all over, ensuring every single spot is covered before she puts the vial away.  You shiver and repress a verbal protest at the chill in her cream.  “<i>It’ll take a few minutes before you’ll start to feel the effects, I want you to tell me when you no longer feel my fingers on your back.</i>”  She then begins a slow circular massage on your back.\n\n");
+
+			outputText("You promise you will, and wait patiently.  Slowly the sensation of her fingers fades away, until at last you aren’t sure if she’s even touching you any more, and you report this to the mare currently planning on sticking you full of needles.\n\n");
+
+			outputText("“<i>Very good.  I'll start the treatment now, you might feel a slight pricking sensation, though it shouldn’t hurt... if at any point it starts hurting, tell me and I’ll do something to ease your pain, alright?</i>”\n\n");
+
+			outputText("You tell her that you understand.  True to her words, you do feel the slight pricking sensation of needles been put on your back, some of them are removed shortly after, while others stay in place for a while longer.  Eventually, you feel all needles being taken out of your back and Uma happily declares,  “<i>All done!</i>”\n\n"); 
+
+			outputText("You ask if you can get up now, or do you need to stay where you are so that it has time to settle?  “<i>No, you can get up and get dressed dear.  The needles are out and your chi should be stable enough now... though you won’t feel much of a change until some time has passed.</i>”  She takes off her gloves and scratches her chin.  “<i>I estimate you should start to feel the changes soon; maybe by the time you get back to your home, if not shortly after.</i>”\n\n");
+
+			ouputText("You thank her for her work, get yourself up and proceed to dress yourself.  You then politely excuse yourself and start the long journey back to your camp.");
+			
+			applyNeedlework(selectedSession);
+			
+			menu();
+			doNext(13);
 		}
 		
 		public function talkMenu():void

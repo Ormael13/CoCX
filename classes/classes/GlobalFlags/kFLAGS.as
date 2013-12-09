@@ -1035,8 +1035,8 @@ public static const LYNNETTE_MET_UNPREGNANT:int                                 
 public static const LYNNETTE_ANNOUNCED_APPROVAL:int                                 = 1027;
 public static const LYNNETTE_FUCK_COUNTER:int                                   = 1028;
 public static const UMA_PC_FOUND_CLINIC:int                                   = 1029;
-public static const UNKNOWN_FLAG_NUMBER_01030:int                                   = 1030;
-public static const UNKNOWN_FLAG_NUMBER_01031:int                                   = 1031;
+public static const UMA_TIMES_MASSAGED:int                                   = 1030;
+public static const UMA_TIMES_ACCUPUNCTURE_UNDO:int                                   = 1031;
 public static const UNKNOWN_FLAG_NUMBER_01032:int                                   = 1032;
 public static const UNKNOWN_FLAG_NUMBER_01033:int                                   = 1033;
 public static const UNKNOWN_FLAG_NUMBER_01034:int                                   = 1034;
