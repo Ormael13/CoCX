@@ -9,7 +9,7 @@
 //const TIMES_NIAMH_BAZAAR_MET:int = 452;
 
 public function telAdreNiamh():void {
-	if(flags[MET_NIAMH] == 0) {
+	if(flags[kFLAGS.MET_NIAMH] == 0) {
 		outputText("\n\nAt a table near the back of the bar sits one of the many curious sights Tel'Adre has to offer: a white-haired, ebony-skinned woman, sporting twitching feline ears and tail.  The curious-looking and mostly human girl sports a pair of form-fitting white leggings and a matching top hat. An unbuttoned leaf-green waistcoat hangs slack around her slender hips, and it doesn't take you long to see the reason for the lack of closure: her ");
 		if(model.time.hours <= 8) outputText("massive N-cup breasts, spilling over the table");
 		else if(model.time.hours <= 9) outputText("huge M-cup breasts, taking up much of the table");
@@ -42,13 +42,13 @@ public function telAdreNiamh():void {
 //Approach:
 public function approachNiamh():void {
 	clearOutput();
-	if(rand(5) == 0 && flags[MET_NIAMH] > 0 && (hasItem("BimboLq",1) || hasItem("SucMilk",1))) 
+	if(rand(5) == 0 && flags[kFLAGS.MET_NIAMH] > 0 && (hasItem("BimboLq",1) || hasItem("SucMilk",1))) 
 	{
 		corruptOrBimboNiamhIntro();
 		return;
 	}
 	//(If player has Talked to Niamh or gotten 1+ mugs of Black Cat Beer, replace with the following: 
-	if(flags[MET_NIAMH] > 0) outputText("Niamh gives you a friendly, but professional, smile as you draw near.  She smiles and shakes her head knowingly as your gaze inevitably falls to her chest, obviously as full of booze as ever.  Small puddles of alcoholic fluid slowly accumulate from the steady drip of her swollen nipples.  \"<i>Well, hello, consumer - yes, up here - hello, consumer.  Did ye want to try more o' me Black Cat Beer?  Just remember the rules; two bits a glass, treat me gentle, and no sneakin' a drink from 'the tap'.</i>\"");
+	if(flags[kFLAGS.MET_NIAMH] > 0) outputText("Niamh gives you a friendly, but professional, smile as you draw near.  She smiles and shakes her head knowingly as your gaze inevitably falls to her chest, obviously as full of booze as ever.  Small puddles of alcoholic fluid slowly accumulate from the steady drip of her swollen nipples.  \"<i>Well, hello, consumer - yes, up here - hello, consumer.  Did ye want to try more o' me Black Cat Beer?  Just remember the rules; two bits a glass, treat me gentle, and no sneakin' a drink from 'the tap'.</i>\"");
 	else outputText("You approach the burdened woman, hailing her politely.  Her ears twitch at the sound, and she sends a crooked smile your way.  \"<i>What can I do ya for?</i>\" she asks somewhat tiredly, the lilt of her words hinting at an accent.  \"<i>Up for a bit o' the brew, perhaps?</i>\"  Your question regarding why she's peddling alcohol dies in your throat as your gaze inevitably drops to her dusky-toned bosom.  As you watch, a small droplet of cloudy golden liquid forms at her engorged teat and splashes into the growing puddle under the nipple.  From the array of top-bearing beer mugs placed within reaching distance on the ground, you begin to put the pieces together.  Is she actually... lactating beer?  You glance back up at her; she smirks knowingly, casually resting her forearms against her expansive breast-flesh and using them to push together and amplify the already-incredible cleavage.  She takes a deep breath, then chants in a singsong voice, \"<i>Black cat beer, two bits a glass.  Get it quick, for it's goin' fast.  Just treat me gentle, or you're in for a slap, and no, you can't have it 'straight from the tap'.</i>\"  After a couple moments, you shrug, figuring stranger things have happened in Mareth.");
 	
 	var beer:* = 0;
@@ -77,13 +77,13 @@ public function getANiamhBeer():void {
 		outputText("  You know just how distracting it is to have your tits full of fluid waiting to get out.");
 	
 	//([if first time] 
-	if(flags[GOT_NIAMH_BEER] == 0) 
+	if(flags[kFLAGS.GOT_NIAMH_BEER] == 0) 
 		outputText("\n\nYou briefly deliberate how you should go about the 'milking' process.  Should you focus on one nipple, or both...?  Deciding on both - most likely easier on the girl that way - you take the proffered mug and prepare to tap the... kegs.");
 	else 
 		outputText("\n\nYou recall how pleased she was last time, when you handled both nipples, so you decide to stick to that. Taking the offered mug from her, you prepare for the extraction.");
 	outputText("  Gingerly, as if you're handling fine china, you heft one of her prodigious mammaries and position a teat above your flagon. With gentle nipple-squeezing motions from base to tip, you quickly get a steady stream of booze flowing. She rewards your skilled manipulations with a throaty groan, and little ripples begin flitting across her boob-flesh as she begins trembling in barely-suppressed arousal.");
 	outputText("\n\nThe girl's hands clamp to her seat as she tries her hardest to disguise her pleasure... unsuccessfully.  Filling your mug around halfway, you push the nipple to the side and move to the other.  The cat-girl's expression gradually changes from excited to nearly orgasmic as the teasing goes on.  The stream of beer easily begins again, and your cup fills surprisingly fast.  You release her tit and cap the mug, to prevent spilling. You now have a mug of Black Cat Beer.  ");
-	if(flags[MET_NIAMH] > 0) 
+	if(flags[kFLAGS.MET_NIAMH] > 0) 
 		outputText("Niamh ");
 	else
 		outputText("the cat-girl ");
@@ -96,14 +96,14 @@ public function getANiamhBeer():void {
 	var togo:* = 0;
 	if(player.gems >= 2) togo = blackCatBeerToGo;
 	else outputText("\n\n<b>You're too poor to buy the mug.</b>");
-	flags[GOT_NIAMH_BEER]++;
+	flags[kFLAGS.GOT_NIAMH_BEER]++;
 	simpleChoices("Here",drinkNiamhsBeerInTelAdre,"To Go",togo,"",0,"",0,"",0);
 }
 
 //[Here]
 public function drinkNiamhsBeerInTelAdre():void {
 	clearOutput();
-	if(player.lactationQ() >= 300 && player.biggestTitSize() >= 5 && rand(2) == 0 && flags[MET_NIAMH] > 0) {
+	if(player.lactationQ() >= 300 && player.biggestTitSize() >= 5 && rand(2) == 0 && flags[kFLAGS.MET_NIAMH] > 0) {
 		outputText("\"<i>Skoal!</i>\" you cheer as you down the delicious mug of booze.  The incredibly potent beverage warms you down in to your chest and beyond.  The heat of the alcohol trailing like fire down in to your gut and warms your genitals, causing you to feel more aroused.  The buzz of the beverage makes you light headed, as if thinking had become a little more difficult.");
 		outputText("\n\nYou start to stumble as your sense of balance shifts and you realize the heat in your body is expanding outwards.  Looking down you see it isn't the heat that's expanding, but your own bountiful tits.  Each of your [fullChest] have gained two full cup sizes, and within seconds they've gained even more.  Beneath your clothes your areola darken in color and you can feel each nipple throbbing with the need to expel its milky contents.");
 		outputText("\n\n\"<i>Oh me, ma darlin'.</i>\"  Niamh comments, \"<i>Those beauties o' yours look to be burstin' out o' ye...</i>\"  Your [armor] falls open as your enlargening breasts swell too large to be contained.  Each of your nipples fatten up and begin squirting a liquid that looks unusual.");
@@ -149,11 +149,11 @@ public function drinkNiamhsBeerInTelAdre():void {
 	//16:00 ending
 	else {
 		outputText("\n\nThanks to your efforts, ");
-		if(flags[MET_NIAMH] == 0) outputText("the cat girl's");
+		if(flags[kFLAGS.MET_NIAMH] == 0) outputText("the cat girl's");
 		else outputText("Niamh's");
 		outputText(" breasts have had the last of their beer squeezed from them.  She sighs in relief, caressing her shrunken breasts; while still hovering at around G-cup size, they're much smaller than they are when the day starts for her.  \"<i>Me thanks for the business; ye got the last mug for today.  Still, I'll be here tomorrow, full as ever.</i>\" She sighs softly.  \"<i>I regret to say that Niamh's Black Cat Beer doesn't look to be going out of business anytime soon.</i>\"  She stands and gathers her coat, slipping her arms into the sleeves.  The nimble girl draws the garment across her buxom chest, buttoning the slightly strained buttons with deceptive ease.  Dressed properly, she starts away, a bag full of gems bouncing against her swaying hips. You watch her go, staring at her back until she walks out the door.");
 	}	
-	flags[MET_NIAMH]++;
+	flags[kFLAGS.MET_NIAMH]++;
 	doNext(13);
 }
 	
@@ -168,12 +168,12 @@ public function blackCatBeerToGo():void {
 	//16:00 ending
 	else {
 		outputText("\n\nThanks to your efforts, ");
-		if(flags[MET_NIAMH] == 0) outputText("the cat girl's");
+		if(flags[kFLAGS.MET_NIAMH] == 0) outputText("the cat girl's");
 		else outputText("Niamh's");
 		outputText(" breasts have had the last of their beer squeezed from them.  She sighs in relief, caressing her shrunken breasts; while still hovering at around G-cup size, they're much smaller than they are when the day starts for her.  \"<i>Me thanks for the business; ye got the last mug for today.  Still, I'll be here tomorrow, full as ever.</i>\" She sighs softly.  \"<i>I regret to say that Niamh's Black Cat Beer doesn't look to be going out of business anytime soon.</i>\"  She stands and gathers her coat, slipping her arms into the sleeves.  The nimble girl draws the garment across her buxom chest, buttoning the slightly strained buttons with deceptive ease.  Dressed properly, she starts away, a bag full of gems bouncing against her swaying hips. You watch her go, staring at her back until she walks out the door.");
 	}	
 	outputText("\n\n");
-	flags[MET_NIAMH]++;
+	flags[kFLAGS.MET_NIAMH]++;
 	//PC gains 1x BCB
 	shortName = "BC Beer";
 	menuLoc = 24;
@@ -184,15 +184,15 @@ public function blackCatBeerToGo():void {
 public function talkToNiamh():void {
 	clearOutput();
 	//(first time only) 
-	if(flags[TALKED_NIAMH] == 0) {
+	if(flags[kFLAGS.TALKED_NIAMH] == 0) {
 		outputText("You ask the cat-girl to tell you about her past.");
 		outputText("\n\n\"<i>The name's Niamh - like the cat noise, eh?  Nya-m? - that's who I am.  I used to be a normal lass... then I stumbled through the portals to this blasted world.  Made the mistake of pickin' up some whiskered fruit an' giving them a samplin'... grew these blasted cat-parts!  So I avoided that lake like th' plague fer a while... ended up in a desert.  Don't know how that happened.  Now, I'm completely lost, and the thirst is killing me - but then, I hear singing.  I charge desperately across a dune, and what do I find?  Some gal sitting in the sand, four big ol' tits hanging out, and guzzling away at a glass of beer - whenever she's empty, she just squirts some more out of her nipples.</i>\"");
 		outputText("\n\nShe shrugs, which does impressive things to her cleavage, then notices your downward glance and taunts you with her laugh, which only causes her huge breasts to jiggle all the more.  \"<i>Aye, just like what I got here.  So, anyway, I beg her to share a drink with me, and she kindly agrees.  I'm so thirsty, and the beer's so good, that, well, I stay there drinking for a good long while...</i>\"");
 		outputText("\n\nShe trails off, then shakes her head sadly, \"<i>I don't really know what happened next; I figure we must have gotten so drunk together that I asked her to cast the same sort of spell on me.  All I know is, I woke up with a killer headache, and monster tits swollen with beer - and the witch o' the sands is gone.  I somehow managed to lug myself around long enough to find... this city.  That nice fox ");
 		if(model.time.hours < 15) outputText("who usually sits over yonder ");
 		outputText("helped me in and set me up here so I can... lighten me load.  That bulk's basically all brew; I milk it out all the time, but I just keep making more of th' stuff... I don't know any way to stop.</i>\"  She shakes her head and sighs.  \"<i>Ironically, it's kept a roof over my head since I got here.  Folks are happy to pay for Niamh's Black Cat Beer.  So, did you want some, or are you done here?</i>\" she asks.");
-		flags[MET_NIAMH]++;
-		flags[TALKED_NIAMH]++;
+		flags[kFLAGS.MET_NIAMH]++;
+		flags[kFLAGS.TALKED_NIAMH]++;
 	}
 	//(repeated) 
 	else {
@@ -317,7 +317,7 @@ public function taintNiamh(bimbo:Boolean = false):void {
 		outputText("\n\nAfter several moments, a small groan escapes her lips, her slender hand flying under the table to press against her suddenly gurgling belly.  She looks up at you, horrified, and you only offer a shrug in response.  The increasingly panicked catgirl tries to rise, toppling her table and sweeping aside her empty flagons.  With a surprised cry, she loses her balance and falls onto her cushiony butt, her gigantic boob-barrels flopping onto her lap.  She tries to speak, but can only moan as a shudder runs through her.  Her hand is the first thing to be affected.  Her ebony skin slowly shifts to a blue tone, and she grunts as two nubs poke through her white bob-cut; the fur of her tail recedes, replaced with glimmering blue skin.  The tip of the appendage shivers and changes as well, going from rounded to spade-tipped.");
 		outputText("\n\nNiamh abruptly cries out in ecstasy as her libido levels skyrocket and begins to knead her tits fervishly.  You can tell she's getting off on the near-electric thrill of their sensitivity.  Equal parts aroused and amused, you're torn between the desire to watch and the need to make yourself scarce before the Watchmen show up to find you at the scene of a 'demonification'.  As the newly-azure girl raises a teat to her mouth and suckles herself, the other hand dropping to her sopping, needy loins, you decide in favor of discretion and pull yourself away from the spectacle, making sure to back up in mock-horror.  Curiously, as Niamh drinks her own 'lactation', the golden coloration of the brew dribbling out around her lips darkens.  From beer to ale, you muse.  As you exit the door of the tavern, four members of the town guard slip into your place; you make sure to give them the benefit of your confused, terrified acting.");
 		outputText("\n\nA crowd of spectators follows as they cart her out, allowing you to slip into the group and watch the proceedings.  Poor Niamh is thrown out of the city unceremoniously, her corrupted bosom spewing ale onto the hot desert sand.  Writhing with a combination of fury and lust, the newly-minted devil's familiar screams profanities and threats between moans, not even bothering to move from her face-down position.  You get one last look at her before the doors close, shutting her out of the desert city completely.  You linger around the city until you figure she'd have moved away from the gate, then make your own way out.");
-		flags[NIAMH_STATUS] = 1;
+		flags[kFLAGS.NIAMH_STATUS] = 1;
 		stats(0,0,0,0,0,0,0,5);
 	}
 	//[if bimbo liquor] 
@@ -327,9 +327,9 @@ public function taintNiamh(bimbo:Boolean = false):void {
 		outputText("\n\nOnly the sight of her still-swelling butt, pants tearing and hips swaying in blatant disregard of the chair stuck to her, prevents you from sampling the stuff.  Better to let bimbofied dogs lie, you figure.  The straining armrests finally splinter from the pressure, embedding a few wooden shards into her partially bared booty.  \"<i>Cripes!</i>\" she exclaims, trying to turn herself enough to reach the stinging slivers, \"<i>How did, like, me... big... wobbly... butt...</i>\"  She trails off, a blush of arousal flying across her features as she regards her new-and-improved posterior.  Ignoring her still-'lactating' nipples, she presses a hand deeply into her double-wide ass, cooing as it sinks into the blubbery bubble-butt.  Still applying considerable pleasure, she slides her hand down to her thickened thigh - causing the cheek to flop up and jiggle all about.");  
 		outputText("\n\nThe enamored catgirl's attentions inevitably shift to her unattended lady-bits, and she promptly begins rubbing her still-clothed groin.  \"<i>Fai-...Fae-...Omigosh, this feels good!</i>\" the increasingly-ditzy Niamh moans.  The catgirl's cries quicken, and you can fairly easily assume what that implies.  Fighting against the urge to give her some 'assistance', you decide instead to duck out, unwilling to be nearby when the inevitable Watch response happens.  As you slip out the door, four guardsmen slip in; you make sure to give them the benefit of a confused, scandalized expression.  Commotion and the sounds of upending furniture ring out from inside the bar, and after a few minutes, a struggling Niamh is carried out by three of the four.");
 		outputText("\n\nA crowd of spectators follow, allowing you to slip into the group and watch the proceedings.  A very confused Niamh is placed, firmly but surprisingly gently, outside of the bounds of the city.  A guard explains to her that, after that display and the transformative effects forced upon the poor watchman who was the subject of her... motherly affections... she and her bosom-brew can't be allowed in Tel'Adre.  She nods, her face curiously blank of any emotion... except maybe lust.  As the gates are closing, you hear her call, \"<i>Hey, can I masturbate now, pretty-please?</i>\" and then, with a slam, she's gone.  You linger around the city until you figure she'd have moved away from the gate, then make your own way out.");
-		flags[NIAMH_STATUS] = 2;
+		flags[kFLAGS.NIAMH_STATUS] = 2;
 	}
-	flags[NIAMH_MOVED_OUT_COUNTER] = 25;
+	flags[kFLAGS.NIAMH_MOVED_OUT_COUNTER] = 25;
 	stats(0,0,0,0,0,0,0,10);
 	doNext(13);
 }
@@ -337,20 +337,20 @@ public function taintNiamh(bimbo:Boolean = false):void {
 //24 hours later, random encounter on the Plains 
 public function niamhPostTelAdreMoveOut():void {
 	//Move her into the bazaar
-	flags[NIAMH_MOVED_OUT_COUNTER] = -1;
+	flags[kFLAGS.NIAMH_MOVED_OUT_COUNTER] = -1;
 	clearOutput();
 	outputText("Upon one of your routine searches, you're given pause as a half-coherent mess of a song comes tumbling across the grasses.  You move toward the cacophony of sound, fairly confident in what you will find.  Indeed, stumbling and shambling towards you comes a ");
-	if(flags[NIAMH_STATUS] == 1) 
+	if(flags[kFLAGS.NIAMH_STATUS] == 1) 
 		outputText("demonic-looking");
 	else 
 		outputText("hourglass-shaped");
 	outputText(" Niamh, and it's obvious she's completely hammered.  ");
-	if(flags[NIAMH_STATUS] == 1) 
+	if(flags[kFLAGS.NIAMH_STATUS] == 1) 
 		outputText("\"<i>W'hey there " + player.mf("boyo","big girl") + ", wanna...g'forrra goooo-gfh...time?</i>\"");
 	else 
 		outputText("\"<i>W'heeeey, honey!  I never thought I'd see yaaaagain!</i>\"");
 	outputText(" she slurs, struggling to stay upright between her impaired motor skills and her absolutely overfilled chest.  \"<i>Aaah've been drinkin' me 'shtash',</i>\" she explains, noticing your gaze.  \"<i>Canno' leddit go'tuh waste!</i>\" You nod your agreement, sneaking a glance behind her to observe the twin trails of ");
-	if(flags[NIAMH_STATUS] == 1) 
+	if(flags[kFLAGS.NIAMH_STATUS] == 1) 
 		outputText("dark");
 	else 
 		outputText("light");
@@ -371,7 +371,7 @@ public function niamhCorruptedMobileSnackDrinkTime():void {
 	clearOutput();
 	outputText("Of course you do!  You went through the trouble of getting her boobs to their current condition; drinking from the tap is exactly what you had in mind.  A smile brightens Niamh's features, and she plops down heavily on the ground, waving you over to sit next to her.  ");
 	//[bimbo version]
-	if(flags[NIAMH_STATUS] == 2) {
+	if(flags[kFLAGS.NIAMH_STATUS] == 2) {
 		outputText("She does her best to jiggle her huge champagne-laden tits.  \"<i>Like, come 'n' get it!</i>\" she beckons.  \"<i>It's all bubbly and tickly and yummy.</i>\"  She giggles, belches hugely, then demurely puts her fingers across her mouth.  \"<i>Like, sorry; my tummy's all full of bubbles too.</i>\"  She giggles again; looks like that bimbo liqueur really down-shifted her mental gear.  But, hell, that's alright; she's only of any importance for what's in those gorgeous great boobs of her, not her brain.  You confidently stride over to her and sit down, positioning yourself where you can most easily access her breasts.");
 		outputText("\n\nShe gives you an empty-headed smile and starts to purr, tail lazily swishing back and forth in anticipation.  You reach out and take hold of one weighty mammary, making her moan throatily; pale frothy liquor immediately starts to seep from it, and you waste no time in taking the nipple between your lips.  Mmm... the taste is like nothing you have ever tried before; sweet and sugary and rich... kinda gooey, actually.  It froths and fizzes madly in your mouth, tickling as you swallow and making you repress a giggle of delight.");
 		outputText("\n\n\"<i>Yummy, isn't it?</i>\" Niamh purrs.  \"<i>Like, drink up; I gots lots more where that came from!</i>\"  She giggles, trying to push her breast forward; with how big it is, she can't really reach around to force you into it like she'd like.");
@@ -470,8 +470,8 @@ public function removeBimboChampagne():void {
 public function bazaarNiamh():void {
 	clearOutput();
 	//Bimbo Niamh:
-	if(flags[NIAMH_STATUS] == 2) {
-		if(flags[TIMES_NIAMH_BAZAAR_MET] == 0) {
+	if(flags[kFLAGS.NIAMH_STATUS] == 2) {
+		if(flags[kFLAGS.TIMES_NIAMH_BAZAAR_MET] == 0) {
 			outputText("As you enter the bazaar, you hear a familiar voice calls out to you. \"<i>Hey!  [name]!  Over here!  Like, it's me!</i>\"");
 			outputText("You follow the sound and find Niamh seated in a corner of the bazaar.  She is totally naked save for a small strip of cloth around her loins; huge breasts lie exposed for all the world to admire.  She's surrounded by a small entourage of assorted beings; some are either hoping to earn a drink or else are simply here to ogle the massively buxom catgirl, others have evidently already drunk their fill, given their swollen bellies, feminine forms and platinum blonde coloration.  She grins as you approach.");
 			outputText("\"<i>Like, I was just roaming the plains, trying to, like, figure out where I was gonna go, and I found this place.  Isn't it, like, so neat here?</i>\"  She has apparently already forgotten that this was her destination all along!  \"<i>All these cool people who know how to have a totally good time!  Not like that dump in the desert, fulla buzzkills.  Yeah, I'm gonna, like, party all night and day here, [name].</i>\" She giggles yet again.  \"<i>But you're still, like, my number one customer.  So... you, like, wanna do something?</i>\" she asks.");
@@ -490,7 +490,7 @@ public function bazaarNiamh():void {
 		//(Approach: 
 		outputText("Pushing your way past the drugged, sloshing, and fitful sleepers, you approach the encircled cat girl.  You catch her eye, and she waves you over.  \"<i>Welcome to me corner,</i>\" she snickers, glancing around at all of her victims.  \"<i>I don't suppose ya want a drink o' the brew?</i>\"  So saying, she lays her hands atop her ponderous bosom, leaning forward and smiling wickedly.");
 	}
-	flags[TIMES_NIAMH_BAZAAR_MET]++;
+	flags[kFLAGS.TIMES_NIAMH_BAZAAR_MET]++;
 	//[Bizarre Bazaar, beer purchase, bimbo and corrupted version]
 	var drink:* = 0;
 	if(player.gems >= 2) 
@@ -508,7 +508,7 @@ public function bazaardNiamhDrink():void {
 	player.gems -= 2;
 	outputText("Approaching the fallen-from-grace (yet completely content) catgirl, you toss her a couple gems and request a glass of the house drink.");
 	//Bimbo: 
-	if(flags[NIAMH_STATUS] == 2) {
+	if(flags[kFLAGS.NIAMH_STATUS] == 2) {
 		outputText("\n\nThe dark-skinned blonde giggles, snatching up the gems and jingling them in the palm of her hand. \"<i>Like, that's totally cool with me, but you're gonna have to serve yourself, y'know?</i>\" she jiggles her mountainous mammaries, the alcoholic beverage softly, yet audibly, sloshing inside them.  \"<i>I'm a wee bit too big to be, like, serving you.</i>\"  Sure enough, when she stretches her arms to demonstrate, her hands can't even reach her nipples anymore.  She titters, which makes the random drunkards around her giggle in amusement.");
 		outputText("\n\nYou approach her leaking teats, casually swatting aside a giggling, totally plastered imp with long, lady-like locks of strawberry blonde, curly hair wreathing his (her?) features.  You contemplate if you want to just milk some into a bottle for later consumption, or have a drink here and now.");
 		simpleChoices("Drink",drinkFromZeTap,"Bottle",getBimboChampFromNiamh,"",0,"",0,"",0);
@@ -550,7 +550,7 @@ public function bazaarSex():void {
 	var x:Number = player.biggestCockIndex();
 	var y:Number = x + 1;
 	clearOutput();
-	if (flags[NIAMH_STATUS] == 2)
+	if (flags[kFLAGS.NIAMH_STATUS] == 2)
 	{
 		//Bimbo:Fuck a Bimbo Catgirl and Suck Dem Boozetits Like You Got a Pair (Or at least a dick; gotta have one of them)
 		outputText("As you approach the bimbofied cat-girl, your eyes wander lustily toward her huge, beer-lactating tits.  Seeing you stare, she giggles and shakes her chest enticingly, letting the huge, liquid-filled mounds wobble.  \"<i>Like, like what you see, [name]?</i>\" she purrs, her long black tail wagging excitedly behind her.");
@@ -563,7 +563,7 @@ public function bazaarSex():void {
 		outputText("\n\n\"<i>Thash was - HIC - shuper shexy, [name],</i>\" the drunken keg-girl giggles, staggering to her feet and stumbling toward the Bazaar.  \"<i>Like, we shud do thish again shoon!</i>\" she adds, prancing out with her new pearl necklace on full display.");
 		stats(0,0,0,-.5,0,-2,-100,0);
 	}
-	else if (flags[NIAMH_STATUS] == 1)	// Succubi Milk
+	else if (flags[kFLAGS.NIAMH_STATUS] == 1)	// Succubi Milk
 	{
 		outputText("\n\nSuccubi Milk Niamph not implemnted yet.");
 	}
@@ -598,7 +598,7 @@ public function yeahSeanLetsBimbooze():void {
 	consumeItem("BimboCh",1);
 	consumeItem("BimboCh",1);
 	statScreenRefresh();
-	flags[NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] = 25;
+	flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] = 25;
 }
 //back to camp
 //remove 5 bimbo champagnes from inventory and also 500 gems
@@ -613,7 +613,7 @@ public function getBimboozeFromSean():void {
 	//bimbo liqueur aqcquired
 	shortName = "BimboLq";
 	menuLoc = 16;
-	flags[NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] = 0;
+	flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] = 0;
 	takeItem();
 }
 
@@ -701,7 +701,7 @@ public function barBeerOrgyTits():void {
 	//Third Paragraph
 	//===============
 	//IF player has pussy and Urta is in the bar and sex with her is unlocked.
-	if(model.time.hours < 15 && flags[URTA_COMFORTABLE_WITH_OWN_BODY] > 0 && player.hasVagina()) {
+	if(model.time.hours < 15 && flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] > 0 && player.hasVagina()) {
 		outputText("\n\nA pair of familiar paws grab your ankles and spread your legs wide.  Your labia practically spurt out girl cum in anticipation of what's about to happen.  \"<i>Oh, looks like someone's overly eager.</i>\"  You struggle to look over the mounds of your own tits to see who's standing between your legs.  The familiar sight of an oversized horse-cock waving in the air catches your attention shortly before the grinning smile of Urta comes in to view.  \"<i>My aren't you going to get reamed, lover.</i>\"  No sooner than she says that than the flared head of her cock plunges with a wet squish between your nether lips.  You feel her stretching your entrance apart as her massive horse meat bores into your body.  Blissful screams of pleasure are heard and it isn't until the head of Urta's cock breaks into your womb that you realize it's you that's screaming in ecstasy.");
 		if(player.pregnancyIncubation == 0) outputText("  Some folks give yelps and cheers when they see the bulge that repeatedly forms in your abdomen each time Urta thrusts herself inside you.");
 		cuntChange(60,true,true,false);
@@ -763,7 +763,7 @@ public function barBeerOrgyTits():void {
 	//Varies based on body type and characters present
 	//================================================
 	// IF [Edryn and Urta are present in the bar and free sex with both is unlocked and character is a herm]
-	if(player.statusAffectv1("Edryn") >= 5 && player.gender == 3 && model.time.hours == 14 && flags[URTA_COMFORTABLE_WITH_OWN_BODY] > 0) {
+	if(player.statusAffectv1("Edryn") >= 5 && player.gender == 3 && model.time.hours == 14 && flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] > 0) {
 		outputText("\n\nYou're so dizzy on pleasure that you barely notice it when you're lifted off the table and carried through the bar again.  You can hardly feel your feet and legs when the crowd stands you up, and with a weak lifting of your head you see why the sudden change of position.  Right in front of you is Edryn's womanly hindquarters with her black cunt lips jiggling back and forth, dripping her girly horse juices from their sopping wet folds.  You don't even have to do anything has several hands angle [eachCock] and guide you forwards.");
 		// IF [player has a single cock]
 		if(player.cockTotal() == 1) outputText("  Edryn moans out loud in ecstasy as your [cock] fills her up.");
@@ -796,7 +796,7 @@ public function barBeerOrgyTits():void {
 		growTits(2, player.bRows(), false, 2);
 	}
 	// IF [Urta but not Edryn is present in the bar and sex with her is unlocked and character has pussy]
-	else if(player.hasVagina() && model.time.hours < 15 && flags[URTA_COMFORTABLE_WITH_OWN_BODY] > 0) {
+	else if(player.hasVagina() && model.time.hours < 15 && flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] > 0) {
 		outputText("\n\nYou hear passionate cries of lustful need from Urta as her horse-cock reams you with greater ferocity.  Her orgasm nearly knocks her off her feet as her shaft swells wider, stretching you apart as the cum surges up through it.");
 		// IF [player is not pregnant]  
 		if(player.pregnancyIncubation == 0) outputText("  The eruption of cum from her horsecock out does every other ejaculating dick in the room.  Your belly button pops outward as your stomach swells from the surging torrent of sperm pumping directly into your womb.  The hands of strangers grab your legs to keep you pinned in place while Urta struggles to keep her gushing cock inside your cunt despite the building pressure.  A couple voices call out, \"<i>She's gonna pop!  Is she gonna pop?  I think she is!</i>\"  Niamh is forced to sit up higher as your cum bloated belly pushes up against her.  Urta looks as if she's having a seizure from the sheer effort of unloading herself into you.  You scream out loud from the ecstasy of swelling but cries of pleasure are lost within Niamh's pussy folds, urging her to come again.  Her girl cum squirts down your throat, making your belly feel all the more tight and fit to burst.");

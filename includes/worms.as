@@ -85,7 +85,7 @@ public function infest1():void {
 	trace("GET INFESTED HERE");
 	if(player.hasStatusAffect("infested") >= 0) {trace("BWUH?");}
 	else {
-		if(flags[EVER_INFESTED] == 0) flags[EVER_INFESTED] = 1;
+		if(flags[kFLAGS.EVER_INFESTED] == 0) flags[kFLAGS.EVER_INFESTED] = 1;
 		player.createStatusAffect("infested",0,0,0,0);
 		stats(0,0,0,0,0,0,0,0);
 	}
@@ -193,8 +193,8 @@ public function playerInfest():void {
 		fatigue(40,2);
 		outputText("With a great squeeze, you will your body to push out a load of semen filled with worms.  Izma's eyes widen in shock as she dives and rolls away from the torrent.  \"<i>What the fuck!</i>\" she yells. \"<i>Is that what that smell was?  That's disgusting!  Get away from me " + player.short + ", I DON'T want what you've got.  Don't talk to me again while you've got those nasty things!</i>\"  Izma grabs her locker between her hands and wades into the lake, swimming away by means of her tail while holding the books out of the water.", true);
 		//(set Izmacounter to 0)
-		flags[UNKNOWN_FLAG_NUMBER_00230] = 0;
-		flags[UNKNOWN_FLAG_NUMBER_00233] = 1;
+		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00230] = 0;
+		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00233] = 1;
 		//clear status
 		clearStatuses(false);
 		//Clear itemswapping in case it hung somehow

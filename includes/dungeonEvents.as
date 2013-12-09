@@ -1085,7 +1085,7 @@ public function doDungeon(eventNo:Number):void {
 	}
 	//Try to go to Zetaz's room from the south
 	if(eventNo == 11077) {
-		if(flags[ZETAZ_DOOR_UNLOCKED] == 0) {
+		if(flags[kFLAGS.ZETAZ_DOOR_UNLOCKED] == 0) {
 			outputText("The door won't budge.", true);
 			doNext(1);
 			return;
@@ -1147,7 +1147,7 @@ public function doDungeon(eventNo:Number):void {
 	if(eventNo == 11097) {
 		shortName = "GodMead";
 		takeItem();
-		flags[HEL_DUNGEON_MEAD_LOOTED]++;
+		flags[kFLAGS.HEL_DUNGEON_MEAD_LOOTED]++;
 		return;
 	}
 	if(eventNo == 11098) {
@@ -1189,19 +1189,19 @@ public function doDungeon(eventNo:Number):void {
 	if(eventNo == 11107) {
 		shortName = "SucWhip";
 		takeItem();
-		flags[HEL_DUNGEON_TAKEN_WHIP] = 1;
+		flags[kFLAGS.HEL_DUNGEON_TAKEN_WHIP] = 1;
 		return;
 	}
 	if(eventNo == 11108) {
 		shortName = "BonStrp";
 		takeItem();
-		flags[HEL_DUNGEON_TAKEN_STRAPS] = 1;
+		flags[kFLAGS.HEL_DUNGEON_TAKEN_STRAPS] = 1;
 		return;
 	}
 	if(eventNo == 11109) {
 		shortName = "L.Daggr";
 		takeItem();
-		flags[HEL_DUNGEON_TAKEN_DAGGER] = 1;
+		flags[kFLAGS.HEL_DUNGEON_TAKEN_DAGGER] = 1;
 		return;
 	}
 	if(eventNo == 11110) {

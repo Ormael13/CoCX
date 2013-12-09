@@ -15,22 +15,22 @@ public function supahAkabalEdition():void
 	monster.cocks[0].cockLength = 15;
 	monster.cocks[0].cockThickness = 2.5;
 	monster.cocks[0].cockType = CockTypesEnum.HUMAN;
-	if (flags[AKBAL_BITCH_Q] >= 2)
+	if (flags[kFLAGS.AKBAL_BITCH_Q] >= 2)
 	{
 		akbitchEncounter();
 		return;
 	}
-	if (flags[AKBAL_SUBMISSION_STATE] == 2)
+	if (flags[kFLAGS.AKBAL_SUBMISSION_STATE] == 2)
 	{
 		repeatAkbalPostSubmission();
 		return;
 	}
-	if (flags[AKBAL_SUBMISSION_STATE] == 1)
+	if (flags[kFLAGS.AKBAL_SUBMISSION_STATE] == 1)
 	{
 		ackbalRepeatAfterWin();
 		return;
 	}
-	if (flags[AKBAL_SUBMISSION_STATE] == -1)
+	if (flags[kFLAGS.AKBAL_SUBMISSION_STATE] == -1)
 	{
 		ackbalRepeatAfterLoss();
 		return;
@@ -116,7 +116,7 @@ public function startuAkabalFightomon():void
 	outputText("You ready your " + player.weaponName + " and prepare to battle the demon jaguar.", false);
 	//[battle ensues]
 	startCombat(22);
-	flags[PLAYER_RESISTED_AKBAL]++;
+	flags[kFLAGS.PLAYER_RESISTED_AKBAL]++;
 }
 
 //[Submit]
@@ -124,11 +124,11 @@ public function akbalSubmit():void
 {
 	spriteSelect(2);
 	slimeFeed();
-	flags[AKBAL_SUBMISSION_COUNTER]++;
-	flags[AKBAL_SUBMISSION_STATE] = 2;
-	flags[AKBAL_BITCH_Q] = -1;
+	flags[kFLAGS.AKBAL_SUBMISSION_COUNTER]++;
+	flags[kFLAGS.AKBAL_SUBMISSION_STATE] = 2;
+	flags[kFLAGS.AKBAL_BITCH_Q] = -1;
 	//Big booty special
-	if (flags[AKBAL_SUBMISSION_COUNTER] > 5 && flags[PLAYER_RESISTED_AKBAL] < 2 && player.buttRating >= 13 && player.tone < 80)
+	if (flags[kFLAGS.AKBAL_SUBMISSION_COUNTER] > 5 && flags[kFLAGS.PLAYER_RESISTED_AKBAL] < 2 && player.buttRating >= 13 && player.tone < 80)
 	{
 		akbalBigButtSubmit();
 		return;
@@ -358,13 +358,13 @@ public function akbalSubmissionFollowup():void
 {
 	spriteSelect(2);
 	outputText("", true);
-	if (flags[AKBAL_SUBMISSION_COUNTER] < 4)
+	if (flags[kFLAGS.AKBAL_SUBMISSION_COUNTER] < 4)
 	{
 		outputText("You awake in your camp feeling dangerous, powerful and fiercely satisfied.", false);
 	}
 	//[After 8th submission, if whispered and corruption is greater than 80%]
 	//(fighting Akbal disables this scene, but you retain the ability if you rape him after)
-	else if (flags[PLAYER_RESISTED_AKBAL] == 0 && flags[AKBAL_SUBMISSION_COUNTER] >= 8 && player.cor > 80)
+	else if (flags[kFLAGS.PLAYER_RESISTED_AKBAL] == 0 && flags[kFLAGS.AKBAL_SUBMISSION_COUNTER] >= 8 && player.cor > 80)
 	{
 		if (player.cor < 80 || player.hasPerk("Fire Lord") >= 0)
 		{
@@ -565,7 +565,7 @@ public function akbalHeal():void
 //[Victory via HP]
 public function victoryChoices():void
 {
-	flags[AKBAL_SUBMISSION_STATE] = 1;
+	flags[kFLAGS.AKBAL_SUBMISSION_STATE] = 1;
 	//[General Victory]
 	if (monster.HP < 1)
 	{
@@ -609,7 +609,7 @@ public function victoryChoices():void
 
 public function rapeAkbalForcedFemaleOral():void
 {
-	flags[AKBAL_BITCH_Q]++;
+	flags[kFLAGS.AKBAL_BITCH_Q]++;
 	outputText("", true);
 	//Naga RAPPUUUUUU
 	if (player.isNaga())
@@ -673,7 +673,7 @@ public function rapeAkbalForcedFemaleOral():void
 //Standard rapes - buttfucks and oral
 public function rapeAkbal():void
 {
-	flags[AKBAL_BITCH_Q]++;
+	flags[kFLAGS.AKBAL_BITCH_Q]++;
 	var primary:Number = player.cockThatFits(50);
 	if (primary < 0)
 		primary = 0;
@@ -899,7 +899,7 @@ public function rapeAkbal():void
 
 public function girlsRapeAkbal():void
 {
-	flags[AKBAL_BITCH_Q]++;
+	flags[kFLAGS.AKBAL_BITCH_Q]++;
 	outputText("", true);
 	outputText("You smirk to yourself quietly as the so called \"God of Terrestrial Fire\" lays in a twitching heap on the ground, his flesh squirming as he shifts into his more humanoid form. Removing your " + player.armorName + ", your hand lowers to your feminine slit, pondering how to make use of him.\n\n", false);
 	//{If Centaur}
@@ -1126,8 +1126,8 @@ public function girlsRapeAkbalPart2():void
 
 public function loseToAckballllllz():void
 {
-	flags[AKBAL_SUBMISSION_STATE] = -1;
-	flags[AKBAL_BITCH_Q] = 0;
+	flags[kFLAGS.AKBAL_SUBMISSION_STATE] = -1;
+	flags[kFLAGS.AKBAL_BITCH_Q] = 0;
 	outputText("", true);
 	//[Defeat via HP]
 	if (player.HP < 1)
@@ -1376,7 +1376,7 @@ public function akbitchEncounter():void
 {
 	clearOutput();
 	outputText("As you explore the deep woods you begin to hear a soft slurping sound. In this world you know that any strange sound, especially the wet ones, most likely means something dangerous is up ahead... or something dangerous is fucking something a little less dangerous.  As you cautiously advance you spy the pelt of the jaguar demon, Akbal.  The demon jaguar sits in the middle of the clearing with one leg extended as he repeatedly swipes his wide tongue against his hole, probably cleaning up imp spunk thanks to you.  He is so utterly focused on the task that he doesn’t notice your approach.");
-	flags[AKBAL_BITCH_Q] = 1;
+	flags[kFLAGS.AKBAL_BITCH_Q] = 1;
 	//{corruption < 40/choose no} 
 	if (player.cor < 40 || player.lust < 33)
 		akbitchNoThnx(false);
@@ -1440,7 +1440,7 @@ public function takeAdvantageOfAkbitch():void
 	//{intelligence > 60}
 	outputText("\n\nAkbal suddenly stops struggling and you hear someone shout your name. You smile, knowing the voice is Akbal’s attempt to distract you.  Ignoring his desperate ploy, you grab the demon by the shoulders and slam him into the ground.  He struggles, you push him down again.  After throwing a fit of swearing and cursing, he goes limp.  Accepting his fate, he tells you to get on with it.  With his arms still behind his back, you tie a portion of the vine around his neck like a collar and leave the rest hanging from the main part, resembling a leash.  This is going to be fun.");
 	
-	flags[AKBAL_TIMES_BITCHED]++;
+	flags[kFLAGS.AKBAL_TIMES_BITCHED]++;
 	menu();
 	addButton(0, "Normal", basicAkbitchScene);
 	//AMB Strength Scene
@@ -1462,7 +1462,7 @@ public function basicAkbitchScene():void
 {
 	clearOutput();
 	outputText("With a grin, you tug on Akbal’s collar, and he lets out a barely suppressed purr.  ");
-	if (flags[AKBAL_TIMES_BITCHED] == 1)
+	if (flags[kFLAGS.AKBAL_TIMES_BITCHED] == 1)
 		outputText("The smile on your [face] spreads even wider as the unexpected sound tells you you’ve turned this demonic sexual predator into your own personal slut.  As if to confirm this, h");
 	else
 		outputText("H");

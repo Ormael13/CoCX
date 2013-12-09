@@ -19,7 +19,7 @@ public function cinnabarAppearance(output:Boolean = true):Number {
 	if(model.time.hours < 15 || model.time.hours > 20) return 0;
 	if(output) {
 		//Not yet introduced
-		if(flags[CINNABAR_NUMBER_ENCOUNTERS] == 0) outputText("\n\nThere's a generously proportioned woman lurking near a tavern.  Looking closer, you can see she has a ruby-red dress over her ruddy fur, and as she turns you make out an unmistakable, rat-like muzzle.", false);
+		if(flags[kFLAGS.CINNABAR_NUMBER_ENCOUNTERS] == 0) outputText("\n\nThere's a generously proportioned woman lurking near a tavern.  Looking closer, you can see she has a ruby-red dress over her ruddy fur, and as she turns you make out an unmistakable, rat-like muzzle.", false);
 		//Appearance Repeat:
 		else outputText("\n\nCinnabar is on the prowl, looking for well-endowed johns to lie with.", false);
 	}
@@ -30,8 +30,8 @@ public function cinnabarGreeting():void {
 	outputText("", true);
 	spriteSelect(91);
 	//1st Time:
-	if(flags[CINNABAR_NUMBER_ENCOUNTERS] == 0) {
-		flags[CINNABAR_NUMBER_ENCOUNTERS]++;
+	if(flags[kFLAGS.CINNABAR_NUMBER_ENCOUNTERS] == 0) {
+		flags[kFLAGS.CINNABAR_NUMBER_ENCOUNTERS]++;
 		//(No cock) 
 		if(!player.hasCock()) {
 			outputText("You walk over towards the rat-morph, and as you near, she places her hands on her hips, sizing you up with her intense, blood-red eyes.  She licks her lips and sidles alongside you, caressing your body as she offers, \"<i>50 gems for an hour.  That's all it takes to have Cinnabar be your companion...</i>\"  Her voice trails off into a husky vibration as she awaits your response.\n\n", false);
@@ -99,9 +99,9 @@ public function cinnabarGreeting():void {
 
 //[Buy an Hour]
 public function cinnabarNonHugeDickings():void {
-	flags[CINNABAR_HOUSE_VISITED]++;
-	flags[CINNABAR_NUMBER_TIMES_FUCKED]++;
-	flags[CINNABAR_FUCKED_CORRUPT_PREVIOUSLY] = 0;
+	flags[kFLAGS.CINNABAR_HOUSE_VISITED]++;
+	flags[kFLAGS.CINNABAR_NUMBER_TIMES_FUCKED]++;
+	flags[kFLAGS.CINNABAR_FUCKED_CORRUPT_PREVIOUSLY] = 0;
 	outputText("", true);
 	spriteSelect(91);
 	//(Too poor)
@@ -210,9 +210,9 @@ public function cinnabarNonHugeDickings():void {
 	
 //[FUCK] – tracks if last fuck was huger + corrupteded version
 public function cinnabarGetsFUKKKKED():void {
-	flags[CINNABAR_HOUSE_VISITED]++;
-	flags[CINNABAR_NUMBER_TIMES_FUCKED]++;
-	flags[CINNABAR_FUCKED_CORRUPT_PREVIOUSLY] = 0;
+	flags[kFLAGS.CINNABAR_HOUSE_VISITED]++;
+	flags[kFLAGS.CINNABAR_NUMBER_TIMES_FUCKED]++;
+	flags[kFLAGS.CINNABAR_FUCKED_CORRUPT_PREVIOUSLY] = 0;
 	outputText("", true);
 	var x:Number = player.biggestCockIndex();
 	var y:Number = player.biggestCockIndex2();
@@ -224,7 +224,7 @@ public function cinnabarGetsFUKKKKED():void {
 	outputText("Though your " + player.legs() + " have grown wobbly and your gear tight, you stand up, straight as a fencepost, and pull the slut's arms away from your kit.  Cinnabar grunts with displeasure, but you grab her dress and spin her into your arms, letting your bulge dig into her back while your hands cup the heavy swells of her breasts.  Her nipples are hard and ready, easily as large as the tips of your fingers, which you waste no time in securing around the swollen buds. The skank's displeased grunt morphs into a loud squeak, then trails off into a low, eager moan.\n\n", false);
 	
 	outputText("\"<i>Please, bend me over and fuck me; stuff that fat cock in my juicy cunt.  Stuff me, rut me, bang me here in front of everyone!", false);
-	if(flags[CINNABAR_FUCKED_CORRUPT_PREVIOUSLY] > 0) outputText("  Just be gentler than last time, okay " + player.mf("stud","baby") + "?", false);
+	if(flags[kFLAGS.CINNABAR_FUCKED_CORRUPT_PREVIOUSLY] > 0) outputText("  Just be gentler than last time, okay " + player.mf("stud","baby") + "?", false);
 	outputText("</i>\"  Cinnabar cries, but the stares your little encounter has attracted warn you that continuing in the open would be a very bad idea.  You pinch on one of Cinnabar's hard nips and bite her to shush her incessant yammering, but all it does it make her squeak even louder.  You growl into her ear, telling the horny cunt that if she wants your dick inside her, she had better be a good pet and find you some privacy.\n\n", false);
 	
 	outputText("The eager rodent spins, pulling her nipples from your fingers and planting a heavy, wet kiss on your lips hard enough to rock you back ", false);
@@ -278,7 +278,7 @@ public function cinnabarGetsFUKKKKED():void {
 	
 //(Huger and Corrupteder) (75+ corr)
 public function fuckCinnabarHugerAndCorruptedEr():void {
-	flags[CINNABAR_FUCKED_CORRUPT_PREVIOUSLY] = 1;
+	flags[kFLAGS.CINNABAR_FUCKED_CORRUPT_PREVIOUSLY] = 1;
 	var x:Number = player.biggestCockIndex();
 	var y:Number = player.biggestCockIndex2();
 	var z:Number = player.biggestCockIndex3();
@@ -286,7 +286,7 @@ public function fuckCinnabarHugerAndCorruptedEr():void {
 	outputText("", true);
 	spriteSelect(91);
 	outputText("You're almost there, so close to your orgasm, but this needy skank's pussy has barely tasted the largeness of your member.  She's wearing out your endurance with her tightness, and if you're going to split her wide, you'll need to pick up the pace.  You grab her thighs, ignoring her tail as it thrashes about, and heave, yanking her dick-dilated cunt along your length with enough force to lift her knees from the mattress.   Cinnabar actually screams from the brutal penetration, her legs spasming nervelessly while her hips are split wide, your fleshy spear absolutely and completely distorting her frail form.", false);
-	if(flags[CINNABAR_FUCKED_CORRUPT_PREVIOUSLY] > 0) outputText("  You're doing it again – turning her into a cum-sleeve without a care for her pleasure, but you don't fucking care.  You're too horny and she's too sexy not to abuse.", false);
+	if(flags[kFLAGS.CINNABAR_FUCKED_CORRUPT_PREVIOUSLY] > 0) outputText("  You're doing it again – turning her into a cum-sleeve without a care for her pleasure, but you don't fucking care.  You're too horny and she's too sexy not to abuse.", false);
 	outputText("\n\n", false);
 	
 	outputText("That one push sent nearly two feet of cock into the violated vermin, and you don't intend to stop until you've buried all " + num2Text(int(player.cocks[x].cockLength/12)) + " turgid feet inside her.  Cinnabar feels so light in comparison to your " + cockDescript(x) + ", barely dragging it down at all.  You get a wicked idea and lean back, letting your iron-hard member shift with you, pulling the rust-red rat completely off the bed and into the air.  With nothing to grab on to and no way to reach the ground, her entire weight is supported entirely by the friction of her over-burdened walls, and with how juicy this bitch is, she's already sliding down, accelerating her gravity-fed violation with her unintentionally well-lubricated fuck-hole.\n\n", false);
@@ -345,7 +345,7 @@ public function fuckCinnabarHugerAndCorruptedEr():void {
 
 //(HUGER)
 public function cinnabarHuger():void {
-	flags[CINNABAR_FUCKED_CORRUPT_PREVIOUSLY] = 0;
+	flags[kFLAGS.CINNABAR_FUCKED_CORRUPT_PREVIOUSLY] = 0;
 	var x:Number = player.biggestCockIndex();
 	var y:Number = player.biggestCockIndex2();
 	var z:Number = player.biggestCockIndex3();
@@ -397,7 +397,7 @@ public function cinnabarHuger():void {
 
 //(HUGE)
 public function cinnabarHuge():void {
-	flags[CINNABAR_FUCKED_CORRUPT_PREVIOUSLY] = 0;
+	flags[kFLAGS.CINNABAR_FUCKED_CORRUPT_PREVIOUSLY] = 0;
 	var x:Number = player.biggestCockIndex();
 	var y:Number = player.biggestCockIndex2();
 	var z:Number = player.biggestCockIndex3();
@@ -453,9 +453,9 @@ public function cinnabarHuge():void {
 //surprise – at the end she moves the portal when you pull back and makes you cum in her
 //and in your own ass.
 public function cinnabarMultiCockPortalFuckFest():void {
-	flags[CINNABAR_HOUSE_VISITED]++;
-	flags[CINNABAR_NUMBER_TIMES_FUCKED]++;
-	flags[CINNABAR_FUCKED_CORRUPT_PREVIOUSLY] = 0;
+	flags[kFLAGS.CINNABAR_HOUSE_VISITED]++;
+	flags[kFLAGS.CINNABAR_NUMBER_TIMES_FUCKED]++;
+	flags[kFLAGS.CINNABAR_FUCKED_CORRUPT_PREVIOUSLY] = 0;
 	outputText("", true);
 	spriteSelect(91);
 	//x pussy, y butt, z face
@@ -474,7 +474,7 @@ public function cinnabarMultiCockPortalFuckFest():void {
 	if(player.lust >= 70) outputText(" you have", false);
 	else outputText(" she's given you", false);
 	outputText(".  She's teasing you, but it's clear she's no dominatrix.  No, she wants you to take charge, and if you're going to get off, you'll need to.  You hook your hand in between her cleavage, feeling the tight, silky embrace of her fur and the gentle, pounding beat of her heart.  It beats faster as soon as you start tugging her, dragging her towards the wagons.  ", false);
-	if(flags[CINNABAR_HOUSE_VISITED] == 0) outputText("She leans, guiding you towards her home even as she lets herself be led.", false);
+	if(flags[kFLAGS.CINNABAR_HOUSE_VISITED] == 0) outputText("She leans, guiding you towards her home even as she lets herself be led.", false);
 	else outputText("She blushes hard, her thighs darkening from the fluid racing down them as you pull her towards her house.", false);
 	outputText("\n\n", false);
 	

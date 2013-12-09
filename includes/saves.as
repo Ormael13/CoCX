@@ -232,7 +232,7 @@ public function deleteScreen():void
 			{
 				delFuncs[i] = function() : void 		// Anonymous functions FTW
 				{
-							flags[TEMP_STORAGE_SAVE_DELETION] = saveFileNames[i];
+							flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION] = saveFileNames[i];
 							confirmDelete();	
 				}
 			})(i);
@@ -258,19 +258,19 @@ public function deleteScreen():void
 
 public function confirmDelete():void
 {
-	outputText("You are about to delete the following save: <b>" + flags[TEMP_STORAGE_SAVE_DELETION] + "</b>\n\nAre you sure you want to delete it?", true);
+	outputText("You are about to delete the following save: <b>" + flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION] + "</b>\n\nAre you sure you want to delete it?", true);
 	simpleChoices("No", deleteScreen, "Yes", purgeTheMutant, "", 0, "", 0, "", 0);
 }
 
 public function purgeTheMutant():void
 {
-	var test:* = SharedObject.getLocal(flags[TEMP_STORAGE_SAVE_DELETION], "/");
-	trace("DELETING SLOT: " + flags[TEMP_STORAGE_SAVE_DELETION]);
+	var test:* = SharedObject.getLocal(flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION], "/");
+	trace("DELETING SLOT: " + flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION]);
 	var blah:Array = new Array("been virus bombed", "been purged", "been vaped", "been nuked from orbit", "taken an arrow to the knee", "fallen on its sword", "lost its reality matrix cohesion", "been cleansed", "suffered the following error: (404) Porn Not Found");
 	
 	trace(blah.length + " array slots");
 	var select:Number = rand(blah.length);
-	outputText(flags[TEMP_STORAGE_SAVE_DELETION] + " has " + blah[select] + ".", true);
+	outputText(flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION] + " has " + blah[select] + ".", true);
 	test.clear();
 	doNext(deleteScreen);
 }
@@ -772,11 +772,11 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 	//If at initial title
 	if (player.str == 0)
 	{
-		if (flags[SHOW_SPRITES_FLAG])
+		if (flags[kFLAGS.SHOW_SPRITES_FLAG])
 			sprite = true;
-		if (flags[EASY_MODE_ENABLE_FLAG])
+		if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG])
 			easy = true;
-		if (flags[SILLY_MODE_ENABLE_FLAG])
+		if (flags[kFLAGS.SILLY_MODE_ENABLE_FLAG])
 			silly = true;
 	}
 	
@@ -827,13 +827,13 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		
 		//If at initial title
 		if (sprite)
-			flags[SHOW_SPRITES_FLAG] = true;
+			flags[kFLAGS.SHOW_SPRITES_FLAG] = true;
 		if (easy)
-			flags[EASY_MODE_ENABLE_FLAG] = true;
+			flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = true;
 		else
-			flags[EASY_MODE_ENABLE_FLAG] = false;
+			flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = false;
 		if (silly)
-			flags[SILLY_MODE_ENABLE_FLAG] = true;
+			flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = true;
 		
 		//PIERCINGS
 		
@@ -1369,29 +1369,29 @@ public function unFuckSave():void
 
 	// Fix issues with corrupt cockTypes caused by a error in the serialization code.
 		
-	//trace("CockInfo = ", flags[RUBI_COCK_TYPE]);
-	//trace("getQualifiedClassName = ", getQualifiedClassName(flags[RUBI_COCK_TYPE]));
-	//trace("typeof = ", typeof(flags[RUBI_COCK_TYPE]));
-	//trace("is CockTypesEnum = ", flags[RUBI_COCK_TYPE] is CockTypesEnum);
-	//trace("instanceof CockTypesEnum = ", flags[RUBI_COCK_TYPE] instanceof CockTypesEnum);
+	//trace("CockInfo = ", flags[kFLAGS.RUBI_COCK_TYPE]);
+	//trace("getQualifiedClassName = ", getQualifiedClassName(flags[kFLAGS.RUBI_COCK_TYPE]));
+	//trace("typeof = ", typeof(flags[kFLAGS.RUBI_COCK_TYPE]));
+	//trace("is CockTypesEnum = ", flags[kFLAGS.RUBI_COCK_TYPE] is CockTypesEnum);
+	//trace("instanceof CockTypesEnum = ", flags[kFLAGS.RUBI_COCK_TYPE] instanceof CockTypesEnum);
 
 
 
-	if (!(flags[RUBI_COCK_TYPE] is CockTypesEnum || flags[RUBI_COCK_TYPE] is Number))	
-	{ // Valid contents of flags[RUBI_COCK_TYPE] are either a CockTypesEnum or a number
+	if (!(flags[kFLAGS.RUBI_COCK_TYPE] is CockTypesEnum || flags[kFLAGS.RUBI_COCK_TYPE] is Number))	
+	{ // Valid contents of flags[kFLAGS.RUBI_COCK_TYPE] are either a CockTypesEnum or a number
 
 		trace("Fixing save (goo girl)");
 		outputText("\n<b>Rubi's cockType is invalid. Defaulting him to human.</b>\n");
-		flags[RUBI_COCK_TYPE] = 0;
+		flags[kFLAGS.RUBI_COCK_TYPE] = 0;
 	}
 
 
-	if (!(flags[GOO_DICK_TYPE] is CockTypesEnum || flags[GOO_DICK_TYPE] is Number))	
-	{ // Valid contents of flags[GOO_DICK_TYPE] are either a CockTypesEnum or a number
+	if (!(flags[kFLAGS.GOO_DICK_TYPE] is CockTypesEnum || flags[kFLAGS.GOO_DICK_TYPE] is Number))	
+	{ // Valid contents of flags[kFLAGS.GOO_DICK_TYPE] are either a CockTypesEnum or a number
 
 		trace("Fixing save (goo girl)");
 		outputText("\n<b>Latex Goo-Girls's cockType is invalid. Defaulting him to human.</b>\n");
-		flags[GOO_DICK_TYPE] = 0;
+		flags[kFLAGS.GOO_DICK_TYPE] = 0;
 	}
 
 
@@ -1410,8 +1410,8 @@ public function unFuckSave():void
 //using the file saving code, else it uses slot saving.
 
 //Arrays for converting a byte array into a string
-public const encodeChars:Array = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '/'];
-public const decodeChars:Array = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 62, -1, -1, -1, 63, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -1, -1, -1, -1, -1, -1, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, -1, -1, -1, -1, -1, -1, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, -1, -1, -1, -1, -1];
+public static const encodeChars:Array = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '/'];
+public static const decodeChars:Array = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 62, -1, -1, -1, 63, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -1, -1, -1, -1, -1, -1, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, -1, -1, -1, -1, -1, -1, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, -1, -1, -1, -1, -1];
 
 //ByteArray > String
 public function b64e(data:ByteArray):String

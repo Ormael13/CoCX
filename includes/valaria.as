@@ -19,7 +19,7 @@ public function valeriaAppearance():void {
 	outputText("Valeria is a 6 foot tall goo-girl composed of a viscous blue goop.  She is currently wearing a suit of plated armor, and wields her gooey greatsword as a weapon.  She has a beautiful feminine face with strong, angular features, and has affected short-cropped gooey hair, hanging just past her cheeks.  Her hips are average, with a muscular, gropable bum.  Unlike most goos, Valeria has formed two normal human legs ending in normal human feet out of her gooey lower body.");
 	outputText("\n\nShe has a pair of C-cup breasts, with a single 0.5 inch nipple on each breast.");
 	//[If Valeria is cock'd:]
-	if(flags[VELARIA_FUTA] == 1) outputText("\n\nWhen you desire it, she's able to form an impressive human-shaped cock above her twat, usually capping out at about 12 inches. Gooey as it is, it constantly dribbles bits of goop, not unlike pre-cum.");
+	if(flags[kFLAGS.VELARIA_FUTA] == 1) outputText("\n\nWhen you desire it, she's able to form an impressive human-shaped cock above her twat, usually capping out at about 12 inches. Gooey as it is, it constantly dribbles bits of goop, not unlike pre-cum.");
 	outputText("\n\nShe has created an easily stretchable, gooey cunt between her legs, with a tiny 0.2 inch clitoris.");
 	outputText("\n\nShe generally doesn't bother to affect an anus, though you can't imagine it'd be too difficult to penetrate her gooey, gropable behind.");
 	doNext(valeriaFollower);
@@ -95,7 +95,7 @@ public function followersValeriaSex(display:Boolean = true):void {
 	if(player.gender > 0) dominated = 3598;
 	var dickToggle:Number = 3594;
 	var dickText:String = "Grow Dick";
-	if(flags[VELARIA_FUTA] == 1) {
+	if(flags[kFLAGS.VELARIA_FUTA] == 1) {
 		dickText = "Lose Dick";
 		dickToggle = 3594;
 	}
@@ -107,17 +107,17 @@ public function valeriaDickToggle():void {
 	spriteSelect(79);
 	clearOutput();
 	//[If Valeria has a dick:] 
-	if(flags[VELARIA_FUTA] == 1) {
+	if(flags[kFLAGS.VELARIA_FUTA] == 1) {
 		outputText("Before you do anything, you ask Valeria if she wouldn't mind hiding her facsimile of a dick, at least when you aren't having sex.");
 		outputText("\n\n\"<i>Aww,</i>\" she groans, \"<i>I was starting to get used to my little buddy there, too.  But, if that's what you want... I guess I'll oblige.</i>\"");
 		outputText("\n\nYou're gratified to see her thick gooey dick retract and dissipate into her groin.");
 		outputText("\n\n\"<i>All better now, partner?</i>\"");
 		//(PC returns to sex menu)
-		flags[VELARIA_FUTA] = 0;
+		flags[kFLAGS.VELARIA_FUTA] = 0;
 	}
 	//[If Valeria doesn't have a dick:] 
 	else {
-		flags[VELARIA_FUTA] = 1;
+		flags[kFLAGS.VELARIA_FUTA] = 1;
 		outputText("Struggling to find a less-than-awkward way of phrasing this, you ask Valeria if she wouldn't mind growing a certain extra appendage for you.");
 		//(If PC is female/herm/genderless:)
 		if(player.gender != 1) {
@@ -150,7 +150,7 @@ public function valeriaGetFucked():void {
 	outputText("\n\nShe grins.  \"<i>You just lie back and let me take care of everything, partner.</i>\"  You do as she asks, flopping onto your back ");
 	if(player.isBiped()) outputText("and spreading your legs ");
 	outputText("as Valeria ");
-	if(flags[VELARIA_FUTA] == 0) outputText("forms a thick, gooey cock");
+	if(flags[kFLAGS.VELARIA_FUTA] == 0) outputText("forms a thick, gooey cock");
 	else outputText("grabs her thick, gooey cock");
 	outputText(" and looms over you.");
 	outputText("\n\nSurprisingly, she kneels over your shoulders and lets her cock flip onto your chin.  \"<i>Well, get it ready.  Come on.</i>\"");
@@ -431,7 +431,7 @@ public function valeriaAndGooThreeStuff():void {
 	else outputText("You sigh as your [asshole] is tenderly licked and tickled by what feels like dozens of inhumanly long tongues, slathering over it in such wide circles that your cheeks get a thorough lashing as well. Bands as firm and strong as leather straps slip into place around your [butt] to spread you wide open, and one of the slender, slime-crafted organs slithers deeper to taste your rosebud, never quite pushing in.");
 	outputText("\n\nYour gait turns a little stuttery in no time flat, and your hips sway and jerk erratically as you approach the fallen goo, helplessly bound to respond to the sensuous caresses of the body-clinging goo. She somehow keeps it up even after you're looming over your defeated foe, giggling airily as you examine your prize.");
 	
-	if(flags[TIMES_VALERIA_GOO_THREESOMED] == 0) outputText("\n\nUnfortunately for you, the fuck-hungry goo-slut is intent on taking command here.");
+	if(flags[kFLAGS.TIMES_VALERIA_GOO_THREESOMED] == 0) outputText("\n\nUnfortunately for you, the fuck-hungry goo-slut is intent on taking command here.");
 	else outputText("\n\nJust like last time, the fuck-hungry goo-slut is taking command.");
 	outputText("  She surprises you by contorting your body with pressure from an unexpected angle, tipping you head over heels, right toward the wide-eyed goo-girl you just managed to defeat!");
 	
@@ -446,7 +446,7 @@ public function valeriaAndGooThreeStuff():void {
 	
 	outputText("\n\nA distortion becomes visible on the arced field of blue before you, slowly resolving into the familiar, sloppy visage of Valeria. A second later, another, unfamiliar face follows, coming up beside her, but a blue hand flattens against the top of the newcomer to smush it away into nothing. Valeria says, \"<i>No way, toots. Let momma do the talkin'....</i>\"");
 	outputText("\n\nYou ");
-	if(flags[TIMES_VALERIA_GOO_THREESOMED] == 0) outputText("demand that she release you");
+	if(flags[kFLAGS.TIMES_VALERIA_GOO_THREESOMED] == 0) outputText("demand that she release you");
 	else outputText("playfully comment that she really ought to release you");
 	outputText(", but the troublesome, liquid armor shakes her head negatively.");
 	outputText("\n\n\"<i>You just sit tight, [name]. I'm gonna give my sister a fun new experience and fill you with so much pleasure that you'll feel like you're gonna pop.</i>\" She disappears back into the azure blob before you can respond. The fading ripples almost mock your inability to reply as they smooth into nonexistence.");
@@ -461,11 +461,11 @@ public function valeriaGooRapeII():void {
 	else outputText("your chest");
 	outputText(" once more, and this time you catch a glimpse of it out of the corner of your eye. It's the goo-girl's core, clasped in a fist of deep-blue. It pulses faintly as it's held there, just before you, while subtle vibrations and temperature fluctuations alert you to some kind of secret communications between the two women. Just what are they planning?");
 	outputText("\n\nYou get your answer in the form of a sudden");
-	if(flags[TIMES_VALERIA_GOO_THREESOMED] == 0) outputText(", unexpected");
+	if(flags[kFLAGS.TIMES_VALERIA_GOO_THREESOMED] == 0) outputText(", unexpected");
 	else outputText(" but expected");
 	outputText(" pressure at your [asshole]. It's so... so slick that you have to wonder how they can manage to push with such authority at your rearmost orifice, but they manage it all the same. You clench to deny them entrance, squeezing your sphincter shut tighter than locked door. Valeria's giggling voice coos from somewhere below, \"<i>Oh, don't be a spoilsport. Come on, it'll be fun.</i>\"");
 	
-	if(flags[TIMES_VALERIA_GOO_THREESOMED] == 0) outputText("\n\nYou hold tight anyway, at least until she yanks your cheeks wide-open and twists whatever it is she's trying to force inside you, slowly spreading you open with a soft, organic, anal drilling.");
+	if(flags[kFLAGS.TIMES_VALERIA_GOO_THREESOMED] == 0) outputText("\n\nYou hold tight anyway, at least until she yanks your cheeks wide-open and twists whatever it is she's trying to force inside you, slowly spreading you open with a soft, organic, anal drilling.");
 	else outputText("You hold tight, keeping up your faux resistance until she yanks your cheeks open and twists her gooey reaming-tool into a sphincter-penetrating drill bit.");
 	outputText(" Spinning faster and faster, the intruding, cylindrical slime dilates your [asshole] to its maximum gape in four or five seconds, hardening its exterior into an butt-stuffing goo-pipe. You can feel it snaking around through your bowels, plumbing deeper inside you than you would have thought possible before stopping what feels like halfway through your large intestine.");
 	//{Butt-change: full anal size}
@@ -509,7 +509,7 @@ public function valeriaGooRapeII():void {
 	}
 	//Merge
 	outputText("\n\nGiggling, the sapphire slut does something that makes the body-wrapping sphere jiggle and contract slightly. ");
-	if(flags[TIMES_VALERIA_GOO_THREESOMED] > 0) outputText("You grin in eager anticipation, waiting to feel the flood of fluid that you know is coming. It won't take long.... You feel it in your butt first.");
+	if(flags[kFLAGS.TIMES_VALERIA_GOO_THREESOMED] > 0) outputText("You grin in eager anticipation, waiting to feel the flood of fluid that you know is coming. It won't take long.... You feel it in your butt first.");
 	else outputText("At first, you don't realize what it is. You're floating in a bit of a sexual daze by now and barely cogent of what's going on, but it does feel quite nice, whatever it is. The spreading heat in your posterior is what finally clues you in to what's happening.");
 	outputText(" Pumping deep into your bowels, the hardened protrusion is no longer simply stuffing you. It's pumping something slick and wet and oh so gooey straight into your [asshole], filling you up so strangely that you aren't sure what to make of beyond how... well, good it feels to be stuffed like this.");
 	
@@ -584,7 +584,7 @@ public function valeriaGooRapeII():void {
 	//Add some faux pregnancy descriptors to the appearance screen
 	//Prevent pregnancy if has a vagina when it happens.
 	//Be sure to track what holes get filled, as body parts may change before birth!
-	flags[TIMES_VALERIA_GOO_THREESOMED]++;
+	flags[kFLAGS.TIMES_VALERIA_GOO_THREESOMED]++;
 	stats(0,0,0,0,0,0,-100,0);
 	//v1 = time till birth.
 	//v2 = cock fill = 1, balls fill = 2

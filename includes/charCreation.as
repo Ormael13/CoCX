@@ -1,5 +1,4 @@
 ﻿import classes.DefaultDict;
-// CUSTOM_PC_ENABLED:int = 759;
 
 public function newGameGo(e:MouseEvent = null):void {
 	funcs = new Array();
@@ -21,14 +20,14 @@ public function newGameGo(e:MouseEvent = null):void {
 	var easy:Boolean = false;
 	var sprite:Boolean = false;
 	//If at initial title
-	if(flags[SHOW_SPRITES_FLAG]) 
+	if(flags[kFLAGS.SHOW_SPRITES_FLAG]) 
 		sprite = true;
-	if(flags[EASY_MODE_ENABLE_FLAG]) 
+	if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG]) 
 		easy = true;
-	if(flags[SILLY_MODE_ENABLE_FLAG]) 
+	if(flags[kFLAGS.SILLY_MODE_ENABLE_FLAG]) 
 		silly = true;
 	mainView.setButtonText( 0, "Newgame" ); // b1Text.text = "Newgame";
-	flags[CUSTOM_PC_ENABLED] = 0;
+	flags[kFLAGS.CUSTOM_PC_ENABLED] = 0;
 	
 	outputText("You grew up in the small village of Ingnam, a remote village with rich traditions, buried deep in the wilds.  Every year for as long as you can remember, your village has chosen a champion to send to the cursed Demon Realm.  Legend has it that in years Ingnam has failed to produce a champion, chaos has reigned over the countryside.  Children disappear, crops wilt, and disease spreads like wildfire.  This year, <b>you</b> have been selected to be the champion.\n\nWhat is your name?", true);
 	
@@ -72,10 +71,10 @@ public function newGameGo(e:MouseEvent = null):void {
 	player.cor = 0;
 	notes = "No Notes Available.";
 	player.lust = 15;
-	player.XP = flags[NEW_GAME_PLUS_BONUS_STORED_XP];
+	player.XP = flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP];
 	player.level = 1;
 	player.HP = maxHP();
-	player.gems = flags[NEW_GAME_PLUS_BONUS_STORED_ITEMS];
+	player.gems = flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_ITEMS];
 	player.hairLength = 5;
 	player.skinType = SKIN_TYPE_PLAIN;
 	player.faceType = FACE_HUMAN;
@@ -153,10 +152,10 @@ public function newGameGo(e:MouseEvent = null):void {
 	//Lets get this bitch started
 	gameState = 0;
 	//NG+ Clothes reset
-	if(flags[NEW_GAME_PLUS_BONUS_STORED_XP] + flags[NEW_GAME_PLUS_BONUS_STORED_ITEMS] > 0) {
+	if(flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] + flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_ITEMS] > 0) {
 		//Clear Raphael's training variable so it does not effect
 		//Weapon strength post-newgame.
-		flags[RAPHAEL_RAPIER_TRANING] = 0;
+		flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 0;
 		player.armorName= oldPlayer.armorName;
 		player.weaponName= oldPlayer.weaponName;
 		player.weaponVerb= oldPlayer.weaponVerb;
@@ -184,12 +183,12 @@ public function newGameGo(e:MouseEvent = null):void {
 	flags = new DefaultDict();
 	
 	//Remember silly/sprite/etc
-	if(sprite) flags[SHOW_SPRITES_FLAG] = 1;
-	if(easy) flags[EASY_MODE_ENABLE_FLAG] = 1;
-	if(silly) flags[SILLY_MODE_ENABLE_FLAG] = 1;
+	if(sprite) flags[kFLAGS.SHOW_SPRITES_FLAG] = 1;
+	if(easy) flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 1;
+	if(silly) flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = 1;
 	//Set that jojo debug doesn't need to run
-	flags[UNKNOWN_FLAG_NUMBER_00102] = 1;
-	flags[UNKNOWN_FLAG_NUMBER_02999] = 3;
+	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00102] = 1;
+	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02999] = 3;
 	//Time reset
 	model.time.days = 0;
 	model.time.hours = 0;
@@ -551,13 +550,13 @@ public function doCreation(eventNo:Number):void {
 		if(mainView.nameBox.text == "") {
 			//If part of newgame+, don't fully wipe.
 			if(player.XP > 0 && player.explored == 0) {
-				flags[NEW_GAME_PLUS_BONUS_STORED_XP] = player.XP;
-				if(flags[NEW_GAME_PLUS_BONUS_STORED_XP] == 0) flags[NEW_GAME_PLUS_BONUS_STORED_XP] = 1;
+				flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] = player.XP;
+				if(flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] == 0) flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] = 1;
 				while(player.level > 1) {
-					flags[NEW_GAME_PLUS_BONUS_STORED_XP] += player.level * 100;
+					flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] += player.level * 100;
 					player.level--;
 				}
-				flags[NEW_GAME_PLUS_BONUS_STORED_ITEMS] = player.gems;
+				flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_ITEMS] = player.gems;
 			}
 			newGameGo(e);
 			outputText("\n\n\n<b>You must select a name.</b>", false);
@@ -579,13 +578,13 @@ public function doCreation(eventNo:Number):void {
 	}
 	//New Game+
 	if(eventNo == 10035) {
-		flags[NEW_GAME_PLUS_BONUS_STORED_XP] = player.XP;
-		if(flags[NEW_GAME_PLUS_BONUS_STORED_XP] == 0) flags[NEW_GAME_PLUS_BONUS_STORED_XP] = 1;
+		flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] = player.XP;
+		if(flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] == 0) flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] = 1;
 		while(player.level > 1) {
-			flags[NEW_GAME_PLUS_BONUS_STORED_XP] += player.level * 100;
+			flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] += player.level * 100;
 			player.level--;
 		}
-		flags[NEW_GAME_PLUS_BONUS_STORED_ITEMS] = player.gems;
+		flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_ITEMS] = player.gems;
 		newGameGo(e);
 		return;
 	}
@@ -672,20 +671,20 @@ public function doCreation(eventNo:Number):void {
 		}
 		else historyPerk = "History: Smith";
 		player.createPerk(historyPerk,0,0,0,0,"YOU GOT HISTORY BRO!");
-		if(flags[UNKNOWN_FLAG_NUMBER_00418] == 0) {
+		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] == 0) {
 			eventParser(10045);
-			flags[UNKNOWN_FLAG_NUMBER_00418] = 1;
+			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] = 1;
 		}
 		else {
-			flags[UNKNOWN_FLAG_NUMBER_00418] = 1;
+			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] = 1;
 			eventParser(1);
 		}
 		return;
 	}
 	if(eventNo == 10045) {
-		if(flags[CUSTOM_PC_ENABLED] == 1) {
+		if(flags[kFLAGS.CUSTOM_PC_ENABLED] == 1) {
 			clearOutput();
-			flags[CUSTOM_PC_ENABLED] = 0;
+			flags[kFLAGS.CUSTOM_PC_ENABLED] = 0;
 			customPCSetup();
 			doNext(10045);
 			return;
@@ -734,13 +733,13 @@ public function doCreation(eventNo:Number):void {
 }
 
 public function useCustomProfile():void {
-	flags[CUSTOM_PC_ENABLED] = 1;
+	flags[kFLAGS.CUSTOM_PC_ENABLED] = 1;
 	clearOutput();
 	player.short = mainView.nameBox.text;
 	mainView.nameBox.visible = false;
 	if(specialName(mainView.nameBox.text)) {
 		outputText("Your name defines everything about you, and as such, it is time to wake...\n\n");
-		flags[CUSTOM_PC_ENABLED] = 0;
+		flags[kFLAGS.CUSTOM_PC_ENABLED] = 0;
 		customPCSetup();
 		doNext(10045);
 	}
@@ -753,7 +752,7 @@ public function useCustomProfile():void {
 
 public function noCustomProfile():void {
 	clearOutput();
-	flags[CUSTOM_PC_ENABLED] = -1;
+	flags[kFLAGS.CUSTOM_PC_ENABLED] = -1;
 	player.short = mainView.nameBox.text;
 	mainView.nameBox.visible = false;
 	outputText("Your name carries little significance beyond it being your name.  What is your gender?");

@@ -657,7 +657,7 @@ public function goblinDrugAttack():void {
 	}	
 }
 public function goblinTeaseAttack():void {
-	if(monster.short == "Tamani" && flags[TAMANI_TIMES_HYPNOTISED] > 0) {
+	if(monster.short == "Tamani" && flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] > 0) {
 		tamaniHypnoTease();
 		return;
 	}

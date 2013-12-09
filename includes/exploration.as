@@ -11,14 +11,14 @@ public function doExplore():void {
 	var desert:Number = 0;
 	var deepwoods:Number = 0;
 	var plains:Number = 0;
-	if(flags[UNKNOWN_FLAG_NUMBER_00272] > 0) swamp = 111;
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272] > 0) swamp = 111;
 	if(player.hasStatusAffect("exploredDeepwoods") >= 0) deepwoods = 80
 	if(player.exploredMountain > 0) mountain = 6;
 	if(player.exploredForest > 0) forest = 4;
 	
 	if(player.exploredLake > 0) lake = 5;
 	if(player.exploredDesert > 0) desert = 3;
-	if(flags[TIMES_EXPLORED_PLAINS] > 0) plains = 97;
+	if(flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0) plains = 97;
 	if(player.explored == 0) {
 		outputText("You tentatively step away from your campsite, alert and scanning the ground and sky for danger.  You walk for the better part of an hour, marking the rocks you pass for a return trip to your camp.  It worries you that the portal has an opening on this side, and it was totally unguarded...\n\n...Wait a second, why is your campsite in front of you? The portal's glow is clearly visible from inside the tall rock formation.   Looking carefully you see your footprints leaving the opposite side of your camp, then disappearing.  You look back the way you came and see your markings vanish before your eyes.  The implications boggle your mind as you do your best to mull over them.  Distance, direction, and geography seem to have little meaning here, yet your campsite remains exactly as you left it.  A few things click into place as you realize you found your way back just as you were mentally picturing the portal!  Perhaps memory influences travel here, just like time, distance, and speed would in the real world!\n\nThis won't help at all with finding new places, but at least you can get back to camp quickly.  You are determined to stay focused the next time you explore and learn how to traverse this gods-forsaken realm.", true);
 		tryDiscover();
@@ -32,7 +32,7 @@ public function doExplore():void {
 	}
 	if(player.explored > 1) outputText("You can continue to search for new locations, or explore your previously discovered locations.", true);
 	
-	if(flags[EXPLORATION_PAGE] == 2) {
+	if(flags[kFLAGS.EXPLORATION_PAGE] == 2) {
 		explorePageII();
 		return;
 	}
@@ -50,24 +50,24 @@ public function doExplore():void {
 	//choices("Explore", 12, "Desert", desert, "Forest", forest, "Lake", lake, "Mountain", mountain, "Plains", plains, "Swamp", swamp, "Deepwoods", deepwoods, "H. Mountain", highMountain, "Back", 1);
 }
 public function explorePageII():void {
-	flags[EXPLORATION_PAGE] = 2;
+	flags[kFLAGS.EXPLORATION_PAGE] = 2;
 	var highMountain:Number = 0;
-	if(flags[DISCOVERED_HIGH_MOUNTAIN] > 0) highMountain = 95;
+	if(flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0) highMountain = 95;
 	menu();
 	if(highMountain > 0) addButton(0,"High Mountain",eventParser,highMountain);
-	if(flags[BOG_EXPLORED] > 0) addButton(1,"Bog",exploreBog);
+	if(flags[kFLAGS.BOG_EXPLORED] > 0) addButton(1,"Bog",exploreBog);
 	addButton(4,"Previous",goBackToPageI);
 	addButton(9,"Back",eventParser,1);
 }
 public function goBackToPageI():void {
-	flags[EXPLORATION_PAGE] = 1;
+	flags[kFLAGS.EXPLORATION_PAGE] = 1;
 	doExplore();
 }
 
 
 //Try to find a new location - called from doExplore once the first location is found
 public function tryDiscover():void {
-	if(flags[PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !followerHel()) {
+	if(flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !followerHel()) {
 		helSexualAmbush();
 		return;
 	}
@@ -98,16 +98,16 @@ public function tryDiscover():void {
 			doNext(13);
 			return;
 		}
-		if(player.exploredMountain >= 1 && rand(3) == 0 && flags[TIMES_EXPLORED_PLAINS] == 0) {
-			flags[TIMES_EXPLORED_PLAINS] = 1;
+		if(player.exploredMountain >= 1 && rand(3) == 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] == 0) {
+			flags[kFLAGS.TIMES_EXPLORED_PLAINS] = 1;
 			player.explored++;
 			outputText("You find yourself standing in knee-high grass, surrounded by flat plains on all sides.  Though the mountain, forest, and lake are all visible from here, they seem quite distant.\n\n<b>You've discovered the plains!</b>", true);
 			doNext(13);
 			return;
 		}
 		//EXPLOOOOOOORE
-		if(flags[UNKNOWN_FLAG_NUMBER_00272] == 0 && flags[TIMES_EXPLORED_PLAINS] > 0 && rand(3) == 0) {
-			flags[UNKNOWN_FLAG_NUMBER_00272] = 1;
+		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272] == 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0 && rand(3) == 0) {
+			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272] = 1;
 			player.explored++;
 			outputText("", true);
 			outputText("All things considered, you decide you wouldn't mind a change of scenery.  Gathering up your belongings, you begin a journey into the wasteland.  The journey begins in high spirits, and you whistle a little traveling tune to pass the time.  After an hour of wandering, however, your wanderlust begins to whittle away.  Another half-hour ticks by.  Fed up with the fruitless exploration, you're nearly about to head back to camp when a faint light flits across your vision.  Startled, you whirl about to take in three luminous will-o'-the-wisps, swirling around each other whimsically.  As you watch, the three ghostly lights begin to move off, and though the thought of a trap crosses your mind, you decide to follow.\n\n", false);
@@ -131,7 +131,7 @@ public function tryDiscover():void {
 		}
 		else if(choosey == 2 || debug) {
 			player.explored++;
-			if(flags[GAR_NAME] == 0) gargoylesTheShowNowOnWBNetwork();
+			if(flags[kFLAGS.GAR_NAME] == 0) gargoylesTheShowNowOnWBNetwork();
 			else returnToCathedral();
 			return;
 		}
@@ -186,7 +186,7 @@ public function exploreDeepwoods():void {
 	{
 		//If Fera isn't free yet...
 		if(player.hasPerk("Fera's Boon - Breeding Bitch") < 0 && player.hasPerk("Fera's Boon - Alpha") < 0) {
-			if(date.fullYear > flags[PUMPKIN_FUCK_YEAR_DONE]) 
+			if(date.fullYear > flags[kFLAGS.PUMPKIN_FUCK_YEAR_DONE]) 
 			{
 				pumpkinFuckEncounter();
 				return;
@@ -194,8 +194,8 @@ public function exploreDeepwoods():void {
 		}
 		//Fera is free!
 		else {
-			if(flags[FERAS_TRAP_SPRUNG_YEAR] == 0) {
-				if(date.fullYear > flags[FERAS_GLADE_EXPLORED_YEAR]) {
+			if(flags[kFLAGS.FERAS_TRAP_SPRUNG_YEAR] == 0) {
+				if(date.fullYear > flags[kFLAGS.FERAS_GLADE_EXPLORED_YEAR]) {
 					feraSceneTwoIntroduction();
 					return;
 				}
@@ -203,21 +203,21 @@ public function exploreDeepwoods():void {
 		}
 	}
 	//Hel jumps you for sex.
-	if(flags[PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !followerHel()) {
+	if(flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !followerHel()) {
 		helSexualAmbush();
 		return;
 	}
 	//Every 5th exploration encounters d2 if hasnt been met yet and factory done
-	if(flags[DISCOVERED_DUNGEON_2_ZETAZ] == 0 && player.statusAffectv1("exploredDeepwoods") % 5 == 0 && player.hasStatusAffect("DungeonShutDown") >= 0) {
+	if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] == 0 && player.statusAffectv1("exploredDeepwoods") % 5 == 0 && player.hasStatusAffect("DungeonShutDown") >= 0) {
 		outputText("While you explore the deepwoods, you do your best to forge into new, unexplored locations.  While you're pushing away vegetation and slapping at plant-life, you spot a half-overgrown orifice buried in the side of a ravine.  There's a large number of imp-tracks around the cavern's darkened entryway.  Perhaps this is where the imp, Zetaz, makes his lair?  In any event, it's past time you checked back on the portal.  You make a mental note of the cave's location so that you can return when you're ready.", true);
 		outputText("\n\n<b>You've discovered the location of Zetaz's lair!</b>", false);
 		simpleChoices("Enter",11076,"",0,"",0,"",0,"Leave",13);
-		flags[DISCOVERED_DUNGEON_2_ZETAZ]++;
+		flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ]++;
 		return;
 	}
 	//Tamani 20% encounter rate
-	if(flags[TAMANI_TIME_OUT] == 0 && rand(5) == 0 && player.gender > 0 && (player.totalCocks() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)) {
-		if(player.totalCocks() > 0 && flags[TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0 && int(player.statusAffectv2("Tamani")/2) >= 12) {
+	if(flags[kFLAGS.TAMANI_TIME_OUT] == 0 && rand(5) == 0 && player.gender > 0 && (player.totalCocks() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)) {
+		if(player.totalCocks() > 0 && flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0 && int(player.statusAffectv2("Tamani")/2) >= 12) {
 			encounterTamanisDaughters();
 		}
 		else
@@ -232,7 +232,7 @@ public function exploreDeepwoods():void {
 	//Tentacle monster
 	if(chooser == 1) {
 		//Reset hilarious shit
-		if(player.gender > 0) flags[UNKNOWN_FLAG_NUMBER_00247] = 0;
+		if(player.gender > 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00247] = 0;
 		//Tentacle avoidance chance due to dangerous plants
 		if(player.hasKeyItem("Dangerous Plants") >= 0 && player.inte/2 > rand(50)) {
 			temp == rand(3) + 1;
@@ -328,7 +328,7 @@ public function exploreForest():void {
 		if(temp == 2) chooser = 3;
 	}
 	//Helia monogamy fucks
-	if(flags[PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !followerHel()) {
+	if(flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !followerHel()) {
 		helSexualAmbush();
 		return;
 	}
@@ -337,7 +337,7 @@ public function exploreForest():void {
 		chooser = 1;
 	}
 	//If Jojo lives in camp, never encounter him
-	if(player.hasStatusAffect("PureCampJojo") >= 0 || flags[JOJO_DEAD_OR_GONE] == 1) {
+	if(player.hasStatusAffect("PureCampJojo") >= 0 || flags[kFLAGS.JOJO_DEAD_OR_GONE] == 1) {
 		chooser = rand(3);
 		if(chooser >= 1) chooser++;
 	}
@@ -349,7 +349,7 @@ public function exploreForest():void {
 		return;
 	}
 	//Essy every 20 explores or so
-	if((rand(100) <= 3) && player.gender > 0 && (flags[ESSY_MET_IN_DUNGEON] == 0 || flags[TOLD_MOTHER_TO_RELEASE_ESSY] == 1)) {
+	if((rand(100) <= 3) && player.gender > 0 && (flags[kFLAGS.ESSY_MET_IN_DUNGEON] == 0 || flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] == 1)) {
 		essrayleMeetingI();
 		return;
 	}
@@ -361,7 +361,7 @@ public function exploreForest():void {
 		return;
 	}
 	//Marble randomness
-	if(player.exploredForest % 50 == 0 && player.exploredForest > 0 && player.hasStatusAffect("Marble Rape Attempted") < 0 && player.hasStatusAffect("No More Marble") < 0 && player.hasStatusAffect("Marble") >= 0 && flags[MARBLE_WARNING] == 0) {
+	if(player.exploredForest % 50 == 0 && player.exploredForest > 0 && player.hasStatusAffect("Marble Rape Attempted") < 0 && player.hasStatusAffect("No More Marble") < 0 && player.hasStatusAffect("Marble") >= 0 && flags[kFLAGS.MARBLE_WARNING] == 0) {
 		//can be triggered one time after Marble has been met, but before the addiction quest starts.
 		clearOutput();
 		outputText("While you're moving through the trees, you suddenly hear yelling ahead, followed by a crash and a scream as an imp comes flying at high speed through the foliage and impacts a nearby tree.  The small demon slowly slides down the tree before landing at the base, still.  A moment later, a familiar-looking cow-girl steps through the bushes brandishing a huge two-handed hammer with an angry look on her face.");
@@ -402,8 +402,8 @@ public function exploreForest():void {
 		//Encounter Gobbalin!
 		else {
 			//Tamani 25% of all goblin encounters encounter rate
-			if(rand(4) <= 0 && flags[TAMANI_TIME_OUT] == 0 && player.gender > 0 && (player.totalCocks() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)) {
-				if(player.totalCocks() > 0 && flags[TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0 && int(player.statusAffectv2("Tamani")/2) >= 12) {
+			if(rand(4) <= 0 && flags[kFLAGS.TAMANI_TIME_OUT] == 0 && player.gender > 0 && (player.totalCocks() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)) {
+				if(player.totalCocks() > 0 && flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0 && int(player.statusAffectv2("Tamani")/2) >= 12) {
 					encounterTamanisDaughters();
 				}
 				else
@@ -596,7 +596,7 @@ public function exploreForest():void {
 //Explore desert
 public function exploreDesert():void {
 	player.exploredDesert++;
-	if(player.level >= 4 && player.exploredDesert % 15 == 0 && flags[DISCOVERED_WITCH_DUNGEON] == 0) {
+	if(player.level >= 4 && player.exploredDesert % 15 == 0 && flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] == 0) {
 		inDungeon = true;
 		dungeonLoc = 23;
 		eventParser(1);
@@ -607,7 +607,7 @@ public function exploreDesert():void {
 		return;
 	}
 	//Helia monogamy fucks
-	if(flags[PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !followerHel()) {
+	if(flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !followerHel()) {
 		helSexualAmbush();
 		return;
 	}
@@ -615,24 +615,24 @@ public function exploreDesert():void {
 		discoverTelAdre();
 		return;
 	}
-	if(flags[EGG_WITCH_COUNTER] >= 4 && flags[EGG_WITCH_TYPE] > 0 && rand(4) == 0) {
-		if(flags[EGG_WITCH_TYPE] == 2) sammitchBirthsDriders();
+	if(flags[kFLAGS.EGG_WITCH_COUNTER] >= 4 && flags[kFLAGS.EGG_WITCH_TYPE] > 0 && rand(4) == 0) {
+		if(flags[kFLAGS.EGG_WITCH_TYPE] == 2) sammitchBirthsDriders();
 		else witchBirfsSomeBees();
 		return;
 	}
 	//Ant colony debug chances
-	if(player.level >= 5 && flags[ANT_WAIFU] == 0 && (player.exploredDesert % 8 == 0) && flags[ANTS_PC_FAILED_PHYLLA] == 0 && flags[ANT_COLONY_KEPT_HIDDEN] == 0) {
+	if(player.level >= 5 && flags[kFLAGS.ANT_WAIFU] == 0 && (player.exploredDesert % 8 == 0) && flags[kFLAGS.ANTS_PC_FAILED_PHYLLA] == 0 && flags[kFLAGS.ANT_COLONY_KEPT_HIDDEN] == 0) {
 		antColonyEncounter();
 		return;
 	}
 	//int over 50?  Chance of alice encounter!
-	if(rand(4)==0 && player.inte > 50 && flags[FOUND_WIZARD_STAFF] == 0) {
+	if(rand(4)==0 && player.inte > 50 && flags[kFLAGS.FOUND_WIZARD_STAFF] == 0) {
 		outputText("", true);
 		outputText("While exploring the desert, you see a plume of smoke rising in the distance.  You change direction and approach the soot-cloud carefully.  It takes a few moments, but after cresting your fourth dune, you locate the source.  You lie low, so as not to be seen, and crawl closer for a better look.\n\n", false);
 		outputText("A library is burning up, sending flames dozens of feet into the air.  It doesn't look like any of the books will survive, and most of the structure has already been consumed by the hungry flames.  The source of the inferno is curled up next to it.  It's a naga!  She's tall for a naga, at least seven feet if she stands at her full height.  Her purplish-blue skin looks quite exotic, and she wears a flower in her hair.  The naga is holding a stick with a potato on the end, trying to roast the spud on the library-fire.  It doesn't seem to be going well, and the potato quickly lights up from the intense heat.\n\n", false);
 		outputText("The snake-woman tosses the burnt potato away and cries, \"<i>Hora hora.</i>\"  She suddenly turns and looks directly at you.  Her gaze is piercing and intent, but she vanishes before you can react.  The only reminder she was ever there is a burning potato in the sand.   Your curiosity overcomes your caution, and you approach the fiery inferno.  There isn't even a trail in the sand, and the library is going to be an unsalvageable wreck in short order.   Perhaps the only item worth considering is the stick with the burning potato.  It's quite oddly shaped, and when you reach down to touch it you can feel a resonant tingle.  Perhaps it was some kind of wizard's staff?\n\n", false);
 		shortName = "W.Staff";
-		flags[FOUND_WIZARD_STAFF]++;
+		flags[kFLAGS.FOUND_WIZARD_STAFF]++;
 		menuLoc = 2;
 		takeItem();
 		return;
@@ -662,11 +662,11 @@ public function exploreDesert():void {
 	var args:Array = new Array();
 
 	//Encounter Sandwitch
-	if(flags[SAND_WITCH_LEAVE_ME_ALONE] == 0) {
+	if(flags[kFLAGS.SAND_WITCH_LEAVE_ME_ALONE] == 0) {
 		choices[choices.length] = eventParser;
 		args[args.length] = 2005;
 	}
-	if(flags[CUM_WITCHES_FIGHTABLE] > 0 ) {
+	if(flags[kFLAGS.CUM_WITCHES_FIGHTABLE] > 0 ) {
 		choices[choices.length] = fightCumWitch;
 		args[args.length] = -8008;
 	}		
@@ -724,7 +724,7 @@ public function walkingDesertStatBoost():void {
 }
 //Explore High Mountain
 public function exploreHighMountain():void {
-	flags[DISCOVERED_HIGH_MOUNTAIN]++;
+	flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN]++;
 	doNext(1);
 	var chooser:Number = rand(3);
 	//Boosts mino and hellhound rates!
@@ -732,22 +732,22 @@ public function exploreHighMountain():void {
 		chooser = 1;
 	}
 	//Helia monogamy fucks
-	if(flags[PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !followerHel()) {
+	if(flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !followerHel()) {
 		helSexualAmbush();
 		return;
 	}
 	//Gats xmas adventure!
-	if(rand(5) == 0 && player.gender > 0 && isHolidays() && flags[GATS_ANGEL_DISABLED] == 0 && flags[GATS_ANGEL_GOOD_ENDED] == 0 && (flags[GATS_ANGEL_QUEST_BEGAN] == 0 || player.hasKeyItem("North Star Key") >= 0)) {
+	if(rand(5) == 0 && player.gender > 0 && isHolidays() && flags[kFLAGS.GATS_ANGEL_DISABLED] == 0 && flags[kFLAGS.GATS_ANGEL_GOOD_ENDED] == 0 && (flags[kFLAGS.GATS_ANGEL_QUEST_BEGAN] == 0 || player.hasKeyItem("North Star Key") >= 0)) {
 		gatsSpectacularRouter();
 		return;
 	}
 	//Minerva
-	if(flags[DISCOVERED_HIGH_MOUNTAIN] % 8 == 0) {
+	if(flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] % 8 == 0) {
 		encounterMinerva();
 		return;
 	}
 	//25% minotaur sons!
-	if(flags[UNKNOWN_FLAG_NUMBER_00326] >= 3 && rand(4) == 0 && player.hasVagina()) {
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] >= 3 && rand(4) == 0 && player.hasVagina()) {
 		spriteSelect(44);
 		meetMinotaurSons();
 		return;		
@@ -768,11 +768,11 @@ public function exploreHighMountain():void {
 		}
 	}
 	//10% chance to mino encounter rate if addicted
-	if(flags[MINOTAUR_CUM_ADDICTION_STATE] > 0 && rand(10) == 0) {
+	if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 0 && rand(10) == 0) {
 		spriteSelect(44);
 		//Cum addictus interruptus!  LOL HARRY POTTERFAG
 		//Withdrawl auto-fuck!
-		if(flags[MINOTAUR_CUM_ADDICTION_STATE] == 3) {
+		if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) {
 			minoAddictionFuck();
 			return;
 		}
@@ -794,14 +794,14 @@ public function exploreHighMountain():void {
 	}
 	//Sophie
 	if(chooser == 2) {
-		if(flags[UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[UNKNOWN_FLAG_NUMBER_00283] > 0 || sophieFollower()) {
+		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || sophieFollower()) {
 			outputText("A harpy wings out of the sky and attacks!", true);
 			startCombat(25);
 			spriteSelect(26);
 			return;
 		}
 		else {
-			if(flags[MET_SOPHIE_COUNTER] == 0) meetSophie();
+			if(flags[kFLAGS.MET_SOPHIE_COUNTER] == 0) meetSophie();
 			else meetSophieRepeat();
 		}
 	}
@@ -811,41 +811,41 @@ public function exploreMountain():void {
 	player.exploredMountain++;
 	var chooser:Number = rand(4);
 	//Helia monogamy fucks
-	if(flags[PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !followerHel()) {
+	if(flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !followerHel()) {
 		helSexualAmbush();
 		return;
 	}
 	//Discover 'high mountain' at level 5 or 40 explores of mountain
-	if((player.level >= 5 || player.exploredMountain >= 40) && flags[DISCOVERED_HIGH_MOUNTAIN] == 0) {
+	if((player.level >= 5 || player.exploredMountain >= 40) && flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] == 0) {
 		outputText("While exploring the mountain, you come across a relatively safe way to get at its higher reaches.  You judge that with this route you'll be able to get about two thirds of the way up the mountain.  With your newfound discovery fresh in your mind, you return to camp.\n\n(<b>High Mountain exploration location unlocked!</b>)", true);
-		flags[DISCOVERED_HIGH_MOUNTAIN]++;
+		flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN]++;
 		doNext(13);
 		return;
 	}
 	if(isHolidays()) {
 		//Gats xmas adventure!
-		if(rand(5) == 0 && player.gender > 0 && isHolidays() && flags[GATS_ANGEL_DISABLED] == 0 && flags[GATS_ANGEL_GOOD_ENDED] == 0 && (flags[GATS_ANGEL_QUEST_BEGAN] > 0 && player.hasKeyItem("North Star Key") < 0)) {
+		if(rand(5) == 0 && player.gender > 0 && isHolidays() && flags[kFLAGS.GATS_ANGEL_DISABLED] == 0 && flags[kFLAGS.GATS_ANGEL_GOOD_ENDED] == 0 && (flags[kFLAGS.GATS_ANGEL_QUEST_BEGAN] > 0 && player.hasKeyItem("North Star Key") < 0)) {
 			gatsSpectacularRouter();
 			return;
 		}
-		if(rand(6) == 0 && flags[JACK_FROST_YEAR] < date.fullYear && silly()) {
+		if(rand(6) == 0 && flags[kFLAGS.JACK_FROST_YEAR] < date.fullYear && silly()) {
 			meetJackFrostInTheMountains();
 			return;
 		}
 	}
 	//8% chance of hellhoundsplosions if appropriate
 	if(rand(100) <= 77) {
-		if(flags[UNKNOWN_FLAG_NUMBER_00141] < 3) {
+		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00141] < 3) {
 			trace("CHANCE AT HELLHOUND GAO");
 			//Requires canine face, [either two dog dicks, or a vag and pregnant with a hellhound], at least two other hellhound features (black fur, dog legs, dog tail), and corruption >=60.
 			if(player.faceType == FACE_DOG && (player.dogCocks() >= 2 || (player.hasVagina() && player.pregnancyType == 6 && player.pregnancyIncubation > 0)) && player.cor >= 60 && player.tailType == TAIL_TYPE_DOG && (player.lowerBody == LOWER_BODY_TYPE_DOG || player.hairColor == "midnight black")) {
 				trace("PASS BODYCHECK");
-				if(flags[UNKNOWN_FLAG_NUMBER_00141] == 0) {
+				if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00141] == 0) {
 					HellHoundMasterEncounter();
 					return;
 				}
 				//Level 2 requires lethecite
-				else if(flags[UNKNOWN_FLAG_NUMBER_00141] == 1 && player.hasKeyItem("Marae's Lethicite") >= 0 && player.keyItemv2("Marae's Lethicite") < 3) {
+				else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00141] == 1 && player.hasKeyItem("Marae's Lethicite") >= 0 && player.keyItemv2("Marae's Lethicite") < 3) {
 					HellHoundMasterEncounter();
 					return;
 				}
@@ -854,12 +854,12 @@ public function exploreMountain():void {
 	}
 	//Rarer 'nice' Ceraph encounter
 	//Overlaps half the old encounters once pierced.
-	if(!ceraphIsFollower() && player.level > 2 && (player.exploredMountain % 30 == 0) && flags[PC_FETISH] > 0) {
+	if(!ceraphIsFollower() && player.level > 2 && (player.exploredMountain % 30 == 0) && flags[kFLAGS.PC_FETISH] > 0) {
 		friendlyNeighborhoodSpiderManCeraph();
 		return;
 	}
 	//15% chance of Ceraph
-	if(!ceraphIsFollower() && player.level > 2 && (player.exploredMountain % 15 == 0) && flags[PC_FETISH] != 1) {
+	if(!ceraphIsFollower() && player.level > 2 && (player.exploredMountain % 15 == 0) && flags[kFLAGS.PC_FETISH] != 1) {
 		encounterCeraph();
 		return;
 	}
@@ -876,7 +876,7 @@ public function exploreMountain():void {
 		else chooser = 3;		
 	}
 	//10% chance to mino encounter rate if addicted
-	if(flags[MINOTAUR_CUM_ADDICTION_STATE] > 0 && rand(10) == 0) {
+	if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 0 && rand(10) == 0) {
 		chooser = 1;
 	}
 	//10% MORE chance for minos if uber-addicted
@@ -961,7 +961,7 @@ public function exploreMountain():void {
 		}
 		//Mino gangbang
 		if(player.hasStatusAffect("Mino + Cowgirl") < 0 || rand(10) == 0) {
-			if(flags[HAS_SEEN_MINO_AND_COWGIRL] == 1 && player.horns > 0 && player.hornType == HORNS_COW_MINOTAUR && player.earType == EARS_COW && player.tailType == TAIL_TYPE_COW && player.lactationQ() >= 200 && player.biggestTitSize() >= 3 && minotaurAddicted()) {
+			if(flags[kFLAGS.HAS_SEEN_MINO_AND_COWGIRL] == 1 && player.horns > 0 && player.hornType == HORNS_COW_MINOTAUR && player.earType == EARS_COW && player.tailType == TAIL_TYPE_COW && player.lactationQ() >= 200 && player.biggestTitSize() >= 3 && minotaurAddicted()) {
 				//PC must be a cowmorph (horns, legs, ears, tail, lactating, breasts at least C-cup)
 				//Must be addicted to minocum
 				outputText("As you pass a shadowy cleft in the mountainside, you hear the now-familiar call of a cowgirl echoing from within.  Knowing what's in store, you carefully inch closer and peek around the corner.");
@@ -982,7 +982,7 @@ public function exploreMountain():void {
 				addButton(1,"Watch",watchAMinoCumSlut);
 				return;
 			}
-			flags[HAS_SEEN_MINO_AND_COWGIRL] = 1;
+			flags[kFLAGS.HAS_SEEN_MINO_AND_COWGIRL] = 1;
 			if(player.hasStatusAffect("Mino + Cowgirl") < 0) player.createStatusAffect("Mino + Cowgirl",0,0,0,0);
 			else player.addStatusValue("Mino + Cowgirl",1,1);
 			outputText("As you pass a shadowy cleft in the mountainside, you hear the sounds of a cow coming out from it. Wondering how a cow got up here, but mindful of this land's dangers, you cautiously sneak closer and peek around the corner.\n\n", true);
@@ -996,7 +996,7 @@ public function exploreMountain():void {
 		}
 		//Cum addictus interruptus!  LOL HARRY POTTERFAG
 		//Withdrawl auto-fuck!
-		if(flags[MINOTAUR_CUM_ADDICTION_STATE] == 3) {
+		if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) {
 			minoAddictionFuck();
 			return;
 		}
@@ -1066,7 +1066,7 @@ public function exploreLake():void {
 	if(poniesYN()) return;
 	
 	//Helia monogamy fucks
-	if(flags[PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !followerHel()) {
+	if(flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !followerHel()) {
 		helSexualAmbush();
 		return;
 	}
@@ -1099,7 +1099,7 @@ public function exploreLake():void {
 	if(player.level >= 2) 
 		choice[choice.length] = 4;
 	//Izma
-	if(flags[UNKNOWN_FLAG_NUMBER_00230] > 0 && (player.exploredLake >= 10) && (flags[UNKNOWN_FLAG_NUMBER_00233] == 0 || player.hasStatusAffect("infested") < 0) && flags[UNKNOWN_FLAG_NUMBER_00238] <= 0) 
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00230] > 0 && (player.exploredLake >= 10) && (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00233] == 0 || player.hasStatusAffect("infested") < 0) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] <= 0) 
 		choice[choice.length] = 5;
 	//Rathazul
 	if(player.hasStatusAffect("Camp Rathazul") < 0) 
@@ -1107,7 +1107,7 @@ public function exploreLake():void {
 	
 	//UNCOMMON EVENTS
 	//Goo finding!
-	if(rand(30) == 0 && flags[GOO_TFED_MEAN] + flags[GOO_TFED_NICE] > 0 && flags[GOO_SLAVE_RECRUITED] == 0) {
+	if(rand(30) == 0 && flags[kFLAGS.GOO_TFED_MEAN] + flags[kFLAGS.GOO_TFED_NICE] > 0 && flags[kFLAGS.GOO_SLAVE_RECRUITED] == 0) {
 		encounterLeftBehindGooSlave();
 		return;
 	}
@@ -1118,7 +1118,7 @@ public function exploreLake():void {
 	
 	//ONE TIME EVENTS
 	//Amily Village discovery
-	if(flags[AMILY_VILLAGE_ACCESSIBLE] == 0) 
+	if(flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] == 0) 
 		choice[choice.length] = 9;
 	//Sword Discovery
 	if(player.hasStatusAffect("Took Blessed Sword") < 0 && player.hasStatusAffect("BSwordBroken") < 0) 
@@ -1184,7 +1184,7 @@ public function exploreLake():void {
 		}
 		//OOZE!
 		else {
-			flags[TIMES_MET_OOZE]++;
+			flags[kFLAGS.TIMES_MET_OOZE]++;
 			spriteSelect(25);
 			//High int starts on even footing.
 			if(player.inte >= 25) {
@@ -1229,7 +1229,7 @@ public function exploreLake():void {
 		doNext(13);
 	}
 	else if(select == 1) {
-		if(player.level >= 5 && flags[KAIJU_DISABLED] == 0) {
+		if(player.level >= 5 && flags[kFLAGS.KAIJU_DISABLED] == 0) {
 			kaijuMeeting();
 			return;
 		}
@@ -1319,7 +1319,7 @@ public function exploreLake():void {
 
 public function boatExplore():void {
 	//Helia monogamy fucks
-	if(flags[PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !followerHel()) {
+	if(flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !followerHel()) {
 		helSexualAmbush();
 		return;
 	}
@@ -1329,7 +1329,7 @@ public function boatExplore():void {
 		if(player.inte > 40) outputText("You realize what it smells like – sex.  ", false);
 	}
 	//3% chance of finding lost daughters
-	if(rand(100) <= 3 && flags[UNKNOWN_FLAG_NUMBER_00412] > 0 && izmaFollower()) {
+	if(rand(100) <= 3 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00412] > 0 && izmaFollower()) {
 		findLostIzmaKids();
 		return;
 	}
@@ -1340,7 +1340,7 @@ public function boatExplore():void {
 		return;
 	}
 	//10% chance of corrupt Marae followups
-	if((debug || rand(10) == 0) && flags[CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] == 0 && player.hasStatusAffect("Met Corrupt Marae") >= 0 && player.gender > 0) {
+	if((debug || rand(10) == 0) && flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] == 0 && player.hasStatusAffect("Met Corrupt Marae") >= 0 && player.gender > 0) {
 		level2MaraeEncounter();
 		return;
 	}
@@ -1382,9 +1382,9 @@ public function boatExplore():void {
 }
 
 public function exploreBog():void {
-	flags[BOG_EXPLORED]++;
+	flags[kFLAGS.BOG_EXPLORED]++;
 	//Helia monogamy fucks
-	if(flags[PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !followerHel()) {
+	if(flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !followerHel()) {
 		helSexualAmbush();
 		return;
 	}
@@ -1398,25 +1398,25 @@ public function exploreBog():void {
 }
 public function exploreSwamp():void {
 	//Discover 'Bog' at after 25 explores of swamp
-	if((flags[UNKNOWN_FLAG_NUMBER_00272] >= 25) && flags[BOG_EXPLORED] == 0) {
+	if((flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272] >= 25) && flags[kFLAGS.BOG_EXPLORED] == 0) {
 		outputText("While exploring the swamps, you find yourself into a particularly dark, humid area of this already fetid biome.  You judge that you could find your way back here pretty easily in the future, if you wanted to.  With your newfound discovery fresh in your mind, you return to camp.\n\n(<b>Bog exploration location unlocked! (Page 2)</b>)", true);
-		flags[BOG_EXPLORED]++;
+		flags[kFLAGS.BOG_EXPLORED]++;
 		doNext(13);
 		return;
 	}
-	flags[UNKNOWN_FLAG_NUMBER_00272]++;
+	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272]++;
 	/*  SPECIAL SCENE OVERWRITES */
 	//KIHA X HEL THREESOME!
-	if(!followerKiha() && player.cor < 60 && flags[KIHA_AFFECTION_LEVEL] >= 1 && flags[HEL_FUCKBUDDY] > 0 && player.hasCock() && flags[KIHA_AND_HEL_WHOOPIE] == 0) {
+	if(!followerKiha() && player.cor < 60 && flags[kFLAGS.KIHA_AFFECTION_LEVEL] >= 1 && flags[kFLAGS.HEL_FUCKBUDDY] > 0 && player.hasCock() && flags[kFLAGS.KIHA_AND_HEL_WHOOPIE] == 0) {
 		kihaXSalamander();
 		return;
 	}
 	//Helia monogamy fucks
-	if(flags[PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !followerHel()) {
+	if(flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !followerHel()) {
 		helSexualAmbush();
 		return;
 	}
-	if(flags[TOOK_EMBER_EGG] == 0 && flags[EGG_BROKEN] == 0 && flags[UNKNOWN_FLAG_NUMBER_00272] > 0 && (flags[UNKNOWN_FLAG_NUMBER_00272] % 40 == 0)) {
+	if(flags[kFLAGS.TOOK_EMBER_EGG] == 0 && flags[kFLAGS.EGG_BROKEN] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272] > 0 && (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272] % 40 == 0)) {
 		findEmbersEgg();
 		return;
 	}
@@ -1429,7 +1429,7 @@ public function exploreSwamp():void {
 	//Drider
 	choices[choices.length] = 2;
 	//ROGAR
-	if(flags[ROGAR_DISABLED] == 0 && flags[ROGAR_PHASE] < 3)
+	if(flags[kFLAGS.ROGAR_DISABLED] == 0 && flags[kFLAGS.ROGAR_PHASE] < 3)
 		choices[choices.length] = 3;
 	//Kiha
 	choices[choices.length] = 4;
@@ -1462,52 +1462,52 @@ public function exploreSwamp():void {
 }
 public function explorePlains():void {
 	outputText("", true);
-	flags[TIMES_EXPLORED_PLAINS]++;
+	flags[kFLAGS.TIMES_EXPLORED_PLAINS]++;
 	var select:Number = rand(6);
 	//Dem Kangasluts!  Force Sheila relationship phase!
-	if(flags[SHEILA_DEMON] == 0 && flags[SHEILA_XP] == 3 && model.time.hours == 20 && flags[SHEILA_CLOCK] >= 0) {
+	if(flags[kFLAGS.SHEILA_DEMON] == 0 && flags[kFLAGS.SHEILA_XP] == 3 && model.time.hours == 20 && flags[kFLAGS.SHEILA_CLOCK] >= 0) {
 		sheilaXPThreeSexyTime();
 		return;
 	}
 	//Add some holiday cheer
-	if(isHolidays() && date.fullYear > flags[CANDY_CANE_YEAR_MET] && rand(5) == 0) {
+	if(isHolidays() && date.fullYear > flags[kFLAGS.CANDY_CANE_YEAR_MET] && rand(5) == 0) {
 		candyCaneTrapDiscovery();
 		return;
 	}
-	if(isHolidays() && date.fullYear > flags[POLAR_PETE_YEAR_MET] && rand(4) == 0 && silly()) {
+	if(isHolidays() && date.fullYear > flags[kFLAGS.POLAR_PETE_YEAR_MET] && rand(4) == 0 && silly()) {
 		polarPete();
-		flags[POLAR_PETE_YEAR_MET] = date.fullYear;
+		flags[kFLAGS.POLAR_PETE_YEAR_MET] = date.fullYear;
 		return;
 	}
 	//Helia monogamy fucks
-	if(flags[PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !followerHel()) {
+	if(flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !followerHel()) {
 		helSexualAmbush();
 		return;
 	}
 	//Find Niamh
-	if(flags[NIAMH_MOVED_OUT_COUNTER] == 1) {
+	if(flags[kFLAGS.NIAMH_MOVED_OUT_COUNTER] == 1) {
 		niamhPostTelAdreMoveOut();
 		return;
 	}
 	//Find Owca
-	if(player.level >= 8 && flags[TIMES_EXPLORED_PLAINS] % 25 == 0 && flags[OWCA_UNLOCKED] == 0) {
+	if(player.level >= 8 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] % 25 == 0 && flags[kFLAGS.OWCA_UNLOCKED] == 0) {
 		gangbangVillageStuff();
 		return;
 	}
 	//Bazaar!
-	if(flags[TIMES_EXPLORED_PLAINS] % 10 == 0 && flags[BAZAAR_ENTERED] == 0) {
+	if(flags[kFLAGS.TIMES_EXPLORED_PLAINS] % 10 == 0 && flags[kFLAGS.BAZAAR_ENTERED] == 0) {
 		findBazaar();
 		return;
 	}
 	//Chance of threesomes!
-	if(flags[UNKNOWN_FLAG_NUMBER_00256] != 0 && flags[UNKNOWN_FLAG_NUMBER_00257] != 0 && flags[HEL_FUCKBUDDY] == 1 && flags[UNKNOWN_FLAG_NUMBER_00260] == 0 && !isabellaFollower() && flags[TIMES_EXPLORED_PLAINS] % 21 == 0 && !(player.tallness > 78 && flags[UNKNOWN_FLAG_NUMBER_00258] == 0)) {
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00256] != 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00257] != 0 && flags[kFLAGS.HEL_FUCKBUDDY] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] == 0 && !isabellaFollower() && flags[kFLAGS.TIMES_EXPLORED_PLAINS] % 21 == 0 && !(player.tallness > 78 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00258] == 0)) {
 		//Hell/Izzy threesome intro
-		if(flags[HEL_ISABELLA_THREESOME_ENABLED] == 0) {
+		if(flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 0) {
 			salamanderXIsabellaPlainsIntro();
 			return;
 		}
 		//Propah threesomes here!
-		else if(flags[HEL_ISABELLA_THREESOME_ENABLED] == 1) {
+		else if(flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 1) {
 			isabellaXHelThreeSomePlainsStart();
 			return;
 		}
@@ -1521,7 +1521,7 @@ public function explorePlains():void {
 	choices[choices.length] = bunnbunbunMeet;
 	choices[choices.length] = bunnbunbunMeet;
 	
-	if(flags[ISABELLA_PLAINS_DISABLED] == 0) {
+	if(flags[kFLAGS.ISABELLA_PLAINS_DISABLED] == 0) {
 		choices[choices.length] = isabellaGreeting;
 		choices[choices.length] = isabellaGreeting;
 	}
@@ -1531,7 +1531,7 @@ public function explorePlains():void {
 	}
 	choices[choices.length] = satyrEncounter;
 	choices[choices.length] = satyrEncounter;
-	if(flags[SHEILA_CLOCK] >= 0) {
+	if(flags[kFLAGS.SHEILA_CLOCK] >= 0) {
 		choices[choices.length] = sheilaEncounterRouter;
 		choices[choices.length] = sheilaEncounterRouter;
 	}
@@ -1743,9 +1743,9 @@ public function bigJunkForestScene(lake:Boolean = false):void {
 //Just want to do a quick Ottergirl event submission after you mentioned it!
 public function ottahGirl():void {
 	clearOutput();
-	flags[MET_OTTERGIRL]++;
+	flags[kFLAGS.MET_OTTERGIRL]++;
 	//First Time
-	if(flags[MET_OTTERGIRL] == 1) {
+	if(flags[kFLAGS.MET_OTTERGIRL] == 1) {
 		outputText("Your exploration of the lakeside take you further than you've gone before.  The water here is almost completely still, its waters ");
 		if(player.hasStatusAffect("FactoryOverload") < 0) outputText("crystal clear, giving you a stunning view of the lakebed");
 		else outputText("only slightly clouded, giving you an obscured view of the lakebed");
@@ -1792,7 +1792,7 @@ public function ottahGirl():void {
 		}
 		if(player.hasVagina() || !player.hasCock()) addButton(1,"Facesitting",ottersForGals);
 	}
-	if(flags[MET_OTTERGIRL] > 1) addButton(2,"Get Fish",getSomeFishYaFatty);
+	if(flags[kFLAGS.MET_OTTERGIRL] > 1) addButton(2,"Get Fish",getSomeFishYaFatty);
 	addButton(4,"Leave",avoidZeOtterPussy);
 }
 
@@ -2099,7 +2099,7 @@ public function joinBeingAMinoCumSlut():void {
 	
 	outputText("\n\nYou quickly re-dress and head back to camp, spying the occassional goblin or imp scurrying from its hiding spot, no doubt recovering from their own self-inflicted orgasms.");
 	stats(0,0,0,0,.5,-3,-100,1);
-	if(flags[PC_FETISH] > 0) {
+	if(flags[kFLAGS.PC_FETISH] > 0) {
 		outputText("  A thrill runs through you.  Even though you were brought to such a satisfying climax, the whole thought that goblins and imps were watching you and getting off on it... it just makes you hornier than you were before.");
 		stats(0,0,0,0,0,0,100,0);
 	}

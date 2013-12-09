@@ -234,13 +234,13 @@ public function gooGirlBadEnd2():void {
 //DEFEAT
 //===============
 public function getBeatByGooGirl():void {
-	flags[GOOGIRL_CONSECUTIVE_LOSSES]++;
-	if(flags[GOOGIRL_CONSECUTIVE_LOSSES] >= 5 && player.gooScore() >= 4) gooGirlBadEnd();
+	flags[kFLAGS.GOOGIRL_CONSECUTIVE_LOSSES]++;
+	if(flags[kFLAGS.GOOGIRL_CONSECUTIVE_LOSSES] >= 5 && player.gooScore() >= 4) gooGirlBadEnd();
 	else if(player.gender == 0) genderlessLoseToGooGal();
 	else if(player.gender == 1) dudeLoseToGooGal();
 	else if(player.gender == 2) femaleLoseToGooGal();
 	else hermLoseToGooGal();
-	flags[TIMES_FUCKED_NORMAL_GOOS]++;
+	flags[kFLAGS.TIMES_FUCKED_NORMAL_GOOS]++;
 }
 //Defeat – Neuter
 public function genderlessLoseToGooGal():void {
@@ -361,7 +361,7 @@ public function femaleLoseToGooGal():void {
 
 //[Goo pregnancy- 3-4 days]
 public function gooPregVagBirth():void {
-	flags[GOOGIRL_BIRTHS]++;
+	flags[kFLAGS.GOOGIRL_BIRTHS]++;
 	outputText("\n", false);
 	if(player.vaginas.length == 0) {
 		outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold a vagina.  ", false);
@@ -377,7 +377,7 @@ public function gooPregVagBirth():void {
 
 //VICTORY
 public function beatUpGoo():void {
-	flags[GOOGIRL_CONSECUTIVE_LOSSES] = 0;
+	flags[kFLAGS.GOOGIRL_CONSECUTIVE_LOSSES] = 0;
 	outputText("", true);
 	outputText("The excitement of your scuffle proves too much for the goo-girl to keep up with and she collapses into the slime of her lower torso, her skin wiggling as she struggles to maintain cohesion. Her expression is one of disappointment, and she looks at you with big, hopeful eyes, reaching out a hand, as if to offer an apology for her over-exuberance.\n\n", false);
 
@@ -417,7 +417,7 @@ public function beatUpGoo():void {
 		else if(player.hasVagina()) {
 			sex1S = "Fuck";
 			sex1N = 3263;
-			if(flags[PC_FETISH] >= 1) {
+			if(flags[kFLAGS.PC_FETISH] >= 1) {
 				sex2S = "Exhib.Fuck";
 				sex2N = 3264;
 			}
@@ -428,17 +428,17 @@ public function beatUpGoo():void {
 		}
 		var gooTF:int = 0;
 		//corrupt chances
-		if((flags[GOO_TFED_MEAN] == 0 && flags[GOO_TFED_NICE] == 0) && flags[TIMES_FUCKED_NORMAL_GOOS] >= 2) {
+		if((flags[kFLAGS.GOO_TFED_MEAN] == 0 && flags[kFLAGS.GOO_TFED_NICE] == 0) && flags[kFLAGS.TIMES_FUCKED_NORMAL_GOOS] >= 2) {
 			if(player.cor < 50 && (hasItem("SucMilk",1) || hasItem("P.S.Mlk",1)) && (hasItem("BlackEg",1) || hasItem("L.BlkEg",1))) {
 				pureGooRecruitmentStart();
 				return;
 			}
-			else if(flags[PC_KNOWS_ABOUT_BLACK_EGGS] > 0) {
+			else if(flags[kFLAGS.PC_KNOWS_ABOUT_BLACK_EGGS] > 0) {
 				//Recruitment:
 				//Notice After Victory:
-				if(flags[TIMES_THOUGHT_ABOUT_GOO_RECRUITMENT] == 0) {
+				if(flags[kFLAGS.TIMES_THOUGHT_ABOUT_GOO_RECRUITMENT] == 0) {
 					outputText("\n\nWith this quivering lump of goo before you, a devilish idea comes to mind.  What would it take to make one of these aqueous sluts your willing slave?  ...Something to make them a little solid - perhaps one of those black eggs to make its skin a little more solid and restrainable?  Maybe a succubi milk to help make it a little more human-like, and the increased libido certainly couldn't hurt.");
-					flags[TIMES_THOUGHT_ABOUT_GOO_RECRUITMENT]++;
+					flags[kFLAGS.TIMES_THOUGHT_ABOUT_GOO_RECRUITMENT]++;
 				}
 				//(Repeat)
 				else {
@@ -452,7 +452,7 @@ public function beatUpGoo():void {
 		}
 		if(valeria != 0) {
 			outputText("\n\nValeria's armored form seems to ebb towards the puddled goo-woman before you, almost eager to close the distance with her despite her pledge to protect you. ");
-			if(flags[TIMES_VALERIA_GOO_THREESOMED] == 0) outputText("Do you offer a threesome with the girl to Valeria? It could get a little weird....");
+			if(flags[kFLAGS.TIMES_VALERIA_GOO_THREESOMED] == 0) outputText("Do you offer a threesome with the girl to Valeria? It could get a little weird....");
 			else outputText("Do you offer a threesome with the girl to Valeria? She'll likely try flood with you with more sloshing, shuddering pleasure than your body can handle.");
 		}
 		choices(sex1S,sex1N,sex2S,sex2N,sex3S,sex3N,sex4S,sex4N,"Lay Eggs",eggs,"",0,"",0,"Valeria",valeria,"Make Slave",gooTF,"Leave",5007);
@@ -462,7 +462,7 @@ public function beatUpGoo():void {
 
 //Victory – Male
 public function gooMaleRape(type:Number = 1):void {
-	flags[TIMES_FUCKED_NORMAL_GOOS]++;
+	flags[kFLAGS.TIMES_FUCKED_NORMAL_GOOS]++;
 	outputText("", true);
 	var x:Number = player.biggestCockIndex();
 	if(player.longestCockLength() >= 24 && player.shortestCockLength() < 24) {
@@ -510,7 +510,7 @@ public function gooMaleRape(type:Number = 1):void {
 
 //Victory – Herm
 public function victoryHermSex():void {
-	flags[TIMES_FUCKED_NORMAL_GOOS]++;
+	flags[kFLAGS.TIMES_FUCKED_NORMAL_GOOS]++;
 	outputText("", true);
 	outputText("The goo-girl relents, her body sloshing into the puddle at her feet. Apparently convinced you want to explore her body, she composes her face into a willing smile and raises her arms at her sides, baring her " + gooColor8() + " torso for inspection. The slime's chest juts out in perfect hemispheres, untouched by gravity and topped with puffy, " + gooColor4() + " nipples that steadily drip a gooey imitation of milk. Her waist is whip-thin but broadens at her hips to accommodate her smooth, shiny rump, which she wiggles happily. Her hourglass figure would be life-threatening on any solid organism, but on the goo-girl, it merely appears she's been molded by someone with a dim grasp of anatomy.  Apparently, if slimes can't touch an organ, they don't consider it terribly important.\n\n", false);
 	
@@ -535,7 +535,7 @@ public function victoryHermSex():void {
 //FEMALE VICTORIES
 //[Feeder perk] 
 public function victoryRapeAGooGalAsFeeder():void {
-	flags[TIMES_FUCKED_NORMAL_GOOS]++;
+	flags[kFLAGS.TIMES_FUCKED_NORMAL_GOOS]++;
 	outputText("", true);
 	outputText("The slimy girl wobbles back and forth, curiously eyeing you with her mouth turned up in an expectant smile. Her expression slowly widens into one of alarm, as your breath comes in quickened gasps. The need is building in your chest, setting your nipples aflame with the pressure within your breasts. Reading the blossoming heat from your body, the goo-girl seems to guess your intent and the playful petulance gives way to a wary caution. She shakes her head, puffing her cheeks and patting her belly as if to say 'no thank you, I am full.' A lop-sided grin creeps up the side of your face, a trickle of drool sliding out the corner of your mouth. She thinks she's got a choice in the matter, you muse. How cute. Advancing on the girl, you gently stroke her " + gooColor4() + " cheek with the back of your hand, her fluid membrane slick and warm on your skin. Yes, she'll do quite nicely.\n\n", false);
 	
@@ -559,7 +559,7 @@ public function victoryRapeAGooGalAsFeeder():void {
 
 //[Exhibitionist Perk]
 public function exhibitionismGooGirlVictoryRape():void {
-	flags[TIMES_FUCKED_NORMAL_GOOS]++;
+	flags[kFLAGS.TIMES_FUCKED_NORMAL_GOOS]++;
 	outputText("", true);
 	outputText("The slimy girl wobbles back and forth, curiously eyeing you with her mouth turned up in an expectant smile. Glancing around, you notice that your little scuffle with the slime has attracted several onlookers! From deeper in the lake, a grey-tinted shark girl and violet-colored anemone seem to be watching you with mild interest while on the shore a robed man has interrupted his secretive journey to eye the two of you warily. Further away, a small minotaur stands, surprisingly far from the mountains, sniffing the air and taking his measure of potential mates. The variety of eyes upon your body brings a cold sweat to your brow and you bite your lower lip with a ragged suck of air between your teeth. Fists clenched, you bow your head as your pulse quickens. With trembling hands, you reach up and loosen your " + player.armorName + " with deliberate slowness, stripping them from your form until you stand, bare skin exposed to all five viewers. With a nervous smile, you move closer to the goo-girl. Every step you take is followed so carefully by your watchers that it sends a thrill of excitement to your gut that ignites your loins with a steady dripping between your thighs. The slime girl purses her lips at your advance before seeming to notice the figures watching the two of you with a delighted clap of her mitt-like hands.\n\n", false);
 	
@@ -579,7 +579,7 @@ public function exhibitionismGooGirlVictoryRape():void {
 }
 //[Normal Female] 
 public function normalFemaleRapesAGooGirl():void {
-	flags[TIMES_FUCKED_NORMAL_GOOS]++;
+	flags[kFLAGS.TIMES_FUCKED_NORMAL_GOOS]++;
 	outputText("", true);
 	outputText("The slimy girl wobbles back and forth, curiously eyeing you with her mouth turned up in an expectant smile. You don't doubt that she'd enjoy playing with your body given half a chance, but your victory in the scuffle has given you a rare opportunity to try out something that been lurking in the back of your head for a while. With a devious smile, you remove your " + player.armorName + " until your bare flesh shivers at the cool wind blowing over the surface of the lake. You hook a beckoning finger to the goo-girl and she shrugs, a willing grin on her face. Splashing toward you, the girl's puddle laps at your " + player.feet() + ", " + gooColor2() + " muck lapping around you until you hold a palm up to stop her. Reaching down, you wrap your hands under her arms and haul her upward, plump legs forming under her waist as she grows taller and taller until you're eye to eye with the slime. Placing your fingers on her hips, you turn the girl around until her jiggling butt is pressed against your " + hipDescript() + ", warm goop wobbling with your every movement. Taking a deep breath, you shake out your shoulders and swallow. Here goes nothing.\n\n", false);
 	

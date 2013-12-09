@@ -426,40 +426,40 @@ inputManager.AddBindableControl(
 	"Cheat! Give Hummus",
 	"Cheat code to get free hummus",
 	function(keyCode:int):void {
-		if (flags[CHEAT_ENTERING_COUNTER] == 0)
+		if (flags[kFLAGS.CHEAT_ENTERING_COUNTER] == 0)
 		{
 			if (keyCode == 38)
 			{
-				flags[CHEAT_ENTERING_COUNTER]++;
+				flags[kFLAGS.CHEAT_ENTERING_COUNTER]++;
 			}
 			else
 			{
-				flags[CHEAT_ENTERING_COUNTER] = 0;
+				flags[kFLAGS.CHEAT_ENTERING_COUNTER] = 0;
 			}
 		}
-		else if (flags[CHEAT_ENTERING_COUNTER] == 1)
+		else if (flags[kFLAGS.CHEAT_ENTERING_COUNTER] == 1)
 		{
 			if (keyCode == 40)
 			{
-				flags[CHEAT_ENTERING_COUNTER]++;
+				flags[kFLAGS.CHEAT_ENTERING_COUNTER]++;
 			}
 			else
 			{
-				flags[CHEAT_ENTERING_COUNTER] = 0;
+				flags[kFLAGS.CHEAT_ENTERING_COUNTER] = 0;
 			}
 		}
-		else if (flags[CHEAT_ENTERING_COUNTER] == 2)
+		else if (flags[kFLAGS.CHEAT_ENTERING_COUNTER] == 2)
 		{
 			if (keyCode == 37)
 			{
-				flags[CHEAT_ENTERING_COUNTER]++;
+				flags[kFLAGS.CHEAT_ENTERING_COUNTER]++;
 			}
 			else
 			{
-				flags[CHEAT_ENTERING_COUNTER] = 0;
+				flags[kFLAGS.CHEAT_ENTERING_COUNTER] = 0;
 			}
 		}
-		else if (flags[CHEAT_ENTERING_COUNTER] == 3)
+		else if (flags[kFLAGS.CHEAT_ENTERING_COUNTER] == 3)
 		{
 			if (keyCode == 39)
 			{
@@ -470,7 +470,7 @@ inputManager.AddBindableControl(
 			}
 			else
 			{
-				flags[CHEAT_ENTERING_COUNTER] = 0;
+				flags[kFLAGS.CHEAT_ENTERING_COUNTER] = 0;
 			}
 		}
 	},

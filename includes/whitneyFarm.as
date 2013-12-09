@@ -22,16 +22,16 @@ public function farmExploreEncounter():void {
 	//Repeat Offender
 	else {
 		spriteSelect(62);
-		if(flags[KELT_BREAK_LEVEL] >= 4 && flags[WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) {
+		if(flags[kFLAGS.KELT_BREAK_LEVEL] >= 4 && flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) {
 			clearOutput();
 			outputText("As soon as you head to the farm, Whitney comes storming up to meet you.  \"<i>What in tarnation do you think you're pulling?!</i>\"");
 			outputText("\n\nYou hold your hands up, knowing full-well what the angry bitch is on about.  \"<i>I didn't do anything he wouldn't have done to me.</i>\"");
 			outputText("\n\nWhitney fumes, \"<i>You might be right on that count, but the difference is that Kelt didn't keep coming to you to do it.  I don't much like him.</i>\"  Whitney spits for emphasis before continuing, \"<i>But I felt bad enough for him to let him stick around, so long as he left me an' everybody else well enough alone.  The boy's got... an aura or something, and sure, you likely would've wound up like he is.</i>\"  She glares back at the farm for emphasis.  \"<i>But only if you enjoyed it enough to keep hanging around the dipstick.  You... you just kept hounding him... drugging him with them demon fluids over and over.  The poor thing can barely sleep without whimpering after your dick.</i>\"");
 			outputText("\n\nWhitney starts to growl before catching herself and folding her arms across her chest.  \"<i>I reckon you don't need to be nosing around my farm anymore, but since 'Kelly' seems to need you, I'll let her go out to visit you when you come calling.  Just stay away from the rest of us.</i>\"");
 			outputText("\n\nShe spins about and trots back to her farm, picking up a pitchfork as she goes.  It looks like you won't have access to the farm any more, at least until you come up with a way to deal with Whitney.");
-			flags[WHITNEY_FLIPPED_OUT_OVER_KELLY] = 1;
+			flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] = 1;
 		}
-		else if(flags[WHITNEY_FLIPPED_OUT_OVER_KELLY] == 1) outputText("You aren't welcome on the farm proper, but you can see Kelly cantering about the fields, looking for you.", true);
+		else if(flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 1) outputText("You aren't welcome on the farm proper, but you can see Kelly cantering about the fields, looking for you.", true);
 		else outputText("Whitney's farm is remarkably large for such a humble operation.  What do you want to do?", true);
 		menu();
 		var keltEvent:Number = 0;
@@ -40,29 +40,29 @@ public function farmExploreEncounter():void {
 		var cockMilk:Number = 0;
 		var marble:Number = 0;
 		if(player.hasStatusAffect("Kelt") >= 0 && player.hasStatusAffect("KeltOff") < 0) {
-			if(flags[KELT_BREAK_LEVEL] >= 4) addButton(1,"Kelly",breakingKeltOptions);
+			if(flags[kFLAGS.KELT_BREAK_LEVEL] >= 4) addButton(1,"Kelly",breakingKeltOptions);
 			else addButton(1,"Kelt",breakingKeltOptions);
 		}
 		if(player.hasKeyItem("Breast Milker - Installed At Whitney's Farm") >= 0) {
 			if(player.hasStatusAffect("Milked") >= 0) {
 				outputText("\n\n<b>Your " + nippleDescript(0) + "s are currently too sore to be milked.  You'll have to wait a while.</b>", false);
 			}
-			else if(flags[WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(2,"Get Milked",getMilked);
+			else if(flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(2,"Get Milked",getMilked);
 			
 		}
 		if(player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") >= 0 && player.cockTotal() > 0)
 		{
 			
-			if(flags[WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(5,"Milk Cock",cockPumping);
+			if(flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(5,"Milk Cock",cockPumping);
 		}
-		if(player.hasStatusAffect("Marble Rape Attempted") < 0 && player.hasStatusAffect("No More Marble") < 0 && player.hasStatusAffect("Marble") >= 0 && flags[MARBLE_WARNING] == 0) {
+		if(player.hasStatusAffect("Marble Rape Attempted") < 0 && player.hasStatusAffect("No More Marble") < 0 && player.hasStatusAffect("Marble") >= 0 && flags[kFLAGS.MARBLE_WARNING] == 0) {
 			
-			if(flags[WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(3,"Marble", meetMarble);
+			if(flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(3,"Marble", meetMarble);
 		}
 		//choices("Explore",exploreFarm,"Kelt",keltEvent,"Get Milked",milkYou,"Marble",marble,"Milk Jojo",milkJojo,"Milk Cock",cockMilk,"Talk",talkWhitney,"Work",workFarm,"",0,"Leave",13);
-		if(flags[WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(0,"Explore",exploreFarm);
-		if(flags[WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(6,"Talk",talkWhitney);
-		if(flags[WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(7,"Work",workFarm);
+		if(flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(0,"Explore",exploreFarm);
+		if(flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(6,"Talk",talkWhitney);
+		if(flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(7,"Work",workFarm);
 		addButton(9,"Leave",eventParser,13);		
 	}		
 }
@@ -174,13 +174,13 @@ public function workFarm():void {
 	//1/3 chance of marblez
 	if(rand(3) == 0 && player.hasStatusAffect("No More Marble") < 0 && player.hasStatusAffect("Marble") > 0) {
 		//Rapez Override normal
-		if(player.hasStatusAffect("Marble Rape Attempted") >= 0 || flags[MARBLE_WARNING] == 3) {
+		if(player.hasStatusAffect("Marble Rape Attempted") >= 0 || flags[kFLAGS.MARBLE_WARNING] == 3) {
 			marbleAfterRapeBattle();
 			player.createStatusAffect("No More Marble",0,0,0,0);
 			return;
 		}
 		//Angry meeting
-		if(flags[MARBLE_WARNING] == 1) {
+		if(flags[kFLAGS.MARBLE_WARNING] == 1) {
 			marbleWarningStateMeeting();
 			return;
 		}
@@ -269,7 +269,7 @@ public function meetMarble():void {
 	if(player.statusAffectv3("Marble") == 0) {
 		//Meet Marble while exploring version 1 (can occur anytime before the player becomes addicted):
 		//Higher chance after talk texts have been exhausted
-		if(flags[MURBLE_FARM_TALK_LEVELS] >= 7) 
+		if(flags[kFLAGS.MURBLE_FARM_TALK_LEVELS] >= 7) 
 			encounterMarbleExploring();
 		//Meet Marble while exploring version 2 (can occur anytime before the player becomes addicted):
 		else encounterMarbleExploring2();
@@ -313,12 +313,12 @@ public function exploreFarm():void {
 		return;
 	}
 	//FIND CARROT!
-	if(nieveHoliday() && flags[NIEVE_STAGE] == 3 && player.hasKeyItem("Carrot") < 0) {
+	if(nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] == 3 && player.hasKeyItem("Carrot") < 0) {
 		findACarrot();
 		return;
 	}
 	//Free Isabella Milkings!
-	if(player.hasCock() && flags[FOUND_ISABELLA_AT_FARM_TODAY] == 0 && flags[ISABELLA_MILKED_YET] < 0 && isabellaFollower() && flags[ISABELLA_MILK_COOLDOWN] == 0 && rand(2) == 0) {
+	if(player.hasCock() && flags[kFLAGS.FOUND_ISABELLA_AT_FARM_TODAY] == 0 && flags[kFLAGS.ISABELLA_MILKED_YET] < 0 && isabellaFollower() && flags[kFLAGS.ISABELLA_MILK_COOLDOWN] == 0 && rand(2) == 0) {
 		findIzzyMilking();
 		return;
 	}
@@ -590,9 +590,9 @@ public function getMilked():void {
 	var payout:Number = 0;
 	var cap:Number = 500;
 	//Ez mode cap doubles
-	if(flags[EASY_MODE_ENABLE_FLAG] == 1) cap *= 2;
+	if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) cap *= 2;
 	if(debug) {
-		flags[WHITNEY_GEMS_PAID_THIS_WEEK] = 0;
+		flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK] = 0;
 		cap = 9999;
 	}
 	liters = int(player.lactationQ()* (rand(10) + 90) / 100)/1000;
@@ -601,18 +601,18 @@ public function getMilked():void {
 	payout = int(liters*2*4);
 	outputText("The machinery displays " + liters + " liters of milk", false);
 	//If already at cap
-	if(flags[WHITNEY_GEMS_PAID_THIS_WEEK] >= cap) {
+	if(flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK] >= cap) {
 		outputText(" and displays a warning that <b>you're producing more than Whitney can pay for</b>", false);
 		payout = 0;		
 	}
 	if(payout > 0) {
 		//If over cap reduce payout to the difference
-		if(payout + flags[WHITNEY_GEMS_PAID_THIS_WEEK] > cap) payout = cap - flags[WHITNEY_GEMS_PAID_THIS_WEEK];
+		if(payout + flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK] > cap) payout = cap - flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK];
 		//Keep track of how much is paid
-		flags[WHITNEY_GEMS_PAID_THIS_WEEK] += payout;
+		flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK] += payout;
 		outputText(" and automatically dispenses " + num2Text(payout) + " gems.  Whitney really went all out with this setup!", false);
 		//Display a warning that you've capped out.
-		if(flags[WHITNEY_GEMS_PAID_THIS_WEEK] >= cap) outputText("  <b>The machinery warns you that Whitney can't afford any more this week!</b>", false);
+		if(flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK] >= cap) outputText("  <b>The machinery warns you that Whitney can't afford any more this week!</b>", false);
 		player.gems += payout;
 	}
 	else outputText(".", false);
@@ -770,7 +770,7 @@ public function cockPumping():void {
 		else outputText("You're kept on the edge of orgasm for the better part of an hour.   Rhythmic contractions squeeze through the flesh-tubes wrapped around your manhoods, keeping them painfully hard and dribbling, always backing off before you can truly cum.  You thrash in your harness wildly, insane with need and nearly frothing at the mouth.  The licking tongues never stop, licking between every wave of mechanized suction that pulls on your many malenesses.   You babble incoherently, pleasure-drunk, not even noticing a green light on the far side of the wall turning on.  One thing you do notice is that the cock-tubes aren't slowing down their ministrations.  You're finally allowed to cum!\n\n", false);
 	}
 	//BAD END!?
-	if(player.cumQ() >= 50 && player.fatigue >= 100 && flags[USED_MILKER_TODAY] > 0) {
+	if(player.cumQ() >= 50 && player.fatigue >= 100 && flags[kFLAGS.USED_MILKER_TODAY] > 0) {
 		//(small/medium helperless skeet)
 		if(cumQ < 1000) {
 			outputText("The orgasm rolls over you, shutting down your thoughts as your body spasms in its straps, boiling out ", false);
@@ -818,8 +818,8 @@ public function cockPumping():void {
 		doNext(milkerBadEnd1);
 		return;
 	}
-	flags[USED_MILKER_TODAY]++;
-	flags[UNKNOWN_FLAG_NUMBER_00333]++;
+	flags[kFLAGS.USED_MILKER_TODAY]++;
+	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00333]++;
 	//ORGAZMO
 	if(cumQ < 10) {
 		if(player.cockTotal() == 1) outputText("The orgasm rolls over you, shutting down your thoughts as your body spasms in its straps, boiling out tiny squirts of spunk.  Wriggling cillia convulse around you, licking your " + cockHead() + " as it flares wide, filling with blood and dripping out a little cum.  You moan and scream with delight, babbling happily as you watch your insignificant amount of cum wick up the clear tube and into the machinery in the wall.  All too soon the pleasure comes to and end, and your cock starts to soften inside its squishy prison.  The harness slowly loosens, lowering you to the ground and releasing you.\n\n", false);
@@ -880,9 +880,9 @@ public function cockPumping():void {
 	var payout:Number = 0;
 	var cap:Number = 500;
 	//Ez mode cap doubles
-	if(flags[EASY_MODE_ENABLE_FLAG] == 1) cap *= 2;
+	if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) cap *= 2;
 	if(debug) {
-		flags[WHITNEY_GEMS_PAID_THIS_WEEK] = 0;
+		flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK] = 0;
 		cap = 9999;
 	}
 	//Get rid of extra digits
@@ -895,18 +895,18 @@ public function cockPumping():void {
 		payout = 2 + int(cumQ/200)*2;
 	}
 	//If over cap!
-	if(flags[WHITNEY_GEMS_PAID_THIS_WEEK] >= cap) {
+	if(flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK] >= cap) {
 		payout = 0;
 		outputText("It also shows a warning: <b>FUNDS EXHAUSTED.</b>  ", false);
 	}
 	//Reduce payout if it would push past
-	else if(flags[WHITNEY_GEMS_PAID_THIS_WEEK] + payout >= cap) {
-		payout = cap - flags[WHITNEY_GEMS_PAID_THIS_WEEK];
+	else if(flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK] + payout >= cap) {
+		payout = cap - flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK];
 		outputText("It also shows a warning: <b>Not enough gems for full payment.  GEMS NOW EXHAUSTED.</b>  ", false);
 	}	
 	if(payout > 0) {
 		player.gems += payout;
-		flags[WHITNEY_GEMS_PAID_THIS_WEEK] += payout;
+		flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK] += payout;
 		statScreenRefresh();
 		if(player.cumQ() < 1000) player.cumMultiplier++;
 		if(payout == 1) outputText(Num2Text(payout) + " gem rolls out into a collection plate.  Whitney really put a lot of work into this!  You pocket the gem and g", false);

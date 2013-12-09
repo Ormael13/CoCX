@@ -26,15 +26,15 @@
 
 
 public function followerHel():Boolean {
-	if(flags[HEL_FOLLOWER_LEVEL] == 2) return true;
+	if(flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 2) return true;
 	//This is a temporary fix
-	if(flags[HEL_HARPY_QUEEN_DEFEATED] == 1) return false;
-	if(flags[HEL_FOLLOWER_LEVEL] > 0) return true;
+	if(flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] == 1) return false;
+	if(flags[kFLAGS.HEL_FOLLOWER_LEVEL] > 0) return true;
 	return false;
 }
 
 public function fuckBuddyHel():Boolean {
-	return (flags[HEL_FUCKBUDDY] == 1);
+	return (flags[kFLAGS.HEL_FUCKBUDDY] == 1);
 }
 
 //Introduction Scene -- Helia's Discovery
@@ -47,7 +47,7 @@ public function heliaDiscovery():void {
 	outputText("Before bedding down for the night, you make one last check of your camp's perimeter, making sure all your traps and defenses are still in place and primed in the event of a surprise nighttime assault.  As you come to the outermost parts of your makeshift camp, you notice a cloaked stranger approaching out of the evening darkness.  You're about to ready your [weapon], but you recognize the shapely figure of Hel the salamander walking towards you, hips a-sway underneath her loose traveling cloak.");
 
 	//(If Hel has never been to camp before (ie, no Isabella threesome at camp)
-	if(flags[HEL_ISABELLA_THREESOME_ENABLED] == 0) {
+	if(flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 0) {
 		outputText("\n\n\"<i>[name]!</i>\" the salamander shouts, waving emphatically as she approaches.  \"<i>Shit, do you have any idea how hard you are to track down? I've been looking for you everywhere!</i>\"  You ");
 		//[(pussy)
 		if(player.cor < 50) outputText("quickly rush over and stop Hel before she loses a leg to one of your traps");
@@ -91,9 +91,9 @@ public function noDungeon():void {
 	outputText("\n\nBefore you can even try to calm her down, Hel is running away from the camp and back into the night from whence she came.");
 	outputText("\n\nWell then.");
 	//(In-Game effect: Reduce Hel's encounter rate, end fuckbuddy mode. Will fight player in plains.)
-	flags[HEL_REDUCED_ENCOUNTER_RATE] = 1;
-	flags[HEL_FUCKBUDDY] = 0;
-	flags[HEL_AFFECTION] = 0;
+	flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] = 1;
+	flags[kFLAGS.HEL_FUCKBUDDY] = 0;
+	flags[kFLAGS.HEL_AFFECTION] = 0;
 	helAffection(-70);
 	doNext(1);
 }
@@ -119,7 +119,7 @@ public function agreeToHelpHeliaDungeon():void {
 		if(silly()) outputText("\n\nMarble stammers and starts, struggling to find a rebuke against the salamander.  Before she can, though, Hel leaps to her feet and rushes her!  You don't even have a chance to intervene before Marble goes flying with a kick right to her cow-cunt, sending her hurtling toward the swamp.  As Hel settles back into your arms, you're almost certain you hear a rather draconic scream of rage in the distance.");
 	}
 	//PROC NEXT FUNCTION AT 6AM.  OVERRIDES OTHER SHIIIIITE
-	flags[HEL_FOLLOWER_LEVEL] = -1;
+	flags[kFLAGS.HEL_FOLLOWER_LEVEL] = -1;
 	
 	doNext(1);
 	//(Decrease Player Lust to minimum, increase HP to maximum, etc. etc. You're sleeping, but also fucking. Figure it out.)
@@ -138,7 +138,7 @@ public function morningAfterHeliaDungeonAgreements():void {
 	outputText("\n\nYou tell the salamander you just need to get your affairs in order and you're off to the harpies' nest. She nods, reminding you that each moment you spend waiting around is another moment that poor man suffers.  You tell her you'll be quick, and set about preparing.");
 	//(Display: 
 	outputText("\n\n(<b>Helia can now be found under the Lovers tab! (For Now!)</b>)");
-	flags[HEL_FOLLOWER_LEVEL] = 1;
+	flags[kFLAGS.HEL_FOLLOWER_LEVEL] = 1;
 	doNext(1);
 }
 
@@ -325,7 +325,7 @@ public function gooArmorBeatsUpPC():void {
 	stats(0,0,0,0,1,3,-100,0);
 	eventParser(5007);
 	doNext(1);
-	flags[LOST_GOO_ARMOR_FIGHT] = 1;
+	flags[kFLAGS.LOST_GOO_ARMOR_FIGHT] = 1;
 }
 
 //Goo Armor -- PC is Victorious (Intro)
@@ -348,7 +348,7 @@ public function beatUpGooArmor():void {
 	outputText("\n\nWell, that's certainly an interesting offer. Do you take the goo-girl armor with you?");
 	//(Display Options: [Take Her] [Refuse Her])
 	simpleChoices("Take Her",11095,"Refuse Her",11094,"",0,"",0,"",0);
-	flags[WON_GOO_ARMOR_FIGHT] = 1;
+	flags[kFLAGS.WON_GOO_ARMOR_FIGHT] = 1;
 }
 //[Refuse Her]
 public function refuseGooArmorOffer():void {
@@ -384,9 +384,9 @@ public function takeGooArmorAndWearIt():void {
 	outputText("\n\nTo your surprise, you feel rather invigorated after the battle, thanks to Valeria's strange healing properties, and with a smirk, you turn your attention back to the dungeon ahead.\n\n");
 	//(PC regains HP)
 	equipArmor("goo armor", false);
-	flags[MET_VALERIA] = 1;
+	flags[kFLAGS.MET_VALERIA] = 1;
 	HPChange(1000,false);
-	flags[TOOK_GOO_ARMOR] = 1;
+	flags[kFLAGS.TOOK_GOO_ARMOR] = 1;
 }
 
 //ATTACK ONE: Claw Flurry
@@ -456,7 +456,7 @@ public function pcLosesToHarpyHorde():void {
 //Harpy Horde -- PC is Victorious
 public function pcDefeatsHarpyHorde():void {
 	clearOutput();
-	flags[HEL_HARPIES_DEFEATED] = 1;
+	flags[kFLAGS.HEL_HARPIES_DEFEATED] = 1;
 	outputText("The harpies collapse in a pile in the center of the room, all utterly defeated... except one.  The lone harpy that did not attack you throughout the fight, a rather slight girl with a shock of bright orange hair, still stands, gaping at the destruction you've wrought.  Eventually, her gaze shifts up to you.");
 
 	outputText("\n\n\"<i>Holy shit, " + player.mf("dude","lady") + ".  You're a goddamn one-" + player.race() + "-army, aren't you? You... you must be [name], right? Hel... er, Miss Helia told me about you.  I'm, uh... I'm Kiri.  Sorry about the other girls - I'd just spiked their drinks, but they didn't have time to finish them.  You're a little earlier than I was expecting.  Sorry,</i>\" she whispers nervously, rubbing the back of her neck.");
@@ -590,11 +590,11 @@ public function talkToValeria():void {
 	outputText("\n\n\"<i>Well hey there, cutie,</i>\" Valeria says, giving Kiri a little wink.  The harpy shudders slightly and shakes the surprise off.");
 	outputText("\n\nYou clear your throat and repeat your question.");
 	//[If Broodmother hasn't been defeated]
-	if(flags[HEL_HARPY_QUEEN_DEFEATED] == 0) outputText("\n\n\"<i>Oh, right. Well, that harpy broodmother is serious business. She's a powerful mage, and a heavy-hitter besides.  Careful with her, or you're liable to end up drugged out of your mind and used as breeding stock 'till you die.  I've seen it happen to other adventurers coming through.</i>\"");
+	if(flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] == 0) outputText("\n\n\"<i>Oh, right. Well, that harpy broodmother is serious business. She's a powerful mage, and a heavy-hitter besides.  Careful with her, or you're liable to end up drugged out of your mind and used as breeding stock 'till you die.  I've seen it happen to other adventurers coming through.</i>\"");
 	//[If Jailer hasn't been defeated]
-	if(HEL_BRIGID_DEFEATED == 0) outputText("\n\n\"<i>Brigid the Jailer is a big girl, probably the meanest harpy here. The others give her plenty of space, from what I've seen.  She uses a hot poker as her weapon, too.  Watch out unless you wanna get burned!</i>\"");
+	if(flags[kFLAGS.HEL_BRIGID_DEFEATED] == 0) outputText("\n\n\"<i>Brigid the Jailer is a big girl, probably the meanest harpy here. The others give her plenty of space, from what I've seen.  She uses a hot poker as her weapon, too.  Watch out unless you wanna get burned!</i>\"");
 	//[If phoenixes haven't been defeated]
-	if(flags[HEL_PHOENIXES_DEFEATED] == 0) outputText("\n\n\"<i>There's some freaky-ass half-breed harpy things upstairs that I've seen around a bit.  Phoenixes, I guess they're called.  They breathe fire, so watch your ass.  I can absorb some of the heat, but... Don't get roasted, okay?</i>\"");
+	if(flags[kFLAGS.HEL_PHOENIXES_DEFEATED] == 0) outputText("\n\n\"<i>There's some freaky-ass half-breed harpy things upstairs that I've seen around a bit.  Phoenixes, I guess they're called.  They breathe fire, so watch your ass.  I can absorb some of the heat, but... Don't get roasted, okay?</i>\"");
 	doNext(1);
 }
 
@@ -649,13 +649,13 @@ public function pcDefeatsBrigid():void {
 	//(New Key Item: Harpy Key A)
 	player.createKeyItem("Harpy Key A",0,0,0,0);
 	eventParser(5007);
-	flags[HEL_BRIGID_DEFEATED] = 1;
+	flags[kFLAGS.HEL_BRIGID_DEFEATED] = 1;
 }
 
 //Brigid the Jailer -- PC Defeated
 public function pcDefeatedByBrigid():void {
 	clearOutput();
-	if(flags[HEL_HARPY_QUEEN_DEFEATED] == 0) {
+	if(flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] == 0) {
 		outputText("\"<i>Tsk tsk tsk,</i>\" the harpy jailer croons, looming over you as you slump to the ground. \"<i>You shouldn't have messed with me, bitch!</i>\" she snaps, giving you a rough kick to the side. \"<i>Now, let's see what Mother has to say about this...</i>\"");
 		//(Go to \"<i>Harpy Breeding Slut</i>\" Bad End)
 		doNext(11117);
@@ -750,19 +750,19 @@ public function tortureGear():void {
 	var straps:Number = 0;
 	var dagger:Number = 0;
 	outputText("You walk up to the torture rack.  ");
-	if(flags[HEL_DUNGEON_TAKEN_WHIP] == 0 || flags[HEL_DUNGEON_TAKEN_STRAPS] == 0 || flags[HEL_DUNGEON_TAKEN_DAGGER] == 0) {
+	if(flags[kFLAGS.HEL_DUNGEON_TAKEN_WHIP] == 0 || flags[kFLAGS.HEL_DUNGEON_TAKEN_STRAPS] == 0 || flags[kFLAGS.HEL_DUNGEON_TAKEN_DAGGER] == 0) {
 		outputText("The rack contains: ");
-		if(flags[HEL_DUNGEON_TAKEN_WHIP] == 0) {
+		if(flags[kFLAGS.HEL_DUNGEON_TAKEN_WHIP] == 0) {
 			outputText("A whip");
 			whip = 11107;
 		}
-		if(flags[HEL_DUNGEON_TAKEN_STRAPS] == 0) {
-			if(flags[HEL_DUNGEON_TAKEN_WHIP] == 0) outputText(", ");
+		if(flags[kFLAGS.HEL_DUNGEON_TAKEN_STRAPS] == 0) {
+			if(flags[kFLAGS.HEL_DUNGEON_TAKEN_WHIP] == 0) outputText(", ");
 			outputText("some leather straps");
 			straps = 11108;
 		}
-		if(flags[HEL_DUNGEON_TAKEN_DAGGER] == 0) {
-			if(flags[HEL_DUNGEON_TAKEN_STRAPS] == 0 || flags[HEL_DUNGEON_TAKEN_WHIP] == 0) outputText(", ");
+		if(flags[kFLAGS.HEL_DUNGEON_TAKEN_DAGGER] == 0) {
+			if(flags[kFLAGS.HEL_DUNGEON_TAKEN_STRAPS] == 0 || flags[kFLAGS.HEL_DUNGEON_TAKEN_WHIP] == 0) outputText(", ");
 			outputText("a lust-draft coated dagger");
 			dagger = 11109;
 		}
@@ -775,7 +775,7 @@ public function tortureGear():void {
 //[Prisoner] (First Time)
 public function helDungeonPrisonerTalk():void {
 	clearOutput();
-	if(flags[HEL_PC_TALKED_WITH_HAKON] == 0) {
+	if(flags[kFLAGS.HEL_PC_TALKED_WITH_HAKON] == 0) {
 		outputText("You approach the Salamander strapped to the table.  He looks at you with his one good eye, warily gauging you as you approach.");
 		outputText("\n\n\"<i>Well, aren't you a sight for sore eyes,</i>\" he laughs, his voice little more than a rasp.  \"<i>About time somebody put a boot up that punk bitch's ass.  Ha!  Hey, the name's Hakon.  I'd shake your hand, but, uh, I'm a bit tied up at the moment as it were.  So, what brings an outsider all the way up here?</i>\"");
 		outputText("\n\nYou tell him that you're here to rescue him as it happens.");
@@ -784,7 +784,7 @@ public function helDungeonPrisonerTalk():void {
 		outputText("\n\n\"<i>H... Helia? My little Hel?</i>\" he asks in disbelief. With a slight grin, you tell him that 'little' Hel isn't so little anymore.  He laughs, but for an instant you think he might be about to cry.  \"<i>Of... of course she is.  My little girl's all grown up.  Oh, what I wouldn't give to meet her...</i>\"");
 		outputText("\n\nYou tell him that she's not far away at all... just a few floors up, in fact.");
 		outputText("\n\n\"<i>WHAT!?</i>\" He yells, straining against the chains that bind him.  \"<i>You brought Hel here!?  What were you thinking?  Go and get her out of here.  NOW!</i>\"");
-		flags[HEL_PC_TALKED_WITH_HAKON] = 1;
+		flags[kFLAGS.HEL_PC_TALKED_WITH_HAKON] = 1;
 	}
 	//[Prisoner] (Repeat)
 	//[IF PC HAS HARPY KEY A & B]
@@ -861,7 +861,7 @@ public function phoenixPlatoonMurdersPC():void {
 public function phoenixPlatoonLosesToPC():void {
 	clearOutput();
 	outputText("With one final grunt, the last of the phoenixes collapses onto the pile of defeated warriors you've left in your wake.  The once-mighty platoon of soldiers has been reduced to a bruised, lusty heap of flesh, scales and feathers.  Seeing that the battle is won, you lower your [weapon] and take a look around.");
-	flags[HEL_PHOENIXES_DEFEATED]++;
+	flags[kFLAGS.HEL_PHOENIXES_DEFEATED]++;
 	eventParser(5007);
 }
 
@@ -1118,7 +1118,7 @@ public function harpyQueenDefeatedByPC():void {
 	outputText("\n\n\"<i>Y-you'll ruin everything,</i>\" the Harpy Queen groans, trying futilely to stand.  Before she can recover, Hel walks over and plants her clawed foot right on the bitch's chest, pinning her down.  From a small hook on the side of the throne, you take her key-ring for the prisoner down below.");
 	//(Acquired Key Item: \"<i>Harpy Key B</i>\")
 	player.createKeyItem("Harpy Key B",0,0,0,0);
-	flags[HEL_HARPY_QUEEN_DEFEATED] = 1;
+	flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] = 1;
 	//(PC moves to Throne Room Main Menu:)
 	eventParser(5007);
 }
@@ -1134,9 +1134,9 @@ public function HeliaThroneRoom():void {
 	outputText("\n\nShe grins.  \"<i>So, what's the plan, lover mine?  Teach this bitch a lesson she'll never forget?</i>\"");
 	//(Display Options: [Hakon](if PC knows this) [Kiri] [Queen](If not dead/gone))
 	var queen:Number = 0;
-	if(flags[HARPY_QUEEN_EXECUTED] == 0) queen = 11122;
+	if(flags[kFLAGS.HARPY_QUEEN_EXECUTED] == 0) queen = 11122;
 	var hakon:Number = 0;
-	if(flags[HEL_PC_TALKED_WITH_HAKON] > 0) hakon = 11120;
+	if(flags[kFLAGS.HEL_PC_TALKED_WITH_HAKON] > 0) hakon = 11120;
 	simpleChoices("Hakon",hakon,"Kiri",11121,"Queen",queen,"",0,"Back",1);
 }
 
@@ -1147,8 +1147,8 @@ public function heliaHakonTalk():void {
 	outputText("\n\n\"<i>Wha... what. No, that's not... It can't be...</i>\"");
 	outputText("\n\nYou assure her that it's true. The salamander she came here to rescue is none other than father, Hakon.");
 	outputText("\n\n\"<i>I don't believe it,</i>\" Hel says, rubbing at the corners of her eyes.  \"<i>I thought all these years... I was sure he was dead.  How... No.  It doesn't matter,</i>\" she says, turning to the broodmother beneath her.");
-	if(flags[HARPY_QUEEN_EXECUTED] == 0) outputText("  \"<i>You're going to pay for what you did to my father, you bitch.  I promise you that.</i>\"");
-	flags[HEL_KNOWS_ABOUT_HAKON] = 1;
+	if(flags[kFLAGS.HARPY_QUEEN_EXECUTED] == 0) outputText("  \"<i>You're going to pay for what you did to my father, you bitch.  I promise you that.</i>\"");
+	flags[kFLAGS.HEL_KNOWS_ABOUT_HAKON] = 1;
 	doNext(1);
 }
 
@@ -1172,7 +1172,7 @@ public function heliaQueenTalk():void {
 	outputText("\n\nYou ask Hel exactly what she thinks you ought to do with the 'queen cunt.'");
 	outputText("\n\n\"<i>Well, we can start by me shoving my tail so far up her twat that she'll never have kids again.  That's a goddamn start.</i>\"");
 	//[If PC has already told her about Hakon: 
-	if(flags[HEL_KNOWS_ABOUT_HAKON] == 1) outputText("  \"<i>Maybe snap her neck afterwards.</i>\"");
+	if(flags[kFLAGS.HEL_KNOWS_ABOUT_HAKON] == 1) outputText("  \"<i>Maybe snap her neck afterwards.</i>\"");
 	doNext(1);
 }
 
@@ -1201,13 +1201,13 @@ public function letHarpyQueenGo():void {
 	outputText("\n\nYou nod for Hel to get off.  She does so grudgingly, letting the Harpy Queen stand and roll her shoulders, spreading her great wings wide.");
 	outputText("\n\n\"<i>Hmm. You're a fool, Champion,</i>\" she says, \"<i>But perhaps I was wrong about you.  Come, my children!  We are leaving this place!</i>\"");
 	//[If you told Hel about Hakon:]
-	if(flags[HEL_KNOWS_ABOUT_HAKON] == 1) {
+	if(flags[kFLAGS.HEL_KNOWS_ABOUT_HAKON] == 1) {
 		outputText("\n\nThe harpies beat their wings and croon happily, eager to be away from you.  As the Harpy Queen is ready to take off, she gives you an appreciative nod, with what might have even been a smile.  It looks as though you've made a friend tod-- OH FUCK!");
 		outputText("\n\nYou try and yell out, but too late. Hel has lunged forward and, grabbing the broodmother by the neck, spins around.  The sound of neck bones snapping echoes through the tower as the queen falls, hitting the floor with a wet thump.");
 		outputText("\n\n\"<i>Bullshit,</i>\" Hel snaps, wringing the dead queen's neck under her arm.  The other harpies around you shriek in outrage, pain, and fear.  \"<i>Do you have ANY IDEA what this bitch did?  To my father--to me?  There was no fucking way I was going to just let her walk off.  No, [name]. No way.</i>\"");
 		//(Display Options: [Forgive] [Berate])
 		simpleChoices("Forgive",11124,"Berate",11125,"",0,"",0,"",0);
-		flags[HARPY_QUEEN_EXECUTED] = 1;
+		flags[kFLAGS.HARPY_QUEEN_EXECUTED] = 1;
 	}
 	//[Else; did not tell about Hakon]
 	else {
@@ -1216,7 +1216,7 @@ public function letHarpyQueenGo():void {
 		outputText("\n\nWith that, the harpies take flight.");
 		//(Return PC to Room Menu)
 		doNext(1);
-		flags[HARPY_QUEEN_EXECUTED] = -1;
+		flags[kFLAGS.HARPY_QUEEN_EXECUTED] = -1;
 	}
 	stats(0,0,0,0,0,0,0,-5);
 }
@@ -1231,7 +1231,7 @@ public function harpyQueenLetHerGoForgive():void {
 	outputText("\n\nShe stands up from the body and wraps you in a tight hug. \"<i>...Thank you.</i>\"");
 	outputText("\n\nYou pat Helia on the head and with a shout, tell the harpies to get lost.  They do so reluctantly, too afraid to fight you, but still outraged at the murder.  They take flight, hurtling out the hole in the ceiling crying curses and epitaphs behind them.");
 	outputText("\n\n\"<i>Alright. You've got the key, so go break ");
-	if(flags[HEL_KNOWS_ABOUT_HAKON] == 1) outputText("Dad ");
+	if(flags[kFLAGS.HEL_KNOWS_ABOUT_HAKON] == 1) outputText("Dad ");
 	else outputText("that poor salamander ");
 	outputText("out of the dungeon.  I'll make sure the phoenixes and harpies don't give you two trouble on the way out.</i>\"");
 	outputText("\n\nWith that, Hel trots out the door and down the stairs, leaving you alone in the room. You notice that the queen's staff has fallen beside her body.");
@@ -1248,7 +1248,7 @@ public function harpyQueenLetHerGoBerate():void {
 	outputText("\n\nBefore you can say another word, the salamander runs out the door, back downstairs.  Aw, shit.");
 	outputText("\n\nYou notice the queen's staff has fallen beside her body.");
 	//(Remove all options but [Go Downstairs]; add [Take Staff]); (Remove Kiri from Stairwell)
-	flags[FOUGHT_WITH_HEL_IN_DUNGEON] = 1;
+	flags[kFLAGS.FOUGHT_WITH_HEL_IN_DUNGEON] = 1;
 	doNext(1);
 }
 
@@ -1261,11 +1261,11 @@ public function killHarpyQueen():void {
 	outputText("\n\n\"<i>Well then. I guess that's that, then,</i>\" Hel says, swinging her sword over her shoulder into its sheath.");
 	outputText("\n\nYou nod your agreement.");
 	outputText("\n\n\"<i>Alright. You've got the key, so go break ");
-	if(flags[HEL_KNOWS_ABOUT_HAKON] == 1) outputText("Dad ");
+	if(flags[kFLAGS.HEL_KNOWS_ABOUT_HAKON] == 1) outputText("Dad ");
 	else outputText("that poor salamander ");
 	outputText("out of the dungeon.  I'll make sure the phoenixes and harpies don't give you two trouble on the way out.</i>\"");
 	outputText("\n\nWith that, Hel trots out the door and down the stairs, leaving you alone in the room. You notice that the queen's staff has fallen beside her body.");
-	flags[HARPY_QUEEN_EXECUTED] = 1;
+	flags[kFLAGS.HARPY_QUEEN_EXECUTED] = 1;
 	//(Remove all options but [Go Downstairs]; add [Take Staff]) (Remove Kiri from Stairwell)
 	doNext(1);
 }
@@ -1278,7 +1278,7 @@ public function takeQueensStaff():void {
 	shortName = "E.Staff";
 	takeItem();
 	//Similar stats to the Wizard's Staff, but with a better Fatigue reduction and a bonus to Magic damage/effect.
-	flags[TOOK_QUEEN_STAFF] = 1;
+	flags[kFLAGS.TOOK_QUEEN_STAFF] = 1;
 }
 
 //Throne Room -- [Harpy Queen] -- [Fuck Her]
@@ -1365,7 +1365,7 @@ public function harpyQueenInterrogate():void {
 	outputText("\n\n\"<i>You bitch!</i>\" Hel snaps, grinding her foot into the harpy's chest.  \"<i>What the fuck is wrong with you people?  Did you even think, for one fucking second, actually THINK to maybe ask one of us?  Just fly down and ask any horny salamander boy, 'Wanna fill me with your seed till my eggs pop and make an army?' Guess what - he'd say yes! Any man in Mareth who's still pure at heart would say YES!</i>\"");
 	outputText("\n\nThe harpy queen turns her gaze toward Hel. \"<i>This one did not.</i>\"");
 	//[If PC told Hel about Hakon:
-	if(flags[HEL_KNOWS_ABOUT_HAKON] == 1) outputText("\n\n\"<i>That's because he was MARRIED, YOU BITCH!</i>\" Hel screams, her tail practically blazing behind her. The queen recoils, but falls silent.");
+	if(flags[kFLAGS.HEL_KNOWS_ABOUT_HAKON] == 1) outputText("\n\n\"<i>That's because he was MARRIED, YOU BITCH!</i>\" Hel screams, her tail practically blazing behind her. The queen recoils, but falls silent.");
 	else outputText("\n\n\Hel scowls, but says nothing. It doesn't seem like you'll get anything further from the queen.");
 	//(Return PC to room menu)
 	doNext(1);
@@ -1375,9 +1375,9 @@ public function harpyQueenInterrogate():void {
 //(Play when the PC interacts with Hakon, in the dungeon, while possessing both HARPY KEY key items)
 public function towerOutro():void {
 	clearOutput();
-	if(flags[HARPY_QUEEN_EXECUTED] == 0) flags[HARPY_QUEEN_EXECUTED] = 1;
+	if(flags[kFLAGS.HARPY_QUEEN_EXECUTED] == 0) flags[kFLAGS.HARPY_QUEEN_EXECUTED] = 1;
 	//[IF PC DID NOT TELL HEL ABOUT HAKON BEFORE]
-	if(flags[HEL_KNOWS_ABOUT_HAKON] == 0) {
+	if(flags[kFLAGS.HEL_KNOWS_ABOUT_HAKON] == 0) {
 		outputText("With Hakon's arm slung over your shoulder, you help the long-imprisoned salamander up the stairs and, with great effort, out the ancient doors of the tower.  Outside, you see Helia and her pseudo-phoenix half-sister Kiri.  Hakon recoils as the evening sunlight hits his eyes, his first taste of the sun in years.");
 		outputText("\n\nHel and Kiri turn to you, smiling from ear to ear as you bring Hakon outside.");
 		outputText("\n\n\"<i>Hel,</i>\" Kiri says, taking the salamander by the hand.  \"<i>I've got someone you might want to meet.</i>\"");

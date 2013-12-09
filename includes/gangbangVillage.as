@@ -19,26 +19,26 @@
 //const VAPULA_EARNED_A_SPANK:int = 634;
 
 public function vapulaSlave():Boolean {
-	if(flags[VAPULA_FOLLOWER] == 1) return true;
+	if(flags[kFLAGS.VAPULA_FOLLOWER] == 1) return true;
 	return false;
 }
 
 public function gangbangVillageStuff():void {
 	clearOutput();
-	if(flags[OWCA_UNLOCKED] == 1) owcaMainScreenOn();
+	if(flags[kFLAGS.OWCA_UNLOCKED] == 1) owcaMainScreenOn();
 	else gangbangVillageFirstGoRound()
 }
 //First encounter (Z)
 public function gangbangVillageFirstGoRound():void {
 	clearOutput();
-	/*if(flags[OWCAS_ATTITUDE] < 5) {
+	/*if(flags[kFLAGS.OWCAS_ATTITUDE] < 5) {
 		desperateVillages();
 		return;
 	}*/
-	if(flags[DECLINED_TO_VISIT_REBECCS_VILLAGE] == 0 && flags[TIMES_REFUSED_REBECCS_OFFER] == 0 && flags[TIMES_IN_DEMON_PIT] == 0) {
+	if(flags[kFLAGS.DECLINED_TO_VISIT_REBECCS_VILLAGE] == 0 && flags[kFLAGS.TIMES_REFUSED_REBECCS_OFFER] == 0 && flags[kFLAGS.TIMES_IN_DEMON_PIT] == 0) {
 		//[Attitude is set to 50]
-		flags[OWCAS_ATTITUDE] = 50;
-		flags[VAPULA_SUBMISSIVENESS] = 50;
+		flags[kFLAGS.OWCAS_ATTITUDE] = 50;
+		flags[kFLAGS.VAPULA_SUBMISSIVENESS] = 50;
 		outputText("You wander for quite a while in an endless field of grass before spotting a commotion in the distance.  A myriad of creatures have gathered in the path ahead, waving to you enthusiastically, some still holding tightly to their farm tools.  It's quite an odd sight, all these happy farmhands extending a warm welcome.  You simply accept it as a gesture of kindness and make your way toward the crowd of smiling faces.");
 		outputText("\n\nA female emerges from the group to greet you and tries to communicate her intentions, holding up a peace sign.  As she approaches, her features become more apparent.  Her appearance is strikingly similar to that of a human.   Her face is pale, with the appearance of porcelain.  Gazing lower, you see that she possesses a bountiful bosom that bulges against her crude peasant dress and hips that sway with grace as she approaches nonchalantly.  Only the two little nubs on her forehead and the long, white woolen mound of her hair suggest she's anything more than a stray village girl from a human town like your own.  The rest of the crowd is of similar appearance, and they begin to follow her lead, walking towards you.  Is this a herd of sheep people?  Or, if you could dare bring yourself to say it... sheeple?");
 		outputText("\n\nThe girl closes the distance between you with three quick strides, and swiftly plants a peck on your cheek.  You straighten up a bit in surprise at such a friendly greeting from the inhabitants of this land.  Her cool breath smells like fresh dairy milk and her eyes are glinting as she speaks.  \"<i>Greetings!  You're not from this world, are you?  We've seen many a vagabond adventurer in this land.  My name's Rebecc, and we're always happy to meet your kind!</i>\"");
@@ -48,7 +48,7 @@ public function gangbangVillageFirstGoRound():void {
 		doYesNo(agreeToFollowRebecFirstTime,dontGoToZeVillage);
 	}
 	//As long as you don't follow her once, display this on subsequent encounters (Z)
-	else if(flags[TIMES_IN_DEMON_PIT] == 0) {
+	else if(flags[kFLAGS.TIMES_IN_DEMON_PIT] == 0) {
 		outputText("After wandering across the plains for a while, you spot Rebecc, the girl you met before, amongst a group of fellow farmers; she calls out to you.  \"<i>Hello again, traveler!  You seem lost... would you mind spending some time with us at our village?</i>\"");
 		outputText("\n\nAs before, you notice while speaking with her that she keeps glancing at your crotch for a few seconds at a time.  She puts on a sultry smile as she nudges the edges of her dress, revealing more and more cleavage each time.  She's a bit shaky as well; it's almost as if she's attempting to seduce you, but is only with difficulty able to contain herself.  Will you spend time with her in the village?");
 		//Yes/No
@@ -63,19 +63,19 @@ public function gangbangVillageFirstGoRound():void {
 		outputText("\n\nShe grabs your hand and drags you to her village, hopping joyfully as she keeps thanking you for your heroic gesture.  You finally reach her home; a handful of people join you, attracted by the noise she's been making.  People are everywhere showing unconditional gratitude, bowing down and muttering thankful words as you go by; it's almost as if they were intimidated - or ashamed - by someone worthier than them.  Eventually you are left alone with the charming farmer girl.");
 		outputText("\n\n\"<i>My home is yours, hero; alongside everyone else's.  You will always be welcome here.  Don't hesitate to come to my place; you must feel all dirty and sullied from these corrupted monsters.  Don't worry, I'll clean you up.</i>\"  She winks at you and walks into her house, leaving her door open as an invitation.");
 		outputText("\n\n(<b>Owca Village added to your 'Places' menu.</b>)");
-		flags[OWCA_UNLOCKED] = 1;
+		flags[kFLAGS.OWCA_UNLOCKED] = 1;
 		doNext(gangbangVillageStuff);
 	}
 }
 public function dontGoToZeVillage():void {
 	clearOutput();
-	flags[DECLINED_TO_VISIT_REBECCS_VILLAGE]++;
+	flags[kFLAGS.DECLINED_TO_VISIT_REBECCS_VILLAGE]++;
 	eventParser(13);
 }
 //First plea (Z)
 public function agreeToFollowRebecFirstTime():void {
 	clearOutput();
-	if(flags[TIMES_REFUSED_REBECCS_OFFER] == 0) {
+	if(flags[kFLAGS.TIMES_REFUSED_REBECCS_OFFER] == 0) {
 		outputText("How could you refuse an invitation from such an alluring girl?  You eagerly agree to go to her village; everyone sets out at once, chatting with each other jovially, but your attention is squarely focused on Rebecc.  She seems impressed by the tales of your adventures and has nothing but praise for your endless bravery, delivered while clinging to your arm and pressing her body against yours.  Her sweet scent is invigorating, and a significant amount of blood flows toward your ");
 		if(player.gender == 0) outputText("regretfully bare ");
 		outputText("groin as you feel the contact of her tender curves against your body.  Taking advantage of the effect you seem to have on her, you start questioning her about her village, her people and how she was affected by demons.");
@@ -135,7 +135,7 @@ public function agreeToFollowRebecFirstTime():void {
 		outputText("\n\nYou know very well what these people want: some meat to appease the demons.  Will you help them?");
 	}
 	//Yes/No
-	if(flags[TIMES_IN_DEMON_PIT] == 0) doYesNo(3607,declineRebeccsPlea);
+	if(flags[kFLAGS.TIMES_IN_DEMON_PIT] == 0) doYesNo(3607,declineRebeccsPlea);
 	else doYesNo(3608,declineRebeccsPlea);
 }
 //Refuse plea (Z)
@@ -143,17 +143,17 @@ public function declineRebeccsPlea():void {
 	clearOutput();
 	outputText("You can't give in to her demand; you are a proud warrior fighting demons.  You were certainly not meant to serve as a scapegoat or sex-toy.  She sighs in disappointment.  \"<i>Well, I should have expected that.  I wasn't full of hope either.  No hard feelings.</i>\"  Everyone is looking at you with sad or apathetically hostile eyes, making you feel uncomfortable.  You quickly leave the village and return to your camp.");
 	//[if more than 40 int, a warning after 4 consecutive refusals]
-	//if(flags[TIMES_REFUSED_REBECCS_OFFER] >= 3 && player.inte >= 40) outputText("\n\nThe villagers are growing impatient of your repeated refusals; you can hear them exchange hushed whispers as you depart.  Failing to grant their request again will probably anger them considerably.");
+	//if(flags[kFLAGS.TIMES_REFUSED_REBECCS_OFFER] >= 3 && player.inte >= 40) outputText("\n\nThe villagers are growing impatient of your repeated refusals; you can hear them exchange hushed whispers as you depart.  Failing to grant their request again will probably anger them considerably.");
 	//[Attitude is set to 50]
-	if(flags[OWCAS_ATTITUDE] > 5) flags[OWCAS_ATTITUDE] -= 5;
-	flags[TIMES_REFUSED_REBECCS_OFFER]++;
+	if(flags[kFLAGS.OWCAS_ATTITUDE] > 5) flags[kFLAGS.OWCAS_ATTITUDE] -= 5;
+	flags[kFLAGS.TIMES_REFUSED_REBECCS_OFFER]++;
 	doNext(13);
 }
 //Accept plea (Z)
 public function acceptRebeccsPlea(firstTime:Boolean = false, sacrificed:Boolean = false):void {
 	clearOutput();
-	flags[OWCAS_ATTITUDE] += 10;
-	if(flags[OWCAS_ATTITUDE] > 100) flags[OWCAS_ATTITUDE] = 100;
+	flags[kFLAGS.OWCAS_ATTITUDE] += 10;
+	if(flags[kFLAGS.OWCAS_ATTITUDE] > 100) flags[kFLAGS.OWCAS_ATTITUDE] = 100;
 	outputText("You tell the desperate girl that you're going to do as she asks.  As soon as you finish speaking, everyone cheers and applauds you, praising you as their savior.  Rebecc grabs hold of your shoulders and gives you a soft kiss on your lips; she whispers, \"<i>Thank you, champion.  We all owe you.  I promise that you will be rewarded for the heroic deed you're about to undertake.</i>\"");
 	outputText("\n\nA group of the farmers then proceeds to lead you across the village to a strange circle-shaped pit.  It's about one meter deep and ten meters in diameter.  At the center of the pit stands a tall wooden pole, adorned with several dangling ropes and chains.  You grimace as you realize you will be tied up and bound to the crudely fashioned post in order to make sure you don't escape before the demons show up.");
 	//if(player.armorName != "comfortable clothes") outputText("  The farmers almost eagerly help you out of your " +player.armorName+ ", supplying you with a set of shabby but comfortable peasant clothes.");
@@ -188,9 +188,9 @@ public function intoTheDemonPit(sacrifice:Boolean = true):void {
 	if(sacrifice) outputText(", tangled in your restraints");
 	outputText(".  She leans down and coos, ");
 	//[if first time]
-	if(flags[TIMES_IN_DEMON_PIT] == 0) outputText("\"<i>Awww, look at the poor little thing!  So this is what they gave us this time... Look at [him], everyone!  Do you know you'd be a cute pet?  People here call me Vapula, and I don't think you'll forget that name any time soon.</i>\"");
+	if(flags[kFLAGS.TIMES_IN_DEMON_PIT] == 0) outputText("\"<i>Awww, look at the poor little thing!  So this is what they gave us this time... Look at [him], everyone!  Do you know you'd be a cute pet?  People here call me Vapula, and I don't think you'll forget that name any time soon.</i>\"");
 	//[else if Vapula Submissiveness >50]
-	else if(flags[VAPULA_SUBMISSIVENESS] > 50) outputText("\"<i>You again?  By Lethice, you must really enjoy it!  You love being a bitch for Vapula, don't you?  Yes you do!</i>\"");
+	else if(flags[kFLAGS.VAPULA_SUBMISSIVENESS] > 50) outputText("\"<i>You again?  By Lethice, you must really enjoy it!  You love being a bitch for Vapula, don't you?  Yes you do!</i>\"");
 	//[else]
 	else outputText("\"<i>Fuck, you again?  Tell me it's so!  I've been looking forward to putting you in your place as my newest slut!</i>\"");
 	//[(if sacrificed)
@@ -206,8 +206,8 @@ public function intoTheDemonPit(sacrifice:Boolean = true):void {
 		else outputText("\n\nThe chains binding you aren't very tight or of the finest craftsmanship, but they're sufficient to hold you more or less in place; though you can probably twist to avoid a few attacks, you won't be able to make any of your own if you decide to resist... at least, not physically.");
 		outputText("  You're once again feeling the regret over letting the villagers hold your equipment, but there's nothing for it now.");
 	}
-	flags[TIMES_IN_DEMON_PIT]++;
-	flags[DAYS_SINCE_LAST_DEMON_DEALINGS] = 0;
+	flags[kFLAGS.TIMES_IN_DEMON_PIT]++;
+	flags[kFLAGS.DAYS_SINCE_LAST_DEMON_DEALINGS] = 0;
 	if(sacrifice) simpleChoices("Submit",loseOrSubmitToVapula,"Fight",3612,"",0,"",0,"",0);
 	else simpleChoices("Submit",loseOrSubmitToVapula,"Fight",3613,"",0,"",0,"",0);
 }
@@ -221,7 +221,7 @@ public function fightZeDemons(sacrifice:Boolean = true):void {
 	if(sacrifice) {
 		//Remove weapon
 		player.createStatusAffect("Disarmed",0,0,0,0);
-		flags[UNKNOWN_FLAG_NUMBER_00268] = player.weaponName;
+		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00268] = player.weaponName;
 		player.weaponName = "fists";
 		player.weaponAttack = 0;
 		monster.createStatusAffect("Bow Disabled",0,0,0,0);
@@ -335,9 +335,9 @@ public function loseOrSubmitToVapula():void {
 	outputText("Everywhere around you, people keep cumming and shooting ropes of jism.  In no time your entire body is drenched with spooge.  Your eyes and ears are completely covered with sticky goo, preventing you from hearing and seeing.  Still, you can feel penises being stuffed into your mouth again as they unload their unholy swill.  The taste is strong, hot, and salty, but not unpleasant.  You swallow until your belly swells, but you don't care; temporarily reduced to the instincts of breeding stock, you want more spunk and you suck it up as if your life depended on it.");
 	outputText("\n\nYou keep oozing out fluids until you reach your own body's capacity.  When the flow of various juices starts to ebb, you relax, completely exhausted.  You simply lie there in a bed of cocks and naked flesh, abandoning all hope of struggling against the demons' will.  Of course, they aren't done yet.  A few seconds later - the time needed for everyone to switch positions - and they're at it again.  You are touched and caressed, filled and used again, and again, and again.  You black out.");
 	//[Vapula Submissiveness raises by 10. If it reaches 100 or more, go on to the Vapula Slave Bad End. Otherwise Wake up scene. Additionally, if it is raised to 90 or more this way, display warning:]
-	flags[VAPULA_SUBMISSIVENESS] += 10;
-	if(flags[VAPULA_SUBMISSIVENESS] >= 90 && flags[VAPULA_SUBMISSIVENESS] < 100) outputText("\n\n<b>You're starting to get dangerously used to this kind of treatment.  Your holes are being stretched to accommodate monstrous sizes and don't hurt that much anymore.  You feel like you could stand this as long as you need to with ease... maybe it's time to stop volunteering?</b>");
-	if(flags[VAPULA_SUBMISSIVENESS] >= 100) doNext(slaveToVapulaBadEnd);
+	flags[kFLAGS.VAPULA_SUBMISSIVENESS] += 10;
+	if(flags[kFLAGS.VAPULA_SUBMISSIVENESS] >= 90 && flags[kFLAGS.VAPULA_SUBMISSIVENESS] < 100) outputText("\n\n<b>You're starting to get dangerously used to this kind of treatment.  Your holes are being stretched to accommodate monstrous sizes and don't hurt that much anymore.  You feel like you could stand this as long as you need to with ease... maybe it's time to stop volunteering?</b>");
+	if(flags[kFLAGS.VAPULA_SUBMISSIVENESS] >= 100) doNext(slaveToVapulaBadEnd);
 	else if(player.hasStatusAffect("lostVillagerSpecial") >= 0) doNext(morningAfterRape);
 	else doNext(wakeUpAfterDemonGangBangs);//WAKE UP
 	stats(0,0,0,0,1,2,-100,3);
@@ -360,7 +360,7 @@ public function wakeUpAfterDemonGangBangs():void {
 //Victory (Z)
 public function defeetVapulasHorde():void {
 	clearOutput();
-	if(flags[VAPULA_SUBMISSIVENESS] <= 0) {
+	if(flags[kFLAGS.VAPULA_SUBMISSIVENESS] <= 0) {
 		subdueVapula();
 		return;
 	}
@@ -384,20 +384,20 @@ public function defeetVapulasHorde():void {
 	}
 	else {
 		outputText("\n\nThough the display as they explore each other is somewhat arousing, you can't really get into it as you are, and simply use your new-found freedom to climb out of the hole.  It's too dark to return to the village now, so you head back to camp.");
-		flags[VAPULA_SUBMISSIVENESS] -= 5;
+		flags[kFLAGS.VAPULA_SUBMISSIVENESS] -= 5;
 		eventParser(5007);
 	}
 	
 }
 public function noVapulaSex():void {
 	clearOutput();
-	flags[VAPULA_SUBMISSIVENESS] -= 5;
+	flags[kFLAGS.VAPULA_SUBMISSIVENESS] -= 5;
 	eventParser(5007);
 }
 //Yes/
 //[Yes: submissiveness is lowered by 10. No or auto-reject: submissiveness is lowered by 5.]
 public function rapeZeVapula():void {
-	flags[VAPULA_SUBMISSIVENESS] -= 10;
+	flags[kFLAGS.VAPULA_SUBMISSIVENESS] -= 10;
 	//Victory rape with penis [Anal Orgy and Bukkake] (NTR Vapula) (Z)
 	if(player.hasCock()) {
 		clearOutput();
@@ -531,16 +531,16 @@ public function rapeZeVapula():void {
 //[displayed after the second encounter text and right away in subsequent encounters]
 public function owcaMainScreenOn():void {
 	clearOutput();
-	if(flags[REBECCS_LAST_PLEA] == 1 && !vapulaSlave()) {
+	if(flags[kFLAGS.REBECCS_LAST_PLEA] == 1 && !vapulaSlave()) {
 		rebeccsLastPlea();
 		return;
 	}
-	if(flags[OWCAS_ATTITUDE] <= 5 && flags[OWCA_ANGER_DISABLED] == 0 && flags[OWCA_SACRIFICE_DISABLED] == 0) {
+	if(flags[kFLAGS.OWCAS_ATTITUDE] <= 5 && flags[kFLAGS.OWCA_ANGER_DISABLED] == 0 && flags[kFLAGS.OWCA_SACRIFICE_DISABLED] == 0) {
 		desperateVillages();
 		return;
 	}
 	//Desperate plea
-	if(rand(10) <= 2 && flags[DAYS_SINCE_LAST_DEMON_DEALINGS] >= 7 && flags[OWCA_SACRIFICE_DISABLED] == 0) {
+	if(rand(10) <= 2 && flags[kFLAGS.DAYS_SINCE_LAST_DEMON_DEALINGS] >= 7 && flags[kFLAGS.OWCA_SACRIFICE_DISABLED] == 0) {
 		//(30% chance of spawning upon going to the village once a week has passed since last demon fight)
 		//should happen instead of the normal village menu every week
 		outputText("The village shows unusual signs of activity.  As you walk down the main road, people are all looking at you uncomfortably.  Some try to approach you but back off awkwardly at the last moment.  You don't understand until you stumble upon Rebecc, who seems on better terms with you than the rest of the village; she is displaying a worried face.");
@@ -552,38 +552,38 @@ public function owcaMainScreenOn():void {
 		return;
 	}
 	//[if attitude > 80]
-	if(flags[OWCAS_ATTITUDE] > 80) outputText("Villagers greet you as you arrive, praising your courage and your heroism.  People shake your hands or ask you to kiss them, as if they hoped your nobility were somehow contagious.  Once they're done complimenting and flattering you in every way possible, they leave you to your business.");
+	if(flags[kFLAGS.OWCAS_ATTITUDE] > 80) outputText("Villagers greet you as you arrive, praising your courage and your heroism.  People shake your hands or ask you to kiss them, as if they hoped your nobility were somehow contagious.  Once they're done complimenting and flattering you in every way possible, they leave you to your business.");
 	//[if 60<=attitude<80]
-	else if(flags[OWCAS_ATTITUDE] > 60) outputText("Villagers greet you with a friendly smile as you arrive.  Some approach you and thank you for what you've done, before leaving awkwardly.  They're obviously not used to strangers.");
+	else if(flags[kFLAGS.OWCAS_ATTITUDE] > 60) outputText("Villagers greet you with a friendly smile as you arrive.  Some approach you and thank you for what you've done, before leaving awkwardly.  They're obviously not used to strangers.");
 	//[if 40<=attitude<60]
-	else if(flags[OWCAS_ATTITUDE] > 40) outputText("Villagers seem to accept your presence without comment now; though none go out of their way to greet you, neither do they avoid doing so when you pass by.");
+	else if(flags[kFLAGS.OWCAS_ATTITUDE] > 40) outputText("Villagers seem to accept your presence without comment now; though none go out of their way to greet you, neither do they avoid doing so when you pass by.");
 	//[if 20<attitude <= 40]
-	else if(flags[OWCAS_ATTITUDE] > 20) outputText("Villagers keep looking at you uncomfortably; no one seems to be willing to talk to you apart from Rebecc, your friend.");
+	else if(flags[kFLAGS.OWCAS_ATTITUDE] > 20) outputText("Villagers keep looking at you uncomfortably; no one seems to be willing to talk to you apart from Rebecc, your friend.");
 	//[if attitude <= 20]
 	else outputText("Villagers here appear to be openly hostile.  You keep hearing muffled whispers as you pass by, and people look at you rancorously.  They don't bother you, though.");
 	//end variable display
 	outputText("  The village is rather small.  A dozen humble thatched cottages are standing here and there, linked by dirt tracks and enclosed with small palisades.  There seems to be very little activity.");
 	outputText("\n\nAt the end of the main road you notice the pit and the pole standing at the middle of it.  It looks rather sinister, reminding you of the permanent curse that lies on the villagers.  It is still unguarded.");
 	//[if a week has passed since last sacrifice]
-	if(flags[DAYS_SINCE_LAST_DEMON_DEALINGS] == 7 && flags[OWCA_SACRIFICE_DISABLED] == 0) outputText("  A week");
-	else if(flags[DAYS_SINCE_LAST_DEMON_DEALINGS] > 7 && flags[OWCA_SACRIFICE_DISABLED] == 0) outputText("  More than a week");
-	if(flags[DAYS_SINCE_LAST_DEMON_DEALINGS] >= 7 && flags[OWCA_SACRIFICE_DISABLED] == 0) outputText(" has passed since the last offering to the demons; guarding the pit would certainly help improve your relations with the little town's denizens.");
+	if(flags[kFLAGS.DAYS_SINCE_LAST_DEMON_DEALINGS] == 7 && flags[kFLAGS.OWCA_SACRIFICE_DISABLED] == 0) outputText("  A week");
+	else if(flags[kFLAGS.DAYS_SINCE_LAST_DEMON_DEALINGS] > 7 && flags[kFLAGS.OWCA_SACRIFICE_DISABLED] == 0) outputText("  More than a week");
+	if(flags[kFLAGS.DAYS_SINCE_LAST_DEMON_DEALINGS] >= 7 && flags[kFLAGS.OWCA_SACRIFICE_DISABLED] == 0) outputText(" has passed since the last offering to the demons; guarding the pit would certainly help improve your relations with the little town's denizens.");
 	//Option: 
 	var pit:* = 0;
 	var herd:* = 0;
 	var tavern:* = 0;
-	if(model.time.hours >= 16 && flags[OWCA_SACRIFICE_DISABLED] == 0) {
+	if(model.time.hours >= 16 && flags[kFLAGS.OWCA_SACRIFICE_DISABLED] == 0) {
 		//Pit. Requires 16:00 or later. Leads to the night gangbang (with possible fight) scene, this time fully equipped and clothed. Attitude is raised by 3.
 		pit = zePit;
 	}
-	if(flags[OWCAS_ATTITUDE] >= 50) {
+	if(flags[kFLAGS.OWCAS_ATTITUDE] >= 50) {
 		outputText("\n\nBeyond the tiny hamlet you see herders guarding a considerable amount of sheep.  You could probably join them and ask them for work.");
 		herd = 3624;
 		//Option: Herds, needs 50 attitude.
 	}
 	outputText("\n\nRebecc's house is nearby, and her door is open. She would probably welcome the chance to wash away any taint you've received from your time in the pit.");
 	//Option: Rebecc. Leads to Rebecc Menu
-	if(flags[OWCAS_ATTITUDE] >= 10) {
+	if(flags[kFLAGS.OWCAS_ATTITUDE] >= 10) {
 		outputText("\n\nA tavern appears to be open; various Owca folk are drinking and chatting in it.  They give you friendly waves when you make eye contact.");
 		//Option: Tavern. Leads to the Tavern, needs 10 attitude
 		tavern = 3618;
@@ -597,32 +597,32 @@ public function owcaTavern():void {
 	outputText("The tavern is nice and cozy; there are a few tables and chairs scattered around in no ordered pattern, and most clients here appear to belong to the same species.  By the crude wooden bar, you see a list of all the current drinks on sale:\n<i>");
 	//SheepMk
 	var milk:Number = 3637;
-	outputText("\nSheep Milk Bottle: " + (180 - flags[OWCAS_ATTITUDE]) + " gems");
-	if((180 - flags[OWCAS_ATTITUDE]) > player.gems) milk = 0;
+	outputText("\nSheep Milk Bottle: " + (180 - flags[kFLAGS.OWCAS_ATTITUDE]) + " gems");
+	if((180 - flags[kFLAGS.OWCAS_ATTITUDE]) > player.gems) milk = 0;
 	
 	var goblin:Number = 3635;
-	outputText("\nGoblin Ale: " + (60 - Math.round(flags[OWCAS_ATTITUDE]/2)) + " gems");
-	if((60 - Math.round(flags[OWCAS_ATTITUDE]/2)) > player.gems) goblin = 0;
+	outputText("\nGoblin Ale: " + (60 - Math.round(flags[kFLAGS.OWCAS_ATTITUDE]/2)) + " gems");
+	if((60 - Math.round(flags[kFLAGS.OWCAS_ATTITUDE]/2)) > player.gems) goblin = 0;
 	
 	var brew:Number = 3636;
-	if(rand(10) > flags[OWCAS_ATTITUDE]/10) {
+	if(rand(10) > flags[kFLAGS.OWCAS_ATTITUDE]/10) {
 		outputText("\nBro Brew: 2000 gems");
 		if((2000) > player.gems) brew = 0;
 	}
 	else brew = 0;
 	
 	var cum:Number = 3634;
-	outputText("\nMinotaur Cum: " + (300 - flags[OWCAS_ATTITUDE]) + " gems");
-	if((300 - flags[OWCAS_ATTITUDE]) > player.gems) cum = 0;
+	outputText("\nMinotaur Cum: " + (300 - flags[kFLAGS.OWCAS_ATTITUDE]) + " gems");
+	if((300 - flags[kFLAGS.OWCAS_ATTITUDE]) > player.gems) cum = 0;
 	outputText("</i>");
 	simpleChoices("Sheep Milk",milk,"Goblin Ale",goblin,"Bro Brew",brew,"MinotaurCum",cum,"Back",gangbangVillageStuff);
 }
 
 public function owcaBuySetup(item:String = "MinoCum"):void {
-	if(item == "SheepMk") buyOwcaShit(item,(180 - flags[OWCAS_ATTITUDE]));
-	else if(item == "Gob.Ale") buyOwcaShit(item,(60 - Math.round(flags[OWCAS_ATTITUDE]/2)));
+	if(item == "SheepMk") buyOwcaShit(item,(180 - flags[kFLAGS.OWCAS_ATTITUDE]));
+	else if(item == "Gob.Ale") buyOwcaShit(item,(60 - Math.round(flags[kFLAGS.OWCAS_ATTITUDE]/2)));
 	else if(item == "BroBrew") buyOwcaShit(item,2000);
-	else buyOwcaShit(item,(300 - flags[OWCAS_ATTITUDE]));
+	else buyOwcaShit(item,(300 - flags[kFLAGS.OWCAS_ATTITUDE]));
 }
 public function buyOwcaShit(bleh:String = "MinoCum",price:Number = 0):void {
 	clearOutput();
@@ -640,11 +640,11 @@ public function herds():void {
 	outputText("The herders greet you warmly.  \"<i>Welcome, champion!  It is indeed a pleasure to have the honor to talk to such a noble and revered hero.</i>\"  You reply with equal grace and ask in a more formal tone if there's anything you can do to help them out.");
 	outputText("\n\n\"<i>Well, our sheep badly need to be sheared and we could really use an extra pair of hands to get the work done.</i>\"  The herder proceeds to hand you some tools, and redirects you to a group of villagers working actively.  You rapidly join them and soon enough you are having a pleasant conversation, chatting and laughing as you collect the wool, so much so that you don't see where time goes; in what seems like minutes you're already done.");
 	//attitude +5, int +1
-	flags[OWCAS_ATTITUDE] += 5;
-	if(flags[OWCAS_ATTITUDE] > 100) flags[OWCAS_ATTITUDE] = 100;
+	flags[kFLAGS.OWCAS_ATTITUDE] += 5;
+	if(flags[kFLAGS.OWCAS_ATTITUDE] > 100) flags[kFLAGS.OWCAS_ATTITUDE] = 100;
 	stats(0,0,0,1,0,0,0,0);
 	//[if attitude > 70]
-	if(flags[OWCAS_ATTITUDE] > 70) {
+	if(flags[kFLAGS.OWCAS_ATTITUDE] > 70) {
 		outputText("\n\nThe villagers thank you for your hard work and one of them hands you a bottle of sheep milk.  \"<i>'Tis good for your health.  Don't worry, it won't... mutate you.</i>\"\n\n");
 		shortName = "SheepMk";
 		menuLoc = 2;
@@ -768,7 +768,7 @@ public function rapeRebecc(outside:Boolean = false):void {
 	}
 	//minus lust, minus libido, plus corruption, remove village from places
 	stats(0,0,0,0,-2,0,-100,5);
-	flags[OWCA_UNLOCKED] = -1;
+	flags[kFLAGS.OWCA_UNLOCKED] = -1;
 	doNext(13);
 }
 
@@ -815,14 +815,14 @@ public function beatUpOwca():void {
 //"Leave" redirects the PC to camp; next encounter is Rebecc's Last Plea.
 public function leaveOwcaAfterWhupping():void {
 	//tag for calling last plea
-	flags[REBECCS_LAST_PLEA] = 1;
+	flags[kFLAGS.REBECCS_LAST_PLEA] = 1;
 	eventParser(5007);
 }
 //Village Torching scene - requires a fire skill (Z)
 public function torchOwcaMotherFuckers():void {
 	clearOutput();
 	outputText("These ignorant folks deserve to be punished for trying to take you by force.  You muster your strength and release a wave of magical flame.  The raw heat and energy is enough to set entire thatched roofs ablaze.  You ignite house after house, the poor constructions unable to withstand your fiery might, until there are enough burning that the wind can carry the flames to all other buildings nearby.  A few minutes later, the entire village is ablaze; hovels are crumbling under their own weight and the crude roads are being littered with fallen debris.  You watch Owca burn silently, arms crossed.  Finally, when the last building has been thoroughly reduced to a pile of rubble and ashes, you quickly search for any valuables among the villagers' belongings.  Fortunately their gems haven't been melted; you pack a substantial amount of them away before leaving.  You cast a thoughtful glance at the remains of what used to be a peaceful village; ironically enough, the only structure you preserved was the pole in the pit, an ultimate mockery of their futile struggles against forces that ridiculously outmatch them.");
-	flags[OWCA_UNLOCKED] = -1;
+	flags[kFLAGS.OWCA_UNLOCKED] = -1;
 	stats(0,0,0,0,0,0,0,15);
 	if(player.cor >= 60 && player.gender > 0 && player.lust >= 33) {
 		outputText("You notice Rebecc is still weeping among the scattered bodies of the beaten villagers.  Do you abuse her?");
@@ -876,8 +876,8 @@ public function forgiveOwca():void {
 	outputText("\n\nRebecc's face is overcome with joy as you speak.  \"<i>Thank you, thank you!  I've been filled with remorse and sorrow since this last awful encounter, you can't believe how relieved I am!</i>\"  You take her in your arms and hold her tight until the last of her tears finally dries up.  \"<i>I'm going to tell everyone in the village how great a person you are!  You will be acclaimed as our hero!</i>\"");
 	//Corruption -8, Int +2, Attitude raised to 60, will never shrink below 1 (i.e. villagers won't get angry at you again)
 	stats(0,0,0,2,0,0,0,-8);
-	flags[OWCAS_ATTITUDE] = 60;
-	flags[OWCA_ANGER_DISABLED] = 1;
+	flags[kFLAGS.OWCAS_ATTITUDE] = 60;
+	flags[kFLAGS.OWCA_ANGER_DISABLED] = 1;
 	//To main owca menu
 	doNext(gangbangVillageStuff);
 }
@@ -885,7 +885,7 @@ public function forgiveOwca():void {
 public function fuckThisShit():void {
 	clearOutput();
 	outputText("You stare at the wretched, whimpering creature before you for a moment.  There's nothing to say.  Without a word, you head back to your camp, carefully closing Rebecc's door behind you as you leave.");
-	flags[REBECCS_LAST_PLEA] = 1;
+	flags[kFLAGS.REBECCS_LAST_PLEA] = 1;
 	doNext(13);
 }
 //Rebecc's Last Plea (Z)
@@ -905,7 +905,7 @@ public function leaveRebeccToBeRaped():void {
 	outputText("You tell Rebecc you don't want to have anything to do with her or her sick people and promptly turn around.  She wails and begs you at first but you're faster than the tear-blinded girl, and she soon falls behind.  Your safe, simple camp looms large in your thoughts, pushing out any desire to return to this wicked village and its wicked people.");
 	//[Owca Village removed from "Places" menu.]
 	outputText("\n\n(Owca has been removed from the places menu.)");
-	flags[OWCA_UNLOCKED] = -1;
+	flags[kFLAGS.OWCA_UNLOCKED] = -1;
 	doNext(13);
 }
 //Option: Face Down the World (Z)
@@ -970,8 +970,8 @@ public function disbandHorde():void {
 	outputText("\n\n\"<i>Begone.  Leave, all of you.  Out of my sight.</i>\"");
 	outputText("\n\nShe nods again in acknowledgement and starts shaking her pets out of their torpor.  The imps quickly awaken each other, giving you a few frightened glances every now and then.  Then, a bit pathetically, Vapula gives the retreat signal.  In no time the once-proud bunch disappears, probably gone for good.  Hopefully, the demons have learned from their mistakes and won't bother the village again.");
 	//Attitude set to 100
-	flags[OWCAS_ATTITUDE] = 100;
-	flags[OWCA_SACRIFICE_DISABLED] = 1;
+	flags[kFLAGS.OWCAS_ATTITUDE] = 100;
+	flags[kFLAGS.OWCA_SACRIFICE_DISABLED] = 1;
 	eventParser(5007);
 }
 //Option: Enslave - penis version (requires D2 completion and libido >= 60 and corr >= 70) (Z)
@@ -993,10 +993,10 @@ public function enslaveVapulaWithYourWang():void {
 	outputText("\n\nYou lend a hand to your newly-acquired succubus slut and help her to her feet.  She stumbles at first, still stunned by the recent fight; she quickly follows you though, firmly lead by your iron grip.  Hand in hand, you walk away from the pit and the scattered bodies without a look back.  On your way to the camp, you don't hesitate to give your succubus toy a few gropes to her boobs and buttocks, making her giggle; she playfully returns the favor, and by the time you reach your camp you are already stroking each other's crotches, your fingers softly probing her vaginal entrance until she openly moans in delight.  You stop teasing her and dismiss her at last.");
 	outputText("\n\n(<b>The demon Vapula has been added to your slaves.</b>)");
 	//[Vapula added as follwer.]
-	flags[VAPULA_FOLLOWER] = 1;
-	flags[OWCAS_ATTITUDE] = 100;
-	flags[VAPULA_HAREM_FUCK] = 1;
-	flags[OWCA_SACRIFICE_DISABLED] = 1;
+	flags[kFLAGS.VAPULA_FOLLOWER] = 1;
+	flags[kFLAGS.OWCAS_ATTITUDE] = 100;
+	flags[kFLAGS.VAPULA_HAREM_FUCK] = 1;
+	flags[kFLAGS.OWCA_SACRIFICE_DISABLED] = 1;
 	//Chance to trigger imp gangbang is increased by 7%!
 	//Attitude set to 100, sacrifices will never be asked again. Lust set to 80 if below.
 	if(player.lust < 80) player.lust = 80;
@@ -1019,10 +1019,10 @@ public function enslaveVapulaAsACuntWielder():void {
 	outputText("\n\nYou leave her hanging for a moment, then give her a curt nod.  \"<i>Go, then.  Don't forget who owns you now, slut.  If you betray my confidence in you, I will hunt you down and make you wish I gave you in to Lethice.</i>\"");
 	outputText("\n\nVapula wags her head, ecstatic with relief; she quickly stumbles to her feet and scurries off, pushing through her defeated horde as if they weren't there.  You watch her bouncing ass, wondering if it was a wise thing to trust a demon.  You suppose it's no skin off your nose if she doesn't come back, but there is no doubting the attraction of being able to dig into that luscious body of hers whenever you want.  You shrug and slowly make your way back to camp, absentmindedly kicking a comatose imp out of the way as you do.");
 	//[QUE VAPULA NIGHT MEETING]
-	flags[VAPULA_FOLLOWER] = .5;
+	flags[kFLAGS.VAPULA_FOLLOWER] = .5;
 	//VILLAGE LOVES YOU + NO MORE SACRIFICES
-	flags[OWCAS_ATTITUDE] = 100;
-	flags[OWCA_SACRIFICE_DISABLED] = 1;
+	flags[kFLAGS.OWCAS_ATTITUDE] = 100;
+	flags[kFLAGS.OWCA_SACRIFICE_DISABLED] = 1;
 	//Chance to trigger imp gangbang is increased by 7%!
 	eventParser(5007);
 }
@@ -1035,8 +1035,8 @@ public function femaleVapulaRecruitmentPartII():void {
 	outputText("\n\n\"<i>There aren't many strap-ons around like this, mistress; Lethice would kill me twice if she knew I had taken it.  The big end has a reservoir of spunk that refills itself - so you can feed me whenever you want.  The other end can be controlled with your mind to be any size you wish.  So you can pack your love tunnel out when you're fucking me, making yourself stupid with lust, or fill it just big enough to tease ever so slightly at that sexy little button you've got down there.</i>\"  Vapula is practically panting when she finishes, her hot breath rolling over you as she stares into your eyes.  Your new slave has done well here, perhaps better than she imagines.  If it works like she says it does, then you can have total say over the succubus's cum intake without being beholden to your own urges - giving you a huge amount of control over her.  The thought makes you bend into Vapula and kiss her hungrily, quickly pushing past her soft lips and sharp fangs to roughly tongue-fuck her.  She moans, sending pleasurable vibrations through your face, and wraps her own long tongue around yours, your saliva and warm muscle melding into one.  After a long minute you slowly pull away, trailing saliva from her lips.");
 	outputText("\n\n\"<i>Well done, my slave,</i>\" you purr, caressing her face.  \"<i>I will be sure to reward you with this item of yours, in the fullness of time.  Repeatedly.</i>\"  Vapula grins with barely contained enthusiasm, before rising and slowly walking away from your bed, beading a trail of juices from her cunt as she goes.");
 	//[Vapula added]
-	flags[VAPULA_FOLLOWER] = 1;
-	flags[VAPULA_HAREM_FUCK] = 1;
+	flags[kFLAGS.VAPULA_FOLLOWER] = 1;
+	flags[kFLAGS.VAPULA_HAREM_FUCK] = 1;
 	//[Demonic dildo added]
 	player.createKeyItem("Demonic Strap-On",0,0,0,0);
 	outputText("\n\n(<b>Gained Item: Demonic Strap-On</b>)");
@@ -1058,7 +1058,7 @@ public function vapulaSlaveFlavorText():void {
 	if(choice == 0) outputText("Vapula is currently resting on a very rough bed of leaves she's gathered herself.  She sleeps quietly, her hand absent-mindedly laid on her vagina and the other one resting on her breasts.  A thin trickle of her juice is leaking out of her crotch.");
 	if(choice == 1) outputText("Your succubus slut, Vaplua, is furiously stroking herself on her bed of leaves, her purple body shining in sweat.  She moans raggedly, often looking up to you with lust-consumed eyes.");
 	if(choice == 2) {
-		if(flags[VAPULA_HAREM_FUCK] == 0) choice = 3;
+		if(flags[kFLAGS.VAPULA_HAREM_FUCK] == 0) choice = 3;
 		else outputText("Vapula is currently absent, probably getting screwed by some of the imps surrounding your camp in order to get her semen rations.  You're sure she would come back instantly if you ever needed to give her YOUR cum instead.");
 	}
 	if(choice == 3) outputText("Vapula is busy drinking a vial of milk that looks very much like the kind you'd usually find on imps.  Her purple cheeks seem to blush darker when she sees you; she awkwardly gulps the rest of the bottle, hiccups, and giggles softly, eyeing you with a coy smile and a lust-filled gaze.  The potion seems to have made her even more aroused than usual.");
@@ -1069,18 +1069,18 @@ public function vapulaSlaveFlavorText():void {
 		outputText(", pumping as fast as she can.  In her feverish display of lust she doesn't even notice you.");
 	}
 	if(choice == 5) {
-		if(flags[VAPULA_HAREM_FUCK] == 0 || !(bimboSophie())) choice = 6;
+		if(flags[kFLAGS.VAPULA_HAREM_FUCK] == 0 || !(bimboSophie())) choice = 6;
 		//if harem fucking is on)
 		else outputText("Vapula is fingering herself while eating out Sophie, your harpy slut.  The dumb avian matron keeps moaning like she's in heat while the succubus furiously assaults her lush fuck-hole; both of their pair of wings flap in rhythm as they feel their pleasure rising in waves.");
 	}
 	if(choice == 6) {
-		if(flags[VAPULA_HAREM_FUCK] == 0 || flags[IZMA_NO_COCK] > 0 || !izmaFollower()) choice = 7;
+		if(flags[kFLAGS.VAPULA_HAREM_FUCK] == 0 || flags[kFLAGS.IZMA_NO_COCK] > 0 || !izmaFollower()) choice = 7;
 		//if Izma has cock and harem fucking is on)
 		else outputText("Your succubus is currently very busy with Izma, your tigershark lover.  Izma is standing and hiding Vapula from your sight and you don't notice what Vapula is doing to her until you see her frantic bobbing movements, and hear Izma's hisses and growls of pleasure.  Obviously your succubus must get the cum she needs from somewhere.");
 	}
 	if(choice == 7) {
 		//if C. Jojo and harem fucking is on)
-		if(flags[VAPULA_HAREM_FUCK] == 0 || !campCorruptJojo()) choice = 8;
+		if(flags[kFLAGS.VAPULA_HAREM_FUCK] == 0 || !campCorruptJojo()) choice = 8;
 		else {
 			outputText("You routinely hear screams of pleasure outside the camp, as well as some frantic male squeaks coming from Jojo, your ");
 			if(tentacleJojo()) outputText("tentacled ");
@@ -1088,7 +1088,7 @@ public function vapulaSlaveFlavorText():void {
 		}
 	}
 	if(choice == 8) {
-		if(flags[VAPULA_HAREM_FUCK] == 0 || !(amilyFollower() && amilyCorrupt())) choice = 9;
+		if(flags[kFLAGS.VAPULA_HAREM_FUCK] == 0 || !(amilyFollower() && amilyCorrupt())) choice = 9;
 		//if C. Amily and harem fucking on)
 		else outputText("Vapula is busy caressing your corrupted mousette, Amily while softly kissing her breasts.  Her fingers are buried in your fuck-toy's pussy, and Amily is moaning whorishly and doesn't even bother to stop when she looks at you, her helpless eyes betraying her lack of control over her own lust.");
 	}
@@ -1128,22 +1128,22 @@ public function mouseWaifuFreakout(amily:Boolean = false, jojo:Boolean = false) 
 	outputText(" raving.  \"<i>You've clearly given in to her demonic lust.</i>\"");
 	if(jojo) {
 		outputText("\n\n\"<i>I'm leaving, " + player.short + ",</i>\" Jojo says.  \"<i>I only hope for your sake that you come to your senses soon... I will return to my place in the forest when you require assistance in freeing your soul of taint.</i>\"");
-		flags[JOJO_MOVE_IN_DISABLED] = 1;
+		flags[kFLAGS.JOJO_MOVE_IN_DISABLED] = 1;
 		player.removeStatusAffect("JojoNightWatch");
 		player.removeStatusAffect("PureCampJojo");
 	}
 	if(amily) {
 		outputText("\n\nAmily shakes her head.  \"<i>Goodbye, [name].  You've changed.  What you did is pure folly.</i>\"");
 		//Set - amily flipped her shit
-		flags[AMILY_FOLLOWER] = 0;
+		flags[kFLAGS.AMILY_FOLLOWER] = 0;
 		//Enable village encounters
-		flags[AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
+		flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
 		//Change to plain mouse birth!
 		if(player.pregnancyType == 11) player.pregnancyType = 4;
 		//FLAG THAT THIS SHIT WENT DOWN
-		flags[AMILY_CORRUPT_FLIPOUT] = 1;
+		flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] = 1;
 		//Make sure the camp warning thing is off so she never moves back in.  Bitch be mad.
-		flags[UNKNOWN_FLAG_NUMBER_00173] = 0;
+		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] = 0;
 	}
 	//[(if PC corr > 70)
 	if(player.cor > 70) outputText("\n\n\"<i>Fine. Go fuck off then, I don't need you.  I have a much better and hotter slut now. Don't hesitate to come back if you want some sweet pussy, though.</i>\"");
@@ -1190,7 +1190,7 @@ public function callSlaveVapula(output:Boolean = true):void {
 	//Spank Vapula for misbehaving.
 	//Requires Vapula force herself on you for food.
 	//Requires bipedal-ness
-	if(flags[VAPULA_EARNED_A_SPANK] > 0 && !player.isTaur() && !player.isDrider()) spank = 3959;
+	if(flags[kFLAGS.VAPULA_EARNED_A_SPANK] > 0 && !player.isTaur() && !player.isDrider()) spank = 3959;
 	else threesome = 3768;
 	choices("Appearance",3750,"Talk",3751,"Feed",mFeed,"Feed(Dildo)",fFeed,"Threesome",threesome,"Spank",spank,"",0,"",0,"",0,"Leave",campSlavesMenu);
 }
@@ -1215,7 +1215,7 @@ public function talkToVapulaForSomeReason():void {
 	var threesomeB:int = 0;
 	var haremT:String = "";
 	var haremB:int = 3753;
-	if(flags[VAPULA_HAREM_FUCK] == 0) {
+	if(flags[kFLAGS.VAPULA_HAREM_FUCK] == 0) {
 		outputText("\n\nVapula will not currently fuck anyone else in your camp without permission.");
 		haremT = "FuckFollowers";
 	}
@@ -1225,7 +1225,7 @@ public function talkToVapulaForSomeReason():void {
 	}
 	//IF PC has cerulean succubused before
 	if(player.hasStatusAffect("repeatSuccubi") >= 0) {
-		if(flags[VAPULA_THREESOMES] == 0) {
+		if(flags[kFLAGS.VAPULA_THREESOMES] == 0) {
 			outputText("\n\nShe won't currently assist the cerulean succubus if you invite her over.");
 			threesomeT = "Assist On";
 		}
@@ -1241,15 +1241,15 @@ public function talkToVapulaForSomeReason():void {
 public function toggleCeruleanVapulaAssist():void {
 	clearOutput();
 	//Cerulean Threesome On (Z)
-	if(flags[VAPULA_THREESOMES] == 0) {
+	if(flags[kFLAGS.VAPULA_THREESOMES] == 0) {
 		outputText("You inform Vapula that a succubus might join you in the following nights, and you want her to join the party; after all, if there's enough cum to feed one, there should be extra to feed another one.  Vapula wiggles and chortles, excited at the perspective of meeting a fellow creature to have a good fuck.  You warn her that she'll have to be very skilled if she doesn't want to be replaced.  Vapula smiles at you seductively and gently fondles your crotch, then says, \"<i>Don't worry; I know that deep down inside, you prefer giving your cum to me, right?</i>\"  The tingle is very pleasant, and you give your slut a soft kiss before sending her on her way.  You look forward to the incoming threesome.");
-		flags[VAPULA_THREESOMES] = 1;
+		flags[kFLAGS.VAPULA_THREESOMES] = 1;
 	}
 	//Turn off
 	else {
 		//Cerulean Threesome Off (Z)
 		outputText("You inform Vapula that you don't want her to meddle with your night fucks anymore.  Your succubus shrugs.  \"<i>Whatever.  As long as I get regular cum rations, I don't care much.  I'll do as you say.</i>\"");
-		flags[VAPULA_THREESOMES] = 0;
+		flags[kFLAGS.VAPULA_THREESOMES] = 0;
 	}
 	//Return to talk menu
 	doNext(talkToVapulaForSomeReason);
@@ -1257,18 +1257,18 @@ public function toggleCeruleanVapulaAssist():void {
 public function toggleVapulaHaremFucks():void {
 	clearOutput();
 	//Stop Fucking Harem
-	if(flags[VAPULA_HAREM_FUCK] == 1) {
+	if(flags[kFLAGS.VAPULA_HAREM_FUCK] == 1) {
 		outputText("You tell Vapula that you're fed up with seeing her fucking nearly everyone at camp and getting screwed by any living creature in its surroundings.  She's supposed to be YOUR succubus, and no one else's. You insist that you don't want to see anything near her pussy but your own genitals. You're her [master], after all, and her body is yours.");
 		outputText("\n\nVapula protests, \"<i>But how am I supposed to feed? It's in my nature to get other people's spunk; I need it, just like you need to eat and breathe.</i>\"");
 		outputText("\n\nYou assure her that your own cum production will be enough to satiate her needs. You just don't want her to feed off anyone else's.");
 		outputText("\n\n\"<i>Ah, you're a possessive [master]... I see. Very well, from now on I will only live on your own semen. But I'm warning you: I have very big needs, and I can get quite... impulsive when I'm hungry. If you don't feed me enough I'm afraid I might get what I rightfully deserve by force.</i>\"");
 		outputText("\n\nYou pretend not to understand her semi-hidden rape threats, confident that you'll be able to drown her futile menaces with cum when the time comes.");
-		flags[VAPULA_HAREM_FUCK] = 0; 
+		flags[kFLAGS.VAPULA_HAREM_FUCK] = 0; 
 	}
 	else {
 		//Fucking Harem OK
 		outputText("You tell Vapula that you don't care anymore about where she gets her cum. From now on she might as well fuck whoever she wants as long as she remains available when you need to use her body. The succubus replies joyfully, \"<i>Yay! I was hungry!</i>\" and kisses you before storming off in the thick jungle. Knowing her, she is probably hunting for some potent imp to milk. You sigh and return to your campfire.");
-		flags[VAPULA_HAREM_FUCK] = 1; 
+		flags[kFLAGS.VAPULA_HAREM_FUCK] = 1; 
 	}
 	//Return to talk menu
 	doNext(talkToVapulaForSomeReason);
@@ -1289,8 +1289,8 @@ public function feedVapulaACupOfJizz():void {
 	if(player.cumQ() >= 1500) outputText(" until she looks six months pregnant");
 	outputText(".  At last, the cum-flow spilling through your urethra starts to ebb and your " + cockDescript(0) + " stops throbbing; only then does she removes your junk from her mouth with a loud POP.  Your " + cockDescript(0) + " appears to be clean of any spooge: your cock-slut did a very good job.  Satisfied, you pat her head with your cock and let her digest her lavish meal.");
 	stats(0,0,0,0,0,0,-100,.5);
-	flags[VAPULA_DAYS_SINCE_FED] = 0;
-	flags[VAPULA_TEASE_COUNT] = 0;
+	flags[kFLAGS.VAPULA_DAYS_SINCE_FED] = 0;
+	flags[kFLAGS.VAPULA_TEASE_COUNT] = 0;
 	doNext(13);
 }
 
@@ -1313,7 +1313,7 @@ public function vapulaThreesomeMenu():void {
 		if(amilyFollower() && amilyCorrupt() && player.hasCock()) amily = 3761;
 		if(ceraphIsFollower() && player.hasCock()) ceraph = 3767;
 		if(bimboSophie()) sophie = 3764;
-		if(izmaFollower() && flags[IZMA_NO_COCK] == 0) izma = 3757;
+		if(izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0) izma = 3757;
 	}
 	choices("Amily",amily,"Ceraph",ceraph,"Sophie",sophie,"Jojo",jojo,"Izma",izma,"",0,"",0,"",0,"",0,"Back",callSlaveVapula);
 }
@@ -1388,8 +1388,8 @@ public function vapulaCeraphThreesomePleaseBoth():void {
 	if(player.lib > 10) stats(0,0,0,0,-1,0,0,0);
 	if(player.lib > 50) stats(0,0,0,0,-1,0,0,0);
 	if(player.lib > 70) stats(0,0,0,0,-1,0,0,0);
-	flags[VAPULA_DAYS_SINCE_FED] = 0;
-	flags[VAPULA_TEASE_COUNT] = 0;
+	flags[kFLAGS.VAPULA_DAYS_SINCE_FED] = 0;
+	flags[kFLAGS.VAPULA_TEASE_COUNT] = 0;
 	doNext(13);
 }
 //Option: Butt-fuck train. Requires Ceraph to be herm.
@@ -1418,8 +1418,8 @@ public function vapulaAndCeraphButtfuckTrainYeehaw():void {
 	outputText("\n\nYou dump your buttsluts, letting them splash in the cum-puddle, exhausted. Triumphantly exhibiting your " + cockDescript(x) + ", you tell them to finish their job.  Vapula and Ceraph growl reluctantly as they grovel in the spunk-tainted mud and crawl toward your junk before licking it with delectation.  You let them enjoy their meal, groaning in pleasure as they squeeze their pittance out of your " + cockDescript(x) + " and suck out the last globs of semen out of your urethra.  When you're all absolutely positive that no residual cum has been wasted, you smirk in satisfaction; you give your sluts a hard cock-slap for good measure and send them away.");
 	//Lust set to 0
 	stats(0,0,0,0,0,-2,-100,1);
-	flags[VAPULA_DAYS_SINCE_FED] = 0;
-	flags[VAPULA_TEASE_COUNT] = 0;
+	flags[kFLAGS.VAPULA_DAYS_SINCE_FED] = 0;
+	flags[kFLAGS.VAPULA_TEASE_COUNT] = 0;
 	doNext(13);
 }
 
@@ -1461,8 +1461,8 @@ public function vapulaSophieThreeSome():void {
 	//lust set to 50, lipstick affect (if no adaptation)
 	luststickApplication(10);
 	stats(0,0,0,0,0,0,-100,2);
-	flags[VAPULA_DAYS_SINCE_FED] = 0;
-	flags[VAPULA_TEASE_COUNT] = 0;
+	flags[kFLAGS.VAPULA_DAYS_SINCE_FED] = 0;
+	flags[kFLAGS.VAPULA_TEASE_COUNT] = 0;
 	if(player.lust < 50) player.lust = 50;
 	doNext(13);
 }
@@ -1483,8 +1483,8 @@ public function vapulaSophieThreesomeCunts():void {
 	outputText("\n\nVapula's expert stimulation as well as Sophie uncontrollably hot ass eventually drain your stamina and you buck into the harpy as hard as you can, helplessly eager for the return thrusts which push you towards orgasm.  You thrust your tongue deep into the succubus's mouth as you reach it, your pussy spasming around the hot, soft, vibrating mass buried within it.  Dimly, you are aware of the other end of the strap-on fluttering, twinging, and then releasing its milky load.  Sophie climaxes and squirts a copious amount of her juice as you deliver rope after rope of jism into her tight confines.  Remembering your succubus slut, you hastily pull out and wave the over-stimulated cum producer at Vapula, spraying her purple godly body with white paint.  She welcomes the rain with a happy squeal that turns into a demonic cry of pleasure when you stuff it crudely inside her steaming love-tunnel, directly injecting your seed in her womb.  She pulls your head between her chest orbs, screaming in delight as you feed her.  \"<i>Yes! YES! Give it to me! Aaaaaaaaaaaaaaahhh....</i>\"  She growls in utter bliss and satiation as you fill her with even more spunk.  The poor bimbo below you is still busy squirting unbelievable amounts of girl-juices, flooding the immediate area with a mix of various sexual fluids as her large pussy muscles keep contracting on their own.");
 	outputText("\n\nAt last, when you're all done, you dismount.  Your mouth is filled with the succubus' essence, and Gods it tastes good. You tell Vapula to get off Sophie's butt too; as soon as she does the bimbo completely clenches and relaxes before falling into a deep slumber, her stretched anus still exposed as she snores and wallows into a pool of juices, mostly her own.  \"<i>Finish your meal</i>\", you tell Vapula, sighing as you peel out of the strap-on.  The tired succubus complies and proceeds to gently eat both the strap-on and your sex clean of the aftermath of your demented threesome.  She keeps licking at your pleasantly aching " + vaginaDescript(0) + " until it is completely clean, polished with succubus saliva.  \"<i>Enough. You should rest now.</i>\"  Nodding, Vapula heads toward her leaf-bed in order to recover from the intense threesome and digest her copious meal.");
 	stats(0,0,0,0,0,0,-100,2);
-	flags[VAPULA_DAYS_SINCE_FED] = 0;
-	flags[VAPULA_TEASE_COUNT] = 0;
+	flags[kFLAGS.VAPULA_DAYS_SINCE_FED] = 0;
+	flags[kFLAGS.VAPULA_TEASE_COUNT] = 0;
 	doNext(13);
 }
 //Vapula-Amily threesome
@@ -1505,7 +1505,7 @@ public function vapulaAndAmilyThreesome():void {
 	outputText("\n\nThis mad triangle of lust eventually breaks as Vapula pulls back feverishly and screams, her body taken by a series of shivering orgasms.  You watch in fascination as the succubus jerks and twitches hypnotically, her lustrous vagina delivering torrent after torrent of fem-spunk.  Amily's upper body is soon wholly drenched, despite her best efforts to waste as little of the succubus' juices as possible.  She keeps gulping at Vapula's baby-maker in a ravenous display of lust.");
 	outputText("\n\nAs Amily drinks, you can't help but notice her body is slowly being transformed by Vapula's essence.  Her horns start growing, her hips widen; her tits keep burgeoning");
 	//[if not defurred]
-	if(flags[AMILY_NOT_FURRY] == 0) outputText(" and her fur starts shrinking, letting her rosy skin shine below");
+	if(flags[kFLAGS.AMILY_NOT_FURRY] == 0) outputText(" and her fur starts shrinking, letting her rosy skin shine below");
 	outputText(".  By Lethice, your succubus is literally warping your cumslut into a replica of herself!  All the more aroused by this obscene show of corruption, you pound harder, grabbing hold of her horns for better leverage.  At last, your " + cockDescript(x) + " is suddenly squeezed as Amily's ample butt swells under the taint of Vapula's juice; this extra pressure is enough to make you cum, your loins churning and your junk bulging as you shoot your load through Amily's anus.  The poor cumslut starts fainting from the sheer flow of spunk flooding her interior as well as her mouth; with a pathetic squirting orgasm, she goes limp and moans pitifully.  You pump ragingly as you reach your climax, making entire ropes of jism spurt in and out of her ass and slathering her backside.  Once your orgasm begins to falter, you carelessly drop your mousy slut, letting her crawl in a small pool of mixed juices.  Vapula lets go of Amily's jaw, discarding her disposable fuck-toy, satiated.");
 	//[if balls]
 	if(player.balls > 0) {
@@ -1517,8 +1517,8 @@ public function vapulaAndAmilyThreesome():void {
 	}
 	outputText("\n\nYou give a pat to Amily's head, telling her she's been an excellent buttslut. The mousette blushes in contentment under the bemused eyes of Vapula; you give your demon pet a last kiss, telling her Amily is hers for the remainder of the hour.  Knowing how insatiable the succubus is, she'll probably try to suck out your cum out of Amily's ass.  You keep musing these perverse thoughts as you leave your sluts to their business.");
 	stats(0,0,0,0,0,0,-100,2);
-	flags[VAPULA_DAYS_SINCE_FED] = 0;
-	flags[VAPULA_TEASE_COUNT] = 0;
+	flags[kFLAGS.VAPULA_DAYS_SINCE_FED] = 0;
+	flags[kFLAGS.VAPULA_TEASE_COUNT] = 0;
 	doNext(13);
 }
 
@@ -1559,8 +1559,8 @@ public function vapulaAssistsCeruleanSuccubus():void {
 	outputText(".  \"<i>That was fun! I can't wait to have another party like this! You should invite her more often!</i>\"");
 	outputText("\n\nYou know you definitely will.");
 	//standard night succubus stat increases
-	flags[VAPULA_DAYS_SINCE_FED] = 0;
-	flags[VAPULA_TEASE_COUNT] = 0;
+	flags[kFLAGS.VAPULA_DAYS_SINCE_FED] = 0;
+	flags[kFLAGS.VAPULA_TEASE_COUNT] = 0;
 	shortName = "Cerul P";
 	stats(rand(2), rand(2), rand(2), rand(2), 0, 0, -100, 2.5);
 	menuLoc = 14;
@@ -1663,8 +1663,8 @@ public function NTRSomeJojos():void {
 		outputText("\n\nSince you haven't given him the authorization to get off yet, the fucktoy is forced to endure your white rain as well as the squirts of an orgasming succubus he never got to touch.  Tears mix with your seed as they dribble down his face and stain his fur, but you don't care; if anything, you are only compelled to pollute him with even more thick ropes of demon jism.  When the mousy slut is completely soiled, you order him to place himself behind Vapula; you want him to lick the cum off her ass while she eats you out.  Excited at the perspective of giving and receiving pleasure at the same time, Vapula does as she's told; kneeling before you she sends her long tongue eagerly searching into your leaking twat, flicking at your " + clitDescript()+ " whilst presenting her purple, cum-packed backside to your other slut.  Whimpering in humiliation, treated as a sex-slave unworthy of getting cum firsthand, Jojo proceeds to lick the succubus' gaping asshole, sobbing and sniffing every now and then as he loudly slurps your cum.  Not caring in the least about the cumslut wiping her ass clean, your purple demon lover distractedly enjoys her dessert, exploring every crevice of your sex and teasing out every last drop of sweet girl cum.  When you're both completely clean, you help Vapula to her feet; as the succubus kisses you and thanks you for her meal, you notice that Jojo is still sitting before you, curled up and waiting for your next orders.");
 		outputText("\n\nYou laugh with your succubus companion at his submissive posture.  Vapula kicks his butt and snickers, \"<i>Can't you see we're busy? Piss off, slut.</i>\" You approve: \"<i>You heard what she said. Go get fucked elsewhere.</i>\"  Still terrified by the unholy couple you both form, Jojo nods feebly and quickly disappears into the jungle.");
 	}
-	flags[VAPULA_DAYS_SINCE_FED] = 0;
-	flags[VAPULA_TEASE_COUNT] = 0;
+	flags[kFLAGS.VAPULA_DAYS_SINCE_FED] = 0;
+	flags[kFLAGS.VAPULA_TEASE_COUNT] = 0;
 	stats(0,0,0,0,0,-2,-100,4);
 	doNext(13);
 }
@@ -1727,8 +1727,8 @@ public function jojoButtFuckTrain():void {
 	outputText("\n\nYou all spend a few minutes in utter ecstasy, thinking of nothing but the steady flow of sexual juices flowing in and out of various bodies.  You all focus on two things: giving everything you've got and keeping everything you're receiving.  Jojo, the nexus of this network of cum-flows, thrashes savagely as his genitals throb with need and his ass spasms reflexively; the poor thing is clearly getting unbearable pleasure and can't control his own movements anymore.  Your own orgasm brings you to a new level of ecstasy as your " + cockDescript(x) + " keeps pulsating and releasing torrents of baby-batter.  At last, when the cum-flow finally ebbs, you rest on Jojo's back for a while, cock buried deep in his ass.  He does the same to Vapula, but you're too exhausted to care.  Besides, the naughty little pet deserved a reward.  You all fall over, sloshing in a newly-formed puddle of thick sexual fluids, and rest for a while.  As you're about to fall asleep you whisper in Jojo's ear, \"<i>Good job slut...</i>\"  Your last vision is the mouse's head nodding in contentment.");
 	outputText("\n\nWhen you wake up, Jojo is gone, and Vapula is still snoring deep in the cum puddle, her body entirely coated with dried semen.  You cock-slap the purple succubus to wake her and tell her she might as well clean your " + cockDescript(x) + " since the cowardly mouse left.  She nods weakly and her mouth opens, visibly waiting for your sloppy dick to fill her since she's too tired to sit up.  Sighing, you lower your junk into a proper sucking position; her tongue seems to be working on its own as it licks your meat clean of any dirty juice left.  You try to shove more dickflesh inside her throat but you can see she's too winded to perform any elaborate blowjob.  Shrugging in mild disappointment, you leave the purple slut as she carelessly wallows in the cum puddle; you head toward a stream to get cleaned up.");
 	stats(0,0,0,0,-1,-2,-100,2);
-	flags[VAPULA_DAYS_SINCE_FED] = 0;
-	flags[VAPULA_TEASE_COUNT] = 0;
+	flags[kFLAGS.VAPULA_DAYS_SINCE_FED] = 0;
+	flags[kFLAGS.VAPULA_TEASE_COUNT] = 0;
 	doNext(13);
 }
 
@@ -1777,8 +1777,8 @@ public function vapulaAndIzma(girls:Boolean = true):void {
 		outputText("\n\nShe happily devours all you've got, her lips and nether-lips contracting mercilessly in order to milk both cocks for fresh baby-batter.  The sight of the shameless cumbucket getting what she wants pushes you to a new height and you orgasm and orgasm, your end of the strap-on vibrating furiously in your streaming depths as the other end and Izma pulsate in rhythm and paint the succubus' inner depths white.  You then pull out of her ass and walk toward Izma. The poor tigershark is completely drained from the double-blowjob, and staggers her way toward the stream to get hydrated, pulling back her dick with a loud POP as it escapes from Vapula's needy lips.  The succubus looks disappointed to see her new sperm feeder running away, but you remind her you still need to be cleaned.  With a happy sigh, she works on your " + vaginaDescript(0) + " for a while, tingling you in the most pleasant way as her tongue runs slowly across your drooling sex and slurps up all the girl slime she can possibly tease out of you.  When you're as dry as she is full, you both rest side to side, recovering from the intense fuck.");
 	}
 	stats(0,0,0,0,0,-2,-100,2);
-	flags[VAPULA_DAYS_SINCE_FED] = 0;
-	flags[VAPULA_TEASE_COUNT] = 0;
+	flags[kFLAGS.VAPULA_DAYS_SINCE_FED] = 0;
+	flags[kFLAGS.VAPULA_TEASE_COUNT] = 0;
 	doNext(13);
 }
 //Feed (as female)
@@ -1787,14 +1787,14 @@ public function chixFeedVapulaBlehblehIVantToZuckYourSpooo():void {
 	outputText("You produce the demonic dildo and hold it by the hilt of its giant purple end, wagging it lazily by your side with a playful grin.  Vapula knows what that means; she is on her knees in an instant, staring at you with wolfish anticipation.");
 	//Feed/Tease
 	var tease:int = 0;
-	if(flags[VAPULA_HAREM_FUCK] == 0) tease = 3771;
+	if(flags[kFLAGS.VAPULA_HAREM_FUCK] == 0) tease = 3771;
 	simpleChoices("Feed",chicksFeedVapula,"Tease",tease,"",0,"",0,"",0);
 }
 //Tease
 public function teaseVapula():void {
 	clearOutput();
 	//Requires: Vapula not fucking harem
-	if(flags[VAPULA_HAREM_FUCK] == 0 && (flags[VAPULA_DAYS_SINCE_FED] == 0)) {
+	if(flags[kFLAGS.VAPULA_HAREM_FUCK] == 0 && (flags[kFLAGS.VAPULA_DAYS_SINCE_FED] == 0)) {
 		outputText("You decide you aren't going to give her what she wants so easily . You're also genuinely curious about how badly she needs cum, and how far you can push her.  You don't say anything as you slowly buckle the strap-on, sighing as you slip the small, pink end into your " + vaginaDescript(0)+ ".  You make Vapula wait as you close your eyes and make the dildo pulse inside you, slowly filling you up and then withdrawing, letting it push up against your " + clitDescript() + ".");
 		outputText("\n\nYou open your eyes to find Vapula is biting her lip fretfully from watching you, a small pool of liquid arousal collecting beneath her.  You smile lazily as you stand over her and brush the purple end against her face; the way this makes the end wedged inside of you push to and fro against your sensitive walls makes you coo.  Vapula follows the bulbous tip like a cat and a string; as it brushes against her mouth she tries to wrap her lips around it, but you tut mockingly and pull it out of reach. With an evidently huge force of will the succubus makes herself be still again, and you resume stroking her face with your artificial cock.");
 		outputText("\n\n\"<i>How badly do you want this, slut?</i>\" you ask.");
@@ -1807,11 +1807,11 @@ public function teaseVapula():void {
 		outputText("\n\n\"<i>Wait, no...  I didn't mean it!  Please don't...</i>\"");
 		outputText("\n\n\"<i>You'll talk about it tomorrow, my hungry little cumslut.  If you're good.</i>\" You turn and stride away, laughing as you slowly unbuckle the strap-on.  The expression on Vapula's face as you leave is going to keep you very warm tonight.");
 		stats(0,0,0,0,0,0,(10+player.sens/10),0);
-		flags[VAPULA_TEASE_COUNT]++;
+		flags[kFLAGS.VAPULA_TEASE_COUNT]++;
 	}
 	//Second Tease
 	//Requires: Vapula not fucking harem, teased the day before
-	else if(flags[VAPULA_HAREM_FUCK] == 0 && flags[VAPULA_DAYS_SINCE_FED] == 1) {
+	else if(flags[kFLAGS.VAPULA_HAREM_FUCK] == 0 && flags[kFLAGS.VAPULA_DAYS_SINCE_FED] == 1) {
 		outputText("You smile as once again Vapula takes up the position on her knees, and you buckle on the strap- on and stand over her.  This time you make the pink end grow long, closing your eyes as it inches up your tunnel, before slowly thrusting your " + hipDescript() + " backwards and forwards in front of your succubus, letting it shrink and grow so it climbs up and down your wet walls.");
 		outputText("\n\nBreathing heavily, you open your eyes to find Vapula is struggling to stop herself from openly drooling, her eyes shooting from you back to the tip of the purple dildo in front of her as she licks her lips and swallows continuously.");
 		outputText("\n\n\"<i>You must be very hungry by now, slut,</i>\" you tease.");
@@ -1838,7 +1838,7 @@ public function teaseVapula():void {
 		outputText("\n\n\"<i>You've got such a fertile imagination on you when you're hungry, slut.  Makes me wonder what else you could come up with if I left you a little while longer.</i>\"  You pause as you run your fingers through her hair, before once again bucking your hips towards her face, the tip of the purple dildo inches away from her face.  You lavishly lengthen your dildo, packing your tunnel and working it back and forth as the thought of what you're doing to Vapula and her colourful words fizzle in your mind.  You open your mouth, arch your back and then exhale with deep satisfaction as you reach a small but perfectly formed high, your " + vaginaDescript(0) + " dribbling juices around your harness.  You smile down sweetly at Vapula, who doesn't look like she's blinked in a while, and slowly step away, leading the dildo away from her bit by bit.");
 		outputText("\n\n\"<i>I guess we'll find out, won't we? Same time tomorrow.</i>\"");
 		outputText("\n\nYou turn and walking away, your mouth curling into a wicked grin as a despairing wail reaches you from behind...");
-		flags[VAPULA_TEASE_COUNT]++;
+		flags[kFLAGS.VAPULA_TEASE_COUNT]++;
 	}
 	//Third Tease
 	else {
@@ -1860,8 +1860,8 @@ public function teaseVapula():void {
 		outputText("\n\n\"<i>You're a bad, filthy little cumslut,</i>\" you say, as sternly as you can.");
 		outputText("\n\n\"<i>That's what you train me to be, mistress,</i>\" she murmurs.  You send her on her way to digest her lavish meal with a slap on the ass.");
 		stats(0,0,0,0,0,0,-100,0);
-		flags[VAPULA_DAYS_SINCE_FED] = 0;
-		flags[VAPULA_TEASE_COUNT] = 0;
+		flags[kFLAGS.VAPULA_DAYS_SINCE_FED] = 0;
+		flags[kFLAGS.VAPULA_TEASE_COUNT] = 0;
 	}
 	stats(0,0,0,0,0,0,0,1);
 	doNext(13);
@@ -1871,7 +1871,7 @@ public function teaseVapula():void {
 public function chicksFeedVapula():void {
 	clearOutput();
 	//[Teased once or twice: 
-	if(flags[VAPULA_TEASE_COUNT] > 1) {
+	if(flags[kFLAGS.VAPULA_TEASE_COUNT] > 1) {
 		outputText("You push the pink end of the dildo into you with a sigh, then strap yourself into the harness so that the monstrous purple end bobs out in front of you.  You stand over a tense Vapula and tease her with it first, lightly brushing her face with the tip for a while.  She swallows thickly and licks her lips as you caress her with your cum fountain, but makes no movements towards it.  Eventually you giggle at her furious concentration and tell her you're going to reward her for being such a good slut, before pushing the end against her lips.  A flood of ecstatic thank-you-mistresses are swiftly muffled out as the dildo disappears into her mouth.");
 	}
 	else {
@@ -1884,8 +1884,8 @@ public function chicksFeedVapula():void {
 	outputText("\n\nAfter a long haze of mindless bliss, you feel long fingers undoing the strap-on and lifting it away, before curling around your thighs.  You peacefully look down to find Vapula bending into your crotch, her warm, slimy tongue touching your belly.  She looks about six months pregnant with the amount of spooge she has managed to milk from the dildo, but she is still intent upon licking you clean.  You sigh and let her, her tongue expertly gliding across your skin and exploring every corner of your dripping sex; she smacks her lips and happily hums as she goes about it, evidently enjoying you like a dessert to the fine main course she just received.  Eventually she finishes her mutually pleasurable task, and the two of you slowly get to your feet. Without a word you send her on her way to digest her lavish meal with a slap on the ass.");
 	doNext(13);
 	stats(0,0,0,0,0,0,-100,0);
-	flags[VAPULA_DAYS_SINCE_FED] = 0;
-	flags[VAPULA_TEASE_COUNT] = 0;
+	flags[kFLAGS.VAPULA_DAYS_SINCE_FED] = 0;
+	flags[kFLAGS.VAPULA_TEASE_COUNT] = 0;
 }
 
 //Forcefeed
@@ -1903,9 +1903,9 @@ public function vapulaForceFeeds():void {
 		outputText("\n\nYour stamina is rapidly overwhelmed and you decide to reward her effort; you savagely press Vapula's head against your groin, burying all eight inches of your false cock into her waiting throat; in symphony the two of you will your throbbing dildo to expand to pack you mercilessly tight, making you cum brutally.  Your " + clitDescript() + " pulses as your vagina contracts ecstatically around the bulging sex toy; vaguely you feel release at the other end, and you hear Vapula loudly and shamelessly enjoy what the dildo pumps out.  You abandon yourself to the climax and keep thrusting your " + hipDescript() + " into her face, girlcum spurting around your harness.");
 		outputText("\n\nAfter a long haze of mindless bliss, you feel long fingers undoing the strap-on and lifting it away, before curling around your thighs.  You peacefully look down to find Vapula bending into your crotch, her warm, slimy tongue touching your belly.  She looks about six months pregnant with the amount of spooge she has managed to milk from the dildo, but she is still intent upon licking you clean.  You sigh and let her, her tongue expertly gliding across your skin and exploring every corner of your dripping sex; she smacks her lips and happily hums as she goes about it, evidently enjoying you like a dessert to the fine main course she just received.  Eventually she finishes her mutually pleasurable task, and the two of you slowly get to your feet. You want to be angry with her but you are too satiated to properly feel it; you can see in her smiling eyes that she knows it.  Without a word you send her on her way to digest her lavish meal with a slap on the ass, and return to your bed.");
 		stats(0,0,0,0,0,0,-100,1);
-		flags[VAPULA_DAYS_SINCE_FED] = 0;
-		flags[VAPULA_TEASE_COUNT] = 0;
-		flags[VAPULA_EARNED_A_SPANK] = 1;
+		flags[kFLAGS.VAPULA_DAYS_SINCE_FED] = 0;
+		flags[kFLAGS.VAPULA_TEASE_COUNT] = 0;
+		flags[kFLAGS.VAPULA_EARNED_A_SPANK] = 1;
 	}
 	//[if no fuck harem is on and PC hasn't fed/fucked Vapula for 5 days that scene will trigger at night]
 	else if(player.hasCock()) {
@@ -1919,9 +1919,9 @@ public function vapulaForceFeeds():void {
 		//[if cum production is massive]
 		if(player.cumQ() >= 1500) outputText(" until she looks 6 months pregnant.  At last, the cum-flow spilling through your urethra starts to ebb and your " + cockDescript(x) + " stops throbbing; only then does she removes your junk from her mouth with a loud POP.  Your tool appears to be clean of any spooge: your cock-slut did a very good job.  Satisfied, you pat her head with your cock and let her digest her lavish meal.");
 		stats(0,0,0,0,0,0,-100,1);
-		flags[VAPULA_DAYS_SINCE_FED] = 0;
-		flags[VAPULA_TEASE_COUNT] = 0;
-		flags[VAPULA_EARNED_A_SPANK] = 1;
+		flags[kFLAGS.VAPULA_DAYS_SINCE_FED] = 0;
+		flags[kFLAGS.VAPULA_TEASE_COUNT] = 0;
+		flags[kFLAGS.VAPULA_EARNED_A_SPANK] = 1;
 	}
 	doNext(1);
 }
@@ -1962,7 +1962,7 @@ public function spankVapulaLikeABoss():void {
 	stats(0,0,0,0,0,0,(10+player.lib/7),0);
 	//{Sadist: + 20 lust}
 	if(player.hasPerk("Sadist") >= 0) stats(0,0,0,0,0,0,(10+player.lib/7),0);
-	flags[VAPULA_EARNED_A_SPANK] = 0;
+	flags[kFLAGS.VAPULA_EARNED_A_SPANK] = 0;
 	doNext(13);
 }
 

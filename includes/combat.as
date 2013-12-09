@@ -179,7 +179,7 @@ public function doCombat(eventNum:Number):void
 	var pSpecials:int = 5161;
 	
 	if(eventNum == 5000) {
-		flags[IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 0;
+		flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 0;
 		mainView.hideMenuButton( MainView.MENU_DATA );
 		mainView.hideMenuButton( MainView.MENU_APPEARANCE );
 		mainView.hideMenuButton( MainView.MENU_PERKS );
@@ -419,15 +419,15 @@ public function doCombat(eventNum:Number):void
 				player.gems -= temp;
 				gameState = 0;
 				//BUNUS XPZ
-				if(flags[COMBAT_BONUS_XP_VALUE] > 0) {
-					player.XP += flags[COMBAT_BONUS_XP_VALUE];
-					outputText("  Somehow you managed to gain " + flags[COMBAT_BONUS_XP_VALUE] + " XP from the situation.", false);
-					flags[COMBAT_BONUS_XP_VALUE] = 0;
+				if(flags[kFLAGS.COMBAT_BONUS_XP_VALUE] > 0) {
+					player.XP += flags[kFLAGS.COMBAT_BONUS_XP_VALUE];
+					outputText("  Somehow you managed to gain " + flags[kFLAGS.COMBAT_BONUS_XP_VALUE] + " XP from the situation.", false);
+					flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = 0;
 				}
 				//Bonus lewts
-				if(flags[UNKNOWN_FLAG_NUMBER_00234] != "") {
-					outputText("  Somehow you came away from the encounter with " + itemLongName(flags[UNKNOWN_FLAG_NUMBER_00234]) + ".\n\n", false);
-					shortName = flags[UNKNOWN_FLAG_NUMBER_00234];
+				if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] != "") {
+					outputText("  Somehow you came away from the encounter with " + itemLongName(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234]) + ".\n\n", false);
+					shortName = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234];
 					menuLoc = 18;
 					takeItem();
 				}
@@ -448,7 +448,7 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "Sheila") {
-			if(flags[SHEILA_DEMON] == 1) beatUpDemonSheila();
+			if(flags[kFLAGS.SHEILA_DEMON] == 1) beatUpDemonSheila();
 			else sheilaGotWhomped();
 			return;
 		}
@@ -473,7 +473,7 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "Kelt") {
-			if(flags[KELT_BREAK_LEVEL] == 1) defeatKellyNDBREAKHIM();
+			if(flags[kFLAGS.KELT_BREAK_LEVEL] == 1) defeatKellyNDBREAKHIM();
 			else breakingKeltNumeroThree();
 			return;
 		}
@@ -903,7 +903,7 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "Sheila") {
-			if(flags[SHEILA_DEMON] == 1) beatUpDemonSheila();
+			if(flags[kFLAGS.SHEILA_DEMON] == 1) beatUpDemonSheila();
 			else sheilaGotWhomped();
 			return;
 		}
@@ -928,7 +928,7 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "Kelt") {
-			if(flags[KELT_BREAK_LEVEL] == 1) defeatKellyNDBREAKHIM();
+			if(flags[kFLAGS.KELT_BREAK_LEVEL] == 1) defeatKellyNDBREAKHIM();
 			else breakingKeltNumeroThree();
 			return;
 		}
@@ -1364,7 +1364,7 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "Sheila") {
-			if(flags[SHEILA_DEMON] == 1) loseToSheila();
+			if(flags[kFLAGS.SHEILA_DEMON] == 1) loseToSheila();
 			else getBeatUpBySheila();
 			return;
 		}
@@ -1704,7 +1704,7 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "Sheila") {
-			if(flags[SHEILA_DEMON] == 1) loseToSheila();
+			if(flags[kFLAGS.SHEILA_DEMON] == 1) loseToSheila();
 			else getBeatUpBySheila();
 			return;
 		}
@@ -1729,8 +1729,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "Kelt") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nKelt recoils for a moment before assuming a look of superiority...");
@@ -1763,8 +1763,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "kitsune") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nThe kitsune recoils before running off, no longer interested in you...");
@@ -1776,8 +1776,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "satyr") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nThe satyr laughs heartily at your eagerness...");
@@ -1789,8 +1789,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "sandtrap" || monster.short == "sand tarp") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nThe sand trap seems bemused by the insects your body houses...");
@@ -1802,8 +1802,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "chameleon girl") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nThe chameleon girl recoils.  \"<i>Ew, gross!</i>\" she screetches as she runs away, leaving you to recover from your defeat alone.");
@@ -1824,8 +1824,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "lusty demons") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nThe demons smile to one at another as they watch your display, then close in...");
@@ -1854,8 +1854,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "mob of spiders-morphs") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nThe spiders smile to one at another as they watch your display, then close in...");
@@ -1867,8 +1867,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "Goo Armor") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nThe armored goo sighs while you exhaust yourself...");
@@ -1882,8 +1882,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "Hel" || monster.short == "salamander") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nHelia waits it out in stoic silence...");
@@ -1896,8 +1896,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "goo-girl") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nThe goo-girl seems confused but doesn't mind.");
@@ -1920,8 +1920,8 @@ public function doCombat(eventNum:Number):void
 			else if(monster.hasStatusAffect("spar") >= 0)
 				sparWithFriendlyKihaLose();
 			else {
-				if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-					flags[CAME_WORMS_AFTER_COMBAT] = 1;
+				if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+					flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 					infestOrgasm();
 					//Mob reaction
 					outputText("\n\nKiha seems visibly disturbed by your infection, enough that she turns to leave.");
@@ -1934,8 +1934,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "minotaur gang" || monster.short == "minotaur tribe") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nThe minutaurs share a laugh while you cum, but their throbbing erections don't subside in the slightest.");
@@ -1947,8 +1947,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "corrupted drider") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nThe drider licks her lips in anticipation...");
@@ -1960,8 +1960,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "basilisk") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nThe basilisk smirks, but waits for you to finish...");
@@ -1973,8 +1973,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "male spider-morph") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nThe spider flashes a predatory grin while he waits it out...");
@@ -1986,8 +1986,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "female spider-morph") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nThe spider flashes a predatory grin while she waits it out...");
@@ -1999,8 +1999,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "Isabella") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\n\"<i>Ick,</i>\" Isabella tuts as she turns to leave...");
@@ -2012,8 +2012,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "Izma") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\n\"<i>Gross!</i>\" Izma cries as she backs away, leaving you to recover alone.");
@@ -2025,8 +2025,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "gnoll spear-thrower") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nYour foe doesn't seem put off enough to leave...");
@@ -2043,8 +2043,8 @@ public function doCombat(eventNum:Number):void
 				phyllaGnollBeatsPC();
 				return;
 			}
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nYour foe doesn't seem put off enough to leave...");
@@ -2056,8 +2056,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "Zetaz") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nYour foe doesn't seem put off enough to care...");
@@ -2069,8 +2069,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "Vala") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nYour foe doesn't seem put off enough to leave...");
@@ -2082,8 +2082,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "anemone") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nYour foe doesn't seem to mind at all...");
@@ -2095,8 +2095,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "imp horde") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nYour foes don't seem put off enough to leave...");
@@ -2108,8 +2108,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "Tamani's daughters") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nYour foes seem visibly disgusted and leave, telling you to, \"<i>quit being so fucking gross...</i>\"");
@@ -2124,8 +2124,8 @@ public function doCombat(eventNum:Number):void
 			if(monster.hasStatusAffect("bimboBrawl") >= 0)
 				debimboSophieBeatsYouUp();
 			else { 
-				if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-					flags[CAME_WORMS_AFTER_COMBAT] = 1;
+				if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+					flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 					infestOrgasm();
 					//Mob reaction
 					outputText("\n\nYour foe seems disgusted by the display and leaves you to recover alone...");
@@ -2138,8 +2138,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "harpy") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nYour foe doesn't seem disgusted enough to leave...");
@@ -2151,8 +2151,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "Ceraph") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nYour foe doesn't seem disgusted enough to leave...");
@@ -2180,8 +2180,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "Akbal") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nYour foe doesn't seem disgusted enough to leave...");
@@ -2204,8 +2204,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "shark-girl") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nYour foe doesn't seem disgusted enough to leave...");
@@ -2219,7 +2219,7 @@ public function doCombat(eventNum:Number):void
 		if(monster.short == "Tamani") {
 			if(player.totalCocks() > 0) {
 				//hypnoslut loss scene
-				if(flags[TAMANI_TIMES_HYPNOTISED] > 19 && rand(2) == 0) {
+				if(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] > 19 && rand(2) == 0) {
 					getRapedByTamaniYouHypnoSlut();
 					return;
 				}
@@ -2298,8 +2298,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "secretarial succubus") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nYour foe doesn't seem to care...");
@@ -2311,8 +2311,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "incubus mechanic") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nYour foe doesn't seem to care...");
@@ -2324,8 +2324,8 @@ public function doCombat(eventNum:Number):void
 			return;
 		}
 		if(monster.short == "Omnibus Overseer") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[CAME_WORMS_AFTER_COMBAT] = 1;
+			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
 				infestOrgasm();
 				//Mob reaction
 				outputText("\n\nYour foe doesn't seem to care...");
@@ -2608,7 +2608,7 @@ public function doCombat(eventNum:Number):void
 	//GAME OVERS
 	if(eventNum == 5025) {
 		outputText("<b>GAME OVER</b>", true);
-		if(flags[EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "",0,"NewGamePlus",10035,"",0,"CHEAT", 1);
+		if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "",0,"NewGamePlus",10035,"",0,"CHEAT", 1);
 		else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus",10035, "BLAH", 0, "LULZ", 0);
 		mainView.showMenuButton( MainView.MENU_DATA );
 		mainView.hideMenuButton( MainView.MENU_APPEARANCE );
@@ -2620,7 +2620,7 @@ public function doCombat(eventNum:Number):void
 	//Soft Game Over - for when you want to leave the text on-screen
 	if(eventNum == 5035) {
 		outputText("\n\n<b>GAME OVER</b>", false);
-		if(flags[EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "",0,"NewGamePlus",10035,"",0,"Debug Cheat", 1);
+		if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "",0,"NewGamePlus",10035,"",0,"Debug Cheat", 1);
 		else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus", 10035, "BLAH", 0, "LULZ", 0);
 		mainView.showMenuButton( MainView.MENU_DATA );
 		mainView.hideMenuButton( MainView.MENU_APPEARANCE );
@@ -3022,7 +3022,7 @@ public function doCombat(eventNum:Number):void
 	if(eventNum == 5071) {
 		//Gain fatigue if not fighting sand tarps
 		if(monster.hasStatusAffect("level") < 0) fatigue(-5);
-		flags[IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 1;
+		flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 1;
 		if(monster.hasStatusAffect("PCTailTangle") >= 0) {
 			kitsuneWait();
 			return;
@@ -3836,7 +3836,7 @@ public function attack():void {
 		enemyAI();
 		return;
 	}
-	if(flags[PC_FETISH] >= 3 && !isUrta()) {
+	if(flags[kFLAGS.PC_FETISH] >= 3 && !isUrta()) {
 		outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  Ceraph's piercings have made normal attack impossible!  Maybe you could try something else?\n\n", false);
 		enemyAI();
 		return;
@@ -3851,13 +3851,13 @@ public function attack():void {
 		outputText("It's all or nothing!  With a bellowing cry you charge down the treacherous slope and smite the sandtrap as hard as you can!  ");
 		trapLevel(-4);
 	}
-	if(player.hasPerk("Double Attack") >= 0 && player.spe >= 50 && flags[DOUBLE_ATTACK_STYLE] < 2) {
+	if(player.hasPerk("Double Attack") >= 0 && player.spe >= 50 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] < 2) {
 		if(player.hasStatusAffect("FirstAttack") >= 0) player.removeStatusAffect("FirstAttack");
 		else {
 			//Always!
-			if(flags[DOUBLE_ATTACK_STYLE] == 0) player.createStatusAffect("FirstAttack",0,0,0,0);
+			if(flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0) player.createStatusAffect("FirstAttack",0,0,0,0);
 			//Alternate!
-			else if(player.str < 61 && flags[DOUBLE_ATTACK_STYLE] == 1) player.createStatusAffect("FirstAttack",0,0,0,0);
+			else if(player.str < 61 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 1) player.createStatusAffect("FirstAttack",0,0,0,0);
 		}
 	}
 	else if(player.hasPerk("Brawler") >= 0 && player.weaponName == "fists") {
@@ -3957,7 +3957,7 @@ public function attack():void {
 	}*/
 	//BASIC DAMAGE STUFF
 	//Double Attack Hybrid Reductions
-	if(player.hasPerk("Double Attack") >= 0 && player.spe >= 50 && player.str > 61 && flags[DOUBLE_ATTACK_STYLE] == 0) {
+	if(player.hasPerk("Double Attack") >= 0 && player.spe >= 50 && player.str > 61 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0) {
 		damage = 60.5;
 	}
 	else damage = player.str;
@@ -4458,9 +4458,9 @@ public function doDamage(damage:Number):Number {
 	monster.HP -= damage;
 	//Isabella gets mad
 	if(monster.short == "Isabella") {
-		flags[ISABELLA_AFFECTION]--;
+		flags[kFLAGS.ISABELLA_AFFECTION]--;
 		//Keep in bounds
-		if(flags[ISABELLA_AFFECTION] < 0) flags[ISABELLA_AFFECTION] = 0;
+		if(flags[kFLAGS.ISABELLA_AFFECTION] < 0) flags[kFLAGS.ISABELLA_AFFECTION] = 0;
 	}
 	//Interrupt gigaflare if necessary.
 	if(monster.hasStatusAffect("Gigafire") >= 0) monster.addStatusValue("Gigafire",1,damage);
@@ -4470,7 +4470,7 @@ public function doDamage(damage:Number):Number {
 }
 public function takeDamage(damage:Number, noMod:Boolean = false):Number {
 	//EZ MOAD half damage
-	if(flags[EASY_MODE_ENABLE_FLAG] == 1) damage /= 2;
+	if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) damage /= 2;
 	if(player.hasStatusAffect("Shielding") >= 0) {
 		damage -= 30;
 		if(damage < 1) damage = 1;
@@ -4506,7 +4506,7 @@ public function takeDamage(damage:Number, noMod:Boolean = false):Number {
 	if(damage < 1) damage = 1;
 	//Else deduct.
 	else player.HP-=damage;
-	if(flags[MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
+	if(flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
 		stats(0,0,0,0,0,0,int(damage/2),0);
 	}
 	mainView.statsView.showStatDown( 'hp' );
@@ -4909,11 +4909,11 @@ public function clearStatuses(visibility:Boolean):void {
 	if(player.hasStatusAffect("Disarmed") >= 0) {
 		player.removeStatusAffect("Disarmed");
 		if(player.weaponName == "fists") {
-			player.weaponName = flags[UNKNOWN_FLAG_NUMBER_00268];
-			player.weaponAttack = fixedDamage(flags[UNKNOWN_FLAG_NUMBER_00268]);
+			player.weaponName = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00268];
+			player.weaponAttack = fixedDamage(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00268]);
 		}
 		else {
-			flags[UNKNOWN_FLAG_NUMBER_00234] = lootWeaponName(flags[UNKNOWN_FLAG_NUMBER_00268]);
+			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] = lootWeaponName(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00268]);
 		}
 	}
 	if(player.hasStatusAffect("Anemone Venom") >= 0) {
@@ -5207,35 +5207,35 @@ public function combatStatusesUpdate():void {
 		}
 		monster.lust += monster.lustVuln * (2 + rand(4));
 	}
-	if(player.hasStatusAffect("Bound") >= 0 && flags[PC_FETISH] >= 2) {
+	if(player.hasStatusAffect("Bound") >= 0 && flags[kFLAGS.PC_FETISH] >= 2) {
 		outputText("The feel of tight leather completely immobilizing you turns you on more and more.  Would it be so bad to just wait and let her play with you like this?\n\n", false);
 		stats(0,0,0,0,0,0,3,0);
 	}
 	if(monster.hasStatusAffect("QueenBind") >= 0) {
 		outputText("You're utterly restrained by the Harpy Queen's magical ropes!\n\n");
-		if(flags[PC_FETISH] >= 2) stats(0,0,0,0,0,0,3,0);
+		if(flags[kFLAGS.PC_FETISH] >= 2) stats(0,0,0,0,0,0,3,0);
 	}
 	if(player.hasStatusAffect("GooArmorBind") >= 0) {
-		if(flags[PC_FETISH] >= 2) {
+		if(flags[kFLAGS.PC_FETISH] >= 2) {
 			outputText("The feel of the all-encapsulating goo immobilizing your helpless body turns you on more and more.  Maybe you should just wait for it to completely immobilize you, have you at its mercy.\n\n");
 			stats(0,0,0,0,0,0,3,0);
 		}
 		else outputText("You're utterly immobilized by the goo flowing around you.  You'll have to struggle free!\n\n");
 	}
 	if(player.hasStatusAffect("HarpyBind") >= 0) {
-		if(flags[PC_FETISH] >= 2) {
+		if(flags[kFLAGS.PC_FETISH] >= 2) {
 			outputText("The harpies are holding you down and restraining you, making the struggle all the sweeter!\n\n");
 			stats(0,0,0,0,0,0,3,0);
 		}
 		else outputText("You're restrained by the harpies so that they can beat on you with impunity.  You'll need to struggle to break free!\n\n");
 	}
-	if(player.hasStatusAffect("Naga Bind") >= 0 && flags[PC_FETISH] >= 2) {
+	if(player.hasStatusAffect("Naga Bind") >= 0 && flags[kFLAGS.PC_FETISH] >= 2) {
 		outputText("Coiled tightly by the naga and utterly immobilized, you can't help but become aroused thanks to your bondage fetish.\n\n", false);
 		stats(0,0,0,0,0,0,5,0);
 	}
 	if(player.hasStatusAffect("TentacleBind") >= 0) {
 		outputText("You are firmly trapped in the tentacle's coils.  <b>The only thing you can try to do is struggle free!</b>\n\n", false);
-		if(flags[PC_FETISH] >= 2) {
+		if(flags[kFLAGS.PC_FETISH] >= 2) {
 			outputText("Wrapped tightly in the tentacles, you find it hard to resist becoming more and more aroused...\n\n", false);
 			stats(0,0,0,0,0,0,3,0);
 		}
@@ -5380,7 +5380,7 @@ public function combatStatusesUpdate():void {
 		}
 	}
 	//Bondage straps + bondage fetish
-	if(flags[PC_FETISH] >= 2 && player.armorName == "barely-decent bondage straps") {
+	if(flags[kFLAGS.PC_FETISH] >= 2 && player.armorName == "barely-decent bondage straps") {
 		outputText("The feeling of the tight, leather straps holding tightly to your body while exposing so much of it turns you on a little bit more.\n\n", false);
 		stats(0,0,0,0,0,0,2,0);
 	}
@@ -9011,22 +9011,22 @@ public function startCombat(monsterNum:Number):void {
 		monster.cor = 50;
 		monster.fatigue = 0;
 		monster.lustVuln = .5;
-		if(flags[TIMES_PC_DEFEATED_VALA] > 0) monster.lustVuln += .25;
-		if(flags[TIMES_PC_DEFEATED_VALA] > 2) monster.lustVuln += .5;
+		if(flags[kFLAGS.TIMES_PC_DEFEATED_VALA] > 0) monster.lustVuln += .25;
+		if(flags[kFLAGS.TIMES_PC_DEFEATED_VALA] > 2) monster.lustVuln += .5;
 		
 		//Combat Stats
 		monster.bonusHP = 350;
 		monster.HP = eMaxHP();
 		
-		monster.lust = 30 + flags[TIMES_PC_DEFEATED_VALA] * 10;
+		monster.lust = 30 + flags[kFLAGS.TIMES_PC_DEFEATED_VALA] * 10;
 		if(monster.lust > 80) monster.lust = 80;
 		
 		
 		//Level Stats
 		monster.level = 11;
 		monster.XP = totalXP() + 50;
-		if(flags[TIMES_PC_DEFEATED_VALA] > 0) monster.XP = 5;
-		if(flags[TIMES_PC_DEFEATED_VALA] > 2) monster.XP = 1;
+		if(flags[kFLAGS.TIMES_PC_DEFEATED_VALA] > 0) monster.XP = 5;
+		if(flags[kFLAGS.TIMES_PC_DEFEATED_VALA] > 2) monster.XP = 1;
 		monster.gems = 1;
 		
 		
@@ -10468,11 +10468,11 @@ public function startCombat(monsterNum:Number):void {
 	if(monsterNum == 41) {
 		monster.short="minotaur";
 		monster.imageName="minotaurmob";
-		if(flags[UNKNOWN_FLAG_NUMBER_00326] < 20) monster.short += " gang";
+		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] < 20) monster.short += " gang";
 		else monster.short += " tribe";
 		monster.plural = true;
-		monster.long = Num2Text(flags[UNKNOWN_FLAG_NUMBER_00326]) + " shaggy beastmen stand around you in a loose circle.  Their postures aren't exactly threatening.  If anything, they seem to be standing protectively around you, as if their presence would somehow shelter you from the rest of the mountain.  All of their features share a brotherly similarity, though there's still a fair bit of differences between your minotaur sons.  One of them is a head above the rest, a massive hulk of muscle so big he seems to dwarf the rest.  In stark contrast, a feminine minitaur keeps his distance in the rear.";
-		if(flags[UNKNOWN_FLAG_NUMBER_00326] >= 20) monster.long += "  The tribe constantly makes hoots and cat-calls, fully expecting to be fucking you soon.";
+		monster.long = Num2Text(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326]) + " shaggy beastmen stand around you in a loose circle.  Their postures aren't exactly threatening.  If anything, they seem to be standing protectively around you, as if their presence would somehow shelter you from the rest of the mountain.  All of their features share a brotherly similarity, though there's still a fair bit of differences between your minotaur sons.  One of them is a head above the rest, a massive hulk of muscle so big he seems to dwarf the rest.  In stark contrast, a feminine minitaur keeps his distance in the rear.";
+		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] >= 20) monster.long += "  The tribe constantly makes hoots and cat-calls, fully expecting to be fucking you soon.";
 		monster.a ="the ";
 		monster.capitalA ="The ";
 		monster.temperment = 1;
@@ -10504,15 +10504,15 @@ public function startCombat(monsterNum:Number):void {
 		monster.fatigue = 0;
 		
 		//Combat Stats
-		monster.bonusHP = 340 + 50 * (flags[UNKNOWN_FLAG_NUMBER_00326] - 3);
+		monster.bonusHP = 340 + 50 * (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3);
 		monster.HP = eMaxHP();
 		monster.lustVuln = 0.45;
-		if((flags[UNKNOWN_FLAG_NUMBER_00326] - 3) * 2 > 13) monster.lustVuln = .3;
-		else monster.lustVuln -= (flags[UNKNOWN_FLAG_NUMBER_00326] - 3) * 0.02;
+		if((flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3) * 2 > 13) monster.lustVuln = .3;
+		else monster.lustVuln -= (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3) * 0.02;
 		monster.lust = 30;
 		
 		//Level Stats
-		monster.level = 11 + Math.round((flags[UNKNOWN_FLAG_NUMBER_00326] - 3)/2);
+		monster.level = 11 + Math.round((flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3)/2);
 		if(monster.level > 14) monster.level = 14;
 		monster.XP = totalXP();
 		monster.gems = rand(15) + 45;
@@ -11005,7 +11005,7 @@ public function startCombat(monsterNum:Number):void {
 		monster.long = "You are fighting a (literally) smoking hot salamander – a seven foot tall woman with crimson scales covering her legs, back, and forearms, with a tail swishing menacingly behind her, ablaze with a red-hot fire.  Her red hair whips wildly around her slender shoulders, occasionally flitting over her hefty E-cup breasts, only just concealed within a scale-covered bikini top.  Bright red eyes focus on you from an almost-human face as she circles you, ready to close in for the kill.  Her brutal, curved sword is raised to her side, feinting at you between genuine attacks.";
 		monster.a ="the ";
 		monster.capitalA ="The ";
-		if(flags[HEL_TALKED_ABOUT_HER] == 1) {
+		if(flags[kFLAGS.HEL_TALKED_ABOUT_HER] == 1) {
 			monster.short ="Hel";
 			monster.a = "";
 			monster.capitalA = "";
@@ -12088,7 +12088,7 @@ public function startCombat(monsterNum:Number):void {
 		monster.inte = 75;
 		monster.lib = 50;
 		monster.sens = 35;
-		monster.cor = flags[EMBER_COR];
+		monster.cor = flags[kFLAGS.EMBER_COR];
 		monster.fatigue = 0;
 		monster.lustVuln = .25;
 		
@@ -12104,7 +12104,7 @@ public function startCombat(monsterNum:Number):void {
 		
 		//Appearance Variables
 		//Gender 1M, 2F, 3H
-		monster.gender = flags[EMBER_GENDER];
+		monster.gender = flags[kFLAGS.EMBER_GENDER];
 		monster.tallness = rand(8) + 70;
 		monster.hairColor = "black";
 		monster.hairLength = 15;
@@ -12171,13 +12171,13 @@ public function startCombat(monsterNum:Number):void {
 		//20 - inconceivably large/big/huge etc
 		monster.buttRating = 8;
 		//Create imp sex attributes
-		if(flags[EMBER_GENDER] >= 2) {
+		if(flags[kFLAGS.EMBER_GENDER] >= 2) {
 			monster.createVagina();
 			monster.vaginas[0].virgin = false;
 			monster.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLAVERING;
 			monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
 		}
-		if(flags[EMBER_GENDER] == 1 || flags[EMBER_GENDER] == 3) {
+		if(flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) {
 			monster.balls = 2;
 			monster.createCock();
 			monster.cocks[0].cockLength = 16;
@@ -12259,7 +12259,7 @@ public function startCombat(monsterNum:Number):void {
 		monster.inte = 85;
 		monster.lib = 50;
 		monster.sens = 45;
-		monster.cor = flags[EMBER_COR];
+		monster.cor = flags[kFLAGS.EMBER_COR];
 		monster.fatigue = 0;
 		monster.lustVuln = .25;
 		
@@ -12627,7 +12627,7 @@ public function startCombat(monsterNum:Number):void {
 		else if(monster.hairColor == "black") monster.long += "lustrous, ass-length black";
 		else monster.long += "unkempt, shoulder-length reddish";
 		monster.long += " hair.  She appears mostly human, except for a pair of large, furry ears poking through her hair and six luxurious silky tails swaying in the air behind her.  Her robes are revealing but comfortable-looking, hugging her voluptuous curves and exposing large swaths of tattooed skin.  A layer of ornate tattoos covers patches of her exposed flesh, accentuating her feminine curves nicely, and each movement brings a pleasant jiggle from her plump backside and large breasts.";
-		if(rand(3) != 2) flags[redheadIsFuta] = 1;
+		if(rand(3) != 2) flags[kFLAGS.redheadIsFuta] = 1;
 		monster.a ="a ";
 		monster.capitalA ="A ";
 		monster.temperment = 1;
@@ -12672,7 +12672,7 @@ public function startCombat(monsterNum:Number):void {
 		//Appearance Variables
 		//Gender 1M, 2F, 3H
 		monster.gender = 2;
-		if(flags[redheadIsFuta] == 1) monster.gender == 3;
+		if(flags[kFLAGS.redheadIsFuta] == 1) monster.gender == 3;
 		monster.tallness = rand(24) + 60;
 		
 		monster.hairLength = 13+rand(20);
@@ -13164,7 +13164,7 @@ public function startCombat(monsterNum:Number):void {
 		monster.imageName="kelt";
 		monster.plural = false;
 		monster.long = "Kelt has changed for the worse since your first meeting.  Gone is his muscular, barrel chest.  In its place is a softer frame, capped with tiny boobs - remnants of your last treatment.  His jaw is fairly square and chiselled (though less than before).  From the waist down, he has the body of a horse, complete with fairly large pair of balls and a decent-sized dong.  Both are smaller than they used to be, however.  He has his bow strung and out, clearly intent on defending himself from your less than gentle touches.";
-		if(flags[KELT_BREAK_LEVEL] == 2) monster.long = "Kelt is looking less and less like the burly centaur from before, and more and more like a woman.  He looks more like an odd, androgynous hybrid than the beautiful woman you had turned him into.  He currently sports roughly b-cup breasts and a smallish, miniature horse-cock.  There's barely any hair on his human body, aside from a long mane of hair.  Each treatment seems to be more effective than the last, and you can't wait to see what happens after you tame him THIS time.";
+		if(flags[kFLAGS.KELT_BREAK_LEVEL] == 2) monster.long = "Kelt is looking less and less like the burly centaur from before, and more and more like a woman.  He looks more like an odd, androgynous hybrid than the beautiful woman you had turned him into.  He currently sports roughly b-cup breasts and a smallish, miniature horse-cock.  There's barely any hair on his human body, aside from a long mane of hair.  Each treatment seems to be more effective than the last, and you can't wait to see what happens after you tame him THIS time.";
 		monster.a ="";
 		monster.capitalA ="";
 		monster.temperment = 1;
@@ -13424,7 +13424,7 @@ public function startCombat(monsterNum:Number):void {
 		monster.ass.analWetness = 0;
 		monster.createStatusAffect("Bonus aCapacity",20,0,0,0);
 		monster.createStatusAffect("Bonus vCapacity",30,0,0,0);
-		if(flags[SHEILA_DEMON] == 1) {
+		if(flags[kFLAGS.SHEILA_DEMON] == 1) {
 			//-slightly slower, has much more stamina, intel, and HP now
 			monster.spe -= 15;
 			monster.tou += 30
@@ -13446,7 +13446,7 @@ public function startCombat(monsterNum:Number):void {
 				monster.long += " jiggle as she moves, and she shoves them out to make sure you see just how lewd her body has become since your first meeting.";
 			monster.long += "  Straight, jaw-length auburn hair frames her face along with two long, smooth ears that stick out sideways.  Her only nods to civilization are a dangling purple earring and the finger rings that she wears on her hands, and the wild woman stares openly at you, touching herself.";
 		}
-		if(flags[SHEILA_XP] > 3 || flags[SHEILA_DEMON] > 0) {
+		if(flags[kFLAGS.SHEILA_XP] > 3 || flags[kFLAGS.SHEILA_DEMON] > 0) {
 			monster.vaginas[0].virgin = false;
 		}
 		doNext(1);
@@ -14132,7 +14132,7 @@ public function startCombat(monsterNum:Number):void {
 	}
 	//LOAD HOLLI
 	if(monsterNum == 68) {
-		flags[FOUGHT_HOLLI] = 1;
+		flags[kFLAGS.FOUGHT_HOLLI] = 1;
 		monster.short="Holli";
 		monster.imageName="holli";
 		monster.plural = false;
@@ -14269,7 +14269,7 @@ public function startCombat(monsterNum:Number):void {
 	}
 	//LOAD HOLLI
 	if(monsterNum == 69) {
-		monster.short = flags[HELSPAWN_NAME];
+		monster.short = flags[kFLAGS.HELSPAWN_NAME];
 		monster.imageName = "hollispawn"
 		monster.plural = false;
 		monster.long = "Marae's offshoot, Holli stands rooted in front of you.  Solid black eyes with golden pupils stare out at you.  Her normally-nude body is concealed inside her tree, though occasionally she will flash you the devilish grin of a sadistic temptress and the bark will split to reveal a pale, jiggling bit of flesh.  A pair of gnarled oak horns sprout from her forehead; leaves and flowers alternately bloom and wither on them as her face contorts with emotion.";
@@ -15982,7 +15982,7 @@ public function tease():void {
 		}
 		if(monster.plural) damage *= 1.3;
 		enemyTeaseReaction(damage + rand(bonusDamage));
-		if(flags[PC_FETISH] >= 1) {
+		if(flags[kFLAGS.PC_FETISH] >= 1) {
 			if(player.lust < 75) outputText("\nFlaunting your body in such a way gets you a little hot and bothered.", false);
 			else outputText("\nIf you keep exposing yourself you're going to get too horny to fight back.  This exhibitionism fetish makes it hard to resist just stripping naked and giving up.", false);
 			stats(0,0,0,0,0,0,2 + rand(3),0);
@@ -16128,7 +16128,7 @@ public function spellArouse():void {
 	statScreenRefresh();
 	if(monster.hasStatusAffect("Shell") >= 0) {
 		outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-		flags[SPELLS_CAST]++;
+		flags[kFLAGS.SPELLS_CAST]++;
 		spellPerkUnlock();
 		enemyAI();
 		return;
@@ -16138,7 +16138,7 @@ public function spellArouse():void {
 	if(monster.short == "worms") {
 		outputText("The worms appear to be unaffected by your magic!", false);
 		outputText("\n\n", false);
-		flags[SPELLS_CAST]++;
+		flags[kFLAGS.SPELLS_CAST]++;
 		spellPerkUnlock();
 		doNext(1);
 		if(monster.lust >= 100) doNext(5009);
@@ -16147,7 +16147,7 @@ public function spellArouse():void {
 	}
 	if(monster.lustVuln == 0) {
 		outputText("It has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n", false);
-		flags[SPELLS_CAST]++;
+		flags[kFLAGS.SPELLS_CAST]++;
 		spellPerkUnlock();
 		enemyAI();
 		return;
@@ -16186,7 +16186,7 @@ public function spellArouse():void {
 	}
 	outputText("\n\n", false);
 	doNext(1);
-	flags[SPELLS_CAST]++;
+	flags[kFLAGS.SPELLS_CAST]++;
 	spellPerkUnlock();
 	if(monster.lust >= 100) doNext(5009);
 	else enemyAI();
@@ -16221,7 +16221,7 @@ public function spellHeal():void {
 	}
 	outputText("\n\n", false);
 	statScreenRefresh();
-	flags[SPELLS_CAST]++;
+	flags[kFLAGS.SPELLS_CAST]++;
 	spellPerkUnlock();
 	if(player.lust >= 100) doNext(5011);
 	else enemyAI();
@@ -16277,7 +16277,7 @@ public function spellMight():void {
 	}
 	outputText("\n\n", false);
 	statScreenRefresh();
-	flags[SPELLS_CAST]++;
+	flags[kFLAGS.SPELLS_CAST]++;
 	spellPerkUnlock();
 	if(player.lust >= 100) doNext(5011);
 	else enemyAI();
@@ -16297,7 +16297,7 @@ public function spellChargeWeapon():void {
 	player.createStatusAffect("Charge Weapon",10*spellMod(),0,0,0);
 	player.weaponAttack += player.statusAffectv1("Charge Weapon");
 	statScreenRefresh();
-	flags[SPELLS_CAST]++;
+	flags[kFLAGS.SPELLS_CAST]++;
 	spellPerkUnlock();
 	enemyAI();
 }
@@ -16313,7 +16313,7 @@ public function spellBlind():void {
 	fatigue(20,1);
 	if(monster.hasStatusAffect("Shell") >= 0) {
 		outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-		flags[SPELLS_CAST]++;
+		flags[kFLAGS.SPELLS_CAST]++;
 		spellPerkUnlock();
 		enemyAI();
 		return;
@@ -16333,7 +16333,7 @@ public function spellBlind():void {
 	}
 	else outputText(monster.capitalA + monster.short + " blinked!", false);	
 	outputText("\n\n", false);
-	flags[SPELLS_CAST]++;
+	flags[kFLAGS.SPELLS_CAST]++;
 	spellPerkUnlock();
 	statScreenRefresh();
 	enemyAI();
@@ -16350,7 +16350,7 @@ public function spellWhitefire():void {
 	fatigue(30,1);
 	if(monster.hasStatusAffect("Shell") >= 0) {
 		outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
-		flags[SPELLS_CAST]++;
+		flags[kFLAGS.SPELLS_CAST]++;
 		spellPerkUnlock();
 		enemyAI();
 		return;
@@ -16366,7 +16366,7 @@ public function spellWhitefire():void {
 		if(monster.hasPerk("Acid") < 0) monster.createPerk("Acid",0,0,0,0);
 	}
 	outputText("\n\n", false);
-	flags[SPELLS_CAST]++;
+	flags[kFLAGS.SPELLS_CAST]++;
 	spellPerkUnlock();
 	monster.HP -= temp;
 	statScreenRefresh();
@@ -16375,15 +16375,15 @@ public function spellWhitefire():void {
 }
 
 public function spellPerkUnlock():void {
-	if(flags[SPELLS_CAST] >= 5 && player.hasPerk("Spellcasting Affinity") < 0) {
+	if(flags[kFLAGS.SPELLS_CAST] >= 5 && player.hasPerk("Spellcasting Affinity") < 0) {
 		outputText("<b>You've become more comfortable with your spells, unlocking the Spellcasting Affinity perk and reducing fatigue cost of spells by 20%!</b>\n\n");
 		player.createPerk("Spellcasting Affinity",20,0,0,0);
 	}
-	if(flags[SPELLS_CAST] >= 15 && player.perkv1("Spellcasting Affinity") < 35) {
+	if(flags[kFLAGS.SPELLS_CAST] >= 15 && player.perkv1("Spellcasting Affinity") < 35) {
 		outputText("<b>You've become more comfortable with your spells, further reducing your spell costs by an additional 15%!</b>\n\n");
 		player.changePerkValue("Spellcasting Affinity",1,35);
 	}
-	if(flags[SPELLS_CAST] >= 45 && player.perkv1("Spellcasting Affinity") < 50) {
+	if(flags[kFLAGS.SPELLS_CAST] >= 45 && player.perkv1("Spellcasting Affinity") < 50) {
 		outputText("<b>You've become more comfortable with your spells, further reducing your spell costs by an additional 15%!</b>\n\n");
 		player.changePerkValue("Spellcasting Affinity",1,50);
 	}
@@ -16494,7 +16494,7 @@ public function kick():void {
 	//(bipedal hoof-kick) 
 	else if(player.lowerBody == LOWER_BODY_TYPE_HOOFED) outputText("You twist and lurch as you raise a leg and slam your hoof forward in a kick.  ", false);
 
-	if(flags[PC_FETISH] >= 3) {
+	if(flags[kFLAGS.PC_FETISH] >= 3) {
 		outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  Ceraph's piercings have made normal attack impossible!  Maybe you could try something else?\n\n", false);
 		enemyAI();
 		return;
@@ -17111,8 +17111,8 @@ public function runAway():void {
 		doNext(5000);
 		return;
 	}
-	if(flags[UNKNOWN_FLAG_NUMBER_00329] == 1 && (monster.short == "minotaur gang" || monster.short == "minotaur tribe")) {
-		flags[UNKNOWN_FLAG_NUMBER_00329] = 0;
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00329] == 1 && (monster.short == "minotaur gang" || monster.short == "minotaur tribe")) {
+		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00329] = 0;
 		//(Free run away) 
 		outputText("You slink away while the pack of brutes is arguing.  Once they finish that argument, they'll be sorely disappointed!", true);
 		gameState = 0;

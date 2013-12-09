@@ -459,7 +459,7 @@ public function willinglyBoneSatyr():void {
 	outputText("; making slow, short thrusts to ensure you've got all the seed that you need.  Panting, he grins at you from his prone position.  \"<i>Tell me then... did you like it?  Think that was enough baby batter to put a little satyr inside you?  Because if not I can go again.</i>\"  He grins confidently.");
 	
 	//(if male/genderless and 0 satyr children)
-	if(!player.hasVagina() && flags[SATYR_KIDS] == 0) {
+	if(!player.hasVagina() && flags[kFLAGS.SATYR_KIDS] == 0) {
 		outputText("\n\nYou stare at him blankly, then, as coherent thought returns to you, you ask how he can knock you up when you don't have a womb.");
 		outputText("\n\nHe winks at your disquieted expression.  \"<i>Satyr seed is so potent that we can impregnate anything, even ");
 		if(player.hasCock()) outputText("males");
@@ -532,7 +532,7 @@ public function satyrBirth(vag:Boolean):void {
 	if(player.cor < 33) outputText(" and more than a bit disgusted");
 	outputText(", you slip into a short, fitful sleep.");
 	//badabingbadaboom
-	flags[SATYR_KIDS]++;
+	flags[kFLAGS.SATYR_KIDS]++;
 }
 
 

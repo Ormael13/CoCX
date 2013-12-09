@@ -13,8 +13,8 @@
 //[Find Travelling Bazaar]
 public function findBazaar():void {
 	outputText("", true);
-	if(flags[BAZAAR_ENCOUNTERED] == 0) {
-		flags[BAZAAR_ENCOUNTERED]++;
+	if(flags[kFLAGS.BAZAAR_ENCOUNTERED] == 0) {
+		flags[kFLAGS.BAZAAR_ENCOUNTERED]++;
 		outputText("Warm, earthy breezes drift by as you explore the wind-blown grasses of the plains.  Though it seems you can see for miles, with the grasses subtly shifting between a few feet and over a dozen feet tall, it's impossible to tell what you'll stumble into next.  You trust your ears and your nose as much as your oft-blocked vision at this point, and before long you catch a whiff of blackened meat and aromatic spices.  There's some kind of camp not far away!\n\n", false);
 		
 		outputText("You raise your " + player.weaponName + " and cautiously creep through the towering vegetation, trying not to give your position away until you've ascertained just what type of people inhabit this camp.  Bright light flickers through the grass in front of you, and you part it to peek from between the blowing stalks.  There's a ring of brightly colored wagons set up here, with a tall, picketed fence erected around them.  Smoke curls up from the camp's center, twisting in the air like a viper in the grass.  Each of the wagons appears to be expanded, deployed into a small, self-contained structure.  Clearly this is some kind of traveling caravan or bazaar.\n\n", false);
@@ -45,9 +45,9 @@ public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 	outputText("", true);
 	var rat:String = "Rat";
 	var lilium:String = "Demon";
-	if(model.time.hours >= 15 && model.time.hours <= 20 && flags[CINNABAR_NUMBER_ENCOUNTERS] > 0) rat = "Cinnabar";
+	if(model.time.hours >= 15 && model.time.hours <= 20 && flags[kFLAGS.CINNABAR_NUMBER_ENCOUNTERS] > 0) rat = "Cinnabar";
 	//Make sure flags to allow entrance is set.
-	if(flags[BAZAAR_ENTERED] == 0) flags[BAZAAR_ENTERED] = 1;
+	if(flags[kFLAGS.BAZAAR_ENTERED] == 0) flags[kFLAGS.BAZAAR_ENTERED] = 1;
 	outputText("You breeze past the crimson guard and enter the interior of the Bizarre Bazaar.  The ground is hard-packed, trampled as if walked over by hundreds of hooves, paws, and feet.  A massive bonfire rages in the center of the clearing, crackling and popping as it consumes its fuel gluttonously.  Surrounding the blazing behemoth are tiny, wheeled food-carts with vendors hawking everything from sausage to something called a 'marshmallow'.  Huge wagons ring the clearing, many set up to display exotic wares or services.  You can see everything from dancing centaurs to demons browsing the wares, but it seems an uneasy truce of sorts reigns here.  Then again, maybe the demons have just not had the chance to openly attack this place yet.", false);
 	outputText("\n\nOne of the wagons proudly proclaims itself to be \"Greta's Garments,\" though both 'G's are emphasized with cute, stylized devil horns, and the 'S' is shaped in the form of a spaded, demonic tail.  Obviously it must some kind of clothing shop.");
 	var roxanne:Number = RoxanneAppearance();
@@ -57,7 +57,7 @@ public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 	var benoit:Number = 0;
 	var benoitT:String = "MarketStall";
 	if(model.time.hours >= 9 && model.time.hours <= 17) {
-		if(flags[TIMES_IN_BENOITS] == 0) outputText("\n\nYou notice a large market stall wedged between two wagons, swaddled in carpets and overflowing with all manner of objects.  On top of its looming fabric canopy is a wooden sign with the words \"<b>Geckos Garbidg</b>\" crudely scrawled upon them.  You wonder what that's all about.");
+		if(flags[kFLAGS.TIMES_IN_BENOITS] == 0) outputText("\n\nYou notice a large market stall wedged between two wagons, swaddled in carpets and overflowing with all manner of objects.  On top of its looming fabric canopy is a wooden sign with the words \"<b>Geckos Garbidg</b>\" crudely scrawled upon them.  You wonder what that's all about.");
 		else {
 			outputText("\n\n" + benoitMF("Benoit","Benoite") + " the basilisk's stall looks open for business.  You could go see what's on offer.");
 			benoitT = "Benoit";
@@ -66,20 +66,20 @@ public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 	}
 	tent = 3167;
 	fapAppearance();
-	if(flags[UNKNOWN_FLAG_NUMBER_00221] > 0) roxanneT = "Roxanne";
-	if(flags[UNKNOWN_FLAG_NUMBER_00267] > 0) lilium = "Lilium";
-	if(flags[UNKNOWN_FLAG_NUMBER_00292] == 0 && rand(4) == 0 && demons) {
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00221] > 0) roxanneT = "Roxanne";
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00267] > 0) lilium = "Lilium";
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00292] == 0 && rand(4) == 0 && demons) {
 		overHearDemonsAboutSyrena();
 		return;
 	}
-	if((flags[UNKNOWN_FLAG_NUMBER_00292] == 1 || flags[UNKNOWN_FLAG_NUMBER_00292] == 2) && demons && rand(10) == 0) {
+	if((flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00292] == 1 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00292] == 2) && demons && rand(10) == 0) {
 		//[Repeat Variant]
 		outputText("\n\n<b>The familiar sounds of the two griping demons can be heard nearby.  Do you listen in again?</b>", false);
 		demon = 3058;
 	}
 	var niamh:int = 0;
-	if(flags[NIAMH_STATUS] > 0 && flags[NIAMH_MOVED_OUT_COUNTER] == -1) {
-		if(flags[NIAMH_STATUS] == 2) outputText("\n\nThe sounds of voices raised in song and girlish laughter makes it obvious where Niamh is holding a perpetual party.");
+	if(flags[kFLAGS.NIAMH_STATUS] > 0 && flags[kFLAGS.NIAMH_MOVED_OUT_COUNTER] == -1) {
+		if(flags[kFLAGS.NIAMH_STATUS] == 2) outputText("\n\nThe sounds of voices raised in song and girlish laughter makes it obvious where Niamh is holding a perpetual party.");
 		niamh = 3537;
 	}
 	/*[S. Squeeze] [][][] [Leave]
@@ -111,8 +111,8 @@ public function theSlipperySqueeze():void {
 	var androgyny:Number = 0;
 	var milker:Number = 0;
 	//(First time desc:
-	if(flags[BAZAAR_SLIPPERY_SQUEEZE_VISITED] == 0) {
-		flags[BAZAAR_SLIPPERY_SQUEEZE_VISITED]++;
+	if(flags[kFLAGS.BAZAAR_SLIPPERY_SQUEEZE_VISITED] == 0) {
+		flags[kFLAGS.BAZAAR_SLIPPERY_SQUEEZE_VISITED]++;
 		outputText("A short, bunny-eared clerk leans on the counter, batting long eyelashes at you as you approach.  The rabbit is wearing a gauzy, sheer pink top and lots of make-up that accentuates her plump, red lips and curvy, cute features.  She doesn't have much in the chest department, but she's unmistakably cute.  You ask the little miss what kind of services this place offers, and she responds by covering her mouth with her hand and giggling girlishly.\n\n", false);
 		outputText("It takes her a few moments for her to get over her humor, but she brushes a hand through her silken hair and replies, \"<i>Oh, I'm sorry if I gave the wrong impression " + player.mf("mister","miss") + ", but I'm not a girl at all.  I'm definitely a male - I just love looking cute and fuckable!  You've got to admit I'm a pretty hot little package!</i>\"  To emphasize 'his' point, the bunny-boy twirls in place, and you notice that all he wears below the waist is a tight, package-hugging thong.  His tail twitches happily from exhibiting himself so, but he doesn't seem to be too aroused yet.\n\n", false);
 		outputText("Before you can comment on his odd mannerisms, he titters, \"<i>You're in 'The Slippery Squeeze', though some have called us 'The Happiest Ending' after a nice, HARD massage.</i>\"  The long-eared bunny-trap licks his gloss-coated lips enticingly before continuing. \"<i>We specialize in salty oil rubs and the complete release of all your tensions.  It's very therapeutic, both for the customer and the masseuse.  We specialize in creating our own, in-house massage lotions that are sure to make the tension ooze from your pores.</i>\"\n\n", false);
@@ -125,9 +125,9 @@ public function theSlipperySqueeze():void {
 		return;
 	}
 	//Cock Milker
-	else if(player.hasKeyItem("Cock Milker") < 0 && flags[JOEY_OFFERED_MILKER] == 0 && player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") < 0) {
+	else if(player.hasKeyItem("Cock Milker") < 0 && flags[kFLAGS.JOEY_OFFERED_MILKER] == 0 && player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") < 0) {
 		outputText("You notice Joey leaning on the counter, lost in thought.  The bunny boy frowns, troubled by something.  He jolts upright when he notices you approaching, his expression lifting into a polite grin.  \"<i>Hey, welcome!  Always nice to see a familiar face.  So, do you have some 'tension' that needs relieving?</i>\"  His eyes travel down to your crotch.  Shameless as ever but with a hesitant offer buried in his eyes...\n\n");
-		flags[JOEY_OFFERED_MILKER] = 1;
+		flags[kFLAGS.JOEY_OFFERED_MILKER] = 1;
 	}
 	//(Repeat visit: 
 	else {
@@ -141,7 +141,7 @@ public function theSlipperySqueeze():void {
 		}
 		//You could have Joey or Sara give you one, though it's obvious they plan to use spooge as massage oil. (Sara needs an introduction before she gets a mention and a menu entry -Z)
 	}
-	if(flags[JOEY_OFFERED_MILKER] > 0 && player.hasKeyItem("Cock Milker") < 0 && player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") < 0)
+	if(flags[kFLAGS.JOEY_OFFERED_MILKER] > 0 && player.hasKeyItem("Cock Milker") < 0 && player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") < 0)
 		milker = 3572;
 	//	[Joey] [Sara] [][] [Leave]
 	
@@ -369,7 +369,7 @@ public function joeysMassageWithEXTRASpooge():void {
 public function joeyBigBalls():void {
 	outputText("", true);
 	//(FIRST TIME) 
-	if(flags[UNKNOWN_FLAG_NUMBER_00348] == 0) {
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00348] == 0) {
 		outputText("Before you can even clear the door-frame, Joey the bunny-boy masseuse launches himself into you, his hands clutching wildly at your " + player.armorName + ".  You look down at him, and his wide, open eyes stare back with panic; namely, the look of someone in over their head with no idea how to save themselves.  Worse still, his trademark thong is bulging out obscenely, cum spilling down the sides while his immensely swollen gonads threaten to burst free of the garment's fraying threads.  Joey babbles, \"<i>Help!  I was testing the potions, and-and-and... I dunno what went wrong, b-b-but my balls are backing up faster than it dribbles out.  They feel like they're going to burst!!  Help meeeeee!</i>\"\n\n", false);
 		outputText("You push the panicked lagomorph back a pace so that you can breathe and appraise the situation.  Joey's legs are drenched, soaked with sloppy spooge.  His thong is on the verge of bursting.  Most notable, his bloated balls look more like cantaloupes than testicles, and these melons are ripening to an unseen Demeter's power, swelling ever-so-slightly larger with each passing second.  You estimate that there's precious little time.\n\n", false);
 		
@@ -387,18 +387,18 @@ public function joeyBigBalls():void {
 		//[SuckCumOut] [MasturbateOut]
 		simpleChoices("SuckCumOut",suckOffJoeysGardenHose,"MasturbateOut",joeyWanksItOut,"",0,"",0,"",0);
 	}
-	flags[UNKNOWN_FLAG_NUMBER_00348]++;	
+	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00348]++;	
 }
 
 //Masturbate It Out (work it out on the floor)
 public function joeyWanksItOut():void {
 	outputText("", true);
-	if(flags[UNKNOWN_FLAG_NUMBER_00349] == 0) {
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00349] == 0) {
 		outputText("You tell Joey that if he masturbates to erectness, his body should be able to shoot it out faster.  He smacks his forehead and runs into a back room, his thong disintegrating around his growing testes as he runs. The door slams, leaving you in peace.  A little freaked out, you head back to camp for now.", false);
 		doNext(13);
 	}
 	else eventParser(13);
-	flags[UNKNOWN_FLAG_NUMBER_00349]++;
+	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00349]++;
 }
 //Suck Cum Out (not your garden-variety hoes)
 public function suckOffJoeysGardenHose():void {
@@ -436,7 +436,7 @@ public function suckOffJoeysGardenHose():void {
 
 public function overHearDemonsAboutSyrena():void {
 	outputText("", true);
-	if(flags[UNKNOWN_FLAG_NUMBER_00292] == 0) {
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00292] == 0) {
 		outputText("A whisper of conversation catches your ear while you're wandering the bazaar, and overcome by curiosity, you veer towards it.\n\n", false);
 		outputText("As you're closing in on the voices, the dialogue grows clear enough to understand.\n\n", false);
 		outputText("\"<i>-old him if he doesn't finish this week's experiments, she's going drop him into a submission tank instead of the champion!</i>\" exclaims the first voice, sounding quite feminine.\n\n", false);
@@ -448,7 +448,7 @@ public function overHearDemonsAboutSyrena():void {
 		outputText("Well, that explains a lot.  The demons seem to have an active research department, though the one called Syrena does not seem to please her underlings very much.  Then again, you doubt any demonic servants are pleased with their bosses.  You can't wait to put a stop to their labors, but for now, there's nothing to do but use the bazaar or go home.\n\n", false);
 	}
 	//[Listen in repeat]
-	else if(flags[UNKNOWN_FLAG_NUMBER_00292] == 1) {
+	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00292] == 1) {
 		outputText("Just as before, you spot the collar-popping incubus and his lab coat-clad lover complaining about their boss.\n\n", false);
 		outputText("\"<i>-still sore!  I can't believe she did that to me!</i>\" groans the male.\n\n", false);
 		outputText("Smiling cruelly, the slick-pussied succubus says, \"<i>You deserved it.  Honestly, you turned in cum-stained reports to your boss, and you're surprised that she took your ass for a ride as punishment?  If you ask me, you planned all this.  Who do you think had to clean up the huge mess you left on the floor?</i>\"\n\n", false);
@@ -457,7 +457,7 @@ public function overHearDemonsAboutSyrena():void {
 		outputText("\"<i>Babe, you're sliming everywhere again.  Why don't we go blow off some steam?</i>\"  The two horny demons run off and disappear.\n\n", false);
 	}
 	//[Listen in Repeat 2]  
-	else if(flags[UNKNOWN_FLAG_NUMBER_00292] >= 2) {
+	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00292] >= 2) {
 		outputText("This time, the two chatty demons are seated near the fire, and the reason for their altered location seems clear.  The succubus' belly is gravid to an unusual degree, utterly packed with some kind of corrupted offspring.  She's rubbing both her hands over the stretched skin-dome and moaning in discomfort, the packed womb squirming beneath her touches.\n\n", false);
 		outputText("Meanwhile, the male incubus is knocking back a beer, grumbling, \"<i>Could you take it down a notch?  It isn't like this is the first time you've had to lug around a load of imps - don't be so melodramatic.</i>\"\n\n", false);
 		outputText("His pregnant companion growls and tugs at her undersized labcoat, failing to conceal the blueberry-colored bulge of her belly from him as she retorts, \"<i>You didn't have to get all these fucked into you, now did you?  Hell, she even shot me up with fertility-plus first!  It feels like there's two dozen of the little bastards packed in there!  I figure in another day or two I won't even be able to walk.</i>\"\n\n", false);
@@ -468,42 +468,42 @@ public function overHearDemonsAboutSyrena():void {
 	}
 	//enterTheBazaarAndMenu(false);
 	doNext(2855);
-	flags[UNKNOWN_FLAG_NUMBER_00292]++;
+	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00292]++;
 }
 
 //"Greta's Garments" - Interior
 public function gretasGarments():void {
 	clearOutput();
-	if(flags[FOUND_SOCKS] == 1 && flags[SOCK_COUNTER] == 0) {
+	if(flags[kFLAGS.FOUND_SOCKS] == 1 && flags[kFLAGS.SOCK_COUNTER] == 0) {
 		outputText("As you enter the store, you're surprised to see that a variety of products line the shelves.  Clothing of various materials, sizes and shapes lay folded on shelves and tables around the little shop.  A lone, surprisingly anatomically correct mannequin stands by the counter nude except for a thin lacy piece of fabric held taut over its wooden penis.");
 		outputText("\n\nThe demoness, Greta, spies you looking at the strange piece of clothing.  \"<i>Aha, you're back!</i>\" she says, throwing her arms wide, which has the unintentional but not unappreciated effect of making her enormous boobs jiggle.  \"<i>As you can see, I'm back in full production.  I finally got that pesky backlog taken care of... although this one shy customer, a quiet browser, if you will keeps me on my toes with new orders.  I swear he and his partner will be the death of me!</i>\"");
 		outputText("\n\nThe pink-skinned succubus clicks her tongue disapprovingly for a moment before turning her gaze back to you.  \"<i>Anyway, I've now got a full stock of delicious cock-socks for purchase.  Please, do look around and let me know if you find anything... suitable,</i>\" she giggles and turns her attention back to knitting.");
 		menu();
 		addButton(0,"Next",gretasGarments);
-		flags[FOUND_SOCKS] = 2;
+		flags[kFLAGS.FOUND_SOCKS] = 2;
 		return;
 	}
-	if(flags[FOUND_SOCKS] < 2) {
+	if(flags[kFLAGS.FOUND_SOCKS] < 2) {
 		outputText("The interior of Greta's Garments is surprisingly bare.  It's literally an empty wagon with a crude bench, a strongbox, a few looms of cloth, and some sewing tools.  However, that's not to say that the shop is empty.  Reclining behind the counter is a pink-skinned succubus, busy knitting what looks like a sock. Even with her slouching posture, you can see that her breasts are truly tremendous - mountainous mammaries that she actually rests her arms on while she knits.  She's completely nude, save for two thin black squares that stretch over her taut nipples (concealing absolutely nothing) and a soaked triangle that's even now threatening to disappear into her gushing crevice forever.");
 		outputText("\n\nNoticing your gaze, she sits up a little straighter and swivels on some kind of rotating chair to face you more directly.  Her jiggling breasts slowly bounce to a stop on the counter before her as she asks, \"<i>Can I interest you in something, honey?</i>\"");
 		outputText("\n\nThere doesn't seem to be anything for sale that you can see");
-		if(flags[OWN_MAIDEN_BIKINI] == 0) outputText(", except maybe a super-skimpy chain bikini that's chased with white and gold highlights");
+		if(flags[kFLAGS.OWN_MAIDEN_BIKINI] == 0) outputText(", except maybe a super-skimpy chain bikini that's chased with white and gold highlights");
 	}
 	else {
 		outputText("The interior of Greta's Garments is surprisingly colorful.  Though it started off as an empty wagon filled with loose bolts of cloth and sewing tools, vivid fabrics now cover all the shelves.  Curtains hang from the walls in every color of the rainbow, and a single wooden mannequin stands near the counter, its surprisingly anatomically correct cock covered in a thin, lacey cock-sock.  Sitting nearby, behind the counter, is a pink-skinned succubus, busy knitting what looks like another such sock. Even with her slouching posture, you can see that her breasts are truly tremendous - mountainous mammaries that she actually rests her arms on while she knits.  She's completely nude, save for two thin black squares that stretch over her taut nipples (concealing absolutely nothing) and a soaked triangle that's even now threatening to disappear into her gushing crevice forever.");
 		outputText("\n\nNoticing your gaze, she sits up a little straighter and swivels on some kind of rotating chair to face you more directly.  Her jiggling breasts slowly bounce to a stop on the counter before her as she asks, \"<i>Can I interest you in something, honey?</i>\"");
 		outputText("\n\nThere doesn't seem to be anything aside from cock-socks here");
-		if(flags[OWN_MAIDEN_BIKINI] == 0) outputText(", except maybe a super-skimpy chain bikini that's chased with white and gold highlights");
+		if(flags[kFLAGS.OWN_MAIDEN_BIKINI] == 0) outputText(", except maybe a super-skimpy chain bikini that's chased with white and gold highlights");
 	}
 	outputText(".");
 	stats(0,0,0,0,0,0,2,0,false);
 	menu();
-	if(flags[FOUND_SOCKS] == 0) addButton(4,"Low Stock",askGretaAboutInventory);
+	if(flags[kFLAGS.FOUND_SOCKS] == 0) addButton(4,"Low Stock",askGretaAboutInventory);
 	else {
-		if(flags[FOUND_SOCKS] == 2 && player.hasCock() && player.hasSockRoom()) addButton(1,"Browse Socks",browseDemSocksSon);
+		if(flags[kFLAGS.FOUND_SOCKS] == 2 && player.hasCock() && player.hasSockRoom()) addButton(1,"Browse Socks",browseDemSocksSon);
 		if(player.hasSock()) addButton(2,"Remove Sock",takeOffDatSock);
 	}
-	if(flags[OWN_MAIDEN_BIKINI] == 0) addButton(0,"Bikini",askGretaAboutZeBikini);
+	if(flags[kFLAGS.OWN_MAIDEN_BIKINI] == 0) addButton(0,"Bikini",askGretaAboutZeBikini);
 	addButton(9,"Back",enterTheBazaarAndMenu);
 	
 }
@@ -518,8 +518,8 @@ public function askGretaAboutInventory():void {
 	outputText("\n\nGreta laughs so hard that her tits quake, scattering her knitting needles away.  Her tail deftly catches one that rolls off the crude counter's edge, twirling it about before stuffing it into the tight bob she has atop her head.  \"<i>You think this is a sock!?  Ahahahahah!  No, dear " + player.mf("boy","girl") + ", this isn't an ordinary sock.  It's a cock-sock.  See the pattern here?  And the specially sewn gaps?  They let the wearer accentuate every sweet curve and throbbing vein on their erection, all while exposing the most sensitive bits for busy hands and hungry tongues, like mine.</i>\"  She lets her tongue slowly extend out from her mouth, inch after inch of wiggling, slick organ that slowly disappears into the valley between her tits.  She slowly retracts it with a giggle.");
 	outputText("\n\n\"<i>I've got back-orders on these things for miles, so you'll have to wait for me to get caught up before I consider crafting any for you.</i>\"");
 	//[Back]
-	if(flags[FOUND_SOCKS] == 0) flags[FOUND_SOCKS] = 1;
-	if(flags[SOCK_COUNTER] == 0) flags[SOCK_COUNTER] = 24;
+	if(flags[kFLAGS.FOUND_SOCKS] == 0) flags[kFLAGS.FOUND_SOCKS] = 1;
+	if(flags[kFLAGS.SOCK_COUNTER] == 0) flags[kFLAGS.SOCK_COUNTER] = 24;
 	menu();
 	addButton(4,"Back",gretasGarments);
 }
@@ -541,7 +541,7 @@ public function askGretaAboutZeBikini():void {
 //Buy Bikini
 public function buyGretasBikini():void {
 	clearOutput();
-	flags[OWN_MAIDEN_BIKINI] = 1;
+	flags[kFLAGS.OWN_MAIDEN_BIKINI] = 1;
 	player.gems -= 500;
 	statScreenRefresh();
 	outputText("Greta's eyes widen in surprise.  \"<i>Really?</i>\"");
@@ -574,7 +574,7 @@ public function browseDemSocksSon():void {
 public function woolCockSock():void {
 	clearOutput();
 	outputText("You spy a thick, woolen sock sitting on a counter and take it up to Greta.  \"<i>Ah, yes.  That's our basic sock.  Warm and cozy, great for those chilly nights.  That one's a mere 10 gems.  A steal, of course.</i>\"");
-	flags[SOCK_HOLDING] = "wool";
+	flags[kFLAGS.SOCK_HOLDING] = "wool";
 	cockSelectionMenu();
 }
 
@@ -583,7 +583,7 @@ public function alabasterCockSock():void {
 	clearOutput();
 	outputText("You pick up a one sock and inspect it.  It's a pure white cock sock, edged with delicate lace.  It almost appears to be some kind of bridal wear... although you don't know of any kind of bride that would wear something like this.  \"<i>Ah yeah, that's a popular one.  Some folks like the purity that it suggests... though I can't guess why.  It's 25 gems, though.</i>\"");
 	//[Buy] [Back]
-	flags[SOCK_HOLDING] = "alabaster";
+	flags[kFLAGS.SOCK_HOLDING] = "alabaster";
 	cockSelectionMenu();
 }
 
@@ -591,7 +591,7 @@ public function alabasterCockSock():void {
 public function cockringCockSock():void {
 	clearOutput();
 	outputText("You pick up one sock, surprised to find how heavy it is.  Large metal rings encircle the base of the smooth cock-sock, with one loose ring dangling down, no doubt intending to wrap around the base of your ball sack.  \"<i>Oh yes, that's a fun one. Those rings will constantly constrict your manhood, so you'll always be hard and ready to go.</i>\" She giggles and waves a hand, \"<i>That's actually a very popular sock... so many demons come in to get these for their harems.  It's 100 gems.</i>\"");
-	flags[SOCK_HOLDING] = "cockring";
+	flags[kFLAGS.SOCK_HOLDING] = "cockring";
 	cockSelectionMenu();
 }
 	
@@ -599,7 +599,7 @@ public function cockringCockSock():void {
 public function viridianCockSock():void {
 	clearOutput();
 	outputText("You pick up one sock and inspect it.  The whole thing is a rich, natural green color and completely lace, accentuated with vivid red roses.  Just touching it makes you feel healthier and more alive.  \"<i>Ahh, that's a fun one right there.  It hastens your natural healing.  Very useful, and pretty, too, if I say so myself.  It's 1,000 gems.</i>\"  You pale at the price, but Greta waves a hand, \"<i>Trust me, honey, it's worth it.</i>\"");
-	flags[SOCK_HOLDING] = "viridian";
+	flags[kFLAGS.SOCK_HOLDING] = "viridian";
 	cockSelectionMenu();
 }
 
@@ -607,7 +607,7 @@ public function viridianCockSock():void {
 public function scarletCockSocK():void {
 	clearOutput();
 	outputText("You pick up one sock and inspect it.  It's an incredible plush red, and made of soft satin and detailed with red lace.  It seems smaller than the other socks you've seen, and you can't help but wonder how tight it will feel on your dick.  \"<i>Mmm, that one's special.  It increases the blood flow to your little dick, enabling it to grow a lot faster.  This one goes quick.  Everyone wants to be a minotaur!  It's 250 gems.</i>\"");
-	flags[SOCK_HOLDING] = "scarlet";
+	flags[kFLAGS.SOCK_HOLDING] = "scarlet";
 	cockSelectionMenu();
 }
 
@@ -615,14 +615,14 @@ public function scarletCockSocK():void {
 public function cobaltCockSock():void {
 	clearOutput();
 	outputText("You pick up one sock and inspect it.  It's a cool, soft blue color, made from satin and detailed in light blue lace.  It seems extremely small, compared to the other socks in the shop, and you can't help but think it must be extremely uncomfortable to wear.  \"<i>Oho, that's a fun one right there.  The cute little femboys go crazy for it.  As you can see, it's a bit small, and it will actually inhibit your cock from growing too big.  It's 250 gems.</i>\"");
-	flags[SOCK_HOLDING] = "cobalt";
+	flags[kFLAGS.SOCK_HOLDING] = "cobalt";
 	cockSelectionMenu();
 }
 //Gilded Cock-sock
 public function gildedCockSock():void {
 	clearOutput();
 	outputText("You pick up one sock and inspect it, surprised to see how rigid and heavy it is.  Unlike the others in the shop, this one seems to be made of a cool golden metallic material.  Glittering gems are embedded into the top side, while the bottom is cinched closed with leather cords.  \"<i>You've got a good eye,</i>\" Greta says, her eyes twinkling greedily.  \"<i>With that bad boy, you can actually convert some of your... sweet cum into even sweeter gems.  Of course, with that kind of awesome power, you've got to understand that it'll cost you 3,000 gems.</i>\"");
-	flags[SOCK_HOLDING] = "gilded";
+	flags[kFLAGS.SOCK_HOLDING] = "gilded";
 	cockSelectionMenu();
 }
 
@@ -631,14 +631,14 @@ public function amaranthineCockSock():void {
 	clearOutput();
 	outputText("You pick up one sock and inspect it.  It's a silky smooth lavish purple color, with fine lace depicting some kind of six-legged wolf-like creature.  Overall, though, the sock is an odd shape, seemingly intended for someone with a knot AND some kind of equine-like flare.  Greta's eyebrows raise as she sees the item you're holding,  \"<i>Ohh, that one.  That, honey, was an experiment.  I took some magic channeled down from the stars themselves and infused it into a new sock, and that was the result.  Truth be told, I'm not entirely sure what it does, but I'll sell it to you for 1,000 gems.</i>\"");
 	//Increase fertility by a small amount
-	flags[SOCK_HOLDING] = "amaranthine";
+	flags[kFLAGS.SOCK_HOLDING] = "amaranthine";
 	cockSelectionMenu();
 }
 
 
 public function cockSelectionMenu():void {
 	menu();
-	if((flags[SOCK_HOLDING] == "amaranthine" && player.gems >= 1000) || (flags[SOCK_HOLDING] == "gilded" && player.gems >= 3000) || (flags[SOCK_HOLDING] == "cobalt" && player.gems >= 250) || (flags[SOCK_HOLDING] == "scarlet" && player.gems >= 250) || (flags[SOCK_HOLDING] == "viridian" && player.gems >= 1000) || (flags[SOCK_HOLDING] == "cockring" && player.gems >= 100) || (flags[SOCK_HOLDING] == "alabaster" && player.gems >= 25) || (flags[SOCK_HOLDING] == "wool" && player.gems >= 10)) addButton(0,"Buy",pickACockForSock);
+	if((flags[kFLAGS.SOCK_HOLDING] == "amaranthine" && player.gems >= 1000) || (flags[kFLAGS.SOCK_HOLDING] == "gilded" && player.gems >= 3000) || (flags[kFLAGS.SOCK_HOLDING] == "cobalt" && player.gems >= 250) || (flags[kFLAGS.SOCK_HOLDING] == "scarlet" && player.gems >= 250) || (flags[kFLAGS.SOCK_HOLDING] == "viridian" && player.gems >= 1000) || (flags[kFLAGS.SOCK_HOLDING] == "cockring" && player.gems >= 100) || (flags[kFLAGS.SOCK_HOLDING] == "alabaster" && player.gems >= 25) || (flags[kFLAGS.SOCK_HOLDING] == "wool" && player.gems >= 10)) addButton(0,"Buy",pickACockForSock);
 	else outputText("\n\n<b>You can't afford that.</b>");
 	addButton(4,"Back",browseDemSocksSon);
 }
@@ -667,9 +667,9 @@ public function pickACockForSock():void {
 
 public function cockSockTarget(target:int):void {
 	clearOutput();
-	flags[SOCKS_BOUGHT]++;
+	flags[kFLAGS.SOCKS_BOUGHT]++;
 	//Putting it On - First Time
-	if(flags[SOCKS_BOUGHT] == 1) {
+	if(flags[kFLAGS.SOCKS_BOUGHT] == 1) {
 		outputText("The gravity-defying succubus gestures towards your crotch.  \"<i>Well, come on then, let's see the tasty cock getting all dressed up,</i>\" she says, her voice becoming a deep purr.  You raise your eyebrow, questioning why she needs to see that.");
 		outputText("\n\n\"<i>Oh, don't you know?  These aren't your ordinary garments,</i>\" she cackles lightly.  \"<i>These are quite special cock-socks.  They won't slip or slide.  No matter what, they'll remain in place until you want me to take it off.</i>\"");
 		outputText("\n\nYou balk a little.  These things are going to be permanently attached to you?");
@@ -689,31 +689,31 @@ public function cockSockTarget(target:int):void {
 //Yes
 public function yesPutDatSockOnMe(target:int):void {
 	clearOutput();
-	if(flags[SOCK_HOLDING] == "amaranthine") player.gems -= 1000;
-	if(flags[SOCK_HOLDING] == "gilded") {
+	if(flags[kFLAGS.SOCK_HOLDING] == "amaranthine") player.gems -= 1000;
+	if(flags[kFLAGS.SOCK_HOLDING] == "gilded") {
 		if(player.hasPerk("Midas Cock") < 0) player.createPerk("Midas Cock",0,0,0,0);
 		player.gems -= 3000;
 	}
-	if(flags[SOCK_HOLDING] == "cobalt") {
+	if(flags[kFLAGS.SOCK_HOLDING] == "cobalt") {
 		player.gems -= 250;
 		if(player.hasPerk("Phallic Restraint") < 0) player.createPerk("Phallic Restraint",0,0,0,0);
 	}
-	if(flags[SOCK_HOLDING] == "scarlet") {
+	if(flags[kFLAGS.SOCK_HOLDING] == "scarlet") {
 		if(player.hasPerk("Phallic Potential") < 0) player.createPerk("Phallic Potential",0,0,0,0);
 		player.gems -= 250;
 	}
-	if(flags[SOCK_HOLDING] == "viridian") {
+	if(flags[kFLAGS.SOCK_HOLDING] == "viridian") {
 		if(player.hasPerk("Lusty Regeneration") < 0) player.createPerk("Lusty Regeneration",0,0,0,0);
 		player.gems -= 1000;
 	}
-	if(flags[SOCK_HOLDING] == "cockring") {
+	if(flags[kFLAGS.SOCK_HOLDING] == "cockring") {
 		player.gems -= 100;
 		if(player.hasPerk("Pent Up") < 0) player.createPerk("Pent Up",10,0,0,0);
 		else player.addPerkValue("Pent Up",1,5);
 	}
-	if(flags[SOCK_HOLDING] == "alabaster") player.gems -= 25;
-	if(flags[SOCK_HOLDING] == "wool") player.gems -= 10;
-	player.cocks[target].sock = flags[SOCK_HOLDING];
+	if(flags[kFLAGS.SOCK_HOLDING] == "alabaster") player.gems -= 25;
+	if(flags[kFLAGS.SOCK_HOLDING] == "wool") player.gems -= 10;
+	player.cocks[target].sock = flags[kFLAGS.SOCK_HOLDING];
 	statScreenRefresh();
 	outputText("You nod to the busty succubus and strip off your [armor], revealing your naked body.  Greta's eyes light up as she looks over your body with barely-contained lust.  Finally her eyes settle onto your " + cockDescript(target) + ", and she licks her lips.  With one hand she lifts your limp cock up, giving it a pleasant little stroke.");
 	
@@ -728,7 +728,7 @@ public function yesPutDatSockOnMe(target:int):void {
 
 public function noCockSock():void {
 	clearOutput();
-	flags[SOCK_HOLDING] = 0;
+	flags[kFLAGS.SOCK_HOLDING] = 0;
 	outputText("You shake your head.  Greta sighs, \"<i>Figures.  Here's your money back, honey.  Come back when you change your mind.</i>\"");
 	//(Back to menu)
 	menu();

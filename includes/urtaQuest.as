@@ -34,10 +34,10 @@ public var urtaQItems4:itemSlotClass = new itemSlotClass();
 public var urtaQItems5:itemSlotClass = new itemSlotClass();
 
 public function urtaBusy():Boolean {
-	return (flags[EDRYN_BIRF_COUNTDOWN] > 0 || flags[URTA_QUEST_STATUS] == -1);
+	return (flags[kFLAGS.EDRYN_BIRF_COUNTDOWN] > 0 || flags[kFLAGS.URTA_QUEST_STATUS] == -1);
 }
 public function isUrta():Boolean {
-	if(flags[URTA_QUEST_STATUS] > 0 && flags[URTA_QUEST_STATUS] < 1) {
+	if(flags[kFLAGS.URTA_QUEST_STATUS] > 0 && flags[kFLAGS.URTA_QUEST_STATUS] < 1) {
 		if(player.short == "Urta") {
 			if(player.hasCock()) {
 				if(player.cocks[0].cockLength == 20 && player.cocks[0].cockThickness == 3) {
@@ -78,7 +78,7 @@ public function talkWithUrtaAboutFamFam():void {
 	
 	outputText("\n\nShe sighs a final time, then smiles sadly at you.  \"<i>Sorry, " + player.short + ", I'm rambling, aren't I?  I just wanted to let you know the truth about me, and why I am... me.</i>\"  She falls into an uneasy silence, awaiting your reaction to her revelations.");
 	
-	flags[URTA_QUEST_STATUS] = .5;
+	flags[kFLAGS.URTA_QUEST_STATUS] = .5;
 	//Insert PC options here
 	//[Comfort Her] [Yeesh][Who Cares]
 	menu();
@@ -101,7 +101,7 @@ public function comfortUrtaAfterFamFamTalk():void {
 	
 	outputText("\n\nNodding, you give the girl a smile as you stand up to depart.  Her eyes twinkle happily as she watches you go.");
 	urtaLove(5);
-	flags[URTA_COMFORTABLE_WITH_OWN_BODY] += 3;
+	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] += 3;
 	doNext(13);
 }
 
@@ -120,7 +120,7 @@ public function yeeshUrtaAfterFamFamTalk():void {
 	outputText("\n\nUrta nods slowly and throws back a swig from her drink.  \"<i>I will.</i>\"");
 	outputText("\n\nGood bitch...");
 	urtaLove(1);
-	flags[URTA_COMFORTABLE_WITH_OWN_BODY] += 1;
+	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] += 1;
 	doNext(13);
 }
 	
@@ -133,8 +133,8 @@ public function whoCaresUrtaAfterFamFamTalk():void {
 	outputText("\n\nUrta growls, \"<i>You asked!</i>\"");
 	outputText("\n\nYou tell her that you asked about her parents, not a summary of every misfortune to ever befall her.  Then, you leave, sending a barmaid her way with a drink.  The whiny cunt will likely need it to get over her bruised pride.  You doubt it will stop her from jumping your bones the next time you visit.  Her libido's too high for her to resist.");
 	urtaLove(-10);
-	flags[URTA_COMFORTABLE_WITH_OWN_BODY] -= 5;
-	if(flags[URTA_COMFORTABLE_WITH_OWN_BODY] < 1) flags[URTA_COMFORTABLE_WITH_OWN_BODY] = 1;
+	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] -= 5;
+	if(flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] < 1) flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] = 1;
 	doNext(13);
 }
 
@@ -269,7 +269,7 @@ public function startUrtaQuest():void {
 	applyArmorStats("leather armor segments",false);
 	//DISPLAY SOME SHIT YO
 	clearOutput();
-	flags[URTA_QUEST_STATUS] = .75;
+	flags[kFLAGS.URTA_QUEST_STATUS] = .75;
 	outputText("<b>You are Urta, a hermaphroditic fox-morph.</b>");
 	outputText("\n\nYou have a vulpine face, fox-like ears atop your head, a bushy fox's tail on your ass, and paw-footed fox-like legs.  Your eyes are a rich green and your lips are a glossy black.");
 	
@@ -364,7 +364,7 @@ public function towerOfTheCovenantII():void {
 	
 	// The description of the getHelBangedAsUrta scene seems to specify that it should only be available to players 
 	// at fuckbuddy status with Firebutt.
-	if (flags[HEL_FUCKBUDDY] > 0)
+	if (flags[kFLAGS.HEL_FUCKBUDDY] > 0)
 	{
 		addButton(0, "Stop4ADrink", getHelBangedAsUrta);
 	}
@@ -397,12 +397,12 @@ public function getHelBangedAsUrta():void {
 	outputText("\n\nMai blushes a bright scarlet, causing her sister and the redhead to burst out laughing. \"<i>Oh, hey wait! I recognize you!</i>\" Helia says with a snap of her fingers. \"<i>" + player2.short + "'s mentioned you! You're Urta, right? Captain of the Guard Urta?</i>\"");
 	
 	outputText("\n\nShe knows " + player2.short + "? You quickly nod as your mind quickly reaches its inevitable conclusions. Well, you suppose you can't judge... you haven't exactly been monogamous, either, after all. It isn't fair to expect that from " + player2.mf("him","her") + ", is it?  Still, you shift awkwardly in your seat, nursing your new drink as the scaly warrior girl starts recounting the fights she and " + player2.short + " used to have");
-	if(flags[HEL_HARPY_QUEEN_DEFEATED] > 0) outputText(", and even how they worked together to bring down an evil sorceress and save her father. Your heart swells with pride as she recounts " + player2.short + " doing so a noble thing, and for a moment you know you made the right pick in a lover..");
+	if(flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] > 0) outputText(", and even how they worked together to bring down an evil sorceress and save her father. Your heart swells with pride as she recounts " + player2.short + " doing so a noble thing, and for a moment you know you made the right pick in a lover..");
 	outputText(".  You sit and listen for a long few minutes, sipping at the beer until the liquid courage starts to work its wonders, giving you a little tingle... and helping to open you up, too.  Soon, you're drawn into the conversation, joking and teasing with the other girls as if you'd been friends for ages.");
 	
 	outputText("\n\nEventually, though, a particularly lewd joke from the salamander causes your old \"<i>friend</i>\" to remind you of your quest, hitting the underside of the table with an audible THUMP! that shocks the others. They look at you with questioning eyes.... It's time to either hit the road or get some much-needed relief, because this boner isn't going anywhere without your help.");
 	stats(0,0,0,0,0,0,20,0,false);
-	flags[URTA_MET_HEL] = 1;
+	flags[kFLAGS.URTA_MET_HEL] = 1;
 	//[Head Out] [Get \"<i>Help</i>\"]
 	menu();
 	addButton(0,"Head Out",leaveB4HelFucksUrta);
@@ -466,7 +466,7 @@ public function fuckHelAndKitsunesAsUrta():void {
 	outputText("\n\nYou finally come down from your orgasmic high minutes later, surrounded by enough excess fox-cum to fill a tub.  With a little help from the salamander, now walking bow-legged, you pull yourself into the bed so that Miko and Mai can deflate their thick knots inside you, lying to either side as your horsecock dribbles the last of its blank seed.  Hel, meanwhile, comes to sit at the head of the bed, letting you rest your head in her well-abused lap, bits of your own spunk sticking to your hair - but it's worth it to feel the warmth emanating from her fiery crotch, to feel her long, clawed fingers lovingly stroking your hair until your drift off into a restful sleep, a lovely fox in either arm, and a fearsome salamander kissing you goodnight.");
 	
 	outputText("\n\nYou wake alone, and as the sun rises, you realize it's time to leave the city on your quest...");
-	flags[URTA_FUCKED_HEL] = 1;
+	flags[kFLAGS.URTA_FUCKED_HEL] = 1;
 	stats(0,0,0,0,0,0,-100,0);
 	model.time.days++;
 	//Advance to next day, jump to leaving text
@@ -482,9 +482,9 @@ public function visitPCPreUrtaQuest(truth:Boolean):void {
 	outputText("\n\nThe sun has set by the time you get there, but the darkness conceals your movements thanks to your natural fur color.  ");
 	if(player.hasStatusAffect("JojoNightWatch") >= 0 && player.hasStatusAffect("PureCampJojo") >= 0)
 		outputText("You easily sneak past a mouse monk.  He's looking towards the sky mostly, perhaps watching for imps.  ");
-	if(flags[ANEMONE_WATCH] > 0 && flags[ANEMONE_KID] > 0) 
-		outputText("A confused-looking anemone with a " + itemLongName(flags[ANEMONE_WEAPON]) + " nearly sees you, but you duck around a rock and escape her notice.  ");
-	if(flags[FUCK_FLOWER_LEVEL] >= 4 && flags[FUCK_FLOWER_KILLED] == 0 && flags[HOLLI_DEFENSE_ON] > 0) 
+	if(flags[kFLAGS.ANEMONE_WATCH] > 0 && flags[kFLAGS.ANEMONE_KID] > 0) 
+		outputText("A confused-looking anemone with a " + itemLongName(flags[kFLAGS.ANEMONE_WEAPON]) + " nearly sees you, but you duck around a rock and escape her notice.  ");
+	if(flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.HOLLI_DEFENSE_ON] > 0) 
 		outputText("A dangling tentacle nearly hits you in the dark.  You roll aside at the last moment, looking up to see dozens of the things idly dangling around.  When did this camp get such a corrupt tree in it?  You suppose it must have its uses in defending against foes from the sky...  ");
 	if(companionsCount() > 2) outputText("There are a number of people in the camp, but you avoid them as you head towards " + player2.short + "'s bunk.  ");
 	outputText("The camp looks pretty nice actually.  Living out here must have given " + player2.mf("him","her") + " plenty of time to improve it.");
@@ -500,12 +500,12 @@ public function visitPCPreUrtaQuest(truth:Boolean):void {
 		else if(player2.cor < 66) outputText(player2.mf("he","she") + " nods understandingly, not surprised that you have to handle this quest alone.  The two of you are alike in that way - each with their own burden to bear.");
 		else outputText(player2.mf("he","she") + " nods dismissively, trusting you to handle it alone you suppose.  " + player2.short + " always was hard like that, even though " + player2.mf("he","she") + " clearly likes you.");
 		outputText("  You hold on to " + player2.mf("him","her") + ", for comfort, dreading the long day ahead.  " + player2.mf("He","She") + " pats your back comfortingly as you cry, and when you break from the hug, " + player2.mf("he","she") + "'s looking at you expectantly.");
-		if(flags[SLEEP_WITH] != "" && flags[SLEEP_WITH] != 0) outputText("  " + player2.short + " suggests the two of you move off, so as not to wake " + flags[SLEEP_WITH] + " in the night.");
+		if(flags[kFLAGS.SLEEP_WITH] != "" && flags[kFLAGS.SLEEP_WITH] != 0) outputText("  " + player2.short + " suggests the two of you move off, so as not to wake " + flags[kFLAGS.SLEEP_WITH] + " in the night.");
 	}
 	//{LIE}
 	else {
 		outputText("\n\nYou sit down across from " + player2.mf("him","her") + ", helping " + player2.mf("him","her") + " up to a sitting position as you tell " + player2.mf("him","her") + " that you just wanted to sneak away for a little while, to be with " + player2.mf("him","her") + " as proper lovers, for the night.  " + player2.short + " smiles a little at that, looking up at you expectantly.  Since you came all this way, you must have something in mind for how you plan to stay the night with " + player2.mf("him","her") + ".");
-		if(flags[SLEEP_WITH] != "" && flags[SLEEP_WITH] != 0) outputText("  " + player2.short + " suggests the two of you move off, so as not to wake " + flags[SLEEP_WITH] + " in the night.");
+		if(flags[kFLAGS.SLEEP_WITH] != "" && flags[kFLAGS.SLEEP_WITH] != 0) outputText("  " + player2.short + " suggests the two of you move off, so as not to wake " + flags[kFLAGS.SLEEP_WITH] + " in the night.");
 	}
 	//[SEX OPTIONS GO HURRRR]
 	//Snuggle, put cock in cocked PC ass, ride PC cock vaginally, Fuck Girlvag with yer dick, maybe a sixtynine?
@@ -1008,7 +1008,7 @@ public function loseToGoblinsPartIVAsUrta():void {
 	outputText("\nSweaty, plastered in cum, and laying in a puddle of spent horsy-foxy seed, you hold onto the curvy spunk-stuffed body of your voluptuous, goblin wife.  The saffron-skinned woman lets out soft pleasured coos as she clings to you.  The poor stuffed girl completely fucked herself out after the seemingly endless sexfest. In the heat of your passionate romp, your lover starts another round of slow, sensuous cock worship, slowly stroking and licking every inch of your musky stallion and huge, breeder balls.  The soaking-wet girl sucks and stimulates your aching, well-fucked stallion-prick. Your fat bloated beast stays sandwiched between her mountainous mammaries until you cum for what very well could have been the fifth or sixth time.  Even after so many messy, sperm-squirting orgasms, you still unleash a veritable torrent of spunk so thick it paints your lover's body pure white with your new virility.  With her so drenched in sweat and cum it's hard to see the goblin underneath, but you know your faithful, loving wife doesn't mind.  In fact, it seems that getting drenched in your spunk just turns her on even more.");
 	
 	outputText("\n\nWiping a great, thick glob from her face, your buttercup goblin snuggles her cum-stuffed belly against yours before smiling at you, her hands sliding around you before planting a kiss on your lips.  \"<i>Mmmm... I love you, my wonderful virile stud,</i>\" she purrs to you before reaching down to fondle your rising mustang once again.  Despite her dubious intentions and having brainwashed you, it seems you found the love and acceptance you always wanted.  No doubt you will be the father of a great many daughters in the months to come.   If only you could remember your old lover's name...");
-	flags[URTA_GOBLIN_SLAVE] = 1;
+	flags[kFLAGS.URTA_GOBLIN_SLAVE] = 1;
 	menu();
 	addButton(0,"Next",urtaGameOver);
 }
@@ -1017,7 +1017,7 @@ public function urtaGameOver():void {
 	clearOutput();
 	outputText("<b>Urta has been lost to her fate...  Meanwhile, back at camp...</b>");
 	gameState = 0;
-	flags[URTA_QUEST_STATUS] = -1;
+	flags[kFLAGS.URTA_QUEST_STATUS] = -1;
 	model.time.days++;
 	resetToPC();
 	model.time.hours = 6;
@@ -1658,7 +1658,7 @@ public function fuckSiriusRadioII():void {
 //Urta Loses*
 public function urtaLosesToSirriusSnakeRadio():void {
 	clearOutput();
-	flags[URTA_BECOMES_SNAKE_SLAVE] = 1;
+	flags[kFLAGS.URTA_BECOMES_SNAKE_SLAVE] = 1;
 	//Loss by HP:
 	if(player.HP < 1) outputText("You cry out in pain as the bruises and buffets you've taken overwhelm you.  You struggle to stay upright, but to no avail; your injured body has reached its limits and you collapse, helpless and at the mercy of your assailant.");
 	//Loss by Lust:
@@ -1824,7 +1824,7 @@ public function winRapeHyenaPrincess():void {
 //[Succubus Milk] (Or, how we CAN have nice things with a little persistence!) 
 public function useSuccubiMilkOnGnollPrincesses():void {
 	clearOutput();
-	flags[SUCCUBI_MILKED_GNOLL_PRINCESS] = 1;
+	flags[kFLAGS.SUCCUBI_MILKED_GNOLL_PRINCESS] = 1;
 	outputText("As you wonder what to do with the defeated furry bitch, you manage to suppress your lusty urges long enough to pull the single milk-white vial off your belt, one of the most common illegal imports you've had to bust in all your years in the Tel'Adre Guard: Succubi's Milk.  Part of you shivers at what you're about to do, but another part of you is very... very excited.  Knowing full well what this potent concoction does to the body, you decide you'd like a plumper, juicier pair of tits to play with when you fuck her.  Pinning the slut down with your foot-pad, you pop the cork.  The smell immediately assaults your senses, sending a shudder up your spine.  Grinning, you hold it up to your nose and give it a long, drawn-out sniff, savoring the nearly alcoholic odor.  The gnoll's breath catches in her throat. She desperately tries to scramble away, but you catch her by the snout, yanking her up into a sitting position.");
 	
 	outputText("\n\n\"<i>Let me go, bitch,</i>\" the gnoll alpha growls around your fist, her words muffled until you finally let her snout go - only to fill it with milk.  She gags and tries to spit it out, but you hold her mouth shut, forcing her to suck it all down or drown in the milk.  By the time she's finished the bottle, her body is already changing: you can see a thin trickle of femcum sloshing down her furry thighs, her already-hefty breasts straining at the fabric of her dress until it tears, letting her tits grow freely under the compulsion of the magical milk.  And grow they do!  The gnoll's bosom fills out nicely, expanding a whole cup size until her tits press against your own.  As her bosom finishes growing, the thick layer of fur on them begins to fall off, revealing the darkly tanned skin underneath - and a pair of midnight black nipples, stiffening at your teasing touch.  Hair falls off all over her body, leaving a bare, flat stomach, smooth arms down to the elbows, and silky, nude thighs to her knees, leaving her with no fur except for enough to simulate a pair of fuck-me boots and long gloves.  Between her now bare thighs sits her thick clit-cock, stiff and ready thanks to the potent elixir.  Her butt gets the same treatment as her rack, filling out until it tears at her dress, revealing a brand new gropable butt for you to savor. Finally, her muzzle disappears with her fur, retracting into her face until nothing of it remains but a human-like nose and a pair of black-painted lips, agape in horror at what you've done.");
@@ -1856,7 +1856,7 @@ public function useSuccubiMilkOnGnollPrincesses():void {
 	outputText("\n\nHer first time? She's a... virgin?");
 	
 	outputText("\n\nWell, as they say, she'll still TECHNICALLY be one after you're done with her!  You give her ass another harsh slap, making the gnoll squeal as you force your giant wang into her asshole.  She's incredibly tight, and her anal muscles desperately try to repel your advance.  But you persist, lavishing the slut with thick dollops of pre that help speed and ease your entry, lubricating her anus until after a few minutes of short, jackhammering thrusts she's as wet and sloppy as ");
-	if(flags[URTA_FUCKED_HEL] == 1) outputText("that salamander slut's cunt");
+	if(flags[kFLAGS.URTA_FUCKED_HEL] == 1) outputText("that salamander slut's cunt");
 	else outputText("a mino-cum addicted whore's sodden cunt");
 	outputText(".  As you start to pick up the pace, bucking your hips into the thick cushion of her rump, the gnoll princess starts mewling pathetically, panting and moaning like a little slut.");
 	
@@ -1896,7 +1896,7 @@ public function useSuccubiMilkOnGnollPrincesses():void {
 //Lose Via Lust (Bonus Scene in Intro!)* ✓ 
 public function loseToGnollPrincessAndGetGangBanged():void {
 	clearOutput();
-	flags[URTA_TAKEN_BY_GNOLLS] = 1;
+	flags[kFLAGS.URTA_TAKEN_BY_GNOLLS] = 1;
 	if(player.lust > 99) {
 		outputText("Sinking to your knees, utterly overwhelmed by lust, you gaze up the clit-cocked amazon, licking your chops. She responds by disdainfully pushing you down with one of her soft, padded paws.  \"<i>Did you really think you could trespass in my mother's territory and go unpunished?</i>\"");
 		
@@ -2159,8 +2159,8 @@ public function urtaFinishesWithBigOrange():void {
 	outputText("\n\nTwo mouths drop back onto your sore breasts and begin to suckle your abused nipples.  Even though your milk has long been exhausted, they try, holding on to your shaking, super-fucked body.  The aphrodisiacs inside you morph the pain and pleasure into a syrup of ecstasy for your brain to drown in, and as the swollen beast inside begins to erupt, you climax.   The cilia girding your maleness go crazy, which causes your jism to wrench free of your body with such force that your [hips] pop from your straining muscles and your horse-cock feels like it's about to explode.  The interior floods with your dick-milk, traveling away through the vine in fat bulges.  Again and again you pulse, filling the vine with the same orgasmic squelching that the other tentacle uses to fill your ruined hole.  All around you, the assembled penises spray their hot loads.  Seedy spunk slops onto your tits, into your pits, over your elbows, onto your knees, and drenches your feet.  Your whole body is a dripping, jizz-drenched wreck.  Your cunny is spasming, clenching, and sucking.  Your womb is inflating, nearly as big as the rest of you.   You scream as the tentacle withdraws from your mouth, suddenly muffled when it splatters you with a fat deposit of alabaster cream.");
 	
 	outputText("\n\nYou black out from the onslaught of pleasure - it's too much for your mere mortal brain to handle, and your mind shuts down.  It doesn't stop you from dreaming of sex for hours more, or from waking up a dripping wreck in the morning, soaked with vine-sperm and drained dry.  Amazingly, your vagina (and hips) have closed back up.  Guiltily, you press your digits into your vagina.  It hugs them tightly, and you sigh in relief.  You look down to pull them out, and realize you've fisted yourself up to your elbow.  Shit.  This won't be easy to explain to " + player2.short + ", but maybe " + player2.mf("he","she") + " will like having someone who can combine tightness and an accommodating capacity.");
-	flags[URTA_TENTACLE_GAPED] = 1;
-	flags[URTA_TENTACLE_RAPED] = 1;
+	flags[kFLAGS.URTA_TENTACLE_GAPED] = 1;
+	flags[kFLAGS.URTA_TENTACLE_RAPED] = 1;
 	stats(0,0,0,0,1,2,-100,0);
 	menu();
 	addButton(0,"Next",introSuccubiAndMinotaur);
@@ -2173,7 +2173,7 @@ public function urtaFinishesWithTentacles():void {
 	
 	outputText("\n\nYou tug two mouths back onto your sore breasts and press them onto your abused nipples.  They suck at once, even though your milk has long been exhausted.  The aphrodisiacs inside you morph the pain and pleasure into a syrup of ecstasy for your brain to drown in, and as tentacle after tentacle begins to erupt, you climax.   The cilia girding your maleness go crazy, which causes your jism to wrench free of your body with such force that your [hips] pop from your straining muscles and your horse-cock feels about to explode.  The interior floods with your dick-milk, traveling away through the vine in fat bulges.  Again and again you pulse, filling the vine with the same orgasmic squelching that the other tentacles use to fill your holes.  Seedy spunk slops onto your tits, into your pits, over your elbows, onto your knees, and drenches your feet.  Your whole body is a dripping, jizz-drenched wreck.  Your cunny is spasming, clenching, and sucking.  You scream as the tentacle withdraws from your mouth, suddenly muffled when it splatters you with a fat deposit of alabaster cream.");
 	outputText("\n\nYou black out from the onslaught of pleasure - it's too much for your mere mortal brain to handle, and your mind shuts down.  It doesn't stop you from dreaming of sex for hours more, or from waking up a dripping wreck in the morning, soaked with vine-sperm and drained dry.");
-	flags[URTA_TENTACLE_RAPED] = 1;
+	flags[kFLAGS.URTA_TENTACLE_RAPED] = 1;
 	stats(0,0,0,0,1,1,-100,0);
 	menu();
 	addButton(0,"Next",introSuccubiAndMinotaur);
@@ -2409,7 +2409,7 @@ public function submissiveMinoUrtaBadEndPtIII():void {
 	
 	outputText("\n\nYou return to the temple with your Mistress and Master, followed by a trail of a half dozen sheep-slaves.  They're every bit as meek as you'd expect, and their milk is delightful.  Unfortunately, you find yourself needing to drink from Fido and Mistress more often to make the nightmares go away.  It's easier to forget.");
 	//{Bad end or Urta removed from game as appropriate}
-	flags[URTA_MINO_AND_SUCCUBI_SLAVE] = 1;
+	flags[kFLAGS.URTA_MINO_AND_SUCCUBI_SLAVE] = 1;
 	menu();
 	addButton(0,"Next",urtaGameOver);
 }
@@ -2457,7 +2457,7 @@ public function winRapeAMinoLordAsUrta():void {
 	outputText("\n\nThe minotaur lord collapses into a puddle of his own spunk, reaching a fat finger to probe at his oozing anus.  It seems he liked it a lot.");
 	
 	outputText("\n\nYou hurriedly re-dress and turn to the succubus, who has finished masturbating, and you get your first real chance to properly inspect her...");
-	flags[URTA_RAPED_MINO_LORD] = 1;
+	flags[kFLAGS.URTA_RAPED_MINO_LORD] = 1;
 	//[End combat, queue post encounter]
 	stats(0,0,0,0,0,0,-100,0);
 	menu();
@@ -2505,7 +2505,7 @@ public function urtaLosesToMinotaurRoughVersion():void {
 	
 	outputText("\n\nLicking your chops with hunger, you look up at the succubus you had been watching, your sexual appetite still not satisfied.  Letting out a growl, you lock your eyes on the succu-cow.  \"<i>Urta wants to <b>BREED</b>!</i>\" you howl before stepping toward your next target.");
 	stats(0,0,0,0,50,50,-100,0);
-	flags[URTA_IS_VULQUINE_MENACE] = 1;
+	flags[kFLAGS.URTA_IS_VULQUINE_MENACE] = 1;
 	menu();
 	addButton(0,"Next",urtaSheHulkPartII);
 }
@@ -2547,7 +2547,7 @@ public function beatMinoLordOnToSuccubi():void {
 	outputText("\n\n\"<i>Not a chance,</i>\" you retort.  \"<i>Now move aside.</i>\"");
 	
 	//{If Urta raped Fido:}
-	if(flags[URTA_RAPED_MINO_LORD] > 0) {
+	if(flags[kFLAGS.URTA_RAPED_MINO_LORD] > 0) {
 		outputText("\n\n\"<i>Why so reluctant my dear?  You didn't seem to mind when you were fucking my pet earlier, so why refuse now?</i>\"  She sucks on a finger tantalisingly.");
 		
 		outputText("\n\nYou laugh your bitterest laugh.  \"<i>Him?  Only because I was desperately horny - I wouldn't fuck him with the end of this halberd otherwise, and the same goes for you.</i>\"");
@@ -2972,7 +2972,7 @@ public function preggedUrtaWithGodChildEpilogue():void {
 	outputText("\n\nThe fox-girl drags you into a huge hug, kissing you passionately.  She whispers, \"<i>Thank you so much for getting me started on this road, " + player2.short + ".  I'm so exhausted now, but come see me at the Wet Bitch later, and maybe... maybe we could see about starting a family.  I mean, maybe there's hope after all?  A dead god was reincarnated!</i>\"");
 	
 	outputText("\n\nYou help her leave the tower, arm in arm, saying goodbye to her only after she's tucked tightly into her bed at home, to rest.  Urta gives you a teary kiss before you leave with a little swagger in your step.  You wonder if Taoth will help the Covenant, or if they've bitten off more than they can chew?  Either way, it seems there's a potent new ally on the field.");
-	flags[URTA_QUEST_STATUS] = 1;
+	flags[kFLAGS.URTA_QUEST_STATUS] = 1;
 	gameState = 0;
 	doNext(13);
 }
@@ -3028,12 +3028,12 @@ public function getKnockedUpWithGodChild():void {
 	outputText(" balls, slathering them with slick spunk.");
 	
 	var ballWorship:Array = new Array();
-	if((amilyFollower() && flags[AMILY_FOLLOWER] == 2) && campCorruptJojo()) ballWorship[ballWorship.length] = 0;
-	if((amilyFollower() && flags[AMILY_FOLLOWER] == 2) || campCorruptJojo()) ballWorship[ballWorship.length] = 1;
+	if((amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2) && campCorruptJojo()) ballWorship[ballWorship.length] = 0;
+	if((amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2) || campCorruptJojo()) ballWorship[ballWorship.length] = 1;
 	if(bimboSophie()) ballWorship[ballWorship.length] = 2;
 	if(followerHel()) ballWorship[ballWorship.length] = 3;
 	if(latexGooFollower()) ballWorship[ballWorship.length] = 4;
-	if(flags[VALARIA_AT_CAMP] == 1) ballWorship[ballWorship.length] = 5;
+	if(flags[kFLAGS.VALARIA_AT_CAMP] == 1) ballWorship[ballWorship.length] = 5;
 	var choice:int;
 	if(ballWorship.length > 0) choice = ballWorship[rand(ballWorship.length)];
 	else choice = -1;
@@ -3060,7 +3060,7 @@ public function getKnockedUpWithGodChild():void {
 	}
 	//{Latexy} 
 	else if(choice == 4) {
-		outputText("\n\nUrta gasps when a slithering tongue winds its way around her balls.  Looking back, she sees an inky black visage you'd recognize anywhere - your pet latex-girl, " + flags[GOO_NAME] + ".  The still-rutting fox-futa seems a little put off by your ebony-skinned slave's dusky visage, but as more and more slippery latex bathes her balls, Urta's confusion softens into pleased acceptance.  Her thick, cum-bloated balls are getting some much-needed TLC, and she's clearly too turned on to care.  [name] smoothly sucks one into her mouth, devouring the messy proof of your lover's virility from every inch of the vulpine gal's ball-shroud.   When Urta's nut pops out, it's solid black, encased in wonderful, constricting latex.  She repeats the action on the other side so as to fully clean the fox, and then she turns to you, applying the same treatment to every messy spot below your waist.  Of course, she keeps returning to the blissful, fuck-crazed fox's balls, thickening the plump latex bindings around them at every turn.");
+		outputText("\n\nUrta gasps when a slithering tongue winds its way around her balls.  Looking back, she sees an inky black visage you'd recognize anywhere - your pet latex-girl, " + flags[kFLAGS.GOO_NAME] + ".  The still-rutting fox-futa seems a little put off by your ebony-skinned slave's dusky visage, but as more and more slippery latex bathes her balls, Urta's confusion softens into pleased acceptance.  Her thick, cum-bloated balls are getting some much-needed TLC, and she's clearly too turned on to care.  [name] smoothly sucks one into her mouth, devouring the messy proof of your lover's virility from every inch of the vulpine gal's ball-shroud.   When Urta's nut pops out, it's solid black, encased in wonderful, constricting latex.  She repeats the action on the other side so as to fully clean the fox, and then she turns to you, applying the same treatment to every messy spot below your waist.  Of course, she keeps returning to the blissful, fuck-crazed fox's balls, thickening the plump latex bindings around them at every turn.");
 	}
 	//{Valeria}
 	else if(choice == 5) outputText("\n\nUrta gasps when moist pressure suddenly envelops her balls.  Looking back, she sees a puddle of blue goo you'd recognize anywhere - your friendly, armored goo-girl, Valeria.  The slimy seductress seems to have left her armor behind for now, opting to condense herself into a moist ball of slime with only her breasts, shoulders, and head coming out of the top of it.  Each of her ponderous, growing tits is far larger than normal, nearly as big as a beachball and capped with plump mouths in place of nipples that can only be described as gifted 'cock-sucking lips'.  Each of those mouths is pressed next to the other, tit to tit, and together, they've pulled Urta's sack into their gelatinous, slippering interior.  The skin that restrains Urta's tortured balls slides through the semipermeable membrane between them.  Her gonads are floating inside the warm, cushiony blue mass while the lips kiss all over her sheath, taint, and loins, even inserting slobbering slippery tongues into her cunt.  Meanwhile, the accumulated sex-slime that coated Urta's testicular endowments has begun to lift away, absorbed into the goo-girl for sustenance.  She seems thrilled to have found such an erotic situation to plunge herself into, and judging by the blissful expression your foxy lover's face, she's enjoying it just as much.");
@@ -3142,7 +3142,7 @@ public function getKnockedUpByUrtaEpilogueII():void {
 	outputText("\n\nThe fox-girl drags you into a huge hug, kissing you passionately.  She whispers, \"<i>Thank you so much for getting me started on this road, " + player.short + ".  I bet you're exhausted now, but come see me at the Wet Bitch later, and maybe... maybe we could see about starting a family.  I mean, maybe there's hope after all?  A dead god was reincarnated!</i>\"");
 	
 	outputText("\n\nShe helps leave the tower, arm in arm, saying her goodbye only after she's tucked you in to take a rest.  Urta gives you a teary kiss and trots back towards the city with a swagger in her step.  You wonder if Taoth will help the Covenant, or if they've bitten off more than they can chew?  Either way, it seems there's a potent new ally on the field.");
-	flags[URTA_QUEST_STATUS] = 1;
+	flags[kFLAGS.URTA_QUEST_STATUS] = 1;
 	gameState = 0;
 	doNext(13);
 }
@@ -3152,7 +3152,7 @@ public function urtaAndEdrynGodChild():void {
 	clearOutput();
 	outputText("Urta shudders from head to toe, barely able to restrain herself around you.  \"<i>Oooooh... uh... okay, then.  I'll come back... when... when it's time, okay?</i>\" she titters, almost drunkenly, already prancing off towards the desert.  The lusty vixen looks over her shoulder at you as she jogs off, a trail of lubricant spattering in her wake, her tongue lolling wildly as her eye-humps you.  After a long moment, she looks away, perhaps unable to bear gazing on you any longer.  You hope everything turns out okay...");
 	//[Urta and Edryn disabled until birth event]
-	flags[EDRYN_BIRF_COUNTDOWN] = 24;
+	flags[kFLAGS.EDRYN_BIRF_COUNTDOWN] = 24;
 	gameState = 0;
 	doNext(13);
 }
@@ -3179,9 +3179,9 @@ public function urtaAndEdrynGodChildEpilogueII():void {
 	//{pre-pregnant }
 	
 	outputText("horse-girl.");
-	if(flags[EDRYN_PREGNANCY_INCUBATION] > 0) outputText("  Just how did she get pregnant again when she was already knocked up?  ...Magic, maybe.");
+	if(flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] > 0) outputText("  Just how did she get pregnant again when she was already knocked up?  ...Magic, maybe.");
 	outputText("  Urta leads you around a bend, squeezing your hand for comfort.  \"<i>Thank you for everything, " + player.short + ", most of all being so understanding.</i>\"  The gray-furred fox pushes past the sixth pair of guards you've seen since entering the tower, just inside to see Edryn splayed on the floor, groaning and heaving, her ");
-	if(flags[EDRYN_PREGNANCY_INCUBATION] > 0) outputText("massively ");
+	if(flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] > 0) outputText("massively ");
 	outputText("pregnant flanks rippling with muscular contractions.   Something is bulging against her nether-lips, stretching the massive horse-cunt wider and wider with each passing moment.");
 	
 	outputText("\n\nSlick with birthing fluids, a ball of fur, skin, and bones rolls out onto a mat placed there a moment before by a nearby centaur.  You squint at it, wondering just what everybody is so excited about - it looks little and messy, like any other newborn.");
@@ -3191,7 +3191,7 @@ public function urtaAndEdrynGodChildEpilogueII():void {
 	outputText("\n\n<i>I live.</i>");
 	
 	outputText("\n\nThe voice isn't spoken aloud but inside, inside your head.  A glance to Urta reveals that she heard it too.  The creature - Taoth, you correct yourself, cocks its head toward Urta, giving Edryn's ass a familiar pat.");
-	if(flags[EDRYN_PREGNANCY_INCUBATION] > 0) outputText("  The centaur guardswoman is still just as pregnant with your offspring as before.  Your child is unharmed by whatever just transpired.");
+	if(flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] > 0) outputText("  The centaur guardswoman is still just as pregnant with your offspring as before.  Your child is unharmed by whatever just transpired.");
 	outputText("  Edryn's eyes immediately close, sinking into a deep, restful sleep.");
 	outputText("\n\n<i>Thank you, Urta-father.</i>  The mental voice speaks again, unmatched by the newborn's vocal cords.  It strides confidently forward, with long, loping steps, seeming... almost unnatural in the way that the limbs seem to sway and dance.  Just a few steps away from Urta, a moment of panic surges through you - what if he hurts her?!  You start to interpose yourself between them, but Urta puts a reassuring hand to your chest, flicking her emerald eyes towards you, begging you not to interfere.  You step back, reluctantly");
 	if(player.cor > 66) outputText(", what do you care, anyway?");
@@ -3203,7 +3203,7 @@ public function urtaAndEdrynGodChildEpilogueII():void {
 	outputText("\n\nThe fox drags you into a huge hug, kissing you passionately.  She whispers, \"<i>Thank you so much for getting me started on this road, " + player.short + ".  I'm exhausted after tending to Edryn and the run to get you, but come see me at the Wet Bitch later, and maybe... maybe we could see about starting a family.  I mean, maybe there's hope after all?  A dead god was reincarnated!</i>\"");
 	outputText("\n\nYou leave the tower arm in arm, saying your goodbye when Urta stops at her place to rest.  She gives you a teary kiss and sends you on your way with a swagger in your step.  You wonder if Taoth will help the Covenant, or if they've bitten off more than they can chew?  Either way, it seems there's a potent new ally on the field.");
 	//set completed tags!
-	flags[URTA_QUEST_STATUS] = 1;
+	flags[kFLAGS.URTA_QUEST_STATUS] = 1;
 	gameState = 0;
 	doNext(13);
 }

@@ -711,13 +711,13 @@ public function exgartuanSleepSurprise():void {
 		
 		outputText("A voice thrums in your head, \"<i>", false);
 		//Split based on how often done
-		if(flags[TIMES_AUTOFELLATIOED_EXGARTUAN] == 0) {
+		if(flags[kFLAGS.TIMES_AUTOFELLATIOED_EXGARTUAN] == 0) {
 			outputText("This is how you fucking please a dick!  If you aren't going to take care of our needs, then I will!  Every night if I have to!", false);
 		}
-		else if(flags[TIMES_AUTOFELLATIOED_EXGARTUAN] < 2) {
+		else if(flags[kFLAGS.TIMES_AUTOFELLATIOED_EXGARTUAN] < 2) {
 			outputText("Oh come on, remember how hard you came last time?  Why don't you stroke the shaft with your hands and I'll see if I can pump more into your belly.", false);
 		}
-		else if(flags[TIMES_AUTOFELLATIOED_EXGARTUAN] < 10) {
+		else if(flags[kFLAGS.TIMES_AUTOFELLATIOED_EXGARTUAN] < 10) {
 			outputText("How many times have we done this now?  It's probably past time you got used to sucking yourself off at night and quit making a fuss about it.  Now that you're awake, let's put that tongue to use and get to stroking.  I feel a big finish coming!", false);
 		}
 		else {
@@ -739,7 +739,7 @@ public function exgartuanSleepSurprise():void {
 		}
 		else {
 			//MED+ COR, NOT DONE A LOT:
-			if(flags[TIMES_AUTOFELLATIOED_EXGARTUAN] < 5) {
+			if(flags[kFLAGS.TIMES_AUTOFELLATIOED_EXGARTUAN] < 5) {
 				outputText("You grab hold of your over-sized, demon-infested organ with both hands, resigned to this fate.  Even if you managed to stop Exgartuan now, he would just start all over again once you'd fallen asleep.  The pre-slicked, veiny surface slides through your fingers, outputting a cacophony of pleasure through your nervous system.  Your eyes cross from the feeling, and you actually cry moans of need into your own " + cockHead(0) + ".  It vibrates pleasantly, dumping a few loads of pre-cum into your gullet while ", false);
 				if(player.biggestTitSize() >= 2) outputText("you squeeze your tits around your " + cockDescript(0) + " with your biceps", false);
 				else outputText("you squeeze and caress your " + cockDescript(0), false);
@@ -792,7 +792,7 @@ public function exgartuanSleepSurprise():void {
 		outputText("  Liquid-hot pressure slides over the underside of your " + cockDescript(0) + ", licking wetly at the pulsating, need-filled demon-prick.  Your rogue tongue's attentions have the desired effect, and the cries of your pleasure are muffled by your own thick flesh and its rapidly distending urethra.\n\n", false);
 		
 		outputText("If someone were watching", false);
-		if(monk >= 5 && player.hasStatusAffect("noJojo") < 0 && flags[JOJO_DEAD_OR_GONE] == 0) outputText(", and judging by Jojo's high pitched whines, he certainly is,", false);
+		if(monk >= 5 && player.hasStatusAffect("noJojo") < 0 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) outputText(", and judging by Jojo's high pitched whines, he certainly is,", false);
 		outputText(" they'd see dick-flesh bulging with a heavy load as it's pumped into your lips.  The fully-inflated cum-tube distends your mouth, stretching your jaw painfully, and dumps it's creamy cargo into its willing receptacle.  Your belly burbles as it adjusts to the ", false);
 		temp = player.cumQ();
 		if(temp < 50) outputText("surprisingly light", false);
@@ -815,7 +815,7 @@ public function exgartuanSleepSurprise():void {
 		}
 		outputText("\n\n", false);
 		
-		if(monk >= 5 && player.hasStatusAffect("noJojo") < 0 && flags[JOJO_DEAD_OR_GONE] == 0) {
+		if(monk >= 5 && player.hasStatusAffect("noJojo") < 0 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) {
 			outputText("The splatter of mouse-cum erupting in the wood reaches your ears, bringing a wistful smile to your face.  That slutty mouse is such a peeping tom!  ", false);
 		}
 		outputText("Your eyes slowly roll back down while Exgartuan deflates, leaving a trail of pleased, white submission ", false);
@@ -828,7 +828,7 @@ public function exgartuanSleepSurprise():void {
 		else if(player.lib < 80) stats(0,0,0,0,.5,0,0,0);
 		else stats(0,0,0,0,.25,0,0,0);
 		stats(0,0,0,0,0,0,10,0);
-		flags[TIMES_AUTOFELLATIOED_EXGARTUAN]++;
+		flags[kFLAGS.TIMES_AUTOFELLATIOED_EXGARTUAN]++;
 		slimeFeed();
 	}
 	player.changeStatusValue("Exgartuan",2,25);
@@ -895,13 +895,13 @@ public function exgartuanBulgeTortureIII():void {
 
 	outputText("A lifetime seems to have passed by in that dead stare.  You manage to catch your breath, your shuddering body calming as it prepares for salvation.", false);
 	//[if first occurrence of scene]
-	if(flags[EXGARTUAN_TIGHTPANTS_MASTURBATE_COUNT] == 0) outputText("  No words are exchanged; no thoughts dare to cross your mind. The only sound is that of your heart, its rhythm acting as prelude for the action you desperately covet.  Mixed emotions of guilt, fright, awe, and satisfaction claw at you.", false);
+	if(flags[kFLAGS.EXGARTUAN_TIGHTPANTS_MASTURBATE_COUNT] == 0) outputText("  No words are exchanged; no thoughts dare to cross your mind. The only sound is that of your heart, its rhythm acting as prelude for the action you desperately covet.  Mixed emotions of guilt, fright, awe, and satisfaction claw at you.", false);
 	//[if occurrence ≥2]
-	else if(flags[EXGARTUAN_TIGHTPANTS_MASTURBATE_COUNT] < 6) outputText("  \"<i>Your will cannot even begin to compare to my might, my helpless little champion. You really shouldn't continue acting as if you're above temptation; I'd hate to see what would happen.</i>\"", false);
+	else if(flags[kFLAGS.EXGARTUAN_TIGHTPANTS_MASTURBATE_COUNT] < 6) outputText("  \"<i>Your will cannot even begin to compare to my might, my helpless little champion. You really shouldn't continue acting as if you're above temptation; I'd hate to see what would happen.</i>\"", false);
 	//[if occurrence ≥6]
-	else if(flags[EXGARTUAN_TIGHTPANTS_MASTURBATE_COUNT] >= 6 && flags[EXGARTUAN_TIGHTPANTS_MASTURBATE_COUNT] < 10) outputText("  \"<i>You know, I never thought I would enjoy even the mere thought of celibacy-not even for a moment.  But watching such an <b>honest</b> champion break down to a quivering pile of helplessness is worth it when the attention I receive afterward is so... thorough.</i>\"", false);
+	else if(flags[kFLAGS.EXGARTUAN_TIGHTPANTS_MASTURBATE_COUNT] >= 6 && flags[kFLAGS.EXGARTUAN_TIGHTPANTS_MASTURBATE_COUNT] < 10) outputText("  \"<i>You know, I never thought I would enjoy even the mere thought of celibacy-not even for a moment.  But watching such an <b>honest</b> champion break down to a quivering pile of helplessness is worth it when the attention I receive afterward is so... thorough.</i>\"", false);
 	//[if occurrence ≥10]
-	else if(flags[EXGARTUAN_TIGHTPANTS_MASTURBATE_COUNT] >= 10 && flags[EXGARTUAN_TIGHTPANTS_MASTURBATE_COUNT] < 12)outputText("\"<i>I can keep this up much longer than you can, " + player.armorName + ".  As much as I enjoy watching you struggle to maintain some form of morality and moderation, I would much rather be exploring the world and its many orifices.  Some day you'll leave that fantasy realm you keep running to and join me in the real world.</i>\"", false);
+	else if(flags[kFLAGS.EXGARTUAN_TIGHTPANTS_MASTURBATE_COUNT] >= 10 && flags[kFLAGS.EXGARTUAN_TIGHTPANTS_MASTURBATE_COUNT] < 12)outputText("\"<i>I can keep this up much longer than you can, " + player.armorName + ".  As much as I enjoy watching you struggle to maintain some form of morality and moderation, I would much rather be exploring the world and its many orifices.  Some day you'll leave that fantasy realm you keep running to and join me in the real world.</i>\"", false);
 	//[if occurrence ≥12]
 	else outputText("\"<i>Oh, it's that time again, I see.  Sorry, I was still thinking about how much I enjoyed myself the <b>last</b> occasion you tried to forget about me!  Well, let's not waste any more time; you know the routine.</i>\"", false);
 	outputText("\n\n", false);
@@ -965,7 +965,7 @@ public function exgartuanBulgeTortureIV():void {
 public function boobGartuanSURPRISE():void {
 	spriteSelect(15);
 	//[if occurrence ==0]
-	if(flags[BOOBGARTUAN_SURPRISE_COUNT] == 0) {
+	if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] == 0) {
 		outputText("The sound of little snickering voices wakes you from your slumber.  A couple of imps are chattering to one another, one of which has his hand under his loincloth, making a night of it.  You think to move, but find both of your arms sprawled and padlocked to the wall behind you, your naked body dangling helplessly against it.  A quick glimpse around reveals your cobblestone dwelling: a small dank, dimly lit room with no windows and a few knick knacks and perverted toys spread haphazardly against the walls.  Offset towards the middle of the room lies an ordinary wooden table, some gold coins, jugs, and a leather pouch of some sort sit atop it.  Before you can get a good look at it, one of the imps snaps to attention, hitting the... preoccupied one in the chest, \"<i>Look alive, idiot!  The " + player.mf("chump","skank") + "'s wakin' up.  Git' the boss!</i>\" The second imp's hand flies free from his crotch, scattering some semen to the air.  He responds with a slack-jawed nod, proceeding to bang twice on the large wooden door beside him.  After a moment's pause, you can make out the sound of wood hitting stone mixed with bare footsteps.\n\n", false);
 		outputText("The door barges open, a four foot tall imp standing in its place.  He's holding a large cane in the air, presumably what he used to throw the door open.  His other hand is behind his back, hiding something from your view.  The miniature monster is a little more chiseled than his foppish brethren, sporting a large eye patch covering the left side of his face and what looks like a short pair of tiger skin overalls instead of the standard loincloth.  Evidently, the imp must think very highly of himself.\n\n", false);
 		
@@ -1007,7 +1007,7 @@ public function boobGartuanSURPRISE():void {
 public function boobgartuanSurprise2():void {
 	spriteSelect(15);
 	outputText("", true);
-	if(flags[BOOBGARTUAN_SURPRISE_COUNT] == 0) {
+	if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] == 0) {
 		outputText("There's no time to be deciding on which cardinal direction to walk in once you exit the room; your efforts have garnered some unwanted attention.  The sound of blaring horns can be heard overhead, far off imp squeaks and squabbles slowly growing louder.  You haul ass in the opposite direction to the east and pull yourself down the next corner on your left, following what sounds like a rough thunderstorm outside.  Your effortless strides along the slick cobblestone ground come to a screeching halt soon after.  It would appear you've made it to a small dining hall, littered with debris and discarded weaponry.  Directly across the room from you lies the door to the courtyard, your last stop on the train to freedom.  But there's an imp in the way.\n\n", false);
 		
 		outputText("However, this is no ordinary imp; if it was, you would have already pummeled the shit out of it.  Blocking the egress stands Teensy, an obviously ironic nickname for the seven foot tall, incredibly muscular, armor-plated behemoth.  Sporting armored padding along his extremities and head, this freak rocks an enormous ironclad chin, the resulting underbite dwarfing his otherwise miniscule head and beady eyes.  Other than the aforementioned armor running along his arms, knees and head, the brute is completely naked, his gigantic ballsack swaying in the breeze.  The lout is poised in the frame, legs bent and arms spread like a defensive lineman, denying you precious freedom.\n\n", false);
@@ -1056,7 +1056,7 @@ public function boobgartuanSurprise2():void {
 public function boobgartuanSurprise3():void {
 	outputText("", true);
 	//[if occurrence ==0]
-	if(flags[BOOBGARTUAN_SURPRISE_COUNT] == 0) {
+	if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] == 0) {
 		outputText("The moon greets your wide-eyed gaze, bathing you in its dim crimson glow.  Seeing as you don't appear to have drowned, it looks as though you just had a dream... or perhaps a nightmare.  Judging by the stupid things you said, you decide to go with nightmare.  You don't even know a \"<i>Nemus</i>\"... you think.  Anyway, y", false);
 	}
 	//[else]
@@ -1069,16 +1069,16 @@ public function boobgartuanSurprise3():void {
 	
 	outputText("Thankfully you were more prepared this time, your reflexes heightened enough to keep you from slamming your noggin yet again.  You also felt just where the shove originated from: your " + chestDesc() + ".  ", false);
 	//[if occurrence ==0]
-	if(flags[BOOBGARTUAN_SURPRISE_COUNT] == 0) outputText("As you sit up and begin to piece the puzzle together, you're interrupted by a familiar voice, \"<i>You have time to fuck everyone in Mareth silly, but can't be bothered to spend an instant of it with these magnificent mounds?</i>\" You feel your " + chestDesc() + " jiggle as Exgartuan speaks, only to have them yank you forward, planting your face back in the ground.  \"<i>I'll just have to make sure you'll never forget again.</i>\"", false);
+	if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] == 0) outputText("As you sit up and begin to piece the puzzle together, you're interrupted by a familiar voice, \"<i>You have time to fuck everyone in Mareth silly, but can't be bothered to spend an instant of it with these magnificent mounds?</i>\" You feel your " + chestDesc() + " jiggle as Exgartuan speaks, only to have them yank you forward, planting your face back in the ground.  \"<i>I'll just have to make sure you'll never forget again.</i>\"", false);
 	//[if occurrence ≥1]
-	else if(flags[BOOBGARTUAN_SURPRISE_COUNT] < 4) {
+	else if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] < 4) {
 		outputText("It's Exgartuan again; you haven't fondled her in a while.  \"<i>Rarin' for another round, eh, champion?</i>\" your " + chestDesc() + " ask you, jiggling furiously for emphasis, \"<i>I had hoped the previous lesson", false);
 		//[if occurrence ≥2]
-		if(flags[BOOBGARTUAN_SURPRISE_COUNT] >= 2) outputText("s", false);
+		if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] >= 2) outputText("s", false);
 		outputText(" would have sunk in, but I guess you need to retake the course.</i>\" Before you can formulate a response, your massive mammaries force your face to the ground yet again.  \"<i>The school of hard knocks is in session.</i>\"", false);
 	}
 	//if occurrence ≥4
-	else if(flags[BOOBGARTUAN_SURPRISE_COUNT] < 8) outputText("</i>\"ARE YOU DENSE, CHAMPION?</i>\" Exgartuan shouts, your mammoth melons bouncing furiously on her every word, \"<i>I will knock you SENSELESS until I clear some space in that vapid cesspool between your ears!</i>\" You want to try and calm her down, but your " + chestDesc() + " promptly launch your face square into the dirt.  \"<i>Don't go on thinking for another SECOND that you can ignore ME!</i>\"", false);
+	else if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] < 8) outputText("</i>\"ARE YOU DENSE, CHAMPION?</i>\" Exgartuan shouts, your mammoth melons bouncing furiously on her every word, \"<i>I will knock you SENSELESS until I clear some space in that vapid cesspool between your ears!</i>\" You want to try and calm her down, but your " + chestDesc() + " promptly launch your face square into the dirt.  \"<i>Don't go on thinking for another SECOND that you can ignore ME!</i>\"", false);
 	//[if occurrence ≥8]
 	else outputText("Before another thought can cross your mind, your " + chestDesc() + " fly up and smack you in the gob! \"<i>" + player.short + ", it's that time again,</i>\" the eager demoness teases you.  You think she's grown to enjoy the torture she puts you through.  \"<i>If you insist on going day in and day out without spending quality time with these tits, then I'll just insist on insisting you otherwise.</i>\" Your beautiful bosom launches forward, throwing your mug right back in the dirt.", false);
 	outputText("  You lift your head enough to shake any clinging ground free, but stop shy of going any higher and giving the demoness another shot at tossing you around.  Grass becomes your anchor as your hands bind themselves to whatever they can.", false);
@@ -1087,21 +1087,21 @@ public function boobgartuanSurprise3():void {
 	outputText("\n\n", false);
 	
 	//[if occurrence ==0]
-	if(flags[BOOBGARTUAN_SURPRISE_COUNT] == 0) outputText("\"<i>Don't think you can overpower me like those puny imps that infest your dreams, champion.</i>\"", false);
+	if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] == 0) outputText("\"<i>Don't think you can overpower me like those puny imps that infest your dreams, champion.</i>\"", false);
 	//[if occurrence ≥1]
-	else if(flags[BOOBGARTUAN_SURPRISE_COUNT] < 4)outputText("\"<i>We haven't even started the curriculum yet, champion.</i>\"", false);
+	else if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] < 4)outputText("\"<i>We haven't even started the curriculum yet, champion.</i>\"", false);
 	//[occurrence ≥4]
-	else if(flags[BOOBGARTUAN_SURPRISE_COUNT] < 8)outputText("\"<i>HOW can you forget to caress these cans!?  Tease these teats!?</i>\"", false);
+	else if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] < 8)outputText("\"<i>HOW can you forget to caress these cans!?  Tease these teats!?</i>\"", false);
 	//[if occurrence ≥8]
 	else outputText("\"<i>Did you find anything to grab onto this time besides weeds? It doesn't look like you have.</i>\"", false);
 	outputText("  You make out a slight warmth radiating through your chest, followed by your " + chestDesc() + " pulling you up into the air!  Your weak bonds to the earth either slip free or unroot, leaving you at the mercy of your possessed pillows.  Not long after you return to your feet does your chest remount its attack, flinging you with ease from side to side while exgartuan laughs at you.  By the third time you tumble towards the terrain, you finally decide to lock your arms around your mutinous milk cans, your fingers clamping down as hard as they can into your " + player.skin() + ".  Your powerful puppies flow over your death grip, the pressure becoming pleasure, your struggle dissolving into confusion.  The demoness pushes and shakes against your hold as your footing keeps up to compensate.  It seems as though her desire to be fondled is stronger than her desire to fight, your turbulent tatas' harsh movements slowly becoming much more smooth and relaxed.\n\n", false);
 	
 	//[if occurrence ==0]
-	if(flags[BOOBGARTUAN_SURPRISE_COUNT] == 0) outputText("\"<i>Well, I suppose you've had enough, champion,</i>\" Exgartuan yields, building lust betraying her usual taunting behavior, \"<i>Now why don't we move on to what we both want, hm?</i>\"", false);
+	if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] == 0) outputText("\"<i>Well, I suppose you've had enough, champion,</i>\" Exgartuan yields, building lust betraying her usual taunting behavior, \"<i>Now why don't we move on to what we both want, hm?</i>\"", false);
 	//[if occurrence ≥1]
-	else if(flags[BOOBGARTUAN_SURPRISE_COUNT] < 4) outputText("\"<i>Ready for your final, eh, " + player.short + "?</i>\" Exgartuan teases, a faint lustful waver in her voice contrasting against her dominating demeanor, \"<i>Let's make this one to remember.</i>\"", false);
+	else if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] < 4) outputText("\"<i>Ready for your final, eh, " + player.short + "?</i>\" Exgartuan teases, a faint lustful waver in her voice contrasting against her dominating demeanor, \"<i>Let's make this one to remember.</i>\"", false);
 	//[if occurrence ≥4]
-	else if(flags[BOOBGARTUAN_SURPRISE_COUNT] < 8) outputText("\"<i>Do you think you'll remember now!</i>\" Exgartuan shouts exasperatedly, your breasts pushing against your grasp one final time, \"<i>Now stop wasting my time and get to the only thing you're halfway decent at.</i>\"", false);
+	else if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] < 8) outputText("\"<i>Do you think you'll remember now!</i>\" Exgartuan shouts exasperatedly, your breasts pushing against your grasp one final time, \"<i>Now stop wasting my time and get to the only thing you're halfway decent at.</i>\"", false);
 	//[if occurrence ≥8]
 	else outputText("\"<i>I suppose that ends tonight's opening act,</i>\" Exgartuan goads, her voice as domineering as ever, \"<i>I know you're dying to get on to the grand finale.</i>\"", false);
 	outputText("  Your solid hold around your " + chestDesc() + " slowly loosens, your tits perking up as they prepare for their much craved attention.  ", false);
@@ -1148,11 +1148,11 @@ public function boobgartuanSurprise3():void {
 	
 	outputText("Even with the aid of what little manages to seep out, Exgartuan's firm grip is too strong for even a single finger to slip through.  Your breathing begins to increase in pace as your hands resort to anxiously orbiting around the surface of your shaking spheres.  The light strokes elicit a deep sigh from you, but your fervor to nudge your nubs remains your priority.  The absentminded stroking quickly ceases, your hands smothering the former site of your nipples.  Your growing guavas jiggle as the demoness laughs at you, \"<i>", false);
 	//[if occurrence ==0]
-	if(flags[BOOBGARTUAN_SURPRISE_COUNT] == 0) outputText("Perhaps instead of dreaming of being fucked by imps and raiding tombs, you'll remember to take care of these luscious love muffins.", false);
+	if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] == 0) outputText("Perhaps instead of dreaming of being fucked by imps and raiding tombs, you'll remember to take care of these luscious love muffins.", false);
 	//[if occurrence ≥1]
-	else if(flags[BOOBGARTUAN_SURPRISE_COUNT] < 4) outputText("I guess you're ready to graduate.  Just don't forget what you've learned here today.", false);
+	else if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] < 4) outputText("I guess you're ready to graduate.  Just don't forget what you've learned here today.", false);
 	//[if occurrence ≥4]
-	else if(flags[BOOBGARTUAN_SURPRISE_COUNT] < 8) outputText("Never again forget that these tantalizing tits are the most important things in your life, champion.  Or I'll make sure that you remember again.", false);
+	else if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] < 8) outputText("Never again forget that these tantalizing tits are the most important things in your life, champion.  Or I'll make sure that you remember again.", false);
 	//[if occurrence ≥8]
 	else outputText("Well, this has been fun, " + player.short + ".  I look forward to beating you senseless and enjoying the wonderful makeup massage should you forget to see to my means yet again.", false);
 	outputText("</i>\"\n\n", false);
@@ -1196,7 +1196,7 @@ public function boobgartuanSurprise3():void {
 	else outputText("  Your fingertips continue to sweep across your " + player.skin() + ", seemingly in denial that the exciting night has drawn to a close.  You peer up at the ever-present moon, its crimson hue as foreboding as the day you first arrived in Mareth.  You stew on the prospect of apologizing to the demoness for your forgetfulness.  Though, be it for your pride or hers, you decide it better to just shelf the idea.  All Exgartuan cares about is attention and fucking, better to not go and try to turn her into a conversationalist.  Best to just tend to her every so often if you actually do care.  Once you've taken care of your own lust anyway.  You shake some sense back into your head, sending some dirt flying.  The \"<i>breast show on earth</i>\" left you soaked, your milk turning the dirt to mud around you.  You figure it best to worry about it once you're at camp.  You begin the trek back, a little smile growing on your face once you see the trail of milk you're leaving behind in your wake.", false);
 	//[corruption +2, lust +5] 
 	stats(0,0,0,0,0,0,5,2);
-	flags[BOOBGARTUAN_SURPRISE_COUNT]++;
+	flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT]++;
 	player.changeStatusValue("Exgartuan",2,25);
 	doNext(1);
 }

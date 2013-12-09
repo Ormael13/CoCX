@@ -1,7 +1,7 @@
 ﻿ //[Amily meets pure Jojo - ]
 public function amilyMeetsPureJojo():void {
 	//set flag for amily met pure jojo
-	flags[AMILY_MET_PURE_JOJO]++;
+	flags[kFLAGS.AMILY_MET_PURE_JOJO]++;
 	outputText("", true);
 	outputText("Amily appears to have located Jojo, and the two of them are actually hugging!  The smaller female mouse is crying, and Jojo looks a little misty-eyed as well.  They break apart as you approach; when out of the blue, Amily socks Jojo with a right hook!  He stumbles back, rubbing at his jaw as she yells, \"<i>That's for not coming back to the village and finding me!  Oh sure, you could fight demons in the forest for years, but Marae forbid you come back to look for survivors!</i>\"\n\n", false);
 	
@@ -19,7 +19,7 @@ public function amilyMeetsPureJojo():void {
 //[Amily and Pure Jojo spar – occurs when going to amily, requires 'amily meets jojo']
 public function pureJojoAndAmilySpar():void {
 	outputText("", true);
-	flags[AMILY_SPAR_WITH_PURE_JOJO]++;
+	flags[kFLAGS.AMILY_SPAR_WITH_PURE_JOJO]++;
 	outputText("Amily and Jojo appear to be sparring.  Amily has a pair of knives in her hands, and Jojo has a staff.  The twin blurs of fur are whirling about in a frenzy of movement.  Jojo is deflecting most of the smaller mouse's strikes, and even manages to get in the occasional strike with his staff.  He's undone the top of his robe, and sweat is pouring off of his fur.  It's clear he's working himself harder than the female.  The match-up is remarkably even, but they spot you and wrap up the intense sparring session for now.  Jojo gives you a respectful nod and departs, guzzling water from a skin as he pulls his robes back into their normal places.\n\n", false);
 		
 	//[To amily screen]
@@ -29,7 +29,7 @@ public function pureJojoAndAmilySpar():void {
 //[Amily rages at what you've done to jojo (corrupted after she met pure jojo) – encountered when visiting corrupt jojo for faps]
 public function amilyIsPissedAtYouForRuiningJojo():void {
 	outputText("", true);
-	flags[AMILY_PISSED_PC_CORRUPED_JOJO]++;
+	flags[kFLAGS.AMILY_PISSED_PC_CORRUPED_JOJO]++;
 	outputText("You call for your personal fuck-pet to come take care of your needs, but he doesn't answer.  You call again, and once more, the mouse does not appear.  Irritated, you get up and walk towards the woods.  At the edge you find Jojo.  He's unconscious and humping the ground, with a dart stuck in his ass.  You pluck the drugged dart from his furry cheek and examine it.  It's one of Amily's!\n\n", false);
 	
 	outputText("\"<i>What did you DO TO HIM!?</i>\" her voice shrieks.  She's behind you!  You pivot, praying the enraged mouse doesn't hit you with the same dart, and you see Amily half-hidden behind a rock.  Her blowgun is clutched in a trembling hand as she sobs with grief.  So she figured it out...\n\n", false);
@@ -53,10 +53,10 @@ public function tellAmilyToFuckOffRuinedJojo():void {
 	if(player.inte >= 45) outputText("  Goblin ale and lust drafts might do the trick.", false);
 	
 	//Follower off
-	flags[AMILY_FOLLOWER] = 0;
-	flags[AMILY_CORRUPT_FLIPOUT] = 1;
-	flags[AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
-	flags[AMILY_VILLAGE_ACCESSIBLE] = 1;
+	flags[kFLAGS.AMILY_FOLLOWER] = 0;
+	flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] = 1;
+	flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
+	flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] = 1;
 	stats(0,0,0,0,0,0,0,10);
 	doNext(1);
 }
@@ -74,7 +74,7 @@ public function agreeToHelpAmilyFixJojo():void {
 	//(-5 cor
 	stats(0,0,0,0,0,0,0,-5);
 	// Amily won't sex.  Jojo sex still available)
-	flags[AMILY_WAIT_FOR_PC_FIX_JOJO] = 1;
+	flags[kFLAGS.AMILY_WAIT_FOR_PC_FIX_JOJO] = 1;
 	doNext(1);
 }
 
@@ -93,21 +93,21 @@ public function fixJojoOOOOHYEEEEAHSNAPINTOASLIMJIM():void {
 	else outputText("glad the damage you did to Jojo wasn't permanent", false);
 	outputText(".", false);
 	//(Jojo leaves, never encountered again.)
-	flags[JOJO_DEAD_OR_GONE] = 1;		
+	flags[kFLAGS.JOJO_DEAD_OR_GONE] = 1;		
 	//(-5 corruption)
 	stats(0,0,0,0,0,0,0,-5);
 	//(Amily not encounterable for 4 hours)
-	flags[AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] = 4;
+	flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] = 4;
 	//Amily fuckable again
-	flags[AMILY_WAIT_FOR_PC_FIX_JOJO] = 0;
+	flags[kFLAGS.AMILY_WAIT_FOR_PC_FIX_JOJO] = 0;
 	//Jojo 'fixed'
-	flags[JOJO_FIXED_STATUS] = 1;
+	flags[kFLAGS.JOJO_FIXED_STATUS] = 1;
 	doNext(13);
 }
 	
 //[Find note from jojo @ followers menu after pufying him]
 public function findJojosNote():void {
-	flags[JOJO_FIXED_STATUS] = 2;
+	flags[kFLAGS.JOJO_FIXED_STATUS] = 2;
 	outputText("", true);
 	outputText("There is a note left on your bedroll. You pick it up and unseal it – it's from Jojo!\n\n", false);
 	outputText("\"<i>After the things that have transpired between us, I felt I ought to give this chapter of our lives some closure.   What you did to me was inexcusable.  It was a violation of everything that I am and was.  But, even though I wasn't able to help you tame your inner corruption, I'm glad that Amily was able to do so in my place.  And although I shall never again be able to return to my life as a chaste monk due to the changes you made to my body and libido, I take solace in the fact that Amily was able to repopulate our people.  Perhaps I'll even get married; its impossible to hide how 'large' I've gotten and the girls all seem to want to see what I've got under my robes.  In any event, good-bye 'Champion'.</i>\"", false);
@@ -118,7 +118,7 @@ public function findJojosNote():void {
 //[Amily finds tentacle Jojo]
 public function amilyDiscoversJojoWithTentaclesAndShitOhBoy():void {
 	outputText("", true);
-	flags[AMILY_DISCOVERED_TENTATLE_JOJO]++;
+	flags[kFLAGS.AMILY_DISCOVERED_TENTATLE_JOJO]++;
 	outputText("You settle down for a nice fuck with your tentacle-mousey, but your pet doesn't answer your calls.  Snarling in irritation, you set off towards the woods to find your corrupted fuck-toy.  It does not take long.  Jojo's body is face-down in the dirt, unconscious.  You can see his hips pumping weakly as his cum-oozing tentacles fuck each other.  There's a dart in his neck, and with great trepidation, you pluck the needle-tipped weapon from the horror-rodent.  It's one of Amily's!\n\n", false);
 	
 	outputText("\"<i>What did you DO TO HIM!?</i>\" her voice shrieks.  She's behind you!  You pivot, praying the enraged mouse doesn't hit you with the same dart, and you see Amily half-hidden behind a rock.  Her blowgun is clutched in a trembling hand as she sobs with grief.  So she figured it out...\n\n", false);
@@ -130,15 +130,15 @@ public function amilyDiscoversJojoWithTentaclesAndShitOhBoy():void {
 		outputText("You flip her the bird.  She was a shitty fuck anyways.  Amily's eyes flood with tears, but her expression hardens with rage.  The mouse yells, \"<i>Like I'd want to stay with a demon like you anyway!</i>\"  She turns and jogs off into the distance.  Amily stops just before you lose sight of her and looks over her shoulder with tears in her eyes.  You've utterly crushed her heart.  She starts jogging again and disappears from your life forever.  Meanwhile, Jojo begins to stir.  It appears he'll be ready to serve soon...\n\n", false);
 		//(No amily, back to camp)
 		//Follower off
-		flags[AMILY_FOLLOWER] = 0;
+		flags[kFLAGS.AMILY_FOLLOWER] = 0;
 		outputText("No doubt she ran back to the ruins.  Perhaps you could gather some appropriate drugs to teach her a lesson?", false);
 		if(player.inte >= 45) outputText("  Goblin ale and lust drafts might do the trick.", false);
 
 		//Follower off
-		flags[AMILY_FOLLOWER] = 0;
-		flags[AMILY_CORRUPT_FLIPOUT] = 1;
-		flags[AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
-		flags[AMILY_VILLAGE_ACCESSIBLE] = 1;
+		flags[kFLAGS.AMILY_FOLLOWER] = 0;
+		flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] = 1;
+		flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
+		flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] = 1;
 		//+5 corruption)
 		stats(0,0,0,0,0,0,0,5);
 		doNext(1);
@@ -157,10 +157,10 @@ public function AmilyLeavesBirdJojoTentacles():void {
 	outputText("No doubt she ran back to the ruins.  Perhaps you could gather some appropriate drugs to teach her a lesson?", false);
 	if(player.inte >= 45) outputText("  Goblin ale and lust drafts might do the trick.", false);
 	//Follower off
-	flags[AMILY_FOLLOWER] = 0;
-	flags[AMILY_CORRUPT_FLIPOUT] = 1;
-	flags[AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
-	flags[AMILY_VILLAGE_ACCESSIBLE] = 1;
+	flags[kFLAGS.AMILY_FOLLOWER] = 0;
+	flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] = 1;
+	flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
+	flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] = 1;
 	//+5 corruption)
 	stats(0,0,0,0,0,0,0,5);
 	doNext(1);
@@ -188,7 +188,7 @@ public function stopJojoDeathInTheNameOfLove():void {
 		//(-80 lust)
 		stats(0,0,0,0,0,0,-99,0);
 		//(You suck and Jojo died.)
-		flags[JOJO_DEAD_OR_GONE] = 1;		
+		flags[kFLAGS.JOJO_DEAD_OR_GONE] = 1;		
 	}
 
 	//(SMART)
@@ -210,14 +210,14 @@ public function whyWouldDoThis():void {
 	//(-99 lust)
 	stats(0,0,0,0,0,0,-99,0);
 	//(You suck and Jojo died.)
-	flags[JOJO_DEAD_OR_GONE] = 1;	
+	flags[kFLAGS.JOJO_DEAD_OR_GONE] = 1;	
 	doNext(13);
 }
 
 //[Amily introduces herself to Rathazul – happens at Rathazul]
 public function AmilyIntroducesSelfToRathazul():void {
 	outputText("", true);
-	flags[AMILY_MET_RATHAZUL]++;
+	flags[kFLAGS.AMILY_MET_RATHAZUL]++;
 	outputText("Amily is here with the elderly rodent alchemist and carrying on a rather deep conversation.  They have not noticed you yet, and the two are currently discussing the medicinal properties of the various herbs and materials in Mareth.  Amily pays rapt attention as the old rat concludes his lecture on the effects of imp grass.  She thanks him, \"<i>I really appreciate this, Rathazul.  I know our tribes never saw eye to eye, but you've done a lot.  My father was an alchemist like you, and I know he'd be happy to know someone like you was continuing to teach me the craft.</i>\"\n\n", false);
 	
 	outputText("The wise rat strokes his frazzled whiskers as he listens, clearly pleased with the younger rodent's words.  \"<i>The pleasure is mine.  It's not often I find such a rapt and attentive listener,</i>\" he replies.\n\n", false);
@@ -237,7 +237,7 @@ public function amilyIngredientDelivery():void {
 	outputText("", true);
 	outputText("As you make your way to Rathazul's lab, a ", false);
 	
-	if(flags[AMILY_NOT_FURRY] == 1) outputText("big-eared blur whizzes past you", false);
+	if(flags[kFLAGS.AMILY_NOT_FURRY] == 1) outputText("big-eared blur whizzes past you", false);
 	else outputText("blur of fur whizzes past you", false);
 	
 	outputText(".  Amily sprints into the rat's lab with an armful of flowers, plants, and other ingredients.  Rathazul says, \"<i>Thank you, child - these will be a huge help.  It is fortunate you knew where to find some of these.  Purchasing them is difficult and expensive.</i>\"\n\n", false);
@@ -245,14 +245,14 @@ public function amilyIngredientDelivery():void {
 	//[To rathazul, +4 lust]
 	stats(0,0,0,0,0,0,4,0);
 	//[Prices reduced for reducto!
-	flags[AMILY_MET_RATHAZUL]++;
+	flags[kFLAGS.AMILY_MET_RATHAZUL]++;
 	doNext(2070);
 }
 
 //[Amily ask Rathazul what happened to his village]
 public function amilyAsksAboutRathazulsVillage():void {
 	outputText("", true);
-	flags[AMILY_MET_RATHAZUL]++;
+	flags[kFLAGS.AMILY_MET_RATHAZUL]++;
 	outputText("Amily is once again at Rathazul's lab.  She just finished asking him what happened to his village.  Rathazul's expression clouds with anger as he thinks on it.  His response is slow and measured as he explains, \"<i>We were sold out.  Our elders knew we couldn't triumph by strength of arms, and rather than join the others they sold us out in exchange for the safety of the council.  The demons gave the elders corrupted agents to lace into the village's well, and my people fell prey to the demons in a single night.  The elders were rewarded and 'raised' to full demon-hood.  I survived because I was at the lake at the time.  The sounds of the orgy were all the warning I needed to keep hidden.  I can't help but think that things would have been different if less selfish rats had been in charge.</i>\"\n\n", false);
 	
 	outputText("Rathazul sighs and shuffles around uncomfortably as he wraps it up, \"<i>'What-ifs' will get us nowhere.  Our villages are gone, and we must look to the future, child.</i>\"\n\n", false);
@@ -264,7 +264,7 @@ public function amilyAsksAboutRathazulsVillage():void {
 //[Rathazul and Corrupt/Tentacle Jojo] – Occurs instead of camp
 public function rathazulFreaksOverJojo():void {
 	outputText("", true);
-	flags[RATHAZUL_CORRUPT_JOJO_FREAKOUT]++;
+	flags[kFLAGS.RATHAZUL_CORRUPT_JOJO_FREAKOUT]++;
 	outputText("Rathazul comes up to you with a serious, worried expression.  You ask him what's wrong, and he explains, \"<i>There is a creature in the woods.  I've seen glimpses of it numerous times, and I believe it to be some kind of demon-tainted mouse.  We must deal with it, lest it strike while we are unawares!</i>\"\n\n", false);
 	
 	outputText("You work hard to keep a straight face.  The 'creature' is clearly your fuck-pet, Jojo.  What do you tell the old mouse?  ", false);
@@ -311,7 +311,7 @@ public function TellRathazulJojoIsHarmless():void {
 //[Rathazul and non-corrupt Jojo]
 public function jojoOffersRathazulMeditation():void {
 	outputText("", true);
-	flags[JOJO_RATHAZUL_INTERACTION_COUNTER]++;
+	flags[kFLAGS.JOJO_RATHAZUL_INTERACTION_COUNTER]++;
 	outputText("Jojo is at Rathazul's lab.  The smaller, white mouse is asking the elderly rodent if he would like to meditate.  Rathazul considers for a moment and agrees, \"<i>I'll have to try it when I have some time.  A little reflection would do my old soul some good.  However we cannot now; " + player.short + " has need of me.</i>\"\n\n", false);
 	
 	outputText("Jojo turns to you, gives a quick bow, and departs.", false);
@@ -322,7 +322,7 @@ public function jojoOffersRathazulMeditation():void {
 public function catchRathazulNapping():void {
 	outputText("", true);
 	//(Occurs when visiting Jojo)
-	flags[JOJO_RATHAZUL_INTERACTION_COUNTER]++;
+	flags[kFLAGS.JOJO_RATHAZUL_INTERACTION_COUNTER]++;
 	outputText("Rathazul and Jojo look to be engaged in some intensive meditation, so you hang back.  The two rodents are sitting cross-legged on a pair of flat rocks with their eyes closed and reflecting on something.  The air is eerily silent until a loud snore escapes from the rat's muzzle.  He's fallen asleep!  Jojo cracks one eye and sighs, \"<i>The old ones always fall asleep.</i>\"\n\n", false);
 	
 	outputText("The mouse quietly rises and walks a fair distance away from the sleeping rat, letting his elder rest.  He motions for you to follow and leave Rathazul in peace.", false);
@@ -332,9 +332,9 @@ public function catchRathazulNapping():void {
 
 public function marbleVsAmilyFreakout():void {
 	outputText("", true);
-	flags[AMILY_NOT_FREAKED_OUT]++;
+	flags[kFLAGS.AMILY_NOT_FREAKED_OUT]++;
 	//Marble is in camp first
-	if(flags[MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] <= 1) outputText("As you bring Amily into your camp, you see Marble look towards you with a smile for a moment, before that smile turns into a frown.  You realize that this might not have been such a good idea...\n\n", false);
+	if(flags[kFLAGS.MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] <= 1) outputText("As you bring Amily into your camp, you see Marble look towards you with a smile for a moment, before that smile turns into a frown.  You realize that this might not have been such a good idea...\n\n", false);
 	////Amily is in camp first
 	else outputText("As you bring Marble back to your camp, you see Amily sitting there as Marble asks while frowning, \"<i>Sweetie, who is that?</i>\"  Uh-oh, this could get bad.\n\n", false);
 	
@@ -358,16 +358,16 @@ public function marbleIsPissyAndYourTooDumbToTalk():void {
 		//outputText("Marble moves in front of you and faces towards Amily.  \"<i>This " + player.mf("man","woman") + " is mine!  " + player.mf("He","She") + " needs me to survive, and I will do anything to protect them.</i>\" Marble declares before saying in a dangerous low voice towards Amily \"<i>Leave now, or I will kill you.</i>\" Amily tries to look at you through her tear filled eyes for a moment, but Marble softly says to you \"<i>" + player.short + ", put your arms around me.</i>\"  It wasn't a request, and without hesitation you put your arms around her.  Amily gives one last horrified look at you before grabbing her things and running away from the camp.  You doubt that you'll see her again.\n\n", false);
 		outputText("Marble moves protectively in front of you and turns to Amily.  \"<i>This " + player.race() + " is mine!  " + player.mf("He","She") + " needs me to survive, and I will do anything to protect " + player.mf("him","her") + ",</i>\"  Marble declares.  Then, in a dangerously gentle voice, says, \"<i>Leave now, or I will kill you.</i>\"  Amily tries to look at you through her tear-filled eyes, but Marble softly whispers,  \"<i>" + player.short + ", put your arms around me.</i>\"  Though soft, her words had nothing in them to suggest a request rather than a command.  You hesitate for a  moment, but, remembering that an angry Marble is a Marble that could revoke milk privileges, you decide that making her mad is something you just can't afford.  You take a deep breath and wrap your arms around Marble.  Amily gives one last anguished look at you before she turns to pack her things.  As she scurries away from the site of her former bed, you doubt that you'll see her again.\n\n");
 		//end event, Amily leave the camp for good
-		flags[AMILY_FOLLOWER] = 0;
-		flags[AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 1;
+		flags[kFLAGS.AMILY_FOLLOWER] = 0;
+		flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 1;
 	}
-	else if(flags[MARBLE_KIDS] > 0) {
+	else if(flags[kFLAGS.MARBLE_KIDS] > 0) {
 		//Silent -> PC has had kid(s) with Marble and is not addicted (A3)
 		outputText("Marble suddenly bursts into tears herself and, between sobs, yells \"<i>Why " + player.short + "?  Did none of our kids mean anything to you?</i>\"  In frustration she slams her hammer against the ground, causing a tremor that almost knocks you and Amily onto your asses.  However, at this point the two of them have broken down and collapsed on their knees sobbing.  You have no idea what you can say at this point, or what you should do.  After a few minutes pass, the two of them each give you a sad look in turn before collecting their things (and in Marble's case, her kids) and leaving the camp.  You doubt that you'll ever see either of them again.", false);
 		//end event, Amily and Marble leave the camp for good
 		player.removeStatusAffect("Camp Marble");
-		flags[AMILY_FOLLOWER] = 0;
-		flags[AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 1;
+		flags[kFLAGS.AMILY_FOLLOWER] = 0;
+		flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 1;
 	}
 	//Silent -> Otherwise (A4)
 	else {
@@ -419,10 +419,10 @@ public function srslyPimpinGuyz():void {
 	outputText("\n\nNo doubt Amily ran back to the ruins.  Perhaps you could gather some appropriate drugs to teach her a lesson?", false);
 	if(player.inte >= 45) outputText("  Goblin ale and lust drafts might do the trick.", false);
 	//Follower off
-	flags[AMILY_FOLLOWER] = 0;
-	flags[AMILY_CORRUPT_FLIPOUT] = 1;
-	flags[AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
-	flags[AMILY_VILLAGE_ACCESSIBLE] = 1;
+	flags[kFLAGS.AMILY_FOLLOWER] = 0;
+	flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] = 1;
+	flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
+	flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] = 1;
 	doNext(16);
 }
 //Pimp -> PC is not addicted -> just joking (B5)
@@ -442,7 +442,7 @@ public function LucyYouGotSomeSplainingToDo():void {
 		//Explain -> pass (C2)
 		outputText("Right away, you realize that this situation isn't really something that you can talk your way out of.  You start to tell the two of them why you like them and why you were with them.  You tell Marble about Amily's desire to repopulate her people, and you tell Amily about Marble's desire to find someone and the difficulties that her species brings with it.  At the end of your talk, the two of them are just looking at each other.  After a few moments Amily says, \"<i>So, you're corrupt huh?  I guess you seem nice enough...</i>\"  Marble responds, \"<i>You're really cute yourself, little mousy, and you definitely needed someone for a good reason.  The real problem is that " + player.short + " didn't get the two of us to talk to each other before now.</i>\"  The two of them then turn back to you with dirty looks in their eyes.  It looks like things aren't going to be all that nice for you for awhile, but at least they don't seem to hate each other.", false);
 		//end event, set lust or other sex values to minimum to make it so that Marble and Amily "punish" the player a little for awhile.
-		flags[MARBLE_LUST] = -100;
+		flags[kFLAGS.MARBLE_LUST] = -100;
 		doNext(13);
 		return;
 	}
@@ -463,8 +463,8 @@ public function LucyYouGotSomeSplainingToDo():void {
 public function BlameMarblezSweetVagoozle():void {
 	outputText("", true);
 	outputText("You turn to Marble and point blankly tell her that its her fault that you weren't faithful to Amily.  You start to rant about how Marble's milk has affected you, and how you lost your willpower to the addiction.  You go on about how she uses it to get what she wants, and how she didn't warn you about what would happen if you drank it.  At this Amily runs to your side and looks into your eyes for a moment before turning back to Marble and saying, \"<i>Is this the truth?</i>\"  Marble looks at you for a moment like she is going to explode before saying, \"<i>Is that really what you think of me?  How could you lie to me like this up until now?!</i>\" she then turns around and almost mechanically gathers her things ", false);
-	if(flags[MARBLE_KIDS] == 1) outputText("and child", false);
-	else if(flags[MARBLE_KIDS] > 1) outputText("and her children", false);
+	if(flags[kFLAGS.MARBLE_KIDS] == 1) outputText("and child", false);
+	else if(flags[kFLAGS.MARBLE_KIDS] > 1) outputText("and her children", false);
 	outputText(" before slowly walking away from the camp without looking back.  \"<i>I'm going back to the farm, I guess I'll see you around.</i>\"\n\n", false);
 	//end event, Marble leaves the camp and returns to the farm, she can now be encountered if she had not joined you in the camp.
 	player.removeStatusAffect("Camp Marble");
@@ -478,14 +478,14 @@ public function blameAmilysDumbMouseCunt():void {
 	//----Quiet Browser should write this part----
 	outputText("You turn to Amily and tell her point blank that she's the one who is in the wrong here. She claimed to be a pure individual, free of all corruption in this world and begging you for your help, but instead she tricked you, seduced you into being unfaithful to your lover, Marble, and making you into her breeding stud and pleasure toy - and then she had the audacity to try and claim you and her had some connection, when it was nothing but trickery and lies on her part. At this tirade, Amily looks first hurt, then outraged, then livid; it's only when Marble silently and defiantly positions herself beside you, holding her hammer and ready to charge, that the female mouse-morph removes her hand from the handle of her knife. Blinking back tears, she starts scurrying around the camp as fast as she can, gathering up all of her few belongings and then heading for the edge of the camp as fast as she can. She halts at the edge, turning to face the two of you, and starts screaming a tirade of the most profane obscenities she can muster, blistering your ears with imprecations about your sexual tastes, habits and skills, your lineage, your personal hygiene and your talents before vanishing into the undergrowth whilst you're both stunned by the litany of swearing and trying to wrap your mind around some of the things she said. Particularly the one about the greasy maggots, the centaur stallion, the candied apple and the plunger. It's pretty obvious she's never coming back.", true);
 	//end event, Amily leaves the camp permanently
-	flags[AMILY_FOLLOWER] = 0;
-	flags[AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 1;
+	flags[kFLAGS.AMILY_FOLLOWER] = 0;
+	flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 1;
 	doNext(13);
 }
 
 //Amily/Urta Interaction
 //Must have Pure Amily as follower
-//flags[AMILY_FOLLOWER] == 1
+//flags[kFLAGS.AMILY_FOLLOWER] == 1
 //Must have "UrtaSexed" flagged
 
 //Must have Lover Urta?
@@ -497,8 +497,8 @@ public function amilyUrtaReaction():void {
 	outputText("As you finish making your way back to camp, Amily surprises you from behind a rock, her arms folded across her chest.  \"<i>Hey, remember when you told me about that city in the desert?  I decided to check it out.</i>\"  You don't remember, but you're too busy absorbing the implications to respond.  \"<i>You'll never guess what I heard!  It seems someone just like you has been seen in the company of one of their prominent citizens,</i>\" she continues.  \"<i>I can't say I didn't expect something like this might happen.  I mean... she's not some demon, right?  Still... I thought we had something special, " + player.short + ".</i>\"  As you try to formulate a reply, she seizes her tail and twists it pensively in her hands, already deciding her next move.  \"<i>I-I've got to meet her... to know what you see in her.</i>\"\n\n", false);
 	
 	outputText("Amily bounds out of camp before you can react, sniffling as she disappears into the distance. She's lost to sight almost immediately thanks to the properties of this accursed landscape.", false);
-	flags[AMILY_VISITING_URTA] = 1;
-	flags[AMILY_NEED_TO_FREAK_ABOUT_URTA] = 0;
+	flags[kFLAGS.AMILY_VISITING_URTA] = 1;
+	flags[kFLAGS.AMILY_NEED_TO_FREAK_ABOUT_URTA] = 0;
 	doNext(1);
 	//disable Amily button and replace her camp screen status, enable [Ask about Amily] button at Wet Bitch
 }
@@ -524,9 +524,9 @@ public function askAboutAmily():void {
 		outputText("This is met with a chittering squeal you distinctly recognize as Amily's.  \"<i>Oooohhh... I see why " + player.short + " - yeah, gimme all you got! - fell for you!</i>\"\n\n", false);
 
 		outputText("Curious, you ease open the door.  Inside, you see Urta and Amily, both naked, sitting on one of the cushioned couches along the wall.  Well, Urta is sitting there; Amily is perched in her lap, Urta's girthy prick visibly stuffed into her folds, with", false);
-		if(flags[AMILY_WANG_LENGTH] > 0) outputText(" her " + amilyCock() + " half-erect and drooling pre and", false);
+		if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText(" her " + amilyCock() + " half-erect and drooling pre and", false);
 		outputText(" her stomach swollen from the fox-morph's prodigious cum output to the point she looks ", false);
-		if(flags[AMILY_INCUBATION] > 0 && flags[AMILY_INCUBATION] < 100) outputText("almost twice as ", false);
+		if(flags[kFLAGS.AMILY_INCUBATION] > 0 && flags[kFLAGS.AMILY_INCUBATION] < 100) outputText("almost twice as ", false);
 		outputText("pregnant.  The mouse is holding a half-full bottle of what you think is Barkardi 151, waving it enthusiastically through the air even as she thumps up and down in Urta's lap, trying to coax one last orgasm from the visibly-drained hermaphrodite.  She giggles with delight and takes a messy swig from her bottle, spilling some of the booze onto her " + amilyTits() + " before twisting around and sloppily kissing Urta, trying to feed the contents of her mouth to the fox but dribbling half down her neck.\n\n", false);
 		
 		outputText("Do you leave them to get acquainted (and possibly be up for threesomes in the future), or do you barge in and stop these cheating sluts?", false);
@@ -543,9 +543,9 @@ public function askAboutAmilyPt2():void {
 	stats(0,0,0,0,0,0,75,0);
 	doNext(13);
 	//Progress to next stage!
-	flags[AMILY_VISITING_URTA] = 2;
+	flags[kFLAGS.AMILY_VISITING_URTA] = 2;
 	//Tag that Urta needs to freak out!
-	flags[UNKNOWN_FLAG_NUMBER_00350] = 1;
+	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00350] = 1;
 }
 public function cheatingSloots():void {
 	outputText("", true);
@@ -561,7 +561,7 @@ public function letTheSlootsFuck():void {
 	outputText("You chuckle and tell them you understand, though they had better include you in the future.  Drunken relief spreads across their faces when you give them a wink and step out.  Soon you hear the sloppy sounds of sex and giggles about how great their lover is.", false);
 	stats(0,0,0,0,0,0,75,0);
 	doNext(13);
-	flags[AMILY_VISITING_URTA] = 4;
+	flags[kFLAGS.AMILY_VISITING_URTA] = 4;
 }
 public function endThisMadness():void {
 	outputText("", true);
@@ -572,8 +572,8 @@ public function endThisMadness():void {
 		outputText("\"<i>" + player.short + ", I did this for you!  I loved you so much I worked to see what you liked in Urta!</i>\" cries Amily.  Her face blushes, not in shame, but in anger as her temper flares.  She actually says, \"<i>Everything, all of this, it was me wanting things to be perfect for YOU!  FOR US!  You... you... asshole!</i>\"\n\n", false);
 		outputText("The mouse scurries past you and disappears into the night.  Somehow you know you won't see her again.\n\n", false);
 		//No more amily follower
-		flags[AMILY_FOLLOWER] = 0;
-		flags[AMILY_CORRUPT_FLIPOUT] = 1;
+		flags[kFLAGS.AMILY_FOLLOWER] = 0;
+		flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] = 1;
 	}
 	//(Chance of Urta rage) 
 	else {
@@ -581,10 +581,10 @@ public function endThisMadness():void {
 		
 		outputText("The angry vixen snatches her clothes from a peg on the wall and slides out the door, too pissed to care that she's standing naked.  \"<i>I won't be a problem for you any more.  Just stay away from me.</i>\"\n\n", false);
 		urtaLove(-100);
-		flags[URTA_PC_LOVE_COUNTER] = -1;
-		flags[URTA_COMFORTABLE_WITH_OWN_BODY] = -1;
+		flags[kFLAGS.URTA_PC_LOVE_COUNTER] = -1;
+		flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] = -1;
 	}
-	flags[AMILY_VISITING_URTA] = 3;
+	flags[kFLAGS.AMILY_VISITING_URTA] = 3;
 	outputText("You shrug.  Well, that puts an end to that.", false);
 	doNext(13);
 }
@@ -618,10 +618,10 @@ public function beADickToAmily():void {
 	outputText("With that, Amily grabs her gear closest to hand and pushes past you with the best flounce she can manage, heading toward the desert.", false);
 	//plus PC corruption a little
 	stats(0,0,0,0,0,0,0,5);
-	flags[AMILY_VISITING_URTA] = 3;
+	flags[kFLAGS.AMILY_VISITING_URTA] = 3;
 	//No more amily follower
-	flags[AMILY_FOLLOWER] = 0;
-	flags[AMILY_CORRUPT_FLIPOUT] = 1;
+	flags[kFLAGS.AMILY_FOLLOWER] = 0;
+	flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] = 1;
 	
 	//no more Puru Amily, corruption path only
 	doNext(1);
@@ -638,17 +638,17 @@ public function smileAndNodToAmilyXUrta():void {
 	
 	//"Urta" is now unlocked in Amily's options between 0600 and 1400
 	outputText("\n\n(<b>Urta is now unlocked from Amily's sex menu.</b>)", false);
-	flags[AMILY_VISITING_URTA] = 4;
+	flags[kFLAGS.AMILY_VISITING_URTA] = 4;
 	doNext(1);
 }
 
 //Amily Option - Urta
 //This option should probably only appear when Urta is actually at the Wet Bitch
 public function amilyUrtaSex():void {
-	flags[UNKNOWN_FLAG_NUMBER_00350] = 2;
+	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00350] = 2;
 	outputText("", true);
 	outputText("With a knowing smirk, you ask how Amily would feel about going to see Urta and maybe having a little fun with her.  The mouse-girl flushes with embarrassment, but you can see the eagerness in her body language.  \"<i>Okay, sure; I kind of like going to the city... besides, between you and me?  I think Urta needs all the friends she can get... never thought I'd feel sorry for a hermaphrodite.</i>\"  She mumbles this last part to herself, but you can still hear her.", false);
-	if(player.cor > 50 && flags[AMILY_WANG_LENGTH] > 0) outputText("  Privately, you note that it's bullshit; she's nothing <b>but</b> self-pity.", false);
+	if(player.cor > 50 && flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText("  Privately, you note that it's bullshit; she's nothing <b>but</b> self-pity.", false);
 	outputText("\n\n", false);
 	
 	outputText("With a gesture, the two of you set off.  As soon as you pass through the gates, you head towards the Wet Bitch.  Sure enough, Urta is at her usual table, and she smiles in delight to see you.  \"<i>" + player.short + ", Amily, hello!</i>\"  You take seats at the same table, as she ", false);
@@ -685,11 +685,11 @@ public function amilyUrtaSexWatch():void {
 	outputText("Amily smiles back and approaches Urta, giving her a small peck on the lips and gently stroking her cock.\n\n", false);
 
 	outputText("Urta groans, unable to resist groping Amily's " + amilyTits() + ".  \"<i>Let me sit down, first, squeaky; I've never been one for sex while standing up</i>\".  She slowly lowers herself to the ground and then pulls Amily down into her lap, idly grinding her mare-cock against Amily's torso", false);
-	if(flags[AMILY_WANG_LENGTH] > 0) outputText(", up the underside of her penis,", false);
+	if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText(", up the underside of her penis,", false);
 	outputText(" and between her " + amilyTits() + ".\n\n", false);
 
 	outputText("Amily slides her cleavage down Urta's length to gently give her flared tip a small lick, before rising", false);
-	if(flags[AMILY_WANG_LENGTH] > 0) outputText(", a bead of pre-cum stretching into a line connecting their two members", false);
+	if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText(", a bead of pre-cum stretching into a line connecting their two members", false);
 	outputText(".  Straddling Urta and aligning the heavy horse-cock with her moist snatch, Amily teases, \"<i>Ready for this, foxy?</i>\"  Her eyes dart towards you for a split second.\n\n", false);
 
 	outputText("You just smile gently and watch Urta, who swallows hard, tongue lolling out with anticipation before she remembers herself.  \"<i>Anytime, little mouse; if you can handle all of this.</i>\"  She's obviously trying to be bold about this - maybe your presence is unnerving her more than you thought.\n\n", false);

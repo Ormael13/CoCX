@@ -14,7 +14,7 @@ public function basiliskGreeting():void {
 	spriteSelect(75);
 	outputText("", true);
 	//First encounter: 
-	if(flags[UNKNOWN_FLAG_NUMBER_00276] == 0) {
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00276] == 0) {
 		outputText("You are carefully trailblazing up a steep pass in the jagged mountain peaks when a furious screech from high above you makes you start.\n\n", false);
 
 		outputText("\"<i>Thiieeeeeeeeef, filthy thieeeeeeeeef!</i>\"  A harpy flaps into view over the ridge, her face a picture of rage.  You hastily assume a fighting stance- but the harpy completely ignores you, her gaze sliding over you and onto the rock wall behind you.  \"<i>You can hide but you can't run, sneak thiieeeeeeeef!  When I find you, I'm going to tear your naaaaaaaaasty little eyes out!</i>\"  She flies on, screaming with anger, her head moving back and forth in jerky movements, scrying the landscape. You stare blankly in bafflement at this display, but are glad that a harpy's attention is on someone else for a change. Marveling at your fortune, you decide to press on.\n\n", false);
@@ -24,7 +24,7 @@ public function basiliskGreeting():void {
 		outputText("Using every vestige of your willpower, you tear your gaze away from the terrible, paralyzing sight.  Panting and feeling groggy, you desperately hold the rock formation in the corner of your eye. A tall, thin bipedal shape disengages from the stone against which it had been camouflaging itself, and stalks predatorily towards you.  With small, quick glances you glean fleeting impressions of grey-green scales, a tightly muscled yellow underbelly, cruelly curved index claws, a whip like tail. The creature moves its snub head towards yours suddenly, trying to catch your gaze with its deadly grey eyes again.  You recoil and ready yourself to fight it as best you can.\n\n", false);
 		//(spd loss)
 		basiliskSpeed(5);
-		flags[UNKNOWN_FLAG_NUMBER_00276]++;
+		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00276]++;
 		startCombat(39);
 	}
 	//Standard encounter:
@@ -32,10 +32,10 @@ public function basiliskGreeting():void {
 		outputText("You notice a large boulder ahead.  There is something curiously shaped about it. A small, wet grey shape on it catches your eye...\n\n", false);
 
 		outputText("You look away in the nick of time, and ready yourself to fight as the basilisk slides from its hiding place and advances upon you, its deadly eyes and sharp claws glinting coldly in the sunlight.\n\n", false);
-		flags[UNKNOWN_FLAG_NUMBER_00276]++;
+		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00276]++;
 		startCombat(39);
 	}
-	flags[UNKNOWN_FLAG_NUMBER_00276]++;
+	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00276]++;
 	spriteSelect(75);
 }
 
@@ -336,7 +336,7 @@ public function basiliskBirth():void {
 		outputText(" large, jade-colored eggs, the unmistakable shape of reptile eggs. You pick up one and hold it gently against your ear; inside, you can hear a little heart, beating strong and quick.  You put it down carefully with its fellows and stare at your clutch, a queasy tangle of emotions tugging at you.");
 
 		//First time:
-		if(flags[BENOIT_EGGS] + flags[BENOIT_GENERIC_EGGS] == 0) {
+		if(flags[kFLAGS.BENOIT_EGGS] + flags[kFLAGS.BENOIT_GENERIC_EGGS] == 0) {
 			//[Have not laid generic basilisk eggs before, have not laid Benoit's eggs: 
 			outputText("\n\nThe seconds drag by and the eggs remain still- the vague hope you harbor that they will immediately hatch, mature and get out of your life slowly vanishes.  What are you going to do with them? The only thing you can think of is to take them to Benoit.  Although you feel a slight tingle of shame for approaching him like this, you can't think of anyone else who would know what to do with these odd, unborn children of yours.");
 		}
@@ -347,15 +347,15 @@ public function basiliskBirth():void {
 		}
 		
 		outputText("\n\nThere is nothing else to be done: you will have to take this batch to Benoit");
-		if(flags[BENOIT_EGGS] > 0) outputText(" as well");
+		if(flags[kFLAGS.BENOIT_EGGS] > 0) outputText(" as well");
 		outputText(".  You place the egg back down and gather them all up, moving them closer to the campfire to stay warm while you recover from your exertions.");
 		outputText("\n\nWhen the light of day breaks, you gather your newly laid clutch and set off for Benoit's shop. The blind basilisk is asleep when you arrive, forcing you to bang loudly on his door to wake him up.");
 		outputText("\n\n\"<i>What is it?!</i>\" He snarls, displaying his fangs when he pops his head irritably out of the door. He stops and inhales through his nose, blushing faintly when he recognizes your scent.  \"<i>Oops! [name], I am zo sorry, I did not think it would be you. But why are you here at such an early hour?</i>\"");
 		//First Time:  
-		if(flags[BENOIT_GENERIC_EGGS] == 0) {
+		if(flags[kFLAGS.BENOIT_GENERIC_EGGS] == 0) {
 			outputText("\n\nApprehensively, you explain the situation - you were caught unawares by a basilisk in the mountains, and then... you put an egg into his hand to feel.  Benoit is silent for a time, his claws rubbing pensively over the smooth surface.");
 			outputText("\n\n“I see,” he says heavily.  \"<i>No, you were right to bring zem ere.  Zey will be safe with me and 'ell knows I will need all ze eggs I can get if I am to make zis work.</i>\"  You breathe an inward sigh of relief and follow him into his shop.");
-			if(flags[BENOIT_EGGS] + flags[BENOIT_GENERIC_EGGS] == 0) {
+			if(flags[kFLAGS.BENOIT_EGGS] + flags[kFLAGS.BENOIT_GENERIC_EGGS] == 0) {
 				outputText("\n\nHe feels around the clutter of his store room until he finds what he's looking for: A battered old basket stuffed with a soft pillow.  You raise an eyebrow at the liberal amounts of dog hair the pillow is covered with and Benoit coughs apologetically.");
 				outputText("\n\n“E isn't 'appy about me taking is bed, but to 'ell wizzim; e always gets is 'air on everysing anyway.” You spend some time arranging the eggs where they will be safe and warm.  Although you know they can't be, Benoit's blind eyes seem to be fixed upon the brood when you have finished.");
 				outputText("\n\n“And zese eggs are different?” he says hesitantly.  “Zere will be…little girls?”  You shrug and say even if they aren't female, at least he'll have some sons he can keep away from the mountain.  He sets his jaw and nods.");
@@ -371,7 +371,7 @@ public function basiliskBirth():void {
 		//Subsequent: Sheepishly, you give him an egg to feel.  Benoit shakes his head in exasperation, but lets you in.
 		else outputText("\n\nHe puts your latest batch with the others and then shares breakfast with you.  You leave with his final words lingering in your ears:  “More eggs is always good [name], but for ze Gods sake: Be.  More.  Careful.”");
 		outputText("\n");
-		flags[BENOIT_GENERIC_EGGS] += Math.floor(player.totalFertility() / 10);
+		flags[kFLAGS.BENOIT_GENERIC_EGGS] += Math.floor(player.totalFertility() / 10);
 	}
 	else {
 		outputText("A sudden shift in the weight of your pregnant belly staggers you, dropping you to your knees.  You realize something is about to be birthed, and you shed your " + player.armorName + " before it can be ruined by what's coming.  A contraction pushes violently through your midsection, stretching your " + vaginaDescript() + " painfully, the lips opening wide as something begins sliding down your passage.  A burst of green slime soaks the ground below as the birthing begins in earnest, and the rounded surface of a strangely colored egg peaks between your lips.  You push hard and the large egg pops free at last, making you sigh with relief as it drops into the pool of slime.", false);
@@ -555,7 +555,7 @@ public function basiliskAdvantageGoblin():void {
 
 		outputText("The minotaur holds onto you until he has finished spurting his last into you, before abruptly setting you back down on your frozen feet, pulling his slimy, receding member out of your abused anus and with a satisfied snort, takes his leave.  You feel his cum drooling out of you and down your " + hipDescript() + ", but in your hazy, druggy state the feeling is almost sensual.", false);
 		//(Addict: 
-		if(flags[MINOTAUR_CUM_ADDICTION_STATE] > 0 || player.hasPerk("Minotaur Cum Addict") >= 0) outputText("  You're incredibly frustrated that you can't clench yourself and hold the magical substance deep inside you, so you can savor the wonderful, soft elation it blossoms inside of you for as long as you can.", false);
+		if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 0 || player.hasPerk("Minotaur Cum Addict") >= 0) outputText("  You're incredibly frustrated that you can't clench yourself and hold the magical substance deep inside you, so you can savor the wonderful, soft elation it blossoms inside of you for as long as you can.", false);
 		outputText("\n\n", false);
 		
 		outputText("Eventually, after another thirty or so minutes of being forced to stand there and savor the cum trickling down your legs, you find with great relief you can begin to move your fingers again. With some effort you manage to work power into each corner of your body and finally shake free of the basilisk's curse; quickly, you shake the aching out of your " + player.legs() + " and re-dress before anything else finds you and woozily begin to make your way back down the mountain, trying to ignore the feeling of ooze dripping out of you.", false);
@@ -607,7 +607,7 @@ public function basiliskAdvantageMinotaur():void {
 
 	outputText("The minotaur holds onto you until he has finished spurting his last into you, before abruptly setting you back down on your frozen feet, pulling his slimy, receding member out of your abused anus and with a satisfied snort, takes his leave.  You feel his cum drooling out of you and down your " + hipDescript() + ", but in your hazy, druggy state the feeling is almost sensual.", false);
 	//(Addict: 
-	if(flags[MINOTAUR_CUM_ADDICTION_STATE] > 0 || player.hasPerk("Minotaur Cum Addict") >= 0) outputText("  You're incredibly frustrated that you can't clench yourself and hold the magical substance deep inside you, so you can savor the wonderful, soft elation it blossoms inside of you for as long as you can.", false);
+	if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 0 || player.hasPerk("Minotaur Cum Addict") >= 0) outputText("  You're incredibly frustrated that you can't clench yourself and hold the magical substance deep inside you, so you can savor the wonderful, soft elation it blossoms inside of you for as long as you can.", false);
 	outputText("\n\n", false);
 
 	outputText("Eventually, after another thirty or so minutes of being forced to stand there and savor the cum trickling down your legs, you find with great relief you can begin to move your fingers again. With some effort you manage to work power into each corner of your body and finally shake free of the basilisk's curse; quickly, you shake the aching out of your knees and redress before anything else finds you and woozily begin to make your way back down the mountain, trying to ignore the feeling of ooze dripping out of you.", false);

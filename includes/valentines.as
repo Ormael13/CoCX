@@ -36,7 +36,7 @@ THE EVENT ITSELF!*/
 
 public function crazyVDayShenanigansByVenithil():void {
 	clearOutput();
-	flags[VALENTINES_EVENT_YEAR] = date.fullYear;
+	flags[kFLAGS.VALENTINES_EVENT_YEAR] = date.fullYear;
 	outputText("Moving through the streets of Tel'Adre, you turn your steps towards the Wet Bitch, only to find that there's some odd event going on nearby.  Deciding the town is a safe enough place to let yourself be led astray by curiosity, you decide to investigate a bit closer.");
 	
 	outputText("\n\nNext to the tavern, there's a stall that's filled with flowers and many heart-shaped things; there's cards, chocolates, boxes of sweets, clothes with hearts sewn into them, mascots with the same, and even a sculpture of a heart and two lockets.  You'd say this was a shopping booth of sorts, but then, you're surprised by the sight of a goblin nearby, looking at you and waving.");

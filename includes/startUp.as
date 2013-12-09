@@ -270,11 +270,11 @@ Also go play <u><a href='http://www.furaffinity.net/view/9830293/'>Nimin</a></u>
 
 	if(debug)
 		outputText("\n\n<b>DEBUG MODE ENABLED:  ITEMS WILL NOT BE CONSUMED BY USE.</b>");
-	if(flags[SHOW_SPRITES_FLAG])
+	if(flags[kFLAGS.SHOW_SPRITES_FLAG])
 		outputText("\n\n<b>Sprites disabled.</b>");
-	if(flags[EASY_MODE_ENABLE_FLAG])
+	if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG])
 		outputText("\n\n<b>Easy Mode On:  Bad-ends can be ignored.</b>");
-	if(flags[SILLY_MODE_ENABLE_FLAG])
+	if(flags[kFLAGS.SILLY_MODE_ENABLE_FLAG])
 		outputText("\n\n<b>SILLY MODE ENGAGED: Crazy, nonsensical, and possibly hilarious things may occur.</b>");
 	if(isEaster())
 		outputText("\n\n<b>It's Easter!  Enjoy the eggs!</b>");
@@ -300,21 +300,21 @@ public function settingsScreen():void
 
 	outputText("\n\n");
 
-	if(flags[SHOW_SPRITES_FLAG] == 0)
+	if(flags[kFLAGS.SHOW_SPRITES_FLAG] == 0)
 		outputText("Sprites enabled: <b>Yes</b>.\n	You like to look at pretty pictures.");
 	else
 		outputText("Sprites enabled: <b>No</b>.\n	There are only words. Nothing else.");
 
 	outputText("\n\n");
 
-	if(flags[EASY_MODE_ENABLE_FLAG])
+	if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG])
 		outputText("Easy Mode <b>On</b>\n	Bad-ends can be ignored and combat is easier.");
 	else
 		outputText("Easy Mode <b>Off</b>\n	Bad-ends can ruin your game and combat is challenging.");
 
 	outputText("\n\n");
 
-	if(flags[SILLY_MODE_ENABLE_FLAG])
+	if(flags[kFLAGS.SILLY_MODE_ENABLE_FLAG])
 		outputText("Silly Mode <b>On</b>\n	Crazy, nonsensical, and possibly hilarious things may occur.");
 	else
 		outputText("Silly Mode <b>Off</b>\n	You're an incorrigable stick-in-the-mud with no sense of humor.");
@@ -324,7 +324,7 @@ public function settingsScreen():void
 	outputText("Additional note: You <b>must</b> be <i>in a game session</i> (e.g. load your save, hit \"Main Menu\", change the flag settings, and then hit \"Resume\") to change these flags. They're saved into the saveGame file, so if you load a save, it will clear them to the state in that save.");
 	outputText("\n\n");
 
-	if(flags[LOW_STANDARDS_FOR_ALL])
+	if(flags[kFLAGS.LOW_STANDARDS_FOR_ALL])
 	{
 		outputText("Low standards Mode <b>On</b>\n	NPCs ignore body type preferences.");
 		outputText("\n	(Not gender preferences though. You still need the right hole.)");
@@ -335,7 +335,7 @@ public function settingsScreen():void
 
 	outputText("\n\n");
 
-	if(flags[HYPER_HAPPY])
+	if(flags[kFLAGS.HYPER_HAPPY])
 	{
 		outputText("Hyper Happy mode <b>On</b>\n	Only reducto and humus shrink endowments.");
 		outputText("\n	Incubus draft doesn't affect breasts, and succubi milk doesn't affect cocks.")
@@ -389,10 +389,10 @@ public function debugPane():void
 public function toggleStandards():void
 {
 	//toggle debug
-	if(flags[LOW_STANDARDS_FOR_ALL])
-		flags[LOW_STANDARDS_FOR_ALL] = false;
+	if(flags[kFLAGS.LOW_STANDARDS_FOR_ALL])
+		flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = false;
 	else
-		flags[LOW_STANDARDS_FOR_ALL] = true;
+		flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = true;
 	settingsScreen();
 	return;
 }
@@ -400,10 +400,10 @@ public function toggleStandards():void
 public function toggleHyperHappy():void
 {
 	//toggle debug
-	if(flags[HYPER_HAPPY])
-		flags[HYPER_HAPPY] = false;
+	if(flags[kFLAGS.HYPER_HAPPY])
+		flags[kFLAGS.HYPER_HAPPY] = false;
 	else
-		flags[HYPER_HAPPY] = true;
+		flags[kFLAGS.HYPER_HAPPY] = true;
 	settingsScreen();
 	return;
 }
@@ -423,10 +423,10 @@ public function toggleDebug():void
 
 public function toggleEasyModeFlag():void
 {
-	if(flags[EASY_MODE_ENABLE_FLAG] == 0)
-		flags[EASY_MODE_ENABLE_FLAG] = 1;
+	if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 0)
+		flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 1;
 	else
-		flags[EASY_MODE_ENABLE_FLAG] = 0;
+		flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 0;
 	settingsScreen();
 	mainView.showMenuButton( MainView.MENU_DATA );
 	settingsScreen();
@@ -435,10 +435,10 @@ public function toggleEasyModeFlag():void
 
 public function toggleSpritesFlag():void
 {
-	if(flags[SHOW_SPRITES_FLAG])
-		flags[SHOW_SPRITES_FLAG] = false;
+	if(flags[kFLAGS.SHOW_SPRITES_FLAG])
+		flags[kFLAGS.SHOW_SPRITES_FLAG] = false;
 	else
-		flags[SHOW_SPRITES_FLAG] = true;
+		flags[kFLAGS.SHOW_SPRITES_FLAG] = true;
 	settingsScreen();
 	return;
 }
@@ -446,10 +446,10 @@ public function toggleSpritesFlag():void
 public function toggleSillyFlag():void
 {
 
-	if(flags[SILLY_MODE_ENABLE_FLAG])
-		flags[SILLY_MODE_ENABLE_FLAG] = false;
+	if(flags[kFLAGS.SILLY_MODE_ENABLE_FLAG])
+		flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = false;
 	else
-		flags[SILLY_MODE_ENABLE_FLAG] = true;
+		flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = true;
 	settingsScreen();
 	return;
 

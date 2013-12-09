@@ -21,7 +21,7 @@ package coc.test {
 
 			trace( "MainView:", this.mainView );
 
-			this.gameModel.flags[ 273 ] = 0;
+			this.gameModel.flags[kFLAGS. 273 ] = 0;
 			this.mainView.selectSprite( 2 );
 
 			this.mainView.setButton( 0, 'Lol' );

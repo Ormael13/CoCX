@@ -368,7 +368,7 @@ public function dropItem(monsterName:String):void {
 	}
 	if(monster.short == "Sheila") {
 		shortName = "KangaFt";
-		if(flags[SHEILA_DEMON] > 0) {
+		if(flags[kFLAGS.SHEILA_DEMON] > 0) {
 			if(rand(3) == 0) shortName = "SucMilk";
 			else if(rand(2) == 0) shortName = "IncubiD";
 		}
@@ -387,7 +387,7 @@ public function dropItem(monsterName:String):void {
 		else shortName = "Brown D";
 	}
 	if(monsterName == "Vala") {
-		if(flags[TIMES_PC_DEFEATED_VALA] == 0) shortName = "NumbRox";
+		if(flags[kFLAGS.TIMES_PC_DEFEATED_VALA] == 0) shortName = "NumbRox";
 	}
 	if(monsterName == "plain girl") {
 		if(rand(3) == 0) shortName = "EctoPls";
@@ -517,10 +517,10 @@ public function dropItem(monsterName:String):void {
 		else if(temp == 6) shortName = "W. Book";
 		else if(temp == 7) shortName = "B.Chitn";
 		//force honey drop if milked
-		if(flags[FORCE_BEE_TO_PRODUCE_HONEY] == 1) {
+		if(flags[kFLAGS.FORCE_BEE_TO_PRODUCE_HONEY] == 1) {
 			if(rand(2) == 0) shortName = "BeeHony";
 			else shortName = "PurHony";
-			flags[FORCE_BEE_TO_PRODUCE_HONEY] = 0;
+			flags[kFLAGS.FORCE_BEE_TO_PRODUCE_HONEY] = 0;
 		}
 	}
 	if(monsterName == "demons") {
@@ -591,7 +591,7 @@ public function dropItem(monsterName:String):void {
 		shortName = "FoxJewl";
 	}
 	//Chance of armor if at level 1 pierce fetish
-	if(!plotFight && monster.short != "Ember" && monster.short != "Kiha" && monster.short != "Helia" && monster.short != "Isabella" && flags[PC_FETISH] == 1 && rand(10) == 0 && !hasItem("SeductA", 1) && !ceraphIsFollower()) {
+	if(!plotFight && monster.short != "Ember" && monster.short != "Kiha" && monster.short != "Helia" && monster.short != "Isabella" && flags[kFLAGS.PC_FETISH] == 1 && rand(10) == 0 && !hasItem("SeductA", 1) && !ceraphIsFollower()) {
 		shortName = "SeductA";
 	}
 	
@@ -615,8 +615,8 @@ public function dropItem(monsterName:String):void {
 		if(temp == 12) shortName ="L.BlkEg";
 	}
 	//Bonus loot overrides others
-	if(flags[UNKNOWN_FLAG_NUMBER_00234] != "") {
-		shortName = flags[UNKNOWN_FLAG_NUMBER_00234];
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] != "") {
+		shortName = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234];
 	}
 	//if(debug) shortName = "OviElix";
 	if(shortName != "NULL") {
@@ -692,8 +692,8 @@ public function fixedDamage(weaponName:String):Number {
 	if(weaponName == "deadly spear") attack = 8;
 	if(weaponName == "coiled whip") attack = 5;
 	if(weaponName == "succubi whip") attack = 10;
-	if(weaponName == "jeweled rapier") attack = (13 + flags[RAPHAEL_RAPIER_TRANING]*2);
-	if(weaponName == "Raphael's rapier" || weaponName == "vulpine rapier") attack = 8 + flags[RAPHAEL_RAPIER_TRANING]*2;
+	if(weaponName == "jeweled rapier") attack = (13 + flags[kFLAGS.RAPHAEL_RAPIER_TRANING]*2);
+	if(weaponName == "Raphael's rapier" || weaponName == "vulpine rapier") attack = 8 + flags[kFLAGS.RAPHAEL_RAPIER_TRANING]*2;
 	if(weaponName == "spiked gauntlet") attack = 5;
 	if(weaponName == "hooked gauntlets") attack = 8;
 	//CHEATAHN'
@@ -788,7 +788,7 @@ public function equipWeapon(weaponName:String):void {
 		player.weaponValue = itemValue("dragon-shell shield");
 		player.weaponAttack = fixedDamage("dragon-shell shield");
 		//First Time Equipping Description: (Z)
-		if(flags[TIMES_EQUIPPED_EMBER_SHIELD] == 0) {
+		if(flags[kFLAGS.TIMES_EQUIPPED_EMBER_SHIELD] == 0) {
 			clearOutput();
 			outputText("Turning the sturdy shield over in inspection, you satisfy yourself as to its craftsmanship and adjust the straps to fit your arm snugly.  You try a few practice swings, but find yourself overbalancing at each one due to the deceptive lightness of the material.  Eventually, though, you pick up the knack of putting enough weight behind it to speed it through the air while thrusting a leg forward to stabilize yourself, and try bashing a nearby rock with it.  You smile with glee as ");
 			if(player.str > 80) outputText("bits and pieces from the surface of the");
@@ -796,7 +796,7 @@ public function equipWeapon(weaponName:String):void {
 			outputText(" rock are sent flying in all directions.");
 			outputText("\n\nAfter a few more practice bashes and shifts to acquaint yourself with its weight, you think you're ready to try facing an enemy with your new protection.  One last thing... taking off the shield and turning it straps-down, you spit onto the surface.  Satisfyingly, the liquid disappears into the shell as soon as it touches.");
 		}
-		flags[TIMES_EQUIPPED_EMBER_SHIELD]++;
+		flags[kFLAGS.TIMES_EQUIPPED_EMBER_SHIELD]++;
 	}
 	if(weaponName == "lust-enchanted dagger") {
 		player.weaponVerb = "stab";
@@ -976,7 +976,7 @@ public function applyArmorStats(armorName:String, output:Boolean = true):void {
 			player.nipplesPierced = 1;
 			player.nipplesPShort = "seamless black nipple-studs";
 			player.nipplesPLong = "Seamless black nipple-studs";
-			flags[PC_FETISH] = 2;
+			flags[kFLAGS.PC_FETISH] = 2;
 			return;
 		}
 		else {
@@ -1046,14 +1046,14 @@ public function applyArmorStats(armorName:String, output:Boolean = true):void {
 		Min lust: 30
 		Min libido: 50*/
 		if(player.hasVirginVagina()) {
-			player.armorDef = 9 + flags[BIKINI_ARMOR_BONUS];
+			player.armorDef = 9 + flags[kFLAGS.BIKINI_ARMOR_BONUS];
 			while(player.hasPerk("Slutty Seduction") >= 0) player.removePerk("Slutty Seduction");
-			player.createPerk("Slutty Seduction",10 + flags[BIKINI_ARMOR_BONUS],0,0,0,"Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.");
+			player.createPerk("Slutty Seduction",10 + flags[kFLAGS.BIKINI_ARMOR_BONUS],0,0,0,"Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.");
 		}
 		else {
-			player.armorDef = 6 + flags[BIKINI_ARMOR_BONUS];
+			player.armorDef = 6 + flags[kFLAGS.BIKINI_ARMOR_BONUS];
 			while(player.hasPerk("Slutty Seduction") >= 0) player.removePerk("Slutty Seduction");
-			if(player.hasPerk("Slutty Seduction") < 0) player.createPerk("Slutty Seduction",6 + flags[BIKINI_ARMOR_BONUS],0,0,0,"Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.");	
+			if(player.hasPerk("Slutty Seduction") < 0) player.createPerk("Slutty Seduction",6 + flags[kFLAGS.BIKINI_ARMOR_BONUS],0,0,0,"Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.");	
 		}
 		player.armorValue = itemValue("lusty maiden's armor");
 	}
@@ -1064,7 +1064,7 @@ public function applyArmorStats(armorName:String, output:Boolean = true):void {
 		if(player.hasPerk("Wizard's Endurance") < 0) player.createPerk("Wizard's Endurance",30,0,0,0,"Your spellcasting equipment makes it harder for spell-casting to fatigue you!");
 	}
 	if(armorName == "goo armor") {
-		flags[VALARIA_AT_CAMP] = 0;
+		flags[kFLAGS.VALARIA_AT_CAMP] = 0;
 		if(output) {
 			outputText("With an ecstatic smile, the goo-armor jumps to her feet and throws her arms around your shoulders.  \"<i>Oh, this is going to be so much fun!  Thank you thank you thank you!  I promise I'll keep you nice and snug and safe, don't you worry.  Oooh, a real adventure again!  WHEEE!</i>\"");
 			outputText("\n\nBefore she can get too excited, you remind the goo that she's supposed to be your armor right about now.  Clasping her hands over her mouth in embarrassment, she utters a muted apology and urges you to just \"<i>put me on!</i>\"  Awkwardly, you strip out of your gear and open up the platemail armor and clamber in.  It's wet and squishy, making you shudder and squirm as you squash your new friend flat against the metal armor.");
@@ -1076,9 +1076,9 @@ public function applyArmorStats(armorName:String, output:Boolean = true):void {
 			outputText(", encasing your loins in case you need a little mid-battle release, she says.");
 		
 			outputText("\n\nAfter a few minutes, you and your armor-friend are settled and ready to go.");
-			if(flags[MET_VALERIA] == 0) {
+			if(flags[kFLAGS.MET_VALERIA] == 0) {
 				outputText("  As you ready yourself for the dungeon ahead, the goo giggles into your ear.  \"<i>Oh shit, silly me.  I forgot, my name's Valeria.  Ser Valeria, if you're feeling fancy.</i>\"  You introduce yourself, awkwardly shaking your own hand by way of pleasantries.");
-				flags[MET_VALERIA]++;
+				flags[kFLAGS.MET_VALERIA]++;
 			}
 			outputText("\n\n\"<i>Well alright then, [name]!</i>\" Valeria says excitedly, \"<i>Let's go!</i>\"\n\n");
 		}
@@ -1334,7 +1334,7 @@ public function equipArmor(armorName:String, output:Boolean = true):void {
 		//outputText("You have " + itemLongName(shortName) + " still over.  ", false);
 		//takeItem();
 		outputText("Valeria picks herself up and huffs, \"<i>Maybe we can adventure some more later on?</i>\" before undulating off towards your camp.\n\n(<b>Valeria now available in the followers tab!</b>)");
-		flags[VALARIA_AT_CAMP] = 1;
+		flags[kFLAGS.VALARIA_AT_CAMP] = 1;
 		itemGoNext();
 	}
 	if(oldArmorName == "lusty maiden's armor") {
@@ -1536,16 +1536,16 @@ public function doItems(eventNo:Number):void {
 				emberCampDesc();
 				ember = 3701;
 			}
-			if(nieveHoliday() && flags[NIEVE_STAGE] > 0 && flags[NIEVE_STAGE] < 5) {
-				if(flags[NIEVE_STAGE] == 1) outputText("\nThere's some odd snow here that you could do something with...\n");
+			if(nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5) {
+				if(flags[kFLAGS.NIEVE_STAGE] == 1) outputText("\nThere's some odd snow here that you could do something with...\n");
 				else outputText("\nYou have a snow" + nieveMF("man","woman") + " here that seems like it could use a little something...\n");
 				nieve = 3964;
 			}
-			if(flags[FUCK_FLOWER_KILLED] == 0 && flags[FUCK_FLOWER_LEVEL] >= 1 && inDungeon == 0) {
+			if(flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1 && inDungeon == 0) {
 				fuckPlant = 3861;
-				if(flags[FUCK_FLOWER_LEVEL] == 3) plantT = "Tree";
+				if(flags[kFLAGS.FUCK_FLOWER_LEVEL] == 3) plantT = "Tree";
 				//Blurb in Items Screen
-				if(flags[FUCK_FLOWER_LEVEL] == 4) outputText("\nHolli is in her tree at the edges of your camp.  You could go visit her if you want.\n");
+				if(flags[kFLAGS.FUCK_FLOWER_LEVEL] == 4) outputText("\nHolli is in her tree at the edges of your camp.  You could go visit her if you want.\n");
 			}
 		}
 		//If3 no items
@@ -2070,9 +2070,9 @@ public function doItems(eventNo:Number):void {
 	if(eventNo == 1058) {
 		spriteSelect(49);
 		outputText("", true);
-		if(player.gems >= 100 || (player.gems >= 50 && flags[AMILY_MET_RATHAZUL] >= 2)) {
+		if(player.gems >= 100 || (player.gems >= 50 && flags[kFLAGS.AMILY_MET_RATHAZUL] >= 2)) {
 			outputText("Rathazul hands you the Reducto with a nod before returning to his work.\n\n", false);
-			if(flags[AMILY_MET_RATHAZUL] >= 2) player.gems -= 50;
+			if(flags[kFLAGS.AMILY_MET_RATHAZUL] >= 2) player.gems -= 50;
 			else player.gems -= 100;
 			shortName = "Reducto";
 			takeItem();
@@ -2174,7 +2174,7 @@ public function doItems(eventNo:Number):void {
 			temp5 = 1070;
 			outputText("\n" + int(itemValue(itemSlot5.shortName)/2) + " gems for " + itemLongName(itemSlot5.shortName) + ".", false);
 		}
-		if(flags[KATHERINE_UNLOCKED] == 1) kath = 3317;
+		if(flags[kFLAGS.KATHERINE_UNLOCKED] == 1) kath = 3317;
 		choices((itemSlot1.shortName + " x" + itemSlot1.quantity), temp1, (itemSlot2.shortName + " x" + itemSlot2.quantity), temp2, (itemSlot3.shortName + " x" + itemSlot3.quantity), temp3, (itemSlot4.shortName + " x" + itemSlot4.quantity), temp4, (itemSlot5.shortName + " x" + itemSlot5.quantity), temp5, "Kath's Alley", kath, "", 0, "", 0, "", 0, "Back", 2211);
 	}
 	//Sell item from slot1
@@ -3145,10 +3145,10 @@ public function destroyItems(itemName:String, minQuantity:Number):Boolean {
 public function ceruleanPotion():void {
 	slimeFeed();
 	//Repeat genderless encounters
-	if(player.gender == 0 && flags[CERULEAN_POTION_NEUTER_ATTEMPTED] > 0) {
+	if(player.gender == 0 && flags[kFLAGS.CERULEAN_POTION_NEUTER_ATTEMPTED] > 0) {
 		outputText("You take another sip of the Cerulean Potion.  You find it soothing and become very excited about the possibility of another visit from the succubus.", true);
 	}
-	else if(player.gender == 3 && flags[UNKNOWN_FLAG_NUMBER_00111] > 0) {
+	else if(player.gender == 3 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00111] > 0) {
 		outputText("With anticipation, you chug down another bottle of the Cerulean Potion. A warm sensation radiates out from your stomach as you feel the potion course through your body.", true);
 	}
 	//All else
@@ -3438,9 +3438,9 @@ public function minotaurCum():void {
 	minoCumAddiction(7);
 	outputText("", true);
 	outputText("As soon as you crack the seal on the bottled white fluid, a ", false);
-	if(flags[MINOTAUR_CUM_ADDICTION_STATE] == 0) outputText("potent musk washes over you.", false);
+	if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 0) outputText("potent musk washes over you.", false);
 	else outputText("heavenly scent fills your nostrils.", false);
-	if(flags[MINOTAUR_CUM_ADDICTION_TRACKER] < 50) outputText("  It makes you feel dizzy, ditzy, and placid.", false);
+	if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] < 50) outputText("  It makes you feel dizzy, ditzy, and placid.", false);
 	else outputText("  It makes you feel euphoric, happy, and willing to do ANYTHING to keep feeling this way.", false);
 	outputText("  Unbidden, your hand brings the bottle to your lips, and the heady taste fills your mouth as you convulsively swallow the entire bottle.", false);
 	//-Raises lust by 10.
@@ -3469,7 +3469,7 @@ public function minotaurCum():void {
 	//(Minotaur fantasy)
 	if(gameState == 0 && rand(10) == 1) {
 		outputText("\n\nYour eyes flutter closed for a second as a fantasy violates your mind.  You're on your knees, prostrate before a minotaur.  Its narcotic scent fills the air around you, and you're swaying back and forth with your belly already sloshing and full of spunk.  Its equine-like member is rubbing over your face, and you submit to the beast, stretching your jaw wide to take its sweaty, glistening girth inside you.  Your tongue quivers happily as you begin sucking and slurping, swallowing each drop of pre-cum you entice from the beastly erection.  Gurgling happily, you give yourself to your inhuman master for a chance to swallow into unthinking bliss.", false);
-		stats(0,0,0,0,1,0,rand(5)+player.cor/20+flags[MINOTAUR_CUM_ADDICTION_TRACKER]/5,0);
+		stats(0,0,0,0,1,0,rand(5)+player.cor/20+flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER]/5,0);
 	}
 	//(Healing – if hurt and uber-addicted (hasperk))
 	if(player.HP < maxHP() && player.hasPerk("Minotaur Cum Addict") >= 0) {
@@ -3477,8 +3477,8 @@ public function minotaurCum():void {
 		HPChange(int(maxHP()/4), false);
 	}
 	//Uber-addicted status!
-	if(player.hasPerk("Minotaur Cum Addict") >= 0 && flags[MINOTAUR_CUM_REALLY_ADDICTED_STATE] <= 0) {
-		flags[MINOTAUR_CUM_REALLY_ADDICTED_STATE] = 3 + rand(2);
+	if(player.hasPerk("Minotaur Cum Addict") >= 0 && flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] <= 0) {
+		flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] = 3 + rand(2);
 		outputText("\n\n<b>Your body feels so amazing and sensitive.  Experimentally you pinch yourself and discover that even pain is turning you on!</b>", false);
 	}
 }
@@ -6100,7 +6100,7 @@ public function blackRubberEgg(large:Boolean):void {
 				player.skinAdj = "rubber";
 				outputText("a layer of sensitive rubber.  ", false);
 			}
-			flags[PC_KNOWS_ABOUT_BLACK_EGGS] = 1;
+			flags[kFLAGS.PC_KNOWS_ABOUT_BLACK_EGGS] = 1;
 			if(player.cor < 66) outputText("You feel like some kind of freak.", false);
 			else outputText("You feel like some kind of sexy " + player.skinDesc + " love-doll.", false);
 			stats(0,0,-3,0,0,8,10,2);			
@@ -7762,8 +7762,8 @@ public function slimeFeed():void {
 		}
 	}
 	if(player.hasPerk("Diapause") >= 0) {
-		flags[UNKNOWN_FLAG_NUMBER_00228] += 3 + rand(3);
-		flags[UNKNOWN_FLAG_NUMBER_00229] = 1;
+		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00228] += 3 + rand(3);
+		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00229] = 1;
 	}
 }
 
@@ -8035,7 +8035,7 @@ public function snakeOil():void {
 
 public function extensionSerum():void {
 	outputText("", true);
-	if(flags[INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED] > 2) {
+	if(flags[kFLAGS.INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED] > 2) {
 		outputText("<b>No way!</b>  Your head itches like mad from using the rest of these, and you will NOT use another.\n", false);
 		if(!debug) {
 			shortName = "ExtSerm";
@@ -8044,24 +8044,24 @@ public function extensionSerum():void {
 		return;
 	}
 	outputText("You open the bottle of hair extension serum and follow the directions carefully, massaging it into your scalp and being careful to keep it from getting on any other skin.  You wash off your hands with lakewater just to be sure.", false);
-	if(flags[INCREASED_HAIR_GROWTH_TIME_REMAINING] <= 0) {
+	if(flags[kFLAGS.INCREASED_HAIR_GROWTH_TIME_REMAINING] <= 0) {
 		outputText("\n\nThe tingling on your head lets you know that it's working!", false);
-		flags[INCREASED_HAIR_GROWTH_TIME_REMAINING] = 7;
-		flags[INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED] = 1;
+		flags[kFLAGS.INCREASED_HAIR_GROWTH_TIME_REMAINING] = 7;
+		flags[kFLAGS.INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED] = 1;
 	}
-	else if(flags[INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED] == 1) {
+	else if(flags[kFLAGS.INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED] == 1) {
 		outputText("\n\nThe tingling intensifies, nearly making you feel like tiny invisible faeries are massaging your scalp.", false);
-		flags[INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED]++;
+		flags[kFLAGS.INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED]++;
 	}
-	else if(flags[INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED] == 2) {
+	else if(flags[kFLAGS.INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED] == 2) {
 		outputText("\n\nThe tingling on your scalp is intolerable!  It's like your head is a swarm of angry ants, though you could swear your hair is growing so fast that you can feel it weighing you down more and more!", false);
-		flags[INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED]++;
+		flags[kFLAGS.INCREASED_HAIR_GROWTH_SERUM_TIMES_APPLIED]++;
 	}
-	if(flags[HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] > 0 && player.hairType != 4) {
-		flags[HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
+	if(flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] > 0 && player.hairType != 4) {
+		flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
 		outputText("\n\n<b>Somehow you know that your " + hairDescript() + " is growing again.</b>", false);
 	}
-	if(flags[INCREASED_HAIR_GROWTH_TIME_REMAINING] < 7) flags[INCREASED_HAIR_GROWTH_TIME_REMAINING] = 7;
+	if(flags[kFLAGS.INCREASED_HAIR_GROWTH_TIME_REMAINING] < 7) flags[kFLAGS.INCREASED_HAIR_GROWTH_TIME_REMAINING] = 7;
 }
 public function Hummus():void {
 	outputText("", true);
@@ -8167,7 +8167,7 @@ public function Hummus():void {
 
 
 public function giveHumanizer():void {
-	if(flags[TIMES_CHEATED_COUNTER] > 0) {
+	if(flags[kFLAGS.TIMES_CHEATED_COUNTER] > 0) {
 		outputText("<b>I was a cheater until I took an arrow to the knee...</b>", true);
 		eventParser(5035);
 		return;
@@ -8175,7 +8175,7 @@ public function giveHumanizer():void {
 	outputText("I AM NOT A CROOK.  BUT YOU ARE!  <b>CHEATER</b>!\n\n", true);
 	shortName = "Hummus ";
 	takeItem();
-	flags[TIMES_CHEATED_COUNTER]++;
+	flags[kFLAGS.TIMES_CHEATED_COUNTER]++;
 }
 
 public function coal():void {
@@ -8820,11 +8820,11 @@ public function reptilum():void {
 		}	
 	}
 	//-Hair stops growing!
-	if(flags[HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0 && changes < changeLimit && rand(4) == 0) {
+	if(flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0 && changes < changeLimit && rand(4) == 0) {
 		outputText("\n\nYour scalp tingles oddly.  In a panic, you reach up to your " + hairDescript() + ", but thankfully it appears unchanged.\n\n", false);
 		outputText("(<b>Your hair has stopped growing.</b>)", false);
 		changes++;
-		flags[HAIR_GROWTH_STOPPED_BECAUSE_LIZARD]++;
+		flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD]++;
 	}	
 	//Big physical changes:
 	//-Legs – Draconic, clawed feet
@@ -10461,9 +10461,9 @@ public function shriveledTentacle():void {
 		outputText("\n\nYour balance slides way off, and you plop down on the ground as mass concentrates on your head.  Reaching up, you give a little shriek as you feel a disturbingly thick, squirming thing where your hair should be.  Pulling it down in front of your eyes, you notice it's still attached to your head; what's more, it's the same color as your hair used to be.  <b>You now have squirming tentacles in place of hair!</b>  As you gaze at it, a gentle heat starts to suffuse your hand.  The tentacles must be developing their characteristic stingers!  You quickly let go; you'll have to take care to keep them from rubbing on your skin at all hours.  On the other hand, they're quite short and you find you can now flex and extend them as you would any other muscle, so that shouldn't be too hard.  You settle on a daring, windswept look for now.", false);
 		player.hairType = 4;
 		player.hairLength = 5;
-		if(flags[HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) {
+		if(flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) {
 			outputText("  <b>(Your hair has stopped growing.)</b>", false);
-			flags[HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 1;
+			flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 1;
 		}
 		changes++;		
 		changes++;		
@@ -10766,9 +10766,9 @@ public function foxTF(enhanced:Boolean = false):void {
 	var counter:int = 0;
 	
 	if(player.faceType == FACE_FOX && player.tailType == TAIL_TYPE_FOX && player.earType == EARS_FOX && player.lowerBody == LOWER_BODY_TYPE_FOX && player.skinType == SKIN_TYPE_FUR && rand(3) == 0) {
-		if(flags[FOX_BAD_END_WARNING] == 0) {
+		if(flags[kFLAGS.FOX_BAD_END_WARNING] == 0) {
 			outputText("\n\nYou get a massive headache and a craving to raid a henhouse.  Thankfully, both pass in seconds, but <b>maybe you should cut back on the vulpine items...</b>");
-			flags[FOX_BAD_END_WARNING] = 1;
+			flags[kFLAGS.FOX_BAD_END_WARNING] = 1;
 		}
 		else {
 			outputText("\n\nYou scarf down the ");
@@ -11150,7 +11150,7 @@ public function eatEmberEgg():void {
 public function chickenHarpy():void {
 	clearOutput();
 	spriteSelect(90);
-	if(flags[TIMES_MET_CHICKEN_HARPY] == 0) {
+	if(flags[kFLAGS.TIMES_MET_CHICKEN_HARPY] == 0) {
 		outputText("Taking a stroll along the mountains, you come across a peculiar-looking harpy wandering around with a large wooden cart in tow.  She's far shorter and bustier than any regular harpy you've seen before, reaching barely 4' in height but managing to retain some semblance of their thick feminine asses.  In addition to the fluffy white feathers decorating her body, the bird-woman sports about three more combed back upon her forehead like a quiff, vividly red in colour.");
 		outputText("\n\nHaving a long, hard think at the person you're currently making uncomfortable with your observational glare, you've come to a conclusion - she must be a chicken harpy!");
 		outputText("\n\nAs you take a look inside of the cart you immediately spot a large hoard of eggs stacked clumsily in a pile.  The curious collection of eggs come in many colours and sizes, protected by a sheet of strong canvas to keep it all together.");
@@ -11169,7 +11169,7 @@ public function chickenHarpy():void {
 		outputText("\n\n\"<i>Hey sunshine, do y'have any elixirs you can give me today?</i>\"");
 		//[Give Two][Give Three]	[No, I Must Now Return To My People]
 	}
-	flags[TIMES_MET_CHICKEN_HARPY]++;
+	flags[kFLAGS.TIMES_MET_CHICKEN_HARPY]++;
 	//[Give Two][Give Three]		[Not Really, No]
 	menu();
 	if(hasItem("OviElix",2)) addButton(0,"Give Two",giveTwoOviElix);
@@ -11228,7 +11228,7 @@ public function getHarpyEgg(type:int = 0):void {
 	if(type == 9) shortName = "L.PrpEg";
 	if(type == 10) shortName = "WhiteEg";
 	if(type == 11) shortName = "L.WhtEg";
-	flags[EGGS_BOUGHT]++;
+	flags[kFLAGS.EGGS_BOUGHT]++;
 	outputText("You take " + itemLongName(shortName) + ", and the harpy nods in regards to your decision.  Prepping her cart back up for the road, she gives you a final wave goodbye before heading back down through the mountains.\n\n");
 	menuLoc = 27;
 	takeItem();	
@@ -11849,13 +11849,13 @@ public function lustyMaidenPaizuri():void {
 	outputText("\n\nThe stink of sperm slowly fades as you move, almost seeming to absorb into your skin.  It leaves you with a healthy glow and a surety to your movements, sure that your revealing armor is going to protect you.");
 	//Slimefeed, minus slight corruption if PC is a virgin, raise sensitivity
 	slimeFeed();
-	flags[BIKINI_ARMOR_BONUS] += 2;
-	if(flags[BIKINI_ARMOR_BONUS] > 8) flags[BIKINI_ARMOR_BONUS] = 8;
+	flags[kFLAGS.BIKINI_ARMOR_BONUS] += 2;
+	if(flags[kFLAGS.BIKINI_ARMOR_BONUS] > 8) flags[kFLAGS.BIKINI_ARMOR_BONUS] = 8;
 	stats(0,0,0,0,0,2,-100,0);
 	if(player.hasVirginVagina()) stats(0,0,0,0,0,0,0,-1);
 	//If minotaur, increase addiction slightly.
 	if(monster.short == "minotaur") minoCumAddiction(3);
-	if(monster.short == "Ceraph") flags[UNKNOWN_FLAG_NUMBER_00291]++;
+	if(monster.short == "Ceraph") flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00291]++;
 	//Usable on: Imps, Minotaurs, Satyrs, Incubus Mechanic, Anemones, Spider Guys, Akbal, Drider, Fetish Zealot, Sand Trap, Very Corrupt Jojo (Maybe slight decorruption to him), Ceraph, Red Kitsune if cock out.
 	if(inCombat()) eventParser(5007);
 	else doNext(13);

@@ -8,7 +8,7 @@ public function isHalloween():Boolean {
 public function pumpkinFuckEncounter():void {
 	clearOutput();
 	outputText("Just ahead, in the middle of the path, lies a seeming innocuous gourd - a pumpkin to be precise.  The growth is oddly out of place.  Nothing else grows on the soft animal-forged path you now tread, and the pumpkin and its vines are moist, as if wet with morning dew.  They are the only plants in the vicinity to bear such moisture, gleaming dully in the muted arboreal light.");
-	if(flags[PUMPKIN_FUCK_YEAR_DONE] > 0) outputText("  An old, haunting memory surfaces, and you realizes this seems... familiar.  Did you find this last year?  Yes... it could have been this very same pumpkin...");
+	if(flags[kFLAGS.PUMPKIN_FUCK_YEAR_DONE] > 0) outputText("  An old, haunting memory surfaces, and you realizes this seems... familiar.  Did you find this last year?  Yes... it could have been this very same pumpkin...");
 	outputText("\n\nWhile startled by the vegetation's placement, it seems harmless enough.");
 	outputText("\n\nYou advance cautiously, extremely familiar with the traps and pitfalls that all-too-often prevail in this world.  The pumpkin's rind is bright orange, ripe and seemingly ready to bulge out.  The vines are thick, dark green, and reflective, partly thanks to the oozing moisture that drips from them to the floor.  After closing, it becomes clear that it isn't a coating of dew on the pumpkin but thick, viscous slime instead.  The clear, syrupy ooze begins to drip from the vines even as it rolls down the pumpkin, seeping out of the plant's skin in fat, heavy rivulets.");
 	var fuck:int = 0;
@@ -36,7 +36,7 @@ public function pumpkinFuckEncounter():void {
 //[HOLY SHIT YOU BE FUCKING A PUMPKIN]
 public function pumpkinFuck():void {
 	clearOutput();
-	flags[PUMPKIN_FUCK_YEAR_DONE] = date.fullYear;
+	flags[kFLAGS.PUMPKIN_FUCK_YEAR_DONE] = date.fullYear;
 	outputText("Well, fuck it.  You're horny, and this little pumpkin doesn't look like it could stop you from fucking that gushing gourd-pussy.  As you shed your [armor], a few of the rough, slime-sweating vines feebly rise up to embrace you, but you brush them away, having no time for corrupt foolishness.  You're going to bust a nut in this fruit's sweet, supple folds, not let some malformed tentacle-horror molest you.");
 	outputText("\n\nYou kneel down before your target and examine the leaky orifice before you.  The rind around the opening is softer and smoother than human skin, yet oddly supple.  As soon as your fingers grace the surface of the moist fruit, a splash of ooze squirts from the gash to puddle at your [feet].  Curiously, you open the pumpkin's pussy with your fingers, feeling the slick wet walls trying to envelop your digits even as you gander at the compellingly vibrant interior.  The air seems thick with the plant's sweet smell, and [eachCock], irregardless of your reason, seems hard as stone and painfully erect.");
 	outputText("\n\nTentatively, you raise one of your juice-soaked fingertips to your lips and taste it.  The flavor is as you would expect from a pumpkin, though it has a sweet, cinnamony aftertaste, just like the pies your village would make around harvest!  Shuddering at the memories of your distant past and budding lust, you shift position to line your [cock biggest] up with the lurid purple plant-pussy.  Smiling at the absurdity of it all, you push forward, anticipating the slimy tightness of your pumpkin's pie.");
@@ -124,7 +124,7 @@ public function pumpkinFuckPartIII():void {
 
 public function mountPumpkin():void {
 	clearOutput();
-	flags[PUMPKIN_FUCK_YEAR_DONE] = date.fullYear;
+	flags[kFLAGS.PUMPKIN_FUCK_YEAR_DONE] = date.fullYear;
 	//>Yes [Player is pregnant, has low vaginal wetness, or has low fertility and is not in heat]
 	if(player.pregnancyIncubation > 0 || (player.wetness() < 2 && player.totalFertility() < 30)) {
 		outputText("Well, fuck it.  You're horny, and this little pumpkin doesn't look like it could stop you from fucking that gushing stem-rod.  As you shed your [armor], a few of the rough, slime-sweating vines feebly rise up to embrace you, but you brush them away, having no time for corrupt foolishness.  You're going to mount this fruit's hard, pulsing phallus, not let some malformed tentacle-horror molest you.");
@@ -239,14 +239,14 @@ public function feraSceneTwoIntroduction():void {
 public function leaveFerasWonderland():void {
 	clearOutput();
 	outputText("Nah, that whole place is probably some kind of giant venus fly trap. Fuck that.");
-	flags[FERAS_GLADE_EXPLORED_YEAR] = date.fullYear;
+	flags[kFLAGS.FERAS_GLADE_EXPLORED_YEAR] = date.fullYear;
 	doNext(13);
 }
 
 //Explore Das Trees
 public function exploreFerasWonderland():void {
 	clearOutput();
-	flags[FERAS_GLADE_EXPLORED_YEAR] = date.fullYear;
+	flags[kFLAGS.FERAS_GLADE_EXPLORED_YEAR] = date.fullYear;
 	outputText("Straightening to your full height, you take a few experimental sniffs and begin to walk back towards the middle of the meadow, brushing aside garish pink blooms that rise up past your waist.  That smell is getting stronger now.  How could you have missed it when you first arrived? It's heavenly, like a combination of every sweet treat you like with an undercurrent of passionate sexual musk blended in underneath.  You close in, " + player.mf("[hips] swaggering excitedly","[hips] sashaying excitedly") + ", " + player.skin() + " flushing.  A few baby blue sunflowers bump your shoulders as you muscle past them to hone in your new favorite aroma.  You've just got to know what bloom could possibly release such a heavenly scent!");
 	outputText("\n\nYou idly wonder what you would look like to any new arrivals, nose up and dragging you forward, almost like a fish on a hook, your body stumbling past chest-high blossoms that are nearly as wide as your shoulders.  A shadow dims the light as you pass under a massive flower-bulb that stretches thirty feet overhead, its petals folded into a familiar-looking, sealed sphere.  That doesn't stop it from dripping sweet-smelling nectar that reminds you vaguely of pussy for some reason, and you certainly don't notice the feet-shaped impressions that kick against the petals after you pass by.");
 	outputText("\n\nThat wondrous aroma guides you deeper, threading past delicate honeysuckles and crimson-colored lotus flowers.  Sometimes, you have you to stop and turn your head this way and that, testing the air with quick breaths to determine which way you must go to chase the increasingly omnipresent odor.  Other times it seems as obvious as a gold-plated path, dragging you right past vibrant foliage and smells that would normally incite you to stop and smell the roses if you weren't so focused on this one, heavenly, nose-tickling smell.");
@@ -297,7 +297,7 @@ public function leaveAfterFlowerHuffing():void {
 //Fuck the Lips
 public function fuckDemCorruptFlowerLips():void {
 	clearOutput();
-	flags[FERAS_TRAP_SPRUNG_YEAR] = date.fullYear;
+	flags[kFLAGS.FERAS_TRAP_SPRUNG_YEAR] = date.fullYear;
 	outputText("You dazedly stagger forward, putting one [foot] after another on the supple flesh of the gigantic, color-swirling petal that leads to your goal: the plush, nectar-leaking lips at the center of the bloom.  With each plodding movement, the hues become more vibrant, the intoxicating scent becomes thicker, and the less well-reasoned your thoughts become, shutting down in the avalanche of sensory overload.  Soon, your thoughts are little more than: <i>Scent. Sex. Horny. Fuck.</i>");
 	outputText("\n\nWith a slight stumble, you work your way out of your [armor], not stopping your plodding advance in the slightest and never letting the flower's core out of your sight, if you can help it.  Those lips seem to be pursing ever so slightly, beckoning you to slip something inside them... something hard and throbbing, aching to unload.  You shudder as you walk, slipping on a stream of leaking nectar and falling down onto your hands, but this doesn't impede your progress.  You continue to climb up, hand over hand, dragging yourself up until the 'floor' levels and you're about to smash yourself face-first into the flower's plump, mouth-like pillows.");
 	outputText("\n\nYou drag yourself up onto your [feet] just as the stamen react to your presence, lashing out with snake-like swiftness to encircle your arms and [legs], binding them up in slippery stalks such that you can barely move.  Luckily, you're close enough that you can still do what you came here to do: fuck this flower.  You lunge your [hips] forward, slamming your crotch towards the huge, multi-hued lips, ");
@@ -416,7 +416,7 @@ public function postSeederUpgrade():void {
 //Stick a Stamen in It!
 public function stickAStamenInIt():void {
 	clearOutput();
-	flags[FERAS_TRAP_SPRUNG_YEAR] = date.fullYear;
+	flags[kFLAGS.FERAS_TRAP_SPRUNG_YEAR] = date.fullYear;
 	outputText("You dazedly stagger forward, one [foot] after another falling on the supple flesh of the gigantic, color-shifting petal that rises up towards the flower's center like steps on an ancient ziggurat.  The closer you get, the more vibrant the hues become, the thicker the scent becomes, and the simpler and more instinctive your thought processes become.  <i>Flower. Fuck. Sex. Need. Ache.</i>");
 	outputText("\n\nStumbling slightly, you begin to wriggle out of your [armor].  First one arm, then the other.  You pause briefly to slide your kit off, forgotten on the petal behind you, and come closer to those juicy, turgid stamen, so heavy and sticky and perfectly hard looking.  The slickness of the leaking nectar nearly robs you of your footing but you struggle on and catch hold at the seam between two petals, never letting your goal out of your sight.  On hands and ");
 	if(player.isNaga()) outputText("tail");

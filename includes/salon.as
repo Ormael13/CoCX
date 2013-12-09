@@ -13,9 +13,9 @@ public function salonFavoritesPaymentMenu():void {
 	var blow:Number = 0;
 	if(player.hasCock()) blow = 2154;
 	var minoCum:Number = 0;
-	if(flags[UNKNOWN_FLAG_NUMBER_00142] > 0) minoCum = 2696;
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00142] > 0) minoCum = 2696;
 	menu();
-	if(flags[LYNNETTE_PREGNANCY_CYCLE] >= 4 && player.hasCock()) addButton(5,"Fuck Goblin",fuckLynnette);
+	if(flags[kFLAGS.LYNNETTE_PREGNANCY_CYCLE] >= 4 && player.hasCock()) addButton(5,"Fuck Goblin",fuckLynnette);
 	if(blow > 0) addButton(0,"Goblin Blow",eventParser,blow);
 	addButton(1,"Canine",gloryholeDoggie);
 	addButton(2,"Imp",gloryholeImp);
@@ -30,9 +30,9 @@ public function salonPaymentMenu():void {
 	var blow:Number = 0;
 	if(player.hasCock()) blow = 2154;
 	var minoCum:Number = 0;
-	if(flags[UNKNOWN_FLAG_NUMBER_00142] > 0) minoCum = 2696;
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00142] > 0) minoCum = 2696;
 	menu();
-	if(flags[LYNNETTE_PREGNANCY_CYCLE] >= 4 && player.hasCock()) addButton(5,"Fuck Goblin",fuckLynnette);
+	if(flags[kFLAGS.LYNNETTE_PREGNANCY_CYCLE] >= 4 && player.hasCock()) addButton(5,"Fuck Goblin",fuckLynnette);
 	if(blow > 0) addButton(0,"Goblin Blow",eventParser,blow);
 	addButton(1,"Canine",gloryholeDoggie);
 	addButton(2,"Imp",gloryholeImp);
@@ -43,7 +43,7 @@ public function salonPaymentMenu():void {
 	//choices("Goblin Blow",blow,"Canine",gloryholeDoggie,"Imp",gloryholeImp,"Minotaur",gloryholeMinotaur,"Incubus",gloryholeIncubus,"",0,"",0,"",0,"Buy MinoCum",minoCum,"Leave",13);
 }
 public function salonPurchaseMenu():void {
-	flags[SALON_PAID] = 1;
+	flags[kFLAGS.SALON_PAID] = 1;
 	spriteSelect(38);
 	var cutShort:Number = 0;
 	var cutMedium:Number = 0;
@@ -52,7 +52,7 @@ public function salonPurchaseMenu():void {
 	var minoCum:Number = 0;
 	var mudFacial:Number = 0;
 	var sandFacial:Number = 0;
-	if(flags[UNKNOWN_FLAG_NUMBER_00142] > 0) minoCum = 2696;
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00142] > 0) minoCum = 2696;
 	if(player.hairLength > 2) cutShort = 2159;
 	if(player.hairLength > 13) cutMedium = 2160;
 	if(player.hairLength >= 26) cutLong = 2161;
@@ -98,20 +98,20 @@ public function hairDresserRepeatGreeting():void {
 	spriteSelect(38);
 	var minoCum:Number = 0;
 	//Chance for mino craziness here
-	if(rand(5) == 0 && (player.hasPerk("Minotaur Cum Addict") >= 0 || flags[MINOTAUR_CUM_ADDICTION_STATE] > 0)) {
+	if(rand(5) == 0 && (player.hasPerk("Minotaur Cum Addict") >= 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 0)) {
 		minotaurCumBukkakeInSalon();	
 		return;
 	}
 	//Had babies announcement!
-	if(flags[LYNNETTE_PREGNANCY_CYCLE] == 4 && flags[LYNNETTE_CARRYING_COUNT] > 0) {
+	if(flags[kFLAGS.LYNNETTE_PREGNANCY_CYCLE] == 4 && flags[kFLAGS.LYNNETTE_CARRYING_COUNT] > 0) {
 		outputText("As soon as you enter the Salon, Lynnette is beaming ");
 		if(player.tallness >= 48) outputText("up ");
-		outputText("at you. \"<i>Hey there, honey. Come for some more service or to check up on the kids?</i>\" She pats her now-flat midsection. \"<i>I popped them out last night. We had " + num2Text(flags[LYNNETTE_CARRYING_COUNT]) + " kids... all girls, of course.</i>\" She tucks a lock of beautifully styled hair behind an elfin ear. \"<i>Now you be sure and let me know when you want to contribute to my baby-bank again.</i>\"");
-		if(flags[LYNNETTE_BABY_COUNT] > 0) outputText("\n\nA few new, green faces can be seen looking your way and blushing as they work the gloryholes,probably from a previous litter. They grow up so fast.");
-		flags[LYNNETTE_BABY_COUNT] += flags[LYNNETTE_CARRYING_COUNT];
-		flags[LYNNETTE_CARRYING_COUNT] = 0;
+		outputText("at you. \"<i>Hey there, honey. Come for some more service or to check up on the kids?</i>\" She pats her now-flat midsection. \"<i>I popped them out last night. We had " + num2Text(flags[kFLAGS.LYNNETTE_CARRYING_COUNT]) + " kids... all girls, of course.</i>\" She tucks a lock of beautifully styled hair behind an elfin ear. \"<i>Now you be sure and let me know when you want to contribute to my baby-bank again.</i>\"");
+		if(flags[kFLAGS.LYNNETTE_BABY_COUNT] > 0) outputText("\n\nA few new, green faces can be seen looking your way and blushing as they work the gloryholes,probably from a previous litter. They grow up so fast.");
+		flags[kFLAGS.LYNNETTE_BABY_COUNT] += flags[kFLAGS.LYNNETTE_CARRYING_COUNT];
+		flags[kFLAGS.LYNNETTE_CARRYING_COUNT] = 0;
 		//If favorite!
-		if(flags[LYNNETTE_ANNOUNCED_APPROVAL] == 1) {
+		if(flags[kFLAGS.LYNNETTE_ANNOUNCED_APPROVAL] == 1) {
 			favoriteSalonMenu();
 			return;
 		}
@@ -125,23 +125,23 @@ public function hairDresserRepeatGreeting():void {
 		}
 	}
 	//Favorite Announcement
-	else if(flags[LYNNETTE_APPROVAL] >= 100 && flags[LYNNETTE_ANNOUNCED_APPROVAL] == 0) {
+	else if(flags[kFLAGS.LYNNETTE_APPROVAL] >= 100 && flags[kFLAGS.LYNNETTE_ANNOUNCED_APPROVAL] == 0) {
 		outputText("Lynnette practically beams at your appearance, chasing you into the lobby of her shop before you can change your mind. You look quizzically at her, wondering just what's gotten her so excited, when she announces, \"<i>Look, honey, you've done such a great job knocking me up that I've decided you ought to have a little reward - besides stuffing me silly.</i>\" Her nipples seem to harden a touch through her dress at that. \"<i>You can get any of our regular services for free, my studly, virile... mmm....</i>\" Her eyes drift closed ever so briefly as a hand vanishes under a slit in her dress. A moment later, she jolts and withdraws it, sheepishly admitting. \"<i>We'll do your hair for free! Just don't forget to knock me up from time to time, okay?</i>\"");
 		outputText("\n\nThis seems like quite the deal!");
-		flags[LYNNETTE_ANNOUNCED_APPROVAL] = 1;
+		flags[kFLAGS.LYNNETTE_ANNOUNCED_APPROVAL] = 1;
 		//Custom menu with options to "pay anyway"
 		favoriteSalonMenu();
 		return;
 	}
 	//Favorite Greeting 
-	else if(flags[LYNNETTE_ANNOUNCED_APPROVAL] == 1) {
+	else if(flags[kFLAGS.LYNNETTE_ANNOUNCED_APPROVAL] == 1) {
 		//(Pregnant With Your Babies)
-		if(flags[LYNNETTE_PREGNANCY_CYCLE] < 4 && flags[LYNNETTE_CARRYING_COUNT] > 0) 
+		if(flags[kFLAGS.LYNNETTE_PREGNANCY_CYCLE] < 4 && flags[kFLAGS.LYNNETTE_CARRYING_COUNT] > 0) 
 		{
 			outputText("Lynnette has a little difficulty ushering you in with her swollen belly in the way. She's tremendously heavy with child already, likely due to some goblin-engineered chemicals that accelerate her pregnancy. Her tremendously fertile hips roll back and forth as she waddles a little deeper into the salon, greeting, \"<i>Welcome back, honey-bunch. Here to make a donation to the cause or get some freebies from your favorite pregnant slut?</i>\" She twists her ass in your direction and slaps it, making it jiggle in her sheer dress.");
 		}
 		//Pregnant with other babies
-		else if(flags[LYNNETTE_PREGNANCY_CYCLE] < 4) {
+		else if(flags[kFLAGS.LYNNETTE_PREGNANCY_CYCLE] < 4) {
 			outputText("Lynnette the goblin answers the door and lets you in, waving you deeper into her shop.  Her shining black dress barely contains her fertile-hips and jiggling chest as she greets you, \"<i>Welcome back, honey-bunch!  You should've stopped by to stuff my oven.  I wound up having to dip into our reserves.</i>\"  She affectionally wraps an arm around your waist and rubs your midsection.  \"<i>I would've much rather had my Champion's babies.</i>\"  She smiles up at you and says, \"<i>I'm sure you didn't just come here to visit.  Did you need a trim, or didja just want to make a donation do my little business?</i>\"  The word 'donation' is rolled as slowly and sensuously from her mouth as possible.");
 		}
 		//Nonpreggers
@@ -159,10 +159,10 @@ public function hairDresserRepeatGreeting():void {
 		return;
 	}
 	//Non-Pregnant Greetings:
-	else if(flags[LYNNETTE_PREGNANCY_CYCLE] >= 4) 
+	else if(flags[kFLAGS.LYNNETTE_PREGNANCY_CYCLE] >= 4) 
 	{
-		if(flags[LYNNETTE_MET_UNPREGNANT] == 0) {
-			flags[LYNNETTE_MET_UNPREGNANT] = 1;
+		if(flags[kFLAGS.LYNNETTE_MET_UNPREGNANT] == 0) {
+			flags[kFLAGS.LYNNETTE_MET_UNPREGNANT] = 1;
 			outputText("Lynnette's familiar face greets you at the door to her salon once more, and she waves you in with a beatific smile plastered upon her face. Clinging to her like a second skin, the businessgoblin's dress highlights her surprisingly flat midsection; she's not pregnant!");
 			outputText("\n\n\"<i>Noticing something you like, honey-bunches?</i>\" the goblin coos with a sashy of her baby-bearing hips. \"<i>A girl can't be pregnant ALL the time, after all.</i>\" She dabs at one of the many spots of moisture her prominent nipples have left on her top and smiles a bit overbroadly.");
 			//Normal offers with a bit hinting at knocking her up when appropriate
@@ -280,7 +280,7 @@ public function goblinHairDresserFacefuck():void {
 public function hairDressingMainMenu():void {
 	spriteSelect(38);
 	outputText("Lynnette offers and explains their options, \"<i>So what'll it be hun?  We could cut it down or give you a lengthening treatment. Or you can get a hair-dye to use on your own.  Just remember to come back in a few days for a touchup.</i>\"", false);
-	if(flags[UNKNOWN_FLAG_NUMBER_00142] > 0) {
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00142] > 0) {
 		outputText("\n\nOf course you could always spend some gems and buy some minotaur cum instead...", false);
 	}
 	salonPurchaseMenu();
@@ -335,7 +335,7 @@ public function hairGrow():void {
 	}
 	outputText("Lynnette grabs a bottle and squirts a white fluid into your hair.  You really hope it isn't your payment.  But it must not be, as within short order you feel the added weight of ", true);
 	temp = rand(3) + 3;
-	flags[HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
+	flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
 	player.hairLength += temp;
 	outputText(num2Text(temp) + " more inches of " + player.hairColor + " hair.", false);
 	doNext(13);
@@ -453,9 +453,9 @@ public function minotaurCumBukkakeInSalon():void {
 public function minotaurSalonFollowUp():void {
 	spriteSelect(38);
 	outputText("", true);
-	if(flags[UNKNOWN_FLAG_NUMBER_00142] == 0) {
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00142] == 0) {
 		//Unlock mino cum purchase
-		flags[UNKNOWN_FLAG_NUMBER_00142]++;
+		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00142]++;
 		//text goez here
 		outputText("Lynnette slaps your face, waking you from your stupor.  What?  Where are you?  You look around and realize you're strapped into a barber's chair and caked with white goop, but why?\n\n", false);
 		outputText("The goblin answers before you can vocalize your query, \"<i>Baby, you're so cum-hungry you make my daughters look like chaste virgins!  I haven't seen anyone go to town on minotaurs like that since my mother passed away, Marae guide her soul.  Normally we don't have that much use for the minotaurs outside of a bit of recreational drug-play, but you milked out so much cum that we can start selling it!  Isn't that great!?</i>\"\n\n", false);
@@ -487,17 +487,17 @@ public function sandFacial():void {
 	doNext(13);
 }
 /*
-public const LYNNETTE_PREGNANCY_CYCLE:int                                    = 1022; //0-3 = pregnant. 4-6 = not.
-public const LYNNETTE_APPROVAL:int		                                     = 1023;
-public const LYNNETTE_BABY_COUNT:int                                         = 1024;
-public const LYNNETTE_CARRYING_COUNT:int                                     = 1025;
+public static const LYNNETTE_PREGNANCY_CYCLE:int                                    = 1022; //0-3 = pregnant. 4-6 = not.
+public static const LYNNETTE_APPROVAL:int		                                     = 1023;
+public static const LYNNETTE_BABY_COUNT:int                                         = 1024;
+public static const LYNNETTE_CARRYING_COUNT:int                                     = 1025;
 */
 
 //Impregnate
 function fuckLynnette():void {
 	clearOutput();
 	//Checks to see if you've cum withint hte past 24 hours.
-	if(flags[LYNNETTE_FUCK_COUNTER] == 0) {
+	if(flags[kFLAGS.LYNNETTE_FUCK_COUNTER] == 0) {
 		outputText("At your suggestion, Lynnette's eyelashes flutter dangerously low. She gives you a smokey look and asks, \"<i>Is that so so?</i>\" She circles around you, looking you up and down with eyes that seem to bore right through your [armor]. She must see something she likes, because she dips forward, parting her weighty melons around your ");
 		if(player.tallness >= 72) outputText("[leg]");
 		else if(player.tallness >= 55) outputText("[hips]");
@@ -636,34 +636,34 @@ function fuckLynnette():void {
 	}
 	//"GOOD"
 	else if(player.cumQ() <= 10000) {
-		if(flags[LYNNETTE_ANNOUNCED_APPROVAL] == 1) outputText("\"<i>Wow, [name].  You cum like a minotaur... and without drugging me out of my mind to boot!  Gods, I can feel the little swimmers hunting down my eggs already.</i>\"  She giggles and retrieves a vial, downing it in a single gulp.  \"<i>I better make sure there's enough eggs for them all, huh?</i>\"\n\nYou leave with a happy smile. It seems Lynnette approves of you as a mate.");
+		if(flags[kFLAGS.LYNNETTE_ANNOUNCED_APPROVAL] == 1) outputText("\"<i>Wow, [name].  You cum like a minotaur... and without drugging me out of my mind to boot!  Gods, I can feel the little swimmers hunting down my eggs already.</i>\"  She giggles and retrieves a vial, downing it in a single gulp.  \"<i>I better make sure there's enough eggs for them all, huh?</i>\"\n\nYou leave with a happy smile. It seems Lynnette approves of you as a mate.");
 		//"GOOD + LYNNETTE FAVORITE"
 		else outputText("\"<i>Mmmm, [name], I love the way you pack me full.</i>\"  She tosses back a vial of fertility-boosting chemicals and sighs.  \"<i>Do me a favor and come back soon.  I'd rather be pouring out swarms of your babies than a slurry of weakling sluts.</i>\"");
 		lynnetteApproval(10);
 	}
 	//"UBUR"
 	else {
-		if(flags[LYNNETTE_ANNOUNCED_APPROVAL] == 0) outputText("\"<i>Ohhh... oh gods....  W-wha?  How...?  I'm so fucking full, [name]!  I can feel it, like I'm pregnant and about to pop already, and I haven't even given my babies a chance to fertilize!</i>\"  She gathers some of your leaking spooge to smear across the titanic dome with one hand and a bottle of fertility enhancers with the other.  \"<i>Go on baby, I'm just going to soak in it for a little while and make sure I get as many girls out of this as I can.</i>\"  Lynnette knocks back the vial and drops it at her side, focusing entirely on wallowing in your cum.\n\nYou swagger out into the main room with a happy smile, noting the envious looks you get from her daughters when they try to offer you 'services'.");
+		if(flags[kFLAGS.LYNNETTE_ANNOUNCED_APPROVAL] == 0) outputText("\"<i>Ohhh... oh gods....  W-wha?  How...?  I'm so fucking full, [name]!  I can feel it, like I'm pregnant and about to pop already, and I haven't even given my babies a chance to fertilize!</i>\"  She gathers some of your leaking spooge to smear across the titanic dome with one hand and a bottle of fertility enhancers with the other.  \"<i>Go on baby, I'm just going to soak in it for a little while and make sure I get as many girls out of this as I can.</i>\"  Lynnette knocks back the vial and drops it at her side, focusing entirely on wallowing in your cum.\n\nYou swagger out into the main room with a happy smile, noting the envious looks you get from her daughters when they try to offer you 'services'.");
 		//"UBUR + LYNNETTE FAVORITE"
 		else outputText("\"<i>Fuck me, honey! I... you're the only one that can fill me like this, you know?  Short of a machine, I mean.</i>\"  Lynnette colors a deep green as she struggles to reach for a bottle of a fertility-enhancing chemical, half-pinned by her own cum-stuffed weight.  You easily hand it to her with a smile, and she downs it before gazing gratefully your way.  \"<i>I fucking love just lying here, fucking into oblivion, lying in a lake of my stud's lusts, wallowing in it until I pass out from pleasure.</i>\"\n\nShe sounds almost lovey-dovey in her declaration and must realize it, because her tone changes when she says, \"<i>Just make sure you come back in a few days to give me another proper fucking.  You'll do it if you know what's good for your dick!</i>\"\n\nYou silence her with a kiss that leaves her swooning and stroll out, dressing on the way.  Lynnette's satiated moans seem to haunt you the entire time you remain in the salon.");
 		lynnetteApproval(25);
 	}
-	flags[LYNNETTE_FUCK_COUNTER]++;
+	flags[kFLAGS.LYNNETTE_FUCK_COUNTER]++;
 	stats(0,0,0,0,0,0,-100,0);
-	flags[LYNNETTE_CARRYING_COUNT] = 3 + rand(3);
-	if(player.cumQ() >= 1000) flags[LYNNETTE_CARRYING_COUNT] += 1 + rand(3);
-	if(player.cumQ() >= 2000) flags[LYNNETTE_CARRYING_COUNT] += 1 + rand(3);
-	if(player.cumQ() >= 3000) flags[LYNNETTE_CARRYING_COUNT] += 2 + rand(3);
-	if(player.cumQ() >= 4000) flags[LYNNETTE_CARRYING_COUNT] += 2 + rand(3);
-	if(player.cumQ() >= 6000) flags[LYNNETTE_CARRYING_COUNT] += 2 + rand(3);
-	if(player.cumQ() >= 10000) flags[LYNNETTE_CARRYING_COUNT] += 2 + rand(3);
+	flags[kFLAGS.LYNNETTE_CARRYING_COUNT] = 3 + rand(3);
+	if(player.cumQ() >= 1000) flags[kFLAGS.LYNNETTE_CARRYING_COUNT] += 1 + rand(3);
+	if(player.cumQ() >= 2000) flags[kFLAGS.LYNNETTE_CARRYING_COUNT] += 1 + rand(3);
+	if(player.cumQ() >= 3000) flags[kFLAGS.LYNNETTE_CARRYING_COUNT] += 2 + rand(3);
+	if(player.cumQ() >= 4000) flags[kFLAGS.LYNNETTE_CARRYING_COUNT] += 2 + rand(3);
+	if(player.cumQ() >= 6000) flags[kFLAGS.LYNNETTE_CARRYING_COUNT] += 2 + rand(3);
+	if(player.cumQ() >= 10000) flags[kFLAGS.LYNNETTE_CARRYING_COUNT] += 2 + rand(3);
 	
-	flags[LYNNETTE_PREGNANCY_CYCLE] = 0;
+	flags[kFLAGS.LYNNETTE_PREGNANCY_CYCLE] = 0;
 	salonPurchaseMenu();
 }
 function lynnetteApproval(arg:int = 0):Number {
-	if(arg != 0) flags[LYNNETTE_APPROVAL] += arg;
-	if(flags[LYNNETTE_APPROVAL] < -100) flags[LYNNETTE_APPROVAL] = -100;
-	else if(flags[LYNNETTE_APPROVAL] > 100) flags[LYNNETTE_APPROVAL] = 100;
-	return flags[LYNNETTE_APPROVAL];
+	if(arg != 0) flags[kFLAGS.LYNNETTE_APPROVAL] += arg;
+	if(flags[kFLAGS.LYNNETTE_APPROVAL] < -100) flags[kFLAGS.LYNNETTE_APPROVAL] = -100;
+	else if(flags[kFLAGS.LYNNETTE_APPROVAL] > 100) flags[kFLAGS.LYNNETTE_APPROVAL] = 100;
+	return flags[kFLAGS.LYNNETTE_APPROVAL];
 }

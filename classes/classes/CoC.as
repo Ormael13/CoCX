@@ -1,9 +1,12 @@
 ﻿package classes
 {
+	// BREAKING ALL THE RULES.
+	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
+	
+	
 	import classes.assClass;
 	import classes.breastRowClass;
-	//import classes.cockClass;
-	
 	import classes.Player;
 	import classes.Cock;
 	import classes.Creature;
@@ -15,11 +18,14 @@
 	import classes.InputManager;
 
 	import classes.Monsters.*;		// import all the various monsters
+	
 	import coc.view.MainView;
-
 	import coc.model.GameModel;
 	import coc.model.TimeModel;
 
+	// Class based content? In my CoC?! It's more likely than you think!
+	import classes.content.*;
+	
 	import fl.controls.ComboBox; 
 	import fl.data.DataProvider; 
 	import flash.display.Loader;
@@ -35,7 +41,7 @@
 	import flash.net.URLRequest;
 	import flash.text.*;
 	import flash.utils.ByteArray;
-
+	
 	/****
 		classes.CoC: The Document class of Corruption of the Champions.
 	****/
@@ -43,8 +49,7 @@
 	[SWF( width="1000", height="800", pageTitle="Corruption of Champions" )]
 
 	public class CoC extends MovieClip
-	{
-
+	{	
 		// Include the functions. ALL THE FUNCTIONS
 		include "../../includes/charCreation.as";
 		include "../../includes/customCharCreation.as";
@@ -69,14 +74,13 @@
 		
 		include "../../includes/eventTest.as";
 		
-		
 		include "../../includes/transform.as";
 		
 		include "../../includes/engineCore.as";
 		include "../../includes/saves.as";
 		
 		// Lots of constants
-		include "../../includes/flagDefs.as";
+		//include "../../includes/flagDefs.as";
 		include "../../includes/appearanceDefs.as";
 
 		
@@ -207,7 +211,8 @@
 		include "../../includes/xmas_gats_not_an_angel.as";
 		include "../../includes/xmas_jack_frost.as";
 		include "../../includes/xmas_misc.as";
-	
+		
+		public var umasShop:UmasShop = new UmasShop();
 		
 		/****
 			This is used purely for bodges while we get things cleaned up.
@@ -219,12 +224,7 @@
 		public var semiglobalReferencer :* = {};
 
 		public var mainView :MainView;
-
 		public var model :GameModel;
-
-		//public var mainView :MainView;
-		//public var model :GameModel;
-
 
 		// ALL THE VARIABLES:
 		// Declare the various global variables as class variables.
@@ -270,14 +270,15 @@
 		public var oldStats:*; // I *think* this is a generic object
 		public var inputManager:InputManager;
 
-
 		public function CoC()
 		{
+			// Cheatmode.
+			kGAMECLASS = this;
+			
 			this.model = new GameModel();
 			this.mainView = new MainView( this.model );
 			this.mainView.name = "mainView";
 			this.stage.addChild( this.mainView );
-
 
 			// Hooking things to MainView.
 			this.mainView.onNewGameClick = newGameGo;

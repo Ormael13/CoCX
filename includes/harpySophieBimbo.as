@@ -28,22 +28,22 @@ Chance of waking the PC by whispering how much they need to fuck her in their sl
 Bimbo harpy pussy apparently tastes tangy with an undertone of sweet, almost peach-like flavor.
 */
 public function sophieSprite():void {
-	if(flags[UNKNOWN_FLAG_NUMBER_00282] > 0 && flags[UNKNOWN_FLAG_NUMBER_00283] == 0) spriteSelect(83);
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] == 0) spriteSelect(83);
 	else spriteSelect(53);
 }
 
 public function bimboSophie():Boolean {
-	return (flags[UNKNOWN_FLAG_NUMBER_00282] > 0 && flags[UNKNOWN_FLAG_NUMBER_00283] == 0 && flags[SOPHIE_DEBIMBOED] == 0);
+	return (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] == 0 && flags[kFLAGS.SOPHIE_DEBIMBOED] == 0);
 }
 
 public function sophieIsInSeason():Boolean {
-	return (flags[SOPHIE_HEAT_COUNTER] > 551 && flags[SOPHIE_INCUBATION] == 0);
+	return (flags[kFLAGS.SOPHIE_HEAT_COUNTER] > 551 && flags[kFLAGS.SOPHIE_INCUBATION] == 0);
 }
 
 public function sophiePregChance():void {
 	//25% + gradually increasing cumQ bonus
 	if(rand(4) == 0 || player.cumQ() > rand(1000)) {
-		flags[SOPHIE_INCUBATION] = 168;
+		flags[kFLAGS.SOPHIE_INCUBATION] = 168;
 	}
 }
 public function sophieCapacity():Number {
@@ -99,7 +99,7 @@ public function bimbotizeMeCaptainSophie():void {
 	
 public function declineBimboSophie():void {
 	sophieSprite();
-	flags[UNKNOWN_FLAG_NUMBER_00283] = 1;
+	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] = 1;
 	outputText("", true);
 	outputText("You turn and flee the mountain, before she can compel you to take her to camp and fuck like bunnies.  Who knows when you'd have time to explore with a lust-crazed bird-woman like that around.  She'll find a mate soon enough, you're sure of that.\n\n", false);
 	eventParser(5007);
@@ -108,7 +108,7 @@ public function declineBimboSophie():void {
 public function acceptBimboSophie():void {
 	sophieSprite();
 	outputText("", true);
-	flags[UNKNOWN_FLAG_NUMBER_00282] = 1;
+	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] = 1;
 	outputText("You nod, and Sophie springs forward on her powerful legs, the strength undiminished by the effects of her bimbo transformation.  She tackles you in a bear-hug, kissing your " + chestDesc() + " over and over as her momentum carries you both off the side of the mountain.  You tumble in the air, screaming as you fall", false);
 	if(player.canFly()) outputText(" and unable to bring your wings to bear with arms pinning them to your back", false);
 	outputText(".\n\n", false);
@@ -122,14 +122,14 @@ public function acceptBimboSophie():void {
 	outputText("You sigh and show the bimbo around.  She seems extremely pleased by the arrangements, and once the tour is complete, she prances off to touch up her make-up, though you see her masturbating the whole time.", false);
 	
 	if(player.hasStatusAffect("Camp Rathazul") >= 0) outputText("  Afterwards, she offers to suck Rathazul's cock.  The old rat looked about ready to have a heart attack, but he managed to decline her offer with some amount of dignity, after a few moments of stammering.", false);
-	else if(flags[UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("  Afterwards, she offers to suck Izma's cock.  Izma looks at you for a moment before shaking her head, no.  Her skirt rises visibly in spite of her negative response.  Maybe she'll like having someone lower on the food chain to boss around?", false);
-	else if(flags[AMILY_FOLLOWER] > 0 && flags[AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0) {
+	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("  Afterwards, she offers to suck Izma's cock.  Izma looks at you for a moment before shaking her head, no.  Her skirt rises visibly in spite of her negative response.  Maybe she'll like having someone lower on the food chain to boss around?", false);
+	else if(flags[kFLAGS.AMILY_FOLLOWER] > 0 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0) {
 		outputText("  Afterwards, she offers to lick Amily's twat, if Amily will do the same to her.  Amily ", false);
-		if(flags[AMILY_FOLLOWER] == 1) outputText("flushes hotly and denies the bimbo's request with a terse 'no'.", false);
+		if(flags[kFLAGS.AMILY_FOLLOWER] == 1) outputText("flushes hotly and denies the bimbo's request with a terse 'no'.", false);
 		else outputText("flushes hotly and wiggles her hips Sophie's way.  The slutty, corrupted mouse and Sophie will clearly be helping to sate each other's needs in your absence.", false);
 	}
 	//(After, she offers to lick Marble's cunt.  Marble doesn't even answer her.  She just turns to you and says, \"<i>Really?  Sweetie... just... keep her away from me.  She's so far gone, I guess you can keep her around if you need to, but don't let her bug me.</i>\")  
-	else if(monk >= 5 && player.hasStatusAffect("noJojo") < 0 && flags[JOJO_DEAD_OR_GONE] == 0) 
+	else if(monk >= 5 && player.hasStatusAffect("noJojo") < 0 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) 
 		outputText("  Afterwards, she offers to suck Jojo's cock.  The corrupted slut-mouse nods and stiffens in delight, though he keeps glancing back your way.  Those two will probably spend a lot of time together...", false);
 	else if(player.hasStatusAffect("PureCampJojo") >= 0) outputText("  Afterwards, she offers to suck Jojo's cock.  The chaste mouse's jaw drops, but when he picks it up, he answers, \"<i>Never.  My body is as pure as my soul!</i>\"", false);
 	else if(isabellaFollower()) 
@@ -163,14 +163,14 @@ public function approachBimboSophieInCamp(output:Boolean = true):void {
 			//Big lust boost
 			stats(0,0,0,0,0,0,20,0);
 		}
-		else if(flags[SOPHIE_INCUBATION] > 0 && flags[SOPHIE_INCUBATION] <= 150) {
-			if(flags[SOPHIE_INCUBATION] > 120) {
+		else if(flags[kFLAGS.SOPHIE_INCUBATION] > 0 && flags[kFLAGS.SOPHIE_INCUBATION] <= 150) {
+			if(flags[kFLAGS.SOPHIE_INCUBATION] > 120) {
 				outputText("Sophie sits by herself on your comfy bedroll.  The feathery female seems to have taken a liking to your place of rest.  Your bird-brained love-slave clearly desires to be as close to you, or at least your fatherly scent, as much as possible.  Lost in her lusty fantasies, she caresses the gentle bump in her belly, the telltale sign that your virile seed has worked its magic on her egg-bearing womb.  One of her hands idly slips between her legs, fingers gently playing with her wet snatch as her other rubs her tummy.");
 				outputText("\n\nFinally noticing your gaze on her body, Sophie looks up at you with an amorous smile, her thick, fertile thighs spreading and showing off her tight puffy pussy to you.  The blond bimbo puts her pregnant body on display for you, to show you the result of your virility and to entice you into playing with her hot, lusty form.");
 				stats(0,0,0,0,0,0,3,0);
 			}
 			//Medium Bump*
-			else if(flags[SOPHIE_INCUBATION] > 100) {
+			else if(flags[kFLAGS.SOPHIE_INCUBATION] > 100) {
 				outputText("As usual, Sophie is laying on your bedroll.  Each day the fertile swell in her stomach seems to grow bigger with the egg inside.  The positively pregnant woman idly strokes her egg-bearing belly with motherly affection.  She even coos to the growing bump as she caresses her body, clearly loving the fact that she is pregnant with another egg.  It's not long before she catches sight of you; a big silly smile breaking across her puffy lips as she hurriedly gets up from your blankets and bounds over to you.  With each step, her voluptuous body jiggles, and bounces, her big bountiful bosom heaving and shaking, her ripe round rump quivering like jelly as she sways her fecund hips for you.");
 				outputText("\n\n\"<i>There you are [name]!  Like, look at me!  Your egg is getting soooo big inside me!  Like, just look at how big and sexy I am!</i>\" the bimbo brained woman tweets as she presses her curvaceous body against you, making sure you can feel her big soft tits and growing baby bump.  From how her body feels, you're sure her already bountiful bimbo-like breasts have only gotten bigger thanks to her pregnancy.  \"<i>Thanks for getting me all pregnant and stuff!</i>\"");
 				stats(0,0,0,0,0,0,5,0);
@@ -215,12 +215,12 @@ public function approachBimboSophieInCamp(output:Boolean = true):void {
 		addButton(4,"Debimbo",unbimboSophie);
 		if(output) outputText("\n\n<b>You could use the bottle of debimbo to return Sophie's intellect...</b>");
 	}
-	if(flags[SOPHIE_CAMP_EGG_COUNTDOWN] > 0 && output) outputText("\n\n<b>Sophie's egg is sitting nearby.</b>");
-	if(flags[SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) {
+	if(flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] > 0 && output) outputText("\n\n<b>Sophie's egg is sitting nearby.</b>");
+	if(flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) {
 		addButton(7,"Daughter",daughterCheckup);
 	}
-	if(flags[SOPHIE_BROACHED_SLEEP_WITH] == 1) {
-		if(flags[SLEEP_WITH] != "Sophie") {
+	if(flags[kFLAGS.SOPHIE_BROACHED_SLEEP_WITH] == 1) {
+		if(flags[kFLAGS.SLEEP_WITH] != "Sophie") {
 			if(output) outputText("\n\nYou could invite her to share the bed with you at night.");
 			addButton(8,"SleepWith",moveSophieInRepeat);
 		}
@@ -243,7 +243,7 @@ public function bimboSophieSexMenu():void {
 		if(player.cockThatFits(sophieCapacity()) >= 0 && player.lust >= 33) addButton(2,"Anal",buttFuckBimboSophie);
 		else outputText("\n\n<b>You're too big to butt-fuck her.</b>", false);
 		//TIT FUCKS!
-		if(flags[SOPHIE_INCUBATION] > 0 && flags[SOPHIE_INCUBATION] < 150) addButton(5,"Titty-Fuck",sophiePreggoTitJobs);
+		if(flags[kFLAGS.SOPHIE_INCUBATION] > 0 && flags[kFLAGS.SOPHIE_INCUBATION] < 150) addButton(5,"Titty-Fuck",sophiePreggoTitJobs);
 		else addButton(5,"Titty-Fuck",fuckBimboSophiesTits);
 		
 		//VAG FUCKS!
@@ -265,17 +265,17 @@ public function bimboSophieSexMenu():void {
 		}
 	}
 	if(player.hasVagina()) addButton(3,"Get Licked",bimboSophieLicksRugs);
-	if(flags[UNKNOWN_FLAG_NUMBER_00284] > 0 && (player.gender > 0) && flags[SOPHIE_INCUBATION] == 0) {
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00284] > 0 && (player.gender > 0) && flags[kFLAGS.SOPHIE_INCUBATION] == 0) {
 		if(hasItem("OviElix",1) || hasItemInStorage("OviElix")) {
 			addButton(4,"Ovi Elixir",sophieEggApocalypse);
 		}
 		else outputText("\n\n<b>If you had an Oviposition Elixir in your inventory or camp storage, Sophie could have some fun with it...</b>", false);
 	}
-	if(flags[TOLD_SOPHIE_TO_IZMA] == 0 && flags[TIMES_SOPHIE_AND_IZMA_FUCKED] > 0 && flags[IZMA_NO_COCK] == 0) {
+	if(flags[kFLAGS.TOLD_SOPHIE_TO_IZMA] == 0 && flags[kFLAGS.TIMES_SOPHIE_AND_IZMA_FUCKED] > 0 && flags[kFLAGS.IZMA_NO_COCK] == 0) {
 		outputText("\n\nYou could tell Sophie to visit Izma again.  She'd probably wind up tied AGAIN.");
 		addButton(7,"Visit Izma",tellSophieToVisitIzma);
 	}
-	if(flags[SOPHIE_ADULT_KID_COUNT] > 0 && flags[SOPHIE_FAMILY_INCEST] > 0 && player.cockThatFits(sophieCapacity()) >= 0 && player.hasCock())
+	if(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] > 0 && flags[kFLAGS.SOPHIE_FAMILY_INCEST] > 0 && player.cockThatFits(sophieCapacity()) >= 0 && player.hasCock())
 		addButton(8,"DaughterFuck",sophieIncestInHerCooterOrSomethingIDunno);
 	addButton(9,"Leave",approachBimboSophieInCamp);
 }
@@ -284,7 +284,7 @@ public function tellSophieToVisitIzma():void {
 	clearOutput();
 	outputText("You suggest she visit Izma again.  Maybe this time she won't get tied up again?");
 	outputText("\n\nSophie squeals, \"<i>REAAALLY?</i>\" before taking off towards the other side of camp.  This should be good.");
-	flags[TOLD_SOPHIE_TO_IZMA] = 1;
+	flags[kFLAGS.TOLD_SOPHIE_TO_IZMA] = 1;
 	doNext(13);
 }
 
@@ -350,13 +350,13 @@ public function bimboSophieLustStickSurprise():void {
 
 public function daughterCheckup():void {
 	clearOutput();
-	if(flags[SOPHIE_DAUGHTER_MATURITY_COUNTER] > 200) {
+	if(flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 200) {
 		outputText("Back in the nest, your cute little harpy is still just a little chick.  Her body is small and childlike, and her feathers are fluffy and poofy, making your little girl look like she has puffballs for arms and legs.  Already looking to be four or five years old, the baby harpy is just as energetic as a human child of that age.  She flutters around and scrambles from one thing to another.  Thankfully, the rambunctious little darling runs out of explosive energy quickly, suddenly falling to the ground into a fluffy heap for a quick nap.");
 	}
-	else if(flags[SOPHIE_DAUGHTER_MATURITY_COUNTER] > 100) {
+	else if(flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 100) {
 		outputText("Back in the nest, your sweet little harpy is starting to grow up!  Her body is much bigger than it was before, though her baby fat has spread out over her larger form and looks more lean and lanky then the big-butted harpies you're used to seeing.  Her feathers have even started to smooth out, though she is still quite the fluffball.  You're sure that it won't be too long before the curves harpies are known for start to appear.  The energy she exuded as a little chick still drives her to 'terrorize' your camp, scampering around, fluttering from place to place and getting into all kinds of things.  Your fluffy daughter seems to be able to stay active for longer than before, though you still see her curl up for a nap every so often.\n");
 	}
-	else if(flags[SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) {
+	else if(flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) {
 		outputText("Looking around for your developing daughter, you find that she and your ");
 		if(bimboSophie()) outputText("boisterous bimbo ");
 		else outputText("matronly harpy ");
@@ -458,7 +458,7 @@ public function bimboSophieSixtyNineAfterCunnilingus():void {
 	//NON WANG
 	if(!player.hasCock() || player.cockThatFits(sophieCapacity()) == -1) {
 		outputText("You throw yourself at Sophie, compelled by thoughts of pleasure and her delicious-looking pussy, wanting nothing more than to place your lips on her cunt and slurp with reckless abandon.  She takes the hit like a champ, tumbling with you through the dirt and dust until you land on your " + buttDescript() + ", bouncing to a stop with the harpy's feathery thighs clenching around your head.  ");
-		if(flags[SOPHIE_INCUBATION] > 0 && flags[SOPHIE_INCUBATION] <= 150) outputText("Her pregnant belly rests against your middle, untouched by the rough fall.  ");
+		if(flags[kFLAGS.SOPHIE_INCUBATION] > 0 && flags[kFLAGS.SOPHIE_INCUBATION] <= 150) outputText("Her pregnant belly rests against your middle, untouched by the rough fall.  ");
 		outputText("How did she do that?  Your questions fade away as you look up and spot your target - the cum-slicked delta of Sophie's cunt, so moist it seems to fog the air, beckoning you to plunge your tongue inside and taste it.\n\n", false);
 		
 		outputText("With rapacious desire, you grab the harpy's down-coated ass-cheeks and squeeze her plump rump, pulling her dripping cooch straight onto your face.  You shiver at the potent, womanly smell as it oozes over your " + player.face() + ", and dribbles down your chin.  Without a moment's hesitation, you take the first long lick of Sophie's tasty juices.  They have a tangy flavor that seems to sizzle on your tongue before fading into a soft, sweet, peach-like taste.  You hum in pleasure - the harpy was right; your tongue REALLY wants to taste her.\n\n", false);
@@ -478,7 +478,7 @@ public function bimboSophieSixtyNineAfterCunnilingus():void {
 		outputText("At long last, the bimbo's bald cunt climaxes from your work, splattering you with a flood of musky girl-spunk.  You still need her pussy so bad that you can't stop.  You lick, lap, and swallow with inhuman eagerness until the box atop you is emptied of everything save your saliva.  Then, and only then, do you finally feel release.  Your " + vaginaDescript() + " climaxes for Sophie, soaking her fingers and wringing them as if your life depended on it.  She giggles, coming down from her own orgasm and feeling quite pleased with the effects her words have had on you.\n\n", false);
 		
 		outputText("The harpy gets up, but only long enough to turn around and lay atop you, face to face");
-		if(flags[SOPHIE_INCUBATION] > 0 && flags[SOPHIE_INCUBATION] <= 150) outputText(", egg-swollen belly smushing between you");
+		if(flags[kFLAGS.SOPHIE_INCUBATION] > 0 && flags[kFLAGS.SOPHIE_INCUBATION] <= 150) outputText(", egg-swollen belly smushing between you");
 		outputText(".  \"<i>That was sooo fun!  Like, we'll totally do this sometime soon, but I need a drink, and you smell like pussy.  Mmmm, I like that smell.  It means fun stuff!</i>\"  Sophie kisses you full on the mouth, her puffy, quim-stained lips coloring your own with her amber lipstick.  \"<i>You're like, the best pussy-licker ever, ya know?</i>\"\n\n", false);
 		
 		outputText("Sophie struts off, touching a finger to her cunt before licking it, tasting the remnants of your saliva.", false);
@@ -490,7 +490,7 @@ public function bimboSophieSixtyNineAfterCunnilingus():void {
 		var x:Number = player.cockThatFits(sophieCapacity());
 		if(x < 0) x = player.smallestCockIndex();
 		outputText("You throw yourself at Sophie, compelled by thoughts of pleasure and her delicious-looking pussy.  Imagining yourself placing your lips on her cunt and slurping with reckless abandon, you tackle her, hard.  She takes the hit like a champ, tumbling with you through the dirt and dust until you land on your " + buttDescript() + ", bouncing to a stop with the harpy's feathery thighs clenching around your head.  ");
-		if(flags[SOPHIE_INCUBATION] > 0 && flags[SOPHIE_INCUBATION] <= 150) outputText("Her gravid belly bumps up against your own, somehow untouched by the rough-and-tumble fall.  ");
+		if(flags[kFLAGS.SOPHIE_INCUBATION] > 0 && flags[kFLAGS.SOPHIE_INCUBATION] <= 150) outputText("Her gravid belly bumps up against your own, somehow untouched by the rough-and-tumble fall.  ");
 		outputText("How did she do that?  Your questions fade away as you look up and spot your target - the cum-slicked delta of Sophie's cunt, so moist it seems to fog the air, beckoning you to plunge your tongue inside and taste it.\n\n", false);
 		
 		outputText("With rapacious desire, you grab the harpy's down-coated ass-cheeks and squeeze her plump rump, pulling her dripping cooch straight onto your face.  You shiver at the potent, womanly smell as it oozes over your " + player.face() + " and dribbles down your chin.  Without a moment's hesitation, you take the first, long lick of Sophie's tasty juices.  They have a tangy flavor that seems to sizzle on your tongue before fading into a soft, sweet peach-like taste.  You hum in pleasure - the harpy was right: your tongue really wants to taste her.\n\n", false);
@@ -515,7 +515,7 @@ public function bimboSophieSixtyNineAfterCunnilingus():void {
 		outputText("\n\n", false);
 	
 		outputText("Sophie gives an airheaded giggle and jumps up, ignoring the slosh of your sexual fluids in her belly");
-		if(flags[SOPHIE_INCUBATION] > 0 && flags[SOPHIE_INCUBATION] <= 150) outputText(" and the way her egg-stuffed womb jiggles");
+		if(flags[kFLAGS.SOPHIE_INCUBATION] > 0 && flags[kFLAGS.SOPHIE_INCUBATION] <= 150) outputText(" and the way her egg-stuffed womb jiggles");
 		outputText(".  Shining in the light, a web of harpy-lube stretches between her groin and your soaked face.  You try to sit up and get your tongue back where it belongs, inside her, but she steps one of her clawed feet down on your chest to playfully pin you to the ground.\n\n", false);
 		
 		outputText("The blond bombshell titters, \"<i>Like, you don't need to lick my cunny any more, babe. You were totally awesome and got me off super hard.  And you did such a good job cumming for me too!  Just relax there a moment, I'm gonna get a drink or something.  Let's do this again soon!</i>\"\n\n", false);
@@ -547,7 +547,7 @@ public function buttFuckBimboSophie():void {
 	if(!player.hasSheath()) outputText("hilt", false);
 	else outputText("sheath", false);
 	outputText(".  Sophie's breasts sway underneath her, the pendulous globes occasionally dipping low enough to drag her thumb-sized nipples through the rough dirt.");
-	if(flags[SOPHIE_INCUBATION] > 0 && flags[SOPHIE_INCUBATION] <= 150) outputText("  Just like her breasts, her gravid tummy sways a little as well, plush with the weight of the egg you've given her.");
+	if(flags[kFLAGS.SOPHIE_INCUBATION] > 0 && flags[kFLAGS.SOPHIE_INCUBATION] <= 150) outputText("  Just like her breasts, her gravid tummy sways a little as well, plush with the weight of the egg you've given her.");
 	outputText("  The bimbo moans harder every time it happens and sounds more whorish and lurid with each passing second - a true anal slut.  She looks back at you with lust in her eyes and a gleeful grin on her face.  Suddenly, one of the ditz's fingernails is dragging ", false);
 	if(player.balls > 0) outputText("over your " + ballsDescriptLight(), false);
 	else outputText("across your taint", false);
@@ -572,7 +572,7 @@ public function buttFuckBimboSophie():void {
 	outputText("  With a few final clenches of pleasure, your dick's flow of cum trickles down to a dribble.  You sigh and muse that you must've completely emptied your " + ballsDescriptLight() + " by now, and you slump back against a rock to watch your jizz flood out of Sophie's ass.  She pushes some inside her pink nether-lips with a triumphant smile, clearly pleased with herself.\n\n", false);
 	
 	outputText("Still full of energy, the big-tittied ditz bounces around and catches the cum as it drains from her gaped ass, shoving more and more into her soaked quim.  She even licks her fingers once she bores of that and says, \"<i>Thanks for making my asshole so creamy!  You even left me enough to like, stuff up my twat so I can have an egg!  Yay!</i>\"\n\n", false);
-	if(flags[SOPHIE_INCUBATION] > 0 && flags[SOPHIE_INCUBATION] <= 150) {
+	if(flags[kFLAGS.SOPHIE_INCUBATION] > 0 && flags[kFLAGS.SOPHIE_INCUBATION] <= 150) {
 		outputText("Sophie giggles again, rubbing her already well-filled belly and winking at you, like you're sharing in some absurd joke.  You roll your eyes - bimbos!");
 	}
 	if(sophieIsInSeason()) sophiePregChance();
@@ -591,7 +591,7 @@ public function fuckBimboSophiesTits():void {
 	outputText("The harpy grabs at your " + player.armorName + " and removes it, leaving your hands free to continue the fondling of her breasts.  Once you're as a nude as your salacious slut, you finally release the huge, watermelon-like breasts and admire your handiwork.  Sophie's ditzy, empty eyes are dilated, her mouth is open and drooling, and her nipples are easily as big as your thumbs.  She's panting softly and just staring at you with her eyes glazed.  You can only assume that her simple mind has slipped into some kind of erotic trance, but if anything it only makes the idea of releasing yourself with big, soft mammaries that much more appealing.\n\n", false);
 	
 	outputText("You grab hold of her nipples and sit down on a nearby rock; the dazed harpy is pulled onto her knees.  ");
-	if(flags[SOPHIE_INCUBATION] > 0 && flags[SOPHIE_INCUBATION] <= 150) outputText("Her swollen tummy pushes against your [legs] as she assumes the position, the weighty egg-distorted lump pressing against you.  ");
+	if(flags[kFLAGS.SOPHIE_INCUBATION] > 0 && flags[kFLAGS.SOPHIE_INCUBATION] <= 150) outputText("Her swollen tummy pushes against your [legs] as she assumes the position, the weighty egg-distorted lump pressing against you.  ");
 	outputText("She wobbles forward and her massive mounds easily slide to either side of " + oMultiCockDesc() + ", completely engulfing it.  Still holding on to her nipples, you pull them together and ", false);
 	if(player.cocks[x].cockThickness < 8) outputText("completely surround yourself", false);
 	else outputText("surround as much of yourself as possible", false);
@@ -615,7 +615,7 @@ public function fuckBimboSophiesTits():void {
 	outputText("You're just getting started.  Sophie smirks and opens her mouth, letting her tongue slide out to taste your jizm as you launch the next rope, so long it trails from her hair to her chin and so thick it rolls in drops from the side of her face.  She hums in delight and squeezes her breasts tight around your " + cockDescript(x) + ", the next blast backing up inside you from the pressure.  A moment of buildup later, and your seed germinates and blooms over the harpy's tits, soaking them with spunk.  Droplets of the stuff splatter onto the ground around the both of you, but you just keep coming.  In your mind you have visions of yourself knocking up harpy after harpy, the slutty bird-girls mounting your fountaining fuck-stick long enough for their bellies to bloat with seed before moving on.  Like this, you could inseminate a whole tribe...\n\n", false);
 	
 	outputText("Once the thought passes, you sag back, utterly spent and more than a little parched.  Blinking the haze from your eyes, you look over at Sophie.  She's on her back, frigging herself non-stop and utterly lost to the world.  Her pretty blonde hair is plastered against her, her boobs are covered in a thick layer of white, ");
-	if(flags[SOPHIE_INCUBATION] > 0 && flags[SOPHIE_INCUBATION] <= 150) outputText("her swollen midriff is glazed, ");
+	if(flags[kFLAGS.SOPHIE_INCUBATION] > 0 && flags[kFLAGS.SOPHIE_INCUBATION] <= 150) outputText("her swollen midriff is glazed, ");
 	outputText("and her eyes are closed, held shut by a thick layer of your sperm.  She's been well and truly bukkaked, drenched in ejaculate, and judging by how furiously she's schlicking away at her pussy, she couldn't be happier.  As for you, " + sMultiCockDesc() + " is still erect, even though you feel like you don't have a drop left in you.  Of course, the drugs soaking into your gold-tinted cock will probably keep you hard and ready to breed for hours.\n\n", false);
 	luststickApplication(5);
 	stats(0,0,0,0,0,-1,-100,0);
@@ -628,7 +628,7 @@ public function sophieEggApocalypse():void {
 	sophieSprite();
 	outputText("", true);
 	//First time
-	if(flags[UNKNOWN_FLAG_NUMBER_00284] == 0) {
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00284] == 0) {
 		outputText("You find her rooting through your belongings, curiously picking up bottles with her feet, trying to figure out what everything does.  She's surprisingly careful with the glass vials, raising her clutching talons to eye level and bobbing her head left and right before grabbing a new potion. \"<i>What do all these symbols mean?</i>\" she asks, inquisitively. When she grabs a hexagonal bottle, however, her eyes light up. \"<i>Oh! I know this! This is an egg!</i>\" She holds it out, proudly displaying the egg symbol on your Ovi Elixir. You nod and she flushes with irrational pride at getting one right. \"<i>I used to lay so many eggs. All my pretty little babies,</i>\" she sighs, wistfully. Pursing her golden lips, the harpy's face scrunches in thought, struggling to put an idea together. She perks up as it gradually works through the lusty haze you've made of her mind. \"<i>Ah! What if I drank this? Would I have more eggs? Ooh oh oh, pleeeeeease? Can you spare this one little bottle so that I can be a mommy again?</i>\" She strokes the flat of her belly with platinum blond feathers, anxiously remembering the pregnancies of her youth. Would you like to play the dutiful spouse and give your bird-brained bimbo a chance to relive her wanton youth?", false);
 	}
 	//Repeat
@@ -638,7 +638,7 @@ public function sophieEggApocalypse():void {
 	//[Daddy (Male/herm)] [Mommy (female/herm)] [Leave]
 	var daddy:Number = 0;
 	var mommy:Number = 0;
-	flags[UNKNOWN_FLAG_NUMBER_00284]++;
+	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00284]++;
 	if(player.hasCock()) daddy = 3034;
 	if(player.hasVagina()) mommy = 3035;
 	simpleChoices("Daddy",daddy,"Mommy",mommy,"",0,"",0,"Leave",1);
@@ -729,7 +729,7 @@ public function rideDatSophieVag(nice:Boolean = false):void {
 	if(player.cor <= 50) nice = true;
 	if(nice) {
 		outputText("Before you can decide what, exactly, you're going to do with your harpy slut, Sophie jiggles her way over to you, the insides of her thighs dripping with every step.  You watch as the plump bird wobbles, too aroused and too damn big to walk straight, but eventually she does manage to make it to you.");
-		if(flags[SOPHIE_INCUBATION] > 0 && flags[SOPHIE_INCUBATION] <= 150) outputText("  Her pregnancy-imbued middle doesn't really help, either.");
+		if(flags[kFLAGS.SOPHIE_INCUBATION] > 0 && flags[kFLAGS.SOPHIE_INCUBATION] <= 150) outputText("  Her pregnancy-imbued middle doesn't really help, either.");
 		outputText("\n\n\"<i>Like, hey, babe...</i>\" she coos, leaning forward and pressing her plushy, oversized breasts against you. Her nipples in particular push hard against your [armor], the harpy completely aroused, and before you can do anything else - she leans in and kisses you, drug-ringed lips smacking desperately against yours again and again.");
 		
 		outputText("\n\nFor a second you lose yourself in it as the drugged cocktail starts to run through you, making [eachCock] start to throb and pulse as ");
@@ -795,7 +795,7 @@ public function rideDatSophieVag(nice:Boolean = false):void {
 	}
 	else {
 		outputText("Before you can decide what, exactly, you're going to do with your harpy slut, Sophie jiggles her way over to you, the insides of her thighs dripping with every step.  You watch as the plump bird wobbles, too aroused and too damn big to walk straight, but eventually she does manage to make it to you.");
-		if(flags[SOPHIE_INCUBATION] > 0 && flags[SOPHIE_INCUBATION] <= 150) outputText("  Her pregnancy-imbued middle doesn't really help, either.");
+		if(flags[kFLAGS.SOPHIE_INCUBATION] > 0 && flags[kFLAGS.SOPHIE_INCUBATION] <= 150) outputText("  Her pregnancy-imbued middle doesn't really help, either.");
 		outputText("\n\n\"<i>Like, hey, babe...</i>\" she coos, leaning forward and pressing her plushy, oversized breasts against you.  Her nipples in particular push hard against your [armor], the harpy completely aroused, and before you can do anything else - she leans in and kisses you, drug-ringed lips smacking desperately against yours again and again.");
 		outputText("\n\nFor a second you lose yourself in it as the drugged cocktail starts to run through you, making [eachCock] start to throb and pulse as [if (cocks >= 2) they grow][if (cocks = 1) it grows] hard inside of your [armor], and your arms slowly start to reach up to fondle the drug-laden harpy... before your eyes snap wide and you shove her off.");
 		outputText("\n\n\"<i>You bitch!</i>\" you curse her, glaring as she falls onto her fat rump.  The stupid bird boggles for a moment, trying to process what just happened, but you're having none of it.  \"<i>If I wanted to fuck you, I'd fucking do it!</i>\"  You berate her, slowly stripping off your [armor].  Despite your yelling, she only seems turned on; she licks her lips and begins to rub her drooling cunt as she watches you strip, and you glower at her the entire time, only being irritated by her encouraging moans.");
@@ -832,7 +832,7 @@ public function rideDatSophieVag(nice:Boolean = false):void {
 		else if(player.cumQ() < 3000) outputText("\n\nYour hips jump and shudder as your huge load of spunk begins to well up inside of you, and you find yourself moaning into Sophie's tits as the bird-slut eggs you on, muttering \"<i>Cum!  Cum!  Cum!</i>\" over and over.  You groan as the first spurt of your seed shoots out into the harpy's twat - and then the floodgates open.  Your hips buck repeatedly into the bird-whore as she moans her pleasure, each thrust met with a gout of your seed - which quickly starts to pour out of her.\n\nSophie's own climax quickly kicks off as her belly starts to swell with your orgasm, and your spunk paints her insides, her thighs, and the crack of her ass white along with your crotch, her belly bloated out into a little hump by the time you're done. She shudders, hips still twitching, and rubs your back lovingly.");
 		else {
 			outputText("\n\nYou flop over, lost in sensation for a few moments, and Sophie seems almost puzzled, still letting out the occasional coo but otherwise going silent.  Just as it seems she's about to ask what's wrong, your hips jump, giving you the last bit of stimulation you need - and the first massive gout of your spunk fires a blisteringly hot arc of pleasure down your [cock " + (x+1) + "], the fluids spurting out and filling Sophie's cunt in a single go.  She lets out a shrill cry, head tilting back, and her entire body shudders.  You let out a desperate, needy moan and pull your hips back, then piston into her again, another gout of your spunk loosing inside of her already-overfilled tunnel, and the excess gushes out around your cock as you thrust into her again and again, each push accompanied by another gout of your hot cum.\n\nHer belly quickly bloats from the treatment, your seed spilling into her womb");
-			if(flags[SOPHIE_INCUBATION] > 0 && flags[SOPHIE_INCUBATION] <= 150) outputText(" (or at least all over her channel, since her womb is bound up with your egg)");
+			if(flags[kFLAGS.SOPHIE_INCUBATION] > 0 && flags[kFLAGS.SOPHIE_INCUBATION] <= 150) outputText(" (or at least all over her channel, since her womb is bound up with your egg)");
 			outputText(" as your [cock " + (x+1) + "] plugs it all from going out, and Sophie's cries get louder as she comes again, her belly bloating with your thick, hot semen and pushing against your [chest].  You finally hilt out in her, letting out a few more surges, this time with nowhere to go - so they all spill directly out around your cock, high-pressure gushes of white cream that paint your crotch and the ground underneath of it with sticky seed.");
 		}
 	}
@@ -861,7 +861,7 @@ public function rideDatSophieVag(nice:Boolean = false):void {
 		outputText("with its' own juices; you barely notice it over the orgasm from your male half, but, as you readjust your position, the slickness dripping down your thighs is unmistakable.");
 	}
 	outputText("\n\nSophie coos and rubs your head, extremely grateful for the (rough, sexy, abusive) fucking, and she tilts your head up to plant a number of bubbly kisses all over your face, seemingly forgetting about the drugged cocktail she has smeared all over them.  You'd be worried about having to fuck her some more to get rid of the effect, but you're so drained that right now you couldn't fuck her again if you wanted to.  Instead you collapse against your slutty harpy milf once more, ");
-	if(flags[SOPHIE_INCUBATION] > 0 && flags[SOPHIE_INCUBATION] <= 150) outputText("resting your head on her gravid tummy and smiling to yourself.");
+	if(flags[kFLAGS.SOPHIE_INCUBATION] > 0 && flags[kFLAGS.SOPHIE_INCUBATION] <= 150) outputText("resting your head on her gravid tummy and smiling to yourself.");
 	else outputText("hugging her tight as she tries her best to show her appreciation.");
 	if(sophieIsInSeason()) sophiePregChance();
 	stats(0,0,0,0,.5,-4,-100,0);
@@ -1110,7 +1110,7 @@ public function postSophieTooBigImpreg():void {
 public function sophieMoveInAttempt():void {
 	clearOutput();
 	sophieSprite();
-	flags[SOPHIE_BROACHED_SLEEP_WITH] = 1;
+	flags[kFLAGS.SOPHIE_BROACHED_SLEEP_WITH] = 1;
 	outputText("Sophie approaches you with a particularly somber expression on her normally vapid face, pressing her index fingers together nervously.  Her walk, normally exaggerated and sexual, is meek and diminished as she makes her way forward.  You cock your head to the side, looking at her curiously.");
 	
 	outputText("\n\n\"<i>Could I like, sleep with you at night?  I thought... maybe... since you got me pre- preg... preggers and stuff, you wouldn't mind me snuggling with you while we slept?</i>\" she asks hopefully, blinking her long lashes innocently at you.  \"<i>I promise, I won't bother you or wake you up in the night or anything...  I just want someone to like, hold when it's cold.</i>\" She immediately adds, \"<i>And I make a really good pillow, ever since you gave me that drink!</i>\" Sophie playfully bounces her boobs for effect, blushing as she awaits your response.");
@@ -1126,12 +1126,12 @@ public function yesSophieSleepWith():void {
 	clearOutput();
 	sophieSprite();
 	outputText("Sophie claps her hands excitedly when you give your assent, immediately launching into a hug that presses her ");
-	if(flags[SOPHIE_INCUBATION] > 150) outputText("burgeoning");
-	else if(flags[SOPHIE_INCUBATION] > 120) outputText("swollen");
-	else if(flags[SOPHIE_INCUBATION] > 100) outputText("huge, gravid");
+	if(flags[kFLAGS.SOPHIE_INCUBATION] > 150) outputText("burgeoning");
+	else if(flags[kFLAGS.SOPHIE_INCUBATION] > 120) outputText("swollen");
+	else if(flags[kFLAGS.SOPHIE_INCUBATION] > 100) outputText("huge, gravid");
 	else outputText("taut");
 	outputText(" midriff and cushiony tits against you.  \"<i>You're awesome, [name], you know that?  You're totally " + player.mf("hunky","cute") + " AND awesome!</i>\"  She spins about, dancing happily and shaking her voluptuous backside in your direction as she goes.");
-	flags[SLEEP_WITH] = "Sophie";
+	flags[kFLAGS.SLEEP_WITH] = "Sophie";
 	doNext(13);
 }
 //No (Also Used To Kick Her Out Of Bed)*
@@ -1139,7 +1139,7 @@ public function noSophieSleepWith():void {
 	clearOutput();
 	sophieSprite();
 	outputText("Sophie casts her eyes down and says, \"<i>I get it...  I'll just... sleep over in my nest then.  Alone...</i>\"  She shambles away, her tail feathers limp against her big, bouncing butt as she goes, clearly unhappy with the decision.  You can hear her sniffling even after she vanishes around a rock, trying not to cry.");
-	if(flags[SLEEP_WITH] == "Sophie") flags[SLEEP_WITH] = "";
+	if(flags[kFLAGS.SLEEP_WITH] == "Sophie") flags[kFLAGS.SLEEP_WITH] = "";
 	doNext(13);
 }
 
@@ -1148,12 +1148,12 @@ public function moveSophieInRepeat():void {
 	clearOutput();
 	sophieSprite();
 	outputText("You go up to the feathery bimbo and idly question if she still wants to share your bed with you");
-	if(flags[SOPHIE_INCUBATION] == 0) outputText(" even though she's not pregnant any more");
+	if(flags[kFLAGS.SOPHIE_INCUBATION] == 0) outputText(" even though she's not pregnant any more");
 	outputText(".  Sophie's voluminous, painted lips curl into a radiant smile, an effect enhanced even more by the gold gloss she coats them with.");
 	
 	outputText("\n\n\"<i>Really?  Like, I can snuggle up next to you when you sleep while you use my boobs as pillows?!</i>\" she asks, unable to keep a girlish squeal of delight out of her voice.  Sophie bounces up and down; her wings flapping with wild excitement, nearly blinding you from the cloud of dust they kick up.  \"<i>I promise I won't bother while you sleep or anything, but maybe we could like, have quickies in the morning?</i>\"");
 	outputText("\n\nYou roll your eyes and give her a thumbs up.  After all, you can't really sleep with a sex-crazed bimbo and NOT expect to be 'mounted' at some point.");
-	flags[SLEEP_WITH] = "Sophie";
+	flags[kFLAGS.SLEEP_WITH] = "Sophie";
 	doNext(13);
 }
 
@@ -1194,7 +1194,7 @@ public function sophieFenCraftedSex(morning:Boolean = false):void {
 	if(player.biggestTitSize() >= 1) outputText("own");
 	else outputText("chest");
 	outputText(", as she kisses you passionately, moaning into your mouth.  The effects of her potent lip-gloss hit you immediately, fortifying your pleasure into a tsunami wave of excitement, one that's cresting whether you want it to or not.  You cry out into Sophie's tongue, hips lifting her off the ground, as you cum, hard.  Your ejaculate fires out in long, thick ropes of white, painting the harpy's sodden innards white.  With her folds coated in spunk, your spasming " + cockDescript(x) + " pours the rest of your lusts into her, emptying your [balls] completely.");
-	if(flags[SOPHIE_INCUBATION] > 0) {
+	if(flags[kFLAGS.SOPHIE_INCUBATION] > 0) {
 		outputText("  The thorough seeding fills her up completely - her womb is too full of egg for there to be any room for spunk, and it all drips out with each fresh injection.");
 		if(player.cumQ() >= 500) outputText("  You cum so hard that torrents of spooge wash out of her slit, her womb obstructed by the egg you made with her.");
 	}
@@ -1454,16 +1454,16 @@ public function sophieBirthsEgg():void {
 	outputText("\n\nThe egg seems fine, as far as eggs go.  Rapidly drying, the surface loses its polished luster and takes on a flat, matte white tone.  Sophie blinks her eyes and snuggles up against you, saying, \"<i>Look at what we did, [name].  It's beautiful.</i>\"");
 	
 	outputText("\n\nYou stick around long enough to make sure Sophie and her egg are okay before you go.");
-	if(flags[SOPHIE_ADULT_KID_COUNT] == 0) outputText("  Can you handle having another harpy living in your camp?\n");
+	if(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] == 0) outputText("  Can you handle having another harpy living in your camp?\n");
 	else outputText("  Just how many harpies can your camp hold?\n");
 	stats(0,0,0,0,0,0,(10+player.lib/10),0);
-	flags[SOPHIE_INCUBATION] = 0;
-	flags[SOPHIE_CAMP_EGG_COUNTDOWN] = 150 + rand(30);
+	flags[kFLAGS.SOPHIE_INCUBATION] = 0;
+	flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] = 150 + rand(30);
 }
 	
 //Egg Hatched Notification
 public function sophiesEggHatches():void {
-	flags[SOPHIE_CAMP_EGG_COUNTDOWN] = 0;
+	flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] = 0;
 	sophieSprite();
 	outputText("\nThe quiet of your camp is suddenly broken by loud bird-like cries and squawks.  What on earth could have gotten Sophie so worked up?  Letting out a sigh, you head over to where your feathery ");
 	if(bimboSophie()) outputText("bimbo ");
@@ -1478,45 +1478,45 @@ public function sophiesEggHatches():void {
 	else outputText("\n\n\"<i>It's time!  It's time!  Our egg is going to hatch!  Come on!  Come see your new daughter!</i>\" she says as she pulls you over to her nest.  As soon as you get there, you can already see what the expectant mother is on about.  The egg wiggles and shakes, cracks forming across its hard shell as if something inside is trying to break out.  Now that you're here and watching, Sophie lets go of you, bounding over to her precious egg.  She rubs it softly and coos to it, cheering her little baby harpy on.  Sophie may be a bit of a domineering woman, but she shows nothing but tenderness for her offspring immensely.");
 	
 	outputText("\n\n\"<i>Ohhh, here it comes!  Come on sweetie, you're almost there,</i>\" she coos to her egg.  As if spurred on by its mother's calls, the egg shakes harder, big cracks splitting across the shell.  Finding yourself interested in what your harpy daughter is going to look like, you step closer, watching with bated breath as a talon tipped foot explodes its way out of the egg. Barely a few seconds later, a hand smashes through the shell.  Again and again, your newborn daughter breaks her egg's confining shell apart until she is free of the protective confines of her old home.");
-	if(flags[SOPHIE_ADULT_KID_COUNT] < 4) {	
+	if(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] < 4) {	
 		//First Harpy:
 		//-Pink plumage, big tits and (sensitive) lips, normal harpy hips. (blue eyes)
-		if(flags[SOPHIE_ADULT_KID_COUNT] == 0) {
+		if(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] == 0) {
 			outputText("\n\nThe first thing that comes to mind when you see your newborn (or is that new-hatched?) daughter is.....'fluffy.'  She's covered in adorably soft, pink down, with big blue eyes that peer around curiously.  She looks cute as hell");
-			if(flags[UNKNOWN_FLAG_NUMBER_00282] > 0) outputText(", though her lips are a little larger than you'd think was normal - maybe she inherited it from her mom?");
+			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0) outputText(", though her lips are a little larger than you'd think was normal - maybe she inherited it from her mom?");
 			else outputText(".");
 			outputText("  The harpy chick is actually about as big as a four or five year old, and she looks up at Sophie curiously.");
-			if(flags[UNKNOWN_FLAG_NUMBER_00282] > 0)  {
-				flags[DAUGHTER_ONE_BIMBO] = 1;
+			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0)  {
+				flags[kFLAGS.DAUGHTER_ONE_BIMBO] = 1;
 			}
 		}
 		//Second daughter
 		//Second Harpy:
 		//-Badonkadonk to 9000.  Blond feathers that grow very long. (violet eyes)
-		else if(flags[SOPHIE_ADULT_KID_COUNT] == 1) {
+		else if(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] == 1) {
 			outputText("\n\nYou'd think that since this is the second time you've seen one of Sophie's eggs hatch, you'd be a little more used to this, but the sight still awes you");
 			if(player.cor > 66) outputText(" a little bit");
 			outputText(".  The newly hatched chick looks about as old as the other - four or five years old.  Unlike the first one, her face is fairly normal, though you think with her features she's sure to be a beauty when she matures.  She's a bit bigger in the butt and hips than her elder sister, and her eyes are violet while her plumage matches her mothers - ");
-			if(flags[UNKNOWN_FLAG_NUMBER_00282] > 0)  {
+			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0)  {
 				outputText("platinum blonde");
-				flags[DAUGHTER_TWO_BIMBO] = 1;
+				flags[kFLAGS.DAUGHTER_TWO_BIMBO] = 1;
 			}
 			else outputText("pure pink");
 			outputText(".  Her feathers definitely seems longer as well, even though it's still just fuzzy down.");
 		}
 		//Third Harpy:
 		//-Not that curvy, but has human feet and purple feathers. (violet eyes)
-		else if(flags[SOPHIE_ADULT_KID_COUNT] == 2) {
+		else if(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] == 2) {
 			outputText("\n\nOnce again, you get to watch another harpy experience the first few moments of her memorable life.  This one has perfect, normal-looking proportions, and though she clearly has the wide hips indicative of her race they're nowhere near as big as her big-butted sister's.  Most surprisingly of all, she lacks the talons that her mom and sisters share.  Instead, she has normal, human feet.  Sophie's brow furrows with worry, but you can't help but think that it's about damned time something in this place took after you for a change.  Her eyes are piercing violet, though her feathers are a deep purple in color.");
-			if(flags[UNKNOWN_FLAG_NUMBER_00282] > 0) flags[DAUGHTER_THREE_BIMBO] = 1;
+			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0) flags[kFLAGS.DAUGHTER_THREE_BIMBO] = 1;
 		}
 		//Fourth Harpy:
 		//-Curvy like Sophie, but with well-developed wings and extra-soft feathers (WINGJOBS).  Pink plumage.  (blue eyes)
 		else {
 			outputText("\n\nYour fourth child seems to take after her mom in just about every way.  She has blue eyes like Sophie, pink feathers");
-			if(flags[UNKNOWN_FLAG_NUMBER_00282] > 0) outputText(" like her mother used to have before her bimbofication");
+			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0) outputText(" like her mother used to have before her bimbofication");
 			outputText(", and a shape that seems to indicate that maturity will be VERY generous to her.  She looks around in wonder, already flapping wings that seem a touch more developed than her sisters were at that age.  You've got to wonder just how big they'll get with age.");
-			if(flags[UNKNOWN_FLAG_NUMBER_00282] > 0) flags[DAUGHTER_FOUR_BIMBO] = 1;
+			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0) flags[kFLAGS.DAUGHTER_FOUR_BIMBO] = 1;
 		}
 		
 		//ALL FIRST FOUR END WITH THIS: 
@@ -1529,7 +1529,7 @@ public function sophiesEggHatches():void {
 		outputText("\n\nYou never get tired of watching this, the young harpy bursting from her egg, shards of shell landing all around the nest as the fluffy little harpy emerges. The ");
 		if(rand(2) == 0) outputText("pink");
 		else {
-			if(flags[UNKNOWN_FLAG_NUMBER_00282] > 0) outputText("blonde");
+			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0) outputText("blonde");
 			else outputText("white");
 		}
 		outputText(" girl coos as she shields her ");
@@ -1550,7 +1550,7 @@ public function sophiesEggHatches():void {
 	outputText("\n\nGrinning to your ");
 	if(bimboSophie()) outputText("curvaceous bimbo, you reach down and grab her huge, round ass and squeeze, pulling her closer.  The rough grab rips a surprised gasp from your milfy harpy. \"<i>Eeep!  Babe... not in front of our chick!  Mmmm, well, Momma Sophie would be happy to play with you babe, just let me put our little girl here for a nap first.  Then you and me can like, totally get started on putting another egg inside me!</i>\"\n");
 	else outputText("curvy mother, you reach down and grab her big, round ass and squeeze, pulling her closer.  The rough grab rips a surprised gasp from your milfy harpy. \"<i>Oh, [name]... not in front of our chick!  Mmmm, well, Momma Sophie would be happy to play with you babe, just let me put our little girl here for a nap first.  Then I'll take care of you, my virile " + player.mf("stud","breeder") + "...</i>\"\n");
-	flags[SOPHIE_DAUGHTER_MATURITY_COUNTER] = 336;
+	flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] = 336;
 }
 	
 //Mature alert
@@ -1560,42 +1560,42 @@ public function sophieKidMaturation():void {
 	outputText("Checking up on your growing daughter, you find her once again with her mother Sophie.  The two harpies are just gabbing away about this and that when suddenly your teen-looking daughter groans as if in pain.  Worried about the state of your offspring, you approach the nest and look over your daughter.  Next to her, Sophie flutters her wings, fussing over her daughter's health.  Before your very eyes, your daughter changes - her once plain body growing out, feminine curves ballooning exquisitely.");
 	
 	//First daughter
-	if(flags[SOPHIE_ADULT_KID_COUNT] == 0) {
+	if(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] == 0) {
 		//First Harpy:
 		//-Pink plumage, big tits and (sensitive) lips, normal harpy hips. (blue eyes)
-		if(flags[DAUGHTER_ONE_BIMBO] == 1) outputText("\n\nHer chest and lips develop remarkably, particularly her chest.  Her breasts are immense, akin to something you would see on a cow-girl, and the prominent nipples and soft, creamy skin make you wonder what it would be like to milk a harpy.  Her swollen tits actually put her mom's to shame, and Sophie looks on jealously as the girl's lips plump up bigger than her own.  The maturing woman's hips widen only slightly, a hair skinnier than most harpies in girth but still very noticeable.  She touches a finger to her bee-stung lips and moans, obviously enjoying how sensitive her plush cock-pillows feel.");
+		if(flags[kFLAGS.DAUGHTER_ONE_BIMBO] == 1) outputText("\n\nHer chest and lips develop remarkably, particularly her chest.  Her breasts are immense, akin to something you would see on a cow-girl, and the prominent nipples and soft, creamy skin make you wonder what it would be like to milk a harpy.  Her swollen tits actually put her mom's to shame, and Sophie looks on jealously as the girl's lips plump up bigger than her own.  The maturing woman's hips widen only slightly, a hair skinnier than most harpies in girth but still very noticeable.  She touches a finger to her bee-stung lips and moans, obviously enjoying how sensitive her plush cock-pillows feel.");
 		else outputText("\n\nHer chest and lips develop remarkably.  Her breasts are large for a harpy, akin to something you would see on a young cow-girl, and the prominent nipples and soft, creamy skin make you wonder what it would be like to milk a harpy.  Her swollen tits actually put her mom's to shame, barely, and Sophie looks on jealously as the girl's lips plump up a little bigger than her own.  The maturing woman's hips widen only slightly, a hair skinnier than most harpies in girth but still very noticeable.  She touches a finger to her larger lips and moans, obviously enjoying how sensitive her cock-pillows feel.");
 	}
 	//Second daughter
-	else if(flags[SOPHIE_ADULT_KID_COUNT] == 1) {
+	else if(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] == 1) {
 		//Second Harpy:
 		//-Badonkadonk to 9000.  Blond feathers that grow very long. (violet eyes)
-		if(flags[DAUGHTER_TWO_BIMBO] == 1) outputText("\n\nHer ass expands immensely along with her hips.  Soon, the freshly-matured harpy has a butt to rival her mother, but it doesn't just stop there.  Her immense rump swells until it's positively gravity-defying, a jiggly expanse of supple butt just wanting to be grabbed, squeezed, or even fucked.  Her chest is fairly modest, perhaps a B or C cup at best guess.  The blond feathers all over her body lengthen as well, her “hair” going down past her ass, the plumage about her legs and arms puffy and shaggy like leg-and-arm warmers.  She licks her lips as the changes finish, admiring her new, posh bottom.");
+		if(flags[kFLAGS.DAUGHTER_TWO_BIMBO] == 1) outputText("\n\nHer ass expands immensely along with her hips.  Soon, the freshly-matured harpy has a butt to rival her mother, but it doesn't just stop there.  Her immense rump swells until it's positively gravity-defying, a jiggly expanse of supple butt just wanting to be grabbed, squeezed, or even fucked.  Her chest is fairly modest, perhaps a B or C cup at best guess.  The blond feathers all over her body lengthen as well, her “hair” going down past her ass, the plumage about her legs and arms puffy and shaggy like leg-and-arm warmers.  She licks her lips as the changes finish, admiring her new, posh bottom.");
 		else outputText("\n\nHer ass expands along with her hips.  Soon, the freshly-matured harpy has a butt to rival her mother, but it doesn't just stop there.  Her swollen rump swells until it's positively posh, a jiggly expanse of supple butt just wanting to be grabbed, squeezed, or even fucked.  Her chest is fairly modest, perhaps a A or B cup at best guess.  The feathers all over her body lengthen as well, her “hair” going down past her ass, the plumage about her legs and arms puffy and shaggy like leg-and-arm warmers.  She licks her lips as the changes finish, admiring her new, enlarged bottom.");
 	}
 	//Third daughter
-	else if(flags[SOPHIE_ADULT_KID_COUNT] == 2) {
+	else if(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] == 2) {
 		//Third Harpy:
 		//-Not that curvy, but has human feet and purple feathers. (violet eyes)
-		if(flags[DAUGHTER_THREE_BIMBO] == 1) outputText("\n\nShe grows up into a perfect-looking harpy - all except her feet, which remain utterly and completely human.  Her hips are nice and broad, her breasts only slightly bigger than average for a harpy, maybe C or D-cup at best, her wings seeming as impressive as any of the other bird-women.  The matured woman stamps her foot in frustration - clearly she had hoped it would change with the rest of her.  Still, Sophie whispers something into her ear that makes her blush yet smile at the same time.  She lifts her foot and curls her toes, looking at herself in a whole new light.");
+		if(flags[kFLAGS.DAUGHTER_THREE_BIMBO] == 1) outputText("\n\nShe grows up into a perfect-looking harpy - all except her feet, which remain utterly and completely human.  Her hips are nice and broad, her breasts only slightly bigger than average for a harpy, maybe C or D-cup at best, her wings seeming as impressive as any of the other bird-women.  The matured woman stamps her foot in frustration - clearly she had hoped it would change with the rest of her.  Still, Sophie whispers something into her ear that makes her blush yet smile at the same time.  She lifts her foot and curls her toes, looking at herself in a whole new light.");
 		else outputText("\n\nShe grows up into a perfect-looking harpy - all except her feet, which remain utterly and completely human.  Her hips are nice and broad, her breasts only slightly bigger than average for a harpy, maybe C at best, her wings seeming as impressive as any of the other bird-women.  The matured woman stamps her foot in frustration - clearly she had hoped it would change with the rest of her.  Still, Sophie whispers something into her ear that makes her blush yet smile at the same time.  She lifts her foot and curls her toes, looking at herself in a whole new light.");
 	}
 	//Fourth daughter
-	else if(flags[SOPHIE_ADULT_KID_COUNT] == 3) {
+	else if(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] == 3) {
 		//Fourth Harpy:
 		//-Curvy like Sophie, but with well-developed wings and extra-soft feathers (WINGJOBS).  Pink plumage.  (blue eyes)
-		if(flags[DAUGHTER_FOUR_BIMBO] == 1) outputText("\n\nAss, hips, and chest all expand in equal measure, only stopping when she's reached a critical mass that puts her on even footing with her mother, perhaps only a single cup size smaller.  She admires her new self experimentally, barely even aware that her wings are still growing.  By the time they stop, they're much larger than her mom's, trailing wisps of soft feather-fluff.  She curls them around her new breasts and squeezes the massive boob flesh tightly, moaning in delight.  Sophie smiles and says something about a wingjob, which makes the freshly-minted, adult harpy blush.");
+		if(flags[kFLAGS.DAUGHTER_FOUR_BIMBO] == 1) outputText("\n\nAss, hips, and chest all expand in equal measure, only stopping when she's reached a critical mass that puts her on even footing with her mother, perhaps only a single cup size smaller.  She admires her new self experimentally, barely even aware that her wings are still growing.  By the time they stop, they're much larger than her mom's, trailing wisps of soft feather-fluff.  She curls them around her new breasts and squeezes the massive boob flesh tightly, moaning in delight.  Sophie smiles and says something about a wingjob, which makes the freshly-minted, adult harpy blush.");
 		else outputText("\n\nAss, hips, and chest all expand in equal measure, only stopping when she's reached a critical mass that puts her on even footing with her mother, perhaps only a single cup size smaller.  She admires her new self experimentally, barely even aware that her wings are still growing.  By the time they stop, they're much larger than her mom's, trailing wisps of soft feather-fluff.  She curls them around her new breasts and squeezes the massive boob flesh tightly, moaning in delight.  Sophie smiles and says something about a wingjob, which makes the freshly-minted, adult harpy blush.");
 	}
 	//Fifth+ daughter
 	else {
 		outputText("\n\nHer flesh ripples as her hips and ass swell into wide, broodmotherly hips with a round, ripe ass to match that just begs to be spanked and grabbed.  Her once-humble breasts spill forth in a flood of supple tit-flesh. The growing orbs engorge to around nearly the same size as Sophie's big, ");
-		if(flags[UNKNOWN_FLAG_NUMBER_00282] > 0) outputText("bimbo ");
+		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0) outputText("bimbo ");
 		outputText("breasts - just as high, round and perky, yet big and yielding to the touch, like the softest pillow.");
 	}
 	//ALL CONTINUE HERE
 	outputText("  The newly embodied harpy lets out a sigh of relief now that the changes have stopped, clearly surprised by what happened and glad it's over. Moving to get a better view of your daughter, you take in the sight of her new body. Your once petite harpy girl looks more like a stacked ");
-	if(flags[UNKNOWN_FLAG_NUMBER_00282] > 0) outputText("bimbo");
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0) outputText("bimbo");
 	else outputText("bombshell");
 	outputText(", just like her mother.");
 	if(bimboSophie()) outputText("  From the inquisitive look on her face and spark of intelligence in her eyes, it seems that she hasn't lost her mind to her inner bimbo.");
@@ -1606,11 +1606,11 @@ public function sophieKidMaturation():void {
 	if(bimboSophie()) outputText("\n\n\"<i>Sweetie! Just look at you!  You grew up into one hot piece of ass!  Momma's so proud of you!  Baby, isn't our little girl like, suuuper sexy?!</i>\" Sophie says as she pushes her newly matured daughter at you.  Your happy, curvy daughter wraps her arms around you tightly, smooching you on the cheek as she presses her new body against you.  Her kiss leaves a big, golden lipstick mark on your " + player.skinFurScales() + "  \"<i>What do you think, daddy? Aren't I super-duper sexy?</i>\" she asks before leaning in, pushing her big, perky tits against you and making a pouty face at you, showing off her plump kissable lips.");
 	else outputText("\n\n\"<i>Wow, you grew up into a fine looking harpy!  Momma Sophie's so proud of you!  [name], isn't our little girl a hottie?!</i>\" Sophie says as she pushes her newly matured daughter at you.  Your happy, curvy daughter wraps her arms around you tightly, smooching you on the cheek as she presses her new body against you.  Her kiss leaves a big, golden lipstick mark on your " + player.skinFurScales() + "  \"<i>What do you think, daddy?  Aren't I cute?</i>\" she asks before leaning in, pushing her big, perky tits against you and making a pouty face at you, showing off her plump kissable lips.");
 	//REPEATS:
-	if(flags[SOPHIE_ADULT_KID_COUNT] > 0) {
+	if(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] > 0) {
 		//If Yes Incest
-		if(flags[SOPHIE_FAMILY_INCEST] == 1) {
+		if(flags[kFLAGS.SOPHIE_FAMILY_INCEST] == 1) {
 			outputText("\n\nYou nod your head and tell her that she's very beautiful, just like her mom and sister");
-			if(flags[SOPHIE_ADULT_KID_COUNT] > 1) outputText("s");
+			if(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] > 1) outputText("s");
 			outputText(".  She beams a radiant smile at you and turns around, shaking her rump at you enticingly, \"<i>So, when do you want to try me out, " + player.mf("Daddy","'Mom'") + "?</i>\"");
 			
 			outputText("\n\nYou promise her that you will in due time.");
@@ -1628,7 +1628,7 @@ public function sophieKidMaturation():void {
 		addButton(0,"Yes - Incest",yesToSophieIncest);
 		addButton(1,"No",noToSophieIncest);
 	}
-	flags[SOPHIE_ADULT_KID_COUNT]++;
+	flags[kFLAGS.SOPHIE_ADULT_KID_COUNT]++;
 }
 //[yes incest plz]
 public function yesToSophieIncest():void {
@@ -1641,7 +1641,7 @@ public function yesToSophieIncest():void {
 	else outputText("lusty matron ");
 	outputText("is more than happy to return the sudden affection, her hands running over your body as she grinds against you teasingly.  With a firm open-palm spank to her rump, you release her, telling both harpies that you will play with them again very soon.  The two horny girls giggle together before talking about all the fun they will have.");
 	stats(0,0,0,0,0,0,5,0);
-	flags[SOPHIE_FAMILY_INCEST] = 1;
+	flags[kFLAGS.SOPHIE_FAMILY_INCEST] = 1;
 	doNext(13);
 }
 //[nono]
@@ -1657,7 +1657,7 @@ public function noToSophieIncest():void {
 //First time happens randomly
 public function sophieAndIzmaPlay():void {
 	outputText("\n");
-	flags[TIMES_SOPHIE_AND_IZMA_FUCKED]++;
+	flags[kFLAGS.TIMES_SOPHIE_AND_IZMA_FUCKED]++;
 	outputText("<b>Something odd happens that ");
 	if(model.time.hours < 6 || model.time.hours > 20) outputText("night");
 	else if(model.time.hours < 12) outputText("morning");
@@ -1689,7 +1689,7 @@ public function sophieAndIzmaPlay():void {
 	outputText("\n\nSophie is completely immobilized, strung up so that her pussy's slick secretions are visible of on her engorged nether-lips, framed by the thick, smooth skin of her immense thighs, just begging to be grabbed hold of and mounted.  All Sophie can do is kick her taloned feet around, but that just makes her heavy bottom swing back and forth pendulously, waist height to the malicious grinning hermaphrodite.");
 	
 	outputText("\n\nYou consider your options.  You could let Izma have her way with the sexy bombshell of a harpy, or you could put a stop to it, before it goes too far.");
-	if(flags[TIMES_SOPHIE_AND_IZMA_FUCKED] == 1) {
+	if(flags[kFLAGS.TIMES_SOPHIE_AND_IZMA_FUCKED] == 1) {
 		outputText("\n\n(Regardless, you could probably suggest that Sophie try this again in the future...)");
 	}
 	stats(0,0,0,0,0,0,10+player.lib/10,0);

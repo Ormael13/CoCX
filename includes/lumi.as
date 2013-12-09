@@ -1,7 +1,7 @@
 ﻿public function lumiEncounter():void {
 	outputText("", true);
 	//1st time lumi meeting
-	if(flags[LUMI_MET] == 0) {
+	if(flags[kFLAGS.LUMI_MET] == 0) {
 		//placeholder text for outside the cathedral
 		outputText("You spot an anomaly in the barren wastes; a door that seems to be standing out in the middle of nowhere. Somehow, you figure that it must lead to some other part of the world, and the only reason it's here is because you can't get to where the door should be right now.\n\n", false);
 		outputText("Do you open it?", false);
@@ -19,9 +19,9 @@ public function lumiLabChoices():void {
 	spriteSelect(37);
 	outputText("", true);
 	//First time meeting
-	if(flags[LUMI_MET] == 0) {
+	if(flags[kFLAGS.LUMI_MET] == 0) {
 		//Set Lumi met flag 
-		flags[LUMI_MET]++;
+		flags[kFLAGS.LUMI_MET]++;
 		outputText("You open the door and carefully check inside for any enemies that may be trying to ambush you. The room seems to be some kind of alchemical lab, with shelves full of apparatuses all along the walls, a desk on one side of the room, and a long table across the room from you that is full of alchemical experiments in progress, many give off lots of smoke, and others are bottles of bubbling fluids.  A goblin wearing an apron and some kind of headband is sitting on a tall, wheeled stool; she is otherwise nude and seems to be watching at least 3 experiments right now. She suddenly turns around and looks straight in your direction.  It's hard to tell thanks to the dark goggles that hide her eyes from view, but you're fairly certain she's watching you.  After a few seconds she yells \"<i>Cuths-tohmer!</i>\" in a thick lisp. She looks harmless enough, so you step inside while she fiddles with her experiments, reducing the bubbling smoke.  She jumps down from her stool, tears off her apron, bounds over to the desk, and scrambles on top of it.\n\n", false);
 
 		outputText("She's about 3 feet tall, with yellow-green skin, and wears her orange hair in a long ponytail that reaches to her knees.  Her breasts are about B cup, with average nipples that have been colored orange. All of her nails have been painted orange to match. She doesn't seem to ever stop moving, and while the majority of her face looks cute, it's a little hard to be sure while she's wearing those thick goggles.  The solid black lenses of her goggles make her look quite unsettling, stifling any appeal her form could inspire in you.\n\n", false);

@@ -36,27 +36,27 @@ public function encounterRathazul():void {
 
 public function campRathazul():void {
 	spriteSelect(49);
-	if(flags[UNKNOWN_FLAG_NUMBER_00274] == 1 && flags[UNKNOWN_FLAG_NUMBER_00275] > 0) {
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] > 0) {
 		collectRathazulArmor();
 		return;
 	}
 	//Special rathazul/follower scenes scenes.
-	if(rand(6) == 0 && flags[RATHAZUL_CAMP_INTERACTION_COUNTDOWN] == 0) {
-		flags[RATHAZUL_CAMP_INTERACTION_COUNTDOWN] = 3;
+	if(rand(6) == 0 && flags[kFLAGS.RATHAZUL_CAMP_INTERACTION_COUNTDOWN] == 0) {
+		flags[kFLAGS.RATHAZUL_CAMP_INTERACTION_COUNTDOWN] = 3;
 		//Pure jojo
-		if(flags[JOJO_RATHAZUL_INTERACTION_COUNTER] == 0 && player.hasStatusAffect("PureCampJojo") >= 0 && flags[JOJO_DEAD_OR_GONE] == 0) {
+		if(flags[kFLAGS.JOJO_RATHAZUL_INTERACTION_COUNTER] == 0 && player.hasStatusAffect("PureCampJojo") >= 0 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) {
 			jojoOffersRathazulMeditation();
 			return;
 		}
-		if(flags[AMILY_MET_RATHAZUL] == 0 && flags[AMILY_FOLLOWER] == 1 && amilyFollower()) {
+		if(flags[kFLAGS.AMILY_MET_RATHAZUL] == 0 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && amilyFollower()) {
 			AmilyIntroducesSelfToRathazul();
 			return;
 		}
-		if(flags[AMILY_MET_RATHAZUL] == 1 && flags[AMILY_FOLLOWER] == 1 && amilyFollower()) {
+		if(flags[kFLAGS.AMILY_MET_RATHAZUL] == 1 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && amilyFollower()) {
 			amilyIngredientDelivery();
 			return;
 		}
-		if(flags[AMILY_MET_RATHAZUL] == 2 && flags[AMILY_FOLLOWER] == 1 && amilyFollower()) {
+		if(flags[kFLAGS.AMILY_MET_RATHAZUL] == 2 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && amilyFollower()) {
 			amilyAsksAboutRathazulsVillage();
 			return;
 		}
@@ -89,7 +89,7 @@ public function rathazulWorkOffer():Boolean {
 	var lethiciteDefense:Number = 0;
 	var dyes:Number = 0;
 	if(hasItem("BlackEg",1) || hasItem("L.BlkEg",1)) {
-		flags[PC_KNOWS_ABOUT_BLACK_EGGS] = 1;
+		flags[kFLAGS.PC_KNOWS_ABOUT_BLACK_EGGS] = 1;
 		spoken = true;
 		outputText("He eyes the onyx egg in your inventory and offers a little advice.  \"<i>Be careful with black eggs.  They can turn your skin to living latex or rubber.  The smaller ones are usually safer, but everyone reacts differently.  I'd get rid of them, if you want my opinion.</i>\"\n\n");
 	}
@@ -162,7 +162,7 @@ public function rathazulWorkOffer():Boolean {
 	var reductos:Number = 0;
 	if(player.hasStatusAffect("Camp Rathazul") >= 0 && player.statusAffectv2("metRathazul") >= 4) {
 		outputText("The rat hurries over to his supplies and produces a container of paste, looking rather proud of himself, \"<i>Good news everyone!  I've developed a paste you could use to shrink down any, ah, oversized body parts.  The materials are expensive though, so I'll need ", false);
-		if(flags[AMILY_MET_RATHAZUL] >= 2) outputText("50", false);
+		if(flags[kFLAGS.AMILY_MET_RATHAZUL] >= 2) outputText("50", false);
 		else outputText("100", false);
 		outputText(" gems for each jar of ointment you want.</i>\"\n\n", false);
 		totalOffers++;
@@ -171,7 +171,7 @@ public function rathazulWorkOffer():Boolean {
 	}
 	//SPOIDAH
 	var silk:Number = 0;
-	if(player.hasStatusAffect("Camp Rathazul") >= 0 && hasItem("T.SSilk", 1) && flags[UNKNOWN_FLAG_NUMBER_00274] + flags[UNKNOWN_FLAG_NUMBER_00275] == 0) {
+	if(player.hasStatusAffect("Camp Rathazul") >= 0 && hasItem("T.SSilk", 1) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 0) {
 		silk = 5;
 		spoken = true;
 		totalOffers++;
@@ -185,11 +185,11 @@ public function rathazulWorkOffer():Boolean {
 		lethiciteDefense = 1059;
 	}
 	if(player.hasStatusAffect("Camp Rathazul") >= 0) {
-		if(flags[RATHAZUL_DEBIMBO_OFFERED] == 0 && (bimboSophie() || player.hasPerk("Bimbo Brains") >= 0 || player.hasPerk("Futa Faculties") >= 0)) {
+		if(flags[kFLAGS.RATHAZUL_DEBIMBO_OFFERED] == 0 && (bimboSophie() || player.hasPerk("Bimbo Brains") >= 0 || player.hasPerk("Futa Faculties") >= 0)) {
 			rathazulDebimboOffer();
 			return true;
 		}
-		else if(flags[RATHAZUL_DEBIMBO_OFFERED] > 0) {
+		else if(flags[kFLAGS.RATHAZUL_DEBIMBO_OFFERED] > 0) {
 			outputText("You recall that Rathazul is willing to make something to cure bimbo liqueur for 250 gems and five Scholar's Teas.");
 			if(hasItem("Smart T",5) && player.gems >= 250) {
 				totalOffers++;
@@ -257,7 +257,7 @@ public function purifySomething():void {
 public function rathazulDebimboOffer():void {
 	spriteSelect(49);
 	clearOutput();
-	if(flags[RATHAZUL_DEBIMBO_OFFERED] == 0) {
+	if(flags[kFLAGS.RATHAZUL_DEBIMBO_OFFERED] == 0) {
 		if(bimboSophie()) {
 			outputText("Rathazul glances your way as you approach his lab, a thoughtful expression on his age-lined face.  \"<i>Tell me, [name], do you truly enjoy having that vacuous idiot around, lusting after you at all hours of the day?</i>\" he asks, shaking his head in frustration.  \"<i>She's clearly been subjected to the effects of Bimbo Liqueur, which as you can plainly see are quite indeed potent.  However, like most things in Mareth, it can be countered - at least partially.</i>\"  Rathazul folds his long, clawed fingers together, his tail lashing behind him as he thinks.  \"<i>Perhaps with a sufficient quantity of something called Scholar's Tea...Can counter the stupefying effects of the elixir... Oh my yes... Hmm...</i>\"  Rathazul nods, stroking at the few long wisps of fur that hang from his chin.");
 			outputText("\n\nYou wait further clarification, but the old rat just stands there, staring off into space.  Coughing politely, you reacquire his attention, causing him to jump.");
@@ -269,7 +269,7 @@ public function rathazulDebimboOffer():void {
 			outputText("\n\nYou twirl a lock of hair around your finger and giggle.  This silly old rat thinks you're like, dumb and stuff!  He just doesn't know how great it is to have a rocking body and a sex-drive that's always ready to suck and fuck.  It's so much fun!  You look back at the rat, realizing you haven't answered him yet, feeling a bit embarrassed as he sighs in disappointment.");
 			outputText("\n\n\"<i>Child, please... bring me five Scholar's Teas and 250 gems for reagents, then I can fix you!  I can help you!  Just... get the tea!</i>\" the alchemist pleads, counting off to five on his clawed fingers for extra emphasis while shaking his gem pouch profusely.  You bite your lower lip— he seems really really mad about this or something.  Maybe you should like, get the tea?");
 		}
-		flags[RATHAZUL_DEBIMBO_OFFERED]++;
+		flags[kFLAGS.RATHAZUL_DEBIMBO_OFFERED]++;
 	}
 	//Rath menu
 	menu();
@@ -306,7 +306,7 @@ public function RathazulArmorMenu():void {
 	if(hasItem("B.Chitn", 5)) {
 		beeArmor = 2180;
 	}
-	if(player.hasStatusAffect("Camp Rathazul") >= 0 && hasItem("T.SSilk", 1) && flags[UNKNOWN_FLAG_NUMBER_00274] + flags[UNKNOWN_FLAG_NUMBER_00275] == 0) {
+	if(player.hasStatusAffect("Camp Rathazul") >= 0 && hasItem("T.SSilk", 1) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 0) {
 		silk = 2999;
 	}
 	simpleChoices("BeeArmor",beeArmor,"GelArmor",gelArmor,"SpiderSilk",silk,"",0,"Back",2070);
@@ -356,18 +356,18 @@ public function chooseArmorOrRobes():void {
 	spriteSelect(49);
 	outputText("Rathazul grunts in response and goes back to work.  You turn back to the center of your camp, wondering if the old rodent will actually deliver the wondrous item that he's promised you.", true);
 	doNext(13);
-	flags[UNKNOWN_FLAG_NUMBER_00274] = 24;
-	trace("274: " + flags[UNKNOWN_FLAG_NUMBER_00274]);
+	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] = 24;
+	trace("274: " + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274]);
 }
 public function collectRathazulArmor():void {
 	spriteSelect(49);
 	outputText("", true);
 	outputText("Rathazul beams and ejaculates, \"<i>Good news everyone!  Your ", false);
-	if(flags[UNKNOWN_FLAG_NUMBER_00275] == 1) outputText("armor", false);
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 1) outputText("armor", false);
 	else outputText("robe", false);
 	outputText(" is finished!</i>\"\n\n", false);
 	//Robe
-	if(flags[UNKNOWN_FLAG_NUMBER_00275] == 2) {
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 2) {
 		outputText("Hanging from a small rack is a long, flowing robe.  It glitters brightly in the light, the pearl-white threads seeming to shimmer and shine with every ripple the breeze blows through the soft fabric.  You run your fingers over the silken garment, feeling the soft material give at your touch.  There's a hood with a golden border embroidered around the edge.  For now, it hangs limply down the back, but it would be easy to pull up in order to shield the wearer's eyes from harsh sunlight or rainy drizzle.  The sleeves match the cowl, circled with intricate threads laid out in arcane patterns.\n\n", false);
 		
 		outputText("Rathazul gingerly takes down the garment and hands it to you.  \"<i>Don't let the softness of the material fool you.  This robe is tougher than many armors, and the spider-silk's properties may even help you in your spell-casting as well.</i>\"\n\n", false);
@@ -381,8 +381,8 @@ public function collectRathazulArmor():void {
 		shortName = "SSArmor";
 	}
 	//Reset counters
-	flags[UNKNOWN_FLAG_NUMBER_00275] = 0;
-	flags[UNKNOWN_FLAG_NUMBER_00274] = 0;
+	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 0;
+	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] = 0;
 	menuLoc = 2;
 	takeItem();
 }

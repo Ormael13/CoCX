@@ -1285,7 +1285,7 @@ public function milkAndHoneyAreKindaFunny():void {
 
 	outputText("Her shiny black vulva is sticky and puffed with arousal, and she is desperate to cum.  She finds her little pleasure bud and rapidly strokes the already swollen button. She throws her head back and pushes her pelvis forward against the jar as she sprays hot honey into the jar.  It quickly fills the jar and the excess spills over onto her pussy and the ground.  She pulls back from the jar with an indentation of the jar's circle on her soft vulva.  She hands you a lid, shakes your hand and thanks you for the exchange in sweet fluids.  \"<i>Maybe we do thiz zome other time.</i>\"", false);
 	//[You have found 1xBee Honey]
-	flags[FORCE_BEE_TO_PRODUCE_HONEY] = 1;
+	flags[kFLAGS.FORCE_BEE_TO_PRODUCE_HONEY] = 1;
 	//set lust to 0, increase sensitivity slightly
 	stats(0,0,0,0,.2,0,-50,0);
 	//You've now been milked, reset the timer for that
