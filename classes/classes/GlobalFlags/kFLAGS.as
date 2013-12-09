@@ -1034,7 +1034,7 @@ public static const LYNNETTE_CARRYING_COUNT:int                                 
 public static const LYNNETTE_MET_UNPREGNANT:int                                     = 1026;
 public static const LYNNETTE_ANNOUNCED_APPROVAL:int                                 = 1027;
 public static const LYNNETTE_FUCK_COUNTER:int                                   = 1028;
-public static const MET_URMA:int                                   = 1029;
+public static const UMA_PC_FOUND_CLINIC:int                                   = 1029;
 public static const UNKNOWN_FLAG_NUMBER_01030:int                                   = 1030;
 public static const UNKNOWN_FLAG_NUMBER_01031:int                                   = 1031;
 public static const UNKNOWN_FLAG_NUMBER_01032:int                                   = 1032;

@@ -35,6 +35,16 @@ package classes
 			kGAMECLASS.doNext(eventNo);
 		}
 		
+		protected function menu():void
+		{
+			kGAMECLASS.menu();
+		}
+		
+		protected function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000):void
+		{
+			kGAMECLASS.addButton(pos, text, func1, arg1);
+		}
+		
 		protected function get player():Player
 		{
 			return kGAMECLASS.player;
@@ -283,6 +293,21 @@ package classes
 		protected function set flags(val:DefaultDict):void
 		{
 			kGAMECLASS.flags = val;
+		}
+		
+		/**
+		 * PRIMO BULLSHIT FUNCTION ACCESS
+		 */
+		// Need to work out a better way of doing this -- I THINK maybe treating external functions as a string and calling
+		// addButton like "addButton(0, "thing", "thisFunc");" might be a way to do it -- check if Func var is a Func type in this.addbutton args
+		// if it is, pass it into kGAMECLASS, if it isn't, check if string. If it is, use the string to pull the func from kGAMECLASS
+		// before passing it into addbutton etc.
+		// Going the string route also makes it... not awful to call into other content classes too - split string on . and chain
+		// lookups into objects ie "umasShop.firstVisitPart1" -> kGAMECLASS["umasShop"].["firstVisitPart1"]()
+		// Clearly this isn't going to fly long term, but it's... functional for now.
+		protected function get armorShops():Function
+		{
+			return kGAMECLASS.armorShops;
 		}
 	}
 

@@ -83,6 +83,7 @@
 		//include "../../includes/flagDefs.as";
 		include "../../includes/appearanceDefs.as";
 
+		public var umasShop:UmasShop = new UmasShop();
 		
 		include "../../includes/akbal.as";
 		include "../../includes/amily.as";
@@ -211,8 +212,6 @@
 		include "../../includes/xmas_gats_not_an_angel.as";
 		include "../../includes/xmas_jack_frost.as";
 		include "../../includes/xmas_misc.as";
-		
-		public var umasShop:UmasShop = new UmasShop();
 		
 		/****
 			This is used purely for bodges while we get things cleaned up.

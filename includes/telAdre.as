@@ -178,7 +178,13 @@ public function armorShops():void {
 	menu();
 	addButton(0,"Blacksmith",armorShop);
 	addButton(1,"Piercing",piercingStudio);
-	addButton(2,"Tailor",eventParser,1072);
+	addButton(2, "Tailor", eventParser, 1072);
+
+	if (flags[kFLAGS.UMA_PC_FOUND_CLINIC] == 1)
+	{
+		addButton(3, "Clinic", umasShop.enterClinic);
+	}
+	
 	addButton(4,"Back",telAdreMenu);
 }
 
