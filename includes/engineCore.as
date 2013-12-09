@@ -2594,7 +2594,19 @@ public function lustPercent():Number {
 	//Luststick reduces lust gain by 10% to match increased min lust
 	if(player.hasPerk("Luststick Adapted") >= 0) lust *= 0.9;
 	if(player.hasStatusAffect("Berzerking") >= 0) lust *= .6;
-	if(player.hasPerk("Pure and Loving") >= 0) lust *= 0.95;
+	if (player.hasPerk("Pure and Loving") >= 0) lust *= 0.95;
+	
+	// Lust mods from Uma's content -- Given the short duration and the gem cost, I think them being multiplicative is justified.
+	// Changing them to an additive bonus should be pretty simple (check the static values in UmasShop.as)
+	var statIndex:int = player.hasStatusAffect(UmasShop.MASSAGE_BONUS_NAME);
+	if (statIndex >= 0)
+	{
+		if (player.statusAffects[statIndex].value1 == UmasShop.MASSAGE_RELIEF || player.statusAffects[statIndex].value1 == UmasShop.MASSAGE_LUST)
+		{
+			lust *= player.statusAffects[statIndex].value2;
+		}
+	}
+	
 	lust = Math.round(lust);
 	return lust;
 }
@@ -2604,7 +2616,8 @@ public function lustPercent():Number {
 public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:Number, sens:Number, lust2:Number, corr:Number, resisted:Boolean = true, noBimbo:Boolean = false):void
 {
 	//Easy mode cuts lust gains!
-	if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 && lust2 > 0 && resisted) lust2 /= 2;
+	if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 && lust2 > 0 && resisted) lust2 /= 2;
+	
 	//Set original values to begin tracking for up/down values if
 	//they aren't set yet.
 	//These are reset when up/down arrows are hidden with 

@@ -4452,6 +4452,17 @@ public function doDamage(damage:Number):Number {
 		if(monster.hasPerk("Last Strike") >= 0) doNext(monster.perks[monster.hasPerk("Last Strike")].value1);
 		else doNext(5008);
 	}
+	
+	// Uma's Massage Bonuses
+	var statIndex:int = player.hasStatusAffect(UmasShop.MASSAGE_BONUS_NAME);
+	if (statIndex >= 0)
+	{
+		if (player.statusAffects[statIndex].value1 == UmasShop.MASSAGE_POWER)
+		{
+			damage *= player.statusAffects[statIndex].value2;
+		}
+	}
+	
 	damage = Math.round(damage);
 	
 	if(damage < 0) damage = 1;
@@ -4468,6 +4479,7 @@ public function doDamage(damage:Number):Number {
 	if(monster.HP < 0) monster.HP = 0;
 	return damage;
 }
+
 public function takeDamage(damage:Number, noMod:Boolean = false):Number {
 	//EZ MOAD half damage
 	if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) damage /= 2;
@@ -4490,6 +4502,17 @@ public function takeDamage(damage:Number, noMod:Boolean = false):Number {
 		damage = Math.round(damage * .8);
 		if(damage < 1) damage = 1;
 	}
+	
+	// Uma's Massage bonuses
+	var statIndex:int = player.hasStatusAffect(UmasShop.MASSAGE_BONUS_NAME);
+	if (statIndex >= 0)
+	{
+		if (player.statusAffects[statIndex].value1 == UmasShop.MASSAGE_RELAXATION && !noMod)
+		{
+			damage = Math.round(damage * player.statusAffects[statIndex].value2);
+		}
+	}
+	
 	//Prevent negatives
 	if(player.HP - damage < 1) {
 		player.HP = 0;

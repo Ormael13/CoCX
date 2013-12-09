@@ -67,6 +67,14 @@ package classes.content
 
 			// Tempted to scene-break here
 			
+			menu();
+			addButton(0, "Next", firstVisitPart2);
+		}
+		
+		public function firstVisitPart2():void
+		{
+			clearOutput();
+			
 			outputText("Loppe bounces up towards the tall equine and they embrace in a friendly hug.  “<i>Hi, mom!</i>”  Uma laughs softly before replying, “<i>Hello my little horsey hopper.  Who is this?</i>”  She asks, looking at you.\n\n");
 
 			outputText("You politely offer Loppe’s mother your name, telling her that you’re a... friend... of Loppe’s.\n\n");
@@ -86,13 +94,15 @@ package classes.content
 
 			outputText("Uma is the first to break the awkwardness.  “<i>Well then... care to give me the details?  How did you two meet?  When did you start fooling around?  Has my daughter worked so hard you had to seek a healer yet?</i>”\n\n");
 
-			outputText("Loppe holds your hand and the two of you begin detailing how you met....");
+			outputText("Loppe holds your hand and the two of you begin detailing how you met....\n\n");
 			
 			menu();
-			addButton(0, "Next", firstVisitPart2);
+			addButton(0, "Next", firstVisitPart3);
+			
+
 		}
 		
-		public function firstVisitPart2():void
+		public function firstVisitPart3():void
 		{
 			clearOutput();
 			
@@ -203,8 +213,11 @@ package classes.content
 		 
 		/**
 		 * Player chose "Relief" massage
+		 * Adds a 10% reduction to lust gain while active.
 		 */
 		public static const MASSAGE_RELIEF:int = 0;
+		public static const MASSAGE_RELIEF_BONUS:Number = 0.9;
+		private static const MASSAGE_RELIEF_BONUS_TEXT:String = "<b>(10% Reduction to all Lust gains whilst active!)</b>";
 		public function massageRelief():void
 		{
 			clearOutput();
@@ -217,13 +230,16 @@ package classes.content
 
 			outputText("“<i>I see... come along then.</i>”  Uma motions for you to follow her.  You nod and promptly do as she asks.");
 			
-			massageMain();
+			massageMain(MASSAGE_RELIEF);
 		}
 		
 		/**
 		 * Player chose "Lust"
+		 * Adds a 10% increase to lust gain while active.
 		 */
 		public static const MASSAGE_LUST:int = 1;
+		public static const MASSAGE_LUST_BONUS:Number = 1.1;
+		private static const MASSAGE_LUST_BONUS_TEXT:String = "<b>(10% Increase to all Lust gains whilst active!)</b>";
 		public function massageLust():void
 		{
 			clearOutput();
@@ -241,8 +257,11 @@ package classes.content
 		
 		/**
 		 * Player chose "Modelling"
+		 * Adds a +10 bonus to femininity?
 		 */
 		public static const MASSAGE_MODELLING:int = 2;
+		public static const MASSAGE_MODELLING_BONUS:int = 10;
+		private static const MASSAGE_MODELLING_BONUS_TEXT:String = "<b>(+10 Bonus Femininity whilst active!)</b>";
 		public function massageModelling():void
 		{
 			clearOutput();
@@ -266,8 +285,11 @@ package classes.content
 		
 		/**
 		 * Player chose "Relaxation"
+		 * Add a 10% reduction in damage taken?
 		 */
 		public static const MASSAGE_RELAXATION:int = 3;
+		public static const MASSAGE_RELAXATION_BONUS:Number = 0.9;
+		private static const MASSAGE_RELAXATION_BONUS_TEXT:String = "<b>(10% Reduction to all Damage taken whilst active!)</b>";
 		public function massageRelaxation(): void
 		{
 			clearOutput();
@@ -285,8 +307,11 @@ package classes.content
 		
 		/**
 		 * Player chose "Power"
+		 * Add a 10% increase to damage inflicted?
 		 */
 		public static const MASSAGE_POWER:int = 4;
+		public static const MASSAGE_POWER_BONUS:Number = 1.1;
+		private static const MASSAGE_POWER_BONUS_TEXT:String = "<b>(10% Increase to all Damage inflicted whilst active!)</b>";
 		public function massagePower():void 
 		{
 			clearOutput();
@@ -316,7 +341,7 @@ package classes.content
 			
 			outputText("The room is light, but not overwhelmingly bright, with cool breezes gently wafting through, tingling deliciously on your exposed [skin] and setting the chimes hanging from the rafters gently a-tinkle. A number of large potted plants occupy the corners of the room, and there’s even a tiny fountain with stones in it, the tumble of water over rocks creating a strangely soothing melody.  A small brazier produces a sweet, calming smell from incense burning in it.  The pride of the room is a sizable table, made from bamboo; it is covered in a white cloth, and has an upraised headboard with a hole in it that looks like it’s big enough to fit your head through.\n\n");
 
-			outputText("“<i>Before we get started, I’ll have to ask you to hand over a few gems for my services, dear.  Even if you are my little Loppe’s [boyfriend], this is still a business.</i>");
+			outputText("“<i>Before we get started, I’ll have to ask you to hand over a few gems for my services, dear.  Even if you are my little Loppe’s [boyfriend], this is still a business.</i>”\n\n");
 
 			outputText("You tell her that’s alright, fishing in your belongings for the gems that the mare masseur needs for this particular service... which you remember she hasn’t told you yet?\n\n");
 
@@ -356,6 +381,10 @@ package classes.content
 			addButton(0, "Next", massageCommence, selectedMassage);
 		}
 		
+		/**
+		 * Extensions to Massage Joiner.
+		 * @param	selectedMassage		Massage bonus ID to apply
+		 */
 		public function massageCommence(selectedMassage:int):void 
 		{
 			clearOutput();
@@ -379,16 +408,110 @@ package classes.content
 
 			outputText("“<i>Very good, dear.  Now flip over, time to take care of your back.</i>”\n\n");
 
-			outputText("You move to do as she asks; it’s a little awkward adjusting to having your face in the - thankfully cushioned - hole. You wriggle about to settle yourself comfortably on the bed,  but you manage to make yourself relaxed, and tell Uma that you’re ready once more.\n\n");
+			// Refactor to say something about nipples against the table?
+			outputText("You move to do as she asks; it’s a little awkward adjusting to having your face in the - thankfully cushioned - hole.  You wriggle about to settle yourself comfortably on the table, but you manage to make yourself relaxed, and tell Uma that you’re ready once more.\n\n");
 
-			outputText("You yelp as Uma presses the metal rod " + ((player.tailType > 0) ? "on the base of your tail" : "to your lower back") + ".  “I’m going to have to trace a few spots on your back, dear.  To ensure your flow of chi is not obstructed, so it might hurt again... but be brave.”  You nod as best as you can and brace yourself...");
+			outputText("You yelp as Uma presses the metal rod " + ((player.tailType > 0) ? "on the base of your tail" : "to your lower back") + ".  “I’m going to have to trace a few spots on your back, dear.  To ensure your flow of chi is not obstructed, so it might hurt again... but be brave.”  You nod as best as you can and brace yourself...\n\n");
 			
+			outputText("By the time Uma is finished, your back is sore... as well as your front... the pain on your back seemingly bringing back the pain on your front.\n\n");
 
-By the time Uma is finished, your back is sore... as well as your front... the pain on your back seemingly bringing back the pain on your front.
+			outputText("“<i>It will be a little while, before the flow of chi inside your body stabilizes, dear.  But by the time you’re out of this clinic, you should feel much better.</i>”  Uma explains.\n\n");
 
-“It will be a little while, before the flow of chi inside your body stabilizes, dear.  But by the time you’re out of this clinic, you should feel much better.”  Uma explains.
-
-You thank the mare and get dressed, bidding her farewell before you exit the clinic. Once outside, and true to her words, you feel better... in fact you feel amazing!  It’s no wonder her treatment is expensive, you feel just... amazing!
+			outputText("You thank the mare and get dressed, bidding her farewell before you exit the clinic. Once outside, and true to her words, you feel better... in fact you feel amazing!  It’s no wonder her treatment is expensive, you feel just... amazing!\n\n");
+			
+			// Apply bonus & back to camp!
+			applyMassageBonus(selectedMassage);
+			menu();
+			doNext(13);
+		}
+		
+		/**
+		 * Apply massage bonus.
+		 * StatusAffect for all bonuses
+		 * StatusAffect Values:
+		 * v1 = bonus index
+		 * v2 = bonus value
+		 * v3 = remaining time
+		 * @param	selectedMassage
+		 */
+		public static const MASSAGE_BONUS_NAME:String = "Uma's Massage";
+		public static const MAX_MASSAGE_BONUS_DURATION:int = 24;
+		public function applyMassageBonus(selectedMassage:int):void
+		{
+			if (selectedMassage < 0 || selectedMassage > 4)
+			{
+				outputText("<b>Invalid massage bonus ID! Welp!</b>");
+			}
+			else
+			{
+				var statIndex:int = player.hasStatusAffect(MASSAGE_BONUS_NAME);
+				var bonusValue:*;
+				
+				// Remove the old massage bonus if present
+				if (statIndex >= 0)
+				{
+					player.removeStatusAffect(MASSAGE_BONUS_NAME);
+				}
+				
+				if (selectedMassage == MASSAGE_RELIEF)
+				{
+					outputText("<b>You feel so relaxed and mellow... you don’t think you’ll be able to get in the mood for sex while you feel this blissed out.</b> " + MASSAGE_RELIEF_BONUS_TEXT);
+					bonusValue = MASSAGE_RELIEF_BONUS;					
+				}
+				else if (selectedMassage == MASSAGE_LUST)
+				{
+					outputText("<b>You feel so... wired! Your skin tingles with the slightest breeze, your heart races in your chest, and you lick your lips with eager nervousness.  You wanna fuck something so badly!</b> " + MASSAGE_LUST_BONUS_TEXT);
+					bonusValue = MASSAGE_LUST_BONUS;
+				}
+				else if (selectedMassage == MASSAGE_MODELLING)
+				{
+					outputText("<b>You feel sexier; you don’t know if the massage has actually affected your looks, but you definitely have the confidence to strut your stuff!</b> " + MASSAGE_MODELLING_BONUS_TEXT);
+					bonusValue = MASSAGE_MODELLING_BONUS;
+				}
+				else if (selectedMassage == MASSAGE_RELAXATION)
+				{
+					outputText("<b>Your aches and pains have vanished, and you feel so relaxed and rested.  That really did the trick in curing what ails you.</b> " + MASSAGE_RELAXATION_BONUS_TEXT);
+					bonusValue = MASSAGE_RELAXATION_BONUS;
+				}
+				else if (selectedMassage == MASSAGE_POWER)
+				{
+					outputText("<b>Your muscles tingle and burn with energy; you feel like you could knock out a minotaur in one punch!</b> " + MASSAGE_POWER_BONUS_TEXT);
+					bonusValue = MASSAGE_POWER_BONUS;
+				}
+				
+				if (bonusValue != undefined)
+				{
+					player.createStatusAffect(MASSAGE_BONUS_NAME, selectedMassage, bonusValue, MAX_MASSAGE_BONUS_DURATION, 0);
+				}
+			}
+		}
+		
+		/**
+		 * Handle reducing the remaining time that the bonus is active for.
+		 * When expired, remove and include a message to the effect.
+		 */
+		public function updateBonusDuration(hours:int):void
+		{
+			var statIndex:int = player.hasStatusAffect(MASSAGE_BONUS_NAME);
+			
+			if (statIndex >= 0)
+			{
+				player.statusAffects[statIndex].value3 -= hours;
+				
+				if (player.statusAffects[statIndex].value3 <= 0)
+				{
+					bonusExpired();
+				}
+			}
+		}
+		
+		public function bonusExpired():void
+		{
+			outputText("\n<b>You groan softly as a feeling of increased tension washes over you, no longer as loose as you were before.  It looks like the effects of Uma’s massage have worn off.</b>\n");
+			
+			player.removeStatusAffect(MASSAGE_BONUS_NAME);
+			
+			trace("Removed Uma's Massage Bonus");
 		}
 		
 		/**

@@ -309,6 +309,11 @@ package classes
 		{
 			return kGAMECLASS.armorShops;
 		}
+		
+		protected function get telAdreMenu():Function
+		{
+			return kGAMECLASS.telAdreMenu;
+		}
 	}
 
 }

@@ -349,12 +349,14 @@ public function doSystem(eventNo:Number):void {
 
 	errorPrint(eventNo);		// Dump the system state to the window so the player can file a decent bug-report
 }
+
 public function getCurrentStackTrace():String		// Fuck, stack-traces only work in the debug player.
 {
 	var tempError:Error = new Error();
 	var stackTrace:String = tempError.getStackTrace();
 	return stackTrace;
 }
+
 public function errorPrint(details:* = null):void
 {
 	rawOutputText("<b>Congratulations, you've found a bug!</b>", true);
@@ -377,9 +379,8 @@ public function errorPrint(details:* = null):void
 	doNext(13);
 }
 
-
-
 //Argument is time passed.  Pass to event parser if nothing happens.
+// The time argument is never actually used atm, everything is done with timeQ instead...
 public function goNext(time:Number, defNext:Boolean):Boolean  {
 	//Update system time
 	//date = new Date();
@@ -391,6 +392,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 	var textHolder:String = "";
 	var threshhold:Number = 0;
 	var temp2:Number = 0;
+	
 	while(timeQ > threshhold) {
 		model.time.hours++;
 		if(player.cumMultiplier > 19999) player.cumMultiplier = 19999;
@@ -2816,6 +2818,14 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			return true;
 		}
 	}
+	
+	// Hanging the Uma massage update here, I think it should work...
+	umasShop.updateBonusDuration(time);
+	if (player.hasStatusAffect(UmasShop.MASSAGE_BONUS_NAME) >= 0)
+	{
+		trace("Uma's massage bonus time remaining: " + player.statusAffectv3(UmasShop.MASSAGE_BONUS_NAME));
+	}
+	
 	//Drop axe if too short!
 	if(player.tallness < 78 && player.weaponName == "large axe") {
 		outputText("<b>\nThis axe is too large for someone of your stature to use, though you can keep it in your inventory until you are big enough.</b>\n", false);

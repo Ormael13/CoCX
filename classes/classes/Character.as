@@ -1,6 +1,7 @@
 ﻿package classes 
 {
 	import classes.Creature;
+	import classes.content.UmasShop;
 	
 	/**
 	 * Character class for player and NPCs. Has subclasses Player and NonPlayer.
@@ -8,7 +9,37 @@
 	 */
 	public class Character extends Creature 
 	{
-		public var femininity:Number = 50;
+		private var _femininity:Number = 50;
+		
+		// This is the easiest way I could think of to apply "flat" bonuses to certain stats without having to write a whole shitload of crazyshit
+		// I think a better long-term solution may be to hang function references off the end of the statusAffect class and move all of the value
+		// calculation into methods of ContentClasses, so rather than having walls of logic, we just call the method reference with a value, and get back the modified value.
+		// It's still shitty, but it would possibly be an improvement.
+		public function get femininity():Number
+		{
+			var fem:Number = _femininity;
+			var statIndex:int = this.hasStatusAffect(UmasShop.MASSAGE_BONUS_NAME);
+			
+			if (statIndex >= 0)
+			{
+				if (this.statusAffects[statIndex].value1 == UmasShop.MASSAGE_MODELLING_BONUS)
+				{
+					fem += this.statusAffects[statIndex].value2;
+				}
+			}
+			
+			if (fem > 100)
+			{
+				fem = 100;
+			}
+			
+			return fem;
+		}
+		
+		public function set femininity(value:Number):void
+		{
+			_femininity = value;
+		}
 		
 		//Eyetype
 		//0 - normal
