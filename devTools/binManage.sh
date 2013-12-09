@@ -24,7 +24,7 @@ if [ "$STAGE" = "commit" ]; then
 	(cd ../binRepo && git add -u)
 	(cd ../binRepo && git add CoC*.swf)
 	(cd ../binRepo && git add CoC*.apk)
-	(cd ../binRepo && git commit CoC* -m "Automated build commited by BuildBot CoC-Builder")
+	(cd ../binRepo && git commit -m "Automated build commited by BuildBot CoC-Builder")
 	(cd ../binRepo && git push)
 
 fi
