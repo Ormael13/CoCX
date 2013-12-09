@@ -291,7 +291,6 @@
 
 
 			// Set up all the messy global stuff:
-			
 			// ******************************************************************************************
 
 			var mainView :MainView = this.mainView;
@@ -306,7 +305,6 @@
 			 * System Variables
 			 * Debug, Version, etc
 			 */
-			//{ region SystemVariables
 
 			//DEBUG, used all over the place
 			debug = false;
@@ -323,13 +321,11 @@
 			images = new ImageManager(stage);
 			inputManager = new InputManager(stage, true);
 			include "../../includes/ControlBindings.as";
-			//} endregion
 
 			/**
 			 * Player specific variables
 			 * The player object and variables associated with the player
 			 */
-			//{ region PlayerVariables
 
 			//The Player object, used everywhere
 			player = new Player();
@@ -341,13 +337,11 @@
 
 			//Create monster, used all over the place
 			monster = new Monster();
-			//} endregion
 
 			/**
 			 * State Variables
 			 * They hold all the information about item states, menu states, game states, etc
 			 */
-			//{ region StateVariables
 
 			//User all over the place whenever items come up
 			itemSwapping = false;
@@ -356,13 +350,6 @@
 			//or state information to do with the game. 
 			flags = new DefaultDict();
 			model.flags = flags;
-
-			/*
-			for (var i = 0; i < 3000; i++)
-			{
-				flags.push(0);
-			}
-			*/
 
 			///Used everywhere to establish what the current game state is
 			// Key system variables
@@ -407,13 +394,11 @@
 			//State variable used to indicate whether inside an item submenu
 			//The item sub menu
 			itemSubMenu = false;
-			//} endregion 
 
 			/**
 			 * Display Variables
 			 * Variables that hold display information like number of days and all the current displayed text
 			 */
-			//{ region DisplayVariables
 
 			//Holds the date and time display in the bottom left
 			time = new TimeModel();
@@ -421,19 +406,11 @@
 
 			//The string holds all the "story" text, mainly used in engineCore
 			currentText = "";
-			//}endregion 
-
-			/**
-			 * Item variables
-			 * Holds all the information about items in your inventory and stashes away
-			 */
-			//{region ItemVariables
 
 			/**
 			 * Plot Variables
 			 * Booleans and numbers about whether you've found certain places
 			 */
-			//{ region PlotVariables
 
 			//Plot variables
 			explored = false;
@@ -456,10 +433,6 @@
 			itemStorage = new Array();
 			gearStorage = new Array();
 			shortName = "";
-			//}endregion
-
-			//Keyboard listener!
-			// stage.addEventListener(KeyboardEvent.KEY_DOWN, keyboard);
 
 			// These are toggled between by the [home] key.
 			mainView.textBGWhite.visible = false;
@@ -496,26 +469,10 @@
 
 			// ******************************************************************************************
 
-
-			//var mainView.aCb:ComboBox = new ComboBox(); 
-			//mainView.aCb.dropdownWidth = 200; 
-			//mainView.aCb.width = 200; 
-			//mainView.aCb.scaleY = 1.1;
-			//mainView.aCb.move(-1250, -1550); 
-			//mainView.aCb.prompt = "Choose a perk"; 
 			mainView.aCb.dataProvider = new DataProvider(perkList); 
 			mainView.aCb.addEventListener(Event.CHANGE, changeHandler); 
 			 
-			//addChild(mainView.aCb);
-
-
-			// ******************************************************************************************
-
-
 			mainView._getButtonToolTipText = getButtonToolTipText;
-
-			// ******************************************************************************************
-
 
 			//Register the classes we need to be able to serialize and reconstitute so
 			// they'll get reconstituted into the correct class when deserialized
@@ -534,18 +491,10 @@
 			//registerClassAlias("Enum", Enum);
 			//registerClassAlias("cockClass", cockClass);
 
-			//Invert shit
-			//invertGo();
 			//Hide sprites
 			mainView.hideSprite();
 			//Hide up/down arrows
 			mainView.statsView.hideUpDown();
-			//Hide choice buttons
-			//choices("one", 0, "two", 0, "three", 0, "four", 0, "five", 0, "six", 0, "seven", 0, "eight", 0, "nine", 0, "ten", 0);
-			//Call up the title screen
-
-
-
 
 			this.addFrameScript( 0, this.run );
 		}
