@@ -12,7 +12,9 @@ if [ "$STAGE" = "setup" ]; then
 	else
 		(cd ../binRepo && git pull)
 		(cd ../binRepo && git reset --hard HEAD)
-		
+		(cd ../binRepo && rm CoC*.swf)
+		(cd ../binRepo && rm CoC*.apk)
+		(cd ../binRepo && git add -u .)
 
 	fi
 
@@ -21,7 +23,8 @@ fi
 if [ "$STAGE" = "commit" ]; then
 	echo "Commit stage"
 	(cd ../binRepo && git add CoC*.swf)
-	(cd ../binRepo && git commit CoC*.swf -m "Automated build commited by BuildBot CoC-Builder")
+	(cd ../binRepo && git add CoC*.apk)
+	(cd ../binRepo && git commit CoC* -m "Automated build commited by BuildBot CoC-Builder")
 	(cd ../binRepo && git push)
 
 fi
