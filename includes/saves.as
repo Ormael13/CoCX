@@ -198,13 +198,40 @@ public function saveLoad(e:MouseEvent = null):void
 		return;
 	}
 	if (gameState == 3)
-		choices("Save", saveScreen, "Load", loadScreen, "Load File", -21, "Delete", deleteScreen, "Back", 0, "Save to File", -20, "Load File", -21, "", 0, "", 0, "", 0);
+		choices("Save",            saveScreen, 
+				"Load",            loadScreen, 
+				"Load File",      -21, 
+				"Delete",          deleteScreen, 
+				"Back",            0, 
+				"Save to File",   -20, 
+				"Load File",      -21, 
+				"",                0, 
+				"",                0, 
+				"",                0);
 	else
 	{
 		if (player.autoSave)
-			choices("Save", saveScreen, "Load", loadScreen, "AutoSav: ON", 65, "Delete", deleteScreen, "", 0, "Save to File", -20, "Load File", -21, "", 0, "", 0, "Back", 1);
+			choices("Save",           saveScreen, 
+					"Load",           loadScreen, 
+					"AutoSav: ON",    65, 
+					"Delete",         deleteScreen, 
+					"",               0, 
+					"Save to File",  -20, 
+					"Load File",     -21, 
+					"",               0, 
+					"",               0, 
+					"Back",           1);
 		else
-			choices("Save", saveScreen, "Load", loadScreen, "AutoSav: OFF", 65, "Delete", deleteScreen, "", 0, "Save to File", -20, "Load File", -21, "", 0, "", 0, "Back", 1);
+			choices("Save",           saveScreen, 
+					"Load",           loadScreen, 
+					"AutoSav: OFF",   65, 
+					"Delete",         deleteScreen, 
+					"",               0, 
+					"Save to File",  -20, 
+					"Load File",     -21, 
+					"",               0, 
+					"",               0, 
+					"Back",           1);
 	}
 }
 

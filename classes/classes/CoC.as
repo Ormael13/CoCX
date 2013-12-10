@@ -270,6 +270,8 @@
 		public var oldStats:*; // I *think* this is a generic object
 		public var inputManager:InputManager;
 
+		public var monkey:ChaosMonkey;
+
 
 		public function CoC()
 		{
@@ -320,9 +322,13 @@
 			mobile = false;
 			model.mobile = mobile;
 
-			images = new ImageManager(stage);
-			inputManager = new InputManager(stage, true);
+			this.images = new ImageManager(stage);
+			this.inputManager = new InputManager(stage, true);
 			include "../../includes/ControlBindings.as";
+
+
+			this.monkey = new ChaosMonkey(this);
+
 			//} endregion
 
 			/**

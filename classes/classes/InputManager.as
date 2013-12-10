@@ -1,4 +1,4 @@
-package classes 
+﻿package classes 
 {
 	import classes.display.BindingPane;
 	import coc.view.MainView;
@@ -386,6 +386,22 @@ package classes
 			return funcs;
 		}
 		
+
+		/**
+		 * Get an array of the currently active keyCodes.
+		 * @return	Array of active keycodes.
+		 */
+		public function GetControlMethods():Array
+		{
+			var buttons:Array = new Array();
+			for (var key:* in _keysToControlMethods)
+			{
+				buttons.push(key);
+			}
+			
+			return buttons;
+		}
+
 		/**
 		 * Clear all currently bound keys.
 		 */
