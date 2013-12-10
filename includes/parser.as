@@ -97,6 +97,7 @@ public var singleArgConverters:Object =
 		"his"						: function(thisPtr:*):* { return thisPtr.player.mf("his","hers"); },
 		"leg"						: function(thisPtr:*):* { return thisPtr.player.leg(); },
 		"legs"						: function(thisPtr:*):* { return thisPtr.player.legs(); },
+		"man"						: function(thisPtr:*):* { return thisPtr.player.mf("man", "woman"); },
 		"master"					: function(thisPtr:*):* { return thisPtr.player.mf("master","mistress"); },
 		"misdirection"				: function(thisPtr:*):* { return "[Misdirection]"; },
 		"multicockdescriptlight"	: function(thisPtr:*):* { return thisPtr.multiCockDescriptLight(); },
