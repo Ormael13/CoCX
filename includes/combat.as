@@ -2849,7 +2849,7 @@ public function doCombat(eventNum:Number):void
 			combatRoundOver();
 			return;
 		}
-		//Determine damage - str modified by enemy toughness!
+		//Determine damage - str modified by enemy toughness!		
 		temp = int((monster.str + monster.weaponAttack) - rand(player.tou) - player.armorDef);
 		if(temp > 0) temp = takeDamage(temp);
 		if(temp <= 0) {
@@ -3993,6 +3993,10 @@ public function attack():void {
 	//Thunderous Strikes
 	if(player.hasPerk("Thunderous Strikes") >= 0 && player.str >= 80) 
 		damage *= 1.2;
+		
+	if (player.hasPerk(UmasShop.NEEDLEWORK_MAGIC_PERK_NAME) >= 0) damage *= UmasShop.NEEDLEWORK_MAGIC_REGULAR_MULTI;
+	if (player.hasPerk(UmasShop.NEEDLEWORK_ATTACK_PERK_NAME) >= 0) damage *= UmasShop.NEEDLEWORK_ATTACK_REGULAR_MULTI;
+	
 	//One final round
 	damage = Math.round(damage);
 	
@@ -4513,6 +4517,12 @@ public function takeDamage(damage:Number, noMod:Boolean = false):Number {
 		}
 	}
 	
+	// Uma's Accupuncture Bonuses
+	var modArmorDef:Number = 0;
+	if (player.hasPerk(UmasShop.NEEDLEWORK_DEFENSE_PERK_NAME) >= 0) modArmorDef = ((player.armorDef * UmasShop.NEEDLEWORK_DEFENSE_DEFENSE_MULTI) - player.armorDef);
+	if (player.hasPerk(UmasShop.NEEDLEWORK_ATTACK_PERK_NAME) >= 0) modArmorDef = ((player.armorDef * UmasShop.NEEDLEWORK_ATTACK_DEFENSE_MULTI) - player.armorDef);
+	damage -= modArmorDef;
+		
 	//Prevent negatives
 	if(player.HP - damage < 1) {
 		player.HP = 0;
@@ -14749,6 +14759,7 @@ public function tease():void {
 	if(player.hasPerk("Sensual Lover") >= 0) {
 		chance += 2;
 	}
+	if (player.hasPerk(UmasShop.NEEDLEWORK_LUST_PERK_NAME) >= 0) chance += UmasShop.NEEDLEWORK_LUST_TEASE_MULTI;
 	//==============================
 	//Determine basic damage.
 	//==============================
@@ -16003,6 +16014,7 @@ public function tease():void {
 			damage *= 1.15;
 			bonusDamage *= 1.15;
 		}
+		if (player.hasPerk(UmasShop.NEEDLEWORK_LUST_PERK_NAME) >= 0) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
 		if(monster.plural) damage *= 1.3;
 		enemyTeaseReaction(damage + rand(bonusDamage));
 		if(flags[kFLAGS.PC_FETISH] >= 1) {
@@ -16138,6 +16150,7 @@ public function spellMod():Number {
 	if(player.hasPerk("Wizard's Focus") >= 0) {
 		if(player.perkv1("Wizard's Focus") is Number) mod += player.perkv1("Wizard's Focus");
 	}
+	if (player.hasPerk(UmasShop.NEEDLEWORK_MAGIC_PERK_NAME) >= 0) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
 	return mod;
 }
 public function spellArouse():void {

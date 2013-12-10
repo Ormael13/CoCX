@@ -29,7 +29,8 @@ public function maxHP():Number {
 	var max:Number = 0;
 	max += int(player.tou*2 + 50);
 	if(player.hasPerk("Tank") >= 0) max += 50;
-	if(player.hasPerk("Tank 2") >= 0) max += Math.round(player.tou);
+	if (player.hasPerk("Tank 2") >= 0) max += Math.round(player.tou);
+	if (player.hasPerk(UmasShop.NEEDLEWORK_DEFENSE_PERK_NAME) >= 0) max += UmasShop.NEEDLEWORK_DEFENSE_EXTRA_HP;
 	if(player.level <= 20) max += player.level * 15;
 	else max += 20 * 15;
 	max = Math.round(max);
@@ -670,7 +671,19 @@ public function perkDescription(perkName:String = ""):String {
 			else return "<b>You aren't strong enough to benefit from this anymore.</b>";
 			break;
 		default:
-			return "<u><i>This Perk does not have a stored description.  Please post a bug report on the bug report forums at forum.fenoxo.com.</i></u>";
+			var checkChildren:String;
+			
+			checkChildren = umasShop.listPerkDescription(perkName);
+			
+			if (checkChildren != "")
+			{
+				return checkChildren;
+			}
+			else
+			{			
+				return "<u><i>This Perk does not have a stored description.  Please post a bug report on the bug report forums at forum.fenoxo.com.</i></u>";
+			}
+			
 			break;
 	}
 	return "broken.";
@@ -2573,6 +2586,7 @@ public function lustPercent():Number {
 	if(player.hasPerk("Purity Blessing") >= 0) lust -= 5;
 	//Resistance = 10%
 	if(player.hasPerk("Resistance") >= 0) lust -= 10;
+	if (player.hasPerk(UmasShop.NEEDLEWORK_LUST_PERK_NAME) >= 0) lust -= UmasShop.NEEDLEWORK_LUST_LUST_RESIST;
 	
 	if(lust < 25) lust = 25;
 	if(player.statusAffectv1("Black Cat Beer") > 0) {
@@ -2646,6 +2660,12 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 			if(libi < 0) libi /= 2;
 		}
 	}
+	
+	// Uma's Perkshit
+	if (player.hasPerk(UmasShop.NEEDLEWORK_SPEED_PERK_NAME) && spee < 0) spee *= UmasShop.NEEDLEWORK_SPEED_SPEED_MULTI;
+	if (player.hasPerk(UmasShop.NEEDLEWORK_LUST_PERK_NAME) && libi > 0) libi *= UmasShop.NEEDLEWORK_LUST_LIBSENSE_MULTI;
+	if (player.hasPerk(UmasShop.NEEDLEWORK_LUST_PERK_NAME) && sens > 0) sens *= UmasShop.NEEDLEWORK_LUST_LIBSENSE_MULTI;
+	
 	//If orgasm, set hours since cum to 0.
 	if(lust2 <= -100) player.hoursSinceCum = 0;
 	//lust resistance
@@ -2674,7 +2694,24 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	if(player.hasPerk("Fast") >= 0 && spee >= 0) player.spe+=spee*player.perks[player.hasPerk("Fast")].value1;
 	if(player.hasPerk("Smart") >= 0 && intel >= 0) player.inte+=intel*player.perks[player.hasPerk("Smart")].value1;
 	if(player.hasPerk("Lusty") >= 0 && libi >= 0) player.lib+=libi*player.perks[player.hasPerk("Lusty")].value1;
-	if(player.hasPerk("Sensitive") >= 0 && sens >= 0) player.sens+=sens*player.perks[player.hasPerk("Sensitive")].value1;
+	if (player.hasPerk("Sensitive") >= 0 && sens >= 0) player.sens += sens * player.perks[player.hasPerk("Sensitive")].value1;
+
+	// Uma's Str Cap from Perks
+	if (player.hasPerk(UmasShop.NEEDLEWORK_SPEED_PERK_NAME) >= 0)
+	{
+		if (player.str > UmasShop.NEEDLEWORK_SPEED_STRENGTH_CAP)
+		{
+			player.str = UmasShop.NEEDLEWORK_SPEED_STRENGTH_CAP;
+		}
+	}
+	if (player.hasPerk(UmasShop.NEEDLEWORK_DEFENSE_PERK_NAME) >= 0)
+	{
+		if (player.spe > UmasShop.NEEDLEWORK_DEFENSE_SPEED_CAP)
+		{
+			player.spe = UmasShop.NEEDLEWORK_DEFENSE_SPEED_CAP;
+		}
+	}
+	
 	//Keep stats in bounds
 	if(player.cor < 0) player.cor = 0;
 	if(player.cor > 100) player.cor= 100;
@@ -2691,8 +2728,7 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	if(player.lib < 50 && player.armorName == "lusty maiden's armor") player.lib = 50;
 	else if(player.lib < 15 && player.gender > 0) player.lib = 15;
 	else if(player.lib < 10 && player.gender == 0) player.lib = 10;
-	if(player.lib < minLust() * 2/3) player.lib = minLust() * 2/3;
-	
+	if (player.lib < minLust() * 2 / 3) player.lib = minLust() * 2 / 3;
 	
 	//Minimum sensitivity.
 	if(player.sens > 100) player.sens = 100;

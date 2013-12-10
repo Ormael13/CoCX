@@ -540,7 +540,8 @@ package classes.content
 		public static const NEEDLEWORK_LUST_PERK_DESC:String = "Uma's Accupuncture Needlework has gifted you with the 'Chi Reflow - Lust' perk. As a result your Lust resistance and Tease attack are enhanced, but Libido and Sensetivity gains are increased.";
 		public static const NEEDLEWORK_LUST_PERK_SHORT_DESC:String = "Lust resistance and Tease are enhanced, but Libido and Sensetivity gains increased.";
 		public static const NEEDLEWORK_LUST_LUST_RESIST:int = 10;
-		public static const NEEDLEWORK_LUST_TEASE_MULTI:Number = 1.1;
+		public static const NEEDLEWORK_LUST_TEASE_MULTI:Number = 10;
+		public static const NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI:Number = 1.1;
 		public static const NEEDLEWORK_LUST_LIBSENSE_MULTI:Number = 1.1;
 		
 		public static const NEEDLEWORK_DEFENSE_PERK_NAME:String = "Chi Reflow - Defense";
@@ -553,7 +554,7 @@ package classes.content
 		public static const NEEDLEWORK_MAGIC_PERK_NAME:String = "Chi Reflow - Magic";
 		public static const NEEDLEWORK_MAGIC_PERK_DESC:String = "Uma's Accupuncture Needlework has gifted you with the 'Chi Reflow - Magic' perk. As a result your spells are now more powerful, but regular attacks are weaker.";
 		public static const NEEDLEWORK_MAGIC_PERK_SHORT_DESC:String = "Magic attacks boosted, but regular attacks are weaker.";
-		public static const NEEDLEWORK_MAGIC_SPELL_MULTI:Number = 1.25;
+		public static const NEEDLEWORK_MAGIC_SPELL_MULTI:Number = 0.25;
 		public static const NEEDLEWORK_MAGIC_REGULAR_MULTI:Number = 0.75;
 		
 		public static const NEEDLEWORK_ATTACK_PERK_NAME:String = "Chi Reflow - Attack";
@@ -588,6 +589,31 @@ package classes.content
 			return "<b>Somethin' dun fucked up.  Please insert bugreport!</b> ";
 		}
 		
+		public function listPerkDescription(perkName:String):String
+		{
+			switch(perkName)
+			{
+				case NEEDLEWORK_SPEED_PERK_NAME:
+					return NEEDLEWORK_SPEED_PERK_SHORT_DESC;
+					break;
+				case NEEDLEWORK_LUST_PERK_NAME:
+					return NEEDLEWORK_LUST_PERK_SHORT_DESC;
+					break;
+				case NEEDLEWORK_DEFENSE_PERK_NAME:
+					return NEEDLEWORK_DEFENSE_PERK_SHORT_DESC;
+					break;
+				case NEEDLEWORK_MAGIC_PERK_NAME:
+					return NEEDLEWORK_MAGIC_PERK_SHORT_DESC;
+					break;
+				case NEEDLEWORK_ATTACK_PERK_NAME:
+					return NEEDLEWORK_ATTACK_PERK_SHORT_DESC;
+					break;
+				default:
+					return "";
+					break;
+			}
+		}
+		
 		/**
 		 * Calculate the current undo cost of the players needlework
 		 * @return	calculated cost
@@ -607,8 +633,10 @@ package classes.content
 		
 		public function hasNeeleworkPerk():Boolean
 		{
-			if (this.getNeedleworkPerkName() != "")
+			var pName:String = this.getNeedleworkPerkName();
+			if (pName != "")
 			{
+				trace("Player has " + pName);
 				return true;
 			}
 			
@@ -617,23 +645,23 @@ package classes.content
 		
 		public function getNeedleworkPerkName():String
 		{
-			if (player.hasPerk(NEEDLEWORK_SPEED_PERK_NAME))
+			if (player.hasPerk(NEEDLEWORK_SPEED_PERK_NAME) >= 0)
 			{
 				return NEEDLEWORK_SPEED_PERK_NAME;
 			}
-			else if (player.hasPerk(NEEDLEWORK_LUST_PERK_NAME))
+			else if (player.hasPerk(NEEDLEWORK_LUST_PERK_NAME) >= 0)
 			{
 				return NEEDLEWORK_LUST_PERK_NAME;
 			}
-			else if (player.hasPerk(NEEDLEWORK_DEFENSE_PERK_NAME))
+			else if (player.hasPerk(NEEDLEWORK_DEFENSE_PERK_NAME) >= 0)
 			{
 				return NEEDLEWORK_DEFENSE_PERK_NAME;
 			}
-			else if (player.hasPerk(NEEDLEWORK_MAGIC_PERK_NAME))
+			else if (player.hasPerk(NEEDLEWORK_MAGIC_PERK_NAME) >= 0)
 			{
 				return NEEDLEWORK_MAGIC_PERK_NAME;
 			}
-			else if (player.hasPerk(NEEDLEWORK_ATTACK_PERK_NAME))
+			else if (player.hasPerk(NEEDLEWORK_ATTACK_PERK_NAME) >= 0)
 			{
 				return NEEDLEWORK_ATTACK_PERK_NAME;
 			}
@@ -644,7 +672,9 @@ package classes.content
 		}
 		
 		/**
-		 * Apply a Needlework perk to the player
+		 * Apply a Needlework perk to the player.
+		 * I don't want to stuff the stat values themselves into the Perk itself, because then we have to figure out if a player was saved with different bonuses applied to the perk than what we currently have defined.
+		 * ie. it makes future balancing of the perks more of a chore. Rather, other code can just reference the static vars we have here using UmasShop.NEEDLEWORK_MAGIC_blah
 		 */
 		public function applyNeedlework(selectedSession:int):void
 		{
@@ -688,12 +718,13 @@ package classes.content
 
 			outputText("“<i>Are you sure, dear?  While the effects of a Do-in massage will fade eventually, acupuncture is fairly... permanent.  Though I can only give you the effects of one type of needlework at once...</i>”\n\n");
 
-			outputText("You tell her you understand what she’s saying, and thank her for warning you.  So, what kinds of needlework can she do?  What effects can her \"acupuncture\" have on you?  ...Also, how much will it cost?");
+			outputText("You tell her you understand what she’s saying, and thank her for warning you, and ask her what kinds of needlework can she do?  What effects can her \"acupuncture\" have on you?  And how much it's going to cost you.\n\n");
 
 			outputText("“<i>Well, fine.  So long as you’re sure.  Normally, I would just show you a catalogue, but I suppose you’d prefer needlework that can be used for combat, yes?</i>”\n\n");
 
 			outputText("You tell her that would probably be most useful to you, yes.\n\n");
 
+			// This seems a bit akward, I wanna come back and rework it to flow smoothly
 			outputText("“<i>Bear in mind that while they have beneficial effects, due to the disruption they cause within the chi flow inside your body... they’d also cause a penalty.  So here are the types of needlework you’d find helpful.</i>” She takes a deep breath, clearly checks her mental list, and then begins to speak.\n\n");
 
 			outputText("“<i>First of all, if you focus on speed over strength,  I can increase your innate swiftness, making you less vulnerable to attacks or transformations that reduce your speed.  The drawback of this is that the maximum possible strength you can possess is lowered - though, as this prevents your muscles from growing so large they interfere with your speed, I think you’ll agree that it’s an easy sacrifice to make.”</i>  The mare masseur notes.\n\n");
@@ -754,21 +785,22 @@ package classes.content
 		{
 			clearOutput();
 			
-			ouputText("You shake your head and tell Uma that you’d actually rather not get one of her acupuncture treatments at this point in time.\n\n");
+			outputText("You shake your head and tell Uma that you’d actually rather not get one of her acupuncture treatments at this point in time.\n\n");
 			
 			outputText("“<i>Very well, dear.  It’s important that you think this through, they’re not easy to undo.</i>”");
 			
 			menu();
 			
-			doNext(0, "Next", enterClinic, true);
+			addButton(0, "Next", enterClinic, true);
 		}
 
 		public function needleworkSession(selectedSession:int):void
 		{
 			clearOutput();
 			
-			// Pay up		
-			if (selectedSession == NEEDLES_UNDO)
+			// Pay up
+			// These could REALLY do with being a little longer. And also not being as akward.
+			if (selectedSession == NEEDLEWORK_UNDO)
 			{
 				outputText("You tell Uma that you’d like her to remove the effects of your last acupuncture session from your body.  Then hand over the gems.\n\n");
 				
@@ -778,7 +810,7 @@ package classes.content
 			}
 			else
 			{
-				outputText("You tell her you would like her to give you the " + this.needleworkString(selectedSession) + " acupuncture session, please. Then hand over the gems.\n\n");
+				outputText("You tell Uma that you would like her to give you the " + this.needleworkString(selectedSession) + " acupuncture session, please. Then hand over the gems.\n\n");
 				
 				outputText("“<i>Alright, dear.</i>”  Uma replies, pocketing the gems.  “<i>Let’s go then.</i>”  She motions for you to follow her.");
 				
@@ -811,11 +843,12 @@ package classes.content
 
 			outputText("“<i>Very good.  I'll start the treatment now, you might feel a slight pricking sensation, though it shouldn’t hurt... if at any point it starts hurting, tell me and I’ll do something to ease your pain, alright?</i>”\n\n");
 
+			// Akward wording
 			outputText("You tell her that you understand.  True to her words, you do feel the slight pricking sensation of needles been put on your back, some of them are removed shortly after, while others stay in place for a while longer.  Eventually, you feel all needles being taken out of your back and Uma happily declares,  “<i>All done!</i>”\n\n"); 
 
 			outputText("You ask if you can get up now, or do you need to stay where you are so that it has time to settle?  “<i>No, you can get up and get dressed dear.  The needles are out and your chi should be stable enough now... though you won’t feel much of a change until some time has passed.</i>”  She takes off her gloves and scratches her chin.  “<i>I estimate you should start to feel the changes soon; maybe by the time you get back to your home, if not shortly after.</i>”\n\n");
 
-			ouputText("You thank her for her work, get yourself up and proceed to dress yourself.  You then politely excuse yourself and start the long journey back to your camp.");
+			outputText("You thank her for her work, get yourself up and proceed to dress yourself.  You then politely excuse yourself and start the long journey back to your camp.\n\n");
 			
 			applyNeedlework(selectedSession);
 			
