@@ -45,6 +45,11 @@ package classes
 			kGAMECLASS.addButton(pos, text, func1, arg1);
 		}
 		
+		protected function rand(maxVal:Number):Number
+		{
+			return kGAMECLASS.rand(maxVal);
+		}
+		
 		protected function get player():Player
 		{
 			return kGAMECLASS.player;

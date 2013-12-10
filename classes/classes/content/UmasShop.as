@@ -807,6 +807,7 @@ package classes.content
 			
 			addButton(0, "Job", talkJob);
 			addButton(1, "Sexuality", talkSexuality);
+			addButton(2, "Loppe", talkLoppe);
 		}
 		
 		public function talkJob():void
@@ -848,18 +849,66 @@ package classes.content
 			outputText("That makes you think, and you ask how much effort Uma has to put into keeping her little tete-a-tetes discrete? After all, you don’t think too many boyfriends, husbands or fathers would be happy to hear about her seducing their girlfriends, wives or daughters.\n\n");
 			
 			// ABORT ABORT DOTVERLOAD DETECTED
-			outputText("Uma smiles at you mischievously.  “<i>On the contrary, my naive little friend.  This is an oriental clinic, and there are many types of therapy, for various problems... including sex life.  Some of the women I seduce are actually straight, and let’s just say sometimes they need to be reminded of what a good penis can do for them.  And the only way to do that... well... is by making them want one in the first place.  A caress here, a press there, a little lick later... and they are all practically on fire, orgasming time and again... begging me to fuck them... There’s only one little problem though... I don’t have the equipment.”  Uma winks at you.  “Once they leave my clinic, they are much more satisfied and much more horny than usual.  So the first thing they do is go home to share their pleasure with their husbands.”\n\n");
+			outputText("Uma smiles at you mischievously.  “<i>On the contrary, my naive little friend.  This is an oriental clinic, and there are many types of therapy, for various problems... including sex life.  Some of the women I seduce are actually straight, and let’s just say sometimes they need to be reminded of what a good penis can do for them.  And the only way to do that... well... is by making them want one in the first place.  A caress here, a press there, a little lick later... and they are all practically on fire, orgasming time and again... begging me to fuck them... There’s only one little problem though... I don’t have the equipment.</i>”  Uma winks at you.  “<i>Once they leave my clinic, they're satisfied and much hornier than usual.  So the first thing they do is go home to share their pleasure with their husbands.</i>”\n\n");
 
-You can’t resist the wry grin as you comment that must do wonders for the reputation of her business.
+			outputText("You can’t resist the wry grin as you comment that must do wonders for the reputation of her business.\n\n");
+			outputText("Uma nods.  “<i>It does... but as you can see, the clinic is pretty empty most of the time.  It just so happens that we’re really expensive... especially considering our... extra... services.  But don’t worry, [name].  Since you’re my little Loppe’s [boyfriend], I’ll be happy to give you a pretty good discount on our services.”\n\n");
+			outputText("You laugh at that, thanking her for her generosity and her time, and then tell her it’s time for you to go.  Uma smiles at you and says, “<i>Come visit me again soon.</i>”\n\n");
+			outputText("You promise that you will, and then head out of the quaint little clinic and back to camp.\n\n");
 
-Uma nods.  “It does... but as you can see, the clinic is pretty empty, most of the time.  It just so happens that we’re really expensive... especially considering our... extra... services.  But don’t worry, [player.name].  Since you’re my little Loppe’s [boyfriend], I’ll be happy to give you a pretty good discount on our services.”
+			menu();
+			doNext(13);
+		}
+		
+		public function talkLoppe():void
+		{
+			clearOutput();
+			
+			outputText("You ask if she’d mind if you wanted to hear some stories about Loppe; what was she like as a little Loppe?  Maybe her mom’s got some embarrassing secrets to share about her, you grin?\n\n");
+			outputText("Uma taps her chin, thinking of something to tell you about...\n\n");
+			
+			// move this shit ~860 lines ^ thattaway
+			var loppeTalks:Array = new Array();
+			loppeTalks.push(talkLoppeAttitudes);
+			
+			// random call to one of the loppeTalks functors
+			loppeTalks[rand(loppeTalks.length)]();
+		}
+		
+		public function talkLoppeJoiner():void
+		{
+			menu();
+			doNext(13);
+		}
+		
+		/**
+		 * Random talk scene about Loppe's Attitudes.
+		 * Fully edited!
+		 */
+		public function talkLoppeAttitudes():void
+		{
+			outputText("“<i>What do you think of Loppe?  How she acts?  Looks?  Behaves?</i>”  Uma asks with a smile.\n\n");
+			outputText("You’re not quite sure what Uma’s getting at and tell her as much, but finally declare that you’d probably call her girly.  A little on the tomboyish side, but, given she’s a herm that only seems reasonable; it’s hard to say what gender traits would be best for a person who is functionally both male and female.\n\n");
+			outputText("“<i>That's true, but what you probably don’t know is Loppe was a lot more troublesome when she was just a little hopper.  She was a lot more boyish, and if anyone called her a girl she'd happily start an all out brawl at a moments notice.</i>”\n\n");
+			outputText("You think it over and note that makes sense; when she was that age, well, she’d hardly have been able to really tell the difference between the genders, and it’s not like she would have had any problems convincing the boys she was one of them, right?\n\n")
+			outputText("“<i>Yes, especially since she was flat-chested back then... but she was quite a handful. The eldar would call for me regularly to discuss my little hoppers behaviour. I guess she was kind of a bully, so I had to discipline her many times.</i>”\n\n");
+			outputText("You note that’s more of a surprise to you than Loppe being a tomboy; she’s always so sweet and kindly when you’re around her.  You can't deny that she's a little on the horny side, but still, she’s a nice person.\n\n");
+			outputText("“<i>That’s because she underwent a very radical change when she finally hit puberty.  Most children get a little rebellious, but not my Loppe, oh no.  If anything she became obedient, almost to a fault. In fact... for a while I thought she was actually sick or worried about something.  But she assured me she was just tired of sitting through my scoldings, and didn’t see a reason to challenge me anymore.  It was kind of cute too, she started asking me all kinds of questions, especially why she had both genders.</i>”\n\n");
+			outputText("You note that it must have been a troubling time in her life; you remember going through puberty, and you can’t imagine how hard it must have been to go through the hassles of things like the first period <i>and</i> uncontrollable erections simultaneously.  Though being the mother to a herm in puberty can’t have been a picnic either...\n\n");
+			outputText("“<i>It wasn’t, but I enjoyed it either way.  Loppe and I grew a lot closer then.  I guess she just finally got tired of trying to be a boy and decided to embrace her femininity.  She had me teach her how to act as a girl, and for the most part she does fine, but I wouldn’t be surprised if she slips up every once in awhile.</i>”\n\n");
+			outputText("Slips up?\n\n");
+			outputText("“<i>Sometimes she'll let loose the foulest belches in public, or... </i>readjust<i> herself in public</i>\" says Uma, her hand cupping an imaginary bulge at her crotch.  \"<i>She does things that a lady wouldn’t let herself get caught dead doing when she forgets about her desire to appear lady-like.</i>”\n\n");
+			outputText("Well, you can’t say you’ve ever caught her doing anything like that... except for her tendency to wrestle you into bed, or having to nurse a very noticable erection in public, you joke.  You really can’t see Loppe as the type to burp at all, though you admit she’s a bit more a glutton than you would have expected such a dainty-looking lady like her to be.\n\n");
+			outputText("“<i>Oh, but she of course you wouldn’t catch her doing any of that, she's extra careful around you... believe me, I’ve seen her when she gets home after a date with you.  She’s at least twice as tired as she usually is, no doubt due to keeping her boyish tendancies in check.</i>”\n\n");
+			outputText("You wonder if maybe you should tell her that she doesn’t have to try so hard to impress you; you want to be able to say you like her for who she is, the real her, not some act she forces herself to go through.  You don’t realize you’ve been musing aloud until Uma responds.\n\n");
+			outputText("“<i>Dear, that's wouldn't help at all.  She wouldn’t be with you if she thought you would leave her if she was rude, but she owes it to herself to act like a proper lady around you.  So the best you can do is pretend to buy into her act.</i>”\n\n");
+			outputText("You sigh quietly and tell Uma you understand, but ask if maybe she could drop a hint to her daughter about trying too hard, hmm?\n\n");
+			outputText("“<i>I can do that, but I don’t think it’s going to help.  When she was young I told her she didn’t have push herself so hard, but she insists on doing so anyway.  She can be quite stubborn, you know?</i>”\n\n");
+			outputText("You confess that you’ve had that impression from her, yes.  You thank Uma for giving you an insight into her daughter’s history, but tell her it’s time you were on your way.\n\n");
+			outputText("“<i>You’re welcome, see you around.</i>”  Uma waves you goodbye as you excuse yourself and return to camp.");
 
-You laugh at that, thanking her for her generosity and her time, and then tell her it’s time for you to go.  Uma smiles at you and says, “Come visit me again soon.”
-
-You promise that you will, and then head out of the quaint little clinic and back to camp.
-
-//Player returns to camp
-
+			// Join the exit back up from all the loppeTalks
+			talkLoppeJoiner();
 		}
 		
 		public function sexMenu():void
