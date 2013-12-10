@@ -709,31 +709,43 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 	saveFile.data.controls = inputManager.SaveBindsToObj();
 
 	trace("done saving");
+	// Because actionscript is stupid, there is no easy way to block until file operations are done.
+	// Therefore, I'm hacking around it for the chaos monkey.
+	// Really, something needs to listen for the FileReference.complete event, and re-enable saving/loading then.
+	// Something to do in the future
 	if (isFile)
 	{
-		file = new FileReference();
-		//outputText(serializeToString(saveFile.data), true);
-		var bytes:ByteArray = new ByteArray();
-		bytes.writeObject(saveFile);
-		file.save(bytes, null);
-		outputText("Attempted to save to file.", true);
-		doNext(1);
+		if (!(this.monkey.run))
+		{
+			file = new FileReference();
+			//outputText(serializeToString(saveFile.data), true);
+			var bytes:ByteArray = new ByteArray();
+			bytes.writeObject(saveFile);
+			file.save(bytes, null);
+			outputText("Attempted to save to file.", true);
+		}
 	}
 	else
 	{
 		saveFile.flush();
 		outputText("Saved to slot" + slot + "!", true);
-		doNext(1);
+	
 	}
+	doNext(1);
 }
 
 public function openSave():void
 {
-	file = new FileReference();
-	file.browse();
-	file.addEventListener(Event.SELECT, onFileSelected);
-	//var fileObj : Object = readObjectFromStringBytes("");
-	//loadGameFile(fileObj);
+
+	// Block when running the chaos monkey
+	if (!(this.monkey.run))
+	{
+		file = new FileReference();
+		file.browse();
+		file.addEventListener(Event.SELECT, onFileSelected);
+		//var fileObj : Object = readObjectFromStringBytes("");
+		//loadGameFile(fileObj);
+	}
 }
 
 public function onFileSelected(evt:Event):void

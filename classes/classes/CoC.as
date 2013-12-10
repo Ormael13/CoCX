@@ -323,7 +323,7 @@
 			model.mobile = mobile;
 
 			this.images = new ImageManager(stage);
-			this.inputManager = new InputManager(stage, true);
+			this.inputManager = new InputManager(stage, false);
 			include "../../includes/ControlBindings.as";
 
 

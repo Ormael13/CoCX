@@ -973,7 +973,7 @@ public function recursiveParser(contents:String, parseAsMarkdown:Boolean = false
 	
 	if (parseAsMarkdown)
 	{
-		trace("markdownificating");
+		// trace("markdownificating");
 		ret = Showdown.makeHtml(ret);
 
 

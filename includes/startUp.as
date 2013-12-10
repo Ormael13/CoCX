@@ -61,11 +61,24 @@ probably do not intend.
 (Yeah, I want to fix that)
 	]]>, true, true);
 
-
-	doYesNo(monkeyStartReallyConfirm, debugPane)
+	menu();
+	addButton(0, "ChaosMonkey",   saveMonkey);
+	addButton(1, "NoMenuMonkey",   noSaveMonkey);
+	addButton(9, "No",            debugPane)
 }
 
 
+public function noSaveMonkey():void
+{
+	this.monkey.excludeMenuKeys = true;
+	monkeyStartReallyConfirm()
+}
+
+public function saveMonkey():void
+{
+	this.monkey.excludeMenuKeys = false;
+	monkeyStartReallyConfirm()
+}
 public function monkeyStartReallyConfirm():void
 {
 	outputText(<![CDATA[
@@ -88,7 +101,7 @@ INITIATING MONKEY
 	]]>, true, true);
 	this.monkey.createChaos()
 
-	doNext(debugPane)
+	doNext(13)
 }
 
 import flash.system.SecurityDomain;

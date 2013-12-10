@@ -208,7 +208,7 @@
 				}
 			}
 			
-			trace("Failed to bind control method [" + funcName + "] to keyCode [" + keyCode + "]");
+			if (_debug) trace("Failed to bind control method [" + funcName + "] to keyCode [" + keyCode + "]");
 		}
 		
 		/**
@@ -238,10 +238,7 @@
 		 */
 		public function KeyHandler(e:KeyboardEvent):void
 		{
-			if (_debug)
-			{
-				trace("Got key input " + e.keyCode);
-			}
+			if (_debug) trace("Got key input " + e.keyCode);
 			
 			// Ignore key input during certain phases of gamestate
 			if (_mainView.eventTestInput.x == 207.5)
@@ -276,10 +273,7 @@
 		{
 			if (_keysToControlMethods[keyCode] != null)
 			{
-				if (_debug)
-				{
-					trace("Attempting to exec func [" + _controlMethods[_keysToControlMethods[keyCode]].Name + "]");
-				}
+				if (_debug) trace("Attempting to exec func [" + _controlMethods[_keysToControlMethods[keyCode]].Name + "]");
 				
 				_controlMethods[_keysToControlMethods[keyCode]].ExecFunc();
 			}
@@ -378,7 +372,7 @@
 			
 			for (var key:String in _controlMethods)
 			{
-				trace(key);
+				if (_debug) trace(key);
 				funcs.push(_controlMethods[key]);
 			}
 			funcs.sortOn( ["Index"], [Array.NUMERIC] );
@@ -451,7 +445,7 @@
 			
 			for (var key:String in _controlMethods)
 			{
-				trace(key);
+				if (_debug) trace(key);
 				var ctrlObj:* = new Object();
 				ctrlObj.PrimaryKey = _controlMethods[key].PrimaryKey;
 				ctrlObj.SecondaryKey = _controlMethods[key].SecondaryKey;
