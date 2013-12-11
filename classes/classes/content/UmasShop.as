@@ -193,7 +193,7 @@ package classes.content
 				addButton(3, "Sex", sexMenu);
 			}
 			
-			addButton(4, "Train Loppe", trainLoppe);
+			//addButton(4, "Train Loppe", trainLoppe); // Unfinished in the doc
 			addButton(9, "Leave", telAdreMenu);
 		}
 		
@@ -1524,7 +1524,6 @@ package classes.content
 			else // Wakkawakka no manns
 			{
 				outputText("\"<i>Sorry [name],  but you're just too manly for my tastes,</i>\" Uma apologizes.\n\n");
-
 				buildCoreMenu(true);
 				return;
 			}
@@ -1539,13 +1538,209 @@ package classes.content
 		private function buildSexMenu():void
 		{
 			menu();
-		}
-		
-		public function trainLoppe():void
-		{
+
+			addButton(0, "EroMassage", sexEroticMassage);
+			addButton(1, "Eat Her Out", sexEatHerOut);
+
+			if (player.gender >= 2 && player.lowerBody != 4) // Vaginas & not centaurs
+			{
+				addButton(2, "Fingerbang", sexGetFingered);
+			}
+
+			if (player.hasCock()) // Has a dick
+			{
+				addButton(3, "Handjob", sexHandjob);
+				addButton(4, "Get Blown", sexBlowjob);
+			}
+
 			
 		}
-		
-	}
 
+		/**
+		* Erotic Massage
+		* Edit Status: FUCK ALL
+		*/
+		private function sexEroticMassage():void
+		{
+			clearOutput();
+
+			outputText("You tell Uma you'd enjoy one of her erotic massages, please.\n\n");
+			outputText("The MILF mare smiles at you.  \"<i>Very well, dear.  Follow me,</i>\" she turns to leave her office and head down the corridor, towards the far back of the clinic, equine tail swishing lazily side to side.  You follow closely in her wake, looking forward to her \"special treatment.\"\n\n");
+			outputText("The room she leads you to is quite simple; wooden walls and floor, a couple of drains set in the floor that are probably for the more fluid generous clientele, ");
+
+			if (urtaLove()) outputText("something that makes you wonder if Urta would like to come and take a spin here, ");
+
+			outputText("and a sizable table, made from bamboo. It's covered in a white cloth, and has an upraised headboard with a hole in it that looks like it's big enough to fit your head through.  This is the only piece of furniture in the room, apart from a small cupboard in the corner.  Though spartan in its layout, the room is quite comfortably warm.\n\n");
+			outputText("Clearing her throat to get your attention the mare chuckles.  \"<i>If you're done examining your surroundings, you'd better get those [armorname] off, unless you want them to get dirty dear,</i>\" Uma says, pointing at your garments.  \"<i>You can put them inside the cupboard,</i>\" she motions over to the cupboard and begins undoing her kimono, with practiced moves and elegant grace, careful not to wrinkle the fabric and ensuring it's all neatly folded.\n\n");
+			outputText("You nod your head in understanding and promptly strip down, ");
+
+			if (flags[kFLAGS.PC_FETISH] >= 1) outputText("unable to resist either the tingle of lust that runs through you at being naked in front of Uma, nor the urge to flaunt your feminine physique for her own gratification, ");
+
+			outputText("and gather your [armorname] up in your arms as you do so. Walking over to the cupboard, you find a couple of folded towels and ample space to store your clothes, which is exactly what you do.\n\n");
+			outputText("When you turn, you notice Uma behind you, standing stark naked and holding her folded kimono in hand.  \"<i>Move over, dear.</i>\"  You politely step aside, and reach out to take Uma's clothes from her so that you can put them in the cupboard for her.  \"<i>Thank you, dear,</i>\" she says, handing over her clothes.  You place them inside and ask what she would like you to do next?\n\n");
+			outputText("\"<i>Just get on my table, belly up, and we can get started,</i>\" she pats her table, waiting patiently.  You nod your head in understanding, approach and position yourself on the table as she instructed, bare [skin] prickling with anticipation at what's to come.  The mare cracks her knuckles and positions her hands over your body.  \"<i>Now, just sit back and enjoy dear.  Let my nimble hands care for this beautiful body of yours.</i>\"  \n\n");
+			outputText("You smile at her and let her know you're ready to start whenever she is.  The mare starts out by caressing your whole body, over your [tone] belly, your [breasts], your arms and your [legs].  Then she begins pressing a few spots, searching for knots in your muscles and quickly treating those with her expert fingers.  \"<i>Seems like you're enjoying it so far,</i>\" the mare chuckles.\n\n");
+			outputText("Even as Uma says this, you realise just how incredibly ");
+
+			if (player.gender == 1) outputText("hard ");
+			else if (player.gender == 2) outputText("wet ");
+			else if (player.gender == 3) outputText("hard and wet ")
+
+			outputText("you are.  Sparks dance across your skin and you shiver, asking just how Uma can get you so turned on with just a few touches?  \"<i>That's a trade secret, dear.  Now let's get rid of all your tension,</i>\" the mare's hands slide around your body, caressing, touching and pinching, and somehow you feel yourself getting ever closer to the edge of climax.  You moan and whimper in pleasure, reduced to blissed-out putty in the mare's skillful hands, and unthinkingly blurt out she's a beautiful minx of a MILF.  \"<i>Why... thank you dear,</i>\"  she smiles happily, even as she moves her hand to one last spot on your body, right above your crotch.  \"<i>Now cum.</i>\"  She presses the spot and you gasp.\n\n");
+			outputText("You groan deep in your throat and obey Uma's commands explicitly, shuddering as the waves of climax rip through your body and culminate in your loins, ");
+
+			if (player.hasCock())
+			{
+				outputText("cum ");
+				if (player.cumQ() < 50) outputText("dribbling ");
+				else if (player.cumQ() < 250) outputText("pouring ");
+				else if (player.cumQ() < 500) outputText("spurting ");
+				else outputText("fountaining ");
+				outputText("from [eachcock] ");
+			}
+			if (player.gender == 3) outputText("and ");
+			if (player.hasVagina())
+			{
+				outputText("femcum ");
+				if (player.wetness() <= 3) outputText("dripping ");
+				else if (player.wetness() < 5) outputText("streaming ");
+				else outputText("gushing ")
+				outputText("from your [vagina]. ")
+			}
+
+			outputText("You writhe in pleasure, twisting yourself on the table as an explosive orgasm rocks you to the core.  You nearly pass out from the ordeal and when you're finally done you slump on the table nervelessly panting and satisfied.  Taking a deep breath, you turn to look a Uma, pretty sure you must've covered her body with your explosive discharge, but to your surprise she only has a bit of ");
+
+			if (player.hasCock()) outputText("cum ");
+			if (player.gender == 3) outputText("and ");
+			if (player.hasVagina()) outputText("juices ");
+
+			outputText("covering her hand and arm.  She smiles knowingly.\n\n");
+			outputText("\"<i>How was it dear?  Let me guess, you feel like you just exploded and had the longest orgasm, quite possibly dirtying the whole room, right?</i>\"\n\n");
+			outputText("You nod mutely, too overwhelmed by what just happened to you to speak.  \"<i>Well, sorry to disappoint, dear.  But this is all that came out of you,</i>\" she lifts her hand, displaying it to you, barely messy.  \"<i>A little trick I learned when I had to keep my little Loppe from quite literally, blowing up in public,</i>\"  she winks.  \"<i>Don't worry though, the feeling of getting a huge orgasm is real enough, but the reality is quite different.</i>\"\n\n");
+			outputText("Remembering what sex with Loppe is like, you decide Uma was a genius for coming up with such a trick, and tell her as much.  \"<i>You're quite good at flattery aren't you dear?  Well, I hope you enjoyed yourself, but now I must be going, so you just rest up until you're feeling well enough to leave.  Bye, dear,</i>\" the mare sashays to the cupboard, fetching a towel that she uses to clean her hand and arm before collecting her robes and casually walking out the door, still naked and without a hint of worry as her tail waves behind her, displaying the firm, round cheeks of her toned butt.\n\n");
+			outputText("You nod absently at her departure and settle down to regain your strength.  Once you feel recovered from your earth-shaking orgasm, you pick yourself up, redress, and quietly make your way back to camp; Uma's already busy with another client as you go.\n\n");
+
+			// DONT CARE HAD SEX
+			// Scene says we've only cum a little so err I guess store the players hoursSinceCum, do statmod, then reset it to a smaller value?
+			var hoursSinceCum:int = player.hoursSinceCum;
+			dynStats("lust", -100);
+			player.hoursSinceCum = Math.ceil(hoursSinceCum * 0.75);
+
+			menu();
+			doNext(13);
+		}
+
+		private function sexGetFingered():void
+		{
+			clearOutput();
+
+			outputText("You give a knowing wink to the mare masseur and say you'd like to see her magic fingers put to work. You particularly want to see if she can can pick the locks and open your secret treasure box.\n\n");
+			outputText("\"<i>Very well, dear.  Come with me,</i>\" she turns to leave her office and head down the corridor, towards the far back of the clinic, equine tail swishing lazily side to side.  You follow closely in her wake, looking forward to her \"special treatment\".\n\n");
+			outputText("The room she leads you to is quite simple; wooden walls and floor, a couple of drains set in the floor that are probably for the more... fluid generous clientele, ");
+
+			if (this.urtaLove()) outputText("something that makes you wonder if Urta would like to come and take a spin here ");
+
+			outputText("and a sizable table, made from bamboo. It's covered in a white cloth, and has an upraised headboard with a hole in it that looks like it's big enough to fit your head through.  This is the only piece of furniture in the room, apart from a small cupboard in the corner.  Though spartan in its layout, the room is quite comfortably warm.\n\n");
+			outputText("Clearing her throat to get your attention the mare chuckles.  \"<i>Now, dear.  I can't quite get my hands where they need if you're still wearing your [armorname].  So why don't you strip down and put them in the cupboard over in the corner,</i>\"  she instructs, beginning to strip herself.  You nod your head in understanding and promptly strip down, ");
+
+			if (flags[kFLAGS.PC_FETISH >= 1) outputText("unable to resist either the tingle of lust that runs through you at being naked in front of Uma, nor the urge to flaunt your feminine physique for her own gratification, ");
+
+			outputText("and gather your [armorname] up in your arms as you do so. Walking over to the cupboard, you find a couple of folded towels and ample space to store your clothes, which is exactly what you do.\n\n");
+
+outputText("Uma stands just behind you, her own clothes neatly folded.  \"<i>Excuse me.</i>\"  You politely step aside, and reach out to take Uma's clothes from her so that you can put them in the cupboard for her.  \"<i>Thanks, dear.  Now come here.</i>\"  The mare says, sitting up on the table and tapping her thighs.  \"<i>Come sit on my lap.</i>\"\n\n");
+
+You look at her with a slightly puzzled expression, but then smile, nod your head and approach.  You gently sit yourself down in the MILFy mare's lap (height under 5 feet: feeling very much like a child with how large she is)/(height over 7 feet: careful to avoid squishing her too badly, given how much larger you are).  Once settled and comfortable, you ask what to do next.
+
+\"<i>Just relax.</i>\"  The mare's hand run over your body.  She gently teases your [nipples] with soft fingers, (kneads your [breasts]) with smooth touches and glide over your [belly] (past your [cock] and) down towards the honeypot located (between your [legs] / on your [lower body]).  Slowly she spreads your folds open, massaging your labia and gathering moisture from your (drooling / wet / moist) vagina.
+
+You moan, already shivering in anticipation, waiting to see what a skilled lesbian can do with your most precious feminine treasure.  \"<i>Just a heads up, dear.  I'm pretty confident no one can hear what takes place here, and I'm not privy to getting myself dirty, so feel free to let loose and enjoy it as much and as loudly as you want, okay?</i>\"
+
+The mare's hands gently circle your netherlips, sometimes brushing against your [clit], but only enough to send small jolts of electric pleasure running up your spine.  Slowly one questing finger begins prodding your entrance, before driving itself in.
+
+(Virgin){
+\"<i>Oh!  So tight!  Tell me something, dear.  Are you, perhaps, a virgin?  No, wait!  Don't tell me.  I'll just find out myself.</i>\"  Wiggling her finger to slowly inch her way inside, Uma explores your nethers as deep as she can... deep enough to reach your hymen.  \"<i>Oh!  So you are!  How rare!  I don't even remember how long it's been since I last had the pleasure of helping a virgin... ah... nothing quite like it...</i>\"  the MILF mare chuckles, reminiscing old times.  \"<i>Oh, dear.  Just thinking about it makes me wet... a pussy that's never known the pleasure of a cock... ripe to be plumbed by my fingers... I can't grant you the same pleasure as a skilled lover can, dear,  but I assure you that by the time I'm finished with you, you will be as sated as you can be.</i>\"  The mare delivers a gentle kiss to your neck.
+
+You murmur and wriggle in your seat, telling her that you don't doubt her in the slightest.  \"<i>Good... now let's make some room for me to work with.</i>\"  She replies, gently thrusting her finger in and out of you in a circular motion, hoping to loosen you so she can add more fingers.
+
+You cry out - that feels wonderful, you tell her.  Uma chuckles.  \"<i>But we haven't even gotten started, dear,</i>\"  She says melodically, slowly working another finger against your passage, wiggling it until it slips in with a wet squelch.  You buck back against her with a cry of delight; this feels so good!  Uma laughs.  \"<i>Now, now, don't get too excited dear.  I still haven't even found your special place.</i>\"  Having said that, she begins probing your depths, pressing against key spots, looking for something.
+
+You react with full-body jolt as a surge of pleasure unlike anything you've felt before ripples through your body.  There!  Oh, there!  You're not sure what Uma just did, but you want more of it!  The MILF mare gives a confident laugh.  \"<i>Found it already!  Yes... I don't mean to brag but I am pretty good at finding those, wouldn't you say, dear?</i>\"  She presses on your G-Spot for emphasis.  You squeal in agreement, writhing in the mare MILF's lap as pleasure rips through your body.
+
+\"<i>How cute... if you weren't dating my daughter I might even have considered keeping you for myself.  But I'm glad you're with her... and I hope you won't deny a mare her fun once in awhile.</i>\"  Uma adds another finger to your pussy, pumping them inside you and brushing against your spot with each insertion.
+
+You moan and babble, vaguely spitting out something about definitely promising to come back to her in the future.  Waves of pleasure wash through you, rippling through your clenching, squeezing netherwalls, building a strange tightness in your belly... oh... you're going to... going to...
+
+With an ecstatic cry, you orgasm, your virginal cunt spasming as it spatters/soaks/drenches Uma's probing hand in your female juices(, your forgotten cock spraying cum in a pearlescent arc to splatter onto the floor).
+
+Uma laughs happily.  \"<i>Oh, deary.  You're so cute I could just squeeze you all day!</i>\"  She pumps her fingers inside you one more time, drawing one last discharge before you finally slump on the older mare's lap.  The MILF removes her hand from your sensitive pussy and takes it close to her mouth, then promptly begins licking your juices off her hand, close to your ear to ensure you hear every single lewd sound she makes as she cleans her hand from your recent orgasm.  \"<i>Hmm... virgins definitely have the best taste.  Sweet, slick and unclaimed.  Be sure to warn Loppe to go easy on you when you finally decide to work with her equine pride,  though I wonder if she'll be able to restrain herself with such a cutie like you.</i>\"  Uma kisses the back of your neck once more, before returning to her cleaning duty.
+
+You take a few moments to regain control of your [legs], but get up and start helping her to clean up the mess - after all, you made it.  Once it's all clean, you kiss Uma on the cheek as a thank you before saying you have to be going.  \"<i>See you soon, dear.  I'd have given you more of an workout, but I think my daughter will appreciate your... inexperience.  So make sure you come prepared next time, so we can have some more fun.</i>\"  She smiles at you, fingers beginning to prod at her own snatch.
+
+You can't resist a smile as you promise to remember that, redress yourself, and head back to camp.
+}
+(Tight){
+\"<i>Hmm... Tight!  I wonder how long you can keep yourself like that while dating my little Loppe.</i>\"  The mare says teasingly.
+
+Loppe isn't that bad, you find yourself saying - and doesn't it feel so weird to be talking about Uma's daughter when you're letting Uma herself do you, you privately note.  \"<i>Oh, but this is where you're mistaken my dear.  Loppe is pretty bad... I should know... she got that from me.</i>\"  The mare laughs lightly, adding another finger to massage your opening.
+
+You moan loudly, wriggling in your seat to allow Uma better access to your more sensitive spots.  Mmm... she's good at this...
+
+\"<i>Thanks, dear, but we are just about to get started with the real thing,</i>\"  She replies with a chuckle.  Uma begins massaging your inner walls, while she roams your insides, trying to find something.  You quickly realise what it is as your G-spot is touched, crying out in delight as she sends the most delicious wave of pleasure rippling through your loins, doing your best to squeeze her fingers with your experienced but still-tight cunt.
+
+\"<i>Aha!  Found it!</i>\"  The MILF says with delight.  \"<i>Now I can finally get started on removing all of this bad tension you've been accumulating, dear.</i>\"  She starts pumping her fingers inside you, making sure to tease your G-Spot with careful touches at every pump.
+
+You gasp and moan as the mare masseur's expert fingers tease you in all the right ways, slightly bucking in place to properly enjoy your finger-fucking, that oh-so-familiar and wonderful tightness building up in your belly before, with a cry of lust, you give in and ride the resultant crescendo of orgasm.  You give yourself over the bliss of cumming into Uma's hand, slumping down in relaxed stupor after you finish emptying yourself.
+
+Removing her hand from your privates, the mare lifts her wet hand to her face and begins licking it clean.  \"<i>Hmm... I see that my daughter is right to call you sugar.  You really are sweet.</i>\"  She chuckles.  \"<i>So how'd you like your... massage?</i>\"
+
+You smile lazily at her and assure her it was wonderful; a real treat to experience.  Maybe she should teach Loppe how to use her fingers like that...
+
+Uma smiles at you.  \"<i>Hmm... I might in the future... but my little Loppe has tricks of her own, as I'm sure you've, no doubt, experienced?</i>\"
+
+You smile demurely and tell her that where you come from, a lady doesn't kiss and tell... then grin to let her know you're just teasing her.  Uma laughs.  \"<i>Oh, you silly girl...  Now if you'll excuse me.  I have to attend to my own problems.</i>\"  The mare motions to her drooling gash.
+
+You smile and tell her you'll shut the door on your way out, getting dressed and then heading back to camp.
+}
+(Loose){
+\"<i>Oh... Moist and easy... I wonder how much of this is Loppe's fault?  Maybe I should tell her to be a bit more gentle?</i>\"  The mare suggests, adding a couple more fingers inside you.
+
+Well, maybe a little, you manage to squeak out; you're really more concerned with just how good Uma's fingers feel inside you - they're not a nice big fat cock, but they're a pretty good substitute.  \"<i>Still feels like I have some room to work with here... so how about another one?</i>\"  The mare smiles as she says this, even as she adds another finger to the ones already inside you.  \"<i>If we continue down this road I might just be able to squeeze a hand down there... you don't mind do you, dear?</i>\"
+
+Mmm... the more the merrier, you unthinkingly reply.  You didn't get this stretched out by not liking to be filled, after all.  \"<i>Good, I'll see if I can't accommodate you later, but for now... there's something I'm looking for.</i>\"  She begins moving her fingers inside of you, feeling around your rippling walls, looking for that special spot within you.
+
+It's not easy for her, you're looser than most, but you enjoy her efforts all the same, playfully teasing and encouraging her as she strokes and fondles and fiddles.  Finally, almost by accident, her finger brushes up against that part you love so much and you moan your delight, letting her know she's hit the jackpot.
+
+\"<i>Hmm... that took longer than usual, but I see I still have the touch... now to make this as good as possible for my future daughter-in-law...</i>\"  Uma adds her last finger to your insides, basically shoving her entire hand inside you.  She massages your innards as she begins pumping her hand, touching, massaging, teasing and squelching.  Every time that wonder hand of hers drives itself inside you, you feel jolts of electricity run up along your body as each finger of hers takes a turn dancing, teasing and pinching that special spot within your treasure.
+
+It's a little different to being filled with cock, but it's not a bad substitute either, and you do your best to wring as much pleasure from it as you can.  It still takes a little longer to build up that delicious pressure inside of you before, with a cry of lust fulfilled, you cum, soaking your lap and Uma's alike with your climax.
+
+\"<i>Oh dear... such a small orgasm... I was hoping more from a experienced woman like yourself...</i>\"  The mare moves her hand a few more times.  \"<i>How about if I do... this!</i>\"  She grips your G-Spot tightly, while teasing your [clit] with her other hand.  You squeal and writhe, your oversensitized flesh burning with pleasure as she continues playing - it takes only seconds before you dredge up a second orgasm, just as full as the first, and then slump back against her, worn out.
+
+Uma chuckles.  \"<i>Now, that's more like it.  Satisfied yet dear?  I could always give you another...</i>\"  She suggests.
+
+No, you think you've had enough for a while, you tell her.  \"<i>Spoilsport...</i>\"  The mare comments, licking the back of your neck.  \"<i>I always enjoy making experienced girls like you see new ways to achieve greater orgasms, and I hope our time together's been as pleasurable as it looked.</i>\"  The mare chuckles.  \"<i>Now then... just rest up and get up when you can... but please don't take too long?  This last tryst of our has left me... wanting.</i>\"
+
+You chuckle at her, painstakingly hauling yourself up, and get dressed.  Thanking Uma for showing you her magic fingers, you blow her a teasing kiss and then head back to camp.
+}
+
+		}
+
+		private function sexHandjob():void
+		{
+
+		}
+
+		private function sexEatHerOut():void
+		{
+
+		}
+
+		/**
+		 * This is marked as Todo in the doc
+		*/
+		private function sexBlowjob():void
+		{
+
+		}		
+	}
 }
