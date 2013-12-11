@@ -2,6 +2,7 @@ package classes.content
 {
 	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
+	import flash.display.InteractiveObject;
 	
 	/**
 	 * Whee!
@@ -31,9 +32,8 @@ package classes.content
 			_loppeTalks.push(talkLoppeAttitudes);
 			_loppeTalks.push(talkLoppeCarrotIncident);
 			_loppeTalks.push(talkLoppePuberty);
-			_loppeTalks.push(talkLoppesLastGirl);
+			_loppeTalks.push(talkLoppesFirstGirl);
 			_loppeTalks.push(talkLoppesFirstBoyfriend);
-			_loppeTalks.push(talkLoppesDad);
 		}
 		
 		/**
@@ -158,21 +158,41 @@ package classes.content
 				outputText("\"<i>Why, if it isn't my little girl's special someone.  What brings you here, hmm?  Wanted to try my services?  A friendly little chat?  Or...</i>\" She saunters confidently over to you and gives you a knowing grin.  \"<i>I bet my loose-lipped little Loppe has hinted that I'm not currently seeing anybody, hmm?  Is that why you're here - you wanted to see how the mother measures up to the daughter?</i>\"\n\n"); 
 			
 				// ima change this to the minvalue required for sex scenes to be available methinks, or atleast lower it to around that bracket
-				if (player.femininity >= 80)
+				if (player.femininity >= UMA_CONSIDER_PC_FEM)
 				{
 					outputText("You notice her giving you a very approving appraisal at the thought."); 
 				}
 			}
 			else
 			{
-				outputText("“<i>So then, [name], what can I do you for?”  She flashes you a knowing grin, the innuendo clearly intended.");
+				outputText("\"<i><i>So then, [name], what can I do you for?</i>\"  She flashes you a knowing grin, the innuendo clearly intended.");
 			}
 			
+			buildCoreMenu();
+		}
+		
+		/**
+		 * Build the primary interface menu to interact with Uma.
+		 * @param	noSex	Indicates if the Sex button should be hidden from display.
+		 */
+		private function buildCoreMenu(noSex:Boolean = false):void
+		{
+			if (noSex)
+			{
+				outputText("You sigh softly, but accept Uma's sexuality is the way it is and apologise for the problem.\n\n");
+				outputText("\"<i>Don't worry about that it's nothing personal, I just don't swing that way.  Although, if you were to make yourself a bit more feminine, I might consider it.  Maybe you could find yourself a nice little beauty salon somewhere?  I heard there are some treatments that can make you absolutely gorgeous.</i>\"\n\n");
+			}
+
 			menu();
 			addButton(0, "Massage", massageMenu);
 			addButton(1, "Acupunct.", accupunctureMenu);
 			addButton(2, "Talk", talkMenu);
-			addButton(3, "Sex", sexMenu);
+			
+			if (!noSex)
+			{
+				addButton(3, "Sex", sexMenu);
+			}
+			
 			addButton(4, "Train Loppe", trainLoppe);
 			addButton(9, "Leave", telAdreMenu);
 		}
@@ -216,7 +236,7 @@ package classes.content
 		{
 			clearOutput();
 			
-			outputText("You apologise and tell Uma that you’ve changed your mind, you don't want a massage right now.\n\n");
+			outputText("You apologise and tell Uma that you've changed your mind, you don't want a massage right now.\n\n");
 			outputText("\"<i>Very well, dear.</i>\"  Uma takes the catalogue back.");
 			
 			menu();
@@ -351,7 +371,7 @@ package classes.content
 			// Not enough cashmonies to pay for massage
 			if (player.gems < 75)
 			{
-				outputText("You tell her that you don’t have that many gems on you right now.\n\n");
+				outputText("You tell her that you don't have that many gems on you right now.\n\n");
 				outputText("Uma sighs and shakes her head.  \"<i>Sorry dear, but if you can't pay I can't treat you.</i>\"\n\n");
 				outputText("You sigh in turn, and tell her that you accept that; she is a business-woman, after all.  You'll have to come back another day, when you do have the money to pay for it.\n\n");
 				outputText("Wishing her well, you calmly let yourself out of the shop and head back to camp.");
@@ -389,7 +409,7 @@ package classes.content
 			clearOutput();
 			
 			outputText("\"<i>Very well, dear.</i>\"  She cracks her knuckles ominously.  \"<i>This might hurt a bit, but bear with it.</i>\"  She adds, rolling up the sleeves of her kimono.\n\n");
-			outputText("You swallow audibly and brace yourself for what’s to come.\n\n");
+			outputText("You swallow audibly and brace yourself for what's to come.\n\n");
 			outputText("Uma presses her elbow against your chest ");
 			
 			if (player.biggestTitSize() >= 1)
@@ -403,11 +423,11 @@ package classes.content
 			outputText("\"<i>Very good, dear.  Now flip yourself over, it's time to take care of your back.</i>\"\n\n");
 
 			// Refactor to say something about nipples against the table?
-			outputText("You move to do as she asks; it’s a little awkward adjusting to having your face in the - thankfully cushioned - hole.  You wriggle about to settle yourself comfortably on the table, but you manage to make yourself relaxed, and tell Uma that you're ready once more.\n\n");
-			outputText("You yelp as Uma presses the metal rod " + ((player.tailType > 0) ? "to the base of your tail" : "to your lower back") + ".  “I’m going to have to trace a few spots on your back dear, to ensure your flow of chi is not obstructed. It might hurt again, but be brave, ok?\"  You nod as best as you can and prepare yourself.\n\n");
+			outputText("You move to do as she asks; it's a little awkward adjusting to having your face in the - thankfully cushioned - hole.  You wriggle about to settle yourself comfortably on the table, but you manage to make yourself relaxed, and tell Uma that you're ready once more.\n\n");
+			outputText("You yelp as Uma presses the metal rod " + ((player.tailType > 0) ? "to the base of your tail" : "to your lower back") + ".  \"<i>I'm going to have to trace a few spots on your back dear, to ensure your flow of chi is not obstructed. It might hurt again, but be brave, ok?\"  You nod as best as you can and prepare yourself.\n\n");
 			outputText("By the time Uma is finished you feel sore all over, the pain on your back seemingly bringing back the pain on your front.\n\n");
-			outputText("\"<i>It will be a little while, before the flow of chi inside your body stabilizes, dear.  But by the time you’re out of this clinic, you should feel much better.</i>\"  Uma explains.\n\n");
-			outputText("You thank the mare and get dressed, bidding her farewell before you exit the clinic. Once outside, and true to her words, you feel better... in fact you feel amazing!  It’s no wonder her treatment is expensive, you feel just... amazing!\n\n");
+			outputText("\"<i>It will be a little while, before the flow of chi inside your body stabilizes, dear.  But by the time you're out of this clinic, you should feel much better.</i>\"  Uma explains.\n\n");
+			outputText("You thank the mare and get dressed, bidding her farewell before you exit the clinic. Once outside, and true to her words, you feel better... in fact you feel amazing!  It's no wonder her treatment is expensive, you feel just... amazing!\n\n");
 			
 			// Apply bonus & back to camp!
 			applyMassageBonus(selectedMassage);
@@ -751,12 +771,12 @@ package classes.content
 				outputText("\"<i>Well, fine.  So long as you're sure.  Normally, I would just show you a catalogue, but I suppose you'd prefer needlework that can be used for combat, yes?</i>\"\n\n");
 				outputText("You tell her that would probably be most useful to you, yes.\n\n");
 				outputText("\"<i>Keep in mind that while they have beneficial effects, due to the disruption they cause within the chi flow inside your body... they also come with some drawbacks.  That said, there are a few types of needlework that you might find useful...</i>\"  She takes a deep breath, clearly running through a mental checklist, and then begins to speak.\n\n");
-				outputText("\"<i>First of all, if you focus on speed over strength,  I can increase your innate swiftness, making you less vulnerable to attacks or transformations that reduce your speed.  The drawback of this is that the maximum possible strength you can possess is lowered - though, as this prevents your muscles from growing so large they interfere with your speed, I think you’ll agree that it’s an easy sacrifice to make.\"</i>  The mare masseur notes.\n\n");
+				outputText("\"<i>First of all, if you focus on speed over strength,  I can increase your innate swiftness, making you less vulnerable to attacks or transformations that reduce your speed.  The drawback of this is that the maximum possible strength you can possess is lowered - though, as this prevents your muscles from growing so large they interfere with your speed, I think you'll agree that it's an easy sacrifice to make.\"</i>  The mare masseur notes.\n\n");
 				outputText("\"<i>I understand that lust plays an important part in fighting, so I could make you more resistant to the advances of the creatures outside the city, as well as augment your ability to, well, entice them.  However this comes with a cost, you will constantly need to have sex, or your chi flow will begin to burn up, increasing your sensitivity as well as your libido.</i>\"\n\n");
 				outputText("\"<i>If you are uncertain of your toughness, your ability to resist the damage inflicted upon you by the creatures that prowl the wilderness, I can bolster that.  However, modifying the chi flow in such a manner causes your limbs to lose some of their power; you will be slower, and find it harder to escape from enemies that even your newfound resilience cannot protect you against.</i>\"\n\n");
 				outputText("\"<i>One of my special needleworks favored by mages will redirect chi from your muscles to your mind; your blows will be weaker, but your spells will be far more potent.</i>\"\n\n");
 				outputText("\"<i>Finally, I can use my needles to rearrange your chi flow and optimise your offense; your blows will be far more powerful, but your natural defense will be impaired, making you more vulnerable to strikes by the enemy.</i>\"\n\n");
-				outputText("The mare tries to remember any other types of needlework that might be useful to you, but ultimately, she can't think of anything else.  \"<i>That's all you might use, I think...</i>\"  She then pauses.  \"<i>As for a price, given you're my little Loppe’s special someone, shall we say " + String(sessionCost) + " gems?  That's half-price of what I’d usually charge.</i>\"\n\n");
+				outputText("The mare tries to remember any other types of needlework that might be useful to you, but ultimately, she can't think of anything else.  \"<i>That's all you might use, I think...</i>\"  She then pauses.  \"<i>As for a price, given you're my little Loppe's special someone, shall we say " + String(sessionCost) + " gems?  That's half-price of what I'd usually charge.</i>\"\n\n");
 				
 				menu();
 				addButton(0, "Speed", needleworkSession, NEEDLEWORK_SPEED);
@@ -813,7 +833,7 @@ package classes.content
 			// These could REALLY do with being a little longer. And also not being as akward.
 			if (selectedSession == NEEDLEWORK_UNDO)
 			{
-				outputText("You tell Uma that you’d like her to remove the effects of your last acupuncture session from your body.  Then hand over the gems.\n\n");
+				outputText("You tell Uma that you'd like her to remove the effects of your last acupuncture session from your body.  Then hand over the gems.\n\n");
 				outputText("\"<i>Alright, dear,</i>\"  Uma replies, pocketing the gems.  \"<i>It might take some time, but I think I can help you with that... follow me.</i>\"\n\n");
 				
 				player.gems -= this.needleworkUndoCost();
@@ -821,7 +841,7 @@ package classes.content
 			else
 			{
 				outputText("You tell Uma that you would like her to give you the " + this.needleworkString(selectedSession) + " acupuncture session, please. Then hand over the gems.\n\n");
-				outputText("\"<i>Alright, dear.</i>\"  Uma replies, pocketing the gems.  \"<i>Let’s go then.</i>\"  She motions for you to follow her.");
+				outputText("\"<i>Alright, dear.</i>\"  Uma replies, pocketing the gems.  \"<i>Let's go then.</i>\"  She motions for you to follow her.");
 				
 				player.gems -= 125;
 			}
@@ -840,13 +860,13 @@ package classes.content
 			clearOutput();
 			
 			outputText("The room is light, but not overwhelmingly bright, with cool breezes gently wafting through, tingling deliciously on your exposed [skin] and setting the chimes hanging from the rafters gently a-tinkle. A number of large potted plants occupy the corners of the room, and there's even a tiny fountain with stones in it, the tumble of water over rocks creating a strangely soothing melody.  A small brazier produces a sweet, calming smell from incense burning in it.  The pride of the room is a sizable table, made from bamboo; it's covered in a white cloth, and has an upraised headboard with a hole in it that looks like it's big enough to fit your head through.\n\n");
-			outputText("\"<i>I want you to strip and lay face down on my table, while I go fetch my needles and some numbing cream.  Unless you’d like me to stick needles in your body without anything to dull the pain?\"</i>  Uma asks jokingly.\n\n");
+			outputText("\"<i>I want you to strip and lay face down on my table, while I go fetch my needles and some numbing cream.  Unless you'd like me to stick needles in your body without anything to dull the pain?\"</i>  Uma asks jokingly.\n\n");
 			outputText("You quickly shake your head, and indicate she should go, promising to be properly undressed and ready by the time she gets back.  As the mare heads off to fetch her things, you do as you were instructed; you quickly slip out of your [armorname] and position yourself on the table.  Sticking your head in the table's hole is a little awkward, and makes you feel rather vulnerable... which is natural, given what Uma mentioned about needles.\n\n");
 			outputText("It only takes a moment before Uma returns with a cart containing a small container and a vial of what you presume to be the numbing cream.  Out of the cart's drawer, Uma pulls a pair of gloves which slips over her hands nicely, then opens the small container.  From your current position it's hard to tell what it contains, but from the clicking sounds you hear, you assume it to be where she keeps her needles.\n\n");
 			outputText("\"<i>Are you comfortable, dear?  May I start?</i>\"  She asks.\n\n");
-			outputText("You tell her that you’re as ready as you'll ever be, so she may as well start.  \"<i>Ok, now try to relax.</i>\"  She says, gently touching your exposed back and lightly massaging it with her fingers.  The combination of nerves and her touch sends static through your skin.\n\n");
-			outputText("\"<i>I'll be applying the cream now.</i>\"  She notifies you, slowly pouring the, rather cold, cream on your back and rubbing it all over, ensuring every single spot is covered before she puts the vial away.  You shiver and repress a verbal protest at the chill in her cream.  \"<i>It will take a few minutes before you start to feel the effects, I want you to tell me when you no longer feel my fingers on your back.</i>”  She then begins a slow circular massage on your back.\n\n");
-			outputText("You promise you will, and wait patiently.  Slowly the sensation of her fingers fades away, until at last you aren’t sure if she's even touching you any more, and you report this to the mare currently planning on sticking you full of needles.\n\n");
+			outputText("You tell her that you're as ready as you'll ever be, so she may as well start.  \"<i>Ok, now try to relax.</i>\"  She says, gently touching your exposed back and lightly massaging it with her fingers.  The combination of nerves and her touch sends static through your skin.\n\n");
+			outputText("\"<i>I'll be applying the cream now.</i>\"  She notifies you, slowly pouring the, rather cold, cream on your back and rubbing it all over, ensuring every single spot is covered before she puts the vial away.  You shiver and repress a verbal protest at the chill in her cream.  \"<i>It will take a few minutes before you start to feel the effects, I want you to tell me when you no longer feel my fingers on your back.</i></i>\"  She then begins a slow circular massage on your back.\n\n");
+			outputText("You promise you will, and wait patiently.  Slowly the sensation of her fingers fades away, until at last you aren't sure if she's even touching you any more, and you report this to the mare currently planning on sticking you full of needles.\n\n");
 			outputText("\"<i>Very good.  I'll start the treatment now, you might feel a slight pricking sensation, though it shouldn't hurt... if at any point it starts hurting, tell me and I'll do something to ease your pain, alright?</i>\"\n\n");
 			outputText("You tell her that you understand.  True to her words, you feel the slight pricking sensation of needles gently poking into your back. Some of them are removed shortly after, while others stay in place for a while longer.  Eventually, you feel all needles gradually being removed from your back and Uma happily declares,  \"<i>All done!</i>\"\n\n"); 
 			outputText("You ask if you can get up now, or do you need to stay where you are so that it has time to settle?\n\n");
@@ -876,6 +896,7 @@ package classes.content
 			addButton(0, "Job", talkJob);
 			addButton(1, "Sexuality", talkSexuality);
 			addButton(2, "Loppe", talkLoppe);
+			addButton(3, "Loppe's Dad", talkLoppesDad);
 		}
 		
 		/**
@@ -891,13 +912,13 @@ package classes.content
 			outputText("You shake your head, which prompts her to sigh.  \"<i>Chi is the energy that permeates one's body, to put it simply.  Every living thing has a certain flow of chi, and this is what determines your talents, abilities and, some would argue, even fate.  Some talented individuals can actually gather chi from other beings, to some effect, and some, like yours truly, can manipulate the flow of the chi inside someone; although there is a limit to how much I can manipulate it.</i>\"  Uma explains.\n\n");
 			outputText("So, Uma manipulates the energy inside of people for a living?  But why would anyone want her to do that?  You ask this to the mare, hoping for clarification.\n\n");
 			outputText("\"<i>Manipulating the chi inside someone can have various beneficial effects, such as improving strength, altering sexual drive, getting rid of pains, alleviating mood swings... basically anything you can imagine has a relationship, no matter how detached, to chi.</i>\"\n\n");
-			outputText("You nod your head in understanding; that makes sense.  So, what's the difference between the massages - do-in, she called them? - and acupuncture?  Don’t they both do the same thing?\n\n");
-			outputText("Uma smiles and shakes her head.  \"<i>No, dear.  Do-in adjusts the flow of chi, such as increasing output in certain areas, or reducing them... imagine this.  Your chi flows like a river, by enlarging or shrinking the stream, the river’s strength will either increase or diminish, correct?  This is what Do-in does, it never cuts the flow of the river, just... adjusts it.</i>\"\n\n");
+			outputText("You nod your head in understanding; that makes sense.  So, what's the difference between the massages - do-in, she called them? - and acupuncture?  Don't they both do the same thing?\n\n");
+			outputText("Uma smiles and shakes her head.  \"<i>No, dear.  Do-in adjusts the flow of chi, such as increasing output in certain areas, or reducing them... imagine this.  Your chi flows like a river, by enlarging or shrinking the stream, the river's strength will either increase or diminish, correct?  This is what Do-in does, it never cuts the flow of the river, just... adjusts it.</i>\"\n\n");
 			outputText("You tell her that's correct, and you understand the analogy. So, how does acupuncture differ in its effects?\n\n");
 			outputText("\"<i>During acupuncture I pierce key spots in your body with needles; these are much more complicated than Do-in, despite do-in not being simple to begin with.  Basically, using the previous analogy, acupuncture obstructs the flow of the river, so that it can flow elsewhere, or flow differently.  The effects of Do-in are just temporary, which means that given enough time, the river will return to normal, but acupuncture... that is permanent, dear.  Once a new pathway has been made for the flow of chi inside your body, it's there to stay... though with some work it might just be possible to remove the effects...</i>\"  Uma rubs her chin in thought.\n\n");
 			outputText("You nod your head thoughtfully, digesting what you have been told.\n\n");
 			outputText("\"<i>Another key point, is that acupuncture is much more disruptive to the flow of chi than do-in.  Usually, in order to make something better, or different, something else has to change... and not always for the better.  I could make you faster, able to move better, but that would seal some of the chi going into your muscles, which means you would never be as strong as you were meant to be...  though sometimes, depending on what you're trying to achieve, that could actually benefit you.</i>\"  Uma smiles.\n\n");
-			outputText("You tell her that you appreciate her taking the time to explain her job to you; maybe at some point in the future you’ll have a need for her special skills, but, right now, you think you’ve taken enough of her time.\n\n");
+			outputText("You tell her that you appreciate her taking the time to explain her job to you; maybe at some point in the future you'll have a need for her special skills, but, right now, you think you've taken enough of her time.\n\n");
 			outputText("\"<i>It's always pleasure speaking to the [man] that wooed my little Loppe, dear.  Come visit soon, will you?</i>\"\n\n");
 			outputText("You promise you'll try, and then head back to camp.");
 
@@ -916,16 +937,16 @@ package classes.content
 			outputText("You tell her that, if it's not too personal, you'd like to ask her some questions about her sexuality?\n\n");
 			outputText("\"<i>Oh, I'm okay with talking about that.  You're not the first person to ask me about that...</i>\" She looks distant for a short while... but then looks at you and smiles.  \"<i>So, what do you want to know, exactly?</i>\"\n\n");
 			outputText("You think for a while, and finally ask why she considers herself a lesbian?  Won't she have sex with herms too?  Wouldn't that make her bisexual?  In fact... what made her think of herself as a lesbian in the first place?\n\n");
-			outputText("Uma stops to think for a while then replies,  \"<i>Well... I guess it was my studies.  Being an acupuncturist means I have to know a lot about bodies in general... and while I do know all the ins and outs of male anatomy, I've always found girls more... beautiful.</i>\"  She thinks for a while longer, then shrugs.  \"<i>I suppose that’s all I can say about that... I really don't know why I find girls more attractive... I just do.  And, well... I'm not entirely against having sex with males either, so long as they're pretty girly to begin with, so maybe you're right... maybe I'm more bi than lesbian.</i>\"\n\n");
+			outputText("Uma stops to think for a while then replies,  \"<i>Well... I guess it was my studies.  Being an acupuncturist means I have to know a lot about bodies in general... and while I do know all the ins and outs of male anatomy, I've always found girls more... beautiful.</i>\"  She thinks for a while longer, then shrugs.  \"<i>I suppose that's all I can say about that... I really don't know why I find girls more attractive... I just do.  And, well... I'm not entirely against having sex with males either, so long as they're pretty girly to begin with, so maybe you're right... maybe I'm more bi than lesbian.</i>\"\n\n");
 			outputText("So, it's not so much that she's unattracted to dicks as that she needs a fairly feminine face, and preferably physique as well, to get turned on by someone? You ask, interested.  Uma nods.  \"<i>That is correct... I like my partners pretty...</i>\"  She laughs lightly.\n\n");
 			outputText("You ask if that makes it at all challenging to find partners, when she's feeling in the mood?\n\n");
 			outputText("Uma giggles.  \"<i>Not at all.  I find that women in general tend to care more for 'natural medicine' than men... usually when men have chronic back pain, most of them would rather drink some kind of alchemic concoction to make it better, and to be honest it does work well. But the truth is that ingesting too many alchemical ingredients might lead to even more problems later; not to mention the chemical dependency.  Since my pins are a one-time thing, and there's no dependency, I get many visits from the more health conscious populace.  And let's just face it, [name].  Women are just that much more concerned about natural medicine than men... especially when it involves a 7 foot horse-woman inserting needles in their bodies.</i>\"  Uma giggles once more.\n\n");
 			outputText("You ask casually if that implies the few men who do visit tend to be especially likely to be her type?\n\n");
-			outputText("Uma thinks for a while.  \"<i>To be honest it’s a fifty-fifty chance... usually the men that do show up happen to have been sent here by their wives and girlfriends.  Finding girly men is just very rare... though I do get the occasional client.</i>\"\n\n");
+			outputText("Uma thinks for a while.  \"<i>To be honest it's a fifty-fifty chance... usually the men that do show up happen to have been sent here by their wives and girlfriends.  Finding girly men is just very rare... though I do get the occasional client.</i>\"\n\n");
 			outputText("That makes you think, and you ask how much effort Uma has to put into keeping her little tete-a-tetes discrete? After all, you don't think too many boyfriends, husbands or fathers would be happy to hear about her seducing their girlfriends, wives or daughters.\n\n");
 			outputText("Uma smiles at you mischievously.  \"<i>On the contrary, my naive little friend.  This is an oriental clinic, and there are many types of therapy, for various problems, including sex life.  Some of the women I seduce are actually straight, and let's just say sometimes they need to be reminded of what a good penis can do for them.  And the only way to do that, well... is by making them want one in the first place.  A caress here, a press there, a little lick later... and they are practically on fire, orgasming time and again, begging me to fuck them... The only problem though, is that I don't have the equipment.</i>\"  Uma winks at you.  \"<i>Once they leave my clinic, they're satisfied and much hornier than usual.  So the first thing they do is go home to share their pleasure with their husbands.</i>\"\n\n");
 			outputText("You can't resist the wry grin as you comment that it must do wonders for the reputation of her business.\n\n");
-			outputText("Uma nods.  \"<i>It does, but as you can see, the clinic is pretty empty most of the time.  It just so happens that we’re really expensive, especially considering our... extra... services.  But don't worry, [name].  Since you’re my little Loppe's [boyfriend], I'll be happy to give you a pretty good discount on our services.\"\n\n");
+			outputText("Uma nods.  \"<i>It does, but as you can see, the clinic is pretty empty most of the time.  It just so happens that we're really expensive, especially considering our... extra... services.  But don't worry, [name].  Since you're my little Loppe's [boyfriend], I'll be happy to give you a pretty good discount on our services.\"\n\n");
 			outputText("You laugh at that, thanking her for her generosity and her time, and then tell her it's time for you to go.  Uma smiles at you and says, \"<i>Come visit me again soon.</i>\"\n\n");
 			outputText("You promise that you will, and then head out of the quaint little clinic and back to camp.\n\n");
 
@@ -945,8 +966,10 @@ package classes.content
 			outputText("Uma taps her chin, thinking of something to tell you about...\n\n");
 			
 			// random call to one of the loppeTalks functors
-			_loppeTalks[rand(_loppeTalks.length)]();
+			_loppeTalks[rand(_loppeTalks.length - 1)]();
 		}
+
+		private var _sceneNum:int = 0;
 		
 		/**
 		 * Centralise the end-of-talk loppe stuffs
@@ -955,6 +978,7 @@ package classes.content
 		{
 			menu();
 			doNext(13);
+			addButton(1, "Debugz", talkMenu);
 		}
 		
 		/**
@@ -1021,8 +1045,6 @@ package classes.content
 		 */
 		public function talkLoppePuberty():void
 		{
-			clearOutput();
-			
 			outputText("\"<i>By now, you must know about Loppe's stamina, right?  And that her cum production is also... quite elevated too, no?</i>\"  Uma asks, smiling.\n\n");
 			outputText("You can't resist a wry grin as you comment that you might be familiar with what Uma is talking about, yes.\n\n");
 			outputText("\"<i>But, did you know it caused her no end of problems when she was younger?</i>\"\n\n");
@@ -1042,7 +1064,7 @@ package classes.content
 			outputText("\"<i>With lots of patience, love and a helping hand.</i>\"  Uma giggles, making a small pumping motion with her hand, as if stroking an invisible cock.\n\n");
 			outputText("You chuckle at Uma's sense of humor; she's so proud to be a dirty old mare now, isn't she?\n\n");
 
-			if (player.femininity >= 80)
+			if (player.femininity >= UMA_CONSIDER_PC_FEM)
 			{
 				outputText("\"<i>Old? Why you... take off your clothes and hop on my table, I'll show you old!</i>\"  Uma replies with indignation.  \"<i>I promise you that by the time I'm done with you, you won't be able to stand on your own two feet, ");
 				if (player.feet() != "feet")
@@ -1082,26 +1104,24 @@ package classes.content
 		 * 				Calling it 75%. I've been through all of it and some of the tensing seems off in places, but I've cleaned up a bunch of shit. I don't even know if this should stay;
 		 * 				It's good, but it's doesn't exactly fit with the style of anything else in CoC outside of Urta's Quest in a way, so...
 		 */
-		public function talkLoppesLastGirl():void
+		public function talkLoppesFirstGirl():void
 		{
-			clearOutput();
-			
 			outputText("\"<i>Oh, I know what would be a great story...</i>\"  Uma smirks at you.  \"<i>How would you like to hear about my little laquine's first time with a girl?</i>\"\n\n");
-outputText("You give it a moments thought, and tell the mare MILF that would be nice; you're curious about just what Loppe's dating life was like before you met her.  Oh, she talks a bold game, but you're not entirely certain she's being honest with you...\n\n");
-outputText("\"<i>Very well, please make yourself comfortable, it's a bit of a long story.</i>\" Uma suggests, motioning at a nearby chair and taking a seat herself.\n\n");
-outputText("You follow her instructions, wondering just what kind of doozy the mare has to share with you this time.\n\n");
-outputText("\"<i>Back in our old village, there was a prostitute that went by name of Puffy Lips... but we just called her Puff.  Loppe had just blossomed into a beautiful young lady, so it's no surprise she drew plenty of stares when she walked around the streets-</i>\"");
-outputText("Wait, her mother actually named her Puffy Lips?  Seriously?  You interject.\n\n");
-outputText("Uma chuckles.  \"<i>Of course not, dear.  This was just her street name... though her last name was Kuchibiru, which means lips...</i>\"\n\n");
-outputText("You shake your head, not sure you want to ask why she'd use such a street name.  You tell the mare to continue; she was saying that Loppe had been blossoming into a pretty young herm who caught the eyes of many in the village?\n\n");
-outputText("\"<i>Yes.  One day, I had my little Loppe take a request to the local carpenter, which happens to be close to where Puff used to... hunt.</i>\"\n\n");
+			outputText("You give it a moments thought, and tell the mare MILF that would be nice; you're curious about just what Loppe's dating life was like before you met her.  Oh, she talks a bold game, but you're not entirely certain she's being honest with you...\n\n");
+			outputText("\"<i>Very well, please make yourself comfortable, it's a bit of a long story.</i>\" Uma suggests, motioning at a nearby chair and taking a seat herself.\n\n");
+			outputText("You follow her instructions, wondering just what kind of doozy the mare has to share with you this time.\n\n");
+			outputText("\"<i>Back in our old village, there was a prostitute that went by name of Puffy Lips... but we just called her Puff.  Loppe had just blossomed into a beautiful young lady, so it's no surprise she drew plenty of stares when she walked around the streets-</i>\"");
+			outputText("Wait, her mother actually named her Puffy Lips?  Seriously?  You interject.\n\n");
+			outputText("Uma chuckles.  \"<i>Of course not, dear.  This was just her street name... though her last name was Kuchibiru, which means lips...</i>\"\n\n");
+			outputText("You shake your head, not sure you want to ask why she'd use such a street name.  You tell the mare to continue; she was saying that Loppe had been blossoming into a pretty young herm who caught the eyes of many in the village?\n\n");
+			outputText("\"<i>Yes.  One day, I had my little Loppe take a request to the local carpenter, which happens to be close to where Puff used to... hunt.</i>\"\n\n");
 
 			menu();
 			
-			addButton(0, "Next", talkLoppesLastGirlPart2);
+			addButton(0, "Next", talkLoppesFirstGirlPart2);
 		}
 		
-		public function talkLoppesLastGirlPart2():void
+		public function talkLoppesFirstGirlPart2():void
 		{
 			clearOutput();
 			
@@ -1115,16 +1135,16 @@ outputText("\"<i>Yes.  One day, I had my little Loppe take a request to the loca
 			outputText("Loppe nodded and continued to browse... until her eyes set upon a wonderful sight; a slice of carrot cake, fresh from the oven.  Being part rabbit and part horse, two species known to love carrots, Loppe's mouth instantly watered. She eagerly looked into her small purse, but she only had a few coins, not nearly enough to buy the cake.  Loppe sighed, well... best not dwell... maybe when she made it home her mother would be willing to reward her with some coins for her service?\n\n");
 			outputText("With that in mind, Loppe made her way towards the carpenter...\n\n");
 			outputText("Puff was on the prowl, trained eyes of a master quickly scanning the crowd for any potential customer. Heck, she'd settle for just a tryst.  She was getting so desperate for a quick shag she might seriously contemplate working for free.  But everyone seemed to be so busy, no one even turned their heads to look at her. The only one not busy was that young bunny browsing the cake shop...\n\n");
-			outputText("Puff sighted.  Yep, ol' thrusty was going to see some action today.  She was about to turn and head home when a sudden gust of wind hit her right on the face with a stray piece of paper, struggling to remove the offending litter with a growl, she saw... it was as if Marae herself had answered her pleas.  Fourteen inches of equine deliciousness, with a pair of heavy, cum churning balls swinging under it it was enough to make her lick her lips with a wolfish smile, and who was it attached to?  Slowly looking up - what the? - That was the young bunny girl she saw browsing the bakery earlier! The young bunny quickly used her hands to push her short robes down and hide her package, looking left and right to see if anyone had spotted her, then sighing with relief. That must have been embarrassing... But luckily someone did spot her!\n\n");
-			outputText("Somehow, then and there, Puff just knew she <i>had</i> to have that young bunny over for lunch. Taking a quick look at her pocket mirror to see if she was presentable enough she cleared her throat and struck the sexiest pose she could muster whilst leaning against the wall to the carpentry.\n\n");
+			outputText("Puff sighed.  Yep, ol' thrusty was going to see some action today.  She was about to turn and head home when a sudden gust of wind hit her right in the face with a stray piece of paper.  Struggling to remove the offending litter with a growl, she saw... it was as if Marae herself had answered her pleas.  Fourteen inches of equine deliciousness, with a pair of heavy, cum churning balls swinging under it it was enough to make her lick her lips with a wolfish smile, and who was it attached to?  Slowly looking up - what the? - That was the young bunny girl she saw browsing the bakery earlier! The young bunny quickly used her hands to push her short robes down and hide her package, looking left and right to see if anyone had spotted her, then sighing with relief. That must have been embarrassing... But luckily someone did spot her!\n\n");
+			outputText("Somehow, then and there, Puff just knew she had to have that young bunny over for lunch. Taking a quick look at her pocket mirror to see if she was presentable enough she cleared her throat and struck the sexiest pose she could muster whilst leaning against the wall to the carpentry.\n\n");
 			outputText("When Loppe approached the carpentry, written request in hand, a melodic, feminine voice called,  \"<i>Hey, bunny-girl!</i>\"\n\n");
 
 			menu();
 			
-			addButton(0, "Next", talkLoppesLastGirlPart3);
+			addButton(0, "Next", talkLoppesFirstGirlPart3);
 		}
 		
-		public function talkLoppesLastGirlPart3():void
+		public function talkLoppesFirstGirlPart3():void
 		{
 			clearOutput();
 			
@@ -1153,14 +1173,14 @@ outputText("\"<i>Yes.  One day, I had my little Loppe take a request to the loca
 		
 			menu();
 			
-			addButton(0, "Next", talkLoppesLastGirlPart4);
+			addButton(0, "Next", talkLoppesFirstGirlPart4);
 		}
 		
-		public function talkLoppesLastGirlPart4():void
+		public function talkLoppesFirstGirlPart4():void
 		{
 			clearOutput();
 			
-			outputText("<b>Moments later in Puffy Lips’ house...</b>\n\n");
+			outputText("<b>Moments later in Puffy Lips' house...</b>\n\n");
 			outputText("Loppe, swallowing nervously, mustered her courage and managed to knock loudly on the she-wolf's door.  She could hardly believe she was about to do what she was going to do... \n\n");
 			outputText("\"<i>It's open.</i>\" Loppe hears through the door. Well, here goes...\n\n");
 			outputText("Loppe swallows hard, at once loving and hating the foot-long cock already beginning to form itself into a tell-tale bulge in her dress, eyes fixed on the scantily clad form of her soon-to-be lover.  She greedily drinks in the sight of the wolfess' plump, kissable, cock-sucking lips framing her gorgeous face, her beautiful orange eyes hooded in sultry anticipation.  Down her gaze sweeps, over the mighty swell of Puff's bosom, the great mammary orbs covered in her beautiful coffee-cream fur, past her breeder's hips and oh-so-fuckable ass to the swollen, greedy, fem-slime-seeping netherlips from which the whore takes her street name.  Loppe's nose twitches, eagerly drinking in the heady, intoxicating scent of Puff's arousal until she feels drunk on smell alone.\n\n");
@@ -1191,10 +1211,10 @@ outputText("\"<i>Yes.  One day, I had my little Loppe take a request to the loca
 			
 			menu();
 			
-			addButton(0, "Next", talkLoppesLastGirlPart5);
+			addButton(0, "Next", talkLoppesFirstGirlPart5);
 		}
 		
-		public function talkLoppesLastGirlPart5():void
+		public function talkLoppesFirstGirlPart5():void
 		{
 			clearOutput();
 			
@@ -1207,11 +1227,14 @@ outputText("\"<i>Yes.  One day, I had my little Loppe take a request to the loca
 			
 			menu();
 			
-			addButton(0, "Next", talkLoppesLastGirlPart6);
+			addButton(0, "Next", talkLoppesFirstGirlPart6);
 		}
 		
-		public function talkLoppesLastGirlPart6():void
+		public function talkLoppesFirstGirlPart6():void
 		{
+			clearOutput();
+			
+			outputText("<b>Uma's detailed description of events over...</b>\n\n");
 			outputText("...That, you finally manage to say, was quite a story.  So, was Uma really that mad Loppe was out late?\n\n");
 			outputText("\"<i>Not that much, no.  I grounded her of course, but when I learned what she had done... then I was really mad.  I taught my little girl better than to hang out with Puffy Lips and her kind.  Though I suppose some good came of it, since she stopped having wet dreams about that vulgar wolf bitch.</i>\"\n\n");
 			outputText("Having done it with her for real meant the dreams were no longer as interesting? You suggest.\n\n");
@@ -1237,285 +1260,285 @@ outputText("\"<i>Yes.  One day, I had my little Loppe take a request to the loca
 		
 		/**
 		 * Talk Loppe - Loppe's First Boyfriend
-		 * Edit Status: FUCK ALL
+		 * Edit Status: 75% Some akwardness, and its fukken long. I did what I could without stomping all over everything.
 		 */
 		public function talkLoppesFirstBoyfriend():void
 		{
-			/*
-			“How about I tell you about Loppe’s first boyfriend?”  Uma suggests.
-
-You tell Uma that sounds like an interesting story, and you kindly ask her to proceed.
-
-“Okay.  This happened a while after my little Loppe blossomed into pretty young lady.  She used to go to this art school, where she learned how to dance, and one of her colleagues was a black cat boy by the name of Hyou.  He was very handsome... had green eyes that resembled polished gems, his black fur was always well kept and on top of all that he was nice, someone pleasant to be around.  He was Loppe’s senior and was the first person to greet her when she started attending the school.”
-
-You can’t resist joking that, if you didn’t know about Uma’s tastes in lovers, hearing her talking about him in such glowing praises would make you half expect the reason they broke up to be because Loppe found him fucking her mother one day.
-
-“Don’t be silly, dear.  If you knew him as well as I do, you’d know there is absolutely no way there could ever be anything between us.”
-
-You ask her exactly what she means, feeling she’s talking about more than sexual incompatibilities here.
-
-“If you really want to know, you’ll just have to listen to my story.”  Uma smiles.
-
-You laugh softly and promise to shut up and listen.
-
-“Very well.  He was always surrounded by girls, it’s tough to find someone as good looking and as nice as he was, and initially Loppe wasn’t very close to him at all... that came later, when my little Loppe was having troubles keeping up with the class.  Turns out Loppe had absolutely no talent when it comes to dancing... and since she was so determined to become a good dancer, Hyou offered to tutor her.”
-
-You note with admiration that Loppe must have worked hard; she dances so wonderfully now, you’d hardly believe it was entirely hard work instead of at least a little natural talent for it.
-
-“Back then, there weren’t many people who knew about Loppe’s extra appendage, so they all just assumed she was a girl.  Hyou was the same, but...”
-
-You ask how that could have happened, given the mentions Uma and Loppe have both made of her gender posing... difficulties during puberty.  Did Uma and Loppe end up moving to a new village where they didn’t know about Loppe’s hermaphrodite gender?
-
-“If you know the right people, changing your gender is not so difficult, dear.  People just assumed she paid a visit to the local shaman... She is not ashamed of her gender, but it’s not something you go advertising everywhere you go either...”
-
-Ah, you reply.  So that’s it, you note to yourself; her accidents happened before she grew her boobs and female curves, resulting in them believing she was a boy who changed himself into a girl, rather than having been boy and girl at the same time all along.
-
-“Well, one day while dancing Loppe’s shorts ripped up and exposed her... right in front of Hyou, too.  Needless to say, she was very embarrassed to be in such a predicament.  But Hyou... well... he gallantly helped Loppe to her feet and loaned her a towel so she could head home.”  Uma laughs, reminiscing the event.
-
-You smile and note that’s one odd way to get into a girl’s good books.
-
-“Anyway... Loppe had always admired him and his feline grace while dancing, and after the incident, she was thrilled to know that Hyou hadn’t spoken a single word about Loppe’s gender to her classmates... or anyone else for that matter... in fact... they just became closer.  Hyou continued to tutor Loppe, and slowly she got better and better, until one day Hyou surprised her with a request... do you know what he said?”  Uma asks, clapping her hands together lightly.
-
-He asked her if they could make love?  You suggest.
-
-“No, silly.  He asked her out...”
-
-Well, that’s a surprise, you say; you didn’t think people still took it that slow in Mareth.
-
-“Not everyone is crazy about getting into each other’s pants all the time dear...” Uma scolds you.  “If we did that all the time we wouldn’t have to do anything but sleep with each other all the time, you know?”
-
-You apologise; there’s so many monsters out in the wilderness who do think precisely that way that it’s hard to remember there are still normal people, sometimes.
-
-“It wasn’t always like this... back then we were just simple people trying to live simple lives...”
-
-You admit that, and tell her to continue.
-
-“So they started dating.  And as is normal for a young couple, one day, after they had come back from a nice dinner... he suggested that he wanted to see Loppe naked.”
-
-//Cutout starts here.
-
-“There’s no need to be ashamed Loppe... I’m your boyfriend... and all I want to do is see my beautiful laquine girlfriend in all her glory.  You aren’t going to deny me that, are you?”  He asks hopefully. 
-
-Loppe swallows, hands flush over her crotch in an effort to conceal her swelling erection. ‘Why am I such a sucker for sweet talk?’ She mentally laments.  “I...I don’t want to deny you, Hyou, but... are you sure?  I mean, I haven’t forgotten that you didn’t say anything about it to the others, but there’s a difference actually seeing it up close...” She pleads.
-
-Hyou smiles and closes the distance between them, gently hugging Loppe and pulling her into a tender kiss.  Once they break he whispers in her ear, “I know what you’re hiding in there... and I really want to see it again... won’t you show it to me again?  Please? Purrrrrty please?”
-
-Blushing through her fur, Loppe nods her head. “O-okay.  Just remember, you asked for it.” She warns him weakly.  Taking a few steps back, literal ponytail swishing gently on her rump, she slips out of her shorts, letting them slide down her legs onto the floor, and then lifts her shirt for added measure.  “There.  Can you see it now?”  She asks, trying to be bold, but unable to look the cat in the eye or keep herself from blushing.
-
-“Not quite... but let me help you.”  He boldly reaches forward and gives Loppe’s equine-prick a few strokes, coaxing it into a full blown hard-on.
-
-The rabbit-horse moans softly as it swells to all fourteen inches of mottled pink horse-dick, jutting erect and proud, defiant of its mistress.
-
-“Now, that’s better...” Hyou says, circling Loppe to examine her from every angle.  “Hmm...yes.  Truly beautiful...”  He comment, purring softly.
-
-The bunny-pony blushes and wriggles.  “Y-you know, it’s really weird you telling me that?” She protests in a half-hearted fashion.  “But... If I gotta show you mine, then you gotta show me yours!” She says, trying to sound more confident than she really is.
-
-Hyou chuckles.  “I thought you were never going to ask!”  He slowly strips himself, dancing and prancing as he removes each piece of his garments until, with a flourish, he finally peels off his underwear and carelessly disposes of it, tossing it away.  “And this is my birthday suit.”  He grins.
-
-Loppe’s eyes lock onto his nakedness like a starving wolf onto a bloody steak, greedily drinking in the sight of him, particularly focusing with eagerness on his jutting, spiky-looking cat-dick.
-
-Hyou looks between his erect kitty-prick and Loppe’s own horse-cock, noting the obvious difference in size.  “Well... well... not only are you taller than I am... you’re also bigger in that department too...  I guess it’s to be expected... I am competing with a horse-bunny after all.”  He winks at Loppe.
-
-The aforementioned “horse-bunny” blinks in confusion, then realises that the shaft she’s been staring at is anywhere from one-third to one-half the length of her own, and she claps her hands over her mouth aghast.  “Hyou, I’m sorry, I...”  She begins, half-expecting a rejection because of this fact.
-
-“Sorry for what?”  Hyou interjects.  “I knew what I was getting into when we started dating.  Relax Loppe.  When I said you were beautiful, I meant all of you, even this hefty pony you carry between your legs.”  He grins happily.
-
-Loppe smiles softly.  “You are such a flatterer, you know that?  But, enough with the foreplay - when do we get to the combobulating?” She mock-whines.
-
-“Combobulating?”  Hyou asks in curiosity.  “Where did you hear such a word?  And what does it even mean?”
-
-“From one of my mom’s books - you know, the ones that have blank covers on?  And what do you think it means, given the context I’m using it in?  Now, are you taking me to bed, or am I going to have to push you into bed?”  She laughs, giving a playful growl to underscore that her confidence is up and she’s ready to fuck.
-
-“Only if you can catch me.”  Hyou raspberries Loppe, getting ready to avoid his girlfriend’s lusty advances.
-
-With the best growl she can manage, the horse-dicked rabbit hops through the air to snatch her feline boyfriend, but he jumps away with a laugh.  Gracefully he dances around and around the bedroom, the increasingly frustrated rabbit trying to cut him off.  Finally, with one perfectly timed leap, she slams into him and knocks him over onto the bed with a mutual ‘whoof!’ of startled shock.  Belly to belly they catch their breath, and then Loppe rises back up, completing the pinning maneuver.  “Haha, caught you!”  Loppe taunts, then blinks in surprise; what’s that funny-nice feeling?  Rearing back, she looks down at their two bellies, seeing their mutual erections rubbing their sensitive flesh against each other, a sight which makes her blush.  “S-sorry, Hyou, I didn’t mean to...”  
-
-“Don’t worry about that, I don’t mind.  So... you managed to catch me... what do you intend to do with me now?  Hmm?”  Hyou asks, ears twitching cutely.
-
-She trails off, looking at the smug smirk of the cat beneath her.  “Alright, time for fooling is over; let’s try something from one of my mom’s books.”  With the awkwardness of someone who’s never actually done this before, Loppe pivots in her “seat” in Hyou’s lap, rotating around until she’s facing away from him.  “Okay, let me see... just gotta find your dick... damn it’s hard to do this when your own dick is in the way.” She mutters to herself, wriggling around in an effort to try and line up her waiting pussy with Hyou’s shaft.
-
-Hyou moans as Loppe gyrates her hips.  “That feels good... even if I’m not in yet...”  He begins gyrating his hips as well, rubbing himself against Loppe, which only serves to make Loppe’s task more difficult.
-
-Loppe moans.  “Y-you know, if you want to help, you could try and slot this into the right hole, instead of rubbing it against my pussy - yee!  I think you just rubbed that one through my balls and up along my cock!  Where are you aiming?” She shakes her head strongly, coincidentally flicking her partner in the face with her ears. “Okay, that’s it, stay still - let me handle this.” Loppe  commands. 
-
-Hyou laughs.  “Okay... okay... I’m sorry, couldn’t resist it!  You look so cute when you’re frustrated!  Alright then... I’ll hold still...”  He says, gently guiding the tip of his feline-cock towards Loppe’s drooling pussy.  “There, I’m even helping this time.”
-
-“If I could reach you from this position, I’d kiss you.” Loppe proclaims happily.  Her tail swishes across the cat’s belly with anticipation, while the rest of her holds still, ready to be penetrated.
-
-“Just sit down and I’ll be inside.” 
-
-Loppe needs no further instructions and promptly flops down; luckily for her, the active lifestyle of a rabbit/horse hybrid means she lost her hymen as a result of an awkward leg positioning some time ago.  This doesn’t keep her from squealing in pleasured shock as she envelops her lover’s cock in one go.  She sits there, feeling the strange yet wonderful sensation inside her belly from her partner’s cock, doing her best to squeeze and grip the intruding appendage with her pussy, like feeling it with her hands.
-
-Hyou purrs and moans, hands moving to hold Loppe’s hips steady.  “You know... as good as your pussy feels, unless you start moving nothing’s going to come, right?”
-
-Wordlessly the laquine nods and begins to rise up and down, moaning and hissing as she truly loses her feminine virginity, riding her feline lover clumsily, but enthusiastically.  “This... oh... this feels so good, Hyou!”
-
-The feline moans.  “Yeah... so good...”
-
-Addled as she is by pleasure, Loppe can still hear the reaction.  “Hey, what’s wrong?  Aren’t you enjoying this?  I know I am!”
-
-“No!  I mean yes!  Of course I’m enjoying it... wow this feels great!”  He says, trying to save face.
-
-“Well, you don’t sound too happy... what’s wrong?  You just not like this position?”  Loppe asks, trying to be understanding.
-
-“I’m sorry Loppe... I don’t know what’s gotten into me... it does feel nice, but I’m just not feeling... y’know.  Maybe it is the position... try turning around?”  He suggests.
-
-With a moan as the action stretches her in just the right way, the laquine awkwardly spins around, leaving her pre-dribbling dick and balls slapping against her feline lover and her breasts positioned right in front of his eyes.  “I’ll try not to give you a facial when we really get going, okay?”  She promises.
-
-Hyou’s shaft throbs, dribbling pre within the laquine’s depths.  “Oh yesss...”  Hyou purrs.  “Now that’s a sight I can appreciate... and personally?  I don’t mind if you do give me a facial... but I appreciate the consideration, now get moving girl!”  Hyou says, excitedly.
-
-Excited, Loppe resumes her bouncing, unthinkingly rubbing her cock against her lover’s belly and shivering at the extra friction on its engorged, sensitive surfaces.  “Ah, Hyou, you feel so good inside of me!”  She whimpers.
-
-Hyou moans and groans, eyes glued to Loppe’s bouncing shaft.  “Yeah!  It feels great!  Slap my belly with that big pony of yours!”
-
-“K-kuh!-kinky b-buh-boy!” Loppe groans, reaching out and grabbing his head and pulling him into an embrace, coincidentally planting his face right amongst her breasts even as she continues to grind her cock into his belly.
-
-“Oh babe!  You’re so sexy! I knew I picked a winner when I first saw you... Ah! Almost there!”  He yowls, bucking against Loppe.  “Damn that horse-cock of your!  Bouncing around!  Slapping my belly!  Teasing me!  Ah!  So hot!” 
-
-A distant part of Loppe’s mind catches these words and files them away with suspicion.  The rest of it is too busy melting at the sensations of losing her female virginity.  She continues to eagerly buck and thrust and impale herself, anxious in pushing on to her first “real” climax as a woman.
-
-Hyou yowls one last time and bucks against Loppe, his claws digging on her his as he goes cross-eyed, looking straight at a dollop of pre that seems to have formed on the flared tip of Loppe’s member.  Finally, he relaxes and lets his orgasm overtake him, spewing rope after rope of cum inside Loppe’s eager pussy.
-
-The laquine moans in pleasure at the sudden sensation of being filled... then blinks in surprise as she feels the cat-prick inside her needy pussy going soft.  “What’s wrong?  What happened?” She asks, baffled; she tries to ride the limp dick a little more, but it’s futile.
-
-Panting, but unable to hide the rumbling purr rising from his chest, Hyou sighs.  “S - Sorry Lops.  That was... AMAZING... couldn’t help myself.”
-
-“That’s all well and good, I’m feeling pretty amazing myself, but I’m not done yet!  Come on, get hard again so we can keep going - you can’t be feeling all limp already, not after just one cum!” The frustrated laquine declares.  She continues to rise and fall, “come on, surely you can go for at least half an hour!”
-
-“H - Half an hour!”  Hyou groans, flopping on Loppe’s bed limply.
-
-“That’s normal, isn’t it?  I mean, I can go for three times that long before I’m sated...” Loppe asks, nervously.
-
-Hyou rises his head.  “Normal?  I came once and am already spent... you are kidding right?”  He asks, laughing nervously at the frustrated laquine.
-
-“So what am I going to do?  I haven’t even cum once yet!” She whines.
-
-Sighing, Hyou looks at Loppe’s cock... then back at Loppe... he smiles.  “Tell you what.  Since you let me fill you... and I just can’t get another erection for a while... how about I let you fill me instead?  Would you like that?”
-
-“But... I wanted to be fucked like a girl... besides, you’re a boy, I can’t fuck you with a cock.”  The laquine whimpers.
-
-Figuring it’s pointless to argue with Loppe in her current state, he takes Loppe’s cock in his hands and bends over to give it a lick; a task that proves easy, given his feline flexibility.
-
-Loppe moans and shudders, wriggling with pleasure as a spurt of pre flies from her flared tip to splatter onto her feline lover’s face.
-
-Hyou smiles and takes Loppe’s equine member into his mouth, sucking and slurping on it like a lollipop.
-
-Mouth opening and closing wordlessly like a fish, the laquine’s eyes roll in her head as she is overwhelmed by the delicate touches on her over-sensitised shaft.
-
-Finally, with one last slurp he lets go of Loppe’s cock and, smiling, asks,  “You sure you don’t want to take me instead?”
-
-“I...okay... but, how do I do that?”  The bewildered bunny asks. “You don’t have a pussy, unless you’ve been hiding something from me, and I don’t want to just have you suck and lick on me; that’s no fun for you, then.” She notes.
-
-“Silly girl...”  He remarks.  “Mind getting off me for an instant?”  He asks, innocently.
-
-Confused, the laquine pulls herself off of her lover, allowing his cum-slick cock to wetly slurp its way out of her.  She scoots over to the side of the bed, wondering what he has in mind.
-
-Hyou rolls around on his belly, lifting his tail and presenting his ass to Loppe, then casually reaches back and spreads his cheeks apart, giving Loppe a first-hand view of his, yet unused, little rosebud.  “See?  I got a hole too!”  He grins.
-
-Ordinarily, Loppe would have protested against the idea of fucking anyone, boy or girl or herm, up the ass.  However, ordinarily, Loppe would not have been as horny as she was, and she promptly leaps up behind him, rubbing her long cock between the spread cheeks of his ass.  However, she holds back from actually penetrating.  “Hyou? P...Please?”  Loppe meekly suggests, looking at him with big doe eyes.  “Promise me you’ll take turns at filling my pussy, too?”
-
-Moaning and purring demurely, Hyou replies,  “S - Sure.  Now jam that wonderful pony of yours in!”  He says, overwhelmed with lust.
-
-Licking her lips in anticipation of finally being sated, the young laquine begins slowly pushing her cock against the tightness of her lover’s virginal ass...
-
-Hyou yowls in a mixture of pain and pleasure.  “Mrrrow!  That feels great!  Ha... Loppe, babe!  Your cock feels amazing!”  He bucks back taking in even more of Loppe inside.
-
-“Excited, are we?  Well, just don’t hurt yourself - I’m not exactly teeny-tiny here!” Loppe giggles, too caught up in the sensations of the cat-morph’s hot, tight little anus wrapping itself slowly around her shaft to be suspicious of his reactions.
-
-“Don’t care!  Ah, Marae!  S - Shit... getting hard again!”  
-
-“Well, make sure you get that ready to fuck me with after I get off for the first time!” The laquine boasts, even as she relentlessly pushes herself forward until she finally manages to hilt herself in her partner.  Waiting a few moments to let him accommodate her properly, she starts to thrust in and out; with her half-done state, she’s confident she’ll cum inside of him before he cums again.
-
-One very long, messy, multi-orgasmic bout of sex later...
-
-Hyou purrs, licking at his cum-caked arms, happily.  His belly is distended with the massive amount of laquine-cum sloshing about inside.  “Wow... I have to say Loppe... you’re one of a kind... Best sex ever!”  He sighs, continuing to lick at his arms.  “Sorry for only getting you off on your female half once.  I swear I don’t know what’s wrong with me... but it just felt so good when you started fucking me with that wonderful, big, horse-cock of yours, that I just lost it... sorry.”
-
-“It’s okay, Hyou...” Loppe sighs.  She cradles her stomach, which looks no different than it did when she started, and looks enviously at the engorged midriff of her boyfriend, very visible proof of her masculine potency.  “Still, we’ll try and concentrate more on that part next time, okay?” She asks.
-
-//cutout ends here.
-
-You can’t resist dryly pointing out that maybe it wasn’t so much the girl part of Loppe that Hyou was interested in when he started dating the young dickgirl.  You would not be too surprised if Uma told you that the “next time” never came - or, at least, the version of it that Loppe wanted never came.
-
-“Yes, dear.  I’m afraid that’s true... Hyou is as manly as a harpy, I’m afraid.”  She chuckles.  “Now you see why there would never have been anything between the two of us, huh?”
-
-A gay man and a gay woman; the very opposite of compatibilities.  So, you ask, raising an eyebrow for emphasis; in denial, or just didn’t realise it until that first night?
-
-“He never really fancied any girls before my Loppe, though he was friends with plenty of them, and I know for a fact he used to get plenty of love letters too.  So I would bet on him not knowing it.  Plus it was kinda unexpected, you know?  He was the son of village’s most renowned hunter, a well-known womanizer, I should let you know.”  Uma chuckles.  “I suppose he really didn’t take after his father.”
-
-Same attitude, different sex on the receiving end, you suggest?
-
-“After that night, yes.  He came out to Loppe too... she took it nicely, I think.  They continued to date for a while, though Loppe often had to coax him into using her pussy too... if I remember what my little ears heard right.”  She flicks her ears for emphasis.  “Those coaxings would involve the ravishing of Hyou’s ass via horse-cock.”
-
-You comment you’re surprised Loppe took it so well; for most girls, hearing they “turned a boy gay by having sex with him” would be a major wound to their self-esteem.
-
-“Loppe didn’t turn him gay though... come on... everything about that boy pointed towards this outcome... he was a petite cat boy, who liked dancing and didn’t hang out with guys... preferring instead to hang out with girls, and I mean that as friends, not lovers.  Not many were surprised when he came out... save for a few of the more naive girls.  Plenty of tears were shed... Loppe was fine though, she had a cute boyfriend.  Unfortunately it was not meant to be,”
-
-He found a guy he liked better and broke up with her as a result? You suggest casually.
-
-Uma shakes her head.  “No.  Actually they broke up because he couldn’t keep up with Loppe’s stamina... it was either break up with her or give up dancing... and walking.”
-
-You heave a sigh; a somewhat sad outcome, you must concede, but inevitable, you suppose. A truly bisexual herm and a homosexual male probably weren’t really that comfortable with each other in a relationship anyway.  You note Loppe was probably happy, deep down, to call an end to it.
-
-“To be quite honest, there wasn’t any bitterness in their breaking up.  And they formed a pretty cute couple too, and for a while they were satisfied with each other.  But Loppe unfortunately was wearing the poor boy down, he was the one falling behind in dancing class after that.”  Uma sighs.  “In fact... it was Loppe who suggested they break up.  They carried on as good friends though, with the eventual benefit... and Hyou said he would support Loppe all the way if she found someone she liked and that was able to keep up with her.”
-
-You tell her that turn of events doesn’t surprise you; Loppe’s got a good heart under her breasts.  And quite a fire in her loins, too, but, hey, nobody’s perfect.
-
-Uma laughs.  “That she does, dear... that she does.  But in case you’re curious.  Hyou eventually found another guy, a wandering foreigner, and decided to leave the village with him.  And that was the last time we saw him.  Hope he is ok, wherever he is...”  Uma looks into the distance.
-
-You tell her that you hope so, too, but it’s time for you to leave.
-
-“Very well, dear.  Hope you don’t disappoint... if you ever have to pick between walking and my daughter, I hope you’ll pick my daughter.”  She jokes, chuckling to herself.
-
-You chuckle and tell her that if Loppe hasn’t chased you off despite the fact she’s twice as bad as she ever was, if not worse, then you’re not likely to make that choice against her favor soon.  That said, you take your things and head back to camp.*/
-
+			outputText("\"<i>How about I tell you about Loppe's first boyfriend?</i>\"  Uma suggests.\n\n");
+			outputText("You tell Uma that it sounds like an interesting story, and you kindly ask her to proceed.\n\n");
+			outputText("\"<i>Okay.  This happened a while after my little Loppe blossomed into pretty young lady.  She used to go to an art school, where she learned how to dance, and one of her colleagues was a black cat boy by the name of Hyou.  He was very handsome.  He had green eyes that resembled polished gems, his black fur was always well kept and on top of all that he was nice, someone pleasant to be around.  He was Loppe's senior and was the first person to greet her when she started attending the school.</i>\"\n\n");
+			outputText("You can't resist joking that, if you didn't know about Uma's tastes in lovers, hearing her talking about him in such glowing praises would make you half expect the reason they broke up to be because Loppe found him fucking her mother one day.\n\n");
+			outputText("\"<i>Don't be silly, dear.  If you knew him as well as I do, you'd know there is absolutely no way there could ever be anything between us.</i>\"\n\n");
+			outputText("You ask her exactly what she means, feeling she's talking about more than sexual incompatibilities here.\n\n");
+			outputText("\"<i>If you really want to know, you'll just have to listen to my story.</i>\"  Uma smiles.\n\n");
+			outputText("You laugh softly and promise to shut up and listen.\n\n");
+			outputText("\"<i>Very well.  He was always surrounded by girls, it's tough to find someone as good looking and as nice as he was, and initially Loppe wasn't very close to him at all... that came later, when my little Loppe was having troubles keeping up with the class.  Turns out Loppe had absolutely no talent when it comes to dancing, but since she was so determined to become a good dancer, Hyou offered to tutor her.</i>\"\n\n");
+			outputText("You note with admiration that Loppe must have worked hard; she dances so wonderfully now, you'd hardly believe it was entirely hard work instead of at least a little natural talent for it.\n\n");
+			outputText("\"<i>Back then, there weren't many people who knew about Loppe's extra appendage, so they all just assumed she was a girl.  Hyou was the same, but...</i>\"\n\n");
+			outputText("You ask how that could have happened, given the mentions Uma and Loppe have both made of her gender posing... difficulties during puberty.  Did Uma and Loppe end up moving to a new village where they didn't know about Loppe's dual-gendered nature?\n\n");
+			outputText("\"<i>If you know the right people, changing your gender is not so difficult, dear.  People just assumed she paid a visit to the local shaman. She is not ashamed of her gender, but it's not something you should freely advertise everywhere you go either.</i>\"\n\n");
+			outputText("Ah, you reply.  So that's it, you note to yourself; her accidents happened before she grew her boobs and female curves, resulting in them believing she was a boy who changed himself into a girl, rather than having been boy and girl at the same time all along.\n\n");
+			outputText("\"<i>Well, one day while dancing Loppe's shorts ripped up and exposed her, right in front of Hyou, too.  Needless to say, she was very embarrassed to be in such a predicament.  But Hyou, well... he gallantly helped Loppe to her feet and loaned her a towel so she could head home.</i>\"  Uma laughs, reminiscing the event.\n\n");
+			outputText("You smile and note that's one odd way to get into a girl's good books.\n\n");
+
+			outputText("\"<i>Anyway, Loppe had always admired him and his feline grace while dancing, and after the incident, she was thrilled to know that Hyou hadn't spoken a single word about Loppe's gender to her classmates. Or anyone else for that matter. In fact, they just became closer.  Hyou continued to tutor Loppe, and slowly she got better and better, until one day Hyou surprised her with a request. Do you know what he asked?</i>\"  Uma asks, clapping her hands together lightly.\n\n");
+			outputText("He asked her if they could make love?  You suggest.\n\n");
+			outputText("\"<i>No, silly.  He asked her out.</i>\"\n\n");
+			outputText("Well, that's a surprise, you say; you didn't think people still took it that slow in Mareth.\n\n");
+			outputText("\"<i>Not everyone is crazy about getting into each other's pants all the time dear</i>\" Uma scolds you.  \"<i>If we did that all the time we wouldn't have to do anything but sleep with each other all the time, you know?</i>\"\n\n"); // I dont even know.
+			outputText("You apologise; there's so many monsters out in the wilderness who do think precisely that way that it's hard to remember there are still normal people, sometimes.\n\n");
+			outputText("\"<i>It wasn't always like this, back then we were just simple people trying to live simple lives.</i>\"\n\n");
+			outputText("You admit that, and tell her to continue.\n\n");
+			outputText("\"<i>So they started dating.  And as is normal for a young couple, one day, after they had come back from a nice dinner, he suggested that he wanted to see Loppe naked.</i>\"\n\n");
+			
+			menu();
+			
+			addButton(0, "Next", talkLoppesFirstBoyfriendPart2);
 		}
 		
+		public function talkLoppesFirstBoyfriendPart2():void
+		{
+			clearOutput();
+			
+			outputText("<b>Some years ago...</b>\n\n");
+			outputText("\"<i>There's no need to be ashamed Loppe... I'm your boyfriend, and all I want to do is see my beautiful laquine girlfriend in all her glory.  You aren't going to deny me that, are you?</i>\"  He asks hopefully.\n\n");
+			outputText("Loppe swallows, hands flush over her crotch in an effort to conceal her swelling erection. 'Why am I such a sucker for sweet talk? She mentally laments.  \"<i>I...I don't want to deny you, Hyou, but... are you sure?  I mean, I haven't forgotten that you didn't say anything about it to the others, but there's a difference actually seeing it up close</i>\" She pleads.\n\n");
+			outputText("Hyou smiles and closes the distance between them, gently hugging Loppe and pulling her into a tender kiss.  Once they break he whispers in her ear, \"<i>I know what you're hiding in there... and I really want to see it again... won't you show it to me again?  Please? Purrrrrty please?</i>\"\n\n");
+			outputText("Blushing through her fur, Loppe nods her head. \"<i>O-okay.  Just remember, you asked for it.</i>\" She warns him weakly.  Taking a few steps back, literal ponytail swishing gently on her rump, she slips out of her shorts, letting them slide down her legs and onto the floor, and then lifts her shirt for added measure.  \"<i>There.  Can you see it now?</i>\"  She asks, trying to be bold, but unable to look the cat in the eye or keep herself from blushing.\n\n");
+			outputText("\"<i>Not quite... but let me help you.</i>\"  He boldly reaches forward and gives Loppe's equine-prick a few strokes, coaxing it into a full blown hard-on.\n\n");
+			outputText("The rabbit-horse moans softly as it swells to all fourteen inches of mottled pink horse-dick, jutting erect and proud, defiant of its mistress.\n\n");
+			outputText("\"<i>Now, that's better</i>\" Hyou says, circling Loppe to examine her from every angle.  \"<i>Hmm... yes.  Truly beautiful</i>\"  He comments, purring softly.\n\n");
+			outputText("The bunny-pony blushes and wriggles.  \"<i>Y-you know, it's really weird you telling me that?</i>\" She protests in a half-hearted fashion.  \"<i>But... If I gotta show you mine, then you gotta show me yours!</i>\" She says, trying to sound more confident than she really is.\n\n");
+			outputText("Hyou chuckles.  \"<i>I thought you were never going to ask!</i>\"  He slowly strips himself, dancing and prancing as he removes each piece of his garments until, with a flourish, he finally peels off his underwear and carelessly disposes of it, tossing it away.  \"<i>And this is my birthday suit.</i>\"  He grins.\n\n");
+			outputText("Loppe's eyes lock onto his nakedness like a starving wolf onto a bloody steak, greedily drinking in the sight of him, particularly focusing with eagerness on his jutting, spiky-looking cat-dick.\n\n");
+			outputText("Hyou looks between his erect kitty-prick and Loppe's own horse-cock, noting the obvious difference in size.  \"<i>Well well... not only are you taller than I am, you're also bigger in that department too.  I guess it's to be expected, I am competing with a horse-bunny after all.</i>\"  He winks at Loppe.\n\n");
+			outputText("The aforementioned \"<i>horse-bunny</i>\" blinks in confusion, then realises that the shaft she's been staring at is anywhere from one-third to one-half the length of her own, and she claps her hands over her mouth aghast.  \"<i>Hyou, I'm sorry, I...</i>\"  She begins, half-expecting a rejection.\n\n");
+			outputText("\"<i>Sorry for what?</i>\"  Hyou interjects.  \"<i>I knew what I was getting into when we started dating.  Relax Loppe.  When I said you were beautiful, I meant all of you, even this hefty pony you carry between your legs.</i>\"  He grins happily.\n\n");
+			outputText("Loppe smiles softly.  \"<i>You are such a flatterer, you know that?  But, enough with the foreplay - when do we get to the real action?</i>\" She mock-whines.\n\n");
+			outputText("\"<i>Action?</i>\"  Hyou asks in mock confusion.  \"<i>Whatever do you mean bun?</i>\"\n\n");
+			outputText("Loppe pouts for a moment, feigning displeasure.  \"<i>Are you taking me to bed, or am I going to have to push you into it?</i>\"  She laughs, giving a playful growl to underscore that her confidence is up and she's ready to fuck.\n\n");
+			outputText("\"<i>Only if you can catch me.</i>\"  Hyou raspberries Loppe, getting ready to avoid his girlfriend's lusty advances...\n\n");
+			outputText("With the best growl she can manage, the horse-dicked rabbit hops through the air to snatch her feline boyfriend, but he jumps away with a laugh.  Gracefully he dances around and around the bedroom, the increasingly frustrated rabbit trying to cut him off.  Finally, with one perfectly timed leap, she slams into him and knocks him over onto the bed with a mutual 'whoof!' of startled shock.  Belly to belly they catch their breath, and then Loppe rises back up, completing the pinning maneuver.  \"<i>Haha, caught you!</i>\"  Loppe taunts, then blinks in surprise; what's that funny-nice feeling?  Rearing back, she looks down at their two bellies, seeing their mutual erections rubbing their sensitive flesh against each other, a sight which makes her blush.  \"<i>S-sorry, Hyou, I didn't mean to...</i>\"  \n\n");
+			outputText("\"<i>Don't worry about that, I don't mind.  So, you managed to catch me... what do you intend to do with me now?  Hmm?</i>\"  Hyou asks, ears twitching cutely.\n\n");
+
+			menu();
+
+			addButton(0, "Next", talkLoppesFirstBoyfriendPart3)
+		}
+		
+		public function talkLoppesFirstBoyfriendPart3():void
+		{
+			clearOutput();
+			
+			outputText("She trails off, looking at the smug smirk of the cat beneath her.  \"<i>Alright, the time for fooling is over; let's try something from one of my mom's books.</i>\"  With the awkwardness of someone who's never actually done this before, Loppe pivots in her \"seat\" in Hyou's lap, rotating around until she's facing away from him.  \"<i>Okay, let me see... just gotta find your dick... damn it's hard to do this when your own dick is in the way.</i>\" She mutters to herself, wriggling around in an effort to try and line up her waiting pussy with Hyou's shaft.\n\n");
+			outputText("Hyou moans as Loppe gyrates her hips.  \"<i>That feels good, even if I'm not in yet.</i>\"  He begins gyrating his hips as well, rubbing himself against Loppe, which only serves to make Loppe's task more difficult.\n\n");
+			outputText("Loppe moans.  \"<i>Y-you know, if you want to help, you could try and slot this into the right hole, instead of rubbing it against my pussy - yee!  I think you just rubbed that one through my balls and up along my cock!  Where are you aiming?</i>\" She shakes her head strongly, coincidentally flicking her partner in the face with her ears. \"<i>Okay, that's it, stay still - let me handle this.</i>\" Loppe commands. \n\n");
+			outputText("Hyou laughs.  \"<i>Okay, okay.  I'm sorry, couldn't resist it!  You look so cute when you're frustrated!  Alright then, I'll hold still...</i>\"  He says, gently guiding the tip of his feline-cock towards Loppe's drooling pussy.  \"<i>There, I'm even helping this time.</i>\"\n\n");
+			outputText("\"<i>If I could reach you from this position, I'd kiss you.</i>\" Loppe proclaims happily.  Her tail swishes across the cat's belly with anticipation, while the rest of her holds still, ready to be penetrated.\n\n");
+			outputText("\"<i>Just sit down and I'll slip right in!</i>\" \n\n");
+			outputText("Loppe needs no further instructions and promptly flops down; luckily for her, the active lifestyle of a rabbit-horse hybrid resulted in the accidental loss of her hymen years ago.  That doesn't keep her from squealing in pleasured shock as she envelops her lover's cock in one swift motion.  She sits there, feeling the strange yet wonderful sensation inside her belly from her partner's cock, doing her best to squeeze and grip the intruding appendage with her pussy, like feeling it with her hands.\n\n"); // PAGING FENOXO -- I don't even know what to do with this. It's still akward, but better than it was.
+			outputText("Hyou purr-moans, hands moving to hold Loppe's hips steady.  \"<i>You know, as good as your pussy feels, unless you start moving nothing's going to happen, right?</i>\"\n\n");
+			outputText("Wordlessly the laquine nods and begins to rise up and down, moaning and hissing as she truly loses her feminine virginity, riding her feline lover clumsily, but enthusiastically.  \"<i>This, oh... this feels so good, Hyou!</i>\"\n\n");
+			outputText("The feline moans.  \"<i>Yeah!  So good.</i>\"\n\n");
+			outputText("Addled as she is by pleasure, Loppe can still hear the reaction.  \"<i>Hey, what's wrong?  Aren't you enjoying this?  I know I am!</i>\"\n\n");
+			outputText("\"<i>No!  I mean yes!  Of course I'm enjoying it... wow this feels great!</i>\"  He says, trying to save face.\n\n");
+			outputText("\"<i>Well, you don't sound too happy, what's wrong?  You just not like this position?</i>\"  Loppe asks, trying to be understanding.\n\n");
+			outputText("\"<i>I'm sorry Loppe... I don't know what's gotten into me... it does feel nice, but I'm just not feeling... y'know.  Maybe it is the position... try turning around?</i>\"  He suggests.\n\n");
+			outputText("With a moan as the action stretches her in just the right way, the laquine awkwardly spins around, leaving her pre-dribbling dick and balls slapping against her feline lover and her breasts positioned right in front of his eyes.  \"<i>I'll try not to give you a facial when we really get going, okay?</i>\"  She promises.\n\n");
+			outputText("Hyou's shaft throbs, dribbling pre within the laquine's depths.  \"<i>Oh yesss</i>\" Hyou purrs.  \"<i>Now that's a sight I can appreciate, and personally?  I don't mind if you do give me a facial... but I appreciate the consideration, now get moving girl!</i>\"  Hyou says, excitedly.\n\n");
+			outputText("Excited, Loppe resumes her bouncing, unthinkingly rubbing her cock against her lover's belly and shivering at the extra friction on its engorged, sensitive surface.  \"<i>Ah, Hyou, you feel so good inside of me!</i>\"  She whimpers.\n\n");
+			outputText("Hyou moans and groans, eyes glued to Loppe's bouncing shaft.  \"<i>Yeah!  It feels great!  Slap my belly with that big pony of yours!</i>\"\n\n");
+			outputText("\"<i>K-kuh!-kinky b-buh-boy!</i>\" Loppe groans, reaching out and grabbing his head and pulling him into an embrace, coincidentally planting his face right amongst her breasts even as she continues to grind her cock into his belly.\n\n");
+			outputText("\"<i>Oh babe!  You're so sexy! I knew I picked a winner when I first saw you. Ah! Almost there!</i>\"  He yowls, bucking against Loppe.  \"<i>Damn that horse-cock of yours!  Bouncing around!  Slapping my belly!  Teasing me!  Ah!  So hot!</i>\" \n\n");
+			outputText("A distant part of Loppe's mind catches these words and files them away with suspicion.  The rest of it is too busy melting at the sensations of losing her female virginity.  She continues to eagerly buck and thrust and impale herself, anxious in pushing on to her first <i>real</i> climax as a woman.\n\n");
+			outputText("Hyou yowls one last time and bucks against Loppe, his claws digging into her hips as his eyes cross, looking straight at a dollop of pre that seems to have formed on the flared tip of Loppe's member.  Finally, he relaxes and lets his orgasm overtake him, spewing rope after rope of cum inside Loppe's eager pussy.\n\n");
+			outputText("The laquine moans in pleasure at the sudden sensation of being filled... then blinks in surprise as she feels the cat-prick inside her needy pussy going soft.  \"<i>What's wrong?  What happened?</i>\" She asks, baffled; she tries to ride the limp dick a little more, but it's futile.\n\n");
+			
+			menu();
+			
+			addButton(0, "Next", talkLoppesFirstBoyfriendPart4);
+		}
+		
+		public function talkLoppesFirstBoyfriendPart4():void
+		{
+			clearOutput();
+			
+			outputText("Panting, but unable to hide the rumbling purr rising from his chest, Hyou sighs.  \"<i>S-Sorry Lops.  That was AMAZING... I-I couldn't help myself.</i>\"\n\n");
+			outputText("\"<i>That's all well and good, I'm feeling pretty amazing myself, but I'm not done yet!  Come on, get hard again so we can keep going - you can't be feeling all limp already, not after just one cum!</i>\"  The frustrated laquine declares.  She continues to rise and fall, \"<i>Come on, surely you can go for at least half an hour!</i>\"\n\n");
+			outputText("\"<i>H-Half an hour!</i>\"  Hyou groans, flopping on Loppe's bed limply.\n\n");
+			outputText("\"<i>That's normal, isn't it?  I mean, I can go for three times that long before I'm sated</i>\" Loppe asks, nervously.\n\n");
+			outputText("Hyou rises his head.  \"<i>Normal?  I came once and am already spent... you are kidding right?</i>\"  He asks, laughing nervously at the frustrated laquine.\n\n");
+			outputText("\"<i>So what am I going to do?  I haven't even cum once yet!</i>\" She whines.\n\n");
+			outputText("Sighing, Hyou looks at Loppe's cock, then back at Loppe... he smiles.  \"<i>Tell you what.  Since you let me fill you, and I just can't get another erection for a while... how about I let you fill me instead?  Would you like that?</i>\"\n\n");
+			outputText("\"<i>B-But I wanted to be fucked like a girl! Besides, you're a boy, I can't fuck you with a cock.</i>\"  The laquine whimpers.\n\n");
+			outputText("Figuring it's pointless to argue with Loppe in her current state, he takes Loppe's cock in his hands and bends over to give it a lick; a task that proves easy, given his feline flexibility.\n\n");
+			outputText("Loppe moans and shudders, wriggling with pleasure as a spurt of pre oozes from her flared tip to splatter onto her feline lover's face.\n\n");
+			outputText("Hyou smiles and slurps the top of Loppe's equine member into his mouth, sucking on it like a lollipop.\n\n");
+			outputText("Mouth opening and closing wordlessly like a fish, the laquine's eyes roll in her head as she is overwhelmed by the delicate touches to her sensetive shaft.\n\n");
+			outputText("Finally, with one last slurp he lets go of Loppe's cock and, smiling, asks,  \"<i>You sure you don't want to take me instead?</i>\"\n\n");
+			outputText("\"<i>I - okay... but, how do I do that?</i>\"  The bewildered bunny asks. \"<i>You don't have a pussy, unless you've been hiding something from me, and I don't want to just have you suck and lick on me; that's no fun for you, then.</i>\" She notes.\n\n");
+			outputText("\"<i>Silly girl,</i>\" he remarks.  \"<i>Mind getting off me for an instant?</i>\" he asks, innocently.\n\n");
+			outputText("Confused, the laquine pulls herself off of her lover, allowing his cum-slick cock to wetly slurp its way out of her.  She scoots over to the side of the bed, wondering what he has in mind.\n\n");
+			outputText("Hyou rolls around on his belly, lifting his tail and presenting his ass to Loppe, then casually reaches back and spreads his cheeks apart, giving Loppe a first-hand view of his, yet unused, little rosebud.  \"<i>See?  I got a hole too!</i>\"  He grins.\n\n");
+			outputText("Ordinarily, Loppe would have protested against the idea of fucking anyone, boy or girl or herm, up the ass.  However, ordinarily, Loppe would not have been as horny as she was, and she promptly leaps up behind him, rubbing her long cock between the spread cheeks of his ass.  However, she holds back from actually penetrating.  \"<i>Hyou? P...Please?</i>\"  Loppe meekly suggests, looking at him with big doe eyes.  \"<i>Promise me you'll take turns at filling my pussy, too?</i>\"\n\n");
+			outputText("Moaning and purring demurely, Hyou replies,  \"<i>S-Sure.  Now jam that wonderful pony of yours in!</i>\"  He says, overwhelmed with lust.\n\n");
+			outputText("Licking her lips in anticipation of finally being sated, the young laquine begins slowly pushing her cock against the tightness of her lover's virginal ass...\n\n");
+			outputText("Hyou yowls in a mixture of pain and pleasure.  \"<i>Mrrrow!  That feels great!  Ha... Loppe, babe!  Your cock feels amazing!</i>\"  He bucks back taking in even more of Loppe inside.\n\n");
+			outputText("\"<i>Excited, are we?  Well, just don't hurt yourself - I'm not exactly teeny-tiny here!</i>\" Loppe giggles, too caught up in the sensations of the cat-morph's hot, tight little anus wrapping itself slowly around her shaft to be suspicious of his reactions.\n\n");
+			outputText("\"<i>Don't care!  Ah, Marae!  S-Shit, getting hard again!</i>\"\n\n");
+			outputText("\"<i>Well, make sure you get that ready to fuck me with after I get off for the first time!</i>\" The laquine boasts, even as she relentlessly pushes herself forward until she finally manages to hilt herself in her partner.  Waiting a few moments to let him accommodate her properly, she starts to thrust in and out; with her half-done state, she's confident she'll cum inside of him before he cums again.\n\n");
+			outputText("<b>One very long, messy, multi-orgasmic bout of sex later...</b>\n\n");
+			outputText("Hyou purrs, licking at his cum-caked arms, happily.  His belly is distended with the massive amount of laquine-cum sloshing about inside.  \"<i>Wow.  I have to say Loppe, you're one of a kind.  Best sex ever!</i>\"  He sighs, continuing to lick at his arms.  \"<i>Sorry for only getting your female half once.  I swear I don't know what's wrong with me... but it just felt so good when you started fucking me with that wonderful, big, horse-cock of yours, that I just lost it... sorry.</i>\"\n\n");
+			outputText("\"<i>It's okay, Hyou...</i>\" Loppe sighs.  She cradles her stomach, which looks no different than it did when she started, and looks enviously at the engorged midriff of her boyfriend, very visible proof of her masculine potency.  \"<i>Still, we'll try and concentrate more on that part next time, okay?</i>\" She asks.\n\n");
+
+			menu();
+
+			addButton(0, "Next", talkLoppesFirstBoyfriendPart5);
+		}
+
+		public function talkLoppesFirstBoyfriendPart5():void
+		{
+			clearOutput();
+
+			outputText("<b>Uma's detailed description of events over...</b>\n\n");
+			
+			outputText("You can't resist dryly pointing out that maybe it wasn't so much the girl part of Loppe that Hyou was interested in when he started dating the young dickgirl.  You would not be too surprised if Uma told you that the \"next time\" never came - or, at least, the version of it that Loppe wanted never came.\n\n");
+			outputText("\"<i>Yes, dear.  I'm afraid that's true... Hyou is as manly as a harpy, I'm afraid.</i>\"  She chuckles.  \"<i>Now you see why there would never have been anything between the two of us, huh?</i>\"\n\n");
+			outputText("A gay man and a gay woman; the very opposite of compatibilities.  So, you ask, raising an eyebrow for emphasis; in denial, or just didn't realise it until that first night?\n\n");
+			outputText("\"<i>He never really fancied any girls before my Loppe, though he was friends with plenty of them, and I know for a fact he used to get plenty of love letters too.  So I would bet on him not knowing it.  Plus it was kinda unexpected, you know?  He was the son of village's most renowned hunter, a well-known womanizer</i>\"  Uma chuckles.  \"<i>I suppose he really didn't take after his father.</i>\"\n\n");
+			outputText("Same attitude, different sex on the receiving end, you suggest?\n\n");
+			outputText("\"<i>After that night, yes.  He came out to Loppe too.  She took it nicely, I think.  They continued to date for a while, though Loppe often had to coax him into using her pussy too, if I remember what my little ears heard right.</i>\"  She flicks her ears for emphasis.  \"<i>Those coaxings would involve the ravishing of Hyou's ass via horse-cock.</i>\"\n\n");
+			outputText("You comment you're surprised Loppe took it so well; for most girls, hearing they \"<i>turned a boy gay by having sex with him</i>\" would be a major wound to their self-esteem.\n\n");
+			outputText("\"<i>Loppe didn't turn him gay though, come on.  Everything about that boy pointed towards this outcome, he was a petite cat boy who liked dancing and didn't hang out with guys.  Preferring instead to hang out with girls, and I mean that as friends, not lovers.  Not many were surprised when he came out, save for a few of the more naive girls.  Plenty of tears were shed... Loppe was fine though, she had a cute boyfriend.  Unfortunately it was not meant to be,</i>\"\n\n");
+			outputText("He found a guy he liked better and broke up with her as a result?  You suggest casually.\n\n");
+			outputText("Uma shakes her head.  \"<i>No.  Actually they broke up because he couldn't keep up with Loppe's stamina... it was either break up with her or give up dancing. And walking.</i>\"\n\n");
+			outputText("You heave a sigh; a somewhat sad outcome, you must concede, but inevitable, you suppose. A truly bisexual herm and a homosexual male probably weren't really that comfortable with each other in a relationship anyway.  You note Loppe was probably happy, deep down, to call an end to it.\n\n");
+			outputText("\"<i>To be quite honest, there wasn't any bitterness in their breaking up.  And they formed a pretty cute couple too, and for a while they were satisfied with each other.  But Loppe unfortunately was wearing the poor boy down, he was the one falling behind in dancing class after that.</i>\"  Uma sighs.  \"<i>In fact... it was Loppe who suggested they break up.  They carried on as good friends though, and Hyou said he would support Loppe all the way if she found someone she liked and that was able to keep up with her.</i>\"\n\n");
+			outputText("You tell her that turn of events doesn't surprise you; Loppe's got a good heart under her breasts.  And quite a fire in her loins, too, but, hey, nobody's perfect.\n\n");
+			outputText("Uma laughs.  \"<i>That she does, dear, that she does.  But in case you're curious.  Hyou eventually found another guy, a wandering foreigner, and decided to leave the village with him.  And that was the last time we saw him.  Hope he is ok, wherever he is.</i>\"  Uma looks into the distance.\n\n");
+			outputText("You tell her that you hope so, too, but it's time for you to leave.\n\n");
+			outputText("\"<i>Very well, dear.  Hope you don't disappoint.  If you ever have to pick between walking and my daughter, I hope you'll pick my daughter.</i>\"  She jokes, chuckling to herself.\n\n");
+			outputText("You chuckle and tell her that if Loppe hasn't chased you off despite the fact she's twice as bad as she ever was, if not worse, then you're not likely to make that choice against her favor soon.  That said, you take your things and head back to camp.\n\n");
+			
+			talkLoppeJoiner();
+		}
 		/**
 		 * Talk Loppe - Loppe's Dad
 		 * Edit Status: FUCK ALL
 		 */
 		public function talkLoppesDad():void
 		{
-			/*
-			Quietly, and assuring her that you don’t want to offend her, you ask if Uma will tell you about the bunny-herm who fathered Loppe?
+			clearOutput();
 
-The mare’s stare grows distant, as if staring deep into her past, and she sighs.  “Ah, Usagi... I loved her so much, you know, [name]?”
+			outputText("Quietly, and assuring her that you don't want to offend her, you ask if Uma will tell you about the bunny-herm who fathered Loppe?\n\n");
+			outputText("The mare's stare grows distant, as if staring deep into her past, and she sighs.  \"<i>Ah, Usagi... I loved her so much, you know, [name]?</i>\"\n\n");
+			outputText("She was special to Uma then, was she, you ask?\n\n");
+			outputText("Uma nods.  \"<i>She was the love of my life.  Unfortunately, it wasn't meant to be.  She left even before I found out I was pregnant with my little Loppe. Still... I enjoyed my time with her, and if we met again, I would love to spend more time with her.</i>\"  Uma smiles, though you detect a hint of sadness in her equine features.\n\n");
+			outputText("You ask who 'Usagi' was, as a person?  You know she was a herm bunny-morph and that she fathered Loppe, but how did she and Uma meet, and take their relationship that far?\n\n");
+			outputText("Uma smiles and looks to the distance.  \"<i>Usa-chan was a wandering warrior, always honorable and true, her skill with a sword was nothing short of amazing.  I don't think there's a single person alive able to match her.  She lived by the sword, back then, always challenging other warriors to hone her skill and travelling from village to village to find better, stronger, opponents.</i>\"  Uma sighs.\n\n");
+			outputText("\"<i>When I met her, she was just passing through our village, and had been suffering from pain chronic pain in her neck, so she came to me to request my services and, well, it was love at first sight.  After our session, she asked me out of a date and I accepted.  There wasn't a single night we didn't go out and make love under the stars.  But unfortunately Usa-chan left after a week.  She left me a note apologising for her departure and said that she couldn't stay, lest she mellow and lose her edge as a warrior.  And that was the last I saw of her.</i>\"  Uma sighs again.\n\n");
+			outputText("So, you're guessing Uma found out Usagi had left her a little going-away present some time after the rabbit warrior had left, you suggest?\n\n");
+			outputText("\"<i>Yes.  My morning sickness didn't start until a fortnight after Usagi had moved on.  Jolted the sadness right out of me too.  I hadn't even opened my clinic in those two weeks, and my friends were very worried. Loppe was just what I needed to pick up the pieces of my broken heart.</i>\"  She smiles, a motherly smile that makes her look absolutely stunning.\n\n");
+			outputText("You ask if Uma ever tried to send a message after Usagi, let her know about her fatherhood?\n\n");
+			outputText("\"<i>I did ask the travellers that passed through about news regarding Usa-chan, but it was rare to ever find any who had heard of her.  Nevertheless I asked everyone that, should they meet Usa-chan, to tell her to return so we could live together as a family... but eventually we had to evacuate the village, so I'm not sure she even got my message, and I couldn't keep waiting for her.</i>\"\n\n");
+			outputText("You quietly thank Uma for sharing such intimate details of her life, and politely excuse yourself to leave.\n\n");
+			outputText("\"<i>I still love her, you know.</i>\"  The mare declares in a conversational tone.  \"<i>I miss her so badly and I want her to come back to me; I dabble in dalliances, to fill the void, but I know they'll never really replace her.</i>\"\n\n");
 
-She was special to Uma then, was she, you ask?
+			outputText("You turn and look back at her, which Uma evidently takes as justification to continue, even though she seems to be talking more for her own benefit than yours.  \"<i>Now, I'm not saying I'm not still mad at her for leaving in the first place, and I'll definitely have to punish her when I get my hands on her,</i>\" her grin, at this point, makes you suspect that Usagi might not entirely mind her punishment, \"<i>but I swear, if she was to walk through that door and ask, I'd take her back like that.</i>\" She snaps her fingers for emphasis.\n\n");
+			outputText("You can't resist noting that it sounds like Uma would end up giving Loppe a little sister if Usagi did come back. \n\n");
+			outputText("Uma nods thoughtfully at your words.  \"<i>A sister or two?  Definitely.  Hey, why not go out on a limb and say five or six little sisters?  I loved being a mom, being pregnant was actually kind of hot, and I'm still young enough to do some serious breeding.</i>\"  She pats her belly with a defiant expression.  But then she slumps and sighs longingly.  \"<i>But I want my Usagi back first...</i>\" She mourns.\n\n");
+			outputText("You tell her to keep hoping; as strong a warrior as Uma described her to be, you're sure that the bunny-herm is still out there, somewhere.  You politely withdraw to give Uma a chance to compose herself, heading back to camp.\n\n");
 
-Uma nods.  “She was the love of my life... unfortunately, it wasn’t meant to be... she left even before I found out I was pregnant with my little Loppe... still... I enjoyed my time with her... and if we met again, I would love to spend more time with her.”  Uma smiles, though you detect a hint of sadness in her equine features.
-
-You ask who ‘Usagi’ was, as a person?  You know she was a herm bunny-morph and that she fathered Loppe on Uma, but how did she and Uma meet, and take their relationship that far?
-
-Uma smiles and looks to the distance.  “Usa-chan was a wandering warrior, always honorable and true, her skill with a sword was... simply... amazing.  I don’t think there’s a single person alive able to match her.  She lived by the sword, back then, always challenging other warriors to hone her skill and travelling from village to village to find better, stronger, opponents.”  Uma sighs.
-
-“When I met her, she was just passing through our village, and had been suffering from pain in her neck area, she came to me to request my services and... well... it was love at first sight.  After our session, she asked me out of a date and I accepted.  There wasn’t a single night we didn’t go out to make love under the stars, in a hill that we came to call, our hill.  But unfortunately Usa-chan left after those 7 days.  She left me a note apologising for her departure and said that she couldn’t stay... lest she mellow and lose her edge as a warrior.  And that was the last I’ve seen of her.”  Uma sighs again.
-
-So, you’re guessing Uma found out Usagi had left her a little going-away present some time after the rabbit warrior had left, you suggest?
-
-“Yes.  My morning sickness didn’t start until about... 5 days later.  Jolted the sadness right out of me too.  I hadn’t even opened my clinic in those 5 days... and my friends were very worried... Loppe was just what I needed to pick up the pieces of my broken heart.”  She smiles, a motherly smile that makes her look absolutely stunning.
-
-You ask if Uma ever tried to send a message after Usagi, let her know about her fatherhood?
-
-“I did ask the travellers that passed through about news regarding Usa-chan... but rarely there was one that had even met her... Nevertheless I asked everyone that, should they meet Usa-chan, to tell her to return so we could live together as a family... but eventually we had to evacuate the village... so I’m not sure she even got my message, and I couldn’t keep waiting for her...”
-
-You quietly thank Uma for sharing such intimate details of her life, and politely excuse yourself to leave.
-
-“I still love her, you know.”  The mare declares in a conversational tone.  “I miss her so badly and I want her to come back to me; I dabble in dalliances, to fill the void, but I know they’ll never really replace her.”
-
-You turn and look back at her, which Uma evidently takes as justification to continue, for all that she seems to be talking to herself first and foremost.  “Now, I’m not saying I’m not still mad at her for leaving in the first place, and I’ll definitely have to punish her when I get my hands on her,” her grin, at this point, makes you suspect that Usagi might not entirely mind her punishment, “but I swear, if she was to walk through that door and ask, I’d take her back like that.” She snaps her fingers for emphasis.
-
-You can’t resist noting that it sounds like Uma would end up giving Loppe a little sister if Usagi did come back. 
-
-Uma nods thoughtfully at your words.  “A sister or two?  Definitely.  Hey, why not go out on a limb and say five or six little sisters?  I loved being a mom, being pregnant was actually kind of hot, and I’m still young enough to do some serious breeding.”  She pats her belly with a defiant expression.  But then she slumps and sighs longingly.  “But I want my Usagi back first...” She mourns.
-
-You tell her to keep hoping; as strong a warrior as Uma described her to be, you’re sure that the bunny-herm is still out there, somewhere.  You then politely withdraw to give Uma a chance to compose herself, heading back to camp.*/
-
+			menu();
+			doNext(13);
 		}
 		
+		/**
+		 * SEXY TIMES
+		 */
+		private static const UMA_CONSIDER_PC_FEM:int = 80; // Femininity value that Uma considers "girly"
+		private static const UMA_CONSIDER_PC_AND:int = 60; // Femininity value that Uma considers "androgynous"
+
+		/**
+		 * Main sex menu
+		 * Edit Status: FUCK ALL
+		 */
 		public function sexMenu():void
 		{
+			clearOutput();
+
+			if (player.gender == 0)
+			{
+				outputText("You are about to ask if Uma would be willing to have sex with you, but then stop and think. Given you have no genitalia, and she's a lesbian woman, you can't really think of anything the two of you could do together that would be good for both of you.  You decide to ask her something else instead.\n\n");
+				
+				buildCoreMenu(true);
+				return;
+			}
 			
+			outputText("You tell Uma that, if it's alright with her, you'd like to have sex with her.  Uma looks you over appraisingly.\n\n");
+
+			// Check femininity
+			if (player.femininity >= UMA_CONSIDER_PC_FEM)
+			{
+				outputText("\"<i>Aren't you cute!  Such curves, such full lips!  Oh girl, you have just what it takes to get an old mare going, don't you?</i>\" Uma grins at you.  \"<i>Now, I know better than to just assume, so I have to ask what are you packing inside that [armorname] of yours?</i>\"\n\n");
+
+				if (player.gender == 1) // Femboys
+				{
+					outputText("You admit that, despite the girliness of your appearance, you're actually male.\n\n");
+					outputText("Uma smirks mischievously at you.  \"<i>Oh, so we've got a pretty femboy here, huh?  Do you like feeling pretty?  Because if you do, I'll make you feel truly beautiful.  All you have to do is get in my office,</i>\" she points beyond the curtains.\n\n");
+				}
+				else if (player.gender == 2) // Chicks
+				{
+					outputText("You smirk and tell her that you're just what lesbians love; a girl who knows the loveliness of other women.\n\n");
+					outputText("Uma grins at you. \"<i>Oh, goodie.  Then you must know what a skilled tongue or a soft caress can do, don't you honey?  All we have to do is get in my office, and I'll show you a good time,</i>\" she points beyond the curtains.\n\n");
+				}
+				else if (player.gender == 3) // Dickchicks
+				{
+					outputText("You shrug carelessly and tell her that you are a girl, for all that you're packing a cock of your own. From what Loppe's said, though, you don't think that's a deal-breaker for Uma?\n\n");
+					outputText("Uma smiles at you.  \"<i>Of course not.  Just because you have a pecker, doesn't mean you aren't a girl now, does it?  Get in my office and we'll have some fun!</i>\"  She points beyond the curtains.\n\n");
+				}
+			}
+			else if (player.femininity >= UMA_CONSIDER_PC_AND)
+			{
+				outputText("\"<i>I don't know [name].  I'm pretty sure my little Loppe already told you, but I'm a lesbian, so it all depends on what you're packing inside that [armorname] of yours, dear.</i>\"\n\n");
+
+				if (player.gender == 1) // No sexytimes for manns
+				{
+					outputText("You confess that you're actually a male, even if you can pass for a girl with a little work.\n\n");
+					outputText("Uma looks at you in disappointment.  \"<i>Well then, I'm sorry... but I'm not interested.  While I don't exactly mind the occasional boy I happen to like mine a little prettier than you are,</i>\"  Uma shrugs.\n\n");
+
+					buildCoreMenu(true);
+					return;
+				}
+				else if (player.gender == 2) // Chicks
+				{
+					outputText("You're kind of boyish, you admit, but you're all girl, you declare.\n\n");
+					outputText("Uma claps her hands and smiles at you.  \"<i>Good, let me show you why men have nothing on us girls.  Step into my office dear,</i>\" she points beyond the curtains.\n\n");
+				}
+				else if (player.gender == 3) // Dickchicks
+				{
+					outputText("Yeah, you know people get confused by which you are. You're actually both, with pussy and dick.\n\n");
+					outputText("Uma looks at you in thought.  \"<i>To be honest, I don't mind herms but I usually like mine a bit more on the girly side, you know?  I think we can make an exception for you though!  Go to my office,</i>\" she points beyond the curtains.\n\n");
+				}
+			}
+			else // Wakkawakka no manns
+			{
+				outputText("\"<i>Sorry [name],  but you're just too manly for my tastes,</i>\" Uma apologizes.\n\n");
+
+				buildCoreMenu(true);
+				return;
+			}
+
+			// If we made it this far, we've passed all of Uma's preference checks
+			outputText("You step through into Uma's office, noting a surprisingly comfortable looking flat table-bed, just waiting for you and Uma to have a little fun.\n\n");
+			outputText("\"<i>Now here's a few 'special services' I can provide you with.  So, which will it be?</i>\"\n\n");
+
+			buildSexMenu();
+		}
+
+		private function buildSexMenu():void
+		{
+			menu();
 		}
 		
 		public function trainLoppe():void
