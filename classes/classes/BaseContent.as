@@ -55,6 +55,18 @@ package classes
 			return kGAMECLASS.urtaLove(value);
 		}
 		
+		/**
+		 * Apply statmods to the player. dynStats wraps the regular stats call, but supports "named" arguments of the form:
+		 * 		"statname", value.
+		 * Exclusively supports either long or short stat names with a single call.
+		 * "str", "lib" "lus", "cor" etc
+		 * "strength, "libido", lust", "corruption"
+		 * Specify the stat you wish to modify and follow it with the value.
+		 * Seperate each stat and value with a comma, and each stat/value pair, again, with a comma.
+		 * eg: dynStats("str", 10, "lust" -100);
+		 * 
+		 * @param	... args
+		 */
 		protected function dynStats(... args):void
 		{
 			// Bullshit to unroll the incoming array
