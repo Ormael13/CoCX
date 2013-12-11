@@ -1643,7 +1643,7 @@ package classes.content
 			outputText("and a sizable table, made from bamboo. It's covered in a white cloth, and has an upraised headboard with a hole in it that looks like it's big enough to fit your head through.  This is the only piece of furniture in the room, apart from a small cupboard in the corner.  Though spartan in its layout, the room is quite comfortably warm.\n\n");
 			outputText("Clearing her throat to get your attention the mare chuckles.  \"<i>Now, dear.  I can't quite get my hands where they need if you're still wearing your [armorname].  So why don't you strip down and put them in the cupboard over in the corner,</i>\"  she instructs, beginning to strip herself.  You nod your head in understanding and promptly strip down, ");
 
-			if (flags[kFLAGS.PC_FETISH >= 1) outputText("unable to resist either the tingle of lust that runs through you at being naked in front of Uma, nor the urge to flaunt your feminine physique for her own gratification, ");
+			if (flags[kFLAGS.PC_FETISH] >= 1) outputText("unable to resist either the tingle of lust that runs through you at being naked in front of Uma, nor the urge to flaunt your feminine physique for her own gratification, ");
 
 			outputText("and gather your [armorname] up in your arms as you do so. Walking over to the cupboard, you find a couple of folded towels and ample space to store your clothes, which is exactly what you do.\n\n");
 			outputText("Uma stands just behind you, her own clothes neatly folded.  \"<i>Excuse me.</i>\"  You politely step aside, and reach out to take Uma's clothes from her so that you can put them in the cupboard for her.  \"<i>Thanks, dear.  Now come here,</i>\" the mare says, sitting up on the table and tapping her thighs.  \"<i>Come sit on my lap.</i>\"\n\n");
@@ -1746,7 +1746,7 @@ package classes.content
 			outputText("and a sizable table, made from bamboo; it's covered in a white cloth, and has an upraised headboard with a hole in it that looks like it's big enough to fit your head through.  This is the only piece of furniture in the room, apart from a small cupboard in the corner.  Though spartan in its layout, the room is quite comfortably warm.\n\n");
 			outputText("She starts stripping and motions for you to do the same.  \"<i>As talented as I am with my hands, I still haven't figured a way to properly take care of you while dressed, dear,</i>\" she giggles.  You nod your head in understanding and promptly strip down, ");
 
-			if (flags[kFLAGS.PC_FETISH >= 1) outputText("unable to resist either the tingle of lust that runs through you at being naked in front of Uma, nor the urge to flaunt your feminine physique for her own gratification, "); 
+			if (flags[kFLAGS.PC_FETISH] >= 1) outputText("unable to resist either the tingle of lust that runs through you at being naked in front of Uma, nor the urge to flaunt your feminine physique for her own gratification, "); 
 
 			outputText("and gather your [armorname] up in your arms as you do so. Walking over to the cupboard, you find a couple of folded towels and ample space to store your clothes, which is exactly what you do.\n\n");
 			outputText("\"<i>Be a dear and store mine too, please,</i>\"  Uma asks, handing her folded clothes to you.  You nod your head and place them in the cupboard like she asked, then walk over to the table and sit down, ready to begin.\n\n");
@@ -1762,25 +1762,25 @@ package classes.content
 			outputText("That's the last straw for you and promptly explode in her hands.\n\n");
 
 			// Normal CumQ
-			if (player.CumQ() <= 250)
+			if (player.cumQ() <= 250)
 			{
 				outputText("Your cum spurts and spatters onto Uma's hands, getting them nice and sticky with your fluids.  \"<i>There we go, dear.  How are you feeling now?</i>\" the mare asks with a smug smile.\n\n");
 				outputText("You heave in a relieved breath of air and tell her that you feel wonderful; she truly has magic fingers.  The mare giggles.  \"<i>Thank you, dear.</i>\"\n\n");
 			}
 			// Medium CumQ
-			else if (player.CumQ() <= 500)
+			else if (player.cumQ() <= 500)
 			{
 				outputText("The great gush of seed soaks Uma's hands beyond their capacity to hold it, dripping messily onto the floor and forming a noticeable puddle underneath where you are.  \"<i>Hmm that was plenty, dear.  You shouldn't let yourself build up so much cum, you know?  That isn't healthy. So, how are you feeling now?</i>\" she asks with a smile.\n\n");
 				outputText("Much better you say, once you can speak again, and you thank her for being willing to attend to your little problem.  The mare giggles, \"<i>It was no problem, dear.</i>\"\n\n");
 			}
 			// High CumQ
-			else if (player.CumQ() <= 1000)
+			else if (player.cumQ() <= 1000)
 			{
 				outputText("A torrent of spunk surges from within your [cock], and Uma narrowly avoids getting splashed by the narrowest of margins, though you paint her hands and arms white with it.  A great puddle of cum splashes into being, one jet even hitting the wall on the other side of the room and trickling sloppily down its surface.  The MILF mare chuckles.  \"<i>Oh, dear.  That's quite a bit you had built up. You should relieve your tension more often, you know?  Now, how do you feel?</i>\" she asks smiling.\n\n");
 				outputText("You tell her that you feel wonderful, wondering how she will react to your nearly hitting her.  \"<i>That's good.  And don't worry about splashing me, I had to endure much worse when Loppe was going through puberty,</i>\" Uma responds. You privately note to yourself that Uma's comment makes sense, given what you know of Loppe.\n\n");
 			}
 			// VHigh CumQ
-			else if (player.CumQ() <= 2500)
+			else if (player.cumQ() <= 2500)
 			{
 				outputText("Uma yelps in shock as you explode into an orgasm of considerably greater output than she was expecting; cum spatters onto her belly and even her face as veritable tidal waves of cum ripple out of your distending shaft, slopping wetly across the floor in a huge puddle that stretches until it hits the first sink and starts quietly oozing down.  Uma wipes your cum off her face casually.  \"<i>My, my, that's quite a bit.  Makes me wonder who's messier, you, or my little Loppe,</i>\" she laughs.  \"<i>Oh, who am I kidding.  Knowing Loppe as well as I do, she's definitely much messier than that.  So, dear, how are you feeling now?</i>\" she asks with a smile.\n\n");
 				outputText("Greatly relieved, you reply, but you cast a curious glance at the mess you made, wondering how long it will take her to clean this place up.  \"<i>Good. Hmm, I'll have to give this place a thorough cleaning later. I don't usually bring people here capable of making such a mess.  Anyway, I'm glad you're relieved, dear.</i>\"\n\n");
@@ -1794,15 +1794,15 @@ package classes.content
 
 			outputText("Once you can stand up again, you get off the table and make your way to the cupboard");
 
-			if (player.CumQ() >= 500) outputText(", audibly sloshing through the cum covering the floor, ");
+			if (player.cumQ() >= 500) outputText(", audibly sloshing through the cum covering the floor, ");
 
 			outputText(" to get both your own clothes and Uma's.  You pull yours on ");
 
-			if (player.CumQ() >= 1000) outputText("careful to avoid getting them soaked in your prodigious quantity of spunk ")
+			if (player.cumQ() >= 1000) outputText("careful to avoid getting them soaked in your prodigious quantity of spunk ")
 
 			outputText(" and offer Uma's to her, thanking her once again for helping you with your relief.  \"<i>Don't worry about any mess, dear.  I'm just going to need a moment to sort myself out");
 
-			if (player.CumQ() >= 500) outputText(", as well as the room");
+			if (player.cumQ() >= 500) outputText(", as well as the room");
 
 			outputText(".  See you later, dear.  And don't be a stranger,</i>\" the mare tells you as she waves you goodbye.\n\n");
 
