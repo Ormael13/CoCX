@@ -76,10 +76,6 @@ package coc.view {
 		public var toolTipView :ToolTipView;
 		public var statsView :StatsView;
 
-		// TODO: Refactor so we don't need these vars.  That sounds so simple when you put it like that...
-		public var _executeButtomButtonClick :Function;
-		public var _getButtonToolTipText :Function;
-
 		protected var options :Object;
 		// protected var allButtonTexts :Array;
 		protected var allButtons :Array;
@@ -356,17 +352,7 @@ package coc.view {
 		};
 
 		protected function executeBottomButtonClick( event :Event ) {
-			var bottomButton :InteractiveObject,
-				bottomButtonIndex :int;
-				
 			this.toolTipView.hide();
-			bottomButton = (event.currentTarget as InteractiveObject);
-
-			// If it has a callback, the button handles the click event.
-			if( ! (bottomButton as CoCButton).callback && this._executeButtomButtonClick ) {
-				bottomButtonIndex = this.bottomButtons.indexOf( bottomButton );
-				this._executeButtomButtonClick( bottomButtonIndex );
-			}
 		};
 
 		protected function hoverButton( event :MouseEvent ) {

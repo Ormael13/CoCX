@@ -289,8 +289,6 @@
 			this.mainView.onPerksClick = displayPerks;
 			this.mainView.onStatsClick = displayStats;
 
-			this.mainView._executeButtomButtonClick = executeButtonClick;
-
 
 			// Set up all the messy global stuff:
 			
@@ -514,11 +512,6 @@
 			 
 			//addChild(mainView.aCb);
 
-
-			// ******************************************************************************************
-
-
-			mainView._getButtonToolTipText = getButtonToolTipText;
 
 			// ******************************************************************************************
 
