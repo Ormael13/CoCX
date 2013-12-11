@@ -1,4 +1,4 @@
-package classes 
+﻿package classes 
 {
 	import classes.display.BindingPane;
 	import coc.view.MainView;
@@ -208,14 +208,14 @@ package classes
 				}
 			}
 			
-			trace("Failed to bind control method [" + funcName + "] to keyCode [" + keyCode + "]");
+			if (_debug) trace("Failed to bind control method [" + funcName + "] to keyCode [" + keyCode + "]");
 		}
 		
 		/**
 		 * Remove an existing key from a BoundControlMethod, if present, and shuffle the remaining key as appropriate
 		 * @param	keyCode		The keycode to remove.
 		 */
-		private function RemoveExistingKeyBind(keyCode:int):void
+		public function RemoveExistingKeyBind(keyCode:int):void
 		{
 			// If the key is already bound to a method, remove it from that method
 			if (_keysToControlMethods[keyCode] != null)
@@ -238,10 +238,7 @@ package classes
 		 */
 		public function KeyHandler(e:KeyboardEvent):void
 		{
-			if (_debug)
-			{
-				trace("Got key input " + e.keyCode);
-			}
+			if (_debug) trace("Got key input " + e.keyCode);
 			
 			// Ignore key input during certain phases of gamestate
 			if (_mainView.eventTestInput.x == 207.5)
@@ -276,10 +273,7 @@ package classes
 		{
 			if (_keysToControlMethods[keyCode] != null)
 			{
-				if (_debug)
-				{
-					trace("Attempting to exec func [" + _controlMethods[_keysToControlMethods[keyCode]].Name + "]");
-				}
+				if (_debug) trace("Attempting to exec func [" + _controlMethods[_keysToControlMethods[keyCode]].Name + "]");
 				
 				_controlMethods[_keysToControlMethods[keyCode]].ExecFunc();
 			}
@@ -378,7 +372,7 @@ package classes
 			
 			for (var key:String in _controlMethods)
 			{
-				trace(key);
+				if (_debug) trace(key);
 				funcs.push(_controlMethods[key]);
 			}
 			funcs.sortOn( ["Index"], [Array.NUMERIC] );
@@ -386,6 +380,22 @@ package classes
 			return funcs;
 		}
 		
+
+		/**
+		 * Get an array of the currently active keyCodes.
+		 * @return	Array of active keycodes.
+		 */
+		public function GetControlMethods():Array
+		{
+			var buttons:Array = new Array();
+			for (var key:* in _keysToControlMethods)
+			{
+				buttons.push(key);
+			}
+			
+			return buttons;
+		}
+
 		/**
 		 * Clear all currently bound keys.
 		 */
@@ -435,7 +445,7 @@ package classes
 			
 			for (var key:String in _controlMethods)
 			{
-				trace(key);
+				if (_debug) trace(key);
 				var ctrlObj:* = new Object();
 				ctrlObj.PrimaryKey = _controlMethods[key].PrimaryKey;
 				ctrlObj.SecondaryKey = _controlMethods[key].SecondaryKey;

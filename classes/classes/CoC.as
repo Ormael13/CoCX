@@ -269,11 +269,19 @@
 		public var oldStats:*; // I *think* this is a generic object
 		public var inputManager:InputManager;
 
+		public var monkey:ChaosMonkey;
+		public var testingBlockExiting:Boolean;
+
 		public function CoC()
 		{
 			// Cheatmode.
 			kGAMECLASS = this;
 			
+			// This is a flag used to prevent the game from exiting when running under the automated tester
+			// (the chaos monkey)
+			this.testingBlockExiting = false;
+
+
 			this.model = new GameModel();
 			this.mainView = new MainView( this.model );
 			this.mainView.name = "mainView";
@@ -286,8 +294,6 @@
 			this.mainView.onLevelClick = levelUpGo;
 			this.mainView.onPerksClick = displayPerks;
 			this.mainView.onStatsClick = displayStats;
-
-			this.mainView._executeButtomButtonClick = executeButtonClick;
 
 
 			// Set up all the messy global stuff:
@@ -318,9 +324,14 @@
 			mobile = false;
 			model.mobile = mobile;
 
-			images = new ImageManager(stage);
-			inputManager = new InputManager(stage, true);
+			this.images = new ImageManager(stage);
+			this.inputManager = new InputManager(stage, false);
 			include "../../includes/ControlBindings.as";
+
+
+			this.monkey = new ChaosMonkey(this);
+
+			//} endregion
 
 			/**
 			 * Player specific variables

@@ -24,41 +24,12 @@ package coc.test {
 			this.gameModel.flags[kFLAGS. 273 ] = 0;
 			this.mainView.selectSprite( 2 );
 
+			// TODO: put in actual callbacks here because that be how we do, now.
 			this.mainView.setButton( 0, 'Lol' );
 			this.mainView.setButton( 4, 'Poop' );
 			this.mainView.setButton( 6, 'Penis' );
 			this.mainView.setButton( 9, 'Clear Buttons' );
 			this.mainView.setButton( 8, '' );
-
-			this.mainView._executeButtomButtonClick = function( index ) {
-				trace( "You pressed button", index );
-
-				if( index == 2 ) {
-					trace( "Hiding menu..." );
-					testThis.mainView.hideAllMenuButtons();
-
-					trace( "test: menuButtonIsVisible( 'newGame' )?\n\t",
-						testThis.mainView.menuButtonIsVisible( 'newGame' ),
-						"(Should be 'false')" );
-				}
-				if( index == 3 ) {
-					trace( "Showing menu..." );
-					testThis.mainView.showAllMenuButtons();
-
-					trace( "test: menuButtonIsVisible( 'newGame' )?\n\t",
-						testThis.mainView.menuButtonIsVisible( 'newGame' ),
-						"(Should be 'true')" );
-				}
-				if( index == 9 ) {
-					trace( "You also cleared all the bottom buttons.  Good job!" );
-					testThis.mainView.clearBottomButtons();
-				}
-			};
-
-			this.mainView._getButtonToolTipText = function( buttonLabel :String ) {
-				trace( "Get tool tip text for:", buttonLabel );
-				return "Tool tip text for " + buttonLabel + ".";
-			}
 
 			trace( "test: hasButton( 'Lol' )?\n\t",
 				this.mainView.hasButton( 'Lol' ), "(Should be 'true')" );

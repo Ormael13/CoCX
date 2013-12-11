@@ -42,6 +42,68 @@ public function mainMenu(e:MouseEvent = undefined):void {
 			"Resume", resume);
 }
 
+public function monkeyStartConfirm():void
+{
+	outputText(<![CDATA[
+
+Chaos Monkah!
+
+This is a testing tool intended to generate random button presses.
+
+**THIS CAN (and probably will) OVERWRITE YOUR SAVE FILES AS A CONSEQUENCE OF HOW IT WORKS**
+
+**SERIOUSLY. YOU NEED TO BE SURE YOU WANT TO DO THIS, AND DO NOT COMPLAIN IF YOU TRIED IT JUST "BECAUSE YOU WERE CURIOUS"**
+
+If you have an open-game, it **WILL** cause your PC to take actions which you 
+probably do not intend. 
+
+**CAUTION. THE ONLY WAY TO STOP THE CHAOS MONKEY IS TO CLOSE THE GAME**   
+(Yeah, I want to fix that)
+	]]>, true, true);
+
+	menu();
+	addButton(0, "ChaosMonkey",   saveMonkey);
+	addButton(1, "NoMenuMonkey",   noSaveMonkey);
+	addButton(9, "No",            debugPane)
+}
+
+
+public function noSaveMonkey():void
+{
+	this.monkey.excludeMenuKeys = true;
+	monkeyStartReallyConfirm()
+}
+
+public function saveMonkey():void
+{
+	this.monkey.excludeMenuKeys = false;
+	monkeyStartReallyConfirm()
+}
+public function monkeyStartReallyConfirm():void
+{
+	outputText(<![CDATA[
+
+**NO REALLY, THIS WILL PROBABLY OVERWRITE YOUR SAVES.**
+
+**ARE YOU REALLY, *REALLY* SURE?**
+
+	]]>, true, true);
+
+	doYesNo(initiateTheMonkey, debugPane)
+}
+
+
+public function initiateTheMonkey():void
+{
+	// I swear, half the fun of this is just the function names I can write.
+	outputText(<![CDATA[
+INITIATING MONKEY
+	]]>, true, true);
+	this.monkey.createChaos()
+
+	doNext(13)
+}
+
 import flash.system.SecurityDomain;
 import flash.system.Security;;
 
@@ -51,8 +113,6 @@ public function doThatTestingThang():void
 	// Excercise the parser. This should catch parser regressions, I think.
 	// 
 	// 
-
-	
 
 	outputText(<![CDATA[
 
@@ -383,6 +443,7 @@ public function debugPane():void
 	addButton(0, "Event Tester", eventTestingPane);
 	addButton(1, "Test Input", eventTester);
 	addButton(5, "Parser Tests", doThatTestingThang);
+	addButton(3, "ChaosMonkey", monkeyStartConfirm)
 	addButton(9, "Back", mainMenu);
 }
 
