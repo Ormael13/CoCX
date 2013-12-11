@@ -215,7 +215,7 @@
 		 * Remove an existing key from a BoundControlMethod, if present, and shuffle the remaining key as appropriate
 		 * @param	keyCode		The keycode to remove.
 		 */
-		private function RemoveExistingKeyBind(keyCode:int):void
+		public function RemoveExistingKeyBind(keyCode:int):void
 		{
 			// If the key is already bound to a method, remove it from that method
 			if (_keysToControlMethods[keyCode] != null)

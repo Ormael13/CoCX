@@ -271,10 +271,15 @@
 		public var inputManager:InputManager;
 
 		public var monkey:ChaosMonkey;
-
+		public var testingBlockExiting:Boolean;
 
 		public function CoC()
 		{
+			// This is a flag used to prevent the game from exiting when running under the automated tester
+			// (the chaos monkey)
+			this.testingBlockExiting = false;
+
+
 			this.model = new GameModel();
 			this.mainView = new MainView( this.model );
 			this.mainView.name = "mainView";

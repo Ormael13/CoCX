@@ -4,6 +4,12 @@
 	import flash.events.KeyboardEvent;
 	import flash.display.Stage;
 
+	/**
+	 * Chaos Monkey!
+	 * Basically a tool to randomly generate BUTTON_DOWN events, to 
+	 * stress-test the game.
+	 * @author Fake-Name
+	 */
 	public class ChaosMonkey
 	{	
 		
@@ -12,21 +18,29 @@
 
 		*/
 		public var run:Boolean
-		public var excludeMenuKeys:Boolean;
-		private var mainClassPtr:*;
+		public var _excludeMenuKeys:Boolean;
+		private var _mainClassPtr:*;
 		private var stage:Stage;
 		private var debug:Boolean;
 		private var buttons:Array;
 
-		public function ChaosMonkey(mainClass:*)
-		{
-			this.debug = false;
-			this.excludeMenuKeys = true;
+		private var exitKeyCode:Number = 123;
 
-			this.mainClassPtr = mainClass;
-			this.stage = this.mainClassPtr.stage;
-			this.run = false;
-			this.getAvailableKeys()
+		/**
+		 * Init the ChaosMonkey
+		 * @param   mainClass   Reference to core CoC class which is needed to access the inputManager to 
+		      *                 properly synthesize fake key events
+		 * @param   debug       Emit debugging trace statements
+		 */
+		public function ChaosMonkey(mainClass:*, debug = false)
+		{
+			this.debug = debug;
+			this._excludeMenuKeys = true;
+
+			this._mainClassPtr = mainClass;
+			this.stage = this._mainClassPtr.stage;
+			this._mainClassPtr.testingBlockExiting = false;
+
 		}
 
 		private function randomChoice(inArr:Array):*
@@ -34,7 +48,7 @@
 			return inArr[ Math.floor( Math.random() * inArr.length ) ];
 		}
 
-		private function getAvailableKeys()
+		private function initAvailableKeysList()
 		{
 			/*
 			 * 83	-- s				-- Display stats if main menu button displayed
@@ -70,7 +84,7 @@
 			
 			this.buttons = new Array()
 
-			controlMethods = this.mainClassPtr.inputManager.GetControlMethods()
+			controlMethods = this._mainClassPtr.inputManager.GetControlMethods()
 			
 			if (this.debug) trace(controlMethods)
 			if (this.debug) trace(blockedButtons)
@@ -78,7 +92,7 @@
 			if (this.debug) trace("ControlMethods = ", this.buttons)
 			for (var button in controlMethods)
 			{
-				if (!this.excludeMenuKeys)
+				if (!this._excludeMenuKeys)
 				{
 					this.buttons.push(controlMethods[button]);
 				}
@@ -89,29 +103,61 @@
 
 			}
 
-			/*
-			for (button in this.buttons)
-			{
-				trace("Index of", this.buttons[button], "=", blockedButtons.indexOf(Number(this.buttons[button])))
-				for (var a = 0; a < blockedButtons.length; a++)
-				{
-
-					if (this.buttons[button] == blockedButtons[a])
-					{
-						trace("It's a duplicate - ", this.buttons[button])
-					}
-				}
-
-			}
-			*/
 			if (this.debug) trace(this.buttons)
 			if (this.debug) trace(blockedButtons)
 		}
 
+		private function setupExitKey():void
+		{
+			
+			// IIFE Hack: http://en.wikipedia.org/wiki/Immediately-invoked_function_expression
+			var stopMonkahTempFunc:Function = function(callFunc:Function):Function
+			{ 
+				return function():void { callFunc() }
+			}(this.stopMonkey);
+
+			this._mainClassPtr.inputManager.AddBindableControl(
+				"StopMonkah",
+				"Stop the chaos-monkey running",
+				stopMonkahTempFunc
+			);
+
+			this._mainClassPtr.inputManager.BindKeyToControl(123, "StopMonkah");
+		}
+
+
+		public function get excludeMenuKeys():Boolean
+		{
+			return this._excludeMenuKeys;
+		}
+		
+		public function set excludeMenuKeys(flag:Boolean):void
+		{
+			this._excludeMenuKeys = flag;
+		}
+
+		public function stopMonkey():void
+		{
+			this._mainClassPtr.testingBlockExiting = false;
+		}
+
+
+
+
 		public function createChaos(blockSaves:Boolean = true)
 		{
-			this.run = true;
-			this.getAvailableKeys()
+
+			this._mainClassPtr.testingBlockExiting = true;
+
+			// Pull in key list from the InputManager
+			this.initAvailableKeysList()
+
+			// setup exit handler
+			this.setupExitKey()
+			
+			// Tie the random keypress generator to the EXIT_FRAME event, which
+			// runs at the end of each render cycle (it's not *quite* an ON_IDLE event
+			// but apparently flash doesn't have a proper ON_IDLE, so what the hell.)
 			this.stage.addEventListener(Event.EXIT_FRAME, this.throwAMonkeyAtIt);
 		}
 
@@ -121,12 +167,19 @@
 
 			
 			var fakeEvent:KeyboardEvent = new KeyboardEvent(KeyboardEvent.KEY_DOWN);
-			fakeEvent.keyCode = randomChoice(this.buttons);
-			if (this.debug) trace("FakeEvent - ", fakeEvent)
-			this.mainClassPtr.inputManager.KeyHandler(fakeEvent);
 
-			if (!(this.run))
+			fakeEvent.keyCode = randomChoice(this.buttons);
+			
+			if (this.debug) trace("FakeEvent - ", fakeEvent);
+
+			this._mainClassPtr.inputManager.KeyHandler(fakeEvent);
+
+			if (!(this._mainClassPtr.testingBlockExiting))
+			{
+				trace("Stopping Monkey");
+				this._mainClassPtr.inputManager.RemoveExistingKeyBind(this.exitKeyCode);
 				this.stage.removeEventListener(Event.EXIT_FRAME, this.throwAMonkeyAtIt);
+			}
 
 
 		}
