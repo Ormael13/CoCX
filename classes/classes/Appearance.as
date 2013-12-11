@@ -123,8 +123,16 @@
 		public static function nippleDescription(i_creature:Creature, i_rowNum:Number):String
 		{
 			//DEBUG SHIT!
-			if(i_rowNum > (i_creature.breastRows.length - 1)) return "<B>Error: Invalid breastRows (" + i_rowNum + ") passed to nippleDescription()</b>";
-			if(i_rowNum < 0) return "<B>Error: Invalid breastRows (" + i_rowNum + ") passed to nippleDescription()</b>";
+			if(i_rowNum > (i_creature.breastRows.length - 1)) 
+			{
+				//this.encounteredErrorFlag = true;
+				return "<B>Error: Invalid breastRows (" + i_rowNum + ") passed to nippleDescription()</b>";
+			}
+			if(i_rowNum < 0) 
+			{
+				//this.encounteredErrorFlag = true;
+				return "<B>Error: Invalid breastRows (" + i_rowNum + ") passed to nippleDescription()</b>";
+			}
 			var haveDescription:Boolean = false;
 			var description:String = "";
 			var options:Array;
@@ -412,8 +420,16 @@
 
 		public static function cockDescription(i_creature:Creature, i_cockIndex:Number):String
 		{
-			if(i_creature.totalCocks() == 0) return "<b>ERROR: CockDescript Called But No Cock Present</b>";
-			if(i_creature.totalCocks() <= i_cockIndex && i_cockIndex != 99) return "<b>ERROR: CockDescript called with index of " + i_cockIndex + " - out of BOUNDS</b>";
+			if(i_creature.totalCocks() == 0) 
+			{
+				//this.encounteredErrorFlag = true;
+				return "<b>ERROR: CockDescript Called But No Cock Present</b>";
+			}
+			if(i_creature.totalCocks() <= i_cockIndex && i_cockIndex != 99) 
+			{
+				//this.encounteredErrorFlag = true;
+				return "<b>ERROR: CockDescript called with index of " + i_cockIndex + " - out of BOUNDS</b>";
+			}
 
 			//Cocknum 99 to default to boring descriptions!
 			if(i_cockIndex != 99)
@@ -432,7 +448,8 @@
 				else if(i_creature.cocks[i_cockIndex].cockType == CockTypesEnum.HUMAN) return humanDescript(i_cockIndex);
 				else
 				{
-					trace("ERRPR: Cock type failed to match. " + i_creature.cocks[i_cockIndex].cockType);
+					//this.encounteredErrorFlag = true;
+					trace("ERROR: Cock type failed to match. " + i_creature.cocks[i_cockIndex].cockType);
 					return "cockDescription failed to describe your cock";
 				}
 			}
@@ -1144,7 +1161,11 @@
 		public static function cockMultiLDescriptionShort(i_creature:Creature):String
 		{
 			var description:String = "";
-			if(i_creature.cocks.length < 1) return "<b>ERROR: NO WANGS DETECTED for cockMultiLightDesc()</b>";
+			if(i_creature.cocks.length < 1) 
+			{
+				//this.encounteredErrorFlag = true;
+				return "<b>ERROR: NO WANGS DETECTED for cockMultiLightDesc()</b>";
+			}
 			if(i_creature.horseCocks() == i_creature.totalCocks()) description += cockNoun(CockTypesEnum.HORSE);
 			else if(i_creature.dogCocks() == i_creature.totalCocks()) description += cockNoun(CockTypesEnum.DOG);
 			else if(i_creature.demonCocks() == i_creature.totalCocks()) description += cockNoun(CockTypesEnum.DEMON);
@@ -1377,11 +1398,20 @@
 		public static function vaginaDescription(i_creature:Creature, i_vaginaIndex:Number = 0):String
 		{
 			if (i_vaginaIndex > (i_creature.vaginas.length - 1))
+			{
+				//this.encounteredErrorFlag = true;
 				return "<B>Error: Invalid vagina number (" + i_vaginaIndex + ") passed to vaginaDescript()</b>";
+			}
 			if (i_vaginaIndex < 0)
+			{
+				//this.encounteredErrorFlag = true;
 				return "<B>Error: Invalid vaginaNum (" + i_vaginaIndex + ") passed to vaginaDescript()</b>";
+			}
 			if (i_creature.vaginas.length <= 0)
+			{
+				//this.encounteredErrorFlag = true;
 				return "ERROR: Called vaginaDescription with no vaginas";
+			}
 
 			var description:String = "";
 			var weighting:Number = 0;
@@ -1549,7 +1579,11 @@
 					haveDescription = true;
 				}
 			}
-			else return("ERROR: CLITDESCRIPT WITH NO CLIT");
+			else
+			{
+				//this.encounteredErrorFlag = true;
+				return("ERROR: CLITDESCRIPT WITH NO CLIT");
+			}
 
 			//Clit nouns
 			options = ["clit",

@@ -2268,7 +2268,9 @@ public function catAutoLick():void {
 			outputText("Another shot of pre-cum is sent down your throat, followed by the building pressure of your release. You force your head down to the base of your " + cockDescript(0) + ", sending it deeply down your throat, feeling the warm and smooth inside as it tightens around the invading member. Thank goodness you're holding your breath, or you would be suffocating right now. You hurry up before you choke on your cock,  moving your head back and forth while your hand caresses the base of your cock. This releases the pent-up pressure through your cock and down your throat. It's too much for you to handle; your cheeks fill up with cum and you pull your head back, making a loud popping sound when you finally free your mouth, as the cum pooled in your cheeks spills out all over your cock. Your cock spurts a few more lines of sperm onto your stomach. You stroke the exhausted member a few times, milking the last drops of cum out. Satisfying the final bits of lust, you lay down on the bedroll and fall into a short cat nap.", false);
 		}
 	}
-	else {
+	else 
+	{
+		this.encounteredErrorFlag = true;
 		outputText("404 ERROR - FAP NOT FOUND");
 	}
 	//Stats & next event
@@ -2664,7 +2666,9 @@ public function tentacleSelfFuck():void {
 		}
 		temp++;
 	}
-	if(x == -1) {
+	if(x == -1) 
+	{
+		this.encounteredErrorFlag = true;
 		outputText("ERROR");
 		doNext(13);
 		return;
@@ -2820,7 +2824,9 @@ public function tentacleGoesUpYerPooperNewsAtEleven():void {
 		}
 		temp++;
 	}
-	if(x == -1) {
+	if(x == -1) 
+	{
+		this.encounteredErrorFlag = true;
 		outputText("ERROR");
 		doNext(13);
 		return;
@@ -2893,7 +2899,9 @@ public function gildedCockTurbate():void {
 		temp++;
 	}
 	//Did I fuck up?
-	if(x < 0) {
+	if(x < 0) 
+	{
+		this.encounteredErrorFlag = true;
 		outputText("ERROR, NO GILDED COCK.");
 		doNext(13);
 		return;

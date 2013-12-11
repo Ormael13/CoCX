@@ -187,6 +187,7 @@ public function itemLongName(shortName1:String):String {
 	if(shortName1 == "PrFruit") return "a purple fruit";
 	if(shortName1 == "RingFig") return "a ringtail fig";
 	if(shortName1 == "MouseCo") return "a handful of mouse cocoa";
+	this.encounteredErrorFlag = true;
 	return "ERROR";
 	
 }
@@ -3068,8 +3069,10 @@ public function consumeItem(itemName:String, amount:Number):Boolean {
 	var slot:*;
 	while (amount > 0) 
 	{
-		if(!hasItem(itemName,1)) {
+		if(!hasItem(itemName,1)) 
+		{
 			amount = 0;
+			this.encounteredErrorFlag = true;
 			trace("ERROR: consumeItem in items.as attempting to find an item to remove when the player has none.");
 			break;
 		}
@@ -4099,7 +4102,11 @@ public function equinum():void {
 				stats(0, 0, 0, 0, 5, 4, 35, 0);
 				temp = player.addHorseCock();
 				outputText("\n\nOne of your penises begins to feel strange.  You pull down your clothes to take a look and see the skin of your " + cockDescript(99) + " darkening to a mottled brown and black pattern.", false);
-				if(temp == -1) outputText("FUKKKK ERROR NO COCK XFORMED", true);
+				if(temp == -1) 
+				{
+					this.encounteredErrorFlag = true;
+					outputText("FUKKKK ERROR NO COCK XFORMED", true);
+				}
 				//Already have a sheath
 				if(player.horseCocks() > 1 || player.dogCocks() > 0) outputText("  Your sheath tingles and begins growing larger as the cock's base shifts to lie inside it.", false);
 				else outputText("  You feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your " + cockDescript(temp) + "'s root, tightening and pulling your " + cockDescript(temp) + " inside its depths.", false);

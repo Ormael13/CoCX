@@ -196,8 +196,16 @@ public function PCCarriedGooBackHomeII():void {
 	mainView.nameBox.x = mainView.mainText.x + 5;
 	mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
 }
-public function nameZeLatexGoo():void {
-	if(mainView.nameBox.text == "") {
+public function nameZeLatexGoo():void 
+{
+	if (this.testingBlockExiting)
+	{
+		// We're running under the testing script.
+		// Stuff a name in the box and go go go
+		mainView.nameBox.text = "Derptexy";
+	}
+	else if(mainView.nameBox.text == "") 
+	{
 		clearOutput();
 		outputText("<b>You must select a name.</b>", false);
 		mainView.nameBox.x = mainView.mainText.x + 5;

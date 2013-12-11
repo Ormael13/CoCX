@@ -2936,7 +2936,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					player.cocks[counter].cockType = CockTypesEnum.FOX;
 			}
 			counter--;
-			trace("IMA LOOPIN", counter);
+			// trace("IMA LOOPIN", counter);
 		}
 		
 	}	

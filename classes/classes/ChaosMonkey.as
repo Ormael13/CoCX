@@ -18,7 +18,8 @@
 
 		*/
 		public var run:Boolean
-		public var _excludeMenuKeys:Boolean;
+		private var _excludeMenuKeys:Boolean;
+		private var _catchOutputTextErrors:Boolean;
 		private var _mainClassPtr:*;
 		private var stage:Stage;
 		private var debug:Boolean;
@@ -36,6 +37,7 @@
 		{
 			this.debug = debug;
 			this._excludeMenuKeys = true;
+			this._catchOutputTextErrors = false;
 
 			this._mainClassPtr = mainClass;
 			this.stage = this._mainClassPtr.stage;
@@ -77,7 +79,24 @@
 			 * 36	-- Home				-- Cycle the background of the maintext area
 			*/
 
-			var blockedButtons = new Array(112, 113, 114, 115, 116, 83, 76, 117, 118, 119, 120, 121, 8, 68, 65, 36)
+			var blockedButtons = new Array(112,     // Quicksave buttons
+											113,
+											114,
+											115,
+											116,
+											
+											117,     // Quickload buttons
+											118,
+											119,
+											120,
+											121,
+											
+											// 83,      // -- Display stats if main menu button displayed
+											// 76,      // -- Level up if level up button displayed
+											 8,      // -- Go to "Main" menu if in game
+											68,      // -- Open saveload if in game
+											// 65,      // -- Open apperance if in game
+											36);      // -- Cycle the background of the maintext area
 
 			if (this.debug) trace("Getting available key events")
 			var controlMethods:Array;
@@ -92,13 +111,16 @@
 			if (this.debug) trace("ControlMethods = ", this.buttons)
 			for (var button in controlMethods)
 			{
-				if (!this._excludeMenuKeys)
+				if (controlMethods[button] != exitKeyCode)   // prevent the monkey from exiting itself by blocking it from adding the exit key-code to the key array
 				{
-					this.buttons.push(controlMethods[button]);
-				}
-				else if (blockedButtons.indexOf(controlMethods[button]) < 0)
-				{
-					this.buttons.push(controlMethods[button]);
+					if (!this._excludeMenuKeys)
+					{
+						this.buttons.push(controlMethods[button]);
+					}
+					else if (blockedButtons.indexOf(controlMethods[button]) < 0)
+					{
+						this.buttons.push(controlMethods[button]);
+					}
 				}
 
 			}
@@ -122,7 +144,7 @@
 				stopMonkahTempFunc
 			);
 
-			this._mainClassPtr.inputManager.BindKeyToControl(123, "StopMonkah");
+			this._mainClassPtr.inputManager.BindKeyToControl(exitKeyCode, "StopMonkah");
 		}
 
 
@@ -136,18 +158,34 @@
 			this._excludeMenuKeys = flag;
 		}
 
+		public function get throwOnSyntaxError():Boolean
+		{
+			return this._catchOutputTextErrors;
+		}
+		
+		public function set throwOnSyntaxError(flag:Boolean):void
+		{
+			this._catchOutputTextErrors = flag;
+		}
+
 		public function stopMonkey():void
 		{
 			this._mainClassPtr.testingBlockExiting = false;
 		}
 
+		private function disengageMonkey():void
+		{
+				this._mainClassPtr.inputManager.RemoveExistingKeyBind(this.exitKeyCode);
+				this.stage.removeEventListener(Event.EXIT_FRAME, this.throwAMonkeyAtIt);
 
-
+		}
 
 		public function createChaos(blockSaves:Boolean = true)
 		{
 
+			trace("Starting monkey")
 			this._mainClassPtr.testingBlockExiting = true;
+			this._mainClassPtr.encounteredErrorFlag = false;
 
 			// Pull in key list from the InputManager
 			this.initAvailableKeysList()
@@ -174,11 +212,18 @@
 
 			this._mainClassPtr.inputManager.KeyHandler(fakeEvent);
 
+			this._mainClassPtr.encounteredErrorFlag
+
 			if (!(this._mainClassPtr.testingBlockExiting))
 			{
 				trace("Stopping Monkey");
-				this._mainClassPtr.inputManager.RemoveExistingKeyBind(this.exitKeyCode);
-				this.stage.removeEventListener(Event.EXIT_FRAME, this.throwAMonkeyAtIt);
+				disengageMonkey();
+			}
+			if (this._mainClassPtr.encounteredErrorFlag && this._catchOutputTextErrors)
+			{
+				trace("Stopping Monkey");
+				disengageMonkey();
+				throw new Error("Syntax Error!")
 			}
 
 

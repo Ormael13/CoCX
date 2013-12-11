@@ -646,7 +646,20 @@ public function nameDatHelspawn():void {
 public function applyHelspawnName():void {
 	spriteSelect(68);
 	//Easter Egg Names Hel WILL NOT ALLOW:
-	if(mainView.nameBox.text == "" || mainView.nameBox.text == "Hellgirl" || mainView.nameBox.text == "Kid" || mainView.nameBox.text == "Phoenix" || mainView.nameBox.text == "Savin" || mainView.nameBox.text == "Helia" || mainView.nameBox.text == "Mini-doofus") {
+	if (this.testingBlockExiting)
+	{
+		// We're running under the testing script.
+		// Stuff a name in the box and go go go
+		mainView.nameBox.text = "Kiderp";
+	}
+	else if(mainView.nameBox.text == "" 
+			|| mainView.nameBox.text == "Hellgirl" 
+			|| mainView.nameBox.text == "Kid" 
+			|| mainView.nameBox.text == "Phoenix" 
+			|| mainView.nameBox.text == "Savin" 
+			|| mainView.nameBox.text == "Helia" 
+			|| mainView.nameBox.text == "Mini-doofus") 
+	{
 		clearOutput();
 		if(mainView.nameBox.text == "") outputText("<b>You must select a name.</b>", false);
 		else if(mainView.nameBox.text == "Hellgirl") outputText("\"<i>Hey, that's copyright infringement.  Probably.</i>\"");

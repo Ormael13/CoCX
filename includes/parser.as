@@ -564,8 +564,11 @@ public function splitConditionalResult(textCtnt:String): Array
 	{
 		ret = textCtnt.split("|")
 		if (ret.length >=3)
+		{
+			this.encounteredErrorFlag = true;
 			ret = ["<b>Error! Too many options in if statement!</b>",
 					"<b>Error! Too many options in if statement!</b>"];
+		}
 
 		// If there was no "else" condition, add a
 		if (ret.length == 1)
@@ -657,7 +660,10 @@ public function parseConditional(textCtnt:String, depth:int):String
 		}
 	}
 	else
+	{
+		this.encounteredErrorFlag = true;
 		throw new Error("Invalid if statement!", textCtnt);
+	}
 	return "";
 }
 
@@ -743,7 +749,10 @@ public function parseButtonTag(textCtnt:String):void
 	var arr:Array;
 	arr = textCtnt.split("|")
 	if (arr.len > 2)
+	{
+		this.encounteredErrorFlag = true;
 		throw new Error("Too many items in button")
+	}
 
 	var buttonName:String = stripStr(arr[1]);
 	var buttonFunc:String = stripStr(arr[0].substring(arr[0].indexOf(' ')));

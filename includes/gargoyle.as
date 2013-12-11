@@ -102,7 +102,13 @@ public function breakZeChains():void {
 }
 
 public function nameZeGargoyle():void {
-	if(mainView.nameBox.text == "") {
+	if (this.testingBlockExiting)
+	{
+		// We're running under the testing script.
+		// Stuff a name in the box and go go go
+		mainView.nameBox.text = "Derpgoyle";
+	}
+	else if(mainView.nameBox.text == "") {
 		clearOutput();
 		outputText("<b>You must name her.</b>", false);
 		mainView.nameBox.text = "";

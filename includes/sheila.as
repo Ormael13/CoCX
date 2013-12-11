@@ -2144,7 +2144,9 @@ public function sheilaMutualMasturbation():void {
 	if(player.hasFuckableNipples()) choices[choices.length] = "nipplecunt";
 	if(player.gender == 0 || choices.length == 0) choices[choices.length] = "ass";
 	
-	if(choices.length == 0) {
+	if(choices.length == 0) 
+	{
+		this.encounteredErrorFlag = true;
 		outputText("ERROR - SHEILA MASTURBATE BROKE, SON");
 		doNext(13);
 	}

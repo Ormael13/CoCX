@@ -345,7 +345,10 @@
 			if (hasBeard())
 				return "beard";
 			else
+			{
+				//this.encounteredErrorFlag = true;
 				return "ERROR: NO BEARD! <b>YOU ARE NOT A VIKING AND SHOULD TELL FEN IMMEDIATELY.</b>";
+			}
 		}
 		
 		public function skin(noAdj:Boolean = false, noTone:Boolean = false):String

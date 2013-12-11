@@ -127,8 +127,16 @@ public function arriveWithLacticWaifuAtCamp():void {
 }
 
 
-public function nameZeMilkBath():void {
-	if(mainView.nameBox.text == "" || mainView.nameBox.text is Number) {
+public function nameZeMilkBath():void 
+{
+	if (this.testingBlockExiting)
+	{
+		// We're running under the testing script.
+		// Stuff a name in the box and go go go
+		mainView.nameBox.text = "Milkderp";
+	}
+	else if(mainView.nameBox.text == "" || mainView.nameBox.text is Number) 
+	{
 		clearOutput();
 		outputText("<b>You must give her a name.</b>", false);
 		menu();

@@ -2606,7 +2606,14 @@ public function doCombat(eventNum:Number):void
 	}
 	//Sand witch bad end
 	//GAME OVERS
-	if(eventNum == 5025) {
+	if(eventNum == 5025) 
+	{
+		if (this.testingBlockExiting)
+		{
+			// Prevent ChaosMonkah instances from getting stuck
+			doNext(1);
+		}
+
 		outputText("<b>GAME OVER</b>", true);
 		if(flags[EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "",0,"NewGamePlus",10035,"",0,"CHEAT", 1);
 		else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus",10035, "BLAH", 0, "LULZ", 0);
@@ -2619,6 +2626,13 @@ public function doCombat(eventNum:Number):void
 	}
 	//Soft Game Over - for when you want to leave the text on-screen
 	if(eventNum == 5035) {
+		
+		if (this.testingBlockExiting)
+		{
+			// Prevent ChaosMonkah instances from getting stuck
+			doNext(1);
+		}
+
 		outputText("\n\n<b>GAME OVER</b>", false);
 		if(flags[EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "",0,"NewGamePlus",10035,"",0,"Debug Cheat", 1);
 		else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus", 10035, "BLAH", 0, "LULZ", 0);

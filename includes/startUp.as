@@ -61,12 +61,22 @@ probably do not intend.
 (Yeah, I want to fix that)
 	]]>, true, true);
 
+	this.monkey.throwOnSyntaxError = false;
+	this.monkey.excludeMenuKeys = false;
 	menu();
-	addButton(0, "ChaosMonkey",   saveMonkey);
+	addButton(0, "ChaosMonkey",   monkeyStartReallyConfirm);
 	addButton(1, "NoMenuMonkey",   noSaveMonkey);
+	addButton(5, "SyntaxMonkey",   syntaxMonkey);
 	addButton(9, "No",            debugPane)
 }
 
+
+public function syntaxMonkey():void
+{
+	this.monkey.throwOnSyntaxError = true;
+	this.monkey.excludeMenuKeys = true;			// Syntax checking monkey should ignore the menu keys (they're irrelevant to it's functions)
+	monkeyStartReallyConfirm()
+}
 
 public function noSaveMonkey():void
 {
@@ -74,11 +84,7 @@ public function noSaveMonkey():void
 	monkeyStartReallyConfirm()
 }
 
-public function saveMonkey():void
-{
-	this.monkey.excludeMenuKeys = false;
-	monkeyStartReallyConfirm()
-}
+
 public function monkeyStartReallyConfirm():void
 {
 	outputText(<![CDATA[
@@ -99,9 +105,13 @@ public function initiateTheMonkey():void
 	outputText(<![CDATA[
 INITIATING MONKEY
 	]]>, true, true);
-	this.monkey.createChaos()
+	
+	this.monkey.createChaos();
 
-	doNext(13)
+	if (this.player.str) // we're in a game
+		doNext(13);      // so dump out to the camp scene
+	else
+		doNext(newGameGo);   // not in a game, create a char randomly
 }
 
 import flash.system.SecurityDomain;
