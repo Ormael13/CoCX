@@ -1,0 +1,4 @@
+[
+{ "keys": ["ctrl+shift+."], "command": "run_macro_file", "args": {"file": "Packages/Macros/outTextWrap.sublime-macro"} },
+{ "keys": ["ctrl+shift+,"], "command": "reg_replace", "args": { "replacements": ["fix_fancyquotes_open", "fix_fancyquotes_close", "fix_fancyquotes_apos"]} }
+]
