@@ -1550,7 +1550,7 @@ package classes.content
 			if (player.hasCock()) // Has a dick
 			{
 				addButton(3, "Handjob", sexHandjob);
-				addButton(4, "Get Blown", sexBlowjob);
+				//addButton(4, "Get Blown", sexBlowjob); // Ehh, it's technically complete in the doc, but it reads pretty unfinished and I'm not a fan of it at all.
 			}
 
 			
