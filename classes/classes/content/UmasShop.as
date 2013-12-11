@@ -2,7 +2,6 @@ package classes.content
 {
 	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
-	import flash.display.InteractiveObject;
 	
 	/**
 	 * Whee!
@@ -38,7 +37,7 @@ package classes.content
 		
 		/**
 		 * First time scene entering le shoppe
-		 * Edit Status: 95%
+		 * Edit Status: 100%
 		 */
 		public function firstVisitPart1():void
 		{
@@ -60,30 +59,28 @@ package classes.content
 				outputText(" and from there you've seen the humble exterior many times.  ");
 			}
 			
-			outputText("\"Kemono's Oriental Clinic\" is written on a wooden board above the entryway.  \"<i>Sugar, you coming?</i>\"  Loppe asks, breaking you out of your reverie.  \"<i>Come on in!</i>\"  Loppe holds the door open to you.\n\n");
+			outputText("\"Kemono's Oriental Clinic\" is written on a wooden board above the entryway.  \"<i>Sugar, you coming?</i>\" Loppe asks, breaking you out of your reverie, stood holding the door open for you.  \"<i>Come on in!</i>\"\n\n");
 			outputText("You follow the laquine inside; the interior is similar to Loppe's house, including the strange internal hallway, but the waiting room outside is light and airy.  Windows are adorned with multiple elaborate windchimes, which tinkle and clatter softly as a cooling breeze drifts through the house. A huge shelf dominates one wall, covered in - you find yourself double-checking - what look like tiny, miniature versions of trees.  A nondescript statue-fountain stands in one corner, water welling from its tip and flowing gently down its sides to create a calming sound.  In another corner, there is a small garden of colorful, polished stones and soft white sand.  Multiple lushly-cushioned chairs complete the room, obviously a waiting room - a dense bead curtain cordons off a doorway leading deeper inside the building, and Loppe's mother must clearly lie beyond.\n\n");
-			outputText("\"<i>Mom, are you busy?!</i>\"  Loppe yells.  \"<i>Just a second, dear!</i>\"  You hear a melodic, feminine voice reply.\n\n");
-			outputText("Out of the bead curtains emerges a dog woman; her fur looks ruffled in places and she has a silly smile plastered on her face, her hair seems to be in disarray.  She briefly glances at you and Loppe, and only greets you two with a brief wave and a giggle before going away.  You wonder what could've happened beyond those curtains....\n\n");
+			outputText("\"<i>Mom, are you busy?!</i>\" Loppe yells.  \"<i>Just a second, dear!</i>\" replies a melodic, feminine voice.\n\n");
+			outputText("Out of the bead curtains emerges a dog woman; her fur looks ruffled in places and she has a silly smile plastered over her face, her hair seems to be in disarray.  She briefly glances at you and Loppe, and only greets you two with a brief wave and a giggle before going away.  You wonder what could've happened beyond those curtains.\n\n");
 			outputText("Loppe giggles and gives you an \"I told you so\" look.\n\n");
 			outputText("Before you can think to respond to her, the beads part and a new figure emerges.  She's one of the many anthropomorphs who inhabit this city, a bipedal humanoid horse with unmistakable human features.  She's huge, easily seven feet tall, certainly far bigger than the half-horse who brought you here, with full, round breasts and wide womanly hips clearly delineated by the strange dress that she wears, a rich blue with a pattern of white snowflakes on it.  She looks "); 
 			
 			// Assuming Uma is ~7' tall == 84". 6" leeway for the variants or more? PAGING FENOXO!
 			if (player.tallness < 78)
 			{
-				outputText("down at you");
+				outputText("down at you ");
 			}
 			else if (player.tallness < 90)
 			{
-				outputText("straight at you");
+				outputText("straight at you ");
 			}
 			else
 			{
-				outputText("up at you");
+				outputText("up at you ");
 			}
 			
-			outputText(" with a soft expression; her features are maternal and friendly, but there's a playful twinkle in her eye that makes her look younger than she really is, and for all that she's clearly a mature woman, she's still strong and attractive.  Black hair, starting to go gray at the tips, is worn in a long, elegant braid, the end knotted around an elaborate butterfly hairpin, while her fur is a beautiful shade of chestnut brown and her large eyes are a deep brown, almost black.  She casually flicks an equine ear in a manner that reminds you very much of Loppe, and you have a strong feeling that this is Uma, Loppe's mother.\n\n");
-
-			// Tempted to scene-break here
+			outputText("with a soft expression; her features are maternal and friendly, but there's a playful twinkle in her eye that makes her look younger than she really is, and for all that she's clearly a mature woman, she's still strong and attractive.  Black hair, starting to go gray at the tips, is worn in a long, elegant braid, the end knotted around an elaborate butterfly hairpin, while her fur is a beautiful shade of chestnut brown and her large eyes are a deep brown, almost black.  She casually flicks an equine ear in a manner that reminds you very much of Loppe, and you have a strong feeling that this is Uma, Loppe's mother.\n\n");
 			
 			menu();
 			addButton(0, "Next", firstVisitPart2);

@@ -483,7 +483,7 @@
 			mainView.aCb.dataProvider = new DataProvider(perkList); 
 			mainView.aCb.addEventListener(Event.CHANGE, changeHandler); 
 			 
-			mainView._getButtonToolTipText = getButtonToolTipText;
+			//mainView._getButtonToolTipText = getButtonToolTipText;
 
 			//Register the classes we need to be able to serialize and reconstitute so
 			// they'll get reconstituted into the correct class when deserialized
