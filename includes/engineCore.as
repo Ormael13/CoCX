@@ -2627,6 +2627,63 @@ public function lustPercent():Number {
 
 //TODO stats function with dynamic arguments so you don't have to specify all those zeros each time.
 //Modify stats
+public function dynStats(... args):void
+{
+	// Check num of args, we should have a multiple of 2
+	if ((args.length % 2) != 0)
+	{
+		trace("dynStats aborted. Keys->Arguments could not be matched");
+		return;
+	}
+	
+	var argNamesFull:Array 	= 	new Array("strength", "toughness", "speed", "intellect", "sensetivity", "lust", "corruption", "resisted", "noBimbo"); // In case somebody uses full arg names etc
+	var argNamesShort:Array = 	new Array(	"str", 	"tou", 	"spe", 	"int", 	"lib", 	"sen", 	"lus", 	"cor", 	"res", 	"bim"); // Arg names
+	var argVals:Array = 		new Array(	0, 		0,	 	0, 		0, 		0, 		0, 		0, 		0, 		true, 	false); // Default arg values
+	
+	for (var i:int = 0; i < args.length; i += 2)
+	{
+		if (typeof(args[i]) == "string")
+		{
+			// Make sure the next arg has the POSSIBILITY of being correct
+			if (typeof(args[i + 1]) != "number" || typeof(args[i + 1]) != "boolean")
+			{
+				trace("dynStats aborted. Next argument after argName is invalid!");
+				return;
+			}
+			
+			var argIndex:int = -1;
+			
+			// Figure out which array to search
+			if ((args[i] as String).length <= 3) // Short
+			{
+				argIndex = argNamesShort.indexOf((args[i] as String));
+			}
+			else // Full
+			{
+				argIndex = argNamesFull.indexOf((args[i] as String));
+			}
+			
+			if (argIndex == -1) // Shit fucked up, welp
+			{
+				trace("Couldn't find the arg name " + (args[i] as String) + " in the index arrays. Welp!");
+				return;
+			}
+			else // Stuff the value into our "values" array
+			{
+				argVals[argIndex] = args[i + 1];
+			}
+		}
+		else
+		{
+			trace("dynStats aborted. Expected a key and got SHIT");
+			return;
+		}
+		
+		// Got this far, we have values to statsify
+		stats(argVals[0], argVals[1], argVals[2], argVals[3], argVals[4], argVals[5], argVals[6], argVals[7], argVals[8], argVals[9]);
+	}
+}
+
 public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:Number, sens:Number, lust2:Number, corr:Number, resisted:Boolean = true, noBimbo:Boolean = false):void
 {
 	//Easy mode cuts lust gains!

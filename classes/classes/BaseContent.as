@@ -50,6 +50,17 @@ package classes
 			return kGAMECLASS.rand(maxVal);
 		}
 		
+		protected function urtaLove(value:Number = 0):Boolean
+		{
+			return kGAMECLASS.urtaLove(value);
+		}
+		
+		protected function dynStats(... args):void
+		{
+			// Bullshit to unroll the incoming array
+			kGAMECLASS.dynStats.apply(null, args);
+		}
+		
 		protected function get player():Player
 		{
 			return kGAMECLASS.player;
@@ -319,6 +330,7 @@ package classes
 		{
 			return kGAMECLASS.telAdreMenu;
 		}
+
 	}
 
 }
