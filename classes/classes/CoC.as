@@ -1,5 +1,8 @@
 ﻿package classes
 {
+
+	import classes.CoC_Settings;
+
 	import classes.assClass;
 	import classes.breastRowClass;
 	//import classes.cockClass;
@@ -272,15 +275,18 @@
 
 		public var monkey:ChaosMonkey;
 		public var testingBlockExiting:Boolean;
-		public var encounteredErrorFlag:Boolean;
+		//public var encounteredErrorFlag:Boolean;
 
 		public function CoC()
 		{
 			// This is a flag used to prevent the game from exiting when running under the automated tester
 			// (the chaos monkey)
-			this.testingBlockExiting = false;
+			testingBlockExiting = false;
+			
 			// Used for stopping chaos monkey on syntax errors. Separate flag so we can make stopping optional
-			this.encounteredErrorFlag = false;
+			CoC_Settings.haltOnErrors = false;
+			
+			
 
 
 			this.model = new GameModel();

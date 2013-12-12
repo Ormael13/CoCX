@@ -1884,6 +1884,34 @@ public function getButtonToolTipText( buttonText :String ) :String
 	return toolTipText;
 }
 
+
+private function showButtonWithCallbackShim(butt_index :int, butt_label :String, callBackFunc :Function = null, toolTipText :String = '')
+{
+	// This is a kind of messy hack because I want to log the button events, so I can do better debugging. 
+	// therefore, we wrap the button creation function in a function that generates a callback shim function 
+	// that embeds the button information which, does event-logging, and
+	// *then* calls the relevant callback.
+	
+	
+	var callBackGenerator:Function = function( internal_index :int, internal_label :String, internal_callBackFunc :Function = null, internal_toolTipViewText :String = '' ):Function
+	{ 
+		return function():void 
+		{
+			trace("Callback shim function!");
+			trace("internal_index", internal_index);
+			trace("internal_label", internal_label);
+			trace("internal_callBackFunc", internal_callBackFunc);
+			trace("internal_toolTipViewText", internal_toolTipViewText);
+
+			internal_callBackFunc();
+		}
+	};
+	callBackFunc = callBackGenerator(butt_index, butt_label, callBackFunc, toolTipText);
+	
+	mainView.showBottomButton( butt_index, butt_label, callBackFunc, toolTipText );
+}
+
+
 public function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000):void {
 	var callback :Function,
 		toolTipText :String;
@@ -1899,7 +1927,10 @@ public function addButton(pos:int, text:String = "", func1:Function = null, arg1
 		callback = function _addButtonCallback():* { return func1( arg1 ); };
 
 	toolTipText = getButtonToolTipText( text );
-	mainView.showBottomButton( pos, text, callback, toolTipText );
+	if (CoC_Settings.haltOnErrors) 
+		showButtonWithCallbackShim( pos, text, callback, toolTipText );
+	else
+		mainView.showBottomButton( pos, text, callback, toolTipText );
 	mainView.setOutputText( currentText );
 }
 
@@ -1943,31 +1974,49 @@ public function menu(text1:String = "", func1:Function = null, arg1:Number = -90
 					text9:String = null, func9:Function = null, arg9:Number = -9000, 
 					text0:String = null, func0:Function = null, arg0:Number = -9000):void 
 {
-
+	
 	function _conditionallyShowButton( index :int, label :String, func :Function, arg :Number ) :void
 	{
 		var callback :Function, toolTipText :String;
 
 		if( func == null || arg == -9000 )
+		{
 			callback = func;
+		}
 		else
+		{
 			callback = function _menuCallback():* 
 			{ 
 				return func( arg ); 
 			};
+		}
 
 		toolTipText = getButtonToolTipText( label );
 
+		
 		if( func != null )
-			mainView.showBottomButton( index, label, callback, toolTipText );
+		{
+			// This is a kind of messy hack because I want to log the button events, so I can do better debugging. 
+			// therefore, we wrap the callback function in a shim function that does event-logging, and
+			// *then* calls the relevant callback.
+
+			
+			if (CoC_Settings.haltOnErrors) 
+				showButtonWithCallbackShim( index, label, callback, toolTipText );
+			else
+				mainView.showBottomButton( index, label, callback, toolTipText );
+			
+		}
 		else
+		{
 			mainView.hideBottomButton( index );
+		}
 	}
 
 	//Clear funcs & args
 	// funcs = new Array();
 	// args = new Array();
-	
+	trace("New menu");
 	_conditionallyShowButton( 0, text1, func1, arg1 );
 	_conditionallyShowButton( 1, text2, func2, arg2 );
 	_conditionallyShowButton( 2, text3, func3, arg3 );
@@ -2044,7 +2093,10 @@ public function choices(text1:String, butt1:*,
 		else {
 			callback = getCallback( buttonEvents[ tmpJ ] );
 			toolTipText = getButtonToolTipText( textLabels[ tmpJ ] );
-			mainView.showBottomButton( tmpJ, textLabels[ tmpJ ], callback, toolTipText );
+			if (CoC_Settings.haltOnErrors) 
+				showButtonWithCallbackShim( tmpJ, textLabels[ tmpJ ], callback, toolTipText );
+			else
+				mainView.showBottomButton( tmpJ, textLabels[ tmpJ ], callback, toolTipText );
 		}
 
 	}

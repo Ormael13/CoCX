@@ -5709,7 +5709,7 @@ public function amilyAttack():void {
 				outputText(" [Flexibility]", false);
 				break;
 			default:
-				this.encounteredErrorFlag = true;
+				if (CoC_Settings.haltOnErrors) throw new Error("");
 				outputText(" <b>[ERROR]</b>", false);
 				break;
 		}
@@ -5858,7 +5858,7 @@ public function amilyDartGo():void {
 				outputText(" [Flexibility]", false);
 				break;
 			default:
-				this.encounteredErrorFlag = true;
+				if (CoC_Settings.haltOnErrors) throw new Error("");
 				outputText(" <b>[ERROR]</b>", false);
 				break;
 		}

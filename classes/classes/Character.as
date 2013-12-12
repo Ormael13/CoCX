@@ -346,7 +346,7 @@
 				return "beard";
 			else
 			{
-				//this.encounteredErrorFlag = true;
+				//if (CoC_Settings.haltOnErrors) throw new Error("");
 				return "ERROR: NO BEARD! <b>YOU ARE NOT A VIKING AND SHOULD TELL FEN IMMEDIATELY.</b>";
 			}
 		}

@@ -2146,7 +2146,7 @@ public function sheilaMutualMasturbation():void {
 	
 	if(choices.length == 0) 
 	{
-		this.encounteredErrorFlag = true;
+		if (CoC_Settings.haltOnErrors) throw new Error("");
 		outputText("ERROR - SHEILA MASTURBATE BROKE, SON");
 		doNext(13);
 	}

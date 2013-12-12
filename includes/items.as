@@ -8,357 +8,358 @@
 public function itemLongName(shortName1:String):String {
 	
 	if(shortName1 == "DryTent") return "a shriveled tentacle";
-	if(shortName1 == "IzyMilk") return "a bottle of Isabella's milk";
-	if(shortName1 == "EctoPls") return "a bottle of ectoplasm";
-	if(shortName1 == "IncubiD") return "an Incubi draft";
-	if(shortName1 == "P.Draft") return "an untainted Incubi draft";
-	if(shortName1 == "Equinum") return "a vial of Equinum";
-	if(shortName1 == "Reptlum") return "a vial of Reptilum";
-	if(shortName1 == "SucMilk") return "a bottle of Succubi milk";
-	if(shortName1 == "P.S.Mlk") return "an untainted bottle of Succubi milk";
-	if(shortName1 == "GldSeed") return "a golden seed";
-	if(shortName1 == "KangaFt") return "a piece of kanga fruit";
-	if(shortName1 == "MghtyVg") return "a mightily enhanced piece of kanga fruit";
-	if(shortName1 == "MagSeed") return "a magically-enhanced golden seed";
-	if(shortName1 == "CanineP") return "a Canine pepper";
-	if(shortName1 == "BulbyPp") return "a bulbous pepper";
-	if(shortName1 == "KnottyP") return "a knotty canine pepper";
-	if(shortName1 == "BlackPp") return "a solid black canine pepper";
-	if(shortName1 == "DblPepp") return "a double canine pepper";
-	if(shortName1 == "LargePp") return "an overly large canine pepper";
-	if(shortName1 == "MinoBlo") return "a vial of Minotaur blood";
-	if(shortName1 == "MinoCum") return "a sealed bottle of minotaur cum";
-	if(shortName1 == "TScroll") return "a tattered scroll";
-	if(shortName1 == "ImpFood") return "a parcel of imp food";
-	if(shortName1 == "Vital T") return "a vitality tincture";
-	if(shortName1 == "Smart T") return "a cup of scholar's tea";
-	if(shortName1 == "Cerul P") return "a cerulean-tinted potion";
-	if(shortName1 == "PurHony") return "a crystal vial filled with glittering honey";
-	if(shortName1 == "BeeHony") return "a small vial filled with giant-bee honey";
-	if(shortName1 == "SDelite") return "a bottle of 'Succubi's Delight'";
-	if(shortName1 == "S.Dream") return "a bottle of 'Succubus' Dream'";
-	if(shortName1 == "PSDelit") return "an untainted bottle of \"Succubi's Delight\"";
-	if(shortName1 == "GreenGl") return "a clump of green gel";
-	if(shortName1 == "B.Chitn") return "a large shard of chitinous plating";
-	if(shortName1 == "OviElix") return "a hexagonal crystal bottle tagged with an image of an egg";
-	if(shortName1 == "BrownEg") return "a brown and white mottled egg";
-	if(shortName1 == "L.BrnEg") return "a large brown and white mottled egg";
-	if(shortName1 == "PurplEg") return "a purple and white mottled egg";
-	if(shortName1 == "L.PrpEg") return "a large purple and white mottled egg";
-	if(shortName1 == "BlueEgg") return "a blue and white mottled egg";
-	if(shortName1 == "L.BluEg") return "a large blue and white mottled egg";
-	if(shortName1 == "PinkEgg") return "a pink and white mottled egg";
-	if(shortName1 == "L.PnkEg") return "a large pink and white mottled egg";
-	if(shortName1 == "NPnkEgg") return "a neon pink egg";
-	if(shortName1 == "L.WhtEg") return "a large white egg";
-	if(shortName1 == "WhiteEg") return "a milky-white egg";
-	if(shortName1 == "BlackEg") return "a rubbery black egg";
-	if(shortName1 == "L.BlkEg") return "a large rubbery black egg";
-	if(shortName1 == "RidingC") return "a riding crop";
-	if(shortName1 == "L. Axe ") return "an axe large enough for a minotaur";
-	if(shortName1 == "L.Hammr") return "Marble's large hammer";
-	if(shortName1 == "Pipe   ") return "a pipe";
-	if(shortName1 == "GelArmr") return "a suit of gel armor";
-	if(shortName1 == "LeathrA") return "a set of leather armor";
-	if(shortName1 == "BeeArmr") return "a set of chitinous armor";
-	if(shortName1 == "B.Sword") return "a beautiful shining sword";
-	if(shortName1 == "L.Daggr") return "an aphrodisiac-coated dagger";
-	if(shortName1 == "C.Cloth") return "a set of comfortable clothes";
-	if(shortName1 == "S.Swmwr") return "a skimpy black bikini";
-	if(shortName1 == "Red Dye") return "a vial of red hair dye";
-	if(shortName1 == "Blond D") return "a vial of blonde hair dye";
-	if(shortName1 == "Black D") return "a vial of black hair dye";
-	if(shortName1 == "Brown D") return "a vial of brown hair dye";
-	if(shortName1 == "AuburnD") return "a vial of auburn hair dye";
-	if(shortName1 == "GrayDye") return "a vial of gray hair dye";
-	if(shortName1 == "WhiteDy") return "a vial of white hair dye";
-	if(shortName1 == "PinkDye") return "a vial of bright pink hair dye";
-	if(shortName1 == "PurpDye") return "a vial of purple hair dye";
-	if(shortName1 == "BlueDye") return "a vial of blue hair dye";
-	if(shortName1 == "OrangDy") return "a vial of brilliant orange hair dye";
-	if(shortName1 == "P.Pearl") return "a pure pearl";
-	if(shortName1 == "GroPlus") return "a needle filled with Gro+";
-	if(shortName1 == "Lactaid") return "a pink bottle labelled \"Lactaid\"";
-	if(shortName1 == "M. Milk") return "a clear bottle of milk from Marble";
-	if(shortName1 == "CCupcak") return "a gigantic, chocolate cupcake";
-	if(shortName1 == "Reducto") return "a salve marked as 'Reducto'";
-	if(shortName1 == "LaBova ") return "a bottle containing a misty fluid labeled \"LaBova\"";
-	if(shortName1 == "ProBova") return "a bottle containing a misty fluid labeled \"ProBova\"";
-	if(shortName1 == "P.LBova") return "a bottle containing a white fluid labeled \"Pure LaBova\"";
-	if(shortName1 == "W. Book") return "a small book with a pristine white cover";
-	if(shortName1 == "B. Book") return "a small book with a midnight-black cover";
-	if(shortName1 == "L.Draft") return "a vial of roiling bubble-gum pink fluid";
-	if(shortName1 == "F.Draft") return "a vial of roiling red fluid labeled \"Fuck Draft\"";
-	if(shortName1 == "Gob.Ale") return "a flagon of potent goblin ale";
-	if(shortName1 == "WetClth") return "a wet cloth dripping with slippery slime";
-	if(shortName1 == "Shark.T") return "a sharp shark tooth";
-	if(shortName1 == "TSTooth") return "a glowing tiger shark tooth";
-	if(shortName1 == "W.Fruit") return "a piece of whisker-fruit";
+	else if(shortName1 == "IzyMilk") return "a bottle of Isabella's milk";
+	else if(shortName1 == "EctoPls") return "a bottle of ectoplasm";
+	else if(shortName1 == "IncubiD") return "an Incubi draft";
+	else if(shortName1 == "P.Draft") return "an untainted Incubi draft";
+	else if(shortName1 == "Equinum") return "a vial of Equinum";
+	else if(shortName1 == "Reptlum") return "a vial of Reptilum";
+	else if(shortName1 == "SucMilk") return "a bottle of Succubi milk";
+	else if(shortName1 == "P.S.Mlk") return "an untainted bottle of Succubi milk";
+	else if(shortName1 == "GldSeed") return "a golden seed";
+	else if(shortName1 == "KangaFt") return "a piece of kanga fruit";
+	else if(shortName1 == "MghtyVg") return "a mightily enhanced piece of kanga fruit";
+	else if(shortName1 == "MagSeed") return "a magically-enhanced golden seed";
+	else if(shortName1 == "CanineP") return "a Canine pepper";
+	else if(shortName1 == "BulbyPp") return "a bulbous pepper";
+	else if(shortName1 == "KnottyP") return "a knotty canine pepper";
+	else if(shortName1 == "BlackPp") return "a solid black canine pepper";
+	else if(shortName1 == "DblPepp") return "a double canine pepper";
+	else if(shortName1 == "LargePp") return "an overly large canine pepper";
+	else if(shortName1 == "MinoBlo") return "a vial of Minotaur blood";
+	else if(shortName1 == "MinoCum") return "a sealed bottle of minotaur cum";
+	else if(shortName1 == "TScroll") return "a tattered scroll";
+	else if(shortName1 == "ImpFood") return "a parcel of imp food";
+	else if(shortName1 == "Vital T") return "a vitality tincture";
+	else if(shortName1 == "Smart T") return "a cup of scholar's tea";
+	else if(shortName1 == "Cerul P") return "a cerulean-tinted potion";
+	else if(shortName1 == "PurHony") return "a crystal vial filled with glittering honey";
+	else if(shortName1 == "BeeHony") return "a small vial filled with giant-bee honey";
+	else if(shortName1 == "SDelite") return "a bottle of 'Succubi's Delight'";
+	else if(shortName1 == "S.Dream") return "a bottle of 'Succubus' Dream'";
+	else if(shortName1 == "PSDelit") return "an untainted bottle of \"Succubi's Delight\"";
+	else if(shortName1 == "GreenGl") return "a clump of green gel";
+	else if(shortName1 == "B.Chitn") return "a large shard of chitinous plating";
+	else if(shortName1 == "OviElix") return "a hexagonal crystal bottle tagged with an image of an egg";
+	else if(shortName1 == "BrownEg") return "a brown and white mottled egg";
+	else if(shortName1 == "L.BrnEg") return "a large brown and white mottled egg";
+	else if(shortName1 == "PurplEg") return "a purple and white mottled egg";
+	else if(shortName1 == "L.PrpEg") return "a large purple and white mottled egg";
+	else if(shortName1 == "BlueEgg") return "a blue and white mottled egg";
+	else if(shortName1 == "L.BluEg") return "a large blue and white mottled egg";
+	else if(shortName1 == "PinkEgg") return "a pink and white mottled egg";
+	else if(shortName1 == "L.PnkEg") return "a large pink and white mottled egg";
+	else if(shortName1 == "NPnkEgg") return "a neon pink egg";
+	else if(shortName1 == "L.WhtEg") return "a large white egg";
+	else if(shortName1 == "WhiteEg") return "a milky-white egg";
+	else if(shortName1 == "BlackEg") return "a rubbery black egg";
+	else if(shortName1 == "L.BlkEg") return "a large rubbery black egg";
+	else if(shortName1 == "RidingC") return "a riding crop";
+	else if(shortName1 == "L. Axe ") return "an axe large enough for a minotaur";
+	else if(shortName1 == "L.Hammr") return "Marble's large hammer";
+	else if(shortName1 == "Pipe   ") return "a pipe";
+	else if(shortName1 == "GelArmr") return "a suit of gel armor";
+	else if(shortName1 == "LeathrA") return "a set of leather armor";
+	else if(shortName1 == "BeeArmr") return "a set of chitinous armor";
+	else if(shortName1 == "B.Sword") return "a beautiful shining sword";
+	else if(shortName1 == "L.Daggr") return "an aphrodisiac-coated dagger";
+	else if(shortName1 == "C.Cloth") return "a set of comfortable clothes";
+	else if(shortName1 == "S.Swmwr") return "a skimpy black bikini";
+	else if(shortName1 == "Red Dye") return "a vial of red hair dye";
+	else if(shortName1 == "Blond D") return "a vial of blonde hair dye";
+	else if(shortName1 == "Black D") return "a vial of black hair dye";
+	else if(shortName1 == "Brown D") return "a vial of brown hair dye";
+	else if(shortName1 == "AuburnD") return "a vial of auburn hair dye";
+	else if(shortName1 == "GrayDye") return "a vial of gray hair dye";
+	else if(shortName1 == "WhiteDy") return "a vial of white hair dye";
+	else if(shortName1 == "PinkDye") return "a vial of bright pink hair dye";
+	else if(shortName1 == "PurpDye") return "a vial of purple hair dye";
+	else if(shortName1 == "BlueDye") return "a vial of blue hair dye";
+	else if(shortName1 == "OrangDy") return "a vial of brilliant orange hair dye";
+	else if(shortName1 == "P.Pearl") return "a pure pearl";
+	else if(shortName1 == "GroPlus") return "a needle filled with Gro+";
+	else if(shortName1 == "Lactaid") return "a pink bottle labelled \"Lactaid\"";
+	else if(shortName1 == "M. Milk") return "a clear bottle of milk from Marble";
+	else if(shortName1 == "CCupcak") return "a gigantic, chocolate cupcake";
+	else if(shortName1 == "Reducto") return "a salve marked as 'Reducto'";
+	else if(shortName1 == "LaBova ") return "a bottle containing a misty fluid labeled \"LaBova\"";
+	else if(shortName1 == "ProBova") return "a bottle containing a misty fluid labeled \"ProBova\"";
+	else if(shortName1 == "P.LBova") return "a bottle containing a white fluid labeled \"Pure LaBova\"";
+	else if(shortName1 == "W. Book") return "a small book with a pristine white cover";
+	else if(shortName1 == "B. Book") return "a small book with a midnight-black cover";
+	else if(shortName1 == "L.Draft") return "a vial of roiling bubble-gum pink fluid";
+	else if(shortName1 == "F.Draft") return "a vial of roiling red fluid labeled \"Fuck Draft\"";
+	else if(shortName1 == "Gob.Ale") return "a flagon of potent goblin ale";
+	else if(shortName1 == "WetClth") return "a wet cloth dripping with slippery slime";
+	else if(shortName1 == "Shark.T") return "a sharp shark tooth";
+	else if(shortName1 == "TSTooth") return "a glowing tiger shark tooth";
+	else if(shortName1 == "W.Fruit") return "a piece of whisker-fruit";
 	
-	if(shortName1 == "ClssyCl") return "a set of classy suit-clothes";
+	else if(shortName1 == "ClssyCl") return "a set of classy suit-clothes";
 	//1. Classy Suitclothes
-	if(shortName1 == "RbbrClt") return "a set of revealing rubber fetish clothes";
+	else if(shortName1 == "RbbrClt") return "a set of revealing rubber fetish clothes";
 	//2. Rubber Fetish Clothes
-	if(shortName1 == "FurLoin") return "a front and back set of loincloths";
+	else if(shortName1 == "FurLoin") return "a front and back set of loincloths";
 	//3. revealing fur loincloths
-	if(shortName1 == "AdvClth") return "a green adventurer's outfit, complete with pointed cap";
+	else if(shortName1 == "AdvClth") return "a green adventurer's outfit, complete with pointed cap";
 	//4. Green Adventurer's Clothes	
-	if(shortName1 == "TubeTop") return "a snug tube top and VERY short shorts";
+	else if(shortName1 == "TubeTop") return "a snug tube top and VERY short shorts";
 	//5. tube top and short shorts
-	if(shortName1 == "Overall") return "a white shirt and overalls";
+	else if(shortName1 == "Overall") return "a white shirt and overalls";
 	//6. white shirt and overalls
-	if(shortName1 == "B.Dress") return "a ballroom dress patterned with sequins";
+	else if(shortName1 == "B.Dress") return "a ballroom dress patterned with sequins";
 	//7. long ballroom dress patterned with sequins
-	if(shortName1 == "T.BSuit") return "a semi-transparent, curve-hugging bodysuit";
+	else if(shortName1 == "T.BSuit") return "a semi-transparent, curve-hugging bodysuit";
 	//8. semi-transparent bodysuit that clings to your curves	
-	if(shortName1 == "M.Robes") return "a set of modest robes";
+	else if(shortName1 == "M.Robes") return "a set of modest robes";
 	//9. Modest Robes
-	if(shortName1 == "LthrPnt") return "a pair of leather pants and a white silk shirt";
+	else if(shortName1 == "LthrPnt") return "a pair of leather pants and a white silk shirt";
 	//10. white silk shirt and tight leather pants
 	//Snakeoil
-	if(shortName1 == "SnakOil") return "a vial of snake oil";
+	else if(shortName1 == "SnakOil") return "a vial of snake oil";
 	//ARMOR SHOP STUFF:
-	if(shortName1 == "LthrRob") return "a suit of black leather armor with voluminous robes";
+	else if(shortName1 == "LthrRob") return "a suit of black leather armor with voluminous robes";
 	//2. scale-mail armor pieces
-	if(shortName1 == "ScaleMl") return "a set of scale-mail armor";
+	else if(shortName1 == "ScaleMl") return "a set of scale-mail armor";
 	//3. full platemail equipment
-	if(shortName1 == "FullPlt") return "a suit of full-plate armor";
+	else if(shortName1 == "FullPlt") return "a suit of full-plate armor";
 	//4. practically indecent steel equipment
-	if(shortName1 == "IndecSt") return "a suit of practically indecent steel armor";
+	else if(shortName1 == "IndecSt") return "a suit of practically indecent steel armor";
 	//5. full-body chainmail equipment
-	if(shortName1 == "FullChn") return "a full suit of chainmail armor";
+	else if(shortName1 == "FullChn") return "a full suit of chainmail armor";
 	//6. revealing chainmail bikini pieces
-	if(shortName1 == "ChBikni") return "a chainmail bikini";
-	if(shortName1 == "SeductA") return "a set of scandalously seductive armor";
-	if(shortName1 == "ExtSerm") return "a bottle of hair extension serum";
-	if(shortName1 == "Hummus ") return "a blob of cheesy-looking hummus";
-	if(shortName1 == "Coal   ") return "two pieces of coal";
+	else if(shortName1 == "ChBikni") return "a chainmail bikini";
+	else if(shortName1 == "SeductA") return "a set of scandalously seductive armor";
+	else if(shortName1 == "ExtSerm") return "a bottle of hair extension serum";
+	else if(shortName1 == "Hummus ") return "a blob of cheesy-looking hummus";
+	else if(shortName1 == "Coal   ") return "two pieces of coal";
 	//I put on my robe and wizard hat
-	if(shortName1 == "W.Robes") return "a wizard's robes";
-	if(shortName1 == "W.Staff") return "a wizard's staff";
-	if(shortName1 == "W.Stick") return "a wingstick";
-	if(shortName1 == "Claymor") return "a large claymore";
-	if(shortName1 == "Warhamr") return "a huge warhammer";
-	if(shortName1 == "Katana ") return "a katana";
-	if(shortName1 == "Spear  ") return "a deadly spear";
-	if(shortName1 == "Whip   ") return "a coiled whip";
-	if(shortName1 == "SucWhip") return "a succubi whip";
-	if(shortName1 == "JRapier") return "a jeweled rapier";
-	if(shortName1 == "RRapier") return "Raphael's vulpine rapier";
-	if(shortName1 == "S.Gaunt") return "a spiked gauntlet";
-	if(shortName1 == "NurseCl") return "a nurse's outfit";
-	if(shortName1 == "BonStrp") return "a set of bondage straps";
-	if(shortName1 == "NumbRox") return "a strange packet of candy called 'Numb Rocks'";
-	if(shortName1 == "SensDrf") return "a bottle of sensitivity draft";
-	if(shortName1 == "BimboLq") return "a potent bottle of 'Bimbo Liqueur'";
-	if(shortName1 == "R.BdySt") return "a red bodysuit for high society";
-	if(shortName1 == "H.Gaunt") return "a set of hooked gauntlets";
-	if(shortName1 == "S.Gossr") return "a bundle of pink, gossamer webbing";
-	if(shortName1 == "B.Gossr") return "a bundle of black, gossamer webbing";
-	if(shortName1 == "SS.Robe") return "a spider-silk robes";
-	if(shortName1 == "SSArmor") return "a suit of spider-silk armor";
-	if(shortName1 == "T.SSilk") return "a bundle of tough spider-silk";
-	if(shortName1 == "LustStk") return "a tube of golden lipstick";
-	if(shortName1 == "BroBrew") return "a can of Bro Brew";
-	if(shortName1 == "I.Robes") return "inquisitor's robes";
-	if(shortName1 == "I.Corst") return "inquisitor's corset";
-	if(shortName1 == "S.Blade") return "a spellblade";
-	if(shortName1 == "BC Beer") return "a mug of Black Cat Beer";
-	if(shortName1 == "BimboCh") return "a bottle of bimbo champagne";
-	if(shortName1 == "FoxBery") return "a fox berry";
-	if(shortName1 == "VixVigr") return "a bottle labelled \"Vixen's Vigor\"";
-	if(shortName1 == "GooArmr") return "Valeria, the goo-girl armor";
-	if(shortName1 == "GodMead") return "a pint of god's mead";
-	if(shortName1 == "E.Staff") return "an eldritch staff";
-	if(shortName1 == "SheepMk") return "a bottle of sheep milk";
-	if(shortName1 == "DrgnShl") return "a dragon-shell shield";
-	if(shortName1 == "DrgnEgg") return "an unfertilized dragon egg";
-	if(shortName1 == "BimboSk") return "a skirt that looks like it belongs on a bimbo";
-	if(shortName1 == "PeppWht") return "a vial of peppermint white";
-	if(shortName1 == "GldStat") return "a golden statue";
-	if(shortName1 == "FoxJewl") return "a fox jewel";
-	if(shortName1 == "MystJwl") return "a mystic jewel";
-	if(shortName1 == "KitGift") return "a kitsune's gift";
-	if(shortName1 == "Debimbo") return "a bottle marked as 'Debimbo'";
-	if(shortName1 == "LMArmor") return "a bikini-like set of armor that could only belong to a lusty maiden";
-	if(shortName1 == "FishFil") return "a fish fillet";
-	if(shortName1 == "TrapOil") return "a vial of trap oil";
-	if(shortName1 == "PurPeac") return "a pure peach";
-	if(shortName1 == "PrFruit") return "a purple fruit";
-	if(shortName1 == "RingFig") return "a ringtail fig";
-	if(shortName1 == "MouseCo") return "a handful of mouse cocoa";
-	this.encounteredErrorFlag = true;
+	else if(shortName1 == "W.Robes") return "a wizard's robes";
+	else if(shortName1 == "W.Staff") return "a wizard's staff";
+	else if(shortName1 == "W.Stick") return "a wingstick";
+	else if(shortName1 == "Claymor") return "a large claymore";
+	else if(shortName1 == "Warhamr") return "a huge warhammer";
+	else if(shortName1 == "Katana ") return "a katana";
+	else if(shortName1 == "Spear  ") return "a deadly spear";
+	else if(shortName1 == "Whip   ") return "a coiled whip";
+	else if(shortName1 == "SucWhip") return "a succubi whip";
+	else if(shortName1 == "JRapier") return "a jeweled rapier";
+	else if(shortName1 == "RRapier") return "Raphael's vulpine rapier";
+	else if(shortName1 == "S.Gaunt") return "a spiked gauntlet";
+	else if(shortName1 == "NurseCl") return "a nurse's outfit";
+	else if(shortName1 == "BonStrp") return "a set of bondage straps";
+	else if(shortName1 == "NumbRox") return "a strange packet of candy called 'Numb Rocks'";
+	else if(shortName1 == "SensDrf") return "a bottle of sensitivity draft";
+	else if(shortName1 == "BimboLq") return "a potent bottle of 'Bimbo Liqueur'";
+	else if(shortName1 == "R.BdySt") return "a red bodysuit for high society";
+	else if(shortName1 == "H.Gaunt") return "a set of hooked gauntlets";
+	else if(shortName1 == "S.Gossr") return "a bundle of pink, gossamer webbing";
+	else if(shortName1 == "B.Gossr") return "a bundle of black, gossamer webbing";
+	else if(shortName1 == "SS.Robe") return "a spider-silk robes";
+	else if(shortName1 == "SSArmor") return "a suit of spider-silk armor";
+	else if(shortName1 == "T.SSilk") return "a bundle of tough spider-silk";
+	else if(shortName1 == "LustStk") return "a tube of golden lipstick";
+	else if(shortName1 == "BroBrew") return "a can of Bro Brew";
+	else if(shortName1 == "I.Robes") return "inquisitor's robes";
+	else if(shortName1 == "I.Corst") return "inquisitor's corset";
+	else if(shortName1 == "S.Blade") return "a spellblade";
+	else if(shortName1 == "BC Beer") return "a mug of Black Cat Beer";
+	else if(shortName1 == "BimboCh") return "a bottle of bimbo champagne";
+	else if(shortName1 == "FoxBery") return "a fox berry";
+	else if(shortName1 == "VixVigr") return "a bottle labelled \"Vixen's Vigor\"";
+	else if(shortName1 == "GooArmr") return "Valeria, the goo-girl armor";
+	else if(shortName1 == "GodMead") return "a pint of god's mead";
+	else if(shortName1 == "E.Staff") return "an eldritch staff";
+	else if(shortName1 == "SheepMk") return "a bottle of sheep milk";
+	else if(shortName1 == "DrgnShl") return "a dragon-shell shield";
+	else if(shortName1 == "DrgnEgg") return "an unfertilized dragon egg";
+	else if(shortName1 == "BimboSk") return "a skirt that looks like it belongs on a bimbo";
+	else if(shortName1 == "PeppWht") return "a vial of peppermint white";
+	else if(shortName1 == "GldStat") return "a golden statue";
+	else if(shortName1 == "FoxJewl") return "a fox jewel";
+	else if(shortName1 == "MystJwl") return "a mystic jewel";
+	else if(shortName1 == "KitGift") return "a kitsune's gift";
+	else if(shortName1 == "Debimbo") return "a bottle marked as 'Debimbo'";
+	else if(shortName1 == "LMArmor") return "a bikini-like set of armor that could only belong to a lusty maiden";
+	else if(shortName1 == "FishFil") return "a fish fillet";
+	else if(shortName1 == "TrapOil") return "a vial of trap oil";
+	else if(shortName1 == "PurPeac") return "a pure peach";
+	else if(shortName1 == "PrFruit") return "a purple fruit";
+	else if(shortName1 == "RingFig") return "a ringtail fig";
+	else if(shortName1 == "MouseCo") return "a handful of mouse cocoa";
+	else if (CoC_Settings.haltOnErrors) throw new Error("Invalid item! Item short-name = "+shortName1);
 	return "ERROR";
 	
 }
 public function itemUse(shortName1:String):void {
 	itemSubMenu = false;
 	if(shortName1 == "DryTent") shriveledTentacle();
-	if(shortName1 == "IzyMilk") isabellaMilk();
-	if(shortName1 == "EctoPls") ectoplasm();
-	if(shortName1 == "IncubiD") incubiDraft(true);
-	if(shortName1 == "P.Draft") incubiDraft(false);
-	if(shortName1 == "Equinum") equinum();
-	if(shortName1 == "Reptlum") reptilum();
-	if(shortName1 == "SucMilk") succubiMilk(true);
-	if(shortName1 == "P.S.Mlk") succubiMilk(false);
-	if(shortName1 == "GldSeed") goldenSeed();
-	if(shortName1 == "MagSeed") goldenSeed(1);
-	if(shortName1 == "KangaFt") kangaFruit();
-	if(shortName1 == "MghtyVg") kangaFruit(1);
-	if(shortName1 == "CanineP") caninePepper();
-	if(shortName1 == "LargePp") caninePepper(1);
-	if(shortName1 == "DblPepp") caninePepper(2);
-	if(shortName1 == "BlackPp") caninePepper(3);
-	if(shortName1 == "KnottyP") caninePepper(4);
-	if(shortName1 == "BulbyPp") caninePepper(5);
-	if(shortName1 == "MinoBlo") minotaurBlood();
-	if(shortName1 == "MinoCum") minotaurCum();
-	if(shortName1 == "Shark.T") sharkTooth();
-	if(shortName1 == "TSTooth") sharkTooth(1);
-	if(shortName1 == "TScroll") tatteredScroll();
-	if(shortName1 == "ImpFood") impFood();
-	if(shortName1 == "Vital T") vitalityTincture();
-	if(shortName1 == "Smart T") scholarsTea();
-	if(shortName1 == "Cerul P") ceruleanPotion();
-	if(shortName1 == "PurHony") pureHoney(true);
-	if(shortName1 == "BeeHony") pureHoney(false);
-	if(shortName1 == "SDelite") succubisDelight(true);
-	if(shortName1 == "S.Dream") succubisDream();
-	if(shortName1 == "PSDelit") succubisDelight(false);
-	if(shortName1 == "GreenGl") greenGel();
-	if(shortName1 == "B.Chitn")	chitinUseless();
-	if(shortName1 == "OviElix") ovipositionElixer();
-	if(shortName1 == "BrownEg") brownEgg(false);
-	if(shortName1 == "L.BrnEg") brownEgg(true);
-	if(shortName1 == "PurplEg") purpleEgg(false);
-	if(shortName1 == "L.PrpEg") purpleEgg(true);
-	if(shortName1 == "BlueEgg") blueEgg(false);
-	if(shortName1 == "L.BluEg") blueEgg(true);
-	if(shortName1 == "PinkEgg") pinkEgg(false);
-	if(shortName1 == "NPnkEgg") neonPinkEgg();
-	if(shortName1 == "L.PnkEg") pinkEgg(true);
-	if(shortName1 == "L.WhtEg") whiteEgg(true);
-	if(shortName1 == "WhiteEg") whiteEgg(false);
-	if(shortName1 == "CCupcak") giantChocolateCupcake();
-	if(shortName1 == "BlackEg") blackRubberEgg(false);
-	if(shortName1 == "L.BlkEg") blackRubberEgg(true);
-	if(shortName1 == "RidingC") equipWeapon("riding crop");
-	if(shortName1 == "L. Axe ") equipWeapon("large axe");
-	if(shortName1 == "B.Sword") equipWeapon("beautiful sword");
-	if(shortName1 == "Pipe   ") equipWeapon("pipe");
-	if(shortName1 == "L.Daggr") equipWeapon("lust-enchanted dagger");
-	if(shortName1 == "GelArmr") equipArmor("glistening gel-armor plates");
-	if(shortName1 == "C.Cloth") equipArmor("comfortable clothes");
-	if(shortName1 == "LeathrA") equipArmor("leather armor segments");
-	if(shortName1 == "BeeArmr") equipArmor("sexy black chitin armor-plating");
-	if(shortName1 == "S.Swmwr") equipArmor("slutty swimwear");
-	if(shortName1 == "Red Dye") hairDye("red");
-	if(shortName1 == "Blond D") hairDye("blonde");
-	if(shortName1 == "Black D") hairDye("black");
-	if(shortName1 == "Brown D") hairDye("brown");
-	if(shortName1 == "AuburnD") hairDye("auburn");
-	if(shortName1 == "GrayDye") hairDye("gray");
-	if(shortName1 == "WhiteDy") hairDye("white");
-	if(shortName1 == "PinkDye") hairDye("neon pink");
-	if(shortName1 == "PurpDye") hairDye("purple");
-	if(shortName1 == "BlueDye") hairDye("dark blue");
-	if(shortName1 == "OrangDy") hairDye("bright orange");
-	if(shortName1 == "P.Pearl") purePearl();
-	if(shortName1 == "GroPlus") growPlus();
-	if(shortName1 == "Lactaid") lactaid();
-	if(shortName1 == "M. Milk") useMarbleMilk();
-	if(shortName1 == "Reducto") reducto();
-	if(shortName1 == "LaBova ") laBova();
-	if(shortName1 == "ProBova") laBova(true,true);
-	if(shortName1 == "P.LBova") laBova(false,false);
-	if(shortName1 == "W. Book") whiteSpellbook();
-	if(shortName1 == "B. Book") blackSpellbook();
-	if(shortName1 == "L.Draft") lustDraft();
-	if(shortName1 == "F.Draft") lustDraft(true);
-	if(shortName1 == "Gob.Ale") goblinAle();
-	if(shortName1 == "WetClth") gooGasmic();
-	if(shortName1 == "L.Hammr") equipWeapon("large hammer");
-	if(shortName1 == "ClssyCl") equipArmor("classy suitclothes");
-	if(shortName1 == "RbbrClt") equipArmor("rubber fetish clothes");
-	if(shortName1 == "FurLoin") equipArmor("revealing fur loincloths");
-	if(shortName1 == "AdvClth") equipArmor("green adventurer's clothes");
-	if(shortName1 == "TubeTop") equipArmor("tube top and short shorts");
-	if(shortName1 == "Overall") equipArmor("white shirt and overalls");
-	if(shortName1 == "B.Dress") equipArmor("long ballroom dress patterned with sequins");
-	if(shortName1 == "T.BSuit") equipArmor("semi-transparent bodysuit");
-	if(shortName1 == "M.Robes") equipArmor("modest robes");
-	if(shortName1 == "LthrPnt") equipArmor("white silk shirt and tight leather pants");
-	if(shortName1 == "LthrRob") equipArmor("black leather armor surrounded by voluminous robes");
+	else if(shortName1 == "IzyMilk") isabellaMilk();
+	else if(shortName1 == "EctoPls") ectoplasm();
+	else if(shortName1 == "IncubiD") incubiDraft(true);
+	else if(shortName1 == "P.Draft") incubiDraft(false);
+	else if(shortName1 == "Equinum") equinum();
+	else if(shortName1 == "Reptlum") reptilum();
+	else if(shortName1 == "SucMilk") succubiMilk(true);
+	else if(shortName1 == "P.S.Mlk") succubiMilk(false);
+	else if(shortName1 == "GldSeed") goldenSeed();
+	else if(shortName1 == "MagSeed") goldenSeed(1);
+	else if(shortName1 == "KangaFt") kangaFruit();
+	else if(shortName1 == "MghtyVg") kangaFruit(1);
+	else if(shortName1 == "CanineP") caninePepper();
+	else if(shortName1 == "LargePp") caninePepper(1);
+	else if(shortName1 == "DblPepp") caninePepper(2);
+	else if(shortName1 == "BlackPp") caninePepper(3);
+	else if(shortName1 == "KnottyP") caninePepper(4);
+	else if(shortName1 == "BulbyPp") caninePepper(5);
+	else if(shortName1 == "MinoBlo") minotaurBlood();
+	else if(shortName1 == "MinoCum") minotaurCum();
+	else if(shortName1 == "Shark.T") sharkTooth();
+	else if(shortName1 == "TSTooth") sharkTooth(1);
+	else if(shortName1 == "TScroll") tatteredScroll();
+	else if(shortName1 == "ImpFood") impFood();
+	else if(shortName1 == "Vital T") vitalityTincture();
+	else if(shortName1 == "Smart T") scholarsTea();
+	else if(shortName1 == "Cerul P") ceruleanPotion();
+	else if(shortName1 == "PurHony") pureHoney(true);
+	else if(shortName1 == "BeeHony") pureHoney(false);
+	else if(shortName1 == "SDelite") succubisDelight(true);
+	else if(shortName1 == "S.Dream") succubisDream();
+	else if(shortName1 == "PSDelit") succubisDelight(false);
+	else if(shortName1 == "GreenGl") greenGel();
+	else if(shortName1 == "B.Chitn")	chitinUseless();
+	else if(shortName1 == "OviElix") ovipositionElixer();
+	else if(shortName1 == "BrownEg") brownEgg(false);
+	else if(shortName1 == "L.BrnEg") brownEgg(true);
+	else if(shortName1 == "PurplEg") purpleEgg(false);
+	else if(shortName1 == "L.PrpEg") purpleEgg(true);
+	else if(shortName1 == "BlueEgg") blueEgg(false);
+	else if(shortName1 == "L.BluEg") blueEgg(true);
+	else if(shortName1 == "PinkEgg") pinkEgg(false);
+	else if(shortName1 == "NPnkEgg") neonPinkEgg();
+	else if(shortName1 == "L.PnkEg") pinkEgg(true);
+	else if(shortName1 == "L.WhtEg") whiteEgg(true);
+	else if(shortName1 == "WhiteEg") whiteEgg(false);
+	else if(shortName1 == "CCupcak") giantChocolateCupcake();
+	else if(shortName1 == "BlackEg") blackRubberEgg(false);
+	else if(shortName1 == "L.BlkEg") blackRubberEgg(true);
+	else if(shortName1 == "RidingC") equipWeapon("riding crop");
+	else if(shortName1 == "L. Axe ") equipWeapon("large axe");
+	else if(shortName1 == "B.Sword") equipWeapon("beautiful sword");
+	else if(shortName1 == "Pipe   ") equipWeapon("pipe");
+	else if(shortName1 == "L.Daggr") equipWeapon("lust-enchanted dagger");
+	else if(shortName1 == "GelArmr") equipArmor("glistening gel-armor plates");
+	else if(shortName1 == "C.Cloth") equipArmor("comfortable clothes");
+	else if(shortName1 == "LeathrA") equipArmor("leather armor segments");
+	else if(shortName1 == "BeeArmr") equipArmor("sexy black chitin armor-plating");
+	else if(shortName1 == "S.Swmwr") equipArmor("slutty swimwear");
+	else if(shortName1 == "Red Dye") hairDye("red");
+	else if(shortName1 == "Blond D") hairDye("blonde");
+	else if(shortName1 == "Black D") hairDye("black");
+	else if(shortName1 == "Brown D") hairDye("brown");
+	else if(shortName1 == "AuburnD") hairDye("auburn");
+	else if(shortName1 == "GrayDye") hairDye("gray");
+	else if(shortName1 == "WhiteDy") hairDye("white");
+	else if(shortName1 == "PinkDye") hairDye("neon pink");
+	else if(shortName1 == "PurpDye") hairDye("purple");
+	else if(shortName1 == "BlueDye") hairDye("dark blue");
+	else if(shortName1 == "OrangDy") hairDye("bright orange");
+	else if(shortName1 == "P.Pearl") purePearl();
+	else if(shortName1 == "GroPlus") growPlus();
+	else if(shortName1 == "Lactaid") lactaid();
+	else if(shortName1 == "M. Milk") useMarbleMilk();
+	else if(shortName1 == "Reducto") reducto();
+	else if(shortName1 == "LaBova ") laBova();
+	else if(shortName1 == "ProBova") laBova(true,true);
+	else if(shortName1 == "P.LBova") laBova(false,false);
+	else if(shortName1 == "W. Book") whiteSpellbook();
+	else if(shortName1 == "B. Book") blackSpellbook();
+	else if(shortName1 == "L.Draft") lustDraft();
+	else if(shortName1 == "F.Draft") lustDraft(true);
+	else if(shortName1 == "Gob.Ale") goblinAle();
+	else if(shortName1 == "WetClth") gooGasmic();
+	else if(shortName1 == "L.Hammr") equipWeapon("large hammer");
+	else if(shortName1 == "ClssyCl") equipArmor("classy suitclothes");
+	else if(shortName1 == "RbbrClt") equipArmor("rubber fetish clothes");
+	else if(shortName1 == "FurLoin") equipArmor("revealing fur loincloths");
+	else if(shortName1 == "AdvClth") equipArmor("green adventurer's clothes");
+	else if(shortName1 == "TubeTop") equipArmor("tube top and short shorts");
+	else if(shortName1 == "Overall") equipArmor("white shirt and overalls");
+	else if(shortName1 == "B.Dress") equipArmor("long ballroom dress patterned with sequins");
+	else if(shortName1 == "T.BSuit") equipArmor("semi-transparent bodysuit");
+	else if(shortName1 == "M.Robes") equipArmor("modest robes");
+	else if(shortName1 == "LthrPnt") equipArmor("white silk shirt and tight leather pants");
+	else if(shortName1 == "LthrRob") equipArmor("black leather armor surrounded by voluminous robes");
 	//2. scale-mail armor pieces
-	if(shortName1 == "ScaleMl") equipArmor("scale-mail armor");
+	else if(shortName1 == "ScaleMl") equipArmor("scale-mail armor");
 	//3. full platemail equipment
-	if(shortName1 == "FullPlt") equipArmor("full platemail");
+	else if(shortName1 == "FullPlt") equipArmor("full platemail");
 	//4. practically indecent steel equipment
-	if(shortName1 == "IndecSt") equipArmor("practically indecent steel armor");
+	else if(shortName1 == "IndecSt") equipArmor("practically indecent steel armor");
 	//5. full-body chainmail equipment
-	if(shortName1 == "FullChn") equipArmor("full-body chainmail");
+	else if(shortName1 == "FullChn") equipArmor("full-body chainmail");
 	//6. revealing chainmail bikini pieces
-	if(shortName1 == "ChBikni") equipArmor("revealing chainmail bikini");
-	if(shortName1 == "SeductA") equipArmor("scandalously seductive armor");
-	if(shortName1 == "SnakOil") snakeOil();
-	if(shortName1 == "ExtSerm") extensionSerum();
-	if(shortName1 == "Hummus ") Hummus();
-	if(shortName1 == "Coal   ") coal();
-	if(shortName1 == "W.Fruit") catTransformation();
-	if(shortName1 == "W.Robes") equipArmor("wizard's robes");
-	if(shortName1 == "W.Staff") equipWeapon("wizard's staff");
-	if(shortName1 == "W.Stick") wingStick();
-	if(shortName1 == "Claymor") equipWeapon("large claymore");
-	if(shortName1 == "Warhamr") equipWeapon("huge warhammer");
-	if(shortName1 == "Katana ") equipWeapon("katana");
-	if(shortName1 == "Spear  ") equipWeapon("deadly spear");
-	if(shortName1 == "Whip   ") equipWeapon("coiled whip");
-	if(shortName1 == "SucWhip") equipWeapon("succubi whip");
-	if(shortName1 == "S.Gaunt") equipWeapon("spiked gauntlet");
-	if(shortName1 == "JRapier") equipWeapon("jeweled rapier");
-	if(shortName1 == "RRapier") equipWeapon("vulpine rapier");
-	if(shortName1 == "NurseCl") equipArmor("skimpy nurse's outfit");
-	if(shortName1 == "BonStrp") equipArmor("barely-decent bondage straps");
-	if(shortName1 == "NumbRox") numbRocks();
-	if(shortName1 == "SensDrf") sensitivityDraft();
-	if(shortName1 == "BimboLq") bimboLiquer();
-	if(shortName1 == "R.BdySt") equipArmor("red, high-society bodysuit");	
-	if(shortName1 == "H.Gaunt") equipWeapon("hooked gauntlets");
-	if(shortName1 == "S.Gossr") sweetGossamer();
-	if(shortName1 == "B.Gossr") sweetGossamer(1);
-	if(shortName1 == "SS.Robe") equipArmor("spider-silk robes");
-	if(shortName1 == "SSArmor") equipArmor("spider-silk armor");
-	if(shortName1 == "T.SSilk") toughSpiderSilk();
-	if(shortName1 == "LustStk") applyLustStick();
-	if(shortName1 == "BroBrew") broBrew();
-	if(shortName1 == "I.Robes") equipArmor("inquisitor's robes");
-	if(shortName1 == "I.Corst") equipArmor("inquisitor's corset");
-	if(shortName1 == "S.Blade") equipWeapon("inscribed spellblade");
-	if(shortName1 == "BC Beer") blackCatBeerEffects();
-	if(shortName1 == "BimboCh") bimboChampagne(true,true);
-	if(shortName1 == "FoxBery") foxTF();
-	if(shortName1 == "VixVigr") foxTF(true);
-	if(shortName1 == "GooArmr") equipArmor("goo armor");
-	if(shortName1 == "GodMead") godMead();
-	if(shortName1 == "E.Staff") equipWeapon("eldritch staff");
-	if(shortName1 == "SheepMk") sheepMilk();
-	if(shortName1 == "DrgnShl") equipWeapon("dragon-shell shield");
-	if(shortName1 == "DrgnEgg") eatEmberEgg();
-	if(shortName1 == "BimboSk") equipArmor("bimbo skirt");
-	if(shortName1 == "PeppWht") peppermintWhite();
-	if(shortName1 == "GldStat") kitsuneStatue();
-	if(shortName1 == "FoxJewl") foxJewel();
-	if(shortName1 == "MystJwl") foxJewel(true);
-	if(shortName1 == "KitGift") kitsunesGift();
-	if(shortName1 == "Debimbo") deBimbo();
-	if(shortName1 == "LMArmor") lustyMaidensArmor();
-	if(shortName1 == "FishFil") fishFillet();
-	if(shortName1 == "TrapOil") trapOil();
-	if(shortName1 == "PurPeac") purityPeach();
-	if(shortName1 == "PrFruit") purpleFruitEssrayle();
-	if(shortName1 == "RingFig") ringtailFig();
-	if(shortName1 == "MouseCo") mouseCocoa();
+	else if(shortName1 == "ChBikni") equipArmor("revealing chainmail bikini");
+	else if(shortName1 == "SeductA") equipArmor("scandalously seductive armor");
+	else if(shortName1 == "SnakOil") snakeOil();
+	else if(shortName1 == "ExtSerm") extensionSerum();
+	else if(shortName1 == "Hummus ") Hummus();
+	else if(shortName1 == "Coal   ") coal();
+	else if(shortName1 == "W.Fruit") catTransformation();
+	else if(shortName1 == "W.Robes") equipArmor("wizard's robes");
+	else if(shortName1 == "W.Staff") equipWeapon("wizard's staff");
+	else if(shortName1 == "W.Stick") wingStick();
+	else if(shortName1 == "Claymor") equipWeapon("large claymore");
+	else if(shortName1 == "Warhamr") equipWeapon("huge warhammer");
+	else if(shortName1 == "Katana ") equipWeapon("katana");
+	else if(shortName1 == "Spear  ") equipWeapon("deadly spear");
+	else if(shortName1 == "Whip   ") equipWeapon("coiled whip");
+	else if(shortName1 == "SucWhip") equipWeapon("succubi whip");
+	else if(shortName1 == "S.Gaunt") equipWeapon("spiked gauntlet");
+	else if(shortName1 == "JRapier") equipWeapon("jeweled rapier");
+	else if(shortName1 == "RRapier") equipWeapon("vulpine rapier");
+	else if(shortName1 == "NurseCl") equipArmor("skimpy nurse's outfit");
+	else if(shortName1 == "BonStrp") equipArmor("barely-decent bondage straps");
+	else if(shortName1 == "NumbRox") numbRocks();
+	else if(shortName1 == "SensDrf") sensitivityDraft();
+	else if(shortName1 == "BimboLq") bimboLiquer();
+	else if(shortName1 == "R.BdySt") equipArmor("red, high-society bodysuit");	
+	else if(shortName1 == "H.Gaunt") equipWeapon("hooked gauntlets");
+	else if(shortName1 == "S.Gossr") sweetGossamer();
+	else if(shortName1 == "B.Gossr") sweetGossamer(1);
+	else if(shortName1 == "SS.Robe") equipArmor("spider-silk robes");
+	else if(shortName1 == "SSArmor") equipArmor("spider-silk armor");
+	else if(shortName1 == "T.SSilk") toughSpiderSilk();
+	else if(shortName1 == "LustStk") applyLustStick();
+	else if(shortName1 == "BroBrew") broBrew();
+	else if(shortName1 == "I.Robes") equipArmor("inquisitor's robes");
+	else if(shortName1 == "I.Corst") equipArmor("inquisitor's corset");
+	else if(shortName1 == "S.Blade") equipWeapon("inscribed spellblade");
+	else if(shortName1 == "BC Beer") blackCatBeerEffects();
+	else if(shortName1 == "BimboCh") bimboChampagne(true,true);
+	else if(shortName1 == "FoxBery") foxTF();
+	else if(shortName1 == "VixVigr") foxTF(true);
+	else if(shortName1 == "GooArmr") equipArmor("goo armor");
+	else if(shortName1 == "GodMead") godMead();
+	else if(shortName1 == "E.Staff") equipWeapon("eldritch staff");
+	else if(shortName1 == "SheepMk") sheepMilk();
+	else if(shortName1 == "DrgnShl") equipWeapon("dragon-shell shield");
+	else if(shortName1 == "DrgnEgg") eatEmberEgg();
+	else if(shortName1 == "BimboSk") equipArmor("bimbo skirt");
+	else if(shortName1 == "PeppWht") peppermintWhite();
+	else if(shortName1 == "GldStat") kitsuneStatue();
+	else if(shortName1 == "FoxJewl") foxJewel();
+	else if(shortName1 == "MystJwl") foxJewel(true);
+	else if(shortName1 == "KitGift") kitsunesGift();
+	else if(shortName1 == "Debimbo") deBimbo();
+	else if(shortName1 == "LMArmor") lustyMaidensArmor();
+	else if(shortName1 == "FishFil") fishFillet();
+	else if(shortName1 == "TrapOil") trapOil();
+	else if(shortName1 == "PurPeac") purityPeach();
+	else if(shortName1 == "PrFruit") purpleFruitEssrayle();
+	else if(shortName1 == "RingFig") ringtailFig();
+	else if(shortName1 == "MouseCo") mouseCocoa();
+	else if(CoC_Settings.haltOnErrors) throw new Error("Tried to use item that cannot be used = "+shortName1);
 }
 
 public function dropItem(monsterName:String):void {
@@ -2175,82 +2176,104 @@ public function doItems(eventNo:Number):void {
 			temp5 = 1070;
 			outputText("\n" + int(itemValue(itemSlot5.shortName)/2) + " gems for " + itemLongName(itemSlot5.shortName) + ".", false);
 		}
-		if(flags[KATHERINE_UNLOCKED] == 1) kath = 3317;
-		choices((itemSlot1.shortName + " x" + itemSlot1.quantity), temp1, (itemSlot2.shortName + " x" + itemSlot2.quantity), temp2, (itemSlot3.shortName + " x" + itemSlot3.quantity), temp3, (itemSlot4.shortName + " x" + itemSlot4.quantity), temp4, (itemSlot5.shortName + " x" + itemSlot5.quantity), temp5, "Kath's Alley", kath, "", 0, "", 0, "", 0, "Back", 2211);
+		if(flags[KATHERINE_UNLOCKED] == 1) 
+			kath = 3317;
+		choices((itemSlot1.shortName + " x" + itemSlot1.quantity), temp1,
+				(itemSlot2.shortName + " x" + itemSlot2.quantity), temp2,
+				(itemSlot3.shortName + " x" + itemSlot3.quantity), temp3,
+				(itemSlot4.shortName + " x" + itemSlot4.quantity), temp4,
+				(itemSlot5.shortName + " x" + itemSlot5.quantity), temp5,
+				"Kath's Alley", kath, 
+				"", 0, 
+				"", 0, 
+				"", 0, 
+				"Back", 2211);
 	}
 	//Sell item from slot1
-	if(eventNo == 1066) {
+	if(eventNo == 1066) 
+	{
 		spriteSelect(47);
-		temp = int(itemValue(itemSlot1.shortName)/2);
-		if(temp == 0) outputText("You hand over " + itemLongName(itemSlot1.shortName) + " to Oswald.  He shrugs and says, \"<i>Well ok, it isn't worth anything, but I'll take it.</i>\"", true);
-		else outputText("You hand over " + itemLongName(itemSlot1.shortName) + " to Oswald.  He nervously pulls out " + num2Text(temp) + " gems and drops them into your waiting hand.", true);
+		var itemValueTemp:int = int(itemValue(itemSlot1.shortName)/2);
+		if(itemValueTemp == 0) 
+			outputText("You hand over " + itemLongName(itemSlot1.shortName) + " to Oswald.  He shrugs and says, \"<i>Well ok, it isn't worth anything, but I'll take it.</i>\"", true);
+		else 
+			outputText("You hand over " + itemLongName(itemSlot1.shortName) + " to Oswald.  He nervously pulls out " + num2Text(itemValueTemp) + " gems and drops them into your waiting hand.", true);
 		itemSlot1.quantity--;
-		if(itemSlot1.quantity <= 0) {
+		if(itemSlot1.quantity <= 0) 
+		{
 			itemSlot1.quantity = 0;
 			itemSlot1.shortName = "";
 		}		
 		doNext(oswaldPawn);
-		player.gems += temp;
+		player.gems += itemValueTemp;
 		statScreenRefresh();
 		return;
 	}
 	//Sell item from slot2
-	if(eventNo == 1067) {
+	if(eventNo == 1067) 
+	{
 		spriteSelect(47);
-		temp = int(itemValue(itemSlot2.shortName)/2);
-		outputText("You hand over " + itemLongName(itemSlot2.shortName) + " to Oswald.  He nervously pulls out " + num2Text(temp) + " gems and drops them into your waiting hand.", true);
+		var itemValueTemp:int = int(itemValue(itemSlot2.shortName)/2);
+		outputText("You hand over " + itemLongName(itemSlot2.shortName) + " to Oswald.  He nervously pulls out " + num2Text(itemValueTemp) + " gems and drops them into your waiting hand.", true);
 		itemSlot2.quantity--;
-		if(itemSlot2.quantity <= 0) {
+		if(itemSlot2.quantity <= 0) 
+		{
 			itemSlot2.quantity = 0;
 			itemSlot2.shortName = "";
 		}		
 		doNext(oswaldPawn);
-		player.gems += temp;
+		player.gems += itemValueTemp;
 		statScreenRefresh();
 		return;
 	}
 	//Sell item from slot3
-	if(eventNo == 1068) {
+	if(eventNo == 1068) 
+	{
 		spriteSelect(47);
-		temp = int(itemValue(itemSlot3.shortName)/2);
-		outputText("You hand over " + itemLongName(itemSlot3.shortName) + " to Oswald.  He nervously pulls out " + num2Text(temp) + " gems and drops them into your waiting hand.", true);
+		var itemValueTemp:int = int(itemValue(itemSlot3.shortName)/2);
+		outputText("You hand over " + itemLongName(itemSlot3.shortName) + " to Oswald.  He nervously pulls out " + num2Text(itemValueTemp) + " gems and drops them into your waiting hand.", true);
 		itemSlot3.quantity--;
-		if(itemSlot3.quantity <= 0) {
+		if(itemSlot3.quantity <= 0) 
+		{
 			itemSlot3.quantity = 0;
 			itemSlot3.shortName = "";
 		}		
 		doNext(oswaldPawn);
-		player.gems += temp;
+		player.gems += itemValueTemp;
 		statScreenRefresh();
 		return;
 	}
 	//Sell item from slot4
-	if(eventNo == 1069) {
+	if(eventNo == 1069) 
+	{
 		spriteSelect(47);
-		temp = int(itemValue(itemSlot4.shortName)/2);
-		outputText("You hand over " + itemLongName(itemSlot4.shortName) + " to Oswald.  He nervously pulls out " + num2Text(temp) + " gems and drops them into your waiting hand.", true);
+		var itemValueTemp:int = int(itemValue(itemSlot4.shortName)/2);
+		outputText("You hand over " + itemLongName(itemSlot4.shortName) + " to Oswald.  He nervously pulls out " + num2Text(itemValueTemp) + " gems and drops them into your waiting hand.", true);
 		itemSlot4.quantity--;
-		if(itemSlot4.quantity <= 0) {
+		if(itemSlot4.quantity <= 0) 
+		{
 			itemSlot4.quantity = 0;
 			itemSlot4.shortName = "";
 		}		
 		doNext(oswaldPawn);
-		player.gems += temp;
+		player.gems += itemValueTemp;
 		statScreenRefresh();
 		return;
 	}
 	//Sell item from slot5
-	if(eventNo == 1070) {
+	if(eventNo == 1070) 
+	{
 		spriteSelect(47);
-		temp = int(itemValue(itemSlot5.shortName)/2);
-		outputText("You hand over " + itemLongName(itemSlot5.shortName) + " to Oswald.  He nervously pulls out " + num2Text(temp) + " gems and drops them into your waiting hand.", true);
+		var itemValueTemp:int = int(itemValue(itemSlot5.shortName)/2);
+		outputText("You hand over " + itemLongName(itemSlot5.shortName) + " to Oswald.  He nervously pulls out " + num2Text(itemValueTemp) + " gems and drops them into your waiting hand.", true);
 		itemSlot5.quantity--;
-		if(itemSlot5.quantity <= 0) {
+		if(itemSlot5.quantity <= 0) 
+		{
 			itemSlot5.quantity = 0;
 			itemSlot5.shortName = "";
 		}
 		doNext(oswaldPawn);
-		player.gems += temp;
+		player.gems += itemValueTemp;
 		statScreenRefresh();
 		return;
 	}
@@ -2605,11 +2628,16 @@ public function itemValue(item:String):Number {
 
 //Finds the first slot with room and returns the slot num.
 public function roomInExistingStack():Number {
-	if(itemSlot1.shortName == shortName && itemSlot1.quantity != 0 && itemSlot1.quantity < 5) return 1;
-	if(itemSlot2.shortName == shortName && itemSlot2.quantity != 0 && itemSlot2.quantity < 5) return 2;
-	if(itemSlot3.shortName == shortName && itemSlot3.quantity != 0 && itemSlot3.quantity < 5) return 3;
-	if(itemSlot4.shortName == shortName && itemSlot4.quantity != 0 && itemSlot4.quantity < 5) return 4;
-	if(itemSlot5.shortName == shortName && itemSlot5.quantity != 0 && itemSlot5.quantity < 5) return 5;
+	if(itemSlot1.shortName == shortName && itemSlot1.quantity != 0 && itemSlot1.quantity < 5) 
+		return 1;
+	if(itemSlot2.shortName == shortName && itemSlot2.quantity != 0 && itemSlot2.quantity < 5) 
+		return 2;
+	if(itemSlot3.shortName == shortName && itemSlot3.quantity != 0 && itemSlot3.quantity < 5) 
+		return 3;
+	if(itemSlot4.shortName == shortName && itemSlot4.quantity != 0 && itemSlot4.quantity < 5) 
+		return 4;
+	if(itemSlot5.shortName == shortName && itemSlot5.quantity != 0 && itemSlot5.quantity < 5) 
+		return 5;
 	return 0;
 }
 public function takeItem():void {
@@ -3072,7 +3100,7 @@ public function consumeItem(itemName:String, amount:Number):Boolean {
 		if(!hasItem(itemName,1)) 
 		{
 			amount = 0;
-			this.encounteredErrorFlag = true;
+			if (CoC_Settings.haltOnErrors) throw new Error("");
 			trace("ERROR: consumeItem in items.as attempting to find an item to remove when the player has none.");
 			break;
 		}
@@ -4104,7 +4132,7 @@ public function equinum():void {
 				outputText("\n\nOne of your penises begins to feel strange.  You pull down your clothes to take a look and see the skin of your " + cockDescript(99) + " darkening to a mottled brown and black pattern.", false);
 				if(temp == -1) 
 				{
-					this.encounteredErrorFlag = true;
+					if (CoC_Settings.haltOnErrors) throw new Error("");
 					outputText("FUKKKK ERROR NO COCK XFORMED", true);
 				}
 				//Already have a sheath

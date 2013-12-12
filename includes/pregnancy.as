@@ -1900,6 +1900,6 @@ public function eggDescript(plural:Boolean = true):String {
 		else descript += "egg";
 		return descript;
 	}
-	this.encounteredErrorFlag = true;
+	if (CoC_Settings.haltOnErrors) throw new Error("");
 	return "EGG ERRORZ";
 }

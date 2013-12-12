@@ -3,6 +3,7 @@
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.display.Stage;
+	import classes.CoC_Settings
 
 	/**
 	 * Chaos Monkey!
@@ -171,6 +172,7 @@
 		public function stopMonkey():void
 		{
 			this._mainClassPtr.testingBlockExiting = false;
+			CoC_Settings.haltOnErrors = false;
 		}
 
 		private function disengageMonkey():void
@@ -184,6 +186,7 @@
 		{
 
 			trace("Starting monkey")
+			CoC_Settings.haltOnErrors = true;
 			this._mainClassPtr.testingBlockExiting = true;
 			this._mainClassPtr.encounteredErrorFlag = false;
 

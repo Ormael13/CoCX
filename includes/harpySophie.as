@@ -392,7 +392,7 @@ public function consensualHotSophieDickings():void {
 	var x:Number = player.cockThatFits(232);
 	if(x < 0) 
 	{
-		this.encounteredErrorFlag = true;
+		if (CoC_Settings.haltOnErrors) throw new Error("");
 		outputText("ERROR: No cock found that fits, yet 'fits' scene was called.", true);
 		doNext(1);
 		gameState = 0;
@@ -400,7 +400,7 @@ public function consensualHotSophieDickings():void {
 	}
 	else if(x > player.cocks.length-1) 
 	{
-		this.encounteredErrorFlag = true;
+		if (CoC_Settings.haltOnErrors) throw new Error("");
 		outputText("ERROR: Cock above max cocks selected for Sophie sex.  Please report bug on fen's bug report forum.", true);
 		doNext(1);
 		gameState = 0;

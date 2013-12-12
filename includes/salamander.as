@@ -1868,6 +1868,9 @@ public function helSexualAmbush():void {
 	if(player.lust < 33) player.lust = 33;
 	flags[HEL_RAPED_TODAY] = 1;
 	//(Raise PC lust; Display sex options)
+
+	// TODO Fix this?
+	// Why is this the only place in the whole game where buttonEvents is directly written to?
 	buttonEvents[9] = pussyOutOfHelSexAmbush;
 	helFuckMenu();
 }
