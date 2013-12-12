@@ -429,23 +429,23 @@ package classes.content
 			
 			outputText("and pushes hard.  You can't help but scream at the initial bout of pain.  \"<i>Relax dear.  It will only hurt for a little while.</i>\"  You squirm at the pain but slowly it begins to dissipate... you're pretty sure Uma is pressing against your chest even harder than before, yet the pain is quickly ebbing away...\n\n");
 			outputText("Uma chuckles.  \"<i>See dear?  I told you it would get better, but I'm afraid it will hurt a bit more later... I have other spots to take care of,</i>\" she says, removing her elbow and moving away, only to return shortly with a small metal stick prominently featuring a rounded tip.  \"<i>Get ready, dear.</i>\"  You brace yourself for the next part of the treatment.\n\n");
-			outputText("The treatment on your front is painful, but at the same time it gets easier and easier to relax as it goes on... and it hurts less and less, until by the time Uma is finished it just doesn't hurt anymore...\n\n");
-			outputText("\"<i>Very good, dear.  Now flip yourself over, it's time to take care of your back,</i> she informs you\"");
+			outputText("The treatment on your front is painful, but at the same time, it gets easier and easier to relax as Uma continues her work.  The discomfort diminishing, until by the time Uma is finished it just doesn't hurt anymore...\n\n");
+			outputText("\"<i>Very good, dear.  Now flip yourself over, it's time to take care of your back,</i>\" she informs you");
 
 			if (player.femininity >= UMA_CONSIDER_PC_FEM)
 			{
-				outputText(", her hand gently caressing your [hip] absent-mindedly");
+				outputText(", her hand gently caressing your [hips] absent-mindedly");
 			}
 			else if (player.femininity >= UMA_CONSIDER_PC_AND)
 			{
-				outputText(", her hand lightly touching your [hip] absend-mindedly");
+				outputText(", her hand lightly touching your [hips] absend-mindedly");
 			}
 
 			outputText(".\n\n");
 
 			// Refactor to say something about nipples against the table?
 			outputText("You move to do as she asks; it's a little awkward adjusting to having your face in the - thankfully cushioned - hole.  You wriggle about to settle yourself comfortably on the table, [nipples] squashing into the surface, but you manage to make yourself relaxed and tell Uma that you're ready once more.\n\n");
-			outputText("You yelp as Uma presses the metal rod " + ((player.tailType > 0) ? "to the base of your tail" : "to your lower back") + ".  \"<i>I'm going to have to trace a few spots on your back dear, to ensure your flow of chi is not obstructed.  It might hurt again, but be brave, ok?\"  You nod as best as you can and prepare yourself.\n\n");
+			outputText("You yelp as Uma presses the metal rod " + ((player.tailType > 0) ? "to the base of your tail" : "to your lower back") + ".  \"<i>I'm going to have to trace a few spots on your back dear, to ensure your flow of chi is not obstructed.  It might hurt again, but be brave, ok?</i>\"  You nod as best as you can and prepare yourself.\n\n");
 			outputText("By the time Uma is finished you feel sore all over, the pain on your back seemingly bringing back the pain on your front.\n\n");
 			outputText("\"<i>It will be a little while, before the flow of chi inside your body stabilizes, dear.  But by the time you're out of this clinic, you should feel much better,</i>\" Uma explains.\n\n");
 			outputText("You thank the mare and get dressed, bidding her farewell before you exit the clinic. Once outside, true to her words, you start to feel better... in fact you feel amazing!  It's no wonder her treatment is expensive, you feel just... amazing!\n\n");
