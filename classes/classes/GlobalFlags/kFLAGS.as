@@ -1026,17 +1026,17 @@ public static const TIMES_ENCOUNTERED_FROG:int                                  
 public static const FERAS_GLADE_EXPLORED_YEAR:int                                   = 1018;
 public static const FERAS_TRAP_SPRUNG_YEAR:int                                      = 1019;
 public static const TIMES_VALERIA_GOO_THREESOMED:int                                = 1020;
-public static const MORE_TURKEY:int    			                                  = 1021;
+public static const MORE_TURKEY:int    			                                  	= 1021;
 public static const LYNNETTE_PREGNANCY_CYCLE:int                                    = 1022; //0-3 = pregnant. 4-6 = not.
-public static const LYNNETTE_APPROVAL:int		                                     = 1023;
+public static const LYNNETTE_APPROVAL:int		                                    = 1023;
 public static const LYNNETTE_BABY_COUNT:int                                         = 1024;
 public static const LYNNETTE_CARRYING_COUNT:int                                     = 1025;
 public static const LYNNETTE_MET_UNPREGNANT:int                                     = 1026;
 public static const LYNNETTE_ANNOUNCED_APPROVAL:int                                 = 1027;
-public static const LYNNETTE_FUCK_COUNTER:int                                   = 1028;
-public static const UMA_PC_FOUND_CLINIC:int                                   = 1029;
-public static const UMA_TIMES_MASSAGED:int                                   = 1030;
-public static const UMA_TIMES_ACCUPUNCTURE_UNDO:int                                   = 1031;
+public static const LYNNETTE_FUCK_COUNTER:int                                   	= 1028;
+public static const UMA_TIMES_SEXED:int                                  			= 1029;
+public static const UMA_TIMES_MASSAGED:int                                  		= 1030;
+public static const UMA_TIMES_ACUPUNCTURE_UNDO:int                                 = 1031;
 public static const UNKNOWN_FLAG_NUMBER_01032:int                                   = 1032;
 public static const UNKNOWN_FLAG_NUMBER_01033:int                                   = 1033;
 public static const UNKNOWN_FLAG_NUMBER_01034:int                                   = 1034;

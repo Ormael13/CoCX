@@ -180,7 +180,7 @@ public function armorShops():void {
 	addButton(1,"Piercing",piercingStudio);
 	addButton(2, "Tailor", eventParser, 1072);
 
-	if (flags[kFLAGS.UMA_PC_FOUND_CLINIC] == 1)
+	if (flags[kFLAGS.LOPPE_PC_MET_UMA] == 1)
 	{
 		addButton(3, "Clinic", umasShop.enterClinic);
 	}

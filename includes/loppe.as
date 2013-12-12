@@ -698,7 +698,7 @@ public function chatWithLoppeAboutHerMom():void {
 	outputText("\n\nLoppe giggles and grins. \"<i>Silly [name].  I don't need several lovers.  Just one... the perfect one.  And I don't think my mom would be upset either way.  She knows I'm a big girl now.</i>\"");
 	outputText("\n\nSo, if she's so confident that her mom wouldn't disapprove of her daughter's sexual awakening... what about your relationship?");
 	
-	outputText("\n\nLoppe looks you over, thoughtful.  \"<i>To be honest... I don't think she would mind.  Want me to introduce you to her?  To become my 'official' " + player.mf("boy", "girl") + "friend?  I know I certainly wouldn't mind having a 'serious' relationship with a cutie like you.</i>\"  The dancer winks at you.  \"<i>But I should be getting back to my exercise.  Bye bye for now, sugar.</i>\"");
+	outputText("\n\nLoppe looks you over, thoughtful.  \"<i>To be honest... I don't think she would mind.  Want me to introduce you to her?  To become my 'official' " + player.mf("boy", "girl") + "friend?  I know I certainly wouldn't mind having a 'serious' relationship with a cutie like you.</i>\"  The dancer winks at you.  \"<i>How about it Sugar, do you wanna go visit my mom?</i>\"");
 	
 	menu();
 	addButton(0, "Visit Mom", umasShop.firstVisitPart1);

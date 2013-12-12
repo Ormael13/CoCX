@@ -12,6 +12,9 @@ package classes.content
 	 * I COULD have made use of Fake-Names new methods of including scene content, but this content file is a proof of concept for new class-based sceneadditions. 
 	 * As such, I've left it as "similar" as possible to older content throughout the the game for clarity purposes. Anything I add past this point will probably use
 	 * Fake-Name's Scene Parsing stuff as much as possible.
+	 *
+	 * I'm also VERY tempted to say the bonuses from massages and acpuncture sessions should be dropped, and they should be turned into like a HP recovery/fatigue recovery deal.
+	 * Massage recovers 50% of missing health in an hour, Acpuncture recovers 30% of current fatigue in an hour?
 	 */
 	public class UmasShop extends BaseContent
 	{
@@ -89,25 +92,26 @@ package classes.content
 		
 		/**
 		 * Page 2 of introduction scene
-		 * Edit Status: 80%
+		 * Edit Status: 95%
 		 */
 		public function firstVisitPart2():void
 		{
 			clearOutput();
 			
-			outputText("Loppe bounces up towards the tall equine and they embrace in a friendly hug.  \"<i>Hi, mom!</i>\"  Uma laughs softly before replying, \"<i>Hello my little horsey hopper.  Who is this?</i>\"  She asks, looking at you.\n\n");
+			outputText("Loppe bounces up towards the tall equine and they embrace in a friendly hug.  \"<i>Hi, mom!</i>\"  Uma laughs softly . \"<i>Hello my little horsey hopper.  Who is this?</i>\" she asks, looking at you.\n\n");
 			
 			 // Doc has ellipses around friend, seemed akward
-			outputText("You politely offer Loppe's mother your name, telling her that you're a <i>friend</i> of Loppe's.\n\n");
-			outputText("Loppe looks at you with disdain, then adds, \"<i>Yes, [he]'s a friend alright...</i>\"  Loppe clears her throat.  \"<i>Mom, I would like to introduce you to [name], my [boyfriend].</i>\"\n\n");
+			outputText("You politely offer Loppe's mother your name, telling her that you're a... friend of Loppe's.\n\n");
+			outputText("Loppe looks at you with disdain, then adds, \"<i>Yes, [he]'s a friend alright.</i>\"  Loppe clears her throat.  \"<i>Mom, I would like to introduce you to [name], my [boyfriend].</i>\"\n\n");
 			
 			// Tempted to add in some variance shit here for corrupt/times-sexed stuff, like low corrupt/low sex count;
 			// Loppe's revelation about your apparant relationship comes as something of a shock to you, but you try - and fail - to hide the suprise from your face." etc
-			outputText("Uma looks between the two of you with interest.  \"<i>[Boyfriend] huh?  So it's you whom I have to thank for the broken springs in Loppe's bed?</i>\"  Uma says with a smile, offering you a hand.\n\n");
+
+			outputText("Uma looks between the two of you with interest.  \"<i>[Boyfriend] huh?  So it's you whom I have to thank for the broken springs in Loppe's bed?</i>\" Uma says with a smile, offering you a hand.\n\n");
 			outputText("You give her a winning smile back and accept it, wondering if you should prepare yourself for a macho-type squeezing match.  Even as you shake her hand, you apologise, telling her it wasn't your intention to make Loppe's bed need replacement springs.\n\n");
-			outputText("Loppe and Uma look at each other and then they both burst out laughing.  \"<i>Oh, sugar... you're so silly,</i>\"  Loppe says.  \"<i>[name], I learned a long time ago that Loppe's beds must be both battle and waterproof.  So her bed is custom made; you could have an army of minotaurs stomp through and it wouldn't even bend.</i>\"  Uma says with a grin.\n\n");
+			outputText("Loppe and Uma look at each other and then they both burst out laughing.  \"<i>Oh, sugar... you're so silly,</i>\" Loppe says.  \"<i>[name], I learned a long time ago that Loppe's beds must be both battle and waterproof.  So her bed is custom made; you could have an army of minotaurs stomp through and it wouldn't even bend.</i>\" Uma says with a grin.\n\n");
 			outputText("You give them your best confused expression, realising that Uma and her daughter must have similar tastes in humor; she was evidently joking with you.\n\n");
-			outputText("Uma is the first to break the awkwardness.  \"<i>Well then... care to give me the details?  How did you two meet?  When did you start fooling around?  Has my daughter worked so hard you had to seek a healer yet?</i>\"\n\n");
+			outputText("Uma is the first to break the awkwardness.  \"<i>Well then, care to give me the details?  How did you two meet?  When did you start fooling around?  Has my daughter worked so hard you had to seek a healer yet?</i>\"\n\n");
 			outputText("Loppe holds your hand and the two of you begin detailing how you met....\n\n");
 			
 			menu();
@@ -125,13 +129,14 @@ package classes.content
 			clearOutput();
 			
 			outputText("\"<i>I see... that is so like my daughter to do something like that.</i>\"  Uma glares mischievously at Loppe.  \"<i>Aww mom... cut me some slack!</i>\"  Loppe protests, playfully.  You can't resist laughing softly at the two; it reminds you of people back in Ingnam... albeit they're joking about subject matter you'd normally not touch back in your world.</i>\n\n");
-			outputText("Your conversation is interrupted when a cat man enters the clinic.  \"<i>Umm... hello?</i>\"  He says, shyly as he enters.  Uma turns to you.  \"<i>You'll have to excuse me, but I must get back to work.</i>\"  Understanding that Uma is currently working, you politely step back and watch as Uma walks to attend to her client.\n\n");
-			outputText("\"<i>We should go, sugar.</i>\"  Loppe whispers in your ear.  You nod to her, tell Uma that it was nice meeting her, and indicate Loppe should lead you out.  You follow the Laquine out of the building, and tell her that her mother is a nice woman.\n\n");
-			outputText("\"<i>Yeah, she is nice, she's just a little... quirky sometimes.</i>\"  Loppe agrees.  \"<i>And I think she likes you too, sugar; nice work.</i>\"  She grins, patting you on the shoulder.\n\n");
-			outputText("You tell her that you're glad, but you have other things to do, so you'll catch her some other time. \"<i>Alright, sugar,</i>\" Loppe agrees, \"<i>see you around.</i>\"  With that, she turns and walks away back in the direction of her home, leaving you to start heading back to what passes for yours in this world.");
+			outputText("Your conversation is interrupted when a cat man enters the clinic.  \"<i>Umm... hello?</i>\" he says, shyly as he enters.  Uma turns to you.  \"<i>You'll have to excuse me, but I must get back to work.</i>\"  Understanding that Uma is currently working, you politely step back and watch as Uma walks to attend to her client.\n\n");
+			outputText("\"<i>We should go, sugar,</i>\" Loppe whispers in your ear.  You nod to her, tell Uma that it was nice meeting her, and indicate Loppe should lead you out.  You follow the Laquine out of the building, and tell her that her mother is a nice woman.\n\n");
+			outputText("\"<i>Yeah, she is nice, she's just a little... quirky sometimes,</i>\" Loppe agrees.  \"<i>And I think she likes you too, sugar; nice work.</i>\"  She grins, patting you on the shoulder.\n\n");
+			outputText("You tell her that you're glad, but you have other things to do, so you'll catch her some other time. \"<i>Alright sugar, see you around,</i>\" Loppe announces as she turns and walks away, back in the direction of her home, leaving you to start heading back to what passes for yours in this world.");
 
 			// Flag the shop visit
-			flags[kFLAGS.UMA_PC_FOUND_CLINIC] = 1;
+			// There's still a flag left over from Loppe's initial content that I dont' think is actually used.
+			flags[kFLAGS.LOPPE_PC_MET_UMA] = 1;
 			
 			// Player returns to Camp
 			menu();
@@ -177,12 +182,12 @@ package classes.content
 			if (noSex)
 			{
 				outputText("You sigh softly, but accept Uma's sexuality is the way it is and apologise for the problem.\n\n");
-				outputText("\"<i>Don't worry about that it's nothing personal, I just don't swing that way.  Although, if you were to make yourself a bit more feminine, I might consider it.  Maybe you could find yourself a nice little beauty salon somewhere?  I heard there are some treatments that can make you absolutely gorgeous.</i>\"\n\n");
+				outputText("\"<i>Don't worry about that, it's nothing personal.  I just don't swing that way.  Although, if you were to make yourself a bit more feminine, I might consider it.  Maybe you could find yourself a nice little beauty salon somewhere?  I heard there are some treatments that can make you absolutely gorgeous.</i>\"\n\n");
 			}
 
 			menu();
 			addButton(0, "Massage", massageMenu);
-			addButton(1, "Acupunct.", accupunctureMenu);
+			addButton(1, "Acupunct.", acupunctureMenu);
 			addButton(2, "Talk", talkMenu);
 			
 			if (!noSex)
@@ -200,19 +205,19 @@ package classes.content
 		
 		/**
 		 * Primary massage intro & selection menu
-		 * Edit Status: 90%
+		 * Edit Status: 95%
 		 */
  		public function massageMenu():void
 		{
 			clearOutput();
 			
-			outputText("You ask if she'd like to have a little business? You could really use one of her famous massage sessions.\n\n");
-			outputText("\"<i>Of course, dear.  I have a selection of a few types of special massages I can give you, but you're only able to keep the effects of one of them, can't risk disturbing your flow of chi, right?</i>\"  She says, smiling happily.  \"<i>Here's the list.</i>\"  She hands you a small catalogue with her available massages.\n\n");
+			outputText("You ask if she'd like to have a little business?  You could really use one of her famous massage sessions.\n\n");
+			outputText("\"<i>Of course, dear.  I have a selection of a few types of special massages I can give you, but you're only able to keep the effects of one of them, we can't risk disturbing your flow of chi, right?</i>\" she says smiling happily, \"<i>Here's the list.</i>\"  She hands you a small catalogue with her available massages.\n\n");
 			outputText("You study the catalogue, noting the description of each one as you do so...\n\n");
 			outputText("\"Your libido getting you down?  Find that it's just too easy for you to get turned on?  This special massage will help make you too relaxed to get horny for a few hours.\"  Reads the first one.\n\n");
 			outputText("The second one, on the other hand, states, \"Want to get into the mood for some special fun, but finding it a challenge?  This special massage will get you primed and ready for some sweet, sweet loving.\"\n\n");
-			outputText("\"Feel good and look better with this special modelling massage; the boys, girls and herms will be drooling over you while it lasts.\" Reads the third; you're not surprised that most of them seem to have some sexual benefit.\n\n");
-			outputText("\"Muscles sore and aching?  Weary down to your bones?  A nice relaxing massage can alleviate your pain and fatigue, and help you unwind more effectively.\" Is how the fourth option describes itself.\n\n");
+			outputText("\"Feel good and look better with this special modelling massage; the boys, girls and herms will be drooling over you while it lasts.\" Reads the third; you're not surprised that most of treatments seem to have some sexual benefit.\n\n");
+			outputText("\"Muscles sore and aching?  Weary down to your bones?  A nice relaxing massage can alleviate your pain and fatigue, and help you unwind more effectively.\"  Is how the fourth option describes itself.\n\n");
 			outputText("Finally, the last message in the catalogue reads, \"Need a little more power?  Going to have a fight on your hands soon?  With the special arts of do-in, we can boost your muscles and let you deliver a real knock-out punch - it doesn't last forever, so be careful!\"\n\n");
 			outputText("You contemplate your choices carefully.");
 			
@@ -246,7 +251,7 @@ package classes.content
 		 * Edit Status: 100%
 		 */
 		public static const MASSAGE_RELIEF:int = 0;
-		public static const MASSAGE_RELIEF_BONUS:Number = 0.9;
+		public static const MASSAGE_RELIEF_BONUS:Number = 0.9;	// Multiplicative bonus to Lust gains
 		private static const MASSAGE_RELIEF_BONUS_TEXT:String = "<b>(10% Reduction to all Lust gains whilst active!)</b>";
 		public function massageRelief():void
 		{
@@ -254,8 +259,8 @@ package classes.content
 			
 			outputText("You tell Uma that you're interested in the lust-relieving massage.\n\n");
 			outputText("\"<i>Are sure about that honey?  Wouldn't that make it hard to keep up with my little Loppe?</i>\"\n\n");
-			outputText("You admit that it may, but you feel you could use it.  Besides, you do spend most of your time out in the wilderness; the people (and you use the term loosely) out there aren't quite as understanding about sex as Uma's daughter is.\n\n");
-			outputText("\"<i>I see... come along then.</i>\"  Uma motions for you to follow her.  You nod and promptly do as she asks.");
+			outputText("You admit that it may, but you feel you could use it.  Besides, you do spend most of your time out in the wilderness; the people, to use the term loosely, out there aren't quite as understanding about sex as Uma's daughter is.\n\n");
+			outputText("\"<i>I see... come along then,</i>\" Uma replies, motioning for you to follow.  You nod and promptly do as she asks.");
 			
 			massageMain(MASSAGE_RELIEF);
 		}
@@ -263,10 +268,10 @@ package classes.content
 		/**
 		 * Player selected "Lust" massage
 		 * Adds a 10% increase to lust gain while active.
-		 * Edit Status: 90%
+		 * Edit Status: 95%
 		 */
 		public static const MASSAGE_LUST:int = 1;
-		public static const MASSAGE_LUST_BONUS:Number = 1.1;
+		public static const MASSAGE_LUST_BONUS:Number = 1.1;	// Multiplicative bonus to Lust gains
 		private static const MASSAGE_LUST_BONUS_TEXT:String = "<b>(10% Increase to all Lust gains whilst active!)</b>";
 		public function massageLust():void
 		{
@@ -274,8 +279,8 @@ package classes.content
 			
 			outputText("You tell Uma that you're interested in the arousal-inducing massage.\n\n");
 			outputText("\"<i>Oh... feel like getting some help handling my little Loppe, perhaps?</i>\"\n\n");
-			outputText("You give her a playful smile and wink and tell her that's not really any of her business; it's not good form for a [boyfriend] to kiss and tell.  Can she help you?\n\n");
-			outputText("Uma gasps in mock hurt.  \"<i>Are you doubting my skills, dear?  Of course I can help you!  Follow me.</i>\"  Uma motions for you to follow her, and you trail along behind the mare masseur.\n\n");
+			outputText("You give her a playful smile and a wink, telling her that's not really any of her business; it's not good form for a [boyfriend] to kiss and tell.  Can she help you?\n\n");
+			outputText("Uma gasps in mock hurt.  \"<i>Are you doubting my skills, dear?  Of course I can help you!  Follow me.</i>\" Uma replies, motioning for you to follow her, and you trail along behind the mare masseur.\n\n");
 			
 			massageMain(MASSAGE_LUST);
 		}
@@ -286,7 +291,7 @@ package classes.content
 		 * Edit Status: 90%
 		 */
 		public static const MASSAGE_MODELLING:int = 2;
-		public static const MASSAGE_MODELLING_BONUS:int = 10;
+		public static const MASSAGE_MODELLING_BONUS:int = 10;	// Flat bonus applied to femininity stat
 		private static const MASSAGE_MODELLING_BONUS_TEXT:String = "<b>(+10 Bonus Femininity whilst active!)</b>";
 		public function massageModelling():void
 		{
@@ -315,7 +320,7 @@ package classes.content
 		 * Edit Status: 95%
 		 */
 		public static const MASSAGE_RELAXATION:int = 3;
-		public static const MASSAGE_RELAXATION_BONUS:Number = 0.9;
+		public static const MASSAGE_RELAXATION_BONUS:Number = 0.9;	// Multiplicative bonus to damage taken -- these seem a little op with current values
 		private static const MASSAGE_RELAXATION_BONUS_TEXT:String = "<b>(10% Reduction to all Damage taken whilst active!)</b>";
 		public function massageRelaxation(): void
 		{
@@ -324,7 +329,7 @@ package classes.content
 			outputText("You tell Uma that you're interested in the relaxing massage.\n\n");
 			outputText("\"<i>I wonder if Loppe is the reason you're asking for this kind of massage... either way, sure, let's do this.</i>\"");
 			outputText("You tell her that you won't deny or admit to Loppe being a cause.  However, it's also pretty rough out in the wilderness, so you could really use the relief.\n\n");
-			outputText("\"<i>Very well... don't want you too burned out to deal my little Loppe afterwards.  Follow me.</i>\" Uma motions for you to follow her, and you trail after her, looking forward to your treatment.\n\n");
+			outputText("\"<i>Very well... don't want you too burned out to deal my little Loppe afterwards.  Follow me.</i>\"  Uma motions for you to follow her, and you trail after her, looking forward to your treatment.\n\n");
 
 			massageMain(MASSAGE_RELAXATION);
 		}
@@ -332,10 +337,10 @@ package classes.content
 		/**
 		 * Player selected "Power" massage
 		 * Add a 10% increase to damage inflicted?
-		 * Edit Status: 90%
+		 * Edit Status: 95%
 		 */
 		public static const MASSAGE_POWER:int = 4;
-		public static const MASSAGE_POWER_BONUS:Number = 1.1;
+		public static const MASSAGE_POWER_BONUS:Number = 1.1;	// Multiplicative bonus to damage done -- these seem a little op with current values
 		private static const MASSAGE_POWER_BONUS_TEXT:String = "<b>(10% Increase to all Damage inflicted whilst active!)</b>";
 		public function massagePower():void 
 		{
@@ -346,7 +351,7 @@ package classes.content
 			outputText("You thank her; her massage could mean the difference between life and death for you.\n\n");
 			outputText("\"<i>Now, now, dear.  There's no need to be so dramatic... but I'm worried about what you intend to do?  I have heard of, and even seen, some of the dangers that are out there, beyond the walls of this city.  Shouldn't you just come live with us, instead?  I'd hate to have anything happen to you, and Loppe would be crushed...</i>\"\n\n");
 			outputText("You tell her that you appreciate your sentiment, and you have no intention of hurting Loppe, but you have a mission and you are sworn to complete it; the demons must fall, and you won't stop until they have been defeated.");
-			outputText("\"<i>I understand.  In that case, follow me.</i>\" Uma motions for you to follow her.  You let her lead the way and follow close behind.\n\n");
+			outputText("\"<i>I understand.  In that case, follow me,</i>\" Uma replies, motioning for you to follow her.  You let her lead the way and follow close behind.\n\n");
 			
 			massageMain(MASSAGE_POWER);
 		}
@@ -354,7 +359,7 @@ package classes.content
 		/**
 		 * "Joiner" scene for all of the subtypes of massage selection
 		 * @param	selectedMassage		int key of the massage type, for later application of benefits.
-		 * Edit Status: 90%
+		 * Edit Status: 95%
 		 */
 		public function massageMain(selectedMassage:int):void
 		{
@@ -381,7 +386,7 @@ package classes.content
 			outputText("You tell her that sounds fair, withdrawing the gems and handing them to her.\n\n");
 			player.gems -= 75;
 
-			outputText("\"<i>Thanks, dear.</i>\"  Uma pockets the gems and walks towards the table.  \"<i>Okay, get yourself stripped naked and lay down on the table, face up for me dear.</i>\"\n\n");
+			outputText("\"<i>Thanks, dear,</i>\" Uma  beams, pocketing the gems and walking towards the table.  \"<i>Okay, get yourself stripped naked and lay down on the table, face up for me dear.</i>\"\n\n");
 			outputText("You promptly set about removing your [armorname], ");
 			
 			// If player is Exhibitionist
@@ -399,13 +404,13 @@ package classes.content
 		/**
 		 * Extensions to Massage Joiner.
 		 * @param	selectedMassage		Massage bonus ID to apply
-		 * Edit Status: 90%
+		 * Edit Status: 95%
 		 */
 		public function massageCommence(selectedMassage:int):void 
 		{
 			clearOutput();
 			
-			outputText("\"<i>Very well, dear.</i>\"  She cracks her knuckles ominously.  \"<i>This might hurt a bit, but bear with it.</i>\"  She adds, rolling up the sleeves of her kimono.\n\n");
+			outputText("\"<i>Very well, dear.</i>\"  She cracks her knuckles ominously, \"<i>This might hurt a bit, but bear with it,</i>\" she adds, rolling up the sleeves of her kimono.\n\n");
 			outputText("You swallow audibly and brace yourself for what's to come.\n\n");
 			outputText("Uma presses her elbow against your chest ");
 			
@@ -414,17 +419,28 @@ package classes.content
 				outputText("between your [chest] ");
 			}
 			
-			outputText("and pushes hard.  You can't help but scream at the initial bout of pain.  \"<i>Relax dear.  It will only hurt for a little while.</i>\"  You squirm at the pain but slowly it begins to dissipate... you're pretty sure Uma is pressing on your chest even harder than before, yet the pain is quickly ebbing away...\n\n");
-			outputText("Uma chuckles.  \"<i>See dear?  I told you it would get better, but I'm afraid it will hurt a bit more later... I have other spots to take care of.</i>\"  She says, removing her elbow and moving away, only to return shortly with a small metal stick prominently featuring a rounded tip.  \"<i>Get ready, dear.</i>\"  You brace yourself for the next part of the treatment.\n\n");
+			outputText("and pushes hard.  You can't help but scream at the initial bout of pain.  \"<i>Relax dear.  It will only hurt for a little while.</i>\"  You squirm at the pain but slowly it begins to dissipate... you're pretty sure Uma is pressing against your chest even harder than before, yet the pain is quickly ebbing away...\n\n");
+			outputText("Uma chuckles.  \"<i>See dear?  I told you it would get better, but I'm afraid it will hurt a bit more later... I have other spots to take care of,</i>\" she says, removing her elbow and moving away, only to return shortly with a small metal stick prominently featuring a rounded tip.  \"<i>Get ready, dear.</i>\"  You brace yourself for the next part of the treatment.\n\n");
 			outputText("The treatment on your front is painful, but at the same time it gets easier and easier to relax as it goes on... and it hurts less and less, until by the time Uma is finished it just doesn't hurt anymore...\n\n");
-			outputText("\"<i>Very good, dear.  Now flip yourself over, it's time to take care of your back.</i>\"\n\n");
+			outputText("\"<i>Very good, dear.  Now flip yourself over, it's time to take care of your back,</i> she informs you\"");
+
+			if (player.femininity >= UMA_CONSIDER_PC_FEM)
+			{
+				outputText(", her hand gently caressing your [hip] absent-mindedly");
+			}
+			else if (player.femininity >= UMA_CONSIDER_PC_AND)
+			{
+				outputText(", her hand lightly touching your [hip] absend-mindedly");
+			}
+
+			outputText(".\n\n");
 
 			// Refactor to say something about nipples against the table?
-			outputText("You move to do as she asks; it's a little awkward adjusting to having your face in the - thankfully cushioned - hole.  You wriggle about to settle yourself comfortably on the table, but you manage to make yourself relaxed, and tell Uma that you're ready once more.\n\n");
-			outputText("You yelp as Uma presses the metal rod " + ((player.tailType > 0) ? "to the base of your tail" : "to your lower back") + ".  \"<i>I'm going to have to trace a few spots on your back dear, to ensure your flow of chi is not obstructed. It might hurt again, but be brave, ok?\"  You nod as best as you can and prepare yourself.\n\n");
+			outputText("You move to do as she asks; it's a little awkward adjusting to having your face in the - thankfully cushioned - hole.  You wriggle about to settle yourself comfortably on the table, [nipples] squashing into the surface, but you manage to make yourself relaxed and tell Uma that you're ready once more.\n\n");
+			outputText("You yelp as Uma presses the metal rod " + ((player.tailType > 0) ? "to the base of your tail" : "to your lower back") + ".  \"<i>I'm going to have to trace a few spots on your back dear, to ensure your flow of chi is not obstructed.  It might hurt again, but be brave, ok?\"  You nod as best as you can and prepare yourself.\n\n");
 			outputText("By the time Uma is finished you feel sore all over, the pain on your back seemingly bringing back the pain on your front.\n\n");
-			outputText("\"<i>It will be a little while, before the flow of chi inside your body stabilizes, dear.  But by the time you're out of this clinic, you should feel much better.</i>\"  Uma explains.\n\n");
-			outputText("You thank the mare and get dressed, bidding her farewell before you exit the clinic. Once outside, and true to her words, you feel better... in fact you feel amazing!  It's no wonder her treatment is expensive, you feel just... amazing!\n\n");
+			outputText("\"<i>It will be a little while, before the flow of chi inside your body stabilizes, dear.  But by the time you're out of this clinic, you should feel much better,</i>\" Uma explains.\n\n");
+			outputText("You thank the mare and get dressed, bidding her farewell before you exit the clinic. Once outside, true to her words, you start to feel better... in fact you feel amazing!  It's no wonder her treatment is expensive, you feel just... amazing!\n\n");
 			
 			// Apply bonus & back to camp!
 			applyMassageBonus(selectedMassage);
@@ -433,7 +449,7 @@ package classes.content
 		}
 		
 		/**
-		 * Apply massage bonus.
+		 * Apply massage bonus. Bonuses are replaced when a new effect is placed on the player.
 		 * StatusAffect for all bonuses
 		 * StatusAffect Values:
 		 * v1 = bonus index
@@ -441,8 +457,8 @@ package classes.content
 		 * v3 = remaining time
 		 * @param	selectedMassage
 		 */
-		public static const MASSAGE_BONUS_NAME:String = "Uma's Massage";
-		public static const MAX_MASSAGE_BONUS_DURATION:int = 24;
+		public static const MASSAGE_BONUS_NAME:String = "Uma's Massage";	// StatusAffect name
+		public static const MAX_MASSAGE_BONUS_DURATION:int = 24;			// Duration of the bonus
 		public function applyMassageBonus(selectedMassage:int):void
 		{
 			if (selectedMassage < 0 || selectedMassage > 4)
@@ -513,22 +529,23 @@ package classes.content
 			}
 		}
 		
+		/**
+		 * Spam a message about the bonus being removed.
+		 */
 		public function bonusExpired():void
 		{
 			outputText("\n<b>You groan softly as a feeling of increased tension washes over you, no longer as loose as you were before.  It looks like the effects of Uma's massage have worn off.</b>\n");
 			
 			player.removeStatusAffect(MASSAGE_BONUS_NAME);
-			
-			trace("Removed Uma's Massage Bonus");
 		}
 		
 		/**
-		 * ACCUPUNCTURO
+		 * ACUPUNCTURO
 		 */
 		
 		/**
-		 * Available Accupucture Types
-		 * All of the associated bonuses for the Accupuncture perks are listed here, and reference throughout the codebase. If Fenoxo wants to tweak the values,
+		 * Available Acupucture Types
+		 * All of the associated bonuses for the Acupuncture perks are listed here, and reference throughout the codebase. If Fenoxo wants to tweak the values,
 		 * you can do so easily here without having to go fishing through other files to find where they are referenced.
 		 */
 		public static const NEEDLEWORK_UNDO:int = -1;
@@ -641,10 +658,10 @@ package classes.content
 		{
 			var baseCost:int = 125;
 			
-			if (flags[kFLAGS.UMA_TIMES_ACCUPUNCTURE_UNDO] != 0)
+			if (flags[kFLAGS.UMA_TIMES_ACUPUNCTURE_UNDO] != 0)
 			{
 				// 25 per undo?
-				baseCost += (25 * flags[kFLAGS.UMA_TIMES_ACCUPUNCTURE_UNDO]);
+				baseCost += (25 * flags[kFLAGS.UMA_TIMES_ACUPUNCTURE_UNDO]);
 			}
 			
 			return baseCost;
@@ -659,7 +676,6 @@ package classes.content
 			var pName:String = this.getNeedleworkPerkName();
 			if (pName != "")
 			{
-				trace("Player has " + pName);
 				return true;
 			}
 			
@@ -709,7 +725,7 @@ package classes.content
 			if (selectedSession == NEEDLEWORK_UNDO)
 			{
 				player.removePerk(this.getNeedleworkPerkName());
-				flags[kFLAGS.UMA_TIMES_ACCUPUNCTURE_UNDO]++;
+				flags[kFLAGS.UMA_TIMES_ACUPUNCTURE_UNDO]++;
 			}
 			else if (selectedSession == NEEDLEWORK_SPEED)
 			{
@@ -739,11 +755,11 @@ package classes.content
 		}
 		 
 		/**
-		 * Present player with accupuncture details.
-		 * Edit Status: 75%
+		 * Present player with acupuncture details.
+		 * Edit Status: 85%
 		 * 				Some of the session descriptions might be a little... off. I've touched up one or two.
 		 */
-		public function accupunctureMenu():void
+		public function acupunctureMenu():void
 		{
 			clearOutput();
 			
@@ -755,16 +771,16 @@ package classes.content
 			{
 				sessionCost = this.needleworkUndoCost();
 				outputText("\"<i>Well, since I have already modified your chi in the past, we would first have to undo those changes... I cannot predict how further modifications to the natural flow through your body could interact.  Reversing past changes becomes increasingly more complex, so I have to warn you that it can become a costly process.</i>\"\n\n");
-				outputText("You tell her that you understand what she's saying, and consider the decision carefully.  You ask her how difficult she estimates the process would be, given the past sessions you have endured.\n\n");				
-				  outputText("The mare takes a moment to inspect you carefully, almost looking through rather than at you.  \"<i>This could be quite a challenge, even for my skills... but, seeing as you're my little hoppers special someone, just for you I will have to ask for " + String(sessionCost) + " gems.  That's half the price of what I'd usually charge for work this difficult.</i>\"\n\n");
-				  
+				outputText("You tell her that you understand what she's saying, and consider the decision carefully.  You ask her how difficult she estimates the process would be, given the past sessions you have endured.\n\n");
+				outputText("The mare takes a moment to inspect you carefully, seeming to look through rather than at you.  \"<i>This could be quite a challenge, even for my skills... but, seeing as you're my little hoppers special someone, just for you I will have to ask for " + String(sessionCost) + " gems.  That's half the price of what I'd usually charge for work this difficult.</i>\"\n\n");
+				
 				menu();
 				addButton(0, "Undo", needleworkSession, NEEDLEWORK_UNDO);
 			}
 			else
 			{
 				outputText("\"<i>Are you sure, dear?  While the effects of a Do-in massage will fade eventually, acupuncture is fairly... permanent.  Though I can only give you the effects of one type of needlework at a time...</i>\"\n\n");
-				outputText("You tell her that you understand what she's saying, and thank her for warning you. You ask her what kinds of effects you can expect from her \"acupuncture,\" and how much it's going to cost you.\n\n");
+				outputText("You tell her that you understand what she's saying, and thank her for warning you. You ask her what kinds of effects you can expect from her needlework and how much it's going to cost you.\n\n");
 				outputText("\"<i>Well, fine.  So long as you're sure.  Normally, I would just show you a catalogue, but I suppose you'd prefer needlework that can be used for combat, yes?</i>\"\n\n");
 				outputText("You tell her that would probably be most useful to you, yes.\n\n");
 				outputText("\"<i>Keep in mind that while they have beneficial effects, due to the disruption they cause within the chi flow inside your body... they also come with some drawbacks.  That said, there are a few types of needlework that you might find useful...</i>\"  She takes a deep breath, clearly running through a mental checklist, and then begins to speak.\n\n");
@@ -790,14 +806,23 @@ package classes.content
 			if (player.gems < sessionCost)
 			{
 				outputText("You click your tongue and apologise to Uma, but you don't have enough gems to pay for your treatment...\n\n");
-				outputText("Uma sighs.  \"It's okay, dear.  Just come back when you do, my doors are always open.\"  She smiles at you.");
+				outputText("Uma sighs, \"It's okay, dear.  Just come back when you do, my doors are always open.\"");
 				
 				menu();
 				doNext(13);
 				return;
 			}
 
-			outputText("You nod in understanding... now you stop and consider your options, wondering which one you should choose..."); 
+			outputText("You nod in understanding... now you stop and consider your options, ");
+
+			if (hasNeedleworkPerk())
+			{
+				outputText("considering Uma's information.\n\n");
+			}
+			else
+			{
+				outputText("wondering what you should choose...\n\n");
+			}
 			
 		}
 		
@@ -831,14 +856,14 @@ package classes.content
 			if (selectedSession == NEEDLEWORK_UNDO)
 			{
 				outputText("You tell Uma that you'd like her to remove the effects of your last acupuncture session from your body.  Then hand over the gems.\n\n");
-				outputText("\"<i>Alright, dear,</i>\"  Uma replies, pocketing the gems.  \"<i>It might take some time, but I think I can help you with that... follow me.</i>\"\n\n");
+				outputText("\"<i>Alright, dear,</i>\" Uma replies, pocketing the gems.  \"<i>It might take some time, but I think I can help you with that... follow me.</i>\"\n\n");
 				
 				player.gems -= this.needleworkUndoCost();
 			}
 			else
 			{
 				outputText("You tell Uma that you would like her to give you the " + this.needleworkString(selectedSession) + " acupuncture session, please. Then hand over the gems.\n\n");
-				outputText("\"<i>Alright, dear.</i>\"  Uma replies, pocketing the gems.  \"<i>Let's go then.</i>\"  She motions for you to follow her.");
+				outputText("\"<i>Alright dear,</i>\" Uma replies, pocketing the gems.  \"<i>Let's go then.</i>\"  She motions for you to follow her.");
 				
 				player.gems -= 125;
 			}
@@ -848,7 +873,7 @@ package classes.content
 		}
 		
 		/**
-		 * Actual scene for the accupuncture stuff to happen.
+		 * Actual scene for the acupuncture stuff to happen.
 		 * Edit Status: 90%
 		 * @param	selectedSession		Static var indicating the desired outcome based on player selection. See NEEDLEWORK_ vars.
 		 */
@@ -858,17 +883,25 @@ package classes.content
 			
 			outputText("The room is light, but not overwhelmingly bright, with cool breezes gently wafting through, tingling deliciously on your exposed [skin] and setting the chimes hanging from the rafters gently a-tinkle. A number of large potted plants occupy the corners of the room, and there's even a tiny fountain with stones in it, the tumble of water over rocks creating a strangely soothing melody.  A small brazier produces a sweet, calming smell from incense burning in it.  The pride of the room is a sizable table, made from bamboo; it's covered in a white cloth, and has an upraised headboard with a hole in it that looks like it's big enough to fit your head through.\n\n");
 			outputText("\"<i>I want you to strip and lay face down on my table, while I go fetch my needles and some numbing cream.  Unless you'd like me to stick needles in your body without anything to dull the pain?\"</i>  Uma asks jokingly.\n\n");
-			outputText("You quickly shake your head, and indicate she should go, promising to be properly undressed and ready by the time she gets back.  As the mare heads off to fetch her things, you do as you were instructed; you quickly slip out of your [armorname] and position yourself on the table.  Sticking your head in the table's hole is a little awkward, and makes you feel rather vulnerable... which is natural, given what Uma mentioned about needles.\n\n");
+			outputText("You quickly shake your head, and indicate she should go, promising to be properly undressed and ready by the time she gets back.  As the mare heads off to fetch her things, you do as you were instructed; you quickly slip out of your [armorname] and position yourself on the table.  Sticking your head in the table's hole is a little awkward, and makes you feel rather vulnerable... which is natural, given what Uma mentioned about needles"); 
+
+			if (flags[kFLAGS.PC_FETISH] >= 1)
+			{
+				outputText(", although there's a certain thrill running through your body, the thought of being naked in front of Uma.  Your [nipples] respond in kind, squashed into the table beneath your [chest]");
+			}
+
+			outputText(".\n\n");
+
 			outputText("It only takes a moment before Uma returns with a cart containing a small container and a vial of what you presume to be the numbing cream.  Out of the cart's drawer, Uma pulls a pair of gloves which slips over her hands nicely, then opens the small container.  From your current position it's hard to tell what it contains, but from the clicking sounds you hear, you assume it to be where she keeps her needles.\n\n");
-			outputText("\"<i>Are you comfortable, dear?  May I start?</i>\"  She asks.\n\n");
-			outputText("You tell her that you're as ready as you'll ever be, so she may as well start.  \"<i>Ok, now try to relax.</i>\"  She says, gently touching your exposed back and lightly massaging it with her fingers.  The combination of nerves and her touch sends static through your skin.\n\n");
-			outputText("\"<i>I'll be applying the cream now.</i>\"  She notifies you, slowly pouring the, rather cold, cream on your back and rubbing it all over, ensuring every single spot is covered before she puts the vial away.  You shiver and repress a verbal protest at the chill in her cream.  \"<i>It will take a few minutes before you start to feel the effects, I want you to tell me when you no longer feel my fingers on your back.</i></i>\"  She then begins a slow circular massage on your back.\n\n");
+			outputText("\"<i>Are you comfortable, dear?  May I start?</i>\" she asks.\n\n");
+			outputText("You tell her that you're as ready as you'll ever be, so she may as well start.  \"<i>Ok, now try to relax,</i>\" she says, gently touching your exposed back and lightly massaging it with her fingers.  The combination of nerves and her touch sends static through your skin.\n\n");
+			outputText("\"<i>I'll be applying the cream now,</i>\" she notifies you, slowly pouring the cold cream on your back and rubbing it all over, ensuring every single spot is covered before she puts the vial away.  You shiver and repress a verbal protest at the chill in her cream.  \"<i>It will take a few minutes before you start to feel the effects, I want you to tell me when you no longer feel my fingers on your back.</i></i>\"  She then begins a slow circular massage on your back.\n\n");
 			outputText("You promise you will, and wait patiently.  Slowly the sensation of her fingers fades away, until at last you aren't sure if she's even touching you any more, and you report this to the mare currently planning on sticking you full of needles.\n\n");
 			outputText("\"<i>Very good.  I'll start the treatment now, you might feel a slight pricking sensation, though it shouldn't hurt... if at any point it starts hurting, tell me and I'll do something to ease your pain, alright?</i>\"\n\n");
 			outputText("You tell her that you understand.  True to her words, you feel the slight pricking sensation of needles gently poking into your back. Some of them are removed shortly after, while others stay in place for a while longer.  Eventually, you feel all needles gradually being removed from your back and Uma happily declares,  \"<i>All done!</i>\"\n\n"); 
 			outputText("You ask if you can get up now, or do you need to stay where you are so that it has time to settle?\n\n");
-			outputText("\"<i>No, you can get up and get dressed dear.  The needles are out and your chi should be stable enough now... though you won't feel much of a change until some time has passed. </i>\"  She takes off her gloves and scratches her chin.  \"<i>I should think you will start to feel the changes soon; maybe by the time you get back to your home, if not shortly after.</i>\"\n\n");
-			outputText("You thank her for her work, get yourself up and proceed to dress yourself.  You then politely excuse yourself and start the long journey back to your camp.\n\n");
+			outputText("\"<i>No, you can get up and get dressed dear.  The needles are out and your chi should be stable enough now... though you won't feel much of a change until some time has passed. </i>\"  She takes off her gloves and scratches her chin before continuing, \"<i>I should think you will start to feel the changes soon; maybe by the time you get back to your home, if not shortly after.</i>\"\n\n");
+			outputText("You thank her for her work, get yourself up and proceed to dress.  You politely excuse yourself and start the long journey back to your camp.\n\n");
 			
 			applyNeedlework(selectedSession);
 			
@@ -898,19 +931,19 @@ package classes.content
 		
 		/**
 		 * Talk Job
-		 * Edit Status: 90%
+		 * Edit Status: 95%
 		 */
 		public function talkJob():void
 		{
 			clearOutput();
 			
 			outputText("You tell her that you're curious about the work she does and what it can do.\n\n");
-			outputText("\"<i>My work?</i>\"  Uma repeats in a thoughtful tone.  \"<i>Well, I'm something of a healer - my specific skills lie in acupuncture and do-in, a form of deep muscle massage.  As for what they can do... In short, my skills allow me to modify a person's flows of chi - I presume you've heard of that?</i>\"\n\n");
-			outputText("You shake your head, which prompts her to sigh.  \"<i>Chi is the energy that permeates one's body, to put it simply.  Every living thing has a certain flow of chi, and this is what determines your talents, abilities and, some would argue, even fate.  Some talented individuals can actually gather chi from other beings, to some effect, and some, like yours truly, can manipulate the flow of the chi inside someone; although there is a limit to how much I can manipulate it.</i>\"  Uma explains.\n\n");
+			outputText("\"<i>My work?</i>\" Uma repeats in a thoughtful tone.  \"<i>Well, I'm something of a healer - my specific skills lie in acupuncture and do-in, a form of deep muscle massage.  As for what they can do... In short, my skills allow me to modify a person's flows of chi - I presume you've heard of that?</i>\"\n\n");
+			outputText("You shake your head, which prompts her to sigh.  \"<i>Chi is the energy that permeates one's body, to put it simply.  Every living thing has a certain flow of chi, and this is what determines your talents, abilities and, some would argue, even fate.  Some talented individuals can actually gather chi from other beings, to some effect, and some, like yours truly, can manipulate the flow of the chi inside someone; although there is a limit to how much I can manipulate it,</i>\" Uma explains.\n\n");
 			outputText("So, Uma manipulates the energy inside of people for a living?  But why would anyone want her to do that?  You ask this to the mare, hoping for clarification.\n\n");
 			outputText("\"<i>Manipulating the chi inside someone can have various beneficial effects, such as improving strength, altering sexual drive, getting rid of pains, alleviating mood swings... basically anything you can imagine has a relationship, no matter how detached, to chi.</i>\"\n\n");
 			outputText("You nod your head in understanding; that makes sense.  So, what's the difference between the massages - do-in, she called them? - and acupuncture?  Don't they both do the same thing?\n\n");
-			outputText("Uma smiles and shakes her head.  \"<i>No, dear.  Do-in adjusts the flow of chi, such as increasing output in certain areas, or reducing them... imagine this.  Your chi flows like a river, by enlarging or shrinking the stream, the river's strength will either increase or diminish, correct?  This is what Do-in does, it never cuts the flow of the river, just... adjusts it.</i>\"\n\n");
+			outputText("Uma smiles and shakes her head.  \"<i>No, dear.  Do-in adjusts the flow of chi, such as increasing output in certain areas, or reducing them.  Picture this; your chi flows like a river, by enlarging or shrinking the stream, the river's strength will either increase or diminish, correct?  This is what Do-in does, it never cuts the flow of the river, just... adjusts it.</i>\"\n\n");
 			outputText("You tell her that's correct, and you understand the analogy. So, how does acupuncture differ in its effects?\n\n");
 			outputText("\"<i>During acupuncture I pierce key spots in your body with needles; these are much more complicated than Do-in, despite do-in not being simple to begin with.  Basically, using the previous analogy, acupuncture obstructs the flow of the river, so that it can flow elsewhere, or flow differently.  The effects of Do-in are just temporary, which means that given enough time, the river will return to normal, but acupuncture... that is permanent, dear.  Once a new pathway has been made for the flow of chi inside your body, it's there to stay... though with some work it might just be possible to remove the effects...</i>\"  Uma rubs her chin in thought.\n\n");
 			outputText("You nod your head thoughtfully, digesting what you have been told.\n\n");
@@ -932,18 +965,18 @@ package classes.content
 			clearOutput();
 			
 			outputText("You tell her that, if it's not too personal, you'd like to ask her some questions about her sexuality?\n\n");
-			outputText("\"<i>Oh, I'm okay with talking about that.  You're not the first person to ask me about that...</i>\" She looks distant for a short while... but then looks at you and smiles.  \"<i>So, what do you want to know, exactly?</i>\"\n\n");
+			outputText("\"<i>Oh, I'm okay with talking about that.  You're not the first person to ask me about that...</i>\"  She looks distant for a short while, but then looks at you and smiles.  \"<i>So, what do you want to know, exactly?</i>\"\n\n");
 			outputText("You think for a while, and finally ask why she considers herself a lesbian?  Won't she have sex with herms too?  Wouldn't that make her bisexual?  In fact... what made her think of herself as a lesbian in the first place?\n\n");
-			outputText("Uma stops to think for a while then replies,  \"<i>Well... I guess it was my studies.  Being an acupuncturist means I have to know a lot about bodies in general... and while I do know all the ins and outs of male anatomy, I've always found girls more... beautiful.</i>\"  She thinks for a while longer, then shrugs.  \"<i>I suppose that's all I can say about that... I really don't know why I find girls more attractive... I just do.  And, well... I'm not entirely against having sex with males either, so long as they're pretty girly to begin with, so maybe you're right... maybe I'm more bi than lesbian.</i>\"\n\n");
-			outputText("So, it's not so much that she's unattracted to dicks as that she needs a fairly feminine face, and preferably physique as well, to get turned on by someone? You ask, interested.  Uma nods.  \"<i>That is correct... I like my partners pretty...</i>\"  She laughs lightly.\n\n");
+			outputText("Uma stops to think for a while then replies,  \"<i>Well... I guess it was my studies.  Being an acupuncturist means I have to know a lot about bodies in general, and while I do know all the ins-and-outs of male anatomy, I've always found girls more... beautiful.</i>\"  She thinks for a while longer, then shrugs.  \"<i>I suppose that's all I can say about that... I really don't know why I find girls more attractive, I just do.  And, well, I'm not entirely against having sex with males either, so long as they're pretty and girly to begin with, so maybe you're right.  Maybe I am more bi than lesbian.</i>\"\n\n");
+			outputText("So, it's not so much that she's unattracted to dicks as that she needs a fairly feminine face, and preferably physique as well, to get turned on by someone? You ask, interested.  Uma nods.  \"<i>That is correct, I like my partners pretty...</i>\"  She laughs lightly.\n\n");
 			outputText("You ask if that makes it at all challenging to find partners, when she's feeling in the mood?\n\n");
-			outputText("Uma giggles.  \"<i>Not at all.  I find that women in general tend to care more for 'natural medicine' than men... usually when men have chronic back pain, most of them would rather drink some kind of alchemic concoction to make it better, and to be honest it does work well. But the truth is that ingesting too many alchemical ingredients might lead to even more problems later; not to mention the chemical dependency.  Since my pins are a one-time thing, and there's no dependency, I get many visits from the more health conscious populace.  And let's just face it, [name].  Women are just that much more concerned about natural medicine than men... especially when it involves a 7 foot horse-woman inserting needles in their bodies.</i>\"  Uma giggles once more.\n\n");
+			outputText("Uma giggles before replying, \"<i>Not at all.  I find that women in general tend to care more for 'natural medicine' than men... usually when men have chronic back pain, most of them would rather drink some kind of alchemic concoction to make it better, and to be honest it does work well. But the truth is that ingesting too many alchemical ingredients might lead to even more problems later; not to mention the chemical dependency.  Since my pins are a one-time thing, and there's no dependency, I get many visits from the more health conscious populace.  And let's just face it, [name].  Women are just that much more concerned about natural medicine than men... especially when it involves a 7 foot horse-woman poking needles in their bodies.</i>\"  Uma giggles once more.\n\n");
 			outputText("You ask casually if that implies the few men who do visit tend to be especially likely to be her type?\n\n");
 			outputText("Uma thinks for a while.  \"<i>To be honest it's a fifty-fifty chance... usually the men that do show up happen to have been sent here by their wives and girlfriends.  Finding girly men is just very rare... though I do get the occasional client.</i>\"\n\n");
 			outputText("That makes you think, and you ask how much effort Uma has to put into keeping her little tete-a-tetes discrete? After all, you don't think too many boyfriends, husbands or fathers would be happy to hear about her seducing their girlfriends, wives or daughters.\n\n");
-			outputText("Uma smiles at you mischievously.  \"<i>On the contrary, my naive little friend.  This is an oriental clinic, and there are many types of therapy, for various problems, including sex life.  Some of the women I seduce are actually straight, and let's just say sometimes they need to be reminded of what a good penis can do for them.  And the only way to do that, well... is by making them want one in the first place.  A caress here, a press there, a little lick later... and they are practically on fire, orgasming time and again, begging me to fuck them... The only problem though, is that I don't have the equipment.</i>\"  Uma winks at you.  \"<i>Once they leave my clinic, they're satisfied and much hornier than usual.  So the first thing they do is go home to share their pleasure with their husbands.</i>\"\n\n");
+			outputText("Uma smiles at you mischievously.  \"<i>On the contrary, my naive little friend.  This is an oriental clinic, and there are many types of therapy, for various problems, including sex life.  Some of the women I seduce are actually straight, and let's just say sometimes they need to be reminded of what a good penis can do for them.  And the only way to do that, well... is by making them want one in the first place.  A caress here, a press there, a little lick later... and they are practically on fire, orgasming time and again, begging me to fuck them.  The only problem is that I don't have the equipment.</i>\"  Uma winks at you.  \"<i>Once they leave my clinic, they're satisfied and much hornier than usual.  So the first thing they do is go home to share their pleasure with their husbands.</i>\"\n\n");
 			outputText("You can't resist the wry grin as you comment that it must do wonders for the reputation of her business.\n\n");
-			outputText("Uma nods.  \"<i>It does, but as you can see, the clinic is pretty empty most of the time.  It just so happens that we're really expensive, especially considering our... extra... services.  But don't worry, [name].  Since you're my little Loppe's [boyfriend], I'll be happy to give you a pretty good discount on our services.\"\n\n");
+			outputText("Uma nods.  \"<i>It does, but as you can see, the clinic is pretty empty most of the time.  It just so happens that we're really expensive, especially considering our... extra services.  But don't worry, [name].  Since you're my little Loppe's [boyfriend], I'll be happy to give you a pretty good discount on our services.\"\n\n");
 			outputText("You laugh at that, thanking her for her generosity and her time, and then tell her it's time for you to go.  Uma smiles at you and says, \"<i>Come visit me again soon.</i>\"\n\n");
 			outputText("You promise that you will, and then head out of the quaint little clinic and back to camp.\n\n");
 
@@ -975,7 +1008,7 @@ package classes.content
 		{
 			menu();
 			doNext(13);
-			addButton(1, "Debugz", talkMenu);
+			//addButton(1, "Debugz", talkMenu);
 		}
 		
 		/**
@@ -1749,13 +1782,13 @@ package classes.content
 			outputText("\"<i>Be a dear and store mine too, please,</i>\"  Uma asks, handing her folded clothes to you.  You nod your head and place them in the cupboard like she asked, then walk over to the table and sit down, ready to begin.\n\n");
 			outputText("Uma takes a seat beside you and smiles gently at you.  \"<i>Tell me, dear, how have you been?</i>\"\n\n");
 			outputText("You think it over and tell her that, all things considered, surprisingly well.  After all, you jest, you're still free and not some demon's toy.  \"<i>That's good, I've been meaning to have a chat with you, maybe get to know you a little better while I'm at it, but the main question is Loppe.  What's your opinion on my little Loppe?  Did I do a good job?</i>\"  Uma asks, a questing hand rubbing along your thigh to gently touch your [cock].  \"<i>And don't think I'm forgetting about our business here either, dear.</i>\"\n\n");
-			outputText("What does she mean by a good job, you ask, shivering at the gently stroking fingers on your steadily stiffening shaft.  \"<i>You know, how she behaves out there?  Is she being nice?  Has she made any passes at inappropriate times?  Is she carrying herself like a lady ought to?</i>\" the mare questions, continuing to stroke your shaft, sometimes rubbing at your [tip] with practiced motions, always pushing the right button to send shudders of pleasure running through you.\n\n");
-			outputText("You moan, then shake your head and try to answer.  You can't really say if Loppe is carrying herself like a lady ought to, because you're not sure what Uma defines as a lady or how that applies to a hermaphrodite.  But she is definitely being very nice to you - no making passes unless you imply you're interested first.  \"<i>That's good - by the way, does this feel good?</i>\"  Uma asks, lavishing your [tip] with more of her attention.\n\n");
+			outputText("What does she mean by a good job, you ask, shivering at the gently stroking fingers on your steadily stiffening shaft.  \"<i>You know, how she behaves out there?  Is she being nice?  Has she made any passes at inappropriate times?  Is she carrying herself like a lady ought to?</i>\" the mare questions, continuing to stroke your shaft, sometimes rubbing at your [cockHead biggest] with practiced motions, always pushing the right button to send shudders of pleasure running through you.\n\n");
+			outputText("You moan, then shake your head and try to answer.  You can't really say if Loppe is carrying herself like a lady ought to, because you're not sure what Uma defines as a lady or how that applies to a hermaphrodite.  But she is definitely being very nice to you - no making passes unless you imply you're interested first.  \"<i>That's good - by the way, does this feel good?</i>\"  Uma asks, lavishing your [cockHead biggest] with more of her attention.\n\n");
 			outputText("Yes, yes it does, you moan, shivering your seat and unable to resist trying to hump the masseur's hand that is caressing you so erotically.\n\n");
 			outputText("\"<i>Focus dear, I'm trying to strike a conversation here,</i>\" Uma chuckles.  You manage to gasp an apology, but refrain from pointing out that her masterful touch on your burgeoning shaft is rather distracting.\n\n");
-			outputText("\"<i>What about the sex though?  How are things?  And let's not restrict this topic to my little Loppe only.  What I'm interested in is you.  Have you been taking care of your needs properly?  Speaking of needs, how big are your needs?  Hmm?</i>\" the MILF mare asks as she adds another hand to your [cock], focusing on both massaging your shaft as well as your [tip].  You gasp and groan, but can't think of anything coherent to say through the pleasure crowding your brain.\n\n");
+			outputText("\"<i>What about the sex though?  How are things?  And let's not restrict this topic to my little Loppe only.  What I'm interested in is you.  Have you been taking care of your needs properly?  Speaking of needs, how big are your needs?  Hmm?</i>\" the MILF mare asks as she adds another hand to your [cock], focusing on both massaging your shaft as well as your [cockHead biggest].  You gasp and groan, but can't think of anything coherent to say through the pleasure crowding your brain.\n\n");
 			outputText("\"<i>Come on, dear.  Talk to me.</i>\" Uma's presses, even as her hands redouble their efforts at pleasuring you.  Between moans you manage to protest that she's making it awfully hard for you to do so, a glow of pride in you for actually being coherent rather than babbling madly.\n\n");
-			outputText("\"<i>Is that so?  In that case, let's try this!</i>\" she twists her hand around your shaft, stroking in a corkscrew-like motion, while her her other hand continues to massage your [tip] and strokes the underside of your strained fuck-pole.\n\n");
+			outputText("\"<i>Is that so?  In that case, let's try this!</i>\" she twists her hand around your shaft, stroking in a corkscrew-like motion, while her her other hand continues to massage your [cockHead biggest] and strokes the underside of your strained fuck-pole.\n\n");
 			outputText("That's the last straw for you and promptly explode in her hands.\n\n");
 
 			// Normal CumQ
