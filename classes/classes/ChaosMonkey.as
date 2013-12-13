@@ -140,7 +140,7 @@
 
 			import flash.events.ErrorEvent;
 
-			this._mainClassPtr.outputText("<b>OMGERRORLOLWUT</b>\n\n", true);
+			this._mainClassPtr.outputText("<b>OMG ERROR LOL WUT</b>\n\n", true);
 			
 			var stackTrace:String = "";
 			
@@ -153,13 +153,13 @@
 			else if (event.error is ErrorEvent)
 			{
 				var errorEvent:ErrorEvent = event.error as ErrorEvent;
-				this._mainClassPtr.outputText("<b>ERROREVENTWAT</b>\n\n");
+				this._mainClassPtr.outputText("<b>ERROR EVENT WAT</b>\n\n");
 				stackTrace += errorEvent + "\n";
 				// do something with the error
 			}
 			else
 			{
-				this._mainClassPtr.outputText("<b>WAT</b>\n\n");
+				this._mainClassPtr.outputText("<b>DURRRRR</b>\n\n");
 			}
 			
 			this._mainClassPtr.outputText("<b>SOMETHING IS BROKEN LOL WAT</b>\n");
@@ -275,10 +275,22 @@
 			this._stage.addEventListener(Event.EXIT_FRAME, this.throwAMonkeyAtIt);
 		}
 
+		private var oldTime:Number = 0;
+		private function checkTime()
+		{
+			if (this._mainClassPtr.time.totalTime - this.oldTime < 0)
+			{
+				this.oldTime = this._mainClassPtr.time.totalTime;
+				throw new Error("Time went backwards!!!")
+			}
+			this.oldTime = this._mainClassPtr.time.totalTime;
+		}
+
 		// KeyHandler(e:KeyboardEvent)
 		public function throwAMonkeyAtIt(e:*)
 		{
 
+			this.checkTime()
 			
 			if (!(this._mainClassPtr.testingBlockExiting))
 			{

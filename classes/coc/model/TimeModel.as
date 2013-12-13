@@ -24,5 +24,9 @@ package coc.model
 		{
 			_hours = value;
 		}		
+		public function get totalTime():Number
+		{
+			return (this._days * 24 + this._hours);
+		}
 	}
 }
