@@ -2,7 +2,7 @@
 //Intro
 public function findTheFrogGirl():void {
 	clearOutput();
-	if(flags[TIMES_ENCOUNTERED_FROG] == 0) {
+	if(flags[kFLAGS.TIMES_ENCOUNTERED_FROG] == 0) {
 		outputText("You begin your trudge through the bog, slogging through the soupy muck.  Insects buzz by every second, spinning in hectic spirals around your head.");
 		outputText("\n\nYou soon become aware of a new sound behind the buzzing - a musical chirping.  Step by step, you move toward it, pushing aside hanging curtains of gray moss until the dark trees of the swamp give way to the wide roots of mangroves.  The sporadic notes trickle into your ears, and you feel unusually relaxed as you move toward their source.");
 		outputText("\n\nThe wide roots of the trees create separate, tiny ponds, where its looks like condensed water has collected into pools of pristine, blue water.  The chirping echoes from the high walls of mangrove roots, coming from a slim figure seated in the largest pool.  Vaguely feminine, it sits cross-legged and waist-deep in the pool, arms open wide and welcoming.  Light glints off the smooth skin of the lithe form as her lips part, issuing out another stream of alluring, musical notes.");
@@ -18,7 +18,7 @@ public function findTheFrogGirl():void {
 		outputText("\n\nShe purses her lips, blowing out another stream of oddly alluring notes, and they float through the air, wrapping around you head and submerging you in a heady, musical fog.  Despite yourself, you feel your eyes half-close as the musical notes ripple through your brain.");
 		outputText("\n\nShe smiles, a three-foot tongue uncoiling from her mouth, trailing down over her flat chest, a patina of slime smearing across her torso.  With one upraised hand, she crooks a finger towards you, beckoning you closer to her pool.");
 	}
-	flags[TIMES_ENCOUNTERED_FROG]++;
+	flags[kFLAGS.TIMES_ENCOUNTERED_FROG]++;
 	outputText("\n\nDo you follow the music into the arms of the frog girl, or resist her melody?");
 	menu();
 	addButton(0,"Follow",followDatFrog);

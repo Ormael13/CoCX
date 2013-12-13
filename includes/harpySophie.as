@@ -28,7 +28,7 @@ Lasts 4-8 hours.
 public function meetSophie():void {
 	sophieSprite();
 	//increment met tag
-	flags[MET_SOPHIE_COUNTER]++;
+	flags[kFLAGS.MET_SOPHIE_COUNTER]++;
 	outputText("", true);
 	outputText("You make the grueling trek through mountain passes with slow, weary determination.  As you get higher, you feel almost like you could reach out and touch the omnipresent clouds that surround the summit.  The fluttering of dozens of harpy wings fills the air when you get close to their nesting area.  They flutter off and circle in the distance, seemingly content to watch you for now.  You glance around and discover numerous egg-filled nests before deciding it would be wise to stay away from those. The mothers haven't gone far.  Climbing higher, you take special care not to disturb the nests, but the effort is wasted.\n\n", false);
 	
@@ -55,7 +55,7 @@ public function meetSophieRepeat():void {
 	sophieSprite();
 	outputText("", true);
 	//(Pissed)
-	if(flags[SOPHIE_ANGRY_AT_PC_COUNTER] > 0) {
+	if(flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] > 0) {
 		outputText("During your exploration of the mountains you wind up passing close to the harpy nests again.  Uh oh.  There's a constant, irritating buzz in the background that makes it hard to focus on what you're doing.  You crest a ledge and find yourself back on the edge of Sophie's nest.  Shit.  She glowers at you and raises one of her talons.  It's a fight!\n\n", false);
 		doNext(1);
 		startCombat(26);
@@ -64,7 +64,7 @@ public function meetSophieRepeat():void {
 	//(Has dick)
 	if(player.totalCocks() > 0) {
 		//(Random Rape) 
-		if(rand(2) == 0 && flags[SOPHIE_WILD_EGG_COUNTDOWN_TIMER] <= 0) {
+		if(rand(2) == 0 && flags[kFLAGS.SOPHIE_WILD_EGG_COUNTDOWN_TIMER] <= 0) {
 			outputText("During your exploration of the mountains you wind up passing close to the harpy nests again, and Sophie flaps her way over to you.  Her breasts jiggle pleasantly and she hooks her talons through the belt you use to hold your pouches before you can stop her.  The force of her flapping wings pulls you off the mountain, suspending you hundreds of feet above the ground as she flies you back towards her nest.  ", false);
 			if(player.tallness > 72) outputText("The harpy struggles with your weight and is clearly out of breath by the time she gets you up to her nest.", false);
 			else outputText("The flight is thankfully brief, and she actually gives you a good view of the mountain-side as she brings you up to her nest.", false);
@@ -85,12 +85,12 @@ public function meetSophieRepeat():void {
 			return;
 		}
 		//(Have sexed) 
-		if(flags[FUCKED_SOPHIE_COUNTER] > 0) {
+		if(flags[kFLAGS.FUCKED_SOPHIE_COUNTER] > 0) {
 			outputText("During your exploration of the mountains you wind up passing close to the harpy nests again, and Sophie flaps her way over to you.  Her breasts jiggle pleasantly and she hooks her talons through through the belt you use to hold your pouches before you can stop her.  The force of her flapping wings pulls you off the mountain, suspending you hundreds of feet above the ground as she flies you back towards her nest.  ", false);
 			if(player.tallness > 72) outputText("The harpy struggles with your weight and is clearly out of breath by the time she gets you up to her nest.", false);
 			else outputText("The flight is thankfully brief, and she actually gives you a good view of the mountain-side as she brings you up to her nest.", false);
 			outputText("  Sophie releases you and flops down across from you, clearly tired.  She asks, \"<i>Did you climb all the way up here to see me?  That's sooo sweet!  ", false);
-			if(flags[SOPHIE_WILD_EGG_COUNTDOWN_TIMER] > 0) outputText("I still haven't laid your egg, but if you want it might be fun to take care of your naughty little urges.", false);
+			if(flags[kFLAGS.SOPHIE_WILD_EGG_COUNTDOWN_TIMER] > 0) outputText("I still haven't laid your egg, but if you want it might be fun to take care of your naughty little urges.", false);
 			else outputText("I already laid your last egg, so why don't you come over her and give momma some sugar?", false);
 			outputText("</i>\"  Her thighs spread apart, inviting you back for more of her pleasure.\n\n", false);
 		}
@@ -137,7 +137,7 @@ public function consensualSexSelector():void {
 public function fightSophie():void {
 	sophieSprite();
 	startCombat(26);
-	flags[SOPHIE_ANGRY_AT_PC_COUNTER] += rand(24);
+	flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] += rand(24);
 	eventParser(1);
 }
 
@@ -355,7 +355,7 @@ public function cramANippleInIt():void {
 			}
 			else outputText("\n\n", false);
 		}
-		flags[SOPHIE_FOLLOWER_PROGRESS] = 0;
+		flags[kFLAGS.SOPHIE_FOLLOWER_PROGRESS] = 0;
 	}
 	//(Volunteered: 
 	else {
@@ -366,7 +366,7 @@ public function cramANippleInIt():void {
 			stats(0,0,0,0,0,0,25,0);
 		}
 		else outputText("</i>\"\n\n", false);
-		flags[SOPHIE_FOLLOWER_PROGRESS]++;
+		flags[kFLAGS.SOPHIE_FOLLOWER_PROGRESS]++;
 	}
 	//prevent lactation reduction and slightly boost
 	player.boostLactation(.1);
@@ -374,7 +374,7 @@ public function cramANippleInIt():void {
 	if(player.cor > 60) outputText("  You give her wide ass a playful slap and start climbing down before she can retaliate.", false);
 	stats(0,0,0,0,0,0,-50,0);
 	//increment times bfed.
-	flags[BREASTFEAD_SOPHIE_COUNTER]++;
+	flags[kFLAGS.BREASTFEAD_SOPHIE_COUNTER]++;
 	if(gameState == 1 || gameState == 2) eventParser(5007);
 	else doNext(13);
 	//You've now been milked, reset the timer for that
@@ -388,7 +388,7 @@ public function cramANippleInIt():void {
 public function consensualHotSophieDickings():void {
 	sophieSprite();
 	outputText("", true);
-	flags[SOPHIE_FOLLOWER_PROGRESS]++;
+	flags[kFLAGS.SOPHIE_FOLLOWER_PROGRESS]++;
 	var x:Number = player.cockThatFits(232);
 	if(x < 0) 
 	{
@@ -478,11 +478,11 @@ public function consensualHotSophieDickings():void {
 	outputText(" are aching and sore.\n\n", false);
 	
 	outputText("Completely spent by the encounter, you lean on her soft, downy chest and try to catch your breath.  Her tight tunnel continues to squeeze and churn, milking any last bits of goo from your urethra.  Sophie groans, \"<i>Mmm, such potent seed for one so young.  ", false);
-	if(flags[FUCKED_SOPHIE_COUNTER] == 0) {
+	if(flags[kFLAGS.FUCKED_SOPHIE_COUNTER] == 0) {
 		outputText("Did you know in the old days we used to keep men trapped like this for a whole day?  We'd keep stroking them like this and get a whole days worth of orgasm.  It was magnificent.  Of course we're so fertile now a single orgasm is enough to fertilize an egg.  It looks like you got off lucky, huh?", false);
 	}
-	else if(flags[FUCKED_SOPHIE_COUNTER] <= 2) outputText("You really like it when I milk you don't you?  That must be why you keep coming back for more.", false);
-	else if(flags[FUCKED_SOPHIE_COUNTER] <= 10) {
+	else if(flags[kFLAGS.FUCKED_SOPHIE_COUNTER] <= 2) outputText("You really like it when I milk you don't you?  That must be why you keep coming back for more.", false);
+	else if(flags[kFLAGS.FUCKED_SOPHIE_COUNTER] <= 10) {
 		outputText("Do you have a fetish for ", false);
 		if(rand(2) == 0) outputText("older women", false);
 		else outputText("harpies", false);
@@ -500,7 +500,7 @@ public function consensualHotSophieDickings():void {
 	outputText(".  You struggle up to your feet and marvel at how rigid ", false);
 	if(player.cockTotal() > 1) outputText("each of ", false);
 	outputText(" your " + multiCockDescriptLight() + " remains.  Sophie giggles, \"<i>", false);
-	if(flags[FUCKED_SOPHIE_COUNTER] == 0) {
+	if(flags[kFLAGS.FUCKED_SOPHIE_COUNTER] == 0) {
 		outputText("Sorry cutey, the lip gloss is going to keep you nice and hard.  It's meant to help your ", false);
 		if(player.balls > 0) outputText("balls", false);
 		else outputText("body", false);
@@ -564,7 +564,7 @@ public function postSexSophieSnuggleTurnedDown():void {
 public function consensualSophieSexNoFit():void {
 	sophieSprite();
 	var x:Number = player.biggestCockIndex();
-	flags[SOPHIE_FOLLOWER_PROGRESS]++;
+	flags[kFLAGS.SOPHIE_FOLLOWER_PROGRESS]++;
 	outputText("", true);
 	outputText("With her spread thighs beckoning you so invitingly, there's no way you could resist.  You tear off your " + player.armorName + " and jump into her nest with her, hardening delightfully from your close proximity to the well-endowed woman.  Sophie places a hand ", false);
 	if(player.biggestTitSize() < 1) outputText("on your chest", false);
@@ -612,11 +612,11 @@ public function consensualSophieSexNoFit():void {
 	outputText(".  She flops on her back", false);
 	if(player.cumQ() >= 2000) outputText(" in the semen-soaked nest", false);
 	outputText(" and runs her hands over her abdomen, clearly enjoying the idea of laying another egg.  Sophie groans, \"<i>Mmm, such potent seed for one so young.  ", false);
-	if(flags[FUCKED_SOPHIE_COUNTER] == 0) {
+	if(flags[kFLAGS.FUCKED_SOPHIE_COUNTER] == 0) {
 		outputText("Did you know in the old days we used to keep men trapped like this for a whole day?  We'd keep stroking them like this and get a whole days worth of orgasm.  It was magnificent.  Of course we're so fertile now a single orgasm is enough to fertilize an egg.  It looks like you got off lucky, huh?", false);
 	}
-	else if(flags[FUCKED_SOPHIE_COUNTER] <= 2) outputText("You really like it when I milk you don't you?  That must be why you keep coming back for more.", false);
-	else if(flags[FUCKED_SOPHIE_COUNTER] <= 10) {
+	else if(flags[kFLAGS.FUCKED_SOPHIE_COUNTER] <= 2) outputText("You really like it when I milk you don't you?  That must be why you keep coming back for more.", false);
+	else if(flags[kFLAGS.FUCKED_SOPHIE_COUNTER] <= 10) {
 		outputText("Do you have a fetish for ", false);
 		if(rand(2) == 0) outputText("older women", false);
 		else outputText("harpies", false);
@@ -630,7 +630,7 @@ public function consensualSophieSexNoFit():void {
 	outputText("You struggle up to your feet and marvel at how rigid ", false);
 	if(player.cockTotal() > 1) outputText("each of ", false);
 	outputText("your " + multiCockDescriptLight() + " remains.  Sophie giggles, \"<i>", false);
-	if(flags[FUCKED_SOPHIE_COUNTER] == 0) {
+	if(flags[kFLAGS.FUCKED_SOPHIE_COUNTER] == 0) {
 		outputText("Sorry cutey, the lip gloss is going to keep you nice and hard.  It's meant to help your ", false);
 		if(player.balls > 0) outputText("balls", false);
 		else outputText("body", false);
@@ -650,22 +650,22 @@ public function consensualSophieSexNoFit():void {
 }
 public function sophieFucked(dicked:Boolean = true):void {
 	//knock up if not knocked up
-	if(flags[SOPHIE_WILD_EGG_COUNTDOWN_TIMER] <= 0 && dicked) {
-		flags[SOPHIE_WILD_EGG_COUNTDOWN_TIMER] = 48 + rand(48);
+	if(flags[kFLAGS.SOPHIE_WILD_EGG_COUNTDOWN_TIMER] <= 0 && dicked) {
+		flags[kFLAGS.SOPHIE_WILD_EGG_COUNTDOWN_TIMER] = 48 + rand(48);
 	}
 	//if forced to lesbosecks
 	if(!dicked) {
-		flags[TIMES_FUCKED_SOPHIE_LESBIAN]++;
+		flags[kFLAGS.TIMES_FUCKED_SOPHIE_LESBIAN]++;
 		//If not pissed increment times pissed
-		if(flags[SOPHIE_ANGRY_AT_PC_COUNTER] <= 0) {
-			flags[SOPHIE_ANGRY_AT_PC_COUNTER] = 72 + rand(100);
-			flags[TIMES_PISSED_OFF_SOPHIE_COUNTER]++;
+		if(flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] <= 0) {
+			flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] = 72 + rand(100);
+			flags[kFLAGS.TIMES_PISSED_OFF_SOPHIE_COUNTER]++;
 		}
 		//Increase pissed time
-		else flags[SOPHIE_ANGRY_AT_PC_COUNTER] += rand(72);
+		else flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] += rand(72);
 	}
 	//increment times fucked
-	flags[FUCKED_SOPHIE_COUNTER]++;
+	flags[kFLAGS.FUCKED_SOPHIE_COUNTER]++;
 }
 
 
@@ -674,7 +674,7 @@ public function luststickApplication(hours:Number = 4):void {
 	//Immune to luststick?
 	if(player.hasPerk("Luststick Adapted") >= 0) return;
 	//Increment luststick resistance
-	flags[UNKNOWN_FLAG_NUMBER_00285] += Math.floor(model.time.hours/2);
+	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00285] += Math.floor(model.time.hours/2);
 	if(!player.hasCock()) return;
 	//Max of 20.
 	if(model.time.hours > 20) model.time.hours = 20;
@@ -920,7 +920,7 @@ public function sophieAI():void {
 
 public function sophieLostCombat():void {
 	sophieSprite();
-	flags[SOPHIE_FOLLOWER_PROGRESS] = 0;
+	flags[kFLAGS.SOPHIE_FOLLOWER_PROGRESS] = 0;
 	outputText("Sophie is down!  ", true);
 	if(monster.HP < 1) outputText("She's too wounded to fight, and she lies in a miserable heap in the nest.", false);
 	else outputText("She's too turned on to be a threat and is happily masturbating.", false);
@@ -954,7 +954,7 @@ public function sophieLostCombat():void {
 }
 public function sophieWonCombat():void {
 	sophieSprite();
-	flags[SOPHIE_FOLLOWER_PROGRESS] = 0;
+	flags[kFLAGS.SOPHIE_FOLLOWER_PROGRESS] = 0;
 	if(player.hasCock()) {
 		if(player.cockThatFits(232) < 0) tooBigForOwnGoodSophieLossRape();
 		else if(player.biggestCockArea() <= 5) tinyDickSupremeSophieLoss();
@@ -1099,8 +1099,8 @@ public function sophieVictoryPussyGrind():void {
 	else if(player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_WET) outputText("Juice trickles from the paired pussies", false);
 	else outputText("Sophie's pussy soaks your own with her juices", false);
 	outputText(" until you fall away from each other, spent and rubbing your tender cunts.  The older bird-woman reluctantly admits, \"<i>", false);
-	if(flags[TIMES_FUCKED_SOPHIE_LESBIAN] == 0) outputText("Cutey, you sure know your way around a pussy, but I just don't like to do this kind of thing.  Don't expect me to be some lesbo bird-slut who'll lick your slit at the drop of a hat.", false);
-	else if(flags[TIMES_FUCKED_SOPHIE_LESBIAN] < 6) outputText("Cutey, you get me off hard every time, but I'd still rather not mess with another girl.  I much prefer getting a younger man in my nest and letting him ravage me.", false);
+	if(flags[kFLAGS.TIMES_FUCKED_SOPHIE_LESBIAN] == 0) outputText("Cutey, you sure know your way around a pussy, but I just don't like to do this kind of thing.  Don't expect me to be some lesbo bird-slut who'll lick your slit at the drop of a hat.", false);
+	else if(flags[kFLAGS.TIMES_FUCKED_SOPHIE_LESBIAN] < 6) outputText("Cutey, you get me off hard every time, but I'd still rather not mess with another girl.  I much prefer getting a younger man in my nest and letting him ravage me.", false);
 	else outputText("I'm not sure how you keep making me cum, but I'd appreciate it if you stopped.", false);
 	outputText("</i>\"\n\n", false);
 	
@@ -1150,7 +1150,7 @@ public function fuckDatClit():void {
 	monster.lust = 98;
 	monster.HP = 2;
 	player.lust = 100;
-	flags[COMBAT_BONUS_XP_VALUE] = monster.XP;
+	flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
 	eventParser(5007);
 	stats(0,0,0,0,0,1,-100,0);
 }
@@ -1179,7 +1179,7 @@ public function tinyDickSupremeSophieLoss():void {
 	outputText("As if she was reading your mind, Sophie answers, \"<i>This is for your own good.  Maybe someday you'll grow up and get a decent cock for me to fuck, but until then you're just a little boy who who would be better off a girl.</i>\"  You actually start to cry, but at the same time you're lifting your " + hipDescript() + " in time with her foot, and your tiny little cock turns it into a Slip N' Slide of pre-cum.   Sophie snickers, \"<i>You're ready,</i>\" and pulls her foot back, trailing strings of fluid.   She steps down and looks at you with a knowing, almost-cruel smile on her face.\n\n", false);
 	
 	outputText("The fluids from her aroused gash drip onto your belly as she bends her legs and begins to bring it closer.  She sneers, \"<i>I'm amazed you haven't cum yet, little girl.  I'm getting closer now, how soon do you think you'll start spurting? Now?  No, but you'll squirt soon.</i>\"  You watch transfixed as Sophie's cunt hovers over-top of you, continuing its slow descent towards your " + cockDescript(0) + ".  Oh gods, why are you so hard?  Your cock is twitching on its own by the time her pussy is a foot away.  No no no, you panic mentally, and think of the most boring, dreadful thing you can.  ", false);
-	if(flags[AMILY_MET] > 0 && player.cor > 50) outputText("You imagine Amily's voice nattering away about how terrible the corruption is, but it doesn't help!  Y", false);
+	if(flags[kFLAGS.AMILY_MET] > 0 && player.cor > 50) outputText("You imagine Amily's voice nattering away about how terrible the corruption is, but it doesn't help!  Y", false);
 	else outputText("It doesn't help; y", false);
 	outputText("our eyes are fixated on the pink-lipped folds of Sophie's sex as it creeps closer.\n\n", false);
 	
@@ -1276,10 +1276,10 @@ public function SophieLossRapeNoDonguuuu():void {
 	stats(-1,-1,0,0,0,0,0,0);
 	eventParser(5007);
 	//If not pissed increment times pissed
-	if(flags[SOPHIE_ANGRY_AT_PC_COUNTER] <= 0) {
-		flags[SOPHIE_ANGRY_AT_PC_COUNTER] = 72 + rand(100);
-		flags[TIMES_PISSED_OFF_SOPHIE_COUNTER]++;
+	if(flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] <= 0) {
+		flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] = 72 + rand(100);
+		flags[kFLAGS.TIMES_PISSED_OFF_SOPHIE_COUNTER]++;
 	}
 	//Increase pissed time
-	else flags[SOPHIE_ANGRY_AT_PC_COUNTER] += rand(72);
+	else flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] += rand(72);
 }

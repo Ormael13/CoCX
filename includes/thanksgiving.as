@@ -28,12 +28,12 @@ public function isThanksgiving():Boolean {
    
 //Introduction: -McGirt
 public function datTurkeyRumpMeeting():void {
-	if(flags[TURKEY_FUCK_YEAR_DONE] > 0) {
+	if(flags[kFLAGS.TURKEY_FUCK_YEAR_DONE] > 0) {
 		turkeyGirlTwoTheTurkeningBySavinWhatADickInAButt();
-		flags[TURKEY_FUCK_YEAR_DONE] = date.fullYear;
+		flags[kFLAGS.TURKEY_FUCK_YEAR_DONE] = date.fullYear;
 		return;
 	}
-	flags[TURKEY_FUCK_YEAR_DONE] = date.fullYear;
+	flags[kFLAGS.TURKEY_FUCK_YEAR_DONE] = date.fullYear;
 	outputText("\nYou sit down by your fire pit, looking at the meager provisions you've managed to gather up in the days leading up to the Feast for the Thankful, your village's largest annual feast day.  Right now through the portal, your friends and loved ones from Ingnam are sitting down to a mighty banquet, holding hands in prayer before devouring more food than they can possibly stand.  A pang of homesickness sweeps through you as you look at the small meal before you.  With a sigh, you pick up your fork and prepare to dig in.");
 	outputText("\n\nSomething stirs at the edge of camp.");
 	
@@ -133,7 +133,7 @@ public function stuffDatTurkeyWithSpoo():void {
 	
 	outputText("\n\nSoon, between your kneading out the thick gravy from her breasts and the spunk leaking out from her loins, mixing with what you splattered across her minutes earlier, the poor turkey is absolutely filthy, covered in the remnants of your rough fucking.  Slowly, languidly, you pull out from inside her, your cock still dribbling little rivulets of cum onto the musky girl's thighs.  The air around you now reeks of sex and a warm meal, her strange breastmilk creating a strong aroma of its own below that of drying spooge.");
 	stats(0,0,0,0,0,-1,-100,0);
-	if(flags[HEL_FUCKBUDDY] == 1 && flags[HEL_REDUCED_ENCOUNTER_RATE] == 0) {
+	if(flags[kFLAGS.HEL_FUCKBUDDY] == 1 && flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] == 0) {
 		outputText("\n\nAs you lay atop the turkey, you hear a faint, almost pleading, \"<i>Gobble?</i>\"  from her. Furrowing your brow, you pick yourself up to look at the cum-slathered turkey.  As soon as you're off her, she rolls over onto her hands and knees, her big bubble butt sticking up in the air for you, her plume of feathers tickling your cheeks.  She... still wants more?</i>\"");
 		simpleChoices("Spit-Roast",3804,"",0,"",0,"",0,"That's Enough",3805);
 	}
@@ -317,11 +317,11 @@ public function turkeyGirlTwoTheTurkeningBySavinWhatADickInAButt():void {
 		if(player.hasKeyItem("Deluxe Dildo") >= 0 || hasItem("L.Draft",1) || hasItem("F.Draft",1)) {
 			outputText("\n\n<b>You could let her come, like last year, or great her in a whole new way (by clicking 'Hello Again')</b>");
 			addButton(2,"Hello Again",helloAgain);
-			flags[MORE_TURKEY] = 0;
+			flags[kFLAGS.MORE_TURKEY] = 0;
 		}
 		else {
 			outputText("\n\n<b>You might be able to have some new, kinky fun with Gobbles this year if you had something lusty on you...</b>.");
-			flags[MORE_TURKEY] = 1;
+			flags[kFLAGS.MORE_TURKEY] = 1;
 		}
 	}
 	addButton(0,"Shoo Off",shooTurkeyAway);

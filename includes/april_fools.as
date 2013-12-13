@@ -2,12 +2,12 @@
 
 // Encounter Chance 1 out of 40 and only if you're a centaur
 public function poniesYN():Boolean {
-	if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR && date.date == 1 && date.month == 3 && flags[UNKNOWN_FLAG_NUMBER_00118] == 0) {
+	if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR && date.date == 1 && date.month == 3 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00118] == 0) {
 		outputText("", true);
 		outputText("While walking around the lake, you hear the sound of feminine voices laughing and talking, accompanied by the distinctive clip-clop of hooves. Stepping lightly through the overgrowth you stumble across a group of small brightly colored ponies. The strange part about them isn't so much their size, but rather the shape of their bodies.  They almost look cartoonish in nature, a few even sport fluttery, feathery looking wings.\n\n", false);
 		//(option: Approach? Leave them Be?)
 		simpleChoices("Approach",approachPonies,"",0,"",0,"",0,"Leave",leavePonies);
-		flags[UNKNOWN_FLAG_NUMBER_00118]++;
+		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00118]++;
 		return true;
 	}
 	return false;

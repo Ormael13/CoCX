@@ -503,8 +503,8 @@ public function tentacleLossRape():void {
 public function centaurGenderlessRetardation():void {
 	outputText("", true);
 	spriteSelect(100);
-	if(flags[UNKNOWN_FLAG_NUMBER_00247] == 0 || player.balls == 0) {
-		flags[UNKNOWN_FLAG_NUMBER_00247] = 1;
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00247] == 0 || player.balls == 0) {
+		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00247] = 1;
 		outputText("Tentacles wrap around your legs before you can make a move to stop them, binding you tightly and coiling upwards.  One slides slowly along your underside, making you shiver in ", false);
 		if(player.cor < 50 && player.lust < 70) outputText("dread", false);
 		else outputText("anticipation", false);

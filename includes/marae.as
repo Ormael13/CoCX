@@ -228,7 +228,7 @@ public function maraeStealLethicite():void {
 
 public function level2MaraeEncounter():void {
 	spriteSelect(40);
-	flags[CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] = 1;
+	flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] = 1;
 	outputText("", true);
 	outputText("While rowing about the lake", false);
 	if(player.str > 70) outputText(" with ease", false);
@@ -281,7 +281,7 @@ public function level2MaraeEncounter():void {
 public function MaraeIIStageII():void {
 	spriteSelect(40);
 	outputText("", true);
-	flags[CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] = 2;
+	flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] = 2;
 	//[Girls]
 	//Marae grows vine-cawks for DP action
 	if(player.gender == 2) {

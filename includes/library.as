@@ -5,16 +5,16 @@
 //[Mage's Tower]
 public function visitZeMagesTower():void {
 	
-	if(flags[TIMES_BEEN_TO_LIBRARY] == 0) firstTowerVisit();
+	if(flags[kFLAGS.TIMES_BEEN_TO_LIBRARY] == 0) firstTowerVisit();
 	else towerFollowUpVisits();
 	menu();
-	if(flags[TIMES_BEEN_TO_LIBRARY] == 0 || model.time.hours <= 17)  {
+	if(flags[kFLAGS.TIMES_BEEN_TO_LIBRARY] == 0 || model.time.hours <= 17)  {
 		addButton(1,"You Okay?",youOkayBuddy);
-		if(flags[UNKNOWN_FLAG_NUMBER_00175] > 0) addButton(2,"Mali",talkToMali);
+		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00175] > 0) addButton(2,"Mali",talkToMali);
 	}
-	if(flags[TIMES_VISITED_MALI] > 0) addButton(2,"Mali",talkToMali);
+	if(flags[kFLAGS.TIMES_VISITED_MALI] > 0) addButton(2,"Mali",talkToMali);
 	addButton(0,"Study",studyInTA);
-	flags[TIMES_BEEN_TO_LIBRARY]++;
+	flags[kFLAGS.TIMES_BEEN_TO_LIBRARY]++;
 	addButton(4,"Back",telAdreMenu);
 }
 
@@ -135,7 +135,7 @@ public function youOkayBuddy():void {
 //[Mali]
 public function talkToMali():void {
 	clearOutput();
-	if(flags[TIMES_VISITED_MALI] == 0) {
+	if(flags[kFLAGS.TIMES_VISITED_MALI] == 0) {
 		outputText("You mention to Quinn that you're looking to speak with Mali.  \"<i>Ah, Asa Mali, our very own Alissyn del Aliana.</i>\"  Quinn chuckles and rubs his chin.  You think you're talking about the same person.  \"<i>How mysterious that she of all people should have a visitor.  Am I setting up a forbidden tryst?  A secret rendezvous?  Or perhaps, given the nature of her work, something far more... ominous.</i>\"  He looms curiously, but you clear your throat and ask if she's in.  Disappointed, he sighs and gestures up the stairs.  \"<i>Yes, our sylvan sorceress is not that much of a socialite.</i>\"");
 		
 		outputText("\n\nTurning on his heel he ascends and unlocks a hidden, secure-looking door to the second floor, beckoning you to follow him.  The staircase loops around the wall of the tower, and you pass many closed doors as you make your way up.  Strange and unfamiliar sounds come from more than a few of them, but Quinn seems to ignore them completely.  Apparently they're to be expected from the tower.  Finally, after climbing higher than any other building in the town (but yet with a great deal more to go), he turns and raps sharply on a wooden door.");
@@ -160,7 +160,7 @@ public function talkToMali():void {
 		doNext(13);
 	}	
 	//[[Mali], player has spellblade]
-	else if((player.weaponName == "inscribed spellblade" || hasItem("S.Blade",1)) && flags[MALI_TAKEN_BLADE] == 0) {
+	else if((player.weaponName == "inscribed spellblade" || hasItem("S.Blade",1)) && flags[kFLAGS.MALI_TAKEN_BLADE] == 0) {
 		outputText("You tell Quinn you're here to see Mali.  He seems intrigued by the wrapped blade you're carrying, but doesn't ask any questions.  Unlocking the second floor as usual, he escorts you to Mali's quarters.");
 		outputText("\n\n\"<i>What's that?</i>\" Mali asks, curious when you pull out the inscribed spellblade.  You place it down on the desk and explain that you got it from... from...  Mali's eyes light up at your strained inability to explain.  \"<i>Yes!</i>\" she says excitedly, reaching over the desk and grabbing your cheeks.  She plants a quick and enthusiastic kiss on your lips in thanks, looking back down at the sword and running her hands over it.");
 		
@@ -179,7 +179,7 @@ public function talkToMali():void {
 		else {
 			consumeItem("S.Blade",1);
 		}
-		flags[MALI_TAKEN_BLADE] = 1;
+		flags[kFLAGS.MALI_TAKEN_BLADE] = 1;
 		doNext(13);
 	}
 	//[[Mali], player does not have spellblade]
@@ -191,7 +191,7 @@ public function talkToMali():void {
 		outputText("\n\n\"<i>Remember,</i>\" she says on the way out, \"<i>Anything you can get from Dominika that holds some aspect of her power will help.</i>\"");
 		doNext(13);
 	}
-	flags[TIMES_VISITED_MALI]++;
+	flags[kFLAGS.TIMES_VISITED_MALI]++;
 }
 
 

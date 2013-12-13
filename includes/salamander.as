@@ -18,9 +18,9 @@
 //Introduction – First Encounter
 public function encounterAJerkInThePlains():void {
 	spriteSelect(68);
-	flags[HEL_TIMES_ENCOUNTERED]++;
+	flags[kFLAGS.HEL_TIMES_ENCOUNTERED]++;
 	//Mino threesome proc
-	if(flags[HEL_AFFECTION] > 0 && flags[HEL_AFFECTION] % 5 == 0 && flags[PC_PROMISED_HEL_MONOGAMY_FUCKS] == 0) {
+	if(flags[kFLAGS.HEL_AFFECTION] > 0 && flags[kFLAGS.HEL_AFFECTION] % 5 == 0 && flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 0) {
 		helMinotaurThreesome();
 		return;
 	}
@@ -30,7 +30,7 @@ public function encounterAJerkInThePlains():void {
 		return;
 	}
 	//First time greeting
-	if(flags[HEL_TIMES_ENCOUNTERED] == 1) {
+	if(flags[kFLAGS.HEL_TIMES_ENCOUNTERED] == 1) {
 		outputText("", true);
 		outputText("The tall grass of the plains seems to stretch out infinitely around you, your view broken only by the softly rolling hills.  If you were not skirting the territory of the Gnolls, you could almost call it a peaceful place.  Your guard is up, however, as you walk carefully across the vast grasslands.\n\n", false);
 		
@@ -72,7 +72,7 @@ public function postHelFuckBuddyFollowup():void {
 		eventParser(13);
 		return;
 	}
-	if(flags[HEL_FUCKBUDDY] == 0) {
+	if(flags[kFLAGS.HEL_FUCKBUDDY] == 0) {
 		eventParser(13);
 		return;
 	}
@@ -232,7 +232,7 @@ public function loseToSalamander():void {
 	if(player.HP < 1) outputText("You collapse on the ground just a few steps away from the unconscious Gnoll, overwhelmed by pain and exhaustion caused by the berzerker's onslaught.", false);
 	//(If Lust loss)
 	else outputText("Your arousal is too great, and your mind can no longer focus on anything but a desperate need for release.  Your knees buckle and you collapse", false);	
-	if(flags[HEL_TIMES_ENCOUNTERED] == 1) outputText(", lying just a few paces from the defeated Gnoll.\n\nYou look up to see the salamander girl looming over you, slowly removing her bikini, revealing her ample breasts and a shaved cunt already glistening with lubricant.  For the first time, she speaks.  \"<i>All right!</i>\" she exclaims, grinning, \"<i>You're not bad with your " + player.weaponName + ", you know. Damn, but it's hard to find someone worth my time around here,</i>\" she nods to the defeated Gnoll \"<i>... And you're not bad looking, either.  You know, there's nothing better after a fight than a good fuck, huh? Whadda ya say?</i>\"  Taken aback by the reckless berzerker's sudden calm, friendly attitude, you try to open your mouth to answer her, but she quickly plants a scaled heel on your chest.  Getting the idea, you shut up; you don't have much choice here, so you might as well enjoy it.\n\n", false);
+	if(flags[kFLAGS.HEL_TIMES_ENCOUNTERED] == 1) outputText(", lying just a few paces from the defeated Gnoll.\n\nYou look up to see the salamander girl looming over you, slowly removing her bikini, revealing her ample breasts and a shaved cunt already glistening with lubricant.  For the first time, she speaks.  \"<i>All right!</i>\" she exclaims, grinning, \"<i>You're not bad with your " + player.weaponName + ", you know. Damn, but it's hard to find someone worth my time around here,</i>\" she nods to the defeated Gnoll \"<i>... And you're not bad looking, either.  You know, there's nothing better after a fight than a good fuck, huh? Whadda ya say?</i>\"  Taken aback by the reckless berzerker's sudden calm, friendly attitude, you try to open your mouth to answer her, but she quickly plants a scaled heel on your chest.  Getting the idea, you shut up; you don't have much choice here, so you might as well enjoy it.\n\n", false);
 	else outputText(".\n\nYou look up to see the salamander girl looming over you, slowly removing her bikini, revealing her ample breasts and a glistening cunt.  \"<i>You're a worthy opponent, you know that?  C'mon, there's no shame in losing,</i>\" she says, offering a hand up.  Shakily, you take it – and she pulls you right into a rough kiss.\n\n\"<i>But, to the victor go the spoils,</i>\" she says, pushing her chest into you.  Well, you might as well enjoy yourself...", false);
 	var x:Number = 0;
 	//TO ZE RAPES!
@@ -301,8 +301,8 @@ public function loseToSalamander():void {
 		outputText("Before your mind has settled, your new friend has collapsed on top of you, resting her cheek on your " + chestDesc() + ".  Her breath is ragged, not unlike yours, and her eyelids seem suddenly heavy.  Smiling, she slowly withdraws her tail from your " + assholeDescript() + " and slips it under your head like a pillow, soft and warm, if not a little moist.  Seeing as she doesn't seem intent on going anywhere, you, too, close your eyes and drift off to a peaceful sleep.", false);
 	}
 	stats(0,0,0,0,0,1,-100,0);
-	flags[HEL_FUCK_COUNTER]++;
-	flags[HEL_AFFECTION]++;
+	flags[kFLAGS.HEL_FUCK_COUNTER]++;
+	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helAffection(5);
 	eventParser(5007);
@@ -337,7 +337,7 @@ public function helDefeatedCorrupt():void {
 public function helDefeatedNormal(clear:Boolean = false):void {
 	spriteSelect(68);
 	if(clear) outputText("", true);
-	if(flags[HEL_TIMES_ENCOUNTERED] == 1) {
+	if(flags[kFLAGS.HEL_TIMES_ENCOUNTERED] == 1) {
 		outputText("Suddenly, she looks up at you with her fiery eyes and beams, smiling ear to ear.  \"<i>That was fucking AWESOME!</i>\" she shouts, bursting into sudden, hearty laughter.  A moment ago, you were worried for your life, but the sight of the enraged berzerker breaking into laughter can't help but make you grin, yourself.\n\n", false);
 
 		outputText("\"<i>Oh, man,</i>\" she says, shaking her head so hard that her long hair whips about her.  \"<i>You have some killer moves, friend.  I know 'taurs that'd go a month without sticking their cocks in anything to kick ass like you do.  Hey, look, sorry I jumped you.  When I get my blood up, I can't help but just swing at anything that moves, you know?</i>\"\n\n", false);
@@ -481,8 +481,8 @@ public function beatUpHelAndStealHerWalletFromHerVagina():void {
 
 	outputText("Exhausted, you can't help but collapse into her cleavage, your cheek coming to rest between her soft breasts.  You smile at her, and cup one of them even as she begins to stroke your cheek, smiling.  Your eyes feel heavy, and exhaustion begins to overtake you.  Slowly, you drift off into a peaceful sleep in the embrace of your lover.", false);
 	stats(0,0,0,0,0,0,-100,0);
-	flags[HEL_FUCK_COUNTER]++;
-	flags[HEL_AFFECTION]++;
+	flags[kFLAGS.HEL_FUCK_COUNTER]++;
+	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helAffection(5);
 	if(inCombat()) eventParser(5007);
@@ -516,8 +516,8 @@ public function fuckHelsAss():void {
 	outputText("She strokes your cheek as you drift off into a nice, peaceful sleep.", false);
 	//(reduce lust, increment Helgate flag by 1)
 	stats(0,0,0,0,0,0,-100,0);
-	flags[HEL_FUCK_COUNTER]++;
-	flags[HEL_AFFECTION]++;
+	flags[kFLAGS.HEL_FUCK_COUNTER]++;
+	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helAffection(5);
 	if(inCombat()) eventParser(5007);
@@ -544,8 +544,8 @@ public function helBlowsYou():void {
 	outputText("Exhausted, you collapse onto her soft tits.  Smiling at you, she strokes your cheeks as you drift off into a peaceful sleep.", false);
 	//(reduce lust, increment Helgate flag by 1)
 	stats(0,0,0,0,0,0,-100,0);
-	flags[HEL_FUCK_COUNTER]++;
-	flags[HEL_AFFECTION]++;
+	flags[kFLAGS.HEL_FUCK_COUNTER]++;
+	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helAffection(5);
 	if(inCombat()) eventParser(5007);
@@ -565,7 +565,7 @@ public function dpHel():void {
 	outputText("\"<i>Oh, I think I know what we both want,</i>\" she says, rising up on her knees and positioning your " + cockDescript(x) + "'s head at the lips of her cunt, and slipping your " + cockDescript(y) + " between her muscular ass cheeks.  You gasp at the feeling of intense heat radiating from her holes, making the wait nearly unbearable.  \"<i>Don't worry, lover,</i>\" she laughs, slowly impaling herself on your twin shafts, \"<i>I won't burn you... yet!</i>\"  Suddenly, she slams down, burying them both up to the hilt.  She screams in ecstasy at the sudden fullness inside her.  Her head rolls back and her tongue lolls out; she's momentarily stunned by her own maneuver, but slowly recovers, and after a few seconds is able to start to rise on your shafts.\n\n", false);
 
 	outputText("\"<i>Gotta admit,</i>\" she says, drawing in a sharp breath as your cocks withdraw to their heads inside her, \"<i>");
-	if(flags[TIMES_HELIA_DOUBLE_DONGED] == 0) outputText("You're my first multi-cock.  Damn, never thought it'd be like THIS!");
+	if(flags[kFLAGS.TIMES_HELIA_DOUBLE_DONGED] == 0) outputText("You're my first multi-cock.  Damn, never thought it'd be like THIS!");
 	else outputText("You're amazing!  I don't think I'll ever get used to sex like THIS!");
 	outputText("</i>\" she says, and slams herself down again.  You both gasp and moan in pleasure, and soon she's practically bounding on your manhoods, milking both your cocks raw in her sweltering hot depths.  You keep this up for a long minute, letting her bounce away on your cocks as she begins to moan lewdly.\n\n", false);
 
@@ -576,9 +576,9 @@ public function dpHel():void {
 	outputText("\"<i>Hot damn,</i>\" the salamander finally says, grinning from ear to ear as she begins to stroke your cheeks.  \"<i>Oh, damn, two cocks are the fucking BEST.</i>\"  She laughs to herself as you nestle your cheek on her soft breasts, slowly drifting off to a pleasant, peaceful sleep.", false);
 	//(reduce lust, increment Helgate flag by 1)
 	stats(0,0,0,0,0,0,-100,0);
-	flags[HEL_FUCK_COUNTER]++;
-	flags[HEL_AFFECTION]++;
-	flags[TIMES_HELIA_DOUBLE_DONGED]++
+	flags[kFLAGS.HEL_FUCK_COUNTER]++;
+	flags[kFLAGS.HEL_AFFECTION]++;
+	flags[kFLAGS.TIMES_HELIA_DOUBLE_DONGED]++
 	//Bump up follower tracking affection too
 	helAffection(5);
 	if(inCombat()) eventParser(5007);
@@ -605,8 +605,8 @@ public function getLickedByHel():void {
 	outputText("She gives a little laugh and strokes your cheek as you drift off into a contented, peaceful sleep.", false);
 	//(reduce lust, increment Helgate flag by 1)
 	stats(0,0,0,0,0,0,-100,0);
-	flags[HEL_FUCK_COUNTER]++;
-	flags[HEL_AFFECTION]++;
+	flags[kFLAGS.HEL_FUCK_COUNTER]++;
+	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helAffection(5);
 	if(inCombat()) eventParser(5007);
@@ -633,8 +633,8 @@ public function helTailWanksYourDickBecauseSheLovesYouDesuDesuHoraHora():void {
 	outputText("When she releases you, you cannot help but collapse onto her lap.  Only vaguely are you aware as she withdraws her tail from around you.  With a clawed finger, she scrapes a pool of cum from her pillowy breast and slips it into her mouth.  \"<i>Mmm, salty and delicious; just how I like it, lover,</i>\" she laughs, scooping up more of your seed into her hungry mouth.  You, however, drift off to sleep, content and at peace.\n\n", false);
 	//(reduce lust, increment Helgate flag by 1)
 	stats(0,0,0,0,0,0,-100,0);
-	flags[HEL_FUCK_COUNTER]++;
-	flags[HEL_AFFECTION]++;
+	flags[kFLAGS.HEL_FUCK_COUNTER]++;
+	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helAffection(5);
 	if(inCombat()) eventParser(5007);
@@ -670,8 +670,8 @@ public function helTailPegging():void {
 	outputText("Seeing you collapsed in a writhing mess of your own pleasure must evoke some tenderness in the berserker.  A moment later she lifts you up off the ground and nestles your head between her pillowy breasts, stroking your cheek and smiling lovingly at you. Contented, you drift off into a deep, peaceful sleep.", false);
 	//(reduce lust, increment Helgate flag by 1)
 	stats(0,0,0,0,0,0,-100,0);
-	flags[HEL_FUCK_COUNTER]++;
-	flags[HEL_AFFECTION]++;
+	flags[kFLAGS.HEL_FUCK_COUNTER]++;
+	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helAffection(5);
 	if(inCombat()) eventParser(5007);
@@ -707,12 +707,12 @@ public function nagaCoilsUpHel():void {
 	outputText("But you can soon feel your orgasm coming as she continues to titfuck you and suck your cock head.  Feeling the impending climax, she quickens her pace to an almost-maddening tempo, but still you hold on... until she slips her long, slender tongue straight into your urethra.  The incredible, piercing sensation sends you over the edge; you buck your hips into her face and cum, hard, shooting thick ropes of jism into her waiting mouth.  She sucks your seed down eagerly as you pump more and more into her mouth, continuing to tongue fuck her and finger her ass until she cums again, screaming and writhing in your tail's firm grasp, spitting drops of your seed to the ground as she dangles.\n\n", false);
 
 	outputText("Exhausted by the ", false);
-	if(flags[HEL_FUCKBUDDY] == 0) outputText("battle and ", false);
+	if(flags[kFLAGS.HEL_FUCKBUDDY] == 0) outputText("battle and ", false);
 	outputText("massive orgasm, you collapse onto your back and release your salamander lover from your grasp.  She crawls up to you and nuzzles into your " + chestDesc() + ", wrapping her own tail around you in return.  Soon, you drift off into a calm, peaceful sleep.", false);
 	//(reduce lust, increment Helgate flag by 1)
 	stats(0,0,0,0,0,0,-100,0);
-	flags[HEL_FUCK_COUNTER]++;
-	flags[HEL_AFFECTION]++;
+	flags[kFLAGS.HEL_FUCK_COUNTER]++;
+	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helAffection(5);
 	if(inCombat()) eventParser(5007);
@@ -741,8 +741,8 @@ public function nagaCoilsUpAnalNaga():void {
 	outputText("When you come to your senses, you're lying on your back, panting and gasping for breath.  Slowly, you salamander lover drags herself to her feet, only to collapse on top of you a second later.  Seemingly content, she nuzzles into your " + chestDesc() + " and strokes your cheek.  No less than exhausted yourself, you soon drift off into a peaceful sleep.", false);
 	//(reduce lust, increment Helgate flag by 1)
 	stats(0,0,0,0,0,0,-100,0);
-	flags[HEL_FUCK_COUNTER]++;
-	flags[HEL_AFFECTION]++;
+	flags[kFLAGS.HEL_FUCK_COUNTER]++;
+	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helAffection(5);
 	if(inCombat()) eventParser(5007);
@@ -789,8 +789,8 @@ public function mountHel():void {
 	outputText("Chuckling, you assure her you'll be back when you can, and soon, you've both drifted off into a contented, restful sleep beneath the lone tree amidst the plains.", false);
 	//(reduce lust, increment Helgate flag by 1)
 	stats(0,0,0,0,0,0,-100,0);
-	flags[HEL_FUCK_COUNTER]++;
-	flags[HEL_AFFECTION]++;
+	flags[kFLAGS.HEL_FUCK_COUNTER]++;
+	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helAffection(5);
 	if(inCombat()) eventParser(5007);
@@ -841,8 +841,8 @@ public function helVaginaTaur69():void {
 	outputText("It takes a minute for your body to calm down; when it has, your salamander lover slips out from her harness and collapses on the ground, soaked in a mixture of your cum and hers.  Exhausted beyond the efforts of willpower, you drop to the ground beside her and drift off to a restive, bruised sleep.\n\n", false);
 	//(reduce lust, reduce HP?, increment Helgate flag by 1)
 	stats(0,0,0,0,0,0,-100,0);
-	flags[HEL_FUCK_COUNTER]++;
-	flags[HEL_AFFECTION]++;
+	flags[kFLAGS.HEL_FUCK_COUNTER]++;
+	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helAffection(5);
 	if(inCombat()) eventParser(5007);
@@ -898,8 +898,8 @@ public function helPossessionShitPoopCock():void {
 	outputText("You laugh, and let out a long, contented yawn.  At the salamander's invitation, you find a secluded clearing in the grass not far away, and snuggle up to nap off the post-sex fatigue.", false);
 	//(reduce lust, increment Helgate flag by 1)
 	stats(0,0,0,0,0,0,-100,0);
-	flags[HEL_FUCK_COUNTER]++;
-	flags[HEL_AFFECTION]++;
+	flags[kFLAGS.HEL_FUCK_COUNTER]++;
+	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helAffection(5);
 	if(inCombat()) eventParser(5007);
@@ -935,8 +935,8 @@ public function rapingHelsAssMeansYourCorruptCauseAnalIsEvil():void {
 	outputText("You yank yourself out of her in one quick pull; she collapses onto her side without you to support her, and shudders when another wave of her protracted orgasm hits her as she absently fingers herself.  The sight turns you on a bit, but you decide to leave her there and head back to camp, though you're sure to snatch her coinpurse before you go.", false);
 	//(reduce lust, decrement Helgate flag by 1 to a minimum of 0)
 	stats(0,0,0,0,0,0,-100,0);
-	flags[HEL_FUCK_COUNTER]++;
-	flags[HEL_AFFECTION]--;
+	flags[kFLAGS.HEL_FUCK_COUNTER]++;
+	flags[kFLAGS.HEL_AFFECTION]--;
 	//Bump down follower tracking affection too
 	helAffection(-15);
 	if(inCombat()) eventParser(5007);
@@ -964,8 +964,8 @@ public function receiveCorruptRimjobsFromHel():void {
 	outputText("Wide-eyed and panting, you struggle to your feet and, sure to grab a few gems from her supine form, stagger back to camp to recover from your fucking.", false);
 	//(reduce lust, decrement Helgate flag by 1 to a minimum of 0)
 	stats(0,0,0,0,0,0,-100,0);
-	flags[HEL_FUCK_COUNTER]++;
-	flags[HEL_AFFECTION]--;
+	flags[kFLAGS.HEL_FUCK_COUNTER]++;
+	flags[kFLAGS.HEL_AFFECTION]--;
 	//Bump up follower tracking affection too
 	helAffection(-15);
 	if(inCombat()) eventParser(5007);
@@ -979,8 +979,8 @@ public function receiveCorruptRimjobsFromHel():void {
 public function helMinotaurThreesome():void {
 	spriteSelect(68);
 	//Reset the additional talk options
-	flags[HEL_TALKED_ABOUT_BERSERKING] = 0;
-	flags[HEL_TALKED_ABOUT_ATTACKING_YOU] = 0;
+	flags[kFLAGS.HEL_TALKED_ABOUT_BERSERKING] = 0;
+	flags[kFLAGS.HEL_TALKED_ABOUT_ATTACKING_YOU] = 0;
 	outputText("", true);
 	outputText("As you wander the grasslands, you wipe your brow in the hot air, wondering where the normal denizens hereabouts have gotten off to – normally you've encountered SOMETHING by now.  Your mind turns faintly toward your salamander friend, if you can call her that after the disjointed encounters you've had, and if the stirring in your loins is any indication, you're fairly sure you kind of miss her.\n\n", false);
 
@@ -1006,7 +1006,7 @@ public function leaveMinotaurHelThreesome():void {
 	outputText("", true);
 	outputText("You shake your head with a deprecating smile, and turn to leave her to her pleasures.", false);
 	//(reset Helgate flag to 0)
-	flags[HEL_AFFECTION] = 0;
+	flags[kFLAGS.HEL_AFFECTION] = 0;
 	doNext(13);
 }
 
@@ -1031,10 +1031,10 @@ public function fuckHerAss():void {
 	outputText("She bursts out laughing at the sight of the 'taur wandering off with a fist-full of his own jism coating his fur.  \"<i>Oh, poor guy,</i>\" she laughs, \"<i>wandered a bit too far from home and ran into me.  Just like someone else I know.</i>\"  To your surprise, she rolls over atop you and plants a long kiss on your lips, eyes closed and tail wagging softly behind her.", false);
 	//(reduce PC lust)
 	stats(0,0,0,0,0,-2,-100,0);
-	flags[HEL_AFFECTION]++;
+	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helAffection(5);
-	flags[HEL_FUCK_COUNTER]++;
+	flags[kFLAGS.HEL_FUCK_COUNTER]++;
 	//POST THREESOME RESULT
 	doNext(postMinoThreesomeDecisionTime);
 }
@@ -1062,10 +1062,10 @@ public function helMinoThreeSomeLickItsDick():void {
 	outputText("Finally, your orgasm ends, and you roll off the minotaur.  Shakily, he staggers to his hooves, throws a handful of gems onto the prone salamander, and stumbles off to recover.  You look up from your collapsed state, and see your friend wallowing in a thick pool of cum – hers, yours, the 'taurs – panting heavily.  A huge stream of it is pouring from her cunt like a waterfall, a half-dozen backed-up minotaur orgasms unleashed at once.  Seeing you stare, your friend chuckles and stands, walking over to you and cuddling up, her head rested on your chest for just a moment before she leans up and plants a surprisingly tender kiss on your lips.\n\n", false);
 	//(reduce lust)
 	stats(0,0,0,0,0,-2,-100,0);
-	flags[HEL_AFFECTION]++;
+	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helAffection(5);
-	flags[HEL_FUCK_COUNTER]++;
+	flags[kFLAGS.HEL_FUCK_COUNTER]++;
 	//POST THREESOME RESULT
 	doNext(postMinoThreesomeDecisionTime);
 }
@@ -1088,7 +1088,7 @@ public function bugOutAfterHelMinoThreesome():void {
 	spriteSelect(68);
 	outputText("On second thought, you'd rather keep it simple for now, even if it means battling back her future advances with force of arms instead of words.  You kiss her once more and give her breasts a squeeze for the road, then wordlessly get up and take your leave.\n\n", false);
 	//(reset Helgate to 0)
-	flags[HEL_AFFECTION] = 0;
+	flags[kFLAGS.HEL_AFFECTION] = 0;
 	doNext(13);
 }
 
@@ -1099,13 +1099,13 @@ public function berserkMode():void {
 	outputText("You take the opportunity to ask about her rather violent, enraged fighting style.\n\n", false);
 
 	outputText("She laughs, a strikingly girlish sound from her.  \"<i>Come on, haven't you ever been so pissed-the-fuck-off that you just want to kill everything?  It's like that.  Every morning when I leave camp, I spend an hour or so thinking about everything I hate – the demons, the gnolls");
-	if(flags[HEL_ISABELLA_THREESOME_ENABLED] == 0) outputText(", that fat cow Isabella");
+	if(flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 0) outputText(", that fat cow Isabella");
 	outputText(" – and then I just go off on anything I see.  Hey, don't give me that look, you're the only thing I've ever met out here that's even half-way decent.</i>\"\n\n", false);
 
 	outputText("She kisses you again.\n\n", false);
 
 	outputText("\"<i>... And you're a lot better than half-decent.</i>\"\n\n", false);
-	flags[HEL_TALKED_ABOUT_BERSERKING] = 1;
+	flags[kFLAGS.HEL_TALKED_ABOUT_BERSERKING] = 1;
 	helChatMenu();
 }
 
@@ -1130,7 +1130,7 @@ public function askHelAboutHer():void {
 	outputText("\"<i>Eventually I was the only one left.  I was pissed off and mad about it, but there it was.  That was maybe a year ago, when the last of my tribe was carted off as a captive by the gnolls.  So I've just been surviving since then.  Killing, stealing, raping.  Then you came along.  First person I've ever met out here who can give as good as they get.</i>\"\n\n", false);
 
 	outputText("She gives you another kiss, and falls silent.", false);
-	flags[HEL_TALKED_ABOUT_HER] = 1;
+	flags[kFLAGS.HEL_TALKED_ABOUT_HER] = 1;
 	//[I'm Bugging Out] changes to [Leave]
 	helChatMenu();
 }
@@ -1139,13 +1139,13 @@ public function askHelAboutHer():void {
 public function askHelAboutAttackingYou():void {
 	spriteSelect(68);
 	outputText("",true);
-	flags[HEL_FUCKBUDDY] = 0;
+	flags[kFLAGS.HEL_FUCKBUDDY] = 0;
 	outputText("Now that you've got the feisty salamander calm for once, you ask her why she's always attacking you.\n\n", false);
 
 	outputText("\"<i>Hey, I don't mean anything by it.  It's just... I can't control myself sometimes.  I've spent so long killing and raping everything out here, that I guess I just don't know how else to operate.  You know I'd never really hurt you, right?  Oh, I tease and play, but you're special.  You're a good " + player.mf("guy","girl") + ".  One of the best, I think.</i>\"\n\n", false);
 
 	outputText("You suppose you could ask her to stop attacking you anyway, though.  One less threat out here couldn't hurt, and maybe – just maybe – you could skip the formalities when you meet and go straight to the really fun part.\n\n", false);
-	flags[HEL_TALKED_ABOUT_ATTACKING_YOU] = 1;
+	flags[kFLAGS.HEL_TALKED_ABOUT_ATTACKING_YOU] = 1;
 	//[Stop] [Say Nothing]
 	simpleChoices("Stop",telHelSTOPATTACKINGMEYOUBITCH,"Say Nothing",helChatMenu,"",0,"",0,"",0);
 }
@@ -1153,12 +1153,12 @@ public function askHelAboutAttackingYou():void {
 //[Say Nothing]
 public function helChatMenu():void {
 	spriteSelect(68);
-	if(flags[HEL_TALKED_ABOUT_HER] == 0) simpleChoices("About Her",askHelAboutHer,"",0,"",0,"",0,"Leave",bugOutAfterHelMinoThreesome);
+	if(flags[kFLAGS.HEL_TALKED_ABOUT_HER] == 0) simpleChoices("About Her",askHelAboutHer,"",0,"",0,"",0,"Leave",bugOutAfterHelMinoThreesome);
 	else {
 		var zerk:Number = 0;
 		var attackin:Number = 0;
-		if(flags[HEL_TALKED_ABOUT_ATTACKING_YOU] == 0) attackin = 3299;
-		if(flags[HEL_TALKED_ABOUT_BERSERKING] == 0) zerk = 3297;
+		if(flags[kFLAGS.HEL_TALKED_ABOUT_ATTACKING_YOU] == 0) attackin = 3299;
+		if(flags[kFLAGS.HEL_TALKED_ABOUT_BERSERKING] == 0) zerk = 3297;
 		choices("",0,"Berserking?",zerk,"Y Attack Me",attackin,"Seconds",askMommaHelForSecondsAfterDinner,"MinosRBad",telHelToGetOffTheMInoCock,"",0,"",0,"",0,"",0,"Leave",leaveHelAfterMinoThreeSomeChat);
 	}
 }
@@ -1174,7 +1174,7 @@ public function telHelSTOPATTACKINGMEYOUBITCH():void {
 	outputText("You give her cheek a little pat and tell her that's all right.\n\n", false);
 
 	//(unlocks \"<i>Fuckbuddy Greeting</i>\" scene when Hel's encountered, rather than the combat intro from above)
-	flags[HEL_FUCKBUDDY] = 1;
+	flags[kFLAGS.HEL_FUCKBUDDY] = 1;
 	//(Original options return)
 	helChatMenu();
 }
@@ -1297,7 +1297,7 @@ public function salamanderXIsabellaDiplomacy2():void {
 	//(Increase Isabella's affection)
 	isabellaAffection(5);
 	helAffection(5);
-	flags[HEL_ISABELLA_THREESOME_ENABLED] = 1;
+	flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] = 1;
 	doNext(13);
 }
 
@@ -1331,7 +1331,7 @@ public function skipTownOnIsabellaAndHelsFight():void {
 	outputText("", true);
 	outputText("Well, you're sure as hell not going to get involved in this – better to let them duke it out between themselves rather than risk your relationship with either girl.  You head on back to camp, not terribly surprised to hear sharp moos, grunts, and cries for some time in the distance.\n\n", false);
 	//(Return PC to camp, advance time 1 hour. Intro scene will not play again.)
-	flags[HEL_ISABELLA_THREESOME_ENABLED] = -1;
+	flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] = -1;
 	doNext(13);
 }
 
@@ -1392,7 +1392,7 @@ public function followrIzzyxSallyThreesomePretext():void {
 	outputText("\"<i>Yeah.  You're all right.</i>\" Hel says, finally sheathing her sword.  \"<i>Thanks for giving me my mom's bandana back.</i>\"\n\n", false);
 
 	outputText("\"<i>You are... welcome,</i>\" Isabella says as Hel disappears into the night.  Heaving a relieved sigh, you return to the camp proper and try to get some shut-eye before the sun rises.", false);
-	flags[HEL_ISABELLA_THREESOME_ENABLED] = 1;
+	flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] = 1;
 	doNext(1);
 }
 
@@ -1671,8 +1671,8 @@ public function izzySallyThreeSomeVagoozlaz():void {
 public function heliaPlusFoxyFluffs():void {
 	spriteSelect(68);
 	outputText("", true);
-	if(flags[HEL_FOXY_FOURSOME_WARNED] == 0) {
-		flags[HEL_FOXY_FOURSOME_WARNED] = 1;
+	if(flags[kFLAGS.HEL_FOXY_FOURSOME_WARNED] == 0) {
+		flags[kFLAGS.HEL_FOXY_FOURSOME_WARNED] = 1;
 		outputText("You give Hel a wink and ask her to introduce you to her foxy friends.  She lets out a sharp whistle and waves the girls back.  Giggling girlishly, the two fox-girls saunter back with full tankards and lusty smiles.  Hel scoots back, letting one swing drunkenly onto her lap as the other crawls onto you, her hefty breasts pressing against your chest and... hey, wait a goddamn minute!  You look down at the modest, yet rock-hard prick pushing against your belly, its little knot already slightly inflated.  Looks like these herm twins are already ready for action.\n\n", false);
 	
 		outputText("Hel grins as you notice the sisters' extra hardware.  \"<i>Miko, Mai, meet " + player.short + ",</i>\" she says, running one of her scaled hands along... Miko's?... thighs, eliciting a sensual moan from the fox-girl.  In response, Mai buries her face in your neck, her full lips brushing along your sensitive flesh.  Your skin tingles with delight at her light caresses as her rigid prick presses further into your stomach, leaving a little wet stain on your " + player.armorName + ".\n\n", false);
@@ -1852,8 +1852,8 @@ public function satisfyHelSoSheStopsMinoFucking():void {
 	}
 	//(Display sex options)
 	//(Mino Threesome will NEVER proc again)
-	flags[PC_PROMISED_HEL_MONOGAMY_FUCKS] = 1;
-	flags[HEL_FUCKBUDDY] = 1;
+	flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] = 1;
+	flags[kFLAGS.HEL_FUCKBUDDY] = 1;
 	helFuckMenu();
 }
 
@@ -1866,7 +1866,7 @@ public function helSexualAmbush():void {
 	outputText("\n\n\"<i>Come on, [name],</i>\" she growls, throwing her top aside, letting her big, bouncy breasts free. \"<i>You wanted me not to fuck 'taurs?  Fine... but I NEED you.  NOW!</i>\"");
 	stats(0,0,0,0,0,0,10+player.lib/20,0);
 	if(player.lust < 33) player.lust = 33;
-	flags[HEL_RAPED_TODAY] = 1;
+	flags[kFLAGS.HEL_RAPED_TODAY] = 1;
 	//(Raise PC lust; Display sex options)
 
 	// TODO Fix this?

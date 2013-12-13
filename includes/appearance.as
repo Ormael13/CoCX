@@ -1204,7 +1204,7 @@ public function appearance(e:MouseEvent = null):void
 			outputText("\nLooking positively perverse, a " + player.cocks[0].pShortDesc + " adorns your " + cockDescript(0) + ".", false);
 		}
 	}
-	if(flags[UNKNOWN_FLAG_NUMBER_00286] == 1) 
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00286] == 1) 
 		outputText("\nA magical, ruby-studded bar pierces your belly button, allowing you to summon Ceraph on a whim.", false);
 	if(player.hasVagina()) 
 	{

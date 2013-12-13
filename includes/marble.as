@@ -60,7 +60,7 @@ public function turnOffMarbleForever():void {
 	clearOutput();
 	spriteSelect(41);
 	//player.createStatusAffect("No More Marble",0,0,0,0);
-	flags[MARBLE_WARNING] = 1;
+	flags[kFLAGS.MARBLE_WARNING] = 1;
 	outputText("Considering the way the cow-girl lovingly cradles her hefty breasts as if they were the only things in the world, you decide you'd rather not get involved with her right now.  You inform her politely that Whitney must have been mistaken - there's nothing you can think to do that would help.  \"<i>Oh,</i>\" she says, surprised... and also nonplussed when she sees your reaction to her swollen jugs.  \"<i>Odd, but okay.  I guess I'll just lie back down then while you show yourself out.</i>\"");
 	doNext(13);
 }
@@ -86,7 +86,7 @@ public function leaveNonFriendsMarble4EVERRRR():void {
 	clearOutput();
 	spriteSelect(41);
 	player.createStatusAffect("No More Marble",0,0,0,0);
-	flags[MARBLE_WARNING] = 2;
+	flags[kFLAGS.MARBLE_WARNING] = 2;
 	outputText("Answering the cow-girl with a blank look, you shake your head and walk away, resolving to avoid Marble from now on.");
 	//Marble is removed from the game
 	//end event
@@ -112,7 +112,7 @@ public function apologizetoWalkingTitsIMEANMARBLE():void {
 	//increase addiction score by 10
 	//set affection to 5
 	marbleStatusChange(5,10);
-	flags[MARBLE_WARNING] = 0;
+	flags[kFLAGS.MARBLE_WARNING] = 0;
 	//(apply the stat effect 'Marble's Milk' to the player)
 	applyMarblesMilk();
 	stats(0,0,0,0,.2,0,(5 + player.lib/10),0);
@@ -146,7 +146,7 @@ public function getOutOfDodge():void {
 	spriteSelect(41);
 	outputText("The hell you will... the truth is the truth no matter how many talking hammers show up.  Catharsis completed, you leave the farm and its cows behind.");
 	//makes the battle available as the next Marble encounter, as if PC had raped her
-	flags[MARBLE_WARNING] = 3;
+	flags[kFLAGS.MARBLE_WARNING] = 3;
 	doNext(13);
 }
 //New After-Battle shiz: (Z)
@@ -242,7 +242,7 @@ public function rapeMarbleInHerRoom():void {
 	outputText("Satisfied, you pull back from the cow-girl's quivering body, and collect her hammer from the floor, informing her that you'll be taking it as compensation for the trouble she's caused you.  After dressing, you exit the barn.");
 	outputText("\n\nA very angry looking Whitney is staring at you.  \"<i>It seems I misjudged you, [name].  The fuck did you do to Marble?</i>\"  Seems to be a rhetorical question; the knowledge and her reaction to it are already all over her face.   \"<i>Don't you dare ever fucking come back here.  This place is a sanctuary from your kind, and I will kill to protect it.</i>\"  You snort and leave the farm, keeping Marble's hammer.  You didn't like the place anyway.");
 	//Farm is removed from places and cannot be rediscovered.  Later, if written, going back to the farm can trigger a fight with Whitney or the other residents of the farm instead.
-	flags[FARM_DISABLED] = 1;
+	flags[kFLAGS.FARM_DISABLED] = 1;
 	//End event
 	eventParser(5007);
 }
@@ -443,7 +443,7 @@ public function encounterMarbleExploring2():void {
 	//[player height <5]
 	if(player.tallness < 60) outputText("As you step into her room, she eagerly rushes over and hugs you to her breast. \"<i>You're as cute as ever, sweetie!</i>\"  ", false);
 	outputText("She is happy to see you and treats you to a small meal while you have a pleasant chat.  ");
-	if(flags[MURBLE_FARM_TALK_LEVELS] < 7) {
+	if(flags[kFLAGS.MURBLE_FARM_TALK_LEVELS] < 7) {
 		extendedMurbelFarmTalkz();
 		doNext(13);
 		return;
@@ -1049,7 +1049,7 @@ public function postAddictionFarmExplorings():void {
 	//[player height <5]
 	if(player.tallness < 60) outputText("As you step into her room, she eagerly rushes over and hugs you to her breast. \"<i>You're as cute as ever, sweetie!</i>\"  ", false);
 	outputText("She is happy to see you and treats you to a small meal while you have a pleasant chat.  ");
-	if(flags[MURBLE_FARM_TALK_LEVELS] < 7) {
+	if(flags[kFLAGS.MURBLE_FARM_TALK_LEVELS] < 7) {
 		extendedMurbelFarmTalkz();
 		doNext(13);
 		return;
@@ -1065,7 +1065,7 @@ public function postAddictionFarmExplorings():void {
 //Murble farm talks
 public function extendedMurbelFarmTalkz():void {
 	//--- First Conversation ---
-	switch (flags[MURBLE_FARM_TALK_LEVELS]) {
+	switch (flags[kFLAGS.MURBLE_FARM_TALK_LEVELS]) {
 		case 0:
 			outputText("During your talk, Marble asks where you're from.");
 			//[if PC is human] 
@@ -1182,7 +1182,7 @@ public function extendedMurbelFarmTalkz():void {
 			outputText("\n\nYou thank Marble for sharing so much about herself with you.  She nods and says, \"<i>It was my pleasure, sweetie.  You're the first person who's ever shown so much interest in me, and I really enjoyed telling you.  Come back and visit anytime, I'm glad to have someone to talk to like this.</i>\"");
 			break;
 	}
-	flags[MURBLE_FARM_TALK_LEVELS]++;
+	flags[kFLAGS.MURBLE_FARM_TALK_LEVELS]++;
 }
 
 //(work with Marble when helping)
@@ -1593,12 +1593,12 @@ public function interactWithMarbleAtCamp():void {
 	if(player.hasStatusAffect("MarbleHasItem") >= 0) gatherEvent = 2129;
 	//The player gives Marble an item, right now only Lactaid will be here, and only if the player is fully addicted
 	if(player.hasPerk("Marble's Milk") >= 0 && hasItem("Lactaid",1)) giveItemEvent = 2128;
-	if(hasItem("P.Draft",1) && flags[MARBLE_DICK_TYPE] == 0) giveItemEvent = 2128;
-	if(flags[MARBLE_DICK_TYPE] > 0) {
+	if(hasItem("P.Draft",1) && flags[kFLAGS.MARBLE_DICK_TYPE] == 0) giveItemEvent = 2128;
+	if(flags[kFLAGS.MARBLE_DICK_TYPE] > 0) {
 		if(hasItem("PinkEgg",1)) giveItemEvent = 2128;
 		if(hasItem("L.PnkEg",1)) giveItemEvent = 2128;
 	}
-	if(flags[MARBLE_KIDS] > 0) playtime = 3571;
+	if(flags[kFLAGS.MARBLE_KIDS] > 0) playtime = 3571;
 	if(hasItem("OviElix",1)) giveItemEvent = 2128;
 	if(hasItem("ProBova",1)) giveItemEvent = 2128;
 	//appearnace/info - always there
@@ -1623,26 +1623,26 @@ public function marbleTalkOverhaul():void {
 	addButton(0,"Info",marbleInfo);
 	if(player.cor<50 && player.statusAffectv4("Marble")<60) addButton(1,"Just Talk",talkWithMarbleAtCamp);
 	addButton(9,"Back",interactWithMarbleAtCamp);
-	if(flags[SLEEP_WITH] != "Marble") addButton(4,"Sleep With",marbleSleepToggle);
+	if(flags[kFLAGS.SLEEP_WITH] != "Marble") addButton(4,"Sleep With",marbleSleepToggle);
 	else addButton(4,"Sleep Alone",marbleSleepToggle);
 }
 
 public function marbleSleepToggle():void {
 	clearOutput();
-	if(flags[SLEEP_WITH] != "Marble") {
+	if(flags[kFLAGS.SLEEP_WITH] != "Marble") {
 		outputText("Marble says, \"<i>That sounds lovely, Sweetie.</i>\"");
-		flags[SLEEP_WITH] = "Marble";
+		flags[kFLAGS.SLEEP_WITH] = "Marble";
 	}
 	else {
 		outputText("Marble folds her arms across her bountiful bosom and sighs, \"<i>If you say so, Sweetie.</i>\"");
-		flags[SLEEP_WITH] = "";
+		flags[kFLAGS.SLEEP_WITH] = "";
 	}
 	menu();
 	addButton(0,"Next", marbleTalkOverhaul);
 }
 
 public function sleepWith(arg:String = ""):void {
-	flags[SLEEP_WITH] = arg;
+	flags[kFLAGS.SLEEP_WITH] = arg;
 }
 
 //Kid playtime
@@ -1650,12 +1650,12 @@ public function marbleKidsPlaytime():void {
 	clearOutput();
 	var choices:Array = new Array();
 	choices[choices.length] = 1;
-	if(flags[MARBLE_KIDS] > 1) choices[choices.length] = 2;
-	if(flags[MARBLE_KIDS] > 1) choices[choices.length] = 3;
-	if(flags[MARBLE_KIDS] > 1) choices[choices.length] = 4;
-	if(flags[MARBLE_KIDS] > 1) choices[choices.length] = 5;
+	if(flags[kFLAGS.MARBLE_KIDS] > 1) choices[choices.length] = 2;
+	if(flags[kFLAGS.MARBLE_KIDS] > 1) choices[choices.length] = 3;
+	if(flags[kFLAGS.MARBLE_KIDS] > 1) choices[choices.length] = 4;
+	if(flags[kFLAGS.MARBLE_KIDS] > 1) choices[choices.length] = 5;
 	var select:int = choices[rand(choices.length)];
-	if(flags[KID_SITTER] == 2 && flags[ANEMONE_KID] > 0) select = 6;
+	if(flags[kFLAGS.KID_SITTER] == 2 && flags[kFLAGS.ANEMONE_KID] > 0) select = 6;
 	//Bovine Saviour (Z)
 	//requires exactly 1 kid  (just put it on the RNG; players get knocked up so much and lots of people have 10+ Marble kids already -Z)
 	if(select == 1) {
@@ -1691,7 +1691,7 @@ public function marbleKidsPlaytime():void {
 		outputText("You notice Marble is sitting on some wood logs with your children.  Curious, you decide to check what exactly is going on.");
 		outputText("\n\n\"<i>Mommy, it broke again!</i>\"");
 		outputText("\n\nApparently, Marble is attempting to teach your children how to properly create wooden structures, starting by constructing small 'houses' and little toys from several pieces of wood.  It would appear ");
-		if(flags[MARBLE_KIDS] == 2) outputText("both");
+		if(flags[kFLAGS.MARBLE_KIDS] == 2) outputText("both");
 		else outputText("about half of your children");
 		outputText(" have at least some knack for it.");
 		outputText("\n\nWith infinite motherly patience, Marble sits down next to your children and again shows them how to make the basic supports.  You smile before departing to continue with your other work.");
@@ -1733,7 +1733,7 @@ public function marbleKidsPlaytime():void {
 	if(select == 6) {
 		repeatCowSitting();
 	}
-	if(flags[MARBLE_PLAYED_WITH_KIDS_TODAY] > 0) stats(0,0,0,0,0,0,-10,0);
+	if(flags[kFLAGS.MARBLE_PLAYED_WITH_KIDS_TODAY] > 0) stats(0,0,0,0,0,0,-10,0);
 	else stats(0,0,0,0,-1,0,-10,-1);
 	doNext(13);
 }
@@ -1756,11 +1756,11 @@ public function definitelyBreakUpWithWithMarble():void {
 	else
 		outputText("I'll see you later then.");
 	outputText("</i>\"  Marble collects her things");
-	if(flags[MARBLE_KIDS] == 1) outputText(" and her child");
-	else if(flags[MARBLE_KIDS] > 1) outputText(" and her children");
+	if(flags[kFLAGS.MARBLE_KIDS] == 1) outputText(" and her child");
+	else if(flags[kFLAGS.MARBLE_KIDS] > 1) outputText(" and her children");
 	outputText(", and leaves the camp behind.");
 	doNext(1);
-	flags[BROKE_UP_WITH_MARBLE] = 1;
+	flags[kFLAGS.BROKE_UP_WITH_MARBLE] = 1;
 	player.removeStatusAffect("Camp Marble");
 	player.removeStatusAffect("No More Marble");
 }
@@ -1786,20 +1786,20 @@ public function talkWithMarbleAtCamp():void {
 	//earliest story event the player has not told Marble about since she joined the player at camp, alternatively, just the most recent event;
 	//ACTUALLY TALK ABOUT SHIT
 	//The player has met the Goddess Marae
-	if(player.hasStatusAffect("Met Marae") >= 0 && flags[MARBLE_CAMPTALK_LEVEL] < 1) 
+	if(player.hasStatusAffect("Met Marae") >= 0 && flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] < 1) 
 	{
 		outputText("You tell Marble about your visit with the Goddess Marae.  Marble is very interested in the story and listens closely to your every word.  \"<i>To think that there is still a pure Goddess in this world…</i>\" she says in wonder afterward, \"<i>But what's happening to her is so sad.  We should definitely help her if we can.</i>\"",false);
 		//Level up!
-		flags[MARBLE_CAMPTALK_LEVEL] = 1;
+		flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] = 1;
 	}
 	//The player has discovered the factory
-	else if(player.hasStatusAffect("Found Factory") >= 0 && flags[MARBLE_CAMPTALK_LEVEL] < 2) 
+	else if(player.hasStatusAffect("Found Factory") >= 0 && flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] < 2) 
 	{
 		outputText("You tell Marble you found a demonic factory and relate everything you know about it.  \"<i>Be careful in there,</i>\" Marble tells you, \"<i>I'm certain that place will consume you if you're unprepared.</i>\"", false);
-		flags[MARBLE_CAMPTALK_LEVEL] = 2;		
+		flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] = 2;		
 	}
 	//The player has cleared the factory and shut it down
-	else if(player.hasStatusAffect("DungeonShutDown") >= 0 && flags[MARBLE_CAMPTALK_LEVEL] < 3) 
+	else if(player.hasStatusAffect("DungeonShutDown") >= 0 && flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] < 3) 
 	{
 		outputText("You tell Marble about what you found inside the factory.  She is horrified at what was being done to the other champions and assures you that no one should ever <i>belong</i> in a place like that. You continue and tell of the overseer and her fate. Marble reacts with surprise, ", false); 
 		if(player.hasPerk("Omnibus' Gift") >= 0) 
@@ -1807,17 +1807,17 @@ public function talkWithMarbleAtCamp():void {
 		else 
 			outputText("but concludes that what you did was probably for the best.  At least you didn't fall for her trick.  ", false);
 		outputText("Finally, you tell her how you shut down the factory and what happened to the captured champions.  Marble is shocked that some stayed, but says she doesn't think there is much the two of you could do to help them if they're already addicted. \"<i>You should probably just leave them be, for now.</i>\"", false);
-		flags[MARBLE_CAMPTALK_LEVEL] = 3;
+		flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] = 3;
 	}
 	//The player has met Marae after doing a shutdown of the factory and smashing the controls
-	else if(player.hasStatusAffect("Marae Complete") >= 0 && player.hasStatusAffect("FactoryOverload") < 0 && flags[MARBLE_CAMPTALK_LEVEL] < 4) 
+	else if(player.hasStatusAffect("Marae Complete") >= 0 && player.hasStatusAffect("FactoryOverload") < 0 && flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] < 4) 
 	{
 		outputText("Marble is very happy to hear you helped Marae.  With the factory taken care of and Marae's corruption postponed for some time, the both of you will probably sleep a little easier tonight. ", false);
-		flags[MARBLE_CAMPTALK_LEVEL] = 4;
+		flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] = 4;
 
 	}
 	//The player has met the corrupted Marae after blowing the storage tanks
-	else if(player.hasStatusAffect("Marae Complete") >= 0 && player.hasStatusAffect("FactoryOverload") >= 0 && flags[MARBLE_CAMPTALK_LEVEL] < 4) 
+	else if(player.hasStatusAffect("Marae Complete") >= 0 && player.hasStatusAffect("FactoryOverload") >= 0 && flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] < 4) 
 	{
 		outputText("Your story about what had happened to Marae seems to have shaken up Marble a little.  Though, you notice that she seems to be getting more and more aroused as you relate your story.  ", false);
 		if(player.hasPerk("Marae's Gift - Fertility") >= 0) 
@@ -1831,22 +1831,22 @@ public function talkWithMarbleAtCamp():void {
 				player.hasPerk("Marae's Gift - Stud") < 0) {
 			outputText("You finish your tale by recounting how you ran away.  She isn't really sure how to respond to your decision, but Marble does thank you for not leaving her behind and joining Marae.", false);
 		}
-		flags[MARBLE_CAMPTALK_LEVEL] = 4;
+		flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] = 4;
 	}
 	//(story) Talk about Zetaz's unexplored lair(Z)
-	else if(flags[DISCOVERED_DUNGEON_2_ZETAZ] > 0 && flags[MARBLE_CAMPTALK_LEVEL] < 5) {
+	else if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0 && flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] < 5) {
 		outputText("You tell Marble about the cave you found deep in the forest.  For some reason, this seems to bother Marble, but when you ask her what is wrong, she claims it's just a feeling and tells you not to worry about it.  Maybe you should make sure you're ready before you go back there?");
-		flags[MARBLE_CAMPTALK_LEVEL] = 5;
+		flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] = 5;
 	}
 	//story) Talk about Tel'Adre(Z)
-	else if(player.statusAffectv1("Tel'Adre") >= 1 && flags[MARBLE_TELADRE_STORY] == 0) {
+	else if(player.statusAffectv1("Tel'Adre") >= 1 && flags[kFLAGS.MARBLE_TELADRE_STORY] == 0) {
 		outputText("This time you've got quite a tale to tell Marble: the last free city in the world, Tel'Adre.  She is quite enthralled by the tale of the many buildings and people who live in its confines, managing to hide away from the demons thanks to the mages in the great tower, but is somewhat saddened when you tell her about how empty much of the city was, and oddly confused about the guards you met at the entrance.  In the end, she seems to decide to check it out on her own, although she doesn't say so openly.");
-		flags[MARBLE_TELADRE_STORY] = 1;
+		flags[kFLAGS.MARBLE_TELADRE_STORY] = 1;
 	}
 	//(story) Talk about defeating Zetaz(Z)
-	else if(flags[DEFEATED_ZETAZ] > 0 && flags[MARBLE_CAMPTALK_LEVEL] < 6) {
+	else if(flags[kFLAGS.DEFEATED_ZETAZ] > 0 && flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] < 6) {
 		outputText("You tell Marble about your run-in with an old foe in the forest cave.  She tenses up at first, but the obvious fact that you've made it out of there alright relaxes her.  Marble admits that for some reason she felt like you were in great danger, but couldn't figure out why she felt that.  \"<i>Anyway, I'm glad that you managed to take care of your old nemesis... that map sounds interesting, too.  Think it really leads to the demon lord's lair?  It is a bit overwhelming, sweetie, to think that you might actually defeat the demon lord!  Part of me wants to beg you not to go, but I know how driven you are, and I won't stop you from going to fulfill your mission.  Just promise me that you'll make absolutely sure you're ready before you follow that map, okay?</i>\"");
-		flags[MARBLE_CAMPTALK_LEVEL] = 6;
+		flags[kFLAGS.MARBLE_CAMPTALK_LEVEL] = 6;
 	}
 	//If talked about nothing!
 	else outputText("You have no new stories to share with Marble, so you chat for a bit about inconsequential things.", false);
@@ -1873,16 +1873,16 @@ public function talkWithMarbleAtCamp():void {
 	else if(player.hasStatusAffect("DungeonShutDown") >= 0 && player.hasStatusAffect("Marae Complete") < 0 && player.hasStatusAffect("Met Corrupt Marae") < 0)
 		outputText("\"<i>You haven't gone back to Marae yet have you?</i>\"  You shake your head.  \"<i>Well then go see her!  I'm sure she really wants to thank you.</i>\"", false);
 	//If PC has not yet discovered Zetaz's lair or Tel'Adre (Z)
-	else if(flags[DISCOVERED_DUNGEON_2_ZETAZ] < 0 || player.statusAffectv1("Tel'Adre") == 0)
+	else if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] < 0 || player.statusAffectv1("Tel'Adre") == 0)
 		outputText("\"<i>Well sweetie, maybe you should explore the world more?  From what I've heard from the centaurs who stop by the farm, I'm sure you could find something interesting in the deep forest, or maybe the desert,</i>\" she suggests.");
 	//(suggestion) If PC has found Tel'Adre, but not Zetaz's lair(Z)
-	else if(flags[DISCOVERED_DUNGEON_2_ZETAZ] < 0 && player.statusAffectv1("Tel'Adre") >= 1)
+	else if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] < 0 && player.statusAffectv1("Tel'Adre") >= 1)
 		outputText("\"<i>I was thinking that the deep woods probably still hide secrets from you, sweetie... a few times I've been there, I've noticed large numbers of imps carrying supplies.  Think there could be something to that?</i>\" she asks.");
 	//(suggestion) if PC has discovered Zetaz's lair, but has not yet found Tel'Adre(Z)
-	else if(flags[DISCOVERED_DUNGEON_2_ZETAZ] > 0 && player.statusAffectv1("Tel'Adre") == 0)
+	else if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0 && player.statusAffectv1("Tel'Adre") == 0)
 		outputText("\"<i>Well... I've seen patrols around the camp before.  They were all wearing the same uniform, so maybe there's some kind of city or armed force out there?  Come to think of it, one time I found some sand where they were standing when they moved on - I bet they're holed up in the desert somewhere!</i>\" she says with conviction.");
 	//(suggestion) if PC has discovered Zetaz's lair but has not cleared the cave(Z)
-	else if(flags[DISCOVERED_DUNGEON_2_ZETAZ] > 0 && flags[DEFEATED_ZETAZ] == 0)
+	else if(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0 && flags[kFLAGS.DEFEATED_ZETAZ] == 0)
 		outputText("\"<i>Well, you haven't finished exploring that cave in the woods yet, have you?  Why don't you go there?</i>\" she offers.  She still seems to be a bit bothered by something, but doesn't voice it.");
 	//Nothing to advise!
 	else outputText("\"<i>Sweetie, you've finished all that there is in the main story of the game so far.  You'll have to wait for Fenoxo to add more,</i>\" she says to you winking. \"<i>In the meantime, explore! There's a lot in here that isn't a part of the main story.  You could also try changing your form and see how that changes each encounter.  Just don't get caught or lose your head, ok sweetie?<i/>\"", false);
@@ -1989,12 +1989,12 @@ public function marbleCampSexNew():void {
 		return;
 	}
 	//Marble isn't willing to pleasure the PC if her lust is lower than 0
-	if(flags[MARBLE_LUST] < 0) {
+	if(flags[kFLAGS.MARBLE_LUST] < 0) {
 		outputText("You call Marble over to see if she can help you get some release.  She looks at you sourly before saying, \"<i>I'm not in the mood right now, but feel free to use the toy in my bag on yourself.</i>\"  Well, that's generous... er, wait, did she just tell you to go fuck yourself?");
 		//end event
 		return;
 	}
-	flags[MARBLE_LUST] = 0;
+	flags[kFLAGS.MARBLE_LUST] = 0;
 	//Non nagas && nontaurs
 	if(!player.isNaga()) {
 		//Feeding
@@ -2041,7 +2041,7 @@ public function marbleCampSexNew():void {
 				
 				outputText("\n\nYou gently moan into her breast in response, causing her to giggle as she plays with the tip of your " + cockDescript(0) + ".  She returns to the pumping motion and increases the pace just as you decide you need something to grab onto - and the most pleasant things at hand are her breasts.  Marble gasps in surprise and moans as you rub her breasts while suckling, and starts jerking you off even faster in response.");
 				//( [Female Marble]
-				if(flags[MARBLE_DICK_LENGTH] == 0) outputText("  Her thighs seem to be rubbing together, and the place you're lying on feels a tiny bit wet, so you assume it isn't only you who's getting more and more excited by this.");
+				if(flags[kFLAGS.MARBLE_DICK_LENGTH] == 0) outputText("  Her thighs seem to be rubbing together, and the place you're lying on feels a tiny bit wet, so you assume it isn't only you who's getting more and more excited by this.");
 				else outputText("  Her thighs are gently rubbing beneath you, and you feel something hard poking you in the back.  You smile around the nipple you have in your mouth.");
 				//[If balls] : A
 				if(player.balls > 0) outputText("  As her hand reaches the base of your cock, she stops stroking it to take a moment and gently roll your " + ballsDescriptLight() + " with her fingers.  \"<i>Are these ready to shoot out for me soon, sweetie?</i>\""); 
@@ -2067,7 +2067,7 @@ public function marbleCampSexNew():void {
 				else outputText("\n\nShe grabs your clit and strokes it a few times, then grins widely.  \"<i>This is kind of perverse, sweetie.  Is this really one of your lady parts?</i>\"");
 				outputText("  She returns to pumping her fingers in and out of your pussy and, just as she increases the pace, you decide you need something to grab onto - and the most pleasant things at hand are her breasts.  Marble gasps in surprise and moans as you rub her breasts while suckling, and starts fingering you even faster in response.");
 				//( [Female Marble] 
-				if(flags[MARBLE_DICK_LENGTH] == 0) outputText("  Her thighs seem to be rubbing together, and the place you're lying on feels a tiny bit wet, so you assume it isn't only you who's getting more and more excited by this.");
+				if(flags[kFLAGS.MARBLE_DICK_LENGTH] == 0) outputText("  Her thighs seem to be rubbing together, and the place you're lying on feels a tiny bit wet, so you assume it isn't only you who's getting more and more excited by this.");
 				else outputText("  Her thighs are gently rubbing beneath you, and you feel something hard poking you in the back.  You smile around the nipple you have in your mouth.");
 
 				outputText("\n\nYou're at the edge already, and the fingering of your " + vaginaDescript(0) + " as well as the rubbing motion against your [clit] soon send you over it.  Thrashing in Marble's embrace, you release your feminine juices all over her hand.");
@@ -2081,7 +2081,7 @@ public function marbleCampSexNew():void {
 			outputText("\n\nA few moments later, the milk flow diminishes somewhat, and your lover speaks.  \"<i>That is enough, sweetie.  Thank you.</i>\"  You move away from her breast, but she pulls you in and gives you a kiss.  \"<i>It was fun; we can try it again anytime.</i>\"");
 			//end scene, minus lust, Marblefeed, slimefeed, whatever other shit, plus Marble lust
 			slimeFeed();
-			flags[MARBLE_LUST] += 20;
+			flags[kFLAGS.MARBLE_LUST] += 20;
 		}
 		//ORAL
 		else if(rand(2) == 0 && player.gender > 0) {
@@ -2226,7 +2226,7 @@ public function marbleCampSexNew():void {
 		outputText("\n\n\"<i>It's a long journey to your special place, sweetie; I hope you enjoy the trip,</i>\" she says as she runs her fingers down your tail, gently playing with the end.  \"<i>Look at this cute little candy, just for me.</i>\"  She lifts your tail up to her mouth, then sticks out her inhumanly long tongue and starts to run it around the tip.  The feel of it sends tingles up your spine.  \"<i>Aww, did I make you shiver with pleasure, sweetie?</i>\"  Marble teases, and sets your tail back down.");
 		outputText("\n\n\"<i>Now sweetie, how about a nice tail massage?</i>\" she says, putting her hands on the exposed underside of your tail and starting to rub the soft scales.  You sigh softly as she gently moves up your length, massaging your tail with shallow downward strokes.  \"<i>Enjoying yourself?  Let me make this even better for you,</i>\" she gently intones as she she gets close to your groin.  She removes her top, and lowers her large breasts to your serpentine length.  Marble grins at you, then turns around and, pushing her breasts down on your tail, starts to slither herself back down your length, giving you an enticing view of her rump.  All the while, her fingers continue to play with the sensitive underside of your tail just ahead of her soft body.");
 		if(player.lib >= 50) outputText("  Quietly, you reach down and hook your fingers into the hem of her clothing, allowing her to pull it half off with her next shift and expose her pussy");
-		if(flags[MARBLE_DICK_LENGTH] > 0) outputText(" and " + marbleCock());
+		if(flags[kFLAGS.MARBLE_DICK_LENGTH] > 0) outputText(" and " + marbleCock());
 		outputText(".  \"<i>Why, you shameless " + player.mf("pervert","hussy") + "!</i>\" the cow-girl says in mock-offense, winking at you.");
 	
 		outputText("\n\nWhen she gets back to your tail, she turns around once more, and crawls back towards your upper body, while walking her fingers up your tail again.");
@@ -2270,25 +2270,25 @@ public function marbleCock():String {
 	var rando:Number;
 	//Discuss length one in 3 times.
 	if(int(Math.random()*3) == 0) {
-		if(flags[MARBLE_DICK_LENGTH] < 3) descript = "squat ";
-		if(flags[MARBLE_DICK_LENGTH] >= 3 && flags[MARBLE_DICK_LENGTH] < 5) descript = "short ";
-		if(flags[MARBLE_DICK_LENGTH] >= 5 && flags[MARBLE_DICK_LENGTH] < 7) descript = "average ";
-		if(flags[MARBLE_DICK_LENGTH] >= 7 && flags[MARBLE_DICK_LENGTH] < 9) descript = "long ";
-		if(flags[MARBLE_DICK_LENGTH] >= 10 && flags[MARBLE_DICK_LENGTH] < 13) descript = "huge ";
-		if(flags[MARBLE_DICK_LENGTH] >= 13 && flags[MARBLE_DICK_LENGTH] < 18) descript = "massive ";
-		if(flags[MARBLE_DICK_LENGTH] >= 18 && flags[MARBLE_DICK_LENGTH] < 30) descript = "enormous ";
-		if(flags[MARBLE_DICK_LENGTH] >= 30) descript = "towering ";
+		if(flags[kFLAGS.MARBLE_DICK_LENGTH] < 3) descript = "squat ";
+		if(flags[kFLAGS.MARBLE_DICK_LENGTH] >= 3 && flags[kFLAGS.MARBLE_DICK_LENGTH] < 5) descript = "short ";
+		if(flags[kFLAGS.MARBLE_DICK_LENGTH] >= 5 && flags[kFLAGS.MARBLE_DICK_LENGTH] < 7) descript = "average ";
+		if(flags[kFLAGS.MARBLE_DICK_LENGTH] >= 7 && flags[kFLAGS.MARBLE_DICK_LENGTH] < 9) descript = "long ";
+		if(flags[kFLAGS.MARBLE_DICK_LENGTH] >= 10 && flags[kFLAGS.MARBLE_DICK_LENGTH] < 13) descript = "huge ";
+		if(flags[kFLAGS.MARBLE_DICK_LENGTH] >= 13 && flags[kFLAGS.MARBLE_DICK_LENGTH] < 18) descript = "massive ";
+		if(flags[kFLAGS.MARBLE_DICK_LENGTH] >= 18 && flags[kFLAGS.MARBLE_DICK_LENGTH] < 30) descript = "enormous ";
+		if(flags[kFLAGS.MARBLE_DICK_LENGTH] >= 30) descript = "towering ";
 		descripted = true;
 	}
 
 	//Discuss girth one in 3 times.
 	if(int(Math.random()*3) == 0) {
 		//narrow, thin, ample, broad, distended, voluminous
-		if(flags[MARBLE_DICK_THICKNESS] <= .75) descript += "narrow "
-		if(flags[MARBLE_DICK_THICKNESS] > 1 && flags[MARBLE_DICK_THICKNESS] <= 1.4) descript += "ample ";
-		if(flags[MARBLE_DICK_THICKNESS] > 1.4 && flags[MARBLE_DICK_THICKNESS] <= 2) descript += "broad ";
-		if(flags[MARBLE_DICK_THICKNESS] > 2 && flags[MARBLE_DICK_THICKNESS] <= 3.5) descript += "fat ";
-		if(flags[MARBLE_DICK_THICKNESS] > 3.5) descript += "distended ";
+		if(flags[kFLAGS.MARBLE_DICK_THICKNESS] <= .75) descript += "narrow "
+		if(flags[kFLAGS.MARBLE_DICK_THICKNESS] > 1 && flags[kFLAGS.MARBLE_DICK_THICKNESS] <= 1.4) descript += "ample ";
+		if(flags[kFLAGS.MARBLE_DICK_THICKNESS] > 1.4 && flags[kFLAGS.MARBLE_DICK_THICKNESS] <= 2) descript += "broad ";
+		if(flags[kFLAGS.MARBLE_DICK_THICKNESS] > 2 && flags[kFLAGS.MARBLE_DICK_THICKNESS] <= 3.5) descript += "fat ";
+		if(flags[kFLAGS.MARBLE_DICK_THICKNESS] > 3.5) descript += "distended ";
 		descripted = true;
 	}
 	rando=int(Math.random()*10)
@@ -2590,18 +2590,18 @@ public function marbleBadEndFollowup():void {
 }
 
 //BIRTHING OVERWRITES SECKS
-//if(flags[MARBLE_PREGNACY_INCUBATION] == 1)
+//if(flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] == 1)
 public function marblePoopsBaybees():void {
-	flags[MARBLE_PREGNACY_INCUBATION] = 0;
+	flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] = 0;
 	//Normal shitz
-	if(flags[MARBLE_PREGNACY_TYPE] == 1) {
+	if(flags[kFLAGS.MARBLE_PREGNACY_TYPE] == 1) {
 		//Gives birth at 28 days
 		outputText("\nMarble rushes up to you with a concerned look on her face.  \"<i>Sweetie, its time!  Our child is going to come into the world!</i>\"  She squats down and gets you to kneel next to her, putting your hand against her now gaping womanhood.  You can feel that something is starting to come out of the hole, and you start encouraging Marble as she continues to breathe heavily and occasionally grunt from the effort of pushing the child out.\n\n", false);
 		outputText("As the head comes out of her hole, you can see that it has small nub like horns and cute little bovine ears.  You call to Marble that you can see the head and that it's already is starting to look like her.  You hear Marble give a happy laugh between her breaths as she continues to push the child out.  You notice that the smell around Marble is a little different right now, though you can't judge exactly what the difference is.\n\n", false);
 		outputText("After only a few short minutes, the child is pushed out by Marble completely and she gives a satisfied sigh.  You look at the child as it starts bawling and see that it is indeed a little cow-girl that the two of you have brought into the world.  You can already tell that she has all the bovine features that Marble has", false);
 		//Does the PC note that she is not a futa?
 		//If (Marble has a cock)
-		if(flags[MARBLE_DICK_TYPE] > 0) outputText(", but you notice that she does not have a cock of any kind. It seems that trait isn't passed on", false);
+		if(flags[kFLAGS.MARBLE_DICK_TYPE] > 0) outputText(", but you notice that she does not have a cock of any kind. It seems that trait isn't passed on", false);
 		outputText(".   The little girl's face is a really pretty one; you're sure that she'll grow up to be like her mom.  You hand Marble the child and she puts the crying child to her chest. The little girl stops crying at once and starts eagerly gobbling down Marble's milk.\n\n", false);
 		//If (PC is addicted to Marble)
 		if(player.hasPerk("Marble's Milk") >= 0) {
@@ -2614,7 +2614,7 @@ public function marblePoopsBaybees():void {
 		//since the PC must either be addicted, or have removed Marble's addictive trait in order to father a child with her, there is no need for a check for addiction here!
 		outputText("Once the two of you have had your fill, Marble puts the child inside the nursery.  The little girl is already starting to look like she is a few years old, and is already trotting around on her little hoofs.  Marble turns to look at you and asks \"<i>Ok, I'll name her ", false);
 		//Marble chooses a random name from this list, assuming that there isn't already a child with that name, in which case she'll say she can't think of a name, and ask the PC to come up with one.
-		if(flags[MARBLE_KIDS] == 0) {
+		if(flags[kFLAGS.MARBLE_KIDS] == 0) {
 			temp = rand(10);
 			switch(temp) {
 				case 0:
@@ -2655,12 +2655,12 @@ public function marblePoopsBaybees():void {
 			outputText("...hmm, well Sweetie, I can't think of a good name right now, I'll figure one out tomorrow.</i>\"", false);
 		} 
 		//cow-girl child is added to the nursery, her name is set to \"<i>childName</i>\"
-		flags[MARBLE_KIDS]++;
+		flags[kFLAGS.MARBLE_KIDS]++;
 		doNext(1);
 		return;
 	}
 	//Eggs
-	else if(flags[MARBLE_PREGNACY_TYPE] == 2) {
+	else if(flags[kFLAGS.MARBLE_PREGNACY_TYPE] == 2) {
 		//Birthing eggs
 		//Gives birth as the standard time for eggs
 		outputText("\nYou hear moaning coming from a secluded part of the rocks and go over to investigate.  You find Marble squatted down on the ground with a ", false);
@@ -2709,38 +2709,38 @@ public function marblePoopsBaybees():void {
 public function marbleNightSleepFlavor():Boolean {
 	spriteSelect(41);
 	//If player is marble-preggo, she builds nursery
-	if(flags[MARBLE_NURSERY_CONSTRUCTION] == 0 && player.pregnancyType == 8 && (player.pregnancyIncubation <= 128)) {
+	if(flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] == 0 && player.pregnancyType == 8 && (player.pregnancyIncubation <= 128)) {
 		outputText("<b>Citing your pregnant belly, Marble informs you she'll be getting to work on building a nursery for your coming cow-child soon.</b>\n\n", false);
-		flags[MARBLE_NURSERY_CONSTRUCTION]++;
+		flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION]++;
 	}
 	//PREGGO ALERTZ
 	//3 days: 
-	if(flags[MARBLE_PREGNACY_INCUBATION] == 648) outputText("<b>You notice that Marble seems to have gained some weight.</b>\n\n", false);
+	if(flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] == 648) outputText("<b>You notice that Marble seems to have gained some weight.</b>\n\n", false);
 	//8 days: 
-	else if(flags[MARBLE_PREGNACY_INCUBATION] == 528) outputText("<b>Marble's belly has gotten a fair bit bigger; she may be pregnant.</b>\n\n", false);
+	else if(flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] == 528) outputText("<b>Marble's belly has gotten a fair bit bigger; she may be pregnant.</b>\n\n", false);
 	//12 days: 
-	else if(flags[MARBLE_PREGNACY_INCUBATION] == 432) {
+	else if(flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] == 432) {
 		outputText("<b>Marble's belly has gotten bigger; she is obviously pregnant.", false);
 		//(if the nursery has not yet been built, she is forced to start working on it here and her job cannot be changed until it has been finished)
-		if(flags[MARBLE_NURSERY_CONSTRUCTION] == 0 && flags[MARBLE_PREGNACY_TYPE] == 1) {
-			flags[MARBLE_NURSERY_CONSTRUCTION]++;
+		if(flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] == 0 && flags[kFLAGS.MARBLE_PREGNACY_TYPE] == 1) {
+			flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION]++;
 			outputText("  She lets you know that she'll be busy working on a nursery for her child for a while.", false);
 		}
 		outputText("</b>\n\n", false);
 	}
 	//18 days: 
-	else if(flags[MARBLE_PREGNACY_INCUBATION] == 288) outputText("<b>Marble's pregnancy has advanced further still, though the structure of her body keeps it from slowing her down.</b>\n\n", false);
+	else if(flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] == 288) outputText("<b>Marble's pregnancy has advanced further still, though the structure of her body keeps it from slowing her down.</b>\n\n", false);
 	//24 days: 
-	else if(flags[MARBLE_PREGNACY_INCUBATION] == 144) outputText("<b>Marble is probably getting close to giving birth, as her belly has gotten very large.</b>\n\n", false);
+	else if(flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] == 144) outputText("<b>Marble is probably getting close to giving birth, as her belly has gotten very large.</b>\n\n", false);
 	//Both under 30 - no sex
 	//Player 60+ & marble 20+ - sex
 	//Marble 60+ & player 20+ - service
 	//boring
 	//PC has worms kills everything.
 	if(player.hasStatusAffect("infested") >= 0) {
-		if(flags[MARBLE_GROSSED_OUT_BECAUSE_WORM_INFESTATION] != 1) {
+		if(flags[kFLAGS.MARBLE_GROSSED_OUT_BECAUSE_WORM_INFESTATION] != 1) {
 			outputText("As you go to lie down for the night, you find that Marble has gotten there before you.  You lie down next to her, but you can't help wishing that the two of you could have sex.  Suddenly, you feel Marble's hand grab ahold of your " + cockDescript(0) + ".  She give a bit of a squeal as one of the worms starts to move around inside the shaft.  She pulls open the blankets and looks closely at your dick for a few moments before picking up her bedroll and moving to a different part of the camp saying, \"<i>" + player.short + ", you get rid of those or I'm not going to sleep next to you or with you.</i>\"\n\n", false);
-			flags[MARBLE_GROSSED_OUT_BECAUSE_WORM_INFESTATION] = 1;
+			flags[kFLAGS.MARBLE_GROSSED_OUT_BECAUSE_WORM_INFESTATION] = 1;
 		}
 		return false;
 	}
@@ -2750,14 +2750,14 @@ public function marbleNightSleepFlavor():Boolean {
 		outputText("As you and Marble lie down for the night, she whispers into your ear, \"<i>Sweetie, if it isn't too much trouble, I'd really like it if you would grow a penis for me.  If you can't do that, then could you at least get a vagina?  I'll understand if it's too much trouble, I just wanted to get that off my chest…</i>\" After a moment of getting comfortable, the two of you go to sleep.\n\n", false);
 		return false;
 	}
-	else if(flags[MARBLE_LUST] < 50 || player.gender == 0) {
+	else if(flags[kFLAGS.MARBLE_LUST] < 50 || player.gender == 0) {
 		outputText("As you go to lie down for the night, you find that Marble has gotten there before you.  ");
-		if(flags[MARBLE_LUST] < 0) outputText("She makes a point of turning to face away from you when you climb into your bedroll.  Looks like she's still annoyed at you.");
-		else if(flags[MARBLE_LUST] < 20) outputText("She lies next to you contentedly when you climb into your bedroll.");
-		else if(flags[MARBLE_LUST] < 30) outputText("Marble gives a soft sigh when you climb into your bedroll.");
-		else if(flags[MARBLE_LUST] < 40) outputText("Marble fidgets around a bit when you climb into your bedroll.");
+		if(flags[kFLAGS.MARBLE_LUST] < 0) outputText("She makes a point of turning to face away from you when you climb into your bedroll.  Looks like she's still annoyed at you.");
+		else if(flags[kFLAGS.MARBLE_LUST] < 20) outputText("She lies next to you contentedly when you climb into your bedroll.");
+		else if(flags[kFLAGS.MARBLE_LUST] < 30) outputText("Marble gives a soft sigh when you climb into your bedroll.");
+		else if(flags[kFLAGS.MARBLE_LUST] < 40) outputText("Marble fidgets around a bit when you climb into your bedroll.");
 		else outputText("Marble seems rather worked up when you climb into your bedroll.");
-		if(player.lust < 33 && flags[MARBLE_LUST] < 20) outputText("  After a few moments of getting comfortable, you drift off to sleep.");
+		if(player.lust < 33 && flags[kFLAGS.MARBLE_LUST] < 20) outputText("  After a few moments of getting comfortable, you drift off to sleep.");
 		else if(player.lust < 33) {
 			outputText("  You wonder for a moment if Marble is maybe looking for something more from you.");
 			//(50% chance of this happening)
@@ -2782,7 +2782,7 @@ public function marbleNightSleepFlavor():Boolean {
 		if(player.lust < 33) {
 			outputText("and I know you really aren't in the mood, but could you please help me out?</i>\"  You sit up and ask her what it is.  She looks at you slightly embarrassed before asking you, \"<i>Could you please ", false);
 			//If (Marble is a herm)
-			if(flags[MARBLE_DICK_TYPE] > 0)
+			if(flags[kFLAGS.MARBLE_DICK_TYPE] > 0)
 				outputText("suck my " + marbleCock() + "?  I really, really need it.</i>\"", false);
 			else
 				outputText("lick my womanhood?  I really want to feel your tongue bring me to release...</i>\"", false);
@@ -2790,7 +2790,7 @@ public function marbleNightSleepFlavor():Boolean {
 			//options: yes/no (yes continues the current scene, this is a bit awkward as the current breaks are in the middle of if statements, so new futa/female if statements will need to be added)
 			var tailJob:Number = 0 ;
 			//tailjob for futa marble if PC is naga
-			if(player.isNaga() && flags[MARBLE_DICK_LENGTH] > 0) tailJob = 3570;
+			if(player.isNaga() && flags[kFLAGS.MARBLE_DICK_LENGTH] > 0) tailJob = 3570;
 			simpleChoices("Yes",marbleNomNoms,"No",1,"Tailjob",tailJob,"",0,"",0);
 		}
 		else {
@@ -2812,7 +2812,7 @@ public function pcPregWithMarblesKids():Boolean {
 	return false;
 }
 public function marblePregWithPCKids():Boolean {
-	if(flags[MARBLE_PREGNACY_TYPE] == 1 && flags[MARBLE_PREGNACY_INCUBATION] <= 280 && flags[MARBLE_PREGNACY_INCUBATION] != 0) return true;
+	if(flags[kFLAGS.MARBLE_PREGNACY_TYPE] == 1 && flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] <= 280 && flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] != 0) return true;
 	return false;
 }
 
@@ -2841,10 +2841,10 @@ public function atNightAskMarbleForSomeSexMaybe():void {
 	clearOutput();
 	outputText("You turn to face Marble, and ");
 	//if (Marble's lust is negative)
-	if(flags[MARBLE_LUST] < 0) {
+	if(flags[kFLAGS.MARBLE_LUST] < 0) {
 		outputText("see the annoyed back of her head.  Oh right, she's probably not in the mood for this.  You'll have to find another way of satisfying your needs tomorrow.");
 	}
-	else if(flags[MARBLE_LUST] < 20) {
+	else if(flags[kFLAGS.MARBLE_LUST] < 20) {
 		outputText("gently ask her if she wants to fool around.  After a moment you hear her breathe out and she says, \"<i>Sorry sweetie, I'm not feeling up to it right now.</i>\"");
 		//Marble cuddles the PC
 		marbleCuddlin();
@@ -2903,7 +2903,7 @@ public function marbleNightSexIntro(clear:Boolean = true):void {
 		if(player.hasVagina()) outputText(vaginaDescript(0), false);
 		outputText(" while you slip your own hand into her clothes and ", false);
 		//If (Marble is a herm) {
-		if(flags[MARBLE_DICK_TYPE] > 0) {
+		if(flags[kFLAGS.MARBLE_DICK_TYPE] > 0) {
 			outputText("gently rub her " + marbleCock() + ".  After a moment, you move your hand down lower and ", false);
 		}
 		outputText(" run your fingers down her moist womanhood.  The two of you quiver under each other's ministrations.  Both of you work to quickly free yourselves from your clothing, growing increasingly excited at where things are going.  Free of your garments, you move overtop of Marble.\n\n", false);
@@ -2936,7 +2936,7 @@ public function marbleNightSexDudes():void {
 	//Try to find a dick that fits.
 	var x:Number = player.cockThatFits(marbleCuntCapacity());
 	if(x < 0) x = 0;
-	flags[MARBLE_LUST] = 0;
+	flags[kFLAGS.MARBLE_LUST] = 0;
 	outputText("", true);
 	outputText("You gently lift yourself up and slide the tip of your " + cockDescript(x) + " into her waiting hole.  Ever so slowly, you push yourself further and further in.  Each inch gained brings gentle moans and coos from Marble, encouraging you onward.  ", false);
 	//Can the PC's main cock go all the way?
@@ -3001,7 +3001,7 @@ public function marbleNightSexDudes():void {
 		outputText(" unleashes its own load, liberally covering both of you.  ", false);
 	}
 	//does Marble spray her cock?
-	if(flags[MARBLE_DICK_TYPE] > 0) {
+	if(flags[kFLAGS.MARBLE_DICK_TYPE] > 0) {
 		outputText("Trapped between your bodies,  Marble's " + marbleCock() + " spasms and sprays the two of you.", false);
 	}
 	//Chance of impregnating Marble (if she is purified or the PC is addicted) based on the PC's cum production
@@ -3012,10 +3012,10 @@ public function marbleNightSexDudes():void {
 // sex function for if PC is female, and Marble is female
 public function marbleNightSexChicks():void {
 	spriteSelect(41);
-	flags[MARBLE_LUST] = 0;
+	flags[kFLAGS.MARBLE_LUST] = 0;
 	var preggerOdds:Number = 0;
 	outputText("", true);
-	if(flags[MARBLE_DICK_TYPE] == 0) {
+	if(flags[kFLAGS.MARBLE_DICK_TYPE] == 0) {
 		outputText("You gently lift yourself up as Marble produces her double dildo and slips it inside her womanhood.  Smiling at her, you slowly lower your body and impale your " + vaginaDescript(0) + " onto the artificial rod.  ", false);
 		//Loosen PC's vagina if they are really tight, also removes virginity
 		cuntChange(14,true);
@@ -3059,7 +3059,7 @@ public function marbleNightSexChicks():void {
 		outputText("You gently lift yourself up into the air and guide your " + vaginaDescript(0) + " to the tip of her waiting " + marbleCock() + ".  You slowly lower your " + vaginaDescript(0) + " onto her quivering " + marbleCock() + ", gaining inch by inch ", false);
 		//is she satisfied?
 		//If (player can fit all of her cock and PC is not a virgin) {
-		if(player.vaginalCapacity() > flags[MARBLE_DICK_LENGTH] * flags[MARBLE_DICK_THICKNESS]) {
+		if(player.vaginalCapacity() > flags[kFLAGS.MARBLE_DICK_LENGTH] * flags[kFLAGS.MARBLE_DICK_THICKNESS]) {
 			outputText("until she is fully within you.  The two of you shudder in pleasure, and Marble says, \"<i>Oh sweetie, you got it all in there.  Being inside another woman like this is something I'll never really get used to, but I can't deny how good it feels.</i>\"\n\n", false);  
 		}
 		//Marble seems to think you can take more then maybe you should be able to take
@@ -3103,7 +3103,7 @@ public function marbleNightSexChicks():void {
 		outputText("The two of you give one more shudder from the wonderful stimulation, before collapsing on top of one another.  ", false);
 		//Pregnancy chance for PC, ¼ their fertility
 		player.knockUp(8,368,150);
-		cuntChange(flags[MARBLE_DICK_THICKNESS] * flags[MARBLE_DICK_LENGTH], true);
+		cuntChange(flags[kFLAGS.MARBLE_DICK_THICKNESS] * flags[kFLAGS.MARBLE_DICK_LENGTH], true);
 	}
 	marbleSexFinish();
 }
@@ -3133,13 +3133,13 @@ public function marblePreggoChance(preggerMult:Number):void {
 	trace("MARBLE PREGGO ODDS: " + preggerOdds);
 	if(rand(100) < preggerOdds && player.hasPerk("Marble's Milk") >= 0) {
 		//SHUT UP SHES ALREADY PREGNANT
-		if(flags[MARBLE_PREGNACY_INCUBATION] > 0) {}
+		if(flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] > 0) {}
 		//NO SHE AINT
 		else {
 			trace("Marble got PREGNANT!");
 			//SHE IS NAU!
-			flags[MARBLE_PREGNACY_INCUBATION] = 720;
-			flags[MARBLE_PREGNACY_TYPE] = 1;
+			flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] = 720;
+			flags[kFLAGS.MARBLE_PREGNACY_TYPE] = 1;
 		}
 	}
 	
@@ -3158,12 +3158,12 @@ public function marbleSexFinish():void {
 //Pleasing Marble
 public function marbleNomNoms():void {
 	spriteSelect(41);
-	flags[MARBLE_LUST] = 0;
+	flags[kFLAGS.MARBLE_LUST] = 0;
 	outputText("", true);
 	//intro for non corrupt Marble
 	//outputText("You go to lie down and notice that Marble hasn't gone to bed yet.  You decide not worry about it too much until you hear Marble come clopping up beside you.  \"<i>Sweetie?</i>\" she calls out to you as she crawls in next to you.  \"<i>Sweetie, I'm feeling really horny and I know you really aren't in the mood, but could you please help me out?</i>\"  You sit up and ask her how you can help; you could never refuse her.  She looks at you slightly embarrassed before asking you, \"<i>Could you please ", false);
 	//If (Marble is a herm) {
-	if(flags[MARBLE_DICK_TYPE] > 0) {
+	if(flags[kFLAGS.MARBLE_DICK_TYPE] > 0) {
 		slimeFeed();
 		//outputText("suck my " + marbleCock() + "?  I really, really need it.</i>\"", false);
 		if(player.cor < 30) {
@@ -3221,9 +3221,9 @@ public function MarbleDigsDraftsYo():void {
 	else outputText("nervous ", false);
 	outputText("smile.  <b>Marble is now a hermaphrodite.</b>  ", false);
 	doNext(13);
-	flags[MARBLE_DICK_TYPE] = 1;
-	flags[MARBLE_DICK_LENGTH] = 7;
-	flags[MARBLE_DICK_THICKNESS] = 2;
+	flags[kFLAGS.MARBLE_DICK_TYPE] = 1;
+	flags[kFLAGS.MARBLE_DICK_LENGTH] = 7;
+	flags[kFLAGS.MARBLE_DICK_THICKNESS] = 2;
 	
 }
 
@@ -3248,9 +3248,9 @@ public function MarblePEggEffects():void {
 		outputText("So does this mean you don't want me to have a cock anymore, sweetie?</i>\"  You assure her that yes, you don't want her to have it anymore.  She seems relieved by this and admits, \"<i>Thank you sweetie, I don't think I really liked having it,</i>\" before eating the egg.\n\n", false);
 	}
 	outputText("She lifts up her skirt and the two of you watch as her " + marbleCock() + " is absorbed back into her body.  <b>Marble is now purely female.</b>  ", false);
-	flags[MARBLE_DICK_TYPE] = 0;
-	flags[MARBLE_DICK_LENGTH] = 0;
-	flags[MARBLE_DICK_THICKNESS] = 0;
+	flags[kFLAGS.MARBLE_DICK_TYPE] = 0;
+	flags[kFLAGS.MARBLE_DICK_LENGTH] = 0;
+	flags[kFLAGS.MARBLE_DICK_THICKNESS] = 0;
 	doNext(13);
 }
 
@@ -3260,20 +3260,20 @@ public function marbleOvulatesLikeMadDawg():void {
 	outputText("", true);
 	//gives her eggs if she isn't pregnant, speeds pregnancy if she is.  She will refuse to take it if she is visibly pregnant with something other than eggs, and the nursery hasn't been built yet.
 	//Marble is visibly pregnant with non-eggs, and the nursery has not been built yet) {
-	if(flags[MARBLE_NURSERY_CONSTRUCTION] < 100 && flags[MARBLE_PREGNACY_INCUBATION] > 0 && flags[MARBLE_PREGNACY_TYPE] == 1) {
+	if(flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] < 100 && flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] > 0 && flags[kFLAGS.MARBLE_PREGNACY_TYPE] == 1) {
 		outputText("Marble refuses to take the elixir to speed up her pregnancy until after she has finished the nursery. ", false);
 		doNext(13);
 		return;
 	}
-	else if(flags[MARBLE_PREGNACY_INCUBATION] > 0) {
+	else if(flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] > 0) {
 		outputText("After taking the elixir, Marble's belly rumbles slightly.  You can both tell that her pregnancy has advanced.  ", false);
-		flags[MARBLE_PREGNACY_INCUBATION] -= 40 + rand(30);
-		if(flags[MARBLE_PREGNACY_INCUBATION] <= 0) flags[MARBLE_PREGNACY_INCUBATION] = 1;
+		flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] -= 40 + rand(30);
+		if(flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] <= 0) flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] = 1;
 	}
 	else {
 		outputText("After taking the elixir, Marble tells you that her belly feels full.  It sounds like she'll be laying eggs soon.  ", false);
-		flags[MARBLE_PREGNACY_INCUBATION] = 96;
-		flags[MARBLE_PREGNACY_TYPE] = 2;
+		flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] = 96;
+		flags[kFLAGS.MARBLE_PREGNACY_TYPE] = 2;
 	}
 	consumeItem("OviElix",1);
 	doNext(13);
@@ -3289,17 +3289,17 @@ She gains 4 points of corruption
 
 public function marbleCuntCapacity():Number {
 	var size:Number = 36;
-	if(flags[MARBLE_BOVA_LEVEL] >= 1) {
+	if(flags[kFLAGS.MARBLE_BOVA_LEVEL] >= 1) {
 		size += 10;
 	}
-	if(flags[MARBLE_BOVA_LEVEL] >= 2) size += 20;
-	if(flags[MARBLE_KIDS] > 0) size += 14;
+	if(flags[kFLAGS.MARBLE_BOVA_LEVEL] >= 2) size += 20;
+	if(flags[kFLAGS.MARBLE_KIDS] > 0) size += 14;
 	return size;
 }
 
 public function giveMurbleProBova():void {
 	clearOutput();
-	if(flags[MARBLE_BOVA_LEVEL] == 0) {
+	if(flags[kFLAGS.MARBLE_BOVA_LEVEL] == 0) {
 		outputText("You hand Marble the bottle of ProBova.  She considers it for a few moments before looking at you and saying, \"<i>Judging by the label, this is probably going to make me even more cowlike then I already am, sweetie.  I'm not really opposed to the idea, but it will be permanent.  Are you sure you want me to drink it?</i>\"");
 		//player chooses yes/no
 		doYesNo(giveMarbleTheProBovas4Sho,2128);
@@ -3315,10 +3315,10 @@ public function giveMarbleTheProBovas4Sho():void {
 	clearOutput();
 	spriteSelect(41);
 	consumeItem("ProBova",1);
-	if(flags[MARBLE_BOVA_LEVEL] == 0) {
+	if(flags[kFLAGS.MARBLE_BOVA_LEVEL] == 0) {
 		outputText("Marble nods and downs the contents.  Nothing happens for a moment... then she gasps and grabs at her chest, stumbling forward slightly.  The cow-girl straightens up and releases her grip, then pulls open her top to look at her breasts.  <b>Each is now decorated with sets of four nipples, like the teats of a cow.  She has also gained about 4 inches in height, judging against the backdrop of the camp.</b>  Marble takes a few minutes to test her new nipples, squeezing them gently and sighing as dribbles of milk decorate her areolae in fours instead of one, then looks at you and says, \"<i>This isn't really so bad.  Actually, it feels nice.  If you find another dose, I'm willing to drink it - just to see what happens, of course.</i>\"");
 		//Set Marble's nippes to quads, set her height to 6'8</i>\", increase Marble's vaginal capacity by 10, increase Marble corruption by 4
-		flags[MARBLE_BOVA_LEVEL] = 1;
+		flags[kFLAGS.MARBLE_BOVA_LEVEL] = 1;
 		player.addStatusValue("Marble",4,4);
 	}
 	//end event
@@ -3327,13 +3327,13 @@ public function giveMarbleTheProBovas4Sho():void {
 		//Set Marble's fur to full body, face to cow-anthro, increase height by 8 inches 
 		//(these don't need to be recorded except with one value), and increase Marble's vaginal capacity by 20, 
 		//increase Marble corruption by 4
-		flags[MARBLE_BOVA_LEVEL] = 2;
+		flags[kFLAGS.MARBLE_BOVA_LEVEL] = 2;
 	}
 	doNext(13);
 }
 
 public function marbleNip():String {
-	if(flags[MARBLE_BOVA_LEVEL] > 0) return "quad-nipple";
+	if(flags[kFLAGS.MARBLE_BOVA_LEVEL] > 0) return "quad-nipple";
 	else return "nipple";
 }
 
@@ -3344,11 +3344,11 @@ public function marbleAppearance():void {
 	//Gives Marble's appearance screen, some of these values change depending 
 	//on her level of corruption.
 	outputText("Marble is a ");
-	if(flags[MARBLE_BOVA_LEVEL] == 0) outputText("6 foot 4 ");
-	else if(flags[MARBLE_BOVA_LEVEL] == 1) outputText("6 foot 8 ");
+	if(flags[kFLAGS.MARBLE_BOVA_LEVEL] == 0) outputText("6 foot 4 ");
+	else if(flags[kFLAGS.MARBLE_BOVA_LEVEL] == 1) outputText("6 foot 8 ");
 	else outputText("7 foot 4 ");
 	outputText("inch tall cow-girl, and while she isn't very fast, she has very strong muscles; though they are difficult to spot under her skin's layer of fat. <b>She is currently wearing farm-hand clothes and using a large two-handed hammer as a weapon.</b>   ");
-	if(flags[MARBLE_BOVA_LEVEL] <= 1) outputText("She has a fairly normal soft human face, with light-colored skin.  ");
+	if(flags[kFLAGS.MARBLE_BOVA_LEVEL] <= 1) outputText("She has a fairly normal soft human face, with light-colored skin.  ");
 	else outputText("She has a soft face that is a mix of bovine and human features, with thick brown fur covering her body.  ");
 
 	outputText("Her shoulder-length brown hair is parted by a pair of rounded cow-ears that stick out sideways from her head.  ");
@@ -3358,7 +3358,7 @@ public function marbleAppearance():void {
 	else outputText("Two fairly large horns grow from her forehead, similar in appearance to those on a female bovine.  ", false);
 	outputText("She has wide womanly thighs that draw the attention of those around her, and her large butt fills out her clothing nicely.  A long cow-tail with a puffy tip swishes back and forth between her legs, as if swatting at flies. A pretty bow has been tied to her tail.  Two legs grow down from her waist");
 	
-	if(flags[MARBLE_BOVA_LEVEL] <=1) outputText(", human until about half-way down her thigh.  The lower portion of her legs is covered in thick dark brown fur and ends in a pair of bestial hooves.\n\n",false);
+	if(flags[kFLAGS.MARBLE_BOVA_LEVEL] <=1) outputText(", human until about half-way down her thigh.  The lower portion of her legs is covered in thick dark brown fur and ends in a pair of bestial hooves.\n\n",false);
 	else outputText(" that are oddly jointed and end in a pair of bestial hooves.\n\n",false);
 
 	if(player.statusAffectv4("Marble") <=15) outputText("She has two pillowy breasts, each supporting a 0.4-inch lactating " + marbleNip() + ".  She could easily fill a DD-cup bra.\n\n", false);
@@ -3370,20 +3370,20 @@ public function marbleAppearance():void {
 	//Marble's Pregnancy
 	//Marble's cock
 	//These pieces of text should appear in the same place as they do for the PC
-	if(flags[MARBLE_PREGNACY_INCUBATION] > 0) {
-		if(flags[MARBLE_PREGNACY_INCUBATION] > 648) {}
+	if(flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] > 0) {
+		if(flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] > 648) {}
 		//3-8 days in...
-		else if(flags[MARBLE_PREGNACY_INCUBATION] > 528) outputText("It looks like she's put on some weight since coming to your camp.\n\n", false);
+		else if(flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] > 528) outputText("It looks like she's put on some weight since coming to your camp.\n\n", false);
 		//8-12 days in...
-		else if(flags[MARBLE_PREGNACY_INCUBATION] > 432) outputText("Her belly has swollen a bit; she may be pregnant.\n\n", false);
+		else if(flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] > 432) outputText("Her belly has swollen a bit; she may be pregnant.\n\n", false);
 		//12-18 days in...
-		else if(flags[MARBLE_PREGNACY_INCUBATION] > 288) outputText("Her belly is obviously swollen; she is almost certainly pregnant.\n\n", false);
+		else if(flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] > 288) outputText("Her belly is obviously swollen; she is almost certainly pregnant.\n\n", false);
 		//18-24 days in...
-		else if(flags[MARBLE_PREGNACY_INCUBATION] > 144) outputText("Her belly is very swollen; she is very pregnant.\n\n", false);
+		else if(flags[kFLAGS.MARBLE_PREGNACY_INCUBATION] > 144) outputText("Her belly is very swollen; she is very pregnant.\n\n", false);
 		//OH GOD SHES FAT( 24+ days)
 		else outputText("Her belly is extremely swollen and occasionally quivers when whatever she is pregnant with moves around.\n\n", false);
 	}
-	if(flags[MARBLE_DICK_TYPE] > 0) outputText("She has grown a " + marbleCock() + " since you brought her to camp. It is " + num2Text(int(flags[MARBLE_DICK_LENGTH])) + " inches long and " + num2Text(int(flags[MARBLE_DICK_THICKNESS])) + " inches thick.\n\n", false);
+	if(flags[kFLAGS.MARBLE_DICK_TYPE] > 0) outputText("She has grown a " + marbleCock() + " since you brought her to camp. It is " + num2Text(int(flags[kFLAGS.MARBLE_DICK_LENGTH])) + " inches long and " + num2Text(int(flags[kFLAGS.MARBLE_DICK_THICKNESS])) + " inches thick.\n\n", false);
 	
 	if(player.statusAffectv4("Marble")<=50) outputText("She has a pussy, with a 0.5 inch clit.\n\n", false);
 	else if(player.statusAffectv4("Marble") <=75) outputText("She has a cunt, with a 0.6 inch clit.  You can see moisture gleaming from it.\n\n", false);
@@ -3403,7 +3403,7 @@ public function giveMarbleTailjobRelease():void {
 	outputText("You tell Marble that while you're not in a mood to suck her off today, you're not just going to leave her alone with it, either, and ask for her permission to do an exotic alternative.  Slowly, she nods, apparently not so sure about what you mean or whether she should agree.");
 	outputText("\n\nYou grin at her and slowly move your serpentine tail towards her leg, then up her bovine-like calf and towards her thighs.  Her body shivers at the sensation, and when she looks down, she finally gets the idea and smiles back at you, kindly.");
 	outputText("\n\nMoving your serpentine tail between her thighs, you decide to start with her original set of genitalia, slowly sliding the tip across her already somewhat moist labia.  You gently push it in, causing her to nearly jump up in surprise, her large breasts jiggling pleasantly as you tease the inside, close to the entrance.  Suddenly, you push more of your tail in and wiggle it inside of her, causing her hips to shake, her mouth to moan and her groin to moisten.  After a short period of wiggling, you shift the muscles in your tail and deliver a few pumps into her pussy, causing her soft butt to shake and forcing another moan.");
-	outputText("\n\nDeciding the moisture on your tail and her arousal level to be sufficient, you remove yourself from the confines of her pussy and slide up to the main offender - Marble's " + num2Text(flags[MARBLE_DICK_LENGTH]) + " inch long, fully erect cock.  You promptly her to tell you if you squeeze too tightly, and prod with the tip of your tail, pushing against the underside of her cock insistently.  Slowly, you run it up her shaft until the end of your tail is stroking her sensitive tip; then, you sensuously drag the rest of the moistened scales over and around her member, squeezing and wrapping it.  Slowly, you cover all of her manhood with your moist tail, and constrict, causing her to yelp before you start to move your coils up and down, essentially jerking her off along her entire length.");
+	outputText("\n\nDeciding the moisture on your tail and her arousal level to be sufficient, you remove yourself from the confines of her pussy and slide up to the main offender - Marble's " + num2Text(flags[kFLAGS.MARBLE_DICK_LENGTH]) + " inch long, fully erect cock.  You promptly her to tell you if you squeeze too tightly, and prod with the tip of your tail, pushing against the underside of her cock insistently.  Slowly, you run it up her shaft until the end of your tail is stroking her sensitive tip; then, you sensuously drag the rest of the moistened scales over and around her member, squeezing and wrapping it.  Slowly, you cover all of her manhood with your moist tail, and constrict, causing her to yelp before you start to move your coils up and down, essentially jerking her off along her entire length.");
 	outputText("\n\nMarble isn't content with simply standing there while you're tugging on her member; one of her hands gently strokes the end of your tail while the other rubs her breast, playing with her nipple.  Pleased that she's enjoying herself, you again shift your tail to rub the very tip of it against her sensitive clit, all the while stroking the male side of her genitalia with the part just before the end.  Marble moans loudly and her hands stop migrating as one of them squeezes your tail and the other grabs her pillowy breast rather roughly.  It'd appear that with the combined strokes to both of her parts, it won't take long to give her her release... you decide to move on to the main event.");
 	outputText("\n\nShifting your coils over her erection so that your movements will stimulate her more effectively, the end of your tail droops down and rubs against her clit as you push it inside her.  With intense, but careful, pumping and stroking movements, you cause her to nearly writhe as she pants from excitement.  \"<i>S...sweetie, you're teasing too many places at once...</i>\" she whispers, half-heartedly.  You have to admit, feeling her more sensitive bits and being able to explore her soft body thoroughly with your tail does excite you as well.");
 	outputText("\n\nIt doesn't take long for her to climax after that.  After a few more strokes and pushes against the walls of her pussy, she releases a moo-like moan and you feel her contracting rhythmically around your tail while her cock twitches, releasing a sticky liquid right into the coils.");
@@ -3423,6 +3423,6 @@ public function giveMarbleTailjobRelease():void {
 	//teh end
 	//slimefeed if corruption, gain fuckin' lust n lower marble lust n' shit
 	stats(0,0,0,0,0,0,20,0);
-	flags[MARBLE_LUST] = 0;
+	flags[kFLAGS.MARBLE_LUST] = 0;
 	doNext(1);
 }

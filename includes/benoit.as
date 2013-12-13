@@ -22,16 +22,16 @@ public function benoitMF(stringM:String,stringF:String):String {
 	else return stringF;
 }
 public function benoitLover():Boolean {
-	if(flags[BENOIT_TIMES_SEXED_FEMPCS] >= 2) return true;
+	if(flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] >= 2) return true;
 	return false;
 }
 public function benoitAffection(changes:Number = 0):Number {
 	if(changes != 0) {
-		flags[BENOIT_AFFECTION] += changes;
-		if(flags[BENOIT_AFFECTION] > 100) flags[BENOIT_AFFECTION] = 100;
-		else if(flags[BENOIT_AFFECTION] < 0) flags[BENOIT_AFFECTION] = 0;
+		flags[kFLAGS.BENOIT_AFFECTION] += changes;
+		if(flags[kFLAGS.BENOIT_AFFECTION] > 100) flags[kFLAGS.BENOIT_AFFECTION] = 100;
+		else if(flags[kFLAGS.BENOIT_AFFECTION] < 0) flags[kFLAGS.BENOIT_AFFECTION] = 0;
 	}
-	return flags[BENOIT_AFFECTION];
+	return flags[kFLAGS.BENOIT_AFFECTION];
 }
 
 public function benoitKnocksUpPCCheck():void {
@@ -39,7 +39,7 @@ public function benoitKnocksUpPCCheck():void {
 	if(player.pregnancyType == 14 && player.hasPerk("Basilisk Womb") >= 0) player.pregnancyType = 18;
 	//Knock up chances:
 	if((player.pregnancyType == 5 || player.hasPerk("Harpy Womb") >= 0 || player.hasPerk("Oviposition") >= 0 || player.hasPerk("Basilisk Womb") >= 0) && (player.pregnancyIncubation == 0 || player.pregnancyType == 5)) {
-		if(player.hasPerk("Basilisk Womb") >= 0 && flags[BENOIT_TESTED_BASILISK_WOMB] == 1) {
+		if(player.hasPerk("Basilisk Womb") >= 0 && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 1) {
 			if(player.pregnancyType != 5 || player.pregnancyIncubation == 0) {
 				//player.pregnancyIncubation = 250;
 				player.knockUp(18,250);
@@ -57,51 +57,51 @@ public function benoitIntro():void {
 	clearOutput();
 	var suggest:int = 0;
 	var womb:int = 0;
-	if(flags[TIMES_IN_BENOITS] == 0) {
+	if(flags[kFLAGS.TIMES_IN_BENOITS] == 0) {
 		outputText("You cautiously approach the stall.  The shadow thrown by its large, overhanging canopy makes it quite difficult to see into its interior, and getting inside is made even more hazardous by the sheer volume of objects which clutter the area around it and hang out of the shelves arranged along its wooden walls.  Everything Mareth has ever created or distilled seems to be here - or at least, everything Mareth has ever thrown out.  Pots, pans, ugly crockery, shelves stuffed with clothing, a spice rack bulging with all manner of suspect-looking potions... you imagine you could probably find anything you'd ever want in here - or something closely resembling it - if you looked hard enough.");
 		outputText("\n\n\"<i>Allo?</i>\" says a raspy voice from further in the gloom.  \"<i>'Oo is zair?</i>\"  You can make out a counter constructed from crates, and a tall, thin shape behind it - a lizan, by the looks of his build and smooth scales.  Something about his shape makes you feel uneasy, though... you shift further in to take a closer look at the stall owner.  He's seated in the only area of his shop not taken up by junk, right next to a heap of rugs and robes, and has a fez perched on top of his blunt head.  It's when he turns his grey slit eyes to you that you realise what is putting you on edge - it's a basilisk!  Panic grips you as you try to wrench your eyes away... which you do, easily.  Curious despite yourself, you look back tentatively.  The creature's eyes seem oddly milky, and they seem to be staring beyond you.  Realisation takes hold when you see the white stick balanced carefully on the counter's side.");
 		outputText("\n\n\"<i>Yes, go ahead, stare,</i>\" says the basilisk in a long-suffering tone, making you jump. \"<i>It is a funny joke, yes?  Believe me, I wake up laughing about it every morning.  At least here zey stare.  In ze mountains, zey are so embarrassed zey can't even look at me.  Or at least I assume zey can't.</i>\"  He straightens his back and sets his jaw.  \"<i>'Owever, my slack-jawed friend, zis is not a freak show.  Zis is Benoit's Spectacular Salvage Shop!  So if you are not 'ere to buy or sell salvage... kindly piss off.</i>\"");
 		
 		outputText("\n\nYou wonder how a blind anything can make it in such a rough and ready place as the Bazaar, but then Benoit curls his claws protectively into the pile of robes sitting next to him, which opens dark brown eyes and sets its muzzle on the counter, looking at you plaintively.  The Alsatian buried within the cloth looks to you like a big softy, but you're willing to concede the point as made.");
 	}
-	else if(flags[BENOIT_SUGGEST_UNLOCKED] == 0 && player.hasVagina() && (player.hasStatusAffect("heat") >= 0 || player.pregnancyType == 5 || player.hasPerk("Harpy Womb") >= 0 || player.hasPerk("Oviposition") >= 0) && (player.pregnancyType == 5 || player.pregnancyIncubation == 0)) {
-		if(flags[BENOIT_SUGGEST_UNLOCKED] == 0) benoitAndFemPCTalkAboutEggings();
+	else if(flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] == 0 && player.hasVagina() && (player.hasStatusAffect("heat") >= 0 || player.pregnancyType == 5 || player.hasPerk("Harpy Womb") >= 0 || player.hasPerk("Oviposition") >= 0) && (player.pregnancyType == 5 || player.pregnancyIncubation == 0)) {
+		if(flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] == 0) benoitAndFemPCTalkAboutEggings();
 		suggest = 3809;
 	}
 	else {
 		//Subsequent Visit, Affection 0-10: 
 		if(benoitAffection() <= 10) outputText("Once again, you carefully enter the gloom of Benoit's salvage shop.  The proprietor sniffs the air as you enter, and then looks at you sourly.  \"<i>Well?</i>\" he rasps.");
 		//Benoit reacts after fucking the PC.
-		else if(flags[BENOIT_TIMES_SEXED_FEMPCS] == 1 && flags[BENOIT_POST_FIRSTFUCK_TALK] == 0)
+		else if(flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] == 1 && flags[kFLAGS.BENOIT_POST_FIRSTFUCK_TALK] == 0)
 			firstTimeAfterBoningEncounterBenoit();
 		else if(benoitAffection() < 35) outputText("Once again, you carefully enter the gloom of Benoit's salvage shop.  The proprietor sniffs the air as you enter, and then relaxes in his seat.  \"<i>Allo again, " + player.short + ".  What brings you 'ere?</i>\"");
 		//Subsequent Visit, Affection 35+ but pre-lover/pre-fem: 
 		else outputText("Once again, you carefully enter the gloom of Benoit's salvage shop.  The proprietor sniffs the air as you enter, and then smiles widely.  \"<i>If it isn't my favourite customer!  Do not 'ang around out zere, [name]; please, come in and let us, 'ow you say, chew ze fat.</i>\"");
 	}
-	if(flags[BENOIT_SUGGEST_UNLOCKED] > 0 && player.hasVagina()) suggest = 3809;
-	flags[TIMES_IN_BENOITS]++;
-	if(flags[BENOIT_WOMB_TALK_UNLOCKED] == 1 && player.hasPerk("Basilisk Womb") < 0 && flags[BENOIT_TESTED_BASILISK_WOMB] == 0) womb = 3814;
+	if(flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] > 0 && player.hasVagina()) suggest = 3809;
+	flags[kFLAGS.TIMES_IN_BENOITS]++;
+	if(flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 1 && player.hasPerk("Basilisk Womb") < 0 && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 0) womb = 3814;
 	choices("Buy",3787,"Sell",3788,"Talk",3798,"Suggest",suggest,"Basil. Womb",womb,"",0,"",0,"",0,"",0,"Leave",2855);
 }
 
 //Buy or Sell First Time, only if prelover/prefem: You ask him what the deal is with his shop.
 public function buyOrSellExplanationFirstTime():void {
-	flags[BENOIT_EXPLAINED_SHOP]++
+	flags[kFLAGS.BENOIT_EXPLAINED_SHOP]++
 	outputText("\"<i>If you can see something you want in Benoit's Spectacular Salvage Shop, and you can walk away with it, it's yours,</i>\" replies Benoit, theatrically sweeping his claw to take in the entirety of his stall but almost knocking over a birdcage.  \"<i>Assuming you can pay whatever I've decided it's worth, of course.  If you want to unload your garbage 'ere?  Zis is also fine.  I cannot pay what ze fat cats in Tel'Adre can, though.  Check back every day; ze Spectacular Salvage Shop always 'as new zings to sell.</i>\"");
 }
 
 public function benoitsBuyMenu():void {
 	clearOutput();
-	if(flags[BENOIT_1] == 0) updateBenoitInventory();
-	if(flags[BENOIT_EXPLAINED_SHOP] == 0) buyOrSellExplanationFirstTime()
+	if(flags[kFLAGS.BENOIT_1] == 0) updateBenoitInventory();
+	if(flags[kFLAGS.BENOIT_EXPLAINED_SHOP] == 0) buyOrSellExplanationFirstTime()
 	else {
 		outputText("\"<i>Some may call zis junk,</i>\" says Benoit, indicating his latest wares.  \"<i>Me... I call it garbage.</i>\"");
 	}
 	outputText("\n\n<b><u>" + benoitMF("Benoit","Benoite") + "'s Prices</u></b>", false);
-	outputText("\n" + itemLongName(flags[BENOIT_1]) + ": " + 2*itemValue(flags[BENOIT_1]));
-	outputText("\n" + itemLongName(flags[BENOIT_2]) + ": " + 2*itemValue(flags[BENOIT_2]));
-	outputText("\n" + itemLongName(flags[BENOIT_3]) + ": " + 2*itemValue(flags[BENOIT_3]));
-	simpleChoices(flags[BENOIT_1],3789,flags[BENOIT_2],3790,flags[BENOIT_3],3791,"",0,"Back",3786);
+	outputText("\n" + itemLongName(flags[kFLAGS.BENOIT_1]) + ": " + 2*itemValue(flags[kFLAGS.BENOIT_1]));
+	outputText("\n" + itemLongName(flags[kFLAGS.BENOIT_2]) + ": " + 2*itemValue(flags[kFLAGS.BENOIT_2]));
+	outputText("\n" + itemLongName(flags[kFLAGS.BENOIT_3]) + ": " + 2*itemValue(flags[kFLAGS.BENOIT_3]));
+	simpleChoices(flags[kFLAGS.BENOIT_1],3789,flags[kFLAGS.BENOIT_2],3790,flags[kFLAGS.BENOIT_3],3791,"",0,"Back",3786);
 }
 
 public function benoitSellMenu():void {
@@ -111,12 +111,12 @@ public function benoitSellMenu():void {
 	var temp3:int = 0;
 	var temp4:int = 0;
 	var temp5:int = 0;
-	if(flags[BENOIT_EXPLAINED_SHOP] == 0) buyOrSellExplanationFirstTime()
+	if(flags[kFLAGS.BENOIT_EXPLAINED_SHOP] == 0) buyOrSellExplanationFirstTime()
 	else {
 		outputText("\"<i>Let us feel what you are trying to palm off upon me zis time, zen,</i>\" sighs Benoit, sitting down and opening his hand to you.");
 	}
 	var sellMod:int = 3;
-	if(flags[BENOIT_EGGS] > 0) sellMod = 2;
+	if(flags[kFLAGS.BENOIT_EGGS] > 0) sellMod = 2;
 	outputText("\n\n<b><u>" + benoitMF("Benoit","Benoite") + "'s Estimates</u></b>", false);
 	if(itemSlot1.quantity > 0 && int(itemValue(itemSlot1.shortName)/sellMod) > 0) {
 		outputText("\n" + int(itemValue(itemSlot1.shortName)/sellMod) + " gems for " + itemLongName(itemSlot1.shortName) + ".", false);
@@ -144,9 +144,9 @@ public function benoitSellMenu():void {
 
 public function benoitTransactBuy(slot:int = 1):void {
 	clearOutput();
-	if(slot == 1) shortName = flags[BENOIT_1];
-	else if(slot == 2) shortName = flags[BENOIT_2];
-	else shortName = flags[BENOIT_3];
+	if(slot == 1) shortName = flags[kFLAGS.BENOIT_1];
+	else if(slot == 2) shortName = flags[kFLAGS.BENOIT_2];
+	else shortName = flags[kFLAGS.BENOIT_3];
 	if(player.gems < 2 * itemValue(shortName)) {
 		outputText("You consider making a purchase, but you lack the gems to go through with it.");
 		doNext(benoitsBuyMenu);
@@ -166,7 +166,7 @@ public function benoitTransactBuy(slot:int = 1):void {
 public function benoitSellTransact(slot:int = 1):void {
 	clearOutput();
 	var sellMod:int = 3;
-	if(flags[BENOIT_EGGS] > 0) sellMod = 2;
+	if(flags[kFLAGS.BENOIT_EGGS] > 0) sellMod = 2;
 	if(benoitLover()) outputText("Benoit" + benoitMF("","e") + " gives your object the briefest of goings-over with " + benoitMF("his","her") + " fingers before stowing it away and handing over your gem reward with a trusting smile.");
 	else outputText("Following a painstaking examination of what you've given him with his hands and nose, Benoit grudgingly accepts it and carefully counts out your reward.");
 	var gems:int = 0;
@@ -222,54 +222,54 @@ public function benoitSellTransact(slot:int = 1):void {
 public function updateBenoitInventory():void {
 	temp = rand(8);
 	//Slot 1 Any one of the following: Incubus Draft, Minotaur Blood, Minotaur Cum, Equinuum, Black Pepper, Vitalitea, Scholar's Tea, Double Pepper
-	if(temp == 0) flags[BENOIT_1] = "IncubiD";
-	else if(temp == 1) flags[BENOIT_1] = "MinoBlo";
-	else if(temp == 2) flags[BENOIT_1] = "MinoCum";
-	else if(temp == 3) flags[BENOIT_1] = "Equinum";
-	else if(temp == 4) flags[BENOIT_1] = "BlackPp";
-	else if(temp == 5) flags[BENOIT_1] = "Smart T";
-	else if(temp == 6) flags[BENOIT_1] = "Vital T";
-	else flags[BENOIT_1] = "DblPepp";
+	if(temp == 0) flags[kFLAGS.BENOIT_1] = "IncubiD";
+	else if(temp == 1) flags[kFLAGS.BENOIT_1] = "MinoBlo";
+	else if(temp == 2) flags[kFLAGS.BENOIT_1] = "MinoCum";
+	else if(temp == 3) flags[kFLAGS.BENOIT_1] = "Equinum";
+	else if(temp == 4) flags[kFLAGS.BENOIT_1] = "BlackPp";
+	else if(temp == 5) flags[kFLAGS.BENOIT_1] = "Smart T";
+	else if(temp == 6) flags[kFLAGS.BENOIT_1] = "Vital T";
+	else flags[kFLAGS.BENOIT_1] = "DblPepp";
 	
 	//If the player discarded a unique item, the first time they arrive at the Salvage Shop after a week has passed it will appear in Slot 1.
 	if(rand(10) == 0) {
-		flags[BENOIT_1] = "GodMead";
+		flags[kFLAGS.BENOIT_1] = "GodMead";
 	}
 	
 	//Slot 2 Any one of the following: Succubus Milk, Whisker Fruit, Wet Cloth, Golden Seed, LaBova, Snake Oil, Pink Gossamer, Black Gossamer
 	temp = rand(7);
-	if(temp == 0) flags[BENOIT_2] = "SucMilk";
-	else if(temp == 1) flags[BENOIT_2] = "W.Fruit";
-	else if(temp == 2) flags[BENOIT_2] = "WetClth";
-	else if(temp == 3) flags[BENOIT_2] = "GldSeed";
-	else if(temp == 4) flags[BENOIT_2] = "LaBova ";
-	else if(temp == 5) flags[BENOIT_2] = "SnakOil";
-	else if(temp == 6) flags[BENOIT_2] = "S.Gossr";
-	else flags[BENOIT_2] = "B.Gossr";
+	if(temp == 0) flags[kFLAGS.BENOIT_2] = "SucMilk";
+	else if(temp == 1) flags[kFLAGS.BENOIT_2] = "W.Fruit";
+	else if(temp == 2) flags[kFLAGS.BENOIT_2] = "WetClth";
+	else if(temp == 3) flags[kFLAGS.BENOIT_2] = "GldSeed";
+	else if(temp == 4) flags[kFLAGS.BENOIT_2] = "LaBova ";
+	else if(temp == 5) flags[kFLAGS.BENOIT_2] = "SnakOil";
+	else if(temp == 6) flags[kFLAGS.BENOIT_2] = "S.Gossr";
+	else flags[kFLAGS.BENOIT_2] = "B.Gossr";
 	
 	//There is a 4% chance the following items will appear in Slot 2: Bimbo Liqueur, Large Pink Egg, Large Blue Egg, Bro Brew, T. Shark Tooth.
 	if(rand(100) < 4) {
 		temp = rand(5);
-		if(temp == 0) flags[BENOIT_2] = "BimboLq";
-		else if(temp == 1) flags[BENOIT_2] = "L.PnkEg";
-		else if(temp == 2) flags[BENOIT_2] = "L.BluEg";
-		else if(temp == 3) flags[BENOIT_2] = "BroBrew";
-		else flags[BENOIT_2] = "TSTooth";
+		if(temp == 0) flags[kFLAGS.BENOIT_2] = "BimboLq";
+		else if(temp == 1) flags[kFLAGS.BENOIT_2] = "L.PnkEg";
+		else if(temp == 2) flags[kFLAGS.BENOIT_2] = "L.BluEg";
+		else if(temp == 3) flags[kFLAGS.BENOIT_2] = "BroBrew";
+		else flags[kFLAGS.BENOIT_2] = "TSTooth";
 	}
 	
 	//Slot 3 Any one of the following: Maid's Clothes, Wizard Robes, Tough Silk, Slutty Swimwear, Goo Chunk, Chitin Plate
 	temp = rand(5);
-	if(temp == 0) flags[BENOIT_3] = "W.Robes";
-	else if(temp == 1) flags[BENOIT_3] = "T.SSilk";
-	else if(temp == 2) flags[BENOIT_3] = "S.Swmwr";
-	else if(temp == 3) flags[BENOIT_3] = "GreenGl";
-	else flags[BENOIT_3] = "B.Chitn";
+	if(temp == 0) flags[kFLAGS.BENOIT_3] = "W.Robes";
+	else if(temp == 1) flags[kFLAGS.BENOIT_3] = "T.SSilk";
+	else if(temp == 2) flags[kFLAGS.BENOIT_3] = "S.Swmwr";
+	else if(temp == 3) flags[kFLAGS.BENOIT_3] = "GreenGl";
+	else flags[kFLAGS.BENOIT_3] = "B.Chitn";
 	
 	if(rand(10) == 0) {
 		//There is a 10% chance the following items will appear in Slot 3: Bondage Straps, Nurse Outfit, Red Party Dress
 		temp = rand(2);
-		if(temp == 0) flags[BENOIT_3] = "BonStrp";
-		else flags[BENOIT_3] = "NurseCl";
+		if(temp == 0) flags[kFLAGS.BENOIT_3] = "BonStrp";
+		else flags[kFLAGS.BENOIT_3] = "NurseCl";
 	}
 	//Slot 4 Herbal Contraceptive - 30 gems.  Only becomes available through PC fem path.  Reduces fertility by 90% for a week if taken.
 }
@@ -279,13 +279,13 @@ public function updateBenoitInventory():void {
 public function talkToBenoit():void {
 	clearOutput();
 	//(+5 Affection per day if used)
-	if(flags[BENOIT_TALKED_TODAY] == 0) {
-		flags[BENOIT_TALKED_TODAY] = 1;
+	if(flags[kFLAGS.BENOIT_TALKED_TODAY] == 0) {
+		flags[kFLAGS.BENOIT_TALKED_TODAY] = 1;
 		benoitAffection(5);
 	}
 	//Basilisk Womb
 	//Requires: Had sex with Benoit at least twice, have vagina, select talk
-	if(((flags[BENOIT_TIMES_SEXED_FEMPCS] > 2 && player.inte >= 60 && flags[BENOIT_WOMB_TALK_UNLOCKED] == 0) || flags[BENOIT_TIMES_SEXED_FEMPCS] == 2) && player.hasVagina()) {
+	if(((flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] > 2 && player.inte >= 60 && flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 0) || flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] == 2) && player.hasVagina()) {
 		outputText("You ask Benoit if he has ever thought about trying to do something to help his people's plight.");
 		
 		outputText("\n\nThe basilisk is silent for a time, running his claws along the counter pensively.  \"<i>Yes,</i>\" he says eventually, in a quiet tone.  \"<i>I 'ave.  Away from ze mountains, I 'ave 'ad time to sink.  I am not ze demons' slave anymore, and I am a funny joke of a basilisk anyway, so I 'ave often thought about... making certain zacrifices.  If we 'ad just one female, away from zeir corruption, zen...</i>\" he trails off, sighing heavily before smiling ruefully at you.  \"<i>Zose were ze kind of soughts I 'ad before I met you.  Crazy, yes?  Even more crazy to be still sinking zem when a good woman is giving me 'er love for no reason except through ze kindness of 'er 'art.  Still... it is so frustrating, being able to sink clearly about zese sings and not being able to do anysing about it.</i>\"");
@@ -294,7 +294,7 @@ public function talkToBenoit():void {
 			outputText("\n\nYour mind wanders.  You doubt that even if you wanted to you could turn into a basilisk proper, but you wonder if there's some kind of transformation that would allow a human womb to mimic that of another race.");
 			outputText("\n\nBenoit answers warily.  \"<i>A double dose of ovi-elixer, a bottle of reptilum, goblin ale and some basilisk blood would probably do... if you were so minded.  But, [name], tell me you're not going to do somesing so reckless as experiment on your body?</i>\"");
 			//toggle on "Bas. Womb" from benoit's main menu.
-			flags[BENOIT_WOMB_TALK_UNLOCKED] = 1;
+			flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] = 1;
 			outputText("\n\n(<b>Basilisk Womb option enabled in Benoit's menu!</b>)");
 		}
 		else {
@@ -304,8 +304,8 @@ public function talkToBenoit():void {
 		doNext(13);
 	}
 	//First time Talk: 
-	else if(flags[BENOIT_TALKED_TO_PROPERLY] == 0) {
-		flags[BENOIT_TALKED_TO_PROPERLY]++;
+	else if(flags[kFLAGS.BENOIT_TALKED_TO_PROPERLY] == 0) {
+		flags[kFLAGS.BENOIT_TALKED_TO_PROPERLY]++;
 		outputText("You take a moment to look the strange merchant over.  Although blind, he doesn't seem very old - he retains the tight, thin muscular frame of other basilisks you've seen, but looks to be slightly shorter and for all his proud, cruel profile seems slightly shabby around the edges.  In what is presumably a nod towards civilized manners, he is wearing a pair of denim long johns as well as his fez, perched upon one of his head spines.  You introduce yourself, and then decide to ask him about basilisks.");
 		
 		outputText("\n\n\"<i>We were a proud race once,</i>\" sighs Benoit.  \"<i>A noble race, who carried our 'eads 'igh, and...</i>\" the blind basilisk bursts into throaty laughter, which eventually subsides into a coughing fit.  You watch, bemused.  \"<i>Hahaha!  Aha.  Sorry.  No, we were always a race of egg-thieving bastards.  The lizans,</i>\" he flicks his snout in the general direction of the bonfire with disdain, \"<i>absolutely 'ate us.  Zey drove us to live in ze mountains, far away from zeir precious clutches, to live like savages.  'Ze family with ze evil eye over it', zat's what zey call us.  Eh... in basilisk it's more snappy.</i>\"  Benoit pauses, running his fingers over the counter ruminatively.  \"<i>But it wasn't so bad, up zair.  We kept ze harpies under control, and we collected scrap, sold it to zose who were brave enough to trade blindfolded.  We've always been good at zat.  Zen ze demons came to ze mountains.</i>\"");
@@ -374,7 +374,7 @@ public function talkToBenoit():void {
 		else if(choice == 6) {
 			outputText("You ask " + benoitMF("Benoit","Benoite") + " for any rumours going around.");
 			//[Deep cave cleared: 
-			if(flags[DEFEATED_ZETAZ] > 0) outputText("\n\n\"<i>Somesing strange did 'appen ze uzzer day, now you mention it,</i>\" " + benoitMF("he","she") + " says, tapping a curved tooth.  \"<i>I got a big group of imps in ere.  I normally don't serve zem because zey are always stealing sings whilst one of zem is paying, but zese guys seemed too worked up to even sink about lifting ze shop - zey smelt of fear.  Zey were buying lots of food and survival gear - one of zem kept going on and on about ze fact zey left \"<i>ze fairy</i>\" behind, until one of ze uzzers slapped 'im and said if 'ee didn't shut up, 'ee would be ze fairy.</i>\"  " + benoitMF("Benoit","Benoite") + " shrugs.  \"<i>Nasty little sings.  Tasty, though.</i>\"");
+			if(flags[kFLAGS.DEFEATED_ZETAZ] > 0) outputText("\n\n\"<i>Somesing strange did 'appen ze uzzer day, now you mention it,</i>\" " + benoitMF("he","she") + " says, tapping a curved tooth.  \"<i>I got a big group of imps in ere.  I normally don't serve zem because zey are always stealing sings whilst one of zem is paying, but zese guys seemed too worked up to even sink about lifting ze shop - zey smelt of fear.  Zey were buying lots of food and survival gear - one of zem kept going on and on about ze fact zey left \"<i>ze fairy</i>\" behind, until one of ze uzzers slapped 'im and said if 'ee didn't shut up, 'ee would be ze fairy.</i>\"  " + benoitMF("Benoit","Benoite") + " shrugs.  \"<i>Nasty little sings.  Tasty, though.</i>\"");
 			//[Factory not cleared: 
 			else if(player.hasStatusAffect("DungeonShutDown") < 0) outputText("\n\n\"<i>Not anysing very interesting,</i>\" " + benoitMF("he","she") + " shrugs.  \"<i>I get a few customers from ze desert city, Tel'Adre, coming in 'ere in secret to pick up a few sings zey cannot find back 'ome.  So zey are still a sing.  You 'ave to wonder ow much longer zey can keep hiding, though.</i>\"");
 			else {
@@ -447,7 +447,7 @@ public function talkToBenoit():void {
 //Requires: PC has oviposition/ovi-elixered/in heat, Affection 35+
 public function benoitAndFemPCTalkAboutEggings():void {
 	clearOutput();
-	flags[BENOIT_SUGGEST_UNLOCKED] = 1;
+	flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] = 1;
 	outputText("Benoit seems very on edge today.  He paces up and down, returns your greeting with a stiff nod, and fiddles endlessly with the stock in reach of his counter as you search for a topic.  You ask if there's something wrong.");
 	
 	outputText("\n\n\"<i>Nuzzing!</i>\" he barks angrily.  He coughs.  \"<i>Nussing,</i>\" he says in a calmer tone.  You wait.  \"<i>It's just... ze way your body is right now,</i>\" he says eventually.  \"<i>It...speaks to me.  But zis is my problem,</i>\" he goes on, straightening his neck and nervously tapping his claws on the counter. \"<i>And I am not myself if I cannot control myself.  Please, [name], ask your questions.</i>\" You look at the sad, proud basilisk and wonder when exactly the last time he got laid was.");
@@ -458,11 +458,11 @@ public function benoitAndFemPCTalkAboutEggings():void {
 //Suggest: 
 public function eggySuggest():void {
 	clearOutput();
-	if(flags[BENOIT_TESTED_BASILISK_WOMB] == .5) {
+	if(flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == .5) {
 		suggestSexAfterBasiWombed(true);
 		return;
 	}
-	if(flags[BENOIT_TIMES_SEXED_FEMPCS] > 0) {
+	if(flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] > 0) {
 		if(player.isTaur()) {
 			outputText("You silently reach across the counter to squeeze his hands again.  Benoit grins with deep affection at you and, hand in hand, the two of you quietly debunk to the store room again.");
 			outputText("\n\nOnce again, you carefully inch your blind charge to a clear cranny and push him against a wooden wall, standing back to slowly peel off your [armor].  You grin as you ostentatiously drop each piece onto the packed earth, allowing him to guess what it is by the sound it makes.  His breathing comes heavier as your undergarments make a feathery sound as they fall.  As you take his hands and lay them upon your naked skin, you think about how you want to go about this.");
@@ -475,7 +475,7 @@ public function eggySuggest():void {
 		simpleChoices("Let Him",repeatSexWithBenoitLetHim,"Take Charge",repeatBenoitFuckTakeCharge,"",0,"",0,"",0);
 		return;
 	}
-	flags[BENOIT_TIMES_SEXED_FEMPCS]++;
+	flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS]++;
 	if(player.isTaur()) {
 		//Suggest: 
 		outputText("You reach your fingers across the counter and lightly touch Benoit's hands, saying you don't mind working out a few natural urges, if he's in the mood.");
@@ -612,7 +612,7 @@ public function dontTakeEggtraceptives():void {
 public function firstTimeAfterBoningEncounterBenoit():void {
 	clearOutput();
 	//Set a flag here to make sure it only happens once.
-	flags[BENOIT_POST_FIRSTFUCK_TALK] = 1;
+	flags[kFLAGS.BENOIT_POST_FIRSTFUCK_TALK] = 1;
 	outputText("A strange, faint noise is emanating from the salvage shop.  It's only when you duck cautiously into the stall proper that you realise it's the sound of a basilisk humming.  Benoit stops to sniff the air when you come in, immediately puts down the mug he is polishing, and beckons you inside.");
 	
 	outputText("\n\n\"<i>'Allo again, [name]</i>\"!</i>\" he says brightly.  \"<i>'Ow pleasant it is to see you.  'Ow are we zis very fine day?</i>\"  There's something imperceptibly different about Benoit today and it takes you a moment to work out what it is.  He doesn't seem quite as shabby as he did before; his scales gleam dully and you wonder if he's taken a bath recently.  There's something else, too.");
@@ -672,7 +672,7 @@ public function repeatSexWithBenoitLetHim():void {
 		
 		outputText("\n\n\"<i>Zat was... wow,</i>\" he manages.  With his dick wrung of every last drop of his seed you can see he is returning to himself, and his hand on your shoulder is cautious.  \"<i>Was zat...alright for you?  I do not know if... I get zese smells in my 'ead and zen...</i>\"  You answer him by kissing him on the cheek and saying with teasing huskiness that it was good, but perhaps next time he shouldn't hold back so much.  He grins at this.  You spend a bit more time cuddling whilst recovering from the intense fuck, before finally clambering to your feet.  Your final act before dressing and taking your leave is to dip a lazy finger into your cunt and faintly brush your scent across Benoit's nose again, telling him you expect him to be ready and primed the next time this naughty girl pays a visit.  He doesn't respond - maybe he is still privately ashamed about losing his cool over you - but you can tell by the lines of his face and the way his head moves unconsciously to follow your path out of his shop that him not being aroused by you isn't something you're ever going to have to worry about.");
 	}
-	flags[BENOIT_TIMES_SEXED_FEMPCS]++;
+	flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS]++;
 	benoitKnocksUpPCCheck();
 	benoitAffection(2);
 	stats(0,0,0,0,0,0,-100,0);
@@ -758,7 +758,7 @@ public function repeatBenoitFuckTakeCharge():void {
 	}
 	benoitKnocksUpPCCheck();
 	benoitAffection(2);
-	flags[BENOIT_TIMES_SEXED_FEMPCS]++;
+	flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS]++;
 	stats(0,0,0,0,0,0,-100,0);
 	doNext(13);
 }
@@ -799,7 +799,7 @@ public function tryToConvertToBassyWomb():void {
 		outputText("\n\n\"<i>Really?</i>\"  The basilisk is off his feet and around the counter faster than you gave him credit for.  \"<i>You are not just high from ze goblin ale?</i>\"  He holds you around the waist and breathes you in slowly.  \"<i>You...you are not joking.</i>\"  He sounds shell-shocked.  \"<i>You really did it.  You...really did mean to do zis.</i>\"");
 		
 		//put some tag here to track dis shit.
-		flags[BENOIT_TESTED_BASILISK_WOMB] = .5;
+		flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] = .5;
 		
 		//[Lust 30 or more: 
 		if(player.lust >= 33) {
@@ -863,7 +863,7 @@ public function suggestSexAfterBasiWombed(later:Boolean = true):void {
 		
 		outputText("\n\n“Bring ze eggs ere,” he says huskily.  “Owever zey turn out, I would be honoured to raise ze shildren of such a woman as you.”  You give him a playful punch and say he may regret those words when he's got a dozen tiny scaly yous tearing up his shop.  You part and take your leave, his hoarse, slightly scared laughter in your ears.");
 	}
-	flags[BENOIT_TESTED_BASILISK_WOMB] = 1;
+	flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] = 1;
 	benoitKnocksUpPCCheck();
 	//(Oviposition perk added)
 	player.createPerk("Basilisk Womb",0,0,0,0);
@@ -901,13 +901,13 @@ public function popOutBenoitEggs():void {
 	outputText("\n\n\"<i>What is it?!</i>\" he snarls, displaying his fangs when he pops his head irritably out of the door.  He stops and inhales through his nose, starting lightly when he recognizes your scent.  \"<i>Oops!  [name], I am zo sorry, I did not think it would be you.  But why are you here at such an early hour?</i>\"");
 	
 	outputText("\n\nYou smile at your blind lover and tell him that he's a father");
-	if(flags[BENOIT_EGGS] > 0) outputText(" once more");
+	if(flags[kFLAGS.BENOIT_EGGS] > 0) outputText(" once more");
 	outputText(".  Well, he will be when this ");
-	if(flags[BENOIT_EGGS] > 0) outputText("latest ");
+	if(flags[kFLAGS.BENOIT_EGGS] > 0) outputText("latest ");
 	outputText("clutch hatches, anyway.");
 	
 	//First Time: 
-	if(flags[BENOIT_EGGS] == 0) {
+	if(flags[kFLAGS.BENOIT_EGGS] == 0) {
 		outputText("\n\nHe beams with joy, then looks confused.  \"<i>But... why have you brought zem 'ere?</i>\" he questions.");
 		
 		outputText("\n\nYou explain that you don't feel your camp is safe enough to keep them there, and Benoit nods.  \"<i>Yes, I can see your point... come, give zem 'ere, and I shall look after them for ze both of us.</i>\"");
@@ -928,7 +928,7 @@ public function popOutBenoitEggs():void {
 	stats(0,0,0,0,0,0,-100,0);
 	player.pregnancyIncubation = 0;
 	player.pregnancyType = 0;
-	flags[BENOIT_EGGS] += Math.floor(player.totalFertility() / 10);
+	flags[kFLAGS.BENOIT_EGGS] += Math.floor(player.totalFertility() / 10);
 	//doNext(1);
 }
 

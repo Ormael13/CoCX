@@ -299,13 +299,13 @@
 		choice6 = 11075;
 		text6 = "Leave";
 		//Zetaz gone?  Alchemist shits!
-		if(flags[DEFEATED_ZETAZ] > 0) {
-			if(flags[ZETAZ_LAIR_DEMON_VENDOR_PRESENT] == 0) {
+		if(flags[kFLAGS.DEFEATED_ZETAZ] > 0) {
+			if(flags[kFLAGS.ZETAZ_LAIR_DEMON_VENDOR_PRESENT] == 0) {
 				outputText("\n\nThere's a demon lazing around outside the cave entrance.  Judging by his size and apparent gender, he must be an incubus.  You try to stay hidden for now, but all he's doing is throwing darts at a dartboard he's set up across the way from himself.  What kind of demon sits around playing darts?", false);
 				text1 = "Investigate";
 				choice1 = 2639;
 			}
-			else if(flags[ZETAZ_LAIR_DEMON_VENDOR_PRESENT] > 0) {
+			else if(flags[kFLAGS.ZETAZ_LAIR_DEMON_VENDOR_PRESENT] > 0) {
 				outputText("\n\nThe incubus known as Sean has set up a small stall around the cave entrance, and is busy tending to his shelves and wares.  He's dressed in an incredibly modest, three-piece suit, and nods to you as you approach, \"<i>Let me know if you want to buy anything.  I haven't done much with the cave, so feel free to poke around if you missed anything on your first pass.  I barely use the first room.</i>\"", false);
 				text3 = "Shop";
 				choice3 = 2642;
@@ -326,7 +326,7 @@
 		outputText("<b><u>Gathering Hall</u></b>\n", true);
 		outputText("This room is clearly some kind of dining or gathering hall.  The chamber's shape has been hewn from the surrounding stone, and judging by the visible tool-marks, it wasn't done with a great deal of care.  Two long wooden tables fill out the room.  They're surprisingly well made, though it appears that part of their legs were hacked off with axes to lower their overall height.  You can't help but wonder where they were stolen from.  The tables haven't been cleaned in ages, as evidenced by their many stains and a number of half-rotten bones that still rest on their battered surfaces.  Two rows of crudely crafted chairs flank their better-made brethren, made to accommodate very short beings.", false);
 		//[Imp Mob Fight]
-		if(flags[ZETAZ_IMP_HORDE_DEFEATED] == 0) {
+		if(flags[kFLAGS.ZETAZ_IMP_HORDE_DEFEATED] == 0) {
 			outputText("\n\nThe place is swarming with two dozen imps, and none of them look happy to see you.  A number of them take flight while the rest form a ring around you, trapping you!  It looks like you'll have to fight your way out!", false);
 			text1 = "FIGHT!";
 			choice1 = 11074;
@@ -344,7 +344,7 @@
 	}
 	if(roomNo == 13) {
 		outputText("<b><u>Fungus Cavern</u></b>\n", true);
-		if(flags[ZETAZ_FUNGUS_ROOM_DEFEATED] == 0) {
+		if(flags[kFLAGS.ZETAZ_FUNGUS_ROOM_DEFEATED] == 0) {
 			outputText("This cavern is huge!  Though you can see the edge of a large stalactite to the west, the rest of the cave disappears into darkness beyond twenty or thirty feet away.  The floor is covered in spongy, leaf-shaped fungus.  They're huge, shiny, and purple, and they cover the cavern floor for as far as the illumination will reach.  A strange, sweet smell hangs in the cavern's humid air, probably coming from the copious fungal flora.  At the edge of your vision you can see a humanoid skeleton propped up against a stalagmite.  There's a rapier laying a few feet in front of it, and it still looks as good as new.  What do you do?", false);
 			//[Get It] [Fly-Get It]
 			text2 = "East";
@@ -368,10 +368,10 @@
 		outputText("<b><u>Filthy Torture Room</u></b>\n", true);
 		outputText("You step into a dank room, outfitted somewhere between a prison cell and a torture chamber. The ceiling of the sulfur-lined room is hung with an inventive variety of shackles, chains, and devices whose intent are not clear to you. Against the north wall, there appears to be an alchemy lab, laden with a dizzying collection of vials, flasks, and beakers. Against the south, there is a long, sinister-looking wooden rack bearing a sequence of progressively larger and thicker devices, carved to resemble monstrous cocks.  ", false);
 		//Vala here?
-		if(flags[FREED_VALA] == 0) {
+		if(flags[kFLAGS.FREED_VALA] == 0) {
 			spriteSelect(85);
 			//Not yet defeated zetaz
-			if(flags[DEFEATED_ZETAZ] == 0) {
+			if(flags[kFLAGS.DEFEATED_ZETAZ] == 0) {
 				//Intro:
 				outputText("", true);
 				outputText("In the far corner, there is a small woman, her back to you, hanging limply by manacles that keep her suspended in a half-kneel. Rich purple hair hangs in long, clumped strands that sparkle occasionally with a pink glitter. Above her, there is a tarnished bronze nameplate that you think reads 'Vala,' but it's impossible to tell for sure under all the imp graffiti. She does not seem to be conscious.\n\n", false);
@@ -413,10 +413,10 @@
 		outputText("<b><u>Secret Tunnel</u></b>\n", true);
 		outputText("This passage is the least livable area that you've seen out of the entire cave.  The walls and floor are little more than dirt and rocks, and explosions of dust burst from the ceiling with each tentative movement you make.  For a moment, a wave of claustrophobia threatens to rob you of your nerve, but you blink the pervasive particles from your eyes and focus on why you're here.  ", false);
 		//If zetaz not yet defeated
-		if(flags[DEFEATED_ZETAZ] == 0) outputText("You're going to find Zetaz and pay him back for drugging you on your first day here.  ", false);
+		if(flags[kFLAGS.DEFEATED_ZETAZ] == 0) outputText("You're going to find Zetaz and pay him back for drugging you on your first day here.  ", false);
 		outputText("A crude door on the southern edge of the tunnel leads back to imp's sleeping chambers, but the tunnel continues away, curving sharply to the west where a far more lavish door marks the far side of the subterranean passage.", false);
 	
-		if(flags[ZETAZ_LAIR_TOOK_BONDAGE_STRAPS] == 0) {
+		if(flags[kFLAGS.ZETAZ_LAIR_TOOK_BONDAGE_STRAPS] == 0) {
 			outputText("\n\nA pair of fetishy, discarded straps lies on the floor, half obscured by dust.  It looks like something a goblin would wear.  Sexy!", false);
 			text3 = "B.Straps";
 			choice3 = 2638;
@@ -432,13 +432,13 @@
 	if(roomNo == 16) {
 		outputText("<b><u>Zetaz's Chambers</u></b>\n", true);
 		outputText("You've stepped into the most lavish room in the entire cave system, and marvel at the difference between this magnificent abode and your own crudely constructed campsite.  The stone walls are covered in stolen tapestries that each look to have been liberated from a unique source.  Judging by the variety of depictions and art styles in this one room, you've barely met a fraction of the races that once inhabited the lands of Mareth.  A pair of bright, smokeless lanterns hang from each wall, lit from within by obviously magical spheres of luminescence.  Various pieces of stolen furniture decorate the room, surrounding a four-post bed decorated with masterfully done carvings of various carnal acts.", false);
-		if(flags[ZETAZ_DOOR_UNLOCKED] == 0) {
+		if(flags[kFLAGS.ZETAZ_DOOR_UNLOCKED] == 0) {
 			outputText("  <b>There's a bolt holding a door to the south closed, but you give it a gentle tug and it comes unlocked.</b>", false);
-			flags[ZETAZ_DOOR_UNLOCKED] = 1;
+			flags[kFLAGS.ZETAZ_DOOR_UNLOCKED] = 1;
 		}
 		outputText("\n\n", false);
 		
-		if(flags[DEFEATED_ZETAZ] == 0) {
+		if(flags[kFLAGS.DEFEATED_ZETAZ] == 0) {
 			outputText("A familiar imp is looking at you with a bewildered expression painted across his face.  You recognize his face immediately – this is Zetaz!  Oddly, he seems to have grown much larger in the time since your previous meeting.  He's over four feet tall and much more solidly built!\n\n", false);
 			outputText("Zetaz whines, \"<i>Seriously?  You show up here!?  First you make me lose my job, and now you beat up my friends and track dirt in my bedroom!?  I've had enough!</i>\"", false);
 			startCombat(31);
@@ -458,7 +458,7 @@
 		//Room Description:
 		outputText("You stand in what might have been a guard room once upon a time.  Now it is a ruined, ransacked mess.  It seems not to have been used in years, and the table, chairs, and spears lined up against the wall have all rotted away to almost nothing.");
 		//[If Armor has not been taken/fought with: 
-		if(flags[WON_GOO_ARMOR_FIGHT] + flags[LOST_GOO_ARMOR_FIGHT] == 0) {
+		if(flags[kFLAGS.WON_GOO_ARMOR_FIGHT] + flags[kFLAGS.LOST_GOO_ARMOR_FIGHT] == 0) {
 			outputText("  However, a suit of half-plate armor has been left up against the eastern wall, hanging loosely on a rack; it seems to be in usable shape.");
 			text4 = "Armor";
 			choice4 = 11096;
@@ -477,8 +477,8 @@
 		if(player.tallness < 60) outputText("just enough room to stand up in");
 		else outputText("a ceiling so low you have to crouch");
 		outputText(".  To your surprise, nothing horrifying jumps out and tries to rape you.  You see a few horns of mead slung up in a wine rack - they smell a bit pungent, but alcohol improves with age they say...");
-		if(flags[HEL_DUNGEON_MEAD_LOOTED] < 5) {
-			outputText("(There are " + (5-flags[HEL_DUNGEON_MEAD_LOOTED]) + "x God's Mead horns here to take.)\n\n");
+		if(flags[kFLAGS.HEL_DUNGEON_MEAD_LOOTED] < 5) {
+			outputText("(There are " + (5-flags[kFLAGS.HEL_DUNGEON_MEAD_LOOTED]) + "x God's Mead horns here to take.)\n\n");
 			text4 = "God'sMead";
 			choice4 = 11097;
 		}
@@ -491,7 +491,7 @@
 		//Room 3: Stair Well
 		outputText("<b><u>Stair Well</u></b>\n", true);
 		//(Upon clicking in:)
-		if(flags[HEL_HARPIES_DEFEATED] == 0) {
+		if(flags[kFLAGS.HEL_HARPIES_DEFEATED] == 0) {
 			outputText("You open the heavy double doors and cringe as a loud \"<i>SCREECH!</i>\" echoes out and up the next room - a wide open stairwell, it seems, with minimal cover.  The perfect place for a harpy to fight... Oh, shit!");
 			outputText("\n\nYou ready your [weapon] as a wing of harpies looks up from eating at a small table in the center of the stone stairwell, all staring at you with wide, astonished eyes.  Another few harpies peer down from above, poking their heads down the stairs to get a look at the intruder.  Almost in unison, they jump to their feet and bare their claws.");
 			outputText("\n\nIt's a fight!");
@@ -500,7 +500,7 @@
 			return;
 		}
 		else {
-			if(flags[HEL_HARPY_QUEEN_DEFEATED] == 0) {
+			if(flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] == 0) {
 				outputText("There's a pile of drugged, unconscious harpies you've already defeated on the floor, as well as Kiri, the only one that didn't attack you.  You recall that she knows Hel and is here to help the both of you.");
 				//(Display Options: [Talk] [Sex] [Valeria](If Encountered) [Go Upstairs] [Go Downstairs])
 				var valeria:Number = 0;
@@ -533,7 +533,7 @@
 		clearOutput();
 		outputText("<b><u>Dungeon</u></b>\n", true);
 		//(Intro -- Before Fight)
-		if(flags[HEL_BRIGID_DEFEATED] == 0) {
+		if(flags[kFLAGS.HEL_BRIGID_DEFEATED] == 0) {
 			outputText("You make your way downstairs into a small, smoky stone room.  A thick smell of steam and burnt meat hangs over the room, making you cough as you descend the stairs.  As you make your way into the tower's little dungeon, you quickly notice the salamander chained to a table.  He's a great big man, nearly eight feet tall and covered in scars.  He has short, spiky red hair, the same color as his tail and limb scales, and a black eyepatch covers his left socket.  He looks like hell, emaciated and exhausted, covered in thick cum-stains from being used an untold number of times by the harpies of the tower.");
 			outputText("\n\nBeside him, though, is the tallest harpy you've ever seen.  A foot over most of her sisters, she stands stark naked save for a red-hot iron poker in her hand and a heavy iron shield in the other.  Her pink hair is shaved down to a mohawk, and her face is covered with a dozen iron studs and rings.");
 			outputText("\n\n\"<i>Bout time you made it down here, you " + player.mf("bastard","bitch") + ".  Mama Brigid's been waiting a loooong time for someone to try and break out one of her toys.</i>\"  She pats the hefty keyring on the underside of her shield and leers at you.");
@@ -544,7 +544,7 @@
 		}
 		else {
 			outputText("You're standing in a small dungeon room, nearly gagging on the smells of burnt meat and smoke.  A number of nasty torture devices hang on the walls, and a table sits in the middle of the room, ");
-			if(flags[HEL_PC_TALKED_WITH_HAKON] == 0) {
+			if(flags[kFLAGS.HEL_PC_TALKED_WITH_HAKON] == 0) {
 				outputText("on which the salamander prisoner lies");
 				text4 = "Prisoner";
 			}
@@ -567,7 +567,7 @@
 		clearOutput();
 		outputText("<b><u>Mezzanine</u></b>\n", true);
 		//(Intro; Before Battle)
-		if(flags[HEL_PHOENIXES_DEFEATED] == 0) {
+		if(flags[kFLAGS.HEL_PHOENIXES_DEFEATED] == 0) {
 			outputText("You ascend the heavy stone steps, circling the tower's walls as you ascend.  You are stopped perhaps half-way to the second main floor on a small terrace level with a wide open view overlooking the vale beneath the high mountains.  As you step onto the mezzanine, you watch with a scowl as a number of tall, muscular hermaphrodites step out from the shadows.  Each is clad in heavy chainmail and wields a scimitar and a blood-red shield, but is otherwise nude, revealing their reptilian pricks and slick pussies.  The soldiers standing before you look like harpies, but they have scaled, humanoid legs, long, fiery tails and their wings are the darkest crimson.  These are phoenixes - the dread half-breed warriors you and Hel are here to stop!");
 			startCombat(50);
 			doNext(1);
@@ -589,7 +589,7 @@
 		clearOutput();
 		outputText("<b><u>Throne Room</u></b>\n");
 		//Throne Room Descript (Before Combat!)
-		if(flags[HEL_HARPY_QUEEN_DEFEATED] == 0) {
+		if(flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] == 0) {
 			outputText("Ascending the stairs, you are stopped by a pair of heavy double doors.  They're covered with rotting, chipped purple paint and laurels that look years old.  The sharp, screeching sounds of metal on metal ring out in the next room - the sounds of a fight!  You kick the door open, and charge into what must be some kind of throne room; a large carpet dominates your view, leading up to a towering throne surrounded by pillows and cushions, currently vacant.");
 
 			outputText("\n\nIn the center of the throne room stand Helia the Salamander and a harpy that could only be described as a broodmother.  She isn't particularly tall or menacing looking, but her hips are truly inhuman, thrice as wide as she is at the least, and her pillowy ass seems canyon-like in her nudity, the type of butt you could lose yourself in forever.  The harpy matron, wielding a staff, is currently locked in a fierce battle against Hel's red-hot scimitar.");
@@ -619,7 +619,7 @@
 			//Room Description:
 			outputText("You stand in the harpy throne room - a long, circular room dominated by a high throne surrounded by cushions and drapes.  A single long carpet flows from the heavy double doors to the throne, reminding you of a castle's great hall in days gone by.  A number of harpies cower in the shadows, afraid to oppose you further now that their mighty leader is defeated.");
 			//[if PC hasn't executed the queen: 
-			if(flags[HARPY_QUEEN_EXECUTED] == 0) {
+			if(flags[kFLAGS.HARPY_QUEEN_EXECUTED] == 0) {
 				text5 = "Harpy Queen";
 				choice5 = 11118;
 				outputText("  The Harpy Queen slumps in her throne, insensate.");
@@ -627,11 +627,11 @@
 			//(Display Options: [Helia] [Harpy Queen] [Go Downstairs])
 			text8 = "Downstairs";
 			choice8 = 11088;
-			if(flags[HARPY_QUEEN_EXECUTED] == 0) {
+			if(flags[kFLAGS.HARPY_QUEEN_EXECUTED] == 0) {
 				text4 = "Helia";
 				choice4 = 11119;
 			}
-			if(flags[HARPY_QUEEN_EXECUTED] == 1 && flags[TOOK_QUEEN_STAFF] == 0) {
+			if(flags[kFLAGS.HARPY_QUEEN_EXECUTED] == 1 && flags[kFLAGS.TOOK_QUEEN_STAFF] == 0) {
 				text5 = "Take Staff";
 				choice5 = 11132;
 			}
@@ -640,22 +640,22 @@
 	if(roomNo == 23) {
 		clearOutput();
 		outputText("<b><u>Strange Gateway in the Sands</u></b>\n");
-		if(flags[SANURA_DISABLED] > 0) {
+		if(flags[kFLAGS.SANURA_DISABLED] > 0) {
 			outputText("Just ahead, in one of the larger dunes, is a square stone doorway, built into the side of a large, sparkling mountain of sand.  You never would have noticed it if the sun hadn't been at the perfect angle to trace a rectangular shadow down the side of the incline.  As you approach, you notice a familiar obsidian orb embedded into the side of it.  It's obviously the mechanism to open it.");
 			text1 = "North";
 			choice1 = 11151;
 			text5 = "Leave";
 			choice5 = 11150;
 		}
-		else if(flags[MET_SANURA] == 0) {
-			flags[MET_SANURA] = 1;
+		else if(flags[kFLAGS.MET_SANURA] == 0) {
+			flags[kFLAGS.MET_SANURA] = 1;
 			outputText("Just ahead, in one of the larger dunes, is a square stone doorway, built into the side of a large, sparkling mountain of sand.  You never would have noticed it if the sun hadn't been at the perfect angle to trace a rectangular shadow down the side of the incline.  As you approach, you notice a smooth obsidian orb embedded into the side of it.  Perhaps that's the mechanism to open it?");
 			outputText("\n\nSuddenly, a huge shadow looms over you, and the sound of beating wings echo from on high. You spin around in time to see a huge creature leap from the dune tops and slam into the ground a few feet away.  At first glance, the creature looks like a tall, tanned woman with flowing black hair, adorned in a great wealth of gold and jewels.  A moment later, though, you're able to take in the full view of her form: from the waist down, her shapely human form morphs into the lower body of a great, golden-haired lion, padding on a quartet of powerful legs ending in sharp claws.  From her leonine sides grow a pair of massive wings, easily over a dozen feet across, which quickly furl up against her body.  She's a sphinx!");
 			outputText("\n\nThe sphinx-girl pads over towards you, her arms crossed under her small, palmable breasts. Chestnut-colored eyes examine you, looking you over from your [hair] to your [feet], a playful grin playing across her feminine features.  \"<i>O-ho!  What's this we have here?  A poor, lost " + player.race() + " wandering the desert; or are you something more?  Indeed, I should think so, with your [weapon] so eager for battle, and your [armor] that looks to have seen a thousand blows.  My, my.  Could it be you've come to brave my Mistress's lair?  Ah, if so... you must answer my riddles three, lest I keep from you the key!</i>\" she says, a little tune springing into her voice as she stalks towards you.");
 			outputText("\n\n\"<i>We could even make it interesting...  If you can't guess my riddles, you must surrender your body to my pleasure.  If you win, your pleasure shall be my wish.</i>\"");
-			if(flags[DISCOVERED_WITCH_DUNGEON] == 0) {
+			if(flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] == 0) {
 				outputText("\n\n(<b>You've discovered a new dungeon, available in the places menu in the future!  Make sure you save before delving too deeply...</b>)");
-				flags[DISCOVERED_WITCH_DUNGEON] = 1;
+				flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] = 1;
 			}
 			//(Display Options: [Riddle Game] [Fight] [Leave])
 			text3 = "Riddle Game";
@@ -666,14 +666,14 @@
 			choice5 = 11150;
 		}
 		else {
-			if(flags[TIMES_SUBMITTED_TO_SANURA] + flags[TIMES_WINFUCKED_SANURA] > 0) {
+			if(flags[kFLAGS.TIMES_SUBMITTED_TO_SANURA] + flags[kFLAGS.TIMES_WINFUCKED_SANURA] > 0) {
 				outputText("You approach Sanura the sphinx as she pads around the great stone doorframe.  A playful grin spreads across her thin lips as you approach.  \"<i>O-ho!  Back again, I see.  Mmm, it's been so dull since last you <i>came</i>.  There's no one more fun to play out here in the wastes.  So... care to try your hand at my game once more?");
-				if(flags[BEATEN_SANURA_COUNT] > 0) outputText("  Or would you rather skip the formalities?  We both know who's got the sharper wit, I should think.");
+				if(flags[kFLAGS.BEATEN_SANURA_COUNT] > 0) outputText("  Or would you rather skip the formalities?  We both know who's got the sharper wit, I should think.");
 				outputText("</i>\"");
 				//(Display Options: [Riddle Game] [Fight] [Leave])
 				text3 = "Riddle Game";
 				choice3 = 11153;
-				if(flags[BEATEN_SANURA_COUNT] > 0) {
+				if(flags[kFLAGS.BEATEN_SANURA_COUNT] > 0) {
 					text1 = "North";
 					choice1 = 11151;
 					text4 = "Fuck";
@@ -686,7 +686,7 @@
 				outputText("The sphinx, Sanura, is padding around the stone doorframe.  Occasionally she beats her leonine wings or gives a mighty yawn, obviously bored by a present lack of stimulation.  Seeing you standing about, however, Sanura gives you a sultry come-hither look and a seductive wink.  You're not sure if she wants to tempt your mind or your body.");
 				text3 = "Riddle Game";
 				choice3 = 11153;
-				if(flags[BEATEN_SANURA_COUNT] > 0) {
+				if(flags[kFLAGS.BEATEN_SANURA_COUNT] > 0) {
 					text1 = "North";
 					choice1 = 11151;
 					text4 = "Fuck";
@@ -701,7 +701,7 @@
 		clearOutput();
 		outputText("<b><u>Cavernous Commons</u></b>\n");
 		outputText("Dancing lights swirl around the roof of the cavern, twirling around each other in patterns too intricate to follow.  Whatever they are, they're clearly magical, and they lend this place an otherworldly ambience unmatched by anything you've seen.  This huge room reminds you of your village commons in a way - it's clearly a communal area.  There's a water-pump in the northwest corner and a blazing purple bonfire in the center of the chamber, heating the cool underground air.  The ground is dirt, rather than sand, and hard-packed as any road.  Various chairs and benches are set up for witches to relax in.  ");
-		if(flags[SANDWITCH_MOB_DEFEATED] == 0) {
+		if(flags[kFLAGS.SANDWITCH_MOB_DEFEATED] == 0) {
 			outputText("Worst of all, a huge assortment of spellcasters is assembling into a mob, obviously hostile.");
 			startCombat(65);
 			doNext(1);
@@ -709,7 +709,7 @@
 		}
 		else outputText("The women you defeated before have returned to their tasks, casting wary glances your way from time to time but no longer threatening.");
 		outputText("  Cave tunnels lead in to the east and west into more underground chambers.  A path leads south towards the exit.");
-		if(flags[SANDWITCH_THRONE_UNLOCKED] == 0) {
+		if(flags[kFLAGS.SANDWITCH_THRONE_UNLOCKED] == 0) {
 			outputText("\n\nA huge stone doorway blocks the path north.  You cannot see a way to open it.");
 		
 		}
@@ -761,13 +761,13 @@
 		clearOutput();
 		outputText("<b><u>West Warrens Main Hall (Western Portion)</u></b>\n");
 		outputText("The smooth tunnel comes to an end here, blocked by the omnipresent sandstone.  The sapphire light plays beautifully across the rough-hewn stone as you watch, but you don't take the time to give it much thought.  To the east, the arching hallway leads back towards a large common area of a cave.  Along the north and south walls are door-sized openings, blocked with rugs of fine make and thick fabric.  They don't leave enough of a gap for any light or sound to bleed into the hall.  You'll have to take a peek if you want to see what's going on.");
-		if(flags[ESSRAYLE_ESCAPED_DUNGEON] == 0 && flags[MET_ESSY] > 0) {
-			flags[ESSY_MET_IN_DUNGEON] = 1;
-			if(flags[TOLD_MOTHER_TO_RELEASE_ESSY] > 0) {
+		if(flags[kFLAGS.ESSRAYLE_ESCAPED_DUNGEON] == 0 && flags[kFLAGS.MET_ESSY] > 0) {
+			flags[kFLAGS.ESSY_MET_IN_DUNGEON] = 1;
+			if(flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] > 0) {
 				outputText("\n\n<b>Your attention is immediately drawn to Essrayle...</b>");
 				menu();
 				addButton(0,"Next",essyWitchVictory);
-				flags[ESSRAYLE_ESCAPED_DUNGEON] = 1;
+				flags[kFLAGS.ESSRAYLE_ESCAPED_DUNGEON] = 1;
 				return;
 			}
 			outputText("\n\nQuite an unusual sight awaits you in this chamber.  Sitting in an oversized pot is what looks to be the overly busty, plant girl you encountered earlier, Essrayle.  She's changed quite a bit since you last saw her, however.  While her inhumanly smooth, elfin face seems to be unchanged, the rest of her verdant body seems to have been warped into a hyper-sexual parody of a fertility idol, with features that echo the nomadic sand witch tribe.");
@@ -792,7 +792,7 @@
 		clearOutput();
 		outputText("<b><u>West Warrens Western Portion South Side (Pharmacy)</u></b>\n");
 		outputText("This room is so tiny it can barely get away with being called that.  If anything, it's more of a small, cozy nook.  There isn't anyone else here, though the room is illuminated by the same omnipresent magics found elsewhere in this little cave of wonders.  Standing silent vigil on the southern wall, a large chest looms over you, stretching most of the way to the ceiling.  It is completely, almost impossibly neat, with every drawer fully and completely closed.  Spurred on by this strangeness, you pop a few of them open.  One drawer has pink pills, another brown.  Searching drawer by drawer until you discover that every single compartment houses the same dual medicines.  You glance about the room and spy a faded parchment on the wall.  It reads \"<i>Tnangerp rof knip, nerrab rof nworb.</i>\"  There is an opening in the wall to the north.");
-		if(flags[SANDWITCH_THRONE_UNLOCKED] == 0) {
+		if(flags[kFLAGS.SANDWITCH_THRONE_UNLOCKED] == 0) {
 			outputText("\n\nThere is also a lever on the floor.  Looking closely at it, it appears that it connects with machinery that leads to the east...");
 			text2 = "Pull Lever";
 			choice2 = 11156;
@@ -831,8 +831,8 @@
 		clearOutput();
 		outputText("<b><u>Eastern Warrens East Portion North Side (Bath Room)</u></b>\n");
 		outputText("As soon as you step in, you can smell a sweet, dairy-like scent in the air, but as your eyes adjust to the dimmer lighting, you realize you've stumbled into the sand witches' bathroom!  Fluffy towels hang from the wall, ready for use.  There's one giant tub in the center of the room, recessed deep into the floor.  It has a number of seats carved into the side with a small, open hole in the bottom.  Hanging from the ceiling, a long chain dangles down, topped with a plug.");
-		flags[MET_MILK_SLAVE] = 1;
-		if(flags[MILK_NAME] is Number) {
+		flags[kFLAGS.MET_MILK_SLAVE] = 1;
+		if(flags[kFLAGS.MILK_NAME] is Number) {
 			outputText("  There are no faucets or water sources that you can see, but your unasked questions are answered when a heavy, liquid sloshing sound emanates from the corner.  The source of the noise reveals itself to be a tit-encumbered, black-skinned human girl.  She drags her milk-swollen mammaries up to the edge of the tub and asks in a breathy, excited voice, \"<i>Bath time?</i>\"  Whoever she was, the witches seem to have broken her utterly - she's interested in nothing but being milked or lounging in her corner.  The way out lies west.");
 			text3 = "Bath Time";
 			choice3 = 11158;
@@ -865,18 +865,18 @@
 	if(roomNo == 36) {
 		clearOutput();
 		outputText("<b><u>Eastern Warrens West Portion South Side (Cum Witch's Office)</u></b>\n");
-		if(flags[SAND_WITCHES_FRIENDLY] > 0) {
+		if(flags[kFLAGS.SAND_WITCHES_FRIENDLY] > 0) {
 			//{SAND WITCHES NOW FRIENDLY}
 			outputText("The cum witch is here, pounding away at one of her sister's cunts, like usual.  She seems to CONSTANTLY excrete her jism into her partner's many cunt-folds, but as her passion and speed rises, the flow thickens, eventually filling the poor milk-witch's wombs entirely.  They go at it like animals for a few seconds more, then separate after a climactic orgasm that leaves a puddle of spooge inches deep on part of the uneven floor.  The cum-witch moves her insensate sister to rest on a nearby bench before putting on her hat and robes.  She winks at you and offers, \"<i>Well, I hope you enjoyed the show, interloper.  Did you come here for some of my gift, or something else?</i>\"");
 			//{VOLUNTEER FOR SERVICE: BAD-END, BLESSING: +CUM PRODUCTION}
-			if(flags[BEEN_BLESSED_BY_CUM_WITCH] == 0) {
+			if(flags[kFLAGS.BEEN_BLESSED_BY_CUM_WITCH] == 0) {
 				text3 = "Blessing";
 				choice3 = 11161;
 			}
 		}
 		else {
 			//{CUM WITCH UNDEFEATED}
-			if(flags[CUM_WITCH_DEFEATED] == 0) {
+			if(flags[kFLAGS.CUM_WITCH_DEFEATED] == 0) {
 				outputText("The curtain pulls to the side easily, and as soon as you enter, you're greeted by the sound of flesh slapping on flesh from somewhere to your left.  Briefly, you note a number of desks as you turn towards the sexual audio, but what really catches your eyes are the two girls locked in coitus.  One, a normal-looking sand witch, is bent over a bench and taking quite the fucking.  Milk drips in huge beads from her four fat teats while fresh rivulets of cum run down past the dried-cum on her thighs.  Above her is something else entirely, a taller woman with a single pair of obscenely large breasts.  She's so dark skinned that at first you have difficulty picking out her features in the dim lighting.  Glittering sweat runs down her form, dripping from her pendulous breasts as she throws back her head and moans, \"<i>Gonna... just... take it!  Take my gift!</i>\"");
 				outputText("\n\nBeneath the ebony woman, you see the sand witch begin to quiver and moan, thick gouts of semen back-flooding from her packed cunny as her belly rounds with delicious fecundity.  Her muscles lock, then twitch feebly for a few seconds before she slides off into the new-born cum-puddle, slipping along the floor in an insensate pile of orgasmic bliss.  You're so enraptured by the sight, that you don't even try to hide when the ebony futanari turns to face you, putting on a pointed, wide-brimmed hat and black robe.  For the slightest second you see a pair of orange-sized balls and one thick, cum-lubed member, but those quickly disappear into the voluminous robes.");
 				outputText("\n\n\"<i>Well now, surely you aren't one of the witches here to receive my seed,</i>\" the odd witch muses, \"<i>I'm afraid you must be an interloper then.  Pity, ");

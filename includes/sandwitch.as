@@ -718,9 +718,9 @@ public function laySomeEggsInThatWitchFinally():void {
 	outputText(" lubricant drooling out of her in the absence of your intimate plug.  Utterly overwhelmed and exhausted, the sand witch resigns herself to gathering strength in the bright, blistering gaze of the desert sun.  Smiling to yourself, you take to re-donning your discarded [armor], remarking as you leave that you look forward to the next encounter; a sentiment the sorceress must agree with as she weakly waves to you, holding her stomach with her arms and filled with motherly delight at the thought of carrying your brood.");
 	//Give her ze eggs!
 	if(player.fertilizedEggs() > 0) {
-		flags[EGG_WITCH_COUNTER] = 1;
-		if(player.canOvipositBee()) flags[EGG_WITCH_TYPE] = 1;
-		else flags[EGG_WITCH_TYPE] = 2;
+		flags[kFLAGS.EGG_WITCH_COUNTER] = 1;
+		if(player.canOvipositBee()) flags[kFLAGS.EGG_WITCH_TYPE] = 1;
+		else flags[kFLAGS.EGG_WITCH_TYPE] = 2;
 	}
 	player.dumpEggs();
 	stats(0,0,0,0,0,0,-100,0);
@@ -815,8 +815,8 @@ public function sandwitchBirthsYourMonstrosities():void {
 	
 	//[(corr >= 60)
 	if(player.cor >= 60) outputText("\n\n\"<i>Just, use your common sense next time.</i>\"");
-	flags[EGG_WITCH_COUNTER] = 0;
-	flags[EGG_WITCH_TYPE] = 0;
+	flags[kFLAGS.EGG_WITCH_COUNTER] = 0;
+	flags[kFLAGS.EGG_WITCH_TYPE] = 0;
 	doNext(13);
 }
 
@@ -831,8 +831,8 @@ public function witchBirfsSomeBees():void {
 	outputText("; likely it was just waiting for someone to find their mother before taking off in the general direction of the forest.  The weak voice of the desert vixen fills the air as she speaks to you.  \"<i>That... was the best.  I can't believe I'm a mother!</i>\"  She gives you a look of appreciation for showing her how pleasurable being a host can be.  Seeing she needs her rest, you give a nod and turn to leave... only to feel a hand grasp at your [leg].  \"<i>I would be disappointed if you didn't come around and 'say hello' more often; keep that in mind " + player.mf("handsome","beautiful") + ".</i>\"  She coos, before drifting off to sleep.  She'll be fine in this shady part of the desert while she rests; the dune currently obstructing the sun and keeping her from being burned from the sun's rays.");
 	
 	outputText("\n\nContent with how things turned out, you head back to camp and decide on the next course of action for today.");
-	flags[EGG_WITCH_COUNTER] = 0;
-	flags[EGG_WITCH_TYPE] = 0;
+	flags[kFLAGS.EGG_WITCH_COUNTER] = 0;
+	flags[kFLAGS.EGG_WITCH_TYPE] = 0;
 	doNext(13);
 }
 
@@ -871,7 +871,7 @@ public function sandwitchSpanking():void {
 	monster.lust = 98;
 	monster.HP = 2;
 	player.lust = 100;
-	flags[COMBAT_BONUS_XP_VALUE] = monster.XP;
+	flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
 	eventParser(5007);
 	stats(0,0,0,0,0,5,-100,0);
 }

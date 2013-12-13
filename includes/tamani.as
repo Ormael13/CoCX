@@ -188,7 +188,7 @@ public function tamaniMaleRepeatEncounter():void {
 	if(player.statusAffectv1("Tamani") != -500 || player.statusAffectv2("Tamani") > 0) outputText("While exploring, you're startled by the feeling of tiny hands stroking the insides of your thighs.  You look down and find Tamani there, grinning wolfishly,  \"<i>Ready for another fuck, big " + player.boyGirl() + "?\"\n\n", false);
 	//(ELSE) 
 	else outputText("While exploring, you're startled by the feeling of tiny hands stroking the insides of your thighs.  You look down and find Tamani the goblin there, grinning with desire, \"<i>Ready to stuff me with cum?  I'm not taking no for an answer this time.</i>\"\n\n", false);
-	if(flags[TAMANI_TIMES_HYPNOTISED] > 19 && rand(2) == 0) {
+	if(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] > 19 && rand(2) == 0) {
 		getRapedByTamaniYouHypnoSlut();
 		return;
 	}
@@ -702,14 +702,14 @@ public function tamaniHypnoTease():void {
 	
 	//REACTIONS
 	//LOW HYPNO VALUE:
-	if(flags[TAMANI_TIMES_HYPNOTISED] < 5) {
+	if(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] < 5) {
 		selector = rand(3);
 		if(selector == 0) outputText("You reluctantly pull your stare away from the heavenly entrance between her legs.  There's an urge to walk over to her and plunge yourself inside her over and over, but you dismiss it.", false);
 		if(selector == 1) outputText("You find it hard to pull your gaze from her inviting twat, but you manage.  You shake your head, clearing away thoughts of fertilizing your wife.  Her rhetoric must be getting to you.", false);
 		if(selector == 2) outputText("No matter the case, her actions shifted a fair bit of your blood-flow to your groin.", false);
 	}
 	//MEDIUM HYPNO VALUE:
-	else if(flags[TAMANI_TIMES_HYPNOTISED] < 10) {
+	else if(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] < 10) {
 		selector = rand(2);
 		if(selector == 0) {
 			outputText("With effort you manage to wrench your eyes away from the inviting folds of Tamani's vagina.  ", false);
@@ -748,7 +748,7 @@ public function tamaniHypnoTease():void {
 			outputText("our " + multiCockDescriptLight() + " pulses and dribbles pre-cum, aching to do its duty and fire load after load into Tamani's perfect pussy.", false);
 		}
 	}
-	stats(0,0,0,0,0,0,(rand(player.lib/5)+3+(flags[TAMANI_TIMES_HYPNOTISED])),0);
+	stats(0,0,0,0,0,0,(rand(player.lib/5)+3+(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED])),0);
 	combatRoundOver();
 }
 
@@ -915,12 +915,12 @@ public function tamaniBeaten():void {
 	outputText("\n\nYou skitter up to her and calmly say, \"<i>Bend over.  I want to take you with my spider half.</i>\"");
 	
 	outputText("\n\nThe eager slut smirks and chuckles, \"<i>Whatever you say, ");
-	if(flags[TIMES_OVIPOSITED_TAMANI] == 0) outputText("my baby-" + player.mf("daddy","momma"));
+	if(flags[kFLAGS.TIMES_OVIPOSITED_TAMANI] == 0) outputText("my baby-" + player.mf("daddy","momma"));
 	else outputText("my egg-obsessed arachnophile");
 	outputText(".</i>\"  Soon, the purple-haired skank has assumed the position, though she has the temerity to look back over her shoulder and lick her lips.  Her smouldering gaze is just beckoning for cock, but in this case, she'll be making do with your ovipositor.  You look away from her hungry eyes down to the green bubble-butt, admiring the swell of her cheeks, her puckered anus, and best of all, her sopping wet nethers.");
 	
 	outputText("\n\nTamani exhales, \"<i>Eyes up here, " + player.mf("stud","breeder") + ".  I want to watch your face while you fuck me,</i>\" in a tone that promises delights beyond imagining.  \"<i>Put it in my pussy and give me your babies.  There's nothing like fucking a woman who'll take your cock straight into her womb and let you bathe her eggs with cum");
-	if(flags[TIMES_OVIPOSITED_TAMANI] > 0) outputText(", or in your case even more eggs");
+	if(flags[kFLAGS.TIMES_OVIPOSITED_TAMANI] > 0) outputText(", or in your case even more eggs");
 	outputText(".</i>\"  Petite hands massage the goblin's perky, lust-thickened nipples as she talks and wiggles her bouncy bum in your direction.");
 	
 	outputText("\n\nYour hard legs clatter noisily as you advance on the prostrate, baby-hungry goblin.  Flexing foreign muscles, you bring your abdomen down and align the turgid organ with the goblin's gushing lips.  Her glistening gateway parts for your masculine egg-layer, easily allowing the ooze-dripping prong to slide right through her passage, and soon enough, your carapace is rubbing on jiggly green bottom, the ovipositor completely swallowed by the goblin's rapacious cunt.  Her rippling passages squeezes it gently, as if to say 'hi'.  Your drider instincts answer with a thick squirt of green goo.");
@@ -932,9 +932,9 @@ public function tamaniBeaten():void {
 	outputText("\n\nTamani's hands begin to roam across the taut dome of her gravid belly as it swells still bigger, and with a jubilant shriek, she climaxes, spraying gouts of green-tinged pussy-juice in a fan beneath her.  She goes limp in your grip, though her milk keeps flowing unimpeded.  You let her go, though she's held to your prong by the pressure of the last few eggs that pass into her stretchy, fertile womb.  You hum happily, feeling completely relieved, utterly languid and satisfied.");
 	if(player.hasCock()) outputText("  White coats the goblin from her shoulders up, the only evidence of your male satisfaction.  You were so focused on the act of impregnation and the unique pleasure that it provides that you barely noticed [eachCock] erupting in sympathetic pleasure.");
 	outputText("\n\nAt last, the bloated bitch slides into the gooey green puddle with a splash, freeing your ovipositor to retract.  She immediately begins snoring, clearly as satisfied as you.  What a strange creature.");
-	flags[TIMES_OVIPOSITED_TAMANI]++;
+	flags[kFLAGS.TIMES_OVIPOSITED_TAMANI]++;
 	//Don't encounter Tamani for 3 days if fertilized
-	if(player.fertilizedEggs() == 0) flags[TAMANI_TIME_OUT] = 3;
+	if(player.fertilizedEggs() == 0) flags[kFLAGS.TAMANI_TIME_OUT] = 3;
 	player.dumpEggs();
 	stats(0,0,0,0,0,0,-100,0);
 	eventParser(5007);

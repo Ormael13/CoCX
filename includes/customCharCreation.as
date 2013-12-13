@@ -1,7 +1,7 @@
 ﻿//Set custom stats and display a blurb about them.  No need to set up buttons, handled outside in 10045
 public function customPCSetup():void {
 	//Set as having history perk
-	flags[UNKNOWN_FLAG_NUMBER_00418] = 1;
+	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] = 1;
 	if(player.short == "Vahdunbrii") {
 		player.createBreastRow();
 		player.createVagina();
@@ -93,9 +93,9 @@ public function customPCSetup():void {
 		createStorage();
 		player.createKeyItem("Camp - Chest",0,0,0,0);
 		player.createKeyItem("Equipment Rack - Weapons",0,0,0,0);
-		flags[UNKNOWN_FLAG_NUMBER_00254] = 1;
+		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1;
 		player.createKeyItem("Equipment Rack - Armor",0,0,0,0);
-		flags[UNKNOWN_FLAG_NUMBER_00255] = 1;
+		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1;
 		//(Flexibility), (Incorporeality), History: Religious, Dragonfire, Brood Mother, Magical Fertility, Wet Pussy, Tough, Strong, Fast, Smart, History: Scholar, History: Slacker, Strong Back, Strong Back 2: Stronger Harder
 		player.createPerk("Flexibility",0,0,0,0,"Due to your cat-like body, you're able to dodge attacks more often.");
 		player.createPerk("History: Religious",0,0,0,0,"");
@@ -399,8 +399,8 @@ public function customPCSetup():void {
     	//Armor: Lusty shit
 		player.armorName = "lusty maiden's armor";
 		player.armorPerk = "Light";
-		player.armorDef = 9 + flags[BIKINI_ARMOR_BONUS];
-		player.createPerk("Slutty Seduction",10 + flags[BIKINI_ARMOR_BONUS],0,0,0,"Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.");
+		player.armorDef = 9 + flags[kFLAGS.BIKINI_ARMOR_BONUS];
+		player.createPerk("Slutty Seduction",10 + flags[kFLAGS.BIKINI_ARMOR_BONUS],0,0,0,"Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.");
 		player.armorValue = itemValue("lusty maiden's armor");
 
 		//Stats: (if possible)
@@ -462,7 +462,7 @@ public function customPCSetup():void {
 		//human tongue
 		//human face
 		//no tail, fur, or scales"
-		flags[UNKNOWN_FLAG_NUMBER_00418] = 0;
+		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] = 0;
 		player.str = 25;
 		player.tou = 25;
 		player.inte = 25;
@@ -744,14 +744,14 @@ public function customPCSetup():void {
 		player.hipRating = 5;
 		player.buttRating = 5;
 		player.thickness = 10;
-		flags[PC_FETISH] = 2;
+		flags[kFLAGS.PC_FETISH] = 2;
 		player.earsPierced = 1;
 		player.earsPShort = "green gem-stone handcuffs";
 		player.earsPLong = "Green gem-stone handcuffs";
 		player.nipplesPierced = 1;
 		player.nipplesPShort = "seamless black nipple-studs";
 		player.nipplesPLong = "Seamless black nipple-studs";
-		flags[PC_FETISH] = 2;
+		flags[kFLAGS.PC_FETISH] = 2;
 		player.vaginas[0].clitPierced = 1;
 		player.vaginas[0].clitPShort = "emerald clit-stud";
 		player.vaginas[0].clitPLong = "Emerald clit-stud";

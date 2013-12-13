@@ -153,7 +153,7 @@ public function oasisSexing():void {
 		//Antmorph stuff
 		if(monster.hasStatusAffect("phyllafight") >= 0) {
 			outputText("You sought to save the ant-girl from being raped, and looking around, you don't see her anywhere.  She must have gotten away safely.  Mission... accomplished?  Wait, that ungrateful little bitch just left you to suffer in her place!  Your ass is gonna be sore for a while, but not as sore as your pride...  ");
-			flags[ANTS_PC_FAILED_PHYLLA] = 1;
+			flags[kFLAGS.ANTS_PC_FAILED_PHYLLA] = 1;
 		}
 		outputText("The demons fuck you like animals until you can't come any more. Your every orifice is filled and you pump out orgasm after orgasm until you black out from the abuse.", false);
 		eventParser(5007);

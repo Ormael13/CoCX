@@ -70,117 +70,117 @@
 
 public function sheilaPreg():void {
 	//CHANCE OF PREGGERS, GAO
-	if(flags[SHEILA_PREG] == 0) {
+	if(flags[kFLAGS.SHEILA_PREG] == 0) {
 		var chance:Number = 5;
 		chance += player.cumQ()/66;
 		if(chance > 20) chance = 20;
 		chance += player.virilityQ() * 100;
 		if(chance > 75) chance = 75;
 		if(rand(100) <= chance) {
-			flags[SHEILA_PREG] = 1;
+			flags[kFLAGS.SHEILA_PREG] = 1;
 		}
 	}
 }
 
 public function sheilaCorruption(arg:Number = 0):Number {
-	if(flags[SHEILA_CORRUPTION] + arg > 100) flags[SHEILA_CORRUPTION] = 100;
-	else if(flags[SHEILA_CORRUPTION] + arg < 0) flags[SHEILA_CORRUPTION] = 0;
-	else flags[SHEILA_CORRUPTION] += arg;
-	return flags[SHEILA_CORRUPTION];
+	if(flags[kFLAGS.SHEILA_CORRUPTION] + arg > 100) flags[kFLAGS.SHEILA_CORRUPTION] = 100;
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] + arg < 0) flags[kFLAGS.SHEILA_CORRUPTION] = 0;
+	else flags[kFLAGS.SHEILA_CORRUPTION] += arg;
+	return flags[kFLAGS.SHEILA_CORRUPTION];
 }
 
 //Sheila's cup function!
 public function sheilaCup():String {
-	if(flags[SHEILA_CORRUPTION]  < 10) return "tiny, almost-absent";
-	else if(flags[SHEILA_CORRUPTION] < 20) return "A-cup";
-	else if(flags[SHEILA_CORRUPTION] < 30) return "B-cup";
-	else if(flags[SHEILA_CORRUPTION] < 40) return "C-cup";
-	else if(flags[SHEILA_CORRUPTION] < 50) return "D-cup";
-	else if(flags[SHEILA_CORRUPTION] < 60) return "DD-cup";
-	else if(flags[SHEILA_CORRUPTION] < 70) return "E-cup";
-	else if(flags[SHEILA_CORRUPTION] < 80) return "EE-cup";
-	else if(flags[SHEILA_CORRUPTION] < 90) return "front-running";
-	else if(flags[SHEILA_CORRUPTION] < 100) return "FF-cup";
-	else if(flags[SHEILA_CORRUPTION] < 110) return "G-cup";
-	else if(flags[SHEILA_CORRUPTION] < 120) return "GG-cup";
-	else if(flags[SHEILA_CORRUPTION] < 130) return "H-cup";
-	else if(flags[SHEILA_CORRUPTION] < 140) return "HH-cup";
-	else if(flags[SHEILA_CORRUPTION] < 150) return "'Holy Honkin' Hooters!'-cup";
-	else if(flags[SHEILA_CORRUPTION] < 160) return "I 'want to squeeze them'-cup";
-	else if(flags[SHEILA_CORRUPTION] < 170) return "II-cup";
-	else if(flags[SHEILA_CORRUPTION] < 180) return "Jiggle-cup";
-	else if(flags[SHEILA_CORRUPTION] < 190) return "JJ-cup";
-	else if(flags[SHEILA_CORRUPTION] < 200) return "K-cup";
-	else if(flags[SHEILA_CORRUPTION] < 210) return "KK-cup";
-	else if(flags[SHEILA_CORRUPTION] < 220) return "L-cup";
-	else if(flags[SHEILA_CORRUPTION] < 230) return "'Ladylove'-cup";
-	else if(flags[SHEILA_CORRUPTION] < 240) return "M-cup";
-	else if(flags[SHEILA_CORRUPTION] < 250) return "'Mega Milk'-cup";
-	else if(flags[SHEILA_CORRUPTION] < 260) return "N-cup";
-	else if(flags[SHEILA_CORRUPTION] < 270) return "NN-cup";
-	else if(flags[SHEILA_CORRUPTION] < 280) return "O-cup";
-	else if(flags[SHEILA_CORRUPTION] < 290) return "'so big it makes you say' OO-cup";
-	else if(flags[SHEILA_CORRUPTION] < 300) return "P-cup";
-	else if(flags[SHEILA_CORRUPTION] < 310 && player.cocks.length > 0) return "'would feel great around your' PP-cup";
-	else if(flags[SHEILA_CORRUPTION] < 310 && player.cocks.length == 0) return "PP-cup";
-	else if(flags[SHEILA_CORRUPTION] < 320) return "Q-cup";
-	else if(flags[SHEILA_CORRUPTION] < 330) return "QQ-cup";
-	else if(flags[SHEILA_CORRUPTION] < 340) return "R-u-serious?-cup";
-	else if(flags[SHEILA_CORRUPTION] < 350) return "RR-cup";
-	else if(flags[SHEILA_CORRUPTION] < 360) return "S-rank";
-	else if(flags[SHEILA_CORRUPTION] < 370) return "'Shooting Star'-cup";
-	else if(flags[SHEILA_CORRUPTION] < 380) return "T-cup";
-	else if(flags[SHEILA_CORRUPTION] < 390) return "'damn, those are some big' TT-cup";
-	else if(flags[SHEILA_CORRUPTION] < 400) return "'bigger than' U-cup";
-	else if(flags[SHEILA_CORRUPTION] < 410) return "UU-cup";
-	else if(flags[SHEILA_CORRUPTION] < 420) return "V-cup";
-	else if(flags[SHEILA_CORRUPTION] < 430) return "'Va-Va-Voom'-cup";
-	else if(flags[SHEILA_CORRUPTION] < 440) return "'War Head'-cup";
-	else if(flags[SHEILA_CORRUPTION] < 450) return "World-cup";
-	else if(flags[SHEILA_CORRUPTION] < 460) return "X-Buster-cup";
-	else if(flags[SHEILA_CORRUPTION] < 470) return "XXXX-cup";
-	else if(flags[SHEILA_CORRUPTION] < 480) return "'Yay'-cup";
-	else if(flags[SHEILA_CORRUPTION] < 490) return "YY-cup";
-	else if(flags[SHEILA_CORRUPTION] < 500) return "Z-Saber-cup";
-	else if(flags[SHEILA_CORRUPTION] < 510) return "ZZ-cup";
+	if(flags[kFLAGS.SHEILA_CORRUPTION]  < 10) return "tiny, almost-absent";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 20) return "A-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 30) return "B-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 40) return "C-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 50) return "D-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 60) return "DD-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 70) return "E-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 80) return "EE-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 90) return "front-running";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 100) return "FF-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 110) return "G-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 120) return "GG-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 130) return "H-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 140) return "HH-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 150) return "'Holy Honkin' Hooters!'-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 160) return "I 'want to squeeze them'-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 170) return "II-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 180) return "Jiggle-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 190) return "JJ-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 200) return "K-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 210) return "KK-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 220) return "L-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 230) return "'Ladylove'-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 240) return "M-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 250) return "'Mega Milk'-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 260) return "N-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 270) return "NN-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 280) return "O-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 290) return "'so big it makes you say' OO-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 300) return "P-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 310 && player.cocks.length > 0) return "'would feel great around your' PP-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 310 && player.cocks.length == 0) return "PP-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 320) return "Q-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 330) return "QQ-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 340) return "R-u-serious?-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 350) return "RR-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 360) return "S-rank";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 370) return "'Shooting Star'-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 380) return "T-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 390) return "'damn, those are some big' TT-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 400) return "'bigger than' U-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 410) return "UU-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 420) return "V-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 430) return "'Va-Va-Voom'-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 440) return "'War Head'-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 450) return "World-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 460) return "X-Buster-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 470) return "XXXX-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 480) return "'Yay'-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 490) return "YY-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 500) return "Z-Saber-cup";
+	else if(flags[kFLAGS.SHEILA_CORRUPTION] < 510) return "ZZ-cup";
 	else return "fuckin' magic";
 }
 
 public function sheilaEncounterRouter():void {
 	trace("Sheila Encounter:");
-	trace("Sheila Corruption: " + Math.round(sheilaCorruption() * 10)/10 + " Sheila Preg: " + flags[SHEILA_PREG] + " Sheila XP: " + flags[SHEILA_XP]);
+	trace("Sheila Corruption: " + Math.round(sheilaCorruption() * 10)/10 + " Sheila Preg: " + flags[kFLAGS.SHEILA_PREG] + " Sheila XP: " + flags[kFLAGS.SHEILA_XP]);
 	//UNFUCK FLAGS
-	if(flags[SHEILA_CLOCK] > 0)
-		flags[SHEILA_CLOCK] = 0
-	if(sheilaCorruption() >= 100 && flags[SHEILA_DEMON] == 0)
-		flags[SHEILA_DEMON] = 1;
-	if(flags[SHEILA_DEMON] == 1)
-		flags[SHEILA_XP] = 4;
+	if(flags[kFLAGS.SHEILA_CLOCK] > 0)
+		flags[kFLAGS.SHEILA_CLOCK] = 0
+	if(sheilaCorruption() >= 100 && flags[kFLAGS.SHEILA_DEMON] == 0)
+		flags[kFLAGS.SHEILA_DEMON] = 1;
+	if(flags[kFLAGS.SHEILA_DEMON] == 1)
+		flags[kFLAGS.SHEILA_XP] = 4;
 	
 	//ACTUALLY PICK ENCOUNTER!
-	if(flags[SHEILA_DEMON] == 0) {
+	if(flags[kFLAGS.SHEILA_DEMON] == 0) {
 		//PREG SHIT
-		if(flags[SHEILA_PREG] >= 4 && flags[SHEILA_XP] >= -2) {
-			if(flags[SHEILA_JOEYS] == 0) normalSheilaPregNotifNumberOne();
+		if(flags[kFLAGS.SHEILA_PREG] >= 4 && flags[kFLAGS.SHEILA_XP] >= -2) {
+			if(flags[kFLAGS.SHEILA_JOEYS] == 0) normalSheilaPregNotifNumberOne();
 			else normalSheilaPregNotifREPEATEDED();
 			return;
 		}
-		if(flags[SHEILA_XP] == 0) sheilaFirstEncounter();
-		else if(flags[SHEILA_XP] == -1 ) sheilaApology();
+		if(flags[kFLAGS.SHEILA_XP] == 0) sheilaFirstEncounter();
+		else if(flags[kFLAGS.SHEILA_XP] == -1 ) sheilaApology();
 		//XP-2 Sheila's apology (sheila xp = -2 and demon sheila = 0):
-		else if(flags[SHEILA_XP] == -2) sheilaIsSorrySheRapedYou();
+		else if(flags[kFLAGS.SHEILA_XP] == -2) sheilaIsSorrySheRapedYou();
 		//XP-3 or XP-4 She-mad (Sheila XP <= -3 and demon sheila = 0):
-		else if(flags[SHEILA_XP] == -3 || flags[SHEILA_XP] == -4) sheilaReallyMad();
+		else if(flags[kFLAGS.SHEILA_XP] == -3 || flags[kFLAGS.SHEILA_XP] == -4) sheilaReallyMad();
 		//XP1: Reconciliation encounter (sheila xp = 1 and demon sheila = 0):
-		else if(flags[SHEILA_XP] == 1) sheilaReconcile();
+		else if(flags[kFLAGS.SHEILA_XP] == 1) sheilaReconcile();
 		//XP2: Familiarizing (Sheila XP = 2; or Sheila XP = 3 AND time =/= 20:00 and demon sheila = 0):
-		else if(flags[SHEILA_XP] == 2 || (flags[SHEILA_XP] == 3 && model.time.hours != 20)) sheilaGettingFamiliar();
+		else if(flags[kFLAGS.SHEILA_XP] == 2 || (flags[kFLAGS.SHEILA_XP] == 3 && model.time.hours != 20)) sheilaGettingFamiliar();
 		//XP3: Sexy Time (sheila xp = 3 AND time = 20:00 and demon sheila = 0):
-		else if(flags[SHEILA_XP] == 3 && model.time.hours == 20) sheilaXPThreeSexyTime();
+		else if(flags[kFLAGS.SHEILA_XP] == 3 && model.time.hours == 20) sheilaXPThreeSexyTime();
 		//XP4: Fancy meeting you here (sheila xp >= 4 and demon sheila = 0):
-		else if(flags[SHEILA_XP] == 4) fuckBuddySheilaMeeting();
+		else if(flags[kFLAGS.SHEILA_XP] == 4) fuckBuddySheilaMeeting();
 		else {
-			outputText("A BUG HAPPENED.  YOUR SHEILA_XP: " + flags[SHEILA_XP] + ". <b>Value should be between -3 to 4.</b>");
+			outputText("A BUG HAPPENED.  YOUR SHEILA_XP: " + flags[kFLAGS.SHEILA_XP] + ". <b>Value should be between -3 to 4.</b>");
 			doNext(13);
 		}
 	}
@@ -188,7 +188,7 @@ public function sheilaEncounterRouter():void {
 	else {
 		//Post-demon pregnancy notif (demon sheila = 1 and sheilapreg = 4)
 		//increment imp children counter?
-		if(flags[SHEILA_PREG] >= 4) demonImpChildren();
+		if(flags[kFLAGS.SHEILA_PREG] >= 4) demonImpChildren();
 		//Demon Sheila encounter (demon sheila = 1 and sheilapreg < 4)
 		else demonSheilaEncounter();
 
@@ -248,14 +248,14 @@ public function sheilaCorruptionUpdate():void {
 		}
 	}
 	//Get one for demon Sheila regardless.
-	if(flags[SHEILA_DEMON] == 1) stats(0,0,0,0,0,0,0,1);
+	if(flags[kFLAGS.SHEILA_DEMON] == 1) stats(0,0,0,0,0,0,0,1);
 }
 
 //XP0: the first encounter (sheila xp =0 and demon sheila = 0):
 public function sheilaFirstEncounter():void {
 	clearOutput();
 	//set sheila corruption = 30
-	flags[SHEILA_CORRUPTION] = 30;
+	flags[kFLAGS.SHEILA_CORRUPTION] = 30;
 	outputText("A strange sight meets your eyes and you drop behind some brush to examine it carefully.  It looks like a dog, though all you can see is a pair of furry hindquarters and a stubby tail draped over them.  But as you get closer, it unbends, revealing a decidedly humanoid upper body!  The creature seems to be wearing a white shirt and a dirty brown vest; what looked like a dog's shoulders from afar is actually a small pack carried on its back.  On its head is a dusty slouch hat, which it presently takes off and begins to fan itself with.  With the hat off, you can see a pair of long reddish-brown ears sticking out from its hair, pointing to each side.  As it turns its body to look around it, you can actually make out a shapely pair of breasts.  What you thought were a dog's hindlegs from the rear are actually a pair of auburn, furry digitigrade appendages only passingly resembling a canine's, and bearing feet with elongated metatarsals.  The animalistic legs come up only as far as the thigh; above them you can make out a band of skin between the fur and the very short shorts that it wears to cover the rest of its posterior.  Its hips are a bit wider than its waist, and the stubby tapered tail sticks out of a tear in the fabric, just below a belt holding them up.");
 	
 	menu();
@@ -325,7 +325,7 @@ public function sheila1ndEncLookCloserPtIILeave():void {
 	clearOutput();
 	outputText("\"<i>Good onya.  Maybe I'll see you around.</i>\"  With that, you take your leave of the strange woman.");
 	//set sheila xp = 1
-	flags[SHEILA_XP] = 1;
+	flags[kFLAGS.SHEILA_XP] = 1;
 	doNext(13);
 }
 
@@ -333,7 +333,7 @@ public function sheila1ndEncLookCloserPtIILeave():void {
 //set sheila xp = -1
 public function sheila1ndEncLookCloserPtIITalk():void {
 	clearOutput();
-	flags[SHEILA_XP] = -1;
+	flags[kFLAGS.SHEILA_XP] = -1;
 	outputText("\"<i>Alright, my earbashing mug, have it your own way.  I get mean when I get hungry; don't say I didn't warn ya.</i>\"  With that, Sheila takes a swing at you!  You jerk backwards to avoid the punch but move too slowly, she clips the end of your [face].  What a wind!  If she'd been trying to hit you, that sucker punch would likely have laid you out.  Just as you open your mouth to speak again, she rears back on one leg and kicks you away hard with the other, knocking the air out of you.  You land painfully on your back.");
 	takeDamage(2);
 	outputText("\n\n\"<i>Feel like leaving now?</i>\" she asks, grinning mirthlessly and raising her fists in front of her.  You rub your smarting nose and sit up, looking angrily at her.  She's proven that she's very fast and probably quite strong, though you have no idea how experienced she is at actually fighting - and there's a bit of a regretful look in her eyes, to boot.  Do you turn tail or fight back?");
@@ -388,7 +388,7 @@ public function apologyAvoidSheila():void {
 	outputText("You shake your head at the leery girl, and tell her you'd be just as happy as she would if you never saw each other again.");
 	outputText("\n\n\"<i>Well... I expect I could arrange that if you'll play along,</i>\" she says, ears twitching in irritation.  \"<i>Take care of yourself, mate.</i>\"  She resets the trap and lays down in her spot in the tall grass again, pointedly turning over on her side to show you her back.");
 	//set sheilapreg = -1
-	flags[SHEILA_PREG] = -1;
+	flags[kFLAGS.SHEILA_PREG] = -1;
 	doNext(13);
 }
 
@@ -404,7 +404,7 @@ public function apologySheilaApology():void {
 	outputText("\n\nWell... it looks like you're back to square one.");
 	
 	//set sheila xp = 1
-	flags[SHEILA_XP] = 1;
+	flags[kFLAGS.SHEILA_XP] = 1;
 	doNext(13);
 }
 
@@ -423,7 +423,7 @@ public function apologySheilaSlapSult():void {
 	outputText("\n\n\"<i>So that's how it'll be, then!  I'm done trying to talk sense to you, ya clacker!</i>\"  The incensed woman assumes a fighting posture, and you respond in kind.");
 	
 	//set sheila xp = -3, go to fight
-	flags[SHEILA_XP] = -3;
+	flags[kFLAGS.SHEILA_XP] = -3;
 	startCombat(62);
 	doNext(1);
 }
@@ -466,7 +466,7 @@ public function sheilaIsSorryButLeaveMeAlone():void {
 	clearOutput();
 	outputText("You shake your head and turn away, dismissing Sheila with a pointed gesture.  \"<i>H-hey!</i>\" the girl calls angrily from behind you.  \"<i>Dammit, I said I was sorry, you bastard!  Screw you!  See if I talk to you again!</i>\"");
 	//set sheilapreg = -1
-	flags[SHEILA_PREG] = -1;
+	flags[kFLAGS.SHEILA_PREG] = -1;
 	doNext(13);
 }
 //[XP-2 - Forgive]
@@ -481,8 +481,8 @@ public function sheilaIsSorryAndYouForgive():void {
 	outputText("\n\nYou nod and she turns, loping away on her long legs.");
 	
 	//set sheila xp to 4 if joeycount > 0, else set sheila xp to 1
-	if(flags[SHEILA_JOEYS] > 0) flags[SHEILA_XP] = 4;
-	else flags[SHEILA_XP] = 1;
+	if(flags[kFLAGS.SHEILA_JOEYS] > 0) flags[kFLAGS.SHEILA_XP] = 4;
+	else flags[kFLAGS.SHEILA_XP] = 1;
 	doNext(13);
 }
 
@@ -491,7 +491,7 @@ public function sheilaPologyFight():void {
 	clearOutput();
 	outputText("Saying nothing, you raise your [weapon] and take a swing!  Sheila starts a bit and dodges just in time, then with a look of resignation, raises her fists as well.  \"<i>That'll be right, I guess.  For what it's worth, I really am sorry.</i>\"");
 	//go to fight, set sheila xp = -3
-	flags[SHEILA_XP] = -3;
+	flags[kFLAGS.SHEILA_XP] = -3;
 	startCombat(62);
 	doNext(1);
 }
@@ -541,9 +541,9 @@ public function castArouseAndLeaveSheila():void {
 	outputText("\n\nTurning away again, you leave the woman calling after you.  Not a very good way to avoid attention for someone who says she doesn't want to be discovered.");
 	
 	//set sheila corruption = 100 and demon sheila = 1 and sheilacite = -1, increase PC corruption + 10
-	flags[SHEILA_CORRUPTION] = 100;
-	flags[SHEILA_DEMON] = 1;
-	flags[SHEILA_CITE] = -1;
+	flags[kFLAGS.SHEILA_CORRUPTION] = 100;
+	flags[kFLAGS.SHEILA_DEMON] = 1;
+	flags[kFLAGS.SHEILA_CITE] = -1;
 	stats(0,0,0,0,0,0,0,10);
 	doNext(13);
 }
@@ -554,7 +554,7 @@ public function castArouseAndLetHer():void {
 	outputText("As soon as you nod, the girl bounds to her feet and jumps you, driving you slightly downward in her ardor.");
 	//increase PC corruption +10, output loss scene consonant with player's sex, set sheila xp = 4
 	stats(0,0,0,0,0,0,0,10);
-	flags[SHEILA_XP] = 4;
+	flags[kFLAGS.SHEILA_XP] = 4;
 	//Call appropriate loss router
 	menu();
 	addButton(0,"Next",sheilaLossRapeRouter);
@@ -569,9 +569,9 @@ public function sheilaReallyMad():void {
 	
 	outputText("\n\n\"<i>I don't want anything to do with you,</i>\" she says, sulking and staring downward.  \"<i>");
 	//[(sheila corruption >= 90)
-	if(flags[SHEILA_CORRUPTION] >= 90) outputText("It's so hard to remember myself anymore, and the taint you've put in my body goes crazy when you touch me.  Do you want me to get on my hands and knees?</i>\"  The woman lowers herself to the ground.  \"<i>I beg you.  ");
+	if(flags[kFLAGS.SHEILA_CORRUPTION] >= 90) outputText("It's so hard to remember myself anymore, and the taint you've put in my body goes crazy when you touch me.  Do you want me to get on my hands and knees?</i>\"  The woman lowers herself to the ground.  \"<i>I beg you.  ");
 	outputText("Please, please leave me alone.");
-	if(flags[SHEILA_XP] == -3) outputText("  I know you... you're not as bad as the rest of the monsters out here, so... please.");
+	if(flags[kFLAGS.SHEILA_XP] == -3) outputText("  I know you... you're not as bad as the rest of the monsters out here, so... please.");
 	outputText("</i>\"");
 	//[Stand][Leave]
 	menu();
@@ -688,7 +688,7 @@ public function sheilaReconcileKay2():void {
 	
 	outputText("\n\nA broad smile lets you know she's just joking as she scatters the cooling fire with her spit, stirring and dispersing the ashes.  \"<i>Thanks for the chatter.  Maybe I'll see you again.</i>\"  Picking up her catch, she turns and lopes off.");
 	//set sheila xp to 2
-	flags[SHEILA_XP] = 2;
+	flags[kFLAGS.SHEILA_XP] = 2;
 	doNext(13);
 }
 
@@ -728,7 +728,7 @@ public function sheilaFriendlyNoQuestions():void {
 
 	outputText("\n\n\"<i>Yeah.</i>\"  Sheila turns and departs with her long-legged gait.");
 	//set sheila xp to 3
-	flags[SHEILA_XP] = 3;
+	flags[kFLAGS.SHEILA_XP] = 3;
 	doNext(13);
 }
 
@@ -746,7 +746,7 @@ public function sheilaFriendlyComeHereOften():void {
 	
 	outputText("\n\nExplanation concluded, she folds her hands over her stomach and resumes staring at the clouds.  You join her for a while, then get up and depart.");
 	//set sheila xp to 3
-	flags[SHEILA_XP] = 3;
+	flags[kFLAGS.SHEILA_XP] = 3;
 	doNext(13);
 }
 
@@ -800,7 +800,7 @@ public function sheilaFriendlyHerPeoples():void {
 		outputText("\n\nShe gets to her feet, lips pressed tight and face flushed with embarrassment, and leaves without another word, the bundle of game animals hanging over her shoulder... but what's said is said.");
 		//set sheila xp to 3
 	}
-	flags[SHEILA_XP] = 3;
+	flags[kFLAGS.SHEILA_XP] = 3;
 	doNext(13);
 }
 
@@ -820,7 +820,7 @@ public function sheilaFriendlyCurfew():void {
 	outputText("\n\n\"<i>Bet your ass!  Moles haven't got anything on us; we could dig right under you and you'd never know it until the invasion popped up under your butt and moved in,</i>\" the girl answers proudly, when you mention it.  \"<i>You're not wrong, though... we love the surface and sun; there's not one person on the dig crew now who's not dreaming of the day he or she gets to rotate off of it and onto hunting or war crew.  Exigencies, you know?  The first shelters were only half-underground when the demons attacked and survived by the grace of whatever gods are left, but we took the hint.</i>\"  Sheila climbs to her feet, and nods at you.  \"<i>Enough for now... I should really get back.  Catch me later and we can talk more, ok?</i>\"");
 	
 	//set sheila xp to 3
-	flags[SHEILA_XP] = 3;
+	flags[kFLAGS.SHEILA_XP] = 3;
 	doNext(13);
 }
 
@@ -861,9 +861,9 @@ public function sheilaXPThreeSexyTimeDitchHer():void {
 	outputText("\n\nYou don't have to do any such thing.  It's getting darker and you should head home, so you bid the girl farewell and depart, leaving Sheila calling your name - until the sound suddenly cuts off.");
 	
 	//set sheila corruption = 100 and demon sheila = 1 and sheilacite = -1
-	flags[SHEILA_CORRUPTION] = 100;
-	flags[SHEILA_DEMON] = 1;
-	flags[SHEILA_CITE] = -1;
+	flags[kFLAGS.SHEILA_CORRUPTION] = 100;
+	flags[kFLAGS.SHEILA_DEMON] = 1;
+	flags[kFLAGS.SHEILA_CITE] = -1;
 	doNext(13);
 }
 
@@ -887,7 +887,7 @@ public function sheilaXPThreeSexyTimePostSexLetHerBe():void {
 	clearOutput();
 	outputText("Pulling away from you, Sheila gathers her clothing and departs, looking satisfied.  The glance she gives you over her shoulder is even a little warmer than before.");
 	//i had snoo-snoo!
-	flags[SHEILA_XP] = 4;
+	flags[kFLAGS.SHEILA_XP] = 4;
 	doNext(13);
 }
 
@@ -895,7 +895,7 @@ public function sheilaXPThreeSexyTimePostSexLetHerBe():void {
 //[XP3 - Sex - any sex scene - Stay With Her]
 public function shielaXPThreeSexyTimePostSexStay():void {
 	clearOutput();
-	flags[SHEILA_XP] = 4;
+	flags[kFLAGS.SHEILA_XP] = 4;
 	outputText("You grab her tail, provoking a curious, but not discouraging, look from the woman who was planning to spend the night alone.  \"<i>What is it, [name]?</i>\"");
 	
 	outputText("\n\n\"<i>Oh... oh Sheila; let me love you 'til the morning comes!</i>\"");
@@ -937,8 +937,8 @@ public function shielaXPThreeSexyTimePostSexStayII():void {
 		if(!player.isTaur()) outputText("Your hands squeeze her hips almost of their own volition, helping her slam down with force, and her head rolls back on her neck.  ");
 		outputText("Her ");
 		//[(sheila corruption < 30)]
-		if(flags[SHEILA_CORRUPTION] < 30) outputText("little breasts rise and fall with increasing frequency atop her ribcage as her pace picks up and her breaths come short and shallow.");
-		else if(flags[SHEILA_CORRUPTION] > 60) outputText("huge tits jiggle magnificently as she rocks, nearly slapping her in the face as she plunges down and then falling back into place with waves of rippling flesh.");
+		if(flags[kFLAGS.SHEILA_CORRUPTION] < 30) outputText("little breasts rise and fall with increasing frequency atop her ribcage as her pace picks up and her breaths come short and shallow.");
+		else if(flags[kFLAGS.SHEILA_CORRUPTION] > 60) outputText("huge tits jiggle magnificently as she rocks, nearly slapping her in the face as she plunges down and then falling back into place with waves of rippling flesh.");
 		else outputText("breasts quiver invitingly as she pumps your cock, but before you can think of grabbing one yourself, both of her hands are squeezing and caressing them, drawing sighs from the woman as she toys with her erect nipples.");
 		
 		outputText("\n\nSheila struggles against her own impulses, trying to make good on her promise to 'punish' you, but it's a losing battle.  Her hips slide back and forth even as she pulls in and out now, shifting angle to aim the tip of your dick against her vaginal walls when she sinks down on it, and her mouth hangs open constantly.  You grit your teeth, trying to endure the sensations as she uses your tool to scratch every one of her itches, but your lover has no such reserve left.  \"<i>No... n-no,</i>\" Sheila moans, \"<i>too soon!  Oh, too soon!</i>\"");
@@ -949,10 +949,10 @@ public function shielaXPThreeSexyTimePostSexStayII():void {
 		else outputText("chest");
 		outputText(" in her soft hair - but her hips keep pumping, incredibly.  ");
 		//(pc corr >= 90 or > sheila corruption)
-		if(player.cor >= 90 || player.cor > flags[SHEILA_CORRUPTION]) {
+		if(player.cor >= 90 || player.cor > flags[kFLAGS.SHEILA_CORRUPTION]) {
 			outputText("  The tight, rippling muscles of her pussy clamp down on you, nearly holding your cock in place as she tries to ride you still but only manages to jerk your dick up and down and squeeze pre-cum from it.  \"<i>S-so full,</i>\" Sheila groans, \"<i>did you just get bigger in me?</i>\"  Her lungs inflate as she sucks in her breath, and her hard nipples push into your " + player.skinFurScales() + ".");
 		}
-		else if(player.cor < flags[SHEILA_CORRUPTION]) outputText("  Her pussy clamps down around you, the rippling muscles so tight that she wouldn't even be able to pump if it weren't for the hot river of juice you feel around your tool.  \"<i>A-ah,</i>\" Sheila groans, \"<i>you thrust too!  Rail me silly!</i>\"  She tries to push against you with her hands, to return herself to an upright position, but can barely pull her chest apart from you - her nipples just narrowly recede from the surface of your " + player.skinFurScales() + " as her efforts peak.");
+		else if(player.cor < flags[kFLAGS.SHEILA_CORRUPTION]) outputText("  Her pussy clamps down around you, the rippling muscles so tight that she wouldn't even be able to pump if it weren't for the hot river of juice you feel around your tool.  \"<i>A-ah,</i>\" Sheila groans, \"<i>you thrust too!  Rail me silly!</i>\"  She tries to push against you with her hands, to return herself to an upright position, but can barely pull her chest apart from you - her nipples just narrowly recede from the surface of your " + player.skinFurScales() + " as her efforts peak.");
 		//(else if magically equal but < 90)
 		else outputText("  Her pussy squirts and sucks alternately, trying to find purchase on your cock even as her pumping hips deny it; the sensation drives you wild.  \"<i>[name], your old fella is amazing...</i>\"");
 		outputText("  Your dick twitches and swells, as if to fulfill her words, and your pelvis rocks into Sheila's as you begin to ejaculate.  \"<i>No... pull out, or you'll get me pregnant,</i>\" she cries, when ");
@@ -1254,7 +1254,7 @@ public function sheilaXPThreeSexyTimeGuardDuty():void {
 	outputText("\n\nYou smile and offer to stay with her a bit longer, but Sheila turns beet-red and shakes her head, departing without another word.");
 	
 	//set sheila xp = 4, small lib-based lust damage if lib < 40, or large if lib >= 40; advance time 1 hr
-	flags[SHEILA_XP] = 4;
+	flags[kFLAGS.SHEILA_XP] = 4;
 	if(player.lib < 40) stats(0,0,0,0,0,0,5,0);
 	else stats(0,0,0,0,0,0,15,0);
 	doNext(13);
@@ -1330,7 +1330,7 @@ public function fuckBuddySheilaMeetingChat():void {
 	addButton(1,"Old Loves",fuckBuddySheilaMeetingChatOldLoves);
 	addButton(2,"Why Hide?",fuckBuddySheilaMeetingChatWhyHide);
 	addButton(3,"LiveWithMe",fuckBuddySheilaMeetingChatLiveWithMe);
-	if(flags[SHEILA_JOEYS] > 0) addButton(4,"Kids", fuckBuddySheilaMeetingChatKids);
+	if(flags[kFLAGS.SHEILA_JOEYS] > 0) addButton(4,"Kids", fuckBuddySheilaMeetingChatKids);
 }
 
 //[XP4 - Chat - Family&Friends]
@@ -1491,7 +1491,7 @@ public function fuckBuddySheilaMeetingChatLiveWithMe():void {
 public function fuckBuddySheilaMeetingChatKids():void {
 	clearOutput();
 	//if joeycount = 1
-	if(flags[SHEILA_JOEYS] == 1) {
+	if(flags[kFLAGS.SHEILA_JOEYS] == 1) {
 		outputText("\"<i>Ah?</i>\" Sheila says, turning toward you sheepishly.");
 		
 		outputText("\n\n\"<i>I said, 'how's the kid doing?',</i>\" you repeat.");
@@ -1539,7 +1539,7 @@ public function fuckBuddySheilaMeetingChatKids():void {
 		outputText("\n\nShaking your head, you lean against her; the two of you remain like that until she gets up to leave and bids you farewell.");
 	}
 	//if 1 < joeycount < 10
-	else if(flags[SHEILA_JOEYS] < 10) {
+	else if(flags[kFLAGS.SHEILA_JOEYS] < 10) {
 		outputText("\"<i>So how are the kids?</i>\"");
 		outputText("\n\nSheila smiles under her downcast eyes.  \"<i>They're fine, love.  Some are getting pretty big.</i>\"");
 		outputText("\n\nShe holds her hands eight or ten inches apart.  When your eyebrows register surprise at that, she elaborates.  \"<i>Remember how small they come out, though... only about four inches when they're born.  We tuck them in little pouches to keep them warm and up against the teat.</i>\"");
@@ -1594,7 +1594,7 @@ public function fuckBuddySheilaMeetingChatKids():void {
 			outputText("\n\nThat's... eerily bitter.");
 			if(player.cor < 40) outputText("  You pat her shoulder carefully and suggest, \"<i>I could watch them for a while.</i>\"");
 			
-			outputText("\n\n\"<i>God, that'd be nice.  But I can't take them out of the colony until they're ready to train a trade; those are the rules.  Only nurses can, when they need to teach a class basic stuff - up is up, rocks are rocks, that sort - and they get a soldier detail when they go.  I wouldn't want to anyway... nothing on you, but there are only two of us and " + num2Text(flags[SHEILA_JOEYS]) + " of them.  I wish I could bring you in, though.</i>\"");
+			outputText("\n\n\"<i>God, that'd be nice.  But I can't take them out of the colony until they're ready to train a trade; those are the rules.  Only nurses can, when they need to teach a class basic stuff - up is up, rocks are rocks, that sort - and they get a soldier detail when they go.  I wouldn't want to anyway... nothing on you, but there are only two of us and " + num2Text(flags[kFLAGS.SHEILA_JOEYS]) + " of them.  I wish I could bring you in, though.</i>\"");
 			
 			outputText("\n\n\"<i>Well... why can't you?</i>\" you ask.  \"<i>I mean, I'd think it's clear by now that I'm not some monster.</i>\"");
 			
@@ -1772,21 +1772,21 @@ public function consensualSheila69(cock:Boolean = true):void {
 	else outputText("\n\n\"<i>Mmmh!  Mm mmnnn!</i>\" Sheila moans, muffled by your body.  The import doesn't hit you until a second later.");
 	outputText("  Her vagina convulses, ");
 	//(pc corr >= 90 or > sheila corruption
-	if(player.cor >= 90 || player.cor > flags[SHEILA_CORRUPTION]) {
+	if(player.cor >= 90 || player.cor > flags[kFLAGS.SHEILA_CORRUPTION]) {
 		outputText("trying to pull your ");
 		if(!player.isTaur()) outputText("tongue");
 		else outputText("fingers");
 		outputText(" in ravenously.  You can literally feel her internal muscles rippling and undulating, stroking you as if they could coax out an ejaculation.  Sheila sucks in her breath as she climaxes, filling her chest; you can feel her tits pushing harder and harder against you.");
 	}
 	//(PC corr < sheila corruption)
-	else if(player.cor < flags[SHEILA_CORRUPTION]) {
+	else if(player.cor < flags[kFLAGS.SHEILA_CORRUPTION]) {
 		outputText("pushing out a gush of fluid.  For what seems like several minutes, her pussy deluges your ");
 		if(!player.isTaur()) outputText("mouth, filling you with her taste.");
 		else outputText("hands, completely soaking them in her orgasm.");
 		outputText("   Her thighs tense, forcing her pelvis into the air and her cunt toward you as her chest slumps; slowly, you feel the perky nipples pressing into your stomach pull away.");
 	}
 	//(else if equal but below 90)
-	else if(player.cor == flags[SHEILA_CORRUPTION] && player.cor < 90) {
+	else if(player.cor == flags[kFLAGS.SHEILA_CORRUPTION] && player.cor < 90) {
 		outputText("drooling a trickle of fluid and licking at you as she screams her ecstasy into your crotch.");
 	}
 	outputText("  Sheila jams her face upward, ");
@@ -1847,7 +1847,7 @@ public function consensualSheila69(cock:Boolean = true):void {
 		return;
 	}
 	//[(corruption threshold warning if sheila corruption >= 80 and PC corr > sheila corruption and sheila xp =/= 3)
-	else if((player.cor > 90 || player.cor > sheilaCorruption()) && sheilaCorruption() >= 80 && flags[SHEILA_XP] != 3) {
+	else if((player.cor > 90 || player.cor > sheilaCorruption()) && sheilaCorruption() >= 80 && flags[kFLAGS.SHEILA_XP] != 3) {
 		sheilaCorruptionUpdate();
 		/*if(player.cor > 90 || player.cor > sheilaCorruption()) {
 			stats(0,0,0,0,0,0,0,-10);
@@ -1885,11 +1885,11 @@ public function consensualSheila69(cock:Boolean = true):void {
 	//minus lust, minus small libido; if PC corr > sheila corruption then -10 PC corr and +10 sheila corruption, else if PC corr < sheila corruption then +10 PC corr and -10 sheila corruption and slimefeed
 	stats(0,0,0,0,-.5,0,-100,0);
 	sheilaCorruptionUpdate();
-	/*if(player.cor >= 90 || player.cor > flags[SHEILA_CORRUPTION]) {
+	/*if(player.cor >= 90 || player.cor > flags[kFLAGS.SHEILA_CORRUPTION]) {
 		stats(0,0,0,0,0,0,0,-10);
 		sheilaCorruption(10);
 	}
-	else if(player.cor < flags[SHEILA_CORRUPTION]) {
+	else if(player.cor < flags[kFLAGS.SHEILA_CORRUPTION]) {
 		stats(0,0,0,0,0,0,0,10);
 		sheilaCorruption(-10);
 	}*/
@@ -1897,7 +1897,7 @@ public function consensualSheila69(cock:Boolean = true):void {
 	
 	outputText("\n\nShe unruffles for a moment, and then pulls in close beside you.  ");
 	//[(sheila xp = 3)
-	if(flags[SHEILA_XP] == 3) {
+	if(flags[kFLAGS.SHEILA_XP] == 3) {
 		outputText("\"<i>[name]... thanks.  Even being covered in your mess is better than being stuck outside all night, too scared to touch myself and too horny to run.</i>\"  Sheila kisses you on the cheek.  \"<i>My sloppy hero, eh?  I'm okay now; I can make it 'til morning when the gate reopens.</i>\"");
 		outputText("\n\nWhatever that means... does she plan to spend all night outside, alone and covered in drying sexual fluids?");
 		outputText("\n\n\"<i>Er... pretty much, yeah?  It won't be the first time - the staying up all night, I mean.</i>\"  Sheila colors a bit.  \"<i>That's how it goes if I can't make curfew; gotta watch out for myself.  But it'll be okay now that you've... helped, and I can actually focus.</i>\"");
@@ -1982,7 +1982,7 @@ public function consentacleVagSexForKangarooSlutBitches():void {
 	outputText(".  \"<i>Ohhh,</i>\" she moans, \"<i>YES!</i>\"  At that moment you feel her vagina clamp around your [cockFit 32], wringing it frantically as she reaches her climax.  You continue pumping as best you're able, but you can't stand up to the siege of her spasming pussy for long; ");
 	
 	//[(pc corr >= 90 or > sheila corruption) 
-	if(player.cor >= 90 || player.cor > flags[SHEILA_CORRUPTION]) {
+	if(player.cor >= 90 || player.cor > flags[kFLAGS.SHEILA_CORRUPTION]) {
 		outputText("something builds to a painful intensity in your crotch.  It feels like two mind-blowing orgasms arriving together and fighting over which one gets to come out first.  You rise toward climax quickly and then are drawn back in moments of maddening frustration, over and over.  In response you intensify your thrusts even more, sawing in and out of the girl at a pace that would be blistering if the two of you weren't leaking enough pre-cum and pussy juice to put out a brushfire.  Eventually the pleasure overwhelms the strange reticence of your orgasm; you cry out loudly as you peak, and squeeze a tiny trickle of cum into her grasping vagina.");
 		//[(multi)
 		if(player.cockTotal() > 1 ) {
@@ -1994,7 +1994,7 @@ public function consentacleVagSexForKangarooSlutBitches():void {
 		outputText("  The intense sensation begins to ascend your dick slowly; your body works itself into overdrive and your partner's moans increase sympathetically as it nears the tip.  Finally, it exits your body with an enormous squeeze, alongside a jet of jism.  Sheila gives a complementary gasp as this pulse enters her, and her pussy convulses in a second orgasm, causing her back to arch.  Her breasts seem to jiggle more wildly than before as she thrashes on the ground in the grip of her pleasure.");
 	}
 	//(PC corruption < sheila corruption)
-	else if(player.cor < flags[SHEILA_CORRUPTION]) {
+	else if(player.cor < flags[kFLAGS.SHEILA_CORRUPTION]) {
 		outputText("your resistance is condemned to die in failure as Sheila lets out a quavering scream of pleasure and wraps her arms and legs around you, pinning you inside.  Her vagina convulses around your cock powerfully; you could swear you feel yourself stretching longer and longer as her rippling pussy pulls you deeper in.  Just when you think that your dick must be a mile long,  her whole body tenses up and her fingernails dig into your back.  Wearing a madwoman's expression, Sheila stares open-mouthed at you as her muscles lock and her pussy quivers out its fitful orgasm; even her ");
 		if(sheilaCorruption() < 30) outputText("perky");
 		else outputText("pillowy");
@@ -2044,7 +2044,7 @@ public function consentacleVagSexForKangarooSlutBitches():void {
 		return;
 	}
 	//[(corruption threshold warning if sheila corruption >= 80 and PC corr > sheila corruption and sheila xp =/= 3)
-	else if((player.cor > 90 || player.cor > sheilaCorruption()) && sheilaCorruption() >= 80 && flags[SHEILA_XP] != 3) {
+	else if((player.cor > 90 || player.cor > sheilaCorruption()) && sheilaCorruption() >= 80 && flags[kFLAGS.SHEILA_XP] != 3) {
 		sheilaCorruptionUpdate();
 		/*if(player.cor > 90 || player.cor > sheilaCorruption()) {
 			stats(0,0,0,0,0,0,0,-10);
@@ -2086,7 +2086,7 @@ public function consentacleVagSexForKangarooSlutBitches():void {
 	
 	outputText("\n\n\"<i>You better be, mate,</i>\" she teases.  Kissing your cheek gingerly, she murmurs, almost too quietly to hear, \"<i>... you're still the best.</i>\"");
 	//[(sheila xp = 3)
-	if(flags[SHEILA_XP] == 3) {
+	if(flags[kFLAGS.SHEILA_XP] == 3) {
 		outputText("  Sheila looks over, thankfulness written on every inch of her brow.  \"<i>[name]... I really appreciate what you did.  I'd rather be knocked up than caught by some nightmare because I was too horny to hide properly until the colony opened - er, not that I want to be knocked up by you, sweet as you are.</i>\"");
 		
 		outputText("\n\nHuh... so she's planning to hide the rest of the night?");
@@ -2232,11 +2232,11 @@ public function sheilaMutualMasturbation():void {
 	//(jack shit)
 	else outputText("fingers are pulled into her vagina by her muscles as her orgasm begins.");
 	//[( pc corr >= 90 or > sheila corruption) 
-	if(player.cor >= 90 || player.cor > flags[SHEILA_CORRUPTION]) {
+	if(player.cor >= 90 || player.cor > flags[kFLAGS.SHEILA_CORRUPTION]) {
 		outputText("\n\nHer lips seem to draw yours in when she comes, until it feels like you've been pressing them into her since time began; her chest rises as she sucks, and you can clearly see her breasts swelling up - it's too much to bear, and you grab one with your free hand and squeeze.  Sheila answers you by sticking her tongue even deeper into your mouth.");
 	}
 	//(else pc corr < sheila corruption)
-	else if(player.cor < flags[SHEILA_CORRUPTION]) {
+	else if(player.cor < flags[kFLAGS.SHEILA_CORRUPTION]) {
 		outputText("\n\nThe kiss breaks as the girl loses muscle control, and she leans forward, pressing her forehead into yours and looking up into your eyes with a smile and a  heavy-lidded stare.  She shivers again, and you can feel heat gathering in your face and fogging your brain even as she seems to curl up in your arms.");
 	}
 	//(else if equal corr but under 90)
@@ -2255,7 +2255,7 @@ public function sheilaMutualMasturbation():void {
 		return;
 	}
 	//[(corruption threshold warning if sheila corruption >= 80 and PC corr > sheila corruption and sheila xp =/= 3)
-	else if((player.cor > 90 || player.cor > sheilaCorruption()) && sheilaCorruption() >= 80 && flags[SHEILA_XP] != 3) {
+	else if((player.cor > 90 || player.cor > sheilaCorruption()) && sheilaCorruption() >= 80 && flags[kFLAGS.SHEILA_XP] != 3) {
 		sheilaCorruptionUpdate();
 		/*if(player.cor > 90 || player.cor > sheilaCorruption()) {
 			stats(0,0,0,0,0,0,0,-10);
@@ -2300,7 +2300,7 @@ public function sheilaMutualMasturbation():void {
 		if(player.gender == 0 && silly()) outputText("  I love you, my Ken doll.");
 		outputText("</i>\"");
 		//[(if sheila xp = 3)
-		if(flags[SHEILA_XP] == 3) {
+		if(flags[kFLAGS.SHEILA_XP] == 3) {
 			outputText("\n\nShe sighs and slips out from under you.");
 			outputText("\n\n\"<i>What's up?</i>\" you ask, sitting up.");
 			outputText("\n\n\"<i>Still gotta find a place to hide tonight,</i>\" Sheila replies.  \"<i>Then I can hit the town again in the morning.  I'll remember you the next time I feel like hanky-panky, though.</i>\"  The girl's cheeks color a bit.");
@@ -2336,8 +2336,8 @@ public function sheilaCorruptionWarningsChooseFondle():void {
 	
 	outputText("\n\nBitch tease.");
 	//set sheila xp to -3 and sheila corruption to 90, PC corr - 10
-	flags[SHEILA_XP] = -3;
-	flags[SHEILA_CORRUPTION] = 90;
+	flags[kFLAGS.SHEILA_XP] = -3;
+	flags[kFLAGS.SHEILA_CORRUPTION] = 90;
 	stats(0,0,0,0,0,0,0,-10);
 	doNext(13);
 }
@@ -2354,7 +2354,7 @@ public function sheilaCorruptionWarningListenToHer():void {
 	outputText("\n\n\"<i>Thank you,</i>\" she says.  With a peck on your cheek, she stands up and gathers her clothes, then sighs.  \"<i>I know it's not just your fault; it takes two to tango.  I'm going to try to get myself under control for these next couple of weeks.  Please, please do the same.  When I feel like I'm ready, you'll see me again.  I... love you.  Bye.</i>\"");
 	//no change in sheila corruption (remains at 80), PC corr -10, set sheila clock = -13
 	stats(0,0,0,0,0,0,-10,0);
-	flags[SHEILA_CLOCK] = -4;
+	flags[kFLAGS.SHEILA_CLOCK] = -4;
 	doNext(13);
 }
 
@@ -2435,7 +2435,7 @@ public function sheilaFlyingKick():void {
 }
 
 public function sheilaAI():void {
-	if(flags[SHEILA_DEMON] == 1) {
+	if(flags[kFLAGS.SHEILA_DEMON] == 1) {
 		demonSheilaAI();
 		return;
 	}
@@ -2459,7 +2459,7 @@ public function sheilaGotWhomped():void {
 	else outputText("rubbing her thighs together and smearing around the moisture from her pussy");
 	outputText(".  As you stand over her, she forces herself to her elbows and tries to scoot away from you, fear written on her face.  \"<i>I'm sorry... please, no...");
 	//[(sheila xp > -4)
-	if(flags[SHEILA_XP] > -4) outputText("  I'll forgive you for everything else, but please, not this!");
+	if(flags[kFLAGS.SHEILA_XP] > -4) outputText("  I'll forgive you for everything else, but please, not this!");
 	outputText("</i>\" she implores.");
 	//[(sheila corruption >= 90)
 	if(sheilaCorruption() >= 90) outputText("  \"<i>I-if you touch me again... god, I can't even think straight anymore!  Don't do this!</i>\"");
@@ -2484,7 +2484,7 @@ public function sheilaGotWhomped():void {
 }
 //if choosing Let Her Go and sheila xp > -3, set sheila xp = -1, then give xp/gems and Next button to camp
 public function letSheilaGo():void {
-	if(flags[SHEILA_XP] >= -3) flags[SHEILA_XP] = -1;
+	if(flags[kFLAGS.SHEILA_XP] >= -3) flags[kFLAGS.SHEILA_XP] = -1;
 	eventParser(5007);
 }
 
@@ -2492,7 +2492,7 @@ public function letSheilaGo():void {
 public function rapeSheilasCooter():void {
 	clearOutput();
 	//set sheila xp = -4
-	flags[SHEILA_XP] = -4;
+	flags[kFLAGS.SHEILA_XP] = -4;
 	var x:int = player.cockThatFits(48);
 	
 	outputText("You grab the girl by her fuzzy leg; she tries to kick away from you, but you pull her back, pinning her");
@@ -2642,7 +2642,7 @@ public function rapeSheilasCooter():void {
 public function forcedSheilaOral(dick:Boolean = true):void {
 	clearOutput();
 	//set sheila xp = -4
-	flags[SHEILA_XP] = -4;
+	flags[kFLAGS.SHEILA_XP] = -4;
 	outputText("You lean down and grab the girl by her shirt-front, raising her to her knees; her hands automatically go to yours.");
 	
 	outputText("\n\n\"<i>Let go!</i>\" she shrieks, trying to pull free of your grip.");
@@ -2781,7 +2781,7 @@ public function forcedSheilaOral(dick:Boolean = true):void {
 		
 		outputText("\n\n\"<i>You are awful at this,</i>\" you gripe, sitting heavily on her head.  A muffled complaint comes from under you, but you pay it no mind.  \"<i>No boy parts, tail too stubby to insert... and now no oral skills either.  Seriously, what are you good for except taking the dick and making babies?  Why don't you just stay home with your legs open and hold out a begging bowl?");
 		//[(PC has met hellhound master)
-		if(flags[UNKNOWN_FLAG_NUMBER_00141] > 0) outputText("  I know a nice boy in the mountains who keeps dogs, and I'm sure he'd love to have a womb like yours for their seed.  By this time tomorrow, you could have a cock in both holes, filling you with hellhound babies since you can't please a person.");
+		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00141] > 0) outputText("  I know a nice boy in the mountains who keeps dogs, and I'm sure he'd love to have a womb like yours for their seed.  By this time tomorrow, you could have a cock in both holes, filling you with hellhound babies since you can't please a person.");
 		outputText("</i>\"");
 		
 		outputText("\n\nYou can feel her face heating up under your [butt] as she flushes with shame; seems like you struck a nerve.  You ");
@@ -2791,17 +2791,17 @@ public function forcedSheilaOral(dick:Boolean = true):void {
 		if(player.exploredForest >= 40) outputText(" - in fact, there are quite a few I've seen who look like better lovers than you.  Maybe I should carry you to the forest and tie you to a nice pussy-shaped giant flower to give you lessons");
 		outputText(".  ");
 		//[(minotaur addiction score =/= 0%)
-		if(flags[MINOTAUR_CUM_ADDICTION_TRACKER] > 0 || player.hasPerk("Minotaur Cum Addict") >= 0) {
+		if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] > 0 || player.hasPerk("Minotaur Cum Addict") >= 0) {
 			outputText("Perhaps I'll turn you over to a minotaur; you're bound to get better at using your tongue when you're addicted to their amazing seed.  Would you like that?  The first thing you'd see in the morning would be a huge flared cock, right in front of you, dripping with heavenly precum and waiting for your mouth... or your cunt.  You could be just another minotaur-fucking slut of the plains.  ");
 		}
 		outputText("Or I could take you home and give you personal training myself, whenever I feel like it, and invite travelers to do the same");
 		//[(PC has Izma with cock)
-		if(izmaFollower() && flags[IZMA_NO_COCK] == 0) outputText("; I personally know fifteen inches of fat, orange dick and four heavy balls that'd love to get in at your other end while I ride your face");
+		if(izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0) outputText("; I personally know fifteen inches of fat, orange dick and four heavy balls that'd love to get in at your other end while I ride your face");
 		outputText(".</i>\"");
 		
 		outputText("\n\nYour [vagOrAss] squeezes around Sheila's hesitant tongue, turned on more by the spectacle of selling her body than by any of her poor efforts.  She squirms under you, rubbing her thighs together as you paint the worst pictures of her future you can imagine, and you climax");
 		//[(PC has met Lumi or Lynette)
-		if(player.hasStatusAffect("hairdresser meeting") >= 0 || flags[LUMI_MET] > 0) {
+		if(player.hasStatusAffect("hairdresser meeting") >= 0 || flags[kFLAGS.LUMI_MET] > 0) {
 			outputText(" while imagining her turned over to the goblins for experiments, forced to drink potion after potion - most would be dedicated to growing cocks on her or increasing semen production, of course");
 		}
 		outputText(".  Your hole clenches and drools on her, and the woman's rude tongue retreats from the pressure, leaving you painfully empty.");
@@ -2819,7 +2819,7 @@ public function forcedSheilaOral(dick:Boolean = true):void {
 //set sheila xp = -4
 public function sheilaGetsRapedWithADildont():void {
 	clearOutput();
-	flags[SHEILA_XP] = -4;
+	flags[kFLAGS.SHEILA_XP] = -4;
 	outputText("Looking down at the woman below you, a cruel idea forms in your head.  You extract the absurd pink goblin dildo from your pack; Sheila's eyes darken as she recognizes the manufacture.  She tries to scoot further away from you, but you grab her leg and turn her over callously, then slide a hand under her and force her ass into the air by lifting her crotch.");
 	
 	outputText("\n\n\"<i>What are you doing?</i>\" she asks, panicked.  Ignoring her, you unfasten her belt and yank down both her shorts and her panties; as you pull the fabric away from her vulva, she squirms uncomfortably.  \"<i>Stop it, please!</i>\"");
@@ -2907,10 +2907,10 @@ public function getBeatUpBySheila():void {
 		
 		outputText("\n\nYou shake your head, lost in a fog.  No sooner do you than she jumps you, pressing her body to yours and stealing a long passionate kiss that focuses your thoughts.");
 		//[(sheila xp > -4)
-		if(flags[SHEILA_XP] > -4) {
+		if(flags[kFLAGS.SHEILA_XP] > -4) {
 			outputText("\n\n\"<i>Don't hate me for this...</i>\" she whispers.");
 			//if sheila xp > -4, set sheila xp = -2, go to loss rape
-			flags[SHEILA_XP] = -2;
+			flags[kFLAGS.SHEILA_XP] = -2;
 		}
 		//TO ZE SCENE
 		addButton(0,"Next",sheilaLossRapeRouter);
@@ -3223,7 +3223,7 @@ public function sheilaForcedOralGeneric():void {
 //output at next sheila encounter if conditions are met, suppressing any normal output (this also includes the sheila xp = -2 or -1 apology outputs)
 //set sheilapreg = 0
 public function normalSheilaPregNotifNumberOne():void {
-	flags[SHEILA_PREG] = 0;
+	flags[kFLAGS.SHEILA_PREG] = 0;
 	clearOutput();
 	outputText("Traipsing through the grass, you can see Sheila sitting under the shade of a low tree from a long way off.  The reverse is also true, as she waves to you from her seat, beckoning you over.  You make your way to her curiously.");
 	outputText("\n\n\"<i>G'day, [name],</i>\" she opens, slightly nervous.  \"<i>I needta tell you something.  Sit down?</i>\"");
@@ -3251,8 +3251,8 @@ public function normalSheilaPregNotifNumberOneYepIssue():void {
 
 	outputText("\n\nShe stands up suddenly and starts walking away.  \"<i>Nice knowing you, mate.  You won't see me again - I'll make sure of that.</i>\"  Within seconds of speaking, she's broken into a fast, bounding run, beyond any hope of catching.");
 	//set sheilapreg = -1, and set joeycount + 1 if you plan to track that stat even after Sheila's disabled
-	flags[SHEILA_PREG] = -1;
-	flags[SHEILA_JOEYS]++;
+	flags[kFLAGS.SHEILA_PREG] = -1;
+	flags[kFLAGS.SHEILA_JOEYS]++;
 	doNext(13);
 }
 
@@ -3264,7 +3264,7 @@ public function normalSheilaPregNotifNumberOneCoolDeal():void {
 	outputText("\n\nShe releases you; a small wet spot marks the space her face just occupied.  Seeing it, she wipes her tears on the back of her hand.  \"<i>Sorry.  Didn't mean to leak on you.</i>\"");
 	
 	//[(sheila xp < 0)
-	if(flags[SHEILA_XP] < 0) {
+	if(flags[kFLAGS.SHEILA_XP] < 0) {
 		outputText("\n\nShe sniffs a bit.  \"<i>I didn't really expect warm approbation, y'know?  I mean, we're not the best of friends, so I appreciate it.  Can't really bring you two together to show you how it's doing yet, and I feel all kinds of bad about not having the dad nearby while it's growing up, but... if you want, we can keep in touch and I'll tell you the news.  Do... would you be okay with seeing more of each other?</i>\"");
 		outputText("\n\nEarnest eyes turn on you, and you put a hand on the girl's head.  She smiles, taking your answer for granted.  \"<i>Spiffy... you're me mate, now.</i>\"  Sheila cuddles a bit closer, resting her head on your chest and making you wonder just which interpretation of the word she was using.  You sit there for several minutes before she gets up and bids you goodbye with a shy glance.");
 	}
@@ -3275,8 +3275,8 @@ public function normalSheilaPregNotifNumberOneCoolDeal():void {
 		
 		outputText("\n\n\"<i>Randy " + player.mf("bloke","sheila") + ",</i>\" she answers, \"<i>as much fun as that would be, I'm feeling clucky and I need to go check on your baby.  I don't want to be one of those mums that leave their nippers with the help and never see them.</i>\"  She kisses you, and then stands up to walk away - though when she glances over her shoulder at you, it's obvious by the fond look in her eyes she's eager for the next meeting.");
 	}
-	if(flags[SHEILA_XP] < 4) flags[SHEILA_XP] = 4;
-	flags[SHEILA_JOEYS]++;
+	if(flags[kFLAGS.SHEILA_XP] < 4) flags[kFLAGS.SHEILA_XP] = 4;
+	flags[kFLAGS.SHEILA_JOEYS]++;
 	doNext(13);
 	//if sheila xp < 4, set sheila xp = 4; increment joeycount + 1
 }
@@ -3297,9 +3297,9 @@ public function normalSheilaPregNotifREPEATEDED():void {
 	if(player.cor < 40) outputText(", and you give it a squeeze");
 	outputText(".  \"<i>I just wanted to tell you about your baby.  Can't stay... have to catch up to quota still.</i>\"  She drags to her feet and turns to go, tail listlessly hanging.  Even her ears are drooping; this girl is tired.");
 	
-	flags[SHEILA_JOEYS]++;
-	flags[SHEILA_PREG] = 0;
-	if(sheilaCorruption() > 80) flags[SHEILA_CORRUPTION] = 80;
+	flags[kFLAGS.SHEILA_JOEYS]++;
+	flags[kFLAGS.SHEILA_PREG] = 0;
+	if(sheilaCorruption() > 80) flags[kFLAGS.SHEILA_CORRUPTION] = 80;
 	menu();
 	//[Help(requires >80 speed, centaur >= 5', naga, or big wings and archery)][Walk With Her][Let Her Go]
 	if((player.spe > 80 && player.hasPerk("Runner") >= 0) || (player.isTaur()) || player.isNaga() || (player.canFly && player.hasKeyItem("Bow") >= 0))
@@ -3463,7 +3463,7 @@ public function normalSheilaPregNotifREPEATEDEDHelpABitchOut():void {
 		//[Stay With Her][To Camp(excluded for PCs with Vapula or Holli)][Welp]
 		menu();
 		addButton(0,"StayWithHer",normalSheilaPregNotifREPEATEDEDHelpABitchOutANDSTAYDERE);
-		if(!(flags[FUCK_FLOWER_LEVEL] >= 4 && flags[FUCK_FLOWER_KILLED] == 0) && !vapulaSlave())
+		if(!(flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0) && !vapulaSlave())
 			addButton(1,"To Camp",normalSheilaPregNotifREPEATEDEDHelpABitchOutTOCAMP);
 		addButton(2,"Welp",normalSheilaPregNotifREPEATEDEDHelpABitchOutANDWELP);
 	}
@@ -3657,7 +3657,7 @@ public function normalSheilaPregNotifREPEATEDEDHelpABitchOutTOCAMP():void {
 		outputText("\n\nYou wave Jojo over, introducing them and explaining that the monk watches the camp at night and you check it during the day.  The small white mouse bows politely to your guest, then seats himself nearby.  \"<i>Hello, Sheila,</i>\" he says.");
 	}
 	//(else if PC has Kid A and Kid's n.watch is on)
-	else if(flags[ANEMONE_WATCH] > 0) outputText("\n\nYou wave off Sheila's objections, pointing to the large barrel housing your skinny tenant and explaining that she watches the camp at night for you in exchange for a place to stay.  Sheila looks dubious as the tall blue girl shuffles over and sits down, shyly hiding herself behind you.  \"<i>Um... hi,</i>\" the anemone mumbles.");
+	else if(flags[kFLAGS.ANEMONE_WATCH] > 0) outputText("\n\nYou wave off Sheila's objections, pointing to the large barrel housing your skinny tenant and explaining that she watches the camp at night for you in exchange for a place to stay.  Sheila looks dubious as the tall blue girl shuffles over and sits down, shyly hiding herself behind you.  \"<i>Um... hi,</i>\" the anemone mumbles.");
 	//(else if PC has no night watch turned on)
 	else {
 		outputText("\n\nYou sagely point out that even as such, spending the night trading shifts with someone she knows in a comfortable camp with a bedroll and hot food is infinitely preferable to slapping yourself awake in a dirty hole, hungry and scared.  Sheila nods, tight-lipped.  \"<i>D'you mind if I get second shift, then?</i>\" she asks, apologetically.  \"<i>I feel like you could knock me over with a feather.</i>\"  You shrug.");
@@ -3670,17 +3670,17 @@ public function normalSheilaPregNotifREPEATEDEDHelpABitchOutTOCAMP():void {
 	outputText("  She nods mutely and pulls the food out of the fire.");
 	//[(if Jojo present)
 	if(player.hasStatusAffect("JojoNightWatch") >= 0 || player.hasStatusAffect("PureCampJojo") >= 0) outputText("  She extends one bird to you and another to Jojo.  He raises his hand and shakes his head, but politely.");
-	else if(flags[ANEMONE_WATCH] > 0) outputText("  Sheila offers you one of the birds, then extends another to your odd tenant.  The anemone's mouth tightens and she shakes her head vigorously, blushing a deep blue.");
+	else if(flags[kFLAGS.ANEMONE_WATCH] > 0) outputText("  Sheila offers you one of the birds, then extends another to your odd tenant.  The anemone's mouth tightens and she shakes her head vigorously, blushing a deep blue.");
 	outputText("  You eat in silence until the food is gone, and Sheila clears her throat.");
 	
 	outputText("\n\n\"<i>I need to go before dawn, so I'll get this out in case you're asleep when I do,</i>\" she announces, still looking at the ground.  \"<i>I appreciate the help... now, and from before.  Really, you're a bottler.</i>\"");
 	
 	//[(if no watch)
-	if(player.hasStatusAffect("JojoNightWatch") < 0 || player.hasStatusAffect("PureCampJojo") < 0 || flags[ANEMONE_WATCH] == 0) outputText("\n\nShe gets to her feet as you grin, then makes her way over to your bedroll.  It doesn't take her long to fall asleep; you amuse yourself watching her toss and turn... and drool on your pillow.");
+	if(player.hasStatusAffect("JojoNightWatch") < 0 || player.hasStatusAffect("PureCampJojo") < 0 || flags[kFLAGS.ANEMONE_WATCH] == 0) outputText("\n\nShe gets to her feet as you grin, then makes her way over to your bedroll.  It doesn't take her long to fall asleep; you amuse yourself watching her toss and turn... and drool on your pillow.");
 	//(if watch)
 	else {
 		outputText("\n\nYou grin and get up, and Sheila tails you to your bed.  ");
-		if(flags[SLEEP_WITH] != 0 && flags[SLEEP_WITH] != "") outputText("She looks with some distaste at the nearby sleeper, and steps past.  You pick up the bedroll and follow her, reasoning that if she keeps her promise to be gone before dawn, it shouldn't raise any questions.  \"<i>Making friends, I see,</i>\" Sheila mutters... but as you unroll the bed again, her eyes zero in on it like a drowning man's on a raft, and she says nothing else.  ");
+		if(flags[kFLAGS.SLEEP_WITH] != 0 && flags[kFLAGS.SLEEP_WITH] != "") outputText("She looks with some distaste at the nearby sleeper, and steps past.  You pick up the bedroll and follow her, reasoning that if she keeps her promise to be gone before dawn, it shouldn't raise any questions.  \"<i>Making friends, I see,</i>\" Sheila mutters... but as you unroll the bed again, her eyes zero in on it like a drowning man's on a raft, and she says nothing else.  ");
 		outputText("She lies down first, allowing you to cozy up to her as far as you dare.  Just as you're about to drift off, you feel Sheila take your hand and pull your arm over her body.");
 	}
 	outputText("\n\nShe's gone in the morning.");
@@ -3703,7 +3703,7 @@ public function sheilaGoesDemon():void {
 	outputText("\n\nYou're barely upright before Sheila's pressed up against you again; she pushes you back down insistently with strength borne of desire, staring at you.  \"<i>[name], I still can't clear my head... I need to get off again, so I've gotta use your body.  You're okay with it, yeah?</i>\"");
 	
 	outputText("\n\nBefore you can answer, Sheila jumps on you and wraps her thighs around your face!  Her pussy is already slick with fluids, and she grinds it relentlessly against your lips.  \"<i>Fucking... lick me or something, before I go crazy!  Come on, you're ");
-	if(flags[SHEILA_XP] < -2) outputText("always so bloody eager to fuck me!");
+	if(flags[kFLAGS.SHEILA_XP] < -2) outputText("always so bloody eager to fuck me!");
 	else outputText("me best mate!");
 	outputText("  Help out!</i>\"");
 
@@ -3731,8 +3731,8 @@ public function sheilaGoesDemon():void {
 	//reduce lust and lib, raise corr slightly, gain key item Sheila's Lethicite, set sheilacite = 1
 	stats(0,0,0,0,-1,0,-100,3);
 	player.createKeyItem("Sheila's Lethicite",0,0,0,0);
-	flags[SHEILA_CITE] = 1;
-	flags[SHEILA_DEMON] = 1;
+	flags[kFLAGS.SHEILA_CITE] = 1;
+	flags[kFLAGS.SHEILA_DEMON] = 1;
 	//good place to cut off content if you don't have time to code it all in one go
 	if(!inCombat()) doNext(13);
 	else eventParser(5007);
@@ -3815,7 +3815,7 @@ public function tellSheilaDemonToFuckOff():void {
 public function askDemonSheilaAboutDahChange():void {
 	clearOutput();
 	//[(if sheilacite >= 1)]
-	if(flags[SHEILA_CITE] >= 1) {
+	if(flags[kFLAGS.SHEILA_CITE] >= 1) {
 		outputText("Sheila blushes deeply.  \"<i>Silly.  You were there.</i>\"  She looks at you, pupils dancing as she remembers the lovemaking session that led to her current form.  \"<i>I suppose that's not what you're asking, though.</i>\"");
 		outputText("\n\n\"<i>How can I say this?  It felt... monumental.  As I came with you, all my cares slipped away.</i>\"  Sheila lowers a hand to her crotch and begins to tease herself");
 		if(player.hasCock()) outputText(", and you feel a monument of your own being erected");
@@ -3823,7 +3823,7 @@ public function askDemonSheilaAboutDahChange():void {
 		outputText("\n\nYou raise an eyebrow at that.  Sheila smiles and explains, \"<i>Strange to say, but the captain was right.  My purpose in life really is to fuck.  When you and I were together, I forgot about all the whining, the unimportant nagging that was dumped on me all my life.  The digging, the worrying, the hiding... it never mattered.  Any of it.  You were what made that clear for me; having you is what I care about.</i>\"  She blows you a kiss.  \"<i>So... we could do something real, if you like.</i>\"");
 	}
 	//(else if sheilacite <= -1)
-	else if(flags[SHEILA_CITE] <= -1) {
+	else if(flags[kFLAGS.SHEILA_CITE] <= -1) {
 		outputText("Sheila looks wistful.  \"<i>Well... I wish it could have been with you.  But after you left me, I fingered myself so hard that my voice attracted an imp.  Not a gnoll, or a satyr, or even one of those scary fuckin' salamanders that are on fire all the time, but an honest-to-god imp.  Just this ragged little beat-up thing, one step away from dead but still trying to get his old fella in something to fill it with his seed and carry on his line.</i>\"");
 		outputText("\n\n\"<i>He was inside me in a blink, thrusting away like it was all that mattered, like his life wasn't worth shit if he couldn't ejaculate in me.  And...</i>\"  She looks at you shyly, and blushes.  \"<i>He was right.  Sex really is all he was good for, all anyone is good for.  As he came and flooded me with that hot spunk, something twigged in me.  I just let go of everything: the worries, the pretense, the effort to be a good, obedient worker.  God, that orgasm!  I sucked him dry!  And the whole time I lay there twitching and squeezing his little whacker, I just cried, and cried, as I realized how wrong I was to ever have cared about any of it.  Fucking is what matters, [name].  It's the real thing.  Even the basest imp knows that.  I could show you...</i>\"");
 	}
@@ -3911,7 +3911,7 @@ public function talkToDemonSheilaAboutWhatNow():void {
 	
 	outputText("\n\nShe's so fixated on having children now, more so than anyone you've met");
 	//[(PC has been propositioned by Amily)]
-	if(flags[AMILY_OFFER_ACCEPTED] > 0) outputText(" save one.  Actually, the two are a bit reminiscent of each other..");
+	if(flags[kFLAGS.AMILY_OFFER_ACCEPTED] > 0) outputText(" save one.  Actually, the two are a bit reminiscent of each other..");
 	outputText(".  Yet, any offspring a demon makes will be imps, right?");
 	
 	outputText("\n\n\"<i>Imps are trustworthy, like dogs,</i>\" she retorts, frowning.  \"<i>Count on them to care about exactly one thing, and they're always honest about it.  Not so with the rest of the pretentious trash dirtying this world, lying with a smile like they know what's best for the others around them.</i>\"  Sheila begins tracing meaningless shapes on your arm.  \"<i>It's what I like about you too, mate");
@@ -3992,8 +3992,8 @@ public function demonImpChildren():void {
 		else outputText("with her split tail while she cradles her massive tits to make sure you see the open invitation");
 		outputText(".  Impatiently, she rubs her stubby, drooling, phallic spade against the hole, accentuating the imagery.  You can feel the blood rushing to your groin as she gives herself shallow, teasing strokes.");
 	}
-	flags[SHEILA_IMPS]++;
-	flags[SHEILA_PREG] = 0;
+	flags[kFLAGS.SHEILA_IMPS]++;
+	flags[kFLAGS.SHEILA_PREG] = 0;
 	//plus lust if PC has cock
 	if(player.hasCock()) stats(0,0,0,0,0,0,10+player.lib/10,0,false);
 	//[Other Sex][Knock Up(cock only)][Leave]
@@ -4330,7 +4330,7 @@ public function loseToNormalSheilaAndGetRidden():void {
 		
 		outputText("\n\n\"<i>I don't think I've ever felt so full in my life...</i>\" Sheila says, dreamily holding her stomach as an avalanche of cum-clumps rolls slowly out of her cunt.  You fall flat and are already passed out by the time she stops rubbing her midriff, imagining the child she'll mother.  She leans down.  \"<i>Falling asleep after coming... for shame, mate.  I didn't even get to tell you I love you.</i>\"  The demon plants a kiss on your cheek, squeezes your scrotum once more, and walks away, bottom half completely stained white.  Your swollen nuts slowly deflate as you doze, though they don't shrink down quite as far as their original size.");
 		//end scene, reduce lust, increment sheilapreg by 1 (in other words, 100% preg chance), increase ball size by ~10% and increase cum multiplier very slightly, reduce sheila corruption by 10 and increase PC corr by 10
-		flags[SHEILA_PREG]++;
+		flags[kFLAGS.SHEILA_PREG]++;
 		player.ballSize++;
 		if(player.ballSize < 10) player.ballSize++;
 		player.cumMultiplier++;
@@ -4877,7 +4877,7 @@ public function sheilaAnalHateFuckAGoGoGETYOUSOMEWORMS():void {
 	player.removeStatusAffect("Infest");
 	stats(0,0,0,0,0,0,-100,10);
 	stats(0,0,0,0,0,0,player.lib/5,0);
-	flags[SHEILA_PREG] = -2;
+	flags[kFLAGS.SHEILA_PREG] = -2;
 	if(inCombat()) eventParser(5007);
 	else doNext(13);
 }
@@ -4986,8 +4986,8 @@ public function jojoRuinsTheAnalHateFuck(clear:Boolean = true):void {
 	
 	//set lust to 100, huge corruption gain (like it matters), set sheilapreg to -3 and disable Jojo unless and until new corrupted content is written to reflect changes
 	stats(0,0,0,0,0,0,100,10,false);
-	flags[SHEILA_PREG] = -3;
-	flags[JOJO_DEAD_OR_GONE] = 1;
+	flags[kFLAGS.SHEILA_PREG] = -3;
+	flags[kFLAGS.JOJO_DEAD_OR_GONE] = 1;
 	if(inCombat()) eventParser(5007);
 	else doNext(13);
 }

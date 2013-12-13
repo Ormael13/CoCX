@@ -81,7 +81,7 @@ public function noJizzingInMyCampPlease():void {
 	outputText("\n\n\"<i>Pity... well, if you'll excuse me, this mountain ain't snowy enough just yet!</i>\"  He resumes his furious masturbation, spraying another gush of snow on the side of the mountain.");
 	
 	outputText("\n\nSeeing no reason to linger, you return to your camp.");
-	flags[JACK_FROST_YEAR] = date.fullYear;
+	flags[kFLAGS.JACK_FROST_YEAR] = date.fullYear;
 	doNext(13);
 }
 
@@ -91,8 +91,8 @@ public function jizzSnowOnMyCampPlease():void {
 	outputText("You look around, and then find a convenient rock to climb.  From here, you can see your camp, and you indicate to the friendly giant where it is.  \"<i>Alright, I'll make sure to paint it white.</i>\"  He chuckles once more.  \"<i>I have a pretty good aim, I'll have you know, and my friend here can pump it far!</i>\"  He pats his enormous dick.  \"<i>Off you go, then.  And merry Winterfest.</i>\"  He smiles turning to point his gigantic prick at your camp and beginning to masturbate furiously.");
 
 	outputText("\n\nYou thank him for the surprisingly kind gesture, and start to head back down to camp.  Even as you go, you can see the first huge jet of snow arcing its way across the sky...");
-	flags[JACK_FROST_YEAR] = date.fullYear;
-	flags[JACK_FROST_PROGRESS] = 1;
+	flags[kFLAGS.JACK_FROST_YEAR] = date.fullYear;
+	flags[kFLAGS.JACK_FROST_PROGRESS] = 1;
 	doNext(13);
 }
 
@@ -102,9 +102,9 @@ public function processJackFrostEvent():void {
 	clearOutput();
 	//Each follower PC has adds a block, having no followers just plays the no followers block.
 	//Corrupts can forget about their lust for one day to play on the snow.
-	if(flags[JACK_FROST_PROGRESS] == 1) {
+	if(flags[kFLAGS.JACK_FROST_PROGRESS] == 1) {
 		outputText("As you approach your camp, you can see that Jack Frost's efforts are paying off.  A great, constant flurry of snowflakes is gently drifting down, swaying in the wind as it makes its inevitable descent towards the ground.  A layer of snowflakes is quickly building up, growing wider and deeper as more snow is launched from out of the mountains to rain down on your camp. You can't help but enjoy the cool air as the snowflakes fall down languidly onto the ground.  It's so beautiful you almost forget the rather perverted origin of it all.\n\n");
-		flags[JACK_FROST_PROGRESS] = 2;
+		flags[kFLAGS.JACK_FROST_PROGRESS] = 2;
 		menu();
 		addButton(0,"Next",processJackFrostEvent);
 		return;
@@ -114,14 +114,14 @@ public function processJackFrostEvent():void {
 		//Only if PC really has NO ONE to be with. aka: ForeverAlone.gif
 		outputText("You sigh... this really reminds you of back home... you only wish you had someone to share this feeling with... Well, there is no reason you shouldn't enjoy yourself while it snows, so you set about rolling a big ball of snow to make a snowman out of...");
 		//Skip to next day...
-		flags[JACK_FROST_PROGRESS] = 0;
+		flags[kFLAGS.JACK_FROST_PROGRESS] = 0;
 		HPChange(maxHP(),false);
 		fatigue(-100);
 		doNext(16);
 		return;
 	}
 	//Rathazul
-	else if(player.hasStatusAffect("Camp Rathazul") >= 0 && flags[JACK_FROST_PROGRESS] == 2) {
+	else if(player.hasStatusAffect("Camp Rathazul") >= 0 && flags[kFLAGS.JACK_FROST_PROGRESS] == 2) {
 		outputText("Rathazul approaches you.  \"<i>[name]?  What is going on?  It hasn't snowed in Mareth for years now.  And why only around the camp?  I wandered out to investigate, but outside there is no snow at all...</i>\" he asks, concerned.");
 		
 		outputText("\n\nYou tell Rathazul that you met a friendly... er... wizard up in the mountains who wanted to try and bring snow back to Mareth.  You offered to let him cast it out over your camp, so it's basically being flung from the mountains to land here.  But, really, why is he worrying about it?  This is the first time it's happened in years, doesn't he want to enjoy it while it lasts, before it melts away?");
@@ -133,11 +133,11 @@ public function processJackFrostEvent():void {
 		outputText("\n\nYou begin gathering snow along with the old rat...");
 		menu();
 		addButton(0,"Next",processJackFrostEvent);
-		flags[JACK_FROST_PROGRESS] = 3;
+		flags[kFLAGS.JACK_FROST_PROGRESS] = 3;
 		return;
 	}
 	//Izma
-	else if(flags[UNKNOWN_FLAG_NUMBER_00238] == 1 && flags[JACK_FROST_PROGRESS] <= 3) {
+	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1 && flags[kFLAGS.JACK_FROST_PROGRESS] <= 3) {
 		outputText("You wonder where Izma is; as a shark, maybe she doesn't like the cold?  Even as the thought crosses your mind, you note a surprisingly large pile of snow sitting not too far - with a very suspicious striped fin jutting out of it.  You rush over, calling for Izma and asking if she's all right.");
 		outputText("\n\nThe mound snow suddenly explodes as Izma pounces you, knocking you on your back and pinning you against the snowy ground.  \"<i>Gotcha!</i>\"  At once she notices who it is she's pounced upon.  \"<i>Hi there, [name].</i>\"");
 		outputText("\n\nYou tell her she's a bold one indeed to do something like that to you - isn't she supposed to be your beta?");
@@ -158,11 +158,11 @@ public function processJackFrostEvent():void {
 		
 		outputText("\n\nYou promise her that they won't be... if she remembers not to start something she can't finish, tapping the chastened tigershark on the nose for emphasis.");
 		addButton(0,"Next",processJackFrostEvent);
-		flags[JACK_FROST_PROGRESS] = 4;
+		flags[kFLAGS.JACK_FROST_PROGRESS] = 4;
 		return;
 	}
 	//Jojo
-	else if((player.hasStatusAffect("PureCampJojo") >= 0 || campCorruptJojo()) && flags[JACK_FROST_PROGRESS] <= 4) {
+	else if((player.hasStatusAffect("PureCampJojo") >= 0 || campCorruptJojo()) && flags[kFLAGS.JACK_FROST_PROGRESS] <= 4) {
 		//Pure
 		if(player.hasStatusAffect("PureCampJojo") >= 0) {
 			outputText("Jojo is sitting on his usual rock, one hand out to catch snowflakes with a beatific smile of awe on his face.  \"<i>Look, [name], snow!  I haven't seen snow since I was a very, very small boy.</i>\"  He tells you.");
@@ -181,7 +181,7 @@ public function processJackFrostEvent():void {
 			outputText("\n\nLaughter echoes as the two of you exchange snowballs...");
 			menu();
 			addButton(0,"Next",processJackFrostEvent);
-			flags[JACK_FROST_PROGRESS] = 5;
+			flags[kFLAGS.JACK_FROST_PROGRESS] = 5;
 		}
 		//Corrupt
 		else {
@@ -198,8 +198,8 @@ public function processJackFrostEvent():void {
 	}
 	//Amily
 	//less than 5!
-	else if(amilyFollower() && flags[JACK_FROST_PROGRESS] <= 5) {
-		flags[JACK_FROST_PROGRESS] = 6;
+	else if(amilyFollower() && flags[kFLAGS.JACK_FROST_PROGRESS] <= 5) {
+		flags[kFLAGS.JACK_FROST_PROGRESS] = 6;
 		//Pure
 		if(!amilyCorrupt()) {
 			outputText("Amily is warily prowling across the icy surface, occasionally glancing all around as if trying to spot an ambush.  Other times, she suddenly leaps up in a flurry, whirling around in mid-air as something catches her over-large ears.  All in all, it's quite obvious she's scared.");
@@ -262,8 +262,8 @@ public function processJackFrostEvent():void {
 		return;
 	}
 	//Tainted Ember
-	else if(followerEmber() && flags[JACK_FROST_PROGRESS] <= 6) {
-		flags[JACK_FROST_PROGRESS] = 7;
+	else if(followerEmber() && flags[kFLAGS.JACK_FROST_PROGRESS] <= 6) {
+		flags[kFLAGS.JACK_FROST_PROGRESS] = 7;
 		outputText("The dragon is wandering your camp in open fascination.  \"<i>What is this weird white stuff?  It's cold and wet... but soft and fluffy, too,</i>\" " + emberMF("he","she") + " says, gently catching a snowflake.");
 		outputText("\n\nHaving heard " + emberMF("his","her") + " question, you approach Ember and tell " + emberMF("him","her") + " that's just snow.");
 		outputText("\n\n\"<i>Snow...?</i>\" " + emberMF("He","She") + " repeats in a curious, blatantly awed voice.  \"<i>...It's so pretty.</i>\" " + emberMF("he","she") + " tells you.");
@@ -298,22 +298,22 @@ public function processJackFrostEvent():void {
 		return;
 	}
 	//Marble (Written by TDM himself)
-	else if(flags[JACK_FROST_PROGRESS] <= 7 && player.hasStatusAffect("Camp Marble") >= 0) {
-		flags[JACK_FROST_PROGRESS] = 8;
+	else if(flags[kFLAGS.JACK_FROST_PROGRESS] <= 7 && player.hasStatusAffect("Camp Marble") >= 0) {
+		flags[kFLAGS.JACK_FROST_PROGRESS] = 8;
 		//With Kids
-		if(flags[MARBLE_KIDS] > 0 && flags[MARBLE_NURSERY_CONSTRUCTION] >= 100) {
+		if(flags[kFLAGS.MARBLE_KIDS] > 0 && flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] >= 100) {
 			outputText("You find Marble simply staring into the sky, a look of wonder covering her face.  Dancing around her in excitement ");
-			if(flags[MARBLE_KIDS] > 1) outputText("are ");
+			if(flags[kFLAGS.MARBLE_KIDS] > 1) outputText("are ");
 			else outputText("is ");
 			outputText("your kid");
-			if(flags[MARBLE_KIDS] > 1) outputText("s");
+			if(flags[kFLAGS.MARBLE_KIDS] > 1) outputText("s");
 			outputText(", playing in the snow, blowing the snow, and experimenting with the snow.  Exactly what ");
-			if(flags[MARBLE_KIDS] == 1) outputText("she");
+			if(flags[kFLAGS.MARBLE_KIDS] == 1) outputText("she");
 			else outputText("they");
 			outputText(" are up to at any given moment is really hard to say, and you're not even sure that the little girl");
-			if(flags[MARBLE_KIDS] > 1) outputText("s");
+			if(flags[kFLAGS.MARBLE_KIDS] > 1) outputText("s");
 			outputText(" know");
-			if(flags[MARBLE_KIDS] == 1) outputText("s herself.");
+			if(flags[kFLAGS.MARBLE_KIDS] == 1) outputText("s herself.");
 			else outputText(" themselves.");
 			
 			outputText("\n\nMarble lifts up her hand, then takes a step forward as you approach.  It looks like she is about to catch a flake in her hands, only to instead suddenly slip on the frozen ground under her hooves, and fall down onto her backside with a cry of surprise.  \"<i>Oww...</i>\" she grumbles, giving her backside a rub as you come up in front of her.  You tell her to be careful, that stuff can be slippery while extending your hand to help her up.  \"<i>Yeah, thanks sweetie, I noticed.</i>\" she sighs and accepts your hand.");
@@ -321,37 +321,37 @@ public function processJackFrostEvent():void {
 			outputText("\n\n\"<i>" + player.short + ", do you know what this is?</i>\" your lover asks while raising her arms in the air and looking around in amazement once more.  \"<i>How can stuff fall from the sky?</i>\"  You laugh, and say that it's snow, or frozen rain.  The cow-girl looks at you in confusion once more and asks what rain is.  Now it is your turn to be surprised, she has never seen it rain before in her life?  It has never gotten cloudy and water has fallen from the sky?  Marble shakes her head no, \"<i>Sweetie, I'm not sure what a cloud is either.  Every day of my life has always been sunny and warm.  This is something I've never experienced before...</i>\"");
 			
 			outputText("\n\nYou're left at a loss for words once more, and the two of you turn back to look at your ");
-			if(flags[MARBLE_KIDS] == 1) outputText("child");
+			if(flags[kFLAGS.MARBLE_KIDS] == 1) outputText("child");
 			else outputText("children");
 			outputText(" playing together once more.  A moment later, Marble puts her hand to her expansive backend again, before suddenly exclaiming again in realization.  \"<i>Sweetie, watch our kid");
-			if(flags[MARBLE_KIDS] > 1) outputText("s");
+			if(flags[kFLAGS.MARBLE_KIDS] > 1) outputText("s");
 			outputText(" for a moment, I'll be right back!</i>\" and she leaves the camp as quickly as she can, without slipping and falling on her ass again.");
 
 			outputText("\n\nYou certainly don't mind staying behind for now, it is certainly a lot of fun spending time with your kid");
-			if(flags[MARBLE_KIDS] > 1) outputText("s");
+			if(flags[kFLAGS.MARBLE_KIDS] > 1) outputText("s");
 			outputText(" and just having fun.  Your cow-girl daughters are certainly not lacking in energy in the cold snow, their fur covered legs and built in shoes probably help a lot with this.  ");
-			if(flags[MARBLE_KIDS] > 1) outputText("They");
+			if(flags[kFLAGS.MARBLE_KIDS] > 1) outputText("They");
 			else outputText("She");
 			outputText(" listen");
-			if(flags[MARBLE_KIDS] == 1) outputText("s");
+			if(flags[kFLAGS.MARBLE_KIDS] == 1) outputText("s");
 			outputText(" with rapt attention when you explain what snow is, and about all the things you use to do in it back home.  Hands-on demonstrations are also in high demand.");
 			
 			outputText("\n\nWhen Marble returns, she can't find a single face that isn't showing a huge smile.  That isn't to say that there wasn't more excitement when what she went off to get is revealed; a big sled for the little one");
-			if(flags[MARBLE_KIDS] > 1) outputText("s");
+			if(flags[kFLAGS.MARBLE_KIDS] > 1) outputText("s");
 			outputText(" to ride on!  Happy cries of joy fill the air for some time, as you and Marble take turns in giving rides on the sled.");
 			
 			//PC strength check:
 			//(>=85)
 			if(player.str >= 85) {
 				outputText("\n\nIt would seem that your strength has won you more favor with ");
-				if(flags[MARBLE_KIDS] > 1) outputText("the girls");
+				if(flags[kFLAGS.MARBLE_KIDS] > 1) outputText("the girls");
 				else outputText("your daughter");
 				outputText(" when it comes to giving sled rides, Marble doesn't seem to mind too much though.  Your mate actually decides to join in the riding part after a while!");
 			} 
 			//(60-84)
 			else if(player.str >= 60) {
 				outputText("\n\nSoon you and Marble turn the sled rides into a friendly contest, trying to earn the favor of ");
-				if(flags[MARBLE_KIDS] > 1) outputText("the girls");
+				if(flags[kFLAGS.MARBLE_KIDS] > 1) outputText("the girls");
 				else outputText("your daughter");
 				outputText(" in deciding who gives the best rides.  In the end, a clear winner is never decided, but everyone agrees that it was a lot of fun.");
 			}
@@ -385,7 +385,7 @@ public function processJackFrostEvent():void {
 	}
 	//Helia
 	//if she ain't a follower and is a lover, just have her visit.
-	else if(flags[JACK_FROST_PROGRESS] <= 9 && (fuckBuddyHel() || followerHel())) {
+	else if(flags[kFLAGS.JACK_FROST_PROGRESS] <= 9 && (fuckBuddyHel() || followerHel())) {
 		
 		outputText("\"<i>Hey, champ, what's going on here?</i>\"  Helia calls as she sees you approach.  Gentle trails of steam are wafting from the salamander's body as her own internal heat melts any snow that builds up on her.");
 		outputText("\n\nYou greet your salamander lover, telling her you found a way to make it snow on your camp... so you were just planning on having a snow-day play-day on your camp, while it lasts.");
@@ -445,13 +445,13 @@ public function processJackFrostEvent():void {
 		outputText("\n\nAs you finally finish cumming, Helia lifts her head and starts to laugh.  \"<i>Oh, man, not how I'd usually do it, but whoo, what a ride, huh?</i>\" she laughs.  You laugh as well.  It certainly felt good, though this is far from what you're used to.  You have to give Helia's wrestling idea some credit.  Rolling around with her, grinding together was pretty hot - in more ways than one.");
 		
 		outputText("\n\n\"<i>Oh, were you maybe wanting another turn, lover?</i>\"  Helia insinuates, gently tapping her fingers on your chest.  You make a show of considering her offer, then, with a smile, say that sounds like a reasonable proposal.  You promptly wrap the salamander-girl, into a tight hug, spreading her legs so you can have access to her dripping vagina...");
-		flags[JACK_FROST_PROGRESS] = 10;
+		flags[kFLAGS.JACK_FROST_PROGRESS] = 10;
 		menu();
 		addButton(0,"Next",processJackFrostEvent);
 		return;
 	}
 	//Isabella
-	else if(isabellaFollower() && flags[JACK_FROST_PROGRESS] <= 10) {
+	else if(isabellaFollower() && flags[kFLAGS.JACK_FROST_PROGRESS] <= 10) {
 		outputText("The bovine adventurer Isabella is staring at the snow around her with a sad look on her face, one hand gently raised to catch snowflakes.  She watches them gather in her palm and heaves a huge sigh.  You quietly approach her and ask what's wrong; is she homesick?");
 		outputText("\n\n\"<i>");
 		if(isabellaAccent()) outputText("Da, [name], I am,");
@@ -489,13 +489,13 @@ public function processJackFrostEvent():void {
 		
 		if(isabellaAccent()) outputText("\n\nIsabella smiles and releases her arm from around your neck to instead stroke your [hair].  \"<i>Da, zat ist good, [name].  I love to empty zese big boobs of mine, but I am loving you more,</i>\" she says this last-part in a stage whisper, clearly intending for you to hear it.  You decide that for now, you'll just busy yourself with the cow-girl's teats, you can return the feelings later...");
 		else outputText("\n\nIsabella smiles and releases her arm from around your neck to instead stroke your [hair].  \"<i>Yeah, that's good, [name].  I love to empty these big boobs of mine, but I think I love you more,</i>\" she says this last-part in a stage whisper, clearly intending for you to hear it.  You decide that for now, you'll just busy yourself with the cow-girl's teats, you can return the feelings later...");
-		flags[JACK_FROST_PROGRESS] = 11;
+		flags[kFLAGS.JACK_FROST_PROGRESS] = 11;
 		menu();
 		addButton(0,"Next",processJackFrostEvent);
 		return;
 	}
 	//Kiha
-	else if(followerKiha() && flags[JACK_FROST_PROGRESS] <= 11) {
+	else if(followerKiha() && flags[kFLAGS.JACK_FROST_PROGRESS] <= 11) {
 		outputText("\"<i>Ah-ah-ahchoo!</i>\"");
 		outputText("\n\n\"<i>Bless you,</i>\" you say to Kiha as you approach the dragon-girl.");
 		outputText("\n\nKiha sniffles and wipes her nose on her arm when she sees you.  \"<i>[name], what is this weird white stuff?  It's cold and wet and - achoo!</i>\"  She sneezes again, spraying a gout of flame across the camp.  \"<i>And the flakes keep flying up my nose,</i>\" she snuffles.");
@@ -510,7 +510,7 @@ public function processJackFrostEvent():void {
 		outputText("\n\nSeeing that, you suggest that perhaps the two of you should move somewhere more... private.  You happen to know a way to make her feel even warmer.  She says nothing, looking into your eyes and nodding with a soft smile on her face, obviously trusting you to lead her.");
 		outputText("\n\nYou waste no time in leading her away to a snowy clearing nearby.  Once there you look the shivering dragon-girl over, considering your options...");
 		//[Fuck her] [Lick Boobs and Finger Pussy]
-		flags[JACK_FROST_PROGRESS] = 12;
+		flags[kFLAGS.JACK_FROST_PROGRESS] = 12;
 		menu();
 		if(player.hasCock() && player.cockThatFits(67) >= 0) addButton(0,"Fuck Her",kihaXmasFuck);
 		addButton(1,"Finger Her",kihaXmasFingering);
@@ -539,7 +539,7 @@ public function processJackFrostEvent():void {
 		}
 		HPChange(maxHP(),false);
 		fatigue(-100);
-		flags[JACK_FROST_PROGRESS] = 0;
+		flags[kFLAGS.JACK_FROST_PROGRESS] = 0;
 		doNext(16);
 		return;
 	}
@@ -588,11 +588,11 @@ public function penetradePureMouseWaifu():void {
 	clearOutput();
 	outputText("Stripping down your [armor] and indicating Amily should do the same... you tell her that you were hoping for some good old-fashioned sex between a horny " + player.mf("man","herm") + " and " + player.mf("his","her") + " lovely mousette.  You playfully ask Amily if she has any objections?");
 	outputText("\n\n\"<i>Well, it's a little counterproductive to take your clothes off if you want to get warm,</i>\" Amily notes.  Despite her words, she's stripping off without the slightest hesitation.  You reply that just the sight of her getting nude is already making you a little warmer... thrusting your hips so she can see your erect " + multiCockDescriptLight() + ".  \"<i>Flattering flirt; you always think with your dick, don't you?</i>\" the mouse laughs.  That's rich; you can see her pussy dripping from here");
-	if(flags[AMILY_WANG_LENGTH] > 0) outputText(", not to mention her dick's pretty hard, too");
+	if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText(", not to mention her dick's pretty hard, too");
 	outputText(".");
 	
 	outputText("\n\nSitting down on your bedroll, you open your arms, inviting Amily over.  The mouse promptly approaches");
-	if(flags[AMILY_WANG_LENGTH] > 0) outputText(", her own " + amilyCock() + " jutting out in anticipation");
+	if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText(", her own " + amilyCock() + " jutting out in anticipation");
 	outputText(", wriggling into your arms and angling her pussy over your " + cockDescript(x) + ".  With the ease of long practice, she slides smoothly down its length, her warm, wet depths greedily inhaling your masculinity.  \"<i>Ah, nothing like a nice hard cock in your cunt to make you feel warmer,</i>\" she coos.");
 	
 	outputText("\n\nYou simply grin and begin bucking your hips against her, suppressing your moans by kissing her, hugging her tightly against you, holding your bodies flush together.  The mouse hugs you as tightly as she can, smothering you with kisses as her hands roam nimbly across your back, slinking down to squeeze your ass with an obvious hunger to molest you.");
@@ -600,7 +600,7 @@ public function penetradePureMouseWaifu():void {
 	outputText("\n\nYou guide your hands down her sides, towards her behind, taking it into your hands and helping her rise and fall on your shaft.  She breaks the kiss with a loud exclamation.  \"<i>Oh, this feels so good, [name]!  And it's certainly warming... why, I think I'm starting to break a sweat... and I think you are too,</i>\" she grins.");
 	
 	outputText("\n\nYou ask her to tell you how much she wants this... how much she wants your seed... how much she wants you?  \"<i>I want you!  I want you with everything I have, I want everything you have to give!</i>\" she cries out.  Then she can have all of you... with one last thrust, you bury your shaft deeply into her quivering cunny and blast your liquid lust straight into her waiting womb.  She moans loudly, making no effort to hide her delight at your treatment, and shudders violently in your grip as orgasm rocks her body, flooding your crotch with her rodent fem-cum");
-	if(flags[AMILY_WANG_LENGTH] > 0) outputText(" and painting your belly white with futa-spooge");
+	if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText(" and painting your belly white with futa-spooge");
 	outputText(".");
 	
 	outputText("\n\nYou tell Amily, \"<i>Happy Holidays,</i>\" hugging her in post-coital affection.  \"<i>Happy Holidays, [name]... whatever that is,</i>\" she giggles.  \"<i>But, you know, we might just have a little late Winterfest present brewing after that bit of fun.</i>\"  She bats her eyes at you flirtatiously, patting her cum-stuffed belly.");
@@ -623,7 +623,7 @@ public function makeOutWithPureMouseWaifu():void {
 	outputText("\n\nSilly mouse, you remark with a smirk.  That's the best way to share body heat... you're still a bit cold... and you're willing to bet so is she... you wink.  \"<i>Ah, so that's your game,</i>\" Amily chuckles.  \"<i>Well, I'm game if you are.</i>\"");
 	
 	outputText("\n\nYou open your arms in a clear invitation for the mousette to sit with you.  ");
-	if(flags[AMILY_WANG_LENGTH] > 0) outputText("Smiling sheepishly you  tell her to mind the erection... though you're not actually looking for sex, you can't help with how cute she looks...  \"<i>Flirt.</i>\"  Amily giggles, but otherwise doesn't comment on it.  ");
+	if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText("Smiling sheepishly you  tell her to mind the erection... though you're not actually looking for sex, you can't help with how cute she looks...  \"<i>Flirt.</i>\"  Amily giggles, but otherwise doesn't comment on it.  ");
 	outputText("The mouse promptly walks over and sits down just in front of you, her back facing you and giving you a perfect opportunity to hug her.  Not keen on missing such an opportunity, you do so.");
 	
 	if(player.hasCock()) outputText("\n\n\"<i>You know I can feel your dick poking me in the back, right?</i>\" Amily giggles, wriggling back against your jutting shaft for emphasis.  You chuckle and tell her to lay off your man-parts... this is just a natural reaction.  \"<i>Oh yeah?  Maybe you wanna see my natural reaction to this situation, hmm?</i>\" she croons.  Maybe later... right now you just want to enjoy her like this.");
@@ -661,7 +661,7 @@ public function penetradeCorruptJojoAss():void {
 	stats(0,0,0,0,-3,-1,-100,1);
 	menu();
 	addButton(0,"Next",processJackFrostEvent);
-	flags[JACK_FROST_PROGRESS] = 5;
+	flags[kFLAGS.JACK_FROST_PROGRESS] = 5;
 }
 //[=Ride Cock=]
 //PC needs vagina
@@ -689,7 +689,7 @@ public function rideCorruptJojoCock():void {
 	stats(0,0,0,0,-3,-1,-100,1);
 	menu();
 	addButton(0,"Next",processJackFrostEvent);
-	flags[JACK_FROST_PROGRESS] = 5;
+	flags[kFLAGS.JACK_FROST_PROGRESS] = 5;
 	//Preggers chance!
 	player.knockUp(4,432);
 }
@@ -716,5 +716,5 @@ public function spankNFingerCorruptJojoAss():void {
 	stats(0,0,0,0,0,0,100,0,true);
 	menu();
 	addButton(0,"Next",processJackFrostEvent);
-	flags[JACK_FROST_PROGRESS] = 5;
+	flags[kFLAGS.JACK_FROST_PROGRESS] = 5;
 }

@@ -10,7 +10,7 @@
 
 public function essrayleMeetingI():void {
 	clearOutput();
-	if(flags[MET_ESSY] == 0) {
+	if(flags[kFLAGS.MET_ESSY] == 0) {
 		outputText("You blunder along through the thick foliage, swatting aside stray branches and the long grasses that try to impede your progress.  A clearing appears up ahead, giving you a goal to reach.  Honestly, you could use a brief break.  Forging through the brush, tromping, and causing a general ruckus, you practically burst into the glen in no time.");
 		outputText("\n\nYou realize you're not alone.  The other occupant looks at you a bit startled, and you look back with more awe than anything.  It is a woman, isn't it?  You can't be fully sure.  Her body is slender, soft green in hue, and she has an elfish, noseless face.  Green, grassy hair cascades down her back, and a large, wooden horn rises from her forehead, ornamented like something you would see on a beetle rather than a person.");
 		outputText("\n\nThe first thing to catch your gaze are her eyes; rich, deep amethyst things.  ");
@@ -50,7 +50,7 @@ public function essrayleMeetingI():void {
 		outputText("During your travels through the forest, you stumble upon a familiar face once again.  \"<i>Oh, hello!</i></i>\ Essrayle cheerily waves to you, causing her ample tits to jiggle slightly.  \"<i>I was wondering if you'd be back.</i>\"  She moves closer, massive melons wobbling mere inches away from you, \"<i>I had a feeling you would though.</i>\"  Cooing warmly, she brushes a lock of hair aside with enough of an exaggerated motion to set the bouncy pair to bobbing.");
 		outputText("\n\n\"<i>So, did you come back just to say hi, or might there be some other reason?</i>\"  Those slender, green hands fall upon her shapely hips as her gorgeous amethyst eyes peer deeply into yours.  \"<i>If you came to give me a feeding, I simply must thank you this time, I insist.</i>\"  Abruptly, those tits squish against your chest as she leans in close, asking seductively, \"<i>So, feeling up for some gardening?</i>\"");
 	}
-	flags[MET_ESSY]++;
+	flags[kFLAGS.MET_ESSY]++;
 	//[Yes] [No]
 	menu();
 	addButton(1,"Yes",plantsForMe);
@@ -62,15 +62,15 @@ public function essrayleMeetingI():void {
 public function noPlantsForMe():void {
 	clearOutput();
 	outputText("Essy pouts, ears flattening to the sides a bit.  \"<i>I see,</i>\" she nods, looking at you with a thinly masked disappointment.  She seems to instantly put on a false smile and move aside, gesturing to the path ahead with a sweep of the arm.  \"<i>Well, in that case, you must be going somewhere important.  Best not keep you waiting.  I do wish you luck in your adventures!</i>\" She continues to beam as you head on off, leaving her behind you in no time.  Though as you leave, you swear you hear a mumbled, \"<i>Leave it to me to find the prudish ones.</i>\"");
-	flags[TURNED_DOWN_ESSY_FIRST_MEETING] = 1;
+	flags[kFLAGS.TURNED_DOWN_ESSY_FIRST_MEETING] = 1;
 	doNext(13);
 }
  
 //>If Yes
 public function plantsForMe():void {
 	clearOutput();
-	if(flags[ACCEPTED_ESSY_FIRST_MEETING] == 0) {
-		flags[ACCEPTED_ESSY_FIRST_MEETING] = 1;
+	if(flags[kFLAGS.ACCEPTED_ESSY_FIRST_MEETING] == 0) {
+		flags[kFLAGS.ACCEPTED_ESSY_FIRST_MEETING] = 1;
 		outputText("Essrayle giggles, sending ripples through her ample breasts.  \"<i>Oh, why thank you!  It's nothing major - I doubt it'll be much of a burden to you.  But in my travels, I've grown wilted and depleted of the energy to go on.  I'm soooo hungry!  Would you please-?</i>\"  She leaves the question hanging, looking to you imploringly.  Hastily your hand goes to where your supplies are housed, but you stop as she waves a hand dismissively.  \"<i>No, no, I don't mean biscuits or the like.</i>\"  Confused, you frown, but soften as you feel her hand rest upon your [chest].  \"<i>I require a special kind of food to do what I do, one that won't exhaust your supplies in the least.</i>\"\n\n");
 	}
 	//(If breasts
@@ -224,7 +224,7 @@ public function plantsForMe2(BE:int = 0):void {
 //Look Closer
 public function approachTrappedEssy():void {
 	clearOutput();
-	if(flags[ESSY_DUNGEON_FUCKED] == 0) {
+	if(flags[kFLAGS.ESSY_DUNGEON_FUCKED] == 0) {
 		outputText("Where once the leafy maiden sported two enormous, watermelon sized breasts, she now is host to four mammoth jugs that put her former bust to shame.  The heaving tits glisten with moisture and almost seem to swell with every exhausted breath she takes.  Her hips - what you can see of them beyond the plant's gigantic udders - are immersed in a black, rich soil that fills the pot to its lip.  A glaze is prominent in her purple eyes, and she seems quite exhausted from something.");
 		
 		outputText("\n\nAs you draw nearer she bolts upright, sending oceanic ripples through her bloated breasts that gives a liquid jiggle to her whole body.  \"<i>Who's there?  It can't be time already!</i>\" she blurts out frantically, before noticing you.  A violet blush stains her emerald cheeks as she recognizes you and her panic is swiftly replaced by a gentle smile.  \"<i>Oh, hey, it's you again.</i>\"");
@@ -263,7 +263,7 @@ public function feedTrappedEssy():void {
 	outputText("Well, it's not like she's going anywhere right now, and she probably would love a good fuck from a friend anyway.");
 	outputText("\n\nYou approach Essrayle once more, taking advantage of her dazed state to disrobe and sidle up to the enchanted flower pot before she realizes your intentions.  From this angle you can clearly see that her hands are sunk deep into the soil around her bubbly hips.  She blinks, confused by your sudden forwardness, but soon moans out loudly as your palms sink into the girl's recently massaged teats, fingers sinking deeply into the tender flesh.");
 	
-	flags[ESSY_DUNGEON_FUCKED]++;
+	flags[kFLAGS.ESSY_DUNGEON_FUCKED]++;
 	
 	if(player.gender == 1) hasCockFeedEssy(false);
 	if(player.gender == 2) hasPussyFeedEssy(false);
@@ -334,7 +334,7 @@ public function essyWitchVictory():void {
 	outputText("\n\nNoticing your drooping stare, a sly smile creeps over her lips.  \"<i>But I think I've got an idea that would make you very happy.</i>\"  Both of her upper hands go to her cleavage, pulling her fat, squishy tits apart before releasing them, letting the girl's mammary mountains slap together in quivering wobbles.  \"<i>Yes, something we could both be very happy with, that you'd truly enjoy.</i>\"  Her lower hands cup the bottoms of her lower breasts and begin to leisurely bounce them in her palms.  \"<i>After all, that's the important thing: enjoying yourself.</i>\"");
 	
 	outputText("\n\n\"<i>Now, I may be a visitor to this world, but I've learned some things.</i>\"  She grins and crosses her other two arms atop those jiggling, swaying, lush beauties.  \"<i>Since you seem to like these four so much, perhaps you'd like to join the club?</i>\"  Essrayle winks coyly, \"<i>How about it?</i>\"");
-	flags[ESSRAYLE_ESCAPED_DUNGEON] = 1;
+	flags[kFLAGS.ESSRAYLE_ESCAPED_DUNGEON] = 1;
 	menu();
 	addButton(0,"Yes",acceptEssyPrizes);
 	addButton(1,"No",declineEssyPrizes);
@@ -423,7 +423,7 @@ public function essyRewardEpilogueOUTTIES():void {
 
 public function askMotherToReleaseEssy():void {
 	clearOutput();
-	if(flags[SAND_WITCHES_COWED] == 0) {
+	if(flags[kFLAGS.SAND_WITCHES_COWED] == 0) {
 		outputText("You point out that the witches have a friend of yours trapped here with magic and you'd like her released.");
 		outputText("\n\nThe Sand Mother cocks her head to the side before understanding dawns on her luminescent eyes.  \"<i>The plant-woman?  She seeks pleasure like a demon, yet lacks the corruption we would expect.  I can give the order to turn her loose, but see her out, and should she return, I can not promise her freedom again.</i>\"");
 		outputText("\n\nThat'll have to do.");
@@ -432,6 +432,6 @@ public function askMotherToReleaseEssy():void {
 		outputText("You command the Sand Mother to release your friend, Essrayle from her magical bondage.  The sorcerous queen looks about to protest, but after a brief pause, she admits, \"<i>Fine, I'll see her released.  You can go pick her up.</i>\"  She practically spits the last sentence.");
 		outputText("\n\nThat'll do.");
 	}
-	flags[TOLD_MOTHER_TO_RELEASE_ESSY] = 1;
+	flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] = 1;
 	doNext(1);
 }

@@ -8,7 +8,7 @@ Entry for the 2012 CoC Contest, \"<i>A Very Milky XMas</i>\".
 Starring Gatters Bee, Shamble Sworth and a caribou named Kirbu.
 */
 public function gatsSpectacularRouter():void {
-	if(flags[GATS_ANGEL_QUEST_BEGAN] == 0) christmasEncounterAngelJunk();
+	if(flags[kFLAGS.GATS_ANGEL_QUEST_BEGAN] == 0) christmasEncounterAngelJunk();
 	else if(player.hasKeyItem("North Star Key") < 0) findTheWindUpKey();
 	else giveThatBitchAKeyYo();
 }
@@ -42,7 +42,7 @@ public function dontExploreGatsChristmasTale():void {
 	outputText("In a place like the high mountains, there's no warning to be found if you happen to be confronted by danger.  Deciding not to take your chances, you continue to walk down the path you came, leaving the peaks to head straight back to camp.");
 	outputText("\n\nIt's certainly warmer there.");
 	//turn dat shit off
-	flags[GATS_ANGEL_DISABLED] = .5;
+	flags[kFLAGS.GATS_ANGEL_DISABLED] = .5;
 	doNext(13);
 }
 
@@ -90,9 +90,9 @@ public function encounterQuoteUnquoteAngel():void {
 		outputText("\n\nYou tell her that you'll try your best to find it, though you admit that even you don't fully believe your words.  She must've heard the same thing thousands of times before, to no avail.  Despite this, her face brightens, her glimmering tears whisked away by the cold winds.");
 		outputText("\n\n\"<i>I believe in you.</i>\"");
 		outputText("\n\nThe feminine behemoth rests her head upon the cliff once more, but not before waving you goodbye.  You return her gesture with a thumbs up, heading back to camp to prepare for another wintery escapade.");
-		flags[GATS_ANGEL_TIME_TO_FIND_KEY] = 1;
+		flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY] = 1;
 	}
-	flags[GATS_ANGEL_QUEST_BEGAN] = 1;
+	flags[kFLAGS.GATS_ANGEL_QUEST_BEGAN] = 1;
 	doNext(13);
 }
 	
@@ -120,7 +120,7 @@ public function findTheWindUpKey():void {
 public function giveThatBitchAKeyYo():void {
 	clearOutput();
 	//if in time!
-	if(flags[GATS_ANGEL_TIME_TO_FIND_KEY] < 150) {
+	if(flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY] < 150) {
 		outputText("All throughout your perilous climb, you cannot help but ogle at the brilliant little crystal key.  You have a suspicion as to how this innocent little key will help the crying colossus on the peak, but you are not completely sure this is the artifact she required.  But you have a hunch that it is.");
 		outputText("\n\nYour trek halts to a standstill as you return to the side of the vast giantess.  Her sadness and longing appears to have overwhelmed her to a degree, putting her to sleep beside the still-inanimate soldier beside her.  You cast another glance at your brilliant relic, hooking a finger through it as you lift it before your face.  Transfixed by the swirling dance of red and green, you begin to weigh the options before you.  The spirit would surely request the key from you so that she may return her love to his former self, you believe.  However, perhaps you deserve a greater reward from this little deed.  You hold all the important cards in this deal afterall.  You thoughtlessly swirl the windup key around on your finger, pondering your next move.");
 		outputText("\n\nYou could try to fuck around with the spirit or her soldier, but doing either would be a huge dick move...");
@@ -147,7 +147,7 @@ public function giveThatBitchAKeyYo():void {
 		outputText("\n\nHe wasn't dead. Only waiting, like her.");
 		outputText("\n\nThe air remains cold and merciless, and regardless of what you do it would be difficult to stay for much longer.  Turning away, you trot silently back to your camp, wondering how things would've gone - if only you were quicker.");
 		//[BAD END, Can no longer see the Old Woman or this series of events]
-		flags[GATS_ANGEL_DISABLED] = 1;
+		flags[kFLAGS.GATS_ANGEL_DISABLED] = 1;
 		doNext(13);
 	}
 	//player.removeKeyItem("North Star Key");
@@ -201,7 +201,7 @@ public function theWorstEndingEverDotJPG():void {
 	if(player.cor > 49) outputText("  More importantly, you have some unsatisfied, pent up lust that you'd like to expend.");
 	stats(0,0,0,0,0,0,2+player.lib/10+player.cor/10,10,false);
 	doNext(13);
-	flags[GATS_ANGEL_DISABLED] = 1;
+	flags[kFLAGS.GATS_ANGEL_DISABLED] = 1;
 	player.removeKeyItem("North Star Key");
 }
 
@@ -271,7 +271,7 @@ public function fuckTheAngelBadEndPartII():void {
 	outputText("\n\nNope, she's still angry. It's time to go. Taking your [armor] with you, you make a run down the side of the high mountain, throwing the key off the side of the cliff as you hear the distraught damsel cry into the skies. The mountains tremble in fear, and a snow storm begins to brew.");
 	outputText("\n\nThankfully, you're out of that mess and heading for camp. That slut is cold.");
 	//[End of event. Possible expansions include finding her as a difficult combat encounter, or raping her while she sleeps.]
-	flags[GATS_ANGEL_DISABLED] = 1;
+	flags[kFLAGS.GATS_ANGEL_DISABLED] = 1;
 	stats(0,0,0,0,0,0,-100,10);
 	doNext(13);
 }
@@ -375,13 +375,13 @@ public function conclusionOfGiantessGoodEnd():void {
 	outputText("\n\nAfter a long pause, you pocket the key, square yourself with Carol and North, returning her hand gesture before giving them a goofy grin that positively sparks in the snow-cushioned landscape.  As you turn to depart once more, you wave over your shoulder, escorted out with the continued giggles and lovey-dovey conversation of the unlikely couple.");
 	outputText("\n\nMerry Christmas indeed!");
 	//[if you haven't been introduced to christmas via elf or otherwise] 
-	if(flags[PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] == 0) outputText("\n\nYou have no idea what that is.");
+	if(flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] == 0) outputText("\n\nYou have no idea what that is.");
 	//[end, get The North Star & A Christmas Carol perks]
 	//The North Star
 	//Witness picnic events with North & Carol at the High Mountain.
 	//A Christmas Carol
 	//Christmas events are open all year 'round! (some sort of arbitrary limit)
 	//merry christmas everyone <3
-	flags[GATS_ANGEL_GOOD_ENDED] = 1;
+	flags[kFLAGS.GATS_ANGEL_GOOD_ENDED] = 1;
 	doNext(13);
 }

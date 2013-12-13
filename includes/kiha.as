@@ -13,23 +13,23 @@
 public function encounterKiha():void {
 	outputText("", true);
 	spriteSelect(72);
-	if(followerKiha() && flags[KIHA_NEEDS_TO_REACT_TO_HORSECOCKING] == 1) {
+	if(followerKiha() && flags[kFLAGS.KIHA_NEEDS_TO_REACT_TO_HORSECOCKING] == 1) {
 		kihaReactsToHorseDicking();
 		return;
 	}
 	//kihaBitchesOutCorruptPCs()
-	if(flags[KIHA_AFFECTION_LEVEL] > 0 && player.cor >= 66 && flags[KIHA_CORRUPTION_BITCH] != 1) {
+	if(flags[kFLAGS.KIHA_AFFECTION_LEVEL] > 0 && player.cor >= 66 && flags[kFLAGS.KIHA_CORRUPTION_BITCH] != 1) {
 		kihaBitchesOutCorruptPCs()
 		return;
 	}
 	//kihaUnBitchesOutCorruptPCs()
-	if(player.cor < 66 && flags[KIHA_CORRUPTION_BITCH] == 1) {
+	if(player.cor < 66 && flags[kFLAGS.KIHA_CORRUPTION_BITCH] == 1) {
 		kihaUnbitchesUncorruptedFolks();
 		return;
 	}
 	//Friendly+ meeting
-	if(flags[KIHA_AFFECTION_LEVEL] >= 1 && flags[KIHA_CORRUPTION_BITCH] != 1) {
-		if(flags[KIHA_AFFECTION_LEVEL] == 2 && flags[KIHA_AFFECTION] >= 100 && flags[KIHA_MOVE_IN_OFFER] == 0) {
+	if(flags[kFLAGS.KIHA_AFFECTION_LEVEL] >= 1 && flags[kFLAGS.KIHA_CORRUPTION_BITCH] != 1) {
+		if(flags[kFLAGS.KIHA_AFFECTION_LEVEL] == 2 && flags[kFLAGS.KIHA_AFFECTION] >= 100 && flags[kFLAGS.KIHA_MOVE_IN_OFFER] == 0) {
 			kihaOffersToMoveIn();
 			return;
 		}
@@ -37,19 +37,19 @@ public function encounterKiha():void {
 		return;
 	}
 	//If currently paid up on toll, don't run into her!
-	if(flags[KIHA_TOLL_DURATION] > 1) {
+	if(flags[kFLAGS.KIHA_TOLL_DURATION] > 1) {
 		kihaExplore();
 		return;
 	}
 	//Count meetings
-	flags[TIMES_MET_KIHA]++;
+	flags[kFLAGS.TIMES_MET_KIHA]++;
 	//PLOT FIGHT TIME!
-	if(player.cor < 66 && flags[KIHA_AFFECTION_LEVEL] == 0 && flags[KIHA_TALK_STAGE] >= 3 && player.gender > 0) {
+	if(player.cor < 66 && flags[kFLAGS.KIHA_AFFECTION_LEVEL] == 0 && flags[kFLAGS.KIHA_TALK_STAGE] >= 3 && player.gender > 0) {
 		kihaSpiderEventIntro();
 		return;
 	}
 	//First time
-	if(flags[TIMES_MET_KIHA] == 1) {
+	if(flags[kFLAGS.TIMES_MET_KIHA] == 1) {
 		outputText("An imposing figure drops out of the gnarled swamp trees, spraying loam and moss everywhere as it impacts the ground.  You immediately put up your " + player.weaponName + " and take up a combat stance.  Laughing uproariously, the stranger straightens, tucking her rust-red wings behind her back.  She's so busy with her mirth that you get a chance to get a good look at the six-foot tall monster of a woman.  Though her face has human-like features, a pair of wicked horns protrude from her forehead, giving evidence to more than a little taint.  The twin spikes match the curve of her skull, the pointed tips sticking out a ways behind her.  Her eyes are nearly solid crimson with inky black slits in the middle.  Dark red scales run up her arms and legs to meet on her back.  A powerful reptilian tail hangs down behind her, whipping back and forth with dangerous strength.\n\n", false);
 		
 		outputText("\"<i>Eyes up here, " + player.mf("dick-head","slut-bag") + ",</i>\" commands the draconic woman - and she's definitely a woman; the dark-skinned entrance between her muscled legs is evidence enough of that.  She twirls a wicked-looking double-headed axe as she warns, \"<i>You seem to have stumbled across my territory.  Let me make this clear to you: I own this stretch of swamp, and if you step foot in this area again, I'm going to beat you until you wish you ran into Lethice herself.  Now run along, before you dread the day you met Kiha!</i>\"  A thin trail of heat shimmers in the air with each pass of her axe's blades, left behind by the obviously magical implement.\n\n", false);
@@ -59,17 +59,17 @@ public function encounterKiha():void {
 		simpleChoices("Fight",meetKihaAndFight,"Ask Why",askWhy,"Buy Passage",offerToBuyPassageFromKiha,"",0,"Leave",leaveWhenMeetingAgressiveKiha);
 	}
 	//*Repeat Encounter - PC WAS VICTORIOUS LAST FIGHT 
-	else if(flags[PC_WIN_LAST_KIHA_FIGHT] == 1) {
+	else if(flags[kFLAGS.PC_WIN_LAST_KIHA_FIGHT] == 1) {
 		outputText("Kiha plummets from the sky, slamming down into the mossy earth with enough force to spray chunks of dirt everywhere.  She stands and growls, \"<i>Just because you beat me doesn't mean you've defeated me.  I'll NEVER BE DEFEATED!</i>\"\n\n", false);
 		
 		outputText("As she screams out in defiance, she charges you, giving you barely enough time to ready yourself for combat!", false);
 		//Clear 'won last fight' toggle
-		flags[PC_WIN_LAST_KIHA_FIGHT] = 0;
+		flags[kFLAGS.PC_WIN_LAST_KIHA_FIGHT] = 0;
 		startCombat(42);
 		return;
 	}
 	//Tribute Offer (1st Time) - Req's Kiha not be mad and PC suggested it at some point. 
-	else if(flags[KIHA_TOLL] == 1 && rand(2) == 0) {
+	else if(flags[kFLAGS.KIHA_TOLL] == 1 && rand(2) == 0) {
 		outputText("Kiha steps out from behind a tree with her axe on her back and her arms folded across her sizable chest.  \"<i>You again?  I've been thinking about what you said.  How about instead of beating you senseless, you pay me a tribute of 200 gems, and I'll let you pass through my territory unhindered.  Of course, if you stumble into my lair I might have to teach you a lesson.</i>\"  A greedy smile spreads across her dusky visage while her eyes burn with mischievous crimson light.  Wait a moment... wasn't this your idea?\n\n", false);
 		temp = 3179;
 		if(player.gems < 200) {
@@ -80,9 +80,9 @@ public function encounterKiha():void {
 		simpleChoices("Fight",meetKihaAndFight,"Pay",temp,"My Idea",tellKihaTributeWasYourIdea,"",0,"Leave",leaveWhenMeetingAgressiveKiha);
 	}
 	//*Repeat Encounter - Tribute Wore off 
-	else if(flags[KIHA_TOLL] > 1 && 
-		(flags[KIHA_TOLL_DURATION] == 1 || 
-		(flags[KIHA_TOLL_DURATION] == 0 && rand(2) == 0))) {
+	else if(flags[kFLAGS.KIHA_TOLL] > 1 && 
+		(flags[kFLAGS.KIHA_TOLL_DURATION] == 1 || 
+		(flags[kFLAGS.KIHA_TOLL_DURATION] == 0 && rand(2) == 0))) {
 		outputText("Kiha steps out from behind a tree with her axe on her back and her arms folded across her sizable chest.  \"<i>If you want to explore my territory again, you'll need to pay the fee,</i>\" she flatly states.  This is absurd - she wants more gems already?  You'll go broke like this, AND it was your idea to begin with!  What do you do?", false);
 		temp = 3179;
 		if(player.gems < 200) {
@@ -98,7 +98,7 @@ public function encounterKiha():void {
 		
 		outputText("\"<i>Don't even start,</i>\" she commands, advancing on you as she continues, \"<i>I told you to avoid my domain and yet you ignored my imperative and returned.  You may be a fucking masochist or a retard, but trust me, you won't enjoy this.</i>\"\n\n", false);
 		
-		if(flags[KIHA_TOLL] == 0) {
+		if(flags[kFLAGS.KIHA_TOLL] == 0) {
 			outputText("If you hurry, you might get a word in edge-wise.  What do you do?", false);
 			//[Fight] [Ask Why][Buy Passage][Leave]
 			simpleChoices("Fight",meetKihaAndFight,"Ask Why",askWhy,"Buy Passage",offerToBuyPassageFromKiha,"",0,"Leave",leaveWhenMeetingAgressiveKiha);
@@ -116,7 +116,7 @@ public function offerToBuyPassageFromKiha():void {
 	spriteSelect(72);
 	outputText("You jingle your gem pouch and ask if you could pay her to allow you passage.  Kiha shoulders her axe and scratches at one of her horns, mulling the idea over.  She stops and abruptly shakes her head.  \"<i>Not today.  Now scram, before I change my mind!</i>\"\n\n", false);
 	//(Unlocks toll option next encounter)
-	flags[KIHA_TOLL] = 1;
+	flags[kFLAGS.KIHA_TOLL] = 1;
 	//[Fight] [Leave] - Same results as main fight/leave.
 	simpleChoices("Fight",meetKihaAndFight,"",0,"",0,"",0,"Leave",leaveWhenMeetingAgressiveKiha);
 }
@@ -153,9 +153,9 @@ public function payKihaTribute():void {
 	outputText("You sigh and pay her 200 gems.  She doesn't even mention that it was originally your idea, but still, you're getting what you want - the ability to explore her territory unhindered.  Of course, you have no idea how long this 200 gems will last.\n\n", false);
 	//(gems -= 200;)
 	player.gems -= 200;
-	flags[KIHA_TOLL_DURATION] = 3 + rand(4);
+	flags[kFLAGS.KIHA_TOLL_DURATION] = 3 + rand(4);
 	//Count times paid
-	flags[KIHA_TOLL]++;
+	flags[kFLAGS.KIHA_TOLL]++;
 	//(2-5 more explorations of her area before she shows up demanding more tribute!)
 	//(do a 'Kiha' exploration with chances of fantabulous prizes)
 	doNext(kihaExplore);	
@@ -163,10 +163,10 @@ public function payKihaTribute():void {
 public function kihaExplore(clearScreen:Boolean = true):void {
 	if(clearScreen) outputText("", true);
 	//spriteSelect(72);
-	flags[KIHA_TOLL_DURATION]--;
+	flags[kFLAGS.KIHA_TOLL_DURATION]--;
 	var event:Number = rand(10);
 	//Grabbin' Inquisitor Armor
-	if(event == 0 && flags[GOTTEN_INQUISITOR_ARMOR] == 0) {
+	if(event == 0 && flags[kFLAGS.GOTTEN_INQUISITOR_ARMOR] == 0) {
 		inquisitorRobesDiscovery();
 		return;
 	}	
@@ -197,7 +197,7 @@ public function tellKihaTributeWasYourIdea():void {
 
 //*Generic PC Victory Introduction: 
 public function kihaVictoryIntroduction():void {
-	flags[PC_WIN_LAST_KIHA_FIGHT] = 1;
+	flags[kFLAGS.PC_WIN_LAST_KIHA_FIGHT] = 1;
 	outputText("", true);
 	spriteSelect(72);
 	outputText("Kiha sways back and forth for a moment, then drops her axe with numb hands.  As soon as she does, the hot glow of the weapon's cutting edge fades to silver, and the weapon lands with a heavy 'thunk' ", false);
@@ -365,7 +365,7 @@ public function kihaRapesMen():void {
 		else outputText("  Your unoccupied shaft sprays ropey strands of cum all around you, jerking and straining under the weight of the dragoness.", false);
 	}
 	outputText("  She pulls her sphincter tight to keep the fountaining jizz inside her and jams her tail half way down your throat until the thick flesh can't fit past your jaw anymore.  She wriggles the limb within you and pants sadistically as the bulge in your neck slides another inch deeper.  You begin to choke.\n\n", false);
-	flags[KIHA_CHOKED_OUT_PC] = 1;
+	flags[kFLAGS.KIHA_CHOKED_OUT_PC] = 1;
 	
 	outputText("\"<i>Fill my ass with that cum,</i>\" she purrs, forgetting her hostile attitude for a moment.  \"<i>I want to feel it in my belly.</i>\"  You can't help but comply, your suffocation-induced panic lending strength to your orgasm until her abdomen distends under the weight of your seed.  Before you black out, you can see her hooking four long, clawed fingers up into her pussy, while her thumb frantically jills her dusky clit.  Then, only darkness.\n\n", false);
 	
@@ -552,7 +552,7 @@ public function victoryDickKiha():void {
 		outputText("You cut her snobby ranting off by pulling back and thrusting hard, her tirade turning from well-spoked complaints to inarticulate moans.  She squeals in forced pleasure with each pump of your double dicks while you work her over.  There's no way you're going to slow down or give her a chance to start bitching again.  Dribbles of fem-spunk burst from her thighs with each body-shaking impact to spatter the ground and your lower member, turning her tight, resistant asshole into a butt-pussy nearly as wet as her cunny.\n\n", false);
 		
 		outputText("Seemingly from nowhere, her tail presses up your back and twists around your neck.  It squeezes your wind-pipe with strangling strength.  You glance down at Kiha, and she's smiling in between her moans, watching her attempts to suffocate you with heavy, lidded eyes.  That bitch!  You fuck her faster, battering at her holes with every ounce of strength you can muster.  The fucking is hard, fast, and desperate, but somehow she manages to keep her pressure up with her tail.  Frustrated, you take to slapping her face, twisting her nipples, and even choking her with one of your hands.  In spite of the incredibly rough sex, she still manages to hold tight.  Her body is twitching and shaking, her mouth spreading into a wordless 'o' of pleasure, but you still can't breathe!\n\n", false);
-		flags[KIHA_CHOKED_OUT_PC] = 1;
+		flags[kFLAGS.KIHA_CHOKED_OUT_PC] = 1;
 		//[if PC has naga tail or 40</i>\"+ tentacle dick not currently in use:
 		var z:Number = -1;
 		temp = player.cocks.length;
@@ -642,7 +642,7 @@ public function kihaRapesLittleGirlsISawItOnTheNews():void {
 public function rapeKihaWithWORDS():void {
 	outputText("", true);
 	spriteSelect(72);
-	if(flags[KIHA_TALK_STAGE] == 0) {
+	if(flags[kFLAGS.KIHA_TALK_STAGE] == 0) {
 		outputText("Kneeling down, you meet the defeated dragoness' gaze and ask her why she's so violent and territorial.  Kiha looks up at you in confusion and asks, \"<i>Wait... you defeated me, and you want to... talk?</i>\"\n\n", false);
 		
 		outputText("You nod your head and ask her again why she's so dead-set on defeating anyone that comes near her.  Kiha scratches at her elbow nervously and answers, \"<i>I don't know.  I just DO.  I-I'm so powerful - I have to defeat everyone.  It's the only way I can become the strongest.  I can't rely on weaklings or expect mercies like this.  The demons gave me none and I intend to return the favor.  You shouldn't even be talking to me.  You should rape me or kill me, anything to weaken me and cement yourself as the top predator.</i>\"\n\n", false);
@@ -652,7 +652,7 @@ public function rapeKihaWithWORDS():void {
 		outputText("Kiha recoils at the passion in your voice and shakes her head like a child trying to find the courage not to fear the dark, \"<i>No.  You sound like someone from the before times, from long, long ago, but it can't be that simple.  If it was, the demons would not rule this world.</i>\"  While you chew that over, Kiha suddenly grabs her weapon and springs to her feet.  Her wings unfurl and she flies away.  Even if she denied you, you feel like you might have gotten through to her.", false);
 	}
 	//Conversation Level 2 (40- Corruption! PUREBABIES ONLY!) (Zed)
-	else if(flags[KIHA_TALK_STAGE] == 1) {
+	else if(flags[kFLAGS.KIHA_TALK_STAGE] == 1) {
 		outputText("Once again, you crouch down and begin talking with your foe.  Kiha immediately sighs and says, \"<i>This again? I thought I told you - you're wrong.</i>\"\n\n", false);
 		
 		outputText("You ask her if she really believes that.  After all, you've beaten her twice now.  Kiha shudders and yells, \"<i>I just said so!  Gods, don't be so... so fucking dense!  If you were right, Lethice wouldn't be on her throne and they never would've been able to make monsters like... ahh, n-nevermind.  Dumbass!</i>\"\n\n", false);
@@ -660,10 +660,10 @@ public function rapeKihaWithWORDS():void {
 		outputText("Shrugging, you decide she's unlikely to talk more on this topic for now, so you change the topic to something else - your own history.  You tell her of your village, of the portal, and the day you were chosen as champion.  You talk of your training, and how different this land was from everything you expected.  You tell of your struggles.  You describe your victories.  You commiserate about your defeats.  You pour out all of the best and worst of your journeys in this strange realm.  Surprisingly, Kiha listens with rapt attention, never once interrupting.\n\n", false);
 		
 		outputText("Once you finish she comes out of it and mutters, \"<i>So you had it hard?  It doesn't matter.  I had it harder.</i>\"  She launches into the air and flies away before you can answer.", false);
-		if(silly() && flags[UNKNOWN_FLAG_NUMBER_00281] > 0 && lottieMorale() <= 33) outputText("  Is that what it feels like to be Lottie?", false);
+		if(silly() && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0 && lottieMorale() <= 33) outputText("  Is that what it feels like to be Lottie?", false);
 	}
 	//Conversation Level 3 (40- Corruption! PUREBABIES ONLY!) (Zed)
-	else if(flags[KIHA_TALK_STAGE] == 2) {
+	else if(flags[kFLAGS.KIHA_TALK_STAGE] == 2) {
 		outputText("Even though you've taken the dragoness down again, you settle down for another chat instead of anything more carnal.  Kiha smiles at that, relaxing a little as she asks, \"<i>Still sticking to your morals, huh?</i>\"\n\n", false);
 		
 		outputText("You nod and ask her if perhaps she'd like to tell her story since you shared yours the last time.  The dragoness laughs so hard that tiny spurts of flame flare in the air while small puffs of smoke burst from her nostrils.  She clutches at her stomach and doubles over, gasping for air.  Only after she manages to recover from her mirth does she breathlessly respond, saying, \"<i>You're serious about that?</i>\"\n\n", false);
@@ -680,7 +680,7 @@ public function rapeKihaWithWORDS():void {
 	else {
 		outputText("You sit down next to Kiha and start to talk again.  While she initially gives the barest hint of a smile, she soon begins to sulk.  No matter what you say or do you can't seem to bring her out of it.  Perhaps for now, there's simply no more to discuss with her.", false);
 	}
-	if(flags[KIHA_TALK_STAGE] < 3) flags[KIHA_TALK_STAGE]++;
+	if(flags[kFLAGS.KIHA_TALK_STAGE] < 3) flags[kFLAGS.KIHA_TALK_STAGE]++;
 	eventParser(5007);
 }
 /*Conversation Level 5: requires Lottie as follower, and to have given her enough bee honey, demon items, or harpy seeds to grow wings

@@ -41,26 +41,26 @@ Variable List
 //const FOUND_ISABELLA_AT_FARM_TODAY:int = 707;
 
 public function isabellaFollower():Boolean {
-	if(flags[ISABELLA_FOLLOWER_ACCEPTED] == 1 && flags[ISABELLA_CAMP_DISABLED] == 0) return true;
+	if(flags[kFLAGS.ISABELLA_FOLLOWER_ACCEPTED] == 1 && flags[kFLAGS.ISABELLA_CAMP_DISABLED] == 0) return true;
 	return false;
 }
 public function isabellaAccent():Boolean {
-	if(flags[ISABELLA_ACCENT_TRAINING_PERCENT] < 100) return true;
-	if(flags[ISABELLA_ACCENT_FORCED_ON]) return true;
+	if(flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] < 100) return true;
+	if(flags[kFLAGS.ISABELLA_ACCENT_FORCED_ON]) return true;
 	return false;
 }
 public function isabellaAffection(mod:int = 0):int {
-	flags[ISABELLA_AFFECTION] += mod;
-	if(flags[ISABELLA_AFFECTION] > 100) flags[ISABELLA_AFFECTION] = 100;
-	else if(flags[ISABELLA_AFFECTION] < 0) flags[ISABELLA_AFFECTION] = 0;
-	return flags[ISABELLA_AFFECTION];
+	flags[kFLAGS.ISABELLA_AFFECTION] += mod;
+	if(flags[kFLAGS.ISABELLA_AFFECTION] > 100) flags[kFLAGS.ISABELLA_AFFECTION] = 100;
+	else if(flags[kFLAGS.ISABELLA_AFFECTION] < 0) flags[kFLAGS.ISABELLA_AFFECTION] = 0;
+	return flags[kFLAGS.ISABELLA_AFFECTION];
 }
 
 //Isabella Moves In Intro
 public function isabellaMoovesInGreeting():void {
 	spriteSelect(31);
 	outputText("", true);
-	if(flags[ISABELLA_TIMES_OFFERED_FOLLOWER] == 0) {
+	if(flags[kFLAGS.ISABELLA_TIMES_OFFERED_FOLLOWER] == 0) {
 		outputText("Isabella gives you a warm smile when you wander into her camp and spikes the sharp edge of her shield into the ground, leaving it standing next to her.  Her big brown eyes are filled with warmth and affection for a friend as she greets you, saying, \"<i>Velcome back, " + player.short + ".  Did you miss little old me?</i>\"\n\n", false);
 		
 		outputText("You ", false);
@@ -91,7 +91,7 @@ public function isabellaMoovesInGreeting():void {
 		}
 		choices("Talk",talkWithIsabella,"Drink",nomOnMommaIzzysTits,"Get Licked",suck,"Fight 4 Rape",fightIsabella,"Offer Oral",volunteerToSlurpCowCunt,"Accept Offer",moveTheBitchIn,"",0,"",0,"",0,"Leave",13);
 	}
-	flags[ISABELLA_TIMES_OFFERED_FOLLOWER]++;
+	flags[kFLAGS.ISABELLA_TIMES_OFFERED_FOLLOWER]++;
 }
 //Decline Izzy Initial Moving Offer (-10 affection) 
 public function turnDownIsabellaFollower():void {
@@ -118,9 +118,9 @@ public function moveTheBitchIn():void {
 	if(hasCompanions()) outputText("newest ", false);
 	outputText("camp follower gather and move her possessions to your camp.  It takes the better part of an hour, but the entire decor is coming with you, so it may just be worth it.\n\n", false);
 	outputText("\n\n(<b>Isabella now available in the lovers menu.</b>)");
-	flags[ISABELLA_AFFECTION] = 100;
-	flags[ISABELLA_FOLLOWER_ACCEPTED] = 1;
-	flags[ISABELLA_PLAINS_DISABLED] = 1;
+	flags[kFLAGS.ISABELLA_AFFECTION] = 100;
+	flags[kFLAGS.ISABELLA_FOLLOWER_ACCEPTED] = 1;
+	flags[kFLAGS.ISABELLA_PLAINS_DISABLED] = 1;
 	doNext(13);
 }
 
@@ -140,7 +140,7 @@ public function callForFollowerIsabella():void {
 	else outputText("Hiya " + player.short + "!  Anything I can help you with?", false);
 	outputText("</i>\"", false);
 	if(player.hasCock()) {
-		if(flags[ISABELLA_BLOWJOBS_DISABLED] == 0) {
+		if(flags[kFLAGS.ISABELLA_BLOWJOBS_DISABLED] == 0) {
 			outputText("\n\nYou could ask Isabella not to suck you off in the morning. (In Sex Menu)", false);
 		}
 		else {
@@ -149,9 +149,9 @@ public function callForFollowerIsabella():void {
 		if(player.shortestCockLength() > 9) outputText("  Sadly, you're too big for her to be interested in sucking you off right now.", false);
 	}
 	var accent:Number = 0;
-	if(flags[ISABELLA_ACCENT_TRAINING_PERCENT] < 100) accent = 3244;
+	if(flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] < 100) accent = 3244;
 	var milk:Number = 0;
-	if(flags[ISABELLA_MILKED_YET] < 0) milk = 3253;
+	if(flags[kFLAGS.ISABELLA_MILKED_YET] < 0) milk = 3253;
 	var pro:Number = 0;
 	if(hasItem("ProBova",1) && player.gender > 0) {
 		pro = 3258;
@@ -169,7 +169,7 @@ public function campIzzySexMenu():void {
 	var bjTogText:String = "";
 	var getSucked:Number = 0;
 	if(player.hasCock()) {
-		if(flags[ISABELLA_BLOWJOBS_DISABLED] == 0) {
+		if(flags[kFLAGS.ISABELLA_BLOWJOBS_DISABLED] == 0) {
 			bjTogText = "No BJs";
 		}
 		else {
@@ -196,7 +196,7 @@ public function isabellasAccentCoaching():void {
 	spriteSelect(31);
 	outputText("", true);
 	//Cooldown rejection
-	if(flags[ISABELLA_ACCENT_TRAINING_COOLDOWN] > 1) {
+	if(flags[kFLAGS.ISABELLA_ACCENT_TRAINING_COOLDOWN] > 1) {
 		outputText("Isabella shakes her head and says, \"<i>Nein.  I do not vish to spend time on zis now.</b>\"", false);
 		//Back to follower menu!
 		doNext(callForFollowerIsabella);
@@ -205,10 +205,10 @@ public function isabellasAccentCoaching():void {
 	/*(req's 100% teach score to replace dialogue.  Success 
 	based on inte)*/
 	//(FIRST TIME) 
-	if(flags[ISABELLA_ACCENT_TRAINING_PERCENT] == 0) {
+	if(flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] == 0) {
 		outputText("You tell Isabella you'd like to offer her lessons in order to reduce her accent and make her more understandable.  She folds her arms across her chest and protests, \"<i>You have an accent too, nein?</i>\"\n\n", false);
 		outputText("Chuckling, a little, you nod, but note that yours is far closer to the people of this land than her own.  She agrees, albeit reluctantly.\n\n", false);
-		flags[ISABELLA_ACCENT_TRAINING_PERCENT] = 1;
+		flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] = 1;
 	}
 	//Autosuccess at inte >= 60)
 	//Autofail at inte < 20)
@@ -252,37 +252,37 @@ public function isabellasAccentCoaching():void {
 		else outputText("You go over Isabella's word choice with her in an effort to reduce her accent.  In short order, the cow-girl is looking at you with rapt, attentive eyes, hanging on to your every word as you help her disguise her tongue to match those she's surrounded by.", false);
 		accentChange = 12 + rand(10);
 	}
-	if(flags[ISABELLA_ACCENT_TRAINING_PERCENT] < 100 && flags[ISABELLA_ACCENT_TRAINING_PERCENT] + accentChange >= 100) 
+	if(flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] < 100 && flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] + accentChange >= 100) 
 		outputText("<b>\n\nIsabella proudly says, \"<i>I think I've learned everything you have to teach, " + player.short + ".</i>\"  You smile at the progress she's made and applaud.  There's little else you can teach for her.</b>", false);
-	else if(flags[ISABELLA_ACCENT_TRAINING_PERCENT] < 90 && flags[ISABELLA_ACCENT_TRAINING_PERCENT] + accentChange >= 90)
+	else if(flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] < 90 && flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] + accentChange >= 90)
 		outputText("<b>  Isabella can often speak without her accent when she tries to, though she doesn't seem to be doing so in everyday conversation yet.  She's so close though!</b>", false);
-	else if(flags[ISABELLA_ACCENT_TRAINING_PERCENT] < 75 && flags[ISABELLA_ACCENT_TRAINING_PERCENT] + accentChange >= 75) 
+	else if(flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] < 75 && flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] + accentChange >= 75) 
 		outputText("<b>  Isabella will sometimes manage to say a sentence or two without a single mistake during the lessons.  It's good progress!</b>", false);
-	else if(flags[ISABELLA_ACCENT_TRAINING_PERCENT] < 50 && flags[ISABELLA_ACCENT_TRAINING_PERCENT] + accentChange >= 50) 
+	else if(flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] < 50 && flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] + accentChange >= 50) 
 		outputText("<b>  Isabella has gained enough control over her language to speak properly... if she talks about half as fast as normal.</b>", false);
-	else if(flags[ISABELLA_ACCENT_TRAINING_PERCENT] < 25 && flags[ISABELLA_ACCENT_TRAINING_PERCENT] + accentChange >= 25)
+	else if(flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] < 25 && flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] + accentChange >= 25)
 		outputText("<b>  Isabella is getting better during your lessons.  Generally she can pick out most of her mistakes if she pauses to think over what she just said.</b>", false);	
-	else if(flags[ISABELLA_ACCENT_TRAINING_PERCENT] < 10 && flags[ISABELLA_ACCENT_TRAINING_PERCENT] + accentChange >= 10) 
+	else if(flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] < 10 && flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] + accentChange >= 10) 
 		outputText("<b>  Isabella has made enough progress that if she thinks about it, she will sometimes catch her mistakes on her own.</b>", false);
 		
 	//Bump up accent level appropriately.
-	flags[ISABELLA_ACCENT_TRAINING_PERCENT] += accentChange;
-	if(flags[ISABELLA_ACCENT_TRAINING_PERCENT] > 100) flags[ISABELLA_ACCENT_TRAINING_PERCENT] = 100;
+	flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] += accentChange;
+	if(flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] > 100) flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] = 100;
 	//4 to 12 hour cooldown
-	flags[ISABELLA_ACCENT_TRAINING_COOLDOWN] = 4 + rand(13);
+	flags[kFLAGS.ISABELLA_ACCENT_TRAINING_COOLDOWN] = 4 + rand(13);
 	doNext(13);
 }
 
 //Morning Wakeup Call 
 public function isabellaMorningWakeupCall():void {
 	spriteSelect(31);
-	flags[ISABELLA_MORNING_FELLATIO_COUNT]++;
+	flags[kFLAGS.ISABELLA_MORNING_FELLATIO_COUNT]++;
 	var x:Number = player.shortestCockIndex();
 	outputText("\n", false);
 	outputText("Sighing happily, your dream takes on a markedly sexual tone, a bevy of delightful sensations wrapping around your loins in your sleep.  Your " + hipDescript() + " pump slightly as your body reacts to the hot, pleasant feelings emanating from your now-stiff cock.  The turgid member is like a lightning rod, shuddering every few seconds under an assault of thunderous pleasure-strikes.  You let out a sleepy, contented sigh as your body starts to stir to wakefulness.  The tactile sensations seem so similar to a hot, tight cunt, and yet so achingly different.  Sometimes, a few places are left exposed to the cool morning air, the breeze chilling that portion of your member's skin in sensual contrast with the heat of whatever is squeezing the rest of it.\n\n", false);
 	
 	outputText("There's a quiet, almost inaudible squishing noise prodding at your muzzy consciousness, like the irritating drip of a leaky faucet; you do the only thing a half-asleep, pleasure-drunk " + player.mf("man","herm") + " can do in a situation like this: blink open your eyes and glance down toward your groin.  There's a tangle of curly crimson hair blocking your view of your crotch, flanked by two down-turned, cute cow-ears.  ", false);
-	if(flags[ISABELLA_MORNING_FELLATIO_COUNT] == 1) outputText("Isabella is fellating you!?", false);
+	if(flags[kFLAGS.ISABELLA_MORNING_FELLATIO_COUNT] == 1) outputText("Isabella is fellating you!?", false);
 	else outputText("Isabella is giving you one of her traditional good-morning blowjobs.", false);
 	outputText("  Her massive, malleable tongue moulds around your " + cockDescript(x) + " as she works to enhance your pleasure.  A trickle of warm, creamy milk escapes the heavy jugs resting on your " + player.legs() + ", showing you just how much she enjoys dispensing oral pleasure.   The tangled, crimson mass of hair slowly begins to bob up and down upon your loins, and Isabella's big brown eyes look up at you with radiant happiness, the corners of her mouth curling into a cock-filled smile.\n\n", false);
 	
@@ -322,7 +322,7 @@ public function isabellaMorningWakeupCall():void {
 	outputText("The orally-fixated red-head shudders and quietly moans as she rises, her pleasure evident on her stained fingers as they withdraw from under her rumpled skirt.  Isabella's silky white top is utterly soaked with sweet-smelling cream, an aroma echoed by the ", false);
 	if(player.cumQ() >= 2000) outputText("spunk-tainted ", false);
 	outputText("milk-puddle around your " + player.legs() + ".  She sighs and says, \"<i>", false);
-	if(flags[ISABELLA_MORNING_FELLATIO_COUNT] == 1) {
+	if(flags[kFLAGS.ISABELLA_MORNING_FELLATIO_COUNT] == 1) {
 		if(isabellaAccent()) outputText("Mmm, your penis has such tasty treats for me.  Keep zat cock small enough for mein mouth and I vill be happy to tend to it every morning, ja?", false);
 		else outputText("Mmm, your penis has such tasty treats for me.  Keep that cock small enough for my mouth and I'll be happy to tend to it every morning, okay?", false);
 	}
@@ -344,11 +344,11 @@ public function isabellaMorningWakeupCall():void {
 public function toggleIsabellasMorningWoodChopping():void {
 	spriteSelect(31);
 	outputText("", true);
-	if(flags[ISABELLA_BLOWJOBS_DISABLED] == 0) {
+	if(flags[kFLAGS.ISABELLA_BLOWJOBS_DISABLED] == 0) {
 		outputText("You let Isabella know that you'd rather manage your morning wood yourself, and if possible, save up your cum rather than having her drain it every morning.  She looks a little disappointed but agrees to leave you be in the morning.  Before you go, she offers, \"<i>", false);
 		if(isabellaAccent()) outputText("Just let Isabella know if you change your mind, ja?</i>\"", false);
 		else outputText("Just let me know if you change your mind, all right?</i>\"", false);
-		flags[ISABELLA_BLOWJOBS_DISABLED] = 1;
+		flags[kFLAGS.ISABELLA_BLOWJOBS_DISABLED] = 1;
 	}
 	else {
 		outputText("You ", false);
@@ -365,7 +365,7 @@ public function toggleIsabellasMorningWoodChopping():void {
 			else outputText("Of course; we wouldn't want you to be out there battling demons unsated.  Who knows what would happen?", false);
 		}
 		outputText("</i>\"", false);
-		flags[ISABELLA_BLOWJOBS_DISABLED] = 0;
+		flags[kFLAGS.ISABELLA_BLOWJOBS_DISABLED] = 0;
 	}
 	//To Izzy SEX menu
 	doNext(campIzzySexMenu);
@@ -376,7 +376,7 @@ public function repeatGermanBratwurstInCamp():void {
 	outputText("", true);
 	var x:Number = player.smallestCockIndex();
 	outputText("You ask Isabella if she would mind helping you blow off some pressure before you go back out.  She glances down at " + sMultiCockDesc() + " and ", false);
-	if(flags[ISABELLA_TIME_SINCE_LAST_HOTDOGGING] < 5 && flags[ISABELLA_TIME_SINCE_LAST_HOTDOGGING] > 0) {
+	if(flags[kFLAGS.ISABELLA_TIME_SINCE_LAST_HOTDOGGING] < 5 && flags[kFLAGS.ISABELLA_TIME_SINCE_LAST_HOTDOGGING] > 0) {
 		if(isabellaAccent()) outputText("mumbles, \"<i>Already?  Did I not just take care of you?</i>\"  The blushing cow-girl teases, \"<i>Are you really zat horny, or do you just like mein heiny that much?", false);
 		else outputText("mumbles, \"<i>Already?  Didn't I just take care of you?</i>\"  The blushing cow-girl teases, \"<i>Are you really that horny, or do you just like my heiny that much?", false);
 	}
@@ -496,8 +496,8 @@ public function repeatGermanBratwurstInCamp():void {
 		
 		outputText("Isabella moans and rubs her hands around the curve of her ass, smearing the jism all over her chocolatey skin.  She even takes a handful of excess and smears it over her dripping cunny, shuddering with her own muted climax as she walks away, slightly bow-legged from pleasure.", false);
 	}
-	flags[ISABELLA_TIME_SINCE_LAST_HOTDOGGING] = 1;
-	flags[ISABELLA_TIMES_HOTDOGGED]++;
+	flags[kFLAGS.ISABELLA_TIME_SINCE_LAST_HOTDOGGING] = 1;
+	flags[kFLAGS.ISABELLA_TIMES_HOTDOGGED]++;
 	stats(0,0,0,0,-1,0,-100,0);
 	doNext(13);
 }
@@ -669,7 +669,7 @@ public function milktasticLacticLactation():void {
 public function izzyMilkYourselfDamnit():void {
 	//set Izzy Milked Yet flag to 0
 	//in other words, she handles it herself somehow but it repeats after another ten days without milking her
-	flags[ISABELLA_MILKED_YET] = 0;
+	flags[kFLAGS.ISABELLA_MILKED_YET] = 0;
 	eventParser(13);
 }
 //[Yes]
@@ -751,7 +751,7 @@ public function AllowIzzyMilkerUse():void {
 	if(player.hasCock()) outputText("(You have a hunch that you might be able to catch her using the milkers at the farm if you 'explore' there, provided she hasn't been recently milked.)\n\n");
 	//get 1 Izzit Milk or Cream? item, set Izzy Milked Yet flag to -1, which adds [GetMilk] button to follower menu
 	shortName = "IzyMilk";
-	flags[ISABELLA_MILKED_YET] = -1;
+	flags[kFLAGS.ISABELLA_MILKED_YET] = -1;
 	menuLoc = 2;
 	takeItem();
 }
@@ -768,7 +768,7 @@ public function noMilkingMilky():void {
 	outputText("arousal at your touch, blushing at putting on such a show in front of Whitney.  The farmer shrugs.  \"<i>Y'all please yourselves.  Milker'll be here if you need it.</i>\"\n\n", false);
 	//get 1 Izzit Milk or Cream? item, set Izzy Milked Yet flag to -2, which adds [GetMilk] button to follower menu
 	shortName = "IzyMilk";
-	flags[ISABELLA_MILKED_YET] = -2;
+	flags[kFLAGS.ISABELLA_MILKED_YET] = -2;
 	menuLoc = 2;
 	takeItem();
 }
@@ -781,15 +781,15 @@ public function getMilk():void {
 	outputText("", true);
 	outputText("You tell Isabella that you want a bottle of her milk.  ", false);
 	//Izzy overmilked
-	if(flags[ISABELLA_MILK_COOLDOWN] > 0) {
+	if(flags[kFLAGS.ISABELLA_MILK_COOLDOWN] > 0) {
 		outputText("Isabella shakes her head and tells you she", false);
-		if(flags[ISABELLA_MILKED_YET] == -1) outputText("'s out of bottled milk right now, and that you should check back later.", false);
+		if(flags[kFLAGS.ISABELLA_MILKED_YET] == -1) outputText("'s out of bottled milk right now, and that you should check back later.", false);
 		else outputText("'s still sore from last time, and that you should wait till later.", false);
 		doNext(callForFollowerIsabella);
 		return;
 	}
 	//[(if Izzy Milked Yet flag = -1)
-	if(flags[ISABELLA_MILKED_YET] == -1) {
+	if(flags[kFLAGS.ISABELLA_MILKED_YET] == -1) {
 		if(isabellaAccent()) outputText("Isabella nods, and fetches you one of the spares from her latest milking session at the farm.  \"<i>Here you go!  Less zan twenty-four hours old, ja?</i>\"", false);
 		else outputText("Isabella nods, and fetches you one of the spares from her latest milking session at the farm.  \"<i>Here you go!  Less than twenty-four hours old, okay?</i>\"\n\n", false);
 	}
@@ -807,8 +807,8 @@ public function getMilk():void {
 	}
 	//get 1 Izzit Milk or Cream? item, lose some fatigue and gain some lust if Izzy Milked Yet flag = -2
 	shortName = "IzyMilk";
-	flags[ISABELLA_MILKED_YET] = -2;
-	flags[ISABELLA_MILK_COOLDOWN] = 7 + rand(4);
+	flags[kFLAGS.ISABELLA_MILKED_YET] = -2;
+	flags[kFLAGS.ISABELLA_MILK_COOLDOWN] = 7 + rand(4);
 	menuLoc = 2;
 	takeItem();
 }
@@ -818,7 +818,7 @@ public function angryMurble():void {
 	outputText("You come to Isabella's part of the camp with Marble in tow, supposing now is as good a time as ever to introduce the two.  Marble greats Isabella warmly but immediately starts bombarding her with questions about her origin.  From her persistence, it seems she is interested in meeting another cow-girl.  Though a little overwhelmed, Isabella recovers quickly, explaining her origins and the impurity of her cow-girl nature.  Marble is visibly disappointed.\n\n", false);
 	
 	outputText("\"<i>Topic of conversation gradually shifts to the reason why Marble has come to the camp.  Marble seems to be happy to meet your friend, and is eager to spend some more time with her in the future.  Isabella, on the other hand, seems a little off-put regarding Marble's actions.  Only time will tell how the two take to each other.", false);
-	flags[ISABELLA_MURBLE_BLEH] = 2;
+	flags[kFLAGS.ISABELLA_MURBLE_BLEH] = 2;
 	doNext(1);
 }
 
@@ -829,13 +829,13 @@ public function angryMurble():void {
 public function isabellaSparMenu():void {
 	spriteSelect(31);
 	outputText("", true);
-	if(flags[ISABELLA_SPARRING_INTRO] == 0) {
+	if(flags[kFLAGS.ISABELLA_SPARRING_INTRO] == 0) {
 		outputText("Isabella smiles when you suggest sparring and vigorously nods, exclaiming, \"<i>", false);
 		if(isabellaAccent()) outputText("Zis vill be good for both of us, ya!?</i>\"  The beaming cow-girl taps a finger to her chin and suggests, \"<i>Ve should set up out on ze edges of the plains, so ve don't damage zis camp.</i>\"", false);
 		else outputText("This ought to be good for both of us!</i>\"  The beaming cow-girl taps a finger to her chin and suggests, \"<i>Why don't we set up a faux camp on the edge of the plains, so we don't damage this one.  Okay?</i>\"", false);
 		
 		outputText("  That seems logical.  This will be like a trip down memory lane.\n\n", false);
-		flags[ISABELLA_SPARRING_INTRO] = 1;
+		flags[kFLAGS.ISABELLA_SPARRING_INTRO] = 1;
 	}
 	else outputText("You suggest a sparring session.  ", false);
 	if(isabellaAccent()) outputText("Isabella asks, \"<i>Vhat stakes should ve use?  Vould you rather we spar light or fight like ze creatures of zis world?</i>\"", false);
@@ -847,9 +847,9 @@ public function isabellaSparMenu():void {
 public function sparring(type:int = 1):void {
 	spriteSelect(31);
 	outputText("", true);
-	if(flags[ISABELLA_SPARRING_INTRO] == 1) {
+	if(flags[kFLAGS.ISABELLA_SPARRING_INTRO] == 1) {
 		outputText("You and Isabella hike to the border of the plains with some old furniture and worn out blankets, arranging a faux camp for you to fight around.  Once it is finished, you take a quick breather before getting started.\n\n", false);
-		flags[ISABELLA_SPARRING_INTRO] = 2;
+		flags[kFLAGS.ISABELLA_SPARRING_INTRO] = 2;
 	}
 	else {
 		outputText("You and Isabella hike to the border of the plains, where you set up the make-shift camp for your sparring sessions.\n\n", false);
@@ -874,7 +874,7 @@ public function isabellaBurps():void {
 	spriteSelect(31);
 	outputText("", true);
 	//First time
-	if(flags[ISABELLA_PROBOVA_BURP_COUNT] == 0) {
+	if(flags[kFLAGS.ISABELLA_PROBOVA_BURP_COUNT] == 0) {
 		if(isabellaAccent()) outputText("\"<i>Vhat is zat, dear?</i>\"", false);
 		else outputText("\"<i>What do you have there?</i>\"", false);
 		outputText(" Isabella asks innocently, inspecting the bottle of cloudy fluid you're offering her.  You reveal the contents to be Pro Bova, basically a supercharged version of what she took to become as she is now.  Her eyes cloud a bit as she absentmindedly presses her oversized bosom together, the most obvious indication of her changes.  \"<i>And you ", false);
@@ -916,7 +916,7 @@ public function runAwayFromIzzyBurps():void {
 	outputText("", true);
 	spriteSelect(31);
 	//First time
-	if(flags[ISABELLA_PROBOVA_BURP_COUNT] == 0) {
+	if(flags[kFLAGS.ISABELLA_PROBOVA_BURP_COUNT] == 0) {
 		outputText("Allowing common sense to dictate your judgement, you step back from the dark-skinned woman, backing up until she stops waving at you.  She grimaces in an evident cross of pain and... pleasure?  Her cheeks are puffing up and chest, puffing out.  Despite yourself, you can't help but admire the way her 'udders' sit on her out-thrust torso, jiggling constantly from the tremors running through her body.  Finally, when she can't seem to hold herself back any longer, her mouth flies open as wide as you've ever seen it, a gigantic burp thundering out.  A visible misty cloud issues from her gaping gob, gaining volume and hovering ominously around her as subsequent belches ripple forth.  In an attempt to free all of the offending gas from her poor body, Isabella roughly squishes her midsection, wincing at each emission as she forces them out.\n\n", false);
 	
 		outputText("The gaseous assault eventually diminishes, her belly returning to a healthy state and the cloud dispersing.  After waiting a few minutes to confirm the end of the episode, Isabella stomps up to you, a fierce blush painting her cheeks.  \"<i>", false);
@@ -946,9 +946,9 @@ public function runAwayFromIzzyBurps():void {
 public function getIzzyBurped():void {
 	outputText("", true);
 	spriteSelect(31);
-	flags[ISABELLA_PROBOVA_BURP_COUNT]++;
+	flags[kFLAGS.ISABELLA_PROBOVA_BURP_COUNT]++;
 	//First time
-	if(flags[ISABELLA_PROBOVA_BURP_COUNT] == 1) {
+	if(flags[kFLAGS.ISABELLA_PROBOVA_BURP_COUNT] == 1) {
 		outputText("You completely ignore the warning, immediately moving to help your cow-girl companion with her upset stomach problems. She casts a disbelieving look at you, vocally stumbling over a dozen different protests. Determined as you are, however, you dutifully rub her belly, intent on alleviating her pains.  \"<i>You... you.... dummkopf! ",false);
 		if(isabellaAccent()) outputText("V", false);
 		else outputText("W", false);
@@ -1074,7 +1074,7 @@ public function getIzzyBurped():void {
 public function declineIzzysCowBurpApology():void {
 	outputText("", true);
 	spriteSelect(31);
-	if(flags[ISABELLA_PROBOVA_BURP_COUNT] == 1) {
+	if(flags[kFLAGS.ISABELLA_PROBOVA_BURP_COUNT] == 1) {
 		outputText("As strange as the situation is, you're too weirded out to reassure Isabella, at least for now, and you relay that to her.  Though crestfallen, she takes the news well, apologizing - sincerely and soberly - once more before moving back to her designated camping spot.  ", false);
 		if(player.hasStatusAffect("Burp Changed") >= 0) {
 			outputText("  Happily, after about an hour, you go back to your old form, leaving the belch-borne bovine bounty behind.", false);
@@ -1097,7 +1097,7 @@ public function acceptCowpology():void {
 		player.removeStatusAffect("Burp Changed");
 	stats(0,0,0,0,0,-1,-100,0);	
 	//FIRST TIME
-	if(flags[ISABELLA_PROBOVA_BURP_COUNT] == 1) {
+	if(flags[kFLAGS.ISABELLA_PROBOVA_BURP_COUNT] == 1) {
 		outputText("Flashing a smirk, you beckon her your way, stripping from your " + player.armorName + ".  With delicate and deliberate motions you pull the hem of Isabella's milk-stained blouse down, reaching into the depths of her cleavage and taking hold of her oversized breasts.  It takes effort to heave the heavy, fluid-filled mammaries up and out of her shirt.  Once exposed to the open air, her quadruplet of nipples twitch and stiffen, only swelling further as you alternatingly tease her teats with the edge of your fingernail.  You trace little circles along the areola, running up and over the nubs; your gentle-but-devastating caressing technique sets Isabella all a-shiver, knees knocking together in hardly-contained ecstasy.  If given enough time, you figure you could push the cow-girl to climax merely from nipple stimulation, but your own body demands satisfaction as well.\n\n", false);
 		//male: titjoob (Z)
 		if(player.hasCock()) {
@@ -1299,7 +1299,7 @@ public function findIzzyMilking():void {
 	outputText("As you wander around Whitney's farm, your exploration brings you back toward the barn.  Wiping the sweat from your brow after nearly an hour under the hot sun, you lean back against the hard wooden wall to take a breather - only to hear a faint, yet clearly cstatic, mooing coming from inside.  You step over to the nearest window and, peering inside, are surprised to see a familiar towering cowgirl leaning over a railing, a pair of oversized milkers chugging away at her massive mounds.  Seeing her mooing softly as the milkers suckle the thick cream from her teats soon has you well aroused at the sight... and you think you could give her a sexy surprise while she's getting milked.");
 	
 	menu();
-	flags[FOUND_ISABELLA_AT_FARM_TODAY] = 1;
+	flags[kFLAGS.FOUND_ISABELLA_AT_FARM_TODAY] = 1;
 	//[Fuck her] [Leave]
 	addButton(0,"Fuck Her",fuckIsabellaInTheBarn);
 	addButton(4,"Leave",eventParser,13);

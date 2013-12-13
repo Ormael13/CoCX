@@ -1,11 +1,13 @@
 ﻿package classes
 {
+	// BREAKING ALL THE RULES.
+	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
 
 	import classes.CoC_Settings;
 
 	import classes.assClass;
 	import classes.breastRowClass;
-	//import classes.cockClass;
 	
 	import classes.Player;
 	import classes.Cock;
@@ -23,6 +25,8 @@
 	import coc.model.GameModel;
 	import coc.model.TimeModel;
 
+	// Class based content? In my CoC?! It's more likely than you think!
+	import classes.content.*;
 	import fl.controls.ComboBox; 
 	import fl.data.DataProvider; 
 	import flash.display.Loader;
@@ -79,9 +83,10 @@
 		include "../../includes/saves.as";
 		
 		// Lots of constants
-		include "../../includes/flagDefs.as";
+		//include "../../includes/flagDefs.as";
 		include "../../includes/appearanceDefs.as";
 
+		public var umasShop:UmasShop = new UmasShop();
 		
 		include "../../includes/akbal.as";
 		include "../../includes/amily.as";
@@ -225,8 +230,6 @@
 
 		public var model :GameModel;
 
-		//public var mainView :MainView;
-		//public var model :GameModel;
 
 
 		// ALL THE VARIABLES:
@@ -275,10 +278,11 @@
 
 		public var monkey:ChaosMonkey;
 		public var testingBlockExiting:Boolean;
-		//public var encounteredErrorFlag:Boolean;
 
 		public function CoC()
 		{
+			// Cheatmode.
+			kGAMECLASS = this;
 			// This is a flag used to prevent the game from exiting when running under the automated tester
 			// (the chaos monkey)
 			testingBlockExiting = false;
@@ -375,12 +379,6 @@
 			flags = new DefaultDict();
 			model.flags = flags;
 
-			/*
-			for (var i = 0; i < 3000; i++)
-			{
-				flags.push(0);
-			}
-			*/
 
 			///Used everywhere to establish what the current game state is
 			// Key system variables
@@ -476,8 +474,6 @@
 			shortName = "";
 			//}endregion
 
-			//Keyboard listener!
-			// stage.addEventListener(KeyboardEvent.KEY_DOWN, keyboard);
 
 			// These are toggled between by the [home] key.
 			mainView.textBGWhite.visible = false;
@@ -514,20 +510,10 @@
 
 			// ******************************************************************************************
 
-
-			//var mainView.aCb:ComboBox = new ComboBox(); 
-			//mainView.aCb.dropdownWidth = 200; 
-			//mainView.aCb.width = 200; 
-			//mainView.aCb.scaleY = 1.1;
-			//mainView.aCb.move(-1250, -1550); 
-			//mainView.aCb.prompt = "Choose a perk"; 
 			mainView.aCb.dataProvider = new DataProvider(perkList); 
 			mainView.aCb.addEventListener(Event.CHANGE, changeHandler); 
 			 
-			//addChild(mainView.aCb);
-
-
-			// ******************************************************************************************
+			//mainView._getButtonToolTipText = getButtonToolTipText;
 
 
 			//Register the classes we need to be able to serialize and reconstitute so
@@ -547,17 +533,10 @@
 			//registerClassAlias("Enum", Enum);
 			//registerClassAlias("cockClass", cockClass);
 
-			//Invert shit
-			//invertGo();
 			//Hide sprites
 			mainView.hideSprite();
 			//Hide up/down arrows
 			mainView.statsView.hideUpDown();
-			//Hide choice buttons
-			//choices("one", 0, "two", 0, "three", 0, "four", 0, "five", 0, "six", 0, "seven", 0, "eight", 0, "nine", 0, "ten", 0);
-			//Call up the title screen
-
-
 
 
 			this.addFrameScript( 0, this.run );

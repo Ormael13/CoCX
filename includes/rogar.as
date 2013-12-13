@@ -31,7 +31,7 @@
 public function encounterRogarSwamp():void {
 	outputText("", true);
 	spriteSelect(86);
-	if(flags[ROGAR_PHASE] == 0) {
+	if(flags[kFLAGS.ROGAR_PHASE] == 0) {
 		outputText("While wandering through the swamp you hit a patch of soft ground; struggling with your balance, you topple over and find yourself falling face-first into the sodden peat and breaking through.  With a dissatisfied grunt, you manage to squirm upright in the filth, your mud-covered head and arms breaking the surface of the heavy gunk again.  You can feel the wet seeping through your clothes, making the fabric stick to your form.  Before you can wipe the mess from your eyes, the sound of footsteps squelching through the muck draws near, and soon a rough, green hand grips you by the shoulder and pulls you from the bog.  You cough and sputter to get the filth from your mouth, and a large hand pats your back to help.  Through the coughing, you wipe your eyes enough to make out your 'rescuer'.  There stands a hulking figure with olive green skin; he must be easily over seven feet tall, his bald face eyeing you up and down with an expression of interest.  \"<i>Aww, look at'cha.  Didn't like suckin' dirt?</i>\"  The man teases you through a grin that shows off rows of sharp teeth, complete with small tusks that jut over his upper lip.  Despite the grin and hand patting your back, he is far more intimidating than charming.  His strong, large hands move to rest on his hips just above his ragged shorts, puffing his bare chest out proudly.  Your eyes drop from his grin to pass over the swell of his pectorals and clenched muscle-gut, his bulging abdominals like fat fish swimming beneath a sea of green skin.  Further you look, trailing down his body.  Even his bare legs are thick with muscle, and as your eyes pass over his calves the man's voice rumbles from deep within his chest.  \"<i>Ain't ya seen a orc a'fore?</i>\" Even the laugh following resounds with masculinity.  \"<i>I'm Ro'gar, an' I live in this here swamp.  I've lived here most've m'life.  I used ta wrestle gators 'fore they got harder to find.</i>\"\n\n", false);
  
 		//((Corruption less than 70))
@@ -46,7 +46,7 @@ public function encounterRogarSwamp():void {
 		doYesNo(waitForChunkyOrcLoe,dontWaitForRogar);
 	}
 		//((Ro'gar phase = 1)) (edited)
-	else if(flags[ROGAR_PHASE] == 1) {
+	else if(flags[kFLAGS.ROGAR_PHASE] == 1) {
 		outputText("With map in hand you wander the swamp for some time, squinting at the rough scrawls Ro'gar had scribed for you.  You can't help but stop and scratch your head as you begin to wonder if you are hopelessly lost.\n\n", false);
  
 		//((intellect less than 30))
@@ -97,7 +97,7 @@ public function encounterRogarSwamp():void {
 			//((lib>50 paths combine, new PG))
 			outputText("Ro'gar looks at you and blinks.  He sets his mug aside and smiles.  \"<i>Sorry, honey, but you're not my type.  Mighty kind of ya though.</i>\"  You furrow your brow in disappointment at his rejection.  \"<i>Ya ain't the drinking type are ya?</i>\" he continues.  \"<i>Should'a known this would'a been too strong.  'Pologies.  You should sleep it off.</i>\"  Blinking, you find yourself being gently but quickly removed from Ro'gar's hut.  The door closes behind you with a \"<i>Take care now,</i>\" and you're left standing in the swamp with a bewildered look on your face.  Maybe you did have too much to drink.  You stumble a bit as you make your way to camp, earning another faceful of mud and disappointment on the way.\n\n", false);
 			//set Ro'gar phase = 2
-			flags[ROGAR_PHASE] = 2;
+			flags[kFLAGS.ROGAR_PHASE] = 2;
 			stats(0,0,0,0,0,0,30,0);
 			doNext(14);
 			return;
@@ -111,7 +111,7 @@ public function encounterRogarSwamp():void {
 			else outputText("Ro'gar apologizes for how messy his hut is.", false);
 			outputText("  You just grin and shake your head at his politeness.  \"<i>It's been too long since I got ta talk with any decent folk.</i>\" Ro'gar says, grinning.  Soon you both have empty mugs.  You can't help but sway where you sit from the alcohol, stronger than anything you've had before.  Ro'gar gives a hearty laugh at you, clearly enjoying your inebriated state.  \"<i>You don't look the heavy drinkin' type.</i>\" Ro'gar smirks, as you sway.  Frowning, you assure him that you can handle it, all the while punctuating your sentences with small hiccups which cause the both of you to break out in laughter.  \"<i>Ya know, I've been in this swamp here for so long.  I'm getting' the itch ta go out inta the world and find greener grass, if'n ya know what I'm sayin'.  Listenin' to yer stories about yer travels ain't helpin' none, either.</i>\"  His tone of voice is distant, almost sounding disappointed with himself.  He gets to his feet with a grunt as he rises.  \"<i>Yer lookin' like yer needin' some shut eye.</i>\"  He helps you to your feet; you manage to get your balance somehow and walk to the door.  \"<i>Y'alright?</i>\" he asks, looking you over.  Through a dumb grin you manage to assure him that you're fine.  \"<i>Well allll-right.</i>\"  Ro'gar nods at you as you turn to leave.  \"<i>Ya take care now.</i>\"  He watches you walk off with concern in his eyes, but you make it back to camp just fine.\n\n", false);
 			//set Ro'gar phase = 2
-			flags[ROGAR_PHASE] = 2;
+			flags[kFLAGS.ROGAR_PHASE] = 2;
 			doNext(14);
 			return;
 		}
@@ -149,20 +149,20 @@ public function encounterRogarSwamp():void {
 		return;
 	}
 	//Not sure what determines this yet
-	else if(flags[ROGAR_PHASE] == 2) {
+	else if(flags[kFLAGS.ROGAR_PHASE] == 2) {
 		//((high femininity or breasts >=B-cup))
 		if(player.biggestTitSize() >= 2) {
 			outputText("You travel to Ro'gar's hut using the map again, your memory of the earlier trip making the passage much smoother.  When you knock on the door, though, you receive no answer.  In fact, the hut is eerily silent.  Trying the handle, you find the door unlatched.  You peer inside and discover that not only is it quiet and dark, quite a bit is missing.  Ro'gar is nowhere to be found, along with most of his belongings.  Looking around, you find no sign of distress or struggle.  It doesn't seem like anything happened to him.  Perhaps he moved?  Either way, he's not here now and it doesn't look like he's coming back anytime soon.  As you head back to camp you wonder if you'll ever see him again.", false);
 			doNext(13);
 			//move Ro'gar to Wet Bitch, set Ro'gar phase = 3
-			flags[ROGAR_PHASE] = 3;
+			flags[kFLAGS.ROGAR_PHASE] = 3;
 			return;
 		}
 		//((androgynous or masculine and breasts <= A-cup))
 		else {
 			outputText("Remembering your way from memory, you find yourself on Ro'gar's doorstep. You gently knock with your fist, and soon you hear footsteps on the other side of the crude door. It opens with a snap and you are greeted with a wide grin of jagged, razor-like teeth.\n\n", false);
 			//(Dirt Mc Girt = 2)
-			if(flags[ROGAR_DIRT] == 2) outputText("\"<i>" + player.short + ", y'all took off on me real quick like,</i>\" he says through a snicker.  The joke falls flat and the orc seems to blush lime green as you stare at him uncomprehendingly.  He rubs the back of his neck with a hand before continuing.  \"<i>Sorry about that.  I was plumb tuckered out afterwards.</i>\"\n\n", false);
+			if(flags[kFLAGS.ROGAR_DIRT] == 2) outputText("\"<i>" + player.short + ", y'all took off on me real quick like,</i>\" he says through a snicker.  The joke falls flat and the orc seems to blush lime green as you stare at him uncomprehendingly.  He rubs the back of his neck with a hand before continuing.  \"<i>Sorry about that.  I was plumb tuckered out afterwards.</i>\"\n\n", false);
 			//(merge sex and non-sex, new PG)
 			outputText("\"<i>Come on in.</i>\"  Ro'gar extends a hand, welcoming you inside.  You quickly take a seat and fold your arms", false);
 			if(player.lib > 50) {
@@ -197,10 +197,10 @@ public function encounterRogarSwamp():void {
 				outputText("\"<i>You'll come an' find me, right?  After I get there?</i>\" Ro'gar asks as he puts a hand on your shoulder.  You nod quickly. \"<i>Good, then I'll be seein' you there.</i>\"\n\n", false);
 				
 				//(if Dirt Mc Girt = 1)
-				if(flags[ROGAR_DIRT] == 1) {
+				if(flags[kFLAGS.ROGAR_DIRT] == 1) {
 					outputText("You leave Ro'gar to finish packing his things for now.", false);
 					//set Ro'gar phase = 3
-					flags[ROGAR_PHASE] = 3;
+					flags[kFLAGS.ROGAR_PHASE] = 3;
 					doNext(13);
 					return;
 				}
@@ -217,7 +217,7 @@ public function encounterRogarSwamp():void {
 				
 					//+lust, set Ro'gar phase = 3
 					stats(0,0,0,0,0,0,30,0);
-					flags[ROGAR_PHASE] = 3;
+					flags[kFLAGS.ROGAR_PHASE] = 3;
 					doNext(13);
 					return;
 				}
@@ -234,7 +234,7 @@ public function dontWaitForRogar():void {
 	
 	outputText("Instead, you find only more mud.  You return to camp.", false);
 	//<set Crying Game = 1>
-	flags[ROGAR_DISABLED] = 1;
+	flags[kFLAGS.ROGAR_DISABLED] = 1;
 	doNext(13);
 }
  
@@ -242,7 +242,7 @@ public function dontWaitForRogar():void {
 public function waitForChunkyOrcLoe():void {
 	outputText("", true);
 	spriteSelect(86);
-	if(flags[ROGAR_PHASE] == 0) {
+	if(flags[kFLAGS.ROGAR_PHASE] == 0) {
 		outputText("It feels like several hours pass with no sign of Ro'gar, but you decide to wait still and use what little cloth you have to clean yourself off.  Eventually you hear the slow trod of heavy footsteps as Ro'gar comes into view with a smile on his face and a bucket and towel in his hands.  He sets the steaming bucket down as he draws near.  \"<i>Here ya go!</i>\" he says with a grunt, dipping the towel in the bucket.  He rubs your body with the towel to wipe away the mud for you, seeming not to realize - or perhaps, not minding - the intimacy of the gesture.\n\n", false);
  
 		//((If libido is less than 50))
@@ -262,7 +262,7 @@ public function waitForChunkyOrcLoe():void {
 	 
 		outputText("<b>You can now find Ro'gar's hut when wandering the swamp occasionally!</b>", false);
 		//pass 2 hours, set Ro'gar phase flag = 1
-		flags[ROGAR_PHASE] = 1;
+		flags[kFLAGS.ROGAR_PHASE] = 1;
 		doNext(14);
 	}
 }
@@ -278,7 +278,7 @@ public function ewwwRogarIsGay():void {
 	spriteSelect(86);
 	outputText("Declining in a clipped manner, you get to your feet and make for the door, doing your best to ignore Ro'gar's disappointed face.  He calls out to you, but it only falls on deaf ears as you shut the door quickly behind you, your legs powering through the swamp as you run with all the speed you can muster.  Only once you get back to camp do you realize you've lost the crude map... either in Ro'gar's hut or in the trackless swamp.", false);
 	//<set Crying Game = 1>
-	flags[ROGAR_DISABLED] = 1;
+	flags[kFLAGS.ROGAR_DISABLED] = 1;
 	doNext(14);
 }
  
@@ -288,8 +288,8 @@ public function noSlowBroIDontWantPokeSex():void {
 	spriteSelect(86);
 	outputText("You give a nervous chuckle and politely decline.  Ro'gar's face suddenly droops with disappointment as you explain he's not your type.  \"<i>S'alright.</i>\"  The pair of you share an awkward moment before Ro'gar gives you a toothy grin.  \"<i>Yer always welcome to chat and drink if'n ya want.</i>\"  You smile in return, and the pair of you chat while enjoying a second round of drinks.  Time passes and you decide to leave.  Ro'gar waves you off as you trek through the swamp and back to camp.\n\n", false);
 	//<Continue without sex, set Dirt Mc Girt flag = 1 and Ro'gar phase = 2>
-	flags[ROGAR_DIRT] = 1;
-	flags[ROGAR_PHASE] = 2;
+	flags[kFLAGS.ROGAR_DIRT] = 1;
+	flags[kFLAGS.ROGAR_PHASE] = 2;
 	doNext(14);
 }
  
@@ -324,8 +324,8 @@ public function okayBroLetsHaveAGayCarwash():void {
 	slimeFeed();
 	stats(0,0,0,0,0,0,40,0);
 	// set Dirt Mc Girt flag = 2 and Ro'gar phase = 2>
-	flags[ROGAR_DIRT] = 2;
-	flags[ROGAR_PHASE] = 2;
+	flags[kFLAGS.ROGAR_DIRT] = 2;
+	flags[kFLAGS.ROGAR_PHASE] = 2;
 	if(player.inte < 30) doNext(14);
 	//lose 3 hours instead of 1 if int<30
 	else doNext(13);
@@ -339,12 +339,12 @@ public function rogarThirdPhase():void {
 		
 	//((high femininity or breasts >=B-cup, Ro'roh Raggy flag = 0))
 	if((player.biggestTitSize() >= 2)) {
-		if(flags[ROGAR_WARNING] == 0) {
+		if(flags[kFLAGS.ROGAR_WARNING] == 0) {
 			outputText("Judging the patron's figure based on how imposingly filled out the cloak is, he or she is clearly very muscled.  You spy a green hand reach for a can and a spark of recognition hits you.  You're completely unsure how to break the ice, but tug on the hem of the cloak.  The figure turns toward you, and you're greeted with the green, toothy smile of Ro'gar, the orc from the swamp!  \"<i>H'lo, " + player.short + "!  I'm s'rprised to see ya here...</i>\"\n\n", false);
 	
 			outputText("You greet him warmly, but he seems a bit nervous around you.  \"<i>Well... after all ya tol' me about yer adventures, I, ah, thought I'd hit the road m'self.  An' so ya find me here.  Good ta see ya again, but I'm just finishin' up my drink afore I head on out.</i>\"  With this, he tips back the contents of his can and flashes you his standard grin, then departs.  He seemed a bit uneasy around you.", false);
 			//set Ro'roh Raggy flag to 1
-			flags[ROGAR_WARNING] = 1;
+			flags[kFLAGS.ROGAR_WARNING] = 1;
 		}
 		//(high fem or breasts >=B-cup and Ro'roh Raggy =1)
 		else {
@@ -359,7 +359,7 @@ public function rogarThirdPhase():void {
 	else {
 		outputText("After taking a few moments to look over the familiar cloth of the cloak, your lips curl into a small smile.  Walking up quietly, ", false);
 		//[(if Ro'roh Raggy flag >=1)
-		if(flags[ROGAR_WARNING] >= 1) {
+		if(flags[kFLAGS.ROGAR_WARNING] >= 1) {
 			outputText("you tap him on the shoulder.  He turns around, then assumes a pleasant smile.  \"<i>Well, h'lo.  Who might you be?</i>\"  Momentarily confused, it quickly comes to you that you were quite different at your prior meetings; you reintroduce yourself with a small bow.  \"<i>Wow.  " + player.short + ", ya look completely different than before!</i>\"  You nod, slightly abashed at having so much attention drawn to your changes, and point out that this world can have some unusual effects on people.  He nods eagerly.  \"<i>Well, ya look jus' great.  How 'bout havin' a sit and chattin' with me fer a while?</i>\"\n\n", false);
 		}
 		//(else if Ro'roh Raggy < 1 and player height >= 5 feet)
@@ -380,19 +380,19 @@ public function rogarThirdPhase():void {
 
 		//variable ending
 		//[(if Dirt Mc Girt = 0)
-		if(flags[ROGAR_DIRT] == 0) {
+		if(flags[kFLAGS.ROGAR_DIRT] == 0) {
 			outputText("You chat for a while longer before separating.  Ro'gar extracts a promise from you to come drink with him again before waving you off with his standard grin.", false);
 			//set Ro'gar phase = 4 and Ro'roh Raggy = 0
-			flags[ROGAR_PHASE] = 4;
-			flags[ROGAR_WARNING] = 0;
+			flags[kFLAGS.ROGAR_PHASE] = 4;
+			flags[kFLAGS.ROGAR_WARNING] = 0;
 			doNext(13);
 		}
 		//(else if Dirt Mc Girt = 1)
-		else if(flags[ROGAR_DIRT] == 1) {
+		else if(flags[kFLAGS.ROGAR_DIRT] == 1) {
 			outputText("Ro'gar gives a satisfied huff, relaxing his body as he takes another drink from his can.  \"<i>You been nothin' but good ta me ever since I met ya, " + player.short + ".  I do ya one favor and you been a real friend ever since.</i>\"  Ro'gar's tone grows lower and more serious as a calloused finger rubs over his damp can.  You rest your arms against the polished wood of the bar as you listen.  \"<i>Yer special ta me,</i>\" he mutters quietly, just loud enough for you to hear him.  You smile warmly and rest a hand against his arm, coaxing him to turn his head to look at you.  \"<i>Here, I got ya sumthin.</i>\" Ro'gar digs through his pants pocket and pulls out a tin can.  Tugging your hand closer, he puts it in your palm and grins widely at you.  \"<i>It's what I'm drinking now.</i>\"  He taps his can.  \"<i>One've my favorites.  Thanks, " + player.short + ".  You kin drink with me any time.</i>\"  The pair of you spend some time together at the bar, drinking and laughing as you empty mugs.  Eventually you part ways and wander back into the city.\n\n", false);
 			//set Ro'gar phase = 4 and Ro'roh Raggy = 0, Acquire 1x Bro Brew
-			flags[ROGAR_PHASE] = 4;
-			flags[ROGAR_WARNING] = 0;
+			flags[kFLAGS.ROGAR_PHASE] = 4;
+			flags[kFLAGS.ROGAR_WARNING] = 0;
 			shortName = "BroBrew";
 			menuLoc = 2;
 			takeItem();
@@ -404,7 +404,7 @@ public function rogarThirdPhase():void {
 			//[(female or unsexed)
 			if(player.gender == 2 || player.gender == 0) {
 				outputText("  It stops on your bare mons, and Ro'gar's eyes widen.  \"<i>Wh-wha... there's nothin' here!</i>\"  You color and nod.  His mouth hangs open for a long minute, then he masters himself.  \"<i>Well... I, uh, guess it was good t' see ya again...</i>\" he stammers.  \"<i>Hey, I'm sure you've got things to be doin' so I won't hold you up.</i>\"  As you attempt to protest, he chugs his drink and makes a show of slamming the can down, noisily and forcefully, on the bar.  Nodding at you, he pulls the cloak over his head and leaves the bar.  Apparently it was quite a shock to him.  You wonder if he'll avoid you from now on...", false);
-				flags[ROGAR_DISABLED] = 1;
+				flags[kFLAGS.ROGAR_DISABLED] = 1;
 				doNext(13);
 			}
 			else {
@@ -416,8 +416,8 @@ public function rogarThirdPhase():void {
 				if(player.hasLongTail() > 0 && player.isNaga()) outputText(", and you feel your tail flicking rapidly in excitement", false);
 				outputText(".\n\n", false);
 				//Lust increased, set Ro'gar phase = 4 and Ro'roh Raggy = 0 if M or H, set Crying Game to 1 if F or U]
-				flags[ROGAR_PHASE] = 4;
-				flags[ROGAR_WARNING] = 0;
+				flags[kFLAGS.ROGAR_PHASE] = 4;
+				flags[kFLAGS.ROGAR_WARNING] = 0;
 				stats(0,0,0,0,0,0,30,0);
 				doNext(13);
 			}
@@ -429,16 +429,16 @@ public function rogarPhaseFour():void {
 	outputText("", true);
 	spriteSelect(86);
 	//(if high femininity or breasts <=B-cup and Ro'roh Raggy = 0)
-	if((player.biggestTitSize() >= 2) && flags[ROGAR_WARNING] == 0) {
+	if((player.biggestTitSize() >= 2) && flags[kFLAGS.ROGAR_WARNING] == 0) {
 		outputText("Ro'gar the orc is drinking at the bar again, two crushed cans sitting by his half-empty one.  The bartender is casting irritated glances at them as though she'd like to throw them away, but doesn't dare take them from the enormous, burly orc until he finishes or leaves.  You tug on his cloak as you take a seat next to him, and he turns to you with a toothy smile.  That smile dims to a frown as he looks you over, eyes lingering on the womanly contours of your face", false);
 		if(player.biggestTitSize() >= 2) outputText(" and your " + chestDesc(), false);
 		outputText(".  \"<i>Gee, ya look... different.  Been samplin' some of the local foods, huh?</i>\"  You agree cautiously, and he flags the bartender over and buys you a drink.  \"<i>I'm just bein' polite since we're pals,</i>\" the orc ventures.  \"<i>Ya kin pay me back another time.</i>\"  You nod, sip your drink, and converse reservedly with him for a while, then go on your way.", false);
 		//set Ro'roh Raggy = 1
-		flags[ROGAR_WARNING] = 1;
+		flags[kFLAGS.ROGAR_WARNING] = 1;
 		doNext(13);
 	}
 	//(high fem or breasts >=B-cup and Ro'roh Raggy =1)
-	else if((player.biggestTitSize() >= 2) && flags[ROGAR_WARNING] == 1) {
+	else if((player.biggestTitSize() >= 2) && flags[kFLAGS.ROGAR_WARNING] == 1) {
 		outputText("Ro'gar the orc is here drinking again, but as you catch his eye, a pained expression flashes across his face as he looks over your form.  It's clear he doesn't relish the prospect of talking to you right now, but knowing him, he's too polite to say so.  The wind spills from your sails and your icebreaker slips from your mind - answering him with a simple glance of resignation is the most you can manage.  He gives you a weak smile and returns to his drink.", false);
 		//return to bar menu
 		doNext(barTelAdre);
@@ -447,7 +447,7 @@ public function rogarPhaseFour():void {
 	else {
 		outputText("Ro'gar is tipping his drink back when he catches sight of you, and waves you over.  \"<i>Ah, good ta see ya, " + player.short + "!", false);
 		//[(Ro'roh Raggy = 1)
-		if(flags[ROGAR_WARNING] == 1) {
+		if(flags[kFLAGS.ROGAR_WARNING] == 1) {
 			outputText("Yer lookin' much better today; ya been workin' out?</i>\"  You smile at the compliment, and ", false);
 		}
 		else outputText("</i>\"  You ", false);
@@ -461,10 +461,10 @@ public function rogarPhaseFour():void {
 		else {
 			outputText("  " + SMultiCockDesc() + " trembles under his strong touch, as he increases the pressure and looks into your eyes meaningfully.  ", false);
 			//[(if Dirt Mc Gurt flag = 1)
-			if(flags[ROGAR_DIRT] == 1) outputText("</i>\"I know ya probably ain't ever imagined hangin' out with a feller like me, but... I could really use the company tonight.</i>\"  ", false);
+			if(flags[kFLAGS.ROGAR_DIRT] == 1) outputText("</i>\"I know ya probably ain't ever imagined hangin' out with a feller like me, but... I could really use the company tonight.</i>\"  ", false);
 			outputText("He's clearly in the mood for some fun; do you want to head back to his place and do something?", false);
 			//+ lust, if M or H, set Ro'roh Raggy = 0
-			flags[ROGAR_WARNING] = 0;
+			flags[kFLAGS.ROGAR_WARNING] = 0;
 			//and give choices 
 			//[Get Anal][Give Anal][Frot][Drink with your Bro! (requires 1x Bro Brew)][No Thanks]
 			rogarFuckMenu();
@@ -501,7 +501,7 @@ public function noTHanksRogarIAintGayDudeIjustLickedThatMudToBeNice():void {
 
 //(([Get Anal], Scenario 1a: give up the buttcherry (buttvirgins only)))
 public function loseButtGinity():void {
-	flags[ROGAR_FUCKED_TODAY] = 1;
+	flags[kFLAGS.ROGAR_FUCKED_TODAY] = 1;
 	outputText("", true);
 	spriteSelect(86);
 	//BUTTCHERRIES
@@ -592,7 +592,7 @@ public function loseButtGinity():void {
 
 //((Scenario 2, [Give Anal]: Fuck Ro'gar))
 public function fuckRogarsButtPussyBoyCuntManMoundSissySlitQueerQuim():void {
-	flags[ROGAR_FUCKED_TODAY] = 1;
+	flags[kFLAGS.ROGAR_FUCKED_TODAY] = 1;
 	outputText("", true);
 	spriteSelect(86);
 	outputText("You nod eagerly, and the orc rewards you with another caress.  \"<i>Well then... let's head on out,</i>\" he says.  The two of you walk down the desert city's streets until you reach a discrete, out-of-the-way building labeled 'Steel Hogan Apartments', and Ro'gar leads you up to his room.  He opens the door and holds if for you, but with a gesture, you allow him to enter first.  As he walks in, you pull the door sharply behind you.  With a slam behind you and a startled look from the burly orc, you fix your eyes on him and tell him it's time he finds out who the boy really is in this relationship.  A confused look appears on Ro'gar's face.  ", false);
@@ -683,7 +683,7 @@ public function rogarIsDumb():void {
 
 //[Fukkin' Grab It!]
 public function takeDatBroBrewFromDaBigMeanOlOrc():void {
-	flags[ROGAR_FUCKED_TODAY] = 1;
+	flags[kFLAGS.ROGAR_FUCKED_TODAY] = 1;
 	consumeItem("BroBrew",1);
 	var changed:Boolean = false;
 	var cocked:Boolean = false;
@@ -782,7 +782,7 @@ public function takeDatBroBrewFromDaBigMeanOlOrc():void {
 
 //((Scenario 4, [Frot]))
 public function frotWithRogar():void {
-	flags[ROGAR_FUCKED_TODAY] = 1;
+	flags[kFLAGS.ROGAR_FUCKED_TODAY] = 1;
 	outputText("", true);
 	spriteSelect(86);
 	outputText("You allow yourself to be led into Ro'gar's apartment and look around the modestly furnished lounge. Ro'gar seats himself in a cushioned chair.  \"<i>Thanks fer comin'.  I missed ya.</i>\"  He snickers, and you draw closer. His calloused hand reaches down to cup your " + buttDescript() + ".  He smirks at you, the frisky orc chuckling deeply and firmly squeezing.  You retaliate with a hard smack against Ro'gar's muscled rump.  He growls low, answering the challenge and crashing his lips into your own.  Muffled grunts and groans issue from both of you as you undress each other.  Soon you are standing in the nude and Ro'gar's hefty cock presses against your " + multiCockDescriptLight() + ".\n\n", false);

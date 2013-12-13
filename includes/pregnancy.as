@@ -528,7 +528,7 @@ public function updatePregnancy():Boolean {
 			}
 			if(player.pregnancyIncubation == 216) {
 				outputText("\n<b>There is no question you're pregnant; your belly is already as big as that of any pregnant woman back home.", false);
-				if(flags[AMILY_FOLLOWER] == 1) outputText("  Amily smiles at you reassuringly. \"<i>We do have litters, dear, this is normal.</i>\"", false);
+				if(flags[kFLAGS.AMILY_FOLLOWER] == 1) outputText("  Amily smiles at you reassuringly. \"<i>We do have litters, dear, this is normal.</i>\"", false);
 				outputText("</b>", false);
 				outputText("\n", false);
 				stats(0, 0, -1, 0, 1, 1, 2, 0);
@@ -580,7 +580,7 @@ public function updatePregnancy():Boolean {
 		//Shark Pregnancy!
 		if(player.pregnancyType == 12) {			
 			if(player.pregnancyIncubation == 275) {
-				if(flags[UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("\n<b>You wake up feeling kind of nauseous.  Izma insists that you stay in bed and won't hear a word otherwise, tending to you in your sickened state.  When you finally feel better, she helps you up.  \"<i>You know, " + player.short + "... I think you might be pregnant.</i>\" Izma says, sounding very pleased at the idea. You have to admit, you do seem to have gained some weight...</b>\n", false);
+				if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("\n<b>You wake up feeling kind of nauseous.  Izma insists that you stay in bed and won't hear a word otherwise, tending to you in your sickened state.  When you finally feel better, she helps you up.  \"<i>You know, " + player.short + "... I think you might be pregnant.</i>\" Izma says, sounding very pleased at the idea. You have to admit, you do seem to have gained some weight...</b>\n", false);
 				else outputText("\n<b>You wake up feeling bloated, and your belly is actually looking a little puffy. At the same time, though, you have the oddest cravings... you could really go for some fish.</b>\n", false);
 				displayedUpdate = true;
 			}
@@ -589,7 +589,7 @@ public function updatePregnancy():Boolean {
 				displayedUpdate = true;	
 			}
 			if(player.pregnancyIncubation == 216) {
-				if(flags[UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("\n<b>Your stomach is undeniably swollen now, and you feel thirsty all the time. Izma is always there to bring you water, even anticipating your thirst before you recognize it yourself. She smiles all the time now, and seems to be very pleased with herself.", false);
+				if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("\n<b>Your stomach is undeniably swollen now, and you feel thirsty all the time. Izma is always there to bring you water, even anticipating your thirst before you recognize it yourself. She smiles all the time now, and seems to be very pleased with herself.", false);
 				else outputText("\n<b>There is no question you're pregnant; your belly is getting bigger and for some reason, you feel thirsty ALL the time.", false);
 				outputText("</b>", false);
 				outputText("\n", false);
@@ -597,18 +597,18 @@ public function updatePregnancy():Boolean {
 				displayedUpdate = true;				
 			}
 			if(player.pregnancyIncubation == 180) {
-				if(flags[UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("\n<b>There is no denying your pregnancy, and Izma is head-over-heels with your 'beautifully bountiful new body', as she puts it. She is forever finding an excuse to touch your bulging stomach, and does her best to coax you to rest against her. However, when you do sit against her, she invariably starts getting hard underneath you.</b>\n", false);
+				if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("\n<b>There is no denying your pregnancy, and Izma is head-over-heels with your 'beautifully bountiful new body', as she puts it. She is forever finding an excuse to touch your bulging stomach, and does her best to coax you to rest against her. However, when you do sit against her, she invariably starts getting hard underneath you.</b>\n", false);
 				else outputText("\n<b>There is no denying your pregnancy.  Your belly bulges and occasionally squirms as your growing offspring shifts position.</b>\n", false);
 				displayedUpdate = true;				
 			}
 			if(player.pregnancyIncubation == 120) {
-				if(flags[UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("\n<b>Your stomach is swollen and gravid; you can feel the baby inside you kicking and wriggling. Izma is always on hand now, it seems, and she won't dream of you fetching your own food or picking up anything you've dropped. She's always dropping hints about how you should try going around naked for comfort's sake. While you are unwilling to do so, you find yourself dreaming about sinking into cool, clean water, and take many baths and swims. Whatever is inside you always seems to like it; they get so much more active when you're in the water.</b>\n", false);
+				if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("\n<b>Your stomach is swollen and gravid; you can feel the baby inside you kicking and wriggling. Izma is always on hand now, it seems, and she won't dream of you fetching your own food or picking up anything you've dropped. She's always dropping hints about how you should try going around naked for comfort's sake. While you are unwilling to do so, you find yourself dreaming about sinking into cool, clean water, and take many baths and swims. Whatever is inside you always seems to like it; they get so much more active when you're in the water.</b>\n", false);
  				else outputText("\n<b>Your stomach is swollen and gravid; you can feel the baby inside you kicking and wriggling.  You find yourself dreaming about sinking into cool, clean water, and take many baths and swims. Whatever is inside you always seems to like it; they get so much more active when you're in the water.</b>\n", false);
 				stats(0, 0, -2, 0, 1, 1, 4, 0);
 				displayedUpdate = true;
 			}
 			if(player.pregnancyIncubation == 72) {
-				if(flags[UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("\n<b>You dream of the water, of a life under the waves, where it's cool and wet and you are free. You spend as much time in the river as possible now, the baby inside you kicking and squirming impatiently, eager to be free of the confines of your womb and have much greater depths to swim and play in. Izma makes no secret of her pleasure and informs you that you should deliver soon.</b>\n", false);
+				if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("\n<b>You dream of the water, of a life under the waves, where it's cool and wet and you are free. You spend as much time in the river as possible now, the baby inside you kicking and squirming impatiently, eager to be free of the confines of your womb and have much greater depths to swim and play in. Izma makes no secret of her pleasure and informs you that you should deliver soon.</b>\n", false);
 				else outputText("\n<b>You dream of the water, of a life under the waves, where it's cool and wet and you are free. You spend as much time in the river as possible now, the baby inside you kicking and squirming impatiently, eager to be free of the confines of your womb and have much greater depths to swim and play in.  The time for delivery will probably come soon.</b>\n", false);
 				displayedUpdate = true;
 			}
@@ -756,7 +756,7 @@ public function updatePregnancy():Boolean {
 		}
 		if(player.pregnancyType == 17) {
 			//Pregnancy notes: Egg Laying 
-			if(flags[EMBER_OVIPOSITION] > 0) {
+			if(flags[kFLAGS.EMBER_OVIPOSITION] > 0) {
 				if(player.pregnancyIncubation == 330) pregText = "Your belly has swollen, becoming larger - proof that Ember's seed did its work.  The dragon seems to be constantly checking you out, as if looking for the signs of weight gain.";
 				if(player.pregnancyIncubation == 250) pregText = "Your belly grows ever bigger, making your pregnancy noticeable; your belly also feels somewhat solid.  Ember casts pleased glances in your direction, whenever " + emberMF("he","she") + " thinks you're not looking.";
 				if(player.pregnancyIncubation == 170) {
@@ -813,7 +813,7 @@ public function updatePregnancy():Boolean {
 					pregText += "\n\nEmber approaches you, and casually asks, \"<i>So... is it kicking already?</i>\"";
 					pregText += "\n\nYou admit that it is, stroking your stomach.  Casually, you ask if Ember would maybe like to touch your belly, wondering if " + emberMF("he","she") + " will be able to bring " + emberMF("him","her") + "self to do it.";
 					pregText += "\n\n\"<i>Yes! Of course!</i>\" Ember replies";
-					if(flags[EMBER_ROUNDFACE] == 1) pregText += ", blush at " + emberMF("his","her") + " own over-enthusiastic reply";
+					if(flags[kFLAGS.EMBER_ROUNDFACE] == 1) pregText += ", blush at " + emberMF("his","her") + " own over-enthusiastic reply";
 					pregText += ".  You just smile encouragingly at the dragon " + emberMF("-boy","herm") + " and lean back slightly, sticking out your gravid midriff in open encouragement to its " + emberMF("father","mother") + " to try and connect with " + emberMF("his","her") + " unborn child.";
 					pregText += "\n\nEmber sets a clawed hand on your belly, careful not to hurt you with " + emberMF("his","her") + " claws.  Slowly " + emberMF("he","she") + " rubs your belly, until " + emberMF("he","she") + " feels a small kick and smiles in glee.  You smile at the look of joy on " + emberMF("his","her") + " face, even as " + emberMF("he","she") + " realizes what " + emberMF("he","she") + "'s doing and embarrassedly mumbles an excuse and walks away.";
 				}
@@ -829,10 +829,10 @@ public function updatePregnancy():Boolean {
 					//High Corruptio
 					else pregText += "You  already thought up a perfect way for this sexy dragon to help you, but it's best not to rush.  It's not everyday that Ember says " + emberMF("he","she") + "'ll do 'anything' for you.  A quick jab on your belly from your unborn child makes you recoil a bit though.  Maybe it would be better to wait until this little one is out of you, just so you can have another.  You ponder what to ask of " + emberMF("him","her") + " a while longer.";
 					pregText += "\n\nFinally, you decide there really isn't anything Ember can help you with, and tell " + emberMF("him","her") + " so.  Though " + emberMF("he","she") + " had better be ready to do " + emberMF("his","her") + " part when the baby is born and needs caring.";
-					if(flags[EMBER_GENDER] == 1 && flags[EMBER_MILK] > 0) pregText += "  You can't resist smirking and patting one of your shemale dragon's bountiful breasts, noting that maybe you should let him do all the breast-feeding.";
+					if(flags[kFLAGS.EMBER_GENDER] == 1 && flags[kFLAGS.EMBER_MILK] > 0) pregText += "  You can't resist smirking and patting one of your shemale dragon's bountiful breasts, noting that maybe you should let him do all the breast-feeding.";
 					
 					pregText += "\n\n";
-					if(flags[EMBER_ROUNDFACE] > 0) pregText += "Ember blushes.  ";
+					if(flags[kFLAGS.EMBER_ROUNDFACE] > 0) pregText += "Ember blushes.  ";
 					pregText += "\"<i>O-of course I'll do my part.  If you don't need me for anything, I'll be going then.</i>\" " + emberMF("He","She") + " turns on " + emberMF("his","her") + " heels and walks away.  You watch " + emberMF("him","her") + " go, pat yourself on the stomach, then painstakingly hoist yourself back upright and go on your way.";
 				}
 				if(player.pregnancyIncubation == 60) {
@@ -1445,7 +1445,7 @@ public function updatePregnancy():Boolean {
 		
 		outputText("Hurriedly you strip off your gear and sit down with your back against a rock.  Focusing yourself, you attempt to prepare for labor; you try to remember your recent partners and worry about what kind of monstrous infant you might have to force out of your " + vaginaDescript(0) + ".  The first contraction comes and you push as hard as you can, to be rewarded with the feeling of something sliding out between your labia.  You attempt a few more pushes but nothing further seems forthcoming; curious, you look down at your crotch only to discover a blue stalk sticking proudly out of your vagina!\n\n", false);
 		
-		if(flags[ANEMONE_KID] > 0) {
+		if(flags[kFLAGS.ANEMONE_KID] > 0) {
 			outputText("As you take in the sight, small nodules around the tip begin to form and lengthen, until the little anemone is capped by a mop of wriggling blue-green tentacles.  Horrified, you grasp it at the base and give it a sharp pull.  The pain makes you lock up and nearly takes away your consciousness as its sticky surface releases its grip on your labia and " + clitDescript() + "!   It writhes and slips out of your pain-wracked hands, leaving them tingling.  As you lie there, stunned, it begins to inch back toward your " + vaginaDescript(0)+ ".  Footfalls sound next to you, and a blue hand picks up the squirming, cilliated creature.  Kid A gives you a shy smile, then turns to her barrel.  A quick splash and a filled waterskin later, she heads toward the stream, toting your grub-like offspring.");
 			cuntChange(20,true,true,false);
 			outputText("\n\nExhausted by the birth but with a burden lifted from your mind, you slip into a grateful doze.");
@@ -1453,7 +1453,7 @@ public function updatePregnancy():Boolean {
 			player.pregnancyType = 0;
 			return true;
 		}
-		else if(player.anemoneCocks() > 0 && player.cor < 25 && flags[ANEMONE_KID] == 0) {
+		else if(player.anemoneCocks() > 0 && player.cor < 25 && flags[kFLAGS.ANEMONE_KID] == 0) {
 			outputText("As you take in the sight, small nodules around the tip begin to form and lengthen, until the little anemone is capped by a mop of wriggling blue-green tentacles.  Horrified, you grasp it at the base and give it a sharp pull.  The ensuing pain in your labia and " + clitDescript() + " makes you lock up and nearly takes away your consciousness, and with " + multiCockDescript() + " in the way, you can't get any leverage on the pull at all!  The anemone detaches weakly, but writhes and slips out of your pain-wracked grip, leaving your hands tingling.  As you lie there, stunned, it begins to inch back toward your " + vaginaDescript(0)+ ".  Searching about weakly with the feelers, it touches along your thigh and searches out the entrance of your pussy.  When the tentacled crown brushes past your lips a venomous heat stirs your crotch and fills you with energy; shocked into sense, you look at the absurd creature.  You raise your arm to slap at it, but something stays your hand.  As if sensing your hesitation, it stands upright and holds itself at attention for inspection.  It would be easy to knock it away... and yet, the unprepossessing little thing looks so proud that you can't quite bring yourself to do so.");
 			outputText("\n\nYou scoop the diminutive anemone up and look around for somewhere wet to put it.  The stream is too far, the lake doubly so; you'd never make it to either, as sick as you feel from yanking viciously on your clitoris.  Driven to last resorts, you lurch over to the water barrel in your camp and, wrenching the lid off, drop the blue stalk unceremoniously inside.  Exhausted by the shock and pain of the ordeal, you slump down beside the barrel and slip into a doze...");
 			cuntChange(20,true,true,false);
@@ -1588,7 +1588,7 @@ public function updatePregnancy():Boolean {
 			genderCheck();
 		}	
 		//If you like terrible outcomes
-		if(flags[MARBLE_NURSERY_CONSTRUCTION] < 100) {
+		if(flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] < 100) {
 			outputText("\nYou feel a clenching sensation in your belly and something shifts inside.  Your contractions start a few moments later and you realize that it's time for your child to be born.  You cry out mildly in pain and lie down, letting your body start to push the baby out.  Marble doesn't seem to be around right now, so you can do nothing but push.\n\n", false);
 
 			outputText("You push and heave with all your might, little else going through your mind. You somehow register when the head comes out, and soon the shoulders along with the rest of the body follow.  You lean back and pant for a while before feeling a pair of hands grab a hold of you. They slowly and clumsily feel up your body before finding your " + biggestBreastSizeDescript() + " and a mouth quickly closes down on a " + nippleDescript(0) + ".  You sigh softly, and drift off to sleep.", false);
@@ -1613,7 +1613,7 @@ public function updatePregnancy():Boolean {
 			}
 			outputText("The little girl is already starting to look like she is a few years old; she's trotting around on her little hooves.", false);
 			//Add to marble-kids:
-			flags[MARBLE_KIDS]++;
+			flags[kFLAGS.MARBLE_KIDS]++;
 		}
 		//Increase the size of the PC's hips, as per normal for pregnancies, increase birth counter
 		if(player.hipRating < 10) {
@@ -1661,18 +1661,18 @@ public function updatePregnancy():Boolean {
 		//326 Number of sons grown
 		//327 Number of sons pending
 		//328 growup countdown
-		flags[UNKNOWN_FLAG_NUMBER_00327]++;
-		if(flags[UNKNOWN_FLAG_NUMBER_00328] == 0) flags[UNKNOWN_FLAG_NUMBER_00328] = 150;		
+		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00327]++;
+		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00328] == 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00328] = 150;		
 	}
 	//Amily failsafe - converts PC with pure babies to mouse babies if Amily is corrupted
 	if(player.pregnancyIncubation == 1 && player.pregnancyType == 11) 
 	{
-		if(flags[AMILY_FOLLOWER] == 2 || flags[UNKNOWN_FLAG_NUMBER_00170] > 0) player.pregnancyType = 4;
+		if(flags[kFLAGS.AMILY_FOLLOWER] == 2 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00170] > 0) player.pregnancyType = 4;
 	}
 	//Amily failsafe - converts PC with pure babies to mouse babies if Amily is with Urta
 	if(player.pregnancyIncubation == 1 && player.pregnancyType == 11) 
 	{
-		if(flags[AMILY_VISITING_URTA] == 1 || flags[AMILY_VISITING_URTA] == 2) player.pregnancyType = 4;
+		if(flags[kFLAGS.AMILY_VISITING_URTA] == 1 || flags[kFLAGS.AMILY_VISITING_URTA] == 2) player.pregnancyType = 4;
 	}
 	//Give birth if it's time (to an AMILY BITCH mouse!)
 	if(player.pregnancyIncubation == 1 && player.pregnancyType == 11) {

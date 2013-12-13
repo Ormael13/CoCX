@@ -18,12 +18,12 @@ public function trapLevel(adjustment:Number = 0):Number {
 public function encounterASandTarp():void {
 	clearOutput();
 	spriteSelect(97);
-	if(flags[SANDTRAP_LOSS_REPEATS] >= 2 && player.eyeType == EYES_BLACK_EYES_SAND_TRAP && player.wingType == WING_TYPE_GIANT_DRAGONFLY) {
+	if(flags[kFLAGS.SANDTRAP_LOSS_REPEATS] >= 2 && player.eyeType == EYES_BLACK_EYES_SAND_TRAP && player.wingType == WING_TYPE_GIANT_DRAGONFLY) {
 		sandTrapBadEnd();
 		return;
 	}
-	flags[TIMES_ENCOUNTERED_SAND_TRAPS]++;
-	if(flags[TIMES_ENCOUNTERED_SAND_TRAPS] == 1) {
+	flags[kFLAGS.TIMES_ENCOUNTERED_SAND_TRAPS]++;
+	if(flags[kFLAGS.TIMES_ENCOUNTERED_SAND_TRAPS] == 1) {
 		//femininity <= 65: 
 		if(player.femininity <= 65) {
 			outputText("You are exploring the endlessly undulating landscape of the desert when you hear an agonized cry for help over the nearest dune.  You quickly scramble up it and are confronted by the sight of a small, flat lake of exceptionally fine sand, overlooked on each side by tall dunes.  Trapped in the middle of it is a young woman with black hair, up to her armpits in the sand.  \"<i>Oh, thank the Gods!</i>\" she cries, spotting you.  \"<i>I'm sinking, please help me!</i>\"  The word 'quicksand' flashes through your mind like fire and you take a nervous step back, attempting to quickly evaluate the situation.");
@@ -192,11 +192,11 @@ public function sandTrapWait():void {
 }
 
 public function sandtrapmentLoss(clear:Boolean = false):void {
-	if(flags[SANDTRAP_LOSS_REPEATS] >= 2 && player.eyeType == EYES_BLACK_EYES_SAND_TRAP && player.wingType == WING_TYPE_GIANT_DRAGONFLY) {
+	if(flags[kFLAGS.SANDTRAP_LOSS_REPEATS] >= 2 && player.eyeType == EYES_BLACK_EYES_SAND_TRAP && player.wingType == WING_TYPE_GIANT_DRAGONFLY) {
 		loseLastFightWithSandTrap();
 		return;
 	}
-	flags[SANDTRAP_LOSS_REPEATS]++;
+	flags[kFLAGS.SANDTRAP_LOSS_REPEATS]++;
 	if(clear) clearOutput();
 	else outputText("\n\n");
 	spriteSelect(97);
@@ -212,7 +212,7 @@ public function sandtrapmentLoss(clear:Boolean = false):void {
 public function pcBeatsATrap():void {
 	clearOutput();
 	spriteSelect(97);
-	flags[SANDTRAP_LOSS_REPEATS] = 0;
+	flags[kFLAGS.SANDTRAP_LOSS_REPEATS] = 0;
 	//PC HP victory: 
 	if(monster.HP < 1) outputText("The sandtrap groans and collapses forwards into the dirt.  With the creature no longer controlling it, the sand underneath you feels a great deal more stable... climbing out won't be too difficult.");
 	//PC lust victory: 
@@ -596,7 +596,7 @@ public function nagaThreesomeWithSandTrap():void {
 	//Requirements: Player is naga with tail and fangs, has met desert naga as naga at least once
 	outputText("You slowly slither down to the bottom of the pit, your long patterned tail undulating in the sand, until you are by the sandtrap's side.  There is a mixture of fear and lust in its eyes as it regards your sinuous form; you slowly prise yourself out of your [armor].  You're not quite sure what you want to do with your lean, tender prize yet, so you follow what your snake instincts, speaking to you in the warm hush of your scales brushing through the sand, tell you to do.  The sandtrap murmurs in disquiet as you pass yourself around its willowy upper body, your tail looping first its abdomen and then its flat breasts, strong, muscular coils easily overcoming the struggles of its four thin arms.  Soon its upper frame is swaddled in your lower body.  It scowls at you and you beam back, displaying your fangs, enjoying the sight and feeling of this former aggressor entirely at your mercy.");
 	//First encounter: 
-	if(flags[SANDTRAP_NAGA_3SOME] == 0) {
+	if(flags[kFLAGS.SANDTRAP_NAGA_3SOME] == 0) {
 		outputText("\n\nA small cough from above you makes you start.  Looking up you are startled to see the desert naga peering down at the two of you.  Anxiety vies with amusement on her face.");
 		outputText("\n\n\"<i>I heard fighting and I heard you,</i>\" she says, in your lonely, shared tongue.  \"<i>I thought you might need help.</i>\"  She gestures with disdain at the creature held in your coils, the six eyes of whom are bulging with fright at the sight of the pair of you.  \"<i>I have encountered these creatures before.  They do... bad things if you let them surprise you.</i>\"  She twists her mouth, and you do the math yourself.");
 		outputText("\n\n\"<i>Perhaps you're in the mood for a spot of revenge, then?</i>\" you suggest, languidly corkscrewing your coils around your prize.  She blinks, and then smiles warmly.  \"<i>We </i>are<i> of one blood, you and I,</i>\" she says fondly, as she slowly slides down to join you.");

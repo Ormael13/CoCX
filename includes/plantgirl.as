@@ -10,7 +10,7 @@ public function encounterPlantWoman():void {
 		monster.createStatusAffect("grouchy",0,0,0,0);
 	}
 	clearOutput();
-	if(flags[TIMES_MET_PLANTGIRL] == 0) {
+	if(flags[kFLAGS.TIMES_MET_PLANTGIRL] == 0) {
 		outputText("While out exploring the deep woods you come across a thick bush full of vines and thorns that is obstructing your path.  Strange...that wasn't there a few days ago.  You remember the perverted, sexual vegetation, but not this.  You scan the brush for a way to get through to no avail.  As you begin to turn, you hear an eerie, ominous coo which causes you to freeze, listening for further movement or noise.  After a few moments, you sigh and begin to head back the way you came… only to hit another patch of dense foliage, blocking your advance once again.");
 		outputText("\n\nNow this is really getting weird.  There certainly wasn't any bush here ten minutes ago.  Before you can consider you next move, you hear a familiar coo from the bush.  Something is definitely following you at this point.  Unnerved, you turn back the way you came when suddenly a mass of vines and thorns thrust along the ground and block that path as well!  You spin about, searching for your would-be captor.");
 		outputText("\n\nWithout warning, something brushes past you, low on the ground!  \"<i>What the?</i>\" you exclaim.  At first you take it for a vine or branch, but the size of the object quickly dispels that notion: whatever it was, it was roughly the size of a human.  Trying to follow the mystery contact with your eyes, you find your movement restricted by unnoticed vines and branches that are wrapping themselves around your arms and [legs].  You scream silently in your head as they attempt to restrain you!");
@@ -1186,7 +1186,7 @@ public function beatPlantGirlDomLetsFuckAnal():void {
 		outputText("\n\nThe sound of your gear hitting the ground causes the plant woman to look over her unimposing shoulder, and she grins as you embrace her from behind. Taking her left, average breast in your hand, you fondle both her mound and her anther-like nipple as you caress her stomach with your free hand.  The creature shudders from your touch, and you feel a thin stream of her moist pussy juice slowly run down your leg.  The need to fuck her becomes too overwhelming for you, and [eachCock] presses itself against her ample ass, pulsating with desire.  As you lower a hand to guide your cockDescript(suitable cock) into her tight asshole, her hand darts out and grabs your dick instead, beating you to the punch.  Surprised at her speed, you slowly draw your hand back and gasp as the plant woman pushes against your cockDescript(suitable cock)'s head, taking it past her tight pucker and into her anus.");
 		outputText("\n\nGritting your teeth at the sudden pleasurable sensation, you ease yourself deeper into her well developed ass while you manhandle her breast, squeezing and distorting the mammary mound's shape in your tight grip.  Moaning at the rough treatment of her mounds in your grasp, her tongue darts outward and hangs in the air as she pants heavily from the pleasure.  Pumping her luscious rump, you mash your [hips] and pelvis against her, contemplating her tightness as you push onward into the vixen.");
 		//First time: 
-		if(flags[TIMES_FUCKED_PLANTGIRLS_ASS] == 0) {
+		if(flags[kFLAGS.TIMES_FUCKED_PLANTGIRLS_ASS] == 0) {
 			outputText("  Given the tightness, she must be an anal virgin!  Gleefully grinning like an idiot, ");
 		}
 		//Subsequent times: 
@@ -1200,7 +1200,7 @@ public function beatPlantGirlDomLetsFuckAnal():void {
 		stats(0,0,0,0,0,0,-100,0);
 		eventParser(13);
 	}
-	flags[TIMES_FUCKED_PLANTGIRLS_ASS]++;
+	flags[kFLAGS.TIMES_FUCKED_PLANTGIRLS_ASS]++;
 }
 
 //[Victory: Anal (corrupted), Vc 1.3] 
@@ -1374,14 +1374,14 @@ public function beatPlantGirlAndTakePlantCockInButt():void {
 //[Victory: Blowjob and Anal (corrupted), both Vc 1.4 and 1.5]
 public function defeatPlantgirlBlowAndButtfuckCorrupt():void {
 	clearOutput();
-	if(flags[TIMES_GOT_CORRUPT_BJ_ANAL_PLANTGIRL_SCENE] >= 2) {
+	if(flags[kFLAGS.TIMES_GOT_CORRUPT_BJ_ANAL_PLANTGIRL_SCENE] >= 2) {
 		
 		return;
 	}
 	outputText("Staring triumphantly at your opponent, you grab her and throw her against a tree trunk, her back hitting the trunk and causing her to cry out in pain.  Eager for release, you tower over your conquest. Well now, that wasn't much of a fight was it? you say, taunting the plant creature.  Let's have a looksie for your cock, shall we?");
 	outputText("\n\nYou poke, prod, and grope at her pelvis for a few minutes, eager to coax any hidden penis out of her body.  The plant woman's pussy drools with juice at the rough treatment, angering you further; you want a cock, not her pussy goddamnit!  Where the hell is your cock? COME ON, I know you have one!  Almost everything around here does!  DON'T YOU DARE HOLD OUT ON ME! You yell.  The plant woman's aroused look turns to fear at your tone.  After a few more frustrating moments, you pull back from the plant creature.  GODDAMIT! Of all the creature I pick to fuck, this one DOESN'T have a dick! FUCK! You yell.  Angrily you return to camp, leaving the bruised and battered creature to lick her wounds.");
 	//(Occurs only two times; third time around, the light side scenes play out for Blowjob and Anal)
-	flags[TIMES_GOT_CORRUPT_BJ_ANAL_PLANTGIRL_SCENE]++;
+	flags[kFLAGS.TIMES_GOT_CORRUPT_BJ_ANAL_PLANTGIRL_SCENE]++;
 	
 }
 

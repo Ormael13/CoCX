@@ -39,11 +39,11 @@ public function hasPinkEgg():Boolean {
 public function breakingKeltOptions():void {
 	clearOutput();
 	spriteSelect(35);
-	if((!player.hasCock() && flags[KELT_BREAK_LEVEL] == 0) ||flags[NEVER_RESIST_KELT] == 1 || player.statusAffectv2("Kelt") >= 40 || player.hasStatusAffect("Kelt") < 0) {
+	if((!player.hasCock() && flags[kFLAGS.KELT_BREAK_LEVEL] == 0) ||flags[kFLAGS.NEVER_RESIST_KELT] == 1 || player.statusAffectv2("Kelt") >= 40 || player.hasStatusAffect("Kelt") < 0) {
 		keltEncounter();
 		return;
 	}
-	if(flags[KELT_BREAK_LEVEL] > 0) {
+	if(flags[kFLAGS.KELT_BREAK_LEVEL] > 0) {
 		if(!player.hasCock()) {
 			outputText("You can't keep trying to break Kelt without the proper tool to do it with.");
 			menu();
@@ -64,7 +64,7 @@ public function breakingKeltOptions():void {
 public function resistKeltsBSBreakHimIntro():void {
 	clearOutput();
 	spriteSelect(35);
-	if(flags[KELT_BREAK_LEVEL] == 0) {
+	if(flags[kFLAGS.KELT_BREAK_LEVEL] == 0) {
 		outputText("You are more and more annoyed by Kelt's rudeness and dick-waving.  The centaur may be imposing at first and his archery skills are impressive, but you're sure that behind his false display of virility, there's nothing an experienced champion like you can't deal with.  With your superior strength and speed, you could probably take him by surprise and teach him a good lesson.  Of course, you won't ever be able to learn archery from him after that.");
 		//[if (PC doesn't have items)
 		if(!(hasItem("SucMilk",15) || (hasItem("SucMilk",10) && hasPinkEgg()))) {
@@ -82,7 +82,7 @@ public function resistKeltsBSBreakHimIntro():void {
 		}
 		return;
 	}
-	else if(flags[KELT_BREAK_LEVEL] == 1) {
+	else if(flags[kFLAGS.KELT_BREAK_LEVEL] == 1) {
 		outputText("You set out to go get Kelt, eager to teach this slut another lesson of your own.  You explore the farm for a bit before spotting the centaur behind the barn.  However, Kelt seems to have changed since last time: he somehow changed back his gender.  That rebellious little bitch!  Although he doesn't look as aggressively masculine as before, and his chest still bears some man-tits, he has gotten back his stern, rude face and you can clearly see a fat prick hanging from his backside.  It doesn't seem to be as big as it was before, though.  He must have grown it in a hurry.");
 		//back to farm]
 		//[if you don't have the items:
@@ -98,7 +98,7 @@ public function resistKeltsBSBreakHimIntro():void {
 		return;
 	}
 	//Third encounter
-	else if(flags[KELT_BREAK_LEVEL] == 2) {
+	else if(flags[kFLAGS.KELT_BREAK_LEVEL] == 2) {
 		outputText("You saunter up to the back of the farm, eager to meet the centaur-slut for another 'lesson'.  The creature is quite a weird sight when you spot her: instead of the gorgeous woman whose face you had splattered with spooge, what you see is an androgynous hybrid sporting a tiny, ridiculous microdick and a little pair of tits that can't fill more than a B-cup bra.  Even the face is ambiguous about its gender.  Although Kelly is now strong in the centaur's body, Kelt seems to have regained a little control.  You have to fix this.");
 		//[if (less than 5 succubi milk)
 		if(!hasItem("SucMilk",5))
@@ -115,7 +115,7 @@ public function resistKeltsBSBreakHimIntro():void {
 		spriteSelect(35);
 		return;
 	}
-	else if(flags[KELT_BREAK_LEVEL] == 3) {
+	else if(flags[kFLAGS.KELT_BREAK_LEVEL] == 3) {
 		spriteSelect(-1);
 		finalKeltBreaking();
 		return;
@@ -134,7 +134,7 @@ public function resistKeltsBSBreakHimIntro():void {
 public function neverBreakKeltIntoKelly():void {
 	clearOutput();
 	spriteSelect(35);
-	flags[NEVER_RESIST_KELT] = 1;
+	flags[kFLAGS.NEVER_RESIST_KELT] = 1;
 	outputText("You decide that trying to break Kelt is something you'd never want to do.  Besides, he's teaching you a useful skill, and there's just something charming about that bastard...");
 	menu();
 	addButton(0,"Go To Kelt",keltEncounter);
@@ -256,7 +256,7 @@ public function breakKeltGo():void {
 	}
 	else consumeItem("SucMilk",15);
 	stats(0,0,0,0,0,0,-100,5);
-	flags[KELT_BREAK_LEVEL] = 1;
+	flags[kFLAGS.KELT_BREAK_LEVEL] = 1;
 	doNext(13);
 }
 
@@ -368,7 +368,7 @@ public function kellyAI():void {
 		if(monster.statusAffectv1("Bow Cooldown") <= 0) monster.removeStatusAffect("Bow Cooldown");
 	}
 	else {
-		if(rand(2) == 0 && flags[KELT_BREAK_LEVEL] >= 2) dayDreamKelly();
+		if(rand(2) == 0 && flags[kFLAGS.KELT_BREAK_LEVEL] >= 2) dayDreamKelly();
 		else keltShootBow();
 		return;
 	}
@@ -466,7 +466,7 @@ public function defeatKellyNDBREAKHIM():void {
 	}
 	else consumeItem("SucMilk",10);
 	stats(0,0,0,0,0,0,-100,5);
-	flags[KELT_BREAK_LEVEL] = 2;
+	flags[kFLAGS.KELT_BREAK_LEVEL] = 2;
 	eventParser(5007);
 }
 
@@ -547,7 +547,7 @@ public function breakingKeltNumeroThree():void {
 	//consume items for 1x scene.
 	consumeItem("SucMilk",5);
 	stats(0,0,0,0,0,0,-100,5);
-	flags[KELT_BREAK_LEVEL] = 3;
+	flags[kFLAGS.KELT_BREAK_LEVEL] = 3;
 	eventParser(5007);
 }
 
@@ -625,7 +625,7 @@ public function finalKeltBreaking():void {
 	
 	outputText("\n\nSatisfied, you pat Kelly's butt and walk away, still recovering from the supernatural orgasm.  Now that you've acquired a new pet, there's a whole new range of possibilities that are open for you...");
 	stats(0,0,0,0,0,0,-100,8);
-	flags[KELT_BREAK_LEVEL] = 4;
+	flags[kFLAGS.KELT_BREAK_LEVEL] = 4;
 	doNext(13);
 }
 
@@ -644,8 +644,8 @@ public function keltFucksShitUpII():void {
 	consumeItem("SucMilk",5);
 	
 	//Roll Kelt back one obedience level - at the worst he drops to the level of the first fight
-	flags[KELT_BREAK_LEVEL]--;
-	if(flags[KELT_BREAK_LEVEL] < 1) flags[KELT_BREAK_LEVEL] = 1;
+	flags[kFLAGS.KELT_BREAK_LEVEL]--;
+	if(flags[kFLAGS.KELT_BREAK_LEVEL] < 1) flags[kFLAGS.KELT_BREAK_LEVEL] = 1;
 	eventParser(5007);
 }
 
@@ -653,46 +653,46 @@ public function keltFucksShitUpII():void {
 //Appearance
 public function kellyAppearance():void {
 	clearOutput();
-	outputText("Kelly is a 6 foot 3 inch tall centauress with a svelte body and generous curves.  Her feminine face is pretty human in appearance, and her lovely traits would be adorably innocent if it weren't for her emerald eyes shining with lusty need whenever she looks at you.  Plump lips that seem to have been made for cock-sucking adorn her hungry mouth.  A long, single " + flags[KELLY_HAIR_COLOR]);
+	outputText("Kelly is a 6 foot 3 inch tall centauress with a svelte body and generous curves.  Her feminine face is pretty human in appearance, and her lovely traits would be adorably innocent if it weren't for her emerald eyes shining with lusty need whenever she looks at you.  Plump lips that seem to have been made for cock-sucking adorn her hungry mouth.  A long, single " + flags[kFLAGS.KELLY_HAIR_COLOR]);
 	//[chestnut brown/sable black/garish purple/bright pink/slutty blonde) 
-	outputText(" braid hangs between her shoulders, giving you easy leverage when you have your way with her.  Her torso is likewise human-looking, only stopping below her navel where her equine part starts growing.  She stands on four horse hooves, her lower body looking almost like a horse's- aside from the pointed " + flags[KELLY_HAIR_COLOR] + " demon's tail which sprouts where her horse tail should, and her cute, pink, human-like asshole.");
+	outputText(" braid hangs between her shoulders, giving you easy leverage when you have your way with her.  Her torso is likewise human-looking, only stopping below her navel where her equine part starts growing.  She stands on four horse hooves, her lower body looking almost like a horse's- aside from the pointed " + flags[kFLAGS.KELLY_HAIR_COLOR] + " demon's tail which sprouts where her horse tail should, and her cute, pink, human-like asshole.");
 	//[chestnut brown/sable black/garish purple/bright pink/slutty blonde]
 	
 	outputText("\n\nShe sports a pair of soft DD-cup breasts.  Each one is ornate with a 0.5 inch nipple, often rock-hard in arousal.");
-	if(flags[KELLY_BONUS_BOOB_ROWS] > 0) outputText("  Beneath those, she has a second row of jiggly tits, just aching to be squeezed.");
-	if(flags[KELLY_INCUBATION] > 0) outputText("  Drops of milk often dribble from her tits, betraying her potent lactation.");
+	if(flags[kFLAGS.KELLY_BONUS_BOOB_ROWS] > 0) outputText("  Beneath those, she has a second row of jiggly tits, just aching to be squeezed.");
+	if(flags[kFLAGS.KELLY_INCUBATION] > 0) outputText("  Drops of milk often dribble from her tits, betraying her potent lactation.");
 	//[enter vagina text] 
 	outputText("\n\nKelly has a ");
 	//[virgin]
-	if(flags[KELLY_VAGINALLY_FUCKED_COUNT] == 0) outputText("virgin, ");
-	if(flags[KELLY_CUNT_TYPE] == 0) outputText("pink pussy");
+	if(flags[kFLAGS.KELLY_VAGINALLY_FUCKED_COUNT] == 0) outputText("virgin, ");
+	if(flags[kFLAGS.KELLY_CUNT_TYPE] == 0) outputText("pink pussy");
 	else outputText("puffy, black mare-cunt");
 	outputText(" placed below her hindquarters.  It is almost constantly dripping rivulets of moisture when you're around.  Its shining openness seems to welcome you in her warmth.");
-	if(flags[KELLY_HEAT_TIME] > 0 && flags[KELLY_INCUBATION] == 0) outputText("<b>  There is so much leaking from her that you think she might be in heat, rendering her more receptive to impregnation.</b>");
+	if(flags[kFLAGS.KELLY_HEAT_TIME] > 0 && flags[kFLAGS.KELLY_INCUBATION] == 0) outputText("<b>  There is so much leaking from her that you think she might be in heat, rendering her more receptive to impregnation.</b>");
 	outputText("\n\nShe has a human-like asshole, placed right between her horse butt-cheeks where it belongs.");
 	
 	//[enter pregnancy text]
 	//1: 
-	if(flags[KELLY_INCUBATION] >= 280) outputText("\n\n<b>Her barrel-like belly is bulging slightly more than it normally does.</b>");
+	if(flags[kFLAGS.KELLY_INCUBATION] >= 280) outputText("\n\n<b>Her barrel-like belly is bulging slightly more than it normally does.</b>");
 	//2:
-	else if(flags[KELLY_INCUBATION] >= 200) outputText("\n\n<b>Her pregnancy is becoming obvious, her horse belly more and more distended each day.</b>");
+	else if(flags[kFLAGS.KELLY_INCUBATION] >= 200) outputText("\n\n<b>Her pregnancy is becoming obvious, her horse belly more and more distended each day.</b>");
 	//3:
-	else if(flags[KELLY_INCUBATION] >= 100) outputText("\n\nHer belly is swollen and often wiggles around as your rambunctious offspring moves inside her.");
+	else if(flags[kFLAGS.KELLY_INCUBATION] >= 100) outputText("\n\nHer belly is swollen and often wiggles around as your rambunctious offspring moves inside her.");
 	//4:
-	else if(flags[KELLY_INCUBATION] >= 1) outputText("\n\n<b>Her body is absolutely bloated with new life and she moves with a slow, deliberate sway.  Even her boobs and lips seem more swollen and sensitive than usual: her skin is flushed and her expression is one of deep, motherly content.  She can't be far from giving birth now.</b>");
+	else if(flags[kFLAGS.KELLY_INCUBATION] >= 1) outputText("\n\n<b>Her body is absolutely bloated with new life and she moves with a slow, deliberate sway.  Even her boobs and lips seem more swollen and sensitive than usual: her skin is flushed and her expression is one of deep, motherly content.  She can't be far from giving birth now.</b>");
 	
 	//Kids flavour text
-	if(flags[KELLY_KIDS] > 0) {
-		if(flags[KELLY_KIDS] == 1) {
+	if(flags[kFLAGS.KELLY_KIDS] > 0) {
+		if(flags[kFLAGS.KELLY_KIDS] == 1) {
 			outputText("\nKelly's ");
-			if(flags[KELLY_FIRST_KID_GENDER] == 1) outputText("son");
+			if(flags[kFLAGS.KELLY_FIRST_KID_GENDER] == 1) outputText("son");
 			else outputText("daughter");
 			outputText(" is off in a separate field; still very young, you can see ");
-			if(flags[KELLY_FIRST_KID_GENDER] == 1) outputText("him playing in the distance, lost in his own little world.");
+			if(flags[kFLAGS.KELLY_FIRST_KID_GENDER] == 1) outputText("him playing in the distance, lost in his own little world.");
 			else outputText("her playing in the distance, lost in her own little world.");
 		}
-		else if(flags[KELLY_KIDS] == 2) outputText("\n\nThe " + num2Text(flags[KELLY_KIDS]) + " children you have had with Kelly are off in a separate field; the sound of their play drifts over the grasslands to your ears.  Kelly evidently prefers to keep her brood away from what you do with her, a remarkably sensible attitude coming from a centauress cumslut.  Maybe motherhood genuinely suits her?");
-		else outputText("\n\nThe " + num2Text(flags[KELLY_KIDS]) + " children you have had with Kelly are as ever off in a separate field, the distance sounds of their acting out the wars and drama of childhood drifting out over the grasslands to your ears.");
+		else if(flags[kFLAGS.KELLY_KIDS] == 2) outputText("\n\nThe " + num2Text(flags[kFLAGS.KELLY_KIDS]) + " children you have had with Kelly are off in a separate field; the sound of their play drifts over the grasslands to your ears.  Kelly evidently prefers to keep her brood away from what you do with her, a remarkably sensible attitude coming from a centauress cumslut.  Maybe motherhood genuinely suits her?");
+		else outputText("\n\nThe " + num2Text(flags[kFLAGS.KELLY_KIDS]) + " children you have had with Kelly are as ever off in a separate field, the distance sounds of their acting out the wars and drama of childhood drifting out over the grasslands to your ears.");
 		outputText("\n");
 	}
 	menu();
@@ -701,26 +701,26 @@ public function kellyAppearance():void {
 public function approachKelly():void {
 	clearOutput();
 	//Fix hair color!
-	if(flags[KELLY_HAIR_COLOR] == 0) flags[KELLY_HAIR_COLOR] = "chestnut brown";
+	if(flags[kFLAGS.KELLY_HAIR_COLOR] == 0) flags[kFLAGS.KELLY_HAIR_COLOR] = "chestnut brown";
 	//PUNISH SCENES IF APPROPRIATE
-	if(flags[KELLY_VAGINALLY_FUCKED_COUNT] > 0 && flags[TIMES_PUNISHED_KELLY] == 0 && rand(3) == 0 && player.hasCock()) {
-		flags[KELLY_DISOBEYING_COUNTER] = 0;
+	if(flags[kFLAGS.KELLY_VAGINALLY_FUCKED_COUNT] > 0 && flags[kFLAGS.TIMES_PUNISHED_KELLY] == 0 && rand(3) == 0 && player.hasCock()) {
+		flags[kFLAGS.KELLY_DISOBEYING_COUNTER] = 0;
 		punishKelly();
 		return;
 	}
 	//Descriptions and Flavour Text
 	outputText("You aren't welcome on the farm proper, but you can go visit Kelly's field.");
 	//09:00-11:00, 2 or more children:
-	if(model.time.hours >= 9 && model.time.hours <= 11 && flags[KELLY_KIDS] >= 2) {
+	if(model.time.hours >= 9 && model.time.hours <= 11 && flags[kFLAGS.KELLY_KIDS] >= 2) {
 		outputText("\n\nKelly is standing in the shadow of her barn, an expression of blissful contentment on her face as she nurses your ");
-		if(flags[KELLY_KIDS] > 2) outputText("two youngest ");
+		if(flags[kFLAGS.KELLY_KIDS] > 2) outputText("two youngest ");
 		outputText("children with ");
-		if(flags[KELLY_BONUS_BOOB_ROWS] > 0) outputText("the top row of ");
+		if(flags[kFLAGS.KELLY_BONUS_BOOB_ROWS] > 0) outputText("the top row of ");
 		outputText("her milk-laden tits.  When she dreamily opens her eyes and sees you standing there, she nudges them off gently.");
 		outputText("\n\n\"<i>That's enough, little ones.  Mommy needs her daddy time now.</i>\"  Your two centaur children make grumpy 'awww's as they are pulled away from her oozing nipples, but they freeze when they turn around and see you, their milk slathered mouths open in a kind of awe.  They clop off in a hurry as Kelly rearranges her hair and gets up to greet you, the peace in her emerald eyes slowly burnt away by desire.");
 	}
 	//15:00-16:00, 4 or more children:
-	else if(model.time.hours >= 15 && model.time.hours <= 16 && flags[KELLY_KIDS] >= 4) {
+	else if(model.time.hours >= 15 && model.time.hours <= 16 && flags[kFLAGS.KELLY_KIDS] >= 4) {
 		outputText("\n\nYou see Kelly standing in the middle of her field, surrounded by her children.  She has the butts set up and, judging by the way she is talking and gesturing with the bow in her hand, is teaching your brood how to shoot.  Trying to, anyway: her big, bare boobs make things a bit difficult.  You see she's actually gone to the trouble of constructing adorable little mini-bows, which the group of centaur children are all threading mini-arrows on as she points, and with expressions of deep concentration, pulling tight, taking aim, and... there's a cacophony of whistling, and arrows wind up everywhere but the target.  The sound of shouting and crying echoes across the field as Kelly begins to ball out the one who somehow managed to shoot an arrow through her braid.");
 		outputText("\n\nYou decide to come back a bit later.  Your kids need all the help they can get.");
 		doNext(13);
@@ -735,14 +735,14 @@ public function approachKelly():void {
 	addButton(0,"Appearance",kellyAppearance);
 	if(player.lust < 33) outputText("\n<b>You aren't aroused enough to pursue sex with your toy right now.</b>");
 	else addButton(1,"Sex",kellySexMenu);
-	if(flags[KELLY_CUNT_TYPE] == 0) {
+	if(flags[kFLAGS.KELLY_CUNT_TYPE] == 0) {
 		if(hasItem("Equinum",1)) {
 			addButton(5,"Give Equinum",giveKellyEquinum);
 			outputText("\nYou could give her equinum to gift her with a proper horse-cunt.");
 		}
 		else outputText("\nIf you had equinum, you could give her a proper horse-cunt.");
 	}
-	else if(flags[KELLY_CUNT_TYPE] == 1) {
+	else if(flags[kFLAGS.KELLY_CUNT_TYPE] == 1) {
 		if(hasItem("SucMilk",1)) {
 			addButton(5,"Give SucMilk",giveKellySuccubiMilk);
 			outputText("\nYou could give her a succubi milk to get rid of that horse-pussy you gave her before.");
@@ -751,21 +751,21 @@ public function approachKelly():void {
 	}
 	if(hasItem("CanineP",1)) {
 		outputText("\nYou could give her a canine pepper");
-		if(flags[KELLY_BONUS_BOOB_ROWS] == 0) outputText(", but who knows how it will change her");
+		if(flags[kFLAGS.KELLY_BONUS_BOOB_ROWS] == 0) outputText(", but who knows how it will change her");
 		outputText(".");
 		addButton(6,"Give CanineP",giveKellyAPepper);
 	}
-	if(flags[KELLY_VAGINALLY_FUCKED_COUNT] > 0 && flags[KELLY_DISOBEYING_COUNTER] >= 3 && player.hasCock()) {
+	if(flags[kFLAGS.KELLY_VAGINALLY_FUCKED_COUNT] > 0 && flags[kFLAGS.KELLY_DISOBEYING_COUNTER] >= 3 && player.hasCock()) {
 		outputText("\n<b>It looks like Kelly has taken to pleasuring herself again in your absense.  Do you want to take care of that?</b>");
 		addButton(7,"Punish",punishKelly);
 	}
-	if(flags[TIMES_PUNISHED_KELLY] > 0 && flags[KELLY_REWARD_COOLDOWN] == 0 && rand(3) == 0) {
+	if(flags[kFLAGS.TIMES_PUNISHED_KELLY] > 0 && flags[kFLAGS.KELLY_REWARD_COOLDOWN] == 0 && rand(3) == 0) {
 		outputText("\n<b>Kelly looks in fine spirits today. Perhaps she's done something worth getting a reward?</b>\n");
 		addButton(8,"Reward",rewardKelly);
 	}
 	
 	//Showing up resets Kelly's desire not to fap without you
-	flags[KELLY_DISOBEYING_COUNTER] = 0;
+	flags[kFLAGS.KELLY_DISOBEYING_COUNTER] = 0;
 
 	addButton(9,"Leave",eventParser,13);
 }
@@ -773,15 +773,15 @@ public function approachKelly():void {
 public function kellySexMenu():void {
 	menu();
 	if(player.hasCock() && player.lust >= 33) {
-		if(player.cockThatFits(300) >= 0 || flags[KELLY_CUNT_TYPE] == 1) {
-			if(flags[KELLY_INCUBATION] > 0) addButton(0,"Preg Fuck",kellyPregSex);
+		if(player.cockThatFits(300) >= 0 || flags[kFLAGS.KELLY_CUNT_TYPE] == 1) {
+			if(flags[kFLAGS.KELLY_INCUBATION] > 0) addButton(0,"Preg Fuck",kellyPregSex);
 			else if(!player.isTaur()) addButton(0,"Fuck Cunt",fuckKellysCunt);
 			else addButton(0,"Fuck Cunt",taurOnTaurSexKelly);
-			if(flags[KELLY_VAGINALLY_FUCKED_COUNT] == 0) addButton(0,"VirginFuck",takeKellysVirginity);
+			if(flags[kFLAGS.KELLY_VAGINALLY_FUCKED_COUNT] == 0) addButton(0,"VirginFuck",takeKellysVirginity);
 			if(player.tentacleCocks() >= 2) addButton(1,"TentaFuck",tentaFuckKelly);
 		}
 		else outputText("\n<b>You're too big to fuck her vagina.</b>");
-		if(flags[KELLY_BONUS_BOOB_ROWS] == 0 && player.cockThatFits(18,"length") < 0 && !player.isTaur()) {
+		if(flags[kFLAGS.KELLY_BONUS_BOOB_ROWS] == 0 && player.cockThatFits(18,"length") < 0 && !player.isTaur()) {
 			outputText("\n<b>You're too big to fuck her tits.  Maybe if you gave her something to make her grow more...</b>");
 		}
 		else if(!player.isTaur()) addButton(2,"Titfuck",kellyTitJob);
@@ -797,7 +797,7 @@ public function kellySexMenu():void {
 //[Not Virginal]
 public function fuckKellysCunt():void {
 	clearOutput();
-	flags[KELLY_VAGINALLY_FUCKED_COUNT]++;
+	flags[kFLAGS.KELLY_VAGINALLY_FUCKED_COUNT]++;
 	var x:int = player.cockThatFits(300);
 	if(x < 0) x = player.smallestCockIndex();
 	outputText("You strip out of your [armor] in a hurry, intent on claiming your equine slut from behind.  As soon as [eachCock] flops free, Kelly takes notice, her hand coming in front of her mouth in surprise.");
@@ -838,7 +838,7 @@ public function fuckKellysCunt():void {
 	outputText("\n\nA familiar throb of excitement in your loins");
 	if(player.balls > 0) outputText(" and roiling balls");
 	outputText(" leaves no doubt that climax is fast approaching.  Kelly cums first, splattering your [hips] with her ");
-	if(flags[KELLY_CUNT_TYPE] > 0) outputText("fragrant ");
+	if(flags[kFLAGS.KELLY_CUNT_TYPE] > 0) outputText("fragrant ");
 	outputText("centaur-cum, soaking your [legs] immediately.  Her pussy goes wild, the once-ordered spasms going wild, wringing your " + cockDescript(x) + " with uncoordinated motions.  A moment later, all those wild contractions sync up into intense, dick-massaging waves.  The power of her equine lower half becomes obvious when her twat seems to suck you inside, squeezing you off to orgasm.");
 	
 	outputText("\n\nJism sprays from your cock almost immediately, and you throw back your head and swat her ass again in your excitement, barely feeling her pussy-juices as they continue to squirt out in smaller sprays.  All of your attention is focused on the iron-hard, ecstatic tool between your legs as it pulses out fresh squirts of jism, one after another.");
@@ -851,7 +851,7 @@ public function fuckKellysCunt():void {
 	outputText("You lay immobile on her back, panting while her wonderful cunt drains you of every drop.");
 	
 	outputText("\n\nOnce your lust is spent, you reach forward to grope a tit, commenting, \"<i>Atta girl.  Now why don't you lay down and rest a while");
-	if(flags[KELLY_INCUBATION] == 0) outputText(" so the cum can turn you into a proper broodmare");
+	if(flags[kFLAGS.KELLY_INCUBATION] == 0) outputText(" so the cum can turn you into a proper broodmare");
 	else outputText(", maybe knit some for the kids you're going to be pumping out for me non-stop");
 	outputText(".</i>\"");
 	
@@ -865,7 +865,7 @@ public function fuckKellysCunt():void {
 /*Requires a centaur lower body.*/
 public function taurOnTaurSexKelly():void {
 	clearOutput();
-	flags[KELLY_VAGINALLY_FUCKED_COUNT]++;
+	flags[kFLAGS.KELLY_VAGINALLY_FUCKED_COUNT]++;
 	var x:int = player.cockThatFits(300);
 	if(x < 0) x = player.smallestCockIndex();
 	outputText("Admiring your [armor], you slowly remove the portions that cover your animal-like bottom half, wondering how you could ever handle having to wear pants.  Letting [eachCock] swing free below you, smacking against your belly when erect - now that's life.  That's how you were meant to be!  You go ahead and undo the top parts of your gear as well, not wanting anything to come between you and the slutty fem-centaur just a few feet away.  She's keeping her eyes down submissively, but she keeps casting glances under your lower half, licking her lips whenever she gets a good look at [oneCock].");
@@ -885,7 +885,7 @@ public function taurOnTaurSexKelly():void {
 	outputText(".  You prance forward, and with a mighty lurch, you mount your mare, climbing atop her, wrapping your hands around her middle for leverage.  She wiggles under your weight, but tries to hold her back-end still while you try to align yourself with her.  Getting in position isn't as easy as it was when you had a humanoid lower body, but when you do finally feel your " + cockDescript(x) + " butting up against that warm, wet orifice, the satisfaction is many times greater.");
 	
 	outputText("\n\nYou lurch forward, plunging yourself deep inside the engorged, ");
-	if(flags[KELLY_CUNT_TYPE] == 0) outputText("pink pussy");
+	if(flags[kFLAGS.KELLY_CUNT_TYPE] == 0) outputText("pink pussy");
 	else outputText("black horse-cunt");
 	outputText(", sheathing yourself in that muscular, deep canal.  The lips cling snugly about your [sheath] as you slide into Kelly's velvet pussy, her inner walls squeezing rhythmically around you.  You adjust position, getting accustomed to mounting her like the mare she is, and get a handhold on her big, rounded breasts, squeezing her pebbly nipples between your thumb and forefinger.  She moans, placing her palms over your hands and pressing your harder into her chest, begging, \"<i>Yes!  Fuck me, [Master]!  Give me your cum!</i>\"");
 	
@@ -893,7 +893,7 @@ public function taurOnTaurSexKelly():void {
 	if(player.balls > 0) outputText("[sack]");
 	else outputText("hindlegs");
 	outputText(", splattering out in fresh waves from Kelly's ");
-	if(flags[KELLY_CUNT_TYPE] > 0) outputText("musky ");
+	if(flags[kFLAGS.KELLY_CUNT_TYPE] > 0) outputText("musky ");
 	outputText("womanhood.  With her body firmly under your own, where it belongs, you firmly assert your control, grabbing her hair in one hand and yanking.  You tug her head back as you bottom out, your body filled with the pleasure of mating like the beasts that you are.");
 	
 	outputText("\n\nKelly groans through her pain, \"<i>Ooohh, yes, give me your foal, [Master]!  My pussy needs it!</i>\"  True to her words, her walls begin to tug at your " + cockDescript(x) + " with familiar, milking contractions, squeezing you from base to " + cockHead(x) + " again and again.  Her fluids gush out everywhere, turning the ground underneath her to mud as she climaxes.  You pinch her nipples as the heat builds within you, and when you can take it no more, you reward your cum-slut with the liquid orgasm she so craved.  Jism basts her inner walls when you explode.  Again and again, your muscles clench with ecstatic blast, ejaculating thick flows of your lust straight into the cum-dumpster's spasming cunny.  ");
@@ -990,7 +990,7 @@ public function giveKellyEquinum():void {
 	outputText("\n\nSmiling cruelly, you give her bodacious rump a smack followed by a rough squeeze.  Kelly moans, shimmying her hindlegs and juicy bottom closer to you in response.  You immediately uncork the vial, place the flared bottle into that welcome honey-hole, and push it deep inside her.  Your centaur toy whinnies in delight, her wide-spread cunt rippling around the vial as it empties, convulsively milking it as if it was a tiny horse-cock.  You guess that even with a human cunt, some instincts must stay the same.  A trickle of her feminine ooze dripples out from her clenching snatch, mixed with a tiny amount of the potion.  Most of it seems to travel deeper inside her, and you can tell from the clear end of the bottle that it's fully emptied.  There's nothing to do now but pull it out and enjoy the changes as they happen.  You do so with a smile.");
 	
 	outputText("\n\nAt first, all you observe is a disappointed moan.  Kelly backs up, hooves stamping impatiently as she tries to bring her pussy closer to you, eager for more.  \"<i>What did you put in me, [Master]?  That didn't feel like cum,</i>\"  she dares to ask.  You swat her square across her equine ass, sending her scampering a few feet away, still trailing dripping fem-slime.  She moans immediately, her plump pussy lips shining with a reflective sheen.  Her feminine odor gets slightly stronger as well, though each time you catch a whiff of it, it's a little bit different - less human and somehow more... potent.  Her glossy pink lips begin to bulge, thickening before your eyes.  Her slit lengthens as well, the clit growing bigger and harder than before to match the larger curtains that are her labia.  Bigger and bigger, her vulvae swell, until those plump, soaked outer lips leave you no doubt that they were designed to part for the biggest, fattest erections possible.  Their coloration darkens to purple, then jet black, a sloppy onyx veil just begging for a cock.");
-	flags[KELLY_CUNT_TYPE] = 1;
+	flags[kFLAGS.KELLY_CUNT_TYPE] = 1;
 	outputText("\n\n<b>Kelly has now has a soaking-wet horsecunt!</b>");
 	consumeItem("Equinum",1);
 	menu();
@@ -1008,7 +1008,7 @@ public function giveKellySuccubiMilk():void {
 	outputText("\n\nKelly finishes the drink with a self-satisfied smile, and she cheerful says, \"<i>Thank you for the treat, [Master].</i>\"");
 	
 	outputText("\n\nYou swat her rump affectionately and nod, not deigning to give her the pleasure of your praise.");
-	flags[KELLY_CUNT_TYPE] = 0;
+	flags[kFLAGS.KELLY_CUNT_TYPE] = 0;
 	outputText("\n\n<b>Kelly now has a human-like pussy.</i>");
 	consumeItem("SucMilk",1);
 	menu();
@@ -1018,9 +1018,9 @@ public function giveKellySuccubiMilk():void {
 //Punish(C)
 public function punishKelly():void {
 	clearOutput();
-	flags[TIMES_PUNISHED_KELLY]++;
+	flags[kFLAGS.TIMES_PUNISHED_KELLY]++;
 	//First time: 
-	if(flags[TIMES_PUNISHED_KELLY] == 1) {
+	if(flags[kFLAGS.TIMES_PUNISHED_KELLY] == 1) {
 		outputText("You don't say anything immediately when Kelly prances to a bouncing halt in front of you; instead, you take your time to do a slow circuit around her, taking her in as if she were a piece of property, which of course she is.  You know the effect you have upon the centauress and you grin quietly to yourself as you draw in close to her without touching; your aura presses upon her and her breath quickens, her always-ready pussy moistening even further.  You pause next to her back end and gently press a finger against her labia.");
 		outputText("\n\n\"<i>It must be difficult,</i>\" you say as you gently trace the line of her wet opening, \"<i>being this turned on and not being able to do anything about it.</i>\"");
 		
@@ -1050,7 +1050,7 @@ public function punishKelly():void {
 		outputText("\n\n\"<i>Yes, [Master], I do,</i>\" she says, slightly louder and straightening her back.  You smile softly.  Such a good girl.");
 	}
 	menu();
-	if(flags[TIMES_RIDDEN_KELLY_FOR_PUNISHMENT] > 0 && player.statusAffectv1("Tel'Adre") < 1) {
+	if(flags[kFLAGS.TIMES_RIDDEN_KELLY_FOR_PUNISHMENT] > 0 && player.statusAffectv1("Tel'Adre") < 1) {
 		outputText("You'd like to take Kelly for a ride, but you don't have any good ideas for public places to humiliate her.");
 	}
 	else addButton(1,"Ride",rideKellyForPunishment);
@@ -1065,7 +1065,7 @@ public function getARimjobFromKelly():void {
 	var x:int = player.cockThatFits(300);
 	if(x < 0) x = player.smallestCockIndex();
 	clearOutput();
-	flags[TIMES_RIM_JOBBED_BY_KELLY]++;
+	flags[kFLAGS.TIMES_RIM_JOBBED_BY_KELLY]++;
 	outputText("\"<i>You aren't worthy of my dick,</i>\" you say, as you slowly peel off your [armor]; you do it facing away from Kelly so that she can take in your [butt] as you slowly wriggle free of your underclothing.  \"<i>But I still need servicing.  So...</i>\"");
 	
 	//[Naga: 
@@ -1112,7 +1112,7 @@ public function getARimjobFromKelly():void {
 	outputText("\n\nYou give three final thrusts against Kelly's face to work out every last drop and then, spent, you slowly pull away, spit trailing from your ass to your slave's lips.  You insouciantly flare your cheeks in front of her after she has withdrawn, waiting, and grin when you feel a hesitant lick against one.  You turn around to take a good look at her.  She is panting for breath, her pupils dilated as she stares back up at you; her own arousal, of course, is unabated.  Finally, she finds some words.");
 	
 	//[First time: 
-	if(flags[TIMES_RIM_JOBBED_BY_KELLY] == 1) {
+	if(flags[kFLAGS.TIMES_RIM_JOBBED_BY_KELLY] == 1) {
 		outputText("\n\nTh- thank you for the lesson, [Master],</i>\" she says.  You shake your head, smiling at her ignorance.");
 		
 		outputText("\n\n\"<i>That wasn't the lesson.</i>\"  You wave at the rivulets of your own cum in front of you casually.  ");
@@ -1136,9 +1136,9 @@ public function rideKellyForPunishment():void {
 	var x:int = player.cockThatFits(300);
 	if(x < 0) x = player.smallestCockIndex();
 	clearOutput();
-	flags[TIMES_RIDDEN_KELLY_FOR_PUNISHMENT]++;
+	flags[kFLAGS.TIMES_RIDDEN_KELLY_FOR_PUNISHMENT]++;
 	//First Time: 
-	if(flags[TIMES_RIDDEN_KELLY_FOR_PUNISHMENT] == 1) 
+	if(flags[kFLAGS.TIMES_RIDDEN_KELLY_FOR_PUNISHMENT] == 1) 
 	{
 		outputText("You stroke Kelly's side thoughtfully.  What would be a good punishment for a centaur? Several ideas immediately occur, but all require... equipment.  You tap your chin as a plan of action falls into place.");
 		//[PC is 6'5</i>\" or less, not a centaur:
@@ -1150,11 +1150,11 @@ public function rideKellyForPunishment():void {
 			//[Drider:]
 			else if(player.isDrider()) outputText("  Your spider half is hardly ideal for riding a horse but eventually you reach a happy compromise; you perch upon her with your long, chitinous legs wrapped carefully around her barrel-like lower body.  You must look utterly bizarre but feel reasonably comfortable.");
 			outputText("  You lean in close to her human half and wrap your arms around her waist, drinking in the sweet scent of her pale skin; you know your own smell and power is pressing upon her senses and she whimpers softly as you slide your hands up her stomach until they are clutching her ");
-			if(flags[KELLY_BONUS_TIT_ROWS] > 0) outputText("top row of ");
+			if(flags[kFLAGS.KELLY_BONUS_TIT_ROWS] > 0) outputText("top row of ");
 			outputText("breasts.");
 			
 			outputText("\n\n\"<i>All right, pony slut,</i>\" you sigh into her ear.  \"<i>I want you to ride us to the farm.  You remember where that is, don't you?  It's where I taught you who you really are.  We're going to learn some more lessons there.  Won't that be fun? Go gently because...</i>\" you grip her breasts tighter, squeezing her nipples between your fingers");
-			if(flags[KELLY_LACTATING] > 0) outputText(" hard enough to produce thin arcs of milk");
+			if(flags[kFLAGS.KELLY_LACTATING] > 0) outputText(" hard enough to produce thin arcs of milk");
 			outputText(".  The centauress gasps, her breath already ragged. \"<i>...I've got to hold onto something.  Now, giddy up!</i>\" Kelly jolts into action, stumbles slightly at the extra weight, before righting and trotting in the direction of the farm; you keep yourself steady by maintaining a firm grip upon her breasts.");
 			//[PC is riding: 
 			outputText("\n\nAlthough it's only a short trip, your [butt] is plenty sore by the time you get to the farm, and you KNOW you're going to need better equipment if you're to do this properly.  You bring Kelly to a halt with a \"<i>woah there</i>\" and a tug upon her ponytail.  Then, you leave her behind the barn as you search the barn for what you need, hoping Whitney doesn't find you.");
@@ -1165,9 +1165,9 @@ public function rideKellyForPunishment():void {
 			outputText("\n\nYou consider for a moment making her ride you where you need to go; but no, your size makes that impossible.  Instead you sigh and slide an arm around her waist, breathing in her sweet scent.");
 			
 			outputText("\n\n\"<i>You're useless to me as a steed,</i>\" you breathe into her ear, knowing your own smell and power are inundating her senses.  The centauress's breath comes ragged as your hand slides up and down her front, across her smooth stomach to lazily cup a breast and hold a nipple.  ");
-			if(flags[KELLY_LACTATING] > 0) 
+			if(flags[kFLAGS.KELLY_LACTATING] > 0) 
 			{
-				if(flags[KELLY_BONUS_TIT_ROWS] > 0) outputText("All four of h");
+				if(flags[kFLAGS.KELLY_BONUS_TIT_ROWS] > 0) outputText("All four of h");
 				else outputText("H");
 				outputText("er swollen teats immediately begin to dribble milk, and she moans.  ");
 			}
@@ -1238,7 +1238,7 @@ public function rideKellyForPunishment():void {
 		//(\"<i>Horsewhip</i>\" option opened in main \"<i>Punish</i>\" menu)
 	}
 	//First repeat: 
-	else if(flags[TIMES_RIDDEN_KELLY_FOR_PUNISHMENT] == 2) {
+	else if(flags[kFLAGS.TIMES_RIDDEN_KELLY_FOR_PUNISHMENT] == 2) {
 		outputText("Without another word, you stride over to the stones underneath which you secreted the riding gear.  Kelly watches you with deep apprehension, and then bursts into protests as you return, carrying the heap of clinking leather and metal.");
 		
 		outputText("\n\n\"<i>No, [Master] please no, I don't want that, I've learnt my lesson, I'll be good for now on, punish me any way you see fit but not that...</i>\"");
@@ -1246,7 +1246,7 @@ public function rideKellyForPunishment():void {
 		outputText("\n\n\"<i>Shush now, ass,</i>\" you say calmly; the epithet immediately silences her. \"<i>This is for your own good, you know that.  Hard lessons are the best lessons, and you will thank me for it later.  Now stay still.</i>\"  She sets her jaw and does as you ask; you soothingly remark upon her bravery as you equip her as you did before, saddle, stirrups, harness, blinkers and bit, before firmly binding her arms behind her back.  You've got an extra treat for her this time, though.  You rummage around in the saddlebags and then lift them up so she can see them in her limited sightline, and her eyes widen.");
 		
 		outputText("\n\n\"<i>I think they were originally supposed to fixed upon a mantle for festivals or something,</i>\" you say conversationally, as you fix the pink tassels to each of her erect nipples. \"<i>But as you can see... they fit upon a slut's fuck pillows perfectly well.");
-		if(flags[KELLY_BONUS_TIT_ROWS] > 0) outputText("  Just as well there were four of them, eh?");
+		if(flags[kFLAGS.KELLY_BONUS_TIT_ROWS] > 0) outputText("  Just as well there were four of them, eh?");
 		outputText("</i>\" You step back to admire the effect.  Kelly stares back at you behind her leather straps and ball gag, her tasselled boobs forced outwards by her arms bound behind her back.  You laugh and stroke her face; she closes her eyes and bends into it, enjoying the simple motion of her [Master]'s hand.");
 		
 		outputText("\n\n\"<i>You look so adorable like that,</i>\" you say.  \"<i>But it's no good if only I can see you, is it?</i>\"  She opens her eyes wide to that.");
@@ -1371,7 +1371,7 @@ public function takeKellysVirginity():void {
 	if(x < 0) x = player.smallestCockIndex();
 	
 	outputText("You tell Kelly that you intend to come claim the prize you broke her for - her virgin ");
-	if(flags[KELLY_CUNT_TYPE] == 1) outputText("horse-");
+	if(flags[kFLAGS.KELLY_CUNT_TYPE] == 1) outputText("horse-");
 	outputText("cunt.");
 	
 	outputText("\n\nThe female centaur fidgets nervously, her hoof pawing at the dirt indecisively, her hands wringing. \"<i>Will it hurt?</i>\" she asks.  Her body shudders nervously, shaking her large, pert breasts enticingly.  Confidently, you place your hand on her arm and give a reassuring squeeze.");
@@ -1381,15 +1381,15 @@ public function takeKellysVirginity():void {
 	outputText("\n\nYou command, \"<i>Lie down on your flank.  I don't want your legs going out on me mid-fuck once you realize how good being my breeding bitch can be.</i>\"");
 	
 	outputText("\n\nNodding meekly, Kelly lowers herself to the ground and flops onto her side with an absolute lack of grace.   Her tail curls up behind her back in order to expose her ");
-	if(flags[KELLY_CUNT_TYPE] == 1) outputText("lust-swollen, black-lipped fuck-hole");
+	if(flags[kFLAGS.KELLY_CUNT_TYPE] == 1) outputText("lust-swollen, black-lipped fuck-hole");
 	else outputText("blooming, pink-tinged pussy");
 	outputText(" to your roving eyes.  She asks, \"<i>Is th-th-this good, [Master]?</i>\"");
 	
 	outputText("\n\nYou kneel behind her, pushing a thumb into that slick entrance, testing it, rubbing in tiny circles, admiring the webs of moist lubricant that hang across that entrance as you slowly accustom it to penetration.  Kelly begins to make quiet sounds of pleasure, little \"<i>Ahhhs</i>\" and \"<i>Oooohs</i>\" that leave no doubt as to her state.  Her clitty quickly grows erect from your attentions, a taut bud that makes her moan whenever you brush a wet digit across it.  Her steamy hole is soon as ready as your thumb can make it, so you switch to inserting your middle and index fingers into the juicy slit, spreading her entrance around the dual intruders.  She whimpers as you forcibly open her, dilating her sodden");
-	if(flags[KELLY_CUNT_TYPE] == 1) outputText(", equine");
+	if(flags[kFLAGS.KELLY_CUNT_TYPE] == 1) outputText(", equine");
 	outputText(" cunt until her hymen is easily visible.  You rub every sensitive fold that you can get to");
 	
-	if(flags[KELLY_CUNT_TYPE] == 1) outputText(", taking time to squeeze her plush, onyx vulva teasingly.  Kelly whinnies in response, overtaken by her potent equine instincts.");
+	if(flags[kFLAGS.KELLY_CUNT_TYPE] == 1) outputText(", taking time to squeeze her plush, onyx vulva teasingly.  Kelly whinnies in response, overtaken by her potent equine instincts.");
 	else outputText(", taking time to fondle her slick labia.  Kelly moans in response, overtaken by the sensations you're forcing through her.");
 	
 	outputText("\n\n\"<i>You like that, don't you, cunt?</i>\" you ask, still molesting your equestrian toy with faster strokes.");
@@ -1412,7 +1412,7 @@ public function takeKellysVirginity():void {
 	if(player.cockArea(x) <= 300)
 	{
 		outputText(", nestling your [sheath] up against her ");
-		if(flags[KELLY_CUNT_TYPE] == 1) outputText("plump, equine cunt-lips");
+		if(flags[kFLAGS.KELLY_CUNT_TYPE] == 1) outputText("plump, equine cunt-lips");
 		else outputText("slippery, pink cunt-lips");
 	}
 	else outputText(", pressing your " + cockHead(x) + " up against the barrier her cervix makes");
@@ -1434,12 +1434,12 @@ public function takeKellysVirginity():void {
 	}
 	
 	outputText("\n\nYou pull out with a self-satisfied sigh, admiring ");
-	if(flags[KELLY_CUNT_TYPE] == 0) outputText("the redness of her well-used cunt.");
+	if(flags[kFLAGS.KELLY_CUNT_TYPE] == 0) outputText("the redness of her well-used cunt.");
 	else outputText("the shining juices that drip from her oh-so-equine entrance, gilding the smooth onyx lips with a slimey sheen.");
 	outputText("  Kelly has passed out in a puddle of her own making, and you leave her like that, getting dressed without a backwards glance.");
 	kellyPreggers();
 	stats(0,0,0,0,0,-3,-100,.5);
-	flags[KELLY_VAGINALLY_FUCKED_COUNT]++;
+	flags[kFLAGS.KELLY_VAGINALLY_FUCKED_COUNT]++;
 	doNext(13);
 }
 
@@ -1448,7 +1448,7 @@ public function takeKellysVirginity():void {
 public function giveKellyAPepper():void {
 	clearOutput();
 	//First: 
-	if(flags[KELLY_TIMES_PEPPERED] == 0) {
+	if(flags[kFLAGS.KELLY_TIMES_PEPPERED] == 0) {
 		outputText("You instruct Kelly to open wide; you've got something that will allow her to serve her master even better.  You imagine she once saw Whitney farm these things, but if your centauress slave knows its properties she doesn't show it; dutifully she opens her mouth, making an \"<i>aaaaaaah</i>\" noise until you pop the glossy red fruit onto her tongue.  You stand back and watch as she munches thoughtfully and then swallows.");
 		
 		outputText("\n\n\"<i>S'quite nice.  Spicy.  I don't know what it's supposed to do th-oh.  Ohhhh...</i>\" She closes her eyes and moans as flesh burgeons and balloons underneath her tits.  Nubs form in the softness and then darken, leaving her finally with a second row of breasts- smaller than her first but still at least C cups.  You smirk and take a few steps back and forth to properly take in her new curves; the soft obscenity of it is perfect for a slaveslut like her, and [eachCock] begins to harden at the thought of sliding it between those four pillows.");
@@ -1458,14 +1458,14 @@ public function giveKellyAPepper():void {
 		outputText("\n\n\"<i>[Master], please...</i>\" she moans.  You draw into her, cup one of her new breasts and gently play with a nipple until you can hear the steady drip of her pussy juices on the dirt behind her, before saying maybe later; she needs to get used to her new body and you don't have time to satisfy the needs of a slut right now.  You turn and leave with a satisfied smile, the sound of the fitful hooves and whimper of a centaur impossibly turned on and incapable of doing anything about it in your ears.");
 		//[Second row of breasts added]
 		//[Kelta 15% more likely to conceive for 2 days]
-		flags[KELLY_BONUS_BOOB_ROWS] = 1;
-		flags[KELLY_HEAT_TIME] = 48;
+		flags[kFLAGS.KELLY_BONUS_BOOB_ROWS] = 1;
+		flags[kFLAGS.KELLY_HEAT_TIME] = 48;
 	}
 	//Repeat:
 	else {
 		outputText("You grin and dangle the pepper in front of Kelly's face wordlessly.  The centauress knows what's coming and color spreads across her cheeks; however, she still opens wide and accepts the \"<i>gift</i>\", chewing slowly and swallowing.");
 		//If no second row:
-		if(flags[KELLY_BONUS_BOOB_ROWS] == 0) {
+		if(flags[kFLAGS.KELLY_BONUS_BOOB_ROWS] == 0) {
 			outputText("\n\nShe closes her eyes and moans as flesh burgeons and balloons underneath her tits.  Nubs form in the softness and then darken, leaving her finally with a second row of breasts- smaller than her first but still at least C cups.  You smirk and take a few steps back and forth to properly take in her new curves; the soft obscenity of it is perfect for a slaveslut like her and [eachCock] begins to harden at the thought of sinking it between those four pillows.");
 			outputText("\n\nThe tits aren't the only thing the pepper has done to Kelly.  As her hands roam uncertainly over her new anatomy her breath comes in short gasps, her eyes lock upon you, even more filled with helpless lust than usual.  You can practically smell the pheromones radiating off her; she has gone into heat.");
 			
@@ -1477,9 +1477,9 @@ public function giveKellyAPepper():void {
 			outputText("\n\n\"<i>[Master], please fuck me,</i>\" she whimpers. \"<i>Fuck me until I can't walk anymore, fuck me until all I can taste is your essence, I need your seed anyway and being like this... this... is unbearable.</i>\" You laugh and rub her flank, telling her she's so cute when she's desperate and who knows? If she's a good girl you might deign to meet her request.  You turn and leave.");
 			//[Kelta 15% more likely to conceive for 2 days]
 		}
-		flags[KELLY_HEAT_TIME] += 48;
+		flags[kFLAGS.KELLY_HEAT_TIME] += 48;
 	}
-	flags[KELLY_TIMES_PEPPERED]++;
+	flags[kFLAGS.KELLY_TIMES_PEPPERED]++;
 	consumeItem("CanineP",1);
 	doNext(13);
 }
@@ -1492,12 +1492,12 @@ public function kellyTitJob():void {
 	
 	var x:int;
 	
-	if(flags[KELLY_BONUS_BOOB_ROWS] == 0) x = player.cockThatFits(18,"length");
+	if(flags[kFLAGS.KELLY_BONUS_BOOB_ROWS] == 0) x = player.cockThatFits(18,"length");
 	else x = player.biggestCockIndex();
 	
 	outputText("As Kelly eagerly trots towards you your eyes are naturally drawn to her breasts, bouncing gently with her swaying canter.  They are just slightly too big and pert to be of non-demonic origin; every step she takes makes them palpitate, her fat, tan curves dancing for you in the sunlight, her erect nipples begging to be touched and teased");
 	//[Lactation:
-	if(flags[KELLY_INCUBATION] > 0) outputText(", glittering beads of milk flicking here and there as she advances");
+	if(flags[kFLAGS.KELLY_INCUBATION] > 0) outputText(", glittering beads of milk flicking here and there as she advances");
 	outputText(".  The weight of them must be a constant reminder to her of the obscene changes you have wrought upon her body, of the deep need you have implanted into her mind, of the fact she is shaped the way she is because you have willed it.  Your " + cockDescript(x) + " is straining against your [armor] by the time Kelly has come to a halt in front of you, her lips parting and her nipples hardening even further as she pushes into your aura.  She grins coquettishly when she sees where you're staring, turning her eyes downwards and then slowly back to yours.");
 	outputText("\n\n\"<i>Does [Master] see something " + player.mf("he","she") + " likes?</i>\" There is no question in your lust reddened mind of how you're going to satisfy yourself.");
 	
@@ -1506,12 +1506,12 @@ public function kellyTitJob():void {
 	//Dick 17 inches or less:
 	if(player.cocks[x].cockLength <= 18) {
 		outputText("\n\nYou hold her by the shoulders and begin to move your " + cockDescript(x) + " up and down her valley, sighing as Kelly clasps her breasts and squashes her softness into your length, encapsulating it in her warm, yielding flesh.  Pre leaks from your tip to the shifting, pillowy pleasure inundating your hard cock, slicking Kelly's tender skin with your scent and providing you with the lubrication you need to pick up the pace.  The centauress coos as you grip her harder and begin to fuck her pillows, her eyes closed as she is swallowed by your presence and feral smell, each second you spend using her like this making her more and more sensitive and pliant to your touch.  She is an expert by now at servicing you; as you thrust into her she rolls her wrists so that your dick is caught in gentle boobquakes, her breasts pressing tightly upon your prick from all angles one second and then pulling away the next, pressing in like the tightest pussy imaginable and then pulling away to leave nothing but yielding softness...");
-		if(flags[KELLY_INCUBATION] > 0) outputText("\n\nThe constant drizzle of milk expressing from her engorged nipples is too delicious to leave alone; you force yourself to stop your rut for a moment to tweak her damp, brown nubs, rubbing and then pressing them firmly between thumb and forefinger until her deep sighs turn into throaty moans.  You gently rub your " + cockDescript(x) + " over the milky streams you've caused to run down her front in rivulets, coating it in warm whiteness before sliding back into her valley.  The added lubrication make her glisteningly wet orbs practically frictionless; you growl at the slippery, encompassing warmth, fucking her now for all your worth whilst her fingers replace yours on her nipples, her mouth open in ecstasy as she replicates the sensation you pressed upon her, squeezing thin streams of milk everywhere.");
+		if(flags[kFLAGS.KELLY_INCUBATION] > 0) outputText("\n\nThe constant drizzle of milk expressing from her engorged nipples is too delicious to leave alone; you force yourself to stop your rut for a moment to tweak her damp, brown nubs, rubbing and then pressing them firmly between thumb and forefinger until her deep sighs turn into throaty moans.  You gently rub your " + cockDescript(x) + " over the milky streams you've caused to run down her front in rivulets, coating it in warm whiteness before sliding back into her valley.  The added lubrication make her glisteningly wet orbs practically frictionless; you growl at the slippery, encompassing warmth, fucking her now for all your worth whilst her fingers replace yours on her nipples, her mouth open in ecstasy as she replicates the sensation you pressed upon her, squeezing thin streams of milk everywhere.");
 		outputText("  Her expression is one of deep concentration and as you quicken the pace and thrust further upwards she bends her chin down to lick at your head as it presents itself between her pressed together tits.");
 	
 		outputText("\n\n\"<i>Ooh...</i>\" she moans as she rolls her tongue around her mouth. \"<i>Why do you taste so godsdamn good, [Master]?</i>\" You are too busy to reply; your cock bulging now with real need you thrust your cock between her cleavage with all you've got, lost to everything but that sleeve of hot, wet flesh.");
 		//[Kelly has four tits:
-		if(flags[KELLY_BONUS_BOOB_ROWS] > 0) {
+		if(flags[kFLAGS.KELLY_BONUS_BOOB_ROWS] > 0) {
 			outputText("\n\nYour [hips] press upon the softness of her lower pair of tits; it dimly occurs to you what a fine idea growing a few extra inches of dickmeat to take full advantage of the shape of your centauress slave might be.");
 		}
 		outputText("\n\nKelly's tongue flicks intermittently over your head and she moves her boobs up and down briskly, rubbing your dick in an alternating motion as you thrust yourself upwards to a body-seizing high.  Sweat beads your brow and you throw your head back as you cum; your ears are full of the slippery sound of prick against boob and the ecstatic, muffled sounds Kelly makes as she opens her mouth wide and swallows your first load whole.  Your seed rises upwards and outwards and you ride your pulsing orgasm, thrusting your [hips] with each surge to blast your slave with jizz.");
@@ -1525,7 +1525,7 @@ public function kellyTitJob():void {
 		outputText("\n\n\"<i>So that's why you made me grow four of them!</i>\" Of course, you say; your slaves have to be suitably shaped to be able to properly service a [Master] as mighty as you.  Now, you say as you hold her by the shoulders and begin to move your " + cockDescript(x) + " up and down her long, twin valley, hush and properly attend to your cumslut duties.");
 		outputText("\n\nYou sigh as Kelly obediently clasps her top breasts and squashes her softness into your length, encapsulating it in her warm, yielding flesh.  You clasp her bottom boobs and do the same; whilst not as big as her first row, there is still more than enough plush fatness there to wrap your girth in warmth.  Pre leaks from your tip to the shifting, pillowy pleasure inundating your hard cock, slicking Kelly's tender skin with your scent; you slowly pull your " + cockDescript(x) + " all the way down and then up again, ensuring the full valley is given the lubrication you need to pick up the pace.  The centauress coos as you grip her harder and begin to fuck her pillows, her eyes closed as she is swallowed by your presence and feral smell, each second you spend using her like this making her more and more sensitive and pliant to your touch.");
 		outputText("\n\nShe is an expert by now at servicing you; as you thrust into her she rolls her wrists so that your dick is caught in gentle boobquakes, her breasts pressing tightly upon your prick from all angles one second and then pulling away the next, pressing in like the tightest pussy imaginable and then pulling away to leave nothing but yielding softness... you try and mimic the movement with the boobs you are holding, but you simply don't have the experience at serving your prick that she does; the base of your totem-like cock is caught in soft, savage kneading whilst your more sensitive top half is being treated to a mercurial, gentle massage.");
-		if(flags[KELLY_INCUBATION] > 0) outputText("\n\nThe constant drizzle of milk expressing from her engorged nipples is too delicious to leave alone; you force yourself to stop your rut for a moment to tweak her damp, brown nubs, rubbing and then pressing them firmly between thumb and forefinger until her deep sighs turn into throaty moans.  You gently rub your " + cockDescript(x) + " over the milky streams you've caused to run down her front in rivulets, running it over all four of her tits until it is coated with warm whiteness, before sliding back into her obscene valley.  The added lubrication make her glisteningly wet orbs practically frictionless; you growl at the slippery, encompassing warmth, fucking her now for all your worth whilst her fingers replace yours on her nipples, her mouth open in ecstasy as she replicates the sensation you pressed upon her, squeezing thin streams of milk everywhere.");
+		if(flags[kFLAGS.KELLY_INCUBATION] > 0) outputText("\n\nThe constant drizzle of milk expressing from her engorged nipples is too delicious to leave alone; you force yourself to stop your rut for a moment to tweak her damp, brown nubs, rubbing and then pressing them firmly between thumb and forefinger until her deep sighs turn into throaty moans.  You gently rub your " + cockDescript(x) + " over the milky streams you've caused to run down her front in rivulets, running it over all four of her tits until it is coated with warm whiteness, before sliding back into her obscene valley.  The added lubrication make her glisteningly wet orbs practically frictionless; you growl at the slippery, encompassing warmth, fucking her now for all your worth whilst her fingers replace yours on her nipples, her mouth open in ecstasy as she replicates the sensation you pressed upon her, squeezing thin streams of milk everywhere.");
 		outputText("  Her expression is one of deep concentration and as you quicken the pace and thrust further upwards she bends her chin to lick at your head as it presents itself between her pressed together tits.");
 		outputText("\n\n\"<i>Ooh...</i>\" she moans as she rolls her tongue around her mouth. \"<i>Why do you taste so godsdamn good, [Master]?</i>\" You are too busy to reply; your cock bulging now with real need you thrust your cock between her extensive cleavage with all you've got, lost to everything but that sleeve of hot, wet flesh.  Kelly's tongue flicks intermittently over your head and she moves her boobs up and down briskly, rubbing your dick in an alternating motion.  You squeeze her bottom row brutally hard, making her gasp as you thrust yourself upwards to a body-seizing high.  Sweat beads your brow and you throw your head back as you cum; your ears are full of the slimy sound of prick against boob and the ecstatic, muffled sounds Kelly makes as she opens her mouth wide and swallows your first load whole.  Your seed rises upwards and outwards and you ride your pulsing orgasm, thrusting your [hips] with each surge to blast your slave with jizz.");
 		if(player.cumQ() < 250) outputText("\n\nWhen you have finally emptied yourself, you sigh and step back to admire your handiwork.  You've given her a pretty impressive facial, her brow and cheeks splattered with your cream; however what is in range of her tongue is quickly disappearing.\n\n\"<i>Mmm... thank you for the load, [Master]!</i>\" she says, contented pleasure glittering in her eyes as she guides another oozing dollop of addiction down her throat.  You tell her she's quite welcome as you use her braid to wipe your dick clean, climb back into your [armor], and leave her to enjoy her fix.");
@@ -1540,12 +1540,12 @@ public function kellyTitJob():void {
 //Preggers
 /*Chance for Kelta to be pregnant is 1% for every 20 mL, capping at 80%.*/
 public function kellyPreggers():void {
-	if(flags[KELLY_INCUBATION] > 0) return;
+	if(flags[kFLAGS.KELLY_INCUBATION] > 0) return;
 	var x:int = Math.round(player.cumQ() / 20);
 	if(x > 80) x = 80;
-	if(flags[KELLY_HEAT_TIME] > 0) x += 15;
+	if(flags[kFLAGS.KELLY_HEAT_TIME] > 0) x += 15;
 	if(rand(100) + 1 <= 80) {
-		flags[KELLY_INCUBATION] = 336;
+		flags[kFLAGS.KELLY_INCUBATION] = 336;
 		trace("Kelly knocked up.");
 	}
 }
@@ -1555,7 +1555,7 @@ public function kellyPreggers():void {
 public function kellyPregSex():void {
 	clearOutput();
 	var x:int;
-	if(flags[KELLY_CUNT_TYPE] == 1) x = player.biggestCockIndex();
+	if(flags[kFLAGS.KELLY_CUNT_TYPE] == 1) x = player.biggestCockIndex();
 	else x = player.cockThatFits(300);
 	if(x < 0) x = player.smallestCockIndex();
 	outputText("Maybe because of her pregnancy, the slut seems to release even more powerful scents out of her slick pussy; you actually have a clear view of her wide, parted lips exuding sexual musk.  You want to take her right now, right there, and deposit on her unborn offspring the load they truly deserve.  As if it weren't enough, Kelly is releasing copious amount of juices and whinnies meekly from time to time, as if her pregnancy makes her uneasy and she needs a big fat cock to release her tension.");
@@ -1595,15 +1595,15 @@ public function kellyPopsOutARunt():void {
 	outputText("\n\nSatisfied to see your offspring will grow strong and healthy for you, you pat Kelly's head, tell her she's a good breeding slut and walk away; the motherly centaur sighs at the compliment.  \"<i>Thank you, [name]!  You were right, this really is my place, being used and breeding beautiful sluts for you.  I hope you will treat them as well as you treated me!</i>\"");
 	//[if corr > 80]
 	if(player.cor > 80) outputText("\n\nYou grin as vivid pictures of how you'll be treating your soon-to-be-grown kids draw themselves in your mind. Right now they're still a little young, but someday...\n");
-	flags[KELLY_FIRST_KID_GENDER] = gender;
-	flags[KELLY_KIDS]++;
+	flags[kFLAGS.KELLY_FIRST_KID_GENDER] = gender;
+	flags[kFLAGS.KELLY_KIDS]++;
 }
 
 //Talk n Hand
 public function talkNHandToKelly():void {
 	clearOutput();
 	//First: You tell her you'd just like to talk.
-	if(flags[KELLY_TALK_N_HAND_TIMES] == 0) {
+	if(flags[kFLAGS.KELLY_TALK_N_HAND_TIMES] == 0) {
 		outputText("\"<i>Talk?  Oh, that's the least interesting thing I can do with my mouth, [Master],</i>\" Kelly purrs.  That may be, you say, but she can amuse you with her hands whilst she amuses you with her voice.  The centaur gets the picture and grins.  ");
 		//Not Centaur: 
 		if(!player.isTaur()) {
@@ -1636,7 +1636,7 @@ public function talkNHandToKelly():void {
 			else outputText("a warm hand wraps around first your [cock] and then your [cock 2] before beginning to gently tug, both quickly hardening from the pleasing coils of friction.");
 		}
 	}
-	flags[KELLY_TALK_N_HAND_TIMES]++;
+	flags[kFLAGS.KELLY_TALK_N_HAND_TIMES]++;
 	//(Randomly generated)
 	var temp:int = rand(5);
 	//1.
@@ -1705,7 +1705,7 @@ public function talkNHandToKelly():void {
 		outputText("\n\nYou want to concentrate on what she's saying but it's difficult when you're champing at the bit, your cock bulging urgently in Kelly's deliberately gentle wringing grasp.  Perhaps guessing this, the centaur goes quiet and begins to pump you hard, jerking you unrelentingly until you blow your load, sweat beading your brow as you spurt cum everywhere, your tensing, flexing orgasm going on for what seems like minutes.  It's a generous payload and Kelly makes appreciative noises as she licks up what hangs from [eachCock] when you're done.  In a husk you ask what happened after that.");
 		
 		outputText("\n\n\"<i>Well, you know most of the rest [Master],</i>\" she says, smacking her lips.  \"<i>I had to feed two breeding mares and my growing brood, and I already knew hunting on my own barely allowed just one centaur to get by, so eventually I fetched up with Whitney, who paid me to guard her farm.  And then I met you, who broke my aura and showed me who I truly was.</i>\"  She looks at you reverently.  \"<i>I was a miserable bastard, you know that?  Even when I was in charge of my tribe, I was miserable.  Now, worshipping your [cocks]");
-		if(flags[KELLY_KIDS] > 0) outputText(" and bearing and raising your children");
+		if(flags[kFLAGS.KELLY_KIDS] > 0) outputText(" and bearing and raising your children");
 		outputText(", I'm a hundred times happier.  I just used a demon's curse to get my way - you did it all on your own.  You showed me what true strength and dominance is, [Master]!</i>\"");
 		
 		outputText("\n\nYou should probably take a mind-broken cumslut's praise with a pinch of salt, but you do feel a glow of gratification which reaches beyond your groin.  You give your loyal servant a kiss on the cheek, dress yourself, and head back to camp.");
@@ -1729,10 +1729,10 @@ public function talkNHandToKelly():void {
 //Reward
 //Requirements: PC used “punish” at least once, 3+ days have gone by and “punish” has not proced*
 public function rewardKelly():void {
-	flags[KELLY_REWARD_COOLDOWN] = 1;
+	flags[kFLAGS.KELLY_REWARD_COOLDOWN] = 1;
 	clearOutput();
 	//First time: 
-	if(flags[KELLY_TIMES_REWARDED] == 0) {
+	if(flags[kFLAGS.KELLY_TIMES_REWARDED] == 0) {
 		outputText("There seems to be an added bounce to Kelly's canter today.  She prances a bit playfully in front of you, grinning, whipping her demonic tail so that the high, sweet smell of her gushing pussy is in the air.  You realise she is calling your attention to her backside, which is unmarked.");
 		outputText("\n\n\"<i>I've been good, [Master].  So very, very... good.</i>\"  Color is high in her cheeks, and although she's smiling proudly there is real desperation burning in her green eyes as she gazes at you.  \"<i>We'll fuck now, right?  It's so hard being good.  After a while I can't think of anything but your cock and how wonderful it tastes and feels.  Last night it was so bad I blew my own fingers thinking about you...</i>\"  She demonstrates graphically.  \"<i>But I didn't cum.  I've learnt my lesson [Master], now please fuck me!</i>\"");
 		outputText("\n\nIt's difficult not to laugh at this earnest outpouring, and yet you can't help but feel a fond glow for your centaur slave, who has fought against her slutty nature to keep herself locked into a constant state of burning arousal just to please you.  Maybe it's time for a bit of kind [Master]-ing and provide her with some sort of reward, aside from fucking her rotten.");
@@ -1742,18 +1742,18 @@ public function rewardKelly():void {
 		outputText("Kelly holds her head up proudly as you inspect her, running your hand slowly over her backside.   It's nice and smooth.  You smile at her benevolently and tell her that since she's been such a good cumslut, you're going to reward her.  She claps excitedly.");
 		outputText("  \"<i>Hurray!</i>\"");
 	}
-	flags[KELLY_TIMES_REWARDED]++;
+	flags[kFLAGS.KELLY_TIMES_REWARDED]++;
 	//*Don't know how the current “punish” system works so leave the function up to you.  Ideally each option should turn up 50% of the time after first punish
 	
 	menu();
 	//Hair Dye/Apple Sauce
 	//[chestnut brown/sable black/garish purple/bright pink/slutty blonde) 
 	if(player.cockThatFits(300) >= 0 && player.hasCock()) addButton(0,"Applesauce",giveKellyAppleSauce);
-	if(hasItem("Black D",1) && flags[KELLY_HAIR_COLOR] != "sable black") addButton(1,"BlackDye",dyeKellysBitchAssHair,"Black D");
-	if(hasItem("Blond D",1) && flags[KELLY_HAIR_COLOR] != "slutty blonde") addButton(2,"BlondDye",dyeKellysBitchAssHair,"Blond D");
-	if(hasItem("PurpDye",1) && flags[KELLY_HAIR_COLOR] != "garish purple") addButton(3,"PurpleDye",dyeKellysBitchAssHair,"PurpDye");
-	if(hasItem("PinkDye",1) && flags[KELLY_HAIR_COLOR] != "bright pink") addButton(4,"PinkDye",dyeKellysBitchAssHair,"PinkDye");
-	if(hasItem("Brown D",1) && flags[KELLY_HAIR_COLOR] != "chestnut brown") addButton(5,"BrownDye",dyeKellysBitchAssHair,"Brown D");
+	if(hasItem("Black D",1) && flags[kFLAGS.KELLY_HAIR_COLOR] != "sable black") addButton(1,"BlackDye",dyeKellysBitchAssHair,"Black D");
+	if(hasItem("Blond D",1) && flags[kFLAGS.KELLY_HAIR_COLOR] != "slutty blonde") addButton(2,"BlondDye",dyeKellysBitchAssHair,"Blond D");
+	if(hasItem("PurpDye",1) && flags[kFLAGS.KELLY_HAIR_COLOR] != "garish purple") addButton(3,"PurpleDye",dyeKellysBitchAssHair,"PurpDye");
+	if(hasItem("PinkDye",1) && flags[kFLAGS.KELLY_HAIR_COLOR] != "bright pink") addButton(4,"PinkDye",dyeKellysBitchAssHair,"PinkDye");
+	if(hasItem("Brown D",1) && flags[kFLAGS.KELLY_HAIR_COLOR] != "chestnut brown") addButton(5,"BrownDye",dyeKellysBitchAssHair,"Brown D");
 	
 	addButton(9,"Back",approachKelly);
 }
@@ -1764,15 +1764,15 @@ public function dyeKellysBitchAssHair(color:String = ""):void {
 	clearOutput();
 	outputText("You tell her you've brought her a gift as you rummage around in your pockets.  Kelly looks apprehensive but pleasant surprise forms on her face when she catches the small vial of dye you throw at her.");
 	outputText("\n\n\"<i>Oh wow, thanks [Master]! It's been ages since I did my hair.");
-	if(flags[KELLY_TIMES_DIED_HAIR] == 0) {
+	if(flags[kFLAGS.KELLY_TIMES_DIED_HAIR] == 0) {
 		outputText("</i>\"\n\nShe stops and thinks.  \"<i>In fact, I don't think I've ever done my hair.  ");
 	}
 	outputText("This'll be so much fun!</i>\"  You walk over to the barn with her and pour some water into a wide bucket.  She lets down her braid and you spend a pleasant quarter of an hour or so helping her work the sharp-smelling substance into her long, luscious hair.  When you're done, you step back to admire the effect.  Amazingly the colour is not only sinking into her hair but also into her tail, her demon spade slowly bleaching with the hue you chose.");
-	flags[KELLY_TIMES_DIED_HAIR]++;
+	flags[kFLAGS.KELLY_TIMES_DIED_HAIR]++;
 	//Black dye:
 	if(color == "Black D") {
 		outputText("\n\nKelly whips her jet black hair to look at it, trotting back and forth and considering, swishing her equally black tail.\n\n\"<i>Mmm.  Not sure how much I like this, [Master],</i>\" she says eventually.  \"<i>It's very... severe, isn't it?</i>\"  You say you picked it because you think it will contrast well with the substance she's most often covered in.  Kelly laughs fondly as she begins the long process of retying her braid.\n\n\"<i>Oh, [Master].  Always thinking two moves ahead.  Thank you for your reward!</i>\"");
-		flags[KELLY_HAIR_COLOR] = "sable black";
+		flags[kFLAGS.KELLY_HAIR_COLOR] = "sable black";
 		consumeItem("Black D",1);
 	}
 	//Blonde dye: 
@@ -1782,14 +1782,14 @@ public function dyeKellysBitchAssHair(color:String = ""):void {
 		
 		outputText("\n\n\"<i>Don't stay away too long,</i>\" she purrs, as she begins the long process of retying her braid.  You feel your bottle blonde bitch's eyes on you for a long time after you head out of the field.");
 		consumeItem("Blond D",1);
-		flags[KELLY_HAIR_COLOR] = "slutty blonde";
+		flags[kFLAGS.KELLY_HAIR_COLOR] = "slutty blonde";
 	}
 	//Purple dye: 
 	else if(color == "PurpDye") {
 		outputText("\n\nKelly whips her virulently purple hair to look at it, trotting back and forth and considering, wagging her equally purple tail.");
 		outputText("\n\n\"<i>Like the goblins, I guess?  I don't know how much I like this colour, [Master].</i>\"  You say it'll serve as a constant reminder to her that she's a cock hungry breeding machine.  Kelly nods thoughtfully as she begins the long process of retying her braid.");
 		outputText("\n\n\"<i>You're right [Master], I would hate to ever forget that.  Thank you for your reward!</i>\"");
-		flags[KELLY_HAIR_COLOR] = "garish purple";
+		flags[kFLAGS.KELLY_HAIR_COLOR] = "garish purple";
 		consumeItem("PurpDye",1);
 	}
 	//Pink dye:
@@ -1798,13 +1798,13 @@ public function dyeKellysBitchAssHair(color:String = ""):void {
 		outputText("\n\n\"<i>Ooh I like this, it makes me feel so... girly.  I feel pink inside!</i>\"  You certainly do, you say.  Kelly giggles as she begins the long process of retying her braid.  She even sounds bubblier.");
 		outputText("\n\n\"<i>Thank you for your reward, [Master]!</i>\"");
 		consumeItem("PinkDye",1);
-		flags[KELLY_HAIR_COLOR] = "bright pink";
+		flags[kFLAGS.KELLY_HAIR_COLOR] = "bright pink";
 	}
 	//Brown dye: Kelly smiles as she examines the regained chestnut brown colour of her hair and tail.
 	else if(color == "Brown D") {
 		outputText("\n\n\"<i>I'd almost forgotten what it looked like.</i>\"  She sighs, twisting a lock of it in a finger.  She looks quite different with her hair down - it reaches almost to her flanks.  \"<i>You'll bring more dye, right?  I'd love to do more colours.</i>\"  That depends, you say, on her being good.  Kelly sets her jaw determinedly as she begins the long process of retying her braid.");
 		outputText("\n\n\"<i>Of course, [Master].  Thank you for your reward!</i>\"");
-		flags[KELLY_HAIR_COLOR] = "chestnut brown";
+		flags[kFLAGS.KELLY_HAIR_COLOR] = "chestnut brown";
 		consumeItem("Brown D",1);
 	}
 	else outputText("\n\nYO dog, " + color + " is definitely not working right. Please report this to fenoxo using the report a bug link on the site.");
@@ -1817,7 +1817,7 @@ public function dyeKellysBitchAssHair(color:String = ""):void {
 public function giveKellyAppleSauce():void {
 	clearOutput();
 	//First time:
-	if(flags[KELLY_TIMES_APPLESAUCED] == 0) {
+	if(flags[kFLAGS.KELLY_TIMES_APPLESAUCED] == 0) {
 		outputText("You tap your chin idly and ask Kelly what she likes eating.  Aside from dick, you add, rolling your eyes as she opens her mouth eagerly.");
 		outputText("\n\n\"<i>Oh.  Um.  Well...</i>\" she furrows her brow as if remembering a very distant time.  \"<i>I used to like fruit.</i>\"  She laughs a bit.  \"<i>A stereotype really, you know, horses and apples?  Whitney even planted me a couple of apple trees across the back, but I never took care of them because I was a bit of a jerk-off back then.</i>\"");
 		outputText("\n\nAt least your jerk off-ing is put to good use these days, you say kindly.  \"<i>That's nice of you to say, [Master],</i>\" replies the centaur solemnly.  She's wringing her hands, her thoughts elsewhere. \"<i>I'd like to go and check on it, but... I don't think Whitney likes me much anymore.  I'd hate to cause more trouble than I already have.</i>\"  You 'pfft' and wave your hand airily to show what YOU think of Whitney.  You tell her to stay put - as her treat, you'll go check on the orchard and bring back some apples for her, if there are any.");
@@ -1849,7 +1849,7 @@ public function giveKellyAppleSauce():void {
 	else {
 		outputText("\n\nYou go to the barn and grab your trusty metal bowl.  Kelly knows what this means: she clasps her hands eagerly, her horse half clopping backwards and forwards impatiently as she watches you walk casually towards the forest.");
 		outputText("\n\nThe small grove of apple trees has changed significantly from when you first found it.  Somebody has begun cutting the encroaching wild trees right back and pruned the rosaceae themselves so they aren't tangling into each other anymore- they look considerably happier.");
-		if(flags[KELLY_KIDS] > 1) outputText("  Somebody has even cleared an oblong patch of earth alongside the trees- a piece of card stuck into it is scrawled with a childish hand which declares it to be “CAROTS”.  You marvel at it all.  Who would have imagined your lust for horse pussy would have turned a pointless asshole into a loving mother who gardens with her children?  Really, you deserve a medal for your efforts.");
+		if(flags[kFLAGS.KELLY_KIDS] > 1) outputText("  Somebody has even cleared an oblong patch of earth alongside the trees- a piece of card stuck into it is scrawled with a childish hand which declares it to be “CAROTS”.  You marvel at it all.  Who would have imagined your lust for horse pussy would have turned a pointless asshole into a loving mother who gardens with her children?  Really, you deserve a medal for your efforts.");
 		
 		outputText("\n\nYou take your time picking the best apples which catch your eye before mashing them up, once again removing the seeds and stalks.  Then, with a wicked smile, you ");
 		if(!player.isTaur()) {
@@ -1877,7 +1877,7 @@ public function giveKellyAppleSauce():void {
 	//Not Centaur: 
 	if(!player.isTaur()) {
 		outputText("\n\nThe mere smell of the apple sauce has got Kelly's vagina dribbling, and in the close, warm environment of the barn the cloying, sweet smell radiating off her has got [eachCock] rock hard again, and your arousal urges you to work quickly.  You lead her to a shelf roughly level with her collarbone and place the bowl of apples sauce on it.  Transfixed by it, swallowing audibly, the centaur reaches for it automatically.  You catch her hand.");
-		outputText("\n\n\"<i>No.  Put them here.</i>\"  You set each one on either side of the bowl so she is clasping it.  \"<i>Don't lift it until you have to.  That's it...</i>\"  You watch, pulling off piece after piece of your [armor], as she dips her head into the bowl, scoops up a long lap of the green mash with her tongue and guides it into her wet mouth.  Her throat works and she closes her eyes.  Behind her, the intermittent dripping of her femcum on the straw turns into a steady trickle and you shake off the last of your underclothes in a hurry, stride over to her hindquarters and push your " + cockDescript(x) + " against her sopping pussy gently, gripping her " + flags[KELLY_HAIR_COLOR] + " tail to her side so she doesn't inadvertently flick you with it.");
+		outputText("\n\n\"<i>No.  Put them here.</i>\"  You set each one on either side of the bowl so she is clasping it.  \"<i>Don't lift it until you have to.  That's it...</i>\"  You watch, pulling off piece after piece of your [armor], as she dips her head into the bowl, scoops up a long lap of the green mash with her tongue and guides it into her wet mouth.  Her throat works and she closes her eyes.  Behind her, the intermittent dripping of her femcum on the straw turns into a steady trickle and you shake off the last of your underclothes in a hurry, stride over to her hindquarters and push your " + cockDescript(x) + " against her sopping pussy gently, gripping her " + flags[kFLAGS.KELLY_HAIR_COLOR] + " tail to her side so she doesn't inadvertently flick you with it.");
 		outputText("\n\nShe is radiating heat and her wet depths suck at your " + cockHead(x) + " deliciously.  Still, you hold back on your pulsing need to bury your cock into her, pressing at her entrance softly until you see her head go down again, and the sloppy sound of a centaur trying to draw as much apple sauce into her mouth as she can reaches your ears.  With a contented sigh, you slide your " + cockDescript(x) + " into her, exulting in the hot slickness which envelopes your sex bit by bit.");
 		if(player.cocks[x].cockThickness >= 4) outputText("  Your girth spreads her fuck tunnel wide and you grunt at the delicious tightness of it as you pack her full of cock.");
 		
@@ -1892,7 +1892,7 @@ public function giveKellyAppleSauce():void {
 			outputText("\n\nYou wait for Kelly's head to descend towards the bowl again and then thrust forward, penetrating both her holes at the same time.  She cries out from the intense sensation and then bucks back into you, helping you sink your " + cockDescript(x) + " deeper and deeper into her ass, spreading her deliciously tight anal passage whilst your " + cockDescript(y) + " slides effortlessly into the fleshy folds of her cunt.  You slap her ass exultantly, making her squeak again, as you find your limit before resuming the same rhythm, fucking both her sopping vagina and tight, hot ass now with deep, slow strokes.");
 		}
 		outputText("\n\nYou keep driving into her nice and measured for long minutes, leisurely enjoying the hot mass of your mare whilst keeping a handle on your own lust, waiting for her to get close to finishing her meal.  You lose track of the number of times Kelly orgasms.  Devouring a fruity cum fix whilst being fucked by you completely overwhelms her senses, and she spasms around your cocks again and again, spurting femcum onto your legs and the ground helplessly, clopping her hooves feverishly as she quivers.  The sight of beads of sweat rolling down her rosy human back are almost too much, but you manage to hold back until finally she picks up the bowl and takes it to her lips to pour the last of the green sweet down her gullet.");
-		outputText("\n\nWith her head thrown back it's easy for you to grip her " + flags[KELLY_HAIR_COLOR] + " braid and use it for leverage as you fuck into her with everything you've got, bucking into her tight, hot flesh ");
+		outputText("\n\nWith her head thrown back it's easy for you to grip her " + flags[kFLAGS.KELLY_HAIR_COLOR] + " braid and use it for leverage as you fuck into her with everything you've got, bucking into her tight, hot flesh ");
 		if(player.balls > 0) outputText(", your [balls] slapping into her thighs demandingly ");
 		outputText("as you push towards your reward.  Panting, Kelly thrusts back into you as best she can, resisting your frenetic tugs to her hair so that the big, final slather of apple sauce can slide out of the bowl and into her mouth.  She screams around the wet, gooey mouthful and her vagina quivers and seizes your bulging " + cockDescript(x) + " in milking ripples");
 		if(y >= 0) outputText(" as her anus clenches around your " + cockDescript(x));
@@ -1916,7 +1916,7 @@ public function giveKellyAppleSauce():void {
 		}
 		
 		outputText("\n\nYou keep driving into her nice and measured for long minutes, leisurely enjoying the hot mass of your mare whilst keeping a handle on your own lust, waiting for her to get close to finishing her meal.  You lose track of the number of times Kelly orgasm's.  Being fed a fruity cum fix whilst being mounted by you has completely overwhelmed her senses, and she spasms around your cocks again and again, spurting femcum onto your legs and the ground helplessly clopping her hooves feverishly as she quivers.  The sight of beads of sweat rolling down her rosy human back are almost too much, but you manage to hold back until finally you see all that the bowl is a quarter empty.");
-		outputText("\n\nYou grip her " + flags[KELLY_HAIR_COLOR] + " braid and force her head to arch back before pushing the bowl against her lips, tipping the last of the green sweet down her gullet whilst you begin to fuck into her with everything you've got, bucking into her tight, hot flesh");
+		outputText("\n\nYou grip her " + flags[kFLAGS.KELLY_HAIR_COLOR] + " braid and force her head to arch back before pushing the bowl against her lips, tipping the last of the green sweet down her gullet whilst you begin to fuck into her with everything you've got, bucking into her tight, hot flesh");
 		if(player.balls > 0) outputText(", your [balls] slapping into her thighs demandingly");
 		outputText(" as you push towards your reward.");
 		outputText("\n\nPanting, Kelly thrusts back into you as best she can, resisting your frenetic tugs to her hair so that the big, final slather of apple sauce can slide out of the bowl and into her mouth.  She screams around the wet, gooey mouthful and her vagina quivers and seizes your bulging " + cockDescript(x) + " in milking ripples");
@@ -1933,7 +1933,7 @@ public function giveKellyAppleSauce():void {
 	else outputText("You don't like to admit it but you do taste pretty good, even to yourself.  You push your tongue further into Kelly's mouth hungrily, working your jaw as you savage her mouth with your lips and tongue in search of that fruity, horny flavour, making her 'mmm' with delight and respond in kind.");
 	
 	//First:
-	if(flags[KELLY_TIMES_APPLESAUCED]  == 0) {
+	if(flags[kFLAGS.KELLY_TIMES_APPLESAUCED]  == 0) {
 		outputText("\"<i>That was the best treat ever [Master],</i>\" she murmurs when you break away, gazing into your eyes lovingly.  \"<i>I liked apples but never quite as much as that.  Wow.</i>\"  You hold her face and say she should look after that orchard: who knows, maybe she'll be good enough to deserve a second helping.  Kelly smiles eagerly.");
 		outputText("\n\n\"<i>I will be [Master], you watch!</i>\"  You dress yourself and amble out of the stable with her before sending her on her way with a loving, jiggling swat to her boobs.");
 	}
@@ -1943,7 +1943,7 @@ public function giveKellyAppleSauce():void {
 		outputText("\n\nYou dress yourself and amble back out of the stable with her before sending her on her way with a loving, jiggling swat to her boobs.");
 	}
 	stats(0,0,0,0,0,-2,-100,0);
-	flags[KELLY_TIMES_APPLESAUCED]++;
+	flags[kFLAGS.KELLY_TIMES_APPLESAUCED]++;
 	doNext(13);
 }
 
@@ -1978,7 +1978,7 @@ public function kellyBJsAhoy():void {
 				outputText("\n\nAfter curling her tongue here and there over each sensitive orb, bathing them in saliva, she envelopes each one in her mouth, sucking gently first one, then the second");
 				if(player.balls > 2) outputText(", then the third, then the fourth");
 				outputText(", then back to the first one, a slow and sensual repetition.  She moans intermittently as she does it, and you're not sure if it's intentionally to send delightful shivers of sensation through your scrotum and up the spine of [eachCock], or it's simply because the sheer degradation of the act fills her with deep, shameful lust.  Supporting her soft, ");
-				if(flags[KELLY_INCUBATION] > 0) outputText("milk-laden ");
+				if(flags[kFLAGS.KELLY_INCUBATION] > 0) outputText("milk-laden ");
 				outputText("breasts whilst slavishly polishing the [balls] of the " + player.mf("man","woman") + " who made her into, well, a ball-licking bitch.  Whatever the cause the result is the same: pleasure thrums through your groin and up your [cock biggest], and you close your eyes, lost to the sensations of her skilful tongue.");
 			}
 			//[Huge balls:
@@ -1986,10 +1986,10 @@ public function kellyBJsAhoy():void {
 				outputText("\n\nAfter curling her tongue here and there over each sensitive orb, bathing them in saliva, she attempts to envelope one in her mouth.  She can't though- your testicles, bulging and tight with arousal, are simply too big.  After a short pause she goes back to licking them, lapping at their surface tenderly, licking all around each one for every trace of salt and musk, wetly caressing first one, then the second");
 				if(player.balls > 2) outputText(", then the third, then the fourth");
 				outputText(", then back to the first one, a slow and sensual repetition.  The warm air is punctuated with desperate 'ahh, ahn, ahh's as she surrenders herself to the deep, shameful lust of the act, supporting her soft");
-				if(flags[KELLY_INCUBATION] > 0) outputText(", milk laden");
+				if(flags[kFLAGS.KELLY_INCUBATION] > 0) outputText(", milk laden");
 				outputText(" breasts whilst slavishly polishing the [balls] of the " + player.mf("man","woman") + " who made her into, well, a ball-licking bitch.");
 				//[Dominika dreams:
-				if(flags[NUMBER_OF_TIMES_MET_SCYLLA] > 0 && flags[UNKNOWN_FLAG_NUMBER_00150] > 0) outputText("  You are gripped by a sudden but thrilling velvet-edged sense of déjà vu.  Has this scene not repeated somewhere else?");
+				if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] > 0) outputText("  You are gripped by a sudden but thrilling velvet-edged sense of déjà vu.  Has this scene not repeated somewhere else?");
 			}
 		}
 		//Vagina:
@@ -2005,7 +2005,7 @@ public function kellyBJsAhoy():void {
 				outputText("After curling her tongue here and there over each sensitive orb, bathing them in saliva, she envelopes each one in her mouth, sucking gently first one, then the second");
 				if(player.balls >= 4) outputText(", then the third, then the fourth");
 				outputText(", then back to the first one, a slow and sensual repetition.  She moans intermittently as she does it, and you're not sure if it's intentionally to send delightful shivers of sensation through your scrotum and up the spine of [eachCock], or it's simply because the sheer degradation of the act, supporting her soft, ");
-				if(flags[KELLY_INCUBATION] > 0) outputText("milk-laden ");
+				if(flags[kFLAGS.KELLY_INCUBATION] > 0) outputText("milk-laden ");
 				outputText("breasts whilst slavishly polishing the [balls] of the " + player.mf("man","woman") + " who made her into, well, a ball-licking bitch, fills her with deep, shameful lust.  Whatever the cause, the result is the same: pleasure thrums through your groin and up your [cock biggest], and you close your eyes, lost to the sensations of her skilful tongue.");
 			}
 			//Huge balls:
@@ -2013,10 +2013,10 @@ public function kellyBJsAhoy():void {
 				outputText("After curling her tongue here and there over each sensitive orb, bathing them in saliva, she attempts to envelope one in her mouth.  She can't though; your testicles, bulging and tight with arousal, are simply too big.  After a short pause she goes back to licking them, lapping at their surface tenderly, licking all around each one for every trace of salt and musk, wetly caressing first one, then the second");
 				if(player.balls >= 4) outputText(", then the third, then the fourth");
 				outputText(", then back to the first one, a slow and sensual repetition.  The warm air is punctuated with desperate 'ahh, ahn, ahh's as she surrenders herself to the deep, shameful lust of the act, supporting her soft ");
-				if(flags[KELLY_INCUBATION] > 0) outputText(", milk laden");
+				if(flags[kFLAGS.KELLY_INCUBATION] > 0) outputText(", milk laden");
 				outputText(" breasts whilst slavishly polishing the [balls] of the " + player.mf("man","woman") + " who made her into, well, a ball-licking bitch.");
 				//Dominika dreams:
-				if(flags[NUMBER_OF_TIMES_MET_SCYLLA] > 0 && flags[UNKNOWN_FLAG_NUMBER_00150] > 0) outputText("  You are gripped by a sudden but thrilling, velvet-edged sense of déjà vu.  Has this scene not repeated somewhere else?");
+				if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] > 0) outputText("  You are gripped by a sudden but thrilling, velvet-edged sense of déjà vu.  Has this scene not repeated somewhere else?");
 			}			
 		}
 		//[merge]
@@ -2036,7 +2036,7 @@ public function kellyBJsAhoy():void {
 		outputText("\n\nShe has been holding her boobs out to you this whole time, and it seems churlish not to accept such a pleasant invitation.  You hold yourself right back, letting her tongue and caress your engorged cockhead for a long moment, waiting until her hums turn into outright gasps of arousal, then thrust as deep as you can into her juicy mouth, holding her head as you face fuck your way to your pent up high.  At the last moment");
 		if(player.balls > 0) outputText(", as you feel your [balls] clench");
 		outputText(", you pull out, grip your [cock biggest] at the base, point it at your cumslut's big creamy tits and groan as your bulging cock tenses.  She 'aww's in deep disappointment as the dick is torn away from her but she obediently presents her fat, pert breasts, and her breathy sigh is what you hear as orgasm clenches you.  Your cock slit dilates and you spurt out rope after rope of jizz");
-		if(flags[KELLY_BONUS_BOOB_ROWS] > 0) outputText(" onto all four of her tits");
+		if(flags[kFLAGS.KELLY_BONUS_BOOB_ROWS] > 0) outputText(" onto all four of her tits");
 		outputText(".  The sensation of deep release is ecstatic, the sight of your cock cream pasting your slave's softness delicious.");
 		if(player.cumQ() >= 750) outputText("\n\nAs ever you can barely control yourself once you get going, and it feels like you cum for minutes on end, painting not just her chest but her face and stomach, not stopping until she is absolutely caked and dripping with your potent sex.");
 		if(player.hasVagina()) outputText("\n\nYour female sex clenches and orgasms in sympathy, and you feel fluid dribble down your [hips] as you continue to paint Kelly.  Your only dim regret is that there's no way of soaking her with that, too.");
@@ -2065,7 +2065,7 @@ public function kellyBJsAhoy():void {
 				outputText("\n\nAfter curling her tongue here and there over each sensitive orb, bathing them in saliva, she envelopes each one in her mouth, sucking gently first one, then the second");
 				if(player.balls >= 4) outputText(", then the third, then the fourth");
 				outputText(", then back to the first one, a slow and sensual repetition.  She moans intermittently as she does it, and you're not sure if it's intentionally to send delightful shivers of sensation through your scrotum and up the spine of [eachCock], or it's simply because the sheer degradation of the act fills her with deep, shameful lust- supporting her soft");
-				if(flags[KELLY_INCUBATION] > 0) outputText(", milk-laden");
+				if(flags[kFLAGS.KELLY_INCUBATION] > 0) outputText(", milk-laden");
 				outputText(" breasts whilst slavishly polishing the [balls] of the centaur who made her into, well, a ball-licking bitch.  Whatever the cause the result is the same.  Pleasure thrums through your groin and up your [cock biggest] and you close your eyes, lost to the sensations of her skilful tongue.");
 			}
 			//[Huge balls:
@@ -2073,9 +2073,9 @@ public function kellyBJsAhoy():void {
 				outputText("\n\nAfter curling her tongue here and there over each sensitive orb, bathing them in saliva, she attempts to envelope one in her mouth.  She can't though - your testicles, bulging and tight with arousal, are simply too big.  After a short pause she goes back to licking them, lapping at their surface tenderly, licking all around each one for every trace of salt and musk, wetly caressing first one, then the second");
 				if(player.balls >= 4) outputText(", then the third, then the fourth");
 				outputText(", then back to the first one, a slow and sensual repetition.  The warm air is punctuated with desperate 'ahh, ahn, ahh's as she surrenders herself to the deep, shameful lust of the act, supporting her soft");
-				if(flags[KELLY_INCUBATION] > 0) outputText(", milk laden");
+				if(flags[kFLAGS.KELLY_INCUBATION] > 0) outputText(", milk laden");
 				outputText(" breasts whilst slavishly polishing the [balls] of the centaur who made her into, well, a ball-licking bitch.");
-				if(flags[NUMBER_OF_TIMES_MET_SCYLLA] > 0 && flags[UNKNOWN_FLAG_NUMBER_00150] > 0) outputText("  You are gripped by a sudden but thrilling, velvet-edged sense of déjà vu.  Has this scene not repeated somewhere else?");
+				if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] > 0) outputText("  You are gripped by a sudden but thrilling, velvet-edged sense of déjà vu.  Has this scene not repeated somewhere else?");
 			}
 		}
 		//Vagina: 
@@ -2091,7 +2091,7 @@ public function kellyBJsAhoy():void {
 				outputText("  After curling her tongue here and there over each sensitive orb, bathing them in saliva, she envelopes each one in her mouth, sucking gently first one, then the second");
 				if(player.balls >= 4) outputText(", then the third, then the fourth");
 				outputText(", then back to the first one, a slow and sensual repetition.  She moans intermittently as she does it, and you're not sure if it's intentionally to send delightful shivers of sensation through your scrotum and up the spine of [eachCock], or it's simply because the sheer degradation of the act, supporting her soft");
-				if(flags[KELLY_INCUBATION] > 0) outputText(", milk-laden");
+				if(flags[kFLAGS.KELLY_INCUBATION] > 0) outputText(", milk-laden");
 				outputText(" breasts whilst slavishly polishing the [balls] of the centaur who made her into, well, a ball-licking bitch, fills her with deep, shameful lust.  Whatever the cause the result is the same; pleasure thrums through your groin and up your [cock biggest] and you close your eyes, lost to the sensations of her skilful tongue.");
 			}
 			//[Huge balls:
@@ -2099,9 +2099,9 @@ public function kellyBJsAhoy():void {
 				outputText("  After curling her tongue here and there over each sensitive orb, bathing them in saliva, she attempts to envelope one in her mouth.  She can't though - your testicles, bulging and tight with arousal, are simply too big.  After a short pause, she goes back to licking them, lapping at their surface tenderly, licking all around each one for every trace of salt and musk, wetly caressing first one, then the second");
 				if(player.balls >= 4) outputText(", then the third, then the fourth");
 				outputText(", then back to the first one, a slow and sensual repetition.  The warm air is punctuated with desperate 'ahh, ahn, ahh's as she surrenders herself to the deep, shameful lust of the act, supporting her soft");
-				if(flags[KELLY_INCUBATION] > 0) outputText(", milk-laden");
+				if(flags[kFLAGS.KELLY_INCUBATION] > 0) outputText(", milk-laden");
 				outputText(" breasts whilst slavishly polishing the [balls] of the centaur who made her into, well, a ball-licking bitch.");
-				if(flags[NUMBER_OF_TIMES_MET_SCYLLA] > 0 && flags[UNKNOWN_FLAG_NUMBER_00150] > 0) outputText("  You are gripped by a sudden but thrilling, velvet-edged sense of déjà vu.  Has this scene not repeated somewhere else?");
+				if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] > 0) outputText("  You are gripped by a sudden but thrilling, velvet-edged sense of déjà vu.  Has this scene not repeated somewhere else?");
 			}
 		}
 		//[merge]
@@ -2135,7 +2135,7 @@ public function kellyBJsAhoy():void {
 		if(player.balls > 0) outputText("ball-sucking ");
 		outputText("cock addict, you will have to do a good job of catching it on those whore pillows of yours.</i>\"  With that, you thrust your hindquarters forward.  Her breathy groan is what you hear as orgasm clenches you.");
 		outputText("\n\nYour cock slit dilates and you spurt out rope after rope of jizz");
-		if(flags[KELLY_BONUS_BOOB_ROWS] > 0) outputText(" onto all four of her tits");
+		if(flags[kFLAGS.KELLY_BONUS_BOOB_ROWS] > 0) outputText(" onto all four of her tits");
 		outputText(".  The sensation of deep release is ecstatic, the sound of your cock cream spattering onto your slave's softness delicious.");
 		//[Vagina:
 		if(player.hasVagina()) outputText("  Your female sex clenches and orgasms in sympathy, and you feel fluid dribble down your [hips] as you continue to paint Kelly.  Your only dim regret is that there's no way of soaking her with that, too.");
@@ -2144,7 +2144,7 @@ public function kellyBJsAhoy():void {
 		if(player.cumQ() < 750) outputText("  Kelly has done a sterling job of catching your load; you've frosted her boobs with long strokes quite convincingly.");
 		else {
 			outputText("  As ever, your virility has gotten the better of you.  Kelly looks like she's in an ecstatic trance.  You've completely pasted not just ");
-			if(flags[KELLY_BONUS_BOOB_ROWS] > 0) outputText("all four of ");
+			if(flags[kFLAGS.KELLY_BONUS_BOOB_ROWS] > 0) outputText("all four of ");
 			outputText("her boobs with alabaster ooze, but her stomach, face and hair.  She's holding a reservoir of the stuff in her cleavage.");
 		}
 	}
@@ -2155,7 +2155,7 @@ public function kellyBJsAhoy():void {
 	outputText(", saying you know she is, but it's a lot more pleasing to you to see her get her fix this way.  Quickly cottoning on, the centaur stares at you with her lustful green eyes as she lifts a cum-spattered boob to her mouth.");
 	
 	outputText("\n\nYou watch as Kelly licks herself clean, sending her mouth slowly sliding across her soft, sensitive curves, lapping up every rivulet of your thick seed she can reach.  At first, she does it to put on a show for you, holding your eyes with a winsome smile as she bends her tongue into her pliant flesh and hooks another stream of cum into her maw with an exaggerated smack of her lips.  But the effect your fluids have on her quickly takes over, and she laps at her boobs with increasing urgency, a flush high on her cheeks as your warm jizz slides down her throat, scratching her itch, making her yet more needy, more addicted to you with each load she swallows.");
-	if(flags[KELLY_BONUS_BOOB_ROWS] > 0) outputText("\n\nShe can't reach her lower row of tits with her tongue, so simply runs her hands over them, sighing as she rubs your musk into her horny skin and hard nipples before running her tongue across her palms.");
+	if(flags[kFLAGS.KELLY_BONUS_BOOB_ROWS] > 0) outputText("\n\nShe can't reach her lower row of tits with her tongue, so simply runs her hands over them, sighing as she rubs your musk into her horny skin and hard nipples before running her tongue across her palms.");
 	outputText("  She leaves a trail of cum leaking down a nipple until last, closing her eyes, tensing and orgasming with a muffled sigh as her wet tongue pushes over her erect nub and guides the last of your fix into her mouth.");
 	
 	//[Libido <50: 

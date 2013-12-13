@@ -188,7 +188,7 @@
 			trace("Starting monkey")
 			CoC_Settings.haltOnErrors = true;
 			this._mainClassPtr.testingBlockExiting = true;
-			this._mainClassPtr.encounteredErrorFlag = false;
+			//this._mainClassPtr.encounteredErrorFlag = false;
 
 			// Pull in key list from the InputManager
 			this.initAvailableKeysList()
@@ -215,19 +215,21 @@
 
 			this._mainClassPtr.inputManager.KeyHandler(fakeEvent);
 
-			this._mainClassPtr.encounteredErrorFlag
+			//this._mainClassPtr.encounteredErrorFlag
 
 			if (!(this._mainClassPtr.testingBlockExiting))
 			{
 				trace("Stopping Monkey");
 				disengageMonkey();
 			}
+			/*
 			if (this._mainClassPtr.encounteredErrorFlag && this._catchOutputTextErrors)
 			{
 				trace("Stopping Monkey");
 				disengageMonkey();
 				throw new Error("Syntax Error!")
 			}
+			*/
 
 
 		}

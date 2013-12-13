@@ -74,7 +74,7 @@ public function retributionArmorIsCoolShit():void {
 	//[Player receives: 1x Inquisitor's Robes]
 	menuLoc = 2;
 	shortName = "I.Robes";
-	flags[GOTTEN_INQUISITOR_ARMOR] = 1;
+	flags[kFLAGS.GOTTEN_INQUISITOR_ARMOR] = 1;
 	takeItem();
 }
 
@@ -91,7 +91,7 @@ public function carnalityArmorIsCoolShitToo():void {
 	//[Player receives 1x Inquisitor's Corset]
 	menuLoc = 2;
 	shortName = "I.Corst";
-	flags[GOTTEN_INQUISITOR_ARMOR] = 1;
+	flags[kFLAGS.GOTTEN_INQUISITOR_ARMOR] = 1;
 	takeItem();
 }
 
@@ -143,7 +143,7 @@ public function dominikaSpellblade():void {
 	menuLoc = 2;
 	shortName = "S.Blade";
 	takeItem();
-	flags[DOMINIKAS_SWORD_GIVEN] = 1;
+	flags[kFLAGS.DOMINIKAS_SWORD_GIVEN] = 1;
 }
 
 
