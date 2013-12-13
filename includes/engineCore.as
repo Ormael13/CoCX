@@ -1898,6 +1898,59 @@ public function getButtonToolTipText( buttonText :String ) :String
 }
 
 
+/*
+
+This stuff doesn't *quite work, but I'm not done with futzing with it yet.
+
+private var funcLookups:Object = null;
+
+
+private function buildFuncLookupDict():void
+{
+	import flash.sampler.*;
+	import flash.utils.*;
+	trace("Building function <-> function name mapping table");
+	// get all methods contained
+	var typeDesc:XML = describeType(this);
+	//trace("TypeDesc - ", typeDesc)
+
+	for each (var node:XML in typeDesc..method) 
+	{
+		// return the method name if the thisObject of f (t) 
+		// has a property by that name 
+		// that is not null (null = doesn't exist) and 
+		// is strictly equal to the function we search the name of
+		//trace("this[node.@name] = ", this[node.@name], " node.@name = ", node.@name)
+		if (this[node.@name] != null)
+			this.funcLookups[this[node.@name]] = node.@name;
+		
+		
+	}
+	this.funcLookups
+}
+
+public function getFunctionName(f:Function):String
+{
+	trace("Getting function name")
+	// get the object that contains the function (this of f)
+	//var t:Object = flash.sampler.getSavedThis(f); 
+	if (this.funcLookups == null)
+	{
+		trace("Rebuilding lookup object");
+		this.funcLookups = new Object()
+		this.buildFuncLookupDict();
+	}
+
+
+	if (f in this.funcLookups)
+		return(this.funcLookups[f]);
+	
+	// if we arrive here, we haven't found anything... 
+	// maybe the function is declared in the private namespace?
+	return null;
+}
+
+
 private function showButtonWithCallbackShim(butt_index :int, butt_label :String, callBackFunc :Function = null, toolTipText :String = '')
 {
 	// This is a kind of messy hack because I want to log the button events, so I can do better debugging. 
@@ -1910,12 +1963,16 @@ private function showButtonWithCallbackShim(butt_index :int, butt_label :String,
 	{ 
 		return function():void 
 		{
-			trace("Callback shim function!");
-			trace("internal_index", internal_index);
-			trace("internal_label", internal_label);
-			trace("internal_callBackFunc", internal_callBackFunc);
-			trace("internal_toolTipViewText", internal_toolTipViewText);
 
+			var tmpStr:String = "";
+
+			tmpStr += "Button Press!";
+			tmpStr += ". Position = " + internal_index;
+			tmpStr += ". Label = " + internal_label;
+			tmpStr += ". Call = " + getFunctionName(internal_callBackFunc);
+			//tmpStr += ". Internal_toolTipViewText = " + internal_toolTipViewText;
+
+			trace(tmpStr);
 			internal_callBackFunc();
 		}
 	};
@@ -1924,25 +1981,51 @@ private function showButtonWithCallbackShim(butt_index :int, butt_label :String,
 	mainView.showBottomButton( butt_index, butt_label, callBackFunc, toolTipText );
 }
 
+*/
+
+
+// returns a function that takes no arguments, and executes function `func` with argument `arg`
+public function createCallBackFunction(func:Function, arg:*):Function
+{
+	if( arg == -9000 )
+	{
+		// trace("Arg-free button. Func = ", func)
+		// trace("func name is = ", getFunctionName(func))
+
+		return func;
+	}
+	else
+	{
+		// trace("anonymous callback with parameter!. Func = ", func, " Param = ", arg);
+		// trace("Retreived function type = ", getFunctionName(func))
+		// if (arg is Function) trace("Arg is a function. Name is = ", getFunctionName(arg))
+		
+
+		return function _addButtonCallback():* 
+		{ 
+			return func( arg ); 
+		};
+	}
+	
+}
+
 
 public function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000):void {
 	var callback :Function,
-		toolTipText :String;
+	toolTipText :String;
 
 	if(pos > 9) {
 		trace("INVALID BUTTON");
 		return;
 	}
 
-	if( arg1 == -9000 )
-		callback = func1;
-	else
-		callback = function _addButtonCallback():* { return func1( arg1 ); };
+	callback = createCallBackFunction(func1, arg1);
+	
 
 	toolTipText = getButtonToolTipText( text );
-	if (CoC_Settings.haltOnErrors) 
-		showButtonWithCallbackShim( pos, text, callback, toolTipText );
-	else
+	//if (CoC_Settings.haltOnErrors) 
+	//	showButtonWithCallbackShim( pos, text, callback, toolTipText );
+	//else
 		mainView.showBottomButton( pos, text, callback, toolTipText );
 	mainView.setOutputText( currentText );
 }
@@ -1992,17 +2075,8 @@ public function menu(text1:String = "", func1:Function = null, arg1:Number = -90
 	{
 		var callback :Function, toolTipText :String;
 
-		if( func == null || arg == -9000 )
-		{
-			callback = func;
-		}
-		else
-		{
-			callback = function _menuCallback():* 
-			{ 
-				return func( arg ); 
-			};
-		}
+		
+		callback = createCallBackFunction(func1, arg1);
 
 		toolTipText = getButtonToolTipText( label );
 
@@ -2014,9 +2088,9 @@ public function menu(text1:String = "", func1:Function = null, arg1:Number = -90
 			// *then* calls the relevant callback.
 
 			
-			if (CoC_Settings.haltOnErrors) 
-				showButtonWithCallbackShim( index, label, callback, toolTipText );
-			else
+			//if (CoC_Settings.haltOnErrors) 
+			//	showButtonWithCallbackShim( index, label, callback, toolTipText );
+			//else
 				mainView.showBottomButton( index, label, callback, toolTipText );
 			
 		}
@@ -2056,18 +2130,12 @@ public function choices(text1:String, butt1:*,
 						text9:String, butt9:*, 
 						text0:String, butt0:*):void 
 {
-	function getCallback( butt :* ):*
-	{
-		return function _choicesCallback():* 
-		{
-			return eventParser( butt );
-		}
-	}
 
-	var callback :Function, toolTipText :String;
+	var callback :Function;
+	var toolTipText :String;
 
-	var textLabels :Array,
-		j :int;
+	var textLabels :Array;
+	var j :int;
 
 	textLabels = [
 		text1,
@@ -2104,11 +2172,12 @@ public function choices(text1:String, butt1:*,
 			mainView.hideBottomButton( tmpJ );
 		}
 		else {
-			callback = getCallback( buttonEvents[ tmpJ ] );
+			callback = createCallBackFunction(eventParser, buttonEvents[tmpJ] );
 			toolTipText = getButtonToolTipText( textLabels[ tmpJ ] );
-			if (CoC_Settings.haltOnErrors) 
-				showButtonWithCallbackShim( tmpJ, textLabels[ tmpJ ], callback, toolTipText );
-			else
+
+			//if (CoC_Settings.haltOnErrors) 
+			//	showButtonWithCallbackShim( tmpJ, textLabels[ tmpJ ], callback, toolTipText );
+			//else
 				mainView.showBottomButton( tmpJ, textLabels[ tmpJ ], callback, toolTipText );
 		}
 
