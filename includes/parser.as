@@ -42,7 +42,7 @@ Planned, but not implemented yet:
 
 import showdown.Showdown;
 
-public var sceneParserDebug:Boolean = true;
+public var sceneParserDebug:Boolean = false;
 
 public var mainParserDebug:Boolean = false;
 

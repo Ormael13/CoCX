@@ -5,6 +5,10 @@
 	import flash.display.Stage;
 	import classes.CoC_Settings
 
+
+	import flash.events.UncaughtErrorEvent;
+	import flash.display.Sprite;
+	
 	/**
 	 * Chaos Monkey!
 	 * Basically a tool to randomly generate BUTTON_DOWN events, to 
@@ -22,7 +26,7 @@
 		private var _excludeMenuKeys:Boolean;
 		private var _catchOutputTextErrors:Boolean;
 		private var _mainClassPtr:*;
-		private var stage:Stage;
+		private var _stage:Stage;
 		private var debug:Boolean;
 		private var buttons:Array;
 
@@ -31,7 +35,7 @@
 		/**
 		 * Init the ChaosMonkey
 		 * @param   mainClass   Reference to core CoC class which is needed to access the inputManager to 
-		      *                 properly synthesize fake key events
+			  *                 properly synthesize fake key events
 		 * @param   debug       Emit debugging trace statements
 		 */
 		public function ChaosMonkey(mainClass:*, debug = false)
@@ -41,7 +45,7 @@
 			this._catchOutputTextErrors = false;
 
 			this._mainClassPtr = mainClass;
-			this.stage = this._mainClassPtr.stage;
+			this._stage = this._mainClassPtr.stage;
 			this._mainClassPtr.testingBlockExiting = false;
 
 		}
@@ -130,6 +134,62 @@
 			if (this.debug) trace(blockedButtons)
 		}
 
+		public function catchGlobalError(event:UncaughtErrorEvent):void
+		{
+			this.stopMonkey()
+
+			import flash.events.ErrorEvent;
+
+			this._mainClassPtr.outputText("<b>OMGERRORLOLWUT</b>\n\n", true);
+			
+			var stackTrace:String = "";
+			
+			if (event.error is Error)
+			{
+				var tempError:Error = event.error as Error;
+				stackTrace = tempError.getStackTrace();
+				// do something with the error
+			}
+			else if (event.error is ErrorEvent)
+			{
+				var errorEvent:ErrorEvent = event.error as ErrorEvent;
+				this._mainClassPtr.outputText("<b>ERROREVENTWAT</b>\n\n");
+				stackTrace += errorEvent + "\n";
+				// do something with the error
+			}
+			else
+			{
+				this._mainClassPtr.outputText("<b>WAT</b>\n\n");
+			}
+			
+			this._mainClassPtr.outputText("<b>SOMETHING IS BROKEN LOL WAT</b>\n");
+			this._mainClassPtr.outputText(stackTrace);
+
+			this._mainClassPtr.outputText("\n\n<b>Preceeding button Events:</b>\n");
+			this._mainClassPtr.outputText(CoC_Settings.getButtonEvents());
+			this._mainClassPtr.menu();
+
+		}
+		
+		
+		
+
+		private function attachGlobalErrorHandler():void
+		{
+			this._mainClassPtr.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, this.catchGlobalError);
+		}
+
+		private function detatchGlobalErrorHandler():void
+		{
+			this._mainClassPtr.loaderInfo.uncaughtErrorEvents.removeEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, this.catchGlobalError);
+		}
+		
+		
+		
+		
+		
+		
+
 		private function setupExitKey():void
 		{
 			
@@ -169,16 +229,31 @@
 			this._catchOutputTextErrors = flag;
 		}
 
+		// This is called by the key-event bound to F12. It does not do any actual teardown
+		// it just sets the run flags to false
+		// Actual teardown is done on the next EXIT_FRAME event.
 		public function stopMonkey():void
 		{
 			this._mainClassPtr.testingBlockExiting = false;
 			CoC_Settings.haltOnErrors = false;
 		}
 
+		// Set up the run vars for the monkey, and attach the gloval error handler.
+		private function engageMonkey():void
+		{
+			
+			CoC_Settings.haltOnErrors = true;
+			this._mainClassPtr.testingBlockExiting = true;
+			this.attachGlobalErrorHandler()
+		}
+
+		// Actual tear-down function. 
+		// Called in the EVENT_EXIT handler if testingBlockExiting is set to false.
 		private function disengageMonkey():void
 		{
-				this._mainClassPtr.inputManager.RemoveExistingKeyBind(this.exitKeyCode);
-				this.stage.removeEventListener(Event.EXIT_FRAME, this.throwAMonkeyAtIt);
+			this._mainClassPtr.inputManager.RemoveExistingKeyBind(this.exitKeyCode);
+			this._stage.removeEventListener(Event.EXIT_FRAME, this.throwAMonkeyAtIt);
+			this.detatchGlobalErrorHandler()
 
 		}
 
@@ -186,10 +261,8 @@
 		{
 
 			trace("Starting monkey")
-			CoC_Settings.haltOnErrors = true;
-			this._mainClassPtr.testingBlockExiting = true;
 			//this._mainClassPtr.encounteredErrorFlag = false;
-
+			this.engageMonkey();
 			// Pull in key list from the InputManager
 			this.initAvailableKeysList()
 
@@ -199,7 +272,7 @@
 			// Tie the random keypress generator to the EXIT_FRAME event, which
 			// runs at the end of each render cycle (it's not *quite* an ON_IDLE event
 			// but apparently flash doesn't have a proper ON_IDLE, so what the hell.)
-			this.stage.addEventListener(Event.EXIT_FRAME, this.throwAMonkeyAtIt);
+			this._stage.addEventListener(Event.EXIT_FRAME, this.throwAMonkeyAtIt);
 		}
 
 		// KeyHandler(e:KeyboardEvent)
@@ -207,29 +280,24 @@
 		{
 
 			
-			var fakeEvent:KeyboardEvent = new KeyboardEvent(KeyboardEvent.KEY_DOWN);
-
-			fakeEvent.keyCode = randomChoice(this.buttons);
-			
-			if (this.debug) trace("FakeEvent - ", fakeEvent);
-
-			this._mainClassPtr.inputManager.KeyHandler(fakeEvent);
-
-			//this._mainClassPtr.encounteredErrorFlag
-
 			if (!(this._mainClassPtr.testingBlockExiting))
 			{
 				trace("Stopping Monkey");
 				disengageMonkey();
 			}
-			/*
-			if (this._mainClassPtr.encounteredErrorFlag && this._catchOutputTextErrors)
+			else
 			{
-				trace("Stopping Monkey");
-				disengageMonkey();
-				throw new Error("Syntax Error!")
+				var fakeEvent:KeyboardEvent = new KeyboardEvent(KeyboardEvent.KEY_DOWN);
+
+				fakeEvent.keyCode = randomChoice(this.buttons);
+				
+				if (this.debug) trace("FakeEvent - ", fakeEvent);
+
+				this._mainClassPtr.inputManager.KeyHandler(fakeEvent);
+
+				//this._mainClassPtr.encounteredErrorFlag
 			}
-			*/
+
 
 
 		}

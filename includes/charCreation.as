@@ -477,7 +477,10 @@ public function doCreation(eventNo:Number):void {
 		doYesNo(10033, 10020);
 		temp = 12;
 	}
-	if(eventNo == 10033) {
+	if(eventNo == 10033) 
+	{
+		
+
 		if(temp == 1) {
 			player.str += 5;
 			player.tone += 7;
