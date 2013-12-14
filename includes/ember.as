@@ -132,7 +132,7 @@ public function emberSexMenu(output:Boolean = true):void {
 			else outputText("is starting to swell with blood");
 			outputText(".  ");
 		}
-		if(flags[kFLAGS.EMBER_GENDER] >= 2) outputText("You can see tiny rivulets of moisture starting to run down Ember's inner thighs, as they rub together, barely hiding her precious treasure from your hungry eyes.  ");
+		if(flags[kFLAGS.EMBER_GENDER] >= 2) outputText("You can see tiny rivulets of moisture starting to run down Ember's inner thighs as they rub together, barely hiding her precious treasure from your hungry eyes.  ");
 		outputText("Well, " + emberMF("he","she") + " is a sexy beast; you ask what naturally comes to mind.");
 		
 		//(Lo-rider Affection)
@@ -1311,7 +1311,7 @@ public function bloodForTheBloodGod():void {
 	}
 	//(High Affection)
 	else {
-		outputText("\n\n\"<i>I think you've been nice enough to deserve a small favour... but I expect you to make it worth my while.  Come and get it.</i>\"");
+		outputText("\n\n\"<i>I think you've been nice enough to deserve a small favor... but I expect you to make it worth my while.  Come and get it.</i>\"");
 		outputText("\n\nEmber bites " + emberMF("his","her") + " tongue with a wicked, dagger-like fang and extends it a few inches past " + emberMF("his","her") + " lips, smearing bluish blood on them and inviting you with open arms and a small kiss.");
 		outputText("\n\nIt would be rude to keep " + emberMF("him","her") + " waiting; you slide over, letting " + emberMF("him","her") + " enfold you in " + emberMF("his","her") + " embrace and drawing the bloody tongue into your mouth.");
 		outputText("\n\nEmber kisses you back; " + emberMF("his","her") + " bleeding tongue stroking yours lovingly.");

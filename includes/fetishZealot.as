@@ -188,7 +188,7 @@ public function zealotLossRape():void {
 		{ 
 			//Give the zealot a blowjob
 			outputText("You take a hold of his nicely sized balls in one hand and the base of his cock in the other.  You give the tip a few licks before running your tongue down its length, making sure to coat every bit of it in your saliva along the way.  His aroused groans let you know that you are giving a good demonstration.  You give his balls a soft rub as you stick the end inside your mouth and run your tongue around it; the taste of his pre is almost like candy to you.\n\n", false);
-			//now the favour is returned
+			//now the favor is returned
 			outputText("You stand up and indicate to him that it is now his turn, and while he is disappointed that the blowjob ended before he came, he still eagerly kneels down in front of your exposed " + multiCockDescriptLight() + " and licks his lips eagerly.  He tries to imitate your performance on his manhood onto your " + cockDescript(0) + ", but he sometimes messes up the order, or does something too fast or slow.  Fortunately, he is a good student, and under your guidance he is soon sucking cock like a pro.  He tickles you with his tongue in just the right way, and gives just the right amount of attention to each part or your length.  ", false);
 			if(player.hasVagina()) outputText("You slip one of your fingers inside your " + vaginaDescript(0) + ", wishing that it could get some attention, but this lesson is about pleasing <i>men</i>.  ", false);
 			outputText("You feel yourself getting close to the edge and tell him to stop.  He looks up at you uncertain for a moment, and you tell him \"<i>It's time for the main event.</i>\"\n\n", false);
