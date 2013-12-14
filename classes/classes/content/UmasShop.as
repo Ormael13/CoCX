@@ -10,8 +10,9 @@ package classes.content
 	 * @author QuietBrowser, ???
 	 * 
 	 * I dunno yet how heavy-handed I can get away with being when it comes to making changes to scene content on the fly, whilst I'm coding it up. 
-	 * For the most part, I've tried to stick to just minor changes where possible rather than making any serious modifications. In hindsight, anything I code up in future
-	 * I'd like to /properly/ edit myself via gdocs with the original author(s), so I can fix the stuff up to the point where I'm happy AND the author(s) have had their input too.
+	 * For the most part, I've tried to stick to just minor changes where possible rather than making any serious modifications, with the intention of seeing exactly what Fen changes (if anything),
+	 * using that as kind of my benchmark. In hindsight, anything I code up in future I'd like to /properly/ edit myself via gdocs with the original author(s), 
+	 * so I can fix the stuff up to the point where I'm happy AND the author(s) have had their input too, but I'm putting that down to how... rough some parts of the Uma doc are. 
 	 *
 	 * I COULD have made use of Fake-Names new methods of including scene content, but this content file is a proof of concept for new class-based sceneadditions. 
 	 * As such, I've left it as "similar" as possible to older content throughout the the game for clarity purposes. Anything I add past this point will probably use
@@ -400,7 +401,7 @@ package classes.content
 			// If player is Exhibitionist
 			if (flags[kFLAGS.PC_FETISH] >= 1)
 			{
-				outputText(" flushing with arousal at the idea of being naked before the matronly mare, ");
+				outputText(" flushing with arousal at the idea of being naked before the mare, ");
 			}
 			
 			outputText("and move over to lay yourself on the table.  You get yourself comfortable and tell Uma that you're ready.\n\n");
@@ -428,24 +429,24 @@ package classes.content
 			}
 			
 			outputText("and pushes hard.  You can't help but scream at the initial bout of pain.  \"<i>Relax dear.  It will only hurt for a little while.</i>\"  You squirm at the pain but slowly it begins to dissipate... you're pretty sure Uma is pressing against your chest even harder than before, yet the pain is quickly ebbing away...\n\n");
-			outputText("Uma chuckles.  \"<i>See dear?  I told you it would get better, but I'm afraid it will hurt a bit more later... I have other spots to take care of,</i>\" she says, removing her elbow and moving away, only to return shortly with a small metal stick prominently featuring a rounded tip.  \"<i>Get ready, dear.</i>\"  You brace yourself for the next part of the treatment.\n\n");
-			outputText("The treatment on your front is painful, but at the same time, it gets easier and easier to relax as Uma continues her work.  The discomfort diminishing, until by the time Uma is finished it just doesn't hurt anymore...\n\n");
-			outputText("\"<i>Very good, dear.  Now flip yourself over, it's time to take care of your back,</i>\" she informs you");
+			outputText("Uma chuckles.  \"<i>See dear?  I told you it would get better, but I'm afraid it will hurt a bit more later... I have other spots to take care of,</i>\" she warns, removing her elbow and moving away, only to return shortly with a small metal stick prominently featuring a rounded tip.  \"<i>Get ready, dear.</i>\"  You brace yourself for the next part of the treatment.\n\n");
+			outputText("The treatment on your front is painful, but at the same time it gets easier and easier to relax as it goes on... and it hurts less and less, until by the time Uma is finished it just doesn't hurt anymore...\n\n");
+			outputText("\"<i>Very good, dear.  Now flip yourself over, it's time to take care of your back,</i> she informs you\"");
 
 			if (player.femininity >= UMA_CONSIDER_PC_FEM)
 			{
-				outputText(", her hand gently caressing your [hips] absent-mindedly");
+				outputText(", her hand gently caressing your [hip] absent-mindedly");
 			}
 			else if (player.femininity >= UMA_CONSIDER_PC_AND)
 			{
-				outputText(", her hand lightly touching your [hips] absend-mindedly");
+				outputText(", her hand lightly touching your [hip] absend-mindedly");
 			}
 
 			outputText(".\n\n");
 
 			// Refactor to say something about nipples against the table?
 			outputText("You move to do as she asks; it's a little awkward adjusting to having your face in the - thankfully cushioned - hole.  You wriggle about to settle yourself comfortably on the table, [nipples] squashing into the surface, but you manage to make yourself relaxed and tell Uma that you're ready once more.\n\n");
-			outputText("You yelp as Uma presses the metal rod " + ((player.tailType > 0) ? "to the base of your tail" : "to your lower back") + ".  \"<i>I'm going to have to trace a few spots on your back dear, to ensure your flow of chi is not obstructed.  It might hurt again, but be brave, ok?</i>\"  You nod as best as you can and prepare yourself.\n\n");
+			outputText("You yelp as Uma presses the metal rod " + ((player.tailType > 0) ? "to the base of your tail" : "to your lower back") + ".  \"<i>I'm going to have to trace a few spots on your back dear, to ensure your flow of chi is not obstructed.  It might hurt again, but be brave, ok?\"  You nod as best as you can and prepare yourself.\n\n");
 			outputText("By the time Uma is finished you feel sore all over, the pain on your back seemingly bringing back the pain on your front.\n\n");
 			outputText("\"<i>It will be a little while, before the flow of chi inside your body stabilizes, dear.  But by the time you're out of this clinic, you should feel much better,</i>\" Uma explains.\n\n");
 			outputText("You thank the mare and get dressed, bidding her farewell before you exit the clinic. Once outside, true to her words, you start to feel better... in fact you feel amazing!  It's no wonder her treatment is expensive, you feel just... amazing!\n\n");
@@ -902,7 +903,7 @@ package classes.content
 
 			outputText("It only takes a moment before Uma returns with a cart containing a small container and a vial of what you presume to be the numbing cream.  Out of the cart's drawer, Uma pulls a pair of gloves which slips over her hands nicely, then opens the small container.  From your current position it's hard to tell what it contains, but from the clicking sounds you hear, you assume it to be where she keeps her needles.\n\n");
 			outputText("\"<i>Are you comfortable, dear?  May I start?</i>\" she asks.\n\n");
-			outputText("You tell her that you're as ready as you'll ever be, so she may as well start.  \"<i>Ok, now try to relax,</i>\" she says, gently touching your exposed back and lightly massaging it with her fingers.  The combination of nerves and her touch sends static through your skin.\n\n");
+			outputText("You tell her that you're as ready as you'll ever be, so she may as well start.  \"<i>Ok, now try to relax.</i>\"  Her voice firm but still friendly as her hands set to work, gently touching your exposed back and lightly massaging it with her fingers.  The combination of nerves and her touch sends static through your skin.\n\n");
 			outputText("\"<i>I'll be applying the cream now,</i>\" she notifies you, slowly pouring the cold cream on your back and rubbing it all over, ensuring every single spot is covered before she puts the vial away.  You shiver and repress a verbal protest at the chill in her cream.  \"<i>It will take a few minutes before you start to feel the effects, I want you to tell me when you no longer feel my fingers on your back.</i></i>\"  She then begins a slow circular massage on your back.\n\n");
 			outputText("You promise you will, and wait patiently.  Slowly the sensation of her fingers fades away, until at last you aren't sure if she's even touching you any more, and you report this to the mare currently planning on sticking you full of needles.\n\n");
 			outputText("\"<i>Very good.  I'll start the treatment now, you might feel a slight pricking sensation, though it shouldn't hurt... if at any point it starts hurting, tell me and I'll do something to ease your pain, alright?</i>\"\n\n");
@@ -1145,7 +1146,7 @@ package classes.content
 		public function talkLoppesFirstGirl():void
 		{
 			outputText("\"<i>Oh, I know what would be a great story...</i>\"  Uma smirks at you.  \"<i>How would you like to hear about my little laquine's first time with a girl?</i>\"\n\n");
-			outputText("You give it a moments thought, and tell the mature mare that would be nice; you're curious about just what Loppe's dating life was like before you met her.  Oh, she talks a bold game, but you're not entirely certain she's being honest with you...\n\n");
+			outputText("You give it a moments thought, and tell the mare that would be nice; you're curious about just what Loppe's dating life was like before you met her.  Oh, she talks a bold game, but you're not entirely certain she's being honest with you...\n\n");
 			outputText("\"<i>Very well, please make yourself comfortable, it's a bit of a long story.</i>\" Uma suggests, motioning at a nearby chair and taking a seat herself.\n\n");
 			outputText("You follow her instructions, wondering just what kind of doozy the mare has to share with you this time.\n\n");
 			outputText("\"<i>Back in our old village, there was a prostitute that went by name of Puffy Lips... but we just called her Puff.  Loppe had just blossomed into a beautiful young lady, so it's no surprise she drew plenty of stares when she walked around the streets-</i>\"");
@@ -1615,7 +1616,7 @@ package classes.content
 			if (flags[kFLAGS.PC_FETISH] >= 1) outputText("unable to resist either the tingle of lust that runs through you at being naked in front of Uma, nor the urge to flaunt your feminine physique for her own gratification, ");
 
 			outputText("and gather your [armorname] up in your arms as you do so. Walking over to the cupboard, you find a couple of folded towels and ample space to store your clothes, which is exactly what you do.\n\n");
-			outputText("When you turn, you notice Uma behind you, standing stark naked and holding her folded kimono in hand.  \"<i>Move over, dear.</i>\"  You politely step aside, and reach out to take Uma's clothes from her so that you can put them in the cupboard for her.  \"<i>Thank you, dear,</i>\" she says, handing over her clothes.  You place them inside and ask what she would like you to do next?\n\n");
+			outputText("When you turn, you notice Uma behind you, standing stark naked and holding her folded kimono in hand.  \"<i>Move over, dear.</i>\"  You politely step aside, and reach out to take Uma's clothes from her so that you can put them in the cupboard for her.  \"<i>Thank you, dear,</i>\" she replies, handing over her clothes.  You place them inside and ask what she would like you to do next?\n\n");
 			outputText("\"<i>Just get on my table, belly up, and we can get started,</i>\" she pats her table, waiting patiently.  You nod your head in understanding, approach and position yourself on the table as she instructed, bare [skin] prickling with anticipation at what's to come.  The mare cracks her knuckles and positions her hands over your body.  \"<i>Now, just sit back and enjoy dear.  Let my nimble hands care for this beautiful body of yours.</i>\"  \n\n");
 			outputText("You smile at her and let her know you're ready to start whenever she is.  The mare starts out by caressing your whole body, over your [tone] belly, your [breasts], your arms and your [legs].  Then she begins pressing a few spots, searching for knots in your muscles and quickly treating those with her expert fingers.  \"<i>Seems like you're enjoying it so far,</i>\" the mare chuckles.\n\n");
 			outputText("Even as Uma says this, you realise just how incredibly ");
@@ -1740,7 +1741,7 @@ package classes.content
 				outputText("\"<i>Oh, but this is where you're mistaken my dear.  Loppe is pretty bad and I should know.  She got that from me,</i>\" the mare laughs lightly, adding another finger to massage your opening.\n\n");
 				outputText("You moan loudly, wriggling in your seat to allow Uma better access to your more sensitive spots.  Mmm, she's good at this...\n\n");
 				outputText("\"<i>Thanks dear, but we are just about to get started with the real thing,</i>\" she replies with a chuckle.  Uma begins massaging your inner walls while she roams your insides, trying to find something.\n\n"); 
-				outputText("You quickly realise what the matronly mare is searching for as your G-Spot is teased, crying out in delight as she sends the most delicious wave of pleasure rippling through your loins, doing your best to squeeze her fingers with your experienced but still-tight cunt.\n\n");
+				outputText("You quickly realise what the mare is searching for, her expertise in matters of pleasure clear as your G-Spot is teased, crying out in delight as she sends the most delicious wave of pleasure rippling through your loins, doing your best to squeeze her fingers with your experienced but still-tight cunt.\n\n");
 				outputText("\"<i>Aha!  Found it!</i>\" the mare says with delight, \"<i>Now I can finally get started on removing all of this bad tension you've been accumulating, dear.</i>\"  She starts pumping her fingers inside you, making sure to tease your G-Spot with careful touches at every pump.\n\n");
 				outputText("You gasp and moan as the mare masseur's expert fingers tease you in all the right ways, slightly bucking in place to properly enjoy your finger-fucking, that oh-so-familiar and wonderful tightness building up in your belly before, with a cry of lust, you give in and ride the resultant crescendo of orgasm.  You give yourself over the bliss of cumming into Uma's hand, slumping down in relaxed stupor after you finish emptying yourself.\n\n");
 				outputText("Removing her hand from your privates, the mare lifts her wet hand to her face and begins licking it clean.  \"<i>Hmm, I see that my daughter is right to call you sugar.  You really are sweet,</i>\" she chuckles.  \"<i>So how'd you like your... massage?</i>\"\n\n");
@@ -1814,7 +1815,7 @@ package classes.content
 			// High CumQ
 			else if (player.cumQ() <= 1000)
 			{
-				outputText("A torrent of spunk surges from within your [cock], and Uma narrowly avoids getting splashed by the narrowest of margins, though you paint her hands and arms white with it.  A great puddle of cum splashes into being, one jet even hitting the wall on the other side of the room and trickling sloppily down its surface.  The mature mare chuckles.  \"<i>Oh, dear.  That's quite a bit you had built up. You should relieve your tension more often, you know?  Now, how do you feel?</i>\" she asks smiling.\n\n");
+				outputText("A torrent of spunk surges from within your [cock], and Uma narrowly avoids getting splashed by the narrowest of margins, though you paint her hands and arms white with it.  A great puddle of cum splashes into being, one jet even hitting the wall on the other side of the room and trickling sloppily down its surface.  The seductive mare chuckles.  \"<i>Oh, dear.  That's quite a bit you had built up. You should relieve your tension more often, you know?  Now, how do you feel?</i>\" she asks smiling.\n\n");
 				outputText("You tell her that you feel wonderful, wondering how she will react to your nearly hitting her.  \"<i>That's good.  And don't worry about splashing me, I had to endure much worse when Loppe was going through puberty,</i>\" Uma responds. You privately note to yourself that Uma's comment makes sense, given what you know of Loppe.\n\n");
 			}
 			// VHigh CumQ
@@ -1864,9 +1865,9 @@ package classes.content
 			if (urtaLove()) outputText("something that makes you wonder if Urta would like to come and take a spin here, ");
 
 			outputText("and a sizable table, made from bamboo; it's covered in a white cloth, and has an upraised headboard with a hole in it that looks like it's big enough to fit your head through.  This is the only piece of furniture in the room, apart from a small cupboard in the corner.  Though spartan in its layout, the room is quite comfortably warm.\n\n");
-			outputText("Uma begins stripping while you watch the older mare's beautifully sculpted body.  You wonder how old she is?  With a body like hers, she could probably pass for Loppe's sister, although she does have a few signs of being more mature.  Rather than making her look less beautiful, they make her even more stunning.  \"<i>Dear?  Hello, dear?</i>\" Uma waves a hand in front of you,  \"<i>Still there, dear?</i>\"  You shake your wandering thoughts out of your head and turn to look at her.  The matronly mare giggles.  \"<i>You should undress.  That is, unless you want your [armorname] to smell like horny mare.</i>\"  You nod in understanding, stripping yourself down and storing your things carefully in the nearby cupboard, beside Uma's own clothing.\n\n");
+			outputText("Uma begins stripping while you watch the older mare's beautifully sculpted body.  You wonder how old she is?  With a body like hers, she could probably pass for Loppe's sister, although she does have a few signs of being more mature.  Rather than making her look less beautiful, they make her even more stunning.  \"<i>Dear?  Hello, dear?</i>\" Uma waves a hand in front of you,  \"<i>Still there, dear?</i>\"  You shake your wandering thoughts out of your head and turn to look at her.  The seductive mare giggles.  \"<i>You should undress.  That is, unless you want your [armorname] to smell like horny mare.</i>\"  You nod in understanding, stripping yourself down and storing your things carefully in the nearby cupboard, beside Uma's own clothing.\n\n");
 			outputText("As you're busying yourself with your things, Uma struts with quiet confidence over to the table and seats herself on it, hands at her sides and gripping the edges for extra support, legs spread and smiling knowingly, as if anticipating your approval.   \"<i>Well, dear?  I'm ready if you are,</i>\" she laughs softly, one hand lifting off the table to caress her breasts, as much to start honing her arousal as to entice you to approach.\n\n");
-			outputText("You approach the the matronly mare and kneel before her, inhaling her scent as you do so.  It smells sweet, enticing and arousing, a fragrance that sends your head reeling with Uma's arousal.  You find the fires of your arousal burn even hotter now.  ");
+			outputText("You approach the the mare and kneel before her, inhaling her scent as you do so.  It smells sweet, enticing and arousing, a fragrance that sends your head reeling with Uma's arousal.  You find the fires of your arousal burn even hotter now.  ");
 
 			if (player.hasCock()) outputText("Blood engorging [eachCock].  ");
 			if (player.hasVagina()) outputText("moisture gatering on your netherlips, drops of your arousal sliding out of your [pussy] and down towards your [feet].  ");
