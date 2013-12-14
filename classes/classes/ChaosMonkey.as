@@ -140,7 +140,7 @@
 
 			import flash.events.ErrorEvent;
 
-			this._mainClassPtr.outputText("<b>OMG ERROR LOL WUT</b>\n\n", true);
+			this._mainClassPtr.rawOutputText("<b>OMG ERROR LOL WUT</b>\n\n", true);
 			
 			var stackTrace:String = "";
 			
@@ -153,20 +153,20 @@
 			else if (event.error is ErrorEvent)
 			{
 				var errorEvent:ErrorEvent = event.error as ErrorEvent;
-				this._mainClassPtr.outputText("<b>ERROR EVENT WAT</b>\n\n");
+				this._mainClassPtr.rawOutputText("<b>ERROR EVENT WAT</b>\n\n");
 				stackTrace += errorEvent + "\n";
 				// do something with the error
 			}
 			else
 			{
-				this._mainClassPtr.outputText("<b>DURRRRR</b>\n\n");
+				this._mainClassPtr.rawOutputText("<b>DURRRRR</b>\n\n");
 			}
 			
-			this._mainClassPtr.outputText("<b>SOMETHING IS BROKEN LOL WAT</b>\n");
-			this._mainClassPtr.outputText(stackTrace);
+			this._mainClassPtr.rawOutputText("<b>SOMETHING IS BROKEN LOL WAT</b>\n");
+			this._mainClassPtr.rawOutputText(stackTrace);
 
-			this._mainClassPtr.outputText("\n\n<b>Preceeding button Events:</b>\n");
-			this._mainClassPtr.outputText(CoC_Settings.getButtonEvents());
+			this._mainClassPtr.rawOutputText("\n\n<b>Preceeding button Events:</b>\n");
+			this._mainClassPtr.rawOutputText(CoC_Settings.getButtonEvents());
 			this._mainClassPtr.menu();
 
 		}

@@ -1,4 +1,4 @@
-package classes 
+﻿package classes 
 {
 	import classes.GlobalFlags.kGAMECLASS;
 	import coc.model.GameModel;
@@ -18,7 +18,14 @@ package classes
 		{
 			
 		}
-		
+
+		// Needed in a few rare cases for dumping text coming from a source that can't properly escape it's brackets
+		// (Mostly traceback printing, etc...)
+		protected function rawOutputText(output:String, purgeText:Boolean = false):void
+		{
+			kGAMECLASS.rawOutputText(output, purgeText);
+		}
+
 		protected function outputText(output:String, purgeText:Boolean = false, parseAsMarkdown:Boolean = false):void
 		{
 			kGAMECLASS.outputText(output, purgeText, parseAsMarkdown);

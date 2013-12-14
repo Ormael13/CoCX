@@ -2608,39 +2608,47 @@ public function doCombat(eventNum:Number):void
 	//GAME OVERS
 	if(eventNum == 5025) 
 	{
-		if (this.testingBlockExiting)
+		if (!this.testingBlockExiting)
 		{
+			outputText("<b>GAME OVER</b>", true);
+			if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "",0,"NewGamePlus",10035,"",0,"CHEAT", 1);
+			else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus",10035, "BLAH", 0, "LULZ", 0);
+			mainView.showMenuButton( MainView.MENU_DATA );
+			mainView.hideMenuButton( MainView.MENU_APPEARANCE );
+			mainView.hideMenuButton( MainView.MENU_LEVEL );
+			mainView.hideMenuButton( MainView.MENU_PERKS );
+
+			gameState = 0;
 			// Prevent ChaosMonkah instances from getting stuck
+		}
+		else
+		{
 			doNext(1);
+
 		}
 
-		outputText("<b>GAME OVER</b>", true);
-		if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "",0,"NewGamePlus",10035,"",0,"CHEAT", 1);
-		else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus",10035, "BLAH", 0, "LULZ", 0);
-		mainView.showMenuButton( MainView.MENU_DATA );
-		mainView.hideMenuButton( MainView.MENU_APPEARANCE );
-		mainView.hideMenuButton( MainView.MENU_LEVEL );
-		mainView.hideMenuButton( MainView.MENU_PERKS );
-		gameState = 0;
 		inDungeon = false;
 	}
 	//Soft Game Over - for when you want to leave the text on-screen
 	if(eventNum == 5035) {
 		
-		if (this.testingBlockExiting)
+		if (!this.testingBlockExiting)
+		{
+			outputText("\n\n<b>GAME OVER</b>", false);
+			if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "",0,"NewGamePlus",10035,"",0,"Debug Cheat", 1);
+			else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus", 10035, "BLAH", 0, "LULZ", 0);
+			mainView.showMenuButton( MainView.MENU_DATA );
+			mainView.hideMenuButton( MainView.MENU_APPEARANCE );
+			mainView.hideMenuButton( MainView.MENU_LEVEL );
+			mainView.hideMenuButton( MainView.MENU_PERKS );
+			
+			gameState = 0;
+		}
+		else
 		{
 			// Prevent ChaosMonkah instances from getting stuck
 			doNext(1);
 		}
-
-		outputText("\n\n<b>GAME OVER</b>", false);
-		if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "",0,"NewGamePlus",10035,"",0,"Debug Cheat", 1);
-		else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus", 10035, "BLAH", 0, "LULZ", 0);
-		mainView.showMenuButton( MainView.MENU_DATA );
-		mainView.hideMenuButton( MainView.MENU_APPEARANCE );
-		mainView.hideMenuButton( MainView.MENU_LEVEL );
-		mainView.hideMenuButton( MainView.MENU_PERKS );
-		gameState = 0;
 		inDungeon = false;
 	}
 	//Sand which(lol) end Pt 1

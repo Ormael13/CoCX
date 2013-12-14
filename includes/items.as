@@ -187,7 +187,7 @@ public function itemLongName(shortName1:String):String {
 	else if(shortName1 == "PrFruit") return "a purple fruit";
 	else if(shortName1 == "RingFig") return "a ringtail fig";
 	else if(shortName1 == "MouseCo") return "a handful of mouse cocoa";
-	else if (CoC_Settings.haltOnErrors) throw new Error("Invalid item! Item short-name = "+shortName1);
+	else if (CoC_Settings.haltOnErrors) throw new Error("Invalid item! Item short-name = \""+shortName1+"\"");
 	return "ERROR";
 	
 }
