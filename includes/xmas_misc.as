@@ -320,7 +320,7 @@ public function chooseLetsGoKami():void {
 	if(player.hasCock() && player.cockThatFits(70) >= 0) addButton(0,"Give Anal",giveKamiTheChristmasRooAnal);
 	addButton(1,"Receive Anal",takeItRooButtStyle);
 	addButton(2,"Give BJ",KamiBlowJob);
-	if(player.cockTotal() > 1 && player.cockThatFits(70) >= 0 && player.cockThatFits2(70) >= 0) addButton(3,"Doube-Fuck",KamiDoubleDickFuck);
+	if(player.cockTotal() > 1 && player.cockThatFits(70) >= 0 && player.cockThatFits2(70) >= 0) addButton(3,"DoubleFuck",KamiDoubleDickFuck);
 }
 
 
@@ -423,6 +423,7 @@ public function KamiDoubleDickFuck():void {
 	outputText("\n\nYou gather your thoughts for a second, exhausted from the actual ordeal.  You slowly put back your [armor] while sharing an appreciative farewell to the now-satiated waitress - of who is panting so profusely she can't even return the gesture.");
 	//[Player heads back to camp, An hour passes, Lust is reduced to zero and KamiEnc = 1]
 	stats(0,0,0,0,0,-3,-100,0);
+	flags[kFLAGS.KAMI_ENCOUNTER] = 1;
 	doNext(13);
 }
 
