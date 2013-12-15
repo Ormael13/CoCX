@@ -19,6 +19,8 @@
 	import classes.ImageManager; // This line not necessary, but added because I'm pedantic like that.
 	import classes.InputManager;
 
+	import classes.Parser;
+
 	import classes.Monsters.*;		// import all the various monsters
 	import coc.view.MainView;
 
@@ -175,7 +177,7 @@
 		include "../../includes/niamh.as";
 		include "../../includes/oasis.as";
 		include "../../includes/ooze.as";
-		include "../../includes/parser.as";
+		//include "../../includes/parser.as";
 		include "../../includes/perkPicker.as";
 		include "../../includes/pregnancy.as";
 		include "../../includes/Raphael.as";
@@ -231,7 +233,7 @@
 
 		public var model :GameModel;
 
-
+		public var parser:Parser;
 
 		// ALL THE VARIABLES:
 		// Declare the various global variables as class variables.
@@ -291,7 +293,7 @@
 			// Used for stopping chaos monkey on syntax errors. Separate flag so we can make stopping optional
 			CoC_Settings.haltOnErrors = false;
 			
-			
+			this.parser = new classes.Parser(this);
 
 
 			this.model = new GameModel();

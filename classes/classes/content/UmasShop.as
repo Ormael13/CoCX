@@ -1675,7 +1675,7 @@ package classes.content
 			doNext(13);
 		}
 
-		private function sexGetFingered():void
+		public function sexGetFingered():void
 		{
 			clearOutput();
 
