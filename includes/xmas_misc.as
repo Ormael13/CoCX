@@ -320,7 +320,7 @@ public function chooseLetsGoKami():void {
 	if(player.hasCock() && player.cockThatFits(70) >= 0) addButton(0,"Give Anal",giveKamiTheChristmasRooAnal);
 	addButton(1,"Receive Anal",takeItRooButtStyle);
 	addButton(2,"Give BJ",KamiBlowJob);
-	if(player.cockTotal() > 1 && player.cockThatFits(70) >= 0 && player.cockThatFits2(70) >= 0) addButton(3,"Doube-Fuck",KamiDoubleDickFuck);
+	if(player.cockTotal() > 1 && player.cockThatFits(70) >= 0 && player.cockThatFits2(70) >= 0) addButton(3,"DoubleFuck",KamiDoubleDickFuck);
 }
 
 
@@ -423,6 +423,7 @@ public function KamiDoubleDickFuck():void {
 	outputText("\n\nYou gather your thoughts for a second, exhausted from the actual ordeal.  You slowly put back your [armor] while sharing an appreciative farewell to the now-satiated waitress - of who is panting so profusely she can't even return the gesture.");
 	//[Player heads back to camp, An hour passes, Lust is reduced to zero and KamiEnc = 1]
 	stats(0,0,0,0,0,-3,-100,0);
+	flags[kFLAGS.KAMI_ENCOUNTER] = 1;
 	doNext(13);
 }
 
@@ -940,7 +941,7 @@ public function fuckNieve():void {
 	var x:int = -1;
 	if(player.hasCock()) {
 		x = player.cockThatFits(130);
-		if(x <= 0 && player.hasVagina() && player.clitLength >= 3.5) x = -1;
+		if(x <= 0 && player.hasVagina() && player.clitLength >= 3.5 && rand(2) == 0) x = -1;
 		else x = player.smallestCockIndex();
 	}
 	outputText("You look your naked, icy lover up and down, thinking of all the things you could do to her.  She raises a white eyebrow at you curiously while you take in her statuesque form.  A thin layer of frost covers her flesh, giving her pale blue skin a sparkling, shimmering appearance.  You find yourself getting aroused at all the potentialities.  Your " + cockClit(x) + " rises to attention as you ponder it, and with a smirk, you finally settle on something.");
@@ -960,7 +961,10 @@ public function fuckNieve():void {
 		else if(player.clitLength >= 24) outputText("  She has to take a breath almost immediately, saying, \"<i>By the fat man's beard this thing is huge.  You must make the rest of this world jealous.</i>\"");
 		else outputText("  \"<i>Mmm,</i>\" she smacks her lips and takes a quick breath, \"<i>Such a nice example of a candycane right here.  Let's go in for another taste.</i>\"");
 	}
-	outputText("  And with that she dives back down onto your " + cockClit(x) + ".  Her head bobs and bows, giving the sensation of an icecube running up and down your dick at great speed.");
+	outputText("  And with that she dives back down onto your " + cockClit(x) + ".  Her head bobs and bows, giving the sensation of an icecube running up and down your ");
+	if(x >= 0) outputText("dick");
+	else outputText("clit");
+	outputText(" at great speed.");
 	
 	//(Variable depending on dick-type)
 	if(x >= 0) {

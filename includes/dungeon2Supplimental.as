@@ -1480,7 +1480,7 @@ public function purifiedFaerieBitchBar():Boolean {
 
 //[Vala]
 public function chooseValaInBar():void {
-	spriteSelect(85);
+	spriteSelect(60);
 	var cumBath:Number = 0;
 	if(player.hasCock()) cumBath = 3449;
 	outputText("", true);

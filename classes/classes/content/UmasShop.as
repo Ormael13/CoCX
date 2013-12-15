@@ -1,4 +1,4 @@
-package classes.content 
+﻿package classes.content 
 {
 	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
@@ -88,7 +88,7 @@ package classes.content
 				outputText("up at you ");
 			}
 			
-			outputText("with a soft expression; her features are maternal and friendly, but there's a playful twinkle in her eye that makes her look younger than she really is, and for all that she's clearly a mature woman, she's still strong and attractive.  Black hair, starting to go gray at the tips, is worn in a long, elegant braid, the end knotted around an elaborate butterfly hairpin, while her fur is a beautiful shade of chestnut brown and her large eyes are a deep brown, almost black.  She casually flicks an equine ear in a manner that reminds you very much of Loppe, and you have a strong feeling that this is Uma, Loppe's mother.\n\n");
+			outputText("with a soft expression; her features are maternal and friendly, but there's a playful twinkle in her eye that makes her look younger than she really is.  For all that, she's clearly a mature woman but still strong and attractive.  Black hair, starting to go gray at the tips, is worn in a long, elegant braid, the end knotted around an elaborate butterfly hairpin.  While her fur is a beautiful shade of chestnut brown, her large eyes are a deep brown, almost black.  She casually flicks an equine ear in a manner that reminds you very much of Loppe, and you have a strong feeling that this is Uma, Loppe's mother.\n\n");
 			
 			menu();
 			addButton(0, "Next", firstVisitPart2);
@@ -114,7 +114,7 @@ package classes.content
 
 			outputText("Uma looks between the two of you with interest.  \"<i>[Boyfriend] huh?  So it's you whom I have to thank for the broken springs in Loppe's bed?</i>\" Uma says with a smile, offering you a hand.\n\n");
 			outputText("You give her a winning smile back and accept it, wondering if you should prepare yourself for a macho-type squeezing match.  Even as you shake her hand, you apologise, telling her it wasn't your intention to make Loppe's bed need replacement springs.\n\n");
-			outputText("Loppe and Uma look at each other and then they both burst out laughing.  \"<i>Oh, sugar... you're so silly,</i>\" Loppe says.  \"<i>[name], I learned a long time ago that Loppe's beds must be both battle and waterproof.  So her bed is custom made; you could have an army of minotaurs stomp through and it wouldn't even bend.</i>\" Uma says with a grin.\n\n");
+			outputText("Loppe and Uma look at each other and then they both burst out laughing.  \"<i>Oh, sugar... you're so silly,</i>\" Loppe says.  \"<i>[name], I learned a long time ago that Loppe's beds must be both battle and waterproof.  So, her bed is custom made; you could have an army of minotaurs stomp through and it wouldn't even bend.</i>\" Uma says with a grin.\n\n");
 			outputText("You give them your best confused expression, realising that Uma and her daughter must have similar tastes in humor; she was evidently joking with you.\n\n");
 			outputText("Uma is the first to break the awkwardness.  \"<i>Well then, care to give me the details?  How did you two meet?  When did you start fooling around?  Has my daughter worked so hard you had to seek a healer yet?</i>\"\n\n");
 			outputText("Loppe holds your hand and the two of you begin detailing how you met....\n\n");
@@ -230,10 +230,10 @@ package classes.content
 			outputText("You ask if she'd like to have a little business?  You could really use one of her famous massage sessions.\n\n");
 			outputText("\"<i>Of course, dear.  I have a selection of a few types of special massages I can give you, but you're only able to keep the effects of one of them, we can't risk disturbing your flow of chi, right?</i>\" she says smiling happily, \"<i>Here's the list.</i>\"  She hands you a small catalogue with her available massages.\n\n");
 			outputText("You study the catalogue, noting the description of each one as you do so...\n\n");
-			outputText("\"Your libido getting you down?  Find that it's just too easy for you to get turned on?  This special massage will help make you too relaxed to get horny for a few hours.\"  Reads the first one.\n\n");
+			outputText("\"Your libido getting you down?  Find that it's just too easy for you to get turned on?  This special massage will help make you too relaxed to get horny for a few hours,\" reads the first one.\n\n");
 			outputText("The second one, on the other hand, states, \"Want to get into the mood for some special fun, but finding it a challenge?  This special massage will get you primed and ready for some sweet, sweet loving.\"\n\n");
-			outputText("\"Feel good and look better with this special modelling massage; the boys, girls and herms will be drooling over you while it lasts.\" Reads the third; you're not surprised that most of treatments seem to have some sexual benefit.\n\n");
-			outputText("\"Muscles sore and aching?  Weary down to your bones?  A nice relaxing massage can alleviate your pain and fatigue, and help you unwind more effectively.\"  Is how the fourth option describes itself.\n\n");
+			outputText("\"Feel good and look better with this special modelling massage; the boys, girls and herms will be drooling over you while it lasts,\" reads the third; you're not surprised that most of treatments seem to have some sexual benefit.\n\n");
+			outputText("\"Muscles sore and aching?  Weary down to your bones?  A nice relaxing massage can alleviate your pain and fatigue, and help you unwind more effectively,\" is how the fourth option describes itself.\n\n");
 			outputText("Finally, the last message in the catalogue reads, \"Need a little more power?  Going to have a fight on your hands soon?  With the special arts of do-in, we can boost your muscles and let you deliver a real knock-out punch - it doesn't last forever, so be careful!\"\n\n");
 			outputText("You contemplate your choices carefully.");
 			
@@ -453,7 +453,7 @@ package classes.content
 
 			// Refactor to say something about nipples against the table?
 			outputText("You move to do as she asks; it's a little awkward adjusting to having your face in the - thankfully cushioned - hole.  You wriggle about to settle yourself comfortably on the table, [nipples] squashing into the surface, but you manage to make yourself relaxed and tell Uma that you're ready once more.\n\n");
-			outputText("You yelp as Uma presses the metal rod " + ((player.tailType > 0) ? "to the base of your tail" : "to your lower back") + ".  \"<i>I'm going to have to trace a few spots on your back dear, to ensure your flow of chi is not obstructed.  It might hurt again, but be brave, ok?\"  You nod as best as you can and prepare yourself.\n\n");
+			outputText("You yelp as Uma presses the metal rod " + ((player.tailType > 0) ? "to the base of your tail" : "to your lower back") + ".  \"<i>I'm going to have to trace a few spots on your back dear, to ensure your flow of chi is not obstructed.  It might hurt again, but be brave, ok?</i>\"  You nod as best as you can and prepare yourself.\n\n");
 			outputText("By the time Uma is finished you feel sore all over, the pain on your back seemingly bringing back the pain on your front.\n\n");
 			outputText("\"<i>It will be a little while, before the flow of chi inside your body stabilizes, dear.  But by the time you're out of this clinic, you should feel much better,</i>\" Uma explains.\n\n");
 			outputText("You thank the mare and get dressed, bidding her farewell before you exit the clinic. Once outside, true to her words, you start to feel better... in fact you feel amazing!  It's no wonder her treatment is expensive, you feel just... amazing!\n\n");
@@ -993,7 +993,7 @@ package classes.content
 			outputText("That makes you think, and you ask how much effort Uma has to put into keeping her little tete-a-tetes discrete? After all, you don't think too many boyfriends, husbands or fathers would be happy to hear about her seducing their girlfriends, wives or daughters.\n\n");
 			outputText("Uma smiles at you mischievously.  \"<i>On the contrary, my naive little friend.  This is an oriental clinic, and there are many types of therapy, for various problems, including sex life.  Some of the women I seduce are actually straight, and let's just say sometimes they need to be reminded of what a good penis can do for them.  And the only way to do that, well... is by making them want one in the first place.  A caress here, a press there, a little lick later... and they are practically on fire, orgasming time and again, begging me to fuck them.  The only problem is that I don't have the equipment.</i>\"  Uma winks at you.  \"<i>Once they leave my clinic, they're satisfied and much hornier than usual.  So the first thing they do is go home to share their pleasure with their husbands.</i>\"\n\n");
 			outputText("You can't resist the wry grin as you comment that it must do wonders for the reputation of her business.\n\n");
-			outputText("Uma nods.  \"<i>It does, but as you can see, the clinic is pretty empty most of the time.  It just so happens that we're really expensive, especially considering our... extra services.  But don't worry, [name].  Since you're my little Loppe's [boyfriend], I'll be happy to give you a pretty good discount on our services.\"\n\n");
+			outputText("Uma nods.  \"<i>It does, but as you can see, the clinic is pretty empty most of the time.  It just so happens that we're really expensive, especially considering our... extra services.  But don't worry, [name].  Since you're my little Loppe's [boyfriend], I'll be happy to give you a pretty good discount on our services.</i>\"\n\n");
 			outputText("You laugh at that, thanking her for her generosity and her time, and then tell her it's time for you to go.  Uma smiles at you and says, \"<i>Come visit me again soon.</i>\"\n\n");
 			outputText("You promise that you will, and then head out of the quaint little clinic and back to camp.\n\n");
 
@@ -1141,7 +1141,7 @@ package classes.content
 			outputText("You get your things and get ready to leave - before you can bring yourself to go, however, you can't resist asking; Uma said the other kids in the village where Loppe grew called her \"<i>Furutama</i>\". What does that mean?\n\n");
 			outputText("\"<i>It means full balls, dear.</i>\"  Uma states matter of factly.\n\n");
 			outputText("You blink in shock, then stifle a laugh.  Yeah, that sounds like Loppe, alright.  You shake your head with a smile, thank Uma for talking to you, and then head off again.\n\n");
-
+			talkLoppeJoiner();
 		}
 		
 		/**
@@ -1504,7 +1504,7 @@ package classes.content
 		 * SEXY TIMES
 		 */
 		private static const UMA_CONSIDER_PC_FEM:int = 70; // Femininity value that Uma considers "girly"
-		private static const UMA_CONSIDER_PC_AND:int = 40; // Femininity value that Uma considers "androgynous"
+		private static const UMA_CONSIDER_PC_AND:int = 50; // Femininity value that Uma considers "androgynous"
 
 		/**
 		 * Main sex menu
@@ -1599,8 +1599,6 @@ package classes.content
 				addButton(3, "Handjob", sexHandjob);
 				//addButton(4, "Get Blown", sexBlowjob); // Ehh, it's technically complete in the doc, but it reads pretty unfinished and I'm not a fan of it at all.
 			}
-
-			
 		}
 
 		/**
@@ -1626,7 +1624,7 @@ package classes.content
 			outputText("and gather your [armorname] up in your arms as you do so. Walking over to the cupboard, you find a couple of folded towels and ample space to store your clothes, which is exactly what you do.\n\n");
 			outputText("When you turn, you notice Uma behind you, standing stark naked and holding her folded kimono in hand.  \"<i>Move over, dear.</i>\"  You politely step aside, and reach out to take Uma's clothes from her so that you can put them in the cupboard for her.  \"<i>Thank you, dear,</i>\" she replies, handing over her clothes.  You place them inside and ask what she would like you to do next?\n\n");
 			outputText("\"<i>Just get on my table, belly up, and we can get started,</i>\" she pats her table, waiting patiently.  You nod your head in understanding, approach and position yourself on the table as she instructed, bare [skin] prickling with anticipation at what's to come.  The mare cracks her knuckles and positions her hands over your body.  \"<i>Now, just sit back and enjoy dear.  Let my nimble hands care for this beautiful body of yours.</i>\"  \n\n");
-			outputText("You smile at her and let her know you're ready to start whenever she is.  The mare starts out by caressing your whole body, over your [tone] belly, your [breasts], your arms and your [legs].  Then she begins pressing a few spots, searching for knots in your muscles and quickly treating those with her expert fingers.  \"<i>Seems like you're enjoying it so far,</i>\" the mare chuckles.\n\n");
+			outputText("You smile at her and let her know you're ready to start whenever she is.  The mare starts out by caressing your whole body, over your belly, your [chest], your arms and your [legs].  Then she begins pressing a few spots, searching for knots in your muscles and quickly treating those with her expert fingers.  \"<i>Seems like you're enjoying it so far,</i>\" the mare chuckles.\n\n");
 			outputText("Even as Uma says this, you realise just how incredibly ");
 
 			if (player.gender == 1) outputText("hard ");
