@@ -51,7 +51,7 @@ package classes.content
 		{
 			clearOutput();
 			
-			outputText("You make your way Uma's shop.  It's close to Loppe's house");
+			outputText("You make your way to Uma's shop.  It's close to Loppe's house");
 			
 			// Added some shit for variance if the players not (presumably) sexed up Loppe too much in the past.
 			if (flags[kFLAGS.LOPPE_TIMES_SEXED] <= 3)
@@ -67,7 +67,7 @@ package classes.content
 				outputText(" and from there you've seen the humble exterior many times.  ");
 			}
 			
-			outputText("\"Kemono's Oriental Clinic\" is written on a wooden board above the entryway.  \"<i>Sugar, you coming?</i>\" Loppe asks, breaking you out of your reverie, stood holding the door open for you.  \"<i>Come on in!</i>\"\n\n");
+			outputText("\"Kemono's Oriental Clinic\" is written on a wooden board above the entryway.  \"<i>Sugar, you coming?</i>\" Loppe asks, breaking you out of your reverie.  \"<i>Come on in!</i>\"\n\n");
 			outputText("You follow the laquine inside; the interior is similar to Loppe's house, including the strange internal hallway, but the waiting room outside is light and airy.  Windows are adorned with multiple elaborate windchimes, which tinkle and clatter softly as a cooling breeze drifts through the house. A huge shelf dominates one wall, covered in - you find yourself double-checking - what look like tiny, miniature versions of trees.  A nondescript statue-fountain stands in one corner, water welling from its tip and flowing gently down its sides to create a calming sound.  In another corner, there is a small garden of colorful, polished stones and soft white sand.  Multiple lushly-cushioned chairs complete the room, obviously a waiting room - a dense bead curtain cordons off a doorway leading deeper inside the building, and Loppe's mother must clearly lie beyond.\n\n");
 			outputText("\"<i>Mom, are you busy?!</i>\" Loppe yells.  \"<i>Just a second, dear!</i>\" replies a melodic, feminine voice.\n\n");
 			outputText("Out of the bead curtains emerges a dog woman; her fur looks ruffled in places and she has a silly smile plastered over her face, her hair seems to be in disarray.  She briefly glances at you and Loppe, and only greets you two with a brief wave and a giggle before going away.  You wonder what could've happened beyond those curtains.\n\n");
@@ -572,13 +572,13 @@ package classes.content
 		public static const NEEDLEWORK_ATTACK:int = 4;
 		
 		public static const NEEDLEWORK_SPEED_PERK_NAME:String = "Chi Reflow - Speed";
-		public static const NEEDLEWORK_SPEED_PERK_DESC:String = "Uma's Accupuncture Needlework has gifted you with the 'Chi Reflow - Speed' perk. As a result your strength is capped but speed reductions are halved.";
+		public static const NEEDLEWORK_SPEED_PERK_DESC:String = "Uma's Acupuncture Needlework has gifted you with the 'Chi Reflow - Speed' perk. As a result your strength is capped but speed reductions are halved.";
 		public static const NEEDLEWORK_SPEED_PERK_SHORT_DESC:String = "Speed reductions are halved but caps strength";
 		public static const NEEDLEWORK_SPEED_STRENGTH_CAP:int = 60;
 		public static const NEEDLEWORK_SPEED_SPEED_MULTI:Number = 0.5;
 		
 		public static const NEEDLEWORK_LUST_PERK_NAME:String = "Chi Reflow - Lust";
-		public static const NEEDLEWORK_LUST_PERK_DESC:String = "Uma's Accupuncture Needlework has gifted you with the 'Chi Reflow - Lust' perk. As a result your Lust resistance and Tease attack are enhanced, but Libido and Sensetivity gains are increased.";
+		public static const NEEDLEWORK_LUST_PERK_DESC:String = "Uma's Acupuncture Needlework has gifted you with the 'Chi Reflow - Lust' perk. As a result your Lust resistance and Tease attack are enhanced, but Libido and Sensetivity gains are increased.";
 		public static const NEEDLEWORK_LUST_PERK_SHORT_DESC:String = "Lust resistance and Tease are enhanced, but Libido and Sensetivity gains increased.";
 		public static const NEEDLEWORK_LUST_LUST_RESIST:int = 10;
 		public static const NEEDLEWORK_LUST_TEASE_MULTI:Number = 10;
@@ -586,20 +586,20 @@ package classes.content
 		public static const NEEDLEWORK_LUST_LIBSENSE_MULTI:Number = 1.1;
 		
 		public static const NEEDLEWORK_DEFENSE_PERK_NAME:String = "Chi Reflow - Defense";
-		public static const NEEDLEWORK_DEFENSE_PERK_DESC:String = "Uma's Accupuncture Needlework has gifted you with the 'Chi Reflow - Defense' perk. As a result your body has gained passive damage resistance and extra health, but speed is capped.";
+		public static const NEEDLEWORK_DEFENSE_PERK_DESC:String = "Uma's Acupuncture Needlework has gifted you with the 'Chi Reflow - Defense' perk. As a result your body has gained passive damage resistance and extra health, but speed is capped.";
 		public static const NEEDLEWORK_DEFENSE_PERK_SHORT_DESC:String = "Passive damage resistance, but caps speed";
 		public static const NEEDLEWORK_DEFENSE_DEFENSE_MULTI:Number = 1.1;
 		public static const NEEDLEWORK_DEFENSE_EXTRA_HP:int = 50;
 		public static const NEEDLEWORK_DEFENSE_SPEED_CAP:int = 60;
 		
 		public static const NEEDLEWORK_MAGIC_PERK_NAME:String = "Chi Reflow - Magic";
-		public static const NEEDLEWORK_MAGIC_PERK_DESC:String = "Uma's Accupuncture Needlework has gifted you with the 'Chi Reflow - Magic' perk. As a result your spells are now more powerful, but regular attacks are weaker.";
+		public static const NEEDLEWORK_MAGIC_PERK_DESC:String = "Uma's Acupuncture Needlework has gifted you with the 'Chi Reflow - Magic' perk. As a result your spells are now more powerful, but regular attacks are weaker.";
 		public static const NEEDLEWORK_MAGIC_PERK_SHORT_DESC:String = "Magic attacks boosted, but regular attacks are weaker.";
 		public static const NEEDLEWORK_MAGIC_SPELL_MULTI:Number = 0.25; // Additive bonus to the other magic damage bonuses
 		public static const NEEDLEWORK_MAGIC_REGULAR_MULTI:Number = 0.75; // Multiplier tagged onto the end of damage calculations for the player.
 		
 		public static const NEEDLEWORK_ATTACK_PERK_NAME:String = "Chi Reflow - Attack";
-		public static const NEEDLEWORK_ATTACK_PERK_DESC:String = "Uma's Accupuncture Needlework has fited you with the 'Chi Reflow - Attack' perk. As a result your regular attacks are more powerful, but your damage reduction is decreased.";
+		public static const NEEDLEWORK_ATTACK_PERK_DESC:String = "Uma's Acupuncture Needlework has gifted you with the 'Chi Reflow - Attack' perk. As a result your regular attacks are more powerful, but your damage reduction is decreased.";
 		public static const NEEDLEWORK_ATTACK_PERK_SHORT_DESC:String = "Regular attacks boosted, but damage resistance decreased.";
 		public static const NEEDLEWORK_ATTACK_REGULAR_MULTI:Number = 1.1;
 		public static const NEEDLEWORK_ATTACK_DEFENSE_MULTI:Number = 0.9;
@@ -1881,10 +1881,10 @@ package classes.content
 			outputText("and a sizable table, made from bamboo; it's covered in a white cloth, and has an upraised headboard with a hole in it that looks like it's big enough to fit your head through.  This is the only piece of furniture in the room, apart from a small cupboard in the corner.  Though spartan in its layout, the room is quite comfortably warm.\n\n");
 			outputText("Uma begins stripping while you watch the older mare's beautifully sculpted body.  You wonder how old she is?  With a body like hers, she could probably pass for Loppe's sister, although she does have a few signs of being more mature.  Rather than making her look less beautiful, they make her even more stunning.  \"<i>Dear?  Hello, dear?</i>\" Uma waves a hand in front of you,  \"<i>Still there, dear?</i>\"  You shake your wandering thoughts out of your head and turn to look at her.  The seductive mare giggles.  \"<i>You should undress.  That is, unless you want your [armorname] to smell like horny mare.</i>\"  You nod in understanding, stripping yourself down and storing your things carefully in the nearby cupboard, beside Uma's own clothing.\n\n");
 			outputText("As you're busying yourself with your things, Uma struts with quiet confidence over to the table and seats herself on it, hands at her sides and gripping the edges for extra support, legs spread and smiling knowingly, as if anticipating your approval.   \"<i>Well, dear?  I'm ready if you are,</i>\" she laughs softly, one hand lifting off the table to caress her breasts, as much to start honing her arousal as to entice you to approach.\n\n");
-			outputText("You approach the the mare and kneel before her, inhaling her scent as you do so.  It smells sweet, enticing and arousing, a fragrance that sends your head reeling with Uma's arousal.  You find the fires of your arousal burn even hotter now.  ");
+			outputText("You approach the mare and kneel before her, inhaling her scent as you do so.  It smells sweet, enticing and arousing, a fragrance that sends your head reeling with Uma's arousal.  You find the fires of your arousal burn even hotter now.  ");
 
-			if (player.hasCock()) outputText("Blood engorging [eachCock].  ");
-			if (player.hasVagina()) outputText("moisture gatering on your netherlips, drops of your arousal sliding out of your [pussy] and down towards your [feet].  ");
+			if (player.hasCock()) outputText("Blood engorges [eachCock],  ");
+			if (player.hasVagina()) outputText("moisture gathers on your netherlips, drops of your arousal sliding out of your [pussy] and down towards your [feet].  ");
 			outputText("You gaze up at Uma, silently asking for permission.\n\n");
 
 			outputText("With a gentle smile and a seductive wiggle, she gently rubs her sweet cunt.  \"<i>Go on, dear,</i>\" she urges you on letting out a girly giggle immediately afterwards. \n\n");
@@ -1905,7 +1905,7 @@ package classes.content
 			outputText("\"<i>Mmm oh yes dear, yes, that feels good.  It's been awhile since someone would do that for me...</i>\"  She croons in her pleasure.\n\n");
 			outputText("You take your mouth off her plush netherlips to pant and regain your breath, licking around your mouth to taste more of her.  You don't take long before you plunge yourself back between her legs, licking, slurping, drinking and tasting.\n\n");
 			outputText("\"<i>Oh! Oh-oh-OH!</i>\"  Uma's legs close tightly around your neck, humping her cunt against your [face] before she shudders violently in orgasm, the wetness of her climax splashing across your lips and running down your chin.  One last pleasure-stoked spasm and she slumps in release, her legs unclenching and then sliding off of your shoulders to clop against the floor.  Breathing heavily, she smiles at you.  \"<i>Mmm my dear, my little Loppe is a lucky girl indeed to have you willing to do that for her.</i>\"\n\n");
-			outputText("You lick your lips and wipe the aftermath from your face, smiling broadly at the mare's flattery.  Shaking herself, Uma yawns loudly, one hand in front of her face to be more demure.  \"<i>That really felt wonderful/ I think... I think I'm going to take a little rest.  Would you be a dear and flip the sign to Closed on your way out, dear?</i>\" she asks, settling back on her table as if she really is about to have a nap here in her own workroom. \n\n");
+			outputText("You lick your lips and wipe the aftermath from your face, smiling broadly at the mare's flattery.  Shaking herself, Uma yawns loudly, one hand in front of her face to be more demure.  \"<i>That really felt wonderful I think... I think I'm going to take a little rest.  Would you be a dear and flip the sign to Closed on your way out, dear?</i>\" she asks, settling back on her table as if she really is about to have a nap here in her own workroom. \n\n");
 			outputText("You rub her thigh affectionately, promising to do so, then redress yourself and head back to camp.\n\n");
 
 			dynStats("lust", 30);
