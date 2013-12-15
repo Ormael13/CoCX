@@ -176,7 +176,14 @@
 			}
 			else
 			{
-				outputText("\"<i><i>So then, [name], what can I do you for?</i>\"  She flashes you a knowing grin, the innuendo clearly intended.");
+				if (player.femininity >= UMA_CONSIDER_PC_FEM)
+				{
+					outputText("\"<i>So then, [name], what can I do you for?</i>\"  She flashes you a knowing grin, the innuendo clearly intended.");
+				}
+				else 
+				{
+					outputText("\"<i>So then, [name], what can I do for you?</i>\"  She flashes you a friendly smile, her professionalism ever present.");
+				}
 			}
 			
 			buildCoreMenu();
@@ -205,7 +212,7 @@
 			}
 			
 			//addButton(4, "Train Loppe", trainLoppe); // Unfinished in the doc
-			addButton(9, "Back", telAdreMenu);
+			addButton(9, "Leave", telAdreMenu);
 		}
 		
 		/**
@@ -936,6 +943,7 @@
 			addButton(1, "Sexuality", talkSexuality);
 			addButton(2, "Loppe", talkLoppe);
 			addButton(3, "Loppe's Dad", talkLoppesDad);
+			addButton(9, "Back", enterClinic, true);
 		}
 		
 		/**
@@ -1675,38 +1683,46 @@
 			outputText("\"<i>Very well, dear.  Come with me,</i>\" she turns to leave her office and head down the corridor, towards the far back of the clinic, equine tail swishing lazily side to side.  You follow closely in her wake, looking forward to her \"special treatment\".\n\n");
 			outputText("The room she leads you to is quite simple; wooden walls and floor, a couple of drains set in the floor that are probably for the more... fluid generous clientele, ");
 
-			if (this.urtaLove()) outputText("something that makes you wonder if Urta would like to come and take a spin here ");
+			if (this.urtaLove()) outputText("something that makes you wonder if Urta would like to come and take a spin here, ");
 
 			outputText("and a sizable table, made from bamboo. It's covered in a white cloth, and has an upraised headboard with a hole in it that looks like it's big enough to fit your head through.  This is the only piece of furniture in the room, apart from a small cupboard in the corner.  Though spartan in its layout, the room is quite comfortably warm.\n\n");
-			outputText("Clearing her throat to get your attention the mare chuckles.  \"<i>Now, dear.  I can't quite get my hands where they need if you're still wearing your [armorname].  So why don't you strip down and put them in the cupboard over in the corner,</i>\"  she instructs, beginning to strip herself.  You nod your head in understanding and promptly strip down, ");
+			outputText("Clearing her throat to get your attention the mare chuckles.  \"<i>Now, dear.  I can't quite get my hands where they need to be if you're still wearing your [armorname].  So why don't you strip down and put them in the cupboard over in the corner,</i>\"  she instructs, beginning to strip herself.  You nod your head in understanding and promptly strip down, ");
 
 			if (flags[kFLAGS.PC_FETISH] >= 1) outputText("unable to resist either the tingle of lust that runs through you at being naked in front of Uma, nor the urge to flaunt your feminine physique for her own gratification, ");
 
 			outputText("and gather your [armorname] up in your arms as you do so. Walking over to the cupboard, you find a couple of folded towels and ample space to store your clothes, which is exactly what you do.\n\n");
 			outputText("Uma stands just behind you, her own clothes neatly folded.  \"<i>Excuse me.</i>\"  You politely step aside, and reach out to take Uma's clothes from her so that you can put them in the cupboard for her.  \"<i>Thanks, dear.  Now come here,</i>\" the mare says, sitting up on the table and tapping her thighs.  \"<i>Come sit on my lap.</i>\"\n\n");
-			outputText("You look at her with a slightly puzzled expression, but then smile, nod your head and approach.  You gently sit yourself down in the milf mare's lap ");
+			outputText("You look at her with a slightly puzzled expression, but then smile, nod your head and approach.  You gently sit yourself down in the milf mare's lap.  ");
 
-			if (player.tallness < 60) outputText("feeling very much like a child sat on the lap of her mother. ");
-			if (player.tallness > 84) outputText("carefully settling down for fear of squashing her. ");
+			if (player.tallness < 60) outputText("feeling very much like a child sat on the lap of her mother.  ");
+			if (player.tallness > 84) outputText("carefully settling down for fear of squashing her.  ");
 
 			outputText("Once settled and comfortable, you ask what to do next.\n\n");
 
-			outputText("\"<i>Just relax,</i>\" the mare prompts as she runs her hands over your body.  She gently teases your [nipples] with soft fingers, kneads your [breasts] with smooth touches and glides over your [belly] "); 
+			outputText("\"<i>Just relax,</i>\" the mare prompts as she runs her hands over your body.  She gently teases your [nipples] with soft fingers, kneading your [chest] with smooth touches; her delicate grasp gradually increasing in force until she's pawing at your sensetive tit-flesh with authority.\n\n");
+			outputText("With your attention focused on your chest, you don't notice one of the mares hands ceasing it's sensual massage of your breast, ");
 			
-			if (player.hasCock()) outputText("past your [cock]");
-			if (player.totalCocks() > 1) outputText("past [eachCock]");
+			
+			if (player.thickness < 10 && player.tone > 90) outputText("her fingertips trailing against your chiseled, muscular abdomen,");
+			else if (player.thickness < 30 && player.tone > 70) outputText("her fingertips gliding across your toned midriff,");
+			else if (player.thickness > 90 && player.tone < 10) outputText("her fingertips stealing a grope of your chubby belly as they travel lower,");
+			else if (player.thickness > 70 && player.tone < 30) outputText("her fingertips over your paunch of a belly,");
+			
+			
+			if (player.hasCock()) outputText(" past your [cock], and ");
+			else if (player.totalCocks() > 1) outputText(" past [eachCock], and");
 
 			if (player.hasVagina()) 
 			{
-				outputText(" and down towards the honeypot located ");
-				if (player.lowerBody == 3 || player.lowerBody == 4) outputText("on your [legs] ");
-				else outputText("between your [legs] ");
+				outputText("down towards the honeypot located ");
+				if (player.lowerBody == 3 || player.lowerBody == 4) outputText("on your [legs].  ");
+				else outputText("between your [legs].  ");
 				
 				outputText("Slowly she spreads your folds open, massaging your labia and gathering moisture from your [vagina].\n\n");
 			}
 			else outputText(".\n\n");
 
-			outputText("You moan already shivering in anticipation, waiting to see what a skilled lesbian can do with your most precious feminine treasure.  \"<i>Just a heads up, dear.  I'm pretty confident no one can hear what takes place here, and I'm not above getting myself a little dirty, so feel free to let loose and enjoy it as much and as loudly as you want, okay?</i>\"\n\n");
+			outputText("You moan, already shivering in anticipation, waiting to see what a skilled lesbian can do with your most precious feminine treasure.  \"<i>Just a heads up, dear.  I'm pretty confident no one can hear what takes place here, and I'm not above getting myself a little dirty, so feel free to let loose and enjoy it as much and as loudly as you want, okay?</i>\"\n\n");
 			outputText("The mare's hands gently circle your netherlips, sometimes brushing against your [clit], but only enough to send small jolts of electric pleasure running up your spine.  Slowly one questing finger begins prodding your entrance, before driving itself in.\n\n");
 
 			if (player.hasVirginVagina())
@@ -1735,13 +1751,13 @@
 			else if (player.looseness() == 0) // Tight
 			{
 				outputText("\"<i>Hmm tight!  I wonder how long you can keep yourself like that while dating my little Loppe,</i>\" the mare says teasingly.\n\n");
-				outputText("Loppe isn't that bad, you find yourself saying - and doesn't it feel so weird to be talking about Uma's daughter when you're letting Uma herself do you, you privately note.");
+				outputText("Loppe isn't that bad, you find yourself saying - and doesn't it feel so weird to be talking about Uma's daughter when you're letting Uma herself do you, you privately note.\n\n");
 				outputText("\"<i>Oh, but this is where you're mistaken my dear.  Loppe is pretty bad and I should know.  She got that from me,</i>\" the mare laughs lightly, adding another finger to massage your opening.\n\n");
 				outputText("You moan loudly, wriggling in your seat to allow Uma better access to your more sensitive spots.  Mmm, she's good at this...\n\n");
 				outputText("\"<i>Thanks dear, but we are just about to get started with the real thing,</i>\" she replies with a chuckle.  Uma begins massaging your inner walls while she roams your insides, trying to find something.\n\n"); 
 				outputText("You quickly realise what the mare is searching for, her expertise in matters of pleasure clear as your G-Spot is teased, crying out in delight as she sends the most delicious wave of pleasure rippling through your loins, doing your best to squeeze her fingers with your experienced but still-tight cunt.\n\n");
 				outputText("\"<i>Aha!  Found it!</i>\" the mare says with delight, \"<i>Now I can finally get started on removing all of this bad tension you've been accumulating, dear.</i>\"  She starts pumping her fingers inside you, making sure to tease your G-Spot with careful touches at every pump.\n\n");
-				outputText("You gasp and moan as the mare masseur's expert fingers tease you in all the right ways, slightly bucking in place to properly enjoy your finger-fucking, that oh-so-familiar and wonderful tightness building up in your belly before, with a cry of lust, you give in and ride the resultant crescendo of orgasm.  You give yourself over the bliss of cumming into Uma's hand, slumping down in relaxed stupor after you finish emptying yourself.\n\n");
+				outputText("You gasp and moan as the mare masseur's expert fingers tease you in all the right ways, slightly bucking in place to properly enjoy your finger-fucking, that oh-so-familiar and wonderful tightness building up in your belly before, with a cry of lust, you give in and ride the resultant crescendo of orgasm.  You give yourself over to the bliss of cumming into Uma's hand, slumping down in relaxed stupor after you finish emptying yourself.\n\n");
 				outputText("Removing her hand from your privates, the mare lifts her wet hand to her face and begins licking it clean.  \"<i>Hmm, I see that my daughter is right to call you sugar.  You really are sweet,</i>\" she chuckles.  \"<i>So how'd you like your... massage?</i>\"\n\n");
 				outputText("You smile lazily at her and assure her it was wonderful; a real treat to experience.  Maybe she should teach Loppe how to use her fingers like that.\n\n");
 				outputText("Uma smiles at you.  \"<i>Hmm I might in the future, but my little Loppe has tricks of her own, as I'm sure you've no doubt experienced?</i>\"\n\n");
@@ -1892,7 +1908,7 @@
 			outputText("You lick your lips and wipe the aftermath from your face, smiling broadly at the mare's flattery.  Shaking herself, Uma yawns loudly, one hand in front of her face to be more demure.  \"<i>That really felt wonderful/ I think... I think I'm going to take a little rest.  Would you be a dear and flip the sign to Closed on your way out, dear?</i>\" she asks, settling back on her table as if she really is about to have a nap here in her own workroom. \n\n");
 			outputText("You rub her thigh affectionately, promising to do so, then redress yourself and head back to camp.\n\n");
 
-			dynStats("lust", 15);
+			dynStats("lust", 30);
 
 			menu();
 			doNext(13);
