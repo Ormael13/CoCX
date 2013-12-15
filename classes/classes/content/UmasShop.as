@@ -1495,8 +1495,8 @@
 		/**
 		 * SEXY TIMES
 		 */
-		private static const UMA_CONSIDER_PC_FEM:int = 80; // Femininity value that Uma considers "girly"
-		private static const UMA_CONSIDER_PC_AND:int = 60; // Femininity value that Uma considers "androgynous"
+		private static const UMA_CONSIDER_PC_FEM:int = 70; // Femininity value that Uma considers "girly"
+		private static const UMA_CONSIDER_PC_AND:int = 50; // Femininity value that Uma considers "androgynous"
 
 		/**
 		 * Main sex menu
