@@ -1005,7 +1005,7 @@
 			outputText("Uma taps her chin, thinking of something to tell you about...\n\n");
 			
 			// random call to one of the loppeTalks functors
-			_loppeTalks[rand(_loppeTalks.length - 1)]();
+			_loppeTalks[rand(_loppeTalks.length)]();
 		}
 
 		private var _sceneNum:int = 0;
@@ -1133,7 +1133,7 @@
 			outputText("You get your things and get ready to leave - before you can bring yourself to go, however, you can't resist asking; Uma said the other kids in the village where Loppe grew called her \"<i>Furutama</i>\". What does that mean?\n\n");
 			outputText("\"<i>It means full balls, dear.</i>\"  Uma states matter of factly.\n\n");
 			outputText("You blink in shock, then stifle a laugh.  Yeah, that sounds like Loppe, alright.  You shake your head with a smile, thank Uma for talking to you, and then head off again.\n\n");
-
+			talkLoppeJoiner();
 		}
 		
 		/**
