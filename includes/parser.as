@@ -42,7 +42,9 @@ Planned, but not implemented yet:
 
 import showdown.Showdown;
 
-public var sceneParserDebug:Boolean = false;
+
+
+public var sceneParserDebug:Boolean = true;
 
 public var mainParserDebug:Boolean = false;
 
@@ -672,6 +674,46 @@ public function parseConditional(textCtnt:String, depth:int):String
 
 // SCENE PARSING ---------------------------------------------------------------------------------------------------------------
 
+
+// Basically, right now, the 
+private function getFuncFromString(localThis:Object, inStr:String):Function
+{
+	if (inStr in localThis)
+	{
+		return localThis[inStr];
+	}
+	
+	else if (inStr.indexOf('.') > 0) // *should* be > -1, but if the string starts with a dot, it can't be a valid reference to a nested class anyways.
+	{
+		var localReference:String;
+		var itemName:String;
+		localReference = inStr.substr(0, inStr.indexOf('.'));
+		itemName = inStr.substr(inStr.indexOf('.')+1);
+		if (sceneParserDebug) trace("localReference = ", localReference);
+		if (sceneParserDebug) trace("itemName = ", itemName);
+		if (sceneParserDebug) trace("localThis = ", localThis);
+		if (sceneParserDebug) trace("dereferenced = ", localThis[localReference]);
+		
+		// If we have the localReference as a member of the localThis, call this function again to further for 
+		// the item itemName in localThis[localReference]
+		// This allows arbitrarily-nested data-structures, by recursing over the . structure in inStr
+		if (localReference in localThis)
+		{
+			if (sceneParserDebug) trace("have localReference:", localThis[localReference]);
+			return getFuncFromString(localThis[localReference], itemName);
+		}
+		else
+		{
+			return null;
+		}
+
+	}
+	
+	return null;
+
+}
+
+
 public var buttonNum:Number;
 
 public function enterParserScene(sceneName:String):String
@@ -712,10 +754,10 @@ public function enterParserScene(sceneName:String):String
 		//if (sceneParserDebug) trace("Scene contents: \"" + tmp1 + "\" as parsed: \"" + tmp2 + "\"")
 		if (sceneParserDebug) trace("Scene contents after markdown: \"" + tmp3 + "\"");
 	}
-	else if (this[sceneName])
+	else if (this.getFuncFromString(this, sceneName) != null)
 	{
 		if (sceneParserDebug) trace("Have function \""+sceneName+"\" in this!. Calling.");
-		this[sceneName]();
+		this.getFuncFromString(this, sceneName)();
 	}
 	else
 	{
@@ -746,6 +788,7 @@ public function parseSceneTag(textCtnt:String):void
 	thisParserState[sceneName] = stripStr(sceneCont);
 
 }
+
 public function parseButtonTag(textCtnt:String):void
 {
 	var arr:Array;
