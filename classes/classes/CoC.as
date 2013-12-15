@@ -63,6 +63,7 @@
 		include "../../includes/input.as";
 		include "../../includes/OnLoadVariables.as";
 		include "../../includes/startUp.as";
+		include "../../includes/debug.as";
 		
 		include "../../includes/combat.as";
 		include "../../includes/doEvent.as";
