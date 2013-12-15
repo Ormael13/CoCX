@@ -962,9 +962,9 @@ public function fuckNieve():void {
 		else outputText("  \"<i>Mmm,</i>\" she smacks her lips and takes a quick breath, \"<i>Such a nice example of a candycane right here.  Let's go in for another taste.</i>\"");
 	}
 	outputText("  And with that she dives back down onto your " + cockClit(x) + ".  Her head bobs and bows, giving the sensation of an icecube running up and down your ");
-	if(x >= 0) output("dick");
-	else output("clit");
-	output(" at great speed.");
+	if(x >= 0) outputText("dick");
+	else outputText("clit");
+	outputText(" at great speed.");
 	
 	//(Variable depending on dick-type)
 	if(x >= 0) {

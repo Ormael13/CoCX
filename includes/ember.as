@@ -3502,7 +3502,7 @@ public function breedEmberPregnantAsIfThereWasAnyOtherKindOfBreeding():void {
 	
 	outputText("\n\nAiming your cock upwards; Ember straddles you and lowers herself on your pulsing " + cockDescript(x) + ", hissing in pleasure as your hot flesh finally makes contact with her drooling fuckhole");
 	if(emberHasCock()) outputText(", her own cock springing up and throbbing with the electric contact.");
-	else output(".");
+	else outputText(".");
 	
 	outputText("\n\nYou hiss back to her at the sensations that fill you with such pleasure, your yearning breeding rod finally slotted into a ripe, ready breeding hole, her deliciously cool inner walls enveloping your burning hot flesh.");
 	
