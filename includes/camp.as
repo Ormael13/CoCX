@@ -372,7 +372,8 @@ public function camp():void {
 	if(player.fatigue > 50) rest = 11;	
 	if(player.lust > 30) masturbate = 42;
 	outputText("", true);
-	//outputText(images.showImage("camping"), false);
+	
+	outputText(images.showImage("camping"), false);
 	//Isabella upgrades camp level!
 	/*
 
