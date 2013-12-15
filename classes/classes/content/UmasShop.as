@@ -1591,8 +1591,6 @@
 				addButton(3, "Handjob", sexHandjob);
 				//addButton(4, "Get Blown", sexBlowjob); // Ehh, it's technically complete in the doc, but it reads pretty unfinished and I'm not a fan of it at all.
 			}
-
-			
 		}
 
 		/**
@@ -1618,7 +1616,7 @@
 			outputText("and gather your [armorname] up in your arms as you do so. Walking over to the cupboard, you find a couple of folded towels and ample space to store your clothes, which is exactly what you do.\n\n");
 			outputText("When you turn, you notice Uma behind you, standing stark naked and holding her folded kimono in hand.  \"<i>Move over, dear.</i>\"  You politely step aside, and reach out to take Uma's clothes from her so that you can put them in the cupboard for her.  \"<i>Thank you, dear,</i>\" she replies, handing over her clothes.  You place them inside and ask what she would like you to do next?\n\n");
 			outputText("\"<i>Just get on my table, belly up, and we can get started,</i>\" she pats her table, waiting patiently.  You nod your head in understanding, approach and position yourself on the table as she instructed, bare [skin] prickling with anticipation at what's to come.  The mare cracks her knuckles and positions her hands over your body.  \"<i>Now, just sit back and enjoy dear.  Let my nimble hands care for this beautiful body of yours.</i>\"  \n\n");
-			outputText("You smile at her and let her know you're ready to start whenever she is.  The mare starts out by caressing your whole body, over your [tone] belly, your [breasts], your arms and your [legs].  Then she begins pressing a few spots, searching for knots in your muscles and quickly treating those with her expert fingers.  \"<i>Seems like you're enjoying it so far,</i>\" the mare chuckles.\n\n");
+			outputText("You smile at her and let her know you're ready to start whenever she is.  The mare starts out by caressing your whole body, over your belly, your [chest], your arms and your [legs].  Then she begins pressing a few spots, searching for knots in your muscles and quickly treating those with her expert fingers.  \"<i>Seems like you're enjoying it so far,</i>\" the mare chuckles.\n\n");
 			outputText("Even as Uma says this, you realise just how incredibly ");
 
 			if (player.gender == 1) outputText("hard ");
