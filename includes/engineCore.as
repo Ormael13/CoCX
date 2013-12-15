@@ -122,7 +122,7 @@ public function speech(output:String, speaker:String):void {
 public function parseText(text:String, parseAsMarkdown:Boolean = false):String
 {
 	// Moved into external parser.
-	text = recursiveParser(text, parseAsMarkdown);
+	text = this.parser.recursiveParser(text, parseAsMarkdown);
 	return text;
 }
 
