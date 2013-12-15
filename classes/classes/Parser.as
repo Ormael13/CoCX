@@ -58,6 +58,8 @@ package classes
 		public var sceneParserDebug:Boolean = false;
 
 		public var mainParserDebug:Boolean = false;
+		public var conditionalDebug:Boolean = false;
+		public var printCcntentDebug:Boolean = false;
 
 
 
@@ -552,7 +554,7 @@ package classes
 				retVal = (condArg1 != condArg2);
 
 
-			if (mainParserDebug) trace("Check: " + condArg1 + " " + operator + " " + condArg2 + " = " + retVal);
+			if (mainParserDebug) trace("Check: " + condArg1 + " " + operator + " " + condArg2 + " result: " + retVal);
 
 			return retVal;
 		}
@@ -568,40 +570,61 @@ package classes
 			// [if (condition) OUTPUT_IF_TRUE | OUTPUT_IF_FALSE]
 			//                 ^          This Bit            ^
 			// If there is no OUTPUT_IF_FALSE, returns an empty string for the second option.
+			if (conditionalDebug) trace("------------------4444444444444444444444444444444444444444444444444444444444-----------------------")
+			if (conditionalDebug) trace("Split Conditional input string: ", textCtnt)
+			if (conditionalDebug) trace("------------------3333333333333333333333333333333333333333333333333333333333-----------------------")
 
-			var i:Number = 0;
-			var tmp:Number = 0;
 
-			var ret:Array;
+			var ret:Array = new Array("", "");
 
-			tmp = textCtnt.indexOf("[");
 
-			if (tmp == -1)
+			var i:int;
+
+			var sectionStart:int = 0;
+			var section:int = 0;
+			var nestLevel:int = 0;
+
+			for (i = 0; i < textCtnt.length; i += 1)
 			{
-				ret = textCtnt.split("|")
-				if (ret.length >=3)
+				if (textCtnt.charAt(i) == "[")
+					nestLevel += 1;
+				else if (textCtnt.charAt(i) == "]")
+					nestLevel -= 1;
+				else if ((textCtnt.charAt(i) == "|") && (nestLevel == 0))
 				{
-					if (CoC_Settings.haltOnErrors) throw new Error("");
-					ret = ["<b>Error! Too many options in if statement!</b>",
+					if (section == 1) // barf if we hit a second "|" that's not in brackets
+					{
+						if (CoC_Settings.haltOnErrors) throw new Error("Nested IF statements still a WIP")
+						ret = ["<b>Error! Too many options in if statement!</b>",
 							"<b>Error! Too many options in if statement!</b>"];
+					}
+					else
+					{
+						ret[section] = textCtnt.substring(sectionStart, i);
+						sectionStart = i + 1
+						section += 1
+					}
 				}
 
-				// If there was no "else" condition, add a
-				if (ret.length == 1)
-					ret.push("");
-				// No nested brackets, just split
 			}
-			else
-			{
-				// This *may* not be a problem, since IF statements should be evaluated depth-first.
-				// Therefore, upper if statements shouldn't be able to tell they contained deeper
-				// statements at all anyways, since the deeper statments will be evaluated to
-				// plain text before the upper statements even are parsed at all
-				// As always, more testing is needed.
-				throw new Error("Nested IF statements still a WIP")
-			}
+			ret[section] = textCtnt.substring(sectionStart, textCtnt.length);
+
+
+			if (conditionalDebug) trace("------------------5555555555555555555555555555555555555555555555555555555555-----------------------")
+			if (conditionalDebug) trace("Outputs: ", ret)
+			if (conditionalDebug) trace("------------------6666666666666666666666666666666666666666666666666666666666-----------------------")
+
 			return ret;
 		}
+
+		private function splitConditionalContents(textCtnt:String):String
+		{
+			var ret:Array = new Array("", "")
+			return "";
+		}
+		
+		
+		
 
 		// Called to evaluate a if statment string, and return the evaluated result.
 		// Returns an empty string ("") if the conditional rvaluates to false, and there is no else
@@ -617,11 +640,26 @@ package classes
 			// Takes the contents of an if statement:
 			// [if (condition) OUTPUT_IF_TRUE]
 			// [if (condition) OUTPUT_IF_TRUE | OUTPUT_IF_FALSE]
-			// and return the condition and output content as an array:
+			// splits the contents into an array as such:
 			// ["condition", "OUTPUT_IF_TRUE"]
 			// ["condition", "OUTPUT_IF_TRUE | OUTPUT_IF_FALSE"]
+			// Finally, evalConditionalStatementStr() is called on the "condition", the result
+			// of which is used to determine which content-section is returned
+			// 
 
-			// (NOT YET) Allows nested condition parenthesis, because I'm masochistic
+
+			// TODO: (NOT YET) Allows nested condition parenthesis, because I'm masochistic
+
+
+			// POSSIBLE BUG: A actual statement starting with "if" could be misinterpreted as an if-statement
+			// It's unlikely, but I *could* see it happening.
+			// I need to do some testing 
+			// ~~~~Fake-Name
+
+
+			if (conditionalDebug) trace("------------------2222222222222222222222222222222222222222222222222222222222-----------------------")
+			if (conditionalDebug) trace("If input string: ", textCtnt)
+			if (conditionalDebug) trace("------------------1111111111111111111111111111111111111111111111111111111111-----------------------")
 
 
 			var ret:Array = new Array("", "", "");	// first string is conditional, second string is the output
@@ -659,18 +697,23 @@ package classes
 
 						// Make sure the contents of the if-statement have been evaluated to a plain-text string before trying to
 						// split the base-level if-statement on the "|"
-						output = recParser(textCtnt.substring(i+1, textCtnt.length), depth);
+						output = textCtnt.substring(i+1, textCtnt.length)
 
 						// And now do the actual splitting.
 						output = splitConditionalResult(output);
 
-						if (mainParserDebug) trace("prefix = '", ret[0], "' conditional = ", conditional, " content = ", output);
-						if (mainParserDebug) trace("Content Item 1 = ", output[0], "Item 2 = ", output[1]);
+						if (conditionalDebug) trace("prefix = '", ret[0], "' conditional = ", conditional, " content = ", output);
+						
+						if (conditionalDebug) trace("-0--------------------------------------------------");
+						if (conditionalDebug) trace("Content Item 1 = ", output[0])
+						if (conditionalDebug) trace("-1--------------------------------------------------");
+						if (conditionalDebug) trace("Item 2 = ", output[1]);
+						if (conditionalDebug) trace("-2--------------------------------------------------");
 
 						if (conditional)
-							return output[0]
+							return recParser(output[0], depth);
 						else
-							return output[1]
+							return recParser(output[1], depth);
 
 					}
 				}
@@ -843,51 +886,50 @@ package classes
 			return textCtnt;
 		}
 
+
+		public function isIfStatement(textCtnt:String):Boolean
+		{
+			if (textCtnt.toLowerCase().indexOf("if") == 0)
+				return true;
+			else
+				return false;
+		}
+
 		// Called to determine if the contents of a bracket are a parseable statement or not
 		// If the contents *are* a parseable, it calls the relevant function to evaluate it
 		// if not, it simply returns the contents as passed
-		public function evalBracketContents(textCtnt:String, depth:int):String
+		public function parseNonIfStatement(textCtnt:String, depth:int):String
 		{
 			
 			var retStr:String = "";
-			if (mainParserDebug) trace("Evaluating string: ", textCtnt);
+			if (printCcntentDebug) trace("Evaluating string: ", textCtnt);
 
-			// POSSIBLE BUG: A actual statement starting with "if" could be misinterpreted as an if-statement
-			// It's unlikely, but I *could* see it happening.
-			// I need to do some testing ~~~~Fake-Name
-			if (textCtnt.toLowerCase().indexOf("if") == 0)
+
+			if (mainParserDebug) trace("Not an if statement")
+				// Match a single word, with no leading or trailing space
+			var singleWordTagRegExp:RegExp = /^\w+$/;
+			var doubleWordTagRegExp:RegExp = /^\w+\s\w+$/;
+
+			var singleWordExpRes:Object = singleWordTagRegExp.exec(textCtnt);
+			var doubleWordExpRes:Object = doubleWordTagRegExp.exec(textCtnt);
+
+			if (mainParserDebug) trace("Checking if single word = [" + singleWordExpRes + "]", getQualifiedClassName(singleWordExpRes));
+			if (mainParserDebug) trace("string length = ", textCtnt.length);
+			if (singleWordExpRes)
 			{
-				if (mainParserDebug) trace("It's an if-statement");
-				retStr = parseConditional(textCtnt, depth);
-				if (mainParserDebug) trace("IF Evaluated to ", retStr);
+				if (mainParserDebug) trace("It's a single word!");
+				retStr += convertSingleArg(textCtnt);
+			}
+			else if (doubleWordExpRes)
+			{
+				if (mainParserDebug) trace("Two-word tag!")
+				retStr += convertDoubleArg(textCtnt);
 			}
 			else
 			{
-				if (mainParserDebug) trace("Not an if statement")
-					// Match a single word, with no leading or trailing space
-				var singleWordTagRegExp:RegExp = /^\w+$/;
-				var doubleWordTagRegExp:RegExp = /^\w+\s\w+$/;
-
-				var singleWordExpRes:Object = singleWordTagRegExp.exec(textCtnt);
-				var doubleWordExpRes:Object = doubleWordTagRegExp.exec(textCtnt);
-
-				if (mainParserDebug) trace("Checking if single word = [" + singleWordExpRes + "]", getQualifiedClassName(singleWordExpRes));
-				if (mainParserDebug) trace("string length = ", textCtnt.length);
-				if (singleWordExpRes)
-				{
-					if (mainParserDebug) trace("It's a single word!");
-					retStr += convertSingleArg(textCtnt);
-				}
-				else if (doubleWordExpRes)
-				{
-					if (mainParserDebug) trace("Two-word tag!")
-					retStr += convertDoubleArg(textCtnt);
-				}
-				else
-				{
-					retStr += "<b>!Unknown multi-word tag \"" + retStr + "\"!</b>";
-				}
+				retStr += "<b>!Unknown multi-word tag \"" + retStr + "\"!</b>";
 			}
+		
 			return retStr;
 		}
 
@@ -899,6 +941,7 @@ package classes
 		// You pass in the string you want parsed, and the parsed result is returned as a string.
 		public function recParser(textCtnt:String, depth:Number):String
 		{
+			if (mainParserDebug) trace("Recursion call", depth, "---------------------------------------------+++++++++++++++++++++")
 
 			// Depth tracks our recursion depth
 			// Basically, we need to handle things differently on the first execution, so we don't mistake single-word print-statements for
@@ -969,9 +1012,21 @@ package classes
 						tmpStr = evalForSceneControls(tmpStr);		
 						// evalForSceneControls swallows scene controls, so they won't get parsed further now.
 						// therefore, you could *theoretically* have nested scene pages, though I don't know WHY you'd ever want that.
-						if (tmpStr)
-							retStr += evalBracketContents(recParser(tmpStr, depth), depth);
-						
+
+						if (isIfStatement(tmpStr))
+						{
+							if (conditionalDebug) trace("early eval as if")
+							retStr = parseConditional(tmpStr, depth)
+							if (conditionalDebug) trace("------------------0000000000000000000000000000000000000000000000000000000000000000-----------------------")
+							//trace("Parsed Ccnditional - ", retStr)
+						}
+						else
+						{
+							
+							if (tmpStr)
+								retStr += parseNonIfStatement(recParser(tmpStr, depth), depth);
+						}
+
 						// First parse into the text in the brackets (to resolve any nested brackets)
 						// then, eval their contents, in case they're an if-statement or other control-flow thing
 						// I haven't implemented yet
@@ -984,12 +1039,12 @@ package classes
 						postfixTmp = textCtnt.substring(i+1, textCtnt.length);
 						if (postfixTmp.indexOf("[") != -1)
 						{
-							if (mainParserDebug) trace("Need to parse trailing text", postfixTmp)
+							if (printCcntentDebug) trace("Need to parse trailing text", postfixTmp)
 							retStr += recParser(postfixTmp, depth);	// Parse the trailing text (if any)
 						}
 						else
 						{
-							if (mainParserDebug) trace("No brackets in trailing text", postfixTmp)
+							if (printCcntentDebug) trace("No brackets in trailing text", postfixTmp)
 							retStr += postfixTmp;
 						}
 
@@ -1002,7 +1057,7 @@ package classes
 			{
 				// DERP. We should never have brackets around something that ISN'T a tag intended to be parsed. Therefore, we just need
 				// to determine what type of parsing should be done do the tag.
-				if (mainParserDebug) trace("No brackets present", textCtnt);
+				if (printCcntentDebug) trace("No brackets present", textCtnt);
 
 
 				retStr += textCtnt;
@@ -1017,9 +1072,6 @@ package classes
 		// textCtnt is the text you want parsed, depth is a number, which should be 0
 		// or not passed at all.
 		// You pass in the string you want parsed, and the parsed result is returned as a string.
-
-
-
 		public function recursiveParser(contents:String, parseAsMarkdown:Boolean = false):String
 		{
 			// Eventually, when this goes properly class-based, we'll add a period, and have this.parserState.
@@ -1070,7 +1122,7 @@ package classes
 				// when we return. Therefore, in a horrible hack, we return the contents of mainTest.htmlText as the ret value, so 
 				// the outputText call overwrites the window content with the exact same content.
 				
-				trace("Returning: ", ret);
+				// trace("Returning: ", ret);
 				_cocClass.currentText = ret;
 
 
