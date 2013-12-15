@@ -1,4 +1,4 @@
-﻿package classes.content 
+package classes.content 
 {
 	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
@@ -438,15 +438,15 @@
 			outputText("and pushes hard.  You can't help but scream at the initial bout of pain.  \"<i>Relax dear.  It will only hurt for a little while.</i>\"  You squirm at the pain but slowly it begins to dissipate... you're pretty sure Uma is pressing against your chest even harder than before, yet the pain is quickly ebbing away...\n\n");
 			outputText("Uma chuckles.  \"<i>See dear?  I told you it would get better, but I'm afraid it will hurt a bit more later... I have other spots to take care of,</i>\" she warns, removing her elbow and moving away, only to return shortly with a small metal stick prominently featuring a rounded tip.  \"<i>Get ready, dear.</i>\"  You brace yourself for the next part of the treatment.\n\n");
 			outputText("The treatment on your front is painful, but at the same time it gets easier and easier to relax as it goes on... and it hurts less and less, until by the time Uma is finished it just doesn't hurt anymore...\n\n");
-			outputText("\"<i>Very good, dear.  Now flip yourself over, it's time to take care of your back,</i> she informs you\"");
+			outputText("\"<i>Very good, dear.  Now flip yourself over, it's time to take care of your back,</i>\" she informs you");
 
 			if (player.femininity >= UMA_CONSIDER_PC_FEM)
 			{
-				outputText(", her hand gently caressing your [hip] absent-mindedly");
+				outputText(", her hand gently caressing your [hips] absent-mindedly");
 			}
 			else if (player.femininity >= UMA_CONSIDER_PC_AND)
 			{
-				outputText(", her hand lightly touching your [hip] absend-mindedly");
+				outputText(", her hand lightly touching your [hips] absend-mindedly");
 			}
 
 			outputText(".\n\n");
