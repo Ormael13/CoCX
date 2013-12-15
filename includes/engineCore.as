@@ -2729,7 +2729,7 @@ public function dynStats(... args):void
 		return;
 	}
 	
-	var argNamesFull:Array 	= 	new Array("strength", "toughness", "speed", "intellect", "sensetivity", "lust", "corruption", "resisted", "noBimbo"); // In case somebody uses full arg names etc
+	var argNamesFull:Array 	= 	new Array("strength", "toughness", "speed", "intellect", "libido", "sensetivity", "lust", "corruption", "resisted", "noBimbo"); // In case somebody uses full arg names etc
 	var argNamesShort:Array = 	new Array(	"str", 	"tou", 	"spe", 	"int", 	"lib", 	"sen", 	"lus", 	"cor", 	"res", 	"bim"); // Arg names
 	var argVals:Array = 		new Array(	0, 		0,	 	0, 		0, 		0, 		0, 		0, 		0, 		true, 	false); // Default arg values
 	
@@ -2738,9 +2738,9 @@ public function dynStats(... args):void
 		if (typeof(args[i]) == "string")
 		{
 			// Make sure the next arg has the POSSIBILITY of being correct
-			if (typeof(args[i + 1]) != "number" || typeof(args[i + 1]) != "boolean")
+			if ((typeof(args[i + 1]) != "number") && (typeof(args[i + 1]) != "boolean"))
 			{
-				trace("dynStats aborted. Next argument after argName is invalid!");
+				trace("dynStats aborted. Next argument after argName is invalid! arg is type " + typeof(args[i + 1]));
 				return;
 			}
 			
