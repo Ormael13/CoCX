@@ -1812,8 +1812,7 @@ public function fuckYvonneInZeBlacksmith():void {
 public function flirtWithVictoria():void {
 	clearOutput();
 	var x:Number = player.cockThatFits(70);
-	//if(x < 0) x = player.smallestCockIndex();
-	var y:Number = x + 1;
+	if(x < 0) x = player.smallestCockIndex();
 	outputText("You take the clothes from her and give them a look over.  Setting them on the counter, you tell her that they're quite nice, but if she's interested you might have something that could fit in the back quite nicely as well.");
 	
 	if(x < 0) {
@@ -1827,7 +1826,7 @@ public function flirtWithVictoria():void {
 	if(player.tallness >= 65) outputText("your stomach.");
 	else if(player.tallness >= 55) outputText("your chest.");
 	else outputText("your face.");
-	outputText("  <i>\"Now then,  let's see what you've got!\"</i>  With practiced ease she works the bottom of your [armor] off, revealing [eachCock].  <i>\"Well, well. Looks like I was right about you from the start,\"</i> she says, licking her lips again.  <i>\"Just a taste first, I think...\"</i> Sticking her tongue out once more, she gives your rapidly stiffening dick a long, slow lick from the base up to the tip.  She closes her mouth just around your [cockHead " + y + "], giving it a few rapid licks before pulling off with a pop.");
+	outputText("  <i>\"Now then,  let's see what you've got!\"</i>  With practiced ease she works the bottom of your [armor] off, revealing [eachCock].  <i>\"Well, well. Looks like I was right about you from the start,\"</i> she says, licking her lips again.  <i>\"Just a taste first, I think...\"</i> Sticking her tongue out once more, she gives your rapidly stiffening dick a long, slow lick from the base up to the tip.  She closes her mouth just around your [cockHead " + x + "], giving it a few rapid licks before pulling off with a pop.");
 	
 	outputText("\n\n<i>\"Oh yes,  I think you'll do rather nicely.  In fact, I think I'm going to give you a special treat.\"</i>  Smirking up at you, the busty dog-girl unbuttons her top just beneath her ample chest.  Before you can puzzle out what it is she's doing, she takes your [cock] and stuffs it into the hole and up through her cleavage");
 	if(player.cocks[x].cockLength >= 5) outputText(" until the tip is poking out the top");
