@@ -835,8 +835,10 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 	var saveFile:* = saveData;
 	if (saveFile.data.exists)
 	{
+
 		//KILL ALL COCKS;
 		player = new Player();
+		flags = new DefaultDict();
 		model.player = player;		
 		
 		//trace("Type of saveFile.data = ", getClass(saveFile.data));
