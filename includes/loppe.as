@@ -696,13 +696,25 @@ public function chatWithLoppeAboutHerMom():void {
 	//(If PC is male:) 
 	if(player.gender == 1) outputText("  Well, from what Loppe's told you, Uma wouldn't be attracted to you anyway.");
 	outputText("\n\nLoppe giggles and grins. \"<i>Silly [name].  I don't need several lovers.  Just one... the perfect one.  And I don't think my mom would be upset either way.  She knows I'm a big girl now.</i>\"");
-	outputText("\n\nSo, if she's so confident that her mom wouldn't disapprove of her daughter's sexual awakening... what about your relationship?");
 	
-	outputText("\n\nLoppe looks you over, thoughtful.  \"<i>To be honest... I don't think she would mind.  Want me to introduce you to her?  To become my 'official' " + player.mf("boy", "girl") + "friend?  I know I certainly wouldn't mind having a 'serious' relationship with a cutie like you.</i>\"  The dancer winks at you.  \"<i>How about it Sugar, do you wanna go visit my mom?</i>\"");
+	if (flags[kFLAGS.LOPPE_PC_MET_UMA] == 0)
+	{
+		outputText("\n\nSo, if she's so confident that her mom wouldn't disapprove of her daughter's sexual awakening... what about your relationship?\n\n");
+		outputText("Loppe looks you over, thoughtful.  \"<i>To be honest... I don't think she would mind.  Want me to introduce you to her?  To become my 'official' " + player.mf("boy", "girl") + "friend?  I know I certainly wouldn't mind having a 'serious' relationship with a cutie like you.</i>\"  The dancer winks at you. \"<i>How about it Sugar, do you wanna go visit my mom?</i>\"");
+	}
 	
 	menu();
-	addButton(0, "Visit Mom", umasShop.firstVisitPart1);
-	addButton(1, "Mebbe Later", eventParser, 13);
+	
+	if (flags[kFLAGS.LOPPE_PC_MET_UMA] == 0) 
+	{
+		addButton(0, "Visit Mom", umasShop.firstVisitPart1);
+		addButton(1, "Mebbe Later", eventParser, 13);
+	}
+	else
+	{
+		addButton(0, "Next", eventParser, 13);
+	}
+	
 }
 
 //Her Village (edited)
