@@ -2973,6 +2973,7 @@ public function doCombat(eventNum:Number):void
 	//confront worm combat
 	if(eventNum == 5056) {
 		outputText("You turn to confront the worms and combat begins!", true);
+		spriteSelect(76);
 		startCombat(8);
 	}
 	//Do nothing
