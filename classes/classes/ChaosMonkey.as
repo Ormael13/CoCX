@@ -5,8 +5,9 @@
 	import flash.display.Stage;
 	import classes.CoC_Settings
 
-
+	
 	import flash.events.UncaughtErrorEvent;
+	import flash.system.Capabilities;
 	import flash.display.Sprite;
 	
 	/**
@@ -177,6 +178,7 @@
 		private function attachGlobalErrorHandler():void
 		{
 			this._mainClassPtr.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, this.catchGlobalError);
+
 		}
 
 		private function detatchGlobalErrorHandler():void

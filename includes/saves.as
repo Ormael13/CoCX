@@ -715,14 +715,19 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 	// Something to do in the future
 	if (isFile)
 	{
-		if (!(this.monkey.run))
-		{
+		CONFIG::debug {
+			if (!(this.monkey.run))
+			{
+		}
+
 			file = new FileReference();
 			//outputText(serializeToString(saveFile.data), true);
 			var bytes:ByteArray = new ByteArray();
 			bytes.writeObject(saveFile);
 			file.save(bytes, null);
 			outputText("Attempted to save to file.", true);
+		CONFIG::debug {
+			}
 		}
 	}
 	else
@@ -737,14 +742,18 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 public function openSave():void
 {
 
-	// Block when running the chaos monkey
-	if (!(this.monkey.run))
-	{
+	CONFIG::debug {
+		// Block when running the chaos monkey
+		if (!(this.monkey.run))
+		{
+	}
 		file = new FileReference();
 		file.browse();
 		file.addEventListener(Event.SELECT, onFileSelected);
 		//var fileObj : Object = readObjectFromStringBytes("");
 		//loadGameFile(fileObj);
+	CONFIG::debug {
+		}
 	}
 }
 

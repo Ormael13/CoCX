@@ -44,6 +44,7 @@
 	import flash.net.URLRequest;
 	import flash.text.*;
 	import flash.utils.ByteArray;
+	import flash.system.Capabilities;
 
 	/****
 		classes.CoC: The Document class of Corruption of the Champions.
@@ -279,13 +280,16 @@
 		public var oldStats:*; // I *think* this is a generic object
 		public var inputManager:InputManager;
 
-		public var monkey:ChaosMonkey;
-		public var testingBlockExiting:Boolean;
+		CONFIG::debug {
+			public var monkey:ChaosMonkey;
+		}
+			public var testingBlockExiting:Boolean;
 
 		public function CoC()
 		{
 			// Cheatmode.
 			kGAMECLASS = this;
+			
 			// This is a flag used to prevent the game from exiting when running under the automated tester
 			// (the chaos monkey)
 			testingBlockExiting = false;
@@ -345,8 +349,9 @@
 			this.inputManager = new InputManager(stage, false);
 			include "../../includes/ControlBindings.as";
 
-
-			this.monkey = new ChaosMonkey(this);
+			CONFIG::debug {
+				this.monkey = new ChaosMonkey(this);
+			}
 
 			//} endregion
 
