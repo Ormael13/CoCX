@@ -270,6 +270,7 @@
 		public var itemSlot3:itemSlotClass;
 		public var itemSlot4:itemSlotClass;
 		public var itemSlot5:itemSlotClass;
+		public var itemSlots:Array;
 		public var itemStorage:Array;
 		public var gearStorage:Array;
 		public var shortName:String;
@@ -472,6 +473,10 @@
 			itemSlot3 = new itemSlotClass();
 			itemSlot4 = new itemSlotClass();
 			itemSlot5 = new itemSlotClass();
+			
+
+			itemSlots = [itemSlot1, itemSlot2, itemSlot3, itemSlot4, itemSlot5];
+
 			itemStorage = new Array();
 			gearStorage = new Array();
 			shortName = "";

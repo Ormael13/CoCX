@@ -172,43 +172,23 @@ public function benoitSellTransact(slot:int = 1):void {
 	var gems:int = 0;
 	if(slot == 1) {
 		gems = int(itemValue(itemSlot1.shortName)/sellMod);
-		itemSlot1.quantity--;
-		if(itemSlot1.quantity <= 0) {
-			itemSlot1.quantity = 0;
-			itemSlot1.shortName = "";
-		}
+		itemSlot1.removeOneItem();
 	}
 	if(slot == 2) {
 		gems = int(itemValue(itemSlot2.shortName)/sellMod);
-		itemSlot2.quantity--;
-		if(itemSlot2.quantity <= 0) {
-			itemSlot2.quantity = 0;
-			itemSlot2.shortName = "";
-		}
+		itemSlot2.removeOneItem();
 	}
 	if(slot == 3) {
 		gems = int(itemValue(itemSlot3.shortName)/sellMod);
-		itemSlot3.quantity--;
-		if(itemSlot3.quantity <= 0) {
-			itemSlot3.quantity = 0;
-			itemSlot3.shortName = "";
-		}
+		itemSlot3.removeOneItem();
 	}
 	if(slot == 4) {
 		gems = int(itemValue(itemSlot4.shortName)/sellMod);
-		itemSlot4.quantity--;
-		if(itemSlot4.quantity <= 0) {
-			itemSlot4.quantity = 0;
-			itemSlot4.shortName = "";
-		}
+		itemSlot4.removeOneItem();
 	}
 	if(slot == 5) {
 		gems = int(itemValue(itemSlot5.shortName)/sellMod);
-		itemSlot5.quantity--;
-		if(itemSlot5.quantity <= 0) {
-			itemSlot5.quantity = 0;
-			itemSlot5.shortName = "";
-		}
+		itemSlot5.removeOneItem();
 	}
 	//add gem price here.
 	player.gems += gems;

@@ -627,61 +627,73 @@ public function dropItem(monsterName:String):void {
 		takeItem();
 	}
 }
-public function isWeapon(shortName:String):Boolean {
-	if(shortName == "E.Staff") return true;
-	if(shortName == "L.Daggr") return true;
-	if(shortName == "Claymor") return true;
-	if(shortName == "Warhamr") return true;
-	if(shortName == "Katana ") return true;
-	if(shortName == "Spear  ") return true;
-	if(shortName == "Whip   ") return true;
-	if(shortName == "SucWhip") return true;
-	if(shortName == "JRapier") return true;
-	if(shortName == "RRapier") return true;
-	if(shortName == "S.Gaunt") return true;
-	if(shortName == "H.Gaunt") return true;
-	if(shortName == "W.Staff") return true;
-	if(shortName == "RidingC") return true;
-	if(shortName == "L.Hammr") return true;
-	if(shortName == "L. Axe ") return true;
-	if(shortName == "B.Sword") return true;
-	if(shortName == "Pipe   ") return true;
-	if(shortName == "S.Blade") return true;
+public function isWeapon(shortName:String):Boolean 
+{
+	switch(shortName)
+	{
+		case "E.Staff":
+		case "L.Daggr":
+		case "Claymor":
+		case "Warhamr":
+		case "Katana ":
+		case "Spear  ":
+		case "Whip   ":
+		case "SucWhip":
+		case "JRapier":
+		case "RRapier":
+		case "S.Gaunt":
+		case "H.Gaunt":
+		case "W.Staff":
+		case "RidingC":
+		case "L.Hammr":
+		case "L. Axe ":
+		case "B.Sword":
+		case "Pipe   ":
+		case "S.Blade":
+			return true;
+			break;	// Not really needed
+	}
 	return false;
 }
-public function isArmor(shortName:String):Boolean {
-	if(shortName == "LMArmor") return true;
-	if(shortName == "GelArmr") return true;
-	if(shortName == "C.Cloth") return true;
-	if(shortName == "LeathrA") return true;
-	if(shortName == "BeeArmr") return true;
-	if(shortName == "S.Swmwr") return true;
-	if(shortName == "ClssyCl") return true;
-	if(shortName == "RbbrClt") return true;
-	if(shortName == "FurLoin") return true;
-	if(shortName == "AdvClth") return true;
-	if(shortName == "TubeTop") return true;
-	if(shortName == "Overall") return true;
-	if(shortName == "B.Dress") return true;
-	if(shortName == "T.BSuit") return true;
-	if(shortName == "M.Robes") return true;
-	if(shortName == "LthrPnt") return true;
-	if(shortName == "LthrRob") return true;
-	if(shortName == "ScaleMl") return true;
-	if(shortName == "FullPlt") return true;
-	if(shortName == "IndecSt") return true;
-	if(shortName == "FullChn") return true;
-	if(shortName == "ChBikni") return true;
-	if(shortName == "SeductA") return true;
-	if(shortName == "W.Robes") return true;
-	if(shortName == "NurseCl") return true;
-	if(shortName == "BonStrp") return true;
-	if(shortName == "R.BdySt") return true;
-	if(shortName == "SS.Robe") return true;
-	if(shortName == "SSArmor") return true;
-	if(shortName == "I.Robes") return true;
-	if(shortName == "I.Corst") return true;
-	if(shortName == "BimboSk") return true;
+public function isArmor(shortName:String):Boolean 
+{
+	switch(shortName)
+	{
+		case "LMArmor":
+		case "GelArmr":
+		case "C.Cloth":
+		case "LeathrA":
+		case "BeeArmr":
+		case "S.Swmwr":
+		case "ClssyCl":
+		case "RbbrClt":
+		case "FurLoin":
+		case "AdvClth":
+		case "TubeTop":
+		case "Overall":
+		case "B.Dress":
+		case "T.BSuit":
+		case "M.Robes":
+		case "LthrPnt":
+		case "LthrRob":
+		case "ScaleMl":
+		case "FullPlt":
+		case "IndecSt":
+		case "FullChn":
+		case "ChBikni":
+		case "SeductA":
+		case "W.Robes":
+		case "NurseCl":
+		case "BonStrp":
+		case "R.BdySt":
+		case "SS.Robe":
+		case "SSArmor":
+		case "I.Robes":
+		case "I.Corst":
+		case "BimboSk":
+			return true;
+			break;	// Not really needed
+	}
 	return false;
 }
 public function fixedDamage(weaponName:String):Number {
@@ -1500,15 +1512,15 @@ public function equipArmor(armorName:String, output:Boolean = true):void {
 	return;
 }
 public function doItems(eventNo:Number):void {
-	var temp1:Number = 0;
-	var temp2:Number = 0;
-	var temp3:Number = 0;
-	var temp4:Number = 0;
-	var temp5:Number = 0;
-	var kath:Number = 0;
-	var nieve:int = 0;
-	var ember:int = 0;
-	var fuckPlant:int = 0;
+	var temp1:* = 0;
+	var temp2:* = 0;
+	var temp3:* = 0;
+	var temp4:* = 0;
+	var temp5:* = 0;
+	var kath:* = 0;
+	var nieve:* = 0;
+	var ember:* = 0;
+	var fuckPlant:* = 0;
 	var plantT:String = "Plant";
 	if(eventNo == 1000) {
 		itemSwapping = false;
@@ -1566,158 +1578,86 @@ public function doItems(eventNo:Number):void {
 		else choices((itemSlot1.shortName + " x" + itemSlot1.quantity), temp1, (itemSlot2.shortName + " x" + itemSlot2.quantity), temp2, (itemSlot3.shortName + " x" + itemSlot3.quantity), temp3, (itemSlot4.shortName + " x" + itemSlot4.quantity), temp4, (itemSlot5.shortName + " x" + itemSlot5.quantity), temp5, "", 0, "Snow", nieve, plantT, fuckPlant, "Egg", ember, "Back", 1);
 		menuLoc = 1;
 	}
-	if(eventNo == 1001) takeItem();
+	if(eventNo == 1001) 
+		takeItem();
 	//The next five are for overwriting item slots with new items. 
 	//Called from takeItem()
-	if(eventNo == 1002) {
+
+	if ((eventNo == 1002) || (eventNo == 1003) || (eventNo == 1004) || (eventNo == 1005) || (eventNo == 1006))
+	{
+
+		var slotTmp:itemSlotClass;
+		switch (eventNo)
+		{
+			case 1002:
+				slotTmp = itemSlot1;
+				break;
+			case 1003:
+				slotTmp = itemSlot2;
+				break;
+			case 1004:
+				slotTmp = itemSlot3;
+				break;
+			case 1005:
+				slotTmp = itemSlot4;
+				break;
+			case 1006:
+				slotTmp = itemSlot5;
+				break;
+		}
+
 		//If it is the same as what's in the slot...just throw away the new item
-		if(itemSlot1.shortName == shortName) outputText("You discard " + itemLongName(itemSlot1.shortName) + " from the stack to make room for the new one.", true);
+		if(slotTmp.shortName == shortName) outputText("You discard " + itemLongName(slotTmp.shortName) + " from the stack to make room for the new one.", true);
 		//If they are different...
 		else {
-			if(itemSlot1.quantity == 1) outputText("You throw away " + itemLongName(itemSlot1.shortName) + " and replace it with " + itemLongName(shortName) + ".", true);
-			else outputText("You throw away " + itemLongName(itemSlot1.shortName) + "(x" + itemSlot1.quantity + ") and replace it with " + itemLongName(shortName) + ".", true);
-			itemSlot1.quantity = 1;
-			itemSlot1.shortName = shortName;
+			if(slotTmp.quantity == 1) outputText("You throw away " + itemLongName(slotTmp.shortName) + " and replace it with " + itemLongName(shortName) + ".", true);
+			else outputText("You throw away " + itemLongName(slotTmp.shortName) + "(x" + slotTmp.quantity + ") and replace it with " + itemLongName(shortName) + ".", true);
+			slotTmp.quantity = 1;
+			slotTmp.shortName = shortName;
 		}
 		itemGoNext();
 	}
-	//Slot 2 replace item
-	if(eventNo == 1003) {
-		//If it is the same as what's in the slot...just throw away the new item
-		if(itemSlot2.shortName == shortName) outputText("You discard " + itemLongName(itemSlot2.shortName) + " from the stack to make room for the new one.", true);
-		//If they are different...
-		else {
-			if(itemSlot2.quantity == 1) outputText("You throw away " + itemLongName(itemSlot2.shortName) + " and replace it with " + itemLongName(shortName) + ".", true);
-			else outputText("You throw away " + itemLongName(itemSlot2.shortName) + "(x" + itemSlot2.quantity + ") and replace it with " + itemLongName(shortName) + ".", true);
-			itemSlot2.quantity = 1;
-			itemSlot2.shortName = shortName;
+
+	if ((eventNo == 1011) || (eventNo == 1012) || (eventNo == 1013) || (eventNo == 1014) || (eventNo == 1015))
+	{
+		var slotTmp:itemSlotClass;
+		switch (eventNo)
+		{
+			case 1011:
+				slotTmp = itemSlot1;
+				break;
+			case 1012:
+				slotTmp = itemSlot2;
+				break;
+			case 1013:
+				slotTmp = itemSlot3;
+				break;
+			case 1014:
+				slotTmp = itemSlot4;
+				break;
+			case 1015:
+				slotTmp = itemSlot5;
+				break;
 		}
-		itemGoNext();
-	}
-	//Slot 3 item replacement
-	if(eventNo == 1004) {
-		//If it is the same as what's in the slot...just throw away the new item
-		if(itemSlot3.shortName == shortName) outputText("You discard " + itemLongName(itemSlot3.shortName) + " from the stack to make room for the new one.", true);
-		//If they are different...
-		else {
-			if(itemSlot3.quantity == 1) outputText("You throw away " + itemLongName(itemSlot3.shortName) + " and replace it with " + itemLongName(shortName) + ".", true);
-			else outputText("You throw away " + itemLongName(itemSlot3.shortName) + "(x" + itemSlot3.quantity + ") and replace it with " + itemLongName(shortName) + ".", true);
-			itemSlot3.quantity = 1;
-			itemSlot3.shortName = shortName;
-		}
-		itemGoNext();
-	}
-	//slot 4 item replacement
-	if(eventNo == 1005) {
-		//If it is the same as what's in the slot...just throw away the new item
-		if(itemSlot4.shortName == shortName) outputText("You discard " + itemLongName(itemSlot4.shortName) + " from the stack to make room for the new one.", true);
-		//If they are different...
-		else {
-			if(itemSlot4.quantity == 1) outputText("You throw away " + itemLongName(itemSlot4.shortName) + " and replace it with " + itemLongName(shortName) + ".", true);
-			else outputText("You throw away " + itemLongName(itemSlot4.shortName) + "(x" + itemSlot4.quantity + ") and replace it with " + itemLongName(shortName) + ".", true);
-			itemSlot4.quantity = 1;
-			itemSlot4.shortName = shortName;
-		}
-		itemGoNext();
-	}
-	//Slot 5 item replacement
-	if(eventNo == 1006) {
-		//If it is the same as what's in the slot...just throw away the new item
-		if(itemSlot5.shortName == shortName) outputText("You discard " + itemLongName(itemSlot5.shortName) + " from the stack to make room for the new one.", true);
-		//If they are different...
-		else {
-			if(itemSlot5.quantity == 1) outputText("You throw away " + itemLongName(itemSlot5.shortName) + " and replace it with " + itemLongName(shortName) + ".", true);
-			else outputText("You throw away " + itemLongName(itemSlot5.shortName) + "(x" + itemSlot5.quantity + ") and replace it with " + itemLongName(shortName) + ".", true);
-			itemSlot5.quantity = 1;
-			itemSlot5.shortName = shortName;
-		}
-		itemGoNext();
-	}	
-	//Use items
-	//Slot1
-	if(eventNo == 1011) {
-		if(!debug) itemSlot1.quantity--;
-		if(itemSlot1.quantity < 0) itemSlot1.quantity = 0;
-		itemUse(itemSlot1.shortName);
-		if(itemSlot1.quantity == 0) itemSlot1.shortName = "";
-		if(!itemSubMenu && !itemSwapping) {
-			if(!inCombat()) doNext(1000);		
-			else if(menuLoc == 1) {
+		if(!debug) slotTmp.removeOneItem();
+
+		itemUse(slotTmp.shortName);
+		if(!itemSubMenu && !itemSwapping) 
+		{
+			if(!inCombat()) 
+				doNext(1000);
+			else if(menuLoc == 1) 
+			{
 				menuLoc = 0;
-				if(!combatRoundOver()) {
+				if(!combatRoundOver()) 
+				{
 					outputText("\n\n");
 					enemyAI();
 				}
 			}
 		}
 	}
-	//Slot2
-	if(eventNo == 1012) {
-		if(!debug) itemSlot2.quantity--;
-		if(itemSlot2.quantity < 0) itemSlot2.quantity = 0;
-		itemUse(itemSlot2.shortName);
-		if(itemSlot2.quantity == 0) itemSlot2.shortName = "";
-		if(!itemSubMenu && !itemSwapping) {
-			if(!inCombat()) doNext(1000);		
-			else if(menuLoc == 1) {
-				menuLoc = 0;
-				if(!combatRoundOver()) {
-					outputText("\n\n");
-					enemyAI();
-				}
-			}
-		}
-	}
-	//Slot3
-	if(eventNo == 1013) {
-		if(!debug) itemSlot3.quantity--;
-		if(itemSlot3.quantity < 0) itemSlot3.quantity = 0;
-		itemUse(itemSlot3.shortName);
-		if(itemSlot3.quantity == 0) itemSlot3.shortName = "";
-		if(!itemSubMenu && !itemSwapping) {
-			if(!inCombat()) doNext(1000);		
-			else if(menuLoc == 1) {
-				menuLoc = 0;
-				if(!combatRoundOver()) {
-					outputText("\n\n");
-					enemyAI();
-				}
-			}
-		}
-	}
-	//Slot4
-	if(eventNo == 1014) {
-		if(!debug) itemSlot4.quantity--;
-		if(itemSlot4.quantity < 0) itemSlot4.quantity = 0;
-		itemUse(itemSlot4.shortName);
-		if(itemSlot4.quantity == 0) itemSlot4.shortName = "";
-		if(!itemSubMenu && !itemSwapping) {
-			if(!inCombat()) doNext(1000);		
-			else if(menuLoc == 1) {
-				menuLoc = 0;
-				if(!combatRoundOver()) {
-					outputText("\n\n");
-					enemyAI();
-				}
-			}
-		}
-	}
-	if(eventNo == 1015) {
-		if(!debug) itemSlot5.quantity--;
-		if(itemSlot5.quantity < 0) itemSlot5.quantity = 0;
-		itemUse(itemSlot5.shortName);
-		if(itemSlot5.quantity == 0) itemSlot5.shortName = "";
-		if(!itemSubMenu && !itemSwapping) {
-			if(!inCombat()) doNext(1000);		
-			else if(menuLoc == 1) {
-				menuLoc = 0;
-				if(!combatRoundOver()) {
-					outputText("\n\n");
-					enemyAI();
-				}
-			}
-		}
-	}
+
 	//Use looted item
 	if(eventNo == 1016) {
 		itemUse(shortName);
@@ -1824,6 +1764,7 @@ public function doItems(eventNo:Number):void {
 	if(eventNo == 1037) {
 		retrieveFromStorage(7);
 	}
+
 	//Gro+ Cancel
 	if(eventNo == 1038) {
 		if(debug) {
@@ -1940,12 +1881,12 @@ public function doItems(eventNo:Number):void {
 	}
 	/*EGG COLOR SHIFTING HAPPENS HERE
 	EGG TYPES-
-0 - brown - ass expansion
-1 - purple - hip expansion
-2 - blue - vaginal removal and/or growth of existing maleness
-3 - pink - dick removal and/or fertility increase.
-4 - white - breast growth.  If lactating increases lactation.
-5 - rubbery black*/
+	0 - brown - ass expansion
+	1 - purple - hip expansion
+	2 - blue - vaginal removal and/or growth of existing maleness
+	3 - pink - dick removal and/or fertility increase.
+	4 - white - breast growth.  If lactating increases lactation.
+	5 - rubbery black*/
 	if(eventNo == 1045) {
 		outputText("You reach out and touch the blue light.  Immediately it flows into your skin, glowing through your arm as if it were translucent.  It rushes through your shoulder and torso, down into your pregnant womb.  The other lights vanish.", true);
 		eggShifter(2);
@@ -2177,7 +2118,7 @@ public function doItems(eventNo:Number):void {
 			outputText("\n" + int(itemValue(itemSlot5.shortName)/2) + " gems for " + itemLongName(itemSlot5.shortName) + ".", false);
 		}
 		if(flags[kFLAGS.KATHERINE_UNLOCKED] == 1) 
-			kath = 3317;
+			kath = visitKatherine;
 
 		choices((itemSlot1.shortName + " x" + itemSlot1.quantity), temp1,
 				(itemSlot2.shortName + " x" + itemSlot2.quantity), temp2,
@@ -2190,94 +2131,49 @@ public function doItems(eventNo:Number):void {
 				"", 0, 
 				"Back", 2211);
 	}
-	//Sell item from slot1
-	if(eventNo == 1066) 
+	
+	//Sell item from slots
+	if ((eventNo == 1066) || (eventNo == 1067) || (eventNo == 1068) || (eventNo == 1069) || (eventNo == 1070))
+	//   slot 1               slot 2                slot 3               slot 4               slot 5
 	{
-		spriteSelect(47);
-		var itemValueTemp:int = int(itemValue(itemSlot1.shortName)/2);
-		if(itemValueTemp == 0) 
-			outputText("You hand over " + itemLongName(itemSlot1.shortName) + " to Oswald.  He shrugs and says, \"<i>Well ok, it isn't worth anything, but I'll take it.</i>\"", true);
-		else 
-			outputText("You hand over " + itemLongName(itemSlot1.shortName) + " to Oswald.  He nervously pulls out " + num2Text(itemValueTemp) + " gems and drops them into your waiting hand.", true);
-		itemSlot1.quantity--;
-		if(itemSlot1.quantity <= 0) 
+
+		var slotTmp:itemSlotClass;
+
+		switch (eventNo)
 		{
-			itemSlot1.quantity = 0;
-			itemSlot1.shortName = "";
-		}		
-		doNext(oswaldPawn);
-		player.gems += itemValueTemp;
-		statScreenRefresh();
-		return;
-	}
-	//Sell item from slot2
-	if(eventNo == 1067) 
-	{
-		spriteSelect(47);
-		var itemValueTemp:int = int(itemValue(itemSlot2.shortName)/2);
-		outputText("You hand over " + itemLongName(itemSlot2.shortName) + " to Oswald.  He nervously pulls out " + num2Text(itemValueTemp) + " gems and drops them into your waiting hand.", true);
-		itemSlot2.quantity--;
-		if(itemSlot2.quantity <= 0) 
-		{
-			itemSlot2.quantity = 0;
-			itemSlot2.shortName = "";
-		}		
-		doNext(oswaldPawn);
-		player.gems += itemValueTemp;
-		statScreenRefresh();
-		return;
-	}
-	//Sell item from slot3
-	if(eventNo == 1068) 
-	{
-		spriteSelect(47);
-		var itemValueTemp:int = int(itemValue(itemSlot3.shortName)/2);
-		outputText("You hand over " + itemLongName(itemSlot3.shortName) + " to Oswald.  He nervously pulls out " + num2Text(itemValueTemp) + " gems and drops them into your waiting hand.", true);
-		itemSlot3.quantity--;
-		if(itemSlot3.quantity <= 0) 
-		{
-			itemSlot3.quantity = 0;
-			itemSlot3.shortName = "";
-		}		
-		doNext(oswaldPawn);
-		player.gems += itemValueTemp;
-		statScreenRefresh();
-		return;
-	}
-	//Sell item from slot4
-	if(eventNo == 1069) 
-	{
-		spriteSelect(47);
-		var itemValueTemp:int = int(itemValue(itemSlot4.shortName)/2);
-		outputText("You hand over " + itemLongName(itemSlot4.shortName) + " to Oswald.  He nervously pulls out " + num2Text(itemValueTemp) + " gems and drops them into your waiting hand.", true);
-		itemSlot4.quantity--;
-		if(itemSlot4.quantity <= 0) 
-		{
-			itemSlot4.quantity = 0;
-			itemSlot4.shortName = "";
-		}		
-		doNext(oswaldPawn);
-		player.gems += itemValueTemp;
-		statScreenRefresh();
-		return;
-	}
-	//Sell item from slot5
-	if(eventNo == 1070) 
-	{
-		spriteSelect(47);
-		var itemValueTemp:int = int(itemValue(itemSlot5.shortName)/2);
-		outputText("You hand over " + itemLongName(itemSlot5.shortName) + " to Oswald.  He nervously pulls out " + num2Text(itemValueTemp) + " gems and drops them into your waiting hand.", true);
-		itemSlot5.quantity--;
-		if(itemSlot5.quantity <= 0) 
-		{
-			itemSlot5.quantity = 0;
-			itemSlot5.shortName = "";
+			case 1066:
+				slotTmp = itemSlot1;
+				break;
+			case 1067:
+				slotTmp = itemSlot2;
+				break;
+			case 1068:
+				slotTmp = itemSlot3;
+				break;
+			case 1069:
+				slotTmp = itemSlot4;
+				break;
+			case 1070:
+				slotTmp = itemSlot5;
+				break;
 		}
+
+		spriteSelect(47);
+		var itemValueTemp:int = int(itemValue(slotTmp.shortName)/2);
+		if(itemValueTemp == 0) 
+			outputText("You hand over " + itemLongName(slotTmp.shortName) + " to Oswald.  He shrugs and says, \"<i>Well ok, it isn't worth anything, but I'll take it.</i>\"", true);
+		else 
+			outputText("You hand over " + itemLongName(slotTmp.shortName) + " to Oswald.  He nervously pulls out " + num2Text(itemValueTemp) + " gems and drops them into your waiting hand.", true);
+		
+		slotTmp.removeOneItem()
+
 		doNext(oswaldPawn);
 		player.gems += itemValueTemp;
 		statScreenRefresh();
 		return;
 	}
+
+
 	//Reducto butt
 	if(eventNo == 1071) {
 		outputText("You smear the foul-smelling paste onto your " + buttDescript() + ".  It feels cool at first but rapidly warms to an uncomfortable level of heat.\n\n", true);
@@ -2497,38 +2393,66 @@ public function doItems(eventNo:Number):void {
 	}
 }
 public function itemValue(item:String):Number {
-	if(item == "lusty maiden's armor" || item == "LMArmor") return 400;
-	if(item == "Debimbo") return 250;
-	if(item == "PurPeac") return 10;
-	if(item == "KitGift") return 0;
-	if(item == "MystJwl") return 20;
-	if(item == "GldStat") return 600;
-	if(item == "PeppWht") return 120;
-	if(item == "GooArmr" || item == "goo armor") return 1;
-	if(item == "CCupcak" ) return 250;
-	if(item == "BulbyPp" ) return 10;
-	if(item == "KnottyP" ) return 10;
-	if(item == "BlackPp" ) return 10;
-	if(item == "DblPepp" ) return 10;
-	if(item == "LargePp" ) return 10;
+	if(item == "lusty maiden's armor" || item == "LMArmor") 
+		return 400;
+	if(item == "Debimbo") 
+		return 250;
+	if(item == "PurPeac") 
+		return 10;
+	if(item == "KitGift") 
+		return 0;
+	if(item == "MystJwl") 
+		return 20;
+	if(item == "GldStat") 
+		return 600;
+	if(item == "PeppWht") 
+		return 120;
+	if(item == "GooArmr" || item == "goo armor") 
+		return 1;
+	if(item == "CCupcak" ) 
+		return 250;
+	if(item == "BulbyPp" ) 
+		return 10;
+	if(item == "KnottyP" ) 
+		return 10;
+	if(item == "BlackPp" ) 
+		return 10;
+	if(item == "DblPepp" ) 
+		return 10;
+	if(item == "LargePp" ) 
+		return 10;
 	
-	if(item == "P.Draft" ) return 20;
-	if(item == "P.S.Mlk" ) return 20;
-	if(item == "PSDelit" ) return 20;
-	if(item == "Reducto" ) return 30;
-	if(item == "L.Draft" ) return 20;
+	if(item == "P.Draft" ) 
+		return 20;
+	if(item == "P.S.Mlk" ) 
+		return 20;
+	if(item == "PSDelit" ) 
+		return 20;
+	if(item == "Reducto" ) 
+		return 30;
+	if(item == "L.Draft" ) 
+		return 20;
 	
-	if(item == "PurHony" ) return 40;
-	if(item == "OviElix" ) return 30;
-	if(item == "W. Book" ) return 40;
-	if(item == "B. Book" ) return 40;
+	if(item == "PurHony" ) 
+		return 40;
+	if(item == "OviElix" ) 
+		return 30;
+	if(item == "W. Book" ) 
+		return 40;
+	if(item == "B. Book" ) 
+		return 40;
 	
-	if(item == "GroPlus" ) return 50;
-	if(item == "MinoCum" ) return 60;
+	if(item == "GroPlus" ) 
+		return 50;
+	if(item == "MinoCum" ) 
+		return 60;
 	
-	if(item == "P.Pearl" ) return 1000;
-	if(item == "SS.Robe" || item == "spider-silk robes") return 950;
-	if(item == "SSArmor" || item == "spider-silk armor") return 950;
+	if(item == "P.Pearl" ) 
+		return 1000;
+	if(item == "SS.Robe" || item == "spider-silk robes") 
+		return 950;
+	if(item == "SSArmor" || item == "spider-silk armor") 
+		return 950;
 	
 	if(item == "LthrRob" || item == "black leather armor surrounded by voluminous robes") 
 		return 100;
@@ -2586,43 +2510,80 @@ public function itemValue(item:String):Number {
 		return 25;
 	}
 	//Tailor items
-	if(item == "ClssyCl" || item == "classy suitclothes") return 400;
-	if(item == "RbbrClt" || item == "rubber fetish clothes") return 1000;
-	if(item == "FurLoin" || item == "revealing fur loincloths") return 100;
-	if(item == "AdvClth" || item == "green adventurer's clothes") return 200;
-	if(item == "TubeTop" || item == "tube top and short shorts") return 80;
-	if(item == "Overall" || item == "white shirt and overalls") return 60;
-	if(item == "B.Dress" || item == "long ballroom dress patterned with sequins") return 1200;
-	if(item == "T.BSuit" || item == "semi-transparent bodysuit") return 1300;
-	if(item == "M.Robes" || item == "modest robes") return 120;
-	if(item == "LthrPnt" || item == "white silk shirt and tight leather pants") return 450;
-	if(item == "W.Robes" || item == "wizard's robes") return 50;
-	if(item == "W.Staff" || item == "wizard's staff") return 350;
-	if(item == "Claymor" || item == "large claymore") return 1000;
-	if(item == "Warhamr" || item == "huge warhammer") return 1600;
-	if(item == "Katana " || item == "katana") return 500;
-	if(item == "Spear  " || item == "deadly spear") return 450;
-	if(item == "Whip   " || item == "coiled whip") return 500;
-	if(item == "JRapier" || item == "jeweled rapier") return 1400;
-	if(item == "RRapier" || item == "Raphael's rapier" || item == "vulpine rapier") return 1000;
-	if(item == "SucWhip" || item == "succubi whip") return 400;
-	if(item == "S.Gaunt" || item == "spiked gauntlet") return 400;
-	if(item == "H.Gaunt" || item == "hooked gauntlets") return 300;
-	if(item == "NurseCl" || item == "skimpy nurse's outfit") return 800;
-	if(item == "BimboSk") return 50;
-	if(item == "BonStrp" || item == "barely-decent bondage straps") return 600;
-	if(item == "R.BdySt" || item == "red, high-society bodysuit") return 1200;
-	if(item == "NumbRox") return 15;
-	if(item == "SensDrf") return 15;
-	if(item == "I.Robes" || item == "inquisitor's robes") return 2000;
-	if(item == "I.Corst" || item == "inquisitor's corset") return 2000;
-	if(item == "S.Blade" || item == "inscribed spellblade") return 500;
-	if(item == "VixVigr") return 30;
-	if(item == "W.Stick") return 16;
-	if(item == "BC Beer") return 1;
-	if(item == "BimboCh") return 1;
-	if(item == "BimboLq") return 1000;
-	if(item == "DrgnShl") return 1500;
+	if(item == "ClssyCl" || item == "classy suitclothes") 
+		return 400;
+	if(item == "RbbrClt" || item == "rubber fetish clothes") 
+		return 1000;
+	if(item == "FurLoin" || item == "revealing fur loincloths") 
+		return 100;
+	if(item == "AdvClth" || item == "green adventurer's clothes") 
+		return 200;
+	if(item == "TubeTop" || item == "tube top and short shorts") 
+		return 80;
+	if(item == "Overall" || item == "white shirt and overalls") 
+		return 60;
+	if(item == "B.Dress" || item == "long ballroom dress patterned with sequins") 
+		return 1200;
+	if(item == "T.BSuit" || item == "semi-transparent bodysuit") 
+		return 1300;
+	if(item == "M.Robes" || item == "modest robes") 
+		return 120;
+	if(item == "LthrPnt" || item == "white silk shirt and tight leather pants") 
+		return 450;
+	if(item == "W.Robes" || item == "wizard's robes") 
+		return 50;
+	if(item == "W.Staff" || item == "wizard's staff") 
+		return 350;
+	if(item == "Claymor" || item == "large claymore") 
+		return 1000;
+	if(item == "Warhamr" || item == "huge warhammer") 
+		return 1600;
+	if(item == "Katana " || item == "katana") 
+		return 500;
+	if(item == "Spear  " || item == "deadly spear") 
+		return 450;
+	if(item == "Whip   " || item == "coiled whip") 
+		return 500;
+	if(item == "JRapier" || item == "jeweled rapier") 
+		return 1400;
+	if(item == "RRapier" || item == "Raphael's rapier" || item == "vulpine rapier") 
+		return 1000;
+	if(item == "SucWhip" || item == "succubi whip") 
+		return 400;
+	if(item == "S.Gaunt" || item == "spiked gauntlet") 
+		return 400;
+	if(item == "H.Gaunt" || item == "hooked gauntlets") 
+		return 300;
+	if(item == "NurseCl" || item == "skimpy nurse's outfit") 
+		return 800;
+	if(item == "BimboSk") 
+		return 50;
+	if(item == "BonStrp" || item == "barely-decent bondage straps") 
+		return 600;
+	if(item == "R.BdySt" || item == "red, high-society bodysuit") 
+		return 1200;
+	if(item == "NumbRox") 
+		return 15;
+	if(item == "SensDrf") 
+		return 15;
+	if(item == "I.Robes" || item == "inquisitor's robes") 
+		return 2000;
+	if(item == "I.Corst" || item == "inquisitor's corset") 
+		return 2000;
+	if(item == "S.Blade" || item == "inscribed spellblade") 
+		return 500;
+	if(item == "VixVigr") 
+		return 30;
+	if(item == "W.Stick") 
+		return 16;
+	if(item == "BC Beer") 
+		return 1;
+	if(item == "BimboCh") 
+		return 1;
+	if(item == "BimboLq") 
+		return 1000;
+	if(item == "DrgnShl") 
+		return 1500;
 	return 6;
 }
 
@@ -3134,43 +3095,56 @@ public function hasLessItems(itemName:String, maxQuantity:Number):Boolean {
 	return false;
 }
 
-public function destroyItems(itemName:String, minQuantity:Number):Boolean {
-	if(itemSlot1.shortName == itemName) {
-		while(itemSlot1.quantity > 0 && minQuantity > 0) {
-			itemSlot1.quantity--;
-			minQuantity--;			
+public function destroyItems(itemName:String, numOfItemToRemove:Number):Boolean 
+{
+	var slotNum:int = 0;
+	for (slotNum = 0; slotNum < itemSlots.length; slotNum += 1)
+	{
+		if(itemSlots[slotNum].shortName == itemName) 
+		{
+			while(itemSlots[slotNum].quantity > 0 && numOfItemToRemove > 0) 
+			{
+				itemSlots[slotNum].removeOneItem()
+				numOfItemToRemove--;
+			}
 		}
-		if(itemSlot1.quantity == 0) itemSlot1.shortName = "";
 	}
-	if(itemSlot2.shortName == itemName) {
-		while(itemSlot2.quantity > 0 && minQuantity > 0) {
-			itemSlot2.quantity--;
-			minQuantity--;			
+	/*
+	if(itemSlot2.shortName == itemName) 
+	{
+		while(itemSlot2.quantity > 0 && numOfItemToRemove > 0) 
+		{
+			itemSlot2.removeOneItem()
+			numOfItemToRemove--;			
 		}
-		if(itemSlot2.quantity == 0) itemSlot2.shortName = "";
 	}
-	if(itemSlot3.shortName == itemName) {
-		while(itemSlot3.quantity > 0 && minQuantity > 0) {
-			itemSlot3.quantity--;
-			minQuantity--;			
+	if(itemSlot3.shortName == itemName) 
+	{
+		while(itemSlot3.quantity > 0 && numOfItemToRemove > 0) 
+		{
+			itemSlot3.removeOneItem()
+			numOfItemToRemove--;			
 		}
-		if(itemSlot3.quantity == 0) itemSlot3.shortName = "";
 	}
-	if(itemSlot4.shortName == itemName) {
-		while(itemSlot4.quantity > 0 && minQuantity > 0) {
-			itemSlot4.quantity--;
-			minQuantity--;			
+	if(itemSlot4.shortName == itemName) 
+	{
+		while(itemSlot4.quantity > 0 && numOfItemToRemove > 0) 
+		{
+			itemSlot4.removeOneItem()
+			numOfItemToRemove--;			
 		}
-		if(itemSlot4.quantity == 0) itemSlot4.shortName = "";
 	}
-	if(itemSlot5.shortName == itemName) {
-		while(itemSlot5.quantity > 0 && minQuantity > 0) {
-			itemSlot5.quantity--;
-			minQuantity--;			
+	if(itemSlot5.shortName == itemName) 
+	{
+		while(itemSlot5.quantity > 0 && numOfItemToRemove > 0) 
+		{
+			itemSlot5.removeOneItem()
+			numOfItemToRemove--;			
 		}
-		if(itemSlot5.quantity == 0) itemSlot5.shortName = "";
 	}
-	if(minQuantity <= 0) return true;
+	*/
+	
+	if(numOfItemToRemove <= 0) return true;
 	else return false;
 }
 //Cerulean P.
@@ -6293,92 +6267,94 @@ public function placeInStorage(slotNum:Number):void {
 	outputText("", true);
 	var shortStorage:String = "";
 	var shortQuantity:Number = 0;
-	var temp2:Number = 0;
+	var currentStorageSlotIndex:Number = 0;
 	//Load the item stats from the slot that's being emptied, and empty the slot.
-	if(slotNum == 1) {
+	if(slotNum == 1) 
+	{
 		shortQuantity = itemSlot1.quantity;
 		shortStorage = itemSlot1.shortName;
-		itemSlot1.quantity = 0;
-		itemSlot1.shortName = "";
+		itemSlot1.emptySlot();
 	}
-	if(slotNum == 2) {
+	else if(slotNum == 2) 
+	{
 		shortQuantity = itemSlot2.quantity;
 		shortStorage = itemSlot2.shortName;
-		itemSlot2.quantity = 0;
-		itemSlot2.shortName = "";
+		itemSlot2.emptySlot();
 	}
-	if(slotNum == 3) {
+	else if(slotNum == 3) 
+	{
 		shortQuantity = itemSlot3.quantity;
 		shortStorage = itemSlot3.shortName;
-		itemSlot3.quantity = 0;
-		itemSlot3.shortName = "";
+		itemSlot3.emptySlot();
 	}
-	if(slotNum == 4) {
+	else if(slotNum == 4) 
+	{
 		shortQuantity = itemSlot4.quantity;
 		shortStorage = itemSlot4.shortName;
-		itemSlot4.quantity = 0;
-		itemSlot4.shortName = "";
+		itemSlot4.emptySlot();
 	}
-	if(slotNum == 5) {
+	else if(slotNum == 5) 
+	{
 		shortQuantity = itemSlot5.quantity;
 		shortStorage = itemSlot5.shortName;
-		itemSlot5.quantity = 0;
-		itemSlot5.shortName = "";
+		itemSlot5.emptySlot();
 	}
 	//Place in the first free slot
-	temp = 0;
+	currentStorageSlotIndex = 0;
+	var storedItems:Number = 0;
+
 	//Check for slots with free space for the item.  If so fill them and move on
 	//until out of items to place
-	while(temp < itemStorage.length && shortQuantity > 0) {
+	while(currentStorageSlotIndex < itemStorage.length && shortQuantity > 0) 
+	{
 		//If there is a slot with the item and room
-		if(itemStorage[temp].shortName == shortStorage && itemStorage[temp].quantity < 5) {
-			//temp2 is used for counting items placed in a slot.
-			temp2 = 0;
+		if(itemStorage[currentStorageSlotIndex].shortName == shortStorage && itemStorage[currentStorageSlotIndex].quantity < 5) 
+		{
+			//storedItems is used for counting items placed in a slot.
+			storedItems = 0;
 			//Place items in 1 at a time until out of room or items
-			while(itemStorage[temp].quantity < 5 && shortQuantity > 0) {
+			while(itemStorage[currentStorageSlotIndex].quantity < 5 && shortQuantity > 0) 
+			{
 				shortQuantity--;
-				itemStorage[temp].quantity++;
-				temp2++;
+				itemStorage[currentStorageSlotIndex].quantity++;
+				storedItems++;
 			}
-			if(temp2 > 0) outputText("You add " + temp2 + "x " + shortStorage + " into storage slot number " + num2Text(temp+1) + ".\n", false);
+			if(storedItems > 0) outputText("You add " + storedItems + "x " + shortStorage + " into storage slot number " + num2Text(currentStorageSlotIndex+1) + ".\n", false);
 		}
-		temp++;
+		currentStorageSlotIndex++;
 	}
 	//Talk about items if they're all gone.
-	temp = 0;
+	currentStorageSlotIndex = 0;
 	//check if a suitable slot is found.  If so, load in, and quit out.
-	while(temp < itemStorage.length && shortQuantity > 0) {
-		if(itemStorage[temp].quantity == 0 && itemStorage[temp].shortName == "") {
-			itemStorage[temp].quantity = shortQuantity;
-			itemStorage[temp].shortName = shortStorage;
-			outputText("You place " + shortQuantity + "x " + shortStorage + " into storage slot " + num2Text(temp+1) + ".\n", false);
-			temp = 17;
+	while(currentStorageSlotIndex < itemStorage.length && shortQuantity > 0) 
+	{
+		if(itemStorage[currentStorageSlotIndex].quantity == 0 && itemStorage[currentStorageSlotIndex].shortName == "") 
+		{
+			itemStorage[currentStorageSlotIndex].placeItemWQuantity(shortQuantity, shortStorage);
+			outputText("You place " + shortQuantity + "x " + shortStorage + " into storage slot " + num2Text(currentStorageSlotIndex+1) + ".\n", false);
+			currentStorageSlotIndex = 17;
 			shortQuantity = 0;
 		}
-		temp++;
+		currentStorageSlotIndex++;
 	}
-	if(shortQuantity > 0) {
+	if(shortQuantity > 0) 
+	{
 		outputText("There is no room for the remaining " + shortQuantity + "x " + shortStorage + ".  You leave it in your inventory.\n", false);
 		//Put remaining back in slot.
 		if(slotNum == 1) {
-			itemSlot1.quantity = shortQuantity;
-			itemSlot1.shortName = shortStorage;
+			itemSlot1.placeItemWQuantity(shortQuantity, shortStorage);
 		}
 		if(slotNum == 2) {
-			itemSlot2.quantity = shortQuantity;
-			itemSlot2.shortName = shortStorage;
+			itemSlot2.placeItemWQuantity(shortQuantity, shortStorage);
 		}
 		if(slotNum == 3) {
-			itemSlot3.quantity = shortQuantity;
-			itemSlot3.shortName = shortStorage;
+			itemSlot3.placeItemWQuantity(shortQuantity, shortStorage);
 		}
 		if(slotNum == 4) {
-			itemSlot4.quantity = shortQuantity;
-			itemSlot4.shortName = shortStorage;
+			itemSlot4.placeItemWQuantity(shortQuantity, shortStorage);
 		}
 		if(slotNum == 5) {
-			itemSlot5.quantity = shortQuantity;
-			itemSlot5.shortName = shortStorage;
+			itemSlot5.placeItemWQuantity(shortQuantity, shortStorage);
 		}
 	}
 	doNext(1028);
@@ -6394,32 +6370,27 @@ public function placeInRacks(slotNum:Number, armor:Boolean = false):void {
 	if(slotNum == 1) {
 		shortQuantity = itemSlot1.quantity;
 		shortStorage = itemSlot1.shortName;
-		itemSlot1.quantity = 0;
-		itemSlot1.shortName = "";
+		itemSlot1.emptySlot()
 	}
 	if(slotNum == 2) {
 		shortQuantity = itemSlot2.quantity;
 		shortStorage = itemSlot2.shortName;
-		itemSlot2.quantity = 0;
-		itemSlot2.shortName = "";
+		itemSlot2.emptySlot()
 	}
 	if(slotNum == 3) {
 		shortQuantity = itemSlot3.quantity;
 		shortStorage = itemSlot3.shortName;
-		itemSlot3.quantity = 0;
-		itemSlot3.shortName = "";
+		itemSlot3.emptySlot()
 	}
 	if(slotNum == 4) {
 		shortQuantity = itemSlot4.quantity;
 		shortStorage = itemSlot4.shortName;
-		itemSlot4.quantity = 0;
-		itemSlot4.shortName = "";
+		itemSlot4.emptySlot()
 	}
 	if(slotNum == 5) {
 		shortQuantity = itemSlot5.quantity;
 		shortStorage = itemSlot5.shortName;
-		itemSlot5.quantity = 0;
-		itemSlot5.shortName = "";
+		itemSlot5.emptySlot()
 	}
 	//Place in the first free slot
 	temp = 0;
@@ -6471,24 +6442,19 @@ public function placeInRacks(slotNum:Number, armor:Boolean = false):void {
 		outputText("There is no room for the remaining " + shortQuantity + "x " + shortStorage + ".  You leave it in your inventory.\n", false);
 		//Put remaining back in slot.
 		if(slotNum == 1) {
-			itemSlot1.quantity = shortQuantity;
-			itemSlot1.shortName = shortStorage;
+			itemSlot1.placeItemWQuantity(shortQuantity, shortStorage);
 		}
 		if(slotNum == 2) {
-			itemSlot2.quantity = shortQuantity;
-			itemSlot2.shortName = shortStorage;
+			itemSlot2.placeItemWQuantity(shortQuantity, shortStorage);
 		}
 		if(slotNum == 3) {
-			itemSlot3.quantity = shortQuantity;
-			itemSlot3.shortName = shortStorage;
+			itemSlot3.placeItemWQuantity(shortQuantity, shortStorage);
 		}
 		if(slotNum == 4) {
-			itemSlot4.quantity = shortQuantity;
-			itemSlot4.shortName = shortStorage;
+			itemSlot4.placeItemWQuantity(shortQuantity, shortStorage);
 		}
 		if(slotNum == 5) {
-			itemSlot5.quantity = shortQuantity;
-			itemSlot5.shortName = shortStorage;
+			itemSlot5.placeItemWQuantity(shortQuantity, shortStorage);
 		}
 	}
 	if(!armor) doNext(1090);//1028);

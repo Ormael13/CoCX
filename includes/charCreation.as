@@ -110,20 +110,15 @@ public function newGameGo(e:MouseEvent = null):void {
 	player.exploredLake = 0;
 	//Inventory clear
 	itemSlot1.unlocked = true;
-	itemSlot1.shortName = "";
-	itemSlot1.quantity = 0;
+	itemSlot1.emptySlot();
 	itemSlot2.unlocked = true;
-	itemSlot2.quantity = 0;
-	itemSlot2.shortName = "";
+	itemSlot2.emptySlot();
 	itemSlot3.unlocked = true;
-	itemSlot3.quantity = 0;
-	itemSlot3.shortName = "";
+	itemSlot3.emptySlot();
 	itemSlot4.unlocked = false;
-	itemSlot4.quantity = 0;
-	itemSlot4.shortName = "";
+	itemSlot4.emptySlot();
 	itemSlot5.unlocked = false;
-	itemSlot5.quantity = 0;
-	itemSlot5.shortName = "";
+	itemSlot5.emptySlot();
 	//PIERCINGS
 	player.nipplesPierced = 0;
 	player.nipplesPShort = "";
