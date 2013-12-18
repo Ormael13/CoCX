@@ -1270,17 +1270,12 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		}
 		else
 		{
-			for (i = 0; i < saveFile.data.itemStorage.length; i++)
-			{
-				itemStorage.push(new Array());
-					//trace("Initialize a slot for one of the item storage locations to load.");
-			}
 			//Populate storage slot array
 			for (i = 0; i < saveFile.data.itemStorage.length; i++)
 			{
 				//trace("Populating a storage slot save with data");
-				itemStorage[i].shortName = saveFile.data.itemStorage[i].shortName;
-				itemStorage[i].quantity = saveFile.data.itemStorage[i].quantity;
+				createStorage();
+				itemStorage[i].placeItemWQuantity(saveFile.data.itemStorage[i].quantity, saveFile.data.itemStorage[i].shortName);
 				itemStorage[i].unlocked = saveFile.data.itemStorage[i].unlocked;
 				if (itemStorage[i].shortName.indexOf("Gro+") != -1)
 					itemStorage[i].shortName = "GroPlus";
