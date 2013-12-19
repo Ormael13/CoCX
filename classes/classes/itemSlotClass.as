@@ -15,7 +15,7 @@
 		public function set shortName(value:String):void
 		{
 
-			if ((value == "" || value == null || value == undefined) && quantity != 0 && CoC_Settings.haltOnErrors == true)
+			if ((value == "" || value == null) && quantity != 0 && CoC_Settings.haltOnErrors == true)
 			{
 				throw new Error("Item name set without a value!")
 			}

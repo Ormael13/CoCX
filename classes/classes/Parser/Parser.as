@@ -1,13 +1,14 @@
 ﻿
-package classes
+package classes.Parser
 {
-	import classes.CoC;
+	// import classes.CoC;
 
 	public class Parser
 	{
-		public function Parser(cocClass:CoC)
+		public function Parser(ownerClass:*, settingsClass:*)
 		{
-			this._cocClass = cocClass;
+			this._ownerClass = ownerClass;
+			this._settingsClass = settingsClass;
 		}
 
 		/*
@@ -41,19 +42,18 @@ package classes
 
 
 
-		Planned, but not implemented yet:
-
-			[screen (SCREEN_NAME) | screen text]
+		[screen (SCREEN_NAME) | screen text]
 			// creates a new screen/page.
 
-			[button (SCREEN_NAME)| button_text]
+		[button (SCREEN_NAME)| button_text]
 			// Creates a button which jumps to SCREEN_NAME when clicked
 
 		*/
 
 		import showdown.Showdown;
 
-		private var _cocClass:CoC;
+		private var _ownerClass:*;			// main game class. Variables are looked-up in this class.
+		private var _settingsClass:*;		// global static class used for shoving conf vars around
 
 		public var sceneParserDebug:Boolean = false;
 
@@ -151,7 +151,7 @@ package classes
 			if (arg in singleArgConverters)
 			{
 				if (mainParserDebug) trace("Found corresponding anonymous function");
-				argResult = singleArgConverters[arg](this._cocClass);
+				argResult = singleArgConverters[arg](this._ownerClass);
 				if (mainParserDebug) trace("Called, return = ", argResult);
 			}
 			else
@@ -358,7 +358,7 @@ package classes
 					aspect = Number(aspect);
 
 					if (mainParserDebug) trace("Found corresponding anonymous function");
-					argResult = twoWordNumericTagsLookup[subject](this._cocClass, aspect);
+					argResult = twoWordNumericTagsLookup[subject](this._ownerClass, aspect);
 					if (mainParserDebug) trace("Called, return = ", argResult);
 				}
 				else
@@ -373,7 +373,7 @@ package classes
 					{
 
 						if (mainParserDebug) trace("Found corresponding anonymous function");
-						argResult = twoWordTagsLookup[subject][aspect](this._cocClass);
+						argResult = twoWordTagsLookup[subject][aspect](this._ownerClass);
 						if (mainParserDebug) trace("Called, return = ", argResult);
 					}
 					else
@@ -478,7 +478,7 @@ package classes
 			if (arg in conditionalOptions)
 			{
 				if (mainParserDebug) trace("Found corresponding anonymous function");
-				argResult = conditionalOptions[arg](this._cocClass);
+				argResult = conditionalOptions[arg](this._ownerClass);
 				if (mainParserDebug) trace("Called, return = ", argResult);
 
 			}
@@ -594,7 +594,7 @@ package classes
 				{
 					if (section == 1) // barf if we hit a second "|" that's not in brackets
 					{
-						if (CoC_Settings.haltOnErrors) throw new Error("Nested IF statements still a WIP")
+						if (this._settingsClass.haltOnErrors) throw new Error("Nested IF statements still a WIP")
 						ret = ["<b>Error! Too many options in if statement!</b>",
 							"<b>Error! Too many options in if statement!</b>"];
 					}
@@ -720,7 +720,7 @@ package classes
 			}
 			else
 			{
-				if (CoC_Settings.haltOnErrors) throw new Error("");
+				if (this._settingsClass.haltOnErrors) throw new Error("");
 				throw new Error("Invalid if statement!", textCtnt);
 			}
 			return "";
@@ -789,12 +789,12 @@ package classes
 			{
 				if (sceneParserDebug) trace("Enter scene called to exit");
 				//doNextClear(debugPane);
-				_cocClass.debugPane();
+				_ownerClass.debugPane();
 			}
 			else if (sceneName in this.ParserState)
 			{	
 				if (sceneParserDebug) trace("Have scene \""+sceneName+"\". Parsing and setting up menu");
-				_cocClass.menu();
+				_ownerClass.menu();
 				
 				buttonNum = 0;		// Clear the button number, so we start adding buttons from button 0
 
@@ -804,20 +804,20 @@ package classes
 
 				
 
-				_cocClass.rawOutputText(tmp3, true);			// and then stick it on the display
+				_ownerClass.rawOutputText(tmp3, true);			// and then stick it on the display
 
 				//if (sceneParserDebug) trace("Scene contents: \"" + tmp1 + "\" as parsed: \"" + tmp2 + "\"")
 				if (sceneParserDebug) trace("Scene contents after markdown: \"" + tmp3 + "\"");
 			}
-			else if (this.getFuncFromString(_cocClass, sceneName) != null)
+			else if (this.getFuncFromString(_ownerClass, sceneName) != null)
 			{
 				if (sceneParserDebug) trace("Have function \""+sceneName+"\" in this!. Calling.");
-				this.getFuncFromString(_cocClass, sceneName)();
+				this.getFuncFromString(_ownerClass, sceneName)();
 			}
 			else
 			{
 				if (sceneParserDebug) trace("Enter scene called with unknown arg \""+sceneName+"\". falling back to the debug pane");
-				_cocClass.doNext(_cocClass.debugPane);
+				_ownerClass.doNext(_ownerClass.debugPane);
 			}
 			return tmp2
 
@@ -850,14 +850,14 @@ package classes
 			arr = textCtnt.split("|")
 			if (arr.len > 2)
 			{
-				if (CoC_Settings.haltOnErrors) throw new Error("");
+				if (this._settingsClass.haltOnErrors) throw new Error("");
 				throw new Error("Too many items in button")
 			}
 
 			var buttonName:String = stripStr(arr[1]);
 			var buttonFunc:String = stripStr(arr[0].substring(arr[0].indexOf(' ')));
 			//trace("adding a button with name\"" + buttonName + "\" and function \"" + buttonFunc + "\"");
-			_cocClass.addButton(buttonNum, buttonName, this.enterParserScene, buttonFunc);
+			_ownerClass.addButton(buttonNum, buttonName, this.enterParserScene, buttonFunc);
 			buttonNum += 1;
 		}
 
@@ -1123,7 +1123,7 @@ package classes
 				// the outputText call overwrites the window content with the exact same content.
 				
 				// trace("Returning: ", ret);
-				_cocClass.currentText = ret;
+				_ownerClass.currentText = ret;
 
 
 			}

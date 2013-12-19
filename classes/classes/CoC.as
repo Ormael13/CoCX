@@ -19,7 +19,7 @@
 	import classes.ImageManager; // This line not necessary, but added because I'm pedantic like that.
 	import classes.InputManager;
 
-	import classes.Parser;
+	import classes.Parser.Parser;
 
 	import classes.Monsters.*;		// import all the various monsters
 	import coc.view.MainView;
@@ -294,7 +294,7 @@
 			// Used for stopping chaos monkey on syntax errors. Separate flag so we can make stopping optional
 			CoC_Settings.haltOnErrors = false;
 			
-			this.parser = new classes.Parser(this);
+			this.parser = new classes.Parser.Parser(this, CoC_Settings);
 
 
 			this.model = new GameModel();
