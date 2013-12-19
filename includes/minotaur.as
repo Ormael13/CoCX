@@ -485,27 +485,65 @@ public function minoPheromones():void {
 	if(player.lust >= 100) doNext(5011);
 	else doNext(5000);
 }
-public function getRapedByMinotaur():void {
+public function getRapedByMinotaur(autoRape:Boolean = false):void {
 	spriteSelect(44);
 	slimeFeed();
+	clearOutput();
 	//BY BUTTS MCGEE
 	//====================================================================
 	//((This would be a Minotaur Loss Rape if the PC fulfills either of the following conditions.))
 	//{CHECK: If male PC with big butt (Over... I have no idea what butt numbers are), use this}
-	//{CHECK: If female or herm PC with big butt and vagina too small to fit minotaur cock, use this}
-	if(rand(2) == 0 && player.buttRating >= 15 && player.vaginalCapacity() < monster.biggestCockArea() && player.tone < 60) {
-		getMinoHawtDawged();
-		return;
+	//{CHECK: If female or herm PC with big butt and vagina too small to fit minotaur cock, use this}		
+	if (!autoRape)
+	{
+		if(rand(2) == 0 && player.buttRating >= 15 && player.vaginalCapacity() < monster.biggestCockArea() && player.tone < 60) {
+			getMinoHawtDawged();
+			return;
+		}
+		//Oral rape chance
+		if(rand(2) == 0 && player.lowerBody != LOWER_BODY_TYPE_CENTAUR) {
+			getOralRapedByMinotaur();
+			return;
+		}
 	}
-	//Oral rape chance
-	if(rand(2) == 0 && player.lowerBody != LOWER_BODY_TYPE_CENTAUR) {
-		getOralRapedByMinotaur();
-		return;
+	else
+	{
+		outputText("As you take the winding path up through the rocky trail, you come upon the opening to a cave. Peering inside, the stench of an overpowering musk washes over you. The primal scent excites you, causing you to become aroused almost immediately.  Not thinking as clearly as you normally might, you slowly sneak your way into the cave. Signs of life litter the cave floor.\n\n", true);
+		stats(0, 0, 0, 0, 0, 0, 10 + player.lib / 5, 0);
+		
+		//Detect minotaur coming
+		if (rand(30) + player.inte / 5 > 18)
+		{
+			outputText("You spot a shadow moving and spin around to see a minotaur lumbering after you from the back of the cave!", false);
+			startCombat(4);
+			return;
+		}
+		
+		outputText("Suddenly you're grabbed from behind, your arms held together by a single massive, furry hand. A heavy, snorting breath brushes the top of your head. You turn your neck to see a massive bull-man. His impressive dick presses ", false);
+		
+		if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR)
+		{
+			outputText("against your buttocks", false);
+		}
+		else
+		{
+			
+			outputText("into the small of your back", false);
+		}
+		
+		outputText(" as it grows larger and harder, smearing its pre-cum into your skin and making you shiver.  ", false);
+		//High str escape
+		if (rand(20) + player.str / 3 > 18)
+		{
+			outputText("\n\nYou twist around using the additional lubrication and squirm free!  Rolling away, you come up in a crouch, ready to fight!", false);
+			startCombat(4);
+			return;
+		}
+	
 	}
 	
 
 	//Normal RAEP
-	outputText("", true);
 	if(player.vaginas.length > 0) {
 		outputText("The bull-man roughly grabs your hair and begins rubbing the flared head of his penis along your " + vaginaDescript(0) + ".  ", false);
 		if(player.averageVaginalWetness() < 2) outputText("You aren't very wet, and fear the damage this beast will inflict on your " + vaginaDescript(0) + ".  ", false);
@@ -520,8 +558,10 @@ public function getRapedByMinotaur():void {
 	}
 	if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) outputText("\n\nHe positions himself behind your rear legs, and roughly impales you onto his shaft, forcing himself as far into you as he can manage. You cry out, and you feel your stomach distending to accommodate his incredible size. Grabbing your ass, he begins to violently pound your backside with his massive member.  ", false);
 	else outputText("\n\nHe lifts you into the air, with little effort hefting your insignificant weight, and roughly impales you onto his shaft, forcing himself as far into you as he can manage. You cry out, and looking down you can see your stomach distending to accommodate his incredible size. Using you like a human cock-sleeve, he simply holds you by the torso and begins lifting you up and down.  ", false);
+	
 	//Vag stretch texts
-	if(player.hasVagina()) cuntChange((24*3), true, false, true);
+	if (player.hasVagina()) cuntChange((24 * 3), true, false, true);
+	
 	//Continue
 	if(player.biggestTitSize() > 0 && player.mostBreastsPerRow() > 1 && player.breastRows.length > 0) {
 		outputText("He manhandles your tits as he does so, almost violently squeezing and stretching them to his enjoyment.  ", false);
