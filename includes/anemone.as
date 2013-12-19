@@ -1200,28 +1200,23 @@ public function placeInAnemone(slot:Number = 1):void {
 	//(set Kidweapon to item name, remove from inventory)
 	if(slot == 1) {
 		flags[kFLAGS.ANEMONE_WEAPON] = itemSlot1.shortName;
-		itemSlot1.quantity--;
-		if(itemSlot1.quantity == 0) itemSlot1.shortName = "";
+		itemSlot1.removeOneItem();
 	}
 	else if(slot == 2) {
 		flags[kFLAGS.ANEMONE_WEAPON] = itemSlot2.shortName;
-		itemSlot2.quantity--;
-		if(itemSlot2.quantity == 0) itemSlot2.shortName = "";
+		itemSlot2.removeOneItem();
 	}
 	else if(slot == 3) {
 		flags[kFLAGS.ANEMONE_WEAPON] = itemSlot3.shortName;
-		itemSlot3.quantity--;
-		if(itemSlot3.quantity == 0) itemSlot3.shortName = "";
+		itemSlot3.removeOneItem();
 	}
 	else if(slot == 4) {
 		flags[kFLAGS.ANEMONE_WEAPON] = itemSlot4.shortName;
-		itemSlot4.quantity--;
-		if(itemSlot4.quantity == 0) itemSlot4.shortName = "";
+		itemSlot4.removeOneItem();
 	}
 	else {
 		flags[kFLAGS.ANEMONE_WEAPON] = itemSlot5.shortName;
-		itemSlot5.quantity--;
-		if(itemSlot5.quantity == 0) itemSlot5.shortName = "";
+		itemSlot5.removeOneItem();
 	}
 	doNext(approachAnemoneBarrel);
 }

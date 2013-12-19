@@ -1107,14 +1107,18 @@ public function releaseRubi():void {
 	else outputText("incredibly swollen blue");
 	outputText(" balls.  Once it's properly lubed up, you press two fingers inside.");
 	
-	outputText("\n\nRubi's face contorts briefly into an expression of surprise, which quickly morphs into lust.  [rubi Ey] pants loudly, tongue out.  Behind the ever growing lust present in [rubi eir] face, however, you see supreme concentration.  No matter what, [rubi ey]'s determined not to let you down.  If you told [rubi em] he couldn't cum ever again, you're certain [rubi ey]'d take it to heart and [rubi ey]'d never let it happen.  Good thing for [rubi em] you're not THAT cruel.");
+	outputText("\n\nRubi's face contorts briefly into an expression of surprise, which quickly morphs into lust.  [rubi Ey] pants loudly, tongue out.  Behind the ever growing lust present in [rubi eir] face, however, you see supreme concentration.  No matter what, [rubi ey]'s determined not to let you down.  If you told [rubi em] [rubi em] couldn't cum ever again, you're certain [rubi ey]'d take it to heart and [rubi ey]'d never let it happen.  Good thing for [rubi em] you're not THAT cruel.");
 	
 	outputText("\n\nYour fingers worm around inside [rubi em], searching for the ");
-	if(flags[kFLAGS.RUBI_COCK_SIZE] > 0) outputText(rubiMF("P-spot","G-spot"));
-	else outputText("most sensitive spot");
+	if(flags[kFLAGS.RUBI_COCK_SIZE] > 0) outputText("P-spot");
+	else outputText("G-spot");
+	//else outputText("most sensitive spot");
 	outputText(".  When Rubi jerks and wiggles involuntarily, you know you've found it.  Pre-cum begins leaking from Rubi's [rubi cock] in copious amounts, running down your hand and arms, and forming a puddle on the coffee table.  Rubi's body trembles and shakes, wriggling on the table like a fish out of water.");
  
- 	outputText("\n\nFeeling a little more adventurous, you slip a third finger into the little demon " + rubiMF("boy","girl") + "'s rectum.  With all three fingers you press and massage [rubi eir] prostate, increasing the amount of pre-cum flowing from [rubi eir] tip.");
+ 	outputText("\n\nFeeling a little more adventurous, you slip a third finger into the little demon " + rubiMF("boy","girl") + "'s ");
+	if(flags[kFLAGS.RUBI_COCK_SIZE] > 0) outputText("rectum");
+	else outputText("folds");
+	outputText(".  With all three fingers you press and massage [rubi eir] prostate, increasing the amount of pre-cum flowing from [rubi eir] tip.");
  	outputText("\n\nFinally, you think you've had enough.  You retrieve your fingers from [rubi eir] ass and cup [rubi eir] balls instead, squeezing them until Rubi squeaks in discomfort.  You pump [rubi eir] cock faster, and order [rubi em] to cum, squeezing [rubi eir] balls with every word.");
 	outputText("\n\nRelief crosses Rubi's face, followed by arousal.  [rubi Ey]'s been waiting for this moment for a long time.  You give [rubi eir] balls another squeeze and [rubi eir] lips form a tight O as a rope of cum lances outwards, flying up before splattering onto [rubi eir] chest.");
 	//(Blueballs 1-3) 

@@ -67,7 +67,7 @@ public function resistKeltsBSBreakHimIntro():void {
 	if(flags[kFLAGS.KELT_BREAK_LEVEL] == 0) {
 		outputText("You are more and more annoyed by Kelt's rudeness and dick-waving.  The centaur may be imposing at first and his archery skills are impressive, but you're sure that behind his false display of virility, there's nothing an experienced champion like you can't deal with.  With your superior strength and speed, you could probably take him by surprise and teach him a good lesson.  Of course, you won't ever be able to learn archery from him after that.");
 		//[if (PC doesn't have items)
-		if(!(hasItem("SucMilk",15) || (hasItem("SucMilk",10) && hasPinkEgg()))) {
+		if(!(hasItem("SucMilk",15) || (hasItem("SucMilk",10) && hasPinkEgg()) || (hasItem("P.S.Mlk",10) && hasPinkEgg()) || hasItem("P.S.Mlk",15))) {
 			outputText("Unfortunately, you don't have anything that could be useful to tame his arrogant maleness.  You want items that would make his disgracious horsecock and balls shrink.  A nice set of breasts on his human chest would be fine, too.  You know you're going to need A LOT of such items - or very potent ones.");
 			menu();
 			addButton(0,"Next",farmExploreEncounter);
@@ -86,7 +86,7 @@ public function resistKeltsBSBreakHimIntro():void {
 		outputText("You set out to go get Kelt, eager to teach this slut another lesson of your own.  You explore the farm for a bit before spotting the centaur behind the barn.  However, Kelt seems to have changed since last time: he somehow changed back his gender.  That rebellious little bitch!  Although he doesn't look as aggressively masculine as before, and his chest still bears some man-tits, he has gotten back his stern, rude face and you can clearly see a fat prick hanging from his backside.  It doesn't seem to be as big as it was before, though.  He must have grown it in a hurry.");
 		//back to farm]
 		//[if you don't have the items:
-		if(!(hasItem("SucMilk",10) || (hasItem("SucMilk",5) && hasPinkEgg()))) {
+		if(!(hasItem("SucMilk",10) || hasItem("P.S.Mlk",10) || (hasItem("SucMilk",5) && hasPinkEgg()) || (hasItem("P.S.Mlk",5) && hasPinkEgg()))) {
 			outputText("\n\nYou'd gladly teach him another lesson so he can keep his true gender and learn his place, but you don't have anything to turn him female again.  You should fetch appropriate items to begin the 'lesson'.</i>\"");
 			//back to farm]
 			menu();
@@ -101,7 +101,7 @@ public function resistKeltsBSBreakHimIntro():void {
 	else if(flags[kFLAGS.KELT_BREAK_LEVEL] == 2) {
 		outputText("You saunter up to the back of the farm, eager to meet the centaur-slut for another 'lesson'.  The creature is quite a weird sight when you spot her: instead of the gorgeous woman whose face you had splattered with spooge, what you see is an androgynous hybrid sporting a tiny, ridiculous microdick and a little pair of tits that can't fill more than a B-cup bra.  Even the face is ambiguous about its gender.  Although Kelly is now strong in the centaur's body, Kelt seems to have regained a little control.  You have to fix this.");
 		//[if (less than 5 succubi milk)
-		if(!hasItem("SucMilk",5))
+		if(!(hasItem("SucMilk",5) || hasItem("P.S.Mlk",5)))
 		{
 			outputText("You must acquire enough Succubi Milk to remove any male remnants off Kelly's body before confronting 'him' again.");
 			menu();
@@ -252,9 +252,20 @@ public function breakKeltGo():void {
 	if(hasPinkEgg()) {
 		if(hasItem("PinkEgg",1)) consumeItem("PinkEgg",1);
 		else consumeItem("L.PnkEg",1);
-		consumeItem("SucMilk",10);
+		if (hasItem("SucMilk",10))
+			consumeItem("SucMilk",10);
+		else 
+			consumeItem("P.S.Mlk",10);
+
 	}
-	else consumeItem("SucMilk",15);
+	else
+	{
+		if (hasItem("SucMilk",15))
+			consumeItem("SucMilk",15);
+		else 
+			consumeItem("P.S.Mlk",15);
+	}
+		
 	stats(0,0,0,0,0,0,-100,5);
 	flags[kFLAGS.KELT_BREAK_LEVEL] = 1;
 	doNext(13);
@@ -462,9 +473,21 @@ public function defeatKellyNDBREAKHIM():void {
 	if(hasPinkEgg()) {
 		if(hasItem("PinkEgg",1)) consumeItem("PinkEgg",1);
 		else consumeItem("L.PnkEg",1);
-		consumeItem("SucMilk",5);
+		if (hasItem("SucMilk",5))
+			consumeItem("SucMilk",5);
+		else 
+			consumeItem("P.S.Mlk",5);
+
 	}
-	else consumeItem("SucMilk",10);
+	else 
+	{
+
+		if (hasItem("SucMilk",10))
+			consumeItem("SucMilk",10);
+		else 
+			consumeItem("P.S.Mlk",10);
+	}
+
 	stats(0,0,0,0,0,0,-100,5);
 	flags[kFLAGS.KELT_BREAK_LEVEL] = 2;
 	eventParser(5007);
@@ -545,7 +568,12 @@ public function breakingKeltNumeroThree():void {
 	
 	outputText("\n\n\"<i>Ohhh...</i>\" Her breasts expand further, her pussy drips even more rivulets in sheer arousal.  Her eyes roll back and her breath grows short as she stares longingly at you.  You marvel at the effects: she's finally being turned into a horny cumslut!  Now all you have to do is wait for her to digest the hefty potion and come back to deliver the last dose.");
 	//consume items for 1x scene.
-	consumeItem("SucMilk",5);
+
+	if (hasItem("SucMilk",5))
+		consumeItem("SucMilk",5);
+	else 
+		consumeItem("P.S.Mlk",5);
+
 	stats(0,0,0,0,0,0,-100,5);
 	flags[kFLAGS.KELT_BREAK_LEVEL] = 3;
 	eventParser(5007);

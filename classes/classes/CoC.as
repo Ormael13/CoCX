@@ -19,7 +19,7 @@
 	import classes.ImageManager; // This line not necessary, but added because I'm pedantic like that.
 	import classes.InputManager;
 
-	import classes.Parser;
+	import classes.Parser.Parser;
 
 	import classes.Monsters.*;		// import all the various monsters
 	import coc.view.MainView;
@@ -270,6 +270,7 @@
 		public var itemSlot3:itemSlotClass;
 		public var itemSlot4:itemSlotClass;
 		public var itemSlot5:itemSlotClass;
+		public var itemSlots:Array;
 		public var itemStorage:Array;
 		public var gearStorage:Array;
 		public var shortName:String;
@@ -293,7 +294,7 @@
 			// Used for stopping chaos monkey on syntax errors. Separate flag so we can make stopping optional
 			CoC_Settings.haltOnErrors = false;
 			
-			this.parser = new classes.Parser(this);
+			this.parser = new classes.Parser.Parser(this, CoC_Settings);
 
 
 			this.model = new GameModel();
@@ -334,8 +335,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.8.3f1";
-			version = "v0.8.3f1 (<b>Uma Likes 'em Pretty</b>)";
+			ver = "0.8.3f2";
+			version = "v0.8.3f2 (<b>Uma Likes 'em Pretty</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
@@ -472,6 +473,10 @@
 			itemSlot3 = new itemSlotClass();
 			itemSlot4 = new itemSlotClass();
 			itemSlot5 = new itemSlotClass();
+			
+
+			itemSlots = [itemSlot1, itemSlot2, itemSlot3, itemSlot4, itemSlot5];
+
 			itemStorage = new Array();
 			gearStorage = new Array();
 			shortName = "";
