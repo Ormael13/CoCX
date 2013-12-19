@@ -578,8 +578,8 @@ package classes.content
 		public static const NEEDLEWORK_SPEED_SPEED_MULTI:Number = 0.5;
 		
 		public static const NEEDLEWORK_LUST_PERK_NAME:String = "Chi Reflow - Lust";
-		public static const NEEDLEWORK_LUST_PERK_DESC:String = "Uma's Acupuncture Needlework has gifted you with the 'Chi Reflow - Lust' perk. As a result your Lust resistance and Tease attack are enhanced, but Libido and Sensetivity gains are increased.";
-		public static const NEEDLEWORK_LUST_PERK_SHORT_DESC:String = "Lust resistance and Tease are enhanced, but Libido and Sensetivity gains increased.";
+		public static const NEEDLEWORK_LUST_PERK_DESC:String = "Uma's Acupuncture Needlework has gifted you with the 'Chi Reflow - Lust' perk. As a result your Lust resistance and Tease attack are enhanced, but Libido and Sensitivity gains are increased.";
+		public static const NEEDLEWORK_LUST_PERK_SHORT_DESC:String = "Lust resistance and Tease are enhanced, but Libido and Sensitivity gains increased.";
 		public static const NEEDLEWORK_LUST_LUST_RESIST:int = 10;
 		public static const NEEDLEWORK_LUST_TEASE_MULTI:Number = 10;
 		public static const NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI:Number = 1.1;

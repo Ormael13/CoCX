@@ -2729,7 +2729,7 @@ public function dynStats(... args):void
 		return;
 	}
 	
-	var argNamesFull:Array 	= 	new Array("strength", "toughness", "speed", "intellect", "libido", "sensetivity", "lust", "corruption", "resisted", "noBimbo"); // In case somebody uses full arg names etc
+	var argNamesFull:Array 	= 	new Array("strength", "toughness", "speed", "intellect", "libido", "sensitivity", "lust", "corruption", "resisted", "noBimbo"); // In case somebody uses full arg names etc
 	var argNamesShort:Array = 	new Array(	"str", 	"tou", 	"spe", 	"int", 	"lib", 	"sen", 	"lus", 	"cor", 	"res", 	"bim"); // Arg names
 	var argVals:Array = 		new Array(	0, 		0,	 	0, 		0, 		0, 		0, 		0, 		0, 		true, 	false); // Default arg values
 	
