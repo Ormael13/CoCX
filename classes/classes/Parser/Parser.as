@@ -1,13 +1,27 @@
 ﻿
-package classes
+package classes.Parser
 {
-	import classes.CoC;
+	// import classes.CoC;
 
 	public class Parser
 	{
-		public function Parser(cocClass:CoC)
+		import showdown.Showdown;
+
+		private var _ownerClass:*;			// main game class. Variables are looked-up in this class.
+		private var _settingsClass:*;		// global static class used for shoving conf vars around
+
+		public var sceneParserDebug:Boolean = false;
+
+		public var mainParserDebug:Boolean = false;
+		public var conditionalDebug:Boolean = false;
+		public var printCcntentDebug:Boolean = false;
+		public var printIntermediateParseStateDebug:Boolean = false;
+
+
+		public function Parser(ownerClass:*, settingsClass:*)
 		{
-			this._cocClass = cocClass;
+			this._ownerClass = ownerClass;
+			this._settingsClass = settingsClass;
 		}
 
 		/*
@@ -41,102 +55,25 @@ package classes
 
 
 
-		Planned, but not implemented yet:
-
-			[screen (SCREEN_NAME) | screen text]
+		[screen (SCREEN_NAME) | screen text]
 			// creates a new screen/page.
 
-			[button (SCREEN_NAME)| button_text]
+		[button (SCREEN_NAME)| button_text]
 			// Creates a button which jumps to SCREEN_NAME when clicked
 
 		*/
 
-		import showdown.Showdown;
 
-		private var _cocClass:CoC;
+		// this.parserState is used to store the scene-parser state.
+		// it is cleared every time recursiveParser is called, and then any scene tags are added 
+		// as parserState["sceneName"] = "scene content"
+		
+		public var parserState:Object = new Object();
 
-		public var sceneParserDebug:Boolean = false;
+		// provides singleArgConverters
+		include "./singleArgLookups.as";
 
-		public var mainParserDebug:Boolean = false;
-		public var conditionalDebug:Boolean = false;
-		public var printCcntentDebug:Boolean = false;
-
-
-
-		// horrible, messy hack
-		// this.ParserState is used to store the parser state.
-		// it is cleared every time recursiveParser is called.
-		// eventually, it should be properly refactored into this.parserState, but the parser would need to 
-		// be properly class-based at that point.
-
-		public var ParserState:Object = new Object();
-
-		// Lookup dictionary for converting any single argument brackets into it's corresponding string
-		// basically [armor] results in the "[armor]" segment of the string being replaced with the
-		// results of the corresponding anonymous function, in this case: function():* {return player.armorName;}
-		// tags not present in the singleArgConverters object return an error message.
-		//
-		public var singleArgConverters:Object =
-		{
-				// all the errors related to trying to parse stuff if not present are
-				// already handled in the various *Descript() functions.
-				// no need to duplicate them.
-
-				// Note: all key strings MUST be ENTIRELY lowercase.
-
-				"agility"					: function(thisPtr:*):* { return "[Agility]"; },
-				"armor"						: function(thisPtr:*):* { return thisPtr.player.armorName;},
-				"armorname"					: function(thisPtr:*):* { return thisPtr.player.armorName;},
-				"ass"						: function(thisPtr:*):* { return thisPtr.buttDescript();},
-				"asshole"					: function(thisPtr:*):* { return thisPtr.assholeDescript(); },
-				"balls"						: function(thisPtr:*):* { return thisPtr.ballsDescriptLight(); },
-				"boyfriend"					: function(thisPtr:*):* { return thisPtr.player.mf("boyfriend", "girlfriend"); },
-				"butt"						: function(thisPtr:*):* { return thisPtr.buttDescript();},
-				"butthole"					: function(thisPtr:*):* { return thisPtr.assholeDescript();},
-				"chest"						: function(thisPtr:*):* { return thisPtr.chestDesc(); },
-				"clit"						: function(thisPtr:*):* { return thisPtr.clitDescript(); },
-				"cock"						: function(thisPtr:*):* { return thisPtr.cockDescript(0);},
-				"cockhead"					: function(thisPtr:*):* { return thisPtr.cockHead(0);},
-				"cocks"						: function(thisPtr:*):* { return thisPtr.multiCockDescriptLight(); },
-				"cunt"						: function(thisPtr:*):* { return thisPtr.vaginaDescript(); },
-				"eachcock"					: function(thisPtr:*):* { return thisPtr.sMultiCockDesc();},
-				"evade"						: function(thisPtr:*):* { return "[Evade]"; },
-				"face"						: function(thisPtr:*):* { return thisPtr.player.face(); },
-				"feet"						: function(thisPtr:*):* { return thisPtr.player.feet(); },
-				"foot"						: function(thisPtr:*):* { return thisPtr.player.foot(); },
-				"fullchest"					: function(thisPtr:*):* { return thisPtr.allChestDesc(); },
-				"hair"						: function(thisPtr:*):* { return thisPtr.hairDescript(); },
-				"hairorfur"					: function(thisPtr:*):* { return thisPtr.hairOrFur(); },
-				"he"						: function(thisPtr:*):* { return thisPtr.player.mf("he","she"); },
-				"him"						: function(thisPtr:*):* { return thisPtr.player.mf("him","her"); },
-				"hips"						: function(thisPtr:*):* { return thisPtr.hipDescript();},
-				"his"						: function(thisPtr:*):* { return thisPtr.player.mf("his","hers"); },
-				"leg"						: function(thisPtr:*):* { return thisPtr.player.leg(); },
-				"legs"						: function(thisPtr:*):* { return thisPtr.player.legs(); },
-				"man"						: function(thisPtr:*):* { return thisPtr.player.mf("man", "woman"); },
-				"master"					: function(thisPtr:*):* { return thisPtr.player.mf("master","mistress"); },
-				"misdirection"				: function(thisPtr:*):* { return "[Misdirection]"; },
-				"multicockdescriptlight"	: function(thisPtr:*):* { return thisPtr.multiCockDescriptLight(); },
-				"name"						: function(thisPtr:*):* { return thisPtr.player.short;},
-				"nipple"					: function(thisPtr:*):* { return thisPtr.nippleDescript(0);},
-				"nipples"					: function(thisPtr:*):* { return thisPtr.nippleDescript(0) + "s";},
-				"onecock"					: function(thisPtr:*):* { return thisPtr.oMultiCockDesc();},
-				"pg"						: function(thisPtr:*):* { return "\n\n";},
-				"pussy"						: function(thisPtr:*):* { return thisPtr.vaginaDescript(); },
-				"sack"						: function(thisPtr:*):* { return thisPtr.sackDescript(); },
-				"sheath"					: function(thisPtr:*):* { return thisPtr.sheathDesc(); },
-				"skin"						: function(thisPtr:*):* { return thisPtr.player.skin(); },
-				"skinfurscales"				: function(thisPtr:*):* { return thisPtr.player.skinFurScales(); },
-				"tongue"					: function(thisPtr:*):* { return thisPtr.tongueDescript();},
-				"vag"						: function(thisPtr:*):* { return thisPtr.vaginaDescript(); },
-				"vagina"					: function(thisPtr:*):* { return thisPtr.vaginaDescript(); },
-				"vagorass"					: function(thisPtr:*):* { return(thisPtr.player.hasVagina() ? thisPtr.vaginaDescript() : thisPtr.assholeDescript()); },
-				"weapon"					: function(thisPtr:*):* { return thisPtr.player.weaponName;},
-				"weaponname"				: function(thisPtr:*):* { return thisPtr.player.weaponName;}
-
-		}
-
-		// Does lookup of single argument tags ("[cock]", "[armor]", etc...)
+		// Does lookup of single argument tags ("[cock]", "[armor]", etc...) in singleArgConverters
 		// Supported variables are the options listed in the above
 		// singleArgConverters object. If the passed argument is found in the above object,
 		// the corresponding anonymous function is called, and it's return-value is returned.
@@ -151,7 +88,7 @@ package classes
 			if (arg in singleArgConverters)
 			{
 				if (mainParserDebug) trace("Found corresponding anonymous function");
-				argResult = singleArgConverters[arg](this._cocClass);
+				argResult = singleArgConverters[arg](this._ownerClass);
 				if (mainParserDebug) trace("Called, return = ", argResult);
 			}
 			else
@@ -162,173 +99,17 @@ package classes
 			return argResult;
 		}
 
-		// PRONOUNS: The parser uses Elverson/Spivak Pronouns specifically to allow characters to be written with non-specific genders.
-		// http://en.wikipedia.org/wiki/Spivak_pronoun
+		// provides rubiLookups and arianLookups
+		// note that these are only used in doubleArgLookups, not in Parser.as itself
 		//
-		// Cheat Table:
-		//           | Subject    | Object       | Possessive Adjective | Possessive Pronoun | Reflexive         |
-		// Agendered | ey laughs  | I hugged em  | eir heart warmed     | that is eirs       | ey loves emself   |
-		// Masculine | he laughs  | I hugged him | his heart warmed     | that is his        | he loves himself  |
-		// Feminine  | she laughs | I hugged her | her heart warmed     | that is hers       | she loves herself |
+		// =!= NOTE: MUST BE IMPORTED BEFORE "./doubleArgLookups.as" =!=
+		// 
+		include "./npcLookups.as";
 
-		// (Is it bad that half my development time so far has been researching non-gendered nouns? ~~~~Fake-Name)
+		// provides twoWordNumericTagsLookup and twoWordTagsLookup, which use 
+		// cockLookups/cockHeadLookups, and rubiLookups/arianLookups respectively
+		include "./doubleArgLookups.as";
 
-
-		public var arianLookups:Object = // For subject: "arian"
-		{
-			"man"		: function(thisPtr:*):* {return thisPtr.arianMF("man","woman")},
-			// argh! "Man" is the mass-noun for humanity, and I'm loathe to choose an even more esoteric variant.
-			// Elverson/Spivak terminology is already esoteric enough, and it lacks a ungendered mass noun.
-
-			"ey"		: function(thisPtr:*):* {return thisPtr.arianMF("he","she")},
-			"em"		: function(thisPtr:*):* {return thisPtr.arianMF("him","her")},
-			"eir"		: function(thisPtr:*):* {return thisPtr.arianMF("his","her")},
-			"eirs"		: function(thisPtr:*):* {return thisPtr.arianMF("his","hers")},
-			"emself"	: function(thisPtr:*):* {return thisPtr.arianMF("himself","herself")},
-
-			"chestadj"	: function(thisPtr:*):* {return thisPtr.arianChestAdjective()},
-			"chest"		: function(thisPtr:*):* {return thisPtr.arianChest()}
-		}
-		// Arian unhandled terms (I have not decided how to support them yet):
-		// arianMF("mas","mis")
-		// arianMF("master","mistress")
-		// arianMF("male","girly")
-
-
-
-		public var rubiLookups:Object = // For subject: "rubi"
-		{
-			"man"		: function(thisPtr:*):* {return thisPtr.rubiMF("man","woman")},
-
-			"ey"		: function(thisPtr:*):* {return thisPtr.rubiMF("he","she")},
-			"em"		: function(thisPtr:*):* {return thisPtr.rubiMF("him","her")},
-			"eir"		: function(thisPtr:*):* {return thisPtr.rubiMF("his","her")},
-			"eirs"		: function(thisPtr:*):* {return thisPtr.rubiMF("his","hers")},
-			"emself"	: function(thisPtr:*):* {return thisPtr.rubiMF("himself","herself")},
-
-			"cock"		: function(thisPtr:*):* {return thisPtr.rubiCock()},
-			"breasts"	: function(thisPtr:*):* {return thisPtr.rubiBreasts()}
-
-		}
-		//Rubi unhandled terms :
-		// rubiMF("boy","girl")
-		// rubiMF("demon","demoness")
-		// rubiMF("gentleman","lady")
-
-
-		// PC ASCII Aspect lookups
-
-		public var cockLookups:Object = // For subject: "cock"
-		{
-			"all"		: function(thisPtr:*):*{ return thisPtr.multiCockDescriptLight(); },
-			"each"		: function(thisPtr:*):*{ return thisPtr.sMultiCockDesc(); },
-			"one"		: function(thisPtr:*):*{ return thisPtr.oMultiCockDesc(); },
-			"largest"	: function(thisPtr:*):*{ return thisPtr.cockDescript(thisPtr.player.biggestCockIndex()); },
-			"biggest"	: function(thisPtr:*):*{ return thisPtr.cockDescript(thisPtr.player.biggestCockIndex()); },
-			"smallest"	: function(thisPtr:*):*{ return thisPtr.cockDescript(thisPtr.player.smallestCockIndex()); },
-			"longest"	: function(thisPtr:*):*{ return thisPtr.cockDescript(thisPtr.player.longestCock()); },
-			"shortest"	: function(thisPtr:*):*{ return thisPtr.cockDescript(thisPtr.player.shortestCockIndex()); }
-		}
-
-
-		public var cockHeadLookups:Object = // For subject: "cockHead"
-		{
-			"biggest"	: function(thisPtr:*):*{ return thisPtr.cockHead(thisPtr.player.biggestCockIndex()); },
-			"largest"	: function(thisPtr:*):*{ return thisPtr.cockHead(thisPtr.player.biggestCockIndex()); },
-			"smallest"	: function(thisPtr:*):*{ return thisPtr.cockHead(thisPtr.player.smallestCockIndex()); },
-			"longest"	: function(thisPtr:*):*{ return thisPtr.cockHead(thisPtr.player.longestCock()); },			// the *head* of a cock has a length? Wut?
-			"shortest"	: function(thisPtr:*):*{ return thisPtr.cockHead(thisPtr.player.shortestCockIndex()); }
-		}
-
-
-		// These tags take a two-word tag with a **numberic** attribute for lookup.
-		// [object NUMERIC-attribute]
-		// if "NUMERIC-attribute" can be cast to a Number, the parser looks for "object" in twoWordNumericTagsLookup.
-		// If it finds twoWordNumericTagsLookup["object"], it calls the anonymous function stored with said key "object"
-		// like so: twoWordNumericTagsLookup["object"](Number("NUMERIC-attribute"))
-		//
-		// if attribute cannot be case to a number, the parser looks for "object" in twoWordTagsLookup.
-		public var twoWordNumericTagsLookup:Object =
-		{
-				"cockfit":
-					function(thisPtr:*, aspect:*):*
-					{
-						if(!thisPtr.player.hasCock()) return "<b>(Attempt to parse cock when none present.)</b>";
-						else
-						{
-							if(thisPtr.player.cockThatFits(aspect) >= 0) return thisPtr.cockDescript(thisPtr.player.cockThatFits(aspect));
-							else return thisPtr.cockDescript(thisPtr.player.smallestCockIndex());
-						}
-					},
-				"cockfit2":
-					function(thisPtr:*, aspect:*):*
-					{
-						if(!thisPtr.player.hasCock()) return "<b>(Attempt to parse cock when none present.)</b>";
-						else {
-							if(thisPtr.player.cockThatFits2(aspect) >= 0) return thisPtr.cockDescript(thisPtr.player.cockThatFits2(aspect));
-							else return thisPtr.cockDescript(thisPtr.player.smallestCockIndex());
-						}
-					},
-				"cockheadfit":
-					function(thisPtr:*, aspect:*):*
-					{
-						if (!thisPtr.player.hasCock())
-						{
-							return "<b>(Attempt to parse cockhead when none present.)</b>";
-						}
-						else {
-							if(thisPtr.player.cockThatFits(aspect) >= 0) return thisPtr.cockHead(thisPtr.player.cockThatFits(aspect));
-							else return thisPtr.cockHead(thisPtr.player.smallestCockIndex());
-						}
-					},
-				"cockheadfit2":
-					function(thisPtr:*, aspect:*):*
-					{
-						if(!thisPtr.player.hasCock()) return "<b>(Attempt to parse cockhead when none present.)</b>";
-						else {
-							if(thisPtr.player.cockThatFits2(aspect) >= 0) return thisPtr.cockHead(thisPtr.player.cockThatFits2(aspect));
-							else return thisPtr.cockHead(thisPtr.player.smallestCockIndex());
-						}
-					},
-				"cock":
-					function(thisPtr:*, aspect:*):*
-					{
-						if(!thisPtr.player.hasCock()) return "<b>(Attempt to parse cock when none present.)</b>";
-						else
-						{
-							if(aspect-1 >= 0 && aspect-1 < thisPtr.player.cockTotal()) return thisPtr.cockDescript(aspect - 1);
-							else return "<b>(Attempt To Parse CockDescript for Invalid Cock)</b>";
-						}
-					},
-				"cockhead":
-					function(thisPtr:*, aspect:*):*
-					{
-						if(!thisPtr.player.hasCock()) return "<b>(Attempt to parse cockHead when none present.)</b>";
-						else
-						{
-							if(aspect-1 >= 0 && aspect-1 < thisPtr.player.cockTotal()) return thisPtr.cockHead(aspect - 1);
-							else return "<b>(Attempt To Parse CockHeadDescript for Invalid Cock)</b>";
-						}
-					}
-
-		}
-
-		// These tags take an ascii attribute for lookup.
-		// [object attribute]
-		// if attribute cannot be cast to a number, the parser looks for "object" in twoWordTagsLookup,
-		// and then uses the corresponding object to determine the value of "attribute", by looking for
-		// "attribute" twoWordTagsLookup["object"]["attribute"]
-		public var twoWordTagsLookup:Object =
-		{
-			// NPCs:
-			"rubi"		: rubiLookups,
-			"arian"		: arianLookups,
-
-			// PC Attributes:
-
-			"cock"		: cockLookups,
-			"cockhead"	: cockHeadLookups
-		}
 
 
 		public function convertDoubleArg(inputArg:String):String
@@ -358,7 +139,7 @@ package classes
 					aspect = Number(aspect);
 
 					if (mainParserDebug) trace("Found corresponding anonymous function");
-					argResult = twoWordNumericTagsLookup[subject](this._cocClass, aspect);
+					argResult = twoWordNumericTagsLookup[subject](this._ownerClass, aspect);
 					if (mainParserDebug) trace("Called, return = ", argResult);
 				}
 				else
@@ -373,7 +154,7 @@ package classes
 					{
 
 						if (mainParserDebug) trace("Found corresponding anonymous function");
-						argResult = twoWordTagsLookup[subject][aspect](this._cocClass);
+						argResult = twoWordTagsLookup[subject][aspect](this._ownerClass);
 						if (mainParserDebug) trace("Called, return = ", argResult);
 					}
 					else
@@ -397,62 +178,8 @@ package classes
 
 
 
-
-
-
-		// Possible text arguments in the conditional of a if statement
-		// First, there is an attempt to cast the argument to a Number. If that fails,
-		// a dictionary lookup is performed to see if the argument is in the conditionalOptions[]
-		// object. If that fails, we just fall back to returning 0
-		public var conditionalOptions:Object =
-		{
-				"strength"			: function(thisPtr:*):* {return  thisPtr.player.str;},
-				"toughness"			: function(thisPtr:*):* {return  thisPtr.player.tou;},
-				"speed"				: function(thisPtr:*):* {return  thisPtr.player.spe;},
-				"intelligence"		: function(thisPtr:*):* {return  thisPtr.player.inte;},
-				"libido"			: function(thisPtr:*):* {return  thisPtr.player.lib;},
-				"sensitivity"		: function(thisPtr:*):* {return  thisPtr.player.sens;},
-				"corruption"		: function(thisPtr:*):* {return  thisPtr.player.cor;},
-				"fatigue"			: function(thisPtr:*):* {return  thisPtr.player.fatigue;},
-				"hp"				: function(thisPtr:*):* {return  thisPtr.player.HP;},
-				"hour"				: function(thisPtr:*):* {return  thisPtr.model.time.hours;},
-				"days"				: function(thisPtr:*):* {return  thisPtr.model.time.days;},
-				"tallness"			: function(thisPtr:*):* {return  thisPtr.player.tallness;},
-				"hairlength"		: function(thisPtr:*):* {return  thisPtr.player.hairLength;},
-				"femininity"		: function(thisPtr:*):* {return  thisPtr.player.femininity;},
-				"masculinity"		: function(thisPtr:*):* {return  100 - thisPtr.player.femininity;},
-				"cocks"				: function(thisPtr:*):* {return  thisPtr.player.cockTotal();},
-				"breastrows"		: function(thisPtr:*):* {return  thisPtr.player.bRows();},
-				"biggesttitsize"	: function(thisPtr:*):* {return  thisPtr.player.biggestTitSize();},
-				"vagcapacity"		: function(thisPtr:*):* {return  thisPtr.player.vaginalCapacity();},
-				"analcapacity"		: function(thisPtr:*):* {return  thisPtr.player.analCapacity();},
-				"balls"				: function(thisPtr:*):* {return  thisPtr.player.balls;},
-				"cumquantity"		: function(thisPtr:*):* {return  thisPtr.player.cumQ();},
-				"biggesttitsize"	: function(thisPtr:*):* {return  thisPtr.player.biggestTitSize();},
-				"milkquantity"		: function(thisPtr:*):* {return  thisPtr.player.lactationQ();},
-				"hasvagina"			: function(thisPtr:*):* {return  thisPtr.player.hasVagina();},
-				"istaur"			: function(thisPtr:*):* {return  thisPtr.player.isTaur();},
-				"isnaga"			: function(thisPtr:*):* {return  thisPtr.player.isNaga();},
-				"isgoo"				: function(thisPtr:*):* {return  thisPtr.player.isGoo();},
-				"isbiped"			: function(thisPtr:*):* {return  thisPtr.player.isBiped();},
-				"hasbreasts"		: function(thisPtr:*):* {return  (thisPtr.player.biggestTitSize() >= 1);},
-				"hasballs"			: function(thisPtr:*):* {return  (thisPtr.player.balls > 0);},
-				"hascock"			: function(thisPtr:*):* {return  thisPtr.player.hasCock();},
-				"isherm"			: function(thisPtr:*):* {return  (thisPtr.player.gender == 3);},
-				"cumnormal"			: function(thisPtr:*):* {return  (thisPtr.player.cumQ() <= 150);},
-				"cummedium"			: function(thisPtr:*):* {return  (thisPtr.player.cumQ() > 150 && thisPtr.player.cumQ() <= 350);},
-				"cumhigh"			: function(thisPtr:*):* {return  (thisPtr.player.cumQ() > 350 && thisPtr.player.cumQ() <= 1000);},
-				"cumveryhigh"		: function(thisPtr:*):* {return  (thisPtr.player.cumQ() > 1000 && thisPtr.player.cumQ() <= 2500);},
-				"cumextreme"		: function(thisPtr:*):* {return  (thisPtr.player.cumQ() > 2500);},
-				"issquirter"		: function(thisPtr:*):* {return  (thisPtr.player.wetness() >= 4);},
-				"ispregnant"		: function(thisPtr:*):* {return  (thisPtr.player.pregnancyIncubation > 0);},
-				"isbuttpregnant"	: function(thisPtr:*):* {return  (thisPtr.player.buttPregnancyIncubation > 0);},
-				"hasnipplecunts"	: function(thisPtr:*):* {return  thisPtr.player.hasFuckableNipples();},
-				"canfly"			: function(thisPtr:*):* {return  thisPtr.player.canFly();},
-				"islactating"		: function(thisPtr:*):* {return  (thisPtr.player.lactationQ() > 0);},
-				"true"				: function(thisPtr:*):* {return  true;},
-				"false"				: function(thisPtr:*):* {return  false;}
-			}
+		// Provides the conditionalOptions object
+		include "./conditionalConverters.as";	
 
 		// converts a single argument to a conditional to
 		// the relevant value, either by simply converting to a Number, or
@@ -478,7 +205,7 @@ package classes
 			if (arg in conditionalOptions)
 			{
 				if (mainParserDebug) trace("Found corresponding anonymous function");
-				argResult = conditionalOptions[arg](this._cocClass);
+				argResult = conditionalOptions[arg](this._ownerClass);
 				if (mainParserDebug) trace("Called, return = ", argResult);
 
 			}
@@ -594,7 +321,7 @@ package classes
 				{
 					if (section == 1) // barf if we hit a second "|" that's not in brackets
 					{
-						if (CoC_Settings.haltOnErrors) throw new Error("Nested IF statements still a WIP")
+						if (this._settingsClass.haltOnErrors) throw new Error("Nested IF statements still a WIP")
 						ret = ["<b>Error! Too many options in if statement!</b>",
 							"<b>Error! Too many options in if statement!</b>"];
 					}
@@ -720,17 +447,22 @@ package classes
 			}
 			else
 			{
-				if (CoC_Settings.haltOnErrors) throw new Error("");
+				if (this._settingsClass.haltOnErrors) throw new Error("");
 				throw new Error("Invalid if statement!", textCtnt);
 			}
 			return "";
 		}
 
 
+		// ---------------------------------------------------------------------------------------------------------------------------------------
 		// SCENE PARSING ---------------------------------------------------------------------------------------------------------------
+		// ---------------------------------------------------------------------------------------------------------------------------------------
 
 
-		// Basically, right now, the 
+		// attempt to return function "inStr" that is a member of "localThis"
+		// Properly handles nested classes/objects, e.g. localThis.herp.derp
+		// is returned by getFuncFromString(localThis, "herp.derp");
+		// returns the relevant function if it exists, null if it does not.
 		private function getFuncFromString(localThis:Object, inStr:String):Function
 		{
 			if (inStr in localThis)
@@ -769,61 +501,84 @@ package classes
 		}
 
 
-		public var buttonNum:Number;
+		private var buttonNum:Number;
 
+
+		// TODO: Make failed scene button lookups work properly!
+
+		// Parser button event handler
+		// This is the event bound to all button events, as well as the function called 
+		// to enter the parser's cached scenes. If you pass recursiveParser a set of scenes including a scene named 
+		// "startup", the parser will not exit normally, and will instead enter the "startup" scene at the completion of parsing the 
+		// input string.
+		//
+		// the passed seneName string is preferentially looked-up in the cached scene array, and if there is not a cached scene of name sceneName
+		// in the cache, it is then looked for as a member of _ownerClass.
+		// if the function name is not found in either context, an error *should* be thrown, but at the moment,
+		// it just returns to the debugPane
+		//
 		public function enterParserScene(sceneName:String):String
 		{
 
 			/*
-			if (sceneParserDebug) trace("this.ParserStateContents:")
-			for (var prop in this.ParserState) 
+			if (sceneParserDebug) trace("this.parserStateContents:")
+			for (var prop in this.parserState) 
 			{
-				if (sceneParserDebug) trace("this.ParserState."+prop+" = "+this.ParserState[prop]); 
+				if (sceneParserDebug) trace("this.parserState."+prop+" = "+this.parserState[prop]); 
 			}
 			*/
 
 
 			if (sceneParserDebug) trace("Entering parser scene: \""+sceneName+"\"");
-			if (sceneParserDebug) trace("Do we have the scene name? ", sceneName in this.ParserState)
+			if (sceneParserDebug) trace("Do we have the scene name? ", sceneName in this.parserState)
 			if (sceneName == "exit")
 			{
 				if (sceneParserDebug) trace("Enter scene called to exit");
 				//doNextClear(debugPane);
-				_cocClass.debugPane();
+				_ownerClass.debugPane();
 			}
-			else if (sceneName in this.ParserState)
+			else if (sceneName in this.parserState)
 			{	
 				if (sceneParserDebug) trace("Have scene \""+sceneName+"\". Parsing and setting up menu");
-				_cocClass.menu();
+				_ownerClass.menu();
 				
 				buttonNum = 0;		// Clear the button number, so we start adding buttons from button 0
 
-				var tmp1:String = this.ParserState[sceneName];
+				var tmp1:String = this.parserState[sceneName];
 				var tmp2:String = recParser(tmp1, 0);		// we have to actually parse the scene now
 				var tmp3:String = Showdown.makeHtml(tmp2)
 
 				
 
-				_cocClass.rawOutputText(tmp3, true);			// and then stick it on the display
+				_ownerClass.rawOutputText(tmp3, true);			// and then stick it on the display
 
 				//if (sceneParserDebug) trace("Scene contents: \"" + tmp1 + "\" as parsed: \"" + tmp2 + "\"")
 				if (sceneParserDebug) trace("Scene contents after markdown: \"" + tmp3 + "\"");
 			}
-			else if (this.getFuncFromString(_cocClass, sceneName) != null)
+			else if (this.getFuncFromString(_ownerClass, sceneName) != null)
 			{
 				if (sceneParserDebug) trace("Have function \""+sceneName+"\" in this!. Calling.");
-				this.getFuncFromString(_cocClass, sceneName)();
+				this.getFuncFromString(_ownerClass, sceneName)();
 			}
 			else
 			{
 				if (sceneParserDebug) trace("Enter scene called with unknown arg \""+sceneName+"\". falling back to the debug pane");
-				_cocClass.doNext(_cocClass.debugPane);
+				_ownerClass.doNext(_ownerClass.debugPane);
+
 			}
 			return tmp2
 
 		}
 
-
+		// Parses the contents of a scene tag, shoves the unprocessed text in the scene object (this.parserState)
+		// under the proper name.
+		// Scenes tagged as such:
+		// 
+		// [sceneName | scene contents blaugh]
+		// 
+		// This gets placed in this.parserState so this.parserState["sceneName"] == "scene contents blaugh"
+		// 
+		// Note that parsing of the actual scene contents is deferred untill it's actually called for display.
 		public function parseSceneTag(textCtnt:String):void
 		{
 			var sceneName:String;
@@ -840,24 +595,33 @@ package classes
 			sceneCont = trimStr(sceneCont, "	");
 
 
-			this.ParserState[sceneName] = stripStr(sceneCont);
+			this.parserState[sceneName] = stripStr(sceneCont);
 
 		}
 
+		// Evaluates the contents of a button tag, and instantiates the relevant button
+		// Current syntax:
+		//
+		// [button function_name | Button Name]
+		// where "button" is a constant string, "function_name" is the name of the function pressing the button will call, 
+		// and "Button Name" is the text that will be shown on the button.
+		// Note that the function name cannot contain spaces (actionscript requires this), and is case-sensitive
+		// "Button name" can contain arbitrary spaces or characters, excepting "]", "[" and "|"
 		public function parseButtonTag(textCtnt:String):void
 		{
+			// TODO: Allow button positioning!
 			var arr:Array;
 			arr = textCtnt.split("|")
 			if (arr.len > 2)
 			{
-				if (CoC_Settings.haltOnErrors) throw new Error("");
+				if (this._settingsClass.haltOnErrors) throw new Error("");
 				throw new Error("Too many items in button")
 			}
 
 			var buttonName:String = stripStr(arr[1]);
 			var buttonFunc:String = stripStr(arr[0].substring(arr[0].indexOf(' ')));
 			//trace("adding a button with name\"" + buttonName + "\" and function \"" + buttonFunc + "\"");
-			_cocClass.addButton(buttonNum, buttonName, this.enterParserScene, buttonFunc);
+			_ownerClass.addButton(buttonNum, buttonName, this.enterParserScene, buttonFunc);
 			buttonNum += 1;
 		}
 
@@ -867,7 +631,6 @@ package classes
 		public function evalForSceneControls(textCtnt:String):String
 		{
 
-			
 
 			if (sceneParserDebug) trace("Checking for scene tags.");
 			if (textCtnt.toLowerCase().indexOf("screen") == 0)
@@ -880,8 +643,7 @@ package classes
 			{
 				if (sceneParserDebug) trace("It's a button add statement");
 				parseButtonTag(textCtnt);
-				return "";
-				
+				return "";	
 			}
 			return textCtnt;
 		}
@@ -942,7 +704,7 @@ package classes
 		public function recParser(textCtnt:String, depth:Number):String
 		{
 			if (mainParserDebug) trace("Recursion call", depth, "---------------------------------------------+++++++++++++++++++++")
-
+			if (printIntermediateParseStateDebug) trace("Parsing contents = ", textCtnt)
 			// Depth tracks our recursion depth
 			// Basically, we need to handle things differently on the first execution, so we don't mistake single-word print-statements for
 			// a tag. Therefore, every call of recParser increments depth by 1
@@ -1002,6 +764,7 @@ package classes
 
 						// Only prepend the prefix if it actually has content.
 						prefixTmp = textCtnt.substring(0, tmp);
+						if (mainParserDebug) trace("prefix content = ", prefixTmp);
 						if (prefixTmp)
 							retStr += prefixTmp
 						// We know there aren't any brackets in the section before the first opening bracket.
@@ -1016,7 +779,7 @@ package classes
 						if (isIfStatement(tmpStr))
 						{
 							if (conditionalDebug) trace("early eval as if")
-							retStr = parseConditional(tmpStr, depth)
+							retStr += parseConditional(tmpStr, depth)
 							if (conditionalDebug) trace("------------------0000000000000000000000000000000000000000000000000000000000000000-----------------------")
 							//trace("Parsed Ccnditional - ", retStr)
 						}
@@ -1041,6 +804,11 @@ package classes
 						{
 							if (printCcntentDebug) trace("Need to parse trailing text", postfixTmp)
 							retStr += recParser(postfixTmp, depth);	// Parse the trailing text (if any)
+							// Note: This leads to LOTS of recursion. Since we basically call recParser once per
+							// tag, it means that if a body of text has 30 tags, we'll end up recursing at least 
+							// 29 times before finishing.
+							// Making this tail-call reursive, or just parsing it flatly may be a much better option in 
+							// the future, if this does become an issue.
 						}
 						else
 						{
@@ -1074,11 +842,12 @@ package classes
 		// You pass in the string you want parsed, and the parsed result is returned as a string.
 		public function recursiveParser(contents:String, parseAsMarkdown:Boolean = false):String
 		{
+			if (mainParserDebug) trace("------------------ Parser called on string -----------------------");
 			// Eventually, when this goes properly class-based, we'll add a period, and have this.parserState.
 
 			// Reset the parser's internal state, since we're parsing a new string:
 			// trace("Purging scene parser contents")
-			this.ParserState = new Object();
+			this.parserState = new Object();
 			
 
 
@@ -1086,7 +855,7 @@ package classes
 			// Run through the parser
 			contents = contents.replace(/\\n/g, "\n")
 			ret = recParser(contents, 0);
-
+			if (printIntermediateParseStateDebug) trace("Parser intermediate contents = ", ret)
 			// Currently, not parsing text as markdown by default because it's fucking with the line-endings.
 			
 			if (parseAsMarkdown)
@@ -1106,14 +875,14 @@ package classes
 			ret = ret.replace(/\\\[/g, "[")
 
 			/*
-			for (var prop in this.ParserState) 
+			for (var prop in this.parserState) 
 			{
-				trace("this.ParserState."+prop+" = "+this.ParserState[prop]); 
+				trace("this.parserState."+prop+" = "+this.parserState[prop]); 
 			}
 			*/
 
 			// Finally, if we have a parser-based scene. enter the "startup" scene.
-			if ("startup" in this.ParserState)
+			if ("startup" in this.parserState)
 			{
 				ret = enterParserScene("startup");
 
@@ -1123,7 +892,7 @@ package classes
 				// the outputText call overwrites the window content with the exact same content.
 				
 				// trace("Returning: ", ret);
-				_cocClass.currentText = ret;
+				_ownerClass.currentText = ret;
 
 
 			}
@@ -1133,8 +902,11 @@ package classes
 
 		}
 
-		// Stupid string utility functions, because actionscript doesn't have them (WTF?)
+		// ---------------------------------------------------------------------------------------------------------------------------------------
+		// ---------------------------------------------------------------------------------------------------------------------------------------
+		// ---------------------------------------------------------------------------------------------------------------------------------------
 
+		// Stupid string utility functions, because actionscript doesn't have them (WTF?)
 
 		public function stripStr(str:String):String
 		{
