@@ -15,6 +15,7 @@ package classes.Parser
 		public var mainParserDebug:Boolean = false;
 		public var conditionalDebug:Boolean = false;
 		public var printCcntentDebug:Boolean = false;
+		public var printIntermediateParseStateDebug:Boolean = false;
 
 
 		public function Parser(ownerClass:*, settingsClass:*)
@@ -703,7 +704,7 @@ package classes.Parser
 		public function recParser(textCtnt:String, depth:Number):String
 		{
 			if (mainParserDebug) trace("Recursion call", depth, "---------------------------------------------+++++++++++++++++++++")
-
+			if (printIntermediateParseStateDebug) trace("Parsing contents = ", textCtnt)
 			// Depth tracks our recursion depth
 			// Basically, we need to handle things differently on the first execution, so we don't mistake single-word print-statements for
 			// a tag. Therefore, every call of recParser increments depth by 1
@@ -763,6 +764,7 @@ package classes.Parser
 
 						// Only prepend the prefix if it actually has content.
 						prefixTmp = textCtnt.substring(0, tmp);
+						if (mainParserDebug) trace("prefix content = ", prefixTmp);
 						if (prefixTmp)
 							retStr += prefixTmp
 						// We know there aren't any brackets in the section before the first opening bracket.
@@ -777,7 +779,7 @@ package classes.Parser
 						if (isIfStatement(tmpStr))
 						{
 							if (conditionalDebug) trace("early eval as if")
-							retStr = parseConditional(tmpStr, depth)
+							retStr += parseConditional(tmpStr, depth)
 							if (conditionalDebug) trace("------------------0000000000000000000000000000000000000000000000000000000000000000-----------------------")
 							//trace("Parsed Ccnditional - ", retStr)
 						}
@@ -802,6 +804,11 @@ package classes.Parser
 						{
 							if (printCcntentDebug) trace("Need to parse trailing text", postfixTmp)
 							retStr += recParser(postfixTmp, depth);	// Parse the trailing text (if any)
+							// Note: This leads to LOTS of recursion. Since we basically call recParser once per
+							// tag, it means that if a body of text has 30 tags, we'll end up recursing at least 
+							// 29 times before finishing.
+							// Making this tail-call reursive, or just parsing it flatly may be a much better option in 
+							// the future, if this does become an issue.
 						}
 						else
 						{
@@ -835,6 +842,7 @@ package classes.Parser
 		// You pass in the string you want parsed, and the parsed result is returned as a string.
 		public function recursiveParser(contents:String, parseAsMarkdown:Boolean = false):String
 		{
+			if (mainParserDebug) trace("------------------ Parser called on string -----------------------");
 			// Eventually, when this goes properly class-based, we'll add a period, and have this.parserState.
 
 			// Reset the parser's internal state, since we're parsing a new string:
@@ -847,7 +855,7 @@ package classes.Parser
 			// Run through the parser
 			contents = contents.replace(/\\n/g, "\n")
 			ret = recParser(contents, 0);
-
+			if (printIntermediateParseStateDebug) trace("Parser intermediate contents = ", ret)
 			// Currently, not parsing text as markdown by default because it's fucking with the line-endings.
 			
 			if (parseAsMarkdown)
