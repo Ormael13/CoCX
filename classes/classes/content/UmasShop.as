@@ -1668,7 +1668,7 @@ package classes.content
 			// DONT CARE HAD SEX
 			// Scene says we've only cum a little so err I guess store the players hoursSinceCum, do statmod, then reset it to a smaller value?
 			var hoursSinceCum:int = player.hoursSinceCum;
-			dynStats("lust", -100);
+			dynStats("lust=", 0);
 			player.hoursSinceCum = Math.ceil(hoursSinceCum * 0.75);
 
 			menu();
@@ -1780,7 +1780,7 @@ package classes.content
 				outputText("You chuckle at her, painstakingly hauling yourself up, and get dressed.  Thanking Uma for showing you her magic fingers, you blow her a teasing kiss and then head back to camp.\n\n");
 			}
 
-			dynStats("lust", -100);
+			dynStats("lust=", 0);
 
 			menu();
 			doNext(13);
@@ -1859,7 +1859,7 @@ package classes.content
 
 			outputText(".  See you later, dear.  And don't be a stranger,</i>\" the mare tells you as she waves you goodbye.\n\n");
 
-			dynStats("lust", -100);
+			dynStats("lust=", 0);
 
 			menu();
 			doNext(13);
