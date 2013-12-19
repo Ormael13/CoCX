@@ -25,6 +25,8 @@ git submodule update --init
 -default-background-color=0x000000 \
 -static-link-runtime-shared-libraries=true \
 -strict=false \
+-define+=CONFIG::release,false \
+-define+=CONFIG::debug,true \
 -source-path+=classes \
 -library-path+=./lib/bin/MainView.swc \
 -library-path+=./lib/bin/ScrollPane.swc \
