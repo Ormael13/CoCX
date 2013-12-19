@@ -6,7 +6,7 @@ Debug pane and related functions
 Author: Fake-Name
 
 */
-
+CONFIG::debug {
 public function monkeyStartConfirm():void
 {
 	outputText(<![CDATA[
@@ -322,5 +322,7 @@ public function toggleHaltSettings():void
 		CoC_Settings.haltOnErrors = true;
 	debugPane();
 	return;
+}
+
 }
 
