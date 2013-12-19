@@ -16,6 +16,14 @@ public function mainMenu(e:MouseEvent = undefined):void {
 
 
 	outputText("<b>Corruption of Champions (" + version + ")</b>", true);
+	
+	CONFIG::debug {
+		outputText(" Debug Build.");
+	}
+	
+	CONFIG::release {
+		outputText(" Release Build");
+	}
 
 	//doThatTestingThang();
 
@@ -30,7 +38,8 @@ public function mainMenu(e:MouseEvent = undefined):void {
 	// since the images haven't loaded yet.
 	// Therefore, the imageCreditScreen will just have to say "No image pack" if you don't have any images
 
-	choices("",  0,
+	CONFIG::debug {
+			choices("",  0,
 			"Image Credits", imageCreditsScreen,
 			"Credits", creditsScreen,
 			"", 0,
@@ -40,6 +49,21 @@ public function mainMenu(e:MouseEvent = undefined):void {
 			"", 0,
 			"Settings", settingsScreen,
 			"Resume", resume);
+	}
+	
+	CONFIG::release {
+			choices("",  0,
+			"Image Credits", imageCreditsScreen,
+			"Credits", creditsScreen,
+			"", 0,
+			"Instructions", howToPlay,
+			"", 0,
+			"", 0,
+			"", 0,
+			"Settings", settingsScreen,
+			"Resume", resume);
+	}
+
 }
 
 public function startupScreenBody():void
@@ -73,7 +97,6 @@ For more information see Fenoxo's Blog at <b><u><a href='http://www.fenoxo.com/'
 Also go play <u><a href='http://www.furaffinity.net/view/9830293/'>Nimin</a></u> by Xadera on furaffinity.
 
 	]]>, false, true);
-
 
 	if(debug)
 		outputText("\n\n<b>DEBUG MODE ENABLED:  ITEMS WILL NOT BE CONSUMED BY USE.</b>");

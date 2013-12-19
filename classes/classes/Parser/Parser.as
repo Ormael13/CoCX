@@ -535,7 +535,9 @@ package classes.Parser
 			{
 				if (sceneParserDebug) trace("Enter scene called to exit");
 				//doNextClear(debugPane);
-				_ownerClass.debugPane();
+				CONFIG::debug {
+					_ownerClass.debugPane();
+				}
 			}
 			else if (sceneName in this.parserState)
 			{	
@@ -563,8 +565,9 @@ package classes.Parser
 			else
 			{
 				if (sceneParserDebug) trace("Enter scene called with unknown arg \""+sceneName+"\". falling back to the debug pane");
-				_ownerClass.doNext(_ownerClass.debugPane);
-
+				CONFIG::debug {
+					_ownerClass.doNext(_ownerClass.debugPane);
+			}
 			}
 			return tmp2
 
