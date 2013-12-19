@@ -1703,14 +1703,14 @@ package classes.content
 			outputText("With your attention focused on your chest, you don't notice one of the mares hands ceasing it's sensual massage of your breast, ");
 			
 			
-			if (player.thickness < 10 && player.tone > 90) outputText("her fingertips trailing against your chiseled, muscular abdomen,");
-			else if (player.thickness < 30 && player.tone > 70) outputText("her fingertips gliding across your toned midriff,");
-			else if (player.thickness > 90 && player.tone < 10) outputText("her fingertips stealing a grope of your chubby belly as they travel lower,");
-			else if (player.thickness > 70 && player.tone < 30) outputText("her fingertips over your paunch of a belly,");
+			if (player.thickness < 10 && player.tone > 90) outputText("her fingertips trailing against your chiseled, muscular abdomen, ");
+			else if (player.thickness < 30 && player.tone > 70) outputText("her fingertips gliding across your toned midriff, ");
+			else if (player.thickness > 90 && player.tone < 10) outputText("her fingertips stealing a grope of your chubby belly as they travel lower, ");
+			else if (player.thickness > 70 && player.tone < 30) outputText("her fingertips over your paunch of a belly, ");
 			
 			
-			if (player.hasCock()) outputText(" past your [cock], and ");
-			else if (player.totalCocks() > 1) outputText(" past [eachCock], and");
+			if (player.hasCock()) outputText("past your [cock], and ");
+			else if (player.totalCocks() > 1) outputText("past [eachCock], and ");
 
 			if (player.hasVagina()) 
 			{
