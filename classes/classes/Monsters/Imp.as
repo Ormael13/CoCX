@@ -97,6 +97,9 @@
 			this.cocks[0].cockLength            = rand(2) + 11;
 			this.cocks[0].cockThickness         = 2.5;
 			this.cocks[0].cockType              = CockTypesEnum.HUMAN;
+			this.ass.analLooseness				= 4;
+			this.ass.analWetness				= 1;
+			
 			
 		}
 
