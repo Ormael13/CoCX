@@ -6,7 +6,10 @@
 	import classes.CoC_Settings
 
 	
-	import flash.events.UncaughtErrorEvent;
+	CONFIG::debug 
+	{
+		import flash.events.UncaughtErrorEvent;
+	}
 	import flash.system.Capabilities;
 	import flash.display.Sprite;
 	
@@ -135,55 +138,63 @@
 			if (this.debug) trace(blockedButtons)
 		}
 
-		public function catchGlobalError(event:UncaughtErrorEvent):void
+
+		CONFIG::debug 
 		{
-			this.stopMonkey()
-
-			import flash.events.ErrorEvent;
-
-			this._mainClassPtr.rawOutputText("<b>OMG ERROR LOL WUT</b>\n\n", true);
-			
-			var stackTrace:String = "";
-			
-			if (event.error is Error)
+			public function catchGlobalError(event:UncaughtErrorEvent):void
 			{
-				var tempError:Error = event.error as Error;
-				stackTrace = tempError.getStackTrace();
-				// do something with the error
-			}
-			else if (event.error is ErrorEvent)
-			{
-				var errorEvent:ErrorEvent = event.error as ErrorEvent;
-				this._mainClassPtr.rawOutputText("<b>ERROR EVENT WAT</b>\n\n");
-				stackTrace += errorEvent + "\n";
-				// do something with the error
-			}
-			else
-			{
-				this._mainClassPtr.rawOutputText("<b>DURRRRR</b>\n\n");
-			}
-			
-			this._mainClassPtr.rawOutputText("<b>SOMETHING IS BROKEN LOL WAT</b>\n");
-			this._mainClassPtr.rawOutputText(stackTrace);
+				this.stopMonkey()
 
-			this._mainClassPtr.rawOutputText("\n\n<b>Preceeding button Events:</b>\n");
-			this._mainClassPtr.rawOutputText(CoC_Settings.getButtonEvents());
-			this._mainClassPtr.menu();
+				import flash.events.ErrorEvent;
 
+				this._mainClassPtr.rawOutputText("<b>OMG ERROR LOL WUT</b>\n\n", true);
+				
+				var stackTrace:String = "";
+				
+				if (event.error is Error)
+				{
+					var tempError:Error = event.error as Error;
+					stackTrace = tempError.getStackTrace();
+					// do something with the error
+				}
+				else if (event.error is ErrorEvent)
+				{
+					var errorEvent:ErrorEvent = event.error as ErrorEvent;
+					this._mainClassPtr.rawOutputText("<b>ERROR EVENT WAT</b>\n\n");
+					stackTrace += errorEvent + "\n";
+					// do something with the error
+				}
+				else
+				{
+					this._mainClassPtr.rawOutputText("<b>DURRRRR</b>\n\n");
+				}
+				
+				this._mainClassPtr.rawOutputText("<b>SOMETHING IS BROKEN LOL WAT</b>\n");
+				this._mainClassPtr.rawOutputText(stackTrace);
+
+				this._mainClassPtr.rawOutputText("\n\n<b>Preceeding button Events:</b>\n");
+				this._mainClassPtr.rawOutputText(CoC_Settings.getButtonEvents());
+				this._mainClassPtr.menu();
+
+			}
 		}
-		
 		
 		
 
 		private function attachGlobalErrorHandler():void
 		{
-			this._mainClassPtr.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, this.catchGlobalError);
-
+			CONFIG::debug 
+			{
+				this._mainClassPtr.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, this.catchGlobalError);
+			}
 		}
 
 		private function detatchGlobalErrorHandler():void
 		{
-			this._mainClassPtr.loaderInfo.uncaughtErrorEvents.removeEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, this.catchGlobalError);
+			CONFIG::debug 
+			{
+				this._mainClassPtr.loaderInfo.uncaughtErrorEvents.removeEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, this.catchGlobalError);
+			}
 		}
 		
 		

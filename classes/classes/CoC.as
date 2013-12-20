@@ -19,7 +19,7 @@
 	import classes.ImageManager; // This line not necessary, but added because I'm pedantic like that.
 	import classes.InputManager;
 
-	import classes.Parser.Parser;
+	import classes.Parser.Main.Parser; 	// import getting long enough yet?
 
 	import classes.Monsters.*;		// import all the various monsters
 	import coc.view.MainView;
@@ -281,10 +281,8 @@
 		public var oldStats:*; // I *think* this is a generic object
 		public var inputManager:InputManager;
 
-		CONFIG::debug {
-			public var monkey:ChaosMonkey;
-		}
-			public var testingBlockExiting:Boolean;
+		public var monkey:ChaosMonkey;
+		public var testingBlockExiting:Boolean;
 
 		public function CoC()
 		{
@@ -298,7 +296,7 @@
 			// Used for stopping chaos monkey on syntax errors. Separate flag so we can make stopping optional
 			CoC_Settings.haltOnErrors = false;
 			
-			this.parser = new classes.Parser.Parser(this, CoC_Settings);
+			this.parser = new Parser(this, CoC_Settings);
 
 
 			this.model = new GameModel();
@@ -350,9 +348,7 @@
 			this.inputManager = new InputManager(stage, false);
 			include "../../includes/ControlBindings.as";
 
-			CONFIG::debug {
-				this.monkey = new ChaosMonkey(this);
-			}
+			this.monkey = new ChaosMonkey(this);
 
 			//} endregion
 

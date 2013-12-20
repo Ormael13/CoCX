@@ -6,10 +6,13 @@
 	 */
 	public class CoC_Settings
 	{
+
+
+		public static var debugBuild:Boolean = true;
+		
 		// Horrible static abuse FTW
 		public static var haltOnErrors:Boolean = false;
 		public static var buttonEvents:Array = new Array();
-		
 		private static const bufferSize:int = 50;
 		
 		public static function appendButtonEvent(inString:String):void
