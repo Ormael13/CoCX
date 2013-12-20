@@ -2639,6 +2639,7 @@ public function doCombat(eventNum:Number):void
 			outputText("\n\n<b>GAME OVER</b>", false);
 			if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "",0,"NewGamePlus",10035,"",0,"Debug Cheat", 1);
 			else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus", 10035, "BLAH", 0, "LULZ", 0);
+			mainView.showMenuButton( MainView.MENU_NEW_MAIN );
 			mainView.showMenuButton( MainView.MENU_DATA );
 			mainView.hideMenuButton( MainView.MENU_APPEARANCE );
 			mainView.hideMenuButton( MainView.MENU_LEVEL );
