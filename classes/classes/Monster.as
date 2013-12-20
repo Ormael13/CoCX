@@ -9,6 +9,8 @@
 	 */
 	public class Monster extends Creature 
 	{
+		
+		protected var mainClassPtr:*;
 		//For enemies
 		public var bonusHP:Number = 0;
 		public var long:String = "An imp is short, only a few feet tall.  An unkempt mane of shaggy black hair hangs from his head, parted by two four inch long horns.  His eyes are solid black, save for tiny red irises that seem to glow with evil intent.  His skin is bright red, and unencumbered by clothing or armor, save for a small loincloth at his belt.  His feet are covered by tiny wooden sandles, and his hands tipped with sharp claws.";
@@ -43,10 +45,10 @@
 		public var antennae:Number = 0;
 		public var horns:Number = 0;		
 		
-		public function Monster() 
+		public function Monster(mainClassPtr:*) 
 		{
 			// trace("Generic Monster Constructor!");
-			
+			this.mainClassPtr = mainClassPtr;
 		}
 		
 
@@ -55,8 +57,9 @@
 			return this.tou * 2 + 50 + this.bonusHP;
 		}
 
-		protected function totalXP(playerLevel:Number):Number 
+		protected function totalXP(playerLevel:Number=-1):Number 
 		{
+			if (playerLevel == -1) return mainClassPtr.player.level;
 			//Nerf xp gains by 20% per level over.
 			var difference:Number = playerLevel - this.level;
 			//No bonuses for underlevel!

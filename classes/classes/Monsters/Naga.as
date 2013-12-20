@@ -16,7 +16,7 @@
 
 		public function Naga(mainClassPtr:*) 
 		{
-			
+			super(mainClassPtr);
 			trace("Naga Constructor!");
 		this.short="naga";
 			this.imageName="naga";

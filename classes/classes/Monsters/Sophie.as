@@ -16,7 +16,7 @@
 
 		public function Sophie(mainClassPtr:*) 
 		{
-			
+			super(mainClassPtr);
 			trace("Sophie Constructor!");
 		
 			this.short="Sophie";

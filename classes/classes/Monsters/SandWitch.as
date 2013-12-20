@@ -16,7 +16,7 @@
 
 		public function SandWitch(mainClassPtr:*) 
 		{
-			
+			super(mainClassPtr);
 			trace("SandWitch Constructor!");
 			this.short                          = "sand witch";
 			if (mainClassPtr.silly())

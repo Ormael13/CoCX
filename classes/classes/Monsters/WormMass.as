@@ -16,7 +16,7 @@
 
 		public function WormMass(mainClassPtr:*) 
 		{
-			
+			super(mainClassPtr);
 			trace("WormMass Constructor!");
 			this.short="worms";
 			this.imageName="worms";

@@ -16,7 +16,7 @@
 
 		public function Marble(mainClassPtr:*) 
 		{
-			
+			super(mainClassPtr);
 			trace("Marble Constructor!");
 			this.short="Marble";
 			this.imageName="marble";

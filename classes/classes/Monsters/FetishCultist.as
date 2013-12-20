@@ -16,7 +16,7 @@
 
 		public function FetishCultist(mainClassPtr:*) 
 		{
-			
+			super(mainClassPtr);
 			trace("GenericMonstah Constructor!");
 				this.short="fetish cultist";
 			this.imageName="fetishcultist";

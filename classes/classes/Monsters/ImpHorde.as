@@ -16,7 +16,7 @@
 
 		public function ImpHorde(mainClassPtr:*) 
 		{
-			
+			super(mainClassPtr);
 			trace("ImpHorde Constructor!");
 			this.short="imp horde";
 			this.imageName="impmob";

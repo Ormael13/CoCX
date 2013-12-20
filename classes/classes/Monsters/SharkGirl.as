@@ -15,7 +15,7 @@
 		
 		public function SharkGirl(mainClassPtr:*) 
 		{
-
+			super(mainClassPtr);
 			trace("SharkGirl Constructor!");
 			this.short="shark-girl";
 			this.imageName="sharkgirl";

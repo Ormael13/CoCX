@@ -16,7 +16,7 @@
 
 		public function Ceraph(mainClassPtr:*) 
 		{
-			
+			super(mainClassPtr);
 			trace("Ceraph Constructor!");
 			this.short="Ceraph";
 			this.imageName="ceraph";

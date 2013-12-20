@@ -16,6 +16,7 @@
 
 		public function BeeGirl(mainClassPtr:*) 
 		{
+			super(mainClassPtr);
 			this.short="bee-girl";
 			this.imageName="beegirl";
 			this.plural = false;

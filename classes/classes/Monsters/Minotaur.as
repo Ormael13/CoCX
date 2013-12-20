@@ -18,7 +18,7 @@
 
 		public function Minotaur(mainClassPtr:*) 
 		{
-			
+			super(mainClassPtr);
 			trace("Minotaur Constructor!");
 			trace(mainClassPtr.flags);
 			

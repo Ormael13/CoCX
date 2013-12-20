@@ -16,7 +16,7 @@
 
 		public function InfestedHellhound(mainClassPtr:*) 
 		{
-			
+			super(mainClassPtr);
 			trace("InfestedHellhound Constructor!");
 		this.short="infested hellhound";
 			this.imageName="infestedhellhound";

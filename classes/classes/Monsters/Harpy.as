@@ -16,7 +16,7 @@
 
 		public function Harpy(mainClassPtr:*) 
 		{
-			
+			super(mainClassPtr);
 			trace("Harpy Constructor!");
 			this.short="harpy";
 			this.imageName="harpy";

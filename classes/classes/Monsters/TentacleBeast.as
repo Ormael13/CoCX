@@ -16,7 +16,7 @@
 
 		public function TentacleBeast(mainClassPtr:*) 
 		{
-			
+			super(mainClassPtr);
 			trace("TentacleBeast Constructor!");
 			this.short="tentacle beast";
 			this.imageName="tentaclebeast";

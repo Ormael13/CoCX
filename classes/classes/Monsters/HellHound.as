@@ -16,7 +16,7 @@
 
 		public function HellHound(mainClassPtr:*) 
 		{
-			
+			super(mainClassPtr);
 			trace("HellHound Constructor!");
 		this.short="hellhound";
 			this.imageName="hellhound";

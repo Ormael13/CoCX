@@ -16,7 +16,7 @@
 
 		public function FetishZealot(mainClassPtr:*) 
 		{
-			
+			super(mainClassPtr);
 			trace("FetishZealot Constructor!");
 		
 			this.short="fetish zealot";

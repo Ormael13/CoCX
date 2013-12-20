@@ -16,7 +16,7 @@
 
 		public function Akbal(mainClassPtr:*) 
 		{
-			
+			super(mainClassPtr);
 			trace("Akbal Constructor!");
 			this.short="Akbal";
 			this.imageName="akbal";

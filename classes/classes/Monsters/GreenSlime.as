@@ -16,7 +16,7 @@
 
 		public function GreenSlime(mainClassPtr:*) 
 		{
-			
+			super(mainClassPtr);
 			trace("GreenSlime Constructor!");
 			this.short="green slime";
 			this.imageName="greenslime";

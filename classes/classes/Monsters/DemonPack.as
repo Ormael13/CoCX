@@ -16,7 +16,7 @@
 
 		public function DemonPack(mainClassPtr:*) 
 		{
-			
+			super(mainClassPtr);
 			trace("DemonPack Constructor!");
 			this.short="demons";
 			this.imageName="demonmob";

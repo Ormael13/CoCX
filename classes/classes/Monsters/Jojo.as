@@ -16,7 +16,7 @@
 
 		public function Jojo(mainClassPtr:*) 
 		{
-			
+			super(mainClassPtr);
 			trace("Jojo Constructor!");
 			this.short="Jojo";
 			this.imageName="jojo";

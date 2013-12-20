@@ -16,7 +16,7 @@
 
 		public function Imp(mainClassPtr:*) 
 		{
-			
+			super(mainClassPtr);
 			trace("Imp Constructor!");
 			this.short                          = "imp";
 			this.imageName                      = "imp";

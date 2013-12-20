@@ -16,7 +16,7 @@
 
 		public function Goblin(mainClassPtr:*) 
 		{
-			
+			super(mainClassPtr);
 			trace("Goblin Constructor!");
 			this.short="goblin";
 			this.imageName="goblin";
