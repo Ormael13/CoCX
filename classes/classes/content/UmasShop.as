@@ -1700,23 +1700,22 @@ package classes.content
 			outputText("Once settled and comfortable, you ask what to do next.\n\n");
 
 			outputText("\"<i>Just relax,</i>\" the mare prompts as she runs her hands over your body.  She gently teases your [nipples] with soft fingers, kneading your [chest] with smooth touches; her delicate grasp gradually increasing in force until she's pawing at your sensetive tit-flesh with authority.\n\n");
-			outputText("With your attention focused on your chest, you don't notice one of the mares hands ceasing it's sensual massage of your breast, ");
+			outputText("With your attention focused on your chest, you don't notice one of the mares hands ceasing it's sensual massage of a breast, ");
 			
 			
 			if (player.thickness < 10 && player.tone > 90) outputText("her fingertips trailing against your chiseled, muscular abdomen, ");
 			else if (player.thickness < 30 && player.tone > 70) outputText("her fingertips gliding across your toned midriff, ");
 			else if (player.thickness > 90 && player.tone < 10) outputText("her fingertips stealing a grope of your chubby belly as they travel lower, ");
-			else if (player.thickness > 70 && player.tone < 30) outputText("her fingertips over your paunch of a belly, ");
+			else if (player.thickness > 70 && player.tone < 30) outputText("her fingertips sinking into paunch of your belly, ");
 			
 			
-			if (player.hasCock()) outputText("past your [cock], and ");
-			else if (player.totalCocks() > 1) outputText("past [eachCock], and ");
+			if (player.hasCock()) outputText("past [eachCock], and ");
 
 			if (player.hasVagina()) 
 			{
-				outputText("down towards the honeypot located ");
-				if (player.lowerBody == 3 || player.lowerBody == 4) outputText("on your [legs].  ");
-				else outputText("between your [legs].  ");
+				outputText("down towards the honeypot ");
+				if (player.isNaga()) outputText("on your [legs].  ");
+				else outputText("nestled between your [legs].  ");
 				
 				outputText("Slowly she spreads your folds open, massaging your labia and gathering moisture from your [vagina].\n\n");
 			}
