@@ -1,4 +1,12 @@
 ﻿
+		// provides rubiLookups and arianLookups
+		// note that these are only used in doubleArgLookups, not in Parser.as itself
+		//
+		// =!= NOTE: MUST BE IMPORTED BEFORE "./doubleArgLookups.as" =!=
+		// 
+		include "./npcLookups.as";
+
+
 		// PC ASCII Aspect lookups
 
 		public var cockLookups:Object = // For subject: "cock"

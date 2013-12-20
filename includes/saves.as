@@ -1,4 +1,4 @@
-import flash.net.FileReference;
+﻿import flash.net.FileReference;
 import flash.events.Event;
 import flash.net.URLRequest;
 import flash.utils.ByteArray;
@@ -708,6 +708,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 	// Keybinds
 	saveFile.data.controls = inputManager.SaveBindsToObj();
 
+
 	trace("done saving");
 	// Because actionscript is stupid, there is no easy way to block until file operations are done.
 	// Therefore, I'm hacking around it for the chaos monkey.
@@ -715,19 +716,14 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 	// Something to do in the future
 	if (isFile)
 	{
-		CONFIG::debug {
-			if (!(this.monkey.run))
-			{
-		}
-
+		if (!(this.monkey.run))
+		{
 			file = new FileReference();
 			//outputText(serializeToString(saveFile.data), true);
 			var bytes:ByteArray = new ByteArray();
 			bytes.writeObject(saveFile);
 			file.save(bytes, null);
 			outputText("Attempted to save to file.", true);
-		CONFIG::debug {
-			}
 		}
 	}
 	else
@@ -738,24 +734,20 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 	}
 	doNext(1);
 }
-
 public function openSave():void
 {
 
-	CONFIG::debug {
-		// Block when running the chaos monkey
-		if (!(this.monkey.run))
-		{
-	}
+	// Block when running the chaos monkey
+	if (!(this.monkey.run))
+	{
 		file = new FileReference();
 		file.browse();
 		file.addEventListener(Event.SELECT, onFileSelected);
 		//var fileObj : Object = readObjectFromStringBytes("");
 		//loadGameFile(fileObj);
-	CONFIG::debug {
-		}
 	}
 }
+
 
 public function onFileSelected(evt:Event):void
 {

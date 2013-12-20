@@ -142,8 +142,7 @@ public function eventTesterGo():void
 public function eventTesterExit():void 
 {
 	mainView.hideTestInputPanel();
-	CONFIG::debug {
-		eventParser(debugPane);
-	}
+	eventParser(debugPane);
+
 	return;
 }

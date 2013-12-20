@@ -2,7 +2,19 @@
 
 
 //MainMenu - kicks player out to the main menu
-public function mainMenu(e:MouseEvent = undefined):void {
+public function mainMenu(e:MouseEvent = undefined):void 
+{
+
+	if(CONFIG::debug)
+	{
+		CoC_Settings.debugBuild = true;
+	}
+	else
+	{
+		CoC_Settings.debugBuild = false;
+	}
+
+
 	mainView.eventTestInput.x = -10207.5;
 	mainView.eventTestInput.y = -1055.1;
 	hideStats();
@@ -17,13 +29,10 @@ public function mainMenu(e:MouseEvent = undefined):void {
 
 	outputText("<b>Corruption of Champions (" + version + ")</b>", true);
 	
-	CONFIG::debug {
+	if (CoC_Settings.debugBuild)
 		outputText(" Debug Build.");
-	}
-	
-	CONFIG::release {
+	else
 		outputText(" Release Build");
-	}
 
 	//doThatTestingThang();
 
@@ -38,8 +47,7 @@ public function mainMenu(e:MouseEvent = undefined):void {
 	// since the images haven't loaded yet.
 	// Therefore, the imageCreditScreen will just have to say "No image pack" if you don't have any images
 
-	CONFIG::debug {
-			choices("",  0,
+	choices("",  0,
 			"Image Credits", imageCreditsScreen,
 			"Credits", creditsScreen,
 			"", 0,
@@ -49,20 +57,9 @@ public function mainMenu(e:MouseEvent = undefined):void {
 			"", 0,
 			"Settings", settingsScreen,
 			"Resume", resume);
-	}
+
 	
-	CONFIG::release {
-			choices("",  0,
-			"Image Credits", imageCreditsScreen,
-			"Credits", creditsScreen,
-			"", 0,
-			"Instructions", howToPlay,
-			"", 0,
-			"", 0,
-			"", 0,
-			"Settings", settingsScreen,
-			"Resume", resume);
-	}
+
 
 }
 
