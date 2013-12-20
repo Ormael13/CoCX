@@ -56,7 +56,7 @@
 				"sheath"					: function(thisPtr:*):* { return thisPtr.sheathDesc(); },
 				"skin"						: function(thisPtr:*):* { return thisPtr.player.skin(); },
 				"skinfurscales"				: function(thisPtr:*):* { return thisPtr.player.skinFurScales(); },
-				"tongue"					: function(thisPtr:*):* { return thisPtr.tongueDescript();},
+				"tongue"					: function(thisPtr:*):* { return thisPtr.tongueDescript(); },
 				"vag"						: function(thisPtr:*):* { return thisPtr.vaginaDescript(); },
 				"vagina"					: function(thisPtr:*):* { return thisPtr.vaginaDescript(); },
 				"vagorass"					: function(thisPtr:*):* { return(thisPtr.player.hasVagina() ? thisPtr.vaginaDescript() : thisPtr.assholeDescript()); },
