@@ -1899,6 +1899,7 @@ public function getButtonToolTipText( buttonText :String ) :String
 
 
 // Hah, finally a place where a dictionary is actually required!
+import classes.Character;
 import flash.utils.Dictionary;
 private var funcLookups:Dictionary = null;
 
@@ -2718,6 +2719,33 @@ public function lustPercent():Number {
 	return lust;
 }
 
+// returns OLD OP VAL
+public function applyOperator(old:Number, op:String, val:Number):Number {
+	switch(op) {
+		case "=":
+			return val;
+		case "+":
+			return old + val;
+		case "-":
+			return old - val;
+		case "*":
+			return old * val;
+		case "/":
+			return old / val;
+		default:
+			trace("applyOperator(" + old + ",'" + op + "'," + val + ") unknown op");
+			return old;
+	}
+}
+
+public function testDynStatsEvent():void {
+	outputText("Old: "+player.str+" "+player.tou+" "+player.spe+" "+player.inte+" "+player.lib+" "+player.sens+" "+player.lust+"\n",true);
+	dynStats("str", 0, "tou", 1, "spe+", 2, "int-", 3, "lib*", 2, "sen=", 25,"lust/",2);
+	outputText("Mod: 0 1 +2 -3 *2 =25 /2\n");
+	outputText("New: "+player.str+" "+player.tou+" "+player.spe+" "+player.inte+" "+player.lib+" "+player.sens+" "+player.lust+"\n");
+	doNext(1);
+}
+
 //TODO stats function with dynamic arguments so you don't have to specify all those zeros each time.
 //Modify stats
 public function dynStats(... args):void
@@ -2729,9 +2757,10 @@ public function dynStats(... args):void
 		return;
 	}
 	
-	var argNamesFull:Array 	= 	new Array("strength", "toughness", "speed", "intellect", "libido", "sensetivity", "lust", "corruption", "resisted", "noBimbo"); // In case somebody uses full arg names etc
+	var argNamesFull:Array 	= 	new Array("strength", "toughness", "speed", "intellect", "libido", "sensitivity", "lust", "corruption", "resisted", "noBimbo"); // In case somebody uses full arg names etc
 	var argNamesShort:Array = 	new Array(	"str", 	"tou", 	"spe", 	"int", 	"lib", 	"sen", 	"lus", 	"cor", 	"res", 	"bim"); // Arg names
 	var argVals:Array = 		new Array(	0, 		0,	 	0, 		0, 		0, 		0, 		0, 		0, 		true, 	false); // Default arg values
+	var argOps:Array = 			new Array(  "+",	"+",    "+",    "+",    "+",    "+",    "+",    "+",    "=",    "=");   // Default operators
 	
 	for (var i:int = 0; i < args.length; i += 2)
 	{
@@ -2747,18 +2776,23 @@ public function dynStats(... args):void
 			var argIndex:int = -1;
 			
 			// Figure out which array to search
-			if ((args[i] as String).length <= 3) // Short
+			var argsi:String = (args[i] as String);
+			if (argsi.length <= 4 && argsi != "lust") // Short
 			{
-				argIndex = argNamesShort.indexOf((args[i] as String));
+				argIndex = argNamesShort.indexOf(argsi.slice(0, 3));
+				if (argsi.length == 4 && argIndex != -1) argOps[argIndex] = argsi.charAt(3);
 			}
 			else // Full
 			{
-				argIndex = argNamesFull.indexOf((args[i] as String));
+				if ("+-*/=".indexOf(argsi.charAt(argsi.length - 1)) != -1) {
+					argIndex = argNamesFull.indexOf(argsi.slice(0, argsi.length - 1));
+					if (argIndex != -1) argOps[argIndex] = argsi.charAt(argsi.length - 1);
+				}
 			}
 			
 			if (argIndex == -1) // Shit fucked up, welp
 			{
-				trace("Couldn't find the arg name " + (args[i] as String) + " in the index arrays. Welp!");
+				trace("Couldn't find the arg name " + argsi + " in the index arrays. Welp!");
 				return;
 			}
 			else // Stuff the value into our "values" array
@@ -2771,10 +2805,27 @@ public function dynStats(... args):void
 			trace("dynStats aborted. Expected a key and got SHIT");
 			return;
 		}
-		
-		// Got this far, we have values to statsify
-		stats(argVals[0], argVals[1], argVals[2], argVals[3], argVals[4], argVals[5], argVals[6], argVals[7], argVals[8], argVals[9]);
 	}
+	// Got this far, we have values to statsify
+	var newStr = applyOperator(player.str, argOps[0], argVals[0]);
+	var newTou = applyOperator(player.tou, argOps[1], argVals[1]);
+	var newSpe = applyOperator(player.spe, argOps[2], argVals[2]);
+	var newInte = applyOperator(player.inte, argOps[3], argVals[3]);
+	var newLib = applyOperator(player.lib, argOps[4], argVals[4]);
+	var newSens = applyOperator(player.sens, argOps[5], argVals[5]);
+	var newLust = applyOperator(player.lust, argOps[6], argVals[6]);
+	var newCor = applyOperator(player.cor, argOps[7], argVals[7]);
+	// Because lots of checks and mods are made in the stats(), calculate deltas and pass them. However, this means that the '=' operator could be resisted
+	// In future (as I believe) stats() should be replaced with dynStats(), and checks and mods should be made here
+	stats(newStr - player.str,
+		  newTou - player.tou,
+		  newSpe - player.spe,
+		  newInte - player.inte,
+		  newLib - player.lib,
+		  newSens - player.sens,
+		  newLust - player.lust,
+		  argVals[8],argVals[9]);
+	
 }
 
 public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:Number, sens:Number, lust2:Number, corr:Number, resisted:Boolean = true, noBimbo:Boolean = false):void
@@ -2812,9 +2863,9 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	}
 	
 	// Uma's Perkshit
-	if (player.hasPerk(UmasShop.NEEDLEWORK_SPEED_PERK_NAME) && spee < 0) spee *= UmasShop.NEEDLEWORK_SPEED_SPEED_MULTI;
-	if (player.hasPerk(UmasShop.NEEDLEWORK_LUST_PERK_NAME) && libi > 0) libi *= UmasShop.NEEDLEWORK_LUST_LIBSENSE_MULTI;
-	if (player.hasPerk(UmasShop.NEEDLEWORK_LUST_PERK_NAME) && sens > 0) sens *= UmasShop.NEEDLEWORK_LUST_LIBSENSE_MULTI;
+	if (player.hasPerk(UmasShop.NEEDLEWORK_SPEED_PERK_NAME)>=0 && spee < 0) spee *= UmasShop.NEEDLEWORK_SPEED_SPEED_MULTI;
+	if (player.hasPerk(UmasShop.NEEDLEWORK_LUST_PERK_NAME)>=0 && libi > 0) libi *= UmasShop.NEEDLEWORK_LUST_LIBSENSE_MULTI;
+	if (player.hasPerk(UmasShop.NEEDLEWORK_LUST_PERK_NAME)>=0 && sens > 0) sens *= UmasShop.NEEDLEWORK_LUST_LIBSENSE_MULTI;
 	
 	//If orgasm, set hours since cum to 0.
 	if(lust2 <= -100) player.hoursSinceCum = 0;

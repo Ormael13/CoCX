@@ -578,8 +578,8 @@ package classes.content
 		public static const NEEDLEWORK_SPEED_SPEED_MULTI:Number = 0.5;
 		
 		public static const NEEDLEWORK_LUST_PERK_NAME:String = "Chi Reflow - Lust";
-		public static const NEEDLEWORK_LUST_PERK_DESC:String = "Uma's Acupuncture Needlework has gifted you with the 'Chi Reflow - Lust' perk. As a result your Lust resistance and Tease attack are enhanced, but Libido and Sensetivity gains are increased.";
-		public static const NEEDLEWORK_LUST_PERK_SHORT_DESC:String = "Lust resistance and Tease are enhanced, but Libido and Sensetivity gains increased.";
+		public static const NEEDLEWORK_LUST_PERK_DESC:String = "Uma's Acupuncture Needlework has gifted you with the 'Chi Reflow - Lust' perk. As a result your Lust resistance and Tease attack are enhanced, but Libido and Sensitivity gains are increased.";
+		public static const NEEDLEWORK_LUST_PERK_SHORT_DESC:String = "Lust resistance and Tease are enhanced, but Libido and Sensitivity gains increased.";
 		public static const NEEDLEWORK_LUST_LUST_RESIST:int = 10;
 		public static const NEEDLEWORK_LUST_TEASE_MULTI:Number = 10;
 		public static const NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI:Number = 1.1;
@@ -1668,7 +1668,7 @@ package classes.content
 			// DONT CARE HAD SEX
 			// Scene says we've only cum a little so err I guess store the players hoursSinceCum, do statmod, then reset it to a smaller value?
 			var hoursSinceCum:int = player.hoursSinceCum;
-			dynStats("lust", -100);
+			dynStats("lust=", 0);
 			player.hoursSinceCum = Math.ceil(hoursSinceCum * 0.75);
 
 			menu();
@@ -1780,7 +1780,7 @@ package classes.content
 				outputText("You chuckle at her, painstakingly hauling yourself up, and get dressed.  Thanking Uma for showing you her magic fingers, you blow her a teasing kiss and then head back to camp.\n\n");
 			}
 
-			dynStats("lust", -100);
+			dynStats("lust=", 0);
 
 			menu();
 			doNext(13);
@@ -1859,7 +1859,7 @@ package classes.content
 
 			outputText(".  See you later, dear.  And don't be a stranger,</i>\" the mare tells you as she waves you goodbye.\n\n");
 
-			dynStats("lust", -100);
+			dynStats("lust=", 0);
 
 			menu();
 			doNext(13);

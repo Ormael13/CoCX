@@ -69,8 +69,11 @@
 		 * "str", "lib" "lus", "cor" etc
 		 * "strength, "libido", lust", "corruption"
 		 * Specify the stat you wish to modify and follow it with the value.
-		 * Seperate each stat and value with a comma, and each stat/value pair, again, with a comma.
-		 * eg: dynStats("str", 10, "lust" -100);
+		 * Separate each stat and value with a comma, and each stat/value pair, again, with a comma.
+		 * eg: dynStats("str", 10, "lust" -100); will add 10 to str and subtract 100 from lust
+		 * Also support operators could be appended with + - * /=
+		 * eg: dynStats("str+", 1, "tou-", 2, "spe*", 1.1, "int/", 2, "cor=", 0)
+		 *     will add 1 to str, subtract 2 from tou, increase spe by 10%, decrease int by 50%, and set cor to 0
 		 * 
 		 * @param	... args
 		 */
