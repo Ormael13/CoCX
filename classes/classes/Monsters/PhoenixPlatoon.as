@@ -16,7 +16,7 @@ package classes.Monsters
 			this.plural = true;
 			this.long = "You are faced with a platoon of heavy infantry, all armed to the teeth and protected by chain vests and shields. They look like a cross between salamander and harpy, humanoid save for crimson wings, scaled feet, and long fiery tails. They stand in a tight-knit shield wall, each phoenix protecting herself and the warrior next to her with their tower-shield. Their scimitars cut great swaths through the room as they slowly advance upon you.";
 			this.a ="the ";
-			this.capitalA ="The ";
+			
 			this.temperment = 3;
 			//Regular attack
 			this.special1 = 0;

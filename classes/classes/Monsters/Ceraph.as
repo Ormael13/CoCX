@@ -23,7 +23,7 @@
 			this.plural = false;		
 			this.long = "Ceraph the Omnibus is totally nude and reveling in it.  Her large yet perky breasts jiggle heavily against her chest as she moves.  The flawless purple skin of her twin mounds glistens with a thin sheen of sweat, inviting you to touch and rub your fingers along their slippery surface.  Her eyes are solid black, but convey a mix of amusement and desire, in spite of their alien appearance.  The demon's crotch is a combination of both genders – a drooling cunt topped with a thick demonic shaft, sprouting from where a clit should be.";
 			this.a ="";
-			this.capitalA ="";
+			
 			this.temperment = 2;
 			//Lusty teases
 			this.special1 = 5133;

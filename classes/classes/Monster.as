@@ -13,8 +13,7 @@
 		protected var mainClassPtr:*;
 		//For enemies
 		public var bonusHP:Number = 0;
-		public var long:String = "An imp is short, only a few feet tall.  An unkempt mane of shaggy black hair hangs from his head, parted by two four inch long horns.  His eyes are solid black, save for tiny red irises that seem to glow with evil intent.  His skin is bright red, and unencumbered by clothing or armor, save for a small loincloth at his belt.  His feet are covered by tiny wooden sandles, and his hands tipped with sharp claws.";
-		public var capitalA:String = "A ";
+		public var long:String = "<b>You have encountered an unitialized monster. Please report this as a bug</b>.";
 		//Is a creature a 'plural' encounter - mob, etc. 
 		public var plural:Boolean = false;
 		public var imageName:String = "";

@@ -27,7 +27,6 @@
 			this.plural                                = false;
 			this.long                                  = "An angry-looking minotaur looms over you.  Covered in shaggy " + this.hairColor + " fur, the beast is an imposing sight.  Wearing little but an obviously distended loincloth, he is clearly already plotting his method of punishment.  Like most minotaurs he has hooves, a cow-like tail and face, prominent horns, and impressive musculature.  <b>This minotaur seems to have found a deadly looking axe somewhere!</b>";
 			this.a                                     = "the ";
-			this.capitalA                              = "The ";
 			this.temperment                            = 1;
 			this.special1                              = 5029;
 			this.pronoun1                              = "he";

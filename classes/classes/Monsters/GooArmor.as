@@ -17,7 +17,7 @@ package classes.Monsters
 			this.plural = false;
 			this.long = "Before you stands a suit of plated mail armor filled with a bright blue goo, standing perhaps six feet off the ground.  She has a beautiful, feminine face, and her scowl as she stands before you is almost cute.  She has formed a mighty greatsword from her goo, and has assumed the stance of a well-trained warrior.";
 			this.a ="a ";
-			this.capitalA ="A ";
+			
 			this.temperment = 3;
 			//Regular attack
 			this.special1 = 0;

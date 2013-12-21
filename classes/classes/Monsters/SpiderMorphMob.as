@@ -21,7 +21,7 @@ package classes.Monsters
 			else this.long += "you could probably handle them alone";
 			this.long += ", you have a powerful ally in this fight - the dragoness Kiha!";
 			this.a ="the ";
-			this.capitalA ="The ";
+			
 			this.temperment = 3;
 			//Regular attack
 			this.special1 = 5043;

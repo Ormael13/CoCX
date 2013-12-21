@@ -23,7 +23,7 @@
 			this.plural = false;
 			this.long = "You see the massive, shambling form of the tentacle beast before you.  Appearing as a large shrub, it shifts its bulbous mass and reveals a collection of thorny tendrils and cephalopodic limbs.";
 			this.a ="the ";
-			this.capitalA ="The ";
+			
 			this.temperment = 3;
 			//Regular attack
 			this.special1 = 5072;

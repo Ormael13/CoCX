@@ -22,7 +22,7 @@ package classes.Monsters
 			else this.long += "swollen, jiggling globes that stand in contrast to her slender body and tell a tale of all the corruption that has been pumped into her.";
 			this.long += "  Her straight, jaw-length auburn hair hangs unrestrained, falling around the fuzzy ears that stick out sideways from her head.  The hat she usually wears is hanging on her back by a string, pushed off to prevent its being lost in the chaos.  Something about slipping a rope around her own neck just to keep a hat tells you that Sheila's mind isn't really staying in the fight - though it could also be the desperate, faraway look in her eyes.";
 			this.a ="";
-			this.capitalA ="";
+			
 			this.temperment = 1;
 			this.special1 = 0;
 			this.special2 = 0;

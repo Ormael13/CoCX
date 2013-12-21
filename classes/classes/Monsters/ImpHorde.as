@@ -23,7 +23,7 @@
 			this.plural = true;
 			this.long = "Imps of all shapes and sizes fill the room around you, keeping you completely surrounded by their myriad forms.  You can see more than a few sporting disproportionate erections, and there's even some with exotic dog-dicks, horse-pricks, and the odd spiny cat-cock.  Escape is impossible, you'll have to fight or seduce your way out of this one!";
 			this.a ="the ";
-			this.capitalA ="The ";
+			
 			this.temperment = 2;
 			//Uber
 			this.special1 = 0;

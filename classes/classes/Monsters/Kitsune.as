@@ -26,7 +26,7 @@ package classes.Monsters
 			this.long += " hair.  She appears mostly human, except for a pair of large, furry ears poking through her hair and six luxurious silky tails swaying in the air behind her.  Her robes are revealing but comfortable-looking, hugging her voluptuous curves and exposing large swaths of tattooed skin.  A layer of ornate tattoos covers patches of her exposed flesh, accentuating her feminine curves nicely, and each movement brings a pleasant jiggle from her plump backside and large breasts.";
 			if(rand(3) != 2) mainClassPtr.flags[kFLAGS.redheadIsFuta] = 1;
 			this.a ="a ";
-			this.capitalA ="A ";
+			
 			this.temperment = 1;
 			this.special1 = 5029;
 			this.special2 = 0;

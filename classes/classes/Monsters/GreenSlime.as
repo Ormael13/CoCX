@@ -23,7 +23,7 @@
 			this.plural = false;
 			this.long = "The green slime has a normally featureless face that sits on top of wide shoulders that sprout into thick, strong arms.  Its torso fades into an indistinct column that melds into the lump of ooze on the ground that serves as a makeshift form of locomotion.";
 			this.a ="a ";
-			this.capitalA ="A ";
+			
 			this.temperment = 3;
 			this.special1 = 5040;
 			this.special2 = 5039;

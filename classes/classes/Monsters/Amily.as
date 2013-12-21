@@ -17,7 +17,7 @@ package classes.Monsters
 			this.plural = false;
 			this.long = "You are currently fighting Amily. The mouse-morph is dressed in rags and glares at you in rage, knife in hand. She keeps herself close to the ground, ensuring she can quickly close the distance between you two or run away.";
 			this.a ="";
-			this.capitalA ="";
+			
 			this.temperment = 0;
 			//Lusty teases
 			this.special1 = 0;

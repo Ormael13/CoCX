@@ -24,7 +24,7 @@
 			this.plural = false;
 			this.long = "The zealot is clad in a bizarre set of religious robes.  They are similar to what you've seen on other religious leaders from home, but none that included the large slit at the front that lets his above average sized human dick stick out the front.";
 			this.a ="the ";
-			this.capitalA ="The ";
+			
 			this.temperment = 2;
 			//Lusty teases
 			this.special1 = 5103;

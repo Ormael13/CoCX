@@ -15,7 +15,7 @@ package classes.Monsters
 			this.plural = false;
 			this.long = "The succubus across from you balances gracefully on her spiked heels, twirling and moving unpredictably.  Sexy dark stockings hug every curve of her perfectly shaped flesh until they disappear into her tiny miniskirt.  Her impressive breasts wobble delightfully as she moves, despite the inadequate efforts of her straining vest.  A pair of foot-long horns curve up from her otherwise perfect face and forehead, wreathed in lustrous blonde hair.  The very air around her is filled with an unidentifiable fragrance that makes you tingle and shiver.";
 			this.a ="the ";
-			this.capitalA ="The ";
+			
 			this.temperment = 3;
 			//Regular attack
 			this.special1 = 11020;

@@ -19,7 +19,7 @@ package classes.Monsters
 			this.plural = false;
 			this.long = "You are currently 'battling' Ember, the dragon, in a playfight.  At least, that was the intention.  The way " + mainClassPtr.emberMF("he","she") + " lashes "+ mainClassPtr.emberMF("his","her") + " tail along the ground, with claws spread and teeth bared ferociously, makes you wonder.";
 			this.a =" ";
-			this.capitalA =" ";
+			
 			this.temperment = 3;
 			//Regular attack
 			this.special1 = 0;

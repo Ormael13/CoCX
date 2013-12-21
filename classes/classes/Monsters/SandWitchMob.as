@@ -17,7 +17,6 @@ package classes.Monsters
 			this.plural = true;
 			this.long = "You are surrounded by a veritable tribe of sand witches.  Like the ones that roam the sands, they have simple robes, blond hair, and four big breasts that push at the concealing cloth immodestly.  Glowering at you hatefully, the pack of female spellcasters readies itself to drag you down with sheer numbers.";
 			this.a ="the ";
-			this.capitalA ="The ";
 			this.temperment = 3;
 			//Regular attack
 			this.special1 = 11020;

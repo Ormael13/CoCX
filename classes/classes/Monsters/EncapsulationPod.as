@@ -71,7 +71,7 @@
 			this.plural = false;
 			this.long = "";
 			this.a ="the ";
-			this.capitalA ="The ";
+			
 			this.temperment = 2;
 			//Uber
 			this.special1 = 0;

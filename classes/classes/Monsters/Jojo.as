@@ -23,7 +23,6 @@
 			this.plural = false;
 			this.long = "Jojo is an anthropomorphic mouse with immaculate white fur.  Though he stands only four feet tall, he is covered in lean muscle and moves with incredible speed.  He wears loose white clothes wrapped in prayer beads and tattered prayer papers.";
 			this.a ="";
-			this.capitalA ="";
 			this.temperment = 1;
 			this.special1 = 5021;
 			this.special2 = 0;

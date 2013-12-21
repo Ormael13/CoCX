@@ -18,7 +18,7 @@ package classes.Monsters
 			this.plural = false;
 			this.long = "From the waist up, your opponent is perfectly human, save his curling, goat-like horns and his pointed, elven ears.  His muscular chest is bare and glistening with sweat, while his coarsely rugged, masculine features are contorted into an expression of savage lust.  Looking at his waist, you notice he has a bit of a potbelly, no doubt the fruits of heavy drinking, judging by the almost overwhelming smell of booze and sex that emanates from him.  Further down you see his legs are the coarse, bristly-furred legs of a bipedal goat, cloven hooves pawing the ground impatiently, sizable manhood swaying freely in the breeze.";
 			this.a ="a ";
-			this.capitalA ="A ";
+			
 			this.temperment = 1;
 			this.special1 = 5029;
 			this.special2 = 0;

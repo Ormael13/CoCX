@@ -21,7 +21,7 @@ package classes.Monsters
 			this.long += ".  Zetaz still wears the trademark imp loincloth, though it bulges and shifts with his movements in a way that suggest a considerable flaccid size and large, full sack.  His shoulders are wrapped with studded leather and his wrists are covered with metallic bracers.  The imp has clearly invested in at least a little additional protection.  It does not look like he carries a weapon.";
 			this.plural = false;
 			this.a ="";
-			this.capitalA ="";
+			
 			this.temperment = 1;
 			this.special1 = 0;
 			this.special2 = 0;

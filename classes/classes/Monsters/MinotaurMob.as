@@ -22,7 +22,7 @@ package classes.Monsters
 			this.long = mainClassPtr.Num2Text(mainClassPtr.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326]) + " shaggy beastmen stand around you in a loose circle.  Their postures aren't exactly threatening.  If anything, they seem to be standing protectively around you, as if their presence would somehow shelter you from the rest of the mountain.  All of their features share a brotherly similarity, though there's still a fair bit of differences between your minotaur sons.  One of them is a head above the rest, a massive hulk of muscle so big he seems to dwarf the rest.  In stark contrast, a feminine minitaur keeps his distance in the rear.";
 			if(mainClassPtr.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] >= 20) this.long += "  The tribe constantly makes hoots and cat-calls, fully expecting to be fucking you soon.";
 			this.a ="the ";
-			this.capitalA ="The ";
+			
 			this.temperment = 1;
 			this.special1 = 5029;
 			this.special2 = 0;

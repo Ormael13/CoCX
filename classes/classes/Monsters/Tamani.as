@@ -17,7 +17,7 @@ package classes.Monsters
 			this.plural = false;
 			this.long = "She keeps her arms folded across her " + mainClassPtr.tamaniChest() + " and glares at you.  The little thing is only about four feet tall, with pink and black dyed hair cut into a cute little 'do.  The greenish-gray skin of her breasts bulges out around her arms, supported by a few leather straps, amplifying her cleavage.  Her cunt lips are pierced multiple times, inflamed, and slightly parted.  There really isn't any clothing on her to hide them, just more of the ever-present straps wrapping around her thighs.";
 			this.a ="";
-			this.capitalA ="";
+			
 			this.temperment = 2;
 			//Regular attack
 			this.special1 = 5087;

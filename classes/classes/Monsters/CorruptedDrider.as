@@ -17,7 +17,7 @@ package classes.Monsters
 			this.plural = false;
 			
 			this.a ="the ";
-			this.capitalA ="The ";
+			
 			this.temperment = 2;
 			//Lusty teases
 			this.special1 = 0;

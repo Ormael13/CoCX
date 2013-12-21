@@ -18,7 +18,7 @@ package classes.Monsters
 			this.plural = false;
 			this.long = "While the fey girl is whip-thin, her breasts are disproportionately huge. They'd be at least a DD-cup on a normal human, but for her height and body type, they're practically as large as her head. They jiggle at her slow, uneven breathing, tiny drops of milk bubbling at her nipples with every heartbeat.  She seems fixated on mating with you, and won't take no for an answer.";
 			this.a ="";
-			this.capitalA ="";
+			
 			this.temperment = 2;
 			//Lusty teases
 			this.special1 = 0;

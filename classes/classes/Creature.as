@@ -21,6 +21,10 @@ package classes
 		//"a" refers to how the article "a" should appear in text. 
 		public var short:String = "You";
 		public var a:String = "a ";
+		public function get capitalA():String {
+			if (a.length == 0) return "";
+			return a.charAt(0).toUpperCase() + a.substr(1);
+		}
 		
 		//Clothing/Armor
 		public var armorName:String = "";

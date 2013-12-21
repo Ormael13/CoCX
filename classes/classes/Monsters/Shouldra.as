@@ -17,7 +17,6 @@ package classes.Monsters
 			this.plural = false;
 			this.long = "Her face has nothing overly attractive about it; a splash of freckles flits across her cheeks, her brows are too strong to be considered feminine, and her jaw is a tad bit square. Regardless, the features come together to make an aesthetically pleasing countenance, framed by a stylish brown-haired bob. Her breasts are obscured by her grey, loose-fitting tunic, flowing down to reach the middle of her thigh. Her legs are clad in snug, form-fitting leather breeches, and a comfortable pair of leather shoes shield her soles from the potentially harmful environment around her.";
 			this.a ="the ";
-			this.capitalA ="The ";
 			this.temperment = 1;
 			this.special1 = 0;
 			this.special2 = 0;

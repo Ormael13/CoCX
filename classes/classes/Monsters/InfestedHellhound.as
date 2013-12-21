@@ -23,7 +23,6 @@
 			this.plural = false;
 			this.long = "It looks like a large four-legged demon with two heads placed side-by-side. Its eyes and mouth are filled with flames, and covering each of its paws are large and menacing claws. A thick layer of dark fur covers his entire body like armor.  Both heads are looking at you hungrily as the hellhound circles around you.  A pair of black, slightly pointed cocks hang exposed, dripping with cum and worms.  You get the feeling reasoning with this beast will be impossible.";
 			this.a ="the ";
-			this.capitalA ="The ";
 			this.temperment = 3;
 			//Regular attack
 			this.special1 = 5066;
