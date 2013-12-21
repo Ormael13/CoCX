@@ -480,14 +480,6 @@
 		
 		public function hasLongTail():Boolean
 		{
-			//tailType:
-			//0 - none
-			//1 - horse
-			//2 - dog
-			//3 - demon
-			//4 - cow!
-			//5 - spider!
-			//6 - bee!
 			//7 - shark tail!
 			//8 - catTAIIIIIL
 			//9 - lizard tail

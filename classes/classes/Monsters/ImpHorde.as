@@ -73,45 +73,17 @@
 			this.tallness = 36;
 			this.hairColor = "black";
 			this.hairLength = 1;
-			//Skintype
-			//0 - skin
-			//1 - furry
-			//2 - scaley
 			this.skinType = SKIN_TYPE_PLAIN;
 			this.skinTone = "red";
 			this.skinDesc = "skin";
-			//Facetype:
-			//0 - human
-			//1 - horse
-			//2 - dogface
 			this.faceType = FACE_HUMAN;
 			this.hornType = HORNS_NONE;
 			this.wingDesc = "imp wings";
-			//Wingtype
-			//0 - none
-			//1 - bee
-			//2 - large bee
-			//3 - faerie?
-			//4 - avian
-			//5 - dragoooon?
+
 			this.wingType = WING_TYPE_NONE;
-			//lowerBody:
-			//0 - normal
-			//1 - hooves
-			//2 - paws
-			//3 - snakelike body
-			//4 - centaur!
 			//5 - demonic heels
 			//6 - demon foot-claws
 			this.lowerBody = LOWER_BODY_TYPE_HUMAN;
-			//tailType:
-			//0 - none
-			//1 - horse
-			//2 - dog
-			//3 - demon
-			//4 - cow!
-			//5 - spider!
-			//6 - bee!
 			this.tailType = TAIL_TYPE_NONE;
 			//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 			this.tailVenom = 0;

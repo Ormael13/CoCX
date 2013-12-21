@@ -67,26 +67,12 @@
 			this.tallness                       = rand(24) + 25;
 			this.hairColor                      = "black";
 			this.hairLength                     = 5;
-			//Skintype
-			//0 - skin
-			//1 - furry
-			//2 - scaley
 			this.skinType                       = SKIN_TYPE_PLAIN;
 			this.skinTone                       = "red";
 			this.skinDesc                       = "skin";
-			//Facetype:
-			//0 - human
-			//1 - horse
-			//2 - dogface
 			this.faceType                       = FACE_HUMAN;
 			this.wingDesc                       = "small";
-			//Wingtype
-			//0 - none
-			//1 - bee
-			//2 - large bee
-			//3 - faerie?
-			//4 - avian
-			//5 - dragoooon?
+
 			this.wingType                       = WING_TYPE_IMP;
 			this.buttRating                     = 2;
 

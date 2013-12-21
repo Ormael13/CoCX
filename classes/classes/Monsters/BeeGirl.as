@@ -71,44 +71,16 @@
 			else 
 				this.hairColor = "black and yellow";
 			this.hairLength = 6;
-			//Skintype
-			//0 - skin
-			//1 - furry
-			//2 - scaley
 			this.skinType = SKIN_TYPE_PLAIN;
 			this.skinTone = "yellow";
 			this.skinDesc = "skin";
-			//Facetype:
-			//0 - human
-			//1 - horse
-			//2 - dogface
 			//3 - cowface
 			this.faceType = FACE_COW_MINOTAUR;
 			this.antennae = ANTENNAE_BEE;
 			this.wingDesc = "insect-like wings";
-			//Wingtype
-			//0 - none
-			//1 - bee
-			//2 - large bee
-			//3 - faerie?
-			//4 - avian
-			//5 - dragoooon?
+
 			this.wingType = WING_TYPE_BEE_LIKE_SMALL;
-			//lowerBody:
-			//0 - normal
-			//1 - hooves
-			//2 - paws
-			//3 - snakelike body
-			//4 - centaur!
 			this.lowerBody = LOWER_BODY_TYPE_HUMAN;
-			//tailType:
-			//0 - none
-			//1 - horse
-			//2 - dog
-			//3 - demon
-			//4 - cow!
-			//5 - spider!
-			//6 - bee!
 			//7 - cow!
 			this.tailType = TAIL_TYPE_BEE_ABDOMEN;
 			//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
