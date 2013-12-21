@@ -76,7 +76,7 @@
 
 			//// 3. Body features
 
-			this.temperment = 2;
+			/*this.temperment = 2;
 			//Lusty teases
 			this.special1 = 5133;
 			this.special2 = 5134;
@@ -302,7 +302,7 @@
 		}
 
 		// MONSTER INITIALIZATION HELPER FUNCTIONS
-		public var initsCalled:Array = [false,false];
+		public var initsCalled:Array = [false,false,false];
 
 		public function fullyInit():Boolean {
 			return initsCalled.indexOf(false)==-1;
