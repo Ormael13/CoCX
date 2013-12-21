@@ -21,7 +21,7 @@
 			super(mainClassPtr);
 			trace("Minotaur Constructor!");
 			trace(mainClassPtr.flags);
-			
+
 			this.short                                 = "minotaur";
 			this.imageName                             = "minotaur";
 			this.plural                                = false;
@@ -32,7 +32,7 @@
 			this.pronoun1                              = "he";
 			this.pronoun2                              = "him";
 			this.pronoun3                              = "his";
-			
+
 			//Clothing/Armor
 			this.armorName                             = "thick fur";
 			this.weaponName                            = "axe";
@@ -46,7 +46,7 @@
 			this.sens                                  = 15;
 			this.cor                                   = 35;
 			this.fatigue                               = 0;
-			
+
 			//Most times they dont have an axe
 			if(rand(3) > 0) {
 				this.weaponName                        = "fist";
@@ -58,16 +58,14 @@
 			else this.lustVuln                         = 0.84;
 			//Combat Stats
 			this.HP                                    = this.eMaxHP();
-			
-			
-			
+
 			//Level Stats
 			this.level                                 = 6;
 			this.XP                                    = this.totalXP(mainClassPtr.player.level);
 			if(this.weaponName == "fist")
 				this.level   = 5;
 			this.gems                                  = rand(5) + 5;
-			
+
 			//Appearance Variables
 			//Gender 1M, 2F, 3H
 			this.gender                                = 1;
@@ -78,43 +76,19 @@
 			else 
 				this.hairColor                         = "brown";
 			this.hairLength                            = 3;
-			//Skintype
-			//0 - skin
-			//1 - furry
-			//2 - scaley
+
 			this.skinType                              = SKIN_TYPE_FUR;
 			this.skinTone                              = "red";
 			this.skinDesc                              = "shaggy fur";
-			//Facetype:
-			//0 - human
-			//1 - horse
-			//2 - dogface
+
 			//3 - cowface
 			this.faceType                              = FACE_COW_MINOTAUR;
 			this.wingDesc                              = "non-existant";
-			//Wingtype
-			//0 - none
-			//1 - bee
-			//2 - large bee
-			//3 - faerie?
-			//4 - avian
-			//5 - dragoooon?
+
 			this.wingType                              = WING_TYPE_NONE;
-			//lowerBody:
-			//0 - normal
-			//1 - hooves
-			//2 - paws
-			//3 - snakelike body
-			//4 - centaur!
+
 			this.lowerBody                             = LOWER_BODY_TYPE_HOOFED;
-			//tailType:
-			//0 - none
-			//1 - horse
-			//2 - dog
-			//3 - demon
-			//4 - cow!
-			//5 - spider!
-			//6 - bee!
+
 			//7 - cow!
 			this.tailType                              = 7;
 			this.hipRating                             = 4;
@@ -141,7 +115,7 @@
 			if(this.ballSize > 4)
 				 this.long += "  Barely visible below the tattered shreds of loincloth are " + Appearance.ballsDescription(true, true, this) + ", swollen with the minotaur's long pent-up need.";
 			this.lust                                  = 20 + rand(this.ballSize*2);
-			
+
 		}
 
 	}

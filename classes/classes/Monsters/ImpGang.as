@@ -1,14 +1,16 @@
 package classes.Monsters 
 {
-	import classes.Monster;
+import classes.CockTypesEnum;
+import classes.Monster;
 	
 	/**
 	 * ...
 	 * @author aimozg
+	 * TODO Class not complete for combat. Used in events only
 	 */
 	public class ImpGang extends Monster
 	{
-		public function get capitalA():String {
+		override public function get capitalA():String {
 			return "gang of imps";
 		}
 		public function ImpGang(mainClassPtr:*) 
@@ -19,7 +21,6 @@ package classes.Monsters
 			this.removeCock(0, this.cocks.length);
 			this.removeVagina(0, this.vaginas.length);
 			this.removeBreastRow(0, this.breastRows.length);
-			this.bonusHP = 0;
 			this.createCock(12,1.5);
 			this.createCock(25,2.5);
 			this.createCock(25,2.5);

@@ -30,7 +30,7 @@
 			this.pronoun1                       = "he";
 			this.pronoun2                       = "him";
 			this.pronoun3                       = "his";
-			
+
 			//Clothing/Armor
 			this.armorName                      = "leathery skin";
 			this.weaponName                     = "claws";
@@ -50,42 +50,30 @@
 			this.sens                           = 45;
 			this.cor                            = 100;
 			this.fatigue                        = 0;
-			
+
 			//Combat Stats
 			this.HP                             = tou * 2 + 50;
 			this.lust                           = 40;
-			
+
 			//Level Stats
 			this.level                          = 1;
 			this.XP                             = this.totalXP(mainClassPtr.player.level);
 			this.gems                           = rand(5) + 5;
-			
+
 			//Appearance Variables
 			//Gender 1M, 2F, 3H
 			this.gender                         = 1;
 			this.tallness                       = rand(24) + 25;
 			this.hairColor                      = "black";
 			this.hairLength                     = 5;
-			//Skintype
-			//0 - skin
-			//1 - furry
-			//2 - scaley
+
 			this.skinType                       = SKIN_TYPE_PLAIN;
 			this.skinTone                       = "red";
 			this.skinDesc                       = "skin";
-			//Facetype:
-			//0 - human
-			//1 - horse
-			//2 - dogface
+
 			this.faceType                       = FACE_HUMAN;
 			this.wingDesc                       = "small";
-			//Wingtype
-			//0 - none
-			//1 - bee
-			//2 - large bee
-			//3 - faerie?
-			//4 - avian
-			//5 - dragoooon?
+
 			this.wingType                       = WING_TYPE_IMP;
 			this.buttRating                     = 2;
 
@@ -96,7 +84,7 @@
 			this.cocks[0].cockLength            = rand(2) + 11;
 			this.cocks[0].cockThickness         = 2.5;
 			this.cocks[0].cockType              = CockTypesEnum.HUMAN;
-			
+
 		}
 
 	}

@@ -33,7 +33,7 @@
 			this.pronoun1                       = "she";
 			this.pronoun2                       = "her";
 			this.pronoun3                       = "her";
-			
+
 			//Clothing/Armor
 			this.armorName                      = "robes";
 			this.weaponName                     = "kick";
@@ -48,50 +48,31 @@
 			this.sens                           = 40;
 			this.cor                            = 30;
 			this.fatigue                        = 0;
-			
+
 			//Combat Stats
 			this.bonusHP                        = 20;
 			this.HP                             = eMaxHP();
 			this.lust                           = 30;
-			
+
 			//Level Stats
 			this.level                          = 3;
 			this.XP                             = this.totalXP(mainClassPtr.player.level);
 			this.gems                           = rand(15) + 5;
-			
+
 			//Appearance Variables
 			//Gender 1M, 2F, 3H
 			this.gender                         = 2;
 			this.tallness                       = rand(12) + 55;
 			this.hairColor                      = "sandy-blonde";
 			this.hairLength                     = 15;
-			//Skintype
-			//0 - skin
-			//1 - furry
-			//2 - scaley
+
 			this.skinType                       = SKIN_TYPE_PLAIN;
 			this.skinTone                       = "bronzed";
 			this.skinDesc                       = "skin";
 			this.lowerBody                      = LOWER_BODY_TYPE_HUMAN;
-			//hipRating
-			//0 - boyish
-			//2 - slender
-			//4 - average
-			//6 - noticable/ample
-			//10 - curvy//flaring
-			//15 - child-bearing/fertile
-			//20 - inhumanly wide
+
 			this.hipRating                      = 10;
-			//buttRating
-			//0 - buttless
-			//2 - tight
-			//4 - average
-			//6 - noticable
-			//8 - large
-			//10 - jiggly
-			//13 - expansive
-			//16 - huge
-			//20 - inconceivably large/big/huge etc
+
 			this.buttRating                                 = 8;
 			this.createBreastRow();
 			this.createBreastRow();
@@ -107,7 +88,7 @@
 			this.hoursSinceCum                              = 20;
 			this.ass.analLooseness                          = 1;
 			this.ass.analWetness                            = 1;
-			
+
 		}
 
 	}
