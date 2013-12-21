@@ -1013,7 +1013,7 @@
 		//Create a keyItem
 		public function createKeyItem(keyName:String, value1:Number, value2:Number, value3:Number, value4:Number):void
 		{
-			var newKeyItem:* = new keyItemClass();
+			var newKeyItem:* = new KeyItemClass();
 			//used to denote that the array has already had its new spot pushed on.
 			var arrayed:Boolean = false;
 			//used to store where the array goes

@@ -193,52 +193,52 @@
 			kGAMECLASS.gameState = val;
 		}
 		
-		protected function get itemSlot1():itemSlotClass
+		protected function get itemSlot1():ItemSlotClass
 		{
 			return kGAMECLASS.itemSlot1;
 		}
 		
-		protected function get itemSlot2():itemSlotClass
+		protected function get itemSlot2():ItemSlotClass
 		{
 			return kGAMECLASS.itemSlot2;
 		}
 		
-		protected function get itemSlot3():itemSlotClass
+		protected function get itemSlot3():ItemSlotClass
 		{
 			return kGAMECLASS.itemSlot3;
 		}
 		
-		protected function get itemSlot4():itemSlotClass
+		protected function get itemSlot4():ItemSlotClass
 		{
 			return kGAMECLASS.itemSlot4;
 		}
 		
-		protected function get itemSlot5():itemSlotClass
+		protected function get itemSlot5():ItemSlotClass
 		{
 			return kGAMECLASS.itemSlot5;
 		}
 		
-		protected function set itemSlot1(val:itemSlotClass):void
+		protected function set itemSlot1(val:ItemSlotClass):void
 		{
 			kGAMECLASS.itemSlot1 = val;
 		}
 		
-		protected function set itemSlot2(val:itemSlotClass):void
+		protected function set itemSlot2(val:ItemSlotClass):void
 		{
 			kGAMECLASS.itemSlot2 = val;
 		}
 		
-		protected function set itemSlot3(val:itemSlotClass):void
+		protected function set itemSlot3(val:ItemSlotClass):void
 		{
 			kGAMECLASS.itemSlot3 = val;
 		}
 		
-		protected function set itemSlot4(val:itemSlotClass):void
+		protected function set itemSlot4(val:ItemSlotClass):void
 		{
 			kGAMECLASS.itemSlot4 = val;
 		}
 		
-		protected function set itemSlot5(val:itemSlotClass):void
+		protected function set itemSlot5(val:ItemSlotClass):void
 		{
 			kGAMECLASS.itemSlot5 = val;
 		}
