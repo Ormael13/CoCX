@@ -1989,7 +1989,7 @@ public function urtasCoochiNeedsFuckedLove():void {
 		outputText("Urta's glazed pussy-lips clench reflexively at their sudden emptiness and you hear a very satisfied sigh from the far end of the bed.\n\n", false);
 	}
 	//[HORSE]
-	else if(player.hasKnot(x)) {
+	else if(players.cocks[x].cockType == CockTypesEnum.HORSE) {
 		outputText("You feel your flare filling with blood as it ", false);
 		if(player.cocks[x].cockLength >= 10) outputText("prods against Urta's cervix.", false);
 		else outputText("seats itself deep inside Urta's passage.", false);
