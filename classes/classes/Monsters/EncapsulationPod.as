@@ -67,15 +67,12 @@
 		{
 			super(mainClassPtr);
 			init1Names("the ", "pod", "pod", "");
+			init2Genderless();
 
 			this.temperment = 2;
 			//Uber
 
 			//Lust attack
-
-			this.pronoun1 = "it";
-			this.pronoun2 = "it";
-			this.pronoun3 = "its";
 
 			//Clothing/Armor
 			this.armorName = "pod";
@@ -107,7 +104,6 @@
 
 			//Appearance Variables
 			//Gender 1M, 2F, 3H
-			this.gender = 1;
 			this.tallness = 120;
 			this.hairColor = "black";
 			this.hairLength = 0;

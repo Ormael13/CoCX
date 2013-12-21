@@ -13,15 +13,11 @@ package classes.Monsters
 		{
 			super(mainClassPtr);
 			init1Names("", "Brigid the Jailer", "brigid", "Brigid is a monster of a harpy, standing a foot taller than any other you've seen. She's covered in piercings, and her pink-dyed hair is shaved down to a long mohawk. She's nude, save for the hot poker in her right hand and the shield in her left, which jingles with every step she takes thanks to the cell keys beneath it.");
+			init2Female(VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_LOOSE);
+			this.cumMultiplier = 3;
+			this.ballSize = 1;
 
 			this.temperment = 3;
-			//Regular attack
-
-			//Lust attack
-
-			this.pronoun1 = "she";
-			this.pronoun2 = "her";
-			this.pronoun3 = "her";
 
 			//Clothing/Armor
 			this.armorName = "armor";
@@ -69,14 +65,6 @@ package classes.Monsters
 			this.hipRating = 8;
 
 			this.buttRating = 8;
-			//Create imp sex attributes
-			this.createVagina();
-			this.vaginas[0].virgin = false;
-			this.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLAVERING;
-			this.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
-
-			this.cumMultiplier = 3;
-			this.ballSize = 1;
 			this.ass.analLooseness = 4;
 			this.ass.analWetness = 0;			
 		}

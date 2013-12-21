@@ -1,5 +1,6 @@
 package classes.Monsters 
 {
+	import classes.Cock;
 	import classes.Monster;
 	
 	/**
@@ -13,6 +14,9 @@ package classes.Monsters
 		{
 			super(mainClassPtr);
 			init1Names("the ", "Omnibus Overseer", "omnibusoverseer", "The 'woman' before you is clothed only in a single strip of fabric that wraps around her bountiful chest.  She has striking red eyes that contrast visibly with her blue skin and dark make-up.  Shiny black gloss encapsulates her kissable bubbly black lips.  Her most striking feature is her crotch, which appears neither male nor female.  She has a puffy wet vulva, but a cock-shaped protrusion sprouts from where a clit should be.");
+			init2Male(new Cock(10,1.5),0,0,3);
+			init2Female(VAGINA_WETNESS_DROOLING,VAGINA_LOOSENESS_NORMAL);
+
 			this.temperment = 3;
 			//Regular attack
 			this.special1 = 11043;
@@ -76,14 +80,6 @@ package classes.Monsters
 			//Create succubus sex attributes
 			this.createBreastRow();
 			this.breastRows[0].breastRating = 0;
-			this.createVagina();
-			this.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
-			this.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
-			this.vaginas[0].virgin = false;
-			this.cumMultiplier = 3;
-			this.createCock();
-			this.cocks[0].cockLength = 10;
-			this.cocks[0].cockThickness = 1.5;
 			this.ass.analLooseness = 1;
 			this.ass.analWetness = 35;			
 		}

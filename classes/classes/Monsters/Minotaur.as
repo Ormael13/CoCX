@@ -22,13 +22,15 @@
 			trace("Minotaur Constructor!");
 			trace(mainClassPtr.flags);
 
-			init1Names("the ","minotaur","minotaur","An angry-looking minotaur looms over you.  Covered in shaggy " + hairColor + " fur, the beast is an imposing sight.  Wearing little but an obviously distended loincloth, he is clearly already plotting his method of punishment.  Like most minotaurs he has hooves, a cow-like tail and face, prominent horns, and impressive musculature.  <b>This minotaur seems to have found a deadly looking axe somewhere!</b>");
+			var hasAxe:Boolean = rand(3)==0;
+			init1Names("the ","minotaur","minotaur","An angry-looking minotaur looms over you.  Covered in shaggy " + hairColor + " fur, the beast is an imposing sight.  Wearing little but an obviously distended loincloth, he is clearly already plotting his method of punishment.  Like most minotaurs he has hooves, a cow-like tail and face, prominent horns, and impressive musculature. ");
+			if (hasAxe) this.long += "<b>This minotaur seems to have found a deadly looking axe somewhere!</b>";
+			init2Male(new Cock(rand(13) + 24,2 + rand(3),CockTypesEnum.HORSE),2,2+rand(13),1.5,mainClassPtr.player.ballSize * 10);
+			if(this.ballSize > 4)
+				 this.long += "  Barely visible below the tattered shreds of loincloth are " + Appearance.ballsDescription(true, true, this) + ", swollen with the minotaur's long pent-up need.";
 			this.hairColor = hairColor;
 			this.temperment                            = 1;
 			this.special1                              = 5029;
-			this.pronoun1                              = "he";
-			this.pronoun2                              = "him";
-			this.pronoun3                              = "his";
 
 			//Clothing/Armor
 			this.armorName                             = "thick fur";
@@ -45,10 +47,9 @@
 			this.fatigue                               = 0;
 
 			//Most times they dont have an axe
-			if(rand(3) > 0) {
+			if(!hasAxe) {
 				this.weaponName                        = "fist";
 				this.weaponVerb                        = "punch";
-				this.long                              = "An angry-looking minotaur looms over you.  Covered in shaggy brown fur, the beast is an imposing sight.  Wearing little but an obviously distended loincloth, he is clearly already plotting his method of punishment.  Like most minotaurs, he has hooves, a cow-like tail and face, prominent horns, and impressive musculature.";
 				this.str                              -= 25;
 				this.lustVuln                          = 0.87;
 			}
@@ -64,8 +65,6 @@
 			this.gems                                  = rand(5) + 5;
 
 			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.gender                                = 1;
 			this.tallness                              = rand(37) + 84;
 			//randomly assign hair color
 			if(rand(2) == 0) 
@@ -92,14 +91,6 @@
 			this.createBreastRow();
 			this.breastRows[0].breastRating            = 0;
 			this.breastRows[0].nipplesPerBreast        = 1;
-			this.createCock();
-			this.cocks[0].cockLength                   = rand(13) + 24;
-			this.cocks[0].cockThickness                = 2 + rand(3);
-			this.cocks[0].cockType                     = CockTypesEnum.HORSE;
-			this.balls                                 = 2;
-			this.cumMultiplier                         = 1.5;
-			this.ballSize                              = 2 + rand(13);
-			this.hoursSinceCum                         = mainClassPtr.player.ballSize * 10;
 			this.ass.analLooseness                     = 4;
 			this.ass.analWetness                       = 1;
 			this.createStatusAffect("Bonus aCapacity",30,0,0,0);
@@ -107,8 +98,6 @@
 			this.lust                                 += this.ballSize * 3;
 			this.sens                                 += this.ballSize * 2;
 			//Extra ball description!
-			if(this.ballSize > 4)
-				 this.long += "  Barely visible below the tattered shreds of loincloth are " + Appearance.ballsDescription(true, true, this) + ", swollen with the minotaur's long pent-up need.";
 			this.lust                                  = 20 + rand(this.ballSize*2);
 
 		}

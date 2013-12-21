@@ -1,5 +1,6 @@
 ﻿package classes.Monsters 
 {
+	import classes.Cock;
 	import classes.Creature;
 	import classes.Monster;
 	import classes.CockTypesEnum;
@@ -19,12 +20,10 @@
 			super(mainClassPtr);
 			trace("Jojo Constructor!");
 			init1Names("", "Jojo", "jojo", "Jojo is an anthropomorphic mouse with immaculate white fur.  Though he stands only four feet tall, he is covered in lean muscle and moves with incredible speed.  He wears loose white clothes wrapped in prayer beads and tattered prayer papers.");
+			init2Male(new Cock(7.5,1.8),0,0,1,1000);
 			this.temperment = 1;
 			this.special1 = 5021;
 
-			this.pronoun1 = "he";
-			this.pronoun2 = "him";
-			this.pronoun3 = "his";
 
 			//Clothing/Armor
 			this.armorName = "robes";
@@ -51,8 +50,6 @@
 			this.gems = rand(5) + 2;
 
 			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.gender = 1;
 			this.tallness = 61;
 			this.hairColor = "white";
 			this.hairLength = 2;
@@ -70,11 +67,6 @@
 			this.createBreastRow();
 			this.breastRows[0].breastRating = 0;
 			this.breastRows[0].nipplesPerBreast = 1;
-			this.createCock();
-			this.cocks[0].cockLength = 7.5;
-			this.cocks[0].cockThickness = 1.8;
-			this.cumMultiplier = 1;
-			this.hoursSinceCum = 1000;
 			this.ass.analLooseness = 1;
 			this.ass.analWetness = 1;
 			//Variations based on jojo's corruption.

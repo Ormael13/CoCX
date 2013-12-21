@@ -13,6 +13,10 @@ package classes.Monsters
 		{
 			super(mainClassPtr);
 			init1Names("a ", "Goo Armor", "gooarmor", "Before you stands a suit of plated mail armor filled with a bright blue goo, standing perhaps six feet off the ground.  She has a beautiful, feminine face, and her scowl as she stands before you is almost cute.  She has formed a mighty greatsword from her goo, and has assumed the stance of a well-trained warrior.");
+			init2Female(VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_GAPING_WIDE);
+			this.gender = 3;
+			this.cumMultiplier = 3;
+			this.ballSize = 1;
 
 			this.temperment = 3;
 			//Regular attack
@@ -53,8 +57,6 @@ package classes.Monsters
 			this.gems = rand(25)+40;
 
 			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.gender = 3;
 			this.tallness = rand(8) + 70;
 			this.hairColor = "black";
 			this.hairLength = 15;
@@ -70,13 +72,6 @@ package classes.Monsters
 
 			this.buttRating = 8;
 			//Create imp sex attributes
-			this.createVagina();
-			this.vaginas[0].virgin = false;
-			this.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLAVERING;
-			this.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING_WIDE;
-
-			this.cumMultiplier = 3;
-			this.ballSize = 1;
 			this.ass.analLooseness = 4;
 			this.ass.analWetness = 5;			
 		}

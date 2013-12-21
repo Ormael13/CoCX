@@ -18,7 +18,8 @@
 		{
 			super(mainClassPtr);
 			trace("GenericMonstah Constructor!");
-				init1Names("the ", "fetish cultist", "fetishcultist", "The woman across from you has her eyes closed, her hands joined, and seems to be chanting under her breath. She is wearing a religious outfit that closely hugs her curvacious shape, with a skirt so short that you can clearly see her pussy's lips.\n\nShe has clealy lost her grasp on sanity, and filled the void with pure perversion.");
+			init1Names("the ", "fetish cultist", "fetishcultist", "The woman across from you has her eyes closed, her hands joined, and seems to be chanting under her breath. She is wearing a religious outfit that closely hugs her curvacious shape, with a skirt so short that you can clearly see her pussy's lips.\n\nShe has clealy lost her grasp on sanity, and filled the void with pure perversion.");
+			init2Female(VAGINA_LOOSENESS_GAPING, VAGINA_WETNESS_WET);
 
 			this.temperment = 3;
 			//Regular attack
@@ -26,9 +27,6 @@
 			//Lust attack
 			this.special2 = 5063;
 			this.special3 = 5062;
-			this.pronoun1 = "she";
-			this.pronoun2 = "her";
-			this.pronoun3 = "her";
 
 			//Clothing/Armor
 			this.armorName = "fetishy outfit";
@@ -68,10 +66,6 @@
 			this.buttRating = 8;
 			//Create imp sex attributes
 
-			this.createVagina();
-			this.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING;
-			this.vaginas[0].virgin = false;
-			this.vaginas[0].vaginalWetness = VAGINA_WETNESS_WET;
 			this.createBreastRow();
 			this.breastRows[0].breastRating = 5;
 			this.cumMultiplier = 3;

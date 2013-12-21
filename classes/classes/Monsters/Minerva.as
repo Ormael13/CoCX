@@ -1,5 +1,6 @@
 package classes.Monsters 
 {
+	import classes.Cock;
 	import classes.Monster;
 	
 	/**
@@ -13,15 +14,15 @@ package classes.Monsters
 		{
 			super(mainClassPtr);
 			init1Names("", "Minerva", "minerva", "You're fighting the tainted siren, Minerva.  Standing around eight feet and wielding a weapon just as tall, she is a force to be reckoned with.  Her skin is a dark navy blue, though her belly, neck and inner thighs are as white as the clouds in the sky, and a golden piecing decorates her navel.  Orange and white stripes adorn her legs, tail and back.  Two large wings sprout from her back, their feathers an attention-grabbing red and orange mix.  She wears a tube-top that hold back her double d-cups, and short shorts around her wide waist that seem to be holding back a huge bulge.\n\nHer weapon is a halberd, made from a shiny, silvery metal, and seems to have an unnatural glow to it.");
+			init2Male(new Cock(16,3),2,3,3)
+			init2Female(VAGINA_WETNESS_SLICK,VAGINA_LOOSENESS_NORMAL);
+
 			this.temperment = 3;
 			//Regular attack
 			this.special1 = 11020;
 			//Lust attack
 			this.special2 = 11021;
 			this.special3 = 11022;
-			this.pronoun1 = "she";
-			this.pronoun2 = "her";
-			this.pronoun3 = "her";
 
 			//Clothing/Armor
 			this.armorName = "comfortable clothes";
@@ -54,8 +55,6 @@ package classes.Monsters
 			this.gems = rand(25)+10;
 
 			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.gender = 3;
 			this.tallness = 101;
 			this.hairColor = "red";
 			this.hairLength = 25;
@@ -71,18 +70,8 @@ package classes.Monsters
 
 			this.buttRating = 9;
 			//Create succubus sex attributes
-			this.createVagina();
-			this.createCock();
-			this.cocks[0].cockLength = 16;
-			this.cocks[0].cockThickness = 3;
 			this.createBreastRow();
 			this.breastRows[0].breastRating = 5;
-			this.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
-			this.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
-			this.vaginas[0].virgin = false;
-			this.balls = 2;
-			this.cumMultiplier = 3;
-			this.ballSize = 3;
 			this.ass.analLooseness = 1;
 			this.ass.analWetness = 0;			
 		}

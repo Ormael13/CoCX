@@ -13,12 +13,9 @@ package classes.Monsters
 		{
 			super(mainClassPtr);
 			init1Names("", "Isabella", "isabella", "Isabella is a seven foot tall, red-headed tower of angry cow-girl.  She's snarling at you from behind her massive shield, stamping her hooves in irritation as she prepares to lay into you.  Her skin is dusky, nearly chocolate except for a few white spots spattered over her body.  She wears a tight silk shirt and a corset that barely supports her bountiful breasts, but it's hard to get a good look at them behind her giant shield.");
+			init2Female(VAGINA_WETNESS_DROOLING,VAGINA_LOOSENESS_GAPING,45);
 			this.temperment = 2;
 			//Lusty teases
-
-			this.pronoun1 = "she";
-			this.pronoun2 = "her";
-			this.pronoun3 = "her";
 
 			//Clothing/Armor
 			this.armorName = "giant shield";
@@ -52,8 +49,6 @@ package classes.Monsters
 			this.gems = rand(5) + 20;
 
 			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.gender = 2;
 			this.tallness = 90;
 			this.hairColor = "red";
 			this.hairLength = 13;
@@ -71,11 +66,6 @@ package classes.Monsters
 			//Create goblin sex attributes
 			this.createBreastRow();
 			this.breastRows[0].breastRating = 10;
-			this.createVagina();
-			this.createStatusAffect("Bonus vCapacity",45,0,0,0);
-			this.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
-			this.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING;
-			this.vaginas[0].virgin = false;
 			this.ass.analLooseness = 0;
 			this.createStatusAffect("Bonus aCapacity",38,0,0,0);
 			this.ass.analWetness = 0;			

@@ -1,5 +1,6 @@
 package classes.Monsters 
 {
+	import classes.Cock;
 	import classes.Monster;
 	import classes.CockTypesEnum;
 	
@@ -14,13 +15,12 @@ package classes.Monsters
 		{
 			super(mainClassPtr);
 			init1Names("the ", "anemone", "anemone", "The anemone is a blue androgyne humanoid of medium height and slender build, with colorful tentacles sprouting on her head where hair would otherwise be.  Her feminine face contains two eyes of solid color, lighter than her skin.  Two feathery gills sprout from the middle of her chest, along the line of her spine and below her collarbone, and drape over her pair of small B-cup breasts.  Though you wouldn't describe her curves as generous, she sways her girly hips back and forth in a way that contrasts them to her slim waist quite attractively.  Protruding from her groin is a blue shaft with its head flanged by diminutive tentacles, and below that is a dark-blue pussy ringed by small feelers.  Further down are a pair of legs ending in flat sticky feet; proof of her aquatic heritage.  She smiles broadly and innocently as she regards you from her deep eyes.");
+			init2Male(new Cock(7,1,CockTypesEnum.ANEMONE));
+			init2Female(VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_LOOSE, 5);
 
 			this.temperment = 2;
 			//Lusty teases
 
-			this.pronoun1 = "she";
-			this.pronoun2 = "her";
-			this.pronoun3 = "her";
 
 			//Clothing/Armor
 			this.armorName = "clammy skin";
@@ -53,8 +53,6 @@ package classes.Monsters
 			this.gems = rand(5) + 1;
 
 			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.gender = 3;
 			this.tallness = 66;
 			this.hairColor = "purplish-black";
 			this.hairLength = 20;
@@ -70,18 +68,9 @@ package classes.Monsters
 			//Create goblin sex attributes
 			this.createBreastRow();
 			this.breastRows[0].breastRating = 7;
-			this.createVagina();
-			this.createStatusAffect("Bonus vCapacity",5,0,0,0);
-			this.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
-			this.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
-			this.vaginas[0].virgin = false;
 			this.ass.analLooseness = 2;
 			this.createStatusAffect("Bonus aCapacity",10,0,0,0);
 			this.ass.analWetness = 0;
-			this.createCock();
-			this.cocks[0].cockLength = 7;
-			this.cocks[0].cockThickness = 1;
-			this.cocks[0].cockType = CockTypesEnum.ANEMONE;
 		}
 		
 	}

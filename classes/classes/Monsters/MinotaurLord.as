@@ -1,5 +1,6 @@
 package classes.Monsters 
 {
+	import classes.Cock;
 	import classes.Monster;
 	import classes.CockTypesEnum;
 	
@@ -14,13 +15,9 @@ package classes.Monsters
 		{
 			super(mainClassPtr);
 			init1Names("the ", "minotaur lord", "minotaurlord", "Across from you is the biggest minotaur you've ever seen.  Fully eleven feet tall, this shaggy monstrosity has muscles so thick that they stand even through his thick, obscuring fur.  A leather collar with a tag indicates his status as 'pet' though it seems completely out of place on the herculean minotaur.  His legs and arms are like thick tree trunks, imposing and implacable, flexing fiercely with every movement.  This can only be a minotaur lord, a minotaur of strength and virility far beyond his lesser brothers. In his hands, a massive chain swings, connected to his collar, but used as an impromptu weapon for now.  A simple loincloth girds his groin, though it does little to hide the massive, erect length that tents it.  It winds up looking more like a simple, cloth condom than any sort of clothing, and it drips long strings of musky pre-slime in ribbons onto the ground.  Below, heavy testes, each easily the size of a basketball, swing in a taut, sloshing sack.  You can almost smell the liquid bounty he has for you, and the musk he's giving off makes it seem like a good idea...");
-
+			init2Male(new Cock(rand(13) + 24,2 + rand(3),CockTypesEnum.HORSE),2,2 + rand(13),1.5,mainClassPtr.player.ballSize * 10);
 			this.temperment = 1;
 			this.special1 = 5029;
-
-			this.pronoun1 = "he";
-			this.pronoun2 = "him";
-			this.pronoun3 = "his";
 
 			//Clothing/Armor
 			this.armorName = "thick fur";
@@ -49,8 +46,6 @@ package classes.Monsters
 			this.gems = rand(5) + 5;
 
 			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.gender = 1;
 			this.tallness = rand(37) + 84;
 			//randomly assign hair color
 			if(rand(2) == 0) this.hairColor = "black";
@@ -76,14 +71,7 @@ package classes.Monsters
 			this.createBreastRow();
 			this.breastRows[0].breastRating = 0;
 			this.breastRows[0].nipplesPerBreast = 1;
-			this.createCock();
-			this.cocks[0].cockLength = rand(13) + 24;
-			this.cocks[0].cockThickness = 2 + rand(3);
-			this.cocks[0].cockType = CockTypesEnum.HORSE;
-			this.balls = 2;
-			this.cumMultiplier = 1.5;
-			this.ballSize = 2 + rand(13);
-			this.hoursSinceCum = mainClassPtr.player.ballSize * 10;
+
 			this.ass.analLooseness = 4;
 			this.ass.analWetness = 1;
 			this.createStatusAffect("Bonus aCapacity",50,0,0,0);			

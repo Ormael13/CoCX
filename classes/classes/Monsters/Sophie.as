@@ -20,16 +20,13 @@
 			trace("Sophie Constructor!");
 		
 			init1Names("", "Sophie", "sophie", "Sophie is approximately the size of a normal human woman, not counting the large feathery wings that sprout from her back.  Her face is gorgeous, with large rounded eyes and glimmering amber lip-gloss painted on her lush, kissable lips.  In spite of her beauty, it's clear from the barely discernible laugh lines around her mouth that she's been around long to enough to have quite a few children.  Her feathers are light pink, though the downy plumage that comprises her 'hair' is brighter than the rest.  She moves with practiced grace despite the large, jiggling breasts that hang from her chest.  Judging from her confident movements, she's an experienced fighter.");
+			init2Female(VAGINA_WETNESS_DROOLING,VAGINA_LOOSENESS_GAPING_WIDE,40);
 
 			this.temperment = 2;
 			//Uber
 			this.special1 = 5136;
 			//Lust attack
 			this.special2 = 5137;
-
-			this.pronoun1 = "she";
-			this.pronoun2 = "her";
-			this.pronoun3 = "her";
 
 			//Clothing/Armor
 			this.armorName = "feathers";
@@ -62,8 +59,6 @@
 			this.gems = 20 + rand(25);
 
 			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.gender = 2;
 			this.tallness = 65;
 			this.hairColor = "pink";
 			this.hairLength = 16;
@@ -81,11 +76,6 @@
 			//Create goblin sex attributes
 			this.createBreastRow();
 			this.breastRows[0].breastRating = 5;
-			this.createVagina();
-			this.createStatusAffect("Bonus vCapacity",40,0,0,0);
-			this.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
-			this.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING_WIDE;
-			this.vaginas[0].virgin = false;
 			this.ass.analLooseness = 1;
 			this.createStatusAffect("Bonus aCapacity",10,0,0,0);
 			this.ass.analWetness = 0;

@@ -1,5 +1,6 @@
 ﻿package classes.Monsters 
 {
+	import classes.Cock;
 	import classes.Creature;
 	import classes.Monster;
 	import classes.CockTypesEnum;
@@ -19,6 +20,7 @@
 			super(mainClassPtr);
 			trace("ImpHorde Constructor!");
 			init1Names("the ","imp horde","impmob","Imps of all shapes and sizes fill the room around you, keeping you completely surrounded by their myriad forms.  You can see more than a few sporting disproportionate erections, and there's even some with exotic dog-dicks, horse-pricks, and the odd spiny cat-cock.  Escape is impossible, you'll have to fight or seduce your way out of this one!");
+			init2Male(new Cock(12,2));
 			this.plural = true;
 
 			this.temperment = 2;
@@ -60,7 +62,6 @@
 
 			//Appearance Variables
 			//Gender 1M, 2F, 3H
-			this.gender = 1;
 			this.tallness = 36;
 			this.hairColor = "black";
 			this.hairLength = 1;
@@ -79,9 +80,6 @@
 			this.ass.analLooseness = 1;
 			this.createStatusAffect("Bonus aCapacity",10,0,0,0);
 			this.ass.analWetness = 0;
-			this.createCock();
-			this.cocks[0].cockLength = 12;
-			this.cocks[0].cockThickness = 2;
 
 			this.XP = this.totalXP(mainClassPtr.player.level);
 		}

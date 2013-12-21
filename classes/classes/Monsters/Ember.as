@@ -1,5 +1,6 @@
 package classes.Monsters 
 {
+	import classes.Cock;
 	import classes.Monster;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.CockTypesEnum;
@@ -15,16 +16,18 @@ package classes.Monsters
 		{
 			super(mainClassPtr);
 			init1Names(" ", "Ember", "ember", "You are currently 'battling' Ember, the dragon, in a playfight.  At least, that was the intention.  The way " + mainClassPtr.emberMF("he", "she") + " lashes " + mainClassPtr.emberMF("his", "her") + " tail along the ground, with claws spread and teeth bared ferociously, makes you wonder.");
+			var gender:int = mainClassPtr.flags[kFLAGS.EMBER_GENDER];
+			if (gender==0){
+				init2Genderless("she","her","her");
+			}
+			if(gender >= 2) {
+				init2Female(VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_LOOSE);
+			}
+			if(gender == 1 || gender == 3) {
+				init2Male(new Cock(16,2,CockTypesEnum.DRAGON),2,4,3);
+			}
 
 			this.temperment = 3;
-			//Regular attack
-
-			//Lust attack
-
-			this.pronoun1 = mainClassPtr.emberMF("he","she");
-			this.pronoun2 = mainClassPtr.emberMF("him","her");
-			this.pronoun3 = mainClassPtr.emberMF("his","her");
-
 			//Clothing/Armor
 			this.armorName = "scales";
 			this.weaponName = "claws";
@@ -55,8 +58,6 @@ package classes.Monsters
 			this.gems = 0;
 
 			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.gender = mainClassPtr.flags[kFLAGS.EMBER_GENDER];
 			this.tallness = rand(8) + 70;
 			this.hairColor = "black";
 			this.hairLength = 15;
@@ -72,21 +73,6 @@ package classes.Monsters
 
 			this.buttRating = 8;
 			//Create imp sex attributes
-			if(mainClassPtr.flags[kFLAGS.EMBER_GENDER] >= 2) {
-				this.createVagina();
-				this.vaginas[0].virgin = false;
-				this.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLAVERING;
-				this.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
-			}
-			if(mainClassPtr.flags[kFLAGS.EMBER_GENDER] == 1 || mainClassPtr.flags[kFLAGS.EMBER_GENDER] == 3) {
-				this.balls = 2;
-				this.createCock();
-				this.cocks[0].cockLength = 16;
-				this.cocks[0].cockThickness = 2;
-				this.cocks[0].cockType = CockTypesEnum.DRAGON;
-				this.ballSize = 4;
-			}
-			this.cumMultiplier = 3;
 			this.ass.analLooseness = 2;
 			this.ass.analWetness = 0;			
 		}

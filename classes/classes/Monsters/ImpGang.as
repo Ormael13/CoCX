@@ -6,7 +6,7 @@ import classes.Monster;
 	/**
 	 * ...
 	 * @author aimozg
-	 * TODO Class not complete for combat. Used in events only
+	 * TODO Class is not configured for combat. Used in events only
 	 */
 	public class ImpGang extends Monster
 	{

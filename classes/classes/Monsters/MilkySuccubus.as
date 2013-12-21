@@ -13,6 +13,8 @@ package classes.Monsters
 		{
 			super(mainClassPtr);
 			init1Names("the ", "milky succubus", "milkysuccubus", "You are fighting a milky, cow-like succubus.  She stands about seven feet tall and is hugely voluptuous, with breasts three times the size of her head, tipped with a cluster of four obscenely teat-like nipples.  Her hips flare out into an exaggerated hourglass shape, with a long tail tipped with a fleshy arrow-head spade that waves above her spankable butt.  A small cowbell is tied at the base of the arrow-head with a cute little ribbon.  Wide, cow-like horns, easily appropriate for a minotaur, rise from her head, and she flicks bovine ears about the sides of her head whilst sashaying from side to side on demonic, high-heeled feet.  Her skin is a vibrant purple with splotches of shiny black here and there, including one large spot covering her right eye.  She's using a leather whip as a weapon.");
+			init2Female(VAGINA_WETNESS_SLAVERING,VAGINA_LOOSENESS_NORMAL,300);
+			this.cumMultiplier = 3;
 
 			this.temperment = 3;
 			//Regular attack
@@ -20,9 +22,6 @@ package classes.Monsters
 			//Lust attack
 			this.special2 = 11021;
 			this.special3 = 11022;
-			this.pronoun1 = "she";
-			this.pronoun2 = "her";
-			this.pronoun3 = "her";
 
 			//Clothing/Armor
 			this.armorName = "demonic skin";
@@ -74,17 +73,8 @@ package classes.Monsters
 			this.hipRating = 10;
 
 			this.buttRating = 9;
-			//Create succubus sex attributes
-			this.createStatusAffect("Bonus vCapacity",300,0,0,0);
-			this.createVagina();
 			this.createBreastRow();
 			this.breastRows[0].breastRating = 15;
-			this.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLAVERING;
-			this.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
-			this.vaginas[0].virgin = false;
-
-			this.cumMultiplier = 3;
-			this.ballSize = 0;
 			this.ass.analLooseness = 4;
 			this.ass.analWetness = 5;			
 		}

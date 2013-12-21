@@ -1,5 +1,6 @@
 package classes.Monsters 
 {
+	import classes.Cock;
 	import classes.Monster;
 	
 	/**
@@ -13,12 +14,10 @@ package classes.Monsters
 		{
 			super(mainClassPtr);
 			init1Names("the ", "male spider-morph", "malespidermorph", "The male spider-morph is completely nude, save for his thigh-high stockings and forearm-length gloves, which upon closer inspection, appear to be actually be part of his body - his exoskeleton.  His exposed skin is pale as the full moon, save for the dusk of his nipples and a patch of jet-black that spreads out over his groin, glossing the male's foreskinned cock and dangling sack in glistening ebon.  His ass is small but well-rounded, with a weighty spider-abdomen hanging from just above.  The spider-man is currently eyeing you with a strange expression and his fangs bared.");
+			init2Male(new Cock(6,2));
+
 			this.temperment = 2;
 			//Lusty teases
-
-			this.pronoun1 = "he";
-			this.pronoun2 = "him";
-			this.pronoun3 = "his";
 
 			//Clothing/Armor
 			this.armorName = "exoskeleton";
@@ -52,8 +51,6 @@ package classes.Monsters
 			this.gems = rand(10) + 10;
 
 			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.gender = 1;
 			this.tallness = 90;
 			this.hairColor = "red";
 			this.hairLength = 13;
@@ -71,9 +68,6 @@ package classes.Monsters
 			//Create goblin sex attributes
 			this.createBreastRow();
 			this.breastRows[0].breastRating = 0;
-			this.createCock();
-			this.cocks[0].cockLength = 6;
-			this.cocks[0].cockThickness = 2;
 			this.ass.analLooseness = 1;
 			this.createStatusAffect("Bonus aCapacity",40,0,0,0);
 			this.ass.analWetness = 0;			

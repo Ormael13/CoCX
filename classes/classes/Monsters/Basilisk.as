@@ -1,5 +1,6 @@
 package classes.Monsters 
 {
+	import classes.Cock;
 	import classes.Monster;
 	
 	/**
@@ -13,6 +14,7 @@ package classes.Monsters
 		{
 			super(mainClassPtr);
 			init1Names("the ", "basilisk", "basilisk", "You are fighting a basilisk!  From what you can tell while not looking directly at it, the basilisk is a male reptilian biped standing a bit over 6' tall.  It has a thin but ropy build, its tightly muscled yellow underbelly the only part of its frame not covered in those deceptive, camouflaging grey-green scales.  A long, whip-like tail flits restlessly through the dirt behind its skinny legs, and sharp sickle-shaped index claws decorate each hand and foot.  You don't dare to look at its face, but you have the impression of a cruel jaw, a blunt lizard snout and a crown of dull spines.");
+			init2Male([new Cock(6,2)]);
 
 			this.temperment = 2;
 			//Lusty teases
@@ -73,9 +75,6 @@ package classes.Monsters
 			//Create goblin sex attributes
 			this.createBreastRow();
 			this.breastRows[0].breastRating = 0;
-			this.createCock();
-			this.cocks[0].cockLength = 6;
-			this.cocks[0].cockThickness = 2;
 			this.ass.analLooseness = 1;
 			this.createStatusAffect("Bonus aCapacity",30,0,0,0);
 			this.ass.analWetness = 0;			

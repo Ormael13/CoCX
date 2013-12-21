@@ -18,14 +18,11 @@
 			super(mainClassPtr);
 			trace("SharkGirl Constructor!");
 			init1Names("the ", "shark-girl", "sharkgirl", "The shark girl stands just over 5'5\", with grey skin shimmering from water droplets catching the sunlight and slender muscles built for swimming.  Her shoulder-length silver hair brushes past her pretty face and her eyes are a striking shade of red. She has rows of intimidating sharp teeth glinting in the light. A fish-like tail protrudes from her backside, wrapping around her toned legs at every opportunity. She's wearing a rather skimpy black bikini, strings done in such a way that they move around her fin; though the swimwear itself barely covers her perky breasts and tight snatch.");
+			init2Female(VAGINA_WETNESS_DROOLING,VAGINA_LOOSENESS_NORMAL,15);
 			this.temperment = 2;
 			//Lusty teases
 			this.special1 = 5097;
 			this.special2 = 5097;
-
-			this.pronoun1 = "she";
-			this.pronoun2 = "her";
-			this.pronoun3 = "her";
 
 			//Clothing/Armor
 			this.armorName = "tough skin";
@@ -72,11 +69,6 @@
 			//Create goblin sex attributes
 			this.createBreastRow();
 			this.breastRows[0].breastRating = 4;
-			this.createVagina();
-			this.createStatusAffect("Bonus vCapacity",15,0,0,0);
-			this.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
-			this.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
-			this.vaginas[0].virgin = false;
 			this.ass.analLooseness = 1;
 			this.createStatusAffect("Bonus aCapacity",40,0,0,0);
 			this.ass.analWetness = 0;

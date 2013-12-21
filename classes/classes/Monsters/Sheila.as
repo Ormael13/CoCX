@@ -1,25 +1,25 @@
-package classes.Monsters 
+package classes.Monsters
 {
 	import classes.Monster;
 	import classes.GlobalFlags.kFLAGS;
-	
+
 	/**
 	 * ...
 	 * @author aimozg
 	 */
-	public class Sheila extends Monster 
+	public class Sheila extends Monster
 	{
-		
-		public function Sheila(mainClassPtr:*) 
+
+		public function Sheila(mainClassPtr:*)
 		{
 			super(mainClassPtr);
-			init1Names("","Sheila","sheila","Sheila is a slim, somewhat athletic woman, over six feet in height.  Most of her lightly-tanned skin is hidden, either by her vest and shorts or by the fuzzy fur that covers her legs from the thighs down to her prominent nails.  Her " + mainClassPtr.sheilaCup() + " breasts are briefly defined against the white of her shirt as she sways on her feet, "+(mainClassPtr.sheilaCorruption() <= 40?"small, round things that match her slender frame.":"swollen, jiggling globes that stand in contrast to her slender body and tell a tale of all the corruption that has been pumped into her.")+"  Her straight, jaw-length auburn hair hangs unrestrained, falling around the fuzzy ears that stick out sideways from her head.  The hat she usually wears is hanging on her back by a string, pushed off to prevent its being lost in the chaos.  Something about slipping a rope around her own neck just to keep a hat tells you that Sheila's mind isn't really staying in the fight - though it could also be the desperate, faraway look in her eyes.");
+			init1Names("", "Sheila", "sheila",
+					mainClassPtr.flags[kFLAGS.SHEILA_DEMON] == 1 ?
+							("Sheila is a slim, somewhat athletic woman, over six feet in height.  Most of her lightly-tanned skin is hidden, either by her vest and shorts or by the fuzzy fur that covers her legs from the thighs down to her prominent nails.  Her " + mainClassPtr.sheilaCup() + " breasts are briefly defined against the white of her shirt as she sways on her feet, " + (mainClassPtr.sheilaCorruption() <= 40 ? "small, round things that match her slender frame." : "swollen, jiggling globes that stand in contrast to her slender body and tell a tale of all the corruption that has been pumped into her.") + "  Her straight, jaw-length auburn hair hangs unrestrained, falling around the fuzzy ears that stick out sideways from her head.  The hat she usually wears is hanging on her back by a string, pushed off to prevent its being lost in the chaos.  Something about slipping a rope around her own neck just to keep a hat tells you that Sheila's mind isn't really staying in the fight - though it could also be the desperate, faraway look in her eyes."):
+							("Sheila is a slim, somewhat athletic woman, over six feet in height.  Her smooth, dark skin is exposed from her head to her clawed feet, and she makes no effort to conceal anything your eyes might linger on.  The " + mainClassPtr.sheilaCup() + " breasts on her chest" +(mainClassPtr.sheilaCorruption() <= 40 ? " are firm, squeezable teardrops; she runs a hand absently over one from time to time." :	" jiggle as she moves, and she shoves them out to make sure you see just how lewd her body has become since your first meeting.") +"  Straight, jaw-length auburn hair frames her face along with two long, smooth ears that stick out sideways.  Her only nods to civilization are a dangling purple earring and the finger rings that she wears on her hands, and the wild woman stares openly at you, touching herself."));
+			init2Female(VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_NORMAL, 30, mainClassPtr.flags[kFLAGS.SHEILA_XP] <= 3 && mainClassPtr.flags[kFLAGS.SHEILA_DEMON] >= 0);
 
 			this.temperment = 1;
-
-			this.pronoun1 = "she";
-			this.pronoun2 = "her";
-			this.pronoun3 = "her";
 
 			//Clothing/Armor
 			this.armorName = "clothes";
@@ -49,8 +49,6 @@ package classes.Monsters
 			this.gems = rand(5) + 5;
 
 			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.gender = 2;
 			this.tallness = 72;
 			//randomly assign hair color
 			this.hairColor = "auburn";
@@ -71,14 +69,10 @@ package classes.Monsters
 			this.createBreastRow();
 			this.breastRows[0].breastRating = 0;
 			this.breastRows[0].nipplesPerBreast = 1;
-			this.createVagina();
-			this.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
-			this.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
 			this.ass.analLooseness = 1;
 			this.ass.analWetness = 0;
-			this.createStatusAffect("Bonus aCapacity",20,0,0,0);
-			this.createStatusAffect("Bonus vCapacity",30,0,0,0);
-			if(mainClassPtr.flags[kFLAGS.SHEILA_DEMON] == 1) {
+			this.createStatusAffect("Bonus aCapacity", 20, 0, 0, 0);
+			if (mainClassPtr.flags[kFLAGS.SHEILA_DEMON] == 1) {
 				//-slightly slower, has much more stamina, intel, and HP now
 				this.spe -= 15;
 				this.tou += 30
@@ -93,18 +87,9 @@ package classes.Monsters
 				//-little higher difficulty than other plains fights, but not much
 				//-now totally okay with taking gems and riding the player so hard he passes out for 8 hours regardless
 				//-drops shitty kangaroo item and imp food
-				this.long = "Sheila is a slim, somewhat athletic woman, over six feet in height.  Her smooth, dark skin is exposed from her head to her clawed feet, and she makes no effort to conceal anything your eyes might linger on.  The " + mainClassPtr.sheilaCup() + " breasts on her chest";
-				if(mainClassPtr.sheilaCorruption() <= 40) 
-					this.long += " are firm, squeezable teardrops; she runs a hand absently over one from time to time.";
-				else 
-					this.long += " jiggle as she moves, and she shoves them out to make sure you see just how lewd her body has become since your first meeting.";
-				this.long += "  Straight, jaw-length auburn hair frames her face along with two long, smooth ears that stick out sideways.  Her only nods to civilization are a dangling purple earring and the finger rings that she wears on her hands, and the wild woman stares openly at you, touching herself.";
 			}
-			if(mainClassPtr.flags[kFLAGS.SHEILA_XP] > 3 || mainClassPtr.flags[kFLAGS.SHEILA_DEMON] > 0) {
-				this.vaginas[0].virgin = false;
-			}			
 		}
-		
+
 	}
 
 }

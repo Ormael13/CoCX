@@ -19,12 +19,12 @@
 			super(mainClassPtr);
 			trace("SandWitch Constructor!");
 			init1Names("the ","sand witch",mainClassPtr.silly()?"sandwidch":"sandwitch","A sand witch appears to be totally human, an oddity in this strange land.  She has dirty blonde hair and a very tanned complexion, choosing to cover most of her body with robes of the same color as the desert sands, making her impossible to spot from afar.");
+			init2Female(VAGINA_WETNESS_WET,VAGINA_LOOSENESS_LOOSE);
+			this.cumMultiplier                              = 3;
+			this.hoursSinceCum                              = 20;
+
 			this.temperment                     = 1;
 			this.special1                       = 5020;
-
-			this.pronoun1                       = "she";
-			this.pronoun2                       = "her";
-			this.pronoun3                       = "her";
 
 			//Clothing/Armor
 			this.armorName                      = "robes";
@@ -70,12 +70,6 @@
 			this.breastRows[0].nipplesPerBreast             = 1;
 			this.breastRows[1].breastRating                 = 5;
 			this.breastRows[1].nipplesPerBreast             = 1;
-			this.createVagina();
-			this.vaginas[0].vaginalWetness                  = VAGINA_WETNESS_WET;
-			this.vaginas[0].vaginalLooseness                = VAGINA_LOOSENESS_LOOSE;
-			this.vaginas[0].virgin                          = false;
-			this.cumMultiplier                              = 3;
-			this.hoursSinceCum                              = 20;
 			this.ass.analLooseness                          = 1;
 			this.ass.analWetness                            = 1;
 

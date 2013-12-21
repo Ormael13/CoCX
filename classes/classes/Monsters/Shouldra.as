@@ -13,11 +13,9 @@ package classes.Monsters
 		{
 			super(mainClassPtr);
 			init1Names("the ", "plain girl", "shouldra", "Her face has nothing overly attractive about it; a splash of freckles flits across her cheeks, her brows are too strong to be considered feminine, and her jaw is a tad bit square. Regardless, the features come together to make an aesthetically pleasing countenance, framed by a stylish brown-haired bob. Her breasts are obscured by her grey, loose-fitting tunic, flowing down to reach the middle of her thigh. Her legs are clad in snug, form-fitting leather breeches, and a comfortable pair of leather shoes shield her soles from the potentially harmful environment around her.");
-			this.temperment = 1;
+			init2Female(VAGINA_WETNESS_WET,VAGINA_LOOSENESS_NORMAL,40,true);
 
-			this.pronoun1 = "she";
-			this.pronoun2 = "her";
-			this.pronoun3 = "her";
+			this.temperment = 1;
 
 			//Clothing/Armor
 			this.armorName = "comfortable clothes";
@@ -45,8 +43,6 @@ package classes.Monsters
 			this.gems = 0;
 
 			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.gender = 2;
 			this.tallness = 65;
 			this.hairColor = "white";
 			this.hairLength = 3;
@@ -65,14 +61,10 @@ package classes.Monsters
 			this.createBreastRow();
 			this.breastRows[0].breastRating = 4;
 			this.breastRows[0].nipplesPerBreast = 1;
-			this.createVagina();
-			this.vaginas[0].vaginalWetness = VAGINA_WETNESS_WET;
-			this.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
 
 			this.ass.analLooseness = 1;
 			this.ass.analWetness = 0;
 			this.createStatusAffect("Bonus aCapacity",40,0,0,0);
-			this.createStatusAffect("Bonus vCapacity",40,0,0,0);			
 		}
 		
 	}

@@ -11,6 +11,8 @@ package classes.Monsters
 		public function SecretarialSuccubus(mainClassPtr :*) {
 			super(mainClassPtr);
 			init1Names("the ", "secretarial succubus", "secretarialsuccubus", "The succubus across from you balances gracefully on her spiked heels, twirling and moving unpredictably.  Sexy dark stockings hug every curve of her perfectly shaped flesh until they disappear into her tiny miniskirt.  Her impressive breasts wobble delightfully as she moves, despite the inadequate efforts of her straining vest.  A pair of foot-long horns curve up from her otherwise perfect face and forehead, wreathed in lustrous blonde hair.  The very air around her is filled with an unidentifiable fragrance that makes you tingle and shiver.");
+			init2Female(VAGINA_WETNESS_SLAVERING,VAGINA_LOOSENESS_NORMAL,30);
+			this.cumMultiplier = 3;
 
 			this.temperment = 3;
 			//Regular attack
@@ -18,9 +20,6 @@ package classes.Monsters
 			//Lust attack
 			this.special2 = 11021;
 			this.special3 = 11022;
-			this.pronoun1 = "she";
-			this.pronoun2 = "her";
-			this.pronoun3 = "her";
 
 			//Clothing/Armor
 			this.armorName = "demonic skin";
@@ -53,8 +52,6 @@ package classes.Monsters
 			this.gems = rand(25)+10;
 
 			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.gender = 2;
 			this.tallness = rand(9) + 60;
 			this.hairColor = "blond";
 			this.hairLength = 13;
@@ -71,17 +68,9 @@ package classes.Monsters
 			this.hipRating = 10;
 
 			this.buttRating = 9;
-			//Create succubus sex attributes
-			this.createStatusAffect("Bonus vCapacity",30,0,0,0);
-			this.createVagina();
 			this.createBreastRow();
 			this.breastRows[0].breastRating = 5;
-			this.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLAVERING;
-			this.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
-			this.vaginas[0].virgin = false;
 
-			this.cumMultiplier = 3;
-			this.ballSize = 0;
 			this.ass.analLooseness = 4;
 			this.ass.analWetness = 5;
 		}

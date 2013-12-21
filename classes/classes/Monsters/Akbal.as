@@ -1,5 +1,6 @@
 ﻿package classes.Monsters
 {
+	import classes.Cock;
 	import classes.Creature;
 	import classes.Monster;
 	import classes.CockTypesEnum;
@@ -19,6 +20,7 @@
 			super(mainClassPtr);
 			trace("Akbal Constructor!");
 			init1Names("", "Akbal", "akbal", "Akbal, 'God of the Terrestrial Fire', circles around you. His sleek yet muscular body is covered in tan fur, with dark spots that seem to dance around as you look upon them.  His mouth holds two ivory incisors that glint in the sparse sunlight as his lips tremble to the sound of an unending growl.  Each paw conceals lethal claws capable of shredding men and demons to ribbons.  His large and sickeningly alluring bright green eyes promise unbearable agony as you look upon them.");
+			init2Male([new Cock(15,2.5,CockTypesEnum.HUMAN)],2,4,6,400);
 
 			this.temperment = 1;
 			this.special1 = 5125;
@@ -75,14 +77,6 @@
 			this.createBreastRow();
 			this.breastRows[0].breastRating = 0;
 			this.breastRows[0].nipplesPerBreast = 0;
-			this.createCock();
-			this.cocks[0].cockLength = 15;
-			this.cocks[0].cockThickness = 2.5;
-			this.cocks[0].cockType = CockTypesEnum.HUMAN;
-			this.balls = 2;
-			this.cumMultiplier = 6;
-			this.ballSize = 4;
-			this.hoursSinceCum = 400;
 			this.ass.analLooseness = 1;
 			this.ass.analWetness = 1;
 

@@ -1,5 +1,6 @@
 package classes.Monsters 
 {
+	import classes.Cock;
 	import classes.Monster;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.CockTypesEnum;
@@ -14,15 +15,11 @@ package classes.Monsters
 		public function MinotaurMob(mainClassPtr:*) 
 		{
 			super(mainClassPtr);
-			init1Names("the ","minotaur"+(mainClassPtr.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] < 20?" gang":" tribe"),"minotaurmob",mainClassPtr.Num2Text(mainClassPtr.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326]) + " shaggy beastmen stand around you in a loose circle.  Their postures aren't exactly threatening.  If anything, they seem to be standing protectively around you, as if their presence would somehow shelter you from the rest of the mountain.  All of their features share a brotherly similarity, though there's still a fair bit of differences between your minotaur sons.  One of them is a head above the rest, a massive hulk of muscle so big he seems to dwarf the rest.  In stark contrast, a feminine minitaur keeps his distance in the rear."+(mainClassPtr.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] >= 20?"  The tribe constantly makes hoots and cat-calls, fully expecting to be fucking you soon.":""));
-			this.plural = true;
+			init1Names("the ","minotaur"+(mainClassPtr.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] < 20?" gang":" tribe"),"minotaurmob",mainClassPtr.Num2Text(mainClassPtr.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326]) + " shaggy beastmen stand around you in a loose circle.  Their postures aren't exactly threatening.  If anything, they seem to be standing protectively around you, as if their presence would somehow shelter you from the rest of the mountain.  All of their features share a brotherly similarity, though there's still a fair bit of differences between your minotaur sons.  One of them is a head above the rest, a massive hulk of muscle so big he seems to dwarf the rest.  In stark contrast, a feminine minitaur keeps his distance in the rear."+(mainClassPtr.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] >= 20?"  The tribe constantly makes hoots and cat-calls, fully expecting to be fucking you soon.":""),true);
+			init2Male(new Cock(rand(13) + 24,2 + rand(3),CockTypesEnum.HORSE),2,2 + rand(13),1.5,mainClassPtr.player.ballSize * 10);
 
 			this.temperment = 1;
 			this.special1 = 5029;
-
-			this.pronoun1 = "they";
-			this.pronoun2 = "them";
-			this.pronoun3 = "their";
 
 			//Clothing/Armor
 			this.armorName = "thick fur";
@@ -53,8 +50,6 @@ package classes.Monsters
 			this.gems = rand(15) + 45;
 
 			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.gender = 1;
 			this.tallness = rand(37) + 84;
 			//randomly assign hair color
 			if(rand(2) == 0) this.hairColor = "black";
@@ -80,14 +75,6 @@ package classes.Monsters
 			this.createBreastRow();
 			this.breastRows[0].breastRating = 0;
 			this.breastRows[0].nipplesPerBreast = 1;
-			this.createCock();
-			this.cocks[0].cockLength = rand(13) + 24;
-			this.cocks[0].cockThickness = 2 + rand(3);
-			this.cocks[0].cockType = CockTypesEnum.HORSE;
-			this.balls = 2;
-			this.cumMultiplier = 1.5;
-			this.ballSize = 2 + rand(13);
-			this.hoursSinceCum = mainClassPtr.player.ballSize * 10;
 			this.ass.analLooseness = 4;
 			this.ass.analWetness = 1;
 			this.createStatusAffect("Bonus aCapacity",30,0,0,0);			

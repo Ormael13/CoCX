@@ -13,15 +13,15 @@ package classes.Monsters
 		{
 			super(mainClassPtr);
 			init1Names("the ", "Harpy Queen", "harpyqueen", "You face the Harpy Queen, a broodmother of epic proportions - literally.  Her hips are amazingly wide, thrice her own width at the least, and the rest of her body is lushly voluptuous, with plush, soft thighs and a tremendous butt.  Her wide wings beat occasionally, sending ripples through her jiggly body.  She wields a towering whitewood staff in one hand, using the other to cast eldritch spells.");
+			init2Female(VAGINA_WETNESS_SLAVERING,VAGINA_LOOSENESS_LOOSE);
+			this.cumMultiplier = 3;
+			this.ballSize = 1;
+			this.gender = 3;
 
 			this.temperment = 3;
 			//Regular attack
 
 			//Lust attack
-
-			this.pronoun1 = "she";
-			this.pronoun2 = "her";
-			this.pronoun3 = "her";
 
 			//Clothing/Armor
 			this.armorName = "armor";
@@ -53,8 +53,6 @@ package classes.Monsters
 			this.gems = rand(25)+160;
 
 			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.gender = 3;
 			this.tallness = rand(8) + 70;
 			this.hairColor = "black";
 			this.hairLength = 15;
@@ -70,13 +68,6 @@ package classes.Monsters
 
 			this.buttRating = 8;
 			//Create imp sex attributes
-			this.createVagina();
-			this.vaginas[0].virgin = false;
-			this.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLAVERING;
-			this.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
-
-			this.cumMultiplier = 3;
-			this.ballSize = 1;
 			this.ass.analLooseness = 4;
 			this.ass.analWetness = 0;			
 		}

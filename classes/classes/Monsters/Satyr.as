@@ -1,5 +1,6 @@
 package classes.Monsters 
 {
+	import classes.Cock;
 	import classes.Monster;
 	import classes.CockTypesEnum;
 	
@@ -14,13 +15,10 @@ package classes.Monsters
 		{
 			super(mainClassPtr);
 			init1Names("a ", "satyr", "satyr", "From the waist up, your opponent is perfectly human, save his curling, goat-like horns and his pointed, elven ears.  His muscular chest is bare and glistening with sweat, while his coarsely rugged, masculine features are contorted into an expression of savage lust.  Looking at his waist, you notice he has a bit of a potbelly, no doubt the fruits of heavy drinking, judging by the almost overwhelming smell of booze and sex that emanates from him.  Further down you see his legs are the coarse, bristly-furred legs of a bipedal goat, cloven hooves pawing the ground impatiently, sizable manhood swaying freely in the breeze.");
+			init2Male(new Cock(rand(13) + 14,1.5 + rand(20)/2,CockTypesEnum.HUMAN),	2,2 + rand(13),1.5,mainClassPtr.player.ballSize * 10);
 
 			this.temperment = 1;
 			this.special1 = 5029;
-
-			this.pronoun1 = "he";
-			this.pronoun2 = "him";
-			this.pronoun3 = "his";
 
 			//Clothing/Armor
 			this.armorName = "thick fur";
@@ -49,8 +47,6 @@ package classes.Monsters
 			this.gems = rand(25) + 25;
 
 			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.gender = 1;
 			this.tallness = rand(37) + 64;
 			//randomly assign hair color
 			if(rand(2) == 0) this.hairColor = "black";
@@ -75,14 +71,6 @@ package classes.Monsters
 			this.createBreastRow();
 			this.breastRows[0].breastRating = 0;
 			this.breastRows[0].nipplesPerBreast = 1;
-			this.createCock();
-			this.cocks[0].cockLength = rand(13) + 14;
-			this.cocks[0].cockThickness = 1.5 + rand(20)/2;
-			this.cocks[0].cockType = CockTypesEnum.HUMAN;
-			this.balls = 2;
-			this.cumMultiplier = 1.5;
-			this.ballSize = 2 + rand(13);
-			this.hoursSinceCum = mainClassPtr.player.ballSize * 10;
 			this.ass.analLooseness = 4;
 			this.ass.analWetness = 1;
 			this.createStatusAffect("Bonus aCapacity",20,0,0,0);			

@@ -18,18 +18,14 @@
 		{
 			super(mainClassPtr);
 			trace("WormMass Constructor!");
-			init1Names("the ","worms","worms","Before you stands the horrid mass of worms. It has shifted itself and now takes the shape of a humanoid composed completely of the worms in the colony. Its vaguely human shape lumbers towards you in a clearly aggressive manner.");
-			this.plural = true;
+			init1Names("the ","worms","worms","Before you stands the horrid mass of worms. It has shifted itself and now takes the shape of a humanoid composed completely of the worms in the colony. Its vaguely human shape lumbers towards you in a clearly aggressive manner.",true);
+			this.gender = 1;
 
 			this.temperment = 3;
 			//Regular attack
 			this.special1 = 5054;
 			//Lust attack
 			this.special2 = 5055;
-
-			this.pronoun1 = "they";
-			this.pronoun2 = "them";
-			this.pronoun3 = "their";
 
 			//Clothing/Armor
 			this.armorName = "skin";
@@ -56,8 +52,6 @@
 			this.gems = 0;
 
 			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.gender = 1;
 			this.tallness = 1;
 			this.hairColor = "none";
 			this.hairLength = 0;

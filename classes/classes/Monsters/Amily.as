@@ -13,13 +13,11 @@ package classes.Monsters
 		{
 			super(mainClassPtr);
 			init1Names("", "Amily", "amily", "You are currently fighting Amily. The mouse-morph is dressed in rags and glares at you in rage, knife in hand. She keeps herself close to the ground, ensuring she can quickly close the distance between you two or run away.");
+			init2Female(VAGINA_WETNESS_NORMAL, VAGINA_LOOSENESS_NORMAL, 48);
 
 			this.temperment = 0;
 			//Lusty teases
 
-			this.pronoun1 = "she";
-			this.pronoun2 = "her";
-			this.pronoun3 = "her";
 
 			//Clothing/Armor
 			this.armorName = "rags";
@@ -52,8 +50,6 @@ package classes.Monsters
 			this.gems = 2 + rand(5);
 
 			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.gender = 2;
 			this.tallness = 48;
 			this.hairColor = "brown";
 			this.hairLength = 5;
@@ -68,12 +64,7 @@ package classes.Monsters
 			//Create goblin sex attributes
 			this.createBreastRow();
 			this.breastRows[0].breastRating = 3;
-			this.createVagina();
-			this.vaginas[0].vaginalWetness = VAGINA_WETNESS_NORMAL;
-			this.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
-			this.vaginas[0].virgin = false;
 			this.ass.analLooseness = 0;
-			this.createStatusAffect("Bonus vCapacity",48,0,0,0);
 			this.ass.analWetness = 0;			
 		}
 		

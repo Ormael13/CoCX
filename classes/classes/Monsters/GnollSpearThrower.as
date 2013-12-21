@@ -13,15 +13,14 @@ package classes.Monsters
 		{
 			super(mainClassPtr);
 			init1Names("the ", "gnoll spear-thrower", "gnollspearthrower", "You are fighting a gnoll.  An amalgam of voluptuous, sensual lady and snarly, pissed off hyena, she clearly intends to punish you for trespassing.  Her dark-tan, spotted hide blends into a soft cream-colored fur covering her belly and two D-cup breasts, leaving two black nipples poking through the fur.  A crude loincloth is tied around her waist, obscuring her groin from view.  A leather strap cuts between her heavy breasts, holding a basket of javelins on her back.  Large, dish-shaped ears focus on you, leaving no doubt that she can hear every move you make.  Sharp, dark eyes are locked on your body, filled with aggression and a hint of lust.");
+			init2Female(VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_LOOSE);
+			this.gender = 3;
 
 			this.temperment = 2;
 			//Lusty teases
 			this.special1 = 5147;
 			this.special2 = 5146;
 			this.special3 = 5145;
-			this.pronoun1 = "she";
-			this.pronoun2 = "her";
-			this.pronoun3 = "her";
 
 			//Clothing/Armor
 			this.armorName = "skin";
@@ -54,8 +53,7 @@ package classes.Monsters
 			this.gems = 10 + rand(5);
 
 			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.gender = 3;
+
 			this.tallness = 72;
 			this.hairColor = "black";
 			this.hairLength = 22;
@@ -69,10 +67,6 @@ package classes.Monsters
 			//Create goblin sex attributes
 			this.createBreastRow();
 			this.breastRows[0].breastRating = 3;
-			this.createVagina();
-			this.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
-			this.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
-			this.vaginas[0].virgin = false;
 			this.ass.analLooseness = 4;
 			this.createStatusAffect("Bonus aCapacity",25,0,0,0);
 			this.ass.analWetness = 0;

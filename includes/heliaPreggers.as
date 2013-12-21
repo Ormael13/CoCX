@@ -1362,28 +1362,6 @@ public function sparHelspawn():void {
 	doNext(1);
 }
 
-//Combat Menu
-//You're fighting " + flags[kFLAGS.HELSPAWN_NAME] + "! Level: 18
-public function helSpawnDesc(monster:Monster):void {
-	monster.long = flags[kFLAGS.HELSPAWN_NAME] + " is a young salamander, appearing in her later teens.  Clad in ";
-	if(flags[kFLAGS.HELSPAWN_PERSONALITY] >= 50) monster.long += "a slutty scale bikini like her mother's, barely concealing anything";
-	else monster.long += "a short skirt, thigh-high boots, and a sky-blue blouse, in stark contrast to her mother’s sluttier attire";
-	monster.long += ", she stands about six feet in height, with a lengthy, fiery tail swishing menacingly behind her. She's packing a ";
-	if(flags[kFLAGS.HELSPAWN_WEAPON] == "bow") {
-		monster.long += "recurve bow, using blunted, soft-tipped arrows";
-		monster.weaponVerb = "blunted arrow";
-	}
-	else if(flags[kFLAGS.HELSPAWN_WEAPON] == "scimitar") {
-		monster.long += "scimitar, just like her mom's, and holds it in the same berzerk stance Helia is wont to use";
-		monster.weaponVerb = "slash";
-	}
-	else if(flags[kFLAGS.HELSPAWN_WEAPON] == "scimitar and shield") {
-		monster.long += "scimitar and shield, giving her a balanced fighting style";
-		monster.weaponVerb = "slash";
-	}
-	monster.long += ".  Pacing around you, the well-built young warrior intently studies her mentor's defenses, readying for your next attack.";
-}
-
 public function helSpawnAI():void {
 	var choices:Array = new Array();
 	choices[choices.length] = helspawnTwinStrikes;

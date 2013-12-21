@@ -12,17 +12,13 @@ package classes.Monsters
 		public function HarpyMob(mainClassPtr:*) 
 		{
 			super(mainClassPtr);
-			init1Names("the ","harpy horde","harpymob","You are surrounded by a wing of particularly large and muscular harpies, perhaps a dozen of them in total.  All of them are clad in simple brown shifts that give them good camouflage in the mountains, and are using their talon-like claws as weapons against you. While not a great threat to a champion of your ability individually, a whole brood of them together is... something else entirely.");
-			this.plural = true;
+			init1Names("the ","harpy horde","harpymob","You are surrounded by a wing of particularly large and muscular harpies, perhaps a dozen of them in total.  All of them are clad in simple brown shifts that give them good camouflage in the mountains, and are using their talon-like claws as weapons against you. While not a great threat to a champion of your ability individually, a whole brood of them together is... something else entirely.",true);
+			init2Female(VAGINA_WETNESS_SLAVERING,VAGINA_LOOSENESS_GAPING_WIDE);
+			this.gender = 3;
+			this.cumMultiplier = 3;
+			this.ballSize = 1;
 
 			this.temperment = 3;
-			//Regular attack
-
-			//Lust attack
-
-			this.pronoun1 = "they";
-			this.pronoun2 = "them";
-			this.pronoun3 = "their";
 
 			//Clothing/Armor
 			this.armorName = "armor";
@@ -54,8 +50,6 @@ package classes.Monsters
 			this.gems = rand(25)+140;
 
 			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.gender = 3;
 			this.tallness = rand(8) + 70;
 			this.hairColor = "black";
 			this.hairLength = 15;
@@ -70,14 +64,7 @@ package classes.Monsters
 			this.hipRating = 8;
 
 			this.buttRating = 8;
-			//Create imp sex attributes
-			this.createVagina();
-			this.vaginas[0].virgin = false;
-			this.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLAVERING;
-			this.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING_WIDE;
 
-			this.cumMultiplier = 3;
-			this.ballSize = 1;
 			this.ass.analLooseness = 4;
 			this.ass.analWetness = 5;			
 		}

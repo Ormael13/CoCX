@@ -1,5 +1,6 @@
 ﻿package classes.Monsters 
 {
+	import classes.Cock;
 	import classes.Creature;
 	import classes.Monster;
 	import classes.CockTypesEnum;
@@ -19,6 +20,8 @@
 			super(mainClassPtr);
 			trace("TentacleBeast Constructor!");
 			init1Names("the ", "tentacle beast", "tentaclebeast", "You see the massive, shambling form of the tentacle beast before you.  Appearing as a large shrub, it shifts its bulbous mass and reveals a collection of thorny tendrils and cephalopodic limbs.");
+			init2Male([new Cock(40,1.5),new Cock(60,1.5),new Cock(50,1.5),new Cock(20,1.5)],0,0,3);
+			init2Genderless();
 
 			this.temperment = 3;
 			//Regular attack
@@ -60,8 +63,6 @@
 			this.gems = rand(15)+5;
 
 			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.gender = 0;
 			this.tallness = rand(9) + 70;
 			this.hairColor = "green";
 			this.hairLength = 1;
@@ -75,19 +76,6 @@
 
 			this.buttRating = 0;
 			//Create succubus sex attributes
-			this.cumMultiplier = 3;
-			this.createCock();
-			this.cocks[0].cockLength = 40;
-			this.cocks[0].cockThickness = 1.5;
-			this.createCock();
-			this.cocks[1].cockLength = 60;
-			this.cocks[1].cockThickness = 1.5;
-			this.createCock();
-			this.cocks[2].cockLength = 50;
-			this.cocks[2].cockThickness = 1.5;
-			this.createCock();
-			this.cocks[3].cockLength = 20;
-			this.cocks[3].cockThickness = 1.5;
 			this.ass.analLooseness = 1;
 			this.ass.analWetness = 35;		
 

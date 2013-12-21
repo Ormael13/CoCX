@@ -18,8 +18,6 @@
 		{
 			super(mainClassPtr);
 			trace("GenericMonstah Constructor!");
-		
-			
 			this.XP = this.totalXP(mainClassPtr.player.level);
 		}
 

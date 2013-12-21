@@ -1,5 +1,6 @@
 ﻿package classes.Monsters 
 {
+	import classes.Cock;
 	import classes.Creature;
 	import classes.Monster;
 	import classes.CockTypesEnum;
@@ -18,7 +19,8 @@
 		{
 			super(mainClassPtr);
 			trace("InfestedHellhound Constructor!");
-		init1Names("the ", "infested hellhound", "infestedhellhound", "It looks like a large four-legged demon with two heads placed side-by-side. Its eyes and mouth are filled with flames, and covering each of its paws are large and menacing claws. A thick layer of dark fur covers his entire body like armor.  Both heads are looking at you hungrily as the hellhound circles around you.  A pair of black, slightly pointed cocks hang exposed, dripping with cum and worms.  You get the feeling reasoning with this beast will be impossible.");
+			init1Names("the ", "infested hellhound", "infestedhellhound", "It looks like a large four-legged demon with two heads placed side-by-side. Its eyes and mouth are filled with flames, and covering each of its paws are large and menacing claws. A thick layer of dark fur covers his entire body like armor.  Both heads are looking at you hungrily as the hellhound circles around you.  A pair of black, slightly pointed cocks hang exposed, dripping with cum and worms.  You get the feeling reasoning with this beast will be impossible.");
+			init2Male([new Cock(9,2),new Cock(9,2)],2,5,8);
 			this.temperment = 3;
 			//Regular attack
 			this.special1 = 5066;
@@ -55,8 +57,6 @@
 			this.gems = 10+rand(10);
 
 			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.gender = 1;
 			this.tallness = 47;
 			this.hairColor = "red";
 			this.hairLength = 3;
@@ -70,15 +70,7 @@
 
 			this.buttRating = 5;
 			//Create imp sex attributes
-			this.balls = 2;
-			this.ballSize = 5;
-			this.createCock();
-			this.createCock();
-			this.cocks[0].cockLength = 9;
-			this.cocks[1].cockLength = 9;
-			this.cocks[0].cockThickness = 2;
-			this.cocks[1].cockThickness = 2;
-			this.cumMultiplier = 8;
+
 			this.ass.analLooseness = 2;
 			this.ass.analWetness = 1;
 

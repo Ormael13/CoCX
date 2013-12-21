@@ -2,14 +2,6 @@
 package classes
 {
 	//import classes.cockClass;
-	import classes.Cock;
-	import classes.vaginaClass;
-	import classes.breastRowClass;
-	import classes.assClass;
-	import classes.perkClass;
-	import classes.statusAffectClass;
-	import classes.keyItemClass;
-	
 	public class Creature
 	{
 
@@ -2727,13 +2719,14 @@ package classes
 			}
 		}
 		
-		//Create a cock
-		public function createCock(clength:Number = 5.5, cthickness:Number = 1):Boolean
+		//Create a cock. Default type is HUMAN
+		public function createCock(clength:Number = 5.5, cthickness:Number = 1,ctype:CockTypesEnum=null):Boolean
 		{
-			trace("createCock called. clength = " + clength + ", cthickness = " + cthickness);
+			if (ctype == null) ctype = CockTypesEnum.HUMAN;
+			trace("createCock called. clength = " + clength + ", cthickness = " + cthickness+", ctype = "+ctype);
 			if (cocks.length >= 10)
 				return false;
-			var newCock:Cock = new Cock(clength, cthickness);
+			var newCock:Cock = new Cock(clength, cthickness,ctype);
 			//var newCock:cockClass = new cockClass();
 			trace("New cock info. Length = " + newCock.cockLength + ", Thickness = " + newCock.cockThickness + ", Type = " + newCock.cockType);
 			cocks.push(newCock);
@@ -2743,11 +2736,11 @@ package classes
 		}
 		
 		//create vagoo
-		public function createVagina():Boolean
+		public function createVagina(virgin:Boolean = true, vaginalWetness:Number = 1, vaginalLooseness:Number = 0):Boolean
 		{
 			if (vaginas.length >= 2)
 				return false;
-			var newVagina:vaginaClass = new vaginaClass();
+			var newVagina:vaginaClass = new vaginaClass(vaginalWetness, vaginalLooseness, virgin);
 			vaginas.push(newVagina);
 			return true;
 		}
@@ -2765,13 +2758,13 @@ package classes
 		public function genderCheck():void
 		{
 			if (hasCock() && hasVagina())
-				gender = 3;
+				gender = GENDER_HERM;
 			else if (hasCock())
-				gender = 1;
+				gender = GENDER_MALE;
 			else if (hasVagina())
-				gender = 2;
+				gender = GENDER_FEMALE;
 			else
-				gender = 0;
+				gender = GENDER_NONE;
 		}
 		
 		//Remove cocks

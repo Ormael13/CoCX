@@ -13,12 +13,11 @@ package classes.Monsters
 		{
 			super(mainClassPtr);
 			init1Names("", "Kiha", "kiha", "Kiha is standing across from you, holding a double-bladed axe that's nearly as big as she is.  She's six feet tall, and her leathery wings span nearly twelve feet extended.  Her eyes are pure crimson, save for a black slit in the center, and a pair of thick draconic horns sprout from her forehead, arcing over her ruby-colored hair to point behind her.  Dim red scales cover her arms, legs, back, and strong-looking tail, providing what protection they might  to large areas of her body.  The few glimpses of exposed skin are dark, almost chocolate in color, broken only by a few stray scales on the underside of her bosom and on her cheekbones.  Her vagina constantly glistens with moisture, regardless of her state of arousal.  Despite her nudity, Kiha stands with the confidence and poise of a trained fighter.");
+			init2Female(VAGINA_WETNESS_DROOLING,VAGINA_LOOSENESS_NORMAL,40,true);
+			this.cumMultiplier = 1.5;
+			this.hoursSinceCum = mainClassPtr.player.ballSize * 10;
 
 			this.temperment = 1;
-
-			this.pronoun1 = "she";
-			this.pronoun2 = "her";
-			this.pronoun3 = "her";
 
 			//Clothing/Armor
 			this.armorName = "thick scales";
@@ -49,8 +48,6 @@ package classes.Monsters
 			this.gems = rand(15) + 95;
 
 			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.gender = 2;
 			this.tallness = 73;
 			this.hairColor = "red";
 			this.hairLength = 3;
@@ -59,15 +56,12 @@ package classes.Monsters
 			this.skinTone = "dark";
 			this.skinDesc = "skin and scales";
 
-			//3 - cowface
-
 			this.wingDesc = "huge";
 
 			this.wingType = WING_TYPE_IMP;
 
 			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
 
-			//7 - cow!
 			this.tailType = TAIL_TYPE_LIZARD;
 
 			this.hipRating = 6;
@@ -77,16 +71,10 @@ package classes.Monsters
 			this.createBreastRow();
 			this.breastRows[0].breastRating = 4;
 			this.breastRows[0].nipplesPerBreast = 1;
-			this.createVagina();
-			this.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
-			this.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
 
-			this.cumMultiplier = 1.5;
-			this.hoursSinceCum = mainClassPtr.player.ballSize * 10;
 			this.ass.analLooseness = 3;
 			this.ass.analWetness = 0;
 			this.createStatusAffect("Bonus aCapacity",40,0,0,0);
-			this.createStatusAffect("Bonus vCapacity",40,0,0,0);			
 		}
 		
 	}

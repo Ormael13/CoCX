@@ -5853,11 +5853,11 @@ public function startCombat(monsterNum:Number):void {
 	//LOAD HOLLI
 	if(monsterNum == 68) {
 		flags[kFLAGS.FOUGHT_HOLLI] = 1;
-		monster = new Holli68(this);
+		monster = new Holli(this);
 	}
 	//LOAD HOLLI
 	if(monsterNum == 69) {
-		monster = new Holli69(this);
+		monster = new Helspawn(this);
 	}
 	//Reduce enemy def if player has precision!
 	if(player.hasPerk("Precision") >= 0 && player.inte >= 25) {

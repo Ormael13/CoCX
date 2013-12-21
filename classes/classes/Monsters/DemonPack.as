@@ -1,5 +1,6 @@
 ﻿package classes.Monsters 
 {
+	import classes.Cock;
 	import classes.Creature;
 	import classes.Monster;
 	import classes.CockTypesEnum;
@@ -18,8 +19,8 @@
 		{
 			super(mainClassPtr);
 			trace("DemonPack Constructor!");
-			init1Names("the ", "demons", "demonmob", "The group is composed of roughly twenty tan-skinned demons, mostly humanoid in shape with many and varied corruptions across the mob. You see demonic high heels, twisting horns and swinging cocks of all shapes and sizes. There even seems to be a bull head in there somewhere. You also make out plenty of breasts ranging from tiny ones to a pair that requires a second person to carry them, and with those breasts a wide range of pussies, dripping and dry, sometimes nestled below some form of demonic dick.  The small tribe carries no weapons and what little clothing they wear is well-shredded, except for one hefty male wearing a cloak of what appears to be snakeskin across his broad shoulders." + (mainClassPtr.silly() ? "  You spot an odd patch that reads, \"<i>41st Engineer Company: Vaginal Clearance</i>\" on his shoulder." : ""));
-			this.plural = true;
+			init1Names("the ", "demons", "demonmob", "The group is composed of roughly twenty tan-skinned demons, mostly humanoid in shape with many and varied corruptions across the mob. You see demonic high heels, twisting horns and swinging cocks of all shapes and sizes. There even seems to be a bull head in there somewhere. You also make out plenty of breasts ranging from tiny ones to a pair that requires a second person to carry them, and with those breasts a wide range of pussies, dripping and dry, sometimes nestled below some form of demonic dick.  The small tribe carries no weapons and what little clothing they wear is well-shredded, except for one hefty male wearing a cloak of what appears to be snakeskin across his broad shoulders." + (mainClassPtr.silly() ? "  You spot an odd patch that reads, \"<i>41st Engineer Company: Vaginal Clearance</i>\" on his shoulder." : ""),true);
+			init2Male([new Cock(18,2),new Cock(18,2)],0,1,3)
 
 			this.temperment = 3;
 			//Regular attack
@@ -27,9 +28,6 @@
 			//Lust attack
 			this.special2 = 5044;
 
-			this.pronoun1 = "they";
-			this.pronoun2 = "them";
-			this.pronoun3 = "their";
 
 			//Clothing/Armor
 			this.armorName = "demonic skin";
@@ -73,21 +71,11 @@
 
 			this.buttRating = 8;
 			//Create imp sex attributes
-			this.createCock();
-			this.cocks[0].cockLength = 18;
-			this.cocks[0].cockThickness = 2;
-			this.cocks[0].cockType = CockTypesEnum.HUMAN;
-			this.createCock();
-			this.cocks[1].cockLength = 18;
-			this.cocks[1].cockThickness = 2;
-			this.cocks[1].cockType = CockTypesEnum.HUMAN;
 			this.createVagina();
 			this.vaginas[0].virgin = false;
 			this.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
 			this.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
 
-			this.cumMultiplier = 3;
-			this.ballSize = 1;
 			this.ass.analLooseness = 4;
 			this.ass.analWetness = 5;
 

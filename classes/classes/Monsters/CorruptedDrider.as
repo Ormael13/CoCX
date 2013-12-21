@@ -1,6 +1,7 @@
 package classes.Monsters
 {
 	import classes.Appearance;
+	import classes.Cock;
 	import classes.Monster;
 
 	/**
@@ -24,6 +25,8 @@ package classes.Monsters
 			_long += "On her face and forehead, a quartet of lust-filled, " + this.skinTone + " eyes gaze back at you.  Behind her, the monster-girl's " + this.hairColor + " hair drapes down her back like a cloak.  The drider's lips seem to shine with a light all their own, and a steady trickle of purple, reflective fluid beads and drips from them.  At her waist, there's a juicy looking snatch with a large, highly visible clit.  From time to time it pulsates and grows, turning part-way into a demon-dick.  Her spider-half has eight spindly legs with black and " + this.hairColor + " stripes - a menacing display if ever you've seen one.";
 
 			init1Names("the ", "corrupted drider", "corrupteddrider", _long);
+			init2Male(new Cock(9,2));
+			init2Female(VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_GAPING, 70, true);
 
 			if (pierced) {
 				this.nipplesPierced = 1;
@@ -40,10 +43,6 @@ package classes.Monsters
 
 			this.temperment = 2;
 			//Lusty teases
-
-			this.pronoun1 = "she";
-			this.pronoun2 = "her";
-			this.pronoun3 = "her";
 
 			//Clothing/Armor
 			this.armorName = "carapace";
@@ -96,15 +95,8 @@ package classes.Monsters
 			//Create goblin sex attributes
 			this.createBreastRow();
 			this.breastRows[0].breastRating = 5;
-			this.createCock();
-			this.cocks[0].cockLength = 9;
-			this.cocks[0].cockThickness = 2;
-			this.createVagina();
-			this.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
-			this.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING;
 			this.ass.analLooseness = 1;
 			this.createStatusAffect("Bonus aCapacity", 70, 0, 0, 0);
-			this.createStatusAffect("Bonus vCapacity", 70, 0, 0, 0);
 			this.ass.analWetness = 0;
 		}
 

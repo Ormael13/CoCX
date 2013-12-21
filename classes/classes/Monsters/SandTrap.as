@@ -1,5 +1,6 @@
 package classes.Monsters 
 {
+	import classes.Cock;
 	import classes.Monster;
 	import classes.CockTypesEnum;
 	
@@ -15,8 +16,8 @@ package classes.Monsters
 			super(mainClassPtr);
 			//1/3 have fertilized eggs!
 			if(rand(3) == 0) this.createStatusAffect("Fertilized",0,0,0,0);
-			this.short="sandtrap";
-			if(mainClassPtr.silly()) init1Names("the ", "sand tarp", "sandtrap", "You are fighting the sandtrap.  It sits half buried at the bottom of its huge conical pit, only its lean human anatomy on show, leering at you from beneath its shoulder length black hair with its six equally sable eyes.  You cannot say whether its long, soft face with its pointed chin is very pretty or very handsome - every time the creature's face moves, its gender seems to shift.  Its lithe, brown flat-chested body supports four arms, long fingers playing with the rivulets of powder sand surrounding it.  Beneath its belly you occasionally catch glimpses of its insect half: a massive sand-coloured abdomen which anchors it to the desert, with who knows what kind of anatomy.");
+			init1Names("the ", mainClassPtr.silly()?"sandtrap":"sand tarp", "sandtrap", "You are fighting the sandtrap.  It sits half buried at the bottom of its huge conical pit, only its lean human anatomy on show, leering at you from beneath its shoulder length black hair with its six equally sable eyes.  You cannot say whether its long, soft face with its pointed chin is very pretty or very handsome - every time the creature's face moves, its gender seems to shift.  Its lithe, brown flat-chested body supports four arms, long fingers playing with the rivulets of powder sand surrounding it.  Beneath its belly you occasionally catch glimpses of its insect half: a massive sand-coloured abdomen which anchors it to the desert, with who knows what kind of anatomy.");
+			init2Male(new Cock(10,2,CockTypesEnum.HUMAN),2,4,3);
 
 			this.temperment = 3;
 			//Regular attack
@@ -57,8 +58,6 @@ package classes.Monsters
 			this.gems = 2 + rand(5);
 
 			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.gender = 1;
 			this.tallness = rand(8) + 150;
 			this.hairColor = "black";
 			this.hairLength = 15;
@@ -73,14 +72,6 @@ package classes.Monsters
 			this.hipRating = 8;
 
 			this.buttRating = 8;
-			//Create imp sex attributes
-			this.balls = 2;
-			this.createCock();
-			this.cocks[0].cockLength = 10;
-			this.cocks[0].cockThickness = 2;
-			this.cocks[0].cockType = CockTypesEnum.HUMAN;
-			this.ballSize = 4;
-			this.cumMultiplier = 3;
 			this.ass.analLooseness = 2;
 			this.ass.analWetness = 0;			
 		}
