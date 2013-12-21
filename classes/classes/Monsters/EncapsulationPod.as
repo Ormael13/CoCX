@@ -69,77 +69,77 @@
 		{
 			this._mainClassPtr = mainClassPtr;
 			trace("EncapsulationPod Constructor!");
-			this.short="pod";
-			this.imageName="pod";
-			this.plural = false;
-			this.long = "";
-			this.a ="the ";
-			this.capitalA ="The ";
-			this.temperment = 2;
+			this.short                   ="pod";
+			this.imageName               ="pod";
+			this.plural                  = false;
+			this.long                    = "";
+			this.a                       ="the ";
+			this.capitalA                ="The ";
+			this.temperment              = 2;
 			//Uber
-			this.special1 = 0;
+			this.special1                = 0;
 			//Lust attack
-			this.special2 = 0;
-			this.special3 = 0;
-			this.pronoun1 = "it";
-			this.pronoun2 = "it";
-			this.pronoun3 = "its";
+			this.special2                = 0;
+			this.special3                = 0;
+			this.pronoun1                = "it";
+			this.pronoun2                = "it";
+			this.pronoun3                = "its";
 			
 			//Clothing/Armor
-			this.armorName = "pod";
-			this.weaponName = "";
-			this.weaponVerb = "";
-			this.armorDef = 0;
-			this.armorPerk = "";
-			this.weaponAttack = 0;
-			this.weaponPerk = "";
-			this.weaponValue = 0;
-			this.armorValue = 0;
+			this.armorName               = "pod";
+			this.weaponName              = "";
+			this.weaponVerb              = "";
+			this.armorDef                = 0;
+			this.armorPerk               = "";
+			this.weaponAttack            = 0;
+			this.weaponPerk              = "";
+			this.weaponValue             = 0;
+			this.armorValue              = 0;
 			//Primary stats
-			this.str = 90;
-			this.tou = 1;
-			this.spe = 1;
-			this.inte = 1;
-			this.lib = 1;
-			this.sens = 1;
-			this.cor = 100;
-			this.fatigue = 0;
-			this.lustVuln = 0;
+			this.str                     = 90;
+			this.tou                     = 1;
+			this.spe                     = 1;
+			this.inte                    = 1;
+			this.lib                     = 1;
+			this.sens                    = 1;
+			this.cor                     = 100;
+			this.fatigue                 = 0;
+			this.lustVuln                = 0;
 			
 			//Combat Stats
-			this.bonusHP = 450;
-			this.HP = eMaxHP();
+			this.bonusHP                 = 450;
+			this.HP                      = eMaxHP();
 			setDescriptionForPlantPot();
 			
-			this.lust = 10;
+			this.lust                    = 10;
 			
 			//Level Stats
-			this.level = 12;
-			this.XP = this.totalXP(mainClassPtr.player.level) + 80;
-			this.gems = 1;
+			this.level                   = 12;
+			this.XP                      = this.totalXP(mainClassPtr.player.level) + 80;
+			this.gems                    = 1;
 			
 			//Appearance Variables
 			//Gender 1M, 2F, 3H
-			this.gender = 1;
-			this.tallness = 120;
-			this.hairColor = "black";
-			this.hairLength = 0;
-			this.skinType = SKIN_TYPE_PLAIN;
-			this.skinTone = "purple";
-			this.skinDesc = "covering";
-			this.faceType = FACE_HUMAN;
-			this.hornType = HORNS_NONE;
-			this.wingDesc = "";
+			this.gender                  = 1;
+			this.tallness                = 120;
+			this.hairColor               = "black";
+			this.hairLength              = 0;
+			this.skinType                = SKIN_TYPE_PLAIN;
+			this.skinTone                = "purple";
+			this.skinDesc                = "covering";
+			this.faceType                = FACE_HUMAN;
+			this.hornType                = HORNS_NONE;
+			this.wingDesc                = "";
 
-			this.wingType = WING_TYPE_NONE;
+			this.wingType                = WING_TYPE_NONE;
 			//5 - demonic heels
 			//6 - demon foot-claws
-			this.lowerBody = LOWER_BODY_TYPE_HUMAN;
-			this.tailType = TAIL_TYPE_NONE;
+			this.lowerBody               = LOWER_BODY_TYPE_HUMAN;
+			this.tailType                = TAIL_TYPE_NONE;
 			//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
-			this.tailVenom = 0;
+			this.tailVenom               = 0;
 			//Tail recharge determines how fast venom/webs comes back per hour.
-			this.tailRecharge = 5;
+			this.tailRecharge            = 5;
 			//hipRating
 			//0 - boyish
 			//2 - slender
@@ -148,7 +148,7 @@
 			//10 - curvy//flaring
 			//15 - child-bearing/fertile
 			//20 - inhumanly wide
-			this.hipRating = 2;
+			this.hipRating               = 2;
 			//buttRating
 			//0 - buttless
 			//2 - tight
