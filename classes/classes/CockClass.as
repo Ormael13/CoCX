@@ -1,9 +1,9 @@
 ﻿package classes
 {
-	public class cockClass
+	public class CockClass
 	{
 		//constructor
-		public function cockClass()
+		public function CockClass()
 		{
 		}
 		//data

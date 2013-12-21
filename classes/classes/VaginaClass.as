@@ -1,9 +1,9 @@
 ﻿package classes
 {
-	public class vaginaClass
+	public class VaginaClass
 	{
 		//constructor
-		public function vaginaClass(vaginalWetness:Number = 1, vaginalLooseness:Number = 0, virgin:Boolean = false)
+		public function VaginaClass(vaginalWetness:Number = 1, vaginalLooseness:Number = 0, virgin:Boolean = false)
 		{
 			this.virgin=virgin;
 			this.vaginalWetness=vaginalWetness;

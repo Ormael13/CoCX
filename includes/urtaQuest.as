@@ -1,5 +1,5 @@
-﻿import classes.itemSlotClass;
-import classes.keyItemClass;
+﻿import classes.ItemSlotClass;
+import classes.KeyItemClass;
 import classes.Player;
 /**
  * Urta's Quest
@@ -8,7 +8,7 @@ import classes.Player;
 
 // import classes.creature;
 // import flash.events.MouseEvent;
-// import classes.itemSlotClass;
+// import classes.ItemSlotClass;
 
 //const URTA_MET_HEL:int = 710;
 //const URTA_QUEST_STATUS:int = 711;
@@ -27,11 +27,11 @@ import classes.Player;
 //You play as Urta, which copies everyone about you into this new variable. Very clumsy.
 //TODO: Figure out this whole thing. You play as Urta but the whole quest saves you state into this variable and swaps back and forth 
 //whenever you "leave" the quest 
-public var urtaQItems1:itemSlotClass = new itemSlotClass();
-public var urtaQItems2:itemSlotClass = new itemSlotClass();
-public var urtaQItems3:itemSlotClass = new itemSlotClass();
-public var urtaQItems4:itemSlotClass = new itemSlotClass();
-public var urtaQItems5:itemSlotClass = new itemSlotClass();
+public var urtaQItems1:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems2:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems3:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems4:ItemSlotClass = new ItemSlotClass();
+public var urtaQItems5:ItemSlotClass = new ItemSlotClass();
 
 public function urtaBusy():Boolean {
 	return (flags[kFLAGS.EDRYN_BIRF_COUNTDOWN] > 0 || flags[kFLAGS.URTA_QUEST_STATUS] == -1);
@@ -184,11 +184,11 @@ public function startUrtaQuest():void {
 	urtaQItems3 = clone(itemSlot3);
 	urtaQItems4 = clone(itemSlot4);
 	urtaQItems5 = clone(itemSlot5);
-	itemSlot1 = new itemSlotClass();
-	itemSlot2 = new itemSlotClass();
-	itemSlot3 = new itemSlotClass();
-	itemSlot4 = new itemSlotClass();
-	itemSlot5 = new itemSlotClass();
+	itemSlot1 = new ItemSlotClass();
+	itemSlot2 = new ItemSlotClass();
+	itemSlot3 = new ItemSlotClass();
+	itemSlot4 = new ItemSlotClass();
+	itemSlot5 = new ItemSlotClass();
 	player2 = clone(player);
 
 	player = new Player();

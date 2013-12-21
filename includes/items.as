@@ -1,4 +1,4 @@
-﻿// import classes.itemSlotClass;
+﻿// import classes.ItemSlotClass;
 
 //const FOX_BAD_END_WARNING:int = 477;
 //const TIMES_MET_CHICKEN_HARPY:int = 652;
@@ -1586,7 +1586,7 @@ public function doItems(eventNo:Number):void {
 	if ((eventNo == 1002) || (eventNo == 1003) || (eventNo == 1004) || (eventNo == 1005) || (eventNo == 1006))
 	{
 
-		var slotTmp:itemSlotClass;
+		var slotTmp:ItemSlotClass;
 		switch (eventNo)
 		{
 			case 1002:
@@ -1620,7 +1620,7 @@ public function doItems(eventNo:Number):void {
 
 	if ((eventNo == 1011) || (eventNo == 1012) || (eventNo == 1013) || (eventNo == 1014) || (eventNo == 1015))
 	{
-		var slotTmp:itemSlotClass;
+		var slotTmp:ItemSlotClass;
 		switch (eventNo)
 		{
 			case 1011:
@@ -2138,7 +2138,7 @@ public function doItems(eventNo:Number):void {
 	//   slot 1               slot 2                slot 3               slot 4               slot 5
 	{
 
-		var slotTmp:itemSlotClass;
+		var slotTmp:ItemSlotClass;
 
 		switch (eventNo)
 		{
@@ -3028,7 +3028,7 @@ public function itemCount(itemName:String):int {
 	return counted;
 }
 
-public function getLowestSlot(itemName:String):itemSlotClass {
+public function getLowestSlot(itemName:String):ItemSlotClass {
 	var slot:* = itemSlot1;
 	var slotCounter:* = itemSlot1;
 	while (slotCounter != undefined)

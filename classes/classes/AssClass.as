@@ -1,9 +1,9 @@
 ﻿package classes
 {
-	public class assClass
+	public class AssClass
 	{
 		//constructor
-		public function assClass()
+		public function AssClass()
 		{
 		}
 		

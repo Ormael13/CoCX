@@ -144,6 +144,16 @@ public function doThatTestingThang():void
 * \\\[hairorfur\\\] - [hairorfur]
 * \\\[pg\\\] - [pg] (This is a shortcut to two newlines. This should be two lines below the \\\[pg\\\])
 
+
+**Single-word function calls and parameter lookups**
+
+* \\\[player.face\\\] - [player.face]
+* \\\[allChestDesc\\\] - [allChestDesc]
+* \\\[player.armorName\\\] - [player.armorName]
+* \\\[player.skinFurScales\\\] - [player.skinFurScales]
+* \\\[chestDesc\\\] - [chestDesc]  
+
+
 **Two word nouns**
 
 * \\\[cock all\\\] - [cock all]

@@ -1,4 +1,4 @@
-﻿package classes.Monsters 
+﻿﻿package classes.Monsters 
 {
 	import classes.Creature;
 	import classes.Monster;
