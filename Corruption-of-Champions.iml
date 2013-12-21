@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="Flex" version="4">
+  <component name="FlexBuildConfigurationManager" active="CorruptionOfChampions">
+    <configurations>
+      <configuration name="CorruptionOfChampions" output-file="CorruptionofChampionsFD.swf" output-folder="$MODULE_DIR$/bin">
+        <dependencies target-player="11.1">
+          <entries>
+            <entry library-name="lib" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+          </entries>
+          <sdk name="4.6.0" />
+        </dependencies>
+        <compiler-options>
+          <option name="additionalConfigFilePath" value="$MODULE_DIR$/obj/Corruption-of-Champions-FDConfig.xml" />
+        </compiler-options>
+        <packaging-air-desktop />
+        <packaging-android />
+        <packaging-ios />
+      </configuration>
+    </configurations>
+    <compiler-options />
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/classes" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/includes" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/bin" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/devTools" />
+      <excludeFolder url="file://$MODULE_DIR$/obj" />
+    </content>
+    <orderEntry type="jdk" jdkName="4.6.0" jdkType="Flex SDK Type (new)" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="lib" level="project" />
+  </component>
+</module>
+
