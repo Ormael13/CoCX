@@ -4,10 +4,11 @@
 
 // Description constants
 
-// skinType
-public static const GENDER_MALE:int                                                 =    0;
-public static const GENDER_FEMALE:int                                               =    1;
-public static const GENDER_HERM:int                                                =    2;
+// gender
+public static const GENDER_NONE:int                                                 =    0;
+public static const GENDER_MALE:int                                                 =    1;
+public static const GENDER_FEMALE:int                                               =    2;
+public static const GENDER_HERM:int                                                 =    3;
 
 // skinType
 public static const SKIN_TYPE_PLAIN:int                                             =    0;

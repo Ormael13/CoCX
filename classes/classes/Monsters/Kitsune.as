@@ -15,17 +15,14 @@ package classes.Monsters
 		{
 			super(mainClassPtr);
 			this.hairColor = hairColor;
-			this.short="kitsune";
-			this.imageName="kitsune";
 
-			this.long = "A kitsune stands in front of you, about five and a half feet tall.  She has a head of ";
-
-			if(hairColor == "blonde") this.long += "long flaxen";
-			else if(hairColor == "black") this.long += "lustrous, ass-length black";
-			else this.long += "unkempt, shoulder-length reddish";
-			this.long += " hair.  She appears mostly human, except for a pair of large, furry ears poking through her hair and six luxurious silky tails swaying in the air behind her.  Her robes are revealing but comfortable-looking, hugging her voluptuous curves and exposing large swaths of tattooed skin.  A layer of ornate tattoos covers patches of her exposed flesh, accentuating her feminine curves nicely, and each movement brings a pleasant jiggle from her plump backside and large breasts.";
+			var _long:String = "A kitsune stands in front of you, about five and a half feet tall.  She has a head of ";
+			if(hairColor == "blonde") _long += "long flaxen";
+			else if(hairColor == "black") _long += "lustrous, ass-length black";
+			else _long += "unkempt, shoulder-length reddish";
+			_long += " hair.  She appears mostly human, except for a pair of large, furry ears poking through her hair and six luxurious silky tails swaying in the air behind her.  Her robes are revealing but comfortable-looking, hugging her voluptuous curves and exposing large swaths of tattooed skin.  A layer of ornate tattoos covers patches of her exposed flesh, accentuating her feminine curves nicely, and each movement brings a pleasant jiggle from her plump backside and large breasts.";
 			if(rand(3) != 2) mainClassPtr.flags[kFLAGS.redheadIsFuta] = 1;
-			this.a ="a ";
+			init1Names("a ","kitsune","kitsune",_long);
 
 			this.temperment = 1;
 			this.special1 = 5029;

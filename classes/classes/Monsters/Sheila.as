@@ -13,15 +13,7 @@ package classes.Monsters
 		public function Sheila(mainClassPtr:*) 
 		{
 			super(mainClassPtr);
-			this.short="Sheila";
-			this.imageName="sheila";
-
-			this.long = "Sheila is a slim, somewhat athletic woman, over six feet in height.  Most of her lightly-tanned skin is hidden, either by her vest and shorts or by the fuzzy fur that covers her legs from the thighs down to her prominent nails.  Her " + mainClassPtr.sheilaCup() + " breasts are briefly defined against the white of her shirt as she sways on her feet, ";
-			//[(sheila corruption <=40)
-			if(mainClassPtr.sheilaCorruption() <= 40) this.long += "small, round things that match her slender frame.";
-			else this.long += "swollen, jiggling globes that stand in contrast to her slender body and tell a tale of all the corruption that has been pumped into her.";
-			this.long += "  Her straight, jaw-length auburn hair hangs unrestrained, falling around the fuzzy ears that stick out sideways from her head.  The hat she usually wears is hanging on her back by a string, pushed off to prevent its being lost in the chaos.  Something about slipping a rope around her own neck just to keep a hat tells you that Sheila's mind isn't really staying in the fight - though it could also be the desperate, faraway look in her eyes.";
-			this.a ="";
+			init1Names("","Sheila","sheila","Sheila is a slim, somewhat athletic woman, over six feet in height.  Most of her lightly-tanned skin is hidden, either by her vest and shorts or by the fuzzy fur that covers her legs from the thighs down to her prominent nails.  Her " + mainClassPtr.sheilaCup() + " breasts are briefly defined against the white of her shirt as she sways on her feet, "+(mainClassPtr.sheilaCorruption() <= 40?"small, round things that match her slender frame.":"swollen, jiggling globes that stand in contrast to her slender body and tell a tale of all the corruption that has been pumped into her.")+"  Her straight, jaw-length auburn hair hangs unrestrained, falling around the fuzzy ears that stick out sideways from her head.  The hat she usually wears is hanging on her back by a string, pushed off to prevent its being lost in the chaos.  Something about slipping a rope around her own neck just to keep a hat tells you that Sheila's mind isn't really staying in the fight - though it could also be the desperate, faraway look in her eyes.");
 
 			this.temperment = 1;
 

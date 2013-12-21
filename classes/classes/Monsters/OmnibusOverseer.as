@@ -12,11 +12,7 @@ package classes.Monsters
 		public function OmnibusOverseer(mainClassPtr:*) 
 		{
 			super(mainClassPtr);
-			this.short="Omnibus Overseer";
-			this.imageName="omnibusoverseer";
-
-			this.long = "The 'woman' before you is clothed only in a single strip of fabric that wraps around her bountiful chest.  She has striking red eyes that contrast visibly with her blue skin and dark make-up.  Shiny black gloss encapsulates her kissable bubbly black lips.  Her most striking feature is her crotch, which appears neither male nor female.  She has a puffy wet vulva, but a cock-shaped protrusion sprouts from where a clit should be.";
-			this.a ="the ";
+			init1Names("the ", "Omnibus Overseer", "omnibusoverseer", "The 'woman' before you is clothed only in a single strip of fabric that wraps around her bountiful chest.  She has striking red eyes that contrast visibly with her blue skin and dark make-up.  Shiny black gloss encapsulates her kissable bubbly black lips.  Her most striking feature is her crotch, which appears neither male nor female.  She has a puffy wet vulva, but a cock-shaped protrusion sprouts from where a clit should be.");
 			this.temperment = 3;
 			//Regular attack
 			this.special1 = 11043;

@@ -1,8 +1,5 @@
 ﻿package classes 
 {
-	import classes.Creature;
-	import classes.CockTypesEnum;
-	
 	/**
 	 * ...
 	 * @author Yoffy, Fake-Name
@@ -49,7 +46,7 @@
 			// trace("Generic Monster Constructor!");
 			this.mainClassPtr = mainClassPtr;
 		}
-		
+
 
 		public function eMaxHP():Number 
 		{
@@ -218,5 +215,30 @@
 			return rand(xp);
 		}
 
+		// MONSTER INITIALIZATION HELPER FUNCTIONS
+		public var initsCalled:Array = [false];
+
+		public function fullyInit():Boolean {
+			return initsCalled.indexOf(false)==-1;
+		}
+
+		/**
+		 * Tells that skipping init<idx>Whatever is ok and you will initialize corresponding properties by hand
+		 */
+		protected function skipInit(idx:int){
+			this.initsCalled[idx-1] = true;
+		}
+
+		/**
+		 * Inits a, short, imageName, long
+		 */
+		protected function init1Names(a:String, short:String, imageName:String, long:String):void
+		{
+			this.short = short;
+			this.imageName = imageName;
+			this.long = long;
+			this.a = a;
+			this.initsCalled[0]=true;
+		}
 	}
 }

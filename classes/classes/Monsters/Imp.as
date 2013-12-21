@@ -18,15 +18,9 @@
 		{
 			super(mainClassPtr);
 			trace("Imp Constructor!");
-			this.short                          = "imp";
-			this.imageName                      = "imp";
-			this.plural                         = false;
-			this.long                           = "An imp is short, only a few feet tall.  An unkempt mane of shaggy black hair hangs from his head, parted by two short curved horns.  His eyes are solid black, save for tiny red irises which glow with evil intent.  His skin is bright red, and unencumbered by clothing or armor, save for a small loincloth at his belt.  His feet are covered by tiny wooden sandals, and his hands tipped with sharp claws.  A pair of tiny but functional wings occasionally flap from his back.";
-			this.a                              ="the ";
+			init1Names("the ","imp","imp","An imp is short, only a few feet tall.  An unkempt mane of shaggy black hair hangs from his head, parted by two short curved horns.  His eyes are solid black, save for tiny red irises which glow with evil intent.  His skin is bright red, and unencumbered by clothing or armor, save for a small loincloth at his belt.  His feet are covered by tiny wooden sandals, and his hands tipped with sharp claws.  A pair of tiny but functional wings occasionally flap from his back.");
 			this.temperment                     = 1;
 			this.special1                       = 5019;
-			this.special2                       = 0;
-			this.special3                       = 0;
 			this.pronoun1                       = "he";
 			this.pronoun2                       = "him";
 			this.pronoun3                       = "his";
@@ -35,12 +29,6 @@
 			this.armorName                      = "leathery skin";
 			this.weaponName                     = "claws";
 			this.weaponVerb                     = "claw-slash";
-			this.armorDef                       = 0;
-			this.armorPerk                      = "";
-			this.weaponAttack                   = 0;
-			this.weaponPerk                     = "";
-			this.weaponValue                    = 0;
-			this.armorValue                     = 0;
 			//Primary stats
 			this.str                            = 20;
 			this.tou                            = 10;
@@ -49,7 +37,6 @@
 			this.lib                            = 45;
 			this.sens                           = 45;
 			this.cor                            = 100;
-			this.fatigue                        = 0;
 
 			//Combat Stats
 			this.HP                             = tou * 2 + 50;
@@ -71,7 +58,6 @@
 			this.skinTone                       = "red";
 			this.skinDesc                       = "skin";
 
-			this.faceType                       = FACE_HUMAN;
 			this.wingDesc                       = "small";
 
 			this.wingType                       = WING_TYPE_IMP;

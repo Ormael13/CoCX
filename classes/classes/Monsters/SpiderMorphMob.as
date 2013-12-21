@@ -13,14 +13,8 @@ package classes.Monsters
 		public function SpiderMorphMob(mainClassPtr:*) 
 		{
 			super(mainClassPtr);
-			this.short = "mob of spiders-morphs";
-			this.imageName = "spidermorphmob"
+			init1Names("the ","mob of spiders-morphs","spidermorphmob","You are fighting a horde of spider-morphs!  A group of some two-dozen spiders and driders approaches you, all baring their teeth.  A pair of large, powerful driders lead the group, their corrupt, lusty stares sending shivers up your spine.  While "+(mainClassPtr.player.level <= 13?"you'd never face such a large horde on your own":"you could probably handle them alone")+", you have a powerful ally in this fight - the dragoness Kiha!");
 			this.plural = true;
-			this.long = "You are fighting a horde of spider-morphs!  A group of some two-dozen spiders and driders approaches you, all baring their teeth.  A pair of large, powerful driders lead the group, their corrupt, lusty stares sending shivers up your spine.  While ";
-			if(mainClassPtr.player.level <= 13) this.long += "you'd never face such a large horde on your own";
-			else this.long += "you could probably handle them alone";
-			this.long += ", you have a powerful ally in this fight - the dragoness Kiha!";
-			this.a ="the ";
 
 			this.temperment = 3;
 			//Regular attack

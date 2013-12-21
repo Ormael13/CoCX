@@ -12,11 +12,7 @@ package classes.Monsters
 		public function Amily(mainClassPtr:*) 
 		{
 			super(mainClassPtr);
-			this.short="Amily";
-			this.imageName="amily";
-
-			this.long = "You are currently fighting Amily. The mouse-morph is dressed in rags and glares at you in rage, knife in hand. She keeps herself close to the ground, ensuring she can quickly close the distance between you two or run away.";
-			this.a ="";
+			init1Names("", "Amily", "amily", "You are currently fighting Amily. The mouse-morph is dressed in rags and glares at you in rage, knife in hand. She keeps herself close to the ground, ensuring she can quickly close the distance between you two or run away.");
 
 			this.temperment = 0;
 			//Lusty teases

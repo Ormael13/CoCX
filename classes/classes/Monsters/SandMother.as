@@ -12,11 +12,7 @@ package classes.Monsters
 		public function SandMother(mainClassPtr:*) 
 		{
 			super(mainClassPtr);
-			this.short="Sand Mother";
-			this.imageName="sandmother";
-
-			this.long = "The Sand Mother is a towering woman of imposing stature and bust.  She wears a much silkier, regal-looking robe than her sisters, and it barely serves to contain her four milk-laden breasts, straining under their jiggling weight.  Dangling around her in a way that reminds you oddly of a halo, the Sand Mother's blonde-white hair fans around her, hanging long behind her.  The queen witch is brandishing a pearly white scepter rather threateningly, though from the way she holds it, it's clear she doesn't intend to use it as a physical weapon.";
-			this.a ="the ";
+			init1Names("the ", "Sand Mother", "sandmother", "The Sand Mother is a towering woman of imposing stature and bust.  She wears a much silkier, regal-looking robe than her sisters, and it barely serves to contain her four milk-laden breasts, straining under their jiggling weight.  Dangling around her in a way that reminds you oddly of a halo, the Sand Mother's blonde-white hair fans around her, hanging long behind her.  The queen witch is brandishing a pearly white scepter rather threateningly, though from the way she holds it, it's clear she doesn't intend to use it as a physical weapon.");
 			this.temperment = 3;
 			//Regular attack
 			this.special1 = 11020;

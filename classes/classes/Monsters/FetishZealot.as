@@ -19,11 +19,7 @@
 			super(mainClassPtr);
 			trace("FetishZealot Constructor!");
 		
-			this.short="fetish zealot";
-			this.imageName="fetishzealot";
-
-			this.long = "The zealot is clad in a bizarre set of religious robes.  They are similar to what you've seen on other religious leaders from home, but none that included the large slit at the front that lets his above average sized human dick stick out the front.";
-			this.a ="the ";
+			init1Names("the ", "fetish zealot", "fetishzealot", "The zealot is clad in a bizarre set of religious robes.  They are similar to what you've seen on other religious leaders from home, but none that included the large slit at the front that lets his above average sized human dick stick out the front.");
 
 			this.temperment = 2;
 			//Lusty teases

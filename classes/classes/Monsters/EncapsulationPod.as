@@ -66,11 +66,7 @@
 		public function EncapsulationPod(mainClassPtr:*) 
 		{
 			super(mainClassPtr);
-			this.short="pod";
-			this.imageName="pod";
-
-			this.long = "";
-			this.a ="the ";
+			init1Names("the ", "pod", "pod", "");
 
 			this.temperment = 2;
 			//Uber

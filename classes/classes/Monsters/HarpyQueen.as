@@ -12,11 +12,7 @@ package classes.Monsters
 		public function HarpyQueen(mainClassPtr:*) 
 		{
 			super(mainClassPtr);
-			this.short="Harpy Queen";
-			this.imageName="harpyqueen";
-
-			this.long = "You face the Harpy Queen, a broodmother of epic proportions - literally.  Her hips are amazingly wide, thrice her own width at the least, and the rest of her body is lushly voluptuous, with plush, soft thighs and a tremendous butt.  Her wide wings beat occasionally, sending ripples through her jiggly body.  She wields a towering whitewood staff in one hand, using the other to cast eldritch spells.";
-			this.a ="the ";
+			init1Names("the ", "Harpy Queen", "harpyqueen", "You face the Harpy Queen, a broodmother of epic proportions - literally.  Her hips are amazingly wide, thrice her own width at the least, and the rest of her body is lushly voluptuous, with plush, soft thighs and a tremendous butt.  Her wide wings beat occasionally, sending ripples through her jiggly body.  She wields a towering whitewood staff in one hand, using the other to cast eldritch spells.");
 
 			this.temperment = 3;
 			//Regular attack

@@ -1364,7 +1364,7 @@ public function sparHelspawn():void {
 
 //Combat Menu
 //You're fighting " + flags[kFLAGS.HELSPAWN_NAME] + "! Level: 18
-public function helSpawnDesc():void {
+public function helSpawnDesc(monster:Monster):void {
 	monster.long = flags[kFLAGS.HELSPAWN_NAME] + " is a young salamander, appearing in her later teens.  Clad in ";
 	if(flags[kFLAGS.HELSPAWN_PERSONALITY] >= 50) monster.long += "a slutty scale bikini like her mother's, barely concealing anything";
 	else monster.long += "a short skirt, thigh-high boots, and a sky-blue blouse, in stark contrast to her mother’s sluttier attire";

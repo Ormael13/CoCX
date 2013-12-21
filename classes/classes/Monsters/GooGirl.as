@@ -11,12 +11,7 @@ package classes.Monsters
 		public function GooGirl(mainClassPtr:*) 
 		{
 			super(mainClassPtr);
-			this.short="goo-girl";
-			this.imageName="googirl";
-
-			this.long = "The goo-girl has a curious expression on her youthful, shimmering face. Her body is slender and globs of slime regularly drip from her limbs, splattering into the goo puddle pooling beneath her hips. A small, heart-shaped nucleus pulses in her chest with a red glow.";
-			if(mainClassPtr.player.biggestTitSize() >= 3) this.long += "  She has apparently made herself a bit more like you, as her chest appears to be a perfect copy of your " + mainClassPtr.biggestBreastSizeDescript()+ ".";
-			this.a ="the ";
+			init1Names("the ","goo-girl","googirl","The goo-girl has a curious expression on her youthful, shimmering face. Her body is slender and globs of slime regularly drip from her limbs, splattering into the goo puddle pooling beneath her hips. A small, heart-shaped nucleus pulses in her chest with a red glow."+(mainClassPtr.player.biggestTitSize() >= 3?("  She has apparently made herself a bit more like you, as her chest appears to be a perfect copy of your " + mainClassPtr.biggestBreastSizeDescript()+ "."):""));
 
 			this.temperment = 3;
 			this.special1 = 5040;

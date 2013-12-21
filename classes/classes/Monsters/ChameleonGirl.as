@@ -9,49 +9,23 @@ package classes.Monsters
 	 */
 	public class ChameleonGirl extends Monster 
 	{
-		
+		/**
+		 * Pairs of skinTone/skinAdj
+		 */
+		private const SKIN_VARIATIONS:Array = [
+			"red","black",
+			"green","yellowish",
+			"blue","lighter blue",
+			"purple","bright yellow",
+			"orange","brown",
+			"tan","white"];
 		public function ChameleonGirl(mainClassPtr:*) 
 		{
 			super(mainClassPtr);
-			this.short="chameleon girl";
-			this.imageName="chameleongirl";
-
-			this.skinTone = "red";
-			this.skinAdj = "";
-			var temp:int = rand(6);
-			switch(temp) {
-				case 0:
-					this.skinTone = "red";
-					this.skinAdj = "black";
-					break;
-				case 1:
-					this.skinTone = "green";
-					this.skinAdj = "yellowish";
-					break;
-				case 2:
-					this.skinTone = "blue";
-					this.skinAdj = "lighter blue";
-					break;
-				case 3:
-					this.skinTone = "purple";
-					this.skinAdj = "bright yellow";
-					break;
-				case 4:
-					this.skinTone = "orange";
-					this.skinAdj = "brown";
-					break;
-				case 5:
-					this.skinTone = "tan";
-					this.skinAdj = "white";
-					break;
-				default:
-					this.skinTone = "Fudgup";
-					this.skinAdj = "Error";
-					break;
-			}
-			this.long = "You're faced with a tall lizard-like girl with smooth " + this.skinTone + " skin and long, " + this.skinAdj + " stripes that run along her body from ankle to shoulder.  An abnormally large tail swishes behind her, and her hands are massive for her frame, built for easily climbing the trees.  A pair of small, cute horns grow from her temples, and a pair of perky B-cups push out through her skimpy drapings.  Large, sharp claws cap her fingers, gesturing menacingly at you.";
-
-			this.a ="the ";
+			var temp:int = rand(SKIN_VARIATIONS.length/2);
+			this.skinTone = SKIN_VARIATIONS[temp*2];
+			this.skinAdj = SKIN_VARIATIONS[temp*2+1];
+			init1Names("the ", "chameleon girl", "chameleongirl", "You're faced with a tall lizard-like girl with smooth " + this.skinTone + " skin and long, " + this.skinAdj + " stripes that run along her body from ankle to shoulder.  An abnormally large tail swishes behind her, and her hands are massive for her frame, built for easily climbing the trees.  A pair of small, cute horns grow from her temples, and a pair of perky B-cups push out through her skimpy drapings.  Large, sharp claws cap her fingers, gesturing menacingly at you.");
 
 			this.temperment = 3;
 			//Regular attack

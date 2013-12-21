@@ -12,11 +12,7 @@ package classes.Monsters
 		public function Brigid(mainClassPtr:*) 
 		{
 			super(mainClassPtr);
-			this.short="Brigid the Jailer";
-			this.imageName = "brigid";
-
-			this.long = "Brigid is a monster of a harpy, standing a foot taller than any other you've seen. She's covered in piercings, and her pink-dyed hair is shaved down to a long mohawk. She's nude, save for the hot poker in her right hand and the shield in her left, which jingles with every step she takes thanks to the cell keys beneath it.";
-			this.a ="";
+			init1Names("", "Brigid the Jailer", "brigid", "Brigid is a monster of a harpy, standing a foot taller than any other you've seen. She's covered in piercings, and her pink-dyed hair is shaved down to a long mohawk. She's nude, save for the hot poker in her right hand and the shield in her left, which jingles with every step she takes thanks to the cell keys beneath it.");
 
 			this.temperment = 3;
 			//Regular attack

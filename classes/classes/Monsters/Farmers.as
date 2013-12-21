@@ -13,11 +13,8 @@ package classes.Monsters
 		public function Farmers(mainClassPtr:*) 
 		{
 			super(mainClassPtr);
-			this.short="farmers";
-			this.imageName="farmers";
+			init1Names("the ", "farmers", "farmers", "This is a group of thirty angry villagers, almost all human-looking but for the tiny horn-like protrusions growing from their heads and the white fuzz that almost passes off as hair.  They are all armed with pitchforks or other crude farming tools they use in their everyday task.  Rebecc is staring from behind them with horrified eyes at the combat, paralyzed by the sudden turn of events.");
 			this.plural = true;
-			this.long = "This is a group of thirty angry villagers, almost all human-looking but for the tiny horn-like protrusions growing from their heads and the white fuzz that almost passes off as hair.  They are all armed with pitchforks or other crude farming tools they use in their everyday task.  Rebecc is staring from behind them with horrified eyes at the combat, paralyzed by the sudden turn of events.";
-			this.a ="the ";
 
 			this.temperment = 3;
 			//Regular attack

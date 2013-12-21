@@ -16,7 +16,7 @@
 
 		public function GenericMonstah(mainClassPtr:*) 
 		{
-			
+			super(mainClassPtr);
 			trace("GenericMonstah Constructor!");
 		
 			

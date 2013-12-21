@@ -18,11 +18,7 @@
 		{
 			super(mainClassPtr);
 			trace("TentacleBeast Constructor!");
-			this.short="tentacle beast";
-			this.imageName="tentaclebeast";
-
-			this.long = "You see the massive, shambling form of the tentacle beast before you.  Appearing as a large shrub, it shifts its bulbous mass and reveals a collection of thorny tendrils and cephalopodic limbs.";
-			this.a ="the ";
+			init1Names("the ", "tentacle beast", "tentaclebeast", "You see the massive, shambling form of the tentacle beast before you.  Appearing as a large shrub, it shifts its bulbous mass and reveals a collection of thorny tendrils and cephalopodic limbs.");
 
 			this.temperment = 3;
 			//Regular attack

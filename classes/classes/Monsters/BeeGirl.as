@@ -17,11 +17,7 @@
 		public function BeeGirl(mainClassPtr:*) 
 		{
 			super(mainClassPtr);
-			this.short="bee-girl";
-			this.imageName="beegirl";
-
-			this.long = "A bee-girl buzzes around you, filling the air with intoxicatingly sweet scents and a buzz that gets inside your head.  She has a humanoid face with small antennae, black chitin on her arms and legs that looks like shiny gloves and boots, sizable breasts, and a swollen abdomen tipped with a gleaming stinger.";
-			this.a ="a ";
+			init1Names("a ", "bee-girl", "beegirl", "A bee-girl buzzes around you, filling the air with intoxicatingly sweet scents and a buzz that gets inside your head.  She has a humanoid face with small antennae, black chitin on her arms and legs that looks like shiny gloves and boots, sizable breasts, and a swollen abdomen tipped with a gleaming stinger.");
 
 			this.temperment = 3;
 			this.special1 = 5036;

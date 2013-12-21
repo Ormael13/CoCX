@@ -16,17 +16,14 @@
 	{
 		
 
-		public function Minotaur(mainClassPtr:*) 
+		public function Minotaur(mainClassPtr:*,hairColor:String)
 		{
 			super(mainClassPtr);
 			trace("Minotaur Constructor!");
 			trace(mainClassPtr.flags);
 
-			this.short                                 = "minotaur";
-			this.imageName                             = "minotaur";
-			this.plural                                = false;
-			this.long                                  = "An angry-looking minotaur looms over you.  Covered in shaggy " + this.hairColor + " fur, the beast is an imposing sight.  Wearing little but an obviously distended loincloth, he is clearly already plotting his method of punishment.  Like most minotaurs he has hooves, a cow-like tail and face, prominent horns, and impressive musculature.  <b>This minotaur seems to have found a deadly looking axe somewhere!</b>";
-			this.a                                     = "the ";
+			init1Names("the ","minotaur","minotaur","An angry-looking minotaur looms over you.  Covered in shaggy " + hairColor + " fur, the beast is an imposing sight.  Wearing little but an obviously distended loincloth, he is clearly already plotting his method of punishment.  Like most minotaurs he has hooves, a cow-like tail and face, prominent horns, and impressive musculature.  <b>This minotaur seems to have found a deadly looking axe somewhere!</b>");
+			this.hairColor = hairColor;
 			this.temperment                            = 1;
 			this.special1                              = 5029;
 			this.pronoun1                              = "he";
@@ -84,8 +81,6 @@
 			//3 - cowface
 			this.faceType                              = FACE_COW_MINOTAUR;
 			this.wingDesc                              = "non-existant";
-
-			this.wingType                              = WING_TYPE_NONE;
 
 			this.lowerBody                             = LOWER_BODY_TYPE_HOOFED;
 

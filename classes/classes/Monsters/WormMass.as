@@ -18,11 +18,8 @@
 		{
 			super(mainClassPtr);
 			trace("WormMass Constructor!");
-			this.short="worms";
-			this.imageName="worms";
+			init1Names("the ","worms","worms","Before you stands the horrid mass of worms. It has shifted itself and now takes the shape of a humanoid composed completely of the worms in the colony. Its vaguely human shape lumbers towards you in a clearly aggressive manner.");
 			this.plural = true;
-			this.long = "Before you stands the horrid mass of worms. It has shifted itself and now takes the shape of a humanoid composed completely of the worms in the colony. Its vaguely human shape lumbers towards you in a clearly aggressive manner.";
-			this.a ="the ";
 
 			this.temperment = 3;
 			//Regular attack

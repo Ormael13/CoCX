@@ -5576,7 +5576,7 @@ public function startCombat(monsterNum:Number):void {
 		monster = new Jojo(this);
 	}
 	if(monsterNum == 4) {
-		monster = new Minotaur(this);
+		monster = new Minotaur(this,monster.hairColor);
 	}
 	//Fertile-Caste Bee
 	if(monsterNum == 5) {
@@ -5870,6 +5870,12 @@ public function eMaxHP():Number {
 	return monster.tou * 2 + 50 + monster.bonusHP;
 }
 public function display():void {
+	if (!monster.fullyInit()){
+		outputText("<B>/!\\BUGMonster is not fully initialized! <u>Missing phases: ");
+		for (var i:int=0; i<monster.initsCalled.length; i++)
+			if (!monster.initsCalled[i]) outputText((i+1)+" ");
+		outputText("</u></b>");
+	}
 	var percent:String = "";
 	var math:Number = monster.HP/eMaxHP();
 	if(monster.short == "worms") math = monster.HP/40;

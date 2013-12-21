@@ -18,15 +18,7 @@
 		{
 			super(mainClassPtr);
 			trace("SandWitch Constructor!");
-			this.short                          = "sand witch";
-			if (mainClassPtr.silly())
-				this.imageName                  = "sandwidch";
-			else
-				this.imageName                  = "sandwitch";
-
-			this.plural                         = false;
-			this.long                           = "A sand witch appears to be totally human, an oddity in this strange land.  She has dirty blonde hair and a very tanned complexion, choosing to cover most of her body with robes of the same color as the desert sands, making her impossible to spot from afar.";
-			this.a                              = "the ";
+			init1Names("the ","sand witch",mainClassPtr.silly()?"sandwidch":"sandwitch","A sand witch appears to be totally human, an oddity in this strange land.  She has dirty blonde hair and a very tanned complexion, choosing to cover most of her body with robes of the same color as the desert sands, making her impossible to spot from afar.");
 			this.temperment                     = 1;
 			this.special1                       = 5020;
 
@@ -66,10 +58,8 @@
 			this.hairColor                      = "sandy-blonde";
 			this.hairLength                     = 15;
 
-			this.skinType                       = SKIN_TYPE_PLAIN;
 			this.skinTone                       = "bronzed";
 			this.skinDesc                       = "skin";
-			this.lowerBody                      = LOWER_BODY_TYPE_HUMAN;
 
 			this.hipRating                      = 10;
 

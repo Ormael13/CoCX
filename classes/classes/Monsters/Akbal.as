@@ -1,9 +1,9 @@
-﻿package classes.Monsters 
+﻿package classes.Monsters
 {
 	import classes.Creature;
 	import classes.Monster;
 	import classes.CockTypesEnum;
-	
+
 	/**
 	 * ...
 	 * @author Fake-Name
@@ -12,17 +12,13 @@
 
 	public class Akbal extends Monster
 	{
-		
 
-		public function Akbal(mainClassPtr:*) 
+
+		public function Akbal(mainClassPtr:*)
 		{
 			super(mainClassPtr);
 			trace("Akbal Constructor!");
-			this.short="Akbal";
-			this.imageName="akbal";
-
-			this.long = "Akbal, 'God of the Terrestrial Fire', circles around you. His sleek yet muscular body is covered in tan fur, with dark spots that seem to dance around as you look upon them.  His mouth holds two ivory incisors that glint in the sparse sunlight as his lips tremble to the sound of an unending growl.  Each paw conceals lethal claws capable of shredding men and demons to ribbons.  His large and sickeningly alluring bright green eyes promise unbearable agony as you look upon them.";
-			this.a ="";
+			init1Names("", "Akbal", "akbal", "Akbal, 'God of the Terrestrial Fire', circles around you. His sleek yet muscular body is covered in tan fur, with dark spots that seem to dance around as you look upon them.  His mouth holds two ivory incisors that glint in the sparse sunlight as his lips tremble to the sound of an unending growl.  Each paw conceals lethal claws capable of shredding men and demons to ribbons.  His large and sickeningly alluring bright green eyes promise unbearable agony as you look upon them.");
 
 			this.temperment = 1;
 			this.special1 = 5125;

@@ -14,11 +14,7 @@ package classes.Monsters
 		public function Ember(mainClassPtr:*) 
 		{
 			super(mainClassPtr);
-			this.short="Ember";
-			this.imageName="ember";
-
-			this.long = "You are currently 'battling' Ember, the dragon, in a playfight.  At least, that was the intention.  The way " + mainClassPtr.emberMF("he","she") + " lashes "+ mainClassPtr.emberMF("his","her") + " tail along the ground, with claws spread and teeth bared ferociously, makes you wonder.";
-			this.a =" ";
+			init1Names(" ", "Ember", "ember", "You are currently 'battling' Ember, the dragon, in a playfight.  At least, that was the intention.  The way " + mainClassPtr.emberMF("he", "she") + " lashes " + mainClassPtr.emberMF("his", "her") + " tail along the ground, with claws spread and teeth bared ferociously, makes you wonder.");
 
 			this.temperment = 3;
 			//Regular attack
