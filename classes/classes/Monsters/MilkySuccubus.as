@@ -15,6 +15,7 @@ package classes.Monsters
 			init1Names("the ", "milky succubus", "milkysuccubus", "You are fighting a milky, cow-like succubus.  She stands about seven feet tall and is hugely voluptuous, with breasts three times the size of her head, tipped with a cluster of four obscenely teat-like nipples.  Her hips flare out into an exaggerated hourglass shape, with a long tail tipped with a fleshy arrow-head spade that waves above her spankable butt.  A small cowbell is tied at the base of the arrow-head with a cute little ribbon.  Wide, cow-like horns, easily appropriate for a minotaur, rise from her head, and she flicks bovine ears about the sides of her head whilst sashaying from side to side on demonic, high-heeled feet.  Her skin is a vibrant purple with splotches of shiny black here and there, including one large spot covering her right eye.  She's using a leather whip as a weapon.");
 			init2Female(VAGINA_WETNESS_SLAVERING,VAGINA_LOOSENESS_NORMAL,300);
 			this.cumMultiplier = 3;
+			init3BreastRows("G");
 
 			this.temperment = 3;
 			//Regular attack
@@ -73,8 +74,6 @@ package classes.Monsters
 			this.hipRating = 10;
 
 			this.buttRating = 9;
-			this.createBreastRow();
-			this.breastRows[0].breastRating = 15;
 			this.ass.analLooseness = 4;
 			this.ass.analWetness = 5;			
 		}

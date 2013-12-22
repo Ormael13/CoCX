@@ -16,6 +16,7 @@ package classes.Monsters
 			super(mainClassPtr);
 			init1Names("a ", "satyr", "satyr", "From the waist up, your opponent is perfectly human, save his curling, goat-like horns and his pointed, elven ears.  His muscular chest is bare and glistening with sweat, while his coarsely rugged, masculine features are contorted into an expression of savage lust.  Looking at his waist, you notice he has a bit of a potbelly, no doubt the fruits of heavy drinking, judging by the almost overwhelming smell of booze and sex that emanates from him.  Further down you see his legs are the coarse, bristly-furred legs of a bipedal goat, cloven hooves pawing the ground impatiently, sizable manhood swaying freely in the breeze.");
 			init2Male(new Cock(rand(13) + 14,1.5 + rand(20)/2,CockTypesEnum.HUMAN),	2,2 + rand(13),1.5,mainClassPtr.player.ballSize * 10);
+			init3BreastRows(0);
 
 			this.temperment = 1;
 			this.special1 = 5029;
@@ -68,9 +69,6 @@ package classes.Monsters
 
 			this.buttRating = 5;
 			//Create imp sex attributes
-			this.createBreastRow();
-			this.breastRows[0].breastRating = 0;
-			this.breastRows[0].nipplesPerBreast = 1;
 			this.ass.analLooseness = 4;
 			this.ass.analWetness = 1;
 			this.createStatusAffect("Bonus aCapacity",20,0,0,0);			

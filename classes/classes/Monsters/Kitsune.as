@@ -30,6 +30,7 @@ package classes.Monsters
 						2,2 + rand(13),1.5,mainClassPtr.player.ballSize * 10);
 			}
 			init2Female(VAGINA_WETNESS_SLICK,VAGINA_LOOSENESS_NORMAL,20);
+			init3BreastRows("D");
 
 			this.temperment = 1;
 			this.special1 = 5029;
@@ -78,12 +79,8 @@ package classes.Monsters
 
 			this.buttRating = 5;
 			//Create imp sex attributes
-			this.createBreastRow();
-			this.breastRows[0].breastRating = 4;
-			this.breastRows[0].nipplesPerBreast = 1;
 			this.ass.analLooseness = 1;
 			this.ass.analWetness = 1;
-			this.createStatusAffect("Bonus vCapacity", 20, 0, 0, 0);
 			this.createStatusAffect("Bonus aCapacity", 20, 0, 0, 0);
 		}
 

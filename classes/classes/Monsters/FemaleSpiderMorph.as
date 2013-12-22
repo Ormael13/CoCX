@@ -14,6 +14,7 @@ package classes.Monsters
 			super(mainClassPtr);
 			init1Names("the ", "female spider-morph", "femalespidermorph", "The female spider-morph is completely nude, save for her thigh-high stockings and forearm-length gloves, which upon closer inspection, appear to be actually be part of her body - her exoskeleton.  Her exposed skin is pale as the full moon, save for the dusky skin of her nipples and the black-skinned delta of her sex.  Her breasts and ass are both full and well-rounded, and just above her ass-cheeks there's a bulbous spider-abdomen.  The spider-girl is currently eyeing you with a strange expression and her fangs bared.");
 			init2Female(VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_LOOSE, 40);
+			init3BreastRows("E+");
 
 			this.temperment = 2;
 			//Lusty teases
@@ -68,8 +69,6 @@ package classes.Monsters
 
 			this.buttRating = 9;
 			//Create goblin sex attributes
-			this.createBreastRow();
-			this.breastRows[0].breastRating = 8;
 			this.ass.analLooseness = 0;
 			this.createStatusAffect("Bonus aCapacity",30,0,0,0);
 			this.ass.analWetness = 0;			

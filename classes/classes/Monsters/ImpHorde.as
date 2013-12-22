@@ -1,4 +1,4 @@
-﻿﻿package classes.Monsters 
+﻿package classes.Monsters
 {
 	import classes.Cock;
 	import classes.Creature;
@@ -21,6 +21,7 @@
 			trace("ImpHorde Constructor!");
 			init1Names("the ","imp horde","impmob","Imps of all shapes and sizes fill the room around you, keeping you completely surrounded by their myriad forms.  You can see more than a few sporting disproportionate erections, and there's even some with exotic dog-dicks, horse-pricks, and the odd spiny cat-cock.  Escape is impossible, you'll have to fight or seduce your way out of this one!");
 			init2Male(new Cock(12,2));
+			init3BreastRows(0);
 			this.plural = true;
 
 			this.temperment = 2;
@@ -75,8 +76,6 @@
 
 			this.buttRating = 2;
 			//Create goblin sex attributes
-			this.createBreastRow();
-			this.breastRows[0].breastRating = 0;
 			this.ass.analLooseness = 1;
 			this.createStatusAffect("Bonus aCapacity",10,0,0,0);
 			this.ass.analWetness = 0;

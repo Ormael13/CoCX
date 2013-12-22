@@ -26,6 +26,7 @@ package classes.Monsters
 							}[mainClassPtr.flags[kFLAGS.HELSPAWN_WEAPON]] +
 							".  Pacing around you, the well-built young warrior intently studies her mentor's defenses, readying for your next attack.");
 			init2Female(VAGINA_WETNESS_NORMAL, VAGINA_LOOSENESS_NORMAL, 85);
+			init3BreastRows("E+");
 
 			this.temperment = 2;
 			//Lusty teases
@@ -82,8 +83,6 @@ package classes.Monsters
 
 			this.buttRating = 9;
 			//Create goblin sex attributes
-			this.createBreastRow();
-			this.breastRows[0].breastRating = 8;
 			this.ass.analLooseness = 0;
 			this.createStatusAffect("Bonus aCapacity", 85, 0, 0, 0);
 			this.ass.analWetness = 0;

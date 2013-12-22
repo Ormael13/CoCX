@@ -27,6 +27,7 @@ package classes.Monsters
 			init1Names("the ", "corrupted drider", "corrupteddrider", _long);
 			init2Male(new Cock(9,2));
 			init2Female(VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_GAPING, 70, true);
+			init3BreastRows("DD");
 
 			if (pierced) {
 				this.nipplesPierced = 1;
@@ -93,8 +94,6 @@ package classes.Monsters
 
 			this.buttRating = 9;
 			//Create goblin sex attributes
-			this.createBreastRow();
-			this.breastRows[0].breastRating = 5;
 			this.ass.analLooseness = 1;
 			this.createStatusAffect("Bonus aCapacity", 70, 0, 0, 0);
 			this.ass.analWetness = 0;

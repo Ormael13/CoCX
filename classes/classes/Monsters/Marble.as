@@ -1,4 +1,4 @@
-﻿﻿package classes.Monsters 
+﻿package classes.Monsters
 {
 	import classes.Creature;
 	import classes.Monster;
@@ -20,6 +20,7 @@
 			trace("Marble Constructor!");
 			init1Names("", "Marble", "marble", "Before you stands a female humanoid with numerous cow features, such as medium-sized cow horns, cow ears, and a cow tail.  She is very well endowed, with wide hips and a wide ass.  She stands over 6 feet tall.  She is using a large two handed hammer with practiced ease, making it clear she is much stronger then she may appear to be.");
 			init2Female(VAGINA_WETNESS_NORMAL,VAGINA_LOOSENESS_NORMAL);
+			init3BreastRows("F");
 
 			this.temperment = 2;
 			//Regular attack
@@ -71,8 +72,6 @@
 
 			this.buttRating = 8;
 			//Create goblin sex attributes
-			this.createBreastRow();
-			this.breastRows[0].breastRating = 11;
 			this.ass.analLooseness = 0;
 			this.ass.analWetness = 0;
 

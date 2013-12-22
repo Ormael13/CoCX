@@ -19,6 +19,7 @@ package classes.Monsters
 			// Not sure if I agree with this, I can imagine the little fuckers abusing the
 			// shit out of any potions they can get their hands on.
 			init2Male(new Cock(rand(2)+11,2.5,CockTypesEnum.DEMON),2,1,3,20);
+			init3BreastRows([0,0]);
 
 			this.temperment = 1;
 			this.special1 = 5019;
@@ -70,9 +71,6 @@ package classes.Monsters
 
 			this.buttRating = 2;
 			//Create imp sex attributes
-			this.createBreastRow();
-			this.breastRows[0].breastRating = 0;
-			this.breastRows[0].nipplesPerBreast = 0;
 			this.ass.analLooseness = 4;
 			this.ass.analWetness = 1;			
 		}

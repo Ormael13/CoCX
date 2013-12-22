@@ -14,6 +14,7 @@ package classes.Monsters
 			super(mainClassPtr);
 			init1Names("the ", "plain girl", "shouldra", "Her face has nothing overly attractive about it; a splash of freckles flits across her cheeks, her brows are too strong to be considered feminine, and her jaw is a tad bit square. Regardless, the features come together to make an aesthetically pleasing countenance, framed by a stylish brown-haired bob. Her breasts are obscured by her grey, loose-fitting tunic, flowing down to reach the middle of her thigh. Her legs are clad in snug, form-fitting leather breeches, and a comfortable pair of leather shoes shield her soles from the potentially harmful environment around her.");
 			init2Female(VAGINA_WETNESS_WET,VAGINA_LOOSENESS_NORMAL,40,true);
+			init3BreastRows("D");
 
 			this.temperment = 1;
 
@@ -58,9 +59,6 @@ package classes.Monsters
 
 			this.buttRating = 5;
 			//Create imp sex attributes
-			this.createBreastRow();
-			this.breastRows[0].breastRating = 4;
-			this.breastRows[0].nipplesPerBreast = 1;
 
 			this.ass.analLooseness = 1;
 			this.ass.analWetness = 0;

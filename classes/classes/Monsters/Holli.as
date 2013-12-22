@@ -20,6 +20,7 @@ package classes.Monsters
 			this.cumMultiplier = 3;
 			this.hoursSinceCum = 20;
 			this.gender = 2;
+			init3BreastRows([7,1]);
 
 			this.temperment = 2;
 			//Lusty teases
@@ -67,9 +68,6 @@ package classes.Monsters
 
 			this.buttRating = 8;
 			//Create imp sex attributes
-			this.createBreastRow();
-			this.breastRows[0].breastRating = 7;
-			this.breastRows[0].nipplesPerBreast = 1;
 			this.ass.analLooseness = 1;
 			this.ass.analWetness = 1;
 		}

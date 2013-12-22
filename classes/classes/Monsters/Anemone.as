@@ -17,6 +17,7 @@ package classes.Monsters
 			init1Names("the ", "anemone", "anemone", "The anemone is a blue androgyne humanoid of medium height and slender build, with colorful tentacles sprouting on her head where hair would otherwise be.  Her feminine face contains two eyes of solid color, lighter than her skin.  Two feathery gills sprout from the middle of her chest, along the line of her spine and below her collarbone, and drape over her pair of small B-cup breasts.  Though you wouldn't describe her curves as generous, she sways her girly hips back and forth in a way that contrasts them to her slim waist quite attractively.  Protruding from her groin is a blue shaft with its head flanged by diminutive tentacles, and below that is a dark-blue pussy ringed by small feelers.  Further down are a pair of legs ending in flat sticky feet; proof of her aquatic heritage.  She smiles broadly and innocently as she regards you from her deep eyes.");
 			init2Male(new Cock(7,1,CockTypesEnum.ANEMONE));
 			init2Female(VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_LOOSE, 5);
+			init3BreastRows("E");
 
 			this.temperment = 2;
 			//Lusty teases
@@ -66,8 +67,6 @@ package classes.Monsters
 
 			this.buttRating = 6;
 			//Create goblin sex attributes
-			this.createBreastRow();
-			this.breastRows[0].breastRating = 7;
 			this.ass.analLooseness = 2;
 			this.createStatusAffect("Bonus aCapacity",10,0,0,0);
 			this.ass.analWetness = 0;

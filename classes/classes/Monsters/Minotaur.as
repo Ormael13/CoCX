@@ -1,4 +1,4 @@
-﻿﻿package classes.Monsters 
+﻿package classes.Monsters
 {
 	import classes.Creature;
 	import classes.Monster;
@@ -28,6 +28,7 @@
 			init2Male(new Cock(rand(13) + 24,2 + rand(3),CockTypesEnum.HORSE),2,2+rand(13),1.5,mainClassPtr.player.ballSize * 10);
 			if(this.ballSize > 4)
 				 this.long += "  Barely visible below the tattered shreds of loincloth are " + Appearance.ballsDescription(true, true, this) + ", swollen with the minotaur's long pent-up need.";
+			init3BreastRows(0);
 			this.hairColor = hairColor;
 			this.temperment                            = 1;
 			this.special1                              = 5029;
@@ -88,9 +89,6 @@
 			this.hipRating                             = 4;
 			this.buttRating                            = 5;
 			//Create imp sex attributes
-			this.createBreastRow();
-			this.breastRows[0].breastRating            = 0;
-			this.breastRows[0].nipplesPerBreast        = 1;
 			this.ass.analLooseness                     = 4;
 			this.ass.analWetness                       = 1;
 			this.createStatusAffect("Bonus aCapacity",30,0,0,0);

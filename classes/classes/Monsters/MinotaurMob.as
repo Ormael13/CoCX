@@ -17,6 +17,7 @@ package classes.Monsters
 			super(mainClassPtr);
 			init1Names("the ","minotaur"+(mainClassPtr.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] < 20?" gang":" tribe"),"minotaurmob",mainClassPtr.Num2Text(mainClassPtr.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326]) + " shaggy beastmen stand around you in a loose circle.  Their postures aren't exactly threatening.  If anything, they seem to be standing protectively around you, as if their presence would somehow shelter you from the rest of the mountain.  All of their features share a brotherly similarity, though there's still a fair bit of differences between your minotaur sons.  One of them is a head above the rest, a massive hulk of muscle so big he seems to dwarf the rest.  In stark contrast, a feminine minitaur keeps his distance in the rear."+(mainClassPtr.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] >= 20?"  The tribe constantly makes hoots and cat-calls, fully expecting to be fucking you soon.":""),true);
 			init2Male(new Cock(rand(13) + 24,2 + rand(3),CockTypesEnum.HORSE),2,2 + rand(13),1.5,mainClassPtr.player.ballSize * 10);
+			init3BreastRows(0);
 
 			this.temperment = 1;
 			this.special1 = 5029;
@@ -72,9 +73,6 @@ package classes.Monsters
 
 			this.buttRating = 5;
 			//Create imp sex attributes
-			this.createBreastRow();
-			this.breastRows[0].breastRating = 0;
-			this.breastRows[0].nipplesPerBreast = 1;
 			this.ass.analLooseness = 4;
 			this.ass.analWetness = 1;
 			this.createStatusAffect("Bonus aCapacity",30,0,0,0);			

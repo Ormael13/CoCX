@@ -1,4 +1,4 @@
-﻿﻿package classes.Monsters 
+﻿package classes.Monsters
 {
 	import classes.Creature;
 	import classes.Monster;
@@ -19,7 +19,9 @@
 			super(mainClassPtr);
 			trace("WormMass Constructor!");
 			init1Names("the ","worms","worms","Before you stands the horrid mass of worms. It has shifted itself and now takes the shape of a humanoid composed completely of the worms in the colony. Its vaguely human shape lumbers towards you in a clearly aggressive manner.",true);
-			this.gender = 1;
+			init2Genderless();
+			this.cumMultiplier = 3;
+			init3BreastRows();
 
 			this.temperment = 3;
 			//Regular attack
@@ -64,8 +66,6 @@
 			this.buttRating = 0;
 			//Create imp sex attributes
 
-			this.cumMultiplier = 3;
-			this.ballSize = 0;
 			this.ass.analLooseness = 0;
 			this.ass.analWetness = 0;
 

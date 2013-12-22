@@ -1,4 +1,4 @@
-﻿﻿package classes.Monsters 
+﻿package classes.Monsters
 {
 	import classes.Creature;
 	import classes.Monster;
@@ -68,6 +68,7 @@
 			super(mainClassPtr);
 			init1Names("the ", "pod", "pod", "");
 			init2Genderless();
+			init3BreastRows();
 
 			this.temperment = 2;
 			//Uber

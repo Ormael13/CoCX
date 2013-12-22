@@ -1,4 +1,4 @@
-﻿﻿package classes.Monsters 
+﻿package classes.Monsters
 {
 	import classes.Creature;
 	import classes.Monster;
@@ -20,6 +20,8 @@
 			trace("GenericMonstah Constructor!");
 			init1Names("the ", "fetish cultist", "fetishcultist", "The woman across from you has her eyes closed, her hands joined, and seems to be chanting under her breath. She is wearing a religious outfit that closely hugs her curvacious shape, with a skirt so short that you can clearly see her pussy's lips.\n\nShe has clealy lost her grasp on sanity, and filled the void with pure perversion.");
 			init2Female(VAGINA_LOOSENESS_GAPING, VAGINA_WETNESS_WET);
+			this.cumMultiplier = 3;
+			init3BreastRows("DD");
 
 			this.temperment = 3;
 			//Regular attack
@@ -66,10 +68,6 @@
 			this.buttRating = 8;
 			//Create imp sex attributes
 
-			this.createBreastRow();
-			this.breastRows[0].breastRating = 5;
-			this.cumMultiplier = 3;
-			this.ballSize = 0;
 			this.ass.analLooseness = 2;
 			this.ass.analWetness = 1;
 

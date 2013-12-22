@@ -14,6 +14,7 @@ package classes.Monsters
 			super(mainClassPtr);
 			init1Names("", "Amily", "amily", "You are currently fighting Amily. The mouse-morph is dressed in rags and glares at you in rage, knife in hand. She keeps herself close to the ground, ensuring she can quickly close the distance between you two or run away.");
 			init2Female(VAGINA_WETNESS_NORMAL, VAGINA_LOOSENESS_NORMAL, 48);
+			init3BreastRows("C");
 
 			this.temperment = 0;
 			//Lusty teases
@@ -62,8 +63,6 @@ package classes.Monsters
 
 			this.buttRating = 2;
 			//Create goblin sex attributes
-			this.createBreastRow();
-			this.breastRows[0].breastRating = 3;
 			this.ass.analLooseness = 0;
 			this.ass.analWetness = 0;			
 		}

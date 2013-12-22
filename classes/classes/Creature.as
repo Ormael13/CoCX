@@ -2754,11 +2754,13 @@ package classes
 		}
 		
 		//create a row of breasts
-		public function createBreastRow():Boolean
+		public function createBreastRow(size:Number=0,nipplesPerBreast:Number=1):Boolean
 		{
 			if (breastRows.length >= 10)
 				return false;
 			var newBreastRow:BreastRowClass = new BreastRowClass();
+			newBreastRow.breastRating = size;
+			newBreastRow.nipplesPerBreast = nipplesPerBreast;
 			breastRows.push(newBreastRow);
 			return true;
 		}

@@ -1,4 +1,4 @@
-﻿﻿package classes.Monsters 
+﻿package classes.Monsters
 {
 	import classes.Creature;
 	import classes.Monster;
@@ -22,6 +22,7 @@
 			init2Female(VAGINA_WETNESS_WET,VAGINA_LOOSENESS_LOOSE);
 			this.cumMultiplier                              = 3;
 			this.hoursSinceCum                              = 20;
+			init3BreastRows(["DD"],["DD"]);
 
 			this.temperment                     = 1;
 			this.special1                       = 5020;
@@ -64,12 +65,6 @@
 			this.hipRating                      = 10;
 
 			this.buttRating                                 = 8;
-			this.createBreastRow();
-			this.createBreastRow();
-			this.breastRows[0].breastRating                 = 5;
-			this.breastRows[0].nipplesPerBreast             = 1;
-			this.breastRows[1].breastRating                 = 5;
-			this.breastRows[1].nipplesPerBreast             = 1;
 			this.ass.analLooseness                          = 1;
 			this.ass.analWetness                            = 1;
 

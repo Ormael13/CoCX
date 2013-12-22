@@ -16,6 +16,7 @@ package classes.Monsters
 			init2Female(VAGINA_WETNESS_WET,VAGINA_LOOSENESS_LOOSE);
 			this.cumMultiplier = 3;
 			this.hoursSinceCum = 20;
+			init3BreastRows(["DD"],["DD"]);
 
 			this.temperment = 3;
 			//Regular attack
@@ -68,12 +69,6 @@ package classes.Monsters
 
 			this.buttRating = 8;
 			//Create imp sex attributes
-			this.createBreastRow();
-			this.breastRows[0].breastRating = 5;
-			this.breastRows[0].nipplesPerBreast = 1;
-			this.createBreastRow();
-			this.breastRows[1].breastRating = 5;
-			this.breastRows[1].nipplesPerBreast = 1;
 			this.createVagina();
 			this.ass.analLooseness = 1;
 			this.ass.analWetness = 1;			

@@ -74,7 +74,13 @@
 			//// 2.4. To create a hermaphrodite, call both init2Male and init2Female.
 			////      Pronouns (he/she) will be taken from last call
 
-			//// 3. Body features
+			//// 3. Breasts
+			//// Each row is array of [size=0,nipplesPerBreast=1]
+			//// Size could be number, name (see BREAST_CUP_NAMES), or short name
+			//init3BreastRows([0,0]); // flat chest, no nipples
+			//init3BreastRows(["flat"]); // manly chest with nipples
+			//init3BreastRows(["DD+"],["DD"],["D"]); // 3 rows of breasts
+			//init3BreastRows([10,2]); // huge boobs with 2 nipples per breasts
 
 			/*this.temperment = 2;
 			//Lusty teases
@@ -124,13 +130,11 @@
 
 			this.buttRating = 6;
 			//Create goblin sex attributes
-			this.createBreastRow();
-			this.breastRows[0].breastRating = 7;
 			this.ass.analLooseness = 4;
 			this.createStatusAffect("Bonus aCapacity",15,0,0,0);
 			this.ass.analWetness = 0;
 
-			this.XP = this.totalXP(mainClassPtr.player.level);
+			this.XP = this.totalXP(mainClassPtr.player.level);   */
 		}
 
 
@@ -318,11 +322,11 @@
 		/**
 		 * Inits a, short, imageName, long, plural
 		 */
-		protected function init1Names(a:String, short:String, imageName:String, long:String, plural:Boolean = false):void
+		protected function init1Names(a:String, _short:String, imageName:String, _long:String, plural:Boolean = false):void
 		{
-			this.short = short;
+			this.short = _short;
 			this.imageName = imageName;
-			this.long = long;
+			this.long = _long;
 			this.a = a;
 			this.plural = plural;
 			if (plural){
@@ -334,14 +338,16 @@
 		}
 
 		/**
-		 * Inits gender, pronouns. Overrides gender and pronouns set by init2Male and init2Female
+		 * Inits gender, pronouns. Overrides gender and pronouns set by init2Male and init2Female. Does not override pronouns if plural
 		 */
 		protected function init2Genderless(pronoun1:String="it",pronoun2:String="it",pronoun3:String="its"):void
 		{
 			this.gender = GENDER_NONE;
-			this.pronoun1 = pronoun1;
-			this.pronoun2 = pronoun2;
-			this.pronoun3 = pronoun3;
+			if (!this.plural){
+				this.pronoun1 = pronoun1;
+				this.pronoun2 = pronoun2;
+				this.pronoun3 = pronoun3;
+			}
 			this.initsCalled[1]=true;
 		}
 
@@ -405,6 +411,36 @@
 			}
 			genderCheck();
 			this.initsCalled[1]=true;
+		}
+
+		/**
+		 * Each row is [size=0,nipplesPerBreast=1]
+		 * Size could be number, name (see BREAST_CUP_NAMES), or short name like "A", "DD+"
+		 * To create single row with 1 nipples per breast, you can call init3BreastRows(size)
+		 */
+		protected function init3BreastRows(... rows):void{
+			if (rows.length>0){
+				if(! (rows[0] is Array)){
+					rows = [rows];
+				}
+				for (var i:int = 0; i<rows.length; i++){
+					var row:* = rows[i];
+					if (!(row is Array)) row = [row,1];
+					var size:Number;
+					if (row[0] is Number) size = row[0];
+					else if (row[0] is String) size = Appearance.breastCupInverse(row[0])
+					else {
+						trace("init3BreastRows.size is "+typeof(row[0]));
+						size = 0;
+					}
+					if (!(row[1] is Number)) {
+						trace("init3BreastRows.nipplesPerBreast is "+typeof(row[1]));
+						row[1] = 1;
+					}
+					createBreastRow(size,row[1]);
+				}
+			}
+			this.initsCalled[2] = true;
 		}
 	}
 }

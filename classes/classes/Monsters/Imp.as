@@ -1,4 +1,4 @@
-﻿﻿package classes.Monsters 
+﻿package classes.Monsters
 {
 	import classes.Cock;
 	import classes.Creature;
@@ -21,6 +21,7 @@
 			trace("Imp Constructor!");
 			init1Names("the ","imp","imp","An imp is short, only a few feet tall.  An unkempt mane of shaggy black hair hangs from his head, parted by two short curved horns.  His eyes are solid black, save for tiny red irises which glow with evil intent.  His skin is bright red, and unencumbered by clothing or armor, save for a small loincloth at his belt.  His feet are covered by tiny wooden sandals, and his hands tipped with sharp claws.  A pair of tiny but functional wings occasionally flap from his back.");
 			init2Male([new Cock(rand(2) + 11,2.5)]);
+			init3BreastRows([0,0]);
 			this.temperment                     = 1;
 			this.special1                       = 5019;
 			this.pronoun1                       = "he";
@@ -65,9 +66,6 @@
 			this.wingType                       = WING_TYPE_IMP;
 			this.buttRating                     = 2;
 
-			this.createBreastRow();
-			this.breastRows[0].breastRating     = 0;
-			this.breastRows[0].nipplesPerBreast = 0;
 
 		}
 

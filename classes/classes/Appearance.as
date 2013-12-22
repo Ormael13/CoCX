@@ -2115,5 +2115,38 @@
 			return descript;
 		}
 
+		public static const BREAST_CUP_NAMES:Array = [
+			"flat, manly breast",//0
+			//				1			2			3			4			5				6			7		8			9
+						"A-cup",	"B-cup",	"C-cup",	"D-cup",	"DD-cup",		"big DD-cup","E-cup","big E-cup","EE-cup",// 1-9
+			"big EE-cup","F-cup",	"big F-cup","FF-cup",	"big FF-cup","G-cup",		"big G-cup","GG-cup","big GG-cup","H-cup",//10-19
+			"big H-cup","HH-cup",	"big HH-cup","HHH-cup",	"I-cup",	"big I-cup",	"II-cup","big II-cup","J-cup","big J-cup",//20-29
+			"JJ-cup",	"big JJ-cup","K-cup",	"big K-cup","KK-cup",	"big KK-cup",	"L-cup","big L-cup","LL-cup","big LL-cup",//30-39
+			"M-cup",	"big M-cup","MM-cup",	"big MM-cup","MMM-cup",	"large MMM-cup","N-cup","large N-cup","NN-cup","large NN-cup",//40-49
+			"O-cup",	"large O-cup","OO-cup",	"large OO-cup","P-cup",	"large P-cup",	"PP-cup","large PP-cup","Q-cup","large Q-cup",//50-59
+			"QQ-cup",	"large QQ-cup","R-cup",	"large R-cup",	"RR-cup","large RR-cup","S-cup","large S-cup","SS-cup","large SS-cup",//60-69
+			"T-cup",	"large T-cup","TT-cup",	"large TT-cup",	"U-cup","large U-cup",	"UU-cup","large UU-cup","V-cup","large V-cup",//70-79
+			"VV-cup",	"large VV-cup","W-cup",	"large W-cup",	"WW-cup","large WW-cup","X-cup","large X-cup","XX-cup","large XX-cup",//80-89
+			"Y-cup",	"large Y-cup","YY-cup",	"large YY-cup",	"Z-cup","large Z-cup",	"ZZ-cup","large ZZ-cup","ZZZ-cup","large ZZZ-cup"//90-99
+		];
+		public static function breastCup(size:Number):String {
+			return BREAST_CUP_NAMES[Math.floor(size)]||BREAST_CUP_NAMES[BREAST_CUP_NAMES.length-1];
+		}
+		/**
+		 * Returns breast size from cup name.
+		 * Acceptable input: "flat","A","B","C","D","DD","DD+",... "ZZZ","ZZZ+" or exact match from BREAST_CUP_NAMES array
+		 */
+		public static function breastCupInverse(name:String,defaultValue:Number=0):Number{
+			if (name.length==0) return defaultValue;
+			if (name == "flat") return 0;
+			var big:Boolean = name.charAt(name.length-1)=="+";
+			if (big) name = name.substr(0,name.length-1);
+			for (var i:int=0; i<BREAST_CUP_NAMES.length; i++) {
+				if (name == BREAST_CUP_NAMES[i]) return i;
+				if (BREAST_CUP_NAMES[i].indexOf(name)==0) return i+(big?1:0);
+			}
+			return defaultValue;
+		}
+
 	}
 }

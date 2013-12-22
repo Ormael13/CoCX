@@ -16,6 +16,7 @@ package classes.Monsters
 			init2Female(VAGINA_WETNESS_DROOLING,VAGINA_LOOSENESS_NORMAL,40,true);
 			this.cumMultiplier = 1.5;
 			this.hoursSinceCum = mainClassPtr.player.ballSize * 10;
+			init3BreastRows("D");
 
 			this.temperment = 1;
 
@@ -68,9 +69,6 @@ package classes.Monsters
 
 			this.buttRating = 5;
 			//Create imp sex attributes
-			this.createBreastRow();
-			this.breastRows[0].breastRating = 4;
-			this.breastRows[0].nipplesPerBreast = 1;
 
 			this.ass.analLooseness = 3;
 			this.ass.analWetness = 0;

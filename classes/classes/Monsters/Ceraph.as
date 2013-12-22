@@ -1,4 +1,4 @@
-﻿﻿package classes.Monsters 
+﻿package classes.Monsters
 {
 	import classes.Cock;
 	import classes.Creature;
@@ -22,6 +22,7 @@
 			init1Names("", "Ceraph", "ceraph", "Ceraph the Omnibus is totally nude and reveling in it.  Her large yet perky breasts jiggle heavily against her chest as she moves.  The flawless purple skin of her twin mounds glistens with a thin sheen of sweat, inviting you to touch and rub your fingers along their slippery surface.  Her eyes are solid black, but convey a mix of amusement and desire, in spite of their alien appearance.  The demon's crotch is a combination of both genders – a drooling cunt topped with a thick demonic shaft, sprouting from where a clit should be.");
 			init2Male(new Cock(10,2,CockTypesEnum.DEMON));
 			init2Female(VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_GAPING, 20);
+			init3BreastRows("E");
 
 			this.temperment = 2;
 			//Lusty teases
@@ -71,8 +72,6 @@
 
 			this.buttRating = 6;
 			//Create goblin sex attributes
-			this.createBreastRow();
-			this.breastRows[0].breastRating = 7;
 			this.ass.analLooseness = 4;
 			this.createStatusAffect("Bonus aCapacity",15,0,0,0);
 			this.ass.analWetness = 0;

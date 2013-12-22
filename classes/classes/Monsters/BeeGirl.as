@@ -21,6 +21,7 @@
 			init2Female(VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_GAPING);
 			this.cumMultiplier = 1.5;
 			this.hoursSinceCum = 10 + rand(100);
+			init3BreastRows("DD");
 
 			this.temperment = 3;
 			this.special1 = 5036;
@@ -83,9 +84,6 @@
 
 			this.buttRating = 13;
 			//Create imp sex attributes
-			this.createBreastRow();
-			this.breastRows[0].breastRating = 5;
-			this.breastRows[0].nipplesPerBreast = 1;
 			this.ass.analLooseness = 4;
 			this.ass.analWetness = 1;
 			trace("BeeGirl Constructor!");
