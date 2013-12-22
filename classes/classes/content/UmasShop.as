@@ -1,4 +1,4 @@
-package classes.content 
+﻿package classes.content 
 {
 	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
@@ -1597,8 +1597,9 @@ package classes.content
 			if (player.hasCock()) // Has a dick
 			{
 				addButton(3, "Handjob", sexHandjob);
-				//addButton(4, "Get Blown", sexBlowjob); // Ehh, it's technically complete in the doc, but it reads pretty unfinished and I'm not a fan of it at all.
+				addButton(4, "Get Blown", sexGetABJFromDisMilfyLesboSlut);
 			}
+			addButton(9,"Back",buildCoreMenu);
 		}
 
 		/**
@@ -1863,7 +1864,184 @@ package classes.content
 			menu();
 			doNext(13);
 		}
+		//Needs Cock.
+		private function sexGetABJFromDisMilfyLesboSlut():void
+		{
+			//Aim for something right around the biggest she can take, otherwise just take smallest.
+			var x:int = player.cockThatFits(25);
+			if(x < 0) x = player.smallestCockIndex();
+			clearOutput();
+			outputText("Fidgeting in place, very much aware of the cum-filled cock");
+			if(player.cockTotal() > 1) outputText("s");
+			outputText(" in your pants, you ask whether Uma would be willing to give you a little intimate release?");
+			outputText("\n\nUma arches an eyebrow, \"<i>sorry, [name], but when it comes to cocks, my pussy and ass are both off-limits... I suppose that, for you, though, I could give you a blowjob - just because you’re my little Loppe’s special someone, though.</i>\"");
+			outputText("\n\nYou ");
+			if(player.lust >= 75) outputText("eagerly ");
+			outputText("tell her that would be plenty, and thank her for her consideration.  \"<i>Okay, follow me then.</i>\"  The mare leads you away, out her office and down the corridor towards the far back of the clinic. Her enticing equine tail swishes lazily side to side the entire way, an organic magnet for your roving eyes.  You follow closely in her wake, looking forward to her “special treatment” with such ardor that you give up on concealing the tenting mass under your [armor]. It makes walking a little more difficult, but the feeling of your length");
+			if(player.cockTotal() > 1) outputText("s");
+			outputText(" grinding and growing is well-worth the obvious discomfort.");
+			
+			outputText("\n\nThe room she leads you to is quite simple: wooden walls and floor, a couple of drains set in the boards that are probably for the more... fluid generous clientele, ");
+			if(urtaLove()) outputText("something that makes you wonder if Urta would like to come and take a spin here, ");
+			outputText("and a sizable bamboo table.  It's covered in a white cloth and has an upraised board with a hole in it that looks like it’s big enough to fit your head through.  It is the only piece of furniture in the room apart from a small cupboard in the corner. Though spartan in its layout, this odd chamber is quite comfortably warm.");
+			
+			outputText("\n\n\"<i>Strip, dear,</i>\" Uma says cheerfully while beginning to strip herself.  You need no further encouragement, eagerly getting naked ");
+			if(flags[kFLAGS.PC_FETISH] >= 1) {
+				outputText(", unable to resist either the tingle of lust that runs through you at being naked in front of Uma or the urge to flaunt your feminine physique for her own gratification.  Gathering your clothes up is a bit of an afterthought, but you make sure to bend over and proudly present your [butt]");
+				if(player.balls > 0) outputText(" and [balls]");
+				outputText(".");
+			}
+			else outputText(", gathering your clothes up in your arms as you do so.");
+			outputText("  Walking over to the cupboard, you find a couple of folded towels and ample space to stow your clothes.");
 
+			outputText("\n\n\"<i>Step aside, if you please</i>\" you hear Uma say from behind you as she approaches, clothes in hand.  You move over with a smile while she finds an empty spot to put her garments.  \"<i>Now... why don't get on my table so I can take a look at the problem.</i>\"");
+			
+			outputText("\n\nYou eagerly settle yourself onto her table as instructed, placing your head through the hole, [eachCock] jutting into the air and awaiting Uma’s mouth with anxious twitches.  You idly wonder how she’ll go about this...");
+			
+			outputText("\n\nThe motherly mare kneels before you, examining your shaft.  ");
+			//VARIANTS NEEDED
+			if(flags[kFLAGS.UMA_TIMES_SUCKED_YOU] < 2) outputText("It’s clear that she doesn’t really enjoy the notion that much, considering the way she’s looking at you.  \"<i>All right, let’s get this over with.</i>\"  ");
+			else if(flags[kFLAGS.UMA_TIMES_SUCKED_YOU] < 5) outputText("She actually seems to be smiling a little as she looks at you.  \"<i>All right, time to see if I can handle this brutish thing.</i>\"  ");
+			else outputText("It's clear that she doesn't mind doing this for you at all. In fact, she's even smiling down at you as she fondles you one-handed.  \"<i>Time to see if I can make you squirm as hard as Loppe does.</i>\"  ");
+			outputText("She opens her mouth wide and takes ");
+			if(player.cockTotal() == 1) outputText("your");
+			else outputText("a single");
+			outputText(" dick into her mouth, slurping on it.");
+			
+
+			outputText("\n\nIt's immediately apparent how her longer, equine-style face affords many advantages when it comes to oral pleasure.  Her capacitive mouth takes inch after inch after inch, long past when you would be normally threatening a gag-reflex, sliding you along her long, flat tongue as she goes.  Her efforts are far from expert, and you can tell that her heart isn't truly in this.  She stops her ministrations, adjusting her hair and saying, \"<i>Sorry dear.  I haven't gotten much practice at these.  They're not really my thing, normally");
+			if(flags[kFLAGS.UMA_TIMES_SUCKED_YOU] >= 2) outputText(", but I guess you're changing that, aren't you?");
+			else outputText(".");
+			outputText("</i>\"  Then, she playfully licks along the underside of your cock, putting that lengthy tongue to work. \"<i>");
+			if(flags[kFLAGS.UMA_TIMES_SUCKED_YOU] < 2) outputText("You don't taste bad, all things considered.");
+			else if(flags[kFLAGS.UMA_TIMES_SUCKED_YOU] < 5) outputText("I think I'm starting to get used to your taste, [name].");
+			else outputText("Mmmm….  Don't tell anyone, but I think I'm starting to like helping you like this.");
+			outputText("</i>\"");
+			
+			outputText("\n\nGrunting softly at her ministrations, you let your [hips] shiver as she passes over your " + cockHead(x) + " once more.  Her tightly sealed lips glide over your spit-slicked length at an even, nerve-tickling pace");
+			if(player.cocks[x].cockLength < 9) outputText(" until she hits your [pc.sheath]");
+			else outputText(" until she has her mouth as full as she can handle");
+			outputText(".  She holds you like that, letting you feel her hot breath wash over the [skinFurScales] of your crotch.  Her tongue wags back and forth underneath you, slipping and sliding against you. Inside her mouth, your " + cockDescript(x) + " twitches and jumps in her maw.  Beads of pre-cum are beading and dripping out onto her busy organ.");
+			
+			outputText("\n\nUma's shaft-muffled voice mumbles, \"<i>");
+			if(flags[kFLAGS.UMA_TIMES_SUCKED_YOU] < 2) outputText("Girls taste better.");
+			else if(flags[kFLAGS.UMA_TIMES_SUCKED_YOU] < 5) outputText("Not too bad.");
+			else outputText("Hmmm, give me more, [name].");
+			outputText("</i>\"");
+
+			//Bonus handjobbies?
+			if(player.cockTotal() > 1)
+			{
+				outputText("\n\nYou politely suggest she put ");
+				if(player.cockTotal() == 2) outputText("one of ");
+				outputText("her hands to work on your spare prick");
+				if(player.cockTotal() > 2) outputText("s");
+				outputText(".  The curvacious mare hums at the thought, inadvertently sending pleasant shockwaves through your length as she considers.  Making up her mind, ");
+				if(flags[kFLAGS.UMA_TIMES_SUCKED_YOU] < 3) outputText("perhaps thinking it will end this sooner");
+				else outputText("perhaps encouraged by the way you swell in her mouth");
+				outputText(", she wraps ");
+				if(player.cockTotal() == 2) outputText("one hand around your girthy tool and starts pumping");
+				else outputText("both hands around your girthy tools and starts pumping");
+				outputText(", stroking up and down with firm twists of her practiced hand");
+				if(player.cockTotal() > 2) outputText("s");
+				outputText(".  Her soft palm");
+				if(player.cockTotal() > 2) outputText("s are");
+				else outputText(" is");
+				outputText(" the perfect mate to your spare length");
+				if(player.cockTotal() > 2) outputText("s");
+				outputText(", and soon you are dribbling and dripping from all of your " + multiCockDescriptLight() + ".");
+			}
+			
+			outputText("\n\nWhile the steady pleasure her mouth and tongue gives you has you feeling very, very good, it isn't quite bringing you towards the orgasm you came here craving.  You suggest she begin to bob up and down on you. \"<i>Cocks need to feel like they're fucking something,</i>\" you ");
+			if(player.cor <= 33) outputText("pleasantly explain");
+			else if(player.cor <= 66) outputText("explain");
+			else outputText("harshly explain");
+			outputText(".  ");
+			if(flags[kFLAGS.UMA_TIMES_SUCKED_YOU] < 2) outputText("You can feel her nod in agreement through your pole, and soon after, she's plunging rhythmically up and down.");
+			else outputText("Before you can even finish, she's plunging up and down along your length, letting you know that she's learned this particular song and dance quite well under your tutelage.");
+			
+			outputText("\n\nYou give up a moan of pleasure as your [hips] lift off the table's coverings.  The building ecstasy within you is rolling around your abdomen like an ingot of molten metal, bubbling and ready to explode.  It's all you can do to stop yourself from thrashing against Uma's tongue in an effort to bring that release on as quickly as possible.  You steady yourself, and with a gasp of pleasure, feel [eachCock] swell, as big and hard as it can get without exploding from the pressure.  Uma slows her fucking motions and starts to suck with the languid blowjob, getting more and more pre-cum on her tongue with each slide down.  Quiet, excited noises slip out of your throat, one after another as you come to the very edge of orgasm.");
+			
+			//{Less than five blowjobs}
+			if(flags[kFLAGS.UMA_TIMES_SUCKED_YOU] < 5)
+			{
+				outputText("\n\nUma pulls off just as your flow of juices goes white and salty, the inevitable prelude to the first discharge of an orgasm.  A slightly sour expression is painted across her face from the sudden change and she looks on in shock as your length");
+				if(player.cockTotal() > 1) outputText("s erupt");
+				else outputText(" erupts");
+				outputText(".  Even though you are no longer enclosed in that wonderfully warm, wet hole, you still shoot long, powerful lances of cum.  Uma catches the first across her face before she can move. The second splatters across the breasts that once nursed Loppe, some even falling into the valley of her cleavage.");
+				if(player.cumQ() >= 500) outputText("  She gets out of the way after that, leaving you to lie there, spraying your seed like a perverted sprinkler.");
+				if(player.cumQ() >= 1500) outputText("  The massive cumsprays that land on you slowly slough off down towards the drains.  It's hard not to bliss at the sound of your loud noisily draining away.");
+			}
+			//{More than five blowjobs!}
+			else {
+				outputText("\n\nUma valiantly holds herself in place on your " + cockDescript(x) + ", just in time for the flow of your juices to turn white and salty, an inevitable prelude to the coming discharge of your orgasm.  She noisily slurps, emptying her mouth of precum to make room, and in the process, inadvertently provides you with even more impetus to unload.  ");
+				if(player.cumQ() <= 25) outputText("She dutifully swallows every drop of your average-sized load, her long tongue slipping and sliding around your shaft as she ensures it is completely cleaned.");
+				else if(player.cumQ() <= 100) 
+				{
+					outputText("She dutifully attempts to swallow every drop, but your load is a little bigger than average, and she's forced to let some of the frothy spit and jizz mixture wash back out over your length.");
+					if(player.balls > 0) outputText("  It rolls down to your [sack], coating it in warm, wet cum-shine.");
+				}
+				else {
+					outputText("She dutifully attempts to swallow, but your load is so massive that the first shot has her cheeks bulging.  She's used to dealing with you, though.  The canny mother relaxes the seal of her lips and begins to stroke you with her tongue once more, using your massive ejaculations as lubrication.  She pumps up and down, faster and faster, letting your jizz wash back out her lips and over your crotch, making this orgasm one of the biggest and messiest you've had in a while.");
+					if(player.cumQ() >= 1000) {
+						outputText("  By the time you finish shooting, the drains are noisily gurging as they struggle to handle the ");
+						if(player.cumQ() <= 2000) outputText("pool");
+						else if(player.cumQ() <= 30000) outputText("bathtub worth");
+						else outputText("lake");
+						outputText(" of semen you've produced.");
+					}
+					outputText("  Your crotch is absolutely glazed with the stuff.");
+				}
+				//Bonus dicks
+				if(player.cockTotal() > 1) {
+					outputText("\n\nAngled off to the side");
+					if(player.cockTotal() > 2) outputText("s");
+					outputText(", your other erection");
+					if(player.cockTotal() > 2) outputText("s release");
+					else outputText(" releases");
+					outputText(" all over the floor, fitfully sagging, then thickening with each shot.  ");
+					if(player.cockTotal() == 2) outputText("Its ");
+					else outputText("Their ");
+					outputText("lewd dance continues on in imitation of your main member's pleasure.  ");
+					if(player.cockTotal() == 2) outputText("It's ropes");
+					else outputText("Their ropes");
+					outputText(" aren't anywhere near as thick.");
+				}
+			}
+			//epilogue
+			//Came on her face
+			if(flags[kFLAGS.UMA_TIMES_SUCKED_YOU] < 2) 
+			{
+				outputText("\n\nUma wipes her face off some of your seed.  \"<i>I’m fine.  Sorry about that, dear... but blowing is not really my thing, you know?  The only other person I did this for was Loppe’s father, and even then I didn’t like it so much... maybe you should have gone to Loppe instead?</i>\"");
+				outputText("\n\nYou tell her you’ll remember that, ");
+				if(player.cor <= 40) outputText(" apologise, and ");
+				outputText("get up to start getting dressed before quietly heading back to camp.");
+			}
+			//Came on her face after second time:
+			else if(flags[kFLAGS.UMA_TIMES_SUCKED_YOU] < 5) 
+			{
+				outputText("\n\nUma wipes her face off some of your seed.  \"<i>I’m fine.  Sorry about that, dear... I'm trying but to be honest, the idea of having a male member go off in my mouth like that startles me.  The gush of a wet pussy on your lips is just so much more understandable.  I bet Loppe wouldn't mind doing this for you, you know.</i>\"  She suddenly smirks, \"<i>Unless you've got some kind of fetish for letting older mares milk you?</i>\"");
+				outputText("\n\nYou give her a wink and a smile as you depart.  She's getting better at this.");
+			}
+			//Came in her mouth
+			else
+			{
+				outputText("\n\nUma slowly licks your cockslime from her lips and swallows, opening up her mouth to show you just how good she's getting at swallowing your goo.  \"<i>I never would have thought that I'd be looking forward to bending over and taking a penis in my mouth, but... there's something special about you, [name].  I can see why Loppe fell for you so quickly.</i>\"  She licks her lips once more, this time running her tongue along her teeth to collect every little drop of your jism.  \"<i>It's just nice, feeling you twitch inside me like that, trusting my mouth to please you so.  It's so different from a massage or a handjob - more intimate I suppose.</i>\"  The smell of feminine arousal is faint in the air under the musky aroma of your spunk.");
+				//Higher cum quantity epilogue.
+				if(player.cumQ() > 25) {
+					outputText("\n\nShe extends a towel to you.  \"<i>Just because your cum is starting to taste okay doesn't mean I'm licking all that up.  Get clean, dear.</i>\"");
+					outputText("\n\nYou wipe up with a rueful smile while Uma gets dressed.  She comes back with your clothes and helps you into them, giving your package an appreciative squeeze \"to make sure it emptied\" before sending you on your way to camp.");
+				}
+				//Else normal epilogue.
+				else {
+					outputText("\n\nUma gets dressed while you cool off.  She comes back with your clothes and helps you into them, giving your package an appreciative squeeze \"to make sure it emptied\" before sending you on your way to camp.");
+				}
+			}
+			dynStats("lust", -100);
+			flags[kFLAGS.UMA_TIMES_SUCKED_YOU]++;
+			menu();
+			doNext(13);
+		}
 		private function sexEatHerOut():void
 		{
 			clearOutput();
@@ -1913,41 +2091,6 @@ package classes.content
 			doNext(13);
 
 		}
-
-		/**
-		 * This is marked as Todo in the doc
-		*/
-		/*private function sexBlowjob():void
-		{
-Fidgeting in place, very much aware of the cum-filled cock in your pants, you ask whether Uma would be willing to give you a little intimate release?
-
-Uma arches an eyebrow, \"<i>sorry, [name], but when it comes to cocks, my pussy and ass are both off-limits... I suppose that, for you, though, I could give you a blowjob.  Just because you're my little Loppe's special someone, though.</i>\"
-
-You tell her that would be plenty, and thank her for her consideration.  \"<i>Okay, follow me then.</i>\"  The mare leads you away, out her office and head down the corridor, towards the far back of the clinic, equine tail swishing lazily side to side.  You follow closely in her wake, looking forward to her \"<i>special treatment</i>\".
-
-The room she leads you to is quite simple; wooden walls and floor, a couple of drains set in the floor that are probably for the more... fluid generous clientele, [UrtaLover: something that makes you wonder if Urta would like to come and take a spin here,] and a sizable table, made from bamboo; it is covered in a white cloth, and has an upraised headboard with a hole in it that looks like it's big enough to fit your head through.  This is the only piece of furniture in the room, apart from a small cupboard in the corner.  Though spartan in its layout, the room is quite comfortably warm.
-
-\"<i>Strip up, dear.</i>\"  Uma says cheerfully, while beginning to strip herself off.  You need no further encouragement, eagerly strip naked [Exhibitionist: unable to resist either the tingle of lust that runs through you at being naked in front of Uma, nor the urge to flaunt your feminine physique for her own gratification,) and gathering your clothes up in your arms as you do so. Walking over to the cupboard, you find a couple of folded towels and ample space to store your clothes, which is exactly what you do.
-
-\"<i>Step aside, dear.</i>\"  You hear Uma say behind you, clothes in hand.  You do so and she finds an empty spot to put them in.  \"<i>Now... get on my table and let me take a look at the problem.</i>\"
-
-You eagerly settle yourself onto the table as instructed, [cock] jutting into the air and awaiting Uma's mouth.  You idly wonder how she'll go about this...
-
-The MILF mare kneels before you, examining your shaft.  It's clear that she doesn't really enjoy the notion that much, considering the way she's looking at you.  \"<i>Alright... let's get this over with.</i>\"  She opens her mouth wide and takes your dick into her mouth, slurping on it.
-
-While her lips and tongue do feel good, you consider this to not be the most expertly done blowjob, and you point out you can tell Uma's heart isn't in this.  Uma stops her ministrations with a sigh, then looks up at you.  \"<i>Sorry, dear.  It's just that blowjobs are not really my thing... but don't worry.  I'm pretty sure I can get you to orgasm, at least.</i>\"  She resumes her task, taking your [cock] back into her warm mouth and suckling on it.
-
-Grunting softly at her ministrations, you suggest she could bob her head- that's supposed to help improve a blowjob.  Uma responds by doing as you suggest, though her face is not exactly one of pleasure.  You (corruption <= 40 sigh in disappointment and) hump her face, wanting to get off at last so you can get this awkward state of affairs over with, but without having to actually give up on the prospect of sex.  The sooner you can cum, the sooner Uma can let go of you.
-
-Despite not liking this whole situation, the mare at least tries to put some effort on her blowjob, but that doesn't make it much better... thankfully you can already feel that familiar pressure building up inside [you / your balls].  You moan in pleasure as the first trickles of seed start to flow from your [cocktip], the inevitable prelude to the discharge of orgasm.  As soon as she tastes your seed, Uma pulls away spitting out your seed in surprise and coughing.  
-
-This was not one of her better ideas; with your usual cry of pleasure, orgasm ripples through you and you begin to truly cum.  As your shaft is no longer enclosed in her hot, wet mouth, Uma instead receives spurts of cum all over her face and breasts, sticky wet seed plastering itself along her lips, in her ears and up her nose.  Finally, you finish cumming and manage to pull yourself together to ask if the sloppy, cum-splattered mare is alright?
-
-Uma wipes her face off some of your seed.  \"<i>Yes, I'm fine.  Sorry about that, dear... but blowing is not really my thing, you know?  The only other person I did this for was Loppe's father, and even then I didn't like it so much... maybe you should have gone to Loppe instead?</i>\"
-
-You tell her you'll remember that, (corruption <=40 apologise and) get up and start getting dressed before quietly heading back to camp.
-		}*/
-
 		/**
 		 * Incomplete in the doc
 		 */
