@@ -4262,11 +4262,11 @@ public function highAffectionEmberLustFuck():void {
 	
 	outputText("\n\nThe dragon smiles at you, and then Ember opens " + emberMF("his","her") + " mouth, letting " + emberMF("his","her") + " inhuman tongue slither out and out.  With lovingly lavish strokes it slides up and down your [cock biggest]'s length, cleaning it of your ");
 	if(flags[kFLAGS.EMBER_GENDER] >= 0) outputText("mingled ");
-	outputText("fluids before sinuously coiling around it like a snake, surrounding you in cool, slick, velvet.  Insistently it begins to slide back into " + emberMF("his","her") + " mouth, taking your cock along for the ride until the dragon closes " + emberMF("his","her") + " mouth, enveloping your shaft in the process, and starts to suckle eagerly, her tongue caressing and squeezing inside as " + emberMF("he","she") + " does so.");
+	outputText("fluids before sinuously coiling around it like a snake, surrounding you in cool, slick, velvet.  Insistently it begins to slide back into " + emberMF("his","her") + " mouth, taking your cock along for the ride until the dragon closes " + emberMF("his","her") + " mouth, enveloping your shaft in the process, and starts to suckle eagerly, " + emberMF("his","her") + " tongue caressing and squeezing inside as " + emberMF("he","she") + " does so.");
 	
 	outputText("\n\n You moan as the dragon begins sucking you off.  It's hard to believe how into you " + emberMF("he","she") + " is now... previously " + emberMF("he","she") + " didn't seem to like blowing you, but now?  " + emberMF("He","She") + " does it with such eagerness, you can't help but reward " + emberMF("his","her") + " with a few spurts of pre.");
 
-	outputText("\n\nLoudly and lewdly Ember slurps and sucks, her tongue continuing its dance around your dick, but then it uncoils and " + emberMF("he","she") + " pulls off with a wet pop, her fingers gently stroking the sensitive flesh, blowing a ticklish breeze over it with " + emberMF("his","her") + " lips.");
+	outputText("\n\nEmber slurps and sucks loudly and lewdly, her tongue continuing its dance around your dick, but then it uncoils and " + emberMF("he","she") + " pulls off with a wet pop, her fingers gently stroking the sensitive flesh, blowing a ticklish breeze over it with " + emberMF("his","her") + " lips.");
 
 	outputText("\n\n\"<i>Do you like it?  When I blow you?</i>\" " + emberMF("he","she") + " looks up at you expectantly.  It's hard not to like it when " + emberMF("he","she") + " does such a fine job.  At this " + emberMF("he","she") + " smiles.  \"<i>I'm glad you like it.  I really like your taste, you know?</i>\"  Ember gets up and walks towards the far wall of the den, sticking " + emberMF("his","her") + " ass out and swaying " + emberMF("his","her") + " tail enticingly.  " + emberMF("He","She") + " looks back lovingly at you and blows you a ring of smoke, blowing a straight line through its center shortly after.  \"<i>I'm ready...</i>\" " + emberMF("he","she") + " whispers.");
 	
@@ -4305,7 +4305,7 @@ public function highAffectionEmberLustFuck():void {
 	if(flags[kFLAGS.EMBER_GENDER] >= 2 && player.cockTotal() > 1) outputText("s");
 	outputText(".  \"<i>Ahh... more seed from my lover...</i>\" " + emberMF("he","she") + " whispers, nearly passing out from the pleasure.  You feel yourself grow dizzy with pleasure and tumble onto the soft grass covering the den's floor, bringing Ember along.  Your dick");
 	if(flags[kFLAGS.EMBER_GENDER] >= 2 && player.cockTotal() > 1) outputText("s");
-	outputText(" sliding out of " + emberMF("his","her") + " with a wet slurp, allowing your deposit to leak it's way under your prone forms.");
+	outputText(" slides out of " + emberMF("his","her") + " with a wet slurp, allowing your deposit to leak its way under your prone forms.");
 	
 	outputText("\n\nYou both take a few moments to catch your breath, before Ember rolls over to look at you.  " + emberMF("He","She") + " extends a clawed hand to lightly brush your cheek.  \"<i>[name]... you really know how to make a dragon feel loved...</i>\"  You return the gesture, telling " + emberMF("him","her") + " it's easy when a dragon seems to love you just as much.  Ember smiles adoringly at you.  \"<i>Hey, can I ask you something, [name]?</i>\"  You indicate that it's okay.  \"<i>I want to be with you... hold you for a little while... is it okay if we do that?</i>\"");
 	stats(0,0,0,0,0,-5,-100,0);
@@ -4339,7 +4339,7 @@ public function stayWithEmberAfterLustFuck():void {
 	if(flags[kFLAGS.EMBER_GENDER] == 1) {
 		outputText("\n\nAs you embrace each other, you feel something stirring against your " + player.skinFurScales() + ".  Breaking up the hug to look downwards you spot Ember's draconic member, erect once more.  \"<i>I... well... you can't expect me to keep it down when I'm holding my naked mate now, can you?</i>\" he states, quite flustered at his reaction.  [OneCock] growing erect, brushing against his, serves you as an answer.");
 
-		outputText("\n\nEmber trembles at the contact, electrical waves of pleasure coursing through his body as your members touch.  \"<i>T-That felt good!</i>\" he exclaims humping slightly to rub your shafts together once more.  \"<i>Yes...  [name], how about we rub one off together this time?  I like how naughty this feels; besides my ass is still pretty sore and I can't hold you if you take me from behind...</i>\"");
+		outputText("\n\nEmber trembles at the contact, electrical waves of pleasure coursing through his body as your members touch.  \"<i>T-That felt good!</i>\" he exclaims, humping slightly to rub your shafts together once more.  \"<i>Yes...  [name], how about we rub one off together this time?  I like how naughty this feels; besides my ass is still pretty sore and I can't hold you if you take me from behind...</i>\"");
 		
 		outputText("\n\nYou can't see any reason not to, and tell him so.");
 		menu();
@@ -4349,7 +4349,7 @@ public function stayWithEmberAfterLustFuck():void {
 	else if(flags[kFLAGS.EMBER_GENDER] == 2) {
 		outputText("\n\nEmber hugs you tightly, pressing you against her bosom.  You enjoy the feel of the dragon's ");
 		if(flags[kFLAGS.EMBER_MILK] > 0) outputText("milk-filled ");
-		outputText("breasts against you, soft and smooth and slightly cooler than you are.  You just enjoy each other for awhile, until you feel your shaft stir once more.  Ember's nostrils flare for a moment and she smiles knowingly at you.  \"<i>Haven't had enough of me yet?</i>\"  You turn the question back on her, asking if she's saying she's had enough of you.  \"<i>I can safely say that I can never have enough of you... I'm soaking wet already.</i>\"  The dragon");
+		outputText("breasts against you, soft, smooth, and slightly cooler than you are.  You just enjoy each other for awhile, until you feel your shaft stir once more.  Ember's nostrils flare for a moment and she smiles knowingly at you.  \"<i>Haven't had enough of me yet?</i>\"  You turn the question back on her, asking if she's saying she's had enough of you.  \"<i>I can safely say that I can never have enough of you... I'm soaking wet already.</i>\"  The dragon");
 		if(flags[kFLAGS.EMBER_ROUNDFACE] > 0) outputText("-girl");
 		outputText(" takes your hand and presses it against her wet quim.  Your fingers instinctively move, sliding themselves over and slightly into the damp netherlips.  \"<i>Ooh... that feels nice... but know what would feel even better?</i>\" she asks teasingly as she strokes your side.  Playfully, you ask her what that might be.");
 		
@@ -4365,7 +4365,7 @@ public function stayWithEmberAfterLustFuck():void {
 		if(flags[kFLAGS.EMBER_ROUNDFACE] > 0) outputText("-girl");
 		outputText(" states, idly rubbing your cocks together.  One of your hands slips down between the two of you, sliding over the ridged surface of the herm dragon's cock before pressing itself against her well-used quim; sure enough, it's already drooling eagerly at the prospect of being filled again.");
 		
-		outputText("\n\n\"<i>Hmm... [name], my mate?  Feel like trying something different?  Or if you aren't can you at least put that cock inside me once more?  I want you...</i>\"  Ember licks her lips in anticipation.");
+		outputText("\n\n\"<i>Hmm... [name], my mate?  Feel like trying something different?  Or if you aren't, can you at least put that cock inside me once more?  I want you...</i>\"  Ember licks her lips in anticipation.");
 		
 		//[Frotting] [Penetrate]
 		menu();
@@ -4392,12 +4392,12 @@ public function penetrateEmberHerm():void {
 public function frottingWithEmber(clear:Boolean = true):void {
 	if(clear) clearOutput();
 	else outputText("\n\n");
-	outputText("Ember thrusts against your shaft, the ridges of " + emberMF("his","her") + " dick stimulate your " + cockDescript(x) + " and you moan at the feeling.  \"<i>Come on, [name].  Are you going to make me do all the work?</i>\" " + emberMF("he","she") + " teases you.  You slowly stroke your shaft against " + emberMF("his","hers") + ", asking just what " + emberMF("he","she") + " has in mind; wasn't " + emberMF("he","she") + " planning on taking a breather?");
+	outputText("Ember thrusts against your shaft; the ridges of " + emberMF("his","her") + " dick stimulate your " + cockDescript(x) + " and you moan at the feeling.  \"<i>Come on, [name].  Are you going to make me do all the work?</i>\" " + emberMF("he","she") + " teases you.  You slowly stroke your shaft against " + emberMF("his","hers") + ", asking just what " + emberMF("he","she") + " has in mind; wasn't " + emberMF("he","she") + " planning on taking a breather?");
 	
 	outputText("\n\n\"<i>I'm always ready to pleasure my mate... besides, I can still hug you while we hump each other,</i>\" Ember says, grabbing you into a hug and pulling you tightly against " + emberMF("his","her") + "self, mashing your shafts together.");
 	
 	//if PC and Ember are male:
-	if(player.gender == 1 && flags[kFLAGS.EMBER_GENDER] == 1) outputText("\n\n\"<i>Sometimes I wonder what other dragons would say... I'm supposed to breed and birth a new generation of dragons into Mareth.  Yet here am I fooling around with a guy...</i>\" he smirks at you.  \"<i>But heck if I care, I love you too much to let this bother me anymore, besides maybe if we try real hard you can still get me pregnant?  Or maybe you'd prefer I got you pregnant?</i>\"  You roll your eyes and kiss him, though it fails to wipe the smirk from his face.");
+	if(player.gender == 1 && flags[kFLAGS.EMBER_GENDER] == 1) outputText("\n\n\"<i>Sometimes I wonder what other dragons would say... I'm supposed to breed and birth a new generation of dragons into Mareth.  Yet here am I fooling around with a guy...</i>\" he smirks at you.  \"<i>But heck if I care, I love you too much to let this bother me anymore... besides maybe if we try real hard you can still get me pregnant?  Or maybe you'd prefer I got you pregnant?</i>\"  You roll your eyes and kiss him, though it fails to wipe the smirk from his face.");
 	
 	outputText("\n\nHaving your shaft pressed so tightly between the two of you stimulates your sensitive member enough that you can't help but drool pre on both your bellies.  Ember is much ahead of you, however.  " + emberMF("His","Her") + " cock dribbles slickness, lubing your bellies up and easing the contact between your shafts, making it even easier to hump against " + emberMF("his","her") + ".");
 	
@@ -4410,7 +4410,7 @@ public function frottingWithEmber(clear:Boolean = true):void {
 	outputText("\n\nEmber doesn't bother wasting time with idle chatter anymore, " + emberMF("he","she") + " embraces you tightly against " + emberMF("him","her") + "self and begins truly thrusting against your slickened belly, not caring that " + emberMF("his","her") + " pre seems to be pooling between the two of you.");
 	if(flags[kFLAGS.EMBER_GENDER] >= 2) outputText("  Her moist dragon pussy is not helping the mess in the least.  You can smell her femcum pooling along with her pre.");
 	
-	outputText("\n\nYou match the dragon thrust for thrust and hump for hump, mewling softly; it's not like fucking a hole, but it's certainly not without its charms.  You can feel that wonderful pressure building inside you for the fourth time, and gasp to Ember that climax is close.  \"<i>Don't hold anything back...</i>\" " + emberMF("he","She") + " whispers, kissing you deeply.");
+	outputText("\n\nYou match the dragon thrust for thrust and hump for hump, mewling softly; it's not like fucking a hole, but it's certainly not without its charms.  You can feel that wonderful pressure building inside you for the fourth time, and gasp to Ember that climax is close.  \"<i>Don't hold anything back...</i>\" " + emberMF("he","she") + " whispers, kissing you deeply.");
 	
 	outputText("\n\nWith a moan and a gasp, you do as " + emberMF("he","she") + " says, letting the pleasure wash over you and spilling seed over the dragon's belly, twitching as the sparks fly through your nerves.  Ember breaks the kiss and roars as " + emberMF("his","her") + " own shaft joins yours in making a mess of both your bellies.  Sighing with relief as the last of it ebbs out of you, instinctively you snuggle against the slimy form of your draconic lover, holding " + emberMF("his","her") + " closer as the last of your orgasm seeps out of you and smears you both in semen.");
 	
@@ -4469,7 +4469,7 @@ public function penetrateWithEmber(clear:Boolean = true):void {
 	if(flags[kFLAGS.EMBER_MILK] > 0) outputText("  You savor the resultant gush of sweet dragon's milk as it squirts obediently down your throat.");
 	
 	outputText("\n\n\"<i>Hmm... that feels nice.  Just... don't forget what's the priority here.</i>\"  She bucks against your cock, still firmly lodged inside her.");
-	if(flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) outputText("  A small dollop of pre escaping Ember's dragon-dick at the pleasure of the movement.");
+	if(flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) outputText("  A small dollop of pre escapes Ember's dragon-dick at the pleasure of the movement.");
 	outputText("  \"<i>And don't forget about my other breast either.</i>\"  She takes your hand in her own and guide it to her other mound, helping you knead it.");
 	
 	outputText("\n\nYou squeeze her tit as she clearly wants you to, caressing the firm-yet-soft flesh.  As you do so, you suckle teasingly at her other nipple, ");
@@ -4482,12 +4482,12 @@ public function penetrateWithEmber(clear:Boolean = true):void {
 	if(flags[kFLAGS.EMBER_ROUNDFACE] > 0) outputText("-girl");
 	outputText(" roaring towards the ceiling, then turning to look at you as her pussy constricts and milks you for all you're worth.  Already spent from your past three orgasms, you just sit back and enjoy yourself being milked by her strong vaginal muscles one last time.");
 	if(player.cumQ() < 250) outputText("\n\nA mere trickle is all that leaves you, having already exhausted your supply from the last two climaxes");
-	else if(player.cumQ() < 500) outputText("\n\nAlthough already well-milked by this point, your load is still big enough to compare to a normal climax, added a few more good-sized jets to the cock-cream already stretching her belly into a slight paunch");
+	else if(player.cumQ() < 500) outputText("\n\nAlthough already well-milked by this point, your load is still big enough to compare to a normal climax, adding a few more good-sized jets to the cock-cream already stretching her belly into a slight paunch");
 	else outputText("\n\nWith your prodigious output, whilst your load is vastly smaller than normal, it's still much bigger than any normal man's first time, leaving Ember moaning as her already swollen belly gains another couple of inches, looking well and truly \"ready to pop any day now\"-pregnant");
 	outputText(".");
 	if(flags[kFLAGS.EMBER_GENDER] == 3) outputText("  Her draconic cock throbs all the way through your orgasm, shooting blanks a few times before spurting a couple ropes of pre onto her belly.");
 	
-	outputText("\n\nThe two of you collapse into each other's arms, you move to pull out, but Ember stops you by holding your hips in place.  \"<i>Leave it inside... that's where it belongs.</i>\"  She smiles at you, panting a bit.  Too tired and happy to argue, you simply nod your head, rest against her, and allow sleep to claim you. You're dimly aware of Ember doing the same thing before you fade.");
+	outputText("\n\nThe two of you collapse into each other's arms.  You move to pull out, but Ember stops you by holding your hips in place.  \"<i>Leave it inside... that's where it belongs.</i>\"  She smiles at you, panting a bit.  Too tired and happy to argue, you simply nod your head, rest against her, and allow sleep to claim you. You're dimly aware of Ember doing the same thing before you fade.");
 	stats(0,0,0,0,0,0,-100,0);
 	//doNext(14);
 	menu();
