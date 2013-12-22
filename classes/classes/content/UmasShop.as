@@ -2091,41 +2091,6 @@
 			doNext(13);
 
 		}
-
-		/**
-		 * This is marked as Todo in the doc
-		*/
-		/*private function sexBlowjob():void
-		{
-Fidgeting in place, very much aware of the cum-filled cock in your pants, you ask whether Uma would be willing to give you a little intimate release?
-
-Uma arches an eyebrow, \"<i>sorry, [name], but when it comes to cocks, my pussy and ass are both off-limits... I suppose that, for you, though, I could give you a blowjob.  Just because you're my little Loppe's special someone, though.</i>\"
-
-You tell her that would be plenty, and thank her for her consideration.  \"<i>Okay, follow me then.</i>\"  The mare leads you away, out her office and head down the corridor, towards the far back of the clinic, equine tail swishing lazily side to side.  You follow closely in her wake, looking forward to her \"<i>special treatment</i>\".
-
-The room she leads you to is quite simple; wooden walls and floor, a couple of drains set in the floor that are probably for the more... fluid generous clientele, [UrtaLover: something that makes you wonder if Urta would like to come and take a spin here,] and a sizable table, made from bamboo; it is covered in a white cloth, and has an upraised headboard with a hole in it that looks like it's big enough to fit your head through.  This is the only piece of furniture in the room, apart from a small cupboard in the corner.  Though spartan in its layout, the room is quite comfortably warm.
-
-\"<i>Strip up, dear.</i>\"  Uma says cheerfully, while beginning to strip herself off.  You need no further encouragement, eagerly strip naked [Exhibitionist: unable to resist either the tingle of lust that runs through you at being naked in front of Uma, nor the urge to flaunt your feminine physique for her own gratification,) and gathering your clothes up in your arms as you do so. Walking over to the cupboard, you find a couple of folded towels and ample space to store your clothes, which is exactly what you do.
-
-\"<i>Step aside, dear.</i>\"  You hear Uma say behind you, clothes in hand.  You do so and she finds an empty spot to put them in.  \"<i>Now... get on my table and let me take a look at the problem.</i>\"
-
-You eagerly settle yourself onto the table as instructed, [cock] jutting into the air and awaiting Uma's mouth.  You idly wonder how she'll go about this...
-
-The MILF mare kneels before you, examining your shaft.  It's clear that she doesn't really enjoy the notion that much, considering the way she's looking at you.  \"<i>Alright... let's get this over with.</i>\"  She opens her mouth wide and takes your dick into her mouth, slurping on it.
-
-While her lips and tongue do feel good, you consider this to not be the most expertly done blowjob, and you point out you can tell Uma's heart isn't in this.  Uma stops her ministrations with a sigh, then looks up at you.  \"<i>Sorry, dear.  It's just that blowjobs are not really my thing... but don't worry.  I'm pretty sure I can get you to orgasm, at least.</i>\"  She resumes her task, taking your [cock] back into her warm mouth and suckling on it.
-
-Grunting softly at her ministrations, you suggest she could bob her head- that's supposed to help improve a blowjob.  Uma responds by doing as you suggest, though her face is not exactly one of pleasure.  You (corruption <= 40 sigh in disappointment and) hump her face, wanting to get off at last so you can get this awkward state of affairs over with, but without having to actually give up on the prospect of sex.  The sooner you can cum, the sooner Uma can let go of you.
-
-Despite not liking this whole situation, the mare at least tries to put some effort on her blowjob, but that doesn't make it much better... thankfully you can already feel that familiar pressure building up inside [you / your balls].  You moan in pleasure as the first trickles of seed start to flow from your [cocktip], the inevitable prelude to the discharge of orgasm.  As soon as she tastes your seed, Uma pulls away spitting out your seed in surprise and coughing.  
-
-This was not one of her better ideas; with your usual cry of pleasure, orgasm ripples through you and you begin to truly cum.  As your shaft is no longer enclosed in her hot, wet mouth, Uma instead receives spurts of cum all over her face and breasts, sticky wet seed plastering itself along her lips, in her ears and up her nose.  Finally, you finish cumming and manage to pull yourself together to ask if the sloppy, cum-splattered mare is alright?
-
-Uma wipes her face off some of your seed.  \"<i>Yes, I'm fine.  Sorry about that, dear... but blowing is not really my thing, you know?  The only other person I did this for was Loppe's father, and even then I didn't like it so much... maybe you should have gone to Loppe instead?</i>\"
-
-You tell her you'll remember that, (corruption <=40 apologise and) get up and start getting dressed before quietly heading back to camp.
-		}*/
-
 		/**
 		 * Incomplete in the doc
 		 */
