@@ -16,6 +16,7 @@ package classes.Monsters
 			init2Female(VAGINA_WETNESS_WET,VAGINA_LOOSENESS_NORMAL,40,true);
 			init3BreastRows("D");
 			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,40);
+			init5Body(65,HIP_RATING_AMPLE,BUTT_RATING_AVERAGE+1);
 
 			this.temperment = 1;
 
@@ -45,21 +46,12 @@ package classes.Monsters
 			this.gems = 0;
 
 			//Appearance Variables
-			this.tallness = 65;
 			this.hairColor = "white";
 			this.hairLength = 3;
 
 			this.skinTone = "white";
 			this.skinDesc = "skin";
 
-			//3 - cowface
-
-			//7 - cow!
-
-			this.hipRating = 6;
-
-			this.buttRating = 5;
-			//Create imp sex attributes
 		}
 		
 	}

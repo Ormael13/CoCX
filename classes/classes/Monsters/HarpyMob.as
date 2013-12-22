@@ -17,6 +17,8 @@ package classes.Monsters
 			this.gender = 3;
 			this.cumMultiplier = 3;
 			this.ballSize = 1;
+			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_SLIME_DROOLING);
+			init5Body(rand(8) + 70,HIP_RATING_CURVY+2,BUTT_RATING_LARGE);
 
 			this.temperment = 3;
 
@@ -50,7 +52,6 @@ package classes.Monsters
 			this.gems = rand(25)+140;
 
 			//Appearance Variables
-			this.tallness = rand(8) + 70;
 			this.hairColor = "black";
 			this.hairLength = 15;
 
@@ -61,10 +62,6 @@ package classes.Monsters
 
 			this.tailType = TAIL_TYPE_DEMONIC;
 
-			this.hipRating = 8;
-
-			this.buttRating = 8;
-			init4Ass(4,5);
 		}
 		
 	}

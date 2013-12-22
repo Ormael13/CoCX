@@ -19,10 +19,9 @@
 			super(mainClassPtr);
 			init1Names("a ", "bee-girl", "beegirl", "A bee-girl buzzes around you, filling the air with intoxicatingly sweet scents and a buzz that gets inside your head.  She has a humanoid face with small antennae, black chitin on her arms and legs that looks like shiny gloves and boots, sizable breasts, and a swollen abdomen tipped with a gleaming stinger.");
 			init2Female(VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_GAPING);
-			this.cumMultiplier = 1.5;
-			this.hoursSinceCum = 10 + rand(100);
 			init3BreastRows("DD");
 			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_NORMAL);
+			init5Body(rand(14) + 59,HIP_RATING_CURVY+3,BUTT_RATING_EXPANSIVE);
 
 			this.temperment = 3;
 			this.special1 = 5036;
@@ -55,7 +54,6 @@
 			this.gems = rand(15) + 1;
 
 			//Appearance Variables
-			this.tallness = rand(14) + 59;
 			//randomly assign hair color
 			if(rand(2) == 0) 
 				this.hairColor = "black";
@@ -78,9 +76,6 @@
 
 			this.tailVenom = 100;
 
-			this.hipRating = 13;
-
-			this.buttRating = 13;
 			//Create imp sex attributes
 			trace("BeeGirl Constructor!");
 

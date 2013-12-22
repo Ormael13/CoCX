@@ -22,6 +22,7 @@
 			init2Female(VAGINA_WETNESS_SLAVERING,VAGINA_LOOSENESS_NORMAL,40);
 			init3BreastRows("C");
 			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,10);
+			init5Body("5'10",HIP_RATING_AMPLE+2,BUTT_RATING_LARGE,LOWER_BODY_TYPE_GOO);
 
 			this.temperment = 2;
 			//Lusty teases
@@ -58,18 +59,12 @@
 			this.gems = rand(5) + 8;
 
 			//Appearance Variables
-			this.tallness = 70;
 			this.hairColor = "brown";
 			this.hairLength = 16;
 
 			this.skinTone = "mediterranean-toned";
 			this.skinDesc = "skin";
 
-			this.lowerBody = LOWER_BODY_TYPE_GOO;
-
-			this.hipRating = 8;
-
-			this.buttRating = 8;
 			//Create goblin sex attributes
 
 			this.XP = this.totalXP(mainClassPtr.player.level);

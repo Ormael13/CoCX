@@ -16,8 +16,9 @@ package classes.Monsters
 			init1Names("", "Izma", "izma", "Izma the tigershark stands a bit over 6' tall, with orange skin bearing horizontal stripes covering most of her body.  Her silver-white hair cascades past her shoulders, draping over an impressive pair of DD-cup breasts barely restrained by a skimpy black bikini top.  Under the knee-length grass skirt below them rustles her beastly fifteen-inch penis and four-balled sack; you catch occasional glimpses of them as she moves.  She's tucked her usual reading glasses into her locker at the moment.");
 			init2Male(new Cock(15,2.2));
 			init2Female(VAGINA_WETNESS_SLICK,VAGINA_LOOSENESS_LOOSE,45);
-			init3BreastRows("E");
+			init3BreastRows("DD");
 			init4Ass(ANAL_LOOSENESS_NORMAL,ANAL_WETNESS_DRY,30);
+			init5Body("5'5",HIP_RATING_CURVY,BUTT_RATING_NOTICEABLE);
 
 			this.temperment = 2;
 			//Lusty teases
@@ -54,16 +55,12 @@ package classes.Monsters
 			this.gems = rand(5) + 1;
 
 			//Appearance Variables
-			this.tallness = 66;
 			this.hairColor = "silver";
 			this.hairLength = 20;
 
 			this.skinTone = "striped orange";
 			this.skinDesc = "skin";
 
-			this.hipRating = 10;
-
-			this.buttRating = 6;
 			//Create goblin sex attributes
 		}
 		

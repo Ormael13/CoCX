@@ -23,6 +23,7 @@
 			init2Male(new Cock(7.5,1.8),0,0,1,1000);
 			init3BreastRows(0);
 			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_NORMAL);
+			init5Body("5'1",HIP_RATING_SLENDER,BUTT_RATING_TIGHT);
 			this.temperment = 1;
 			this.special1 = 5021;
 
@@ -52,7 +53,6 @@
 			this.gems = rand(5) + 2;
 
 			//Appearance Variables
-			this.tallness = 61;
 			this.hairColor = "white";
 			this.hairLength = 2;
 
@@ -62,9 +62,6 @@
 
 			this.wingDesc = "";
 
-			this.hipRating = 2;
-
-			this.buttRating = 2;
 			//Create jojo sex attributes
 			//Variations based on jojo's corruption.
 			if(mainClassPtr.monk == 3) {

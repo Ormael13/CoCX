@@ -14,9 +14,11 @@ package classes.Monsters
 		{
 			super(mainClassPtr);
 			init1Names("", "Minerva", "minerva", "You're fighting the tainted siren, Minerva.  Standing around eight feet and wielding a weapon just as tall, she is a force to be reckoned with.  Her skin is a dark navy blue, though her belly, neck and inner thighs are as white as the clouds in the sky, and a golden piecing decorates her navel.  Orange and white stripes adorn her legs, tail and back.  Two large wings sprout from her back, their feathers an attention-grabbing red and orange mix.  She wears a tube-top that hold back her double d-cups, and short shorts around her wide waist that seem to be holding back a huge bulge.\n\nHer weapon is a halberd, made from a shiny, silvery metal, and seems to have an unnatural glow to it.");
-			init2Male(new Cock(16,3),2,3,3)
+			init2Male(new Cock(16,3),2,3,3);
 			init2Female(VAGINA_WETNESS_SLICK,VAGINA_LOOSENESS_NORMAL);
 			init3BreastRows("DD");
+			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY);
+			init5Body("8'4",HIP_RATING_CURVY,BUTT_RATING_LARGE+1);
 
 			this.temperment = 3;
 			//Regular attack
@@ -56,7 +58,6 @@ package classes.Monsters
 			this.gems = rand(25)+10;
 
 			//Appearance Variables
-			this.tallness = 101;
 			this.hairColor = "red";
 			this.hairLength = 25;
 
@@ -67,11 +68,7 @@ package classes.Monsters
 
 			this.wingType = WING_TYPE_HARPY;
 
-			this.hipRating = 10;
-
-			this.buttRating = 9;
 			//Create succubus sex attributes
-			init4Ass(1,0);
 		}
 		
 	}

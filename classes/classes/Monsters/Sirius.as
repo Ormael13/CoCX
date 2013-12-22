@@ -17,6 +17,7 @@ package classes.Monsters
 			init2Male(new Cock(14,2));
 			init3BreastRows(0);
 			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,10);
+			init5Body("5'10",HIP_RATING_AMPLE+2,BUTT_RATING_LARGE,LOWER_BODY_TYPE_GOO);
 
 			this.temperment = 2;
 			//Lusty teases
@@ -53,18 +54,11 @@ package classes.Monsters
 			this.gems = rand(5) + 8;
 
 			//Appearance Variables
-			this.tallness = 70;
 			this.hairColor = "orange";
 			this.hairLength = 16;
 
 			this.skinTone = "mediterranean-toned";
 			this.skinDesc = "skin";
-
-			this.lowerBody = LOWER_BODY_TYPE_GOO;
-
-			this.hipRating = 8;
-
-			this.buttRating = 8;
 		}
 		
 	}

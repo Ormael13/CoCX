@@ -19,6 +19,7 @@ package classes.Monsters
 			init2Male(new Cock(36,3.5,CockTypesEnum.HORSE),2,2+rand(13),1.5,mainClassPtr.player.ballSize * 10);
 			init3BreastRows(0);
 			init4Ass(ANAL_LOOSENESS_NORMAL,ANAL_WETNESS_DRY,50);
+			init5Body(84,HIP_RATING_AVERAGE,BUTT_RATING_AVERAGE+1,LOWER_BODY_TYPE_CENTAUR);
 			this.temperment = 1;
 
 			//Clothing/Armor
@@ -49,7 +50,6 @@ package classes.Monsters
 			this.gems = rand(5) + 5;
 
 			//Appearance Variables
-			this.tallness = 84;
 			//randomly assign hair color
 			if(rand(2) == 0) this.hairColor = "black";
 			else this.hairColor = "brown";
@@ -59,13 +59,8 @@ package classes.Monsters
 			this.skinDesc = "skin";
 
 
-			this.lowerBody = LOWER_BODY_TYPE_CENTAUR;
-
 			this.tailType = TAIL_TYPE_HORSE;
 
-			this.hipRating = 4;
-
-			this.buttRating = 5;
 			//Create imp sex attributes
 		}
 		

@@ -81,20 +81,24 @@
 			//init3BreastRows(["flat"]); // manly chest with nipples
 			//init3BreastRows(["DD+"],["DD"],["D"]); // 3 rows of breasts
 			//init3BreastRows([10,2]); // huge boobs with 2 nipples per breasts
+			//init3BreastRows(); // no breast rows
+
+			//// 4. Ass
+			//init4Ass(looseness=0,wetness=0,bonusACapacity=0)
+
+			//// 5. Body
+			//init5Body(tallness,hipRating=HIP_RATING_BOYISH,buttRating=BUTT_RATING_BUTTLESS,lowerBody=LOWER_BODY_TYPE_HUMAN)
 
 			/*this.temperment = 2;
 			//Lusty teases
 			this.special1 = 5133;
 			this.special2 = 5134;
 			this.special3 = 5135;
-
 			//Clothing/Armor
 			this.armorName = "demon-skin";
 			this.weaponName = "flaming whip";
 			this.weaponVerb = "flame-whip";
-
 			this.weaponAttack = 15;
-
 			//Primary stats
 			this.str = 65;
 			this.tou = 40;
@@ -103,37 +107,20 @@
 			this.lib = 75;
 			this.sens = 15;
 			this.cor = 100;
-
 			//Combat Stats
 			this.bonusHP = 200;
 			this.HP = eMaxHP();
 			this.lustVuln = 0.75;
-
 			this.lust = 30;
-
 			//Level Stats
 			this.level = 9;
 			this.XP = this.totalXP(mainClassPtr.player.level);;
 			this.gems = rand(5) + 38;
-
 			//Appearance Variables
-			this.tallness = 66;
 			this.hairColor = "black";
 			this.hairLength = 20;
-
 			this.skinTone = "purple";
 			this.skinDesc = "skin";
-
-			this.lowerBody = LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
-
-			this.hipRating = 10;
-
-			this.buttRating = 6;
-			//Create goblin sex attributes
-			this.ass.analLooseness = 4;
-			this.createStatusAffect("Bonus aCapacity",15,0,0,0);
-			this.ass.analWetness = 0;
-
 			this.XP = this.totalXP(mainClassPtr.player.level);   */
 		}
 
@@ -306,7 +293,7 @@
 		}
 
 		// MONSTER INITIALIZATION HELPER FUNCTIONS
-		public var initsCalled:Array = [false,false,false,false];
+		public var initsCalled:Array = [false,false,false,false,false];
 
 		public function isFullyInit():Boolean {
 			return initsCalled.indexOf(false)==-1;
@@ -315,7 +302,7 @@
 		/**
 		 * Tells that skipping init<idx>Whatever is ok and you will initialize corresponding properties by hand
 		 */
-		protected function skipInit(idx:int){
+		protected function skipInit(idx:int):void{
 			this.initsCalled[idx-1] = true;
 		}
 
@@ -392,7 +379,7 @@
 		}
 
 		/**
-		 * Inits gender, pronouns, 1 vagina
+		 * Inits gender, pronouns, 1 vagina. To add second vagina, call method twice. Usage of VAGINA_WETNESS_XXXX and VAGINA_LOOSENESS_XXXX constants is preferable
 		 */
 		protected function init2Female(vaginalWetness:Number = VAGINA_WETNESS_NORMAL, vaginalLooseness:Number = VAGINA_LOOSENESS_TIGHT, bonusVCapacity:Number = 0, virgin:Boolean = false):void
 		{
@@ -443,10 +430,39 @@
 			this.initsCalled[2] = true;
 		}
 
-		protected function init4Ass(looseness:Number = 0, wetness:Number = 0, bonusACapacity:Number = 0){
+		/**
+		 * Usage of ANAL_LOOSENESS_XXXX and ANAL_WETNESS_XXXX constants is preferrable
+		 */
+		protected function init4Ass(looseness:Number = 0, wetness:Number = 0, bonusACapacity:Number = 0):void{
 			this.ass.analLooseness = looseness;
 			this.ass.analWetness = wetness;
 			if (bonusACapacity>0) this.createStatusAffect("Bonus aCapacity",bonusACapacity,0,0,0);
+			this.initsCalled[3] = true;
+		}
+
+		/**
+		 * Tallness is in inches or string like "5'6" or "5.5'". Usage of constants HIP_RATING_XXXX, BUTT_RATING_XXXX, LOWER_BODY_XXXX is preferable.
+		 */
+		protected function init5Body(tallness:*,hipRating:Number=HIP_RATING_BOYISH,buttRating:Number=BUTT_RATING_BUTTLESS,lowerBody:Number=LOWER_BODY_TYPE_HUMAN):void{
+			if (tallness is String){
+				tallness = tallness.split("'");
+				if (tallness.length==1){
+					trace("init5Body.tallness=\""+tallness[0]+"\". Interpreted as inches");
+				} else if (tallness.length==2){
+					tallness = parseFloat(tallness[0])*12+parseFloat(tallness[1]);
+				} else {
+					trace("init5Body.tallness=\""+tallness.join("'")+"\". Defaulting to 5'");
+					tallness = 5*12;
+				}
+			} else if(!(tallness is Number)){
+				trace("init5Body.tallness is "+typeof(tallness));
+				tallness = 5*12;
+			}
+			this.tallness = tallness;
+			this.hipRating = hipRating;
+			this.buttRating = buttRating;
+			this.lowerBody = lowerBody;
+			this.initsCalled[4] = true;
 		}
 	}
 }

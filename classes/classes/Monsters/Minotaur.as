@@ -30,6 +30,7 @@
 				 this.long += "  Barely visible below the tattered shreds of loincloth are " + Appearance.ballsDescription(true, true, this) + ", swollen with the minotaur's long pent-up need.";
 			init3BreastRows(0);
 			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_NORMAL,30);
+			init5Body(rand(37) + 84,HIP_RATING_AVERAGE,BUTT_RATING_AVERAGE,LOWER_BODY_TYPE_HOOFED);
 			this.hairColor = hairColor;
 			this.temperment                            = 1;
 			this.special1                              = 5029;
@@ -67,7 +68,6 @@
 			this.gems                                  = rand(5) + 5;
 
 			//Appearance Variables
-			this.tallness                              = rand(37) + 84;
 			//randomly assign hair color
 			if(rand(2) == 0) 
 				this.hairColor                         = "black";
@@ -83,12 +83,9 @@
 			this.faceType                              = FACE_COW_MINOTAUR;
 			this.wingDesc                              = "non-existant";
 
-			this.lowerBody                             = LOWER_BODY_TYPE_HOOFED;
 
 			//7 - cow!
 			this.tailType                              = 7;
-			this.hipRating                             = 4;
-			this.buttRating                            = 5;
 			//Create imp sex attributes
 			this.lib                                  += this.ballSize * 2;
 			this.lust                                 += this.ballSize * 3;

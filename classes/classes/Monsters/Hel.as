@@ -17,6 +17,8 @@ package classes.Monsters
 			init1Names(met?"":"the ",met?"Hel":"salamander","hel","You are fighting a (literally) smoking hot salamander – a seven foot tall woman with crimson scales covering her legs, back, and forearms, with a tail swishing menacingly behind her, ablaze with a red-hot fire.  Her red hair whips wildly around her slender shoulders, occasionally flitting over her hefty E-cup breasts, only just concealed within a scale-covered bikini top.  Bright red eyes focus on you from an almost-human face as she circles you, ready to close in for the kill.  Her brutal, curved sword is raised to her side, feinting at you between genuine attacks.");
 			init2Female(VAGINA_WETNESS_NORMAL,VAGINA_LOOSENESS_NORMAL,85);
 			init3BreastRows("E+");
+			init4Ass(ANAL_LOOSENESS_VIRGIN,ANAL_WETNESS_DRY,85);
+			init5Body(90,HIP_RATING_CURVY+2, BUTT_RATING_LARGE+1);
 
 			this.temperment = 2;
 			//Lusty teases
@@ -54,7 +56,6 @@ package classes.Monsters
 			this.gems = 10 + rand(5);
 
 			//Appearance Variables
-			this.tallness = 90;
 			this.hairColor = "red";
 			this.hairLength = 13;
 
@@ -65,11 +66,7 @@ package classes.Monsters
 
 			this.tailRecharge = 0;
 
-			this.hipRating = 12;
-
-			this.buttRating = 9;
 			//Create goblin sex attributes
-			init4Ass(0,0,85);
 		}
 		
 	}

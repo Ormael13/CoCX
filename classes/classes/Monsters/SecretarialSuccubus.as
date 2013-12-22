@@ -15,6 +15,7 @@ package classes.Monsters
 			this.cumMultiplier = 3;
 			init3BreastRows("DD");
 			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_SLIME_DROOLING);
+			init5Body(rand(9) + 60,HIP_RATING_CURVY,BUTT_RATING_LARGE+1,LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS);
 
 			this.temperment = 3;
 			//Regular attack
@@ -54,7 +55,6 @@ package classes.Monsters
 			this.gems = rand(25)+10;
 
 			//Appearance Variables
-			this.tallness = rand(9) + 60;
 			this.hairColor = "blond";
 			this.hairLength = 13;
 
@@ -63,13 +63,9 @@ package classes.Monsters
 
 			this.wingDesc = "tiny hidden";
 
-			this.lowerBody = LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
 
 			this.tailType = TAIL_TYPE_DEMONIC;
 
-			this.hipRating = 10;
-
-			this.buttRating = 9;
 		}
 	}
 

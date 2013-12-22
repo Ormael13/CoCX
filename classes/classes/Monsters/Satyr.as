@@ -18,6 +18,7 @@ package classes.Monsters
 			init2Male(new Cock(rand(13) + 14,1.5 + rand(20)/2,CockTypesEnum.HUMAN),	2,2 + rand(13),1.5,mainClassPtr.player.ballSize * 10);
 			init3BreastRows(0);
 			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_NORMAL,20);
+			init5Body(rand(37) + 64,HIP_RATING_AVERAGE,BUTT_RATING_AVERAGE+1,LOWER_BODY_TYPE_HOOFED);
 
 			this.temperment = 1;
 			this.special1 = 5029;
@@ -49,7 +50,6 @@ package classes.Monsters
 			this.gems = rand(25) + 25;
 
 			//Appearance Variables
-			this.tallness = rand(37) + 64;
 			//randomly assign hair color
 			if(rand(2) == 0) this.hairColor = "black";
 			else this.hairColor = "brown";
@@ -61,14 +61,9 @@ package classes.Monsters
 			//3 - cowface
 			this.faceType = FACE_COW_MINOTAUR;
 
-			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
-
 			//7 - cow!
 			this.tailType = TAIL_TYPE_SHARK;
 
-			this.hipRating = 4;
-
-			this.buttRating = 5;
 		}
 		
 	}

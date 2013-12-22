@@ -69,6 +69,8 @@
 			init1Names("the ", "pod", "pod", "");
 			init2Genderless();
 			init3BreastRows();
+			init4Ass();
+			init5Body(120,HIP_RATING_SLENDER,BUTT_RATING_BUTTLESS);
 
 			this.temperment = 2;
 			//Uber
@@ -104,8 +106,6 @@
 			this.gems = 1;
 
 			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.tallness = 120;
 			this.hairColor = "black";
 			this.hairLength = 0;
 
@@ -113,8 +113,6 @@
 			this.skinDesc = "covering";
 
 			this.wingDesc = "";
-
-			this.hipRating = 2;
 
 		}
 

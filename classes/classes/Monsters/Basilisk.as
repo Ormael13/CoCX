@@ -17,17 +17,15 @@ package classes.Monsters
 			init2Male([new Cock(6,2)]);
 			init3BreastRows(0);
 			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,30);
+			init5Body("7'6",HIP_RATING_SLENDER+1,BUTT_RATING_AVERAGE);
 
 			this.temperment = 2;
-			//Lusty teases
-
 
 			//Clothing/Armor
 			this.armorName = "scales";
 			this.weaponName = "claws";
 			this.weaponVerb = "claw";
 			this.armorDef = 10;
-
 			this.weaponAttack = 30;
 
 			this.armorValue = 70;
@@ -41,20 +39,14 @@ package classes.Monsters
 			this.cor = 60;
 
 			this.lustVuln = .5;
-
-			//Combat Stats
 			this.bonusHP = 200;
 			this.HP = eMaxHP();
-
 			this.lust = 30;
 
-			//Level Stats
 			this.level = 12;
 			this.XP = totalXP();
 			this.gems = rand(10) + 10;
 
-			//Appearance Variables
-			this.tallness = 90;
 			this.hairColor = "none";
 			this.hairLength = 0;
 
@@ -63,13 +55,8 @@ package classes.Monsters
 			this.skinDesc = "scales";
 
 			this.tailType = TAIL_TYPE_COW;
-
 			this.tailRecharge = 0;
 
-			this.hipRating = 3;
-
-			this.buttRating = 4;
-			//Create goblin sex attributes
 		}
 		
 	}

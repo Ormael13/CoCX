@@ -20,6 +20,7 @@ package classes.Monsters
 			init2Female(VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_NORMAL, 30, mainClassPtr.flags[kFLAGS.SHEILA_XP] <= 3 && mainClassPtr.flags[kFLAGS.SHEILA_DEMON] >= 0);
 			init3BreastRows(0);
 			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,20);
+			init5Body("6'",HIP_RATING_AVERAGE,BUTT_RATING_AVERAGE+1);
 
 			this.temperment = 1;
 
@@ -51,7 +52,6 @@ package classes.Monsters
 			this.gems = rand(5) + 5;
 
 			//Appearance Variables
-			this.tallness = 72;
 			//randomly assign hair color
 			this.hairColor = "auburn";
 			this.hairLength = 11;
@@ -64,9 +64,6 @@ package classes.Monsters
 			//7 - cow!
 			this.tailType = TAIL_TYPE_HORSE;
 
-			this.hipRating = 4;
-
-			this.buttRating = 5;
 			this.createStatusAffect("Bonus aCapacity", 20, 0, 0, 0);
 			if (mainClassPtr.flags[kFLAGS.SHEILA_DEMON] == 1) {
 				//-slightly slower, has much more stamina, intel, and HP now

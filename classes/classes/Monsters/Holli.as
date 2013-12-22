@@ -20,7 +20,9 @@ package classes.Monsters
 			this.cumMultiplier = 3;
 			this.hoursSinceCum = 20;
 			this.gender = 2;
-			init3BreastRows([7,1]);
+			init3BreastRows("E");
+			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_NORMAL);
+			init5Body(rand(12) + 55,HIP_RATING_CURVY,BUTT_RATING_LARGE);
 
 			this.temperment = 2;
 			//Lusty teases
@@ -55,7 +57,6 @@ package classes.Monsters
 			this.gems = 0;
 
 			//Appearance Variables
-			this.tallness = rand(12) + 55;
 			this.hairColor = "sandy-blonde";
 			this.hairLength = 15;
 
@@ -64,11 +65,7 @@ package classes.Monsters
 
 			this.wingDesc = "";
 
-			this.hipRating = 10;
-
-			this.buttRating = 8;
 			//Create imp sex attributes
-			init4Ass(1,1);
 		}
 		
 	}

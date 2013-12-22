@@ -14,10 +14,9 @@ package classes.Monsters
 			super(mainClassPtr);
 			init1Names("the ", "Sand Mother", "sandmother", "The Sand Mother is a towering woman of imposing stature and bust.  She wears a much silkier, regal-looking robe than her sisters, and it barely serves to contain her four milk-laden breasts, straining under their jiggling weight.  Dangling around her in a way that reminds you oddly of a halo, the Sand Mother's blonde-white hair fans around her, hanging long behind her.  The queen witch is brandishing a pearly white scepter rather threateningly, though from the way she holds it, it's clear she doesn't intend to use it as a physical weapon.");
 			init2Female(VAGINA_WETNESS_WET,VAGINA_LOOSENESS_LOOSE,70);
-			this.cumMultiplier = 3;
-			this.hoursSinceCum = 20;
 			init3BreastRows(["DD"],["DD"]);
-			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_NORMAL);
+			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_NORMAL,50);
+			init5Body("8'6",HIP_RATING_CURVY,BUTT_RATING_LARGE);
 
 			this.temperment = 3;
 			//Regular attack
@@ -55,20 +54,14 @@ package classes.Monsters
 			this.gems = rand(15) + 55;
 
 			//Appearance Variables
-			this.tallness =  102;
 			this.hairColor = "platinum-blonde";
 			this.hairLength = 15;
 
 			this.skinTone = "bronzed";
 			this.skinDesc = "skin";
 
-			this.wingDesc = "";
 
-			this.hipRating = 10;
-
-			this.buttRating = 8;
 			//Create imp sex attributes
-			this.createStatusAffect("Bonus aCapacity",50,0,0,0);
 			this.createPerk("Resolute",0,0,0,0);
 			this.createPerk("Focused",0,0,0,0);
 		}

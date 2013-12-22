@@ -23,6 +23,7 @@
 			init2Male([new Cock(rand(2) + 11,2.5)]);
 			init3BreastRows([0,0]);
 			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_NORMAL);
+			init5Body(rand(24) + 25,HIP_RATING_BOYISH,BUTT_RATING_TIGHT);
 			this.temperment                     = 1;
 			this.special1                       = 5019;
 			this.pronoun1                       = "he";
@@ -52,7 +53,6 @@
 			this.gems                           = rand(5) + 5;
 
 			//Appearance Variables
-			this.tallness                       = rand(24) + 25;
 			this.hairColor                      = "black";
 			this.hairLength                     = 5;
 
@@ -63,7 +63,6 @@
 			this.wingDesc                       = "small";
 
 			this.wingType                       = WING_TYPE_IMP;
-			this.buttRating                     = 2;
 
 
 		}

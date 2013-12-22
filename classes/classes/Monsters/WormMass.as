@@ -20,9 +20,9 @@
 			trace("WormMass Constructor!");
 			init1Names("the ","worms","worms","Before you stands the horrid mass of worms. It has shifted itself and now takes the shape of a humanoid composed completely of the worms in the colony. Its vaguely human shape lumbers towards you in a clearly aggressive manner.",true);
 			init2Genderless();
-			this.cumMultiplier = 3;
 			init3BreastRows();
 			init4Ass(ANAL_LOOSENESS_VIRGIN,ANAL_WETNESS_DRY);
+			init5Body(1,HIP_RATING_SLENDER,BUTT_RATING_BUTTLESS);
 
 			this.temperment = 3;
 			//Regular attack
@@ -55,16 +55,12 @@
 			this.gems = 0;
 
 			//Appearance Variables
-			this.tallness = 1;
 			this.hairColor = "none";
 			this.hairLength = 0;
 
 			this.skinTone = "white";
 			this.skinDesc = "skin";
 
-			this.hipRating = 2;
-
-			this.buttRating = 0;
 
 		}
 

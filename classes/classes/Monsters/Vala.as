@@ -17,6 +17,7 @@ package classes.Monsters
 			init2Female(VAGINA_WETNESS_SLICK,VAGINA_LOOSENESS_GAPING_WIDE,25);
 			init3BreastRows("E");
 			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_DRY,10);
+			init5Body("4'",HIP_RATING_CURVY,BUTT_RATING_LARGE);
 
 			this.temperment = 2;
 			//Lusty teases
@@ -54,7 +55,6 @@ package classes.Monsters
 			this.gems = 1;
 
 			//Appearance Variables
-			this.tallness = 48;
 			this.hairColor = "purple";
 			this.hairLength = 22;
 
@@ -65,9 +65,6 @@ package classes.Monsters
 
 			this.wingType = WING_TYPE_BEE_LIKE_LARGE;
 
-			this.hipRating = 10;
-
-			this.buttRating = 8;
 
 		}
 		

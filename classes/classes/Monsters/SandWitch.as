@@ -20,10 +20,9 @@
 			trace("SandWitch Constructor!");
 			init1Names("the ","sand witch",mainClassPtr.silly()?"sandwidch":"sandwitch","A sand witch appears to be totally human, an oddity in this strange land.  She has dirty blonde hair and a very tanned complexion, choosing to cover most of her body with robes of the same color as the desert sands, making her impossible to spot from afar.");
 			init2Female(VAGINA_WETNESS_WET,VAGINA_LOOSENESS_LOOSE);
-			this.cumMultiplier                              = 3;
-			this.hoursSinceCum                              = 20;
 			init3BreastRows(["DD"],["DD"]);
 			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_NORMAL);
+			init5Body(rand(12) + 55,HIP_RATING_CURVY,BUTT_RATING_LARGE);
 
 			this.temperment                     = 1;
 			this.special1                       = 5020;
@@ -54,18 +53,12 @@
 			this.gems                           = rand(15) + 5;
 
 			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.gender                         = 2;
-			this.tallness                       = rand(12) + 55;
 			this.hairColor                      = "sandy-blonde";
 			this.hairLength                     = 15;
 
 			this.skinTone                       = "bronzed";
 			this.skinDesc                       = "skin";
 
-			this.hipRating                      = 10;
-
-			this.buttRating                                 = 8;
 
 		}
 

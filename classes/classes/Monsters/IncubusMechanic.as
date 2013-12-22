@@ -9,10 +9,10 @@ package classes.Monsters
 		public function IncubusMechanic(mainClassPtr:*) {
 			super(mainClassPtr);
 			init1Names("the ", "incubus mechanic", "incubusmechanic", "The demon before you is clad only in cut-off denim overalls.  Covered in stains of oil and other strange fluids, they appear to be in pretty rough shape.  There is a large hole ripped in the crotch, allowing the demon's foot-long member to hang free.  His skin is light purple and perfect, contrasting with the slovenly appearance of his clothing.  His face is rugged and handsome, topped with a simple black ponytail and two large horns that sprout from his forehead like twisted tree-trunks.  He wears a narrow goatee on his chin that is kept skillfully braided.  A cocky smile always seems to grace his features, giving him an air of supreme confidence.");
-			init2Male(new Cock(12,1.75),2,0,3);
-			this.gender = 2;
+			init2Male(new Cock(12,1.75),2,2,3);
 			init3BreastRows(0);
 			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_SLIME_DROOLING);
+			init5Body(rand(9) + 70,HIP_RATING_AMPLE,BUTT_RATING_TIGHT,LOWER_BODY_TYPE_DEMONIC_CLAWS);
 			this.temperment = 3;
 			//Regular attack
 			this.special1 = 11035;
@@ -50,7 +50,6 @@ package classes.Monsters
 			this.gems = rand(25)+10;
 
 			//Appearance Variables
-			this.tallness = rand(9) + 70;
 			this.hairColor = "black";
 			this.hairLength = 12;
 
@@ -59,13 +58,8 @@ package classes.Monsters
 
 			this.wingDesc = "tiny hidden";
 
-			this.lowerBody = LOWER_BODY_TYPE_DEMONIC_CLAWS;
 
 			this.tailType = TAIL_TYPE_DEMONIC;
-
-			this.hipRating = 6;
-
-			this.buttRating = 2;
 			//Create succubus sex attributes
 		}
 	}

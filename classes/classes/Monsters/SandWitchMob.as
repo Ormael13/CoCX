@@ -14,10 +14,9 @@ package classes.Monsters
 			super(mainClassPtr);
 			init1Names("the ","sand witches","sandwitchmob","You are surrounded by a veritable tribe of sand witches.  Like the ones that roam the sands, they have simple robes, blond hair, and four big breasts that push at the concealing cloth immodestly.  Glowering at you hatefully, the pack of female spellcasters readies itself to drag you down with sheer numbers.",true);
 			init2Female(VAGINA_WETNESS_WET,VAGINA_LOOSENESS_LOOSE);
-			this.cumMultiplier = 3;
-			this.hoursSinceCum = 20;
 			init3BreastRows(["DD"],["DD"]);
 			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_NORMAL);
+			init5Body(rand(12) + 55,HIP_RATING_CURVY,BUTT_RATING_LARGE);
 
 			this.temperment = 3;
 			//Regular attack
@@ -55,21 +54,12 @@ package classes.Monsters
 			this.gems = rand(15) + 5;
 
 			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.gender = 2;
-			this.tallness = rand(12) + 55;
 			this.hairColor = "sandy-blonde";
 			this.hairLength = 15;
 
 			this.skinTone = "bronzed";
 			this.skinDesc = "skin";
 
-			this.wingDesc = "";
-
-			this.hipRating = 10;
-
-			this.buttRating = 8;
-			//Create imp sex attributes
 		}
 		
 	}

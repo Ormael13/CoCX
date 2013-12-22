@@ -18,6 +18,7 @@ package classes.Monsters
 			init2Male(new Cock(9,2,CockTypesEnum.HUMAN),0,1,3);
 			init2Female(VAGINA_WETNESS_SLICK,VAGINA_LOOSENESS_LOOSE);
 			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_SLIME_DROOLING);
+			init5Body(rand(8) + 70,HIP_RATING_AMPLE+2,BUTT_RATING_LARGE);
 
 			this.temperment = 3;
 			//Regular attack
@@ -52,7 +53,6 @@ package classes.Monsters
 			this.gems = rand(25)+40;
 
 			//Appearance Variables
-			this.tallness = rand(8) + 70;
 			this.hairColor = "black";
 			this.hairLength = 15;
 
@@ -62,10 +62,6 @@ package classes.Monsters
 			this.hornType = HORNS_DEMON;
 
 			this.tailType = TAIL_TYPE_DEMONIC;
-
-			this.hipRating = 8;
-
-			this.buttRating = 8;
 		}
 		
 	}

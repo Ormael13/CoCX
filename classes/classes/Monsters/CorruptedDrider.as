@@ -29,6 +29,7 @@ package classes.Monsters
 			init2Female(VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_GAPING, 70, true);
 			init3BreastRows("DD");
 			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,70);
+			init5Body("10'",HIP_RATING_CURVY+2,BUTT_RATING_LARGE+1);
 
 			if (pierced) {
 				this.nipplesPierced = 1;
@@ -78,9 +79,6 @@ package classes.Monsters
 			this.gems = rand(10) + 20;
 
 			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.gender = 3;
-			this.tallness = 120;
 
 			this.hairLength = 24;
 
@@ -90,11 +88,6 @@ package classes.Monsters
 
 			this.tailRecharge = 0;
 
-			this.hipRating = 12;
-
-
-			this.buttRating = 9;
-			//Create goblin sex attributes
 		}
 
 	}

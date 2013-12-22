@@ -21,6 +21,7 @@
 			init1Names("", "Marble", "marble", "Before you stands a female humanoid with numerous cow features, such as medium-sized cow horns, cow ears, and a cow tail.  She is very well endowed, with wide hips and a wide ass.  She stands over 6 feet tall.  She is using a large two handed hammer with practiced ease, making it clear she is much stronger then she may appear to be.");
 			init2Female(VAGINA_WETNESS_NORMAL,VAGINA_LOOSENESS_NORMAL);
 			init3BreastRows("F");
+			init5Body("6'4",HIP_RATING_CURVY,BUTT_RATING_LARGE,LOWER_BODY_TYPE_CENTAUR);
 
 			this.temperment = 2;
 			//Regular attack
@@ -57,20 +58,13 @@
 			this.gems = rand(5) + 25;
 
 			//Appearance Variables
-			this.tallness = 76;
 			this.hairColor = "brown";
 			this.hairLength = 13;
 
 			this.skinTone = "pale";
 			this.skinDesc = "skin";
 
-			this.lowerBody = LOWER_BODY_TYPE_CENTAUR;
-
 			this.tailType = TAIL_TYPE_COW;
-
-			this.hipRating = 10;
-
-			this.buttRating = 8;
 			//Create goblin sex attributes
 			init4Ass(0,0);
 

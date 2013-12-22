@@ -27,15 +27,14 @@ package classes.Monsters
 							".  Pacing around you, the well-built young warrior intently studies her mentor's defenses, readying for your next attack.");
 			init2Female(VAGINA_WETNESS_NORMAL, VAGINA_LOOSENESS_NORMAL, 85);
 			init3BreastRows("E+");
+			init4Ass(ANAL_LOOSENESS_VIRGIN,ANAL_WETNESS_DRY,85);
+			init5Body(90,HIP_RATING_CURVY+2,BUTT_RATING_LARGE+1);
 
 			this.temperment = 2;
 			//Lusty teases
 			this.special1 = 5133;
 			this.special2 = 5134;
 			this.special3 = 5135;
-			this.pronoun1 = "she";
-			this.pronoun2 = "her";
-			this.pronoun3 = "her";
 
 			this.armorDef = 12;
 
@@ -68,7 +67,6 @@ package classes.Monsters
 			this.gems = 10 + rand(5);
 
 			//Appearance Variables
-			this.tallness = 90;
 			this.hairColor = "red";
 			this.hairLength = 13;
 
@@ -79,11 +77,7 @@ package classes.Monsters
 
 			this.tailRecharge = 0;
 
-			this.hipRating = 12;
-
-			this.buttRating = 9;
 			//Create goblin sex attributes
-			init4Ass(0,0,85);
 		}
 
 	}

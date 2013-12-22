@@ -23,6 +23,7 @@
 			init2Male(new Cock(12,2));
 			init3BreastRows(0);
 			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,10);
+			init5Body(36,HIP_RATING_SLENDER,BUTT_RATING_TIGHT);
 
 			this.temperment = 2;
 			//Uber
@@ -62,8 +63,6 @@
 			this.gems = 20 + rand(25);
 
 			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.tallness = 36;
 			this.hairColor = "black";
 			this.hairLength = 1;
 
@@ -72,9 +71,6 @@
 
 			this.wingDesc = "imp wings";
 
-			this.hipRating = 2;
-
-			this.buttRating = 2;
 			//Create goblin sex attributes
 
 			this.XP = this.totalXP(mainClassPtr.player.level);

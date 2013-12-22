@@ -18,6 +18,7 @@ package classes.Monsters
 			this.hoursSinceCum = mainClassPtr.player.ballSize * 10;
 			init3BreastRows("D");
 			init4Ass(ANAL_LOOSENESS_LOOSE,ANAL_WETNESS_DRY,40);
+			init5Body("6'1",HIP_RATING_AMPLE,BUTT_RATING_AVERAGE+1,LOWER_BODY_TYPE_HOOFED);
 
 			this.temperment = 1;
 
@@ -50,7 +51,6 @@ package classes.Monsters
 			this.gems = rand(15) + 95;
 
 			//Appearance Variables
-			this.tallness = 73;
 			this.hairColor = "red";
 			this.hairLength = 3;
 
@@ -62,14 +62,8 @@ package classes.Monsters
 
 			this.wingType = WING_TYPE_IMP;
 
-			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
-
 			this.tailType = TAIL_TYPE_LIZARD;
 
-			this.hipRating = 6;
-
-			this.buttRating = 5;
-			//Create imp sex attributes
 		}
 		
 	}

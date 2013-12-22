@@ -32,6 +32,7 @@ package classes.Monsters
 			init2Female(VAGINA_WETNESS_SLICK,VAGINA_LOOSENESS_NORMAL,20);
 			init3BreastRows("D");
 			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_NORMAL,20);
+			init5Body(rand(24) + 60,HIP_RATING_AMPLE,BUTT_RATING_AVERAGE+1);
 
 			this.temperment = 1;
 			this.special1 = 5029;
@@ -63,7 +64,6 @@ package classes.Monsters
 			this.gems = rand(10) + 10;
 
 			//Appearance Variables
-			this.tallness = rand(24) + 60;
 
 			this.hairLength = 13 + rand(20);
 
@@ -76,9 +76,6 @@ package classes.Monsters
 			//7 - cow!
 			this.tailType = TAIL_TYPE_FOX;
 
-			this.hipRating = 6;
-
-			this.buttRating = 5;
 			//Create imp sex attributes
 		}
 

@@ -7,7 +7,7 @@
 
 	public class Appearance
 	{
-		#include "../../includes/appearanceDefs.as"
+		include "../../includes/appearanceDefs.as"
 		// Eventually, this should contain the entire char appearance.
 		// At the moment, it's pretty piecemeal.
 

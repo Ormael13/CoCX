@@ -18,6 +18,7 @@ package classes.Monsters
 			init2Female(VAGINA_WETNESS_DROOLING,VAGINA_LOOSENESS_NORMAL);
 			init3BreastRows(0);
 			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_SLIME_DROOLING);
+			init5Body(rand(9) + 70,HIP_RATING_AMPLE+2,BUTT_RATING_TIGHT,LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS);
 
 			this.temperment = 3;
 			//Regular attack
@@ -61,9 +62,6 @@ package classes.Monsters
 			this.gems = rand(25)+10;
 
 			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.gender = 2;
-			this.tallness = rand(9) + 70;
 			this.hairColor = "purple";
 			this.hairLength = 42;
 
@@ -72,14 +70,8 @@ package classes.Monsters
 
 			this.wingDesc = "tiny hidden";
 
-			this.lowerBody = LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
-
 			this.tailType = TAIL_TYPE_DEMONIC;
 
-			this.hipRating = 8;
-
-			this.buttRating = 2;
-			//Create succubus sex attributes
 		}
 		
 	}

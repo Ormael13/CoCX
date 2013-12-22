@@ -16,6 +16,7 @@ package classes.Monsters
 			init2Female(VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_LOOSE, 40);
 			init3BreastRows("E+");
 			init4Ass(ANAL_LOOSENESS_VIRGIN,ANAL_WETNESS_DRY,30);
+			init5Body("7'6",HIP_RATING_CURVY+2,BUTT_RATING_LARGE+1);
 
 			this.temperment = 2;
 			//Lusty teases
@@ -53,9 +54,6 @@ package classes.Monsters
 			this.gems = rand(10) + 10;
 
 			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.gender = 2;
-			this.tallness = 90;
 			this.hairColor = "red";
 			this.hairLength = 13;
 
@@ -66,9 +64,6 @@ package classes.Monsters
 
 			this.tailRecharge = 0;
 
-			this.hipRating = 12;
-
-			this.buttRating = 9;
 			//Create goblin sex attributes
 		}
 		

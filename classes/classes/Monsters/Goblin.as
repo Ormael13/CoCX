@@ -21,6 +21,8 @@
 			init1Names("the ", "goblin", "goblin", "The goblin before you is a typical example of her species, with dark green skin, pointed ears, and purple hair that would look more at home on a punk-rocker.  She's only about three feet tall, but makes up for it with her curvy body, sporting hips and breasts that would entice any of the men in your village were she full-size.  There isn't a single scrap of clothing on her, just lewd leather straps and a few clinking pouches.  She does sport quite a lot of piercings – the most noticeable being large studs hanging from her purple nipples.  Her eyes are fiery red, and practically glow with lust.  This one isn't going to be satisfied until she has her way with you.  It shouldn't be too hard to subdue such a little creature, right?");
 			init2Female(VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL, 40);
 			init3BreastRows("E");
+			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,30);
+			init5Body(35 + rand(4),HIP_RATING_AMPLE+2,BUTT_RATING_LARGE);
 
 			this.temperment = 2;
 			//Regular attack
@@ -55,7 +57,6 @@
 			this.gems = rand(5) + 5;
 
 			//Appearance Variables
-			this.tallness = 35 + rand(4);
 			this.hairColor = "purple";
 			this.hairLength = 4;
 
@@ -64,11 +65,6 @@
 
 			this.wingType = WING_TYPE_NONE;
 
-			this.hipRating = 8;
-
-			this.buttRating = 8;
-			//Create goblin sex attributes
-			init4Ass(1,0,30);
 
 		}
 

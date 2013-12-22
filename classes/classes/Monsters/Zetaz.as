@@ -18,6 +18,7 @@ package classes.Monsters
 			init2Male(new Cock(rand(2) + 11,2.5,CockTypesEnum.HUMAN),2,1,3,20);
 			init3BreastRows();
 			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY);
+			init5Body("4'1",HIP_RATING_BOYISH,BUTT_RATING_TIGHT);
 
 
 			this.temperment = 1;
@@ -50,7 +51,6 @@ package classes.Monsters
 			this.gems = rand(55) + 150;
 
 			//Appearance Variables
-			this.tallness = 49;
 			this.hairColor = "black";
 			this.hairLength = 5;
 
@@ -60,10 +60,6 @@ package classes.Monsters
 			this.wingDesc = "small";
 
 			this.wingType = WING_TYPE_IMP;
-
-			this.hipRating = 0;
-
-			this.buttRating = 2;
 			//Create imp sex attributes
 		}
 		

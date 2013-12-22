@@ -23,6 +23,7 @@
 			init2Male([new Cock(18,2),new Cock(18,2)],0,1,3);
 			init2Female(VAGINA_WETNESS_SLICK,VAGINA_LOOSENESS_LOOSE);
 			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_SLIME_DROOLING);
+			init5Body(rand(8) + 70,HIP_RATING_AMPLE+2,BUTT_RATING_LARGE);
 
 			this.temperment = 3;
 			//Regular attack
@@ -56,7 +57,6 @@
 			this.gems = rand(25)+10;
 
 			//Appearance Variables
-			this.tallness = rand(8) + 70;
 			this.hairColor = "black";
 			this.hairLength = 15;
 
@@ -67,9 +67,6 @@
 
 			this.tailType = TAIL_TYPE_DEMONIC;
 
-			this.hipRating = 8;
-
-			this.buttRating = 8;
 			//Create imp sex attributes
 
 		}

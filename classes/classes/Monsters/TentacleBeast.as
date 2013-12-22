@@ -24,6 +24,7 @@
 			init2Genderless();
 			init3BreastRows();
 			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_SLIME_DROOLING);
+			init5Body(rand(9) + 70,HIP_RATING_BOYISH,BUTT_RATING_BUTTLESS);
 
 			this.temperment = 3;
 			//Regular attack
@@ -31,9 +32,6 @@
 			//Lust attack
 			this.special2 = 5073;
 			this.special3 = 5072;
-			this.pronoun1 = "it";
-			this.pronoun2 = "it";
-			this.pronoun3 = "its";
 
 			//Clothing/Armor
 			this.armorName = "rubbery skin";
@@ -65,7 +63,6 @@
 			this.gems = rand(15)+5;
 
 			//Appearance Variables
-			this.tallness = rand(9) + 70;
 			this.hairColor = "green";
 			this.hairLength = 1;
 
@@ -73,10 +70,6 @@
 			this.skinDesc = "bark";
 
 			this.tailType = TAIL_TYPE_DEMONIC;
-
-			this.hipRating = 0;
-
-			this.buttRating = 0;
 		}
 
 	}

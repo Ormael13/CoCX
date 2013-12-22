@@ -23,6 +23,7 @@
 			init2Female(VAGINA_WETNESS_DROOLING,VAGINA_LOOSENESS_GAPING_WIDE,40);
 			init3BreastRows("DD");
 			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,10);
+			init5Body("5'5",HIP_RATING_INHUMANLY_WIDE,BUTT_RATING_EXPANSIVE);
 
 			this.temperment = 2;
 			//Uber
@@ -61,7 +62,6 @@
 			this.gems = 20 + rand(25);
 
 			//Appearance Variables
-			this.tallness = 65;
 			this.hairColor = "pink";
 			this.hairLength = 16;
 
@@ -71,10 +71,6 @@
 			this.wingDesc = "large feathery wings";
 
 			this.wingType = WING_TYPE_HARPY;
-
-			this.hipRating = 20;
-
-			this.buttRating = 13;
 
 			this.XP = this.totalXP(mainClassPtr.player.level);
 		}

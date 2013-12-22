@@ -20,10 +20,12 @@
 			super(mainClassPtr);
 			trace("GreenSlime Constructor!");
 			init1Names("a ", "green slime", "greenslime", "The green slime has a normally featureless face that sits on top of wide shoulders that sprout into thick, strong arms.  Its torso fades into an indistinct column that melds into the lump of ooze on the ground that serves as a makeshift form of locomotion.");
-			init2Male(new Cock(18,2,CockTypesEnum.HUMAN),0,1,3);
+			init2Male(new Cock(18,2,CockTypesEnum.HUMAN),0,1,3,20);
 			this.pronoun1 = "it";
 			this.pronoun2 = "it";
 			this.pronoun3 = "its";
+			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_SLIME_DROOLING);
+			init5Body(rand(8) + 80,HIP_RATING_AMPLE,BUTT_RATING_LARGE);
 
 			this.temperment = 3;
 			this.special1 = 5040;
@@ -56,21 +58,11 @@
 			this.gems = rand(5)+1;
 
 			//Appearance Variables
-			this.tallness = rand(8) + 80;
 			this.hairColor = "green";
 			this.hairLength = 0;
 
 			this.skinTone = "green";
 			this.skinDesc = "skin";
-
-			this.hipRating = 6;
-
-			this.buttRating = 8;
-			//Create imp sex attributes
-
-
-			this.hoursSinceCum = 20;
-			init4Ass(4,5);
 
 		}
 

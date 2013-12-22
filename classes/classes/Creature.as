@@ -58,8 +58,7 @@ package classes
 				
 		//Appearance Variables
 		//Gender 1M, 2F, 3H
-		//public var gender:Number = GENDER_MALE;
-		public var gender:Number = 0;
+		public var gender:Number = GENDER_NONE;
 		public var tallness:Number = 0;
 		
 		/*Hairtype
@@ -68,7 +67,7 @@ package classes
 		2- ghost
 		3- goo!
 		4- anemononeoenoeneo!*/
-		public var hairType:Number = 0;
+		public var hairType:Number = HAIR_NORMAL;
 		public var hairColor:String = "no";
 		public var hairLength:Number = 0;
 		
@@ -77,8 +76,7 @@ package classes
 		1 - furry
 		2 - scaley
 		3 - goopey*/
-		//public var skinType:Number = SKIN_TYPE_PLAIN;
-		public var skinType:Number = 0;
+		public var skinType:Number = SKIN_TYPE_PLAIN;
 		public var skinTone:String = "albino";
 		public var skinDesc:String = "skin";
 		public var skinAdj:String = "";
@@ -101,9 +99,8 @@ package classes
 		14 - fullcoon
 		15 - halfmouse
 		16 - fullmouse*/
-		//public var faceType:Number = FACE_HUMAN;
 		public var faceType:Number = FACE_HUMAN;
-		
+
 		/*EarType
 		-1 - none!
 		0 - human
@@ -119,8 +116,7 @@ package classes
 		10 - dragon
 		11 - coon
 		12 - mouse*/
-		//public var earType:Number = EARS_HUMAN;
-		public var earType:Number = 0;
+		public var earType:Number = EARS_HUMAN;
 		public var earValue:Number = 0;
 		
 		/*Horntype
@@ -129,9 +125,8 @@ package classes
 		3 - Draconic/Lizard
 		4 - Double draconic
 		5 - Antlers*/
-		//public var hornType:Number = HORNS_NONE;
-		public var hornType:Number = 0;
-		
+		public var hornType:Number = HORNS_NONE;
+
 		/*Wingtype
 		0 - none
 		1 - bee
@@ -146,8 +141,7 @@ package classes
 		10 - small dagron
 		11 - trogdor wings
 		12 - sandtrap wings*/
-		//public var wingType:Number = WING_TYPE_NONE;
-		public var wingType:Number = 0;
+		public var wingType:Number = WING_TYPE_NONE;
 		public var wingDesc:String = "non-existant";
 		
 		/* lowerBody:
@@ -171,9 +165,8 @@ package classes
 		17 - foxpaws
 		18 - dragonfeet
 		19 - raccoonfeet*/
-		//public var lowerBody:Number = LOWER_BODY_TYPE_HUMAN;
-		public var lowerBody:Number = 0;
-		
+		public var lowerBody:Number = LOWER_BODY_TYPE_HUMAN;
+
 		/*tailType:
 		0 - none
 		1 - horse
@@ -192,8 +185,7 @@ package classes
 		14 - dagron tail
 		15 - raccoon tail
 		16 - mousetail*/
-		//public var tailType:Number = TAIL_TYPE_NONE;
-		public var tailType:Number = 0;
+		public var tailType:Number = TAIL_TYPE_NONE;
 		
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		public var tailVenom:Number = 0;
@@ -208,7 +200,7 @@ package classes
 		10 - curvy//flaring
 		15 - child-bearing/fertile
 		20 - inhumanly wide*/
-		public var hipRating:Number = 0;
+		public var hipRating:Number = HIP_RATING_BOYISH;
 		
 		/*buttRating
 		0 - buttless
@@ -220,7 +212,7 @@ package classes
 		13 - expansive
 		16 - huge
 		20 - inconceivably large/big/huge etc*/
-		public var buttRating:Number = 0;
+		public var buttRating:Number = BUTT_RATING_BUTTLESS;
 		
 		//Piercings
 		//TODO: Pull this out into it's own class and enum.

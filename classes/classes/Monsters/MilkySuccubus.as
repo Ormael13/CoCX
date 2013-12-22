@@ -14,8 +14,9 @@ package classes.Monsters
 			super(mainClassPtr);
 			init1Names("the ", "milky succubus", "milkysuccubus", "You are fighting a milky, cow-like succubus.  She stands about seven feet tall and is hugely voluptuous, with breasts three times the size of her head, tipped with a cluster of four obscenely teat-like nipples.  Her hips flare out into an exaggerated hourglass shape, with a long tail tipped with a fleshy arrow-head spade that waves above her spankable butt.  A small cowbell is tied at the base of the arrow-head with a cute little ribbon.  Wide, cow-like horns, easily appropriate for a minotaur, rise from her head, and she flicks bovine ears about the sides of her head whilst sashaying from side to side on demonic, high-heeled feet.  Her skin is a vibrant purple with splotches of shiny black here and there, including one large spot covering her right eye.  She's using a leather whip as a weapon.");
 			init2Female(VAGINA_WETNESS_SLAVERING,VAGINA_LOOSENESS_NORMAL,300);
-			this.cumMultiplier = 3;
 			init3BreastRows("G");
+			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_SLIME_DROOLING);
+			init5Body(rand(9) + 60,HIP_RATING_CURVY,BUTT_RATING_LARGE+1,LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS);
 
 			this.temperment = 3;
 			//Regular attack
@@ -55,9 +56,6 @@ package classes.Monsters
 			this.gems = rand(25)+10;
 
 			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.gender = 2;
-			this.tallness = rand(9) + 60;
 			this.hairColor = "black";
 			this.hairLength = 13;
 
@@ -67,14 +65,9 @@ package classes.Monsters
 			this.hornType = HORNS_DRACONIC_X2;
 			this.wingDesc = "tiny hidden";
 
-			this.lowerBody = LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
 
 			this.tailType = TAIL_TYPE_DEMONIC;
 
-			this.hipRating = 10;
-
-			this.buttRating = 9;
-			init4Ass(4,5);
 		}
 		
 	}

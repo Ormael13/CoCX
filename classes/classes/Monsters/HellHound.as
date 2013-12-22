@@ -21,6 +21,8 @@
 			trace("HellHound Constructor!");
 			init1Names("the ", "hellhound", "hellhound", "It looks like a large demon on all fours with two heads placed side-by-side. The heads are shaped almost like human heads, but they have dog ears on the top and have a long dog snout coming out where their mouths and noses would be.  Its eyes and mouth are filled with flames and its hind legs capped with dog paws, but its front ones almost look like human hands.  Its limbs end in large, menacing claws. A thick layer of dark fur covers his entire body like armor.  Both heads look at you hungrily as the hellhound circles around you. You get the feeling that reasoning with this beast will be impossible.");
 			init2Male([new Cock(8,2),new Cock(8,2)],2,4,5);
+			init4Ass(ANAL_LOOSENESS_NORMAL,ANAL_WETNESS_NORMAL);
+			init5Body(47,HIP_RATING_AVERAGE,BUTT_RATING_AVERAGE+1);
 			this.temperment = 3;
 			//Regular attack
 			this.special1 = 5066;
@@ -53,7 +55,6 @@
 			this.gems = 10+rand(10);
 
 			//Appearance Variables
-			this.tallness = 47;
 			this.hairColor = "red";
 			this.hairLength = 3;
 
@@ -62,11 +63,7 @@
 
 			this.tailType = TAIL_TYPE_DOG;
 
-			this.hipRating = 4;
-
-			this.buttRating = 5;
 			//Create imp sex attributes
-			init4Ass(2,1);
 
 		}
 

@@ -14,9 +14,8 @@ package classes.Monsters
 			super(mainClassPtr);
 			init1Names("", "Brigid the Jailer", "brigid", "Brigid is a monster of a harpy, standing a foot taller than any other you've seen. She's covered in piercings, and her pink-dyed hair is shaved down to a long mohawk. She's nude, save for the hot poker in her right hand and the shield in her left, which jingles with every step she takes thanks to the cell keys beneath it.");
 			init2Female(VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_LOOSE);
-			this.cumMultiplier = 3;
-			this.ballSize = 1;
 			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_DRY);
+			init5Body(rand(8) + 70,HIP_RATING_AMPLE+2,BUTT_RATING_LARGE);
 
 			this.temperment = 3;
 
@@ -50,9 +49,6 @@ package classes.Monsters
 			this.gems = rand(25)+140;
 
 			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.gender = 3;
-			this.tallness = rand(8) + 70;
 			this.hairColor = "black";
 			this.hairLength = 15;
 
@@ -62,10 +58,6 @@ package classes.Monsters
 			this.hornType = HORNS_DEMON;
 
 			this.tailType = TAIL_TYPE_DEMONIC;
-
-			this.hipRating = 8;
-
-			this.buttRating = 8;
 		}
 		
 	}

@@ -27,17 +27,13 @@ package classes.Monsters
 			this.skinAdj = SKIN_VARIATIONS[temp*2+1];
 			init1Names("the ", "chameleon girl", "chameleongirl", "You're faced with a tall lizard-like girl with smooth " + this.skinTone + " skin and long, " + this.skinAdj + " stripes that run along her body from ankle to shoulder.  An abnormally large tail swishes behind her, and her hands are massive for her frame, built for easily climbing the trees.  A pair of small, cute horns grow from her temples, and a pair of perky B-cups push out through her skimpy drapings.  Large, sharp claws cap her fingers, gesturing menacingly at you.");
 			init2Female(VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_LOOSE);
-			this.cumMultiplier = 3;
 			init4Ass(ANAL_LOOSENESS_NORMAL,ANAL_WETNESS_DRY);
+			init5Body(rand(2) + 68,HIP_RATING_AMPLE+2,BUTT_RATING_LARGE);
 
 			this.temperment = 3;
 			//Regular attack
 
 			//Lust attack
-
-			this.pronoun1 = "she";
-			this.pronoun2 = "her";
-			this.pronoun3 = "her";
 
 			//Clothing/Armor
 			this.armorName = "skin";
@@ -69,18 +65,12 @@ package classes.Monsters
 			this.gems = 10 + rand(50);
 
 			//Appearance Variables
-			this.tallness = rand(2) + 68;
 			this.hairColor = "black";
 			this.hairLength = 15;
 
 			this.skinDesc = "skin";
 
 			this.tailRecharge = 0;
-
-			this.hipRating = 8;
-
-			this.buttRating = 8;
-
 		}
 		
 	}
