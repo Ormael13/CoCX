@@ -90,6 +90,7 @@
 		//include "../../includes/flagDefs.as";
 		include "../../includes/appearanceDefs.as";
 
+		public var testContent:TestContent = new TestContent();
 		public var umasShop:UmasShop = new UmasShop();
 		
 		include "../../includes/akbal.as";
