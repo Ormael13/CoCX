@@ -22,6 +22,8 @@
 			init3BreastRows("D");
 			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,40);
 			init5Body("5'5",HIP_RATING_AMPLE+2,BUTT_RATING_LARGE);
+			init6Skin("gray");
+			init7Hair("silver",16);
 			this.temperment = 2;
 			//Lusty teases
 			this.special1 = 5097;
@@ -56,12 +58,6 @@
 			this.XP = this.totalXP(mainClassPtr.player.level);
 			this.gems = rand(15) + 5;
 
-			//Appearance Variables
-			this.hairColor = "silver";
-			this.hairLength = 16;
-
-			this.skinTone = "gray";
-			this.skinDesc = "skin";
 
 			//Create goblin sex attributes
 

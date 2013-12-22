@@ -15,7 +15,6 @@ package classes.Monsters
 		public function Kitsune(mainClassPtr:*, hairColor:String)
 		{
 			super(mainClassPtr);
-			this.hairColor = hairColor;
 
 			if (rand(3) != 2) mainClassPtr.flags[kFLAGS.redheadIsFuta] = 1;
 			init1Names("a ", "kitsune", "kitsune",
@@ -33,6 +32,8 @@ package classes.Monsters
 			init3BreastRows("D");
 			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_NORMAL,20);
 			init5Body(rand(24) + 60,HIP_RATING_AMPLE,BUTT_RATING_AVERAGE+1);
+			init6Skin("pale");
+			init7Hair(hairColor,13 + rand(20));
 
 			this.temperment = 1;
 			this.special1 = 5029;
@@ -65,10 +66,6 @@ package classes.Monsters
 
 			//Appearance Variables
 
-			this.hairLength = 13 + rand(20);
-
-			this.skinTone = "pale";
-			this.skinDesc = "skin";
 
 			//3 - cowface
 			this.faceType = FACE_COW_MINOTAUR;

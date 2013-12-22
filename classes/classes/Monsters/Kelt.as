@@ -1,5 +1,6 @@
 package classes.Monsters 
 {
+	import classes.Appearance;
 	import classes.Cock;
 	import classes.Monster;
 	import classes.CockTypesEnum;
@@ -20,6 +21,9 @@ package classes.Monsters
 			init3BreastRows(0);
 			init4Ass(ANAL_LOOSENESS_NORMAL,ANAL_WETNESS_DRY,50);
 			init5Body(84,HIP_RATING_AVERAGE,BUTT_RATING_AVERAGE+1,LOWER_BODY_TYPE_CENTAUR);
+			init6Skin("tan");
+			init7Hair(Appearance.randomChoice("black","brown"),3);
+
 			this.temperment = 1;
 
 			//Clothing/Armor
@@ -48,16 +52,6 @@ package classes.Monsters
 			this.level = 6;
 			this.XP = totalXP();
 			this.gems = rand(5) + 5;
-
-			//Appearance Variables
-			//randomly assign hair color
-			if(rand(2) == 0) this.hairColor = "black";
-			else this.hairColor = "brown";
-			this.hairLength = 3;
-
-			this.skinTone = "tan";
-			this.skinDesc = "skin";
-
 
 			this.tailType = TAIL_TYPE_HORSE;
 

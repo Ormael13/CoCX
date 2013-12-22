@@ -19,6 +19,8 @@ package classes.Monsters
 			init3BreastRows("DD");
 			init4Ass(ANAL_LOOSENESS_NORMAL,ANAL_WETNESS_DRY,30);
 			init5Body("5'5",HIP_RATING_CURVY,BUTT_RATING_NOTICEABLE);
+			init6Skin("striped orange");
+			init7Hair("silver",20);
 
 			this.temperment = 2;
 			//Lusty teases
@@ -54,12 +56,6 @@ package classes.Monsters
 			this.XP = totalXP();
 			this.gems = rand(5) + 1;
 
-			//Appearance Variables
-			this.hairColor = "silver";
-			this.hairLength = 20;
-
-			this.skinTone = "striped orange";
-			this.skinDesc = "skin";
 
 			//Create goblin sex attributes
 		}

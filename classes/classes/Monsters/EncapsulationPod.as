@@ -71,6 +71,8 @@
 			init3BreastRows();
 			init4Ass();
 			init5Body(120,HIP_RATING_SLENDER,BUTT_RATING_BUTTLESS);
+			init6Skin("purple",SKIN_TYPE_PLAIN,"covering");
+			init7Hair("black",0);
 
 			this.temperment = 2;
 			//Uber
@@ -105,12 +107,6 @@
 			this.XP = totalXP() + 80;
 			this.gems = 1;
 
-			//Appearance Variables
-			this.hairColor = "black";
-			this.hairLength = 0;
-
-			this.skinTone = "purple";
-			this.skinDesc = "covering";
 
 			this.wingDesc = "";
 

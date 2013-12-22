@@ -16,14 +16,14 @@
 	{
 		
 
-		public function Minotaur(mainClassPtr:*,hairColor:String)
+		public function Minotaur(mainClassPtr:*,furColor:String)
 		{
 			super(mainClassPtr);
 			trace("Minotaur Constructor!");
 			trace(mainClassPtr.flags);
 
 			var hasAxe:Boolean = rand(3)==0;
-			init1Names("the ","minotaur","minotaur","An angry-looking minotaur looms over you.  Covered in shaggy " + hairColor + " fur, the beast is an imposing sight.  Wearing little but an obviously distended loincloth, he is clearly already plotting his method of punishment.  Like most minotaurs he has hooves, a cow-like tail and face, prominent horns, and impressive musculature. ");
+			init1Names("the ","minotaur","minotaur","An angry-looking minotaur looms over you.  Covered in shaggy " + furColor + " fur, the beast is an imposing sight.  Wearing little but an obviously distended loincloth, he is clearly already plotting his method of punishment.  Like most minotaurs he has hooves, a cow-like tail and face, prominent horns, and impressive musculature. ");
 			if (hasAxe) this.long += "<b>This minotaur seems to have found a deadly looking axe somewhere!</b>";
 			init2Male(new Cock(rand(13) + 24,2 + rand(3),CockTypesEnum.HORSE),2,2+rand(13),1.5,mainClassPtr.player.ballSize * 10);
 			if(this.ballSize > 4)
@@ -31,7 +31,8 @@
 			init3BreastRows(0);
 			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_NORMAL,30);
 			init5Body(rand(37) + 84,HIP_RATING_AVERAGE,BUTT_RATING_AVERAGE,LOWER_BODY_TYPE_HOOFED);
-			this.hairColor = hairColor;
+			init6Skin(furColor,SKIN_TYPE_FUR,"shaggy fur");
+			init7Hair(Appearance.randomChoice("black","brown"),3);
 			this.temperment                            = 1;
 			this.special1                              = 5029;
 
@@ -67,17 +68,6 @@
 				this.level   = 5;
 			this.gems                                  = rand(5) + 5;
 
-			//Appearance Variables
-			//randomly assign hair color
-			if(rand(2) == 0) 
-				this.hairColor                         = "black";
-			else 
-				this.hairColor                         = "brown";
-			this.hairLength                            = 3;
-
-			this.skinType                              = SKIN_TYPE_FUR;
-			this.skinTone                              = "red";
-			this.skinDesc                              = "shaggy fur";
 
 			//3 - cowface
 			this.faceType                              = FACE_COW_MINOTAUR;

@@ -23,6 +23,8 @@
 			init3BreastRows("DD");
 			init4Ass(ANAL_LOOSENESS_NORMAL,ANAL_WETNESS_NORMAL);
 			init5Body("5'7",HIP_RATING_AMPLE,BUTT_RATING_LARGE);
+			init6Skin("pale");
+			init7Hair("black",15);
 
 			this.temperment = 3;
 			//Regular attack
@@ -54,12 +56,6 @@
 			this.XP = this.totalXP(mainClassPtr.player.level);
 			this.gems = 5+rand(10);
 
-			//Appearance Variables
-			this.hairColor = "black";
-			this.hairLength = 15;
-
-			this.skinTone = "pale";
-			this.skinDesc = "skin";
 
 		}
 

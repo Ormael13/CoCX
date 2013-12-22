@@ -23,6 +23,8 @@
 			init3BreastRows(["DD"],["DD"]);
 			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_NORMAL);
 			init5Body(rand(12) + 55,HIP_RATING_CURVY,BUTT_RATING_LARGE);
+			init6Skin("bronzed");
+			init7Hair("sandy-blonde",15);
 
 			this.temperment                     = 1;
 			this.special1                       = 5020;
@@ -52,12 +54,6 @@
 			this.XP                             = this.totalXP(mainClassPtr.player.level);
 			this.gems                           = rand(15) + 5;
 
-			//Appearance Variables
-			this.hairColor                      = "sandy-blonde";
-			this.hairLength                     = 15;
-
-			this.skinTone                       = "bronzed";
-			this.skinDesc                       = "skin";
 
 
 		}

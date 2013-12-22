@@ -24,6 +24,8 @@
 			init3BreastRows([0],[0],[0],[0]);
 			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_NORMAL);
 			init5Body("4'",HIP_RATING_SLENDER,BUTT_RATING_TIGHT);
+			init6Skin("spotted",SKIN_TYPE_FUR);
+			init7Hair("black",5);
 
 			this.temperment = 1;
 			this.special1 = 5125;
@@ -55,14 +57,8 @@
 
 			//Level Stats
 			this.level = 6;
-			this.totalXP(mainClassPtr.player.level)
 			this.gems = 15;
 
-			this.hairColor = "black";
-			this.hairLength = 5;
-			this.skinTone = "spotted";
-
-			this.skinDesc = "fur";
 			this.tailType = TAIL_TYPE_DOG;
 
 			this.XP = this.totalXP(mainClassPtr.player.level);

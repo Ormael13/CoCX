@@ -17,6 +17,8 @@ package classes.Monsters
 			init3BreastRows("C");
 			init4Ass(ANAL_LOOSENESS_VIRGIN,ANAL_WETNESS_DRY);
 			init5Body("4'",HIP_RATING_AMPLE,BUTT_RATING_TIGHT);
+			init6Skin("tawny",SKIN_TYPE_FUR);
+			init7Hair("brown",5);
 
 			this.temperment = 0;
 			this.armorName = "rags";
@@ -39,12 +41,7 @@ package classes.Monsters
 			this.XP = totalXP();
 			this.gems = 2 + rand(5);
 
-			this.hairColor = "brown";
-			this.hairLength = 5;
 
-			this.skinType = SKIN_TYPE_FUR;
-			this.skinTone = "tawny";
-			this.skinDesc = "fur";
 
 			//Create goblin sex attributes
 		}

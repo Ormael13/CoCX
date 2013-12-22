@@ -1,5 +1,6 @@
 package classes.Monsters 
 {
+	import classes.Appearance;
 	import classes.Cock;
 	import classes.Monster;
 	import classes.GlobalFlags.kFLAGS;
@@ -20,6 +21,8 @@ package classes.Monsters
 			init3BreastRows(0);
 			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_NORMAL,30);
 			init5Body(rand(37) + 84,HIP_RATING_AVERAGE,BUTT_RATING_AVERAGE+1,LOWER_BODY_TYPE_HOOFED);
+			init6Skin("red",SKIN_TYPE_FUR,"shaggy fur");
+			init7Hair(Appearance.randomChoice("black","brown"),3);
 
 			this.temperment = 1;
 			this.special1 = 5029;
@@ -52,15 +55,6 @@ package classes.Monsters
 			this.XP = totalXP();
 			this.gems = rand(15) + 45;
 
-			//Appearance Variables
-			//randomly assign hair color
-			if(rand(2) == 0) this.hairColor = "black";
-			else this.hairColor = "brown";
-			this.hairLength = 3;
-
-			this.skinType = SKIN_TYPE_FUR;
-			this.skinTone = "red";
-			this.skinDesc = "shaggy fur";
 
 			this.faceType = FACE_COW_MINOTAUR;
 

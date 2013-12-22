@@ -24,6 +24,8 @@
 			init3BreastRows(0);
 			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,10);
 			init5Body(36,HIP_RATING_SLENDER,BUTT_RATING_TIGHT);
+			init6Skin("red");
+			init7Hair("black",1);
 
 			this.temperment = 2;
 			//Uber
@@ -62,12 +64,6 @@
 			this.XP = this.totalXP(mainClassPtr.player.level);
 			this.gems = 20 + rand(25);
 
-			//Appearance Variables
-			this.hairColor = "black";
-			this.hairLength = 1;
-
-			this.skinTone = "red";
-			this.skinDesc = "skin";
 
 			this.wingDesc = "imp wings";
 

@@ -21,6 +21,8 @@ package classes.Monsters
 			init3BreastRows(0);
 			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,20);
 			init5Body("6'",HIP_RATING_AVERAGE,BUTT_RATING_AVERAGE+1);
+			init6Skin("tan");
+			init7Hair("auburn",11);
 
 			this.temperment = 1;
 
@@ -51,13 +53,6 @@ package classes.Monsters
 			this.XP = totalXP();
 			this.gems = rand(5) + 5;
 
-			//Appearance Variables
-			//randomly assign hair color
-			this.hairColor = "auburn";
-			this.hairLength = 11;
-
-			this.skinTone = "tan";
-			this.skinDesc = "skin";
 
 			//3 - cowface
 

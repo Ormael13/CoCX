@@ -22,6 +22,8 @@
 			init2Female(VAGINA_WETNESS_NORMAL,VAGINA_LOOSENESS_NORMAL);
 			init3BreastRows("F");
 			init5Body("6'4",HIP_RATING_CURVY,BUTT_RATING_LARGE,LOWER_BODY_TYPE_CENTAUR);
+			init6Skin("pale");
+			init7Hair("brown",13);
 
 			this.temperment = 2;
 			//Regular attack
@@ -57,12 +59,6 @@
 			this.XP = this.totalXP(mainClassPtr.player.level);
 			this.gems = rand(5) + 25;
 
-			//Appearance Variables
-			this.hairColor = "brown";
-			this.hairLength = 13;
-
-			this.skinTone = "pale";
-			this.skinDesc = "skin";
 
 			this.tailType = TAIL_TYPE_COW;
 			//Create goblin sex attributes

@@ -14,11 +14,11 @@ package classes.Monsters
 			super(mainClassPtr);
 			init1Names("", "Kiha", "kiha", "Kiha is standing across from you, holding a double-bladed axe that's nearly as big as she is.  She's six feet tall, and her leathery wings span nearly twelve feet extended.  Her eyes are pure crimson, save for a black slit in the center, and a pair of thick draconic horns sprout from her forehead, arcing over her ruby-colored hair to point behind her.  Dim red scales cover her arms, legs, back, and strong-looking tail, providing what protection they might  to large areas of her body.  The few glimpses of exposed skin are dark, almost chocolate in color, broken only by a few stray scales on the underside of her bosom and on her cheekbones.  Her vagina constantly glistens with moisture, regardless of her state of arousal.  Despite her nudity, Kiha stands with the confidence and poise of a trained fighter.");
 			init2Female(VAGINA_WETNESS_DROOLING,VAGINA_LOOSENESS_NORMAL,40,true);
-			this.cumMultiplier = 1.5;
-			this.hoursSinceCum = mainClassPtr.player.ballSize * 10;
 			init3BreastRows("D");
 			init4Ass(ANAL_LOOSENESS_LOOSE,ANAL_WETNESS_DRY,40);
 			init5Body("6'1",HIP_RATING_AMPLE,BUTT_RATING_AVERAGE+1,LOWER_BODY_TYPE_HOOFED);
+			init6Skin("dark",SKIN_TYPE_SCALES,"skin and scales");
+			init7Hair("red",3);
 
 			this.temperment = 1;
 
@@ -50,13 +50,6 @@ package classes.Monsters
 			this.XP = totalXP();
 			this.gems = rand(15) + 95;
 
-			//Appearance Variables
-			this.hairColor = "red";
-			this.hairLength = 3;
-
-			this.skinType = SKIN_TYPE_SCALES;
-			this.skinTone = "dark";
-			this.skinDesc = "skin and scales";
 
 			this.wingDesc = "huge";
 

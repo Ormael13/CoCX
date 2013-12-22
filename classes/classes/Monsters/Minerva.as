@@ -19,6 +19,8 @@ package classes.Monsters
 			init3BreastRows("DD");
 			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY);
 			init5Body("8'4",HIP_RATING_CURVY,BUTT_RATING_LARGE+1);
+			init6Skin("blue");
+			init7Hair("red",25);
 
 			this.temperment = 3;
 			//Regular attack
@@ -57,12 +59,6 @@ package classes.Monsters
 			this.XP = totalXP() + 50;
 			this.gems = rand(25)+10;
 
-			//Appearance Variables
-			this.hairColor = "red";
-			this.hairLength = 25;
-
-			this.skinTone = "blue";
-			this.skinDesc = "skin";
 
 			this.wingDesc = "fluffy feathery";
 

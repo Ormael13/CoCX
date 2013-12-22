@@ -19,6 +19,8 @@ package classes.Monsters
 			this.gender = 3;
 			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_DRY);
 			init5Body(rand(8) + 70,HIP_RATING_AMPLE+2,BUTT_RATING_LARGE);
+			init6Skin("red");
+			init7Hair("black",15);
 
 			this.temperment = 3;
 			//Regular attack
@@ -54,12 +56,6 @@ package classes.Monsters
 			this.XP = totalXP() + 50;
 			this.gems = rand(25)+160;
 
-			//Appearance Variables
-			this.hairColor = "black";
-			this.hairLength = 15;
-
-			this.skinTone = "red";
-			this.skinDesc = "skin";
 
 			this.hornType = HORNS_DEMON;
 

@@ -24,6 +24,8 @@
 			init3BreastRows([0,0]);
 			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_NORMAL);
 			init5Body(rand(24) + 25,HIP_RATING_BOYISH,BUTT_RATING_TIGHT);
+			init6Skin("red");
+			init7Hair("black",5);
 			this.temperment                     = 1;
 			this.special1                       = 5019;
 			this.pronoun1                       = "he";
@@ -52,13 +54,6 @@
 			this.XP                             = this.totalXP(mainClassPtr.player.level);
 			this.gems                           = rand(5) + 5;
 
-			//Appearance Variables
-			this.hairColor                      = "black";
-			this.hairLength                     = 5;
-
-			this.skinType                       = SKIN_TYPE_PLAIN;
-			this.skinTone                       = "red";
-			this.skinDesc                       = "skin";
 
 			this.wingDesc                       = "small";
 

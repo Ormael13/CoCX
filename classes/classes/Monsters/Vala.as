@@ -18,6 +18,8 @@ package classes.Monsters
 			init3BreastRows("E");
 			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_DRY,10);
 			init5Body("4'",HIP_RATING_CURVY,BUTT_RATING_LARGE);
+			init6Skin("fair");
+			init7Hair("purple",22);
 
 			this.temperment = 2;
 			//Lusty teases
@@ -54,12 +56,6 @@ package classes.Monsters
 			if(mainClassPtr.flags[kFLAGS.TIMES_PC_DEFEATED_VALA] > 2) this.XP = 1;
 			this.gems = 1;
 
-			//Appearance Variables
-			this.hairColor = "purple";
-			this.hairLength = 22;
-
-			this.skinTone = "fair";
-			this.skinDesc = "skin";
 
 			this.wingDesc = "shimmering wings";
 

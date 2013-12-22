@@ -24,6 +24,8 @@
 			init2Male(new Cock(7,1.5));
 			init4Ass(ANAL_LOOSENESS_LOOSE,ANAL_WETNESS_DRY,40);
 			init5Body("6'",HIP_RATING_BOYISH+1,BUTT_RATING_TIGHT);
+			init6Skin("tan");
+			init7Hair("black",4);
 
 			this.temperment = 2;
 			//Lusty teases
@@ -60,12 +62,6 @@
 			this.level = 5;
 			this.gems = 5+rand(10);
 
-			//Appearance Variables
-			this.hairColor = "black";
-			this.hairLength = 4;
-
-			this.skinTone = "tan";
-			this.skinDesc = "skin";
 
 
 			this.XP = this.totalXP(mainClassPtr.player.level);

@@ -23,6 +23,8 @@
 			init3BreastRows("B");
 			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,20);
 			init5Body(78,HIP_RATING_INHUMANLY_WIDE,BUTT_RATING_EXPANSIVE);
+			init6Skin("pink",SKIN_TYPE_PLAIN,"feathers");
+			init7Hair("blue",16);
 
 			this.temperment = 2;
 			//Uber
@@ -63,15 +65,7 @@
 			this.XP = this.totalXP(mainClassPtr.player.level);;
 			this.gems = 10 + rand(4);
 
-			//Appearance Variables
-			this.hairColor = "blue";
-			this.hairLength = 16;
-
-			this.skinTone = "pink";
-			this.skinDesc = "feathers";
-
 			this.wingDesc = "large feathery wings";
-
 			this.wingType = WING_TYPE_HARPY;
 
 			//Create goblin sex attributes

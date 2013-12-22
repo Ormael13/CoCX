@@ -11,6 +11,14 @@
 		// Eventually, this should contain the entire char appearance.
 		// At the moment, it's pretty piecemeal.
 
+		public static function inverseMap(x:Object):Object{
+			var result:Object = {};
+			for (var i:String in x){
+				result[String(x[i])] = i;
+			}
+			return result;
+		}
+
 		public static function randomChoice(... args):*
 		{
 			if ((args.length == 1) && (args[0] is Array))
@@ -2150,6 +2158,12 @@
 			}
 			return defaultValue;
 		}
-
+		public static const DEFAULT_SKIN_DESCS:Object = {
+			SKIN_TYPE_PLAIN:"skin",
+			SKIN_TYPE_FUR:"fur",
+			SKIN_TYPE_SCALES:"scales",
+			SKIN_TYPE_GOO:"skin",
+			SKIN_TYPE_UNDEFINED:"skin"
+		};
 	}
 }

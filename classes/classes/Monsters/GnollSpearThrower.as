@@ -17,6 +17,8 @@ package classes.Monsters
 			init3BreastRows("D");
 			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_DRY,25);
 			init5Body(72,HIP_RATING_AMPLE,BUTT_RATING_TIGHT);
+			init6Skin("tawny",SKIN_TYPE_FUR);
+			init7Hair("black",22);
 
 			this.temperment = 2;
 			//Lusty teases
@@ -54,13 +56,6 @@ package classes.Monsters
 			this.XP = totalXP();
 			this.gems = 10 + rand(5);
 
-			//Appearance Variables
-
-			this.hairColor = "black";
-			this.hairLength = 22;
-
-			this.skinTone = "tawny";
-			this.skinDesc = "fur";
 
 		}
 	}

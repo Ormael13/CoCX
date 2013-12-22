@@ -23,6 +23,8 @@
 			init3BreastRows("E");
 			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,30);
 			init5Body(35 + rand(4),HIP_RATING_AMPLE+2,BUTT_RATING_LARGE);
+			init6Skin("dark green");
+			init7Hair("purple",4);
 
 			this.temperment = 2;
 			//Regular attack
@@ -56,12 +58,6 @@
 			this.XP = this.totalXP(mainClassPtr.player.level);
 			this.gems = rand(5) + 5;
 
-			//Appearance Variables
-			this.hairColor = "purple";
-			this.hairLength = 4;
-
-			this.skinTone = "dark green";
-			this.skinDesc = "skin";
 
 			this.wingType = WING_TYPE_NONE;
 

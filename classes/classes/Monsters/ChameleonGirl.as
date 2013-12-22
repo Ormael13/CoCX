@@ -1,5 +1,6 @@
 package classes.Monsters 
 {
+	import classes.Appearance;
 	import classes.Monster;
 	import classes.GlobalFlags.kFLAGS;
 	
@@ -13,22 +14,22 @@ package classes.Monsters
 		 * Pairs of skinTone/skinAdj
 		 */
 		private const SKIN_VARIATIONS:Array = [
-			"red","black",
-			"green","yellowish",
-			"blue","lighter blue",
-			"purple","bright yellow",
-			"orange","brown",
-			"tan","white"];
+			["red","black"],
+			["green","yellowish"],
+			["blue","lighter blue"],
+			["purple","bright yellow"],
+			["orange","brown"],
+			["tan","white"]];
 		public function ChameleonGirl(mainClassPtr:*) 
 		{
 			super(mainClassPtr);
-			var temp:int = rand(SKIN_VARIATIONS.length/2);
-			this.skinTone = SKIN_VARIATIONS[temp*2];
-			this.skinAdj = SKIN_VARIATIONS[temp*2+1];
-			init1Names("the ", "chameleon girl", "chameleongirl", "You're faced with a tall lizard-like girl with smooth " + this.skinTone + " skin and long, " + this.skinAdj + " stripes that run along her body from ankle to shoulder.  An abnormally large tail swishes behind her, and her hands are massive for her frame, built for easily climbing the trees.  A pair of small, cute horns grow from her temples, and a pair of perky B-cups push out through her skimpy drapings.  Large, sharp claws cap her fingers, gesturing menacingly at you.");
+			var skinToneAdj:Array = Appearance.randomChoice(SKIN_VARIATIONS);
+			init1Names("the ", "chameleon girl", "chameleongirl", "You're faced with a tall lizard-like girl with smooth " + skinToneAdj[0] + " skin and long, " + skinToneAdj[1] + " stripes that run along her body from ankle to shoulder.  An abnormally large tail swishes behind her, and her hands are massive for her frame, built for easily climbing the trees.  A pair of small, cute horns grow from her temples, and a pair of perky B-cups push out through her skimpy drapings.  Large, sharp claws cap her fingers, gesturing menacingly at you.");
 			init2Female(VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_LOOSE);
 			init4Ass(ANAL_LOOSENESS_NORMAL,ANAL_WETNESS_DRY);
 			init5Body(rand(2) + 68,HIP_RATING_AMPLE+2,BUTT_RATING_LARGE);
+			init6Skin(skinToneAdj[0],SKIN_TYPE_PLAIN,"skin",skinToneAdj[1]);
+			init7Hair("black",15);
 
 			this.temperment = 3;
 			//Regular attack
@@ -63,12 +64,6 @@ package classes.Monsters
 			this.level = 14;
 			this.XP = totalXP();
 			this.gems = 10 + rand(50);
-
-			//Appearance Variables
-			this.hairColor = "black";
-			this.hairLength = 15;
-
-			this.skinDesc = "skin";
 
 			this.tailRecharge = 0;
 		}

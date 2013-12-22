@@ -23,6 +23,9 @@
 			init2Male([new Cock(9,2),new Cock(9,2)],2,5,8);
 			init4Ass(ANAL_LOOSENESS_NORMAL,ANAL_WETNESS_NORMAL);
 			init5Body(47,HIP_RATING_AVERAGE,BUTT_RATING_AVERAGE+1);
+			init6Skin("black",SKIN_TYPE_FUR);
+			init7Hair("red",3);
+
 			this.temperment = 3;
 			//Regular attack
 			this.special1 = 5066;
@@ -55,12 +58,6 @@
 			this.level = 5;
 			this.gems = 10+rand(10);
 
-			//Appearance Variables
-			this.hairColor = "red";
-			this.hairLength = 3;
-
-			this.skinTone = "black";
-			this.skinDesc = "fur";
 
 			this.tailType = TAIL_TYPE_DOG;
 

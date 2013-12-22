@@ -20,6 +20,8 @@ package classes.Monsters
 			init3BreastRows("E");
 			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_NORMAL);
 			init5Body(rand(12) + 55,HIP_RATING_CURVY,BUTT_RATING_LARGE);
+			init6Skin("black");
+			init7Hair("sandy-blonde",15);
 
 			this.temperment = 2;
 			//Lusty teases
@@ -52,12 +54,6 @@ package classes.Monsters
 			this.XP = totalXP();
 			this.gems = rand(15) + 5;
 
-			//Appearance Variables
-			this.hairColor = "sandy-blonde";
-			this.hairLength = 15;
-
-			this.skinTone = "black";
-			this.skinDesc = "skin";
 
 			this.wingDesc = "";
 

@@ -1,5 +1,6 @@
 package classes.Monsters 
 {
+	import classes.Appearance;
 	import classes.Monster;
 	/**
 	 * ...
@@ -15,6 +16,9 @@ package classes.Monsters
 			init2Female(VAGINA_WETNESS_SLAVERING,VAGINA_LOOSENESS_NORMAL,9001,true);
 			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_SLIME_DROOLING,9001);
 			init5Body(rand(8) + 70,HIP_RATING_AMPLE,BUTT_RATING_LARGE);
+			var tone:String = Appearance.randomChoice("blue","purple","crystal");
+			init6Skin(tone);
+			init7Hair(tone,0);
 
 			this.temperment = 3;
 			this.special1 = 5040;
@@ -46,18 +50,6 @@ package classes.Monsters
 			this.gems = rand(5)+1;
 			this.lustVuln = .75;
 
-			//Appearance Variables
-
-			this.hairLength = 0;
-
-			var temp:int = rand(3);
-			if(temp == 0) this.skinTone = "blue";
-			else if(temp == 1) this.skinTone = "purple";
-			else this.skinTone = "crystal";
-			this.hairColor = this.skinTone;
-			this.skinDesc = "skin";
-
-			//Create imp sex attributes
 		}
 		
 	}

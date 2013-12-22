@@ -23,6 +23,8 @@
 			init3BreastRows("C");
 			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,10);
 			init5Body("5'10",HIP_RATING_AMPLE+2,BUTT_RATING_LARGE,LOWER_BODY_TYPE_GOO);
+			init6Skin("mediterranean-toned");
+			init7Hair("brown",16);
 
 			this.temperment = 2;
 			//Lusty teases
@@ -58,12 +60,6 @@
 			this.totalXP(mainClassPtr.player.level)
 			this.gems = rand(5) + 8;
 
-			//Appearance Variables
-			this.hairColor = "brown";
-			this.hairLength = 16;
-
-			this.skinTone = "mediterranean-toned";
-			this.skinDesc = "skin";
 
 			//Create goblin sex attributes
 

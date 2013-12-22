@@ -12,10 +12,11 @@ package classes.Monsters
 			super(mainClassPtr);
 			init1Names("the ", "secretarial succubus", "secretarialsuccubus", "The succubus across from you balances gracefully on her spiked heels, twirling and moving unpredictably.  Sexy dark stockings hug every curve of her perfectly shaped flesh until they disappear into her tiny miniskirt.  Her impressive breasts wobble delightfully as she moves, despite the inadequate efforts of her straining vest.  A pair of foot-long horns curve up from her otherwise perfect face and forehead, wreathed in lustrous blonde hair.  The very air around her is filled with an unidentifiable fragrance that makes you tingle and shiver.");
 			init2Female(VAGINA_WETNESS_SLAVERING,VAGINA_LOOSENESS_NORMAL,30);
-			this.cumMultiplier = 3;
 			init3BreastRows("DD");
 			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_SLIME_DROOLING);
 			init5Body(rand(9) + 60,HIP_RATING_CURVY,BUTT_RATING_LARGE+1,LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS);
+			init6Skin("blue");
+			init7Hair("blond",13);
 
 			this.temperment = 3;
 			//Regular attack
@@ -54,12 +55,6 @@ package classes.Monsters
 			this.XP = totalXP() + 50;
 			this.gems = rand(25)+10;
 
-			//Appearance Variables
-			this.hairColor = "blond";
-			this.hairLength = 13;
-
-			this.skinTone = "blue";
-			this.skinDesc = "skin";
 
 			this.wingDesc = "tiny hidden";
 

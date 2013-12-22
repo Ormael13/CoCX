@@ -25,6 +25,8 @@
 			init3BreastRows();
 			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_SLIME_DROOLING);
 			init5Body(rand(9) + 70,HIP_RATING_BOYISH,BUTT_RATING_BUTTLESS);
+			init6Skin("green",SKIN_TYPE_PLAIN,"bark");
+			init7Hair("green",1);
 
 			this.temperment = 3;
 			//Regular attack
@@ -62,12 +64,6 @@
 			this.XP = this.totalXP(mainClassPtr.player.level);
 			this.gems = rand(15)+5;
 
-			//Appearance Variables
-			this.hairColor = "green";
-			this.hairLength = 1;
-
-			this.skinTone = "green";
-			this.skinDesc = "bark";
 
 			this.tailType = TAIL_TYPE_DEMONIC;
 		}

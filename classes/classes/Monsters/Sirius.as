@@ -18,6 +18,8 @@ package classes.Monsters
 			init3BreastRows(0);
 			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,10);
 			init5Body("5'10",HIP_RATING_AMPLE+2,BUTT_RATING_LARGE,LOWER_BODY_TYPE_GOO);
+			init6Skin("mediterranean-toned");
+			init7Hair("orange",16);
 
 			this.temperment = 2;
 			//Lusty teases
@@ -53,12 +55,6 @@ package classes.Monsters
 			this.XP = totalXP();
 			this.gems = rand(5) + 8;
 
-			//Appearance Variables
-			this.hairColor = "orange";
-			this.hairLength = 16;
-
-			this.skinTone = "mediterranean-toned";
-			this.skinDesc = "skin";
 		}
 		
 	}

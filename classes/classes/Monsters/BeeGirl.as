@@ -1,5 +1,6 @@
 ﻿package classes.Monsters 
 {
+	import classes.Appearance;
 	import classes.Creature;
 	import classes.Monster;
 	import classes.CockTypesEnum;
@@ -22,6 +23,8 @@
 			init3BreastRows("DD");
 			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_NORMAL);
 			init5Body(rand(14) + 59,HIP_RATING_CURVY+3,BUTT_RATING_EXPANSIVE);
+			init6Skin("yellow");
+			init7Hair(Appearance.randomChoice("black","black and yellow"),6)
 
 			this.temperment = 3;
 			this.special1 = 5036;
@@ -53,16 +56,6 @@
 			this.XP = this.totalXP(mainClassPtr.player.level);
 			this.gems = rand(15) + 1;
 
-			//Appearance Variables
-			//randomly assign hair color
-			if(rand(2) == 0) 
-				this.hairColor = "black";
-			else 
-				this.hairColor = "black and yellow";
-			this.hairLength = 6;
-
-			this.skinTone = "yellow";
-			this.skinDesc = "skin";
 
 			//3 - cowface
 			this.faceType = FACE_COW_MINOTAUR;

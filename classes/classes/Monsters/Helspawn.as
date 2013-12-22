@@ -29,6 +29,8 @@ package classes.Monsters
 			init3BreastRows("E+");
 			init4Ass(ANAL_LOOSENESS_VIRGIN,ANAL_WETNESS_DRY,85);
 			init5Body(90,HIP_RATING_CURVY+2,BUTT_RATING_LARGE+1);
+			init6Skin("helspawn");
+			init7Hair("red",13);
 
 			this.temperment = 2;
 			//Lusty teases
@@ -66,12 +68,6 @@ package classes.Monsters
 			this.XP = totalXP();
 			this.gems = 10 + rand(5);
 
-			//Appearance Variables
-			this.hairColor = "red";
-			this.hairLength = 13;
-
-			this.skinTone = "helspawn";
-			this.skinDesc = "skin";
 
 			this.tailType = TAIL_TYPE_COW;
 

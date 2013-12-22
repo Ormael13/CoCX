@@ -17,6 +17,8 @@ package classes.Monsters
 			init3BreastRows("E");
 			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,40);
 			init5Body(40,HIP_RATING_AMPLE+2,BUTT_RATING_LARGE);
+			init6Skin("greenish gray");
+			init7Hair("pink and black",16);
 
 			this.temperment = 2;
 			//Regular attack
@@ -50,12 +52,6 @@ package classes.Monsters
 			this.XP = totalXP();
 			this.gems = rand(25) + 5;
 
-			//Appearance Variables
-			this.hairColor = "pink and black";
-			this.hairLength = 16;
-
-			this.skinTone = "greenish gray";
-			this.skinDesc = "skin";
 
 			//Create goblin sex attributes
 		}

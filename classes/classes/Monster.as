@@ -89,6 +89,16 @@
 			//// 5. Body
 			//init5Body(tallness,hipRating=HIP_RATING_BOYISH,buttRating=BUTT_RATING_BUTTLESS,lowerBody=LOWER_BODY_TYPE_HUMAN)
 
+			//// 6. Skin
+			//init6Skin(skinTone,skinType=SKIN_TYPE_PLAIN,skinDesc="type-dependant if not specified",skinAdj="");
+			//init6Skin("ebony"); // skinDesc = "skin"
+			//init6Skin("red",SKIN_TYPE_SCALES); // skinDesc = "scales"
+			//init6Skin("blue",SKIN_TYPE_GOO); // will also set skinAdj to "goopey"
+			//init6Skin("white",SKIN_TYPE_FUR,"fluffy fur","spotted"); // maximum customization
+
+			//// 7. Hair
+			//init7Hair(hairColor="no",hairLength=0,hairType=HAIR_NORMAL);
+
 			/*this.temperment = 2;
 			//Lusty teases
 			this.special1 = 5133;
@@ -117,10 +127,6 @@
 			this.XP = this.totalXP(mainClassPtr.player.level);;
 			this.gems = rand(5) + 38;
 			//Appearance Variables
-			this.hairColor = "black";
-			this.hairLength = 20;
-			this.skinTone = "purple";
-			this.skinDesc = "skin";
 			this.XP = this.totalXP(mainClassPtr.player.level);   */
 		}
 
@@ -293,7 +299,8 @@
 		}
 
 		// MONSTER INITIALIZATION HELPER FUNCTIONS
-		public var initsCalled:Array = [false,false,false,false,false];
+		//noinspection JSUntypedDeclaration
+		public var initsCalled:Array =Array(6).map(function(){return false});
 
 		public function isFullyInit():Boolean {
 			return initsCalled.indexOf(false)==-1;
@@ -321,7 +328,7 @@
 				this.pronoun2 = "them";
 				this.pronoun3 = "their";
 			}
-			this.initsCalled[0]=true;
+			skipInit(1);
 		}
 
 		/**
@@ -335,7 +342,7 @@
 				this.pronoun2 = pronoun2;
 				this.pronoun3 = pronoun3;
 			}
-			this.initsCalled[1]=true;
+			skipInit(2);
 		}
 
 		/**
@@ -375,7 +382,7 @@
 			this.cumMultiplier = cumMultiplier;
 			this.hoursSinceCum = hoursSinceCum;
 			genderCheck();
-			this.initsCalled[1]=true;
+			skipInit(2);
 		}
 
 		/**
@@ -397,7 +404,7 @@
 				this.createStatusAffect("Bonus vCapacity",bonusVCapacity,0,0,0);
 			}
 			genderCheck();
-			this.initsCalled[1]=true;
+			skipInit(2);
 		}
 
 		/**
@@ -427,7 +434,7 @@
 					createBreastRow(size,row[1]);
 				}
 			}
-			this.initsCalled[2] = true;
+			skipInit(3);
 		}
 
 		/**
@@ -437,7 +444,7 @@
 			this.ass.analLooseness = looseness;
 			this.ass.analWetness = wetness;
 			if (bonusACapacity>0) this.createStatusAffect("Bonus aCapacity",bonusACapacity,0,0,0);
-			this.initsCalled[3] = true;
+			skipInit(4);
 		}
 
 		/**
@@ -462,7 +469,26 @@
 			this.hipRating = hipRating;
 			this.buttRating = buttRating;
 			this.lowerBody = lowerBody;
-			this.initsCalled[4] = true;
+			skipInit(5);
+		}
+
+		/**
+		 * if skinDesc == null, sets default name for type ("skin"/"fur"/...).
+		 * Also, for SKIN_TYPE_GOO if skinAdj=="" sets skinAdj="goopey"
+		 */
+		protected function init6Skin(skinTone:String,skinType:int=SKIN_TYPE_PLAIN,skinDesc:String=null,skinAdj:String=""):void{
+			this.skinTone = skinTone;
+			this.skinType = skinType;
+			this.skinDesc = skinDesc || Appearance.DEFAULT_SKIN_DESCS[skinType];
+			this.skinAdj = skinAdj;
+			skipInit(6);
+		}
+
+		protected function init7Hair(hairColor:String="no",hairLength:Number=0,hairType:int=HAIR_NORMAL):void{
+			this.hairColor = hairColor;
+			this.hairLength = hairLength;
+			this.hairType = hairType;
+			skipInit(7);
 		}
 	}
 }

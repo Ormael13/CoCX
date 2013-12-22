@@ -24,6 +24,8 @@
 			init3BreastRows("DD");
 			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,10);
 			init5Body("5'5",HIP_RATING_INHUMANLY_WIDE,BUTT_RATING_EXPANSIVE);
+			init6Skin("pink",SKIN_TYPE_PLAIN,"feathers");
+			init7Hair("pink",16);
 
 			this.temperment = 2;
 			//Uber
@@ -61,12 +63,6 @@
 			this.level = 11;
 			this.gems = 20 + rand(25);
 
-			//Appearance Variables
-			this.hairColor = "pink";
-			this.hairLength = 16;
-
-			this.skinTone = "pink";
-			this.skinDesc = "feathers";
 
 			this.wingDesc = "large feathery wings";
 

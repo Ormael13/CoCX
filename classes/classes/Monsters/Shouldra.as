@@ -17,6 +17,8 @@ package classes.Monsters
 			init3BreastRows("D");
 			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,40);
 			init5Body(65,HIP_RATING_AMPLE,BUTT_RATING_AVERAGE+1);
+			init6Skin("white");
+			init7Hair("white",3);
 
 			this.temperment = 1;
 
@@ -45,12 +47,6 @@ package classes.Monsters
 			this.XP = totalXP();
 			this.gems = 0;
 
-			//Appearance Variables
-			this.hairColor = "white";
-			this.hairLength = 3;
-
-			this.skinTone = "white";
-			this.skinDesc = "skin";
 
 		}
 		

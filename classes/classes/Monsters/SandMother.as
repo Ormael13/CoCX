@@ -17,6 +17,8 @@ package classes.Monsters
 			init3BreastRows(["DD"],["DD"]);
 			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_NORMAL,50);
 			init5Body("8'6",HIP_RATING_CURVY,BUTT_RATING_LARGE);
+			init6Skin("bronzed");
+			init7Hair("platinum-blonde",15);
 
 			this.temperment = 3;
 			//Regular attack
@@ -53,12 +55,6 @@ package classes.Monsters
 			this.XP = totalXP();
 			this.gems = rand(15) + 55;
 
-			//Appearance Variables
-			this.hairColor = "platinum-blonde";
-			this.hairLength = 15;
-
-			this.skinTone = "bronzed";
-			this.skinDesc = "skin";
 
 
 			//Create imp sex attributes

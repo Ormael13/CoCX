@@ -26,6 +26,8 @@
 			this.pronoun3 = "its";
 			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_SLIME_DROOLING);
 			init5Body(rand(8) + 80,HIP_RATING_AMPLE,BUTT_RATING_LARGE);
+			init6Skin("green");
+			init7Hair("green",0);
 
 			this.temperment = 3;
 			this.special1 = 5040;
@@ -57,12 +59,6 @@
 			this.XP = this.totalXP(mainClassPtr.player.level);
 			this.gems = rand(5)+1;
 
-			//Appearance Variables
-			this.hairColor = "green";
-			this.hairLength = 0;
-
-			this.skinTone = "green";
-			this.skinDesc = "skin";
 
 		}
 

@@ -24,6 +24,8 @@
 			init3BreastRows(0);
 			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_NORMAL);
 			init5Body("5'1",HIP_RATING_SLENDER,BUTT_RATING_TIGHT);
+			init6Skin("white",SKIN_TYPE_FUR,"fur");
+			init7Hair("white",2);
 			this.temperment = 1;
 			this.special1 = 5021;
 
@@ -52,13 +54,6 @@
 			this.XP = this.totalXP(mainClassPtr.player.level);
 			this.gems = rand(5) + 2;
 
-			//Appearance Variables
-			this.hairColor = "white";
-			this.hairLength = 2;
-
-			this.skinType = SKIN_TYPE_FUR;
-			this.skinTone = "white";
-			this.skinDesc = "fur";
 
 			this.wingDesc = "";
 
