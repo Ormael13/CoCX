@@ -9,6 +9,9 @@
 	 * @author Fake-Name
 	 */
 
+	/*
+	this class is mostly intended to be copy&pasted as the base for reworking the monsters.
+	*/
 
 	public class GenericMonstah extends Monster
 	{

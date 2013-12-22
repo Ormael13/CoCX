@@ -1,9 +1,9 @@
 ﻿package classes
 {
-	public class keyItemClass extends Object
+	public class KeyItemClass extends Object
 	{
 		//constructor
-		public function keyItemClass()
+		public function KeyItemClass()
 		{
 		}
 		

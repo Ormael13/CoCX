@@ -1,9 +1,9 @@
 ﻿package classes
 {
-	public class itemSlotClass extends Object
+	public class ItemSlotClass extends Object
 	{
 		//constructor
-		public function itemSlotClass()
+		public function ItemSlotClass()
 		{
 		}
 		

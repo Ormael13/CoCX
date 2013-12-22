@@ -66,10 +66,6 @@
 			this.tallness                       = rand(12) + 55;
 			this.hairColor                      = "sandy-blonde";
 			this.hairLength                     = 15;
-			//Skintype
-			//0 - skin
-			//1 - furry
-			//2 - scaley
 			this.skinType                       = SKIN_TYPE_PLAIN;
 			this.skinTone                       = "bronzed";
 			this.skinDesc                       = "skin";

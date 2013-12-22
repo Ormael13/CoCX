@@ -1,9 +1,9 @@
 ﻿package classes
 {
-	public class vaginaClass
+	public class VaginaClass
 	{
 		//constructor
-		public function vaginaClass()
+		public function VaginaClass()
 		{
 		}
 		//data

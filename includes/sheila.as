@@ -2009,7 +2009,7 @@ public function consentacleVagSexForKangarooSlutBitches():void {
 	
 	outputText("\n\n\"<i>Oh god!</i>\" she yells.  \"<i>Pull out, before you get me pregnant!</i>\"  ");
 	//[(non-dog cock)
-	if(player.cocks[x].cockType != CockTypesEnum.DOG) {
+	if(!player.hasKnot(x)) {
 		outputText("You oblige shakingly, pulling your " + Appearance.cockNoun(player.cocks[x].cockType) + " out of her clenching pussy with a wet, sucking noise.  A trickle of semen drools from between her lips as you unburden yourself of the rest of your load, squirting it onto her groin");
 		//[(big skeet)
 		if(player.cumQ() > 500) outputText(", breasts, and face");

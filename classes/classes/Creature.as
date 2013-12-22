@@ -1,14 +1,14 @@
 ﻿//CoC Creature.as
 package classes
 {
-	//import classes.cockClass;
+	//import classes.CockClass;
 	import classes.Cock;
-	import classes.vaginaClass;
-	import classes.breastRowClass;
-	import classes.assClass;
-	import classes.perkClass;
-	import classes.statusAffectClass;
-	import classes.keyItemClass;
+	import classes.VaginaClass;
+	import classes.BreastRowClass;
+	import classes.AssClass;
+	import classes.PerkClass;
+	import classes.StatusAffectClass;
+	import classes.KeyItemClass;
 	
 	public class Creature
 	{
@@ -258,7 +258,7 @@ package classes
 		public var clitLength:Number = .5;
 		public var nippleLength:Number = .25;
 		public var breastRows:Array;
-		public var ass:assClass = new assClass();		
+		public var ass:AssClass = new AssClass();		
 		
 		//Monsters have few perks, which I think should be a status effect for clarity's sake.
 		//TODO: Move perks into monster status effects.
@@ -286,7 +286,7 @@ package classes
 		//Create a perk
 		public function createPerk(keyName:String, value1:Number, value2:Number, value3:Number, value4:Number, desc:String = ""):void
 		{
-			var newKeyItem:perkClass = new perkClass();
+			var newKeyItem:PerkClass = new PerkClass();
 			//used to denote that the array has already had its new spot pushed on.
 			var arrayed:Boolean = false;
 			//used to store where the array goes
@@ -584,7 +584,7 @@ package classes
 		//Create a status
 		public function createStatusAffect(statusName:String, value1:Number, value2:Number, value3:Number, value4:Number):void
 		{
-			var newStatusAffect:* = new statusAffectClass();
+			var newStatusAffect:* = new StatusAffectClass();
 			statusAffects.push(newStatusAffect);
 			statusAffects[statusAffects.length - 1].statusAffectName = statusName;
 			statusAffects[statusAffects.length - 1].value1 = value1;
@@ -2730,7 +2730,7 @@ package classes
 			if (cocks.length >= 10)
 				return false;
 			var newCock:Cock = new Cock(clength, cthickness);
-			//var newCock:cockClass = new cockClass();
+			//var newCock:CockClass = new CockClass();
 			trace("New cock info. Length = " + newCock.cockLength + ", Thickness = " + newCock.cockThickness + ", Type = " + newCock.cockType);
 			cocks.push(newCock);
 			cocks[cocks.length-1].cockThickness = cthickness;
@@ -2743,7 +2743,7 @@ package classes
 		{
 			if (vaginas.length >= 2)
 				return false;
-			var newVagina:vaginaClass = new vaginaClass();
+			var newVagina:VaginaClass = new VaginaClass();
 			vaginas.push(newVagina);
 			return true;
 		}
@@ -2753,7 +2753,7 @@ package classes
 		{
 			if (breastRows.length >= 10)
 				return false;
-			var newBreastRow:breastRowClass = new breastRowClass();
+			var newBreastRow:BreastRowClass = new BreastRowClass();
 			breastRows.push(newBreastRow);
 			return true;
 		}

@@ -23,6 +23,15 @@ public function eventParser(eventNo:*):void {
 		if(eventNo != 1) {
 			hideMenus();
 		}
+		
+		if (eventNo == 9999) // Game over event; overriding whatever the fuck has been done to the UI up to this point to force display of the data and new game buttons
+		{
+			mainView.showMenuButton( MainView.MENU_NEW_MAIN );
+			mainView.showMenuButton( MainView.MENU_DATA );
+			mainView.hideMenuButton( MainView.MENU_APPEARANCE );
+			mainView.hideMenuButton( MainView.MENU_LEVEL );
+			mainView.hideMenuButton( MainView.MENU_PERKS );
+		}
 		/*if(eventNo == 1000 && gameState == 1 && menuLoc == 1) {
 			menuLoc = 0;
 			outputText("\n\n", false);
