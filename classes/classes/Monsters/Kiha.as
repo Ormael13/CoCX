@@ -17,6 +17,7 @@ package classes.Monsters
 			this.cumMultiplier = 1.5;
 			this.hoursSinceCum = mainClassPtr.player.ballSize * 10;
 			init3BreastRows("D");
+			init4Ass(ANAL_LOOSENESS_LOOSE,ANAL_WETNESS_DRY,40);
 
 			this.temperment = 1;
 
@@ -69,10 +70,6 @@ package classes.Monsters
 
 			this.buttRating = 5;
 			//Create imp sex attributes
-
-			this.ass.analLooseness = 3;
-			this.ass.analWetness = 0;
-			this.createStatusAffect("Bonus aCapacity",40,0,0,0);
 		}
 		
 	}

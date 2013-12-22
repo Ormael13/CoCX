@@ -19,6 +19,7 @@ package classes.Monsters
 							("Sheila is a slim, somewhat athletic woman, over six feet in height.  Her smooth, dark skin is exposed from her head to her clawed feet, and she makes no effort to conceal anything your eyes might linger on.  The " + mainClassPtr.sheilaCup() + " breasts on her chest" +(mainClassPtr.sheilaCorruption() <= 40 ? " are firm, squeezable teardrops; she runs a hand absently over one from time to time." :	" jiggle as she moves, and she shoves them out to make sure you see just how lewd her body has become since your first meeting.") +"  Straight, jaw-length auburn hair frames her face along with two long, smooth ears that stick out sideways.  Her only nods to civilization are a dangling purple earring and the finger rings that she wears on her hands, and the wild woman stares openly at you, touching herself."));
 			init2Female(VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_NORMAL, 30, mainClassPtr.flags[kFLAGS.SHEILA_XP] <= 3 && mainClassPtr.flags[kFLAGS.SHEILA_DEMON] >= 0);
 			init3BreastRows(0);
+			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,20);
 
 			this.temperment = 1;
 
@@ -66,9 +67,6 @@ package classes.Monsters
 			this.hipRating = 4;
 
 			this.buttRating = 5;
-			//Create imp sex attributes
-			this.ass.analLooseness = 1;
-			this.ass.analWetness = 0;
 			this.createStatusAffect("Bonus aCapacity", 20, 0, 0, 0);
 			if (mainClassPtr.flags[kFLAGS.SHEILA_DEMON] == 1) {
 				//-slightly slower, has much more stamina, intel, and HP now

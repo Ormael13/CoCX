@@ -16,13 +16,11 @@ package classes.Monsters
 			init1Names("the ", "basilisk", "basilisk", "You are fighting a basilisk!  From what you can tell while not looking directly at it, the basilisk is a male reptilian biped standing a bit over 6' tall.  It has a thin but ropy build, its tightly muscled yellow underbelly the only part of its frame not covered in those deceptive, camouflaging grey-green scales.  A long, whip-like tail flits restlessly through the dirt behind its skinny legs, and sharp sickle-shaped index claws decorate each hand and foot.  You don't dare to look at its face, but you have the impression of a cruel jaw, a blunt lizard snout and a crown of dull spines.");
 			init2Male([new Cock(6,2)]);
 			init3BreastRows(0);
+			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,30);
 
 			this.temperment = 2;
 			//Lusty teases
 
-			this.pronoun1 = "he";
-			this.pronoun2 = "him";
-			this.pronoun3 = "his";
 
 			//Clothing/Armor
 			this.armorName = "scales";
@@ -56,8 +54,6 @@ package classes.Monsters
 			this.gems = rand(10) + 10;
 
 			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.gender = 1;
 			this.tallness = 90;
 			this.hairColor = "none";
 			this.hairLength = 0;
@@ -74,9 +70,6 @@ package classes.Monsters
 
 			this.buttRating = 4;
 			//Create goblin sex attributes
-			this.ass.analLooseness = 1;
-			this.createStatusAffect("Bonus aCapacity",30,0,0,0);
-			this.ass.analWetness = 0;			
 		}
 		
 	}

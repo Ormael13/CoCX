@@ -60,10 +60,7 @@ package classes.Monsters
 
 			this.buttRating = 8;
 			//Create imp sex attributes
-
-
-			this.ass.analLooseness = 1;
-			this.ass.analWetness = 5;
+			init4Ass(1,5);
 			this.createStatusAffect("Bonus aCapacity",9001,0,0,0);
 		}
 		

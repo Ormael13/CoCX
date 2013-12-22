@@ -18,6 +18,7 @@ package classes.Monsters
 			init2Male(new Cock(12,2,CockTypesEnum.HUMAN),0,0,3,20);
 			init2Female(VAGINA_WETNESS_WET, VAGINA_LOOSENESS_LOOSE, 20);
 			init3BreastRows("E");
+			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_NORMAL);
 
 			this.temperment = 2;
 			//Lusty teases
@@ -66,8 +67,6 @@ package classes.Monsters
 
 			this.buttRating = 8;
 			//Create imp sex attributes
-			this.ass.analLooseness = 1;
-			this.ass.analWetness = 1;
 		}
 		
 	}

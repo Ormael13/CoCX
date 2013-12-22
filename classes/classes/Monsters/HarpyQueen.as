@@ -68,8 +68,7 @@ package classes.Monsters
 
 			this.buttRating = 8;
 			//Create imp sex attributes
-			this.ass.analLooseness = 4;
-			this.ass.analWetness = 0;			
+			init4Ass(4,0);
 		}
 		
 	}

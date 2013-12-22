@@ -22,13 +22,11 @@
 			this.cumMultiplier = 1.5;
 			this.hoursSinceCum = 10 + rand(100);
 			init3BreastRows("DD");
+			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_NORMAL);
 
 			this.temperment = 3;
 			this.special1 = 5036;
 
-			this.pronoun1 = "she";
-			this.pronoun2 = "her";
-			this.pronoun3 = "her";
 
 			//Clothing/Armor
 			this.armorName = "chitin";
@@ -84,8 +82,6 @@
 
 			this.buttRating = 13;
 			//Create imp sex attributes
-			this.ass.analLooseness = 4;
-			this.ass.analWetness = 1;
 			trace("BeeGirl Constructor!");
 
 			// possible issues accessing flags from this context.

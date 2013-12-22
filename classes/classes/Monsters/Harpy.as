@@ -77,9 +77,7 @@
 
 			this.buttRating = 13;
 			//Create goblin sex attributes
-			this.ass.analLooseness = 1;
-			this.createStatusAffect("Bonus aCapacity",20,0,0,0);
-			this.ass.analWetness = 0;
+			init4Ass(1,0,20);
 
 			this.XP = this.totalXP(mainClassPtr.player.level);
 		}

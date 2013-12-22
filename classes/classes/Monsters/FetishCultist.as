@@ -22,6 +22,7 @@
 			init2Female(VAGINA_LOOSENESS_GAPING, VAGINA_WETNESS_WET);
 			this.cumMultiplier = 3;
 			init3BreastRows("DD");
+			init4Ass(ANAL_LOOSENESS_NORMAL,ANAL_WETNESS_NORMAL);
 
 			this.temperment = 3;
 			//Regular attack
@@ -67,9 +68,6 @@
 
 			this.buttRating = 8;
 			//Create imp sex attributes
-
-			this.ass.analLooseness = 2;
-			this.ass.analWetness = 1;
 
 		}
 

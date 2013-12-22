@@ -22,6 +22,7 @@
 			init1Names("", "Jojo", "jojo", "Jojo is an anthropomorphic mouse with immaculate white fur.  Though he stands only four feet tall, he is covered in lean muscle and moves with incredible speed.  He wears loose white clothes wrapped in prayer beads and tattered prayer papers.");
 			init2Male(new Cock(7.5,1.8),0,0,1,1000);
 			init3BreastRows(0);
+			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_NORMAL);
 			this.temperment = 1;
 			this.special1 = 5021;
 
@@ -65,8 +66,6 @@
 
 			this.buttRating = 2;
 			//Create jojo sex attributes
-			this.ass.analLooseness = 1;
-			this.ass.analWetness = 1;
 			//Variations based on jojo's corruption.
 			if(mainClassPtr.monk == 3) {
 				this.lust += 30;

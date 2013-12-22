@@ -17,6 +17,7 @@ package classes.Monsters
 			init1Names("the ","mob of spiders-morphs","spidermorphmob","You are fighting a horde of spider-morphs!  A group of some two-dozen spiders and driders approaches you, all baring their teeth.  A pair of large, powerful driders lead the group, their corrupt, lusty stares sending shivers up your spine.  While "+(mainClassPtr.player.level <= 13?"you'd never face such a large horde on your own":"you could probably handle them alone")+", you have a powerful ally in this fight - the dragoness Kiha!",true);
 			init2Male(new Cock(9,2,CockTypesEnum.HUMAN),0,1,3);
 			init2Female(VAGINA_WETNESS_SLICK,VAGINA_LOOSENESS_LOOSE);
+			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_SLIME_DROOLING);
 
 			this.temperment = 3;
 			//Regular attack
@@ -65,10 +66,6 @@ package classes.Monsters
 			this.hipRating = 8;
 
 			this.buttRating = 8;
-			//Create imp sex attributes
-
-			this.ass.analLooseness = 4;
-			this.ass.analWetness = 5;			
 		}
 		
 	}

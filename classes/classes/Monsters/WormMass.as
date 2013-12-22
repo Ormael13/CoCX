@@ -22,6 +22,7 @@
 			init2Genderless();
 			this.cumMultiplier = 3;
 			init3BreastRows();
+			init4Ass(ANAL_LOOSENESS_VIRGIN,ANAL_WETNESS_DRY);
 
 			this.temperment = 3;
 			//Regular attack
@@ -64,10 +65,6 @@
 			this.hipRating = 2;
 
 			this.buttRating = 0;
-			//Create imp sex attributes
-
-			this.ass.analLooseness = 0;
-			this.ass.analWetness = 0;
 
 		}
 

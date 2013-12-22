@@ -14,6 +14,7 @@ package classes.Monsters
 			init2Female(VAGINA_WETNESS_SLAVERING,VAGINA_LOOSENESS_NORMAL,30);
 			this.cumMultiplier = 3;
 			init3BreastRows("DD");
+			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_SLIME_DROOLING);
 
 			this.temperment = 3;
 			//Regular attack
@@ -69,9 +70,6 @@ package classes.Monsters
 			this.hipRating = 10;
 
 			this.buttRating = 9;
-
-			this.ass.analLooseness = 4;
-			this.ass.analWetness = 5;
 		}
 	}
 

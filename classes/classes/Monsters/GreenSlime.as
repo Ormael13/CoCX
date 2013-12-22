@@ -70,8 +70,7 @@
 
 
 			this.hoursSinceCum = 20;
-			this.ass.analLooseness = 4;
-			this.ass.analWetness = 5;
+			init4Ass(4,5);
 
 		}
 

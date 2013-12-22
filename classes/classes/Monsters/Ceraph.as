@@ -23,6 +23,7 @@
 			init2Male(new Cock(10,2,CockTypesEnum.DEMON));
 			init2Female(VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_GAPING, 20);
 			init3BreastRows("E");
+			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_DRY,15);
 
 			this.temperment = 2;
 			//Lusty teases
@@ -72,9 +73,6 @@
 
 			this.buttRating = 6;
 			//Create goblin sex attributes
-			this.ass.analLooseness = 4;
-			this.createStatusAffect("Bonus aCapacity",15,0,0,0);
-			this.ass.analWetness = 0;
 
 			this.XP = this.totalXP(mainClassPtr.player.level);
 		}

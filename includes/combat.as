@@ -5871,7 +5871,7 @@ public function eMaxHP():Number {
 	return monster.tou * 2 + 50 + monster.bonusHP;
 }
 public function display():void {
-	if (!monster.fullyInit()){
+	if (!monster.isFullyInit()){
 		outputText("<B>/!\\BUGMonster is not fully initialized! <u>Missing phases: ");
 		for (var i:int=0; i<monster.initsCalled.length; i++)
 			if (!monster.initsCalled[i]) outputText((i+1)+" ");

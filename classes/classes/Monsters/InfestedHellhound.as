@@ -21,15 +21,13 @@
 			trace("InfestedHellhound Constructor!");
 			init1Names("the ", "infested hellhound", "infestedhellhound", "It looks like a large four-legged demon with two heads placed side-by-side. Its eyes and mouth are filled with flames, and covering each of its paws are large and menacing claws. A thick layer of dark fur covers his entire body like armor.  Both heads are looking at you hungrily as the hellhound circles around you.  A pair of black, slightly pointed cocks hang exposed, dripping with cum and worms.  You get the feeling reasoning with this beast will be impossible.");
 			init2Male([new Cock(9,2),new Cock(9,2)],2,5,8);
+			init4Ass(ANAL_LOOSENESS_NORMAL,ANAL_WETNESS_NORMAL);
 			this.temperment = 3;
 			//Regular attack
 			this.special1 = 5066;
 			//Lust attack
 			this.special2 = 5067;
 			this.special3 = 5107;
-			this.pronoun1 = "he";
-			this.pronoun2 = "him";
-			this.pronoun3 = "his";
 
 			//Clothing/Armor
 			this.armorName = "thick fur";
@@ -70,9 +68,6 @@
 
 			this.buttRating = 5;
 			//Create imp sex attributes
-
-			this.ass.analLooseness = 2;
-			this.ass.analWetness = 1;
 
 			this.XP = this.totalXP(mainClassPtr.player.level);
 		}

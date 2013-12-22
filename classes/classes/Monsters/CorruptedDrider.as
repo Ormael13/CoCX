@@ -28,6 +28,7 @@ package classes.Monsters
 			init2Male(new Cock(9,2));
 			init2Female(VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_GAPING, 70, true);
 			init3BreastRows("DD");
+			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,70);
 
 			if (pierced) {
 				this.nipplesPierced = 1;
@@ -94,9 +95,6 @@ package classes.Monsters
 
 			this.buttRating = 9;
 			//Create goblin sex attributes
-			this.ass.analLooseness = 1;
-			this.createStatusAffect("Bonus aCapacity", 70, 0, 0, 0);
-			this.ass.analWetness = 0;
 		}
 
 	}

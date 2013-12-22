@@ -66,9 +66,7 @@ package classes.Monsters
 
 			this.buttRating = 2;
 			//Create goblin sex attributes
-			this.ass.analLooseness = 4;
-			this.createStatusAffect("Bonus aCapacity",25,0,0,0);
-			this.ass.analWetness = 0;
+			init4Ass(4,0,25);
 		}		
 	}
 }

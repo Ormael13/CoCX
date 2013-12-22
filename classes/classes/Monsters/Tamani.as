@@ -15,6 +15,7 @@ package classes.Monsters
 			init1Names("", "Tamani", "tamani", "She keeps her arms folded across her " + mainClassPtr.tamaniChest() + " and glares at you.  The little thing is only about four feet tall, with pink and black dyed hair cut into a cute little 'do.  The greenish-gray skin of her breasts bulges out around her arms, supported by a few leather straps, amplifying her cleavage.  Her cunt lips are pierced multiple times, inflamed, and slightly parted.  There really isn't any clothing on her to hide them, just more of the ever-present straps wrapping around her thighs.");
 			init2Female(VAGINA_WETNESS_DROOLING,VAGINA_LOOSENESS_NORMAL,55);
 			init3BreastRows("E");
+			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,40);
 
 			this.temperment = 2;
 			//Regular attack
@@ -62,9 +63,6 @@ package classes.Monsters
 
 			this.buttRating = 8;
 			//Create goblin sex attributes
-			this.ass.analLooseness = 1;
-			this.createStatusAffect("Bonus aCapacity",40,0,0,0);
-			this.ass.analWetness = 0;		
 		}
 		
 	}

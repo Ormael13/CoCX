@@ -64,9 +64,7 @@ package classes.Monsters
 			this.hipRating = 8;
 
 			this.buttRating = 8;
-
-			this.ass.analLooseness = 4;
-			this.ass.analWetness = 5;			
+			init4Ass(4,5);
 		}
 		
 	}

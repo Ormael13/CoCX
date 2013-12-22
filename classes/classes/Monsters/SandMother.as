@@ -17,6 +17,7 @@ package classes.Monsters
 			this.cumMultiplier = 3;
 			this.hoursSinceCum = 20;
 			init3BreastRows(["DD"],["DD"]);
+			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_NORMAL);
 
 			this.temperment = 3;
 			//Regular attack
@@ -70,8 +71,6 @@ package classes.Monsters
 			this.createStatusAffect("Bonus aCapacity",50,0,0,0);
 			this.createPerk("Resolute",0,0,0,0);
 			this.createPerk("Focused",0,0,0,0);
-			this.ass.analLooseness = 1;
-			this.ass.analWetness = 1;			
 		}
 		
 	}

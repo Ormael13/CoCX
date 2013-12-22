@@ -26,6 +26,7 @@ package classes.Monsters
 			if(gender == 1 || gender == 3) {
 				init2Male(new Cock(16,2,CockTypesEnum.DRAGON),2,4,3);
 			}
+			init4Ass(ANAL_LOOSENESS_NORMAL,ANAL_WETNESS_DRY);
 
 			this.temperment = 3;
 			//Clothing/Armor
@@ -73,8 +74,6 @@ package classes.Monsters
 
 			this.buttRating = 8;
 			//Create imp sex attributes
-			this.ass.analLooseness = 2;
-			this.ass.analWetness = 0;			
 		}
 		
 	}

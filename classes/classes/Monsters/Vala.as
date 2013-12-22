@@ -16,6 +16,7 @@ package classes.Monsters
 			init1Names("", "Vala", "vala", "While the fey girl is whip-thin, her breasts are disproportionately huge. They'd be at least a DD-cup on a normal human, but for her height and body type, they're practically as large as her head. They jiggle at her slow, uneven breathing, tiny drops of milk bubbling at her nipples with every heartbeat.  She seems fixated on mating with you, and won't take no for an answer.");
 			init2Female(VAGINA_WETNESS_SLICK,VAGINA_LOOSENESS_GAPING_WIDE,25);
 			init3BreastRows("E");
+			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_DRY,10);
 
 			this.temperment = 2;
 			//Lusty teases
@@ -67,10 +68,6 @@ package classes.Monsters
 			this.hipRating = 10;
 
 			this.buttRating = 8;
-			//Create goblin sex attributes
-			this.ass.analLooseness = 4;
-			this.createStatusAffect("Bonus aCapacity",10,0,0,0);
-			this.ass.analWetness = 0;
 
 		}
 		

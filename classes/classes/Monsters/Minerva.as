@@ -71,8 +71,7 @@ package classes.Monsters
 
 			this.buttRating = 9;
 			//Create succubus sex attributes
-			this.ass.analLooseness = 1;
-			this.ass.analWetness = 0;			
+			init4Ass(1,0);
 		}
 		
 	}

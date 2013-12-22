@@ -17,6 +17,7 @@ package classes.Monsters
 			this.cumMultiplier = 3;
 			this.hoursSinceCum = 20;
 			init3BreastRows(["DD"],["DD"]);
+			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_NORMAL);
 
 			this.temperment = 3;
 			//Regular attack
@@ -69,9 +70,6 @@ package classes.Monsters
 
 			this.buttRating = 8;
 			//Create imp sex attributes
-			this.createVagina();
-			this.ass.analLooseness = 1;
-			this.ass.analWetness = 1;			
 		}
 		
 	}

@@ -16,6 +16,7 @@ package classes.Monsters
 			init2Female(VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_LOOSE);
 			this.cumMultiplier = 3;
 			this.ballSize = 1;
+			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_DRY);
 
 			this.temperment = 3;
 
@@ -65,8 +66,6 @@ package classes.Monsters
 			this.hipRating = 8;
 
 			this.buttRating = 8;
-			this.ass.analLooseness = 4;
-			this.ass.analWetness = 0;			
 		}
 		
 	}

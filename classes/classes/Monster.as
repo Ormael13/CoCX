@@ -306,9 +306,9 @@
 		}
 
 		// MONSTER INITIALIZATION HELPER FUNCTIONS
-		public var initsCalled:Array = [false,false,false];
+		public var initsCalled:Array = [false,false,false,false];
 
-		public function fullyInit():Boolean {
+		public function isFullyInit():Boolean {
 			return initsCalled.indexOf(false)==-1;
 		}
 
@@ -441,6 +441,12 @@
 				}
 			}
 			this.initsCalled[2] = true;
+		}
+
+		protected function init4Ass(looseness:Number = 0, wetness:Number = 0, bonusACapacity:Number = 0){
+			this.ass.analLooseness = looseness;
+			this.ass.analWetness = wetness;
+			if (bonusACapacity>0) this.createStatusAffect("Bonus aCapacity",bonusACapacity,0,0,0);
 		}
 	}
 }

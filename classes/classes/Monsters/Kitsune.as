@@ -31,6 +31,7 @@ package classes.Monsters
 			}
 			init2Female(VAGINA_WETNESS_SLICK,VAGINA_LOOSENESS_NORMAL,20);
 			init3BreastRows("D");
+			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_NORMAL,20);
 
 			this.temperment = 1;
 			this.special1 = 5029;
@@ -79,9 +80,6 @@ package classes.Monsters
 
 			this.buttRating = 5;
 			//Create imp sex attributes
-			this.ass.analLooseness = 1;
-			this.ass.analWetness = 1;
-			this.createStatusAffect("Bonus aCapacity", 20, 0, 0, 0);
 		}
 
 	}

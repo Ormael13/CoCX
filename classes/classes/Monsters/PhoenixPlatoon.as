@@ -15,6 +15,7 @@ package classes.Monsters
 			init1Names("the ","phoenix platoon","phoenixmob","You are faced with a platoon of heavy infantry, all armed to the teeth and protected by chain vests and shields. They look like a cross between salamander and harpy, humanoid save for crimson wings, scaled feet, and long fiery tails. They stand in a tight-knit shield wall, each phoenix protecting herself and the warrior next to her with their tower-shield. Their scimitars cut great swaths through the room as they slowly advance upon you.",true);
 			init2Male(new Cock(),0,1,3);
 			init2Female(VAGINA_WETNESS_SLAVERING,VAGINA_LOOSENESS_LOOSE);
+			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_DRY);
 
 			this.temperment = 3;
 
@@ -63,9 +64,6 @@ package classes.Monsters
 
 			this.buttRating = 8;
 			//Create imp sex attributes
-
-			this.ass.analLooseness = 4;
-			this.ass.analWetness = 0;			
 		}
 		
 	}

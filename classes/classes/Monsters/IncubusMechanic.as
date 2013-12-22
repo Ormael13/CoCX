@@ -12,6 +12,7 @@ package classes.Monsters
 			init2Male(new Cock(12,1.75),2,0,3);
 			this.gender = 2;
 			init3BreastRows(0);
+			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_SLIME_DROOLING);
 			this.temperment = 3;
 			//Regular attack
 			this.special1 = 11035;
@@ -66,8 +67,6 @@ package classes.Monsters
 
 			this.buttRating = 2;
 			//Create succubus sex attributes
-			this.ass.analLooseness = 4;
-			this.ass.analWetness = 5;			
 		}
 	}
 }

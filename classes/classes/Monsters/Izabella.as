@@ -15,6 +15,7 @@ package classes.Monsters
 			init1Names("", "Isabella", "isabella", "Isabella is a seven foot tall, red-headed tower of angry cow-girl.  She's snarling at you from behind her massive shield, stamping her hooves in irritation as she prepares to lay into you.  Her skin is dusky, nearly chocolate except for a few white spots spattered over her body.  She wears a tight silk shirt and a corset that barely supports her bountiful breasts, but it's hard to get a good look at them behind her giant shield.");
 			init2Female(VAGINA_WETNESS_DROOLING,VAGINA_LOOSENESS_GAPING,45);
 			init3BreastRows("EE+");
+			init4Ass(ANAL_LOOSENESS_VIRGIN,ANAL_WETNESS_DRY,38);
 			this.temperment = 2;
 			//Lusty teases
 
@@ -65,9 +66,6 @@ package classes.Monsters
 
 			this.buttRating = 9;
 			//Create goblin sex attributes
-			this.ass.analLooseness = 0;
-			this.createStatusAffect("Bonus aCapacity",38,0,0,0);
-			this.ass.analWetness = 0;			
 		}
 		
 	}

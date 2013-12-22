@@ -72,8 +72,7 @@
 
 			this.buttRating = 8;
 			//Create goblin sex attributes
-			this.ass.analLooseness = 0;
-			this.ass.analWetness = 0;
+			init4Ass(0,0);
 
 		}
 

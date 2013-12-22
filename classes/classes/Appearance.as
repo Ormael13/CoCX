@@ -7,7 +7,7 @@
 
 	public class Appearance
 	{
-
+		#include "../../includes/appearanceDefs.as"
 		// Eventually, this should contain the entire char appearance.
 		// At the moment, it's pretty piecemeal.
 
@@ -1991,32 +1991,35 @@
 		public static function assholeDescription(i_creature:Creature):String
 		{
 			var description:String = "";
-			var haveDescription:Boolean = false;
-			var options:Array;
 			//66% wetness description
 			if (rand(3) <= 1) {
-				if(i_creature.ass.analWetness == 2) description += "moist ";
-				if(i_creature.ass.analWetness == 3) description += "slimy ";
-				if(i_creature.ass.analWetness == 4) description += "drooling ";
-				if(i_creature.ass.analWetness == 5) description += "slime-drooling ";
+				description += {
+					ANAL_WETNESS_DRY: "",
+					ANAL_WETNESS_NORMAL: "",
+					ANAL_WETNESS_MOIST: "moist ",
+					ANAL_WETNESS_SLIMY: "slimy ",
+					ANAL_WETNESS_DROOLING: "drooling ",
+					ANAL_WETNESS_SLIME_DROOLING: "slime-drooling "
+				}[i_creature.ass.analWetness] || "";
 			}
 			//25% tightness description
-			if(rand(4) == 0 || (i_creature.ass.analLooseness <= 1 && rand(4) <= 2)) {
-				if(i_creature.ass.analLooseness == 0) description += "virgin ";
-				if(i_creature.ass.analLooseness == 1) description += "tight ";
-				if(i_creature.ass.analLooseness == 2) description += "loose ";
-				if(i_creature.ass.analLooseness == 3) description += "roomy ";
-				if(i_creature.ass.analLooseness == 4) description += "stretched ";
-				if(i_creature.ass.analLooseness == 5) description += "gaping ";
+			if (rand(4) == 0 || (i_creature.ass.analLooseness <= 1 && rand(4) <= 2)) {
+				description += {
+					ANAL_LOOSENESS_VIRGIN: "virgin ",
+					ANAL_LOOSENESS_TIGHT: "tight ",
+					ANAL_LOOSENESS_NORMAL: "loose ",
+					ANAL_LOOSENESS_LOOSE: "roomy ",
+					ANAL_LOOSENESS_STRETCHED: "stretched ",
+					ANAL_LOOSENESS_GAPING: "gaping "
+				}[i_creature.ass.analLooseness] || "";
 			}
 			//asshole descriptor
-			options = ["ass",
-			"anus",
-			"pucker",
-			"backdoor",
-			"asshole",
-			"butthole"];
-			description += randomChoice(options);
+			description += randomChoice("ass",
+					"anus",
+					"pucker",
+					"backdoor",
+					"asshole",
+					"butthole");
 
 			return description;
 		}

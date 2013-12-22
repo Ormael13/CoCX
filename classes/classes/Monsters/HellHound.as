@@ -66,8 +66,7 @@
 
 			this.buttRating = 5;
 			//Create imp sex attributes
-			this.ass.analLooseness = 2;
-			this.ass.analWetness = 1;
+			init4Ass(2,1);
 
 		}
 

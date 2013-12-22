@@ -22,6 +22,7 @@
 		
 			init1Names("the ", "fetish zealot", "fetishzealot", "The zealot is clad in a bizarre set of religious robes.  They are similar to what you've seen on other religious leaders from home, but none that included the large slit at the front that lets his above average sized human dick stick out the front.");
 			init2Male(new Cock(7,1.5));
+			init4Ass(ANAL_LOOSENESS_LOOSE,ANAL_WETNESS_DRY,40);
 
 			this.temperment = 2;
 			//Lusty teases
@@ -72,9 +73,6 @@
 
 			this.buttRating = 2;
 			//Create goblin sex attributes
-			this.ass.analLooseness = 3;
-			this.createStatusAffect("Bonus aCapacity",40,0,0,0);
-			this.ass.analWetness = 0;
 
 
 			this.XP = this.totalXP(mainClassPtr.player.level);

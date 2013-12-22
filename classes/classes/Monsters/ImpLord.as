@@ -20,6 +20,7 @@ package classes.Monsters
 			// shit out of any potions they can get their hands on.
 			init2Male(new Cock(rand(2)+11,2.5,CockTypesEnum.DEMON),2,1,3,20);
 			init3BreastRows([0,0]);
+			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_NORMAL);
 
 			this.temperment = 1;
 			this.special1 = 5019;
@@ -71,8 +72,6 @@ package classes.Monsters
 
 			this.buttRating = 2;
 			//Create imp sex attributes
-			this.ass.analLooseness = 4;
-			this.ass.analWetness = 1;			
 		}
 		
 	}

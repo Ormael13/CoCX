@@ -18,6 +18,7 @@ package classes.Monsters
 			init2Male(new Cock(7,1,CockTypesEnum.ANEMONE));
 			init2Female(VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_LOOSE, 5);
 			init3BreastRows("E");
+			init4Ass(ANAL_LOOSENESS_NORMAL,ANAL_WETNESS_DRY,10);
 
 			this.temperment = 2;
 			//Lusty teases
@@ -67,9 +68,6 @@ package classes.Monsters
 
 			this.buttRating = 6;
 			//Create goblin sex attributes
-			this.ass.analLooseness = 2;
-			this.createStatusAffect("Bonus aCapacity",10,0,0,0);
-			this.ass.analWetness = 0;
 		}
 		
 	}

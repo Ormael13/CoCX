@@ -23,6 +23,7 @@
 			init2Male([new Cock(40,1.5),new Cock(60,1.5),new Cock(50,1.5),new Cock(20,1.5)],0,0,3);
 			init2Genderless();
 			init3BreastRows();
+			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_SLIME_DROOLING);
 
 			this.temperment = 3;
 			//Regular attack
@@ -76,10 +77,6 @@
 			this.hipRating = 0;
 
 			this.buttRating = 0;
-			//Create succubus sex attributes
-			this.ass.analLooseness = 1;
-			this.ass.analWetness = 35;		
-
 		}
 
 	}
