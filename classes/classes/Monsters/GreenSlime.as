@@ -1,9 +1,10 @@
-﻿package classes.Monsters 
+﻿package classes.Monsters
 {
+	import classes.Cock;
 	import classes.Creature;
 	import classes.Monster;
 	import classes.CockTypesEnum;
-	
+
 	/**
 	 * ...
 	 * @author Fake-Name
@@ -12,107 +13,29 @@
 
 	public class GreenSlime extends Monster
 	{
-		
 
-		public function GreenSlime(mainClassPtr:*) 
+
+		public function GreenSlime(mainClassPtr:*)
 		{
-			
+			super(mainClassPtr);
 			trace("GreenSlime Constructor!");
-			this.short                                   ="green slime";
-			this.imageName                               ="greenslime";
-			this.plural                                  = false;
-			this.long                                    = "The green slime has a normally featureless face that sits on top of wide shoulders that sprout into thick, strong arms.  Its torso fades into an indistinct column that melds into the lump of ooze on the ground that serves as a makeshift form of locomotion.";
-			this.a                                       ="a ";
-			this.capitalA                                ="A ";
-			this.temperment                              = 3;
-			this.special1                                = 5040;
-			this.special2                                = 5039;
-			this.special3                                = 5039;
-			this.pronoun1                                = "it";
-			this.pronoun2                                = "it";
-			this.pronoun3                                = "its";
-			
-			//Clothing/Armor
-			this.armorName                               = "gelatinous skin";
-			this.weaponName                              = "hands";
-			this.weaponVerb                              = "slap";
-			this.armorDef                                = 0;
-			this.armorPerk                               = "";
-			this.weaponAttack                            = 0;
-			this.weaponPerk                              = "";
-			this.weaponValue                             = 0;
-			this.armorValue                              = 0;
-			//Primary stats
-			this.str                                     = 25;
-			this.tou                                     = 20;
-			this.spe                                     = 10;
-			this.inte                                    = 5;
-			this.lib                                     = 50;
-			this.sens                                    = 60;
-			this.cor                                     = 20;
-			this.fatigue                                 = 0;
-			
-			//Combat Stats
-			this.bonusHP                                 = 30;
-			this.HP                                      = eMaxHP();
-			this.lust                                    = 30;
-			
-			//Level Stats
-			this.level                                   = 2;
-			this.XP                                      = this.totalXP(mainClassPtr.player.level);
-			this.gems                                    = rand(5)+1;
-			
-			//Appearance Variables
-			//Gender 1M, 2F, 3H
-			this.gender                                  = 1;
-			this.tallness                                = rand(8) + 80;
-			this.hairColor                               = "green";
-			this.hairLength                              = 0;
-			this.skinType                                = SKIN_TYPE_PLAIN;
-			this.skinTone                                = "green";
-			this.skinDesc                                = "skin";
-			this.faceType                                = FACE_HUMAN;
-			this.wingDesc                                = "non-existant";
-
-			this.wingType                                = WING_TYPE_NONE;
-			this.lowerBody                               = LOWER_BODY_TYPE_HUMAN;
-			this.tailType                                = TAIL_TYPE_NONE;
-			//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
-			this.tailVenom                               = 0;
-			//Tail recharge determines how fast venom/webs comes back per hour.
-			this.tailRecharge                            = 5;
-			//hipRating
-			//0 - boyish
-			//2 - slender
-			//4 - average
-			//6 - noticable/ample
-			//10 - curvy//flaring
-			//15 - child-bearing/fertile
-			//20 - inhumanly wide
-			this.hipRating                               = 6;
-			//buttRating
-			//0 - buttless
-			//2 - tight
-			//4 - average
-			//6 - noticable
-			//8 - large
-			//10 - jiggly
-			//13 - expansive
-			//16 - huge
-			//20 - inconceivably large/big/huge etc
-			this.buttRating                              = 8;
-			//Create imp sex attributes
-			this.createCock();
-			this.cocks[0].cockLength                     = 18;
-			this.cocks[0].cockThickness                  = 2;
-			this.cocks[0].cockType                       = CockTypesEnum.HUMAN;
-			this.balls                                   = 0;
-			this.cumMultiplier                           = 3;
-			this.ballSize                                = 1;
-			this.hoursSinceCum                           = 20;
-			this.ass.analLooseness                       = 4;
-			this.ass.analWetness                         = 5;
-			
+			init01Names("a ", "green slime", "greenslime", "The green slime has a normally featureless face that sits on top of wide shoulders that sprout into thick, strong arms.  Its torso fades into an indistinct column that melds into the lump of ooze on the ground that serves as a makeshift form of locomotion.");
+			init02Male(new Cock(18, 2, CockTypesEnum.HUMAN), 0, 1, 3, 20);
+			this.pronoun1 = "it";
+			this.pronoun2 = "it";
+			this.pronoun3 = "its";
+			init03BreastRows(0);
+			init04Ass(ANAL_LOOSENESS_STRETCHED, ANAL_WETNESS_SLIME_DROOLING);
+			init05Body(rand(8) + 80, HIP_RATING_AMPLE, BUTT_RATING_LARGE);
+			init06Skin("green");
+			init07Hair("green", 0);
+			init08Face();
+			init09PrimaryStats(25, 20, 10, 5, 50, 60, 20);
+			init10Weapon("hands", "slap");
+			init11Armor("gelatinous skin");
+			init12Combat(30, 30, 1, Monster.TEMPERMENT_LOVE_GRAPPLES);
+			init13Level(2, rand(5) + 1);
+			initX_Specials(5040, 5039, 5039);
 		}
 
 	}

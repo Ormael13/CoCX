@@ -3,8 +3,11 @@
 	public class VaginaClass
 	{
 		//constructor
-		public function VaginaClass()
+		public function VaginaClass(vaginalWetness:Number = 1, vaginalLooseness:Number = 0, virgin:Boolean = false)
 		{
+			this.virgin=virgin;
+			this.vaginalWetness=vaginalWetness;
+			this.vaginalLooseness=vaginalLooseness;
 		}
 		//data
 		//Vag wetness

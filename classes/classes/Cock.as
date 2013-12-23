@@ -21,12 +21,13 @@ package classes
 		//Sock
 		private var _sock:String;
 		
-		//constructor
-		public function Cock(i_cockLength:Number = 5.5, i_cockThickness:Number = 1)
+		//constructor. Default type is HUMAN
+		public function Cock(i_cockLength:Number = 5.5, i_cockThickness:Number = 1, i_cockType:CockTypesEnum=null)
 		{
+			if (i_cockType == null) i_cockType = CockTypesEnum.HUMAN;
 			_cockLength = i_cockLength;
 			_cockThickness = i_cockThickness;
-			_cockType = CockTypesEnum.HUMAN;
+			_cockType = i_cockType;
 			_pierced = 0;
 			_knotMultiplier = 1;
 			_isPierced = false;

@@ -1,4 +1,5 @@
-﻿public function impVictory():void {
+﻿import classes.Monsters.ImpGang;
+public function impVictory():void {
 	if(player.hasStatusAffect("Feeder") >= 0) {
 		if(player.lust >= 33) outputText("You smile in satisfaction as " + monster.a + monster.short + " collapses and begins masturbating feverishly.  Sadly you realize your own needs have not been met.  Of course you could always rape the poor thing, but it might be more fun to force it to guzzle your breast-milk.\n\nWhat do you do?", true);
 		else outputText("You smile in satisfaction as " + monster.a + monster.short + " collapses and begins masturbating feverishly.  You're not really turned on enough to rape it, but it might be fun to force it to guzzle your breast-milk.\n\nDo you breastfeed it?", true);
@@ -573,23 +574,7 @@ public function impGangabangaEXPLOSIONS():void {
 	spriteSelect(18);
 	//Set imp monster values
 	//Clear arrays in preparation
-	monster.removeStatuses();
-	monster.removePerks();
-	monster.removeCock(0, monster.cocks.length);
-	monster.removeVagina(0, monster.vaginas.length);
-	monster.removeBreastRow(0, monster.breastRows.length);
-	monster.bonusHP = 0;
-	monster.createCock(12,1.5);
-	monster.createCock(25,2.5);
-	monster.createCock(25,2.5);
-	monster.cocks[2].cockType = CockTypesEnum.DOG;
-	monster.cocks[2].knotMultiplier = 2;
-	monster.balls = 2;
-	monster.ballSize = 3;
-	monster.a = "a mob of imps";
-	monster.short = "imp gang";
-	monster.capitalA = "gang of imps";
-	monster.skinTone = "imp mob";
+	monster = new ImpGang(this);
 	outputText("\n", false);
 	outputText("<b>You sleep uneasily. A small sound near the edge of your camp breaks into your rest and you awaken suddenly to find yourself surrounded by " + monster.a  + "</b>!\n\n", false);
 	//CENTAUR

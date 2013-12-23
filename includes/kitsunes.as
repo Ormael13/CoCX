@@ -288,7 +288,7 @@ public function kitsuneMaleOrHermMansion(willing:Boolean):void {
 	if(willing) {
 		outputText("<b>How do you respond?</b>");
 		// display choices:
-		//{"Let Her" } {"Shove Her" }
+		//["Let Her" ] ["Shove Her" ]
 		if(willing) simpleChoices("Let Her",3929,"Shove Her",3931,"",0,"",0,"",0);
 		else simpleChoices("Let Her",3930,"Shove Her",3932,"",0,"",0,"",0);
 	}
@@ -398,7 +398,7 @@ public function kitsuneShoveHerMansion(willing:Boolean = true):void {
 		outputText("\n\nThe blonde casually wades over to the redhead, flipping her onto her back and sliding onto her sister's hips with a haughty smirk.  The poor redhead is pinned under her weight, flushing with wanton desire, her cock twitching needfully between the blonde's ass cheeks.  One of the blonde's tails winds around the " + ((player.hasSheath()) ? "sheath" : "base" ) + " of your " + cockDescript(player.biggestCockIndex()) + ", pulling it into the shimmering tangle of golden coils, and though a fluffy forest obscures your view, you can feel the " + cockHead( player.biggestCockIndex() )+ " pressing up against the blonde's warm, inviting snatch.\n\n");
 		outputText("Her tail coils and constricts around your member, drawing you forward to plunge into the waiting folds with a wet slurp." + ((player.biggestCockArea() > 80) ? "  Her walls draw you inward for ages, rippling sensually along your length as her cavernous cunt seems to go on forever.  Impossible though it might sound, it seems she intends to take ALL of you." : "") + "  She shudders with satisfaction as your hips lightly press against hers, a few of her tails lashing around your " + hipDescript() + " to draw you in as far as possible" + ((player.cocks.length > 1) ? ", [eachCock] entangled in a jungle of gold that caresses and tickles them teasingly." : ".") + "  The redhead's tails flail sporadically beneath her, bristling with pleasure as your " + vaginaDescript() + " slides across the tip of her cock teasingly, sending a shiver up her spine and a blush to her cheeks.\n\n");
 		outputText("You feel something brushing against you and look down to find the black-haired girl pressing her face against your [butt], running her hands up and down your " + hipDescript() + " and smacking your cheek once lightly for good measure.  An involuntary shudder zigzags up your spine as her slick tongue runs up your crack, lining your [asshole] with saliva.  Her fingertips dig into the flesh of your bottom, the other hand sliding along your " + vaginaDescript() + ", pinching and rolling your " + clitDescript() + ".  A moment later, you rise an inch or two off the ground as a squirming invader spears your ass.  Her plush lips press against you like soft pillows, a muffled giggle vibrating up her tongue and into your prostate.  Your strength gives out as she prods your prostate, dragging you down with her weight at the same time to impale you on the redhead's cock.");
-		//{virginity loss/ stretching, redhead is 12x2}
+		//[virginity loss/ stretching, redhead is 12x2]
 		cuntChange(24,true,true,false);
 		outputText("\n\n");
 		outputText("The redhead squeals with pleasure as her throbbing shaft spears your nethers, her hands rising up to the blonde's shoulders and digging into them passionately.  Caught between the blonde's sopping pussy, the redhead's cock, and the ravenette's swirling tongue, you are ensconced in such pleasure that you can no longer distinguish the source.  Your body bucks and trembles from the trio's indulgent onslaught, hips grinding and mashing against each other in a passionate spectacle.\n\n");
@@ -473,7 +473,7 @@ public function kitsuneFemaleOrGenderless(willing:Boolean):void {
 	if(willing){
 		outputText("<b>How do you respond?</b>");
 		// display choices:
-		//{"Let Her" = letHer() } {"Shove Her" = shoveHer() }
+		//["Let Her" = letHer() ] ["Shove Her" = shoveHer() ]
 		if(willing) simpleChoices("Let Her",3936,"Shove Her",3938,"",0,"",0,"",0);
 		else simpleChoices("Let Her",3937,"Shove Her",3939,"",0,"",0,"",0);
 	}

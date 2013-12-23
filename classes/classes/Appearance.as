@@ -7,9 +7,17 @@
 
 	public class Appearance
 	{
-
+		include "../../includes/appearanceDefs.as"
 		// Eventually, this should contain the entire char appearance.
 		// At the moment, it's pretty piecemeal.
+
+		public static function inverseMap(x:Object):Object{
+			var result:Object = {};
+			for (var i:String in x){
+				result[String(x[i])] = i;
+			}
+			return result;
+		}
 
 		public static function randomChoice(... args):*
 		{
@@ -1991,32 +1999,35 @@
 		public static function assholeDescription(i_creature:Creature):String
 		{
 			var description:String = "";
-			var haveDescription:Boolean = false;
-			var options:Array;
 			//66% wetness description
 			if (rand(3) <= 1) {
-				if(i_creature.ass.analWetness == 2) description += "moist ";
-				if(i_creature.ass.analWetness == 3) description += "slimy ";
-				if(i_creature.ass.analWetness == 4) description += "drooling ";
-				if(i_creature.ass.analWetness == 5) description += "slime-drooling ";
+				description += {
+					ANAL_WETNESS_DRY: "",
+					ANAL_WETNESS_NORMAL: "",
+					ANAL_WETNESS_MOIST: "moist ",
+					ANAL_WETNESS_SLIMY: "slimy ",
+					ANAL_WETNESS_DROOLING: "drooling ",
+					ANAL_WETNESS_SLIME_DROOLING: "slime-drooling "
+				}[i_creature.ass.analWetness] || "";
 			}
 			//25% tightness description
-			if(rand(4) == 0 || (i_creature.ass.analLooseness <= 1 && rand(4) <= 2)) {
-				if(i_creature.ass.analLooseness == 0) description += "virgin ";
-				if(i_creature.ass.analLooseness == 1) description += "tight ";
-				if(i_creature.ass.analLooseness == 2) description += "loose ";
-				if(i_creature.ass.analLooseness == 3) description += "roomy ";
-				if(i_creature.ass.analLooseness == 4) description += "stretched ";
-				if(i_creature.ass.analLooseness == 5) description += "gaping ";
+			if (rand(4) == 0 || (i_creature.ass.analLooseness <= 1 && rand(4) <= 2)) {
+				description += {
+					ANAL_LOOSENESS_VIRGIN: "virgin ",
+					ANAL_LOOSENESS_TIGHT: "tight ",
+					ANAL_LOOSENESS_NORMAL: "loose ",
+					ANAL_LOOSENESS_LOOSE: "roomy ",
+					ANAL_LOOSENESS_STRETCHED: "stretched ",
+					ANAL_LOOSENESS_GAPING: "gaping "
+				}[i_creature.ass.analLooseness] || "";
 			}
 			//asshole descriptor
-			options = ["ass",
-			"anus",
-			"pucker",
-			"backdoor",
-			"asshole",
-			"butthole"];
-			description += randomChoice(options);
+			description += randomChoice("ass",
+					"anus",
+					"pucker",
+					"backdoor",
+					"asshole",
+					"butthole");
 
 			return description;
 		}
@@ -2115,5 +2126,318 @@
 			return descript;
 		}
 
+		public static const BREAST_CUP_NAMES:Array = [
+			"flat, manly breast",//0
+			//				1			2			3			4			5				6			7		8			9
+						"A-cup",	"B-cup",	"C-cup",	"D-cup",	"DD-cup",		"big DD-cup","E-cup","big E-cup","EE-cup",// 1-9
+			"big EE-cup","F-cup",	"big F-cup","FF-cup",	"big FF-cup","G-cup",		"big G-cup","GG-cup","big GG-cup","H-cup",//10-19
+			"big H-cup","HH-cup",	"big HH-cup","HHH-cup",	"I-cup",	"big I-cup",	"II-cup","big II-cup","J-cup","big J-cup",//20-29
+			"JJ-cup",	"big JJ-cup","K-cup",	"big K-cup","KK-cup",	"big KK-cup",	"L-cup","big L-cup","LL-cup","big LL-cup",//30-39
+			"M-cup",	"big M-cup","MM-cup",	"big MM-cup","MMM-cup",	"large MMM-cup","N-cup","large N-cup","NN-cup","large NN-cup",//40-49
+			"O-cup",	"large O-cup","OO-cup",	"large OO-cup","P-cup",	"large P-cup",	"PP-cup","large PP-cup","Q-cup","large Q-cup",//50-59
+			"QQ-cup",	"large QQ-cup","R-cup",	"large R-cup",	"RR-cup","large RR-cup","S-cup","large S-cup","SS-cup","large SS-cup",//60-69
+			"T-cup",	"large T-cup","TT-cup",	"large TT-cup",	"U-cup","large U-cup",	"UU-cup","large UU-cup","V-cup","large V-cup",//70-79
+			"VV-cup",	"large VV-cup","W-cup",	"large W-cup",	"WW-cup","large WW-cup","X-cup","large X-cup","XX-cup","large XX-cup",//80-89
+			"Y-cup",	"large Y-cup","YY-cup",	"large YY-cup",	"Z-cup","large Z-cup",	"ZZ-cup","large ZZ-cup","ZZZ-cup","large ZZZ-cup"//90-99
+		];
+		public static function breastCup(size:Number):String {
+			return BREAST_CUP_NAMES[Math.floor(size)]||BREAST_CUP_NAMES[BREAST_CUP_NAMES.length-1];
+		}
+		/**
+		 * Returns breast size from cup name.
+		 * Acceptable input: "flat","A","B","C","D","DD","DD+",... "ZZZ","ZZZ+" or exact match from BREAST_CUP_NAMES array
+		 */
+		public static function breastCupInverse(name:String,defaultValue:Number=0):Number{
+			if (name.length==0) return defaultValue;
+			if (name == "flat") return 0;
+			var big:Boolean = name.charAt(name.length-1)=="+";
+			if (big) name = name.substr(0,name.length-1);
+			for (var i:int=0; i<BREAST_CUP_NAMES.length; i++) {
+				if (name == BREAST_CUP_NAMES[i]) return i;
+				if (BREAST_CUP_NAMES[i].indexOf(name)==0) return i+(big?1:0);
+			}
+			return defaultValue;
+		}
+		public static function createMapFromPairs(src:Array):Object{
+		    var result:Object = {};
+			for (var i:int=0; i<src.length; i++) result[src[i][0]]=src[i][1];
+			return result;
+		}
+		public static const DEFAULT_GENDER_NAMES:Object = createMapFromPairs(
+			[[GENDER_NONE,"genderless"],
+			[GENDER_MALE,"male"],
+			[GENDER_FEMALE,"female"],
+			[GENDER_HERM,"hermaphrodite"]]
+		);
+		public static const DEFAULT_SKIN_NAMES:Object = createMapFromPairs(
+			[[SKIN_TYPE_PLAIN,"skin"],
+			[SKIN_TYPE_FUR,"fur"],
+			[SKIN_TYPE_SCALES,"scales"],
+			[SKIN_TYPE_GOO,"goo"],
+			[SKIN_TYPE_UNDEFINED,"undefined flesh"]]
+		);
+		public static const DEFAULT_SKIN_DESCS:Object = createMapFromPairs(
+			[[SKIN_TYPE_PLAIN,"skin"],
+			[SKIN_TYPE_FUR,"fur"],
+			[SKIN_TYPE_SCALES,"scales"],
+			[SKIN_TYPE_GOO,"skin"],
+			[SKIN_TYPE_UNDEFINED,"skin"]]
+		);
+		public static const DEFAULT_HAIR_NAMES:Object = createMapFromPairs(
+			[[HAIR_NORMAL,"normal"],
+			[HAIR_FEATHER,"feather"],
+			[HAIR_GHOST,"transparent"],
+			[HAIR_GOO,"goopy"],
+			[HAIR_ANEMONE,"tentacle"]]
+		);
+		public static const DEFAULT_FACE_NAMES:Object = createMapFromPairs(
+			[[FACE_HUMAN,"human"],
+			[FACE_HORSE,"horse"],
+			[FACE_DOG,"dog"],
+			[FACE_COW_MINOTAUR,"cow"],
+			[FACE_SHARK_TEETH,"shark"],
+			[FACE_SNAKE_FANGS,"snake"],
+			[FACE_CAT,"cat"],
+			[FACE_LIZARD,"lizard"],
+			[FACE_BUNNY,"bunny"],
+			[FACE_KANGAROO,"kangaroo"],
+			[FACE_SPIDER_FANGS,"spider"],
+			[FACE_FOX,"fox"],
+			[FACE_DRAGON,"dragon"],
+			[FACE_RACCOON_MASK,"raccoon mask"],
+			[FACE_RACCOON,"racoon"],
+			[FACE_BUCKTEETH,"buckteeth"],
+			[FACE_MOUSE,"mouse"]]
+		);
+		public static const DEFAULT_TONGUE_NAMES:Object = createMapFromPairs(
+			[[TONUGE_HUMAN,"human"],
+			[TONUGE_SNAKE,"snake"],
+			[TONUGE_DEMONIC,"demonic"],
+			[TONUGE_DRACONIC,"draconic"]]
+		);
+		public static const DEFAULT_EYES_NAMES:Object = createMapFromPairs(
+			[[EYES_HUMAN,"human"],
+			[EYES_FOUR_SPIDER_EYES,"4 spider"],
+			[EYES_BLACK_EYES_SAND_TRAP,"sandtrap black"]]
+		);
+		public static const DEFAULT_EARS_NAMES:Object = createMapFromPairs(
+			[[EARS_HUMAN,"human"],
+			[EARS_HORSE,"horse"],
+			[EARS_DOG,"dog"],
+			[EARS_COW,"cow"],
+			[EARS_ELFIN,"elfin"],
+			[EARS_CAT,"cat"],
+			[EARS_LIZARD,"lizard"],
+			[EARS_BUNNY,"bunny"],
+			[EARS_KANGAROO,"kangaroo"],
+			[EARS_FOX,"fox"],
+			[EARS_DRAGON,"dragon"],
+			[EARS_RACCOON,"raccoon"],
+			[EARS_MOUSE,"mouse"]]
+		);
+		public static const DEFAULT_HORNS_NAMES:Object = createMapFromPairs(
+			[[HORNS_NONE,"non-existant"],
+			[HORNS_DEMON,"demon"],
+			[HORNS_COW_MINOTAUR,"cow"],
+			[HORNS_DRACONIC_X2,"2 draconic"],
+			[HORNS_DRACONIC_X4_12_INCH_LONG,"four 12\" long draconic"],
+			[HORNS_ANTLERS,"deer"]]
+		);
+		public static const DEFAULT_ANTENNAE_NAMES:Object = createMapFromPairs(
+			[[ANTENNAE_NONE,"non-existant"],
+			[ANTENNAE_BEE,"bee"]]
+		);
+		public static const DEFAULT_ARM_NAMES:Object = createMapFromPairs(
+			[[ARM_TYPE_HUMAN,"human"],
+			[ARM_TYPE_HARPY,"harpy"],
+			[ARM_TYPE_SPIDER,"spider"]]
+		);
+		public static const DEFAULT_TAIL_NAMES:Object = createMapFromPairs(
+			[[TAIL_TYPE_NONE,"non-existant"],
+			[TAIL_TYPE_HORSE,"horse"],
+			[TAIL_TYPE_DOG,"dog"],
+			[TAIL_TYPE_DEMONIC,"demonic"],
+			[TAIL_TYPE_COW,"cow"],
+			[TAIL_TYPE_SPIDER_ADBOMEN,"spider abdomen"],
+			[TAIL_TYPE_BEE_ABDOMEN,"bee abdomen"],
+			[TAIL_TYPE_SHARK,"shark"],
+			[TAIL_TYPE_CAT,"cat"],
+			[TAIL_TYPE_LIZARD,"lizard"],
+			[TAIL_TYPE_RABBIT,"rabbit"],
+			[TAIL_TYPE_HARPY,"harpy"],
+			[TAIL_TYPE_KANGAROO,"kangaroo"],
+			[TAIL_TYPE_FOX,"fox"],
+			[TAIL_TYPE_DRACONIC,"draconic"],
+			[TAIL_TYPE_RACCOON,"raccoon"],
+			[TAIL_TYPE_MOUSE,"mouse"]]
+		);
+		public static const DEFAULT_WING_NAMES:Object = createMapFromPairs(
+			[[WING_TYPE_NONE,"non-existant"],
+			[WING_TYPE_BEE_LIKE_SMALL,"small bee-like"],
+			[WING_TYPE_BEE_LIKE_LARGE,"large bee-like"],
+			[WING_TYPE_HARPY,"harpy"],
+			[WING_TYPE_IMP,"imp"],
+			[WING_TYPE_BAT_LIKE_TINY,"tiny bat-like"],
+			[WING_TYPE_BAT_LIKE_LARGE,"large bat-like"],
+			[WING_TYPE_SHARK_FIN,"shark fin"],
+			[WING_TYPE_FEATHERED_LARGE,"large feathered"],
+			[WING_TYPE_DRACONIC_SMALL,"small draconic"],
+			[WING_TYPE_DRACONIC_LARGE,"large draconic"],
+			[WING_TYPE_GIANT_DRAGONFLY,"giant dragonfly"]]
+		);
+		public static const DEFAULT_WING_DESCS:Object = createMapFromPairs(
+			[[WING_TYPE_NONE,"non-existant"],
+			[WING_TYPE_BEE_LIKE_SMALL,"small bee-like"],
+			[WING_TYPE_BEE_LIKE_LARGE,"large bee-like"],
+			[WING_TYPE_HARPY,"large feathery"],
+			[WING_TYPE_IMP,"small"],
+			[WING_TYPE_BAT_LIKE_TINY,"tiny, bat-like"],
+			[WING_TYPE_BAT_LIKE_LARGE,"large, bat-like"],
+			[WING_TYPE_SHARK_FIN,""],
+			[WING_TYPE_FEATHERED_LARGE,"large, feathered"],
+			[WING_TYPE_DRACONIC_SMALL,"small, draconic"],
+			[WING_TYPE_DRACONIC_LARGE,"large, draconic"],
+			[WING_TYPE_GIANT_DRAGONFLY,"giant dragonfly"]]
+		);
+		public static const DEFAULT_LOWER_BODY_NAMES:Object = createMapFromPairs(
+			[[LOWER_BODY_TYPE_HUMAN,"human"],
+			[LOWER_BODY_TYPE_HOOFED,"hoofed"],
+			[LOWER_BODY_TYPE_DOG,"dog"],
+			[LOWER_BODY_TYPE_NAGA,"naga"],
+			[LOWER_BODY_TYPE_CENTAUR,"centaur"],
+			[LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS,"demonic high-heels"],
+			[LOWER_BODY_TYPE_DEMONIC_CLAWS,"demonic claws"],
+			[LOWER_BODY_TYPE_BEE,"bee"],
+			[LOWER_BODY_TYPE_GOO,"goo"],
+			[LOWER_BODY_TYPE_CAT,"cat"],
+			[LOWER_BODY_TYPE_LIZARD,"lizard"],
+			[LOWER_BODY_TYPE_PONY,"pony"],
+			[LOWER_BODY_TYPE_BUNNY,"bunny"],
+			[LOWER_BODY_TYPE_HARPY,"harpy"],
+			[LOWER_BODY_TYPE_KANGAROO,"kangaroo"],
+			[LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS,"chitinous spider legs"],
+			[LOWER_BODY_TYPE_DRIDER_LOWER_BODY,"drider"],
+			[LOWER_BODY_TYPE_FOX,"fox"],
+			[LOWER_BODY_TYPE_DRAGON,"dragon"],
+			[LOWER_BODY_TYPE_RACCOON,"raccoon"]]
+		);
+		public static const DEFAULT_PIERCING_NAMES:Object = createMapFromPairs(
+			[[PIERCING_TYPE_NONE,"none"],
+			[PIERCING_TYPE_STUD,"stud"],
+			[PIERCING_TYPE_RING,"ring"],
+			[PIERCING_TYPE_LADDER,"ladder"],
+			[PIERCING_TYPE_HOOP,"hoop"],
+			[PIERCING_TYPE_CHAIN,"chain"]]
+		);
+		public static const DEFAULT_VAGINA_TYPE_NAMES:Object = createMapFromPairs(
+			[[VAGINA_TYPE_HUMAN,"human"],
+			[VAGINA_TYPE_BLACK_SAND_TRAP,"black sandtrap"]]
+		);
+		public static const DEFAULT_VAGINA_WETNESS_SCALES:Array = [
+			[VAGINA_WETNESS_DRY,"dry"],
+			[VAGINA_WETNESS_NORMAL,"normal"],
+			[VAGINA_WETNESS_WET,"wet"],
+			[VAGINA_WETNESS_SLICK,"slick"],
+			[VAGINA_WETNESS_DROOLING,"drooling"],
+			[VAGINA_WETNESS_SLAVERING,"slavering"],
+		];
+		public static const DEFAULT_VAGINA_LOOSENESS_SCALES:Array = [
+			[VAGINA_LOOSENESS_TIGHT,"tight"],
+			[VAGINA_LOOSENESS_NORMAL,"normal"],
+			[VAGINA_LOOSENESS_LOOSE,"loose"],
+			[VAGINA_LOOSENESS_GAPING,"gaping"],
+			[VAGINA_LOOSENESS_GAPING_WIDE,"gaping wide"],
+			[VAGINA_LOOSENESS_LEVEL_CLOWN_CAR,"clown-car level"]
+		];
+		public static const DEFAULT_ANAL_WETNESS_SCALES:Array = [
+			[ANAL_WETNESS_DRY,"dry"],
+			[ANAL_WETNESS_NORMAL,"normal"],
+			[ANAL_WETNESS_MOIST,"moist"],
+			[ANAL_WETNESS_SLIMY,"slimym"],
+			[ANAL_WETNESS_DROOLING,"drooling"],
+			[ANAL_WETNESS_SLIME_DROOLING,"slime-drooling"],
+		];
+		public static const DEFAULT_ANAL_LOOSENESS_SCALES:Array = [
+			[ANAL_LOOSENESS_VIRGIN,"virgin"],
+			[ANAL_LOOSENESS_TIGHT,"tight"],
+			[ANAL_LOOSENESS_NORMAL,"normal"],
+			[ANAL_LOOSENESS_LOOSE,"loose"],
+			[ANAL_LOOSENESS_STRETCHED,"stretched"],
+			[ANAL_LOOSENESS_GAPING,"gaping"]
+		];
+		public static const DEFAULT_HIP_RATING_SCALES:Array = [
+			[HIP_RATING_BOYISH,"boyish"],
+			[HIP_RATING_SLENDER,"slender"],
+			[HIP_RATING_AVERAGE,"average"],
+			[HIP_RATING_AMPLE,"ample"],
+			[HIP_RATING_CURVY,"curvy"],
+			[HIP_RATING_FERTILE,"fertile"],
+			[HIP_RATING_INHUMANLY_WIDE,"inhumanly wide"]
+		];
+		public static const DEFAULT_BUTT_RATING_SCALES:Array = [
+			[BUTT_RATING_BUTTLESS,"buttless"],
+			[BUTT_RATING_TIGHT,"tight"],
+			[BUTT_RATING_AVERAGE,"average"],
+			[BUTT_RATING_NOTICEABLE,"noticeable"],
+			[BUTT_RATING_LARGE,"large"],
+			[BUTT_RATING_JIGGLY,"jiggly"],
+			[BUTT_RATING_EXPANSIVE,"expansive"],
+			[BUTT_RATING_HUGE,"huge"],
+			[BUTT_RATING_INCONCEIVABLY_BIG,"inconceivably big"]
+		];
+
+		/**
+		 * Assume scale = [[0,"small"],[5,"average"],[10,"big"]]
+		 *      value < 0   ->   "less than small"
+		 *      value = 0   ->   "small"
+		 *  0 < value < 5   ->   "between small and average"
+		 *      value = 5   ->   "average"
+		 *  5 < value < 10  ->   "between average and big"
+		 *      value = 10  ->   "big"
+		 *      value > 10  ->   "more than big"
+		 */
+		public static function describeByScale(value:Number,scale:Array,lessThan:String="less than",moreThan:String="more than"):String{
+			if (scale.length == 0) return "undescribeale";
+			if (scale.length == 1) return "about "+scale[0][1];
+			if (value<scale[0][0]) return lessThan+" "+scale[0][1];
+			if (value==scale[0][0]) return scale[0][1];
+			for (var i:int = 1; i<scale.length; i++){
+				if (value<scale[i][0]) return "between "+scale[i-1][1]+" and "+scale[i][1];
+				if (value==scale[i][0]) return scale[i][1];
+			}
+			return moreThan+" "+scale[scale.length-1][1];
+		}
+		/**
+		 * numberOfThings(0,"brain") = "no brains"
+		 * numberOfThings(1,"head") = "one head"
+		 * numberOfThings(2,"tail") = "2 tails"
+		 * numberOfThings(3,"hoof","hooves") = "3 hooves"
+		 */
+		public static function numberOfThings(n:int,name:String,pluralForm:String=null):String{
+			pluralForm = pluralForm || (name+"s");
+			if (n == 0) return "no "+pluralForm;
+			if (n == 1) return "one "+name;
+			return n+" "+pluralForm;
+		}
+
+		/**
+		 * 13 -> 2'1"
+		 * 5.5 -> 5.5"
+		 * Positive only!
+		 */
+		public static function feetsAndInches(n:Number):String{
+			var feet:int = Math.floor(n/12);
+			var inches:Number = n-feet*12;
+			if (feet>0) return feet+"'"+inches+"\"";
+			else return inches+"\"";
+		}
+
+		/**
+		 * 13 -> 13" (2'1")
+		 */
+		public static function inchesAndFeetsAndInches(n:Number):String {
+			if (n<12) return n+"\"";
+			return n+"\" ("+feetsAndInches(n)+")";
+		}
 	}
 }
