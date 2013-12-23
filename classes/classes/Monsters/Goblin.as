@@ -18,50 +18,20 @@
 		{
 			super(mainClassPtr);
 			trace("Goblin Constructor!");
-			init1Names("the ", "goblin", "goblin", "The goblin before you is a typical example of her species, with dark green skin, pointed ears, and purple hair that would look more at home on a punk-rocker.  She's only about three feet tall, but makes up for it with her curvy body, sporting hips and breasts that would entice any of the men in your village were she full-size.  There isn't a single scrap of clothing on her, just lewd leather straps and a few clinking pouches.  She does sport quite a lot of piercings – the most noticeable being large studs hanging from her purple nipples.  Her eyes are fiery red, and practically glow with lust.  This one isn't going to be satisfied until she has her way with you.  It shouldn't be too hard to subdue such a little creature, right?");
-			init2Female(VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL, 40);
-			init3BreastRows("E");
-			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,30);
-			init5Body(35 + rand(4),HIP_RATING_AMPLE+2,BUTT_RATING_LARGE);
-			init6Skin("dark green");
-			init7Hair("purple",4);
-
-			this.temperment = 2;
-			//Regular attack
-			this.special1 = 5087;
-			//Lust attack
-			this.special2 = 5088;
-
-
-			//Clothing/Armor
-			this.armorName = "leather straps";
-			this.weaponName = "fists";
-			this.weaponVerb = "tiny punch";
-
-			//Primary stats
-			this.str = 12;
-			this.tou = 13;
-			this.spe = 35;
-			this.inte = 42;
-			this.lib = 45;
-			this.sens = 45;
-			this.cor = 60;
-
-			//Combat Stats
-
-			this.HP = eMaxHP();
-
-			this.lust = 50;
-
-			//Level Stats
-			this.level = 1;
-			this.XP = this.totalXP(mainClassPtr.player.level);
-			this.gems = rand(5) + 5;
-
-
-			this.wingType = WING_TYPE_NONE;
-
-
+			init01Names("the ", "goblin", "goblin", "The goblin before you is a typical example of her species, with dark green skin, pointed ears, and purple hair that would look more at home on a punk-rocker.  She's only about three feet tall, but makes up for it with her curvy body, sporting hips and breasts that would entice any of the men in your village were she full-size.  There isn't a single scrap of clothing on her, just lewd leather straps and a few clinking pouches.  She does sport quite a lot of piercings – the most noticeable being large studs hanging from her purple nipples.  Her eyes are fiery red, and practically glow with lust.  This one isn't going to be satisfied until she has her way with you.  It shouldn't be too hard to subdue such a little creature, right?");
+			init02Female(VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL, 40);
+			init03BreastRows("E");
+			init04Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,30);
+			init05Body(35 + rand(4),HIP_RATING_AMPLE+2,BUTT_RATING_LARGE);
+			init06Skin("dark green");
+			init07Hair("purple",4);
+			init08Face();
+			init09PrimaryStats(12,13,35,42,45,45,60);
+			init10Weapon("fists","tiny punch");
+			init11Armor("leather straps");
+			init12Combat(0,50,1,Monster.TEMPERMENT_RANDOM_GRAPPLES);
+			init13Level(1,rand(5) + 5);
+			initX_Specials(5087,5088);
 		}
 
 	}

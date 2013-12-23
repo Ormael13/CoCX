@@ -13,7 +13,8 @@ package classes.Monsters
 		public function Helspawn(mainClassPtr:*)
 		{
 			super(mainClassPtr);
-			init1Names("", mainClassPtr.flags[kFLAGS.HELSPAWN_NAME], "hollispawn",
+			var weapon:String = mainClassPtr.flags[kFLAGS.HELSPAWN_WEAPON];
+			init01Names("", mainClassPtr.flags[kFLAGS.HELSPAWN_NAME], "hollispawn",
 					mainClassPtr.flags[kFLAGS.HELSPAWN_NAME] + " is a young salamander, appearing in her later teens.  Clad in " +
 							(mainClassPtr.flags[kFLAGS.HELSPAWN_PERSONALITY] >= 50 ?
 									"a slutty scale bikini like her mother's, barely concealing anything" :
@@ -23,57 +24,23 @@ package classes.Monsters
 								'bow': "recurve bow, using blunted, soft-tipped arrows",
 								'scimitar': "scimitar, just like her mom's, and holds it in the same berzerk stance Helia is wont to use",
 								'scimitar and shield': "scimitar and shield, giving her a balanced fighting style"
-							}[mainClassPtr.flags[kFLAGS.HELSPAWN_WEAPON]] +
+							}[ weapon] +
 							".  Pacing around you, the well-built young warrior intently studies her mentor's defenses, readying for your next attack.");
-			init2Female(VAGINA_WETNESS_NORMAL, VAGINA_LOOSENESS_NORMAL, 85);
-			init3BreastRows("E+");
-			init4Ass(ANAL_LOOSENESS_VIRGIN,ANAL_WETNESS_DRY,85);
-			init5Body(90,HIP_RATING_CURVY+2,BUTT_RATING_LARGE+1);
-			init6Skin("helspawn");
-			init7Hair("red",13);
-
-			this.temperment = 2;
-			//Lusty teases
-			this.special1 = 5133;
-			this.special2 = 5134;
-			this.special3 = 5135;
-
-			this.armorDef = 12;
-
-			this.weaponName = mainClassPtr.flags[kFLAGS.HELSPAWN_WEAPON];
-			this.weaponVerb = {'bow': "blunted arrow", 'scimitar': "slash", 'scimitar and shield': "slash"}[this.weaponName];
-			this.weaponAttack = 20;
+			init02Female(VAGINA_WETNESS_NORMAL, VAGINA_LOOSENESS_NORMAL, 85);
+			init03BreastRows("E+");
+			init04Ass(ANAL_LOOSENESS_VIRGIN,ANAL_WETNESS_DRY,85);
+			init05Body(90,HIP_RATING_CURVY+2,BUTT_RATING_LARGE+1);
+			init06Skin("helspawn");
+			init07Hair("red",13);
+			init08Face(faceType,earType,tongueType,eyeType);
+			init09PrimaryStats(50,50,65,40,35,55,20);
+			init10Weapon(weapon,{'bow': "blunted arrow", 'scimitar': "slash", 'scimitar and shield': "slash"}[weapon],20);
+			init11Armor("",12,"",50);
+			init12Combat(175,30,.55,Monster.TEMPERMENT_RANDOM_GRAPPLES);
+			init13Level(12,10 + rand(5));
+			initX_Tail(TAIL_TYPE_COW,0,0);
+			initX_Specials(5133,5134,5135);
 			this.createStatusAffect("keen", 0, 0, 0, 0);
-
-			this.armorValue = 50;
-			//Primary stats
-			this.str = 50;
-			this.tou = 50;
-			this.spe = 65;
-			this.inte = 40;
-			this.lib = 35;
-			this.sens = 55;
-			this.cor = 20;
-
-			this.lustVuln = .55;
-
-			//Combat Stats
-			this.bonusHP = 175;
-			this.HP = eMaxHP();
-
-			this.lust = 30;
-
-			//Level Stats
-			this.level = 12;
-			this.XP = totalXP();
-			this.gems = 10 + rand(5);
-
-
-			this.tailType = TAIL_TYPE_COW;
-
-			this.tailRecharge = 0;
-
-			//Create goblin sex attributes
 		}
 
 	}

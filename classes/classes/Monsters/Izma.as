@@ -13,51 +13,23 @@ package classes.Monsters
 		public function Izma(mainClassPtr:*) 
 		{
 			super(mainClassPtr);
-			init1Names("", "Izma", "izma", "Izma the tigershark stands a bit over 6' tall, with orange skin bearing horizontal stripes covering most of her body.  Her silver-white hair cascades past her shoulders, draping over an impressive pair of DD-cup breasts barely restrained by a skimpy black bikini top.  Under the knee-length grass skirt below them rustles her beastly fifteen-inch penis and four-balled sack; you catch occasional glimpses of them as she moves.  She's tucked her usual reading glasses into her locker at the moment.");
-			init2Male(new Cock(15,2.2));
-			init2Female(VAGINA_WETNESS_SLICK,VAGINA_LOOSENESS_LOOSE,45);
-			init3BreastRows("DD");
-			init4Ass(ANAL_LOOSENESS_NORMAL,ANAL_WETNESS_DRY,30);
-			init5Body("5'5",HIP_RATING_CURVY,BUTT_RATING_NOTICEABLE);
-			init6Skin("striped orange");
-			init7Hair("silver",20);
-
-			this.temperment = 2;
-			//Lusty teases
-
-
-			//Clothing/Armor
-			this.armorName = "bikini and grass skirt";
-			this.weaponName = "clawed gauntlets";
-			this.weaponVerb = "clawed punches";
-			this.armorDef = 8;
-
-			this.weaponAttack = 45;
-
-			//Primary stats
-			this.str = 80;
-			this.tou = 90;
-			this.spe = 85;
-			this.inte = 65;
-			this.lib = 75;
-			this.sens = 25;
-			this.cor = 40;
-
-			this.lustVuln = .20;
-
-			//Combat Stats
-			this.bonusHP = 330;
-			this.HP = eMaxHP();
-
-			this.lust = 20;
-
-			//Level Stats
-			this.level = 15;
-			this.XP = totalXP();
-			this.gems = rand(5) + 1;
+			init01Names("", "Izma", "izma", "Izma the tigershark stands a bit over 6' tall, with orange skin bearing horizontal stripes covering most of her body.  Her silver-white hair cascades past her shoulders, draping over an impressive pair of DD-cup breasts barely restrained by a skimpy black bikini top.  Under the knee-length grass skirt below them rustles her beastly fifteen-inch penis and four-balled sack; you catch occasional glimpses of them as she moves.  She's tucked her usual reading glasses into her locker at the moment.");
+			init02Male(new Cock(15,2.2));
+			init02Female(VAGINA_WETNESS_SLICK,VAGINA_LOOSENESS_LOOSE,45);
+			init03BreastRows("DD");
+			init04Ass(ANAL_LOOSENESS_NORMAL,ANAL_WETNESS_DRY,30);
+			init05Body("5'5",HIP_RATING_CURVY,BUTT_RATING_NOTICEABLE);
+			init06Skin("striped orange");
+			init07Hair("silver",20);
+			init08Face();
+			init09PrimaryStats(80,90,85,65,75,25,40);
+			init10Weapon("clawed gauntlets","clawed punches",45);
+			init11Armor("bikini and grass skirt",8);
+			init12Combat(330,20,.20,Monster.TEMPERMENT_RANDOM_GRAPPLES);
+			init13Level(15,rand(5) + 1);
+			initX_Specials();
 
 
-			//Create goblin sex attributes
 		}
 		
 	}

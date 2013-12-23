@@ -14,53 +14,21 @@ package classes.Monsters
 		{
 			super(mainClassPtr);
 			var met:Boolean = mainClassPtr.flags[kFLAGS.HEL_TALKED_ABOUT_HER] == 1;
-			init1Names(met?"":"the ",met?"Hel":"salamander","hel","You are fighting a (literally) smoking hot salamander – a seven foot tall woman with crimson scales covering her legs, back, and forearms, with a tail swishing menacingly behind her, ablaze with a red-hot fire.  Her red hair whips wildly around her slender shoulders, occasionally flitting over her hefty E-cup breasts, only just concealed within a scale-covered bikini top.  Bright red eyes focus on you from an almost-human face as she circles you, ready to close in for the kill.  Her brutal, curved sword is raised to her side, feinting at you between genuine attacks.");
-			init2Female(VAGINA_WETNESS_NORMAL,VAGINA_LOOSENESS_NORMAL,85);
-			init3BreastRows("E+");
-			init4Ass(ANAL_LOOSENESS_VIRGIN,ANAL_WETNESS_DRY,85);
-			init5Body(90,HIP_RATING_CURVY+2, BUTT_RATING_LARGE+1);
-			init6Skin("dusky");
-			init7Hair("red",13);
-
-			this.temperment = 2;
-			//Lusty teases
-
-			//Clothing/Armor
-			this.armorName = "scales";
-			this.weaponName = "sword";
-			this.weaponVerb = "slashing blade";
-			this.armorDef = 14;
-
-			this.weaponAttack = 20;
+			init01Names(met?"":"the ",met?"Hel":"salamander","hel","You are fighting a (literally) smoking hot salamander – a seven foot tall woman with crimson scales covering her legs, back, and forearms, with a tail swishing menacingly behind her, ablaze with a red-hot fire.  Her red hair whips wildly around her slender shoulders, occasionally flitting over her hefty E-cup breasts, only just concealed within a scale-covered bikini top.  Bright red eyes focus on you from an almost-human face as she circles you, ready to close in for the kill.  Her brutal, curved sword is raised to her side, feinting at you between genuine attacks.");
+			init02Female(VAGINA_WETNESS_NORMAL,VAGINA_LOOSENESS_NORMAL,85);
+			init03BreastRows("E+");
+			init04Ass(ANAL_LOOSENESS_VIRGIN,ANAL_WETNESS_DRY,85);
+			init05Body(90,HIP_RATING_CURVY+2, BUTT_RATING_LARGE+1);
+			init06Skin("dusky");
+			init07Hair("red",13);
+			init08Face();
+			init09PrimaryStats(80,70,75,60,65,25,30);
+			init10Weapon("sword","slashing blade",20);
+			init11Armor("scales",14,"",50);
+			init12Combat(275,30,.35,Monster.TEMPERMENT_RANDOM_GRAPPLES);
+			init13Level(16,10 + rand(5));
+			initX_Tail(TAIL_TYPE_COW,0,0);
 			this.createStatusAffect("keen",0,0,0,0);
-
-			this.armorValue = 50;
-			//Primary stats
-			this.str = 80;
-			this.tou = 70;
-			this.spe = 75;
-			this.inte = 60;
-			this.lib = 65;
-			this.sens = 25;
-			this.cor = 30;
-
-			this.lustVuln = .35;
-
-			//Combat Stats
-			this.bonusHP = 275;
-			this.HP = eMaxHP();
-
-			this.lust = 30;
-		
-			//Level Stats
-			this.level = 16;
-			this.XP = totalXP();
-			this.gems = 10 + rand(5);
-
-			this.tailType = TAIL_TYPE_COW;
-			this.tailRecharge = 0;
-
-			//Create goblin sex attributes
 		}
 		
 	}

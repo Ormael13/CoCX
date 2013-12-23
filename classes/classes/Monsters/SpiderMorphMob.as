@@ -14,50 +14,23 @@ package classes.Monsters
 		public function SpiderMorphMob(mainClassPtr:*) 
 		{
 			super(mainClassPtr);
-			init1Names("the ","mob of spiders-morphs","spidermorphmob","You are fighting a horde of spider-morphs!  A group of some two-dozen spiders and driders approaches you, all baring their teeth.  A pair of large, powerful driders lead the group, their corrupt, lusty stares sending shivers up your spine.  While "+(mainClassPtr.player.level <= 13?"you'd never face such a large horde on your own":"you could probably handle them alone")+", you have a powerful ally in this fight - the dragoness Kiha!",true);
-			init2Male(new Cock(9,2,CockTypesEnum.HUMAN),0,1,3);
-			init2Female(VAGINA_WETNESS_SLICK,VAGINA_LOOSENESS_LOOSE);
-			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_SLIME_DROOLING);
-			init5Body(rand(8) + 70,HIP_RATING_AMPLE+2,BUTT_RATING_LARGE);
-			init6Skin("red");
-			init7Hair("black",15);
-
-			this.temperment = 3;
-			//Regular attack
-			this.special1 = 5043;
-			//Lust attack
-			this.special2 = 5044;
-
-			//Clothing/Armor
-			this.armorName = "chitin";
-			this.weaponName = "claws";
-			this.weaponVerb = "claws";
-
-			//Primary stats
-			this.str = 60;
-			this.tou = 50;
-			this.spe = 99;
-			this.inte = 99;
-			this.lib = 35;
-			this.sens = 35;
-			this.cor = 20;
-
-			this.lustVuln = .2;
-
-			//Combat Stats
-			this.bonusHP = 1200;
-			this.HP = eMaxHP();
-			this.lust = 0;
-
-			//Level Stats
-			this.level = 18;
-			this.XP = totalXP();
-			this.gems = rand(25)+40;
-
-
-			this.hornType = HORNS_DEMON;
-
-			this.tailType = TAIL_TYPE_DEMONIC;
+			init01Names("the ","mob of spiders-morphs","spidermorphmob","You are fighting a horde of spider-morphs!  A group of some two-dozen spiders and driders approaches you, all baring their teeth.  A pair of large, powerful driders lead the group, their corrupt, lusty stares sending shivers up your spine.  While "+(mainClassPtr.player.level <= 13?"you'd never face such a large horde on your own":"you could probably handle them alone")+", you have a powerful ally in this fight - the dragoness Kiha!",true);
+			init02Male(new Cock(9,2,CockTypesEnum.HUMAN),0,1,3);
+			init02Female(VAGINA_WETNESS_SLICK,VAGINA_LOOSENESS_LOOSE);
+			init03BreastRows(0);
+			init04Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_SLIME_DROOLING);
+			init05Body(rand(8) + 70,HIP_RATING_AMPLE+2,BUTT_RATING_LARGE);
+			init06Skin("red");
+			init07Hair("black",15);
+			init08Face();
+			init09PrimaryStats(60,50,99,99,35,35,20);
+			init10Weapon("claws","claws");
+			init11Armor("chitin");
+			init12Combat(1200,0,.2,Monster.TEMPERMENT_LOVE_GRAPPLES);
+			init13Level(18,rand(25)+40);
+			initX_Specials(5043,5044);
+			initX_Horns(HORNS_DEMON);
+			initX_Tail(TAIL_TYPE_DEMONIC);
 		}
 		
 	}

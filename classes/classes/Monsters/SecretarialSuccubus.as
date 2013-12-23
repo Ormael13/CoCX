@@ -10,56 +10,23 @@ package classes.Monsters
 	public class SecretarialSuccubus extends Monster {
 		public function SecretarialSuccubus(mainClassPtr :*) {
 			super(mainClassPtr);
-			init1Names("the ", "secretarial succubus", "secretarialsuccubus", "The succubus across from you balances gracefully on her spiked heels, twirling and moving unpredictably.  Sexy dark stockings hug every curve of her perfectly shaped flesh until they disappear into her tiny miniskirt.  Her impressive breasts wobble delightfully as she moves, despite the inadequate efforts of her straining vest.  A pair of foot-long horns curve up from her otherwise perfect face and forehead, wreathed in lustrous blonde hair.  The very air around her is filled with an unidentifiable fragrance that makes you tingle and shiver.");
-			init2Female(VAGINA_WETNESS_SLAVERING,VAGINA_LOOSENESS_NORMAL,30);
-			init3BreastRows("DD");
-			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_SLIME_DROOLING);
-			init5Body(rand(9) + 60,HIP_RATING_CURVY,BUTT_RATING_LARGE+1,LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS);
-			init6Skin("blue");
-			init7Hair("blond",13);
-
-			this.temperment = 3;
-			//Regular attack
-			this.special1 = 11020;
-			//Lust attack
-			this.special2 = 11021;
-			this.special3 = 11022;
-
-			//Clothing/Armor
-			this.armorName = "demonic skin";
-			this.weaponName = "claws";
-			this.weaponVerb = "slap";
-			this.armorDef = 4;
-
-			this.weaponAttack = 10;
-
-			this.weaponValue = 150;
-
-			//Primary stats
-			this.str = 50;
-			this.tou = 40;
-			this.spe = 75;
-			this.inte = 35;
-			this.lib = 80;
-			this.sens = 70;
-			this.cor = 80;
-
-			//Combat Stats
-			this.bonusHP = 100;
-			this.HP = eMaxHP();
-
-			this.lust = 30;
-
-			//Level Stats
-			this.level = 7;
-			this.XP = totalXP() + 50;
-			this.gems = rand(25)+10;
-
-
-			this.wingDesc = "tiny hidden";
-
-
-			this.tailType = TAIL_TYPE_DEMONIC;
+			init01Names("the ", "secretarial succubus", "secretarialsuccubus", "The succubus across from you balances gracefully on her spiked heels, twirling and moving unpredictably.  Sexy dark stockings hug every curve of her perfectly shaped flesh until they disappear into her tiny miniskirt.  Her impressive breasts wobble delightfully as she moves, despite the inadequate efforts of her straining vest.  A pair of foot-long horns curve up from her otherwise perfect face and forehead, wreathed in lustrous blonde hair.  The very air around her is filled with an unidentifiable fragrance that makes you tingle and shiver.");
+			init02Female(VAGINA_WETNESS_SLAVERING,VAGINA_LOOSENESS_NORMAL,30);
+			init03BreastRows("DD");
+			init04Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_SLIME_DROOLING);
+			init05Body(rand(9) + 60,HIP_RATING_CURVY,BUTT_RATING_LARGE+1,LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS);
+			init06Skin("blue");
+			init07Hair("blond",13);
+			init08Face();
+			init09PrimaryStats(50,40,75,35,80,70,80);
+			init10Weapon("claws","slap",10,"",150);
+			init11Armor("demonic skin",4);
+			init12Combat(100,30,1,Monster.TEMPERMENT_LOVE_GRAPPLES);
+			init13Level(7,rand(25)+10);
+			this.XP +=50;
+			var wingDesc:String = "tiny hidden";
+			initX_Tail(TAIL_TYPE_DEMONIC);
+			initX_Specials(11020,11021,11022);
 
 		}
 	}

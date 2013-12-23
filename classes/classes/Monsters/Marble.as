@@ -18,51 +18,21 @@
 		{
 			super(mainClassPtr);
 			trace("Marble Constructor!");
-			init1Names("", "Marble", "marble", "Before you stands a female humanoid with numerous cow features, such as medium-sized cow horns, cow ears, and a cow tail.  She is very well endowed, with wide hips and a wide ass.  She stands over 6 feet tall.  She is using a large two handed hammer with practiced ease, making it clear she is much stronger then she may appear to be.");
-			init2Female(VAGINA_WETNESS_NORMAL,VAGINA_LOOSENESS_NORMAL);
-			init3BreastRows("F");
-			init5Body("6'4",HIP_RATING_CURVY,BUTT_RATING_LARGE,LOWER_BODY_TYPE_CENTAUR);
-			init6Skin("pale");
-			init7Hair("brown",13);
-
-			this.temperment = 2;
-			//Regular attack
-			this.special1 = 5092;
-			//Lust attack
-			this.special2 = 5093;
-
-			//Clothing/Armor
-			this.armorName = "tough hide";
-			this.weaponName = "large hammer";
-			this.weaponVerb = "hammer-blow";
-			this.armorDef = 5;
-
-			this.weaponAttack = 10;
-
-			//Primary stats
-			this.str = 75;
-			this.tou = 70;
-			this.spe = 35;
-			this.inte = 40;
-			this.lib = 25;
-			this.sens = 45;
-			this.cor = 40;
-
-			//Combat Stats
-
-			this.HP = eMaxHP();
-
-			this.lust = 0;
-
-			//Level Stats
-			this.level = 7;
-			this.XP = this.totalXP(mainClassPtr.player.level);
-			this.gems = rand(5) + 25;
-
-
-			this.tailType = TAIL_TYPE_COW;
-			//Create goblin sex attributes
-			init4Ass(0,0);
+			init01Names("", "Marble", "marble", "Before you stands a female humanoid with numerous cow features, such as medium-sized cow horns, cow ears, and a cow tail.  She is very well endowed, with wide hips and a wide ass.  She stands over 6 feet tall.  She is using a large two handed hammer with practiced ease, making it clear she is much stronger then she may appear to be.");
+			init02Female(VAGINA_WETNESS_NORMAL,VAGINA_LOOSENESS_NORMAL);
+			init03BreastRows("F");
+			init04Ass(ANAL_LOOSENESS_VIRGIN,ANAL_WETNESS_DRY);
+			init05Body("6'4",HIP_RATING_CURVY,BUTT_RATING_LARGE,LOWER_BODY_TYPE_CENTAUR);
+			init06Skin("pale");
+			init07Hair("brown",13);
+			init08Face();
+			init09PrimaryStats(75,70,35,40,25,45,40);
+			init10Weapon("large hammer","hammer-blow",10);
+			init11Armor("tough hide",5);
+			init12Combat(0,0,1,Monster.TEMPERMENT_RANDOM_GRAPPLES);
+			init13Level(7,rand(5) + 25);
+			initX_Tail(TAIL_TYPE_COW);
+			initX_Specials(5092,5093);
 
 		}
 

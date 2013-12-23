@@ -20,51 +20,20 @@
 			super(mainClassPtr);
 			trace("FetishZealot Constructor!");
 		
-			init1Names("the ", "fetish zealot", "fetishzealot", "The zealot is clad in a bizarre set of religious robes.  They are similar to what you've seen on other religious leaders from home, but none that included the large slit at the front that lets his above average sized human dick stick out the front.");
-			init2Male(new Cock(7,1.5));
-			init4Ass(ANAL_LOOSENESS_LOOSE,ANAL_WETNESS_DRY,40);
-			init5Body("6'",HIP_RATING_BOYISH+1,BUTT_RATING_TIGHT);
-			init6Skin("tan");
-			init7Hair("black",4);
-
-			this.temperment = 2;
-			//Lusty teases
-			this.special1 = 5103;
-			this.special2 = 5104;
-
-			this.pronoun1 = "he";
-			this.pronoun2 = "him";
-			this.pronoun3 = "his";
-
-			//Clothing/Armor
-			this.armorName = "religious clothes";
-			this.weaponName = "wavy dagger";
-			this.weaponVerb = "stab";
-			this.armorDef = 5;
-
-			this.weaponAttack = 3;
-
-			//Primary stats
-			this.str = 35;
-			this.tou = 35;
-			this.spe = 30;
-			this.inte = 1;
-			this.lib = 75;
-			this.sens = 80;
-			this.cor = 90;
-
-			//Combat Stats
-			this.HP = eMaxHP();
-			this.lust = 25;
-			this.lustVuln = 0.75;
-
-			//Level Stats
-			this.level = 5;
-			this.gems = 5+rand(10);
-
-
-
-			this.XP = this.totalXP(mainClassPtr.player.level);
+			init01Names("the ", "fetish zealot", "fetishzealot", "The zealot is clad in a bizarre set of religious robes.  They are similar to what you've seen on other religious leaders from home, but none that included the large slit at the front that lets his above average sized human dick stick out the front.");
+			init02Male(new Cock(7,1.5));
+			init03BreastRows(0);
+			init04Ass(ANAL_LOOSENESS_LOOSE,ANAL_WETNESS_DRY,40);
+			init05Body("6'",HIP_RATING_BOYISH+1,BUTT_RATING_TIGHT);
+			init06Skin("tan");
+			init07Hair("black",4);
+			init08Face();
+			init09PrimaryStats(35,35,30,1,75,80,90);
+			init10Weapon("wavy dagger","stab",3);
+			init11Armor("religious clothes",5);
+			init12Combat(0,25,0.75,Monster.TEMPERMENT_RANDOM_GRAPPLES);
+			init13Level(5,5+rand(10));
+			initX_Specials(5103,5104);
 		}
 
 	}

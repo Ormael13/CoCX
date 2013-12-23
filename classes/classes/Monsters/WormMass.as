@@ -18,43 +18,21 @@
 		{
 			super(mainClassPtr);
 			trace("WormMass Constructor!");
-			init1Names("the ","worms","worms","Before you stands the horrid mass of worms. It has shifted itself and now takes the shape of a humanoid composed completely of the worms in the colony. Its vaguely human shape lumbers towards you in a clearly aggressive manner.",true);
-			init2Genderless();
-			init3BreastRows();
-			init4Ass(ANAL_LOOSENESS_VIRGIN,ANAL_WETNESS_DRY);
-			init5Body(1,HIP_RATING_SLENDER,BUTT_RATING_BUTTLESS);
-			init6Skin("white");
-			init7Hair();
-
-			this.temperment = 3;
-			//Regular attack
-			this.special1 = 5054;
-			//Lust attack
-			this.special2 = 5055;
-
-			//Clothing/Armor
-			this.armorName = "skin";
-			this.weaponName = "worm";
-			this.weaponVerb = "slap";
-
-			//Primary stats
-			this.str = 35;
-			this.tou = 5;
-			this.spe = 10;
-			this.inte = 1;
-			this.lib = 90;
-			this.sens = 60;
-			this.cor = 90;
-
-			//Combat Stats
+			init01Names("the ","worms","worms","Before you stands the horrid mass of worms. It has shifted itself and now takes the shape of a humanoid composed completely of the worms in the colony. Its vaguely human shape lumbers towards you in a clearly aggressive manner.",true);
+			init02Genderless();
+			init03BreastRows();
+			init04Ass(ANAL_LOOSENESS_VIRGIN,ANAL_WETNESS_DRY);
+			init05Body(1,HIP_RATING_SLENDER,BUTT_RATING_BUTTLESS);
+			init06Skin("white");
+			init07Hair();
+			init08Face();
+			init09PrimaryStats(35,5,10,1,90,60,90);
+			init10Weapon("worm","slap");
+			init11Armor("skin");
+			init12Combat(0,30,0,Monster.TEMPERMENT_LOVE_GRAPPLES);
 			this.HP = 40;
-			this.lust = 30;
-			this.lustVuln = 0;
-
-			//Level Stats
-			this.level = 3;
-			this.XP = this.totalXP(mainClassPtr.player.level);
-			this.gems = 0;
+			init13Level(3,0);
+			initX_Specials(5054,5055);
 
 
 

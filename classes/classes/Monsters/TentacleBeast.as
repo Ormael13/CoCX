@@ -19,53 +19,24 @@
 		{
 			super(mainClassPtr);
 			trace("TentacleBeast Constructor!");
-			init1Names("the ", "tentacle beast", "tentaclebeast", "You see the massive, shambling form of the tentacle beast before you.  Appearing as a large shrub, it shifts its bulbous mass and reveals a collection of thorny tendrils and cephalopodic limbs.");
-			init2Male([new Cock(40,1.5),new Cock(60,1.5),new Cock(50,1.5),new Cock(20,1.5)],0,0,3);
-			init2Genderless();
-			init3BreastRows();
-			init4Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_SLIME_DROOLING);
-			init5Body(rand(9) + 70,HIP_RATING_BOYISH,BUTT_RATING_BUTTLESS);
-			init6Skin("green",SKIN_TYPE_PLAIN,"bark");
-			init7Hair("green",1);
-
-			this.temperment = 3;
-			//Regular attack
-			this.special1 = 5072;
-			//Lust attack
-			this.special2 = 5073;
-			this.special3 = 5072;
-
-			//Clothing/Armor
-			this.armorName = "rubbery skin";
-			this.weaponName = "whip-tendril";
-			this.weaponVerb = "thorny tendril";
-			this.armorDef = 1;
-
-			this.weaponAttack = 1;
-
-			//Primary stats
-			this.str = 58;
-			this.tou = 25;
-			this.spe = 45;
-			this.inte = 45;
-			this.lib = 90;
-			this.sens = 20;
-			this.cor = 100;
-
-			//Combat Stats
-			this.bonusHP = 350;
-			this.HP = eMaxHP();
-			this.lustVuln = 0.8;
-
-			this.lust = 10;
-
-			//Level Stats
-			this.level = 6;
-			this.XP = this.totalXP(mainClassPtr.player.level);
-			this.gems = rand(15)+5;
+			init01Names("the ", "tentacle beast", "tentaclebeast", "You see the massive, shambling form of the tentacle beast before you.  Appearing as a large shrub, it shifts its bulbous mass and reveals a collection of thorny tendrils and cephalopodic limbs.");
+			init02Male([new Cock(40,1.5),new Cock(60,1.5),new Cock(50,1.5),new Cock(20,1.5)],0,0,3);
+			init02Genderless();
+			init03BreastRows();
+			init04Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_SLIME_DROOLING);
+			init05Body(rand(9) + 70,HIP_RATING_BOYISH,BUTT_RATING_BUTTLESS);
+			init06Skin("green",SKIN_TYPE_PLAIN,"bark");
+			init07Hair("green",1);
+			init08Face();
+			init09PrimaryStats(58,25,45,45,90,20,100);
+			init10Weapon("whip-tendril","thorny tendril",1);
+			init11Armor("rubbery skin",1);
+			init12Combat(350,10,0.8,Monster.TEMPERMENT_LOVE_GRAPPLES);
+			init13Level(6,rand(15)+5);
+			initX_Specials(5072,5073,5072);
 
 
-			this.tailType = TAIL_TYPE_DEMONIC;
+			initX_Tail(TAIL_TYPE_DEMONIC);
 		}
 
 	}

@@ -4,7 +4,7 @@
 	import classes.Creature;
 	import classes.Monster;
 	import classes.CockTypesEnum;
-	
+
 	/**
 	 * ...
 	 * @author Fake-Name
@@ -13,53 +13,29 @@
 
 	public class GreenSlime extends Monster
 	{
-		
 
-		public function GreenSlime(mainClassPtr:*) 
+
+		public function GreenSlime(mainClassPtr:*)
 		{
 			super(mainClassPtr);
 			trace("GreenSlime Constructor!");
-			init1Names("a ", "green slime", "greenslime", "The green slime has a normally featureless face that sits on top of wide shoulders that sprout into thick, strong arms.  Its torso fades into an indistinct column that melds into the lump of ooze on the ground that serves as a makeshift form of locomotion.");
-			init2Male(new Cock(18,2,CockTypesEnum.HUMAN),0,1,3,20);
+			init01Names("a ", "green slime", "greenslime", "The green slime has a normally featureless face that sits on top of wide shoulders that sprout into thick, strong arms.  Its torso fades into an indistinct column that melds into the lump of ooze on the ground that serves as a makeshift form of locomotion.");
+			init02Male(new Cock(18, 2, CockTypesEnum.HUMAN), 0, 1, 3, 20);
 			this.pronoun1 = "it";
 			this.pronoun2 = "it";
 			this.pronoun3 = "its";
-			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_SLIME_DROOLING);
-			init5Body(rand(8) + 80,HIP_RATING_AMPLE,BUTT_RATING_LARGE);
-			init6Skin("green");
-			init7Hair("green",0);
-
-			this.temperment = 3;
-			this.special1 = 5040;
-			this.special2 = 5039;
-			this.special3 = 5039;
-
-
-			//Clothing/Armor
-			this.armorName = "gelatinous skin";
-			this.weaponName = "hands";
-			this.weaponVerb = "slap";
-
-			//Primary stats
-			this.str = 25;
-			this.tou = 20;
-			this.spe = 10;
-			this.inte = 5;
-			this.lib = 50;
-			this.sens = 60;
-			this.cor = 20;
-
-			//Combat Stats
-			this.bonusHP = 30;
-			this.HP = eMaxHP();
-			this.lust = 30;
-
-			//Level Stats
-			this.level = 2;
-			this.XP = this.totalXP(mainClassPtr.player.level);
-			this.gems = rand(5)+1;
-
-
+			init03BreastRows(0);
+			init04Ass(ANAL_LOOSENESS_STRETCHED, ANAL_WETNESS_SLIME_DROOLING);
+			init05Body(rand(8) + 80, HIP_RATING_AMPLE, BUTT_RATING_LARGE);
+			init06Skin("green");
+			init07Hair("green", 0);
+			init08Face();
+			init09PrimaryStats(25, 20, 10, 5, 50, 60, 20);
+			init10Weapon("hands", "slap");
+			init11Armor("gelatinous skin");
+			init12Combat(30, 30, 1, Monster.TEMPERMENT_LOVE_GRAPPLES);
+			init13Level(2, rand(5) + 1);
+			initX_Specials(5040, 5039, 5039);
 		}
 
 	}

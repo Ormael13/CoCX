@@ -18,45 +18,20 @@
 		{
 			super(mainClassPtr);
 			trace("GenericMonstah Constructor!");
-			init1Names("the ", "fetish cultist", "fetishcultist", "The woman across from you has her eyes closed, her hands joined, and seems to be chanting under her breath. She is wearing a religious outfit that closely hugs her curvacious shape, with a skirt so short that you can clearly see her pussy's lips.\n\nShe has clealy lost her grasp on sanity, and filled the void with pure perversion.");
-			init2Female(VAGINA_LOOSENESS_GAPING, VAGINA_WETNESS_WET);
-			init3BreastRows("DD");
-			init4Ass(ANAL_LOOSENESS_NORMAL,ANAL_WETNESS_NORMAL);
-			init5Body("5'7",HIP_RATING_AMPLE,BUTT_RATING_LARGE);
-			init6Skin("pale");
-			init7Hair("black",15);
-
-			this.temperment = 3;
-			//Regular attack
-			this.special1 = 5062;
-			//Lust attack
-			this.special2 = 5063;
-			this.special3 = 5062;
-
-			//Clothing/Armor
-			this.armorName = "fetishy outfit";
-			this.weaponName = "whip";
-			this.weaponVerb = "whip-crack";
-
-			//Primary stats
-			this.str = 35;
-			this.tou = 25;
-			this.spe = 30;
-			this.inte = 1;
-			this.lib = 75;
-			this.sens = 80;
-			this.cor = 90;
-
-			//Combat Stats
-			this.HP = eMaxHP();
-			this.lust = 25;
-
-			//Level Stats
-			this.level = 2;
-			this.XP = this.totalXP(mainClassPtr.player.level);
-			this.gems = 5+rand(10);
-
-
+			init01Names("the ", "fetish cultist", "fetishcultist", "The woman across from you has her eyes closed, her hands joined, and seems to be chanting under her breath. She is wearing a religious outfit that closely hugs her curvacious shape, with a skirt so short that you can clearly see her pussy's lips.\n\nShe has clealy lost her grasp on sanity, and filled the void with pure perversion.");
+			init02Female(VAGINA_LOOSENESS_GAPING, VAGINA_WETNESS_WET);
+			init03BreastRows("DD");
+			init04Ass(ANAL_LOOSENESS_NORMAL,ANAL_WETNESS_NORMAL);
+			init05Body("5'7",HIP_RATING_AMPLE,BUTT_RATING_LARGE);
+			init06Skin("pale");
+			init07Hair("black",15);
+			init08Face();
+			init09PrimaryStats(35,25,30,1,75,80,90);
+			init10Weapon("whip","whip-crack");
+			init11Armor("fetishy outfit");
+			init12Combat(0,25,1,Monster.TEMPERMENT_LOVE_GRAPPLES);
+			init13Level(2,5+rand(10));
+			initX_Specials(5062,5063,5062);
 		}
 
 	}

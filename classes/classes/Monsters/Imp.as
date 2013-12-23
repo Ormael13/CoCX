@@ -19,46 +19,21 @@
 		{
 			super(mainClassPtr);
 			trace("Imp Constructor!");
-			init1Names("the ","imp","imp","An imp is short, only a few feet tall.  An unkempt mane of shaggy black hair hangs from his head, parted by two short curved horns.  His eyes are solid black, save for tiny red irises which glow with evil intent.  His skin is bright red, and unencumbered by clothing or armor, save for a small loincloth at his belt.  His feet are covered by tiny wooden sandals, and his hands tipped with sharp claws.  A pair of tiny but functional wings occasionally flap from his back.");
-			init2Male([new Cock(rand(2) + 11,2.5)]);
-			init3BreastRows([0,0]);
-			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_NORMAL);
-			init5Body(rand(24) + 25,HIP_RATING_BOYISH,BUTT_RATING_TIGHT);
-			init6Skin("red");
-			init7Hair("black",5);
-			this.temperment                     = 1;
-			this.special1                       = 5019;
-			this.pronoun1                       = "he";
-			this.pronoun2                       = "him";
-			this.pronoun3                       = "his";
-
-			//Clothing/Armor
-			this.armorName                      = "leathery skin";
-			this.weaponName                     = "claws";
-			this.weaponVerb                     = "claw-slash";
-			//Primary stats
-			this.str                            = 20;
-			this.tou                            = 10;
-			this.spe                            = 25;
-			this.inte                           = 12;
-			this.lib                            = 45;
-			this.sens                           = 45;
-			this.cor                            = 100;
-
-			//Combat Stats
-			this.HP                             = tou * 2 + 50;
-			this.lust                           = 40;
-
-			//Level Stats
-			this.level                          = 1;
-			this.XP                             = this.totalXP(mainClassPtr.player.level);
-			this.gems                           = rand(5) + 5;
-
-
-			this.wingDesc                       = "small";
-
-			this.wingType                       = WING_TYPE_IMP;
-
+			init01Names("the ","imp","imp","An imp is short, only a few feet tall.  An unkempt mane of shaggy black hair hangs from his head, parted by two short curved horns.  His eyes are solid black, save for tiny red irises which glow with evil intent.  His skin is bright red, and unencumbered by clothing or armor, save for a small loincloth at his belt.  His feet are covered by tiny wooden sandals, and his hands tipped with sharp claws.  A pair of tiny but functional wings occasionally flap from his back.");
+			init02Male([new Cock(rand(2) + 11,2.5)]);
+			init03BreastRows([0,0]);
+			init04Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_NORMAL);
+			init05Body(rand(24) + 25,HIP_RATING_BOYISH,BUTT_RATING_TIGHT);
+			init06Skin("red");
+			init07Hair("black",5);
+			init09PrimaryStats(20,10,25,12,45,45,100);
+			init08Face();
+			init10Weapon("claws","claw-slash");
+			init11Armor("leathery skin");
+			init12Combat(0,40,1,1);
+			init13Level(1,rand(5) + 5);
+			initX_Specials(5019);
+			initX_Wings(WING_TYPE_IMP);
 
 		}
 

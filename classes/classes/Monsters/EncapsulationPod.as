@@ -14,20 +14,20 @@
 
 	public class EncapsulationPod extends Monster
 	{
-		public function setDescriptionForPlantPot():void 
+		public function setDescriptionForPlantPot():void
 		{
 			//[Round 1 Description]
-			if(mainClassPtr.hasStatusAffect("Round") < 0) 
+			if(hasStatusAffect("Round") < 0)
 				this.long = "You're totally trapped inside a pod!  The walls are slimy and oozing moisture that makes the air sickeningly sweet.  It makes you feel a little dizzy.  Tentacles are climbing up your " + mainClassPtr.player.legs() + " towards your crotch, doing their best to get under you " + mainClassPtr.player.armorName + ".  There's too many to try to pull away.  You're only chance of escape is to create a way out!";
 			//[Round 2 Description]
-			else if(mainClassPtr.statusAffectv1("Round") == 2) {
+			else if(statusAffectv1("Round") == 2) {
 				this.long = "You're still trapped inside the pod!  By now the walls are totally soaked with some kind of viscous slime.  The smell of it is unbearably sweet and you have to put a hand against the wall to steady yourself.  Warm tentacles are curling and twisting underneath your armor, caressing every ";
 				if(mainClassPtr.player.skinType == mainClassPtr.SKIN_TYPE_FUR) this.long += "furry ";
 				if(mainClassPtr.player.skinType == mainClassPtr.SKIN_TYPE_SCALES) this.long += "scaley ";
 				this.long += "inch of your " + mainClassPtr.player.legs() + ", crotch, and " + mainClassPtr.player.assDescript() + ".";
 			}
 			//[Round 3 Description]
-			else if(mainClassPtr.statusAffectv1("Round") == 3) {
+			else if(statusAffectv1("Round") == 3) {
 				this.long = "You're trapped inside the pod and being raped by it's many tentacles!   The pooling slime is constantly rising, and in a few moments it will have reached your groin.  The viscous sludge makes it hard to move and the smell of it is making it even harder to think or stand up.  The tentacles assaulting your groin don't stop moving for an instant, and in spite of yourself, some part of you wants them to make you cum quite badly.";
 			}
 			//[Round 4 Description]
@@ -66,50 +66,22 @@
 		public function EncapsulationPod(mainClassPtr:*) 
 		{
 			super(mainClassPtr);
-			init1Names("the ", "pod", "pod", "");
-			init2Genderless();
-			init3BreastRows();
-			init4Ass();
-			init5Body(120,HIP_RATING_SLENDER,BUTT_RATING_BUTTLESS);
-			init6Skin("purple",SKIN_TYPE_PLAIN,"covering");
-			init7Hair("black",0);
-
-			this.temperment = 2;
-			//Uber
-
-			//Lust attack
-
-			//Clothing/Armor
-			this.armorName = "pod";
-			this.weaponName = "";
-			this.weaponVerb = "";
-
-			//Primary stats
-			this.str = 90;
-			this.tou = 1;
-			this.spe = 1;
-			this.inte = 1;
-			this.lib = 1;
-			this.sens = 1;
-			this.cor = 100;
-
-			this.lustVuln = 0;
-
-			//Combat Stats
-			this.bonusHP = 450;
-			this.HP = eMaxHP();
+			init01Names("the ", "pod", "pod", "");
 			setDescriptionForPlantPot();
-
-			this.lust = 10;
-
-			//Level Stats
-			this.level = 12;
-			this.XP = totalXP() + 80;
-			this.gems = 1;
-
-
-			this.wingDesc = "";
-
+			init02Genderless();
+			init03BreastRows();
+			init04Ass();
+			init05Body(120,HIP_RATING_SLENDER,BUTT_RATING_BUTTLESS);
+			init06Skin("purple",SKIN_TYPE_PLAIN,"covering");
+			init07Hair("black",0);
+			init08Face();
+			init09PrimaryStats(90,1,1,1,1,1,100);
+			init10Weapon("","");
+			init11Armor("pod");
+			init12Combat(450,10,0,TEMPERMENT_RANDOM_GRAPPLES);
+			init13Level(12,1);
+			this.XP += 80;
+			initX_Specials(special1,special2,special3);
 		}
 
 	}

@@ -24,48 +24,19 @@ package classes.Monsters
 		{
 			super(mainClassPtr);
 			var skinToneAdj:Array = Appearance.randomChoice(SKIN_VARIATIONS);
-			init1Names("the ", "chameleon girl", "chameleongirl", "You're faced with a tall lizard-like girl with smooth " + skinToneAdj[0] + " skin and long, " + skinToneAdj[1] + " stripes that run along her body from ankle to shoulder.  An abnormally large tail swishes behind her, and her hands are massive for her frame, built for easily climbing the trees.  A pair of small, cute horns grow from her temples, and a pair of perky B-cups push out through her skimpy drapings.  Large, sharp claws cap her fingers, gesturing menacingly at you.");
-			init2Female(VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_LOOSE);
-			init4Ass(ANAL_LOOSENESS_NORMAL,ANAL_WETNESS_DRY);
-			init5Body(rand(2) + 68,HIP_RATING_AMPLE+2,BUTT_RATING_LARGE);
-			init6Skin(skinToneAdj[0],SKIN_TYPE_PLAIN,"skin",skinToneAdj[1]);
-			init7Hair("black",15);
-
-			this.temperment = 3;
-			//Regular attack
-
-			//Lust attack
-
-			//Clothing/Armor
-			this.armorName = "skin";
-			this.weaponName = "claws";
-			this.weaponVerb = "claw";
-			this.armorDef = 20;
-
-			this.weaponAttack = 30;
-
-			//Primary stats
-			this.str = 65;
-			this.tou = 65;
-			this.spe = 95;
-			this.inte = 85;
-			this.lib = 50;
-			this.sens = 45;
-			this.cor = mainClassPtr.flags[kFLAGS.EMBER_COR];
-
-			this.lustVuln = .25;
-
-			//Combat Stats
-			this.bonusHP = 350;
-			this.HP = eMaxHP();
-			this.lust = 30;
-
-			//Level Stats
-			this.level = 14;
-			this.XP = totalXP();
-			this.gems = 10 + rand(50);
-
-			this.tailRecharge = 0;
+			init01Names("the ", "chameleon girl", "chameleongirl", "You're faced with a tall lizard-like girl with smooth " + skinToneAdj[0] + " skin and long, " + skinToneAdj[1] + " stripes that run along her body from ankle to shoulder.  An abnormally large tail swishes behind her, and her hands are massive for her frame, built for easily climbing the trees.  A pair of small, cute horns grow from her temples, and a pair of perky B-cups push out through her skimpy drapings.  Large, sharp claws cap her fingers, gesturing menacingly at you.");
+			init02Female(VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_LOOSE);
+			init03BreastRows("B");
+			init04Ass(ANAL_LOOSENESS_NORMAL,ANAL_WETNESS_DRY);
+			init05Body(rand(2) + 68,HIP_RATING_AMPLE+2,BUTT_RATING_LARGE);
+			init06Skin(skinToneAdj[0],SKIN_TYPE_PLAIN,"skin",skinToneAdj[1]);
+			init07Hair("black",15);
+			init08Face();
+			init09PrimaryStats(65,65,95,85,50,45,mainClassPtr.flags[kFLAGS.EMBER_COR]);
+			init10Weapon("claws","claw",30);
+			init11Armor("skin",20);
+			init12Combat(350,30,.25,TEMPERMENT_LOVE_GRAPPLES);
+			init13Level(14,10 + rand(50));
 		}
 		
 	}

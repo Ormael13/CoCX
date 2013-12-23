@@ -14,53 +14,22 @@ package classes.Monsters
 		public function Farmers(mainClassPtr:*) 
 		{
 			super(mainClassPtr);
-			init1Names("the ", "farmers", "farmers", "This is a group of thirty angry villagers, almost all human-looking but for the tiny horn-like protrusions growing from their heads and the white fuzz that almost passes off as hair.  They are all armed with pitchforks or other crude farming tools they use in their everyday task.  Rebecc is staring from behind them with horrified eyes at the combat, paralyzed by the sudden turn of events.",true);
-			init2Male(new Cock(9,2,CockTypesEnum.HUMAN),0,1,3);
-			init2Female(VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_LOOSE);
-			init4Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_SLIME_DROOLING);
-			init5Body(rand(8) + 70,HIP_RATING_AMPLE+2,BUTT_RATING_LARGE);
-			init6Skin("red");
-			init7Hair("black",15);
-
-			this.temperment = 3;
-			//Regular attack
-			this.special1 = 5043;
-			//Lust attack
-			this.special2 = 5044;
-
-
-
-			//Clothing/Armor
-			this.armorName = "chitin";
-			this.weaponName = "pitchforks";
-			this.weaponVerb = "stab";
-
-			//Primary stats
-			this.str = 40;
-			this.tou = 50;
-			this.spe = 99;
-			this.inte = 99;
-			this.lib = 35;
-			this.sens = 35;
-			this.cor = 20;
-
-			this.lustVuln = 0;
-
-			//Combat Stats
-			this.bonusHP = 500;
-			this.HP = eMaxHP();
-			this.lust = 0;
-
-			//Level Stats
-			this.level = 10;
-			this.XP = totalXP();
-			this.gems = rand(25)+40;
-
-
-			this.hornType = HORNS_DEMON;
-
-			this.tailType = TAIL_TYPE_DEMONIC;
-			//Create imp sex attributes
+			init01Names("the ", "farmers", "farmers", "This is a group of thirty angry villagers, almost all human-looking but for the tiny horn-like protrusions growing from their heads and the white fuzz that almost passes off as hair.  They are all armed with pitchforks or other crude farming tools they use in their everyday task.  Rebecc is staring from behind them with horrified eyes at the combat, paralyzed by the sudden turn of events.",true);
+			init02Male(new Cock(9,2,CockTypesEnum.HUMAN),0,1,3);
+			init02Female(VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_LOOSE);
+			init04Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_SLIME_DROOLING);
+			init05Body(rand(8) + 70,HIP_RATING_AMPLE+2,BUTT_RATING_LARGE);
+			init06Skin("red");
+			init07Hair("black",15);
+			init08Face();
+			init09PrimaryStats(40,50,99,99,35,35,20);
+			init10Weapon("pitchforks","stab");
+			init11Armor("chitin");
+			init12Combat(500,0,0,Monster.TEMPERMENT_LOVE_GRAPPLES);
+			init13Level(10,rand(25)+40);
+			initX_Specials(5043,5044);
+			initX_Horns(HORNS_DEMON);
+			initX_Tail(TAIL_TYPE_DEMONIC);
 		}
 		
 	}
