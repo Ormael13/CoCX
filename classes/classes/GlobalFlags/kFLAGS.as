@@ -1,4 +1,4 @@
-// The extra folder is to let the package namespacing seperate out the statics from the classes.* space.
+﻿// The extra folder is to let the package namespacing seperate out the statics from the classes.* space.
 // Global flags can now be brought into the main program by "import classes.GlobalFlags.*"
 
 package classes.GlobalFlags
@@ -1037,7 +1037,7 @@ public static const LYNNETTE_FUCK_COUNTER:int                                   
 public static const UMA_TIMES_SEXED:int                                  			= 1029;
 public static const UMA_TIMES_MASSAGED:int                                  		= 1030;
 public static const UMA_TIMES_ACUPUNCTURE_UNDO:int                                 = 1031;
-public static const UNKNOWN_FLAG_NUMBER_01032:int                                   = 1032;
+public static const UMA_TIMES_SUCKED_YOU:int	                                    = 1032;
 public static const UNKNOWN_FLAG_NUMBER_01033:int                                   = 1033;
 public static const UNKNOWN_FLAG_NUMBER_01034:int                                   = 1034;
 public static const UNKNOWN_FLAG_NUMBER_01035:int                                   = 1035;

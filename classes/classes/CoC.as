@@ -6,16 +6,16 @@
 
 	import classes.CoC_Settings;
 
-	import classes.assClass;
-	import classes.breastRowClass;
+	import classes.AssClass;
+	import classes.BreastRowClass;
 	
 	import classes.Player;
 	import classes.Cock;
 	import classes.Creature;
-	import classes.itemSlotClass;
-	import classes.perkClass;
-	import classes.statusAffectClass;
-	import classes.vaginaClass;
+	import classes.ItemSlotClass;
+	import classes.PerkClass;
+	import classes.StatusAffectClass;
+	import classes.VaginaClass;
 	import classes.ImageManager; // This line not necessary, but added because I'm pedantic like that.
 	import classes.InputManager;
 
@@ -266,11 +266,11 @@
 		public var sand:Number;
 		public var giacomo:Number;
 		public var beeProgress:Number;
-		public var itemSlot1:itemSlotClass;
-		public var itemSlot2:itemSlotClass;
-		public var itemSlot3:itemSlotClass;
-		public var itemSlot4:itemSlotClass;
-		public var itemSlot5:itemSlotClass;
+		public var itemSlot1:ItemSlotClass;
+		public var itemSlot2:ItemSlotClass;
+		public var itemSlot3:ItemSlotClass;
+		public var itemSlot4:ItemSlotClass;
+		public var itemSlot5:ItemSlotClass;
 		public var itemSlots:Array;
 		public var itemStorage:Array;
 		public var gearStorage:Array;
@@ -337,8 +337,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "0.8.3f2";
-			version = "v0.8.3f2 (<b>Uma Likes 'em Pretty</b>)";
+			ver = "0.8.3f4";
+			version = "v0.8.3f4 (<b>Fixes and Uma Blowjob Training</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
@@ -469,11 +469,11 @@
 			beeProgress = 0;
 
 			//Item things
-			itemSlot1 = new itemSlotClass();
-			itemSlot2 = new itemSlotClass();
-			itemSlot3 = new itemSlotClass();
-			itemSlot4 = new itemSlotClass();
-			itemSlot5 = new itemSlotClass();
+			itemSlot1 = new ItemSlotClass();
+			itemSlot2 = new ItemSlotClass();
+			itemSlot3 = new ItemSlotClass();
+			itemSlot4 = new ItemSlotClass();
+			itemSlot5 = new ItemSlotClass();
 			
 
 			itemSlots = [itemSlot1, itemSlot2, itemSlot3, itemSlot4, itemSlot5];
@@ -527,20 +527,20 @@
 
 			//Register the classes we need to be able to serialize and reconstitute so
 			// they'll get reconstituted into the correct class when deserialized
-			registerClassAlias("assClass", assClass);
+			registerClassAlias("AssClass", AssClass);
 			registerClassAlias("Character", Character);
 			registerClassAlias("Cock", Cock);
 			registerClassAlias("CockTypesEnum", CockTypesEnum);
 			registerClassAlias("Enum", Enum);
 			registerClassAlias("Creature", Creature);
-			registerClassAlias("itemSlotClass", itemSlotClass);
-			registerClassAlias("keyItemClass", keyItemClass);
+			registerClassAlias("ItemSlotClass", ItemSlotClass);
+			registerClassAlias("KeyItemClass", KeyItemClass);
 			registerClassAlias("Monster", Monster);
 			registerClassAlias("Player", Player);
-			registerClassAlias("statusAffectClass", statusAffectClass);
-			registerClassAlias("vaginaClass", vaginaClass);
+			registerClassAlias("StatusAffectClass", StatusAffectClass);
+			registerClassAlias("VaginaClass", VaginaClass);
 			//registerClassAlias("Enum", Enum);
-			//registerClassAlias("cockClass", cockClass);
+			//registerClassAlias("CockClass", CockClass);
 
 			//Hide sprites
 			mainView.hideSprite();

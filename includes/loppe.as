@@ -682,7 +682,7 @@ public function chatWithLoppeAboutHerMom():void {
 	clearOutput();
 	//req LoppeChat > 0
 	outputText("Loppe rubs her chin, deep in thought.  \"<i>Where do I start?  I guess by saying that my mom is a super mom.  She raised me all on her own, and she's always had time for me, despite having to keep up with her job.  I love her very much.</i>\"");
-	outputText("\n\nRemembering what Loppe mentioned when you last  talked about her family life, you ask if she could tell you a bit more about her mother.  For example, what's her name?  What sort of person is she?");
+	outputText("\n\nRemembering what Loppe mentioned when you last talked about her family life, you ask if she could tell you a bit more about her mother.  For example, what's her name?  What sort of person is she?");
 	outputText("\n\n\"<i>I never did mention mom's name, did I?  Her name is Uma, and she's a horse.  She's a really nice person, and is very good with her hands... then again, she has to be, being a masseuse and acupuncturist.  She's always smiling and is very positive, although she can be kinda scary when she's mad,</i>\" Loppe adds, with a smirk.");
 	outputText("\n\nYou can't resist smiling and asking if Loppe has maybe been a bad little girl for her poor hard-working mom in the past?");
 	outputText("\n\n\"<i>Oh, no.  I've always been good, but I can't say the same of a few clients who weren't respectful enough...</i>\" Loppe says, looking away in no specific direction.");

@@ -1349,108 +1349,46 @@ public function npcBreastDescript(size:Number):String
 }
 
 public function breastCup(size:Number):String {
-	if(size < 1) return "flat, manly breast";
-	else if(size < 2) return "A-cup";
-	else if(size < 3) return "B-cup";
-	else if(size < 4) return "C-cup";
-	else if(size < 5) return "D-cup";
-	else if(size < 6) return "DD-cup";
-	else if(size < 7) return "big DD-cup";
-	else if(size < 8) return "E-cup";
-	else if(size < 9) return "big E-cup";
-	else if(size < 10) return "EE-cup";
-	else if(size < 11) return "big EE-cup";
-	else if(size < 12) return "F-cup";
-	else if(size < 13) return "big F-cup";
-	else if(size < 14) return "FF-cup";
-	else if(size < 15) return "big FF-cup";
-	else if(size < 16) return "G-cup";
-	else if(size < 17) return "big G-cup";
-	else if(size < 18) return "GG-cup";
-	else if(size < 19) return "big GG-cup";
-	else if(size < 20) return "H-cup";
-	else if(size < 21) return "big H-cup";
-	else if(size < 22) return "HH-cup";
-	else if(size < 23) return "big HH-cup";
-	else if(size < 24) return "HHH-cup";
-	else if(size < 25) return "I-cup";
-	else if(size < 26) return "big I-cup";
-	else if(size < 27) return "II-cup";
-	else if(size < 28) return "big II-cup";
-	else if(size < 29) return "J-cup";
-	else if(size < 30) return "big J-cup";
-	else if(size < 31) return "JJ-cup";
-	else if(size < 32) return "big JJ-cup";
-	else if(size < 33) return "K-cup";
-	else if(size < 34) return "big K-cup";
-	else if(size < 35) return "KK-cup";
-	else if(size < 36) return "big KK-cup";
-	else if(size < 37) return "L-cup";
-	else if(size < 38) return "big L-cup";
-	else if(size < 39) return "LL-cup";
-	else if(size < 40) return "big LL-cup";
-	else if(size < 41) return "M-cup";
-	else if(size < 42) return "big M-cup";
-	else if(size < 43) return "MM-cup";
-	else if(size < 44) return "big MM-cup";
-	else if(size < 45) return "MMM-cup";
-	else if(size < 46) return "large MMM-cup";
-	else if(size < 47) return "N-cup";
-	else if(size < 48) return "large N-cup";
-	else if(size < 49) return "NN-cup";
-	else if(size < 50) return "large NN-cup";
-	else if(size < 51) return "O-cup";
-	else if(size < 52) return "large O-cup";
-	else if(size < 53) return "OO-cup";
-	else if(size < 54) return "large OO-cup";
-	else if(size < 55) return "P-cup";
-	else if(size < 56) return "large P-cup";
-	else if(size < 57) return "PP-cup";
-	else if(size < 58) return "large PP-cup";
-	else if(size < 59) return "Q-cup";
-	else if(size < 60) return "large Q-cup";
-	else if(size < 61) return "QQ-cup";
-	else if(size < 62) return "large QQ-cup";
-	else if(size < 63) return "R-cup";
-	else if(size < 64) return "large R-cup";
-	else if(size < 65) return "RR-cup";
-	else if(size < 66) return "large RR-cup";
-	else if(size < 67) return "S-cup";
-	else if(size < 68) return "large S-cup";
-	else if(size < 69) return "SS-cup";
-	else if(size < 70) return "large SS-cup";
-	else if(size < 71) return "T-cup";
-	else if(size < 72) return "large T-cup";
-	else if(size < 73) return "TT-cup";
-	else if(size < 74) return "large TT-cup";
-	else if(size < 75) return "U-cup";
-	else if(size < 76) return "large U-cup";
-	else if(size < 77) return "UU-cup";
-	else if(size < 78) return "large UU-cup";
-	else if(size < 79) return "V-cup";
-	else if(size < 80) return "large V-cup";
-	else if(size < 81) return "VV-cup";
-	else if(size < 82) return "large VV-cup";
-	else if(size < 83) return "W-cup";
-	else if(size < 84) return "large W-cup";
-	else if(size < 85) return "WW-cup";
-	else if(size < 86) return "large WW-cup";
-	else if(size < 87) return "X-cup";
-	else if(size < 88) return "large X-cup";
-	else if(size < 89) return "XX-cup";
-	else if(size < 90) return "large XX-cup";
-	else if(size < 91) return "Y-cup";
-	else if(size < 92) return "large Y-cup";
-	else if(size < 93) return "YY-cup";
-	else if(size < 94) return "large YY-cup";
-	else if(size < 95) return "Z-cup";
-	else if(size < 96) return "large Z-cup";
-	else if(size < 97) return "ZZ-cup";
-	else if(size < 98) return "large ZZ-cup";
-	else if(size < 99) return "ZZZ-cup";
-	else return "large ZZZ-cup"
+	return Appearance.breastCup(size);
 }
+/**
+Test event for the breastCupInverse(). Test passed so you can remove this.
 
+ Produced output:
+	 flat -> 0 (flat, manly breast), ok
+	 A -> 1 (A-cup), ok
+	 B -> 2 (B-cup), ok
+	 C -> 3 (C-cup), ok
+	 D -> 4 (D-cup), ok
+	 DD -> 5 (DD-cup), ok
+	 DD+ -> 6 (big DD-cup), ok
+	 E -> 7 (E-cup), ok
+	 E+ -> 8 (big E-cup), ok
+	 EE -> 9 (EE-cup), ok
+	 F -> 11 (F-cup), ok
+	 HH+ -> 22 (big HH-cup), ok
+	 K+ -> 33 (big K-cup), ok
+	 MMM -> 44 (MMM-cup), ok
+	 P+ -> 55 (large P-cup), ok
+	 S -> 66 (S-cup), ok
+	 UU+ -> 77 (large UU-cup), ok
+	 XX -> 88 (XX-cup), ok
+	 ZZZ+ -> 99 (large ZZZ-cup), ok
+*/
+/*public function breastCupInverseTest():void{
+	//just test first row and the diagonal
+	var inputs:Array = ["flat",	"A","B","C","D","DD",	"DD+",	"E","E+",	"EE",	"F","HH+",	"K+",	"MMM",	"P+",	"S","UU+",	"XX",	"ZZZ+"];
+	var outputs:Array = [0,		1,	2,	3,	4,	5,		6,		7,	8,		9,		11,	22,		33,		44,		55,		66,	77,		88,		99];
+	for (var i:int = 0; i<inputs.length; i++){
+		var arg:String = inputs[i];
+		var val:Number = outputs[i];
+		var got:Number = Appearance.breastCupInverse(arg);
+		outputText(arg+" -> "+got+" ("+breastCup(got)+"), ");
+		if (val==got) outputText("ok\n");
+		else outputText("expected "+val+" ("+breastCup(val)+").\n");
+	}
+	doNext(1);
+}*/
 
 public function NPCCockDescript(cockType:*, cockLength:Number = 0, lust:Number = 50):String 
 {

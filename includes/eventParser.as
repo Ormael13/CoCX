@@ -23,6 +23,15 @@ public function eventParser(eventNo:*):void {
 		if(eventNo != 1) {
 			hideMenus();
 		}
+		
+		if (eventNo == 9999) // Game over event; overriding whatever the fuck has been done to the UI up to this point to force display of the data and new game buttons
+		{
+			mainView.showMenuButton( MainView.MENU_NEW_MAIN );
+			mainView.showMenuButton( MainView.MENU_DATA );
+			mainView.hideMenuButton( MainView.MENU_APPEARANCE );
+			mainView.hideMenuButton( MainView.MENU_LEVEL );
+			mainView.hideMenuButton( MainView.MENU_PERKS );
+		}
 		/*if(eventNo == 1000 && gameState == 1 && menuLoc == 1) {
 			menuLoc = 0;
 			outputText("\n\n", false);
@@ -1692,7 +1701,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		//Regain slime core
 		if(player.hasKeyItem("Ruby Heart") >= 0) {
-			if(player.hasStatusAffect("Slime Craving") >= 0 && player.hasPerk("Slime Core") < 0 && player.isGoo() && player.gooScore() >= 4 && player.vaginalCapacity() >= 9000) {
+			if(player.hasStatusAffect("Slime Craving") >= 0 && player.hasPerk("Slime Core") < 0 && player.isGoo() && player.gooScore() >= 4 && player.vaginalCapacity() >= 9000 && player.skinAdj == "slimy" && player.skinDesc == "skin" && player.lowerBody == LOWER_BODY_TYPE_GOO) {
 				outputText("\nAs you adjust to your new, goo-like body, you remember the ruby heart you expelled so long ago.  As you reach to pick it up, it quivers and pulses with a warm, cheerful light.  Your fingers close on it and the nucleus slides through your palm, into your body!\n\n", false);
 				
 				outputText("There is a momentary pressure in your chest and a few memories that are not your own flicker before your eyes.  The dizzying sight passes and the slime core settles within your body, imprinted with your personality and experiences.  There is a comforting calmness from your new nucleus and you feel as though, with your new memories, you will be better able to manage your body's fluid requirements.\n", false);

@@ -62,6 +62,178 @@
 			return kGAMECLASS.urtaLove(value);
 		}
 		
+		protected function sackDescript():String
+		{
+			return kGAMECLASS.sackDescript();
+		}
+		
+		protected function cockClit(value:int = 0):String
+		{
+			return kGAMECLASS.cockClit(value);
+		}
+		
+		protected function balls(balls:*, noBalls:*):String
+		{
+			return kGAMECLASS.balls(balls, noBalls);
+		}
+		
+		protected function sheathDesc():String
+		{
+			return kGAMECLASS.sheathDesc();
+		}
+		
+		protected function chestDesc():String
+		{
+			return kGAMECLASS.chestDesc();
+		}
+		
+		protected function allChestDesc():String
+		{
+			return kGAMECLASS.allChestDesc();
+		}
+		
+		protected function sMultiCockDesc():String
+		{
+			return kGAMECLASS.sMultiCockDesc();
+		}
+		
+		protected function SMultiCockDesc():String
+		{
+			return kGAMECLASS.SMultiCockDesc();
+		}
+		
+		protected function oMultiCockDesc():String
+		{
+			return kGAMECLASS.oMultiCockDesc();
+		}
+		
+		protected function OMultiCockDesc():String
+		{
+			return kGAMECLASS.OMultiCockDesc();
+		}
+		
+		protected function tongueDescript():String
+		{
+			return kGAMECLASS.tongueDescript();
+		}
+		
+		protected function ballsDescriptLight(forcedSize:Boolean = true):String {
+			return kGAMECLASS.ballsDescriptLight(forcedSize);
+		}
+
+		protected function ballDescript():String {
+			return kGAMECLASS.ballDescript();
+		}
+
+		protected function eBallsDescriptLight():String {
+			return kGAMECLASS.eBallsDescriptLight();
+		}
+		protected function eBallsDescript():String {
+			return kGAMECLASS.eBallsDescript();
+		}
+
+		protected function ballsDescript():String {
+			return kGAMECLASS.ballsDescript();
+		}
+		
+		protected function simpleBallsDescript():String {
+			return kGAMECLASS.simpleBallsDescript();
+		}
+
+		protected function assholeDescript():String {
+			return kGAMECLASS.assholeDescript();
+		}
+		
+		protected function eAssholeDescript():String {
+			return kGAMECLASS.eAssholeDescript();
+		}
+				
+		protected function hipDescript():String {
+			return kGAMECLASS.hipDescript();
+		}
+		
+		protected function assDescript():String {
+			return kGAMECLASS.assDescript();
+		}
+		
+		protected  function buttDescript():String {
+			return kGAMECLASS.buttDescript();
+		}
+		
+		protected  function eButtDescript():String {
+			return kGAMECLASS.eButtDescript();
+		}
+
+		protected function num2TextBest(number:int, capitalised:Boolean = false, positional:Boolean = false):String
+		{
+			return kGAMECLASS.num2TextBest(number, capitalised, positional);
+		}
+		
+		protected function num2Text(number:int):String
+		{
+			return kGAMECLASS.num2Text(number);
+		}
+		
+		protected function nippleDescript(rowNum:Number):String
+		{
+			return kGAMECLASS.nippleDescript(rowNum);
+		}
+		
+		protected function cockDescript(cockNum:Number):String
+		{
+			return kGAMECLASS.cockDescript(cockNum);
+		}
+		
+		protected function cockAdjective(cockNum:Number = -1):String
+		{
+			return kGAMECLASS.cockAdjective(cockNum);
+		}
+		
+		protected function multiCockDescript():String
+		{
+			return kGAMECLASS.multiCockDescript();
+		}
+		
+		protected function multiCockDescriptLight():String
+		{
+			return kGAMECLASS.multiCockDescriptLight();
+		}
+		
+		protected function eMultiCockDescriptLight():String
+		{
+			return kGAMECLASS.eMultiCockDescriptLight();
+		}
+		
+		protected function eCockHead(cockNum:Number = 0):String
+		{
+			return kGAMECLASS.eCockHead(cockNum);
+		}
+		
+		protected function eCockDescript(cockIndex:Number):String
+		{
+			return kGAMECLASS.eCockDescript(cockIndex);
+		}
+		
+		protected function breastDescript(rowNum:Number):String
+		{
+			return kGAMECLASS.breastDescript(rowNum);
+		}
+		
+		protected function cockHead(cockNum:Number = 0):String
+		{
+			return kGAMECLASS.cockHead(cockNum);
+		}
+		
+		protected function breastSize(val:Number):String
+		{
+			return kGAMECLASS.breastSize(val);
+		}
+		
+		protected function biggestBreastSizeDescript():String
+		{
+			return kGAMECLASS.biggestBreastSizeDescript();
+		}
+		
 		/**
 		 * Apply statmods to the player. dynStats wraps the regular stats call, but supports "named" arguments of the form:
 		 * 		"statname", value.
@@ -193,52 +365,52 @@
 			kGAMECLASS.gameState = val;
 		}
 		
-		protected function get itemSlot1():itemSlotClass
+		protected function get itemSlot1():ItemSlotClass
 		{
 			return kGAMECLASS.itemSlot1;
 		}
 		
-		protected function get itemSlot2():itemSlotClass
+		protected function get itemSlot2():ItemSlotClass
 		{
 			return kGAMECLASS.itemSlot2;
 		}
 		
-		protected function get itemSlot3():itemSlotClass
+		protected function get itemSlot3():ItemSlotClass
 		{
 			return kGAMECLASS.itemSlot3;
 		}
 		
-		protected function get itemSlot4():itemSlotClass
+		protected function get itemSlot4():ItemSlotClass
 		{
 			return kGAMECLASS.itemSlot4;
 		}
 		
-		protected function get itemSlot5():itemSlotClass
+		protected function get itemSlot5():ItemSlotClass
 		{
 			return kGAMECLASS.itemSlot5;
 		}
 		
-		protected function set itemSlot1(val:itemSlotClass):void
+		protected function set itemSlot1(val:ItemSlotClass):void
 		{
 			kGAMECLASS.itemSlot1 = val;
 		}
 		
-		protected function set itemSlot2(val:itemSlotClass):void
+		protected function set itemSlot2(val:ItemSlotClass):void
 		{
 			kGAMECLASS.itemSlot2 = val;
 		}
 		
-		protected function set itemSlot3(val:itemSlotClass):void
+		protected function set itemSlot3(val:ItemSlotClass):void
 		{
 			kGAMECLASS.itemSlot3 = val;
 		}
 		
-		protected function set itemSlot4(val:itemSlotClass):void
+		protected function set itemSlot4(val:ItemSlotClass):void
 		{
 			kGAMECLASS.itemSlot4 = val;
 		}
 		
-		protected function set itemSlot5(val:itemSlotClass):void
+		protected function set itemSlot5(val:ItemSlotClass):void
 		{
 			kGAMECLASS.itemSlot5 = val;
 		}

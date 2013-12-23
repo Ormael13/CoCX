@@ -4,10 +4,11 @@
 
 // Description constants
 
-// skinType
-public static const GENDER_MALE:int                                                 =    0;
-public static const GENDER_FEMALE:int                                               =    1;
-public static const GENDER_HERM:int                                                =    2;
+// gender
+public static const GENDER_NONE:int                                                 =    0;
+public static const GENDER_MALE:int                                                 =    1;
+public static const GENDER_FEMALE:int                                               =    2;
+public static const GENDER_HERM:int                                                 =    3;
 
 // skinType
 public static const SKIN_TYPE_PLAIN:int                                             =    0;
@@ -15,6 +16,13 @@ public static const SKIN_TYPE_FUR:int                                           
 public static const SKIN_TYPE_SCALES:int                                            =    2;
 public static const SKIN_TYPE_GOO:int                                               =    3;
 public static const SKIN_TYPE_UNDEFINED:int                                         =    4;
+
+// hairType
+public static const HAIR_NORMAL:int                                                =     0;
+public static const HAIR_FEATHER:int                                               =     1;
+public static const HAIR_GHOST:int                                                 =     2;
+public static const HAIR_GOO:int                                                   =     3;
+public static const HAIR_ANEMONE:int                                               =     4;
 
 // faceType
 public static const FACE_HUMAN:int                                                  =    0;
@@ -176,6 +184,26 @@ public static const ANAL_LOOSENESS_NORMAL:int                                   
 public static const ANAL_LOOSENESS_LOOSE:int                                        =   3;
 public static const ANAL_LOOSENESS_STRETCHED:int                                    =   4;
 public static const ANAL_LOOSENESS_GAPING:int                                       =   5;
+
+// hipRating
+public static const HIP_RATING_BOYISH:int                                           =   0;
+public static const HIP_RATING_SLENDER:int                                          =   2;
+public static const HIP_RATING_AVERAGE:int                                          =   4;
+public static const HIP_RATING_AMPLE:int                                            =   6;
+public static const HIP_RATING_CURVY:int                                            =  10;
+public static const HIP_RATING_FERTILE:int                                          =  15;
+public static const HIP_RATING_INHUMANLY_WIDE:int                                   =  20;
+
+// buttRating
+public static const BUTT_RATING_BUTTLESS:int                                        =   0;
+public static const BUTT_RATING_TIGHT:int                                           =   2;
+public static const BUTT_RATING_AVERAGE:int                                         =   4;
+public static const BUTT_RATING_NOTICEABLE:int                                      =   6;
+public static const BUTT_RATING_LARGE:int                                           =   8;
+public static const BUTT_RATING_JIGGLY:int                                          =  10;
+public static const BUTT_RATING_EXPANSIVE:int                                       =  13;
+public static const BUTT_RATING_HUGE:int                                            =  16;
+public static const BUTT_RATING_INCONCEIVABLY_BIG:int                               =  20;
 
 // End Description constants
 

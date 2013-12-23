@@ -3007,5 +3007,16 @@ public function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):voi
 }
 
 public function spriteSelect(choice:Number = 0):void {
-	mainView.selectSprite( choice );
+	if (flags[kFLAGS.SHOW_SPRITES_FLAG] == 0)
+	{
+		mainView.selectSprite( choice );
+	}
+	else
+	{
+		if (choice >= 0)
+		{
+			trace ("hiding sprite because flags");
+			mainView.selectSprite( -1 );
+		}
+	}
 }

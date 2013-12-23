@@ -49,13 +49,7 @@
 			
 			_femininity = value;
 		}
-		
-		//Eyetype
-		//0 - normal
-		//1 - spidah!
-		//2 - sandtrap!
-		public var eyeType:Number = 0;
-		
+
 		//BEARDS! Not used anywhere right now but WHO WANTS A BEARD?
 		public var beardLength:Number = 0;
 		public var beardStyle:Number = 0;
@@ -65,26 +59,6 @@
 		
 		//Body tone i.e. Lithe, stocky, etc
 		public var tone:Number = 0;
-		
-		//TongueType
-		//0 - normal
-		//1 - snakey
-		//2 - demon
-		//3 - dragon
-		public var tongueType:Number = 0;
-		
-		//Head ornaments. Definitely need to convert away from hard coded types.
-		public var antennae:Number = 0;
-		public var horns:Number = 0;
-		
-		//ArmType
-		//0 - normal
-		//1 - harpy feathered
-		//2 - SPIDA
-		public var armType:Number = 0;
-		
-		//Gills
-		public var gills:Boolean = false;
 		
 		//Preggos
 		//TODO: Document pregancy types. Both butt and normal. Mainly butts though.
@@ -480,14 +454,6 @@
 		
 		public function hasLongTail():Boolean
 		{
-			//tailType:
-			//0 - none
-			//1 - horse
-			//2 - dog
-			//3 - demon
-			//4 - cow!
-			//5 - spider!
-			//6 - bee!
 			//7 - shark tail!
 			//8 - catTAIIIIIL
 			//9 - lizard tail
@@ -1021,7 +987,7 @@
 		//Create a keyItem
 		public function createKeyItem(keyName:String, value1:Number, value2:Number, value3:Number, value4:Number):void
 		{
-			var newKeyItem:* = new keyItemClass();
+			var newKeyItem:* = new KeyItemClass();
 			//used to denote that the array has already had its new spot pushed on.
 			var arrayed:Boolean = false;
 			//used to store where the array goes

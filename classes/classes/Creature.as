@@ -1,14 +1,14 @@
 ﻿//CoC Creature.as
 package classes
 {
-	//import classes.cockClass;
+	//import classes.CockClass;
 	import classes.Cock;
-	import classes.vaginaClass;
-	import classes.breastRowClass;
-	import classes.assClass;
-	import classes.perkClass;
-	import classes.statusAffectClass;
-	import classes.keyItemClass;
+	import classes.VaginaClass;
+	import classes.BreastRowClass;
+	import classes.AssClass;
+	import classes.PerkClass;
+	import classes.StatusAffectClass;
+	import classes.KeyItemClass;
 	
 	public class Creature
 	{
@@ -21,6 +21,10 @@ package classes
 		//"a" refers to how the article "a" should appear in text. 
 		public var short:String = "You";
 		public var a:String = "a ";
+		public function get capitalA():String {
+			if (a.length == 0) return "";
+			return a.charAt(0).toUpperCase() + a.substr(1);
+		}
 		
 		//Clothing/Armor
 		public var armorName:String = "";
@@ -54,8 +58,7 @@ package classes
 				
 		//Appearance Variables
 		//Gender 1M, 2F, 3H
-		//public var gender:Number = GENDER_MALE;
-		public var gender:Number = 0;
+		public var gender:int = GENDER_NONE;
 		public var tallness:Number = 0;
 		
 		/*Hairtype
@@ -64,7 +67,7 @@ package classes
 		2- ghost
 		3- goo!
 		4- anemononeoenoeneo!*/
-		public var hairType:Number = 0;
+		public var hairType:Number = HAIR_NORMAL;
 		public var hairColor:String = "no";
 		public var hairLength:Number = 0;
 		
@@ -73,8 +76,7 @@ package classes
 		1 - furry
 		2 - scaley
 		3 - goopey*/
-		//public var skinType:Number = SKIN_TYPE_PLAIN;
-		public var skinType:Number = 0;
+		public var skinType:Number = SKIN_TYPE_PLAIN;
 		public var skinTone:String = "albino";
 		public var skinDesc:String = "skin";
 		public var skinAdj:String = "";
@@ -97,9 +99,8 @@ package classes
 		14 - fullcoon
 		15 - halfmouse
 		16 - fullmouse*/
-		//public var faceType:Number = FACE_HUMAN;
 		public var faceType:Number = FACE_HUMAN;
-		
+
 		/*EarType
 		-1 - none!
 		0 - human
@@ -115,8 +116,7 @@ package classes
 		10 - dragon
 		11 - coon
 		12 - mouse*/
-		//public var earType:Number = EARS_HUMAN;
-		public var earType:Number = 0;
+		public var earType:Number = EARS_HUMAN;
 		public var earValue:Number = 0;
 		
 		/*Horntype
@@ -125,9 +125,9 @@ package classes
 		3 - Draconic/Lizard
 		4 - Double draconic
 		5 - Antlers*/
-		//public var hornType:Number = HORNS_NONE;
-		public var hornType:Number = 0;
-		
+		public var hornType:Number = HORNS_NONE;
+		public var horns:Number = 0;
+
 		/*Wingtype
 		0 - none
 		1 - bee
@@ -142,8 +142,7 @@ package classes
 		10 - small dagron
 		11 - trogdor wings
 		12 - sandtrap wings*/
-		//public var wingType:Number = WING_TYPE_NONE;
-		public var wingType:Number = 0;
+		public var wingType:Number = WING_TYPE_NONE;
 		public var wingDesc:String = "non-existant";
 		
 		/* lowerBody:
@@ -167,9 +166,8 @@ package classes
 		17 - foxpaws
 		18 - dragonfeet
 		19 - raccoonfeet*/
-		//public var lowerBody:Number = LOWER_BODY_TYPE_HUMAN;
-		public var lowerBody:Number = 0;
-		
+		public var lowerBody:Number = LOWER_BODY_TYPE_HUMAN;
+
 		/*tailType:
 		0 - none
 		1 - horse
@@ -188,8 +186,7 @@ package classes
 		14 - dagron tail
 		15 - raccoon tail
 		16 - mousetail*/
-		//public var tailType:Number = TAIL_TYPE_NONE;
-		public var tailType:Number = 0;
+		public var tailType:Number = TAIL_TYPE_NONE;
 		
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		public var tailVenom:Number = 0;
@@ -204,7 +201,7 @@ package classes
 		10 - curvy//flaring
 		15 - child-bearing/fertile
 		20 - inhumanly wide*/
-		public var hipRating:Number = 0;
+		public var hipRating:Number = HIP_RATING_BOYISH;
 		
 		/*buttRating
 		0 - buttless
@@ -216,7 +213,7 @@ package classes
 		13 - expansive
 		16 - huge
 		20 - inconceivably large/big/huge etc*/
-		public var buttRating:Number = 0;
+		public var buttRating:Number = BUTT_RATING_BUTTLESS;
 		
 		//Piercings
 		//TODO: Pull this out into it's own class and enum.
@@ -238,7 +235,22 @@ package classes
 		public var nosePierced:Number = 0;
 		public var nosePShort:String = "";
 		public var nosePLong:String = "";
-		
+
+		//Head ornaments. Definitely need to convert away from hard coded types.
+		public var antennae:Number = ANTENNAE_NONE;
+
+		//Eyetype
+		public var eyeType:Number = EYES_HUMAN;
+
+		//TongueType
+		public var tongueType:Number = TONUGE_HUMAN;
+
+		//ArmType
+		public var armType:Number = ARM_TYPE_HUMAN;
+
+		//Gills
+		public var gills:Boolean = false;
+
 		//Sexual Stuff		
 		//MALE STUFF
 		//public var cocks:Array;
@@ -258,7 +270,7 @@ package classes
 		public var clitLength:Number = .5;
 		public var nippleLength:Number = .25;
 		public var breastRows:Array;
-		public var ass:assClass = new assClass();		
+		public var ass:AssClass = new AssClass();		
 		
 		//Monsters have few perks, which I think should be a status effect for clarity's sake.
 		//TODO: Move perks into monster status effects.
@@ -286,7 +298,7 @@ package classes
 		//Create a perk
 		public function createPerk(keyName:String, value1:Number, value2:Number, value3:Number, value4:Number, desc:String = ""):void
 		{
-			var newKeyItem:perkClass = new perkClass();
+			var newKeyItem:PerkClass = new PerkClass();
 			//used to denote that the array has already had its new spot pushed on.
 			var arrayed:Boolean = false;
 			//used to store where the array goes
@@ -584,7 +596,7 @@ package classes
 		//Create a status
 		public function createStatusAffect(statusName:String, value1:Number, value2:Number, value3:Number, value4:Number):void
 		{
-			var newStatusAffect:* = new statusAffectClass();
+			var newStatusAffect:* = new StatusAffectClass();
 			statusAffects.push(newStatusAffect);
 			statusAffects[statusAffects.length - 1].statusAffectName = statusName;
 			statusAffects[statusAffects.length - 1].value1 = value1;
@@ -2723,13 +2735,14 @@ package classes
 			}
 		}
 		
-		//Create a cock
-		public function createCock(clength:Number = 5.5, cthickness:Number = 1):Boolean
+		//Create a cock. Default type is HUMAN
+		public function createCock(clength:Number = 5.5, cthickness:Number = 1,ctype:CockTypesEnum=null):Boolean
 		{
-			trace("createCock called. clength = " + clength + ", cthickness = " + cthickness);
+			if (ctype == null) ctype = CockTypesEnum.HUMAN;
+			trace("createCock called. clength = " + clength + ", cthickness = " + cthickness+", ctype = "+ctype);
 			if (cocks.length >= 10)
 				return false;
-			var newCock:Cock = new Cock(clength, cthickness);
+			var newCock:Cock = new Cock(clength, cthickness,ctype);
 			//var newCock:cockClass = new cockClass();
 			trace("New cock info. Length = " + newCock.cockLength + ", Thickness = " + newCock.cockThickness + ", Type = " + newCock.cockType);
 			cocks.push(newCock);
@@ -2739,21 +2752,23 @@ package classes
 		}
 		
 		//create vagoo
-		public function createVagina():Boolean
+		public function createVagina(virgin:Boolean = true, vaginalWetness:Number = 1, vaginalLooseness:Number = 0):Boolean
 		{
 			if (vaginas.length >= 2)
 				return false;
-			var newVagina:vaginaClass = new vaginaClass();
+			var newVagina:VaginaClass = new VaginaClass();
 			vaginas.push(newVagina);
 			return true;
 		}
 		
 		//create a row of breasts
-		public function createBreastRow():Boolean
+		public function createBreastRow(size:Number=0,nipplesPerBreast:Number=1):Boolean
 		{
 			if (breastRows.length >= 10)
 				return false;
-			var newBreastRow:breastRowClass = new breastRowClass();
+			var newBreastRow:BreastRowClass = new BreastRowClass();
+			newBreastRow.breastRating = size;
+			newBreastRow.nipplesPerBreast = nipplesPerBreast;
 			breastRows.push(newBreastRow);
 			return true;
 		}
@@ -2761,13 +2776,13 @@ package classes
 		public function genderCheck():void
 		{
 			if (hasCock() && hasVagina())
-				gender = 3;
+				gender = GENDER_HERM;
 			else if (hasCock())
-				gender = 1;
+				gender = GENDER_MALE;
 			else if (hasVagina())
-				gender = 2;
+				gender = GENDER_FEMALE;
 			else
-				gender = 0;
+				gender = GENDER_NONE;
 		}
 		
 		//Remove cocks

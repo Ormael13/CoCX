@@ -340,13 +340,13 @@ OH GOD SOMEONE FIX THIS DISASTER!!!!111one1ONE!
 public function saveGameObject(slot:String, isFile:Boolean):void
 {
 
-	//import classes.cockClass
+	//import classes.CockClass
 	import classes.Cock;
-	import classes.vaginaClass;
-	import classes.breastRowClass;
-	import classes.assClass;
-	import classes.perkClass;
-	import classes.statusAffectClass;
+	import classes.VaginaClass;
+	import classes.BreastRowClass;
+	import classes.AssClass;
+	import classes.PerkClass;
+	import classes.StatusAffectClass;
 	import classes.BoundControlMethod;
 	
 	//Autosave stuff
@@ -822,13 +822,13 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 	
 	//Autosave stuff
 	player.slotName = slot;
-	//import classes.cockClass;
+	//import classes.CockClass;
 	import classes.Cock
-	import classes.vaginaClass;
-	import classes.breastRowClass;
-	import classes.assClass;
-	import classes.perkClass;
-	import classes.statusAffectClass;
+	import classes.VaginaClass;
+	import classes.BreastRowClass;
+	import classes.AssClass;
+	import classes.PerkClass;
+	import classes.StatusAffectClass;
 	
 	var counter:Number = player.cocks.length;
 	//Initialize the save file

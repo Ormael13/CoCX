@@ -106,8 +106,6 @@ public function eventTester():void {
 	outputText("", true);
 	mainView.showTestInputPanel();
 	mainView.eventTestInput.text = <![CDATA[
-
-
 [screen startup |
 
 "Paste test event text here."

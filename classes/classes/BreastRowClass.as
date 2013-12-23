@@ -1,9 +1,9 @@
 ﻿package classes
 {
-	public class breastRowClass
+	public class BreastRowClass
 	{
 		//constructor
-		public function breastRowClass()
+		public function BreastRowClass()
 		{
 		}
 		public var breasts:Number = 2;

@@ -246,7 +246,7 @@ public function doCombat(eventNum:Number):void
 			else {
 				//Tease text changes based on perks!
 				tempText="Tease";
-				choices("Attack", attacks, tempText, 5005, "Spells", temp2, "Items", 1000, "Run", 5003, "P. Specials",pSpecials,"M. Specials",5160,waitT,5071,"Fantasize",5086,"",0);
+				choices("Attack", attacks, tempText, 5005, "Spells", temp2, "Items", 1000, "Run", 5003, "P. Specials",pSpecials,"M. Specials",5160,waitT,5071,"Fantasize",5086,"Inspect",debug?5166:0);
 			}
 		}
 	}
@@ -2640,6 +2640,7 @@ public function doCombat(eventNum:Number):void
 			outputText("\n\n<b>GAME OVER</b>", false);
 			if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "",0,"NewGamePlus",10035,"",0,"Debug Cheat", 1);
 			else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus", 10035, "BLAH", 0, "LULZ", 0);
+			mainView.showMenuButton( MainView.MENU_NEW_MAIN );
 			mainView.showMenuButton( MainView.MENU_DATA );
 			mainView.hideMenuButton( MainView.MENU_APPEARANCE );
 			mainView.hideMenuButton( MainView.MENU_LEVEL );
@@ -3731,6 +3732,10 @@ public function doCombat(eventNum:Number):void
 	if(eventNum == 5165) {
 		tailWhipAttack();
 		return;
+	}
+	if (eventNum == 5166){
+		outputText(monster.generateDebugDescription(),true);
+		doNext(1);
 	}
 }
 //Fantasize
@@ -5576,7 +5581,7 @@ public function startCombat(monsterNum:Number):void {
 		monster = new Jojo(this);
 	}
 	if(monsterNum == 4) {
-		monster = new Minotaur(this);
+		monster = new Minotaur(this,monster.hairColor);
 	}
 	//Fertile-Caste Bee
 	if(monsterNum == 5) {
@@ -5853,11 +5858,11 @@ public function startCombat(monsterNum:Number):void {
 	//LOAD HOLLI
 	if(monsterNum == 68) {
 		flags[kFLAGS.FOUGHT_HOLLI] = 1;
-		monster = new Holli68(this);
+		monster = new Holli(this);
 	}
 	//LOAD HOLLI
 	if(monsterNum == 69) {
-		monster = new Holli69(this);
+		monster = new Helspawn(this);
 	}
 	//Reduce enemy def if player has precision!
 	if(player.hasPerk("Precision") >= 0 && player.inte >= 25) {
@@ -5870,6 +5875,12 @@ public function eMaxHP():Number {
 	return monster.tou * 2 + 50 + monster.bonusHP;
 }
 public function display():void {
+	if (!monster.isFullyInit()){
+		outputText("<B>/!\\BUGMonster is not fully initialized! <u>Missing phases: ");
+		for (var i:int=0; i<monster.initsCalled.length; i++)
+			if (!monster.initsCalled[i]) outputText((i+1)+" ");
+		outputText("</u></b>");
+	}
 	var percent:String = "";
 	var math:Number = monster.HP/eMaxHP();
 	if(monster.short == "worms") math = monster.HP/40;
