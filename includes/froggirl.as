@@ -75,7 +75,7 @@ public function resistDatFrog():void {
 	outputText("\n\nYou stand at the lip of the pool, and glare down at her, demanding an explanation.");
 	outputText("\n\n\"<i>Okay, geeze, sorry,</i>\" she says, holding up her wide-fingered palms.  \"<i>Sorry - I’m done, no harm, no foul.  Be on your way</i>\"");
 	outputText("\n\nShe wrinkles up her noseless face and slouches down into the water, sinking down until it reaches the bottoms of her eyes, huffing out a bubbling sigh.");
-	outputText("\n\nYou admit to being a bit curious as to Why she attempted to lure you in, but you do have your own tasks at hand.  On the other hand, she did just try to lure you in for unwanted sex.  Are you just going to let her get away with that?  Do you question the frog girl, continue on your way, or teach her a lesson?");
+	outputText("\n\nYou admit to being a bit curious as to why she attempted to lure you in, but you do have your own tasks at hand.  On the other hand, she did just try to lure you in for unwanted sex.  Are you just going to let her get away with that?  Do you question the frog girl, continue on your way, or teach her a lesson?");
 	menu();
 	addButton(0,"Question",questDatFrogGirl);
 	addButton(1,"TeachLesson",teachDatFrogALesson);

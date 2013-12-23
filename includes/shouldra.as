@@ -130,7 +130,7 @@ public function shouldraGreeting():void {
 		
 		//(option to skip the fight and just get to the sex, have to have beaten her five times beforehand [add this to the 3-encounter text when it happens, basically])
 		if(flags[kFLAGS.TIMES_BEATEN_SHOULDRA] >= 3) {
-			outputText("\"<i>Or...maybe not?  Truth be told, I think you've proven your ability to pummel me enough.  Wanna just skip to the good part?</i>\"\n\n", false);
+			outputText("\"<i>Or... maybe not?  Truth be told, I think you've proven your ability to pummel me enough.  Wanna just skip to the good part?</i>\"\n\n", false);
 			//([if first time] 
 			if(flags[kFLAGS.TIMES_BEATEN_SHOULDRA] == 3) outputText("You can't say you saw that coming.  It seems she has offered to forego the fight in lieu of sexings.  ", false);
 			outputText("Would you like to accept her offer, or do you want to fight her regardless?", false);
