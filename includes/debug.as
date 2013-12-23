@@ -78,8 +78,65 @@ INITIATING MONKEY
 		doNext(newGameGo);   // not in a game, create a char randomly
 }
 
+
+
+public function debugPane():void
+{
+	outputText("<b>Debug information!</b>\n", true);
+
+	outputText("\nPossible flash sandboxing contexts:");
+	outputText("<ul>");
+	outputText("<li><b>\"localWithNetwork\"</b> means images <b><u>will not work</u></b>!</li>");
+	outputText("<li><b>\"localWithFile\"</b> means images can work.</li>");
+	outputText("<li><b>\"localTrusted\"</b> means images can work, and you've somehow managed to install this swf into a flash trusted directory. How did you manage that?</li>");
+	outputText("</ul>");
+	outputText("\nNote that you still need the proper folder structure to have functional images.");
+
+	outputText("\n\nCurrent Sandbox mode: <b>" + Security.sandboxType + "</b>");
+	outputText("\n<hr /> --------"); // HR Tag! WHY U NO WORK?
+
+	outputText("\nCurrently have " + images.getLoadedImageCount() + " images loaded into cache.");
+	
+
+
+	if (CoC_Settings.haltOnErrors)  // Using a static class so I can grab it from anywhere.
+		outputText("\nCurrently set to halt on all errors.");
+	else
+		outputText("\nParsing or description errors only generate warning message");
+
+	outputText("\n<hr /> --------"); // HR Tag! WHY U NO WORK?
+
+	outputText("\n\n<b>FUNCTIONALITY ON THIS PAGE IS IN ALPHA-RELEASE STATUS</b>\n");
+	outputText("<b>IF YOU DON'T KNOW WHAT YOU ARE DOING AND/OR HAVE UNSAVED GAME PROGRESS, DO NOT CLICK ANY BUTTON EXCEPT \"BACK\"</b>\n");
+
+	
+	outputText(images.showImage("monster-ceraph"));
+
+	menu();
+	addButton(0, "Event Tester", eventTestingPane);
+	addButton(1, "Test Input", eventTester);
+	addButton(5, "Parser Tests", doThatTestingThang);
+	addButton(6, "Halt on Errors", toggleHaltSettings);
+	addButton(3, "ChaosMonkey", monkeyStartConfirm)
+	addButton(9, "Back", mainMenu);
+}
+
+public function toggleHaltSettings():void
+{
+	//toggle debug
+	if(CoC_Settings.haltOnErrors)
+		CoC_Settings.haltOnErrors = false;
+	else
+		CoC_Settings.haltOnErrors = true;
+	debugPane();
+	return;
+}
+
+
+
+
 import flash.system.SecurityDomain;
-import flash.system.Security;;
+import flash.system.Security;
 
 public function doThatTestingThang():void
 {
@@ -270,7 +327,14 @@ public function doThatTestingThang():void
 \\\[if (hasCock = true) \\\[cock\\\] stiffening IFSTUFF \\\[if (hasVagina = true) \\\[vagina\\\] starting to burn with need\\\] IFSTUFFDONE\\\]\\\[if (isHerm = true) and \\\]\\\[if (hasVagina = true) \\\[vagina\\\] starting to burn with need\\\]   
 [if (hasCock = true) [cock] stiffening IFSTUFF [if (hasVagina = true) [vagina] starting to burn with need] IFSTUFFDONE][if (isHerm = true) and ][if (hasVagina = true) [vagina] starting to burn with need]
 
-	
+**FancyQuotes!**
+
+Convert '  
+'herp a derp'
+
+convert "  
+"derp a herp"
+
 	]]>, true, true);
 
 
@@ -278,59 +342,4 @@ public function doThatTestingThang():void
 	addButton(4, "Back", debugPane)
 
 }
-
-
-
-public function debugPane():void
-{
-	outputText("<b>Debug information!</b>\n", true);
-
-	outputText("\nPossible flash sandboxing contexts:");
-	outputText("<ul>");
-	outputText("<li><b>\"localWithNetwork\"</b> means images <b><u>will not work</u></b>!</li>");
-	outputText("<li><b>\"localWithFile\"</b> means images can work.</li>");
-	outputText("<li><b>\"localTrusted\"</b> means images can work, and you've somehow managed to install this swf into a flash trusted directory. How did you manage that?</li>");
-	outputText("</ul>");
-	outputText("\nNote that you still need the proper folder structure to have functional images.");
-
-	outputText("\n\nCurrent Sandbox mode: <b>" + Security.sandboxType + "</b>");
-	outputText("\n<hr /> ---------"); // HR Tag! WHY U NO WORK?
-
-	outputText("\nCurrently have " + images.getLoadedImageCount() + " images loaded into cache.");
-	
-
-
-	if (CoC_Settings.haltOnErrors)  // Using a static class so I can grab it from anywhere.
-		outputText("\nCurrently set to halt on all errors.");
-	else
-		outputText("\nParsing or description errors only generate warning message");
-
-	outputText("\n<hr /> ---------"); // HR Tag! WHY U NO WORK?
-
-	outputText("\n\n<b>FUNCTIONALITY ON THIS PAGE IS IN ALPHA-RELEASE STATUS</b>\n");
-	outputText("<b>IF YOU DON'T KNOW WHAT YOU ARE DOING AND/OR HAVE UNSAVED GAME PROGRESS, DO NOT CLICK ANY BUTTON EXCEPT \"BACK\"</b>\n");
-
-	
-	outputText(images.showImage("monster-ceraph"));
-
-	menu();
-	addButton(0, "Event Tester", eventTestingPane);
-	addButton(1, "Test Input", eventTester);
-	addButton(5, "Parser Tests", doThatTestingThang);
-	addButton(6, "Halt on Errors", toggleHaltSettings);
-	addButton(3, "ChaosMonkey", monkeyStartConfirm)
-	addButton(9, "Back", mainMenu);
-}
-
-public function toggleHaltSettings():void
-{
-	//toggle debug
-	if(CoC_Settings.haltOnErrors)
-		CoC_Settings.haltOnErrors = false;
-	else
-		CoC_Settings.haltOnErrors = true;
-	debugPane();
-	return;
-}
-
 

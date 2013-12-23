@@ -281,7 +281,7 @@ public function approachKamiTheChristmasRoo():void {
 		
 		outputText("\n\nThe kanga girl rises and walks into the bakery storage room, appearing again only seconds later with a medium-sized present in her hands.  You'd almost be curious about it, but an even more intriguing 'surprise' catches your eyes directly beneath it in the form of a massive, protruding and honestly, quite blatant, wet bulge that presses against her garments gloriously.  Apparently this waitress is packing a little something extra.");
 		outputText("\n\nShe places the present in your lap, then scoots backwards to await your response.  You notice her legs twitching agitatedly in anticipation, presumably from the lubricants dripping from between her well-formed thighs.  She's pretty damn aroused right now, by the looks of it.  You decide to open the present at once, opening the lid to reveal... a small, folded note.  You give the kangaroo girl one last glance before you thumb the little message open to see what the fuss is about.");
-		outputText("\n\nThe note reads: \"<i>\<i>Hey there " + player.mf("stud", "babe") + "\</i>\".  My name's Kami.  Wanna come out the back and fuck?  It can be my special present to you.</i></i>\"  She signed it with a winking smiley face");
+		outputText("\n\nThe note reads: \"<i>\<i>Hey there " + player.mf("stud", "babe") + "\</i>.  My name's Kami.  Wanna come out the back and fuck?  It can be my special present to you.</i></i>\"  She signed it with a winking smiley face");
 		if(silly()) outputText(" and found space to scrawl a little penis in one corner. Clever");
 		outputText(".");
 		outputText("\n\nWow, well, that's pretty blunt.  What should you do now?");
