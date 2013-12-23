@@ -246,7 +246,7 @@ public function doCombat(eventNum:Number):void
 			else {
 				//Tease text changes based on perks!
 				tempText="Tease";
-				choices("Attack", attacks, tempText, 5005, "Spells", temp2, "Items", 1000, "Run", 5003, "P. Specials",pSpecials,"M. Specials",5160,waitT,5071,"Fantasize",5086,"",0);
+				choices("Attack", attacks, tempText, 5005, "Spells", temp2, "Items", 1000, "Run", 5003, "P. Specials",pSpecials,"M. Specials",5160,waitT,5071,"Fantasize",5086,"Inspect",debug?5166:0);
 			}
 		}
 	}
@@ -3732,6 +3732,10 @@ public function doCombat(eventNum:Number):void
 	if(eventNum == 5165) {
 		tailWhipAttack();
 		return;
+	}
+	if (eventNum == 5166){
+		outputText(monster.generateDebugDescription(),true);
+		doNext(1);
 	}
 }
 //Fantasize

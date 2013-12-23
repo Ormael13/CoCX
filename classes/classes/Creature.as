@@ -58,7 +58,7 @@ package classes
 				
 		//Appearance Variables
 		//Gender 1M, 2F, 3H
-		public var gender:Number = GENDER_NONE;
+		public var gender:int = GENDER_NONE;
 		public var tallness:Number = 0;
 		
 		/*Hairtype
@@ -126,6 +126,7 @@ package classes
 		4 - Double draconic
 		5 - Antlers*/
 		public var hornType:Number = HORNS_NONE;
+		public var horns:Number = 0;
 
 		/*Wingtype
 		0 - none
@@ -234,7 +235,22 @@ package classes
 		public var nosePierced:Number = 0;
 		public var nosePShort:String = "";
 		public var nosePLong:String = "";
-		
+
+		//Head ornaments. Definitely need to convert away from hard coded types.
+		public var antennae:Number = ANTENNAE_NONE;
+
+		//Eyetype
+		public var eyeType:Number = EYES_HUMAN;
+
+		//TongueType
+		public var tongueType:Number = TONUGE_HUMAN;
+
+		//ArmType
+		public var armType:Number = ARM_TYPE_HUMAN;
+
+		//Gills
+		public var gills:Boolean = false;
+
 		//Sexual Stuff		
 		//MALE STUFF
 		//public var cocks:Array;

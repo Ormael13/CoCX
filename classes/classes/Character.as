@@ -49,13 +49,7 @@
 			
 			_femininity = value;
 		}
-		
-		//Eyetype
-		//0 - normal
-		//1 - spidah!
-		//2 - sandtrap!
-		public var eyeType:Number = 0;
-		
+
 		//BEARDS! Not used anywhere right now but WHO WANTS A BEARD?
 		public var beardLength:Number = 0;
 		public var beardStyle:Number = 0;
@@ -65,26 +59,6 @@
 		
 		//Body tone i.e. Lithe, stocky, etc
 		public var tone:Number = 0;
-		
-		//TongueType
-		//0 - normal
-		//1 - snakey
-		//2 - demon
-		//3 - dragon
-		public var tongueType:Number = 0;
-		
-		//Head ornaments. Definitely need to convert away from hard coded types.
-		public var antennae:Number = 0;
-		public var horns:Number = 0;
-		
-		//ArmType
-		//0 - normal
-		//1 - harpy feathered
-		//2 - SPIDA
-		public var armType:Number = 0;
-		
-		//Gills
-		public var gills:Boolean = false;
 		
 		//Preggos
 		//TODO: Document pregancy types. Both butt and normal. Mainly butts though.
