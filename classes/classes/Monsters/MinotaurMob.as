@@ -35,7 +35,7 @@ package classes.Monsters
 			var level:int = 11 + Math.round((mainClassPtr.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3)/2);
 			if(level > 14) level = 14;
 			init13Level(level,rand(15) + 45);
-			initX_Tail(TAIL_TYPE_SHARK);
+			initX_Tail(TAIL_TYPE_COW);
 			initX_Specials(5029);
 
 		}

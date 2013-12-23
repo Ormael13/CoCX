@@ -28,7 +28,7 @@ package classes.Monsters
 			init11Armor("thick fur");
 			init12Combat(700,50,0.33,Monster.TEMPERMENT_LUSTY_GRAPPLES);
 			init13Level(15,rand(5) + 5);
-			initX_Tail(TAIL_TYPE_SHARK);
+			initX_Tail(TAIL_TYPE_COW);
 			initX_Specials(5029);
 
 		}

@@ -40,7 +40,7 @@
 			init12Combat(0,this.ballSize * 3,hasAxe?0.84:0.87,TEMPERMENT_LUSTY_GRAPPLES);
 			init13Level(hasAxe?6:5,rand(5) + 5);
 			initX_Specials(5029);
-			initX_Tail(TAIL_TYPE_SHARK);
+			initX_Tail(TAIL_TYPE_COW);
 			//Extra ball description!
 			this.lust                                  = 20 + rand(this.ballSize*2);
 		}
