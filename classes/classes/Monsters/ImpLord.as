@@ -19,7 +19,7 @@ package classes.Monsters
 			// Not sure if I agree with this, I can imagine the little fuckers abusing the
 			// shit out of any potions they can get their hands on.
 			init02Male(new Cock(rand(2)+11,2.5,CockTypesEnum.DEMON),2,1,3,20);
-			init03BreastRows([0,0]);
+			init03BreastRows(0);
 			init04Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_NORMAL);
 			init05Body(rand(14) + 40,HIP_RATING_BOYISH,BUTT_RATING_TIGHT);
 			init06Skin("red");

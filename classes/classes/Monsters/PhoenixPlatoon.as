@@ -15,6 +15,7 @@ package classes.Monsters
 			init01Names("the ","phoenix platoon","phoenixmob","You are faced with a platoon of heavy infantry, all armed to the teeth and protected by chain vests and shields. They look like a cross between salamander and harpy, humanoid save for crimson wings, scaled feet, and long fiery tails. They stand in a tight-knit shield wall, each phoenix protecting herself and the warrior next to her with their tower-shield. Their scimitars cut great swaths through the room as they slowly advance upon you.",true);
 			init02Male(new Cock(),0,1,3);
 			init02Female(VAGINA_WETNESS_SLAVERING,VAGINA_LOOSENESS_LOOSE);
+			init03BreastRows("D");
 			init04Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_DRY);
 			init05Body(rand(8) + 70, HIP_RATING_AMPLE+2,BUTT_RATING_LARGE);
 			init06Skin("red");
@@ -24,8 +25,7 @@ package classes.Monsters
 			init10Weapon("spears","stab",20);
 			init11Armor("armor",20);
 			init12Combat(1000,20,.15,Monster.TEMPERMENT_LOVE_GRAPPLES);
-			init13Level(20,rand(25)+160);
-			this.XP += 50;
+			init13Level(20,rand(25)+160,50);
 			initX_Horns(HORNS_DEMON);
 			initX_Tail(TAIL_TYPE_DEMONIC);
 

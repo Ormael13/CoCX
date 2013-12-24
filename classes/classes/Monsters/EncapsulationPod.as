@@ -69,7 +69,7 @@
 			init01Names("the ", "pod", "pod", "");
 			setDescriptionForPlantPot();
 			init02Genderless();
-			init03BreastRows();
+			init03BreastRows([0,0]);
 			init04Ass();
 			init05Body(120,HIP_RATING_SLENDER,BUTT_RATING_BUTTLESS);
 			init06Skin("purple",SKIN_TYPE_PLAIN,"covering");
@@ -79,8 +79,7 @@
 			init10Weapon("","");
 			init11Armor("pod");
 			init12Combat(450,10,0,TEMPERMENT_RANDOM_GRAPPLES);
-			init13Level(12,1);
-			this.XP += 80;
+			init13Level(12,1,80);
 			initX_Specials(special1,special2,special3);
 		}
 

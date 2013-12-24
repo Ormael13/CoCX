@@ -14,9 +14,7 @@ package classes.Monsters
 			super(mainClassPtr);
 			init01Names("the ","harpy horde","harpymob","You are surrounded by a wing of particularly large and muscular harpies, perhaps a dozen of them in total.  All of them are clad in simple brown shifts that give them good camouflage in the mountains, and are using their talon-like claws as weapons against you. While not a great threat to a champion of your ability individually, a whole brood of them together is... something else entirely.",true);
 			init02Female(VAGINA_WETNESS_SLAVERING,VAGINA_LOOSENESS_GAPING_WIDE);
-			this.gender = 3;
-			this.cumMultiplier = 3;
-			this.ballSize = 1;
+			init03BreastRows("B");
 			init04Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_SLIME_DROOLING);
 			init05Body(rand(8) + 70,HIP_RATING_CURVY+2,BUTT_RATING_LARGE);
 			init06Skin("red");

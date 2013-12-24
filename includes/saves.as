@@ -741,8 +741,9 @@ public function openSave():void
 	if (!(this.monkey.run))
 	{
 		file = new FileReference();
-		file.browse();
 		file.addEventListener(Event.SELECT, onFileSelected);
+		file.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
+		file.browse();
 		//var fileObj : Object = readObjectFromStringBytes("");
 		//loadGameFile(fileObj);
 	}
@@ -751,8 +752,9 @@ public function openSave():void
 
 public function onFileSelected(evt:Event):void
 {
-	file.load();
 	file.addEventListener(Event.COMPLETE, onFileLoaded);
+	file.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
+	file.load();
 }
 
 public function onFileLoaded(evt:Event):void
@@ -761,7 +763,7 @@ public function onFileLoaded(evt:Event):void
 	loader = new URLLoader();
 	loader.dataFormat = URLLoaderDataFormat.BINARY;
 	loader.addEventListener(Event.COMPLETE, onDataLoaded);
-	loader.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler)
+	loader.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
 	try
 	{
 		var req:* = new URLRequest(tempFileRef.name);
@@ -776,6 +778,7 @@ public function onFileLoaded(evt:Event):void
 public function ioErrorHandler(e:IOErrorEvent):void
 {
 	outputText("<b>!</b> Save file not found, check that it is in the same directory as the CoC_" + ver + ".swf file.\r\rLoad from file is not available when playing directly from a website like furaffinity or fenoxo.com.", true);
+	doNext(30);
 }
 
 public function onDataLoaded(evt:Event):void
@@ -793,10 +796,12 @@ public function onDataLoaded(evt:Event):void
 	catch (rangeError:RangeError)
 	{
 		outputText("<b>!</b> File is either corrupted or not a valid save", true);
+		doNext(30);
 	}
 	catch (error:Error)
 	{
 		outputText("<b>!</b> Unhandled Exception", true);
+		doNext(30);
 	}
 	statScreenRefresh();
 	//eventParser(1);

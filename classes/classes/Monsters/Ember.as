@@ -21,7 +21,7 @@ package classes.Monsters
 				init02Genderless("she","her","her");
 			}
 			if(gender >= 2) {
-				init02Female(VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_LOOSE);
+				init02Female(VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_LOOSE,0,mainClassPtr.flags[kFLAGS.EMBER_PUSSY_FUCK_COUNT] == 0);
 			}
 			if(gender == 1 || gender == 3) {
 				init02Male(new Cock(16,2,CockTypesEnum.DRAGON),2,4,3);

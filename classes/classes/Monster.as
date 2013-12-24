@@ -158,7 +158,7 @@
 
 		protected function totalXP(playerLevel:Number=-1):Number
 		{
-			if (playerLevel == -1) return mainClassPtr.player.level;
+			if (playerLevel == -1) playerLevel = mainClassPtr.player.level;
 			//Nerf xp gains by 20% per level over.
 			var difference:Number = playerLevel - this.level;
 			//No bonuses for underlevel!
@@ -564,11 +564,11 @@
 		}
 
 
-		// also sets up XP=totalXP()
-		protected function init13Level(level:int,gems:int):void{
+		// also sets up XP=totalXP()+additionalXP
+		protected function init13Level(level:int,gems:int,additionalXP:int=0):void{
 			this.level = level;
 			this.gems = gems;
-			this.XP=totalXP();
+			this.XP=totalXP()+additionalXP;
 			skipInit(13);
 		}
 

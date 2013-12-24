@@ -5708,7 +5708,6 @@ public function startCombat(monsterNum:Number):void {
 	}
 	//LOAD GNOLL!
 	if(monsterNum == 32) {
-		plotFight = true;
 		monster = new Gnoll(this);
 	}
 	//LOAD AMILY!
@@ -5718,7 +5717,6 @@ public function startCombat(monsterNum:Number):void {
 	}
 	//LOAD GNOLL!
 	if(monsterNum == 34) {
-		plotFight = true;
 		monster = new GnollSpearThrower(this);
 	}
 	//LOAD IZMA!

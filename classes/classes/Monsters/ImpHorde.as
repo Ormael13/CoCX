@@ -20,7 +20,7 @@
 			super(mainClassPtr);
 			trace("ImpHorde Constructor!");
 			init01Names("the ","imp horde","impmob","Imps of all shapes and sizes fill the room around you, keeping you completely surrounded by their myriad forms.  You can see more than a few sporting disproportionate erections, and there's even some with exotic dog-dicks, horse-pricks, and the odd spiny cat-cock.  Escape is impossible, you'll have to fight or seduce your way out of this one!",true);
-			init02Male(new Cock(12,2));
+			init02Male(new Cock(12,2,CockTypesEnum.DEMON),2,1);
 			init03BreastRows(0);
 			init04Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,10);
 			init05Body(36,HIP_RATING_SLENDER,BUTT_RATING_TIGHT);
