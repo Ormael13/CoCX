@@ -20,7 +20,7 @@
 			super(mainClassPtr);
 			trace("Akbal Constructor!");
 			init01Names("", "Akbal", "akbal", "Akbal, 'God of the Terrestrial Fire', circles around you. His sleek yet muscular body is covered in tan fur, with dark spots that seem to dance around as you look upon them.  His mouth holds two ivory incisors that glint in the sparse sunlight as his lips tremble to the sound of an unending growl.  Each paw conceals lethal claws capable of shredding men and demons to ribbons.  His large and sickeningly alluring bright green eyes promise unbearable agony as you look upon them.");
-			init02Male([new Cock(15,2.5,CockTypesEnum.HUMAN)],2,4,6,400);
+			init02Male([new Cock(15,2.5,CockTypesEnum.DOG)],2,4,6,400);
 			init03BreastRows([0],[0],[0],[0]);
 			init04Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_NORMAL);
 			init05Body("4'",HIP_RATING_SLENDER,BUTT_RATING_TIGHT);

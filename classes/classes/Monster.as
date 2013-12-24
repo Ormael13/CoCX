@@ -564,11 +564,11 @@
 		}
 
 
-		// also sets up XP=totalXP()
-		protected function init13Level(level:int,gems:int):void{
+		// also sets up XP=totalXP()+additionalXP
+		protected function init13Level(level:int,gems:int,additionalXP:int=0):void{
 			this.level = level;
 			this.gems = gems;
-			this.XP=totalXP();
+			this.XP=totalXP()+additionalXP;
 			skipInit(13);
 		}
 

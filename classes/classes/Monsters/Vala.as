@@ -30,8 +30,7 @@ package classes.Monsters
 			var lust:Number = 30 + mainClassPtr.flags[kFLAGS.TIMES_PC_DEFEATED_VALA] * 10;
 			if(lust > 80) lust = 80;
 			init12Combat(350,lust,lustVuln,Monster.TEMPERMENT_RANDOM_GRAPPLES,fatigue);
-			init13Level(11,1);
-			this.XP += 50;
+			init13Level(11,1,50);
 			if(mainClassPtr.flags[kFLAGS.TIMES_PC_DEFEATED_VALA] > 0) this.XP = 5;
 			if(mainClassPtr.flags[kFLAGS.TIMES_PC_DEFEATED_VALA] > 2) this.XP = 1;
 			initX_Specials(special1,special2,special3);
