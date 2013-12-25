@@ -10,6 +10,11 @@ package classes.Monsters
 	public class Helspawn extends Monster
 	{
 
+		override public function doAI():void
+		{
+			mainClassPtr.helSpawnAI();
+		}
+
 		public function Helspawn(mainClassPtr:*)
 		{
 			super(mainClassPtr);

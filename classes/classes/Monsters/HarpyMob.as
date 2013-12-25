@@ -8,8 +8,13 @@ package classes.Monsters
 	 */
 	public class HarpyMob extends Monster 
 	{
-		
-		public function HarpyMob(mainClassPtr:*) 
+
+		override protected function performCombatAction():void
+		{
+			mainClassPtr.harpyHordeAI();
+		}
+
+		public function HarpyMob(mainClassPtr:*)
 		{
 			super(mainClassPtr);
 			init01Names("the ","harpy horde","harpymob","You are surrounded by a wing of particularly large and muscular harpies, perhaps a dozen of them in total.  All of them are clad in simple brown shifts that give them good camouflage in the mountains, and are using their talon-like claws as weapons against you. While not a great threat to a champion of your ability individually, a whole brood of them together is... something else entirely.",true);

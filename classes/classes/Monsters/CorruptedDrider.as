@@ -11,6 +11,12 @@ package classes.Monsters
 	 */
 	public class CorruptedDrider extends Monster
 	{
+
+		override protected function performCombatAction():void
+		{
+			mainClassPtr.driderAI();
+		}
+
 		public function CorruptedDrider(mainClassPtr:*)
 		{
 			super(mainClassPtr);

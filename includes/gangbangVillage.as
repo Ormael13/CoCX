@@ -217,7 +217,7 @@ public function fightZeDemons(sacrifice:Boolean = true):void {
 	//Fight leads to the Horde Fight
 	//When acting as sacrifice, Item button is disabled; Fight, Run, and Phys Special buttons are disabled unless PC has str >= 80; Run is furthermore prevented entirely if PC is non-winged; outputs text: \"<i>You'd like to run, but you can't scale the walls of the pit with so many demonic hands pulling you down!</i>\"
 	//PC's weapon is temporarily set to fists and armor to comfortable clothes during a Horde Fight if he triggered it in response to a sacrifice request, but not if triggered through volunteering to guard the pit later once the village is unlocked
-	startCombat(7);
+	startCombat(new LustyDemons(this));
 	if(sacrifice) {
 		//Remove weapon
 		player.createStatusAffect("Disarmed",0,0,0,0);
@@ -234,16 +234,6 @@ public function fightZeDemons(sacrifice:Boolean = true):void {
 			if(!player.canFly()) monster.createStatusAffect("Run Disabled",0,0,0,0);
 		}
 	}
-	monster.createStatusAffect("Vapula",0,0,0,0);
-	monster.short = "lusty demons";
-	monster.long = "You're facing a group of thirty demons of various kinds.  Imps, incubi and succubi of all sizes and colors are encircling you, doing their best to show their genitals or their gigantic rows of breasts, often both.  You can see an impressive number of towering cocks, drooling pussies, and jiggling tits wiggle around as they move.  Most of the genitalia are monstrous, ridiculously disproportionate to the actual demons sporting them - to say nothing of the imps!  Some of the succubi are winking at you, blowing invisible kisses as they dance in circles around your pole.  Among them, you can easily spot the tallest demoness of the horde, Vapula; her perfect purple-skinned body, big perky boobs, luscious buttocks, fleshy lips, and seductive stare draw your attention like a magnet.  She's sporting a pair of magnificent wings and her abundant hair gives her face a fierce, lion-like appearance.  While her eyes ravage you with an insatiable hunger, she gives orders with the assurance of a well-established dominatrix.";
-	//6 attacks: 5 from demons (10 damage each), 1 from Vapula (80 damage), 200 gems, 200 xp, 700 hp*/
-	monster.bonusHP = 680;
-	monster.lustVuln = .3;
-	monster.HP = eMaxHP();
-	monster.gems = 150 + rand(100);
-	monster.level = 14;
-	monster.XP = totalXP();
 	eventParser(1);
 }
 
@@ -788,7 +778,7 @@ public function desperateVillages():void {
 public function fightZeVillagers():void {
 	clearOutput();
 	//You are fighting the villagers (level 14):
-	startCombat(52);
+	startCombat(new Farmers(this));
 	monster.createStatusAffect("Generic Run Disabled",0,0,0,0);
 	eventParser(1);
 	//~500 HP, 6 different attacks at 20 hp, can't run, 100% lust resistance (can't arouse), ~200 xp

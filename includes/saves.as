@@ -32,7 +32,7 @@ public function loadSaveDisplay(slot:String, slotName:String):String
 	var holding:String = "";
 	//Initialize the save file
 	var saveFile:* = SharedObject.getLocal(slot, "/");
-	
+	//trace(slot+".data="+(function(x){var z=[];for (var i in x){z.push(i);}return z})(saveFile.data).join(","));
 	var pfileHolding:Creature;
 	if (saveFile.data.exists)
 	{

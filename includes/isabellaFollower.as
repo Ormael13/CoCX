@@ -856,7 +856,7 @@ public function sparring(type:int = 1):void {
 	}
 	outputText("Isabella lifts her shield and raps her knuckles against the solid steel, making a loud, gong-like sound that carries for some distance.  You raise your " + player.weaponName + " and prepare to fight.  It's on!", false);
 	if(type == 1) outputText("  The knowledge that you're playing for keeps makes your heart beat faster.", false);
-	startCombat(36);
+	startCombat(new Izabella(this));
 	monster.createStatusAffect("sparring",type,0,0,0);
 	//No gems.
 	monster.gems = 0;

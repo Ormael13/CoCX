@@ -8,8 +8,13 @@ package classes.Monsters
 	 */
 	public class SandWitchMob extends Monster 
 	{
-		
-		public function SandWitchMob(mainClassPtr:*) 
+
+		override protected function performCombatAction():void
+		{
+			mainClassPtr.sandWitchMobAI();
+		}
+
+		public function SandWitchMob(mainClassPtr:*)
 		{
 			super(mainClassPtr);
 			init01Names("the ","sand witches","sandwitchmob","You are surrounded by a veritable tribe of sand witches.  Like the ones that roam the sands, they have simple robes, blond hair, and four big breasts that push at the concealing cloth immodestly.  Glowering at you hatefully, the pack of female spellcasters readies itself to drag you down with sheer numbers.",true);

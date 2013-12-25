@@ -8,8 +8,13 @@ package classes.Monsters
 	 */
 	public class Amily extends Monster 
 	{
-		
-		public function Amily(mainClassPtr:*) 
+
+		override protected function performCombatAction():void
+		{
+			mainClassPtr.amilyAI();
+		}
+
+		public function Amily(mainClassPtr:*)
 		{
 			super(mainClassPtr);
 			init01Names("", "Amily", "amily", "You are currently fighting Amily. The mouse-morph is dressed in rags and glares at you in rage, knife in hand. She keeps herself close to the ground, ensuring she can quickly close the distance between you two or run away.");

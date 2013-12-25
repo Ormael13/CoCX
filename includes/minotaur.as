@@ -515,7 +515,7 @@ public function getRapedByMinotaur(autoRape:Boolean = false):void {
 		if (rand(30) + player.inte / 5 > 18)
 		{
 			outputText("You spot a shadow moving and spin around to see a minotaur lumbering after you from the back of the cave!", false);
-			startCombat(4);
+			startCombat(new Minotaur(this, monster.hairColor));
 			return;
 		}
 		
@@ -536,7 +536,7 @@ public function getRapedByMinotaur(autoRape:Boolean = false):void {
 		if (rand(20) + player.str / 3 > 18)
 		{
 			outputText("\n\nYou twist around using the additional lubrication and squirm free!  Rolling away, you come up in a crouch, ready to fight!", false);
-			startCombat(4);
+			startCombat(new Minotaur(this, monster.hairColor));
 			return;
 		}
 	

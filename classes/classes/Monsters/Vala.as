@@ -9,8 +9,13 @@ package classes.Monsters
 	 */
 	public class Vala extends Monster 
 	{
-		
-		public function Vala(mainClassPtr:*) 
+
+		override protected function performCombatAction():void
+		{
+			mainClassPtr.valaAI();
+		}
+
+		public function Vala(mainClassPtr:*)
 		{
 			super(mainClassPtr);
 			init01Names("", "Vala", "vala", "While the fey girl is whip-thin, her breasts are disproportionately huge. They'd be at least a DD-cup on a normal human, but for her height and body type, they're practically as large as her head. They jiggle at her slow, uneven breathing, tiny drops of milk bubbling at her nipples with every heartbeat.  She seems fixated on mating with you, and won't take no for an answer.");

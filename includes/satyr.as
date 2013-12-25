@@ -126,7 +126,7 @@ public function satyrEncounter(location:int = 0):void {
 		if(location == 0) outputText("grassy plains");
 		else outputText("sodden expanse of the swamp");
 		outputText(", you hear lewd bellowings and drunken curses.  From out of the expanse of green comes a humanoid figure with a set of goat-like horns curling from his head.  Seeing you, he lets out a randy bleat and charges, naked erection jabbing before him!");
-		startCombat(56);
+		startCombat(new Satyr(this));
 	}
 	//Non-aggressive Encounter (Z)
 	//Happens in either the plains or swamp
@@ -219,7 +219,7 @@ public function leavePartySatyr():void {
 	
 	outputText("\n\nThere is a sudden loud, indignant bleat from behind you, and you hear something suddenly charging clumsily forward.  Though you only realise this when something slams into your back, knocking you to the ground.  When you roll around, you find the satyr standing over you, face contorted in fury.  \"<i>Nobody leaves me until I'm done with them!</i>\" he roars, and attacks you again!\n\n");
 	
-	startCombat(56);
+	startCombat(new Satyr(this));
 	doNext(1);
 	//proc first attack;
 	satyrCharge();

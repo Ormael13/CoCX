@@ -12,9 +12,14 @@
 
 	public class Harpy extends Monster
 	{
-		
 
-		public function Harpy(mainClassPtr:*) 
+
+		override protected function performCombatAction():void
+		{
+			mainClassPtr.harpyAI();
+		}
+
+		public function Harpy(mainClassPtr:*)
 		{
 			super(mainClassPtr);
 			trace("Harpy Constructor!");

@@ -1441,7 +1441,7 @@ public function noogaisNippleRape():void {
 public function impLordEncounter():void {
 	clearOutput();
 	outputText("A large corrupted imp crosses your path, he flashes a cruel smile your way.  No way around it, you ready your " + player.weaponName + " for the fight.");
-	startCombat(64);
+	startCombat(new ImpLord(this));
 	doNext(1);
 }
 

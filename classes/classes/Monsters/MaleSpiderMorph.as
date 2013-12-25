@@ -9,8 +9,14 @@ package classes.Monsters
 	 */
 	public class MaleSpiderMorph extends Monster 
 	{
-		
-		public function MaleSpiderMorph(mainClassPtr:*) 
+
+
+		override protected function performCombatAction():void
+		{
+			mainClassPtr.spiderAI();
+		}
+
+		public function MaleSpiderMorph(mainClassPtr:*)
 		{
 			super(mainClassPtr);
 			init01Names("the ", "male spider-morph", "malespidermorph", "The male spider-morph is completely nude, save for his thigh-high stockings and forearm-length gloves, which upon closer inspection, appear to be actually be part of his body - his exoskeleton.  His exposed skin is pale as the full moon, save for the dusk of his nipples and a patch of jet-black that spreads out over his groin, glossing the male's foreskinned cock and dangling sack in glistening ebon.  His ass is small but well-rounded, with a weighty spider-abdomen hanging from just above.  The spider-man is currently eyeing you with a strange expression and his fangs bared.");

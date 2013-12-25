@@ -13,9 +13,14 @@
 
 	public class Ceraph extends Monster
 	{
-		
 
-		public function Ceraph(mainClassPtr:*) 
+		override protected function performCombatAction():void
+		{
+			//Ceraph has special AI in ceraph.as
+			mainClassPtr.ceraphAI();
+		}
+
+		public function Ceraph(mainClassPtr:*)
 		{
 			super(mainClassPtr);
 			trace("Ceraph Constructor!");

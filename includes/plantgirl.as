@@ -169,7 +169,7 @@ public function declinePlantSmex():void {
 	//(Decline 1.2; apathetic to your wishes: 
 	outputText("\n\nRaising her head, she spins around and glares at you. Tears streaming down her now angered face as she starts toward you.  It's clear she's not taking no for an answer, and you twist and wiggle against her vines, using her momentary lapse in concentration to your advantage. Before she can direct her upset mind back to the vines, you manage to break free. Screaming in fury, she raises an arm back and winds up to deliver a lash of her \"whip\".  Rolling to the side, you dodge the attack and gain some distance between yourself and the plant creature.  Readying your [weapon], you assume a defensive stance and prepare for battle.");
 	//(Leads to Fight 1.0)
-	startCombat(9999);
+	startCombat(monster);// TODO create PlantGirl
 }
 
 //[Seriously, get lost!, or GL 1.0]
@@ -177,7 +177,7 @@ public function seriouslyGetLostPlantLady():void {
 	clearOutput();
 	outputText("Going in for a pseudo-kiss, the plant woman closes her eyes to relish the moment when her lips press against yours; a mistake that she will regret later as you buck your head back and smash into her leafy skull. Reeling from the sudden and painful blow, the plant woman groans and staggers dizzily to the ground. The vines that hold you lose their grip, and summoning your strength, you rip free of them at last. Cautiously, you back away from the creature and put some distance between you two. Aggression washes over her slumped form and she rises to her feet, sappy blood running down her face as she furiously glares at you. She takes a step towards you and arches her right arm  over her left shoulder, protruding a vine from her wrist and tensing it up into a whip. It's on!");
 	//(proceeds to Fight 1.0, with the plant woman having 290-270 HP instead of 300, depending on the PC having horns and the like).
-	startCombat(9999);
+	startCombat(monster);// TODO create PlantGirl
 	monster.HP -= 20;
 	if(player.horns > 0 && player.hornType > HORNS_NONE) monster.HP -= 15;
 	doNext(1);
@@ -245,7 +245,7 @@ public function escapeFromPlantWomanAndDeclineSex():void {
 		else outputText("gallop");
 		outputText(" out of the way.  She's misses, but it's obvious she will not take no for an answer. Looks like you have a fight on your hands...");
 		//(leads to Fight 1.0]
-		startCombat(9999);
+		startCombat(monster);// TODO create PlantGirl
 		doNext(1);
 	}
 }

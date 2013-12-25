@@ -75,7 +75,7 @@ public function doSystem(eventNo:Number):void {
 	}
 	if(eventNo == 1) {
 		mainView.nameBox.visible = false;
-		if(gameState == 1) {
+		if(gameState == 1 || gameState == 2) {
 			menuLoc = 0;
 			eventParser(5000);
 			return;

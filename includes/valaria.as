@@ -32,7 +32,7 @@ public function valeriaSpar():void {
 	outputText("\n\n\"<i>Hey, that'd be great, partner. Gotta keep our skills sharp if we wanna have a chance against the demons, after all! Let's do it.</i>\"");
 	outputText("\n\nYou take Valeria out to the fringe of camp and ready your [weapon] as she forms a gooey greatsword in her hands.");
 	//(Play normal combat scenes, with EXP rewards. No rape options, however; use the following outtros:)
-	startCombat(47);
+	startCombat(new GooArmor(this));
 	monster.createStatusAffect("spar",0,0,0,0);
 	monster.gems = 0;
 	doNext(1);

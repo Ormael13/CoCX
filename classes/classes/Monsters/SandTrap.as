@@ -10,8 +10,15 @@ package classes.Monsters
 	 */
 	public class SandTrap extends Monster 
 	{
-		
-		public function SandTrap(mainClassPtr:*) 
+
+		override protected function performCombatAction():void
+		{
+			if (hasStatusAffect("level") >= 0) {
+				mainClassPtr.sandTrapAI();
+			} else super.performCombatAction();
+		}
+
+		public function SandTrap(mainClassPtr:*)
 		{
 			super(mainClassPtr);
 			//1/3 have fertilized eggs!

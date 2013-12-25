@@ -12,8 +12,13 @@ package classes.Monsters
 	 */
 	public class Kelt extends Monster 
 	{
-		
-		public function Kelt(mainClassPtr:*) 
+
+		override protected function performCombatAction():void
+		{
+			mainClassPtr.kellyAI();
+		}
+
+		public function Kelt(mainClassPtr:*)
 		{
 			super(mainClassPtr);
 			var breakLevel2:Boolean = mainClassPtr.flags[kFLAGS.KELT_BREAK_LEVEL] == 2;

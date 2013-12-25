@@ -13,9 +13,14 @@
 
 	public class ImpHorde extends Monster
 	{
-		
 
-		public function ImpHorde(mainClassPtr:*) 
+
+		override protected function performCombatAction():void
+		{
+			mainClassPtr.impGangAI();
+		}
+
+		public function ImpHorde(mainClassPtr:*)
 		{
 			super(mainClassPtr);
 			trace("ImpHorde Constructor!");

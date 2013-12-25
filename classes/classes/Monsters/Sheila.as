@@ -10,6 +10,12 @@ package classes.Monsters
 	public class Sheila extends Monster
 	{
 
+
+		override protected function performCombatAction():void
+		{
+			mainClassPtr.sheilaAI();
+		}
+
 		public function Sheila(mainClassPtr:*)
 		{
 			super(mainClassPtr);

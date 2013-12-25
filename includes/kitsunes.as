@@ -23,7 +23,7 @@ public function enterTheTrickster():void {
 	outputText("\"<i>Th-thank goodness!  Please, you must help me!</i>\"  she cries, darting around to take shelter behind you.  \"<i>I was out picking wild berries, and, and...  the wretched, terrible little things attacked me!</i>\"\n\n");
 	outputText("You are about to question her, but are interrupted as an imp flies out of the thicket, growling and clawing at you menacingly.  At least...  clearly it's <i>trying</i> to be menacing.  The melodramatic display comes off as more hilarious than anything, but the woman cowering behind you obviously feels threatened, so you might as well deal with the pest.");
 	// -> Standard Imp Battle
-	startCombat(1);
+	startCombat(new Imp(this));
 	monster.createStatusAffect("Kitsune Fight",0,0,0,0);
 	doNext(1);
 	flags[kFLAGS.MET_KITSUNES]++;
@@ -688,7 +688,7 @@ public function kitSuneMansionBadEndII():void {
 public function fightSomeKitsunes():void {
 	clearOutput();
 	outputText("Something just doesn't sit right with you about this woman, and you cautiously raise your " + player.weaponName + ", watching her carefully.\n\n");
-	startCombat(57);
+	startCombat(new Kitsune(this, monster.hairColor));// TODO refactor
 	kitsuneSprite();
 	//Blonde
 	if(monster.hairColor == "blonde") outputText("\"<i>Ah, so we're going to play like that, are we?</i>\"  she says with a grin, making a small clawing motion in the air.  \"<i>Very well my darling, if that's how you want it, but I won't be taking it easy on you just because you're cute~.</i>\"");

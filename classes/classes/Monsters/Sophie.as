@@ -12,9 +12,15 @@
 
 	public class Sophie extends Monster
 	{
-		
 
-		public function Sophie(mainClassPtr:*) 
+
+		override protected function performCombatAction():void
+		{
+			//Sophie has special AI in harpySophie.as
+			mainClassPtr.sophieAI();
+		}
+
+		public function Sophie(mainClassPtr:*)
 		{
 			super(mainClassPtr);
 			trace("Sophie Constructor!");

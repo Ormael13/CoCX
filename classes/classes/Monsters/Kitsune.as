@@ -12,6 +12,11 @@ package classes.Monsters
 	public class Kitsune extends Monster
 	{
 
+		override protected function performCombatAction():void
+		{
+			mainClassPtr.kitsuneAI();
+		}
+
 		public function Kitsune(mainClassPtr:*, hairColor:String)
 		{
 			super(mainClassPtr);

@@ -8,8 +8,20 @@ package classes.Monsters
 	 */
 	public class Kiha extends Monster 
 	{
-		
-		public function Kiha(mainClassPtr:*) 
+
+		override protected function handleFear():Boolean
+		{
+			removeStatusAffect("Fear");
+			mainClassPtr.outputText("Kiha shudders for a moment, then looks your way with a clear head.  \"<i>Fear was the first thing the demons taught us to overcome.  Do you think it would stay my blade?</i>\"\n", false);
+			return true;
+		}
+
+		override protected function performCombatAction():void
+		{
+			mainClassPtr.kihaAI();
+		}
+
+		public function Kiha(mainClassPtr:*)
 		{
 			super(mainClassPtr);
 			init01Names("", "Kiha", "kiha", "Kiha is standing across from you, holding a double-bladed axe that's nearly as big as she is.  She's six feet tall, and her leathery wings span nearly twelve feet extended.  Her eyes are pure crimson, save for a black slit in the center, and a pair of thick draconic horns sprout from her forehead, arcing over her ruby-colored hair to point behind her.  Dim red scales cover her arms, legs, back, and strong-looking tail, providing what protection they might  to large areas of her body.  The few glimpses of exposed skin are dark, almost chocolate in color, broken only by a few stray scales on the underside of her bosom and on her cheekbones.  Her vagina constantly glistens with moisture, regardless of her state of arousal.  Despite her nudity, Kiha stands with the confidence and poise of a trained fighter.");

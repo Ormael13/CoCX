@@ -9,8 +9,13 @@ package classes.Monsters
 	 */
 	public class Hel extends Monster 
 	{
-		
-		public function Hel(mainClassPtr:*) 
+
+		override protected function performCombatAction():void
+		{
+			mainClassPtr.helAI();
+		}
+
+		public function Hel(mainClassPtr:*)
 		{
 			super(mainClassPtr);
 			var met:Boolean = mainClassPtr.flags[kFLAGS.HEL_TALKED_ABOUT_HER] == 1;

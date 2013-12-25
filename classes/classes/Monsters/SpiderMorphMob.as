@@ -10,8 +10,13 @@ package classes.Monsters
 	 */
 	public class SpiderMorphMob extends Monster 
 	{
-		
-		public function SpiderMorphMob(mainClassPtr:*) 
+
+		override protected function performCombatAction():void
+		{
+			mainClassPtr.spiderHordeAI();
+		}
+
+		public function SpiderMorphMob(mainClassPtr:*)
 		{
 			super(mainClassPtr);
 			init01Names("the ","mob of spiders-morphs","spidermorphmob","You are fighting a horde of spider-morphs!  A group of some two-dozen spiders and driders approaches you, all baring their teeth.  A pair of large, powerful driders lead the group, their corrupt, lusty stares sending shivers up your spine.  While "+(mainClassPtr.player.level <= 13?"you'd never face such a large horde on your own":"you could probably handle them alone")+", you have a powerful ally in this fight - the dragoness Kiha!",true);

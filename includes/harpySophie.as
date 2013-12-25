@@ -58,7 +58,7 @@ public function meetSophieRepeat():void {
 	if(flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] > 0) {
 		outputText("During your exploration of the mountains you wind up passing close to the harpy nests again.  Uh oh.  There's a constant, irritating buzz in the background that makes it hard to focus on what you're doing.  You crest a ledge and find yourself back on the edge of Sophie's nest.  Shit.  She glowers at you and raises one of her talons.  It's a fight!\n\n", false);
 		doNext(1);
-		startCombat(26);
+		startCombat(new Sophie(this));
 		return;
 	}
 	//(Has dick)
@@ -136,7 +136,7 @@ public function consensualSexSelector():void {
 
 public function fightSophie():void {
 	sophieSprite();
-	startCombat(26);
+	startCombat(new Sophie(this));
 	flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] += rand(24);
 	eventParser(1);
 }
@@ -152,7 +152,7 @@ public function repeatBreastFeeding():void {
 //Normal Harpy Fight
 public function PCIgnoresSophieAndHarpyIsFought():void {
 	outputText("A harpy wings out of the sky and attacks!", true);
-	startCombat(25);
+	startCombat(new Harpy(this));
 	spriteSelect(26);
 	doNext(1);
 }
@@ -230,7 +230,7 @@ public function FirstTimeSophieForceSex():void {
 	
 	outputText("Sophie's large eyes widen in surprise at your statement, and her wings unfold as she counters, \"<i>Then you'll have to hope you can handle me.</i>\"  Her foot comes up warningly.\n\n", false);
 	outputText("It's going to be a fight!", false);
-	startCombat(26);
+	startCombat(new Sophie(this));
 	doNext(1);
 }
 

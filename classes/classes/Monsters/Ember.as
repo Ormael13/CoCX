@@ -11,8 +11,13 @@ package classes.Monsters
 	 */
 	public class Ember extends Monster 
 	{
-		
-		public function Ember(mainClassPtr:*) 
+
+		override protected function performCombatAction():void
+		{
+			mainClassPtr.emberAI();
+		}
+
+		public function Ember(mainClassPtr:*)
 		{
 			super(mainClassPtr);
 			init01Names(" ", "Ember", "ember", "You are currently 'battling' Ember, the dragon, in a playfight.  At least, that was the intention.  The way " + mainClassPtr.emberMF("he", "she") + " lashes " + mainClassPtr.emberMF("his", "her") + " tail along the ground, with claws spread and teeth bared ferociously, makes you wonder.");

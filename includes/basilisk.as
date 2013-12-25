@@ -25,7 +25,7 @@ public function basiliskGreeting():void {
 		//(spd loss)
 		basiliskSpeed(5);
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00276]++;
-		startCombat(39);
+		startCombat(new Basilisk(this));
 	}
 	//Standard encounter:
 	else {
@@ -33,7 +33,7 @@ public function basiliskGreeting():void {
 
 		outputText("You look away in the nick of time, and ready yourself to fight as the basilisk slides from its hiding place and advances upon you, its deadly eyes and sharp claws glinting coldly in the sunlight.\n\n", false);
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00276]++;
-		startCombat(39);
+		startCombat(new Basilisk(this));
 	}
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00276]++;
 	spriteSelect(75);

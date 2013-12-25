@@ -213,7 +213,7 @@ public function fSpiderMorphGreeting():void {
 
 //Selecting fight starts combat and eventParsers to 1 to display the combat menu and enemy description.
 public function fightFSpiderMorph():void {
-	startCombat(37);
+	startCombat(new FemaleSpiderMorph(this));
 	spriteSelect(73);
 	eventParser(1);
 }
@@ -228,7 +228,7 @@ public function runFromFSpiderMorph():void {
 	}
 	//The other 50% will start combat and then immediately attempt to run.
 	else {
-		startCombat(37);
+		startCombat(new FemaleSpiderMorph(this));
 		eventParser(5003);
 	}
 }
@@ -263,13 +263,13 @@ public function talkToFSpiderMorph():void {
 	else {
 		outputText("You hold your hands up non-threateningly and ask the spider-girl why she's trying to sneak up on you.\n\n", false);
 		//(Start combat and immediately call a web attack)
-		startCombat(37);
+		startCombat(new FemaleSpiderMorph(this));
 		spiderMorphWebAttack();
 	}
 }
 //*OPTION 1 Yes - Let Her Fuck You
 public function voluntaryFemaleSpiderMorphRapesYou():void {
-	startCombat(37);
+	startCombat(new FemaleSpiderMorph(this));
 	spriteSelect(73);
 	gameState = 0;
 	loseToFemaleSpiderMorph();

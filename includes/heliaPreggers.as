@@ -1358,7 +1358,7 @@ public function sparHelspawn():void {
 	//If Sluttymander: 
 	if(flags[kFLAGS.HELSPAWN_PERSONALITY] >= 50) outputText("\n\n\"<i>Ready to get your shit kicked in, old " + player.mf("man","lady") + "?</i>\" she grins, drawing her weapon.");
 	else outputText("\n\n\"<i>Just go easy on me, okay?  I'm still new at this...</i>\" she says, stepping back as she draws her weapon.");
-	startCombat(69);
+	startCombat(new Helspawn(this));
 	doNext(1);
 }
 

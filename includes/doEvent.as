@@ -1,3 +1,5 @@
+import classes.Monsters.MaleSpiderMorph;
+
 //Event No's 2000 4999 use this function
 
 public function doEvent(eventNo:Number):void
@@ -115,7 +117,7 @@ public function doEvent(eventNo:Number):void
 			else
 				outputText("turns crimson", false);
 			outputText(" as you yank your " + player.armorName + " back into place.  You're in charge here, not some possessed appendage!   Exgartuan yells something snide, but it's muffled too much to understand.  You look up in time to sidestep an attack from the Sand Witch.  It looks like you'll have to fight her!", false);
-			startCombat(2);
+			startCombat(new SandWitch(this));
 			return;
 		}
 		else
@@ -206,7 +208,7 @@ public function doEvent(eventNo:Number):void
 	{
 		spriteSelect(50);
 		outputText("With an inarticulate scream of rage, the Sand Witch attacks!", true);
-		startCombat(2);
+		startCombat(new SandWitch(this));
 		return;
 	}
 	//Minotaur shows up...rape?
@@ -305,7 +307,7 @@ public function doEvent(eventNo:Number):void
 			simpleChoices("Fight", 2080, "Submit", 5074, "", 0, "", 0, "", 0);
 			return;
 		}
-		startCombat(14);
+		startCombat(new TentacleBeast(this));
 		return;
 	}
 	//Tentacle continuation!
@@ -1435,7 +1437,7 @@ public function doEvent(eventNo:Number):void
 	{
 		outputText("You clear your head and resolve to defeat the monstrous bee-woman.", true);
 		spriteSelect(6);
-		startCombat(5);
+		startCombat(new BeeGirl(this));
 	}
 	//Level 3 with clear previous text
 	//Encounter bee girl level 3 - get raeped.
@@ -1543,7 +1545,7 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 2080)
 	{
-		startCombat(14);
+		startCombat(new TentacleBeast(this));
 		eventParser(1);
 		return;
 	}
@@ -2164,7 +2166,7 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 2203)
 	{
 		outputText("Tamani adopts a fighting pose and says, \"<i>If I have to I'll beat my children out of you!</b>\"", true);
-		startCombat(17);
+		startCombat(new Tamani(this));
 		return;
 	}
 	else if (eventNo == 2211)
@@ -3524,7 +3526,7 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 2997)
 	{
-		startCombat(38);
+		startCombat(new MaleSpiderMorph(this));
 		eventParser(1);
 		spriteSelect(74);
 		return;

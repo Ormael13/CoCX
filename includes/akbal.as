@@ -1,4 +1,6 @@
-﻿//  AKBAL_TIMES_BITCHED:int = 902;
+﻿import classes.Monsters.Akbal;
+
+//  AKBAL_TIMES_BITCHED:int = 902;
 
 //  AKBAL_BITCH_Q:int = 903;
 
@@ -115,7 +117,7 @@ public function startuAkabalFightomon():void
 	outputText("", true);
 	outputText("You ready your " + player.weaponName + " and prepare to battle the demon jaguar.", false);
 	//[battle ensues]
-	startCombat(22);
+	startCombat(new Akbal(this));;
 	flags[kFLAGS.PLAYER_RESISTED_AKBAL]++;
 }
 
@@ -1421,7 +1423,7 @@ public function takeAdvantageOfAkbitch():void
 	{
 		outputText("\n\nA gout of green fire roars into existence.  The suddenly intense heat causes you to flinch away from the inferno nearly encasing your [face].  The Jaguar demon slips your grasp, and when you look up, another green fireball is coming your way.  Looks like you have a fight on your hands.\n\n");
 		//(Enter battle with clearscreen and fireball attack.)
-		startCombat(22);
+		startCombat(new Akbal(this));;
 		akbalSpecial();
 		return;
 	}
@@ -1433,7 +1435,7 @@ public function takeAdvantageOfAkbitch():void
 	{
 		outputText("\n\nAkbal suddenly stops struggling and you hear someone shout your name.  As you look away Akbal rolls from beneath you.  A blast of terrestrial ignites the vines and he lunges at you, his claws extended.\n\n");
 		//(fight - clearscreen and enemyattack)
-		startCombat(22);
+		startCombat(new Akbal(this));;
 		akabalAttack();
 		return;
 	}

@@ -187,7 +187,7 @@ public function takeGooArmor4Realz():void {
 	outputText("You reach out to grab the armor, but as soon as your finger brushes the shiny surface, a human-like face appears in the helm!  You recoil as a daintily feminine and bright blue face takes shape out of nowhere, staring at you with eyes afire with rage.  More of the gooey substance that makes up the girl's face fills out the armor, yanking it off the racks on feet made of goop.");
 	outputText("\n\nQuietly, the armored goo-girl growls, \"<i>You dare to disturb my rest, mortal? Prepare yourself for my vengeance!</i>\"");
 	outputText("\n\nWhat the fuck!? Oh well, looks like she wants a fight!");
-	startCombat(47);
+	startCombat(new GooArmor(this));
 	doNext(1);
 }
 

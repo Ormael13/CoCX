@@ -3,7 +3,7 @@ public function gnollEncounter():void {
 	spriteSelect(11);
 	outputText("", true);
 	outputText("The sound of distant laughter comes across the plains, then seems to die off suddenly.  A moment later, a gnoll comes bounding from the nearest scrap of cover and barrels into you.  The monstrous thing giggles as it bounces back and forth before you, looking for an opening to exploit.", false);
-	startCombat(32);
+	startCombat(new Gnoll(this));
 }
 
 public function gnollAI():void {

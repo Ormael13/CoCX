@@ -10,7 +10,11 @@ package classes.Monsters
 	 */
 	public class Holli extends Monster
 	{
-		
+		override protected function performCombatAction():void
+		{
+			mainClassPtr.holliAI();
+		}
+
 		public function Holli(mainClassPtr:*)
 		{
 			super(mainClassPtr);

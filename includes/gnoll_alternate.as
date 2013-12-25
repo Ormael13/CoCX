@@ -41,7 +41,7 @@ public function gnoll2Encounter():void {
 
 		outputText("A growl snaps your eyes up to the gnoll's face, seeing black lips pulled back from ivory fangs.  Dark, dominant eyes pierce you as the hyena slowly starts to circle you.  She sniffs at the air, getting your scent, before squaring off with you.  Powerful muscles ripple under her fur as she prepares to attack.  You have clearly trespassed on her lands and this feral lady intends to punish you for it.", false);
 	}
-	startCombat(34);
+	startCombat(new GnollSpearThrower(this));
 }
 
 public function hyenaPhysicalAttack():void {

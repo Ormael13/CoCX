@@ -1,4 +1,6 @@
-﻿//Encountered via Boat (unless a new Under-Lake area is 
+﻿import classes.Monsters.Anemone;
+
+//Encountered via Boat (unless a new Under-Lake area is
 //unlocked)
 
 //NPC details (proto-codex): Giant, colorful freshwater 
@@ -67,7 +69,7 @@ public function mortalAnemoneeeeee():void {
 		outputText("The initial surprise subsides to wooly-headedness and a feeling of mild arousal as the stingers in her tentacles find exposed flesh.  In panic of drowning you pull free of the ropy mass and backpaddle away from the girl until your " + player.feet() + " reassuringly touch the shallows of the lakebed once again and you're far enough above water to be able to fight.\n\n", false);
 		
 		outputText("You are fighting an anemone!", false);
-		startCombat(29);
+		startCombat(new Anemone(this));
 	}
 	else {
 		flags[kFLAGS.TIMES_MET_ANEMONE]++;
@@ -75,7 +77,7 @@ public function mortalAnemoneeeeee():void {
 		outputText("As you unmoor the boat and cast off, you hear a soft bubbling sound coming from amidships.  You look around only to see several green tentacles slip over the saxboard and pull down suddenly, pitching the boat and sending you overside into the welcoming embrace of a grinning anemone!  She swims alongside and gives you several playful caresses as you struggle back toward shore, already woozy and aroused from the venomous contact.\n\n");
 		//(typical lust gain and temporary stat damage, start combat)
 		outputText("You are fighting an anemone!", false);
-		startCombat(29);
+		startCombat(new Anemone(this));
 	}
 	//(gain lust, temp lose spd/str)
 	stats(0,0,0,0,0,0,4,0);
@@ -594,7 +596,7 @@ public function minoCumForAnemonieeeeez():void {
 	else {
 		outputText("Oh, hell NO are you going to give that bottle away when you haven't even gotten your own fix yet! You raise your " + player.weaponName + " and advance on the girl with a wild look in your eyes. She shivers a bit at your expression and drops the bottle with a splash, then recovers her composure and backs up a few steps. You grab the floating bottle, and the rest of your stuff, quickly.", false);
 		//(gain lust, temp lose spd/str; if in withdrawal then proceed to fight, otherwise present choices 'Give' and 'Don't Give')
-		startCombat(29);
+		startCombat(new Anemone(this));
 		//(gain lust, temp lose spd/str)
 		stats(0,0,0,0,0,0,4,0);
 		applyVenom(1);	
@@ -609,7 +611,7 @@ public function dontGiveMino():void {
 	outputText("", true);
 	outputText("You look sternly at the blue girl and hold out your hand.  As she realizes you don't intend to let her have the bottle, her face changes to a half-pout, half-frown.  When you don't react, she throws the bottle at your feet and shouts, \"<i>Mean!</i>\"  You bend down to pick it, and the other items, up, and when you straighten back up, she looks quite angry and her tentacles are waving all over the place.  Uh-oh.  You raise your weapon as the anemone giggles sadistically and attacks!\n\n", false);
 	//(proceed to combat)
-	startCombat(29);
+	startCombat(new Anemone(this));
 	//(gain lust, temp lose spd/str)
 	stats(0,0,0,0,0,0,4,0);
 	applyVenom(1);	

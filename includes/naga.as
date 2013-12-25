@@ -134,7 +134,7 @@ public function nagaEncounter():void {
 		doNext(13);
 		return;
 	}
-	startCombat(21);
+	startCombat(new Naga(this));
 }
 
 //2a)  Ability -  Poison Bite - poisons player

@@ -550,7 +550,7 @@ public function sparWithHeliaFirebuttsAreHot():void {
 	outputText("Giving Hel a playful punch on the shoulder, you ask the salamander-girl if she'd be up for a little battle practice.");
 	outputText("\n\n<i>\"Oh?  Well, it's certainly been awhile since you and I fought out on the plains...  Alright, let's do it, [name]!  But heads up, I might just need to have my way with you after I push your face in the dirt!\"</i>");
 	outputText("\n\nYou ready your [weapon] and prepare for battle!");
-	startCombat(45);
+	startCombat(new Hel(this));
 	monster.createStatusAffect("sparring",0,0,0,0);
 	//No gems.
 	monster.XP = 1;

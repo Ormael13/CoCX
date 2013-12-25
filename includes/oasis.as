@@ -20,7 +20,7 @@ public function oasisRunAway():void {
 	}
 	else {
 		outputText("You scramble away from the demons, but too late. A swift demon with canine features tackles you to the ground.  Luckily he loses his grip as you tumble onto the sand and you slither free, stand up and wheel to face the host of leering demons which begin to advance with malicious intent.", true);
-		startCombat(7);		
+		startCombat(new DemonPack(this));
 		doNext(1);
 	}
 }
@@ -40,7 +40,7 @@ public function oasisTalkDecline():void {
 	outputText("You consider the invitation, but do your best to politely decline. The little giggle this produces in a small implike creature in the back of the group send chills down your spine and you turn to go, but as you do so you catch the eye of the leader. His grin has widened, as if he knows something that you do not. With a deliberate slowness he starts to chuckle, and your worst fears are confirmed when you hear the words 'Silly creature. The offer to feast is never denied. Take it alive and kicking.'\n\n", true);
 	//MORTAL KOMBAAAAAT
 	outputText("The demons begin to circle menacingly, and you can do nothing but prepare to defend yourself.", false);
-	startCombat(7);
+	startCombat(new DemonPack(this));
 	doNext(1);
 }
 public function oasisTalkAccept():void {

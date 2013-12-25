@@ -368,7 +368,7 @@ public function finalCeraphEncounterStartFight():void {
 	if(player.cor <= 50) outputText("you'll stop her devilish scheme", false);
 	else outputText("you'll be HER " + player.mf("master","mistress"), false);
 	outputText(".  She snarls and drops the harness, preparing to defend herself.  It looks like you've got a fight!", false);
-	startCombat(23);
+	startCombat(new Ceraph(this));
 }
 
 //[Yes] TO BAD END
@@ -440,7 +440,7 @@ public function ceraphFirstTimeDecline():void {
 	
 	outputText("Ceraph adopts a suggestive pose and tweaks her nipple, clearly more intent on turning you on than physically harming you.", false);
 	//FIGHTO
-	startCombat(23);
+	startCombat(new Ceraph(this));
 }
 
 //[Yes]
@@ -471,7 +471,7 @@ public function ceraphFirstTimeRepeat():void {
 	outputText("Ceraph saunters out of the bushes and gives you a disapproving look, \"<i><i>I tried this the easy way.  Now we're doing it the hard way.</i></i>\"\n\n", false);
 	
 	outputText("She uncurls a whip that lights aflame and says, \"<i><i>Time for your spanking!</i></i>\"\n\n", false);
-	startCombat(23);
+	startCombat(new Ceraph(this));
 }
 
 //[PC haz 1 piercing, trapped armor]
@@ -499,7 +499,7 @@ public function level3CeraphOfferNo():void {
 	outputText("You let Ceraph know that you refuse to let her violate your body and mind in such a way.  She shrugs nonchalantly and tugs on the crop, stretching it into a whip that bursts into flames.\n\n", false);
 	outputText("\"<i><i>Mortals always want to do things the hard way,</i></i>\" she sighs.\n\n", false);
 	outputText("<b>You've got a fight on your hands!</b>", false);
-	startCombat(23);
+	startCombat(new Ceraph(this));
 }
 	
 //[YES OH YES]
@@ -850,7 +850,7 @@ public function winRapeChoices():void {
 	var leave:Number = 5007;
 	if(gameState < 1 || gameState > 2) {
 		//Load ceraph and set up win conditions
-		startCombat(23);
+		startCombat(new Ceraph(this));
 		leave = 3041;
 		//Exit combat
 		gameState = 0;
@@ -1096,7 +1096,7 @@ public function friendlyNeighborhoodSpiderManCeraph():void {
 
 //[Fight] → Cue normal Ceraph fight
 public function startAFightWithCeraph():void {
-	startCombat(23);
+	startCombat(new Ceraph(this));
 	eventParser(1);
 	spriteSelect(7);
 }

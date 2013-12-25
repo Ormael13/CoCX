@@ -173,7 +173,7 @@ public function isabellaGreeting():void {
 	//CAMP MEETING – UMAD BRAH!?
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] > 0) {
 		outputText("You unintentionally wind up in Isabella's camp, and the cow-girl still seems pretty steamed at you.  She charges towards you, sliding her arm through the straps on her shield as she approaches.  It's a fight!", false);
-		startCombat(36);
+		startCombat(new Izabella(this));
 		if(!isabellaFollower()) isabellaAffection(-4);
 		spriteSelect(31);
 		return;
@@ -298,7 +298,7 @@ public function unwelcomeFightCowGal():void {
 	outputText("", true);
 	outputText("You ready your " + player.weaponName + " and adopt a fighting pose.  No cow is going to chase you away!", false);
 	if(!isabellaFollower()) isabellaAffection(-5);
-	startCombat(36);
+	startCombat(new Izabella(this));
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] += 72;
 	spriteSelect(31);
 	doNext(1);
@@ -308,7 +308,7 @@ public function fightIsabella():void {
 	outputText("", true);
 	if(!isabellaFollower()) isabellaAffection(-5);
 	outputText("You smirk at Isabella, and ready your " + player.weaponName + ", telling her you intend to have you way with her.  She turns beet red and grabs her shield, announcing, \"<i>You von't find me such easy prey, and I vill punish you for being so naughty!</b>\"", false);
-	startCombat(36);
+	startCombat(new Izabella(this));
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] += 72;
 	spriteSelect(31);
 	doNext(1);
@@ -321,7 +321,7 @@ public function tryToTalkDownAngryCow():void {
 	if(player.inte < 25) {
 		outputText("You open your mouth and tell her you won't be leaving until she understands that you aren't her enemy.  She snorts and taunts, \"<i>You zink Izabella vould fall for zuch trickery? HAH!</i>\"\n\n", false);
 		outputText("Your reply is blotted out by the thundering of her hooves as she lowers her shield and charges.\n\n", false);
-		startCombat(36);
+		startCombat(new Izabella(this));
 		if(!isabellaFollower()) isabellaAffection(-2);
 		enemyAI();
 		return;
@@ -331,7 +331,7 @@ public function tryToTalkDownAngryCow():void {
 		outputText("You start to try to explain your reasons for coming here, stuttering slightly in haste as the angry cow-girl looks to be paying less and less attention.  She snorts and lowers her shield, shouting, \"<i>You zink Izabella vould fall for zuch nonzense? HAH!  Prepare to face mein fury!</i>\"", false);
 		if(!isabellaFollower()) isabellaAffection(-2);
 		//(start combat)
-		startCombat(36);
+		startCombat(new Izabella(this));
 		return;
 	}
 	//(Int below 75) 
@@ -339,7 +339,7 @@ public function tryToTalkDownAngryCow():void {
 		outputText("You do your best to explain the situation, but even giving her such a concise, well-explained argument doesn't seem to help you.  She snorts dismissively and says, \"<i>Shut up.  I have no patience for ze mutants of this land.  Now, if you truly mean no harm, you'd best find a way out of mein clearing before Izabella's shield breaks your noggin!</i>\"", false);
 		if(!isabellaFollower()) isabellaAffection(-2);
 		//(Start combat)
-		startCombat(36);
+		startCombat(new Izabella(this));
 		return;
 	}
 	//(Else) 

@@ -10,6 +10,13 @@ package classes.Monsters
 	 */
 	public class ChameleonGirl extends Monster 
 	{
+
+
+		override protected function performCombatAction():void
+		{
+			mainClassPtr.chameleonAI();
+		}
+
 		/**
 		 * Pairs of skinTone/skinAdj
 		 */

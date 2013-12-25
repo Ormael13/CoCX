@@ -8,8 +8,13 @@ package classes.Monsters
 	 */
 	public class HarpyQueen extends Monster 
 	{
-		
-		public function HarpyQueen(mainClassPtr:*) 
+
+		override protected function performCombatAction():void
+		{
+			mainClassPtr.harpyQueenAI();
+		}
+
+		public function HarpyQueen(mainClassPtr:*)
 		{
 			super(mainClassPtr);
 			init01Names("the ", "Harpy Queen", "harpyqueen", "You face the Harpy Queen, a broodmother of epic proportions - literally.  Her hips are amazingly wide, thrice her own width at the least, and the rest of her body is lushly voluptuous, with plush, soft thighs and a tremendous butt.  Her wide wings beat occasionally, sending ripples through her jiggly body.  She wields a towering whitewood staff in one hand, using the other to cast eldritch spells.");

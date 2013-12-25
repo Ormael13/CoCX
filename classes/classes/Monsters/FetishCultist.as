@@ -1,5 +1,6 @@
 ﻿package classes.Monsters
 {
+	import classes.Appearance;
 	import classes.Creature;
 	import classes.Monster;
 	import classes.CockTypesEnum;
@@ -12,9 +13,14 @@
 
 	public class FetishCultist extends Monster
 	{
-		
 
-		public function FetishCultist(mainClassPtr:*) 
+
+		override protected function performCombatAction():void
+		{
+			mainClassPtr.eventParser(Appearance.randomChoice(special1, special2));
+		}
+
+		public function FetishCultist(mainClassPtr:*)
 		{
 			super(mainClassPtr);
 			trace("GenericMonstah Constructor!");

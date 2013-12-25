@@ -8,8 +8,13 @@ package classes.Monsters
 	 */
 	public class GooGirl extends Monster
 	{
-		
-		public function GooGirl(mainClassPtr:*) 
+
+		override protected function performCombatAction():void
+		{
+			mainClassPtr.gooAI();
+		}
+
+		public function GooGirl(mainClassPtr:*)
 		{
 			super(mainClassPtr);
 			var playerHasBigBoobs:Boolean = mainClassPtr.player.biggestTitSize() >= 3;

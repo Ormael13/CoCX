@@ -13,9 +13,15 @@
 
 	public class DemonPack extends Monster
 	{
-		
 
-		public function DemonPack(mainClassPtr:*) 
+
+		override protected function performCombatAction():void
+		{
+			//Demon pack has different AI
+			mainClassPtr.eventParser((rand(2) == 0) ? special1 : special2);
+		}
+
+		public function DemonPack(mainClassPtr:*)
 		{
 			super(mainClassPtr);
 			trace("DemonPack Constructor!");

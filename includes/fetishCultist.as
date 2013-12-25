@@ -10,7 +10,7 @@ Loot: Could drop a random set of clothing or a costume on death.
 
 public function fetishCultistEncounter():void {
 	outputText("You see a largely human-looking young woman in the distance in a strange, whorish outfit, seemingly lost in prayers that sound like nonsense to you.  Finally noticing your presence, she confronts you with a lewd smile on her face.\n\nShe has clearly lost her grasp on sanity, and filled the void with pure perversion.", true);
-	startCombat(9);
+	startCombat(new FetishCultist(this));
 	spriteSelect(19);
 	doNext(1);
 }

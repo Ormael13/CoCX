@@ -76,7 +76,8 @@ public function doDungeon(eventNo:Number):void {
 	}
 	//Start combat succubi
 	if(eventNo == 11016) {
-		startCombat(11);
+		player.createStatusAffect("FactorySuccubusDefeated", 0, 0, 0, 0);
+		startCombat(new SecretarialSuccubus(this),true);
 		eventParser(1);
 		spriteSelect(55);
 		return;
@@ -395,10 +396,11 @@ public function doDungeon(eventNo:Number):void {
 	}
 	//Start combat incubi
 	if(eventNo == 11031) {
-		startCombat(12);
+		player.createStatusAffect("FactoryIncubusDefeated", 0, 0, 0, 0);
+		startCombat(new IncubusMechanic(this),true);
 		eventParser(1);
 		spriteSelect(30);
-		return;1
+		return;
 	}
 	//Talk to Incubus
 	if(eventNo == 11032) {
@@ -686,7 +688,8 @@ public function doDungeon(eventNo:Number):void {
 	}
 	//Omnibus Combat Start
 	if(eventNo == 11045) {
-		startCombat(13);
+		player.createStatusAffect("FactoryOmnibusDefeated", 0, 0, 0, 0);
+		startCombat(new OmnibusOverseer(this),true);
 		spriteSelect(16);
 		return;
 	}
@@ -1048,7 +1051,8 @@ public function doDungeon(eventNo:Number):void {
 	if(eventNo == 11065) {
 		outputText("You laugh mockingly at the stupid demon, roaring, \"<i>I'm the bloody champion you vapid cunt!</i>\"\n\nShe whirls, her beautiful face marred by rage.  It looks like you have a fight on your hands...", true);
 		//(START FIGHT – Succubus Defense -10)
-		startCombat(11);
+		player.createStatusAffect("FactorySuccubusDefeated", 0, 0, 0, 0);
+		startCombat(new SecretarialSuccubus(this),true);
 		monster.armorDef -= 10;
 		return;
 	}
@@ -1062,7 +1066,7 @@ public function doDungeon(eventNo:Number):void {
 	if(eventNo == 11073) dungeonLoc = 17;
 	//Start fighting imp horde.
 	if(eventNo == 11074) {
-		startCombat(27);
+		startCombat(new ImpHorde(this),true);
 		eventParser(1);
 		return;
 	}

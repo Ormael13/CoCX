@@ -13,9 +13,16 @@
 
 	public class TentacleBeast extends Monster
 	{
-		
 
-		public function TentacleBeast(mainClassPtr:*) 
+
+		override protected function performCombatAction():void
+		{
+			//tentacle beasts have special AI
+			if (rand(2) == 0 || hasStatusAffect("TentacleCoolDown") >= 0) mainClassPtr.eventParser(special1);
+			else mainClassPtr.eventParser(special2);
+		}
+
+		public function TentacleBeast(mainClassPtr:*)
 		{
 			super(mainClassPtr);
 			trace("TentacleBeast Constructor!");

@@ -9,8 +9,13 @@ package classes.Monsters
 	 */
 	public class Izma extends Monster 
 	{
-		
-		public function Izma(mainClassPtr:*) 
+
+		override protected function performCombatAction():void
+		{
+			mainClassPtr.IzmaAI();
+		}
+
+		public function Izma(mainClassPtr:*)
 		{
 			super(mainClassPtr);
 			init01Names("", "Izma", "izma", "Izma the tigershark stands a bit over 6' tall, with orange skin bearing horizontal stripes covering most of her body.  Her silver-white hair cascades past her shoulders, draping over an impressive pair of DD-cup breasts barely restrained by a skimpy black bikini top.  Under the knee-length grass skirt below them rustles her beastly fifteen-inch penis and four-balled sack; you catch occasional glimpses of them as she moves.  She's tucked her usual reading glasses into her locker at the moment.");

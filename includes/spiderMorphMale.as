@@ -7,7 +7,7 @@ public function greetMaleSpiderMorph():void {
 	if(rand(2) == 0) {
 		outputText("A moment later, he flips down onto his feet and advances, touching his half-hard, foreskin-shrouded cock.  Judging from the glint in his eyes, he plans to force himself upon you!", false);
 		//- auto fight
-		startCombat(38);
+		startCombat(new MaleSpiderMorph(this));
 		doNext(1);
 	}
 	//NICE GUY MODE: 

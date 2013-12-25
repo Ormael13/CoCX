@@ -46,7 +46,7 @@ public function encounterAJerkInThePlains():void {
 		outputText("\"<i>Hey there, ace!</i>\" she says, grinning through her teeth as she assumes a battle stance.  \"<i>Who's ready for a re-match!?</i>\"", false);
 	}
 	//FIRST COMBAT – Main Screen
-	startCombat(45);
+	startCombat(new Hel(this));
 	doNext(1);
 }
 

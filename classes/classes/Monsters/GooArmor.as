@@ -8,8 +8,13 @@ package classes.Monsters
 	 */
 	public class GooArmor extends Monster 
 	{
-		
-		public function GooArmor(mainClassPtr:*) 
+
+		override protected function performCombatAction():void
+		{
+			mainClassPtr.gooArmorAI();
+		}
+
+		public function GooArmor(mainClassPtr:*)
 		{
 			super(mainClassPtr);
 			init01Names("a ", "Goo Armor", "gooarmor", "Before you stands a suit of plated mail armor filled with a bright blue goo, standing perhaps six feet off the ground.  She has a beautiful, feminine face, and her scowl as she stands before you is almost cute.  She has formed a mighty greatsword from her goo, and has assumed the stance of a well-trained warrior.");

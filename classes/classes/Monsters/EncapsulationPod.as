@@ -14,6 +14,12 @@
 
 	public class EncapsulationPod extends Monster
 	{
+
+		override protected function performCombatAction():void
+		{
+			mainClassPtr.encapsulationPodAI();
+		}
+
 		public function setDescriptionForPlantPot():void
 		{
 			//[Round 1 Description]

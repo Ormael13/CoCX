@@ -130,7 +130,7 @@
 			//init12Combat(bonusHP=0,lust=0,lustVuln=1,fatigue=0);
 
 			//// 13. Level
-			//init13Level(level,gems);
+			//init13Level(level,gems,additionalXP);
 
 			//// OPTIONAL INITIALIZERS
 
@@ -159,163 +159,29 @@
 		protected function totalXP(playerLevel:Number=-1):Number
 		{
 			if (playerLevel == -1) playerLevel = mainClassPtr.player.level;
-			//Nerf xp gains by 20% per level over.
+			//
+			// 1) Nerf xp gains by 20% per level after first two level difference
+			// 2) No bonuses for underlevel!
+			// 3) Super high level folks (over 10 levels) only get 1 xp!
 			var difference:Number = playerLevel - this.level;
-			//No bonuses for underlevel!
-			if(difference < 0) difference = 0;
-			//No craziness for crazy over-level!
-			if(difference > 6) difference = 6;
-			//First two levels make no difference
 			if(difference <= 2) difference = 0;
 			else difference -= 2;
-			//convert into something we can multiply by
-			difference = (5 - difference) * 20 / 100;
-			//Super high level folks only get 1 xp!
-			if(playerLevel - this.level > 10) return 1;	
-			
+			if(difference > 4) difference = 4;
+			difference = (5 - difference) * 20.0 / 100.0;
+			if(playerLevel - this.level > 10) return 1;
 			return Math.round((this.baseXP() + this.bonusXP()) * difference);
 		}
 		protected function baseXP():Number 
 		{
-			var xp:Number = 0;
-			var lev:Number = Math.round(this.level);
-			switch(lev) {
-				case 1:
-					xp = 10;
-					break;
-				case 2:
-					xp = 20;
-					break;
-				case 3:
-					xp = 30;
-					break;
-				case 4:
-					xp = 40;
-					break;
-				case 5:
-					xp = 50;
-					break;
-				case 6:
-					xp = 55;
-					break;
-				case 7:
-					xp = 60;
-					break;
-				case 8:
-					xp = 66;
-					break;
-				case 9:
-					xp = 75;
-					break;
-				case 10:
-					xp = 83;
-					break;
-				case 11:
-					xp = 85;
-					break;
-				case 12:
-					xp = 92;
-					break;
-				case 13:
-					xp = 100;
-					break;
-				case 14:
-					xp = 107;
-					break;
-				case 15:
-					xp = 115;
-					break;
-				case 16:
-					xp = 118;
-					break;
-				case 17:
-					xp = 121;
-					break;
-				case 18:
-					xp = 128;
-					break;
-				case 19:
-					xp = 135;
-					break;
-				case 20:
-					xp = 145;
-					break;
-				default:
-					xp = 200;
-					break;
-			}
-			return xp;
+			return[200, 10, 20, 30, 40, 50, 55, 60, 66, 75,//0-9
+				83, 85, 92, 100, 107, 115, 118, 121, 128, 135,//10-19
+				145][Math.round(level)] || 200;
 		}
 		protected function bonusXP():Number 
 		{
-			var xp:Number = 0;
-			var lev:Number = Math.round(this.level);
-			switch(lev) {
-				case 1:
-					xp = 10;
-					break;
-				case 2:
-					xp = 20;
-					break;
-				case 3:
-					xp = 30;
-					break;
-				case 4:
-					xp = 40;
-					break;
-				case 5:
-					xp = 50;
-					break;
-				case 6:
-					xp = 55;
-					break;
-				case 7:
-					xp = 58;
-					break;
-				case 8:
-					xp = 66;
-					break;
-				case 9:
-					xp = 75;
-					break;
-				case 10:
-					xp = 83;
-					break;
-				case 11:
-					xp = 85;
-					break;
-				case 12:
-					xp = 85;
-					break;
-				case 13:
-					xp = 86;
-					break;
-				case 14:
-					xp = 92;
-					break;
-				case 15:
-					xp = 94;
-					break;
-				case 16:
-					xp = 96;
-					break;
-				case 17:
-					xp = 98;
-					break;
-				case 18:
-					xp = 99;
-					break;
-				case 19:
-					xp = 101;
-					break;
-				case 20:
-					xp = 107;
-					break;
-				default:
-					xp = 130;
-					break;
-			}
-			return rand(xp);
+			return rand([200,10,20,30,40,50,55,58,66,75,
+					83,85,85,86,92,94,96,98,99,101,
+					107][Math.round(this.level)] || 130);
 		}
 
 		// MONSTER INITIALIZATION HELPER FUNCTIONS
@@ -605,6 +471,113 @@
 			this.antennae = antennae;
 		}
 
+
+		public function doAI():void
+		{
+			if (hasStatusAffect("Stunned") >= 0) {
+				if (!handleStun()) return;
+			}
+			if (hasStatusAffect("Fear") >= 0) {
+				if (!handleFear()) return;
+			}
+			//Exgartuan gets to do stuff!
+			if (mainClassPtr.player.hasStatusAffect("Exgartuan") >= 0 && mainClassPtr.player.statusAffectv2("Exgartuan") == 0 && rand(3) == 0) {
+				if (mainClassPtr.exgartuanCombatUpdate()) mainClassPtr.outputText("\n\n", false);
+			}
+			if (hasStatusAffect("Constricted") >= 0) {
+				if (!handleConstricted()) return;
+			}
+			//If grappling... TODO implement grappling
+			if (mainClassPtr.gameState == 2) {
+				mainClassPtr.gameState = 1;
+				//temperment - used for determining grapple behaviors
+				//0 - avoid grapples/break grapple
+				//1 - lust determines > 50 grapple
+				//2 - random
+				//3 - love grapples
+				/*
+				 //		if(temperment == 0) eGrappleRetreat();
+				 if (temperment == 1) {
+				 //			if(lust < 50) eGrappleRetreat();
+				 mainClassPtr.doNext(3);
+				 return;
+				 }
+				 mainClassPtr.outputText("Lust Placeholder!!", false);
+				 mainClassPtr.doNext(3);
+				 return;*/
+			}
+			performCombatAction();
+		}
+
+		/**
+		 * Called if monster is constricted. Should return true if constriction is ignored and need to proceed with ai
+		 */
+		protected function handleConstricted():Boolean
+		{
+			//Enemy struggles -
+			mainClassPtr.outputText("Your prey pushes at your tail, twisting and writhing in an effort to escape from your tail's tight bonds.", false);
+			if (statusAffectv1("Constricted") <= 0) {
+				mainClassPtr.outputText("  " + capitalA + short + " proves to be too much for your tail to handle, breaking free of your tightly bound coils.", false);
+				removeStatusAffect("Constricted");
+			}
+			addStatusValue("Constricted", 1, -1);
+			mainClassPtr.combatRoundOver();
+			return false;
+		}
+
+		/**
+		 * Called if monster is under fear. Should return true if fear ignored and need to proceed with ai
+		 */
+		protected function handleFear():Boolean
+		{
+			if (statusAffectv1("Fear") == 0) {
+				if (plural) {
+					removeStatusAffect("Fear");
+					mainClassPtr.outputText("Your foes shake free of their fear and ready themselves for battle.", false);
+				}
+				else {
+					removeStatusAffect("Fear");
+					mainClassPtr.outputText("Your foe shakes free of its fear and readies itself for battle.", false);
+				}
+			}
+			else {
+				addStatusValue("Fear", 1, -1);
+				if (plural) mainClassPtr.outputText(capitalA + short + " are too busy shivering with fear to fight.", false);
+				else mainClassPtr.outputText(capitalA + short + " is too busy shivering with fear to fight.", false);
+			}
+			mainClassPtr.combatRoundOver();
+			return false;
+		}
+
+		/**
+		 * Called if monster is stunned. Should return true if stun is ignored and need to proceed with ai.
+		 */
+		protected function handleStun():Boolean
+		{
+			if (plural) mainClassPtr.outputText("Your foes are too dazed from your last hit to strike back!", false);
+			else mainClassPtr.outputText("Your foe is too dazed from your last hit to strike back!", false);
+			if (statusAffectv1("Stunned") <= 0) removeStatusAffect("Stunned");
+			else addStatusValue("Stunned", 1, -1);
+			mainClassPtr.combatRoundOver();
+			return false;
+		}
+
+		/**
+		 * This method is called after all stun/fear/constricted checks.
+		 * Default: Equal chance to do physical or special (if any) attack
+		 */
+		protected function performCombatAction():void
+		{
+			var select:Number = 1;
+			if (special1 > 0) select++;
+			if (special2 > 0) select++;
+			if (special3 > 0) select++;
+			var rando:int = int(Math.random() * select);
+			if (rando == 0) mainClassPtr.eAttack();
+			if (rando == 1 && special1 > 0) mainClassPtr.eventParser(special1);
+			if (rando == 2 && special2 > 0) mainClassPtr.eventParser(special2);
+			if (rando == 3 && special3 > 0) mainClassPtr.eventParser(special3);
+		}
 		public function generateDebugDescription():String{
 			var result:String;
 			var be:String =plural?"are":"is";
