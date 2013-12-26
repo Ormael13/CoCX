@@ -824,7 +824,7 @@ public function naggaSqueeze():void {
 	outputText("", true);
 	//Squeeze - 
 	outputText("Your coils wrap tighter around your prey, leaving " + monster.pronoun2 + " short of breath. You can feel it in your tail as " + monster.pronoun3 + " struggles are briefly intensified.", false);
-    monster.HP -= eMaxHP() * (.10 + rand(15)/100);           
+    monster.HP -= monster.eMaxHP() * (.10 + rand(15)/100);           
 	//Enemy faints - 
 	if(monster.HP < 1) {
 		outputText("You can feel " + monster.a + monster.short + "'s life signs beginning to fade, and before you crush all the life from " + monster.pronoun2 + ", you let go, dropping " +monster.pronoun2 + " to the floor, unconscious but alive.  In no time, " + monster.pronoun3 + "'s eyelids begin fluttering, and you've no doubt they'll regain consciousness soon.  ", false);

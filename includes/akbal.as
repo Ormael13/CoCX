@@ -550,15 +550,11 @@ public function akbalSpecial():void
 //*Support ability - 
 public function akbalHeal():void
 {
-	if (monster.HP == eMaxHP())
+	if (monster.HPRatio() >= 1)
 		outputText("Akbal licks himself, ignoring you for now.", false);
 	else
 		outputText("Akbal licks one of his wounds, and you scowl as the injury quickly heals itself.", false);
-	monster.HP += 30;
-	if (monster.HP > eMaxHP())
-	{
-		monster.HP = eMaxHP();
-	}
+	monster.addHP(30);
 	monster.lust += 10;
 	combatRoundOver();
 }

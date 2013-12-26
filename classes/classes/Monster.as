@@ -156,6 +156,19 @@
 			return this.tou * 2 + 50 + this.bonusHP;
 		}
 
+		public function addHP(hp:Number):void{
+			this.HP += hp;
+			if (this.HP<0) this.HP = 0;
+			else if (this.HP>eMaxHP()) this.HP = eMaxHP();
+		}
+
+		/**
+		 * @return HP/eMaxHP()
+		 */
+		public function HPRatio():Number{
+			return HP/eMaxHP();
+		}
+
 		protected function totalXP(playerLevel:Number=-1):Number
 		{
 			if (playerLevel == -1) playerLevel = mainClassPtr.player.level;

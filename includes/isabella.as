@@ -10,7 +10,7 @@
 //IZZY AI:
 public function isabellaAI():void {
 	//-If below 70% HP, 50% chance of milk drinking
-	if(monster.HP / eMaxHP() * 100 < 70 && rand(3) == 0) drankMalkYaCunt();
+	if(monster.HPRatio() < .7 && rand(3) == 0) drankMalkYaCunt();
 	//if PC has spells and isn't silenced, 1/3 chance of silence.
 	else if(hasSpells() && player.hasStatusAffect("Throat Punch") < 0 && rand(3) == 0) {
 		isabellaThroatPunch();

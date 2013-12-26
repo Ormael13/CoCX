@@ -4871,7 +4871,7 @@ public function combatStatusesUpdate():void {
 		}
 		//Deal damage if still wounded.
 		else {
-			var store:Number = eMaxHP() * (3 + rand(4))/100;
+			var store:Number = monster.eMaxHP() * (3 + rand(4))/100;
 			store = doDamage(store);
 			if(monster.plural) outputText(monster.capitalA + monster.short + " bleed profusely from the jagged wounds your weapon left behind. (" + store + ")\n\n", false);
 			else outputText(monster.capitalA + monster.short + " bleeds profusely from the jagged wounds your weapon left behind. (" + store + ")\n\n", false);
@@ -5293,19 +5293,17 @@ public function startCombat(monster_:Monster,plotFight_:Boolean=false):void {
 	}
 	doNext(1);
 }
-public function eMaxHP():Number {
-	return monster.tou * 2 + 50 + monster.bonusHP;
-}
 public function display():void {
 	if (!monster.isFullyInit()){
-		outputText("<B>/!\\BUGMonster is not fully initialized! <u>Missing phases: ");
-		for (var i:int=0; i<monster.initsCalled.length; i++)
-			if (!monster.initsCalled[i]) outputText((i+1)+" ");
-		outputText("</u></b>");
+		outputText("<B>/!\\BUGMonster is not fully initialized! <u>Missing phases: "+
+				monster.initsCalled
+						.map(function(x:Boolean,i:int):String{return x?"":String(i)})
+						.filter(function(x:*):Boolean{return x!=""})
+						.join(",")+
+				"</u></b>\n");
 	}
 	var percent:String = "";
-	var math:Number = monster.HP/eMaxHP();
-	if(monster.short == "worms") math = monster.HP/40;
+	var math:Number = monster.HPRatio();
 	percent = "(<b>" + String(int(math * 1000) / 10) + "% HP</b>)";
 	if (monster.imageName != "")
 	{
@@ -8019,7 +8017,7 @@ public function runAway():void {
 		doNext(13);
 		return;
 	}
-	else if(monster.short == "minotaur tribe" && monster.HP/eMaxHP() >= 0.75) {
+	else if(monster.short == "minotaur tribe" && monster.HPRatio() >= 0.75) {
 		outputText("There's too many of them surrounding you to run!", true);
 		menuLoc = 3;
 		doNext(5000);

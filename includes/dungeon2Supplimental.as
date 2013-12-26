@@ -410,19 +410,19 @@ public function setDescriptionForPlantPot():void {
 	}
 	//[DAMAGE DESCRIPTS – Used All Rounds]
 	//[Greater than 80% Life]
-	if(monster.HP > eMaxHP() * 0.8) {
+	if(monster.HPRatio() > 0.8) {
 		monster.long += "  The pulsing luminescence continues to oscillate in a regular rhythm.  You haven't done enough damage to the thing to effect it in the slightest.";
 	}
 	//[Greater than 60% Life]
-	else if(monster.HP > eMaxHP() * 0.6) {
+	else if(monster.HPRatio() > 0.6) {
 		monster.long += "  Your attacks have turned a part of the wall a sickly black color, and it no longer glows along with the rest of your chamber.";
 	}
 	//[Greater than 40% Life] 
-	else if(monster.HP > eMaxHP() * 0.4) {
+	else if(monster.HPRatio() > 0.4) {
 		monster.long += "  You've dented the wall with your attacks.  It's permanently deformed and bruised solid black from your struggles.  Underneath the spongy surface you can feel a rock-solid core that's beginning to give.";
 	}
 	//Greater than 20% Life] 
-	else if(monster.HP > eMaxHP() * 0.2) {
+	else if(monster.HPRatio() > 0.2) {
 		monster.long += "  You have to blink your eyes constantly because the capsule's bio-luminescent lighting is going nuts.  The part of the wall you're going after is clearly dead, but the rest of your fungal prison is flashing in a crazy, panicked fashion.";
 	}
 	//[Greater than 0% Life]
@@ -878,7 +878,7 @@ public function valaAI():void {
 	outputText("\n\n", false);
 	//Select Attack	
 	//BLood magic special
-	if(monster.HP/eMaxHP() < .85 && rand(3) == 0) valaSpecial1();
+	if(monster.HPRatio() < .85 && rand(3) == 0) valaSpecial1();
 	//25% chance of milksquirt.
 	else if(rand(4) == 0) valaSpecial2();
 	else valaMasturbate();
@@ -888,11 +888,11 @@ public function valaAI():void {
 public function valaSpecial1():void {
 	outputText("Vala dabs at one of her wounds and swoons.  Is she actually getting off from the wounds?  Damn she's damaged!  Vala licks the blood from her fingers, winks, and blows pink mist from her mouth.", false);
 	//Lightly wounded.
-	if(monster.HP/eMaxHP() > .7) {
+	if(monster.HPRatio() > .7) {
 		outputText("  The sweet-smelling cloud rapidly fills the room, but the volume of mist is low enough that you don't end up breathing in that much of it.  It does make your pulse quicken in the most pleasant way though...", false);
 		stats(0,0,0,0,0,0,5 + player.lib/20,0);
 	}
-	else if(monster.HP/eMaxHP() > .4) {
+	else if(monster.HPRatio() > .4) {
 		outputText("  The rose-colored vapor spreads throughout the room, forcing you to breathe it in or pass out from lack of air.  It smells sweet and makes your head swim with sensual promises and your crotch tingle with desire.  Panicked by the knowledge that you're being drugged, you gasp, but it only draws more of the rapidly disappating cloud into your lungs, fueling your lust.", false);
 		stats(0,0,0,0,0,0,10 + player.lib/20,0);
 	}
@@ -1804,9 +1804,9 @@ public function zetazAI():void {
 	//STANDARD COMBAT STATUS AFFECTS END HERE
 	//-If over 50 lust and below 50% hp
 	//--burns 20 lust to restore 20% hp. 
-	if(monster.lust > 50 && monster.HP/eMaxHP() <= .5) {
+	if(monster.lust > 50 && monster.HPRatio() <= .5) {
 		outputText("The imp lord shudders from his wounds and the pulsing member that's risen from under his tattered loincloth.  He strokes it and murmurs under his breath for a few moments.  You're so busy watching the spectacle of his masturbation that you nearly miss the sight of his bruises and wounds closing!  Zetaz releases his swollen member, and it deflates slightly.  He's used some kind of black magic to convert some of his lust into health!", false);
-		monster.HP += 0.25 * eMaxHP();
+		monster.addHP(0.25 * monster.eMaxHP());
 		monster.lust -= 20;
 		stats(0,0,0,0,0,0,2,0);
 	}
