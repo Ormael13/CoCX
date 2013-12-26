@@ -21,8 +21,8 @@ package classes.Monsters
 			init02Female(VAGINA_WETNESS_SLAVERING,VAGINA_LOOSENESS_LOOSE);
 			init03BreastRows("D");
 			init04Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_DRY);
-			init05Body(rand(8) + 70,HIP_RATING_AMPLE+2,BUTT_RATING_LARGE);
-			init06Skin("red");
+			init05Body(rand(8) + 70,HIP_RATING_AMPLE+2,BUTT_RATING_LARGE,LOWER_BODY_TYPE_HARPY);
+			init06Skin("red",SKIN_TYPE_PLAIN,"feathers");
 			init07Hair("black",15);
 			init08Face();
 			init09PrimaryStats(70,60,120,40,40,45,50);

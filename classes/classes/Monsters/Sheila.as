@@ -27,7 +27,7 @@ package classes.Monsters
 			init02Female(VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_NORMAL, 30, mainClassPtr.flags[kFLAGS.SHEILA_XP] <= 3 && !sheilaDemon);
 			init03BreastRows([mainClassPtr.flags[kFLAGS.SHEILA_CORRUPTION]/10]);
 			init04Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,20);
-			init05Body("6'",HIP_RATING_AVERAGE,BUTT_RATING_AVERAGE+1);
+			init05Body("6'",HIP_RATING_AVERAGE,BUTT_RATING_AVERAGE+1,LOWER_BODY_TYPE_KANGAROO);
 			init06Skin("tan");
 			init07Hair("auburn",11);
 			init08Face();

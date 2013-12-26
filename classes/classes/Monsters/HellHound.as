@@ -23,7 +23,7 @@
 			init02Male([new Cock(8,2,CockTypesEnum.DOG),new Cock(8,2,CockTypesEnum.DOG)],2,4,5);
 			init03BreastRows([0],[0],[0]);
 			init04Ass(ANAL_LOOSENESS_NORMAL,ANAL_WETNESS_NORMAL);
-			init05Body(47,HIP_RATING_AVERAGE,BUTT_RATING_AVERAGE+1);
+			init05Body(47,HIP_RATING_AVERAGE,BUTT_RATING_AVERAGE+1,LOWER_BODY_TYPE_DOG);
 			init06Skin("black",SKIN_TYPE_FUR);
 			init07Hair("red",3);
 			init08Face();

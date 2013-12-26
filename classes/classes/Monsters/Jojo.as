@@ -23,7 +23,7 @@
 			init02Male(new Cock(7.5,1.8),2,1,1,1000);
 			init03BreastRows(0);
 			init04Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_NORMAL);
-			init05Body("5'1",HIP_RATING_SLENDER,BUTT_RATING_TIGHT);
+			init05Body("4'",HIP_RATING_SLENDER,BUTT_RATING_TIGHT);
 			init06Skin("white",SKIN_TYPE_FUR,"fur");
 			init07Hair("white",2);
 			init08Face();

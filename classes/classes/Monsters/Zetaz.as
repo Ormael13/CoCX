@@ -24,7 +24,7 @@ package classes.Monsters
 			init02Male(new Cock(rand(2) + 11,2.5,CockTypesEnum.DEMON),2,1,3,20);
 			init03BreastRows(0);
 			init04Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY);
-			init05Body("4'1",HIP_RATING_BOYISH,BUTT_RATING_TIGHT);
+			init05Body("4'1",HIP_RATING_BOYISH,BUTT_RATING_TIGHT,LOWER_BODY_TYPE_KANGAROO);
 			init06Skin("red");
 			init07Hair("black",5);
 			init08Face();

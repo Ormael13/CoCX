@@ -22,7 +22,7 @@ package classes.Monsters
 			init02Female(VAGINA_WETNESS_SLAVERING,VAGINA_LOOSENESS_LOOSE);
 			init03BreastRows("D");
 			init04Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_DRY);
-			init05Body(rand(8) + 70, HIP_RATING_AMPLE+2,BUTT_RATING_LARGE);
+			init05Body(rand(8) + 70, HIP_RATING_AMPLE+2,BUTT_RATING_LARGE,LOWER_BODY_TYPE_LIZARD);
 			init06Skin("red");
 			init07Hair("black",15);
 			init08Face();

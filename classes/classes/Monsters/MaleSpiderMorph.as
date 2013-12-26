@@ -23,7 +23,7 @@ package classes.Monsters
 			init02Male(new Cock(6,2),2,2);
 			init03BreastRows(0);
 			init04Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,40);
-			init05Body("7'6",HIP_RATING_CURVY+2,BUTT_RATING_LARGE+1);
+			init05Body("7'6",HIP_RATING_CURVY+2,BUTT_RATING_LARGE+1,LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS);
 			init06Skin("dusky");
 			init07Hair("red",13);
 			init08Face();

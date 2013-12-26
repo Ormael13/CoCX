@@ -26,9 +26,9 @@
 			this.pronoun3 = "its";
 			init03BreastRows(0);
 			init04Ass(ANAL_LOOSENESS_STRETCHED, ANAL_WETNESS_SLIME_DROOLING);
-			init05Body(rand(8) + 80, HIP_RATING_AMPLE, BUTT_RATING_LARGE);
+			init05Body(rand(8) + 80, HIP_RATING_AMPLE, BUTT_RATING_LARGE,LOWER_BODY_TYPE_GOO);
 			init06Skin("green");
-			init07Hair("green", 0);
+			init07Hair();
 			init08Face();
 			init09PrimaryStats(25, 20, 10, 5, 50, 60, 20);
 			init10Weapon("hands", "slap");

@@ -22,10 +22,10 @@ package classes.Monsters
 			init02Female(VAGINA_WETNESS_SLAVERING,VAGINA_LOOSENESS_NORMAL,9001);
 			init03BreastRows(playerHasBigBoobs?mainClassPtr.player.biggestTitSize():3);
 			init04Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_SLIME_DROOLING,9001);
-			init05Body(rand(8) + 70,HIP_RATING_AMPLE,BUTT_RATING_LARGE);
+			init05Body(rand(8) + 70,HIP_RATING_AMPLE,BUTT_RATING_LARGE,LOWER_BODY_TYPE_GOO);
 			var tone:String = Appearance.randomChoice("blue","purple","crystal");
-			init06Skin(tone);
-			init07Hair(tone,0);
+			init06Skin(tone,SKIN_TYPE_GOO);
+			init07Hair(tone,12+rand(10));
 			init08Face();
 			init09PrimaryStats(25,25,20,30,50,40,10);
 			init10Weapon("hands","slap");

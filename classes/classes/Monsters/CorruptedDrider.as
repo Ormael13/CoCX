@@ -31,8 +31,8 @@ package classes.Monsters
 			init02Female(VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_GAPING, 70);
 			init03BreastRows("DD");
 			init04Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,70);
-			init05Body("10'",HIP_RATING_CURVY+2,BUTT_RATING_LARGE+1);
-			init06Skin(skinTone,SKIN_TYPE_PLAIN,"scales");
+			init05Body("10'",HIP_RATING_CURVY+2,BUTT_RATING_LARGE+1,LOWER_BODY_TYPE_DRIDER_LOWER_BODY);
+			init06Skin(skinTone,SKIN_TYPE_PLAIN);
 			init07Hair(hairColor,24);
 			init08Face();
 			init09PrimaryStats(100,50,70,100,80,50,90);

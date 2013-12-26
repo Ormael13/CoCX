@@ -22,7 +22,7 @@
 			init02Female(VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_GAPING);
 			init03BreastRows("DD");
 			init04Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_NORMAL);
-			init05Body(rand(14) + 59,HIP_RATING_CURVY+3,BUTT_RATING_EXPANSIVE);
+			init05Body(rand(14) + 59,HIP_RATING_CURVY+3,BUTT_RATING_EXPANSIVE,LOWER_BODY_TYPE_BEE);
 			init06Skin("yellow");
 			init07Hair(Appearance.randomChoice("black","black and yellow"),6);
 			init08Face(FACE_COW_MINOTAUR);

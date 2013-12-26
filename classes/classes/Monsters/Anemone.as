@@ -19,9 +19,9 @@ package classes.Monsters
 			init02Female(VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_LOOSE, 5);
 			init03BreastRows("B");
 			init04Ass(ANAL_LOOSENESS_NORMAL,ANAL_WETNESS_DRY,10);
-			init05Body("5'5",BUTT_RATING_NOTICEABLE,HIP_RATING_CURVY,LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS);
+			init05Body("5'5",BUTT_RATING_NOTICEABLE,HIP_RATING_CURVY);
 			init06Skin("purple");
-			init07Hair("purplish-black",20);
+			init07Hair("purplish-black",20,HAIR_ANEMONE);
 			init08Face();
 			init09PrimaryStats(40,20,40,50,55,35,50);
 			init10Weapon("tendrils","tentacle",5);

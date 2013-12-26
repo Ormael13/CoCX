@@ -21,7 +21,7 @@ package classes.Monsters
 			init02Female(VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_LOOSE, 40);
 			init03BreastRows("E+");
 			init04Ass(ANAL_LOOSENESS_VIRGIN,ANAL_WETNESS_DRY,30);
-			init05Body("7'6",HIP_RATING_CURVY+2,BUTT_RATING_LARGE+1);
+			init05Body("7'6",HIP_RATING_CURVY+2,BUTT_RATING_LARGE+1,LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS);
 			init06Skin("dusky");
 			init07Hair("red",13);
 			init08Face();

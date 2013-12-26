@@ -35,7 +35,7 @@ package classes.Monsters
 			init03BreastRows("E+");
 			init04Ass(ANAL_LOOSENESS_VIRGIN,ANAL_WETNESS_DRY,85);
 			init05Body(90,HIP_RATING_CURVY+2,BUTT_RATING_LARGE+1);
-			init06Skin("helspawn");
+			init06Skin("dusky");
 			init07Hair("red",13);
 			init08Face(faceType,earType,tongueType,eyeType);
 			init09PrimaryStats(50,50,65,40,35,55,20);

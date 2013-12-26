@@ -25,15 +25,14 @@ package classes.Monsters
 			init02Male(new Cock(rand(2)+11,2.5,CockTypesEnum.DEMON),2,1,3,20);
 			init03BreastRows(0);
 			init04Ass(ANAL_LOOSENESS_STRETCHED,ANAL_WETNESS_NORMAL);
-			init05Body(rand(14) + 40,HIP_RATING_BOYISH,BUTT_RATING_TIGHT);
+			init05Body(rand(14) + 40,HIP_RATING_BOYISH,BUTT_RATING_TIGHT,LOWER_BODY_TYPE_HOOFED);
 			init06Skin("red");
 			init07Hair();
 			init08Face();
 			init09PrimaryStats(55,40,75,42,55,35,100);
 			init10Weapon("fist","punch",10);
 			init11Armor("leathery skin",5);
-			this.bonusHP
-			init12Combat(0,30,.65,Monster.TEMPERMENT_LUSTY_GRAPPLES);
+			init12Combat(100,30,.65,Monster.TEMPERMENT_LUSTY_GRAPPLES);
 			init13Level(7,rand(15) + 25);
 			initX_Wings(WING_TYPE_IMP);
 			initX_Specials(5019);
