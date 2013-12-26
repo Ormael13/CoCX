@@ -2184,7 +2184,7 @@ public function getPenetratedByArianAndHisHitlerMustache():void {
 		
 		outputText("\n\nThe bulbous orbs dotting the length work somewhat like beads, as they work over your resistance, each time one of them presses in, you moan and brace yourself for the next, larger bulb.  Gently but insistently Arian presses forward, quite happy to try and take both of your holes at the same time.  \"<i>This isn't hurting you? Is it?</i>\" [Arian ey] asks, still understandably nervous about your relationship.");
 		
-		outputText("\n\nYou shake your head and tell [Arian em] that you're fine.  [Arian Eir] cocks just feel... different... from what you're used to seeing around, you remark that they seen built to rub against your most sensitive spots inside both your ass and your vagina.  Still, if [Arian ey] doesn't hurry up and fill you up, you might have to take matters into your own hands.  It's not nice to keep a girl waiting.");
+		outputText("\n\nYou shake your head and tell [Arian em] that you're fine.  [Arian Eir] cocks just feel... different... from what you're used to seeing around, you remark that they seem built to rub against your most sensitive spots inside both your ass and your vagina.  Still, if [Arian ey] doesn't hurry up and fill you up, you might have to take matters into your own hands.  It's not nice to keep a girl waiting.");
 
 		outputText("\n\nArian fumbles and begins penetrating you with more gusto.  \"<i>S-sorry, I just don't want to hurt you...</i>\"  You sigh and tell [Arian em] that you aren't made of glass.  [Arian Ey] can be a little rough, though if [Arian ey] overdoes it you'll have to stop [Arian em].  Still, you can take something like this!");
 		

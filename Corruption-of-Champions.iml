@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="Flex" version="4">
-  <component name="FlexBuildConfigurationManager" active="CorruptionOfChampions">
+  <component name="FlexBuildConfigurationManager" active="CoC-debug">
     <configurations>
-      <configuration name="CorruptionOfChampions" output-file="CorruptionofChampionsFD.swf" output-folder="$MODULE_DIR$/bin">
-        <dependencies target-player="11.1">
+      <configuration name="CoC-debug" main-class="classes.CoC" output-file="CorruptionofChampionsFD.swf" output-folder="$MODULE_DIR$/bin">
+        <dependencies target-player="11.1" framework-linkage="Merged">
           <entries>
             <entry library-name="lib" library-level="project">
               <dependency linkage="Merged" />
@@ -12,7 +12,27 @@
           <sdk name="4.6.0" />
         </dependencies>
         <compiler-options>
-          <option name="additionalConfigFilePath" value="$MODULE_DIR$/obj/Corruption-of-Champions-FDConfig.xml" />
+          <map>
+            <entry key="compiler.define" value="CONFIG::debug&#9;true&#10;CONFIG::release&#9;false" />
+          </map>
+        </compiler-options>
+        <packaging-air-desktop />
+        <packaging-android />
+        <packaging-ios />
+      </configuration>
+      <configuration name="CoC-release" main-class="classes.CoC" output-file="CoC-release.swf" output-folder="$MODULE_DIR$/bin">
+        <dependencies target-player="11.1" framework-linkage="Merged">
+          <entries>
+            <entry library-name="lib" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+          </entries>
+          <sdk name="4.6.0" />
+        </dependencies>
+        <compiler-options>
+          <map>
+            <entry key="compiler.define" value="CONFIG::debug&#9;false&#10;CONFIG::release&#9;true" />
+          </map>
         </compiler-options>
         <packaging-air-desktop />
         <packaging-android />
