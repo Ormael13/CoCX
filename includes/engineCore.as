@@ -156,7 +156,7 @@ public function rawOutputText(output:String, purgeText:Boolean = false):void
 
 }
 
-public function outputText(output:String, purgeText:Boolean = false, parseAsMarkdown:Boolean = false):void
+public function outputText(output:String, purgeText:Boolean = false, parseAsMarkdown:Boolean = false, outputRaw:Boolean = false):void
 {
 	// we have to purge the output text BEFORE calling parseText, because if there are scene commands in 
 	// the parsed text, parseText() will write directly to the output
@@ -165,8 +165,8 @@ public function outputText(output:String, purgeText:Boolean = false, parseAsMark
 	{
 		clearOutput();
 	}
-	
-	output = parseText(output, parseAsMarkdown);
+
+	if (!outputRaw) { output = parseText(output, parseAsMarkdown);}
 
 	//OUTPUT!
 	if(purgeText) {

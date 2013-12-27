@@ -76,7 +76,7 @@ public function startupScreenBody():void
 Edited By: SoS, Zeikfried, Prisoner416, Ashi, and Others
 
 Open-source version modifications by:  
-Amygdaloidnucleus/Amygdala, Hoffledop/Yoffy, Herp-a-derp/Fake-Name, Cmacleod42, Gedan
+Amygdaloidnucleus/Amygdala, Hoffledop/Yoffy, Herp-a-derp/Fake-Name, Cmacleod42, Gedan, aimozg
 
 Source Code: <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions'>https://github.com/herp-a-derp/Corruption-of-Champions</a></u>
 
