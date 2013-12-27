@@ -2,7 +2,7 @@
 <module type="Flex" version="4">
   <component name="FlexBuildConfigurationManager" active="CoC-debug">
     <configurations>
-      <configuration name="CoC-debug" main-class="classes.CoC" output-file="CorruptionofChampionsFD.swf" output-folder="$MODULE_DIR$/bin">
+      <configuration name="CoC-debug" main-class="classes.CoC" output-file="CoC-debug.swf" output-folder="$MODULE_DIR$">
         <dependencies target-player="11.1" framework-linkage="Merged">
           <entries>
             <entry library-name="lib" library-level="project">
@@ -20,7 +20,7 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="CoC-release" main-class="classes.CoC" output-file="CoC-release.swf" output-folder="$MODULE_DIR$/bin">
+      <configuration name="CoC-release" main-class="classes.CoC" output-file="CoC-release.swf" output-folder="$MODULE_DIR$">
         <dependencies target-player="11.1" framework-linkage="Merged">
           <entries>
             <entry library-name="lib" library-level="project">
@@ -48,7 +48,6 @@
       <sourceFolder url="file://$MODULE_DIR$/includes" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lib/bin" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.idea" />
-      <excludeFolder url="file://$MODULE_DIR$/bin" />
       <excludeFolder url="file://$MODULE_DIR$/devTools" />
       <excludeFolder url="file://$MODULE_DIR$/obj" />
     </content>
