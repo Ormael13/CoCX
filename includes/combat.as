@@ -5309,7 +5309,7 @@ public function display():void {
 	percent = "(<b>" + String(int(math * 1000) / 10) + "% HP</b>)";
 	if (monster.imageName != "")
 	{
-		outputText(images.showImage("monster-" + monster.imageName), false);
+		outputText(images.showImage("monster-" + monster.imageName), false,false,true);
 	}
 	if(gameState == 2) outputText("<b>You are grappling with:\n</b>", false);
 	else outputText("<b>You are fighting ", false);
