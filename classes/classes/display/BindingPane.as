@@ -170,6 +170,7 @@ package classes.display
 					return function():void 
 					{
 						inMan.ListenForNewBind(funcName, InputManager.PRIMARYKEY);
+						_stage.focus = _stage;
 					}
 				}
 				
@@ -178,6 +179,7 @@ package classes.display
 					return function():void
 					{
 						inMan.ListenForNewBind(funcName, InputManager.SECONDARYKEY);
+						_stage.focus = _stage;
 					}
 				}
 				// ... Warned you.
