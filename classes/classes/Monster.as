@@ -207,7 +207,7 @@
 		}
 
 		// MONSTER INITIALIZATION HELPER FUNCTIONS
-		public var initsCalled:Array =Array(13).map(function():*{return false});
+		public var initsCalled:Array = new Array(13).map(function():*{return false});
 
 		public function isFullyInit():Boolean {
 			return initsCalled.indexOf(false)==-1;

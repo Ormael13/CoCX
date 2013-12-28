@@ -119,12 +119,6 @@ public function speech(output:String, speaker:String):void {
 	outputText(speech, false);
 }
 
-public function parseText(text:String, parseAsMarkdown:Boolean = false):String
-{
-	// Moved into external parser.
-	text = this.parser.recursiveParser(text, parseAsMarkdown);
-	return text;
-}
 
 	
 public function clearOutput():void {
@@ -156,7 +150,9 @@ public function rawOutputText(output:String, purgeText:Boolean = false):void
 
 }
 
-public function outputText(output:String, purgeText:Boolean = false, parseAsMarkdown:Boolean = false, outputRaw:Boolean = false):void
+public function outputText(output:String, 
+						purgeText:Boolean = false, 
+						parseAsMarkdown:Boolean = false):void
 {
 	// we have to purge the output text BEFORE calling parseText, because if there are scene commands in 
 	// the parsed text, parseText() will write directly to the output
@@ -166,7 +162,7 @@ public function outputText(output:String, purgeText:Boolean = false, parseAsMark
 		clearOutput();
 	}
 
-	if (!outputRaw) { output = parseText(output, parseAsMarkdown);}
+	output = this.parser.recursiveParser(output, parseAsMarkdown);
 
 	//OUTPUT!
 	if(purgeText) {

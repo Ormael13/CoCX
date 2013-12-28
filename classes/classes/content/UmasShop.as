@@ -1919,7 +1919,7 @@
 			outputText("</i>\"");
 			
 			outputText("\n\nGrunting softly at her ministrations, you let your [hips] shiver as she passes over your " + cockHead(x) + " once more.  Her tightly sealed lips glide over your spit-slicked length at an even, nerve-tickling pace");
-			if(player.cocks[x].cockLength < 9) outputText(" until she hits your [pc.sheath]");
+			if(player.cocks[x].cockLength < 9) outputText(" until she hits your [sheath]");
 			else outputText(" until she has her mouth as full as she can handle");
 			outputText(".  She holds you like that, letting you feel her hot breath wash over the [skinFurScales] of your crotch.  Her tongue wags back and forth underneath you, slipping and sliding against you. Inside her mouth, your " + cockDescript(x) + " twitches and jumps in her maw.  Beads of pre-cum are beading and dripping out onto her busy organ.");
 			
@@ -2037,7 +2037,7 @@
 					outputText("\n\nUma gets dressed while you cool off.  She comes back with your clothes and helps you into them, giving your package an appreciative squeeze \"to make sure it emptied\" before sending you on your way to camp.");
 				}
 			}
-			dynStats("lust", -100);
+			dynStats("lust=", 0);
 			flags[kFLAGS.UMA_TIMES_SUCKED_YOU]++;
 			menu();
 			doNext(13);
