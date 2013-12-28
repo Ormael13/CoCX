@@ -30,8 +30,8 @@ package classes.Monsters
 			init11Armor("armor",20);
 			init12Combat(1000,20,.15,Monster.TEMPERMENT_LOVE_GRAPPLES);
 			init13Level(20,rand(25)+160,50);
-			initX_Horns(HORNS_DEMON);
-			initX_Tail(TAIL_TYPE_DEMONIC);
+			initX_Tail(TAIL_TYPE_HARPY);
+			initX_Wings(WING_TYPE_FEATHERED_LARGE);
 			initX_Specials();
 		}
 		

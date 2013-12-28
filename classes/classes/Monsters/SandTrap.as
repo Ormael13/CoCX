@@ -36,7 +36,6 @@ package classes.Monsters
 			init11Armor("chitin",20);
 			init12Combat(100,20,.55,Monster.TEMPERMENT_LOVE_GRAPPLES);
 			init13Level(4,2 + rand(5));
-			initX_Horns(HORNS_DEMON);
 			initX_Tail(TAIL_TYPE_DEMONIC);
 		}
 		

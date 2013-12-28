@@ -28,8 +28,8 @@ package classes.Monsters
 			init12Combat(200,20,0.75,Monster.TEMPERMENT_LOVE_GRAPPLES);
 			init13Level(8,rand(25)+10);
 			initX_Specials(11043,11044);
-			var wingDesc:String = "tiny hidden";
-			initX_Tail(TAIL_TYPE_DEMONIC)
+			initX_Wings(WING_TYPE_BAT_LIKE_TINY,"tiny hidden");
+			initX_Tail(TAIL_TYPE_DEMONIC);
 
 		}
 		

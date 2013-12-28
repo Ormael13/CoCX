@@ -10,8 +10,17 @@
 		protected var mainClassPtr:*;
 		//For enemies
 		public var bonusHP:Number = 0;
-		public var long:String = "<b>You have encountered an unitialized monster. Please report this as a bug</b>.";
-		//Is a creature a 'plural' encounter - mob, etc. 
+		private var _long:String = "<b>You have encountered an unitialized monster. Please report this as a bug</b>.";
+		public function get long():String
+		{
+			return _long;
+		}
+		public function set long(value:String):void
+		{
+			_long = value;
+		}
+
+		//Is a creature a 'plural' encounter - mob, etc.
 		public var plural:Boolean = false;
 		public var imageName:String = "";
 		
@@ -649,10 +658,10 @@
 				result += ", "+Appearance.describeByScale(vagina.vaginalWetness,Appearance.DEFAULT_VAGINA_WETNESS_SCALES,"drier than","wetter than");
 				if (vagina.labiaPierced) result += ". Labia are pierced with "+vagina.labiaPLong;
 				if (vagina.clitPierced) result += ". Clit is pierced with "+vagina.clitPLong;
+				if (statusAffectv1("Bonus vCapacity")>0){
+					result+="; vaginal capacity is increased by "+statusAffectv1("Bonus vCapacity");
+				}
 				result+=".\n";
-			}
-			if (statusAffectv1("Bonus vCapacity")>0){
-				result+="Vaginal capacity is increased by "+statusAffectv1("Bonus vCapacity")+"\n";
 			}
 			if (breastRows.length>0){
 				var nipple:String = nippleLength+"\" ";
@@ -660,24 +669,28 @@
 				for (i = 0; i < breastRows.length; i++) {
 					var row:BreastRowClass = (breastRows[i] as BreastRowClass);
 					result += Pronoun3+(i>0?(" #"+(i+1)):"") + " breast row has " + row.breasts;
-					result += " " + row.breastRating + "-size (" + Appearance.breastCup(row.breastRating) + ") breasts with ";
+					result += " " + row.breastRating.toFixed(2) + "-size (" + Appearance.breastCup(row.breastRating) + ") breasts with ";
 					result += Appearance.numberOfThings(row.nipplesPerBreast, nipple+(row.fuckable ? "fuckable nipple" : "unfuckable nipple")) + " on each.\n";
 				}
 			}
-			result += Pronoun3+" ass is "+Appearance.describeByScale(ass.analLooseness,Appearance.DEFAULT_ANAL_LOOSENESS_SCALES,"tighter than","looser than")+", "+Appearance.describeByScale(ass.analWetness,Appearance.DEFAULT_ANAL_WETNESS_SCALES,"drier than","wetter than")+".\n";
+			result += Pronoun3+" ass is "+Appearance.describeByScale(ass.analLooseness,Appearance.DEFAULT_ANAL_LOOSENESS_SCALES,"tighter than","looser than")+", "+Appearance.describeByScale(ass.analWetness,Appearance.DEFAULT_ANAL_WETNESS_SCALES,"drier than","wetter than");
 			if (statusAffectv1("Bonus aCapacity")>0){
-				result += "Anal capacity is increased by "+statusAffectv1("Bonus aCapacity")+"\n";
+				result += "; anal capacity is increased by "+statusAffectv1("Bonus aCapacity");
 			}
-			result +="\n";
+			result +=".\n\n";
 
 			// COMBAT AND OTHER STATS
 			result+=Hehas+"str="+str+", tou="+tou+", spe="+spe+", inte="+inte+", lib="+lib+", sens="+sens+", cor="+cor+".\n";
 			result += Pronoun1+" could "+weaponVerb+" you with  "+weaponPerk+" "+weaponName+" (attack "+weaponAttack+", value "+weaponValue+").\n";
 			result += Pronoun1 +" is guarded with "+armorPerk+" "+armorName+" (defense "+armorDef+", value "+armorValue+").\n";
-			result += Hehas+HP+"/"+eMaxHP()+"HP, "+lust+"/100 lust, "+fatigue+"/100 fatigue. "+Pronoun3+" bonus HP="+bonusHP+", and lust vulnerability="+lustVuln+".\n";
-			result += Heis+"level "+level+" and "+have+" "+gems+" gems. You will be awarded "+XP+" XP for victory over "+pronoun2+".\n";
+			result += Hehas+HP+"/"+eMaxHP()+" HP, "+lust+"/100 lust, "+fatigue+"/100 fatigue. "+Pronoun3+" bonus HP="+bonusHP+", and lust vulnerability="+lustVuln+".\n";
+			result += Heis+"level "+level+" and "+have+" "+gems+" gems. You will be awarded "+XP+" XP.\n";
 			if (special1 || special2 || special3){
-				result+=Hehas+"special attacks with magical numbers "+special1+", "+special2+", "+special3+".\n"
+				result+=Hehas+"special attacks with magical numbers "+
+						[special1,special2,special3]
+								.filter(function(x:int):Boolean{return x>0})
+								.join(",")
+						+".\n"
 			} else {
 				result+=Hehas+"no special attacks.\n";
 			}

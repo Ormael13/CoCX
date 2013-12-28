@@ -25,12 +25,10 @@ package classes.Monsters
 			init07Hair("black",15,HAIR_GOO);
 			init08Face();
 			init09PrimaryStats(60,50,50,40,60,35,50);
-			init10Weapon("claws","claws",60);
+			init10Weapon("goo sword","slash",60);
 			init11Armor("armor",50);
 			init12Combat(500,0,.35,Monster.TEMPERMENT_LOVE_GRAPPLES,fatigue);
 			init13Level(16,rand(25)+40);
-			initX_Tail(TAIL_TYPE_DEMONIC);
-			initX_Horns(HORNS_DEMON);
 		}
 		
 	}

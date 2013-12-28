@@ -23,7 +23,7 @@ package classes.Monsters
 			init13Level(8,rand(25)+10);
 			initX_Specials(11035,11036);
 			initX_Tail(TAIL_TYPE_DEMONIC);
-			var wingDesc:String = "tiny hidden";
+			initX_Wings(WING_TYPE_BAT_LIKE_TINY,"tiny hidden");
 		}
 	}
 }

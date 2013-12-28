@@ -32,11 +32,9 @@
 			init07Hair("blue",16);
 			init08Face();
 			init09PrimaryStats(60,40,90,40,70,30,80);
-			var lustVuln:Number = .6;
-			var lustVuln:Number = .7;
 			init10Weapon("talons","slashing talons",15);
 			init11Armor("feathers",5);
-			init12Combat(150,10,lustVuln,Monster.TEMPERMENT_RANDOM_GRAPPLES);
+			init12Combat(150,10,.7,Monster.TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(10,10 + rand(4));
 			initX_Wings(WING_TYPE_HARPY);
 			initX_Specials(5136,5137);

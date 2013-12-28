@@ -39,7 +39,7 @@ package classes.Monsters
 			init05Body(rand(24) + 60,HIP_RATING_AMPLE,BUTT_RATING_AVERAGE+1);
 			init06Skin("pale");
 			init07Hair(hairColor,13 + rand(20));
-			init08Face(FACE_COW_MINOTAUR);
+			init08Face();
 			init09PrimaryStats(35,45,90,95,60,65,45);
 			init10Weapon("claws","punch");
 			init11Armor("skin");
