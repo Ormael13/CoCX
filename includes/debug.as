@@ -329,8 +329,8 @@ public function doThatTestingThang():void
 
 **FancyQuotes!**
 
-Convert '  
-'herp a derp'
+Convert Apostrophes '  
+It's a herm!
 
 convert "  
 "derp a herp"
