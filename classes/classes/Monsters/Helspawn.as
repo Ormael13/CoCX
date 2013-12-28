@@ -43,7 +43,7 @@ package classes.Monsters
 			init11Armor("",12,"",50);
 			init12Combat(175,30,.55,Monster.TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(12,10 + rand(5));
-			initX_Tail(TAIL_TYPE_COW,0,0);
+			initX_Tail(TAIL_TYPE_LIZARD,0,0);
 			initX_Specials(5133,5134,5135);
 			this.createStatusAffect("keen", 0, 0, 0, 0);
 		}

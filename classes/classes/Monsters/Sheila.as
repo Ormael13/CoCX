@@ -54,7 +54,7 @@ package classes.Monsters
 			init11Armor("clothes",4);
 			init12Combat(bonusHP,lust,lustVuln,Monster.TEMPERMENT_LUSTY_GRAPPLES);
 			init13Level(14,rand(5) + 5);
-			initX_Tail(TAIL_TYPE_HORSE);
+			initX_Tail(TAIL_TYPE_KANGAROO);
 
 		}
 

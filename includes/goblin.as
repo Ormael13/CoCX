@@ -594,21 +594,19 @@ public function goblinDrugAttack():void {
 	else {
 		if(monster.short == "Tamani's daughters") {
 			outputText("Tamani pulls out a blue vial and uncaps it, then douses the mob with the contents.", false);
-			if(monster.HP < eMaxHP()) {
+			if(monster.HPRatio() < 1) {
 				outputText("  Though less effective than ingesting it, the potion looks to have helped the goblins recover from their wounds!\n", false);
-				monster.HP += 80;
-				if(monster.HP > eMaxHP()) monster.HP = eMaxHP();
+				monster.addHP(80);
 			}
 			else outputText("  There doesn't seem to be any effect.\n", false);			
 			outputText("\n", false);
 		}
 		else {
 			outputText(monster.capitalA + monster.short + " pulls out a blue vial and uncaps it, swiftly downing its contents.", false);
-			if(monster.HP < eMaxHP()) {
+			if(monster.HPRatio() < 1) {
 				outputText("  She looks to have recovered from some of her wounds!\n", false);
-				monster.HP += eMaxHP() * 1/4;
-				if(monster.short == "Tamani") monster.HP += eMaxHP() * 1/4;
-				if(monster.HP > eMaxHP()) monster.HP = eMaxHP();
+				monster.addHP(monster.eMaxHP() /4);
+				if(monster.short == "Tamani") monster.addHP(monster.eMaxHP()/4);
 			}
 			else outputText("  There doesn't seem to be any effect.\n", false);
 			combatRoundOver();
