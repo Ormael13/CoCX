@@ -110,6 +110,9 @@ public function eventTester():void {
 
 "Paste test event text here."
 
+[eCockDescript 0]
+[eCockDescript]
+
 [button demonSheilaEncounter | Call]
 [button exit | Exit ]
 ]

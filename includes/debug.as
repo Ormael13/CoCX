@@ -335,6 +335,12 @@ It's a herm!
 convert "  
 "derp a herp"
 
+**Random test-funtions**
+
+* \\\[eCockDescript 0\\\] - [eCockDescript 0]
+* \\\[eCockDescript\\\] - [eCockDescript]
+
+
 	]]>, true, true);
 
 

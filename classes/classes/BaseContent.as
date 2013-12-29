@@ -209,7 +209,7 @@
 			return kGAMECLASS.eCockHead(cockNum);
 		}
 		
-		protected function eCockDescript(cockIndex:Number):String
+		protected function eCockDescript(cockIndex:Number = 0):String
 		{
 			return kGAMECLASS.eCockDescript(cockIndex);
 		}

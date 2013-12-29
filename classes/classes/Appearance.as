@@ -980,6 +980,10 @@
 		//Short cock description. Describes length or girth. Supports multiple cocks.
 		public static function cockDescriptionShort(i_cockIndex:int, i_creature:Creature):String
 		{
+			// catch calls where we're outside of combat, and eCockDescript could be called.
+			if (i_creature.cocks.length == 0)
+				return "<B>ERROR. INVALID CREATURE SPECIFIED to cockDescriptShort</B>";
+			
 			var description:String = "";
 			var descripted:Boolean = false;
 			//Discuss length one in 3 times
