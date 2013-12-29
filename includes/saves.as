@@ -11,6 +11,7 @@ public var file:FileReference;
 public var loader:URLLoader;
 
 public var saveFileNames:Array = ["CoC_1", "CoC_2", "CoC_3", "CoC_4", "CoC_5", "CoC_6", "CoC_7", "CoC_8", "CoC_9"];
+public var versionProperties:Object = { "legacy" : 100, "0.8.3f7" : 124, "0.8.3f8" : 125, "latest" : 125 };
 
 public function cloneObj(obj:Object):Object
 {
@@ -311,23 +312,71 @@ public function saveGame(slot:String):void
 public function loadGame(slot:String):void
 {
 	var saveFile:* = SharedObject.getLocal(slot, "/");
-
-	// I want to be able to write some debug stuff to the GUI during the loading process
-	// Therefore, we clear the display *before* calling loadGameObject
-	outputText("", true);
-
-	loadGameObject(saveFile, slot);
-	outputText("Game Loaded");
-	temp = 0;
-	statScreenRefresh();
 	
-	if (player.slotName == "VOID")
+	// Check the property count of the file
+	var numProps:int = 0;
+	for (var prop in saveFile.data)
 	{
-		trace("Setting in-use save slot to: " + slot);
-		player.slotName = slot;
+		numProps++;
 	}
 	
-	doNext(1);
+	var sfVer:int;
+	if (saveFile.data.version == undefined)
+	{
+		sfVer = versionProperties["legacy"];
+	}
+	else
+	{
+		sfVer = versionProperties[saveFile.data.version];
+	}
+	
+	if (sfVer == undefined)
+	{
+		sfVer = versionProperties["latest"];
+	}
+	
+	trace("File version expects propNum " + sfVer);
+	
+	if (numProps < sfVer)
+	{
+		trace("Got " + numProps + " file properties -- failed!");
+		outputText("<b>Aborting load.  The current save file is missing a number of expected properties.</b>\n\n", true);
+		
+		var backup:SharedObject = SharedObject.getLocal(slot + "_backup", "/");
+		
+		if (backup.data.exists)
+		{
+			outputText("Would you like to load the backup version of this slot?");
+			menu();
+			addButton(0, "Yes", loadGame, (slot + "_backup"));
+			addButton(1, "No", saveLoad);
+		}
+		else
+		{
+			menu();
+			addButton(0, "Next", saveLoad);
+		}
+	}
+	else
+	{
+		trace("Got " + numProps + " file properties -- success!");
+		// I want to be able to write some debug stuff to the GUI during the loading process
+		// Therefore, we clear the display *before* calling loadGameObject
+		outputText("", true);
+
+		loadGameObject(saveFile, slot);
+		outputText("Game Loaded");
+		temp = 0;
+		statScreenRefresh();
+		
+		if (player.slotName == "VOID")
+		{
+			trace("Setting in-use save slot to: " + slot);
+			player.slotName = slot;
+		}
+		
+		doNext(1);
+	}
 }
 
 
@@ -373,6 +422,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 	//Set a single variable that tells us if this save exists
 	
 	saveFile.data.exists = true;
+	saveFile.data.version = ver;
 	
 	//CLEAR OLD ARRAYS
 	
@@ -760,7 +810,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		}
 		
 		// There should be 124 root properties minimum in the save file. Give some wiggleroom for things that might be omitted? (All of the broken saves I've seen are MUCH shorter than expected)
-		if (numProps < 124)
+		if (numProps < versionProperties[ver])
 		{
 			outputText("<b>Aborting save.  Your current save file is broken, and needs to be bug-reported.</b>\n\nWithin the save folder for CoC, there should be a pair of files named \"" + slot + ".sol\" and \"" + slot + "_backup.sol\"\n\n<b>We need BOTH of those files, and a quick report of what you've done in the game between when you last saved, and this message.</b>\n\n", true);
 			outputText("When you've sent us the files, you can copy the _backup file over your old save to continue from your last save.\n\n");
