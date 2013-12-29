@@ -857,11 +857,11 @@ public function runIntoAGoblin(camped:Boolean = false):void {
 	}
 	outputText("\n\n\"<i>Hey there lady-stud!  You look like you could use a hot cunt to fertilize a few times!</i>\" a reedy, high-pitched goblin voice calls.  Shit, one of those guttersluts.  They're almost as bad as demons.  Worst of all, you know they'll play to your basest, most well-concealed fetishes.  Just the idea of having one of them split on your cock, slowly ballooning with seed and loving it...  well, if you're being honest with yourself, it makes you stiffen a little.  You turn around to face the curvy little preg-hungry whore, and as soon as you see her, you realize she's not going to go away until she's had a ride on your dick or been subdued.");
 	outputText("\n\n<b>It's a fight!</b>");
-	startCombat(new Goblin(this));
+	startCombat(new Goblin(this));// TODO extract to Monsters.GoblinBroodMother class
 	monster.level = 10;
 	monster.bonusHP = 300;
 	monster.tou = 30;
-	monster.HP = eMaxHP();
+	monster.HP = monster.eMaxHP();
 	monster.str = 50;
 	monster.inte = 100;
 	monster.cor = 70;
@@ -1771,7 +1771,7 @@ public function gnollAlphaBitchIntro():void {
 	startCombat(new GnollSpearThrower(this));
 	monster.bonusHP = 350;
 	monster.short = "alpha gnoll";
-	monster.HP = eMaxHP();
+	monster.HP = monster.eMaxHP(); // TODO extract to AlphaGnoll class
 	monster.long = "The gnoll standing before you is obviously an alpha among her kind; she has to be over seven feet tall and rippling with muscle, not that this stops her from having a curvy form, squeezable ass and full E-cup boobs.  The remnants of what must have once been a gorgeous and expensive silken dress are draped across her figure, torn off at the knees and hanging by only a single shoulder, arms bare and exposed.  A heavy necklace of gold is wrapped around her neck, while bracelets of more of the same adorn her arms, and piercings of gold stud her ears.  She carries a mighty-looking spear in her hands, which she brandishes at you menacingly, and a basket of throwing javelins is strapped to her back.";
 	doNext(1);
 }
@@ -2252,9 +2252,8 @@ public function minotaurDrankMalk():void {
 	
 	//Success:*
 	if(monster.statusAffectv1("Mino Milk") < 3) {
-		outputText("\"<i>Catch!\</i>\"  The succubus throws a bottle containing a milky-white substance to the minotaur.  He grabs it and uncorks the bottle, quickly chugging its contents with obvious enjoyment.  After he is done he looks even more energetic and ready to fight, and his cock looks even harder!");
-		monster.HP += 300;
-		if(monster.HP > eMaxHP()) monster.HP = eMaxHP();
+		outputText("\"<i>Catch!</i>\"  The succubus throws a bottle containing a milky-white substance to the minotaur.  He grabs it and uncorks the bottle, quickly chugging its contents with obvious enjoyment.  After he is done he looks even more energetic and ready to fight, and his cock looks even harder!");
+		monster.addHP(300);
 		monster.lust += 10;
 		if(monster.hasStatusAffect("Mino Milk") < 0)
 			monster.createStatusAffect("Mino Milk",1,0,0,0);

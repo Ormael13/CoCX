@@ -622,10 +622,9 @@ public function sandstonesAreCool():void {
 public function drankSomeMialk():void {
 	outputText("One of the blonde beauties turns to another and asks, \"<i>A drink, sister?  Fighting this intruder has given me a powerful thirst.</i>\"  The other woman wordlessly opens her robe, baring her breasts, exposing four heaving, milk-fueled mounds to the air before the other woman claims a nipple for herself.  Three others crowd in on the exposed teats, their rumps shaking contentedly as they grab a quick snack.");
 	outputText("\n\nAfter wiping the excess from their lips, they close their robes and resume a fighting stance, seeming healthier than before.");
-	//+ 30 HP, +light lust damage to PC and mob
-	monster.HP += 30;
 	stats(0,0,0,0,0,0,4 + player.lib/10,0);
-	if(monster.HP > eMaxHP()) monster.HP = eMaxHP();
+	//+ 30 HP, +light lust damage to PC and mob
+	monster.addHP(30);
 	combatRoundOver();
 }
 
@@ -644,19 +643,19 @@ public function sandStormAttack():void {
 
 public function sandWitchMobAI():void {
 	if(monster.hasStatusAffect("sandstorm") < 0) sandStormAttack();
-	else if(monster.HP/eMaxHP() < .5) drankSomeMialk();
+	else if(monster.HPRatio() < .5) drankSomeMialk();
 	else if(monster.hasStatusAffect("sandstorm") >= 0 && rand(2) == 0 && player.hasStatusAffect("lust stones") < 0) sandstonesAreCool();
 	else if(rand(3) == 0) headbuttABitch();
 	else gangrush();
 }
 public function cumWitchAI():void {
 	//Hurt!
-	if(monster.HP/eMaxHP() < .6) {
+	if(monster.HPRatio() < .6) {
 		sandWitchCuntHeals();;
 		return;
 	}
 	
-	var choices:Array = new Array();
+	var choices:Array = [];
 	
 	//Dicks only
 	if(player.hasCock()) choices[choices.length] = cumMagicAttack;
@@ -789,7 +788,7 @@ public function cocknosisAttack():void {
 //*Restores one third of her HP.
 public function sandWitchCuntHeals():void {
 	outputText("The Witch smirks at you and holds her free hand under her robes.  When she pulls it out, you realize she's gathered a handful of her cum.  She holds it up and exhales over it, the air making a slight whistle as it blows through her parted lips.  The ebony sorceress then smears the goop over her wounds, which seem to drink in the cum and vanish before your eyes.  She scolds, \"<i>Physical damage?  How artless.</i>\"");
-	monster.HP += eMaxHP()*0.33;
+	monster.addHP(monster.eMaxHP()*0.33);
 	monster.fatigue
 	combatRoundOver();
 }

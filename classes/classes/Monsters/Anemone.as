@@ -26,9 +26,7 @@ package classes.Monsters
 			init09PrimaryStats(40,20,40,50,55,35,50);
 			init10Weapon("tendrils","tentacle",5);
 			init11Armor("clammy skin");
-			var lustVuln:Number = .6;
-			var lustVuln:Number = .9;
-			init12Combat(120,30,lustVuln,TEMPERMENT_RANDOM_GRAPPLES);
+			init12Combat(120,30,.9,TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(4,rand(5) + 1);
 		}
 		

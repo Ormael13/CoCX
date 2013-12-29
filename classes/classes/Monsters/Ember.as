@@ -41,8 +41,8 @@ package classes.Monsters
 			init11Armor("scales",40);
 			init12Combat(600,20,.25,TEMPERMENT_LOVE_GRAPPLES);
 			init13Level(15,0);
-			initX_Horns(HORNS_DEMON);
-			initX_Tail(TAIL_TYPE_DEMONIC);
+			initX_Horns(HORNS_DRACONIC_X4_12_INCH_LONG);
+			initX_Tail(TAIL_TYPE_DRACONIC);
 		}
 		
 	}

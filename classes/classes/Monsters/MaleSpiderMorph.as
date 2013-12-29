@@ -32,7 +32,7 @@ package classes.Monsters
 			init11Armor("exoskeleton",14,"",70);
 			init12Combat(200,20,.6,Monster.TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(13,rand(10) + 10);
-			initX_Tail(TAIL_TYPE_COW,0,0);
+			initX_Tail(TAIL_TYPE_SPIDER_ADBOMEN,0,0);
 			initX_Specials();
 		}
 		

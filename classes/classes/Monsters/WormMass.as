@@ -20,6 +20,12 @@
 			mainClassPtr.eventParser((rand(2) == 0) ? special1 : special2);
 		}
 
+
+		override public function eMaxHP():Number
+		{
+			return 40;
+		}
+
 		public function WormMass(mainClassPtr:*)
 		{
 			super(mainClassPtr);
@@ -36,7 +42,6 @@
 			init10Weapon("worm","slap");
 			init11Armor("skin");
 			init12Combat(0,30,0,Monster.TEMPERMENT_LOVE_GRAPPLES);
-			this.HP = 40;
 			init13Level(3,0);
 			initX_Specials(5054,5055);
 

@@ -234,6 +234,36 @@
 			return kGAMECLASS.biggestBreastSizeDescript();
 		}
 		
+		protected function hairDescript():String
+		{
+			return kGAMECLASS.hairDescript();
+		}
+		
+		protected function hairOrFur():String
+		{
+			return kGAMECLASS.hairOrFur();
+		}
+		
+		protected function clitDescript():String
+		{
+			return kGAMECLASS.clitDescript();
+		}
+		
+		protected function vaginaDescript():String
+		{
+			return kGAMECLASS.vaginaDescript();
+		}
+		
+		protected function allVaginaDescript():String
+		{
+			return kGAMECLASS.allVaginaDescript();
+		}
+		
+		protected function breastCup(val:Number):String
+		{
+			return kGAMECLASS.breastCup(val);
+		}
+		
 		/**
 		 * Apply statmods to the player. dynStats wraps the regular stats call, but supports "named" arguments of the form:
 		 * 		"statname", value.

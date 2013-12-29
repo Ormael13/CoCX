@@ -1493,8 +1493,7 @@ public function helSpawnFocus():void {
 	outputText("Seeing a momentary lull in the melee, " + flags[kFLAGS.HELSPAWN_NAME] + " slips out of reach, stumbling back and clutching at the bruises forming all over her body.  \"<i>Come on, " + flags[kFLAGS.HELSPAWN_NAME] + ", you can do this. Focus, focus,</i>\" she mutters, trying to catch her breath.  A moment later and she seems to have taken a second wind as she readies her weapon with a renewed vigor.");
 	monster.lust -= 30;
 	if(monster.lust < 0) monster.lust = 0;
-	monster.HP += eMaxHP() * .3333333333;
-	if(monster.HP > eMaxHP()) monster.HP = eMaxHP();
+	monster.addHP(monster.eMaxHP() / 3.0);
 }
 
 //PC Somehow Loses Despite Being Like Level 20+

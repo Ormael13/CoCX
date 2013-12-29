@@ -29,10 +29,9 @@ package classes.Monsters
 			init10Weapon("whip","whipping",10,"",150);
 			init11Armor("demonic skin",10);
 			init12Combat(700,40,.3,Monster.TEMPERMENT_LOVE_GRAPPLES);
-			init13Level(16,rand(25)+10);
-			this.XP = totalXP() + 50;
+			init13Level(16,rand(25)+10,50);
 			initX_Horns(HORNS_DRACONIC_X2);
-			var wingDesc:String = "tiny hidden";
+			initX_Wings(WING_TYPE_BAT_LIKE_TINY,"tiny hidden");
 			initX_Tail(TAIL_TYPE_DEMONIC);
 			initX_Specials(11020,11021,11022);
 

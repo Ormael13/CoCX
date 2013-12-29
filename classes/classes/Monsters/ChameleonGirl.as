@@ -39,7 +39,7 @@ package classes.Monsters
 			init06Skin(skinToneAdj[0],SKIN_TYPE_PLAIN,"skin",skinToneAdj[1]);
 			init07Hair("black",15);
 			init08Face();
-			init09PrimaryStats(65,65,95,85,50,45,mainClassPtr.flags[kFLAGS.EMBER_COR]);
+			init09PrimaryStats(65,65,95,85,50,45,50);
 			init10Weapon("claws","claw",30);
 			init11Armor("skin",20);
 			init12Combat(350,30,.25,TEMPERMENT_LOVE_GRAPPLES);

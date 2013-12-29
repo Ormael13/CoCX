@@ -34,8 +34,7 @@ package classes.Monsters
 			init12Combat(1200,0,.2,Monster.TEMPERMENT_LOVE_GRAPPLES);
 			init13Level(18,rand(25)+40);
 			initX_Specials(5043,5044);
-			initX_Horns(HORNS_DEMON);
-			initX_Tail(TAIL_TYPE_DEMONIC);
+			initX_Tail(TAIL_TYPE_SPIDER_ADBOMEN);
 		}
 		
 	}

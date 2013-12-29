@@ -1057,10 +1057,9 @@ public function escapeFailWithHolli():void {
 public function holliBonusHealing():void {
 	//(monster hp < 100%)
 	if(monster.hasStatusAffect("Holli Burning") < 0) {
-		if(monster.HP < eMaxHP() && monster.HP > 1) {
+		if(monster.HPRatio() < 1 && monster.HP > 1) {
 			outputText("\n\nWhat wounds you have inflicted on the tree-demon overflow with sap, and begin to close!  You are left to watch helplessly as she recovers, knotting up her damaged bark until it looks as formidable as before.");
-			monster.HP += 25;
-			if(monster.HP > eMaxHP()) monster.HP = eMaxHP();
+			monster.addHP(25);
 		}
 		//[(monster lust > 0)]
 		if(monster.lust > 20 && monster.lust <= 99) {
@@ -1078,8 +1077,7 @@ public function holliBonusHealing():void {
 			if(monster.armorDef > 20) monster.armorDef = 20;
 			if(monster.tou > 50) monster.tou = 50;
 			//Reduced Regen
-			monster.HP += 5;
-			if(monster.HP > eMaxHP()) monster.HP = eMaxHP();
+			monster.addHP(5);
 			monster.lust -= 2;
 			if(monster.lust < 20) monster.lust = 20;
 		}
@@ -1207,8 +1205,7 @@ public function healHolli():void {
 	clearOutput();
 	outputText("The bark splits part way and the woman's mouth suddenly explodes with color, her lips folding out into a rather yonic-looking orchid.  Copious white-tinted sap oozes from the bloom, coating her bark and healing the lesions.  Petals rustle as she speaks wetly through it.  \"<i>Your efforts are nothing!  Throw yourself on my mercy; be my slave and do my bidding!</i>\"");
 	//heal some fuckin' hp
-	monster.HP += 200;
-	if(monster.HP > eMaxHP()) monster.HP = eMaxHP();
+	monster.addHP(200);
 	combatRoundOver();
 }
 

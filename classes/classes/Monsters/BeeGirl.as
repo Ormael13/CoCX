@@ -25,7 +25,7 @@
 			init05Body(rand(14) + 59,HIP_RATING_CURVY+3,BUTT_RATING_EXPANSIVE,LOWER_BODY_TYPE_BEE);
 			init06Skin("yellow");
 			init07Hair(Appearance.randomChoice("black","black and yellow"),6);
-			init08Face(FACE_COW_MINOTAUR);
+			init08Face();
 			init09PrimaryStats(30,30,30,20,60,55,0);
 			init10Weapon("chitin-plated fist","armored punch");
 			init11Armor("chitin",9);

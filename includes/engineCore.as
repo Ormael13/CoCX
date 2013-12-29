@@ -1698,8 +1698,9 @@ public function getButtonToolTipText( buttonText :String ) :String
 	//Combat
 	//COMBAT
 	//combat
-	if(buttonText == "Attack") {                        
-		toolTipText = "Attempt to attack the enemy with your " + player.weaponName + ".  Damage done is determined by your strength and weapon.";
+	if (buttonText == "Attack") {
+		if (gameState != 1) toolTipText = "";
+		else toolTipText = "Attempt to attack the enemy with your " + player.weaponName + ".  Damage done is determined by your strength and weapon.";
 	}
 	if(buttonText == "Kiss") {                        
 		toolTipText = "Attempt to kiss your foe on the lips with drugged lipstick.  It has no effect on those without a penis.";
@@ -1708,7 +1709,8 @@ public function getButtonToolTipText( buttonText :String ) :String
 		toolTipText = "This tube of golden lipstick is used by harpies to keep males aroused.  It has aphrodisiac properties on anyone with male genitalia and is most effective when applied to the lips or groin.";
 	}
 	if(buttonText == "Tease") {                        
-		toolTipText = "Attempt to make an enemy more aroused by striking a seductive pose and exposing parts of your body.";
+		if (gameState != 1) toolTipText = "";
+		else toolTipText = "Attempt to make an enemy more aroused by striking a seductive pose and exposing parts of your body.";
 	}
 	if(buttonText == "Kick") {                        
 		toolTipText = "Attempt to kick an enemy using your powerful lower body.";
@@ -1767,7 +1769,8 @@ public function getButtonToolTipText( buttonText :String ) :String
 	if(buttonText.indexOf("Aroused") != -1) {
 	}
 	if(buttonText.indexOf("Arouse") != -1) {                        
-		toolTipText = "The arouse spell draws on your own inner lust in order enflame the enemy's passions.  (Fatigue Cost: " + spellCost(15) + ")";
+		if (gameState != 1) toolTipText = "";
+		else toolTipText = "The arouse spell draws on your own inner lust in order enflame the enemy's passions.  (Fatigue Cost: " + spellCost(15) + ")";
 	}
 	if(buttonText == "Heal") {                        
 		toolTipText = "Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  (Fatigue Cost: " + spellCost(20) + ")";
