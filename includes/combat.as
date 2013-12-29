@@ -3737,7 +3737,7 @@ public function doCombat(eventNum:Number):void
 		return;
 	}
 	if (eventNum == 5166){
-		outputText(monster.generateDebugDescription(),true);
+		//outputText(monster.generateDebugDescription(),true);
 		doNext(1);
 	}
 }
@@ -5344,10 +5344,10 @@ public function display():void {
 		outputText("  " + percent + "\n", false);
 		showMonsterLust();
 	}
-	if (debug){
-		outputText("\n----\n");
-		outputText(monster.generateDebugDescription(),false);
-	}
+	//if (debug){
+	//	outputText("\n----\n");
+	//	outputText(monster.generateDebugDescription(),false);
+	//}
 }
 public function enemyTeaseReaction(lustDelta:Number):void {
 	lustDelta = monster.lustVuln * lustDelta;
