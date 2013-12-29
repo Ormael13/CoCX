@@ -3737,7 +3737,7 @@ public function doCombat(eventNum:Number):void
 		return;
 	}
 	if (eventNum == 5166){
-		//outputText(monster.generateDebugDescription(),true);
+		outputText(monster.generateDebugDescription(),true);
 		doNext(1);
 	}
 }

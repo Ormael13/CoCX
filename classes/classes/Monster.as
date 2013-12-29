@@ -685,13 +685,20 @@
 			result += Pronoun1 +" is guarded with "+armorPerk+" "+armorName+" (defense "+armorDef+", value "+armorValue+").\n";
 			result += Hehas+HP+"/"+eMaxHP()+" HP, "+lust+"/100 lust, "+fatigue+"/100 fatigue. "+Pronoun3+" bonus HP="+bonusHP+", and lust vulnerability="+lustVuln+".\n";
 			result += Heis+"level "+level+" and "+have+" "+gems+" gems. You will be awarded "+XP+" XP.\n";
-			if (special1 || special2 || special3){
-				result+=Hehas+"special attacks with magical numbers "+
-						[special1,special2,special3]
-								.filter(function(x:int):Boolean{return x>0})
-								.join(",")
-						+".\n"
-			} else {
+			if (special1 || special2 || special3)
+			{
+				result+=Hehas+"special attacks with magical numbers "
+				var specials:Array = [special1,special2,special3];
+				for (var cnt:int = 0; cnt < 3; cnt += 1)
+				{
+					if (specials[cnt] != 0)
+						result += String(specials[cnt]) + ","
+				}
+				
+				result += ".\n"
+			} 
+			else 
+			{
 				result+=Hehas+"no special attacks.\n";
 			}
 
