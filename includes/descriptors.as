@@ -1085,7 +1085,7 @@ public function eVaginaDescript(vaginaNum:Number):String {
 }
 
 //Enemy cock description - value of random cock or 1000 for normal, 1001 horse, 1002 dog.
-public function eCockDescript(cockIndex:Number):String {
+public function eCockDescript(cockIndex:Number = 0):String {
 	return Appearance.cockDescriptionShort(cockIndex, monster);
 }
 public function allBreastsDescript():String {
