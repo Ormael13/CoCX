@@ -3737,7 +3737,7 @@ public function doCombat(eventNum:Number):void
 		return;
 	}
 	if (eventNum == 5166){
-		outputText(monster.generateDebugDescription(),true);
+		outputText(monster.generateDebugDescription(),false);
 		doNext(1);
 	}
 }
@@ -5297,8 +5297,8 @@ public function display():void {
 	if (!monster.isFullyInit()){
 		outputText("<B>/!\\BUGMonster is not fully initialized! <u>Missing phases: "+
 				monster.initsCalled
-						.map(function(x:Boolean,i:int):String{return x?"":String(i)})
-						.filter(function(x:*):Boolean{return x!=""})
+						.map(function(x:Boolean,idx:int,array:Array):String{return x?"":String(idx)})
+						.filter(function(x:String,idx:int,array:Array):Boolean{return x!=""})
 						.join(",")+
 				"</u></b>\n");
 	}
