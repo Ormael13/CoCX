@@ -17,6 +17,12 @@ package classes.Monsters
 			mainClassPtr.chameleonAI();
 		}
 
+
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.defeatChameleonGirl();
+		}
+
 		/**
 		 * Pairs of skinTone/skinAdj
 		 */

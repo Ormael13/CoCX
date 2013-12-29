@@ -15,6 +15,12 @@ package classes.Monsters
 			mainClassPtr.helAI();
 		}
 
+		override public function defeated(hpVictory:Boolean):void
+		{
+			if(hasStatusAffect("sparring") >= 0) mainClassPtr.PCBeatsUpSalamanderSparring();
+			else mainClassPtr.beatUpHel();
+		}
+
 		public function Hel(mainClassPtr:*)
 		{
 			super(mainClassPtr);

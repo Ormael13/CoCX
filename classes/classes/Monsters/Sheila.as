@@ -1,7 +1,7 @@
 package classes.Monsters
 {
-	import classes.Monster;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Monster;
 
 	/**
 	 * ...
@@ -14,6 +14,12 @@ package classes.Monsters
 		override protected function performCombatAction():void
 		{
 			mainClassPtr.sheilaAI();
+		}
+
+		override public function defeated(hpVictory:Boolean):void
+		{
+			if(mainClassPtr.flags[kFLAGS.SHEILA_DEMON] == 1) mainClassPtr.beatUpDemonSheila();
+			else mainClassPtr.sheilaGotWhomped();
 		}
 
 		public function Sheila(mainClassPtr:*)

@@ -14,6 +14,17 @@ package classes.Monsters
 			mainClassPtr.gnollAI();
 		}
 
+
+		override public function defeated(hpVictory:Boolean):void
+		{
+			if(hasStatusAffect("PhyllaFight") >= 0) {
+				removeStatusAffect("PhyllaFight");
+				mainClassPtr.phyllaPCBeatsGnoll();
+				return;
+			}
+			mainClassPtr.defeatHyena();
+		}
+
 		public function Gnoll(mainClassPtr:*)
 		{
 			super(mainClassPtr);

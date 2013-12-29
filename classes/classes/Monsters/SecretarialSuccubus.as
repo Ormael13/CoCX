@@ -8,6 +8,29 @@ package classes.Monsters
 	 * @author aimozg
 	 */
 	public class SecretarialSuccubus extends Monster {
+		override public function defeated(hpVictory:Boolean):void
+		{
+			if (player.gender > 0){
+				if (hpVictory) {
+					outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.  Now would be the perfect opportunity to taste the fruits of her sex-ready form...\n\nDo you rape her?", true);
+					mainClassPtr.stats(0, 0, 0, 0, 0, 0, 1, 0);
+					var temp2:int = 0;
+					if (player.hasKeyItem("Deluxe Dildo") >= 0) temp2 = 2266;
+					mainClassPtr.simpleChoices("Yes", 11023, "Dildo Rape", temp2, "", 0, "", 0, "No", 5007);
+				} else if (player.lust>=33){
+					outputText("You smile in satisfaction as the " + short + " gives up on fighting you and starts masturbating, begging for you to fuck her.  Now would be the perfect opportunity to taste the fruits of her sex-ready form...\n\nDo you fuck her?", true);
+					mainClassPtr.stats(0,0,0,0,0,0,1,0);
+					temp2 = 0;
+					if(player.hasKeyItem("Deluxe Dildo") >= 0) temp2 = 2266;
+					mainClassPtr.simpleChoices("Yes",11023,"Dildo Rape",temp2,"",0,"",0,"No",5007);
+				} else {
+					mainClassPtr.finishCombat();
+				}
+			} else {
+				mainClassPtr.finishCombat();
+			}
+		}
+
 		public function SecretarialSuccubus(mainClassPtr :*) {
 			super(mainClassPtr);
 			init01Names("the ", "secretarial succubus", "secretarialsuccubus", "The succubus across from you balances gracefully on her spiked heels, twirling and moving unpredictably.  Sexy dark stockings hug every curve of her perfectly shaped flesh until they disappear into her tiny miniskirt.  Her impressive breasts wobble delightfully as she moves, despite the inadequate efforts of her straining vest.  A pair of foot-long horns curve up from her otherwise perfect face and forehead, wreathed in lustrous blonde hair.  The very air around her is filled with an unidentifiable fragrance that makes you tingle and shiver.");

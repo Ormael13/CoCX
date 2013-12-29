@@ -13,9 +13,14 @@
 
 	public class FetishZealot extends Monster
 	{
-		
 
-		public function FetishZealot(mainClassPtr:*) 
+
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.zealotDefeated();
+		}
+
+		public function FetishZealot(mainClassPtr:*)
 		{
 			super(mainClassPtr);
 			trace("FetishZealot Constructor!");

@@ -15,6 +15,11 @@ package classes.Monsters
 			mainClassPtr.basiliskAI();
 		}
 
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.defeatBasilisk();
+		}
+
 		public function Basilisk(mainClassPtr:*)
 		{
 			super(mainClassPtr);

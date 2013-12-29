@@ -18,6 +18,11 @@ package classes.Monsters
 			} else super.performCombatAction();
 		}
 
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.pcBeatsATrap();
+		}
+
 		public function SandTrap(mainClassPtr:*)
 		{
 			super(mainClassPtr);

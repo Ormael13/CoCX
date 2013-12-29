@@ -14,6 +14,12 @@ package classes.Monsters
 			mainClassPtr.gooArmorAI();
 		}
 
+		override public function defeated(hpVictory:Boolean):void
+		{
+			if (hasStatusAffect("spar") >= 0) mainClassPtr.pcWinsValeriaSpar();
+			else mainClassPtr.beatUpGooArmor();
+		}
+
 		public function GooArmor(mainClassPtr:*)
 		{
 			super(mainClassPtr);

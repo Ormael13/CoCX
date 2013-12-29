@@ -20,6 +20,14 @@
 			mainClassPtr.sophieAI();
 		}
 
+		override public function defeated(hpVictory:Boolean):void
+		{
+			if(hasStatusAffect("bimboBrawl") >= 0)
+				mainClassPtr.beatUpDebimboSophie();
+			else
+				mainClassPtr.sophieLostCombat();
+		}
+
 		public function Sophie(mainClassPtr:*)
 		{
 			super(mainClassPtr);

@@ -12,13 +12,24 @@ package classes.Monsters
 		override protected function handleFear():Boolean
 		{
 			removeStatusAffect("Fear");
-			mainClassPtr.outputText("Kiha shudders for a moment, then looks your way with a clear head.  \"<i>Fear was the first thing the demons taught us to overcome.  Do you think it would stay my blade?</i>\"\n", false);
+			outputText("Kiha shudders for a moment, then looks your way with a clear head.  \"<i>Fear was the first thing the demons taught us to overcome.  Do you think it would stay my blade?</i>\"\n", false);
 			return true;
 		}
 
 		override protected function performCombatAction():void
 		{
 			mainClassPtr.kihaAI();
+		}
+
+		override public function defeated(hpVictory:Boolean):void
+		{
+			if(hasStatusAffect("spiderfight") >= 0)
+				mainClassPtr.playerBeatsUpKihaPreSpiderFight();
+			else if(hasStatusAffect("domfight") >= 0)
+				mainClassPtr.pcWinsDomFight();
+			else if(hasStatusAffect("spar") >= 0)
+				mainClassPtr.winSparWithKiha();
+			else mainClassPtr.kihaVictoryIntroduction();
 		}
 
 		public function Kiha(mainClassPtr:*)

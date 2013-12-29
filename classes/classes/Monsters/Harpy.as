@@ -19,6 +19,11 @@
 			mainClassPtr.harpyAI();
 		}
 
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.harpyVictoryuuuuu();
+		}
+
 		public function Harpy(mainClassPtr:*)
 		{
 			super(mainClassPtr);

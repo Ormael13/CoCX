@@ -15,6 +15,11 @@ package classes.Monsters
 			mainClassPtr.tamanisDaughtersAI();
 		}
 
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.combatWinAgainstDaughters();
+		}
+
 		public function TamanisDaughters(mainClassPtr:*)
 		{
 			super(mainClassPtr);
@@ -29,9 +34,9 @@ package classes.Monsters
 			init09PrimaryStats(55,30,45,50,70,70,50);
 			init10Weapon("fists","tiny punch");
 			init11Armor("leather straps");
-			var bonusHP:Number = 50 + (int(mainClassPtr.player.statusAffectv2("Tamani")/2)*15);
+			var bonusHP:Number = 50 + (int(player.statusAffectv2("Tamani")/2)*15);
 			init12Combat(bonusHP,30,.65,Monster.TEMPERMENT_RANDOM_GRAPPLES);
-			var level:int = 8 + (Math.floor(mainClassPtr.player.statusAffectv2("Tamani")/2/10));
+			var level:int = 8 + (Math.floor(player.statusAffectv2("Tamani")/2/10));
 			init13Level(level,rand(15) + 5);
 
 

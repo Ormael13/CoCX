@@ -15,6 +15,11 @@ package classes.Monsters
 			mainClassPtr.isabellaAI();
 		}
 
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.defeatIsabella();
+		}
+
 		public function Izabella(mainClassPtr:*)
 		{
 			super(mainClassPtr);

@@ -16,6 +16,11 @@ package classes.Monsters
 			mainClassPtr.nagaSiriusRadioAI();
 		}
 
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.urtaBeatsUpSiriusRadio();
+		}
+
 		public function Sirius(mainClassPtr:*)
 		{
 			super(mainClassPtr);

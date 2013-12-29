@@ -15,6 +15,11 @@ package classes.Monsters
 			mainClassPtr.IzmaAI();
 		}
 
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.defeatIzma();
+		}
+
 		public function Izma(mainClassPtr:*)
 		{
 			super(mainClassPtr);

@@ -8,8 +8,22 @@ package classes.Monsters
 	 */
 	public class GnollSpearThrower extends Monster 
 	{
-		
-		public function GnollSpearThrower(mainClassPtr:*) 
+
+		override public function defeated(hpVictory:Boolean):void
+		{
+			if(short == "alpha gnoll") {
+				mainClassPtr.clearOutput();
+				outputText("The gnoll alpha is defeated!  You could use her for a quick, willing fuck to sate your lusts before continuing on.  Hell, you could even dose her up with that succubi milk you took from the goblin first - it might make her even hotter.  Do you?");
+				mainClassPtr.menu();
+				mainClassPtr.addButton(0,"Fuck",	mainClassPtr.winRapeHyenaPrincess);
+				mainClassPtr.addButton(1,"Succ Milk", mainClassPtr.useSuccubiMilkOnGnollPrincesses);
+				mainClassPtr.addButton(4,"Leave",mainClassPtr.urtaNightSleep);
+			} else {
+				mainClassPtr.hyenaVictory();
+			}
+		}
+
+		public function GnollSpearThrower(mainClassPtr:*)
 		{
 			super(mainClassPtr);
 			init01Names("the ", "gnoll spear-thrower", "gnollspearthrower", "You are fighting a gnoll.  An amalgam of voluptuous, sensual lady and snarly, pissed off hyena, she clearly intends to punish you for trespassing.  Her dark-tan, spotted hide blends into a soft cream-colored fur covering her belly and two D-cup breasts, leaving two black nipples poking through the fur.  A crude loincloth is tied around her waist, obscuring her groin from view.  A leather strap cuts between her heavy breasts, holding a basket of javelins on her back.  Large, dish-shaped ears focus on you, leaving no doubt that she can hear every move you make.  Sharp, dark eyes are locked on your body, filled with aggression and a hint of lust.");

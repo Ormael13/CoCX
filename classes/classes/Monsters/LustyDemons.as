@@ -15,6 +15,11 @@ package classes.Monsters
 			mainClassPtr.vapulaAI();
 		}
 
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.defeetVapulasHorde();
+		}
+
 		public function LustyDemons(mainClassPtr:*)
 		{
 			super(mainClassPtr);

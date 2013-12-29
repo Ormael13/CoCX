@@ -20,6 +20,12 @@
 			mainClassPtr.ceraphAI();
 		}
 
+
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.winRapeChoices();
+		}
+
 		public function Ceraph(mainClassPtr:*)
 		{
 			super(mainClassPtr);

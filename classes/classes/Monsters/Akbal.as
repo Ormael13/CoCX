@@ -15,6 +15,11 @@
 	{
 
 
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.victoryChoices();
+		}
+
 		public function Akbal(mainClassPtr:*)
 		{
 			super(mainClassPtr);

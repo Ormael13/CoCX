@@ -20,6 +20,11 @@
 			mainClassPtr.impGangAI();
 		}
 
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.impGangVICTORY();
+		}
+
 		public function ImpHorde(mainClassPtr:*)
 		{
 			super(mainClassPtr);

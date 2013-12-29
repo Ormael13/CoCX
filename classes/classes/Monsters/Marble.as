@@ -12,9 +12,14 @@
 
 	public class Marble extends Monster
 	{
-		
 
-		public function Marble(mainClassPtr:*) 
+
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.eventParser(5094);
+		}
+
+		public function Marble(mainClassPtr:*)
 		{
 			super(mainClassPtr);
 			trace("Marble Constructor!");

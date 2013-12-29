@@ -17,6 +17,16 @@ package classes.Monsters
 			mainClassPtr.fidoAI();
 		}
 
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.clearOutput();
+			outputText("The minotaur lord is defeated!  ");
+			outputText("  You could use him for a quick fuck to sate your lusts before continuing on.  Do you?");
+			mainClassPtr.menu();
+			mainClassPtr.addButton(0,"Fuck",mainClassPtr.winRapeAMinoLordAsUrta);
+			mainClassPtr.addButton(4,"Leave",mainClassPtr.beatMinoLordOnToSuccubi);
+		}
+
 		public function MinotaurLord(mainClassPtr:*)
 		{
 			super(mainClassPtr);

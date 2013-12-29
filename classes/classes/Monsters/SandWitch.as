@@ -12,9 +12,18 @@
 
 	public class SandWitch extends Monster
 	{
-		
 
-		public function SandWitch(mainClassPtr:*) 
+
+		override public function defeated(hpVictory:Boolean):void
+		{
+			if (player.lust >= 33){
+				mainClassPtr.beatSandwitch();
+			} else {
+				mainClassPtr.finishCombat();
+			}
+		}
+
+		public function SandWitch(mainClassPtr:*)
 		{
 			super(mainClassPtr);
 			trace("SandWitch Constructor!");

@@ -14,6 +14,11 @@ package classes.Monsters
 			mainClassPtr.milkSuccubusAI();
 		}
 
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.urtaBeatsUpCowcubi();
+		}
+
 		public function MilkySuccubus(mainClassPtr:*)
 		{
 			super(mainClassPtr);

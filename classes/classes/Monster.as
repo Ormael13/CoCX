@@ -1,5 +1,7 @@
 ﻿package classes 
 {
+	import classes.GlobalFlags.kFLAGS;
+
 	/**
 	 * ...
 	 * @author Yoffy, Fake-Name
@@ -8,9 +10,17 @@
 	{
 		
 		protected var mainClassPtr:*;
+		
+		protected function get player():Player
+		{
+			return mainClassPtr.player;
+		}
+		protected function outputText(text:String,clear:Boolean=false):void{
+			mainClassPtr.outputText(text,clear);
+		}
 		//For enemies
 		public var bonusHP:Number = 0;
-		private var _long:String = "<b>You have encountered an unitialized monster. Please report this as a bug</b>.";
+		private var _long:String = "<b>You have encountered an unitialized  Please report this as a bug</b>.";
 		public function get long():String
 		{
 			return _long;
@@ -600,6 +610,17 @@
 			if (rando == 2 && special2 > 0) mainClassPtr.eventParser(special2);
 			if (rando == 3 && special3 > 0) mainClassPtr.eventParser(special3);
 		}
+
+		/**
+		 * All branches of this method should end either with choose/doNext,
+		 * or with default 'awardPlayer' or 'finishCombat'. The latter displays
+		 * default message like "you defeat %s" or "%s falls and starts masturbating"
+		 */
+		public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.finishCombat();
+		}
+
 		public function generateDebugDescription():String{
 			var result:String;
 			var be:String =plural?"are":"is";
