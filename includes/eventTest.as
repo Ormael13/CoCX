@@ -110,6 +110,26 @@ public function eventTester():void {
 
 "Paste test event text here."
 
+
+[screen male_content | 
+OH HAI I HAZ A PENOR
+]
+[screen female_content | 
+OH HAI I HAZ A VAGOO
+]
+
+[screen herm_content | 
+OH HAI I HAZ ALL THE THINGS
+]
+[screen neuter_content | 
+WHERE IS MAH JUNK!!!!111one!
+]
+
+[if (player.gender == 1) [insertSection male_content]]
+[if (player.gender == 2) [insertSection female_content]]
+[if (player.gender == 3) [insertSection herm_content]]
+[if (player.gender == 0) [insertSection neuter_content]]
+
 [eCockDescript 0]
 [eCockDescript]
 

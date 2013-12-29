@@ -157,6 +157,11 @@ public function outputText(output:String,
 	// we have to purge the output text BEFORE calling parseText, because if there are scene commands in 
 	// the parsed text, parseText() will write directly to the output
 
+
+	// This is cleaup in case someone hits the Data or new-game button when the event-test window is shown. 
+	// It's needed since those buttons are available even when in the event-tester
+	mainView.hideTestInputPanel();
+
 	if (purgeText)
 	{
 		clearOutput();
