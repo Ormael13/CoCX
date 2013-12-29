@@ -688,7 +688,7 @@
 			if (special1 || special2 || special3){
 				result+=Hehas+"special attacks with magical numbers "+
 						[special1,special2,special3]
-								.filter(function(x:int):Boolean{return x>0})
+								.filter(function(x:*,index:int,array:Array):Boolean{return x>0})
 								.join(",")
 						+".\n"
 			} else {
