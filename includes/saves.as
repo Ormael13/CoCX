@@ -352,10 +352,13 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 	//Autosave stuff
 	if (player.slotName != "VOID")
 		player.slotName = slot;
+		
+	var backupAborted:Boolean = false;
 	
 	var counter:Number = player.cocks.length;
 	//Initialize the save file
 	var saveFile:*;
+	var backup:SharedObject;
 	if (isFile)
 	{
 		saveFile = new Object();
@@ -366,6 +369,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 	{
 		saveFile = SharedObject.getLocal(slot, "/");
 	}
+	
 	//Set a single variable that tells us if this save exists
 	
 	saveFile.data.exists = true;
@@ -396,317 +400,329 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.notes = notes;
 	mainView.nameBox.visible = false;
 	
-	//flags
-	saveFile.data.flags = new Array();
-	for (var i:int = 0; i < flags.length; i++)
+	var processingError:Boolean = false;
+	var dataError:Error;
+	
+	try
 	{
-		// Don't save unset/default flags
-		if (flags[i] != 0)
+		//flags
+		saveFile.data.flags = new Array();
+		for (var i:int = 0; i < flags.length; i++)
 		{
-			saveFile.data.flags[i] = flags[i];
+			// Don't save unset/default flags
+			if (flags[i] != 0)
+			{
+				saveFile.data.flags[i] = flags[i];
+			}
 		}
+		
+		//CLOTHING/ARMOR
+		saveFile.data.armorName = player.armorName;
+		saveFile.data.weaponName = player.weaponName;
+		saveFile.data.weaponVerb = player.weaponVerb;
+		saveFile.data.armorDef = player.armorDef;
+		saveFile.data.armorPerk = player.armorPerk;
+		saveFile.data.weaponAttack = player.weaponAttack;
+		saveFile.data.weaponPerk = player.weaponPerk;
+		saveFile.data.weaponValue = player.weaponValue;
+		saveFile.data.armorValue = player.armorValue;
+		
+		//PIERCINGS
+		saveFile.data.nipplesPierced = player.nipplesPierced;
+		saveFile.data.nipplesPShort = player.nipplesPShort;
+		saveFile.data.nipplesPLong = player.nipplesPLong;
+		saveFile.data.lipPierced = player.lipPierced;
+		saveFile.data.lipPShort = player.lipPShort;
+		saveFile.data.lipPLong = player.lipPLong;
+		saveFile.data.tonguePierced = player.tonguePierced;
+		saveFile.data.tonguePShort = player.tonguePShort;
+		saveFile.data.tonguePLong = player.tonguePLong;
+		saveFile.data.eyebrowPierced = player.eyebrowPierced;
+		saveFile.data.eyebrowPShort = player.eyebrowPShort;
+		saveFile.data.eyebrowPLong = player.eyebrowPLong;
+		saveFile.data.earsPierced = player.earsPierced;
+		saveFile.data.earsPShort = player.earsPShort;
+		saveFile.data.earsPLong = player.earsPLong;
+		saveFile.data.nosePierced = player.nosePierced;
+		saveFile.data.nosePShort = player.nosePShort;
+		saveFile.data.nosePLong = player.nosePLong;
+		
+		//MAIN STATS
+		saveFile.data.str = player.str;
+		saveFile.data.tou = player.tou;
+		saveFile.data.spe = player.spe;
+		saveFile.data.inte = player.inte;
+		saveFile.data.lib = player.lib;
+		saveFile.data.sens = player.sens;
+		saveFile.data.cor = player.cor;
+		saveFile.data.fatigue = player.fatigue;
+		//Combat STATS
+		saveFile.data.HP = player.HP;
+		saveFile.data.lust = player.lust;
+		saveFile.data.teaseLevel = player.teaseLevel;
+		saveFile.data.teaseXP = player.teaseXP;
+		//LEVEL STATS
+		saveFile.data.XP = player.XP;
+		saveFile.data.level = player.level;
+		saveFile.data.gems = player.gems;
+		saveFile.data.perkPoints = player.perkPoints;
+		
+		//Appearance
+		saveFile.data.gender = player.gender;
+		saveFile.data.femininity = player.femininity;
+		saveFile.data.thickness = player.thickness;
+		saveFile.data.tone = player.tone;
+		saveFile.data.tallness = player.tallness;
+		saveFile.data.hairColor = player.hairColor;
+		saveFile.data.hairType = player.hairType;
+		saveFile.data.gills = player.gills;
+		saveFile.data.armType = player.armType;
+		saveFile.data.hairLength = player.hairLength;
+		saveFile.data.beardLength = player.beardLength;
+		saveFile.data.eyeType = player.eyeType;
+		saveFile.data.beardStyle = player.beardStyle;
+		saveFile.data.skinType = player.skinType;
+		saveFile.data.skinTone = player.skinTone;
+		saveFile.data.skinDesc = player.skinDesc;
+		saveFile.data.skinAdj = player.skinAdj;
+		saveFile.data.faceType = player.faceType;
+		saveFile.data.tongueType = player.tongueType;
+		saveFile.data.earType = player.earType;
+		saveFile.data.earValue = player.earValue;
+		saveFile.data.antennae = player.antennae;
+		saveFile.data.horns = player.horns;
+		saveFile.data.hornType = player.hornType;
+		saveFile.data.wingDesc = player.wingDesc;
+		saveFile.data.wingType = player.wingType;
+		saveFile.data.lowerBody = player.lowerBody;
+		saveFile.data.tailType = player.tailType;
+		saveFile.data.tailVenum = player.tailVenom;
+		saveFile.data.tailRecharge = player.tailRecharge;
+		saveFile.data.hipRating = player.hipRating;
+		saveFile.data.buttRating = player.buttRating;
+		
+		//Sexual Stuff
+		saveFile.data.balls = player.balls;
+		saveFile.data.cumMultiplier = player.cumMultiplier;
+		saveFile.data.ballSize = player.ballSize;
+		saveFile.data.hoursSinceCum = player.hoursSinceCum;
+		saveFile.data.fertility = player.fertility;
+		saveFile.data.clitLength = player.clitLength;
+		
+		//Preggo stuff
+		saveFile.data.pregnancyIncubation = player.pregnancyIncubation;
+		saveFile.data.pregnancyType = player.pregnancyType;
+		saveFile.data.buttPregnancyIncubation = player.buttPregnancyIncubation;
+		saveFile.data.buttPregnancyType = player.buttPregnancyType;
+		
+		/*myLocalData.data.furnitureArray = new Array();
+		   for (var i:Number = 0; i < GameArray.length; i++) {
+		   myLocalData.data.girlArray.push(new Array());
+		   myLocalData.data.girlEffectArray.push(new Array());
+		 }*/
+		
+		saveFile.data.cocks = new Array();
+		saveFile.data.vaginas = new Array();
+		saveFile.data.breastRows = new Array();
+		saveFile.data.perks = new Array();
+		saveFile.data.statusAffects = new Array();
+		saveFile.data.ass = new Array();
+		saveFile.data.keyItems = new Array();
+		saveFile.data.itemStorage = new Array();
+		saveFile.data.gearStorage = new Array();
+		//Set array
+		for (i = 0; i < player.cocks.length; i++)
+		{
+			saveFile.data.cocks.push(new Array());
+		}
+		//Populate Array
+		for (i = 0; i < player.cocks.length; i++)
+		{
+			saveFile.data.cocks[i].cockThickness = player.cocks[i].cockThickness;
+			saveFile.data.cocks[i].cockLength = player.cocks[i].cockLength;
+			saveFile.data.cocks[i].cockType = player.cocks[i].cockType.Index;
+			saveFile.data.cocks[i].knotMultiplier = player.cocks[i].knotMultiplier;
+			saveFile.data.cocks[i].pierced = player.cocks[i].pierced;
+			saveFile.data.cocks[i].pShortDesc = player.cocks[i].pShortDesc;
+			saveFile.data.cocks[i].pLongDesc = player.cocks[i].pLongDesc;
+			saveFile.data.cocks[i].sock = player.cocks[i].sock;
+		}
+		//Set Vaginal Array
+		for (i = 0; i < player.vaginas.length; i++)
+		{
+			saveFile.data.vaginas.push(new Array());
+		}
+		//Populate Vaginal Array
+		for (i = 0; i < player.vaginas.length; i++)
+		{
+			saveFile.data.vaginas[i].type = player.vaginas[i].type;
+			saveFile.data.vaginas[i].vaginalWetness = player.vaginas[i].vaginalWetness;
+			saveFile.data.vaginas[i].vaginalLooseness = player.vaginas[i].vaginalLooseness;
+			saveFile.data.vaginas[i].fullness = player.vaginas[i].fullness;
+			saveFile.data.vaginas[i].virgin = player.vaginas[i].virgin;
+			saveFile.data.vaginas[i].labiaPierced = player.vaginas[i].labiaPierced;
+			saveFile.data.vaginas[i].labiaPShort = player.vaginas[i].labiaPShort;
+			saveFile.data.vaginas[i].labiaPLong = player.vaginas[i].labiaPLong;
+			saveFile.data.vaginas[i].clitPierced = player.vaginas[i].clitPierced;
+			saveFile.data.vaginas[i].clitPShort = player.vaginas[i].clitPShort;
+			saveFile.data.vaginas[i].clitPLong = player.vaginas[i].clitPLong;
+		}
+		//NIPPLES
+		saveFile.data.nippleLength = player.nippleLength;
+		//Set Breast Array
+		for (i = 0; i < player.breastRows.length; i++)
+		{
+			saveFile.data.breastRows.push(new Array());
+				//trace("Saveone breastRow");
+		}
+		//Populate Breast Array
+		for (i = 0; i < player.breastRows.length; i++)
+		{
+			//trace("Populate One BRow");
+			saveFile.data.breastRows[i].breasts = player.breastRows[i].breasts;
+			saveFile.data.breastRows[i].breastRating = player.breastRows[i].breastRating;
+			saveFile.data.breastRows[i].nipplesPerBreast = player.breastRows[i].nipplesPerBreast;
+			saveFile.data.breastRows[i].lactationMultiplier = player.breastRows[i].lactationMultiplier;
+			saveFile.data.breastRows[i].milkFullness = player.breastRows[i].milkFullness;
+			saveFile.data.breastRows[i].fuckable = player.breastRows[i].fuckable;
+			saveFile.data.breastRows[i].fullness = player.breastRows[i].fullness;
+		}
+		//Set Perk Array
+		for (i = 0; i < player.perks.length; i++)
+		{
+			saveFile.data.perks.push(new Array());
+				//trace("Saveone Perk");
+		}
+		//Populate Perk Array
+		for (i = 0; i < player.perks.length; i++)
+		{
+			//trace("Populate One Perk");
+			saveFile.data.perks[i].perkName = player.perks[i].perkName;
+			saveFile.data.perks[i].value1 = player.perks[i].value1;
+			saveFile.data.perks[i].value2 = player.perks[i].value2;
+			saveFile.data.perks[i].value3 = player.perks[i].value3;
+			saveFile.data.perks[i].value4 = player.perks[i].value4;
+			saveFile.data.perks[i].perkDesc = player.perks[i].perkDesc;
+		}
+		
+		//Set Status Array
+		for (i = 0; i < player.statusAffects.length; i++)
+		{
+			saveFile.data.statusAffects.push(new Array());
+				//trace("Saveone statusAffects");
+		}
+		//Populate Status Array
+		for (i = 0; i < player.statusAffects.length; i++)
+		{
+			//trace("Populate One statusAffects");
+			saveFile.data.statusAffects[i].statusAffectName = player.statusAffects[i].statusAffectName;
+			saveFile.data.statusAffects[i].value1 = player.statusAffects[i].value1;
+			saveFile.data.statusAffects[i].value2 = player.statusAffects[i].value2;
+			saveFile.data.statusAffects[i].value3 = player.statusAffects[i].value3;
+			saveFile.data.statusAffects[i].value4 = player.statusAffects[i].value4;
+		}
+		//Set keyItem Array
+		for (i = 0; i < player.keyItems.length; i++)
+		{
+			saveFile.data.keyItems.push(new Array());
+				//trace("Saveone keyItem");
+		}
+		//Populate keyItem Array
+		for (i = 0; i < player.keyItems.length; i++)
+		{
+			//trace("Populate One keyItemzzzzzz");
+			saveFile.data.keyItems[i].keyName = player.keyItems[i].keyName;
+			saveFile.data.keyItems[i].value1 = player.keyItems[i].value1;
+			saveFile.data.keyItems[i].value2 = player.keyItems[i].value2;
+			saveFile.data.keyItems[i].value3 = player.keyItems[i].value3;
+			saveFile.data.keyItems[i].value4 = player.keyItems[i].value4;
+		}
+		//Set storage slot array
+		for (i = 0; i < itemStorage.length; i++)
+		{
+			saveFile.data.itemStorage.push(new Array());
+		}
+		
+		//Populate storage slot array
+		for (i = 0; i < itemStorage.length; i++)
+		{
+			saveFile.data.itemStorage[i].shortName = itemStorage[i].shortName;
+			saveFile.data.itemStorage[i].quantity = itemStorage[i].quantity;
+			saveFile.data.itemStorage[i].unlocked = itemStorage[i].unlocked;
+		}
+		//Set gear slot array
+		for (i = 0; i < gearStorage.length; i++)
+		{
+			saveFile.data.gearStorage.push(new Array());
+		}
+		
+		//Populate gear slot array
+		for (i = 0; i < gearStorage.length; i++)
+		{
+			saveFile.data.gearStorage[i].shortName = gearStorage[i].shortName;
+			saveFile.data.gearStorage[i].quantity = gearStorage[i].quantity;
+			saveFile.data.gearStorage[i].unlocked = gearStorage[i].unlocked;
+		}
+		saveFile.data.ass.push(new Array());
+		saveFile.data.ass.analWetness = player.ass.analWetness;
+		saveFile.data.ass.analLooseness = player.ass.analLooseness;
+		saveFile.data.ass.fullness = player.ass.fullness;
+		//EXPLORED
+		saveFile.data.exploredLake = player.exploredLake;
+		saveFile.data.exploredMountain = player.exploredMountain;
+		saveFile.data.exploredForest = player.exploredForest;
+		saveFile.data.exploredDesert = player.exploredDesert;
+		saveFile.data.explored = player.explored;
+		saveFile.data.foundForest = foundForest;
+		saveFile.data.foundDesert = foundDesert;
+		saveFile.data.foundMountain = foundMountain;
+		saveFile.data.foundLake = foundLake;
+		saveFile.data.gameState = gameState;
+		
+		//Time and Items
+		saveFile.data.hours = model.time.hours;
+		saveFile.data.days = model.time.days;
+		saveFile.data.autoSave = player.autoSave;
+		
+		//PLOTZ
+		saveFile.data.whitney = whitney;
+		saveFile.data.monk = monk;
+		saveFile.data.sand = sand;
+		saveFile.data.giacomo = giacomo;
+		saveFile.data.beeProgress = beeProgress;
+		
+		//ITEMZ. Item1s
+		saveFile.data.itemSlot1 = new Array();
+		saveFile.data.itemSlot1.quantity = itemSlot1.quantity;
+		saveFile.data.itemSlot1.shortName = itemSlot1.shortName;
+		saveFile.data.itemSlot1.unlocked = itemSlot1.unlocked;
+		saveFile.data.itemSlot2 = new Array();
+		saveFile.data.itemSlot2.quantity = itemSlot2.quantity;
+		saveFile.data.itemSlot2.quantity = itemSlot2.quantity;
+		saveFile.data.itemSlot2.shortName = itemSlot2.shortName;
+		saveFile.data.itemSlot2.unlocked = itemSlot2.unlocked;
+		saveFile.data.itemSlot3 = new Array();
+		saveFile.data.itemSlot3.quantity = itemSlot3.quantity;
+		saveFile.data.itemSlot3.shortName = itemSlot3.shortName;
+		saveFile.data.itemSlot3.unlocked = itemSlot3.unlocked;
+		saveFile.data.itemSlot4 = new Array();
+		saveFile.data.itemSlot4.quantity = itemSlot4.quantity;
+		saveFile.data.itemSlot4.shortName = itemSlot4.shortName;
+		saveFile.data.itemSlot4.unlocked = itemSlot4.unlocked;
+		saveFile.data.itemSlot5 = new Array();
+		saveFile.data.itemSlot5.quantity = itemSlot5.quantity;
+		saveFile.data.itemSlot5.shortName = itemSlot5.shortName;
+		saveFile.data.itemSlot5.unlocked = itemSlot5.unlocked;
+		
+		// Keybinds
+		saveFile.data.controls = inputManager.SaveBindsToObj();
 	}
-	
-	//CLOTHING/ARMOR
-	saveFile.data.armorName = player.armorName;
-	saveFile.data.weaponName = player.weaponName;
-	saveFile.data.weaponVerb = player.weaponVerb;
-	saveFile.data.armorDef = player.armorDef;
-	saveFile.data.armorPerk = player.armorPerk;
-	saveFile.data.weaponAttack = player.weaponAttack;
-	saveFile.data.weaponPerk = player.weaponPerk;
-	saveFile.data.weaponValue = player.weaponValue;
-	saveFile.data.armorValue = player.armorValue;
-	
-	//PIERCINGS
-	saveFile.data.nipplesPierced = player.nipplesPierced;
-	saveFile.data.nipplesPShort = player.nipplesPShort;
-	saveFile.data.nipplesPLong = player.nipplesPLong;
-	saveFile.data.lipPierced = player.lipPierced;
-	saveFile.data.lipPShort = player.lipPShort;
-	saveFile.data.lipPLong = player.lipPLong;
-	saveFile.data.tonguePierced = player.tonguePierced;
-	saveFile.data.tonguePShort = player.tonguePShort;
-	saveFile.data.tonguePLong = player.tonguePLong;
-	saveFile.data.eyebrowPierced = player.eyebrowPierced;
-	saveFile.data.eyebrowPShort = player.eyebrowPShort;
-	saveFile.data.eyebrowPLong = player.eyebrowPLong;
-	saveFile.data.earsPierced = player.earsPierced;
-	saveFile.data.earsPShort = player.earsPShort;
-	saveFile.data.earsPLong = player.earsPLong;
-	saveFile.data.nosePierced = player.nosePierced;
-	saveFile.data.nosePShort = player.nosePShort;
-	saveFile.data.nosePLong = player.nosePLong;
-	
-	//MAIN STATS
-	saveFile.data.str = player.str;
-	saveFile.data.tou = player.tou;
-	saveFile.data.spe = player.spe;
-	saveFile.data.inte = player.inte;
-	saveFile.data.lib = player.lib;
-	saveFile.data.sens = player.sens;
-	saveFile.data.cor = player.cor;
-	saveFile.data.fatigue = player.fatigue;
-	//Combat STATS
-	saveFile.data.HP = player.HP;
-	saveFile.data.lust = player.lust;
-	saveFile.data.teaseLevel = player.teaseLevel;
-	saveFile.data.teaseXP = player.teaseXP;
-	//LEVEL STATS
-	saveFile.data.XP = player.XP;
-	saveFile.data.level = player.level;
-	saveFile.data.gems = player.gems;
-	saveFile.data.perkPoints = player.perkPoints;
-	
-	//Appearance
-	saveFile.data.gender = player.gender;
-	saveFile.data.femininity = player.femininity;
-	saveFile.data.thickness = player.thickness;
-	saveFile.data.tone = player.tone;
-	saveFile.data.tallness = player.tallness;
-	saveFile.data.hairColor = player.hairColor;
-	saveFile.data.hairType = player.hairType;
-	saveFile.data.gills = player.gills;
-	saveFile.data.armType = player.armType;
-	saveFile.data.hairLength = player.hairLength;
-	saveFile.data.beardLength = player.beardLength;
-	saveFile.data.eyeType = player.eyeType;
-	saveFile.data.beardStyle = player.beardStyle;
-	saveFile.data.skinType = player.skinType;
-	saveFile.data.skinTone = player.skinTone;
-	saveFile.data.skinDesc = player.skinDesc;
-	saveFile.data.skinAdj = player.skinAdj;
-	saveFile.data.faceType = player.faceType;
-	saveFile.data.tongueType = player.tongueType;
-	saveFile.data.earType = player.earType;
-	saveFile.data.earValue = player.earValue;
-	saveFile.data.antennae = player.antennae;
-	saveFile.data.horns = player.horns;
-	saveFile.data.hornType = player.hornType;
-	saveFile.data.wingDesc = player.wingDesc;
-	saveFile.data.wingType = player.wingType;
-	saveFile.data.lowerBody = player.lowerBody;
-	saveFile.data.tailType = player.tailType;
-	saveFile.data.tailVenum = player.tailVenom;
-	saveFile.data.tailRecharge = player.tailRecharge;
-	saveFile.data.hipRating = player.hipRating;
-	saveFile.data.buttRating = player.buttRating;
-	
-	//Sexual Stuff
-	saveFile.data.balls = player.balls;
-	saveFile.data.cumMultiplier = player.cumMultiplier;
-	saveFile.data.ballSize = player.ballSize;
-	saveFile.data.hoursSinceCum = player.hoursSinceCum;
-	saveFile.data.fertility = player.fertility;
-	saveFile.data.clitLength = player.clitLength;
-	
-	//Preggo stuff
-	saveFile.data.pregnancyIncubation = player.pregnancyIncubation;
-	saveFile.data.pregnancyType = player.pregnancyType;
-	saveFile.data.buttPregnancyIncubation = player.buttPregnancyIncubation;
-	saveFile.data.buttPregnancyType = player.buttPregnancyType;
-	
-	/*myLocalData.data.furnitureArray = new Array();
-	   for (var i:Number = 0; i < GameArray.length; i++) {
-	   myLocalData.data.girlArray.push(new Array());
-	   myLocalData.data.girlEffectArray.push(new Array());
-	 }*/
-	
-	saveFile.data.cocks = new Array();
-	saveFile.data.vaginas = new Array();
-	saveFile.data.breastRows = new Array();
-	saveFile.data.perks = new Array();
-	saveFile.data.statusAffects = new Array();
-	saveFile.data.ass = new Array();
-	saveFile.data.keyItems = new Array();
-	saveFile.data.itemStorage = new Array();
-	saveFile.data.gearStorage = new Array();
-	//Set array
-	for (i = 0; i < player.cocks.length; i++)
+	catch (error:Error)
 	{
-		saveFile.data.cocks.push(new Array());
+		processingError = true;
+		dataError = error;
+		trace(error.message);
 	}
-	//Populate Array
-	for (i = 0; i < player.cocks.length; i++)
-	{
-		saveFile.data.cocks[i].cockThickness = player.cocks[i].cockThickness;
-		saveFile.data.cocks[i].cockLength = player.cocks[i].cockLength;
-		saveFile.data.cocks[i].cockType = player.cocks[i].cockType.Index;
-		saveFile.data.cocks[i].knotMultiplier = player.cocks[i].knotMultiplier;
-		saveFile.data.cocks[i].pierced = player.cocks[i].pierced;
-		saveFile.data.cocks[i].pShortDesc = player.cocks[i].pShortDesc;
-		saveFile.data.cocks[i].pLongDesc = player.cocks[i].pLongDesc;
-		saveFile.data.cocks[i].sock = player.cocks[i].sock;
-	}
-	//Set Vaginal Array
-	for (i = 0; i < player.vaginas.length; i++)
-	{
-		saveFile.data.vaginas.push(new Array());
-	}
-	//Populate Vaginal Array
-	for (i = 0; i < player.vaginas.length; i++)
-	{
-		saveFile.data.vaginas[i].type = player.vaginas[i].type;
-		saveFile.data.vaginas[i].vaginalWetness = player.vaginas[i].vaginalWetness;
-		saveFile.data.vaginas[i].vaginalLooseness = player.vaginas[i].vaginalLooseness;
-		saveFile.data.vaginas[i].fullness = player.vaginas[i].fullness;
-		saveFile.data.vaginas[i].virgin = player.vaginas[i].virgin;
-		saveFile.data.vaginas[i].labiaPierced = player.vaginas[i].labiaPierced;
-		saveFile.data.vaginas[i].labiaPShort = player.vaginas[i].labiaPShort;
-		saveFile.data.vaginas[i].labiaPLong = player.vaginas[i].labiaPLong;
-		saveFile.data.vaginas[i].clitPierced = player.vaginas[i].clitPierced;
-		saveFile.data.vaginas[i].clitPShort = player.vaginas[i].clitPShort;
-		saveFile.data.vaginas[i].clitPLong = player.vaginas[i].clitPLong;
-	}
-	//NIPPLES
-	saveFile.data.nippleLength = player.nippleLength;
-	//Set Breast Array
-	for (i = 0; i < player.breastRows.length; i++)
-	{
-		saveFile.data.breastRows.push(new Array());
-			//trace("Saveone breastRow");
-	}
-	//Populate Breast Array
-	for (i = 0; i < player.breastRows.length; i++)
-	{
-		//trace("Populate One BRow");
-		saveFile.data.breastRows[i].breasts = player.breastRows[i].breasts;
-		saveFile.data.breastRows[i].breastRating = player.breastRows[i].breastRating;
-		saveFile.data.breastRows[i].nipplesPerBreast = player.breastRows[i].nipplesPerBreast;
-		saveFile.data.breastRows[i].lactationMultiplier = player.breastRows[i].lactationMultiplier;
-		saveFile.data.breastRows[i].milkFullness = player.breastRows[i].milkFullness;
-		saveFile.data.breastRows[i].fuckable = player.breastRows[i].fuckable;
-		saveFile.data.breastRows[i].fullness = player.breastRows[i].fullness;
-	}
-	//Set Perk Array
-	for (i = 0; i < player.perks.length; i++)
-	{
-		saveFile.data.perks.push(new Array());
-			//trace("Saveone Perk");
-	}
-	//Populate Perk Array
-	for (i = 0; i < player.perks.length; i++)
-	{
-		//trace("Populate One Perk");
-		saveFile.data.perks[i].perkName = player.perks[i].perkName;
-		saveFile.data.perks[i].value1 = player.perks[i].value1;
-		saveFile.data.perks[i].value2 = player.perks[i].value2;
-		saveFile.data.perks[i].value3 = player.perks[i].value3;
-		saveFile.data.perks[i].value4 = player.perks[i].value4;
-		saveFile.data.perks[i].perkDesc = player.perks[i].perkDesc;
-	}
-	
-	//Set Status Array
-	for (i = 0; i < player.statusAffects.length; i++)
-	{
-		saveFile.data.statusAffects.push(new Array());
-			//trace("Saveone statusAffects");
-	}
-	//Populate Status Array
-	for (i = 0; i < player.statusAffects.length; i++)
-	{
-		//trace("Populate One statusAffects");
-		saveFile.data.statusAffects[i].statusAffectName = player.statusAffects[i].statusAffectName;
-		saveFile.data.statusAffects[i].value1 = player.statusAffects[i].value1;
-		saveFile.data.statusAffects[i].value2 = player.statusAffects[i].value2;
-		saveFile.data.statusAffects[i].value3 = player.statusAffects[i].value3;
-		saveFile.data.statusAffects[i].value4 = player.statusAffects[i].value4;
-	}
-	//Set keyItem Array
-	for (i = 0; i < player.keyItems.length; i++)
-	{
-		saveFile.data.keyItems.push(new Array());
-			//trace("Saveone keyItem");
-	}
-	//Populate keyItem Array
-	for (i = 0; i < player.keyItems.length; i++)
-	{
-		//trace("Populate One keyItemzzzzzz");
-		saveFile.data.keyItems[i].keyName = player.keyItems[i].keyName;
-		saveFile.data.keyItems[i].value1 = player.keyItems[i].value1;
-		saveFile.data.keyItems[i].value2 = player.keyItems[i].value2;
-		saveFile.data.keyItems[i].value3 = player.keyItems[i].value3;
-		saveFile.data.keyItems[i].value4 = player.keyItems[i].value4;
-	}
-	//Set storage slot array
-	for (i = 0; i < itemStorage.length; i++)
-	{
-		saveFile.data.itemStorage.push(new Array());
-	}
-	
-	//Populate storage slot array
-	for (i = 0; i < itemStorage.length; i++)
-	{
-		saveFile.data.itemStorage[i].shortName = itemStorage[i].shortName;
-		saveFile.data.itemStorage[i].quantity = itemStorage[i].quantity;
-		saveFile.data.itemStorage[i].unlocked = itemStorage[i].unlocked;
-	}
-	//Set gear slot array
-	for (i = 0; i < gearStorage.length; i++)
-	{
-		saveFile.data.gearStorage.push(new Array());
-	}
-	
-	//Populate gear slot array
-	for (i = 0; i < gearStorage.length; i++)
-	{
-		saveFile.data.gearStorage[i].shortName = gearStorage[i].shortName;
-		saveFile.data.gearStorage[i].quantity = gearStorage[i].quantity;
-		saveFile.data.gearStorage[i].unlocked = gearStorage[i].unlocked;
-	}
-	saveFile.data.ass.push(new Array());
-	saveFile.data.ass.analWetness = player.ass.analWetness;
-	saveFile.data.ass.analLooseness = player.ass.analLooseness;
-	saveFile.data.ass.fullness = player.ass.fullness;
-	//EXPLORED
-	saveFile.data.exploredLake = player.exploredLake;
-	saveFile.data.exploredMountain = player.exploredMountain;
-	saveFile.data.exploredForest = player.exploredForest;
-	saveFile.data.exploredDesert = player.exploredDesert;
-	saveFile.data.explored = player.explored;
-	saveFile.data.foundForest = foundForest;
-	saveFile.data.foundDesert = foundDesert;
-	saveFile.data.foundMountain = foundMountain;
-	saveFile.data.foundLake = foundLake;
-	saveFile.data.gameState = gameState;
-	
-	//Time and Items
-	saveFile.data.hours = model.time.hours;
-	saveFile.data.days = model.time.days;
-	saveFile.data.autoSave = player.autoSave;
-	
-	//PLOTZ
-	saveFile.data.whitney = whitney;
-	saveFile.data.monk = monk;
-	saveFile.data.sand = sand;
-	saveFile.data.giacomo = giacomo;
-	saveFile.data.beeProgress = beeProgress;
-	
-	//ITEMZ. Item1s
-	saveFile.data.itemSlot1 = new Array();
-	saveFile.data.itemSlot1.quantity = itemSlot1.quantity;
-	saveFile.data.itemSlot1.shortName = itemSlot1.shortName;
-	saveFile.data.itemSlot1.unlocked = itemSlot1.unlocked;
-	saveFile.data.itemSlot2 = new Array();
-	saveFile.data.itemSlot2.quantity = itemSlot2.quantity;
-	saveFile.data.itemSlot2.quantity = itemSlot2.quantity;
-	saveFile.data.itemSlot2.shortName = itemSlot2.shortName;
-	saveFile.data.itemSlot2.unlocked = itemSlot2.unlocked;
-	saveFile.data.itemSlot3 = new Array();
-	saveFile.data.itemSlot3.quantity = itemSlot3.quantity;
-	saveFile.data.itemSlot3.shortName = itemSlot3.shortName;
-	saveFile.data.itemSlot3.unlocked = itemSlot3.unlocked;
-	saveFile.data.itemSlot4 = new Array();
-	saveFile.data.itemSlot4.quantity = itemSlot4.quantity;
-	saveFile.data.itemSlot4.shortName = itemSlot4.shortName;
-	saveFile.data.itemSlot4.unlocked = itemSlot4.unlocked;
-	saveFile.data.itemSlot5 = new Array();
-	saveFile.data.itemSlot5.quantity = itemSlot5.quantity;
-	saveFile.data.itemSlot5.shortName = itemSlot5.shortName;
-	saveFile.data.itemSlot5.unlocked = itemSlot5.unlocked;
-	
-	// Keybinds
-	saveFile.data.controls = inputManager.SaveBindsToObj();
 
 
 	trace("done saving");
@@ -714,7 +730,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 	// Therefore, I'm hacking around it for the chaos monkey.
 	// Really, something needs to listen for the FileReference.complete event, and re-enable saving/loading then.
 	// Something to do in the future
-	if (isFile)
+	if (isFile && !processingError)
 	{
 		if (!(this.monkey.run))
 		{
@@ -726,14 +742,81 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 			outputText("Attempted to save to file.", true);
 		}
 	}
+	else if (!processingError)
+	{
+		// Write the file
+		saveFile.flush();
+		
+		// Reload it
+		saveFile = SharedObject.getLocal(slot, "/");
+		var backup:SharedObject = SharedObject.getLocal(slot + "_backup", "/");
+		var numProps:int = 0;
+		
+		// Copy the properties over to a new file object
+		for (var prop in saveFile.data)
+		{
+			numProps++;
+			backup.data[prop] = saveFile.data[prop];
+		}
+		
+		// There should be 124 root properties minimum in the save file. Give some wiggleroom for things that might be omitted? (All of the broken saves I've seen are MUCH shorter than expected)
+		if (numProps < 124)
+		{
+			outputText("<b>Aborting save.  Your current save file is broken, and needs to be bug-reported.</b>\n\nWithin the save folder for CoC, there should be a pair of files named \"" + slot + ".sol\" and \"" + slot + "_backup.sol\"\n\n<b>We need BOTH of those files, and a quick report of what you've done in the game between when you last saved, and this message.</b>\n\n", true);
+			outputText("When you've sent us the files, you can copy the _backup file over your old save to continue from your last save.\n\n");
+			outputText("Alternatively, you can just hit the restore button to overwrite the broken save with the backup... but we'd really like the saves first!");
+			trace("Backup Save Aborted! Broken save detected!");
+			backupAborted = true;
+		}
+		else
+		{
+			// Property count is correct, write the backup
+			backup.flush();
+		}
+		
+		if (!backupAborted)
+			outputText("Saved to slot" + slot + "!", true);
+	}
 	else
 	{
-		saveFile.flush();
-		outputText("Saved to slot" + slot + "!", true);
-	
+		outputText("There was a processing error during saving. Please report the following message:\n\n");
+		outputText(dataError.message);
+		outputText("\n\n");
+		outputText(dataError.getStackTrace());
 	}
+	
+	if (!backupAborted)
+	{
+		doNext(1);
+	}
+	else
+	{
+		menu();
+		addButton(0, "Next", eventParser, 1);
+		addButton(9, "Restore", restore, slot);
+	}
+	
+}
+
+public function restore(slotName:String):void
+{
+	clearOutput();
+	// copy slot_backup.sol over slot.sol
+	var backupFile:SharedObject = SharedObject.getLocal(slotName + "_backup", "/");
+	var overwriteFile:SharedObject = SharedObject.getLocal(slotName, "/");
+	
+	for (var prop in backupFile.data)
+	{
+		overwriteFile.data[prop] = backupFile.data[prop];
+	}
+	
+	overwriteFile.flush();
+	
+	outputText("Restored backup of " + slotName, true);
+	menu();
 	doNext(1);
 }
+
 public function openSave():void
 {
 
