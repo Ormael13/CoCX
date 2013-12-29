@@ -23,7 +23,7 @@
 		override public function get long():String {
 			//[Round 1 Description]
 			var _long:String;
-			if(hasStatusAffect("Round") < 0) _long = "You're totally trapped inside a pod!  The walls are slimy and oozing moisture that makes the air sickeningly sweet.  It makes you feel a little dizzy.  Tentacles are climbing up your " + mainClassPtr.mainClassPtr.player.legs() + " towards your crotch, doing their best to get under you " + mainClassPtr.player.armorName + ".  There's too many to try to pull away.  You're only chance of escape is to create a way out!";
+			if(hasStatusAffect("Round") < 0) _long = "You're totally trapped inside a pod!  The walls are slimy and oozing moisture that makes the air sickeningly sweet.  It makes you feel a little dizzy.  Tentacles are climbing up your " + mainClassPtr.player.legs() + " towards your crotch, doing their best to get under you " + mainClassPtr.player.armorName + ".  There's too many to try to pull away.  You're only chance of escape is to create a way out!";
 			//[Round 2 Description]
 			else if(statusAffectv1("Round") == 2) {
 				_long = "You're still trapped inside the pod!  By now the walls are totally soaked with some kind of viscous slime.  The smell of it is unbearably sweet and you have to put a hand against the wall to steady yourself.  Warm tentacles are curling and twisting underneath your armor, caressing every ";
