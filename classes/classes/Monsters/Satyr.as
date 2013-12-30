@@ -14,12 +14,12 @@ package classes.Monsters
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.satyrAI();
+			game.satyrAI();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.defeatASatyr();
+			game.defeatASatyr();
 		}
 
 		public function Satyr(mainClassPtr:*)

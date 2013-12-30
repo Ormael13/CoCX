@@ -21,9 +21,9 @@
 				//Rape if not naga, turned on, and girl that can fit!
 				if (player.hasVagina() && player.lust >= 33 && !player.isNaga()) {
 					outputText("  You find yourself musing that you could probably take advantage of the poor 'doggy'.  Do you fuck it?", false);
-					mainClassPtr.simpleChoices("Fuck it", mainClassPtr.hellHoundPropahRape, "", 0, "", 0, "", 0, "Leave", 5007);
+					game.simpleChoices("Fuck it", game.hellHoundPropahRape, "", 0, "", 0, "", 0, "Leave", 5007);
 				} else {
-					mainClassPtr.eventParser(5007);
+					game.eventParser(5007);
 				}
 			} else {
 				outputText("Unable to bear hurting you anymore, the hellhound's flames dim as he stops his attack. The two heads look at you, whining plaintively.  The hellhound slowly pads over to you and nudges its noses at your crotch.  It seems he wishes to pleasure you.\n\n", true);
@@ -36,11 +36,11 @@
 						temp2 = 2746;
 					}
 					outputText(".  What do you do?", false);
-					mainClassPtr.simpleChoices("Lick", 5068, "Fuck", temp2, "", 0, "", 0, "Leave", 5007);
+					game.simpleChoices("Lick", 5068, "Fuck", temp2, "", 0, "", 0, "Leave", 5007);
 				}
 				else {
 					outputText("You turn away, not really turned on enough to be interested in such an offer.", false);
-					mainClassPtr.eventParser(5007);
+					game.eventParser(5007);
 				}
 			}
 		}

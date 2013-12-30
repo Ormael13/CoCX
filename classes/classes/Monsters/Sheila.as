@@ -13,13 +13,13 @@ package classes.Monsters
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.sheilaAI();
+			game.sheilaAI();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if(mainClassPtr.flags[kFLAGS.SHEILA_DEMON] == 1) mainClassPtr.beatUpDemonSheila();
-			else mainClassPtr.sheilaGotWhomped();
+			if(game.flags[kFLAGS.SHEILA_DEMON] == 1) game.beatUpDemonSheila();
+			else game.sheilaGotWhomped();
 		}
 
 		public function Sheila(mainClassPtr:*)

@@ -32,18 +32,18 @@ package classes.Monsters
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.kihaAI();
+			game.kihaAI();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if(hasStatusAffect("spiderfight") >= 0)
-				mainClassPtr.playerBeatsUpKihaPreSpiderFight();
+				game.playerBeatsUpKihaPreSpiderFight();
 			else if(hasStatusAffect("domfight") >= 0)
-				mainClassPtr.pcWinsDomFight();
+				game.pcWinsDomFight();
 			else if(hasStatusAffect("spar") >= 0)
-				mainClassPtr.winSparWithKiha();
-			else mainClassPtr.kihaVictoryIntroduction();
+				game.winSparWithKiha();
+			else game.kihaVictoryIntroduction();
 		}
 
 		public function Kiha(mainClassPtr:*)

@@ -1,5 +1,8 @@
 package classes.classes 
 {
+	import classes.Character;
+	import classes.CoC;
+
 	/**
 	 * ...
 	 * @author Yoffy
@@ -7,9 +10,9 @@ package classes.classes
 	public class NonPlayer extends Character
 	{
 		
-		public function NonPlayer() 
+		public function NonPlayer(game:CoC)
 		{
-			
+			super(game);
 		}
 		
 	}

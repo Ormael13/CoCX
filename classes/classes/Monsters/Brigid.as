@@ -11,13 +11,13 @@ package classes.Monsters
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.BrigidAI();
+			game.BrigidAI();
 		}
 
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.pcDefeatsBrigid();
+			game.pcDefeatsBrigid();
 		}
 
 		public function Brigid(mainClassPtr:*)

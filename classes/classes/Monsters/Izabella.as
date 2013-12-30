@@ -12,12 +12,12 @@ package classes.Monsters
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.isabellaAI();
+			game.isabellaAI();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.defeatIsabella();
+			game.defeatIsabella();
 		}
 
 		public function Izabella(mainClassPtr:*)

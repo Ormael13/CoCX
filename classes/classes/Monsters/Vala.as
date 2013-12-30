@@ -12,13 +12,13 @@ package classes.Monsters
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.valaAI();
+			game.valaAI();
 		}
 
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.fightValaVictory();
+			game.fightValaVictory();
 		}
 
 		public function Vala(mainClassPtr:*)

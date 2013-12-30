@@ -14,13 +14,13 @@ package classes.Monsters
 
 		override public function doAI():void
 		{
-			mainClassPtr.zetazAI();
+			game.zetazAI();
 		}
 
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.defeatZetaz();
+			game.defeatZetaz();
 		}
 
 		public function Zetaz(mainClassPtr:*)

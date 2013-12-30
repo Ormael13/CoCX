@@ -12,13 +12,13 @@ package classes.Monsters
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.helAI();
+			game.helAI();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if(hasStatusAffect("sparring") >= 0) mainClassPtr.PCBeatsUpSalamanderSparring();
-			else mainClassPtr.beatUpHel();
+			if(hasStatusAffect("sparring") >= 0) game.PCBeatsUpSalamanderSparring();
+			else game.beatUpHel();
 		}
 
 		public function Hel(mainClassPtr:*)

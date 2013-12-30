@@ -11,20 +11,20 @@ package classes.Monsters
 
 		override public function eAttack():void
 		{
-			mainClassPtr.hyenaPhysicalAttack();
+			game.hyenaPhysicalAttack();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if(short == "alpha gnoll") {
-				mainClassPtr.clearOutput();
+				game.clearOutput();
 				outputText("The gnoll alpha is defeated!  You could use her for a quick, willing fuck to sate your lusts before continuing on.  Hell, you could even dose her up with that succubi milk you took from the goblin first - it might make her even hotter.  Do you?");
-				mainClassPtr.menu();
-				mainClassPtr.addButton(0,"Fuck",	mainClassPtr.winRapeHyenaPrincess);
-				mainClassPtr.addButton(1,"Succ Milk", mainClassPtr.useSuccubiMilkOnGnollPrincesses);
-				mainClassPtr.addButton(4,"Leave",mainClassPtr.urtaNightSleep);
+				game.menu();
+				game.addButton(0,"Fuck",	game.winRapeHyenaPrincess);
+				game.addButton(1,"Succ Milk", game.useSuccubiMilkOnGnollPrincesses);
+				game.addButton(4,"Leave",game.urtaNightSleep);
 			} else {
-				mainClassPtr.hyenaVictory();
+				game.hyenaVictory();
 			}
 		}
 

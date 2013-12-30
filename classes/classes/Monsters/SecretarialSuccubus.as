@@ -13,21 +13,21 @@ package classes.Monsters
 			if (player.gender > 0){
 				if (hpVictory) {
 					outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.  Now would be the perfect opportunity to taste the fruits of her sex-ready form...\n\nDo you rape her?", true);
-					mainClassPtr.stats(0, 0, 0, 0, 0, 0, 1, 0);
+					game.stats(0, 0, 0, 0, 0, 0, 1, 0);
 					var temp2:int = 0;
 					if (player.hasKeyItem("Deluxe Dildo") >= 0) temp2 = 2266;
-					mainClassPtr.simpleChoices("Yes", 11023, "Dildo Rape", temp2, "", 0, "", 0, "No", 5007);
+					game.simpleChoices("Yes", 11023, "Dildo Rape", temp2, "", 0, "", 0, "No", 5007);
 				} else if (player.lust>=33){
 					outputText("You smile in satisfaction as the " + short + " gives up on fighting you and starts masturbating, begging for you to fuck her.  Now would be the perfect opportunity to taste the fruits of her sex-ready form...\n\nDo you fuck her?", true);
-					mainClassPtr.stats(0,0,0,0,0,0,1,0);
+					game.stats(0,0,0,0,0,0,1,0);
 					temp2 = 0;
 					if(player.hasKeyItem("Deluxe Dildo") >= 0) temp2 = 2266;
-					mainClassPtr.simpleChoices("Yes",11023,"Dildo Rape",temp2,"",0,"",0,"No",5007);
+					game.simpleChoices("Yes",11023,"Dildo Rape",temp2,"",0,"",0,"No",5007);
 				} else {
-					mainClassPtr.finishCombat();
+					game.finishCombat();
 				}
 			} else {
-				mainClassPtr.finishCombat();
+				game.finishCombat();
 			}
 		}
 

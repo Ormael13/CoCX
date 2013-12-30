@@ -11,12 +11,12 @@ package classes.Monsters
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.shouldraAI();
+			game.shouldraAI();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.defeatDannyPhantom();
+			game.defeatDannyPhantom();
 		}
 
 		public function Shouldra(mainClassPtr:*)

@@ -19,9 +19,9 @@
 		{
 			if (player.lust > 33 && player.gender > 0) {
 				outputText("You smile in satisfaction as " + a + short + (hpVictory?" collapses, unable to continue fighting":" collapses and begins masturbating feverishly")+".  Sadly you realize your own needs have not been met.  Of course, you could always rape the poor thing...\n\nDo you rape him?", true);
-				mainClassPtr.doYesNo(5022, 5007);
+				game.doYesNo(5022, 5007);
 			} else {
-				mainClassPtr.finishCombat();
+				game.finishCombat();
 			}
 		}
 

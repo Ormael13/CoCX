@@ -17,15 +17,15 @@
 		override protected function performCombatAction():void
 		{
 			//Sophie has special AI in harpySophie.as
-			mainClassPtr.sophieAI();
+			game.sophieAI();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if(hasStatusAffect("bimboBrawl") >= 0)
-				mainClassPtr.beatUpDebimboSophie();
+				game.beatUpDebimboSophie();
 			else
-				mainClassPtr.sophieLostCombat();
+				game.sophieLostCombat();
 		}
 
 		public function Sophie(mainClassPtr:*)

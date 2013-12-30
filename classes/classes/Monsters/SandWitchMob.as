@@ -11,12 +11,12 @@ package classes.Monsters
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.sandWitchMobAI();
+			game.sandWitchMobAI();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.yoYouBeatUpSomeSandWitchesYOUMONSTER();
+			game.yoYouBeatUpSomeSandWitchesYOUMONSTER();
 		}
 
 		public function SandWitchMob(mainClassPtr:*)

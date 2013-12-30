@@ -31,11 +31,9 @@ package classes
 		public var exploredMountain:Number = 0;
 		public var exploredLake:Number = 0;
 
-		private var game:*;
-		
 		public function Player(game:*)
 		{
-			this.game = game;
+			super(game);
 		}
 
 		public function reduceDamage(damage:Number):Number{

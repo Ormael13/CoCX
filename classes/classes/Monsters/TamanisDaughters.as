@@ -12,12 +12,12 @@ package classes.Monsters
 		override protected function performCombatAction():void
 		{
 			//Tamani's Daughters have special AI in tamanisDaughters.as
-			mainClassPtr.tamanisDaughtersAI();
+			game.tamanisDaughtersAI();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.combatWinAgainstDaughters();
+			game.combatWinAgainstDaughters();
 		}
 
 		public function TamanisDaughters(mainClassPtr:*)

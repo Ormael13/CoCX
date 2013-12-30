@@ -17,12 +17,12 @@
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.impGangAI();
+			game.impGangAI();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.impGangVICTORY();
+			game.impGangVICTORY();
 		}
 
 		public function ImpHorde(mainClassPtr:*)

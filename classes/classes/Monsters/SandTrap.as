@@ -14,13 +14,13 @@ package classes.Monsters
 		override protected function performCombatAction():void
 		{
 			if (hasStatusAffect("level") >= 0) {
-				mainClassPtr.sandTrapAI();
+				game.sandTrapAI();
 			} else super.performCombatAction();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.pcBeatsATrap();
+			game.pcBeatsATrap();
 		}
 
 		public function SandTrap(mainClassPtr:*)

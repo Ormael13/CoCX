@@ -12,12 +12,12 @@ package classes.Monsters
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.vapulaAI();
+			game.vapulaAI();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.defeetVapulasHorde();
+			game.defeetVapulasHorde();
 		}
 
 		public function LustyDemons(mainClassPtr:*)

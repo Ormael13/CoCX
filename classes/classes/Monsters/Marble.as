@@ -16,7 +16,7 @@
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.eventParser(5094);
+			game.eventParser(5094);
 		}
 
 		public function Marble(mainClassPtr:*)

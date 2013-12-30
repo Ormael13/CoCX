@@ -11,13 +11,13 @@ package classes.Monsters
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.amilyAI();
+			game.amilyAI();
 		}
 
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.conquerThatMouseBitch();
+			game.conquerThatMouseBitch();
 		}
 
 		public function Amily(mainClassPtr:*)

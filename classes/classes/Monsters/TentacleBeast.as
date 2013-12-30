@@ -24,22 +24,22 @@
 			}
 			if (hasStatusAffect("PhyllaFight") >= 0) {
 				removeStatusAffect("PhyllaFight");
-				mainClassPtr.phyllaTentacleDefeat();
+				game.phyllaTentacleDefeat();
 			}
 			else {
 				if(!hpVictory && player.gender > 0) {
 					outputText("  Perhaps you could use it to sate yourself?", true);
-					mainClassPtr.doYesNo(5078,5007);
+					game.doYesNo(5078,5007);
 				}
-				mainClassPtr.eventParser(5007);
+				game.eventParser(5007);
 			}
 		}
 
 		override protected function performCombatAction():void
 		{
 			//tentacle beasts have special AI
-			if (rand(2) == 0 || hasStatusAffect("TentacleCoolDown") >= 0) mainClassPtr.eventParser(special1);
-			else mainClassPtr.eventParser(special2);
+			if (rand(2) == 0 || hasStatusAffect("TentacleCoolDown") >= 0) game.eventParser(special1);
+			else game.eventParser(special2);
 		}
 
 		public function TentacleBeast(mainClassPtr:*)

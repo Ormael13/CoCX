@@ -13,13 +13,13 @@ package classes.Monsters
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.spiderAI();
+			game.spiderAI();
 		}
 
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.defeatSpiderBoy();
+			game.defeatSpiderBoy();
 		}
 
 		public function MaleSpiderMorph(mainClassPtr:*)

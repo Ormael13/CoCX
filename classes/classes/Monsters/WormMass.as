@@ -17,7 +17,7 @@
 		override protected function performCombatAction():void
 		{
 			//Worms have different AI
-			mainClassPtr.eventParser((rand(2) == 0) ? special1 : special2);
+			game.eventParser((rand(2) == 0) ? special1 : special2);
 		}
 
 

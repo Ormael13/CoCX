@@ -12,12 +12,12 @@ package classes.Monsters
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.minervaAI();
+			game.minervaAI();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.beatUpDatSharpie();
+			game.beatUpDatSharpie();
 		}
 
 		public function Minerva(mainClassPtr:*)

@@ -21,14 +21,14 @@
 				outputText("\nYou notice that some kind of unnatural heat is flowing into your body from the wound", false);
 				if (player.inte > 50) outputText(", was there some kind of aphrodisiac on the knife?", false);
 				else outputText(".", false);
-				mainClassPtr.stats(0, 0, 0, 0, 0, 0, (player.lib / 20 + 5), 0);
+				game.stats(0, 0, 0, 0, 0, 0, (player.lib / 20 + 5), 0);
 			}
 			super.postAttack(damage);
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.zealotDefeated();
+			game.zealotDefeated();
 		}
 
 		public function FetishZealot(mainClassPtr:*)

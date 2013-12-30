@@ -16,12 +16,12 @@
 
 		override public function eAttack():void
 		{
-			mainClassPtr.akabalAttack();
+			game.akabalAttack();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.victoryChoices();
+			game.victoryChoices();
 		}
 
 		public function Akbal(mainClassPtr:*)

@@ -15,7 +15,7 @@
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.nagaRapeChoice();
+			game.nagaRapeChoice();
 		}
 
 		public function Naga(mainClassPtr:*)

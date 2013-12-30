@@ -18,12 +18,12 @@
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if (hasStatusAffect("Kitsune Fight") >= 0){
-				mainClassPtr.winKitsuneImpFight();
+				game.winKitsuneImpFight();
 			} else {
 				if (hpVictory){
-					mainClassPtr.finishCombat();
+					game.finishCombat();
 				} else {
-					mainClassPtr.impVictory();
+					game.impVictory();
 				}
 			}
 		}

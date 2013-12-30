@@ -14,12 +14,12 @@ package classes.Monsters
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.driderAI();
+			game.driderAI();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.defeatDriderIntro();
+			game.defeatDriderIntro();
 		}
 
 		public function CorruptedDrider(mainClassPtr:*)

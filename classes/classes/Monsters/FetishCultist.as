@@ -26,20 +26,20 @@
 			}
 			if(player.lust >= 33 && player.gender > 0) {
 				outputText("  You realize she'd make a perfect receptacle for your lusts.  Do you have your way with her?", false);
-				mainClassPtr.simpleChoices("Sex",5065,"",0,"",0,"B. Feed",temp2,"Leave",5007);
+				game.simpleChoices("Sex",5065,"",0,"",0,"B. Feed",temp2,"Leave",5007);
 			}
 			else {
 				if(temp2 > 0) {
 					outputText("  She looks like she might take some of your milk if you offered it to her.  What do you do?", false);
-					mainClassPtr.simpleChoices("B. Feed",temp2,"",0,"",0,"",0,"Leave",5007);
+					game.simpleChoices("B. Feed",temp2,"",0,"",0,"",0,"Leave",5007);
 				}
-				else mainClassPtr.eventParser(5007);
+				else game.eventParser(5007);
 			}
 		}
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.eventParser(Appearance.randomChoice(special1, special2));
+			game.eventParser(Appearance.randomChoice(special1, special2));
 		}
 
 		public function FetishCultist(mainClassPtr:*)

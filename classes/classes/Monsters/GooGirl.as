@@ -11,12 +11,12 @@ package classes.Monsters
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.gooAI();
+			game.gooAI();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.beatUpGoo();
+			game.beatUpGoo();
 		}
 
 		public function GooGirl(mainClassPtr:*)

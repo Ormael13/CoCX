@@ -12,12 +12,12 @@ package classes.Monsters
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.basiliskAI();
+			game.basiliskAI();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.defeatBasilisk();
+			game.defeatBasilisk();
 		}
 
 		public function Basilisk(mainClassPtr:*)

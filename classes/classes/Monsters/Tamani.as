@@ -25,9 +25,9 @@ package classes.Monsters
 				if(player.statusAffectv1("Tamani") <= -500 && player.canOvipositSpider()) {
 					temp2 = 3837;
 				}
-				mainClassPtr.simpleChoices("Fuck",mainClassPtr.tamaniSexWon,"Buttfuck",temp,"",0,"Lay Eggs",temp2,"Leave",5007);
+				game.simpleChoices("Fuck",game.tamaniSexWon,"Buttfuck",temp,"",0,"Lay Eggs",temp2,"Leave",5007);
 			}
-			else mainClassPtr.eventParser(5007);
+			else game.eventParser(5007);
 		}
 
 		public function Tamani(mainClassPtr:*)

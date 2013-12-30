@@ -17,13 +17,13 @@
 		override protected function performCombatAction():void
 		{
 			//Ceraph has special AI in ceraph.as
-			mainClassPtr.ceraphAI();
+			game.ceraphAI();
 		}
 
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.winRapeChoices();
+			game.winRapeChoices();
 		}
 
 		public function Ceraph(mainClassPtr:*)

@@ -22,9 +22,9 @@
 			if(hasStatusAffect("PhyllaFight") >= 0) {
 				removeStatusAffect("PhyllaFight");
 				outputText("You defeat a minotaur!  ", true);
-				mainClassPtr.phyllaBeatAMino();
+				game.phyllaBeatAMino();
 			} else {
-				mainClassPtr.minoVictoryRapeChoices();
+				game.minoVictoryRapeChoices();
 			}
 		}
 

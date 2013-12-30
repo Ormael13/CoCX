@@ -12,12 +12,12 @@ package classes.Monsters
 	{
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.holliAI();
+			game.holliAI();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.defeatHolli();
+			game.defeatHolli();
 		}
 
 		public function Holli(mainClassPtr:*)

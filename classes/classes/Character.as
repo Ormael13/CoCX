@@ -80,8 +80,9 @@
 		//Key items
 		public var keyItems:Array;
 		
-		public function Character() 
+		public function Character(game:CoC)
 		{
+			super(game);
 			keyItems = new Array();
 		}
 		

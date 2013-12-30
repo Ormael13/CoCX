@@ -19,12 +19,12 @@ package classes.Monsters
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.IzmaAI();
+			game.IzmaAI();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.defeatIzma();
+			game.defeatIzma();
 		}
 
 		public function Izma(mainClassPtr:*)

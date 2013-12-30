@@ -15,6 +15,7 @@ package classes
 
 		include "../../includes/appearanceDefs.as";
 
+		public var game:CoC;
 		//Variables
 		
 		//Short refers to player name and monster name. BEST VARIABLE NAME EVA!
@@ -281,16 +282,17 @@ package classes
 		public var statusAffects:Array;
 		
 		//Constructor
-		public function Creature()
+		public function Creature(game:CoC)
 		{
+			this.game = game;
 			//cocks = new Array();
 			//The world isn't ready for typed Arrays just yet.
-			cocks = new Array();
-			vaginas = new Array();
+			cocks = [];
+			vaginas = [];
 			//vaginas: Vector.<Vagina> = new Vector.<Vagina>();
-			breastRows = new Array();
-			perks = new Array();
-			statusAffects = new Array();
+			breastRows = [];
+			perks = [];
+			statusAffects = [];
 			//keyItems = new Array();
 		}
 		

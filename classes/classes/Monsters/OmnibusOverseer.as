@@ -12,7 +12,7 @@ package classes.Monsters
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.omnibusVictoryEvent();
+			game.omnibusVictoryEvent();
 		}
 
 		public function OmnibusOverseer(mainClassPtr:*)

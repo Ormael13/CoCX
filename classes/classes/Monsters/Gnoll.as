@@ -12,12 +12,12 @@ package classes.Monsters
 
 		override public function eAttack():void
 		{
-			mainClassPtr.gnollAttackText();
+			game.gnollAttackText();
 		}
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.gnollAI();
+			game.gnollAI();
 		}
 
 
@@ -25,10 +25,10 @@ package classes.Monsters
 		{
 			if(hasStatusAffect("PhyllaFight") >= 0) {
 				removeStatusAffect("PhyllaFight");
-				mainClassPtr.phyllaPCBeatsGnoll();
+				game.phyllaPCBeatsGnoll();
 				return;
 			}
-			mainClassPtr.defeatHyena();
+			game.defeatHyena();
 		}
 
 		public function Gnoll(mainClassPtr:*)

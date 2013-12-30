@@ -15,13 +15,13 @@ package classes.Monsters
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.kellyAI();
+			game.kellyAI();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if(mainClassPtr.flags[kFLAGS.KELT_BREAK_LEVEL] == 1) mainClassPtr.defeatKellyNDBREAKHIM();
-			else mainClassPtr.breakingKeltNumeroThree();
+			if(game.flags[kFLAGS.KELT_BREAK_LEVEL] == 1) game.defeatKellyNDBREAKHIM();
+			else game.breakingKeltNumeroThree();
 		}
 
 		public function Kelt(mainClassPtr:*)

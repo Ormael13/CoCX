@@ -16,12 +16,12 @@
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.harpyAI();
+			game.harpyAI();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.harpyVictoryuuuuu();
+			game.harpyVictoryuuuuu();
 		}
 
 

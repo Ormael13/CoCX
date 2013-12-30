@@ -15,7 +15,7 @@
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.sharkWinChoices();
+			game.sharkWinChoices();
 		}
 
 		public function SharkGirl(mainClassPtr:*)

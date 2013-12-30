@@ -13,12 +13,12 @@ package classes.Monsters
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.farmersAI();
+			game.farmersAI();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.beatUpOwca();
+			game.beatUpOwca();
 		}
 
 		public function Farmers(mainClassPtr:*)

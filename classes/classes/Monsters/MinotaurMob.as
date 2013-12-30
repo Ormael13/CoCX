@@ -15,13 +15,13 @@ package classes.Monsters
 
 		override public function doAI():void
 		{
-			mainClassPtr.minoGangAI();
+			game.minoGangAI();
 		}
 
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.victoryMinotaurGang();
+			game.victoryMinotaurGang();
 		}
 
 		public function MinotaurMob(mainClassPtr:*)

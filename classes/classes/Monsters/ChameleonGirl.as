@@ -14,13 +14,13 @@ package classes.Monsters
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.chameleonAI();
+			game.chameleonAI();
 		}
 
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.defeatChameleonGirl();
+			game.defeatChameleonGirl();
 		}
 
 

@@ -14,13 +14,13 @@ package classes.Monsters
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.kitsuneAI();
+			game.kitsuneAI();
 		}
 
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.defeatTheKitsunes();
+			game.defeatTheKitsunes();
 		}
 
 		public function Kitsune(mainClassPtr:*, hairColor:String)
