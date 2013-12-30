@@ -1334,7 +1334,7 @@ package classes
 			return int(Math.random() * max);
 		}
 		
-		public function cockDescript(cockIndex:Number):String
+		public function cockDescript(cockIndex:Number = 0):String
 		{
 
 			//trace("WRONG COCKDESCRIPT FUNCTION CALLED");

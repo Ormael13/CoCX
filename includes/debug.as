@@ -271,6 +271,10 @@ public function doThatTestingThang():void
 * 17 [if (hasCock == True) HERP|DERP]
 * 18 \\\[if (hasVagina == True) HERP|DERP\\\]
 * 18 [if (hasVagina == True) HERP|DERP]
+* 19 \\\[if (player.biggestLactation > 0) HERP|DERP\\\]
+* 19 [if (player.biggestLactation > 0) HERP|DERP]
+* 20 \\\[if (player.biggestLactation > 0)  \\\[if (hasVagina == True) LOL|WAT\\\]|DERP\\\]
+* 20 [if (player.biggestLactation > 0)  [if (hasVagina == True) LOL|WAT]|DERP]
 
 **Gender tests**
 
@@ -339,6 +343,9 @@ convert "
 
 * \\\[eCockDescript 0\\\] - [eCockDescript 0]
 * \\\[eCockDescript\\\] - [eCockDescript]
+
+* \\\[cockDescript 0\\\] - [cockDescript 0]
+* \\\[cockDescript\\\] - [cockDescript]
 
 
 	]]>, true, true);

@@ -750,7 +750,7 @@ public function cockAdjectives(i_cockLength:Number, i_cockThickness:Number, i_co
 }
 
 
-public function cockDescript(cockNum:Number):String 
+public function cockDescript(cockNum:Number = 0):String 
 {
 	return Appearance.cockDescription(player, cockNum);
 }
