@@ -2756,7 +2756,7 @@ package classes
 		{
 			if (vaginas.length >= 2)
 				return false;
-			var newVagina:VaginaClass = new VaginaClass();
+			var newVagina:VaginaClass = new VaginaClass(vaginalWetness,vaginalLooseness,virgin);
 			vaginas.push(newVagina);
 			return true;
 		}
