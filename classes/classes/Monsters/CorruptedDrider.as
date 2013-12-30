@@ -17,6 +17,11 @@ package classes.Monsters
 			mainClassPtr.driderAI();
 		}
 
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.defeatDriderIntro();
+		}
+
 		public function CorruptedDrider(mainClassPtr:*)
 		{
 			super(mainClassPtr);

@@ -13,9 +13,19 @@
 
 	public class Jojo extends Monster
 	{
-		
 
-		public function Jojo(mainClassPtr:*) 
+
+		override public function defeated(hpVictory:Boolean):void
+		{
+			if (player.lust > 33 && player.gender > 0) {
+				outputText("You smile in satisfaction as " + a + short + (hpVictory?" collapses, unable to continue fighting":" collapses and begins masturbating feverishly")+".  Sadly you realize your own needs have not been met.  Of course, you could always rape the poor thing...\n\nDo you rape him?", true);
+				mainClassPtr.doYesNo(5022, 5007);
+			} else {
+				mainClassPtr.finishCombat();
+			}
+		}
+
+		public function Jojo(mainClassPtr:*)
 		{
 			super(mainClassPtr);
 			trace("Jojo Constructor!");
@@ -39,13 +49,13 @@
 				this.lust += 30;
 				this.cocks[0].cockThickness += .2;
 				this.cocks[0].cockLength += 1.5;
-				if(mainClassPtr.player.gender == 1 || mainClassPtr.player.gender == 3) this.ass.analLooseness = 2;
+				if(player.gender == 1 || player.gender == 3) this.ass.analLooseness = 2;
 			}
 			if(mainClassPtr.monk == 4) {
 				this.lust += 40;
 				this.cocks[0].cockThickness += .5;
 				this.cocks[0].cockLength += 3.5;
-				if(mainClassPtr.player.gender == 1 || mainClassPtr.player.gender == 3) this.ass.analLooseness = 3;
+				if(player.gender == 1 || player.gender == 3) this.ass.analLooseness = 3;
 			}
 			if(mainClassPtr.monk == 5) {
 				this.lust += 50;
@@ -54,7 +64,7 @@
 				this.str -= 20;
 				this.tou += 30;
 				this.HP += 60;
-				if(mainClassPtr.player.gender == 1 || mainClassPtr.player.gender == 3) this.ass.analLooseness = 4;
+				if(player.gender == 1 || player.gender == 3) this.ass.analLooseness = 4;
 				this.long = "Jojo is an anthropomorphic mouse with immaculate white fur.  Though he stands only four feet tall, he is covered in lean muscle and moves with incredible speed.  He's naked, with a large tainted throbbing member bouncing at attention.  A fuzzy sack with painfully large looking balls dangles between his legs.";
 			}
 		}

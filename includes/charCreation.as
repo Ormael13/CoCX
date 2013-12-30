@@ -60,7 +60,7 @@ public function newGameGo(e:MouseEvent = null):void {
 	//Hold onto old data for NG+
 	var oldPlayer:Player = player;
 	//Reset all standard stats
-	player = new Player();
+	player = new Player(this);
 	model.player = player;
 	player.str = 15;
 	player.tou = 15;

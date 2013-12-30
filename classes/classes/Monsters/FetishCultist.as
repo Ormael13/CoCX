@@ -15,6 +15,28 @@
 	{
 
 
+		override public function defeated(hpVictory:Boolean):void
+		{
+			var temp2:int = 0;
+			if(player.hasStatusAffect("Feeder") >= 0) temp2 = 2485;
+			if (hpVictory) {
+				outputText("Hurt too much to continue controlling her powers, the cultist collapses helplessly.", true);
+			} else {
+				outputText("Overwhelmed by her lusts, the cultist loses the ability to control herself and collapses.", true);
+			}
+			if(player.lust >= 33 && player.gender > 0) {
+				outputText("  You realize she'd make a perfect receptacle for your lusts.  Do you have your way with her?", false);
+				mainClassPtr.simpleChoices("Sex",5065,"",0,"",0,"B. Feed",temp2,"Leave",5007);
+			}
+			else {
+				if(temp2 > 0) {
+					outputText("  She looks like she might take some of your milk if you offered it to her.  What do you do?", false);
+					mainClassPtr.simpleChoices("B. Feed",temp2,"",0,"",0,"",0,"Leave",5007);
+				}
+				else mainClassPtr.eventParser(5007);
+			}
+		}
+
 		override protected function performCombatAction():void
 		{
 			mainClassPtr.eventParser(Appearance.randomChoice(special1, special2));

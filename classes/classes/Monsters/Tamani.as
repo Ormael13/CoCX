@@ -8,8 +8,29 @@ package classes.Monsters
 	 */
 	public class Tamani extends Monster 
 	{
-		
-		public function Tamani(mainClassPtr:*) 
+
+		override public function defeated(hpVictory:Boolean):void
+		{
+			if (hpVictory) {
+				outputText("Tamani is defeated!", true);
+			} else {
+				outputText("Tamani gives up on defeating you and starts masturbating!", true);
+			}
+			if(player.lust >= 33 && player.totalCocks() > 0) {
+				outputText("  You could fuck her, but if that's the case why did you bother fighting her?\n\nWhat do you do to her?", false);
+				var temp:int = 0;
+				var temp2:int = 0;
+				if(player.hasCock() && player.cockThatFits(analCapacity()) >= 0) temp = 3360;
+				//NOT PREGGERS
+				if(player.statusAffectv1("Tamani") <= -500 && player.canOvipositSpider()) {
+					temp2 = 3837;
+				}
+				mainClassPtr.simpleChoices("Fuck",mainClassPtr.tamaniSexWon,"Buttfuck",temp,"",0,"Lay Eggs",temp2,"Leave",5007);
+			}
+			else mainClassPtr.eventParser(5007);
+		}
+
+		public function Tamani(mainClassPtr:*)
 		{
 			super(mainClassPtr);
 			init01Names("", "Tamani", "tamani", "She keeps her arms folded across her " + mainClassPtr.tamaniChest() + " and glares at you.  The little thing is only about four feet tall, with pink and black dyed hair cut into a cute little 'do.  The greenish-gray skin of her breasts bulges out around her arms, supported by a few leather straps, amplifying her cleavage.  Her cunt lips are pierced multiple times, inflamed, and slightly parted.  There really isn't any clothing on her to hide them, just more of the ever-present straps wrapping around her thighs.");

@@ -18,6 +18,12 @@ package classes.Monsters
 			mainClassPtr.minoGangAI();
 		}
 
+
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.victoryMinotaurGang();
+		}
+
 		public function MinotaurMob(mainClassPtr:*)
 		{
 			super(mainClassPtr);

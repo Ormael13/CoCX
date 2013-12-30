@@ -1,9 +1,9 @@
 package classes.Monsters 
 {
 	import classes.Cock;
-	import classes.Monster;
 	import classes.CockTypesEnum;
-	
+	import classes.Monster;
+
 	/**
 	 * Holli
 	 * @author aimozg
@@ -13,6 +13,11 @@ package classes.Monsters
 		override protected function performCombatAction():void
 		{
 			mainClassPtr.holliAI();
+		}
+
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.defeatHolli();
 		}
 
 		public function Holli(mainClassPtr:*)

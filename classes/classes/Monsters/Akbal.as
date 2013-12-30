@@ -14,6 +14,15 @@
 	public class Akbal extends Monster
 	{
 
+		override public function eAttack():void
+		{
+			mainClassPtr.akabalAttack();
+		}
+
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.victoryChoices();
+		}
 
 		public function Akbal(mainClassPtr:*)
 		{

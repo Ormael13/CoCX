@@ -17,6 +17,11 @@ package classes.Monsters
 			mainClassPtr.emberAI();
 		}
 
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.beatEmberSpar();
+		}
+
 		public function Ember(mainClassPtr:*)
 		{
 			super(mainClassPtr);

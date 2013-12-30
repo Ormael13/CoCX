@@ -14,6 +14,12 @@ package classes.Monsters
 			mainClassPtr.BrigidAI();
 		}
 
+
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.pcDefeatsBrigid();
+		}
+
 		public function Brigid(mainClassPtr:*)
 		{
 			super(mainClassPtr);

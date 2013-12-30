@@ -15,6 +15,12 @@ package classes.Monsters
 			mainClassPtr.valaAI();
 		}
 
+
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.fightValaVictory();
+		}
+
 		public function Vala(mainClassPtr:*)
 		{
 			super(mainClassPtr);

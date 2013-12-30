@@ -14,6 +14,11 @@ package classes.Monsters
 			mainClassPtr.sandWitchMobAI();
 		}
 
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.yoYouBeatUpSomeSandWitchesYOUMONSTER();
+		}
+
 		public function SandWitchMob(mainClassPtr:*)
 		{
 			super(mainClassPtr);

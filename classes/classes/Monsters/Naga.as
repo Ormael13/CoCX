@@ -12,9 +12,13 @@
 
 	public class Naga extends Monster
 	{
-		
 
-		public function Naga(mainClassPtr:*) 
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.nagaRapeChoice();
+		}
+
+		public function Naga(mainClassPtr:*)
 		{
 			super(mainClassPtr);
 			trace("Naga Constructor!");

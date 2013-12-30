@@ -1,7 +1,7 @@
 package classes.Monsters
 {
-	import classes.Monster;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Monster;
 
 	/**
 	 * Holli (combat id 69)
@@ -13,6 +13,12 @@ package classes.Monsters
 		override public function doAI():void
 		{
 			mainClassPtr.helSpawnAI();
+		}
+
+
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.beatUpYourDaughter();
 		}
 
 		public function Helspawn(mainClassPtr:*)

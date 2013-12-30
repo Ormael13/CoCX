@@ -14,6 +14,12 @@ package classes.Monsters
 			mainClassPtr.amilyAI();
 		}
 
+
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.conquerThatMouseBitch();
+		}
+
 		public function Amily(mainClassPtr:*)
 		{
 			super(mainClassPtr);

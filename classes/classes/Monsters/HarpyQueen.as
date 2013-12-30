@@ -14,6 +14,11 @@ package classes.Monsters
 			mainClassPtr.harpyQueenAI();
 		}
 
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.harpyQueenDefeatedByPC();
+		}
+
 		public function HarpyQueen(mainClassPtr:*)
 		{
 			super(mainClassPtr);

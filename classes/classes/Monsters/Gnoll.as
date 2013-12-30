@@ -9,9 +9,26 @@ package classes.Monsters
 	public class Gnoll extends Monster 
 	{
 
+
+		override public function eAttack():void
+		{
+			mainClassPtr.gnollAttackText();
+		}
+
 		override protected function performCombatAction():void
 		{
 			mainClassPtr.gnollAI();
+		}
+
+
+		override public function defeated(hpVictory:Boolean):void
+		{
+			if(hasStatusAffect("PhyllaFight") >= 0) {
+				removeStatusAffect("PhyllaFight");
+				mainClassPtr.phyllaPCBeatsGnoll();
+				return;
+			}
+			mainClassPtr.defeatHyena();
 		}
 
 		public function Gnoll(mainClassPtr:*)

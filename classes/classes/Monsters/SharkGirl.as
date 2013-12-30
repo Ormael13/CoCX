@@ -12,8 +12,13 @@
 
 	public class SharkGirl extends Monster
 	{
-		
-		public function SharkGirl(mainClassPtr:*) 
+
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.sharkWinChoices();
+		}
+
+		public function SharkGirl(mainClassPtr:*)
 		{
 			super(mainClassPtr);
 			trace("SharkGirl Constructor!");

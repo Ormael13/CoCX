@@ -17,6 +17,17 @@
 		public var hasAxe:Boolean;
 
 
+		override public function defeated(hpVictory:Boolean):void
+		{
+			if(hasStatusAffect("PhyllaFight") >= 0) {
+				removeStatusAffect("PhyllaFight");
+				outputText("You defeat a minotaur!  ", true);
+				mainClassPtr.phyllaBeatAMino();
+			} else {
+				mainClassPtr.minoVictoryRapeChoices();
+			}
+		}
+
 		override public function get long():String
 		{
 			return "An angry-looking minotaur looms over you.  Covered in shaggy " + hairColor + " fur, the beast is an imposing sight.  Wearing little but an obviously distended loincloth, he is clearly already plotting his method of punishment.  Like most minotaurs he has hooves, a cow-like tail and face, prominent horns, and impressive musculature. "+

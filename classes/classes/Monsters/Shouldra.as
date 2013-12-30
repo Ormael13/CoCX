@@ -14,6 +14,11 @@ package classes.Monsters
 			mainClassPtr.shouldraAI();
 		}
 
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.defeatDannyPhantom();
+		}
+
 		public function Shouldra(mainClassPtr:*)
 		{
 			super(mainClassPtr);

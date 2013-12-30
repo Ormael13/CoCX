@@ -14,6 +14,11 @@ package classes.Monsters
 			mainClassPtr.spiderAI();
 		}
 
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.defeatASpiderBitch();
+		}
+
 		public function FemaleSpiderMorph(mainClassPtr:*)
 		{
 			super(mainClassPtr);

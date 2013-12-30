@@ -10,8 +10,33 @@ package classes.Monsters
 	 */
 	public class Anemone extends Monster 
 	{
-		
-		public function Anemone(mainClassPtr:*) 
+
+
+		override public function eAttack():void
+		{
+			outputText("Giggling playfully, the anemone launches several tentacles at you.  Most are aimed for your crotch, but a few attempt to caress your chest and face.\n", false);
+			super.eAttack();
+		}
+
+		override public function eOneAttack():int
+		{
+			if (attackSucceeded()){
+				mainClassPtr.applyVenom(rand(4 + player.sens / 20) + 1);
+			}
+			return 1;
+		}
+
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.defeatAnemone();
+		}
+
+		override public function outputAttack(damage:int):void
+		{
+			outputText("You jink and dodge valiantly but the tentacles are too numerous and coming from too many directions.  A few get past your guard and caress your skin, leaving a tingling, warm sensation that arouses you further.", false);
+		}
+
+		public function Anemone(mainClassPtr:*)
 		{
 			super(mainClassPtr);
 			init01Names("the ", "anemone", "anemone", "The anemone is a blue androgyne humanoid of medium height and slender build, with colorful tentacles sprouting on her head where hair would otherwise be.  Her feminine face contains two eyes of solid color, lighter than her skin.  Two feathery gills sprout from the middle of her chest, along the line of her spine and below her collarbone, and drape over her pair of small B-cup breasts.  Though you wouldn't describe her curves as generous, she sways her girly hips back and forth in a way that contrasts them to her slim waist quite attractively.  Protruding from her groin is a blue shaft with its head flanged by diminutive tentacles, and below that is a dark-blue pussy ringed by small feelers.  Further down are a pair of legs ending in flat sticky feet; proof of her aquatic heritage.  She smiles broadly and innocently as she regards you from her deep eyes.");

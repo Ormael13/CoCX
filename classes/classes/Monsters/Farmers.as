@@ -16,6 +16,11 @@ package classes.Monsters
 			mainClassPtr.farmersAI();
 		}
 
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.beatUpOwca();
+		}
+
 		public function Farmers(mainClassPtr:*)
 		{
 			super(mainClassPtr);

@@ -17,6 +17,12 @@ package classes.Monsters
 			mainClassPtr.kitsuneAI();
 		}
 
+
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.defeatTheKitsunes();
+		}
+
 		public function Kitsune(mainClassPtr:*, hairColor:String)
 		{
 			super(mainClassPtr);
@@ -31,7 +37,7 @@ package classes.Monsters
 							" hair.  She appears mostly human, except for a pair of large, furry ears poking through her hair and six luxurious silky tails swaying in the air behind her.  Her robes are revealing but comfortable-looking, hugging her voluptuous curves and exposing large swaths of tattooed skin.  A layer of ornate tattoos covers patches of her exposed flesh, accentuating her feminine curves nicely, and each movement brings a pleasant jiggle from her plump backside and large breasts.");
 			if (hairColor=="red" && mainClassPtr.flags[kFLAGS.redheadIsFuta] == 1) {
 				init02Male(new Cock(rand(13) + 14,1.5 + rand(20)/2,CockTypesEnum.HUMAN),
-						2,2 + rand(13),1.5,mainClassPtr.player.ballSize * 10);
+						2,2 + rand(13),1.5,player.ballSize * 10);
 			}
 			init02Female(VAGINA_WETNESS_SLICK,VAGINA_LOOSENESS_NORMAL,20);
 			init03BreastRows("D");

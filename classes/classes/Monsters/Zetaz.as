@@ -17,6 +17,12 @@ package classes.Monsters
 			mainClassPtr.zetazAI();
 		}
 
+
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.defeatZetaz();
+		}
+
 		public function Zetaz(mainClassPtr:*)
 		{
 			super(mainClassPtr);

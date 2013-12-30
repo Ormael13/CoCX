@@ -15,6 +15,12 @@ package classes.Monsters
 			mainClassPtr.impLordAI();
 		}
 
+
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.defeatImpLord();
+		}
+
 		public function ImpLord(mainClassPtr:*)
 		{
 			super(mainClassPtr);

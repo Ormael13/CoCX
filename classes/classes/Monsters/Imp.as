@@ -13,9 +13,22 @@
 
 	public class Imp extends Monster
 	{
-		
 
-		public function Imp(mainClassPtr:*) 
+
+		override public function defeated(hpVictory:Boolean):void
+		{
+			if (hasStatusAffect("Kitsune Fight") >= 0){
+				mainClassPtr.winKitsuneImpFight();
+			} else {
+				if (hpVictory){
+					mainClassPtr.finishCombat();
+				} else {
+					mainClassPtr.impVictory();
+				}
+			}
+		}
+
+		public function Imp(mainClassPtr:*)
 		{
 			super(mainClassPtr);
 			trace("Imp Constructor!");

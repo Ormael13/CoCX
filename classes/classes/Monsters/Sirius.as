@@ -10,10 +10,35 @@ package classes.Monsters
 	public class Sirius extends Monster 
 	{
 
+		override public function eAttack():void
+		{
+			outputText("Sirius readies his hands, undulating his body erratically with quick motions in order to catch you off-guard and strike at you.\n");
+			super.eAttack();
+		}
+
+
+		override protected function outputPlayerDodged(dodge:int):void
+		{
+			outputText("With your trained eyes, you see through his feints and effectively block his first swipe, then quickly twist your body to kick him away.  He clutches his belly where you kicked him, but recovers quickly, eyes fixated on yours.\n");
+		}
+
+		override public function outputAttack(damage:int):void
+		{
+			if (damage<=0) {
+				super.outputAttack(damage);
+			} else {
+				outputText("You misjudge his pattern and wind up getting slashed by a series of swipes from his sharpened nails.  He distances himself from you in order to avoid retaliation and glares at you with his piercing yellow eyes, a hint of a smile on his face. (" + damage + ")");
+			}
+		}
 
 		override protected function performCombatAction():void
 		{
 			mainClassPtr.nagaSiriusRadioAI();
+		}
+
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.urtaBeatsUpSiriusRadio();
 		}
 
 		public function Sirius(mainClassPtr:*)

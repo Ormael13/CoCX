@@ -1,16 +1,27 @@
 ﻿package classes 
 {
+	import classes.GlobalFlags.kFLAGS;
+	import classes.Monsters.Kiha;
+
 	/**
 	 * ...
-	 * @author Yoffy, Fake-Name
+	 * @author Yoffy, Fake-Name, aimozg
 	 */
 	public class Monster extends Creature 
 	{
 		
 		protected var mainClassPtr:*;
+		
+		protected final function get player():Player
+		{
+			return mainClassPtr.player;
+		}
+		protected final function outputText(text:String,clear:Boolean=false):void{
+			mainClassPtr.outputText(text,clear);
+		}
 		//For enemies
 		public var bonusHP:Number = 0;
-		private var _long:String = "<b>You have encountered an unitialized monster. Please report this as a bug</b>.";
+		private var _long:String = "<b>You have encountered an unitialized  Please report this as a bug</b>.";
 		public function get long():String
 		{
 			return _long;
@@ -176,6 +187,20 @@
 		 */
 		public function HPRatio():Number{
 			return HP/eMaxHP();
+		}
+
+		/**
+		 * @return damage not reduced by player stats
+		 */
+		public function eBaseDamage():Number {
+			return str + weaponAttack;
+		}
+
+		/**
+		 * @return randomized damage reduced by player stats
+		 */
+		public function calcDamage():int{
+			return player.reduceDamage(eBaseDamage());
 		}
 
 		protected function totalXP(playerLevel:Number=-1):Number
@@ -493,6 +518,153 @@
 			this.antennae = antennae;
 		}
 
+		/**
+		 * try to hit, apply damage
+		 * @return damage
+		 */
+		public function eOneAttack():int
+		{
+			if (attackSucceeded()){
+				//Determine damage - str modified by enemy toughness!
+				var damage:int = calcDamage();
+				if (damage > 0 && short != "anemone") damage = player.takeDamage(damage);
+				return damage;
+			}
+			return 0;
+		}
+
+		/**
+		 * return true if we land a hit
+		 */
+		protected function attackSucceeded():Boolean
+		{
+			var attack:Boolean = true;
+			//Blind dodge change
+			if (hasStatusAffect("Blind") >= 0) {
+				attack &&= handleBlind();
+			}
+			attack &&= !playerDodged();
+			return attack;
+		}
+
+		public function eAttack():void {
+			var attacks:int = statusAffectv1("attacks");
+			if (attacks == 0) attacks = 1;
+			while (attacks>0){
+				var damage:int = eOneAttack();
+				outputAttack(damage);
+				postAttack(damage);
+				mainClassPtr.statScreenRefresh();
+				outputText("\n", false);
+				if (statusAffectv1("attacks") >= 0) {
+					addStatusValue("attacks", 1, -1);
+				}
+				attacks--;
+			}
+			removeStatusAffect("attacks");
+			if (!mainClassPtr.combatRoundOver()) mainClassPtr.doNext(1);
+		}
+
+		/**
+		 * Called no matter of success of the attack
+		 * @param damage damage received by player
+		 */
+		protected function postAttack(damage:int):void
+		{
+			if (damage > 0) {
+				if (lustVuln > 0 && player.armorName == "barely-decent bondage straps") {
+					if (!plural) outputText("\n" + capitalA + short + " brushes against your exposed skin and jerks back in surprise, coloring slightly from seeing so much of you revealed.", false);
+					else outputText("\n" + capitalA + short + " brush against your exposed skin and jerk back in surprise, coloring slightly from seeing so much of you revealed.", false);
+					lust += 5 * lustVuln;
+				}
+			}
+		}
+
+		public function outputAttack(damage:int):void
+		{
+			if (damage <= 0) {
+				//Due to toughness or amor...
+				if (rand(player.armorDef + player.tou) < player.armorDef) outputText("You absorb and deflect every " + weaponVerb + " with your " + player.armorName + ".", false);
+				else {
+					if (plural) outputText("You deflect and block every " + weaponVerb + " " + a + short + " throw at you.", false);
+					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.", false);
+				}
+			}
+			else if (damage < 6) outputText("You are struck a glancing blow by " + a + short + "! (" + damage + ")", false);
+			else if (damage < 11) {
+				outputText(capitalA + short + " wound");
+				if (!plural) outputText("s");
+				outputText(" you! (" + damage + ")", false);
+			}
+			else if (damage < 21) {
+				outputText(capitalA + short + " stagger");
+				if (!plural) outputText("s");
+				outputText(" you with the force of " + pronoun3 + " " + weaponVerb + "! (" + damage + ")", false);
+			}
+			else if (damage > 20) {
+				outputText(capitalA + short + " <b>mutilate", false);
+				if (!plural) outputText("s", false);
+				outputText("</b> you with " + pronoun3 + " powerful " + weaponVerb + "! (" + damage + ")", false);
+			}
+		}
+
+		/**
+		 * @return true if continue with attack
+		 */
+		protected function handleBlind():Boolean
+		{
+			if (rand(3) < 2) {
+				if (weaponVerb == "tongue-slap") outputText(capitalA + short + " completely misses you with a thrust from "+pronoun3+" tongue!\n", false);
+				else outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
+				return false;
+			}
+			return true;
+		}
+
+		/**
+		 * print something about how we miss the player
+		 */
+		protected function outputPlayerDodged(dodge:int):void
+		{
+			if (dodge==1) outputText("You narrowly avoid " + a + short + "'s " + weaponVerb + "!\n", false);
+			else if (dodge==2) outputText("You dodge " + a + short + "'s " + weaponVerb + " with superior quickness!\n", false);
+			else {
+				outputText("You deftly avoid " + a + short);
+				if (plural) outputText("'");
+				else outputText("'s");
+				outputText(" slow " + weaponVerb + ".\n", false);
+			}
+		}
+
+		private function playerDodged():Boolean
+		{
+			//Determine if dodged!
+			var dodge:int = player.speedDodge(this);
+			if (dodge>0) {
+				outputPlayerDodged(dodge);
+				return true;
+			}
+			//Determine if evaded
+			if (!(this is Kiha) && player.hasPerk("Evade") >= 0 && rand(100) < 10) {
+				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'");
+				if (!plural) outputText("s");
+				outputText(" attack.\n", false);
+				return true;
+			}
+			//("Misdirection"
+			if (player.hasPerk("Misdirection") >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
+				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n", false);
+				return true;
+			}
+			//Determine if cat'ed
+			if (player.hasPerk("Flexibility") >= 0 && rand(100) < 6) {
+				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "", false);
+				if (plural) outputText("' attacks.\n", false);
+				else outputText("'s attack.\n", false);
+				return true;
+			}
+			return false;
+		}
 
 		public function doAI():void
 		{
@@ -600,6 +772,17 @@
 			if (rando == 2 && special2 > 0) mainClassPtr.eventParser(special2);
 			if (rando == 3 && special3 > 0) mainClassPtr.eventParser(special3);
 		}
+
+		/**
+		 * All branches of this method should end either with choose/doNext,
+		 * or with default 'awardPlayer' or 'finishCombat'. The latter displays
+		 * default message like "you defeat %s" or "%s falls and starts masturbating"
+		 */
+		public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.finishCombat();
+		}
+
 		public function generateDebugDescription():String{
 			var result:String;
 			var be:String =plural?"are":"is";

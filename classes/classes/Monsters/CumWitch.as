@@ -16,6 +16,11 @@ package classes.Monsters
 			mainClassPtr.cumWitchAI();
 		}
 
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.cumWitchDefeated();
+		}
+
 		public function CumWitch(mainClassPtr:*)
 		{
 			super(mainClassPtr);

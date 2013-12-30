@@ -14,6 +14,11 @@ package classes.Monsters
 			mainClassPtr.phoenixPlatoonAI();
 		}
 
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.phoenixPlatoonLosesToPC();
+		}
+
 		public function PhoenixPlatoon(mainClassPtr:*)
 		{
 			super(mainClassPtr);

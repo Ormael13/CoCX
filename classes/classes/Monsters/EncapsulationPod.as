@@ -20,6 +20,11 @@
 			mainClassPtr.encapsulationPodAI();
 		}
 
+		override public function defeated(hpVictory:Boolean):void
+		{
+			mainClassPtr.encapsulationVictory();
+		}
+
 		override public function get long():String {
 			//[Round 1 Description]
 			var _long:String;
@@ -27,9 +32,9 @@
 			//[Round 2 Description]
 			else if(statusAffectv1("Round") == 2) {
 				_long = "You're still trapped inside the pod!  By now the walls are totally soaked with some kind of viscous slime.  The smell of it is unbearably sweet and you have to put a hand against the wall to steady yourself.  Warm tentacles are curling and twisting underneath your armor, caressing every ";
-				if(mainClassPtr.player.skinType == SKIN_TYPE_FUR) _long += "furry ";
-				if(mainClassPtr.player.skinType == SKIN_TYPE_SCALES) _long += "scaley ";
-				_long += "inch of your " + mainClassPtr.player.legs() + ", crotch, and " + mainClassPtr.assDescript() + ".";
+				if(player.skinType == SKIN_TYPE_FUR) _long += "furry ";
+				if(player.skinType == SKIN_TYPE_SCALES) _long += "scaley ";
+				_long += "inch of your " + player.legs() + ", crotch, and " + mainClassPtr.assDescript() + ".";
 			}
 			//[Round 3 Description]
 			else if(statusAffectv1("Round") == 3) {
@@ -38,10 +43,10 @@
 			//[Round 4 Description]
 			else {
 				_long = "You're trapped inside the pod and being violated from by tentacles from the shoulders down!  The slime around your waist is rising even faster now.  It will probably reach ";
-				if(mainClassPtr.player.biggestTitSize() >= 1) _long += "the underside of your " + mainClassPtr.allBreastsDescript();
+				if(player.biggestTitSize() >= 1) _long += "the underside of your " + mainClassPtr.allBreastsDescript();
 				else _long += "your chest";
 				_long += " in moments.  You're being fucked by a bevy of tentacles while your nipples are ";
-				if(!mainClassPtr.player.hasFuckableNipples()) _long += "fondled ";
+				if(!player.hasFuckableNipples()) _long += "fondled ";
 				else _long += "fucked ";
 				_long += "by more of the slippery fungal protrusions.  It would be so easy to just relax back in the fluid and let it cradle you while you're pleasured.  You barely even smell the sweet, thought-killing scent from before, but you're hips are rocking on their own and you stumble every time you try to move.  Your resistance is about to give out!";
 			}
