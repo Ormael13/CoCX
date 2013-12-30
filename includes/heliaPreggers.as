@@ -1528,7 +1528,7 @@ public function loseSparringToDaughter():void {
 		else outputText("dunk your head");
 		outputText(".");
 	}
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //PC kicks Helspawn's shit in, surprising nobody. 
@@ -1556,7 +1556,7 @@ public function beatUpYourDaughter():void {
 		outputText(".  You chuckle and ruffle her hair, \"<i>C'mon, kiddo, let's get some food in you.</i>\"");
 		outputText("\n\n\"<i>Yeah, food,</i>\" she groans, stumbling after you as you both recover from the furious sparring match.");
 	}
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //BONUS SCENES!

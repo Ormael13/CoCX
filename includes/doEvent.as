@@ -387,7 +387,7 @@ public function doEvent(eventNo:Number):void
 			player.boostLactation(.3);
 		}
 		if (gameState > 0)
-			eventParser(5007);
+			cleanupAfterCombat();
 		else
 			doNext(13);
 		
@@ -444,7 +444,7 @@ public function doEvent(eventNo:Number):void
 			player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
 		slimeFeed();
 		if (gameState > 0)
-			eventParser(5007);
+			cleanupAfterCombat();
 		else
 			doNext(13);
 		
@@ -1418,7 +1418,7 @@ public function doEvent(eventNo:Number):void
 	{
 		beeEncounterLevel3();
 		if (gameState > 0)
-			eventParser(5007);
+			cleanupAfterCombat();
 	}
 	//Free honey event!
 	

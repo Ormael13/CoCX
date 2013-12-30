@@ -138,7 +138,7 @@ public function getMockedForSmallDongBySammitchMob():void {
 		outputText("\n\nYou wake up hours later outside the dungeon with all your belongs and surprisingly not missing any gems.");
 		inDungeon = false;
 		stats(0,0,0,0,1,-1,-100,0);
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 	//[Bad end for small cocks]
 	outputText("\n\nYou spend the rest of your life being a bitch to the sand witches.  Kept naked and hard all the time, you're chained-up like an animal in the chamber with your hands tied behind your back, making sure you don't play with yourself.  The witches do mess with you from time to time, but mostly they just let you drown in your lust.  Many nights you yearn to feel the touch of your mistresses. You want them to humiliate you if it means they'll pleasure your little cock.  Sometimes, when a group of witches walk by, you try to look as wanting as possible.  They just walk by, saying how desperate and sad you look, leave you alone with that raging hard-on.");
@@ -227,7 +227,7 @@ public function sandWitchMobNotBadEnd():void {
 	outputText("You wake up hours later outside the dungeon with all your belongings, surprisingly not missing any gems.");
 	inDungeon = false;
 	stats(0,0,0,0,1,-1,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[Sand-witch mob Bad end for Females]
@@ -373,7 +373,7 @@ public function yoYouBeatUpSomeSandWitchesYOUMONSTER():void {
 		if(player.hasVagina()) addButton(1,"Forced Lick",forceCunnilingusRimjobClitAndNipple);
 	}
 	//Present PC with Leave and Orgy options
-	addButton(9,"Leave",eventParser,5007);
+	addButton(9,"Leave",eventParser,cleanupAfterCombat);
 }
 
 //Dicked Win Sex
@@ -455,7 +455,7 @@ public function dicksHaveSexWithAWitch():void {
 		outputText("\n\nFinishing up, you pull yourself out of her tits wipe up with her robes, tossing the musky robes on her face as she begins to sluttily keen in an orgasm of her own.  Now to explore the rest of this desert rat cellar.");
 	}
 	stats(0,0,0,0,0,-1,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 	
 //*Sapphic Win Sex
@@ -513,7 +513,7 @@ public function forceCunnilingusRimjobClitAndNipple():void {
 	outputText(" while you come down from your high.  Why couldn't they have just done this to start?");
 	outputText("\n\nAfter that morale boost, you climb out of the writhing orgy of fem-flesh and dust yourself off, ready to explore further inside this den of inequity.");
 	stats(0,0,0,0,0,-1,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Sand Witch Mob Attacks:
@@ -1118,7 +1118,7 @@ public function repeatLoseToCumWitchForDudes():void {
 		
 		stats(0,0,0,0,0,5,-100,0);
 		if(player.cumQ() < 60000) player.cumMultiplier += 2;
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 }
 
@@ -1153,7 +1153,7 @@ public function tooBigCumWitchLossFacial():void {
 	else player.cumMultiplier+=2;
 	if(player.ballSize < 7) player.ballSize++;
 	stats(0,0,0,0,1,1,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Avoid The Too Big Loss Facial
@@ -1173,7 +1173,7 @@ public function tooBigCumWitchLossNoFacial():void {
 	if(player.ballSize > 5) player.ballSize -= Math.round(player.ballSize * 0.333);
 	player.cumMultiplier = Math.round(player.cumMultiplier * .75);
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 //TDM's generic loss to cum witch scene
 //requires that the PC have a dick that can fit inside the cum witch's vagina.  The scene can be used with herms.
@@ -1238,7 +1238,7 @@ public function TDMsLoseToCumWitchScene():void {
 	if(player.cumQ() >= 200) stats(-1,0,0,0,0,0,0,0);
 	if(player.cumQ() >= 3000) stats(-1,0,0,0,0,0,0,0);
 	//Usual loss text+gem loss.
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 
@@ -1257,7 +1257,7 @@ public function defeatedByCumWitch():void {
 		else if(player.hasVagina()) {
 			savinMakesAwesomeFemdom();
 		}
-		else eventParser(5007);
+		else cleanupAfterCombat();
 	}
 }
 
@@ -1283,7 +1283,7 @@ public function cumWitchDefeated():void {
 	
 	if(inCombat()) {
 		if(monster.HP >= 1) addButton(9,"Leave",declineSandWitch);
-		else addButton(9,"Leave",eventParser,5007);
+		else addButton(9,"Leave",eventParser,cleanupAfterCombat);
 	}
 	else addButton(9,"Back",eventParser,1);
 }
@@ -1292,7 +1292,7 @@ public function cumWitchDefeated():void {
 public function declineSandWitch():void {
 	clearOutput();
 	outputText("Dusting yourself off, you lower your [weapon] and leave the cum witch to recover from the humiliation of losing to you.  The haunted, hungry look in her eyes leaves little doubt that she'll challenge you again or that she still wants to fuck you.  For now, she slips down into her own puddled cum, idly touching herself.");
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(1);
 }
 
@@ -1385,11 +1385,11 @@ public function menFuckUpSomeCumWitch():void {
 		stats(0,0,0,0,0,0,-100,0);
 	}
 	if(inDungeon) {
-		if(inCombat()) eventParser(5007);
+		if(inCombat()) cleanupAfterCombat();
 		else doNext(1);
 	}
 	else { 
-		if(inCombat()) eventParser(5007);
+		if(inCombat()) cleanupAfterCombat();
 		else doNext(13);
 	}
 }
@@ -1428,11 +1428,11 @@ public function maleTooBigVictorySex():void {
 	outputText("\n\nExhausted at last, you pat your " + cockDescript(x) + " affectionately.  You'd wipe it off on the witch's hair, if it wasn't messier than the " + player.skin() + " you plan to clean.  She begins to lick her fingers and clean the stuff off her face.  You just laugh, and get dressed.  There's still much to do.");
 	stats(0,0,0,0,0,0,-100,0);
 	if(inDungeon) {
-		if(inCombat()) eventParser(5007);
+		if(inCombat()) cleanupAfterCombat();
 		else doNext(1);
 	}
 	else { 
-		if(inCombat()) eventParser(5007);
+		if(inCombat()) cleanupAfterCombat();
 		else doNext(13);
 	}
 }
@@ -1467,11 +1467,11 @@ public function ladyVictorySex():void {
 	player.knockUp(22,360,90);
 	stats(0,0,0,0,0,0,-100,0);
 	if(inDungeon) {
-		if(inCombat()) eventParser(5007);
+		if(inCombat()) cleanupAfterCombat();
 		else doNext(1);
 	}
 	else { 
-		if(inCombat()) eventParser(5007);
+		if(inCombat()) cleanupAfterCombat();
 		else doNext(13);
 	}
 }
@@ -1507,11 +1507,11 @@ public function tentacleVictoryGangbangCumWitch():void {
 	
 	stats(0,0,0,0,0,0,-100,0);
 	if(inDungeon) {
-		if(inCombat()) eventParser(5007);
+		if(inCombat()) cleanupAfterCombat();
 		else doNext(1);
 	}
 	else { 
-		if(inCombat()) eventParser(5007);
+		if(inCombat()) cleanupAfterCombat();
 		else doNext(13);
 	}
 }
@@ -1576,7 +1576,7 @@ public function resistSavinStuff():void {
 	
 	outputText("\n\nSilently, you nod, and collapse atop her, head buried in her milk-laden chest as you pass out from sexual exhaustion.");
 	stats(0,0,0,0,0,2,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 	//knock up hurrrr
 	player.knockUp(22,360,90);
 }
@@ -1593,7 +1593,7 @@ public function doNotResistSavin():void {
 	
 	outputText("\n\nSilently, you nod, and collapse atop her, head buried in her milk-laden chest as you pass out from sexual exhaustion.");
 	stats(0,0,0,0,0,2,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 	//knock up hurrrr
 	player.knockUp(22,360,90);
 }
@@ -2616,7 +2616,7 @@ public function tentacleGangBang():void {
 	flags[kFLAGS.TIMES_TENTACLED_SAND_MOTHER]++;
 	stats(0,0,0,0,0,0,-100,1);
 	if(!inCombat()) doNext(1);
-	else eventParser(5007);
+	else cleanupAfterCombat();
 }
 //*Fuck Her Cunt
 //>Sets to resisting with options for repeat rapes.
@@ -2693,7 +2693,7 @@ public function fuckTheSandMothersCunt():void {
 	else outputText("\n\nThey may not think much of you, but turning the Sand Witch Queen into a mewling slut never gets old.");
 	stats(0,0,0,0,0,0,-100,1);
 	if(!inCombat()) doNext(1);
-	else eventParser(5007);
+	else cleanupAfterCombat();
 }
 
 //*ScissorAnDrink
@@ -2742,7 +2742,7 @@ public function scissorAndDrink():void {
 	else outputText("\n\nThey may not think much of you, but turning the Sand Witch Queen into a mewling slut never gets old.");
 	stats(0,0,0,0,0,0,-100,1);
 	if(!inCombat()) doNext(1);
-	else eventParser(5007);
+	else cleanupAfterCombat();
 }
 	
 //*Lose Male Loss

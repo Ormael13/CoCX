@@ -44,7 +44,7 @@ public function pcWinsValeriaSpar():void {
 	spriteSelect(79);
 	outputText("\"<i>Oof!</i>\" Valeria grunts, nearly losing her human shape as she tumbles to the hard-packed dirt.  \"<i>All right, all right, you win!  Take it easy, partner,</i>\" she laughs, letting her greatsword dissipate back into her body.");
 	outputText("\n\nYou offer to help her up, but she easily reconstitutes herself into a standing pose, giving you a little wink afterwards.  \"<i>Thanks for the ass-whoopin', [name],</i>\" she laughs.  \"<i>C'mon, let's get back to it.  Demons aren't gonna defeat themselves, after all.</i>\"");
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[Valeria] -- [Spar] -- PC Defeated
@@ -63,7 +63,7 @@ public function pcWinsValeriaSparDefeat():void {
 		outputText(", offering you a hand up.");
 		outputText("\n\n\"<i>C'mon, let's get back to camp.</i>\"");
 		//(Return to main Camp menu)
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 	//[else; If PC lost via lust & has a gender: 
 	else {
@@ -338,7 +338,7 @@ public function valeriaSexDominated():void {
 	HPChange(25,false);
 	stats(0,0,0,0,0,1,-100,0);
 	if(!inCombat()) doNext(13);
-	else eventParser(5007);
+	else cleanupAfterCombat();
 }
 
 //Followers -- [Valeria] -- [Talk]
@@ -597,7 +597,7 @@ public function valeriaGooRapeII():void {
 		else player.changeStatusValue("gooStuffed",2,1);
 	}
 	if(player.biggestTitSize() >= 5 && player.hasFuckableNipples()) player.changeStatusValue("gooStuffed",4,1);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Random Goo-girl Cum-Out:

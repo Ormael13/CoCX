@@ -298,7 +298,7 @@ public function gooNagaRape():void {
 		outputText("You cry out and shudder as you feel wave after wave of the naga's orgasm rushing over your body, bringing you to a strange orgasmic bliss of your own.", false);
 	} 
 	outputText("  For a moment you just sit there in post orgasmic bliss, the walls of the naga convulsing around your gooey half. You decide that the snake woman has had enough and slowly withdraw yourself from her abused love canal. You gather up your things and head back to your camp, leaving the naga lying in the sands.", false);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //3) Victory male
@@ -385,7 +385,7 @@ public function nagaVictoryMale():void {
 	}
 	outputText("You think it would be a very good idea to come to the desert more often.", false);
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 	return;
 }
 
@@ -443,7 +443,7 @@ public function nagaVictoryFemale():void {
 	}
 	outputText("You think it would be a very good idea to come to the desert more often.", false);
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 	return;
 }
 
@@ -483,7 +483,7 @@ public function nagaVictoryGenderless():void {
 	}
 	outputText("You think it would be a very good idea to come to the desert more often.", false);
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 	return;    	
 }
 
@@ -737,7 +737,7 @@ public function nagaFUCKSJOOOOOO():void {
 		outputText("You bring your mouth back to her awaiting hole and redouble your efforts. You can feel that she is nearing her peak as you continue to lick at her pussy. With a final shudder the naga climaxes, squeezing you firmly against her, coating your chin and nose with her thick honey.  As the naga relaxes her grip you slide out from her loosened tail coils.  Exhausted, you lose consciousness, but when you awake, you grab your things and leave the moistened sands behind.", false);
 	}
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 public function nagaRapeChoice():void {
@@ -750,21 +750,21 @@ public function nagaRapeChoice():void {
 	if(player.lust >= 33) {
 		outputText("Your body aches for further satisfaction - do you rape the snake woman?", false);
 		if(player.lowerBody == LOWER_BODY_TYPE_GOO) {
-			if(player.gender == 0) simpleChoices("Yes",5115,"Gooey Rape",5122,"Lay Eggs",eggs,"",0,"Leave",5007);
-			if(player.gender == 1) simpleChoices("Yes",5113,"Gooey Rape",5122,"Lay Eggs",eggs,"",0,"Leave",5007);
-			if(player.gender == 2) simpleChoices("Yes",5114,"Gooey Rape",5122,"Lay Eggs",eggs,"",0,"Leave",5007);
-			if(player.gender == 3) simpleChoices("As Male",5113,"As Female",5114,"Gooey Rape",5122,"Lay Eggs",eggs,"Leave",5007);
+			if(player.gender == 0) simpleChoices("Yes",5115,"Gooey Rape",5122,"Lay Eggs",eggs,"",0,"Leave",cleanupAfterCombat);
+			if(player.gender == 1) simpleChoices("Yes",5113,"Gooey Rape",5122,"Lay Eggs",eggs,"",0,"Leave",cleanupAfterCombat);
+			if(player.gender == 2) simpleChoices("Yes",5114,"Gooey Rape",5122,"Lay Eggs",eggs,"",0,"Leave",cleanupAfterCombat);
+			if(player.gender == 3) simpleChoices("As Male",5113,"As Female",5114,"Gooey Rape",5122,"Lay Eggs",eggs,"Leave",cleanupAfterCombat);
 			return;	
 		}
 		else {
-			if(player.gender == 0) simpleChoices("Yes",5115,"",0,"",0,"Lay Eggs",eggs,"No",5007);
-			if(player.gender == 1) simpleChoices("Yes",5113,"",0,"",0,"Lay Eggs",eggs,"No",5007);
-			if(player.gender == 2) simpleChoices("Yes",5114,"",0,"",0,"Lay Eggs",eggs,"Leave",5007);
-			if(player.gender == 3) simpleChoices("As Male",5113,"As Female",5114,"",0,"Lay Eggs",eggs,"Leave",5007);
+			if(player.gender == 0) simpleChoices("Yes",5115,"",0,"",0,"Lay Eggs",eggs,"No",cleanupAfterCombat);
+			if(player.gender == 1) simpleChoices("Yes",5113,"",0,"",0,"Lay Eggs",eggs,"No",cleanupAfterCombat);
+			if(player.gender == 2) simpleChoices("Yes",5114,"",0,"",0,"Lay Eggs",eggs,"Leave",cleanupAfterCombat);
+			if(player.gender == 3) simpleChoices("As Male",5113,"As Female",5114,"",0,"Lay Eggs",eggs,"Leave",cleanupAfterCombat);
 			return;	
 		}
 	}
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 public function nagaPlayerConstrict():void {
@@ -812,7 +812,7 @@ public function nagaPlayerConstrict():void {
 		outputText("You launch yourself at your opponent and attempt to wrap yourself around " + monster.pronoun2 + ". Before you can even get close enough, " +monster.a + monster.short + " jumps out of the way, causing you to fall flat on your face. You quickly pick yourself up and jump back.", false);
 		takeDamage(5);
 		if(player.HP <= 0) {
-			doNext(5010);
+			doNext(endHpLoss);
 			return;
 		}
 	}
@@ -831,7 +831,7 @@ public function naggaSqueeze():void {
 		if(monster.short == "demons") 
 			outputText("The others quickly back off, terrified at the idea of what you might do to them.", false);
 		outputText("\n\n", false);
-		doNext(5008);
+		doNext(endHpVictory);
 		return;
 	}
 	outputText("\n\n", false);
@@ -955,7 +955,7 @@ public function naggaTease():void {
 		//OLD
 		//monster.lust += 5 + rand(15);
 		if(monster.lust > 99) {
-			doNext(5009);
+			doNext(endLustVictory);
 			return;
 		}
 	}
@@ -1002,7 +1002,7 @@ public function eggUpANagaSpiderLike():void {
 	outputText("\n\nA while later, you awaken alone in the desert sand.  Getting your shaky legs under you and stifling a yawn, you head back to camp.  You should come to the desert more often.");
 	player.dumpEggs();
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Bee Naga Scene: Finished (Fenoxo) (edited)
@@ -1044,5 +1044,5 @@ public function beePositANagaPlease():void {
 	outputText("\n\nYou should definitely come to the desert more often.");
 	player.dumpEggs();
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }

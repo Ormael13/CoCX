@@ -19,6 +19,11 @@ package classes.Monsters
 			game.yoYouBeatUpSomeSandWitchesYOUMONSTER();
 		}
 
+		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
+		{
+			game.loseToSammitchMob();
+		}
+
 		public function SandWitchMob(mainClassPtr:*)
 		{
 			super(mainClassPtr);

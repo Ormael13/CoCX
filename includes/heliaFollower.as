@@ -590,7 +590,7 @@ public function PCBeatsUpSalamanderSparring():void {
 	
 	//[Display "Rough" sex options]
 	heliaRoughSex(false);
-	//eventParser(5007);
+	//cleanupAfterCombat();
 }
 
 
@@ -1025,7 +1025,7 @@ public function heliaRoughSex(output:Boolean = true):void {
 		}
 	}
 	if(player.lust < 33) outputText("\n\n<b>You aren't turned on enough for sex right now.</b>");
-	if(inCombat()) addButton(9,"Leave",eventParser,5007);
+	if(inCombat()) addButton(9,"Leave",eventParser,cleanupAfterCombat);
 	else addButton(9,"Back",heliaFollowerMenu);
 }
 
@@ -1121,7 +1121,7 @@ public function possessIzma():void {
 	outputText("\n\n\"<i>That's what you get for submitting to other people without my permission,</i>\" you say, pushing Hel's tail-cockring off of Izma's cock.  \"<i>Now be a good girl and do something about... that...</i>\"");
 	
 	stats(0,0,0,0,0,-1,-100,0);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
 	
@@ -1159,7 +1159,7 @@ public function inCampHelNagaLuv():void {
 	outputText("\n\nBefore you know it, you're drifting off to sleep in your lover's embrace...  The last thing you hear is her quiet whisper: \"<i>Nagas really do give the best hugs...</i>\"");
 	
 	stats(0,0,0,0,0,-1,-100,0);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }	
 
@@ -1187,7 +1187,7 @@ public function nagaCoilForHelCampWithGirls():void {
 	outputText("\n\nBefore you know it, you're drifting off to sleep in your lover's embrace.... The last thing you hear is her quiet whisper:  \"<i>Nagas really do give the best hugs...</i>\"");
 	
 	stats(0,0,0,0,0,-1,-100,0);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }	
 
@@ -1225,7 +1225,7 @@ public function centaurMountsCampHel():void {
 	outputText("\n\n\"<i>Holy shit,</i>\" she gasps, breathing hard, You look down from your loft position on centaur-back as Hel rolls over, idly fingering out thick globs of seed still leaking from her well-abused hole.  \"<i>Thanks for the ride, lover mine.</i>\"");
 	
 	stats(0,0,0,0,0,-1,-100,0);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }	
 
@@ -1256,7 +1256,7 @@ public function femtaurPlusCampHel():void {
 	
 	outputText("\n\nBreathing heavily, you pat her on the cheek and stumble off to get cleaned up.");
 	stats(0,0,0,0,0,-1,-100,0);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
 
@@ -1279,7 +1279,7 @@ public function heliaFollowerTentafuck():void {
 	
 	outputText("\n\nYou roll your eyes and go to get cleaned up.");
 	stats(0,0,0,0,0,-1,-100,0);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
 

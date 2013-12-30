@@ -25,6 +25,16 @@
 		}
 
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if(pcCameWorms){
+				outputText("\n\nYour foe doesn't seem disgusted enough to leave...");
+				game.doNext(game.endLustLoss);
+			} else {
+				game.harpyLossU();
+			}
+		}
+
 		override protected function outputPlayerDodged(dodge:int):void
 		{
 			outputText("With another deranged cry the harpy dives at you, swinging her razor-sharp talons through the air with the grace of a ballerina. Your quick reflexes allow you to dodge every vicious slash she makes at you.\n", false);

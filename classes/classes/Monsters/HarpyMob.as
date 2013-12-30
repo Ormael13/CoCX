@@ -19,6 +19,11 @@ package classes.Monsters
 			game.pcDefeatsHarpyHorde();
 		}
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			game.pcLosesToHarpyHorde();
+		}
+
 		public function HarpyMob(mainClassPtr:*)
 		{
 			super(mainClassPtr);

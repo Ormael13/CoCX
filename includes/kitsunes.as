@@ -117,7 +117,7 @@ public function turnBackFromWillOWisp():void {
 	clearOutput();
 	outputText("There's no way you're going to go gallivanting off into the woods after some flame.  You shake your head to clear your thoughts, and warily turn away to head back toward camp.  You could almost swear for a moment the flame looked disappointed, and you chuckle lightly at such a silly thought." );
 	//Advance time 1 hour, return to camp.
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	doNext(13);
 }
 
@@ -201,7 +201,7 @@ public function leaveKitsune(talked:Boolean = true):void {
 	outputText("<b>You have received a Kitsune's Gift!</b>\n" );
 	if(inCombat()) {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] = "KitGift";
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 	else {
 		//add Kitsune's Gift to inventory
@@ -640,7 +640,7 @@ public function outro(tentacles:Boolean = false):void {
 		model.time.hours = 6;
 		model.time.days++;
 		if(!inCombat()) doNext(13);
-		else eventParser(5007);
+		else cleanupAfterCombat();
 	}
 }
 
@@ -959,7 +959,7 @@ public function loseFightToHerms():void {
 	outputText("\n\nSighing deeply in utter satisfaction" + ((player.cumQ() > 350) ? " with one hand resting on her stomach" : "" ) + ", she leans back, swiveling her hips a little to tease your spent cock.  Drenched in her " + ((monster.hairColor == "red") ? "musky futa-cum" : "feminine juices") + ", you twitch lightly as bliss and fatigue spread through your body in equal measure.  She leans forward again, dropping her lips to your ear, and whispers a short incantation while stroking the side of your face.\n\n");
 	outputText("The last thing you see before blacking out is a pair of delightfully plump, round cheeks jiggling happily as the kitsune gathers her robes.");
 	stats(0,0,0,0,1,1,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 // For Females and Genderless
@@ -993,7 +993,7 @@ public function femalesAndNuetersLoseToKitsunes():void {
 	
 	outputText("The last thing you see before blacking out is a pair of delightfully plump, round cheeks jiggling happily as the kitsune gathers her robes.");
 	stats(0,0,0,0,1,1,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Blonde-exclusive
@@ -1052,7 +1052,7 @@ public function blondeKitsuneRapesSmallWangs():void {
 	//<b>You'll probably come to your senses in 8 hours or so, missing X gems</b>" );
 	// Advance time 8hrs, lose X gems, return to camp. +Sensitivity +Libido
 	stats(0,0,0,0,1,1,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Black-hair-exclusive
@@ -1084,7 +1084,7 @@ public function loseToBlackHairLatexWhileMilky():void {
 		player.addStatusValue("Feeder",1,1);
 		player.changeStatusValue("Feeder",2,0);
 	}
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 	
 // lose, requires balls and cumQ() > 1000
@@ -1128,7 +1128,7 @@ public function loseToKitsunesWithBallsAndHighCumQ():void {
 	//Advance time 8 hours, lose X gems, return to camp. +Sensitivity, +Libido, +Cum Production
 	stats(0,0,0,0,1,1,-100,0);
 	if(player.cumQ() < 30000) player.cumMultiplier += 5;
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Redhead-exclusive
@@ -1181,7 +1181,7 @@ public function getRapedByRedHeadFutaKitsune():void {
 	
 	//Advance time 8 hrs, lose X gems, return to camp. +Sensitivity, +Libido.
 	stats(0,0,0,0,1,1,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[WIN FIGHT]
@@ -1277,7 +1277,7 @@ public function defeatTheKitsunes(display:Boolean = true):void {
 	//[Feeder]
 	if(player.hasPerk("Feeder") >= 0)
 		button = kitsuneButton(button,"Breastfeed",feederTheKitsunes);
-	addButton(9,"Leave",eventParser,5007);
+	addButton(9,"Leave",eventParser,cleanupAfterCombat);
 }
 
 public function kitsuneButton(button:int,nam:String,func:*):int {
@@ -1357,7 +1357,7 @@ public function fuckAKitsuneVaginally():void {
 	outputText("Finally, you turn to gather up your things, cleaning yourself off a little and pulling your " +  player.armorName + " back on.  When you turn around again to check up on the insensate kitsune, you are left scratching your head, staring at the spot where she was mere moments ago.  All that remains of her is a puddle of mixed fluids, already mostly absorbed by the ground, and the faint sound of mischievous laughter filtering through the trees.");
 	//Advance time 1hr and return to camp. +Sensitivity, +Libido
 	stats(0,0,0,0,1,1,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[Anal] - requires cock area 144 or less
@@ -1429,7 +1429,7 @@ public function putItInAKitsunesAssWin():void {
 	outputText("You take a moment to recuperate, and then begin to gather your things, but when you turn your attention back to the kitsune, there's no sign of her save for the sound of a feminine giggle drifting through the leaves.");
 	//Advance time 1hr and return to camp. +Sensitivity, +Libido
 	stats(0,0,0,0,1,1,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[Tribbing] - requires vagina
@@ -1469,7 +1469,7 @@ public function tribbingWithAKitsune():void {
 	// Possibly increase clitLength
 	player.clitLength += 0.1 + rand(3)/10;
 	stats(0,0,0,0,1,1,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[Tail Job] - requires cock
@@ -1514,7 +1514,7 @@ public function tailJobKitsuneWin():void {
 	outputText("\"<i>Come look me up anytime, dear!</i>\"  she calls back when she is safely out of sight.  You briefly consider giving chase, but decide it is not worth the effort, gathering your " + player.armorName + " and turning back toward camp." );
 	//Advance time 1hr and return to camp.  +Sensitivity
 	stats(0,0,0,0,0,5,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[Tentacles] - requires 3+ tentacles of 30" or longer
@@ -1590,7 +1590,7 @@ public function kitsunesGetBonedBy3PlusTentacles():void {
 	outputText("\"<i>Tentacles...</i>\" she repeats, shuddering from head to toe." );
 	//Advance time 1hr and return to camp.  +Sensitivity, +Libido
 	stats(0,0,0,0,1,1,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 
@@ -1700,7 +1700,7 @@ public function fuckDraftBlond():void {
 	//Advance time 1hr and return to camp. +Sensitivity, +Libido
 	stats(0,0,0,0,1,1,-100,0);
 	consumeItem("F.Draft",1);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 
@@ -1786,7 +1786,7 @@ public function doseAKitsuneWithOviElixirs():void {
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] = shortName;
 	//Advance time 1hr and return to camp. +Sensitivity, +Libido
 	stats(0,0,0,0,1,1,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[Lactaid]
@@ -1849,7 +1849,7 @@ public function lactaidDoseAKitSune():void {
 	stats(0,0,0,0,1,1,-100,0);
 	//consume lactaid
 	consumeItem("Lactaid",1);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 
@@ -1923,7 +1923,7 @@ public function hotdogAnalInKitsuneButtDontLetTailTickleYourNose():void {
 	outputText("\n\nShe rolls onto her side, curling up in a puddle of sweat and sex, resting her hands on her " + ((player.cumQ() > 1000) ? "inflated" : "pudgy" ) + " stomach and sighing contentedly, the tips of her tails gently twitching with residual pleasure.  You take a moment to recuperate, then gather your things and turn toward camp, leaving the insensate kitsune to recover on her own.");
 	//Advance time 1hr and return to camp. +Sensitivity, +Libido
 	stats(0,0,0,0,1,1,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 
@@ -1980,7 +1980,7 @@ public function feederTheKitsunes():void {
 	player.addStatusValue("Feeder",1,1);
 	player.changeStatusValue("Feeder",2,0);
 	stats(0,0,0,0,0,3,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[GetBJ] - requires cock 108 area or less
@@ -2068,7 +2068,7 @@ public function getABJFromAFoxGirl():void {
 	outputText( "\n\nSighing in satisfaction, you step back from the tree to catch your breath." + ((player.cumQ() > 1000) ? "  The kitsune leans back, cradling her full stomach with a blissful smile on her face and a few strings of cum-laced spittle dripping down her chin, a small puddle of juices spreading between her knees.  How she can look so happy after a brutal facefucking like the one you just gave her is beyond you, but by the look of things she's quite content with the results." : "  The kitsune leans back, laying a hand on her stomach and rubbing it lightly.  An audible gurgle reaches your ears, and she sighs bemusedly, shaking her head.") + "  Either way, it doesn't look like the exhausted girl is going to be getting up soon, so you gather your things and head back to camp.");
 	//Advance time 1hr and return to camp. +Sensitivity, +Libido
 	stats(0,0,0,0,1,1,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[GetLicked] - requires a vagina
@@ -2099,7 +2099,7 @@ public function getLickedByKitsunes():void {
 	
 	outputText("She licks her lips in satisfaction, then wipes her mouth on her sleeve, sighing happily before slumping back to rest against the side of a tree.  You lie splayed out on the ground in ecstasy for several minutes before finally summoning up the strength to stand, and when you do so, a cursory glance around suggests that the wily kitsune has made her getaway.  As you gather your things and prepare to head back to camp, you can almost hear the faint echo of a mischievous giggle filtering through the forest.");
 	stats(0,0,0,0,1,1,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 	
 //Redhead-exclusive
@@ -2141,7 +2141,7 @@ public function rideDatRedheadKitsuneCockIntoTheSkyDiamonds():void {
 	//Advance time 1hr and return to camp. +Sensitivity, +Libido
 	stats(0,0,0,0,1,1,-100,0);
 	slimeFeed();
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[Helix] - requires herm
@@ -2213,7 +2213,7 @@ public function helixZeKitsunes():void {
 	outputText("You turn to gather your " + player.armorName + ", cleaning up and dressing once more, then whip around to the sound of rustling leaves.  A set of sticky footprints leads your gaze to the edge of a bush, a flash of red tails and a pair of plump hind cheeks disappearing into the forest.");
 	//Advance time 1hr and return to camp. +Sensitivity, +Libido
 	stats(0,0,0,0,1,1,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[Remove Dick]
@@ -2312,7 +2312,7 @@ public function nonFutaRedHeadIsWorstRedheadLapsittingHandjobThingIDontKnow():vo
 	outputText( "Finally, she shuts her eyes and rests her head against your shoulder, too insensate to react to your continued stroking with more than a gentle shiver.  It's almost a shame that you need to return to camp, as you have little doubt that she would probably curl up to sleep in your lap if you gave her the chance.  You set her aside in the grass, then clean yourself off before heading back." );
 	//Return to camp, advance time 1hr, +Sensitivity
 	stats(0,0,0,0,0,3,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Non-futa Redhead: [Bondage] - requires a cock with area <= 144 due to some anal
@@ -2366,7 +2366,7 @@ public function nonFutaRedHeadBondageIGuessYouTieHerUpWithYourPenisThenHuh():voi
 	outputText( "\n\nShe moans in insensate bliss as she sways back and forth, dripping with your steamy seed.  Her eyes are the merest sliver of jade beneath heavy lids, her tongue hanging out lazily as she hangs in helpless pleasure from her bonds.  " + ((player.cor > 50) ? "Smirking lightly, you give the dazed kitsune a patronizing slap on the ass, eliciting a delirious groan.  She remains dangling from the lofty bough as you gather your things, turning back toward camp." : "Carefully, you pull her down from the tree, laying her on her side at its base.  You spread her robe over her naked body like a blanket, patting her on the head gently as she drifts to sleep, then turn to make your way back to camp." ) );
 	//advance time 1hr and return to camp, +Sensitivity, +Libido
 	stats(0,0,0,0,1,1,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 /*Use whichever enhancement scene(s) you feel like.

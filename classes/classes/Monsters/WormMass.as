@@ -21,6 +21,12 @@
 		}
 
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			outputText("Overcome by your "+(hpVictory?"wounds":"lust")+", you sink to your knees as the colony of worms swarms all over your body...\n\n", true);
+			game.infest1();
+		}
+
 		override public function eMaxHP():Number
 		{
 			return 40;

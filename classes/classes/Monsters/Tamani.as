@@ -1,5 +1,6 @@
 package classes.Monsters 
 {
+	import classes.GlobalFlags.kFLAGS;
 	import classes.Monster;
 	
 	/**
@@ -25,9 +26,34 @@ package classes.Monsters
 				if(player.statusAffectv1("Tamani") <= -500 && player.canOvipositSpider()) {
 					temp2 = 3837;
 				}
-				game.simpleChoices("Fuck",game.tamaniSexWon,"Buttfuck",temp,"",0,"Lay Eggs",temp2,"Leave",5007);
+				game.simpleChoices("Fuck",game.tamaniSexWon,"Buttfuck",temp,"",0,"Lay Eggs",temp2,"Leave",game.cleanupAfterCombat);
 			}
-			else game.eventParser(5007);
+			else game.cleanupAfterCombat();
+		}
+
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if (hpVictory){
+				if(player.totalCocks() > 0) {
+					if(rand(2) == 0) game.tamaniSexLost();
+					else game.tamaniSexLetHer();
+				}else {
+					outputText("Tamani sighs as you begin to lose conscious, \"<i>You dummy, why'd you get rid of the fun parts?</i>\"", true);
+					game.cleanupAfterCombat();
+				}
+			} else {
+				if(player.totalCocks() > 0) {
+				//hypnoslut loss scene
+				if(game.flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] > 19 && rand(2) == 0) {
+					game.getRapedByTamaniYouHypnoSlut();
+				} else if(rand(2) == 0) game.tamaniSexLost();
+				else game.tamaniSexLetHer();
+				} else {
+					outputText("You give into your lusts and masturbate, but Tamani doesn't seem to care.  She kicks and punches you over and over, screaming, \"<i>You dummy, why'd you get rid of the fun parts?</i>\"", true);
+					game.takeDamage(10000);
+					game.cleanupAfterCombat();
+				}
+			}
 		}
 
 		public function Tamani(mainClassPtr:*)

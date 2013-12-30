@@ -364,7 +364,7 @@ public function giveGoblinAMilkMustache():void {
 	//You've now been milked, reset the timer for that
 	player.addStatusValue("Feeder",1,1);
 	player.changeStatusValue("Feeder",2,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 public function minotaurCumBukkakeInSalon():void {

@@ -20,6 +20,11 @@ package classes.Monsters
 			game.defeatHolli();
 		}
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			game.enjoyYourBadEndBIYAAAATCH();
+		}
+
 		public function Holli(mainClassPtr:*)
 		{
 			super(mainClassPtr);

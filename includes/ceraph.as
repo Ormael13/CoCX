@@ -177,7 +177,7 @@ public function maleFuckCeraphsPussy():void {
 	}
 	stats(0,0,0,0,3,3,-100,1);
 	if(gameState < 1 || gameState > 2) doNext(13);
-	else eventParser(5007);
+	else cleanupAfterCombat();
 }
 	
 //[Female] Ride 'Dat Cawk
@@ -231,7 +231,7 @@ public function rideCeraphsCockLikeaBAWSSexclamation11eleven():void {
 	stats(0,0,0,0,3,3,-100,1);
 	player.knockUp(1,400,61);
 	if(gameState < 1 || gameState > 2) doNext(13);
-	else eventParser(5007);
+	else cleanupAfterCombat();
 }
 
 //[OH SHIT SON YOU LOST GET EARS PIERCED]
@@ -259,7 +259,7 @@ public function loseToCeraphAndGetPiercingsInEarsOrSomethingSomehow():void {
 	player.earsPLong = "Green gem-stone ear-studs";
 	flags[kFLAGS.PC_FETISH] = 1;
 	stats(0,0,0,0,0,0,25,5);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 	
 //[OH SHIT SON MOAR SHIT GETTING PIERCEDEDEDED] – NIPPLEZ GO
@@ -285,7 +285,7 @@ public function loseToCeraphAnGetPierced2():void {
 	player.nipplesPShort = "seamless black nipple-studs";
 	player.nipplesPLong = "Seamless black nipple-studs";
 	flags[kFLAGS.PC_FETISH] = 2;
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[OH SHIT!  WHY DOES FEN KEEP WIRTING THAT 3RD TIME – CROTCH GO]
@@ -338,7 +338,7 @@ public function getPiercedByCeraphLoss3():void {
 	
 	outputText("You tremble in impotent fury at the violation as the demoness flounces away.  You'd pursue her, but between her ideas and exposing your crotch to the entire area, you need to cum more than anything.  You scurry back to camp, too horny to think straight and your new piercing aching just enough to keep you from forgetting about it.", false);
 	stats(0,0,0,0,0,0,25,5);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[FINAL ENCOUNTER LEVEL]
@@ -847,7 +847,7 @@ public function encounterCeraph():void {
 
 public function winRapeChoices():void {
 	//FOLLOWER CHANCE:
-	var leave:Number = 5007;
+	var leave:* = cleanupAfterCombat;
 	if(gameState < 1 || gameState > 2) {
 		//Load ceraph and set up win conditions
 		startCombat(new Ceraph(this));
@@ -885,14 +885,14 @@ public function winRapeChoices():void {
 
 		simpleChoices("Fuck Her",dicking,"Ride Her",cunting,"FuckHerAss",buttsmexing,"B.Titfuck",bikiniTits,"Leave",leave);
 		/*
-		if(player.gender == 1) doYesNo(maleFuckCeraphsPussy,5007);
-		if(player.gender == 2) doYesNo(rideCeraphsCockLikeaBAWSSexclamation11eleven,5007);
-		if(player.gender == 3) simpleChoices("Fuck Her",maleFuckCeraphsPussy,"Ride Her",rideCeraphsCockLikeaBAWSSexclamation11eleven,"",0,"",0,"Leave",5007);
+		if(player.gender == 1) doYesNo(maleFuckCeraphsPussy,cleanupAfterCombat);
+		if(player.gender == 2) doYesNo(rideCeraphsCockLikeaBAWSSexclamation11eleven,cleanupAfterCombat);
+		if(player.gender == 3) simpleChoices("Fuck Her",maleFuckCeraphsPussy,"Ride Her",rideCeraphsCockLikeaBAWSSexclamation11eleven,"",0,"",0,"Leave",cleanupAfterCombat);
 		*/
 	}
 	else {
 		if(gameState < 1 || gameState > 2) doNext(3041);
-		else eventParser(5007);
+		else cleanupAfterCombat();
 	}
 }
 
@@ -950,7 +950,7 @@ public function ceraphRapesYouBADDAWGYODIGGITY():void {
 	outputText("Her whip uncurls itself from around you, but by some sorcerous trick, you're unable to separate your limbs and free yourself.  Ceraph snickers and gives your rump a crack with her whip before sauntering off, leaving you to lie there, growing more and more sexually frustrated.  Eventually you doze off into a sort of half-sleep, dreaming of being dominated as the demon's fluids dry on your face.", false);
 	stats(0,0,0,0,0,0,200,0);
 	if(gameState < 1 || gameState > 2) doNext(13);
-	else eventParser(5007);
+	else cleanupAfterCombat();
 }
 
 //(REQ's – HUGE WANG, Exgartuan or Jojo corruption, and !centaur)
@@ -1031,7 +1031,7 @@ public function hugeCorruptionForceFuckCeraph():void {
 	}
 	outputText("(Do you accept Ceraph's Offer?)", false);
 	//Y/N – remove 1 fetish level or +10 gems
-	doYesNo(ceraphsNiceOffer,5007);
+	doYesNo(ceraphsNiceOffer,cleanupAfterCombat);
 	stats(0,0,0,0,3,3,-100,1);
 }
 
@@ -1050,7 +1050,7 @@ public function ceraphsNiceOffer():void {
 		player.gems+=10;
 	}
 	outputText("\n\nThe abused demon-dom laughs, \"<i>What?  Did you expect me to trick you?  No, I liked today.  It's so hard to find someone who can go toe to toe with me AND find incredible ways to abuse my body.</i>\"\n\nShe lays back and relaxes, falling asleep after the intense fuck.", false);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 /*
@@ -1644,6 +1644,6 @@ public function buttRapeCeraph():void {
 	outputText(", you drop her like a discarded rag.  She moans and begins masturbating, half-insensate from the rough treatment.  You ignore her, get dressed, and get out of there before the mountain's beasts show up.  Ceraph is in for a wild night!", false);
 	stats(0,0,0,0,0,0,-100,0);
 	if(gameState < 1 || gameState > 2) doNext(13);
-	else eventParser(5007);
+	else cleanupAfterCombat();
 }
 

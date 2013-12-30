@@ -311,7 +311,7 @@ public function fuckYoDaughtersHomie():void {
 	//Knock the bitches up, boost libido, corruption
 	knockUpDaughters();
 	player.cumMultiplier += .3;
-	if(gameState == 1 || gameState == 2) eventParser(5007);
+	if(gameState == 1 || gameState == 2) cleanupAfterCombat();
 	else doNext(15);
 }
 
@@ -664,7 +664,7 @@ public function legTamanisDaughtersRAEPYou():void {
 	//knock bitches up, slight libido gain, slight strength/toughness loss.
 	stats(-.5,0,0,-.5,1,0,-100,1);
 	knockUpDaughters();
-	if(gameState == 1 || gameState == 2) eventParser(5007);
+	if(gameState == 1 || gameState == 2) cleanupAfterCombat();
 	else doNext(15);
 }
 
@@ -790,7 +790,7 @@ public function tamaniDaughtersCombatLossDrain():void {
 			outputText("   Fucks & Love,\n", false);
 			outputText("      -Tamani</i>", false);
 		}
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 	//(ALT – BAD END GATEWAY)
 	else {
@@ -843,7 +843,7 @@ public function tamaniDaughtersDeclineBadEnd():void {
 	outputText("The restraints pop off you at once, and you pull the tubes and IV's from your skin.  You grunt with discomfort and remove the final tube from your " + assholeDescript() + ".  Climbing off the table, your " + player.legs() + " wobble unsteadily as you try to get your balance.   The goblin says, \"<i>Go on home dad before I strap you back down and teach you to enjoy my gifts!</i>\"\n\n", false);
 	
 	outputText("You sheepishly leave the cave and head home, glad to be out of there before your growing tribe of daughters decides to milk you forever.\n\n", false);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 //[Rather Fill Individually]
 public function tamanisDaughtersFillIndividuallyBADEND():void {
@@ -975,7 +975,7 @@ public function loseToDaughtersWithTamaniThere():void {
 	flags[kFLAGS.TAMANI_TIMES_HYPNOTISED]++;
 	//daughter countdown reset. 
 	stats(-.5,0,0,-.5,1,1,-100,1);
-	if(gameState == 1 || gameState == 2) eventParser(5007);
+	if(gameState == 1 || gameState == 2) cleanupAfterCombat();
 	else doNext(13);
 }
 
@@ -1030,9 +1030,9 @@ public function combatWinAgainstDaughters():void {
 		outputText("You smile in satisfaction as " + monster.a + monster.short + " collapses, unable to continue fighting.", true);
 		if(player.lust >= 33 && player.cockTotal() > 0) {
 			outputText("In spite of their injuries, they do try to present their bodies in as lewd a way as possible.  You could still fuck them, but things might get out of hand...\n\nDo you fuck them?", true);
-			doYesNo(fuckYoDaughtersHomie, 5007);
+			doYesNo(fuckYoDaughtersHomie, cleanupAfterCombat);
 		}
-		else eventParser(5007);
+		else cleanupAfterCombat();
 		return;
 	}
 	else {
@@ -1040,9 +1040,9 @@ public function combatWinAgainstDaughters():void {
 		stats(0,0,0,0,0,0,5,0);
 		if(player.lust >= 33 && player.cockTotal() > 0) {
 			outputText("You could still fuck them, but things might get out of hand...\n\nDo you fuck them?", false);
-			doYesNo(fuckYoDaughtersHomie, 5007);
+			doYesNo(fuckYoDaughtersHomie, cleanupAfterCombat);
 		}
-		else eventParser(5007);
+		else cleanupAfterCombat();
 		return;
 	}
 }
@@ -1059,7 +1059,7 @@ public function loseToDaughters():void {
 		outputText("\n\nYou give up, you're just too turned on by the sea of sexually charged deviants to resist them anymore.  You're ready to fuck them all.", false);
 		if(player.cockTotal() == 0) {
 			outputText("The sexy sluts pout, \"<i>Why did you have to go and get rid of your dick!?</i>\" before something hits you in the head, HARD, knocking you out.", false);
-			eventParser(5007);
+			cleanupAfterCombat();
 			return;
 		}
 		if(monster.hasStatusAffect("Tamani") >= 0) {
@@ -1078,7 +1078,7 @@ public function loseToDaughters():void {
 		outputText("\n\nOverwhelmed by your wounds, you can't even try to stop the goblin horde...", false);
 		if(player.cockTotal() == 0) {
 			outputText("The sexy sluts pout, \"<i>Why did you have to go and get rid of your dick!?</i>\" before something hits you in the head, HARD, knocking you out.", false);
-			eventParser(5007);
+			cleanupAfterCombat();
 			return;
 		}
 		if(monster.hasStatusAffect("Tamani") >= 0) {

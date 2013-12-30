@@ -28,6 +28,18 @@ package classes.Monsters
 			}
 		}
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if (short == "alpha gnoll"){
+				game.loseToGnollPrincessAndGetGangBanged();
+			} else if (pcCameWorms){
+				outputText("\n\nYour foe doesn't seem put off enough to leave...");
+				game.doNext(game.endLustLoss);
+			} else {
+				game.hyenaSpearLossAnal();
+			}
+		}
+
 		public function GnollSpearThrower(mainClassPtr:*)
 		{
 			super(mainClassPtr);

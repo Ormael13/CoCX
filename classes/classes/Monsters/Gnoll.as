@@ -31,6 +31,19 @@ package classes.Monsters
 			game.defeatHyena();
 		}
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if(hasStatusAffect("PhyllaFight") >= 0) {
+				removeStatusAffect("PhyllaFight");
+				game.phyllaGnollBeatsPC();
+			} else if(pcCameWorms) {
+				outputText("\n\nYour foe doesn't seem put off enough to leave...");
+				game.doNext(game.endLustLoss);
+			} else {
+				game.getRapedByGnoll();
+			}
+		}
+
 		public function Gnoll(mainClassPtr:*)
 		{
 			super(mainClassPtr);

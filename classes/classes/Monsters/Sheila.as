@@ -22,6 +22,12 @@ package classes.Monsters
 			else game.sheilaGotWhomped();
 		}
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if(game.flags[kFLAGS.SHEILA_DEMON] == 1) game.loseToSheila();
+			else game.getBeatUpBySheila();
+		}
+
 		public function Sheila(mainClassPtr:*)
 		{
 			super(mainClassPtr);

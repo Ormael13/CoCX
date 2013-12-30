@@ -71,7 +71,7 @@ public function sandwitchRape():void {
 		slimeFeed();
 		stats(0,0,0,0,1,5,0,0);
 		if(sand == 0) sand = 1;
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 	//HP DEFEAT
 	else { 
@@ -82,7 +82,7 @@ public function sandwitchRape():void {
 			return;
 		}				
 		outputText("\n<b>You fall, defeated by the Sand Witch!</b>\n\n", false);
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 }
 
@@ -93,7 +93,7 @@ public function sandwitchRaped():void {
 	if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) {
 		doNext(13);
 		sandwitchCentaurBoning();
-		eventParser(5007);
+		cleanupAfterCombat();
 		return;
 	}
 	outputText("Even as you rip her sand-colored robes from her body, her eyes hold power and defiance. Her chest holds four large breasts, each leaking milk upon the sands.  ", false); 
@@ -137,7 +137,7 @@ public function sandwitchRaped():void {
 				outputText("\n\nThe sand witch screams in savage denial as you plant your seed deep within her body, your corruption no doubt making it extra potent. You gaze into her eyes, revelling in her expression of horror. Without uttering a word, you continue to fuck her, making sure your seed is well-entrenched within her wombs, feeling it splatter and bubble around your " + multiCockDescriptLight() + ".  You wonder if she will remember the pleasure her body felt today, and if she will be more likely to drop to her knees before you than to fight... ", false);
 				outputText("Finally finished, you pull your " + multiCockDescriptLight() + " from her well used slits, your " + multiCockDescriptLight() + " drooling cum even now. With a grin, you walk away, happy with your little encounter.  ", false);
 			}
-			eventParser(5007);
+			cleanupAfterCombat();
 		}
 	}
 	//Femfem
@@ -158,7 +158,7 @@ public function sandwitchBewbs():void {
 	outputText("You wake up in the desert, immediately grabbing at your body to see if anything's changed...", false);
 	slimeFeed();
 	stats(0,0,0,0,0,0,25,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 	outputText("\n", false);
 }
 public function sandwitchSex():void {
@@ -177,7 +177,7 @@ public function sandwitchSex():void {
 	outputText("\n\nWith a satisfied smirk, you lay atop your prize, your " + cockDescript(0) + " still twitching within her depths. One of the sand witch's hands rubs at your head, teasing your " + player.skinDesc + ". Like a fresh youth, you fall asleep, " + cockDescript(0) + " buried deep in the sand witch.  ", false);
 	outputText("With a start you wake up, only to find the sand witch still passed out beside you.  Almost thinking it was a dream, you touch your groin tenderly and rub softly. There's a faint trace of soreness, and you remember the ferocity with which you mashed your pelvises together.  You get up and get ready.  ", false);
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 /*
 Event: Centaur-SWitch: Player Raping
@@ -452,7 +452,7 @@ public function rapeSandwitchMultis():void {
 	outputText("With the corruption of this realm comfortably throbbing in your shameless veins, you feel your mind opening to new possibilities.  Despite the slickly perfect fit of the sand witch's multiple pussies as you pound into her, and the way she moans with each thrust of your titanic members, you feel there are still some further alleys of pleasure within her left to explore.  Long inured to carnal pleasure that would have rendered your earlier, purer, self unconscious,  your mind wanders back to the witch's weapon of lust, the vibrating stone of pleasure.  You feel it's time to give her a dose of her own medicine.\n\n", true);
 	outputText("You grin wickedly at the humiliated and whimpering witch as you rape her.  Between involuntary gasps of pleasure as you steadily pound into her sopping snatches, she looks afraid, not knowing the source of your mirth.  It soon becomes clear enough. She struggles a little once she hears the low buzzing of her own corrupted pleasure stone and bucks and thrashes as you push the persistent little charm into her tight, but well-cum-lubed ass.  The feel of the stone vibrating within her spreads through to your cocks, enhancing the pleasure as she clenches and spasmes while being violated multiple ways.  All too soon, it brings you to a gushing orgasm.  As you finally withdraw from the troublesome sand witch, you spit on her milk-oozing form and take your leave.", false);
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 public function beatSandwitch():void {
@@ -466,11 +466,11 @@ public function beatSandwitch():void {
 	if(player.hasKeyItem("Deluxe Dildo") >= 0) temp2 = 2265;
 	var shouldra:int = 0;
 	if(followerShouldra() && player.gender > 0) shouldra = 3670;
-	//doYesNo(5032, 5007);
+	//doYesNo(5032, cleanupAfterCombat);
 	var ovi:int = 0;
 	if(player.gender > 0 && player.canOviposit()) ovi = 3845;
 	
-	choices("Yes",5032,"Dildo Rape",temp2,"Use 3i@-",temp3,"Use Shouldra",shouldra,"Lay Eggs",ovi,"Taunt Her",3962,"",0,"",0,"",0,"Leave",5007);
+	choices("Yes",5032,"Dildo Rape",temp2,"Use 3i@-",temp3,"Use Shouldra",shouldra,"Lay Eggs",ovi,"Taunt Her",3962,"",0,"",0,"",0,"Leave",cleanupAfterCombat);
 	return;
 }
 
@@ -561,7 +561,7 @@ public function missingoSex5():void {
 public function missingoSex6():void {
 	spriteSelect(50);
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 	hideUpDown();
 	statScreenRefresh();
 	outputText("", true);
@@ -724,7 +724,7 @@ public function laySomeEggsInThatWitchFinally():void {
 	}
 	player.dumpEggs();
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Birthing scene: Driders (Radar)(edited)
@@ -872,6 +872,6 @@ public function sandwitchSpanking():void {
 	monster.HP = 2;
 	player.lust = 100;
 	flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
-	eventParser(5007);
+	cleanupAfterCombat();
 	stats(0,0,0,0,0,5,-100,0);
 }

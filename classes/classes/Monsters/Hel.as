@@ -21,6 +21,17 @@ package classes.Monsters
 			else game.beatUpHel();
 		}
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if (pcCameWorms){
+				outputText("\n\nHelia waits it out in stoic silence...");
+				game.doNext(game.endLustLoss);
+			} else {
+				if(hasStatusAffect("sparring") >= 0) game.loseToSparringHeliaLikeAButtRapedChump();
+				else game.loseToSalamander();
+			}
+		}
+
 		public function Hel(mainClassPtr:*)
 		{
 			super(mainClassPtr);

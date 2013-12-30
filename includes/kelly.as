@@ -490,7 +490,7 @@ public function defeatKellyNDBREAKHIM():void {
 
 	stats(0,0,0,0,0,0,-100,5);
 	flags[kFLAGS.KELT_BREAK_LEVEL] = 2;
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Win Second Fight (Third Feminizing Encounter):
@@ -576,7 +576,7 @@ public function breakingKeltNumeroThree():void {
 
 	stats(0,0,0,0,0,0,-100,5);
 	flags[kFLAGS.KELT_BREAK_LEVEL] = 3;
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Fourth encounter
@@ -674,7 +674,7 @@ public function keltFucksShitUpII():void {
 	//Roll Kelt back one obedience level - at the worst he drops to the level of the first fight
 	flags[kFLAGS.KELT_BREAK_LEVEL]--;
 	if(flags[kFLAGS.KELT_BREAK_LEVEL] < 1) flags[kFLAGS.KELT_BREAK_LEVEL] = 1;
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 

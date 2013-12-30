@@ -26,6 +26,16 @@
 			game.winRapeChoices();
 		}
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if(pcCameWorms){
+				outputText("\n\nYour foe doesn't seem disgusted enough to leave...");
+				game.doNext(game.endLustLoss);
+			} else {
+				game.loseFUCKME();
+			}
+		}
+
 		public function Ceraph(mainClassPtr:*)
 		{
 			super(mainClassPtr);

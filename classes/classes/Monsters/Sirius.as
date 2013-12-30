@@ -41,6 +41,11 @@ package classes.Monsters
 			game.urtaBeatsUpSiriusRadio();
 		}
 
+		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
+		{
+			game.urtaLosesToSirriusSnakeRadio();
+		}
+
 		public function Sirius(mainClassPtr:*)
 		{
 			super(mainClassPtr);

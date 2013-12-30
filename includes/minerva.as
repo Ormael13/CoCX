@@ -764,7 +764,7 @@ public function fuckMinervasAsshole():void {
 	//PC returns to main camp menu
 	flags[kFLAGS.TIMES_BUTTFUCKED_MINERVA]++;
 	stats(0,0,0,0,0,-1,-100,0);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
 
@@ -865,7 +865,7 @@ public function minervaCowgirlSex():void {
 	else outputText("\n\nThe lovestruck siren sighs and sits up, looking up at you with affection clearly written on her face.  \"<i>I hope you'll come back soon; I always feel so much happier when you're around,</i>\" she says as she brings a hand to her chest, holding it over her heart.");
 	flags[kFLAGS.TIMES_MINERVA_COWGIRLED]++;
 	stats(0,0,0,0,0,-1,-100,0);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
 
@@ -950,7 +950,7 @@ public function minervaLapSex():void {
 	slimeFeed();
 	flags[kFLAGS.TIMES_MINERVA_LAPSEXED]++;
 	stats(0,0,0,0,0,-1,-100,0);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
 
@@ -1028,7 +1028,7 @@ public function noBallsMinervaAndContinuation(clear:Boolean = true):void {
 	outputText("\n\nFor a long while, you just lay there, cuddled up with the mostly naked siren, the two of you idly chatting about various things that come to mind.  Eventually, you must leave the gentle embrace and return to your duties as a Champion.  Disentangling yourself from Minerva, you straighten your clothes out and, with a smile, tell her you had a wonderful time.  Grinning up at you, Minerva climbs back onto her feet and pulls you into a deep, tongue-tangling goodbye kiss.  \"<i>It was amazing, we have to do this again.  Perhaps next time, I can do you, hmm?</i>\" she suggests, not wanting to be greedy and get all the pleasure.  Giving you another peck on the cheek, the siren sends you on your way after telling you to come back and visit soon.");
 	
 	stats(0,0,0,0,0,0,20,0);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
 	
@@ -1101,7 +1101,7 @@ public function letMinervaSuckYouOff():void {
 	outputText("\n\nDeciding to relax for a while after your sexual exertion, you curl up on the soft moss with Minerva, both of you just basking in the warmth that the spring gives off, and the softness of the moss, content with each other's presence.  Unfortunately, you know you have to go; the call of your duty to this land is too great, and despite the comfort of this place, you must go.  Pulling away from the siren you promise to return and visit her soon.");
 	//PC returns to camp.
 	stats(0,0,0,0,0,0,-100,0);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
 
@@ -1163,7 +1163,7 @@ public function fuckMinervaWithHerHandsBehindHerBack():void {
 	outputText("\n\nWith an amused grin, you give the sharky herm a pat on the rump before heading out, your hand sliding along that sexy tail of hers as you let the well-fucked woman rest.");
 	//PC returns to camp
 	stats(0,0,0,0,0,-1,-100,0);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
 	
@@ -1240,7 +1240,7 @@ public function pcGetsEatenOutByMinerva():void {
 	flags[kFLAGS.MINERVA_LEZZES_OUT]++;
 	// PC returns to camp
 	stats(0,0,0,0,0,-2,-100,0);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
 
@@ -1422,7 +1422,7 @@ public function loseToMinerva():void {
 		menuLoc = 2;
 		shortName = "PurPeac";
 		takeItem();
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 	//PC loss by Lust
 	else {
@@ -1430,7 +1430,7 @@ public function loseToMinerva():void {
 		outputText("\n\n\"<i>W-well... don't worry, Minerva is going to take care of you, just tell me how you want it, all right?</i>\" she says earnestly, clearly intending to finish what she started and help you with your battle induced lust.");
 		//Take PC to sex menu
 		minervaSexMenu(false);
-		addButton(9,"Leave",eventParser,5007);
+		addButton(9,"Leave",eventParser,cleanupAfterCombat);
 	}
 }
 
@@ -1443,14 +1443,14 @@ public function beatUpDatSharpie():void {
 		outputText("With your final blow against the siren, you send her silver halberd flying from her hands.  The metal weapon skitters across the ground as Minerva herself falls to the soft moss, her sharky skin covered in sweat and bruises as she sits her butt down, letting out a sigh.  \"<i>Wow... you sure are something, aren't you...  I'm glad this was just a friendly spar and not a real fight,</i>\" she says with a content smile on her face as she looks up at you.  You could swear that she is even blushing a little.  \"<i>Such a big strong warrior you are.</i>\"");
 		outputText("\n\nAfter a moment, the siren manages to get up before presenting you with a freshly picked peach and a small sack.  \"<i>I get these gems from the harpies, they seem to like shiny things, but I have no use for them... though I could do with some decorations I guess.  And here's a peach, as well, it'll help you regain your strength... not that you need it with how strong you are...</i>\" she says with a coy chuckle.\n\n");
 		//PC gains 1 purity peach
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 	//Win by lust
 	else {
 		outputText("Your final move finishes the horny siren, her shorts bulging obscenely and soaked with her arousal.  Falling to her knees, Minerva desperately grabs hold of her shorts, yanking them from her curvy hips, letting out a gasp of relief and a moan of need.  Between the lusty herm's legs stands her painfully hard cock, all sixteen thick inches throbbing with desperate need, her thighs soaked in womanly juices.  Minerva's hands grab hold of her cock, stroking herself as she slips a pair of fingers into her quivering, slippery quim.  \"<i>Oh, [name], p-please... ohhh... look what you've done.  So mean, getting me so horny like this,</i>\" she says before letting out a long moan.");
 		outputText("\n\nShe's looking up at you with her debilitating lust clear in her eyes.  \"<i>W-well... think you could help little old me with this...  Just tell me what to do, I need it so badly.</i>\"");
 		minervaSexMenu(false);
-		addButton(9,"Leave",eventParser,5007);
+		addButton(9,"Leave",eventParser,cleanupAfterCombat);
 	}
 }
 

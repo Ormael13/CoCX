@@ -21,6 +21,11 @@ package classes.Monsters
 			game.cumWitchDefeated();
 		}
 
+		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
+		{
+			game.defeatedByCumWitch();
+		}
+
 		public function CumWitch(mainClassPtr:*)
 		{
 			super(mainClassPtr);

@@ -1264,7 +1264,7 @@ public function defeatHolli():void {
 	}
 	outputText("\n\n(Key Item Gained: Holli's Ashes)");
 	player.createKeyItem("Holli's Ashes",0,0,0,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 	
 //[yes gimme monk pls]
@@ -1275,7 +1275,7 @@ public function recruitJojoToCamp():void {
 	player.createStatusAffect("PureCampJojo",0,0,0,0);
 	outputText("\n\n(Key Item Gained: Holli's Ashes)");
 	player.createKeyItem("Holli's Ashes",0,0,0,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[no want]
@@ -1284,7 +1284,7 @@ public function dontRecruitJojoToCamp():void {
 	outputText("You hold your tongue, allowing Jojo to make his way back to the forest.");
 	outputText("\n\n(Key Item Gained: Holli's Ashes)");
 	player.createKeyItem("Holli's Ashes",0,0,0,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 	
 //>Lose

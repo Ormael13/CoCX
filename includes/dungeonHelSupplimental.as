@@ -323,7 +323,7 @@ public function gooArmorBeatsUpPC():void {
 	//(PC regains HP)
 	HPChange(1000,false);
 	stats(0,0,0,0,1,3,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 	doNext(1);
 	flags[kFLAGS.LOST_GOO_ARMOR_FIGHT] = 1;
 }
@@ -357,7 +357,7 @@ public function refuseGooArmorOffer():void {
 	outputText("You tell her to fuck off -- you don't need armor that might try to kill or rape you at night.");
 	outputText("\n\nShe huffs indignantly and scrambles to her feet.  \"<i>Well fine, and fuck you anyway.  I hope you get raped by harpies, " + player.mf("sir","madam") + ".</i>\"  After a moment, she hesitantly adds, \"<i>But if you change your mind later... Well, we'll see if you live through this place without me!</i>\"  Before you can stop her, she ducks out the front door and off to... Wherever goo-armor-girl-things would go, you guess.  Still, to your surprise, you feel rather invigorated after the battle, and rolling your shoulders, you turn your attention back to the dungeon ahead.");
 	HPChange(1000,false);
-	eventParser(5007);
+	cleanupAfterCombat();
 	doNext(1);
 }
 //[Take Her]
@@ -379,7 +379,7 @@ public function takeGooArmorAndWearIt():void {
 	outputText("\n\n\"<i>Well, alright then, [name]!</i>\" Valeria says excitedly, \"<i>Let's go!</i>\"");
 
 	//(\"<i>You gained ValeriaArmor!</i>\")
-	eventParser(5007);
+	cleanupAfterCombat();
 	//(\"<i>You put a (previous armorName) in your X pouch)
 	outputText("\n\nTo your surprise, you feel rather invigorated after the battle, thanks to Valeria's strange healing properties, and with a smirk, you turn your attention back to the dungeon ahead.\n\n");
 	//(PC regains HP)
@@ -466,7 +466,7 @@ public function pcDefeatsHarpyHorde():void {
 	outputText("\n\n\"<i>Uh, well, I'm the one who told her about this place. You could say I'm her informant, I guess,</i>\" she shrugs and slips her hands behind her inhumanly wide hips.  Cocking an eyebrow, you notice the girl is actually quite pretty - her wings and hair are an orange as bright as the sun, and she has deliciously curvaceous thighs and hips, not to mention cute perky breasts.  Noticing your lusty glances, she makes a little giggle and bites her lower lip.");
 
 	outputText("\n\n\"<i>Anyway, Miss Helia asked me to help you any way I can, so... I guess, just ask me if you need anything.</i>\"");
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 //Kiri -- [Talk]
 public function talkToKiri():void {
@@ -648,7 +648,7 @@ public function pcDefeatsBrigid():void {
 	outputText(" to continue the fight.  You quickly snatch the keys from inside her shield, and hook them onto your own belt.");
 	//(New Key Item: Harpy Key A)
 	player.createKeyItem("Harpy Key A",0,0,0,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 	flags[kFLAGS.HEL_BRIGID_DEFEATED] = 1;
 }
 
@@ -862,7 +862,7 @@ public function phoenixPlatoonLosesToPC():void {
 	clearOutput();
 	outputText("With one final grunt, the last of the phoenixes collapses onto the pile of defeated warriors you've left in your wake.  The once-mighty platoon of soldiers has been reduced to a bruised, lusty heap of flesh, scales and feathers.  Seeing that the battle is won, you lower your [weapon] and take a look around.");
 	flags[kFLAGS.HEL_PHOENIXES_DEFEATED]++;
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[Phoenixes]
@@ -1120,7 +1120,7 @@ public function harpyQueenDefeatedByPC():void {
 	player.createKeyItem("Harpy Key B",0,0,0,0);
 	flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] = 1;
 	//(PC moves to Throne Room Main Menu:)
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Throne Room -- [Helia]

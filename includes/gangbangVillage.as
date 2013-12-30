@@ -342,7 +342,7 @@ public function wakeUpAfterDemonGangBangs():void {
 	fatigue(20);
 	slimeFeed();
 	stats(-2,-2,-1,-1,1,1,100,3);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 	//PC is redirected to camp, next morning. No nightly camp scenes or dreams.
 }
@@ -375,14 +375,14 @@ public function defeetVapulasHorde():void {
 	else {
 		outputText("\n\nThough the display as they explore each other is somewhat arousing, you can't really get into it as you are, and simply use your new-found freedom to climb out of the hole.  It's too dark to return to the village now, so you head back to camp.");
 		flags[kFLAGS.VAPULA_SUBMISSIVENESS] -= 5;
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 	
 }
 public function noVapulaSex():void {
 	clearOutput();
 	flags[kFLAGS.VAPULA_SUBMISSIVENESS] -= 5;
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 //Yes/
 //[Yes: submissiveness is lowered by 10. No or auto-reject: submissiveness is lowered by 5.]
@@ -514,7 +514,7 @@ public function rapeZeVapula():void {
 	//PC is redirected to camp, next morning. No nightly camp scenes. 
 	model.time.hours = 7;
 	model.time.days++;
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Main Owca Village menu (Z)
@@ -806,7 +806,7 @@ public function beatUpOwca():void {
 public function leaveOwcaAfterWhupping():void {
 	//tag for calling last plea
 	flags[kFLAGS.REBECCS_LAST_PLEA] = 1;
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 //Village Torching scene - requires a fire skill (Z)
 public function torchOwcaMotherFuckers():void {
@@ -829,7 +829,7 @@ public function torchUpVillagersAndLeave():void {
 	player.gems += 900 + rand(150);
 	fatigue(100);
 	statScreenRefresh();
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 //End of quest
 //Lose to Villagers (Z)
@@ -948,7 +948,7 @@ public function subdueVapula():void {
 	if(player.gender > 0 && player.lust >= 33) fuck = 3617;
 	var enslave:int = 0;
 	if(player.gender > 0 && player.cor >= 66) enslave = 3748;
-	simpleChoices("Disband",disbandHorde,"EnslaveVapula",enslave,"JustFuckEm",fuck,"",0,"Skip Out",5007);
+	simpleChoices("Disband",disbandHorde,"EnslaveVapula",enslave,"JustFuckEm",fuck,"",0,"Skip Out",cleanupAfterCombat);
 }
 //Option: Disband (Z)
 public function disbandHorde():void {
@@ -962,7 +962,7 @@ public function disbandHorde():void {
 	//Attitude set to 100
 	flags[kFLAGS.OWCAS_ATTITUDE] = 100;
 	flags[kFLAGS.OWCA_SACRIFICE_DISABLED] = 1;
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 //Option: Enslave - penis version (requires D2 completion and libido >= 60 and corr >= 70) (Z)
 public function enslaveVapulaWithYourWang():void {
@@ -991,7 +991,7 @@ public function enslaveVapulaWithYourWang():void {
 	//Attitude set to 100, sacrifices will never be asked again. Lust set to 80 if below.
 	if(player.lust < 80) player.lust = 80;
 	stats(0,0,0,0,0,0,0.1,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 //Option: Enslave - vagina version (requires D2 completion and libido >= 60 and corr >= 70 and, apparently, no centaurs)(Z)
 //NOTE: No Centaurs. Fuck Centaurs.
@@ -1014,7 +1014,7 @@ public function enslaveVapulaAsACuntWielder():void {
 	flags[kFLAGS.OWCAS_ATTITUDE] = 100;
 	flags[kFLAGS.OWCA_SACRIFICE_DISABLED] = 1;
 	//Chance to trigger imp gangbang is increased by 7%!
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 	
 //Two nights after "vagina enslave", if PC still meets initial requirements (else defer until she does)(Z)

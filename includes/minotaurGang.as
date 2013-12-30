@@ -226,7 +226,7 @@ public function minotaurDeFeet():void {
 	outputText("", true);
 	if(!player.hasVagina()) {
 		outputText("As you slump down in defeat, your horny beast-children take note of your missing femininity.  They growl in displeasure and depart, but not before kicking you unconsciousness.  \"<i>Bitch.</i>\"");
-		eventParser(5007);
+		cleanupAfterCombat();
 		return;
 	}
 	//(HP)
@@ -349,7 +349,7 @@ public function nonAddictMinotaurGangBang():void {
 	stats(0,0,-.5,-.5,.5,-.5,-100,1);
 	slimeFeed();
 	minoCumAddiction(20);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else {
 		menuLoc = 18;
 		outputText("\n\n", false);
@@ -445,7 +445,7 @@ public function loseToMinoMobVeryPregnant():void {
 	stats(0,0,-.5,-.5,.5,.5,-100,1);
 	slimeFeed();
 	minoCumAddiction(15);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(16);
 }
 		
@@ -548,7 +548,7 @@ public function analSpearSemiPregMinotaurGangbang():void {
 	stats(0,0,-.5,-.5,.5,.5,-100,1);
 	slimeFeed();
 	minoCumAddiction(15);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(16);
 }
 
@@ -573,7 +573,7 @@ public function victoryMinotaurGang():void {
 	if(player.hasFuckableNipples()) nipFuck = 3161;
 	var titFuck:Number = 0;
 	if(player.biggestTitSize() >= 6) titFuck = 3157;
-	choices("Gangbang",3158,"Tit-Fuck",titFuck,"Nipple-Fuck",nipFuck,"Get Licked",3159,"Get Sucked",getSuck,"Discipline",3383,"",0,"",0,"",0,"Leave",5007);
+	choices("Gangbang",3158,"Tit-Fuck",titFuck,"Nipple-Fuck",nipFuck,"Get Licked",3159,"Get Sucked",getSuck,"Discipline",3383,"",0,"",0,"",0,"Leave",cleanupAfterCombat);
 }
 //*[Victory Tit-Fuck] (for only the fattest of fat bitch titties) 
 public function victoryMinotaurGangTitFuck():void {
@@ -676,7 +676,7 @@ public function victoryMinotaurGangTitFuck():void {
 	stats(0,0,-.5,-.5,.5,.5,-100,.5);
 	slimeFeed();
 	minoCumAddiction(15);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else {
 		menuLoc = 2;
 		outputText("\n\n", false);
@@ -774,7 +774,7 @@ public function victoryAllThePenetrationsMinotaurGangBang():void {
 	stats(0,0,-.5,-.5,.5,-.5,-100,1);
 	slimeFeed();
 	minoCumAddiction(20);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else {
 		doNext(13);
 	}
@@ -890,7 +890,7 @@ public function forceMinitaurToGiveOral(choice:Number = 0):void {
 	
 	outputText("Finished with him, you push him back to let him fall on the ground, his face wet with your cum.  The poor minitaur is harder than ever, and though his cock looks tempting, you're already satisfied.  You get dressed and blow a kiss to the poor boy.  \"<i>Be good for Momma, okay?</i>\"  He nods dumbly as you saunter away.", false);
 	stats(0,0,0,0,0,-1,-100,0);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else {
 		doNext(13);
 	}
@@ -958,7 +958,7 @@ public function victoryBJNippleFuckMinotaurGang():void {
 	stats(0,0,-.5,-.5,0,-1,-100,1);
 	minoCumAddiction(10);
 	slimeFeed();
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else {
 		doNext(13);
 	}
@@ -1192,5 +1192,5 @@ public function disciplineEldestMinotaurSon():void {
 
 	outputText("Finished with your son, you push him on his back.  You have had enough of him, for now... If he dares to ambush you again, then you will be more than happy to discipline him again.  After getting dressed, you proceed to walk away.  Your last image of your son is the image of him futilely masturbating, but his cock is too thick and too numb for him to truly get off.  Profoundly amused, you leave the mountains and return to camp.", false);
 	stats(0,0,0,0,0,0,-100,0);
-	doNext(5007);
+	doNext(cleanupAfterCombat);
 }

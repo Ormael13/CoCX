@@ -2151,7 +2151,7 @@ public function beatEmberSpar():void {
 		outputText("\n\n\"<i>Okay, let's go back then,</i>\" Ember says, pulling you close and walking back to the camp with you.");
 		emberAffection(5);
 	}
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 public function loseToEmberSpar():void {
@@ -2182,7 +2182,7 @@ public function loseToEmberSpar():void {
 		
 		emberAffection(-5);
 	}
-	eventParser(5007);
+	cleanupAfterCombat();
 	HPChange(maxHP()*.33, false);
 }
 
@@ -2200,7 +2200,7 @@ public function emberReactsToLustiness():void {
 	monster.gems = 0;
 	monster.XP = 0;
 	monster.HP = 0;
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Ember Attacks:

@@ -23,6 +23,18 @@
 			}
 		}
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if (hpVictory){
+				game.finishCombat();
+			} else if (pcCameWorms){
+				outputText("\n\nThe witch blanches and backs away, leaving you to your fate.", false);
+				game.cleanupAfterCombat();
+			} else {
+				game.sandwitchRape();
+			}
+		}
+
 		public function SandWitch(mainClassPtr:*)
 		{
 			super(mainClassPtr);

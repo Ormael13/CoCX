@@ -28,6 +28,18 @@
 			}
 		}
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if(hasStatusAffect("PhyllaFight") >= 0) {
+				removeStatusAffect("PhyllaFight");
+				game.phyllaPCLostToMino();
+			} else if (pcCameWorms){
+				outputText("\n\nThe minotaur picks you up and forcibly tosses you from his cave, grunting in displeasure.", false);
+				game.cleanupAfterCombat();
+			} else
+				game.eventParser(5031);
+		}
+
 		override public function get long():String
 		{
 			return "An angry-looking minotaur looms over you.  Covered in shaggy " + hairColor + " fur, the beast is an imposing sight.  Wearing little but an obviously distended loincloth, he is clearly already plotting his method of punishment.  Like most minotaurs he has hooves, a cow-like tail and face, prominent horns, and impressive musculature. "+

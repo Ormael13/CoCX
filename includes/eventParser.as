@@ -15,9 +15,9 @@ public function eventParser(eventNo:*):void {
 	else if (eventNo is int)
 	{
 		//Clear sprite if not in combat
-		if(!inCombat() && eventNo != 5007) spriteSelect(-1);
+		if(!inCombat() && eventNo != cleanupAfterCombat) spriteSelect(-1);
 		//Clear pic if not in combat
-		//if(!inCombat() && eventNo != 5007) clearImages();
+		//if(!inCombat() && eventNo != cleanupAfterCombat) clearImages();
 		//Reset newgame buttons till back at camp
 		mainView.setMenuButton( MainView.MENU_NEW_MAIN, "New Game", newGameGo );
 		if(eventNo != 1) {
@@ -352,7 +352,7 @@ public function doSystem(eventNo:Number):void {
 	if(eventNo == 119) {
 		mainView.eventTestInput.x = -10207.5;
 		mainView.eventTestInput.y = -1055.1;
-		eventParser(mainMenu);
+		mainMenu();
 		return;
 	}
 

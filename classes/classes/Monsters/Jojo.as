@@ -19,10 +19,15 @@
 		{
 			if (player.lust > 33 && player.gender > 0) {
 				outputText("You smile in satisfaction as " + a + short + (hpVictory?" collapses, unable to continue fighting":" collapses and begins masturbating feverishly")+".  Sadly you realize your own needs have not been met.  Of course, you could always rape the poor thing...\n\nDo you rape him?", true);
-				game.doYesNo(5022, 5007);
+				game.doYesNo(5022, game.cleanupAfterCombat);
 			} else {
 				game.finishCombat();
 			}
+		}
+
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			game.eventParser(5024);
 		}
 
 		public function Jojo(mainClassPtr:*)

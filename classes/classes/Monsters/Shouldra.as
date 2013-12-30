@@ -19,6 +19,11 @@ package classes.Monsters
 			game.defeatDannyPhantom();
 		}
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			game.loseToShouldra();
+		}
+
 		public function Shouldra(mainClassPtr:*)
 		{
 			super(mainClassPtr);

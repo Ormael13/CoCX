@@ -24,6 +24,16 @@ package classes.Monsters
 			game.victoryMinotaurGang();
 		}
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if (pcCameWorms) {
+				outputText("\n\nThe minutaurs share a laugh while you cum, but their throbbing erections don't subside in the slightest.");
+				game.doNext(game.endLustLoss);
+			} else {
+				game.minotaurDeFeet();
+			}
+		}
+
 		public function MinotaurMob(mainClassPtr:*)
 		{
 			super(mainClassPtr);

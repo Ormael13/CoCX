@@ -21,6 +21,11 @@ package classes.Monsters
 			game.beatUpOwca();
 		}
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			game.loseToOwca();
+		}
+
 		public function Farmers(mainClassPtr:*)
 		{
 			super(mainClassPtr);

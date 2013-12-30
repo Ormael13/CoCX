@@ -75,7 +75,7 @@ public function infestedHellhoundLossRape():void {
 		outputText("Overcome by the worms, both you and the beast begin orgasming, without external stimulation of any kind.  Worms and cum mix together on top of you, slowly building into a large mound that covers the better part of your torso.  Exhausted and drained, you both squirt weakly, emptying the last of your smallest worms into the pile.   Your eyes close as the beast lies down with you, and together the two of you lose consciousness as your newly birthed worm colony squirms away.", false);
 		stats(0,0,0,0,1,1,-100,1);
 		player.cumMultiplier += .5;
-		eventParser(5007);
+		cleanupAfterCombat();
 		return;
 	}
 	//[PLAYER'S COCKS ARE BIG ENOUGH TO BE INFECTED]
@@ -128,7 +128,7 @@ public function infestedHellhoundLossRape():void {
 		player.createStatusAffect("infested",0,0,0,0);
 		stats(0,0,0,0,1,1,-100,1);
 		player.cumMultiplier += .2;
-		eventParser(5007);
+		cleanupAfterCombat();
 		return;
 	}
 	//[HAS PUSSY AND NO DICK BIG ENOUGH TO BE INFECTED]
@@ -170,7 +170,7 @@ public function infestedHellhoundLossRape():void {
 		else
 			player.createStatusAffect("worm plugged",1+rand(5),0,0,0);
 		stats(0,0,0,0,1,0,-100,1);
-		eventParser(5007);
+		cleanupAfterCombat();
 		return;
 	}
 	//[GENDERLESS OR MALE WITH DICK TOO SMALL]
@@ -202,7 +202,7 @@ public function infestedHellhoundLossRape():void {
 		outputText("  ", false);
 		buttChange(monster.cockArea(0), true);
 		stats(0,0,0,0,1,0,-100,1);
-		eventParser(5007);
+		cleanupAfterCombat();
 		
 		return;
 	}

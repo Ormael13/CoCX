@@ -31,6 +31,16 @@ package classes.Monsters
 			game.defeatAnemone();
 		}
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if(pcCameWorms){
+				outputText("\n\nYour foe doesn't seem to mind at all...");
+				game.doNext(game.endLustLoss);
+			} else {
+				game.loseToAnemone();
+			}
+		}
+
 		override public function outputAttack(damage:int):void
 		{
 			outputText("You jink and dodge valiantly but the tentacles are too numerous and coming from too many directions.  A few get past your guard and caress your skin, leaving a tingling, warm sensation that arouses you further.", false);

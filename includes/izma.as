@@ -443,7 +443,7 @@ public function IzmaWins():void {
 		outputText("\n\nIzma looks on in horror as you push out the load of wormy cargo onto the sand at her feet, only snapping out of her daze as several of the parasites begin climbing her ankle with an eye toward her cock.  She shrieks and jumps back, then drags her foot in the sand, dislodging or pulverizing the squirming vermin.  \"<i>" + player.short + ", that's nasty!  Get away!  Get away and don't talk to me again!  Ugh!</i>\"  She takes off, grabbing her chest of books and kicking sand up in her flight down the beach.", false);
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00233] = 1;
 		stats(0,0,0,0,0,0,-100,0);
-		doNext(5007);
+		doNext(cleanupAfterCombat);
 		return;
 	}
 	//(without worms)
@@ -697,7 +697,7 @@ public function loseToIzma():void {
 	else outputText("  You embrace the dreams fully, desperate to cling to them as long as you can. It's getting so hard to care about your former mission anymore; why fight the demons when you can just give it up and surrender yourself to Izma? Yes... such a strong, powerful, worthy alpha she is; Izma is all you need. Let her take control of your life, why don't you?", false);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] = "TSTooth";
 	slimeFeed();
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[Final loss sex scene]
@@ -822,7 +822,7 @@ public function victoryPenisIzma():void {
 	if(flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON] <= 4 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00235] > 0) {
 		outputText("You say your goodbyes to the pretty tigershark and leave once she hands you your tooth-shaped reward.", false);
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] = "TSTooth";
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 	//(if Izmafight >=5 then go to [Victor's Choice]] (Izmafight +1)
 	else victorzChoice();
@@ -866,7 +866,7 @@ public function eatIzmasLeafAfterRapinHer():void {
 	//[(if Izmafight <=4) 
 	if(flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON] <= 4 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00235] > 0) {
 		outputText("  You say your goodbyes to the pretty tigershark and leave once she hands you your tooth-shaped reward.", false);
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 	//(if Izmafight >=5 then go to [Victor's Choice]]
 	else victorzChoice();
@@ -883,7 +883,7 @@ public function dontEatIzamsLeafAfterRape():void {
 	
 	outputText("You slap the leaf out of her hand.  \"<i>Try getting stronger before you impose your decisions on others!</i>\" you bark.  \"<i>Whether I decide to have your kids or not is none of your business; you should be grateful at the chance to father them with someone tougher than you!</i>\"  She shivers and nods meekly, and you turn about and pick your way back to camp.\n\n", false);
 	player.knockUp(12,300);
-	eventParser(5007);
+	cleanupAfterCombat();
 	//(Izmafight +1)
 	flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON]++;
 }
@@ -910,7 +910,7 @@ public function takeItInZeButtVictoryLikeFromIzma():void {
 	if(flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON] <= 4 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00235] > 0) {
 		outputText("You say your goodbyes to the pretty tigershark and leave once she hands you your tooth-shaped reward.", false);
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] = "TSTooth";
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 	//(if Izmafight >=5 then go to [Victor's Choice]]
 	else victorzChoice();
@@ -936,7 +936,7 @@ public function leaveIzmaVictoryTease():void {
 	
 	flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON]++;
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] = "TSTooth";
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[Victor's choice] (tacks onto end of victory sex if Izmafight >= 5)
@@ -951,7 +951,7 @@ public function chooseIzmaTooth():void {
 	outputText("You accept the tooth from her with a polite word of thanks.", false);
 	//(gain 1 t-shark toof)
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] = "TSTooth";
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Gloves]
@@ -967,7 +967,7 @@ public function chooseIzmaGloves():void {
 	//(gain 1 Hooked gauntlets) 
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] = "H.Gaunt";
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00235]++;
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 public function chooseYourIzmaWeapon():void {

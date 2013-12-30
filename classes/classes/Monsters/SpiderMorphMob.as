@@ -22,6 +22,16 @@ package classes.Monsters
 			game.beatSpiderMob();
 		}
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if (pcCameWorms){
+				outputText("\n\nThe spiders smile to one at another as they watch your display, then close in...");
+				game.doNext(game.endLustLoss);
+			} else {
+				game.loseToSpiderMob();
+			}
+		}
+
 		public function SpiderMorphMob(mainClassPtr:*)
 		{
 			super(mainClassPtr);

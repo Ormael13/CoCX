@@ -305,7 +305,7 @@ public function loseToSalamander():void {
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helAffection(5);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 
@@ -456,7 +456,7 @@ public function declineHelSexings():void {
 	outputText("\"<i>Catch you next time, friend – and maybe we can have some fun, then!</i>\" she calls over her shoulder with a wave.\n\n", false);
 
 	outputText("You nod, and return the wave before heading back to your camp.", false);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
 
@@ -485,7 +485,7 @@ public function beatUpHelAndStealHerWalletFromHerVagina():void {
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helAffection(5);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -520,7 +520,7 @@ public function fuckHelsAss():void {
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helAffection(5);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -548,7 +548,7 @@ public function helBlowsYou():void {
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helAffection(5);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -581,7 +581,7 @@ public function dpHel():void {
 	flags[kFLAGS.TIMES_HELIA_DOUBLE_DONGED]++
 	//Bump up follower tracking affection too
 	helAffection(5);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -609,7 +609,7 @@ public function getLickedByHel():void {
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helAffection(5);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -637,7 +637,7 @@ public function helTailWanksYourDickBecauseSheLovesYouDesuDesuHoraHora():void {
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helAffection(5);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -674,7 +674,7 @@ public function helTailPegging():void {
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helAffection(5);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -715,7 +715,7 @@ public function nagaCoilsUpHel():void {
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helAffection(5);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -745,7 +745,7 @@ public function nagaCoilsUpAnalNaga():void {
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helAffection(5);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -793,7 +793,7 @@ public function mountHel():void {
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helAffection(5);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -845,7 +845,7 @@ public function helVaginaTaur69():void {
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helAffection(5);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -902,7 +902,7 @@ public function helPossessionShitPoopCock():void {
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
 	helAffection(5);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -939,7 +939,7 @@ public function rapingHelsAssMeansYourCorruptCauseAnalIsEvil():void {
 	flags[kFLAGS.HEL_AFFECTION]--;
 	//Bump down follower tracking affection too
 	helAffection(-15);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 
@@ -968,7 +968,7 @@ public function receiveCorruptRimjobsFromHel():void {
 	flags[kFLAGS.HEL_AFFECTION]--;
 	//Bump up follower tracking affection too
 	helAffection(-15);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(postHelFuckBuddyFollowup);
 }
 

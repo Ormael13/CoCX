@@ -110,9 +110,9 @@ public function defeatBasilisk():void {
 	if(player.lust >= 33 && player.gender > 0) {
 		outputText("  Certain that the creature won't dare try and turn its eyes on you again, you take your time to look the tall reptile over directly for the first time.  Perhaps you could use it to satisfy your baser urges. If so, what part of it do you choose?", false);
 		//[Tongue][Ass]
-		simpleChoices("Tongue",tongueBasiliskSmex,"Ass",evil,"",0,"Lay Eggs",eggs,"Leave",5007);
+		simpleChoices("Tongue",tongueBasiliskSmex,"Ass",evil,"",0,"Lay Eggs",eggs,"Leave",cleanupAfterCombat);
 	}
-	else eventParser(5007);
+	else cleanupAfterCombat();
 }
 
 //Player Victory sex:
@@ -157,7 +157,7 @@ public function tongueBasiliskSmex():void {
 		outputText("You look beatifically down at it and notice that despite itself the basilisk has got more than a bit turned on by your fairly callous treatment of it; the creature is finding it difficult to kneel properly with its long, purple erection poking against the ground.  Its tongue flops weakly out of its girl-cum-spattered mouth, evidently too weak to even curl back up, and you grin as you imagine how much it must ache from the workout you gave it.  \"<i>That's a good look for you.  We really must do this again,</i>\" you say breezily as you loosen its blindfold just a little before taking your leave, shaking the weariness out of your knees as you go.  You chance a look back; the creature is staggering in the opposite direction, wiping its face with a claw and trying not to bump its cock into anything, looking very dazed indeed. You grin and make your way back to camp.", false);
 	}
 	stats(0,0,0,0,-1,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 //basilisk Defeat: Anal 
 public function defeatBasiliskAndAnal():void {
@@ -200,7 +200,7 @@ public function defeatBasiliskAndAnal():void {
 	}
 	outputText("You are shaken out of it by an urgent, rasping moan from the basilisk. You sense movement overhead and look up. The lizard has seen in the water's reflection what you can take in with your own eyes; several harpies circling overhead like vultures, waiting patiently for you to leave.  The smiles which plaster their faces are possibly the least kindly you have ever seen.  The basilisk whines again, this time with a desperate pleading edge.  You kneel down and comfortingly stroke your victim's scaled head, glorying in the moment of false hope you give it.  \"<i>Get hard,</i>\" you whisper.  The creature clenches as its no doubt aching cock strains to attention again.  \"<i>Don't worry,</i>\" you murmur into its ear. \"<i>I'm sure the nice birdies will shake you out of it.  Eventually.</i>\"  You get up, dress yourself, and leave.  A pitiless grin slowly spreads across your face as behind you, the opening strains of what promises to be a very long, violent, and feathery rape reach your ears...", false);
 	stats(0,0,0,0,0,0,-100,1);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Player Defeated:
@@ -264,7 +264,7 @@ public function defaultBasiliskRape():void {
 	else basiliskAdvantageMinotaur();
 	//INSERT OPTIONAL OTHER MONSTER FINDINGS!
 	stats(0,0,0,0,0,1,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 //basilisk vag rape
 //Requires: Player has vag and is in heat, currently has egg pregnancy, or has oviposition perk
@@ -311,7 +311,7 @@ public function basiliskHasVagEggStuff():void {
 	//Eggs fertilised (Ovi Potion/Oviposition only. Eggs take a few days 
 	//longer to be laid than usual): 
 	stats(0,0,0,0,0,1,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 public function basiliskBirth():void {
@@ -664,7 +664,7 @@ public function driderPCEggLaysBasilisk():void {
 	else outputText(".  You reach up and slice him free from the webbing, carefully placing him on the ground below.  The blindfold stays, though.  You're kind, not stupid.  With your good deed for the day complete, you gather yourself up and head back to camp.")
 	player.dumpEggs();
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 public function layBeeEggsInABasilisk():void {
@@ -724,6 +724,6 @@ public function layBeeEggsInABasilisk():void {
 	outputText("\n\nAs you remove your depleted appendage from the violated basilisk's ass, he falls to the side, no longer able to keep himself upright.  Laying like this, you can see the beast's horribly-distended stomach, almost able to make out the outline of each individual egg but for the scales in the way. You nod approvingly and bend down to give to the lizard a quick kiss on the cheek for being such a good sport about the whole thing - though, not being an idiot, you don't untie him.  After that, you buzz away contentedly, idly thinking about returning the next time you'll need a receptacle for your eggs.");
 	player.dumpEggs();
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 		

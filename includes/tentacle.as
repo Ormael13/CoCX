@@ -143,7 +143,7 @@ public function tentacleVictoryRape():void {
 		}
 	}
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Spoiler for Bad End-Tentacle Monster: 
@@ -210,7 +210,7 @@ public function tentacleLossRape():void {
 			outputText("\n\nAt a loss for words, you meekly offer the creature some of your food. The creature slaps it out of your hand, almost breaking your wrist.\n\n\"<i>I can't eat that shit!</i>\" roars the abomination. \"<i>Do I look like I have a fucking mouth to chew that with?! NOOOOOO! I feed off dicks and wayward women! Futa cum and tit milk! YOU have NEITHER!!!</i>\"", false);
 			outputText("\n\nThe beast slaps you squarely on the ass as if to push you along. \"<i>Get the fuck out of here!</i>\" it screams.  \"<i>Get lost so I can hunt me a REAL meal!!!</i>\"  ", false);
 			outputText("You walk away from the creature, which hides back in the brush. After you trek a bit, you wonder if what happened really DID happen...", false);
-			if(gameState > 0) eventParser(5007);
+			if(gameState > 0) cleanupAfterCombat();
 			else doNext(13);
 			return;
 		}
@@ -235,7 +235,7 @@ public function tentacleLossRape():void {
 		stats(0.5, 0, -.5, -1, 5, 1, -100, 1);
 		monster.HP = 0;
 		if(player.HP == 0) player.HP++;
-		if(gameState > 0) eventParser(5007);
+		if(gameState > 0) cleanupAfterCombat();
 		else doNext(13);
 		return;
 	}
@@ -320,7 +320,7 @@ public function tentacleLossRape():void {
 			player.boostLactation(.5);
 			monster.HP = 0;
 			if(player.HP == 0) player.HP++;
-			if(gameState > 0) eventParser(5007);
+			if(gameState > 0) cleanupAfterCombat();
 			else doNext(13);
 			return;
 		}
@@ -343,7 +343,7 @@ public function tentacleLossRape():void {
 			outputText("  It continues to violate your ass until you black out from exhaustion, the number of loads you've released no longer countable.", false);
 			//end (loss)
 			stats(0, 1, 0, -.5, 2, 1, -100, .5);
-			if(inCombat()) eventParser(5007);
+			if(inCombat()) cleanupAfterCombat();
 			else doNext(14);
 			return;
 		}
@@ -352,7 +352,7 @@ public function tentacleLossRape():void {
 			outputText("Just as you think it's over, the tentacle inside your " + assholeDescript() + " begins to swell massively, causing another surge of cum to leave you, and another, and another.  It continues to violate your ass until you black out from exhaustion, the number of loads you've released no longer countable.", false);
 			//end (loss)
 			stats(0, 1, 0, -.5, 2, 1, -100, .5);
-			if(inCombat()) eventParser(5007);
+			if(inCombat()) cleanupAfterCombat();
 			else doNext(14);
 			return;
 		}		
@@ -363,7 +363,7 @@ public function tentacleLossRape():void {
 			outputText("  It continues to violate your ass until you black out from exhaustion, the number of times you've orgasmed no longer countable.", false);
 			//end (loss)
 			stats(0, 1, 0, -.5, 2, 1, -100, .5);
-			if(inCombat()) eventParser(5007);
+			if(inCombat()) cleanupAfterCombat();
 			else doNext(14);
 			return;
 		}
@@ -380,13 +380,13 @@ public function tentacleLossRape():void {
 			stats(0, .5, -.5, -.5, 1, 1, -100, 1);
 			monster.HP = 0;
 			if(player.HP == 0) player.HP++;
-			if(gameState > 0) eventParser(5007);
+			if(gameState > 0) cleanupAfterCombat();
 			else doNext(13);
 			return;
 		}
 		//end (loss)
 		stats(0, 1, 0, -.5, 2, 1, -100, .5);
-		if(inCombat()) eventParser(5007);
+		if(inCombat()) cleanupAfterCombat();
 		else doNext(14);
 		return;
 	}
@@ -443,7 +443,7 @@ public function tentacleLossRape():void {
 		player.boostLactation(.5);
 		monster.HP = 0;
 		if(player.HP == 0) player.HP++;
-		if(gameState > 0) eventParser(5007);
+		if(gameState > 0) cleanupAfterCombat();
 		else doNext(13);
 		return;
 	}
@@ -562,7 +562,7 @@ public function centaurGenderlessRetardation():void {
 		outputText("\"<i>Q.E.D., MOTHERFUCKER!</i>\" it shouts, gesticulating in the air wildly with its tentacles as it turns and clumps back into the dense brush.", false);
 	}
 	takeDamage(5);
-	if(gameState > 0) eventParser(5007);
+	if(gameState > 0) cleanupAfterCombat();
 	else doNext(13);
 }
 
@@ -582,7 +582,7 @@ public function genderlessHilarityForNagaKenDolls():void {
 
 	outputText("\"<i>Fucking tourists.</i>\"  It slams its tentacles down in a brutal blow, knocking you out.", false);
 	takeDamage(15);
-	if(gameState > 0) eventParser(5007);
+	if(gameState > 0) cleanupAfterCombat();
 	else doNext(13);
 }
 
@@ -611,7 +611,7 @@ public function tentacularGenderGooTimes():void {
 	outputText("\"<i>FUCK!</i>\" comes the voice again.  \"<i>You're sour apple!  I fucking HATE sour apple!</i>\"\n\n", false);
 
 	outputText("It slams its tentacles down in a brutal blow, knocking you out.", false);
-	if(gameState > 0) eventParser(5007);
+	if(gameState > 0) cleanupAfterCombat();
 	else doNext(13);
 }
 

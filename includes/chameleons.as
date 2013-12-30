@@ -133,7 +133,7 @@ public function loseToChameleonGirl():void {
 	else {
 		outputText("\n\nThe Chameleon Girl gives you a once-over, but finding no genitals, she sighs and slaps you hard enough to have you black out.");
 		takeDamage(20);
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 }
 
@@ -165,7 +165,7 @@ public function loseToChameleonWithCockAnBallsAnCunt():void {
 	
 	//send player back to camp, reset hours since cum, remove gems and add time
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 
@@ -197,7 +197,7 @@ public function dudesLoseToChamChams():void {
 
 	outputText("\n\nShe catches herself, and looks back down at you and sneers.  \"<i>Y-yeah, and you better not come back around my bog again,</i>\" she says between tired breaths as she takes the silk from your wrists and dresses herself again.  She splashes off through the water, leaving you in silence.  You take a while to recover from the experience before managing to work up the energy to get out of the mud and back to your camp.");
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 	//send player back to camp, reset hours since cum, remove gems and add time
 }
 
@@ -217,7 +217,7 @@ public function loseToChamChamWithPCCunt():void {
 	//set lust to 100, return to camp
 	stats(0,0,0,0,0,0,100,0);
 	player.lust = 100;
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //VICTORY SCENES INTRO(Z edited)
@@ -235,7 +235,7 @@ public function defeatChameleonGirl():void {
 		if(player.lust >= 33) outputText("  Do you use the girl in her weakened state to get yourself off?  Or maybe you could punish her bad attitude with an item from your bags...");
 	}
 	if(player.lust < 33 || player.gender == 0) {
-		eventParser(5007);
+		cleanupAfterCombat();
 		return;
 	}
 	//(Display Options: [Fuck Her Face] [Pussy Rub] [Herm Style Pussyrub] [Incubi Draft] [Succubi Milk] [Lust&Sens Drafts])
@@ -249,7 +249,7 @@ public function defeatChameleonGirl():void {
 	//let PC use item
 	if((hasItem("SucMilk",1) || hasItem("P.S.Mlk",1)) && player.hasCock()) item = 3781;
 	else if(hasItem("SensDrf",1) && (hasItem("L.Draft",1) || hasItem("F.Draft",1))) item = 3781;
-	simpleChoices("Use Dick",dick,"Use Pussy",pussy,"Herm Style",herm,"Use Item",item,"Leave",5007);
+	simpleChoices("Use Dick",dick,"Use Pussy",pussy,"Herm Style",herm,"Use Item",item,"Leave",cleanupAfterCombat);
 }
 
 //-Herm Victory (Z edited)
@@ -274,7 +274,7 @@ public function fuckDatChameleonAsACoolGuyGirlHerm():void {
 	if(player.cor < 50) outputText("and guiltily ");
 	outputText("roll her onto her back and get up to collect your things, rinsing yourself with the water and shaking the mud out before putting your " + player.armorName + " back on and heading back to camp.");
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //-Male (Z edited)
@@ -302,7 +302,7 @@ public function manFucksChameleonWithBiggishWang():void {
 	outputText("  Satisfied, you put your " + player.armorName + " back on and head back to camp.");
 	//send player back to camp, reset hours since cum, add gems and time
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //-Female (for herms without dicks) (Z edited)
@@ -328,7 +328,7 @@ public function femaleHasWinSexWithChamCham():void {
 	outputText("roll her onto her back and get up to collect your things, shaking out the mud and water before putting your " + player.armorName + " back on and heading to camp.");
 	//send player back to camp, reset hours since cum, add gems and time
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Item Use Scenes Intro (Victory) (Z edited)
@@ -377,7 +377,7 @@ public function giveTheChameleonASuccubiMilk():void {
 		consumeItem("SucMilk",1);
 		stats(0,0,0,0,0,0,0,5);
 	}
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //-Lust and Sens Draft (you you you you you need to find more ways to start sentences without using pronouns, she?) (Z edited)
@@ -407,7 +407,7 @@ public function doseDatChameleonWithLustAndSensitivityDrafts():void {
 		var x:int = player.cockThatFits(monster.vaginalCapacity());
 		if(x < 0) {
 			outputText("COCK ERROR");
-			eventParser(5007);
+			cleanupAfterCombat();
 			return;
 		}
 		outputText("\n\nYou gently tug at the knot of her thong, and the fabric easily slips away from her wide hips.  Her arousal is obvious; she's practically drooling lubricant.  The sight is just too enticing; you hastily shed your " + player.armorName + " and position your " + cockDescript(x) + " in front of her needy fuck-hole.  She gasps sharply and arches her back as you press the head of your erect member against her slick lips; her hands shoot out and grab at your arms, trying desperately to pull you in to her.  With a smile you oblige, pushing deep into her pussy.  Already too far gone with your earlier teasing, she immediately cries out in orgasm, the walls of her cunt squeezing your cock with all they've got.  Though you expect her to relax into a stupor after the release, she's clearly not satisfied with just cumming once while you're still inside her, gripping you tightly with her hands and beginning to slide her hips up and down your cock.");
@@ -421,5 +421,5 @@ public function doseDatChameleonWithLustAndSensitivityDrafts():void {
 	consumeItem("SensDrf",1);
 	if(hasItem("L.Draft",1)) consumeItem("L.Draft",1);
 	else consumeItem("F.Draft",1);
-	eventParser(5007);
+	cleanupAfterCombat();
 }

@@ -29,7 +29,7 @@ public function cultistRaisePlayerLust():void {
 		outputText("She suddenly starts mauling her shapely breasts, her fingers nearly disappearing briefly in the soft, full flesh, while fingering herself eagerly, emitting a variety of lewd noises.  You are entranced by the scene, the sexual excitement she's experiencing penetrating your body in warm waves coming from your groin.", false);
 	}
 	stats(0,0,0,0,0,0,(player.lib/10 + player.cor/20)+4,0);
-	if(player.lust >= 100) doNext(5011);
+	if(player.lust >= 100) doNext(endLustLoss);
 	else doNext(5000);
 }
 public function cultistLustTransfer():void {
@@ -54,7 +54,7 @@ public function cultistLustTransfer():void {
 		monster.lust -= 50;
 		if(monster.lust < 0) monster.lust = 10;
 	}
-	if(player.lust >= 100) doNext(5011);
+	if(player.lust >= 100) doNext(endLustLoss);
 	else doNext(5000);
 }
 public function cultistRapesYou():void {
@@ -95,7 +95,7 @@ public function cultistRapesYou():void {
 					outputText("The ordeal has also left you with a slightly dulled mind, and some of the desire you felt still lingers.", false);
 					stats(0,0,0,-2,0,0,-100,0);
 					stats(0,0,0,0,0,0,10,0);
-					eventParser(5007);
+					cleanupAfterCombat();
 				}
 				return;
 			}
@@ -146,7 +146,7 @@ public function cultistRapesYou():void {
 				outputText("The ordeal has also left you with a slightly dulled mind, and some of the desire you felt still lingers.", false);
 				stats(0,0,0,-2,0,0,-100,0);
 				stats(0,0,0,0,0,0,10,0);
-				eventParser(5007);
+				cleanupAfterCombat();
 			}
 			return;
 		}
@@ -201,7 +201,7 @@ public function cultistRapesYou():void {
 				outputText("The ordeal has also left you with a slightly dulled mind, and some of the desire you felt still lingers.", false);
 				stats(0,0,0,-2,0,0,-100,0);
 				stats(0,0,0,0,0,0,10,0);
-				eventParser(5007);
+				cleanupAfterCombat();
 			}
 			return;
 		}
@@ -307,7 +307,7 @@ public function cultistRapesYou():void {
 			outputText("The ordeal has also left you with a slightly dulled mind, and some of the desire you felt still lingers.  ", false);
 			stats(0,0,0,-2,0,0,-100,0);
 			stats(0,0,0,0,0,0,10,0);
-			eventParser(5007);
+			cleanupAfterCombat();
 			if(changedBoobs) outputText("\n\nYou notice that the changes you experienced to your breasts while in the fantasy are still affecting you.", false);
 			if(changedCock) outputText("\n\nYou notice that the changes you experienced to your genitals while in the fantasy are still affecting you.", false);
 		}
@@ -401,7 +401,7 @@ public function cultistRapesYou():void {
 			outputText("The ordeal has also left you with a slightly dulled mind, and some of the desire you felt still lingers.", false);
 			stats(0,0,0,-2,0,0,-100,0);
 			stats(0,0,0,0,0,0,10,0);
-			eventParser(5007);
+			cleanupAfterCombat();
 		}
 	}
 }
@@ -488,7 +488,7 @@ public function playerRapesCultist():void {
 		var fuckVag:Number = 0;
 		if(player.hasVagina()) vibe = 3392;
 		if(player.hasCock()) fuckVag = 3393;
-		simpleChoices("FuckHerVag",fuckVag,"Vibrator",vibe,"",0,"",0,"Leave",5007);
+		simpleChoices("FuckHerVag",fuckVag,"Vibrator",vibe,"",0,"",0,"Leave",cleanupAfterCombat);
 		return;
 	}
 	else {
@@ -517,7 +517,7 @@ public function playerRapesCultist():void {
 			outputText("You make her rub your body down, but you don't really have a means to rape her.  Afterwards you do feel better, but didn't get any real release.  Disappointed, you continue on your way.", false);
 		}
 	}
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //PC goes for the vagina
@@ -550,7 +550,7 @@ public function plugSwimsuitVag():void {
 	outputText("You stand up and clean yourself off, thoroughly satisfied with the encounter.  The cultist, on the other hand, collapses in a quivering pile of pleasure on the ground.", false);
 	//set PC's lust to minimum
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //PC goes for the vagina vibrators
@@ -583,7 +583,7 @@ public function swimsuitVibrators():void {
 		monster.HP = 2;
 		player.lust = 100;
 		flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
-		eventParser(5007);
+		cleanupAfterCombat();
 		stats(0,0,0,0,1,-3,-100,0);
 	}
 	//It fits!
@@ -606,7 +606,7 @@ public function swimsuitVibrators():void {
 		outputText(" of your lady juices.  You shudder for a moment and look down at it on the ground.  It seems to have, deflated a bit?  There is a clear fluid flowing out of the top of the toy.  A thump sound brings the cultist back to your attention, but only briefly as you see she is writhing on the ground in pleasure from the toy still inside her.  You shake your head and get dressed again.", false);
 		//end scene
 		stats(0,0,0,0,1,-3,-100,0);
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 }
 
@@ -688,5 +688,5 @@ public function fetishCultistHasAMilkFetish():void {
 	//You've now been milked, reset the timer for that
 	player.addStatusValue("Feeder",1,1);
 	player.changeStatusValue("Feeder",2,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }

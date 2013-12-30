@@ -20,11 +20,20 @@
 			if (hasStatusAffect("Kitsune Fight") >= 0){
 				game.winKitsuneImpFight();
 			} else {
-				if (hpVictory){
-					game.finishCombat();
-				} else {
-					game.impVictory();
-				}
+				game.impVictory();
+			}
+		}
+
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if(hasStatusAffect("Kitsune Fight") >= 0) {
+				game.loseKitsuneImpFight();
+			} else if (pcCameWorms){
+				outputText("\n\nThe imp grins at your already corrupted state...", false);
+				player.lust = 100;
+				game.doNext(5017);
+			} else {
+				game.eventParser(5017);
 			}
 		}
 

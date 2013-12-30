@@ -275,7 +275,7 @@ public function zealotLossRape():void {
 	}
 	outputText("  The ordeal has also left you with a slightly dulled mind, and some of the desire you felt still lingers.", false);
 	stats(0,0,0,0,0,0,player.cor/20+player.lib/10,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 public function zealotDefeated():void {
 	//Defeated by health
@@ -286,9 +286,9 @@ public function zealotDefeated():void {
 		outputText("\n\nDo you want to take advantage of his vulnerable state to sate your lusts?", false);
 		var bikiniTits:int = 0;
 		if(player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = 3988;
-		simpleChoices("Yes",5105,"",0,"",0,"B.Titfuck",bikiniTits,"Leave",5007);
+		simpleChoices("Yes",5105,"",0,"",0,"B.Titfuck",bikiniTits,"Leave",cleanupAfterCombat);
 	}
-	else eventParser(5007);
+	else cleanupAfterCombat();
 }
 
 
@@ -322,5 +322,5 @@ public function zealotWinRape():void {
 		cuntChange(monster.cockArea(0),true);
 	}
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }

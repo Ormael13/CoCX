@@ -19,6 +19,11 @@ package classes.Monsters
 			game.harpyQueenDefeatedByPC();
 		}
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			game.harpyQueenBeatsUpPCBadEnd();
+		}
+
 		public function HarpyQueen(mainClassPtr:*)
 		{
 			super(mainClassPtr);

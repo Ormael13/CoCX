@@ -294,11 +294,11 @@ public function impGangVICTORY():void {
 	else outputText("The last of the imps collapses, pulling its demon-prick free from the confines of its loincloth.  Surrounded by masturbating imps, you sigh as you realize how enslaved by their libidos the foul creatures are.", false);
 	if(player.lust >= 33 && player.gender > 0) {
 		outputText("\n\nFeeling a bit horny, you wonder if you should use them to sate your budding urges before moving on.  Do you rape them?", false);
-		if(player.gender == 1) simpleChoices("Rape",11078,"",0,"",0,"",0,"Leave",5007);
-		if(player.gender == 2) simpleChoices("Rape",11079,"",0,"",0,"",0,"Leave",5007);
-		if(player.gender == 3) simpleChoices("Male Rape",11078,"Female Rape",11079,"",0,"",0,"Leave",5007);
+		if(player.gender == 1) simpleChoices("Rape",11078,"",0,"",0,"",0,"Leave",cleanupAfterCombat);
+		if(player.gender == 2) simpleChoices("Rape",11079,"",0,"",0,"",0,"Leave",cleanupAfterCombat);
+		if(player.gender == 3) simpleChoices("Male Rape",11078,"Female Rape",11079,"",0,"",0,"Leave",cleanupAfterCombat);
 	}
-	else eventParser(5007);
+	else cleanupAfterCombat();
 }
 
 //RAEP -M
@@ -325,7 +325,7 @@ public function impGangGetsRapedByMale():void {
 	
 	outputText("Satisfied, you redress and prepare to continue with your exploration of the cave.", false);
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 //RAEP-F
 public function impGangGetsRapedByFemale():void {
@@ -350,7 +350,7 @@ public function impGangGetsRapedByFemale():void {
 	stats(0,0,0,0,0,0,-100,0);
 	player.knockUp(1,418,50);
 
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 
@@ -540,7 +540,7 @@ public function loseToThisShitPartII():void {
 	//Done if escaped
 	if(monster.lust == 100) {
 		flags[kFLAGS.ZETAZ_FUNGUS_ROOM_DEFEATED]++;
-		eventParser(5007);
+		cleanupAfterCombat();
 		return;
 	}
 	//[BAD-END GO]
@@ -580,7 +580,7 @@ public function encapsulationVictory():void {
 		outputText("", true);
 		outputText("The pod's wall bursts under your onslaught.  The strength goes out of the tentacles holding you at once, giving them all the power of a limp noodle.  The spongy surface of the pod gives out, and the 'petals' split apart, falling down to the ground with a heavy 'thwack'.  You stand there, exulting in your freedom.  You've won!\n\nThe rapier you approached originally still lies there, and you claim your prize.", false);
 	}
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 
@@ -1089,9 +1089,9 @@ public function fightValaVictory():void {
 	//[Fuck] [Leave]
 	if(player.gender > 0) {
 		outputText(" What will you do?", false);
-		simpleChoices("Fuck",valaFightVictoryFuck,"",0,"",0,"",0,"Leave",5007);
+		simpleChoices("Fuck",valaFightVictoryFuck,"",0,"",0,"",0,"Leave",cleanupAfterCombat);
 	}
-	else eventParser(5007);
+	else cleanupAfterCombat();
 	
 }
 
@@ -1178,7 +1178,7 @@ public function valaFightVictoryFuckPtII():void {
 	flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON]++;
 	//Mark as defeated in combat
 	flags[kFLAGS.TIMES_PC_DEFEATED_VALA_AND_RAEPED]++;
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 
@@ -1823,7 +1823,7 @@ public function gigaArouse():void {
 		if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING && player.vaginas.length > 0) outputText("Thick runners of girl-lube stream down the insides of your thighs as your crotch gives into the demonic magics.  You wonder what " + monster.a + monster.short + "'s cock would feel like inside you?  ", false);
 		if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING && player.vaginas.length == 1) outputText("Your " + allVaginaDescript() + " instantly soaks your groin with the heady proof of your need.  You wonder just how slippery you could " + monster.a + monster.short + "'s dick when it's rammed inside you?  ", false);
 	}
-	if(player.lust >= 100) doNext(5011)
+	if(player.lust >= 100) doNext(endLustLoss)
 	else doNext(1);
 }
 
@@ -1874,7 +1874,7 @@ public function releaseZForInfo():void {
 	outputText(".  Zetaz scrambles out the south door, never once looking back at the tattered remnants of his old home.", false);
 	outputText("\n\n<b>(Key Item Acquired: Zetaz's Map!)</b>", false);
 	player.createKeyItem("Zetaz's Map",0,0,0,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 	
 //[Sexual Interrogation]
@@ -1932,7 +1932,7 @@ public function sexualTortureReleaseZetaz():void {
 	
 	outputText("<b>(Key Item Acquired: Zetaz's Map!)</b>", false);
 	player.createKeyItem("Zetaz's Map",0,0,0,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[Tighten Strap] 
@@ -1950,7 +1950,7 @@ public function sexualTortureTightenZetaz():void {
 	
 	outputText("<b>(Key Item Acquired: Zetaz's Map!)</b>", false);
 	player.createKeyItem("Zetaz's Map",0,0,0,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[END HIM – Ew death!]
@@ -1966,7 +1966,7 @@ public function endZetaz():void {
 	player.createKeyItem("Zetaz's Map",0,0,0,0);
 	//(ZETAZ IS DEAD)
 	flags[kFLAGS.ZETAZ_DEFEATED_AND_KILLED]++;
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[Lose to Zetaz]

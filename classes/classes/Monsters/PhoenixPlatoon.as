@@ -19,6 +19,11 @@ package classes.Monsters
 			game.phoenixPlatoonLosesToPC();
 		}
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			game.phoenixPlatoonMurdersPC();
+		}
+
 		public function PhoenixPlatoon(mainClassPtr:*)
 		{
 			super(mainClassPtr);

@@ -21,6 +21,11 @@ package classes.Monsters
 			game.defeatImpLord();
 		}
 
+		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
+		{
+			game.loseToAnImpLord();
+		}
+
 		public function ImpLord(mainClassPtr:*)
 		{
 			super(mainClassPtr);

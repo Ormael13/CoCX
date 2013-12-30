@@ -302,7 +302,7 @@ public function tamaniSexLetHer():void {
 		//Combat end: 
 		if(gameState == 1 || gameState == 2) {
 			outputText("  After the stress and strain of a lost fight and the stress of having your seed so expertly stolen, you lie down on your flank and go to sleep.", false);
-			eventParser(5007);
+			cleanupAfterCombat();
 			stats(0,0,0,0,0,0,-100,0);
 		}
 		//(Noncombat end: 
@@ -345,7 +345,7 @@ public function tamaniSexLetHer():void {
 			//Combat end: 
 			if(gameState == 1 || gameState == 2) {
 				outputText("You black out, exhausted from the ordeal.", false);
-				eventParser(5007);
+				cleanupAfterCombat();
 				stats(0,0,0,0,0,0,-100,0);
 			}
 			//(Noncombat end: 
@@ -397,7 +397,7 @@ public function tamaniSexLetHer():void {
 			//Combat end: 
 			if(gameState == 1 || gameState == 2) {
 				outputText("You black out, exhausted from the ordeal.", false);
-				eventParser(5007);
+				cleanupAfterCombat();
 				stats(0,0,0,0,0,0,-100,0);
 			}
 			//(Noncombat end: 
@@ -451,7 +451,7 @@ public function tamaniSexLost():void {
 	
 	outputText("Tamani removes the ring once you have finished.  She seals the bottle and places it in her pouch as you drop to the ground, exhausted.  All you can do is watch as she walks away, her ass swaying confidently from side to side.  Your last thought before you pass out is how much easier it would've been to just fuck her.", false);
 	stats(0,0,0,0,.5,-1,-100,.5);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 	
 //[NORMAL COMBAT – VICTORY RAEEP]
@@ -497,7 +497,7 @@ public function tamaniSexWon():void {
 		outputText("any more cream to give to me?</i>\"\n\n", false);
 		outputText("She doesn't give you a chance to answer as she wobbles off, jiggling pleasantly in all the right places, \"<i>Of course you do.  I'll be back for the rest later!</i>\"\n\n", false);
 		stats(0,0,0,0,0,0,-100,0);
-		if(gameState > 0) eventParser(5007);
+		if(gameState > 0) cleanupAfterCombat();
 		else doNext(13);
 	}
 	//Too big? Jerk off with feet and bukkake
@@ -525,7 +525,7 @@ public function tamaniSexWon():void {
 		outputText("Tamani wiggles in the sexiest way as she leaves, arousing your body all over again...", false);
 		stats(0,0,0,0,0,0,-100,0);
 		stats(0,0,0,0,0,0,35,0);
-		if(gameState > 0) eventParser(5007);
+		if(gameState > 0) cleanupAfterCombat();
 		else doNext(13);
 	}
 }
@@ -881,7 +881,7 @@ public function getRapedByTamaniYouHypnoSlut():void {
 		tamaniKnockUp()
 		stats(0,0,0,-.5,0,-1,-100,0);
 	}
-	if(gameState == 1 || gameState == 2) eventParser(5007);
+	if(gameState == 1 || gameState == 2) cleanupAfterCombat();
 	else doNext(13);
 }
 
@@ -902,7 +902,7 @@ public function tamaniAnalShits():void {
 	outputText("You can feel the cum building up inside you, and you know that you won't be able to hold out much longer.  Looking down, you can see that Tamani isn't far from orgasm, either.  Her fingers slip rapidly in and out of her cunt, and the look on her face is one of thoughtless bliss.  She shudders and goes limp in your grasp just as you cum, painting the insides of her ass with your semen.  Her eyes are still rolled up into the back of her head as you pull your softening prick out of her ass.  You drop her, letting her legs fall back to the ground with a dull thud.  She turns over onto her side, looking up at you.  Between exhausted pants, she manages to say, \"<i>Don't... think that I... enjoyed that... or anything... I'll be back for you, and you better not...</i>\" before she passes out.  You shake your head and laugh at the stubborn little slut as you tuck " + sMultiCockDesc() + " back into your " + player.armorName + " and head back to your camp.", false);
 	
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 public function tamaniBeaten():void {
@@ -937,7 +937,7 @@ public function tamaniBeaten():void {
 	if(player.fertilizedEggs() == 0) flags[kFLAGS.TAMANI_TIME_OUT] = 3;
 	player.dumpEggs();
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 	
 //Butts McGee Facesitting Tamaniz

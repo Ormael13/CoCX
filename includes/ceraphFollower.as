@@ -131,9 +131,9 @@ public function submissiveCeraphOffer():void {
 		if(player.hasVagina()) cunting = 2319;
 		
 		
-		simpleChoices("Collar Her",collarCeraph,"Fuck Her",dicking,"Ride Her",cunting,"FuckHerAss",buttsmexing,"Leave",5007);
+		simpleChoices("Collar Her",collarCeraph,"Fuck Her",dicking,"Ride Her",cunting,"FuckHerAss",buttsmexing,"Leave",cleanupAfterCombat);
 	}
-	else simpleChoices("Collar Her",collarCeraph,"",0,"",0,"",0,"Leave",5007);
+	else simpleChoices("Collar Her",collarCeraph,"",0,"",0,"",0,"Leave",cleanupAfterCombat);
 }
 
 //Collar Ceraph After 4th Defeat + Rape: (Zeddited)
@@ -188,11 +188,11 @@ public function carryCarephsToken():void {
 		}
 		var cunting:Number = 0;
 		if(player.hasVagina()) cunting = 2319;
-		simpleChoices("Fuck Her",dicking,"Ride Her",cunting,"FuckHerAss",buttsmexing,"",0,"Leave",5007);
+		simpleChoices("Fuck Her",dicking,"Ride Her",cunting,"FuckHerAss",buttsmexing,"",0,"Leave",cleanupAfterCombat);
 	}
 	else {
 		outputText("  You don't really have the equipment to.  Oh well.", false);
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 }
 
@@ -224,11 +224,11 @@ public function getCeraphFollowerPiercing():void {
 		}
 		var cunting:Number = 0;
 		if(player.hasVagina()) cunting = 2319;
-		simpleChoices("Fuck Her",dicking,"Ride Her",cunting,"FuckHerAss",buttsmexing,"",0,"Leave",5007);
+		simpleChoices("Fuck Her",dicking,"Ride Her",cunting,"FuckHerAss",buttsmexing,"",0,"Leave",cleanupAfterCombat);
 	}
 	else {
 		outputText("  You don't really have the equipment to.  Oh well.", false);
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 }
 	

@@ -27,6 +27,16 @@ package classes.Monsters
 			game.defeatIzma();
 		}
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if (pcCameWorms){
+				outputText("\n\n\"<i>Gross!</i>\" Izma cries as she backs away, leaving you to recover alone.");
+				game.cleanupAfterCombat();
+			} else {
+				game.IzmaWins();
+			}
+		}
+
 		public function Izma(mainClassPtr:*)
 		{
 			super(mainClassPtr);

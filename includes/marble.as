@@ -162,7 +162,7 @@ public function marbleFightWin():void {
 	//Options, rape in room, milk (Spy's submission - not included yet) and, don't rape.
 	var feed:Number = 0;
 	if(player.hasPerk("Feeder") >= 0 || player.lactationQ() > 200) feed = 3560;
-	simpleChoices("Feed Her",feed,"RapeInRoom",rapeMarbleInHerRoom,"",0,"",0,"Leave",5007);
+	simpleChoices("Feed Her",feed,"RapeInRoom",rapeMarbleInHerRoom,"",0,"",0,"Leave",cleanupAfterCombat);
 }
 public function marbleFightLose():void {
 	spriteSelect(41);
@@ -172,7 +172,7 @@ public function marbleFightLose():void {
 	//lose by lust
 	else outputText("Overcome by desire, you fall to your knees, and start masturbating furiously.  Disgusted with you, Marble hits you upside the head once more, knocking you over.  ", false);
 	outputText("She leans in close to your head and whispers \"<i>Don't ever come near me again, or I will crush your head with this hammer.</i>\"  She stands up and walks away from you as you pass out from your head injuries.  ", false);	
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Rape in room (Z)
@@ -244,7 +244,7 @@ public function rapeMarbleInHerRoom():void {
 	//Farm is removed from places and cannot be rediscovered.  Later, if written, going back to the farm can trigger a fight with Whitney or the other residents of the farm instead.
 	flags[kFLAGS.FARM_DISABLED] = 1;
 	//End event
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Force-feed (by Spy) (Z)
@@ -279,7 +279,7 @@ public function forceFeedMarble():void {
 	//You've now been milked, reset the timer for that
 	player.addStatusValue("Feeder",1,1);
 	player.changeStatusValue("Feeder",2,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 public function resistMarbleInitially():void {

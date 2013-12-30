@@ -598,11 +598,11 @@ public function victoryChoices():void
 				buttFuck = rapeAkbal;
 			outputText("\n\nDo you rape him?", false);
 			//Rape / Don't Rape
-			simpleChoices("Butt-fuck", buttFuck, "Take Vaginally", vagoo, "Force Lick", vagooLick, "B.Titfuck", bikiniTits, "Leave", 5007);
+			simpleChoices("Butt-fuck", buttFuck, "Take Vaginally", vagoo, "Force Lick", vagooLick, "B.Titfuck", bikiniTits, "Leave", cleanupAfterCombat);
 			return;
 		}
 	}
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 public function rapeAkbalForcedFemaleOral():void
@@ -664,8 +664,7 @@ public function rapeAkbalForcedFemaleOral():void
 	}
 	//END CENTAUR STUFF
 	stats(0, 0, 0, 0, 0, 0, -100, 1);
-	eventParser(5007);
-	return;
+	cleanupAfterCombat();
 }
 
 //Standard rapes - buttfucks and oral
@@ -746,8 +745,7 @@ public function rapeAkbal():void
 			outputText("As you leave Akbal snarls as the creatures that once feared him use his overtly aroused state to get revenge on the \"god\" of the terrestrial fire.  Even After you've reached the edge of the forest the wails of the jaguar demon can still be heard but just barely over the high pitched laughter of the demon imps and goblin females.", false);
 		}
 		stats(0, 0, 0, 0, 0, 0, -100, 1);
-		eventParser(5007);
-		return;
+		cleanupAfterCombat();
 			//END NAGA STUFF
 	}
 	//Centaur RAPPUUUUU
@@ -834,7 +832,7 @@ public function rapeAkbal():void
 			outputText("As you leave Akbal snarls as the creatures that once feared him use his overtly aroused state to get revenge on the \"god\" of the terrestrial fire.  Even After you've reached the edge of the forest the wails of the jaguar demon can still be heard but just barely over the high pitched laughter of the demon imps and goblin females.", false);
 		}
 		stats(0, 0, 0, 0, 0, 0, -100, 1);
-		eventParser(5007);
+		cleanupAfterCombat();
 		return;
 			//END CENTAUR STUFF
 	}
@@ -892,7 +890,7 @@ public function rapeAkbal():void
 		outputText("Akbal snarls as you leave, the creatures that once feared him using his aroused state to get revenge on the 'god' of the terrestrial fire.  Even after you've reached the edge of the forest, the jaguar demon's pained howls can still be heard – though, just barely over the high-pitched laughter of the demon imps and the cackling of the goblin females.", false);
 	}
 	stats(0, 0, 0, 0, 0, 0, -100, 1);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 public function girlsRapeAkbal():void
@@ -1119,7 +1117,7 @@ public function girlsRapeAkbalPart2():void
 		//Preggers chance!
 		player.knockUp(1, 432, 101);
 	}
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 public function loseToAckballllllz():void
@@ -1131,7 +1129,7 @@ public function loseToAckballllllz():void
 	if (player.HP < 1)
 	{
 		outputText("The intense pain causes you to black out. The last thing you see is Akbal standing over you on his two hind legs, his massive cock ominously swinging between them as he watches you lose consciousness.\n\n", false);
-		eventParser(5007);
+		cleanupAfterCombat();
 		return;
 	}
 	//[Defeat via Lust]
@@ -1186,7 +1184,7 @@ public function loseToAckballllllz():void
 		outputText("After hours of being his toy you pass out, never having reached your own orgasm.", false);
 		
 		stats(0, 0, 0, 0, 0, 0, 10 + player.lib / 10, 5 + rand(10));
-		eventParser(5007);
+		cleanupAfterCombat();
 		return;
 			//Centaur over
 	}
@@ -1214,7 +1212,7 @@ public function loseToAckballllllz():void
 	
 	outputText("After hours of being his toy you finally pass out, never having reached your own orgasm.", false);
 	stats(0, 0, 0, 0, 0, 0, 10 + player.lib / 10, 5 + rand(10));
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Extra Scenes

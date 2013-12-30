@@ -29,7 +29,7 @@
 				var temp3:int = 0;
 				if(player.hasStatusAffect("Feeder") >= 0) temp3 = 2484;
 				if(player.hasKeyItem("Deluxe Dildo") >= 0) temp2 = 2263;
-				game.simpleChoices("Rape",2059,"Dildo Rape",temp2,"",0,"B. Feed",temp3,"Leave",5007);
+				game.simpleChoices("Rape",2059,"Dildo Rape",temp2,"",0,"B. Feed",temp3,"Leave",game.cleanupAfterCombat);
 			}
 			//Genderless can still breastfeed
 			else if(player.hasStatusAffect("Feeder") >= 0) {
@@ -38,7 +38,17 @@
 				} else {
 					outputText("You smile in satisfaction as the " + short + " spreads her legs and starts frigging her honey-soaked cunt.  The sweet scent oozing from between her legs is too much to bear, arousing you painfully.\n\nWhat do you do?", true);
 				}
-				game.simpleChoices("B. Feed", 2484,"",0,"",0,"",0,"Leave",5007);
+				game.simpleChoices("B. Feed", 2484,"",0,"",0,"",0,"Leave",game.cleanupAfterCombat);
+			}
+		}
+
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if(pcCameWorms){
+				outputText("\n\nThe bee-girl goes white and backs away with a disgusted look on her face.\n\n", false);
+				game.cleanupAfterCombat();
+			} else {
+				game.eventParser(2058);
 			}
 		}
 

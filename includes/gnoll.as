@@ -258,7 +258,7 @@ public function getRapedByGnoll():void {
  	outputText("The hyena girl slumps against your body, but only for a moment.  Then she's suddenly up again, sliding her bizarre member out of you with an obscene slurp.  She leans down to pat your cheek and giggles, \"<i>Thanks, lover.</i>\"   Then she sprints off towards the horizon.", false);  
 	outputText("  A whimper bubbles up your throat and comes out as a half-giggle as you slump down unconscious.", false);
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 
@@ -277,29 +277,29 @@ public function defeatHyena():void {
 			if(player.cockThatFits(monster.vaginalCapacity()) != -1) dickDownClit = 2742;
 			outputText("  The gnoll is at your mercy.  What will you do with her?", false);
 			//[DickDownClit] [DickInAss] [SuckHerClit] [Leave]
-			simpleChoices("DickDownClit",dickDownClit,"DickInAss",dickInGnollAss,"SuckHerClit",suckGnollClit,"",0,"Leave",5007);
+			simpleChoices("DickDownClit",dickDownClit,"DickInAss",dickInGnollAss,"SuckHerClit",suckGnollClit,"",0,"Leave",cleanupAfterCombat);
 		}
 		//(if cockTotal>0 AND vaginas=1)
 		else if(player.gender == 3) {
 			if(player.cockThatFits(monster.vaginalCapacity()) != -1) dickDownClit = 2742;
 			outputText("  The gnoll is at your mercy.  What will you do with her?", false);
 			//[DickDownClit] [DickInAss] [SuckHerClit] [TakeHerClit] [Leave]
-			simpleChoices("DickDownClit",dickDownClit,"DickInAss",dickInGnollAss,"SuckHerClit",suckGnollClit,"TakeHerClit",takeGnollClit,"Leave",5007);
+			simpleChoices("DickDownClit",dickDownClit,"DickInAss",dickInGnollAss,"SuckHerClit",suckGnollClit,"TakeHerClit",takeGnollClit,"Leave",cleanupAfterCombat);
 		}
 		//(if cockTotal=0 AND vaginas=1)
 		else if(player.gender == 2) {
 			outputText("  The gnoll is at your mercy.  What will you do with her?", false);
 			//[SuckHerClit] [TakeHerClit] [Leave]
-			simpleChoices("SuckHerClit",suckGnollClit,"TakeHerClit",takeGnollClit,"",0,"",0,"Leave",5007);
+			simpleChoices("SuckHerClit",suckGnollClit,"TakeHerClit",takeGnollClit,"",0,"",0,"Leave",cleanupAfterCombat);
 		}
 		//(if cockTotal=0 AND vaginas=0)
 		else {
 			outputText("  The gnoll is at your mercy.  What will you do with her?", false);
 			//[SuckHerClit] [Leave]
-			simpleChoices("SuckHerClit",suckGnollClit,"",0,"",0,"",0,"Leave",5007);
+			simpleChoices("SuckHerClit",suckGnollClit,"",0,"",0,"",0,"Leave",cleanupAfterCombat);
 		}
 	}
-	else eventParser(5007);
+	else cleanupAfterCombat();
 }
 
 //DickDownClit
@@ -325,7 +325,7 @@ public function dickDownGnollClit():void {
 	else outputText("Your " + cockDescript(x) + " convulses, pouring cum into her.  Her clitoris bulges even more as the jism backs up, the skin pulling tight and shiny as the pressure builds.  Finally gouts of cum begin spurting back out the tip of her clitoris, splashing against your crotch.", false);
 	outputText("  With a lusty groan, you pull out with a long, slippery sound, and leave the gnoll panting on the dusty ground.", false);
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 //DickInAss
 public function dickInGnollAss():void {
@@ -399,7 +399,7 @@ public function dickInGnollAss():void {
 		outputText("Satisfied, you leave the gnoll to her pleasures, gather your " + player.armorName + ", and head back to camp.", false);
 	}
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //SuckHerClit
@@ -412,7 +412,7 @@ public function suckGnollClit():void {
 	outputText("The massive clit-dick then begins to flutter and twitch as the gnoll starts to cum.  Her feet stamp the ground to either side of you and she abruptly screams into the sky.  Her warbling cry then seems to collapse inward, and her entire body slumps to the ground, unconscious.\n\n", false);
 	outputText("You leave her there on the sun-caked ground and head back to camp.", false);
 	stats(0,0,0,0,0,0,100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 //TakeHerClit
 public function takeGnollClit():void {
@@ -425,7 +425,7 @@ public function takeGnollClit():void {
 	outputText("Every few strokes, the fake dick starts to fail you and you reach forward to slap her again.  Pump pump slap.  Thrust thrust smack.  Grunt grunt slap.  By the time your body rises up to the quivering summit of orgasm, the gnoll's face is purple with bruises.  You scream your orgasm to the sky, bearing down hard on her hollow clitoris, and come hard enough that you see stars.\n\n", false);
 	outputText("When you can get your feet under yourself again, you stand up, letting the now-shrunken clitoris fall out of your " + vaginaDescript(0) + " with a wet plop.  You leave her there on the sun-caked ground and head back to camp.", false);
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
    
 public function yoDawgIHeardULiekGNollBallzzzdahdakjldh():void {
@@ -473,7 +473,7 @@ public function yoDawgHyenaBallz3():void {
 	outputText("Finally, you feel the gnoll's clit slide out of your anus as the overly-endowed girl collapses at your side.  Broken utterly, she pants with depraved exhaustion, no strength left to continue pounding your body into the dirt.  Even now, she strokes her massive clit with one spotted paw as the other helplessly massages the basketball-sized testicles that audibly churn with gallons of the girl's jizz.  Finding a reserve of strength you didn't know you had, you rise tenderly and gather your belongings, creeping away before the hyena-girl can get her second wind.", false);
 	//[24 hours pass, player asshole size increased, sensitivity significantly lowered, toughness lowered temporarily, fatigue maxed, remove one succubi's dream]
 	stats(0,0,0,0,2,-10,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 /*
 --------------------

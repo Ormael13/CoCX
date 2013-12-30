@@ -28,6 +28,18 @@
 				game.sophieLostCombat();
 		}
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if(hasStatusAffect("bimboBrawl") >= 0)
+				game.debimboSophieBeatsYouUp();
+			else if (pcCameWorms) {
+				outputText("\n\nYour foe seems disgusted by the display and leaves you to recover alone...");
+				game.cleanupAfterCombat();
+			} else {
+				game.sophieWonCombat();
+			}
+		}
+
 		public function Sophie(mainClassPtr:*)
 		{
 			super(mainClassPtr);

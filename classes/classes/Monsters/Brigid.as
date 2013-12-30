@@ -20,6 +20,11 @@ package classes.Monsters
 			game.pcDefeatsBrigid();
 		}
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			game.pcDefeatedByBrigid();
+		}
+
 		public function Brigid(mainClassPtr:*)
 		{
 			super(mainClassPtr);

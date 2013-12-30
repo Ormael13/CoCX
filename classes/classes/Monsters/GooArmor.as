@@ -20,6 +20,17 @@ package classes.Monsters
 			else game.beatUpGooArmor();
 		}
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if (pcCameWorms){
+				outputText("\n\nThe armored goo sighs while you exhaust yourself...");
+				game.doNext(game.endLustLoss);
+			} else {
+				if(hasStatusAffect("spar") >= 0) game.pcWinsValeriaSparDefeat();
+				else game.gooArmorBeatsUpPC();
+			}
+		}
+
 		public function GooArmor(mainClassPtr:*)
 		{
 			super(mainClassPtr);

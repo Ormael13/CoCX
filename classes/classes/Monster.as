@@ -772,13 +772,36 @@
 		}
 
 		/**
-		 * All branches of this method should end either with choose/doNext,
-		 * or with default 'awardPlayer' or 'finishCombat'. The latter displays
+		 * All branches of this method should end either with choose/doNext/menu,
+		 * or with default 'awardPlayer' or 'finishCombat'. The latter also displays
 		 * default message like "you defeat %s" or "%s falls and starts masturbating"
 		 */
 		public function defeated(hpVictory:Boolean):void
 		{
 			game.finishCombat();
+		}
+
+		/**
+		 * All branches of this method should end either with choose/doNext/menu,
+		 * or with default 'cleanupAfterCombat', 'penalizePlayer' or 'finishCombat'. The latter also displays
+		 * default message like "you fall unconscious" or
+		 */
+		public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
+		{
+			if (hpVictory){
+				player.HP = 1;
+				outputText("Your wounds are too great to bear, and you fall unconscious.", true);
+			} else {
+				outputText("Your desire reaches uncontrollable levels, and you Numberopenly masturbating.\n\nThe lust and pleasure cause you to black out for hours on end.", true);
+				player.lust = 0;
+			}
+			game.gameState = 0;
+			game.clearStatuses(false);
+			var temp:Number = rand(10) + 1;
+			if(temp > player.gems) temp = player.gems;
+			outputText("\n\nYou'll probably wake up in eight hours or so, missing " + temp + " gems.", false);
+			player.gems -= temp;
+			game.doNext(16);
 		}
 
 		public function generateDebugDescription():String{

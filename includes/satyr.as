@@ -315,7 +315,7 @@ public function loseToSatyr():void {
 	satyrPreggo();
 	stats(0,0,0,0,0,3,-100,0);
 	if(player.cor < 50) stats(0,0,0,0,0,0,0,1);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Victory Rapes
@@ -337,7 +337,7 @@ public function defeatASatyr():void {
 	}
 	var bikiniTits:int = 0;
 	if(player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = 3988;
-	simpleChoices("FuckHisButt",butt,"Ride Face",faces,"B.Titfuck",bikiniTits,"",0,"Leave",5007);
+	simpleChoices("FuckHisButt",butt,"Ride Face",faces,"B.Titfuck",bikiniTits,"",0,"Leave",cleanupAfterCombat);
 }
 //Female (Z)
 public function femaleTakesAdvantageOfSatyr():void {
@@ -370,7 +370,7 @@ public function femaleTakesAdvantageOfSatyr():void {
 	outputText("\n\nYou grind your pussy into his face one last time, then, with regal delicacy, you remove yourself from the unconscious, sex-splattered satyr.  Picking up your clothes, you redress yourself.  Once you're decent, you leave the unconscious goatman as prey for whatever creature comes to investigate the stink of cum spattered about in such copious quantities.");
 	//reduce lust
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 	
 //Male (Z)
@@ -406,7 +406,7 @@ public function malesTakeAdvantageOfSatyrs():void {
 	outputText("\n\nSated for the moment, your gaze drifts towards the satyr.  He makes no sound; indeed, when you take a better look at him, you realise he's fallen asleep, still idly shaking his ass back and forth and jerking his cum-dribbling cock.  You don't even spare him a contemptuous look as you pull your bottoms up and head back.");
 	//reduce lust
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 

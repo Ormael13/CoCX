@@ -172,7 +172,7 @@ public function defeatDannyPhantom():void {
 		outputText("With an ear-splitting, ghostly wail that forces you to your knees, the ", false);
 		if(flags[kFLAGS.TIMES_POSSESSED_BY_SHOULDRA] >= 1) outputText("ghost ", false);
 		outputText("girl falls back, overcome by her injuries. Before you can stop her, she simply becomes insubstantial, her clothes undergoing the change as well. A breeze slips through the ruins, picking the ghost up and scattering her to the winds.", false);
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 	//(defeat by lust)
 	else {
@@ -205,7 +205,7 @@ public function noSlimingSlimer():void {
 	if(flags[kFLAGS.TIMES_POSSESSED_BY_SHOULDRA] == 0) outputText("girl (what was that about her 'taking over' a goblin?)", false);
 	else outputText("spirit", false);
 	outputText(", and a twinge of guilt runs through you.", false);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //(let her in)
@@ -321,7 +321,7 @@ public function sharkyEctoginas():void {
 	outputText("With that settled, you and your temporary ghostly companion decide to part ways here. Pushing out of your stomach, the ghost girl flows out of you and reforms, giving you a quick hug and a reassurance of the good time she had. As she begins her trek back to the ruined city, she warns that if you expect her to follow along with your wishes, you'd best be ready to put up a fight.", false);
 	stats(0,0,0,0,0,0,-100,0);
 	flags[kFLAGS.TIMED_SHARKGINAS]++;
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 	
 //Shark Girl x Ghost Girl - Penis Scene (Saliva Growth)
@@ -362,7 +362,7 @@ public function ghostIzmaPenis():void {
 	outputText("With that settled, you and your temporary ghostly companion decide to part ways here. Pushing out of your stomach, the ghost girl flows out of you and reforms, giving you a quick hug and a reassurance of the good time she had. As she begins her trek back to the ruined city, she warns that if you expect her to follow along with your wishes, you'd best be ready to put up a fight.", false);
 	stats(0,0,0,0,0,0,-100,0);
 	flags[kFLAGS.TIMES_SHARKPENISED]++;
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Slime x Ghost Girl - Introduction
@@ -442,7 +442,7 @@ public function slimeGinaFlation():void {
 	stats(0,0,0,0,0,0,-100,0);
 	if(inCombat()) {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] = "EctoPls";
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 	else {
 		outputText("\n\n", false);
@@ -503,7 +503,7 @@ public function slimeyPenorsAhoy():void {
 	flags[kFLAGS.SHOULDRA_SLIME_PENOR_TIMES]++;
 	if(inCombat()) {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] = "EctoPls";
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 	else {
 		outputText("\n\n", false);
@@ -553,7 +553,7 @@ public function genderlessGhostBuster():void {
 	outputText("Her pleasure dealt with, the ghost girl appears head-first from your belly, flowing out and reconstituting herself into the normal, brown-eyed girl you first encountered.  Almost as an afterthought, she smiles, moving to her clothing and swiftly dressing, then gives you a little wave before wandering away, rounding a corner and disappearing from sight. You resolve to find her again—her magic was pretty fun!", false);
 	stats(0,0,0,0,0,0,-100,0);
 	flags[kFLAGS.SHOULDRA_GENDERLESS_FUCK_COUNT]++;
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 //Penis Scene
 public function penisLossThatIsntALoss():void {
@@ -624,7 +624,7 @@ public function penisLossThatIsntALoss():void {
 	flags[kFLAGS.SHOULDRA_PENIS_DEFEAT_TIMES]++;
 	if(inCombat()) {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] = "EctoPls";
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 	else {
 		outputText("\n\n", false);
@@ -669,7 +669,7 @@ public function ghostBJFinisher(inside:Boolean):void {
 	}
 	if(inCombat()) {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] = "EctoPls";
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 	else {
 		outputText("\n\n", false);
@@ -691,7 +691,7 @@ public function dewormYourGhost():void {
 	outputText("\n\n", false);
 	stats(0,0,0,0,0,0,15,0);
 	outputText("There's silence for a moment, then you are almost rendered unconscious as she cries, \"<i>NOOOOOOOOPE,</i>\" telepathically, surging out of your body in record time. She corporealizes and backs away from you until she bumps into one of the ruined buildings. Then, she's off, booking it down the street to get as far away from you as possible. You shrug, figuring at the very least you dealt with her arousal, albeit in an unexpected way, and begin your trek back to your camp.", false);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 	flags[kFLAGS.SHOULDRA_WORM_SCENE_COUNTER]++;
 }
@@ -734,7 +734,7 @@ public function penisGartuanGhostSmexVictory():void {
 	outputText("\"<i>THEY DON'T CALL ME 'THE DEVIL OF DICKINGS' FOR NOTHIN',</i>\" your dick-demon pipes in. The two of you share a laugh, and with a friendly wave, the spirit turns away. She sloshes through the layer of seed coating the ground, and you can't help but notice a little white fluid drip from her bare buttocks. The droplet causes a small wave to disperse through the jizz. You shake your head with a smile creeping across your cheeks. Spirit sex... what a ridiculous thing.\n\n", false);
 	stats(0,0,0,0,0,0,-100,0);
 	flags[kFLAGS.SHOULDRA_EXGARTUAN_SPIRIT_SEX_COUNT]++;
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
 	
@@ -759,7 +759,7 @@ public function ghostGinaWinSexings():void {
 	cuntChange(50,true,true,false);
 	stats(0,0,0,0,0,0,-100,0);
 	flags[kFLAGS.SHOULDRA_VAGINAL_POSSESSIONS]++;
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
 //Hermaphrodite Scene
@@ -831,7 +831,7 @@ public function hermaphroditeGhostsCumEctoplasm():void {
 	outputText("Her pleasure dealt with, the ghost girl appears head-first from your belly, flowing out and reconstituting herself into the normal, brown-eyed girl you first encountered.  Almost as an afterthought, she smiles, moving to her clothing and swiftly dressing, then gives you a little wave before wandering away, rounding a corner and disappearing from sight. You resolve to find her again—her magic was pretty fun!", false);
 	stats(0,0,0,0,0,0,-100,0);
 	flags[kFLAGS.SHOULDRA_HERMSEX_COUNT]++;
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
 
@@ -891,7 +891,7 @@ public function ourDadTaughtUsNotToBeAshamedOfOurDicks():void {
 	flags[kFLAGS.SHOULDRA_PENIS_DEFEAT_TIMES]++;
 	if(inCombat()) {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] = "EctoPls";
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 	else {
 		outputText("\n\n", false);
@@ -914,7 +914,7 @@ public function loseToShouldraWithWorms():void {
 	outputText("The ghost-girl responds by meeting your eyes and staring daggers at them, and before you can stop her, she leaps towards you, spins, and cracks a kick against the side of your neck. You go tumbling to the ground and unsteadily raise your head to watch her stomp away, grumbling about worms and freaky fetishists. The pavement rushes up to meet you, and the world fades away as you slip into unconsciousness.", false);
 	flags[kFLAGS.SHOULDRA_WORM_SCENE_COUNTER]++;
 	takeDamage(10000);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Vagina Scene
@@ -935,7 +935,7 @@ public function ghostGinaLosses():void {
 	stats(0,0,0,0,0,1,-100,0);
 	if(inCombat()) {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] = "EctoPls";
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 	else {
 		outputText("\n\n", false);
@@ -965,7 +965,7 @@ public function loseToShouldraAsHerm():void {
 	stats(0,0,0,0,0,1,-100,0);
 	if(inCombat()) {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] = "EctoPls";
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 	else {
 		outputText("\n\n", false);
@@ -1068,7 +1068,7 @@ public function shouldraGiantCockLoss():void {
 	flags[kFLAGS.SHOULDRA_USES_YOUR_GIANT_COCK_COUNT]++;
 	if(inCombat()) {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] = "EctoPls";
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 	else {
 		outputText("\n\n", false);
@@ -1123,7 +1123,7 @@ public function genderlessShouldrasLossRapes():void {
 	stats(0,0,0,0,0,1,-100,0);
 	if(inCombat()) {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] = "EctoPls";
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 	else {
 		outputText("\n\n", false);
@@ -1169,7 +1169,7 @@ public function ghostGartuanLossSceneOrSomeShit():void {
 	outputText("\"<i>THEY DON'T CALL ME 'THE DEVIL OF DICKINGS' FOR NOTHIN',</i>\" your dick-demon pipes in. The two of you share a laugh, and with a friendly wave, the spirit turns away. She sloshes through the layer of seed coating the ground, and you can't help but notice a little white fluid drip from her bare buttocks. The droplet causes a small wave to disperse through the jizz. You shake your head with a smile creeping across your cheeks. Spirit sex... what a ridiculous thing.", false);
 	flags[kFLAGS.SHOULDRA_EXGARTUAN_SPIRIT_SEX_COUNT]++;
 	stats(0,0,0,0,0,1,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[super secret paladin 'sex' scene; prerequisites: human face, human body, human legs, no tail, no horns, light/olive/dark/ebony complexion, slightly to severely masculine face, 0-15 corruption, 4-10 inch normal penis, 1-2 inch testicles, no-adjective to narrow hips, height between 5'5</i>\" and 6'5</i>\"]  
@@ -1242,7 +1242,7 @@ public function ginaBoobgartuanShouldra():void {
 	stats(0,0,0,0,0,0,-100,0);
 	if(inCombat()) {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] = "EctoPls";
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 	else {
 		outputText("\n\n", false);
@@ -1324,7 +1324,7 @@ public function slimeGhostGalForHerms(clearOut:Boolean = false):void {
 	stats(0,0,0,0,0,-1,-100,0);
 	if(inCombat()) {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] = "EctoPls";
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 	else {
 		outputText("\n\n", false);

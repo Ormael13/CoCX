@@ -14,20 +14,30 @@ package classes.Monsters
 				} else {
 					outputText("You smile in satisfaction as the " + short + " collapses, masturbating happily.  Now would be the perfect opportunity to test his demonic tool...\n\nHow do you want to handle him?", true);
 				}
-				game.simpleChoices("Anally",11063,"Orally",11039,"",0,"",0,"Leave",5007);
+				game.simpleChoices("Anally",11063,"Orally",11039,"",0,"",0,"Leave",game.cleanupAfterCombat);
 			}
 			else {
 				if (hpVictory) {
 					outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.  Now would be the perfect opportunity to put his tool to use...\n\nWhat do you do, rape him, service him, or let him take you anally?", true);
 					game.stats(0,0,0,0,0,0,1,0);
-					game.simpleChoices("Rape",11064,"Service Him",11039,"Anal",11063,"Nothing",5007,"",0);
+					game.simpleChoices("Rape",11064,"Service Him",11039,"Anal",11063,"Nothing",game.cleanupAfterCombat,"",0);
 				} else {
 					outputText("You smile in satisfaction as the " + short + " collapses, masturbating happily.  Now would be the perfect opportunity to put his tool to use...\n\nWhat do you do?", true);
 					var temp2:int = 0;
 					if(player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") temp2 = 3988;
 					game.stats(0,0,0,0,0,0,1,0);
-					game.simpleChoices("Rape",11064,"Service Him",11039,"Anal",11063,"B.Titfuck",temp2,"Nothing",5007);
+					game.simpleChoices("Rape",11064,"Service Him",11039,"Anal",11063,"B.Titfuck",temp2,"Nothing",game.cleanupAfterCombat);
 				}
+			}
+		}
+
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if(pcCameWorms){
+				outputText("\n\nYour foe doesn't seem to care...");
+				game.doNext(game.endLustLoss);
+			} else {
+				game.eventParser(11038);
 			}
 		}
 

@@ -1956,7 +1956,7 @@ public function getFunctionName(f:Function):String
 
 private function logFunctionInfo(func:Function, arg:* = null):void
 {
-	var logStr:String = ""
+	var logStr:String = "";
 	if (arg is Function)
 	{
 		logStr += "Calling = " + getFunctionName(func) + " Param = " +  getFunctionName(arg);
@@ -1978,7 +1978,7 @@ public function createCallBackFunction(func:Function, arg:*):Function
 		return function _addButtonCallback():* 
 		{ 
 			if (CoC_Settings.haltOnErrors) 
-				logFunctionInfo(func, arg)
+				logFunctionInfo(func, arg);
 			return func(); 
 		};
 	}
@@ -1988,7 +1988,7 @@ public function createCallBackFunction(func:Function, arg:*):Function
 		return function _addButtonCallback():* 
 		{ 
 			if (CoC_Settings.haltOnErrors) 
-				logFunctionInfo(func, arg)
+				logFunctionInfo(func, arg);
 			return func( arg ); 
 		};
 	}
@@ -2148,11 +2148,15 @@ public function choices(text1:String, butt1:*,
 
 	for (tmpJ = 0; tmpJ < 10; tmpJ += 1)
 	{
-		if(buttonEvents[tmpJ] == 0) {
+		if(buttonEvents[tmpJ] == 0 || buttonEvents[tmpJ] == null) {
 			mainView.hideBottomButton( tmpJ );
 		}
 		else {
-			callback = createCallBackFunction(eventParser, buttonEvents[tmpJ] );
+			if (buttonEvents[tmpJ] is Number) {
+				callback = createCallBackFunction(eventParser, buttonEvents[tmpJ] );
+			} else {
+				callback = createCallBackFunction(buttonEvents[tmpJ], null);
+			}
 			toolTipText = getButtonToolTipText( textLabels[ tmpJ ] );
 
 			mainView.showBottomButton( tmpJ, textLabels[ tmpJ ], callback, toolTipText );
@@ -2811,14 +2815,14 @@ public function dynStats(... args):void
 		}
 	}
 	// Got this far, we have values to statsify
-	var newStr = applyOperator(player.str, argOps[0], argVals[0]);
-	var newTou = applyOperator(player.tou, argOps[1], argVals[1]);
-	var newSpe = applyOperator(player.spe, argOps[2], argVals[2]);
-	var newInte = applyOperator(player.inte, argOps[3], argVals[3]);
-	var newLib = applyOperator(player.lib, argOps[4], argVals[4]);
-	var newSens = applyOperator(player.sens, argOps[5], argVals[5]);
-	var newLust = applyOperator(player.lust, argOps[6], argVals[6]);
-	var newCor = applyOperator(player.cor, argOps[7], argVals[7]);
+	var newStr:Number = applyOperator(player.str, argOps[0], argVals[0]);
+	var newTou:Number = applyOperator(player.tou, argOps[1], argVals[1]);
+	var newSpe:Number = applyOperator(player.spe, argOps[2], argVals[2]);
+	var newInte:Number = applyOperator(player.inte, argOps[3], argVals[3]);
+	var newLib:Number = applyOperator(player.lib, argOps[4], argVals[4]);
+	var newSens:Number = applyOperator(player.sens, argOps[5], argVals[5]);
+	var newLust:Number = applyOperator(player.lust, argOps[6], argVals[6]);
+	var newCor:Number = applyOperator(player.cor, argOps[7], argVals[7]);
 	// Because lots of checks and mods are made in the stats(), calculate deltas and pass them. However, this means that the '=' operator could be resisted
 	// In future (as I believe) stats() should be replaced with dynStats(), and checks and mods should be made here
 	stats(newStr - player.str,

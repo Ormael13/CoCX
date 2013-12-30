@@ -1275,7 +1275,7 @@ public function beeEggsInCorruptJojo():void {
 	flags[kFLAGS.TIMES_EGGED_JOJO]++;
 	player.dumpEggs();
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 //Jojo Got Laid With Fertilized Bee Eggs (Zedit)
 public function jojoLaysEggs():void {

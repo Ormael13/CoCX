@@ -11859,7 +11859,7 @@ public function lustyMaidenPaizuri():void {
 	if(monster.short == "minotaur") minoCumAddiction(3);
 	if(monster.short == "Ceraph") flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00291]++;
 	//Usable on: Imps, Minotaurs, Satyrs, Incubus Mechanic, Anemones, Spider Guys, Akbal, Drider, Fetish Zealot, Sand Trap, Very Corrupt Jojo (Maybe slight decorruption to him), Ceraph, Red Kitsune if cock out.
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
 

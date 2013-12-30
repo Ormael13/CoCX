@@ -50,9 +50,9 @@ public function defeatSpiderBoy():void {
 	if(player.gender > 0 && player.lust >= 33) {
 		outputText("\n\nWhat do you do?", false);
 		//[CHOICES]
-		simpleChoices("Mount",mount,"FuckHisButt",buttfuck,"Frot",frot,"B.Titfuck",bikiniTits,"Leave",5007);
+		simpleChoices("Mount",mount,"FuckHisButt",buttfuck,"Frot",frot,"B.Titfuck",bikiniTits,"Leave",cleanupAfterCombat);
 	}
-	else eventParser(5007);
+	else cleanupAfterCombat();
 }
 //Loss selector
 public function loseToMaleSpiderMorph():void {
@@ -63,7 +63,7 @@ public function loseToMaleSpiderMorph():void {
 		spriteSelect(74);
 		outputText("The raven-haired spider-guy tears off your " + player.armorName + ", and disgusted by what he finds, he kicks you in the head, knocking you out.", true);
 		player.HP = 1;
-		eventParser(5007);
+		cleanupAfterCombat();
 		return;
 	}
 	var select:Number = choices[rand(choices.length)];
@@ -127,7 +127,7 @@ public function victoryButtFuck():void {
 	else outputText("rivers", false);
 	outputText(" of semen sliding out of the abused opening.  He rolls onto his side and pants, still leaking his thick goo from the limp, weak little cock between his legs.  You bend down and wipe your dick off on his face, letting him lick at it like a trained puppy.  Once cleaned, you get dressed and wander back to camp, leaving the spider to recover from the ordeal.", false);
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 //*Victory Frotting? (too biggo)
 public function victoryFrotTheSpoidah():void {
@@ -164,7 +164,7 @@ public function victoryFrotTheSpoidah():void {
 	
 	outputText("You stretch and sigh with contentment, looking over your cum-covered conquest while he tries to clean himself off.  Absolutely perfect.", false);
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //*Victory Cowgirl
@@ -213,7 +213,7 @@ public function victoryCowgirlRidingOnSpiderBoi():void {
 	//Pregnancy Goes Here
 	player.knockUp(13,400,151);
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 	
 //*Loss: Get butt-fucked
@@ -290,7 +290,7 @@ public function spiderBoyLossMaleButtfuck():void {
 	outputText("  Your eyelids flutter and droop, your tongue lolls out of your mouth, and you start drooling all over yourself.  Zombie-like, your body keeps shaking, locked in orgasm, even after the spider dumps you in the dirt and walks away.", false);
 	slimeFeed();
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //*Loss: Impregnation?
@@ -355,7 +355,7 @@ public function loseToSpiderBoyVagFucked():void {
 	slimeFeed();
 	stats(0,0,0,0,0,0,-100,0);
 	player.knockUp(13,400);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 public function spiderPregVagBirth():void {

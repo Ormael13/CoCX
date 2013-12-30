@@ -102,7 +102,7 @@ public function declineBimboSophie():void {
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] = 1;
 	outputText("", true);
 	outputText("You turn and flee the mountain, before she can compel you to take her to camp and fuck like bunnies.  Who knows when you'd have time to explore with a lust-crazed bird-woman like that around.  She'll find a mate soon enough, you're sure of that.\n\n", false);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 public function acceptBimboSophie():void {
@@ -136,7 +136,7 @@ public function acceptBimboSophie():void {
 		outputText("  Afterwards, she offers to lick Isabella's cunt.  Isabella answers sternly, \"<i>Nein!  But you can drink mein milk from time to time.</i>\"  The cow-girl is blushing hotly.  You've no doubt after a few nipple-licks she'll be spreading her thick thighs for the bimbo harpy.", false);
 	outputText("\n\n", false);
 	outputText("Well, you know where to find her anytime you want to fuck the motherly bimbo.\n<b>(Bimbo Sophie has been added to your slaves!)</b>", false);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 //Follower In Camp Text:
 public function sophieCampLines():void {

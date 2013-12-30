@@ -1089,7 +1089,7 @@ public function succubusVictoryRape():void {
 		}
 		outputText("\n\nThe succubus licks her fingers clean, looking totally recovered.  In the blink of an eye, she dashes out the door, disappearing.", false);
 		stats(0,0,0,0,0,0,-100,5);
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 	//FEMSAUCE
 	else {
@@ -1112,7 +1112,7 @@ public function dungeonSuccubusForceScissor():void {
 	outputText("It takes only a few seconds to get the succubus' juices really flowing, the sounds of your grinding hips dissolving into a cacophony of liquid squelches.  The gooey corrupt fem-cum tingles, spreading warmth through every patch of skin it touches.  Your locked hips writhe and twist with her's, eliciting pants and squeals from the both of you.  In no time flat, you find yourself cumming and feel your " + vaginaDescript(0) + "'s muscles clench hungrily with an unquenchable desire to be filled.  The succubus shivers in pleasure, probably feeding off your orgasm.  You back off, fingering your " + vaginaDescript(0) + " languidly and denying her a full meal.  Pouting, the succubus dips her fingers back in, determined to cum.", false);
 	outputText("\n\nYou turn away with a bemused sigh.  When you glance back, she has vanished!", false);
 	stats(0,0,0,0,0,0,-100,1);	
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 public function dungeonSuccubusForceFeed():void {
@@ -1161,7 +1161,7 @@ public function dungeonSuccubusForceFeed():void {
 	outputText(".", false);
 	outputText("\n\nYou turn away with a bemused sigh.  When you glance back, she has vanished!", false);
 	stats(0,0,0,0,0,0,-50,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 public function incubusLossRape():void {
 	slimeFeed();
@@ -1179,7 +1179,7 @@ public function incubusLossRape():void {
 		outputText("The demon tenses, pulling your head forwards and burying your nose against his belly.  The dick in your mouth slides down your throat, hanging just above your belly as it begins to fill your gut with bursts of demonic warmth.  Black cum erupts from your nipples as his orgasm overwhelms their meager storage capacity, soaking your tits in his corruptive essence as the pleasure finally breaks your mind.  Your eyes roll back into your head as you begin cumming... and cumming... and cumming. The orgasm drags on and on as more and more cum pours into your body.  Like a passenger in a car you see what's happening but have no control.  Your body is used and abused for hours before you finally drift off to sleep.", false);
 		stats(0,0,0,0,0,0,-100,20);
 		if(player.hasStatusAffect("DungeonShutDown") < 0) doNext(11025);
-		else eventParser(5007);
+		else cleanupAfterCombat();
 		return;
 	}
 	//Tentacle gangbang
@@ -1225,7 +1225,7 @@ public function incubusLossRape():void {
 			stats(0,0,0,0,0,0,-100,25);
 			buttChange(monster.cockArea(0), true);
 			if(player.hasStatusAffect("DungeonShutDown") < 0) doNext(11025);
-			else eventParser(5007);
+			else cleanupAfterCombat();
 			return;
 		}
 		//Male/Genderless
@@ -1256,7 +1256,7 @@ public function incubusLossRape():void {
 			buttChange(monster.cockArea(0), true);
 			stats(0,0,0,0,0,0,-100,25);
 			if(player.hasStatusAffect("DungeonShutDown") < 0) doNext(11025);
-			else eventParser(5007);
+			else cleanupAfterCombat();
 		}
 	}
 }
@@ -1270,7 +1270,7 @@ public function incubusVictoryRapeBackdoor():void {
 	buttChange(monster.cockArea(0), true);
 	slimeFeed();
 	stats(0,0,0,0,0,0,-100,2);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 public function incubusVictoryRapeSex():void {
 	outputText("", true);
@@ -1307,7 +1307,7 @@ public function incubusVictoryRapeSex():void {
 		if(player.cumQ() >= 400) outputText("A massive cock-distending bulge of cum works through your shaft, splashing into the demon's rectum in an explosive burst of pleasure. Unfortunately for your victim, it is only the first of many such cum-blasts. In no time flat, jism is spurting from his overfilled rectum while his belly looks a few months pregnant. You feel weak from discharging so much fluid, and y", false);
 		outputText("ou fall back, the fluid of your orgasm dripping from your " + cockDescript(0) + " and the gaping asshole of your latest conquest.\n\nYou turn to gather your " + player.armorName + ", and when you look back the demon is gone, leaving only a small puddle of male fluids in his wake.", false);
 		stats(0,0,0,0,0,0,-100,0);
-		eventParser(5007);
+		cleanupAfterCombat();
 		return;
 	}
 	//(VAGINAL - Requires Vagina)
@@ -1335,7 +1335,7 @@ public function incubusVictoryRapeSex():void {
 		outputText("Unable to contain your body's desires due to either the demon's aura or his wonderful penis, you slam your " + vaginaDescript(0) + " onto his member with impunity, twitching and squeezing involuntarily.  His tainted pre-cum begins seeping deep inside your uterus and you cry out with orgasmic intensity.  Your entire body clenches down, even the hand clamped on the incubus' windpipe. You feel his demon-cock swell up inside you in response to his stress, stretching your cunt taut.  His skin darkens from the lack of oxygen as he begins cumming HARD inside you.  Your womb immediately fills with his demon-seed, leaving ribbons of spunk to drip from your tightly-stretched cunt.  You sigh in delight as your muscles slowly stop quivering.  With a pleasured gasp, you rise off the distended demon-prick, and realize that you've choked your foe into unconsciousness. Still, you did let him cum, so maybe he won't mind too much when he wakes.  Feeling sensual and sated, you redress and prepare to explore the rest of the factory. ", false);
 		cuntChange(player.vaginalCapacity()*.8, true);
 		stats(0,0,0,0,0,0,-100,2);
-		eventParser(5007);
+		cleanupAfterCombat();
 		return;
 	}
 }
@@ -1353,7 +1353,7 @@ public function incubusVictoryService():void {
 	outputText("You feel his balls begin to grow. Perhaps he can sense your thirst for cum, or maybe he just wants to enjoy it - but you are sure he is going to finish spectacularly. They stop swelling just as they reach the size of grapefruits, tingling and pulsing spectacularly in your hand.  You stroke him faster, letting you guzzle his pre as it pours into your greedy mouth.  A coo of delight escapes from your tightly-stretched lips as you savor his tasty fluids.\n\n", false);
 	outputText("The incubus' hips begin humping your face, stuffing a few more inches of his length into your throat and forcing you to struggle against gagging.  His cock swells wider and nearly unhinge your jaw as you feel a gooey warmth wash your throat, flooding your gullet with demon-seed.  Still impaled on his nubby member, your body is rocked back and forth by the strength of his orgasm, the motions making your belly slosh with an increasingly large load.  You moan at the warmth of his corruption seeping through your body as his orgasm diminishes. Yanking back hard, you let his dick slip free of your mouth as the last spurt of cum blasts your face.\n\n", false); 
 	outputText("You push the exhausted demon down and idly collect the cum from your face with your fingers, slowly licking each clean.  Feeling rather sensual and sated, you decide to resume exploring the factory.\n\nAfter redressing you turn about, and see the demon is gone, leaving only a small pool of cum in his wake.", false);
-	eventParser(5007);
+	cleanupAfterCombat();
 	return;
 }
 public function omnibusVictoryEvent():void {

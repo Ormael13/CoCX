@@ -21,6 +21,16 @@ package classes.Monsters
 			game.fightValaVictory();
 		}
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if(pcCameWorms){
+				outputText("\n\nYour foe doesn't seem put off enough to leave...");
+				game.doNext(game.endLustLoss);
+			} else {
+				game.loseToVala();
+			}
+		}
+
 		public function Vala(mainClassPtr:*)
 		{
 			super(mainClassPtr);

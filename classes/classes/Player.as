@@ -92,7 +92,7 @@ package classes
 				//Prevent negatives
 				if (HP<=0){
 					HP = 0;
-					if (game.gameState == 1 || game.gameState == 2) game.doNext(5010);
+					if (game.gameState == 1 || game.gameState == 2) game.doNext(game.endHpLoss);
 				}
 			}
 			return returnDamage;
@@ -933,7 +933,7 @@ package classes
 			//(HUGE – 2.4 - Size 12 + 5 Multi + 4 tits)
 			var total:Number = 0;
 			if (hasStatusAffect("Lactation Endurance") < 0)
-				createStatusAffect("Lactation Endurance", 1, 0, 0, 0);
+				createStatusAffect("Lactation EnNumbere", 1, 0, 0, 0);
 			total = biggestTitSize() * 10 * averageLactation() * statusAffectv1("Lactation Endurance") * totalBreasts();
 			if (statusAffectv1("Lactation Reduction") >= 48)
 				total = total * 1.5;

@@ -22,6 +22,16 @@ package classes.Monsters
 			game.defeatDriderIntro();
 		}
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if (pcCameWorms){
+				outputText("\n\nThe drider licks her lips in anticipation...");
+				game.doNext(game.endLustLoss);
+			} else {
+				game.loseToDrider();
+			}
+		}
+
 		public function CorruptedDrider(mainClassPtr:*)
 		{
 			super(mainClassPtr);

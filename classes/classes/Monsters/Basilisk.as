@@ -20,6 +20,16 @@ package classes.Monsters
 			game.defeatBasilisk();
 		}
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if (pcCameWorms){
+				outputText("\n\nThe basilisk smirks, but waits for you to finish...");
+				game.doNext(game.endLustLoss);
+			} else {
+				game.loseToBasilisk();
+			}
+		}
+
 		public function Basilisk(mainClassPtr:*)
 		{
 			super(mainClassPtr);

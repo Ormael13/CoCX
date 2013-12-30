@@ -20,6 +20,16 @@ package classes.Monsters
 			game.defeetVapulasHorde();
 		}
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if (pcCameWorms){
+				outputText("\n\nThe demons smile to one at another as they watch your display, then close in...");
+				game.doNext(game.endLustLoss);
+			} else {
+				game.loseOrSubmitToVapula();
+			}
+		}
+
 		public function LustyDemons(mainClassPtr:*)
 		{
 			super(mainClassPtr);

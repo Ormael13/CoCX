@@ -19,6 +19,11 @@ package classes.Monsters
 			game.urtaBeatsUpCowcubi();
 		}
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			game.urtaLosesToCowCubi();
+		}
+
 		public function MilkySuccubus(mainClassPtr:*)
 		{
 			super(mainClassPtr);

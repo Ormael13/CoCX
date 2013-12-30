@@ -27,6 +27,12 @@ package classes.Monsters
 			game.addButton(4,"Leave",game.beatMinoLordOnToSuccubi);
 		}
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if (hpVictory) game.urtaLosesToMinotaurRoughVersion();
+			else game.urtaSubmitsToMinotaurBadEnd();
+		}
+
 		public function MinotaurLord(mainClassPtr:*)
 		{
 			super(mainClassPtr);

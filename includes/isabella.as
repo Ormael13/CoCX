@@ -826,7 +826,7 @@ public function IsabellaWinsAndSpanks():void {
 			return;
 		}
 	}
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[Isabella rapes you with her ass]
@@ -932,7 +932,7 @@ public function isabellaRapesYouWithHerAss():void {
 	}
 	if(!isabellaFollower()) isabellaAffection(4);
 	stats(0,0,0,0,0,2,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[OPTIONAL GET RAPED AFTER SPANKING/FEEDING]
@@ -968,7 +968,7 @@ public function IsabellaPostSpankFeedSex():void {
 	outputText("Once you've emptied the last of your submission into Isabella, she rolls off of you, panting heavily.  \"<i>Das vas a very good boy!  I hope I taught you some manners.  Maybe come visit me some time, but be polite for me or I'll have to give you another spanking!</i>\"  She climbs up on woozy legs and walks off, leaving you to doze in the defiled well of earth like a discarded tissue.\n\n", false);
 	if(!isabellaFollower()) isabellaAffection(3);
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //LOSS
@@ -978,7 +978,7 @@ public function isabellaDefeats():void {
 		else IsabellaWinsAndSpanks();
 	}
 	else {
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 }
 
@@ -992,7 +992,7 @@ public function defeatIsabella():void {
 		outputText(" cow-girl a push, and she immediately slumps down, defeated.  Since this was just a light-hearted sparring match, you help her up and back to camp, where she can ", false);
 		if(monster.HP < 1) outputText("recuperate.", false);
 		else outputText("take care of her needs (or be taken care of).", false);
-		eventParser(5007);
+		cleanupAfterCombat();
 		return;
 	}
 	outputText("You push the ", false);
@@ -1028,7 +1028,7 @@ public function defeatIsabella():void {
 		if(player.cockArea(player.biggestCockIndex()) > 70 && player.lust >= 33) bigTitFuck = 2965;
 		if(player.cocks[player.shortestCockIndex()].cockLength < 9 && player.lust >= 33) smallTitFuck = 2967;
 	}
-	choices("Lactation69",lactation,"Buttsex",buttsex,"Sixty-Nine",sixtyNine,"Vaginal",vaginalSex,"Big Titfuck", bigTitFuck,"Small Titfuck", smallTitFuck, "", 0, "", 0, "", 0, "Leave",5007);
+	choices("Lactation69",lactation,"Buttsex",buttsex,"Sixty-Nine",sixtyNine,"Vaginal",vaginalSex,"Big Titfuck", bigTitFuck,"Small Titfuck", smallTitFuck, "", 0, "", 0, "", 0, "Leave",cleanupAfterCombat);
 }
 //[LACTATION 69]
 public function victoryLactation69():void {
@@ -1107,7 +1107,7 @@ public function victoryLactation69():void {
 	//Reset anger
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] = 0;
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 //[VICTORY BUTTSEX]
 public function PCVictoryOnIsabellaButtsex():void {
@@ -1197,7 +1197,7 @@ public function PCVictoryOnIsabellaButtsex():void {
 	outputText("You get dressed and set off, feeling quite proud of how you handled the haughty foreign bovine.", false);
 	if(!isabellaFollower()) isabellaAffection(3);
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[Victory 69]
@@ -1313,7 +1313,7 @@ public function victoryAgainstIzzzzzySixtyNine():void {
 	if(!isabellaFollower()) isabellaAffection(9);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] = 0;
 	slimeFeed();
-	if(gameState == 1 || gameState == 2) eventParser(5007);
+	if(gameState == 1 || gameState == 2) cleanupAfterCombat();
 	else doNext(13);
 }
 
@@ -1387,7 +1387,7 @@ public function tooBigVictoryTittyFuckingFuntimesWithMilk():void {
 	if(!isabellaFollower()) isabellaAffection(3);
 	outputText("Shrugging, you wipe " + sMultiCockDesc() + " off on her lips and get dressed.  This cow is one marvelous cum-dump.", false);
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[VAGINAL PROD N' POKE]
@@ -1449,7 +1449,7 @@ public function vaginalProdNPokeIsabella():void {
 	//Reset anger
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] = 0;
 	if(!isabellaFollower()) isabellaAffection(7);
-	eventParser(5007);
+	cleanupAfterCombat();
 	stats(0,0,0,0,0,0,-100,0);
 }
 
@@ -1495,7 +1495,7 @@ public function tinyVictoryTittyFuckingFuntimesWithMilk():void {
 	//Reset anger
 	if(!isabellaFollower()) isabellaAffection(8);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] = 0;
-	eventParser(5007);
+	cleanupAfterCombat();
 	stats(0,0,0,0,0,0,-100,0);
 }
 

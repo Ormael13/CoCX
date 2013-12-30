@@ -340,7 +340,7 @@ public function hyenaSpearLossAnal():void {
 	if(player.lowerBody == LOWER_BODY_TYPE_GOO) outputText("  Even as your eyes slide closed, you see the hyena kicking open the circle of dust.", false);
 	outputText("  The last thing you hear before blackness overtakes you is the barking laugh of the hyena as she leaves her newest conquest to sleep in the fields of grass.", false);
 	stats(0,0,0,0,0,2,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 public function hyenaVictory():void {
@@ -353,9 +353,9 @@ public function hyenaVictory():void {
 	if(player.hasCock()) penor = 5148;
 	if(player.lust >= 33 && player.gender > 0) {
 		outputText("\n\nUsing the hyena to get off would be easy.  What do you do?", false);
-		simpleChoices("Get BJ",penor,"Get Licked",vagoo,"",0,"",0,"Leave",5007);
+		simpleChoices("Get BJ",penor,"Get Licked",vagoo,"",0,"",0,"Leave",cleanupAfterCombat);
 	}
-	else doNext(5007);
+	else doNext(cleanupAfterCombat);
 }
 //<Hyena Defeat - Fellatio>
 public function hyenaVictoryRapeFellatio():void {
@@ -423,7 +423,7 @@ public function hyenaVictoryRapeFellatio():void {
 	}
 	outputText("The world goes gray and fuzzy as your lose yourself in the afterglow of the powerful orgasm.  When you last sit up, dizzy, you find that the hyena has disappeared.  You find your " + player.armorName + " neatly folded next to you, but absolutely coated in the juices of the departed amazon.  Next to this musky pile is a small bag containing her gift to you.", false);
 	stats(0,0,0,0,0,0,-100,0);	
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //<Hyena Defeat – Cunnilingus>
@@ -454,5 +454,5 @@ public function victoryRapeHyenaCunnilingus():void {
 
 	outputText("When you awake some time later, still heady with pleasure, you find your " + player.armorName + " piled neatly next to you, along with what appears to be a thank you gift from the now-absent gnoll.  The memory of the amazon's incredible strength and lithe form brings a smile to your lips as you prepare to leave.", false);
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }

@@ -21,6 +21,12 @@ package classes.Monsters
 			game.beatUpYourDaughter();
 		}
 
+
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			game.loseSparringToDaughter();
+		}
+
 		public function Helspawn(mainClassPtr:*)
 		{
 			super(mainClassPtr);

@@ -260,7 +260,7 @@ public function sandWitchGetsGhostly():void {
 	}
 	shouldraSleeping(10,true);
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Follower Shouldra - Masturbation Scenes

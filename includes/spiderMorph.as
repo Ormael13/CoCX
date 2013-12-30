@@ -229,7 +229,7 @@ public function runFromFSpiderMorph():void {
 	//The other 50% will start combat and then immediately attempt to run.
 	else {
 		startCombat(new FemaleSpiderMorph(this));
-		eventParser(5003);
+		eventParser(runAway);
 	}
 }
 //*Try to Talk
@@ -406,7 +406,7 @@ public function defeatFemale():void {
 	//[end]
 	stats(0,0,0,0,2,1,-100,0);
 	if(!inCombat()) doNext(13);
-	else eventParser(5007);
+	else cleanupAfterCombat();
 }
 //*Defeat Male
 public function spiderMorphFemaleRidesACawk():void {
@@ -507,7 +507,7 @@ public function spiderMorphFemaleRidesACawk():void {
 	
 	stats(0,0,0,0,2,1,-100,0);
 	if(!inCombat()) doNext(13);
-	else eventParser(5007);
+	else cleanupAfterCombat();
 }
 
 //*Defeat Male - Too Big
@@ -580,7 +580,7 @@ public function femaleSpiderMorphTooBigWebRape():void {
 	outputText("  You sigh and fall into a fitful slumber, barely registering the spider-girl cutting your restraints.", false);
 	stats(0,0,0,0,2,1,-100,0);
 	if(!inCombat()) doNext(13);
-	else eventParser(5007);
+	else cleanupAfterCombat();
 }
 	
 public function loseToFemaleSpiderMorph():void {
@@ -591,7 +591,7 @@ public function loseToFemaleSpiderMorph():void {
 	else if(player.hasVagina()) defeatFemale();
 	else {
 		outputText("The spider-girl knocks you out, muttering something about 'genderless freaks' the entire time.", true);
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 }	
 
@@ -614,9 +614,9 @@ public function defeatASpiderBitch():void {
 			if(player.cockThatFits(monster.analCapacity()) != -1) analFuck = 2991;
 			else outputText("  <b>Her ass is too tight for you to fit inside.</b>", false);
 		}
-		simpleChoices("Fuck Ass",analFuck,"Fuck Pussy",pussyFuck,"Scissor",scissor,"",0,"Leave",5007);
+		simpleChoices("Fuck Ass",analFuck,"Fuck Pussy",pussyFuck,"Scissor",scissor,"",0,"Leave",cleanupAfterCombat);
 	}
-	else eventParser(5007);
+	else cleanupAfterCombat();
 }
 	
 //*Victory Female
@@ -674,7 +674,7 @@ public function fSpiderMorphRape():void {
 	else outputText("You leave her there with her hands and feet completely restrained.  Sucks to be her.", false);
 	stats(0,0,0,0,0,0,-100,0);
 	if(!inCombat()) doNext(13);
-	else eventParser(5007);
+	else cleanupAfterCombat();
 }
 //*Victory Male
 //Summary:  Bind her hands with vines and fuck the immobilized spider-girl. BORING
@@ -738,7 +738,7 @@ public function fSpiderMorphRapeDude():void {
 	stats(0,0,0,0,0,0,-100,0);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00271] = 200;
 	if(!inCombat()) doNext(13);
-	else eventParser(5007);
+	else cleanupAfterCombat();
 }
 
 //*Victory Anal:
@@ -805,7 +805,7 @@ public function evilSpiderGirlVictoryAnal():void {
 	if(y != 1) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00271] = 200;
 	stats(0,0,0,0,0,0,-100,0);
 	if(!inCombat()) doNext(13);
-	else eventParser(5007);
+	else cleanupAfterCombat();
 }
 //*Egg Sack Find
 public function findASpiderMorphEggSack():void {

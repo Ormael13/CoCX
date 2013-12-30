@@ -83,7 +83,7 @@ public function minoVictoryRapeChoices():void {
 	else {
 		if(monster.lust > 99) outputText("You smile in satisfaction as the " + monster.short + " drops down on all fours and begins masturbating feverishly.", true);
 		else outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.", true);
-		eventParser(5007);
+		cleanupAfterCombat();
 		return;
 	}
 	//No rapinz if not horney!
@@ -95,7 +95,7 @@ public function minoVictoryRapeChoices():void {
 		urethralPen = 0;
 		bj = 0;
 	}
-	choices("Use Cock",dickRape,"Use Vagina",cuntRape,"Use Both",hermRape,"TentacleDick",tentaRape,"UrethraFuck",urethralPen,"Get Filled",filled,tempText,temp,"MakeHimSuck",bj,feedposit,temp2,"Leave",5007);
+	choices("Use Cock",dickRape,"Use Vagina",cuntRape,"Use Both",hermRape,"TentacleDick",tentaRape,"UrethraFuck",urethralPen,"Get Filled",filled,tempText,temp,"MakeHimSuck",bj,feedposit,temp2,"Leave",cleanupAfterCombat);
 
 	if(x < 0 && player.hasCock()) outputText("\nSadly, you're too well endowed to penetrate the minotaur.", false);
 	if(player.gender == 3 && player.isTaur()) outputText("\nIf you had a different body type you might be able to penetrate him while taking him, but as a centaur that's not an option.", false);
@@ -176,7 +176,7 @@ public function rapeMinotaurTentacles():void {
 	//Cum
 	outputText("Your tentacles throb and pulse, quickening in pace as you can feel the cum swelling in your prostate. They wave madly, and then, just as their motion makes you dizzy, you feel them stiffen suddenly, and start spewing their load all in and across the minotaur. You gasp and pause, collapsing on the strong back of the minotaur, basking in the afterglow.", false);
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 public function rapeMinotaurTentacle():void {
@@ -246,7 +246,7 @@ public function rapeMinotaurTentacle():void {
 		if(player.cumQ() >= 250 && player.cumQ() < 500) outputText("Eventually, the moment is right... you position yourself accordingly to do what you have in mind. Your needs are both at their peak, and release will be soon! Once you're properly set up behind him, you shove his head forward, making him take both your and his own dick into his mouth. His tongue tries to shove you out, slipping in between his and your own dick.  It pushes your over the edge, and you release his balls, causing both of your dicks to overflow his mouth with cum, spraying out his nose, forcing him to swallow from sheer volume.", false);
 		if(player.cumQ() >= 500) outputText("Eventually, the moment is right... you position yourself accordingly to do what you have in mind. Your needs are both at their peak, and release will be soon! Once you're properly set up behind him, you shove his head forward, making him take both your, and his own dick into his mouth. His tongue tries to shove you out, slipping in between his and your own dick.  It pushes your over the edge, and you release his balls, allowing him to cum. However, your own cum dwarfs his pathetic volume... forcing him to swallow load after load of your hot sticky jizz. Even so, the volume exceeds his ability to down it, and cum sprays out of his mouth, an arc shooting out of his nose every now and again further commenting on the capacity of your massive ejaculation.", false);
 	}
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 public function AddictNagaOnMinotaur():void {
@@ -268,7 +268,7 @@ public function AddictNagaOnMinotaur():void {
 	//(satisfy or progress mino addiction)
 	minoCumAddiction(10);
 	monster.short = "tit-fucked Minotaur";
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 public function minoUrethralPen():void {
@@ -325,7 +325,7 @@ public function minoUrethralPen():void {
 		outputText("You know that he won't be able to leave or put up much of a struggle until he's managed to cum, but with his balls pinning his cock down, that could be a while. Meanwhile, his raised ass and stretched urethra invite everyone around to take a turn.", false);
 	}
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 	return;
 }
 
@@ -395,7 +395,7 @@ public function bumRapeaMinotaur():void {
 		stats(0,0,0,0,0,0,-100,0);
 		stats(0,0,0,0,0,0,15+player.lib/7,0);
 	}
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 public function girlRapeAMinotaur():void {
 	spriteSelect(44);
@@ -437,7 +437,7 @@ public function girlRapeAMinotaur():void {
 	stats(0,0,-.5,-.5,0,1.5,-100,1);
 	//Preggers chance!
 	player.knockUp(2,432);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 public function minotaurGetsRapedByHerms():void {
 	spriteSelect(44);
@@ -455,7 +455,7 @@ public function minotaurGetsRapedByHerms():void {
 	stats(0,0,-.5,-.5,0,1.5,-100,1);
 	//Preggers chance!
 	player.knockUp(2,432);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 public function minoPheromones():void {
@@ -482,7 +482,7 @@ public function minoPheromones():void {
 		stats(0,0,0,0,0,0,5+rand(5),0);
 	}
 	//YOU LOSE!
-	if(player.lust >= 100) doNext(5011);
+	if(player.lust >= 100) doNext(endLustLoss);
 	else doNext(5000);
 }
 public function getRapedByMinotaur(autoRape:Boolean = false):void {
@@ -601,7 +601,7 @@ public function getRapedByMinotaur(autoRape:Boolean = false):void {
 	outputText("The bull-man relaxes for a moment, then shoves you off of him and to the cold ground. You pass out as a strange sense of euphoria washes over you while copious quantities of monstrous cum escape your distended ", false);
 	if(player.hasVagina()) outputText("pussy.", false);
 	else outputText("asshole.", false);
-	if(gameState != 0) eventParser(5007);
+	if(gameState != 0) cleanupAfterCombat();
 	else doNext(15);
 }
 
@@ -637,7 +637,7 @@ public function getOralRapedByMinotaur():void {
 	outputText("The minotaur grunts a few last times.  Finished with you, it lifts your " + player.leg() + " and pulls you off its " + eCockDescript(0) + ". The huge cock-head slides through your throat, gets jammed behind your teeth, and finally pulls free with a loud sucking sound. Cum pours from your throat and over your face, and the minotaur sprays a few final loads across your bloated stomach. The minotaur drops you in the cum-pool and walks away, leaving you to cradle your distended belly and swoon as his drug-like sperm addles your mind.  You pass out with a blissful smile.", false);
 	stats(0,0,0,0,0,1,-100,0);
 	minoCumAddiction(10);
-	if(gameState != 0) eventParser(5007);
+	if(gameState != 0) cleanupAfterCombat();
 	else doNext(15);
 }
 
@@ -674,7 +674,7 @@ public function minoGetsTitFucked():void {
 	minoCumAddiction(10);
 	monster.short = "tit-fucked Minotaur";
 	stats(0,0,0,0,0,.5,-100,.7);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //(Direct Injection) – GIGITY!
@@ -718,7 +718,7 @@ public function takeMinoCumDirectly():void {
 	if(player.sens < 20) stats(0,0,0,0,0,1,0,0);
 	//+15 addiction
 	minoCumAddiction(15);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 public function minoCumAddiction(raw:Number = 10):void {
@@ -854,7 +854,7 @@ public function minoAddictionFuck():void {
 	monster.hoursSinceCum = player.ballSize * 10;
 	monster.ass.analLooseness = 4;
 	monster.ass.analWetness = 1;
-	doNext(5011);
+	doNext(endLustLoss);
 }
 
 
@@ -933,7 +933,7 @@ public function minotaurDrinksMilkNewsAtEleven():void {
 	//You've now been milked, reset the timer for that
 	player.addStatusValue("Feeder",1,1);
 	player.changeStatusValue("Feeder",2,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 
@@ -966,7 +966,7 @@ public function minotaurBlowjob():void {
 	
 	outputText("Pulling yourself free from the thing's mouth, you let the abused creature fall flat onto its chest and then gather your armor to leave.  Once, you turn back, only to catch sight of the minotaur lost with himself, desperatly trying to fuck the ground beneath him and mooing in overstimulated agony from the experience.", false); 
 	stats(0,0,0,0,0,0,-100,0);	
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 
@@ -1015,7 +1015,7 @@ public function layEggsInAMinotaurSpiderLike():void {
 	outputText("\n\n\"<i>We'll have to do this again.  In fact, every time you cross my path, we will do this again, my little cow-poke.</i>\"");
 	player.dumpEggs();
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);	
+	cleanupAfterCombat();
 	//satisfy mino cum addiction if addicted
 }
 
@@ -1056,7 +1056,7 @@ public function layBeeEggsInCowbutt():void {
 	//i like this writer, can we keep him?
 	player.dumpEggs();
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //BY BUTTS MCGEE
@@ -1110,5 +1110,5 @@ public function getMinoHawtDawged():void {
 	stats(0,0,0,0,0,0,15+rand(player.lib/2),0);
 	slimeFeed();
 	minoCumAddiction(5);
-	eventParser(5007);
+	cleanupAfterCombat();
 }

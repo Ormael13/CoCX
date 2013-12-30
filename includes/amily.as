@@ -5995,7 +5995,7 @@ public function rapeCorruptAmily1Male():void {
 	else outputText(cockDescript(x) + " throb", false);
 	outputText("; the very idea of a mousy slut eager for cum distils into one massive load of cum, and you dump it all in her mouth.\n\nYou sigh, sated for now and leave her to clean herself up.", false);
 	stats(0,0,0,0,-2,0,-100,5);
-	if(gameState == 1 || gameState == 2) eventParser(5007);
+	if(gameState == 1 || gameState == 2) cleanupAfterCombat();
 	else doNext(13);
 }
 //[Female]
@@ -6032,7 +6032,7 @@ public function rapeCorruptAmily1Female():void {
 
 	outputText("Finally done, you let go of her and get up; she proceeds to slump down and give a small burp of satisfaction, then drift off into sleep. You untie her and proceed to get dressed; you give her a light pat on the thigh and return to your camp. You'll have to do this again sometime later...", false);
 	stats(0,0,0,0,-2,0,-100,5);
-	if(gameState == 1 || gameState == 2) eventParser(5007);
+	if(gameState == 1 || gameState == 2) cleanupAfterCombat();
 	else doNext(13);
 }
 

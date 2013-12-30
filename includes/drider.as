@@ -204,9 +204,9 @@ public function defeatDriderIntro():void {
 	//(Qualifies for any rape?:)
 	if(player.lust >= 33) {
 		outputText("\n\nWhat do you do?", false);
-		choices("Butt Fuck",buttFuckBUTTFUCKBUTTTFUCKBUTTFUCK,"Fuck Pussy",vagFuck,"Bondage Fuck",careful,"FuckSpinner",fuckSpinner,"Ride Cock",rideCock,"Ride Ovi",rideOvi,"RideOviAnal",rideOviAss,"",0,"B.Titfuck",bikiniTits,"Leave",5007);
+		choices("Butt Fuck",buttFuckBUTTFUCKBUTTTFUCKBUTTFUCK,"Fuck Pussy",vagFuck,"Bondage Fuck",careful,"FuckSpinner",fuckSpinner,"Ride Cock",rideCock,"Ride Ovi",rideOvi,"RideOviAnal",rideOviAss,"",0,"B.Titfuck",bikiniTits,"Leave",cleanupAfterCombat);
 	}
-	else eventParser(5007);
+	else cleanupAfterCombat();
 }
 //Lose to drider
 public function loseToDrider():void {
@@ -387,7 +387,7 @@ public function winDriderPCDickInSpiderCunt2():void {
 	monster.HP = 2;
 	player.lust = 100;
 	flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
-	eventParser(5007);
+	cleanupAfterCombat();
 	stats(0,0,0,0,1,1,-100,0);
 }
 
@@ -423,7 +423,7 @@ public function winVSDriderTakeItsCockInCunt():void {
 	player.knockUp(15,400,151);
 	slimeFeed();
 	stats(0,0,0,0,0,0,-100,.5);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 //*Victory Rape: Ride Ovi Vaginal (done)
 public function victoryVSDriderRideOviVaginal():void {
@@ -491,7 +491,7 @@ public function victoryVSDriderRideOviVaginal():void {
 	player.knockUp(15,200,10);
 	slimeFeed();
 	stats(0,0,0,0,0,0,-100,.5);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 
@@ -597,7 +597,7 @@ public function victoryVSDriderRideOviAnal():void {
 	}
 	slimeFeed();
 	stats(0,0,0,0,0,0,-100,.5);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 //*Victory Spinneret Penetration - written by Sham (done)
 //(please view the spinneret as a spider-horsecock because for all intents and purposes that is really what it is) - shambadibs (1.5-inch width max because i'm racist against buur-bous american penis) (also probably a corruption minimum this is a pretty dick move) (I GET IT)
@@ -647,7 +647,7 @@ public function victoryVSDriderStickDickInSpinneret():void {
 	outputText("\n\n", false);
 	outputText("Your lust sated, you disengage from her with a little pop, leaving her to lick her lips happily and groan unintelligible babble.  You wipe your " + cockDescript(x) + " off on her hair to clean it off a bit, then redress and head out.  With a glance at the snoozing drider over your shoulder, you head out of the smelly swamp and start back towards camp.", false);
 	stats(0,0,0,0,0,0,-100,.5);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //*Loss Ride Ovi Anal unsexed - gats (done)
@@ -708,7 +708,7 @@ public function loseVSDriderGetAnalledOvi():void {
 	//(slimefeed, set lust to 100?)
 	slimeFeed();
 	stats(0,0,0,0,0,1,800,1);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 //*Loss Vaginal Impregnation and forced BJ - Symphonie (done)
 public function loseVSDriderAndVaginallyImpreggleOvi():void {
@@ -800,7 +800,7 @@ public function loseVSDriderAndVaginallyImpreggleOvi():void {
 	player.knockUp(15,200,10);
 	stats(0,0,0,0,1,0,100,1);
 	slimeFeed();
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //*Loss Ride & Impregnate Butt (done)
@@ -856,7 +856,7 @@ public function loseVSDriderAndGetFuckedANDAnalImpreggegity():void {
 		trace("PC BUTT IMPREGNATED BY DRIDER");
 	}
 	stats(0,0,0,0,1,1,-100,.5);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //*Asspreg egg 'birth': (done)
@@ -955,7 +955,7 @@ public function buttFuckADriderOhBaby():void {
 	outputText("Finally done, you pull out of the drider, collapsing on her spider-back with a contented sigh.  Completely insensate after the anal ravaging you just gave her, the drider poses no threat as you leisurely gather " + sMultiCockDesc() + " back into your " + player.armorName + " and lower yourself off her cum-soaked abdomen.  You give her a final, playful ass slap as you dismount before heading back to camp.", false);
 	if(silly()) outputText("\n\n(Driders butt-sex is awesome.)", false);
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 
@@ -1110,5 +1110,5 @@ public function driderTiedUpPartFour():void {
 	}
 	
 	//Plus gems and such
-	eventParser(5007);
+	cleanupAfterCombat();
 }

@@ -4,17 +4,105 @@ import classes.Monsters.*;
 import coc.view.MainView;
 
 public function inCombat():Boolean {
-	if(gameState == 1 || gameState == 2) return true;
-	return false;
+	return gameState == 1 || gameState == 2;
 }
 
+public function endHpVictory():void
+{
+	monster.defeated(true);
+}
+public function endLustVictory():void
+{
+	monster.defeated(false);
+}
+public function endHpLoss():void
+{
+	monster.won(true,false);
+}
+public function endLustLoss():void
+{
+	if (player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
+		flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
+		infestOrgasm();
+		monster.won(false,true);
+	} else {
+		monster.won(false,false);
+	}
+}
+//combat is over. Clear shit out and go to main
+public function cleanupAfterCombat():void {
+	if(gameState == 1 || gameState == 2) {
+		//clear status
+		clearStatuses(false);
+		//Clear itemswapping in case it hung somehow
+		itemSwapping = false;
+		//Player won
+		if(monster.HP < 1 || monster.lust > 99) {
+			awardPlayer();
+		}
+		//Player lost
+		else {
+			if(monster.statusAffectv1("sparring") == 2) {
+				outputText("The cow-girl has defeated you in a practice fight!", true);
+				outputText("\n\nYou have to lean on Isabella's shoulder while the two of your hike back to camp.  She clearly won.", false);
+				gameState = 0;
+				player.HP = 1;
+				statScreenRefresh();
+				doNext(13);
+				return;
+			}
+			//Next button is handled within the minerva loss function
+			if(monster.hasStatusAffect("Peach Loot Loss") >= 0) {
+				gameState = 0;
+				player.HP = 1;
+				statScreenRefresh();
+				return;
+			}
+			if(monster.short == "Ember") {
+				gameState = 0;
+				player.HP = 1;
+				statScreenRefresh();
+				doNext(13);
+				return;
+			}
+			temp = rand(10) + 1 + Math.round(monster.level/2);
+			if(!inDungeon) {
+				if(player.gems == 1) outputText("\n\nYou'll probably come to your senses in eight hours or so, missing your only gem.", false);
+				if(player.gems > 1) outputText("\n\nYou'll probably come to your senses in eight hours or so, missing " + temp + " gems.", false);
+			}
+			else {
+				temp += 20 + monster.level*2;
+				outputText("\n\nSomehow you came out of that alive, but after checking your gem pouch, you realize you're missing " + num2Text(temp) + ".");
+			}
+			if(temp > player.gems) temp = player.gems;
+			player.gems -= temp;
+			gameState = 0;
+			//BUNUS XPZ
+			if(flags[kFLAGS.COMBAT_BONUS_XP_VALUE] > 0) {
+				player.XP += flags[kFLAGS.COMBAT_BONUS_XP_VALUE];
+				outputText("  Somehow you managed to gain " + flags[kFLAGS.COMBAT_BONUS_XP_VALUE] + " XP from the situation.", false);
+				flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = 0;
+			}
+			//Bonus lewts
+			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] != "") {
+				outputText("  Somehow you came away from the encounter with " + itemLongName(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234]) + ".\n\n", false);
+				shortName = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234];
+				menuLoc = 18;
+				takeItem();
+			}
+			else doNext(16);
+		}
+	}
+	//Not actually in combat
+	else doNext(13);
+}
 //5000 6999
 public function doCombat(eventNum:Number):void
 {
-	var temp2:Number = 0;
-	var temp3:Number = 0;
-	var temp4:Number = 0;
-	var temp5:Number = 0;
+	var temp2:* = 0;
+	var temp3:* = 0;
+	var temp4:* = 0;
+	var temp5:* = 0;
 	var tempText:String = "";
 	var tempText2:String = "";
 	var tempText3:String = "";
@@ -40,7 +128,7 @@ public function doCombat(eventNum:Number):void
 		statScreenRefresh();
 		menuLoc = 0;
 		if(combatRoundOver()) return;
-		temp2 = 5002;
+		temp2 = magicMenu;
 		if(player.hasStatusAffect("Throat Punch") >= 0) temp2 = 0;
 		if(player.hasStatusAffect("Web-Silence") >= 0) temp2 = 0;
 		if(player.hasStatusAffect("GooArmorSilence") >= 0) temp2 = 0;
@@ -88,9 +176,8 @@ public function doCombat(eventNum:Number):void
 			}
 			//REGULAR MENU
 			else {
-				//Tease text changes based on perks!
-				tempText="Tease";
-				choices("Attack", attacks, tempText, 5005, "Spells", temp2, "Items", 1000, "Run", 5003, "P. Specials",pSpecials,"M. Specials",5160,waitT,5071,"Fantasize",5086,"Inspect",debug?5166:0);
+				//Tease text should change based on perks!
+				choices("Attack", attacks, "Tease", 5005, "Spells", temp2, "Items", 1000, "Run", runAway, "P. Specials",pSpecials,"M. Specials",5160,waitT,5071,"Fantasize",5086,"Inspect",debug?5166:0);
 			}
 		}
 	}
@@ -166,20 +253,9 @@ public function doCombat(eventNum:Number):void
 		if(player.hasPerk("Whispered") >= 0) temp8 = 5124;
 		choices(button1Text,temp5,"Bow",temp4,button3Text,temp6,"Firebreath",temp7,"Gore",temp2,"Infest", temp3,buttText,temp, tempText, 5005, "Whisper",temp8,"Back",5000);
 	}
-	//Magic Menu
-	if(eventNum == 5002) {
-		menuLoc = 3;
-		magicMenu();
-		menuLoc = 3;
-	}
-	//Run AWAY
-	if(eventNum == 5003) {
-		runAway();		
-	}
 	//Defend
-	if(eventNum == 5004) {
-		
-	}
+	//if(eventNum == 5004) {
+	//}
 	//Tease - fail, or 5-20 enemy lust.
 	if(eventNum == 5005) {
 		if(monster.lustVuln == 0) {
@@ -198,1177 +274,8 @@ public function doCombat(eventNum:Number):void
 		return;
 	}
 	//Initiate Grapple 
-	if(eventNum == 5006) {
-		
-	}
-	//combat is over. Clear shit out and go to main
-	if(eventNum == 5007) {
-		if(gameState == 1 || gameState == 2) {
-			//clear status
-			clearStatuses(false);
-			//Clear itemswapping in case it hung somehow
-			itemSwapping = false;
-			//Player won
-			if(monster.HP < 1 || monster.lust > 99) {
-				awardPlayer();
-				return;
-			}
-			//Player lost
-			else {
-				if(monster.statusAffectv1("sparring") == 2) {
-					outputText("The cow-girl has defeated you in a practice fight!", true);
-					outputText("\n\nYou have to lean on Isabella's shoulder while the two of your hike back to camp.  She clearly won.", false);
-					gameState = 0;
-					player.HP = 1;
-					statScreenRefresh();
-					doNext(13);
-					return;
-				}
-				//Next button is handled within the minerva loss function
-				if(monster.hasStatusAffect("Peach Loot Loss") >= 0) {
-					gameState = 0;
-					player.HP = 1;
-					statScreenRefresh();
-					return;
-				}
-				if(monster.short == "Ember") {
-					gameState = 0;
-					player.HP = 1;
-					statScreenRefresh();
-					doNext(13);
-					return;
-				}
-				temp = rand(10) + 1 + Math.round(monster.level/2);
-				if(!inDungeon) {
-					if(player.gems == 1) outputText("\n\nYou'll probably come to your senses in eight hours or so, missing your only gem.", false);
-					if(player.gems > 1) outputText("\n\nYou'll probably come to your senses in eight hours or so, missing " + temp + " gems.", false);
-				}
-				else {
-					temp += 20 + monster.level*2;
-					outputText("\n\nSomehow you came out of that alive, but after checking your gem pouch, you realize you're missing " + num2Text(temp) + ".");
-				}
-				if(temp > player.gems) temp = player.gems;
-				player.gems -= temp;
-				gameState = 0;
-				//BUNUS XPZ
-				if(flags[kFLAGS.COMBAT_BONUS_XP_VALUE] > 0) {
-					player.XP += flags[kFLAGS.COMBAT_BONUS_XP_VALUE];
-					outputText("  Somehow you managed to gain " + flags[kFLAGS.COMBAT_BONUS_XP_VALUE] + " XP from the situation.", false);
-					flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = 0;
-				}
-				//Bonus lewts
-				if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] != "") {
-					outputText("  Somehow you came away from the encounter with " + itemLongName(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234]) + ".\n\n", false);
-					shortName = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234];
-					menuLoc = 18;
-					takeItem();
-				}
-				else doNext(16);
-			}
-		}
-		//Not actually in combat
-		else doNext(13);
-	}
-	//HP Victory
-	if(eventNum == 5008) {
-		monster.defeated(true);
-		return;
-	}
-	//Lust Victory
-	if(eventNum == 5009) {
-		monster.defeated(false);
-		return;
-
-	}
-	//HP Loss
-	if(eventNum == 5010) {
-		if(monster.skinTone == "helspawn") {
-			loseSparringToDaughter();
-			return;
-		}
-		if(monster.short == "Holli") {
-			enjoyYourBadEndBIYAAAATCH();
-			return;
-		}
-		if(monster.short == "Sheila") {
-			if(flags[kFLAGS.SHEILA_DEMON] == 1) loseToSheila();
-			else getBeatUpBySheila();
-			return;
-		}
-		if(monster.short == "Sand Mother") {
-			loseToTheSandMother();
-			return;
-		}
-		if(monster.short == "Cum Witch") {
-			defeatedByCumWitch();
-			return;
-		}
-		if(monster.short == "sand witches") {
-			loseToSammitchMob();
-			return;
-		}
-		if(monster.short == "imp lord") {
-			loseToAnImpLord();
-			return;
-		}
-		if(monster.short == "Minerva") {
-			loseToMinerva();
-			return;
-		}
-		if(monster.short == "Kelt") {
-			keltFucksShitUp();
-			return;
-		}
-		if(monster.short == "Sirius, a naga hypnotist") {
-			urtaLosesToSirriusSnakeRadio();
-			return;
-		}
-		if(monster.short == "kitsune") {
-			loseToKitsunes();
-			return;
-		}
-		if(monster.short == "satyr") {
-			loseToSatyr();
-			return;
-		}
-		if(monster.short == "sandtrap" || monster.short == "sand tarp") {
-			sandtrapmentLoss(true);
-			return;
-		}
-		if(monster.short == "chameleon girl") {
-			loseToChameleonGirl();
-			return;
-		}
-		if(monster.short == "Ember") {
-			//beatEmberSpar();
-			loseToEmberSpar()
-			return;
-		}
-		if(monster.short == "farmers") {
-			loseToOwca()
-			return;
-		}
-		if(monster.short == "lusty demons") {
-			//defeetVapulasHorde();
-			loseOrSubmitToVapula();
-			return;
-		}
-		if(monster.short == "Harpy Queen") {
-			harpyQueenBeatsUpPCBadEnd();
-			return;
-		}
-		if(monster.short == "phoenix platoon") {
-			phoenixPlatoonMurdersPC();
-			return;
-		}
-		if(monster.short == "Brigid the Jailer") {
-			pcDefeatedByBrigid();
-			return;
-		}
-		if(monster.short == "harpy horde") {
-			pcLosesToHarpyHorde();
-			return;
-		}
-		if(monster.short == "mob of spiders-morphs") {
-			loseToSpiderMob();
-			return;
-		}
-		if(monster.short == "Goo Armor") {
-			//gooArmorBeatsUpPC();
-			if(monster.hasStatusAffect("spar") >= 0) pcWinsValeriaSparDefeat();
-			else gooArmorBeatsUpPC();
-			return;
-		}
-		if(monster.short == "Hel" || monster.short == "salamander") {
-			if(monster.hasStatusAffect("sparring") >= 0) loseToSparringHeliaLikeAButtRapedChump();
-			else loseToSalamander();
-			return;
-		}
-		if(monster.short == "goo-girl") {
-			getBeatByGooGirl();
-			return;
-		}
-		if(monster.short == "plain girl") {
-			loseToShouldra();
-			return;
-		}
-		if(monster.short == "Kiha") {
-			if(monster.hasStatusAffect("spiderfight") >= 0)
-				loseKihaPreSpiderFight();
-			else if(monster.hasStatusAffect("domfight") >= 0)
-				pcLosesDomFight();
-			else if(monster.hasStatusAffect("spar") >= 0)
-				sparWithFriendlyKihaLose();
-			else kihaLossIntro();
-			return;
-		}
-		if(monster.short == "minotaur gang" || monster.short == "minotaur tribe") {
-			minotaurDeFeet();
-			return;
-		}
-		if(monster.short == "corrupted drider") {
-			loseToDrider();
-			return;
-		}
-		if(monster.short == "basilisk") {
-			loseToBasilisk();
-			return;
-		}
-		if(monster.short == "female spider-morph") {
-			loseToFemaleSpiderMorph();
-			return;
-		}
-		if(monster.short == "male spider-morph") {
-			loseToMaleSpiderMorph();
-			return;
-		}
-		if(monster.short == "Isabella") {
-			isabellaDefeats();
-			return;
-		}
-		if(monster.short == "Izma") {
-			IzmaWins();
-			return;
-		}
-		if(monster.short == "gnoll spear-thrower") {
-			hyenaSpearLossAnal();
-			return;
-		}
-		if(monster.short == "gnoll") {
-			if(monster.hasStatusAffect("PhyllaFight") >= 0) {
-				monster.removeStatusAffect("PhyllaFight");
-				phyllaGnollBeatsPC();
-				return;
-			}
-			getRapedByGnoll();
-			return;
-		}
-		if(monster.short == "Zetaz") {
-			loseToZetaz();
-			return;
-		}
-		if(monster.short == "Vala") {
-			loseToVala();
-			return;
-		}
-		if(monster.short == "anemone") {
-			loseToAnemone();
-			return;
-		}
-		if(monster.short == "imp horde") {
-			loseToImpMob();
-			return;
-		}
-		if(monster.short == "Tamani's daughters") {
-			loseToDaughters();
-			return;
-		}
-		if(monster.short == "Sophie") {
-			if(monster.hasStatusAffect("bimboBrawl") >= 0)
-				debimboSophieBeatsYouUp();
-			else 
-				sophieWonCombat();
-			return;
-		}
-		if(monster.short == "harpy") {
-			harpyLossU();
-			return;
-		}
-		if(monster.short == "Ceraph") {
-			loseFUCKME();
-			return;
-		}
-		if(monster.short == "worms") {
-			outputText("Overcome by your wounds, you sink to your knees as the colony of worms swarms all over your body...\n\n", true);
-			infest1();
-			return;
-		}
-		if(monster.short == "Akbal") {
-			loseToAckballllllz();
-			return;
-		}
-		if(monster.short == "shark-girl") {
-			sharkLossRape();
-			return
-		}
-		if(monster.short == "Marble") {
-			eventParser(5095);
-			return;
-		}
-		if(monster.short == "Tamani") {
-			if(player.totalCocks() > 0) {
-				if(rand(2) == 0) tamaniSexLost();
-				else tamaniSexLetHer();
-			}
-			else {
-				outputText("Tamani sighs as you begin to lose conscious, \"<i>You dummy, why'd you get rid of the fun parts?</i>\"", true);
-				eventParser(5007);
-			}
-			return;
-		}
-		if(monster.short == "naga") {
-			nagaFUCKSJOOOOOO();
-			return;
-		}
-		if(monster.short == "tentacle beast") {
-			outputText("Overcome by your wounds, you turn to make a last desperate attempt to run...\n\n", false);
-			if(monster.hasStatusAffect("PhyllaFight") >= 0) {
-				monster.removeStatusAffect("PhyllaFight");
-				outputText("...and make it into the nearby tunnel.  ");
-				phyllaTentaclePCLoss();
-				return;
-			}
-			eventParser(5074);
-			return;
-		}
-		if(monster.short == "fetish zealot") {
-			zealotLossRape();
-			return;
-		}
-		if(monster.short == "imp") {
-			if(monster.hasStatusAffect("Kitsune Fight") >= 0) {
-				loseKitsuneImpFight();
-				return;
-			}
-			eventParser(5017);
-			return;
-		}
-		if(monster.short == "demons") {
-			if(player.gender == 0) {
-				outputText("You collapse before the demons, who laugh at your utter lack of male or female endowments, beating you until you pass out.", true);
-				eventParser(5007);
-				return;
-			}
-			outputText("The demons finally beat you down and you collapse onto the sand of the oasis. Almost immediately you feel demonic hands pressing and probing your prone form. You hear the leader of the group say something in a strange tongue but you have a feeling you know what it means. The demons dive onto your inert body with intent and begin to press themselves against you...", true);
-			doNext(5048);
-			return;
-		}
-		if(monster.short == "minotaur") {
-			if(monster.hasStatusAffect("PhyllaFight") >= 0) {
-				monster.removeStatusAffect("PhyllaFight");
-				phyllaPCLostToMino();
-				return;
-			}
-			eventParser(5031);
-			return;
-		}
-		if(monster.short == "goblin") {
-			if(player.gender == 0) {
-				outputText("You collapse in front of the goblin, too wounded to fight.  She giggles and takes out a tube of lipstick smearing it whorishly on your face.  You pass into unconsciousness immediately.  It must have been drugged.", false);
-				eventParser(5007);
-				return;
-			}
-			eventParser(5089);
-			return;
-		}
-		if(monster.short == "goblin broodmother") {
-			urtaLosesToGoblin();
-			return;
-		}
-		if(monster.short == "milky succubus") {
-			urtaLosesToCowCubi();
-			return;
-		}
-		if(monster.short == "minotaur lord") {
-			if(player.lust > 99) urtaSubmitsToMinotaurBadEnd();
-			else urtaLosesToMinotaurRoughVersion();
-			return;
-		}
-		if(monster.short == "alpha gnoll") {
-			loseToGnollPrincessAndGetGangBanged();
-			return;
-		}
-		if(monster.short == "Jojo") {
-			eventParser(5024);
-			return;
-		}
-		if(monster.short == "bee-girl") {
-			eventParser(2058);
-			return;
-		}
-		if(monster.short == "secretarial succubus") {
-			eventParser(11024);
-			return;
-		}
-		if(monster.short == "incubus mechanic") {
-			eventParser(11038);
-			return;
-		}
-		if(monster.short == "Omnibus Overseer") {
-			eventParser(11046);
-			return;
-		}
-		if(monster.short == "green slime") {
-			eventParser(5042);
-			return;
-		}
-		if(monster.short == "hellhound") {
-			eventParser(5069);
-			return;
-		}
-		if(monster.short == "infested hellhound") {
-			infestedHellhoundLossRape();
-			return;
-		}
-		gameState = 0;
-		player.HP = 1;
-		clearStatuses(false);
-		outputText("Your wounds are too great to bear, and you fall unconscious.", true);
-		temp = rand(10) + 1;
-		if(temp > player.gems) temp = player.gems;
-		outputText("\n\nYou'll probably wake up in eight hours or so, missing " + temp + " gems.", false);
-		player.gems -= temp;
-		doNext(16);
-	}
-	//Lust Loss
-	if(eventNum == 5011) {
-		if(monster.skinTone == "helspawn") {
-			loseSparringToDaughter();
-			return;
-		}
-		if(monster.short == "Holli") {
-			enjoyYourBadEndBIYAAAATCH();
-			return;
-		}
-		if(monster.short == "Sheila") {
-			if(flags[kFLAGS.SHEILA_DEMON] == 1) loseToSheila();
-			else getBeatUpBySheila();
-			return;
-		}
-		if(monster.short == "Sand Mother") {
-			loseToTheSandMother();
-			return;
-		}
-		if(monster.short == "Cum Witch") {
-			defeatedByCumWitch();
-			return;
-		}
-		if(monster.short == "sand witches") {
-			loseToSammitchMob();
-			return;
-		}
-		if(monster.short == "imp lord") {
-			loseToAnImpLord();
-			return;
-		}
-		if(monster.short == "Minerva") {
-			loseToMinerva();
-			return;
-		}
-		if(monster.short == "Kelt") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-				infestOrgasm();
-				//Mob reaction
-				outputText("\n\nKelt recoils for a moment before assuming a look of superiority...");
-				//eventParser(5007) to end or 5011 to move on.
-				doNext(5011);
-				return;
-			}
-			keltFucksShitUp();
-			return;
-		}
-		if(monster.short == "goblin broodmother") {
-			urtaLosesToGoblin();
-			return;
-		}
-		if(monster.short == "milky succubus") {
-			urtaLosesToCowCubi();
-			return;
-		}
-		if(monster.short == "minotaur lord") {
-			if(player.lust > 99) urtaSubmitsToMinotaurBadEnd();
-			else urtaLosesToMinotaurRoughVersion();
-			return;
-		}
-		if(monster.short == "alpha gnoll") {
-			loseToGnollPrincessAndGetGangBanged();
-			return;
-		}
-		if(monster.short == "Sirius, a naga hypnotist") {
-			urtaLosesToSirriusSnakeRadio();
-			return;
-		}
-		if(monster.short == "kitsune") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-				infestOrgasm();
-				//Mob reaction
-				outputText("\n\nThe kitsune recoils before running off, no longer interested in you...");
-				//eventParser(5007) to end or 5011 to move on.
-				eventParser(5007);
-				return;
-			}
-			loseToKitsunes();
-			return;
-		}
-		if(monster.short == "satyr") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-				infestOrgasm();
-				//Mob reaction
-				outputText("\n\nThe satyr laughs heartily at your eagerness...");
-				//eventParser(5007) to end or 5011 to move on.
-				doNext(5011);
-				return;
-			}
-			loseToSatyr();
-			return;
-		}
-		if(monster.short == "sandtrap" || monster.short == "sand tarp") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-				infestOrgasm();
-				//Mob reaction
-				outputText("\n\nThe sand trap seems bemused by the insects your body houses...");
-				//eventParser(5007) to end or 5011 to move on.
-				doNext(5011);
-				return;
-			}
-			sandtrapmentLoss(true);
-			return;
-		}
-		if(monster.short == "chameleon girl") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-				infestOrgasm();
-				//Mob reaction
-				outputText("\n\nThe chameleon girl recoils.  \"<i>Ew, gross!</i>\" she screetches as she runs away, leaving you to recover from your defeat alone.");
-				//eventParser(5007) to end or 5011 to move on.
-				eventParser(5007);
-				return;
-			}
-			loseToChameleonGirl();
-			return;
-		}
-		if(monster.short == "Ember") {
-			//beatEmberSpar();
-			loseToEmberSpar()
-			return;
-		}
-		if(monster.short == "farmers") {
-			loseToOwca()
-			return;
-		}
-		if(monster.short == "lusty demons") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-				infestOrgasm();
-				//Mob reaction
-				outputText("\n\nThe demons smile to one at another as they watch your display, then close in...");
-				//eventParser(5007) to end or 5011 to move on.
-				doNext(5011);
-				return;
-			}
-			//defeetVapulasHorde();
-			loseOrSubmitToVapula();
-			return;
-		}
-		if(monster.short == "Harpy Queen") {
-			harpyQueenBeatsUpPCBadEnd();
-			return;
-		}
-		if(monster.short == "phoenix platoon") {
-			phoenixPlatoonMurdersPC();
-			return;
-		}
-		if(monster.short == "Brigid the Jailer") {
-			pcDefeatedByBrigid();
-			return;
-		}
-		if(monster.short == "harpy horde") {
-			pcLosesToHarpyHorde();
-			return;
-		}
-		if(monster.short == "mob of spiders-morphs") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-				infestOrgasm();
-				//Mob reaction
-				outputText("\n\nThe spiders smile to one at another as they watch your display, then close in...");
-				//eventParser(5007) to end or 5011 to move on.
-				doNext(5011);
-				return;
-			}
-			loseToSpiderMob();
-			return;
-		}
-		if(monster.short == "Goo Armor") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-				infestOrgasm();
-				//Mob reaction
-				outputText("\n\nThe armored goo sighs while you exhaust yourself...");
-				//eventParser(5007) to end or 5011 to move on.
-				doNext(5011);
-				return;
-			}
-			//gooArmorBeatsUpPC();
-			if(monster.hasStatusAffect("spar") >= 0) pcWinsValeriaSparDefeat();
-			else gooArmorBeatsUpPC();
-			return;
-		}
-		if(monster.short == "Hel" || monster.short == "salamander") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-				infestOrgasm();
-				//Mob reaction
-				outputText("\n\nHelia waits it out in stoic silence...");
-				//eventParser(5007) to end or 5011 to move on.
-				doNext(5011);
-				return;
-			}
-			if(monster.hasStatusAffect("sparring") >= 0) loseToSparringHeliaLikeAButtRapedChump();
-			else loseToSalamander();
-			return;
-		}
-		if(monster.short == "goo-girl") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-				infestOrgasm();
-				//Mob reaction
-				outputText("\n\nThe goo-girl seems confused but doesn't mind.");
-				//eventParser(5007) to end or 5011 to move on.
-				doNext(5011);
-				return;
-			}
-			getBeatByGooGirl();
-			return;
-		}
-		if(monster.short == "plain girl") {
-			loseToShouldra();
-			return;
-		}
-		if(monster.short == "Kiha") {
-			if(monster.hasStatusAffect("spiderfight") >= 0)
-				loseKihaPreSpiderFight();
-			else if(monster.hasStatusAffect("domfight") >= 0)
-				pcLosesDomFight();
-			else if(monster.hasStatusAffect("spar") >= 0)
-				sparWithFriendlyKihaLose();
-			else {
-				if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-					flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-					infestOrgasm();
-					//Mob reaction
-					outputText("\n\nKiha seems visibly disturbed by your infection, enough that she turns to leave.");
-					//eventParser(5007) to end or 5011 to move on.
-					doNext(5011);
-					return;
-				}
-				kihaLossIntro();
-			}
-			return;
-		}
-		if(monster.short == "minotaur gang" || monster.short == "minotaur tribe") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-				infestOrgasm();
-				//Mob reaction
-				outputText("\n\nThe minutaurs share a laugh while you cum, but their throbbing erections don't subside in the slightest.");
-				//eventParser(5007) to end or 5011 to move on.
-				doNext(5011);
-				return;
-			}
-			minotaurDeFeet();
-			return;
-		}
-		if(monster.short == "corrupted drider") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-				infestOrgasm();
-				//Mob reaction
-				outputText("\n\nThe drider licks her lips in anticipation...");
-				//eventParser(5007) to end or 5011 to move on.
-				doNext(5011);
-				return;
-			}
-			loseToDrider();
-			return;
-		}
-		if(monster.short == "basilisk") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-				infestOrgasm();
-				//Mob reaction
-				outputText("\n\nThe basilisk smirks, but waits for you to finish...");
-				//eventParser(5007) to end or 5011 to move on.
-				doNext(5011);
-				return;
-			}
-			loseToBasilisk();
-			return;
-		}
-		if(monster.short == "male spider-morph") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-				infestOrgasm();
-				//Mob reaction
-				outputText("\n\nThe spider flashes a predatory grin while he waits it out...");
-				//eventParser(5007) to end or 5011 to move on.
-				doNext(5011);
-				return;
-			}
-			loseToMaleSpiderMorph();
-			return;
-		}
-		if(monster.short == "female spider-morph") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-				infestOrgasm();
-				//Mob reaction
-				outputText("\n\nThe spider flashes a predatory grin while she waits it out...");
-				//eventParser(5007) to end or 5011 to move on.
-				doNext(5011);
-				return;
-			}
-			loseToFemaleSpiderMorph();
-			return;
-		}
-		if(monster.short == "Isabella") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-				infestOrgasm();
-				//Mob reaction
-				outputText("\n\n\"<i>Ick,</i>\" Isabella tuts as she turns to leave...");
-				//eventParser(5007) to end or 5011 to move on.
-				eventParser(5007);
-				return;
-			}
-			isabellaDefeats();
-			return;
-		}
-		if(monster.short == "Izma") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-				infestOrgasm();
-				//Mob reaction
-				outputText("\n\n\"<i>Gross!</i>\" Izma cries as she backs away, leaving you to recover alone.");
-				//eventParser(5007) to end or 5011 to move on.
-				eventParser(5007);
-				return;
-			}
-			IzmaWins();
-			return;
-		}
-		if(monster.short == "gnoll spear-thrower") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-				infestOrgasm();
-				//Mob reaction
-				outputText("\n\nYour foe doesn't seem put off enough to leave...");
-				//eventParser(5007) to end or 5011 to move on.
-				doNext(5011);
-				return;
-			}
-			hyenaSpearLossAnal();
-			return;
-		}
-		if(monster.short == "gnoll") {
-			if(monster.hasStatusAffect("PhyllaFight") >= 0) {
-				monster.removeStatusAffect("PhyllaFight");
-				phyllaGnollBeatsPC();
-				return;
-			}
-			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-				infestOrgasm();
-				//Mob reaction
-				outputText("\n\nYour foe doesn't seem put off enough to leave...");
-				//eventParser(5007) to end or 5011 to move on.
-				doNext(5011);
-				return;
-			}
-			getRapedByGnoll();
-			return;
-		}
-		if(monster.short == "Zetaz") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-				infestOrgasm();
-				//Mob reaction
-				outputText("\n\nYour foe doesn't seem put off enough to care...");
-				//eventParser(5007) to end or 5011 to move on.
-				doNext(5011);
-				return;
-			}
-			loseToZetaz();
-			return;
-		}
-		if(monster.short == "Vala") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-				infestOrgasm();
-				//Mob reaction
-				outputText("\n\nYour foe doesn't seem put off enough to leave...");
-				//eventParser(5007) to end or 5011 to move on.
-				doNext(5011);
-				return;
-			}
-			loseToVala();
-			return;
-		}
-		if(monster.short == "anemone") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-				infestOrgasm();
-				//Mob reaction
-				outputText("\n\nYour foe doesn't seem to mind at all...");
-				//eventParser(5007) to end or 5011 to move on.
-				doNext(5011);
-				return;
-			}
-			loseToAnemone();
-			return;
-		}
-		if(monster.short == "imp horde") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-				infestOrgasm();
-				//Mob reaction
-				outputText("\n\nYour foes don't seem put off enough to leave...");
-				//eventParser(5007) to end or 5011 to move on.
-				doNext(5011);
-				return;
-			}
-			loseToImpMob();
-			return;
-		}
-		if(monster.short == "Tamani's daughters") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-				infestOrgasm();
-				//Mob reaction
-				outputText("\n\nYour foes seem visibly disgusted and leave, telling you to, \"<i>quit being so fucking gross...</i>\"");
-				//eventParser(5007) to end or 5011 to move on.
-				eventParser(5007);
-				return;
-			}
-			loseToDaughters();
-			return;
-		}
-		if(monster.short == "Sophie") {
-			if(monster.hasStatusAffect("bimboBrawl") >= 0)
-				debimboSophieBeatsYouUp();
-			else { 
-				if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-					flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-					infestOrgasm();
-					//Mob reaction
-					outputText("\n\nYour foe seems disgusted by the display and leaves you to recover alone...");
-					//eventParser(5007) to end or 5011 to move on.
-					eventParser(5007);
-					return;
-				}
-				sophieWonCombat();
-			}
-			return;
-		}
-		if(monster.short == "harpy") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-				infestOrgasm();
-				//Mob reaction
-				outputText("\n\nYour foe doesn't seem disgusted enough to leave...");
-				//eventParser(5007) to end or 5011 to move on.
-				doNext(5011);
-				return;
-			}
-			harpyLossU();
-			return;
-		}
-		if(monster.short == "Ceraph") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-				infestOrgasm();
-				//Mob reaction
-				outputText("\n\nYour foe doesn't seem disgusted enough to leave...");
-				//eventParser(5007) to end or 5011 to move on.
-				doNext(5011);
-				return;
-			}
-			loseFUCKME();
-			return;
-		}
-		if(monster.short == "imp") {
-			if(monster.hasStatusAffect("Kitsune Fight") >= 0) {
-				loseKitsuneImpFight();
-				return;
-			}
-			if(player.hasStatusAffect("infested") >= 0) {
-				infestOrgasm();
-				outputText("\n\nThe imp grins at your already corrupted state...", false);
-				stats(0,0,0,0,0,0,-100,0);
-				player.lust = 100;
-				doNext(5017);
-				return;
-			}
-			eventParser(5017);
-			return;
-		}
-		if(monster.short == "Akbal") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-				infestOrgasm();
-				//Mob reaction
-				outputText("\n\nYour foe doesn't seem disgusted enough to leave...");
-				//eventParser(5007) to end or 5011 to move on.
-				doNext(5011);
-				return;
-			}
-			loseToAckballllllz();
-			return;
-		}
-		if(monster.short == "fetish zealot") {
-			if(player.hasStatusAffect("infested") >= 0) {
-				infestOrgasm();
-				outputText("\n\nThe fetish cultist ignores the perverse display and continues on as if nothing had happened...", false);
-				stats(0,0,0,0,0,0,-100,0);
-				doNext(5106);
-				return;
-			}
-			zealotLossRape();
-			return;
-		}
-		if(monster.short == "shark-girl") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-				infestOrgasm();
-				//Mob reaction
-				outputText("\n\nYour foe doesn't seem disgusted enough to leave...");
-				//eventParser(5007) to end or 5011 to move on.
-				doNext(5011);
-				return;
-			}
-			sharkLossRape();
-			return
-		}
-		if(monster.short == "Tamani") {
-			if(player.totalCocks() > 0) {
-				//hypnoslut loss scene
-				if(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] > 19 && rand(2) == 0) {
-					getRapedByTamaniYouHypnoSlut();
-					return;
-				}
-				if(rand(2) == 0) tamaniSexLost();
-				else tamaniSexLetHer();
-			}
-			else {
-				outputText("You give into your lusts and masturbate, but Tamani doesn't seem to care.  She kicks and punches you over and over, screaming, \"<i>You dummy, why'd you get rid of the fun parts?</i>\"", true);
-				takeDamage(10000);
-				eventParser(5007);
-			}
-			return;
-		}
-		if(monster.short == "Marble") {
-			eventParser(5095);
-			return;
-		}
-		if(monster.short == "naga") {
-			if(player.hasStatusAffect("infested") >= 0) {
-				infestOrgasm();
-				outputText("\n\nThe naga's eyes go wide and she turns to leave, no longer interested in you.", false);
-				stats(0,0,0,0,0,0,-100,0);
-				doNext(5007);
-				return;
-			}
-			nagaFUCKSJOOOOOO();
-			return;
-		}
-		if(monster.short == "goblin") {
-			if(player.gender == 0) {
-				outputText("You collapse in front of the goblin, too wounded to fight.  She giggles and takes out a tube of lipstick smearing it whorishly on your face.  You pass into unconsciousness immediately.  It must have been drugged.", false);
-				eventParser(5007);
-				return;
-			}
-			if(player.hasStatusAffect("infested") >= 0) {
-				infestOrgasm();
-				outputText("\n\nThe goblin's eyes go wide and she turns to leave, no longer interested in you.", false);
-				stats(0,0,0,0,0,0,-100,0);
-				doNext(5007);
-				return;
-			}
-			eventParser(5089);
-			return;
-		}
-		if(monster.short == "hellhound") {
-			if(player.hasStatusAffect("infested") >= 0) {
-				infestOrgasm();
-				outputText("\n\nThe hellhound snorts and leaves you to your fate.", false);
-				stats(0,0,0,0,0,0,-100,0);
-				doNext(5007);
-				return;
-			}
-			eventParser(5069);
-			return;
-		}
-		if(monster.short == "infested hellhound") {
-			if(player.hasStatusAffect("infested") >= 0) {
-				infestOrgasm();
-				outputText("\n\nThe infested hellhound's heads both grin happily as it advances towards you...", false);
-				stats(0,0,0,0,0,0,-100,0);
-				doNext(5108);
-				return;
-			}
-			eventParser(5108);
-			return;
-		}
-		if(monster.short == "tentacle beast") {
-			outputText("You give up on fighting, too aroused to resist any longer.  Shrugging, you walk into the writhing mass...\n\n", false);
-			if(monster.hasStatusAffect("PhyllaFight") >= 0) {
-				monster.removeStatusAffect("PhyllaFight");
-				outputText("...but an insistent voice rouses you from your stupor.  You manage to run into a nearby tunnel.  ");
-				phyllaTentaclePCLoss();
-				return;
-			}
-			doNext(5074);
-			return;
-		}
-		if(monster.short == "secretarial succubus") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-				infestOrgasm();
-				//Mob reaction
-				outputText("\n\nYour foe doesn't seem to care...");
-				//eventParser(5007) to end or 5011 to move on.
-				doNext(5011);
-				return;
-			}
-			eventParser(11024);
-			return;
-		}
-		if(monster.short == "incubus mechanic") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-				infestOrgasm();
-				//Mob reaction
-				outputText("\n\nYour foe doesn't seem to care...");
-				//eventParser(5007) to end or 5011 to move on.
-				doNext(5011);
-				return;
-			}
-			eventParser(11038);
-			return;
-		}
-		if(monster.short == "Omnibus Overseer") {
-			if(player.hasStatusAffect("infested") >= 0 && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
-				flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-				infestOrgasm();
-				//Mob reaction
-				outputText("\n\nYour foe doesn't seem to care...");
-				//eventParser(5007) to end or 5011 to move on.
-				doNext(5011);
-				return;
-			}
-			eventParser(11046);
-			return;
-		}
-		if(monster.short == "worms") {
-			outputText("Overcome by your lust, you sink to your knees as the colony of worms swarms all over your body...\n\n", true);
-			infest1();
-			return;
-		}
-		if(monster.short == "sand witch") {
-			if(player.hasStatusAffect("infested") >= 0) {
-				infestOrgasm();
-				outputText("\n\nThe witch blanches and backs away, leaving you to your fate.", false);
-				stats(0,0,0,0,0,0,-100,0);
-				eventParser(5007);
-				return;
-			}
-			sandwitchRape();
-			return;
-		}
-		if(monster.short == "demons") {
-			if(player.gender == 0) {
-				outputText("You offer yourself to the demons, who promptly begin laughing at your lack of endowments.  They fall on you as one, beating you into unconsciousness.", true);
-				eventParser(5007);
-				return;
-			}
-			outputText("You struggle to keep your mind on the fight and fail to do so. ", true);
-			if(player.hasStatusAffect("infested") >= 0) {
-				infestOrgasm();
-				stats(0,0,0,0,0,0,-100,0);
-				outputText("\n\nThe demons joke and smile, obviously unconcerned with your state.\n\n", false);
-			}
-			if(player.cocks.length > 0) {
-				if(player.cockTotal() > 1) outputText("Each of y", false);
-				else outputText("Y", false);
-				outputText("our " + multiCockDescriptLight() + " throbs ", false);
-				if(player.hasVagina()) outputText(" and your ", false);
-			}
-			if(player.vaginas.length > 0) {
-				if(!player.hasCock()) outputText("Your ", false);
-				outputText(vaginaDescript(0) + " burns ", false);
-			}
-			outputText("with arousal.  You make a grab for the nearest demon and catch a handful of jiggly breast. You try desperately to use your other arm to pull her closer to slake your thirst but you both go tumbling to the ground. The demonic leader laughs out loud and the rest of the tribe falls on you, grabbing for anything it can find.", false);
-			doNext(5048);
-			return;
-		}
-		//FETISH CULTIST
-		if(monster.short == "fetish cultist") {
-			outputText("", true);
-			if(player.hasStatusAffect("infested") >= 0) {
-				infestOrgasm();
-				outputText("\n\nThe cultist giggles as she watches you struggling.\n\n", false);
-				stats(0,0,0,0,0,0,-100,0);
-				//Go on with rape
-			}
-			cultistRapesYou();
-			return;
-		}
-		if(monster.short == "minotaur") {
-			if(monster.hasStatusAffect("PhyllaFight") >= 0) {
-				monster.removeStatusAffect("PhyllaFight");
-				phyllaPCLostToMino();
-				return;
-			}
-			if(player.hasStatusAffect("infested") >= 0) {
-				infestOrgasm();
-				stats(0,0,0,0,0,0,-100,0);
-				outputText("\n\nThe minotaur picks you up and forcibly tosses you from his cave, grunting in displeasure.", false);
-				eventParser(5007);
-				return;
-			}
-			eventParser(5031);
-			return;
-		}
-		if(monster.short == "Jojo") {
-			eventParser(5024);
-			return;
-		}
-		if(monster.short == "bee-girl") {
-			if(player.hasStatusAffect("infested") >= 0) {
-				infestOrgasm();
-				stats(0,0,0,0,0,0,-100,0);
-				outputText("\n\nThe bee-girl goes white and backs away with a disgusted look on her face.\n\n", false);
-				eventParser(5007);
-				return;
-			}
-			eventParser(2058);
-			return;
-		}
-		if(monster.short == "green slime") {
-			if(player.hasStatusAffect("infested") >= 0) {
-				infestOrgasm();
-				stats(0,0,0,0,0,0,-100,0);
-				outputText("\n\nThe slime doesn't even seem to notice.\n\n", false);
-				doNext(5042);
-				return;
-			}
-			eventParser(5042);
-			return;
-		}
-		gameState = 0;
-		clearStatuses(false);
-		outputText("Your desire reaches uncontrollable levels, and you begin openly masturbating.\n\nThe lust and pleasure cause you to black out for hours on end.", true);
-		temp = rand(10) + 1;
-		if(temp > player.gems) temp = player.gems;
-		outputText("\n\nYou'll probably come to your senses in eight hours or so, missing " + temp + " gems.", false);
-		player.lust = 0;
-		player.gems -= temp;
-		doNext(16);
-	}
+	//if(eventNum == 5006) {
+	//}
 	//Attack
 	if(eventNum == 5012) {
 		outputText("", true);
@@ -1422,7 +329,7 @@ public function doCombat(eventNum:Number):void
 			if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING && player.vaginas.length > 1) outputText("Your " + allVaginaDescript() + " instantly soak your groin.", false);
 		}
 		outputText("\n", false);
-		if(player.lust > 99) doNext(5011)
+		if(player.lust > 99) doNext(endLustLoss)
 		else doNext(1);
 	}
 	//Sand which lust magic attack
@@ -1463,7 +370,7 @@ public function doCombat(eventNum:Number):void
 		if(monster.lust >= 60 && monster.lust < 70) outputText("The mouse's eyes constantly dart over your most sexual parts, betraying his lust.  ", false);
 		if(monster.lust >= 70 && monster.lust < 85) outputText("The mouse is having trouble moving due to the rigid protrusion from his groin.  ", false);
 		if(monster.lust >= 85) outputText("The mouse is panting and softly whining, each movement seeming to make his bulge more pronounced.  You don't think he can hold out much longer.  ", false);
-		if(monster.lust >= 100) doNext(5009);
+		if(monster.lust >= 100) doNext(endLustVictory);
 		else doNext(1);
 	}
 	//Jojo loses via lust
@@ -1476,7 +383,7 @@ public function doCombat(eventNum:Number):void
 	//Monk RAEP
 	if(eventNum == 5023) {
 		jojoRape();
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 	//Lose to Jojo
 	if(eventNum == 5024) {
@@ -1529,7 +436,7 @@ public function doCombat(eventNum:Number):void
 				statScreenRefresh();
 			}
 		}		
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 	//Sand witch bad end
 	//GAME OVERS
@@ -1617,7 +524,7 @@ public function doCombat(eventNum:Number):void
 	//Rape minotaur
 	if(eventNum == 5030) {
 		//minoRape();
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 	//Get raped by minotaur 
 	if(eventNum == 5031) {
@@ -1693,7 +600,7 @@ public function doCombat(eventNum:Number):void
 				outputText("  You've fallen prey to paralyzation venom!  Better end this quick!", false);
 			}
 		}
-		if(player.lust >= 100) doNext(5011);
+		if(player.lust >= 100) doNext(endLustLoss);
 		else doNext(5000);
 	}
 	//Player sting attack
@@ -1753,7 +660,7 @@ public function doCombat(eventNum:Number):void
 			//female or futa
 			else if(player.gender > 0) femaleRapesOoze();
 		}
-		eventParser(5007);
+		cleanupAfterCombat();
 		return;
 	}
 	//Losing Sex (Slime)
@@ -1772,7 +679,7 @@ public function doCombat(eventNum:Number):void
 			if(temp == 0) oozeRapesYouOrally();
 			if(temp == 1) oozeButtRapesYou();
 		}
-		eventParser(5007);
+		cleanupAfterCombat();
 		return;
 	}
 	//Demon pack attack
@@ -2287,7 +1194,7 @@ public function doCombat(eventNum:Number):void
 			if(monster.short == "pod") outputText(". (" + String(damage) + ")\n\n", false);
 			else if(monster.plural) outputText(" and stagger, collapsing onto each other from the wounds you've inflicted on " + monster.pronoun2 + ".  (" + String(damage) + ")\n\n", false);
 			else outputText(" and staggers, collapsing from the wounds you've inflicted on " + monster.pronoun2 + ".  (" + String(damage) + ")\n\n", false);
-			doNext(5008);
+			doNext(endHpVictory);
 			return;
 		}
 		else outputText(".  It's clearly very painful. (" + String(damage) + ")\n\n", false);
@@ -2702,7 +1609,7 @@ public function fantasize():void {
 			stats(0,0,0,0,0,0,-25,0);
 		}
 		else {
-			doNext(5011);
+			doNext(endLustLoss);
 			return;
 		}
 	}
@@ -2772,8 +1679,8 @@ public function bite():void {
 		enemyAI();
 	}
 	else {
-		if(monster.HP <= 0) doNext(5008);
-		else doNext(5009);
+		if(monster.HP <= 0) doNext(endHpVictory);
+		else doNext(endLustVictory);
 	}
 }
 
@@ -2854,7 +1761,7 @@ public function attack():void {
 			outputText("You strike at the amalgamation, crushing countless worms into goo, dealing " + temp + " damage.\n\n", false);
 			monster.HP -= temp;
 			if(monster.HP <= 0) {
-				doNext(5008);
+				doNext(endHpVictory);
 				return;
 			}
 		}
@@ -2976,8 +1883,8 @@ public function attack():void {
 					enemyAI();
 				}
 				else {
-					if(monster.HP <= 0) doNext(5008);
-					else doNext(5009);
+					if(monster.HP <= 0) doNext(endHpVictory);
+					else doNext(endLustVictory);
 				}
 				return;
 			}
@@ -3057,8 +1964,8 @@ public function attack():void {
 		enemyAI();
 	}
 	else {
-		if(monster.HP <= 0) doNext(5008);
-		else doNext(5009);
+		if(monster.HP <= 0) doNext(endHpVictory);
+		else doNext(endLustVictory);
 	}
 }
 //Gore Attack - uses 15 fatigue!
@@ -3150,8 +2057,8 @@ public function goreAttack():void {
 	//Victory ORRRRR enemy turn.
 	if(monster.HP > 0 && monster.lust < 100) enemyAI();
 	else {
-		if(monster.HP <= 0) doNext(5008);
-		if(monster.lust >= 100) doNext(5009);
+		if(monster.HP <= 0) doNext(endHpVictory);
+		if(monster.lust >= 100) doNext(endLustVictory);
 	}
 }
 //Player sting attack
@@ -3210,7 +2117,7 @@ public function playerStinger():void {
 	player.tailVenom -= 25;
 	//Kick back to main if no damage occured!
 	if(monster.HP > 0 && monster.lust < 100) enemyAI();
-	else doNext(5009);
+	else doNext(endLustVictory);
 }
 public function combatMiss():Boolean {
 	if(player.spe - monster.spe > 0 && int(Math.random()*(((player.spe-monster.spe)/4)+80)) > 80) return true;
@@ -3243,7 +2150,7 @@ public function doDamage(damage:Number):Number {
 	}
 	if(monster.HP - damage <= 0) {
 		if(monster.hasPerk("Last Strike") >= 0) doNext(monster.perks[monster.hasPerk("Last Strike")].value1);
-		else doNext(5008);
+		else doNext(endHpVictory);
 	}
 	
 	// Uma's Massage Bonuses
@@ -3971,8 +2878,8 @@ public function combatStatusesUpdate():void {
 		monster.lust += monster.lustVuln * 3;
 	}
 	regeneration(true);
-	if(player.lust >= 100) doNext(5011);
-	if(player.HP <= 0) doNext(5010);
+	if(player.lust >= 100) doNext(endLustLoss);
+	if(player.HP <= 0) doNext(endHpLoss);
 }
 
 public function regeneration(combat:Boolean = true):void {
@@ -5642,11 +4549,11 @@ public function combatRoundOver():Boolean {
 	applyArmorStats(player.armorName, false);
 	if(gameState < 1) return false;
 	if(monster.HP < 1) {
-		doNext(5008);
+		doNext(endHpVictory);
 		return true;
 	}
 	if(monster.lust > 99) {
-		doNext(5009);
+		doNext(endLustVictory);
 		return true;
 	}
 	if(monster.hasStatusAffect("level") >= 0) {
@@ -5656,15 +4563,15 @@ public function combatRoundOver():Boolean {
 		}
 	}
 	if(monster.short == "basilisk" && player.spe <= 1) {
-		doNext(5010);
+		doNext(endHpLoss);
 		return true;
 	}
 	if(player.HP < 1) {
-		doNext(5010);
+		doNext(endHpLoss);
 		return true;
 	}
 	if(player.lust > 99) {
-		doNext(5011);
+		doNext(endLustLoss);
 		return true;
 	}
 	doNext(1);
@@ -5701,6 +4608,7 @@ public function magicMenu():void {
 		clearOutput();
 		outputText("You reach for your magic, but you just can't manage the focus necessary.  <b>Your ability to use magic was sealed, and now you've wasted a chance to attack!</b>\n\n");
 		enemyAI();
+		menuLoc = 3;
 		return;
 	}
 	outputText("What spell will you use?\n\n", true);
@@ -5728,6 +4636,7 @@ public function magicMenu():void {
 		}
 	}
 	choices("Charge W.",chargeEvent,"Blind",blindEvent,"Whitefire",whitefireEvent,"",0,"",0,"Arouse",arouseEvent,"Heal",healEvent,"Might",mightEvent,"",0,"Back",5000);
+	menuLoc = 3;
 }
 public function spellMod():Number {
 	var mod:Number = 1;
@@ -5744,7 +4653,7 @@ public function spellMod():Number {
 public function spellArouse():void {
 	if(player.hasPerk("Blood Mage") < 0 && player.fatigue + spellCost(15) > 100) {
 		outputText("You are too tired to cast this spell.", true);
-		doNext(5002);
+		doNext(magicMenu);
 		return;
 	}
 	menuLoc = 0;
@@ -5765,7 +4674,7 @@ public function spellArouse():void {
 		flags[kFLAGS.SPELLS_CAST]++;
 		spellPerkUnlock();
 		doNext(1);
-		if(monster.lust >= 100) doNext(5009);
+		if(monster.lust >= 100) doNext(endLustVictory);
 		else enemyAI();
 		return;
 	}
@@ -5812,14 +4721,14 @@ public function spellArouse():void {
 	doNext(1);
 	flags[kFLAGS.SPELLS_CAST]++;
 	spellPerkUnlock();
-	if(monster.lust >= 100) doNext(5009);
+	if(monster.lust >= 100) doNext(endLustVictory);
 	else enemyAI();
 	return;	
 }
 public function spellHeal():void {
 	if(player.hasPerk("Blood Mage") < 0 && player.fatigue + spellCost(20) > 100) {
 		outputText("You are too tired to cast this spell.", true);
-		doNext(5002);
+		doNext(magicMenu);
 		return;
 	}
 	menuLoc = 0;
@@ -5847,7 +4756,7 @@ public function spellHeal():void {
 	statScreenRefresh();
 	flags[kFLAGS.SPELLS_CAST]++;
 	spellPerkUnlock();
-	if(player.lust >= 100) doNext(5011);
+	if(player.lust >= 100) doNext(endLustLoss);
 	else enemyAI();
 	return;
 }
@@ -5858,7 +4767,7 @@ public function spellHeal():void {
 public function spellMight():void {
 	if(player.hasPerk("Blood Mage") < 0 && player.fatigue + spellCost(25) > 100) {
 		outputText("You are too tired to cast this spell.", true);
-		doNext(5002);
+		doNext(magicMenu);
 		return;
 	}
 	menuLoc = 0;
@@ -5903,7 +4812,7 @@ public function spellMight():void {
 	statScreenRefresh();
 	flags[kFLAGS.SPELLS_CAST]++;
 	spellPerkUnlock();
-	if(player.lust >= 100) doNext(5011);
+	if(player.lust >= 100) doNext(endLustLoss);
 	else enemyAI();
 	return;
 }
@@ -5912,7 +4821,7 @@ public function spellMight():void {
 public function spellChargeWeapon():void {
 	if(player.hasPerk("Blood Mage") < 0 && player.fatigue + spellCost(15) > 100) {
 		outputText("You are too tired to cast this spell.", true);
-		doNext(5002);
+		doNext(magicMenu);
 		return;
 	}
 	menuLoc = 0;
@@ -5930,7 +4839,7 @@ public function spellBlind():void {
 	outputText("", true);
 	if(player.hasPerk("Blood Mage") < 0 && player.fatigue + spellCost(20) > 100) {
 		outputText("You are too tired to cast this spell.", true);
-		doNext(5002);
+		doNext(magicMenu);
 		return;
 	}
 	menuLoc = 0;
@@ -5967,7 +4876,7 @@ public function spellWhitefire():void {
 	outputText("", true);
 	if(player.hasPerk("Blood Mage") < 0 && player.fatigue + spellCost(30) > 100) {
 		outputText("You are too tired to cast this spell.", true);
-		doNext(5002);
+		doNext(magicMenu);
 		return;
 	}
 	menuLoc = 0;
@@ -5994,7 +4903,7 @@ public function spellWhitefire():void {
 	spellPerkUnlock();
 	monster.HP -= temp;
 	statScreenRefresh();
-	if(monster.HP < 1) doNext(5008);
+	if(monster.HP < 1) doNext(endHpVictory);
 	else enemyAI();
 }
 
@@ -6086,11 +4995,11 @@ public function hellFire():void {
 	outputText("\n", false);
 	if(monster.short == "Holli" && monster.hasStatusAffect("Holli Burning") < 0) lightHolliOnFireMagically();
 	if(monster.HP < 1) {
-		doNext(5008);
+		doNext(endHpVictory);
 		return;
 	}
 	else if(monster.lust >= 99) {
-		doNext(5009);
+		doNext(endLustVictory);
 		return;
 	}
 	else enemyAI();
@@ -6142,7 +5051,7 @@ public function kick():void {
 			outputText("You strike at the amalgamation, crushing countless worms into goo, dealing " + temp + " damage.\n\n", false);
 			monster.HP -= temp;
 			if(monster.HP <= 0) {
-				doNext(5008);
+				doNext(endHpVictory);
 				return;
 			}
 		}
@@ -6563,7 +5472,7 @@ public function fireballuuuuu():void {
 		if(monster.short == "Holli" && monster.hasStatusAffect("Holli Burning") < 0) lightHolliOnFireMagically();
 	}
 	if(monster.HP < 1) {
-		doNext(5008);
+		doNext(endHpVictory);
 		return;
 	}
 	else enemyAI();
@@ -7165,7 +6074,7 @@ public function corruptedFoxFire():void {
 	dmg = doDamage(dmg);
 	outputText("  (" + dmg + ")\n\n", false);
 	statScreenRefresh();
-	if(monster.HP < 1) doNext(5008);
+	if(monster.HP < 1) doNext(endHpVictory);
 	else enemyAI();
 }
 //Fox Fire
@@ -7203,7 +6112,7 @@ public function foxFire():void {
 	dmg = doDamage(dmg);
 	outputText("  (" + dmg + ")\n\n", false);
 	statScreenRefresh();
-	if(monster.HP < 1) doNext(5008);
+	if(monster.HP < 1) doNext(endHpVictory);
 	else enemyAI();
 }
 

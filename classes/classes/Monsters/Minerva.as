@@ -20,6 +20,11 @@ package classes.Monsters
 			game.beatUpDatSharpie();
 		}
 
+		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
+		{
+			game.loseToMinerva();
+		}
+
 		public function Minerva(mainClassPtr:*)
 		{
 			super(mainClassPtr);

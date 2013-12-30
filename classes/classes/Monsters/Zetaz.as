@@ -23,6 +23,16 @@ package classes.Monsters
 			game.defeatZetaz();
 		}
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if (pcCameWorms){
+				outputText("\n\nYour foe doesn't seem put off enough to care...");
+				game.doNext(game.endLustLoss);
+			} else {
+				game.loseToZetaz();
+			}
+		}
+
 		public function Zetaz(mainClassPtr:*)
 		{
 			super(mainClassPtr);

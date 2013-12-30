@@ -24,6 +24,16 @@ package classes.Monsters
 			else game.breakingKeltNumeroThree();
 		}
 
+		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
+		{
+			if (pcCameWorms){
+				outputText("\n\nKelt recoils for a moment before assuming a look of superiority...");
+				game.doNext(game.endLustLoss);
+			} else {
+				game.keltFucksShitUp();
+			}
+		}
+
 		public function Kelt(mainClassPtr:*)
 		{
 			super(mainClassPtr);

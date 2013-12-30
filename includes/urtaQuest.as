@@ -1207,8 +1207,8 @@ public function urtaComboAttack():void {
 		enemyAI();
 	}
 	else {
-		if(monster.HP <= 0) doNext(5008);
-		else doNext(5009);
+		if(monster.HP <= 0) doNext(endHpVictory);
+		else doNext(endLustVictory);
 	}
 }
 
@@ -1351,8 +1351,8 @@ public function urtaSidewinder():void {
 		enemyAI();
 	}
 	else {
-		if(monster.HP <= 0) doNext(5008);
-		else doNext(5009);
+		if(monster.HP <= 0) doNext(endHpVictory);
+		else doNext(endLustVictory);
 	}
 }
 
@@ -1465,8 +1465,8 @@ public function urtaVaultAttack():void {
 		enemyAI();
 	}
 	else {
-		if(monster.HP <= 0) doNext(5008);
-		else doNext(5009);
+		if(monster.HP <= 0) doNext(endHpVictory);
+		else doNext(endLustVictory);
 	}
 }
 

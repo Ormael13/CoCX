@@ -19,6 +19,11 @@
 			game.eventParser(5094);
 		}
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			game.eventParser(5095);
+		}
+
 		public function Marble(mainClassPtr:*)
 		{
 			super(mainClassPtr);

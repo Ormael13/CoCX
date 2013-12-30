@@ -971,7 +971,7 @@ public function doDungeon(eventNo:Number):void {
 	if(eventNo == 11054) {
 		spriteSelect(16);
 		outputText("You refuse to fall for her ploy, and decide not to take her up on her offer.  However, being that she is so thoroughly defeated, you allow her to escape, promising her far worse should she ever oppose you in the future.\n\n\"<i>Thank you, merciful hero!</i>\" she says and she sprints out the door.  Wings unfurl from her back and she takes flight, disappearing out a skylight above the main factory floor.", true);
-		eventParser(5007);
+		cleanupAfterCombat();
 		return;
 	}
 	//Omnibus Post-Boon stuff
@@ -979,14 +979,14 @@ public function doDungeon(eventNo:Number):void {
 		outputText("\n\nThe omnibus disappeared while you were examining the changes.  You guess you did get what you wanted.  You blush and smile, still feeling very horny.  You decide to use the privacy of the office to relieve the tension you've been building up since you arrived.\n\nYou masturbate quickly and efficiently, eager to calm down and resume your exploration.  In no time at all an orgasm crashes through your body.  Stretching and standing up, you find yourself still aroused.\n\nYou slap your forehead as realization washes over you - <b>the demoness' magic is keeping you from ever being totally satisfied!</b>\n(Perk Gained - Omnibus' Gift - Minimum lust has been increased!)", false);
 		player.createPerk("Omnibus' Gift",0,0,0,0,"Raises your minimum lust by up to 35 and slightly reduces lust gain.");
 		stats(0,0,0,0,0,0,-100,2);
-		eventParser(5007);
+		cleanupAfterCombat();
 		return;
 	}
 	//Omnibus Kill
 	if(eventNo == 11056) {
 		spriteSelect(16);
 		outputText("You step forwards and grab her by the head.  With an abrupt twist you snap her neck, ending at least one small part of the demonic threat.", true);
-		eventParser(5007);
+		cleanupAfterCombat();
 		return;
 	}
 	//Find Factory

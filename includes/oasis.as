@@ -142,7 +142,7 @@ public function oasisSexing():void {
 	//If you got here by winning combat!
 	if((monster.HP < 1 || monster.lust > 99) && gameState > 0) {
 		outputText("You fuck and fuck until not a single demon is capable of servicing your needs. They lie moaning and panting at the edge of the oasis, unable to move. You survey the fallen fiends with just a touch of pride and a whole lot of satisfaction, your body feeling stronger for the endurance exercise.", false);
-		eventParser(5007);
+		cleanupAfterCombat();
 		stats(0,0,0,0,0,0,-100,1.5);
 		return;
 	}
@@ -156,7 +156,7 @@ public function oasisSexing():void {
 			flags[kFLAGS.ANTS_PC_FAILED_PHYLLA] = 1;
 		}
 		outputText("The demons fuck you like animals until you can't come any more. Your every orifice is filled and you pump out orgasm after orgasm until you black out from the abuse.", false);
-		eventParser(5007);
+		cleanupAfterCombat();
 		stats(0,.5,0,0,0,0,-100,3);
 		return;
 	}
@@ -167,7 +167,7 @@ public function oasisSexing():void {
 	}
 	outputText("You fuck for hours 'feasting' with the demons. Pain, pleasure and exhaustion intermingle and no matter how hard you try to cling to consciousness you are in no state to concentrate. You dangle over the edge for what seems like eternity before another orgasm, stronger than any other, hits you like a solid wall and you black out. For a little while you drift in and out of conscious reality to find your body still the object of demonic attentions until eventually you wake to find that the seemingly endless string of orgasms has stopped. Looking around you see what demons remain awake engaged solely in fucking each other. Tender and sore from the abuse and still finding it hard to concentrate you gather your clothes and steal away, leaving them to the tail end of their orgy. In the aftermath you feel like you've just run an endurance race, but the rubbed raw sensitivity of your brutally fucked body tells another tale.", false);
 	stats(0,.5,0,0,0,.5,-100,4);
-	if(gameState == 1 || gameState == 2) eventParser(5007);
+	if(gameState == 1 || gameState == 2) cleanupAfterCombat();
 	else doNext(1);
 }
 

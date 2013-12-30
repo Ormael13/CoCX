@@ -258,7 +258,7 @@ public function genderlessLoseToGooGal():void {
 	outputText("You awaken with a sputtering hack, water and gooey " + gooColor() + " cum spilling from your lungs. You've been returned to shore and other than a full-body soreness and a splitting headache, you seem none the worse for wear. Who knew cute little slimes could be so aggressive when they don't have sex organs to suck on?", false);
 	slimeFeed();
 	stats(0,0,0,0,0,4,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 //Defeat – Male
 public function dudeLoseToGooGal():void {
@@ -286,7 +286,7 @@ public function dudeLoseToGooGal():void {
 	slimeFeed();
 	stats(0,0,0,0,0,4,-100,0);
 	slimeFeed();
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 //Defeat – Herm
 public function hermLoseToGooGal():void {
@@ -304,7 +304,7 @@ public function hermLoseToGooGal():void {
 	outputText("When you finally run dry, every muscle in your body aches with exhaustion and it feels like you haven't had anything to drink in months.  The slime slowly disentangles herself from your twitching form, ejecting you from the womb-like ardor of her squishy interior.  When she reforms her slender body, the goo-girl's belly bulges with your creamy load.  She gives you a beaming smile and pats her belly, sending ripples through her body with each wobbling slap.  The girl waves goodbye and slides back into the lake, giving you enough time to catch your breath and let your body recover.", false);
 	stats(0,0,0,0,0,4,-100,0);
 	slimeFeed();
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 //Defeat – Female
 public function femaleLoseToGooGal():void {
@@ -356,7 +356,7 @@ public function femaleLoseToGooGal():void {
 	}
 	stats(0,0,0,0,0,4,-100,0);
 	slimeFeed();
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[Goo pregnancy- 3-4 days]
@@ -384,7 +384,7 @@ public function beatUpGoo():void {
 	//Victory – Neuter
 	if(player.gender == 0 || player.lust < 33) {
 		outputText("The goo-girl, while an unusual creature, seems unable to communicate and clearly has nothing of value.  Of no particular use in your quest, you shoo the dripping blob back to the shore. She seems disappointed at first, but bounces back quickly enough, spotting movement in the lake.  She splashes in and takes off at top speed, " + gooColor9() + " blur while you take your leave.", false);
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 	else {
 		outputText("With the goo-girl defeated, her unusual body is at your mercy.  What do you do?", false);
@@ -455,7 +455,7 @@ public function beatUpGoo():void {
 			if(flags[kFLAGS.TIMES_VALERIA_GOO_THREESOMED] == 0) outputText("Do you offer a threesome with the girl to Valeria? It could get a little weird....");
 			else outputText("Do you offer a threesome with the girl to Valeria? She'll likely try flood with you with more sloshing, shuddering pleasure than your body can handle.");
 		}
-		choices(sex1S,sex1N,sex2S,sex2N,sex3S,sex3N,sex4S,sex4N,"Lay Eggs",eggs,"",0,"",0,"Valeria",valeria,"Make Slave",gooTF,"Leave",5007);
+		choices(sex1S,sex1N,sex2S,sex2N,sex3S,sex3N,sex4S,sex4N,"Lay Eggs",eggs,"",0,"",0,"Valeria",valeria,"Make Slave",gooTF,"Leave",cleanupAfterCombat);
 	}
 }
 
@@ -505,7 +505,7 @@ public function gooMaleRape(type:Number = 1):void {
 	}
 	stats(0,0,0,0,0,0,-100,0);
 	slimeFeed();
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Victory – Herm
@@ -529,7 +529,7 @@ public function victoryHermSex():void {
 	coreDropChance();
 	stats(0,0,0,0,0,0,-100,0);
 	slimeFeed();
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //FEMALE VICTORIES
@@ -554,7 +554,7 @@ public function victoryRapeAGooGalAsFeeder():void {
 	//You've now been milked, reset the timer for that
 	player.addStatusValue("Feeder",1,1);
 	player.changeStatusValue("Feeder",2,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[Exhibitionist Perk]
@@ -575,7 +575,7 @@ public function exhibitionismGooGirlVictoryRape():void {
 	coreDropChance();
 	stats(0,0,0,0,0,0,-100,0);
 	slimeFeed();
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 //[Normal Female] 
 public function normalFemaleRapesAGooGirl():void {
@@ -595,7 +595,7 @@ public function normalFemaleRapesAGooGirl():void {
 	coreDropChance();
 	stats(0,0,0,0,0,0,-100,0);
 	slimeFeed();
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Ooze and Goo scene (one shot voyeur scene similar to the minotaur peep-show)– 
@@ -626,5 +626,5 @@ public function layBeeEggsInGoo():void {
 	outputText("\n\nThis continues on for quite some time with the honey googirl greedily sucking down everything it can from your ovipositor, stroking it and squeezing your abdomen to work out all of its sweet fluid and eggs.  When you finally decide enough is enough, you retract your black tube and rise back up to your [feet].  Turning to look at the goo, you see her idly rubbing at her distended honey-colored belly, imitating a pregnant mother before she slides back down the lakeshore; your numerous eggs bounce around inside her infused body.  She turns one last time to you and waves before sinking below the surface.");
 	player.dumpEggs();
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }

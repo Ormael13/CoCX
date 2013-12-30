@@ -24,6 +24,16 @@ package classes.Monsters
 		}
 
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if (pcCameWorms){
+				outputText("\n\nThe chameleon girl recoils.  \"<i>Ew, gross!</i>\" she screetches as she runs away, leaving you to recover from your defeat alone.");
+				game.cleanupAfterCombat();
+			} else {
+				game.loseToChameleonGirl();
+			}
+		}
+
 		override protected function outputPlayerDodged(dodge:int):void
 		{
 			outputText("The chameleon girl whips her head and sends her tongue flying at you, but you hop to the side and manage to avoid it.  The pink blur flies back into her mouth as quickly as it came at you, and she looks more than a bit angry that she didn't find her target.\n");

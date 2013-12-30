@@ -26,14 +26,26 @@
 			}
 			if(player.lust >= 33 && player.gender > 0) {
 				outputText("  You realize she'd make a perfect receptacle for your lusts.  Do you have your way with her?", false);
-				game.simpleChoices("Sex",5065,"",0,"",0,"B. Feed",temp2,"Leave",5007);
+				game.simpleChoices("Sex",5065,"",0,"",0,"B. Feed",temp2,"Leave",game.cleanupAfterCombat);
 			}
 			else {
 				if(temp2 > 0) {
 					outputText("  She looks like she might take some of your milk if you offered it to her.  What do you do?", false);
-					game.simpleChoices("B. Feed",temp2,"",0,"",0,"",0,"Leave",5007);
+					game.simpleChoices("B. Feed",temp2,"",0,"",0,"",0,"Leave",game.cleanupAfterCombat);
 				}
-				else game.eventParser(5007);
+				else game.cleanupAfterCombat();
+			}
+		}
+
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if (hpVictory){
+				super.won(hpVictory,pcCameWorms);
+			} else {
+				if (pcCameWorms){
+					outputText("\n\nThe cultist giggles as she watches you struggling.\n\n", false);
+				}
+				game.cultistRapesYou();
 			}
 		}
 

@@ -22,6 +22,12 @@ package classes.Monsters
 			game.beatEmberSpar();
 		}
 
+
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			game.loseToEmberSpar();
+		}
+
 		public function Ember(mainClassPtr:*)
 		{
 			super(mainClassPtr);

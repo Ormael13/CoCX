@@ -72,7 +72,7 @@ public function goblinRapesPlayer():void {
 
 			outputText("Your eyes roll up into your head, leaving you looking dumber than ever. Damn, like, that was, like, totally fucking amazing!", false);
 			stats(0,0,0,0,0,0,-100,0);
-			eventParser(5007);
+			cleanupAfterCombat();
 			return;
 		}
 	}
@@ -126,7 +126,7 @@ public function goblinRapesPlayer():void {
 			else outputText("was better than I could have dreamed.  I'm going to find you again stud", false);
 			outputText("!</i>\"\n\n", false);
 			outputText("She giggles again and leans over to kiss you on the lips, smearing her thick bubbly lips across your own and leaving you tasting the bubble-gum of her lipstick.  You find yourself smiling dreamily and slipping into unconsciousness...there must have been something in that lipstick!", false);
-			eventParser(5007);
+			cleanupAfterCombat();
 			stats(0,0,0,0,0,0,-100,0);
 			return;
 		}
@@ -150,7 +150,7 @@ public function goblinRapesPlayer():void {
 			outputText("Your dick obeys happily, thickening slightly as your abdominal muscles clench with the force of your orgasm.  The goblin's pupils shrink and her eyes roll back as the first torrent of cum splatters against her cervix.  She quivers when the pressure builds up and begins to fill her womb.  You clench again, this time pressing against her as the drug's effects begin wearing off.  Her belly stretches out slightly from all the cum packed inside her, but you know you aren't done.   She drools, her tongue hanging lewdly from her mouth as you pump load after load into her fertile womb, but like all good things, it does come to an end.\n\n", false);
 			outputText("The goblin regains consciousness, and flops off of you, grabbing her belly and smiling blissfully, before staggering up to her feet.  She thanks you, \"<i>Mmmm good job stud.  I'll have to let my daughters know how to find you once they're born.  I think you've got what it takes for me to start my own tribe!</i>\"  Patting your still-dripping member, the pregnant goblin leans down and gives you a wet kiss with her glossy lips.  You smile contentedly and close your eyes, barely realizing her lipstick was drugged before you pass out.", false);
 			stats(0,0,0,0,0,0,-100,0);
-			eventParser(5007);
+			cleanupAfterCombat();
 			return;
 		}
 		//[END MALE]
@@ -176,7 +176,7 @@ public function goblinRapesPlayer():void {
 		outputText("She plants a kiss on your lips and mutters, \"<i>Can't forget this,</i>\" as she puts her dildo away.  You find yourself smiling and watching her strap-covered form jiggle pleasantly as she bounds away from you into the distance.  Your eyelids drift closed and your lips go numb as her drugged lipstick puts you out.  ", false);
 		cuntChange(player.vaginalCapacity(), true);
 		stats(0,0,0,0,0,0,-100,0);
-		eventParser(5007);
+		cleanupAfterCombat();
 		return;
 	}
 }
@@ -194,7 +194,7 @@ public function gobboRapeIntro():void {
 	}
 	//If cant rape or breastfeed
 	if(player.lust < 30 && player.hasStatusAffect("Feeder") < 0) {
-		eventParser(5007);
+		cleanupAfterCombat();
 		return;
 	}
 	var buttseks:Number = 0;
@@ -236,16 +236,16 @@ public function gobboRapeIntro():void {
 	}
 	if(player.lust >= 33 && player.gender > 0 && fitsFuck + cuntFuck + tooBig + corruptTooBig + buttseks + feeder + spiderCondom + eggs> 0) {
 		outputText("\n\n<b>What do you do to her, and if anything, which of your body parts do you use?</b>", false);
-		choices("Dick Fuck",fitsFuck,"DickTooBig",tooBig,"CorruptDick",corruptTooBig,"Dick In Ass",buttseks,"Jog Fuck",jog,"Breastfeed",feeder,"Web Condom", spiderCondom,"Pussies",cuntFuck,"Lay Eggs",eggs,"Leave",5007);
+		choices("Dick Fuck",fitsFuck,"DickTooBig",tooBig,"CorruptDick",corruptTooBig,"Dick In Ass",buttseks,"Jog Fuck",jog,"Breastfeed",feeder,"Web Condom", spiderCondom,"Pussies",cuntFuck,"Lay Eggs",eggs,"Leave",cleanupAfterCombat);
 	}
 	else if(feeder > 0 || eggs > 0) {
 		outputText("\n\n<b>You aren't horny enough to rape her, but ");
 		if(feeder > 0) outputText("your nipples ache with the desire to feed her your milk.  Do you feed her milk or leave?</b>", false);
 		else outputText("your abdomen aches with the desire to impregnate her full of insect eggs.  Do you?</b>");
-		simpleChoices("Feed",feeder,"Lay Eggs",eggs,"",0,"",0,"Leave",5007);
-		//doYesNo(feeder,5007);
+		simpleChoices("Feed",feeder,"Lay Eggs",eggs,"",0,"",0,"Leave",cleanupAfterCombat);
+		//doYesNo(feeder,cleanupAfterCombat);
 	}
-	else eventParser(5007);
+	else cleanupAfterCombat();
 }
 public function gobboButtSecks():void {
 	spriteSelect(24);
@@ -268,7 +268,7 @@ public function gobboButtSecks():void {
 	outputText(" smacking her plump rump with each thrust, as if to tease her.\n\n", false);
 	outputText("The tight confines of the goblin's asshole prove too much for you. Your body convulses wildly as you unload a massive load in her. Spent, you throw the little whore onto the ground; you have no further use for her at the moment.\n\n", false); 
 	outputText("As you pick up your " + player.armorName + " and begin to get dressed, you glance at the goblin. Her hands began to dig in her now stretched out anus, desperately trying to gather up the cum you deposited in her. Smirking, you walk away nonchalantly, quite pleased with yourself.", false);
-	eventParser(5007);
+	cleanupAfterCombat();
 	stats(0,0,0,0,0,0,-100,0);
 	return;
 }
@@ -296,7 +296,7 @@ public function gobboGetsRapedFem():void {
 		outputText("Her efforts are rewarded as you cum on the drugged green bitch, leaving the taste of pussy on her tongue. Her face has a strange dopey smile on it, and she looks like she's in some strange state in-between consciousness and sleep. You watch as she twitches and writhes on the ground, gasping for air and orgasming repeatedly. While at first you're worried, the convulsions start to slow down; the little twat ought to be fine.\n\n", false);
 
 		outputText("You casually dress, ignoring the pants and moans from the blissed-out goblin, and prepare to leave. Taking one last look over your shoulder, you realize her fluids have made a puddle bigger than her. She'll probably have a hell of a hangover when she wakes up. You sigh and trot off, feeling a bit guilty about overdoing it.", false);
-		eventParser(5007);
+		cleanupAfterCombat();
 		stats(0,0,0,0,0,0,-100,0);
 	}
 	//Goblin victory rape, female naga:
@@ -343,7 +343,7 @@ public function gobboGetsRapedFem():void {
 		outputText("You orgasm repeatedly, the goblin not tiring and the residue of the various substances you poured into her still coating her lips and tongue making you not feel like stopping. Eventually you grow tired, releasing the goblin from your coils. She lands on her feet, does a pirouette, runs about the clearing for a bit (all while giggling like a madwoman), then collapses face first onto her 'clothes'.\n\n", false);
 
 		outputText("Thoroughly confused about what just happened, you decide not to test fate by sticking around near the heavily drugged creature and make for camp as soon as you've grabbed your things.", false);
-		eventParser(5007);
+		cleanupAfterCombat();
 		stats(0,0,0,0,0,0,-100,0);
 	}
 	else {
@@ -376,7 +376,7 @@ public function gobboGetsRapedFem():void {
 		outputText(" and saunter off, feeling ", false);
 		if(player.cor < 50) outputText("a bit guilty about overdoing it.", false);
 		else outputText("thoroughly satisfied with your revenge.", false);
-		eventParser(5007);
+		cleanupAfterCombat();
 		stats(0,0,0,0,0,0,-100,0);
 	}
 	return;
@@ -455,7 +455,7 @@ public function rapeAGoblinCorruptTooBig():void {
 	outputText("\"<i>I hope my daughters are a better fuck than their bitch mother,</i>\" you say. \"<i>Tell'em to find me if they want to get split like a log too.</i>\"", false);
 	outputText("\n\nShe absolutely will.", false);
 	stats(0,0,0,0,0,0,-100,1);
-	eventParser(5007);
+	cleanupAfterCombat();
 	return;
 }
 
@@ -492,7 +492,7 @@ public function manRapesGoblinTooBig():void {
 	outputText("The green slut seems to handle it pretty well, even going so far as to scoop up your spunk and rub it into her cunt as she masturbates.  She licks her lips as she watches you redress, a sultry smile on her cum-painted face, \"<i>You tasted as good as I thought stud!  Maybe shrink that bad-boy down and come visit me for a better visit next time ok?  Hopefully by then all this baby batter I'm cramming into my box will give me a nice belly for you to rub!</i>\"\n\n", false);
 	outputText("You shake your head and leave, somewhat drained and relieved by the experience.", false);
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[DUDEGASM]
@@ -570,7 +570,7 @@ public function gobboGetsRapedMaleFits():void {
 		else outputText("Shuddering", false);
 		outputText(", you make your way back to camp, satisfied.", false);
 	}
-	eventParser(5007);
+	cleanupAfterCombat();
 	stats(0,0,0,0,0,0,-100,0);
 	return;
 }
@@ -692,7 +692,7 @@ public function goblinCondomed():void {
 	outputText("Squirming right-side up, covered in sweat and mud, the emerald girl's face screws into an expression of confusion as she pokes at the bulge of her abdomen. \"What… that doesn't feel right,\" she mumbles, pushing at her skin with both hands. Checking her cunny with a long, middle finger, she pulls it out clean, devoid of the ivory cream she expected. \"The fuck? A condom?\" she screeches. \"You bastard!\" Pushing at her belly with increasingly frantic motions, her mouth gapes when the seed-loaded balloon bounces right back, still intact. \"Why won't it burst?\" she demands. You politely inform her that spider silk is terribly strong and oh so sticky. Reaching her fingers into her slit, she tries to pull it out and gasps at the feeling of her inner walls being pulled by the clinging webbing. Despite her best effort, the silk bubble stays right where you left it, snugly glued in place by your binding webbing. You laugh and wish her luck trying to get it out as you gather your clothes and walk away. So full of cum and yet unable to get any of it into her womb, the goblin girl moans helplessly, fingering herself in desperation, as if her orgasm could dislodge the treasure you've left inside of her.", false);
 	
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //REQUIRES: AT LEAST ONE DICK AND A COPY OF ATLAS SHRUGGED - MUST NOT BE MONSTROUSLY HUGE
@@ -734,7 +734,7 @@ public function gatsGoblinBoners():void {
 
 	outputText("You pick yourself back up, jerking yourself slowly as cum dribbles from your " + cockDescript(x) + " onto the collapsed body of the goblin.  It'll be awhile before she comes back to consciousness, but you're certain she'll have a better appreciation for sex when she does.", false);
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 public function laySomeDriderEggsInGobboTwat():void {
@@ -780,5 +780,5 @@ public function laySomeDriderEggsInGobboTwat():void {
 	outputText("\n\nLaying her down in the shade, you put your clothes back on, glad to be free of the extra weight and ready to continue your adventure.");
 	player.dumpEggs();
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }

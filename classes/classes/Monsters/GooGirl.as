@@ -19,6 +19,16 @@ package classes.Monsters
 			game.beatUpGoo();
 		}
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if(pcCameWorms){
+				outputText("\n\nThe goo-girl seems confused but doesn't mind.");
+				game.doNext(game.endLustLoss);
+			} else {
+				game.getBeatByGooGirl();
+			}
+		}
+
 		public function GooGirl(mainClassPtr:*)
 		{
 			super(mainClassPtr);

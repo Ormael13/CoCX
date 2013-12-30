@@ -25,6 +25,16 @@
 			game.impGangVICTORY();
 		}
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if(pcCameWorms){
+				outputText("\n\nYour foes don't seem put off enough to leave...");
+				game.doNext(game.endLustLoss);
+			} else {
+				game.loseToImpMob();
+			}
+		}
+
 		public function ImpHorde(mainClassPtr:*)
 		{
 			super(mainClassPtr);

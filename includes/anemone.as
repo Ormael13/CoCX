@@ -142,9 +142,9 @@ public function defeatAnemone():void {
 		if(player.hasVagina()) vaginaRape = 2591;
 		var bikiniTits:int = 0;
 		if(player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = 3988;
-		choices("Your Ass",2593,"Your Cock",cockRape,"Your Vagina",vaginaRape,"Her Butt",anal,"Lay Egg",eggs,"",0,"",0,"",0,"B.Titfuck",bikiniTits,"Leave",5007);
+		choices("Your Ass",2593,"Your Cock",cockRape,"Your Vagina",vaginaRape,"Her Butt",anal,"Lay Egg",eggs,"",0,"",0,"",0,"B.Titfuck",bikiniTits,"Leave",cleanupAfterCombat);
 	}
-	else eventParser(5007);
+	else cleanupAfterCombat();
 }
 
 //anal: -requires butthole
@@ -189,7 +189,7 @@ public function victoryButtholeRape():void {
 	outputText(" giggle from the blue girl.  Standing up, you gather your gear and blow her a kiss before you leave.  She darkens in color, her camouflage reflex causing her to 'blush' in discomfort at this display of affection.", false);
 	//(pass 1 hour, reduce lust to min)
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 
@@ -247,7 +247,7 @@ public function rapeAnemoneWithDick():void {
 		outputText("After the last of your cum has been squeezed out, you pull your " + cockDescript(0) + " out and rinse it off in the lakewater.  You gather your gear while the anemone holds her belly and smiles placidly, staring into the sky.", false);
 		//(pass 1 hour, reset lust to min or min+10 if big or greater skeet)
 		stats(0,0,0,0,0,0,-100,0);
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 	//Too-big male: -requires cockarea > 36
 	else {
@@ -291,7 +291,7 @@ public function rapeAnemoneWithDick():void {
 		else outputText("she continues to sputter and cough up bubbles of your spunk.", false);
 		//(pass 1 hour, reset lust to min or min+10 if big or greater skeet)
 		stats(0,0,0,0,0,0,-100,0);
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 }
 		
@@ -362,7 +362,7 @@ public function rapeAnemoneWithPussy():void {
 	//(reduce lust to min, pregnancy check)
 	//(pass 1 hour, reset lust to min or min+10 if big or greater skeet)
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //loss rapes:
@@ -375,7 +375,7 @@ public function loseToAnemone():void {
 		outputText("You collapse face-first into the lake, weakened by your damage.  The last thing you hear before passing out is a faint <i>\"What?\"</i>\n\n", false);
 		
 		outputText("Several minutes later you awake to feel yourself washed onto the sand and hurting all over.  <i>\"You... dead?\"</i> The anemone is still with you; she must have found a stick from somewhere and is sitting next to you, judiciously poking you with it.  As you force your eyes open in answer she drops the stick with a startled yelp and hugs her knees to her chest.  Too beat-up to say anything, you can only stare at her, which unnerves her further. <i>\"Umm... bye,\"</i> she says, getting to her feet.  She heads for the water again, leaving you alone to recover.", false);
-		eventParser(5007);
+		cleanupAfterCombat();
 		return;
 	}
 	//loss, pre-sex worm shot reaction:
@@ -397,7 +397,7 @@ public function loseToAnemone():void {
 		//(1 hour pass, lose 1/10th of max hp from current hp, lose 20 lust)
 		takeDamage(10);
 		stats(0,0,0,0,0,0,-20,0);
-		eventParser(5007);
+		cleanupAfterCombat();
 		return;
 	}
 	//loss, male:
@@ -477,7 +477,7 @@ public function loseToAnemone():void {
 			outputText(".  The blue girl continues to stroke your privates with her tentacle hair, flicking your urethra with her tongue, until you've come twice more.  Nor does she display any intention of stopping there, but mercifully you black out and collapse into the water.  Half-frowning, the anemone shrugs and pushes your insensible form up onto the sandy shore.", false);
 			//(pass 8 hours, reset lust to min)
 			stats(0,0,0,0,0,0,-100,0);
-			eventParser(5007);
+			cleanupAfterCombat();
 			return;
 		}
 		//loss, too-big male (cock > 5" width or > 48" length):
@@ -544,7 +544,7 @@ public function loseToAnemone():void {
 			outputText("  Having fed, she grins mischievously and grabs your " + cockDescript(0) + ", then tows your floating body to the shoreline with it.  She rolls you onto the sand and then swims for deep water, vanishing.", false);
 			//(pass 8 hours, minus libido, reset lust to min)
 			stats(0,0,0,0,-1,0,-100,0);
-			eventParser(5007);
+			cleanupAfterCombat();
 			return;
 		}
 	}
@@ -573,7 +573,7 @@ public function loseToAnemone():void {
 		//(reduce lust to min, add 10 lust, pregnancy check)
 		stats(0,0,0,0,0,0,-100,0);
 		stats(0,0,0,0,1,0,10,0);
-		eventParser(5007);
+		cleanupAfterCombat();
 		return;
 	}
 }
@@ -782,7 +782,7 @@ public function anemoneQuoteUnquoteAnal():void {
 	}
 	//end scene, reset hours since cum and lust, reduce libido and sens a little
 	stats(0,0,0,0,-.5,-.5,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[Hotdog!]
@@ -834,7 +834,7 @@ public function hotdogTheAnemone():void {
 	
 	//end scene, reset hours since cum and lust, reduce libido and sens a bit 
 	stats(0,0,0,0,-.5,-.5,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[Fuck Off]
@@ -848,7 +848,7 @@ public function fuckingAssholelessAnemoneeeez():void {
 	
 	//-30 lust)
 	stats(0,0,0,0,0,0,-20,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Bee on Anemone: Finished (Zeik)
@@ -926,7 +926,7 @@ public function anemoneGetsLayedByBeePositor():void {
 	}
 	player.dumpEggs();
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Drider on Anemone: Finished (Zeik)
@@ -1003,7 +1003,7 @@ public function spiderOvipositAnAnemone():void {
 	//ponytailed anemone with Lisa Loeb glasses WHEN
 	player.dumpEggs();
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 

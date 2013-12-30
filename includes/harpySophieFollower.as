@@ -77,7 +77,7 @@ public function bimboSophieAgain():void {
 	flags[kFLAGS.SOPHIE_DEBIMBOED] = 0;
 	flags[kFLAGS.SOPHIES_DAUGHTERS_DEBIMBOED] = 0;
 	consumeItem("BimboLq",1);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	//(Display Sophie's normal options.You monster)
 	else approachBimboSophieInCamp(false);
 }
@@ -156,7 +156,7 @@ public function letDebimboSophieGo():void {
 		}
 	}
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] = 1;
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
 
@@ -177,7 +177,7 @@ public function whyIDidItToDebimboSophie():void {
 	
 	outputText("\n\nYou nod, and tell Sophie to make herself at home.");
 	outputText("\n\n(<b>Sophie has been moved to the \"Followers\" tab!</b>)");
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
 
@@ -201,7 +201,7 @@ public function apologizeToDebimboSophie():void {
 	outputText("\n\nYou nod, and tell Sophie to make herself at home.");
 	//{Sophie has been moved to the \"Followers\" tab!}
 	outputText("\n\n(<b>Sophie has been moved to the \"Followers\" tab!</b>)");
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
 

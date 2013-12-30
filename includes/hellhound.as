@@ -48,11 +48,11 @@ public function hellhoundFire():void {
 		stats(0,0,0,0,0,0,20-(player.sens/10),0);
 		statScreenRefresh();
 		if(player.HP <= 0) {
-			doNext(5010);
+			doNext(endHpLoss);
 			return;
 		}
 		if(player.lust >= 100) {
-			doNext(5011);
+			doNext(endLustLoss);
 			return;
 		}		
 	}
@@ -90,11 +90,11 @@ public function hellhoundScent():void {
 		outputText("The hellhound keeps his four eyes on you as he sniffs the ground where you were moments ago. He raises his heads back up and gives you a firey grin - He seems to have aquired you scent!  Running away will now be much more difficult...", false);
 	}
 	if(player.HP <= 0) {
-		doNext(5010);
+		doNext(endHpLoss);
 		return;
 	}
 	if(player.lust > 100) {
-		doNext(5011);
+		doNext(endLustLoss);
 		return;
 	}
 	doNext(1);*/
@@ -142,7 +142,7 @@ public function hellhoundRapesPlayer():void {
 	if(player.cor < 40) stats(0,-2,0,0,0,0,-100,1);
 	//[if corrupt]
 	else stats(0,0,0,0,0,0,-100,1.5);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 public function hellHoundGetsRaped():void {
@@ -159,7 +159,7 @@ public function hellHoundGetsRaped():void {
 	//[if player has no endowments] 
 	if(player.gender == 0) outputText("The two heads stare at your lack of sexual endowments for a few seconds before looking up at you sadly.  With a whine, the hellhound wanders off.  Feeling rather unsatisfied, you think that you should probably fix your lack of sexual 'parts'....", false);
 	else stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);																																																																		
+	cleanupAfterCombat();
 }
 
 
@@ -362,7 +362,7 @@ public function hellHoundPropahRape():void {
 	if(player.cor < 20) {
 		outputText("The corrupt juice burns on your tongue, far worse than the hottest spicy dish you have ever had. You instantly back off from his member, cursing this abomination of nature. Leaving the submissive creature as it is, you head back for your camp.", false);
 		stats(0,0,0,0,0,0,-99,0);
-		eventParser(5007);
+		cleanupAfterCombat();
 		return;
 	}
 	//--- ELSE (CORRUPTION >= 20) ---
@@ -376,7 +376,7 @@ public function hellHoundPropahRape():void {
 			takeDamage(20);
 			stats(0,0,0,0,0,0,-99,0);
 			//--> deals 20dmg (lowering hp to a minimum of 1), introduces inability to masturbate
-			eventParser(5007);
+			cleanupAfterCombat();
 			return;
 		}
 		//--- ELSE (CORRUPTION >= 40) ---
@@ -424,5 +424,5 @@ public function hellHoundPropahRape():void {
 		//Preggers chance!
 		player.knockUp(6,352,101);
 	}
-	eventParser(5007);
+	cleanupAfterCombat();
 }

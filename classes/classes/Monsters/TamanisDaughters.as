@@ -20,6 +20,16 @@ package classes.Monsters
 			game.combatWinAgainstDaughters();
 		}
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if(pcCameWorms){
+				outputText("\n\nYour foes seem visibly disgusted and leave, telling you to, \"<i>quit being so fucking gross...</i>\"");
+				game.cleanupAfterCombat();
+			} else {
+				game.loseToDaughters();
+			}
+		}
+
 		public function TamanisDaughters(mainClassPtr:*)
 		{
 			super(mainClassPtr);

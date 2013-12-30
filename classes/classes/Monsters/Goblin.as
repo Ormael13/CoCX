@@ -27,6 +27,24 @@
 			}
 		}
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if (short == "goblin") {
+				if (player.gender == 0) {
+					outputText("You collapse in front of the goblin, too wounded to fight.  She giggles and takes out a tube of lipstick smearing it whorishly on your face.  You pass into unconsciousness immediately.  It must have been drugged.", false);
+					game.cleanupAfterCombat();
+				} else if (pcCameWorms) {
+					outputText("\n\nThe goblin's eyes go wide and she turns to leave, no longer interested in you.", false);
+					game.stats(0, 0, 0, 0, 0, 0, -100, 0);
+					game.doNext(game.cleanupAfterCombat);
+				} else {
+					game.eventParser(5089);
+				}
+			} else if (short == "goblin broodmother"){
+				game.urtaLosesToGoblin();
+			}
+		}
+
 		public function Goblin(mainClassPtr:*)
 		{
 			super(mainClassPtr);

@@ -31,6 +31,17 @@
 			game.zealotDefeated();
 		}
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if (pcCameWorms){
+				outputText("\n\nThe fetish cultist ignores the perverse display and continues on as if nothing had happened...", false);
+				game.stats(0,0,0,0,0,0,-100,0);
+				game.doNext(5106);
+			} else {
+				game.zealotLossRape();
+			}
+		}
+
 		public function FetishZealot(mainClassPtr:*)
 		{
 			super(mainClassPtr);

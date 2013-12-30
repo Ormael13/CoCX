@@ -23,6 +23,16 @@ package classes.Monsters
 			game.defeatTheKitsunes();
 		}
 
+		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
+		{
+			if (pcCameWorms) {
+				outputText("\n\nThe kitsune recoils before running off, no longer interested in you...");
+				game.cleanupAfterCombat();
+			} else {
+				game.loseToKitsunes();
+			}
+		}
+
 		public function Kitsune(mainClassPtr:*, hairColor:String)
 		{
 			super(mainClassPtr);

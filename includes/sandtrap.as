@@ -239,9 +239,9 @@ public function pcBeatsATrap():void {
 	if(player.lust >= 33) {
 		outputText("\n\nBefore you go, you take in the helpless body of your would-be ambusher.  What do you do?");
 		
-		choices("Naga3Some",nagaThreeSome,"UseYourCock",putYourDickInIt,"RideVaginal",rideDatSantTrap,"Handjob",useSandTarpsHand,"",0,"",0,"",0,"",0,"B.Titfuck",bikiniTits,"Leave",5007);
+		choices("Naga3Some",nagaThreeSome,"UseYourCock",putYourDickInIt,"RideVaginal",rideDatSantTrap,"Handjob",useSandTarpsHand,"",0,"",0,"",0,"",0,"B.Titfuck",bikiniTits,"Leave",cleanupAfterCombat);
 	}
-	else eventParser(5007);
+	else cleanupAfterCombat();
 }
 
 //Male/Herm loss (Z)
@@ -289,7 +289,7 @@ public function dickwieldersLoseToSandTarps():void {
 	stats(0,0,0,0,1,0,-100,0);
 	slimeFeed();
 	//reduce lust, increase lib, slimefeed, reset hours since cum
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Female loss (Z)
@@ -322,7 +322,7 @@ public function chicksLoseToSandTarp():void {
 	stats(0,0,0,0,1,0,-100,0);
 	slimeFeed();
 	//reduce lust, increase lib, slimefeed, reset hours since cum
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Unsexed (Z)
@@ -356,7 +356,7 @@ public function genderlessLoss():void {
 	stats(0,0,0,0,1,0,-100,0);
 	slimeFeed();
 	//reduce lust, increase lib, slimefeed, reset hours since cum
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 public function sandTrapPregChance():void {
@@ -517,7 +517,7 @@ public function useSandTarpsHands():void {
 	outputText("\n\n\"<i>Please, lion,</i>\" it manages eventually.  You look at the strange, half-buried creature and notice that spots of fluid are darkening the sand around it; it is evidently perversely turned on by your domineering actions, and you have left it in no way satiated.  You curl your lip into an evil smirk.");
 	outputText("\n\n\"<i>Not today, I think,</i>\" you say over your shoulder, as you clamber out of its pit.  \"<i>I think you'll have to try a bit harder if you want to get what you want from this lion.</i>\"  Your smile broadens as a deeply frustrated moan reaches your ears from behind you...");
 	stats(0,0,0,0,0,-1,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 
@@ -545,7 +545,7 @@ public function rideDatSandTarpLikeIts1999():void {
 	outputText("\n\n\"<i>What do you say, slave?</i>\"");
 	outputText("\n\nIt takes the creature several moments to gather its wits.  \"<i>Th-thank you, lion.</i>\"  Glowing with satisfaction, you begin the climb out of your conquest's hole and back towards camp.");
 	stats(0,0,0,0,0,-1,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 //\"<i>Vagina</i>\" (Z)
 public function stickWangInSandgina():void {
@@ -586,7 +586,7 @@ public function stickWangInSandgina():void {
 	outputText("vision swims a bit as you slowly recede from the sandtrap, dripping shared sex as you go.  You give the top half of the creature a careful berth as you pick up your [armor] and slowly dress, but it is in no shape for retaliation.  The black haired androgyne seems to be in a deeply satisfied post-coital trance, humming and fluttering softly to itself as it trails patterns in the sand.  It blinks unsteadily at you as you begin to clamber your way out of the hole.  Behind you you hear sand being flung as it begins to go about the task of re-immersing itself.");
 	outputText("\n\n\"<i>Thank you for your seed, lion,</i>\" its sleepy words reach you as you pull yourself clear of the hollow and step out towards camp.  \"<i>Perhaps next time we meet I will return the favor, hmm?</i>\"  In your wearily tranquil fug you can't tell if it intends this as an invitation or a threat.");
 	stats(0,0,0,0,0,-1,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Naga Threesome (Z)
@@ -649,7 +649,7 @@ public function nagaThreesomeWithSandTrap():void {
 	outputText("\n\n\"<i>That was wonderful,</i>\" she whispers as she slowly releases you and begins to trail off into the shimmering heat.  \"<i>Everything is so much more fun when you do it with two.</i>\"");
 	outputText("\n\nYou definitely think visiting the desert more often is a good idea.");
 	stats(0,0,0,0,0,0,-100,0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Sandtrap Bad End

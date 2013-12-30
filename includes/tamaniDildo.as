@@ -26,7 +26,7 @@ public function sharkGirlGetsDildoed():void {
 	outputText("Damn that was hot!  You'll need to sate yourself once you get back to camp for sure.  Maybe you should give this dildo a whirl?  It still smells of your victim.", false);
 	
 	stats(0,0,0,0,0,0,(20+player.lib/5+player.cor/10),0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //RAEP BEE GIRLS WITH DILDO
@@ -52,7 +52,7 @@ public function beeGirlsGetsDildoed():void {
 	else outputText("Y", false);
 	outputText("ou really need to get back to camp and get off after such an intense experience.  Maybe you should give your honey-flavored dildo a shot?", false);
 	stats(0,0,0,0,0,0,(20+player.lib/5+player.cor/10),0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //RAEP SAND-WITCH!
@@ -68,7 +68,7 @@ public function sandwitchGetsDildoed():void {
 	if(player.cor > 50) outputText("lick it clean, ", false);
 	outputText("and head back towards camp, knowing full well you'll need to relieve some tension after such a hot encounter.", false);
 	stats(0,0,0,0,0,0,(20+player.lib/5+player.cor/10),0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[FACTORY SUCCUBUS]
@@ -86,5 +86,5 @@ public function succubusGetsDildoed():void {
 	if(player.cor > 75) outputText("giving it a long lick to taste the succubi's delicious flavor ", false);
 	outputText("and put it away.  When you glance back towards the Succubus, she's gone, leaving you alone and horny...", false);
 	stats(0,0,0,0,0,0,(20+player.lib/5+player.cor/10),0);
-	eventParser(5007);
+	cleanupAfterCombat();
 }

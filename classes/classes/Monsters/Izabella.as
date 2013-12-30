@@ -20,6 +20,16 @@ package classes.Monsters
 			game.defeatIsabella();
 		}
 
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
+		{
+			if(pcCameWorms){
+				outputText("\n\n\"<i>Ick,</i>\" Isabella tuts as she turns to leave...");
+				game.cleanupAfterCombat();
+			} else {
+				game.isabellaDefeats();
+			}
+		}
+
 		public function Izabella(mainClassPtr:*)
 		{
 			super(mainClassPtr);

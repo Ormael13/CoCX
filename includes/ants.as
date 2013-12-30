@@ -193,7 +193,7 @@ public function consolePhylla():void {
 	outputText("\n\nYou stagger backwards and almost fall over completely, but the ant manages to catch you. Though she herself is thin, her four arms are surprisingly strong; they do little to help the disorientation, even so.  The world spins round and round as you struggle to shake off your vertigo and the girl lowers you to the ground.  Once your thoughts are collected enough to at least sit up unassisted, you find your new friend standing in front of you with a huge smile.  You feel an odd kinship from her, as though you've known her your whole life.  That can't be right; you shake your head again trying to clear your mind.  The female... ant-morph breaks into a sprint away from you and the cart, before you can ask her what just happened.  You would attempt to pursue, but she's very quick and you can yet hardly stand upright.  She leaves you surrounded by useless trinkets in a barren part of the desert and completely stunned as to what just transpired.  Although, looking around, you think you have a better idea of where you might be in the desert - you may even know how to find that large anthill you saw when the ant-morph kissed you.  Unconsciously you whisper a name quietly under your breath as you picture the scene: \"<i>Phylla...</i>\"");
 	outputText("\n\nYou exhale a loud sigh.  This land is still full of surprises, even after all you've seen.");
 	flags[kFLAGS.PHYLLA_SAVED] = 1;
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[Enter The Colony]
@@ -308,7 +308,7 @@ public function phyllaTentacleDefeat():void {
 	fatigue(10);
   	//(+1 Win Score)
 	flags[kFLAGS.ANT_ARENA_WINS]++;
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //►(Tentacle Beast - Loss) Standard Tentacle Beast Loss Scene.
@@ -323,7 +323,7 @@ public function phyllaTentaclePCLoss():void {
 		antastrophyBadEnd();
 		return;
 	}
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //►(Minotaur- Win) 
@@ -335,7 +335,7 @@ public function phyllaBeatAMino():void {
 	fatigue(10);
  	//(+1 Win Score)
 	flags[kFLAGS.ANT_ARENA_WINS]++;
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 //►(Minotaur- Loss) 
 public function phyllaPCLostToMino():void {
@@ -347,7 +347,7 @@ public function phyllaPCLostToMino():void {
 		antastrophyBadEnd();
 		return;
 	}
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 public function phyllaPCBeatsGnoll():void {
@@ -371,7 +371,7 @@ public function phyllaPCBeatsGnoll():void {
 	}
 	//(+1 Win Score)
 	flags[kFLAGS.ANT_ARENA_WINS]++;
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 public function phyllaGnollBeatsPC():void {
 	//►(Gnoll - Loss First Time) Standard Gnoll Loss Scene. +
@@ -390,7 +390,7 @@ public function phyllaGnollBeatsPC():void {
 		antastrophyBadEnd();
 		return;
 	}
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 

@@ -2485,7 +2485,7 @@ public function sheilaGotWhomped():void {
 //if choosing Let Her Go and sheila xp > -3, set sheila xp = -1, then give xp/gems and Next button to camp
 public function letSheilaGo():void {
 	if(flags[kFLAGS.SHEILA_XP] >= -3) flags[kFLAGS.SHEILA_XP] = -1;
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[Victory Rapin' - Rape Pussy] - uses cockarea <= 48:
@@ -2634,7 +2634,7 @@ public function rapeSheilasCooter():void {
 			sheilaCorruption(-10);
 		}*/
 	}
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[Victory Rapin' - Forced Oral] - no corruption transfer, but adds some to PC
@@ -2812,7 +2812,7 @@ public function forcedSheilaOral(dick:Boolean = true):void {
 		//end lingus branch, reduce lust, lower libido, add corruption
 		stats(0,0,0,0,-1,0,-100,1);
 	}
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //[Dildo Rape] - requires DX Dildo
@@ -2882,7 +2882,7 @@ public function sheilaGetsRapedWithADildont():void {
 		sheilaCorruption(10);
 	}
 	stats(0,0,0,0,0,0,player.lib/3,0,false);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //loss in combat: 
@@ -2898,7 +2898,7 @@ public function getBeatUpBySheila():void {
 		else outputText("fantasies of her, stark naked but for her hat and waiting with her legs open");
 		outputText(".");
 		//lose 8 hrs if HP < 1 or 1 hr if lust > 99, no gem loss 
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 	//(else monster lust >= 75)
 	else {
@@ -3007,7 +3007,7 @@ public function sheilaCowgirlRapesYou():void {
 			outputText("\n\n\"<i>Well... what do you think of that, then?</i>\"  Sheila laughs and cleans herself on the grass, then picks up her stuff and leaves you to sleep off the fatigue and defeat.");
 			//reset hours since cum, pass 1 hr if lust loss or 8 if HP
 			stats(0,0,0,0,0,1,-100,0);
-			eventParser(5007);
+			cleanupAfterCombat();
 		}
 		//(else sens < 50)
 		else {
@@ -3029,7 +3029,7 @@ public function sheilaCowgirlRapesYou():void {
 			//huge sens-based lust damage and lose 8 hrs if HP loss or plus med libido and return to camp if lust loss
 			stats(0,0,0,0,0,3,50+player.lib/10,0,false);
 			//end cock don't fit branch
-			eventParser(5007);
+			cleanupAfterCombat();
 		}
 	}
 	//(else if cock fit 32)
@@ -3060,7 +3060,7 @@ public function sheilaCowgirlRapesYou():void {
 			outputText("\n\n\"<i>No, I'm...</i>\" she attempts, frowning, then slumps her shoulders in defeat.  \"<i>You're right.  This is wrong.  I'm sorry.</i>\"  Sheila turns and quietly pulls her shorts back up, fastening her belt, then locates her top and slips it over her breasts.  She picks up the rest of her stuff, looks back at you once, then lopes off.  You watch her go with high energy and mixed feelings - of all things, the image of her pulling the shirt down over her flushed, sweating back sticks in your head, taunting you and keeping your prick hard long after she's gone.");
 			//end scene and return to camp, plus some libido, plus lots of lust
 			stats(0,0,0,0,1,0,70,0);
-			eventParser(5007);
+			cleanupAfterCombat();
 			return;
 		}
 		//(else lib >= 25)
@@ -3115,7 +3115,7 @@ public function sheilaCowgirlRapesYou():void {
 			
 			//reduce lust and lib, reset hrs since cum, lose 8 hrs if HP or 2-3 if lust loss?
 			stats(0,0,0,0,-1,0,-100,0);
-			eventParser(5007);
+			cleanupAfterCombat();
 		}
 	}
 	//if not ended prematurely by small cock and lib < 25, PC corr > sheila corruption then -10 PC corr and +10 sheila corruption, else if PC corr < sheila corruption then +10 PC corr and -10 sheila corruption
@@ -3216,7 +3216,7 @@ public function sheilaForcedOralGeneric():void {
 		stats(0,0,0,0,0,0,0,10);
 		sheilaCorruption(-10);
 	}*/
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Normal preg notif #1 (sheilapreg = 4 and demon sheila = 0 and sheila xp >= -2 and joeycount = 0):
@@ -3735,7 +3735,7 @@ public function sheilaGoesDemon():void {
 	flags[kFLAGS.SHEILA_DEMON] = 1;
 	//good place to cut off content if you don't have time to code it all in one go
 	if(!inCombat()) doNext(13);
-	else eventParser(5007);
+	else cleanupAfterCombat();
 }
 
 //Demon Sheila encounter (demon sheila = 1 and sheilapreg < 4)
@@ -4141,7 +4141,7 @@ public function sitAndPout():void {
 	//(if PC lust < 30)
 	if(player.lust < 33) {
 		outputText("\n\nYou're not that interested, though; Sheila harrumphs as you pass her by and leave.");
-		eventParser(5007);
+		cleanupAfterCombat();
 		return;
 	}
 	combatRoundOver();
@@ -4270,7 +4270,7 @@ public function loseToDemonSheila():void {
 	stats(0,0,0,0,0,0,-100,0);
 	player.HP = maxHP();
 	fatigue(-50);
-	eventParser(5007);
+	cleanupAfterCombat();
 }
 
 //Loss - normal cocks get rode (for cockarea <= 56)
@@ -4336,7 +4336,7 @@ public function loseToNormalSheilaAndGetRidden():void {
 		player.cumMultiplier++;
 		stats(0,0,0,0,0,0,0,10);
 		sheilaCorruption(-10);
-		if(inCombat()) eventParser(5007);
+		if(inCombat()) cleanupAfterCombat();
 		else doNext(13);
 	}
 	//(else if no balls)
@@ -4391,7 +4391,7 @@ public function loseToNormalSheilaAndGetRidden():void {
 		stats(0,0,0,0,0,0,-100,10);
 		sheilaPreg();
 		sheilaCorruption(-10);
-		if(inCombat()) eventParser(5007);
+		if(inCombat()) cleanupAfterCombat();
 		else doNext(13);
 	}
 }
@@ -4433,7 +4433,7 @@ public function tailSpadeSoundingForFuckHugeDongsWithDemonSheila():void {
 	player.cumMultiplier++;
 	stats(0,0,0,0,0,0,-100,10);
 	sheilaCorruption(-10);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	doNext(13);
 }
 
@@ -4582,7 +4582,7 @@ public function clitSwellingDemonSheilaClitSoundingAnal():void {
 		stats(0,0,0,0,0,0,0,-10);
 	}
 	stats(0,0,0,0,-1,-2,-100,0);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
 	
@@ -4604,7 +4604,7 @@ public function aintGotNoGenderAndKangarooRaped():void {
 	
 	//big lib-based lust gain, med lib gain if lust hits 100, pass 1 hour
 	stats(0,0,0,0,0,0,20+player.lib/4,0,false);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
 
@@ -4620,7 +4620,7 @@ public function beatUpDemonSheila(output:Boolean = true):void {
 	//[(lust < 30)]
 	if(player.lust <= 33 && output) {
 		outputText("\n\nYou're just not horny enough to consider fucking her right now, though, and she wilts a bit as you turn away.  \"<i>Sorry, I was just having fun... I'll see you soon, then?</i>\" she calls, hopefully.");
-		eventParser(5007);
+		cleanupAfterCombat();
 	}
 	//if lust high enough, display choices [Missionary][Big Dick+Thighs][Penetration, In Spades][Nipple Kisses][Anal Hate-fuck(req >= 75 corr and monster lust >99 or monster HP < 1 to appear)]
 	menu();
@@ -4703,7 +4703,7 @@ public function missionaryForThePurposesOfCreatingImpsWithSheila():void {
 		stats(0,0,0,0,-1,0,-100,0);
 		sheilaPreg();
 		//if short scene, sheilapreg check, reduce PC lust and libido
-		if(inCombat()) eventParser(5007);
+		if(inCombat()) cleanupAfterCombat();
 		else doNext(13);
 	}
 	//(else if RNG doesn't end scene)
@@ -4758,7 +4758,7 @@ public function missionaryForThePurposesOfCreatingImpsWithSheila():void {
 			stats(0,0,0,0,0,0,0,-10);
 			sheilaCorruption(10);
 		}
-		if(inCombat()) eventParser(5007);
+		if(inCombat()) cleanupAfterCombat();
 		else doNext(13);
 	}
 }
@@ -4845,7 +4845,7 @@ public function sheilaAnalHateFuckAGoGoNO():void {
 	
 	//minus lust, minus libido, plus small corruption
 	stats(0,0,0,0,-1,0,-100,2);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
 
@@ -4878,7 +4878,7 @@ public function sheilaAnalHateFuckAGoGoGETYOUSOMEWORMS():void {
 	stats(0,0,0,0,0,0,-100,10);
 	stats(0,0,0,0,0,0,player.lib/5,0);
 	flags[kFLAGS.SHEILA_PREG] = -2;
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
 
@@ -4939,7 +4939,7 @@ public function analHateFucksWithJojoNo(clear:Boolean):void {
 	outputText("\n\nResponding quickly, Jojo falls into formation beside you as you back away from the debased demon.  As she pushes herself upright, covered in liquid filth, the only glow you can see in her eyes now is one of simmering anger.  Satisfied with ruining her fun, you depart.");
 	//lust raised, plus some corruption
 	stats(0,0,0,0,0,0,player.lib/3,2);
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
 
@@ -4988,7 +4988,7 @@ public function jojoRuinsTheAnalHateFuck(clear:Boolean = true):void {
 	stats(0,0,0,0,0,0,100,10,false);
 	flags[kFLAGS.SHEILA_PREG] = -3;
 	flags[kFLAGS.JOJO_DEAD_OR_GONE] = 1;
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
 	
@@ -5128,7 +5128,7 @@ public function bigDickAndThighs():void {
 		stats(0,0,0,0,0,0,0,-10);
 		sheilaCorruption(10);
 	}
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
 
@@ -5205,7 +5205,7 @@ public function winAgainstDemoNSheilaForVaginas():void {
 		sheilaCorruption(-10);
 		stats(0,0,0,0,0,0,0,10);
 	}
-	if(inCombat()) eventParser(5007);
+	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
 
