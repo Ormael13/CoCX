@@ -24,6 +24,20 @@
 			mainClassPtr.harpyVictoryuuuuu();
 		}
 
+
+		override protected function outputPlayerDodged(dodge:int):void
+		{
+			outputText("With another deranged cry the harpy dives at you, swinging her razor-sharp talons through the air with the grace of a ballerina. Your quick reflexes allow you to dodge every vicious slash she makes at you.\n", false);
+		}
+
+		override public function outputAttack(damage:int):void
+		{
+			if (damage <= 0){
+				outputText("The harpy dives at you with her foot-talons, but you deflect the attack, grasp onto her leg, and swing her through the air, tossing her away from you before she has a chance to right herself.", false);
+			} else {outputText("The harpy surges forward, bringing her razor-sharp claws down on you, tearing at all the exposed flesh she can reach! (" + damage + ")", false);
+			}
+		}
+
 		public function Harpy(mainClassPtr:*)
 		{
 			super(mainClassPtr);

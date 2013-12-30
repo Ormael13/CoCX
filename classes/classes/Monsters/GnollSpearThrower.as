@@ -9,6 +9,11 @@ package classes.Monsters
 	public class GnollSpearThrower extends Monster 
 	{
 
+		override public function eAttack():void
+		{
+			mainClassPtr.hyenaPhysicalAttack();
+		}
+
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if(short == "alpha gnoll") {

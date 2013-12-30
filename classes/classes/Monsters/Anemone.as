@@ -11,9 +11,29 @@ package classes.Monsters
 	public class Anemone extends Monster 
 	{
 
+
+		override public function eAttack():void
+		{
+			outputText("Giggling playfully, the anemone launches several tentacles at you.  Most are aimed for your crotch, but a few attempt to caress your chest and face.\n", false);
+			super.eAttack();
+		}
+
+		override public function eOneAttack():int
+		{
+			if (attackSucceeded()){
+				mainClassPtr.applyVenom(rand(4 + player.sens / 20) + 1);
+			}
+			return 1;
+		}
+
 		override public function defeated(hpVictory:Boolean):void
 		{
 			mainClassPtr.defeatAnemone();
+		}
+
+		override public function outputAttack(damage:int):void
+		{
+			outputText("You jink and dodge valiantly but the tentacles are too numerous and coming from too many directions.  A few get past your guard and caress your skin, leaving a tingling, warm sensation that arouses you further.", false);
 		}
 
 		public function Anemone(mainClassPtr:*)

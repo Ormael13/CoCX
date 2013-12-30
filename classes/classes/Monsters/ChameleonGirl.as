@@ -23,6 +23,21 @@ package classes.Monsters
 			mainClassPtr.defeatChameleonGirl();
 		}
 
+
+		override protected function outputPlayerDodged(dodge:int):void
+		{
+			outputText("The chameleon girl whips her head and sends her tongue flying at you, but you hop to the side and manage to avoid it.  The pink blur flies back into her mouth as quickly as it came at you, and she looks more than a bit angry that she didn't find her target.\n");
+		}
+
+		override public function outputAttack(damage:int):void
+		{
+			if (damage <= 0){
+				outputText("The Chameleon Girl lashes out with her tongue, but you deflect the sticky projectile off your arm, successfully defending against it.  She doesn't look happy about it when she slurps the muscle back into her mouth.");
+			} else {
+				outputText("The chameleon whips her head forward and sends her tongue flying at you.  It catches you in the gut, the incredible force behind it staggering you.  The pink blur flies back into her mouth as quickly as it came at you, and she laughs mockingly as you recover your footing. (" + damage + ")");
+			}
+		}
+
 		/**
 		 * Pairs of skinTone/skinAdj
 		 */

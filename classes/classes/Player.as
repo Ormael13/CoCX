@@ -1,6 +1,8 @@
 package classes
 {
-	
+	import classes.GlobalFlags.kFLAGS;
+	import classes.content.UmasShop;
+
 	/**
 	 * ...
 	 * @author Yoffy
@@ -28,45 +30,94 @@ package classes
 		public var exploredDesert:Number = 0;
 		public var exploredMountain:Number = 0;
 		public var exploredLake:Number = 0;
-		
-		public function Player()
-		{
 
-		}	
+		private var game:*;
+		
+		public function Player(game:*)
+		{
+			this.game = game;
+		}
+
+		public function reduceDamage(damage:Number):Number{
+			damage = int(damage - rand(tou) - armorDef);
+			//EZ MOAD half damage
+			if (game.flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) damage /= 2;
+			if (hasStatusAffect("Shielding") >= 0) {
+				damage -= 30;
+				if (damage < 1) damage = 1;
+			}
+			//Black cat beer = 25% reduction!
+			if (statusAffectv1("Black Cat Beer") >= 0)
+				damage = Math.round(damage * .75);
+
+			//Take damage you masochist!
+			if (hasPerk("Masochist") >= 0 && lib >= 60) {
+				damage = Math.round(damage * .7);
+				game.stats(0, 0, 0, 0, 0, 0, 2, 0);
+				//Dont let it round too far down!
+				if (damage < 1) damage = 1;
+			}
+			if (hasPerk("Immovable Object") >= 0 && tou >= 75) {
+				damage = Math.round(damage * .8);
+				if (damage < 1) damage = 1;
+			}
+
+			// Uma's Massage bonuses
+			var statIndex:int = hasStatusAffect(UmasShop.MASSAGE_BONUS_NAME);
+			if (statIndex >= 0) {
+				if (statusAffects[statIndex].value1 == UmasShop.MASSAGE_RELAXATION) {
+					damage = Math.round(damage * statusAffects[statIndex].value2);
+				}
+			}
+
+			// Uma's Accupuncture Bonuses
+			var modArmorDef:Number = 0;
+			if (hasPerk(UmasShop.NEEDLEWORK_DEFENSE_PERK_NAME) >= 0) modArmorDef = ((armorDef * UmasShop.NEEDLEWORK_DEFENSE_DEFENSE_MULTI) - armorDef);
+			if (hasPerk(UmasShop.NEEDLEWORK_ATTACK_PERK_NAME) >= 0) modArmorDef = ((armorDef * UmasShop.NEEDLEWORK_ATTACK_DEFENSE_MULTI) - armorDef);
+			damage -= modArmorDef;
+			if (damage<0) damage = 0;
+			return damage;
+		}
+
+		public function takeDamage(damage:Number,noMod:Boolean=false):Number{
+			if (!noMod) damage = reduceDamage(damage);
+			//Round
+			damage = Math.round(damage);
+			// we return "1 damage received" if it is in (0..1) but deduce no HP
+			var returnDamage:int = (damage>0 && damage<1)?1:damage;
+			if (damage>0){
+				HP -= damage;
+				game.mainView.statsView.showStatDown('hp');
+				if (game.flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
+					game.stats(0, 0, 0, 0, 0, 0, int(damage / 2), 0);
+				}
+				//Prevent negatives
+				if (HP<=0){
+					HP = 0;
+					if (game.gameState == 1 || game.gameState == 2) game.doNext(5010);
+				}
+			}
+			return returnDamage;
+		}
+
+		/**
+		 * @return 0: did not avoid; 1-3: avoid with varying difference between
+		 * speeds (1: narrowly avoid, 3: deftly avoid)
+		 */
+		public function speedDodge(monster:Monster):int{
+			var diff:Number = spe - monster.spe;
+			var rnd:Boolean = int(Math.random() * ((diff / 4) + 80)) > 80;
+			if (rnd) return 0;
+			else if (diff<8) return 1;
+			else if (diff<20) return 2;
+			else return 3;
+		}
 		
 		//Body Type
 		public function bodyType():String
 		{
 			var desc:String = "";
 			//OLD STUFF
-			/*var strong:Number = 0;
-			   var desc:String = "";
-			   var lithe:Number = 0;
-			   //strong points
-			   if(str > 25) strong++;
-			   if(str > 50) strong++;
-			   if(str > 75) strong++;
-			   if(str > 99) strong++;
-			   //lithe points
-			   if(spe > 25) lithe++;
-			   if(spe > 50) lithe++;
-			   if(spe > 75) lithe++;
-			   if(spe > 99) lithe++;
-			   if(strong == 0) desc += "small muscles ";
-			   if(strong == 1) desc += "average muscles ";
-			   if(strong == 2) desc += "strong muscles ";
-			   if(strong == 3) desc += "obvious muscles ";
-			   if(strong == 4) desc += "bodybuilder-like muscles ";
-			   if(lithe == strong) desc += "as quick as they are strong";
-			   if(lithe - 1 == strong) desc += "that look lean and quick";
-			   if(lithe - 2 == strong) desc += "that stand out on your sinewy frame";
-			   if(lithe - 3 == strong) desc += "that look lithe and quick";
-			   if(lithe - 4 == strong) desc += "that don't betray their incredible speed";
-			   if(lithe + 1 == strong) desc += "that aren't that quick";
-			   if(lithe + 2 == strong) desc += "hidden under a small layer of fat";
-			   if(lithe + 3 == strong) desc += "under some noticable pudge";
-			   if(lithe + 4 == strong) desc += "buried under lots of fat";
-			 */
 			//SUPAH THIN
 			if (thickness < 10)
 			{

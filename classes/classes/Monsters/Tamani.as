@@ -19,7 +19,7 @@ package classes.Monsters
 			if(player.lust >= 33 && player.totalCocks() > 0) {
 				outputText("  You could fuck her, but if that's the case why did you bother fighting her?\n\nWhat do you do to her?", false);
 				var temp:int = 0;
-				var temp2 = 0;
+				var temp2:int = 0;
 				if(player.hasCock() && player.cockThatFits(analCapacity()) >= 0) temp = 3360;
 				//NOT PREGGERS
 				if(player.statusAffectv1("Tamani") <= -500 && player.canOvipositSpider()) {

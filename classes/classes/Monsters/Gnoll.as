@@ -9,6 +9,12 @@ package classes.Monsters
 	public class Gnoll extends Monster 
 	{
 
+
+		override public function eAttack():void
+		{
+			mainClassPtr.gnollAttackText();
+		}
+
 		override protected function performCombatAction():void
 		{
 			mainClassPtr.gnollAI();

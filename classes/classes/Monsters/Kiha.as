@@ -16,6 +16,20 @@ package classes.Monsters
 			return true;
 		}
 
+		override protected function handleBlind():Boolean
+		{
+			return true;
+		}
+
+
+		override protected function postAttack(damage:int):void
+		{
+			super.postAttack(damage);
+			var flame:int = 15 + rand(6);
+			flame = player.takeDamage(flame);
+			outputText("\nAn afterwash of flames trails behind her blow, immolating you! (" + flame + ")", false);
+		}
+
 		override protected function performCombatAction():void
 		{
 			mainClassPtr.kihaAI();

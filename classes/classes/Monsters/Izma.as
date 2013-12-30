@@ -10,6 +10,13 @@ package classes.Monsters
 	public class Izma extends Monster 
 	{
 
+
+		override public function eAttack():void
+		{
+			outputText("Izma slides up to you, throws a feint, and then launches a rain of jabs at you!\n", false);
+			super.eAttack();
+		}
+
 		override protected function performCombatAction():void
 		{
 			mainClassPtr.IzmaAI();
