@@ -271,10 +271,35 @@ public function doThatTestingThang():void
 * 17 [if (hasCock == True) HERP|DERP]
 * 18 \\\[if (hasVagina == True) HERP|DERP\\\]
 * 18 [if (hasVagina == True) HERP|DERP]
+
+** Member Accessors**
+
 * 19 \\\[if (player.biggestLactation > 0) HERP|DERP\\\]
 * 19 [if (player.biggestLactation > 0) HERP|DERP]
 * 20 \\\[if (player.biggestLactation > 0)  \\\[if (hasVagina == True) LOL|WAT\\\]|DERP\\\]
 * 20 [if (player.biggestLactation > 0)  [if (hasVagina == True) LOL|WAT]|DERP]
+* 21 \\\[if (player.str > 0)  HERP|DERP\\\]
+* 21 [if (player.str > 0)  HERP|DERP]
+* 22 \\\[if (player.int > 0)  HERP|DERP\\\]
+* 22 [if (player.int > 0)  HERP|DERP]
+* 23 \\\[if (player.biggestTitSize > 0)  HERP|DERP\\\]
+* 23 [if (player.biggestTitSize > 0)  HERP|DERP]
+* 24 \\\[if (player.biggestLactation > 0)  HERP|DERP\\\]
+* 24 [if (player.biggestLactation > 0)  HERP|DERP]
+
+**Arbitrary function calls**
+
+
+* \\\[eCockDescript 0\\\] - [eCockDescript 0]  
+* \\\[eCockDescript\\\] - [eCockDescript]  
+
+* \\\[cockDescript 0\\\] - [cockDescript 0]  
+* \\\[cockDescript\\\] - [cockDescript]  
+* Generic function calls will be cast to string  
+* \\\[player.cumQ\\\] - [player.cumQ]  
+* `\[kFLAGS_REF.ARIAN_COCK_SIZE\]` - [kFLAGS_REF.ARIAN_COCK_SIZE]  
+* `\[flags kFLAGS_REF.ARIAN_COCK_SIZE\]` - [flags kFLAGS_REF.ARIAN_COCK_SIZE]  
+
 
 **Gender tests**
 
@@ -338,14 +363,6 @@ It's a herm!
 
 convert "  
 "derp a herp"
-
-**Random test-funtions**
-
-* \\\[eCockDescript 0\\\] - [eCockDescript 0]
-* \\\[eCockDescript\\\] - [eCockDescript]
-
-* \\\[cockDescript 0\\\] - [cockDescript 0]
-* \\\[cockDescript\\\] - [cockDescript]
 
 
 	]]>, true, true);
