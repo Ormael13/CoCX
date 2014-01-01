@@ -1356,7 +1356,7 @@ public function kihaPlaysWithBigassCocksFemDomAhoy():void {
 	}
 	outputText(".");
 	if(bimboSophie()) outputText("  Sophie greets you when you return, though she seems crestfallen once she smells the sex on you and realizes how thoroughly you've been sated.");
-	if(amilyCorrupt()) outputText("  Amily begs, \"<i>May I help to service you next time, " + player.mf("master","mistress") + "?</i>\"");
+	if(amilyScene.amilyCorrupt()) outputText("  Amily begs, \"<i>May I help to service you next time, " + player.mf("master","mistress") + "?</i>\"");
 	dynStats("sen", -1, "lus=", 0);
 	doNext(13);
 }

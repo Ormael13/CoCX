@@ -1897,7 +1897,7 @@ public function doEvent(eventNo:Number):void
 	{
 		jojoSprite();
 		//Amily meets Jojo:
-		if (flags[kFLAGS.AMILY_MET_PURE_JOJO] == 0 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && amilyFollower())
+		if (flags[kFLAGS.AMILY_MET_PURE_JOJO] == 0 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && amilyScene.amilyFollower())
 		{
 			amilyMeetsPureJojo();
 			return;
@@ -2482,49 +2482,49 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 2371)
 	{
-		exploreVillageRuin();
+		amilyScene.exploreVillageRuin();
 		return;
 	}
 	else if (eventNo == 2382)
 	{
-		sexWithAmily();
+		amilyScene.sexWithAmily();
 		return;
 	}
 	else if (eventNo == 2399)
 	{
 		//No sex after
-		talkWithCuntIMeanAmily(false);
+		amilyScene.talkWithCuntIMeanAmily(false);
 		return;
 	}
 	else if (eventNo == 2400)
 	{
 		//sex after
-		talkWithCuntIMeanAmily(true);
+		amilyScene.talkWithCuntIMeanAmily(true);
 		return;
 	}
 	else if (eventNo == 2405)
 	{
-		amilySexHappens();
+		amilyScene.amilySexHappens();
 		return;
 	}
 	else if (eventNo == 2409)
 	{
-		sitAndWatchAmilySex();
+		amilyScene.sitAndWatchAmilySex();
 		return;
 	}
 	else if (eventNo == 2410)
 	{
-		caressAmilyHaveSex();
+		amilyScene.caressAmilyHaveSex();
 		return;
 	}
 	else if (eventNo == 2427)
 	{
-		amilyFollowerEncounter();
+		amilyScene.amilyFollowerEncounter();
 		return;
 	}
 	else if (eventNo == 2429)
 	{
-		talkToAmilyCamp();
+		amilyScene.talkToAmilyCamp();
 		return;
 	}
 	else if (eventNo == 2435)
@@ -2540,37 +2540,37 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 2453)
 	{
-		giveAmilyPureIncubusDraft();
+		amilyScene.giveAmilyPureIncubusDraft();
 		return;
 	}
 	else if (eventNo == 2456)
 	{
-		giveAmilyPurifiedSuccubusMilk();
+		amilyScene.giveAmilyPurifiedSuccubusMilk();
 		return;
 	}
 	else if (eventNo == 2457)
 	{
-		giveAmilyAPinkEgg();
+		amilyScene.giveAmilyAPinkEgg();
 		return;
 	}
 	else if (eventNo == 2458)
 	{
-		giveAmilyAWhiteEgg();
+		amilyScene.giveAmilyAWhiteEgg();
 		return;
 	}
 	else if (eventNo == 2459)
 	{
-		giveAmilyABrownEgg();
+		amilyScene.giveAmilyABrownEgg();
 		return;
 	}
 	else if (eventNo == 2460)
 	{
-		giveAmilyAPurpleEgg();
+		amilyScene.giveAmilyAPurpleEgg();
 		return;
 	}
 	else if (eventNo == 2461)
 	{
-		giveAmilySomePants();
+		amilyScene.giveAmilySomePants();
 		return;
 	}
 	else if (eventNo == 2479)
@@ -3041,22 +3041,22 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 2756)
 	{
-		girlyGirlMouseSex();
+		amilyScene.girlyGirlMouseSex();
 		return;
 	}
 	else if (eventNo == 2757)
 	{
-		hermilyOnFemalePC();
+		amilyScene.hermilyOnFemalePC();
 		return;
 	}
 	else if (eventNo == 2768)
 	{
-		makeAmilyAHerm();
+		amilyScene.makeAmilyAHerm();
 		return;
 	}
 	else if (eventNo == 2775)
 	{
-		makeChildren();
+		amilyScene.makeChildren();
 		return;
 	}
 	else if (eventNo == 2777)
@@ -3091,7 +3091,7 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 2800)
 	{
-		giveCorruptAmilySuccubusDelight();
+		amilyScene.giveCorruptAmilySuccubusDelight();
 		return;
 	}
 	
@@ -3912,12 +3912,12 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 3172)
 	{
-		amilyDefurryOfferAtCamp();
+		amilyScene.amilyDefurryOfferAtCamp();
 		return;
 	}
 	else if (eventNo == 3174)
 	{
-		amilyNoFur();
+		amilyScene.amilyNoFur();
 		return;
 	}
 	else if (eventNo == 3179)
@@ -4424,17 +4424,17 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 3396)
 	{
-		urtaXAmilyCuntPussyVagSQUICK();
+		amilyScene.urtaXAmilyCuntPussyVagSQUICK();
 		return;
 	}
 	else if (eventNo == 3397)
 	{
-		threesomeAmilUrtaCAWKS();
+		amilyScene.threesomeAmilUrtaCAWKS();
 		return;
 	}
 	else if (eventNo == 3400)
 	{
-		dateNightFirstTime();
+		amilyScene.dateNightFirstTime();
 		return;
 	}
 	else if (eventNo == 3407)
@@ -4454,7 +4454,7 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 3410)
 	{
-		pureAmilyPutsItInYourRectumDamnNearKilledEm();
+		amilyScene.pureAmilyPutsItInYourRectumDamnNearKilledEm();
 		return;
 	}
 	else if (eventNo == 3414)
@@ -4575,12 +4575,12 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 3457)
 	{
-		fuckIncestCunts();
+		amilyScene.fuckIncestCunts();
 		return;
 	}
 	else if (eventNo == 3458)
 	{
-		fuckIncestCunts(true);
+		amilyScene.fuckIncestCunts(true);
 		return;
 	}
 	else if (eventNo == 3463)
@@ -4852,13 +4852,7 @@ public function doEvent(eventNo:Number):void
 	{
 		acceptRebeccsPlea(false, true);
 		return;
-	}
-	if (false == 3609)
-	{
-		acceptRebeccsPlea(false, false);
-		return;
-	}
-	else if (eventNo == 3610)
+	} else if (eventNo == 3610)
 	{
 		intoTheDemonPit(true);
 		return;
@@ -5848,8 +5842,7 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 3950)
 	{
-		layEggsInAmily();
-		return;
+		amilyScene.layEggsInAmily();
 	}
 	else if (eventNo == 3951)
 	{
@@ -5881,8 +5874,7 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 3960)
 	{
-		amilySwimFuckIntro();
-		return;
+		amilyScene.amilySwimFuckIntro();
 	}
 	else if (eventNo == 3962)
 	{
@@ -5967,18 +5959,15 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 3989)
 	{
-		amilyXIzmaSuperPregOptions();
-		return;
+		amilyScene.amilyXIzmaSuperPregOptions();
 	}
 	else if (eventNo == 3990)
 	{
-		drinkThePotion();
-		return;
+		amilyScene.drinkThePotion();
 	}
 	else if (eventNo == 3991)
 	{
-		amilyNurseCheckup();
-		return;
+		amilyScene.amilyNurseCheckup();
 	}
 	else if (eventNo == 3992)
 	{

@@ -57,19 +57,19 @@ public function jojoMutationOfferNo():void {
 public function corruptCampJojo():void {
 	jojoSprite();
 	//Corrupt Amily and Jojo sexings
-	if(flags[kFLAGS.AMILY_FOLLOWER] == 2 && amilyFollower() && campCorruptJojo() && flags[kFLAGS.AMILY_X_JOJO_COOLDOWN] <= 0 && rand(5) == 0) {
+	if(flags[kFLAGS.AMILY_FOLLOWER] == 2 && amilyScene.amilyFollower() && campCorruptJojo() && flags[kFLAGS.AMILY_X_JOJO_COOLDOWN] <= 0 && rand(5) == 0) {
 		flags[kFLAGS.AMILY_X_JOJO_COOLDOWN] = 7;
 		hideMenus();
 		amilyTeachingJojoBJ();
 		return;
 	}
 	//Oh shit goes down! (Wiv Tentacles)
-	if(amilyFollower && flags[kFLAGS.AMILY_DISCOVERED_TENTATLE_JOJO] == 0 && rand(10) <= 1 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && player.hasStatusAffect("Tentacle Jojo") >= 0) {
+	if(amilyScene.amilyFollower && flags[kFLAGS.AMILY_DISCOVERED_TENTATLE_JOJO] == 0 && rand(10) <= 1 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && player.hasStatusAffect("Tentacle Jojo") >= 0) {
 		amilyDiscoversJojoWithTentaclesAndShitOhBoy();
 		return;
 	}
 	//Oh shit goes down! (No tentacles)
-	else if(flags[kFLAGS.AMILY_PISSED_PC_CORRUPED_JOJO] == 0 && rand(10) <= 1 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && amilyFollower() && player.hasStatusAffect("Tentacle Jojo") < 0) {
+	else if(flags[kFLAGS.AMILY_PISSED_PC_CORRUPED_JOJO] == 0 && rand(10) <= 1 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && amilyScene.amilyFollower() && player.hasStatusAffect("Tentacle Jojo") < 0) {
 		amilyIsPissedAtYouForRuiningJojo();
 		return;
 	}
@@ -762,7 +762,7 @@ public function amilyTeachingJojoBJ():void {
 }
 //Scene 1 Result: Male Gets BJ (Z)
 public function BJRidesGETYOUONE():void {
-	amilySprite();
+	amilyScene.amilySprite();
 	clearOutput();
 	outputText("You step into view and knowingly ask just what all the fuss is about.  Amily meekly prostrates herself before you, apologizing, \"<i>I'm sorry, [master], I merely wanted to help your boyslut learn to satisfy your needs better.</i>\"  You wait, just long enough to make her nervous.  The pregnant pause hangs in the air as both your murine whores look increasingly worried, their large, radar-like ears twitching fitfully about as they await your response.  Laughing, you undo your [armor] and ask Amily how she planned to teach without a proper 'teaching tool'.");
 	outputText("\n\nThe succubus-tainted mouse looks up at you with lust pooling in her large, languid eyes.  \"<i>As you command, [master],</i>\" she whispers eagerly as she rises her feet, her spaded tail curling behind Jojo's neck, dragging him closer to you.  Flopping free, [oneCock] dangles enticingly in the air before them, swaying back and forth to a rhythm that seems almost hypnotic to your poor, corrupted sluts.  They zero in on your [cock biggest] as if it were the only thing in the world.  Even Jojo's reluctant attitude evaporates when faced with the irresistable allure of your swinging manhood.  He sits at your [feet] as eagerly as his teacher, his expression an ecstatic portrait of mesmeric cock-worship.");
@@ -794,7 +794,7 @@ public function BJRidesGETYOUONE():void {
 }
 //Fill Amily's Mouth (Z)
 public function fillAmilysMouth():void {
-	amilySprite();
+	amilyScene.amilySprite();
 	clearOutput();
 	outputText("You tell Amily to open wide, and she gleefully yanks your [cock biggest] away from Jojo.  He whines pathetically but, servile as he is, the mouse-boy [if (hasBalls = true) \"leans down to desperately suckle at your [sack], subserviently worshipping your bloated testes and their liquid bliss one after another; tonguing, sucking, and moaning into the spunk-bloated mass of your ambrosial scrotum.\" else \"leans down to slurp needily at the bottom of your cock, licking it with languid tongue-strokes each time Amily gives him an opening.\"]  Amily looks up at you, her cute, succubi-like horns glinting in the light as she purrs, \"<i>Please, [master], give slut a throat-thick load to swallow.  Fill your nympho's mouth-pussy with sticky baby batter and splatter her whorish face with oozing leftovers.</i>\"");
 	outputText("\n\nThe mousette's chemically-engorged lips spread into an 'o', then happily devour most of your dick's straining length, leaving room at the base for her hands and Jojo's tongue to work.  She pumps you hard and fast, and you feel the telltale twitching of your internal muscles, signaling the crest of your onrushing orgasm.  Your [hips] jerk spasmodically as the pleasure overwhelms your control, but Amily holds on like a pro.  She slides her hot, wet little tongue along your member's underside again as your urethra fills with goo, and in one explosive moment, you propel the thick rope of seed hard into the hungry addict's throat.  You see her jaw work breathlessly as she swallows [if (cumQuantity >= 250) most of|all of] it.  You cum and cum for her, packing her worthless throat with your gushing cream, unloading even as she does her best to wring you dry (with Jojo's help).[if (cumQuantity >= 500) \"  Before long, her belly is nicely rounded from all the seed she's swallowed, a happy little bump visible on her lithe frame.\"][if (cumQuantity >= 1000)   Too full to keep drinking, she releases your [cock biggest] with a zestful gasp and gladly takes the next spurt directly on her face and hair.  The huge blob of cum soaks her ardent features, cataracts of jism cascading lazily towards the ground.][if (cumQuantity >= 3000) \"  You keep blasting her with ever-greater volumes of spooge until she's stained completely white with gobs of spunk and lounging euphorically in a deep puddle of it.\"]");
@@ -805,7 +805,7 @@ public function fillAmilysMouth():void {
 }
 //Fill Amily's Twat (requires not short-ass, weak-ass nigga) (Z)
 public function stuffAmilysMouthWithPostBJCUM():void {
-	amilySprite();
+	amilyScene.amilySprite();
 	clearOutput();
 	outputText("You tell Amily to hurry up and climb on.  With a squeak of joy, she bounds up into your arms, immediately sinking her plush little pussy onto your lap and swallowing your cocktip.  Surprising you with her control, she holds herself like that, restraining herself from taking in your whole [cock biggest] and instead bouncing up and down atop your peak while Jojo attends to the lower portion of your manhood with his eager tongue.  He tentatively licks along the swell of your shaft, sucking at the sensitive underside and planting desperate kisses over your length, lapping up Amily's freely flowing juices as she rides the crest of your pulsing tip.  The mouse-girl's ears tickle as they brush against you, her voice husky with desperate need.  \"<i>Please, [master], give slut your seed.  Her cunny needs to be filled sooo badly.  Make me your pregnant, baby-bloated whore, [master]!</i>\"");
 	outputText("\n\nAs if you'd resist such an invitation!  You squeeze your demon mouse tightly and push her further down, impaling her juicy snatch ");
@@ -815,7 +815,7 @@ public function stuffAmilysMouthWithPostBJCUM():void {
 	outputText("\n\nYou leave them behind with a spring in your step.  With a dedicated slave like that training your harem, you have no doubt that you'll be well taken care of.");
 	dynStats("sen", -1, "lus=", 0);
 	//{DONT FORGET PREGNANCY CHECK}
-	amilyPreggoChance();
+	amilyScene.amilyPreggoChance();
 	doNext(13);
 }
 //Fill Jojo's Mouth (Z)

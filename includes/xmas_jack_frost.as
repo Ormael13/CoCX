@@ -198,10 +198,10 @@ public function processJackFrostEvent():void {
 	}
 	//Amily
 	//less than 5!
-	else if(amilyFollower() && flags[kFLAGS.JACK_FROST_PROGRESS] <= 5) {
+	else if(amilyScene.amilyFollower() && flags[kFLAGS.JACK_FROST_PROGRESS] <= 5) {
 		flags[kFLAGS.JACK_FROST_PROGRESS] = 6;
 		//Pure
-		if(!amilyCorrupt()) {
+		if(!amilyScene.amilyCorrupt()) {
 			outputText("Amily is warily prowling across the icy surface, occasionally glancing all around as if trying to spot an ambush.  Other times, she suddenly leaps up in a flurry, whirling around in mid-air as something catches her over-large ears.  All in all, it's quite obvious she's scared.");
 			outputText("\n\nApproaching her, you ask what's gotten her so worried?");
 			outputText("\n\n\"<i>Can't you see all this snow?  There hasn't been snow in Mareth since I was a little baby girl - the demons must have something to do with this!</i>\"  Amily hisses, clearly expecting an attack to come at any moment.");
@@ -592,7 +592,7 @@ public function penetradePureMouseWaifu():void {
 	outputText(".");
 	
 	outputText("\n\nSitting down on your bedroll, you open your arms, inviting Amily over.  The mouse promptly approaches");
-	if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText(", her own " + amilyCock() + " jutting out in anticipation");
+	if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText(", her own " + amilyScene.amilyCock() + " jutting out in anticipation");
 	outputText(", wriggling into your arms and angling her pussy over your " + cockDescript(x) + ".  With the ease of long practice, she slides smoothly down its length, her warm, wet depths greedily inhaling your masculinity.  \"<i>Ah, nothing like a nice hard cock in your cunt to make you feel warmer,</i>\" she coos.");
 	
 	outputText("\n\nYou simply grin and begin bucking your hips against her, suppressing your moans by kissing her, hugging her tightly against you, holding your bodies flush together.  The mouse hugs you as tightly as she can, smothering you with kisses as her hands roam nimbly across your back, slinking down to squeeze your ass with an obvious hunger to molest you.");

@@ -344,6 +344,16 @@
 			// Bullshit to unroll the incoming array
 			kGAMECLASS.dynStats.apply(null, args);
 		}
+
+		protected function hasItem(itemName:String, minQuantity:Number):Boolean
+		{
+			return kGAMECLASS.hasItem(itemName,minQuantity);
+		}
+
+		protected function consumeItem(itemName:String, quantity:Number):Boolean
+		{
+			return kGAMECLASS.consumeItem(itemName,quantity);
+		}
 		
 		protected function get player():Player
 		{
@@ -454,7 +464,7 @@
 		{
 			kGAMECLASS.gameState = val;
 		}
-		
+
 		protected function get itemSlot1():ItemSlotClass
 		{
 			return kGAMECLASS.itemSlot1;

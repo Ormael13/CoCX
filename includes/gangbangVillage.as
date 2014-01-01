@@ -1078,7 +1078,7 @@ public function vapulaSlaveFlavorText():void {
 		}
 	}
 	if(choice == 8) {
-		if(flags[kFLAGS.VAPULA_HAREM_FUCK] == 0 || !(amilyFollower() && amilyCorrupt())) choice = 9;
+		if(flags[kFLAGS.VAPULA_HAREM_FUCK] == 0 || !(amilyScene.amilyFollower() && amilyScene.amilyCorrupt())) choice = 9;
 		//if C. Amily and harem fucking on)
 		else outputText("Vapula is busy caressing your corrupted mousette, Amily while softly kissing her breasts.  Her fingers are buried in your fuck-toy's pussy, and Amily is moaning whorishly and doesn't even bother to stop when she looks at you, her helpless eyes betraying her lack of control over her own lust.");
 	}
@@ -1300,7 +1300,7 @@ public function vapulaThreesomeMenu():void {
 	var izma:int = 0;
 	if(player.hasCock() || (player.hasVagina() && player.hasKeyItem("Demonic Strap-On") >= 0)) {
 		if(campCorruptJojo()) jojo = 3759;
-		if(amilyFollower() && amilyCorrupt() && player.hasCock()) amily = 3761;
+		if(amilyScene.amilyFollower() && amilyScene.amilyCorrupt() && player.hasCock()) amily = 3761;
 		if(ceraphIsFollower() && player.hasCock()) ceraph = 3767;
 		if(bimboSophie()) sophie = 3764;
 		if(izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0) izma = 3757;

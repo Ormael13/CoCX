@@ -3026,9 +3026,9 @@ public function getKnockedUpWithGodChild():void {
 	else outputText("her");
 	outputText(" balls, slathering them with slick spunk.");
 	
-	var ballWorship:Array = new Array();
-	if((amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2) && campCorruptJojo()) ballWorship[ballWorship.length] = 0;
-	if((amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2) || campCorruptJojo()) ballWorship[ballWorship.length] = 1;
+	var ballWorship:Array = [];
+	if((amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2) && campCorruptJojo()) ballWorship[ballWorship.length] = 0;
+	if((amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2) || campCorruptJojo()) ballWorship[ballWorship.length] = 1;
 	if(bimboSophie()) ballWorship[ballWorship.length] = 2;
 	if(followerHel()) ballWorship[ballWorship.length] = 3;
 	if(latexGooFollower()) ballWorship[ballWorship.length] = 4;

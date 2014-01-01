@@ -635,7 +635,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(flags[kFLAGS.AMILY_OVIPOSITED_COUNTDOWN] > 0) {
 			flags[kFLAGS.AMILY_OVIPOSITED_COUNTDOWN]--;
 			if(flags[kFLAGS.AMILY_OVIPOSITED_COUNTDOWN] <= 0) {
-				amilyLaysEggsLikeABitch();
+				amilyScene.amilyLaysEggsLikeABitch();
 				needNext = true;
 			}
 		}
@@ -1019,7 +1019,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		//if in camp and birthing, display scene!
 		if(flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_INCUBATION] == 1) {
 			outputText("\n", false);
-			amilyPopsOutKidsInCamp();
+			amilyScene.amilyPopsOutKidsInCamp();
 			flags[kFLAGS.AMILY_INCUBATION] = 0;
 			outputText("\n", false);
 			needNext = true;
@@ -2021,12 +2021,12 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(model.time.hours == 6) {
 			//Pure amily flips her shit and moves out!
 			if(flags[kFLAGS.AMILY_FOLLOWER] == 1 && player.cor >= 66 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] > 0) {
-				farewellNote();
+				amilyScene.farewellNote();
 				needNext = true;
 			}
 			//Amily moves back in once uncorrupt.
 			if(flags[kFLAGS.AMILY_TREE_FLIPOUT] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] > 0 && player.cor <= 25 && flags[kFLAGS.AMILY_FOLLOWER] == 0) {
-				amilyReturns();
+				amilyScene.amilyReturns();
 				needNext = true;
 			}
 		}

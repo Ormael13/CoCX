@@ -714,7 +714,7 @@ public function ceraphUrtaRoleplayDrunk2():void {
 	outputText("\n\n", false);
  
 	outputText("Pounding you faster and faster, you can feel her cock swelling within you dangerously. Rutting frantically, she leans down, pressing her smooth sienna skin against your jizz-soaked back, her tits rubbing the fox-girl's spunk into your " + player.skin() + ". Lowering her head, she whispers into your ear, \"<i>No condoms for sneaky bitches who spike drinks,</i>\" her husky voice right on the edge.  \"<i>Fur isn't the only thing I've lost. I'm potent again,</i>\" she drunkenly insists. \"<i>I can feel it in my big, swollen balls.", false);
-	if(amilyFollower() || marbleFollower() || izmaFollower()) outputText("  After I knock you up, try explaining the fox tails on your kids to those other bitches.", false);
+	if(amilyScene.amilyFollower() || marbleFollower() || izmaFollower()) outputText("  After I knock you up, try explaining the fox tails on your kids to those other bitches.", false);
 	outputText("</i>\"  Reaching out to brace herself, Urta grabs your shoulder with her left hand, but her right goes wild and she ends up hooking her fingers in your mouth, jerking your cheek to the side. With the added grip, she wriggles deeper, the remaining inches snaking into your uterus until the elephantine flare rubs against your cervix, the bottom ridge of her fleshy sheath teasingly flicking against your swollen clit. Sensations crash over you: the gentle curves of her fit abdomen stroking your ass, her wobbling chest pressing button-stiff nipples into your back, the sweet taste of your tongue stroking the fingers in your mouth. It is too much and your body clenches down in a gushing orgasm on the invading member, drool leaking from your gaping mouth as your heavily lidded eyes lose focus, allowing the fox-girl to use you to her heart's content.\n\n", false);
 	
 	outputText("When she cums for the third time, you can feel the blast directly on your cervix, the force of her load parting the muscled sphincter, ropes of newly virile seed flooding your womb.  The weight of her distended scrotum pulses between your thighs and your belly bulges under the impregnating torrent. Urta's body tenses as she inundates your depths with the excess of her loins, the influx cascading through your uterus to burst like a tide, your body flush with her pouring jizz.", false);
@@ -1811,7 +1811,7 @@ public function barkOrMeowTwiceToCeraph(dog:Boolean = true):void {
 	//Choose one of the following at random
 	if(flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0)
 		choices[choices.length] = 0;
-	if(amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2)
+	if(amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2)
 		choices[choices.length] = 1;
 	else if(campCorruptJojo())
 		choices[choices.length] = 1;
@@ -1859,7 +1859,7 @@ public function barkOrMeowTwiceToCeraph(dog:Boolean = true):void {
 	//Corrupt Jojo or Amily
 	else if(select == 1) {
 		//Both
-		if(amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2 && campCorruptJojo()) {
+		if(amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2 && campCorruptJojo()) {
 			//Both Corrupt Jojo & Amily
 			outputText("\n\nBefore long, you come across both of your corrupt, mouse-like slaves.  They stop fondling each other's genitals long enough to ask, \"<i>[Master], what are you doing?</i>\"");
 			outputText("\n\nCeraph looks down at you with her hand tight on your leash.");
@@ -1901,17 +1901,17 @@ public function barkOrMeowTwiceToCeraph(dog:Boolean = true):void {
 		}
 		//Mice finisher
 		outputText("\n\nYou go for an exhausting walk around the nearby wasteland with your companion");
-		if(amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2 && campCorruptJojo()) outputText("s");
+		if(amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2 && campCorruptJojo()) outputText("s");
 		outputText(", and you thoroughly enjoy the degrading experience.  Lust and humiliation are all jumbled up inside you into one big mass of sex, such that getting turned on from this humiliates you, and being humiliated gets you even more aroused");
 		outputText(".  It's an endless feedback loop of sexual excitement that has you about to blow, except you're back in camp.  The collar is untied, and your owner's sweet voice whispers, \"<i>Good walk, pet.</i>\" before vanishing into the wind.");
 		
 		outputText("\n\n");
 		if(campCorruptJojo()) {
 			outputText("Jojo");
-			if(amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2) outputText(" and ");
+			if(amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2) outputText(" and ");
 		}
-		if(amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2) outputText("Amily");
-		if(amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2 && campCorruptJojo()) outputText("look around uncertainly before darting back to their usual places, knowing you'll give the command if you want them to take care of your desires.");
+		if(amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2) outputText("Amily");
+		if(amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2 && campCorruptJojo()) outputText("look around uncertainly before darting back to their usual places, knowing you'll give the command if you want them to take care of your desires.");
 		else outputText("looks around uncertainly before darting back to the usual places, knowing you'll give the command if you want a slave to take care of your desires.");
 	}
 	//Generic

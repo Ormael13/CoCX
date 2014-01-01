@@ -1135,8 +1135,7 @@ public function exploreLake():void {
 	//==============================
 	//Pre-emptive chance of discovering Amily the stupidshit mouse
 	if(select == 9) {
-		discoverAmilyVillage();
-		return;
+		amilyScene.discoverAmilyVillage();
 	}
 	//Pre-emptive chance of discovering the Beautiful Sword
 	else if(select == 10) {

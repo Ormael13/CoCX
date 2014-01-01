@@ -737,7 +737,7 @@ public function heliaTalkEight():void {
 	outputText("\n\nHel's right. Your little girl looks like she's five, maybe six years old already.");
 	
 	//If Amily is at camp: 
-	if(amilyFollower()) outputText("\n\nYou mention how Amily managed to reverse-engineer a goblin's potion to accelerate her childrens' growth.  Hel grimaces, running a hand over her belly.  \"<i>God damn green menaces.  I never - almost never - drank any of their shit.  Succubus milk?  Sure, why not.  Snake oil, bring it on... But goblin potions?  I'm not that stupid, [name].  It couldn't have been...</i>\"");
+	if(amilyScene.amilyFollower()) outputText("\n\nYou mention how Amily managed to reverse-engineer a goblin's potion to accelerate her childrens' growth.  Hel grimaces, running a hand over her belly.  \"<i>God damn green menaces.  I never - almost never - drank any of their shit.  Succubus milk?  Sure, why not.  Snake oil, bring it on... But goblin potions?  I'm not that stupid, [name].  It couldn't have been...</i>\"");
 	
 	outputText("\n\nSighing, Hel leans her head on your shoulder, wrapping her tail around your waist.  \"<i>Well, I guess we get even less time to learn how to be parents, huh?  I guess it doesn't matter how it happened - what matters is that ");
 	if(flags[kFLAGS.HELSPAWN_DADDY] == 0) outputText("our");
@@ -1195,7 +1195,7 @@ public function talkToHelspawn():void {
 		outputText("\n\nChuckling, you nod and follow " + flags[kFLAGS.HELSPAWN_NAME] + " as she returns to Rath's makeshift laboratory and seats herself on one of his tables.  Grumbling about kids, the old rat proceeds to rap his little hammer on her knee - nearly getting kicked in the face for his trouble - before asking her to hold her breath as he listens to her heartbeat.  She's nearly blue in the face before he nods approvingly and tells her she can go. " + flags[kFLAGS.HELSPAWN_NAME] + " goes running, happy to get away as Rath turns to you, shaking his head.");
 		
 		outputText("\n\n\"<i>Just checking up on her, [name].  Her meteoric growth is of some concern - and scientific interest, I might add, if I could determine what caused it.  If I could mass-produce it.  ");
-		if((amilyFollower() && !amilyCorrupt())) outputText("Little Amily's solution was makeshift at best, and the children are beyond my reach to study.  Still.  ");
+		if((amilyScene.amilyFollower() && !amilyScene.amilyCorrupt())) outputText("Little Amily's solution was makeshift at best, and the children are beyond my reach to study.  Still.  ");
 		outputText("Imagine whole legions of children reared and raised in the time it takes a goblin to do the same. We might have a fighting chance for once, with numbers to match the demons.</i>\"");
 		
 		outputText("\n\n\"<i>But I suppose that's still out of reach, [name].  She's finished growing, and there's no sign of the exact chemical needed to synthesize the compound.  I'll keep checking up on her for health, though perhaps one day I'll find the means to make accelerated growth safe and widespread.  An old man can hope, yes?</i>\"");

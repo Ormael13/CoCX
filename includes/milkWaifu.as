@@ -355,7 +355,7 @@ public function milkBathTime():void {
 	if(player.hasStatusAffect("PureCampJojo") >= 0) count++;
 	if(latexGooFollower()) count++;
 	if(flags[kFLAGS.VALARIA_AT_CAMP] == 1) count++;
-	if(amilyFollower() && !amilyCorrupt()) count++;
+	if(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) count++;
 	if(followerHel()) count++;
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) count++;
 	if(followerEmber()) count++;
@@ -401,7 +401,7 @@ public function communalBath():void {
 	if(flags[kFLAGS.VALARIA_AT_CAMP] == 1) outputText("\n\nThe gooey mass of Valeria materializes a few feet away, assuming her human shape as she surveys the milkbath awaiting her.  \"<i>Damn, [name].  This girl's got some faucets on her.  Ought to get some of the girls from the lake on up here to finish the job when we're done.</i>\"  Chuckling, Val slips into the pool, turning a brighter shade of blue as cream rushes through her porous body.");
 	
 	//If PC has Pure!Amily:
-	if(amilyFollower() && !amilyCorrupt()) outputText("\n\nThe mouse-girl, Amily, is quick to respond to your call.  Happy for the luxury of a simple bath, even a milky one, she quickly tosses her clothes aside and dives in beside you, laughing and splashing playfully even as her brown hair is soaked.");
+	if(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) outputText("\n\nThe mouse-girl, Amily, is quick to respond to your call.  Happy for the luxury of a simple bath, even a milky one, she quickly tosses her clothes aside and dives in beside you, laughing and splashing playfully even as her brown hair is soaked.");
 	
 	//If PC has Helia:
 	if(followerHel()) outputText("\n\nWith a gleeful shout, Hel rushes the pool.  In one swift motion, she tosses her scale bikini aside and cannon-balls in, splashing everyone with a creamy tidal wave.  Chuckling, you clear your eyes - just in time for her bikini bottom to land on your face.");

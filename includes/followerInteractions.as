@@ -23,7 +23,7 @@ public function pureJojoAndAmilySpar():void {
 	outputText("Amily and Jojo appear to be sparring.  Amily has a pair of knives in her hands, and Jojo has a staff.  The twin blurs of fur are whirling about in a frenzy of movement.  Jojo is deflecting most of the smaller mouse's strikes, and even manages to get in the occasional strike with his staff.  He's undone the top of his robe, and sweat is pouring off of his fur.  It's clear he's working himself harder than the female.  The match-up is remarkably even, but they spot you and wrap up the intense sparring session for now.  Jojo gives you a respectful nod and departs, guzzling water from a skin as he pulls his robes back into their normal places.\n\n", false);
 		
 	//[To amily screen]
-	doNext(amilyFollowerEncounter);
+	doNext(amilyScene.amilyFollowerEncounter);
 }
 
 //[Amily rages at what you've done to jojo (corrupted after she met pure jojo) – encountered when visiting corrupt jojo for faps]
@@ -524,10 +524,10 @@ public function askAboutAmily():void {
 		outputText("This is met with a chittering squeal you distinctly recognize as Amily's.  \"<i>Oooohhh... I see why " + player.short + " - yeah, gimme all you got! - fell for you!</i>\"\n\n", false);
 
 		outputText("Curious, you ease open the door.  Inside, you see Urta and Amily, both naked, sitting on one of the cushioned couches along the wall.  Well, Urta is sitting there; Amily is perched in her lap, Urta's girthy prick visibly stuffed into her folds, with", false);
-		if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText(" her " + amilyCock() + " half-erect and drooling pre and", false);
+		if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText(" her " + amilyScene.amilyCock() + " half-erect and drooling pre and", false);
 		outputText(" her stomach swollen from the fox-morph's prodigious cum output to the point she looks ", false);
 		if(flags[kFLAGS.AMILY_INCUBATION] > 0 && flags[kFLAGS.AMILY_INCUBATION] < 100) outputText("almost twice as ", false);
-		outputText("pregnant.  The mouse is holding a half-full bottle of what you think is Barkardi 151, waving it enthusiastically through the air even as she thumps up and down in Urta's lap, trying to coax one last orgasm from the visibly-drained hermaphrodite.  She giggles with delight and takes a messy swig from her bottle, spilling some of the booze onto her " + amilyTits() + " before twisting around and sloppily kissing Urta, trying to feed the contents of her mouth to the fox but dribbling half down her neck.\n\n", false);
+		outputText("pregnant.  The mouse is holding a half-full bottle of what you think is Barkardi 151, waving it enthusiastically through the air even as she thumps up and down in Urta's lap, trying to coax one last orgasm from the visibly-drained hermaphrodite.  She giggles with delight and takes a messy swig from her bottle, spilling some of the booze onto her " + amilyScene.amilyTits() + " before twisting around and sloppily kissing Urta, trying to feed the contents of her mouth to the fox but dribbling half down her neck.\n\n", false);
 		
 		outputText("Do you leave them to get acquainted (and possibly be up for threesomes in the future), or do you barge in and stop these cheating sluts?", false);
 		//[Leave Them (finishes as normal] [Interrupt]
@@ -684,9 +684,9 @@ public function amilyUrtaSexWatch():void {
 	
 	outputText("Amily smiles back and approaches Urta, giving her a small peck on the lips and gently stroking her cock.\n\n", false);
 
-	outputText("Urta groans, unable to resist groping Amily's " + amilyTits() + ".  \"<i>Let me sit down, first, squeaky; I've never been one for sex while standing up</i>\".  She slowly lowers herself to the ground and then pulls Amily down into her lap, idly grinding her mare-cock against Amily's torso", false);
+	outputText("Urta groans, unable to resist groping Amily's " + amilyScene.amilyTits() + ".  \"<i>Let me sit down, first, squeaky; I've never been one for sex while standing up</i>\".  She slowly lowers herself to the ground and then pulls Amily down into her lap, idly grinding her mare-cock against Amily's torso", false);
 	if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText(", up the underside of her penis,", false);
-	outputText(" and between her " + amilyTits() + ".\n\n", false);
+	outputText(" and between her " + amilyScene.amilyTits() + ".\n\n", false);
 
 	outputText("Amily slides her cleavage down Urta's length to gently give her flared tip a small lick, before rising", false);
 	if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText(", a bead of pre-cum stretching into a line connecting their two members", false);

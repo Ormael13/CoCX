@@ -1684,7 +1684,7 @@ public function updatePregnancy():Boolean {
 			genderCheck();
 		}
 		//FUCKING BIRTH SHIT HERE.
-		pcBirthsAmilysKidsQuestVersion();
+		amilyScene.pcBirthsAmilysKidsQuestVersion();
 		cuntChange(60, true, true, false);
 		if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
 		dynStats("str", -1,"tou", -2, "spe", 3, "lib", 1, "sen", .5, "lus=", 0);

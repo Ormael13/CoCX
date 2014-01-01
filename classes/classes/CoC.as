@@ -9,6 +9,7 @@
 	import classes.AssClass;
 	import classes.BreastRowClass;
 	import classes.Monsters.Scenes.AkbalScene;
+	import classes.Monsters.Scenes.AmilyScene;
 
 	import classes.Player;
 	import classes.Cock;
@@ -94,8 +95,8 @@
 		public var testContent:TestContent = new TestContent();
 		public var umasShop:UmasShop = new UmasShop();
 		public var akbalScene:AkbalScene = new AkbalScene();
+		public var amilyScene:AmilyScene = new AmilyScene();
 		
-		include "../../includes/amily.as";
 		include "../../includes/anemone.as";
 		include "../../includes/ants.as";
 		include "../../includes/april_fools.as";

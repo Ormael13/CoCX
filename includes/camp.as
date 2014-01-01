@@ -152,7 +152,7 @@ public function camp():void {
 	}
 	//Amily followup!
 	if(flags[kFLAGS.PC_PENDING_PREGGERS] == 1) {
-		postBirthingEndChoices();
+		amilyScene.postBirthingEndChoices();
 		flags[kFLAGS.PC_PENDING_PREGGERS] = 2;
 		return;
 	}
@@ -203,12 +203,12 @@ public function camp():void {
 		return;
 	}
 	//Amily flips out
-	if(amilyFollower() && !amilyCorrupt() && flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0) {
+	if(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt() && flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0) {
 		amilyHatesTreeFucking();
 		hideMenus();
 		return;
 	}
-	if(flags[kFLAGS.FUCK_FLOWER_KILLED] == 1 && flags[kFLAGS.AMILY_TREE_FLIPOUT] == 1 && !amilyFollower() && flags[kFLAGS.AMILY_VISITING_URTA] == 0) {
+	if(flags[kFLAGS.FUCK_FLOWER_KILLED] == 1 && flags[kFLAGS.AMILY_TREE_FLIPOUT] == 1 && !amilyScene.amilyFollower() && flags[kFLAGS.AMILY_VISITING_URTA] == 0) {
 		amilyComesBack();
 		flags[kFLAGS.AMILY_TREE_FLIPOUT] = 2;
 		hideMenus();
@@ -256,7 +256,7 @@ public function camp():void {
 		return;
 	}
 	//Amily + Urta freakout!
-	if(!urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] == 0 && rand(10) == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] >= 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00147] == 0 && flags[kFLAGS.AMILY_NEED_TO_FREAK_ABOUT_URTA] == 1 && amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_INCUBATION] == 0) {
+	if(!urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] == 0 && rand(10) == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] >= 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00147] == 0 && flags[kFLAGS.AMILY_NEED_TO_FREAK_ABOUT_URTA] == 1 && amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_INCUBATION] == 0) {
 		amilyUrtaReaction();
 		hideMenus();
 		return;
@@ -286,18 +286,18 @@ public function camp():void {
 		return;
 	}
 	//Amily/Marble Freakout
-	if(flags[kFLAGS.AMILY_NOT_FREAKED_OUT] == 0 && player.hasStatusAffect("Camp Marble") >= 0 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && amilyFollower()) {
+	if(flags[kFLAGS.AMILY_NOT_FREAKED_OUT] == 0 && player.hasStatusAffect("Camp Marble") >= 0 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && amilyScene.amilyFollower()) {
 		marbleVsAmilyFreakout();
 		hideMenus();
 		return;
 	}
 	//Amily and/or Jojo freakout about Vapula!!
-	if(vapulaSlave() && (player.hasStatusAffect("PureCampJojo") >= 0 || (amilyFollower() && !amilyCorrupt()))) {
+	if(vapulaSlave() && (player.hasStatusAffect("PureCampJojo") >= 0 || (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()))) {
 		//Jojo but not Amily
-		if(player.hasStatusAffect("PureCampJojo") >= 0 && !(amilyFollower() && !amilyCorrupt())) 
+		if(player.hasStatusAffect("PureCampJojo") >= 0 && !(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()))
 			mouseWaifuFreakout(false,true);
 		//Amily but not Jojo
-		else if((amilyFollower() && !amilyCorrupt())) mouseWaifuFreakout(true,false);
+		else if((amilyScene.amilyFollower() && !amilyScene.amilyCorrupt())) mouseWaifuFreakout(true,false);
 		//Both
 		else mouseWaifuFreakout(true,true);
 		hideMenus();
@@ -504,12 +504,12 @@ public function camp():void {
 		else outputText("Tucked into a shaded corner of the rocks is a bevy of alchemical devices and equipment.  The alchemist Rathazul looks to be hard at work on the silken equipment you've commissioned him to craft.\n\n", false);
 	}
 	//MOUSEBITCH
-	if(amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1) {
+	if(amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1) {
 		if(flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4) outputText("Amily has relocated her grass bedding to the opposite side of the camp from the strange tree; every now and then, she gives it a suspicious glance, as if deciding whether to move even further.");
 		else outputText("A surprisingly tidy nest of soft grasses and sweet-smelling herbs has been built close to your bedroll. A much-patched blanket draped neatly over the top is further proof that Amily sleeps here. She changes the bedding every few days, to ensure it stays as nice as possible.\n\n", false);
 	}
 	//Corrupt mousebitch!
-	else if(amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2) {
+	else if(amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2) {
 		outputText("Sometimes you hear a faint moan from not too far away. No doubt the result of your slutty toy mouse playing with herself.\n\n", false);
 	}
 	//Amily out freaking Urta?
@@ -729,7 +729,7 @@ public function slavesCount():Number {
 	if(latexGooFollower()) counter++;
 	if(vapulaSlave()) counter++;
 	if(campCorruptJojo()) counter++;
-	if(amilyFollower() && amilyCorrupt()) counter++;
+	if(amilyScene.amilyFollower() && amilyScene.amilyCorrupt()) counter++;
 	//Bimbo sophie
 	if(bimboSophie()) counter++;
 	if(ceraphIsFollower()) counter++;
@@ -748,7 +748,7 @@ public function loversCount():Number {
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) counter++;
 	if(isabellaFollower()) counter++;
 	if(player.hasStatusAffect("Camp Marble") >= 0) counter++;
-	if(amilyFollower() && !amilyCorrupt()) counter++;
+	if(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) counter++;
 	if(followerKiha()) counter++;
 	if(flags[kFLAGS.NIEVE_STAGE] == 5) counter++;
 	if(flags[kFLAGS.ANT_WAIFU] > 0) counter++;
@@ -822,9 +822,9 @@ public function campLoversMenu():void {
 				izzyCreeps[izzyCreeps.length] = 0;
 			if(player.hasStatusAffect("PureCampJojo") >= 0)
 				izzyCreeps[izzyCreeps.length] = 1;
-			if(amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0)
+			if(amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0)
 				izzyCreeps[izzyCreeps.length] = 2;
-			if(amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0)
+			if(amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0)
 				izzyCreeps[izzyCreeps.length] = 3;
 			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1)
 				izzyCreeps[izzyCreeps.length] = 4;
@@ -878,7 +878,7 @@ public function campLoversMenu():void {
 		outputText("\n\n", false);
 	}
 	//AMILY
-	if(amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0) {
+	if(amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0) {
 		outputText("Amily is currently strolling around your camp, ", false);
 		temp = rand(6);
 		if(temp == 0) {
@@ -941,7 +941,7 @@ public function campSlavesMenu():void {
 		jojoEvent = 43;
 	}
 	//Modified Camp/Follower List Description:
-	if(amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0) {
+	if(amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0) {
 		outputText("Sometimes you hear a faint moan from not too far away. No doubt the result of your slutty toy mouse playing with herself.\n\n", false);
 		amilyEvent = 2427;
 	}

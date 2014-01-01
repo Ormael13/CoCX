@@ -2972,7 +2972,7 @@ public function enemyTeaseReaction(lustDelta:Number):void {
 		if(lustDelta >= 10) outputText("The demons are decreasingly willing to hit you and more and more willing to just stroke their hands sensuously over you.  Vapula is uncontrollably aroused herself and shivers even as she tries to maintain some semblance of offense, but most of the demons are visibly uncomfortable and some just lie on the ground, tamed by their own lust.");
 	}
 	//Amily has her own reaction.
-	else if(amilyTeaseConcentration()) {}
+	else if(amilyScene.amilyTeaseConcentration()) {}
 	//Googals!
 	else if(monster.short == "goo-girl") {
 		if(monster.lust <= 99) {
