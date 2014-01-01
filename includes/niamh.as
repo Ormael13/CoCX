@@ -235,20 +235,20 @@ public function blackCatBeerEffects(clearScreen:Boolean = true,newLine:Boolean =
 		player.addStatusValue("Black Cat Beer",1,4);
 		player.addStatusValue("Black Cat Beer",2,lib);
 		outputText("\n\nDamn, it's even better with every extra drink!");
-		dynStats("str", 0,"tou", 0, "spe", -1, "int", -1, "lib", lib, "sen", 0, "lus", 30+rand(player.lib/4), "cor", 0);
+		dynStats("spe", -1, "int", -1, "lib", lib, "lus", 30+rand(player.lib/4));
 	}
 	else {
 		if(100 - player.lib >= 10) lib = 10;
 		else lib = 100 - player.lib;
 		player.createStatusAffect("Black Cat Beer",8,lib,0,0);
-		dynStats("str", 0,"tou", 0, "spe", -5, "int", -5, "lib", lib, "sen", 0, "lus", 20+rand(player.lib/4), "cor", 0);
+		dynStats("spe", -5, "int", -5, "lib", lib, "lus", 20+rand(player.lib/4));
 	}
 	slimeFeed();
 }
 
 //Black Cat Beer Wears Off: This message is displayed eight hours after the last drink.
 public function blackCatBeerExpires():void {
-	dynStats("str", 0,"tou", 0, "spe", 4.5, "int", 4.5, "lib", (-1 * player.statusAffectv2("Black Cat Beer")), "sen", 0, "lus", 0, "cor", 0);
+	dynStats("spe", 4.5, "int", 4.5, "lib", (-1 * player.statusAffectv2("Black Cat Beer")));
 	player.removeStatusAffect("Black Cat Beer");
 	outputText("\n<b>The warm, fuzzy feeling finally dissipates, leaving you thinking clearer, focusing better, and less horny.  It was nice while it lasted, but it's also good to be back to normal.  Still, a part of you kind of wants another beer.</b>\n");
 }
@@ -318,7 +318,7 @@ public function taintNiamh(bimbo:Boolean = false):void {
 		outputText("\n\nNiamh abruptly cries out in ecstasy as her libido levels skyrocket and begins to knead her tits fervishly.  You can tell she's getting off on the near-electric thrill of their sensitivity.  Equal parts aroused and amused, you're torn between the desire to watch and the need to make yourself scarce before the Watchmen show up to find you at the scene of a 'demonification'.  As the newly-azure girl raises a teat to her mouth and suckles herself, the other hand dropping to her sopping, needy loins, you decide in favor of discretion and pull yourself away from the spectacle, making sure to back up in mock-horror.  Curiously, as Niamh drinks her own 'lactation', the golden coloration of the brew dribbling out around her lips darkens.  From beer to ale, you muse.  As you exit the door of the tavern, four members of the town guard slip into your place; you make sure to give them the benefit of your confused, terrified acting.");
 		outputText("\n\nA crowd of spectators follows as they cart her out, allowing you to slip into the group and watch the proceedings.  Poor Niamh is thrown out of the city unceremoniously, her corrupted bosom spewing ale onto the hot desert sand.  Writhing with a combination of fury and lust, the newly-minted devil's familiar screams profanities and threats between moans, not even bothering to move from her face-down position.  You get one last look at her before the doors close, shutting her out of the desert city completely.  You linger around the city until you figure she'd have moved away from the gate, then make your own way out.");
 		flags[kFLAGS.NIAMH_STATUS] = 1;
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 5);
+		dynStats("cor", 5);
 	}
 	//[if bimbo liquor] 
 	else {
@@ -330,7 +330,7 @@ public function taintNiamh(bimbo:Boolean = false):void {
 		flags[kFLAGS.NIAMH_STATUS] = 2;
 	}
 	flags[kFLAGS.NIAMH_MOVED_OUT_COUNTER] = 25;
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 10);
+	dynStats("cor", 10);
 	doNext(13);
 }
 
@@ -415,7 +415,7 @@ public function bimboChampagne(clearScreen:Boolean,intro:Boolean):void {
 	}
 	if(player.hasStatusAffect("Bimbo Champagne") >= 0) {
 		player.addStatusValue("Bimbo Champagne",1,4);
-		dynStats("str", 0,"tou", 0, "spe", -2, "int", 0, "lib", 1, "sen", 0, "lus", 10, "cor", 0);
+		dynStats("spe", -2, "lib", 1, "lus", 10);
 	}
 	else {
 		player.createStatusAffect("Bimbo Champagne",8,0,0,0);
@@ -443,13 +443,13 @@ public function bimboChampagne(clearScreen:Boolean,intro:Boolean):void {
 			if(player.hipRating < 10) player.hipRating = 10;
 		}
 		genderCheck();
-		dynStats("str", 0,"tou", 0, "spe", -10, "int", 0, "lib", 1, "sen", 0, "lus", 25, "cor", 0);
+		dynStats("spe", -10, "lib", 1, "lus", 25);
 	}
 }
 
 public function removeBimboChampagne():void {
 	outputText("\n<b>Whoah!  Your head is clearing up, and you feel like you can think clearly for the first time in forever.  Niamh sure is packing some potent stuff!  You shake the cobwebs out of your head, glad to once again be less dense than a goblin with a basilisk boyfriend.</b>");
-	dynStats("str", 0,"tou", 0, "spe", 10, "int", 0, "lib", -1, "sen", 0, "lus", 0, "cor", 0);
+	dynStats("spe", 10, "lib", -1);
 	if(player.statusAffectv2("Bimbo Champagne") > 0) {
 		player.breastRows[0].breastRating -= player.statusAffectv2("Bimbo Champagne");
 		outputText("  As the trecherous brew fades, your [chest] loses some of its... bimboliciousness.  Your back feels so much lighter without the extra weight dragging down on it.");
@@ -561,7 +561,7 @@ public function bazaarSex():void {
 		outputText("\n\nAfter several minutes of tit-fucking your brainless beer-girl, you feel an orgasm welling up inside your [balls].  You pick up the pace, hammering your hips into her tits as hard as you can until she cries out, fizz leaking down her chin, and soon mixing with the first thick streams of your ejaculate. You roar and cum, giving the bimbo a creamy pearl necklace as it jets out from between her thick tits.");
 		outputText("\n\nGiggling drunkenly, the girl slurps up the little extras that stain her chin and cheeks, her long cat-tongue flicking bits of spooge around mindlessly as you wind down, now just dribbling a little lake between her breasts.");
 		outputText("\n\n\"<i>Thash was - HIC - shuper shexy, [name],</i>\" the drunken keg-girl giggles, staggering to her feet and stumbling toward the Bazaar.  \"<i>Like, we shud do thish again shoon!</i>\" she adds, prancing out with her new pearl necklace on full display.");
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", -.5, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
+		dynStats("int", -.5, "sen", -2, "lus=", 0);
 	}
 	else if (flags[kFLAGS.NIAMH_STATUS] == 1)	// Succubi Milk
 	{
@@ -642,7 +642,7 @@ public function sellYourBooze():void {
 	else outputText("Niamh giggles as you try to move your breasts closer to the bar to be milked by the patrons, but it's obvious only the top pair of your tits can easily rest on the counter top.  \"<i>Lassie, it might be unconventional, but givin' the circumstance mayhaps it'd be best if ye laid down on the bar.</i>\"");
 	outputText("\n\nIt isn't long before patrons start lining up for mugs of your particular brand of booze.  They tug on your nipples, teasing the beverage from your teats.  Each drunken tug however encourages your libido, arousing you further.");
 	if(player.hasVagina()) outputText("  You feel your excitement dripping down the inside of your thighs as your pussy wettens.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10 + player.sens/5, "cor", 0, "resisted", false);
+	dynStats("lus", 10 + player.sens/5, "resisted", false);
 	//[If player has cocks]  
 	if(player.hasCock()) outputText("  You start to feel sympathetic sensations in [eachCock] as the hands and paws of the bar goers milk your nipples.  With their fingers sliding over your sensitive nubs you can easily imagine them sliding up and down your cock");
 	if(player.cockTotal() > 1) outputText("s");
@@ -867,7 +867,7 @@ public function barBeerOrgyTits():void {
 		}
 		growTits(2, player.bRows(), false, 2);
 	}
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	doNext(13);
 }
 

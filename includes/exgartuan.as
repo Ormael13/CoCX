@@ -133,7 +133,7 @@ public function exgartuanInfestDick():void {
 		outputText("\n\nYou look down, and find your demonic cock pointing directly at you, and shaking with...indignation?  The ground hits your " + buttDescript() + " hard as you fall backwards, too surprised to maintain your footing.  Is your dick talking to you?", false);
 		outputText("\n\n\"<i>Yes I am.  You should consider yourself lucky – you're now the host of the great demon Exgartuan, and you'd best please me every few hours, or I'll make sure your body finds someone to relieve my building pressure.   But I think you'll do fine.  Come now, I can see a wonderful camp in your mind that we can paint white,</i>\" it suggests.", false);
 		outputText("\n\nWell now... This was certainly unexpected.  Perhaps there's a way to be rid of this thing?", false);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 5, "sen", 0, "lus", 10, "cor", 10);
+		dynStats("lib", 5, "lus", 10, "cor", 10);
 		player.cocks[0].cockType = CockTypesEnum.DEMON;
 		player.cocks[0].cockLength += 1;
 		player.cocks[0].cockThickness += .5;
@@ -230,7 +230,7 @@ public function exgartuanMasturbation():void {
 			outputText("You explode, filling your mouth with the tangy seed of your demonic submission.  Why did you ever think to resist such pleasure?  White hot release radiates out from your groin, making your body numb and happy as wave after wave of demon-spunk pours down your throat and spatters your face.   Such unholy pleasures, truly you deserve to enjoy them after what you've been through, right?  You wallow in a growing lake of syrupy submission, happy to be host to such a fun demon.\n\n", false);
 			outputText("Temporarily sated, Exgartuan deflates, not even bothering to taunt you while you try to clean up the goop now splattered over your upper body.", false);
 		}
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", .25, "sen", 0, "lus", -100, "cor", 1);
+		dynStats("lib", .25, "lus=", 0, "cor", 1);
 	}
 	//TITURBATION
 	else if(player.statusAffectv1("Exgartuan") == 2) {
@@ -261,7 +261,7 @@ public function exgartuanMasturbation():void {
 		else outputText("stroke your enlongated nipples, occasionally pinching them gently as you jerk them off.  It's far too much sensation for you.", false);
 		outputText(" You shake and wriggle, overcome with a strange type of pleasure unlike a 'normal' orgasm.  The boobgasm does feel wonderful, but it does nothing for the aching lust that has built up in your crotch.  Perhaps you'll need to satisfy that as well.\n\n", false);
 		//(lust + 15)
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", .25, "lus", 15, "cor", 1);
+		dynStats("sen", .25, "lus", 15, "cor", 1);
 		if(player.biggestLactation() > 1) outputText("As you calm down you realize your " + nippleDescript(0) + "s are dribbling streams of milk, and judging from the pools of whiteness in the soil, you turned into quite the little milk-sprinkler.  ", false);
 		outputText("You blush and redress, noting that Exgartuan seems to be silent and sleeping...  maybe you'll get a little peace now?", false);
 	}
@@ -411,7 +411,7 @@ public function exgartuanCombatUpdate():Boolean {
 					outputText("It's becoming increasingly difficult to see this battle to its end when your mutinous mushroom is increasingly stiffening with each passing moment.  Exgartuan's weight is bad enough to your poise without extending it away from you.  What a jerk.", false);
 					break;
 			}
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 4+rand(5), "cor", 0);
+			dynStats("lus", 4+rand(5));
 			return true;
 		}
 		//(Taunts Male Foes -enemy lust)
@@ -495,7 +495,7 @@ public function exgartuanCombatUpdate():Boolean {
 					break;
 			}
 			//(+lust! Possible + enemy lust)
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 2+player.sens/10, "cor", 0);
+			dynStats("lus", 2+player.sens/10);
 			if(rand(3) == 0) monster.lust += 5 + monster.lib/10;
 			return true;
 		}
@@ -666,7 +666,7 @@ public function exgartuanBeeRape():void {
 	outputText("It does not take long for the feeling of being in such a tight hole to push you beyond any point of endurance, and the obscene squelching mixed with high pitched moans doesn't help any.  You feel your orgasm building, flooding your groin with heat.  You press your body tightly against hers, forcing as much of yourself as possible inside her as you go off the deep end.  Wave after wave of spunk pumps into the bee, squeezing out an equal amount of eggs from her ovipositor.  Wet plops greet your ears in time with each spurt of seed you push into her.  Apparently, the eggs go in the very hole you're now abusing.\n\n", false);
 	outputText("You pull out with a satisfied grunt, enjoying the wet 'schlick' sound your " + cockDescript(0) + " makes as it pulls free of the bee-girl's once-tight hole.  Where once there was a honey-coated slit now resides a gaping monster, drooling a gooey mixture of slime and your tainted demonic seed.  Well, maybe her queen will have an easier time packing her full of eggs.\n\n", false);
 	outputText("You redress, whistling happily as you prepare to leave.  Your victim is practically unconscious, still shaking from the intense experience and leaking eggs and honey from the organ on her backside.  Do you cut her down or leave her bound up for the locals to enjoy?", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 0, "lus", -100, "cor", 2);
+	dynStats("lib", 1, "lus=", 0, "cor", 2);
 	simpleChoices("Leave Her",leaveBeePostRape,"Free Her",freeBeePostRape,"",0,"",0,"",0);
 }
 
@@ -675,7 +675,7 @@ public function freeBeePostRape():void {
 	outputText("", true);
 	outputText("You take pity on the slut and untie her.  Hopefully she'll recover before something worse finds her.  You'd hate to let a tentacle-beast get your sloppy seconds.", false);
 	doNext(13);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", -1);
+	dynStats("cor", -1);
 }
 
 //[Leave Her]
@@ -683,7 +683,7 @@ public function leaveBeePostRape():void {
 	outputText("", true);
 	outputText("You smile cruelly and give her glittering vulva a gentle smack before you walk away, leaving her tied up there.  Maybe some lonely imps will find a use for her...", false);
 	doNext(13);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", .5);
+	dynStats("cor", .5);
 }
 
 public function exgartuanSleepSurprise():void {
@@ -823,11 +823,11 @@ public function exgartuanSleepSurprise():void {
 		else outputText("between your tits", false);
 		outputText(" and across your belly as he retreats.  The thrill of orgasm is still fresh in your mind, but exhaustion quickly replaces it.  You resolve to clean up the mess in the morning as your eyelids flutter closed.  The smell of sex hangs off your dozing form like a cloud, keeping your dreams from straying too far from your cock...", false);
 		//[-100 lust, then +10 lust immediately, +1 libido to 60, then +.5 libido to 80, then +.25 libido.  +1 sensitivity.  +1 corruption]
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 1, "lus", -100, "cor", 1);
-		if(player.lib < 60) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 0, "lus", 0, "cor", 0);
-		else if(player.lib < 80) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", .5, "sen", 0, "lus", 0, "cor", 0);
-		else dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", .25, "sen", 0, "lus", 0, "cor", 0);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10, "cor", 0);
+		dynStats("sen", 1, "lus=", 0, "cor", 1);
+		if(player.lib < 60) dynStats("lib", 1);
+		else if(player.lib < 80) dynStats("lib", .5);
+		else dynStats("lib", .25);
+		dynStats("lus", 10);
 		flags[kFLAGS.TIMES_AUTOFELLATIOED_EXGARTUAN]++;
 		slimeFeed();
 	}
@@ -865,7 +865,7 @@ public function exgartuanBulgeTortureII():void {
 	outputText("  Too preoccupied with whatever's going on down below, you can't seem to focus enough to get the job done right.  Your peer down your body at your " + cockDescript(0) + ", still flaccid and on lockdown.  The most you can respond is with another deep sigh, retreating your attention to the canvas up above you.  You figure the best course of action from here is to just try and make it until morning when you can find some help.  Confessing shame to some third party seems a much better alternative to going any more rounds with this nonsense.  Your fists clench and you take some deep breaths, prepared to ride out the remainder of the night with your sanity intact.\n\n", false);
 	
 	//[new page. lust raises to 100]
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 1000, "cor", 0);
+	dynStats("lus=", 1000);
 	doNext(exgartuanBulgeTortureIII);
 }
 public function exgartuanBulgeTortureIII():void {
@@ -933,7 +933,7 @@ public function exgartuanBulgeTortureIII():void {
 	else outputText("a colossal wave of heavy demonic jizz", false);
 	outputText(" hits you square in the face.  The surprising force of the blow sends you reeling, your hands clearing from the mighty demon as he points skyward, showering everything around you in black, warm ejaculate.  You care little, however, being too busy convulsing and indulging on every ounce of pleasure radiating through it.  It doesn't take long for you to black out, drawing an end to your excruciating experience.\n\n", false);
 	//[new page. lust resets to 0. corruption raises by 2. player gains ailment \"<i>Jizzpants</i>\"]
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 2);
+	dynStats("lus=", 0, "cor", 2);
 	doNext(exgartuanBulgeTortureIV);
 }
 
@@ -1195,7 +1195,7 @@ public function boobgartuanSurprise3():void {
 	//[else]
 	else outputText("  Your fingertips continue to sweep across your " + player.skin() + ", seemingly in denial that the exciting night has drawn to a close.  You peer up at the ever-present moon, its crimson hue as foreboding as the day you first arrived in Mareth.  You stew on the prospect of apologizing to the demoness for your forgetfulness.  Though, be it for your pride or hers, you decide it better to just shelf the idea.  All Exgartuan cares about is attention and fucking, better to not go and try to turn her into a conversationalist.  Best to just tend to her every so often if you actually do care.  Once you've taken care of your own lust anyway.  You shake some sense back into your head, sending some dirt flying.  The \"<i>breast show on earth</i>\" left you soaked, your milk turning the dirt to mud around you.  You figure it best to worry about it once you're at camp.  You begin the trek back, a little smile growing on your face once you see the trail of milk you're leaving behind in your wake.", false);
 	//[corruption +2, lust +5] 
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5, "cor", 2);
+	dynStats("lus", 5, "cor", 2);
 	flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT]++;
 	player.changeStatusValue("Exgartuan",2,25);
 	doNext(1);
@@ -1297,6 +1297,6 @@ public function exgartuanNagaStoleMyMasturbation():void {
 
 	outputText("Having coated your face and upper torso in a demonic jism assault, Exgartuan returns to your serpent's slit.  His grasp on your tail lifts, leaving you to undo the tangled mess he left behind.  But you're too busy laying back decompressing.  No thoughts, no musings, no questions, no doubts... nothing is going on in your cum-soaked head.  What is there to say?", false);
 	player.changeStatusValue("Exgartuan",2,(16+rand(7)));
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", .25, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lib", .25, "lus=", 0);
 	doNext(13);
 }

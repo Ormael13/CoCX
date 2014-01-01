@@ -243,7 +243,7 @@ public function eatEmbersYolkLikeAnEvenBiggerDick():void {
 	//(+5-10 to strength, toughness, and speed.)
 	//(+20 Corruption)
 	//(also slimefeed!)
-	dynStats("str", 5 + rand(5),"tou", 5+ rand(5), "spe", 0, "int", 5 + rand(5), "lib", 0, "sen", 0, "lus", 0, "cor", 20);
+	dynStats("str", 5 + rand(5),"tou", 5+ rand(5), "int", 5 + rand(5), "cor", 20);
 	slimeFeed();
 	doNext(13);
 }
@@ -395,7 +395,7 @@ public function emberEggInteraction():void {
 			outputText("cum... ");
 		}
 		outputText(" You stop yourself and shake your head.  Where did that thought come from?");
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10+player.cor/10, "cor", 0);
+		dynStats("lus", 10+player.cor/10);
 	}
 	//(If player has lust >= 33)
 	if(player.lust >= 33 && (flags[kFLAGS.EMBER_EGG_FLUID_COUNT] < 5 || flags[kFLAGS.EMBER_JACKED_ON] == 0)) {
@@ -665,7 +665,7 @@ public function masturbateOntoAnEgg():void {
 	if(flags[kFLAGS.EMBER_EGG_FLUID_COUNT] < 5) {
 		outputText("\n\nYou note the egg emanates a feeling of greater satisfaction than before, but still not enough. Maybe it will hatch if you feed it more?");
 	}
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	//MAKE SURE EMBER HAS BEEN JACKED ON FLAG IS SET TO TRUE
 	flags[kFLAGS.EMBER_JACKED_ON] = 1;
 	//INCREMENT EMBER FEEDINZ
@@ -811,7 +811,7 @@ public function embersAppearance():void {
 		//(Male)
 		if(flags[kFLAGS.EMBER_GENDER] == 1) outputText("\n\nHis hips are normal-looking, not demanding any kind of extra attention.  His butt is taut and firm, lending itself well to balance.");
 		//(Female/Herm)
-		else outputText("\n\n\Her girly hips are as eye-catching as the shapely handful that graces her posterior, giving Ember a graceful strut.  That same delightful butt of hers just begs to be touched, soft enough to jiggle only slightly and yet firm enough to not trouble the dragon's balance.");
+		else outputText("\n\nHer girly hips are as eye-catching as the shapely handful that graces her posterior, giving Ember a graceful strut.  That same delightful butt of hers just begs to be touched, soft enough to jiggle only slightly and yet firm enough to not trouble the dragon's balance.");
 		
 		outputText("\n\nA long, scaly, flexible tail lashes behind " + emberMF("him","her") + ", its final third adorned with small bumps that can extend into vicious-looking spikes.  " + emberMF("His","Her") + " legs appear humanoid until the feet, where they end in powerful, taloned reptilian claws meant for gripping at the ground.");
 		
@@ -1323,10 +1323,10 @@ public function bloodForTheBloodGod():void {
 	flags[kFLAGS.DRANK_EMBER_BLOOD_TODAY] = 1;
 	//Medium/high get stat boosts!
 	var stat:int = rand(4);
-	if(stat == 0) dynStats("str", 1,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
-	else if(stat == 1) dynStats("str", 0,"tou", 1, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
-	else if(stat == 2) dynStats("str", 0,"tou", 0, "spe", 1, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
-	else dynStats("str", 0,"tou", 0, "spe", 0, "int", 1, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+	if(stat == 0) dynStats("str", 1);
+	else if(stat == 1) dynStats("tou", 1);
+	else if(stat == 2) dynStats("spe", 1);
+	else dynStats("int", 1);
 }
 
 //[=Stop=]
@@ -1385,7 +1385,7 @@ public function emberTFs():void {
 		else outputText("but you sternly rein in your hands and tuck them into your armpits as the arousing changes run their course.");
 		outputText("  <b>You now have a dragon penis.</b>");
 		//lose lust if sens>=50, gain lust if else
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 10, "lus", 10, "cor", 0);
+		dynStats("sen", 10, "lus", 10);
 		changes++;
 		//Apply the TF
 		player.cocks[select].cockType = CockTypesEnum.DRAGON;
@@ -1592,11 +1592,11 @@ Miss: Unfortunately, you lose your sense of depth as you whirl, and the tip swin
 				player.addStatusValue("rut",1,100);
 				player.addStatusValue("rut",2,5);
 				player.addStatusValue("rut",3,48);
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 5, "sen", 0, "lus", 0, "cor", 0, "resisted", false, "noBimbo", true);
+				dynStats("lib", 5, "resisted", false, "noBimbo", true);
 			}
 			else {
 				player.createStatusAffect("rut",150,5,100,0);
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 5, "sen", 0, "lus", 0, "cor", 0, "resisted", false, "noBimbo", true);
+				dynStats("lib", 5, "resisted", false, "noBimbo", true);
 			}
 			changes++;
 		}
@@ -1608,12 +1608,12 @@ Miss: Unfortunately, you lose your sense of depth as you whirl, and the tip swin
 				player.statusAffects[temp].value1 += 5;
 				player.statusAffects[temp].value2 += 5;
 				player.statusAffects[temp].value3 += 48;
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 5, "sen", 0, "lus", 0, "cor", 0, "resisted", false, "noBimbo", true);
+				dynStats("lib", 5, "resisted", false, "noBimbo", true);
 			}
 			//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
 			if(player.hasStatusAffect("heat") < 0) {
 				player.createStatusAffect("heat", 10, 15, 48, 0);
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 15, "sen", 0, "lus", 0, "cor", 0, "resisted", false, "noBimbo", true);
+				dynStats("lib", 15, "resisted", false, "noBimbo", true);
 			}
 			changes++;
 		}
@@ -1655,7 +1655,7 @@ public function emberIsAnEggFactory():void {
 		outputText("\n\n\"<i>Here's your egg.</i>\"  Ember holds out the egg for you, averting her eyes.  With a smile, you take it from her hands and thank her for her generosity.");
 		outputText("\n\nEmber mumbles quietly, \"<i>Next time, fertilize it for me will you?</i>\"  You start at that; did she really just say it aloud?  But, knowing her temper, you decide against asking.  ");
 		//git a dragon egg, small libido-based lust damage
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10 + player.lib/10, "cor", 0);
+		dynStats("lus", 10 + player.lib/10);
 		menuLoc = 2;
 		shortName = "DrgnEgg";
 		takeItem();
@@ -1707,7 +1707,7 @@ public function emberIsAnEggFactory():void {
 		outputText("\n\nEmber sighs, realising she's fighting a losing battle.  \"<i>At least I know what to expect when I'm finally laying a fertilized one.</i>\"  Moments after her comment, her face lights with awareness and embarrassment.  \"<i>I... I mean...</i>\"");
 		outputText("\n\nYou just smile and tell her you understand exactly what she meant.  One quick kiss and you head back to the camp proper, leaving one adorably flustered dragon behind you.  ");
 		//git a dragon egg, small libido-based lust damage
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10 + player.lib/10, "cor", 0);
+		dynStats("lus", 10 + player.lib/10);
 		menuLoc = 2;
 		shortName = "DrgnEgg";
 		takeItem();
@@ -1857,11 +1857,11 @@ public function getMilkFromEmber():void {
 					player.addStatusValue("rut",1,100);
 					player.addStatusValue("rut",2,5);
 					player.addStatusValue("rut",3,48);
-					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 5, "sen", 0, "lus", 0, "cor", 0, "resisted", false, "noBimbo", true);
+					dynStats("lib", 5, "resisted", false, "noBimbo", true);
 				}
 				else {
 					player.createStatusAffect("rut",150,5,100,0);
-					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 5, "sen", 0, "lus", 0, "cor", 0, "resisted", false, "noBimbo", true);
+					dynStats("lib", 5, "resisted", false, "noBimbo", true);
 				}
 			}
 			else {
@@ -1872,12 +1872,12 @@ public function getMilkFromEmber():void {
 					player.statusAffects[temp].value1 += 5;
 					player.statusAffects[temp].value2 += 5;
 					player.statusAffects[temp].value3 += 48;
-					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 5, "sen", 0, "lus", 0, "cor", 0, "resisted", false, "noBimbo", true);
+					dynStats("lib", 5, "resisted", false, "noBimbo", true);
 				}
 				//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
 				if(player.hasStatusAffect("heat") < 0) {
 					player.createStatusAffect("heat", 10, 15, 48, 0);
-					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 15, "sen", 0, "lus", 0, "cor", 0, "resisted", false, "noBimbo", true);
+					dynStats("lib", 15, "resisted", false, "noBimbo", true);
 				}
 			}
 			outputText("!</b>");
@@ -1939,11 +1939,11 @@ public function getMilkFromEmber():void {
 					player.addStatusValue("rut",1,100);
 					player.addStatusValue("rut",2,5);
 					player.addStatusValue("rut",3,48);
-					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 5, "sen", 0, "lus", 0, "cor", 0, "resisted", false, "noBimbo", true);
+					dynStats("lib", 5, "resisted", false, "noBimbo", true);
 				}
 				else {
 					player.createStatusAffect("rut",150,5,100,0);
-					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 5, "sen", 0, "lus", 0, "cor", 0, "resisted", false, "noBimbo", true);
+					dynStats("lib", 5, "resisted", false, "noBimbo", true);
 				}
 			}
 			else {
@@ -1954,12 +1954,12 @@ public function getMilkFromEmber():void {
 					player.statusAffects[temp].value1 += 5;
 					player.statusAffects[temp].value2 += 5;
 					player.statusAffects[temp].value3 += 48;
-					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 5, "sen", 0, "lus", 0, "cor", 0, "resisted", false, "noBimbo", true);
+					dynStats("lib", 5, "resisted", false, "noBimbo", true);
 				}
 				//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
 				if(player.hasStatusAffect("heat") < 0) {
 					player.createStatusAffect("heat", 10, 15, 48, 0);
-					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 15, "sen", 0, "lus", 0, "cor", 0, "resisted", false, "noBimbo", true);
+					dynStats("lib", 15, "resisted", false, "noBimbo", true);
 				}
 			}
 			outputText("!</b>");
@@ -2020,7 +2020,7 @@ public function getMilkFromEmber():void {
 			outputText("\n\n\"<i>Ah!  That's good...</i>\"  Ember embraces you in a tight hug, bringing you as close to " + emberMF("him","her") + " as possible.  You smile around your nipple and enjoy the sensation, languidly suckling from " + emberMF("him","her") + " less out of an honest thirst for the milk and more to prolong your excuse to be so close to your strangely fuzzy dragon.");
 			outputText("\n\nBy the time you're done Ember has melted into a purring pile, content with simply letting you sit on " + emberMF("his","her") + " lap.  \"<i>Don't think that just because it felt good, I'm going to let you do this whenever you feel like.</i>\"");
 			outputText("\n\nYou tell " + emberMF("him","her") + " you wouldn't dream of thinking that, sneaking an opportunity to kiss " + emberMF("him","her") + " while " + emberMF("his","her") + " guard is so lax.  Even as you do, your stomach begins to gripe, trying and failing to digest the slow-to-process milk before it begins to turn.  You're going to be sick later, that's for sure...");
-			if(player.tou > 40) dynStats("str", 0,"tou", -1, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+			if(player.tou > 40) dynStats("tou", -1);
 		}
 		//(corrupt jerk)
 		else {
@@ -2059,11 +2059,11 @@ public function getMilkFromEmber():void {
 					player.addStatusValue("rut",1,100);
 					player.addStatusValue("rut",2,5);
 					player.addStatusValue("rut",3,48);
-					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 5, "sen", 0, "lus", 0, "cor", 0, "resisted", false, "noBimbo", true);
+					dynStats("lib", 5, "resisted", false, "noBimbo", true);
 				}
 				else {
 					player.createStatusAffect("rut",150,5,100,0);
-					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 5, "sen", 0, "lus", 0, "cor", 0, "resisted", false, "noBimbo", true);
+					dynStats("lib", 5, "resisted", false, "noBimbo", true);
 				}
 			}
 			else {
@@ -2074,12 +2074,12 @@ public function getMilkFromEmber():void {
 					player.statusAffects[temp].value1 += 5;
 					player.statusAffects[temp].value2 += 5;
 					player.statusAffects[temp].value3 += 48;
-					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 5, "sen", 0, "lus", 0, "cor", 0, "resisted", false, "noBimbo", true);
+					dynStats("lib", 5, "resisted", false, "noBimbo", true);
 				}
 				//Go into heat.  Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
 				if(player.hasStatusAffect("heat") < 0) {
 					player.createStatusAffect("heat", 10, 15, 48, 0);
-					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 15, "sen", 0, "lus", 0, "cor", 0, "resisted", false, "noBimbo", true);
+					dynStats("lib", 15, "resisted", false, "noBimbo", true);
 				}
 			}
 			outputText("!</b>");
@@ -2088,7 +2088,7 @@ public function getMilkFromEmber():void {
 	emberAffection(1);
 	doNext(13);
 	//reset Dragonbreath counter to ready, increase lust slightly if low or med affection, add heat/rut if high dragon-score, damage toughness slightly if high affection and low PC corruption
-	if(emberAffection() < 75) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 20, "cor", 0);
+	if(emberAffection() < 75) dynStats("lus", 20);
 	fatigue(-50);
 	HPChange(maxHP() * .33,false);
 }
@@ -2445,7 +2445,7 @@ public function catchAnal():void {
 	outputText("\n\nEmber makes the best face of disgust " + emberMF("he","she") + " can manage.  \"<i>Argh!  I need a bath!  Now!</i>\"  And with a quick spin, " + emberMF("he","she") + " dashes off to find a stream.  You watch " + emberMF("him","her") + " go and smile bitterly; you've grown used to how the dragon behaves and you know " + emberMF("he","she") + " really did enjoy " + emberMF("him","her") + "self, but the act might be getting a bit tiresome.  Grabbing a handful of dried grass, you wipe the worst smears of sexual fluids from your body, redress yourself, and head lazily back to the camp.");
 	//(+Affection, minus lust, reset hours since cum, slimefeed)
 	emberAffection(6);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 3, "lus", -100, "cor", 0);
+	dynStats("sen", 3, "lus=", 0);
 	slimeFeed();
 	doNext(13);
 }
@@ -2547,7 +2547,7 @@ public function suckEmberCock():void {
 	//(+Affection, lust, reset hours since cum, slimefeed)
 	slimeFeed();
 	emberAffection(6);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10 + player.lib/10, "cor", 0);
+	dynStats("lus", 10 + player.lib/10);
 	doNext(13);
 }
 
@@ -2657,7 +2657,7 @@ public function stickDickInKnifeDrawer():void {
 	else outputText(", folding your arms; " + emberMF("his","her") + " dementia is getting worse...");
 	
 	//lose lust, reset hours since cum
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	doNext(13);
 }
 
@@ -2810,7 +2810,7 @@ public function stickItInEmbersButt():void {
 		
 		outputText("\n\nEmber shudders as you finish talking and blows a puff of smoke, then turns around and hurries away to the nearest stream. You just watch " + emberMF("him","her") + " go, plugging " + emberMF("his","her") + " used rosebud with a finger, you make note of " + emberMF("his","her") + " awkward stride, somehow... " + emberMF("he","she") + " didn't seem that angry as " + emberMF("he","she") + " left...");
 	}
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
+	dynStats("sen", -2, "lus=", 0);
 	doNext(13);
 }
 
@@ -2889,7 +2889,7 @@ public function slurpDraggieCunnies():void {
 	//Moderate lust gain and slimefeed, ala blowing Urta or drinking Lover Urta's fluids at Tel'Adre*/
 	slimeFeed();
 	emberAffection(6);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10 + player.lib/10, "cor", 0);
+	dynStats("lus", 10 + player.lib/10);
 	doNext(13);
 }
 
@@ -2955,7 +2955,7 @@ public function getEatenOutByEmbra():void {
 	
 	outputText("\n\nYou smile, hating to see " + emberMF("him","her") + " go, but so loving to watch " + emberMF("him","her") + " leave.  Shaking off your pleasurable fantasies, you manage to pull yourself back upright, redress yourself, and return to camp.");
 	//minus some fukkin' lust, reset hours since cum
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	doNext(13);
 }
 
@@ -3112,7 +3112,7 @@ public function penetrateEmbrah():void {
 	if(player.cor >= 66) {
 		outputText("\n\n\"<i>Nor you, me,</i>\" you say, folding your arms.  \"<i>You were the one in charge, so the failure is all yours... luckily, my stamina was enough to finish, even though you became useless halfway through.</i>\"  Picking up your gear, you leave the dragon behind you; she hurls breathless insults at you, but you only answer with a negligent wave.");
 		//end scene, reset hours since cum, Ember preg check, minus some fuckin Ember affection
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
+		dynStats("sen", -2, "lus=", 0);
 		emberAffection(-5);
 		doNext(13);
 		flags[kFLAGS.EMBER_PUSSY_FUCK_COUNT]++;
@@ -3143,7 +3143,7 @@ public function penetrateEmbrah():void {
 	
 	outputText("\n\n\"<i>Yes... let's go again...</i>\" she responds tiredly, before slumping down for a quick nap.  Beyond satisfied yourself, you settle on top of her with a sigh and a groan, repositioning yourself for greater comfort as you join her in sleep.");
 	
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", .5, "sen", -2, "lus", -100, "cor", 0);
+	dynStats("lib", .5, "sen", -2, "lus=", 0);
 	doNext(penetrateEmbrahPartII);
 }
 
@@ -3274,8 +3274,8 @@ public function getPenetratedByEmberLastSexSceneWoooo():void {
 	outputText("  Mmm... you can feel your own second orgasm coming in hot.  Maybe after another 4 or 5, you'll let the dragon go...");
 	
 	outputText("\n\nEventually, exhausted, belly stuffed with dragon-spunk to the point you look ready to birth a pair of dragon toddlers, and feeling incredibly well-sated, you lay on Ember's chest, cuddling your limp, utterly drained lover.  The dragon is fast asleep, having passed out from exhaustion, and you amuse yourself by listening to " + emberMF("his","her") + " heart beating as " + emberMF("he","she") + " inhales and exhales softly in " + emberMF("his","her") + " sleep.  To be honest, you could use a nap too, and you pass out atop " + emberMF("him","her") + ".");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
-	if(player.lib > 50) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -3, "sen", 0, "lus", 0, "cor", 0);
+	dynStats("sen", -2, "lus=", 0);
+	if(player.lib > 50) dynStats("lib", -3);
 	slimeFeed();
 	doNext(getPenetratedByEmberLastSexSceneWooooPartII);
 }
@@ -3331,7 +3331,7 @@ public function emberRapesYourHeatness():void {
 		outputText("humping against you, smearing your thigh with dragon pre.");
 	else outputText("tightly pressing her drooling, puffy netherlips on your thighs.");
 	outputText("  \"<i>I need you, [name].  I need you so badly... can you see how badly I need you?</i>\" Ember asks, panting in barely contained lust.  \"<i>I want to fuck you so badly... Let's make a baby now!</i>\"");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10 + player.lib/10, "cor", 0);
+	dynStats("lus", 10 + player.lib/10);
 	outputText("\n\nWhat do you say?");
 	//[Accept] [Deny]
 	simpleChoices("Accept",timeToPuffTheMagicDragon,"Deny",fuckOffEmberIWantANap,"",0,"",0,"",0);
@@ -3340,7 +3340,7 @@ public function emberRapesYourHeatness():void {
 //[=Deny=]
 public function fuckOffEmberIWantANap():void {
 	clearOutput();
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10 + player.lib/10, "cor", 0);
+	dynStats("lus", 10 + player.lib/10);
 	outputText("Oh, your ");
 	if(player.hasVagina()) outputText("[vagina]"); 
 	if(player.gender == 3) outputText(" and ");
@@ -3478,7 +3478,7 @@ public function getKnockedUpByEmbrahBroBaby():void {
 	if(flags[kFLAGS.EMBER_OVIPOSITION] == 0) outputText("baby dragon");
 	else outputText("dragon egg");
 	outputText(".  Yawning, you curl up to the dragon for a quick nap of your own.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
+	dynStats("sen", -2, "lus=", 0);
 	//Preg shit goez hurdur
 	player.knockUp(17,336,1,1);
 	player.createStatusAffect("ember fuck cooldown",36,0,0,0);
@@ -3584,7 +3584,7 @@ public function breedEmberPregnantAsIfThereWasAnyOtherKindOfBreeding():void {
 	flags[kFLAGS.EMBER_INCUBATION] = 336;
 	player.createStatusAffect("ember fuck cooldown",36,0,0,0);
 	player.removeStatusAffect("rut");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
+	dynStats("sen", -2, "lus=", 0);
 	doNext(3776);
 }
 
@@ -3652,7 +3652,7 @@ public function emberPregUpdate():Boolean {
 		}
 		if(flags[kFLAGS.EMBER_INCUBATION] == 270) {
 			pregText = "\nEmber's belly grows ever bigger, making her pregnancy noticeable. She looks very sexy knocked up like that...  You shake your stray thoughts away.\n";
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (5 + player.lib/10), "cor", 0);
+			dynStats("lus", (5 + player.lib/10));
 		}
 		if(flags[kFLAGS.EMBER_INCUBATION] == 180) pregText = "\nEmber's grown a lot; anyone can tell she's pregnant with a single glance.  Ember notices you looking.  \"<i>W-what? Never seen a pregnant woman before?</i>\" she asks indignantly, although she can't hide her smile as you continue to look.\n";
 		if(flags[kFLAGS.EMBER_INCUBATION] == 100) pregText = "\nYou hear Ember groan, then sit down.  You rush to her side, asking if she's all right.  \"<i>Yes, I'm fine. Just a bit tired.</i>\"  She reassures you; then takes your hand and presses it against her belly.  You feel something hard and slightly round inside.  \"<i>Can you feel it?  This egg is already much larger than the others.  Proof that your seed took.</i>\" she says, smiling.  You smile back, then excuse yourself.\n";
@@ -3693,7 +3693,7 @@ public function emberPregUpdate():Boolean {
 		if(flags[kFLAGS.EMBER_INCUBATION] == 330) pregText = "\nEmber's belly seems to be swelling; it looks like your seed took after all.  The dragon makes no obvious sign that she's noticed the weight she's putting on, and you don't think it would be wise to draw attention to it, even if it is \"<i>only</i>\" a pregnancy bulge.\n";
 		if(flags[kFLAGS.EMBER_INCUBATION] == 270) {
 			pregText = "\nEmber's belly grows ever bigger, making her pregnancy noticeable.  Her swollen midriff suits her well; to be honest she looks pretty sexy like that.\n";
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (5+player.lib/20), "cor", 0);
+			dynStats("lus", (5+player.lib/20));
 		}
 		if(flags[kFLAGS.EMBER_INCUBATION] == 180) {
 			pregText = "\nEmber's belly has grown quite a bit.  Anyone can tell she's pregnant with a single glance.  Ember catches you looking";
@@ -4308,7 +4308,7 @@ public function highAffectionEmberLustFuck():void {
 	outputText(" slides out of " + emberMF("his","her") + " with a wet slurp, allowing your deposit to leak its way under your prone forms.");
 	
 	outputText("\n\nYou both take a few moments to catch your breath, before Ember rolls over to look at you.  " + emberMF("He","She") + " extends a clawed hand to lightly brush your cheek.  \"<i>[name]... you really know how to make a dragon feel loved...</i>\"  You return the gesture, telling " + emberMF("him","her") + " it's easy when a dragon seems to love you just as much.  Ember smiles adoringly at you.  \"<i>Hey, can I ask you something, [name]?</i>\"  You indicate that it's okay.  \"<i>I want to be with you... hold you for a little while... is it okay if we do that?</i>\"");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -5, "lus", -100, "cor", 0);
+	dynStats("sen", -5, "lus=", 0);
 	//[Yes] [No]
 	menu();
 	addButton(0,"Yes",stayWithEmberAfterLustFuck);
@@ -4424,7 +4424,7 @@ public function frottingWithEmber(clear:Boolean = true):void {
 	else if(flags[kFLAGS.EMBER_HAIR] == 2) outputText(" mane");
 	else outputText(" hair");
 	outputText(" before allowing yourself to also fall asleep.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	//doNext(14);
 	menu();
 	addButton(0,"Next",emberJizzbangbangEnding);
@@ -4488,7 +4488,7 @@ public function penetrateWithEmber(clear:Boolean = true):void {
 	if(flags[kFLAGS.EMBER_GENDER] == 3) outputText("  Her draconic cock throbs all the way through your orgasm, shooting blanks a few times before spurting a couple ropes of pre onto her belly.");
 	
 	outputText("\n\nThe two of you collapse into each other's arms.  You move to pull out, but Ember stops you by holding your hips in place.  \"<i>Leave it inside... that's where it belongs.</i>\"  She smiles at you, panting a bit.  Too tired and happy to argue, you simply nod your head, rest against her, and allow sleep to claim you. You're dimly aware of Ember doing the same thing before you fade.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	//doNext(14);
 	menu();
 	addButton(0,"Next",emberJizzbangbangEnding);
@@ -4528,6 +4528,6 @@ public function emberJizzbangbangEnding():void {
 	outputText("\n\nYou head off yourself, ready to resume the rest of your day.");
 	//2 hours pass, PC's fatigue is healed some, Libido is reduced.
 	fatigue(-20);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -1, "sen", 0, "lus", 0, "cor", 0);
+	dynStats("lib", -1);
 	doNext(14);
 }

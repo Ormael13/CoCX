@@ -63,13 +63,13 @@ public function sharkTease():void {
 		outputText("You charge at the shark girl, prepared to strike again, but stop dead in your tracks when she bends over and wiggles her toned ass towards you. It distracts you long enough for her tail to swing out and smack you to the ground. She coos, \"<i>Aw... You really do like me!</i>\"", false);
 		//(Small health damage, medium lust build).
 		takeDamage(4+rand(4));
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (10+(player.lib/20)), "cor", 0);
+		dynStats("lus", (10+(player.lib/20)));
 	}
 	else {
 		outputText("You pull your " + player.weaponName + " back, getting a running start to land another attack. The Shark girl smirks and pulls up her bikini top, shaking her perky breasts in your direction. You stop abruptly, aroused by the sight just long enough for the shark girl to kick you across the face and knock you to the ground.  She teases, \"<i>Aw, don't worry baby, you're gonna get the full package in a moment!</i>\"", false);
 		//(Small health damage, medium lust build)
 		takeDamage(4+rand(4));
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (5+(player.lib/10)), "cor", 0);
+		dynStats("lus", (5+(player.lib/10)));
 	}
 	combatRoundOver();	
 }
@@ -84,7 +84,7 @@ public function sharkWinChoices():void {
 	//Lust win
 	else {
 		outputText("The shark-girl begins masturbating, giving up on dominating you.  The sight is truly entrancing.", true);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 15, "cor", 0);
+		dynStats("lus", 15);
 	}
 	if(player.lust >= 33 && player.gender > 0) {
 		outputText("  Do you have your way with her or leave?", false);
@@ -134,8 +134,8 @@ public function sharkgirlDickFuck():void {
 		outputText("The shark girl cries out in orgasm, her pussy tightening as the feelers wrap around your cock. The pleasure drives you over the edge, and you pump your load of cum into her needy pussy, the feelers milking you for every drop you have. You pull out, satisfied, and as you turn to leave you see the shark girl rubbing cum into her cunt and winking at you.", false);
 	}
 	cleanupAfterCombat();
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
-	if(player.cor < 33) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 1);
+	dynStats("sen", -1, "lus=", 0);
+	if(player.cor < 33) dynStats("cor", 1);
 }
 
 public function sharkgirlSixtyNine():void {
@@ -170,8 +170,8 @@ public function sharkgirlSixtyNine():void {
 		outputText("Thoroughly satisfied, you leave the shark girl on the ground covered in your fluids and depart for your camp.", false);
 	}
 	cleanupAfterCombat();
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
-	if(player.cor < 33) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 1);
+	dynStats("sen", -1, "lus=", 0);
+	if(player.cor < 33) dynStats("cor", 1);
 }
 
 //Shark girl Bad End.
@@ -267,7 +267,7 @@ public function sharkLossRape():void {
 		outputText("to fight on.\n\n", false);
 		outputText("The shark girl does a little victory dance, swaying her hips to and fro before moving over to you. She quickly removes your " + player.armorName + ", but her smile fades to a blank expression when she notices you lack any genitalia. \"<i>What the...</i>\" she mumbles, poking you in the groin. Finding you completely useless, she growls in frustration and stomps on your face in anger. The sudden pain makes you pass out.", false);
 		cleanupAfterCombat();
-		dynStats("str", 0,"tou", -2, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+		dynStats("tou", -2);
 		return;
 	}
 	//Female:
@@ -288,8 +288,8 @@ public function sharkLossRape():void {
 		outputText("The shark girl eventually sighs happily and relaxes her grip on your hair, pulling your head away a few inches. \"<i>Not bad bitch, not bad. Now get on your back.</i>\" You obey your mistress's command and flop onto your back. A sense of joy fills you as she positions her crotch in front of your face and moves her own head between your legs. You quickly resume eating her out, and this time she joins in the feast. It's not too long before the two of you orgasm, spraying girl-cum onto each other's faces.\n\n", false);
 		outputText("The shark girl stands to leave and winks at you before diving back into the water. You eventually pass out from the exertion.", false);
 		//(Corruption +2, Intelligence -4)
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
-		if(player.cor < 30) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 1);
+		dynStats("lus=", 0);
+		if(player.cor < 30) dynStats("cor", 1);
 		cleanupAfterCombat();
 		return;
 	}
@@ -307,8 +307,8 @@ public function sharkLossRape():void {
 		outputText("The shark girl has no such qualms and rides you like a mechanical bull, hammering up and down your " + cockDescript(0) + " with incredible speed. It certainly feels nice, but the rough nature of the ride also certainly hurts. You'll be walking funny for a while after this, that's for sure.\n\n", false);
 		
 		outputText("Eventually, her vagina clamps down on your cock and she cries out in orgasm. You grunt loudly and cum a few seconds after, pumping your seed into her womb. The shark girl leans over and plants a tiny kiss on your lips. \"<i>Good boy. I'll be sure to see you again</i>\". She gets up again and you watch her re-enter the water before you pass out.", false);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 1, "lus", -100, "cor", 0);
-		if(player.cor < 30) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 1);
+		dynStats("sen", 1, "lus=", 0);
+		if(player.cor < 30) dynStats("cor", 1);
 		cleanupAfterCombat();
 		return;
 	}

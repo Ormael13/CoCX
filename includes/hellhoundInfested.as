@@ -17,17 +17,17 @@ public function hellHoundWormCannon():void {
 	outputText("\n", false);
 	if(rand(2) == 0) {
 		//Get hit – 10+ lust
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5 + player.lib/20, "cor", 0);
+		dynStats("lus", 5 + player.lib/20);
 		outputText("Taken off-guard by the unexpected sexual display, you fail to move out of the way, and the wormy jism splatters you from the chest down.", false);
 		if(player.hasStatusAffect("infested") >= 0 && player.totalCocks() > 0) {
 			outputText("  The worms inside you begin moving and squirming. A few of your cum-soaked parasites crawl out from your shivering " + multiCockDescriptLight() + " as if attempting to meet the new arrivals.  You desperately want to brush them away, but the pleasure in your crotch is too good to fight, and you find yourself staying your hand as each and every one of the new worms makes it way into your " + multiCockDescriptLight() + ".", false);
 			if(player.balls > 0) outputText("  Your " + ballsDescriptLight() + " grow weightier as the worms settle into their new home, arousing you beyond measure.", false);
 			else outputText("  You can feel them shifting around inside you as they adjust to their new home, arousing you beyond measure.", false);
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10, "cor", 0);
+			dynStats("lus", 10);
 		}
 		else if(player.totalCocks() > 0) {
 			outputText("  The worms wriggle and squirm all over you, working their way towards your groin.  It tickles pleasantly, but you brush them away before they can get inside you.  The thought of being turned into a worm-dispensing cum fountain is horrifying, but it leaves you hard.", false);
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (5+Math.round(player.cor/20)), "cor", 0);
+			dynStats("lus", (5+Math.round(player.cor/20)));
 		}
 		else if(player.hasVagina()) outputText("  Thankfully, the worms don't seem to want anything to do with you, and rapidly drop down to the ground.", false);
 	}
@@ -42,11 +42,11 @@ public function hellHoundWormCannon():void {
 			outputText(" wriggle", false);
 			if(player.balls == 0 && player.cockTotal() == 1) outputText("s", false);
 			outputText(" hotly, expelling a few of your own worms in response along with a dribble of thick pre-cum.   You wonder what it would feel like to let his worms crawl inside you…", false);
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10, "cor", 0);
+			dynStats("lus", 10);
 		}
 		//if aroused by worms +5 lust:
 		else if(player.hasStatusAffect("wormsOn") >= 0 && player.hasStatusAffect("wormsHalf") < 0) {
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5, "cor", 0);
+			dynStats("lus", 5);
 			outputText("  The idea of being covered in the beast's infested seed arouses you slightly, but you shake your head violently and clear away the unwelcome thought.", false);
 		}
 	}
@@ -73,7 +73,7 @@ public function infestedHellhoundLossRape():void {
 		outputText("The beast takes a sniff at your groin, then backs away, looking confused.  You glance down and realize just how hard you've become.  A few of your worms are hanging from the " + cockHead(0) + " of your " + cockDescript(0) + ", starting to flow out in a steady stream.  It feels better than it has any right to.   A shadow falls across you as the hellhound moves over you, its imposing twin members hard and pulsating above you.  Hot splatters of jism drip onto your chest as the beast's worms begin escaping, forcing thick globules of dog-semen out along with them.\n\n", false);
 		
 		outputText("Overcome by the worms, both you and the beast begin orgasming, without external stimulation of any kind.  Worms and cum mix together on top of you, slowly building into a large mound that covers the better part of your torso.  Exhausted and drained, you both squirt weakly, emptying the last of your smallest worms into the pile.   Your eyes close as the beast lies down with you, and together the two of you lose consciousness as your newly birthed worm colony squirms away.", false);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", -100, "cor", 1);
+		dynStats("lib", 1, "sen", 1, "lus=", 0, "cor", 1);
 		player.cumMultiplier += .5;
 		cleanupAfterCombat();
 		return;
@@ -126,7 +126,7 @@ public function infestedHellhoundLossRape():void {
 		}
 		//(+infested)
 		player.createStatusAffect("infested",0,0,0,0);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", -100, "cor", 1);
+		dynStats("lib", 1, "sen", 1, "lus=", 0, "cor", 1);
 		player.cumMultiplier += .2;
 		cleanupAfterCombat();
 		return;
@@ -169,7 +169,7 @@ public function infestedHellhoundLossRape():void {
 			player.addStatusValue("worm plugged",1,1+rand(5));
 		else
 			player.createStatusAffect("worm plugged",1+rand(5),0,0,0);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 0, "lus", -100, "cor", 1);
+		dynStats("lib", 1, "lus=", 0, "cor", 1);
 		cleanupAfterCombat();
 		return;
 	}
@@ -201,7 +201,7 @@ public function infestedHellhoundLossRape():void {
 		outputText("Unable to support yourself any longer, you collapse, your hips held up by the demonic black dog-dick lodged in your orifice.  They keep cumming and cumming, until your body takes a slow slide off to the ground.  Your eyes drift closed, lulled to sleep by the squirming warmth plugging your " + assholeDescript() + " and coating your back.", false);
 		outputText("  ", false);
 		buttChange(monster.cockArea(0), true);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 0, "lus", -100, "cor", 1);
+		dynStats("lib", 1, "lus=", 0, "cor", 1);
 		cleanupAfterCombat();
 		
 		return;

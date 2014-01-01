@@ -576,7 +576,7 @@ public function kihaXmasFingering():void {
 	outputText("\n\nYou begin pistoning your fingers in and out of the dragon-girl, asking her if she's feeling warmer now.  \"<i>Mmm, y-y-yes,</i>\" Kiha answers, even as her legs start to buckle, making her sway in a rather drunken fashion. \"<i>B-but it'll take more than - ooohhh... than that to warm me up,</i>\" she says, then moans.  She wants more, doesn't she?  Well, you're happy to oblige!  You add a couple more fingers to her love-hole, your other hand joining the first one in caring for her womanly needs by pinching and stroking her little, achingly engorged clit.  She shudders and squeals, her nether-lips squeezing you tightly as fem-cum drenches your hand, the orgasm ripping through her body and causing her to lose control of her legs, sending her crashing into you and knocking you both to the ground.");
 	outputText("\n\nYou click your tongue, mocking her for giving in to a little pleasure.  Isn't she supposed to be all strong and mighty?  \"<i>I'll never be defeated,</i>\" right?  \"<i>Shush, love,</i>\" she pants unthinkingly.  You laugh at your scaly lover's reaction, patting her butt gently.  Then, you ask her if she's feeling warmer now?  If she isn't, you'll be happy to warm her up some more, even going so far as to send a questing hand to prod her moist opening.");
 	outputText("\n\n\"<i>Well, I suppose you could get me a little hotter... if you can take the heat, my doofus,</i>\" she croons, snuggling tighter against you...");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 20+player.sens/20+player.lib/20, "cor", 0);
+	dynStats("lus", 20+player.sens/20+player.lib/20);
 	menu();
 	addButton(0,"Next",processJackFrostEvent);
 	return;
@@ -605,7 +605,7 @@ public function penetradePureMouseWaifu():void {
 	
 	outputText("\n\nYou tell Amily, \"<i>Happy Holidays,</i>\" hugging her in post-coital affection.  \"<i>Happy Holidays, [name]... whatever that is,</i>\" she giggles.  \"<i>But, you know, we might just have a little late Winterfest present brewing after that bit of fun.</i>\"  She bats her eyes at you flirtatiously, patting her cum-stuffed belly.");
 	outputText("\n\nYou agree with her and enjoy your closeness a while longer...");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -1, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lib", -1, "lus=", 0);
 	menu();
 	addButton(0,"Next",processJackFrostEvent);
 }
@@ -635,7 +635,7 @@ public function makeOutWithPureMouseWaifu():void {
 	outputText("\n\nYou tell her it feels perfect, and you'll fight hard to ensure you will all have more moments like this in the future...  \"<i>Well, I'll be rooting for you all the way... though, right now, I think I'd rather you just shut up and enjoy the moment,</i>\" she adds.");
 	
 	outputText("\n\nYou chuckle, even though she's the one that's been chatting your ears off this whole time?  \"<i>Yes, even though I'm the one that's been chatting your ears off,</i>\" Amily replies with a smile.  You suggest that perhaps all you need to do to stop talking is finding something to keep your mouths busy.  \"<i>Oh?  What are you suggesting?</i>\" she asks, her tail gently looping around your midriff.  Your reply is to simply draw her into a kiss...");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 30+player.sens/10, "cor", 0);
+	dynStats("lus", 30+player.sens/10);
 	menu();
 	addButton(0,"Next",processJackFrostEvent);
 }
@@ -658,7 +658,7 @@ public function penetradeCorruptJojoAss():void {
 	outputText("\n\nLaughing at his reaction, you ask if he has learned how to properly fuck in the snow.  Jojo lifts his face, covered in half-frozen spunk-slush, and nods at you, too tired from his recent fucking to speak.");
 	
 	outputText("\n\nGood, now he should get his face cleaned up.  You order him to lick himself clean.  Without hesitation, Jojo starts doing exactly what you said, slurping up all of the cum-slush on his face and using his fingers to scrape the rest into his reach.  He then begins licking at his arms and chest, clearly not intending to stop until he has it all.   You nod in satisfaction, telling him to keep at it, you want to see him eat it all up...");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -3, "sen", -1, "lus", -100, "cor", 1);
+	dynStats("lib", -3, "sen", -1, "lus=", 0, "cor", 1);
 	menu();
 	addButton(0,"Next",processJackFrostEvent);
 	flags[kFLAGS.JACK_FROST_PROGRESS] = 5;
@@ -686,7 +686,7 @@ public function rideCorruptJojoCock():void {
 	outputText("\n\nYou wait until you're sure you dripped the last few drops of femcum from your cunt, then, with a groan, noisily pull yourself off of the mouse's now-limp dick.  Moving so that you are hovering it over Jojo's face, you authoritatively command your slave to clean up all the mouse-spunk he stuffed into your cunt.  The panting mouse-slut breaks out of his trance with a start, and quickly raises to get started and do your bidding, even as drops of your mixed juice and his slutty baby-batter drip on his face.  He drinks the spunk with joy, moaning in enjoyment at the act.");
 	
 	outputText("\n\nYou just stand and watch as he works, waiting for him to finish cleaning you up so you can get started on your next task...");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -3, "sen", -1, "lus", -100, "cor", 1);
+	dynStats("lib", -3, "sen", -1, "lus=", 0, "cor", 1);
 	menu();
 	addButton(0,"Next",processJackFrostEvent);
 	flags[kFLAGS.JACK_FROST_PROGRESS] = 5;
@@ -713,7 +713,7 @@ public function spankNFingerCorruptJojoAss():void {
 	outputText("\n\nWith a gasp and a howl, Jojo does as you command, a fountain of tainted mouse-spooge gushing from his cock, soaking into the snow to create a great slushy puddle.  He cums and he cums until he's totally exhausted his strength, collapsing bonelessly into the puddle he's just created, his tail slipping off of your wrist as he does so.");
 	
 	outputText("\n\nYou laugh at the mouse-slut's blissed out face of pleasure, feeling like you managed to chip away another part of his broken will.  Before you leave him to pass out on his snowy puddle of mouse-cum you ask him, what is his name?  \"<i>S - Slut...</i>\"  Is the moaning reply.  Satisfied, you decide to leave for the moment.  Maybe you'll get back to him and break him in a little more later...");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 100, "cor", 0, "resisted", true);
+	dynStats("lus=", 100, "resisted", true);
 	menu();
 	addButton(0,"Next",processJackFrostEvent);
 	flags[kFLAGS.JACK_FROST_PROGRESS] = 5;

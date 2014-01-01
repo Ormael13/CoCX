@@ -56,7 +56,7 @@ package classes
 			//Take damage you masochist!
 			if (hasPerk("Masochist") >= 0 && lib >= 60) {
 				damage = Math.round(damage * .7);
-				game.dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 2, "cor", 0);
+				game.dynStats("lus", 2);
 				//Dont let it round too far down!
 				if (damage < 1) damage = 1;
 			}
@@ -92,7 +92,7 @@ package classes
 				HP -= damage;
 				game.mainView.statsView.showStatDown('hp');
 				if (game.flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
-					game.dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", int(damage / 2), "cor", 0);
+					game.dynStats("lus", int(damage / 2));
 				}
 				//Prevent negatives
 				if (HP<=0){

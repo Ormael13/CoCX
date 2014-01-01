@@ -285,7 +285,7 @@ public function CeraphHandsOutNewFetishesLikePervCandy():void {
 			player.earsPLong = "Green gem-stone ear-studs";
 		}
 		flags[kFLAGS.PC_FETISH] = 1;
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 25, "cor", 1);
+		dynStats("lus", 25, "cor", 1);
 	}
 	//*Fetish level = 1
 	else if(flags[kFLAGS.PC_FETISH] == 1) {
@@ -308,7 +308,7 @@ public function CeraphHandsOutNewFetishesLikePervCandy():void {
 		outputText("Ceraph smiles down at you and whimpers, \"<i>I hope you're pleased with the new fetish " + player.mf("Master","Mistress") + ".  Just think about how similar being paralyzed is to being tied down and tell me if you like it.</i>\"\n\n", false);
 	
 		outputText("Your body goes beet-red as it suddenly tries to struggle against the invisible binding of her magic.  It... it feels good!  You nearly cry out with lust as the restraint turns you on more and more.  Ceraph's magic has given you a fetish for being tied up!  You nearly faint when you think of all the strange things in this land that might try to restrain you, and you know you have no hope of resisting if they ever catch you.  <b>Though somehow you think you might enjoy being a bondage fetishist...</b>", false);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 25, "cor", 1);
+		dynStats("lus", 25, "cor", 1);
 		if(player.nipplesPierced == 0) {
 			player.nipplesPierced = 1;
 			player.nipplesPShort = "seamless black nipple-studs";
@@ -363,7 +363,7 @@ public function CeraphHandsOutNewFetishesLikePervCandy():void {
 		outputText("You rub a hand through the demon's pitch-black hair and let her know that it's exactly what you asked for.\n\n", false);
 		
 		outputText("Ceraph gives an excited squeak and holds herself still, allowing you to pet her.  Once you stop, she gives a disappointed sigh, but holds her position.", false);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 25, "cor", 2);
+		dynStats("lus", 25, "cor", 2);
 	}
 	doNext(ceraphFollowerAppearance);
 }
@@ -390,7 +390,7 @@ public function goThroughWithCeraphUnfetishification():void {
 	else if(player.cor < 66) outputText("You sigh and wonder if you should punish her for giving you such lip.", false);
 	else outputText("You slap her across the face for her temerity.", false);
 	
-	dynStats("str", 0,"tou", -1, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 1);
+	dynStats("tou", -1, "cor", 1);
 	if(flags[kFLAGS.PC_FETISH] == 3) flags[kFLAGS.PC_FETISH] = 2;
 	else if(flags[kFLAGS.PC_FETISH] == 2) flags[kFLAGS.PC_FETISH] = 1;
 	else if(flags[kFLAGS.PC_FETISH] == 1) flags[kFLAGS.PC_FETISH] = 0;
@@ -481,7 +481,7 @@ public function fuckFollowerCeraphsVagoo():void {
 	outputText(" and mouths, \"<i>Thank you.</i>\"\n\n", false);
 	
 	outputText("Nodding, you give her ass a slap and send her off, noting Ceraph has freed her hands at some point and returned them to their normal position.  She hasn't done anything about the sexual filth coating her body, but knowing her, she probably doesn't want to.", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", .25);
+	dynStats("sen", -2, "lus=", 0, "cor", .25);
 	doNext(13);
 }
 	
@@ -530,7 +530,7 @@ public function followerCeraphTongueFucking():void {
 	
 	outputText("You pull her back to your " + vaginaDescript() + " to lick the last of your lady-spunk from your nethers, then send her on her way with a smile on your face.  Your expression widens when you see Ceraph stagger, still a bit shaky from her own orgasm.", false);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00289]++;
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", .25);
+	dynStats("sen", -2, "lus=", 0, "cor", .25);
 	doNext(13);
 }
 
@@ -578,7 +578,7 @@ public function ceraphTentacleGrape():void {
 	
 	outputText("You come to in a puddle of cum, both yours and Ceraph's.  The demoness is sitting down across from you, her appearance returned to normal.  She brightens when she wakes and kneels, saying, \"<i>Thank you for allowing me to serve you so... completely, " + player.mf("Master","Mistress") + ".  It was... thrilling.</i>\"\n\n", false);
 	
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", .25);
+	dynStats("sen", -2, "lus=", 0, "cor", .25);
 	player.knockUp(1,400,61);
 	if(flags[kFLAGS.CERAPH_HIDING_DICK] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00290] == 0) {
 		outputText("You smirk and wonder if you should punish her for stuffing her cock down your throat.  Do you?", false);
@@ -661,7 +661,7 @@ public function fuckCeraphsCatgirls():void {
 	outputText(" thank you for the 'cream'.  You nod weakly and they jump to their feet and swish their tails at you, then depart.\n\n", false);
 	
 	//lust to 0, corruption +0.5
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -1, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lib", -1, "lus=", 0);
 	//end scene
 	doNext(13);
 }
@@ -697,7 +697,7 @@ public function ceraphUrtaRoleplayDrunk():void {
 	outputText("When Urta finally stops shuddering, the vulpine guard looks very different. The silken coat of grey fur that once patterned her lean, athletic torso has been removed, to reveal the soft caramel of her dusky-hued skin. While her lower legs and pawed feet retain their leaden pelt, they now more closely resemble stockings than natural body hair. Her tail seems unaffected as well, fluffy fur twitching from the junction just above her taut ass, raw sienna globes shining from the sweat of her transformation. Moving your gaze further along her dark amber body, you find two sharp, sliver fox ears poking out of the black-striped argentine hair on her head. Beyond these spots, however, it seems the girl has lost all of the fox hair that previously covered her, from her knees up to her eyebrows. Shaking her head, the Captain of Tel'Adre's city guard takes her hands from her face and almost leaps backward in surprise. Her muzzle is gone, replaced with a small, humanoid nose and plump, ebony lips just beneath it. Her startlingly human features cause the intoxicated girl to press her fingers against the burnt sugar of her skin, soft flesh highlighting the high cheekbones of her feminine face. She runs a hand through her hair, not sure what to think and too drunk to form an opinion.\n\n", false);
  
 	outputText("Grasping her shoulders and lifting her gaze to yours, you stare into Urta's emerald eyes. With a signing breath, you whisper that she's never looked more beautiful, and press forward, your lips eagerly finding hers. She twists her head too far to the side, trying to compensate for a muzzle that's no longer there before giggling into your mouth and turning back too far, bumping her nose against yours. She lets out a brief bark of laughter and moistly kisses your forehead, running her hands unsteadily down your " + player.skinFurScales() + ". \"<i>So, you like me this way, huh? Well, now it's my turn. Bottom's up!</i>\" She pushes you backwards harder than she'd intended, knocking your head against the soft ground before grabbing your " + hipDescript() + " and flipping you onto your " + allChestDesc() + ". Looking back over your shoulder, you see the girl tweaking her pale, pink nipples which stiffly rise from the generous swell of her olive breasts. A warm, firm thwack between your ass cheeks tells you that neither the alcohol nor her first orgasm has affected the herm's raging hardness. As she slides her cock up and down, between the pillowy orbs of your rump, you can feel every contour of her twenty inch horsecock- from its bulging veins to the ringed lip of her fleshy sheath to the smooth, cool skin of her refilling scrotum, heavily slapping against your inner thighs. You squeeze your " + buttDescript() + " in time with her long strokes, stroking the shaft between your globes as she quickens the pace. She can't keep her hands off her new body, it seems, the guards-woman rubbing her palms over her breasts, belly, arms, and hips, feeling her flawless flesh as eagerly as she hotdogs your " + buttDescript() + ".\n\n", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 125, "cor", 0);
+	dynStats("lus", 125);
 	//[Next]
 	doNext(ceraphUrtaRoleplayDrunk2);
 }
@@ -722,7 +722,7 @@ public function ceraphUrtaRoleplayDrunk2():void {
 	outputText("\n\n", false);
  
 	outputText("You wake up before long and find yourself cleaned, though still a little sticky, as if someone had used their tongue to wash the cum from your " + player.skinFurScales() + ".", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -1, "sen", -2, "lus", -100, "cor", 2);
+	dynStats("lib", -1, "sen", -2, "lus=", 0, "cor", 2);
 	//Preggers chance!
 	if(player.hasVagina() && player.totalFertility() >= rand(45) && player.pregnancyIncubation == 0) {
 		player.knockUp(1,432);
@@ -742,7 +742,7 @@ public function ceraphUrtaRoleplaySober():void {
  
 	outputText("Drawing you back to your cot, Urta sits on the cushioned bedding, knees spread as she leans back and braces herself on her elbows. You sink between her muscled thighs, rubbing your palms up the dusky fur of her hips as you bring your head toward her leaking pussy. The delicate folds of her labia are as dark as her nose, but there is a certain elegance in their plush depths, like the petals of a black rose guarding the nectar of the flower. You trace your tongue around the edge of her vulva, warm skin tingling with the faintest trace of the athletic guardswoman's perfumed sweat, exciting the tip of your tongue and making you draw it back into your mouth to savor the untainted taste of the girl's body. Placing small kisses on the puffy lips of her sex, you draw the girl's skin into your mouth with a gentle sucking, nibbling at the fox's flesh with only your lips as you gradually, achingly work your way up to the polished nub of her clitoris, engorged from your teasing oral stimulation. You stroke the sensitive flesh with the tip of your nose, brushing the swell of your lower lip across Urta's joy-buzzer. She moans, her hips swaying back and forth in time to your movements.", false);
 	if(player.horns > 0) outputText("  Unable to keep her hands at her sides, but unwilling to stand between your mouth and her slit, the fox-girl takes hold of your horns, pulling your face tightly against her mound, her chest tight with a barely audible squeak of delight. Stroking the tip of your tongue at the curtain of her sex, you allow her the barest trace of penetration before drawing back and placing a wet kiss on her clit. Enough foreplay.", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 200, "cor", 0);
+	dynStats("lus", 200);
 	//[Next]
 	doNext(ceraphUrtaRoleplaySober2);
 }
@@ -760,7 +760,7 @@ public function ceraphUrtaRoleplaySober2():void {
 	outputText("When the two of you reach the crest of your climax this time, neither of you has the strength to hold back, triumphantly surging toward your simultaneous orgasms. Urta squeezes your hand so tightly your knuckles crack in her hands while her legs pull your " + hipDescript() + " into an iron embrace. Your " + cockDescript(x) + " releases its fertile load into the girl's depths, liquid weight flooding her ravished canal with the creamy testament of your love.  She holds you inside her desperately, her pliant, sable lips murmuring her devotion to you with shuddering whispers.  When you finally finish, she keeps you within her a minute longer, savoring the sensation of your shaft surrounded by the rapturous warmth of your seed, before finally releasing her grip, allowing you to withdraw.  Sighing happily, she rubs her pussy lips as you slip out, a pearl bead of your jizz bubbling from her stuffed uterus. She runs her fingertips through the spunk, massaging the cum against the folds of her glistening labia. \"<i>You know,</i>\" she playfully murmurs, \"<i>now that my curse is broken, I'm not barren anymore.</i>\" She closes her eyes and takes a deep breath, cooing about the feeling of your silken sperm pressing against her waiting womb. You smile, despite yourself.\n\n", false);
  
 	outputText("Retrieving your " + player.armorName + ", when you turn around again, Urta is gone, the moment vanishing like a drop of water in an endless sea. \"<i>Thank you, " + player.mf("Master","Mistress") + ",</i>\" Ceraph's voice demurely whispers, gratitude floating on the wind.", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -1, "sen", -2, "lus", -100, "cor", 2);
+	dynStats("lib", -1, "sen", -2, "lus=", 0, "cor", 2);
 	doNext(13);
 }
 
@@ -881,7 +881,7 @@ public function ceraphLackeyCorruption():void {
 	outputText("She smiles at you seductively, licking her lips.  A slapping sound along with multiple pants and gasps catches your attention; both you and the succubus look around for its source.  The imps that brought the succubus for you are still masturbating furiously.  She looks at you with an eyebrow raised and says, \"<i>There is only one more thing you have to do to completely subdue me.  Order me to pleasure those lowly imps.</i>\"\n\n", false);
 
 	outputText("Do you?", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -3, "sen", 0, "lus", -100, "cor", 5);
+	dynStats("lib", -3, "lus=", 0, "cor", 5);
 	//[Yes][No][Never Again]
 	simpleChoices("Yes",acceptMoreCeraphFauxCorruption,"No",declineCeraphFauxCorruption,"",0,"",0,"Never Again",iQuitCeraphCorruptionDemons);
 }
@@ -918,7 +918,7 @@ public function acceptMoreCeraphFauxCorruption():void {
 	outputText("\"<i>Look at what happened to me... used and transformed, then forced to service a bunch of dirty imps...  Thank you, " + player.mf("Master","Mistress") + ",</i>\" she moans with a lewd smile.\n\n", false);
 
 	outputText("Licking the cum off her body, she sashays towards you to give you a little peck on the cheek.  \"<i>Hmm, you're such a good " + player.mf("Master","Mistress") + ", I might have to leave Ceraph's harem and join yours instead.  See you around, hot stuff.</i>\"  She rounds up the tired imps and extends her wings, setting off alongside them.", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5, "cor", 2);
+	dynStats("lus", 5, "cor", 2);
 	doNext(13);
 }
 
@@ -1034,7 +1034,7 @@ public function postUdderChoice(newl:Boolean = false):void {
 
 	outputText("Her grip fades, and you turn around to see... nothing.  She's simply gone, vanished without a trace.  No... not without a trace, you realize.  Right near where the milker used to lie sits a lone cowbell, lying in a pool of what you can only assume to be cum.  You reach for it, but it disappears as well, turned into a small puff of smoke and dispersing with the wind.  \"<i>Bye, sweetie,</i>\" the disembodied voice of your demonic slave whispers into your ear, mocking tones interspersed with a promise of further pleasure.", false);
 	//end (stat changes?)
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", -5, "lus", -100, "cor", 3);
+	dynStats("lib", 1, "sen", -5, "lus=", 0, "cor", 3);
 	doNext(13);
 }
 
@@ -1148,7 +1148,7 @@ public function cerminika():void {
 
 		outputText("\"<i>That said,</i>\" she whispers in your ear, \"<i>If you get a chance to do that to that cunt, do invite me.</i>\"", false);
 	}
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 2);
+	dynStats("sen", -2, "lus=", 0, "cor", 2);
 	flags[kFLAGS.CERAPH_ROLEPLAY_AS_DOMINIKA_COUNT]++;
 	doNext(13);
 }
@@ -1251,7 +1251,7 @@ public function fuckZetsukosTonguepussy():void {
 	outputText("Her pussy continues to suck on you gently as you pull out, and when your " + cockDescript(x) + " finally comes free of her bizarre lovehole, her tongue gently swirls around the lips before retracting itself inside.  You back up, wondering if you should help the bound kitsune to her feet, but as you are considering this, she flashes you a crazed grin and is suddenly bathed in purple flames, disappearing before your eyes.\n\n", false);
 
 	outputText("\"<i>Zetsuko hopes to taste " + player.mf("Master","Mistress") + " again sometime...</i>\"", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", .25, "sen", -5, "lus", -100, "cor", 2);
+	dynStats("lib", .25, "sen", -5, "lus=", 0, "cor", 2);
 	doNext(13);
 }
 //▶[GetTongued] requires vagina
@@ -1303,7 +1303,7 @@ public function getTonguedByZetsuko():void {
 	outputText("Fully spent, you pull yourself back, grasping Zetsuko's still-writhing tongue in your hand and sliding it out of you, letting her lower body thump to the ground.  You watch as her tongue gently swirls around the lips and then retracts within the bizarre orifice, looking for all the world to be an ordinary—if slightly overstretched—pussy.  You wonder if you should help her up for a moment, but as you are considering reaching down to bring her to her feet, she is suddenly bathed in corrupted flames, disappearing before your eyes.\n\n", false);
 
 	outputText("\"<i>Zetsuko hopes to taste " + player.mf("Master","Mistress") + " again sometime...</i>\"", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", .25, "sen", -5, "lus", -100, "cor", 2);
+	dynStats("lib", .25, "sen", -5, "lus=", 0, "cor", 2);
 	doNext(13);
 }
 //▶[Banana?] silly mode
@@ -1393,7 +1393,7 @@ public function ceraphFollowerCockTaking(smallest:Boolean = false):void {
 	outputText(" in her hand!  At the base there's smooth flesh and an arcane mark, somehow keeping the disembodied dick alive to pulse and squirm in her grasp.  The place on your groin is left completely smooth and featureless, as if it had never been there at all.", false);		
 	outputText("\n\nCeraph runs a finger up and down the length, setting off fireworks in your brain – you can still feel it!  The demoness laughs and says, \"<i>Don't worry, that will fade once I get it further away, though you know what to expect at night, right?  For now, enjoy the pleasure!  Oh, and thank you again for this, you won't regret it.  If you do, no refunds.</i>\"", false);
 	outputText("\n\nShe pirouettes away, practically dancing into the sky while she strokes and teases the cock you just lost.  You shudder and shake as orgasm wracks your body, your cum falling like rain thousands of feet away.  You swear, you can hear your pet laughing.", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -2, "sen", -2, "lus", -100, "cor", 5);
+	dynStats("lib", -2, "sen", -2, "lus=", 0, "cor", 5);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00218]++;
 	player.removeCock(x,1);
 	genderCheck();
@@ -1411,7 +1411,7 @@ public function ceraphFollowerCuntTaking():void {
 	player.removeVagina(0,1);
 	genderCheck();
 	//(-100 lust, -1 fetish, +1 vagina toy status)
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -2, "sen", -2, "lus", 0, "cor", 5);
+	dynStats("lib", -2, "sen", -2, "cor", 5);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00219]++;
 	doNext(13);
 }
@@ -1463,7 +1463,7 @@ public function ceraphFollowerTitTaking(rowNum:int = 0):void {
 	
 	outputText("Ceraph turns and prances off through the rocks, tweaking your nipples HARD every few moments to remind you of your choice.  She vanishes before long, leaving you to deal with the slowly dwindling sensation of her cock in your tits.\n\n", false);
 	//(-1 fetish, +1 tit toy status)
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 20, "cor", 5);
+	dynStats("lus", 20, "cor", 5);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00220]++;
 	doNext(13);
 }
@@ -1504,7 +1504,7 @@ public function stuffSomeNippleCunts():void {
 	outputText("  Her hands run through your [hair] and pull your [face] into her shoulder.  She holds you tightly, clingingly even.  If you weren't so enraptured by the sensation of your sperm-filled nipples, you might actually care.");
 	outputText("\n\nThe two of you slowly relax, dueling climaxes winding down to return some level of sanity at last.  As soon as the demoness' eyes uncross, she stands up, " + num2Text(player.totalNipples()) + " dicks sliding free of clutching, spunk-stuffed twats at once.  You gasp and shudder, the sensitive flesh nearly setting you off again.  As she stretches, Ceraph's new appendages shrink, losing their masculinity and even faster their size.  You rise while trying to ignore the runnels of demon-spunk that spout from your well-fucked chest, your [chest] wobbling fantastically with the extra fluid weight.  Ceraph leans over to suck a [nipple] into her mouth, and after a few quick swallows, she sighs contently.");
 	outputText("\n\n\"<i>Delicious, my [Master],</i>\" the demoness coos as her wings unfurl, \"<i>Please, let's do this again.</i>\"  She leaps into the sky and flies off, no doubt to tend to her own pets.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 2, "lus", -100, "cor", 1);
+	dynStats("sen", 2, "lus=", 0, "cor", 1);
 	doNext(13);
 }
 
@@ -1542,7 +1542,7 @@ public function portalFuckWithFollowerCeraph():void {
 	outputText("\n\nThere's no stopping the surging passion as it races through you, and with a throaty sigh, you release your seed.  It's amazing, from this vantage you can do more than just experience your orgasm, you can watch it happen.  You can see the underside of your disembodied cock bulging with each urethra-stretching load.[if (cumQuantity > 500) \"  Jizz foams at her lips as her belly rounds, and you're treated to the sight of Ceraph's bellybutton suddenly becoming an outtie.\"][if (cumQuantity > 1000)   A moment later, her stomach rounds further, taking on a positively pregnant appearance.][if (cumQuantity > 1500) \"  Spunky rivers pump from the demon's overfull womb as it loses its ability to stretch any further.\"]  You sigh and idly move the portal up and down, fucking through the sloshing, sperm-filled mess that the demon's cunt has turned into.  Delightful.");
 	if(flags[kFLAGS.CERAPH_HIDING_DICK] == 0) outputText("\n\nCeraph gurgles happily for a second, then her cheeks bulge.  Her throat begins working, and you realize she's cumming into her own mouth.  By the look of how squirrel-like her visage has become, she can barely manage to swallow a mouthful before the next is stuffing her full, dribbles of pearly cream running freely from the corners of her mouth.  Ceraph quietly gulps and swallows over and over until her dick finally begins to soften, spent at last.");
 	outputText("\n\nYou stand up and stretch, your cock still lodged tight in Ceraph's cooch.  Alas, all good things must come to an end, and with one slow tug, you remove the ring from your [cock " + y + "] (and your maleness from her cunt).  You toss the borrowed item back to her, letting it fall on your slave's heaving bosom as she tries to recover, a fucked-out mess in the dirt.  You turn to get dressed, and when you glance back, Ceraph is gone, until the next time you call for her.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 1);
+	dynStats("lus=", 0, "cor", 1);
 	flags[kFLAGS.TIMES_CERAPH_PORTAL_FUCKED]++;
 	doNext(13);
 }
@@ -1591,7 +1591,7 @@ public function layEggsInSlaveCeraph():void {
 	
 	outputText("\n\nHumming a happy tune to yourself as you walk around Ceraph's twitching form, you grab a handful of her hair and pull her up off the ground.  Her face is crusted with dirt and her sparkling, gem-like eyes stare senselessly at you.  You rub your ovipositor over her head, carefully wiping your mingled lubes off on her hair before retracting the organ back into its holding sleeve.  \"<i>That will be all,</i>\" you tell her, and she smiles dreamily at you.  You turn around to gather your things, and don't bother to look back.");
 	player.dumpEggs();
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	doNext(13);
 }
 
@@ -1635,7 +1635,7 @@ public function sumissivenessToCeraphFollower():void {
 	if(player.hasCock()) outputText("\n\n(Agreeing could result in some humiliating milking...)");
 	else outputText("\n\n(Agreeing could result in some humiliating pegging...)");
 	//+50 lust, affected by resistance
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 50, "cor", 0);
+	dynStats("lus", 50);
 	menu();
 	//[Mewl once] [Bark once] [Either twice][Apple]
 	addButton(0,"Mewl Once",barkToCeraphOnce,false);
@@ -1786,7 +1786,7 @@ public function barkToCeraphOnce(dog:Boolean = true):void {
 	outputText("\n\n\"<i>Good, " + player.mf("boy","girl") + ".</i>\" her voice says, slowly fading into the wind.");
 	//Increase corruption, reset lust, increase sensitivity.
 	slimeFeed();
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 2, "lus", -100, "cor", 1);
+	dynStats("sen", 2, "lus=", 0, "cor", 1);
 	doNext(13);
 }
 
@@ -1989,6 +1989,6 @@ public function barkOrMeowTwiceToCeraph(dog:Boolean = true):void {
 		outputText("\n\nClick.");
 		outputText("\n\nYour collar is removed, and you look around realizing your owner is gone.  Your muscles are sore from the journey and you NEED to masturbate...  You aren't even sure why you did that.");
 	}
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 4, "lus", 100, "cor", 0, "resisted", false);
+	dynStats("sen", 4, "lus=", 100, "resisted", false);
 	doNext(13);
 }

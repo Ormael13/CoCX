@@ -10,7 +10,7 @@ public function amilyMeetsPureJojo():void {
 	outputText("Amily sighs and hugs him again, \"<i>You're a pansy. You know that Jojo?  But I'm glad " + player.short + " reunited us so that we could meet again.</i>\"\n\n", false);
 	
 	outputText("Jojo replies, \"<i>Me too,</i>\" before he notices you and coughs.  Amily pulls back and beams a brilliant, buck-toothed smile at you.  She rushes into your arms and gives you a kiss before she runs off.  Jojo looks a little embarrassed and scratches his ear as he centers himself.\n\n", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5, "cor", 0);
+	dynStats("lus", 5);
 
 	//[To jojo camp interaction]
 	doNext(2150);
@@ -57,7 +57,7 @@ public function tellAmilyToFuckOffRuinedJojo():void {
 	flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] = 1;
 	flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
 	flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] = 1;
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 10);
+	dynStats("cor", 10);
 	doNext(1);
 }
 //[Fix Him]
@@ -72,7 +72,7 @@ public function agreeToHelpAmilyFixJojo():void {
 	outputText("She tearfully nods and promises, \"<i>Just don't expect anything from me until this is taken care of.</i>\"\n\n", false);
 	
 	//(-5 cor
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", -5);
+	dynStats("cor", -5);
 	// Amily won't sex.  Jojo sex still available)
 	flags[kFLAGS.AMILY_WAIT_FOR_PC_FIX_JOJO] = 1;
 	doNext(1);
@@ -95,7 +95,7 @@ public function fixJojoOOOOHYEEEEAHSNAPINTOASLIMJIM():void {
 	//(Jojo leaves, never encountered again.)
 	flags[kFLAGS.JOJO_DEAD_OR_GONE] = 1;		
 	//(-5 corruption)
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", -5);
+	dynStats("cor", -5);
 	//(Amily not encounterable for 4 hours)
 	flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] = 4;
 	//Amily fuckable again
@@ -140,7 +140,7 @@ public function amilyDiscoversJojoWithTentaclesAndShitOhBoy():void {
 		flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
 		flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] = 1;
 		//+5 corruption)
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 5);
+		dynStats("cor", 5);
 		doNext(1);
 	}
 	//Else: 
@@ -162,7 +162,7 @@ public function AmilyLeavesBirdJojoTentacles():void {
 	flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
 	flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] = 1;
 	//+5 corruption)
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 5);
+	dynStats("cor", 5);
 	doNext(1);
 }
 
@@ -186,7 +186,7 @@ public function stopJojoDeathInTheNameOfLove():void {
 		//(NOT SMART)
 		outputText("Stop, think about this.  We can't do this, can we?</i>\"   She answers, \"<i>We do what we must,</i>\" and pulls her dagger.  You can't watch the grisly deed and avert your eyes.  She slits the once-pious monk's throat and it's done.  The two of you build a cairn of rocks over the mouse's body, as fitting a burial as you're able to provide for him.", false);
 		//(-80 lust)
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -99, "cor", 0);
+		dynStats("lus", -99);
 		//(You suck and Jojo died.)
 		flags[kFLAGS.JOJO_DEAD_OR_GONE] = 1;		
 	}
@@ -197,7 +197,7 @@ public function stopJojoDeathInTheNameOfLove():void {
 		
 		outputText("She slowly nods and pulls her hand away from her dagger.  Amily answers, \"<i>You're right, as usual.  I'll leave him be, but if you ever do something like this again, I'm gone.</i>\"\n\n", false);
 		//(+1 int)
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 1, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+		dynStats("int", 1);
 		//(YAY SAVED JOJO), and amily didn't leave.
 	}
 	doNext(13);
@@ -208,7 +208,7 @@ public function whyWouldDoThis():void {
 	outputText("You can't watch the grisly deed and avert your eyes.  She slits the once-pious monk's throat and it's done.  The two of you build a cairn of rocks over the mouse's body, as fitting a burial as you're able to provide for him.", false);
 	
 	//(-99 lust)
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -99, "cor", 0);
+	dynStats("lus", -99);
 	//(You suck and Jojo died.)
 	flags[kFLAGS.JOJO_DEAD_OR_GONE] = 1;	
 	doNext(13);
@@ -229,7 +229,7 @@ public function AmilyIntroducesSelfToRathazul():void {
 	outputText("Amily takes off, leaving you alone with the alchemist.", false);
 	
 	//(+5 lust!)/
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5, "cor", 0);
+	dynStats("lus", 5);
 	doNext(2070);
 }
 //[Amily delivers ingredients to Rathazul – happens at Rathazul]
@@ -243,7 +243,7 @@ public function amilyIngredientDelivery():void {
 	outputText(".  Amily sprints into the rat's lab with an armful of flowers, plants, and other ingredients.  Rathazul says, \"<i>Thank you, child - these will be a huge help.  It is fortunate you knew where to find some of these.  Purchasing them is difficult and expensive.</i>\"\n\n", false);
 	outputText("Amily bobs her head happily as Rathazul reaches into his robes and says, \"<i>Here is the payment, as promised,</i>\" and hands her an old alchemical text.  She squeals happily and runs past you, her tail curling about your waist for the briefest moment before she's gone.\n\n", false);
 	//[To rathazul, +4 lust]
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 4, "cor", 0);
+	dynStats("lus", 4);
 	//[Prices reduced for reducto!
 	flags[kFLAGS.AMILY_MET_RATHAZUL]++;
 	doNext(2070);
@@ -540,7 +540,7 @@ public function askAboutAmilyPt2():void {
 	outputText("Amily breaks the kiss and gives Urta a drunkenly affectionate smile, gently stroking her cheek.  \"<i>Mmm... I wish " + player.short + " had introduced ush earlier... I think we're gonna be good friendsh,</i>\" she slurs.  Urta simply nods, giving her a goofy grin but clearly miles away, mentally. The mouse promptly yawns, dropping the now empty bottle to the floor, shuts her eyes and snuggles up to Urta, who cuddles her close and also drifts off.\n\n", false);
 
 	outputText("With a soft sigh, you shut the door and leave them to sleep it off.  While you can't predict that they will be quite so magnanimous about all this when they wake up, right now, it looks like neither of them is inclined to declare war over you.", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 75, "cor", 0);
+	dynStats("lus", 75);
 	doNext(13);
 	//Progress to next stage!
 	flags[kFLAGS.AMILY_VISITING_URTA] = 2;
@@ -559,7 +559,7 @@ public function cheatingSloots():void {
 public function letTheSlootsFuck():void {
 	outputText("", true);
 	outputText("You chuckle and tell them you understand, though they had better include you in the future.  Drunken relief spreads across their faces when you give them a wink and step out.  Soon you hear the sloppy sounds of sex and giggles about how great their lover is.", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 75, "cor", 0);
+	dynStats("lus", 75);
 	doNext(13);
 	flags[kFLAGS.AMILY_VISITING_URTA] = 4;
 }
@@ -617,7 +617,7 @@ public function beADickToAmily():void {
 	
 	outputText("With that, Amily grabs her gear closest to hand and pushes past you with the best flounce she can manage, heading toward the desert.", false);
 	//plus PC corruption a little
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 5);
+	dynStats("cor", 5);
 	flags[kFLAGS.AMILY_VISITING_URTA] = 3;
 	//No more amily follower
 	flags[kFLAGS.AMILY_FOLLOWER] = 0;
@@ -709,6 +709,6 @@ public function amilyUrtaSexWatch():void {
 	outputText("With a sigh and a smile, Amily collapses on top of Urta, sated and full.  Her eyes dart towards you one more time before she cuddles the panting vixen to rest and enjoy the afterglow.\n\n", false);
 	
 	outputText("By this point, you are feeling very turned on indeed, but you can't bring yourself to disturb them.  Instead, you simply grin again and leave them to recover.", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 50, "cor", 0);
+	dynStats("lus", 50);
 	doNext(13);
 }

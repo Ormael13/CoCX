@@ -299,15 +299,15 @@ public function fuckYoDaughtersHomie():void {
 		//(20+ daughters:
 		else if(daughters < 30) {
 			outputText("A glass vial is slipped into your mouth as you lose consciousness, and you reflexively swallow.  You swear you could hear something about, \"<i>not done yet,</i>\" but you pass out.  Your dreams are far from restful, but full of pleasure.", false);
-			dynStats("str", 0,"tou", -.5, "spe", 0, "int", -.5, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+			dynStats("tou", -.5, "int", -.5);
 		}
 		//(30+ Daughters: 
 		else {
 			outputText("Vial after vial is pressed against your mouth as liquids are poured down your throat.  Your body reflexively swallows and the massive jump in arousal prevents you from totally passing out.  You can't remember much before you truly lose consciousness, but one thing that sticks in your mind is some of your daughters asking, \"<i>Why don't we just bring Daddy back to camp and then we can fuck him whenever we want?</i>\"\n\nYou passed out before you could hear the answer.", false);
-			dynStats("str", 0,"tou", -.75, "spe", 0, "int", -1, "lib", .5, "sen", 0, "lus", 0, "cor", 0);
+			dynStats("tou", -.75, "int", -1, "lib", .5);
 		}
 	}
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 0, "lus", -100, "cor", 1);
+	dynStats("lib", 1, "lus=", 0, "cor", 1);
 	//Knock the bitches up, boost libido, corruption
 	knockUpDaughters();
 	player.cumMultiplier += .3;
@@ -453,7 +453,7 @@ public function legTamanisDaughtersRAEPYou():void {
 				else {
 					outputText("Locked in a ceaseless orgasm, you're raped by one goblin after another.  A parade of tight pink pussies and their green-skinned owners passes by you, and once each of them is dripping with white seed, they take the time for a second pass.  You're raw, sore, and losing consciousness, but the huge mass of young goblins is far from done with you.  The force another potion into your throat as you lose consciousness.   Your dreams are filled with demented orgies where your dick is kept in one tight hole after another, a cruel reflection of reality.  When you awake they're gone and you're incredibly sore, but somehow still horny.  Getting dosed with so many goblin drugs in such a short time-span might not have been a good idea.", false);
 					//libido/cumq/corruption booster?
-					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 0, "lus", 0, "cor", .5);
+					dynStats("lib", 1, "cor", .5);
 					player.cumMultiplier += .3;
 				}
 			}
@@ -662,7 +662,7 @@ public function legTamanisDaughtersRAEPYou():void {
 		}
 	}
 	//knock bitches up, slight libido gain, slight strength/toughness loss.
-	dynStats("str", -.5,"tou", 0, "spe", 0, "int", -.5, "lib", 1, "sen", 0, "lus", -100, "cor", 1);
+	dynStats("str", -.5,"int", -.5, "lib", 1, "lus=", 0, "cor", 1);
 	knockUpDaughters();
 	if(gameState == 1 || gameState == 2) cleanupAfterCombat();
 	else doNext(15);
@@ -805,7 +805,7 @@ public function tamaniDaughtersCombatLossDrain():void {
 	//boost cum production slightly.
 	player.cumMultiplier += .3;
 	//increase libido, slight corruption, minus stregth and speed.
-	dynStats("str", -.5,"tou", 0, "spe", 0, "int", -.5, "lib", 1, "sen", 0, "lus", -100, "cor", 1);
+	dynStats("str", -.5,"int", -.5, "lib", 1, "lus=", 0, "cor", 1);
 }
 
 public function tamaniDaughtersBadEndChoice():void {
@@ -974,7 +974,7 @@ public function loseToDaughtersWithTamaniThere():void {
 	tamaniKnockUp();
 	flags[kFLAGS.TAMANI_TIMES_HYPNOTISED]++;
 	//daughter countdown reset. 
-	dynStats("str", -.5,"tou", 0, "spe", 0, "int", -.5, "lib", 1, "sen", 1, "lus", -100, "cor", 1);
+	dynStats("str", -.5,"int", -.5, "lib", 1, "sen", 1, "lus=", 0, "cor", 1);
 	if(gameState == 1 || gameState == 2) cleanupAfterCombat();
 	else doNext(13);
 }
@@ -1037,7 +1037,7 @@ public function combatWinAgainstDaughters():void {
 	}
 	else {
 		outputText("You smile in satisfaction as your daughters collapse in upon themselves, devolving into a frenzied orgy.  It looks like they're too distracted to continue fighting.  They're putting on quite a show...\n\n", true);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5, "cor", 0);
+		dynStats("lus", 5);
 		if(player.lust >= 33 && player.cockTotal() > 0) {
 			outputText("You could still fuck them, but things might get out of hand...\n\nDo you fuck them?", false);
 			doYesNo(fuckYoDaughtersHomie, cleanupAfterCombat);
@@ -1054,7 +1054,7 @@ public function loseToDaughters():void {
 		if(player.hasStatusAffect("infested") >= 0) {
 			infestOrgasm();
 			outputText("\n\nThe goblins sigh and say, \"<i>Dad, that's just gross.  Don't get me wrong, we're still gonna have you knock us up, but I hate the feeling of those worms inside me.</i>\"", false);
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+			dynStats("lus=", 0);
 		}
 		outputText("\n\nYou give up, you're just too turned on by the sea of sexually charged deviants to resist them anymore.  You're ready to fuck them all.", false);
 		if(player.cockTotal() == 0) {
@@ -1112,7 +1112,7 @@ public function midRoundMadness():void {
 		outputText("You reach back and throw her off, but her perverted taunts still leave you feeling a little hot under the collar.\n\n", false);
 	}
 	else outputText("A daughter lays down in front of you and starts jilling herself on the spot.  It's impossible to not glance down and see her or hear her pleasured moans.  You step away to remove the distraction but it definitely causes some discomfort in your " + player.armorName + ".\n\n", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 1 + player.lib/15+rand(player.cor/30), "cor", 0);
+	dynStats("lus", 1 + player.lib/15+rand(player.cor/30));
 }
 
 public function tamaniShowsUp():void {

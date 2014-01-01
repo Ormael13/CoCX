@@ -49,7 +49,7 @@ public function satyrAttack():void {
 public function satyrBate():void {
 	outputText("He glares at you, panting while his tongue hangs out and begins to masturbate.  You can nearly see his lewd thoughts reflected in his eyes, as beads of pre form on his massive cock and begin sliding down the erect shaft.");
 	//(small Libido based Lust increase, and increase monster lust)
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (player.lib/5)+4, "cor", 0);
+	dynStats("lus", (player.lib/5)+4);
 	monster.lust += 5;
 	combatRoundOver();
 }
@@ -95,7 +95,7 @@ public function satyrCharge():void {
 public function bottleChug():void {
 	outputText("He whips a bottle of wine seemingly from nowhere and begins chugging it down, then lets out a bellowing belch towards you.  The smell is so horrible you cover your nose in disgust, yet you feel hot as you inhale some of the fetid scent.");
 	//(damage PC lust very slightly and raise the satyr's lust.)
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (player.lib/5), "cor", 0);
+	dynStats("lus", (player.lib/5));
 	monster.lust += 5;
 	combatRoundOver();
 }
@@ -113,7 +113,7 @@ public function highLustChugRape():void {
 		outputText("You fall with a <b>THUD</b> and the Satyr doesn't even bother to undress you before he begins rubbing his massive cock on your body until he comes, soiling your [armor] and " + player.skinFurScales() + " with slimy, hot cum.  As it rubs into your body, you shiver with unwanted arousal.");
 		//large-ish sensitivity based lust increase if hit.)(This also relieves him of some of his lust, though not completely.)
 		monster.lust -= 50;
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (player.sens/5+20), "cor", 0);
+		dynStats("lus", (player.sens/5+20));
 	}
 	combatRoundOver();
 }
@@ -163,7 +163,7 @@ public function consensualSatyrFuck(loc:int = 0):void {
 	
 	outputText("\n\nYou barely register what he's saying, the beverage hits you with such force you immediately stop drinking and start coughing, spilling some of the booze on the floor.");
 	//(+Lust)
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 25, "cor", 0, "resisted", false);
+	dynStats("lus", 25, "resisted", false);
 	outputText("\n\nThe satyr bellows with laughter and takes a huge swig of his own wineskin.  \"<i>Looks like you need more practice with your liquor!</i>\" he chortles.  \"<i>Go on, drink up; practice makes perfect.</i>\"");
 	
 	outputText("\n\nIt suddenly dawns upon you that this satyr might not have the most noble intentions... you're pretty sure there's some sort of aphrodisiac inside this beverage he offered you, judging by the heat that spreads through your body.");
@@ -313,8 +313,8 @@ public function loseToSatyr():void {
 	//reduce lust, slimefeed, pregnatize me cap'n
 	slimeFeed();
 	satyrPreggo();
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 3, "lus", -100, "cor", 0);
-	if(player.cor < 50) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 1);
+	dynStats("sen", 3, "lus=", 0);
+	if(player.cor < 50) dynStats("cor", 1);
 	cleanupAfterCombat();
 }
 
@@ -369,7 +369,7 @@ public function femaleTakesAdvantageOfSatyr():void {
 	
 	outputText("\n\nYou grind your pussy into his face one last time, then, with regal delicacy, you remove yourself from the unconscious, sex-splattered satyr.  Picking up your clothes, you redress yourself.  Once you're decent, you leave the unconscious goatman as prey for whatever creature comes to investigate the stink of cum spattered about in such copious quantities.");
 	//reduce lust
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	cleanupAfterCombat();
 }
 	
@@ -405,7 +405,7 @@ public function malesTakeAdvantageOfSatyrs():void {
 	
 	outputText("\n\nSated for the moment, your gaze drifts towards the satyr.  He makes no sound; indeed, when you take a better look at him, you realise he's fallen asleep, still idly shaking his ass back and forth and jerking his cum-dribbling cock.  You don't even spare him a contemptuous look as you pull your bottoms up and head back.");
 	//reduce lust
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	cleanupAfterCombat();
 }
 
@@ -483,7 +483,7 @@ public function willinglyBoneSatyr():void {
 	outputText("\n\nYou watch him as he goes, then manage to force yourself back to your feet and stagger off, lest something far less hospitable find you here.");
 	//slimefeed, reduce lust, impregnational geographic
 	slimeFeed();
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	satyrPreggo();
 	doNext(13);
 }
@@ -568,7 +568,7 @@ public function ignoreSatyr():void {
 	if(player.cor < 50) outputText("disgusted by the strange thoughts this place seems to put into your mind", false);
 	else outputText("not feeling inclined to rape some satyr butt right now", false);
 	outputText(", and silently leave him to his pleasures.", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5+player.lib/20, "cor", 0);
+	dynStats("lus", 5+player.lib/20);
 	doNext(13);
 }
 //Player returns to camp
@@ -621,7 +621,7 @@ public function rapeSatyr():void {
 	outputText("You can't help but smile inwardly at the helpless goatman's eagerness, and decide to stick around and watch him a little longer.  It's not everyday you see a creature like him at your mercy.  Every once in awhile you egg him on with a fresh slapping of his butt. The satyr grumbles and huffs, but continues to thrust and rut mindlessly into the vegetative pussy feeding on his cock. You don't think it'll be long before he cums...\n\n", false);
 	
 	outputText("As you watch the lewd display, you feel your arousal building and your " + cockDescript(x) + " growing back into full mast. Figuring you already have a willing slut readily available, you consider using him to relieve yourself once more... What do you do?", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	//[Again][Leave]
 	simpleChoices("Again",secondSatyrFuck,"",0,"",0,"",0,"Leave",dontRepeatFuckSatyr);
 }
@@ -645,6 +645,6 @@ public function secondSatyrFuck():void {
 	outputText("With a great, garbled cry, the satyr cums on his own, gurgling through the sap-tinted cum drooling from his mouth as he spews into the waiting opening of his rapacious plant lover.  It swells and bloats as it gorges itself on his thick, stinking seed, stretching its stem until it is almost spherical, finally releasing him to collapse on his knees, free at last of the plant's grip.  He moans and bleats softly, leaking cummy sap from his chin onto his hairy chest, too overwhelmed by the combined fucking of yourself and the flower and too poisoned by whatever aphrodisiac he's been slurping on to move.\n\n", false);
 
 	outputText("You give your sensitive member a few trembling, almost-painful strokes... maybe you overdid it a bit.  Shrugging, you gather your " + player.armorName + " and leave the passed-out satyr behind as you go back to your camp.", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", -5, "lus", -100, "cor", 0);
+	dynStats("lib", 1, "sen", -5, "lus=", 0);
 	doNext(13);
 }

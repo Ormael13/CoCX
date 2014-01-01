@@ -45,7 +45,7 @@ public function hellhoundFire():void {
 		temp = 15 + rand(10);
 		temp = takeDamage(temp);
 		outputText("Both the hellhound's heads breathe in deeply before blasting a wave of dark fire at you. While the flames don't burn much, the unnatural heat fills your body with arousal. (" + temp + " damage)", false);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 20-(player.sens/10), "cor", 0);
+		dynStats("lus", 20-(player.sens/10));
 		statScreenRefresh();
 		if(player.HP <= 0) {
 			doNext(endHpLoss);
@@ -139,9 +139,9 @@ public function hellhoundRapesPlayer():void {
 	//(Lose player anal virginity; if player has vagina, lose vaginal virginity)
 	buttChange(monster.cockArea(0), true);
 	//[if not corrupt]
-	if(player.cor < 40) dynStats("str", 0,"tou", -2, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 1);
+	if(player.cor < 40) dynStats("tou", -2, "lus=", 0, "cor", 1);
 	//[if corrupt]
-	else dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 1.5);
+	else dynStats("lus=", 0, "cor", 1.5);
 	cleanupAfterCombat();
 }
 
@@ -158,7 +158,7 @@ public function hellHoundGetsRaped():void {
 	if(player.cocks.length > 1) outputText("One of the heads eagerly starts licking your " +cockDescript(0)+ " while the other starts to work on your "+cockDescript(1) +". The large, flat tongues give you a rather unusual feeling, but it is definitely effective.   As you approach your peak, the heads quickly take your "+cockDescript(0)+" and "+cockDescript(1)+" into their mouths. The pleasure from this new arrangement quickly overwhelms you, leaving you dazed.  When your senses return to you, you look up to see the hellhound's tongues running all over their mouths, clearly very happy.  With a pair of happy barks, the hellhound turns and runs away.", false);
 	//[if player has no endowments] 
 	if(player.gender == 0) outputText("The two heads stare at your lack of sexual endowments for a few seconds before looking up at you sadly.  With a whine, the hellhound wanders off.  Feeling rather unsatisfied, you think that you should probably fix your lack of sexual 'parts'....", false);
-	else dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	else dynStats("lus=", 0);
 	cleanupAfterCombat();
 }
 
@@ -265,7 +265,7 @@ public function giveLethicitePiece():void {
 
 	outputText("<b>You now have the power to breath hellfire!</b>  (This power remains available to you so long as you maintain a corruption of at least 50.)", false);
 	//increase lust by 30, corruption by 6, and libido by 3
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 3, "sen", 0, "lus", 30, "cor", 6);
+	dynStats("lib", 3, "lus", 30, "cor", 6);
 	//player gains hellfire perk.  Hellfire deals physical damage to completely pure foes, lust damage to completely corrupt foes, and a mix for those in between.  Its power is based on the PC's corruption and level.  Appearance is slightly changed to mention that the PC's eyes and mouth occasionally show flicks of fire from within them, text could possibly vary based on corruption.
 	player.createPerk("Hellfire",0,0,0,0,"You've been gifted with Hellfire for pleasing the master of the hellhounds.");
 	//Hellhounds no longer encounterable.
@@ -278,7 +278,7 @@ public function giveALLTHELETHICITES():void {
 	outputText("", true);
 	//Give him Merae's Lethicite, now he's got enough power for a major upheaval in the demon hierarchy.  You don't get to keep being a champion.
 	//Max player's lust for genital descriptions.
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 100, "cor", 0);
+	dynStats("lus=", 100);
 
 	outputText("You pull out the giant pink crystal that you stole from Merae.  At the sight of the gem, the demon's eyes go so wide, you almost can't believe that they stay in his head.  \"<i>Is that what I think...yes, YES! This is quite the prize you have brought me, my wonderful imitator!</i>\"  He snatches the crystal out of your hands and cradles it in his hands for a few moments, a crazed hungry look in his eyes.  You remain in his power, and can do nothing but watch as he raves for a few minutes with the jewel in his hands.\n\n", false);
 
@@ -361,7 +361,7 @@ public function hellHoundPropahRape():void {
 	//--- IF CORRUPTION < 20 ---
 	if(player.cor < 20) {
 		outputText("The corrupt juice burns on your tongue, far worse than the hottest spicy dish you have ever had. You instantly back off from his member, cursing this abomination of nature. Leaving the submissive creature as it is, you head back for your camp.", false);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -99, "cor", 0);
+		dynStats("lus", -99);
 		cleanupAfterCombat();
 		return;
 	}
@@ -374,7 +374,7 @@ public function hellHoundPropahRape():void {
 		if(player.cor < 40 && player.hasPerk("Masochist")  < 0) {
 			outputText("As you bottom out on his sheath, you lean forward to engulf more of his hot cocks inside you. The hellhound enjoys the treatment you are giving him. As a result, the flames along his eyes and snout flicker back to life. Just as your hardening clit presses against the top of his is ballsack, the hellhound's natural flames lick across your sex. The magical fire fills you with arousal, but also applies intense pain to your most sensitive spot. You practically jump off the corrupt creature, pulling the dicks from your holes in great speed. Nearly blacking out from the sensations, you cover your burnt button, not daring to touch it. You curse the creature, loudly swearing at the hellhound. In your fury, you barely notice that the he looks disappointed and maybe even somewhat sorry.\n\n", false);
 			takeDamage(20);
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -99, "cor", 0);
+			dynStats("lus", -99);
 			//--> deals 20dmg (lowering hp to a minimum of 1), introduces inability to masturbate
 			cleanupAfterCombat();
 			return;
@@ -418,9 +418,9 @@ public function hellHoundPropahRape():void {
 		outputText("Finally having finished, you relax your anal sphincter and allow his member to leave your anus. His members rise from the feel of the incredible amount of cum his quadruple balls pumped into your holes squirting back out to wash over them. The hellhound curls up, spent, his tail covering his privates. His rods look a little red from the intense fuck, and you're sure that in spite of his fiery nature he is experiencing a little more than a burning sensation.", false);
 		//--> increases corruption, usual post coital procedure
 		//[if not corrupt]
-		if(player.cor < 40) dynStats("str", 0,"tou", -2, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 1);
+		if(player.cor < 40) dynStats("tou", -2, "lus=", 0, "cor", 1);
 		//[if corrupt]
-		else dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 1.5);
+		else dynStats("lus=", 0, "cor", 1.5);
 		//Preggers chance!
 		player.knockUp(6,352,101);
 	}

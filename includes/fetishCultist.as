@@ -28,7 +28,7 @@ public function cultistRaisePlayerLust():void {
 	else {
 		outputText("She suddenly starts mauling her shapely breasts, her fingers nearly disappearing briefly in the soft, full flesh, while fingering herself eagerly, emitting a variety of lewd noises.  You are entranced by the scene, the sexual excitement she's experiencing penetrating your body in warm waves coming from your groin.", false);
 	}
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (player.lib/10 + player.cor/20)+4, "cor", 0);
+	dynStats("lus", (player.lib/10 + player.cor/20)+4);
 	if(player.lust >= 100) doNext(endLustLoss);
 	else doNext(5000);
 }
@@ -50,7 +50,7 @@ public function cultistLustTransfer():void {
 		else if(player.cockTotal() > 0) outputText("  A sudden influx of pre-cum blurts out and stream down your " + multiCockDescriptLight() + ", painfully hardened by a vast amount of blood rushing to your groin.", false);
 		if(player.gender == 0) outputText("  Your genderless body is suddenly filled by a perverted warmth.", false);
 		outputText("\n\nYou notice that the young woman seems to have calmed down some.", false);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (monster.lust/3 * (1 + player.cor/300)), "cor", 0);
+		dynStats("lus", (monster.lust/3 * (1 + player.cor/300)));
 		monster.lust -= 50;
 		if(monster.lust < 0) monster.lust = 10;
 	}
@@ -93,8 +93,8 @@ public function cultistRapesYou():void {
 					if(player.armorValue > 0) outputText("You find your " + player.armorName + " back on your body with no sign of the strange clothes you were wearing before.  ", false);
 					else outputText("You are still wearing the " + player.armorName + " that she gave you, and there is no sign of your old clothes.  ", false);
 					outputText("The ordeal has also left you with a slightly dulled mind, and some of the desire you felt still lingers.", false);
-					dynStats("str", 0,"tou", 0, "spe", 0, "int", -2, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
-					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10, "cor", 0);
+					dynStats("int", -2, "lus=", 0);
+					dynStats("lus", 10);
 					cleanupAfterCombat();
 				}
 				return;
@@ -144,8 +144,8 @@ public function cultistRapesYou():void {
 				if(player.armorValue > 0) outputText("You find your " + player.armorName + " back on your body with no sign of the strange clothes you were wearing before.  ", false);
 				else outputText("You are still wearing the " + player.armorName + " that she gave you, and there is no sign of your old clothes.  ", false);
 				outputText("The ordeal has also left you with a slightly dulled mind, and some of the desire you felt still lingers.", false);
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", -2, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10, "cor", 0);
+				dynStats("int", -2, "lus=", 0);
+				dynStats("lus", 10);
 				cleanupAfterCombat();
 			}
 			return;
@@ -199,8 +199,8 @@ public function cultistRapesYou():void {
 				if(player.armorValue > 0) outputText("You find your " + player.armorName + " back on your body with no sign of the strange clothes you were wearing before.  ", false);
 				else outputText("You are still wearing the " + player.armorName + " that she gave you, and there is no sign of your old clothes.  ", false);
 				outputText("The ordeal has also left you with a slightly dulled mind, and some of the desire you felt still lingers.", false);
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", -2, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10, "cor", 0);
+				dynStats("int", -2, "lus=", 0);
+				dynStats("lus", 10);
 				cleanupAfterCombat();
 			}
 			return;
@@ -236,7 +236,7 @@ public function cultistRapesYou():void {
 				player.boostLactation(.6);
 			}
 			outputText("Satisfied, the nurse rises from you and says, \"<i>Wow!  I really hope I get a chance to do that again sometime, but for now I've got to go take care of another patient.  Don't do anything too exciting until I get back, alright?  I'll check on you again as soon as I'm able!</i>\"  She gives you a wink, and turns to walk out the door.", false);
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 3, "lus", 0, "cor", 0);
+			dynStats("sen", 3);
 			changed = true;
 			changedBoobs = true;
 		}
@@ -246,7 +246,7 @@ public function cultistRapesYou():void {
 			outputText("\n\nShe briefly steps out of the room before returning with a syringe.  \"<i>It'll be ok, the good news is that the pain for this injection will quickly subside, just take nice easy breaths and you'll be fine.  In fact, you might find this quite enjoyable after the first hurdle.  I'll even get to have some fun after.</i>\"  Smiling again, she takes hold of your " + cockDescript(0) + " and pushes the needle into the base of it.  The nurse starts humming a pleasant tune, while you try to cry out in pain into the gag and struggle against the bindings.  However, they prove to be quite secure, and you can't do anything about the pain you feel spreading throughout your " + multiCockDescriptLight() + ".  Thankfully, it doesn't take very long before the nurse pulls the needle out and, to your immense relief, the pain quickly subsides.");
 			outputText("\n\nThe nurse stops humming before setting the syringe aside and climbs on top of your legs, she giggles softly before lowering herself and taking your " + cockDescript(0) + " between her breasts and starts rubbing and playing with them while running your " + cockDescript(0) + " up and down between them.  It is an exquisite experience having her tit fuck you, and you notice that she seems to be enjoying it just as much as you are.  It doesn't take long for her ministrations to make you cum between her breasts, and cum you do.  You cum and cum and cum, much more then you usually would.  Satisfied, the nurse rises from you and says, \"<i>That should do it, in the future you won't produce as much cum when you orgasm as you just did, but you should be producing at a more natural level.  For now, I've got to go take care of another patient, don't you do anymore running about until I get back ok?  I'll be back to check on your progress as soon as I'm able!</i>\"  She gives you a wink, and turns to walk out the door.", false);
 			player.cumMultiplier += 2;
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 3, "lus", 0, "cor", 0);
+			dynStats("sen", 3);
 			changed = true;
 			changedCock = true;
 		}
@@ -269,7 +269,7 @@ public function cultistRapesYou():void {
 			outputText("Nodding approvingly, the nurse says  'Good, for now I've got to go take care of another patient, don't you do anymore running about until I get back ok?' as she turns away and goes out the door.", false);
 			player.boostLactation(1.5);			
 			changed = true;
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 3, "lus", 0, "cor", 0);
+			dynStats("sen", 3);
 			changedBoobs = true;
 		}
 		//(4 - if player has only a vagina and no breasts)
@@ -280,7 +280,7 @@ public function cultistRapesYou():void {
 			player.createCock();
      		player.removeVagina(0,1);
 			outputText("Soon you have a fully formed " + cockDescript(0) + " standing tall and proud where your old femininity use to lie.  The nurse sets the syringe aside and climbs on top of your legs, she giggles softly before lowering herself and taking your " + cockDescript(0) + " between her breasts and starts rubbing and playing with them while running your " + cockDescript(0) + " between them.  It is an exquisite experience having her tit fuck your brand new " + cockDescript(0) + ", and you notice that she seems to be enjoying it just as much as you are.  It doesn't take long for her ministrations to make you cum between her breasts, and cum you do.  Satisfied, the nurse rises from you and says 'Looks to me like its working properly.  For now, I've got to go take care of another patient, don't you do anymore running about until I get back ok?  I'll be back to check on your progress as soon as I'm able!'  She gives you a wink, and turns to walk out the door.", false);
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 3, "lus", 0, "cor", 0);
+			dynStats("sen", 3);
 			changed = true;
 			genderCheck();
 			changedCock = true;
@@ -290,7 +290,7 @@ public function cultistRapesYou():void {
 			outputText("The smile disappears from her lips and she says 'Now if I understand it correctly, you are beset by random panic attacks due to a lack of genitals.'  To address this issue, I will be giving you a special injection at the site.'  She briefly steps out of the room before returning with a syringe.  'It'll be ok, the good news is that the pain for this injection will quickly subside, just take nice easy breaths and you'll be fine.  In fact, you might find this quite enjoyable after the first hurdle.'  She leans down and pushes the needle into your crotch.  The pain is quite intense, but thankfully it does not last long.  'This injection will address your unnatural body shape by giving you a penis,' she says to you smiling while pulling the needle out 'and then, I get to be the first to play with it!'.  You look down to see that the flesh where she injected you is pushing out of your body, becoming larger and more defined as the seconds tick by.\n\n", false);
 			player.createCock();
 			outputText("Soon you have a fully formed " + cockDescript(0) + " standing tall and proud where your bare crotch use to lie.  The nurse sets the syringe aside and climbs on top of your legs, she giggles softly before lowering herself and taking your " + cockDescript(0) + " between her breasts and starts rubbing and playing with them while running your " + cockDescript(0) + " between them.  It is an exquisite experience having her tit fuck your brand new " + cockDescript(0) + ", and you notice that she seems to be enjoying it just as much as you are.  It doesn't take long for her ministrations to make you cum between her breasts, and cum you do.  Satisfied, the nurse rises from you and says 'That was fun, maybe later we can practice more.  For now, I've got to go take care of another patient, don't you do anymore running about until I get back ok?  I'll be back to check on your progress as soon as I'm able!'  She gives you a wink, and turns to walk out the door.", false);
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 3, "lus", 0, "cor", 0);
+			dynStats("sen", 3);
 			changed = true;
 			genderCheck();
 			changedCock = true;
@@ -305,8 +305,8 @@ public function cultistRapesYou():void {
 			}
 			else outputText("You are still wearing the " + player.armorName + " that she gave you, and there is no sign of your old clothes.  ", false);
 			outputText("The ordeal has also left you with a slightly dulled mind, and some of the desire you felt still lingers.  ", false);
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", -2, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10, "cor", 0);
+			dynStats("int", -2, "lus=", 0);
+			dynStats("lus", 10);
 			cleanupAfterCombat();
 			if(changedBoobs) outputText("\n\nYou notice that the changes you experienced to your breasts while in the fantasy are still affecting you.", false);
 			if(changedCock) outputText("\n\nYou notice that the changes you experienced to your genitals while in the fantasy are still affecting you.", false);
@@ -399,8 +399,8 @@ public function cultistRapesYou():void {
 			if(player.armorValue > 0) outputText("You find your " + player.armorName + " back on your body with no sign of the strange clothes you were wearing before.  ", false);
 			else outputText("You are still wearing the " + player.armorName + " that she gave you, and there is no sign of your old clothes.  ", false);
 			outputText("The ordeal has also left you with a slightly dulled mind, and some of the desire you felt still lingers.", false);
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", -2, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10, "cor", 0);
+			dynStats("int", -2, "lus=", 0);
+			dynStats("lus", 10);
 			cleanupAfterCombat();
 		}
 	}
@@ -450,7 +450,7 @@ public function playerRapesCultist():void {
 		//(after either)
 		outputText("You get dressed and notice that the cultist is still lying on the ground in the perverted nun outfit, with a look of utter bliss on her face.  ", false);
 		outputText("Satisfied, you continue on your way.", false);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+		dynStats("lus=", 0);
 	}
 	else if(monster.armorName == "swimsuit") {
 		var x:Number = player.biggestCockIndex();
@@ -482,7 +482,7 @@ public function playerRapesCultist():void {
 			outputText("\"<i>Uh, hey, I've got some toys that we could play with,</i>\" she says a bit nervously.  \"<i>Do you want to play with some vibrators?</i>\"\n\n", false);
 		}
 		//increase PC's lust thanks to foreplay
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 30, "cor", 0);
+		dynStats("lus", 30);
 		//player chooses between; penetrate vagina, vibrator vagina, nevermind.  Options as appropriate.
 		var vibe:Number = 0;
 		var fuckVag:Number = 0;
@@ -502,7 +502,7 @@ public function playerRapesCultist():void {
 			if(player.cor < 40) outputText("Feeling uncomfortable at this, you start to pull away, but her expression turns instantly into a look of pure horror and her body becomes completely tense.  As you move back to her, her body relaxes and her expression returns to the tear-stricken face.  Obviously this is an act and she would be far more bothered by you if you left her without finishing the job.  ", false);
 			outputText("Filled with new determination, you push your " +cockDescript(0)+ " into her love hole and start to rape her roughly.  Despite the tears, she starts moaning, clearly enjoying the rough treatment.  A little while into the rape, she starts to move against you, almost lovingly.  It is quite clear that she has a lot of experience, but is giving you free reign to do whatever you want.   Feeling in complete control, you decide that this game isn't too bad.  Before long you reach your orgasm and you blow your load deep inside her.", false);
 			outputText("\n\nYou get dressed and notice that the cultist is still lying on the ground with her farm hand outfit torn from her, with a look of utter bliss on her face.  Satisfied, you continue on your way.", false);
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+			dynStats("lus=", 0);
 		}
 		//(if player has a vagina)
 		else if(player.vaginas.length > 0) {
@@ -511,7 +511,7 @@ public function playerRapesCultist():void {
 			if(player.cor < 40) outputText("Feeling uncomfortable at this, you start to pull away, but her expression turns instantly into a look of pure horror and her body becomes completely tense.  As you move back to her, her body relaxes and her expression returns to the tear stricken face.  Obviously this is an act and she would be far more bothered by you if you left her without finishing the job.  ", false);
 			outputText("With new determination, you yell at her to lick harder, and to push in as much as she can, or her mother will die.  This time when she starts licking you, she does it almost lovingly.  It is quite clear that she has a lot of experience and, regardless of her words, she obviously wants this.  Feeling in complete control, you think that this game isn't too bad.  Under her expert flicks, you quickly reach a climax.  You pull her head back and tell her that now she has to clean you up.  You specify that she can't just lick this time, she has to drink your excretions.\n\n", false);
 			outputText("A few minutes later, you close your " + player.armorName + " back up, and look back at the cultist.  She is lying on the ground in her farm hand outfit with a look of utter bliss on her face.  Satisfied, you continue on your way.", false);
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+			dynStats("lus=", 0);
 		}
 		if(player.gender == 0) {
 			outputText("You make her rub your body down, but you don't really have a means to rape her.  Afterwards you do feel better, but didn't get any real release.  Disappointed, you continue on your way.", false);
@@ -549,7 +549,7 @@ public function plugSwimsuitVag():void {
 
 	outputText("You stand up and clean yourself off, thoroughly satisfied with the encounter.  The cultist, on the other hand, collapses in a quivering pile of pleasure on the ground.", false);
 	//set PC's lust to minimum
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	cleanupAfterCombat();
 }
 
@@ -576,7 +576,7 @@ public function swimsuitVibrators():void {
 		}
 		outputText("For hours you're left on the ground writhing in pain and pleasure from the cultist roughly forcing the false cock in and out of you while she moans with pleasure around the quivering shaft inside her.  The sensations are too much for you, and you can do nothing but just lie there and take it.  The cultist brings you to multiple orgasms before you finally pass out from the pain and overstimulation.", false);
 		//increase libido, decrease sensitivity
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", -3, "lus", -100, "cor", 0);
+		dynStats("lib", 1, "sen", -3, "lus=", 0);
 		//victory becomes a defeat, even event
 		hideUpDown();
 		monster.lust = 98;
@@ -584,7 +584,7 @@ public function swimsuitVibrators():void {
 		player.lust = 100;
 		flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
 		cleanupAfterCombat();
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", -3, "lus", -100, "cor", 0);
+		dynStats("lib", 1, "sen", -3, "lus=", 0);
 	}
 	//It fits!
 	else {
@@ -605,7 +605,7 @@ public function swimsuitVibrators():void {
 		else outputText("a torrent", false);
 		outputText(" of your lady juices.  You shudder for a moment and look down at it on the ground.  It seems to have, deflated a bit?  There is a clear fluid flowing out of the top of the toy.  A thump sound brings the cultist back to your attention, but only briefly as you see she is writhing on the ground in pleasure from the toy still inside her.  You shake your head and get dressed again.", false);
 		//end scene
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", -3, "lus", -100, "cor", 0);
+		dynStats("lib", 1, "sen", -3, "lus=", 0);
 		cleanupAfterCombat();
 	}
 }
@@ -684,7 +684,7 @@ public function fetishCultistHasAMilkFetish():void {
 	//[You have found 1xBee Honey]
 	flags[kFLAGS.FORCE_BEE_TO_PRODUCE_HONEY] = 1;
 	//set lust to 0, increase sensitivity slightly
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", .2, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lib", .2, "lus=", 0);
 	//You've now been milked, reset the timer for that
 	player.addStatusValue("Feeder",1,1);
 	player.changeStatusValue("Feeder",2,0);

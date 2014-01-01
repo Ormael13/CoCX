@@ -34,7 +34,7 @@ public function interactWithAuntNancy():void {
 
 		outputText("Aunt Nancy sighs.  \"<i>Sorry. I don't mean to bore you with an old woman's rambling.  I... I just miss him, so much, and I get a little... lonely, sometimes.</i>\"  She looks at you, with a strange, half-hungry, half-desperate look in her eyes.  \"<i>Would you mind... coming home with me?  You seem a little tense, and I'd like to give you a massage.</i>\"\n\n", false);
 		//[Gain 20 Lust.] (I remain steadfastly unaroused; maudlin self-pity isn't sexy.  -Z)
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10, "cor", 0);
+		dynStats("lus", 10);
 		simpleChoices("Agree",timeForAuntNancySpiderCooch,"Decline",declineAuntNancyMassage,"",0,"",0,"",0);
 	}
 	//[If Time >= 1400 - (100*(Relationship with Aunt Nancy/30), Relationship with Aunt Nancy >= 30, and PillowTalk= 1]
@@ -68,7 +68,7 @@ public function strongStuff():void {
 		doNext(interactWithAuntNancy);
 		return;
 	}
-	dynStats("str", 0,"tou", 1, "spe", 0, "int", -1, "lib", 0, "sen", 0, "lus", 15, "cor", 0);
+	dynStats("tou", 1, "int", -1, "lus", 15);
 	player.gems -= 5;
 	statScreenRefresh();
 	outputText("You ask for a strong drink anyway, and Aunt Nancy nods.  Easily, she picks up a glass with one hand, reaches out with another two, and fills it with something greenish.\n\n", false);
@@ -102,7 +102,7 @@ public function lightStuff():void {
 		return;
 	}
 	player.gems -= 5;
-	dynStats("str", 0,"tou", .5, "spe", 0, "int", -.5, "lib", 0, "sen", 0, "lus", 7, "cor", 0);
+	dynStats("tou", .5, "int", -.5, "lus", 7);
 	outputText("You don't feel like throwing back a really heavy drink this early, come to think, and instead ask for something light.  Aunt Nancy nods and pours you something thin and bright yellow from out of a barrel behind her, giving you a good look at her from behind.  Her lower half seems to stick out behind her in a long stretch of black chitin, with several long, thick legs supporting it.", false);
 	//[If Intelligence >= 20]
 	if(player.inte >= 20) outputText("  You realize that what look like almost-shoulder-length gloves over her hands must actually be shell-like portions of this exoskeleton.", false);
@@ -147,14 +147,14 @@ public function lightStuff():void {
 		outputText("She takes another drink, melancholically, before shaking her head to clear it.  \"<i>Well, thank you for sharing some time with an old widow like me.</i>\"  She flutters her still-beautiful eyelashes at you once or twice, then chuckles.  \"<i>Come back some time.</i>\"\n\n", false);
 	
 		//[50% chance to gain 1-2 Intelligence, +20 Relationship with Aunt Nancy, FirstTalkNancy += 1]
-		if(rand(2) == 0) dynStats("str", 0,"tou", 0, "spe", 0, "int", 1+rand(2), "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+		if(rand(2) == 0) dynStats("int", 1+rand(2));
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00264] += 20;
 	}
 	//[Else:]
 	else {
 		outputText("As you sip your drink, you and Nancy swap adventuring stories for a while, enjoying one another's company in the fairly quiet bar.  The older spider-lady is a good conversationalist, and you feel a little closer for having shared some time with her.", false);
 		//[50% chance to gain 1-2 Intelligence, +10 Relationship with Aunt Nancy]
-		if(rand(2) == 0) dynStats("str", 0,"tou", 0, "spe", 0, "int", 1+rand(2), "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+		if(rand(2) == 0) dynStats("int", 1+rand(2));
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00264] += 20;
 	}
 	doNext(13);
@@ -184,7 +184,7 @@ public function timeForAuntNancySpiderCooch():void {
 	outputText("Then, she lets go of you and skitters easily up to her door, opening it and slipping inside.", false);
 	//[Gain 30 Lust, New Page]
 	player.lust += 29;
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 1, "cor", 0);
+	dynStats("lus", 1);
 	doNext(auntNancyPoonPartII);
 }
 public function auntNancyPoonPartII():void {
@@ -442,7 +442,7 @@ public function auntNancyPoonPartIV():void {
 	outputText("<b>Two passionate, sticky hours pass...</b>\n\n", false);
 	
 	//[70 % for Toughness, Strength to increase 2-6 points]
-	dynStats("str", .3,"tou", .3, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("str", .3,"tou", .3, "lus=", 0);
 	//[+35 Fatigue]
 	fatigue(35);
 	//[+20 Relationship with Aunt Nancy, PillowTalk += 1]

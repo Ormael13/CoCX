@@ -16,7 +16,7 @@ public function updatePregnancy():Boolean {
 	if(player.hasStatusAffect("heat") >= 0) {
 		outputText("\nYou calm down a bit and realize you no longer fantasize about getting fucked constantly.  It seems your heat has ended.\n", false);
 		//Remove bonus libido from heat
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -player.statusAffects[player.hasStatusAffect("heat")].value2, "sen", 0, "lus", 0, "cor", 0);
+		dynStats("lib", -player.statusAffects[player.hasStatusAffect("heat")].value2);
 		if(player.lib < 10) player.lib = 10;
 		statScreenRefresh();
 		player.removeStatusAffect("heat");
@@ -118,7 +118,7 @@ public function updatePregnancy():Boolean {
 				if(player.cor < 40) outputText("You are distressed by your unwanted pregnancy, and your inability to force this thing out of you.</b>", false);
 				if(player.cor >= 40 && player.cor < 75) outputText("Considering the size of the creatures you've fucked, you hope it doesn't hurt when it comes out.</b>", false);
 				if(player.cor >= 75) outputText("You think dreamily about the monstrous cocks that have recently been fucking you, and hope that your offspring inherit such a pleasure tool.</b>", false);
-				dynStats("str", 0,"tou", 0, "spe", -1, "int", 0, "lib", 1, "sen", 1, "lus", 2, "cor", 0);
+				dynStats("spe", -1, "lib", 1, "sen", 1, "lus", 2);
 				outputText("\n", false);
 				displayedUpdate = true;				
 			}
@@ -136,7 +136,7 @@ public function updatePregnancy():Boolean {
 				if(player.cor >= 40 && player.cor < 75) outputText("and you wonder how much longer you have to wait.</b>", false);
 				if(player.cor >= 75) outputText("and you're eager to give birth, so you can get impregnated again by corrupted or monstrous cum filling out your eager womb.</b>", false);
 				outputText("\n", false);
-				dynStats("str", 0,"tou", 0, "spe", -3, "int", 0, "lib", 1, "sen", 1, "lus", 4, "cor", 0);
+				dynStats("spe", -3, "lib", 1, "sen", 1, "lus", 4);
 				displayedUpdate = true;
 			}
 			if(player.pregnancyIncubation == 48) {
@@ -162,7 +162,7 @@ public function updatePregnancy():Boolean {
 				if(player.cor < 40) outputText("You are distressed by your unwanted pregnancy, and your inability to force this thing out of you.</b>", false);
 				if(player.cor >= 40 && player.cor < 75) outputText("Considering the size of the creatures you've fucked, you hope it doesn't hurt when it comes out.</b>", false);
 				if(player.cor >= 75) outputText("You think dreamily about the monstrous cocks that have recently been fucking you, and hope that your offspring inherit such a pleasure tool.</b>", false);
-				dynStats("str", 0,"tou", 0, "spe", -1, "int", 0, "lib", 1, "sen", 1, "lus", 2, "cor", 0);
+				dynStats("spe", -1, "lib", 1, "sen", 1, "lus", 2);
 				outputText("\n", false);
 				displayedUpdate = true;				
 			}
@@ -180,7 +180,7 @@ public function updatePregnancy():Boolean {
 				if(player.cor >= 40 && player.cor < 75) outputText("and you wonder how much longer you have to wait.</b>", false);
 				if(player.cor >= 75) outputText("and you're eager to give birth, so you can get impregnated again by monstrous cocks unloading their corrupted seed directly into your eager womb.</b>", false);
 				outputText("\n", false);
-				dynStats("str", 0,"tou", 0, "spe", -3, "int", 0, "lib", 1, "sen", 1, "lus", 4, "cor", 0);
+				dynStats("spe", -3, "lib", 1, "sen", 1, "lus", 4);
 				displayedUpdate = true;
 			}
 			if(player.pregnancyIncubation == 48) {
@@ -230,7 +230,7 @@ public function updatePregnancy():Boolean {
 			}
 			if(player.pregnancyIncubation == 216) {
 				outputText("\n<b>The unmistakable bulge of pregnancy is visible in your tummy.  Somehow, you don't feel worried. Only content.</b>\n", false);
-				dynStats("str", 0,"tou", 0, "spe", -1, "int", 0, "lib", 1, "sen", 1, "lus", 2, "cor", 0);
+				dynStats("spe", -1, "lib", 1, "sen", 1, "lus", 2);
 				displayedUpdate = true;				
 			}
 			if(player.pregnancyIncubation == 180) {
@@ -239,12 +239,12 @@ public function updatePregnancy():Boolean {
 			}
 			if(player.pregnancyIncubation == 120) {
 				outputText("\n<b>Your belly is painfully distended and overswollen with the offspring of some huge beast, making it difficult to function.</b>\n", false);
-				dynStats("str", 0,"tou", 0, "spe", -1, "int", 0, "lib", .5, "sen", .5, "lus", 4, "cor", 0);
+				dynStats("spe", -1, "lib", .5, "sen", .5, "lus", 4);
 				displayedUpdate = true;
 			}
 			if(player.pregnancyIncubation == 72) {
 				outputText("\n<b>Your stomach is easily the size of a beach ball, and still growing ever further. Strangely, you don't feel hindered. In fact, you feel like running...</b>\n", false);
-				dynStats("str", 0,"tou", 0, "spe", -1, "int", 0, "lib", 1, "sen", 1, "lus", 4, "cor", 0);
+				dynStats("spe", -1, "lib", 1, "sen", 1, "lus", 4);
 				displayedUpdate = true;
 			}
 			if(player.pregnancyIncubation == 48) {
@@ -321,7 +321,7 @@ public function updatePregnancy():Boolean {
 				if(player.cor < 40) outputText("You are distressed by your unwanted pregnancy, and your inability to force this thing out of you.</b>", false);
 				if(player.cor >= 40 && player.cor < 75) outputText("You find yourself wondering what giving birth to bunny-girls is like.</b>", false);
 				if(player.cor >= 75) outputText("You dreamily wonder if you could find a bunny willing to put more than two eggs inside you at once.</b>", false);
-				dynStats("str", 0,"tou", 0, "spe", -1, "int", 0, "lib", 1, "sen", 1, "lus", 2, "cor", 0);
+				dynStats("spe", -1, "lib", 1, "sen", 1, "lus", 2);
 				outputText("\n", false);
 				displayedUpdate = true;				
 			}
@@ -339,7 +339,7 @@ public function updatePregnancy():Boolean {
 				if(player.cor >= 40 && player.cor < 75) outputText("and you wonder how much longer you have to wait.</b>", false);
 				if(player.cor >= 75) outputText("and you're eager to give birth so you'll be able to get pregnant again.</b>", false);
 				outputText("\n", false);
-				dynStats("str", 0,"tou", 0, "spe", -3, "int", 0, "lib", 1, "sen", 1, "lus", 4, "cor", 0);
+				dynStats("spe", -3, "lib", 1, "sen", 1, "lus", 4);
 				displayedUpdate = true;
 			}
 			if(player.pregnancyIncubation == 48) {
@@ -365,7 +365,7 @@ public function updatePregnancy():Boolean {
 				if(player.cor < 40) outputText("You are distressed by your unwanted pregnancy, and your inability to force this thing out of you.</b>", false);
 				if(player.cor >= 40 && player.cor < 75) outputText("Considering the size of the creatures you've fucked, you hope it doesn't hurt when it comes out.</b>", false);
 				if(player.cor >= 75) outputText("You think dreamily about the monstrous cocks that have recently been fucking you, and hope that your offspring inherit such a pleasure tool.</b>", false);
-				dynStats("str", 0,"tou", 0, "spe", -1, "int", 0, "lib", 1, "sen", 1, "lus", 2, "cor", 0);
+				dynStats("spe", -1, "lib", 1, "sen", 1, "lus", 2);
 				outputText("\n", false);
 				displayedUpdate = true;				
 			}
@@ -383,7 +383,7 @@ public function updatePregnancy():Boolean {
 				if(player.cor >= 40 && player.cor < 75) outputText("and you wonder how much longer you have to wait.</b>", false);
 				if(player.cor >= 75) outputText("and you're eager to give birth, so you can get fill your womb with a new charge.</b>", false);
 				outputText("\n", false);
-				dynStats("str", 0,"tou", 0, "spe", -3, "int", 0, "lib", 1, "sen", 1, "lus", 4, "cor", 0);
+				dynStats("spe", -3, "lib", 1, "sen", 1, "lus", 4);
 				displayedUpdate = true;
 			}
 			if(player.pregnancyIncubation == 48) {
@@ -463,7 +463,7 @@ public function updatePregnancy():Boolean {
 				if(player.cor >= 40 && player.cor < 75) outputText("Considering the size of the creatures you've fucked, you hope it doesn't hurt when it comes out.</b>", false);
 				if(player.cor >= 75) outputText("You think dreamily about the monstrous cocks that have recently been fucking you, and hope that your offspring inherit such a pleasure tool.</b>", false);
 				outputText("\n", false);
-				dynStats("str", 0,"tou", 0, "spe", -1, "int", 0, "lib", 1, "sen", 1, "lus", 2, "cor", 0);
+				dynStats("spe", -1, "lib", 1, "sen", 1, "lus", 2);
 				displayedUpdate = true;				
 			}
 			if(player.pregnancyIncubation == 180) {
@@ -480,7 +480,7 @@ public function updatePregnancy():Boolean {
 				if(player.cor >= 40 && player.cor < 75) outputText("and you wonder how much longer you have to wait.</b>", false);
 				if(player.cor >= 75) outputText("and you're eager to give birth, so you can get impregnated again by monstrous cocks unloading their corrupted seed directly into your eager womb.</b>", false);
 				outputText("\n", false);
-				dynStats("str", 0,"tou", 0, "spe", -3, "int", 0, "lib", 1, "sen", 1, "lus", 4, "cor", 0);
+				dynStats("spe", -3, "lib", 1, "sen", 1, "lus", 4);
 				displayedUpdate = true;
 			}
 			if(player.pregnancyIncubation == 48) {
@@ -531,7 +531,7 @@ public function updatePregnancy():Boolean {
 				if(flags[kFLAGS.AMILY_FOLLOWER] == 1) outputText("  Amily smiles at you reassuringly. \"<i>We do have litters, dear, this is normal.</i>\"", false);
 				outputText("</b>", false);
 				outputText("\n", false);
-				dynStats("str", 0,"tou", 0, "spe", -1, "int", 0, "lib", 1, "sen", 1, "lus", 2, "cor", 0);
+				dynStats("spe", -1, "lib", 1, "sen", 1, "lus", 2);
 				displayedUpdate = true;				
 			}
 			if(player.pregnancyIncubation == 180) {
@@ -544,7 +544,7 @@ public function updatePregnancy():Boolean {
 			}
 			if(player.pregnancyIncubation == 72) {
 				outputText("\n<b>You jolt from the sensation of squirming inside your swollen stomach. Fortunately, it dies down quickly, but you know for a fact that you felt more than one baby kicking inside you.</b>\n", false);
-				dynStats("str", 0,"tou", 0, "spe", -3, "int", 0, "lib", 1, "sen", 1, "lus", 4, "cor", 0);
+				dynStats("spe", -3, "lib", 1, "sen", 1, "lus", 4);
 				displayedUpdate = true;
 			}
 			if(player.pregnancyIncubation == 48) {
@@ -593,7 +593,7 @@ public function updatePregnancy():Boolean {
 				else outputText("\n<b>There is no question you're pregnant; your belly is getting bigger and for some reason, you feel thirsty ALL the time.", false);
 				outputText("</b>", false);
 				outputText("\n", false);
-				dynStats("str", 0,"tou", 0, "spe", -1, "int", 0, "lib", 1, "sen", 1, "lus", 2, "cor", 0);
+				dynStats("spe", -1, "lib", 1, "sen", 1, "lus", 2);
 				displayedUpdate = true;				
 			}
 			if(player.pregnancyIncubation == 180) {
@@ -604,7 +604,7 @@ public function updatePregnancy():Boolean {
 			if(player.pregnancyIncubation == 120) {
 				if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("\n<b>Your stomach is swollen and gravid; you can feel the baby inside you kicking and wriggling. Izma is always on hand now, it seems, and she won't dream of you fetching your own food or picking up anything you've dropped. She's always dropping hints about how you should try going around naked for comfort's sake. While you are unwilling to do so, you find yourself dreaming about sinking into cool, clean water, and take many baths and swims. Whatever is inside you always seems to like it; they get so much more active when you're in the water.</b>\n", false);
  				else outputText("\n<b>Your stomach is swollen and gravid; you can feel the baby inside you kicking and wriggling.  You find yourself dreaming about sinking into cool, clean water, and take many baths and swims. Whatever is inside you always seems to like it; they get so much more active when you're in the water.</b>\n", false);
-				dynStats("str", 0,"tou", 0, "spe", -2, "int", 0, "lib", 1, "sen", 1, "lus", 4, "cor", 0);
+				dynStats("spe", -2, "lib", 1, "sen", 1, "lus", 4);
 				displayedUpdate = true;
 			}
 			if(player.pregnancyIncubation == 72) {
@@ -669,7 +669,7 @@ public function updatePregnancy():Boolean {
 				if(player.pregnancyType == 13) outputText("spider-morphs ", false);
 				else outputText("driders ", false);
 				outputText("quickly come to dominate your thoughts.  You start playing with a nipple while you lose yourself in the fantasy, imagining being tied up in webs and mated with over and over, violated by a pack of horny males, each hoping to father your next brood.  You shake free of the fantasy and notice your hands rubbing over your slightly bloated belly.  Perhaps it wouldn't be so bad?</b>\n", false);
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", 20, "cor", 0);
+				dynStats("lib", 1, "sen", 1, "lus", 20);
 				displayedUpdate = true;				
 			}
 			if(player.pregnancyIncubation == 120) {
@@ -781,7 +781,7 @@ public function updatePregnancy():Boolean {
 				}
 				if(player.pregnancyIncubation == 30) {
 					pregText = "You rub your hands over your ripe belly, lost in the sensations of motherhood.  ";
-					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 5, "lus", (5+player.sens/20), "cor", 0);
+					dynStats("sen", 5, "lus", (5+player.sens/20));
 					//If Corruption < 40
 					if(player.cor < 40) pregText += "Despite your initial reluctance, you've come to find a very real pleasure in being pregnant.  You hope Ember will want to have more children in the future...";
 					//(If Corruption >= 40)
@@ -789,7 +789,7 @@ public function updatePregnancy():Boolean {
 					//(If Corruption >= 75)
 					else {
 						pregText += "You find yourself daydreaming about giving birth, your belly swollen huge - bigger than it currently is - and the orgasmic sensation of many large, round eggs sliding out of your [vagina].\n\nYou start to absently rub yourself as you envision eggs by the dozens coming from within you; you shall be mothergod for a whole new race of dragons...";
-						dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 35, "cor", 0);
+						dynStats("lus", 35);
 					}
 					pregText += "\n\nEmber interrupts your musings with a question.  \"<i>How are you feeling? Do you need me to get you anything?</i>\"";
 					pregText += "\n\nThe dragon's question is uncharacteristic of " + emberMF("him","her") + ".  Still, you do appreciate the attention you're getting, and so you ask Ember to fetch you some food and water.  The speed with which Ember dashes off to fulfill your requests is truly impressive!  In short moments Ember is back with a piece of roasted meat and a skin of water.";
@@ -954,7 +954,7 @@ public function updatePregnancy():Boolean {
 			}
 			if(player.pregnancyIncubation == 210) {
 				outputText("\n<b>The fluttering of sensation inside you is getting stronger and more frequent.  At times it even feels as if the inner lining of your womb is tingling.</b>\n", false);
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (5+player.lib/20), "cor", 0);
+				dynStats("lus", (5+player.lib/20));
 				displayedUpdate = true;	
 			}
 			if(player.pregnancyIncubation == 185) {
@@ -962,7 +962,7 @@ public function updatePregnancy():Boolean {
 				if(player.cor < 40) outputText("You are distressed by your unwanted pregnancy, and your inability to force this thing out of you.</b>", false);
 				if(player.cor >= 40 && player.cor < 75) outputText("Considering the possible fathers, you hope it isn't that big.</b>", false);
 				if(player.cor >= 75) outputText("You think dreamily about the cocks that have recently been fucking you, and hope that your offspring inherit such a divine pleasure tool.</b>", false);
-				dynStats("str", 0,"tou", 0, "spe", -1, "int", 0, "lib", 1, "sen", 1, "lus", 2, "cor", 0);
+				dynStats("spe", -1, "lib", 1, "sen", 1, "lus", 2);
 				outputText("\n", false);
 				displayedUpdate = true;				
 			}
@@ -974,7 +974,7 @@ public function updatePregnancy():Boolean {
 				outputText("\n<b>Your larger, squirming belly makes your pregnancy obvious for those around you", false);
 				if(player.hasVagina()) outputText(" and keeps your " + vaginaDescript(0) + " aroused from the constant tingling in your womb", false);
 				outputText(".</b>\n", false);
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (10+player.lib/20), "cor", 0);
+				dynStats("lus", (10+player.lib/20));
 				displayedUpdate = true;
 			}
 			if(player.pregnancyIncubation == 72) {
@@ -983,7 +983,7 @@ public function updatePregnancy():Boolean {
 				if(player.cor >= 40 && player.cor < 75) outputText("and you wonder how much longer you have to wait.</b>", false);
 				if(player.cor >= 75) outputText("and you're eager to give birth, so you can get impregnated again by corrupted or monstrous cum filling out your eager womb.</b>", false);
 				outputText("\n", false);
-				dynStats("str", 0,"tou", 0, "spe", -3, "int", 0, "lib", 1, "sen", 1, "lus", (5+player.lib/20), "cor", 0);
+				dynStats("spe", -3, "lib", 1, "sen", 1, "lus", (5+player.lib/20));
 				displayedUpdate = true;
 			}
 			if(player.pregnancyIncubation == 48) {
@@ -991,7 +991,7 @@ public function updatePregnancy():Boolean {
 				if(player.cor < 40) outputText("Afterwards you feel somewhat disgusted with yourself, but horny.</b>\n", false);
 				if(player.cor >= 40 && player.cor < 75) outputText("You estimate you'll give birth in the next few days.  You hope the birth is as erotically charged as the pregnancy has been.</b>\n", false);
 				if(player.cor >= 75) outputText("You find yourself daydreaming about about birthing cilia-covered worms, orgasming each time their thousands of stingers brush by your clit and fill it full of sensation-enhancing drugs.</b>\n", false);
-				dynStats("str", 0,"tou", 0, "spe", -1, "int", 0, "lib", 1, "sen", 1, "lus", (10+player.lib/20), "cor", 0);
+				dynStats("spe", -1, "lib", 1, "sen", 1, "lus", (10+player.lib/20));
 				displayedUpdate = true;
 			}
 		}
@@ -1011,23 +1011,23 @@ public function updatePregnancy():Boolean {
 				if(player.cor >= 40 && player.cor < 75) outputText("Considering the size of the creatures you've fucked, you hope it doesn't hurt when it comes out.</b>", false);
 				if(player.cor >= 75) outputText("You think dreamily about the monstrous cocks that have recently been fucking you, and hope that your offspring inherit such a pleasure tool.</b>", false);
 				outputText("\n", false);
-				dynStats("str", 0,"tou", 0, "spe", -1, "int", 0, "lib", 1, "sen", 1, "lus", 2, "cor", 0);
+				dynStats("spe", -1, "lib", 1, "sen", 1, "lus", 2);
 				displayedUpdate = true;				
 			}
 			if(player.pregnancyIncubation == 180) {
 				outputText("\n<b>There is a strange heat within your belly, it makes you a little tired.</b>\n", false);
-				dynStats("str", 0,"tou", -1, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+				dynStats("tou", -1);
 				displayedUpdate = true;				
 			}
 			if(player.pregnancyIncubation == 120) {
 				outputText("\n<b>Your ever-growing belly makes your pregnancy obvious for those around you.  With each day you can feel the heat within you growing.</b>\n", false);
 				displayedUpdate = true;
-				dynStats("str", 0,"tou", -1, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+				dynStats("tou", -1);
 			}
 			if(player.pregnancyIncubation == 72) {
 				outputText("\n<b>The heat within doesn't drain you as much as it used to, instead giving you an odd strength.</b>", false);
 				outputText("\n", false);
-				dynStats("str", 1,"tou", 1, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+				dynStats("str", 1,"tou", 1);
 				displayedUpdate = true;
 			}
 			if(player.pregnancyIncubation == 48) {
@@ -1036,7 +1036,7 @@ public function updatePregnancy():Boolean {
 				if(player.cor >= 40 && player.cor < 75) outputText("and you wonder how much longer you have to wait.</b>", false);
 				if(player.cor >= 75) outputText("and you're eager to give birth, so you can get impregnated again by monstrous cocks unloading their corrupted seed directly into your eager womb.</b>", false);
 				outputText("\n", false);
-				dynStats("str", 0,"tou", 0, "spe", -2, "int", 0, "lib", 1, "sen", 1, "lus", 4, "cor", 0);
+				dynStats("spe", -2, "lib", 1, "sen", 1, "lus", 4);
 				displayedUpdate = true;
 			}
 			if(player.pregnancyIncubation == 32 || player.pregnancyIncubation == 64 || player.pregnancyIncubation == 85 || player.pregnancyIncubation == 150) {
@@ -1079,7 +1079,7 @@ public function updatePregnancy():Boolean {
 					//genderless: 
 					else outputText("  Your [vagina] begins twitching, aching for something to push through it over and over again.");
 					outputText("  Seated in your own slime, you moan softly, unable to keep your hands off yourself.");
-					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 100, "cor", 0, "resisted", false);
+					dynStats("lus=", 100, "resisted", false);
 					displayedUpdate = true;
 				}
 				else {
@@ -1104,7 +1104,7 @@ public function updatePregnancy():Boolean {
 				//genderless: 
 				else outputText("  Your asshole begins twitching, aching for something to push through it over and over again.");
 				outputText("  Seated in your own slime, you moan softly, unable to keep your hands off yourself.");
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 100, "cor", 0, "resisted", false);
+				dynStats("lus=", 100, "resisted", false);
 				displayedUpdate = true;
 			}
 		}
@@ -1154,7 +1154,7 @@ public function updatePregnancy():Boolean {
 				if(player.pregnancyType == 9999) outputText("spider-morphs ", false);
 				else outputText("driders ", false);
 				outputText("quickly come to dominate your thoughts.  You start playing with a nipple while you lose yourself in the fantasy, imagining being tied up in webs and packed completely full of eggs, stuffing your belly completely with burgeoning spheres of love.  You shake free of the fantasy and notice your hands rubbing over your slightly bloated belly.  Perhaps it wouldn't be so bad?</b>\n", false);
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", 20, "cor", 0);
+				dynStats("lib", 1, "sen", 1, "lus", 20);
 				displayedUpdate = true;				
 			}
 			if(player.buttPregnancyIncubation == 120) {
@@ -1186,7 +1186,7 @@ public function updatePregnancy():Boolean {
 				}
 				if(player.cockTotal() > 1) outputText("groin.  Your " + multiCockDescriptLight() + " fill and grow with every lungful of the stuff you breathe in.  You suck in great lungfuls of the tainted air, desperate for more, your cocks twitching and dripping with need.  ", false);
 				outputText("You smile knowing you couldn't stop from masturbating if you wanted to.\n", false);
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", -.5, "lib", 0, "sen", 0, "lus", 500, "cor", 0);
+				dynStats("int", -.5, "lus", 500);
 				displayedUpdate = true;
 			}
 		}
@@ -1207,7 +1207,7 @@ public function updatePregnancy():Boolean {
 			if(player.buttPregnancyIncubation == 20) {
 				//end eggpreg here if unfertilized
 				outputText("\nSomething oily drips from your sphincter, staining the ground.  You suppose you should feel worried about this, but the overriding emotion which simmers in your gut is one of sensual, yielding calm.  The pressure in your bowels which has been building over the last few days feels right somehow, and the fact that your back passage is dribbling lubricant makes you incredibly, perversely hot.  As you stand there and savour the wet, soothing sensation a fantasy pushes itself into your mind, one of being on your hands and knees and letting any number of beings use your ass, of being bred over and over by beautiful, irrepressible insect creatures.  With some effort you suppress these alien emotions and carry on, trying to ignore the oil which occasionally beads out of your " + assholeDescript() + " and stains your [armor].\n");
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", -.5, "lib", 0, "sen", 0, "lus", 500, "cor", 0);
+				dynStats("int", -.5, "lus", 500);
 				displayedUpdate = true;
 			}
 		}
@@ -1296,7 +1296,7 @@ public function updatePregnancy():Boolean {
 		if(player.cor >= 90) outputText("You lick your lips, savoring the honeyed residue on them as you admire your thousands of children.  If only every night could be like this...\n", false);
 		player.buttPregnancyIncubation = 0;
 		player.buttPregnancyType=0;
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 1, "lib", 4, "sen", 3, "lus", -100, "cor", 0);
+		dynStats("int", 1, "lib", 4, "sen", 3, "lus=", 0);
 		if(buttChange(20, true)) outputText("\n", false);
 		if(player.buttRating < 17) {
 			//Guaranteed increase up to level 10
@@ -1429,7 +1429,7 @@ public function updatePregnancy():Boolean {
 		}
 		player.pregnancyIncubation = 0;
 		player.pregnancyType = 0;
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 10, "lus", -100, "cor", -2);
+		dynStats("lib", 1, "sen", 10, "lus=", 0, "cor", -2);
 	}
 	//Anemone birfs
 	//Anemone Pregnancy
@@ -1498,7 +1498,7 @@ public function updatePregnancy():Boolean {
 			outputText(" from your female orgasm to the puddle on the ground below your ass.\n\n", false);
 			//(gain 1 nemo-dick, reduce lust to min)]
 			genderCheck();
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 2, "sen", 5, "lus", -100, "cor", 0);
+			dynStats("lib", 2, "sen", 5, "lus=", 0);
 		}
 		//[(if PC has 10 existing cocks) && no kid
 		else {
@@ -1509,7 +1509,7 @@ public function updatePregnancy():Boolean {
 
 			outputText("\n\nPush as you might, you can't get it to peek back out even the slightest bit.  What's worse, the heat isn't subsiding, as the tentacles are now lodged inside your pussy!  Prodding and pulling at your " + vaginaDescript(0) + " is only worsening the effect; " + sMultiCockDesc() + " and your clitoris harden as you attempt to retrieve your invader.  Your probes get weaker and weaker as your vagina spasms to each stroke of your insides; each time you touch the creature, the sensation is being transmitted right back to your nerves.  Eventually you push yourself to accidental orgasm; your " + vaginaDescript(0) + " quivers around your fingers and your " + multiCockDescriptLight() + " does the best ejaculation it can manange with hardly any warmup time and no direct stimulation.  Even after the orgasm ends, the tentacles continue to torment your groin.  <b>You are VERY horny with this thing inside you... though you can't reach it, maybe there's a way to crowd it out?</b>\n\n", false);
 			//(reduce lust to min, increased minimum lust by 30 until halfway through PC's next pregnancy)]
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 2, "sen", 5, "lus", -100, "cor", 0);
+			dynStats("lib", 2, "sen", 5, "lus=", 0);
 			if(player.hasStatusAffect("Anemone Arousal") < 0) player.createStatusAffect("Anemone Arousal",0,0,0,0);
 		}		
 		player.pregnancyIncubation = 0;
@@ -1565,7 +1565,7 @@ public function updatePregnancy():Boolean {
 		if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
 		if(player.gender == 1) player.gender = 3;
 		if(player.gender == 0) player.gender = 2;
-		dynStats("str", 0,"tou", -2, "spe", 2, "int", 0, "lib", 1, "sen", .5, "lus", -100, "cor", 7);
+		dynStats("tou", -2, "spe", 2, "lib", 1, "sen", .5, "lus=", 0, "cor", 7);
 		if(player.buttRating < 10 && rand(2) == 0) {
 			player.buttRating++;
 			outputText("\n\nYou notice your " + buttDescript() + " feeling larger and plumper after the ordeal.", false);
@@ -1644,7 +1644,7 @@ public function updatePregnancy():Boolean {
 		if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
 		if(player.gender == 1) player.gender = 3;
 		if(player.gender == 0) player.gender = 2;
-		dynStats("str", -1,"tou", -2, "spe", 3, "int", 0, "lib", 1, "sen", .5, "lus", -100, "cor", 0);
+		dynStats("str", -1,"tou", -2, "spe", 3, "lib", 1, "sen", .5, "lus=", 0);
 		displayedUpdate = true;
 		//Hip and butt increase
 		if(player.buttRating < 12 && rand(2) == 0) {
@@ -1687,7 +1687,7 @@ public function updatePregnancy():Boolean {
 		pcBirthsAmilysKidsQuestVersion();
 		cuntChange(60, true, true, false);
 		if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
-		dynStats("str", -1,"tou", -2, "spe", 3, "int", 0, "lib", 1, "sen", .5, "lus", -100, "cor", 0);
+		dynStats("str", -1,"tou", -2, "spe", 3, "lib", 1, "sen", .5, "lus=", 0);
 		displayedUpdate = true;
 		outputText("\n", false);
 		player.pregnancyIncubation = 0;
@@ -1715,7 +1715,7 @@ public function updatePregnancy():Boolean {
 		if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
 		if(player.gender == 1) player.gender = 3;
 		if(player.gender == 0) player.gender = 2;
-		dynStats("str", -1,"tou", -2, "spe", 3, "int", 0, "lib", 1, "sen", .5, "lus", -100, "cor", 0);
+		dynStats("str", -1,"tou", -2, "spe", 3, "lib", 1, "sen", .5, "lus=", 0);
 		displayedUpdate = true;
 		//Butt increase
 		if(player.buttRating < 14 && rand(2) == 0) {
@@ -1757,7 +1757,7 @@ public function updatePregnancy():Boolean {
 		if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
 		if(player.gender == 1) player.gender = 3;
 		if(player.gender == 0) player.gender = 2;
-		dynStats("str", -1,"tou", -4, "spe", 2, "int", 0, "lib", 1, "sen", .5, "lus", -100, "cor", 0);
+		dynStats("str", -1,"tou", -4, "spe", 2, "lib", 1, "sen", .5, "lus=", 0);
 		displayedUpdate = true;
 		//Butt increase
 		if(player.buttRating < 14 && rand(2) == 0) {
@@ -1798,7 +1798,7 @@ public function updatePregnancy():Boolean {
 		if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
 		if(player.gender == 1) player.gender = 3;
 		if(player.gender == 0) player.gender = 2;
-		dynStats("str", -1,"tou", -1, "spe", 2, "int", 0, "lib", 1, "sen", .5, "lus", -100, "cor", 0);
+		dynStats("str", -1,"tou", -1, "spe", 2, "lib", 1, "sen", .5, "lus=", 0);
 		displayedUpdate = true;
 		//Butt increase
 		if(player.buttRating < 14 && rand(2) == 0) {
@@ -1838,7 +1838,7 @@ public function updatePregnancy():Boolean {
 					outputText("You are interrupted as you find yourself overtaken by an uncontrollable urge to undress and squat.   You berate yourself for giving in to the urge for a moment before feeling something shift.  You hear the splash of fluid on the ground and look down to see a thick greenish fluid puddling underneath you.  There is no time to ponder this development as a rounded object passes down your birth canal, spreading your feminine lips apart and forcing a blush to your cheeks.  It plops into the puddle with a splash, and you find yourself feeling visibly delighted to be laying such healthy eggs.   Another egg works its way down and you realize the process is turning you on more and more.   In total you lay ", false);
 					outputText(eggDescript(), false); 
 					outputText(", driving yourself to the very edge of orgasm.", false);
-					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 100, "cor", 0, "resisted", false);
+					dynStats("lus=", 100, "resisted", false);
   				}
 				//High quantity
 				else {
@@ -1847,7 +1847,7 @@ public function updatePregnancy():Boolean {
 					if(player.clitLength > 2 && player.clitLength <= 5) outputText("playing with your over-large clit as if it were a small cock, moaning and panting as the eggs slide free of your diminishing belly.  You spread the slime and cunt juice over it as you tease and stroke until ", false);
 					if(player.clitLength <= 2) outputText("pulling your folds wide and playing with your clit as another egg pops free from your diminishing belly.  You make wet 'schlick'ing sounds as your spread the slime around, vigorously frigging yourself until ", false); 
 					outputText("you quiver in orgasm, popping out the last of your eggs as your body twitches nervelessly on the ground.   In total you lay " + eggDescript() + ".", false);
-					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0, "resisted", false);
+					dynStats("lus=", 0, "resisted", false);
 				}
 			}
 			//Large egg scene
@@ -1863,7 +1863,7 @@ public function updatePregnancy():Boolean {
 				outputText("You cum hard, the big eggs each making your cunt gape wide just before popping free.  You slump down, exhausted and barely conscious from the force of the orgasm.  ", false);
 				if(player.statusAffects[player.hasStatusAffect("eggs")].value3 >= 11) outputText("Your swollen belly doesn't seem to be done with you, as yet another egg pushes its way to freedom.   The stimulation so soon after orgasm pushes you into a pleasure-stupor.  If anyone or anything discovered you now, they would see you collapsed next to a pile of eggs, your fingers tracing the outline of your " + vaginaDescript(0) + " as more and more eggs pop free.  In time your wits return, leaving you with the realization that you are no longer pregnant.  ", false);
 				outputText("\n\nYou gaze down at the mess, counting " + eggDescript() + ".", false);
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0, "resisted", false);
+				dynStats("lus=", 0, "resisted", false);
 			}
 			outputText("\n\n<b>You feel compelled to leave the eggs behind, ", false);
 			if(player.hasStatusAffect("ateEgg") >= 0) outputText("but you remember the effects of the last one you ate.\n</b>", false);

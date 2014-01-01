@@ -508,7 +508,7 @@ public function talkAboutTheSpringWithMinerva():void {
 	outputText("\n\nThe two of you rest for a while, and can't help but enjoy each other's company.  You idly make small talk before deciding that it's time to take your leave.  Putting your [armor] back on, you gather your things with Minerva watching, mildly upset that you have to leave so soon.  \"<i>Thank you so much for coming to visit!  I had a lot of fun.  Now, don't be a stranger, you hear?  Come back and visit again soon!</i>\"  she says, before sitting up and tossing you one last smile.");
 	outputText("\n\nReturning her shining smile, you promise to come back and visit soon, then head out and start the hike back toward your camp.");
 	// PC returns to camp.
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10+player.lib/10, "cor", 0);
+	dynStats("lus", 10+player.lib/10);
 	doNext(13);
 }
 
@@ -642,7 +642,7 @@ public function bathTimeWithMinerva():void {
 	outputText("\n\nEventually though, the heat fades and it's time for both of you to get out of the spring.  The affectionate siren helps you out of the warm water, even going to get you something to dry off with and helping dry you off.  As soon as you're dry, you find yourself wrapped up in a tight, squeezing hug, the blue and gray siren cuddling you tightly.  \"<i>That was nice, my love... really, it was wonderful,</i>\" she says as she looks at you, eyes locked on yours, clearly very happy to have shared that tender moment with you.");
 	outputText("\n\nLeaning in, she gives you a gentle kiss on the lips before finally letting go of you.  \"<i>I wish you didn't have to go, but I understand that you must.  I'll miss you, you know?  Make sure you come back soon, all right?</i>\"  she asks, a sparkle of hope in her eyes.  Smiling back at the happy siren, you nod, reassuring the herm that you will come back as soon as you can, returning her embrace for a moment before turning and heading back for your camp.");
 	// PC returns to camp.
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10+player.lib/10, "cor", 0);
+	dynStats("lus", 10+player.lib/10);
 	fatigue(-30);
 	doNext(13);
 }
@@ -763,7 +763,7 @@ public function fuckMinervasAsshole():void {
 	}
 	//PC returns to main camp menu
 	flags[kFLAGS.TIMES_BUTTFUCKED_MINERVA]++;
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
@@ -864,7 +864,7 @@ public function minervaCowgirlSex():void {
 	//Romanced ending:
 	else outputText("\n\nThe lovestruck siren sighs and sits up, looking up at you with affection clearly written on her face.  \"<i>I hope you'll come back soon; I always feel so much happier when you're around,</i>\" she says as she brings a hand to her chest, holding it over her heart.");
 	flags[kFLAGS.TIMES_MINERVA_COWGIRLED]++;
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
@@ -949,7 +949,7 @@ public function minervaLapSex():void {
 	else outputText("\n\nThe lovestruck siren sighs and sits up, looking up at you with affection clearly written on her face.  \"<i>I hope you'll come back soon, I always feel so much happier when you're around,</i>\" she says as she brings a hand to her chest, holding it over her heart.");
 	slimeFeed();
 	flags[kFLAGS.TIMES_MINERVA_LAPSEXED]++;
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
@@ -1027,7 +1027,7 @@ public function noBallsMinervaAndContinuation(clear:Boolean = true):void {
 	
 	outputText("\n\nFor a long while, you just lay there, cuddled up with the mostly naked siren, the two of you idly chatting about various things that come to mind.  Eventually, you must leave the gentle embrace and return to your duties as a Champion.  Disentangling yourself from Minerva, you straighten your clothes out and, with a smile, tell her you had a wonderful time.  Grinning up at you, Minerva climbs back onto her feet and pulls you into a deep, tongue-tangling goodbye kiss.  \"<i>It was amazing, we have to do this again.  Perhaps next time, I can do you, hmm?</i>\" she suggests, not wanting to be greedy and get all the pleasure.  Giving you another peck on the cheek, the siren sends you on your way after telling you to come back and visit soon.");
 	
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 20, "cor", 0);
+	dynStats("lus", 20);
 	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
@@ -1100,7 +1100,7 @@ public function letMinervaSuckYouOff():void {
 	
 	outputText("\n\nDeciding to relax for a while after your sexual exertion, you curl up on the soft moss with Minerva, both of you just basking in the warmth that the spring gives off, and the softness of the moss, content with each other's presence.  Unfortunately, you know you have to go; the call of your duty to this land is too great, and despite the comfort of this place, you must go.  Pulling away from the siren you promise to return and visit her soon.");
 	//PC returns to camp.
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
@@ -1162,7 +1162,7 @@ public function fuckMinervaWithHerHandsBehindHerBack():void {
 	
 	outputText("\n\nWith an amused grin, you give the sharky herm a pat on the rump before heading out, your hand sliding along that sexy tail of hers as you let the well-fucked woman rest.");
 	//PC returns to camp
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
@@ -1239,7 +1239,7 @@ public function pcGetsEatenOutByMinerva():void {
 	outputText("\n\nWith that, you turn and start the long hike back to camp.");
 	flags[kFLAGS.MINERVA_LEZZES_OUT]++;
 	// PC returns to camp
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
+	dynStats("sen", -2, "lus=", 0);
 	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
@@ -1356,7 +1356,7 @@ public function kiteFire():void {
 //Booty-shorts
 public function bootyShortInYoFaceSon():void {
 	outputText("The blue beauty turns around and bends over so far that she uses her halberd like a pole to support herself.  She lifts her shark tail up so you can see her short-shorts hugging perfectly against her ample bottom.  Her tail waves to the left and to the right as she does a little booty shake for you.  The siren gives her big ass a nice, hard slap that echoes off the tower walls, and making it jiggle even more.  She quickly turns around to face you, smirking at what she just did.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 20+player.lib/10+rand(5), "cor", 0);
+	dynStats("lus", 20+player.lib/10+rand(5));
 	combatRoundOver();
 }
 
@@ -1364,7 +1364,7 @@ public function bootyShortInYoFaceSon():void {
 //Pole licking
 public function lickDatPole():void {
 	outputText("Minerva stands, holding her halberd straight up next to her as she looks it over with a seductive stare.  Giving you a suggestive look she rolls out a two-foot long tongue from her mouth, licking a good length of the massive weapon, even wrapping her tongue around it a few times.  Suddenly she sucks her tongue back into her mouth and gives you a little smirk, almost to say \"<i>Yeah, I can do that... and more.</i>\"");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 20+player.lib/10+rand(5), "cor", 0);
+	dynStats("lus", 20+player.lib/10+rand(5));
 	combatRoundOver();
 }
 
@@ -1484,9 +1484,9 @@ public function getADrinkYouBitch():void {
 	//[Bottle] [Drink]
 	//[Drink]
 	outputText("\n\nApproaching the pristine pond, you kneel on the shore and dip your hands into the water, cupping them together and lifting them out to scoop up a decent drink.  The water is cool and sweet to the taste, and every swallow makes you feel calmer, cleaner, and refreshed.  You drink until your thirst is quenched, feeling purer in both mind and body.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -25, "cor", -.5, "resisted", false);
-	if(player.cor > 50) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", -1);
-	if(player.cor > 75) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", -1);
+	dynStats("lus", -25, "cor", -.5, "resisted", false);
+	if(player.cor > 50) dynStats("cor", -1);
+	if(player.cor > 75) dynStats("cor", -1);
 	doNext(13);
 }
 /*

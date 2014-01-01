@@ -164,7 +164,7 @@ public function loseToChameleonWithCockAnBallsAnCunt():void {
 	outputText("\n\nThe feelings of being filled and having your " + cockDescript(x) + " serviced by her foot are just too good, and you quickly reach orgasm, spattering her foot and shin with your hot cum.  Her face is red as she tries to maintain her composure, and her entire body is starting to grow flush with barely contained excitement.  She softly rubs your semen into your softening man-meat as you recover from your orgasm, looking at it almost blankly and smiling.  After a moment she snaps herself out of her reverie, remembering that she was supposed to be punishing you but obviously too aroused to do much.  \"<i>Um, yeah! And you, uhh, better not come back!</i>\"  She rushes off back into the trees, presumably to masturbate somewhere where you won't notice.  You shake your head at the girl's antics, dress yourself, and head back to camp.");
 	
 	//send player back to camp, reset hours since cum, remove gems and add time
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	cleanupAfterCombat();
 }
 
@@ -196,7 +196,7 @@ public function dudesLoseToChamChams():void {
 	outputText("\n\nYour softening member slides out of her and she hops down, legs nearly giving out as she lands.  She takes a moment to recuperate before jerking your still-bound wrists towards the ground.  You collapse, unable to stand any longer anyways.  The chameleon girl mutters, \"<i>Oh my gods, that felt so-</i>\"");
 
 	outputText("\n\nShe catches herself, and looks back down at you and sneers.  \"<i>Y-yeah, and you better not come back around my bog again,</i>\" she says between tired breaths as she takes the silk from your wrists and dresses herself again.  She splashes off through the water, leaving you in silence.  You take a while to recover from the experience before managing to work up the energy to get out of the mud and back to your camp.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	cleanupAfterCombat();
 	//send player back to camp, reset hours since cum, remove gems and add time
 }
@@ -215,7 +215,7 @@ public function loseToChamChamWithPCCunt():void {
 	outputText("\n\nHer moans quickly grow more insistent above you, though, and she nearly collapses forwards onto your head as she cums loudly.  You steady her with one hand, still using her tail like a smooth sex-toy in the other as her skin fades back to its normal " + monster.skinTone + " coloration.  Mind apparently cleared by her orgasm, she suddenly jerks her tail back, forcing it out of your hand and " + vaginaDescript(0) + ".  \"<i>Wha... no!  B-bitches like you don't get to cum!</i>\"  She puts her most menacing smile back on, with yet no idea how to manage one.  \"<i>And, umm, you better not come back to my bog!</i>\"  She turns and quickly scampers off, pulling her wet clothes up off the ground as she goes.  You chuckle a bit as the wannabe dominatrix runs back into the trees, but stop as you realize she did beat you and leave you horny.  With a frustrated \"<i>Hmph!</i>\" you pull your " + player.armorName + " back up.");
 	
 	//set lust to 100, return to camp
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 100, "cor", 0);
+	dynStats("lus=", 100);
 	player.lust = 100;
 	cleanupAfterCombat();
 }
@@ -273,7 +273,7 @@ public function fuckDatChameleonAsACoolGuyGirlHerm():void {
 	outputText("\n\nThe two of you slow down and eventually fall still, basking in the afterglow.  When you look back to the chameleon girl, you can see that she's fallen asleep cuddling against you, her arm still draped over your naked thigh and her tail lying limp against you.  The head pressed against your shoulder wears a content smile; you gently ");
 	if(player.cor < 50) outputText("and guiltily ");
 	outputText("roll her onto her back and get up to collect your things, rinsing yourself with the water and shaking the mud out before putting your " + player.armorName + " back on and heading back to camp.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	cleanupAfterCombat();
 }
 
@@ -301,7 +301,7 @@ public function manFucksChameleonWithBiggishWang():void {
 	if(player.cumQ() > 750) outputText("  Even the murky water around her is turned white as the pools of your cum on her body run off into it.");
 	outputText("  Satisfied, you put your " + player.armorName + " back on and head back to camp.");
 	//send player back to camp, reset hours since cum, add gems and time
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	cleanupAfterCombat();
 }
 
@@ -327,7 +327,7 @@ public function femaleHasWinSexWithChamCham():void {
 	if(player.cor < 50) outputText("and somewhat guiltily ");
 	outputText("roll her onto her back and get up to collect your things, shaking out the mud and water before putting your " + player.armorName + " back on and heading to camp.");
 	//send player back to camp, reset hours since cum, add gems and time
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	cleanupAfterCombat();
 }
 
@@ -371,11 +371,11 @@ public function giveTheChameleonASuccubiMilk():void {
 	outputText("\n\nDespite her inexperience, her huge, soft breasts feel divine as they smother and stimulate your cock.  Enough of your pre-cum has leaked out onto her skin and been rubbed back into your shaft that it feels nearly as warm and sticky as her sex; hands work ever more efficiently at squeezing her tits against you and getting you off, and she even moans a little as she finds the time to tweak a nipple.  Her efforts don't go unrewarded, and soon you're releasing a torrent of hot cum all over her neck and face; she opens her mouth wide, catching what she can and swallowing greedily.  The colors of her body shift slightly and her stripes grow so bright that they seem to shine.  She collapses back into a blissed-out heap, still covered in your semen.  Pushing out the last of it, you recover yourself and stand up, leaving the girl to enjoy the taste of your seed and her new endowments.");
 	
 	//send player back to camp, remove 1 succubi milk or p.milk, add gems and exp and time
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	if(hasItem("P.S.Mlk",1)) consumeItem("P.S.Mlk",1);
 	else {
 		consumeItem("SucMilk",1);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 5);
+		dynStats("cor", 5);
 	}
 	cleanupAfterCombat();
 }
@@ -400,7 +400,7 @@ public function doseDatChameleonWithLustAndSensitivityDrafts():void {
 	if(!player.hasCock() || player.cockArea(player.smallestCockIndex()) > monster.vaginalCapacity()) {
 		outputText("\n\nYou reach under her thong and toy with her clit for just a moment.  She nearly jumps, almost managing to sit up before collapsing back down into the water, and you slip a couple fingers into her slick cunt to be immediately met with a gush of her fluids.  She cries out loudly and her pussy clenches around your fingers as she cums, getting off quickly after all her waiting; then curls up on her side as her tail thrashes wildly while orgasm slowly melts her painful nerves down to normal levels.  After a minute she slackens and spreads out on the ground, panting heavily as she recovers.  Smiling down at the tired chameleon girl, you wish her luck with her new nerves and untie her hands.  She's too exhausted to get up, though, and you leave her lying there to sleep in the swampy water.");
 		//player.lust+=30;
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 30, "cor", 0);
+		dynStats("lus", 30);
 	}
 	//(else if at least one cock of appropriate size)
 	else {
@@ -414,8 +414,8 @@ public function doseDatChameleonWithLustAndSensitivityDrafts():void {
 		
 		outputText("\n\nYou trace one finger lightly up and down her belly again, and she squirms as the powerful chemicals and sensations you've given her make her cum again and again.  Her eyes roll up and she pants openly, her mind completely broken by the overwhelming pleasure.  You start to notice that she feels almost a bit <i>too</i> good around you, and you wonder if the magic of the tainted liquids might also be affecting you to some extent, seeping into your system as her sexual fluids bathe your " + cockDescript(x) + ".  The squeezes of her hands on your skin feel as crisp as pinches but lack the pain, and you can feel the warm, wet folds of her pussy pressing against every inch of your prick.  Your thrusting intensifies as your whole body aches with need, and she wriggles and squeals as you push deeper into her, as if to outdistance your own orgasm building inside of you.  Her legs wrap around your back and hold you deep inside as you cum, and so much erupts from your " + cockDescript(x) + " that not even her vise-like wringing can prevent it from gushing back out and dripping down to the base of your cock.  Her grip on you loosens as she feels the proof of your lovemaking inside her.  You run a hand along her skin and she shudders, though your presence barely registers with her at this point.  Doubtful that this one will try to assert her dominance over you again any time soon, you pull your softening member out of the blissed-out chameleon-girl and stand up, donning your " + player.armorName + " and leaving the semi-conscious girl there in the bog to recover.  The chemicals that you've gotten a contact high from leave you feeling somewhat aroused as you make your way back to camp.");
 		//player.lust = base + 20;
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 20, "cor", 0);
+		dynStats("lus=", 0);
+		dynStats("lus", 20);
 	}
 	//send player back to camp, remove sens/fuck draft, reset hours since cum, add gems and exp and time
 	consumeItem("SensDrf",1);

@@ -220,14 +220,14 @@ public function doSystem(eventNo:Number):void {
 	}
 	//Gain +5 Str due to level
 	if(eventNo == 44) {
-		dynStats("str", 5,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+		dynStats("str", 5);
 		outputText("Your muscles feel significantly stronger from your time adventuring.", true);
 		doNext(116);
 		return;
 	}
 	//Gain +5 Toughness due to level
 	if(eventNo == 45) {
-		dynStats("str", 0,"tou", 5, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+		dynStats("tou", 5);
 		trace("HP: " + player.HP + " MAX HP: " + maxHP());
 		statScreenRefresh();
 		outputText("You feel tougher from all the fights you have endured.", true);
@@ -236,14 +236,14 @@ public function doSystem(eventNo:Number):void {
 	}
 	//Gain +5 Intelligence due to level
 	if(eventNo == 46) {
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 5, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+		dynStats("int", 5);
 		outputText("Your time spent fighting the creatures of this realm has sharpened your wit.", true);
 		doNext(116);
 		return;
 	}
 	//Gain +5 speed due to level
 	if(eventNo == 47) {
-		dynStats("str", 0,"tou", 0, "spe", 5, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+		dynStats("spe", 5);
 		outputText("Your time in combat has driven you to move faster.", true);
 		doNext(116);
 		return;
@@ -443,16 +443,16 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(flags[kFLAGS.ARIAN_EGG_COUNTER] > 0) flags[kFLAGS.ARIAN_EGG_COUNTER]++;
 		if(player.hasPerk("Well Adjusted") < 0) {
 			//Raise lust
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", player.lib * 0.04, "cor", 0, "resisted", false);
+			dynStats("lus", player.lib * 0.04, "resisted", false);
 			//Double lust rise if lusty.
-			if(player.hasPerk("Lusty") >= 0) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", player.lib * 0.02, "cor", 0, "resisted", false);
+			if(player.hasPerk("Lusty") >= 0) dynStats("lus", player.lib * 0.02, "resisted", false);
 		}
 		//Well adjusted perk
 		else {
 			//Raise lust
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", player.lib * 0.02, "cor", 0);
+			dynStats("lus", player.lib * 0.02);
 			//Double lust rise if lusty.
-			if(player.hasPerk("Lusty") >= 0) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", player.lib * 0.01, "cor", 0, "resisted", false);
+			if(player.hasPerk("Lusty") >= 0) dynStats("lus", player.lib * 0.01, "resisted", false);
 		}
 		//Rathazul crafting countdown
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00274] > 1) {
@@ -542,7 +542,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 						outputText("\n\nFinally noticing your gaze on her body, Sophie looks up at you with an amorous smile, her thick, fertile thighs spreading and showing off her tight puffy pussy to you.  The matron puts her pregnant body on display for you, to show you the result of your virility and to entice you into playing with her hot, lusty form.\n");
 					}
 					needNext = true;
-					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 3, "cor", 0);
+					dynStats("lus", 3);
 				}
 				//Medium Bump*
 				else if(flags[kFLAGS.SOPHIE_INCUBATION] == 120) {
@@ -554,7 +554,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 						outputText("\nAs usual, Sophie is laying on your bedroll.  Each day the fertile swell in her stomach seems to grow bigger with the egg inside.  The positively pregnant woman idly strokes her egg-bearing belly with motherly affection.  She even coos to the growing bump as she caresses her body, clearly loving the fact that she is pregnant with another egg.  It's not long before she catches sight of you; a big silly smile breaking across her lips as she hurriedly gets up from your blankets and bounds over to you.  With each step, her voluptuous body jiggles, and bounces, her big bountiful bosom heaving and shaking, her ripe round rump quivering like jelly as she sways her fecund hips for you.");
 						outputText("\n\n\"<i>Hey there [name].  Look at me!  That egg has gotten so big inside me.  You have no idea how good this feels,</i>\" the confident woman tweets as she presses her curvaceous body against you, making sure you can feel her big soft tits and growing baby bump.  From how her body feels, you're sure her already bountiful breasts have only gotten bigger thanks to her pregnancy.  \"<i>Maybe in a month or so, I'll let you do it all over again...</i>\"\n");
 					}
-					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5, "cor", 0);
+					dynStats("lus", 5);
 					needNext = true;
 				}
 				//Big Belly Bump*
@@ -567,7 +567,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 						outputText("\nOnce again, your pregnant harpy lounges on your bedroll, her face buried in your pillow and taking deep breaths of your scent.  Even with her in such a - vulnerable... position, face down and ass up, you can clearly see the big, round bulge of her egg-laden belly.  With the feathery slut so gravid, you're sure it won't be long until she lays that womb-straining egg.  As if sensing your gaze, Sophie starts to sway her round spankable ass, her legs seeming to spread a little wider as well.  Your suspicions prove correct when she looks back at you; her pursed lips blowing you a kiss as she looks at you with lusty eyes.");
 						outputText("\n\nThe amorous harpy practically leaps out of your bed, her voluptuous body bouncing with each step as she bounds over to you.  Despite her heavily pregnant state, Sophie seems to carry herself well, the milfy harpy well adapted at being heavy with egg.  Taking advantage of your momentary distraction, she flounces at you, tackling you and cuddling you happily.  She presses her egg-heavy belly and massive, perky tits against you and says, \"<i>It's gonna be time soon...  Before you know it, I'll be popping out this big, swollen egg, and you'll be right there to see it!</i>\"  Leaning in, she plants a big wet kiss on your cheek before sliding her hands down to her round bulging belly.  \"<i>It's going to be a really big egg too!  Don't worry, I'm good at laying eggs, and my pussy is going to be ready for you as soon as it comes out!</i>\"\n");
 					}
-					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5, "cor", 0);
+					dynStats("lus", 5);
 					needNext = true;
 				}
 				else if(flags[kFLAGS.SOPHIE_INCUBATION] == 0) {
@@ -726,7 +726,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				player.str += player.statusAffectv2("Hangover");
 				player.spe += player.statusAffectv3("Hangover");
 				player.inte += player.statusAffectv4("Hangover");
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+				dynStats("cor", 0);
 				//Clear status
 				player.removeStatusAffect("Hangover");
 				needNext = true;
@@ -857,10 +857,10 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(player.hasStatusAffect("LustyTongue") >= 0) {
 			if(rand(5) == 0) {
 				outputText("\nYou keep licking your lips, blushing with the sexual pleasure it brings you.", false);
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 2+rand(15), "cor", 0);
+				dynStats("lus", 2+rand(15));
 				if(player.lust >= 100) {
 					outputText("  Your knees lock from the pleasure, and you fall back in pleasure, twisting and moaning like a whore as you somehow orgasm from your mouth.  When it finishes, you realize your mouth feels even more sensitive than before.", false);
-					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 2, "lus", -100, "cor", 0);
+					dynStats("sen", 2, "lus=", 0);
 					//Tongue orgasming makes it last longer.
 					player.changeStatusValue("LustyTongue",1,player.statusAffectv1("LustyTongue")+10);
 					
@@ -894,7 +894,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					flags[kFLAGS.PC_CURRENTLY_LUSTSTICK_AFFECTED]++;
 					needNext = true;
 				}
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", .1, "cor", 0);
+				dynStats("lus", .1);
 				player.lust += 20;
 				if(player.lust > 100) player.lust = 100;
 			}
@@ -1098,7 +1098,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					if(temp < 40 && player.eggs() >= 40) {
 						//-Speed
 						outputText("\nYour lower half has become so heavy that it's difficult to move now, the weight of your eggs bearing down on your lust-addled frame.  Your ovipositor pokes from its hiding place, dripping its slick lubrication in anticipation of filling something, anything with its burden.  You're going to have to find someone to help relieve you of your load, and soon...\n\n<b>Minimum Lust raised!</b>\n");
-						dynStats("str", 0,"tou", 0, "spe", -1, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+						dynStats("spe", -1);
 						needNext = true;
 					}
 				}
@@ -1124,7 +1124,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					//-Speed
 					if(temp < 40 && player.eggs() >= 40) {
 						outputText("\nYour bee half has become so heavy that it's difficult to move now, the weight of your eggs bearing down on your lust-addled frame.  Your ovipositor pokes from its hiding place, dripping its sweet, slick lubrication in anticipation of filling something, anything with its burden.  You're going to have to find someone to help relieve you of your load, and soon...\n");
-						dynStats("str", 0,"tou", 0, "spe", -1, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+						dynStats("spe", -1);
 						needNext = true;
 					}
 				}
@@ -1201,7 +1201,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(player.statusAffects[player.hasStatusAffect("heat")].value3 <= 1 || player.vaginas.length == 0) 
 			{
 				//Remove bonus libido from heat
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -player.statusAffects[player.hasStatusAffect("heat")].value2, "sen", 0, "lus", 0, "cor", 0, "resisted", false, "noBimbo", true);
+				dynStats("lib", -player.statusAffects[player.hasStatusAffect("heat")].value2, "resisted", false, "noBimbo", true);
 				//remove heat
 				player.removeStatusAffect("heat");
 				if(player.lib < 1) player.lib = 1;
@@ -1232,7 +1232,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(player.statusAffectv3("rut") <= 1 || player.totalCocks() == 0) 
 			{
 				//Remove bonus libido from rut
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -player.statusAffectv2("rut"), "sen", 0, "lus", 0, "cor", 0, "resisted", false, "noBimbo", true);
+				dynStats("lib", -player.statusAffectv2("rut"), "resisted", false, "noBimbo", true);
 				//remove heat
 				player.removeStatusAffect("rut");
 				if(player.lib < 10) player.lib = 10;
@@ -1259,7 +1259,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					player.balls = 2;
 					player.ballSize = 3;
 				}
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", -1, "lib", 0, "sen", 5, "lus", 15, "cor", 0);
+				dynStats("int", -1, "sen", 5, "lus", 15);
 				outputText("</b>\n", false);
 				needNext = true;
 			}
@@ -1285,14 +1285,14 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				if(player.hasPerk("Futa Faculties") >= 0) outputText("\n<b>Your tits get nice and full again.  You'll have lots of fun now that your breasts are back to being big, swollen knockers!</b>\n", false);
 				else outputText("\n<b>Your " + breastDescript(0) + " have regained their former bimbo-like size.  It looks like you'll be stuck with large, sensitive breasts forever, but at least it'll help you tease your enemies into submission!</b>\n", false);
 				needNext = true;
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", -1, "lib", 0, "sen", 0, "lus", 15, "cor", 0);
+				dynStats("int", -1, "lus", 15);
 			}
 			//Vagoo
 			if(!player.hasVagina()) {
 				player.createVagina();
 				if(player.hasPerk("Futa Faculties") >= 0) outputText("\n<b>Your crotch is like, all itchy an' stuff.  Damn!  There's a wet little slit opening up, and it's all tingly!  It feels so good, why would you have ever gotten rid of it?</b>\n", false);
 				else outputText("\n<b>Your crotch tingles for a second, and when you reach down to feel, your " + player.legs() + " fold underneath you, limp.  You've got a vagina - the damned thing won't go away and it feels twice as sensitive this time.  Fucking bimbo liquer.</b>\n", false);
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", -1, "lib", 0, "sen", 10, "lus", 15, "cor", 0);
+				dynStats("int", -1, "sen", 10, "lus", 15);
 				needNext = true;
 			}
 		}
@@ -1305,7 +1305,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				if(player.hasPerk("Bimbo Brains") >= 0 || player.hasStatusAffect("Bimbo Champagne") >= 0) outputText("\n<b>Your boobies like, get all big an' wobbly again!  You'll have lots of fun now that your tits are back to being big, yummy knockers!</b>\n", false);
 				else outputText("\n<b>Your " + breastDescript(0) + " have regained their former bimbo-like size.  It looks like you'll be stuck with large, sensitive breasts forever, but at least it'll help you tease your enemies into submission!</b>\n", false);
 				needNext = true;
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", -1, "lib", 0, "sen", 0, "lus", 15, "cor", 0);
+				dynStats("int", -1, "lus", 15);
 			}
 			//Vagoo
 			if(!player.hasVagina()) {
@@ -1317,14 +1317,14 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			if(player.hipRating < 12) {
 				if(player.hasPerk("Bimbo Brains") >= 0) outputText("\nWhoah!  As you move, your [hips] sway farther and farther to each side, expanding with every step, soft new flesh filling in as your hips spread into something more appropriate on a tittering bimbo.  You giggle when you realize you can't walk any other way.  At least it makes you look, like, super sexy!\n");
 				else outputText("\nOh, no!  As you move, your [hips] sway farther and farther to each side, expanding with every step, soft new flesh filling in as your hips spread into something more appropriate for a bimbo.  Once you realize that you can't walk any other way, you sigh heavily, your only consolation the fact that your widened hips can be used to tease more effectively.\n");
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", -1, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+				dynStats("int", -1);
 				player.hipRating = 12;
 				needNext = true;
 			}
 			if(player.buttRating < 12) {
 				if(player.hasPerk("Bimbo Brains") >= 0) outputText("\nGradually warming, you find that your [butt] is practically sizzling with erotic energy.  You smile to yourself, imagining how much you wish you had a nice, plump, bimbo-butt again, your hands finding their way to the flesh on their own.  Like, how did they get down there?  You bite your lip when you realize how good your tush feels in your hands, particularly when it starts to get bigger.  Are butts supposed to do that?  Happy pink thoughts wash that concern away - it feels good, and you want a big, sexy butt!  The growth stops eventually, and you pout disconsolately when the lusty warmth's last lingering touches dissipate.  Still, you smile when you move and feel your new booty jiggling along behind you.  This will be fun!\n");
 				else outputText("\nGradually warming, you find that your [butt] is practically sizzling with erotic energy.  Oh, no!  You thought that having a big, bloated bimbo-butt was a thing of the past, but with how it's tingling under your groping fingertips, you have no doubt that you're about to see the second coming of your sexy ass.  Wait, how did your fingers get down there?  You pull your hands away somewhat guiltily as you feel your buttcheeks expanding.  Each time you bounce and shake your new derriere, you moan softly in enjoyment.  Damnit!  You force yourself to stop just as your ass does, but when you set off again, you can feel it bouncing behind you with every step.  At least it'll help you tease your foes a little more effectively...\n");
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", -1, "lib", 0, "sen", 0, "lus", 10, "cor", 0);
+				dynStats("int", -1, "lus", 10);
 				player.buttRating = 12;
 				needNext = true;
 			}
@@ -1387,7 +1387,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				if(player.statusAffectv2("Feeder") >= 72 && model.time.hours == 14) {
 					outputText("\n<b>After having gone so long without feeding your milk to someone, you're starting to feel strange.  Every inch of your skin practically thrums with sensitivity, particularly your sore, dripping nipples.</b>\n", false);
 					temp = (2 + (((player.statusAffectv2("Feeder")) - 70) / 20));
-					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", temp, "lus", 0, "cor", 0);
+					dynStats("sen", temp);
 					needNext = true;
 				}
 			}
@@ -1399,7 +1399,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					flags[kFLAGS.PLAYER_PREGGO_WITH_WORMS] = 1;
 					outputText("\nA sudden gush of semen-coated worms noisily slurps out of your womb.  It runs down your legs as the worms do their damnedest to escape.  The feeling of so many squiggling forms squirting through your cunt-lips turns you on more than you'd like to admit.  You wonder why they stayed as long as they did, and some part of you worries that their stay may have reduced your capacity to bear children, though in a place like this that might be a blessing.\n", false);
 					needNext = true;
-					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 2+player.sens/10, "cor", 0);
+					dynStats("lus", 2+player.sens/10);
 					if(player.fertility > 5) player.fertility -= (1 + Math.round(player.fertility * 1/4));
 					//Lower chances
 					player.addStatusValue("worm plugged",1,-1);
@@ -1461,7 +1461,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 							needNext = true;
 							outputText("</b>\n", false);	
 						}
-						else dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 1+rand(2), "cor", 0);
+						else dynStats("lus", 1+rand(2));
 					}
 					//Chick stuff
 					if(player.statusAffectv1("Exgartuan") == 2 && player.biggestTitSize() >= 12) {
@@ -1481,12 +1481,12 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 									outputText("Your hands knead and caress your " + breastDescript(0) + ", eagerly touching every inch of soft flesh.  You gasp when you realize what you're doing and pull them away", false);
 									if(player.cor < 50) outputText(", angry at yourself for falling prey to the demon's directions", false);
 									outputText(".", false);
-									dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5+player.sens/10, "cor", 0);
+									dynStats("lus", 5+player.sens/10);
 								}
 								needNext = true;
 								outputText("</b>\n", false);	
 							}
-							else dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 1+rand(2), "cor", 0);
+							else dynStats("lus", 1+rand(2));
 						}
 					}
 				}
@@ -1504,7 +1504,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(player.hasStatusAffect("Jizzpants") >= 0) {
 			outputText("\nYour " + player.armorName + " squishes wetly with all the semen you unloaded into them, arousing you more and more with every movement.\n", false);
 			needNext = true;
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10 + player.sens/5, "cor", 0);
+			dynStats("lus", 10 + player.sens/5);
 			player.removeStatusAffect("Jizzpants");
 		}
 		//Marble's Milk Status!
@@ -1514,7 +1514,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			//Remove the status and stat boosts when time runs out on the milk
 			if(player.statusAffectv1("Marbles Milk") <= 0) {
 				needNext = true;
-				dynStats("str", (-1 * player.statusAffectv2("Marbles Milk")),"tou", (-1 * player.statusAffectv3("Marbles Milk")), "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+				dynStats("str", (-1 * player.statusAffectv2("Marbles Milk")),"tou", (-1 * player.statusAffectv3("Marbles Milk")));
 				player.removeStatusAffect("Marbles Milk");
 				//Text for when Marble's Milk effect wears off:
 				//[addiction is 10 or less] 
@@ -1536,7 +1536,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 						else outputText("\nThe euphoria from Marble's milk has faded, and you need more milk.  It's almost impossible not to run straight back to her and beg her to let you drink from her breasts again.\n", false);
 						//If the player is addicted to her milk, they gain the withdrawal effect when it wears off, reducing player's inte and tou by 5
 						player.createStatusAffect("MarbleWithdrawl",0,0,0,0);
-						dynStats("str", 0,"tou", -5, "spe", 0, "int", -5, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+						dynStats("tou", -5, "int", -5);
 					}
 				}
 			}			
@@ -1550,7 +1550,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					outputText("\nYou are overwhelmed with a desire for more of Marble's Milk.\n", false);
 					needNext = true;
 					player.createStatusAffect("MarbleWithdrawl",0,0,0,0);
-					dynStats("str", 0,"tou", -5, "spe", 0, "int", -5, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+					dynStats("tou", -5, "int", -5);
 				}
 			}
 		}
@@ -1562,7 +1562,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(player.hasStatusAffect("MarbleWithdrawl") >= 0) {
 			if(player.statusAffectv2("Marble") <= 25) {
 				player.removeStatusAffect("MarbleWithdrawl");
-				dynStats("str", 0,"tou", 5, "spe", 0, "int", 5, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+				dynStats("tou", 5, "int", 5);
 				outputText("\nYou no longer feel the symptoms of withdrawal.\n", false);
 				needNext = true;
 			}
@@ -1571,7 +1571,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				outputText("\nYou no longer feel the symptoms of withdrawal.\n", false);
 				needNext = true;
 				player.removeStatusAffect("MarbleWithdrawl");
-				dynStats("str", 0,"tou", 5, "spe", 0, "int", 5, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+				dynStats("tou", 5, "int", 5);
 			}
 		}
 		//Bottled Milk Countdown
@@ -1729,7 +1729,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 						outputText("\n<b>Your craving for the 'fluids' of others grows strong, and you feel yourself getting weaker and slower with every passing hour.</b>\n", false);
 						needNext = true;
 					}
-					dynStats("str", -.1,"tou", 0, "spe", -.1, "int", 0, "lib", 0, "sen", 0, "lus", 2, "cor", 0);
+					dynStats("str", -.1,"spe", -.1, "lus", 2);
 					//Keep track of how much has been taken from speed/strength
 					player.addStatusValue("Slime Craving",2,.1);
 					//Bad end!
@@ -1745,13 +1745,13 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			outputText("\n<b>As you wake up, you feel a strange tingling starting in your nipples that extends down into your breasts.  After a minute, the tingling dissipates in a soothing wave.  As you cup your tits, you realize they've gotten larger!</b>");
 			growTits(1,player.bRows(),false,2);
 			needNext = true;
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10, "cor", 0);
+			dynStats("lus", 10);
 		}
 		//Slime feeding stuff
 		if(player.hasStatusAffect("Slime Craving Feed") >= 0) {
 			outputText("\n<b>You feel revitalized from your recent intake, but soon you'll need more...</b>\n", false);
 			//Boost speed and restore hp/toughness
-			dynStats("str", player.statusAffectv2("Slime Craving") * .5,"tou", 0, "spe", player.statusAffectv2("Slime Craving"), "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+			dynStats("str", player.statusAffectv2("Slime Craving") * .5,"spe", player.statusAffectv2("Slime Craving"));
 			//Remove feed succuss status so it can be reset
 			player.removeStatusAffect("Slime Craving Feed");
 			//Reset stored hp/toughness values
@@ -2155,8 +2155,8 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			//convert eggs to fertilized based on player cum output, reduce lust by 100 and then add 20 lust
 			if(player.hasCock()) player.fertilizeEggs();
 			//reduce lust by 100 and add 20, convert eggs to fertilized depending on cum output
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 20, "cor", 0);
+			dynStats("lus=", 0);
+			dynStats("lus", 20);
 			doNext(1);
 			//Hey Fenoxo - maybe the unsexed characters get a few \"cock up the ovipositor\" scenes for fertilization with some characters (probably only willing ones)?
 			//Hey whoever, maybe you write them? -Z
@@ -2178,8 +2178,8 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			outputText("  Turning over and trying to find a dry spot, you attempt to return to sleep... the wet pressure against your crotch doesn't make it easy, nor do the rumbles in your abdomen, and you're already partway erect by the time you drift off into another erotic dream.  Another traveler passes under you, and you prepare to snare her with your web; your ovipositor peeks out eagerly and a bead of slime drips from it, running just ahead of the first fertilized egg you'll push into your poor victim...");
 			if(player.hasCock()) player.fertilizeEggs();
 			//reduce lust by 100 and add 20, convert eggs to fertilized depending on cum output
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 20, "cor", 0);
+			dynStats("lus=", 0);
+			dynStats("lus", 20);
 			doNext(1);
 			//Hey Fenoxo - maybe the unsexed characters get a few \"cock up the ovipositor\" scenes for fertilization with some characters (probably only willing ones)?
 			//Hey whoever, maybe you write them? -Z
@@ -2372,7 +2372,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			outputText("\nYou wake up feeling strangely at ease, having slept better than you have in a long while.  After a minute, you realize that you don't feel a need to drink Marble's milk anymore!  You are free of your addiction.  You hurry off to the farm to give her the news.\n\n", false);
 			outputText("You find Marble in her room.  When you come in she looks up at you and starts.  \"<i>What happened?</i>\" she asks, \"<i>Something about you is completely different from before...</i>\"  You explain to her that you've gotten over your addiction and no longer crave her milk.\n", false);
 			//(reduce corr by 5)
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", -5);
+			dynStats("cor", -5);
 			//(From this point forward, the addiction scores and affection scores are no longer modified.  Additionally, the player can no longer be given the status effect of 'Marble's Milk' or go into withdrawal)
 			player.createPerk("Marble Resistant",0,0,0,0,"You know how to avoid the addictive qualities of Marble's milk.");
 			//After player ends Addiction:
@@ -2460,7 +2460,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			//Clear withdrawl
 			if(player.hasStatusAffect("MarbleWithdrawl") >= 0) {
 				player.removeStatusAffect("MarbleWithdrawl");
-				dynStats("str", 0,"tou", 5, "spe", 0, "int", 5, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+				dynStats("tou", 5, "int", 5);
 			}
 			//Clear marble's milk status
 			if(player.hasStatusAffect("Marbles Milk") >= 0) {
@@ -2468,7 +2468,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 			//Boost stats if not under its affects
 			else {
-				dynStats("str", 5,"tou", 10, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+				dynStats("str", 5,"tou", 10);
 			}
 			//Post-addiction flavors
 			//Marble liked you addicted

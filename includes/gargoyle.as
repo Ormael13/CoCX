@@ -333,7 +333,7 @@ public function gargoyleAnal():void {
 		
 		outputText("\n\nUtterly sated, you gently push " + flags[kFLAGS.GAR_NAME] + " off your cock.  She collapses on the floor, insensate, and soon is surrounded by a pool of your spooge leaking from her ass.  With a grin, you pat her on the head and collect your [armor] before heading back to camp.");
 	}
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	doNext(13);
 }
 
@@ -364,7 +364,7 @@ public function gargoyleCoochiiGetsPlowed():void {
 	outputText("\n\n\"<i>Thank you, Master,</i>\" she says, running a hand through your " + hairDescript() + ".  \"<i>That was wonderful.</i>\"");
 	
 	outputText("\n\nYou give her a pat on the head and head on back to camp.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	doNext(13);
 }
 
@@ -390,7 +390,7 @@ public function titFuckTheGargoyle():void {
 	outputText("\n\n\"<i>Was that... pleasing, Master?</i>\" she asks innocently.");
 	
 	outputText("\n\nYou give her a little pat on the head and tell her it was more than pleasing.  Gratified, the little gargoyle sets to slurping up your cum as your clean yourself up and head back to camp.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	doNext(13);
 }
 
@@ -429,7 +429,7 @@ public function strapOnGargoyle():void {
 		
 		outputText("\n\nStill panting from the ordeal, you slowly drag yourself off of " + flags[kFLAGS.GAR_NAME] + "'s cock and roll onto your back, exhausted. By the time you've recovered enough to stumble to your feet, " + flags[kFLAGS.GAR_NAME] + " is fast asleep beside you, snoring cutely, her metal cock still standing straight up in the air.  You give her a gentle pat on the thigh and get dressed, leaving the gargoyle snoozing peacefully as you head back to camp.");
 	}
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	doNext(13);
 }
 
@@ -454,7 +454,7 @@ public function tailFuckGargoyleScene():void {
 	outputText(".");
 	
 	outputText("\n\nYou rub her head and tell her that oh, yes you were. You leave her with a gratified smile on her thin lips.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	doNext(13);
 }
 
@@ -470,7 +470,7 @@ public function useGargoyleMaleHerm():void {
 	outputText("\n\n\"<i>M-Master?</i>\" " + flags[kFLAGS.GAR_NAME] + " gasps, giving a full-body shudder as you slowly pull out from inside her.  Your cum drools out of her snatch and pools beneath her.  Playfully, you jam your fingers up between her legs, damming your sperm inside her.  To your glee, this simple act sends " + flags[kFLAGS.GAR_NAME] + " right over the edge: convulsing, she collapses on the floor with a heavy THUNK!");
 	
 	outputText("\n\nYou give the gargoyle a little pat on the head for a job well done before heading on out.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	doNext(13);
 }
 
@@ -486,7 +486,7 @@ public function useHerGargoyleFemale():void {
 	outputText("\n\nYou're pleased to note that the gargoyle's tail is now dark and wet thanks to the liberal streams of lubricant pouring from your [vagina].  Now you're practically sliding on " + flags[kFLAGS.GAR_NAME] + "'s tail, riding toward inevitable orgasm.  You cum at the apex of a bounce, slamming yourself down hard upon " + flags[kFLAGS.GAR_NAME] + "'s tail until her tip breaches the entrance to your womb.  You scream in ecstasy, squirting your girl-cum freely onto the gargoyle's tail, back, and legs until you're completely and utterly spent.");
 	
 	outputText("\n\nContented, you spend a few minutes recovering before slowly dressing back up into your [armor]. You head on out, making sure to give " + flags[kFLAGS.GAR_NAME] + " a little pat on the head on your way out.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	doNext(13);
 }
 
@@ -522,7 +522,7 @@ public function bodyRitual():void {
 	outputText("\n\n\"<i>With pain comes purity,</i>\" " + flags[kFLAGS.GAR_NAME] + " says, so quietly you can barely hear her.  \"<i>Prepare yourself, Master,</i>\" she adds, and your heart nearly skips a beat when you hear the crack of a whip behind you.  Oh, shit, this is going to hu-CRACK!  You see stars as white-hot pain arcs through your body, making you scream into the wall.  You can feel the burning streak left across your back by the bullwhip, throbbing mercilessly in the moments before CRACK!  She hits you again, throwing you forward against your bonds with the force of the blow.");
 	
 	outputText("\n\nOver your ragged, pained breathing, you can just hear " + flags[kFLAGS.GAR_NAME] + " chanting: \"<i>With pain comes purity... CRACK!  With agony comes enlightenment... CRACK!  Through torment comes holiness... CRACK!</i>\"  The last crack of the whip leaves you groaning, breathless, sagging in your bonds. Somehow, though, you do feel... cleaner?  Like a weight was just lifted from your heart.  And you know you're going to be thicker-skinned after that!  Quietly, reservedly, " + flags[kFLAGS.GAR_NAME] + " releases you from your bonds, and you stagger into her waiting arms.  She helps you over to the altar and lays you down, letting you rest after your ordeal.  She stands over you, watching you pant and gasp.  You suppose you could get some vengeance for her brutality – or you could be kind.  What do you do?");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -.5, "sen", -2, "lus", 0, "cor", 0);
+	dynStats("lib", -.5, "sen", -2);
 	takeDamage(Math.round(maxHP()/2));
 	//(Display options: [Nothing] [Revenge] and [Cuddle])
 	menu();
@@ -568,7 +568,7 @@ public function mindGargoyleRitual():void {
 	outputText("  " + flags[kFLAGS.GAR_NAME] + " brings the invocation to a quiet close, and rests the bowl back upon the altar. \"<i>Drink of this, Master,</i>\" she says, offering you the bowl, \"<i>and be healed of mind.</i>\"");
 	
 	outputText("\n\nYou do so, taking a long drought of the holy water.  By the time you've set the bowl down, you feel light-headed, as if a fog has receded from your mind.  You gasp happily, able to think more clearly than you have in days.  You thank " + flags[kFLAGS.GAR_NAME] + ", give her a pat on the head, and head back to camp with a skip in your step.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -10, "cor", -.5);
+	dynStats("lus", -10, "cor", -.5);
 	//takeDamage(Math.round(maxHP()/2));
 	fatigue(50);
 	doNext(13);
@@ -697,7 +697,7 @@ public function kinkyBodyRitual():void {
 	outputText(".  Already, you feel more thick-skinned and less lusty, and so give an appreciative grin to your cute little gargoyle.  In response, she nuzzles against you and wraps her bat-like wings protectively around the two of you.");
 	
 	outputText("\n\nYou spend a few minutes cuddling with " + flags[kFLAGS.GAR_NAME] + ", but sadly, you know you can't leave your camp unattended for too long.  Giving her a pat on the head and a kiss on the brow, you gather up your clothes and head on back to camp.");
-	dynStats("str", 0,"tou", .5, "spe", 0, "int", 0, "lib", -.5, "sen", -2, "lus", 0, "cor", 0);
+	dynStats("tou", .5, "lib", -.5, "sen", -2);
 	gargoyleConfidence(2);
 	takeDamage(Math.round(maxHP()/2));
 	doNext(13);
@@ -721,7 +721,7 @@ public function mindRitualPervy():void {
 	
 	outputText("\n\nScreaming, " + flags[kFLAGS.GAR_NAME] + " arches her back and thrusts out her bat-wings to their full expanse, clamping down on your tongue as she cums.  You slow your pace, giving her a last few licks as she pants, gasps, and moans, slowly coming down from an orgasmic high.  She collapses backwards, clutching her chest and staring into the rafters.  Chuckling, you stand and give her a pleased pat on the inner thigh, letting her know she did a good job for you.  You leave her smiling atop the altar, slowly getting her breath under control.");
 	//(Return PC to camp, advance time 1 hour)
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", .5, "lib", 0, "sen", 0, "lus", -10, "cor", -.5);
+	dynStats("int", .5, "lus", -10, "cor", -.5);
 	fatigue(50);
 	doNext(13);
 }

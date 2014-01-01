@@ -22,7 +22,7 @@
 				outputText("\nYou notice that some kind of unnatural heat is flowing into your body from the wound", false);
 				if (player.inte > 50) outputText(", was there some kind of aphrodisiac on the knife?", false);
 				else outputText(".", false);
-				game.dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (player.lib / 20 + 5), "cor", 0);
+				game.dynStats("lus", (player.lib / 20 + 5));
 			}
 			super.postAttack(damage);
 		}
@@ -36,7 +36,7 @@
 		{
 			if (pcCameWorms){
 				outputText("\n\nThe fetish cultist ignores the perverse display and continues on as if nothing had happened...", false);
-				game.dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+				game.dynStats("lus=", 0);
 				game.doNext(5106);
 			} else {
 				game.zealotLossRape();

@@ -324,7 +324,7 @@ public function acceptYoga():void {
 		outputText("She then helps you into an outfit identical to her own and you both return to the gym proper.\n\n", false);
 	
 		outputText("She instructs you to lay on the mat, and you do. She proceeds to talk you through several poses, and hovers over you to correct your positioning here or there with a soft touch. Several times she bends over you, and her enormous bosom gets right in your face. At one point she stands over your head and you accidentally get a face full of her musky crotch. After about a half hour of this, the arousal and fatigue is too much and you explain you have to quit for now.\n\n", false);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (10+player.lib/10+player.sens/20), "cor", 0);
+		dynStats("lus", (10+player.lib/10+player.sens/20));
 	
 		outputText("\"<i>Oh, that's too bad. But you've done pretty good for a beginner,</i>\" she helps you up off the mat and pats you gently on the back. \"<i>Want to hit the showers then?</i>\" Despite having done little more than stretching, you find you are sweating quite a bit... but something makes you wonder if her idea of hitting the shower is the same as yours.", false);
 		//[Shower] or [Leave]
@@ -371,7 +371,7 @@ public function acceptYoga():void {
 	player.modTone(52,1);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00176]++;
 	fatigue(20);
-	dynStats("str", 0,"tou", 0, "spe", 1, "int", 0, "lib", 0, "sen", 0, "lus", (5+player.lib/20+player.sens/20), "cor", 0);
+	dynStats("spe", 1, "lus", (5+player.lib/20+player.sens/20));
 }
 
 public function cottonChat():void {
@@ -429,7 +429,7 @@ public function cottonChat():void {
 		//(If Jojo hasn't been corrupted) 
 		if(monk == 1) {
 			outputText("While you're doing your stretches, you find yourself chatting about the folks of Tel'Adre and beyond. \"<i>Jojo?</i>\" Cotton says, \"<i>You know Jojo too? I met him a while back. He taught me the finer points of meditation, which I incorporate into my yoga. Here, let's try.</i>\" You spend the rest of the workout in meditative poses, and by the time you're done, you feel… lighter somehow.\n\n", false);
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", -1);
+			dynStats("cor", -1);
 		}
 		//(If Jojo has been corrupted)
 		else if(monk > 1) outputText("While you're doing your stretches, you find yourself chatting about the folks of Tel'Adre. \"<i>Jojo?</i>\" Cotton says, \"<i>You know Jojo too? I met him a while back. He taught me the finer points of meditation. I haven't seen him much lately, though. I wonder where he's gone to.</i>\" You smile inwardly, knowing exactly where he's gone to.\n\n", false);
@@ -483,7 +483,7 @@ public function cottonFirstTimeFuckHer():void {
 
 	outputText("Your 'post-workout stretch' and shower done, the two of you dry off, redress and leave the gym. Cotton takes you by the arm and says, \"<i>That was great, pet. Come by the gym anytime. I'll be waiting.</i>\"  Then, she heads back home.  With a little grin on your face, you do the same.\n\n", false);
 	pregCottonChance();
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	doNext(13);
 }
 //(Get fucked, as Male)
@@ -512,7 +512,7 @@ public function cottonFucksYou():void {
 		outputText("The two of you slip down onto the floor, right into your puddle of cum, letting the water rinse you off for the time being. After a minute, Cotton pulls her now flaccid (but still impressive) cock from your rear, which gapes open for several minutes afterward, and proceeds to clean the both of you up.\n\n", false);
 	
 		outputText("Your 'post-workout stretch' and shower done, the two of you dry off, redress and leave the gym. Cotton takes you by the arm and says, \"<i>That was great, little pet. Come by the gym anytime. I'll be waiting.</i>\"  Then, she heads back home.  With a little grin on your face, you do the same.\n\n", false);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 2, "lus", -100, "cor", 0);
+		dynStats("sen", 2, "lus=", 0);
 	}
 	//(Get fucked, as Female)
 	else if(player.gender == 2) {
@@ -533,7 +533,7 @@ public function cottonFucksYou():void {
 		outputText("The two of you slip down onto the floor, letting the water rinse you off for the time being. After a minute, Cotton pulls her now flaccid (but still impressive) cock from your folds, which gapes open for several minutes afterward, and proceeds to clean the both of you up.\n\n", false);
 
 		outputText("Your 'post-workout stretch' and shower done, the two of you dry off, redress and leave the gym. Cotton takes you by the arm and says, \"<i>That was great, little pet. Come by the gym anytime. I'll be waiting.</i>\"  Then, she heads back home.  With a little grin on your face, you do the same.", false);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+		dynStats("sen", -1, "lus=", 0);
 		cottonPregPCChance();
 	}
 	//(Get fucked, as Herm)
@@ -555,7 +555,7 @@ public function cottonFucksYou():void {
 		outputText("The two of you slip down onto the floor, letting the water rinse you off for the time being. After a minute, Cotton pulls her now flaccid (but still impressive) cock from your folds, which gapes open for several minutes afterward, and proceeds to clean the both of you up.\n\n", false);
 
 		outputText("Your 'post-workout stretch' and shower done, the two of you dry off, redress and leave the gym. Cotton takes you by the arm and says, \"<i>That was great, little pet. Come by the gym anytime. I'll be waiting.</i>\"  Then, she heads back home.  With a little grin on your face, you do the same.\n\n", false);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+		dynStats("sen", -1, "lus=", 0);
 		cottonPregPCChance();
 	}
 	doNext(13);
@@ -579,7 +579,7 @@ public function serviceFirstTimeCotton():void {
 	outputText("You gulp it down, mildly surprised at how sweet it tastes. Taking two fingers you collect some of the cum deposited on your face and lick it off, then you carefully lick Cotton's rapidly shrinking member, until not a drop of cum remains.\n\n", false);
 
 	outputText("Cotton helps you up and gives you a warm kiss, tasting her own seed in your mouth. Wordlessly, you finish your shower, redress and head out of the gym. Cotton takes you by the arm and says, \"<i>That was great, little pet. Come by the gym anytime. I'll be waiting.</i>\"  Then, she heads back home.  With a little grin on your face, you do the same.", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 1, "lus", (10+player.lib/20+player.sens/20), "cor", 0);
+	dynStats("sen", 1, "lus", (10+player.lib/20+player.sens/20));
 	doNext(13);
 }
 //(If Refuse)
@@ -840,7 +840,7 @@ public function fuckCottonInShowerRepeat():void {
 		outputText("You both bask in the afterglow for a few moments before you stand up to an upright position and help Cotton up. You return to the task of cleaning yourselves, sensually washing each other's private areas. Yoga, sex and cleanup done, you get dressed and leave the gym, giving Cotton's hand a final squeeze before departing.", false);
 	}
 	pregCottonChance();
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	doNext(13);
 }
 
@@ -861,7 +861,7 @@ public function cottonFucksYouInShowerRepeat():void {
 		outputText("  You take turns kissing each other's necks and nibbling each other's ears while she thrusts in and out. And after several minutes neither of you can take much more. She gives one last thrust, pulling you down further onto her cock as it explodes within you. Your whole body shudders with orgasmic energy and you bury your head into her neck, stifling a scream.\n\n", false);
 	
 		outputText("After a moment, Cotton pulls you up, letting her shrinking member flop to the floor, and sets you down. Only now you notice your flaccid cock also came at some point, covering both your bodies in seed. You share a deep kiss again and wash each other up before redressing and leaving the gym.\n\n", false);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 1, "lus", -100, "cor", 0);
+		dynStats("sen", 1, "lus=", 0);
 	}
 	//(Shower Sex, Get Fucked as Female)
 	else {
@@ -874,7 +874,7 @@ public function cottonFucksYouInShowerRepeat():void {
 		outputText("At this angle she can't quite get her entire girth into you, but that doesn't matter, as it feels absolutely exquisite. You take turns kissing each other's necks and nibbling each other's ears while she thrusts in and out. And after several minutes neither of you can take much more. She gives one last thrust, pulling you down further onto her cock as it explodes within you. Your whole body shudders with orgasmic energy and you bury your head into her neck, stifling a scream.\n\n", false);
 
 		outputText("After a moment, Cotton pulls you up, letting her shrinking member flop to the floor, and sets you down. You share a deep kiss again and wash each other up before redressing and leaving the gym.", false);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+		dynStats("sen", -1, "lus=", 0);
 	}*/
 	//(Repeat get fucked, for centaurs)
 	if(player.isTaur()) {
@@ -1006,7 +1006,7 @@ public function cottonFucksYouInShowerRepeat():void {
 		outputText("Exhausted, Cotton sets you down on the shower floor under the spray of water, though cum leaks from your abused hole and your " + player.legs() + " quivering so much you nearly collapse. Your partner steadies you, however, and you regain your footing quickly. You return to the task of cleaning yourselves, sensually washing each other's most intimate areas. Yoga, sex and cleanup done, you get dressed and leave the gym, giving Cotton's hand a final squeeze before departing.", false);
 	}
 	if(player.hasVagina()) cottonPregPCChance();
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	doNext(13);
 }
 
@@ -1103,7 +1103,7 @@ public function cottonTantricSex():void {
 	outputText("And then in a flash, it's gone. The lightning subsided, you both collapse sideways onto the floor, panting. The tantric link is apparently gone, and you suddenly feel very alone. Cotton, seemingly sensing this, pulls out and curls up next to you, cuddling you until the sudden feeling of loss dissipates.\n\n", false);
 
 	outputText("After a few minutes, you feel your strength ebbing back into you and you get up. Cotton does the same, and you both spend the time to clean the mat of the results of your escapades, before retreating to the showers to clean each other up. Once that's over, you both leave the gym hand-in-hand, with Cotton giving your hand a final squeeze before you depart to your camp.", false);
-	dynStats("str", 0,"tou", .25, "spe", .25, "int", 0, "lib", -.25, "sen", -.25, "lus", -100, "cor", 0);
+	dynStats("tou", .25, "spe", .25, "lib", -.25, "sen", -.25, "lus=", 0);
 	if(player.hasVagina()) cottonPregPCChance();
 	doNext(13);
 }
@@ -1148,7 +1148,7 @@ public function nomSomeTitMilkCereal():void {
 	outputText("\"<i>Thanks, pet, that was delicious. I'll be sure to stop by another time so we can share a meal. Feel free to come by the gym too. We can get a little more… personal.</i>\" She kisses you on the cheek, and then departs back towards Tel'Adre.", false);
 	
 	//(Event should increase lust (by 10?), or maybe reduce it if the player has the Feeder perk. Should also increase the character's lactation rating, or at least prevent it from decaying.) 
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -0.5, "sen", -.5, "lus", -5, "cor", 0);
+	dynStats("lib", -0.5, "sen", -.5, "lus", -5);
 	player.boostLactation(0.05);
 	//You've now been milked, reset the timer for that
 	if(player.hasStatusAffect("Feeder") >= 0) {
@@ -1868,7 +1868,7 @@ public function feedYourCottonKids():void {
 	outputText("\n\n\"<i>I'll be fine, don't worry about a thing. You get home, get some rest, and keep those milk jugs full, eh?</i>\" she laughs.");
 
 	outputText("\n\nYou kiss your equine lover, ruffle the sleeping child's hair, and quietly head back to camp, leaving Cotton to take care of things.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -10, "cor", 0);
+	dynStats("lus", -10);
 	//You've now been milked, reset the timer for that
 	if(player.hasStatusAffect("Feeder") >= 0) {
 		player.addStatusValue("Feeder",1,1);

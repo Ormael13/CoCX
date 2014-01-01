@@ -7,7 +7,7 @@
 public function meetMinotaurSons():void {
 	outputText("", true);
 	spriteSelect(94);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10, "cor", 0);
+	dynStats("lus", 10);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00325]++;
 	//First Meeting
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00325] == 1) {
@@ -217,7 +217,7 @@ public function fightOTaurs():void {
 //[Submit]
 public function submitToMinotaurMob():void {
 	player.lust = 100;
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 1, "cor", 0);
+	dynStats("lus", 1);
 	minotaurDeFeet();
 	spriteSelect(94);
 }
@@ -346,7 +346,7 @@ public function nonAddictMinotaurGangBang():void {
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] = "MinoCum";
 	//Preggers chance!
 	player.knockUp(2,432,75);
-	dynStats("str", 0,"tou", 0, "spe", -.5, "int", -.5, "lib", .5, "sen", -.5, "lus", -100, "cor", 1);
+	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", -.5, "lus=", 0, "cor", 1);
 	slimeFeed();
 	minoCumAddiction(20);
 	if(inCombat()) cleanupAfterCombat();
@@ -442,7 +442,7 @@ public function loseToMinoMobVeryPregnant():void {
 		else outputText("we wouldn't want to ruin our favorite toy would we?", false);
 		outputText("  Look at her, she's smiling with a dick in her mouth while she passes out.  Mom's the best.</i>\"", false);
 	}
-	dynStats("str", 0,"tou", 0, "spe", -.5, "int", -.5, "lib", .5, "sen", .5, "lus", -100, "cor", 1);
+	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", .5, "lus=", 0, "cor", 1);
 	slimeFeed();
 	minoCumAddiction(15);
 	if(inCombat()) cleanupAfterCombat();
@@ -545,7 +545,7 @@ public function analSpearSemiPregMinotaurGangbang():void {
 	outputText(".  Hands gently lower you to the ground", false);
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] >= 5) outputText(", but you're positioned with your ass in the air.  A voice calls out, \"<i>Okay, Mom's pretty out of it.  One at a time and don't damage her, okay?</i>\"\n\nGiggling dreamily, you're fucked repeatedly, spunk squirting from your anus with every thrust.  You pass out like that, feeling quite satisfied.", false);
 	else outputText(".  They step back and admire their handiwork while you float through your narcotic-infused haze.", false);
-	dynStats("str", 0,"tou", 0, "spe", -.5, "int", -.5, "lib", .5, "sen", .5, "lus", -100, "cor", 1);
+	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", .5, "lus=", 0, "cor", 1);
 	slimeFeed();
 	minoCumAddiction(15);
 	if(inCombat()) cleanupAfterCombat();
@@ -563,8 +563,8 @@ public function victoryMinotaurGang():void {
 	else outputText("The last minotaur sinks to his knees, pulling aside his loincloth with thread-rending strength to expose the pulsating, needy shaft to the air.  He begins to masturbate himself just like his brother, spilling his pre-seed over the ground into the messy, growing puddle.  The smell hangs thick in the air, but you've won and kept enough of your wits about you to walk away if you want.\n\n", false);
 	//+lust regardless 
 	if(player.lust < 33) player.lust = 33;
-	else dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 20, "cor", 0);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 1, "cor", 0);
+	else dynStats("lus", 20);
+	dynStats("lus", 1);
 	outputText("Your body is burning up, buzzing with growing lust from the obscenity going on a few feet away from you.  What do you do?", false);
 	//	[win options]
 	var getSuck:Number = 0;
@@ -673,7 +673,7 @@ public function victoryMinotaurGangTitFuck():void {
 	}
 	//Force cum bottle loot!
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] = "MinoCum";
-	dynStats("str", 0,"tou", 0, "spe", -.5, "int", -.5, "lib", .5, "sen", .5, "lus", -100, "cor", .5);
+	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", .5, "lus=", 0, "cor", .5);
 	slimeFeed();
 	minoCumAddiction(15);
 	if(inCombat()) cleanupAfterCombat();
@@ -771,7 +771,7 @@ public function victoryAllThePenetrationsMinotaurGangBang():void {
 
 	//Preggers chance!
 	player.knockUp(2,432,75);
-	dynStats("str", 0,"tou", 0, "spe", -.5, "int", -.5, "lib", .5, "sen", -.5, "lus", -100, "cor", 1);
+	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", -.5, "lus=", 0, "cor", 1);
 	slimeFeed();
 	minoCumAddiction(20);
 	if(inCombat()) cleanupAfterCombat();
@@ -889,7 +889,7 @@ public function forceMinitaurToGiveOral(choice:Number = 0):void {
 	}
 	
 	outputText("Finished with him, you push him back to let him fall on the ground, his face wet with your cum.  The poor minitaur is harder than ever, and though his cock looks tempting, you're already satisfied.  You get dressed and blow a kiss to the poor boy.  \"<i>Be good for Momma, okay?</i>\"  He nods dumbly as you saunter away.", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	if(inCombat()) cleanupAfterCombat();
 	else {
 		doNext(13);
@@ -955,7 +955,7 @@ public function victoryBJNippleFuckMinotaurGang():void {
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] < 5) outputText("relax and fan themselves while giving you lusty looks", false);
 	else outputText("stare gloomily at the lucky three before turning to regard your form again with unrepentant lust", false);
 	outputText(".  You re-dress sensually, giving them as much of a show as you dare, not even bothering to wipe the cum-coating from your " + player.skinFurScales() + " before you finish slipping into your " + player.armorName + " and depart.", false);
-	dynStats("str", 0,"tou", 0, "spe", -.5, "int", -.5, "lib", 0, "sen", -1, "lus", -100, "cor", 1);
+	dynStats("spe", -.5, "int", -.5, "sen", -1, "lus=", 0, "cor", 1);
 	minoCumAddiction(10);
 	slimeFeed();
 	if(inCombat()) cleanupAfterCombat();
@@ -1008,7 +1008,7 @@ public function minotaurGangBadEnd():void {
 	outputText(", releasing so much that a squirt of it escapes to run down your " + player.leg() + ".  That was just the first spurt!  The second burst of semen fills every nook and cranny of your " + vaginaDescript() + ", your entrance turning to a frothy mess of white goo and slippery lady-spunk.  The pent-up pecker keeps flexing in orgasm, firing jet after jet of narcotic cream into your semen-spurting box, the pillows under you quickly soaking up the excess, addictive jizz.\n\n", false);
 	
 	outputText("Your son sighs and slumps down, his cock slowly slipping from your abused vulva, escaping with a wet 'pop'.  A river of white rolls out of your body to further stain the room's furnishings.  You shudder from the sensation as a it triggers a series of tiny, miniature climaxes.  While you're lost to the pleasure, the minitaur departs with noticeably less bulge in his loincloth.  At the same time, the other girls crowd around you, scooping up what they can save of your boy's liquid love and shoveling it into their greedy, whorish maws.  The cow-girl industriously sets to work, using her massive tongue on your " + vaginaDescript() + " to scoop out every drop she can get.  You cum on her face, splattering her with spooge and your feminine moisture.  She smiles and kisses your still-sensitive clit, throwing you into a black-out inducing orgasm.", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", -10, "lib", 10, "sen", 10, "lus", -100, "cor", 0);
+	dynStats("int", -10, "lib", 10, "sen", 10, "lus=", 0);
 	doNext(minotaurGangBadEnd2);
 }
 	
@@ -1040,7 +1040,7 @@ public function minotaurGangBadEnd2():void {
 	outputText("You're cut back off by an even bigger member just as the cunt-ravaging horse-cock stuffing your box explodes.  There's an immediate and familiar rush of euphoria, arousal, and fuzzy-headedness sweeping through you, making you giggle into the lip-stretching dick now gaping your mouth.  Your womb floods, your " + vaginaDescript() + " squirts, and your " + player.legs() + " flop about lamely, as your body tries to cope with the onslaught of narcotic, orgasmic pleasure.  Pregnancy seems certain from that single stud's deposit.\n\n", false);
 	
 	outputText("He's pulled back and replaced, and you wonder which of your boys is getting sloppy seconds.  Who cares, as long as you get to feel him cum in you until you go dizzy!", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 100, "sen", 100, "lus", -100, "cor", 0);
+	dynStats("lib", 100, "sen", 100, "lus=", 0);
 	//[GAME OVER]
 	eventParser(5035);
 }
@@ -1088,7 +1088,7 @@ public function precumTease():void {
 		outputText("The smallest of the beastmen, the minitaur, moans and begs, \"<i>Please Mom, can we please fuck you?  I... I need it so bad.</i>\"  He raises the edge of his loincloth to show exactly what he's talking about.  His member is limp but leaking.  What really catches your eyes sits behind that drizzling shaft - a pair of balls looking swollen and pent up beyond belief.  A sticky web of his leavings hangs between his genitals and his loincloth, showing you just how much he's been leaking at the thought of fucking you.  Fanning the sopping garment, he inadvertently blows a wave of his pheromones your way.\n", false);
 		damage = 9 + player.lib/20;
 	}
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", damage, "cor", 0);
+	dynStats("lus", damage);
 	damage = player.lust - oldLust;
 	//UNIVERSAL pre-cum RESULT:
 	//(Low damage taken) 
@@ -1115,7 +1115,7 @@ public function precumTease():void {
 		outputText(" in need.", false);
 		if(minotaurNeed()) {
 			outputText("  You need a fix so bad!", false);
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5, "cor", 0);
+			dynStats("lus", 5);
 		}
 		else {
 			outputText("  You can understand firsthand just how potent and addictive that fluid is...", false);
@@ -1134,14 +1134,14 @@ public function minotaurGangGropeAttack():void {
 	outputText("Strong hands come from behind and slide under your equipment to squeeze your " + chestDesc() + ".  The brutish fingers immediately locate and pinch at your " + nippleDescript(0) + "s, the sensitive flesh on your chest lighting up with pain and pleasure.  You arch your back in surprise, utterly stunned by the violation of your body.  After a moment you regain your senses and twist away, but the damage is already done.  You're breathing a bit quicker now", false);
 	if(player.lust >= 80) outputText(", and your pussy is absolutely soaking wet", false);
 	outputText(".", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (5 + player.sens/10), "cor", 0);
+	dynStats("lus", (5 + player.sens/10));
 	combatRoundOver();
 }
 //Gang Grope
 public function minotaurGangGangGropeAttack():void {
 	spriteSelect(94);
 	outputText("Before you can react, hands reach out from multiple angles and latch onto your body.  One pair squeezes at your " + buttDescript() + ", the strong grip massaging your cheeks with loving touches.  Another set of hands are sliding along your tummy, reaching down for, but not quite touching, the juicy delta below.  Palms encircle your " + chestDesc() + " and caress them, gently squeezing in spite of the brutish hands holding you.  You wriggle and squirm in the collective grip of the many minotaurs for a few moments, growing more and more turned on by the treatment.  At last, you shake out of their hold and stand free, panting hard from exertion and desire.", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (15 + player.sens/10), "cor", 0);
+	dynStats("lus", (15 + player.sens/10));
 	combatRoundOver();
 }
 //Waste  a turn
@@ -1191,6 +1191,6 @@ public function disciplineEldestMinotaurSon():void {
 	outputText("Everything else is a foggy haze to your son.  You can see he has given himself up to pleasure you and nothing more.  His eyes are glazed over with lust, losing himself with each lick.  When you glance between your thighs, you can see his balls have swelled up to the size of beach balls!  His aching member throbs as pre-cum oozes from his exposed urethra. If you wanted, you could plunge your cunt down and relieve him, but that would defeat the purpose of the punishment.  And despite the cluelessness of his foreplay, his tongue against your shining lips feels fucking good!  With a smile, you caress your son, encouraging him to continue.  A sudden increase in his slurping is all that it takes for you to reach your peak.  Your " + vaginaDescript(0) + " spasms, drenching his mouth in your girl cum.  With increased zeal, he laps up as much of your sweet juices as he can.  Your running girl-cum eventually drips down to his aching member.  A cruel, cruel torture, your son whimpers as he's denied release.\n\n", false);
 
 	outputText("Finished with your son, you push him on his back.  You have had enough of him, for now... If he dares to ambush you again, then you will be more than happy to discipline him again.  After getting dressed, you proceed to walk away.  Your last image of your son is the image of him futilely masturbating, but his cock is too thick and too numb for him to truly get off.  Profoundly amused, you leave the mountains and return to camp.", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	doNext(cleanupAfterCombat);
 }

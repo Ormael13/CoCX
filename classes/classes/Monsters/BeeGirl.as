@@ -25,7 +25,7 @@
 					outputText("You smile in satisfaction as the " + short + " spreads her legs and starts frigging her honey-soaked cunt.  The sweet scent oozing from between her legs is too much to bear, arousing you painfully, and you see an easy way to relieve it..\n\nWhat do you do to her?", true);
 				}
 				player.lust = 98;
-				game.dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 1, "cor", 0);
+				game.dynStats("lus", 1);
 				var temp2:int = 0;
 				var temp3:int = 0;
 				if(player.hasStatusAffect("Feeder") >= 0) temp3 = 2484;

@@ -224,7 +224,7 @@ package classes.Monsters.Scenes
 
 					outputText("As you leave Akbal snarls as the creatures that once feared him use his overtly aroused state to get revenge on the \"god\" of the terrestrial fire.  Even After you've reached the edge of the forest the wails of the jaguar demon can still be heard but just barely over the high pitched laughter of the demon imps and goblin females.", false);
 				}
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 1);  
+				dynStats("lus=", 0, "cor", 1);
 				cleanupAfterCombat();
 					//END NAGA STUFF
 			}
@@ -311,7 +311,7 @@ package classes.Monsters.Scenes
 
 					outputText("As you leave Akbal snarls as the creatures that once feared him use his overtly aroused state to get revenge on the \"god\" of the terrestrial fire.  Even After you've reached the edge of the forest the wails of the jaguar demon can still be heard but just barely over the high pitched laughter of the demon imps and goblin females.", false);
 				}
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 1);  
+				dynStats("lus=", 0, "cor", 1);
 				cleanupAfterCombat();
 				return;
 					//END CENTAUR STUFF
@@ -369,7 +369,7 @@ package classes.Monsters.Scenes
 				outputText("With a sadistic laugh you ride out your orgasm until you're reduced to a shuddering heap on the floor.  After you've recovered, you stand and gather your " + player.armorName + ", leaving Akbal in a groaning mess behind you.  He howls as he claws the ground, his barbed cock still rock hard beneath him.  As you walk away, you notice a group of imps watching you and the jaguar demon with their cocks out and leaking, their jagged teeth spread into feral grins.  You even spy a few goblins mixed in the crowd, and each is twirling a bottle of liquid while playing with their snatches.\n\n", false);
 				outputText("Akbal snarls as you leave, the creatures that once feared him using his aroused state to get revenge on the 'god' of the terrestrial fire.  Even after you've reached the edge of the forest, the jaguar demon's pained howls can still be heard – though, just barely over the high-pitched laughter of the demon imps and the cackling of the goblin females.", false);
 			}
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 1);  
+			dynStats("lus=", 0, "cor", 1);
 			cleanupAfterCombat();
 		}
 
@@ -454,7 +454,7 @@ package classes.Monsters.Scenes
 
 				outputText("Judging by the shudder of longing that runs through his body, it's clear that he's more turned on by your actions than he would have liked. Using your lower body to pin his legs down, you grab his arms as you sink down, moaning more for his benefit as you brush the tip of his slick member against your entrance.", false);
 			}
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 50, "cor", 0);  
+			dynStats("lus", 50);
 			//-Page Turn-
 			doNext(girlsRapeAkbalPart2);
 		}
@@ -503,7 +503,7 @@ package classes.Monsters.Scenes
 				player.knockUp(1, 432, 101);
 
 				player.cuntChange(monster.cockArea(0), true, true, false);
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 1);
+				dynStats("lus=", 0, "cor", 1);
 			}
 			//TOIGHT
 			else if (player.vaginalCapacity() < monster.cockArea(0))
@@ -545,7 +545,7 @@ package classes.Monsters.Scenes
 					outputText("He sits, dazed as your cum covers his groin, his meat still shiny from the torrent you dropped down upon it. Nevertheless, his face is twisted into a purr", false);
 				outputText(" as he sags against the tree trunk, overwhelmed by the pleasure. With a satisfied grin of your own, you pick up your " + player.armorName + " and head out. Perhaps you should look out for the \"<i>God of Terrestrial fire</i>\" again sometime...", false);
 				//{No Penetration or fluids exchanged = No corruption increase? Poss. Sensitivity increase/decrease due to fur and/or saliva}
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+				dynStats("lus=", 0);
 			}
 			//= = = =
 			//Loose
@@ -592,7 +592,7 @@ package classes.Monsters.Scenes
 				outputText(", his face twisted into a snarl of pleasure and satisfaction.\n\n", false);
 
 				outputText("You slowly come down from your orgasmic high, struggling to remove yourself from the demon's lap and heading unsteadily towards your " + player.armorName + " as fresh feline seed pours down your body, wincing at the slight bruising to your womanhood. Rubbing a hand over your stomach, you start to wonder if perhaps it was a touch risky to allow a demon to shoot his seed into your womb. However, despite the mild throbbing, you feel refreshed and oddly strengthened by Akbal's potent seed, glancing over your shoulder to see the once proud god revealing in his own release. Perhaps it wouldn't be a bad idea to seek him out some other time...", false);
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 1);
+				dynStats("lus=", 0, "cor", 1);
 				//Imp pregnancy
 				//Preggers chance!
 				player.knockUp(1, 432, 101);
@@ -863,9 +863,9 @@ package classes.Monsters.Scenes
 
 				outputText("The jaguar demon no longer seems to mind your presence in his territory as he drapes his tired body over yours and the two of you fall into a sex-induced coma.", false);
 				//[+ 4-12 Corruption]
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 4 + rand(8));
+				dynStats("cor", 4 + rand(8));
 				//[+ 1-2 Speed]
-				dynStats("str", 0,"tou", 0, "spe", 1 + rand(2), "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+				dynStats("spe", 1 + rand(2), "lus=", 0);
 				//[Chance of butt growth]
 				if (player.buttRating < 8)
 				{
@@ -940,9 +940,9 @@ package classes.Monsters.Scenes
 
 				outputText("You close your eyes, willingly falling into a sex induced sleep.", false);
 				//[+ 4-12 Corruption]
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 4 + rand(8));
+				dynStats("cor", 4 + rand(8));
 				//[+ 1-2 Speed]
-				dynStats("str", 0,"tou", 0, "spe", 1 + rand(2), "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+				dynStats("spe", 1 + rand(2), "lus=", 0);
 				//[Chance of butt growth]
 				if (player.buttRating < 8)
 				{
@@ -1019,9 +1019,9 @@ package classes.Monsters.Scenes
 			outputText("The jaguar demon no longer seems to mind your presence in his territory as he drapes his body over yours, and the two of you fall into a sex-induced sleep.", false);
 
 			//[+ 4-12 Corruption]
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 4 + rand(8));
+			dynStats("cor", 4 + rand(8));
 			//[+ 1-2 Speed]
-			dynStats("str", 0,"tou", 0, "spe", 1 + rand(2), "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+			dynStats("spe", 1 + rand(2), "lus=", 0);
 			//[Chance of butt growth]
 			if (player.buttRating < 8)
 			{
@@ -1225,7 +1225,7 @@ package classes.Monsters.Scenes
 				outputText("  Tingling in your sleep, your [butt] jiggles slightly as it softens along with the rest of your body, changed by Akbal's saliva to be a softer, more pleasant fuck.");
 				player.modTone(30, 5);
 			}
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 5);
+			dynStats("lus=", 0, "cor", 5);
 			player.slimeFeed();
 			player.createStatusAffect("Post Akbal Submission", 0, 0, 0, 0);
 			doNext(16);
@@ -1399,7 +1399,7 @@ package classes.Monsters.Scenes
 
 			outputText("\n\nYou look back at your new bitch with a grin while he regains his senses.  As you leave the forest you hear a promise from Akbal’s chorus of voices, \"<i>You will regret this... Champion.</i>\"");
 
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 3);
+			dynStats("lus=", 0, "cor", 3);
 			doNext(13);
 		}
 
@@ -1463,7 +1463,7 @@ package classes.Monsters.Scenes
 				outputText("\n\nEvery nerve ending in your body explodes as you convulse atop the Jaguar.  With a hoarse groan, your [vagOrAss] begins to spasm around the embedded pleasure rod as it gushes more fluid than you thought possible.  Soon the Jaguar is soaked from waist to thigh.");
 
 			outputText("\n\nYou look back at your new bitch with a grin while he regains his senses.  As you leave the forest, you hear a promise from Akbal’s chorus of voices, \"<i>You will regret this... Champion.</i>\"");
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 3);
+			dynStats("lus=", 0, "cor", 3);
 			if (player.hasVagina())
 				player.knockUp(1, 432, 101);
 			doNext(13);
@@ -1535,7 +1535,7 @@ package classes.Monsters.Scenes
 				//{corruption > 90}
 				else
 					outputText("\n\nYou stand and Akbal’s legs flop from where you had them pinned to his chest.  You gather your [armor] and dress before aiming a wicked slap at Akbal’s tender cheeks and leaving him tied up for the imps and goblins you spy watching the two of you from the trees.\n\nYou tell him he is all theirs and share a conspiratorial grin as you head back to camp.");
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 3);
+				dynStats("lus=", 0, "cor", 3);
 				doNext(13);
 			}
 			else
@@ -1584,7 +1584,7 @@ package classes.Monsters.Scenes
 				if (player.hasCock())
 					outputText("  [EachCock] swells and explodes, shooting cream all over Akbal’s thighs, chest and face as you unload thick white rope after rope.");
 
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 3);
+				dynStats("lus=", 0, "cor", 3);
 				if (player.hasVagina())
 					player.knockUp(1, 432, 101);
 				doNext(13);
@@ -1685,7 +1685,7 @@ package classes.Monsters.Scenes
 				if (player.hasVagina())
 					player.knockUp(1, 432, 101);
 			}
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 3);
+			dynStats("lus=", 0, "cor", 3);
 			doNext(13);
 		}
 
@@ -1836,7 +1836,7 @@ package classes.Monsters.Scenes
 			}
 			if (player.hasVagina())
 				player.knockUp(1, 432, 101);
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 3);
+			dynStats("lus=", 0, "cor", 3);
 			doNext(13);
 		}
 	}

@@ -43,6 +43,7 @@ package classes.Monsters
 			if(gender == 1 || gender == 3) {
 				init02Male(new Cock(16,2,CockTypesEnum.DRAGON),2,4,3);
 			}
+			init03BreastRows("F");
 			init04Ass(ANAL_LOOSENESS_NORMAL,ANAL_WETNESS_DRY);
 			init05Body(rand(8) + 70,HIP_RATING_AMPLE+2,BUTT_RATING_LARGE);
 			init06Skin("red");

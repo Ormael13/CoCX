@@ -435,7 +435,7 @@ public function wakeUpWithUrtaAfterStaying():void {
 	model.time.days++;
 	model.time.hours = 6;
 	statScreenRefresh();
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	sleepRecovery(false);
 	//PC Wakes with Urta
 	outputText("As the morning sun shines on the blinds, you open your eyes.  Then you remember the events of the last day.  You spent the whole day with Urta, not having sex, just walking together and buying stuff for your newborn ");
@@ -528,7 +528,7 @@ public function drinkSomeUrtaPostBirthTitMilk():void {
 	else outputText("children");
 	outputText(" together... but that's a poor substitute if you don't ever come back.  Please, be careful with yourself, [name],</i>\" she tells you solemnly.  You kiss her goodbye, giving her shaft a teasing grope then step out of the room.");
 	//Maybe lower Libido by -1?//
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -1, "sen", 0, "lus", 10, "cor", 0);
+	dynStats("lib", -1, "lus", 10);
 	doNext(13);
 }
 
@@ -1057,7 +1057,7 @@ public function urtaMassageClimax():void {
 	//High Cor:
 	else outputText("You walk up to her with a smirk and remove her condom, then pour down its contents over her belly, chuckling to yourself.  Now that's a great cream topping for your lovely fox-herm.");
 	outputText("  You walk out of her house, taking care to lock the door on your way out.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 25, "cor", 0);
+	dynStats("lus", 25);
 	doNext(13);
 }
 
@@ -1217,7 +1217,7 @@ public function finishTitWorshipWivUrta():void {
 	outputText("\n\nUrta smiles and promptly gives your belly a playful poke.  \"<i>So you have... well, all right.  Still, if you ever want to drop by my place for a bite to eat... or a drop to drink... please, don't be a stranger,</i>\" she laughs.  \"<i>Though you may need to wait for the baby to be done if it's milk you're wanting,</i>\" she playfully chastises you.");
 	
 	outputText("\n\nYou'll keep that in mind.  Having said that, you kiss her goodbye and find your [armor], then excuse yourself.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 20, "cor", 0);
+	dynStats("lus", 20);
 	fatigue(40);
 	doNext(13);
 }
@@ -1275,12 +1275,12 @@ public function milkPregnantUrta():void {
 	//if PC has a dick and ain't a centaur:
 	if(player.hasCock() && !player.isTaur() && player.cockThatFits(urtaCapacity())) {
 		outputText("\n\nYou pump into her a few more times, finishing off; then you  pull yourself out of her, dropping her hips on the mattress and panting.  \"<i>Are you supposed to be the farmer or the bull?</i>\" Urta chuckles softly, patting her swollen belly.");
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+		dynStats("sen", -1, "lus=", 0);
 	}
 	outputText("\n\n\"<i>I can't say that would have ever been something I'd come up with...</i>\"  Urta notes.  \"<i>But it was actually kind of fun.</i>\"  You smile at her happily.  Maybe next time you should come up with something a bit more hardcore for your roleplay.");
 	
 	outputText("\n\nUrta looks intently at you as you say this.  \"<i>Now, I know that look, and that look means you're up to something... should I be excited, scared or both of whatever you have cooking up in that brain of yours?</i>\"  She asks sarcastically, though her eyes twinkle in a way that suggests she's not really that adverse to it.  Then she yawns loudly.  \"<i>Wow, I feel really tired now... I guess you better head off; I'm going to take a nap while I'm here,</i>\" she murmurs.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 20, "cor", 0);
+	dynStats("lus", 20);
 	menu();
 	addButton(0,"Go",goHomeHorsecock);
 	addButton(1,"Stay",stayForHorseDickings);
@@ -1410,7 +1410,7 @@ public function getBlownByPregnantUrta():void {
 		outputText("\n\nUrta makes a futile effort at wiping her eyes clean, then looks at you, the green glittering amidst the off-white expanse of your efforts.  \"<i>Well... maybe it was better I didn't swallow all that.</i>\"  She admits, then grins, \"<i>still, I hear this is good for stretch marks and fur conditioning.</i>\"");
 	}
 	outputText("\n\nYou're too tired to do much, except close your eyes and let the afterglow set in and slowly take you to dreamland.  The last thing you feel is one slimy fox-herm cuddling up to you, carefully positioning her overstuffed belly against you.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 2, "lus", -100, "cor", 0);
+	dynStats("sen", 2, "lus=", 0);
 	menu();
 	addButton(0,"Next",weirdUrtaCravingsConclusion);	
 }
@@ -1487,7 +1487,7 @@ public function holdOnYouAintGettingYerCumYetYouNaughtyFox():void {
 	outputText(" belly, clearly feeling tired even though she wasn't the one being pleasured this time.");
 
 	outputText("\n\nYou suddenly find yourself growing extremely drowsy after your recent climax, so you roll to give Urta enough room to lay down beside you.  You smile and pat the open spot beside you in hopes that Urta will join you for a quick nap.  Urta wastes no time in settling herself comfortably beside you, closing her eyes and drifting quietly off to sleep.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
+	dynStats("sen", -2, "lus=", 0);
 	menu();
 	addButton(0,"Next",weirdUrtaCravingsConclusion);
 }
@@ -1508,7 +1508,7 @@ public function weirdUrtaCravingsConclusion():void {
 	else if(player.tongueType == TONUGE_DRACONIC) outputText("draconic ");
 	outputText("tongue.  She yips in surprise, then moans as she eagerly sinks into your embrace, kissing you back with equal passion.  She suddenly breaks it, looking apologetic.  \"<i>Sorry, [name], but if we keep that up, I'll be wanting another round, and I have things to do.</i>\"  She pats your face apologetically and shifts herself, somewhat clumsily, out of the bed, gathering her clothes and starting to dress herself.");
 	outputText("\n\nTaking that as your cue, you do likewise, and the two of you go your separate ways after locking the apartment up behind you.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -.5, "sen", 0, "lus", 0, "cor", 0);
+	dynStats("lib", -.5);
 	doNext(14);
 }
 
@@ -1602,7 +1602,7 @@ public function urtaRaepsJoo():void {
 	outputText(" and close your eyes, letting sleep take you over even as the fox behind you drools on your back and continues to pound your ass raw.");
 	
 	outputText("\n\nYou come to your senses and notice the amazing softness of the pillow you're laying on.  It feels so good you can't help but dig your head in and rub your cheek against it.  \"<i>You like that, do you?</i>\"  A familiar voice says, sounding rather amused.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 3, "lus", -100, "cor", 0);
+	dynStats("sen", 3, "lus=", 0);
 	menu();
 	addButton(0,"Next",partTwoOfUrtaBoning);
 }
@@ -1670,7 +1670,7 @@ public function acceptUrtaRimJobbies():void {
 	//Both choices converge here.
 	outputText("\n\nIt takes a little work, but eventually the pair of you manage to get yourselves looking decent, though you've little doubt you still smell fairly strongly of sex.  Urta smiles, cuddles up against you and kisses you, then yawns.  \"<i>Well, I'm not pent up any more, but now I'm tired.  This baby could come any day now, so I need my sleep - I'm going home to take a nap, [name].  Take care of yourself, all right?</i>\" she tells you.");
 	outputText("\n\nYou kiss her goodbye and step out.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", player.sens/10, "cor", 0, "resisted", false);
+	dynStats("lus", player.sens/10, "resisted", false);
 	doNext(13);
 }
 
@@ -2211,7 +2211,7 @@ public function getABackWashFromLianna():void {
 	
 	outputText("\n\n\"<i>If you'll excuse me, I gotta go rinse off,</i>\" She says moving towards the shower.   Seeing no point in waiting after what you were just doing, you follow after her.  Once rinsed and dressed, you politely say your goodbyes to the skunkette and head off.");
 	fatigue(-30);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", player.sens/10, "cor", 0);
+	dynStats("lus", player.sens/10);
 	doNext(13);
 }
 
@@ -2747,7 +2747,7 @@ public function getEggsHarvested():void {
 	
 	outputText("\n\nAs you lay there to savor the afterglow, the skunk suddenly sticks something hard and sweet in your mouth - it's a lollipop, just like the one she was using.  \"<i>You were very helpful and cooperative, so you deserve a lollipop.  Enjoy yourself and feel free to use my bed.  Now I have to go store and test your juices.</i>\"  She shakes the bottle, now filled with your juices, at you and enters her bathroom; a click indicating she's locked herself in.");
 	outputText("\n\nYou sigh and shake your head.  When the strength comes back to your limbs, you redress yourself and leave; what a strange woman.  Still, this lollipop is quite nice - ooh!  Your favorite flavor, too!");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	doNext(13);
 }
 
@@ -2814,6 +2814,6 @@ public function liannaHandjobbies():void {
 	outputText("\n\nShe massages her throat a bit, then gets up and looks at you.  \"<i>Here.</i>\"  She grabs a lollipop from a pocket within her lab coat and hands it to you. You accept it with a little reluctance, still not sure what she's thinking.  \"For your contribution to my research.  Now feel free to rest on my bed as long as you need, I have to go process all this semen while it's still fresh.  See you later, and thank you.\"  She turns on her heels and walks towards her bathroom, closing the door and locking it in place.");
 	
 	outputText("\n\nYou sigh and shake your head.  When the strength comes back to your limbs, you redress yourself and leave; what a strange woman.  Still, this lollipop is quite nice - ooh!  Your favorite flavor, too!");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	doNext(13);
 }

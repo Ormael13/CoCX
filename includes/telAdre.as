@@ -224,7 +224,7 @@ public function aboutYara():void {
 	if(player.humanScore() <= 2) outputText("you were once a human too.", false);
 	else outputText("you haven't seen many other humans about.", false);
 	outputText("\n\nShe blushes a little when she answers, her tail curling about her protectively, \"<i>My home city was built around a portal, and the Baron that ruled it insisted that we send a sacrifice through every year.  We were raised believing that if we didn't sacrifice SOMEONE, the gods would become angry and bring our city to ruin.  Of course the whole thing was a sham, but the families of those sacrificed get compensation.  My father tried to whore me out first, but when that didn't work, the bastard had me drugged and sacrificed.  I woke up next to a lake, ate some weird fruit when I got hungry, and I...well, I changed.  Thankfully I found my way here before I ran into any demons, or who knows what would have happened to me!  Tel'Adre has been good to me, and I'm sure it'll be good to you.  Now, how about getting a piercing?</i>\"", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 2, "lib", 0, "sen", 0, "lus", -5, "cor", -1);
+	dynStats("int", 2, "lus", -5, "cor", -1);
 	doNext(piercingStudio);
 }
 public function pierceMenu():void {
@@ -480,42 +480,42 @@ public function normalPierceAssemble():void {
 	switch(piercingMat) {
 		case 1:
 			shortP += "amethyst ";
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 1, "lib", 1, "sen", 0, "lus", 0, "cor", 0);
+			dynStats("int", 1, "lib", 1);
 			longP += "Amethyst ";
 			break;
 		case 2:
 			shortP += "diamond ";
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 2, "lib", 0, "sen", 0, "lus", 0, "cor", -1);
+			dynStats("int", 2, "cor", -1);
 			longP += "Diamond ";
 			break;
 		case 3:
 			shortP += "gold ";
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 1, "lib", 0, "sen", 1, "lus", 0, "cor", 0);
+			dynStats("int", 1, "sen", 1);
 			longP += "Gold ";
 			break;
 		case 4:
 			shortP += "emerald ";
-			dynStats("str", 0,"tou", 0, "spe", 1, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+			dynStats("spe", 1);
 			longP += "Emerald ";
 			break;
 		case 5:
 			shortP += "jade ";
-			dynStats("str", 0,"tou", -.5, "spe", 0, "int", 1, "lib", 0, "sen", 0, "lus", 0, "cor", -1);
+			dynStats("tou", -.5, "int", 1, "cor", -1);
 			longP += "Jade ";
 			break;
 		case 6:
 			shortP += "onyx ";
-			dynStats("str", 0,"tou", 1, "spe", -1, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+			dynStats("tou", 1, "spe", -1);
 			longP += "Onyx ";
 			break;
 		case 7:
 			shortP += "ruby ";
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", 0, "cor", 0);
+			dynStats("lib", 1, "sen", 1);
 			longP += "Ruby ";
 			break;
 		case 8:
 			shortP += "steel ";
-			dynStats("str", 2,"tou", 0, "spe", 0, "int", -2, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+			dynStats("str", 2,"int", -2);
 			longP += "Steel ";
 			break;
 		case 9:
@@ -556,45 +556,45 @@ public function normalPierceAssemble():void {
 		case 0:
 			shortP += "clit-";
 			longP += "clit-";
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 2, "lus", 0, "cor", 0);
+			dynStats("sen", 2);
 			break;
 		case 1:
 			if(piercingType == 3) break;
 			shortP += "cock-";
 			longP += "cock-";
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 2, "sen", 0, "lus", 0, "cor", 0);
+			dynStats("lib", 2);
 			break;
 		case 2:
 			shortP += "ear";
 			longP += "ear";
 			break;
 		case 3:
-			dynStats("str", 0,"tou", -.5, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+			dynStats("tou", -.5);
 			shortP += "eyebrow-";
 			longP += "eyebrow-";
 			break;
 		case 4:
-			dynStats("str", 0,"tou", -.5, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+			dynStats("tou", -.5);
 			shortP += "lip-";
 			longP += "lip-";
 			break;
 		case 5:
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", 0, "cor", 0);
+			dynStats("lib", 1, "sen", 1);
 			shortP += "nipple-";
 			longP += "nipple-";
 			break;
 		case 6:
-			dynStats("str", .5,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+			dynStats("str", .5);
 			shortP += "nose-";
 			longP += "nose-";
 			break;
 		case 7:
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 1, "lus", 0, "cor", 0);
+			dynStats("sen", 1);
 			shortP += "tongue-";
 			longP += "tongue-";
 			break;
 		case 8:
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 1, "lus", 0, "cor", 0);
+			dynStats("sen", 1);
 			shortP += "labia-";
 			longP += "labia-";
 			break
@@ -777,7 +777,7 @@ public function removeClitPierce():void {
 	player.vaginas[0].clitPierced = 0;
 	player.vaginas[0].clitPShort = "";
 	player.vaginas[0].clitPLong = "";
-	dynStats("str", 0,"tou", -5, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+	dynStats("tou", -5);
 	player.gems -= 100;
 	statScreenRefresh();
 	doNext(piercingStudio);
@@ -789,7 +789,7 @@ public function removeCockPierce():void {
 	player.cocks[0].pierced = 0;
 	player.cocks[0].pShortDesc = "";
 	player.cocks[0].pLongDesc = "";
-	dynStats("str", 0,"tou", -5, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+	dynStats("tou", -5);
 	player.gems -= 100;
 	statScreenRefresh();
 	doNext(piercingStudio);
@@ -801,7 +801,7 @@ public function removeEarsPierce():void {
 	player.earsPierced = 0;
 	player.earsPShort = "";
 	player.earsPLong = "";
-	dynStats("str", 0,"tou", -5, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+	dynStats("tou", -5);
 	player.gems -= 100;
 	statScreenRefresh();
 	doNext(piercingStudio);
@@ -813,7 +813,7 @@ public function removeEyebrowPierce():void {
 	player.eyebrowPierced = 0;
 	player.eyebrowPShort = "";
 	player.eyebrowPLong = "";
-	dynStats("str", 0,"tou", -5, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+	dynStats("tou", -5);
 	player.gems -= 100;
 	statScreenRefresh();
 	doNext(piercingStudio);
@@ -825,7 +825,7 @@ public function removeLipPierce():void {
 	player.lipPierced = 0;
 	player.lipPShort = "";
 	player.lipPLong = "";
-	dynStats("str", 0,"tou", -5, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+	dynStats("tou", -5);
 	player.gems -= 100;
 	statScreenRefresh();
 	doNext(piercingStudio);
@@ -837,7 +837,7 @@ public function removeNipplesPierce():void {
 	player.nipplesPierced = 0;
 	player.nipplesPShort = "";
 	player.nipplesPLong = "";
-	dynStats("str", 0,"tou", -5, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+	dynStats("tou", -5);
 	player.gems -= 100;
 	statScreenRefresh();
 	doNext(piercingStudio);
@@ -849,7 +849,7 @@ public function removeNosePierce():void {
 	player.nosePierced = 0;
 	player.nosePShort = "";
 	player.nosePLong = "";
-	dynStats("str", 0,"tou", -5, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+	dynStats("tou", -5);
 	player.gems -= 100;
 	statScreenRefresh();
 	doNext(piercingStudio);
@@ -861,7 +861,7 @@ public function removeTonguePierce():void {
 	player.tonguePierced = 0;
 	player.tonguePShort = "";
 	player.tonguePLong = "";
-	dynStats("str", 0,"tou", -5, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+	dynStats("tou", -5);
 	player.gems -= 100;
 	statScreenRefresh();
 	doNext(piercingStudio);
@@ -873,7 +873,7 @@ public function removeVulvaPierce():void {
 	player.vaginas[0].labiaPierced = 0;
 	player.vaginas[0].labiaPShort = "";
 	player.vaginas[0].labiaPLong = "";
-	dynStats("str", 0,"tou", -5, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+	dynStats("tou", -5);
 	player.gems -= 100;
 	statScreenRefresh();
 	doNext(piercingStudio);
@@ -1523,7 +1523,7 @@ public function buyGymLifeTimeMembership():void {
 	outputText("You fish into your pouches and pull out 500 gems, dumping them into the centaur's hands.  Her eyes widen as she turns and trots towards a counter in the back.  She leans over as she counts, giving you a generous view down her low-cut top at the cleavage she barely bothers to conceal.", false);
 	if(player.hasCock()) {
 		outputText("  It brings a flush to your face that has nothing to do with exercise.  Maybe you'll be able to con her into some alone time later?", false);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (10+player.lib/10), "cor", 0);
+		dynStats("lus", (10+player.lib/10));
 	}
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00167] = 1;
 	player.gems -= 500;
@@ -1563,8 +1563,8 @@ public function weightLifting():void {
 	//(else)
 	else outputText("This place barely has anything left to challenge you, but you take the heaviest weights you can get your mitts on and get to it.  By the time an hour has passed, you've worked up a good sweat, but without heavier weights you probably won't get any stronger.", false);
 	//Stat changes HERE!
-	if(player.str < 90) dynStats("str", .5,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
-	if(player.tou < 40) dynStats("str", 0,"tou", .3, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+	if(player.str < 90) dynStats("str", .5);
+	if(player.tou < 40) dynStats("tou", .3);
 	//Body changes here
 	//Muscleness boost!
 	outputText(player.modTone(85,5+rand(5)), false);
@@ -1609,8 +1609,8 @@ public function goJogging():void {
 	//else) 
 	else outputText("and it barely challenges you.  You run at a sprint half the time and still don't feel like you're improving in the slightest.  Still, you do manage to burn a lot of calories.", false);
 	//Stat changes HERE!
-	if(player.spe < 40) dynStats("str", 0,"tou", 0, "spe", .3, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
-	if(player.tou < 90) dynStats("str", 0,"tou", .5, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+	if(player.spe < 40) dynStats("spe", .3);
+	if(player.tou < 90) dynStats("tou", .5);
 
 	//If butt is over 15 guaranteed reduction
 	if(player.buttRating >= 15) {
@@ -1740,7 +1740,7 @@ public function letsDoYaraSex(girl:Boolean = true):void {
 	
 		outputText("Her head stops short, though.  Through your gasping relief, you managed to lock onto her legs.  \"<i>Nice...nice catch,</i>\" is about all Yara manages to share before resuming her purring contentment upside down, limp arms spread across the floor.  After a minute or so, the two of you regain some sort of composure, but the spectacular gymnast from before can only bare to slink around on the ground as she reorients herself.  The most you need to do is fix the back of your chair, lifting it to a more comfortable height.  \"<i>Can you spare one more helping hand here, friend?</i>\" Yara requests, now having at least managed to at least sit up straight.  The two of you exchange a knowing glance as you lift the metal-worker back to her feet.", false);
 	}
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	doNext(piercingStudio);
 }
 
@@ -1751,7 +1751,7 @@ public function yvonneFlirt():void {
 	clearOutput();
 	outputText("You step closer, glancing from her bulging, barely contained tits to her pouting lips and expressive, violet eyes.  A shock of sweat-matted auburn hair obscures part of her face, but the tall, buxom blacksmith nervously brushes it aside as she watches.  Once you're close enough to touch, you quietly and sincerely proclaim, \"<i>You're the most beautiful piece of craftsmanship in this entire store.</i>\"");
 	outputText("\n\nYvonne steps back, and you swear you can see a blush blooming through her fur, a fiery glow of embarrassment that spreads to the upper curve of her immense mammaries.  She folds her arms over her apron, unintentionally smushing those gigantic tits closer together and deepening her cleavage into a canyon. An immense sigh causes the plush plateau to sway pendulously as Yvonne answers, \"<i>");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (10+player.lib/10), "cor", 0);
+	dynStats("lus", (10+player.lib/10));
 	if(player.cockTotal() == 0 || player.tallness > 65 || player.cockThatFits(75) == -1) {
 		outputText("Sorry, but you don't look like you'd be much fun.");
 		outputText("</i>\"");
@@ -1802,7 +1802,7 @@ public function fuckYvonneInZeBlacksmith():void {
 	outputText(" out, accompanied by a exhalation of female pleasure.");
 	outputText("\n\nYvonne staggers up on her footpaws, groaning the whole time, a trail of white dribbling on the floor behind her.  Her tail wags happily, and she grabs you, pulling you into her sweaty bosom as she affectionately squeezes your [butt].  You aren't released until you feel dizzy, half-suffocated by her preponderance of breast-tissues and potent pheromones.");
 	outputText("\n\nYvonne tosses you your gear, and you dress in a daze.  Before you've completely finished, she's pushing you out into the street, covered in sex-stink and stumbling over your own [feet].  She calls out after you, \"<i>Thanks babe, I gotta mop this mess up!</i>\"");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	flags[kFLAGS.YVONNE_FUCK_COUNTER]++;
 	doNext(13);
 }
@@ -1856,6 +1856,6 @@ public function flirtWithVictoria():void {
 	
 	outputText("\n\nA few seconds later your body finally gives out completely and you pass out.  You wake up about an hour later, still on the floor with Vicky on the ground near you, leaning up against the counter with her legs splayed, cum still dripping from her used pussy.  <i>\"I uh... s'pose you wanna leave now?\"</i>  She asks, still sounding a bit loopy.  She climbs unsteadily to her feet, and walks, a bit bowlegged to the door, unlocking it before slumping back down the wall.  <i>\"Do come back for a visit, love!\"</i>  You pull your pants back up and crawl back out into the street.  Climbing back to your feet, you notice a few passersby chuckling at you before you close the door.  Before you leave, you think you can make out Victoria muttering, <i>\"Gonna have to clean this place up...\"</i>");
 	
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	doNext(13);
 }

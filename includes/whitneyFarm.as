@@ -152,11 +152,11 @@ public function talkWhitney():void {
 	else outputText("how poorly the farm has been going since the lake became tainted.  She has to work three times as hard to keep her livestock and crops from succumbing to the taint, and the demons and monsters of the forest are many times more bold", false);
 	outputText(".  It feels good to get a chance to talk with another sane individual, but before long Whitney has to return to work, and you should check back on your camp.", false);
 	//+3 int if less than 15, +2 int if less 20, +1 int if less than 30, +.5 int if less than 40.
-	if(player.inte < 15) dynStats("str", 0,"tou", 0, "spe", 0, "int", 1, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
-	if(player.inte < 20) dynStats("str", 0,"tou", 0, "spe", 0, "int", 1, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
-	if(player.inte < 30) dynStats("str", 0,"tou", 0, "spe", 0, "int", .5, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
-	if(player.inte < 40) dynStats("str", 0,"tou", 0, "spe", 0, "int", .5, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -5, "cor", 0);
+	if(player.inte < 15) dynStats("int", 1);
+	if(player.inte < 20) dynStats("int", 1);
+	if(player.inte < 30) dynStats("int", .5);
+	if(player.inte < 40) dynStats("int", .5);
+	dynStats("lus", -5);
 	doNext(13);
 	return;
 	//+3 int if less than 15, +2 int if less 20, +1 int if less than 30, +.5 int if less than 40.
@@ -231,11 +231,11 @@ public function workFarm():void {
 		if(player.faceType == FACE_DOG) outputText("sensitive ", false);
 		outputText("nose, and set to work.", false);
 		//[Lust increase based on libido, degree of cow/mino features] 
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", player.cowScore() + player.minoScore(), "cor", 0);
+		dynStats("lus", player.cowScore() + player.minoScore());
 		outputText("\n\nAn hour later you can stand it no more and exit the milking barn. Gulping down the fresher air and dragging the tools back to their shed, you admit to yourself that Whitney is a much harder worker and has a stronger constitution than you thought. You promise yourself you'll come back and help her out some more -- as soon as your nose recovers.", false);
 		//always +1 str till 50, then 50% chance.
-		if(player.str <= 50) dynStats("str", 1,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
-		else dynStats("str", rand(2),"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+		if(player.str <= 50) dynStats("str", 1);
+		else dynStats("str", rand(2));
 		doNext(13);
 		return;
 	}
@@ -347,22 +347,22 @@ public function exploreFarm():void {
 		outputText("You run around the farm, keeping an eye for any monsters or oddities around Whitney's property.  Eventually the she-dog joins you, and the two of you have a good time pushing your speed to its limits.  ", true);
 		//Less than 30 speed (+2 speed)
 		if(player.spe < 30) {
-			dynStats("str", 0,"tou", 0, "spe", 2, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+			dynStats("spe", 2);
 			outputText("Whitney easily outpaces you, leaving you so far behind that she laps around the farm twice for each pass you make.", false);
 		}
 		//Less than 50 speed (+1 speed)
 		else if(player.spe < 50) {
-			dynStats("str", 0,"tou", 0, "spe", 1, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+			dynStats("spe", 1);
 			outputText("Whitney is still faster than you, and manages to get far enough ahead of you to disappear from time to time.", false);
 		}
 		//Less than 70 speed (+.75 speed)
 		else if(player.spe < 70) {
-			dynStats("str", 0,"tou", 0, "spe", .75, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+			dynStats("spe", .75);
 			outputText("Whitney and you are evenly matched, and the two of you run together for a while, each pushing yourself harder in an effort to best the other.", false);
 		}
 		//Else (+.5 speed)
 		else {
-			dynStats("str", 0,"tou", 0, "spe", .5, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+			dynStats("spe", .5);
 			outputText("Whitney falls behind, unable to cope with your speed as you tear around the farm.", false);
 		}
 		outputText("\n\nAfterwards, the both of you lie back against a tree, panting heavily and exchanging pleasantries.  Once you've both had a chance to rest, she bids you farewell and returns to her labors, leaving you to journey home to camp.", false);
@@ -372,7 +372,7 @@ public function exploreFarm():void {
 	//Other stuff
 	if(explore == 1) {
 		outputText("After wandering around for a while, you find yourself atop a slight rise looking out over the farm and the distant lake. Despite the corruption you know is slowly consuming this land, being here now makes you feel so at peace you wish it could go on forever.", true);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", -rand(3));
+		dynStats("cor", -rand(3));
 		doNext(13);
 		return;
 	}
@@ -389,17 +389,17 @@ public function exploreFarm():void {
 			else if(player.cor <= 60) outputText("You aren't sure how you feel about that.", false);
 			//[continue paragraph condition] 
 			outputText("  It for certain would get Whitney chasing you off with a pitchfork.\n\n", false);
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10, "cor", 0);
+			dynStats("lus", 10);
 		}
 		//[if no horse dick, a deep cow or horse vag, and in heat]
 		else if(player.hasStatusAffect("heat") >= 0) {
 			outputText("Maybe it wants a bull? You do, one with long, thick dick-meat to satisfy your starving fuck-hole...\n\n", false);
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 15, "cor", 0);
+			dynStats("lus", 15);
 		}
 		//- [if no dick, not in heat, but overfull with milk]
 		else if(player.biggestLactation() >= 2) {
 			outputText("\"<i>Maybe she wants to be milked?</i>\" you think. You certainly do.\n\n", false);
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 3, "cor", 0);
+			dynStats("lus", 3);
 		}
 		outputText("Shaking your head, you clear your thoughts and turn away from the pasture. Cows don't have your problems.", false);
 		doNext(13);
@@ -490,7 +490,7 @@ public function getMilked():void {
 	//Version 4 huge nips
 	if(application == 3) {
 		outputText("In spite of the tightness of your harness, you collect the suction cups and bring them up to your huge nipples, letting the machine pull them into the tight cups with agonizing slowness.  In spite of the large size of your aureola, the machine slowly sucks you inside, the tightness serving only to arouse you further.  The suction pulls the walls of the nipple-tubes tight against your nipples, turning them purple as they swell up like dicks.  Drops of milk leak from the tips as your body lets your milk down, letting it flow through your imprisoned nipples towards its release.\n\n", false);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10, "cor", 0);
+		dynStats("lus", 10);
 	}
 	//Milksplosion Texts
 	//Lactation * breastSize x 10 (milkPerBreast) determines scene
@@ -501,7 +501,7 @@ public function getMilked():void {
 	var milksplosion:Number = rand(3);
 	//Lightish (+15 lust)
 	if(player.lactationQ() < 50) {
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 15, "cor", 0);
+		dynStats("lus", 15);
 		if(milksplosion == 0) {
 			outputText("A few drops of milk bud on the tips of your " + nippleDescript(0) + "s, growing larger as they roll down to the edge of the tube.  It feels as if a ", false);
 			if(player.totalBreasts() == 2) outputText("pair", false);
@@ -520,7 +520,7 @@ public function getMilked():void {
 	}
 	//Medium (+30 lust)
 	else if(player.lactationQ() < 250) {
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 30, "cor", 0);
+		dynStats("lus", 30);
 		//MEDIUMLICIOUS
 		if(milksplosion == 0) {
 			outputText("Drops of your milk roll down the edge of the milk-cups as you begin lactating into them.  Milk sprays in solid streams from your nipples, forming a puddle at the bottom of the cup as the machinery siphons it through the clear tube towards the reservoir.   You moan hotly as the milking progresses, emptying your " + allBreastsDescript() + " of their creamy cargo.  For an hour your world is reduced to the sensation of suction and release, though towards the end nothing is coming out but tiny milk-drops.  At long last the harness lowers you to the floor, letting the cups pop off your abused " + nippleDescript(0) + "s.  You feel a little bit sore and sensitive, but overwhelmingly aroused by the experience.\n\n", false);
@@ -545,7 +545,7 @@ public function getMilked():void {
 	}
 	//High Output (+ 40 lust)
 	else if(player.lactationQ() < 750) {
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 40, "cor", 0);
+	dynStats("lus", 40);
 		if(milksplosion == 0) {
 			outputText("An eruption of milk floods the suction-tubes with a vortex of cream.  The machinery chugs loudly, struggling to keep up with the waves of fluid as your nipples continue to fountain into the receptacles.  You squeal in delight as your nipples get red and sensitive, but never slow in their production.  Writhing in the harness, you become more and more aroused by this milk-draining device until you feel as if you can bear it no longer.  When you get out, you'll NEED to get off.  After an hour of sexual torture, the suction cuts off and the harness releases.  The nipple-suckers drop off and spill your milk over the floor as droplets continue to leak from your over-productive chest.\n\n", false);
 			
@@ -570,7 +570,7 @@ public function getMilked():void {
 	}
 	//CRAZY OUTPUT1 (+60 lust)
 	else {
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 60, "cor", 0);
+		dynStats("lus", 60);
 		milksplosion = rand(2);
 		if(milksplosion == 0) {
 			outputText("Your " + nippleDescript(0) + "s twitch and pulse for but a moment, then unleash a torrent of milk, totally filling the tubes.  The machinery lurches, struggling to keep up as you flood the tubes.   An alarm starts blaring as milk begins leaking out around the edges – Whitney's machinery just can't keep up!  You can hear footsteps in the barn, and a pair of soft hands hold the cups against your chest.   The machinery is shut down, but another pair of hands begins massaging your " + allBreastsDescript() + ", pumping wave after wave of milk through the tubes, unaided by the machinery.  You practically ", false);
@@ -622,16 +622,16 @@ public function getMilked():void {
 		//Being a cow makes you less dumb
 		//Somehow
 		if(player.hasStatusAffect("Feeder") >= 0) {
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", -1, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
-			if(liters > 5) dynStats("str", 0,"tou", 0, "spe", 0, "int", -1, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
-			if(liters > 10) dynStats("str", 0,"tou", 0, "spe", 0, "int", -1, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
-			if(liters > 20) dynStats("str", 0,"tou", 0, "spe", 0, "int", -1, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+			dynStats("int", -1);
+			if(liters > 5) dynStats("int", -1);
+			if(liters > 10) dynStats("int", -1);
+			if(liters > 20) dynStats("int", -1);
 		}
 		//not a cow, bimbotize me!
 		else {
-			if(liters/2 > 10) dynStats("str", 0,"tou", 0, "spe", 0, "int", -10, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
-			else dynStats("str", 0,"tou", 0, "spe", 0, "int", -liters/2, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
-			if(liters > 30) dynStats("str", 0,"tou", 0, "spe", 0, "int", -2, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+			if(liters/2 > 10) dynStats("int", -10);
+			else dynStats("int", -liters/2);
+			if(liters > 30) dynStats("int", -2);
 		}
 		if(player.inte < 10) {
 			doNext(cowBadEnd1);
@@ -649,7 +649,7 @@ public function getMilked():void {
 	//Horny
 	else {
 		outputText("Overwhelmed with your desire, you don't even bother to cover up and make yourself decent, you just run out of the barn, " + allBreastsDescript() + " jiggling and wet, heading straight for camp.  It isn't until you get back that you remember the disapproving look Whitney gave you, but if anything, it only makes you hornier.", false);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 100, "cor", 0);
+		dynStats("lus=", 100);
 	}
 	//Boost lactation by a tiny bit and prevent lactation reduction
 	player.boostLactation(.05);
@@ -813,7 +813,7 @@ public function cockPumping():void {
 			}
 			outputText(".  Every time you get a good grip and start to pull, a shiver of pleasure shoots down " + sMultiCockDesc() + " and robs you of your focus and muscle control.  Practically helpless against the tubes, you feel " + sMultiCockDesc() + " get harder and harder as the machine sucks out more pre-cum along with the milky aftershocks of your last massive orgasm.\n\n", false);
 		}
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -150, "cor", 0);
+		dynStats("lus", -150);
 		//TO BAD ENDAGE
 		doNext(milkerBadEnd1);
 		return;
@@ -914,7 +914,7 @@ public function cockPumping():void {
 	}
 	else outputText("You g", false);
 	outputText("o on your way, whistling happily and feeling like taking a nap.", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -150, "cor", 0);
+	dynStats("lus", -150);
 	doNext(13);
 }
 
@@ -1033,7 +1033,7 @@ public function milkerBadEnd1():void {
 		outputText("  You barely take notice of her as another explosive orgasm goes off, your enormously swollen penis", false);
 		if(player.cockTotal() > 1) outputText("es", false);
 		outputText(" pushing massive loads of semen down the tubes and out of the release valves in a firework pattern. Whitney shrinks back as some of the spooge squirts across the barn and comes to a stop less than a foot from her. The canine woman screams volubly enough to wake the entire farm. \"<i>Dammit, " + player.short + "; just... DAMMIT!</i>\" You spare her not even a thought as you anticipate your next injection of the tainted chemicals and work up another batch of jizz.", false);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 20, "sen", 10, "lus", 80, "cor", 20);
+		dynStats("lib", 20, "sen", 10, "lus", 80, "cor", 20);
 	}
 	//[(corruption > 90, high demonscore)
 	else {
@@ -1046,7 +1046,7 @@ public function milkerBadEnd1():void {
 		if(player.totalCocks() == 1) outputText("dick", false);
 		else outputText("set of dicks", false);
 		outputText(" like yours, why worry about anything else for the moment?", false);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 20, "sen", 10, "lus", 80, "cor", 100);
+		dynStats("lib", 20, "sen", 10, "lus", 80, "cor", 100);
 	}
 	eventParser(5035);
 }

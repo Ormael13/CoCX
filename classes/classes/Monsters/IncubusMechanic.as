@@ -20,13 +20,13 @@ package classes.Monsters
 			else {
 				if (hpVictory) {
 					outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.  Now would be the perfect opportunity to put his tool to use...\n\nWhat do you do, rape him, service him, or let him take you anally?", true);
-					game.dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 1, "cor", 0);
+					game.dynStats("lus", 1);
 					game.simpleChoices("Rape",11064,"Service Him",11039,"Anal",11063,"Nothing",game.cleanupAfterCombat,"",0);
 				} else {
 					outputText("You smile in satisfaction as the " + short + " collapses, masturbating happily.  Now would be the perfect opportunity to put his tool to use...\n\nWhat do you do?", true);
 					var temp2:int = 0;
 					if(player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") temp2 = 3988;
-					game.dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 1, "cor", 0);
+					game.dynStats("lus", 1);
 					game.simpleChoices("Rape",11064,"Service Him",11039,"Anal",11063,"B.Titfuck",temp2,"Nothing",game.cleanupAfterCombat);
 				}
 			}

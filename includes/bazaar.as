@@ -213,7 +213,7 @@ public function joeyAndrogyny():void {
 	
 	outputText("Thanking the cute bunny-boy for his help, you hand over the payment and head back to check on camp.", false);
 	player.createPerk("Androgyny",0,0,0,0,"Your face is able to be as masculine or feminine as possible, regardless of gender.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5, "cor", 0);
+	dynStats("lus", 5);
 	doNext(13);
 }
 //[Joey]
@@ -307,11 +307,11 @@ public function joeysMassageWifNoExtraJizz():void {
 		outputText("  Joey turns and prances away, saying, \"<i>There's a shower if you need to clean up, and be sure and visit me the next time you need help to squeeze out all that tension!</i>\"  You barely hear his words, so focused are you on his cum-darkened, distended thong.  You can see it bulging between his legs, and while his pert butt sways out the door, you can see that his cum-filled thong is designed to redirect all that fluid over his taint and into his backdoor. Kinky.", false);
 	}
 	//(reduces libido significantly if very high, reduces lust, and reduces sensitivity to 40)
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
-	if(player.lib > 20) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -.5, "sen", 0, "lus", 0, "cor", 0);
-	if(player.lib > 80) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -1, "sen", 0, "lus", 0, "cor", 0);
-	if(player.lib > 60) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -1, "sen", 0, "lus", 0, "cor", 0);
-	if(player.sens > 40) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -4, "lus", 0, "cor", 0);
+	dynStats("lus=", 0);
+	if(player.lib > 20) dynStats("lib", -.5);
+	if(player.lib > 80) dynStats("lib", -1);
+	if(player.lib > 60) dynStats("lib", -1);
+	if(player.sens > 40) dynStats("lib", -.5);
 	doNext(13);
 }
 	
@@ -359,11 +359,11 @@ public function joeysMassageWithEXTRASpooge():void {
 	
 	outputText("Joey leaves, his poofy tail bobbing back and forth.  You can see his thong is distended, virtually packed with his own still-pumping spooge, and you marvel at his perverse ingenuity when you realize his thong is waterproofed and shaped to guide all the jizz between his thighs and into his back-door.  Kinky.", false);
 	player.cumMultiplier += 2;
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
-	if(player.lib > 20) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -.5, "sen", 0, "lus", 0, "cor", 0);
-	if(player.lib > 80) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -1, "sen", 0, "lus", 0, "cor", 0);
-	if(player.lib > 60) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -1, "sen", 0, "lus", 0, "cor", 0);
-	if(player.sens > 40) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -4, "lus", 0, "cor", 0);
+	dynStats("lus=", 0);
+	if(player.lib > 20) dynStats("lib", -.5);
+	if(player.lib > 80) dynStats("lib", -1);
+	if(player.lib > 60) dynStats("lib", -1);
+	if(player.sens > 40) dynStats("sen", -4);
 	doNext(13);
 }
 public function joeyBigBalls():void {
@@ -430,7 +430,7 @@ public function suckOffJoeysGardenHose():void {
 	outputText("Pulling him up, you drag the both of you deeper into the trailer to find a shower, where you both clean up with a touch of good-natured teasing.  Once the cute 'trap' and you are free of his goo, you head back to the entrance.\n\n", false);
 	outputText("\"<i>I cleaned out your balls; you can clean up the floor,</i>\" you joke as you leave, kissing him one last time on the mouth before you go.\n\n", false);
 	outputText("Joey blushes again and begins looking for a mop.", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 70, "cor", 0);
+	dynStats("lus", 70);
 	doNext(13);
 }
 
@@ -496,7 +496,7 @@ public function gretasGarments():void {
 		if(flags[kFLAGS.OWN_MAIDEN_BIKINI] == 0) outputText(", except maybe a super-skimpy chain bikini that's chased with white and gold highlights");
 	}
 	outputText(".");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 2, "cor", 0, "resisted", false);
+	dynStats("lus", 2, "resisted", false);
 	menu();
 	if(flags[kFLAGS.FOUND_SOCKS] == 0) addButton(4,"Low Stock",askGretaAboutInventory);
 	else {
@@ -721,7 +721,7 @@ public function yesPutDatSockOnMe(target:int):void {
 	
 	outputText("\n\nGreta smiles knowingly and returns to her chair behind the counter.");
 	//(Cock-sock get! +5 Corruption, +5 Arousal)
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5, "cor", 2);
+	dynStats("lus", 5, "cor", 2);
 	menu();
 	addButton(0,"Next",gretasGarments);
 }
@@ -794,7 +794,7 @@ public function removeTargettedSock(index:int):void {
 	}	
 	outputText("\n\n\"<i>If you need another one, we've got plenty more for sale.</i>\"");
 	//(Cock-sock lost! +5 Corruption, -10 Arousal)
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -10, "cor", 1);
+	dynStats("lus", -10, "cor", 1);
 	menu();
 	addButton(0,"Next",gretasGarments);
 }
@@ -817,7 +817,7 @@ public function joeySweetMassage():void {
 	outputText("\n\nJoey hops off of you and you notice his cute femboy feet round the table, heading towards a small counter nearby hosting a large number of bottles.  You hear the sounds of a cork being pulled from one such bottle, followed by the bunny-boy gulping down its contents.  Then, surprisingly, he bends over, letting his thong pool around his ankles and revealing his cute, pink asshole.  He retrieves something else from the table and pulls it into view... a large multihued egg!  Joey places the egg at his butthole, which contracts in anticipation.  Slowly he works it inside, a task that you're sure would put the average anal acrobat to the test, but Joey is clearly no amateur.  The egg disappears completely within a couple minutes, swallowed up by that sweet little pucker.  Joey pulls his thong back up and turns towards you, his modest erection raging right in front of your face.");
 
 	outputText("\n\nRather than the usual stream of off-white jism, what starts pouring out the tip of his cock is a rich brown color.  It's viscous, and when it dribbles down onto the floor it forms a velvety pool.  Your masseuse scoops some of it up with two fingers and slips them into his mouth, closing his eyes as if he's enjoying an incredibly tasty treat.  \"<i>Mmm,</i>\" he moans, \"<i>chocolate.  This is what makes the sweet massage so sweet.  It's just as good as my creamy lotion, and twice as tasty.</i>\"  Joey turns away, retrieving another large egg from the table.  You wonder briefly if he has room for two of the two huge eggs in his ass, before he asks, \"<i>Would you like an egg too?  They don't have anything to do with the massage, but I just </i>love<i> feeling so full, don't you?</i>\"");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 25, "cor", 0);
+	dynStats("lus", 25);
 	//[Yes (gives the chocolate-egg stuffed ass from the Easter bunny)] [No (This just skips the "If Yes" paragraphs)]
 	menu();
 	addButton(0,"Yes",eggsInButt,true);
@@ -880,7 +880,7 @@ public function eggsInButt(eggButt:Boolean = false):void {
 	outputText("\n\nJoey sets the headrest back up, pats you on the head and says, \"<i>Take as long as you want to recover, you sweet thing, you.  There's a towel on the table, and a shower in the back!  Come back ANY time, [name].  I'd love to give you another 'dessert.'</i>\"");
 	
 	outputText("\n\nJoey leaves, his rabbit tail bobbing to and fro.  You see his thong is distended, practically packed to the brim with more of his still-drooling chocolatey cum.  As usual, the waterproof thong seems to be pumping it all between his soft thighs and right into his already egg-filled asshole.  He really does like feeling full back there.  Kinky.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -2, "sen", -2, "lus", -100, "cor", 0);
+	dynStats("lib", -2, "sen", -2, "lus=", 0);
 	doNext(13);
 }
 
@@ -1135,7 +1135,7 @@ public function finalGayFinallee(road:int = 0):void {
 			if(player.gems < 0) player.gems = 0;
 		}
 		outputText(".  You redress yourself before realizing something.  You have acquired something extra: a lust draft potion with an orange ribbon tied to it.  A note at the end reads: \"<i>Thanks for bailing me out of buying booze.  Your ass was amazing even after that orc had it.</i>\"  There's no name on the note but you have a good idea who left it for you, judging by the drawn tiger paw print in the corner.  You pocket the lust draft and leave the tent to head back to the bazaar in the morning light.\n\n");
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 5, "lus", -100, "cor", 0);
+		dynStats("sen", 5, "lus=", 0);
 		model.time.days++;
 		model.time.hours = 6;
 		//Lust sated
@@ -1168,7 +1168,7 @@ public function finalGayFinallee(road:int = 0):void {
 			if(player.gems < 0) player.gems = 0;
 		}
 		outputText(".  You redress yourself before realizing something.  You have acquired something extra: A lust draft potion with an brown ribbon tied to it.  A note at the end reads: \"<i>I'll always remember the face you made trying to wrap your cute lips around my giant dick.</i>\"  There's no name on the note but you have a good idea who left it for you, judging by the drawn bear paw print in the corner.  You pocket the lust draft and leave the tent to head back to the bazaar in the morning light.\n\n");
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 5, "lus", -100, "cor", 0);
+		dynStats("sen", 5, "lus=", 0);
 		model.time.days++;
 		model.time.hours = 6;
 		//Lust sated
@@ -1200,7 +1200,7 @@ public function finalGayFinallee(road:int = 0):void {
 		//Lust sated
 		//Gained 1 Bimbo brew, lost a few gems(9 or so?)
 		//Time set to morning
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 5, "lus", -100, "cor", 0);
+		dynStats("sen", 5, "lus=", 0);
 		model.time.days++;
 		
 		model.time.hours = 6;

@@ -321,7 +321,7 @@ public function demonChanges():void {
 			outputText("<b>Your tail is now demonic in appearance.</b>", false);
 		}
 		else outputText("\n\nA pain builds in your backside... growing more and more pronounced.  The pressure suddenly disappears with a loud ripping and tearing noise.  <b>You realize you now have a demon tail</b>... complete with a cute little spade.", false);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 4);
+		dynStats("cor", 4);
 		player.tailType = TAIL_TYPE_DEMONIC;	
 	}
 	//grow horns!
@@ -335,7 +335,7 @@ public function demonChanges():void {
 			if(player.hornType == HORNS_NONE) player.hornType = HORNS_DEMON;
 			player.horns++;
 			player.horns++;
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 3);
+			dynStats("cor", 3);
 		}
 		//Text for shifting horns
 		else if(player.hornType > HORNS_DEMON) {
@@ -343,7 +343,7 @@ public function demonChanges():void {
 			outputText("Your horns shift, shrinking into two small demonic-looking horns.", false);
 			player.horns = 2;
 			player.hornType = HORNS_DEMON;
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 3);
+			dynStats("cor", 3);
 		}		
 	}
 	//Nipples Turn Back:

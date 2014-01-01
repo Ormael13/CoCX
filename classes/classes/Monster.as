@@ -350,9 +350,10 @@
 				for (var i:int = 0; i<rows.length; i++){
 					var row:* = rows[i];
 					if (!(row is Array)) row = [row,1];
+					if (row.length==1) row.push(1);
 					var size:Number;
 					if (row[0] is Number) size = row[0];
-					else if (row[0] is String) size = Appearance.breastCupInverse(row[0])
+					else if (row[0] is String) size = Appearance.breastCupInverse(row[0]);
 					else {
 						trace("init03BreastRows.size is "+typeof(row[0]));
 						size = 0;

@@ -61,7 +61,7 @@ public function wandererStayHuman():void {
 	outputText(" is right, my soul is immortal and not to be sacrificed so lightly.  Why don't we stick to our original agreement another decade and mull it over then?</i>\"\n\n", false);
 	outputText("Lucia pouts, nearly on the verge of tears, \"<i>Fine!  But don't expect me to be happy about it.</i>\"  She pats his swollen balls roughly, smirking down at him, \"<i>and I'm going to let these swell up nice and tight before I take my next meal!</i>\"  ", false);
 	outputText("Marcus sighs, though you think you spy the hint of a smile on his lips, \"<i>As you wish...thanks for your guidance traveler, and may you find what you seek in this strange land.</i>\"\n\nAs they turn to leave, Lucia scowls at you over her shoulder...", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -1, "sen", 0, "lus", 1, "cor", -5);
+	dynStats("lib", -1, "lus", 1, "cor", -5);
 	player.createStatusAffect("wanderer human",0,0,0,0);
 	doNext(13);
 }
@@ -70,7 +70,7 @@ public function wandererGoDemon():void {
 	spriteSelect(42);
 	outputText("Lucia breaks into a mischievious smile as you suggest taking her up on her offer.  She sashays over to you, flesh jiggling enticingly the whole way.  She leans close, sliding a slender finger down the center of your chest.  \"<i>Thank you for this.  Should we meet again, I promise rewards fit to make a whore faint.</i>\"\n\n", true);
 	outputText("Marcus raises an eyebrow at the exchange, but smiles as his demonic lover returns to his side.  Lucia winks again, and huge wings explode from her back.  She grabs Marcus, who bleats in surprise, and lifts off, flying away with her prize to her lair.", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5, "cor", 1);
+	dynStats("lus", 5, "cor", 1);
 	player.createStatusAffect("wanderer demon",0,0,0,0);
 	doNext(13);
 }
@@ -85,7 +85,7 @@ public function wandererDemonEpilogue():void {
 			outputText("\"<i>I stopped by and I wanted to thank you for this,</i>\" Lucia purrs, balancing a purple crystal along her knuckles.  It sparkles and glitters with a light in the sunlight as she speaks, \"<i>You see, when a human or other mortal creature finally begins to desire corruption and pleasure more than everything else, they can become a demon.  The process leaves behind a single crystal of lethicite – this crystal.  It's a power source beyond anything you can comprehend, and I have you to thank for giving it to me.</i>\"\n\n", false);
 			outputText("Lucia places a small bottle in your hand.  \"<i>So thank you, and have this present.  Perhaps you can create some lethicite for us later... oh, and before I forget, Marcus is loving his new existence.</i>\"\n\n", false);
 			outputText("She steps away and blows a kiss as her wings unfurl.  With a powerful downstroke she scatters sand everywhere, forcing you to throw an arm in front of your eyes.  When the debris settles, she's gone.\n\n", false);
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5, "cor", 0);
+			dynStats("lus", 5);
 			shortName = "SDelite";
 			menuLoc = 2;
 			takeItem();
@@ -119,7 +119,7 @@ public function wandererEpilogueHuman():void {
 			if(player.cor < 33) outputText("You duck back behind a dune, blushing furiously.", false);
 			else if(player.cor < 66) outputText("You blush crimson as you swear you see Lucia look right at you and wink.", false);
 			else outputText("You openly leer at the crude display, whistling lewdly at the blissful couple.  Marcus looks up and gives a cocky smile, while Lucia licks her lips and gives you a predatory grin.", false);
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10, "cor", 0);
+			dynStats("lus", 10);
 			//Value 1 is used to track the status of the end state.
 			player.statusAffects[player.hasStatusAffect("wanderer human")].value1 = 1;
 			doNext(13);

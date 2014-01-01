@@ -123,7 +123,7 @@ public function agreeToHelpHeliaDungeon():void {
 	
 	doNext(1);
 	//(Decrease Player Lust to minimum, increase HP to maximum, etc. etc. You're sleeping, but also fucking. Figure it out.)
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 }
 	
 public function morningAfterHeliaDungeonAgreements():void {
@@ -322,7 +322,7 @@ public function gooArmorBeatsUpPC():void {
 	}
 	//(PC regains HP)
 	HPChange(1000,false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 3, "lus", -100, "cor", 0);
+	dynStats("lib", 1, "sen", 3, "lus=", 0);
 	cleanupAfterCombat();
 	doNext(1);
 	flags[kFLAGS.LOST_GOO_ARMOR_FIGHT] = 1;
@@ -429,11 +429,11 @@ public function harpyHordeLustAttack():void {
 	if(player.hasPerk("Luststick Adapted") >= 0) outputText("doing relatively little thanks to your adaptation");
 	else {
 		outputText("sending shivers of lust up your spine");
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5, "cor", 0);
-		if(player.hasCock()) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 15, "cor", 0);
+		dynStats("lus", 5);
+		if(player.hasCock()) dynStats("lus", 15);
 	}
 	outputText(".");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10, "cor", 0);
+	dynStats("lus", 10);
 	combatRoundOver();
 }
 
@@ -563,7 +563,7 @@ public function kiriSexAnal():void {
 	outputText(".  With a scream of delight, Kiri clamps down on your [cock " + y + "] and climaxes too, leaking a pool of fem-spunk onto the ground.  She starts to bounce on your cock, riding out her anal orgasm until she's exhausted and you're deflated inside her.");
 
 	outputText("\n\nYou pull out with a POP, letting a stream of cum leak out her butt.  You clean your cock off and stick it back in your [armor].");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	doNext(1);
 }
 
@@ -578,7 +578,7 @@ public function kiriSexGetLicked():void {
 	outputText("\n\nYou begin to grind your slit into her face as she eats you out, rubbing your cunt along her nose and forehead to the beat of her tongue's skillful ministrations.  She makes a slow, steady progression inward, slipping her long tongue further and further into your cunny until you can feel her flicking around your cervix.");
 	outputText("\n\nYou cannot resist her skillful tongue-fuck for long.  Grabbing Kiri's head, you force her face into your crotch, getting every last bit of her tongue inside you as you can as you climax, spraying your fem-cum all across her face.");
 	outputText("\n\nUtterly satisfied, you stagger back from Kiri, letting her whip her head around to flick off your fem-cum.  You clean yourself off and suit up again.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	doNext(1);
 }
 
@@ -624,7 +624,7 @@ public function brigidBop():void {
 //Attack Three: Harpy Ass Grind GO!
 public function BrigidAssGrind():void {
 	outputText("Brigid grins as she approaches you.  She handily deflects a few defensive blows and grabs you by the shoulders.  She forces you onto your knees and before you can blink, has turned around and smashed your face into her ass!  \"<i>Mmm, you like that, don'tcha?</i>\" she growls, grinding her huge, soft ass across your face, giving you an up-close and personal feel of her egg-laying hips.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 30, "cor", 0);
+	dynStats("lus", 30);
 	combatRoundOver();
 }
 public function BrigidAI():void {
@@ -825,7 +825,7 @@ public function phoenixPlatoonFireBreath():void {
 public function phoenixPlatoonLustbang():void {
 	outputText("\"<i>LUSTBANG OUT!</i>\" one of the rear-most phoenixes shouts, causing all the other warriors to duck down behind their shields.  Oh, shit!  A large glass sphere rolls out from the shield wall, and immediately explodes in a great pink cloud.  You cough and wave your arms, but by the time the cloud has dissipated, you feel lightheaded and lusty, barely able to resist the urge to throw yourself at the phoenixes and beg for their cocks and cunts.");
 	//(Effect: Large lust increase)
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 40, "cor", 0);
+	dynStats("lus", 40);
 	combatRoundOver();
 }
 
@@ -943,7 +943,7 @@ public function phoenixMissionary():void {
 	if(player.cockTotal() > 1) outputText("s");
 	outputText(" and gather your gear.");
 	//(Return to Mezzanine main menu)
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	doNext(1);
 }
 
@@ -963,7 +963,7 @@ public function phoenixWanking():void {
 
 	outputText("\n\nYour [cock " + y + "] explodes, pumping a thick load into the shocked phoenix's mouth.  She gags on your cum, finally swallowing it as the last of your sperm drips into her mouth.  With a grin, you tell her what a good job she did as you withdraw your [cock " + y + "]  from her grip.  With little rivulets of cum dripping down her face, the half-breed collapses onto her back, rapidly fingering herself.");
 	//(Return to Mezzanine main menu)
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	doNext(1);
 }
 	
@@ -993,7 +993,7 @@ public function gitButtRoadPhoenix():void {
 
 	outputText("\n\nWhen you come to your senses a few minutes later, the phoenix-girl is asleep, still holding you tight.  You pull her deflated lizard dick out of your ass and shudder as a torrent of her sizzling hot spunk dribbles out onto her thighs and hips.  You wriggle out of her tight embrace and give her a little kiss on the cheek before collecting your [armor] and heading out.");
 	//(Return to Mezzanine main menu)
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	doNext(1);
 }
 
@@ -1030,7 +1030,7 @@ public function phoenixAginal():void {
 	//v3 = quantity
 	player.createStatusAffect("eggs",rand(6),0,(5+rand(3)),0);
 	//(Return to Mezzanine main menu)
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	doNext(1);
 }
 
@@ -1070,7 +1070,7 @@ public function ropeStruggles(wait:Boolean = false):void {
 public function lustSpikeAttack():void {
 	outputText("The Harpy Queen draws a strange arcane circle in the air, lines of magic remaining wherever the tip of her staff goes.  You try to rush her, but the circle seems to have created some kind of barrier around her.  You can only try to force it open - but too late!  A great pink bolt shoots out of the circle, slamming into your chest.  You suddenly feel light-headed and so very, very horny...");
 	//(Effect: Heavy Lust Damage)
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 40, "cor", 0);
+	dynStats("lus", 40);
 	combatRoundOver();
 }
 
@@ -1218,7 +1218,7 @@ public function letHarpyQueenGo():void {
 		doNext(1);
 		flags[kFLAGS.HARPY_QUEEN_EXECUTED] = -1;
 	}
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", -5);
+	dynStats("cor", -5);
 }
 
 //Throne Room -- [Harpy Queen] -- [Let Her Go] -- [Forgive]
@@ -1312,7 +1312,7 @@ public function harpyQueenSexAnal():void {
 	outputText("\n\nShe squeezes down so hard on your cock you feel like it's ready to burst.  Instead, though, you feel a sudden surge in your loins.  You have only enough time to sink your hands into the queen's cheeks and let out a powerful roar of pleasure as you cum, shooting a great big rope of hot cum right up her ass.  The queen screeches as you unload inside her, and the sudden motion of the queen's mouth sets Hel right off.  The salamander grabs the queen's head and crushes it against her hips, burying the harpy's nose inside her snatch as she cums over the bitch's face.");
 	outputText("\n\nSpent, you pull out of the broodmother's now-gaping asshole.  Her huge asscheeks, however, bottle up your load inside her, preventing it from pooling out.  Laughing, you squeeze her squishy ass one last time before Hel rolls her over and pins her again.");
 	//(Return to normal room menu)
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	doNext(1);
 }
 
@@ -1345,7 +1345,7 @@ public function vaginalHarpyQueenSex():void {
 		outputText(" hollow and empty.  You and Hel slowly withdraw, causing some of your semen to leak out of the harpy's massive canal, leaving your cock and Hel's tail a spunk-and-juice-covered mess.");
 	}
 	outputText("\n\nAfter a fuck like that, the broodmother will be laying a clutch of your eggs in no time.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	doNext(1);
 }
 

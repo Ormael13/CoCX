@@ -142,7 +142,7 @@ public function sandTrapPheremones():void {
 	else {
 		var damage:Number = (10 + player.lib/10);
 		outputText("  Despite ducking away from the jet of fluid as best you can, you cannot avoid some of the stuff splashing upon your arms and face.  The substance feels oddly warm and oily, and though you quickly try to wipe it off it sticks resolutely to your skin and the smell hits your nose.  Your heart begins to beat faster as warmth radiates out from it; you feel languid, light-headed and sensual, eager to be touched and led by the hand to a sandy bed...  Shaking your head, you try to stifle what the foreign pheromones are making you feel.");
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", damage, "cor", 0);
+		dynStats("lus", damage);
 		damage = Math.round(damage * lustPercent()/10)/10;
 		outputText(" (" + damage +" lust)");
 	}
@@ -286,7 +286,7 @@ public function dickwieldersLoseToSandTarps():void {
 	outputText("\n\nYou awaken a while later, wearily getting to your feet and looking around.  You are standing in a featureless stretch of desert... there is no suggestion of the sandtrap, or indeed that you are in the same place where it caught you.  A fair amount of time has passed though, judging by the sky above you.  Perhaps it was all a particularly lucid mirage?  A sensation of... fullness in your abdomen suggests otherwise.  Clutching your bowels uneasily, you make your way back to camp.");
 	monster.createStatusAffect("Fertilized",0,0,0,0);
 	sandTrapPregChance();
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lib", 1, "lus=", 0);
 	slimeFeed();
 	//reduce lust, increase lib, slimefeed, reset hours since cum
 	cleanupAfterCombat();
@@ -319,7 +319,7 @@ public function chicksLoseToSandTarp():void {
 	outputText("\n\nYou awaken a while later, staggering to your feet and looking around.  You are standing in a featureless stretch of the desert... there is no suggestion of the sandtrap, or indeed that you are in the same place where it caught you.  A fair amount of time has passed though, judging by the sky above you.  Perhaps it was all a particularly lucid mirage?  A sensation of... fullness in your abdomen suggests otherwise.  Clutching your bowels uneasily, you make your way back to camp.");
 	//buttpreg only if RNG decided trap was fertilized, reduce lust, increase lib, simefeed
 	if(monster.hasStatusAffect("Fertilized") >= 0) sandTrapPregChance();
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lib", 1, "lus=", 0);
 	slimeFeed();
 	//reduce lust, increase lib, slimefeed, reset hours since cum
 	cleanupAfterCombat();
@@ -353,7 +353,7 @@ public function genderlessLoss():void {
 	//butteggpreg only if RNG has trap with fertilized eggs, reduce lust, increase lib, slimefeed
 	sandTrapPregChance();
 	
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lib", 1, "lus=", 0);
 	slimeFeed();
 	//reduce lust, increase lib, slimefeed, reset hours since cum
 	cleanupAfterCombat();
@@ -403,7 +403,7 @@ public function birfSandTarps():void {
 	else outputText("\n\nYou smile lazily, then lie back and glory in the sensual haze the oil has left you in.  After you have spent many minutes lying listening to the happy twittering of your flytrap children above you, you reluctantly get up.  You only hope that you get to experience the unearthly wonder of birthing these strange creatures again, and again, and again.");
 	buttChange(25,true,true,false);
 	outputText("\n");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 4, "lus", -100, "cor", 0);
+	dynStats("lib", 1, "sen", 4, "lus=", 0);
 }
 
 //\"<i>Hands</i>\" (Z)
@@ -516,7 +516,7 @@ public function useSandTarpsHands():void {
 	outputText("\n\nYou sigh with immense satisfaction and step back from the sandtrap.  Taking into account what an excellent job it did you opt not to rub its face in what you have made it do, particularly as you have managed to get quite a bit of your fluids on it anyway.  It watches you, still flushed and mouth slightly ajar, as you leisurely pull your [armor] back on.");
 	outputText("\n\n\"<i>Please, lion,</i>\" it manages eventually.  You look at the strange, half-buried creature and notice that spots of fluid are darkening the sand around it; it is evidently perversely turned on by your domineering actions, and you have left it in no way satiated.  You curl your lip into an evil smirk.");
 	outputText("\n\n\"<i>Not today, I think,</i>\" you say over your shoulder, as you clamber out of its pit.  \"<i>I think you'll have to try a bit harder if you want to get what you want from this lion.</i>\"  Your smile broadens as a deeply frustrated moan reaches your ears from behind you...");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	cleanupAfterCombat();
 }
 
@@ -544,7 +544,7 @@ public function rideDatSandTarpLikeIts1999():void {
 	outputText("\n\nIn an amplified post-coital euphoria, you slide off the sandtrap, almost falling straight over- you have been at it so long you've lost sensation in your [legs].  You slowly redress and then, before you take your leave, kneel next to the sandtrap's head.  It is still lying with its arms spread-eagled upon the slope, its abused, wilted oil prong slowly retracting, looking semi-comatose.  Smiling, you stroke its brow until it looks up and focuses on you.");
 	outputText("\n\n\"<i>What do you say, slave?</i>\"");
 	outputText("\n\nIt takes the creature several moments to gather its wits.  \"<i>Th-thank you, lion.</i>\"  Glowing with satisfaction, you begin the climb out of your conquest's hole and back towards camp.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	cleanupAfterCombat();
 }
 //\"<i>Vagina</i>\" (Z)
@@ -585,7 +585,7 @@ public function stickWangInSandgina():void {
 	if(player.balls > 0) outputText("balls ache and your ");
 	outputText("vision swims a bit as you slowly recede from the sandtrap, dripping shared sex as you go.  You give the top half of the creature a careful berth as you pick up your [armor] and slowly dress, but it is in no shape for retaliation.  The black haired androgyne seems to be in a deeply satisfied post-coital trance, humming and fluttering softly to itself as it trails patterns in the sand.  It blinks unsteadily at you as you begin to clamber your way out of the hole.  Behind you you hear sand being flung as it begins to go about the task of re-immersing itself.");
 	outputText("\n\n\"<i>Thank you for your seed, lion,</i>\" its sleepy words reach you as you pull yourself clear of the hollow and step out towards camp.  \"<i>Perhaps next time we meet I will return the favor, hmm?</i>\"  In your wearily tranquil fug you can't tell if it intends this as an invitation or a threat.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	cleanupAfterCombat();
 }
 
@@ -648,7 +648,7 @@ public function nagaThreesomeWithSandTrap():void {
 	outputText("\n\nEventually the two of you ride out your shared orgasms and, after relaxing for a short while in naga's arms sharing the bliss of an oil-coated post-coitus, you slowly disentangle from the sandtrap.  Exhausted by hypnosis and your own ministrations, the androgyne sinks down into the sand and slumps its head into its four arms, covered from head to waist in sticky sex.  Hand in hand, you and the naga slither out of its hole.  Your partner lets out an uncharacteristic giggle as a fluttering snore reaches you from below.");
 	outputText("\n\n\"<i>That was wonderful,</i>\" she whispers as she slowly releases you and begins to trail off into the shimmering heat.  \"<i>Everything is so much more fun when you do it with two.</i>\"");
 	outputText("\n\nYou definitely think visiting the desert more often is a good idea.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	cleanupAfterCombat();
 }
 

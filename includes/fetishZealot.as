@@ -50,7 +50,7 @@ public function zealotSpecial1():void {
 		//The Zealot seems to have taken on the appearance of a young adult wearing a student uniform of sorts; of course, this isn't any less perverted than any of the other costumes this man wears.  This one includes a number of loose straps that you're certain would cause large sections of his clothes to fall off if somebody pulled on them.
 		outputText("The Zealot student looks at you a little shyly and sticks a pencil in his mouth while pushing a hand in front of his groin, trying to hide a rather obvious bulge.  The whole scene is rather cute, and you feel incredibly aroused afterwards.", false);
 	}
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (7+rand(player.lib/20+player.cor/20)), "cor", 0);
+	dynStats("lus", (7+rand(player.lib/20+player.cor/20)));
 	combatRoundOver();
 }
 //Special2: Lust transfer spell, it becomes more and 
@@ -58,7 +58,7 @@ public function zealotSpecial1():void {
 //higher, but he can use it at any time (like the cultist).
 public function zealotSpecial2():void {
 	outputText("The zealot suddenly cries out and extends his arms towards you; your mind is suddenly overwhelmed with a massive wave of arousal as images of every kind of fetish you can imagine wash over you, all blended together.  After a moment you are able to recover, but you notice that the Zealot doesn't seem to be as aroused as before.", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", monster.lust/2, "cor", 0);
+	dynStats("lus", monster.lust/2);
 	monster.lust /= 2;
 	combatRoundOver();
 }
@@ -249,7 +249,7 @@ public function zealotLossRape():void {
 	}
 	//After any zealot rape
 	//Reduce intelligence, set lust to zero, then add some lust based on libido and corruption
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", -1, "lib", 0, "sen", 0, "lus", -100, "cor", 2);
+	dynStats("int", -1, "lus=", 0, "cor", 2);
 	//Trigger bad end if player's intelligence is less than 10 after being drained.
 	if(player.inte < 10) {
 		outputText("You find that your mind is unable to return to reality, and it moves on to another, then another.  Later you feel a female body come and pick you up, but you are too messed up to react to it...", false);
@@ -274,7 +274,7 @@ public function zealotLossRape():void {
 		outputText("\n\nYou find that your " + player.armorName + " are back to normal, and there is no sign of the strange clothes you were wearing before.", false);
 	}
 	outputText("  The ordeal has also left you with a slightly dulled mind, and some of the desire you felt still lingers.", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", player.cor/20+player.lib/10, "cor", 0);
+	dynStats("lus", player.cor/20+player.lib/10);
 	cleanupAfterCombat();
 }
 public function zealotDefeated():void {
@@ -321,6 +321,6 @@ public function zealotWinRape():void {
 		outputText("Your lusts sated for now, you rise up off of him and put your " + player.armorName + " back on.  You decide to leave him lying there, still coughing from the blow to his stomach.  ", false);
 		cuntChange(monster.cockArea(0),true);
 	}
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	cleanupAfterCombat();
 }

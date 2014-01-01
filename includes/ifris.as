@@ -96,9 +96,9 @@ public function liftWhileIfrisWatches():void {
 
 	outputText("\"<i>Mmm... lovely. Maybe next time I'll get to see a little more.</i>\" She grins a little then, exposing her fanged teeth to you briefly before she turns and slinks from the gym, her posh little bottom swaying more than it has any real right to. You can't help but stare until she's gone, and you shake your head, trying to clear it to go about your business...", false);
 	//Stat changes HERE!
-	if(player.str < 90) dynStats("str", .5,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
-	if(player.tou < 40) dynStats("str", 0,"tou", .3, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5, "cor", 0);
+	if(player.str < 90) dynStats("str", .5);
+	if(player.tou < 40) dynStats("tou", .3);
+	dynStats("lus", 5);
 	//Body changes here
 	//Muscleness boost!
 	outputText(player.modTone(85,5+rand(5)), false);
@@ -148,8 +148,8 @@ public function showOffForIfris():void {
 	if(player.gender == 0 || (player.femininity < 40 && player.cor > 75 && player.faceType == FACE_COW_MINOTAUR)) {
 		outputText("Ifris watches you for a moment as you move down to the bench, but her eyes clearly wander elsewhere now and then. The pleasant smile never leaves her pretty face, but it's clear she's distracted or even disinterested for some reason. Soon enough she turns to leave, a bored little sigh leaving her. Her hips sway with a sexy gait as though it were natural, though nothing about her seems particularly excited at the moment...", false);
 		//Stat changes HERE!
-		if(player.str < 90) dynStats("str", .5,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
-		if(player.tou < 40) dynStats("str", 0,"tou", .3, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+		if(player.str < 90) dynStats("str", .5);
+		if(player.tou < 40) dynStats("tou", .3);
 		//Body changes here
 		//Muscleness boost!
 		outputText(player.modTone(85,5+rand(5)), false);
@@ -243,9 +243,9 @@ public function showOffForIfris():void {
 		flags[kFLAGS.TIMES_FUCKED_IFRIS_LICKED]++;
 	}
 	//Stat changes HERE!
-	if(player.str < 90) dynStats("str", .5,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
-	if(player.tou < 40) dynStats("str", 0,"tou", .3, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	if(player.str < 90) dynStats("str", .5);
+	if(player.tou < 40) dynStats("tou", .3);
+	dynStats("lus=", 0);
 	//Body changes here
 	//Muscleness boost!
 	outputText(player.modTone(85,5+rand(5)), false);
@@ -325,9 +325,9 @@ public function ifrisDP():void {
 	outputText("It is some time until you gain the energy to rise.", false);
 	fatigue(10);
 	//Stat changes HERE!
-	if(player.str < 90) dynStats("str", .75,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
-	if(player.tou < 40) dynStats("str", 0,"tou", .5, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	if(player.str < 90) dynStats("str", .75);
+	if(player.tou < 40) dynStats("tou", .5);
+	dynStats("lus=", 0);
 	//Body changes here
 	//Muscleness boost!
 	outputText(player.modTone(85,5+rand(5)), false);

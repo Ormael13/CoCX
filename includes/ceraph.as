@@ -175,7 +175,7 @@ public function maleFuckCeraphsPussy():void {
 	
 		outputText("As you leave, you don't bother to spare a glance at the confused omnibus, she isn't worth your time.", false);
 	}
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 3, "sen", 3, "lus", -100, "cor", 1);
+	dynStats("lib", 3, "sen", 3, "lus=", 0, "cor", 1);
 	if(gameState < 1 || gameState > 2) doNext(13);
 	else cleanupAfterCombat();
 }
@@ -228,7 +228,7 @@ public function rideCeraphsCockLikeaBAWSSexclamation11eleven():void {
 	else outputText("You bend over and rub your belly while whispering in her ear, \"<i><i>Like mother, like child.</i></i>\"\n\n", false);
 	outputText("As you leave, you don't bother to spare a glance at the confused omnibus, she isn't worth your time.\n\n", false);
 	cuntChange(monster.cockArea(0), true);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 3, "sen", 3, "lus", -100, "cor", 1);
+	dynStats("lib", 3, "sen", 3, "lus=", 0, "cor", 1);
 	player.knockUp(1,400,61);
 	if(gameState < 1 || gameState > 2) doNext(13);
 	else cleanupAfterCombat();
@@ -258,7 +258,7 @@ public function loseToCeraphAndGetPiercingsInEarsOrSomethingSomehow():void {
 	player.earsPShort = "green gem-stone ear-studs";
 	player.earsPLong = "Green gem-stone ear-studs";
 	flags[kFLAGS.PC_FETISH] = 1;
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 25, "cor", 5);
+	dynStats("lus", 25, "cor", 5);
 	cleanupAfterCombat();
 }
 	
@@ -280,7 +280,7 @@ public function loseToCeraphAnGetPierced2():void {
 	outputText("She smiles down at you and teases, \"<i><i>Still haven't figured it out?  I'll give you a hint:  Isn't being paralyzed nearly the same as being tied down?</i></i>\"\n\n", false);
 	
 	outputText("Your body goes beet-red as it suddenly tries to struggle against her invisible restraints.  It really is!  You nearly cry as the restraint turns you on more and more.  Ceraph's cursed piercings have given you a fetish for being restrained.  You nearly faint when you think of the tentacle monsters, and you know you have no hope of resisting if they ever bind you up.  <b>Somehow you'll have to get used to being a bondage fetishist...</b>", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 25, "cor", 5);
+	dynStats("lus", 25, "cor", 5);
 	player.nipplesPierced = 1;
 	player.nipplesPShort = "seamless black nipple-studs";
 	player.nipplesPLong = "Seamless black nipple-studs";
@@ -337,7 +337,7 @@ public function getPiercedByCeraphLoss3():void {
 	outputText("\"<i><i>So, I take it you like it?  You'll never be able to raise a hand in anger again.  I guess if you want to win fights you'll have to tease your foes into submission with that luscious body.  I suppose that might be hard to do when you're getting off on exposing yourself and cumming from the thought of being tied down,</i></i>\" she laughs.\n\n", false);
 	
 	outputText("You tremble in impotent fury at the violation as the demoness flounces away.  You'd pursue her, but between her ideas and exposing your crotch to the entire area, you need to cum more than anything.  You scurry back to camp, too horny to think straight and your new piercing aching just enough to keep you from forgetting about it.", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 25, "cor", 5);
+	dynStats("lus", 25, "cor", 5);
 	cleanupAfterCombat();
 }
 
@@ -589,7 +589,7 @@ public function ceraphSpecial1():void {
 			//(AUTO-LOSE)
 			else {
 				outputText("She throws her hands out, palms facing you, and a rush of pink flame washes towards you.  Too busy with your own attack to effectively dodge, you're hit full on by the pink fire.  Incredibly, it doesn't burn.  The fire actually seems to flow inside you, disappearing into your skin.  You stumble, confused for a second, but then it hits you.  Every inch of your body is buzzing with pleasure, practically squirming and convulsing with sexual delight.  You collapse, twitching and heaving, feeling the constant sensation of sexual release running from your head to your " + player.feet() + ".  Too horny and pleasured to resist, you lie down and tremble, occasionally rubbing yourself to enhance the bliss.", false);
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 1500, "cor", 0);
+				dynStats("lus", 1500);
 			}
 		}
 	}
@@ -603,7 +603,7 @@ public function ceraphSpecial2():void {
 		//If player has l2 piercing
 		if(flags[kFLAGS.PC_FETISH] >= 2) {
 			outputText("  Gods this turns you on!", false);
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5, "cor", 0);
+			dynStats("lus", 5);
 		}
 		player.createStatusAffect("Bound",2+rand(5),0,0,0);
 	}
@@ -611,7 +611,7 @@ public function ceraphSpecial2():void {
 	else {
 		if(rand(2) == 0) {
 			outputText("Ceraph cuddles up against you, embracing you tenderly.  Her more-than-ample bosom crushes against your flank, and her demonic prick grinds and rubs against your " + player.skinDesc + ", smearing it with her juices.  Her hands slide over your bound form, sneaking underneath your " + player.armorName + " to caress you more intimately while you're at her mercy.", false);
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 9+player.sens/10, "cor", 0);
+			dynStats("lus", 9+player.sens/10);
 		}
 		//[SPECIAL 2 WHILE PC RESTRAINED]
 		else {
@@ -620,7 +620,7 @@ public function ceraphSpecial2():void {
 			else if(player.lust < 60) outputText("It gets inside you and turns you on, stoking the flames of your desire.", false);
 			else if(player.lust < 80) outputText("It makes you very horny, and you begin to wonder if it's worth resisting.", false);
 			else outputText("It makes you ache and tremble with need, practically begging for another touch.", false);
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5+player.cor/10+player.lib/20, "cor", 0);
+			dynStats("lus", 5+player.cor/10+player.lib/20);
 		}
 	}
 	combatRoundOver();
@@ -662,9 +662,9 @@ public function ceraphBoundWait():void {
 	outputText("Why bother resisting?  The feeling of the leather wrapped tightly around you, digging into your " + player.skinDesc + ", is intoxicating.", false);
 	if(flags[kFLAGS.PC_FETISH] >= 2) {
 		outputText("  You squirm inside the bindings as you get more and more turned on, hoping that Ceraph will strip away your armor and force you to parade around as her bound, naked pet.", false);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5, "cor", 0);
+		dynStats("lus", 5);
 	}
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", player.lib/20 + 5 + rand(5), "cor", 0);
+	dynStats("lus", player.lib/20 + 5 + rand(5));
 	outputText("\n\n", false);
 	enemyAI();
 }
@@ -683,7 +683,7 @@ public function ceraphSpecial3():void {
 		monster.tou += 10;
 		monster.HP += 20;
 		monster.lust = 33;
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 3, "cor", 0);
+		dynStats("lus", 3);
 		outputText("\n", false);
 		combatRoundOver();
 		return;
@@ -948,7 +948,7 @@ public function ceraphRapesYouBADDAWGYODIGGITY():void {
 	outputText("The perverse sexuality fills you with need, but Ceraph only smirks and puts her foot against your cheek, shoving your face into the sex-fluid-filled mud.  She mutters, \"<i><i>It looks like you managed to save a few brain-cells this time slut.  Because you've been so disobedient you don't get to cum with me.  You can lay here and ache for sex a few hours I think.</i></i>\"\n\n", false);
 	
 	outputText("Her whip uncurls itself from around you, but by some sorcerous trick, you're unable to separate your limbs and free yourself.  Ceraph snickers and gives your rump a crack with her whip before sauntering off, leaving you to lie there, growing more and more sexually frustrated.  Eventually you doze off into a sort of half-sleep, dreaming of being dominated as the demon's fluids dry on your face.", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 200, "cor", 0);
+	dynStats("lus", 200);
 	if(gameState < 1 || gameState > 2) doNext(13);
 	else cleanupAfterCombat();
 }
@@ -1016,7 +1016,7 @@ public function hugeCorruptionForceFuckCeraph():void {
 	outputText("Ceraph gasps, \"<i><i>Ohhhhkay.  That felt goooooooood.</i></i>\"  She gathers some of your sperm from her space and swallows it with a smile before she offers, \"<i><i>You've shown me a good time, mortal.", false);
 	if(gameState < 1 || gameState > 2) {
 		outputText("</i>\"", false);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 3, "sen", 3, "lus", -100, "cor", 1);
+		dynStats("lib", 3, "sen", 3, "lus=", 0, "cor", 1);
 		doNext(13);
 		return;
 	}
@@ -1032,7 +1032,7 @@ public function hugeCorruptionForceFuckCeraph():void {
 	outputText("(Do you accept Ceraph's Offer?)", false);
 	//Y/N – remove 1 fetish level or +10 gems
 	doYesNo(ceraphsNiceOffer,cleanupAfterCombat);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 3, "sen", 3, "lus", -100, "cor", 1);
+	dynStats("lib", 3, "sen", 3, "lus=", 0, "cor", 1);
 }
 
 public function ceraphsNiceOffer():void {
@@ -1089,7 +1089,7 @@ public function friendlyNeighborhoodSpiderManCeraph():void {
 	outputText("</i>\"\n\n", false);
 	
 	outputText("The demoness lifts one heeled foot high onto a boulder and winks at you, letting her whip rub up and down her hard, nodule-studded shaft.  Her tail rises languidly between her perfect, lissom legs, rubbing the glistening wet delta of her sex enticingly.  The demon coos, \"<i>Oh, I do love putting on a show for my future pets.  Tell me, did you really come up here to fight?  I'd rather lie back in the sunlight, rubbing my fingers over my glistening skin and showing everyone just how wondrous sex with me would be.  You can even go if you want, or maybe you'd have something worth trading with me?</i>\"", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (5 + player.cor/10 + player.lib/20), "cor", 0)
+	dynStats("lus", (5 + player.cor/10 + player.lib/20), "cor", 0)
 	//[Fight] [Trade] [Run]
 	simpleChoices("Fight",startAFightWithCeraph,"Trade",tradeCeraphSomething,"",0,"",0,"Run",runFromCeraphsNiceDeal);
 }
@@ -1109,7 +1109,7 @@ public function runFromCeraphsNiceDeal():void {
 	if(player.cor > 66) outputText("grab your equipment and ", false);
 	outputText("beat a hasty retreat from the trickster of fetishes.  Her masturbatory moans chase you down the mountainside back towards your camp, spiking the already-burning furnace of your lust.", false);
 	//(+10 lust + 10lust/piercing)
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (10 + flags[kFLAGS.PC_FETISH] * 10), "cor", 0);
+	dynStats("lus", (10 + flags[kFLAGS.PC_FETISH] * 10));
 	doNext(13);
 }
 
@@ -1177,7 +1177,7 @@ public function tradeCeraphBimboLiqueur():void {
 	consumeItem("BimboLq",1);
 	takeDamage(4);
 	flags[kFLAGS.PC_FETISH] = 0;
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -20, "cor", 0);
+	dynStats("lus", -20);
 	doNext(13);
 }
 	
@@ -1189,7 +1189,7 @@ public function tradeCeraphCrotchityBits():void {
 	if(player.statusAffectv1("Exgartuan") == 1) {
 		outputText("A disembodied voice roars out, \"<i>FUCK NO!  You are NOT giving me to that crazy bitch!</i>\"  Exgartuan doesn't seem to want to run the risk of being taken by Ceraph, and he completely assumes control of your " + player.legs() + " to make you flee with all due haste.  He taunts, \"<i>Rip off your own little dick, why doncha!  You'd look better with just a pussy anyhow ya dried out old sow!</i>\"\n\n", false);
 		outputText("Ceraph seems perturbed but doesn't bother to pursue you.", false);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -20, "cor", 0);
+		dynStats("lus", -20);
 		doNext(13);
 		return;
 	}
@@ -1314,7 +1314,7 @@ public function giveUpYourBallsOrWhateverForLessFetishes():void {
 		//(-fetish, +cock-toy status +1)
 		flags[kFLAGS.PC_FETISH]--;
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00218]++;
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -2, "sen", -2, "lus", 0, "cor", 5);
+		dynStats("lib", -2, "sen", -2, "cor", 5);
 	}
 	//(Pussy)
 	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00217] == 2) {
@@ -1327,7 +1327,7 @@ public function giveUpYourBallsOrWhateverForLessFetishes():void {
 		outputText("You work your jaw in consternation, trying to dredge up a response or stop her, but before you can do anything, she pushes your old " + vaginaDescript(0) + " down on her throbbing demon-shaft.  It knocks the strength out of your " + player.legs() + ", and you lie there moaning while Ceraph prances off, masturbating herself with your disembodied pussy.  Eventually you cum to the feeling of demon-cum spurting inside you, but it's a strange, empty orgasm.", false);
 		player.removeVagina(0,1);
 		//(-100 lust, -1 fetish, +1 vagina toy status)
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 5);
+		dynStats("lus=", 0, "cor", 5);
 		flags[kFLAGS.PC_FETISH]--;
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00219]++;
 	}
@@ -1377,7 +1377,7 @@ public function giveUpYourBallsOrWhateverForLessFetishes():void {
 	
 		outputText("Ceraph turns and prances off through the rocks, tweaking your nipples HARD every time you start to make a move to follow her.  It's no use.  She vanishes before long, leaving you to deal with the slowly dwindling sensation of her cock in your tits.\n\n", false);
 		//(-1 fetish, +1 tit toy status)
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 20, "cor", 5);
+		dynStats("lus", 20, "cor", 5);
 		flags[kFLAGS.PC_FETISH]--;
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00220]++;
 	}
@@ -1436,7 +1436,7 @@ public function ceraphBodyPartDreams():void {
 			
 			outputText("You're a useless cum-dump, there only to slurp up the leavings from Ceraph's more treasured pets, but it makes you oh-so horny.  You pant in your sleep, hopelessly aroused but denied release by the fading dream.", false);
 			//(+4 sens, +200 lust)
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 4, "lus", 200, "cor", 0);
+			dynStats("sen", 4, "lus", 200);
 		}
 		//PUSSY CLITPUMP
 		else if(subChoice == 1) {
@@ -1455,7 +1455,7 @@ public function ceraphBodyPartDreams():void {
 			
 			outputText("Sudden warmth plasters your feet and ankles, drenching them with the inhumanly warm jizm of Ceraph's pleasure.  She sighs, relaxing her grip on your ankles while you pump away, dutifully milking every ounce of demonic juice onto your willing soles.  \"<i>Gooood pet... yes, good girl,</i>\" coos the still blissful dominatrix before she suddenly yanks the pump from your groin without warning.  Your poor pussy jiggles with pain and pleasure, orgasming hard enough to squirt all over your cock-sized clitty.  Thankfully, the swelling of your genitals immediately fades, leaving them larger but less freakish.  Ceraph presses her still-hard cock against your lips, but the mental link starts to fade as she does so, leaving you to return to your normal dreams...", false);
 			//(-3 sens, -100 lust)
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -3, "lus", -100, "cor", 0);
+			dynStats("sen", -3, "lus=", 0);
 		}
 		//PUSSY FLESHLIGHT
 		else if(subChoice == 2) {
@@ -1470,7 +1470,7 @@ public function ceraphBodyPartDreams():void {
 			
 			outputText("The vision and feelings slowly fade, letting you out of their grip and leaving faint after-images of Ceraph cleaning you with her tongue.", false);
 			//(-100 lust, +2 sens, +1 cor)
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 2, "lus", -100, "cor", 1);
+			dynStats("sen", 2, "lus=", 0, "cor", 1);
 		}
 		else {
 			//Vagina Wall-Cubby
@@ -1483,7 +1483,7 @@ public function ceraphBodyPartDreams():void {
 			outputText("\n\nA quim-stained crotch smacks into your lips, and explosions of warmth begin detonating deep inside your depths, the blooms liquid heat bringing you to a cunt-clenching climax of epic proportions.  Your muscles lock and your [butt] rises from your resting place, cheeks clenched in tight pleasure.  A scream of bliss tears through the night as you cum.  Jizz froths from your entrance as you're overfilled, spilling out to roll to the ground.  It feels so good, so goddamn good.  Your wails slowly trail off to whimpers, aftershocks of enjoyment causing your body to twitch wildly beneath the blankets until the cream-spurting cock is finally removed from your jizz-glazed cavern.");
 			outputText("\n\n\"<i>I suppose I should thank [name] for giving me such an excellent fuck-toy,</i>\" the mysterious-yet-familiar voice comments.  Wait... Ceraph!");
 			outputText("\n\nYou jolt awake, sweating buckets and shivering.  Somewhere, the demoness just blew a load in your old pussy.  The thought would keep you awake, if that orgasm hadn't been so goddamn satisfying.");
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 2, "lus", -100, "cor", 1);
+			dynStats("sen", 2, "lus=", 0, "cor", 1);
 		}
 	}
 	else if(choice == 3) {
@@ -1493,14 +1493,14 @@ public function ceraphBodyPartDreams():void {
 			outputText("You feel your tits dragging across the smooth cave floor... a dozen pairs arranged by size, starting with a meager pair of A-cups at the tip of your tail, up to DD cups not far below your waist.  The well-arranged boobs swell up your thighs, hitting F-cups by your hips.  Three more rows of mammoth mammaries hang from your torso, straining your poor back with their obscene weight.  You want to clutch at them, but you have no arms, and every movement is an agony of pleasure, dragging nipples, tit-pussies, and teats beneath you.  Juices run unhindered from your cloaca, your poor, neglected pussy unable to deal with the erotic sensations.");
 			outputText("\n\nIn a panic, you wriggle your tit-tail, propelling yourself around the confines of your small chamber.  The door is locked, as always, but you press your tight, hard nipples against it anyhow.  Mistress has kept you pent up for so long, trapped away in this little box.  You regret everything!  You'll never doubt her again!  She was so right... nipples can feel so wonderfully, exquisitely pleasureable, but you can't take it any longer.  Every movement, every sinuous slide, they feel so good.  You can cum just from pacing about, but you know you'll just wind up a twisted, curling mass of squirming nipple-flesh, your tail half-tied in knots as it tries to rub each pair of breasts against another. You know because you've done it countless times already.");
 			outputText("\n\nA spiral of pain twists through your pleasure-wounded psyche, and you remember yourself, not the demon-enslaved naga.  Still, conjoined as your minds are, you're able to recognize that one of those many breasts used to be yours.  Ceraph has put it to good use.  The realization jars you to wakefulness, and you're forced to try and go to sleep with the knowledge that somewhere, your breasts are being used to break a naga.  Sleep does not return easily.");
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5+player.lib/5, "cor", 0);
+			dynStats("lus", 5+player.lib/5);
 		}
 		//Milk Dispenser
 		else if(subChoice == 1) {
 			outputText("You dream about your tits.  Not your current [chest], but the ones from before.  Before Ceraph took them.  You can't see anything.  You can't hear anything.  There's something sucking on your nipples - slowly, incessantly tugging.  Trickles of warm wetness express from your milky tits with every pull.  There's a subtle relief mixed with erotic pleasure, and as the sucking action repeats itself, you come to realize that it's mechanical.  Something is milking your tits!  It never stops or slows.  The milking simply continues.");
 			outputText("\n\nSuddenly, from out of nowhere, you hear a voice in the silence, \"<i>Well, I can't thank [name] enough for these.  No shortage of milk here!</i>\"  Then, there is brightness.  The appearance of light reveals a strange, disembodied view of a demon standing next to a tank. It's Ceraph!  She holds a cup of coffee, and as she pulls a lever, creamy breast milk flows into the mocha-colored beverage, lightening it significantly. Your tits, hooked up to some kind of odd machinery, tremble and shake as fluids are fed into them by transparent cables.  The speed of the milking increases, gallons gushing from your tender teats in mere seconds.  Faster and faster the liquids flow, a veritable waterfall of lactic cream.");
 			outputText("\n\nErotic energy sizzles through your nipples as the milking goes faster and faster, the pleasure unbearable.  Sadly, just when you feel on the cusp of orgasm, the machine shuts down, and the vision fades.  There will be no relief for you tonight.");
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5+player.lib/5, "cor", 0);
+			dynStats("lus", 5+player.lib/5);
 		}
 		//Tit Volleyball
 		else {
@@ -1519,7 +1519,7 @@ public function ceraphBodyPartDreams():void {
 			outputText("\n\nAs Ceraph groans, the incubi high-five each other, and your prone breast slowly dribbles milk into the sand, the dream fades, and you wake up.  You stare blankly for a moment, trying to piece together what just happened");
 			if(silly()) outputText(" and what possible ramifications it has for your mental health");
 			outputText(", until you dismiss it as corruption and toss over, entering a peaceful, dreamless sleep.");
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5+player.lib/5, "cor", 0);
+			dynStats("lus", 5+player.lib/5);
 		}
 	}
 	//COCKUUUU
@@ -1531,7 +1531,7 @@ public function ceraphBodyPartDreams():void {
 			
 			outputText("The process is repeated twice more, each more painful and arousing than the last.  Just as you're nearly driven to wakefulness, a cool salve is applied to the oh-so-sensitive member, smothering the pain with blissful cool.  Ceraph's nails tease their way through the new substance, setting you on edge.  While you're ready for an explosive climax, it never comes.  That's the last thing your phantom cock feels that night, and you drift into a peaceful, if horny, slumber.", false);
 			//-3 sensitivity +200 lust.
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -3, "lus", 200, "cor", 0);
+			dynStats("sen", -3, "lus", 200);
 		}
 		//FUCK A BUTT
 		else if(subChoice < 5) {
@@ -1557,7 +1557,7 @@ public function ceraphBodyPartDreams():void {
 			
 			outputText("With the sensation and scenario fading, your confused dreams shift before resuming a more normal flow.  You've no doubt you'll feel sated in the morning, but the lingering echoes of Ceraph's pet in your mind wishes you'd go submit to her.", false);
 			//(-100 lust, +1 corruption)
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 1);
+			dynStats("lus=", 0, "cor", 1);
 		}
 		//FEATHER TORTURE
 		else if(subChoice < 7) {
@@ -1567,7 +1567,7 @@ public function ceraphBodyPartDreams():void {
 		
 			outputText("The scene fades, but that maddening, feathery purgatory on your phantom cock never goes away.  You're kept hard, on the verge of orgasm, all... night... long...", false);
 			//(+100 lust, +30 hours since last orgasm)
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 3, "lus", 100, "cor", 0);
+			dynStats("sen", 3, "lus=", 100);
 			player.hoursSinceCum += 30;
 		}
 		//Cock Sandwich
@@ -1584,7 +1584,7 @@ public function ceraphBodyPartDreams():void {
 			outputText("\n\nCeraph coos happily as she pinches your nipple.  \"<i>Good pet.  You may cum... tomorrow.  For now, stay nice and hard.  You've only been edged six days so far; another one won't be too big of a deal, will it?</i>\"");
 			outputText("\n\nNo!  Anything but that!  You start to beg, but a gag fills your mouth.  It tastes sweet, like strawberries and cream, and the dribbling meat-stick pinned between the succubi's tight bods begins to drip even more.  What did she put on this gag?  There's no way to ask - Ceraph's heels click a few times as she wanders away, and the two tainted twats below are too busy rubbing your cock and making out to give you answer.  A moan of bliss reverberates through your gag, releasing more yummy, cock-thickening goodness.  Your torturers hear as well, and they slow their gyrations to make sure you don't cum yet.  After all, they get to abuse you for another day...");
 			outputText("\n\nYou wake with your heart pounding.  That was hot, but agonizing.  It will be hard to go back to sleep now.");
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5+player.lib/5, "cor", .5);
+			dynStats("lus", 5+player.lib/5, "cor", .5);
 			player.hoursSinceCum += 100;
 		}
 	}
@@ -1642,7 +1642,7 @@ public function buttRapeCeraph():void {
 	outputText(" asshole leaks spunk everywhere. Disgusted with her", false);
 	if(player.cor < 33) outputText(" and a little bit by yourself", false);
 	outputText(", you drop her like a discarded rag.  She moans and begins masturbating, half-insensate from the rough treatment.  You ignore her, get dressed, and get out of there before the mountain's beasts show up.  Ceraph is in for a wild night!", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	if(gameState < 1 || gameState > 2) doNext(13);
 	else cleanupAfterCombat();
 }

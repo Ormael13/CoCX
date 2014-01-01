@@ -1120,7 +1120,7 @@ public function possessIzma():void {
 	
 	outputText("\n\n\"<i>That's what you get for submitting to other people without my permission,</i>\" you say, pushing Hel's tail-cockring off of Izma's cock.  \"<i>Now be a good girl and do something about... that...</i>\"");
 	
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
@@ -1158,7 +1158,7 @@ public function inCampHelNagaLuv():void {
 	
 	outputText("\n\nBefore you know it, you're drifting off to sleep in your lover's embrace...  The last thing you hear is her quiet whisper: \"<i>Nagas really do give the best hugs...</i>\"");
 	
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }	
@@ -1186,7 +1186,7 @@ public function nagaCoilForHelCampWithGirls():void {
 	
 	outputText("\n\nBefore you know it, you're drifting off to sleep in your lover's embrace.... The last thing you hear is her quiet whisper:  \"<i>Nagas really do give the best hugs...</i>\"");
 	
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }	
@@ -1224,7 +1224,7 @@ public function centaurMountsCampHel():void {
 	
 	outputText("\n\n\"<i>Holy shit,</i>\" she gasps, breathing hard, You look down from your loft position on centaur-back as Hel rolls over, idly fingering out thick globs of seed still leaking from her well-abused hole.  \"<i>Thanks for the ride, lover mine.</i>\"");
 	
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }	
@@ -1255,7 +1255,7 @@ public function femtaurPlusCampHel():void {
 	outputText("\n\n\"<i>I have got... to get... one of those,</i>\" Hel pants, her eyes still rolled up in her head.");
 	
 	outputText("\n\nBreathing heavily, you pat her on the cheek and stumble off to get cleaned up.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
@@ -1278,7 +1278,7 @@ public function heliaFollowerTentafuck():void {
 	outputText("\n\nWith a contented sigh, you yank your wilting pricks out of your fiery lover, letting her flop to the ground in a puddle of sticky spunk.  She groans loudly, rolling over and blinking hard.  \"<i>You're just a miniature tentacle monster, you know that?  And I love it!  You gotta do that again some time... just like a walking gang bang.</i>\"");
 	
 	outputText("\n\nYou roll your eyes and go to get cleaned up.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
 }
@@ -1299,7 +1299,7 @@ public function boxWithInCampHel():void {
 		
 		outputText("\n\n\"<i>Alright, alright,</i>\" Hel groans, settling down beneath you.  \"<i>You win... this time!</i>\"  Her smirk widens even more as your eyes jump wide; the familiar, naughty feel of clawed hand grabbing at your [butt].  Hel licks her lips with a slow, sultry motion and asks, \"<i>Now then, lover mine, to the victor go the spoils...</i>\"");
 		//[Display Rough Sex menu]
-		dynStats("str", 1,"tou", 1, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+		dynStats("str", 1,"tou", 1);
 		heliaRoughSex(false);
 		addButton(9,"Leave",eventParser,13);
 	}
@@ -1310,7 +1310,7 @@ public function boxWithInCampHel():void {
 		outputText("\n\n\"<i>Alright, alright,</i>\" Hel groans, settling down beneath you.  \"<i>You win... this time!</i>\"");
 		outputText("\n\nYour eyes jump wide as you feel a familiar clawed hand grab a handful of your [butt].  Hel licks her lips with a slow, sultry motion and asks, \"<i>Now then, lover mine, to the victor go the spoils...</i>\"");
 		//Display Rough Sex menu
-		dynStats("str", 2,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+		dynStats("str", 2);
 		heliaRoughSex(false);
 		addButton(9,"Leave",eventParser,13);
 	}
@@ -1319,7 +1319,7 @@ public function boxWithInCampHel():void {
 		outputText("\n\nAs you desperately fend off the salamander's flurry of blows, though, you feel yourself wearing down.  Her punches start getting through your guard, scaled knuckles hammering into your flanks and gut, too many and too hard to withstand.  Eventually, battered and bruised, a particularly hard blow throwing you to the ground.  You land with a groan, and a moment later feel Hel's soft, leathery sole pressing down on your [chest].");
 		outputText("\n\n\"<i>Ha! Not today, [name]! You're good, lover, but you're gonna need to practice a lot more to beat me!  Now then.... what shall the victor do with her spoils?</i>\"");
 		//[Proceed to Lose to Hel sex scenes]
-		dynStats("str", 0,"tou", 2, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
+		dynStats("tou", 2);
 		if(player.lust >= 33 && player.hasCock()) {
 			if(player.cockThatFits(helCapacity()) >= 0) {
 				muddyLizardFeet();
@@ -1397,7 +1397,7 @@ public function muddyLizardFeet():void {
 	
 	outputText("\n\nYou brush her hair and nod, happy to enjoy the loving embrace of your lover.");
 	
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
+	dynStats("sen", -2, "lus=", 0);
 	doNext(13);
 }
 
@@ -1602,7 +1602,7 @@ public function heliaAndVapula():void {
 	
 		outputText("\n\n\"<i>Don't worry, I can take care of myself.  And if I get stuck in your camp, who cares?  If we did this every time I stumbled upon your place I would get lost more often!</i>\" she says with a cute little wink; she's still limping and giggling as she heads toward the plains.  Meanwhile, Vapula is a sorry mess.  Still digesting her copious cum-meal, she doesn't seem to mind the sexual filth coating her face.  You shrug and leave your pet to her digestion.");
 	}
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 1);
+	dynStats("sen", -2, "lus=", 0, "cor", 1);
 	doNext(13);
 }
 
@@ -1666,7 +1666,7 @@ public function girlsThreesomeHelAndKiha():void {
 	outputText("\n\nYou grab Kiha's horns to steady yourself as your cunt and ass spasm around the thick tail-cocks crammed inside you, your [legs] wobbling weakly after the double-penetration.  Even as you recover, though, the dragoness mashes Hel's face into her belly, commanding, \"<i>Come on, firebutt, clean it off!</i>\"");
 	
 	outputText("\n\nWith the two lizard-girls distracted, you languidly pull their limp tails out of your holes, relishing the blessedly empty feeling left before before you collapse into a pool of your own juices... just to catch your breath, you insist.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
+	dynStats("sen", -2, "lus=", 0);
 	doNext(13);
 }
 //Male Helia + Kiha Threesome (Episode III: Revenge of the Footjobs)
@@ -1704,7 +1704,7 @@ public function dudeHeliaAndKihaThreeSome():void {
 	outputText("\n\n\"<i>I'm not.  A Lizard,</i>\" Kiha growls.  Rather than answer, Hel hooks her leg around and gives Kiha a foot-full of cum on the face before bounding away, laughing madly.");
 
 	outputText("\n\n\"<i>FIREBUUUUUUUTTT!!!</i>\"");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
+	dynStats("sen", -2, "lus=", 0);
 	doNext(13);
 }
 
@@ -1757,7 +1757,7 @@ public function helXValeriaFemalePC():void {
 	outputText("\n\n\"<i>Oh, for fuck's sake!</i>\" Hel snaps, trying to pull out again and again, tearing at the goo covering her body, only for it to reform a moment later.");
 	
 	outputText("\n\nHanging her head, Hel moves with you so that you can both get on all fours. Hel swings a leg over your ass, making it so that you're sitting butt-to-butt, the knots in both your asses slowly deflating - a bit too realistically for comfort...");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -3, "lus", -100, "cor", 0);
+	dynStats("sen", -3, "lus=", 0);
 	doNext(13);
 }
 
@@ -1847,7 +1847,7 @@ public function giveHeliaAnalTraining():void {
 	outputText("</i>”");
 	
 	consumeItem("Gob.Ale",1);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	doNext(13);	
 }
 
@@ -1905,7 +1905,7 @@ public function yesMakeHeliaAGapeSlut():void {
 	else outputText("allows you to hose her down with your ongoing waves of salty jism, soaking her in your sexual scent.");
 	outputText(" Helia burps. “<i>Fuck me that was awesome! Whoah, don’t mind me, but I, uh... I think I’m gonna stay here for a little while, maybe just rock up and down till I come down off this buzz. She blushes and begins to finger her snatch again. Just let me... just let me get used to.</i>” She shoos you away and goes back to toying with herself, getting used to her new “flexibility”.");
 	outputText("\n\n“<i>You’re gonna fall in love with my asshole, lover mine,</i>” Helia calls after you.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	doNext(13);
 }
 

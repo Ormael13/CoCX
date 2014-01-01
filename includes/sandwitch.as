@@ -13,7 +13,7 @@ public function sandwitchRape():void {
 			doNext(5026);
 			return;
 		}
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+		dynStats("lus=", 0);
 		outputText("Your wobbly legs give out underneath you as your body's will to fight evaporates.\n\n", true);
 		if(player.hairColor == "sandy blonde") {
 			outputText("The Sand Witch smiles wickedly and intones, \"<i>Tresed eht retaw llahs klim ruoy.</i>\"\n\n", false); 
@@ -23,12 +23,12 @@ public function sandwitchRape():void {
 				player.breastRows[0].breasts = 2;
 				player.breastRows[0].breastRating = 3;
 				if(player.breastRows[0].nipplesPerBreast < 1) player.breastRows[0].nipplesPerBreast = 1;
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 2, "lus", 1, "cor", 0);
+				dynStats("sen", 2, "lus", 1);
 			}
 			if(player.biggestTitSize() > 0 && player.biggestTitSize() < 3) {
 				outputText("Your breasts suddenly balloon outwards, stopping as they reach a perfectly rounded C-cup.  ", false);
 				player.breastRows[0].breastRating = 3;
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 1, "lus", 1, "cor", 0);
+				dynStats("sen", 1, "lus", 1);
 			}
 			if(player.averageNipplesPerBreast() < 1) {
 				outputText("A dark spot appears on each breast, rapidly forming into a sensitive nipple.  ", false);
@@ -39,7 +39,7 @@ public function sandwitchRape():void {
 					if(player.breastRows[0].nipplesPerBreast < 1) player.breastRows[0].nippleLength = .2;
 					player.breastRows[0].nipplesPerBreast = 1;
 				}
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 2, "lus", 1, "cor", 0);
+				dynStats("sen", 2, "lus", 1);
 			}
 			if(player.biggestLactation() > 0) {
 				outputText("A strong pressure builds in your chest, painful in its intensity.  You yank down your top as ", false);
@@ -52,12 +52,12 @@ public function sandwitchRape():void {
 					player.boostLactation(.7);
 					outputText("Your breasts feel fuller... riper... like your next milking could be even bigger.  ", false);
 				}
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 4, "lus", 15, "cor", 0);
+				dynStats("lib", 1, "sen", 4, "lus", 15);
 			}
 			if(player.biggestLactation() == 0) {
 				outputText("A pleasurable release suddenly erupts from your nipples!  Twin streams of milk are spraying from your breasts, soaking into the sand immediately.  It stops all too soon, though the witch assures you that you can lactate quite often now.  ", false);
 				player.boostLactation(1);
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", .5, "sen", 1, "lus", 10, "cor", 0);
+				dynStats("lib", .5, "sen", 1, "lus", 10);
 			}
 			outputText("\n\nThe witch whispers into your ear, \"<i>I ALWAYS get what I want, dear...</i>\"", false);
 		}
@@ -69,7 +69,7 @@ public function sandwitchRape():void {
 		//RAEP
 		outputText("  You hear the soft impact of her robe upon the sands and cannot resist a peek at your captor.  You turn to behold a curvy, dark-skinned beauty, whose form is dominated by a quartet of lactating breasts.  Somewhere in your lust fogged mind you register the top two as something close to double-D's, and her lower pair to be about C's.  She smiles and leans over you, pushing you to the ground violently.\n\nShe turns over you and drops down, planting her slick honey-pot firmly against your mouth.  Her scent is strong, overpowering in its intensity.  Your tongue darts out for a taste and finds a treasure trove of sticky sweetness.  Instinctively you tongue-fuck her, greedily devouring her cunny-juice, shoving your tongue in as far as possible before suckling at her clit.  Dimly you feel the milk spattering over you, splashing off you and into the warm desert sands.  Everywhere the milk touches feels silky smooth and sensitive, and your hands begin stroking your body, rubbing it in as the witch sprays more and more of it.  You lose track of time, orgasming many times, slick and sticky with sexual fluids.", false);
 		slimeFeed();
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 5, "lus", 0, "cor", 0);
+		dynStats("lib", 1, "sen", 5);
 		if(sand == 0) sand = 1;
 		cleanupAfterCombat();
 	}
@@ -119,12 +119,12 @@ public function sandwitchRaped():void {
 					outputText("With a bestial cry of lust, you shove your shaft deep within one of her vaginas, past her cervix and into her womb where you blast your potent, corrupted, demon-tainted seed.  ", false);
 					outputText("\n\nThe sand witch screams in savage denial as you plant your seed deep within her body, your corruption no doubt making it extra potent. You gaze into her eyes, revelling in her expression of horror. Without uttering a word, you continue to fuck her, making sure your seed is well-entrenched within her womb, feeling it splatter and bubble around your " + cockDescript(0) + ".  You wonder if she will remember the pleasure her body felt today, and if she will be more likely to drop to her knees before you than to fight... ", false);
 					outputText("Finally finished, you pull your " + cockDescript(0) + " from one of her well-used slits, your " + cockDescript(0) + " drooling cum even now. With a grin, you walk away, happy with your little encounter.  ", false);
-					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+					dynStats("lus=", 0);
 				}
 			}
 			//Multiprick
 			if(player.cockTotal() > 1) {
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+				dynStats("lus=", 0);
 				if(rand(2) == 0) {
 					rapeSandwitchMultis();
 					return;
@@ -157,7 +157,7 @@ public function sandwitchBewbs():void {
 	outputText("She breaks the kiss and smiles at you, whispering. Your eyes slowly close as you grow drowsy, too late you realize she's casting a spell. You fall asleep, the sand witch's milk in your stomach churning, gurgling.  ", false);
 	outputText("You wake up in the desert, immediately grabbing at your body to see if anything's changed...", false);
 	slimeFeed();
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 25, "cor", 0);
+	dynStats("lus", 25);
 	cleanupAfterCombat();
 	outputText("\n", false);
 }
@@ -176,7 +176,7 @@ public function sandwitchSex():void {
 	outputText(cockDescript(0) + " throbs with need, even as you empty your lust into the defeated sand witch.", false);
 	outputText("\n\nWith a satisfied smirk, you lay atop your prize, your " + cockDescript(0) + " still twitching within her depths. One of the sand witch's hands rubs at your head, teasing your " + player.skinDesc + ". Like a fresh youth, you fall asleep, " + cockDescript(0) + " buried deep in the sand witch.  ", false);
 	outputText("With a start you wake up, only to find the sand witch still passed out beside you.  Almost thinking it was a dream, you touch your groin tenderly and rub softly. There's a faint trace of soreness, and you remember the ferocity with which you mashed your pelvises together.  You get up and get ready.  ", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	cleanupAfterCombat();
 }
 /*
@@ -184,7 +184,7 @@ Event: Centaur-SWitch: Player Raping
 Definition: Tentacle Cock: very long (smallest 2+ feet) */
 public function sandwitchCentaurBoning():void {
 	spriteSelect(50);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	outputText("The Sand Witch is panting before you, her clothes in disarray ", false);
 	//[win via HP]
 	if(monster.HP < 1) outputText("and torn in many places. ", false);
@@ -266,7 +266,7 @@ public function SWCentaurMore(argument:Number):Boolean {
 		outputText("Too late you realize that she has been casting a spell for the past few minutes. Before you can react, everything grows dark.", false);
 		//[Whatever effect the witch has if the player wins, rapes her, and she gets to cast a spell] [end]
 		//1 change
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+		dynStats("lus=", 0);
 		//Grow tits
 		if(player.biggestTitSize() == 0) {
 			outputText("\n\n(You grow a perfectly rounded pair of C-cup breasts!)", false);
@@ -274,20 +274,20 @@ public function SWCentaurMore(argument:Number):Boolean {
 			player.breastRows[0].breasts = 2;
 			player.breastRows[0].breastRating = 3;
 			if(player.breastRows[0].nipplesPerBreast < 1) player.breastRows[0].nipplesPerBreast = 1;
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 2, "lus", 1, "cor", 0);
+			dynStats("sen", 2, "lus", 1);
 			return false;
 		}
 		//Grow tits bigger
 		if(player.biggestTitSize() < 3) {
 			outputText("\n\n(Your breasts suddenly balloon outwards, stopping as they reach a perfectly rounded C-cup.)", false);
 			player.breastRows[0].breastRating = 3;
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 1, "lus", 1, "cor", 0);
+			dynStats("sen", 1, "lus", 1);
 			return false;
 		}
 		if(player.biggestLactation() == 0) {
 			outputText("\n\n(Your breasts now lactate.)", false);
 			player.boostLactation(1);
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", .5, "sen", 1, "lus", 10, "cor", 0);
+			dynStats("lib", .5, "sen", 1, "lus", 10);
 			return false;
 		}
 		//Make lactation happen
@@ -297,7 +297,7 @@ public function SWCentaurMore(argument:Number):Boolean {
 			return false;
 		}
 		//Libido boost if nothing else
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 4, "sen", 0, "lus", 0, "cor", 0);
+		dynStats("lib", 4);
 		outputText("\n\n(Your libido has been boosted significantly by the Sand Witch's magic.)", false);
 		return false;
 	}
@@ -443,7 +443,7 @@ public function knotSandwitch():void {
    if(player.cumQ() >= 25 && player.cumQ() < 100) outputText("Your cum expands her pussy, stretching her out and leaving your " + cockDescript(0) + " swimming in your spunk, trapped within her tight-stretched walls by your massive knot.", false);
    if(player.cumQ() >= 100 && player.cumQ() < 500) outputText("Your cum begins to pump into her corked body, filling her hole to the brim.  Surely the pressure is piling the jizz deep into her womb, and after what feels like forever, the overfull spunk shoves back on your knot, a little dribbling out around the edges of her taut feminine folds as her pussy reaches its limit.", false);
    if(player.cumQ() >= 500) outputText("Your cum spurts into her in rapid jets, coating the inside of her walls briefly white as more continues to pour into her. Her cunt begins to fill, and as she strugles to relieve the pressure that continues to pump into her, she only succeeds in spurring your orgasm to a new height.  You continue to blast within her, your knot holding her fast as she squirms, each shot of cum from your prick managing to squirt a tiny bit of jizz from your locked genitals.", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 }
 
 //Sandwitch multi-cock corrupt rape
@@ -451,7 +451,7 @@ public function rapeSandwitchMultis():void {
 	spriteSelect(50);
 	outputText("With the corruption of this realm comfortably throbbing in your shameless veins, you feel your mind opening to new possibilities.  Despite the slickly perfect fit of the sand witch's multiple pussies as you pound into her, and the way she moans with each thrust of your titanic members, you feel there are still some further alleys of pleasure within her left to explore.  Long inured to carnal pleasure that would have rendered your earlier, purer, self unconscious,  your mind wanders back to the witch's weapon of lust, the vibrating stone of pleasure.  You feel it's time to give her a dose of her own medicine.\n\n", true);
 	outputText("You grin wickedly at the humiliated and whimpering witch as you rape her.  Between involuntary gasps of pleasure as you steadily pound into her sopping snatches, she looks afraid, not knowing the source of your mirth.  It soon becomes clear enough. She struggles a little once she hears the low buzzing of her own corrupted pleasure stone and bucks and thrashes as you push the persistent little charm into her tight, but well-cum-lubed ass.  The feel of the stone vibrating within her spreads through to your cocks, enhancing the pleasure as she clenches and spasmes while being violated multiple ways.  All too soon, it brings you to a gushing orgasm.  As you finally withdraw from the troublesome sand witch, you spit on her milk-oozing form and take your leave.", false);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	cleanupAfterCombat();
 }
 
@@ -560,7 +560,7 @@ public function missingoSex5():void {
 //{Next Page}
 public function missingoSex6():void {
 	spriteSelect(50);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	cleanupAfterCombat();
 	hideUpDown();
 	statScreenRefresh();
@@ -625,7 +625,7 @@ public function eggwitchForeplay():void {
 	if(player.canOvipositBee()) outputText("Sitting");
 	else outputText("Laying");
 	outputText(" against your mate, you both take the moment to revel in the anticipation of coitus.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 25, "cor", -.35);
+	dynStats("lus", 25, "cor", -.35);
 	doNext(laySomeEggsInThatWitchFinally);
 	//go to merge
 }
@@ -653,7 +653,7 @@ public function getToFuckingWithZeEggsInWitch():void {
 	}
 	//both go to merge
 	doNext(laySomeEggsInThatWitchFinally);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 15, "cor", 0);
+	dynStats("lus", 15);
 }
 
 //(Merge)
@@ -723,7 +723,7 @@ public function laySomeEggsInThatWitchFinally():void {
 		else flags[kFLAGS.EGG_WITCH_TYPE] = 2;
 	}
 	player.dumpEggs();
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	cleanupAfterCombat();
 }
 
@@ -873,5 +873,5 @@ public function sandwitchSpanking():void {
 	player.lust = 100;
 	flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
 	cleanupAfterCombat();
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 5, "lus", -100, "cor", 0);
+	dynStats("sen", 5, "lus=", 0);
 }

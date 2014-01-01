@@ -66,7 +66,7 @@ public function meetJasun():void {
 			if(player.tone < 75) {
 				outputText("\"<i>Hrm, I was going to suggest something, but quite frankly, you'd just hold me back. Maybe we'll meet each other again at some point when you're better fleshed out.</i>\" He grins and thrusts himself past you to leave the changing room. You feel flushed from contact with his skin and otherwise long to be around him more - to think, he hadn't even introduced himself.  You leave the changing room and try to get your wits back about you for whatever happens next.\n\n", false);
 				//(+15 Lust, back to gym entrance)
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (10+player.lib/10), "cor", 0);
+				dynStats("lus", (10+player.lib/10));
 				outputText("You book it out of there.  What a waste.", false);
 				doNext(13);
 				return;
@@ -78,7 +78,7 @@ public function meetJasun():void {
 			if(player.armorName != "slutty swimwear") {
 				outputText("\"<i>I was going to ask you to swim with me for a bit to get my blood really pumping, but you don't look like you're prepped for swimming at all!  Come back with the right gear on and maybe we can talk more about this.</i>\"  He walks with a very justified pose out of the room, almost exaggeratedly, and brushes by you just enough to make you blush from contact with his rough, and yet very arousing skin.  The right gear? Surely he's talking about a swimsuit?  Where can you get one of those..?  Maybe the tailor in town has one, but if not there, then maybe you'll just have to find one on your journey.\n\n", false);
 				//(+15 Lust, back to gym entrance)
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (10+player.lib/10), "cor", 0);
+				dynStats("lus", (10+player.lib/10));
 				outputText("You book it out of there.  What a waste.", false);
 				doNext(13);
 				return;
@@ -114,7 +114,7 @@ public function meetJasun():void {
 			else outputText("a little more compatible with me", false);
 			outputText(", we can go swim.</i>\" He hesitates for a moment at the mirror, and then walks past you quickly without making eye contact. Feeling dejected and suddenly very alone, you ignore the sensation caused by his skin brushing against yours and walk back to the gym's entrance. Maybe you can work yourself back into Jasun's graces with time.\n\n", false);
 			//(-15 Lust, back to gym entrance)
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -15, "cor", 0);
+			dynStats("lus", -15);
 			doNext(13);
 			return;
 		}
@@ -138,7 +138,7 @@ public function meetJasun():void {
 			
 			outputText("\"<i>" + player.short + ", you know, I see that a lot has changed with you. That's fine, and it's entirely up to you, but I think today I should probably swim alone. You can come and visit me anytime, of course, maybe things will be like they were before in time.</i>\" He hesitates for a moment at the mirror, and then walks past you quickly without making eye contact. Feeling dejected and suddenly very alone, you ignore the sensation caused by his skin brushing against yours and walk back to the gym's entrance. Maybe you can work yourself back into Jasun's graces with time.\n\n", false);
 			//(-15 Lust, back to gym entrance)
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -15, "cor", 0);
+			dynStats("lus", -15);
 			doNext(13);
 			return;
 		}
@@ -219,7 +219,7 @@ public function jasunSecks():void {
 		outputText("When you wake back up, you find that your bikini is next to you and that everything else seems to be fine. You put your bikini back on and look around, unable to see Jasun anywhere. You walk toward the gym's exit and reminisce of your experience today, ready for whatever your next escapade will bring.", false);
 	}
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00180]++;
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	doNext(13);
 }
 

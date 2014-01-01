@@ -177,7 +177,7 @@ public function beeEncounterLevel3():void {
 			outputText("After hours of her forcefully filling your hole, her stinger pumping what feels like gallons of her bee-seed into your bowels while awkwardly dealing with your needs; she finally pulls out. She smiles and lies down on your back and your legs finally give out from exhaustion.\n\n", false);
 			outputText("When you awaken, you're covered in honey and what you can only assume is the lubrication from her ovipositor. You stand with a bit of a struggle and notice that in your wild state you seem to have devastated the little clearing, as it's covered with broken trees and trampled plants. A thin trail of honey leads away from the devastation into the undergrowth.", false);
 		}
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", -.5, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+		dynStats("int", -.5, "lus=", 0);
 		slimeFeed();
 		//Anal bee pregnancy!
 		if(rand(3) == 0 && player.buttPregnancyType == 0) {
@@ -202,7 +202,7 @@ public function beeEncounterLevel3():void {
 		//epilogue
 		outputText("You awaken, your nose full of a honey like scent, some strange fluid on your back, and the feeling of something leaking from you.", false);
 		buttChange(25, true);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", -.5, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+		dynStats("int", -.5, "lus=", 0);
 		//Anal bee pregnancy!
 		if(rand(3) == 0 && player.buttPregnancyType == 0) {
 			player.buttPregnancyIncubation = 48;
@@ -252,7 +252,7 @@ public function beeEncounterLevel3():void {
 		outputText("you drive yourself to orgasm after orgasm.  For hours you lie there, licking, masturbating, and allowing your backside to be slowly filled with sweet fluid and the occasional bump of what you can only assume is an egg.\n\n", false);
 		//Recovery
 		outputText("Eventually you realize she is no longer feeding you honey, and the bee-girl pulls her shriveled organ from your rectum.  She pats you on the head and begins to stagger away, honey dripping from between her thighs and her once bloated rear-abdomen now looking more appropriate for her thin frame.", false);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", -.5, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+		dynStats("int", -.5, "lus=", 0);
 		slimeFeed();
 		//Anal bee pregnancy!
 		if(rand(3) == 0 && player.buttPregnancyType == 0) {
@@ -298,7 +298,7 @@ public function beeTalk():void {
 public function declineBeeTalk():void {
 	spriteSelect(6);
 	outputText("She pouts and returns to her sing-song buzzing.  Her fingers trace circles between her thighs and the sweet scent intensifies.  You beat a hasty retreat before her efforts overcome your reason.", true);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (20+player.lib/15), "cor", 0);
+	dynStats("lus", (20+player.lib/15));
 	doNext(13);
 }
 
@@ -333,7 +333,7 @@ public function seduceBeeGirl():void {
 		outputText("You can feel a pressure rising from the base of your cock. Thrusting deeply, you let out a howl as you cum, your cock spilling forth its sticky load into her, filling her pussy to the brim with your fluid.  ", false);
 		outputText("Panting, you collapse onto her, as your cock finally stops twitching. Kissing you again, the bee-girl slides from beneath you and stands. She holds her stomach while a large smile plays on her face. You smile back at her as a feeling of contentment washes over you. You have no regrets as you part.", false);
 		slimeFeed();
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+		dynStats("lus=", 0);
 	}
 	doNext(13);
 }
@@ -377,7 +377,7 @@ public function beeRapesYou():void {
 					outputText("You awake in a puddle of cum, the scent wafting up to you and making your stomach churn. You manage to settle it and stagger to your hooves, wobbly walking away using trees to steady yourself.\n\n", false);
 					outputText("Despite everything, you realize that you feel oddly good; a warm tingling sensation ripples through your whole body every time you move and the pain from the stingers appears to have disappeared entirely. With a smile you kind of hope the next time you meet a bee-girl you will be victorious, so you can show her how to please you properly.", false);
 				}
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", -.5, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+				dynStats("int", -.5, "lus=", 0);
 			}
 			//[Male without testicles:
 			else if(player.gender == 1 && player.balls == 0) {
@@ -395,7 +395,7 @@ public function beeRapesYou():void {
 
 				outputText("The combination of the lust filled poisons, pain and shame at your utter defeat and humiliation drive you to black out, welcoming the blissful darkness.\n\n", false);
 				outputText("When you awake, despite everything, you realize that you feel oddly good; a warm tingling sensation ripples through your whole body every time you move and the pain from the stingers appears to have disappeared entirely. With a smile you kind of hope the next time you meet a bee-girl you will be victorious, so you can show her how to please you properly.", false);
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", -.5, "lib", 0, "sen", 0, "lus", 100, "cor", 0);
+				dynStats("int", -.5, "lus=", 100);
 			}
 			//[Female:
 			else if(player.gender == 2) {
@@ -422,7 +422,7 @@ public function beeRapesYou():void {
 					outputText("You awake in a puddle of femcum, the scent wafting up to you and making your stomach churn. You manage to settle it and stagger to your hooves, wobbly walking away using trees to steady yourself.\n\n", false);
 					outputText("Despite everything, you realize that you feel oddly good; a warm tingling sensation ripples through your whole body every time you move and the pain from the stingers appears to have disappeared entirely. With a smile you kind of hope the next time you meet a bee-girl you will be victorious, so you can show her how to please you properly.", false);
 				}
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", -.5, "lib", 0, "sen", 0, "lus", 100, "cor", 0);
+				dynStats("int", -.5, "lus=", 100);
 			}
 			//[Herm:
 			else if(player.gender == 3) {
@@ -451,7 +451,7 @@ public function beeRapesYou():void {
 					outputText("You awake in a puddle of various sexual fluids, the scent wafting up to you and making your stomach churn. You manage to settle it and stagger to your hooves, wobbly walking away using trees to steady yourself.\n\n", false);
 					outputText("Despite everything, you realize that you feel oddly good; a warm tingling sensation ripples through your whole body every time you move and the pain from the stingers appears to have disappeared entirely. With a smile you kind of hope the next time you meet a bee-girl you will be victorious, so you can show her how to please you properly.", false);
 				}
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", -.5, "lib", 0, "sen", 0, "lus", 100, "cor", 0);
+				dynStats("int", -.5, "lus=", 100);
 			}
 			//[Genderless:
 			else {
@@ -467,7 +467,7 @@ public function beeRapesYou():void {
 
 				outputText("The malevolent bee-girls continue their ministrations though, delighting in the way your body is reacting. The combination of the lust filled poisons, pain and shame at your utter defeat and humiliation drive you to black out, welcoming the blissful darkness.\n\n", false);
 				outputText("You awake in a couple of hours and stagger to your hooves, wobbly walking away using trees to steady yourself.  Despite everything, you realize that you feel oddly good; a warm tingling sensation ripples through your whole body every time you move and the pain from the stingers appears to have disappeared entirely. With a smile you kind of hope the next time you meet a bee-girl you will be victorious, so you can show her how to please you properly.", false);
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", -.5, "lib", 0, "sen", 0, "lus", 100, "cor", 0);
+				dynStats("int", -.5, "lus=", 100);
 			}
 		}
 		//Lust:
@@ -526,7 +526,7 @@ public function beeRapesYou():void {
 				outputText("She pays no attention to that though, and busies herself with inserting her ovipositor inside it. The thick lubrication allows it quick entrance, and soon she's pumping her fluids into your bowels. The sensation proves too much for you and you begin to shake violently, incapable of touching yourself and alleviating the dreadful pressure.\n\n", false);
 				outputText("She seems to understand your problem though and, wanting to help you with your needs, begins to stroke where your genitals should be with her 'feet'. As she does this she starts to hum, a sound that obliterates what few thoughts you had left and which causes her entire body to vibrate. The mix of sensations is enough to stop you from shaking, but the pressure doesn't go away and you pass out as she continues her task.\n\n", false);
 			}
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", -.5, "lib", 0, "sen", 0, "lus", 100, "cor", 0);
+			dynStats("int", -.5, "lus=", 100);
 			//Anal bee pregnancy!
 			if(player.totalFertility() > rand(100) && player.buttPregnancyType == 0) {
 				player.buttPregnancyIncubation = 48;
@@ -549,7 +549,7 @@ public function beeRapesYou():void {
 			cleanupAfterCombat();
 			outputText("\n\nSeveral hours later you wake up free of pain - if anything you feel great, a warm tingling sensation rippling through your whole body every time you move as you sit upright. As you look down you see you are still naked and covered in your own seed. With a smile you kind of hope the next time you meet a bee-girl you will be victorious, so you can show her how to please you properly.", false);
 			sexed = true;
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+			dynStats("lus=", 0);
 			return;
 		}
 		//Generic male bee-rape
@@ -565,7 +565,7 @@ public function beeRapesYou():void {
 			//epilogue
 			outputText("You awaken, your nose full of a honey like scent, some strange fluid on your back, and the feeling of something leaking from you.", false);
 			slimeFeed();
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", -.5, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+			dynStats("int", -.5, "lus=", 0);
 			//Anal bee pregnancy!
 			if(rand(3) == 0 && player.buttPregnancyType == 0) {
 				player.buttPregnancyIncubation = 48;
@@ -600,7 +600,7 @@ public function beeRapesYou():void {
 			else outputText("Your moans are muffled by the honeyed pussy on your face, and you hear her starting to squeal loudly. Her thighs clamp tightly around your ears, grinding harder into your face as her stinger picks up the pace.  ", false);
 			outputText("It gets harder and harder to breathe, the thick flow of honey threatening to suffocate you as the bee-girl reaches her climax.  You feel your body finally succumbing to the pleasure and oxygen deprivation and cum HARD, the world going comfortably dark as you lose your grip on consciousness.", false);
 			slimeFeed();
-			dynStats("str", 0,"tou", 0, "spe", 0, "int", -.5, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+			dynStats("int", -.5, "lus=", 0);
 			cleanupAfterCombat();
 			return;
 		}
@@ -676,7 +676,7 @@ public function rapeTheBeeMultiCockStuff():void {
 		outputText("Letting go of her arms, you grip the base of her abdomen for leverage and let her arms and legs slide around you as your pace increases.  You show her how to press her breasts together against your " + cockDescript(0) + ", and she obliges, rubbing them back and forth as you fuck her.  With your jiggling breasts added to the mix, it becomes even more enjoyable, your " + breastDescript(0) + " mashing against hers.  The milk leaking out of your immense jugs runs down your bodies and adds further to the ocean of fluids forming between your hips.\n\n", false);
 		outputText("The heads of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " rub back and forth against the bee-girl's lips and face, and finally curiosity leads her to begin tasting, her surprisingly long tongue lassoing and swirling around every tip she can reach in turn, darting from one to another as if tasting flowers to provide an experience almost as unique as her pussy.\n\n", false);
 		outputText("You feel her abdomen pressing against your rear as you drive into her, the pressure in your groin building as her pussy and ass tighten around you. With a groan you cum, your hot seed gushing in alternating spurts out of each of your shafts into her eager little holes while your tight cunt juices itself with your own brand of honey. She clenches you tightly, her belly distending slightly as you empty your load into her pussy and ass while she squeals again at getting her face covered in seed.  Exhausted from the battle and the fuck, she relaxes and collapses on the ground, panting heavily and half-conscious.", false);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+		dynStats("lus=", 0);
 		cleanupAfterCombat();
 		return;
 	}
@@ -687,7 +687,7 @@ public function rapeTheBeeMultiCockStuff():void {
 		outputText("You decide that it's time to bring your other gift into play. Atop the bee-girl you fire in one more stroke of your " + cockDescript(0) + " and then you run your free hand from her black lips across her breast and across her abdomen before you rest it on her clit. You tweak her sensitive spot along with the strokes from your intruding member and then when the rush of nectar and cum juices from her pussy seem up to the task you grab hold of your other " + cockDescript(1) + " and forcefully ram it into her pussy right below your first entry.\n\n", false);
 		outputText("At this the bee-girl shrieks in utter bliss as her eyes roll back and she can't fight back the tingles coursing through her as you stretch her pussy lips.  You let go of her hands and watch with a satisfied grin as she tosses, turns, and clings to the dirt with a rich mix of pain and pleasure from the rough double-penetration. Suddenly you're caught off guard slightly as she pushes forward, almost tackling you. For an instant you're prepared to finish off the bee-girl, but the lust in her eyes is easy enough to read and she looks down, begging to be fucked and filled.  Grabbing onto her arms to brace against and suckling at her ample breast, you force your twin rods into her again and again while a pool of her sexual juices and sweet nectar form at your crotch from each slip in to her moist wetness. The bee-slut moans as you push your rock-hard cocks into her slick pussy, and you can just see the detectable bump of your cock head edging along her stomach, but strong as you are the tightness is overwhelming as her pussy muscles clench about your cocks.\n\n", false);
 		outputText("Letting go of your hands the bee-girl leans back and her mouth opens in a powerful scream of ecstasy that you're sure will scatter any wild-life or imps who hear the noise. As she flings herself back, your body clenches and a torrential storm of white, warm cum soars from the tip of your members into her innermost spaces. Unable to cope with the feelings coursing through her, the bee-girl nearly faints as she comes to a rest on your chest.  You catch your breath and the last couple of cum shots is milked by her still clenching pussy. Rolling over, you free both of your cocks from her fuck-hole and watch with more than a bit of satisfaction.  The dam breaks and a sea of white escapes her stretched, well-lubricated pussy. Pleased with your latest jaunt through the forest, you collect your gear and settle off, leaving the cum-drenched bee-girl covered in your seed.", false);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+		dynStats("lus=", 0);
 		cleanupAfterCombat();
 		return;
 	}
@@ -807,7 +807,7 @@ public function rapeTheBeeGirlWithADick():void {
 			if(player.cumQ() >= 750) outputText(" and watching as her lower body sinks into your spunk like a thick white bath", false);
 			outputText(". Once she looks comfortable you make your way back to camp, thoroughly satisfied.", false);
 		}
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+		dynStats("lus=", 0);
 		cleanupAfterCombat();
 	}
 	else if(rand(2) == 0) {
@@ -833,7 +833,7 @@ public function rapeTheBeeGirlWithADick():void {
 		if(player.cumQ() >= 250 && player.cumQ() < 500) outputText("You smile proudly at the steady stream of your cum that pours from her abused cunt, pooling underneath her.   Her abdomen even looks bloated with your seed.", false);
 		if(player.cumQ() >= 500 && player.cumQ() < 1000) outputText("You smile proudly at your handy-work, noting how bloated and distended the bee's abdomen is.  It bulges obscenely, nearly double its previous size.  A sizable river of your spunk drools from between your legs, but amazingly she seems able to keep most of your over-sized orgasm in.", false);
 		if(player.cumQ() >= 1000) outputText("You giggle at your poor victim's state.  She really is a mess.  Her abdomen and belly are both swollen, making her look pregnant in both her bee AND human halves.   A practical river of spunk drools from her glossy pussy-lips, pooling below her.  Even her ovipositor dangles down, dripping with your seed, forced out from her abdomen by the sheer amount of spunk she's carrying.  It twitches, bulges moving along its length, eventually dropping egg after egg on the ground, unable to keep in its cargo.", false);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+		dynStats("lus=", 0);
 		cleanupAfterCombat();
 	}
 	//Male 2
@@ -842,7 +842,7 @@ public function rapeTheBeeGirlWithADick():void {
 		outputText("You begin to push forward, sliding your " + cockDescript(x) + " against the soft folds of her pussy, her whimpers shifting gently into moans. Your grin widens as you penetrate her roughly in one strong stroke, the bee-girl's body tensing underneath you as a squeal leaves her lips. Looking into her eyes, you see a faint glimmer of defiance, and under your body you feel her shifting slightly, muscles growing firm and tense. The realisation hits you, and you manage to shift before her stinger comes into contact with you. Moving your knee, you pin her thick abdomen down and remove the threat.\n\n", false);
 		outputText("Unhindered, you start to fuck her. Her pussy tightens and convulses around your cock, becoming slick with her juices and your pre-cum. You can smell the sickly combination of nectar, sweat and love juices hanging thickly in the air. Your breathing becomes heavy while her moans get deeper and lust-filled. Her reluctance evaporates, her struggling shifts into more receptive movements against your body, her hips rocking against yours with each thrust, forcing your " + cockDescript(x) + " deeper into her tight honeypot.\n\n", false);
 		outputText("Letting go of her arms, you grip the base of her abdomen for leverage and let her arms and legs slide around you as your pace increases. You feel her abdomen pressing against your rear as you drive into her, the pressure in your " + ballsDescriptLight() + " building as her pussy tightens around you. With a groan you cum, your hot seed gushing inside of her. She clenches you tightly, her pussy milking your " + cockDescript(x) + " for every ounce, until the sticky white fluid is pouring from around your " + cockDescript(x) + ". Exhausted from the battle and the fuck, she relaxes and collapses on the ground, panting heavily and half-conscious.", false);
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+		dynStats("lus=", 0);
 		cleanupAfterCombat();
 	}
 }
@@ -913,7 +913,7 @@ public function rapeABeeGirlWithYourVagina():void {
 		if(player.isTaur()) outputText("You orgasm in no time, girl-cum-coating her face in the process.  You return the favor and dive into her muff, planting kisses in licks down as a reward for your victim's rather skilled efforts.  The taste is sweet and sexy all at once, and you quickly lose track of your reward scheme, simply licking and slurping to get as much of her nectar as possible until she is satisfied as well.", false);
 		else outputText("In no time you both orgasm, sweet girl-cum coating both your faces as you work each other's cunt with desperation born of desire.  ", false);
 	}
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	cleanupAfterCombat();
 }
 //FUTA Fallback
@@ -989,7 +989,7 @@ public function futaRapesBeeGirl():void {
 		else outputText("Your body's cum supply eventually empties", false);
 		outputText(", and you turn your back on your soaked, cum-bloated conquest and the puddle of spooge that's rapidly wicking into the ground.", false);
 	}
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	cleanupAfterCombat();
 }
 
@@ -1026,7 +1026,7 @@ public function beeGirlRapeForTheDistinguishedGentleman():void {
 		if(player.hasCock()) outputText(", spraying the fuzzy side of the bee's abdomen with your sticky come,", false);
 		outputText(" before you get enough.  Ahh, who knew that stuff would be this much better when it was still fresh in the bee?  You feel a strong urge to take the girl home with you and make her your 'pantry', but you groggily realize that she has to be fertilized with eggs by the queen bee before she produces your treat.  Shaking your head to clear the sugary haze, you take a firm grip on the bee's knob and decide to enact your original plan now; maybe you can capture the queen later.\n\n", false);
 		//(gain 2 libido and 2 sensitivity)
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 2, "sen", 2, "lus", -100, "cor", 0);
+		dynStats("lib", 2, "sen", 2, "lus=", 0);
 	}
 	//(if penis)
 	else if(select == 1) {
@@ -1057,7 +1057,7 @@ public function beeGirlRapeForTheDistinguishedGentleman():void {
 	outputText("Damn, that probably did some ear damage but was it ever worth it!  The bee-girl, having finally redirected every egg she had into her own swollen butthole and ceased climaxing, passes out.  You gather your things and leave her contorted and soaked body behind you as you head back to camp.", false);
 	//(gain 20 fatigue if spd<50)
 	if(player.spe < 50) fatigue(20);
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	cleanupAfterCombat();
 }
 
@@ -1123,7 +1123,7 @@ public function beeAlternate():void {
 		else outputText("your glorious but spent " + multiCockDescriptLight() + " dangling under your belly,", false);
 		outputText(" and leave the completely exhausted and drenched woman on the forest floor, wings and legs still twitching slightly, sending a fine mist of cum across the ground around her.", false);
 	}
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	doNext(13);
 	cleanupAfterCombat();
 }
@@ -1248,7 +1248,7 @@ public function nagaRapesPt2TheExtremeContinuationOfAwesome():void {
 
 		outputText("You pull your hand out and futilely try to wipe away the gunk on a nearby bush. The handmaiden is collapsed in a heap, excreting eggs from her dilated organ, mumbling blissfully delirious nonsense.  Gathering your things, you slither away.", false);
 	}
-	if(player.gender > 0) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	if(player.gender > 0) dynStats("lus=", 0);
 	doNext(13);
 	cleanupAfterCombat();
 }
@@ -1287,7 +1287,7 @@ public function milkAndHoneyAreKindaFunny():void {
 	//[You have found 1xBee Honey]
 	flags[kFLAGS.FORCE_BEE_TO_PRODUCE_HONEY] = 1;
 	//set lust to 0, increase sensitivity slightly
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", .2, "sen", 0, "lus", -50, "cor", 0);
+	dynStats("lib", .2, "lus", -50);
 	//You've now been milked, reset the timer for that
 	player.addStatusValue("Feeder",1,1);
 	player.changeStatusValue("Feeder",2,0);
@@ -1331,6 +1331,6 @@ public function layEggsInABeeSpiderLike():void {
 	
 	outputText("\n\nYou pull yourself free on unsteady legs, her gaping hole gushing emerald lube while her chitinous abdomen flops listlessly over her egg-filled ass.  You cut her free from your sticky webbing and gather up your [armor], shuffling back to camp as she collapses exhausted on her side, both hands wrapped around her tremendously swollen midsection.");
 	player.dumpEggs();
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	cleanupAfterCombat();
 }

@@ -113,10 +113,10 @@ public function dreamSelect():Boolean {
 	else outputText("\nYou barely rest, spending most of the time touching yourself and dreaming of ", false);
 	//LUST CHANGES
 	//Well adjusted cuts gain in half!
-	if(player.hasPerk("Well Adjusted") < 0) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (-dreamtemp/2), "cor", 0);
+	if(player.hasPerk("Well Adjusted") < 0) dynStats("lus", (-dreamtemp/2));
 	//Lust change!
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", dreamtemp, "cor", 0);
-	if(player.hasPerk("Lusty") >= 0) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", dreamtemp/3, "cor", 0);
+	dynStats("lus", dreamtemp);
+	if(player.hasPerk("Lusty") >= 0) dynStats("lus", dreamtemp/3);
 	//ACTUAL DREAM TEXTS
 	if(dreamtemp > 5) {
 		//Roll for dream!
@@ -315,12 +315,12 @@ public function dreamSelect():Boolean {
 					//end dream
 					//lust increase
 				}
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 25, "cor", 0);
+				dynStats("lus", 25);
 			}
 			else {
 				//Female Trap Dream: 
 				outputText("odd things...\nYou find it difficult to find deep sleep, your rest tormented by strange desires which pluck at your subconscious and tease at your supple tomboy body.   You dream of rough leather on your skin, tough cotton tight upon your [fullChest] and the smell of medicinal alcohol in your nose.  You dream of swaggering down the roads of your old home town, meeting the eyes of everyone you pass, daring them to ask; you dream of haunting bars and parties in a perpetual twilight, sweet talking every girl you see with casual, lust charged ease.  Women want you and men want to be you in the whirl of your sleeping mind.  There is a buzz running through these thoughts and images which energises and stupefies you; you find yourself charging through dream after tantalising dream, exhausting yet somehow never satisfying yourself.");
-				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 25, "cor", 0);
+				dynStats("lus", 25);
 			}
 		}
 		else if(daydream == 17) {
@@ -423,8 +423,8 @@ public function dayTenDreams():void {
 			outputText("You wake up in a sweat.  Fuck.", false);
 		}
 	}
-	if(player.cor < 50) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10, "cor", 0);
-	else dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 25, "cor", 0);
+	if(player.cor < 50) dynStats("lus", 10);
+	else dynStats("lus", 25);
 }
 
 public function fuckedUpCockDreamChange():void {
@@ -465,7 +465,7 @@ public function displacerDreamII():void {
 	
 	outputText("\n\nA soft \"sssht\" noise comes from behind you, that hole in the metal cave opening up once more.  Curious, you twist around so that you and your alien lover are butt-to-butt, and trot towards the doorway, dragging her along with you, though she's too blissed out to care.");
 	outputText("\n\nAs you pass through the doorway, your vision suddenly goes white... and you wake up with a start.");
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 2, "sen", 2, "lus", -100, "cor", 0);
+	dynStats("lib", 2, "sen", 2, "lus=", 0);
 	menu();
 	addButton(0,"Next",displacerDreamIII);
 }

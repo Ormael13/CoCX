@@ -341,7 +341,7 @@ public function useRedoctoOnKatsKnot():void {
 	//use 1x Reducto, reduce Kat knot size by 2, increase PC lust value, go to Kat sex menu
 	flags[kFLAGS.KATHERINE_KNOT_THICKNESS] -= 2;
 	if(flags[kFLAGS.KATHERINE_KNOT_THICKNESS] < 2) flags[kFLAGS.KATHERINE_KNOT_THICKNESS] = 2;
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10+player.lib/20, "cor", 0);
+	dynStats("lus", 10+player.lib/20);
 	consumeItem("Reducto",1);
 	katSexMenu();
 }
@@ -392,7 +392,7 @@ public function useReductoOnKatsKock():void {
 	//remove 2 inches from Kat's length, use 1x Reducto, increase PC lust value, go to Kat sex menu
 	flags[kFLAGS.KATHERINE_DICK_LENGTH] -= 2;
 	if(flags[kFLAGS.KATHERINE_DICK_LENGTH] < 8) flags[kFLAGS.KATHERINE_DICK_LENGTH] = 8;
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10+player.lib/20, "cor", 0);
+	dynStats("lus", 10+player.lib/20);
 	consumeItem("Reducto",1);
 	katSexMenu();
 }
@@ -412,7 +412,7 @@ public function reductoBallSize():void {
 	//use 1x Reducto, reduce Kat ball size by two inches, increase PC lust by small value, go to Kat sex menu
 	flags[kFLAGS.KATHERINE_BALL_SIZE] -= 2;
 	if(flags[kFLAGS.KATHERINE_BALL_SIZE] < 1) flags[kFLAGS.KATHERINE_BALL_SIZE] = 1;
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10+player.lib/20, "cor", 0);
+	dynStats("lus", 10+player.lib/20);
 	consumeItem("Reducto",1);
 	katSexMenu();
 }
@@ -428,7 +428,7 @@ public function giveKatABulbousPepper():void {
 		//add 2 to Kat ball size, use 1x Bulby Pepper, Display Katherine Sex options
 		flags[kFLAGS.KATHERINE_BALL_SIZE] += 2;
 		if(flags[kFLAGS.KATHERINE_BALL_SIZE] > 5) flags[kFLAGS.KATHERINE_BALL_SIZE] = 5;
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10+player.lib/20, "cor", 0);
+		dynStats("lus", 10+player.lib/20);
 		consumeItem("BulbyPp",1);
 		katSexMenu();
 	}
@@ -460,7 +460,7 @@ public function giveKatADoublePepper():void {
 
 		outputText("\"<i>Oh dear...  I think that was maybe a bit too spicy.  You want to help me out with this?</i>\" she purrs, already starting to stroke her twin shafts.\n\n", false);
 	}
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10+player.lib/20, "cor", 0);
+	dynStats("lus", 10+player.lib/20);
 	consumeItem("DblPepp",1);
 	katSexMenu();
 }
@@ -478,7 +478,7 @@ public function giveKatAOverlyLargePepper():void {
 		if(flags[kFLAGS.KATHERINE_DICK_COUNT] == 1) outputText("s", false);
 		outputText(" from her sheath, growing to full size and then a full two inches further before stopping.  She moans softly, licks her lips and smiles at you.  \"<i>Care to have a test run?  Be a shame to let the chance go to waste...</i>\" she purrs.\n\n", false);
 		//use 1x large pepper, increase Kat length by 2, Display Katherine Sex options
-		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10+player.lib/20, "cor", 0);
+		dynStats("lus", 10+player.lib/20);
 		flags[kFLAGS.KATHERINE_DICK_LENGTH] += 2;
 		consumeItem("LargePp",1);
 		katSexMenu();
@@ -568,7 +568,7 @@ public function penetrateKatsVag():void {
 
 	outputText("With a smile, you scratch her behind the ears in a way that the cats in your village loved, enjoy her contented purr, clean yourself off with some old rags that the cat laid aside, and then politely say goodbye, redressing yourself and heading back out in Tel'Adre.\n\n", false);
 	//lust -100, Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	doNext(13);
 }
@@ -613,7 +613,7 @@ public function pcPenetratesKatAnally():void {
 
 	outputText("With a smirk at her flattery, you give her a hand getting dressed, then dress yourself and head back out into the street.", false);
 	//lust -100, Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	doNext(13);
 }
@@ -679,7 +679,7 @@ public function suckNFuck():void {
 	
 	outputText("You promise her you'll remember that.  Redressed, you bid her farewell and head back out into the streets of Tel'Adre.\n\n", false);
 	//lust -100, Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	doNext(13);
 }
@@ -802,7 +802,7 @@ public function letKatKnotYourCuntPussyFuck():void {
 	else outputText("Y", false);
 	outputText("ou get dressed, thank her, and head back to your camp.", false);
 	//minus lust, slimefeed, Player returns to camp
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	slimeFeed();
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	doNext(13);
@@ -896,7 +896,7 @@ public function getPenetrated():void {
 
 	outputText("About an hour later, she's deflated and you are able to get dressed, thank her, and head back to your camp.", false);
 	//minus lust, slimefeed, Player returns to camp
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	slimeFeed();
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	doNext(13);
@@ -963,7 +963,7 @@ public function getDoublePennedByKat():void {
 	outputText("About an hour later, she's deflated and you are finally able to rise off of her, get dressed, and head back to your camp.\n\n", false);
 	//minus lust, slimefeed, Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
 	slimeFeed();
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
+	dynStats("sen", -2, "lus=", 0);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	doNext(13);
 }
@@ -1052,7 +1052,7 @@ public function suckedNFuckedByKat():void {
 	outputText(" deflate and you detach, you clean yourself off, get dressed, and head back out into the street.", false);
 	//lust -100, slimefeed, Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
 	slimeFeed();
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("sen", -1, "lus=", 0);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	doNext(13);
 }
@@ -1292,7 +1292,7 @@ public function giveKatOralPenisWingWang():void {
 	//minus lust, slimefeed, Player returns to camp
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	slimeFeed();
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 25, "cor", 0);
+	dynStats("lus", 25);
 	doNext(13);
 }
 
@@ -1318,7 +1318,7 @@ public function katherineGoesDownOnTheGirlsOhYahBabyLesbo():void {
 	outputText("You simply groan at the absolutely terrible pun and get back up, redressing yourself and heading back into the streets after a quick peck to thank her for the time.", false);
 	doNext(13);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 }
 //[Male/Herm]
 public function katherineLicksAllTheBoyPenises():void {
@@ -1353,7 +1353,7 @@ public function katherineLicksAllTheBoyPenises():void {
 	
 	outputText("Weakly, she collapses onto her furry behind on the ground, smiling up at you.  \"<i>I take it you enjoyed that?</i>\" she teases.  You admit she did very well, helping her up and to her own 'bed', then get dressed and head back out into Tel'Adre's streets.", false);
 	//lust -100 regardless of sex, return to wherever
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+	dynStats("lus=", 0);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	doNext(13);
 }
@@ -1475,7 +1475,7 @@ public function katDoubleHelixCraziness():void {
 	//Player returns to camp without his lust, slimefeed
 	slimeFeed();
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -1, "sen", -1, "lus", -100, "cor", 0);
+	dynStats("lib", -1, "sen", -1, "lus=", 0);
 	doNext(13);
 }
 
@@ -1508,7 +1508,7 @@ public function suckleTacularKats():void {
 
 	outputText("Smiling at the flattery, you help the very well-fed cat out of your lap, then quietly put your clothes back on and head out into the streets.\n\n", false);
 	//some lust loss, satisfy feeder, Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
-	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -40, "cor", 0);
+	dynStats("sen", -2, "lus", -40);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	doNext(13);
 	//You've now been milked, reset the timer for that
