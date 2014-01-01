@@ -42,6 +42,7 @@ public function mainMenu(e:MouseEvent = undefined):void
 	if(player.str > 0)  //we're in a game, allow resume.
 		resume = 1;
 
+
 	// I really wanted to only have the "imageCreditsScreen" button if images were found, but it turns out
 	// that if you check if any images were found immediately when this screen is shown, you get 0
 	// since the images haven't loaded yet.
@@ -58,9 +59,12 @@ public function mainMenu(e:MouseEvent = undefined):void
 			"Settings", settingsScreen,
 			"Resume", resume);
 
-	
-
-
+	if (false)  // Conditionally jump into chaosmonkey IMMEDIATELY
+	{
+		this.monkey.throwOnSyntaxError = true;
+		this.monkey.excludeMenuKeys = true;			// Syntax checking monkey should ignore the menu keys (they're irrelevant to it's functions)
+		this.initiateTheMonkey()
+	}
 }
 
 public function startupScreenBody():void
