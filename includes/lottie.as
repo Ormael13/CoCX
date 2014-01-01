@@ -386,7 +386,7 @@ public function drinkLustWithYourHamhock():void {
 	outputText("You take her by the hand and lead her into one of the empty saunas. \"<i>" + player.short + "...</i>\" You grab her by the hips and lean her against the wall, throwing off her towel and revealing her velvety skin underneath. Reaching down, you grab a handful of her luxurious ass, squeezing and slapping it lightly. Lottie moans into your shoulder and reaches towards your groin, removing your " + player.armorName + ". She begins stroking " + oMultiCockDesc() + " lightly, picking up the pace as you continue to work on her pert rump. You can't help but lust over her full figure, using one of your hands to firmly grope her pillowy jugs and reaching your other towards her glistening pussy. You move your hand over her cushiony rack, before burying your head into her bosom and eagerly sucking on one of her nipples, fondling the other between your thumb and forefinger. Your other hand is already fast at work, fingering her hot cunt. You can feel her legs about to buckle beneath their own weight. Lottie moans in between short, hot breaths, \"<i>Y-you're... really amazing, " + player.mf("guy","lady") + ".</i>\"  You give her chubby ass a hard slap in agreement.  Lottie squeals in glee, jerking your " + cockDescript(0) + " as it pokes into her soft stomach. The sensation of your tip rubbing against her velvety skin drives you wild.\n\n", false);
 	
 	outputText("You tell Lottie you've decided you're going to take her for a vigorous work out. She can only pant with anticipation.", false);
-	stats(0,0,0,0,0,0,99,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 99, "cor", 0);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00298]++;
 	//[Oral][Anal]
 	simpleChoices("Oral",getSuckedOffByAHamSandwich,"Anal",analLottieMilkshake,"",0,"",0,"",0);
@@ -437,7 +437,7 @@ public function analLottieMilkshake():void {
 	lottieTone(1);
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00307] == 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00307] = 1;
 	outputText(player.modTone(100,1), false);
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	doNext(13);
 }
 
@@ -529,7 +529,7 @@ public function getSuckedOffByAHamSandwich():void {
 	lottieTone(-1);
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00306] == 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00306] = 1;
 	outputText(player.modTone(100,1), false);
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	doNext(13);
 }
 //[Appearance]
@@ -715,14 +715,14 @@ public function talkToPigSlut():void {
 	//[If Neither, Encouragement 30 - 70]
 	else if(lottieMorale() <= 70) {
 		outputText("Her ears perk up at your eagerness to talk, though she doesn't seem to have much on her mind. Regardless, you ask how she's been doing. \"<i>Haha, a bit curious, are we?</i>\" Lottie looks up at you and grins. \"<i>Well, I'm afraid nothing's really happened since we last met y'know? Maybe today we can get some results!</i>\" she stands up, pumping her fist in the air and wiggling her plump ass. \"<i>And if you want... we could go do some yoga, eheh...</i>\" She's clearly quite antsy. You chuckle at her comment, though you feel a familiar sensation stirring in your groin.", false);
-		stats(0,0,0,0,0,0,2,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 2, "cor", 0);
 		outputText("Without much to go on, you can't really comment on her progress.", false);
 		doNext(13);
 	}
 	//[If Neither, Encouragement 70 - 100]
 	else if(lottieMorale() <= 100000) {
 		outputText("Her ears perk up at your eagerness to talk, though she doesn't seem to have much on her mind. Regardless, you ask how she's been doing. \"<i>Haha, you really that interested in me, babe?</i>\" Lottie looks up at you and grins. \"<i>Well, I'm afraid nothing's really happened since we last met y'know? I don't mind, but hey – you get what you get!</i>\" she stands up, grinning slyly before turning around and wiggling her plump ass at you. \"<i>And if you want... we could go do some yoga, eheh...</i>\" She's clearly quite antsy. You reach over and slap her bouncing butt, Lottie squealing in return. You both chuckle at her comment, though you feel a familiar sensation stirring in your groin.\n\n", false);
-		stats(0,0,0,0,0,0,2,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 2, "cor", 0);
 		outputText("Without much to go on, you can't really comment on her progress.", false);
 		doNext(13);
 	}
@@ -962,7 +962,7 @@ public function lottieFatLoserCulminationFuckChoice():void {
 	outputText("shake on the way out.", false);
 	if(silly()) outputText("  You fucking love bacon shakes.", false);
 	outputText("\n\n(<i>Doggy-style unlocked from Lottie's sex menu.</i>)", false);
-	stats(0,0,0,0,0,-3,-100,3);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -3, "lus", -100, "cor", 3);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00310] = 1;
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00298]++;
 	doNext(13);
@@ -992,7 +992,7 @@ public function lottieFatLoserCulminationHumiliationChoice():void {
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00311] = 1;
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00298]++;
 	outputText("\n\n(<i>'Walkies' unlocked from Lottie's sex menu.</i>)", false);
-	stats(0,0,0,0,0,-1,-100,5);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 5);
 	doNext(13);
 }
 
@@ -1005,7 +1005,7 @@ public function lottieFatLoserCulminationLeaveComedyChoice():void {
 	outputText("You discover much later that she's pregnant and miserable with your child.", false);
 	outputText("\n\n(<i>Lottie is no longer encounterable</i>.)", false);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00278] = 1;
-	stats(0,0,0,0,0,0,-100,10);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 10);
 	player.cumMultiplier += 100;
 	doNext(13);
 }
@@ -1035,7 +1035,7 @@ public function lottieHighMoraleFatLoveSelfOneTimeEvent():void {
 	outputText("A while later, you've both said your goodbyes for the night. Before you leave, you make sure to head out to the cafe to buy yourself a bacon shake. You love bacon shakes.\n\n", false);
 	//[Unlocks Cowgirl]
 	outputText("(<i>'Cowgirl' unlocked from Lottie's sex menu.</i>)", false);
-	stats(0,0,0,0,0,-3,-100,-1);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -3, "lus", -100, "cor", -1);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00313] = 1;
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00298]++;
 	doNext(13);
@@ -1071,7 +1071,7 @@ public function lottieHighMoraleFatYoullGetThereOneTimeEvent():void {
 	outputText("(<i>'Quickie' has been unlocked from Lottie's sex menu.</i>)", false);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00314] = 1;
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00298]++;
-	stats(0,0,0,0,0,-3,-100,-1);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -3, "lus", -100, "cor", -1);
 	doNext(13);
 }
 
@@ -1086,7 +1086,7 @@ public function ewLottieNo():void {
 	outputText("You really need glasses.", false);
 	//[Note: Lottie will no longer be encountered at the gym.]
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00278] = 1;
-	stats(0,0,0,0,0,0,-100,10);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 10);
 	doNext(13);
 }
 
@@ -1102,7 +1102,7 @@ public function lottieElleThreesomeFirstTime():void {
 	if(silly()) outputText("bacon ", false);
 	outputText("shake on the way out.", false);
 	if(silly()) outputText("  You only need one of those to satisfy you.", false);
-	stats(0,0,0,0,0,-2,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
 	//[Unlocks Threesome]
 	outputText("\n\n(<i>'Threesome' unlocked from Lottie's sex menu.</i>)", false);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00316] = 1;
@@ -1137,7 +1137,7 @@ public function fuckElleInsteadOfThatFatSlutFirstTime():void {
 	outputText("\n\n(<i>'Elle' unlocked in Lottie's sex menu.</i>)", false);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00317] = 1;
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00298]++;
-	stats(0,0,0,0,0,2,-100,10);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 2, "lus", -100, "cor", 10);
 	doNext(13);
 }
 //[Oh I Get It]
@@ -1149,7 +1149,7 @@ public function charlottesWebComedyBullshit():void {
 	outputText("You slap your " + cockDescript(x) + " gleefully as you point at the two girls in front of you. \"<i>OOOH, NOW I GET IT.</i>\" You yell triumphantly, your knowledge of fictional stories about farm animals finally coming to good use. \"<i>YOU ASSHOLES ARE JUST LIKE CHARLOTTE'S WEB.</i>\" They both tilt their heads to the side quizzically, unsure of the excellent referential joke you just made – but you continue anyway. \"<i>No, cause like – there's a spider called Charlotte and a pig called Wilbur and the spider talks by spinning webs and... ugh, forget it.</i>\" You decide the slutty animorphs aren't worth your time, stomping off in frustration. \"<i>W-wait! " + player.short + ", don't leave me!</i>\" Lottie yells as she runs towards you, but it's too late. You're fucking done – until you bump into an elderly white mouse. \"<i>BIMBO MARBLE'S NON-EXISTANT TITTIES, IF IT ISN'T E.B. WHITE!</i>\" you yell, ejaculating in your pants as your mind overloads from the referential humour. He smiles, asking politely if you want to go on a journey through space.  You eagerly agree as you follow the old man down into a dark alleyway, excited to go on the adventure of a lifetime.\n\n", false);
 	outputText("<b>...</b>\nYou wake up hours later, missing a few gems. Your asshole is now a Little Stuart.\n\n", false);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00278] = 1;
-	stats(0,0,0,0,0,0,-100,10);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 10);
 	doNext(13);
 }
 
@@ -1193,7 +1193,7 @@ public function lottieSuccessOneShot():void {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00298]++;
 		outputText("(<i>'FemDom'</i> unlocked in Lottie's sex menu</i>)", false);		
 	}
-	stats(0,0,0,0,0,-2,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
 	doNext(13);
 }
 	
@@ -1253,7 +1253,7 @@ public function boastAtLottie():void {
 	
 	outputText("After a few more attempts at the weights, she eventually buckles under the pressure and gives up, walking home by herself. You snort and continue a few more well-earned reps before dropping down and recharging for the night.", false);
 	fatigue(10);
-	stats(.25,0,0,0,0,0,0,0);
+	dynStats("str", .25,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 	lottieMorale(-3);
 	doNext(13);
 }
@@ -1264,7 +1264,7 @@ public function trainWithLottie():void {
 	outputText("", true);
 	outputText("You chuckle at her pathetic attempt and pick up one of the small ones next to hers, much to the surprise of both Lottie and the other members watching. She smiles at you and tries her best to lift, despite not being very good at it. You blow through several reps before tiring yourself out, though Lottie, determined to beat your score, continues. Eventually, she gets close enough to rival your attempts before dropping the weight to the ground wearily.\n\n", false);
 	outputText("After a few more attempts at the weights, you both decide you've had enough, going your separate ways and waving as you leave the gym.", false);
-	stats(.1,0,0,0,0,0,0,0);
+	dynStats("str", .1,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 	lottieMorale(2);
 	lottieTone(2);
 	fatigue(10);
@@ -1278,7 +1278,7 @@ public function boastAtFitLottie():void {
 	outputText("You laugh as you pick up one of the larger ones and pump mercilessly, looking at her expectantly as if she should be pushing herself to the limit. She drops the weight she's using and picks up one around your size, trying to match your speed and strength but inevitably failing. She looks up at you and sniffles, but you just grunt in response, disappointed with her efforts. She sighs and tries her best to do it again.\n\n", false);
 
 	outputText("After a few more attempts at the weights, she eventually buckles under the pressure and gives up, walking home by herself. You snort and continue a few more well-earned reps before dropping down and recharging for the night.", false);
-	stats(.25,0,0,0,0,0,0,0);
+	dynStats("str", .25,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 	lottieMorale(-3);
 	fatigue(10);
 	doNext(13);
@@ -1291,7 +1291,7 @@ public function trainWithFitLottie():void {
 	outputText("You smile at her hard work, and pull up a weight around your level. You both share a glance at each other's sizes and chuckle at the noticeable difference. You both unanimously decide to hold a competition over who can score the most reps at one time, though obviously the larger weight has the bigger disadvantage. You try and blow through several reps before tiring yourself out, though Lottie, determined to beat your score, continues. Eventually, she gets close enough to rival your attempts, before dropping the weight to the ground wearily.\n\n", false);
 
 	outputText("After a few more attempts at the weights, you both decide you've had enough, going your separate ways and waving as you leave the gym.", false);
-	stats(.1,0,0,0,0,0,0,0);
+	dynStats("str", .1,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 	lottieMorale(2);
 	lottieTone(2);
 	fatigue(10);
@@ -1321,7 +1321,7 @@ public function sprintAndLeaveLottieBehind():void {
 	outputText("", true);
 	outputText("You don't want to lose the groove you've built up so far, so you decide to go all out and tear through the track, leaving Lottie in your dust. \"<i>Wha- hey! Wait; don't leave me behind, please!</i>\" She yells, running as fast as her chubby legs are willing to go. By the time you reach the end of the track, Lottie's already given up, waiting for you to finish at the gym entrance. You give her a thumbs up before proceeding to run another lap.\n\n", false);
 	outputText("A few rounds later, you've exhausted yourself so you decide to return home. You notice that Lottie's nowhere in sight, but it's her loss - not yours.", false);
-	stats(0,.2,.25,0,0,0,0,0);
+	dynStats("str", 0,"tou", .2, "spe", .25, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 	lottieMorale(-3);
 	fatigue(10);
 	doNext(13);
@@ -1332,7 +1332,7 @@ public function jogWithLottie():void {
 	spriteSelect(36);
 	outputText("", true);
 	outputText("You decide that sprinting wouldn't really get either of you anywhere, though taking things a little faster wouldn't be any harm. You take the power walking to the next level with a quick jog, before reminding Lottie to take this as leisurely as possible - it isn't a race. Lottie quickly picks up the idea and starts to push herself further, trying her best to keep up with you, whilst maintaining a steady rhythm on the track. You both spend the good part of the evening jogging a fair distance, before deciding to retire for the night. You're both tired, but satisfied with today's efforts.\n\n", false);
-	stats(0,.1,.1,0,0,0,0,0);
+	dynStats("str", 0,"tou", .1, "spe", .1, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 	lottieMorale(2);
 	lottieTone(2);
 	fatigue(10);
@@ -1344,7 +1344,7 @@ public function sprintAndLeaveFitLottieBehind():void {
 	outputText("", true);
 	outputText("You don't want to lose the groove you've built up so far, so you decide to go all out and tear through the track, leaving Lottie in your dust. \"<i>Wha- hey! What's the big idea?!</i>\" She yells, trying to catch up to you. By the time you reach the end of the track, Lottie's already far behind though you can see her still trying to catch up. You give her a thumbs up before proceeding to run another lap.\n\n", false);
 	outputText("A few rounds later and you've exhausted yourself, so you decide to return home. You notice that Lottie's nowhere in sight, but it's her loss - not yours.", false);
-	stats(0,.2,.25,0,0,0,0,0);
+	dynStats("str", 0,"tou", .2, "spe", .25, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 	lottieMorale(-3);
 	fatigue(10);
 	doNext(13);
@@ -1395,7 +1395,7 @@ public function togetherLottieYoga():void {
 	lottieMorale(4);
 	lottieTone(1);
 	fatigue(5);
-	stats(0,0,0,0,0,0,80,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 80, "cor", 0);
 	doNext(13);
 }
 
@@ -1417,7 +1417,7 @@ public function jumpInPoolBeforeLottieSeesYourWingWang():void {
 	outputText(" decided to say hello. Needless to say, you decide it'd be better if you swam alone – nothing's wrong with the occasional chubby-assed slut wandering now and then, but it's a pain to not be distracted. Lottie wades at the other end of the pool, doing the occasional stretch before breaking into laps. You take a page from her book and begin to work back and forth from either end, making sure not to stare at Lottie's massive chest as it bounces into the air every so often after a stroke. After a considerable amount of time, you both finish considerably more exhausted than before. She seems to have lightened up since your initial reaction to her body, so you shrug it off and head home.", false);
 	//ENCOURAGEMENT -1, FIGURE +2, MUSCLE TONE +2, LUST +9001
 	outputText(player.modTone(100,2), false);
-	stats(0,0,0,0,0,0,40,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 40, "cor", 0);
 	lottieTone(2);
 	lottieMorale(-1);
 	fatigue(5);
@@ -1435,7 +1435,7 @@ public function waitAndShowLottieYourPoolBoner():void {
 	
 	outputText("A while later and you've both finished off several laps of the pool, exhausted from your progress. Lottie flashes you a large smile before you part ways, leaving you still somewhat aroused from the experience.", false);
 	outputText(player.modTone(100,2), false);
-	stats(0,0,0,0,0,0,80,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 80, "cor", 0);
 	lottieTone(2);
 	lottieMorale(2);
 	fatigue(5);
@@ -1512,7 +1512,7 @@ public function giveLottieGroPlus():void {
 		outputText("You grab Lottie's shoulder, surprising her with your sudden movements. She quickly brushes you off, and looks sternly into your eyes. \"<i>I'm sorry, but I'm really not comfortable with taking needles, okay?</i>\" the girl looks far more serious than usual – perhaps she's encountered needles in her weight loss schemes before? Regardless, you tell her that a single needle wouldn't make much difference to her figure – in fact, you're not even sure it might work! You smirk, but Lottie continues to stare. \"<i>Then why are you giving it to me?</i>\" She swipes the needle from your hand before walking over to throw it in the trash. Your face twists into a grimace – that needle was one of a kind. Standing up, you walk over to the pig-slut and grab her firmly by the arm. She turns quickly in annoyance but immediately pales at the sight of your anger. You raise your hand high and tell her you're going to teach her a lesson about the worth of things. How that needle was worth a billion of her. Her eyes widen, her free arm trying to pull you off in desperation. You swing down and she flinches – but you stop. Lottie's eyes slowly open to see your hand hovering only a few inches above her face. She squeals and falls to the floor as you relinquish your grip, leaving a small bruise on her otherwise smooth arm. You walk away to the sound of her sobbing quietly, making sure to take the needle of Gro+ on your way out. It's completely unharmed – though you can't say the same about the snivelling whore behind you.", false);
 		lottieMorale(-5);
 	}
-	stats(0,0,0,0,0,0,0,1);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 1);
 	doNext(13);
 }
 //[If Reducto]
@@ -1552,14 +1552,14 @@ public function hamSammitchTimeBIATCH():void {
 	else if(player.cor >= 75) {
 		outputText("You walk over to the cafe, Lottie watching as you order a sandwich from their menu. In a matter of seconds the collie-like clerk pulls one up from the glass display and hands it over to you, mumbling something about giving a pig-girl a ham sandwich being a stupid fucking idea. You exchange a smile before quickly walking out of the cafe and into the currently empty pool area. You hastily remove your " + player.armorName + " and take out your " + cockDescript(0) + ", jamming it straight into the sandwich and fucking it relentlessly. In moments you cum between the velvety slices of ham, leaving a large puddle inside and leaving the rest of your spunk leaking out the back and pooling onto the floor. You dress yourself before walking back to the table and handing Lottie the incredibly moist meal, explaining that you saw the ham sandwich the other day, figuring she might enjoy it – and that you've taken care into adding your own 'special mayonnaise'. Lottie throws it on the floor. \"<i>Don't cum inside ham sandwiches, asshole!</i>\"\n\n", false);
 		outputText("You reach for a high five that never comes.", false);
-		stats(0,0,0,0,0,0,-100,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	}
 	//[If Ham Sandwich, Repeat Encounter]
 	else {
 		outputText("You walk over to the cafe, Lottie watching as you order a sandwich from their menu. In a matter of seconds the collie-like clerk pulls one up from the glass display and hands it over to you, mumbling something about giving a pig-girl a ham sandwich being a stupid fucking idea. You exchange a smile before walking back to the table and handing Lottie the moist meal, explaining that you saw the ham sandwich the other day, figuring she might enjoy it. Lottie throws it on the floor. \"<i>Stop giving me ham sandwiches, asshole!</i>\"\n\n", false);
 		outputText("You reach for a high five that never comes.", false);
 	}
-	stats(0,0,0,0,0,0,0,1);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 1);
 	doNext(13);
 }
 //LOTTIE SEX STARTS HERE
@@ -1624,7 +1624,7 @@ public function lottieFuck():void {
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00319] > 0) femdom = 3147;
 		choices("Anal",3081,"Oral",3082,"Tentacle",tentacle,"",0,"",0,"Quickie",quickie,"Cowgirl",cowgirl,"R.Cowgirl",rcowgirl,"Femdom",femdom,"30Minute",thirtyMinute);
 	}
-	stats(0,0,0,0,0,0,50,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 50, "cor", 0);
 }
  
 //[Doggystyle]
@@ -1643,7 +1643,7 @@ public function lottieRepeatDoggieStyle():void {
 	if(silly()) outputText("bacon ", false);
 	outputText("shake on the way out.", false);
 	if(silly()) outputText("  You fucking love bacon shakes.", false);
-	stats(0,0,0,0,0,-2,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
 	doNext(13);
 }
 
@@ -1666,7 +1666,7 @@ public function lottieRepeatWalkies():void {
 	if(silly()) outputText("bacon ", false);
 	outputText("shake.", false);
 	if(silly()) outputText("  You sure do love spit roasting a pig, but nothing can beat a bacon shakes.", false);
-	stats(0,0,0,0,0,-2,-100,1);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 1);
 	doNext(13);
 }
 	
@@ -1694,7 +1694,7 @@ public function lottieRepeatCowGirl():void {
 	if(silly()) outputText("bacon ", false);
 	outputText("shake.", false);
 	if(silly()) outputText("  You love bacon shakes.", false);
-	stats(0,0,0,0,0,-2,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
 
 	doNext(13);
 }
@@ -1723,7 +1723,7 @@ public function lottieRepeatQuickie():void {
 	if(silly()) outputText("bacon ", false);
 	outputText("shake on the way out.", false);
 	if(silly()) outputText("  They're fucking delicious.", false);
-	stats(0,0,0,0,0,-2,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
 	doNext(13);
 }
 
@@ -1737,7 +1737,7 @@ public function lottieRepeatThreesome():void {
 	if(silly()) outputText("bacon ", false);
 	outputText("shake on the way out.", false);
 	if(silly()) outputText("  You only need one of those to satisfy you.", false);
-	stats(0,0,0,0,0,-2,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
 	doNext(13);
 }
 
@@ -1765,7 +1765,7 @@ public function lottieRepeatSUPERNEATORARES():void {
 	if(silly()) outputText("bacon ", false);
 	outputText("shake on the way out.", false);
 	if(silly()) outputText("  You only need one of those to satisfy you.", false);
-	stats(0,0,0,0,0,-2,-100,2);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 2);
 	doNext(13);
 }
 
@@ -1780,7 +1780,7 @@ public function lottieRepeatBackwardsAssCowgirl():void {
 	outputText("Inevitably, you can feel your release approaching, and with one final push you grab a hold of the pig-girl's tight ass, slamming against her and pumping your spunk directly into her clenched pussy, your " + cockDescript(x) + " twitching as ropes of cum coat her insides. Lottie yelps, collapsing on the floor and full of your hot seed. You wipe your cock along her ass cleavage, leaving her as a sweaty, cum-filled mess on the floor. Walking out, you make sure to grab a ", false);
 	if(silly()) outputText("bacon ", false);
 	outputText("shake from the cafe. They're fantastic.", false);
-	stats(0,0,0,0,0,-2,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
 	doNext(13)
 }
 
@@ -1811,7 +1811,7 @@ public function lottieRepeatFEMDOMFEMFDOM():void {
 		outputText("shake before deciding to head home.", false);
 		if(silly()) outputText("  You fucking love bacon shakes.", false);
 	}
-	stats(0,0,0,0,0,-2,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
 	doNext(13)
 }
 //[Hug]
@@ -1942,7 +1942,7 @@ public function tentaDickLottieButtFuckbuttFuckButtFUCKBUTTFUCKBUTTFUCK():void {
 		outputText("You turn to see your slut as she tries to move around, before snorting and walking outside of the shed towards the direction of your camp.  A familiar-looking spider-morph running the stand nearby notices you out alone, walking towards the direction of the shed.  You're long gone before she can catch up to you, though.", false);
 		if(silly()) outputText("  Unfortunately for the spider-clerk, you've raided her cart of bacon shakes on the way out.  You try to backflip back to camp before accidentally dropping the majority of your shakes onto the floor, ultimately deciding to walk back normally - the last beverage you could save gripped firmly in your hands.", false);
 	}
-	stats(0,0,0,0,0,-2,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
 	doNext(13);
 }
 
@@ -1982,7 +1982,7 @@ public function ifrisAndLottieGetsNTRedLiftingWeights():void {
 	outputText("Your " + player.legs() + " go weak and your arms feel like slime as you push Ifris all the way down one more time.  The first geyser of cum overloads the pretty red gym-goer. She's nearly pushed off of your dick by the force of your first shot.  With no strength left, you let go of her silky hair and let her collapse onto the floor.  Her throat bulges and spunk dribbles out of her mouth.  The second wave overcomes you and you coat the floor with cum.  You barely register grabbing Lottie by the arm and hauling her over to Ifris.  Both women are still fingering their dripping pussies while you prepare one ultimate burst.  Darkness creeps into your vision as you angle your cock above both sluts.  Your urethra dilates and unleashes a barrage of seed; Ifris and Lottie coated in thick ropes of it.  They embrace under the rain of cream, mashing each other's drenched bodies together.\n\n", false);
 									  
 	outputText("Only swaying for a handful of seconds before collapsing into the two women, you black out.", false);
-	stats(0,0,0,0,1,0,-100,5);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 0, "lus", -100, "cor", 5);
 	doNext(lottieAndIfrisNTREpilogue);
 	//--next--
 }
@@ -2022,6 +2022,6 @@ public function lottiesThirtyMinutePigGasm():void {
 	outputText("Standing victorious, you attempt to pull out, but you can't.  Her pussy has clamped down on you so hard that you can't withdraw.  You are in no rush, however. Your cock is still hard and her body is plenty warm.  Smirking, you just stand and enjoy the feeling of her womb.  Then suddenly, Lottie cries at the top of her lungs.  Your attempt to pull out seems to have triggered her orgasm.  A cataract of womanly juices cascades out of her cunt.  She gushes, and gushes, and gushes... after five minutes, her orgasm still hasn't ceased!  The ground where you two stand looks like a small puddle thanks to her constant stream of femspray.  At ten minutes, she still hasn't stopped!  When will the end be?  Why all this pig glee?  Yo man, what happened?  Lottie's breathing heavily and oinking as loudly as possible.  Tired and frustrated, you just stand there while her orgasm continues unabated.  After about twenty minutes more, Lottie's chubby cunt finally releases you and she falls forward onto her face in the puddle of pork drippings, eyes rolled into her head and a smile splitting her face.\n\n", false);
 
 	outputText("DAMN!  Did this pig bitch really just have a half-hour orgasm?  You're a little jealous.", false);
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	doNext(13);
 }

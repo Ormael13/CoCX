@@ -100,7 +100,7 @@ public function rapeImpWithDick():void {
 		if(player.cumQ() > 100) outputText("  Your orgasm only seems to grow more and more intense as it goes on, each spurt more powerful and copious than the last.  The imp begins to look slightly pregnant as you fill him, and tiny jets of cum squirt out around your " + cockDescript(x) + " with each thrust.", false);
 		outputText("\n\nSatisfied at last, you pull him off just as he reaches his own orgasm, splattering his hot demon-cum all over the ground.   You drop the imp hard and he passes out, dripping mixed fluids that seem to be absorbed by the dry earth as fast as they leak out.", false);
 	}
-	stats(0,0,0,0,0,0,-100,1);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 1);
 	cleanupAfterCombat();
 }
 public function rapeImpWithPussy():void {
@@ -123,12 +123,12 @@ public function rapeImpWithPussy():void {
 		outputText("  Your lust and desire spurs you into movement, driving you to bounce yourself up and down on the " + eCockDescript(0) + ".  His exquisite member pushes you to the very height of pleasure, your " + vaginaDescript(0) + " clenching tightly of its own accord each time you bottom out.  The tensing of the little demon's hips is the only warning you get before he cums inside you, hot demonic jizz pouring into your womb.  Your " + player.legs() + " give out, pushing him deeper as he finishes filling you.", false);
 		outputText("\n\nThe two of you lay there a moment while you recover, at last separating as you rise up off his " + eCockDescript(0) + ".  Spunk drips down your legs, quickly wicking into your skin and disappearing.", false);
 		//Taking it internal is more corruptive!
-		stats(0,0,0,0,0,0,0,1);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 1);
 		//Preggers chance!
 		player.knockUp(1,432);
 		cuntChange(monster.cockArea(0), true, true, false);
 	}
-	stats(0,0,0,0,0,0,-100,1);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 1);
 	cleanupAfterCombat();
 }
 
@@ -236,7 +236,7 @@ public function centaurGirlOnImps():void {
 		outputText("You trot over to the leader, still using the nearly unconscious imp as a cock sleeve, and pull the abused creature off of him. He looks shocked as you grab his cock and squeeze his balls, causing him to orgasm hard and spray you down in white hot seed. He collapses onto the ground, spent, as you wipe yourself down as best you can.", false);
 
 		outputText("  Collecting your things, you give the assorted bodies one last look and stumble back to camp.", false);
-		stats(0,0,0,0,0,0,-100,1);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 1);
 	}
 	cleanupAfterCombat();
 }
@@ -278,7 +278,7 @@ public function centaurOnImpMale(vape:Boolean = false):void {
 		//<<GoTo I1>>
 		centaurOnImpResults(1);
 		//<<End>>
-		stats(0,0,0,0,0,0,-100,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 		cleanupAfterCombat();
 		return;
 	}
@@ -298,7 +298,7 @@ public function centaurOnImpMale(vape:Boolean = false):void {
 			//<<GoTo I2>>
 			centaurOnImpResults(2);
 			//<<End>>
-			stats(0,0,0,0,0,0,-100,0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 			cleanupAfterCombat();
 			return;
 		}
@@ -308,7 +308,7 @@ public function centaurOnImpMale(vape:Boolean = false):void {
 			//<<GoTo I1>>
 			centaurOnImpResults(1);
 			//<<End>>
-			stats(0,0,0,0,0,0,-100,0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 			cleanupAfterCombat();
 			return;
 		}
@@ -326,7 +326,7 @@ public function centaurOnImpMale(vape:Boolean = false):void {
 			//<<GoTo I2>>
 			centaurOnImpResults(2);
 			//<<End>>
-			stats(0,0,0,0,0,0,-100,0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 			cleanupAfterCombat();
 			return;
 		}
@@ -340,7 +340,7 @@ public function centaurOnImpMale(vape:Boolean = false):void {
 				outputText("Feeling merciful you extract yourself from the creature, flipping it unto a nearby rock as it begins to regain consciousness.  Before it realizes what you are doing your " + cockDescript(player.biggestCockIndex()) + " is prodding at its " + eAssholeDescript() + ", then sliding quickly between its cheeks.  The amount of slobber over you is more than enough lubricant.  You groan in pleasure as it gives a slight squeal, then proceed to finish yourself off in the once-tight orifice.\n\n", false);
 				//<<Goto I1>> 
 				centaurOnImpResults(1);
-				stats(0,0,0,0,0,0,-100,0);
+				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 				cleanupAfterCombat();
 				return;
 			}
@@ -359,7 +359,7 @@ public function centaurOnImpMale(vape:Boolean = false):void {
 				//<<cum multiplier: lots>>
 				if(player.cumQ() > 250) outputText("Beneath you the creature's belly is distending more and more, and you can feel some of the overflowing cum filling back out until it is pouring out of the creature's unconscious mouth and overstretched ass, forming a spermy pool beneath it.", false);
 				outputText("With on last grunt you begin extracting the tentacles back out, almost cumming again from the tightness around them.  You give your " + cockDescript(player.smallestCockIndex()) + " one last shake over the creature's face before trotting away satisfied and already thinking about the next creature you might abuse.", false);
-				stats(0,0,0,0,0,0,-100,0);
+				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 				cleanupAfterCombat();
 				return;
 			}
@@ -380,12 +380,12 @@ public function centaurOnImpMale(vape:Boolean = false):void {
 			//<<GoTo I1>>
 			centaurOnImpResults(1);
 			//<<End>>
-			stats(0,0,0,0,0,0,-100,0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 			cleanupAfterCombat();
 			return;
 		}
 	}
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 //CUNTS
@@ -417,7 +417,7 @@ public function centaurOnImpFemale(vape:Boolean = false):void {
 		//Ride around with him till he cums and falls off
 		outputText("When the creature completely bottoms out inside of you, you begin trotting forward with a wicked grin.  The creature's hands grasp your flanks desperately, and its " + eCockDescript(0) + " bounces inside your " + vaginaDescript(0) + ", adding to your sensation.  The movement is causing the Imp to push himself even harder against you as it tries to not fall off, and it is all you can do to keep an eye on where you are going.  Soon you can feel the Imp's sperm filling your " + vaginaDescript(0) + " and overflowing even as your cunt-muscles try to milk it of all of its seed. Unsatisfied you begin to speed up as you use its " + eCockDescript(0) + " to bring about your own orgasm.  The small creature is unable to let go without hurting itself.  It hangs on desperately while you increase the pace and begin making short jumps to force it deeper into you.  The feeling of sperm dripping out and over your " + clitDescript() + " pushes you over and cry out in intense pleasure.  When you finally slow down and clear your head the Imp is nowhere to be seen.  Trotting back along the trail of sperm you left behind you find only its small satchel.", false);
 		cuntChange(monster.cockArea(0), true, true, false);
-		stats(0,0,0,0,0,0,-100,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 		cleanupAfterCombat();
 		return;
 		//END OF NON GAPE CASE
@@ -455,11 +455,11 @@ public function centaurOnImpFemale(vape:Boolean = false):void {
 		outputText("\n\nIt is a relief when you feel the creature's sperm filling your womb and lubricating your raw cervix, your own body is wrecked by an intense orgasm while it breeds you.  You pass out, waking up to find that the Imp has slipped out of you and is lying unconscious and coated completely in a mixture of your juices and his own. After looking for anything you might be able to take away from him you limp away, you ", false);
 		if(player.cor < 80) outputText("promise to yourself that you will not do that again.", false);
 		else outputText("find your cunt juices already dripping down your legs in anticipation of doing this again.", false);
-		stats(0,0,0,0,0,0,-100,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 		cleanupAfterCombat();
 		return;
 	}
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -562,7 +562,7 @@ public function areImpsLactoseIntolerant():void {
 
 	outputText("You feel the imp's mighty gulps start to slow down until he lets out a sigh of relief. While imps may be small, they're very hungry creatures. Your " + nippleDescript(0) + " slips out of the imp's mouth, and you gently lay it down on the ground. It gives a few gentle burps before dozing off; you can see that the imp's erection has retracted, and its belly has expanded significantly. You smile to yourself and, feeling fully satisfied, you stand up.", false);
 	//set lust to 0, increase sensitivity slightly
-	stats(0,0,0,0,.2,0,-50,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", .2, "sen", 0, "lus", -50, "cor", 0);
 	//You've now been milked, reset the timer for that
 	player.addStatusValue("Feeder",1,1);
 	player.changeStatusValue("Feeder",2,0);
@@ -740,7 +740,7 @@ public function impGangabangaEXPLOSIONS():void {
 			if(player.cor < 50) outputText("Your last coherent thought is to find a way to better hide your camp, so this never happens again.", false);
 			//(High corruption)
 			else outputText("Your last coherent thought is to find a way to make your own mutated master imp, maybe even a stable full of them...", false);
-			stats(0,0,0,0,2,0,-100,3);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 2, "sen", 0, "lus", -100, "cor", 3);
 			player.knockUp(1,418);
 		}
 		//Scene number 2 - male possible.
@@ -913,7 +913,7 @@ public function impGangabangaEXPLOSIONS():void {
 			if(player.cor < 50) outputText("How long can you last in this corrupted land, when your body can be so horribly twisted by the sick pleasures of its denizens?", false);
 			//(High corruption)
 			else outputText("Why bother with your silly quest, when you've only scratched the surface of the pleasures this land offers you?\n", false);
-			stats(0,0,0,0,2,0,-100,3);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 2, "sen", 0, "lus", -100, "cor", 3);
 			player.knockUp(1,418);
 			//Stretch!
 			if(player.hasVagina()) {
@@ -1046,7 +1046,7 @@ public function impGangabangaEXPLOSIONS():void {
 			if(player.cor < 50) outputText("Your last coherent thought is to find a way to better hide your camp, so this never happens again.", false);
 			//(High corruption)
 			else outputText("Your last coherent thought is to find a way to make your own mutated master imp, one you can keep as a fuck-toy...", false);
-			stats(0,0,0,0,2,0,-100,3);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 2, "sen", 0, "lus", -100, "cor", 3);
 			player.knockUp(1,418);
 		}
 		else {
@@ -1221,7 +1221,7 @@ public function impGangabangaEXPLOSIONS():void {
 			if(player.cor < 50) outputText("How long can you last in this corrupted land, when your body can be so horribly twisted for the sick pleasures of its denizens?\n\n", false);
 			//(High corruption)
 			else outputText("Why bother with your silly quest, when you've only scratched the surface of the pleasures this land offers you?\n\n", false);
-			stats(0,0,0,0,2,0,-100,3);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 2, "sen", 0, "lus", -100, "cor", 3);
 			player.knockUp(1,418);
 			//Stretch!
 			if(player.hasVagina()) {
@@ -1250,7 +1250,7 @@ public function impRapesYou():void {
 		outputText("With a sigh, he pulls his dick free, and you flop down, cum leaking out onto the ground from your well-fucked hole. If you could, like, focus at all, you'd totally be worrying about being, like, pregnant or whatever. But you lose consciousness.", false);
 		player.knockUp(1,418);
 
-		stats(0, 0, 0, 0, 1, 1, -100, 1);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", -100, "cor", 1);
 		cleanupAfterCombat();
 		return;
 	}
@@ -1299,8 +1299,8 @@ public function impRapesYou():void {
 				}
 			}
 			player.knockUp(1,418);
-			stats(0, 0, 0, 0, 1, 1, 1, 1);
-			stats(0, 0, 0, 0, 0, 0, -100, 0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", 1, "cor", 1);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 		}
 		//Male or genderless
 		if(player.gender == 0 || player.gender == 1) {
@@ -1317,7 +1317,7 @@ public function impRapesYou():void {
 				if(player.ballSize >= 5) outputText("Your huge " + ballsDescriptLight() + " swing heavily against you as well, responding to the force of the imp's thrusts, slapping your own ass and driving your " + cockDescript(0) + " even stiffer with lust, the pre-cum pulsing out of your cock in time with the slapping.\n\n", false);
 				outputText("You begin to feel light-headed from lack of air just as the imp grips your head firmly and begins making rapid, shallow thrusts down your throat, nearing his orgasm. Suddenly he clenches tight, his claws digging into your head and thrusts down your throat as far as he can, holding his massive cock deep in your stomach. Your eyes go wide as you feel the imp's balls on your chin spasm violently.  His cock pulses in your mouth as the thick demon cum is pumped violently down your throat. It feels like an eternity as the imp continues to fill your guts with his hot cum, his orgasm lasting far longer than any human's. He slowly withdraws his still-pumping cock from you, coating your throat and then mouth with an almost continual spray of his unnaturally hot and sticky demon seed. The imp pulls out of your mouth just in time to splatter your face with his cum before his orgasm stops, coating your lips, nose, eyes, and hair with his incredibly thick and sticky cum.\n\n", false);
 				outputText("You fall to the ground gasping, exhausted and unable to move, the demon cum on your face and inside you still burning with intense heat and corruption. You lose consciousness, your " + cockDescript(0) + " still firmly erect, your lust not sated.", false);
-				stats(0,0,0,0,0,0,20,2);
+				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 20, "cor", 2);
 				cleanupAfterCombat();
 				slimeFeed();
 				return;					
@@ -1328,12 +1328,12 @@ public function impRapesYou():void {
 				if(player.lowerBody != LOWER_BODY_TYPE_CENTAUR) outputText("as you are disrobed", false);
 				outputText(".  As the imp presses a large bulk against your backside, you realize he has a massive penis!\n\nThe imp pushes his " + eCockDescript(0) + " into your ass and fucks you hard, with little regard to your pleasure.  After a rough fucking, he cums, stuffing your ass full of hot demon cum.  His orgasm lasts far longer than any human's, leaving your belly slightly distended.", false);
 				buttChange(monster.cockArea(0), true,true,false);
-				stats(0, 0, 0, 0, 1, 1, 1, 1);
+				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", 1, "cor", 1);
 				if(player.sens > 40) {
 					outputText("  You manage to orgasm from the feeling of being filled by hot cum.", false);
 					if(player.gender == 1) outputText("  You jizz all over the ground in front of you, spraying cum in huge squirts in time with the demon's thrusts.", false);
 
-					stats(0, 0, 0, 0, 0, 0, -100, 1);
+					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 1);
 				}
 				outputText("\n\nYou drop to the ground when he's done with you, cum spilling from your abused ass all over the ground, too exhausted to move.  Consciousness fades.  ", false);
 			}
@@ -1433,7 +1433,7 @@ public function noogaisNippleRape():void {
 	//(if not)
 	else outputText("You quickly get dressed and leave the imp to his slumbering, his hands still tied together by his loincloth.", false);
 	//Gain xp and gems here
-	stats(0,0,0,0,0,-3,-100,1);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -3, "lus", -100, "cor", 1);
 	cleanupAfterCombat();
 }
 
@@ -1464,7 +1464,7 @@ public function impLordHeavyEncounter():void {
 public function impLordLustAttack():void {
 	outputText("Lowering his loincloth the imp reveals his inhumanly thick shaft.  He smirks and licks his lips as he gives his cock a squeeze, milking a few beads of clear pre from the tip.  You shake your head and try to ignore your growing need.");
 	//[+Lust]
-	stats(0,0,0,0,0,0,5+player.lib/5+player.cor/5,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5+player.lib/5+player.cor/5, "cor", 0);
 	combatRoundOver();
 }
 
@@ -1475,7 +1475,7 @@ public function impLordLustAttack2():void {
 	damage = takeDamage(damage);
 	outputText(" ("+damage+")");
 	//[-HP(minor) // +Lust]
-	stats(0,0,0,0,0,0,5+player.sens/4+player.cor/10,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5+player.sens/4+player.cor/10, "cor", 0);
 	combatRoundOver();
 }
 
@@ -1485,7 +1485,7 @@ public function impFire():void {
 	//[-HP // +Lust(minor)]
 	var damage:int = 40 + rand(10);
 	damage = takeDamage(damage);
-	stats(0,0,0,0,0,0,20+player.cor/10,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 20+player.cor/10, "cor", 0);
 	combatRoundOver();
 }
 public function impLordAI():void {
@@ -1494,7 +1494,7 @@ public function impLordAI():void {
 	choices[choices.length] = impLordLustAttack2;
 	choices[choices.length] = impLordLustAttack;
 	choices[choices.length] = impLordHeavyEncounter;
-	choices[choices.length] = eAttack;
+	choices[choices.length] = monster.eAttack;
 	choices[rand(choices.length)]();
 }
 	
@@ -1602,7 +1602,7 @@ public function impLordBumPlug():void {
 		outputText("\n\nAt the end of your orgasm, the poor creature is coated with your seed, marking him as the slut he is.  You release the exhausted imp and he falls forward into the puddle of his own semen.  The imp doesn't seem finished however, his " + eCockDescript(0) + " is still hard, throbbing and drooling pre like a faucet.  The poor thing begins to jerk himself off feverishly, using his earlier spilled cum as a lubricant.  You consider staying for another round, but decide against it when your [legs] begin to wobble from exhaustion.");
 	}
 	outputText("\n\nYou stumble slightly as you gather up your [armor], and begin to get dressed.");
-	stats(0,0,0,0,0,0,-100,1);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 1);
 	cleanupAfterCombat();
 }
 
@@ -1649,7 +1649,7 @@ public function getBlownByAnImpLord():void {
 	else outputText("  Cum floods out of your urethra like a faucet, quickly of filling the imp's tight mouth regardless of how fast he tries to swallow.  You step back, your length popping out of the demon's mouth.  The imp acts quickly, shutting his eyes and opening his mouth wide, as your seed splatters his face, chest and tongue.  Your [cock biggest] spasms from the powerful orgasm, quickly coating the imp in your hot spunk.  It takes several minutes for your orgasm to end, you manage to look at the cum soaked imp as he begins wiping your cum up with his hands.  His muscular hands don't stay cum soaked for long as he begins suckling each finger and licking his palms.");
 	
 	outputText("\n\nYou gather your things and put your [armor] back on before turning to leave.  You chance one last glance back at the defeated imp, you notice him laying down on his back, his hands working his own still hard length furiously.  You head back for camp and allow the imp to enjoy the afterglow of his meal.");
-	stats(0,0,0,0,0,0,-100,1);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 1);
 	cleanupAfterCombat();
 }
 
@@ -1693,7 +1693,7 @@ public function femaleVagRape():void {
 		outputText("\n\nAs you ride out your orgasm the crafty imp pulls your " + cockDescript(0) + " and " + cockDescript(1) + " towards his mouth. Locking his lips around the tips of your two cocks, he suckles down every last drop of your jizz they offer.  You begin to mewl and whine in desperation as your orgasm seems to last an eternity.  The imp's skilled tongue and cock manage to work all of your favorite and most sensitive spots, sending into complete euphoria.  Once your orgasm begins to settle the imp pulls back allowing the last few strings of semen to splatter across his face.");
 	}
 	outputText("\n\nAfter a few moments of recovery, you slowly lift yourself off the imp.  Cum rushes out of your " + vaginaDescript() + " and you clamp your muscles down as best as you can to keep the warm substance inside of you.  You give your swollen cum filled belly a motherly rub, before gathering your [armor].");
-	stats(0,0,0,0,0,0,-100,1);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 1);
 	slimeFeed();
 	cleanupAfterCombat();
 }
@@ -1727,7 +1727,7 @@ public function feederBreastfeedRape():void {
 		outputText("\n\nAfter riding out his orgasm, the imp flops backwards onto the ground.  His cock now semi hard and coated in his juices.  He gives his slightly bloated belly a gentle, content rub.  You chuckle at him as he falls asleep contentedly.");
 		
 		outputText("\n\nYou pick yourself up, gather up your equipment and put your [armorName] back on.");
-		stats(0,0,0,0,0,0,50,1);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 50, "cor", 1);
 	}
 	else {
 		outputText("\n\nYou lean down, and allow the imp to stand back up.  He immediately throws himself against your breast, and begins to suckle on the closest [nipple].  You give a gentle moan and bask in the sensation of nursing the imp's insatiable hunger.  You notice the imp's member slowly shifting to a semi-hard state, and chuckle, gently patting his bald head encouragingly.");
@@ -1760,7 +1760,7 @@ public function feederBreastfeedRape():void {
 				outputText("\n\nThe imp weakly smiles at you one last time as he passes out.  Clearly very happy with how the events unfolded.  You're very pleased with the event as well.  Picking yourself up, you gather your equipment and put your [armor] back on.");
 			}
 		}
-		stats(0,0,0,0,0,0,0,1);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 1);
 	}
 	//You've now been milked, reset the timer for that
 	player.addStatusValue("Feeder",1,1);
@@ -1811,7 +1811,7 @@ public function loseToImpLord():void {
 	outputText("\n\nThe imp pulls out, but is quick to stuff a soft unknown object into your [asshole] to plug all of his delicious, corrupt seed inside of you.  You stay in position, though you're wobbling slightly from the intense experience.  The short, muscular demon looks down at you, and you look up at him concerned.  He chuckles, \"<i>Don't worry my bitch, that thing will dissolve on it's own in a day or so,</i>\" the demon assures you.  He grips his " + eCockDescript(0) + ", which is soaked with his own juices, and hold it out towards you.");
 	
 	outputText("\n\nYou take the hint and nervously lick the cock clean.  You can taste the corruption, and it sends sparks through your mind.  You almost wish it didn't have to end, but soon the imp is satisfied with your cleaning job, gathers is things and turns to leave you, to recover from your ordeal.  Within minutes of him leaving you pass out, collapsing to the ground.  You lay there, in a puddle of sexual fluids for a long time before you wake up.  After gathering your equipment, you begin to make your way back to camp.  Hopefully that green stuff's effects will have worn off once you get back.");
-	stats(0,0,0,0,0,2,-100,1);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 2, "lus", -100, "cor", 1);
 	slimeFeed();
 	cleanupAfterCombat();
 }
@@ -1844,7 +1844,7 @@ public function getRapedAsAGirl():void {
 	outputText("\n\nThe imp pulls out, and gives himself a few final strokes, sending one last shot of cum across your face.  You blush in embarrassment and wipe the sticky seed from your nose and lips.  Standing up, the imp presses a hoof down hard on your distended stomach, making you gasp loudly as the demon's thick cum is forced back out of your [vagina], pooling between your legs. The imp gives a satisfied smirk and flies off, leaving you to clean up.");
 	
 	outputText("\n\nYou stand up weakly after several moments, and gather your [armor].  It takes you a while to get dressed in your defeated state, but you managed to crawl back towards your camp.  You're [vagina] is still leaking some of the demonic cum, but you try not to worry about it as you arrive, collapsing almost immediately.");
-	stats(0,0,0,0,0,0,-100,1);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 1);
 	slimeFeed();
 	cleanupAfterCombat();
 }
@@ -1902,7 +1902,7 @@ public function putBeeEggsInAnImpYouMonster():void {
 	outputText("\n\nYou hear a strange noise from the imp, one that sounds strangely like a giggle.  You glance down at him, instinctively evaluating him as a bearer of your eggs.  The imp is still panting, looking up at you from under his messy, black hair.  With a flushed, submissive expression and swollen, pregnant belly, the imp seems almost... cute?  He cradles his massive, egg-filled belly, caressing it, then looks back to you, blushing.");
 
 	outputText("\n\nYou blink then stand up.  You shake your head as you walk away, chalking the odd thoughts up to your egg-laying instincts.  Some of these mutations have some weird effects, after all...");
-	stats(0,0,0,0,0,-1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
 	player.dumpEggs();
 	cleanupAfterCombat();
 }

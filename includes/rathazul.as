@@ -7,7 +7,7 @@ public function encounterRathazul():void {
 	spriteSelect(49);
 	var offered:Boolean = false;
 	//Rat is definitely not sexy!
-	if(player.lust > 30) stats(0,0,0,0,0,0,-10,0);
+	if(player.lust > 30) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -10, "cor", 0);
 	//Introduction
 	if(player.hasStatusAffect("metRathazul") >= 0) {
 		if(player.hasStatusAffect("Camp Rathazul") >= 0)
@@ -63,10 +63,10 @@ public function campRathazul():void {
 	}
 	var offered:Boolean = false;
 	//Rat is definitely not sexy!
-	if(player.lust > 50) stats(0,0,0,0,0,0,-1,0);
-	if(player.lust > 65) stats(0,0,0,0,0,0,-5,0);
-	if(player.lust > 80) stats(0,0,0,0,0,0,-5,0);
-	if(player.lust > 90) stats(0,0,0,0,0,0,-5,0);
+	if(player.lust > 50) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -1, "cor", 0);
+	if(player.lust > 65) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -5, "cor", 0);
+	if(player.lust > 80) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -5, "cor", 0);
+	if(player.lust > 90) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -5, "cor", 0);
 	//Introduction
 	outputText("Rathazul looks up from his equipment and gives you an uncertain smile.\n\n\"<i>Oh, don't mind me,</i>\" he says, \"<i>I'm just running some tests here.  Was there something you needed, " + player.short + "?</i>\"\n\n", true);
 	//player.createStatusAffect("metRathazul",0,0,0,0);

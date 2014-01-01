@@ -154,7 +154,7 @@ public function drankMalkYaCunt():void {
 	outputText("Isabella pulls one of her breasts out of her low-cut shirt and begins to suckle at one of the many-tipped nipples. Her cheeks fill and hollow a few times while you watch with spellbound intensity.  She finishes and tucks the weighty orb away, blushing furiously.  The quick drink seems to have reinvigorated her, and watching it has definitely aroused you.", false);
 	monster.HP += 100;
 	monster.lust += 5;
-	stats(0,0,0,0,0,0,(10+player.lib/20),0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (10+player.lib/20), "cor", 0);
 	combatRoundOver();
 }
 
@@ -249,7 +249,7 @@ public function isabellaGreeting():void {
 	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00259] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00258] == 0 && player.tallness > 78) {
 		outputText("You easily brush through the tall grasses and stride into Isabella the cow-girl's camp.  It looks like she was sitting in her chair mending a blanket when you arrived, and you take a moment to watch her hunched posture squeeze her breasts tightly against the gauzy silk top she's so fond of wearing.  The outline of a single areola is clearly visible through the diaphanous material, but most striking is that each areola has four VERY prominent nipple-tips.  She looks at you, first in fright, and then in embarrassment as she recognizes you AND realizes what you were doing in a single instant.\n\n", false);
 		//(+lust!)
-		stats(0,0,0,0,0,0,10+rand(10),0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10+rand(10), "cor", 0);
 		outputText("Isabella complains, \"<i>Vere you just checking me out?  Vell I must confess, I liked you better ven you were shorter.  Maybe if you ask nicely I might give you a peak and a drink.  That vould be nice, nein?\n\n", false);
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00258]++;
 		if(player.hasCock()) {
@@ -411,7 +411,7 @@ public function nomOnMommaIzzysTits():void {
 			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00261] == 0) outputText("  S-she fucked you in your sleep?  That explains how good your dreams were.  On one hand you feel a little violated, but on the other you have to wonder how long this woman has held her camp against the demons with nothing to please her.", false);
 			else outputText("  It looks like she fucked you in your sleep again.  You wish you wouldn't fall asleep so soundly after drinking her milk so that you could contribute to the sex, but you wake so COMPLETELY SATED in every way that you know it's going to be hard to ever turn her down.", false);
 			//(no lust!, minus 50 fatigue)
-			stats(0,0,0,0,0,0,-100,0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 			fatigue(-50);
 			//increment sleep rape counter
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00261]++;
@@ -466,7 +466,7 @@ public function nomOnMommaIzzysTits():void {
 				outputText(".", false);
 			}
 			//(no lust!, minus 50 fatigue)
-			stats(0,0,0,0,0,0,-100,0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 			fatigue(-50);
 			//increment sleep rape counter
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00261]++;
@@ -627,7 +627,7 @@ public function izzyGivesSmallWangsFreeOral():void {
 		}
 	}
 	if(!isabellaFollower()) isabellaAffection(2);
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	doNext(13);
 }
 
@@ -679,7 +679,7 @@ public function volunteerToSlurpCowCunt():void {
 		outputText("Isabella sighs contentedly and says, \"<i>Thank you, " + player.short + ".  You're a wonderful pussy licker.  Perhaps one of these times I will keep you for myself, huh?  I kid, I kid.</i>\"  She blushes heavily, as if realizing what she just said and turns to busy herself with cleaning up.  You get dressed, having some difficulty hiding the lust the act inspired in you.\n\n", false);
 	}
 	//(+lots of lust)
-	stats(0,0,0,0,0,0,(10+player.lib/10),0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (10+player.lib/10), "cor", 0);
 	if(player.hasCock()) {
 		outputText("The cow-girl suddenly glances back at your crotch ", false);
 		if(player.cocks[player.shortestCockIndex()].cockLength >= 9) outputText("before sighing wistfully.", false);
@@ -760,8 +760,8 @@ public function IsabellaWinsAndSpanks():void {
 		outputText("You go back to sleep, your backside bruised and your belly full of Isabella's milk.\n\n", false);
 		//(+4 sensitivity, -100 lust if masochist, -40 fatigue)
 		fatigue(-40);
-		stats(0,0,0,0,0,4,0,0);
-		if(player.hasPerk("Masochist") >= 0) stats(0,0,0,0,0,0,-100,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 4, "lus", 0, "cor", 0);
+		if(player.hasPerk("Masochist") >= 0) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	}
 	//[Lose And Get Spanked – Tall]
 	else {
@@ -817,8 +817,8 @@ public function IsabellaWinsAndSpanks():void {
 		outputText("You go back to sleep, your backside bruised and your belly full of Isabella's milk.", false);
 		//(+4 sensitivity, -100 lust if masochist, -40 fatigue)
 		fatigue(-40);
-		stats(0,0,0,0,0,4,0,0);
-		if(player.hasPerk("Masochist") >= 0) stats(0,0,0,0,0,0,-100,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 4, "lus", 0, "cor", 0);
+		if(player.hasPerk("Masochist") >= 0) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	}
 	if(player.hasCock()) {
 		if(player.cocks[player.shortestCockIndex()].cockLength < 9) {
@@ -931,7 +931,7 @@ public function isabellaRapesYouWithHerAss():void {
 		outputText("Isabella sighs, panting lightly from the effort as she watches the tension drain from your face.  \"<i>Such a good boy to let it all out.  All that nasty, vile stuff just pouring out of your body for me... yes, you are my good boy.</i>\"  The cow-girl kisses you full on the lips, slipping her wide, flat tongue through your own.  You sigh, but she breaks it and stretches languidly.  Overcome by exhaustion, you slip into a restful slumber, interrupted only by the feel of your body swaying as it's moved.", false);
 	}
 	if(!isabellaFollower()) isabellaAffection(4);
-	stats(0,0,0,0,0,2,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 2, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -967,7 +967,7 @@ public function IsabellaPostSpankFeedSex():void {
 	
 	outputText("Once you've emptied the last of your submission into Isabella, she rolls off of you, panting heavily.  \"<i>Das vas a very good boy!  I hope I taught you some manners.  Maybe come visit me some time, but be polite for me or I'll have to give you another spanking!</i>\"  She climbs up on woozy legs and walks off, leaving you to doze in the defiled well of earth like a discarded tissue.\n\n", false);
 	if(!isabellaFollower()) isabellaAffection(3);
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -1106,7 +1106,7 @@ public function victoryLactation69():void {
 	player.changeStatusValue("Feeder",2,0);
 	//Reset anger
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] = 0;
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 //[VICTORY BUTTSEX]
@@ -1196,7 +1196,7 @@ public function PCVictoryOnIsabellaButtsex():void {
 	
 	outputText("You get dressed and set off, feeling quite proud of how you handled the haughty foreign bovine.", false);
 	if(!isabellaFollower()) isabellaAffection(3);
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -1309,7 +1309,7 @@ public function victoryAgainstIzzzzzySixtyNine():void {
 	outputText("  It takes you a moment to catch your breath, but once you do, you stand with renewed vigor and satisfaction – Isabella is delirious and panting.  You lean down to listen and she whispers, \"<i>..love you.  Lick lick lick slurp slurp cum cum! Fun fun cum cum...</i>\"  The poor girl is completely blissed out!  Hell, it sounds like she's already forgiven you for the rough treatment, just as she should.\n\n", false);
 	outputText("You get dressed and leave with a smile.", false);
 	//(slimefeed + izzy unmad!)
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	if(!isabellaFollower()) isabellaAffection(9);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] = 0;
 	slimeFeed();
@@ -1386,7 +1386,7 @@ public function tooBigVictoryTittyFuckingFuntimesWithMilk():void {
 	outputText(" her breasts.  She's mooing contentedly and tugging on her teats now, squeezing the last of her cream out while you watch.  The cow-girl barely seems conscious of your presence at this point.\n\n", false);
 	if(!isabellaFollower()) isabellaAffection(3);
 	outputText("Shrugging, you wipe " + sMultiCockDesc() + " off on her lips and get dressed.  This cow is one marvelous cum-dump.", false);
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -1450,7 +1450,7 @@ public function vaginalProdNPokeIsabella():void {
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] = 0;
 	if(!isabellaFollower()) isabellaAffection(7);
 	cleanupAfterCombat();
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 }
 
 //[Small dick tit-fucking] (Dicks less than 9 inches)
@@ -1496,7 +1496,7 @@ public function tinyVictoryTittyFuckingFuntimesWithMilk():void {
 	if(!isabellaFollower()) isabellaAffection(8);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] = 0;
 	cleanupAfterCombat();
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 }
 
 //[Discuss Isabella]

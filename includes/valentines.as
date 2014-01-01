@@ -137,7 +137,7 @@ public function goHomeFromVDay():void {
 	outputText("You decide your work here is done, and bid the three girls goodbye.  Scylla in particular seems grateful for your help, locking you in a smooshy hug for a few seconds before letting you go, and again expressing her gratitude for your help.  Well, that last gratitude almost made it worth it, though on the other hand, you find yourself a bit aroused by it...");
 	//With no other things to do, you go back to camp to rest.
 	//{Small Lust Increase, return to camp, go to sleep}
-	stats(0,0,0,0,0,0,10,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10, "cor", 0);
 	doNext(14);
 }
 
@@ -262,7 +262,7 @@ public function feedScyllaVDay():void {
 	clearOutput();
 	//{The PC titfucks Scylla again, and then gets her to suck them off, resulting in two quick orgasm and a big nice load of food for Scylla. How far can you fall to get off? On such a nice day, too!}
 	outputText("You feed Scylla what feels like a gallon of jizz!");
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	outputText("\n\n(<b>You have gained the One Track Mind perk.</b>");
 	player.createPerk("One Track Mind",0,0,0,0,"Q-q-quit peeking in my code, desu-chan!");
 	doNext(14);
@@ -345,7 +345,7 @@ public function fuckAbbyVDay():void {
 	
 	outputText("\n\n(<b>You've received the Sensual Lover Perk!</b>)");
 	player.createPerk("Sensual Lover",0,0,0,0,"Q-q-quit peaking in my code, desu-chan!");
-	stats(0,0,0,0,0,-3,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -3, "lus", -100, "cor", 0);
 	doNext(14);
 }
 
@@ -375,7 +375,7 @@ public function pleasureAbbyVDay():void {
 	
 	outputText("\n\n(<b>You've received the Pure and Loving Perk!</b>)");
 	player.createPerk("Pure and Loving",0,0,0,0,"Q-q-quit peaking in my code, desu-chan!");
-	stats(0,0,0,0,0,0,80,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 80, "cor", 0);
 	doNext(14);
 }
 
@@ -503,7 +503,7 @@ public function fuckPastieForVDay():void {
 	
 	outputText("\n\n(<b>You have gained the One Track Mind perk!</b>)");
 	player.createPerk("One Track Mind",0,0,0,0,"Q-q-quit peaking in my code, desu-chan!");
-	stats(0,0,0,0,0,-2,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
 	doNext(14);
 }
 
@@ -538,7 +538,7 @@ public function rubPastieOnYourWangDawg():void {
 	// (You have gained the One Track Mind perk!)
 	outputText("\n\n(<b>You have gained the One Track Mind perk!</b>)");
 	player.createPerk("One Track Mind",0,0,0,0,"Q-q-quit peaking in my code, desu-chan!");
-	stats(0,0,0,0,0,-2,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
 	doNext(14);
 }
 
@@ -570,7 +570,7 @@ public function goForAPushayDivePasty():void {
 	
 	outputText("\n\n(<b>You have gained the Sensual Lover perk!</b>)");
 	player.createPerk("Sensual Lover",0,0,0,0,"Q-q-quit peaking in my code, desu-chan!");
-	stats(0,0,0,0,0,-2,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
 	doNext(14);
 }
 

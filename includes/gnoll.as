@@ -183,7 +183,7 @@ public function gnollTease():void {
 		outputText("The gnoll dances forward, then back, her whole body alive with sensual movement.  She catches the way you watch her and smirks, throwing in a hip-shake just for you.", false);
 		bonus += 6;
 	}
-	stats(0,0,0,0,0,0,(bonus + 10 + player.lib/20 + rand(player.cor/20)),0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (bonus + 10 + player.lib/20 + rand(player.cor/20)), "cor", 0);
 	outputText("\n", false);
 }
 
@@ -257,7 +257,7 @@ public function getRapedByGnoll():void {
 	}
  	outputText("The hyena girl slumps against your body, but only for a moment.  Then she's suddenly up again, sliding her bizarre member out of you with an obscene slurp.  She leans down to pat your cheek and giggles, \"<i>Thanks, lover.</i>\"   Then she sprints off towards the horizon.", false);  
 	outputText("  A whimper bubbles up your throat and comes out as a half-giggle as you slump down unconscious.", false);
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -324,7 +324,7 @@ public function dickDownGnollClit():void {
 	//(if cumQ()>500)
 	else outputText("Your " + cockDescript(x) + " convulses, pouring cum into her.  Her clitoris bulges even more as the jism backs up, the skin pulling tight and shiny as the pressure builds.  Finally gouts of cum begin spurting back out the tip of her clitoris, splashing against your crotch.", false);
 	outputText("  With a lusty groan, you pull out with a long, slippery sound, and leave the gnoll panting on the dusty ground.", false);
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 //DickInAss
@@ -398,7 +398,7 @@ public function dickInGnollAss():void {
 		}
 		outputText("Satisfied, you leave the gnoll to her pleasures, gather your " + player.armorName + ", and head back to camp.", false);
 	}
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -411,7 +411,7 @@ public function suckGnollClit():void {
 	outputText("Her legs twitch around your ears as you continue to swallow, even though there is no more to go.  The muscles in your throat gently massage the length of the monstrous clitoris, which plumps even further as more blood rushes into it.  You can feel its tumescent bulk all down your throat and halfway into your chest.\n\n", false);
 	outputText("The massive clit-dick then begins to flutter and twitch as the gnoll starts to cum.  Her feet stamp the ground to either side of you and she abruptly screams into the sky.  Her warbling cry then seems to collapse inward, and her entire body slumps to the ground, unconscious.\n\n", false);
 	outputText("You leave her there on the sun-caked ground and head back to camp.", false);
-	stats(0,0,0,0,0,0,100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 100, "cor", 0);
 	cleanupAfterCombat();
 }
 //TakeHerClit
@@ -424,7 +424,7 @@ public function takeGnollClit():void {
 	outputText("\"<i>Hey!</i>\" you shout, and reach forward to slap the gnoll across the face.  Abruptly the clit-dick hardens inside you, even as the girl's face registers little response.  With a smirk, you try it again.  A second hard slap brings the hyena's pseudocock ramrod straight up inside you, and you roll your hips atop her appreciatively.\n\n", false);
 	outputText("Every few strokes, the fake dick starts to fail you and you reach forward to slap her again.  Pump pump slap.  Thrust thrust smack.  Grunt grunt slap.  By the time your body rises up to the quivering summit of orgasm, the gnoll's face is purple with bruises.  You scream your orgasm to the sky, bearing down hard on her hollow clitoris, and come hard enough that you see stars.\n\n", false);
 	outputText("When you can get your feet under yourself again, you stand up, letting the now-shrunken clitoris fall out of your " + vaginaDescript(0) + " with a wet plop.  You leave her there on the sun-caked ground and head back to camp.", false);
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
    
@@ -472,7 +472,7 @@ public function yoDawgHyenaBallz3():void {
 	outputText("", true);
 	outputText("Finally, you feel the gnoll's clit slide out of your anus as the overly-endowed girl collapses at your side.  Broken utterly, she pants with depraved exhaustion, no strength left to continue pounding your body into the dirt.  Even now, she strokes her massive clit with one spotted paw as the other helplessly massages the basketball-sized testicles that audibly churn with gallons of the girl's jizz.  Finding a reserve of strength you didn't know you had, you rise tenderly and gather your belongings, creeping away before the hyena-girl can get her second wind.", false);
 	//[24 hours pass, player asshole size increased, sensitivity significantly lowered, toughness lowered temporarily, fatigue maxed, remove one succubi's dream]
-	stats(0,0,0,0,2,-10,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 2, "sen", -10, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 /*

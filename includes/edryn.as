@@ -132,7 +132,7 @@ public function edrynBarTalk():void {
 		outputText(", now rock-hard.  You breathe deeply, your mind subsumed in a sea of equine instincts.  The hard floor squeezes your " + cockDescript(0) + " painfully underneath you, forcing you to rise up onto your hooves.  You can feel more than a few curious gazes sliding along your now fully exposed maleness, and it twitches as if it were happy for the attention.\n\n", false);
 		outputText("Swaying back and forth, alternatively snorting and breathing deeply of the female's scent, your gaze immediately locked onto the returning mare.  Your " + cockDescript(0) + " jumps and bounces underneath you, painfully hard and swollen.  A thick dollop of pre beads on your " + cockHead(0) + ", as if the bar needed your display to be any more overtly sexual.  Edryn looks you over, walking alongside you she talks, \"<i>My my, someone liked what they saw.  Or was it smelled?  I can never tell what it is that gets you " + player.mf("studs","hotties") + " so worked up about me.</i>\"\n\n", false);
 		outputText("A soft hand slides under your belly, hefting your " + cockDescript(0) + " and smearing the bead of pre over it with long slick strokes.  She coos, \"<i>", false);
-		stats(0,0,0,0,0,0,70,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 70, "cor", 0);
 		edrynOffer();
 		return;
 	}
@@ -142,7 +142,7 @@ public function edrynBarTalk():void {
 			if(player.cocks[0].cockLength > 16) outputText("You barely register the thump of your hardening " + Appearance.cockNoun(CockTypesEnum.HORSE) + " as it smacks into the underside of the table.\n\n", false);
 			else outputText("You squirm uncomfortably, feeling constrained by your " + player.armorName + " as you surge to erectness.\n\n", false);
 			outputText("Swaying back and forth in a scent induced haze, you fail to notice Edryn's return.  She coughs noisily, drawing you back to the real world and pushing away the memory of her glistening snatch.  You start to fumble for words until you realize she's smiling knowingly at you.  Unexpectedly, caresses slide against your groin, hefting and measuring you through your " + player.armorName + ".\n\n", false);
-			stats(0,0,0,0,0,0,60,0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 60, "cor", 0);
 			edrynOffer();
 			return;
 		}
@@ -156,7 +156,7 @@ public function edrynBarTalk():void {
 				outputText("behind her, fucking her like the beast-woman she is.  Lost in your thoughts, you fail to notice Edryn's return.  She coughs noisily, rousing you from the impromptu fantasy as she gives you a knowing smile.  An unexpected caress slides against you groin, rubbing and hefting you carefully.", false);
 				if(player.cocks[0].cockType == CockTypesEnum.TENTACLE) outputText("  She smiles coyly when your " + cockDescript(0) + " wriggles, wrapping around her arm.", false);
 				outputText("\n\n", false);
-				stats(0,0,0,0,0,0,40,0);
+				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 40, "cor", 0);
 				edrynOffer();
 				return;
 			}
@@ -385,7 +385,7 @@ public function fuckEdrynTaur():void {
 	else outputText("\n\nShe sighs contentedly and says, \"<i>Mmm, never stop visiting, okay?</i>\"", false);
 	outputText("\n\nThe two of you wipe up as best you can, redress, and head back out to the bar.  You're consciously aware of how strongly your groin reeks of centaur-slut.  Your body, happy with the scent and scrutiny of the bar's patrons, refuses to go soft, providing a wonderful view of your cum-slicked member.  Giggles and laughter break out around you as you leave, though more than a few of those taking notice have hard nipples or tents of their own.", false);
 	if(player.statusAffectv1("Edryn") >= 4) edrynPregChance();
-	stats(0,0,0,0,0,-3,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -3, "lus", -100, "cor", 0);
 	if(player.lust < 30) player.lust = 30;
 	doNext(13);
 }
@@ -440,7 +440,7 @@ public function fuckEdrynNonTaur():void {
 	else outputText("She sighs contentedly and says, \"<i>Mmm, never stop visiting ok?</i>\"\n\n", false);
 	outputText("The two of you clean up as best you can, redress, and head back out to the bar.  You're consciously aware of how strongly you reek of centaur-slut.  Your body, happy with the scent and the scrutiny of the bar's patrons, refuses to go soft, providing a more-than-ample tent.  Giggles and laughter break out around you as you leave, though more than a few of those taking notice have hard nipples or tents of their own.", false);
 	if(player.statusAffectv1("Edryn") >= 4) edrynPregChance();
-	stats(0,0,0,0,0,-3,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -3, "lus", -100, "cor", 0);
 	if(player.lust < 30) player.lust = 30;
 	doNext(13);
 }
@@ -577,7 +577,7 @@ public function threesomeEdrynAndHel():void {
 	outputText("When you're satisfied, you stumble and collapse against her horsebody, barely fighting off an intense urge to sleep.  The centauress moans contentedly, \"<i>Mmm, we should do this again sometime. You two were amazing.</i>\"\n\n", false);
 
 	outputText("\"<i>Oh yeah. We... We gotta go again sometime,</i>\" Hel agrees, nearly falling off Edryn's back.  You give each of the girls a long kiss before collecting your " + player.armorName + " and walking off back to camp.\n\n", false);
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	helAffection(5);
 	doNext(13);
 }
@@ -731,7 +731,7 @@ public function pregdrynOffer(cs:Boolean = true):void {
 		outputText("?</i>\"  You try to deny it, but she pumps at your shaft and continues, \"<i>Don't lie dear, I can feel how hard you are now, and I DEFINITELY saw how dazed you were when I came back out.  Let's go back to my room so you can get another whiff, okay?</i>\"\n\n", false);
 		
 		outputText("The centaur doesn't wait for a reply, and takes off at a trot towards her quarters.  A few drips have splattered across the floor, leaving a trail for you to follow.  You get up, dazed with arousal and leaking pre-cum, and stagger through the bar to her room, practically lust-drunk.", false);
-		stats(0,0,0,0,0,0,50,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 50, "cor", 0);
 		//TO SEX!
 		//doNext(fuckPregEdryn);
 		outputText("\n\nHow do you want to handle this?  ");
@@ -757,7 +757,7 @@ public function pregdrynOffer(cs:Boolean = true):void {
 		outputText("Edryn releases you and climbs up on all fours, making her way towards her room in the back of the establishment.  The smell of her need hangs heavy in the air, and you follow it like a lost puppy.  Of course, puppies don't have their massive, rock-hard maleness visible to everyone around them.  Thankfully, you reach her door quickly, and bolt inside.", false);
 		//Go to 'too big or too small eat out'
 		doNext(jizzFromEatingPregdrynOut);
-		stats(0,0,0,0,0,0,50,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 50, "cor", 0);
 		return;
 	}
 	//(PC TOO SMALL)
@@ -769,7 +769,7 @@ public function pregdrynOffer(cs:Boolean = true):void {
 		outputText("The centaur doesn't wait for a reply, and takes off at a trot towards her quarters.  A few drips have splattered across the floor, leaving a trail for you to follow.  You get up, dazed with arousal and leaking pre-cum, and stagger through the bar to her room, practically drunk on lust.", false);
 		//Go to 'too big or too small eat out'
 		doNext(jizzFromEatingPregdrynOut);
-		stats(0,0,0,0,0,0,50,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 50, "cor", 0);
 		return;
 	}
 }
@@ -858,7 +858,7 @@ public function fuckPregEdryn():void {
 		
 		outputText("After you both get a chance to stagger up to your feet and get dressed, Edryn thanks you, \"<i>That was wonderful dear.  I'll probably be horny and dripping again in a few minutes, so please come back soon.  I think I'm going to be a sopping wet mess until our child is born.</i>\"\n\n", false);
 	}
-	stats(0,0,0,0,0,-.5,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -.5, "lus", -100, "cor", 0);
 	doNext(13);
 }
 
@@ -922,7 +922,7 @@ public function jizzFromEatingPregdrynOut():void {
 	outputText("You nod and give her milk-dripping teat a squeeze.  A squirt of the white stuff escapes before Edryn pushes you away.  You chuckle and get dressed while she does the same, but before you can escape her room, she lifts her shirt, squeezes a teat, and catches you in the face with her milk.\n\n", false);
 	
 	outputText("\"<i>Turn-about is fair play!</i>\" she exclaims. You leave, unable to dispute the logic.", false);
-	stats(0,0,0,0,1,2,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 2, "lus", -100, "cor", 0);
 	doNext(13);
 }
 
@@ -1092,14 +1092,14 @@ public function eatEdrynPussyLikeABawss():void {
 	//[Next]
 	menu();
 	addButton(0,"Next",postEdrynEatOutRut);
-	stats(0,0,0,0,.25,-3,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", .25, "sen", -3, "lus", -100, "cor", 0);
 }
 
 public function postEdrynEatOutRut():void {
 	clearOutput();
 	outputText("When Edryn and you wake, your genitals are so sore and sensitive that getting cleaned up is almost painful.  The centauress even goes so far as to comment that she'll have to pay someone to mop up the mess, but there's a proud twinkle in her eye.  Somehow, your [armor] got splattered with vaginal juices during the sexcapade, and as you put them back on, [eachCock] regains its familiar hardness.  You chew on your lower lip as you slip out after saying goodbye, rock-hard and smelling totally of Edryn's lust.  A limited applause goes up at your departure, mixed with hooting and catcalls.  What a fuck!");
 	hideUpDown();
-	stats(0,0,0,0,0,0,20+player.lib/5,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 20+player.lib/5, "cor", 0);
 	edrynPregChance();
 	edrynPregChance();
 	edrynPregChance();

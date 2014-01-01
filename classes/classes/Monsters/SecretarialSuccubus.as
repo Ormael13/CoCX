@@ -1,5 +1,6 @@
-package classes.Monsters 
+package classes.Monsters
 {
+	import classes.CoC;
 	import classes.Creature;
 	import classes.Monster;
 	import classes.CockTypesEnum;	
@@ -13,13 +14,13 @@ package classes.Monsters
 			if (player.gender > 0){
 				if (hpVictory) {
 					outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.  Now would be the perfect opportunity to taste the fruits of her sex-ready form...\n\nDo you rape her?", true);
-					game.stats(0, 0, 0, 0, 0, 0, 1, 0);
+					game.dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 1, "cor", 0);
 					var temp2:int = 0;
 					if (player.hasKeyItem("Deluxe Dildo") >= 0) temp2 = 2266;
 					game.simpleChoices("Yes", 11023, "Dildo Rape", temp2, "", 0, "", 0, "No", game.cleanupAfterCombat);
 				} else if (player.lust>=33){
 					outputText("You smile in satisfaction as the " + short + " gives up on fighting you and starts masturbating, begging for you to fuck her.  Now would be the perfect opportunity to taste the fruits of her sex-ready form...\n\nDo you fuck her?", true);
-					game.stats(0,0,0,0,0,0,1,0);
+					game.dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 1, "cor", 0);
 					temp2 = 0;
 					if(player.hasKeyItem("Deluxe Dildo") >= 0) temp2 = 2266;
 					game.simpleChoices("Yes",11023,"Dildo Rape",temp2,"",0,"",0,"No",game.cleanupAfterCombat);
@@ -41,8 +42,8 @@ package classes.Monsters
 			}
 		}
 
-		public function SecretarialSuccubus(mainClassPtr :*) {
-			super(mainClassPtr);
+		public function SecretarialSuccubus(game :*) {
+			super(game);
 			init01Names("the ", "secretarial succubus", "secretarialsuccubus", "The succubus across from you balances gracefully on her spiked heels, twirling and moving unpredictably.  Sexy dark stockings hug every curve of her perfectly shaped flesh until they disappear into her tiny miniskirt.  Her impressive breasts wobble delightfully as she moves, despite the inadequate efforts of her straining vest.  A pair of foot-long horns curve up from her otherwise perfect face and forehead, wreathed in lustrous blonde hair.  The very air around her is filled with an unidentifiable fragrance that makes you tingle and shiver.");
 			init02Female(VAGINA_WETNESS_SLAVERING,VAGINA_LOOSENESS_NORMAL,30);
 			init03BreastRows("DD");

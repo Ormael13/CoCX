@@ -1,9 +1,9 @@
 package classes.Monsters 
 {
 	import classes.Appearance;
+	import classes.CoC;
 	import classes.Monster;
-	import classes.GlobalFlags.kFLAGS;
-	
+
 	/**
 	 * ...
 	 * @author aimozg
@@ -58,9 +58,9 @@ package classes.Monsters
 			["purple","bright yellow"],
 			["orange","brown"],
 			["tan","white"]];
-		public function ChameleonGirl(mainClassPtr:*) 
+		public function ChameleonGirl(game:CoC)
 		{
-			super(mainClassPtr);
+			super(game);
 			var skinToneAdj:Array = Appearance.randomChoice(SKIN_VARIATIONS);
 			init01Names("the ", "chameleon girl", "chameleongirl", "You're faced with a tall lizard-like girl with smooth " + skinToneAdj[0] + " skin and long, " + skinToneAdj[1] + " stripes that run along her body from ankle to shoulder.  An abnormally large tail swishes behind her, and her hands are massive for her frame, built for easily climbing the trees.  A pair of small, cute horns grow from her temples, and a pair of perky B-cups push out through her skimpy drapings.  Large, sharp claws cap her fingers, gesturing menacingly at you.");
 			init02Female(VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_LOOSE);

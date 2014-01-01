@@ -222,7 +222,7 @@ public function isabellasAccentCoaching():void {
 		//(FAIL2) 
 		else if(temp == 1) {
 			outputText("In spite of your efforts to teach the foreign cow-girl, she doesn't seem to make any progress.  The worst part is, she keeps slumping down when you correct her, which only sets her bosom to jiggling, her cleavage looking larger than ever before.  You wind up quite distracted by the time the two of you get finished.", false);
-			stats(0,0,0,0,0,0,10,0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10, "cor", 0);
 		}
 		//(FAIL3) 
 		else {
@@ -231,7 +231,7 @@ public function isabellasAccentCoaching():void {
 			else if(player.hasVagina()) outputText(", and you leave the lesson with wet panties.", false);
 			else outputText(".", false);
 			//(+big lust)
-			stats(0,0,0,0,0,0,25,0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 25, "cor", 0);
 		}
 	}
 	else if(result < 14) {
@@ -337,7 +337,7 @@ public function isabellaMorningWakeupCall():void {
 	outputText("</i>\"\n\n", false);
 	
 	outputText("You slump down while the tension oozes from your frame.  By the time you can move again, Isabella has walked off towards her section of camp.  Is it just you, or does her ass have a particularly sensuous sway this morning?", false);
-	stats(0,0,0,0,0,-1.5,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1.5, "lus", -100, "cor", 0);
 	doNext(1);
 }
 //No BJ's Plz 
@@ -441,7 +441,7 @@ public function repeatGermanBratwurstInCamp():void {
 		//(if libido <=15:  
 		if(silly() && (player.lust < 50 || player.lib <= 20)) {
 			outputText("  Your cock immediately deflates from her laughable doujin-tier pillow talk and falls out of her buttcheeks.  You'll be posting that line to 4chan later for laughs.", false);
-			stats(0,0,0,0,0,0,-99,0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -99, "cor", 0);
 			doNext(13);
 			return;
 		}
@@ -498,7 +498,7 @@ public function repeatGermanBratwurstInCamp():void {
 	}
 	flags[kFLAGS.ISABELLA_TIME_SINCE_LAST_HOTDOGGING] = 1;
 	flags[kFLAGS.ISABELLA_TIMES_HOTDOGGED]++;
-	stats(0,0,0,0,-1,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -1, "sen", 0, "lus", -100, "cor", 0);
 	doNext(13);
 }
 
@@ -644,7 +644,7 @@ public function tentacleBoneFollowerIzzy():void {
 	outputText("feels empty, devoid of any fluid left to spray on her.  ", false);
 	
 	outputText("You keep holding her with " + sMultiCockDesc() + " for a moment, both of you enjoying the powerful embrace as you literally dick-hug her.  The entirety of her body is dripping with your jism but she doesn't seem to care.  Eventually, you put her down, letting her splat in the puddle of juices that formed below your junk-prison.  At last, you unfold your arms.\n\n", false);
-	stats(0,0,0,0,-1,-1,-100,.3);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -1, "sen", -1, "lus", -100, "cor", .3);
 	doNext(13);
 }
 
@@ -1095,7 +1095,7 @@ public function acceptCowpology():void {
 	//Clear burps!
 	if(player.hasStatusAffect("Burp Changed") >= 0) 
 		player.removeStatusAffect("Burp Changed");
-	stats(0,0,0,0,0,-1,-100,0);	
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
 	//FIRST TIME
 	if(flags[kFLAGS.ISABELLA_PROBOVA_BURP_COUNT] == 1) {
 		outputText("Flashing a smirk, you beckon her your way, stripping from your " + player.armorName + ".  With delicate and deliberate motions you pull the hem of Isabella's milk-stained blouse down, reaching into the depths of her cleavage and taking hold of her oversized breasts.  It takes effort to heave the heavy, fluid-filled mammaries up and out of her shirt.  Once exposed to the open air, her quadruplet of nipples twitch and stiffen, only swelling further as you alternatingly tease her teats with the edge of your fingernail.  You trace little circles along the areola, running up and over the nubs; your gentle-but-devastating caressing technique sets Isabella all a-shiver, knees knocking together in hardly-contained ecstasy.  If given enough time, you figure you could push the cow-girl to climax merely from nipple stimulation, but your own body demands satisfaction as well.\n\n", false);
@@ -1208,7 +1208,7 @@ public function receiveAllTheCowTOngues():void {
 
 	outputText("\n\nYou give her a weak thumbs-up before passing out for a quick nap in her comfy chair.");
 	if(isabellaAccent()) outputText("  A bit confused, she nonetheless leaves and returns with a drink, setting it beside you before leaving you to your rest.");
-	stats(0,0,0,0,0,-1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
 	doNext(13);
 }
 
@@ -1286,7 +1286,7 @@ public function fuckIsabella():void {
 		else outputText("\n\n\"<i>Gods, was I ever wrong about big cocks.  That was... You're incredible with that thing, [name].</i>\"");
 	}
 	outputText("\n\nYou grin and rub the big cow's hair before getting dressed.");
-	stats(0,0,0,0,0,-1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
 	doNext(13);
 }
 
@@ -1394,7 +1394,7 @@ public function isabellaBarnFuckPartII():void {
 	outputText("\n\nYou laugh, and rest your head in the pillowy warmth of her milk-stained bosom.  You're nearly ready to drift off into a post-coitus drowse when you hear a sharp voice behind you, \"<i>Isabella?  You alright in there?</i>\"");
 	
 	outputText("\n\nYou look over your shoulders as Whitney throws the door open, her pitchfork at the ready, as if expecting some demon.  You grin sheepishly, your bare [ass] staring the farmer girl right in the face as your trouser snake drips onto the barn floor.  Silently, Whitney turns on a heel and withdraws, closing the door behind her.  A silent moment passes before you and Isabella erupt in laughter, both reaching for your clothes.");
-	stats(0,0,0,0,-1,-3,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -1, "sen", -3, "lus", -100, "cor", 0);
 	fatigue(-25);
 	doNext(14);
 }

@@ -1,5 +1,6 @@
 ﻿package classes.Monsters
 {
+	import classes.CoC;
 	import classes.Cock;
 	import classes.Creature;
 	import classes.Monster;
@@ -49,9 +50,9 @@
 			}
 		}
 
-		public function GreenSlime(mainClassPtr:*)
+		public function GreenSlime(game:CoC)
 		{
-			super(mainClassPtr);
+			super(game);
 			trace("GreenSlime Constructor!");
 			init01Names("a ", "green slime", "greenslime", "The green slime has a normally featureless face that sits on top of wide shoulders that sprout into thick, strong arms.  Its torso fades into an indistinct column that melds into the lump of ooze on the ground that serves as a makeshift form of locomotion.");
 			init02Male(new Cock(18, 2, CockTypesEnum.HUMAN), 0, 0, 3, 20);

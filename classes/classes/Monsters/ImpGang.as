@@ -1,6 +1,7 @@
-package classes.Monsters 
+package classes.Monsters
 {
-import classes.CockTypesEnum;
+	import classes.CoC;
+	import classes.CockTypesEnum;
 import classes.Monster;
 	
 	/**
@@ -13,9 +14,9 @@ import classes.Monster;
 		override public function get capitalA():String {
 			return "gang of imps";
 		}
-		public function ImpGang(mainClassPtr:*) 
+		public function ImpGang(game:CoC)
 		{
-			super(mainClassPtr);
+			super(game);
 			this.removeStatuses();
 			this.removePerks();
 			this.removeCock(0, this.cocks.length);

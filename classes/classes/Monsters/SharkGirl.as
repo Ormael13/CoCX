@@ -1,5 +1,6 @@
 ﻿package classes.Monsters
 {
+	import classes.CoC;
 	import classes.Creature;
 	import classes.Monster;
 	import classes.CockTypesEnum;
@@ -28,9 +29,9 @@
 			}
 		}
 
-		public function SharkGirl(mainClassPtr:*)
+		public function SharkGirl(game:CoC)
 		{
-			super(mainClassPtr);
+			super(game);
 			trace("SharkGirl Constructor!");
 			init01Names("the ", "shark-girl", "sharkgirl", "The shark girl stands just over 5'5\", with grey skin shimmering from water droplets catching the sunlight and slender muscles built for swimming.  Her shoulder-length silver hair brushes past her pretty face and her eyes are a striking shade of red. She has rows of intimidating sharp teeth glinting in the light. A fish-like tail protrudes from her backside, wrapping around her toned legs at every opportunity. She's wearing a rather skimpy black bikini, strings done in such a way that they move around her fin; though the swimwear itself barely covers her perky breasts and tight snatch.");
 			init02Female(VAGINA_WETNESS_DROOLING,VAGINA_LOOSENESS_NORMAL,15);

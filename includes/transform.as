@@ -1,108 +1,8 @@
 ﻿public function cuntChange(cArea:Number, display:Boolean, spacingsF:Boolean = false, spacingsB:Boolean = true):Boolean {
-	if(player.vaginas.length == 0) return false;
-	var stretched:Boolean = false;
-	var devirgined:Boolean = false;
-	if(player.hasPerk("Fera's Boon - Milking Twat") < 0 || player.vaginas[0].vaginalLooseness <= VAGINA_LOOSENESS_NORMAL) {
-	//cArea > capacity = autostreeeeetch.
-	if(cArea >= player.vaginalCapacity()) {
-		if(player.vaginas[0].vaginalLooseness >= VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) {}
-		else player.vaginas[0].vaginalLooseness++;
-		stretched = true;
-	}
-	//If within top 10% of capacity, 50% stretch
-	else if(cArea >= .9 * player.vaginalCapacity() && rand(2) == 0) {
-		player.vaginas[0].vaginalLooseness++;
-		stretched = true;
-	}
-	//if within 75th to 90th percentile, 25% stretch
-	else if(cArea >= .75 * player.vaginalCapacity() && rand(4) == 0) {
-		player.vaginas[0].vaginalLooseness++;
-		stretched = true;
-		}
-	}
-	//If virgin
-	if(player.vaginas[0].virgin) {
-		if(spacingsF) outputText("  ", false);
-		outputText("<b>Your hymen is torn, robbing you of your virginity.</b>", false);
-		if(spacingsB) outputText("  ", false);
-		player.vaginas[0].virgin = false;
-		devirgined = true;
-	}
-	//Delay anti-stretching
-	if(cArea >= .5 * player.vaginalCapacity()) {
-		//Cunt Stretched used to determine how long since last enlargement
-		if(player.hasStatusAffect("CuntStretched") < 0) player.createStatusAffect("CuntStretched",0,0,0,0);
-		//Reset the timer on it to 0 when restretched.
-		else player.changeStatusValue("CuntStretched",1,0);
-	}
-	if(stretched) {
-		trace("CUNT STRETCHED TO " + (player.vaginas[0].vaginalLooseness) + ".");
-		//STRETCH SUCCESSFUL - begin flavor text if outputting it!
-		if(display) {
-			//Virgins get different formatting
-			if(devirgined) {
-				//If no spaces after virgin loss
-				if(!spacingsB) outputText("  ", false);
-			}
-			//Non virgins as usual
-			else if(spacingsF) outputText("  ", false);
-			if(player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) outputText("<b>Your " + vaginaDescript(0) + " is stretched painfully wide, large enough to accomodate most beasts and demons.</b>", false);
-			if(player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + vaginaDescript(0) + " is stretched so wide that it gapes continually.</b>", false);
-			if(player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING) outputText("<b>Your " + vaginaDescript(0) + " painfully stretches, the lips now wide enough to gape slightly.</b>", false);
-			if(player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LOOSE) outputText("<b>Your " + vaginaDescript(0) + " is now very loose.</b>", false);
-			if(player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_NORMAL) outputText("<b>Your " + vaginaDescript(0) + " is now a little loose.</b>", false);
-			if(player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + vaginaDescript(0) + " is stretched out to a more normal size.</b>", false);
-			if(spacingsB) outputText("  ", false);
-		}
-	}
-	return stretched;
+	return player.cuntChange(cArea,display,spacingsF,spacingsB);
 }
 public function buttChange(cArea:Number, display:Boolean, spacingsF:Boolean = true, spacingsB:Boolean = true):Boolean {
-	var stretched:Boolean = false;
-	//cArea > capacity = autostreeeeetch half the time.
-	if(cArea >= player.analCapacity() && rand(2) == 0) {
-		if(player.ass.analLooseness >= 5) {}
-		else player.ass.analLooseness++;
-		stretched = true;
-		//Reset butt stretchin recovery time
-		if(player.hasStatusAffect("ButtStretched") >= 0) player.changeStatusValue("ButtStretched",1,0);
-	}
-	//If within top 10% of capacity, 25% stretch
-	if(cArea < player.analCapacity() && cArea >= .9*player.analCapacity() && rand(4) == 0) {
-		player.ass.analLooseness++;
-		stretched = true;
-	}
-	//if within 75th to 90th percentile, 10% stretch
-	if(cArea < .9 * player.analCapacity() && cArea >= .75 * player.analCapacity() && rand(10) == 0) {
-		player.ass.analLooseness++;
-		stretched = true;
-	}
-	//Anti-virgin
-	if(player.ass.analLooseness == 0) {
-		player.ass.analLooseness++;
-		stretched = true;
-	}
-	//Delay un-stretching
-	if(cArea >= .5 * player.analCapacity()) {
-		//Butt Stretched used to determine how long since last enlargement
-		if(player.hasStatusAffect("ButtStretched") < 0) player.createStatusAffect("ButtStretched",0,0,0,0);
-		//Reset the timer on it to 0 when restretched.
-		else player.changeStatusValue("ButtStretched",1,0);
-	}
-	if(stretched) {
-		trace("BUTT STRETCHED TO " + (player.ass.analLooseness) + ".");
-		//STRETCH SUCCESSFUL - begin flavor text if outputting it!
-		if(display) {
-			if(spacingsF) outputText("  ", false);
-			if(player.ass.analLooseness == 5) outputText("<b>Your " + assholeDescript() + " is stretched even wider, capable of taking even the largest of demons and beasts.</b>", false);
-			if(player.ass.analLooseness == 4) outputText("<b>Your " + assholeDescript() + " becomes so stretched that it gapes continually.</b>", false);
-			if(player.ass.analLooseness == 3) outputText("<b>Your " + assholeDescript() + " is now very loose.</b>", false);
-			if(player.ass.analLooseness == 2) outputText("<b>Your " + assholeDescript() + " is now a little loose.</b>", false);
-			if(player.ass.analLooseness == 1) outputText("<b>You have lost your anal virginity.</b>", false);
-			if(spacingsB) outputText("  ", false);
-		}
-	}
-	return stretched;
+	return player.buttChange(cArea,display,spacingsF,spacingsB);
 }
 
 
@@ -421,7 +321,7 @@ public function demonChanges():void {
 			outputText("<b>Your tail is now demonic in appearance.</b>", false);
 		}
 		else outputText("\n\nA pain builds in your backside... growing more and more pronounced.  The pressure suddenly disappears with a loud ripping and tearing noise.  <b>You realize you now have a demon tail</b>... complete with a cute little spade.", false);
-		stats(0, 0, 0, 0, 0, 0, 0, 4);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 4);
 		player.tailType = TAIL_TYPE_DEMONIC;	
 	}
 	//grow horns!
@@ -435,7 +335,7 @@ public function demonChanges():void {
 			if(player.hornType == HORNS_NONE) player.hornType = HORNS_DEMON;
 			player.horns++;
 			player.horns++;
-			stats(0, 0, 0, 0, 0, 0, 0, 3);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 3);
 		}
 		//Text for shifting horns
 		else if(player.hornType > HORNS_DEMON) {
@@ -443,7 +343,7 @@ public function demonChanges():void {
 			outputText("Your horns shift, shrinking into two small demonic-looking horns.", false);
 			player.horns = 2;
 			player.hornType = HORNS_DEMON;
-			stats(0, 0, 0, 0, 0, 0, 0, 3);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 3);
 		}		
 	}
 	//Nipples Turn Back:

@@ -1,5 +1,6 @@
-﻿package classes.Monsters 
+﻿package classes.Monsters
 {
+	import classes.CoC;
 	import classes.Creature;
 	import classes.Monster;
 	import classes.CockTypesEnum;
@@ -17,9 +18,9 @@
 	{
 		
 
-		public function GenericMonstah(mainClassPtr:*) 
+		public function GenericMonstah(game:CoC)
 		{
-			super(mainClassPtr);
+			super(game);
 			trace("GenericMonstah Constructor!");
 		}
 

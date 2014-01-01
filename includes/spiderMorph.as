@@ -9,7 +9,7 @@
 		spiderDisarm();
 	}
 	else if(rand(2) == 0 || player.spe < 2) getBitten();
-	else eAttack();
+	else monster.eAttack();
 }
 //-Web - lowers speed by 25 each application and disables 
 //flight once hit.
@@ -76,7 +76,7 @@ public function getBitten():void {
 		outputText("While " + monster.mf("his","her") + " venom pours into you, the spider-" + monster.mf("boy","girl") + " reaches into your gear to play with your " + nippleDescript(0) + ", and you moan like a whore from the dual stimulation of " + monster.mf("his","her") + " venom and nipple-play.\n\n", false);
 		if(monster.hasVagina()) outputText("The saucy dominatrix exhausts her supply of aphrodisiac toxin for the moment and finally steps back, admiring her work and giving you a lewd wink.  You ", false);
 		else outputText("The confident male exhausts his supply of aphrodisiac toxin for the moment and finally steps back, admiring his work and giving you a lewd wink.  You ", false);
-		stats(0,0,0,0,0,0,60,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 60, "cor", 0);
 		if(player.lust > 99) outputText("wobble, utterly defeated and about to cave in to your lust.", false);
 		else outputText("struggle not to fall down and start masturbating on the spot.", false);
 		outputText("\n", false);
@@ -109,11 +109,11 @@ public function getBitten():void {
 			outputText("You react far too slowly, and before you can even think to dodge, " + monster.mf("he","she") + "'s bitten deep into you, pumping large squirts of venom deep into your body.  Unnatural heat rolls through you, pooling in your groin until you're lewdly bucking your hips against the spider-morph's thigh.  " + monster.mf("He","She") + " pulls out and steps back, ", false);
 			if(monster.hasVagina()) outputText("casually cupping her breasts while you watch with venom-dilated eyes, slowly touching yourself.  Once she stops, you shake your head and master yourself, remembering that you're supposed to be fighting this " + monster.mf("boy","girl") + "!\n", false);
 			else outputText("casually tugging on his relatively short, girthy dick as you watch with venom-dilated eyes, slowly touching yourself.  Once he stops, you shake your head and master yourself, remembering that you're supposed to be fighting this " + monster.mf("boy","girl") + "!\n", false);
-			stats(0,0,0,0,0,0,50,0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 50, "cor", 0);
 		}
 		else {
 			outputText("You react too slowly, and before you can dodge, " + monster.mf("he","she") + "'s bitten you, leaving behind a burning venom that warms your blood and stokes your lust.\n", false);
-			stats(0,0,0,0,0,0,30,0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 30, "cor", 0);
 		}
 	}
 	combatRoundOver();
@@ -404,7 +404,7 @@ public function defeatFemale():void {
 	
 	outputText("During your dreamless sleep, your body registers the feeling of your restraints being removed, but you slumber on, completely unaware.", false);
 	//[end]
-	stats(0,0,0,0,2,1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 2, "sen", 1, "lus", -100, "cor", 0);
 	if(!inCombat()) doNext(13);
 	else cleanupAfterCombat();
 }
@@ -505,7 +505,7 @@ public function spiderMorphFemaleRidesACawk():void {
 	
 	outputText("Finally at peace, you go limp in the bonds, slipping into a deep slumber.  During your dreamless sleep, your body registers the feeling of your restraints being severed.", false);
 	
-	stats(0,0,0,0,2,1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 2, "sen", 1, "lus", -100, "cor", 0);
 	if(!inCombat()) doNext(13);
 	else cleanupAfterCombat();
 }
@@ -578,7 +578,7 @@ public function femaleSpiderMorphTooBigWebRape():void {
 		if(player.cumQ() >= 4000) outputText("  It pops, too weak to contain all that liquid pressure, soaking the both of you with your spunk!", false);
 	}
 	outputText("  You sigh and fall into a fitful slumber, barely registering the spider-girl cutting your restraints.", false);
-	stats(0,0,0,0,2,1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 2, "sen", 1, "lus", -100, "cor", 0);
 	if(!inCombat()) doNext(13);
 	else cleanupAfterCombat();
 }
@@ -672,7 +672,7 @@ public function fSpiderMorphRape():void {
 	if(player.cor < 33) outputText("In a moment of pity, you work to free her from the restraints before you leave.", false);
 	else if(player.cor < 66) outputText("You feel a little guilty, and before you go, you untie the bindings around her hands so that she'll be able to free herself.", false);
 	else outputText("You leave her there with her hands and feet completely restrained.  Sucks to be her.", false);
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	if(!inCombat()) doNext(13);
 	else cleanupAfterCombat();
 }
@@ -735,7 +735,7 @@ public function fSpiderMorphRapeDude():void {
 	else outputText("you slap her across the face and tell her to toughen up.  She starts to bawl at that, curling into a tight little ball and openly weeping.", false);
 	outputText("  You get dressed and head back to camp.", false);
 	
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00271] = 200;
 	if(!inCombat()) doNext(13);
 	else cleanupAfterCombat();
@@ -803,7 +803,7 @@ public function evilSpiderGirlVictoryAnal():void {
 	else outputText("river", false);
 	outputText(" of seed rushes out of her gaped anus, pooling on the swamp floor as she slowly loses consciousness.  You give her ass an affectionate slap and get dressed, feeling sated and ready to resume your adventures.", false);
 	if(y != 1) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00271] = 200;
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	if(!inCombat()) doNext(13);
 	else cleanupAfterCombat();
 }

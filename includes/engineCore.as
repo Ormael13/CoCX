@@ -2754,7 +2754,6 @@ public function testDynStatsEvent():void {
 	doNext(1);
 }
 
-//TODO stats function with dynamic arguments so you don't have to specify all those zeros each time.
 //Modify stats
 public function dynStats(... args):void
 {
@@ -2765,10 +2764,10 @@ public function dynStats(... args):void
 		return;
 	}
 	
-	var argNamesFull:Array 	= 	new Array("strength", "toughness", "speed", "intellect", "libido", "sensitivity", "lust", "corruption", "resisted", "noBimbo"); // In case somebody uses full arg names etc
-	var argNamesShort:Array = 	new Array(	"str", 	"tou", 	"spe", 	"int", 	"lib", 	"sen", 	"lus", 	"cor", 	"res", 	"bim"); // Arg names
-	var argVals:Array = 		new Array(	0, 		0,	 	0, 		0, 		0, 		0, 		0, 		0, 		true, 	false); // Default arg values
-	var argOps:Array = 			new Array(  "+",	"+",    "+",    "+",    "+",    "+",    "+",    "+",    "=",    "=");   // Default operators
+	var argNamesFull:Array 	= 	["strength", "toughness", "speed", "intellect", "libido", "sensitivity", "lust", "corruption", "resisted", "noBimbo"]; // In case somebody uses full arg names etc
+	var argNamesShort:Array = 	["str", 	"tou", 	"spe", 	"int", 	"lib", 	"sen", 	"lus", 	"cor", 	"res", 	"bim"]; // Arg names
+	var argVals:Array = 		[0, 		0,	 	0, 		0, 		0, 		0, 		0, 		0, 		true, 	false]; // Default arg values
+	var argOps:Array = 			["+",	"+",    "+",    "+",    "+",    "+",    "+",    "+",    "=",    "="];   // Default operators
 	
 	for (var i:int = 0; i < args.length; i += 2)
 	{
@@ -2778,7 +2777,7 @@ public function dynStats(... args):void
 			if ((typeof(args[i + 1]) != "number") && (typeof(args[i + 1]) != "boolean"))
 			{
 				trace("dynStats aborted. Next argument after argName is invalid! arg is type " + typeof(args[i + 1]));
-				return;
+				continue;
 			}
 			
 			var argIndex:int = -1;
@@ -2795,13 +2794,15 @@ public function dynStats(... args):void
 				if ("+-*/=".indexOf(argsi.charAt(argsi.length - 1)) != -1) {
 					argIndex = argNamesFull.indexOf(argsi.slice(0, argsi.length - 1));
 					if (argIndex != -1) argOps[argIndex] = argsi.charAt(argsi.length - 1);
+				} else {
+					argIndex = argNamesFull.indexOf(argsi);
 				}
 			}
 			
 			if (argIndex == -1) // Shit fucked up, welp
 			{
 				trace("Couldn't find the arg name " + argsi + " in the index arrays. Welp!");
-				return;
+				continue;
 			}
 			else // Stuff the value into our "values" array
 			{
@@ -2832,6 +2833,7 @@ public function dynStats(... args):void
 		  newLib - player.lib,
 		  newSens - player.sens,
 		  newLust - player.lust,
+		  newCor - player.cor,
 		  argVals[8],argVals[9]);
 	
 }

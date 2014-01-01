@@ -15,7 +15,7 @@ public function doEvent(eventNo:Number):void
 	if (eventNo == 2000)
 	{
 		hideUpDown();
-		stats(0, 0, 0, 0, 0, 0, 40, 2);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 40, "cor", 2);
 		model.time.hours = 18;
 		outputText("You wake with a splitting headache and a body full of burning desire.  A shadow darkens your view momentarily and your training kicks in.  You roll to the side across the bare ground and leap to your feet.  A surprised looking imp stands a few feet away, holding an empty vial.  He's completely naked, an improbably sized pulsing red cock hanging between his spindly legs.  You flush with desire as a wave of lust washes over you, your mind reeling as you fight ", true);
 		if (player.gender == 2)
@@ -29,7 +29,7 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 2001)
 	{
 		hideUpDown();
-		stats(0, 0, 0, 0, 0, 0, -30, 0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -30, "cor", 0);
 		outputText("\nThe imp shakes the empty vial to emphasize his point.  You reel in shock at this revelation - you've just entered the demon realm and you've already been drugged!  You tremble with the aching need in your groin, but resist, righteous anger lending you strength.\n\nIn desperation you leap towards the imp, watching with glee as his cocky smile changes to an expression of sheer terror.  The smaller creature is no match for your brute strength as you pummel him mercilessly.  You pick up the diminutive demon and punt him into the air, frowning grimly as he spreads his wings and begins speeding into the distance.\n\n", true);
 		speech("FOOL!  You could have had pleasure unending...but should we ever cross paths again you will regret humiliating me!  Remember the name Zetaz, as you'll soon face the wrath of my master!", "The Imp");
 		outputText("\nYour pleasure at defeating the demon ebbs as you consider how you've already been defiled.  You swear to yourself you will find the demon responsible for doing this to you and the other Champions, and destroy him AND his pet imp.", false);
@@ -49,7 +49,7 @@ public function doEvent(eventNo:Number):void
 		jojoSprite();
 		outputText("Jojo smiles and leads you off the path to a small peaceful clearing.  There is a stump in the center, polished smooth and curved in a way to be comfortable.  He gestures for you to sit, and instructs you to meditate.\n\nAn indeterminate amount of time passes, but you feel more in control of yourself.  Jojo congratulates you, but offers a warning as well.  \"<i>Be ever mindful of your current state, and seek me out before you lose yourself to the taints of this world.  Perhaps someday this tainted world can be made right again.</i>\"", true);
 		
-		stats(.5, .5, 0, .5, -1, 0, -5, -1);
+		dynStats("str", .5,"tou", .5, "spe", 0, "int", .5, "lib", -1, "sen", 0, "lus", -5, "cor", -1);
 		if (player.hasStatusAffect("Jojo Meditation Count") < 0)
 			player.createStatusAffect("Jojo Meditation Count", 1, 0, 0, 0);
 		else
@@ -141,19 +141,19 @@ public function doEvent(eventNo:Number):void
 				player.breastRows[0].breastRating = 3;
 				if (player.breastRows[0].nipplesPerBreast < 1)
 					player.breastRows[0].nipplesPerBreast = 1;
-				stats(0, 0, 0, 0, 0, 2, 1, 0);
+				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 2, "lus", 1, "cor", 0);
 			}
 			if (player.biggestTitSize() >= 1 && player.biggestTitSize() <= 2)
 			{
 				outputText("Your breasts suddenly balloon outwards, stopping as they reach a perfectly rounded C-cup.  ", false);
 				player.breastRows[0].breastRating = 3;
-				stats(0, 0, 0, 0, 0, 1, 1, 0);
+				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 1, "lus", 1, "cor", 0);
 			}
 			if (player.breastRows[0].nipplesPerBreast < 1)
 			{
 				outputText("Two dark spots appear on your chest, rapidly forming into sensitive nipples.  ", false);
 				player.breastRows[0].nipplesPerBreast = 1;
-				stats(0, 0, 0, 0, 0, 2, 1, 0);
+				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 2, "lus", 1, "cor", 0);
 			}
 			if (player.biggestLactation() > 0)
 			{
@@ -171,13 +171,13 @@ public function doEvent(eventNo:Number):void
 					player.boostLactation(.75);
 					outputText("Your breasts feel fuller... riper... like your next milking could be even bigger.  ", false);
 				}
-				stats(0, 0, 0, 0, 1, 4, 15, 0);
+				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 4, "lus", 15, "cor", 0);
 			}
 			if (player.biggestLactation() == 0)
 			{
 				outputText("A pleasurable release suddenly erupts from your nipples!  Streams of milk are spraying from your breasts, soaking into the sand immediately.  It stops all too soon, though the witch assures you that you can lactate quite often now.  ", false);
 				player.boostLactation(1);
-				stats(0, 0, 0, 0, .5, 1, 10, 0);
+				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", .5, "sen", 1, "lus", 10, "cor", 0);
 			}
 			outputText("The sand-witch smiles and thanks you for your offering.  You notice her dress is damp in four spots on the front.  ", false);
 			if (sand == 0)
@@ -284,7 +284,7 @@ public function doEvent(eventNo:Number):void
 			outputText("At a loss for words, you meekly offer the creature some of your food you have packed for your journey. The creature slaps it out of your hand, almost breaking your wrist.\n\n\"<i>I can't eat that shit!</i>\" roars the abomination. \"<i>Do I look like I have a fucking mouth to chew that with?! NOOOOOO! I feed off dicks and wayward women! Cum and tit milk! YOU have NEITHER!!!</i>\"  ", false);
 			outputText("The beast slaps you squarely on the ass as if to push you along. \"<i>Get the fuck out of here!</i>\" it screams. \"<i>Get lost so I can hunt me a REAL meal!!!</i>\"", false);
 			outputText("You walk away from the creature, which hides back in the brush. After you trek a bit, you wonder if what happened really DID happen...", false);
-			stats(0, 0, 0, 0, 0, 0, -5, 0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -5, "cor", 0);
 			doNext(13);
 			return;
 		}
@@ -313,7 +313,7 @@ public function doEvent(eventNo:Number):void
 	//Tentacle continuation!
 	else if (eventNo == 2010)
 	{
-		stats(0, 1, 0, -.5, 2, 1, -100, .5);
+		dynStats("str", 0,"tou", 1, "spe", 0, "int", -.5, "lib", 2, "sen", 1, "lus", -100, "cor", .5);
 		//Pg2
 		if (player.gender == 1)
 		{
@@ -517,7 +517,7 @@ public function doEvent(eventNo:Number):void
 					outputText("As you depart, you note the plants' stalks bulging out obscenely, looking like overfull balloons.  They're stretched so thin as to be transparent, your cum sloshing about inside them as they attempt to digest their meals. Steady streams of your jism leak from the flowers' lips, unable to keep it all inside.", false);
 			}
 			//Stat changes!
-			stats(0, 0, 0, 0, 0, 2, -100, 0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 2, "lus", -100, "cor", 0);
 			var booster:Number = 1;
 			if (player.balls == 0)
 				booster += 3;
@@ -539,7 +539,7 @@ public function doEvent(eventNo:Number):void
 			//Last PG
 			outputText("You walk away, your lips and tongue feeling slightly puffy and sensitive, but none the worse for the wear.", false);
 			slimeFeed();
-			stats(0, 0, 0, 0, 0, 4, -100, 1);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 4, "lus", -100, "cor", 1);
 		}
 		doNext(13);
 		return;
@@ -629,7 +629,7 @@ public function doEvent(eventNo:Number):void
 			outputText("An hour or two later, you wake feeling very sore, but satisfied.  The vine must have popped free at some point and the bulb now rests on your pussy lips.  You go to brush it off and nearly orgasm from touching your nether-lips, still sensitive and parted from the overlarge tentacle they so recently took.  A rush of white goop escapes from between your thighs as you stand, soaking back into the soil immediately.   A quick stretch later, you don your gear and head back to camp with a smile.\n\n", false);
 			//Normal stat changes
 			slimeFeed();
-			stats(0, 0, 0, 0, 0, 5, -100, 2);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 5, "lus", -100, "cor", 2);
 			//Xforms
 			//Change hair to green sometimes
 			if (rand(3) == 0 && player.hairColor != "green")
@@ -679,7 +679,7 @@ public function doEvent(eventNo:Number):void
 			//Finish sentance
 			outputText(" tingle.  ", false);
 			//Simple stat changes - + lust.
-			stats(0, 0, 0, 0, 0, 0, 25 + player.lib / 10, 2);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 25 + player.lib / 10, "cor", 2);
 			//Changes start, counted with temp
 			temp = 0;
 			slimeFeed();
@@ -961,7 +961,7 @@ public function doEvent(eventNo:Number):void
 			
 			outputText("As the Succubus finishes her ultimatum, you feel churning vaginal contractions stroking your massive cock. Heavy, powerful, coordinated undulations work your dick as surely as the best handjob. You quickly moan in shock and pleasure at such rough treatment.", false);
 		}
-		stats(0, 0, 0, 0, 0, 0, 35, 0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 35, "cor", 0);
 		doNext(2026);
 	}
 	//Cerulean potion continued
@@ -982,7 +982,7 @@ public function doEvent(eventNo:Number):void
 			
 			outputText("\"<i>Ready to burst, are you?</i>\" the Succubus playfully challenges. \"<i>Well, then. No reason for you to hold back.</i>\"", false);
 		}
-		stats(0, .3, 0, 0, .5, .5, 5, 1);
+		dynStats("str", 0,"tou", .3, "spe", 0, "int", 0, "lib", .5, "sen", .5, "lus", 5, "cor", 1);
 		doNext(2027);
 	}
 	//Cerulean potion continued
@@ -1009,7 +1009,7 @@ public function doEvent(eventNo:Number):void
 				//[Mechanics: Corruption increase same as male counterpart. No hit point recover for that night. When fatigue model is implemented, no fatigue recovery and add 25 points]
 		}
 		fatigue(20);
-		stats(0, 0, 0, 0, .5, 0, -100, 0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", .5, "sen", 0, "lus", -100, "cor", 0);
 		doNext(2028);
 	}
 	//Succubi 
@@ -1028,7 +1028,7 @@ public function doEvent(eventNo:Number):void
 				outputText("you see she's definitely shorter than you, only about seven feet tall. ", false);
 			outputText("She braces you against a tree and picks up the empty potion bottle. Grabbing the tit you ignored during the unholy tryst, she pokes her nipple into the bottle and squeezes for about a minute. Satisfied, she corks the bottle and hands it to you. She begins licking her nectar off your face. \"<i>You have pleased me, little man,</i>\" she coos. \"<i>It is a rare thing indeed for one of my meals to pleasure me so. If you ever desire for me again, all you need is to drink my milk. I will appear forthwith to let you suckle me and I will suckle you! We will feed each other and grow stronger for the effort!</i>\" ", false);
 			outputText(" She gives a giggle and disappears before your eyes. At that moment the fatigue from the massive fucking you received catches up with you and you pass out in a slump.", false);
-			stats(.5, 0, 0, 0, 0, 0, 4, 0);
+			dynStats("str", .5,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 4, "cor", 0);
 		}
 		shortName = "Cerul P";
 		takeItem();
@@ -1336,7 +1336,7 @@ public function doEvent(eventNo:Number):void
 			outputText("you pass out with aching, empty balls.", false);
 		else
 			outputText("you pass out with " + multiCockDescriptLight() + " sore from exertion.", false);
-		stats(0, 0, 0, 0, 0, -1, -100, 0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
 		doNext(13);
 	}
 	//Natural Stim Belt continuation
@@ -1347,7 +1347,7 @@ public function doEvent(eventNo:Number):void
 		outputText("The fiendish belt shifts again. It buries itself as deep as it can go and you feel pressure against the depths of your womanhood. You feel a hot fluid spray inside you. Reflexively, you shout, \"<b>IT'S CUMMING!!!! IT'S CUMMING INSIDE ME!!!</b>\" Indeed, each push of the prodding member floods your box with juice. It cums... and cums... and cums... and cums...\n\n", false);
 		outputText("An eternity passes, and your pussy is sore. It is stretched and filled completely with whatever this thing shoots for cum. It retracts itself from your hole and you feel one last pang of pressure as your body now has a chance to force out all of the spunk that it cannot handle. Ooze sprays out from the sides of the belt and leaves you in a smelly, sticky mess. You feel the belt's tension ease up as it loosens. The machine has run its course. You immediately pass out.", false);
 		slimeFeed();
-		stats(0, 0, 0, 0, 1, (-0.5), -100, 0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", (-0.5), "lus", -100, "cor", 0);
 		doNext(13);
 	}
 	//Natural Onahole Sales Pitch
@@ -1398,7 +1398,7 @@ public function doEvent(eventNo:Number):void
 			outputText(String(int(((Math.random() * player.str / 12) + player.str / 6) * 10) / 10), false);
 			outputText(" feet away from you. Delirious with pleasure, you continue your 'impression' of a semen volcano, covering yourself and the area with your seed. ", false);
 			outputText(" As your orgasms fade, you find yourself a well-fucked mess, and pass out.", false);
-			stats(0, 0, 0, 0, 0, -1, -100, 0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
 		}
 		doNext(1);
 	}
@@ -1563,7 +1563,7 @@ public function doEvent(eventNo:Number):void
 			player.HP = int(maxHP() * .15);
 		//Maybe add a random chance of losing a random transformation with a smaller chance of losing ALL transformations except gender changes. This will probably be a bitch to implement.
 		player.removeStatusAffect("infested");
-		stats(0, 0, 0, 0, -1, 0, -99, -4);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -1, "sen", 0, "lus", -99, "cor", -4);
 		player.gems -= 175;
 		statScreenRefresh();
 		shortName = "Vital T";
@@ -1609,7 +1609,7 @@ public function doEvent(eventNo:Number):void
 			player.HP = int(maxHP() * .5);
 		player.sens = 11;
 		player.removeStatusAffect("infested");
-		stats(0, 0, 0, 0, 0, -1, -99, -15);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -99, "cor", -15);
 		doNext(13);
 		return;
 	}
@@ -1621,7 +1621,7 @@ public function doEvent(eventNo:Number):void
 		outputText("Stepping carefully around the other hazards of the glade, you close on the strange trees with equal parts curiosity and desire.  Up close, it's easy to see the strange growths that sprout from the bark – dozens of full ripe-looking breasts, each capped with a swollen and leaking nipple.  You touch one, marveling at the smooth texture of its chocolate-colored skin.   In response a runner of sap oozes free of the nipple and slides down the curved surface.\n\n", false);
 		outputText("You lean forwards and lick around the nipple's surface, sampling the sweetness of the trickling sap.   The stuff nearly overpowers you with a taste like syrupy cream as more sap drips free of the fully-erect tree-nipple.  Unable to resist testing this nonsensical oddity, you engulf the entire nipple between your lips, suckling hard.   The tree seems to oblige your efforts with a fresh discharge of the sticky sap.   Your tongue tingles and vibrates with the sinfully sweet taste in your mouth, dancing in circles around the nipple, coaxing yet more nectar from swollen plant-jug.  It's easy to lose yourself in that taste, falling into a rhythm of alternatively sucking, swallowing, and licking.\n\n", false);
 		outputText("In time you realize the breast has long since been emptied by your hungry mouth, and you pull free with a pop, letting your tongue run over your now over-sensitive lips.  It seems your entire mouth has been affected by the tree's sap, and is now as sensitive and receptive as a maiden's box.  You don't think you could drink any more sap with how full you feel, and you make ready to depart this perverted place.", false);
-		stats(0, 0, 0, 0, 0, 1, 15, .5);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 1, "lus", 15, "cor", .5);
 		slimeFeed();
 		doNext(13);
 		if (player.hasStatusAffect("LustyTongue") < 0)
@@ -1838,13 +1838,13 @@ public function doEvent(eventNo:Number):void
 		if (player.biggestLactation() >= 2)
 			outputText("Thin streams of creamy milk flow from your " + allBreastsDescript() + ", your torso and midsection dripping wet from the stuff. ", false);
 		outputText("Completely sated, you take off the belt, finding it slides off easily, and put it away in your campsite, eagerly awaiting the time you can next use it and have the suit work you over once more.", false);
-		stats(0, 0, 0, 0, 0, -1, -300, 0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -300, "cor", 0);
 		if (player.lib < 30)
-			stats(0, 0, 0, 0, .5, 0, 0, 0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", .5, "sen", 0, "lus", 0, "cor", 0);
 		if (player.lib < 50)
-			stats(0, 0, 0, 0, .5, 0, 0, 0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", .5, "sen", 0, "lus", 0, "cor", 0);
 		if (player.lib < 60)
-			stats(0, 0, 0, 0, .5, 0, 0, 0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", .5, "sen", 0, "lus", 0, "cor", 0);
 		doNext(13);
 		if (player.sens > 40)
 			player.sens -= 1;
@@ -1853,9 +1853,9 @@ public function doEvent(eventNo:Number):void
 		if (player.sens > 80)
 			player.sens -= 1;
 		if (player.tou > 50)
-			stats(0, -1, 0, 0, 0, 0, 0, 0);
+			dynStats("str", 0,"tou", -1, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 		if (player.tou > 75)
-			stats(0, -1, 0, 0, 0, 0, 0, 0);
+			dynStats("str", 0,"tou", -1, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 	}
 	//Purify LaBova Draft
 	else if (eventNo == 2145)
@@ -1941,37 +1941,37 @@ public function doEvent(eventNo:Number):void
 		{
 			outputText("Jojo smiles and meditates with you.  The experience is calming, but it's so soon after your last session that you don't get much benefit from it.", true);
 			if (player.lust > 40)
-				stats(0, 0, 0, 0, 0, 0, -10, 0);
+				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -10, "cor", 0);
 			doNext(13);
 			return;
 		}
 		outputText("The mouse monk leads you to a quiet spot away from the portal and the two of you sit down, him cross-legged and you mimicing to the best of your ability, back to back.  You close your eyes and meditate for half-an hour, centering your body and mind.  Afterwards, he guides you through stretches and exercises to help keep your bodies fit and healthy.\n\nWhen you are done, Jojo nods to you, and climbs back onto his rock, still thinking.", true);
-		//OLD STAT LINE - stats(.25,.25,.25,.25,-1,0,-10,-2);
+		//OLD STAT LINE - dynStats("str", .25,"tou", .25, "spe", .25, "int", .25, "lib", -1, "sen", 0, "lus", -10, "cor", -2);
 		//Reduces lust
-		stats(0, 0, 0, 0, 0, 0, -30, 0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -30, "cor", 0);
 		//Corruption reduction - faster at high corruption
 		if (player.cor > 80)
-			stats(0, 0, 0, 0, 0, 0, 0, -1);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", -1);
 		if (player.cor > 60)
-			stats(0, 0, 0, 0, 0, 0, 0, -1);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", -1);
 		if (player.cor > 40)
-			stats(0, 0, 0, 0, 0, 0, 0, -1);
-		stats(0, 0, 0, 0, 0, 0, 0, -2);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", -1);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", -2);
 		//Str boost to 45
 		if (player.str < 45)
-			stats(1, 0, 0, 0, 0, 0, 0, 0);
+			dynStats("str", 1,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 		//Tou boost to 45
 		if (player.tou < 45)
-			stats(0, 1, 0, 0, 0, 0, 0, 0);
+			dynStats("str", 0,"tou", 1, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 		//Speed boost to 75
 		if (player.spe < 75)
-			stats(0, 0, 1, 0, 0, 0, 0, 0);
+			dynStats("str", 0,"tou", 0, "spe", 1, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 		//Int boost to 80
 		if (player.inte < 80)
-			stats(0, 0, 0, 1, 0, 0, 0, 0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 1, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 		//Libido lower to 15
 		if (player.lib > 15)
-			stats(0, 0, 0, 0, -1, 0, 0, 0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -1, "sen", 0, "lus", 0, "cor", 0);
 		doNext(13);
 		player.createStatusAffect("Meditated", 1, 0, 0, 0);
 		return;
@@ -2126,13 +2126,13 @@ public function doEvent(eventNo:Number):void
 		outputText("Whitney shrugs and the two of you chat about other things, just passing the time and enjoying a relatively normal chat.", true);
 		//+3 int if less than 15, +2 int if less 20, +1 int if less than 30, +.5 int if less than 40.
 		if (player.inte < 15)
-			stats(0, 0, 0, 1, 0, 0, 0, 0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 1, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 		if (player.inte < 20)
-			stats(0, 0, 0, 1, 0, 0, 0, 0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 1, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 		if (player.inte < 30)
-			stats(0, 0, 0, .5, 0, 0, 0, 0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", .5, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 		if (player.inte < 40)
-			stats(0, 0, 0, .5, 0, 0, 0, 0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", .5, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 		return;
 	}
 	//Continuing mino voyeurism
@@ -2152,7 +2152,7 @@ public function doEvent(eventNo:Number):void
 		if (player.statusAffectv1("Mino + Cowgirl") == 0)
 			outputText("  Apparently this isn't an uncommon show, and the locals enjoy it immensely.", false);
 		//Lust!
-		stats(0, 0, 0, 0, 0, 0, 5 + player.lib / 20 + player.minoScore() + player.cowScore(), 0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5 + player.lib / 20 + player.minoScore() + player.cowScore(), "cor", 0);
 		doNext(13);
 		return;
 	}

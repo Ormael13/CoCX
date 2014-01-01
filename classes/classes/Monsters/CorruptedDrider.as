@@ -1,6 +1,7 @@
 package classes.Monsters
 {
 	import classes.Appearance;
+	import classes.CoC;
 	import classes.Cock;
 	import classes.CockTypesEnum;
 	import classes.Monster;
@@ -32,9 +33,9 @@ package classes.Monsters
 			}
 		}
 
-		public function CorruptedDrider(mainClassPtr:*)
+		public function CorruptedDrider(game:CoC)
 		{
-			super(mainClassPtr);
+			super(game);
 
 			var hairColor:String = Appearance.randomChoice("red", "orange", "green");
 			var skinTone:String = Appearance.randomChoice("yellow", "purple", "red", "turquoise");

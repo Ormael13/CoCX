@@ -1,5 +1,6 @@
-package classes.Monsters 
+package classes.Monsters
 {
+	import classes.CoC;
 	import classes.Appearance;
 	import classes.Cock;
 	import classes.Monster;
@@ -34,10 +35,10 @@ package classes.Monsters
 			}
 		}
 
-		public function MinotaurMob(mainClassPtr:*)
+		public function MinotaurMob(game:CoC)
 		{
-			super(mainClassPtr);
-			init01Names("the ","minotaur"+(mainClassPtr.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] < 20?" gang":" tribe"),"minotaurmob",mainClassPtr.Num2Text(mainClassPtr.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326]) + " shaggy beastmen stand around you in a loose circle.  Their postures aren't exactly threatening.  If anything, they seem to be standing protectively around you, as if their presence would somehow shelter you from the rest of the mountain.  All of their features share a brotherly similarity, though there's still a fair bit of differences between your minotaur sons.  One of them is a head above the rest, a massive hulk of muscle so big he seems to dwarf the rest.  In stark contrast, a feminine minitaur keeps his distance in the rear."+(mainClassPtr.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] >= 20?"  The tribe constantly makes hoots and cat-calls, fully expecting to be fucking you soon.":""),true);
+			super(game);
+			init01Names("the ","minotaur"+(game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] < 20?" gang":" tribe"),"minotaurmob",game.Num2Text(game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326]) + " shaggy beastmen stand around you in a loose circle.  Their postures aren't exactly threatening.  If anything, they seem to be standing protectively around you, as if their presence would somehow shelter you from the rest of the mountain.  All of their features share a brotherly similarity, though there's still a fair bit of differences between your minotaur sons.  One of them is a head above the rest, a massive hulk of muscle so big he seems to dwarf the rest.  In stark contrast, a feminine minitaur keeps his distance in the rear."+(game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] >= 20?"  The tribe constantly makes hoots and cat-calls, fully expecting to be fucking you soon.":""),true);
 			var ballSize:Number = 2 + rand(13);
 			init02Male(new Cock(rand(13) + 24,2 + rand(3),CockTypesEnum.HORSE),2, ballSize,1.5,ballSize * 10);
 			init03BreastRows(0);
@@ -49,12 +50,12 @@ package classes.Monsters
 			init09PrimaryStats(65,60,30,20,40,15,35);
 			init10Weapon("fists","punches");
 			init11Armor("thick fur");
-			var bonusHP:Number = 340 + 50 * (mainClassPtr.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3);
+			var bonusHP:Number = 340 + 50 * (game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3);
 			var lustVuln:Number = 0.45;
-			if((mainClassPtr.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3) * 2 > 13) lustVuln = .3;
-			else lustVuln -= (mainClassPtr.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3) * 0.02;
+			if((game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3) * 2 > 13) lustVuln = .3;
+			else lustVuln -= (game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3) * 0.02;
 			init12Combat(bonusHP,30,lustVuln,Monster.TEMPERMENT_LUSTY_GRAPPLES);
-			var level:int = 11 + Math.round((mainClassPtr.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3)/2);
+			var level:int = 11 + Math.round((game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3)/2);
 			if(level > 14) level = 14;
 			init13Level(level,rand(15) + 45);
 			initX_Tail(TAIL_TYPE_COW);

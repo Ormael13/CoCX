@@ -136,7 +136,7 @@ public function buttFuckTongueJeorb():void {
 	
 	outputText("After you both recover, you get up to don your " + player.armorName + ", thanking Lilium and beginning the trip back to camp.  Maybe you'll take a bath too...", false);
 	
-	stats(0,0,0,0,0,0,-100,1);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 1);
 	doNext(13);
 }
 
@@ -189,7 +189,7 @@ public function liliumDickRidah():void {
 
 	outputText("After a moment of recovery time you get up to get dressed before starting your journey back to camp.  \"<i>Don't be a stranger, now,</i>\" calls the voice over your shoulder. A slight smile appears on your face.\n\n", false);
 
-	stats(0,0,0,0,0,0,-100,1);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 1);
 	//(imp preg check)
 	player.knockUp(1,418);
 	doNext(13);
@@ -249,6 +249,6 @@ public function liliumNippleFuck():void {
 	outputText(" and soaked sock, you brush a wayward strand of hair from her face.  Her eyes make their way up to meet yours and you give her a wink as you both smile lasciviously.\n\n", false);
 
 	outputText("You get dressed again and begin to leave; as you look back over shoulder, Lilium - still seated and leaning against the wall - blows you a kiss.", false);
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	doNext(13);
 }

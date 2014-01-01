@@ -192,7 +192,7 @@ public function dickXmasElfGo():void {
 	//(Go to followup for fucking scene)
 	//[Next]
 	doNext(xmasFuckFollowup);
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 }
 
 //[FEMALE SCENE]	
@@ -222,7 +222,7 @@ public function vagFuckXmasElf():void {
 
 	outputText("You black out to the following words: \"<i>Good girl.  Keep cumming, let out all those naughty thoughts.  I can't wait to see you next year!</i>\"", false);
 	doNext(xmasFuckFollowupFems);
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 }
 	
 //MANTASTIC FOLLOWUP:
@@ -236,10 +236,10 @@ public function xmasFuckFollowup():void {
 	//[Yes][No] – yes awards (+250 mls cum volume), no awards +15 intellect
 	doYesNo(xmasPerkM,xmasSmart);
 	//(-5 corruption)
-	stats(0,0,0,0,0,0,0,-5);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", -5);
 	//(+20 sens unless it would bring you over 80 sens, then +5 sens)
-	if(player.sens + 20 > 80) stats(0,0,0,0,0,5,0,0);
-	else stats(0,0,0,0,0,15,0,0);
+	if(player.sens + 20 > 80) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 5, "lus", 0, "cor", 0);
+	else dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 15, "lus", 0, "cor", 0);
 	temp = 1001;
 	flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
 }
@@ -255,10 +255,10 @@ public function xmasFuckFollowupFems():void {
 	//[Yes][No] – yes awards (+15 fertility!), no awards +15 intellect
 	doYesNo(xmasPerkM,xmasSmart);
 	//(-5 corruption)
-	stats(0,0,0,0,0,0,0,-5);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", -5);
 	//(+20 sens unless it would bring you over 80 sens, then +5 sens)
-	if(player.sens + 20 > 80) stats(0,0,0,0,0,5,0,0);
-	else stats(0,0,0,0,0,15,0,0);
+	if(player.sens + 20 > 80) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 5, "lus", 0, "cor", 0);
+	else dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 15, "lus", 0, "cor", 0);
 	temp = 2002;
 	flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] = date.fullYear;
 }
@@ -288,5 +288,5 @@ public function xmasSmart():void {
 	hideUpDown();
 	outputText("You nod to yourself, feeling pretty smart about your decision.", true);
 	doNext(1);
-	stats(0,0,0,15,0,0,0,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 15, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 }

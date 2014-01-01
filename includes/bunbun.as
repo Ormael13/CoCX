@@ -40,7 +40,7 @@ public function bunnbunbunMeet():void {
 		outputText("She claps both hands over her mouth, leaving her swollen prick to bounce precipitously while she awaits your response.\n\n", false);
 		
 		outputText("(If you're going to sex her, which of her body parts will you use?", false);
-		stats(0,0,0,0,0,0,5+player.lib/20,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5+player.lib/20, "cor", 0);
 		var DickInV:Number = 0;
 		var Vagina:Number = 0;
 		var sixtyNine:Number = 0;
@@ -108,7 +108,7 @@ public function talkToBunnyBunBun():void {
 	//var Ass:Number = 0;
 	//Dick In V] [Dick in A] [Vagina] [Ass] [Leave]
 	simpleChoices("DickInVag",DickInV,"DickInAss",bunbunFucksPCInAss,"Vagina",Vagina,"69",sixtyNine,"Leave",13);
-	stats(0,0,0,0,0,0,5+player.lib/20,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5+player.lib/20, "cor", 0);
 }
 //[Rape Her]
 public function rapeBunBun():void {
@@ -130,7 +130,7 @@ public function rapeBunBun():void {
 		
 		outputText("The horny bun-herm follows your gaze and breaks into a slowly spreading grin, revealing a pair of cute buck-teeth as she asks, \"<i>Oh you just wanted to fuck?  Why didn't you just ask?  I thought you were going to eat me!</i>\"  Her confident declaration does little to hide the bright red blush coloring her cheeks, making it clear this situation is a little strange to her.\n\n", false);
 		
-		stats(0,0,0,0,0,0,10,3);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10, "cor", 3);
 		outputText("(If you're going to sex her, which of her body parts will you use?", false);
 		var DickInV:Number = 0;
 		var Vagina:Number = 0;
@@ -237,7 +237,7 @@ public function bunbunFucksYourVag():void {
 	else {
 		player.knockUp(9,200,60);
 	}
-	stats(0,0,0,0,1,-3,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", -3, "lus", -100, "cor", 0);
 	doNext(16);
 }
 
@@ -328,7 +328,7 @@ public function bunbunFucksPCInAss():void {
 		player.buttPregnancyIncubation = 808;
 		player.buttPregnancyType = 9;
 	}
-	stats(0,0,0,0,1,1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", -100, "cor", 0);
 	doNext(16);
 }
 
@@ -409,7 +409,7 @@ public function bunbunGetsFucked():void {
 	
 	outputText("You shrug and pick up one of her eggs, noticing that it's turned neon pink in color.  The bunny mumbles, \"<i>Have it, iz good for youuuu...</i>\" before she starts to snore and murmur out a sexual dream.\n\n", false);
 	
-	stats(0,0,0,0,1,1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", -100, "cor", 0);
 	menuLoc = 2;
 	shortName = "NPnkEgg";
 	takeItem();
@@ -433,7 +433,7 @@ public function bunbun69():void {
 			outputText("Before you can return with a witty remark, the bunny has hopped off, leaving you alone in the field with your face in your palm.\n\n", false); 
 			//- Intelligence
 			//+ Lust
-			stats(0,0,0,-2,0,0,-100,0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", -2, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 			doNext(13);
 		}
 		else {
@@ -449,7 +449,7 @@ public function bunbun69():void {
 
 			outputText("You wipe off what you can of the sticky goop and trot off with a scowl, leaving the hysterical rabbit to calm herself down.\n\n", false);
 			//- Intelligence
-			stats(0,0,0,-2,0,0,-100,0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", -2, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 			//+ Lust
 			//+ Pink Egg 
 			shortName = "NPnkEgg";
@@ -510,7 +510,7 @@ public function bunbun69():void {
 			player.tailType = TAIL_TYPE_RABBIT;
 			player.earType = EARS_BUNNY;
 			doNext(13);
-			stats(0,0,0,0,1,1,-100,0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", -100, "cor", 0);
 			return;
 		}
 		//REGULAR SHOW
@@ -566,7 +566,7 @@ public function bunbun69():void {
 			player.tailType = TAIL_TYPE_RABBIT;
 			player.earType = EARS_BUNNY;
 			doNext(13);
-			stats(0,0,0,0,1,1,-100,0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", -100, "cor", 0);
 			return;
 		}
 	}
@@ -606,7 +606,7 @@ public function bunbun69():void {
 		player.tailType = TAIL_TYPE_RABBIT;
 		player.earType = EARS_BUNNY;
 		doNext(13);
-		stats(0,0,0,0,1,1,-100,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", -100, "cor", 0);
 		return;
 	}
 }
@@ -658,7 +658,7 @@ public function layEggsInBunbuns():void {
 	}
 	outputText("\n\nFinally you find you no longer have any to give to the egg-obsessed rabbit girl and the ovipositor retracts into its slit.  Tired but blissful, she curls up to slumber, and you leave her to deal with having a stomach chock full of eggs 'n honey, returning to camp till you once again need a warm body to play host.");
 	player.dumpEggs();
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	doNext(13);
 }
 
@@ -709,7 +709,7 @@ public function ovipositBunnyEaster():void {
 	outputText("\n\nThe hare goes limp after that, her eyes drifting shut as her tongue idly licks her spent seed from her face.  It looks like she got more eggs than she reckoned for.");
 	//ITS OVER
 	player.dumpEggs();
-	stats(0,0,0,0,0,-2,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
 	doNext(13);
 }
 
@@ -795,7 +795,7 @@ public function freeHerOhGodWhyDidYouDoThis():void {
 	
 	outputText("\n\nThe frantic pace of her initial discharge ebbs as her hulking testes visibly shrink.  She leans up against the wobbling factories, resting atop them like they were hefty, liquid pillows.  It'll take her a while to finish emptying herself completely, but for the time being, she seems content.  You give her fluffy tail a playful poof and head back to camp, stooping to retrieve one of the girl's eggs from the ground as you go.\n\n");
 	//[End Encounter, gain neon pink egg]
-	stats(0,0,0,0,0,0,25,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 25, "cor", 0);
 	menuLoc = 2;
 	shortName = "NPnkEgg";
 	takeItem();
@@ -851,7 +851,7 @@ public function fuckTheEggBoundBun():void {
 	else outputText("growing larger and larger as cum splatters in thick streams from her saturated pussy. Your seemingly endless gallons of flooding cum wash the remnants of her previous partners away, immersing the caramel woman in the fluid wealth of your liquid possession.");
 	outputText("  No sooner has your spunk taken root inside her, than the bunny's already colossal testes tremble anew.  Before your eyes, they balloon even larger, fattening with the profit of your claim.  You remain inside her a moment longer to marvel at the impossible bulk of her egg-stuffed body, before withdrawing and stepping back to clean yourself off.  Bulbous dollops of spunk bubble from her cunny as she impotently grinds her shaft against the mammoth bulk of her stoppered balls.  Satisfied, you head back to camp, leaving the bunny to the mercies of the next rescuer.");
 	//[End Encounter, corruption up]
-	stats(0,0,0,0,0,0,-100,2);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 2);
 	doNext(13);
 }
 
@@ -960,7 +960,7 @@ public function getEggflated():void {
 	}
 	outputText(player.modThickness(100,3));
 	outputText(player.modTone(0,3));
-	stats(0,0,0,0,1,-3,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", -3, "lus", -100, "cor", 0);
 	doNext(16);
 }
 //If not full bunny morph: [Next]

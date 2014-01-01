@@ -122,7 +122,7 @@ public function RaphaelFirstMeetingSWOON():void {
 
 	outputText("You hold the hand he touched close to your chest.", false);
 
-	stats(0,0,0,0,0,0,10,0);
+	dynStats("str", -1,"tou", -1, "spe", 3, "int", 0, "lib", 0, "sen", 1, "lus", 25, "cor", 0);
 	doNext(1);
 }
 
@@ -413,7 +413,7 @@ public function friskFondleChoice():void {
 	outputText("\"<i>And I in turn, will have to retrieve those.</i>\" He growls low.\n\n", false);
 
 	outputText("\"<i>But the day is young!</i>\" He proclaims before shooting up the wall and extending you his paw. \"<i>Join me! And together we shall paint the forest russet red!</i>\" And he winks at you while pulling you up. \"<i>Stick with me and I could finish your education. I will promise that your graduation will be... everything you hoped for. Like the wild mare is shown what is expected from her, the russet rogue never leaves a lady wanting.</i>\"\n\n", false); 
-	stats(0,0,0,0,0,0,5+player.lib/10,0);
+	dynStats("str", -1,"tou", -1, "spe", 3, "int", 0, "lib", 0, "sen", 1, "lus", 25, "cor", 0);
 	//{Next scene Picnic}
 	doNext(RaphaelPicnic);
 }
@@ -551,7 +551,7 @@ public function RaphaelPicnicSkill():void {
 		outputText("Raphael's smile returns for him. \"<i>Raphael!</i>\" He burrs. \"<i>And for someone like you I'd gladly suffer a dozen broken toes at once!</i>\" He boasts. \"<i>I will teach you grace becoming of your beauty yet!</i>\"\n\n", false);
 
 		outputText("\"<i>Again!</i>\" He stands up and extends you an arm with renewed energy.", false);
-		stats(-1,-1,3,0,0,0,15,0);
+		dynStats("str", -1,"tou", -1, "spe", 3, "int", 0, "lib", 0, "sen", 1, "lus", 25, "cor", 0);
 		flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 1;
 	}
 	//{Fencing practice variables: Speed 30-39 Must play out at least once}
@@ -582,7 +582,7 @@ public function RaphaelPicnicSkill():void {
 
 		outputText("<i>\"Magnefique.\"</i> Raphael comments, pleased.  <i>\"You could use some work on how to wield it properly, but only because you weren't born with one in hand like I was.\"</i> He smiles, saunters closer to you and releases the rapier from your intoxicated grip by fondling your fingers.  <i>\"You still need a master to show you how to thrust and parry properly.\"</i>\n\n", false);
 		
-		stats(-1,-1,3,0,0,1,25,0);
+		dynStats("str", -1,"tou", -1, "spe", 3, "int", 0, "lib", 0, "sen", 1, "lus", 25, "cor", 0);
 		flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 2;
 	}
 	//{Fencing practice variables: Speed 40-49, Must play out at least once}
@@ -604,7 +604,7 @@ public function RaphaelPicnicSkill():void {
 		outputText("<i>\"Think you can remember how this feels?\"</i> Raphael asks. Your flustered acknowledgement comes out in the form of a soft groan.\n\n", false);
 
 		outputText("Perhaps with a deliberate, firmer brush than necessary, Raphael removes his crotch from your upturned ass and moves backward, seemingly uninterested.  He adopts a serious stare, nods and commands you to practice jabs again, this time holding your stance.  You do so to the letter with a bright blush, never remiss, but always feeling Raphael is getting a good look at your exposed buttocks as you raise them towards him like an offering.  His tail wags to the rhythm of the display, even though the fox stares you down solemnly with crossed arms - ever the harsh taskmaster when it comes to grace.\n\n", false);
-		stats(-1,-1,3,0,0,2,60,0);
+		dynStats("str", -1,"tou", -1, "spe", 3, "int", 0, "lib", 0, "sen", 2, "lus", 60, "cor", 0);
 		flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 3;
 	}
 	//{Warning when you have 50 speed, played through all 3 variables and choose {Skill} at the opening picnic}
@@ -721,7 +721,7 @@ public function RaphaelPostFenceSex():void {
 	outputText("With a victorious glint, Raphael rolls you on your back while you're still dazed.  The fox, taking the sash from his hips and tying either end around your knees, brings your legs towards your chest.  He holds them there without any effort on the part of either of you, by putting his chest down on the cloth tied between them and mounting you again, lying on top of you.  More deep thrusts follow, this time deep enough for the tip to titilate even your cervix, while the slender knot at his base parts the sensitive entrance a little wider with every bottoming bump into you.\n\n", false);
 
 	outputText("It is how you spend the rest of that morning, filled a thousands times over and constantly driven past the edge of orgasmic bliss by the master fencer's trained thrusts.  His civilized smile has long since given way to the mean smirk of a sexual victor driving his victim to the edge of madness.", false);
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	doNext(postRaphaelCoitus);
 
 }
@@ -832,7 +832,7 @@ public function RaphaelPicnicChooseThieving(newl:Boolean = true):void {
 		outputText("Raphael himself remains amicable and relents, leaning back on crossed arms and with a pleased smile, as though signifying it was all you.  <i>\"And that is what they call distraction. Notice how you didn't even realize until the last moment I had my hands on your body?\"</i> Raphael states academically.  He lets you recover, but keeps a careful eye on you like a considerate lover.  <i>\"That's how a proper pickpocket operates.\"</i>\n\n", false);
 
 		outputText("You respond with a embarrassed \"<i>uh-huh</i>\" as you turn your back to the fox and shield your breasts. The taste of his saliva is still on your tongue, surprisingly sweet. You would have protested, if you hadn't asked for a demonstration of his skills earlier.\n\n", false);
-		stats(-1,-1,0,3,0,1,40,0);
+		dynStats("str", -1,"tou", -1, "spe", 0, "int", 3, "lib", 0, "sen", 1, "lus", 40, "cor", 0);
 		flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] = 1;
 	}
 	//{Picnic Thieving 30-39 Int. Must play out at least once.}
@@ -862,7 +862,7 @@ public function RaphaelPicnicChooseThieving(newl:Boolean = true):void {
 		outputText("<i>\"Not bad!\"</i> The fox states as he disconnects.  <i>\"But you're missing the point, señorita.\"</i> he comments, pleased.  <i>\"Although this was fine practice, it is not a game about winning.  It is not a game about foiling the other side, your mark.  This is a game... of togetherness, of both believing you can reach the state you desire, even though your goals may not be alike. It is about illusion. About gliding across fields of forbidding energies and secret desires.\"</i>\n\n", false);
 
 		outputText("When you ask him what he means, Raphael merely winks.  <i>\"You've come this far, I'm sure you'll figure it out. A proper rogue, knows it by heart.\"</i>\n\n", false);
-		stats(-1,-1,0,3,0,1,40,0);
+		dynStats("str", -1,"tou", -1, "spe", 0, "int", 3, "lib", 0, "sen", 1, "lus", 40, "cor", 0);
 		flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] = 2;
 	}
 	//{Picnic Thieving at 40-49 Int. Must play out at least once.}
@@ -885,7 +885,7 @@ public function RaphaelPicnicChooseThieving(newl:Boolean = true):void {
 		outputText("Raphael however, doesn't get angry at himself.  The young prince of thieves isn't embarrassed and doesn't even try to desperately correct himself.  He simply smiles, rolls slowly onto his back before your eyes and carries through the performance.  He crooks his limbs above his prostrate body, curls his tail between his legs and acts like a young dog who has just made a mess, staring at you from upside down position with well-humoured puppy dog eyes.\n\n", false); 
 
 		outputText("You crack up and laugh openly at his antics.  Suddenly, you don't have as hard a time imagining Raphael relaxing.\n\n", false);
-		stats(-1,-1,0,3,0,1,20,0);
+		dynStats("str", -1,"tou", -1, "spe", 0, "int", 3, "lib", 0, "sen", 1, "lus", 20, "cor", 0);
 		flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] = 3;
 	}
 	//{Int Thieving Apex Warning: When the PC's intelligence is at 50 or higher.}
@@ -946,7 +946,7 @@ public function thieveryEnding():void {
 
 	outputText("<i>\"Some games are meant to be lost.\"</i>  He nuzzles you, putting his snout to your ear.  <i>\"It will be... exquisite.  Lose yourself, in my capable hands.\"</i>\n\n", false);
 	outputText("Do you?", false);
-	stats(0,0,0,0,0,0,25,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 25, "cor", 0);
 	//Choose: 
 	//[Yes] [No]
 	doYesNo(RaphaelThieverySmex,declinePuttingOutForRogues);
@@ -1304,7 +1304,7 @@ public function kissRaphaelFirstTimeOrphanage():void {
 	
 	outputText("\n\nFinally, you beg of him to stop as the growing crescendo and steady rhythm becomes too much, not by pulling out, but by jamming into you one last time and simply keeping his wonderful cock in the magic spot for long enough to ride the sensation to a climax.");
 	slimeFeed();
-	stats(0,0,0,0,0,-1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
 	menu();
 	addButton(0,"Next",followupToFirstTimeOrphanageRaphSex);
 }
@@ -1345,7 +1345,7 @@ public function cunnilingusWithRaphael():void {
 	//({High wetness multiplier}
 	else outputText("gushing a torrent of femcum into the air");
 	outputText(".  Raphael backs off a bit afterwards, giving you a few more laps of admiration around the throbbing fissure and cleaning you of any spillage. He ends with a tiny kiss, just inside your inner thigh.");
-	stats(0,0,0,0,0,-2,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
 	doNext(13);
 }
 
@@ -1366,7 +1366,7 @@ public function girlOnTopOfRedFoxesOhMy():void {
 	outputText("\n\nDesperate for that little bit more, you reach down and start fondeling your " + clitDescript() + " too.  It brushing in against Raphael's soft white pubes tickles.");
 	
 	outputText("\n\nLooking him in the eyes again, you slaver on top of the fox.  Raphael simply lays back, lazily fondles your breasts and ass and looks at you to put in the effort around his cock.  Only after minutes of this, almost driving yourself towards the brink, does Raphael suddenly sit up sharply - an anguished snarl on his face - to hold you in a tight embrace and groan conceitedly.  You can feel his cock jerk up and grow an inch in size, before his passion escapes into your womanhood.  Allowing yourself as well, you follow him with a lazy orgasm and join him in his growl, while he squeezes you on your waist.");
-	stats(0,0,0,0,0,-2,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
 	doNext(13);
 }
 //Available side by side to having sex: Dialogue scenes.

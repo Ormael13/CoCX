@@ -259,11 +259,11 @@ public function exploreDeepwoods():void {
 			//Get plant-cum dripped on you if not fast and unlucky!
 			if(player.spe < 60 && rand(player.spe + 50) < 50) {
 				outputText("  Disgusted by this perversion of nature, you turn to leave, catching a faceful of the white goop that's spurting down from the vines above!  It's slimy, gross, and difficult to clear from your eyes, nose, and mouth.  The musky smell and delicious salty flavor are undoubtedly a result of the plant's corruption.  You escape the tainted glade, but feel warmer and warmer as time passes...", false);
-				stats(0,0,0,0,0,0,20 + player.lib/5,0);
+				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 20 + player.lib/5, "cor", 0);
 			}
 			else {
 				outputText("  Disgusted by this perversion of nature, you turn away to leave, narrowly avoiding a sudden dripping of thick white fluid from the vines overhead.", false);
-				stats(0,0,0,0,0,0,2,0);
+				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 2, "cor", 0);
 			}
 			doNext(13);
 			return;
@@ -275,17 +275,17 @@ public function exploreDeepwoods():void {
 			//flowers...
 			if(temp2 == 0) {
 				outputText("A group of perverted looking flowers catch your eye, and leading you to bend closer for a better look at the intricately folded petals, noting the beads of slick moisture that seems to perspire from inside the plant.  Awed by the corrupt yet beautiful flower, you take a deep breath, inhaling a lungful of it's pungent yet sweet scents.  It matches the flower somehow, lingering in your nose even after you pull away.  The smell makes you wonder just how functional the pussy flowers are, as they do have fairly large stalks.\n\nYou sigh and take one last sniff from the flower's honeypot before moving on.  Your body flushes happily with desire as your blood pools in your groin.  You giggle, wishing you could feel like this more often.", false);
-				stats(0,0,0,0,0,0,20 + player.lib/5,.5);
+				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 20 + player.lib/5, "cor", .5);
 			}
 			//vines...
 			if(temp2 == 1) {
 				outputText("A few vines dangling from the trees catch your eye due to their rather 'unique' tips.  Every single one of them ends in a flared mushroom-like head, each twice as wide as the already thick vine.  You touch a vine gently, musing at its slippery texture and how similar it would be to a penis if the 'head' were smaller.  You encircle the vine with your hand, stroking it and giggling at the absurdity of this place.  The vine suddenly flexes in your grasp, pulsating and contracting as its head grows bigger, turning shiny and red.  Pulling away in shock, you gasp as the vine begins spurting out huge ropes of thick viscous fluid, splattering everywhere.  The plant-gasm ends as suddenly as it started, the 'head' retaining the size it gained and dripping the last of its strange load.  Overcome with curiosity, you sniff at the dripping spunk and swoon at the overpoweringly musky scent.  Gathering your wits, you decide to leave before you end up with one of those inside you.  You escape the corrupted glade, but stay flush with arousal.", false);
-				stats(0,0,0,0,0,0,20 + player.lib/5,.5);
+				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 20 + player.lib/5, "cor", .5);
 			}
 			//trees...
 			if(temp2 == 2) {
 				outputText("A cluster of huge breast-like knots on a nearby tree draws your attention.  Unable to resist, you poke one, and burst into giggles as it jiggles like a real breast!  You cautiously begin groping the tree-tit, and smile as it begins leaking sweet-smelling sap.  The scent conjures memories of helping to make maple syrup back home, and before you realize it, you've gathered a drop of the sap on your finger and tasted it.  It's powerfully sweet, making your tongue tingle and heart beat faster.  Unbidden, the thought of suckling the teat dry of its sweet treat comes to mind, but you manage to reject it and stumble away from the corrupted glade.  You have trouble with your tongue for the next hour: it won't stay in your mouth, and keeps licking your lips, seeking any leftover sweetness.  It almost distracts you from the palpable heat gathering between your thighs.", false);
-				stats(0,0,0,0,0,0,20 + player.lib/5,.5);
+				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 20 + player.lib/5, "cor", .5);
 			}
 			doNext(13);
 			return;
@@ -299,7 +299,7 @@ public function exploreDeepwoods():void {
 		//Wallow in decadence reaction - UNFINISHED
 	}
 	if(chooser == 3) {
-		supahAkabalEdition();
+		akbalScene.supahAkabalEdition();
 		return;
 	}
 	else if(chooser == 4) {
@@ -432,7 +432,7 @@ public function exploreForest():void {
 		if(monk == 0) {
 			if(player.cor < 25) {
 				outputText("You enjoy a peaceful walk in the woods.  It gives you time to think over the recent, disturbing events.", true);
-				stats(0,.5,0,1,0,0,0,0);
+				dynStats("str", 0,"tou", .5, "spe", 0, "int", 1, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 				doNext(13);
 				return;
 			}			
@@ -457,7 +457,7 @@ public function exploreForest():void {
 		if(monk == 1) {
 			if(player.cor < 10) {
 				outputText("You enjoy a peaceful walk in the woods, it gives you time to think.", true);
-				stats(0,.5,0,1,0,0,0,0);
+				dynStats("str", 0,"tou", .5, "spe", 0, "int", 1, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 				doNext(13);
 				return;
 			}
@@ -507,7 +507,7 @@ public function exploreForest():void {
 		if(temp == 1) {
 			if(player.cor < 80) {
 				outputText("You enjoy a peaceful walk in the woods, it gives you time to think.", false);
-				stats(0,.5,0,1,0,0,0,0);
+				dynStats("str", 0,"tou", .5, "spe", 0, "int", 1, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 			}
 			else {
 				outputText("As you wander in the forest, you keep ", false);
@@ -516,7 +516,7 @@ public function exploreForest():void {
 				if(player.gender == 3) outputText("stroking alternatively your " + multiCockDescriptLight() + " and your " + vaginaDescript(0) + " as you daydream about fucking all kinds of women, from weeping tight virgins to lustful succubi with gaping, drooling fuck-holes, before, or while, getting fucked by various monstrous cocks, from minotaurs' thick, smelly dongs to demons' towering, bumpy pleasure-rods.", false);
 				if(player.gender == 0) outputText("daydreaming about sex-demons with huge sexual attributes, and how you could please them.", false);
 				outputText("", false);
-				stats(0,.5,0,0,.25,0,player.lib/5,0);
+				dynStats("str", 0,"tou", .5, "spe", 0, "int", 0, "lib", .25, "sen", 0, "lus", player.lib/5, "cor", 0);
 			}
 			doNext(13);
 			return;
@@ -534,11 +534,11 @@ public function exploreForest():void {
 				//Get plant-cum dripped on you if not fast and unlucky!
 				if(player.spe < 60 && rand(player.spe + 50) < 50) {
 					outputText("  Disgusted by this perversion of nature, you turn to leave, catching a faceful of the white goop that's spurting down from the vines above!  It's slimy, gross, and difficult to clear from your eyes, nose, and mouth.  The musky smell and delicious salty flavor are undoubtedly a result of the plant's corruption.  You escape the tainted glade, but feel warmer and warmer as time passes...", false);
-					stats(0,0,0,0,0,0,20 + player.lib/5,0);
+					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 20 + player.lib/5, "cor", 0);
 				}
 				else {
 					outputText("  Disgusted by this perversion of nature, you turn away to leave, narrowly avoiding a sudden dripping of thick white fluid from the vines overhead.", false);
-					stats(0,0,0,0,0,0,2,0);
+					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 2, "cor", 0);
 				}
 				doNext(13);
 				return;
@@ -550,17 +550,17 @@ public function exploreForest():void {
 				//flowers...
 				if(temp2 == 0) {
 					outputText("A group of perverted looking flowers catch your eye, leading you to bend closer for a better look at the intricately folded petals, noting the beads of slick moisture that seems to perspire from inside the plant.  Awed by the corrupt yet beautiful flower, you take a deep breath, inhaling a lungful of its pungent yet sweet scents.  It matches the flower somehow, lingering in your nose even after you pull away.  The smell makes you wonder just how functional the pussy flowers are, they do have fairly large stalks.\n\nYou sigh and take one last sniff from the flower's honeypot before moving on.  Your body flushes happily with desire as your blood pools in your groin.  You giggle, wishing you could feel like this more often.", false);
-					stats(0,0,0,0,0,0,20 + player.lib/5,.5);
+					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 20 + player.lib/5, "cor", .5);
 				}
 				//vines...
 				if(temp2 == 1) {
 					outputText("A few vines dangling from the trees catch your eye due to their rather 'unique' tips.  Every single one of them ends in a flared mushroom-like head, each twice as wide as the already thick vine.  You touch a vine gently, musing at its slippery texture and how similar it would be to a penis if the 'head' were smaller.  You encircle the vine with your hand, stroking it and giggling at the absurdity of this place.  The vine suddenly flexes in your grasp, pulsating and contracting as it's head grows bigger, turning shiny and red.  Pulling away in shock, you gasp as the vine begins spurting out huge ropes of thick viscous fluid, splattering everywhere.  The plant-gasm ends as suddenly as it started, the 'head' retaining the size it gained and dripping the last of its strange load.  Overcome with curiosity, you sniff at the dripping spunk and swoon at the overpoweringly musky scent.  Gathering your wits, you decide to leave before you end up with one of those inside you.  You escape the corrupted glade, but stay flush with arousal.", false);
-					stats(0,0,0,0,0,0,20 + player.lib/5,.5);
+					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 20 + player.lib/5, "cor", .5);
 				}
 				//trees...
 				if(temp2 == 2) {
 					outputText("A cluster of huge breast-like knots on a nearby tree draws your attention.  Unable to resist, you poke one, and burst into giggles as it jiggles like a real breast!  You cautiously begin groping the tree-tit, and smile as it begins leaking sweet-smelling sap.  The scent conjures memories of helping to make maple syrup back home, and before you realize it, you've gathered a drop of the sap on your finger and tasted it.  It's powerfully sweet, making your tongue tingle and heart beat faster.  Unbidden, the thought of suckling the teat dry of its sweet treat comes to mind, but you manage to reject it and stumble away from the corrupted glade.  You have trouble with your tongue for the next hour: it won't stay in your mouth, and keeps licking your lips, seeking any leftover sweetness.  It almost distracts you from the palpable heat gathering between your thighs.", false);
-					stats(0,0,0,0,0,0,20 + player.lib/5,.5);
+					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 20 + player.lib/5, "cor", .5);
 				}
 				doNext(13);
 				return;
@@ -700,7 +700,7 @@ public function exploreDesert():void {
 public function mirageDesert():void {
 	clearOutput();
 	outputText("While exploring the desert, you see a shimmering tower in the distance.  As you rush towards it, it vanishes completely.  It was a mirage!   You sigh, depressed at wasting your time.", true);
-	stats(0,0,0,0,0,0,-15,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -15, "cor", 0);
 	doNext(13);
 	return;
 }
@@ -712,12 +712,12 @@ public function walkingDesertStatBoost():void {
 		//50/50 strength/toughness
 		if(rand(2) == 0 && player.str < 50) {
 			outputText("The effort of struggling with the uncertain footing has made you stronger.", false);
-			stats(.5,0,0,0,0,0,0,0);
+			dynStats("str", .5,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 		}
 		//Toughness
 		else if(player.tou < 50) {
 			outputText("The effort of struggling with the uncertain footing has made you tougher.", false);
-			stats(0,.5,0,0,0,0,0,0);
+			dynStats("str", 0,"tou", .5, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 		}
 	}
 	doNext(13);
@@ -1010,11 +1010,11 @@ public function exploreMountain():void {
 			if(player.hasStatusAffect("wormsHalf") >= 0 && rand(2) == 0) {
 				if(player.cor < 90) {
 					outputText("Your hike in the mountains, while fruitless, reveals pleasant vistas and provides you with good exercise and relaxation.", true);
-					stats(0,.25,.5,0,0,0,player.lib/10-15,0);
+					dynStats("str", 0,"tou", .25, "spe", .5, "int", 0, "lib", 0, "sen", 0, "lus", player.lib/10-15, "cor", 0);
 				}
 				else {
 				 	outputText("During your hike into the mountains, your depraved mind keeps replaying your most obcenely warped sexual encounters, always imagining new perverse ways of causing pleasure.\n\nIt is a miracle no predator picked up on the strong sexual scent you are emitting.", true);
-					stats(0,.25,.5,0,.25,0,player.lib/10,0);
+					dynStats("str", 0,"tou", .25, "spe", .5, "int", 0, "lib", .25, "sen", 0, "lus", player.lib/10, "cor", 0);
 				}
 				doNext(13);
 				return;
@@ -1026,11 +1026,11 @@ public function exploreMountain():void {
 			if(player.hasStatusAffect("wormsOff") >= 0 || player.hasStatusAffect("infested") >= 0 || (rand(2) == 0 && player.hasStatusAffect("wormsHalf") >= 0)) {
 				if(player.cor < 90) {
 					outputText("Your hike in the mountains, while fruitless, reveals pleasant vistas and provides you with good exercise and relaxation.", true);
-					stats(0,.25,.5,0,0,0,player.lib/10-15,0);
+					dynStats("str", 0,"tou", .25, "spe", .5, "int", 0, "lib", 0, "sen", 0, "lus", player.lib/10-15, "cor", 0);
 				}
 				else {
 				 	outputText("During your hike into the mountains, your depraved mind keeps replaying your most obcenely warped sexual encounters, always imagining new perverse ways of causing pleasure.\n\nIt is a miracle no predator picked up on the strong sexual scent you are emitting.", true);
-					stats(0,.25,.5,0,.25,0,player.lib/10,0);
+					dynStats("str", 0,"tou", .25, "spe", .5, "int", 0, "lib", .25, "sen", 0, "lus", player.lib/10, "cor", 0);
 				}
 				doNext(13);
 			}
@@ -1206,13 +1206,13 @@ public function exploreLake():void {
 				if(player.hasStatusAffect("DungeonShutDown") >= 0 && player.hasStatusAffect("FactoryOverload") < 0) outputText("\n\n<b>You are amazed to encounter a slime creature with the factory shut down - most of them have disappeared.</b>", false);
 				startCombat(new GreenSlime(this));
 				outputText("\n\n", false);
-				eAttack();
+				monster.eAttack();
 				return;
 			}
 			//Player's stats suck and you should feel bad.
 			outputText("Without warning, you feel something moist and spongy wrap around your ankle, pulling you off balance!  You turn and try to pull your leg away, struggling against a large green ooze for a moment before your foot comes away with a *schlorp* and a thin coating of green fluid.  The rest of the ooze rises to tower over you, forming a massive green humanoid torso with hugely muscled arms and wide shoulders.  Adrenaline rushes into your body as you prepare for combat, and you feel your heart skip a beat as your libido begins to kick up as well!", true);
 			if(player.hasStatusAffect("DungeonShutDown") >= 0 && player.hasStatusAffect("FactoryOverload") < 0) outputText("\n\n<b>You are amazed to encounter a slime creature with the factory shut down - most of them have disappeared.</b>", false);
-			stats(0,0,0,0,1,0,10,0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 0, "lus", 10, "cor", 0);
 			startCombat(new GreenSlime(this));
 			return;
 		}
@@ -1224,7 +1224,7 @@ public function exploreLake():void {
 		}
 		else{
 			outputText("  You bet you could cover the same distance even faster next time.\n", false);
-			stats(0,0,.75,0,0,0,0,0);
+			dynStats("str", 0,"tou", 0, "spe", .75, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 		}
 		doNext(13);
 	}
@@ -1235,15 +1235,15 @@ public function exploreLake():void {
 		}
 		outputText("Your stroll around the lake increasingly bores you, leaving your mind to wander.  ", true);
 		if(player.cor > 30 || player.lust > 60 || player.lib > 40) outputText("Your imaginings increasingly seem to turn ", false);
-		else stats(0,0,0,1,0,0,0,0);
+		else dynStats("str", 0,"tou", 0, "spe", 0, "int", 1, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 		if((player.cor > 30 && player.cor < 60) || (player.lust > 60 && player.lust < 90) || (player.lib > 40 && player.lib < 75)) {
 			outputText("to thoughts of sex.", false);
-			stats(0,0,0,0,0,0,(5+player.lib/10),0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (5+player.lib/10), "cor", 0);
 			displayed = true;
 		}
 		if(((player.cor >= 60) || (player.lust >= 90) || (player.lib >= 75)) && !displayed) {
 			outputText("into daydreams of raunchy perverted sex, flooding your groin with warmth.", false);
-			stats(0,0,0,0,0,0,(player.cor/10+player.lib/10),0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (player.cor/10+player.lib/10), "cor", 0);
 		}
 		doNext(13);
 		
@@ -1302,7 +1302,7 @@ public function exploreLake():void {
 			outputText("After a moment, a number of the figures disembark down the gangplank and immediately go off in different directions.  You count half a dozen of them, and guess that they are female when one of them passes by close to you and you see the hole in her outfit over her naughty bits.  You look back at the boat to see it close the gangplank, and move back onto the lake, with only one of the figures still on board.  Surprised to hear a sudden yell, you look to the side and see the clothing of the one who passed you earlier shifts and twists before becoming some pink outfit that clings to her backside.  You are stunned for a moment as she disappears from sight before you shake your head and move on.  It seems there are new residents to the lake.\n\n<b>(Fetish Cultists can now be encountered!)</b>", false); 
 
 			//(increase player lust from the sights they saw)
-			stats(0,0,0,0,0,0,5,0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5, "cor", 0);
 			doNext(13);
 			return;
 		}
@@ -1626,7 +1626,7 @@ public function bigJunkDesertScene():void {
 	else if(player.isTaur()) outputText("  You struggle and work your equine legs against the surface of the dune you are trapped on.  Your " + player.feet() + " have consistent trouble finding footing, the soft sand failing to provide enough leverage to lift your bulk.  You breath in deeply and lean from side to side, trying to find some easier vertical leverage.  Eventually, with a crude crawl, your legs manage to push the bulk of your body onto more solid ground.  With great difficulty, you spend the next hour shuffling your genitals across the sandscape and back to camp.", false);
 	//SCENE END = FOR ALL OTHER CHARACTERS
 	else outputText("  You struggle and push with your " + player.legs() + " as hard as you can, but it's no use.  You do the only thing you can and begin stroking your " + multiCockDescriptLight() + " with as much vigor as you can muster.  Eventually your body tenses and a light load of jizz erupts from your body, but the orgasm is truly mild compared to what you need.  You're simply too weary from struggling to give yourself the masturbation you truly need, but you continue to try.  Nearly an hour later " + sMultiCockDesc() + " softens enough to allow you to stand again, and you make your way back to camp, still dragging your genitals across the warm sand.", false);
-	stats(0,0,0,0,0,0,25+rand(player.cor/5),0,false);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 25+rand(player.cor/5), "cor", 0, "resisted", false);
 	fatigue(5);
 	doNext(13);
 }
@@ -1733,7 +1733,7 @@ public function bigJunkForestScene(lake:Boolean = false):void {
 		//SCENE END = FOR ALL OTHER CHARACTERS
 		else outputText("  You struggle and push with your " + player.legs() + " as hard as you can, but it's no use.  You do the only thing you can and begin stroking your " + multiCockDescriptLight() + " with as much vigor as you can muster.  Eventually, your body tenses and a light load of jizz erupts from your loins, but the orgasm is truly mild compared to what you need.  You're far too weary from struggling to give yourself the masturbation you truly need, but you continue to try.  Nearly an hour later, " + sMultiCockDesc() + " has softened enough to allow you to stand again, and you make your way back to camp, still dragging your genitals across the forest floor.", false);
 	}
-	stats(0,0,0,0,0,0,25+rand(player.cor/5),0,false);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 25+rand(player.cor/5), "cor", 0, "resisted", false);
 	fatigue(5);
 	doNext(13);
 }
@@ -1900,7 +1900,7 @@ public function ottergirlLikesDongs():void {
 	outputText("\n\nFrom the same bag she pulls out a delicious smelling piece of cooked fish, wrapped in a large green leaf.  She hands it to you, saying simply, \"<i>Fish and a fuck, darlin'.  I got mine and you get yours.</i>\"  You nod absently, taking the piece of wrapped fish.  Callu gives your rapidly limpening cock a little pat on the head, before gathering up her things and heading off down the beach, leaving behind a trail of cum and other love juices.");
 	
 	outputText("\n\nYou take a minute to recover before doing the same.  ");
-	stats(0,0,0,0,0,-1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
 	menuLoc = 2;
 	shortName = "FishFil";
 	takeItem();
@@ -1959,7 +1959,7 @@ public function ottersForGals():void {
 	
 	outputText("\n\nYou take several minutes to recover before doing the same.  ");
 	
-	stats(0,0,0,0,0,-1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
 	menuLoc = 2;
 	shortName = "FishFil";
 	takeItem();
@@ -2098,10 +2098,10 @@ public function joinBeingAMinoCumSlut():void {
 	outputText("\n\nYou awaken several hours later.  The minotaur and the cow-girl are nowhere to be seen, but your [armor] is left neatly folded next to you, along with a small bottle filled with some white liquid, most likely a gift from your \"bull\".");
 	
 	outputText("\n\nYou quickly re-dress and head back to camp, spying the occassional goblin or imp scurrying from its hiding spot, no doubt recovering from their own self-inflicted orgasms.");
-	stats(0,0,0,0,.5,-3,-100,1);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", .5, "sen", -3, "lus", -100, "cor", 1);
 	if(flags[kFLAGS.PC_FETISH] > 0) {
 		outputText("  A thrill runs through you.  Even though you were brought to such a satisfying climax, the whole thought that goblins and imps were watching you and getting off on it... it just makes you hornier than you were before.");
-		stats(0,0,0,0,0,0,100,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 100, "cor", 0);
 	}
 	//Chance to impregnate PC, get mino-fix, and maybe relief from feeder perk.
 	minoCumAddiction(10);
@@ -2127,7 +2127,7 @@ public function watchAMinoCumSlut():void {
 	outputText("\n\nWith a hearty thrust, the minotaur plunges into the cow-girl's eager fuck-hole, burying himself past one -- two of his oversized cock's three ridge rings.  She screams in half pain, half ecstasy and pushes back, hungry for his full length.  After pulling back only slightly, he pushes deeper, driving every inch of his gigantic dick into his willing partner who writhes in pleasure, impaled exactly as she wanted.");
 	outputText("\n\nThe pair quickly settles into a rhythm, punctuated with numerous grunts, groans, and moans of sexual excess.  To you it's almost a violent assault sure to leave both of them bruised and sore, but the cow-girl's lolling tongue and expression of overwhelming desire tells you otherwise.  She's enjoying every thrust as well as the strokes, gropes, and seemingly painful squeezes the minotaur's powerful hands deliver to her jiggling ass and ponderous tits.  He's little better, his eyes glazed over with lust as he continues banging the fuck-hole he found and all but mauling its owner.");
 	//[Next]
-	stats(0,0,0,0,0,0,10,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10, "cor", 0);
 	menu();
 	addButton(0,"Next",watchMinoCumSlutII);
 }
@@ -2136,6 +2136,6 @@ public function watchMinoCumSlutII():void {
 	outputText("They go at it for nearly an hour, oblivious to you watching them, before their intensity heightens as they near orgasm.  The results are almost explosive, both of them crying out as they begin twitching uncontrollably.  Clinging desperately to the cow-girl's ass, the minotaur pumps so much cum into her depths that it begins spurting out.  This accidental lubrication releases his grip and the pair collapse to the ground.  Yet the minotaur isn't finished, his man-milk spraying into the air almost like his still-erect dick is a hose and splattering down onto both of them.");
 	outputText("\n\nAs you look at the two cum-covered creatures laying there in their exhausted sex-induced stupors, the minotaur's thick horse-cock now slowly deflating, you realize that you've been touching yourself.  You make yourself stop in disgust.");
 	outputText("\n\nOnly now do you notice other faces peeking over ledges and ridges.  You count at least two goblins and one imp who quickly pull back.  From the sounds, they were busy getting themselves off.  Apparently this isn't an uncommon show, and the locals enjoy it immensely.");
-	stats(0,0,0,0,0,0,25,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 25, "cor", 0);
 	doNext(13);
 }			

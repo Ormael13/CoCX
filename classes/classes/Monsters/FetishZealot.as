@@ -1,5 +1,6 @@
 ﻿package classes.Monsters
 {
+	import classes.CoC;
 	import classes.Cock;
 	import classes.Creature;
 	import classes.Monster;
@@ -21,7 +22,7 @@
 				outputText("\nYou notice that some kind of unnatural heat is flowing into your body from the wound", false);
 				if (player.inte > 50) outputText(", was there some kind of aphrodisiac on the knife?", false);
 				else outputText(".", false);
-				game.stats(0, 0, 0, 0, 0, 0, (player.lib / 20 + 5), 0);
+				game.dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (player.lib / 20 + 5), "cor", 0);
 			}
 			super.postAttack(damage);
 		}
@@ -35,16 +36,16 @@
 		{
 			if (pcCameWorms){
 				outputText("\n\nThe fetish cultist ignores the perverse display and continues on as if nothing had happened...", false);
-				game.stats(0,0,0,0,0,0,-100,0);
+				game.dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 				game.doNext(5106);
 			} else {
 				game.zealotLossRape();
 			}
 		}
 
-		public function FetishZealot(mainClassPtr:*)
+		public function FetishZealot(game:CoC)
 		{
-			super(mainClassPtr);
+			super(game);
 			trace("FetishZealot Constructor!");
 		
 			init01Names("the ", "fetish zealot", "fetishzealot", "The zealot is clad in a bizarre set of religious robes.  They are similar to what you've seen on other religious leaders from home, but none that included the large slit at the front that lets his above average sized human dick stick out the front.");

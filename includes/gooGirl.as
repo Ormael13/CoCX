@@ -169,7 +169,7 @@ public function gooGalAttack():void {
 //Play – 
 public function gooPlay():void {
 	outputText("The goo-girl lunges, wrapping her slimy arms around your waist in a happy hug, hot muck quivering excitedly against you. She looks up, empty eyes confused by your lack of enthusiasm and forms her mouth into a petulant pout before letting go.  You shiver in the cold air, regretting the loss of her embrace.", false);
-	stats(0,0,0,0,0,0,3+rand(3)+player.sens/10,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 3+rand(3)+player.sens/10, "cor", 0);
 	combatRoundOver();
 }
 //Throw – 
@@ -177,7 +177,7 @@ public function gooThrow():void {
 	outputText("The girl reaches into her torso, pulls a large clump of goo out, and chucks it at you like a child throwing mud. The slime splatters on your chest and creeps under your " + player.armorName + ", tickling your skin like fingers dancing across your body.", false);
 	var damage:Number = 1;
 	damage = takeDamage(damage);
-	stats(0,0,0,0,0,0,5+rand(3)+player.sens/10,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5+rand(3)+player.sens/10, "cor", 0);
 	combatRoundOver();
 }
 //Engulf – 
@@ -257,7 +257,7 @@ public function genderlessLoseToGooGal():void {
 	
 	outputText("You awaken with a sputtering hack, water and gooey " + gooColor() + " cum spilling from your lungs. You've been returned to shore and other than a full-body soreness and a splitting headache, you seem none the worse for wear. Who knew cute little slimes could be so aggressive when they don't have sex organs to suck on?", false);
 	slimeFeed();
-	stats(0,0,0,0,0,4,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 4, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 //Defeat – Male
@@ -284,7 +284,7 @@ public function dudeLoseToGooGal():void {
 	else outputText("The girl's expression goes from pleased triumph to mild panic when your orgasm shows no sign of flagging, load after load racing into her body. She quickly snakes her tongue out of your urethra and tries to pull off of your " + cockDescript(x) + ", but her arm is too deep in your ass and she finds herself stuck! You rest your hands on the " + gooColor4() + " sludge of her goopy hair, fingers sinking into her slime as she tries to make room for your gushing, ivory torrent.  You clench your eyes in pleasure and surrender yourself to the feeling, your groin a font of creamy seed.  When you finally slow and open your eyes, you're a little surprised to find that the girl has become almost entirely white!  Her translucent skin retains a bit of the lake's " + monster.skinTone + " hue, but top to bottom, the goo-girl's body swirls with your cum, leaving her with the fattened appearance of pale pregnancy.", false);
 	outputText("  Her arm slides out of your rump and the goo-girl practically rolls into the lake, splashing into the depths lazily. It sure didn't feel like you lost that fight, you reflect while taking delicious swallows of cold air.", false);
 	slimeFeed();
-	stats(0,0,0,0,0,4,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 4, "lus", -100, "cor", 0);
 	slimeFeed();
 	cleanupAfterCombat();
 }
@@ -302,7 +302,7 @@ public function hermLoseToGooGal():void {
 	outputText("  Your spurting ecstasy floods the girl's jelly body, coloring her " + gooColor3() + " body white as she drinks deeply, coaxing a few seconds of gasping spasms into long, seed-spewing minutes of climaxing euphoria.", false);
 	
 	outputText("When you finally run dry, every muscle in your body aches with exhaustion and it feels like you haven't had anything to drink in months.  The slime slowly disentangles herself from your twitching form, ejecting you from the womb-like ardor of her squishy interior.  When she reforms her slender body, the goo-girl's belly bulges with your creamy load.  She gives you a beaming smile and pats her belly, sending ripples through her body with each wobbling slap.  The girl waves goodbye and slides back into the lake, giving you enough time to catch your breath and let your body recover.", false);
-	stats(0,0,0,0,0,4,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 4, "lus", -100, "cor", 0);
 	slimeFeed();
 	cleanupAfterCombat();
 }
@@ -354,7 +354,7 @@ public function femaleLoseToGooGal():void {
 			player.knockUp(16,85,1,1);
 		}
 	}
-	stats(0,0,0,0,0,4,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 4, "lus", -100, "cor", 0);
 	slimeFeed();
 	cleanupAfterCombat();
 }
@@ -371,7 +371,7 @@ public function gooPregVagBirth():void {
 	outputText("There is a lurching in your belly that steals the breath from you. As seconds pass, the quivering kicks increase and you're forced to the ground as your womb feels like it's been set aflame by the heat pouring from your stowaway goo-girl. You pant and spread your labia with two fingers, the chill of your hands on your inflamed sex so sweet that you almost cum from the mere touch. Your cervix clenches involuntarily and you try to relax as much as possible, but the slime inside of you hardly needs the help. Squishing and slurping in gouts of syrupy fluid, she trickles from your uterus, sliding out of your tunnel in spurting gouts. You sigh and let her force her seething warmth from within you, the small puddle of ooze growing larger as it pools together. Finally, the small, red heart pops out of your tunnel and you allow yourself a big gulp of chill air to resuscitate your seared lungs.\n\n", false);
 	
 	outputText("The small " + gooColor4() + " sludge quivers, but seems unable to take a human shape. Extending pseudopods, it experimentally prods at your skin, trying to gets its bearings. You shiver as the goo slides over your flesh, poking you wetly from time to time. When it finds your breasts, the goo works up your mounds and slurps at your teats, milk filling the blob with a creamy tint that makes it larger and gives its membrane a firmer texture. It takes about ten minutes to flop its way across your entire body before sliding off of you and wriggling at your feet. It shifts again, but this time, manages to form a featureless head. Slowly, gradually, it adds more, morphing shoulders, arms, a waist, and even hips. Her body ripples and the blank slime morphs into a perfect miniature copy of you! It stares up at its mother with a happy expression before lurching away, toward the lake. Even though you were just her incubator and template, you can't help but feel a little pride at your goo child entering the wild world with a fearless sense of exploration.", false);
-	stats(0,0,0,0,0,0,50,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 50, "cor", 0);
 }
 
 
@@ -503,7 +503,7 @@ public function gooMaleRape(type:Number = 1):void {
 		outputText("If only all of Mareth's denizens were so accommodating, you muse, as you gather your things and depart.", false);
 		coreDropChance();
 	}
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	slimeFeed();
 	cleanupAfterCombat();
 }
@@ -527,7 +527,7 @@ public function victoryHermSex():void {
 	//Corrupt victory ooze – (After specific sex scenes while the player has a 70+ corruption score)
 	if(player.cor >= 85 && rand(2) == 0) outputText("\n\nAs you're leaving, you happen to glance back at the lake and notice something strange; the sludge left by the melting shell of the goo-girl is quivering with renewed life! The swirling opalescence of your corrupt seed is clearly visible through her membrane, her " + gooColor11() + " slowly bleeding into a pale emerald hue. Your eyes widen as the muck regains solidity, first a head and then shoulders slowly rising from the puddle. The empty girl regains her shape, but the rippling within her does not stop. Gradually, her breasts shrink, flattening against her chest while a viridian phallus rises from between her legs.  Your cum floats down her torso and inflates a pair of jiggling, slimy balls.  The potency of your semen has reanimated the goo-girl, it seems, but has transformed her into an instinctual, mindless ooze. She- now a he- stares vacantly at you, the slick, green cock at his base stiffening, before he plunges into the lake. You'll have to check on your new son one of these days.", false);
 	coreDropChance();
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	slimeFeed();
 	cleanupAfterCombat();
 }
@@ -550,7 +550,7 @@ public function victoryRapeAGooGalAsFeeder():void {
 	
 	outputText("When you regain consciousness, your breasts finally feel empty, milked dry by your rough treatment of the goo-girl. Shaking your head, you look for a sign of the girl and spot something a short distance off in the lake. You almost don't recognize her at first, until you notice the tiny, jiggling horns poking out of the sides of her head. The cow-slime has apparently captured a shark girl and an anemone, her pale " + gooColor() + " membrane wrapping around their bodies like giant fists. She's holding them to each giant breast, kneading their faces against her quivering membrane as her periwinkle nipples gush with your milk, soaking their heads and filling their senses with your addictive fragrance. In short order, they wrap their mouths around the " + gooColor5() + " faucets and begin to drink deeply, the cow-goo's face a silent mirror of your previous climax. Two more girls being taught the joys of lactation, you murmur, touching yourself with a gleeful shudder. Forcing yourself to master the desire to keep watching, you clean yourself up and head out, pleased gurgles fading into the distance.", false);
 	coreDropChance();
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	//You've now been milked, reset the timer for that
 	player.addStatusValue("Feeder",1,1);
 	player.changeStatusValue("Feeder",2,0);
@@ -573,7 +573,7 @@ public function exhibitionismGooGirlVictoryRape():void {
 	
 	outputText("Your orgasms are as loud as you can make them, screaming, cursing, and praying in consecutive breaths until you're hoarse and your body is sore with exhaustion. The goo-girl looks just as drained from the performance, cradling you in her gooey body as much as resting against yours. The effect of your show has left your viewers wanting more, it seems, as they've partnered off. The anemone has entwined the shark girl and is giving her enough to keep the vicious female snarling in ecstatic throes as the two churn the water to thick foam. The stray minotaur has taken the man from behind and, despite its formidable size, has pulled his victim to the very hilt of its member, swollen balls slapping against his legs while the stuffed man jerks himself off again, lost in some private memory of your display. You give the goo-girl a kiss on her " + gooColor7() + "-flavored face as thanks for the wonderful time and she musses your hair playfully. You give them a final show as you slowly put your " + player.armorName + " back on, gradually covering up your oil-slick skin before leaving the monsters to their own sport.", false);
 	coreDropChance();
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	slimeFeed();
 	cleanupAfterCombat();
 }
@@ -593,7 +593,7 @@ public function normalFemaleRapesAGooGirl():void {
 	
 	outputText("You aren't sure how much time has passed when you finally regain your senses. The goo-girl nuzzles your cheek affectionately, perhaps thanking you for the unique experience. Slowly, regretfully, she flows off of you, suckling ooze lapping at your limbs with slurping kisses all over your body. When the two of you are finally separated, you notice that she's maintained your proportions exactly, a " + gooColor3() + " mirror of your body, jiggling alluringly. You sigh as she flows back into the lapping waves of the lake, missing the heat of her embrace already. Admittedly, you don't know if trying to wear her for an extended length of time would've been a good idea- you'd never get anything done! Retracing your steps, you recover your " + player.armorName + " and head back to camp.", false);
 	coreDropChance();
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	slimeFeed();
 	cleanupAfterCombat();
 }
@@ -608,7 +608,7 @@ public function spyOnGooAndOozeSex():void {
 	outputText("The small, crimson heart-shaped core in the girl's body swims within her form uncertainly. The expanding " + gooColor8() + " lengths gradually approach the jewel-like nucleus at the girl's center, their corrupt fluids swirling within the trembling shafts, moments from release. In panic, the girl's heart leaps up into her head and her eyes clench as her gaping mouth crinkles around the edges and she lurches forward in a tremendous sneeze. The slime core launches from her lips and arcs through the air before splashing safely away from the orgy. Without an intellect, the girl's now doll-like body coos wordlessly when the ooze men climax, unleashing a torrent of seething viridian into her. The murky cum floods the goo's vibration-sexualized form, filling her belly, limbs, and head with a creeping green tint. The hollow slime blissfully strokes her distorted form as the corrupt slime within her begins to work its masculine influence on her shape. Her overfull curves bubble and collapse as the last of her " + gooColor() + " goo is smothered by the corrupt slime semen.  When it's all over, the hyper-feminine slime's body has been sculpted to a slightly effete male. A bulge rises from between her legs, dripping into a fresh, gooey cock.\n\n", false);
 	
 	outputText("You hurry away before the five oozes take an interest in you next.", false);
-	stats(0,0,0,0,0,0,(4+player.cor/10),0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (4+player.cor/10), "cor", 0);
 	doNext(13);
 }
 
@@ -625,6 +625,6 @@ public function layBeeEggsInGoo():void {
 	
 	outputText("\n\nThis continues on for quite some time with the honey googirl greedily sucking down everything it can from your ovipositor, stroking it and squeezing your abdomen to work out all of its sweet fluid and eggs.  When you finally decide enough is enough, you retract your black tube and rise back up to your [feet].  Turning to look at the goo, you see her idly rubbing at her distended honey-colored belly, imitating a pregnant mother before she slides back down the lakeshore; your numerous eggs bounce around inside her infused body.  She turns one last time to you and waves before sinking below the surface.");
 	player.dumpEggs();
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }

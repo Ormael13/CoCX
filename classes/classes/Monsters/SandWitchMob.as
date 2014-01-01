@@ -1,5 +1,6 @@
-package classes.Monsters 
+package classes.Monsters
 {
+	import classes.CoC;
 	import classes.Monster;
 	
 	/**
@@ -24,9 +25,9 @@ package classes.Monsters
 			game.loseToSammitchMob();
 		}
 
-		public function SandWitchMob(mainClassPtr:*)
+		public function SandWitchMob(game:CoC)
 		{
-			super(mainClassPtr);
+			super(game);
 			init01Names("the ","sand witches","sandwitchmob","You are surrounded by a veritable tribe of sand witches.  Like the ones that roam the sands, they have simple robes, blond hair, and four big breasts that push at the concealing cloth immodestly.  Glowering at you hatefully, the pack of female spellcasters readies itself to drag you down with sheer numbers.",true);
 			init02Female(VAGINA_WETNESS_WET,VAGINA_LOOSENESS_LOOSE);
 			init03BreastRows(["DD"],["DD"]);

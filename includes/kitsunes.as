@@ -127,7 +127,7 @@ public function followTheWillOWisp(firstTime:Boolean = false):void {
 	if(!firstTime) {
 		outputText("The flame suddenly darts off into the darkness of the trees, and you find yourself unable to resist giving chase.  It feels as though you are being drawn to it by some otherworldly force, but every time your suspicions begin to grow, the flame pauses to float around you, tickling your erogenous zones and then pressing onward." );
 	//+15 Lust
-		stats(0,0,0,0,0,0,15,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 15, "cor", 0);
 	}
 	if((player.lust >= 100 || player.inte < 20) && !firstTime){  
 		mansion(false,false);
@@ -356,7 +356,7 @@ public function kitSuneLetHerMansion(willing:Boolean = true):void {
 	outputText("Her warm " + ((player.biggestCockArea() > 80) ? "cunt" : "asshole") + " still grips your cock tightly, dragging you down with her.  You collapse on top of her, sliding off of the redhead's cock as you tumble into the golden curls of the blonde's hair.");
 	if(player.gender >= 2) outputText("  A flood of seed begins to spill from your abused pussy, gushing over the redhead's groin and spreading into the water.  The flow is soon stemmed by the introduction of the black-haired girl's tongue, plush lips pressed against your cunt as she hungrily sucks down the outpouring of semen.  She gulps loudly and gluttonously, spreading your lips with her thumbs and swallowing every last delicious salty morsel, her stomach swelling and quivering as your own overfull abdomen begins to deflate in equal measure.");
 	outputText("  As your twitching cock relieves itself of the last of your seed inside the blonde's " + ((player.biggestCockArea() > 80) ? "pussy" : "ass") + ", you feel your strength slipping away from you with each spasm, your eyelids growing heavy with an uncommon weariness.\n\n");
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	doNext(kitsuneStillHungryMansion);
 } //End letHer() 	
 
@@ -425,7 +425,7 @@ public function kitsuneShoveHerMansion(willing:Boolean = true):void {
 		outputText("The slithering tongue coils around the base of the redhead's softening member, pulling it from your " + vaginaDescript() + " with a 'plop!'  A flood of seed begins to spill from your abused pussy, gushing over the redhead's groin and spreading into the water.  The flow is soon stemmed by the introduction of the black-haired girl's tongue, plush lips pressed against your cunt as she hungrily sucks down the outpouring of semen.  She gulps loudly and gluttonously, spreading your lips with her thumbs and swallowing every last delicious salty morsel, her stomach swelling and quivering as your own overfull abdomen begins to deflate in equal measure.\n\n");
 		outputText("As your twitching cock relieves itself of the last of your seed inside the blonde's pussy, you feel your strength slipping away from you with each spasm, your eyelids growing heavy with an uncommon weariness.\n\n");
 	}
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	doNext(kitsuneStillHungryMansion);
 } // End shoveHer()
 
@@ -457,7 +457,7 @@ public function kitsuneStillHungryMansion():void
 	outputText("A viscous stream of femcum crashes against your face, dribbling down your chin as the blonde achieves climax shortly after you do, and altogether the four of you ride the waves of pleasure for what feels like ages.  Each passing second finds you more and more fatigued, and your eyelids grow heavier and heavier, muscles growing weak.\n\n");
 	outputText("Exhausted by the ordeal, you relax into a blissful stupor, only vaguely aware of the feeling of being dragged onto the deck.  The last thing you recall before slipping into unconsciousness is the three sisters crawling up alongside you, coaxing your twice-spent member back to life yet again with their magic, eyes glinting hungrily." );
 	//Increase PC cum production slightly due to residual effects from the kitsunes' magic.
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	outro();
 } //end stillHungry();
 
@@ -602,13 +602,13 @@ outputText( "Thick streams of cum arc through the air, raining down on the three
 	}
 	outputText( "\n\nEvery twitch and spasm of your loins finds you feeling a little more fatigued, your eyelids growing heavy with drowsiness as you can feel the life being drained from you.  Panting desperately, the three sisters gradually regain their senses as your flagging tentacles slowly lower them down into the water" + ((player.cumQ() > 1000) ? ", their arms wrapped protectively around their cum-bloated bellies" : "" ) + ".  Exhausted from your ordeal, you let yourself relax into a blissful stupor, only vaguely aware of the feeling of being dragged up onto the deck.  The last thing you see before going unconscious is the three sisters crawling up around you, coaxing your spent tentacles back to life, their eyes glinting hungrily.");
 	outro();
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 }
 
 public function outro(tentacles:Boolean = false):void {
 	fatigue(15);
 	kitsuneSprite();
-	stats(0,-2,0,0,0,0,0,0);
+	dynStats("str", 0,"tou", -2, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 	if(player.fatigue > 80 && player.fatigue < 100)
 	{
 		outputText("\n\nYour dreams are haunted by visions of yourself wandering through the halls of an impressive manor, searching desperately for a way out.  No matter where you turn, the twisting hallways all seem to turn back on each other.  You are trapped, forever doomed to wander the halls of this manor, being toyed with at the whims of your three beautiful mistresses.");
@@ -729,7 +729,7 @@ public function kitsuneEntwine():void {
 	outputText("The kitsune closes in on you with a mischievous glint in her eyes.  You raise your guard, keeping your eyes trained on her to ensure that she doesn't try to pull anything.  Suddenly, you feel something coiling around your " + player.leg() + ", and let out a yelp as you are suddenly lifted into the air, entangled in the kitsune's tails!");
 	outputText("\n\nYour limbs are bound tightly while coils of delightfully soft fur caress you on all sides.  You can do little besides struggle against your furry bonds as the constant writhing of her tails sends shudders flying up and down your spine.");
 	monster.createStatusAffect("PCTailTangle",0,0,0,0);
-	stats(0,0,0,0,0,0,10+player.sens/8,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10+player.sens/8, "cor", 0);
 	combatRoundOver();
 }
 //Struggle - event 5077 in combat.as
@@ -747,7 +747,7 @@ public function kitsuneStruggle():void {
 	else {
 		outputText("  Despite your valiant efforts, your wriggling only serves to get you deeper entangled in the fluffy tails, eliciting an amused giggle from the kitsune.");
 		outputText("\n\nShe licks her lips, running her hands along you wherever she can find exposed flesh.  Her fingertips leave small trails of dazzling blue that make you flush with lust - you must escape her grasp soon or else you will be like putty in her hands!");
-		stats(0,0,0,0,0,0,5+player.sens/10,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5+player.sens/10, "cor", 0);
 		monster.addStatusValue("PCTailTangle",1,3);
 		combatRoundOver();
 	}
@@ -757,7 +757,7 @@ public function kitsuneWait():void {
 	outputText("Happily, you slump deeper into the fluffy tails, eliciting an amused giggle from the kitsune.");
 	if(silly()) outputText("  You're so glad you got to touch fluffy tail.");
 	outputText("\n\nShe licks her lips, running her hands along you wherever she can find exposed flesh.  Her fingertips leave small trails of dazzling blue that make you flush with lust - you must escape her grasp soon or else you will be like putty in her hands!");
-	stats(0,0,0,0,0,0,5+player.sens/10,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5+player.sens/10, "cor", 0);
 	combatRoundOver();
 }
 
@@ -768,7 +768,7 @@ public function foxFireAttack():void {
 	var damage:int = 5+rand(20);
 	damage = takeDamage(damage);
 	outputText(" (" + damage + ")");
-	stats(0,0,0,0,0,0,15+player.sens/10,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 15+player.sens/10, "cor", 0);
 	combatRoundOver();
 }
 
@@ -860,7 +860,7 @@ public function kitSuneTeases():void {
 	else if(select == 2) outputText("Turning her back to you, the kitsune fans out her tails, peering back as she lifts the hem of her robe to expose her plump hindquarters.  Her tails continually shift and twist, blocking your view, but it only serves to make you want it even <i>more</i>, licking your lips in anticipation.");
 	//Redhead only:
 	else outputText("The kitsune sways her hips enticingly as she appears in front of you abruptly, rubbing up against your side.  Her teasing caresses make you shiver with arousal, and you can feel something thick and warm pressing against your [hips].  She gives you a wry grin as she breaks away from you, sporting an obvious tent in her robes.  \"<i>Just you wait...</i>\"");
-	stats(0,0,0,0,0,0,5+player.sens/7,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5+player.sens/7, "cor", 0);
 	combatRoundOver();
 }
 
@@ -958,7 +958,7 @@ public function loseFightToHerms():void {
 	}
 	outputText("\n\nSighing deeply in utter satisfaction" + ((player.cumQ() > 350) ? " with one hand resting on her stomach" : "" ) + ", she leans back, swiveling her hips a little to tease your spent cock.  Drenched in her " + ((monster.hairColor == "red") ? "musky futa-cum" : "feminine juices") + ", you twitch lightly as bliss and fatigue spread through your body in equal measure.  She leans forward again, dropping her lips to your ear, and whispers a short incantation while stroking the side of your face.\n\n");
 	outputText("The last thing you see before blacking out is a pair of delightfully plump, round cheeks jiggling happily as the kitsune gathers her robes.");
-	stats(0,0,0,0,1,1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -992,7 +992,7 @@ public function femalesAndNuetersLoseToKitsunes():void {
 	outputText("Your " + ((player.gender >= 2) ? vaginaDescript() : assholeDescript() ) + " bears down on her tail tightly, squeezing and rippling around the soft fur.  Powerful spasms of pleasure shudder through you as your orgasm comes into full effect." + ((player.wetness() >= 4) ? "  A hot spray of femcum arcs through the air, splattering across the horny fox lady's behind and drenching her tails with your viscous fluids." : "") + "  Her tail continues to thrust into you violently through your climax, prolonging it for several minutes, heedless of your desperate thrashing.  At long last, it whips out of you, slinging your slick fluids into the air with a wet slap, and exhaustion begins to take pleasure's place.  You feel as though you haven't slept in days, your eyelids growing heavy as the kitsune leans up, her lips touching the edge of your ear as she whispers a short incantation while stroking the side of your face.\n\n");
 	
 	outputText("The last thing you see before blacking out is a pair of delightfully plump, round cheeks jiggling happily as the kitsune gathers her robes.");
-	stats(0,0,0,0,1,1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -1051,7 +1051,7 @@ public function blondeKitsuneRapesSmallWangs():void {
 	outputText("Your last sight before blacking out from the kitsune's spell is a span of creamy white flesh jiggling seductively, quivering gently beneath a cluster of tails.");
 	//<b>You'll probably come to your senses in 8 hours or so, missing X gems</b>" );
 	// Advance time 8hrs, lose X gems, return to camp. +Sensitivity +Libido
-	stats(0,0,0,0,1,1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -1078,7 +1078,7 @@ public function loseToBlackHairLatexWhileMilky():void {
 	outputText("She whispers an incantation in a strange language, and you can slowly feel your already pleasure-worn consciousness leaving you, replaced with a warm, comforting darkness.  Your dreams are haunted by visions of yourself being turned into a human dairy cow, forced to live out the rest of your days as a living milk factory for your hungry kitsune mistress.");
 	//<b>You'll probably come to your senses in 8 hours or so, missing X gems.</b>" );
 	//Advance time 8 hours, lose X gems, return to camp. +Sensitivity, +Libido, +Lactation Amount
-	stats(0,0,0,0,1,1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", -100, "cor", 0);
 	player.boostLactation(1.5);
 	if(player.hasPerk("Feeder") >= 0) {
 		player.addStatusValue("Feeder",1,1);
@@ -1126,7 +1126,7 @@ public function loseToKitsunesWithBallsAndHighCumQ():void {
 	outputText( "As your [cock biggest] begins to flag, your magically enhanced balls slowly return to their normal size.  Fatigue fills your muscles, and you find it hard to keep your eyes open.  The last thing you see before passing out is a quivering tattooed ass rising off your chest, two hands lovingly cradling a pregnant-looking stomach as it jiggles softly.");
 	//outputText("<b>You'll probably come to your senses in 8 hours or so, missing X gems.</b>" );
 	//Advance time 8 hours, lose X gems, return to camp. +Sensitivity, +Libido, +Cum Production
-	stats(0,0,0,0,1,1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", -100, "cor", 0);
 	if(player.cumQ() < 30000) player.cumMultiplier += 5;
 	cleanupAfterCombat();
 }
@@ -1180,7 +1180,7 @@ public function getRapedByRedHeadFutaKitsune():void {
 	outputText("She leans down over you and whispers a line of some strange language into your ear, and almost immediately you can feel your consciousness begin to fail you.  The last thing you see before blacking out is her half-flaccid cock swaying happily between her legs as she bends down to pick up her clothes, flashing you one last look at her wide, round ass.\n\n");
 	
 	//Advance time 8 hrs, lose X gems, return to camp. +Sensitivity, +Libido.
-	stats(0,0,0,0,1,1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -1356,7 +1356,7 @@ public function fuckAKitsuneVaginally():void {
 	
 	outputText("Finally, you turn to gather up your things, cleaning yourself off a little and pulling your " +  player.armorName + " back on.  When you turn around again to check up on the insensate kitsune, you are left scratching your head, staring at the spot where she was mere moments ago.  All that remains of her is a puddle of mixed fluids, already mostly absorbed by the ground, and the faint sound of mischievous laughter filtering through the trees.");
 	//Advance time 1hr and return to camp. +Sensitivity, +Libido
-	stats(0,0,0,0,1,1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -1428,7 +1428,7 @@ public function putItInAKitsunesAssWin():void {
 	
 	outputText("You take a moment to recuperate, and then begin to gather your things, but when you turn your attention back to the kitsune, there's no sign of her save for the sound of a feminine giggle drifting through the leaves.");
 	//Advance time 1hr and return to camp. +Sensitivity, +Libido
-	stats(0,0,0,0,1,1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -1468,7 +1468,7 @@ public function tribbingWithAKitsune():void {
 	// Advance time 1hr and return to camp. +Sensitivity, +Libido
 	// Possibly increase clitLength
 	player.clitLength += 0.1 + rand(3)/10;
-	stats(0,0,0,0,1,1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -1513,7 +1513,7 @@ public function tailJobKitsuneWin():void {
 	
 	outputText("\"<i>Come look me up anytime, dear!</i>\"  she calls back when she is safely out of sight.  You briefly consider giving chase, but decide it is not worth the effort, gathering your " + player.armorName + " and turning back toward camp." );
 	//Advance time 1hr and return to camp.  +Sensitivity
-	stats(0,0,0,0,0,5,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 5, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -1589,7 +1589,7 @@ public function kitsunesGetBonedBy3PlusTentacles():void {
 	
 	outputText("\"<i>Tentacles...</i>\" she repeats, shuddering from head to toe." );
 	//Advance time 1hr and return to camp.  +Sensitivity, +Libido
-	stats(0,0,0,0,1,1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -1698,7 +1698,7 @@ public function fuckDraftBlond():void {
 	
 	outputText("You can't be certain how long you were asleep, but when you come to your senses, you are alone.  A musky trail of fluids leads into the underbrush, and though you doubt that she could have gotten far in her condition, you need to return to check on your camp.  As you gather your things, you pause briefly and smirk, certain you can hear the sound of moaning filtering through the trees.");
 	//Advance time 1hr and return to camp. +Sensitivity, +Libido
-	stats(0,0,0,0,1,1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", -100, "cor", 0);
 	consumeItem("F.Draft",1);
 	cleanupAfterCombat();
 }
@@ -1785,7 +1785,7 @@ public function doseAKitsuneWithOviElixirs():void {
 	//{replace normal kitsune loot tables with randomly colored eggs}
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] = shortName;
 	//Advance time 1hr and return to camp. +Sensitivity, +Libido
-	stats(0,0,0,0,1,1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -1846,7 +1846,7 @@ public function lactaidDoseAKitSune():void {
 
 	outputText( "\n\nShe groans deeply as an unexpected climax shudders through her chest, fresh fountains of milk spurting everywhere like a warm, creamy sprinkler and raining down around you.  Even after you lie back in satisfaction to catch your breath, the kitsune's breasts continue to leak milk, rivulets of creamy white slowly flowing down the massive curvature of her chest.  When you stand up to clean yourself off at last, you look back to see the horny fox-woman hefting one of her engorged jugs to her lips, suckling deeply." );
 	//Advance time 1hr and return to camp. +Sensitivity, +Libido
-	stats(0,0,0,0,1,1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", -100, "cor", 0);
 	//consume lactaid
 	consumeItem("Lactaid",1);
 	cleanupAfterCombat();
@@ -1922,7 +1922,7 @@ public function hotdogAnalInKitsuneButtDontLetTailTickleYourNose():void {
 	}
 	outputText("\n\nShe rolls onto her side, curling up in a puddle of sweat and sex, resting her hands on her " + ((player.cumQ() > 1000) ? "inflated" : "pudgy" ) + " stomach and sighing contentedly, the tips of her tails gently twitching with residual pleasure.  You take a moment to recuperate, then gather your things and turn toward camp, leaving the insensate kitsune to recover on her own.");
 	//Advance time 1hr and return to camp. +Sensitivity, +Libido
-	stats(0,0,0,0,1,1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -1979,7 +1979,7 @@ public function feederTheKitsunes():void {
 	//You've now been milked, reset the timer for that
 	player.addStatusValue("Feeder",1,1);
 	player.changeStatusValue("Feeder",2,0);
-	stats(0,0,0,0,0,3,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 3, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -2067,7 +2067,7 @@ public function getABJFromAFoxGirl():void {
 	}
 	outputText( "\n\nSighing in satisfaction, you step back from the tree to catch your breath." + ((player.cumQ() > 1000) ? "  The kitsune leans back, cradling her full stomach with a blissful smile on her face and a few strings of cum-laced spittle dripping down her chin, a small puddle of juices spreading between her knees.  How she can look so happy after a brutal facefucking like the one you just gave her is beyond you, but by the look of things she's quite content with the results." : "  The kitsune leans back, laying a hand on her stomach and rubbing it lightly.  An audible gurgle reaches your ears, and she sighs bemusedly, shaking her head.") + "  Either way, it doesn't look like the exhausted girl is going to be getting up soon, so you gather your things and head back to camp.");
 	//Advance time 1hr and return to camp. +Sensitivity, +Libido
-	stats(0,0,0,0,1,1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -2098,7 +2098,7 @@ public function getLickedByKitsunes():void {
 	outputText("Her tongue continues to wriggle against your quivering walls throughout the duration of your thrashing climax, hungrily funneling every drop that comes rushing out into her mouth." + ((player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) ? "  Streams of girlcum spray from your slavering cunt, soaking her face in the moments before she opens her mouth wide, eagerly swallowing all that she can." : "" ) + "  After what feels like an eternity, your orgasm begins to wane, the shivering pulses of pleasure ebbing away and your mind slowly clearing.  Panting heavily, you loosen your death grip on her head, letting her pull back to catch her breath as you collapse on your back to do the same.\n\n");
 	
 	outputText("She licks her lips in satisfaction, then wipes her mouth on her sleeve, sighing happily before slumping back to rest against the side of a tree.  You lie splayed out on the ground in ecstasy for several minutes before finally summoning up the strength to stand, and when you do so, a cursory glance around suggests that the wily kitsune has made her getaway.  As you gather your things and prepare to head back to camp, you can almost hear the faint echo of a mischievous giggle filtering through the forest.");
-	stats(0,0,0,0,1,1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 	
@@ -2139,7 +2139,7 @@ public function rideDatRedheadKitsuneCockIntoTheSkyDiamonds():void {
 	
 	outputText("Once her colossal load has finished draining out - primarily onto her - you clean up and begin to dress yourself once more.  Your attention is drawn by the sound of rustling leaves, and when you turn to look, a sextet of red tails disappears into the bushes, followed shortly after by a playfully waving hand.");
 	//Advance time 1hr and return to camp. +Sensitivity, +Libido
-	stats(0,0,0,0,1,1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", -100, "cor", 0);
 	slimeFeed();
 	cleanupAfterCombat();
 }
@@ -2212,7 +2212,7 @@ public function helixZeKitsunes():void {
 	
 	outputText("You turn to gather your " + player.armorName + ", cleaning up and dressing once more, then whip around to the sound of rustling leaves.  A set of sticky footprints leads your gaze to the edge of a bush, a flash of red tails and a pair of plump hind cheeks disappearing into the forest.");
 	//Advance time 1hr and return to camp. +Sensitivity, +Libido
-	stats(0,0,0,0,1,1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -2311,7 +2311,7 @@ public function nonFutaRedHeadIsWorstRedheadLapsittingHandjobThingIDontKnow():vo
 
 	outputText( "Finally, she shuts her eyes and rests her head against your shoulder, too insensate to react to your continued stroking with more than a gentle shiver.  It's almost a shame that you need to return to camp, as you have little doubt that she would probably curl up to sleep in your lap if you gave her the chance.  You set her aside in the grass, then clean yourself off before heading back." );
 	//Return to camp, advance time 1hr, +Sensitivity
-	stats(0,0,0,0,0,3,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 3, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -2365,7 +2365,7 @@ public function nonFutaRedHeadBondageIGuessYouTieHerUpWithYourPenisThenHuh():voi
 	}
 	outputText( "\n\nShe moans in insensate bliss as she sways back and forth, dripping with your steamy seed.  Her eyes are the merest sliver of jade beneath heavy lids, her tongue hanging out lazily as she hangs in helpless pleasure from her bonds.  " + ((player.cor > 50) ? "Smirking lightly, you give the dazed kitsune a patronizing slap on the ass, eliciting a delirious groan.  She remains dangling from the lofty bough as you gather your things, turning back toward camp." : "Carefully, you pull her down from the tree, laying her on her side at its base.  You spread her robe over her naked body like a blanket, patting her on the head gently as she drifts to sleep, then turn to make your way back to camp." ) );
 	//advance time 1hr and return to camp, +Sensitivity, +Libido
-	stats(0,0,0,0,1,1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -2440,19 +2440,19 @@ public function readKitsuneBooks():void {
 	if(choice == 0) {
 		outputText("It's a rather dry read, but informative.  Chapter after chapter explains the underlying theory of magic, going to almost excruciating levels of detail.  " + ((player.inte < 50) ? "Much of it flies over your head, but the book does manage to clarify a few points.  You close the book and set it back on the shelf, feeling like you've learned something." : "Much of it is merely review, but you do manage to glean a few facts before closing the book and setting it back on the shelf.") );
 		//+2 INT, Advance 1hr and return to camp
-		stats(0,0,0,2,0,0,0,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 2, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 		doNext(13);
 	}
 	else if(choice == 1) {
 		outputText( "It seems to be a religious text of some sort.  As you flip through the pages, you read about various rituals and scriptures, familiarizing yourself with the spirits and gods of this land.  You close the tome at last, setting it reverently back on the shelf and reflecting upon the teachings housed within." );
 		//-1 COR, Advance 1hr and return to camp
-		stats(0,0,0,0,0,0,0,-1);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", -1);
 		doNext(13);
 	}
 	else {
 		outputText( "You start to flip through the pages, a deep blush slowly forming on your cheeks the further you read into what is clearly an erotic novella of some form.  Graphic descriptions of women being violated by tentacle beasts abound on almost every page, " + ((player.lib < 50) ? "and you slam the book shut before reading further, already feeling a heat building in your groin." : "and you lick your lips hungrily, poring over every line and word of lascivious prose.") );
 		//+ 1 LIB, + 5 LUST, Advance 1hr and return to camp
-		stats(0,0,0,0,1,0,5,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 0, "lus", 5, "cor", 0);
 		doNext(13);
 	}
 }
@@ -2480,7 +2480,7 @@ public function meditateLikeAKitsuneEhQuestionMark():void {
 			//Apply Nine-Tails perk if applicable.
 			player.tailVenom = 9;
 			player.createPerk("Enlightened Nine-tails",0,0,0,0);
-			stats(0,0,0,2,0,0,-20,-2);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 2, "lib", 0, "sen", 0, "lus", -20, "cor", -2);
 		}
 		consumeItem("FoxJewl",1);
 		doNext(13);
@@ -2489,7 +2489,7 @@ public function meditateLikeAKitsuneEhQuestionMark():void {
 		//Normal:
 		outputText( "You sit down carefully on a small mat in front of the shrine and clear your mind.  Closing your eyes, you meditate on the things you've learned in your journey thus far, and resolve to continue fighting against the forces of corruption that permeate the land.  As you open your eyes again, you feel as if a great burden has been lifted from your shoulders.\n\nWith a renewed vigor for your quest, you stand up and set off for camp." );
 		//-2 COR, -20 LUST, +1 INT, Advance 1hr and return to camp.
-		stats(0,0,0,1,0,0,-20,-2);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 1, "lib", 0, "sen", 0, "lus", -20, "cor", -2);
 		doNext(13);
 	}
 }
@@ -2515,7 +2515,7 @@ public function takeAKitsuneStatue():void {
 	clearOutput();
 	outputText( "The thought of how many gems you'll be able to get for it is enough to quickly suppress those feelings, avarice winning out over guilt.");
 	//+10 COR, add Gold Statue to inventory, Advance 1hr and return to camp
-	stats(0,0,0,0,0,0,10,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10, "cor", 0);
 	menuLoc = 2;
 	shortName = "GldStat";
 	takeItem();

@@ -159,7 +159,7 @@ public function heckelOrallyFixated():void {
 		outputText("Heckel pulls herself slowly from your throat, her dick finally coming free with a loud POP.  You moan as its girth leaves you, your throat feeling strangely empty without it. A strand of semen drips from her tip as she stands above you, but you greedily move your head to catch it and swallow the salty treat down. Heckel snickers at this before falling down on the bench, looking you over appreciatively.\n\n", false);
 	
 		outputText("\"<i>By Marae, " + player.short + ", you've got quite the mouth. I'm impressed, and that doesn't happen often.</i>\" She brings a paw to her chin as if thinking, before finally reaching it out and ruffling your hair. \"<i>You know, you aren't half bad to be around, and not just for the sex. Don't be a stranger around here, alright?</i>\" With that she stands and heads back into the showers, giving you time to clean up and head back to camp.", false);
-		stats(0,0,0,0,0,4,-100,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 4, "lus", -100, "cor", 0);
 		doNext(13);
 	}
 	//Increment BJ count
@@ -175,7 +175,7 @@ public function heckelOralFixationII():void {
 	outputText("Before you can start thinking of a way out of the situation, she growls loudly above you.  Her hands grip the back of your head and pull you towards her, burying your face in wet fur and her knot in your mouth. You feel her lean over you as your vision goes dark, your entire face buried in the fur of her groin. Her entire cock seems to flex inside you as her hips thrust forward, and a moment later you feel a burning heat travelling down your throat. Your hands go to the ground to steady yourself as she pulls herself suddenly away, her dick pulling out of your gullet with a long slurp and giving you a chance to breathe clearly again. You barely get one breath in before you realize that she's still cumming, and a thick stream of jism lands across your face and into your open mouth as she paws herself off the rest of the way. Unable to do anything else at this point, you simply fall back onto your " + buttDescript() + " and let her cum across your face two more times, her tongue lolling out of her mouth as she finishes.\n\n", false);
 
 	outputText("When she's finally emptied herself on your face, she falls down onto the bench in front of you. Before you can say anything, she extends a paw and ruffles your semen-streaked hair. \"<i>Heh, not bad fresh meat. If you can learn your place on the food chain here, we might have a beautiful partnership ahead of us. If you still think you can keep up, that is.</i>\" She winks at you as she stands again, tossing you her towel from earlier as she heads towards the showers.\n\n", false);
-	stats(0,0,0,0,1,4,(10+player.lib/10+player.sens/10),0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 4, "lus", (10+player.lib/10+player.sens/10), "cor", 0);
 	doNext(13);
 }
 
@@ -271,7 +271,7 @@ public function heckelLovesAnal2():void {
 	outputText("You lay on the bench for a few moments as Heckel ruffles your hair again. \"<i>Not bad, partner. You're the best fuck I've had in years, you know that? Not to mention the best workout!</i>\"\n\n", false);
 	
 	outputText("She laughs as she stands and heads for the shower, letting you clean yourself up and head back to camp.", false);
-	stats(0,0,0,0,0,4,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 4, "lus", -100, "cor", 0);
 	doNext(15);
 }
 
@@ -310,7 +310,7 @@ public function dominateHeckel():void {
 		if(flags[kFLAGS.TIMES_DOMMED_HECKEL] > 0) outputText(" AGAIN");
 		outputText("...</i>\"");
 		outputText("\n\nTime to claim your prize...");
-		stats(.5,0,0,0,0,0,0,0);
+		dynStats("str", .5,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 		menu();
 		addButton(0,"Next",dominateHeckelConclusion);
 		flags[kFLAGS.TIMES_DOMMED_HECKEL]++;
@@ -389,6 +389,6 @@ public function dominateHeckelConclusion():void {
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0) outputText(", then give Lottie a high five");
 		outputText(".  You really love bacon.");
 	}
-	stats(0,0,0,0,0,-2,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
 	doNext(13);
 }

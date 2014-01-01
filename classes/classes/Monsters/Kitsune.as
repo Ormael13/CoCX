@@ -1,5 +1,6 @@
 package classes.Monsters
 {
+	import classes.CoC;
 	import classes.Cock;
 	import classes.Monster;
 	import classes.CockTypesEnum;
@@ -33,11 +34,11 @@ package classes.Monsters
 			}
 		}
 
-		public function Kitsune(mainClassPtr:*, hairColor:String)
+		public function Kitsune(game:CoC, hairColor:String)
 		{
-			super(mainClassPtr);
+			super(game);
 
-			if (rand(3) != 2) mainClassPtr.flags[kFLAGS.redheadIsFuta] = 1;
+			if (rand(3) != 2) game.flags[kFLAGS.redheadIsFuta] = 1;
 			init01Names("a ", "kitsune", "kitsune",
 					"A kitsune stands in front of you, about five and a half feet tall.  She has a head of " + ({
 						"blonde": "long flaxen",
@@ -45,7 +46,7 @@ package classes.Monsters
 						"red": "unkempt, shoulder-length reddish"
 					}[hairColor]) +
 							" hair.  She appears mostly human, except for a pair of large, furry ears poking through her hair and six luxurious silky tails swaying in the air behind her.  Her robes are revealing but comfortable-looking, hugging her voluptuous curves and exposing large swaths of tattooed skin.  A layer of ornate tattoos covers patches of her exposed flesh, accentuating her feminine curves nicely, and each movement brings a pleasant jiggle from her plump backside and large breasts.");
-			if (hairColor=="red" && mainClassPtr.flags[kFLAGS.redheadIsFuta] == 1) {
+			if (hairColor=="red" && game.flags[kFLAGS.redheadIsFuta] == 1) {
 				init02Male(new Cock(rand(13) + 14,1.5 + rand(20)/2,CockTypesEnum.HUMAN),
 						2,2 + rand(13),1.5,player.ballSize * 10);
 			}

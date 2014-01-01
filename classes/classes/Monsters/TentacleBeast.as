@@ -1,5 +1,6 @@
 ﻿package classes.Monsters
 {
+	import classes.CoC;
 	import classes.Cock;
 	import classes.Creature;
 	import classes.Monster;
@@ -63,9 +64,9 @@
 			else game.eventParser(special2);
 		}
 
-		public function TentacleBeast(mainClassPtr:*)
+		public function TentacleBeast(game:CoC)
 		{
-			super(mainClassPtr);
+			super(game);
 			trace("TentacleBeast Constructor!");
 			init01Names("the ", "tentacle beast", "tentaclebeast", "You see the massive, shambling form of the tentacle beast before you.  Appearing as a large shrub, it shifts its bulbous mass and reveals a collection of thorny tendrils and cephalopodic limbs.");
 			init02Male([new Cock(40,1.5),new Cock(60,1.5),new Cock(50,1.5),new Cock(20,1.5)],0,0,3);

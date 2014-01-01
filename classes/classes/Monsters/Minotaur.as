@@ -1,5 +1,6 @@
 ﻿package classes.Monsters
 {
+	import classes.CoC;
 	import classes.Creature;
 	import classes.Monster;
 	import classes.CockTypesEnum;
@@ -46,15 +47,15 @@
 					(hasAxe?"<b>This minotaur seems to have found a deadly looking axe somewhere!</b>":"");
 		}
 
-		public function Minotaur(mainClassPtr:*)
+		public function Minotaur(game:CoC)
 		{
-			super(mainClassPtr);
+			super(game);
 			//Most times they dont have an axe
 			hasAxe = rand(3)==0;
 			var furColor:String = Appearance.randomChoice("black","brown");
 
 			trace("Minotaur Constructor!");
-			trace(mainClassPtr.flags);
+			trace(game.flags);
 			init01Names("the ","minotaur","minotaur","");
 			var ballSize:Number = 2 + rand(13);
 			init02Male(new Cock(rand(13) + 24,2 + rand(3),CockTypesEnum.HORSE),2, ballSize,1.5,ballSize * 10);

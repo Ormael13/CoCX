@@ -49,7 +49,7 @@ public function followDatFrog():void {
 	outputText("\n\nYou giggle drunkenly to yourself as a frog egg the size of an apple squeezes inside you.  If you weren’t so lost in mind-bending pleasure, you might be concerned at the pressure.  Instead, you just feel more dizzy - those eggs must be lubed with the frog girl’s slime - and with one inside you, the world begins to spin.");
 	outputText("\n\n\"<i>One down...</i>\" the frog girl hisses through gritted teeth.  But you can’t find the wherewithal to even raise an eyebrow at her words.  Pressure builds again against your asshole, and the frog girl pushes another massive, squishy egg into you.  \"<i>Unff!</i>\" she grunts, shaking with the effort of forcing her eggs into your body.");
 	outputText("\n\nYou giggle again, loving the way the world spins with every egg fed into you.  Egg after egg, she lays into you.  It’s finally too much for you and your mind collapses.  The world completely dissolves into a swirling collage of color, sensation, and sound.");
-	stats(0,0,0,0,0,1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 1, "lus", -100, "cor", 0);
 	menu();
 	addButton(0,"Next",getFrogButtFilled);
 }
@@ -59,7 +59,7 @@ public function getFrogButtFilled():void {
 	outputText("\n\nAnd the eggs.  Oh hell, the eggs!  You splash in the water, righting yourself and looking down at your swollen belly.  You look nine months pregnant!  The frog girl filled you with her eggs and took off leaving you to birth them.  You can’t seem to force them out, either - it looks like you’ll just have to carry these eggs to term.");
 	outputText("\n\nWrapping your arms under your heavy belly, you clamber out of the pool.  Water sluices down your naked body, leaving the last of the slime behind you in the no-longer pristine water.");
 	outputText("\n\nYou don your [armor] with some difficulty over your massive stomach, and venture back towards your camp, a little sore, but wiser for the ordeal.");
-	stats(0,0,0,1,0,0,0,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 1, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 	player.buttKnockUp(23,30,1,1);
 	doNext(14);
 }
@@ -138,7 +138,7 @@ public function carryBeeGirlsEggsVoluntarilyYouButtSlut():void {
 	outputText("\n\nYou giggle drunkenly to yourself as a frog egg the size of an apple squeezes inside you.  If you weren’t so lost in mind-bending pleasure, you might be concerned at the pressure.  Instead, you just feel more dizzy - those eggs must be lubed with the frog girl’s slime - and with one inside you, the world begins to spin.");
 	outputText("\n\n\"<i>One down...</i>\" the frog girl hisses through gritted teeth.  But you can’t find the wherewithal to even raise an eyebrow at her words.  Pressure builds again against your asshole, and the frog girl pushes another massive, squishy egg into you.  \"<i>Unff!</i>\" she grunts, shaking with the effort of forcing her eggs into your body.");
 	outputText("\n\nYou giggle again, loving the way the world spins with every egg fed into you.  Egg after egg, she lays into you.  It’s finally too much for you and your mind collapses.  The world completely dissolves into a swirling collage of color, sensation, and sound.");
-	stats(0,0,0,0,0,1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 1, "lus", -100, "cor", 0);
 	menu();
 	addButton(0,"Next",voluntarilyGetEggedEpilogue);
 }
@@ -151,7 +151,7 @@ public function voluntarilyGetEggedEpilogue():void {
 	outputText("\n\nYou don your [armor] with some difficulty over your massive stomach, and venture back towards your camp, feeling a little sore, but proud of yourself for helping out a mother in need.");
 	//[Anal stretch +1/Anal Moistness +1, sensitivity +1, corruption -1]
 	player.buttKnockUp(23,30,1,1);
-	stats(0,0,0,0,0,1,0,-1);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 1, "lus", 0, "cor", -1);
 	doNext(13);
 }
 //Teach Her a Lesson
@@ -173,7 +173,7 @@ public function lessonFollowup():void {
 	clearOutput();
 	outputText("You wake up two hours later, floating alone in the pool, with a migraine and soggy clothes.  You slog your way out, clutching your head, and head back to camp.");
 	//[Toughness -1]
-	stats(0,-1,0,0,0,0,0,0);
+	dynStats("str", 0,"tou", -1, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 	doNext(14);
 }
 
@@ -192,7 +192,7 @@ public function birthFrogEggsAnal():void {
 	player.hipRating++;
 	player.ass.analWetness += 1;
 	if(player.ass.analWetness > 5) player.ass.analWetness = 5;
-	stats(0,0,0,0,0,1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 1, "lus", -100, "cor", 0);
 }
 //Superbonus Vaginal Eggs!
 public function superBonusFrogEggsInYerCooch():void {
@@ -214,7 +214,7 @@ public function superBonusFrogEggsInYerCooch():void {
 	outputText("\n\nYou’re not sure when the frog girl finishes.  By the time the trees stop dancing and the sky stops rippling, you’re floating face-up in the pool, watching the curve of your now-swollen belly as you bob gently in the water.");
 	outputText("\n\nAs awareness slowly starts to trickle in to your head, you blink, groaning slightly as you sit up, clutching your massive, pregnant belly, feeling the jelly-eggs inside shifting when you step up out of the water.  You pause as a tiny trickle of slime oozes out from your vagina, sending a brief rainbow flash across your vision and the echo of an orgasm through your system, before you put your [armor] back on and stagger back toward camp.");
 	//[Vaginal wetness +1, Sensitivity +1]
-	stats(0,0,0,0,0,1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 1, "lus", -100, "cor", 0);
 	player.knockUp(23,30,1,1);
 	doNext(13);
 }
@@ -262,6 +262,6 @@ public function layFrogEggs():void {
 		player.hipRating++;
 		outputText("  There's an extra thickness to your [hips] as well.");
 	}
-	stats(0,0,0,0,0,1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 1, "lus", -100, "cor", 0);
 	doNext(13);
 }

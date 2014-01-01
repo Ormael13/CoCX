@@ -33,7 +33,7 @@ public function tryToTakeSwordInStone():void {
 		if(player.str < 40) outputText("easily pull the sword free, surprising yourself with how easy it was to remove.  ", false);
 		outputText("Remarkably the tree's trunk is entirely intact.  While marveling at this new development, a leaf brushes your shoulder.  You look up and watch as every single leaf turns from healthy green, to brilliant orange, and finally changes to brown.  The leaves rain down around you, covering the ground in dead plant-matter, leaving you alone with the withering skeleton of a dead tree.  The sight saddens you, though you cannot fathom why.\n\n", false);
 		outputText("The blade itself is three and a half feet of the purest, shining steel you have ever seen.  It truly is a beautiful blade.\n\n", false);
-		stats(0,0,0,0,-(player.lib/3),0,-15,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -(player.lib/3), "sen", 0, "lus", -15, "cor", 0);
 		shortName = "B.Sword"
 		takeItem();
 		player.createStatusAffect("Took Blessed Sword",0,0,0,0);

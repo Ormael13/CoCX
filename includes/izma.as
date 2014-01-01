@@ -75,7 +75,7 @@ public function meetIzmaAtLake():void {
 		outputText("You roll the idea around in your head for a few seconds before asking just what's in it for you.  Izma smiles, happy to see you're at least pondering the offer.  \"<i>I can pay you,</i>\" she says proudly, earning a raised eyebrow from you.  Izma rummages around her oak chest, pulling out something that looks like a shark tooth.  Though one thing that catches your eye is the strange purple glow it's giving off.\n\n", false);
 
 		outputText("\"<i>It can make you a tigershark like me, with enough doses...</i>\" Izma explains, rolling the tooth between her knuckles.  \"<i>I mean, if you think you'd like that.  It can give you skin like mine, a fin, a shark tail, fangs... and one of these, too.</i>\" Izma cups her breasts and pivots her pelvis forward with its hefty package, as if trying to entice you.  Her suggestive pose does turn you on slightly.\n\n", false);
-		stats(0,0,0,0,0,0,5,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5, "cor", 0);
 
 		outputText("\"<i>There are two ways we can do this.  The sex, I mean,</i>\" Izma says, standing upright.  This causes you to raise your eyebrows, wondering what that's supposed to mean.  \"<i>We can do a bit of oral... or if you want to put it in, we can do what shark people do: fight for dominance. Choice is yours, really,</i>\" Izma says, moving closer to you. \"<i>So... what can I tempt you with today?</i>\"", false);
 		//[Trade] [Talk] [Sex] [Fight] [Leave]
@@ -158,17 +158,17 @@ public function readSharkCuntManual2():void {
 	if(choice == 0) {
 		outputText("You learn a few new guarding stances that seem rather promising.", false);
 		//(+2 Toughness)
-		stats(0,2,0,0,0,0,0,0);
+		dynStats("str", 0,"tou", 2, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 	}
 	else if(choice == 1) {
 		outputText("After a quick skim you reach the end of the book. You don't learn any new fighting moves, but the refresher on the overall mechanics and flow of combat and strategy helped.", false);
 		//(+2 Intelligence)
-		stats(0,0,0,2,0,0,0,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 2, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 	}
 	else {
 		outputText("Your read-through of the manual has given you insight into how to put more of your weight behind your strikes without leaving yourself open.  Very useful.", false);
 		//(+2 Strength)
-		stats(2,0,0,0,0,0,0,0);
+		dynStats("str", 2,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 	}
 	outputText("\n\nFinished learning what you can from the old rag, you hand it back to Izma who happily adds it back into her collection.  You say your goodbyes and then ", false);
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] != 1) outputText("head back to your camp.", false);
@@ -202,7 +202,7 @@ public function readSharkEdgingGuideLOL():void {
 
 	outputText("You peruse the strange book in an attempt to refine your manners, though you're almost offended by the stereotypes depicted within.  Still, the book has some good ideas on how to maintain chastity and decorum in the face of lewd advances.\n\n", false);
 	//(-2 Libido, -2 Corruption)
-	stats(0,0,0,0,-2,0,0,-2);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -2, "sen", 0, "lus", 0, "cor", -2);
 	
 	outputText("After reading through the frilly book you give it back to Izma who delicately places it back in the trunk.  You say your goodbyes and then ", false);
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] != 1) outputText("head back to your camp.", false);
@@ -234,7 +234,7 @@ public function readSharkgirlPornzYouFuckingPervertAsshole():void {
 	
 	outputText("You wet your lips as you flick through the pages of the book and admire the rather... detailed illustrations inside.  A bee-girl getting gangbanged by imps, a minotaur getting sucked off by a pair of goblins... the artist certainly has a dirty mind.  As you flip the pages you notice the air around you heating up a bit; you attribute this to weather until you finish and close the book... only to discover that Izma had been standing behind you for some time, 'reading' over your shoulder.", false);
 	//(+2! Libido and lust gain)
-	stats(0,0,0,0,2,0,(20+player.lib/10),0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 2, "sen", 0, "lus", (20+player.lib/10), "cor", 0);
 	//(0-30 Corruption)
 	if(player.cor < 33) {
 		outputText("  You give a bit of a start.  \"<i>S-sorry,</i>\" she says.  At a loss for words, you hand her the porn and make a hasty retreat", false);
@@ -274,7 +274,7 @@ public function talkToASharkCoochie():void {
 	//(repeat: factory cleared)
 	else {
 		outputText("With the factory on the mountain shut down and no longer belching conspicuous pink smog, the conversation turns to more esoteric subject matter.  The two of you discuss some of the ramifications of the demon outbreak and speculate on what the future might hold.  She argues her points cogently and without backing down or getting sidetracked, and you're given a bit of a mental workout as you formulate and present your own arguments.", false);
-		stats(0,0,0,1,0,0,0,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 1, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 	}
 	outputText("\n\nEventually the two of you decide to part ways, and you head back to camp.", false);
 	//(Izmacounter +1)
@@ -385,12 +385,12 @@ public function IzmaSpecials2():void {
 public function IzmaSpecials3():void {
 	outputText("Rather than move to attack you, Izma grins at you and grabs her breasts, massaging them as she caresses her long penis with one knee. Her tail thrashes and thumps the sand heavily behind her as she simulates an orgasm, moaning loudly into the air. The whole display leaves you more aroused than before.", false);
 	//(lust gain)
-	stats(0,0,0,0,0,0,(20 + player.lib/5),0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (20 + player.lib/5), "cor", 0);
 }
 
 public function IzmaAI():void {
 	var choice:Number = rand(5);
-	if(choice <= 1) eAttack();
+	if(choice <= 1) monster.eAttack();
 	if(choice == 2) {
 		if(player.fatigue >= 80) choice = 3;
 		else IzmaSpecials1();
@@ -442,7 +442,7 @@ public function IzmaWins():void {
 		infestOrgasm();
 		outputText("\n\nIzma looks on in horror as you push out the load of wormy cargo onto the sand at her feet, only snapping out of her daze as several of the parasites begin climbing her ankle with an eye toward her cock.  She shrieks and jumps back, then drags her foot in the sand, dislodging or pulverizing the squirming vermin.  \"<i>" + player.short + ", that's nasty!  Get away!  Get away and don't talk to me again!  Ugh!</i>\"  She takes off, grabbing her chest of books and kicking sand up in her flight down the beach.", false);
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00233] = 1;
-		stats(0,0,0,0,0,0,-100,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 		doNext(cleanupAfterCombat);
 		return;
 	}
@@ -683,7 +683,7 @@ public function loseToIzma():void {
 		//(Izmafight minus 1
 		flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON]--;
 	}
-	stats(0,0,0,0,0,2,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 2, "lus", -100, "cor", 0);
 	//[Post-loss submissiveness blurb, checks Izmafight AFTER any changes from the sex]
 	//zmafight -1: 
 	if(flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON] >= -1) outputText("  You realize what you're thinking and shudder, forcing the submission-tinged desires down. Where did they come from, anyway?", false);
@@ -748,7 +748,7 @@ public function finalIzmaSubmission():void {
 	if(player.race() != "shark-morph") outputText("  \"<i>But we'll have to make some changes to your body, of course...</i>\"", false);
 	outputText("\n\n", false);
 	slimeFeed();
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	doNext(IzmaBadEnd);
 }
 //[Bad end]
@@ -817,7 +817,7 @@ public function victoryPenisIzma():void {
 		
 		outputText("Izma gasps again as you plant your " + vaginaDescript(0) + " onto her face, grinding against the angular features and moaning loudly as her obliging tongue darts past your lips.  You could really get used to this feeling.  You ride her face for another few minutes before an orgasm rocks your female parts, splattering girlcum onto Izma's face.  You sigh happily and weakly get to your feet, redressing.  You see Izma fishing something from her storage chest - a plant of some sort - and munching it down.\n\n", false);
 	}
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	//[(if Izmafight <=4)
 	if(flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON] <= 4 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00235] > 0) {
 		outputText("You say your goodbyes to the pretty tigershark and leave once she hands you your tooth-shaped reward.", false);
@@ -852,7 +852,7 @@ public function useVagooOnIzmaWin():void {
 
 	outputText("After a few more minutes of vigorous fucking, Izma grunts and roars in an animalistic fashion as she orgasms, jets of hot musky spunk pumping into your depths.  You cry out in pleasure, your inner walls clamping down on her cock and milking every available drop of jizz she has.  After a while you manage to recover and stumble onto your feet.  \"<i>Hey, wait a sec,</i>\" Izma says weakly as you start to leave.  She goes to her storage chest and retrieves a crumpled leaf, then holds it out to you with a smile.  \"<i>Here, take this.  It's an anti-pregnancy herb.</i>\" Do you take it?", false);
 	slimeFeed();
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	//[yes/no]
 	doYesNo(eatIzmasLeafAfterRapinHer,dontEatIzamsLeafAfterRape);
 }
@@ -905,7 +905,7 @@ public function takeItInZeButtVictoryLikeFromIzma():void {
 	outputText("\n\n", false);
 	
 	outputText("The shark grits her teeth and gives a roar as she cums, blowing a massive, hot load straight up your " + assholeDescript() + ", bloating you slightly as she empties her quads inside you.  Your muscles twitch and contract, and you can swear you see stars as she ejaculates.  It takes you a while to catch your breath as you slide off her slowly softening meat pole and crawl onto the sand.\n\n", false);
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	//[(if Izmafight <=4)
 	if(flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON] <= 4 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00235] > 0) {
 		outputText("You say your goodbyes to the pretty tigershark and leave once she hands you your tooth-shaped reward.", false);
@@ -1043,7 +1043,7 @@ public function nonFightIzmaSmexPAINUS():void {
 	slimeFeed();
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00230]++;
 	menuLoc = 2;
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	shortName = "TSTooth";
 	takeItem();
 }
@@ -1090,7 +1090,7 @@ public function nonFightIzmaSmexCUNTPUSSYSNATCHQUIM():void {
 	//(lust minus 100, gain 1 t-shark tooth, Izmacounter +1)
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00230]++;
 	menuLoc = 2;
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	shortName = "TSTooth";
 	takeItem();
 }
@@ -1361,7 +1361,7 @@ public function izmaLakeDominate():void {
 		outputText("The two of you get dress after awhile, have some small talk, and then you make your way back to camp.", false);
 		slimeFeed();
 	}
-	stats(0,0,0,0,0,-1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
 	doNext(13);
 }
 
@@ -1404,7 +1404,7 @@ public function izmaLakeDominateContinueVanilla(vanilla:Boolean = true) :void
 		
 		outputText("Izma gasps again as you plant your " + vaginaDescript(0) + " onto her face, grinding against the angular features and moaning loudly as her obliging tongue darts past your lips.  You could really get used to this feeling.  You ride her face for another few minutes before an orgasm rocks your female parts, splattering girlcum onto Izma's face.  You sigh happily and weakly get to your feet, redressing.  You see Izma fishing something from her storage chest - a plant of some sort - and munching it down.", false); 
 	}
-	stats(0,0,0,0,0,-1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
 	doNext(13);
 }
 
@@ -1590,7 +1590,7 @@ public function submitToLakeIzma():void {
 		}
 		else outputText("gives you a decidedly unchaste kiss before she helps you up.  You dress yourself and head back to camp feeling very sated.", false);
 	}
-	stats(0,0,0,0,0,2,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 2, "lus", -100, "cor", 0);
 	slimeFeed();
 	doNext(13);
 }
@@ -1781,7 +1781,7 @@ public function followerIzmaMountsPC(lastHalf:Boolean = false):void {
 	outputText("  Once you've finished, Izma rolls off you and continues breathing heavily.  \"<i>That was amazing... my Alpha.</i>\"\n\n", false);
 
 	outputText("You're too busy gasping for breath to reply, at first.  But then, with a smile, you pick yourself up and give her a quick kiss on the cheek.  To your surprise, the ever-horny shark-girl actually blushes with delight at the gesture.  The two of you leisurely dress yourselves and then go your separate ways; you back to your camp, Izma back to the stream to soak and recover.", false);
-	stats(0,0,0,0,0,-2,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
 	doNext(13);
 }
 
@@ -1819,7 +1819,7 @@ public function RadarIzmaLeaveHerWangUnWingWanged():void {
 	outputText("  Once you've finished, Izma rolls off you and continues breathing heavily.  \"<i>That was amazing... my Alpha.</i>\"\n\n", false);
 
 	outputText("You're too busy gasping for breath to reply, at first.  But then, with a smile, you pick yourself up and give her a quick kiss on the cheek.  To your surprise, the ever-horny shark-girl actually blushes with delight at the gesture.  The two of you leisurely dress yourselves and then go your separate ways; you back to your camp, Izma back to the stream to soak and recover.", false);
-	stats(0,0,0,0,0,-2,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
 	doNext(13);
 }
 
@@ -1953,7 +1953,7 @@ public function followerIzmaTakesItInPooper():void {
 	}
 	//(10; resume here for dickless)
 	if(!player.hasCock()) outputText("After a few minutes, she pulls her shrinking cock out of you and gives you a deep kiss. \"<i>Thanks for that,</i>\" she says, \"<i>...my Alpha.</i>\"  She jogs off to the river to clean off.  After a minute you follow her, with her cum dripping out of your well-used anus.", false);
-	stats(0,0,0,0,0,-1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
 	doNext(13);
 }
 
@@ -2019,7 +2019,7 @@ public function followerIzmaTakesItInVagoo():void {
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00249] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] == 0 && rand(100) < (10 + Math.round(player.cumQ()/100))) {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] = 300;
 	}
-	stats(0,0,0,0,0,-2,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
 	doNext(13);
 }
 
@@ -2075,7 +2075,7 @@ public function facialWhereItGoesRadarIzmaXpack():void {
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00249] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] == 0 && rand(100) < (10 + Math.round(player.cumQ()/100))) {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] = 300;
 	}
-	stats(0,0,0,0,0,-2,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
 	doNext(13);
 }
 //[Your chest]
@@ -2106,7 +2106,7 @@ public function RadarIzmaCumInYourChest():void {
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00249] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] == 0 && rand(100) < (10 + Math.round(player.cumQ()/100))) {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] = 300;
 	}
-	stats(0,0,0,0,0,-2,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
 	doNext(13);
 }
 
@@ -2125,7 +2125,7 @@ public function IzmaSelfFacialWheeRadar():void {
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00249] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] == 0 && rand(100) < (10 + Math.round(player.cumQ()/100))) {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00250] = 300;
 	}
-	stats(0,0,0,0,0,-2,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
 	doNext(13);
 }
 //[69]
@@ -2174,7 +2174,7 @@ public function followerIzmaTakesIt69():void {
 	outputText("spunk in your stomach...\n\n", false);
  
 	outputText("\"<i>Thanks for that...</i>\" Izma whispers, stumbling onto her feet and retrieving her clothing.  \"<i>Feel free to come back for some more... or maybe we could do something a little more intense next time.</i>\"  It's a little hard to tell with her skin colour, but you can almost see a blush on her face.  You smile at Izma and nod, before heading off to wash up.\n\n", false);
-	stats(0,0,0,0,0,-2,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
 	doNext(13);
 }
 
@@ -2215,7 +2215,7 @@ public function talkWivIzma():void {
 
 		outputText("You thank Izma for being willing to talk to you, then you politely excuse yourself and leave her to her thoughts.", false);
 		//(Slight lust gain)
-		stats(0,0,0,0,0,0,5,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5, "cor", 0);
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00239]++;
 		doNext(13);
 		return;
@@ -2527,7 +2527,7 @@ public function pcPopsOutASharkTot():void {
 		outputText("; physically, you'd have to say she was anywhere from ten to thirteen years old. She grins at you, displaying both rows of teeth, and then kisses you on the lips. \"<i>Mama.</i>\" She states, clearly and contendly, then visibly relaxes, nuzzling into your arms and closing her eyes, clearly intent on drifting off to sleep.\n\n", false);
  
 		outputText("You look up at the tigershark who fathered her for support, but she just smiles and flops down beside you as well. With a soft sigh, you simply lay back and enjoy your strange new family being there with you. When you wake in the morning, Izma will have taken your daughter to stay at the stream with her; it's important for young shark-folk to be moist, constantly.\n", false);
-		stats(0,0,0,0,1,1,-100,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", -100, "cor", 0);
 	}
 	player.boostLactation(.01);
 }
@@ -2702,7 +2702,7 @@ public function inCampRideIzmasDickDongTheWitchIsDead():void {
 	outputText("Izma moans weakly from beneath you, trying hard to keep her eyes open.  \"<i>If, ah... if that's what you want.</i>\"\n\n", false);
  
 	outputText("You simply give her your wickedest grin, already starting to get into the rhythm of rising and falling...\n\n", false);
- 	stats(0,0,0,0,0,-2,-100,0);
+ 	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
 	outputText("<b>Some time later...</b>\n", false);
 	outputText("Finally, you are tired and sexually sated enough that you tell Izma you're fulfilled. The tigershark merely groans and you have to help her get into the stream to restore her strength. Still, seven orgasms in only an hour is pretty impressive, and you give her a pat on her shapely derierre before you leave, calling over her shoulder that you'll be back again sometime.\n\n", false);
  
@@ -2742,17 +2742,17 @@ public function campCuntManual():void {
 	if(choice == 0) {
 		outputText("You learn a few new guarding stances that seem rather promising.", false);
 		//(+2 Toughness)
-		stats(0,2,0,0,0,0,0,0);
+		dynStats("str", 0,"tou", 2, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 	}
 	else if(choice == 1) {
 		outputText("After a quick skim you reach the end of the book. You don't learn any new fighting moves, but the refresher on the overall mechanics and flow of combat and strategy helped.", false);
 		//(+2 Intelligence)
-		stats(0,0,0,2,0,0,0,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 2, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 	}
 	else {
 		outputText("Your read-through of the manual has given you insight into how to put more of your weight behind your strikes without leaving yourself open.  Very useful.", false);
 		//(+2 Strength)
-		stats(2,0,0,0,0,0,0,0);
+		dynStats("str", 2,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 	}
 	outputText("\n\nAfter about an hour you yawn and stretch, telling Izma that you're going off to do other business.  She nods lazily at your words but doesn't look up from her old book. \"<i>Sure thing " + player.short + ", I'm just gonna read this for a little while longer,</i>\" Izma says.  You nod at her, before moving off.", false);
 	doNext(13);
@@ -2766,7 +2766,7 @@ public function entropyGuideByStephenHawking():void {
 	//(Usual random stat increase from the E.Guide)
 	outputText("You peruse the strange book in an attempt to refine your manners, though you're almost offended by the stereotypes depicted within.  Still, the book has some good ideas on how to maintain chastity and decorum in the face of lewd advances.\n\n", false);
 	//(-2 Libido, -2 Corruption)
-	stats(0,0,0,0,-2,0,0,-2); 
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -2, "sen", 0, "lus", 0, "cor", -2);
  
 	outputText("As time passes you realise that you do have other things to do.  You thank Izma for her company and get up to leave.  \"<i>All right, thanks for sitting with me " + player.short + ".  You go on ahead, I'm just going to read some more of this,</i>\" she replies, not even looking up from the pages of her book.\n\n", false);
 	doNext(13);
@@ -2782,7 +2782,7 @@ public function stephenHawkingPorn():void {
 	outputText("By the time you're done reading, Izma certainly seems turned on.  She tries to hide it and sit primly - ");
 	if(flags[kFLAGS.IZMA_NO_COCK] == 0) outputText("but that's not exactly possible for someone who just had over a foot of dick slip from between her thighs and stick into the air.  You laugh openly and give Izma's silver hair a soft tug, before getting up and telling her you have business elsewhere.  Izma simply nods in taciturn response but keeps her gaze fixed on the lewd images before her.  Another laugh escapes your lips as soon as you think you're out of earshot.", false);
 	else outputText("but that's not exactly possible for someone who keeps squirming, creating lewd squishes from below the waist.  You laugh openly and give Izma's silver hair a soft tug, before getting up and telling her you have business elsewhere.  Izma simply nods in taciturn response but keeps her gaze fixed on the lewd images before her.  Another laugh escapes your lips as soon as you think you're out of earshot.", false);
-	stats(0,0,0,0,1,0,5,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 0, "lus", 5, "cor", 0);
 	doNext(13); 
 }
 //(Trying to use another book inside the span of 6 hours)
@@ -2919,7 +2919,7 @@ public function izmaDickToggle():void {
 		while(hasItem("SucMilk",1) && count < 5) {
 			consumeItem("SucMilk",1);
 			count++;
-			stats(0,0,0,0,0,0,0,3);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 3);
 		}
 	}
 	else {
@@ -3021,7 +3021,7 @@ public function radarIzmaGasm():void {
 	if(flags[kFLAGS.IZMA_NO_COCK] == 0) outputText(" cock");
 	else outputText("self");
 	outputText(" down at the river... but judging by how tired she looks, you doubt that will happen anytime soon.");
-	stats(0,0,0,0,0,-1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
 	izmaPreg();
 	doNext(13);
 }
@@ -3089,7 +3089,7 @@ public function radarIzmaAnalDominant():void {
 		outputText("\n\nA half hour passes before you wake up; Izma peacefully snoozing away as she holds you in a lover's embrace.  Faintly, you pull yourself from her grasp and place your [armor] back on.  As you finish placing the last piece of your gear back on, Izma wakes and rises to her feet, planting a tender kiss on her Alpha's neck as she sees you off.  Before you go though, Izma quietly asks, \"<i>So... where's my gift?</i>\", smirking as you turn around to respond to her.  With a firm slap on your ass, you tell her that going all the way with her Alpha was the gift.  Sheepishly grinning, she sees you off as you head out to tend to other matters.");
 		doNext(13);
 	}
-	stats(0,0,0,0,0,2,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 2, "lus", -100, "cor", 0);
 }
 //[Tuck in]
 public function radarIzmaAnalDomResultTuckIn():void {
@@ -3099,14 +3099,14 @@ public function radarIzmaAnalDomResultTuckIn():void {
 		outputText("Despite your good intentions, you can't lift Izma off the ground for long before needing to set her back down.  Imza quietly remarks that you should just let her rest; causing you to tell her not to talk back.  Alternating between dragging her through the grass and \"carrying\" her over some rocks, ");
 		if(player.fatigue < 70) {
 			outputText("you eventually get her back to her bedroll.  She smiles sheepishly as you lay her on the bedding to sleep off your passionate throes.  She's comfortable, but the effort is exhausting.");
-			stats(0,0,0,0,0,0,0,-2);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", -2);
 			fatigue(30);
 		}
 		else outputText("you try and get her to her bedroll, but you are simply too exhausted.  Izma tells	you not to worry about her and go get some rest; that she'll be okay in the grass.  You groggily agree as you set her down, telling her she better be ready for more sex if you want it; something she approves of as she hums and drifts off to sleep.");
 	}
 	else {
 		outputText("With a great show of force, you take Izma under the legs and back, lifting her off the ground and starting toward her bedroll. In little time flat, you reach her bedding and lie her down gently. As you turn, you remark to Izma that she better rest up; you'll likely have another \"itch\" that will need scratching.  Her raspy words ring out behind you as you begin to walk away; \"<i>Promise?</i>\"  Turning your head slightly to catch her in your left eye, you grin mischievously at the shark-morph and continue on your way.");
-		stats(0,0,0,0,0,0,0,-2);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", -2);
 	}
 	doNext(13);
 }
@@ -3383,7 +3383,7 @@ public function izmaDomsLatexyPartI():void {
 	}
 	flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY]++;
 	flags[kFLAGS.GOO_FLUID_AMOUNT] = 100;
-	stats(0,0,0,0,0,0,20+player.lib/10,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 20+player.lib/10, "cor", 0);
 	doNext(13);
 }
 

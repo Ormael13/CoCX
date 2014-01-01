@@ -1,5 +1,6 @@
 ﻿package classes.Monsters
 {
+	import classes.CoC;
 	import classes.Creature;
 	import classes.Monster;
 	import classes.CockTypesEnum;
@@ -32,9 +33,9 @@
 			return 40;
 		}
 
-		public function WormMass(mainClassPtr:*)
+		public function WormMass(game:CoC)
 		{
-			super(mainClassPtr);
+			super(game);
 			trace("WormMass Constructor!");
 			init01Names("the ","worms","worms","Before you stands the horrid mass of worms. It has shifted itself and now takes the shape of a humanoid composed completely of the worms in the colony. Its vaguely human shape lumbers towards you in a clearly aggressive manner.",true);
 			init02Genderless();

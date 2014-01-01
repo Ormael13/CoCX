@@ -1,5 +1,6 @@
-package classes.Monsters 
+package classes.Monsters
 {
+	import classes.CoC;
 	import classes.Appearance;
 	import classes.Cock;
 	import classes.GlobalFlags.kFLAGS;
@@ -34,9 +35,9 @@ package classes.Monsters
 			}
 		}
 
-		public function Satyr(mainClassPtr:*)
+		public function Satyr(game:CoC)
 		{
-			super(mainClassPtr);
+			super(game);
 			init01Names("a ", "satyr", "satyr", "From the waist up, your opponent is perfectly human, save his curling, goat-like horns and his pointed, elven ears.  His muscular chest is bare and glistening with sweat, while his coarsely rugged, masculine features are contorted into an expression of savage lust.  Looking at his waist, you notice he has a bit of a potbelly, no doubt the fruits of heavy drinking, judging by the almost overwhelming smell of booze and sex that emanates from him.  Further down you see his legs are the coarse, bristly-furred legs of a bipedal goat, cloven hooves pawing the ground impatiently, sizable manhood swaying freely in the breeze.");
 			var ballSize:Number = 2 + rand(13);
 			init02Male(new Cock(rand(13) + 14,1.5 + rand(20)/2,CockTypesEnum.HUMAN),2, ballSize,1.5,player.ballSize * 10);

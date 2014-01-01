@@ -1,5 +1,6 @@
-package classes.Monsters 
+package classes.Monsters
 {
+	import classes.CoC;
 	import classes.Monster;
 	
 	/**
@@ -29,9 +30,9 @@ package classes.Monsters
 			}
 		}
 
-		public function FemaleSpiderMorph(mainClassPtr:*)
+		public function FemaleSpiderMorph(game:CoC)
 		{
-			super(mainClassPtr);
+			super(game);
 			init01Names("the ", "female spider-morph", "femalespidermorph", "The female spider-morph is completely nude, save for her thigh-high stockings and forearm-length gloves, which upon closer inspection, appear to be actually be part of her body - her exoskeleton.  Her exposed skin is pale as the full moon, save for the dusky skin of her nipples and the black-skinned delta of her sex.  Her breasts and ass are both full and well-rounded, and just above her ass-cheeks there's a bulbous spider-abdomen.  The spider-girl is currently eyeing you with a strange expression and her fangs bared.");
 			init02Female(VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_LOOSE, 40);
 			init03BreastRows("E+");

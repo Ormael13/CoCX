@@ -49,10 +49,10 @@
 		*/
 		public var temperment:Number = TEMPERMENT_AVOID_GRAPPLES;
 		
-		//Used for special attacks. Event codes EVERYWHERE
-		public var special1:Number = 0;
-		public var special2:Number = 0;
-		public var special3:Number = 0;
+		//Used for special attacks.
+		public var special1:* = 0;
+		public var special2:* = 0;
+		public var special3:* = 0;
 		
 		//he
 		public var pronoun1:String = "";
@@ -483,7 +483,7 @@
 			skipInit(13);
 		}
 
-		protected function initX_Specials(special1:int=0,special2:int=0,special3:int=0):void
+		protected function initX_Specials(special1:*=0,special2:*=0,special3:*=0):void
 		{
 			this.special1 = special1;
 			this.special2 = special2;
@@ -760,15 +760,16 @@
 		 */
 		protected function performCombatAction():void
 		{
-			var select:Number = 1;
-			if (special1 > 0) select++;
-			if (special2 > 0) select++;
-			if (special3 > 0) select++;
-			var rando:int = int(Math.random() * select);
-			if (rando == 0) game.eAttack();
-			if (rando == 1 && special1 > 0) game.eventParser(special1);
-			if (rando == 2 && special2 > 0) game.eventParser(special2);
-			if (rando == 3 && special3 > 0) game.eventParser(special3);
+			var actions:Array = [eAttack,special1,special2,special3].filter(
+					function(special:*,idx:int,array:Array):Boolean{
+						return special != 0 && special != null;
+					}
+			);
+			var rando:int = int(Math.random() * (actions.length));
+			var action:* = actions[rando];
+			if (action is Number) game.eventParser(action);
+			else if (action is Function) action();
+			else trace("monster tried to do "+typeof(action));
 		}
 
 		/**

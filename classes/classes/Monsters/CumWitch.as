@@ -1,5 +1,6 @@
 package classes.Monsters 
 {
+	import classes.CoC;
 	import classes.Cock;
 	import classes.Monster;
 	import classes.CockTypesEnum;
@@ -26,9 +27,9 @@ package classes.Monsters
 			game.defeatedByCumWitch();
 		}
 
-		public function CumWitch(mainClassPtr:*)
+		public function CumWitch(game:CoC)
 		{
-			super(mainClassPtr);
+			super(game);
 			init01Names("the ", "Cum Witch", "cumwitch", "The Cum Witch is a moderately tall woman, almost six feet in height.  Her dark ebony skin is nearly as black as pitch, though it glitters with sweat from her recent sexual activities and the fight.  She has plump lips and long, smooth blonde hair, though much of it is hidden behind a pointed, wide-brimmed hat.  Her robes are even blacker than she is, but she wields an alabaster staff that fairly sizzles with magical might.  Of course, her garments don't do much to conceal her gigantic breasts.  Though there are only two, they're large enough to dwarf the four tits most sand witches are packing.");
 			init02Male(new Cock(12,2,CockTypesEnum.HUMAN),0,0,3,20);
 			init02Female(VAGINA_WETNESS_WET, VAGINA_LOOSENESS_LOOSE, 20);

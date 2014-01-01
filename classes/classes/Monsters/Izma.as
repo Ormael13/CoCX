@@ -1,5 +1,6 @@
-package classes.Monsters 
+package classes.Monsters
 {
+	import classes.CoC;
 	import classes.Cock;
 	import classes.Monster;
 	
@@ -37,9 +38,9 @@ package classes.Monsters
 			}
 		}
 
-		public function Izma(mainClassPtr:*)
+		public function Izma(game:CoC)
 		{
-			super(mainClassPtr);
+			super(game);
 			init01Names("", "Izma", "izma", "Izma the tigershark stands a bit over 6' tall, with orange skin bearing horizontal stripes covering most of her body.  Her silver-white hair cascades past her shoulders, draping over an impressive pair of DD-cup breasts barely restrained by a skimpy black bikini top.  Under the knee-length grass skirt below them rustles her beastly fifteen-inch penis and four-balled sack; you catch occasional glimpses of them as she moves.  She's tucked her usual reading glasses into her locker at the moment.");
 			init02Male(new Cock(15,2.2),4,3);
 			init02Female(VAGINA_WETNESS_SLICK,VAGINA_LOOSENESS_LOOSE,45);

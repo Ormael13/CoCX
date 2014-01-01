@@ -135,7 +135,7 @@ public function letDebimboSophieGo():void {
 		if(player.cor < 40) {
 			outputText("  You blink repeatedly, trying to clear your head of these idle thoughts, but are nonetheless aroused.");
 			//{+10 AROUSAL}
-			stats(0,0,0,0,0,0,10,0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10, "cor", 0);
 		}
 		else {
 			outputText("\n\nYou let these fantasies run wild through your head, imagining a group of three opportunistic minotaurs gangbanging a flight-exhausted Sophie; their ribbed, flared cocks completely renovating her yielding pussy and convulsing asshole while she gurgles helplessly around a third pulsing horseshaft lodged deep in her throat.  The two double-penetrating her holes grunt, their grossly sperm-swollen, watermelon-sized ball sacs and quivering dark taints rubbing up against one another in a fevered race to see who can cum first and claim this bimbo bird as their own personal cumdump and breeding slave.");
@@ -152,7 +152,7 @@ public function letDebimboSophieGo():void {
 			
 			outputText("\n\nYou smile perversely from your fantasy, thoroughly aroused by it.");
 			//{+25 AROUSAL}
-			stats(0,0,0,0,0,0,25,0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 25, "cor", 0);
 		}
 	}
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] = 1;
@@ -431,7 +431,7 @@ public function fuckFollowerSophie():void {
 	outputText("  Then, you black out, with your " + cockDescript(x));
 	if(y >= 0) outputText(" and " + cockDescript(y));
 	outputText(" still pulsing in ecstasy.  It was such a good cum...");
-	stats(0,0,0,0,0,-2,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -2, "lus", -100, "cor", 0);
 	if(sophieIsInSeason()) sophiePregChance();
 	menu();
 	addButton(0,"Next",sophieVagFollowerFollowup);
@@ -535,8 +535,8 @@ public function sophieBlowsSixtyNine():void {
 	//8 hours lust stick
 	luststickApplication(8);
 	//+10 lust
-	stats(0,0,0,0,0,1,-100,0);
-	stats(0,0,0,0,0,0,10,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 1, "lus", -100, "cor", 0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10, "cor", 0);
 	doNext(13);
 }
 
@@ -591,7 +591,7 @@ public function forceSophieBlowjob():void {
 	outputText("</i>\"");
 	
 	outputText("\n\nYou get dressed with a self-satisfied sigh.");
-	stats(0,0,0,0,0,-1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
 	doNext(13);
 }
 
@@ -684,7 +684,7 @@ public function sophieSmallDongTeases():void {
 	outputText("mess you made, wondering why you enjoyed that so much.");
 	
 	flags[kFLAGS.TIMES_MORNING_SOPHIE_FEMDOMMED]++;
-	stats(0,0,0,0,-1,3,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -1, "sen", 3, "lus", -100, "cor", 0);
 	doNext(1);
 }
 
@@ -791,7 +791,7 @@ public function sophieSpecial():void {
 	outputText("\n\nIndeed, the intensity of her cunt quivering and pulsing around your cum-spewing member is too much and you black out for a moment, waking up with her tit in your mouth, your fingers in her cunt as she drips your cum everywhere.  She's still stroking your head as she cuddles up to you, possessively.");
 	
 	outputText("\n\nYou feel like you may need to rest a few hours.");
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	if(sophieIsInSeason()) sophiePregChance();
 	fatigue(15);
 	doNext(13);
@@ -807,7 +807,7 @@ public function sophieFollowerIntro():void {
 	outputText("\n\nYou snap back into reality, waking up to find the object of your obsession bouncing gleefully on your exposed groin.  Her tousled hair jumps around with every plunge of the bird-woman's heavenly thighs.  She quickly notices your stark awakening, and blushes hard while she tries to remove herself.");
 	
 	outputText("\n\n\"<i>Oh shit - dear, it's hardly what you think.  I've just always been the one to capture young men to bone me raw, but ever since you've come along, all I can think about is your cock!  Oh and you, of course.  Please don't get mad darling, it was hard enough to try and find this place, and-</i>\"");
-	stats(0,0,0,0,0,0,10,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10, "cor", 0);
 	//Plus lust!
 	//[Kiss Her][Get Out]
 	menu();
@@ -821,7 +821,7 @@ public function getOutSophieRecruitment():void {
 	outputText("Invading your camp is one thing, but Sophie's overstepping her boundaries by thinking she can get sex from you whenever she wants.  You push her off of your body, standing up to announce that you'll get sex when you need it, not when she desires.  The poor bird nods feverishly, completely embarrassed by the entire ordeal.");
 	outputText("\n\n\"<i>Absolutely dear, let's never speak of this again.  I'll be off now.</i>\"");
 	outputText("\n\nWith that, she darts above the camp, flying back to her home in the high mountains.  You were having such a nice dream, too.");
-	stats(0,0,0,0,0,0,-5,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -5, "cor", 0);
 	flags[kFLAGS.NO_PURE_SOPHIE_RECRUITMENT] = 1;
 	doNext(1);
 }
@@ -840,7 +840,7 @@ public function kissSophieRecruitment():void {
 	outputText("\n\nThe two of you slump back, exhausted over a good night's sex.  Sophie lies in your arms, twirling her finger around your chest.");
 
 	outputText("\n\n\"<i>You've got a cute set up here, sweetheart.  I don't mind moving away from all those harpies, if there was the possibility that I could stay here with you.</i>\"");
-	stats(0,0,0,0,0,0,20,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 20, "cor", 0);
 	//[Sure][No] – Note: [No] leads to the [Get Out] scene.
 	menu();
 	addButton(0,"Sure",sophieRecruitmentFinale);
@@ -1007,7 +1007,7 @@ public function phaseTwoOfIncest(daughter:int):void {
 	outputText("\n\nFor nearly an hour you lay there, cuddling, kissing and stroking your daughter's body as she hogs you all to herself.  Despite how comfortable it is to cuddle with your daughter like this, you have to pull yourself away from her curvaceous, cock-pleasing body.  She can't help but pout as you pull away, clearly wanting to spend more time with her beloved " + player.mf("father","mother") + ".  Not wanting to leave her so disappointed, you reach around and give her a spank on the ass and pull her close to you, kissing her once more before promising to spend more time with her later.  With a smile, she giggles and nods, her mind happily thinking about the next time you will spend some quality time with her.");
 	//pass time 1 hour//
 	//return PC to camp interface//
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	doNext(13);
 }
 

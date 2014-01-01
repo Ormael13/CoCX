@@ -134,7 +134,7 @@ public function acceptDominikasKnowledge():void {
 			else outputText("You blink, then casually mention that you actually know quite a bit about magic. Dominika smiles, curling those glistening black lips into an even more erotic shape as she replies, \"<i>Oh I know sweety.  Why don't we discuss the theory behind it all?</i>\"\n\n", false);
 			outputText("Magical theory is not very interesting, but you do feel smarter for discussing it.", false);
 				//(Player receives Intelligence.)
-			stats(0,0,0,1+rand(4),0,0,0,0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 1+rand(4), "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 		}
 		//[If player knows some spells]
 		else if(spellCount() > 0) {
@@ -167,7 +167,7 @@ public function acceptDominikasKnowledge():void {
 				outputText("\n\n<b>New White Magic Spell Learned: Whitefire</b>", false);
 			}
 			else outputText("==SOMETHING FUCKED UP.  TELL FEN VIA EMAIL (fenoxo@gmail.com) OR POST ON THE BUG FORUMS==", false);
-			stats(0,0,0,2,0,0,0,0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 2, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 		}
 		//[If player knows no spells]
 		else {
@@ -202,7 +202,7 @@ public function acceptDominikasKnowledge():void {
 				outputText("\n\n<b>New White Magic Spell Learned: Whitefire</b>", false);
 			}
 			else outputText("==SOMETHING FUCKED UP.  TELL FEN VIA EMAIL (fenoxo@gmail.com) OR POST ON THE BUG FORUMS==", false);
-			stats(0,0,0,2,0,0,0,0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 2, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 		}
 	}
 	doNext(fellatrixSexWarmup);
@@ -252,7 +252,7 @@ public function declineFellatrixOral():void {
 		outputText("She raises her eyebrow and looks around. \"<i>...Really?</i>\" she asks after a few seconds. \"<i>Like, I mean... you're going to turn down a free blowjob?</i>\"\n\n", false);
 	
 		outputText("She pauses. \"<i>Or cunnilingus, I mean, I haven't looked between your legs yet. You know what this place is like.</i>\"\n\nYou suppose it might not hurt.  Do you want to receive some oral?", false);
-		stats(0,0,0,0,0,0,10,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10, "cor", 0);
 		doYesNo(acceptFellatrixOral,declineFellatrixOralHARDCORE);
 	}
 	else {
@@ -272,7 +272,7 @@ public function declineFellatrixOralHARDCORE():void {
 	spriteSelect(58);
 	outputText("", true);
 	outputText("\"<i>Really?</i>\" she asks again. \"<i>But, I mean... fucking look at these!</i>\" She purses her dark lips, running her tongue over them to emphasize how they glisten in the light. \"<i>Don't tell me you don't think these would feel fucking rad on you.</i>\"\n\nIt's VERY tempting.  Maybe one little round of fellatio?", false);
-	stats(0,0,0,0,0,0,(10 + player.lib/10),0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (10 + player.lib/10), "cor", 0);
 	doYesNo(acceptFellatrixOral,declineFellatrixOralSUPERHARDCORE);
 }	
 
@@ -334,7 +334,7 @@ public function acceptFellatrixOral():void {
 			outputText("She crosses the room to return to you, resting a hand on your chest.  \"<i>I want my freedom back, and I do not care anymore what I have to destroy to get it.  Help me.</i>\"", false);
 			simpleChoices("Agree",agreeWithDominika,"Ehhh",ehhhhDominika,"Disagree",disagreeDominika,"",0,"",0);
 		}
-		stats(0,0,0,0,-1,1,-100,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -1, "sen", 1, "lus", -100, "cor", 0);
 		return;
 	}
 	if(x < 0) x = 0;
@@ -551,7 +551,7 @@ public function acceptFellatrixOral():void {
 		}
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00152]++;
 	}
-	stats(0,0,0,0,-1,1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -1, "sen", 1, "lus", -100, "cor", 0);
 	
 	if(timesFellatrixSucked() >= 4 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00175] == 0) doNext(dominidrama);
 	else doNext(14);
@@ -568,7 +568,7 @@ public function agreeWithDominika():void {
 	spriteSelect(58);
 	outputText("", true);
 	//(Corruption increases)
-	stats(0,0,0,0,0,0,0,2);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 2);
 	if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0) {
 		outputText("You pause for a moment, then nod. Dominika's lips curl in a grin that manages to be both sinister and playful at the same time, running a hand over your shoulder before suddenly and aggressively straddling your lap. She bends down to you, biting your lip just barely lightly enough to not draw blood. Her hand caresses down the side of your head and your neck almost possessively.  The action turns into a kiss of some small passion, the smell of your crotch still fresh on her breath as those slippery ebon pillows graze over your own inferior display. She breathes heavily over you, looking in your eyes and filling your vision with her own blue eyes.\n\n", false);
 	
@@ -590,7 +590,7 @@ public function agreeWithDominika():void {
 
 		outputText("You think about her lips on the streets of Tel'adre.", false);
 	}
-	stats(0,0,0,0,0,0,25,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 25, "cor", 0);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00157] = 1;
 	doNext(13);
 }
@@ -612,7 +612,7 @@ public function disagreeDominika():void {
 	spriteSelect(58);
 	outputText("", true);
 	//(Corruption decrease)
-	stats(0,0,0,0,0,0,0,-2);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", -2);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00157] = 3;
 	if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0) {
 		outputText("That seems like a ridiculous thing to say, and you tell her so. Her nose wrinkles slightly and she seems to hold herself a little higher. \"<i>Well, it's the sort of thing you ponder,</i>\" she says after a short wait. \"<i>The city has... many who don't pull their weight.</i>\" She offers a half-smile, then turns back to her mirror, fixing her hair once more. You get the sense that she's not interested in pursuing the conversation.\n\n", false);
@@ -688,7 +688,7 @@ public function dominidramaNo():void {
 	outputText("She turns to leave down the street, then pauses and turns back to you. \"<i>Where are you from, anyway?</i>\" she asks, \"<i>I don't recognize your accent.</i>\" You mention your home. \"<i>Ingnam? Hmm. Never heard of it.</i>\" She shrugs lightly, then leaves.\n\n", false);
 
 	outputText("You feel warm inside, filled with a confidence that seemed to come out of nowhere. You can imagine Dominika's dark lips in your mind smiling, opening and curving as if to say \"<i>Good work.</i>\" The thought empowers you. It feels good to protect her, you think to yourself. You stride confidently out of the city.", false);
-	stats(0,0,0,0,0,0,10,1);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10, "cor", 1);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00175] = 2;
 	doNext(13);
 }
@@ -834,7 +834,7 @@ public function dominikaBlowjobs():void {
 
 		outputText("Her hand trails over your belly, down to your crotch. \"<i><b>Again.</b></i>\"\n\n", false);
 	}
-	stats(0,0,0,0,5,-15,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 5, "sen", -15, "lus", -100, "cor", 0);
 	//[Next]
 	doNext(dominikaBlowjobs2);
 }

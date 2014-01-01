@@ -99,7 +99,7 @@ public function meetSophieRepeat():void {
 			outputText("During your exploration of the mountains you wind up passing close to the harpy nests again.  You hear a faint buzzing on the breeze but ignore it, focusing instead on climbing the rocky mountain.  Pulling yourself up a ledge, you find yourself face-to-face with Sophie the harpy once again.  She's pinching one of her nipples and stroking around the entrance to her sodden twat.  It's flushed bright pink with desire and Sophie explains in between pleasured gasps, \"<i>I've been thinking about you since the last time I saw you, cutey.  I'm normally a horny bundle of fuck anyway, but I'd sure love for a virile " + player.mf("boy","breeder") + " like yourself to fertilize my eggs.</i>\"  She spreads her legs wide and leans back, giving you an offer that's part suggestion, part command, \"<i>Come here and put it inside me.  I promise I'll be tighter than a virgin and wetter than a succubus.</i>\"\n\n", false);
 		}
 		outputText("(Her words sink into you, and a desire to go with her threatens to overcome your self-control.  You take a deep breath and clear your head.  Do you go with her, turn her down, or try to take control and be the dominant one?  You'll probably have to fight her in order to dominate her...)", false);
-		stats(0,0,0,0,0,0,20,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 20, "cor", 0);
 		//[Yes – consentacle sex] [No – sad harpy]
 		simpleChoices("Yes",consensualSexSelector,"No",shootDownSophieSex,"Dominate",fightSophie,"",0,"",0);
 		return;
@@ -190,8 +190,8 @@ public function shootDownSophieSex():void {
 	outputText("", true);
 	outputText("Sophie pouts for a moment, leaning forward to better display her cleavage. \"<i>Really?  Well if you change your mind, come back and visit me.</i>\"  She turns around and fluffs her tail-feathers at you in what is clearly a dismissal.  You climb down, careful to avoid any other nests as you head back to check on your camp and its portal.", false);
 	doNext(13);
-	if(player.lib > 25) stats(0,0,0,0,-1,0,0,0);
-	if(player.lust > 50) stats(0,0,0,0,0,0,-5,0);
+	if(player.lib > 25) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -1, "sen", 0, "lus", 0, "cor", 0);
+	if(player.lust > 50) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -5, "cor", 0);
 }
 
 //[Sex]
@@ -256,8 +256,8 @@ public function sophieMeetingGotLost():void {
 	else {
 		outputText("Mmm, it's a shame you don't have a penis, or you could show me what I was missing.</i>\"  The sexually deprived bird-woman plies you with questions about the world for the better part of an hour, masturbating to several mid-conversation orgasms.  Once she exhausts herself, she thanks you and leans down for her nap.  Her tail-feathers fluff in what is clearly a dismissal.", false);
 		//(+10 + libmod lust, +1 int up to 50 int))
-		stats(0,0,0,0,0,0,(10+player.lib/4),0);
-		if(player.inte < 50) stats(0,0,0,1,0,0,0,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (10+player.lib/4), "cor", 0);
+		if(player.inte < 50) dynStats("str", 0,"tou", 0, "spe", 0, "int", 1, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 		//[Go to camp if neither of the above]
 		doNext(13);
 	}
@@ -272,8 +272,8 @@ public function tellSophieYoureForagingForStuff():void {
 	outputText("It takes a little while to make her understand the situation, but after a lengthy explanation the harpy finally gets it.   She doesn't comprehend your reasons, but at least she knows how important your mission is to you.   Sophie sighs, clearly bored with the discussion, and spreads her sizable thighs to begin circling a finger around the large, puffy entrance to her pussy.  Your eyes widen a bit at her brazen masturbation while your body heats with arousal of its own.  Though her posture is open, the shameless harpy doesn't seem to want a partner.  You take the hint that she's through talking and climb back down.\n\n", false);
 	
 	//(+10 + libmod lust, +1 int up to 50 int))
-	stats(0,0,0,0,0,0,(10+player.lib/4),0);
-	if(player.inte < 50) stats(0,0,0,1,0,0,0,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (10+player.lib/4), "cor", 0);
+	if(player.inte < 50) dynStats("str", 0,"tou", 0, "spe", 0, "int", 1, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 	doNext(13);
 }
 	
@@ -351,7 +351,7 @@ public function cramANippleInIt():void {
 			outputText("</i>\"", false);
 			if(player.totalCocks() > 0) {
 				outputText("  The harpy laughs and caresses your backside tenderly as she whispers, \"<i>It's been a long time, you know...</i>\"\n\n", false);
-				stats(0,0,0,0,0,0,25,0);
+				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 25, "cor", 0);
 			}
 			else outputText("\n\n", false);
 		}
@@ -363,7 +363,7 @@ public function cramANippleInIt():void {
 		if(player.totalCocks() > 0) {
 			outputText("  Maybe you'll let me try your 'other' milk next time?</i>\"  The harpie laughs and caresses your backside tenderly as she whispers, \"<i>It's been a long time, you know...</i>\"\n\n", false);
 			//(+25 lust)
-			stats(0,0,0,0,0,0,25,0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 25, "cor", 0);
 		}
 		else outputText("</i>\"\n\n", false);
 		flags[kFLAGS.SOPHIE_FOLLOWER_PROGRESS]++;
@@ -372,7 +372,7 @@ public function cramANippleInIt():void {
 	player.boostLactation(.1);
 	outputText("The busty harpy rubs her full belly as she disentangles herself from you.  She accidentally gives a cute little burp and colors crimson.  To hide her embarrassment, she turns and dismisses you with a wave of her tail-feathers.  It looks like Sophie was rather happy with how things turned out.", false);
 	if(player.cor > 60) outputText("  You give her wide ass a playful slap and start climbing down before she can retaliate.", false);
-	stats(0,0,0,0,0,0,-50,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -50, "cor", 0);
 	//increment times bfed.
 	flags[kFLAGS.BREASTFEAD_SOPHIE_COUNTER]++;
 	if(gameState == 1 || gameState == 2) cleanupAfterCombat();
@@ -510,7 +510,7 @@ public function consensualHotSophieDickings():void {
 	outputText("</i>\"\n\n", false);
 	//Apply harpy status.
 	luststickApplication(4);
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	//Sophiepreg
 	sophieFucked();
 	outputText("Do you take her up on her offer?", false);
@@ -544,7 +544,7 @@ public function postSophieSexSnuggle():void {
 	//Remove luststick
 	player.removeStatusAffect("Luststick");
 	//(+sensitivity, +libido
-	stats(0,0,0,0,1,1,0,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", 0, "cor", 0);
 	
 	//4 hours pass
 	doNext(15);
@@ -556,7 +556,7 @@ public function postSexSophieSnuggleTurnedDown():void {
 	outputText("", true);
 	outputText("You turn down her offer and assure her that you'll be fine.  Sophie giggles while you try to get dressed, and you see her amber eyes watching you as try to climb back down the mountain with a stiffy.  She seems greatly amused by your predicament.", false);
 	//(+sensitivity, +libido
-	stats(0,0,0,0,1,1,0,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 1, "lus", 0, "cor", 0);
 	doNext(13);
 }
 	
@@ -640,7 +640,7 @@ public function consensualSophieSexNoFit():void {
 	outputText("</i>\"\n\n", false);
 	//Apply harpy status.
 	luststickApplication(4);
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	//Sophiepreg
 	sophieFucked();
 	outputText("Do you take her up on her offer?", false);
@@ -739,7 +739,7 @@ public function sophieKissAttack():void {
 	if(player.hasStatusAffect("Luststick") >= 0) {
 		outputText("  Blood rushes to " + sMultiCockDesc() + " as you grow so hard so fast that it hurts.  ", false);
 		luststickApplication(2);
-		stats(0,0,0,0,0,0,(12+player.lib/10),0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (12+player.lib/10), "cor", 0);
 		if(player.lust < 70) outputText("The drugged lip-gloss is starting to get to you!\n", false);
 		else if(player.lust < 80) outputText("Her curvy thighs look so inviting.  You barely stop yourself before you climb in between them!\n", false);
 		else if(player.lust < 90) outputText("A trickle of pre-cum leaks from " + sMultiCockDesc() + ".  Sophie coos, \"<i>Why don't you give in and let mommy Sophie drain out all that juicy cum?</i>\"\n", false);
@@ -749,7 +749,7 @@ public function sophieKissAttack():void {
 	else {
 		outputText("  Your whole body blushes as your lips tingle with some unnatural sensation.  Her lips were drugged!  Your whole body flushes as arousal begins to course through your veins.  ", false);
 		luststickApplication(2);
-		stats(0,0,0,0,0,0,8+player.lib/10,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 8+player.lib/10, "cor", 0);
 		if(player.lust < 70) outputText("The drugged lip-gloss is starting to get to you!\n", false);
 		else if(player.lust < 80) outputText("Her curvy thighs look so inviting.  You barely stop yourself before you climb in between them!\n", false);
 		else if(player.lust < 90) outputText("A trickle of pre-cum leaks from " + sMultiCockDesc() + ".  Sophie coos, \"<i>Why don't you give in and let mommy Sophie drain out all that juicy cum?</i>\"\n", false);
@@ -795,7 +795,7 @@ public function sophieHarpyBoatsPC():void {
 	outputText("She hits you hard, nearly bowling you over.  Thankfully, her talons passed to either side of your torso.  They lock together behind your back and your face is pulled tightly into Sophie's smotheringly large mounds!", false);
 	if(rand(2) == 0) outputText("  She jiggles them around you pleasantly and coos, \"<i>Don't fight it baby.  Just let your body do what comes naturally.</i>\"\n", false);
 	else outputText("  She runs her long fingernails through your hair as she whispers, \"<i>Why fight it?  I'll make you feel so good.  Just relax and play with momma Sophie's tits.</i>\"\n", false);
-	stats(0,0,0,0,0,0,(13 + player.sens/10),0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (13 + player.sens/10), "cor", 0);
 }
 
 //Compulsion (Male Only)
@@ -808,7 +808,7 @@ public function sophieCompulsionAttack():void {
 	if(player.inte < 40 || (player.inte < 80 && rand(40) > (player.inte - 40))) {
 		outputText("You moan out loud as your arms move of their own volition.  They reach inside your " + player.armorName + " and stroke " + sMultiCockDesc() + ", caress the tip, and continue to fondle you a few moments.", false);
 		outputText("Even after regaining control of your limbs, you're left far more turned on by the ordeal.", false);
-		stats(0,0,0,0,0,0,(15 + player.cor/20 + player.lib/20),0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (15 + player.cor/20 + player.lib/20), "cor", 0);
 	}
 	//Player resists
 	else {
@@ -993,7 +993,7 @@ public function maleVictorySophieRape():void {
 	outputText("  Sophie's well-fucked slit gapes and drools whiteness once you pull out.  It won't be long until she has an egg at this rate.", false);
 	
 	//Victory - lust decrease, sensitivity decrease
-	stats(0,0,0,0,0,-1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
 	//Fuck & Preg counter
 	sophieFucked();
 	cleanupAfterCombat();
@@ -1049,7 +1049,7 @@ public function maleVictorySophieRapeHUGE():void {
 	luststickApplication(8);
 	
 	//Victory - lust decrease, sensitivity decrease
-	stats(0,0,0,0,0,-1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
 	//Fuck & Preg counter
 	sophieFucked();
 	cleanupAfterCombat();
@@ -1107,7 +1107,7 @@ public function sophieVictoryPussyGrind():void {
 	outputText("\"<i>Don't think I've given up on you yet.  One of these times you'll come around,</i>\" you declare as you get dressed.  Finished and refreshed, you slap her feathery ass and hop out of her nest to climb back down the mountain.", false);
 
 	//Victory - lust decrease, sensitivity decrease
-	stats(0,0,0,0,0,-1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
 	//Fuck & Piss-off counter
 	sophieFucked(false);
 	cleanupAfterCombat();
@@ -1152,7 +1152,7 @@ public function fuckDatClit():void {
 	player.lust = 100;
 	flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
 	cleanupAfterCombat();
-	stats(0,0,0,0,0,1,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 1, "lus", -100, "cor", 0);
 }
 	
 //LOSS SCENES
@@ -1201,7 +1201,7 @@ public function tinyDickSupremeSophieLoss():void {
 	
 	//END
 	//(0 libido-0 sensitivity and mino-blood numb-parts acknowledgements would be funny here; like, she can't get the PC off with the heat alone because he's so frigid and/or numb and has to employ the drugs in frustration. Almost like turning the tables on the tentacle monster. -Z)
-	stats(0,0,0,0,0,5,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 5, "lus", -100, "cor", 0);
 	sophieFucked();
 	luststickApplication(8);
 	cleanupAfterCombat();
@@ -1246,7 +1246,7 @@ public function normalLossRapuuuuSophie():void {
 	}
 	
 	outputText("  Sophie's hips pull you in more tightly as you spend the last of your white goo within her depths.   She murmurs, \"<i>Not bad for your first shot.</i>\"  Her voice shifts and buzzes as she suggests, \"<i>You're getting even harder now, little " + player.mf("boy","girl") + ".  Mhmmm, you'll cum again soon.</i>\"  The words burrow inside you and seem to squeeze more blood into your " + cockDescript(x) + ".  It gets so hard it's painful, and the tightness of her walls is almost too much to bear.  The bird-woman's face gives a tender, but knowing smile when you cum the second time, and the third time, and the fourth...", false);
-	stats(0,0,0,0,0,5,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 5, "lus", -100, "cor", 0);
 	sophieFucked();
 	luststickApplication(8);
 	cleanupAfterCombat();
@@ -1261,7 +1261,7 @@ public function tooBigForOwnGoodSophieLossRape():void {
 	outputText("Sophie reaches forwards with a clawed foot to pull down your armor, but your " + cockDescript(x) + " bursts free on its own.  She recoils in shock, nearly falling onto her feathery ass.   Sophie screeches, \"<i>How did you even hide that monster!?  I CAN'T TAKE THAT!</i>\"   She lashes and batters your head with her wings and kicks.  A particularly powerful hit lands just above your ears and things go black...\n\n", false);
 	
 	outputText("Hours later, you wake with an agonizing headache.   You sit up and fresh stabs of pain rock your world, nearly dropping you flat on your back again.  That harpy... she left you at the bottom of the mountain, and didn't even bother to cover your crotch back up!  Your " + cockDescript(x) + " is trembling, hard, and dripping pre-cum.  Its entire surface is covered in yellowish lip-prints, and judging from how tired you feel, Sophie found a way to make you cum numerous times.  With that many kisses covering you, you'll be hard for hours.  You get on your " + player.feet() + " and head back to camp.", false);
-	stats(0,0,0,0,0,5,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 5, "lus", -100, "cor", 0);
 	sophieFucked();
 	luststickApplication(16);
 	cleanupAfterCombat();
@@ -1273,7 +1273,7 @@ public function SophieLossRapeNoDonguuuu():void {
 	outputText("Utterly defeated, you collapse.   Sophie doesn't let up, and batters you mercilessly with her wings until you lose consciousness.\n\n", false);
 	
 	outputText("By the time you wake up, you're at the bottom of the mountain, and you feel as if you've fallen down the entire thing.  Obviously Sophie had enough care not to drop you to your death, but she didn't do you any favors on the ride either.   Yeesh.", false);
-	stats(-1,-1,0,0,0,0,0,0);
+	dynStats("str", -1,"tou", -1, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 	cleanupAfterCombat();
 	//If not pissed increment times pissed
 	if(flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] <= 0) {

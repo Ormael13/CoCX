@@ -72,7 +72,7 @@ public function tentacleEntwine():void {
 			else if(player.hasVagina()) outputText("The creature quickly positions a long tentacle with a single sucker over your clitoris. You feel the power of the suction on you, and your body quickly heats up.  Your clit engorges, prompting the beast to latch the sucker onto your " + clitDescript() + ".\n", false);
 			//Genderless
 			else outputText("The creature quickly positions a long tentacle against your " + assholeDescript() + ". It circles your pucker with slow, delicate strokes that bring unexpected warmth to your body.\n", false);
-			stats(0,0,0,0,0,0,(8+player.sens/20),0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (8+player.sens/20), "cor", 0);
 			player.createStatusAffect("TentacleBind",0,0,0,0);
 		}
 	}
@@ -142,7 +142,7 @@ public function tentacleVictoryRape():void {
 			outputText("You quickly reach a cunt-cramping orgasm, which forces the creature to unload a torrent of hot, musky fluids inside you. You feel bloated and stuffed as the beast reflexively sprays the entire contents of its seminal sacs…or whatever it stores its cum in…inside you. With a quick squeeze, you start expelling the tentacle, which prompts the creature to withdraw its tendril and leave your body. You walk away well satisfied while the abomination is too exhausted to move.", false);
 		}
 	}
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -232,7 +232,7 @@ public function tentacleLossRape():void {
 		if(player.balls > 0) outputText("Your balls have overfilled the creature!\n\n", false);
 		else outputText("Your cum has overfilled the creature!\n\n", false);
 		outputText("One last jerk from the creature breaks your hold and it pulls itself away from your member, excess cum spilling everywhere and flying through the air as it flops about. Clearly overwhelmed, the beast lumbers clumsily back into the bush. You laugh to yourself as you made the creature taste its own proverbial medicine as its efforts to overwhelm you completely backfired.", false);
-		stats(0.5, 0, -.5, -1, 5, 1, -100, 1);
+		dynStats("str", 0.5,"tou", 0, "spe", -.5, "int", -1, "lib", 5, "sen", 1, "lus", -100, "cor", 1);
 		monster.HP = 0;
 		if(player.HP == 0) player.HP++;
 		if(gameState > 0) cleanupAfterCombat();
@@ -316,7 +316,7 @@ public function tentacleLossRape():void {
 			}
 			outputText("The tentacles holding you release, leaking fluids everywhere.  You delight in giving one of the larger ones a hard stomp, as a reminder not to trifle with you.", false);
 			//end (victory)
-			stats(0, .5, -.5, -.5, 1, 1, -100, 1);
+			dynStats("str", 0,"tou", .5, "spe", -.5, "int", -.5, "lib", 1, "sen", 1, "lus", -100, "cor", 1);
 			player.boostLactation(.5);
 			monster.HP = 0;
 			if(player.HP == 0) player.HP++;
@@ -342,7 +342,7 @@ public function tentacleLossRape():void {
 			buttChange(40,true,true,false);
 			outputText("  It continues to violate your ass until you black out from exhaustion, the number of loads you've released no longer countable.", false);
 			//end (loss)
-			stats(0, 1, 0, -.5, 2, 1, -100, .5);
+			dynStats("str", 0,"tou", 1, "spe", 0, "int", -.5, "lib", 2, "sen", 1, "lus", -100, "cor", .5);
 			if(inCombat()) cleanupAfterCombat();
 			else doNext(14);
 			return;
@@ -351,7 +351,7 @@ public function tentacleLossRape():void {
 		if(player.hasCock() && player.cumQ() < 1500 && player.ass.analLooseness >= 0) {
 			outputText("Just as you think it's over, the tentacle inside your " + assholeDescript() + " begins to swell massively, causing another surge of cum to leave you, and another, and another.  It continues to violate your ass until you black out from exhaustion, the number of loads you've released no longer countable.", false);
 			//end (loss)
-			stats(0, 1, 0, -.5, 2, 1, -100, .5);
+			dynStats("str", 0,"tou", 1, "spe", 0, "int", -.5, "lib", 2, "sen", 1, "lus", -100, "cor", .5);
 			if(inCombat()) cleanupAfterCombat();
 			else doNext(14);
 			return;
@@ -362,7 +362,7 @@ public function tentacleLossRape():void {
 			buttChange(40,true,true,false);
 			outputText("  It continues to violate your ass until you black out from exhaustion, the number of times you've orgasmed no longer countable.", false);
 			//end (loss)
-			stats(0, 1, 0, -.5, 2, 1, -100, .5);
+			dynStats("str", 0,"tou", 1, "spe", 0, "int", -.5, "lib", 2, "sen", 1, "lus", -100, "cor", .5);
 			if(inCombat()) cleanupAfterCombat();
 			else doNext(14);
 			return;
@@ -377,7 +377,7 @@ public function tentacleLossRape():void {
 			if(player.balls > 0) outputText("r " + ballsDescriptLight(), false);
 			outputText(" empty and you turn around to leave, giving the spunk covered mass a swift kick as a reminder of your superiority.", false);
 			//end (victory)
-			stats(0, .5, -.5, -.5, 1, 1, -100, 1);
+			dynStats("str", 0,"tou", .5, "spe", -.5, "int", -.5, "lib", 1, "sen", 1, "lus", -100, "cor", 1);
 			monster.HP = 0;
 			if(player.HP == 0) player.HP++;
 			if(gameState > 0) cleanupAfterCombat();
@@ -385,7 +385,7 @@ public function tentacleLossRape():void {
 			return;
 		}
 		//end (loss)
-		stats(0, 1, 0, -.5, 2, 1, -100, .5);
+		dynStats("str", 0,"tou", 1, "spe", 0, "int", -.5, "lib", 2, "sen", 1, "lus", -100, "cor", .5);
 		if(inCombat()) cleanupAfterCombat();
 		else doNext(14);
 		return;
@@ -394,7 +394,7 @@ public function tentacleLossRape():void {
 	if(player.biggestLactation() >= 3.5 && player.gender > 0) {
 		slimeFeed();
 		outputText("Before you can react the creature has wrapped a long, sinewy tendril around each leg.  A third tendril quickly circles your waist.  You can feel the creature's strength immediately and wince as it tightens its grip.  The constricting pain is followed by a tingling, almost burning sensation, which you quickly recognize means the beast has injected you with some kind of poison.  A warm sensation floods your body and you realize with a start the poison is actually an aphrodisiac.\n\n", false);
-		stats(0,0,0,0,2,0,0,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 2, "sen", 0, "lus", 0, "cor", 0);
 		outputText("You feel light-headed as the drug spreads through your body quickly.  Your ", false);
 		//Just dicks
 		if(player.gender == 1) {
@@ -439,7 +439,7 @@ public function tentacleLossRape():void {
 		if(player.gender >= 2) outputText("Your " + allBreastsDescript() + " ache, but you can tell immediately they are not depleted.  More milk dribbles as the tentacles try to retreat, and you grin, hardly satisfied with the beast's attack.  You reach between your thighs, seizing the nearest knobbly tentacle.  The beast is so sated it offers no resistance as you begin to pound your " + vaginaDescript(0) + " with the living dildo.  The idea of turning the tables on the raping beast spurs you on to new heights and you cum quickly around the knobbly shaft, your cunt spasming and milking the bumpy tentacle hard.  As you finish with the tentacle the beast gives a final gurgle and retreats into the forest.", false);
 		//[Male]
 		else outputText("You feel your " + nippleDescript(0) + "s dribbling milk as the tentacles attempt their retreat.  You realize the beast has nowhere near drained you and you grin eagerly as your " + cockDescript(0) + " throbs mightily.  You reach back and seize the nearest knobby tentacle, the beast offers no resistance as you shove your " + cockDescript(0) + " into the tight, puckered orifice.  You moan in delight, grunting happily as you fuck the tight hole wildly.  The thought of turning the tables on the raping beast drives you closer to the edge; soon you bury all of your cock into the tight fuck tool and unload your massive torrent of cum into the tentacle.  Your hot cum gushes into the beast and you can feel the tentacle throb and squirm in protest as you fill the beast even more.  After your " + cockDescript(0) + " slips free the beast lets out a final gurgle of defeat and slithers away into the forest.", false);
-		stats(0, .5, -.5, -.5, 1, 1, -100, 1);
+		dynStats("str", 0,"tou", .5, "spe", -.5, "int", -.5, "lib", 1, "sen", 1, "lus", -100, "cor", 1);
 		player.boostLactation(.5);
 		monster.HP = 0;
 		if(player.HP == 0) player.HP++;
@@ -449,7 +449,7 @@ public function tentacleLossRape():void {
 	}
 	if(player.gender == 1) 
 	{
-		stats(-1, 0, 0, -1, 5, 2, 25, 1);
+		dynStats("str", -1,"tou", 0, "spe", 0, "int", -1, "lib", 5, "sen", 2, "lus", 25, "cor", 1);
 		if(player.cor < 75) outputText("It grabs you before you can get away!\n\nWhile you attempt to resist the abomination, its raw muscle mass is too much. ", false);
 		outputText("It pins you to the ground easily. You immediately feel a sharp, horrible pain ", false);
 		if(player.cockTotal() > 1) outputText("at the base of your " + multiCockDescriptLight() + ".", false);
@@ -463,7 +463,7 @@ public function tentacleLossRape():void {
 	if(player.gender == 2)
 	{
 		slimeFeed();
-		stats(0, 0, -1, -1, 5, 3, 20, 1);
+		dynStats("str", 0,"tou", 0, "spe", -1, "int", -1, "lib", 5, "sen", 3, "lus", 20, "cor", 1);
 		if(player.cor < 75) outputText("It grabs you before you can get away!\n\nWhile you struggle valiantly, the beast's raw might is more than a match for you. ", false);
 		outputText("Tentacles burst from the mass and bind your arms, legs, and midriff. ", false);
 		if(player.cor < 75) outputText("You struggle to break free, but the creature only constricts you further, ensuring your immobility. ", false);
@@ -477,7 +477,7 @@ public function tentacleLossRape():void {
 	if(player.gender == 3) 
 	{
 		slimeFeed();
-		stats(0, 0, -1, -1, 5, 4, 35, 2);
+		dynStats("str", 0,"tou", 0, "spe", -1, "int", -1, "lib", 5, "sen", 4, "lus", 35, "cor", 2);
 		if(player.cor < 75) outputText("While you attempt to resist the abomination, its raw muscle mass is too much. ", false);
 		outputText("It pins you to the ground easily. You immediately feel a sharp, horrible pain at the base of your ", false);
 		if(player.cockTotal() > 1) outputText("cocks", false);

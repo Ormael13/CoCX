@@ -78,7 +78,7 @@ public function oasisSexing():void {
 			outputText("and begins to slide herself up and down your shaft in complete ecstasy, moaning like a cheap whore. She seems relatively uncorrupted for a denizen of this realm and is firm, tight and free of fur. Only a pair of horns betrays her taint. The thought that you are perhaps one of her first cocks sends tingles down your spine.  ", false); 
 			if(player.cocks[0].cockLength > 6) {
 				outputText("The realisation that her pussy is slowly stretching over your " + cockDescript(0) + " gives you a thrill that can only be described as positively evil.  ", false);
-				stats(0,0,0,0,0,0,0,1);
+				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 1);
 			}
 			outputText("Soon the slender cock-whore begins to cum and she starts on what is about to be the first of several shuddering orgasms. You smile evilly as she cums around your " + cockDescript(0) + " and when her eyes roll back to the front of her head you know that there is more to come.  ", false);
 		}
@@ -124,7 +124,7 @@ public function oasisSexing():void {
 	buttChange(monster.cockArea(0), true);
 	//More fucking!
 	outputText("Around you you see the demons wrapped up in the frenzy of fucking that they've fallen into. No hole is unfilled and not a single cock isn't sunk into some being's flesh. The moans and screams are almost contagious and you feel them clouding your brain making you want more, harder.", false);
-	stats(0,0,0,-1,1,0,0,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", -1, "lib", 1, "sen", 0, "lus", 0, "cor", 0);
 	//Titzen!
 	if(player.breastRows.length > 0) {
 		if(player.biggestTitSize() > 1) {
@@ -143,7 +143,7 @@ public function oasisSexing():void {
 	if((monster.HP < 1 || monster.lust > 99) && gameState > 0) {
 		outputText("You fuck and fuck until not a single demon is capable of servicing your needs. They lie moaning and panting at the edge of the oasis, unable to move. You survey the fallen fiends with just a touch of pride and a whole lot of satisfaction, your body feeling stronger for the endurance exercise.", false);
 		cleanupAfterCombat();
-		stats(0,0,0,0,0,0,-100,1.5);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 1.5);
 		return;
 	}
 	//If you got here by losing combat!
@@ -157,7 +157,7 @@ public function oasisSexing():void {
 		}
 		outputText("The demons fuck you like animals until you can't come any more. Your every orifice is filled and you pump out orgasm after orgasm until you black out from the abuse.", false);
 		cleanupAfterCombat();
-		stats(0,.5,0,0,0,0,-100,3);
+		dynStats("str", 0,"tou", .5, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 3);
 		return;
 	}
 	//If you submitted willingly - chance of bad end
@@ -166,7 +166,7 @@ public function oasisSexing():void {
 		return;
 	}
 	outputText("You fuck for hours 'feasting' with the demons. Pain, pleasure and exhaustion intermingle and no matter how hard you try to cling to consciousness you are in no state to concentrate. You dangle over the edge for what seems like eternity before another orgasm, stronger than any other, hits you like a solid wall and you black out. For a little while you drift in and out of conscious reality to find your body still the object of demonic attentions until eventually you wake to find that the seemingly endless string of orgasms has stopped. Looking around you see what demons remain awake engaged solely in fucking each other. Tender and sore from the abuse and still finding it hard to concentrate you gather your clothes and steal away, leaving them to the tail end of their orgy. In the aftermath you feel like you've just run an endurance race, but the rubbed raw sensitivity of your brutally fucked body tells another tale.", false);
-	stats(0,.5,0,0,0,.5,-100,4);
+	dynStats("str", 0,"tou", .5, "spe", 0, "int", 0, "lib", 0, "sen", .5, "lus", -100, "cor", 4);
 	if(gameState == 1 || gameState == 2) cleanupAfterCombat();
 	else doNext(1);
 }

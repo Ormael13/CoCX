@@ -246,6 +246,6 @@ public function useTheSexMachine():void {
 		}
 	}
 	fatigue(10);
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	doNext(13);
 }

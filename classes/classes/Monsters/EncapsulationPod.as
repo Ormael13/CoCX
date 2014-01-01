@@ -1,5 +1,6 @@
 ﻿package classes.Monsters
 {
+	import classes.CoC;
 	import classes.Creature;
 	import classes.Monster;
 	import classes.CockTypesEnum;
@@ -74,9 +75,9 @@
 			return _long;
 		}
 
-		public function EncapsulationPod(mainClassPtr:*) 
+		public function EncapsulationPod(game:CoC)
 		{
-			super(mainClassPtr);
+			super(game);
 			init01Names("the ", "pod", "pod", "");
 			init02Genderless();
 			init03BreastRows([0,0]);

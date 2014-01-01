@@ -311,7 +311,7 @@ public function nomnomnom():void {
 		else if(player.femininity <= 25) outputText("females squirm", false);
 		else outputText("other patrons squirm and fill out their pants", false);
 		outputText(", none of them tries to make a move.  Pity.", false);
-		stats(0,0,0,0,0,0,(20+player.lib/10),0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (20+player.lib/10), "cor", 0);
 		minoCumAddiction(10);
 	}
 	else {
@@ -469,7 +469,7 @@ public function malesHelpOutWithEaster():void {
 	outputText("  It's about all you can do to get to the floor before passing out.  So much for helping.  In the back of your mind you picture the minotaur with a smug grin as your consciousness fades.");
 	outputText("\n\n<b>Later...</b>");
 	outputText("\nYou stumble back to camp, still somewhat out of it from your experience.");
-	stats(0,0,0,0,1,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 0, "lus", -100, "cor", 0);
 	player.cumMultiplier += 2;
 	doNext(13);
 }

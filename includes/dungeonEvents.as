@@ -38,7 +38,7 @@ public function doDungeon(eventNo:Number):void {
 	if(eventNo == 11011) {
 		spriteSelect(96);
 		outputText("You take a sip of the rich creamy coffee and suddenly feel refreshed. As you replace the coffeepot, the busty coffee-maker comes to life, grabbing her thick dusky nipples and squeezing out a trickle of scaldingly hot liquid. You can see her eyes roll up into her head from what you assume to be pleasure as she automatically refills the missing coffee, mouth open with ecstasy.  Her movements gradually slow as she quivers almost imperceptibly. A contented smile graces her features as immobility overtakes her, freezing her back in place.  You wonder if 'Mrs. Coffee' was created, or a victim of this place's dark master.", true);
-		stats(0,0,0,0,0,0,1,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 1, "cor", 0);
 		HPChange(35, false);
 		doNext(1);
 		return;
@@ -209,7 +209,7 @@ public function doDungeon(eventNo:Number):void {
 				outputText(", making it jiggle delightfully.", false);
 				//85% success rate for the jiggly girls
 				if(rand(100) <= 95) {
-					stats(0,0,0,0,0,0,rand(monster.buttRating) + 10,0);
+					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", rand(monster.buttRating) + 10, "cor", 0);
 					outputText("\nThe display is quite arousing.", false);
 				}
 				else outputText("\nYou're unimpressed.\n\n", false);
@@ -218,7 +218,7 @@ public function doDungeon(eventNo:Number):void {
 				outputText(".", false);
 				//50%ish chance of success for the tight butted.
 				if(rand(100) <= (70 + monster.buttRating*2)) {
-					stats(0,0,0,0,0,0,rand(monster.buttRating) + 9,0);
+					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", rand(monster.buttRating) + 9, "cor", 0);
 					outputText("\nThe display is quite arousing.", false);
 				}
 				else outputText("\nYou're unimpressed.\n\n", false);
@@ -234,7 +234,7 @@ public function doDungeon(eventNo:Number):void {
 				outputText(monster.capitalA + monster.short + " caresses some of her ample chest-flesh before shaking it from side to side enticingly.", false);
 				if(monster.lust >= 50) outputText("  " + monster.pronoun2 + " hard nipples seem to demand your attention.", false);
 				if(rand(100) <= (65+monster.biggestTitSize())) {
-					stats(0,0,0,0,0,0,rand(monster.breastRows[0].breastRating) + monster.breastRows.length + 10,0);
+					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", rand(monster.breastRows[0].breastRating) + monster.breastRows.length + 10, "cor", 0);
 					outputText("\nThe display is quite arousing.", false);
 				}
 				else outputText("\nYou're unimpressed.\n\n", false);
@@ -245,7 +245,7 @@ public function doDungeon(eventNo:Number):void {
 				if(monster.lust >= 50) outputText(", your " + nippleDescript(0) + "s painfully visible.", false);
 				else outputText(".", false);
 				if(rand(100) <= (54+(monster.breastRows.length-1)*15+monster.breastRows[0].breastRating)) {
-					stats(0,0,0,0,0,0,rand(monster.breastRows[0].breastRating) + monster.breastRows.length*monster.breastRows[0].breasts + 5,0);
+					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", rand(monster.breastRows[0].breastRating) + monster.breastRows.length*monster.breastRows[0].breasts + 5, "cor", 0);
 					outputText("\nThe display is quite arousing.", false);
 				}
 				else outputText("\nYou're unimpressed.\n\n", false);
@@ -258,7 +258,7 @@ public function doDungeon(eventNo:Number):void {
 			//Success = 50% + 10% times each cock/vagina
 			//rand(vaginas*2 + cocks*2) + wetness and/or length/6
 			if(rand(101) <= (65+monster.vaginas.length*10 + monster.cocks.length*10)) {
-				stats(0,0,0,0,0,0,rand(monster.vaginas.length*2 + monster.cocks.length*2) + 13,0);
+				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", rand(monster.vaginas.length*2 + monster.cocks.length*2) + 13, "cor", 0);
 				outputText("\nThe display is quite arousing.", false);
 			}
 			else outputText("\nYou're unimpressed.\n\n", false);
@@ -281,14 +281,14 @@ public function doDungeon(eventNo:Number):void {
 			if(temp == 0) {
 				outputText("ass (4)", false);
 				takeDamage(4);
-				stats(0,0,0,0,0,0,6 + int(player.sens/20),0);
+				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 6 + int(player.sens/20), "cor", 0);
 			}
 			//Whip yo tits!
 			if(temp == 1) {
 				if(player.breastRows.length > 0 && player.biggestTitSize() > 0) outputText(allBreastsDescript() + " (9)", false);
 				else outputText("chest (9)", false);
 				takeDamage(9);
-				stats(0,0,0,0,0,0,4 + int(player.sens/15),0);		
+				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 4 + int(player.sens/15), "cor", 0);
 			}
 			//Whip yo groin
 			if(temp == 2) {
@@ -298,17 +298,17 @@ public function doDungeon(eventNo:Number):void {
 				}
 				if(player.gender == 1) {
 					outputText("groin, dealing painful damage to your " + multiCockDescriptLight() + ", doubling you over in agony (" + int((player.tou*2 + 50) / 4) + ")", false);
-					stats(0,0,0,0,0,0,-15,0);
+					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -15, "cor", 0);
 					takeDamage(int((maxHP()) / 4));
 				}
 				if(player.gender == 2) {
 					outputText("groin, making your " + vaginaDescript(0) + " sting with pain (-10)", false);
 					takeDamage(10);
-					stats(0,0,0,0,0,0,-8,0);
+					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -8, "cor", 0);
 				}
 				if(player.gender == 3) {
 					outputText("groin, dealing painful damage to your " + multiCockDescriptLight() + " and " + vaginaDescript(0) + ", doubling you over in agony (" + int((player.tou*2 + 50) / 3) + ")", false);
-					stats(0,0,0,0,0,0,-20,0);
+					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -20, "cor", 0);
 					takeDamage(int((maxHP()) / 3));	
 				}
 			}
@@ -455,17 +455,17 @@ public function doDungeon(eventNo:Number):void {
 			outputText("  You land hard on your ass, momentarily stunned as the demonic cock-tentacle curls around your " + player.legs() + ", smearing them with oozing demonic fluids.", false);
 			if(player.lust >= 80 || player.cor >= 80) {
 				outputText("  Moaning with desire, you lick your lips as you slide your well-lubricated " + player.legs() + " free.  You gather a dollop of cum and lick it seductively, winking at the incubus and hoping to make him cave into his desire.", false);
-				stats(0,0,0,0,0,0,13,1);
+				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 13, "cor", 1);
 			}
 			else {
 				if(player.lust >= 50 || player.cor >= 50) {
 					outputText("  Blushing at the scent and feel of cum on your " + player.legs() + ", you twist and pull free.  You find yourself wondering what this demon's dick would taste like.", false);
-					stats(0,0,0,0,0,0,8 + player.cor/20,0);
+					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 8 + player.cor/20, "cor", 0);
 					
 				}
 				else {
 					outputText("  Disgusted, you pull away from the purplish monstrosity, the act made easier by your well-slimed " + player.legs() + ".", false);
-					stats(0,0,0,0,0,0,5 + player.cor/20,0);
+					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5 + player.cor/20, "cor", 0);
 				}
 			}
 			takeDamage(5);
@@ -488,7 +488,7 @@ public function doDungeon(eventNo:Number):void {
 		//Face
 		if(temp == 0) {
 			outputText("face.  The gooey demon-seed oozes and slides over you with a mind of its own, forcing its way into your mouth and nose!  You can feel it moving around inside you, doing its best to prepare you for its master.", false);
-			stats(0,0,0,0,0,0,3,0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 3, "cor", 0);
 			if(player.hasStatusAffect("DemonSeed") < 0) player.createStatusAffect("DemonSeed",5,0,0,0);
 			else player.statusAffects[player.hasStatusAffect("DemonSeed")].value1 += 7;
 			slimeFeed();
@@ -497,7 +497,7 @@ public function doDungeon(eventNo:Number):void {
 		if(temp == 1) {
 			if(player.hasFuckableNipples()) {
 				outputText(allBreastsDescript() + ".  The gooey demon-seed oozes and slides over you with a mind of its own, forcing its way into your open nipples.  You can feel it moving around inside you, doing its best to prepare you for its master.", false);
-				stats(0,0,0,0,0,0,3,0);
+				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 3, "cor", 0);
 				if(player.hasStatusAffect("DemonSeed") < 0) player.createStatusAffect("DemonSeed",5,0,0,0);
 				else player.statusAffects[player.hasStatusAffect("DemonSeed")].value1 += 8;
 				slimeFeed();
@@ -508,7 +508,7 @@ public function doDungeon(eventNo:Number):void {
 		if(temp == 2) {
 			if(player.vaginas.length > 0) {
 				outputText("crotch.  The gooey demon-seed oozes and slides over you with a mind of its own, forcing its way past your " + player.armorName + " and into your " + vaginaDescript(0) + ".  You can feel it moving around inside you, doing its best to prepare you for its master.", false);
-				stats(0,0,0,0,0,0,3,0);
+				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 3, "cor", 0);
 				if(player.hasStatusAffect("DemonSeed") < 0) player.createStatusAffect("DemonSeed",5,0,0,0);
 				else player.statusAffects[player.hasStatusAffect("DemonSeed")].value1 += 8;
 				slimeFeed();
@@ -545,7 +545,7 @@ public function doDungeon(eventNo:Number):void {
 				outputText("  ", false);
 			}
 			outputText("You glance over to the pile of glistening entwined bodies as they writhe in pleasure, and find yourself drawn in to the mass.  You spend the next four hours suckling tainted breast milk, fucking gaping pussies, and doing your damnedest to milk as much cum from the dick-girls around you.  Eventually the drugs work their way out of your system, leaving you to recover on the floor.  Cum, milk, and sweat drip from your nude form as you try to clean up and get dressed.", false);
-			stats(0,0,0,-2,4,0,-100,4);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", -2, "lib", 4, "sen", 0, "lus", -100, "cor", 4);
 			slimeFeed();
 			player.createStatusAffect("TensionReleased",0,0,0,0);
 		}
@@ -595,7 +595,7 @@ public function doDungeon(eventNo:Number):void {
 				//HERM
 				if(player.vaginas.length > 0 && player.cocks.length > 0) outputText("You feel your " + multiCockDescript() + " getting milked by many wet holes, though you are too busy sucking cocks and moaning in ecstasy to notice who they belong to.  ", false);
 				outputText("The next eight hours are lost to your desires as you cum over and over, feeling mind-shattering pleasure.  You recover a while on the floor, soaked with a mixture of milk, cum, and pussy-juice.  Getting dressed is a bit troublesome with the recent changes, but you manage to squeeze back into your " + player.armorName + ".  You walk away while still feeling horny, and the moaning of the girls behind you doesn't help.  Maybe you could stay for another round...", false);
-				stats(0,0,0,-2,4,0,-100,4);
+				dynStats("str", 0,"tou", 0, "spe", 0, "int", -2, "lib", 4, "sen", 0, "lus", -100, "cor", 4);
 				player.createStatusAffect("TensionReleased",0,0,0,0);
 				player.statusAffects[player.hasStatusAffect("TensionReleased")].value1++;
 				slimeFeed();
@@ -650,7 +650,7 @@ public function doDungeon(eventNo:Number):void {
 		outputText("The demoness blinks her eyes closed and knits her eyebrows in concentration.  The red orbs open wide and she smiles, licking her lips.   The air around her grows warmer, and muskier, as if her presence has saturated it with lust.", false);
 		if(monster.hasStatusAffect("Lust Aura") >= 0) {
 			outputText("  Your eyes cross with unexpected feelings as the taste of desire in the air worms it's way into you.  The intense aura quickly subsides, but it's already done its job.", false);
-			stats(0,0,0,0,0,0,(8+int(player.lib/20 + player.cor/25)),0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (8+int(player.lib/20 + player.cor/25)), "cor", 0);
 		}
 		else {
 			monster.createStatusAffect("Lust Aura",0,0,0,0);
@@ -673,14 +673,14 @@ public function doDungeon(eventNo:Number):void {
 				outputText("The milk splashes into your " + player.armorName + ", soaking you effectively.  ", false);
 				if(player.cocks.length > 0) {
 					outputText("Your " + cockDescript(0) + " gets hard as the milk lubricates and stimulates it.  ", false);
-					stats(0,0,0,0,0,0,5,0);
+					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5, "cor", 0);
 				}
 				if(player.vaginas.length > 0) {
 					outputText("You rub your thighs together as the milk slides between your pussy lips, stimulating you far more than it should.  ", false);
-					stats(0,0,0,0,0,0,5,0);
+					dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5, "cor", 0);
 				}
 			}
-			stats(0,0,0,0,0,0,7 + player.sens/20,0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 7 + player.sens/20, "cor", 0);
 			if(player.biggestLactation() > 1) outputText("Milk dribbles from your " + allBreastsDescript() + " in sympathy.", false);
 		}
 		combatRoundOver();
@@ -978,7 +978,7 @@ public function doDungeon(eventNo:Number):void {
 	if(eventNo == 11055) {
 		outputText("\n\nThe omnibus disappeared while you were examining the changes.  You guess you did get what you wanted.  You blush and smile, still feeling very horny.  You decide to use the privacy of the office to relieve the tension you've been building up since you arrived.\n\nYou masturbate quickly and efficiently, eager to calm down and resume your exploration.  In no time at all an orgasm crashes through your body.  Stretching and standing up, you find yourself still aroused.\n\nYou slap your forehead as realization washes over you - <b>the demoness' magic is keeping you from ever being totally satisfied!</b>\n(Perk Gained - Omnibus' Gift - Minimum lust has been increased!)", false);
 		player.createPerk("Omnibus' Gift",0,0,0,0,"Raises your minimum lust by up to 35 and slightly reduces lust gain.");
-		stats(0,0,0,0,0,0,-100,2);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 2);
 		cleanupAfterCombat();
 		return;
 	}

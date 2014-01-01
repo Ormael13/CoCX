@@ -3,6 +3,7 @@
  */
 package classes.Monsters
 {
+	import classes.CoC;
 	import classes.Cock;
 	import classes.CockTypesEnum;
 	import classes.Monster;
@@ -30,9 +31,9 @@ package classes.Monsters
 			}
 		}
 
-		public function LustyDemons(mainClassPtr:*)
+		public function LustyDemons(game:CoC)
 		{
-			super(mainClassPtr);
+			super(game);
 			init01Names("the ", "lusty demons", "demonmob", "You're facing a group of thirty demons of various kinds.  Imps, incubi and succubi of all sizes and colors are encircling you, doing their best to show their genitals or their gigantic rows of breasts, often both.  You can see an impressive number of towering cocks, drooling pussies, and jiggling tits wiggle around as they move.  Most of the genitalia are monstrous, ridiculously disproportionate to the actual demons sporting them - to say nothing of the imps!  Some of the succubi are winking at you, blowing invisible kisses as they dance in circles around your pole.  Among them, you can easily spot the tallest demoness of the horde, Vapula; her perfect purple-skinned body, big perky boobs, luscious buttocks, fleshy lips, and seductive stare draw your attention like a magnet.  She's sporting a pair of magnificent wings and her abundant hair gives her face a fierce, lion-like appearance.  While her eyes ravage you with an insatiable hunger, she gives orders with the assurance of a well-established dominatrix.",true);
 			init02Male([new Cock(18,2),new Cock(18,2,CockTypesEnum.DEMON)],2,1,3);
 			init02Female(VAGINA_WETNESS_SLICK,VAGINA_LOOSENESS_LOOSE);

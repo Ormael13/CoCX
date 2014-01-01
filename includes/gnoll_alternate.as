@@ -56,7 +56,7 @@ public function hyenaPhysicalAttack():void {
 		//Count down 1 attack then recursively call the function, chipping away at it.
 		if(monster.statusAffectv1("attacks") - 1 >= 0) {
 			monster.addStatusValue("attacks",1,-1);
-			eAttack();
+			monster.eAttack();
 		}
 		return;
 	}
@@ -73,7 +73,7 @@ public function hyenaPhysicalAttack():void {
 		//Count down 1 attack then recursively call the function, chipping away at it.
 		if(monster.statusAffectv1("attacks") - 1 >= 0) {
 			monster.addStatusValue("attacks",1,-1);
-			eAttack();
+			monster.eAttack();
 		}
 		return;
 	}
@@ -85,7 +85,7 @@ public function hyenaPhysicalAttack():void {
 		//Count down 1 attack then recursively call the function, chipping away at it.
 		if(monster.statusAffectv1("attacks") - 1 >= 0) {
 			monster.addStatusValue("attacks",1,-1);
-			eAttack();
+			monster.eAttack();
 		}
 		return;
 	}
@@ -99,7 +99,7 @@ public function hyenaPhysicalAttack():void {
 		//Count down 1 attack then recursively call the function, chipping away at it.
 		if(monster.statusAffectv1("attacks") - 1 >= 0) {
 			monster.addStatusValue("attacks",1,-1);
-			eAttack();
+			monster.eAttack();
 		}
 		return;
 	}
@@ -121,7 +121,7 @@ public function hyenaPhysicalAttack():void {
 			outputText("\nYou notice that some kind of unnatural heat is flowing into your body from the wound", false);
 			if(player.inte > 50) outputText(", was there some kind of aphrodisiac on the knife?", false);
 			else outputText(".", false);
-			stats(0,0,0,0,0,0,(player.lib/20 + rand(4)+1),0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (player.lib/20 + rand(4)+1), "cor", 0);
 		}
 		if(monster.lustVuln > 0 && player.armorName == "barely-decent bondage straps") {
 			if(!monster.plural) outputText("\n" + monster.capitalA + monster.short + " brushes against your exposed skin and jerks back in surprise, coloring slightly from seeing so much of you revealed.", false);
@@ -227,7 +227,7 @@ public function hyenaSnapKicku():void {
 			outputText("A glint enters the dark eyes of the gnoll before she strides forward and pivots.  A long, spotted leg snaps up and out to slam against your " + chestDesc(), false);
 			if(player.biggestTitSize() >= 1) outputText(", sending a wave of pain through the sensitive flesh", false);
 			outputText(".  A small, traitorous part of you can't help but notice a flash of long, dark flesh beneath her loincloth even as you stagger back from the impact. (" + damage + ")", false);
-			stats(0,0,0,0,0,0,2,0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 2, "cor", 0);
 		}
 	}
 	combatRoundOver();
@@ -239,12 +239,12 @@ public function hyenaArousalAttack():void {
 	//<Hyena Attack 4 – Arousal Attack – Highly Successful>
 	if(player.cor + player.lib > chance + 50) {
 		outputText("A wry grin spreads across the gnoll's face before she sprints towards you.  Too fast to follow, she flies forward, and you desperately brace for an impact that doesn't come.  Instead of striking you, two spotted paws clamp behind your neck and pull your head down, planting your face against her leather loincloth.  A powerful, musky smell burns in your nose and the feel of firm flesh behind the flimsy leather leaves a tingling sensation along your face.  She holds you there, pressed against her groin for several moments, desire growing deep within your body, before you find the strength and will to pull away.  The amazon grins, letting you stumble back as you try to fight off the feel of her body.\n\n", false);
-		stats(0,0,0,0,0,0,(25 + player.lib/20 + player.sens/5),0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (25 + player.lib/20 + player.sens/5), "cor", 0);
 	}
 	//<Hyena Attack 4 – Arousal Attack – Mildly Successful>
 	else if(20 + player.cor + player.lib > chance) {
 		outputText("A lazy grin spreads across the gnoll's face before she sprints towards you.  Too fast to follow, she flies forward, and you desperately brace for an impact that doesn't come.  Instead of striking you, two spotted paws clamp behind your neck and pull your head down, planting your face against her leather loincloth.  A powerful, musky smell burns in your nose and the feel of firm flesh behind the flimsy leather leaves a tingling sensation along your face.  Instinctively, you tear away from the hold, stumbling away from the sensations filling your mind, though some desire remains kindled within you.", false);
-		stats(0,0,0,0,0,0,(15 + player.lib/20 + player.sens/5),0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (15 + player.lib/20 + player.sens/5), "cor", 0);
 	}
 	//<Hyena Attack 4 – Arousal Attack – Unsuccessful>
 	else {
@@ -339,7 +339,7 @@ public function hyenaSpearLossAnal():void {
 	//<For Slimes> 
 	if(player.lowerBody == LOWER_BODY_TYPE_GOO) outputText("  Even as your eyes slide closed, you see the hyena kicking open the circle of dust.", false);
 	outputText("  The last thing you hear before blackness overtakes you is the barking laugh of the hyena as she leaves her newest conquest to sleep in the fields of grass.", false);
-	stats(0,0,0,0,0,2,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 2, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -422,7 +422,7 @@ public function hyenaVictoryRapeFellatio():void {
 		outputText("  You feel your knees weaken as her muzzle works harder and faster, trying to drain you of every drop.  He paws wrap around your waist and powerful arms lift you and lay you on the ground as that talented muzzle continues to milk you dry.\n\n", false);
 	}
 	outputText("The world goes gray and fuzzy as your lose yourself in the afterglow of the powerful orgasm.  When you last sit up, dizzy, you find that the hyena has disappeared.  You find your " + player.armorName + " neatly folded next to you, but absolutely coated in the juices of the departed amazon.  Next to this musky pile is a small bag containing her gift to you.", false);
-	stats(0,0,0,0,0,0,-100,0);	
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -453,6 +453,6 @@ public function victoryRapeHyenaCunnilingus():void {
 	outputText("That final action is too much for your abused body.  Pure ecstasy floods through your mind as your " + vaginaDescript(0) + " spasms wildly.  Your honey splashes out of you, the hyena trying to catch the juices on her tongue, though much splatters over her tawny throat and breasts.  Her deft tongue delves inside of you, twisting and heightening your orgasm.  The world fades to nothing but pleasure.\n\n", false);
 
 	outputText("When you awake some time later, still heady with pleasure, you find your " + player.armorName + " piled neatly next to you, along with what appears to be a thank you gift from the now-absent gnoll.  The memory of the amazon's incredible strength and lithe form brings a smile to your lips as you prepare to leave.", false);
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }

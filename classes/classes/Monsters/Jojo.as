@@ -1,5 +1,6 @@
 ﻿package classes.Monsters
 {
+	import classes.CoC;
 	import classes.Cock;
 	import classes.Creature;
 	import classes.Monster;
@@ -30,9 +31,9 @@
 			game.eventParser(5024);
 		}
 
-		public function Jojo(mainClassPtr:*)
+		public function Jojo(game:CoC)
 		{
-			super(mainClassPtr);
+			super(game);
 			trace("Jojo Constructor!");
 			init01Names("", "Jojo", "jojo", "Jojo is an anthropomorphic mouse with immaculate white fur.  Though he stands only four feet tall, he is covered in lean muscle and moves with incredible speed.  He wears loose white clothes wrapped in prayer beads and tattered prayer papers.");
 			init02Male(new Cock(7.5,1.8),2,1,1,1000);
@@ -50,19 +51,19 @@
 			initX_Specials(5021);
 			//Create jojo sex attributes
 			//Variations based on jojo's corruption.
-			if(mainClassPtr.monk == 3) {
+			if(game.monk == 3) {
 				this.lust += 30;
 				this.cocks[0].cockThickness += .2;
 				this.cocks[0].cockLength += 1.5;
 				if(player.gender == 1 || player.gender == 3) this.ass.analLooseness = 2;
 			}
-			if(mainClassPtr.monk == 4) {
+			if(game.monk == 4) {
 				this.lust += 40;
 				this.cocks[0].cockThickness += .5;
 				this.cocks[0].cockLength += 3.5;
 				if(player.gender == 1 || player.gender == 3) this.ass.analLooseness = 3;
 			}
-			if(mainClassPtr.monk == 5) {
+			if(game.monk == 5) {
 				this.lust += 50;
 				this.cocks[0].cockThickness += 1;
 				this.cocks[0].cockLength += 5.5;

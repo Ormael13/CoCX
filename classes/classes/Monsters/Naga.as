@@ -1,5 +1,6 @@
 ﻿package classes.Monsters
 {
+	import classes.CoC;
 	import classes.Creature;
 	import classes.Monster;
 	import classes.CockTypesEnum;
@@ -22,16 +23,16 @@
 		{
 			if(pcCameWorms){
 				outputText("\n\nThe naga's eyes go wide and she turns to leave, no longer interested in you.", false);
-				game.stats(0,0,0,0,0,0,-100,0);
+				game.dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 				game.doNext(game.cleanupAfterCombat);
 			} else {
 				game.nagaFUCKSJOOOOOO();
 			}
 		}
 
-		public function Naga(mainClassPtr:*)
+		public function Naga(game:CoC)
 		{
-			super(mainClassPtr);
+			super(game);
 			trace("Naga Constructor!");
 			init01Names("the ", "naga", "naga", "You are fighting a naga. She resembles a beautiful and slender woman from the waist up, with dark hair hanging down to her neck. Her upper body is deeply tanned, while her lower body is covered with shiny scales, striped in a pattern reminiscent of the dunes around you. Instead of bifurcating into legs, her hips elongate into a snake's body which stretches far out behind her, leaving a long and curving trail in the sand.  She's completely naked, with her round C-cup breasts showing in plain sight. In her mouth you can see a pair of sharp, poisonous fangs and a long forked tongue moving rapidly as she hisses at you.");
 			init02Female(VAGINA_WETNESS_SLAVERING,VAGINA_LOOSENESS_NORMAL,40);

@@ -1,5 +1,6 @@
 ﻿package classes.Monsters
 {
+	import classes.CoC;
 	import classes.Creature;
 	import classes.Monster;
 	import classes.CockTypesEnum;
@@ -24,9 +25,9 @@
 			game.eventParser(5095);
 		}
 
-		public function Marble(mainClassPtr:*)
+		public function Marble(game:CoC)
 		{
-			super(mainClassPtr);
+			super(game);
 			trace("Marble Constructor!");
 			init01Names("", "Marble", "marble", "Before you stands a female humanoid with numerous cow features, such as medium-sized cow horns, cow ears, and a cow tail.  She is very well endowed, with wide hips and a wide ass.  She stands over 6 feet tall.  She is using a large two handed hammer with practiced ease, making it clear she is much stronger then she may appear to be.");
 			init02Female(VAGINA_WETNESS_NORMAL,VAGINA_LOOSENESS_NORMAL);

@@ -1,6 +1,7 @@
 ﻿package classes.Monsters 
 {
 	import classes.Appearance;
+	import classes.CoC;
 	import classes.Creature;
 	import classes.Monster;
 	import classes.CockTypesEnum;
@@ -24,7 +25,7 @@
 					outputText("You smile in satisfaction as the " + short + " spreads her legs and starts frigging her honey-soaked cunt.  The sweet scent oozing from between her legs is too much to bear, arousing you painfully, and you see an easy way to relieve it..\n\nWhat do you do to her?", true);
 				}
 				player.lust = 98;
-				game.stats(0,0,0,0,0,0,1,0);
+				game.dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 1, "cor", 0);
 				var temp2:int = 0;
 				var temp3:int = 0;
 				if(player.hasStatusAffect("Feeder") >= 0) temp3 = 2484;
@@ -52,9 +53,9 @@
 			}
 		}
 
-		public function BeeGirl(mainClassPtr:*)
+		public function BeeGirl(game:CoC)
 		{
-			super(mainClassPtr);
+			super(game);
 			init01Names("a ", "bee-girl", "beegirl", "A bee-girl buzzes around you, filling the air with intoxicatingly sweet scents and a buzz that gets inside your head.  She has a humanoid face with small antennae, black chitin on her arms and legs that looks like shiny gloves and boots, sizable breasts, and a swollen abdomen tipped with a gleaming stinger.");
 			init02Female(VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_GAPING);
 			init03BreastRows("DD");

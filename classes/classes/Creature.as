@@ -2883,6 +2883,84 @@ package classes
 				}
 			}
 		}
+
+		public function buttChangeNoDisplay(cArea:Number):Boolean {
+			var stretched:Boolean = false;
+			//cArea > capacity = autostreeeeetch half the time.
+			if(cArea >= analCapacity() && rand(2) == 0) {
+				if(ass.analLooseness >= 5) {}
+				else ass.analLooseness++;
+				stretched = true;
+				//Reset butt stretchin recovery time
+				if(hasStatusAffect("ButtStretched") >= 0) changeStatusValue("ButtStretched",1,0);
+			}
+			//If within top 10% of capacity, 25% stretch
+			if(cArea < analCapacity() && cArea >= .9*analCapacity() && rand(4) == 0) {
+				ass.analLooseness++;
+				stretched = true;
+			}
+			//if within 75th to 90th percentile, 10% stretch
+			if(cArea < .9 * analCapacity() && cArea >= .75 * analCapacity() && rand(10) == 0) {
+				ass.analLooseness++;
+				stretched = true;
+			}
+			//Anti-virgin
+			if(ass.analLooseness == 0) {
+				ass.analLooseness++;
+				stretched = true;
+			}
+			//Delay un-stretching
+			if(cArea >= .5 * analCapacity()) {
+				//Butt Stretched used to determine how long since last enlargement
+				if(hasStatusAffect("ButtStretched") < 0) createStatusAffect("ButtStretched",0,0,0,0);
+				//Reset the timer on it to 0 when restretched.
+				else changeStatusValue("ButtStretched",1,0);
+			}
+			if(stretched) {
+				trace("BUTT STRETCHED TO " + (ass.analLooseness) + ".");
+			}
+			return stretched;
+		}
+
+		public function cuntChangeNoDisplay(cArea:Number):Boolean{
+			if(vaginas.length == 0) return false;
+			var stretched:Boolean = false;
+			var devirgined:Boolean = false;
+			if(hasPerk("Fera's Boon - Milking Twat") < 0 || vaginas[0].vaginalLooseness <= VAGINA_LOOSENESS_NORMAL) {
+			//cArea > capacity = autostreeeeetch.
+			if(cArea >= vaginalCapacity()) {
+				if(vaginas[0].vaginalLooseness >= VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) {}
+				else vaginas[0].vaginalLooseness++;
+				stretched = true;
+			}
+			//If within top 10% of capacity, 50% stretch
+			else if(cArea >= .9 * vaginalCapacity() && rand(2) == 0) {
+				vaginas[0].vaginalLooseness++;
+				stretched = true;
+			}
+			//if within 75th to 90th percentile, 25% stretch
+			else if(cArea >= .75 * vaginalCapacity() && rand(4) == 0) {
+				vaginas[0].vaginalLooseness++;
+				stretched = true;
+				}
+			}
+			//If virgin
+			if(vaginas[0].virgin) {
+				vaginas[0].virgin = false;
+				devirgined = true;
+			}
+			//Delay anti-stretching
+			if(cArea >= .5 * vaginalCapacity()) {
+				//Cunt Stretched used to determine how long since last enlargement
+				if(hasStatusAffect("CuntStretched") < 0) createStatusAffect("CuntStretched",0,0,0,0);
+				//Reset the timer on it to 0 when restretched.
+				else changeStatusValue("CuntStretched",1,0);
+			}
+			if(stretched) {
+				trace("CUNT STRETCHED TO " + (vaginas[0].vaginalLooseness) + ".");
+			}
+			return stretched;
+		}
 	}
 }
 

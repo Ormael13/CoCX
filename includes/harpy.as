@@ -19,7 +19,7 @@ public function harpyAI():void {
 	if(monster.special3 > 0) select++;
 	rando = int(Math.random()*select);
 
-	if(rando == 0) eAttack();
+	if(rando == 0) monster.eAttack();
 	if(rando == 1) eventParser(monster.special1);
 	if(rando == 2) eventParser(monster.special2);
 	if(rando == 3) eventParser(monster.special3);
@@ -51,7 +51,7 @@ public function harpyUberCharge():void {
 //(Harpy special attack 2, lust increase)
 public function harpyTease():void {
 	outputText("The harpy charges at you carelessly, her body striking you with the full weight of her motherly hips.  The pair of you go crashing backwards onto the ground.  You grapple with her weighty ass, trying your best not to think dirty thoughts, but the way she's maniacally flapping and writhing her curvy body against you makes it impossible! After a brief, groping wrestle on the ground, she pushes you away and takes flight again.", false);
-	stats(0,0,0,0,0,0,(12 + rand(player.sens/5)),0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (12 + rand(player.sens/5)), "cor", 0);
 	combatRoundOver();
 }
 
@@ -194,7 +194,7 @@ public function harpyLossLust():void {
 		outputText("In your last conscious moment before you pass out from the hit, you hear the harpy sisters cackling above you.", false);
 	}
 	cleanupAfterCombat();
-	stats(0,0,0,0,1,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 0, "lus", -100, "cor", 0);
 }
 
 //No genderless folks.
@@ -317,7 +317,7 @@ public function harpyDamageLoss():void {
 	outputText("After a few hours, when you wake, every muscle in your body is aching as though you've just run a marathon. Looking down at your " + player.legs() + " in a weary haze, you see signs that even after you'd blacked out, your body had continued to be abused by the three lust-crazed harpies.", false);
 	fatigue(20);
 	cleanupAfterCombat();
-	stats(-1,-1,0,0,1,2,-100,0);
+	dynStats("str", -1,"tou", -1, "spe", 0, "int", 0, "lib", 1, "sen", 2, "lus", -100, "cor", 0);
 }
 
 public function victoryHarpyGetsHerPussyRaped():void {
@@ -392,7 +392,7 @@ public function victoryHarpyGetsHerPussyRaped():void {
 	outputText("Once your flow of seed subsides, you pull free of the fat-reared harpy.  She collapses into an orgasm-wracked pile on the ground, her plump ass and tender thighs waving in the air for whomever comes along after you.  You wipe yourself down and continue on your way, pleased with the brutal fuck and looking forward to your NEXT encounter...", false);
 	
 	cleanupAfterCombat();
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 }
 
 public function winAndRapeHarpyAnally():void {
@@ -449,7 +449,7 @@ public function winAndRapeHarpyAnally():void {
 	
 	outputText("Still leaking seed, you pull free of her gaping ass, and dump the worthless bird-slut on the floor in a heap. Passed out and woefully exposed, her lush holes await whatever horny beast or demon will come alone after you.", false);
 	cleanupAfterCombat();
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 }
 
 
@@ -552,7 +552,7 @@ public function WinOnHarpyAndOralRape():void {
 	player.lust = 100;
 	flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
 	cleanupAfterCombat();
-	stats(0,0,0,0,1,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 0, "lus", -100, "cor", 0);
 }
 
 public function harpyScissorSurprise():void {
@@ -584,7 +584,7 @@ public function harpyScissorSurprise():void {
 	if(monster.lust > 99) outputText(" again");
 	outputText(", her fingers firmly stuffed down between her plush thighs and frantically toying with her pussy. Seeing her get off to your treatment almost makes you climax right then and there, but you manage to hold yourself back, reasoning that she hasn't quite paid enough just yet for deciding to attack you.");
 	doNext(harpyScissorSurprisePtII);
-	stats(0,0,0,0,0,0,100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 100, "cor", 0);
 }
 //{New page}
 public function harpyScissorSurprisePtII():void {
@@ -610,7 +610,7 @@ public function harpyScissorSurprisePtII():void {
 	outputText("\n\nEventually, your body too drained to continue, you stop and release the harpy's cheeks, letting her ass drop back down onto the drenched rock.  You pant heavily, lying back and giving yourself a few minutes to recover before disentangling from her body.  Your strength slowly returns to you and you start to don your armour once more, readying yourself for the trip back to camp.  You're glad you didn't leave your [armor] too close, considering how wet the floor managed to become during your interlude.  It seems as though it'll still get drenched though, considering how your thighs are soaked and your pussy[if (isHerm = true)  and your slightly sore cock] still oozes copiously from the ridiculously energetic session, but apparently it was all too much for the harpy who has now curled up and started snoring gently on the rocky ground.  Her lower body is utterly soaked, the feathers matted together with your shared juices, and her rear still has bright red handprints where you were holding her as you rode out your climax.[if (isHerm = true)   Her tits are also covered with fluid, white jizz starting to drip its way down her body towards the already overwhelming puddle of femspunk on the floor.]  You even catch a glimpse of her pussy between her thick thighs, smirking at how it continues to quiver and leak slightly, still enjoying the aftershocks of her last climax.");
  
 	outputText("\n\nYou smile to yourself as you grab a few gems from the slumbering girl, making a mental note to visit the mountains again sometime.");
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -672,7 +672,7 @@ public function spoidahsLegEggsInHarpeis():void {
 	outputText("\n\nFinally relieved of your uncountable eggs, you pull out of your surrogate, ovipositor retracting, and watch as she slowly slides down the boulder face; she comes to rest on her knees, feathered arms wrapping around her swollen midsection.  The harpy looks back at you, her eyelids drooping as her breathing slows, and you lean in to give her a quick kiss on the cheek before you suit up and head back to camp.");
 	
 	player.dumpEggs();
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -711,11 +711,11 @@ public function clitFuckAHarpy():void {
 		player.lust = 100;
 		flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
 		cleanupAfterCombat();
-		stats(0,0,0,0,.5,-1,-100,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", .5, "sen", -1, "lus", -100, "cor", 0);
 	}
 	else {
 		outputText(" the harpy's eyes close, and she slips into unconsciousness.  You give her round bottom a little pat before you depart, still shivering from the cascades of pleasure it brought you.");
-		stats(0,0,0,0,0,-1,-100,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
 		cleanupAfterCombat();
 	}
 }

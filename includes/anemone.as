@@ -80,7 +80,7 @@ public function mortalAnemoneeeeee():void {
 		startCombat(new Anemone(this));
 	}
 	//(gain lust, temp lose spd/str)
-	stats(0,0,0,0,0,0,4,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 4, "cor", 0);
 	applyVenom(1);	
 }
 
@@ -89,13 +89,13 @@ public function applyVenom(str:Number = 1):void {
 	//First application
 	if(player.hasStatusAffect("Anemone Venom") < 0) player.createStatusAffect("Anemone Venom",0,0,0,0);
 	//Gain some lust
-	stats(0,0,0,0,0,0,(2 * str),0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (2 * str), "cor", 0);
 
 	//Loop through applying 1 point of venom at a time.
 	while(str > 0) {
 		str--;
 		//Str bottommed out, convert to lust
-		if(player.str < 2) stats(0,0,0,0,0,0,2,0);
+		if(player.str < 2) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 2, "cor", 0);
 		//Lose a point of str.
 		else {
 			mainView.statsView.showStatDown( "str" );
@@ -105,7 +105,7 @@ public function applyVenom(str:Number = 1):void {
 			player.addStatusValue("Anemone Venom",1,1);			
 		}
 		//Spe bottomed out, convert to lust
-		if(player.spe < 2) stats(0,0,0,0,0,0,2,0);
+		if(player.spe < 2) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 2, "cor", 0);
 		//Lose a point of spe.
 		else {
 			mainView.statsView.showStatDown( "spe" );
@@ -188,7 +188,7 @@ public function victoryButtholeRape():void {
 	else if(player.hasVagina()) outputText("another ", false);
 	outputText(" giggle from the blue girl.  Standing up, you gather your gear and blow her a kiss before you leave.  She darkens in color, her camouflage reflex causing her to 'blush' in discomfort at this display of affection.", false);
 	//(pass 1 hour, reduce lust to min)
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -246,7 +246,7 @@ public function rapeAnemoneWithDick():void {
 		}
 		outputText("After the last of your cum has been squeezed out, you pull your " + cockDescript(0) + " out and rinse it off in the lakewater.  You gather your gear while the anemone holds her belly and smiles placidly, staring into the sky.", false);
 		//(pass 1 hour, reset lust to min or min+10 if big or greater skeet)
-		stats(0,0,0,0,0,0,-100,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 		cleanupAfterCombat();
 	}
 	//Too-big male: -requires cockarea > 36
@@ -290,7 +290,7 @@ public function rapeAnemoneWithDick():void {
 		//[(mega skeet)
 		else outputText("she continues to sputter and cough up bubbles of your spunk.", false);
 		//(pass 1 hour, reset lust to min or min+10 if big or greater skeet)
-		stats(0,0,0,0,0,0,-100,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 		cleanupAfterCombat();
 	}
 }
@@ -361,7 +361,7 @@ public function rapeAnemoneWithPussy():void {
 	anemonePreg();
 	//(reduce lust to min, pregnancy check)
 	//(pass 1 hour, reset lust to min or min+10 if big or greater skeet)
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -396,7 +396,7 @@ public function loseToAnemone():void {
 		outputText("the anemone lashes out with a slap that knocks the expression off your face and makes your eardrums sing.  <i>\"Dumb!\"</i> she shouts, turning sharply; her tentacles lash past you as she about-faces.  She dives down below the surface and kicks water into your face spitefully as she swims away.  You sputter and rub your jaw a bit, then stand up and walk dizzily back to camp.", false);
 		//(1 hour pass, lose 1/10th of max hp from current hp, lose 20 lust)
 		takeDamage(10);
-		stats(0,0,0,0,0,0,-20,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -20, "cor", 0);
 		cleanupAfterCombat();
 		return;
 	}
@@ -476,7 +476,7 @@ public function loseToAnemone():void {
 			}
 			outputText(".  The blue girl continues to stroke your privates with her tentacle hair, flicking your urethra with her tongue, until you've come twice more.  Nor does she display any intention of stopping there, but mercifully you black out and collapse into the water.  Half-frowning, the anemone shrugs and pushes your insensible form up onto the sandy shore.", false);
 			//(pass 8 hours, reset lust to min)
-			stats(0,0,0,0,0,0,-100,0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 			cleanupAfterCombat();
 			return;
 		}
@@ -543,7 +543,7 @@ public function loseToAnemone():void {
 			else outputText("She leans over you and begins licking the semen off your body, not stopping until you're clean (if slightly sticky).", false);
 			outputText("  Having fed, she grins mischievously and grabs your " + cockDescript(0) + ", then tows your floating body to the shoreline with it.  She rolls you onto the sand and then swims for deep water, vanishing.", false);
 			//(pass 8 hours, minus libido, reset lust to min)
-			stats(0,0,0,0,-1,0,-100,0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -1, "sen", 0, "lus", -100, "cor", 0);
 			cleanupAfterCombat();
 			return;
 		}
@@ -571,8 +571,8 @@ public function loseToAnemone():void {
 		outputText("After several minutes of this final orgasm you fall backwards into the shallow water with a splash and pass out with a look of bliss, floating on a surface made choppy by your hectic ride.  The poor anemone takes a while longer to collect herself, then slowly pulls her limp dick out of your " + vaginaDescript(0) + " and tugs you up the beach past the tideline so you won't roll facedown in the water while you're unconscious.  She bends down and kisses you, tracing your " + nippleDescript(0) + "; too spent to hold up her hair, it drapes over your prone form as she leans and releases a last shot of her drug to ensure that your dreams will be of her.", false);
 		anemonePreg();
 		//(reduce lust to min, add 10 lust, pregnancy check)
-		stats(0,0,0,0,0,0,-100,0);
-		stats(0,0,0,0,1,0,10,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 1, "sen", 0, "lus", 10, "cor", 0);
 		cleanupAfterCombat();
 		return;
 	}
@@ -598,7 +598,7 @@ public function minoCumForAnemonieeeeez():void {
 		//(gain lust, temp lose spd/str; if in withdrawal then proceed to fight, otherwise present choices 'Give' and 'Don't Give')
 		startCombat(new Anemone(this));
 		//(gain lust, temp lose spd/str)
-		stats(0,0,0,0,0,0,4,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 4, "cor", 0);
 		applyVenom(1);	
 		return;
 	}
@@ -613,7 +613,7 @@ public function dontGiveMino():void {
 	//(proceed to combat)
 	startCombat(new Anemone(this));
 	//(gain lust, temp lose spd/str)
-	stats(0,0,0,0,0,0,4,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 4, "cor", 0);
 	applyVenom(1);	
 }
 //'Give':
@@ -781,7 +781,7 @@ public function anemoneQuoteUnquoteAnal():void {
 		outputText(" and leave her.");
 	}
 	//end scene, reset hours since cum and lust, reduce libido and sens a little
-	stats(0,0,0,0,-.5,-.5,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -.5, "sen", -.5, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -833,7 +833,7 @@ public function hotdogTheAnemone():void {
 	else outputText("looks indolently at you as you go.");
 	
 	//end scene, reset hours since cum and lust, reduce libido and sens a bit 
-	stats(0,0,0,0,-.5,-.5,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -.5, "sen", -.5, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -847,7 +847,7 @@ public function fuckingAssholelessAnemoneeeez():void {
 	outputText("\n\n\"<i>Don't worry, I've got something for you.</i>\"  You place a hand behind your back and watch her face light up, then pull it out with the middle finger extended skyward.  \"<i>Eat it.</i>\"  As the rejection sinks in, you kick wet sand from the lakebed into her stricken face and stomp off, mad as hell.");
 	
 	//-30 lust)
-	stats(0,0,0,0,0,0,-20,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -20, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -925,7 +925,7 @@ public function anemoneGetsLayedByBeePositor():void {
 		outputText("  Gathering your things, you " + player.mf("laugh","giggle") + " at her and depart.");
 	}
 	player.dumpEggs();
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -1002,7 +1002,7 @@ public function spiderOvipositAnAnemone():void {
 	}
 	//ponytailed anemone with Lisa Loeb glasses WHEN
 	player.dumpEggs();
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -1296,7 +1296,7 @@ public function tutorAnemoneKid():void {
 		outputText(" enough to keep you from thinking dirty thoughts about grabbing her naughty, teasing face and mashing it into your crotch.");
 		//(HP - 5, lust +5 if lib>=50, KidXP + 2)
 		HPChange(-5,false);
-		if(player.lib >= 50) stats(0,0,0,0,0,0,5,0,false);
+		if(player.lib >= 50) dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5, "cor", 0, "resisted", false);
 		kidAXP(6);
 	}
 	//[Lust Dagger]
@@ -1304,7 +1304,7 @@ public function tutorAnemoneKid():void {
 		outputText("\n\nThe enchanted dagger is light enough for the anemone to use one-handed, and she makes a good practice of turning aside your mock blows with it while reaching in to stimulate you with her other hand.  For good measure, she nicks you with the blade itself whenever her caress elicits a distracted flush.");
 		//(HP -5, lust +10, KidXP + 3)
 		HPChange(-5,false);
-		stats(0,0,0,0,0,0,10,0,false);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10, "cor", 0, "resisted", false);
 		kidAXP(5);
 	}
 	//[Beautiful Sword]
@@ -1347,8 +1347,8 @@ public function tutorAnemoneKid():void {
 		if(flags[kFLAGS.ANEMONE_WEAPON] == "SucWhip") outputText("  The demonic enchantment chooses then to activate, and her color deepens as her lust peaks, as does your own.");
 		outputText("  You feel a point digging into your groin as her prick hardens and her struggles cease; she begins to moan openly in arousal.  As she relaxes, the coils of the whip finally loosen enough for you to extricate yourself.");
 		//(HP -0, lust +10 if normal whip or +20 if succubus, KidXP + 3)
-		stats(0,0,0,0,0,0,10,0,false);
-		if(flags[kFLAGS.ANEMONE_WEAPON] == "SucWhip") stats(0,0,0,0,0,0,10,0,false);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10, "cor", 0, "resisted", false);
+		if(flags[kFLAGS.ANEMONE_WEAPON] == "SucWhip") dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10, "cor", 0, "resisted", false);
 		kidAXP(6);
 	}
 	//[Spiked Gauntlets] or [Hooked Gauntlets]
@@ -1370,7 +1370,7 @@ public function tutorAnemoneKid():void {
 		//(lust + 5, temp str/spd down, KidXP + 5)
 		//str/spd loss reverts after clicking Next button
 		kidAXP(5);
-		stats(0,0,0,0,0,0,10,0,false);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10, "cor", 0, "resisted", false);
 	}
 	//[White Book]
 	else if(flags[kFLAGS.ANEMONE_WEAPON] == "W. Book") {
@@ -1386,7 +1386,7 @@ public function tutorAnemoneKid():void {
 		else outputText("become a hindrance");
 		outputText("... though the part between her own legs is still pointed at you.");
 		//(lust + 10, KidXP + 2)
-		stats(0,0,0,0,0,0,20,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 20, "cor", 0);
 		kidAXP(4);
 	}
 	//[Scarred Blade](NYI)
@@ -1480,8 +1480,8 @@ public function kidASex(cont:Boolean = true):Boolean {
 		}
 		outputText("\n\nSpent, your blue girl slumps down onto your chest, not even bothering to avoid the puddle of her own spunk or pull your cock out, and is quickly asleep.  Your eyes close as sleep overtakes you as well, though the venom trickling into your chest as she rests her head on it ensures the scene will play over and over in your dreams...");
 		//pass 2 hr, remove 100 lust and add 30 base lust before resistance, set Kidswag = 3
-		stats(0,0,0,0,0,0,-100,0);
-		stats(0,0,0,0,0,0,30,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 30, "cor", 0);
 		if(flags[kFLAGS.ANEMONE_KID] < 3) flags[kFLAGS.ANEMONE_KID] = 3;
 		doNext(14);
 		return true;
@@ -1564,7 +1564,7 @@ public function kidASex(cont:Boolean = true):Boolean {
 		
 		outputText("\n\nYou lay back, spent, and slip from consciousness.");
 		//lose 100 lust, pass 2 hr, if Kidswag = 1, set Kidswag = 2
-		stats(0,0,0,0,0,0,-100,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 		if(flags[kFLAGS.ANEMONE_KID] == 1) flags[kFLAGS.ANEMONE_KID] = 2;
 		doNext(14);
 		return true;
@@ -1593,7 +1593,7 @@ public function kidASex(cont:Boolean = true):Boolean {
 		//anemone preg chance, slimefeed, reduce lust by 100, if Kidswag = 1 set Kidswag = 2
 		anemonePreg();
 		slimeFeed();
-		stats(0,0,0,0,0,0,-100,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 		if(flags[kFLAGS.ANEMONE_KID] == 1) flags[kFLAGS.ANEMONE_KID] = 2;
 		doNext(16);
 		return true;
@@ -1662,7 +1662,7 @@ public function kidADreams():void {
 		else outputText(" and neither of you says a word as she backs away slowly on her knees.");
 		outputText("  Sighing, you turn over and attempt to return to sleep despite the pervading smell of semen.");
 	}
-	stats(0,0,0,0,0,0,50 + player.sens/2,0,false);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 50 + player.sens/2, "cor", 0, "resisted", false);
 	doNext(1);
 }
 	

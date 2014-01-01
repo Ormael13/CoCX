@@ -5,7 +5,7 @@ public function camp():void {
 	mainView.showMenuButton( MainView.MENU_NEW_MAIN );
 	if(player.hasStatusAffect("Post Akbal Submission") >= 0) {
 		player.removeStatusAffect("Post Akbal Submission");
-		akbalSubmissionFollowup();
+		akbalScene.akbalSubmissionFollowup();
 		return;
 	}
 	if(player.hasStatusAffect("Post Anemone Beatdown") >= 0) {
@@ -544,7 +544,7 @@ public function camp():void {
 	//Clear bee-status
 	if(player.hasStatusAffect("paralyze venom") >= 0) {
 		temp = player.hasStatusAffect("paralyze venom");
-		stats(player.statusAffects[temp].value1, 0, player.statusAffects[temp].value2, 0,0,0,0,0);
+		dynStats("str", player.statusAffects[temp].value1,"tou", 0, "spe", player.statusAffects[temp].value2, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 		player.removeStatusAffect("paralyze venom");
 		outputText("<b>You feel quicker and stronger as the paralyzation venom in your veins wears off.</b>\n\n", false);
 	}
@@ -1038,7 +1038,7 @@ public function rest():void {
 		if(player.hasStatusAffect("MarbleWithdrawl") >= 0) {
 			outputText("\nYour rest is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n", false);
 			HPChange(timeQ * 510, true);
-			stats(0,-.1,0,-.1,0,0,0,0);
+			dynStats("str", 0,"tou", -.1, "spe", 0, "int", -.1, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 			//fatigue
 			fatigue(-2*timeQ);
 			if(player.hasPerk("Speedy Recovery") >= 0) fatigue(-1*timeQ);
@@ -1224,7 +1224,7 @@ public function sleepRecovery(display:Boolean = false):void {
 	if(player.hasStatusAffect("MarbleWithdrawl") >= 0) {
 		if(display) outputText("\nYour sleep is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n", false);
 		HPChange(timeQ * 10, true);
-		stats(0,-.1,0,-.1,0,0,0,0);
+		dynStats("str", 0,"tou", -.1, "spe", 0, "int", -.1, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 		//fatigue
 		fatigue(-int(player.fatigue/2));
 		if(player.hasPerk("Speedy Recovery") >= 0) fatigue(-int(player.fatigue/4));
@@ -1301,7 +1301,7 @@ public function nightSuccubiRepeat():void {
 		doNext(1);
 		return;
 	}
-	stats(0,0,0,0,0,0,-100,2);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 2);
 	if(player.gender == 1) {
 		if(player.cor < 66) {
 			outputText("\nAgainst your better judgment, you've again partaken of the cerulean elixir and fallen asleep. You are quickly awakened by a thick nipple being thrust into your mouth and torrents of breast milk gushing down your throat as the succubus returns to have her way with you. Looking up, your eyes meet hers as a hungry manipulative grin stretches across her blue face. Unable to control your lust, your prick jumps to attention, which prompts the demoness to ", false);
@@ -1335,7 +1335,7 @@ public function nightSuccubiRepeat():void {
 			else outputText("She embraces you, moaning inhumanly, and reflexively digs her claws into your back. Searing with lust, the pain means little to you as you only feel the sensation of your body forcing your fluids out of your body and into hers. You slam your pelvis into hers", false);
 			outputText(", as if to force yourself to cum harder than you already are capable of, prompting an equally pleasurable reaction from her.\n\n", false);
 			outputText("For the first time since you have had your 'visits', the succubus appears winded. Without another word, her muscles release your manhood, which she quickly licks clean of your intermingled juices.  She tongues your face in lustful approval and flies away. You quickly fall asleep, utterly spent.  ", false);
-			stats(0,0,0,0,-1,0,0,0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", -1, "sen", 0, "lus", 0, "cor", 0);
 		}
 	}
 	else if(player.gender == 3) {
@@ -1382,7 +1382,7 @@ public function nightSuccubiRepeat():void {
 	menuLoc = 14;
 	takeItem();
 	outputText("\n", false);
-	stats(rand(2), rand(2), rand(2), rand(2), 0, 0, -100, 1);
+	dynStats("str", rand(2),"tou", rand(2), "spe", rand(2), "int", rand(2), "lib", 0, "sen", 0, "lus", -100, "cor", 1);
 }
 //Places menu
 public function places(display:Boolean):Boolean {

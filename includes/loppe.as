@@ -524,7 +524,7 @@ public function itsMeFuckingUrtaLoppe():void {
 	outputText("\n\n\"<i>Oh my goodness!  Her, too?</i>\" Loppe blurts, before rallying.  \"<i>Well... bigger doesn't mean better,</i>\" she says, still sounding a little defensive - maybe jealous, \"<i>I'm pretty sure I can give you a ride like she could never hope to.  Just call her over and get us a room and I'll show you what I mean, sugar.</i>\"");
 	outputText("\n\n\"<i>Perhaps,</i>\" you laugh.");
 	outputText("\n\nLoppe grins encouragingly, as though her offer were completely serious.  \"<i>Well, anyways... I'd say you'd be in more position to gossip about her than I would.  </i>You<i> can tell </i>me<i> about her next time.  For now, I'm going to go work off these calories.</i>\"");
-	stats(0,0,0,0,0,0,10+player.lib/10,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10+player.lib/10, "cor", 0);
 	doNext(13);
 	//End Scene
 }
@@ -543,7 +543,7 @@ public function playAlongWivLoppesesUrtaGossip():void {
 	outputText("\n\nHer voice is almost liquid with desperation and lust, and you sadistically rub her straining bulge, playing your fingers absently over the stretched material, then 'remember' that you had plans to meet with Urta.");
 	outputText("\n\n\"<i>Sugar, wait up!  I know you said she's bigger and yada, yada, yada.  But size isn't everything... I doubt she is able to keep up as long as I am, or that she's as experienced as I am, so let's just tuck ourselves in a corner and you can help me with this... please?  Pretty please?  With cream on top?  Or bottom, or wherever you want it?  Just a quickie, so I can go back to working out?</i>\"  Loppe is on the verge of begging, and a pained look contorts her face as you hear the distinct sound of a seam ripping.  Loppe's hands dart to her shorts, trying to hold it together against her straining erection.  \"<i>Fuck!</i>\" she hisses.");
 	outputText("\n\nYou could just leave her like this or give her some relief... though you'd better be quick if you choose the latter.   You could always slide under the table and help blow off her steam, but a small part of you wonders just how upset she'd be if you kept rubbing her until her seams gave out and she creamed herself.");
-	stats(0,0,0,0,0,0,10+player.lib/10,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10+player.lib/10, "cor", 0);
 	//[Suck] [Handjob] [Kiss 'n' Run]
 	//See the Tease section for these scenes//
 	//Tease Menu options!
@@ -852,7 +852,7 @@ public function loppeSexChoice(bakery:Boolean = false):void {
 	}
 	if(player.lust < 33) {
 		player.lust = 33;
-		stats(0,0,0,0,0,0,.2,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", .2, "cor", 0);
 	}
 	//Display sex options
 	//[Cowgirl][Frot][TakeVaginal][Boobjob][TakeAnal][Bail]
@@ -950,7 +950,7 @@ public function loppeRidesCocks():void {
 		menu();
 		addButton(0,"Next",loppeRidesYouNoFaceJizz);
 	}
-	stats(0,0,0,0,0,0,100,0,false);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 100, "cor", 0, "resisted", false);
 }
 
 //{If NoFace:
@@ -1094,7 +1094,7 @@ public function loppeRidesPCCockFinal():void {
 	//[(Exhibitionist)
 	if(flags[kFLAGS.PC_FETISH] > 0) outputText("; it gives you something of a thrill, though nowhere near as much as taking them off for her in the first place did");
 	outputText(".  Finished, you depart.");
-	stats(0,.5,0,0,.5,-4,-100,0);
+	dynStats("str", 0,"tou", .5, "spe", 0, "int", 0, "lib", .5, "sen", -4, "lus", -100, "cor", 0);
 	flags[kFLAGS.LOPPE_TIMES_SEXED]++;
 	//3 hours pass.
 	doNext(15);
@@ -1183,7 +1183,7 @@ public function loppeWorshipsDicks():void {
 	outputText("\n\n<b>Two hours later...</b>");
 	
 	outputText("\n\nA familiar feeling emanates from your crotch... a distinct sucking and bobbing feeling.  Your eyes open and you awaken with a gasp as you blast a fresh batch of cum into Loppe's eager mouth.  She withdraws with a slurp and smiles gleefully at you.  \"<i>Morning, sleepyhead!  Rest well?  Want me to wake you up some more?</i>\" she asks, licking her lips.  \"<i>I placed your stuff on the chair over there.  And don't worry, it's all cleaned too.  See you later on?  For more 'appreciation', of course...</i>\"");
-	stats(0,.5,0,0,.5,-4,-100,0);
+	dynStats("str", 0,"tou", .5, "spe", 0, "int", 0, "lib", .5, "sen", -4, "lus", -100, "cor", 0);
 	flags[kFLAGS.LOPPE_TIMES_SEXED]++;
 	doNext(15);
 }
@@ -1336,7 +1336,7 @@ public function getFuckedInYerTwatYaCunt():void {
 	//3 hours pass.
 	slimeFeed();
 	flags[kFLAGS.LOPPE_TIMES_SEXED]++;
-	stats(0,.5,0,0,.5,-4,-100,0);
+	dynStats("str", 0,"tou", .5, "spe", 0, "int", 0, "lib", .5, "sen", -4, "lus", -100, "cor", 0);
 	doNext(15);
 }
 
@@ -1500,7 +1500,7 @@ public function getButtFuckedNonHoarseByLoppe():void {
 	slimeFeed();
 	flags[kFLAGS.LOPPE_TIMES_SEXED]++;
 	//3 hours pass
-	stats(0,.5,0,0,.5,-4,-100,0);
+	dynStats("str", 0,"tou", .5, "spe", 0, "int", 0, "lib", .5, "sen", -4, "lus", -100, "cor", 0);
 	doNext(15);
 }
 
@@ -1643,7 +1643,7 @@ public function getAssFuckedByLoppeAsACentaur():void {
 	
 	outputText("\n\nYou nod and head to her room to fetch your [armor].");
 	
-	stats(0,.5,0,0,.5,-4,-100,0);
+	dynStats("str", 0,"tou", .5, "spe", 0, "int", 0, "lib", .5, "sen", -4, "lus", -100, "cor", 0);
 	flags[kFLAGS.LOPPE_TIMES_SEXED]++;
 	slimeFeed();
 	doNext(15);
@@ -1762,7 +1762,7 @@ public function letsLoppeGoCum():void {
 	}
 	//set LoppeDenial to 4
 	flags[kFLAGS.LOPPE_DENIAL_COUNTER] = 3;
-	stats(0,0,0,0,0,0,30+player.lib/10,0,false);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 30+player.lib/10, "cor", 0, "resisted", false);
 	flags[kFLAGS.LOPPE_TIMES_SEXED]++;
 	doNext(13);
 }
@@ -1803,7 +1803,7 @@ public function superLoppeOrgasmDenialGo():void {
 		flags[kFLAGS.LOPPE_DENIAL_COUNTER] = 10;
 		//leave, set LoppeDenial flag = 14 (an extra 7 for being a jerk)
 	}
-	stats(0,0,0,0,0,0,30+player.lib/10,0,false);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 30+player.lib/10, "cor", 0, "resisted", false);
 	flags[kFLAGS.LOPPE_TIMES_SEXED]++;
 	doNext(13);
 }
@@ -1907,7 +1907,7 @@ public function boobjobLoppe():void {
 	
 	flags[kFLAGS.LOPPE_TIMES_SEXED]++;
 	slimeFeed();
-	stats(0,.5,0,0,.5,-4,-100,0);
+	dynStats("str", 0,"tou", .5, "spe", 0, "int", 0, "lib", .5, "sen", -4, "lus", -100, "cor", 0);
 	doNext(15);
 }
 
@@ -1929,7 +1929,7 @@ public function beATeaseAndLeaveLoppeAfterSexInvite():void {
 	outputText("\n\nShe smiles wanly at you and walks to her closet, dressing herself in a comfy bathrobe.  \"<i>[name], sorry for being a bad hostess, but can you show yourself out?  I kinda need to take care of a... thing.</i>\"");
 	
 	outputText("\n\nYou nod your head, quietly redress yourself, and exit.");
-	stats(0,0,0,0,0,0,5+rand(5),0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5+rand(5), "cor", 0);
 	menu();
 	addButton(0,"Next",telAdreMenu);
 }
@@ -2022,7 +2022,7 @@ public function teaseLoppeNHJ():void {
 	
 	//If FertileLoppe flag is not active, no special effects
 	//If FertileLoppe flag is active, PC who can become pregnant who uses the Goblin Machine at the Gym will become pregnant with Loppe-daughter if they use it within a week of playing this scene
-	stats(0,0,0,0,0,0,10+player.lib/5,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10+player.lib/5, "cor", 0);
 	doNext(13);
 }
 
@@ -2101,7 +2101,7 @@ public function teaseLoppeNSuck():void {
 	//[=Accept=]
 	//[=Refuse=]
 	outputText("\n\nLoppe smiles at you, holding her cock in her hand.  \"<i>Alright then, sugar.  I'll be going in then; I have business to handle.  See you later!</i>\"");
-	stats(0,0,0,0,0,0,10+player.lib/5,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 10+player.lib/5, "cor", 0);
 	doNext(13);
 	slimeFeed();
 }
@@ -2117,6 +2117,6 @@ public function teaseLoppeKissRun():void {
 	
 	outputText("\n\nYou advise her to order herself something sweet, sit back, relax, and just try to cool off - it'll go down on its own.  Eventually.");
 	
-	stats(0,0,0,0,0,0,5+player.lib/20,.5);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5+player.lib/20, "cor", .5);
 	doNext(13);
 }

@@ -219,7 +219,7 @@ public function haveAKid():void {
 	outputText(".</i>\"  You start to reply, when you're suddenly upended, landing back on your back with Helia atop you, fingers brushing along the cock buried twixt her legs.  \"<i>Oh, don't think you're getting away that easy, lover mine... my love.  I've gotta make sure your seed took, and that... that's going to take all night long.</i>\"");
 	
 	outputText("\n\nYou gulp, and wince as Hel starts to move atop your battered cock - and not for the last time this sleepless night!");
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	menu();
 	addButton(0,"Next",HaveAHellKidPartII);
 	model.time.hours = 6;
@@ -1280,7 +1280,7 @@ public function incestWithHelspawn():void {
 	outputText("\n\nYou grin as the beautiful salamander strokes your cheek, and says, \"<i>You're a hell of a lot better than any femmy spider boy, " + championRef() + ".  I'm a lucky girl to have someone like you to raise me... and to love me.</i>\"");
 	
 	outputText("\n\nYou kiss her again and send her on her way with a sharp swat on the ass.  She gives it a sexy wiggle as she walks, winking back at you as she saunters off.");
-	stats(0,0,0,0,0,0,player.sens/10+5,0,false);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", player.sens/10+5, "cor", 0, "resisted", false);
 	flags[kFLAGS.HELSPAWN_INCEST] = 1;
 	doNext(13);
 }
@@ -1389,7 +1389,7 @@ public function helspawnTwinStrikes():void {
 	if(flags[kFLAGS.HELSPAWN_WEAPON] == "bow") outputText(flags[kFLAGS.HELSPAWN_NAME] + " leaps back out of your reach and nocks a pair of blunted arrows, drawing them back together and loosing them at once!\n");
 	else outputText(flags[kFLAGS.HELSPAWN_NAME] + " lunges at you, scimitar cleaving through the air toward your throat!\n");
 	monster.createStatusAffect("attacks",0,0,0,0);
-	eAttack();
+	monster.eAttack();
 }
 
 //Called Shot (Bowmander Only)

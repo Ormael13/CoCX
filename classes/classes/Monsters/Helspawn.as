@@ -1,5 +1,6 @@
 package classes.Monsters
 {
+	import classes.CoC;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Monster;
 
@@ -27,13 +28,13 @@ package classes.Monsters
 			game.loseSparringToDaughter();
 		}
 
-		public function Helspawn(mainClassPtr:*)
+		public function Helspawn(game:CoC)
 		{
-			super(mainClassPtr);
-			var weapon:String = mainClassPtr.flags[kFLAGS.HELSPAWN_WEAPON];
-			init01Names("", mainClassPtr.flags[kFLAGS.HELSPAWN_NAME], "hollispawn",
-					mainClassPtr.flags[kFLAGS.HELSPAWN_NAME] + " is a young salamander, appearing in her later teens.  Clad in " +
-							(mainClassPtr.flags[kFLAGS.HELSPAWN_PERSONALITY] >= 50 ?
+			super(game);
+			var weapon:String = game.flags[kFLAGS.HELSPAWN_WEAPON];
+			init01Names("", game.flags[kFLAGS.HELSPAWN_NAME], "hollispawn",
+					game.flags[kFLAGS.HELSPAWN_NAME] + " is a young salamander, appearing in her later teens.  Clad in " +
+							(game.flags[kFLAGS.HELSPAWN_PERSONALITY] >= 50 ?
 									"a slutty scale bikini like her mother's, barely concealing anything" :
 									"a short skirt, thigh-high boots, and a sky-blue blouse, in stark contrast to her mother’s sluttier attire") +
 							", she stands about six feet in height, with a lengthy, fiery tail swishing menacingly behind her. She's packing a " +

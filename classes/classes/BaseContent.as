@@ -13,10 +13,28 @@
 	 * @author Gedan
 	 */
 	public class BaseContent 
-	{		
+	{
+		// TODO remove when we have proper enums for this
+		include "../../includes/appearanceDefs.as";
+
 		public function BaseContent() 
 		{
 			
+		}
+
+		protected function cleanupAfterCombat():void
+		{
+			kGAMECLASS.cleanupAfterCombat();
+		}
+
+		protected function spriteSelect(choice:Number = 0):void
+		{
+			kGAMECLASS.spriteSelect(choice);
+
+		}
+
+		protected function startCombat(monster_:Monster,plotFight_:Boolean=false):void{
+			kGAMECLASS.startCombat(monster_,plotFight_);
 		}
 
 		// Needed in a few rare cases for dumping text coming from a source that can't properly escape it's brackets
@@ -37,7 +55,7 @@
 			kGAMECLASS.mainView.clearOutputText();
 		}
 		
-		protected function doNext(eventNo:int):void
+		protected function doNext(eventNo:*):void
 		{
 			kGAMECLASS.doNext(eventNo);
 		}
@@ -46,7 +64,49 @@
 		{
 			kGAMECLASS.menu();
 		}
-		
+
+		protected function choices(text1:String, butt1:*,
+								text2:String, butt2:*,
+								text3:String, butt3:*,
+								text4:String, butt4:*,
+								text5:String, butt5:*,
+								text6:String, butt6:*,
+								text7:String, butt7:*,
+								text8:String, butt8:*,
+								text9:String, butt9:*,
+								text0:String, butt0:*):void
+		{
+			kGAMECLASS.choices(
+					text1, butt1,
+					text2, butt2,
+					text3, butt3,
+					text4, butt4,
+					text5, butt5,
+					text6, butt6,
+					text7, butt7,
+					text8, butt8,
+					text9, butt9,
+					text0, butt0
+			);
+		}
+
+		protected function simpleChoices(text1:String, butt1:*,
+								text2:String, butt2:*,
+								text3:String, butt3:*,
+								text4:String, butt4:*,
+								text5:String, butt5:*):void
+		{
+			kGAMECLASS.simpleChoices(text1, butt1,
+					text2, butt2,
+					text3, butt3,
+					text4, butt4,
+					text5, butt5);
+		}
+
+		protected function doYesNo(eventYes:*, eventNo:*):void {
+			kGAMECLASS.doYesNo(eventYes,eventNo);
+		}
+
 		protected function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000):void
 		{
 			kGAMECLASS.addButton(pos, text, func1, arg1);
@@ -249,9 +309,9 @@
 			return kGAMECLASS.clitDescript();
 		}
 		
-		protected function vaginaDescript():String
+		protected function vaginaDescript(vaginaNum:Number = 0):String
 		{
-			return kGAMECLASS.vaginaDescript();
+			return kGAMECLASS.vaginaDescript(vaginaNum);
 		}
 		
 		protected function allVaginaDescript():String

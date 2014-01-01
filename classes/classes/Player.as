@@ -9,6 +9,11 @@ package classes
 	 */
 	public class Player extends Character
 	{
+		protected final function outputText(text:String, clear:Boolean = false):void
+		{
+			game.outputText(text, clear);
+		}
+		
 		//Autosave
 		public var slotName:String = "VOID";
 		public var autoSave:Boolean = false;
@@ -51,7 +56,7 @@ package classes
 			//Take damage you masochist!
 			if (hasPerk("Masochist") >= 0 && lib >= 60) {
 				damage = Math.round(damage * .7);
-				game.stats(0, 0, 0, 0, 0, 0, 2, 0);
+				game.dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 2, "cor", 0);
 				//Dont let it round too far down!
 				if (damage < 1) damage = 1;
 			}
@@ -87,7 +92,7 @@ package classes
 				HP -= damage;
 				game.mainView.statsView.showStatDown('hp');
 				if (game.flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
-					game.stats(0, 0, 0, 0, 0, 0, int(damage / 2), 0);
+					game.dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", int(damage / 2), "cor", 0);
 				}
 				//Prevent negatives
 				if (HP<=0){
@@ -938,6 +943,68 @@ package classes
 			if (statusAffectv1("Lactation Reduction") >= 48)
 				total = total * 1.5;
 			return total;
+		}
+
+		public function cuntChange(cArea:Number, display:Boolean, spacingsF:Boolean = false, spacingsB:Boolean = true):Boolean {
+			if (vaginas.length==0) return false;
+			var wasVirgin:Boolean = vaginas[0].virgin;
+			var stretched:Boolean = cuntChangeNoDisplay(cArea);
+			var devirgined:Boolean = wasVirgin && !vaginas[0].virgin;
+			if (devirgined){
+				if(spacingsF) outputText("  ");
+				outputText("<b>Your hymen is torn, robbing you of your virginity.</b>", false);
+				if(spacingsB) outputText("  ");
+			}
+			//STRETCH SUCCESSFUL - begin flavor text if outputting it!
+			if(display) {
+				//Virgins get different formatting
+				if(devirgined) {
+					//If no spaces after virgin loss
+					if(!spacingsB) outputText("  ");
+				}
+				//Non virgins as usual
+				else if(spacingsF) outputText("  ");
+				if(vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) outputText("<b>Your " + Appearance.vaginaDescription(this,0)+ " is stretched painfully wide, large enough to accomodate most beasts and demons.</b>");
+				if(vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + Appearance.vaginaDescription(this,0) + " is stretched so wide that it gapes continually.</b>");
+				if(vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING) outputText("<b>Your " + Appearance.vaginaDescription(this,0) + " painfully stretches, the lips now wide enough to gape slightly.</b>");
+				if(vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LOOSE) outputText("<b>Your " + Appearance.vaginaDescription(this,0) + " is now very loose.</b>", false);
+				if(vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_NORMAL) outputText("<b>Your " + Appearance.vaginaDescription(this,0) + " is now a little loose.</b>", false);
+				if(vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + Appearance.vaginaDescription(this,0) + " is stretched out to a more normal size.</b>");
+				if(spacingsB) outputText("  ");
+			}
+			return stretched;
+		}
+
+		public function buttChange(cArea:Number, display:Boolean, spacingsF:Boolean = true, spacingsB:Boolean = true):Boolean
+		{
+			var stretched:Boolean = buttChangeNoDisplay(cArea);
+			//STRETCH SUCCESSFUL - begin flavor text if outputting it!
+			if(stretched && display) {
+				if(spacingsF) outputText("  ");
+				if(ass.analLooseness == 5) outputText("<b>Your " + Appearance.assholeDescription(this) + " is stretched even wider, capable of taking even the largest of demons and beasts.</b>");
+				if(ass.analLooseness == 4) outputText("<b>Your " + Appearance.assholeDescription(this) + " becomes so stretched that it gapes continually.</b>", false);
+				if(ass.analLooseness == 3) outputText("<b>Your " + Appearance.assholeDescription(this) + " is now very loose.</b>");
+				if(ass.analLooseness == 2) outputText("<b>Your " + Appearance.assholeDescription(this) + " is now a little loose.</b>");
+				if(ass.analLooseness == 1) outputText("<b>You have lost your anal virginity.</b>", false);
+				if(spacingsB) outputText("  ");
+			}
+			return stretched;
+		}
+
+		public function slimeFeed():void{
+			if(hasStatusAffect("Slime Craving") >= 0) {
+				//Reset craving value
+				changeStatusValue("Slime Craving",1,0);
+				//Flag to display feed update and restore stats in event parser
+				if(hasStatusAffect("Slime Craving Feed") < 0) {
+					createStatusAffect("Slime Craving Feed",0,0,0,0);
+				}
+			}
+			if(hasPerk("Diapause") >= 0) {
+				game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00228] += 3 + rand(3);
+				game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00229] = 1;
+			}
+
 		}
 	}
 }

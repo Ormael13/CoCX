@@ -157,7 +157,7 @@ public function tamaniFirstTimeConsentual():void {
 		//([CORRUPT]
 		if(player.cor > 66) outputText("  Your " + cockDescript(0) + " twitches at the thought, ready and wanting more.", false);
 	}
-	stats(0,0,0,0,.5,-1,-100,.5);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", .5, "sen", -1, "lus", -100, "cor", .5);
 	doNext(13);
 }
 
@@ -169,7 +169,7 @@ public function tamaniFirstTimeRefusal():void {
 	//[Fuck Her (Goes to fuck her - consensual first time)]
 	//[No means no]
 	simpleChoices("Fuck Her",tamaniFirstTimeConsentual,"No",tamaniSecondRefusal,"",0,"",0,"",0);
-	stats(0,0,0,0,0,0,5,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 5, "cor", 0);
 }
 //[No Means No]
 public function tamaniSecondRefusal(): void {
@@ -193,7 +193,7 @@ public function tamaniMaleRepeatEncounter():void {
 		return;
 	}
 	//(+1 lust per 10 sensitivity)
-	stats(0,0,0,0,0,0,player.sens/10,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", player.sens/10, "cor", 0);
 	//[Take Her – win sex] 
 	//[Let Her – Get dommed] 
 	//[No – starts fight]
@@ -303,12 +303,12 @@ public function tamaniSexLetHer():void {
 		if(gameState == 1 || gameState == 2) {
 			outputText("  After the stress and strain of a lost fight and the stress of having your seed so expertly stolen, you lie down on your flank and go to sleep.", false);
 			cleanupAfterCombat();
-			stats(0,0,0,0,0,0,-100,0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 		}
 		//(Noncombat end: 
 		else {
-			stats(0,0,0,0,0,0,-100,0);
-			stats(0,0,0,0,0,0,+10,0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+			dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", +10, "cor", 0);
 			doNext(13);
 		}
 	}
@@ -346,13 +346,13 @@ public function tamaniSexLetHer():void {
 			if(gameState == 1 || gameState == 2) {
 				outputText("You black out, exhausted from the ordeal.", false);
 				cleanupAfterCombat();
-				stats(0,0,0,0,0,0,-100,0);
+				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 			}
 			//(Noncombat end: 
 			else {
 				outputText("You lie there, recovering from the intense sex.  After a little while you manage to get up and redress, but the scent of horny goblin stays with you for hours.", false);
-				stats(0,0,0,0,0,0,-100,0);
-				stats(0,0,0,0,0,0,+10,0);
+				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", +10, "cor", 0);
 				doNext(13);
 			}
 		}
@@ -398,13 +398,13 @@ public function tamaniSexLetHer():void {
 			if(gameState == 1 || gameState == 2) {
 				outputText("You black out, exhausted from the ordeal.", false);
 				cleanupAfterCombat();
-				stats(0,0,0,0,0,0,-100,0);
+				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 			}
 			//(Noncombat end: 
 			else {
 				outputText("You lie there, recovering from the intense sex.  After a little while you manage to get up and redress, but the scent of horny goblin stays with you for hours.", false);
-				stats(0,0,0,0,0,0,-100,0);
-				stats(0,0,0,0,0,0,+10,0);
+				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+				dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", +10, "cor", 0);
 				doNext(13);
 			}
 		}
@@ -450,7 +450,7 @@ public function tamaniSexLost():void {
 	outputText("\n\n", false);
 	
 	outputText("Tamani removes the ring once you have finished.  She seals the bottle and places it in her pouch as you drop to the ground, exhausted.  All you can do is watch as she walks away, her ass swaying confidently from side to side.  Your last thought before you pass out is how much easier it would've been to just fuck her.", false);
-	stats(0,0,0,0,.5,-1,-100,.5);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", .5, "sen", -1, "lus", -100, "cor", .5);
 	cleanupAfterCombat();
 }
 	
@@ -496,7 +496,7 @@ public function tamaniSexWon():void {
 		else outputText("sweet cock has ", false);
 		outputText("any more cream to give to me?</i>\"\n\n", false);
 		outputText("She doesn't give you a chance to answer as she wobbles off, jiggling pleasantly in all the right places, \"<i>Of course you do.  I'll be back for the rest later!</i>\"\n\n", false);
-		stats(0,0,0,0,0,0,-100,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 		if(gameState > 0) cleanupAfterCombat();
 		else doNext(13);
 	}
@@ -523,8 +523,8 @@ public function tamaniSexWon():void {
 		outputText("She doesn't give you a chance to answer as she staggers up and strikes a sexy pose, \"<i>Of course you do.  I'll be back for the rest later!</i>\"\n\n", false);
 		
 		outputText("Tamani wiggles in the sexiest way as she leaves, arousing your body all over again...", false);
-		stats(0,0,0,0,0,0,-100,0);
-		stats(0,0,0,0,0,0,35,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 35, "cor", 0);
 		if(gameState > 0) cleanupAfterCombat();
 		else doNext(13);
 	}
@@ -575,8 +575,8 @@ public function tamaniPregnantFuck():void {
 		outputText("For her part, Tamani staggers to her feet, letting you flop free as a river of your cum pours between her legs, soaking your lower body.  She staggers over to your face, pleasure-drunk, and leans down to give you another sloppy kiss.\n\n", false);
 		
 		outputText("\"<i>Thanks for the good fuck, " + player.mf("stud","lover") + ",</i>\" she says, smiling cruelly as you find yourself getting hard again from her drug-laced kisses.  Tamani doesn't hang around to help though; she waddles off, cradling her belly and smiling.\n\n", false);
-		stats(0,0,0,0,0,0,-100,0);
-		stats(0,0,0,0,0,0,25,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 25, "cor", 0);
 	}
 	//(Doesn't Fit)
 	else {
@@ -591,7 +591,7 @@ public function tamaniPregnantFuck():void {
 		player.addStatusValue("Tamani",2,3);
 
 		outputText("Tamani comes over to you and gives you a sloppy goodbye kiss, sending an immediate surge of hardness and desire to your groin.  She looks back and giggles, then waddles off, patting her pouches and dripping with your spooge.", false);
-		stats(0,0,0,0,0,0,-100,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	}
 	doNext(13);
 }
@@ -629,7 +629,7 @@ public function tamaniPoopsOutBabies():void {
 	}
 	outputText("  She looks up at you and whispers breathily, \"<i>Come fuck me a little later, I'll give you even more beautiful little girls.  These " + num2Text(daughters) + " will be fully grown in a week or two and out man-hunting, but none of them will please you like me, I promise.</i>\"\n\n", false);
 	outputText("Tamani sighs and relaxes, enjoying the breastfeeding and waving you away.  You shrug and head back to camp, more than a little aroused.", false);
-	stats(0,0,0,0,0,0,player.lib/10 + player.cor/10,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", player.lib/10 + player.cor/10, "cor", 0);
 	//Add daughter count to total daughters.
 	player.addStatusValue("Tamani",2,daughters);
 	//Clear 'to be born' daughters.
@@ -748,7 +748,7 @@ public function tamaniHypnoTease():void {
 			outputText("our " + multiCockDescriptLight() + " pulses and dribbles pre-cum, aching to do its duty and fire load after load into Tamani's perfect pussy.", false);
 		}
 	}
-	stats(0,0,0,0,0,0,(rand(player.lib/5)+3+(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED])),0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", (rand(player.lib/5)+3+(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED])), "cor", 0);
 	combatRoundOver();
 }
 
@@ -831,7 +831,7 @@ public function getRapedByTamaniYouHypnoSlut():void {
 		
 		outputText("A surge of pride spreads through you at her praise, and you lean down to give your wife a long french kiss before heading back to camp.  On the way back your head slowly clears, and you wonder what came over you back there?!", false);
 		tamaniKnockUp();
-		stats(0,0,0,-.5,0,-1,-100,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", -.5, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
 	}
 	//[DOESNT FIT]
 	else {
@@ -879,7 +879,7 @@ public function getRapedByTamaniYouHypnoSlut():void {
 		
 		outputText("A surge of pride spreads through you at her praise, and you get up to give your wife a long french kiss before heading back to camp.  On the way back your head slowly clears, and you wonder what came over you back there?!", false);
 		tamaniKnockUp()
-		stats(0,0,0,-.5,0,-1,-100,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", -.5, "lib", 0, "sen", -1, "lus", -100, "cor", 0);
 	}
 	if(gameState == 1 || gameState == 2) cleanupAfterCombat();
 	else doNext(13);
@@ -901,7 +901,7 @@ public function tamaniAnalShits():void {
 
 	outputText("You can feel the cum building up inside you, and you know that you won't be able to hold out much longer.  Looking down, you can see that Tamani isn't far from orgasm, either.  Her fingers slip rapidly in and out of her cunt, and the look on her face is one of thoughtless bliss.  She shudders and goes limp in your grasp just as you cum, painting the insides of her ass with your semen.  Her eyes are still rolled up into the back of her head as you pull your softening prick out of her ass.  You drop her, letting her legs fall back to the ground with a dull thud.  She turns over onto her side, looking up at you.  Between exhausted pants, she manages to say, \"<i>Don't... think that I... enjoyed that... or anything... I'll be back for you, and you better not...</i>\" before she passes out.  You shake your head and laugh at the stubborn little slut as you tuck " + sMultiCockDesc() + " back into your " + player.armorName + " and head back to your camp.", false);
 	
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 
@@ -936,7 +936,7 @@ public function tamaniBeaten():void {
 	//Don't encounter Tamani for 3 days if fertilized
 	if(player.fertilizedEggs() == 0) flags[kFLAGS.TAMANI_TIME_OUT] = 3;
 	player.dumpEggs();
-	stats(0,0,0,0,0,0,-100,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", -100, "cor", 0);
 	cleanupAfterCombat();
 }
 	
@@ -981,6 +981,6 @@ public function acceptTamaniFacesits():void {
 	outputText("\n\nThe movements of her bucking hips and fat ass stop, instead replaced by a full-body shivering as you finger her ass and molest her clit on top of everything else, and she tries to speak again.  \"<i>F-f-f... ff-... f-f-f-f...</i>\"  All she manages to do is let out high-pitched, half-squealing little 'fffff' sounds, like she's trying to swear over and over and failing just as often, and then you pinch her clit one more time.");
 	outputText("\n\n\"<i>FFFFFFFNNNNNnnnnnnnn!</i>\" the green whore cries out, her thighs clamping down on the sides of your head like a vice.  Her asshole grips down on your invading fingers, holding them in place, and her pussy undulates around your tongue like a living thing, more and more of her juices gushing out as the little slut comes <b>hard</b> before she just... goes limp.");
 	outputText("\n\nYou withdraw your fingers from her ass and let go of her clit, and the little green fuck-doll topples over, falling into the dirt and muttering something incoherently. You sit up and look, admiring the sight of her fat green ass sticking up in the air with her juices still dripping down her thighs, and decide to walk away from the clearly unconscious goblin.");
-	stats(0,0,0,0,0,0,20+player.lib/20,0);
+	dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 20+player.lib/20, "cor", 0);
 	doNext(13);
 }

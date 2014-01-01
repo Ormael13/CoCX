@@ -47,7 +47,7 @@ public function pickPerks(eventNo:*):void
 		player.createPerk("Tank",0,0,0,0,"Raises max HP by 50.");
 		outputText("You choose the 'Tank' perk, giving you an additional 50 hp!", true);
 		doNext(1);
-		stats(0,0,0,0,0,0,0,0);
+		dynStats("str", 0,"tou", 0, "spe", 0, "int", 0, "lib", 0, "sen", 0, "lus", 0, "cor", 0);
 		return;
 	}
 	//Perk Regeneration
