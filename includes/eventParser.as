@@ -612,7 +612,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		if(flags[kFLAGS.ANEMONE_KID] > 0) {
 			if(flags[kFLAGS.KID_SITTER] == 0 && flags[kFLAGS.MARBLE_KIDS] >= 5 && model.time.hours > 10 && model.time.hours < 18 && rand(4) == 0) {
-				kidABabysitsCows();
+				anemoneScene.kidABabysitsCows();
 				needNext = true;
 			}
 			if(flags[kFLAGS.KID_SITTER] == 1 && model.time.hours > 10 && model.time.hours < 18 && rand(4) == 0) {
@@ -2205,8 +2205,8 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				doNext(1);
 				return true;
 			}
-			else if(kidAXP() >= 40 && flags[kFLAGS.HAD_KID_A_DREAM] == 0 && player.gender > 0) {
-				kidADreams();
+			else if(anemoneScene.kidAXP() >= 40 && flags[kFLAGS.HAD_KID_A_DREAM] == 0 && player.gender > 0) {
+				anemoneScene.kidADreams();
 				doNext(1);
 				flags[kFLAGS.HAD_KID_A_DREAM] = 1;
 				return true;
@@ -2241,7 +2241,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(vapulaSlave()) temp += 7;
 		if(model.time.hours == 2) {
 			if(model.time.days % 30 == 0 && flags[kFLAGS.ANEMONE_KID] > 0 && player.hasCock() && flags[kFLAGS.ANEMONE_WATCH] > 0 && player.statusAffectv2("Tamani") >= 40) {
-				goblinNightAnemone();
+				anemoneScene.goblinNightAnemone();
 				needNext = true;
 			}
 			else if(temp > rand(100) && player.hasStatusAffect("Defense: Canopy") < 0) {

@@ -89,7 +89,7 @@ public function dreamSelect():Boolean {
 		choices[choices.length] = 14;
 		choices[choices.length] = 14;
 	}
-	if(kidAXP() >= 40 && player.lust >= 70 && player.gender > 0) {
+	if(anemoneScene.kidAXP() >= 40 && player.lust >= 70 && player.gender > 0) {
 		choices[choices.length] = 15;
 		choices[choices.length] = 15;
 		choices[choices.length] = 15;
@@ -292,7 +292,7 @@ public function dreamSelect():Boolean {
 		}
 		else if(daydream == 15) {
 			outputText("something unusual...\n");
-			kidADreams();
+			anemoneScene.kidADreams();
 		}
 		else if(daydream == 16) {
 			if(player.gender <= 1) {

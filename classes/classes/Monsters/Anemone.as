@@ -22,14 +22,50 @@ package classes.Monsters
 		override public function eOneAttack():int
 		{
 			if (attackSucceeded()){
-				game.applyVenom(rand(4 + player.sens / 20) + 1);
+				applyVenom(rand(4 + player.sens / 20) + 1);
 			}
 			return 1;
 		}
 
+		//Apply the effects of AnemoneVenom()
+		public function applyVenom(str:Number = 1):void
+		{
+			//First application
+			if (player.hasStatusAffect("Anemone Venom") < 0) player.createStatusAffect("Anemone Venom", 0, 0, 0, 0);
+			//Gain some lust
+			game.dynStats("lus", (2 * str));
+
+			//Loop through applying 1 point of venom at a time.
+			while (str > 0) {
+				str--;
+				//Str bottommed out, convert to lust
+				if (player.str < 2) game.dynStats("lus", 2);
+				//Lose a point of str.
+				else {
+					game.mainView.statsView.showStatDown("str");
+					// strDown.visible = true;
+					// strUp.visible = false;
+					player.str--;
+					player.addStatusValue("Anemone Venom", 1, 1);
+				}
+				//Spe bottomed out, convert to lust
+				if (player.spe < 2) game.dynStats("lus", 2);
+				//Lose a point of spe.
+				else {
+					game.mainView.statsView.showStatDown("spe");
+					// speDown.visible = true;
+					// speUp.visible = false;
+					player.spe--;
+					player.addStatusValue("Anemone Venom", 2, 1);
+				}
+			}
+			game.statScreenRefresh();
+		}
+
+
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.defeatAnemone();
+			game.anemoneScene.defeatAnemone();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -38,7 +74,7 @@ package classes.Monsters
 				outputText("\n\nYour foe doesn't seem to mind at all...");
 				game.doNext(game.endLustLoss);
 			} else {
-				game.loseToAnemone();
+				game.anemoneScene.loseToAnemone();
 			}
 		}
 

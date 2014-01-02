@@ -1889,7 +1889,7 @@ public function attack():void {
 		if(monster.short == "anemone") {
 			outputText("\nThough you managed to hit the anemone, several of the tentacles surrounding her body sent home jolts of venom when your swing brushed past them.", false);
 			//(gain lust, temp lose str/spd)
-			applyVenom((1+rand(2)));
+			(monster as Anemone).applyVenom((1+rand(2)));
 		}
 		//Lust raising weapon bonuses
 		if(monster.lustVuln > 0) {
@@ -5086,7 +5086,7 @@ public function kick():void {
 		if(monster.short == "anemone") {
 			outputText("\nThough you managed to hit the anemone, several of the tentacles surrounding her body sent home jolts of venom when your swing brushed past them.", false);
 			//(gain lust, temp lose str/spd)
-			applyVenom((1+rand(2)));
+			(monster as Anemone).applyVenom((1+rand(2)));
 		}
 	}
 	outputText("\n\n", false);
@@ -5696,7 +5696,7 @@ public function runAway():void {
 			else {
 				outputText("You try to shake off the fog and run but the anemone slinks over to you and her tentacles wrap around your waist.  <i>\"Stay?\"</i> she asks, pressing her small breasts into you as a tentacle slides inside your " + player.armorName + " and down to your nethers.  The combined stimulation of the rubbing and the tingling venom causes your knees to buckle, hampering your resolve and ending your escape attempt.", false);
 				//(gain lust, temp lose spd/str)
-				applyVenom((4+player.sens/20));
+				(monster as Anemone).applyVenom((4+player.sens/20));
 				combatRoundOver();
 				return;
 			}

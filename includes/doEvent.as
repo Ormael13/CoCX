@@ -2810,22 +2810,6 @@ public function doEvent(eventNo:Number):void
 		scyllaPtVSex();
 		return;
 	}
-	
-	else if (eventNo == 2591)
-	{
-		rapeAnemoneWithPussy();
-		return;
-	}
-	else if (eventNo == 2592)
-	{
-		rapeAnemoneWithDick();
-		return;
-	}
-	else if (eventNo == 2593)
-	{
-		victoryButtholeRape();
-		return;
-	}
 	else if (eventNo == 2594)
 	{
 		freeValazLooseCoochie();
@@ -3017,16 +3001,6 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 2739)
 	{
 		fellatrixBarApproach();
-		return;
-	}
-	else if (eventNo == 2740)
-	{
-		dontGiveMino();
-		return;
-	}
-	else if (eventNo == 2741)
-	{
-		giveMino();
 		return;
 	}
 	else if (eventNo == 2742)
@@ -4742,26 +4716,6 @@ public function doEvent(eventNo:Number):void
 		yeahSeanLetsBimbooze();
 		return;
 	}
-	else if (eventNo == 3546)
-	{
-		approachAnemoneBarrel();
-		return;
-	}
-	else if (eventNo == 3547)
-	{
-		getAnemoneItem();
-		return;
-	}
-	else if (eventNo == 3548)
-	{
-		giveAnemoneWeapon();
-		return;
-	}
-	else if (eventNo == 3549)
-	{
-		takeOutOfAnemone();
-		return;
-	}
 	else if (eventNo == 3557)
 	{
 		marbleNomNoms();
@@ -5419,16 +5373,6 @@ public function doEvent(eventNo:Number):void
 		suggestSexAfterBasiWombed(false);
 		return;
 	}
-	else if (eventNo == 3818)
-	{
-		anemoneButtPlugginz();
-		return;
-	}
-	else if (eventNo == 3820)
-	{
-		hotdogTheAnemone();
-		return;
-	}
 	else if (eventNo == 3822)
 	{
 		saveTheSandTarps();
@@ -5522,11 +5466,6 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 3848)
 	{
 		layBeeEggsInGoo();
-		return;
-	}
-	else if (eventNo == 3849)
-	{
-		anemoneGetsLayedByBeePositor();
 		return;
 	}
 	else if (eventNo == 3850)

@@ -217,7 +217,7 @@ public function camp():void {
 	//Anemone birth followup!
 	if(player.hasStatusAffect("Camp Anemone Trigger") >= 0) {
 		player.removeStatusAffect("Camp Anemone Trigger");
-		anemoneKidBirthPtII();
+		anemoneScene.anemoneKidBirthPtII();
 		hideMenus();
 		return;
 	}
@@ -624,7 +624,7 @@ public function stash(exists:Boolean = true):Boolean {
 	var weaponRetrieve:Number = 0;
 	var armorRack:Number = 0;
 	var armorRetrieve:Number = 0;
-	var barrel:Number = 0;
+	var barrel:* = 0;
 	outputText("", true);
 	if(flags[kFLAGS.ANEMONE_KID] > 0) {
 		//(morning)
@@ -636,7 +636,7 @@ public function stash(exists:Boolean = true):Boolean {
 		//(night hours)
 		else if(model.time.hours < 22) outputText("Kid A is peeking out of her barrel.  Whenever you make eye contact she breaks into a smile; otherwise she just stares off into the distance, relaxing.\n\n");
 		else outputText("Kid A is here, seated demurely on the rim of her barrel and looking somewhat more purple under the red moon.  She glances slyly at you from time to time.\n\n");
-		barrel = 3546;
+		barrel = anemoneScene.approachAnemoneBarrel;
 		if(model.time.hours < 6) barrel = 0;
 	}
 	if(player.hasKeyItem("Camp - Chest") >= 0) outputText("You have a large wood and iron chest to help store excess items located near the portal entrance.\n\n", false);

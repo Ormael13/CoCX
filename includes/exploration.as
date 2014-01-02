@@ -1374,7 +1374,7 @@ public function boatExplore():void {
 			zealotBoat();
 			return;
 		case 5: 
-			mortalAnemoneeeeee();
+			anemoneScene.mortalAnemoneeeeee();
 			return;
 	}
 

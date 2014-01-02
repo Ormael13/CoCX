@@ -2360,19 +2360,19 @@ public function doItems(eventNo:Number):void {
 		retrieveFromRacks(8, true);
 	}	
 	if(eventNo == 1117) {
-		placeInAnemone(1);
+		anemoneScene.placeInAnemone(1);
 	}
 	if(eventNo == 1118) {
-		placeInAnemone(2);
+		anemoneScene.placeInAnemone(2);
 	}
 	if(eventNo == 1119) {
-		placeInAnemone(3);
+		anemoneScene.placeInAnemone(3);
 	}
 	if(eventNo == 1120) {
-		placeInAnemone(4);
+		anemoneScene.placeInAnemone(4);
 	}
 	if(eventNo == 1121) {
-		placeInAnemone(5);
+		anemoneScene.placeInAnemone(5);
 	}
 	if(eventNo == 1122) {
 		outputText("You smear the foul-smelling paste onto your [hips].  It feels cool at first but rapidly warms to an uncomfortable level of heat.\n\n", true);

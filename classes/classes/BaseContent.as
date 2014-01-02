@@ -354,6 +354,40 @@
 		{
 			return kGAMECLASS.consumeItem(itemName,quantity);
 		}
+
+		protected function itemLongName(shortName1:String):String
+		{
+			return kGAMECLASS.itemLongName(shortName1);
+		}
+
+		protected function takeItem():void{
+			kGAMECLASS.takeItem();
+		}
+
+		protected function silly():Boolean
+		{
+			return kGAMECLASS.silly();
+		}
+
+		protected function HPChange(changeNum:Number,display:Boolean)
+		{
+			kGAMECLASS.HPChange(changeNum,display);
+		}
+
+		protected function fatigue(mod:Number,type:Number=0)
+		{
+			kGAMECLASS.fatigue(mod,type);
+		}
+
+		protected function isWeapon(shortName:String):Boolean
+		{
+			return kGAMECLASS.isWeapon(shortName);
+		}
+
+		protected function get eventParser():Function
+		{
+			return kGAMECLASS.eventParser;
+		}
 		
 		protected function get player():Player
 		{

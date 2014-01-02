@@ -8,8 +8,6 @@
 
 	import classes.AssClass;
 	import classes.BreastRowClass;
-	import classes.Monsters.Scenes.AkbalScene;
-	import classes.Monsters.Scenes.AmilyScene;
 
 	import classes.Player;
 	import classes.Cock;
@@ -24,6 +22,7 @@
 	import classes.Parser.Main.Parser; 	// import getting long enough yet?
 
 	import classes.Monsters.*;		// import all the various monsters
+	import classes.Monsters.Scenes.*;
 	import coc.view.MainView;
 
 	import coc.model.GameModel;
@@ -31,13 +30,13 @@
 
 	// Class based content? In my CoC?! It's more likely than you think!
 	import classes.content.*;
-	import fl.controls.ComboBox; 
-	import fl.data.DataProvider; 
+	import fl.controls.ComboBox;
+	import fl.data.DataProvider;
 	import flash.display.Loader;
 	import flash.display.MovieClip;
 	import flash.events.*
 	import flash.net.FileReference;
-	import flash.net.navigateToURL; 
+	import flash.net.navigateToURL;
 	import flash.net.registerClassAlias;
 	import flash.net.SharedObject;
 	import flash.net.SharedObjectFlushStatus;
@@ -96,8 +95,8 @@
 		public var umasShop:UmasShop = new UmasShop();
 		public var akbalScene:AkbalScene = new AkbalScene();
 		public var amilyScene:AmilyScene = new AmilyScene();
+		public var anemoneScene:AnemoneScene = new AnemoneScene();
 		
-		include "../../includes/anemone.as";
 		include "../../includes/ants.as";
 		include "../../includes/april_fools.as";
 		include "../../includes/arian.as";

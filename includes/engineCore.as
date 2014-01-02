@@ -2619,7 +2619,7 @@ public function displayStats(e:MouseEvent = null):void
 		else outputText("100%\n", false);
 	}
 	if(flags[kFLAGS.ANEMONE_KID] > 0) {
-		outputText("<b>Kid A's Confidence:</b> " + kidAXP() + "%\n");
+		outputText("<b>Kid A's Confidence:</b> " + anemoneScene.kidAXP() + "%\n");
 	}
 	if(flags[kFLAGS.KIHA_AFFECTION_LEVEL] == 2) {
 		if(followerKiha()) outputText("<b>Kiha Affection:</b> " + 100 + "%\n", false);
