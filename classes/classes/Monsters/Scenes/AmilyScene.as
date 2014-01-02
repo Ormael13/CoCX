@@ -5666,22 +5666,6 @@ package classes.Monsters.Scenes
 		}
 
 
-
-
-		//(if PC uses tease/seduce after this)
-		//Deals big lust increase, despite her resistance.
-		public function amilyTeaseConcentration():Boolean {
-			if(monster.hasStatusAffect("Concentration") >= 0) {
-				outputText("Amily flushes hotly; her concentration only makes her pay more attention to your parts!", false);
-				monster.lust += 25;
-				monster.removeStatusAffect("Concentration");
-				return true;
-			}
-			return false;
-		}
-
-
-
 		//(Winning Messages)
 		public function conquerThatMouseBitch():void {
 			amilySprite();

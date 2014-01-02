@@ -30,6 +30,17 @@ package classes.Monsters
 			}
 		}
 
+		override public function teased(lustDelta:Number):void
+		{
+			if(lust <= 99) {
+				if(lustDelta <= 0) outputText("\nThe goo-girl looks confused by your actions, as if she's trying to understand what you're doing.", false);
+				else if(lustDelta < 13) outputText("\nThe curious goo has begun stroking herself openly, trying to understand the meaning of your actions by imitating you.", false);
+				else outputText("\nThe girl begins to understand your intent. She opens and closes her mouth, as if panting, while she works slimy fingers between her thighs and across her jiggling nipples.", false);
+			}
+			else outputText("\nIt appears the goo-girl has gotten lost in her mimicry, squeezing her breasts and jilling her shiny " + skinTone + " clit. Her desire to investigate you forgotten.", false);
+			applyTease(lustDelta);
+		}
+
 		public function GooGirl(game:CoC)
 		{
 			super(game);

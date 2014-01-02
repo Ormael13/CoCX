@@ -25,6 +25,13 @@ package classes.Monsters
 			game.urtaLosesToCowCubi();
 		}
 
+
+		override public function teased(lustDelta:Number):void
+		{
+			game.milkCubiGainsHPFromTeasing();
+			applyTease(lustDelta);
+		}
+
 		public function MilkySuccubus(game:CoC)
 		{
 			super(game);

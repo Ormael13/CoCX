@@ -37,23 +37,16 @@ package classes
 		public var exploredMountain:Number = 0;
 		public var exploredLake:Number = 0;
 
-		public function Player(game:*)
+		// Hacky workaround shit for ByteArray.readObject
+		public function Player()
 		{
-			super(game);
-			if (game == null)
-			{
-				this.game = kGAMECLASS;
-			}
-			else
-			{
-				this.game = game;
-			}
+			super(kGAMECLASS);
 		}
 
 		public function reduceDamage(damage:Number):Number{
 			damage = int(damage - rand(tou) - armorDef);
 			//EZ MOAD half damage
-			if (game.flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) damage /= 2;
+			if (kGAMECLASS.flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) damage /= 2;
 			if (hasStatusAffect("Shielding") >= 0) {
 				damage -= 30;
 				if (damage < 1) damage = 1;

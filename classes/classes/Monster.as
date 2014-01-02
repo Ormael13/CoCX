@@ -287,9 +287,9 @@
 				this.pronoun3 = "his";
 			}
 			if (cocks == null) cocks=[new Cock()];
-			if (cocks is Cock) cocks=[cocks]
+			if (cocks is Cock) cocks=[cocks];
 			else if (!(cocks is Array)) {
-				trace(this.short+".init02Male("+typeof(c)+")");
+				trace(this.short+".init02Male("+typeof(cocks)+")");
 				cocks = [new Cock()];
 			}
 			if (cocks.length==0){
@@ -804,6 +804,65 @@
 			outputText("\n\nYou'll probably wake up in eight hours or so, missing " + temp + " gems.", false);
 			player.gems -= temp;
 			game.doNext(16);
+		}
+
+		/**
+		 * Display tease reaction message. Then call applyTease() to increase lust.
+		 * @param lustDelta value to be added to lust (already modified by lustVuln etc)
+		 */
+		public function teased(lustDelta:Number):void
+		{
+			outputDefaultTeaseReaction(lustDelta);
+			if(lustDelta > 0) {
+				//Imp mob uber interrupt!
+			  	if(hasStatusAffect("ImpUber") >= 0) { // TODO move to proper class
+					outputText("\nThe imps in the back stumble over their spell, their loincloths tenting obviously as your display interrupts their casting.  One of them spontaneously orgasms, having managed to have his spell backfire.  He falls over, weakly twitching as a growing puddle of whiteness surrounds his defeated form.", false);
+					//(-5% of max enemy HP)
+					HP -= bonusHP * .05;
+					lust -= 15;
+					removeStatusAffect("ImpUber");
+					createStatusAffect("ImpSkip",0,0,0,0);
+				}
+			}
+			applyTease(lustDelta);
+		}
+
+		protected function outputDefaultTeaseReaction(lustDelta:Number):void
+		{
+			if (plural) {
+				if (lustDelta == 0) outputText("\n\n" + capitalA + short + " seem unimpressed.", false);
+				if (lustDelta > 0 && lustDelta < 4) outputText("\n" + capitalA + short + " look intrigued by what " + pronoun1 + " see.", false);
+				if (lustDelta >= 4 && lustDelta < 10) outputText("\n" + capitalA + short + " definitely seem to be enjoying the show.", false);
+				if (lustDelta >= 10 && lustDelta < 15) outputText("\n" + capitalA + short + " openly stroke " + pronoun2 + "selves as " + pronoun1 + " watch you.", false);
+				if (lustDelta >= 15 && lustDelta < 20) outputText("\n" + capitalA + short + " flush hotly with desire, " + pronoun3 + " eyes filled with longing.", false);
+				if (lustDelta >= 20) outputText("\n" + capitalA + short + " lick " + pronoun3 + " lips in anticipation, " + pronoun3 + " hands idly stroking " + pronoun3 + " bodies.", false);
+			}
+			else {
+				if (lustDelta == 0) outputText("\n" + capitalA + short + " seems unimpressed.", false);
+				if (lustDelta > 0 && lustDelta < 4) {
+					if (plural) outputText("\n" + capitalA + short + " looks intrigued by what " + pronoun1 + " see.", false);
+					else outputText("\n" + capitalA + short + " looks intrigued by what " + pronoun1 + " sees.", false);
+				}
+				if (lustDelta >= 4 && lustDelta < 10) outputText("\n" + capitalA + short + " definitely seems to be enjoying the show.", false);
+				if (lustDelta >= 10 && lustDelta < 15) {
+					if (plural) outputText("\n" + capitalA + short + " openly strokes " + pronoun2 + "selves as " + pronoun1 + " watch you.", false);
+					else outputText("\n" + capitalA + short + " openly strokes " + pronoun2 + "self as " + pronoun1 + " watches you.", false);
+				}
+				if (lustDelta >= 15 && lustDelta < 20) {
+					if (plural) outputText("\n" + capitalA + short + " flush hotly with desire, " + pronoun3 + " eyes filling with longing.", false);
+					else outputText("\n" + capitalA + short + " flushes hotly with desire, " + pronoun3 + " eyes filled with longing.", false);
+				}
+				if (lustDelta >= 20) {
+					if (plural) outputText("\n" + capitalA + short + " licks " + pronoun3 + " lips in anticipation, " + pronoun3 + " hands idly stroking " + pronoun3 + " own bodies.", false);
+					else outputText("\n" + capitalA + short + " licks " + pronoun3 + " lips in anticipation, " + pronoun3 + " hands idly stroking " + pronoun3 + " own body.", false);
+				}
+			}
+		}
+
+		protected function applyTease(lustDelta:Number):void{
+			lust += lustDelta;
+			lustDelta = Math.round(lustDelta * 10)/10;
+			outputText(" (" + lustDelta + ")", false);
 		}
 
 		public function generateDebugDescription():String{

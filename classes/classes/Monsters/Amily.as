@@ -236,6 +236,20 @@ package classes.Monsters
 			game.combatRoundOver();
 		}
 
+		//(if PC uses tease/seduce after this)
+		//Deals big lust increase, despite her resistance.
+		override public function teased(lustDelta:Number):void
+		{
+			if(hasStatusAffect("Concentration") >= 0) {
+				outputText("Amily flushes hotly; her concentration only makes her pay more attention to your parts!", false);
+				lustDelta += 25+lustDelta;
+				removeStatusAffect("Concentration");
+				applyTease(lustDelta);
+			} else {
+				super.teased(lustDelta);
+			}
+		}
+
 		override public function defeated(hpVictory:Boolean):void
 		{
 			game.amilyScene.conquerThatMouseBitch();

@@ -943,7 +943,7 @@ public function naggaTease():void {
 			if(player.hasPerk("History: Whore") >= 0) {
 				damage *= 1.15;
 			}
-			enemyTeaseReaction(damage);
+			monster.teased(damage);
 			teaseXP(1);
 		}
 		//Nuttin honey

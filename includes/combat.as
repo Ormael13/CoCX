@@ -104,10 +104,6 @@ public function doCombat(eventNum:Number):void
 	var temp4:* = 0;
 	var temp5:* = 0;
 	var tempText:String = "";
-	var tempText2:String = "";
-	var tempText3:String = "";
-	var tempText4:String = "";
-	var tempText5:String = "";
 	var attacks:Number = 5012;
 	var pSpecials:int = 5161;
 	
@@ -2950,84 +2946,6 @@ public function display():void {
 	//	outputText(monster.generateDebugDescription(),false);
 	//}
 }
-public function enemyTeaseReaction(lustDelta:Number):void {
-	lustDelta = monster.lustVuln * lustDelta;
-	if(monster.short == "demons") {
-		outputText("\n", false);
-		if(lustDelta == 0) 
-		if(lustDelta > 0 && lustDelta < 5) outputText("The demons lessen somewhat in the intensity of their attack, and some even eye up your assets as they strike at you.", false);
-		if(lustDelta >= 5 && lustDelta < 10) outputText("The demons are obviously steering clear from damaging anything you might use to fuck and they're starting to leave their hands on you just a little longer after each blow. Some are starting to cop quick feels with their other hands and you can smell the demonic lust of a dozen bodies on the air.", false);
-		if(lustDelta >= 10) outputText("The demons are less and less willing to hit you and more and more willing to just stroke their hands sensuously over you. The smell of demonic lust is thick on the air and part of the group just stands there stroking themselves openly.", false);
-	}
-	else if(monster.short == "Holli" && monster.hasStatusAffect("Holli Burning") >= 0) {
-		outputText("Holli doesn't even seem to notice, so concerned is she with defeating you before the mounting bonfire causes her any more pain.");
-		lustDelta = 0;
-	}
-	else if(monster.short == "milky succubus") {
-		milkCubiGainsHPFromTeasing();
-	}
-	else if(monster.short == "lusty demons") {
-		if(lustDelta > 0 && lustDelta < 5) outputText("The demons lessen somewhat in the intensity of their attack, and some even eye up your assets as they strike at you. Vapula has trouble giving her orders.");
-		if(lustDelta >= 5 && lustDelta < 10) outputText("The demons are obviously avoiding damaging anything you might use to fuck and they're starting to leave their hands on you just a little longer after each blow.  Some are copping quick feels and you can smell the demonic lust on the air.  Vapula is starting to get frustrated as her minions are more and more reluctant to attack you, preferring to caress each other instead.");
-		if(lustDelta >= 10) outputText("The demons are decreasingly willing to hit you and more and more willing to just stroke their hands sensuously over you.  Vapula is uncontrollably aroused herself and shivers even as she tries to maintain some semblance of offense, but most of the demons are visibly uncomfortable and some just lie on the ground, tamed by their own lust.");
-	}
-	//Amily has her own reaction.
-	else if(amilyScene.amilyTeaseConcentration()) {}
-	//Googals!
-	else if(monster.short == "goo-girl") {
-		if(monster.lust <= 99) {
-			if(lustDelta <= 0) outputText("\nThe goo-girl looks confused by your actions, as if she's trying to understand what you're doing.", false);
-			else if(lustDelta < 13) outputText("\nThe curious goo has begun stroking herself openly, trying to understand the meaning of your actions by imitating you.", false);
-			else outputText("\nThe girl begins to understand your intent. She opens and closes her mouth, as if panting, while she works slimy fingers between her thighs and across her jiggling nipples.", false);
-		}
-		else outputText("\nIt appears the goo-girl has gotten lost in her mimicry, squeezing her breasts and jilling her shiny " + monster.skinTone + " clit. Her desire to investigate you forgotten.", false);
-	}
-	//Everybody else
-	else {
-		if(monster.plural) {
-			if(lustDelta == 0) outputText("\n\n" + monster.capitalA + monster.short + " seem unimpressed.", false);
-			if(lustDelta > 0 && lustDelta < 4) outputText("\n" + monster.capitalA + monster.short + " look intrigued by what " + monster.pronoun1 + " see.", false);
-			if(lustDelta >= 4 && lustDelta < 10) outputText("\n" + monster.capitalA + monster.short + " definitely seem to be enjoying the show.", false);
-			if(lustDelta >= 10 && lustDelta < 15) outputText("\n" + monster.capitalA + monster.short + " openly stroke " + monster.pronoun2 + "selves as " + monster.pronoun1 + " watch you.", false);
-			if(lustDelta >= 15 && lustDelta < 20) outputText("\n" + monster.capitalA + monster.short + " flush hotly with desire, " + monster.pronoun3 + " eyes filled with longing.", false);
-			if(lustDelta >= 20) outputText("\n" + monster.capitalA + monster.short + " lick " + monster.pronoun3 + " lips in anticipation, " + monster.pronoun3 + " hands idly stroking " + monster.pronoun3 + " bodies.", false);
-		}
-		else {
-			if(lustDelta == 0) outputText("\n" + monster.capitalA + monster.short + " seems unimpressed.", false);
-			if(lustDelta > 0 && lustDelta < 4) {
-				if(monster.plural) outputText("\n" + monster.capitalA + monster.short + " looks intrigued by what " + monster.pronoun1 + " see.", false);
-				else outputText("\n" + monster.capitalA + monster.short + " looks intrigued by what " + monster.pronoun1 + " sees.", false);
-			}
-			if(lustDelta >= 4 && lustDelta < 10) outputText("\n" + monster.capitalA + monster.short + " definitely seems to be enjoying the show.", false);
-			if(lustDelta >= 10 && lustDelta < 15) {
-				if(monster.plural) outputText("\n" + monster.capitalA + monster.short + " openly strokes " + monster.pronoun2 + "selves as " + monster.pronoun1 + " watch you.", false);
-				else outputText("\n" + monster.capitalA + monster.short + " openly strokes " + monster.pronoun2 + "self as " + monster.pronoun1 + " watches you.", false);
-			}
-			if(lustDelta >= 15 && lustDelta < 20) {
-				if(monster.plural) outputText("\n" + monster.capitalA + monster.short + " flush hotly with desire, " + monster.pronoun3 + " eyes filling with longing.", false);
-				else outputText("\n" + monster.capitalA + monster.short + " flushes hotly with desire, " + monster.pronoun3 + " eyes filled with longing.", false);
-			}
-			if(lustDelta >= 20) {
-				if(monster.plural) outputText("\n" + monster.capitalA + monster.short + " licks " + monster.pronoun3 + " lips in anticipation, " + monster.pronoun3 + " hands idly stroking " + monster.pronoun3 + " own bodies.", false);
-				else outputText("\n" + monster.capitalA + monster.short + " licks " + monster.pronoun3 + " lips in anticipation, " + monster.pronoun3 + " hands idly stroking " + monster.pronoun3 + " own body.", false);
-			}
-		}
-	}
-	if(lustDelta > 0) {
-		//Imp mob uber interrupt!
-	  	if(monster.hasStatusAffect("ImpUber") >= 0) {
-			outputText("\nThe imps in the back stumble over their spell, their loincloths tenting obviously as your display interrupts their casting.  One of them spontaneously orgasms, having managed to have his spell backfire.  He falls over, weakly twitching as a growing puddle of whiteness surrounds his defeated form.", false);
-			//(-5% of max enemy HP)
-			monster.HP -= monster.bonusHP * .05;
-			monster.lust -= 15;
-			monster.removeStatusAffect("ImpUber");
-			monster.createStatusAffect("ImpSkip",0,0,0,0);
-		}
-	}
-	monster.lust += lustDelta;
-	lustDelta = Math.round(lustDelta * 10)/10;
-	outputText(" (" + lustDelta + ")", false);
-}
 public function showMonsterLust():void {
 	//Entrapped
 	if(monster.hasStatusAffect("Constricted") >= 0) {
@@ -3187,7 +3105,7 @@ public function tease():void {
 	var bimbo:Boolean = false;
 	var bro:Boolean = false;
 	var futa:Boolean = false;
-	var choices:Array = new Array();
+	var choices:Array = [];
 	var select:Number = 0;
 	//Tags used for bonus damage and chance later on
 	var breasts:Boolean = false;
@@ -4482,7 +4400,8 @@ public function tease():void {
 		}
 		if (player.hasPerk(UmasShop.NEEDLEWORK_LUST_PERK_NAME) >= 0) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
 		if(monster.plural) damage *= 1.3;
-		enemyTeaseReaction(damage + rand(bonusDamage));
+		damage = (damage + rand(bonusDamage))*monster.lustVuln;
+		monster.teased(damage);
 		if(flags[kFLAGS.PC_FETISH] >= 1) {
 			if(player.lust < 75) outputText("\nFlaunting your body in such a way gets you a little hot and bothered.", false);
 			else outputText("\nIf you keep exposing yourself you're going to get too horny to fight back.  This exhibitionism fetish makes it hard to resist just stripping naked and giving up.", false);

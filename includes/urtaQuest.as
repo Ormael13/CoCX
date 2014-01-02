@@ -191,7 +191,7 @@ public function startUrtaQuest():void {
 	itemSlot5 = new ItemSlotClass();
 	player2 = clone(player);
 
-	player = new Player(this);
+	player = new Player();
 	model.player = player;
 	player.short = "Urta";
 	player.tallness = 71;

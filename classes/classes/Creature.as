@@ -304,8 +304,8 @@ package classes
 			//used to denote that the array has already had its new spot pushed on.
 			var arrayed:Boolean = false;
 			//used to store where the array goes
-			var keySlot:Number = 0
-			var counter:Number = 0
+			var keySlot:Number = 0;
+			var counter:Number = 0;
 			//Start the array if its the first bit
 			if (perks.length == 0)
 			{
@@ -2808,7 +2808,14 @@ package classes
 				}
 				else
 				{
-					cocks.splice(arraySpot, totalRemoved);
+					try
+					{
+						cocks.splice(arraySpot, totalRemoved);
+					}
+					catch (e:Error)
+					{
+						trace("Argument error in Creature[" + this.short + "]: " + e.message);
+					}
 					//trace("Attempted to remove " + totalRemoved + " cocks.");
 				}
 			}

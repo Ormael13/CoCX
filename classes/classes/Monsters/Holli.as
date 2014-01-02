@@ -26,6 +26,16 @@ package classes.Monsters
 			game.enjoyYourBadEndBIYAAAATCH();
 		}
 
+
+		override public function teased(lustDelta:Number):void
+		{
+			if (hasStatusAffect("Holli Burning") >= 0) {
+				outputText("Holli doesn't even seem to notice, so concerned is she with defeating you before the mounting bonfire causes her any more pain.");
+				lustDelta = 0;
+			}
+			applyTease(lustDelta);
+		}
+
 		public function Holli(game:CoC)
 		{
 			super(game);
