@@ -36,7 +36,6 @@ package classes.Monsters
 
 		public function Kitsune(game:CoC, hairColor:String)
 		{
-			super(game);
 
 			if (rand(3) != 2) game.flags[kFLAGS.redheadIsFuta] = 1;
 			init01Names("a ", "kitsune", "kitsune",

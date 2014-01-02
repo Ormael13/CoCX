@@ -52,7 +52,7 @@ public function sharkGirlEncounter(exploreLoc:Number = 0):* {
 	outputText("A grey blur bursts from the water and lands on the ground a few feet away from you.\n\n", false);
 	outputText("It's a woman – a peculiarly corrupted woman, with shiny grey skin, silver hair, and a fin positioned between her shoulder blades. She's wearing some rather revealing black swimwear. The girl looks up at you and grins widely, showing rows of knife-like teeth. \"<i>Wanna play? Heads up though, I play 'rough'!</i>\"\n\n", false);
 	outputText("You're fighting a shark girl!", false);
-	startCombat(new SharkGirl(this));
+	startCombat(new SharkGirl());
 	spriteSelect(70);
 }
 

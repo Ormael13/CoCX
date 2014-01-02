@@ -25,9 +25,8 @@ package classes.Monsters
 			game.harpyQueenBeatsUpPCBadEnd();
 		}
 
-		public function HarpyQueen(game:CoC)
+		public function HarpyQueen()
 		{
-			super(game);
 			init01Names("the ", "Harpy Queen", "harpyqueen", "You face the Harpy Queen, a broodmother of epic proportions - literally.  Her hips are amazingly wide, thrice her own width at the least, and the rest of her body is lushly voluptuous, with plush, soft thighs and a tremendous butt.  Her wide wings beat occasionally, sending ripples through her jiggly body.  She wields a towering whitewood staff in one hand, using the other to cast eldritch spells.");
 			init02Female(VAGINA_WETNESS_SLAVERING,VAGINA_LOOSENESS_LOOSE);
 			init03BreastRows("D");

@@ -94,7 +94,7 @@ package classes.Monsters.Scenes
 				//(typical lust gain and temporary stat damage, start combat)
 			}
 			outputText("You are fighting an anemone!", false);
-			var anemone:Anemone = new Anemone(kGAMECLASS);
+			var anemone:Anemone = new Anemone();
 			startCombat(anemone);
 			//(gain lust, temp lose spd/str)
 			dynStats("lus", 4);
@@ -583,7 +583,7 @@ package classes.Monsters.Scenes
 			else {
 				outputText("Oh, hell NO are you going to give that bottle away when you haven't even gotten your own fix yet! You raise your " + player.weaponName + " and advance on the girl with a wild look in your eyes. She shivers a bit at your expression and drops the bottle with a splash, then recovers her composure and backs up a few steps. You grab the floating bottle, and the rest of your stuff, quickly.", false);
 				//(gain lust, temp lose spd/str; if in withdrawal then proceed to fight, otherwise present choices 'Give' and 'Don't Give')
-				var anemone:Anemone = new Anemone(kGAMECLASS);
+				var anemone:Anemone = new Anemone();
 				startCombat(anemone);
 				//(gain lust, temp lose spd/str)
 				dynStats("lus", 4);
@@ -600,7 +600,7 @@ package classes.Monsters.Scenes
 			outputText("", true);
 			outputText("You look sternly at the blue girl and hold out your hand.  As she realizes you don't intend to let her have the bottle, her face changes to a half-pout, half-frown.  When you don't react, she throws the bottle at your feet and shouts, \"<i>Mean!</i>\"  You bend down to pick it, and the other items, up, and when you straighten back up, she looks quite angry and her tentacles are waving all over the place.  Uh-oh.  You raise your weapon as the anemone giggles sadistically and attacks!\n\n", false);
 			//(proceed to combat)
-			var anemone:Anemone = new Anemone(kGAMECLASS);
+			var anemone:Anemone = new Anemone();
 			startCombat(anemone);
 			//(gain lust, temp lose spd/str)
 			dynStats("lus", 4);

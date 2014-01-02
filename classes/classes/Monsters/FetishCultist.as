@@ -55,9 +55,8 @@
 			game.eventParser(Appearance.randomChoice(special1, special2));
 		}
 
-		public function FetishCultist(game:CoC)
+		public function FetishCultist()
 		{
-			super(game);
 			trace("GenericMonstah Constructor!");
 			init01Names("the ", "fetish cultist", "fetishcultist", "The woman across from you has her eyes closed, her hands joined, and seems to be chanting under her breath. She is wearing a religious outfit that closely hugs her curvacious shape, with a skirt so short that you can clearly see her pussy's lips.\n\nShe has clealy lost her grasp on sanity, and filled the void with pure perversion.");
 			init02Female(VAGINA_LOOSENESS_GAPING, VAGINA_WETNESS_WET);

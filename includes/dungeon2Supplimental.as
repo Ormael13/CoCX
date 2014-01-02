@@ -381,7 +381,7 @@ public function getTrappedContinuation():void {
 	outputText("Meanwhile, a number of tentacles have sprung up from below, and are crawling up your " + player.legs() + ".  It's becoming fairly clear how the skeleton wound up in this cave...  You've got to escape!", false);
 	
 	//[FIGHT]
-	startCombat(new EncapsulationPod(this),true);
+	startCombat(new EncapsulationPod(),true);
 }
 
 
@@ -820,7 +820,7 @@ public function rejectFuckingVala():void {
 		outputText("The fairy stumbles up and fondles herself madly, already looking close to defeat. \"<i>Bitch doesn't want to leave masters!  Masters have good cum.  Let bitch show you how wonderful it tastes.</i>\" she demands, madly. Her wings gain sudden life, flapping rapidly to pull her frail body off the floor. Hovering before you, she curls her fingers into desperate claws and rakes at you. She's too far gone, you realize. You're going to have to fight the broken fairy, AGAIN!", false);
 	}
 	//Initiate fight
-	startCombat(new Vala(this),true);
+	startCombat(new Vala(),true);
 	doNext(1);
 }
 

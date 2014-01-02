@@ -75,9 +75,8 @@
 			return _long;
 		}
 
-		public function EncapsulationPod(game:CoC)
+		public function EncapsulationPod()
 		{
-			super(game);
 			init01Names("the ", "pod", "pod", "");
 			init02Genderless();
 			init03BreastRows([0,0]);

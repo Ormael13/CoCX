@@ -148,7 +148,7 @@ public function tryDiscover():void {
 				}
 				else {
 					outputText("An imp wings out of the sky and attacks!", true);
-					startCombat(new Imp(this));
+					startCombat(new Imp());
 					spriteSelect(29);
 				}
 				return;
@@ -158,14 +158,14 @@ public function tryDiscover():void {
 				if(player.gender > 0) {
 					outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fucked, " + player.mf("stud","slut"), true);
 					outputText(".</i>\"", false);
-					startCombat(new Goblin(this));
+					startCombat(new Goblin());
 					spriteSelect(24);
 					return;
 				}
 				else {
 					outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fuc-oh shit, you don't even have anything to play with!  This is for wasting my time!", true);
 					outputText("</i>\"", false);
-					startCombat(new Goblin(this));
+					startCombat(new Goblin());
 					spriteSelect(24);
 					return;
 				}
@@ -394,7 +394,7 @@ public function exploreForest():void {
 			}
 			else {
 				outputText("An imp leaps out of the bushes and attacks!", true);
-				startCombat(new Imp(this));
+				startCombat(new Imp());
 			}
 			spriteSelect(29);
 			return;
@@ -413,14 +413,14 @@ public function exploreForest():void {
 			if(player.gender > 0) {
 				outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fucked, " + player.mf("stud","slut"), true);
 				outputText(".</i>\"", false);
-				startCombat(new Goblin(this));
+				startCombat(new Goblin());
 				spriteSelect(24);
 				return;
 			}
 			else {
 				outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fuc-oh shit, you don't even have anything to play with!  This is for wasting my time!", true);
 				outputText("</i>\"", false);
-				startCombat(new Goblin(this));
+				startCombat(new Goblin());
 				spriteSelect(24);
 				return;
 			}
@@ -481,7 +481,7 @@ public function exploreForest():void {
 			if(monk == 3) outputText("unsteady on his feet, but looking for a fight!", false);
 			if(monk == 4) outputText("visibly tenting his robes, but intent on fighting you.", false);
 			if(monk == 5) outputText("panting and nude, his fur rustling in the breeze, a twitching behemoth of a cock pulsing between his legs.", false);
-			startCombat(new Jojo(this));
+			startCombat(new Jojo());
 		}
 	}
 	//Tentacles 25% of the time...
@@ -783,7 +783,7 @@ public function exploreHighMountain():void {
 	//Generic harpy
 	if(chooser == 0) {
 		outputText("A harpy wings out of the sky and attacks!", true);
-		startCombat(new Harpy(this));
+		startCombat(new Harpy());
 		spriteSelect(26);
 		return;
 	}
@@ -796,7 +796,7 @@ public function exploreHighMountain():void {
 	if(chooser == 2) {
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || sophieFollower()) {
 			outputText("A harpy wings out of the sky and attacks!", true);
-			startCombat(new Harpy(this));
+			startCombat(new Harpy());
 			spriteSelect(26);
 			return;
 		}
@@ -911,7 +911,7 @@ public function exploreMountain():void {
 			}
 			else {
 				outputText("An imp leaps out from behind a rock and attacks!", true);
-				startCombat(new Imp(this));
+				startCombat(new Imp());
 			}
 			spriteSelect(29);
 			return;
@@ -921,14 +921,14 @@ public function exploreMountain():void {
 			if(player.gender > 0) {
 				outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fucked, " + player.mf("stud","slut"), true);
 				outputText(".</i>\"", false);
-				startCombat(new Goblin(this));
+				startCombat(new Goblin());
 				spriteSelect(24);
 				return;
 			}
 			else {
 				outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fuc-oh shit, you don't even have anything to play with!  This is for wasting my time!", true);
 				outputText("</i>\"", false);
-				startCombat(new Goblin(this));
+				startCombat(new Goblin());
 				spriteSelect(24);
 				return;
 			}
@@ -1188,14 +1188,14 @@ public function exploreLake():void {
 			//High int starts on even footing.
 			if(player.inte >= 25) {
 				outputText("A soft shuffling sound catches your attention and you turn around, spotting an amorphous green mass sliding towards you!  Realizing it's been spotted, the ooze's mass surges upwards into a humanoid form with thick arms and wide shoulders.  The beast surges forward to attack!", true);
-				startCombat(new GreenSlime(this));
+				startCombat(new GreenSlime());
 				if(player.hasStatusAffect("DungeonShutDown") >= 0 && player.hasStatusAffect("FactoryOverload") < 0) outputText("\n\n<b>You are amazed to encounter a slime creature with the factory shut down - most of them have disappeared.</b>", false);
 				return;
 			}
 			//High speed starts on even footing.
 			if(player.spe >= 30) {
 				outputText("You feel something moist brush the back of your ankle and instinctively jump forward and roll, coming up to face whatever it is behind you.  The nearly silent, amorphous green slime that was at your feet surges vertically, its upper body taking the form of a humanoid with thick arms and wide shoulders, which attacks!", true);
-				startCombat(new GreenSlime(this));
+				startCombat(new GreenSlime());
 				if(player.hasStatusAffect("DungeonShutDown") >= 0 && player.hasStatusAffect("FactoryOverload") < 0) outputText("\n\n<b>You are amazed to encounter a slime creature with the factory shut down - most of them have disappeared.</b>", false);
 				return;
 			}
@@ -1203,7 +1203,7 @@ public function exploreLake():void {
 			if(player.str >= 40) {
 				outputText("Without warning, you feel something moist and spongy wrap around your ankle, nearly pulling you off balance.  With a ferocious tug, you pull yourself free and turn to face your assailant.  It is a large green ooze that surges upwards to take the form of humanoid with wide shoulders and massive arms.  It shudders for a moment, and its featureless face shifts into a green version of your own! The sight gives you pause for a moment, and the creature strikes!", true);
 				if(player.hasStatusAffect("DungeonShutDown") >= 0 && player.hasStatusAffect("FactoryOverload") < 0) outputText("\n\n<b>You are amazed to encounter a slime creature with the factory shut down - most of them have disappeared.</b>", false);
-				startCombat(new GreenSlime(this));
+				startCombat(new GreenSlime());
 				outputText("\n\n", false);
 				monster.eAttack();
 				return;
@@ -1212,7 +1212,7 @@ public function exploreLake():void {
 			outputText("Without warning, you feel something moist and spongy wrap around your ankle, pulling you off balance!  You turn and try to pull your leg away, struggling against a large green ooze for a moment before your foot comes away with a *schlorp* and a thin coating of green fluid.  The rest of the ooze rises to tower over you, forming a massive green humanoid torso with hugely muscled arms and wide shoulders.  Adrenaline rushes into your body as you prepare for combat, and you feel your heart skip a beat as your libido begins to kick up as well!", true);
 			if(player.hasStatusAffect("DungeonShutDown") >= 0 && player.hasStatusAffect("FactoryOverload") < 0) outputText("\n\n<b>You are amazed to encounter a slime creature with the factory shut down - most of them have disappeared.</b>", false);
 			dynStats("lib", 1, "lus", 10);
-			startCombat(new GreenSlime(this));
+			startCombat(new GreenSlime());
 			return;
 		}
 	}

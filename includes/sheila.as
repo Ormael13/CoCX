@@ -356,7 +356,7 @@ public function sheila1ndEncLookCloserPtIITalkLeave():void {
 // go to fight
 public function sheila1ndEncLookCloserPtIITalkFight():void {
 	clearOutput();
-	startCombat(new Sheila(this));
+	startCombat(new Sheila());
 	eventParser(5000);
 }
 
@@ -424,7 +424,7 @@ public function apologySheilaSlapSult():void {
 	
 	//set sheila xp = -3, go to fight
 	flags[kFLAGS.SHEILA_XP] = -3;
-	startCombat(new Sheila(this));
+	startCombat(new Sheila());
 	doNext(1);
 }
 
@@ -492,7 +492,7 @@ public function sheilaPologyFight():void {
 	outputText("Saying nothing, you raise your [weapon] and take a swing!  Sheila starts a bit and dodges just in time, then with a look of resignation, raises her fists as well.  \"<i>That'll be right, I guess.  For what it's worth, I really am sorry.</i>\"");
 	//go to fight, set sheila xp = -3
 	flags[kFLAGS.SHEILA_XP] = -3;
-	startCombat(new Sheila(this));
+	startCombat(new Sheila());
 	doNext(1);
 }
 
@@ -602,7 +602,7 @@ public function sheilaReallyMadStandGround():void {
 		outputText("\n\n\"<i>So... it has to be like this, then?  Alright!</i>\"  Sheila thrusts a fist in the air, eyes glinting, and yells \"<i>Come out!  'Ready, World'!</i>\"  A form flows from her, taking the shape of a slim, dark woman with curly, almost liquid hair, in a loose vest and billowing, long-sleeved tunic.  Sheila jumps at you, and both the woman and her glamorous stand draw back to punch!");
 	}
 	//go to fight; if silly mode, heal 20 hp and 10 fatigue on PC and set sheila HP = 120%
-	startCombat(new Sheila(this));
+	startCombat(new Sheila());
 	doNext(1);
 	if(silly()) {
 		monster.HP *= 1.2;
@@ -3765,7 +3765,7 @@ public function demonSheilaResist():void {
 	if(sheilaCorruption() < 30) outputText(", tilting her palm to dribble a handful of strong-scented dark oils");
 	outputText(", but as she giggles sadistically and starts to approach, you tense up again.  It's pretty clear by the way she swaggers dismissively that she isn't taking the rejection well!");
 	//go to fight
-	startCombat(new Sheila(this));
+	startCombat(new Sheila());
 }
 
 //[Demon Sheila - Talk]
@@ -3800,7 +3800,7 @@ public function tellSheilaDemonToFuckOff():void {
 	//[(RNG decides if dis bitch crazy, bias toward sane)
 	if(rand(10) < 3) {
 		outputText("and she blurts, \"<i>I know I can make you understand.  You can't go until you say it back!</i>\"  You pull her hand free and back away from her, but she advances again, trying to grab you!");
-		startCombat(new Sheila(this));
+		startCombat(new Sheila());
 		return;
 	}
 	else {
@@ -4026,7 +4026,7 @@ public function pregDemonSheilaOtherSex():void {
 		if(sheilaCorruption() >= 80) outputText("heaves onto her feet, heavy breasts swaying");
 		else outputText("nimbly hops to her clawed feet");
 		outputText(", and runs her hands distractingly along the curves of her hips.  \"<i>You can do what you like with my body, love... if you can convince me.  Of course, I'll claim the same privilege!</i>\"  Sheila jumps at you, leaving no doubt what kind of 'convincing' she expects to do!");
-		startCombat(new Sheila(this));
+		startCombat(new Sheila());
 	}
 	//(if no cock)
 	else {

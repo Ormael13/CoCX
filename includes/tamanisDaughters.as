@@ -114,7 +114,7 @@ public function fightTamanisDaughters(tamani:Boolean = false):void {
 	outputText("", true);
 	
 	outputText("You whirl around threateningly, intent on putting Tamani's wayward brood back in their place.\n\n", false);
-	startCombat(new TamanisDaughters(this));
+	startCombat(new TamanisDaughters());
 	spriteSelect(57);
 	if(tamani) {
 		//(+5 mob strength)

@@ -29,9 +29,8 @@ package classes.Monsters
 			game.loseToEmberSpar();
 		}
 
-		public function Ember(game:CoC)
+		public function Ember()
 		{
-			super(game);
 			init01Names(" ", "Ember", "ember", "You are currently 'battling' Ember, the dragon, in a playfight.  At least, that was the intention.  The way " + game.emberMF("he", "she") + " lashes " + game.emberMF("his", "her") + " tail along the ground, with claws spread and teeth bared ferociously, makes you wonder.");
 			var gender:int = game.flags[kFLAGS.EMBER_GENDER];
 			if (gender==0){

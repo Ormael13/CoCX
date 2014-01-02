@@ -857,7 +857,7 @@ public function runIntoAGoblin(camped:Boolean = false):void {
 	}
 	outputText("\n\n\"<i>Hey there lady-stud!  You look like you could use a hot cunt to fertilize a few times!</i>\" a reedy, high-pitched goblin voice calls.  Shit, one of those guttersluts.  They're almost as bad as demons.  Worst of all, you know they'll play to your basest, most well-concealed fetishes.  Just the idea of having one of them split on your cock, slowly ballooning with seed and loving it...  well, if you're being honest with yourself, it makes you stiffen a little.  You turn around to face the curvy little preg-hungry whore, and as soon as you see her, you realize she's not going to go away until she's had a ride on your dick or been subdued.");
 	outputText("\n\n<b>It's a fight!</b>");
-	startCombat(new Goblin(this));// TODO extract to Monsters.GoblinBroodMother class
+	startCombat(new Goblin());// TODO extract to Monsters.GoblinBroodMother class
 	monster.level = 10;
 	monster.bonusHP = 300;
 	monster.tou = 30;
@@ -1496,7 +1496,7 @@ public function nagaPleaseNagaStoleMyDick():void {
 	
 	outputText("\n\n<b>It's a fight!</b>");
 	clearStatuses(false);
-	startCombat(new Sirius(this));
+	startCombat(new Sirius());
 }
 
 //Tease*
@@ -1768,7 +1768,7 @@ public function gnollAlphaBitchIntro():void {
 	outputText("\n\nHow wrong you are.  A spear smacks into the ground, the tip exploding into some sticky, restraining substance by your foot.  A high pitched war-cry chases the missile, barely giving you the warning you need to avoid the onrushing gnoll!  This one doesn't quite look like what you'd expect from their race, but she's moving too fast to really dwell on it.");
 	outputText("\n\n<b>It's a fight!</b>");
 	clearStatuses(false);
-	startCombat(new GnollSpearThrower(this));
+	startCombat(new GnollSpearThrower());
 	monster.bonusHP = 350;
 	monster.short = "alpha gnoll";
 	monster.HP = monster.eMaxHP(); // TODO extract to AlphaGnoll class
@@ -2205,7 +2205,7 @@ public function introSuccubiAndMinotaur():void {
 	
 	//{start fight}
 	clearStatuses(false);
-	startCombat(new MinotaurLord(this));
+	startCombat(new MinotaurLord());
 }
 
 
@@ -2560,7 +2560,7 @@ public function beatMinoLordOnToSuccubi():void {
 	player.weaponPerk = "Large";
 	player.weaponValue = 10;
 	player.weaponAttack = fixedDamage("halberd");
-	startCombat(new MilkySuccubus(this),true);
+	startCombat(new MilkySuccubus(),true);
 }
 
 

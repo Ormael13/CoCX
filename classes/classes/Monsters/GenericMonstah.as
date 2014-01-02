@@ -18,9 +18,8 @@
 	{
 		
 
-		public function GenericMonstah(game:CoC)
+		public function GenericMonstah()
 		{
-			super(game);
 			trace("GenericMonstah Constructor!");
 		}
 

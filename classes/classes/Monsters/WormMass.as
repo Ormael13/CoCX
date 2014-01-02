@@ -33,9 +33,8 @@
 			return 40;
 		}
 
-		public function WormMass(game:CoC)
+		public function WormMass()
 		{
-			super(game);
 			trace("WormMass Constructor!");
 			init01Names("the ","worms","worms","Before you stands the horrid mass of worms. It has shifted itself and now takes the shape of a humanoid composed completely of the worms in the colony. Its vaguely human shape lumbers towards you in a clearly aggressive manner.",true);
 			init02Genderless();

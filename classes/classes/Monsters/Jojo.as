@@ -31,9 +31,8 @@
 			game.eventParser(5024);
 		}
 
-		public function Jojo(game:CoC)
+		public function Jojo()
 		{
-			super(game);
 			trace("Jojo Constructor!");
 			init01Names("", "Jojo", "jojo", "Jojo is an anthropomorphic mouse with immaculate white fur.  Though he stands only four feet tall, he is covered in lean muscle and moves with incredible speed.  He wears loose white clothes wrapped in prayer beads and tattered prayer papers.");
 			init02Male(new Cock(7.5,1.8),2,1,1,1000);

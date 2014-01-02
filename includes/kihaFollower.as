@@ -73,7 +73,7 @@ public function kihaSpiderEventIntro():void {
 	outputText("The dragoness charges through her wall of fire, screaming with rage and swinging her deadly axe!\n\n", false);
 
 	outputText("You're fighting Kiha!", false);
-	startCombat(new Kiha(this));
+	startCombat(new Kiha());
 	//Flag this status to differentiate what happens on defeat or loss!
 	monster.createStatusAffect("spiderfight",0,0,0,0);
 	doNext(1);
@@ -129,7 +129,7 @@ public function warnKihaOfHerImpendingDemise():void {
 	outputText("\"<i>You!</i>\" Kiha snaps, tearing the webs away and grabbing her axe, \"<i>Why the hell did you do that?</i>\"\n\n", false);
 
 	outputText("\"<i>Talk later!</i>\" you answer.\n\nYou're now fighting the spider horde!", false);
-	startCombat(new SpiderMorphMob(this));
+	startCombat(new SpiderMorphMob());
 	//(Proceed to Spider Horde Combat)
 	//Set first round cover
 	monster.createStatusAffect("miss first round",0,0,0,0);
@@ -167,7 +167,7 @@ public function helpKihaAgainstSpoidahs():void {
 	else outputText("talk", false);
 	outputText(" any logic into her obtuse head, you simply haul Kiha to her feet and toss her the axe before turning to the onrushing foes.\n\n", false);
 	//(Proceed to Spider Horde Combat)
-	startCombat(new SpiderMorphMob(this));
+	startCombat(new SpiderMorphMob());
 	//st - say, 100 hp, -30 fatigue, and -40 lust - then have her cover for you for the first few rounds if you lost to her so you can blitz them or heal. -Z)
 	HPChange(100,false);
 	fatigue(-30);
@@ -371,7 +371,7 @@ public function sparWithKiha():void {
 	outputText("[pg]You return her smug grin and ready your [weaponName].", false);
 
 	//(Use the normal Kiha combat scenario, with the following changes upon Win/Lose, and no \"<i>Run</i>\" option available)
-	startCombat(new Kiha(this));
+	startCombat(new Kiha());
 	spriteSelect(72);;
 	monster.createStatusAffect("spar",0,0,0,0);
 }
@@ -1739,7 +1739,7 @@ public function fightForDominanceWithDragonCunnies():void {
 	outputText("You inform her that you doubt she'll be be hurting you today.  With an almost child-like sense of glee, you ready your [weapon] and step into the dragoness's intimidating presence.");
 	outputText("[pg]\"<i>I wouldn't have it any other way, [name],</i>\" she says as she grins, raising her axe into a more combat-ready stance.  It's time to prove your worth!");
 	//[Leads to a fight]
-	startCombat(new Kiha(this));
+	startCombat(new Kiha());
 	monster.createStatusAffect("domfight",0,0,0,0);
 	doNext(1);
 }

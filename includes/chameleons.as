@@ -24,7 +24,7 @@ Item Use Scenes Intro (Victory) (Z edited)
 
 public function encounterChameleon():void {
 	clearOutput();
-	startCombat(new ChameleonGirl(this));
+	startCombat(new ChameleonGirl());
 	spriteSelect(89);
 	if(flags[kFLAGS.TIMES_MET_CHAMELEON] == 0) {
 		outputText("You work your way through the dense foliage of the bog, pushing aside branches and slogging through the thick mud in search of something new.  Feeling exhausted, you slow down and look for a place to rest; finding a small clearing with shallow water no more than a couple inches deep and firmer ground, you sit back against a tree to catch your breath.  You're so soaked by now that you hardly notice the murky water beneath you and the slick mud on the trunk seeping into your " + player.armorName + ".  You lean your head back and close your eyes, enjoying a few moments of peace.");

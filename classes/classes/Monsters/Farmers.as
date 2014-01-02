@@ -27,9 +27,8 @@ package classes.Monsters
 			game.loseToOwca();
 		}
 
-		public function Farmers(game:CoC)
+		public function Farmers()
 		{
-			super(game);
 			init01Names("the ", "farmers", "farmers", "This is a group of thirty angry villagers, almost all human-looking but for the tiny horn-like protrusions growing from their heads and the white fuzz that almost passes off as hair.  They are all armed with pitchforks or other crude farming tools they use in their everyday task.  Rebecc is staring from behind them with horrified eyes at the combat, paralyzed by the sudden turn of events.",true);
 			init02Male(new Cock(9,2,CockTypesEnum.HUMAN),2,1,3);
 			init02Female(VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_LOOSE);

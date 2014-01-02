@@ -369,12 +369,12 @@
 			return kGAMECLASS.silly();
 		}
 
-		protected function HPChange(changeNum:Number,display:Boolean)
+		protected function HPChange(changeNum:Number,display:Boolean):void
 		{
 			kGAMECLASS.HPChange(changeNum,display);
 		}
 
-		protected function fatigue(mod:Number,type:Number=0)
+		protected function fatigue(mod:Number,type:Number=0):void
 		{
 			kGAMECLASS.fatigue(mod,type);
 		}

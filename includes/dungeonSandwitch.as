@@ -32,7 +32,7 @@ public function enterBoobsDungeon():void {
 public function fightCumWitch():void {
 	clearOutput();
 	outputText("A robed witch crests one of the dunes, her sable skin glistening with moisture in the unforgiving desert sun.  She spies you, and her dusky lips curl up in a smile while a white staff materializes in her hands.  Playfully, the woman calls, \"<i>I'm going to cast a spell on you...</i>\"");
-	startCombat(new CumWitch(this));
+	startCombat(new CumWitch());
 }
 
 public function openZeDoorToParadize():void {
@@ -2274,7 +2274,7 @@ public function fenPutsHisShittyFetishInYoSphinx():void {
 
 public function sandWitchMotherFriendlyMenu():void {
 	if(monster.short != "Sand Mother") {
-		startCombat(new SandMother(this),true);
+		startCombat(new SandMother(),true);
 		gameState = 0;
 		monster.HP = 0;
 	}
@@ -2316,7 +2316,7 @@ public function sexWithFriendlySandMother():void {
 
 public function sandMotherPOMenu():void {
 	if(monster.short != "Sand Mother") {
-		startCombat(new SandMother(this),true);
+		startCombat(new SandMother(),true);
 		gameState = 0;
 		monster.HP = 0;
 	}
@@ -2393,7 +2393,7 @@ public function explainYourSelfToZeSandBitch():void {
 		outputText("\n\nThe Sand Mother steps out of her throne, brandishing a shining scepter as she rises.  Her lips curve into a cruel smile and she challenges, \"<i>Fight me, [name], and fall like every demonic agent before you.  Do not fear, for when you lose, you shall be reborn to serve a just cause.  Your taint may yet be exorcised.</i>\"");
 		outputText("\n\nThere's no way out, it's a fight!");
 		//(start combat)
-		startCombat(new SandMother(this),true);
+		startCombat(new SandMother(),true);
 	}
 	//(No new PG. Corruption is less than intellect and no major asshole moves made:) 
 	else {
@@ -2415,7 +2415,7 @@ public function explainYourSelfToZeSandBitch():void {
 public function fightTheSandWitch():void {
 	clearOutput();
 	outputText("You brandish your [weapon] and advance threateningly.  The Sand Witch Queen slowly rises, pulling a scepter from beneath her robes with a resolute look in her eyes.  \"<i>You shall regret this action for a time, until we've corrected your diseased way of thinking.  Now, taste the power of a Sand Mother!</i>\"");
-	startCombat(new SandMother(this),true);
+	startCombat(new SandMother(),true);
 }
 
 //Earthshield
@@ -2623,7 +2623,7 @@ public function tentacleGangBang():void {
 public function fuckTheSandMothersCunt():void {
 	clearOutput();
 	if(!inCombat()) {
-		startCombat(new SandMother(this),true);
+		startCombat(new SandMother(),true);
 		gameState = 0;
 		monster.HP = 0;
 	}
@@ -2956,7 +2956,7 @@ public function sandMotherBadEndsLadiesEpilogue():void {
 //>Fuck her friendly style.
 public function friendlySandMotherFuck():void {
 	clearOutput();
-	startCombat(new SandMother(this),true);
+	startCombat(new SandMother(),true);
 	gameState = 0;
 	var x:int = player.cockThatFits(monster.vaginalCapacity());
 	var y:int = player.cockThatFits2(monster.vaginalCapacity());

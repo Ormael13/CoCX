@@ -29,9 +29,8 @@ package classes.Monsters
 			else game.getBeatUpBySheila();
 		}
 
-		public function Sheila(game:CoC)
+		public function Sheila()
 		{
-			super(game);
 			var sheilaDemon:Boolean = game.flags[kFLAGS.SHEILA_DEMON] == 1;
 			init01Names("", "Sheila", "sheila",
 					sheilaDemon ?

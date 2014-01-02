@@ -14,7 +14,7 @@ Upon defeat, the flames in the hellhound's mouth goes out. It submits to its foe
 public function hellhoundEncounter():void {
 	outputText("You hear a fiery howl as a demonic, two-headed beast-man leaps out in front of you!", true);
 	doNext(1);
-	startCombat(new HellHound(this));
+	startCombat(new HellHound());
 	spriteSelect(27);
 }
 public function hellhoundFire():void {

@@ -33,9 +33,8 @@ package classes.Monsters
 			}
 		}
 
-		public function CorruptedDrider(game:CoC)
+		public function CorruptedDrider()
 		{
-			super(game);
 
 			var hairColor:String = Appearance.randomChoice("red", "orange", "green");
 			var skinTone:String = Appearance.randomChoice("yellow", "purple", "red", "turquoise");

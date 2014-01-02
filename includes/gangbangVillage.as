@@ -217,7 +217,7 @@ public function fightZeDemons(sacrifice:Boolean = true):void {
 	//Fight leads to the Horde Fight
 	//When acting as sacrifice, Item button is disabled; Fight, Run, and Phys Special buttons are disabled unless PC has str >= 80; Run is furthermore prevented entirely if PC is non-winged; outputs text: \"<i>You'd like to run, but you can't scale the walls of the pit with so many demonic hands pulling you down!</i>\"
 	//PC's weapon is temporarily set to fists and armor to comfortable clothes during a Horde Fight if he triggered it in response to a sacrifice request, but not if triggered through volunteering to guard the pit later once the village is unlocked
-	startCombat(new LustyDemons(this));
+	startCombat(new LustyDemons());
 	if(sacrifice) {
 		//Remove weapon
 		player.createStatusAffect("Disarmed",0,0,0,0);
@@ -778,7 +778,7 @@ public function desperateVillages():void {
 public function fightZeVillagers():void {
 	clearOutput();
 	//You are fighting the villagers (level 14):
-	startCombat(new Farmers(this));
+	startCombat(new Farmers());
 	monster.createStatusAffect("Generic Run Disabled",0,0,0,0);
 	eventParser(1);
 	//~500 HP, 6 different attacks at 20 hp, can't run, 100% lust resistance (can't arouse), ~200 xp

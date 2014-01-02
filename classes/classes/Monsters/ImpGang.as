@@ -14,9 +14,8 @@ import classes.Monster;
 		override public function get capitalA():String {
 			return "gang of imps";
 		}
-		public function ImpGang(game:CoC)
+		public function ImpGang()
 		{
-			super(game);
 			this.removeStatuses();
 			this.removePerks();
 			this.removeCock(0, this.cocks.length);

@@ -53,9 +53,8 @@
 			}
 		}
 
-		public function BeeGirl(game:CoC)
+		public function BeeGirl()
 		{
-			super(game);
 			init01Names("a ", "bee-girl", "beegirl", "A bee-girl buzzes around you, filling the air with intoxicatingly sweet scents and a buzz that gets inside your head.  She has a humanoid face with small antennae, black chitin on her arms and legs that looks like shiny gloves and boots, sizable breasts, and a swollen abdomen tipped with a gleaming stinger.");
 			init02Female(VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_GAPING);
 			init03BreastRows("DD");

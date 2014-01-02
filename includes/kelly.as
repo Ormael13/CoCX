@@ -111,7 +111,7 @@ public function resistKeltsBSBreakHimIntro():void {
 		outputText("\n\nYou casually approach the centaur, shaking a vial of Succubi milk with a broad grin; your intentions are clear.  Kelt whinnies, his voice higher than ever, \"<i>Not again!</i>\"  A puff of a very feminine odor reaches your nostrils - nothing at all like the masculine scent he usually exudes.  Is he coming to like this?");
 		outputText("\n\nYou don't have time to consider it any further - Kelt draws his bow, ready to fight!");
 		//[Start Combat]
-		startCombat(new Kelt(this));
+		startCombat(new Kelt());
 		spriteSelect(35);
 		return;
 	}
@@ -289,7 +289,7 @@ public function secondKeltBreaking():void {
 	outputText("\n\n\"<i>You sneaky little prick, I'm going to make you pay for this.</i>\"");
 	
 	outputText("\n\nIt's a fight!");
-	startCombat(new Kelt(this));
+	startCombat(new Kelt());
 	spriteSelect(35);
 }
 

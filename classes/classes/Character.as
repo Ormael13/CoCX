@@ -80,10 +80,9 @@
 		//Key items
 		public var keyItems:Array;
 		
-		public function Character(game:CoC)
+		public function Character()
 		{
-			super(game);
-			keyItems = new Array();
+			keyItems = [];
 		}
 		
 		//Return bonus fertility

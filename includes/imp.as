@@ -574,7 +574,7 @@ public function impGangabangaEXPLOSIONS():void {
 	spriteSelect(18);
 	//Set imp monster values
 	//Clear arrays in preparation
-	monster = new ImpGang(this);
+	monster = new ImpGang();
 	outputText("\n", false);
 	outputText("<b>You sleep uneasily. A small sound near the edge of your camp breaks into your rest and you awaken suddenly to find yourself surrounded by " + monster.a  + "</b>!\n\n", false);
 	//CENTAUR
@@ -1441,7 +1441,7 @@ public function noogaisNippleRape():void {
 public function impLordEncounter():void {
 	clearOutput();
 	outputText("A large corrupted imp crosses your path, he flashes a cruel smile your way.  No way around it, you ready your " + player.weaponName + " for the fight.");
-	startCombat(new ImpLord(this));
+	startCombat(new ImpLord());
 	doNext(1);
 }
 

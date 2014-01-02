@@ -47,9 +47,8 @@
 					(hasAxe?"<b>This minotaur seems to have found a deadly looking axe somewhere!</b>":"");
 		}
 
-		public function Minotaur(game:CoC)
+		public function Minotaur()
 		{
-			super(game);
 			//Most times they dont have an axe
 			hasAxe = rand(3)==0;
 			var furColor:String = Appearance.randomChoice("black","brown");

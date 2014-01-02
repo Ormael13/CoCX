@@ -255,9 +255,8 @@ package classes.Monsters
 			game.amilyScene.conquerThatMouseBitch();
 		}
 
-		public function Amily(game:CoC)
+		public function Amily()
 		{
-			super(game);
 			init01Names("", "Amily", "amily", "You are currently fighting Amily. The mouse-morph is dressed in rags and glares at you in rage, knife in hand. She keeps herself close to the ground, ensuring she can quickly close the distance between you two or run away.");
 			init02Female(VAGINA_WETNESS_NORMAL, VAGINA_LOOSENESS_NORMAL, 48);
 			init03BreastRows("C");

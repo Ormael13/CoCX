@@ -41,9 +41,8 @@ package classes.Monsters
 			applyTease(lustDelta);
 		}
 
-		public function GooGirl(game:CoC)
+		public function GooGirl()
 		{
-			super(game);
 			var playerHasBigBoobs:Boolean = player.biggestTitSize() >= 3;
 			init01Names("the ","goo-girl","googirl","The goo-girl has a curious expression on her youthful, shimmering face. Her body is slender and globs of slime regularly drip from her limbs, splattering into the goo puddle pooling beneath her hips. A small, heart-shaped nucleus pulses in her chest with a red glow."+(playerHasBigBoobs?("  She has apparently made herself a bit more like you, as her chest appears to be a perfect copy of your " + game.biggestBreastSizeDescript()+ "."):""));
 			init02Female(VAGINA_WETNESS_SLAVERING,VAGINA_LOOSENESS_NORMAL,9001);

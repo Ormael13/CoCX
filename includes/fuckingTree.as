@@ -38,7 +38,7 @@
 
 public function fightHolli():void {
 	flags[kFLAGS.FOUGHT_HOLLI] = 1;
-	startCombat(new Holli(this));
+	startCombat(new Holli());
 	eventParser(1);
 }
 
@@ -1003,7 +1003,7 @@ public function cutHerDown():void {
 	}
 	//go to fight
 	flags[kFLAGS.FOUGHT_HOLLI] = 1;
-	startCombat(new Holli(this));
+	startCombat(new Holli());
 }
 
 //[Call Jojo]
@@ -1018,7 +1018,7 @@ public function callDatJojo():void {
 	outputText("\n\n\"<i>What is this?</i>\" the demon tree roars, breaking in on your conversation.  \"<i>First you set off silly toys that foul my air, and now you talk of burning me?!  I will not tolerate this!</i>\"  Her voluptuous body pulls back into the tree and bark closes over all of her form except her face.  Roots burst violently from the ground, waving with menace.  \"<i>I will break you both!</i>\"  Jojo quickly scurries off to fetch the first armfuls of wood, leaving you to withstand the onslaught!");
 	//go to fight
 	flags[kFLAGS.FOUGHT_HOLLI] = 1;
-	startCombat(new Holli(this));
+	startCombat(new Holli());
 	monster.createStatusAffect("Jojo Is Assisting",0,0,0,0);
 }
 

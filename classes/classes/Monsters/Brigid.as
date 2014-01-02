@@ -26,9 +26,8 @@ package classes.Monsters
 			game.pcDefeatedByBrigid();
 		}
 
-		public function Brigid(game:CoC)
+		public function Brigid()
 		{
-			super(game);
 			init01Names("", "Brigid the Jailer", "brigid", "Brigid is a monster of a harpy, standing a foot taller than any other you've seen. She's covered in piercings, and her pink-dyed hair is shaved down to a long mohawk. She's nude, save for the hot poker in her right hand and the shield in her left, which jingles with every step she takes thanks to the cell keys beneath it.");
 			init02Female(VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_LOOSE,LOWER_BODY_TYPE_HARPY);
 			init03BreastRows("D");

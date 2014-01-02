@@ -36,9 +36,8 @@
 			}
 		}
 
-		public function SandWitch(game:CoC)
+		public function SandWitch()
 		{
-			super(game);
 			trace("SandWitch Constructor!");
 			init01Names("the ","sand witch",game.silly()?"sandwidch":"sandwitch","A sand witch appears to be totally human, an oddity in this strange land.  She has dirty blonde hair and a very tanned complexion, choosing to cover most of her body with robes of the same color as the desert sands, making her impossible to spot from afar.");
 			init02Female(VAGINA_WETNESS_WET,VAGINA_LOOSENESS_LOOSE);

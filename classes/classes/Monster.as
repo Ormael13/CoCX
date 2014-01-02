@@ -73,9 +73,8 @@
 			return pronoun3.substr(0,1).toUpperCase()+pronoun3.substr(1);
 		}
 
-		public function Monster(game:CoC)
+		public function Monster()
 		{
-			super(game);
 			// trace("Generic Monster Constructor!");
 			this.gender = GENDER_NONE;
 

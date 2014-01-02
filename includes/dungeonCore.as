@@ -441,7 +441,7 @@
 		if(flags[kFLAGS.DEFEATED_ZETAZ] == 0) {
 			outputText("A familiar imp is looking at you with a bewildered expression painted across his face.  You recognize his face immediately – this is Zetaz!  Oddly, he seems to have grown much larger in the time since your previous meeting.  He's over four feet tall and much more solidly built!\n\n", false);
 			outputText("Zetaz whines, \"<i>Seriously?  You show up here!?  First you make me lose my job, and now you beat up my friends and track dirt in my bedroom!?  I've had enough!</i>\"", false);
-			startCombat(new Zetaz(this),true);
+			startCombat(new Zetaz(),true);
 			return;
 		}
 		else {
@@ -495,7 +495,7 @@
 			outputText("You open the heavy double doors and cringe as a loud \"<i>SCREECH!</i>\" echoes out and up the next room - a wide open stairwell, it seems, with minimal cover.  The perfect place for a harpy to fight... Oh, shit!");
 			outputText("\n\nYou ready your [weapon] as a wing of harpies looks up from eating at a small table in the center of the stone stairwell, all staring at you with wide, astonished eyes.  Another few harpies peer down from above, poking their heads down the stairs to get a look at the intruder.  Almost in unison, they jump to their feet and bare their claws.");
 			outputText("\n\nIt's a fight!");
-			startCombat(new HarpyMob(this));
+			startCombat(new HarpyMob());
 			doNext(1);
 			return;
 		}
@@ -538,7 +538,7 @@
 			outputText("\n\nBeside him, though, is the tallest harpy you've ever seen.  A foot over most of her sisters, she stands stark naked save for a red-hot iron poker in her hand and a heavy iron shield in the other.  Her pink hair is shaved down to a mohawk, and her face is covered with a dozen iron studs and rings.");
 			outputText("\n\n\"<i>Bout time you made it down here, you " + player.mf("bastard","bitch") + ".  Mama Brigid's been waiting a loooong time for someone to try and break out one of her toys.</i>\"  She pats the hefty keyring on the underside of her shield and leers at you.");
 			outputText("\n\nYou ready your [weapon] and prepare to take the keys from her!");
-			startCombat(new Brigid(this));
+			startCombat(new Brigid());
 			doNext(1);
 			return;
 		}
@@ -569,7 +569,7 @@
 		//(Intro; Before Battle)
 		if(flags[kFLAGS.HEL_PHOENIXES_DEFEATED] == 0) {
 			outputText("You ascend the heavy stone steps, circling the tower's walls as you ascend.  You are stopped perhaps half-way to the second main floor on a small terrace level with a wide open view overlooking the vale beneath the high mountains.  As you step onto the mezzanine, you watch with a scowl as a number of tall, muscular hermaphrodites step out from the shadows.  Each is clad in heavy chainmail and wields a scimitar and a blood-red shield, but is otherwise nude, revealing their reptilian pricks and slick pussies.  The soldiers standing before you look like harpies, but they have scaled, humanoid legs, long, fiery tails and their wings are the darkest crimson.  These are phoenixes - the dread half-breed warriors you and Hel are here to stop!");
-			startCombat(new PhoenixPlatoon(this));
+			startCombat(new PhoenixPlatoon());
 			doNext(1);
 			return;
 		}
@@ -611,7 +611,7 @@
 
 			outputText("\n\nShe now sits upon her throne, her staff laid across her bird-like legs.  \"<i>Idiot,</i>\" she sneers, just loud enough to be heard over the din of battle.  \"<i>You've doomed us all.  So many of my daughters dead or beaten or fled... No, I will not allow you to go unpunished, even if it means my life.</i>\"");
 			outputText("\n\nShe stands, grabbing her great whitewood staff.  A ball of magical whitefire forms in her hand, ready to sear you alive.");
-			startCombat(new HarpyQueen(this));
+			startCombat(new HarpyQueen());
 			doNext(1);
 			return;
 		}
@@ -703,7 +703,7 @@
 		outputText("Dancing lights swirl around the roof of the cavern, twirling around each other in patterns too intricate to follow.  Whatever they are, they're clearly magical, and they lend this place an otherworldly ambience unmatched by anything you've seen.  This huge room reminds you of your village commons in a way - it's clearly a communal area.  There's a water-pump in the northwest corner and a blazing purple bonfire in the center of the chamber, heating the cool underground air.  The ground is dirt, rather than sand, and hard-packed as any road.  Various chairs and benches are set up for witches to relax in.  ");
 		if(flags[kFLAGS.SANDWITCH_MOB_DEFEATED] == 0) {
 			outputText("Worst of all, a huge assortment of spellcasters is assembling into a mob, obviously hostile.");
-			startCombat(new SandWitchMob(this),true);
+			startCombat(new SandWitchMob(),true);
 			doNext(1);
 			return;
 		}
@@ -887,7 +887,7 @@
 				
 				outputText("\n\nThe soot-skinned futanari delicately opens one of her palms and murmurs an unintelligible word. Before your eyes, flickers of light flash into existence and align themselves vertically, slowly sliding together like pieces of a flawless crystal jigsaw puzzle.  The glimmering phantasmal luminance slowly fades as all the pieces come together, leaving a flawless ivory staff in the woman's hand.  She slams the base into the ground, sending ripples of magical force through the many pools of cum scattered around the room.  <b>It looks like you'll have to fight her!</b>");
 				//{START CUM WITCH FIGHT}
-				startCombat(new CumWitch(this));
+				startCombat(new CumWitch());
 				doNext(1);
 				return;
 			}

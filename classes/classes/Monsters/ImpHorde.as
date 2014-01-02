@@ -36,9 +36,8 @@
 			}
 		}
 
-		public function ImpHorde(game:CoC)
+		public function ImpHorde()
 		{
-			super(game);
 			trace("ImpHorde Constructor!");
 			init01Names("the ","imp horde","impmob","Imps of all shapes and sizes fill the room around you, keeping you completely surrounded by their myriad forms.  You can see more than a few sporting disproportionate erections, and there's even some with exotic dog-dicks, horse-pricks, and the odd spiny cat-cock.  Escape is impossible, you'll have to fight or seduce your way out of this one!",true);
 			init02Male(new Cock(12,2,CockTypesEnum.DEMON),2,1);

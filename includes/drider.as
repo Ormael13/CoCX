@@ -9,7 +9,7 @@ public function driderEncounter():void {
 	spriteSelect(77);
 	outputText("", true);
 	//Load monster stats so we can display things like eye/hide color!
-	startCombat(new CorruptedDrider(this));
+	startCombat(new CorruptedDrider());
 	//First time
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00277] == 0) {
 		outputText("While you explore the swamp, the sun's light withers and fades.  You look up through the mossy trees, but the sky is totally blocked from sight.  It's nearly as purple as twilight here, but you press on, brushing aside old spider-webs as you go.  Faintly, you can hear the sound of skittering legs moving around you, but with the way the damp air muffles everything, it's impossible to tell from which direction.\n\n", false);

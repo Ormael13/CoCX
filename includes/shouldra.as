@@ -115,7 +115,7 @@ public function shouldraGreeting():void {
 		outputText("Finally, she acknowledges your readiness to fight. With a sigh and a shrug, she raises her arms and drops into an orthodox boxing stance. Once again, you heft your " + player.weaponName + ".", false);
 	
 		//fight
-		startCombat(new Shouldra(this));
+		startCombat(new Shouldra());
 	}
 	//(after three encounters with her)
 	else {
@@ -139,7 +139,7 @@ public function shouldraGreeting():void {
 		}
 		else {
 			//FIGHT!
-			startCombat(new Shouldra(this));
+			startCombat(new Shouldra());
 		}
 	}
 	flags[kFLAGS.TIMES_MET_SHOULDRA]++;
@@ -159,7 +159,7 @@ public function novemberAlphaHotel():void {
 	spriteSelect(66);
 	outputText("", true);
 	outputText("You shake your head slowly, raising your " + player.weaponName + " as you regard her.  \"<i>Ah, so that's how you want it?</i>\" she titters, a smile gracing her features.  \"<i>In that case, enough talk... have at you!</i>\"\n\n", false);
-	startCombat(new Shouldra(this));
+	startCombat(new Shouldra());
 }
 
 //Victory Scenarios

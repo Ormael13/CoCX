@@ -37,9 +37,8 @@
 			}
 		}
 
-		public function Ceraph(game:CoC)
+		public function Ceraph()
 		{
-			super(game);
 			trace("Ceraph Constructor!");
 			init01Names("", "Ceraph", "ceraph", "Ceraph the Omnibus is totally nude and reveling in it.  Her large yet perky breasts jiggle heavily against her chest as she moves.  The flawless purple skin of her twin mounds glistens with a thin sheen of sweat, inviting you to touch and rub your fingers along their slippery surface.  Her eyes are solid black, but convey a mix of amusement and desire, in spite of their alien appearance.  The demon's crotch is a combination of both genders – a drooling cunt topped with a thick demonic shaft, sprouting from where a clit should be.");
 			init02Male(new Cock(10,2,CockTypesEnum.DEMON));

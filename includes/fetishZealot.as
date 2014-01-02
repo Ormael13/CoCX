@@ -89,7 +89,7 @@ public function zealotBoat():void {
 	outputText("", true);
 	outputText("As you get close to your boat, you are surprised to find someone standing at the end of the dock.  As you get closer, you see that it's a man wearing some kind of bizarre religious outfit.  He turns to face you as you approach and says \"<i>This has been claimed by the Followers of the Fetish for security reasons, leave at once.</i>\"\n\n\"<i>What?  This is my boat!</i>\" you cry out in surprise.  The zealot seems to take this as an aggressive action on your part and moves to attack you.", false);
 	//next button, go to zealot fight
-	startCombat(new FetishZealot(this));
+	startCombat(new FetishZealot());
 	spriteSelect(20);	
 }
 //Regular encounter
@@ -97,7 +97,7 @@ public function zealotBoat():void {
 public function zealotRepeat():void {
 	outputText("", true);
 	outputText("While exploring, you hear someone cry out behind you \"<i>This is sacred land!  You WILL be punished for trespassing!</i>\"  It seems you've managed to stumble upon whatever land this zealot has been tasked to guard, and now you must fight him.", false);
-	startCombat(new FetishZealot(this));
+	startCombat(new FetishZealot());
 	spriteSelect(20);	
 }
 	

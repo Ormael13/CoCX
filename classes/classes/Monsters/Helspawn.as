@@ -28,9 +28,8 @@ package classes.Monsters
 			game.loseSparringToDaughter();
 		}
 
-		public function Helspawn(game:CoC)
+		public function Helspawn()
 		{
-			super(game);
 			var weapon:String = game.flags[kFLAGS.HELSPAWN_WEAPON];
 			init01Names("", game.flags[kFLAGS.HELSPAWN_NAME], "hollispawn",
 					game.flags[kFLAGS.HELSPAWN_NAME] + " is a young salamander, appearing in her later teens.  Clad in " +

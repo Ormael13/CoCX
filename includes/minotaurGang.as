@@ -210,7 +210,7 @@ public function runFromMinotaurs():void {
 }
 //[Fight]
 public function fightOTaurs():void {
-	startCombat(new MinotaurMob(this));
+	startCombat(new MinotaurMob());
 	spriteSelect(94);
 	eventParser(5000);
 }
