@@ -976,7 +976,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 	{
 
 		//KILL ALL COCKS;
-		player = new Player(this);
+		player = new Player();
 		flags = new DefaultDict();
 		model.player = player;		
 		

@@ -138,7 +138,7 @@ package classes
 					}
 				}
 			}
-			trace("Loading image: " + imageID + ", html: " + imageString);
+			//trace("Loading image: " + imageID + ", html: " + imageString);
 			fixupImage();
 			return imageString;
 		}

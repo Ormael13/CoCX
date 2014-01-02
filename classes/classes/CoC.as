@@ -366,9 +366,9 @@
 			//{ region PlayerVariables
 
 			//The Player object, used everywhere
-			player = new Player(this);
+			player = new Player();
 			model.player = player;
-			player2 = new Player(this);
+			player2 = new Player();
 
 			//Used in perk selection, mainly eventParser, input and engineCore
 			tempPerk = "";
