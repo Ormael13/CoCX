@@ -17,7 +17,7 @@
 		override protected function performCombatAction():void
 		{
 			//Worms have different AI
-			mainClassPtr.eventParser((rand(2) == 0) ? special1 : special2);
+			game.eventParser((rand(2) == 0) ? special1 : special2);
 		}
 
 
@@ -26,9 +26,9 @@
 			return 40;
 		}
 
-		public function WormMass(mainClassPtr:*)
+		public function WormMass()
 		{
-			super(mainClassPtr);
+			super();
 			trace("WormMass Constructor!");
 			init01Names("the ","worms","worms","Before you stands the horrid mass of worms. It has shifted itself and now takes the shape of a humanoid composed completely of the worms in the colony. Its vaguely human shape lumbers towards you in a clearly aggressive manner.",true);
 			init02Genderless();

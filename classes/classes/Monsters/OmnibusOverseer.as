@@ -12,12 +12,12 @@ package classes.Monsters
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.omnibusVictoryEvent();
+			game.omnibusVictoryEvent();
 		}
 
-		public function OmnibusOverseer(mainClassPtr:*)
+		public function OmnibusOverseer()
 		{
-			super(mainClassPtr);
+			super();
 			init01Names("the ", "Omnibus Overseer", "omnibusoverseer", "The 'woman' before you is clothed only in a single strip of fabric that wraps around her bountiful chest.  She has striking red eyes that contrast visibly with her blue skin and dark make-up.  Shiny black gloss encapsulates her kissable bubbly black lips.  Her most striking feature is her crotch, which appears neither male nor female.  She has a puffy wet vulva, but a cock-shaped protrusion sprouts from where a clit should be.");
 			init02Male(new Cock(10,1.5),0,0,3);
 			init02Female(VAGINA_WETNESS_DROOLING,VAGINA_LOOSENESS_NORMAL);

@@ -14,22 +14,22 @@ package classes.Monsters
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.fidoAI();
+			game.fidoAI();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.clearOutput();
+			game.clearOutput();
 			outputText("The minotaur lord is defeated!  ");
 			outputText("  You could use him for a quick fuck to sate your lusts before continuing on.  Do you?");
-			mainClassPtr.menu();
-			mainClassPtr.addButton(0,"Fuck",mainClassPtr.winRapeAMinoLordAsUrta);
-			mainClassPtr.addButton(4,"Leave",mainClassPtr.beatMinoLordOnToSuccubi);
+			game.menu();
+			game.addButton(0,"Fuck",game.winRapeAMinoLordAsUrta);
+			game.addButton(4,"Leave",game.beatMinoLordOnToSuccubi);
 		}
 
-		public function MinotaurLord(mainClassPtr:*)
+		public function MinotaurLord()
 		{
-			super(mainClassPtr);
+			super();
 			init01Names("the ", "minotaur lord", "minotaurlord", "Across from you is the biggest minotaur you've ever seen.  Fully eleven feet tall, this shaggy monstrosity has muscles so thick that they stand even through his thick, obscuring fur.  A leather collar with a tag indicates his status as 'pet' though it seems completely out of place on the herculean minotaur.  His legs and arms are like thick tree trunks, imposing and implacable, flexing fiercely with every movement.  This can only be a minotaur lord, a minotaur of strength and virility far beyond his lesser brothers. In his hands, a massive chain swings, connected to his collar, but used as an impromptu weapon for now.  A simple loincloth girds his groin, though it does little to hide the massive, erect length that tents it.  It winds up looking more like a simple, cloth condom than any sort of clothing, and it drips long strings of musky pre-slime in ribbons onto the ground.  Below, heavy testes, each easily the size of a basketball, swing in a taut, sloshing sack.  You can almost smell the liquid bounty he has for you, and the musk he's giving off makes it seem like a good idea...");
 			var ballSize:Number = 2 + rand(13);
 			init02Male(new Cock(rand(13) + 24,2 + rand(3),CockTypesEnum.HORSE),2, ballSize,1.5,ballSize * 10);

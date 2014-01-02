@@ -12,17 +12,17 @@ package classes.Monsters
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.isabellaAI();
+			game.isabellaAI();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.defeatIsabella();
+			game.defeatIsabella();
 		}
 
-		public function Izabella(mainClassPtr:*)
+		public function Izabella()
 		{
-			super(mainClassPtr);
+			super();
 			init01Names("", "Isabella", "isabella", "Isabella is a seven foot tall, red-headed tower of angry cow-girl.  She's snarling at you from behind her massive shield, stamping her hooves in irritation as she prepares to lay into you.  Her skin is dusky, nearly chocolate except for a few white spots spattered over her body.  She wears a tight silk shirt and a corset that barely supports her bountiful breasts, but it's hard to get a good look at them behind her giant shield.");
 			init02Female(VAGINA_WETNESS_DROOLING,VAGINA_LOOSENESS_GAPING,45);
 			init03BreastRows("EE+");

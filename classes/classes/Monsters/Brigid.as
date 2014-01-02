@@ -11,18 +11,18 @@ package classes.Monsters
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.BrigidAI();
+			game.BrigidAI();
 		}
 
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.pcDefeatsBrigid();
+			game.pcDefeatsBrigid();
 		}
 
-		public function Brigid(mainClassPtr:*)
+		public function Brigid()
 		{
-			super(mainClassPtr);
+			super();
 			init01Names("", "Brigid the Jailer", "brigid", "Brigid is a monster of a harpy, standing a foot taller than any other you've seen. She's covered in piercings, and her pink-dyed hair is shaved down to a long mohawk. She's nude, save for the hot poker in her right hand and the shield in her left, which jingles with every step she takes thanks to the cell keys beneath it.");
 			init02Female(VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_LOOSE,LOWER_BODY_TYPE_HARPY);
 			init03BreastRows("D");

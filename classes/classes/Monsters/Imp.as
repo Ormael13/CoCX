@@ -18,19 +18,19 @@
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if (hasStatusAffect("Kitsune Fight") >= 0){
-				mainClassPtr.winKitsuneImpFight();
+				game.winKitsuneImpFight();
 			} else {
 				if (hpVictory){
-					mainClassPtr.finishCombat();
+					game.finishCombat();
 				} else {
-					mainClassPtr.impVictory();
+					game.impVictory();
 				}
 			}
 		}
 
-		public function Imp(mainClassPtr:*)
+		public function Imp()
 		{
-			super(mainClassPtr);
+			super();
 			trace("Imp Constructor!");
 			init01Names("the ","imp","imp","An imp is short, only a few feet tall.  An unkempt mane of shaggy black hair hangs from his head, parted by two short curved horns.  His eyes are solid black, save for tiny red irises which glow with evil intent.  His skin is bright red, and unencumbered by clothing or armor, save for a small loincloth at his belt.  His feet are covered by tiny wooden sandals, and his hands tipped with sharp claws.  A pair of tiny but functional wings occasionally flap from his back.");
 			init02Male([new Cock(rand(2) + 11,2.5,CockTypesEnum.DEMON)],2,1);

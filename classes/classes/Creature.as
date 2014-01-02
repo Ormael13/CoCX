@@ -16,7 +16,7 @@ package classes
 
 		include "../../includes/appearanceDefs.as";
 
-		public static function get game():CoC {
+		public function get game():CoC {
 			return kGAMECLASS;
 		}
 

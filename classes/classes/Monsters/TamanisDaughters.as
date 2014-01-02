@@ -12,17 +12,17 @@ package classes.Monsters
 		override protected function performCombatAction():void
 		{
 			//Tamani's Daughters have special AI in tamanisDaughters.as
-			mainClassPtr.tamanisDaughtersAI();
+			game.tamanisDaughtersAI();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.combatWinAgainstDaughters();
+			game.combatWinAgainstDaughters();
 		}
 
-		public function TamanisDaughters(mainClassPtr:*)
+		public function TamanisDaughters()
 		{
-			super(mainClassPtr);
+			super();
 			init01Names("the group of ","Tamani's daughters","tamanisdaughters","A large grouping of goblin girls has gathered around you, surrounding you on all sides.  Most have varying shades of green skin, though a few have yellowish or light blue casts to their skin.  All are barely clothed, exposing as much of their flesh as possible in order to excite a potential mate.  Their hairstyles are as varied as their clothing and skin-tones, and the only things they seem to have in common are cute faces and curvy forms.  It looks like they want something from you.",true);
 			init02Female(VAGINA_WETNESS_DROOLING,VAGINA_LOOSENESS_TIGHT,40);
 			init03BreastRows("D");

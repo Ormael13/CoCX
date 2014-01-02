@@ -1857,7 +1857,7 @@ public function doCombat(eventNum:Number):void
 	}
 	//start combat
 	if(eventNum == 5047) {
-		startCombat(new DemonPack(this));
+		startCombat(new DemonPack());
 		eventParser(1);
 		spriteSelect(46);
 	}
@@ -1902,12 +1902,12 @@ public function doCombat(eventNum:Number):void
 	if(eventNum == 5056) {
 		outputText("You turn to confront the worms and combat begins!", true);
 		spriteSelect(76);
-		startCombat(new WormMass(this));
+		startCombat(new WormMass());
 	}
 	//Do nothing
 	if(eventNum == 5057) {
 		outputText("You do nothing, allowing the worms to enter combat range!", true);
-		startCombat(new WormMass(this));
+		startCombat(new WormMass());
 	}
 	//worm toggle on
 	if(eventNum == 5058) {

@@ -374,7 +374,7 @@
 			tempPerk = "";
 
 			//Create monster, used all over the place
-			monster = new Monster(this);
+			monster = new Monster();
 			//} endregion
 
 			/**

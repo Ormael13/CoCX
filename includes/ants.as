@@ -172,7 +172,7 @@ public function playHero():void {
 	//►Introduction to Combat
 	outputText("As the demons bear down on the ant-girl, you burst from your hiding place, raising your [weapon] to the air and uttering an impressive war cry.  Nobody, ant or otherwise, is getting raped if you have any say in the matter!");
 	outputText("\n\nYou are now fighting demons!");
-	startCombat(new DemonPack(this));
+	startCombat(new DemonPack());
 	monster.createStatusAffect("phyllafight",0,0,0,0);
 	doNext(1);
 }
@@ -268,14 +268,14 @@ public function antColiseumFight():void {
 		outputText("You tell the fight manager you're ready.  He nods and leads you down into one of the two staging areas of the arena.  You watch through the bars as the stadium fills quickly.  Although pretty much every ant face looks identical to you, the larger ones who are clearly warriors stand in stark contrast with the smaller ones that must be the workers - or maybe they're just younger; you can't tell.  Watching them gather for the impending fight, you confirm the suspicion you formed when you first saw the queen's chamber: every ant-morph except the princess and the queen is male!  Gazing out into the crowd you spot the two royal personages sitting in a special area that appears to be reserved for them.  The shy princess's gaze nervously drifts toward your room and for a moment your eyes meet.");
 		outputText("\n\nAs you raise a hand to wave, you're stopped as you hear the sounds of a shambling and banging from across the arena.  A large silhouetted beast is poked and prodded into the staging area across from you. You narrow your eyes, trying to get a glimpse of your opponent. As you do, the gates of the staging areas drop and a very angry and enraged tentacle beast thrashes out into the center of the arena.");
 		outputText("\n\nYou're fighting a tentacle beast!");
-		startCombat(new TentacleBeast(this));
+		startCombat(new TentacleBeast());
 	}
 	//►[Fight #2]
 	else if(flags[kFLAGS.ANT_ARENA_WINS] + flags[kFLAGS.ANT_ARENA_LOSSES] == 1) {
 		//►(Minotaur - Intro) 
 		outputText("When you arrive in the colosseum, you tell the fight manager you're ready; he nods and leads you down into one of the two staging areas for the arena.  You watch through the bars as the stadium fills almost to capacity, still resistant to the idea of so many ants living right under the sands; there must be hundreds.  Gazing out into the cheering crowd, you spot the royal family sitting in their reserved area.  The princess waves at you excitedly with two of her arms, but her mother grabs them and lowers them.  Chylla herself looks as regal and reserved as ever.  You catch the queen smiling at you, but there's something wicked behind the smile.  Before you can contemplate what it might be, the gates raise on both sides of the colosseum and you are pushed out.");
 		outputText("\n\nYou're now fighting a minotaur and it's wielding a Giant Axe!  You quickly put two and two together and realize Chylla has set you up by arming the minotaur!  You brace yourself as the beastman charges you, roaring wildly.");
-		startCombat(new Minotaur(this));
+		startCombat(new Minotaur());
 		if(monster.weaponName == "fist") {
 			monster.weaponName = "axe";
 			monster.weaponVerb = "cleave";
@@ -292,7 +292,7 @@ public function antColiseumFight():void {
 		else outputText("You move through the network of tunnels and caves and come to the colosseum once more.  You are greeted by the event manager and he ushers you down to one of the staging areas for the arena.  The noise intensifies as the colosseum fills to the brim with spectators; Phylla herself is up in her box waving to you.  You look across the arena floor and the gnoll at the other side of the arena seems just as excited to fight as you are.  The gates open and you charge each other!");
 		outputText("\n\nYou're fighting a gnoll!");
 		flags[kFLAGS.MET_ANT_ARENA_GNOLL]++;
-		startCombat(new Gnoll(this));
+		startCombat(new Gnoll());
 	}
 	monster.createStatusAffect("PhyllaFight",0,0,0,0);
 	doNext(1);

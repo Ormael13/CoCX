@@ -12,22 +12,22 @@ package classes.Monsters
 
 		override public function doAI():void
 		{
-			mainClassPtr.helSpawnAI();
+			game.helSpawnAI();
 		}
 
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.beatUpYourDaughter();
+			game.beatUpYourDaughter();
 		}
 
-		public function Helspawn(mainClassPtr:*)
+		public function Helspawn()
 		{
-			super(mainClassPtr);
-			var weapon:String = mainClassPtr.flags[kFLAGS.HELSPAWN_WEAPON];
-			init01Names("", mainClassPtr.flags[kFLAGS.HELSPAWN_NAME], "hollispawn",
-					mainClassPtr.flags[kFLAGS.HELSPAWN_NAME] + " is a young salamander, appearing in her later teens.  Clad in " +
-							(mainClassPtr.flags[kFLAGS.HELSPAWN_PERSONALITY] >= 50 ?
+			super();
+			var weapon:String = game.flags[kFLAGS.HELSPAWN_WEAPON];
+			init01Names("", game.flags[kFLAGS.HELSPAWN_NAME], "hollispawn",
+					game.flags[kFLAGS.HELSPAWN_NAME] + " is a young salamander, appearing in her later teens.  Clad in " +
+							(game.flags[kFLAGS.HELSPAWN_PERSONALITY] >= 50 ?
 									"a slutty scale bikini like her mother's, barely concealing anything" :
 									"a short skirt, thigh-high boots, and a sky-blue blouse, in stark contrast to her mother’s sluttier attire") +
 							", she stands about six feet in height, with a lengthy, fiery tail swishing menacingly behind her. She's packing a " +

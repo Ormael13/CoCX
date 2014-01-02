@@ -21,9 +21,9 @@
 				//Rape if not naga, turned on, and girl that can fit!
 				if (player.hasVagina() && player.lust >= 33 && !player.isNaga()) {
 					outputText("  You find yourself musing that you could probably take advantage of the poor 'doggy'.  Do you fuck it?", false);
-					mainClassPtr.simpleChoices("Fuck it", mainClassPtr.hellHoundPropahRape, "", 0, "", 0, "", 0, "Leave", 5007);
+					game.simpleChoices("Fuck it", game.hellHoundPropahRape, "", 0, "", 0, "", 0, "Leave", 5007);
 				} else {
-					mainClassPtr.eventParser(5007);
+					game.eventParser(5007);
 				}
 			} else {
 				outputText("Unable to bear hurting you anymore, the hellhound's flames dim as he stops his attack. The two heads look at you, whining plaintively.  The hellhound slowly pads over to you and nudges its noses at your crotch.  It seems he wishes to pleasure you.\n\n", true);
@@ -36,18 +36,18 @@
 						temp2 = 2746;
 					}
 					outputText(".  What do you do?", false);
-					mainClassPtr.simpleChoices("Lick", 5068, "Fuck", temp2, "", 0, "", 0, "Leave", 5007);
+					game.simpleChoices("Lick", 5068, "Fuck", temp2, "", 0, "", 0, "Leave", 5007);
 				}
 				else {
 					outputText("You turn away, not really turned on enough to be interested in such an offer.", false);
-					mainClassPtr.eventParser(5007);
+					game.eventParser(5007);
 				}
 			}
 		}
 
-		public function HellHound(mainClassPtr:*)
+		public function HellHound()
 		{
-			super(mainClassPtr);
+			super();
 			trace("HellHound Constructor!");
 			init01Names("the ", "hellhound", "hellhound", "It looks like a large demon on all fours with two heads placed side-by-side. The heads are shaped almost like human heads, but they have dog ears on the top and have a long dog snout coming out where their mouths and noses would be.  Its eyes and mouth are filled with flames and its hind legs capped with dog paws, but its front ones almost look like human hands.  Its limbs end in large, menacing claws. A thick layer of dark fur covers his entire body like armor.  Both heads look at you hungrily as the hellhound circles around you. You get the feeling that reasoning with this beast will be impossible.");
 			init02Male([new Cock(8,2,CockTypesEnum.DOG),new Cock(8,2,CockTypesEnum.DOG)],2,4,5);

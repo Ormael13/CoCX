@@ -11,18 +11,18 @@ package classes.Monsters
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.amilyAI();
+			game.amilyAI();
 		}
 
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.conquerThatMouseBitch();
+			game.conquerThatMouseBitch();
 		}
 
-		public function Amily(mainClassPtr:*)
+		public function Amily()
 		{
-			super(mainClassPtr);
+			super();
 			init01Names("", "Amily", "amily", "You are currently fighting Amily. The mouse-morph is dressed in rags and glares at you in rage, knife in hand. She keeps herself close to the ground, ensuring she can quickly close the distance between you two or run away.");
 			init02Female(VAGINA_WETNESS_NORMAL, VAGINA_LOOSENESS_NORMAL, 48);
 			init03BreastRows("C");

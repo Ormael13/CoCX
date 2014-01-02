@@ -23,7 +23,7 @@ public function enterTheTrickster():void {
 	outputText("\"<i>Th-thank goodness!  Please, you must help me!</i>\"  she cries, darting around to take shelter behind you.  \"<i>I was out picking wild berries, and, and...  the wretched, terrible little things attacked me!</i>\"\n\n");
 	outputText("You are about to question her, but are interrupted as an imp flies out of the thicket, growling and clawing at you menacingly.  At least...  clearly it's <i>trying</i> to be menacing.  The melodramatic display comes off as more hilarious than anything, but the woman cowering behind you obviously feels threatened, so you might as well deal with the pest.");
 	// -> Standard Imp Battle
-	startCombat(new Imp(this));
+	startCombat(new Imp());
 	monster.createStatusAffect("Kitsune Fight",0,0,0,0);
 	doNext(1);
 	flags[kFLAGS.MET_KITSUNES]++;

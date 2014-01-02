@@ -11,17 +11,17 @@ package classes.Monsters
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.harpyHordeAI();
+			game.harpyHordeAI();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.pcDefeatsHarpyHorde();
+			game.pcDefeatsHarpyHorde();
 		}
 
-		public function HarpyMob(mainClassPtr:*)
+		public function HarpyMob()
 		{
-			super(mainClassPtr);
+			super();
 			init01Names("the ","harpy horde","harpymob","You are surrounded by a wing of particularly large and muscular harpies, perhaps a dozen of them in total.  All of them are clad in simple brown shifts that give them good camouflage in the mountains, and are using their talon-like claws as weapons against you. While not a great threat to a champion of your ability individually, a whole brood of them together is... something else entirely.",true);
 			init02Female(VAGINA_WETNESS_SLAVERING,VAGINA_LOOSENESS_GAPING_WIDE);
 			init03BreastRows("B");

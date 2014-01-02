@@ -18,32 +18,32 @@
 		override protected function performCombatAction():void
 		{
 			//Demon pack has different AI
-			mainClassPtr.eventParser((rand(2) == 0) ? special1 : special2);
+			game.eventParser((rand(2) == 0) ? special1 : special2);
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if (hpVictory) {
 				outputText("You strike out and the last of the demons tumbles to the ground with a thud. You stand there for a second surrounded by dead or unconscious demons feeling like a god of battle. Then you realize that if a god of battle does exist he lives on a demonic plane like this, so to avoid insulting him you take your hands off your hips and your " + player.legs() + " off the head of the demon leader before you start to search the bodies.", true);
-				mainClassPtr.stats(0, 0, 0, 0, 0, 0, 1, 0);
+				game.stats(0, 0, 0, 0, 0, 0, 1, 0);
 			} else {
 				outputText("The demons stop attacking, and reach out to touch your body. Some are already masturbating like it's the only thing in the world and you know that right now, if you wanted to, you could make each and every one of them fuck you.");
 			}
 			if(hasStatusAffect("phyllafight") >= 0) {
-				mainClassPtr.doNext(mainClassPtr.consolePhylla);
+				game.doNext(game.consolePhylla);
 			} else if (hpVictory){
-				mainClassPtr.eventParser(5007);
+				game.eventParser(5007);
 			} else {
 				outputText("  Do you rape them?", true);
-				mainClassPtr.doYesNo(5045, 5007);
+				game.doYesNo(5045, 5007);
 			}
 		}
 
-		public function DemonPack(mainClassPtr:*)
+		public function DemonPack()
 		{
-			super(mainClassPtr);
+			super();
 			trace("DemonPack Constructor!");
-			init01Names("the ", "demons", "demonmob", "The group is composed of roughly twenty tan-skinned demons, mostly humanoid in shape with many and varied corruptions across the mob. You see demonic high heels, twisting horns and swinging cocks of all shapes and sizes. There even seems to be a bull head in there somewhere. You also make out plenty of breasts ranging from tiny ones to a pair that requires a second person to carry them, and with those breasts a wide range of pussies, dripping and dry, sometimes nestled below some form of demonic dick.  The small tribe carries no weapons and what little clothing they wear is well-shredded, except for one hefty male wearing a cloak of what appears to be snakeskin across his broad shoulders." + (mainClassPtr.silly() ? "  You spot an odd patch that reads, \"<i>41st Engineer Company: Vaginal Clearance</i>\" on his shoulder." : ""),true);
+			init01Names("the ", "demons", "demonmob", "The group is composed of roughly twenty tan-skinned demons, mostly humanoid in shape with many and varied corruptions across the mob. You see demonic high heels, twisting horns and swinging cocks of all shapes and sizes. There even seems to be a bull head in there somewhere. You also make out plenty of breasts ranging from tiny ones to a pair that requires a second person to carry them, and with those breasts a wide range of pussies, dripping and dry, sometimes nestled below some form of demonic dick.  The small tribe carries no weapons and what little clothing they wear is well-shredded, except for one hefty male wearing a cloak of what appears to be snakeskin across his broad shoulders." + (game.silly() ? "  You spot an odd patch that reads, \"<i>41st Engineer Company: Vaginal Clearance</i>\" on his shoulder." : ""),true);
 			init02Male([new Cock(18,2),new Cock(18,2,CockTypesEnum.DEMON)],2,1,3);
 			init02Female(VAGINA_WETNESS_SLICK,VAGINA_LOOSENESS_LOOSE);
 			init03BreastRows(0);

@@ -33,7 +33,7 @@ public function beeEncounterLevel2():void {
 		else {
 			outputText("The bee-girl's eyes widen at the sight,  shocked by your over-endowed form being dragged towards her as if there were a magnet in your " + cockDescript(0) + ".   She flutters into the air and aims her stinger towards you, ready to fight!", false);
 			//start combat
-			startCombat(new BeeGirl(this));
+			startCombat(new BeeGirl());
 			return;
 		}
 	}

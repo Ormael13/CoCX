@@ -2116,7 +2116,7 @@ public function decideToSparEmbra():void {
 		outputText("\n\n\"<i>Well... don't expect me to go easy on you!  We dragons are very competitive!  And I don't mind beating you up, even if you are my friend!</i>\" Ember warns you, dropping into " + emberMF("his","her") + " battle stance.");
 		outputText("\n\nYou grin at " + emberMF("him","her") + " and tell " + emberMF("him","her") + " to bring it on - you're too psyched up to be caught off guard by the dragon openly calling you a friend.");
 	}
-	startCombat(new Ember(this));
+	startCombat(new Ember());
 }
 
 public function beatEmberSpar():void {

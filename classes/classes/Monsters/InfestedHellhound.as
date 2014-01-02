@@ -18,23 +18,23 @@
 		{
 			if (hpVictory) {
 				outputText("The hellhound's flames dim and the heads let out a whine before the creature slumps down, defeated, unconscious, and yet still drooling worms.", true);
-				mainClassPtr.eventParser(5007);
+				game.eventParser(5007);
 			} else {
 				outputText("Unable to bear its unnatural arousal, the infested hellhound's flames dim as he stops his attack. The two heads look at you, whining plaintively.  The hellhound slowly pads over to you and nudges its noses at your crotch.  It seems he wishes to pleasure you.\n\n", true);
 				if (player.gender > 0 && player.lust >= 33) {
 					outputText("You realize your desires aren't quite sated.  You could let it please you.  Do you?", false);
-					mainClassPtr.simpleChoices("Fuck it", 5068, "", 0, "", 0, "", 0, "Leave", 5007);
+					game.simpleChoices("Fuck it", 5068, "", 0, "", 0, "", 0, "Leave", 5007);
 				}
 				else {
 					outputText("You turn away, not really turned on enough to be interested in such an offer from such a beast.", false);
-					mainClassPtr.eventParser(5007);
+					game.eventParser(5007);
 				}
 			}
 		}
 
-		public function InfestedHellhound(mainClassPtr:*)
+		public function InfestedHellhound()
 		{
-			super(mainClassPtr);
+			super();
 			trace("InfestedHellhound Constructor!");
 			init01Names("the ", "infested hellhound", "infestedhellhound", "It looks like a large four-legged demon with two heads placed side-by-side. Its eyes and mouth are filled with flames, and covering each of its paws are large and menacing claws. A thick layer of dark fur covers his entire body like armor.  Both heads are looking at you hungrily as the hellhound circles around you.  A pair of black, slightly pointed cocks hang exposed, dripping with cum and worms.  You get the feeling reasoning with this beast will be impossible.");
 			init02Male([new Cock(9, 2), new Cock(9, 2)], 2, 5, 8);

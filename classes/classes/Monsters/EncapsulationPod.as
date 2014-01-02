@@ -17,24 +17,24 @@
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.encapsulationPodAI();
+			game.encapsulationPodAI();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.encapsulationVictory();
+			game.encapsulationVictory();
 		}
 
 		override public function get long():String {
 			//[Round 1 Description]
 			var _long:String;
-			if(hasStatusAffect("Round") < 0) _long = "You're totally trapped inside a pod!  The walls are slimy and oozing moisture that makes the air sickeningly sweet.  It makes you feel a little dizzy.  Tentacles are climbing up your " + mainClassPtr.player.legs() + " towards your crotch, doing their best to get under you " + mainClassPtr.player.armorName + ".  There's too many to try to pull away.  You're only chance of escape is to create a way out!";
+			if(hasStatusAffect("Round") < 0) _long = "You're totally trapped inside a pod!  The walls are slimy and oozing moisture that makes the air sickeningly sweet.  It makes you feel a little dizzy.  Tentacles are climbing up your " + game.player.legs() + " towards your crotch, doing their best to get under you " + game.player.armorName + ".  There's too many to try to pull away.  You're only chance of escape is to create a way out!";
 			//[Round 2 Description]
 			else if(statusAffectv1("Round") == 2) {
 				_long = "You're still trapped inside the pod!  By now the walls are totally soaked with some kind of viscous slime.  The smell of it is unbearably sweet and you have to put a hand against the wall to steady yourself.  Warm tentacles are curling and twisting underneath your armor, caressing every ";
 				if(player.skinType == SKIN_TYPE_FUR) _long += "furry ";
 				if(player.skinType == SKIN_TYPE_SCALES) _long += "scaley ";
-				_long += "inch of your " + player.legs() + ", crotch, and " + mainClassPtr.assDescript() + ".";
+				_long += "inch of your " + player.legs() + ", crotch, and " + game.assDescript() + ".";
 			}
 			//[Round 3 Description]
 			else if(statusAffectv1("Round") == 3) {
@@ -43,7 +43,7 @@
 			//[Round 4 Description]
 			else {
 				_long = "You're trapped inside the pod and being violated from by tentacles from the shoulders down!  The slime around your waist is rising even faster now.  It will probably reach ";
-				if(player.biggestTitSize() >= 1) _long += "the underside of your " + mainClassPtr.allBreastsDescript();
+				if(player.biggestTitSize() >= 1) _long += "the underside of your " + game.allBreastsDescript();
 				else _long += "your chest";
 				_long += " in moments.  You're being fucked by a bevy of tentacles while your nipples are ";
 				if(!player.hasFuckableNipples()) _long += "fondled ";
@@ -74,9 +74,9 @@
 			return _long;
 		}
 
-		public function EncapsulationPod(mainClassPtr:*) 
+		public function EncapsulationPod()
 		{
-			super(mainClassPtr);
+			super();
 			init01Names("the ", "pod", "pod", "");
 			init02Genderless();
 			init03BreastRows([0,0]);

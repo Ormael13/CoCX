@@ -23,25 +23,25 @@
 				//Eligable to rape
 				if(player.lust >= 33 && player.gender > 0) {
 					outputText("\n\nYou're horny enough to try and rape it, though you'd rather see how much milk you can squirt into it.  What do you do?", false);
-					mainClassPtr.simpleChoices("B.Feed",2480,"Rape",5041,"",0,"",0,"Leave",5007);
+					game.simpleChoices("B.Feed",2480,"Rape",5041,"",0,"",0,"Leave",5007);
 				}
 				//Rapes not on the table.
 				else {
 					outputText("\n\nYour nipples ache with the desire to forcibly breastfeed the gelatinous beast.  Do you?", false);
-					mainClassPtr.doYesNo(mainClassPtr.rapeOozeWithMilk,5007);
+					game.doYesNo(game.rapeOozeWithMilk,5007);
 				}
 			}
 			//Not a breastfeeder
 			else if(player.lust >= 33 && player.gender > 0) {
 				outputText("  Sadly you realize your own needs have not been met.  Of course, you could always play with the poor thing... Do you rape it?", false);
-				mainClassPtr.doYesNo(5041, 5007);
+				game.doYesNo(5041, 5007);
 			}
-			else mainClassPtr.eventParser(5007);
+			else game.eventParser(5007);
 		}
 
-		public function GreenSlime(mainClassPtr:*)
+		public function GreenSlime()
 		{
-			super(mainClassPtr);
+			super();
 			trace("GreenSlime Constructor!");
 			init01Names("a ", "green slime", "greenslime", "The green slime has a normally featureless face that sits on top of wide shoulders that sprout into thick, strong arms.  Its torso fades into an indistinct column that melds into the lump of ooze on the ground that serves as a makeshift form of locomotion.");
 			init02Male(new Cock(18, 2, CockTypesEnum.HUMAN), 0, 0, 3, 20);

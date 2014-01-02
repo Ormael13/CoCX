@@ -24,27 +24,27 @@
 			}
 			if (hasStatusAffect("PhyllaFight") >= 0) {
 				removeStatusAffect("PhyllaFight");
-				mainClassPtr.phyllaTentacleDefeat();
+				game.phyllaTentacleDefeat();
 			}
 			else {
 				if(!hpVictory && player.gender > 0) {
 					outputText("  Perhaps you could use it to sate yourself?", true);
-					mainClassPtr.doYesNo(5078,5007);
+					game.doYesNo(5078,5007);
 				}
-				mainClassPtr.eventParser(5007);
+				game.eventParser(5007);
 			}
 		}
 
 		override protected function performCombatAction():void
 		{
 			//tentacle beasts have special AI
-			if (rand(2) == 0 || hasStatusAffect("TentacleCoolDown") >= 0) mainClassPtr.eventParser(special1);
-			else mainClassPtr.eventParser(special2);
+			if (rand(2) == 0 || hasStatusAffect("TentacleCoolDown") >= 0) game.eventParser(special1);
+			else game.eventParser(special2);
 		}
 
-		public function TentacleBeast(mainClassPtr:*)
+		public function TentacleBeast()
 		{
-			super(mainClassPtr);
+			super();
 			trace("TentacleBeast Constructor!");
 			init01Names("the ", "tentacle beast", "tentaclebeast", "You see the massive, shambling form of the tentacle beast before you.  Appearing as a large shrub, it shifts its bulbous mass and reveals a collection of thorny tendrils and cephalopodic limbs.");
 			init02Male([new Cock(40,1.5),new Cock(60,1.5),new Cock(50,1.5),new Cock(20,1.5)],0,0,3);

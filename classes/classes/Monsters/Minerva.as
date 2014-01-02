@@ -12,17 +12,17 @@ package classes.Monsters
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.minervaAI();
+			game.minervaAI();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.beatUpDatSharpie();
+			game.beatUpDatSharpie();
 		}
 
-		public function Minerva(mainClassPtr:*)
+		public function Minerva()
 		{
-			super(mainClassPtr);
+			super();
 			init01Names("", "Minerva", "minerva", "You're fighting the tainted siren, Minerva.  Standing around eight feet and wielding a weapon just as tall, she is a force to be reckoned with.  Her skin is a dark navy blue, though her belly, neck and inner thighs are as white as the clouds in the sky, and a golden piecing decorates her navel.  Orange and white stripes adorn her legs, tail and back.  Two large wings sprout from her back, their feathers an attention-grabbing red and orange mix.  She wears a tube-top that hold back her double d-cups, and short shorts around her wide waist that seem to be holding back a huge bulge.\n\nHer weapon is a halberd, made from a shiny, silvery metal, and seems to have an unnatural glow to it.");
 			init02Male(new Cock(16,3),2,3,3);
 			init02Female(VAGINA_WETNESS_SLICK,VAGINA_LOOSENESS_NORMAL);

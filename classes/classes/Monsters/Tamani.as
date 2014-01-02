@@ -25,15 +25,15 @@ package classes.Monsters
 				if(player.statusAffectv1("Tamani") <= -500 && player.canOvipositSpider()) {
 					temp2 = 3837;
 				}
-				mainClassPtr.simpleChoices("Fuck",mainClassPtr.tamaniSexWon,"Buttfuck",temp,"",0,"Lay Eggs",temp2,"Leave",5007);
+				game.simpleChoices("Fuck",game.tamaniSexWon,"Buttfuck",temp,"",0,"Lay Eggs",temp2,"Leave",5007);
 			}
-			else mainClassPtr.eventParser(5007);
+			else game.eventParser(5007);
 		}
 
-		public function Tamani(mainClassPtr:*)
+		public function Tamani()
 		{
-			super(mainClassPtr);
-			init01Names("", "Tamani", "tamani", "She keeps her arms folded across her " + mainClassPtr.tamaniChest() + " and glares at you.  The little thing is only about four feet tall, with pink and black dyed hair cut into a cute little 'do.  The greenish-gray skin of her breasts bulges out around her arms, supported by a few leather straps, amplifying her cleavage.  Her cunt lips are pierced multiple times, inflamed, and slightly parted.  There really isn't any clothing on her to hide them, just more of the ever-present straps wrapping around her thighs.");
+			super();
+			init01Names("", "Tamani", "tamani", "She keeps her arms folded across her " + game.tamaniChest() + " and glares at you.  The little thing is only about four feet tall, with pink and black dyed hair cut into a cute little 'do.  The greenish-gray skin of her breasts bulges out around her arms, supported by a few leather straps, amplifying her cleavage.  Her cunt lips are pierced multiple times, inflamed, and slightly parted.  There really isn't any clothing on her to hide them, just more of the ever-present straps wrapping around her thighs.");
 			init02Female(VAGINA_WETNESS_DROOLING,VAGINA_LOOSENESS_NORMAL,55);
 			init03BreastRows("E");
 			init04Ass(ANAL_LOOSENESS_TIGHT,ANAL_WETNESS_DRY,40);

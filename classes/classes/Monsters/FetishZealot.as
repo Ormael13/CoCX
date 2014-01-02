@@ -21,19 +21,19 @@
 				outputText("\nYou notice that some kind of unnatural heat is flowing into your body from the wound", false);
 				if (player.inte > 50) outputText(", was there some kind of aphrodisiac on the knife?", false);
 				else outputText(".", false);
-				mainClassPtr.stats(0, 0, 0, 0, 0, 0, (player.lib / 20 + 5), 0);
+				game.stats(0, 0, 0, 0, 0, 0, (player.lib / 20 + 5), 0);
 			}
 			super.postAttack(damage);
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.zealotDefeated();
+			game.zealotDefeated();
 		}
 
-		public function FetishZealot(mainClassPtr:*)
+		public function FetishZealot()
 		{
-			super(mainClassPtr);
+			super();
 			trace("FetishZealot Constructor!");
 		
 			init01Names("the ", "fetish zealot", "fetishzealot", "The zealot is clad in a bizarre set of religious robes.  They are similar to what you've seen on other religious leaders from home, but none that included the large slit at the front that lets his above average sized human dick stick out the front.");

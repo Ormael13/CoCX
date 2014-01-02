@@ -68,7 +68,7 @@ public function wormsRun():void {
 	}
 	else {
 		outputText("You turn to run, but before your " + player.feet() + " can get you away, the worms are upon you!  You turn to face them, lest they launch onto your unprotected back.", true);
-		startCombat(new WormMass(this));
+		startCombat(new WormMass());
 		doNext(1);
 	}
 }

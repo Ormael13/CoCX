@@ -14,17 +14,17 @@ package classes.Monsters
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.driderAI();
+			game.driderAI();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.defeatDriderIntro();
+			game.defeatDriderIntro();
 		}
 
-		public function CorruptedDrider(mainClassPtr:*)
+		public function CorruptedDrider()
 		{
-			super(mainClassPtr);
+			super();
 
 			var hairColor:String = Appearance.randomChoice("red", "orange", "green");
 			var skinTone:String = Appearance.randomChoice("yellow", "purple", "red", "turquoise");

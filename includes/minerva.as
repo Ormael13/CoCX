@@ -354,7 +354,7 @@ public function dontFlyWithWithMeYouCrazyBitch():void {
 }
 
 public function fightMinerva():void {
-	startCombat(new Minerva(this),true);
+	startCombat(new Minerva(),true);
 	spriteSelect(95);
 	eventParser(1);
 }

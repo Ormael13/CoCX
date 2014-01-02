@@ -65,7 +65,7 @@ public function encounterKiha():void {
 		outputText("As she screams out in defiance, she charges you, giving you barely enough time to ready yourself for combat!", false);
 		//Clear 'won last fight' toggle
 		flags[kFLAGS.PC_WIN_LAST_KIHA_FIGHT] = 0;
-		startCombat(new Kiha(this));
+		startCombat(new Kiha());
 		return;
 	}
 	//Tribute Offer (1st Time) - Req's Kiha not be mad and PC suggested it at some point. 
@@ -105,7 +105,7 @@ public function encounterKiha():void {
 		}
 		else {
 			outputText("It's a fight!", false);
-			startCombat(new Kiha(this));
+			startCombat(new Kiha());
 			return;
 		}
 	}
@@ -133,7 +133,7 @@ public function meetKihaAndFight():void {
 	spriteSelect(72);
 	outputText("You step closer and proclaim that you go where you please.  Kiha snorts and says, \"<i>Cute.  Sadly, misplaced confidence will only make this hurt that much more.</i>\"", false);
 	//(START COMBAT)
-	startCombat(new Kiha(this));
+	startCombat(new Kiha());
 }
 //[Ask Why]
 public function askWhy():void {
@@ -144,7 +144,7 @@ public function askWhy():void {
 	outputText("Thinking you may have found a way to win into the powerful warrior's good graces, you start to explain that your whole purpose here is to defeat the demon queen.  She cuts you off by exhaling a whirling tornado of fire into the air.  The scorching inferno seems to suck the very breath from your lungs, robbing you of your words.  While the after-image still hangs in your vision, she declares, \"<i>I don't give two licks about why you're here.  I'm gonna beat your ass just for wasting my time!</i>\"", false);
 	
 	//(START COMBAT!)
-	startCombat(new Kiha(this));
+	startCombat(new Kiha());
 }
 //[Pay]
 public function payKihaTribute():void {
@@ -192,7 +192,7 @@ public function tellKihaTributeWasYourIdea():void {
 	outputText("You ask why she changed her mind about your idea.  Kiha's face screws up for a moment, her chocolate-hued visage distorting into an irritated grimace.  This may have been a mistake.  She screams, \"<i>As if someone like you would have an idea worthy of being adopted by me!  I forgot about your insignificant offer as soon as I was away from you.  This tribute was devised solely with my own sizable wit and cunning!</i>\"\n\n", false);
 	
 	outputText("The dragon-girl yanks her axe from her back and twists her hands, making the edge glow orange in the murky swamp air.  \"<i>You should've kept your mouth shut, worm.  The offer is off the table now!  The only thing I'll trade you is pain!</i>\"", false);
-	startCombat(new Kiha(this));
+	startCombat(new Kiha());
 }
 
 //*Generic PC Victory Introduction: 

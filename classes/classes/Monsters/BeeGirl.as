@@ -24,12 +24,12 @@
 					outputText("You smile in satisfaction as the " + short + " spreads her legs and starts frigging her honey-soaked cunt.  The sweet scent oozing from between her legs is too much to bear, arousing you painfully, and you see an easy way to relieve it..\n\nWhat do you do to her?", true);
 				}
 				player.lust = 98;
-				mainClassPtr.stats(0,0,0,0,0,0,1,0);
+				game.stats(0,0,0,0,0,0,1,0);
 				var temp2:int = 0;
 				var temp3:int = 0;
 				if(player.hasStatusAffect("Feeder") >= 0) temp3 = 2484;
 				if(player.hasKeyItem("Deluxe Dildo") >= 0) temp2 = 2263;
-				mainClassPtr.simpleChoices("Rape",2059,"Dildo Rape",temp2,"",0,"B. Feed",temp3,"Leave",5007);
+				game.simpleChoices("Rape",2059,"Dildo Rape",temp2,"",0,"B. Feed",temp3,"Leave",5007);
 			}
 			//Genderless can still breastfeed
 			else if(player.hasStatusAffect("Feeder") >= 0) {
@@ -38,13 +38,13 @@
 				} else {
 					outputText("You smile in satisfaction as the " + short + " spreads her legs and starts frigging her honey-soaked cunt.  The sweet scent oozing from between her legs is too much to bear, arousing you painfully.\n\nWhat do you do?", true);
 				}
-				mainClassPtr.simpleChoices("B. Feed", 2484,"",0,"",0,"",0,"Leave",5007);
+				game.simpleChoices("B. Feed", 2484,"",0,"",0,"",0,"Leave",5007);
 			}
 		}
 
-		public function BeeGirl(mainClassPtr:*)
+		public function BeeGirl()
 		{
-			super(mainClassPtr);
+			super();
 			init01Names("a ", "bee-girl", "beegirl", "A bee-girl buzzes around you, filling the air with intoxicatingly sweet scents and a buzz that gets inside your head.  She has a humanoid face with small antennae, black chitin on her arms and legs that looks like shiny gloves and boots, sizable breasts, and a swollen abdomen tipped with a gleaming stinger.");
 			init02Female(VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_GAPING);
 			init03BreastRows("DD");

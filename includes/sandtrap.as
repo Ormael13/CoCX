@@ -50,7 +50,7 @@ public function encounterASandTarp():void {
 		else {
 			outputText("\n\nYou don't move quickly enough, however, and you may as well be running on the spot; the edge of the pit recedes as the fluid sand carries you downwards.  You struggle upright as best you can and ready yourself to fight the sandtrap, which is leering at you hungrily from the bottom of its vast pit.");
 			outputText("\n\n\"<i>Only a matter of time now, little ant,</i>\" it says huskily, in its fluttering, buzzing voice.  You will have to defeat it in order to escape, and before it pulls you to the bottom!");
-			startCombat(new SandTrap(this));
+			startCombat(new SandTrap());
 			monster.createStatusAffect("level",4,0,0,0);
 			doNext(1);
 		}
@@ -78,7 +78,7 @@ public function saveTheSandTarps():void {
 		outputText("\n\nA rumbling, hissing sound fills your ears and the dunes surrounding you lift out of sight as all the sand in the hollow begins to run downwards, taking you with it.  You fight against it desperately, but you cannot swim up a landslide and within moments you find yourself buried up to your neck at the bottom of a huge, conical depression, eyes level with the naked abdomen of your captor.  You cough, spit and blink sand away and stare helplessly up at it.  The creature has a long, slim human upper half with four arms and a pair of flat breasts; its twenty slender fingers stroke your face, brush you off and massage your [chest] as it allows you to take it in.  With its glamour gone you can see clearly the six eyed creature is in fact female... or is it?  Its long face is soft around the edges with a cute, pointed chin which is very pretty - or very handsome.  Every time the creature moves its face its gender seems to shift.  Unnerved, you look downwards, and wish you hadn't.  Although its lower half is obscured below the sand, you can see that below its waist the creature's body balloons outwards into what must be a massive, sand-colored insect thorax.  You feel something brush against you and you instinctively attempt to flinch, but you can't.  The sand feels packed against you, and straining every muscle you have to free your limbs gets you nowhere.  Gently, the creature slides its fingers behind your neck and makes you look into its black eyes.");
 		outputText("\n\n\"<i>You made it all too easy for me, little ant,</i>\" it says pityingly.  \"<i>Did no one warn you about sandtraps?</i>\"  Slowly it sinks downwards, and whilst it fondles your face you feel its other set of hands cup your [butt].  \"<i>Never mind,</i>\" the insect monster sighs into your forehead in its fluttery voice.  \"<i>I'll teach you everything there is to know.</i>\"");
 	}
-	startCombat(new SandTrap(this));
+	startCombat(new SandTrap());
 	monster.createStatusAffect("level",2,0,0,0);
 	doNext(1);
 }
@@ -113,7 +113,7 @@ public function dontSaveTheTarps():void {
 
 
 public function startSandTarpFight():void {
-	startCombat(new SandTrap(this));
+	startCombat(new SandTrap());
 	spriteSelect(97);
 	monster.createStatusAffect("level",4,0,0,0);
 	eventParser(1);
@@ -681,7 +681,7 @@ public function sandTrapBadEndFight():void {
 	spriteSelect(97);
 	outputText("You shake yourself out of your fug, clench your [weapon] and grit your teeth.  You are your own person, dammit, and you will show this creature just what that means!  The Sandtrap slowly lowers its arms and looks at you with almost parental disappointment as you march into its pit with the obvious intention of beating the crap out of it.  \"<i>You want to dance again, Flytrap?</i>\" it sighs.  \"<i>I would prefer that you look at yourself and accept what you are, but I will force you to accept it if that is what you wish.</i>\"");
 	//(If fight won, resets counter)
-	startCombat(new SandTrap(this));
+	startCombat(new SandTrap());
 }
 
 //Leave:

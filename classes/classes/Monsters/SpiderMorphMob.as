@@ -13,18 +13,18 @@ package classes.Monsters
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.spiderHordeAI();
+			game.spiderHordeAI();
 		}
 
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			mainClassPtr.beatSpiderMob();
+			game.beatSpiderMob();
 		}
 
-		public function SpiderMorphMob(mainClassPtr:*)
+		public function SpiderMorphMob()
 		{
-			super(mainClassPtr);
+			super();
 			init01Names("the ","mob of spiders-morphs","spidermorphmob","You are fighting a horde of spider-morphs!  A group of some two-dozen spiders and driders approaches you, all baring their teeth.  A pair of large, powerful driders lead the group, their corrupt, lusty stares sending shivers up your spine.  While "+(player.level <= 13?"you'd never face such a large horde on your own":"you could probably handle them alone")+", you have a powerful ally in this fight - the dragoness Kiha!",true);
 			init02Male(new Cock(9,2,CockTypesEnum.HUMAN),2,1,3);
 			init02Female(VAGINA_WETNESS_SLICK,VAGINA_LOOSENESS_LOOSE);

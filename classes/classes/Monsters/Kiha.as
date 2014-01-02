@@ -32,23 +32,23 @@ package classes.Monsters
 
 		override protected function performCombatAction():void
 		{
-			mainClassPtr.kihaAI();
+			game.kihaAI();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if(hasStatusAffect("spiderfight") >= 0)
-				mainClassPtr.playerBeatsUpKihaPreSpiderFight();
+				game.playerBeatsUpKihaPreSpiderFight();
 			else if(hasStatusAffect("domfight") >= 0)
-				mainClassPtr.pcWinsDomFight();
+				game.pcWinsDomFight();
 			else if(hasStatusAffect("spar") >= 0)
-				mainClassPtr.winSparWithKiha();
-			else mainClassPtr.kihaVictoryIntroduction();
+				game.winSparWithKiha();
+			else game.kihaVictoryIntroduction();
 		}
 
-		public function Kiha(mainClassPtr:*)
+		public function Kiha()
 		{
-			super(mainClassPtr);
+			super();
 			init01Names("", "Kiha", "kiha", "Kiha is standing across from you, holding a double-bladed axe that's nearly as big as she is.  She's six feet tall, and her leathery wings span nearly twelve feet extended.  Her eyes are pure crimson, save for a black slit in the center, and a pair of thick draconic horns sprout from her forehead, arcing over her ruby-colored hair to point behind her.  Dim red scales cover her arms, legs, back, and strong-looking tail, providing what protection they might  to large areas of her body.  The few glimpses of exposed skin are dark, almost chocolate in color, broken only by a few stray scales on the underside of her bosom and on her cheekbones.  Her vagina constantly glistens with moisture, regardless of her state of arousal.  Despite her nudity, Kiha stands with the confidence and poise of a trained fighter.");
 			init02Female(VAGINA_WETNESS_DROOLING,VAGINA_LOOSENESS_NORMAL,40);
 			init03BreastRows("D");

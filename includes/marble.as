@@ -136,7 +136,7 @@ public function stayForFights():void {
 	spriteSelect(41);
 	outputText("You fold your arms over your chest and scowl as Marble trudges back over the fields carrying a huge hammer.  Part of you feels terribly juvenile to be solving an argument with violence - but the other part is cheering at the opportunity to put the bossy cow in her place.");
 	//go to battle
-	startCombat(new Marble(this),true);
+	startCombat(new Marble(),true);
 	doNext(1);
 }
 
@@ -2427,7 +2427,7 @@ public function marbleAfterRapeStartFight():void {
 	spriteSelect(41);
 	outputText("You drop into your own combat stance; it's time to get even with her for last time.  ", true);
 	//Do battle with Marble
-	startCombat(new Marble(this),true);
+	startCombat(new Marble(),true);
 }
 
 //if the player leaves, that's it

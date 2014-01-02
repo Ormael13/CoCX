@@ -6512,7 +6512,7 @@ public function stalkingZeAmiliez():void {
 
 		outputText("This is your cue to act; you quickly burst out of your hideout and swipe her blowpipe away. Amily jumps away in surprise and reaches for her knife, assuming a fighting stance. You ready your " + player.weaponName + " and prepare to teach the foolish mouse a lesson.\n\n", false);
 		//[Proceed to battle.]
-		startCombat(new Amily(this),true);
+		startCombat(new Amily(),true);
 	}
 	//(if PC's speed >= 65)
 	else if(player.spe >= 65) {
@@ -6523,7 +6523,7 @@ public function stalkingZeAmiliez():void {
 
 		outputText("Panicked, she takes her knife and prepares to fight you. You ready your " + player.weaponName + " and prepare to teach the foolish mouse a lesson.\n\n", false);
 		//[Proceed to battle.]
-		startCombat(new Amily(this),true);
+		startCombat(new Amily(),true);
 	}
 	else {
 		outputText("You search for Amily high and low, but can't find a single trace of her. Frustrated, you return to the camp.  Maybe if you were smarter or faster you could find her.", false);
