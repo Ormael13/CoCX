@@ -1,6 +1,5 @@
 ﻿package classes 
 {
-	import classes.GlobalFlags.kFLAGS;
 	import classes.Monsters.Kiha;
 
 	/**
