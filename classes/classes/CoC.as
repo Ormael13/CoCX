@@ -286,11 +286,17 @@
 		public var monkey:ChaosMonkey;
 		public var testingBlockExiting:Boolean;
 
+		public var kFLAGS_REF:*;
+
 		public function CoC()
 		{
 			// Cheatmode.
 			kGAMECLASS = this;
 			
+			this.kFLAGS_REF = kFLAGS; 
+			// cheat for the parser to be able to find kFLAGS
+			// If you're not the parser, DON'T USE THIS
+
 			// This is a flag used to prevent the game from exiting when running under the automated tester
 			// (the chaos monkey)
 			testingBlockExiting = false;

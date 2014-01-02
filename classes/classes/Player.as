@@ -2,6 +2,7 @@ package classes
 {
 	import classes.GlobalFlags.kFLAGS;
 	import classes.content.UmasShop;
+	import classes.GlobalFlags.kGAMECLASS;
 
 	/**
 	 * ...
@@ -39,6 +40,14 @@ package classes
 		public function Player(game:*)
 		{
 			super(game);
+			if (game == null)
+			{
+				this.game = kGAMECLASS;
+			}
+			else
+			{
+				this.game = game;
+			}
 		}
 
 		public function reduceDamage(damage:Number):Number{

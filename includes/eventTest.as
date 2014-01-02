@@ -130,7 +130,7 @@ WHERE IS MAH JUNK!!!!111one!
 [if (player.gender == 3) [insertSection herm_content]]
 [if (player.gender == 0) [insertSection neuter_content]]
 
-[eCockDescript 0]
+[eCockDescript 0]  
 [eCockDescript]
 
 [button demonSheilaEncounter | Call]

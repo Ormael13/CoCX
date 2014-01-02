@@ -239,7 +239,7 @@
 			return kGAMECLASS.nippleDescript(rowNum);
 		}
 		
-		protected function cockDescript(cockNum:Number):String
+		protected function cockDescript(cockNum:Number = 0):String
 		{
 			return kGAMECLASS.cockDescript(cockNum);
 		}
