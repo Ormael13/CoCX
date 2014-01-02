@@ -2,6 +2,7 @@ package classes
 {
 	import classes.GlobalFlags.kFLAGS;
 	import classes.content.UmasShop;
+	import classes.GlobalFlags.kGAMECLASS;
 
 	/**
 	 * ...
@@ -33,9 +34,17 @@ package classes
 
 		private var game:*;
 		
-		public function Player(game:*)
+		// Hacky workaround shit for ByteArray.readObject
+		public function Player(game:* = null)
 		{
-			this.game = game;
+			if (game == null)
+			{
+				this.game = kGAMECLASS;
+			}
+			else
+			{
+				this.game = game;
+			}
 		}
 
 		public function reduceDamage(damage:Number):Number{
