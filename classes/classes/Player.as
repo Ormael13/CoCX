@@ -2,7 +2,6 @@ package classes
 {
 	import classes.GlobalFlags.kFLAGS;
 	import classes.content.UmasShop;
-	import classes.GlobalFlags.kGAMECLASS;
 
 	/**
 	 * ...
@@ -40,13 +39,12 @@ package classes
 		// Hacky workaround shit for ByteArray.readObject
 		public function Player()
 		{
-			super(kGAMECLASS);
 		}
 
 		public function reduceDamage(damage:Number):Number{
 			damage = int(damage - rand(tou) - armorDef);
 			//EZ MOAD half damage
-			if (kGAMECLASS.flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) damage /= 2;
+			if (game.flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) damage /= 2;
 			if (hasStatusAffect("Shielding") >= 0) {
 				damage -= 30;
 				if (damage < 1) damage = 1;
@@ -99,7 +97,7 @@ package classes
 				//Prevent negatives
 				if (HP<=0){
 					HP = 0;
-					if (game.gameState == 1 || game.gameState == 2) game.doNext(game.endHpLoss);
+					if (game.gameState == 1 || game.gameState == 2) game.doNext(5010);
 				}
 			}
 			return returnDamage;

@@ -3,6 +3,7 @@ package classes
 {
 	//import classes.CockClass;
 	import classes.Cock;
+	import classes.GlobalFlags.kGAMECLASS;
 	import classes.VaginaClass;
 	import classes.BreastRowClass;
 	import classes.AssClass;
@@ -15,7 +16,10 @@ package classes
 
 		include "../../includes/appearanceDefs.as";
 
-		public var game:CoC;
+		public static function get game():CoC {
+			return kGAMECLASS;
+		}
+
 		//Variables
 		
 		//Short refers to player name and monster name. BEST VARIABLE NAME EVA!
@@ -282,9 +286,8 @@ package classes
 		public var statusAffects:Array;
 		
 		//Constructor
-		public function Creature(game:CoC)
+		public function Creature()
 		{
-			this.game = game;
 			//cocks = new Array();
 			//The world isn't ready for typed Arrays just yet.
 			cocks = [];
