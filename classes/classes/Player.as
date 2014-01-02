@@ -2,7 +2,6 @@ package classes
 {
 	import classes.GlobalFlags.kFLAGS;
 	import classes.content.UmasShop;
-	import classes.GlobalFlags.kGAMECLASS;
 
 	/**
 	 * ...
@@ -32,8 +31,6 @@ package classes
 		public var exploredMountain:Number = 0;
 		public var exploredLake:Number = 0;
 
-		private var game:*;
-		
 		// Hacky workaround shit for ByteArray.readObject
 		public function Player()
 		{
@@ -42,7 +39,7 @@ package classes
 		public function reduceDamage(damage:Number):Number{
 			damage = int(damage - rand(tou) - armorDef);
 			//EZ MOAD half damage
-			if (kGAMECLASS.flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) damage /= 2;
+			if (game.flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1) damage /= 2;
 			if (hasStatusAffect("Shielding") >= 0) {
 				damage -= 30;
 				if (damage < 1) damage = 1;
@@ -54,7 +51,7 @@ package classes
 			//Take damage you masochist!
 			if (hasPerk("Masochist") >= 0 && lib >= 60) {
 				damage = Math.round(damage * .7);
-				kGAMECLASS.stats(0, 0, 0, 0, 0, 0, 2, 0);
+				game.stats(0, 0, 0, 0, 0, 0, 2, 0);
 				//Dont let it round too far down!
 				if (damage < 1) damage = 1;
 			}
@@ -88,14 +85,14 @@ package classes
 			var returnDamage:int = (damage>0 && damage<1)?1:damage;
 			if (damage>0){
 				HP -= damage;
-				kGAMECLASS.mainView.statsView.showStatDown('hp');
-				if (kGAMECLASS.flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
-					kGAMECLASS.stats(0, 0, 0, 0, 0, 0, int(damage / 2), 0);
+				game.mainView.statsView.showStatDown('hp');
+				if (game.flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
+					game.stats(0, 0, 0, 0, 0, 0, int(damage / 2), 0);
 				}
 				//Prevent negatives
 				if (HP<=0){
 					HP = 0;
-					if (kGAMECLASS.gameState == 1 || kGAMECLASS.gameState == 2) kGAMECLASS.doNext(5010);
+					if (game.gameState == 1 || game.gameState == 2) game.doNext(5010);
 				}
 			}
 			return returnDamage;

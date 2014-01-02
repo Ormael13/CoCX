@@ -3,6 +3,7 @@ package classes
 {
 	//import classes.CockClass;
 	import classes.Cock;
+	import classes.GlobalFlags.kGAMECLASS;
 	import classes.VaginaClass;
 	import classes.BreastRowClass;
 	import classes.AssClass;
@@ -14,6 +15,10 @@ package classes
 	{
 
 		include "../../includes/appearanceDefs.as";
+
+		public static function get game():CoC {
+			return kGAMECLASS;
+		}
 
 		//Variables
 		
