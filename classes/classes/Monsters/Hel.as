@@ -26,7 +26,7 @@ package classes.Monsters
 		{
 			if (pcCameWorms){
 				outputText("\n\nHelia waits it out in stoic silence...");
-				game.doNext(game.endLustLoss);
+				doNext(game.endLustLoss);
 			} else {
 				if(hasStatusAffect("sparring") >= 0) game.loseToSparringHeliaLikeAButtRapedChump();
 				else game.loseToSalamander();

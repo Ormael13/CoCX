@@ -23,7 +23,7 @@
 		{
 			if (pcCameWorms){
 				outputText("\n\nYour foe doesn't seem disgusted enough to leave...");
-				game.doNext(game.endLustLoss);
+				doNext(game.endLustLoss);
 			} else {
 				game.sharkLossRape();
 			}

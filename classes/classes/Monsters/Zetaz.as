@@ -28,7 +28,7 @@ package classes.Monsters
 		{
 			if (pcCameWorms){
 				outputText("\n\nYour foe doesn't seem put off enough to care...");
-				game.doNext(game.endLustLoss);
+				doNext(game.endLustLoss);
 			} else {
 				game.loseToZetaz();
 			}

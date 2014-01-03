@@ -30,7 +30,7 @@
 		{
 			if(pcCameWorms){
 				outputText("\n\nYour foes don't seem put off enough to leave...");
-				game.doNext(game.endLustLoss);
+				doNext(game.endLustLoss);
 			} else {
 				game.loseToImpMob();
 			}

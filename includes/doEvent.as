@@ -2518,11 +2518,6 @@ public function doEvent(eventNo:Number):void
 		rapeOozeWithMilk();
 		return;
 	}
-	else if (eventNo == 2481)
-	{
-		areImpsLactoseIntolerant();
-		return;
-	}
 	else if (eventNo == 2482)
 	{
 		giveGoblinAMilkMustache();
@@ -2933,11 +2928,6 @@ public function doEvent(eventNo:Number):void
 		fellatrixBarApproach();
 		return;
 	}
-	else if (eventNo == 2742)
-	{
-		dickDownGnollClit();
-		return;
-	}
 	else if (eventNo == 2746)
 	{
 		hellHoundPropahRape();
@@ -3343,41 +3333,6 @@ public function doEvent(eventNo:Number):void
 		liliumNippleFuck();
 		return;
 	}
-	else if (eventNo == 2989)
-	{
-		fSpiderMorphRape();
-		return;
-	}
-	else if (eventNo == 2990)
-	{
-		fSpiderMorphRapeDude();
-		return;
-	}
-	else if (eventNo == 2991)
-	{
-		evilSpiderGirlVictoryAnal();
-		return;
-	}
-	else if (eventNo == 2992)
-	{
-		goblinCondomed();
-		return;
-	}
-	else if (eventNo == 2993)
-	{
-		victoryButtFuck();
-		return;
-	}
-	else if (eventNo == 2994)
-	{
-		victoryFrotTheSpoidah();
-		return;
-	}
-	else if (eventNo == 2995)
-	{
-		victoryCowgirlRidingOnSpiderBoi();
-		return;
-	}
 	else if (eventNo == 2997)
 	{
 		startCombat(new MaleSpiderMorph());
@@ -3410,66 +3365,6 @@ public function doEvent(eventNo:Number):void
 	{
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 2;
 		chooseArmorOrRobes();
-		return;
-	}
-	else if (eventNo == 3005)
-	{
-		rapeAGoblinCorruptTooBig();
-		return;
-	}
-	else if (eventNo == 3006)
-	{
-		manRapesGoblinTooBig();
-		return;
-	}
-	else if (eventNo == 3007)
-	{
-		rapeImpWithPussy();
-		return;
-	}
-	else if (eventNo == 3008)
-	{
-		centaurGirlOnImps();
-		return;
-	}
-	else if (eventNo == 3009)
-	{
-		centaurOnImpStart();
-		return;
-	}
-	else if (eventNo == 3010)
-	{
-		centaurOnImpMale(true);
-		return;
-	}
-	else if (eventNo == 3011)
-	{
-		centaurOnImpFemale(true);
-		return;
-	}
-	else if (eventNo == 3014)
-	{
-		winDriderPCDickInSpiderCunt();
-		return;
-	}
-	else if (eventNo == 3016)
-	{
-		winVSDriderTakeItsCockInCunt();
-		return;
-	}
-	else if (eventNo == 3017)
-	{
-		victoryVSDriderRideOviVaginal();
-		return;
-	}
-	else if (eventNo == 3018)
-	{
-		victoryVSDriderRideOviAnal();
-		return;
-	}
-	else if (eventNo == 3019)
-	{
-		victoryVSDriderStickDickInSpinneret();
 		return;
 	}
 	else if (eventNo == 3028)
@@ -3850,49 +3745,9 @@ public function doEvent(eventNo:Number):void
 		isabellaBurps();
 		return;
 	}
-	else if (eventNo == 3263)
-	{
-		normalFemaleRapesAGooGirl();
-		return;
-	}
-	else if (eventNo == 3264)
-	{
-		exhibitionismGooGirlVictoryRape();
-		return;
-	}
-	else if (eventNo == 3265)
-	{
-		victoryRapeAGooGalAsFeeder();
-		return;
-	}
-	else if (eventNo == 3266)
-	{
-		victoryHermSex();
-		return;
-	}
-	else if (eventNo == 3267)
-	{
-		gooMaleRape(1);
-		return;
-	}
-	else if (eventNo == 3268)
-	{
-		gooMaleRape(2);
-		return;
-	}
 	else if (eventNo == 3270)
 	{
 		analRapuzulaKiha();
-		return;
-	}
-	else if (eventNo == 3272)
-	{
-		gatsGoblinBoners();
-		return;
-	}
-	else if (eventNo == 3273)
-	{
-		buttFuckADriderOhBaby();
 		return;
 	}
 	else if (eventNo == 3276)
@@ -4169,11 +4024,6 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 3393)
 	{
 		plugSwimsuitVag();
-		return;
-	}
-	else if (eventNo == 3394)
-	{
-		noogaisNippleRape();
 		return;
 	}
 	else if (eventNo == 3396)
@@ -4868,16 +4718,6 @@ public function doEvent(eventNo:Number):void
 		getPenetratedByEmberLastSexSceneWoooo();
 		return;
 	}
-	else if (eventNo == 3739)
-	{
-		driderVagSmartFuck();
-		return;
-	}
-	else if (eventNo == 3741)
-	{
-		driderTiedUpPartTwo(true);
-		return;
-	}
 	else if (eventNo == 3748)
 	{
 		enslaveVapulaWithYourWang();
@@ -4974,41 +4814,6 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 3777)
 	{
 		emberBreedingAfterMathWatchOutForRadioactiveFallout(false);
-		return;
-	}
-	else if (eventNo == 3778)
-	{
-		fuckDatChameleonAsACoolGuyGirlHerm();
-		return;
-	}
-	else if (eventNo == 3779)
-	{
-		manFucksChameleonWithBiggishWang();
-		return;
-	}
-	else if (eventNo == 3780)
-	{
-		femaleHasWinSexWithChamCham();
-		return;
-	}
-	else if (eventNo == 3781)
-	{
-		useAnItemOnTheChamcham();
-		return;
-	}
-	else if (eventNo == 3782)
-	{
-		giveTheChameleonASuccubiMilk();
-		return;
-	}
-	else if (eventNo == 3783)
-	{
-		doseDatChameleonWithLustAndSensitivityDrafts();
-		return;
-	}
-	else if (eventNo == 3784)
-	{
-		defeatChameleonGirl();
 		return;
 	}
 	else if (eventNo == 3786)
@@ -5138,11 +4943,6 @@ public function doEvent(eventNo:Number):void
 		useSandTarpsHands();
 		return;
 	}
-	else if (eventNo == 3832)
-	{
-		laySomeDriderEggsInGobboTwat();
-		return;
-	}
 	else if (eventNo == 3834)
 	{
 		eggUpANagaSpiderLike();
@@ -5176,11 +4976,6 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 3846)
 	{
 		beePositANagaPlease();
-		return;
-	}
-	else if (eventNo == 3848)
-	{
-		layBeeEggsInGoo();
 		return;
 	}
 	else if (eventNo == 3850)

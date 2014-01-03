@@ -76,7 +76,7 @@ package classes.Monsters
 		{
 			if (pcCameWorms){
 				outputText("\n\nThe basilisk smirks, but waits for you to finish...");
-				game.doNext(game.endLustLoss);
+				doNext(game.endLustLoss);
 			} else {
 				game.basiliskScene.loseToBasilisk();
 			}

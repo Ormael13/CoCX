@@ -37,7 +37,7 @@
 			if (pcCameWorms){
 				outputText("\n\nThe fetish cultist ignores the perverse display and continues on as if nothing had happened...", false);
 				game.dynStats("lus=", 0);
-				game.doNext(5106);
+				doNext(5106);
 			} else {
 				game.zealotLossRape();
 			}

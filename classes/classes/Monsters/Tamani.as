@@ -8,7 +8,7 @@ package classes.Monsters
 	 * ...
 	 * @author aimozg
 	 */
-	public class Tamani extends Monster 
+	public class Tamani extends Goblin
 	{
 
 		override public function defeated(hpVictory:Boolean):void
@@ -59,6 +59,7 @@ package classes.Monsters
 
 		public function Tamani()
 		{
+			super(false);
 			init01Names("", "Tamani", "tamani", "She keeps her arms folded across her " + game.tamaniChest() + " and glares at you.  The little thing is only about four feet tall, with pink and black dyed hair cut into a cute little 'do.  The greenish-gray skin of her breasts bulges out around her arms, supported by a few leather straps, amplifying her cleavage.  Her cunt lips are pierced multiple times, inflamed, and slightly parted.  There really isn't any clothing on her to hide them, just more of the ever-present straps wrapping around her thighs.");
 			init02Female(VAGINA_WETNESS_DROOLING,VAGINA_LOOSENESS_NORMAL,55);
 			init03BreastRows("E");
@@ -72,9 +73,7 @@ package classes.Monsters
 			init11Armor("leather straps");
 			init12Combat(40,40,0.9,Monster.TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(4,rand(25) + 5);
-			initX_Specials(5087,5088);
-
-
+			initX_Specials(goblinDrugAttack,goblinTeaseAttack);
 		}
 		
 	}

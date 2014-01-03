@@ -1,9 +1,9 @@
 ﻿//CoC Creature.as
 package classes
 {
-	//import classes.CockClass;
 	import classes.GlobalFlags.kGAMECLASS;
 
+	//import classes.CockClass;
 	public class Creature
 	{
 
@@ -3849,6 +3849,101 @@ package classes
 		public function allBreastsDescript():String
 		{
 			return Appearance.allBreastsDescript(this);
+		}
+
+		public function SMultiCockDesc():String
+		{
+			return Appearance.cockMultiDesc(this, true, false);
+		}
+
+		public function vaginaDescript(idx:int = 0):String
+		{
+			return Appearance.vaginaDescript(this, 0)
+		}
+
+		public function nippleDescript(rowIdx:int):String
+		{
+			return Appearance.nippleDescription(this, rowIdx);
+		}
+
+		public function chestDesc():String
+		{
+			return Appearance.chestDesc(this);
+		}
+
+		public function clitDescript():String {
+			return Appearance.clitDescription(this);
+		}
+
+		public function assholeOrPussy():String
+		{
+			return Appearance.assholeOrPussy(this);
+		}
+
+		public function multiCockDescriptLight():String
+		{
+			return Appearance.cockMultiLDescriptionShort(this);
+		}
+
+		public function ballsDescriptLight(forcedSize:Boolean = true):String
+		{
+			return Appearance.ballsDescription(forcedSize, true, this);
+		}
+
+		public function breastDescript(rowNum:int):String
+		{
+			//ERROR PREVENTION
+			if (breastRows.length - 1 < rowNum) {
+				if (CoC_Settings.haltOnErrors) throw new Error("");
+				return "<b>ERROR, breastDescript() working with invalid breastRow</b>";
+			}
+			if (breastRows.length == 0) {
+				if (CoC_Settings.haltOnErrors) throw new Error("");
+				return "<b>ERROR, breastDescript() called when no breasts are present.</b>";
+			}
+			var temp14:int = Math.random() * 3;
+			var descript:String = "";
+			if (breastRows[rowNum].breastRating == 0) return "flat breasts";
+			//50% of the time size-descript them
+			if (rand(2) == 0) descript += breastSize(breastRows[rowNum].breastRating);
+			//Nouns!
+			temp14 = rand(10);
+			if (temp14 == 0) descript += "breasts";
+			if (temp14 == 1) {
+				if (breastRows[rowNum].lactationMultiplier > 2) descript += "milk-udders";
+				else descript += "breasts";
+			}
+			if (temp14 == 2) {
+				if (breastRows[rowNum].lactationMultiplier > 1.5) descript += "milky ";
+				if (breastRows[rowNum].breastRating > 4) descript += "tits";
+				else descript += "breasts";
+			}
+			if (temp14 == 3) {
+				//if(breastRows[rowNum].breastRating > 6) descript += "rack";
+				descript += "breasts";
+			}
+			if (temp14 == 4) descript += "tits";
+			if (temp14 == 5) descript += "tits";
+			if (temp14 == 6) descript += "tits";
+			if (temp14 == 7) {
+				if (breastRows[rowNum].lactationMultiplier >= 1 && breastRows[rowNum].lactationMultiplier < 2.5) descript += "milk jugs";
+				if (breastRows[rowNum].lactationMultiplier >= 2.5) descript += "udders";
+				if (breastRows[rowNum].lactationMultiplier < 1) descript += "jugs";
+			}
+			if (temp14 == 8) {
+				if (breastRows[rowNum].breastRating > 6) descript += "love-pillows";
+				else descript += "boobs";
+			}
+			if (temp14 == 9) {
+				if (breastRows[rowNum].breastRating > 6) descript += "tits";
+				else descript += "breasts";
+			}
+			return descript;
+		}
+
+		private function breastSize(val:Number):String
+		{
+			return Appearance.breastSize(val);
 		}
 	}
 }

@@ -1248,7 +1248,7 @@ public function updatePregnancy():Boolean {
 	}
 	//Give birf if its time... to ANAL EGGS
 	if(player.buttPregnancyIncubation == 1 && player.buttPregnancyType == 3) {
-		birthSpiderEggsFromAnusITSBLEEDINGYAYYYYY();
+		corruptedDriderScene.birthSpiderEggsFromAnusITSBLEEDINGYAYYYYY();
 		displayedUpdate = true;
 		player.buttPregnancyIncubation = 0;
 		player.buttPregnancyType = 0;
@@ -1337,14 +1337,14 @@ public function updatePregnancy():Boolean {
 		player.pregnancyIncubation = 0;
 		player.pregnancyType = 0;
 		displayedUpdate = true;
-		spiderPregVagBirth();
+		maleSpiderMorphScene.spiderPregVagBirth();
 	}
 	//DRIDER BIRF
 	if((player.pregnancyType == 15) && player.pregnancyIncubation == 1) {
 		player.pregnancyIncubation = 0;
 		player.pregnancyType = 0;
 		displayedUpdate = true;
-		driderPregVagBirth();
+		corruptedDriderScene.driderPregVagBirth();
 	}
 	if((player.pregnancyType == 20) && player.pregnancyIncubation == 1) {
 		player.pregnancyIncubation = 0;
@@ -1357,7 +1357,7 @@ public function updatePregnancy():Boolean {
 		player.pregnancyIncubation = 0;
 		player.pregnancyType = 0;
 		displayedUpdate = true;
-		gooPregVagBirth();
+		gooGirlScene.gooPregVagBirth();
 	}
 	if(player.pregnancyType == 14 && player.pregnancyIncubation == 1) {
 		player.pregnancyIncubation = 0;

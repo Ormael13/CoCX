@@ -964,12 +964,12 @@ package classes
 				}
 				//Non virgins as usual
 				else if(spacingsF) outputText("  ");
-				if(vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) outputText("<b>Your " + Appearance.vaginaDescription(this,0)+ " is stretched painfully wide, large enough to accomodate most beasts and demons.</b>");
-				if(vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + Appearance.vaginaDescription(this,0) + " is stretched so wide that it gapes continually.</b>");
-				if(vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING) outputText("<b>Your " + Appearance.vaginaDescription(this,0) + " painfully stretches, the lips now wide enough to gape slightly.</b>");
-				if(vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LOOSE) outputText("<b>Your " + Appearance.vaginaDescription(this,0) + " is now very loose.</b>", false);
-				if(vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_NORMAL) outputText("<b>Your " + Appearance.vaginaDescription(this,0) + " is now a little loose.</b>", false);
-				if(vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + Appearance.vaginaDescription(this,0) + " is stretched out to a more normal size.</b>");
+				if(vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) outputText("<b>Your " + Appearance.vaginaDescript(this,0)+ " is stretched painfully wide, large enough to accomodate most beasts and demons.</b>");
+				if(vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " is stretched so wide that it gapes continually.</b>");
+				if(vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " painfully stretches, the lips now wide enough to gape slightly.</b>");
+				if(vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LOOSE) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " is now very loose.</b>", false);
+				if(vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_NORMAL) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " is now a little loose.</b>", false);
+				if(vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " is stretched out to a more normal size.</b>");
 				if(spacingsB) outputText("  ");
 			}
 			return stretched;
@@ -981,10 +981,10 @@ package classes
 			//STRETCH SUCCESSFUL - begin flavor text if outputting it!
 			if(stretched && display) {
 				if(spacingsF) outputText("  ");
-				if(ass.analLooseness == 5) outputText("<b>Your " + Appearance.assholeDescription(this) + " is stretched even wider, capable of taking even the largest of demons and beasts.</b>");
-				if(ass.analLooseness == 4) outputText("<b>Your " + Appearance.assholeDescription(this) + " becomes so stretched that it gapes continually.</b>", false);
-				if(ass.analLooseness == 3) outputText("<b>Your " + Appearance.assholeDescription(this) + " is now very loose.</b>");
-				if(ass.analLooseness == 2) outputText("<b>Your " + Appearance.assholeDescription(this) + " is now a little loose.</b>");
+				if(ass.analLooseness == 5) outputText("<b>Your " + Appearance.assholeDescript(this) + " is stretched even wider, capable of taking even the largest of demons and beasts.</b>");
+				if(ass.analLooseness == 4) outputText("<b>Your " + Appearance.assholeDescript(this) + " becomes so stretched that it gapes continually.</b>", false);
+				if(ass.analLooseness == 3) outputText("<b>Your " + Appearance.assholeDescript(this) + " is now very loose.</b>");
+				if(ass.analLooseness == 2) outputText("<b>Your " + Appearance.assholeDescript(this) + " is now a little loose.</b>");
 				if(ass.analLooseness == 1) outputText("<b>You have lost your anal virginity.</b>", false);
 				if(spacingsB) outputText("  ");
 			}
@@ -1036,6 +1036,177 @@ package classes
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] < 0) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] = 0;
 		
 			trace("MINO CUM ADDICTION %: " + flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER]);
+		}
+
+		public function hasSpells():Boolean
+		{
+			return spellCount()>0;
+		}
+
+		public function spellCount():Number
+		{
+			return ["Knows Arouse","Knows Heal","Knows Might","Knows Charge","Knows Blind","Knows Whitefire"]
+					.filter(function(item:String,index:int,array:Array):Boolean{
+						return this.hasStatusAffect(item)>0;},this)
+					.length;
+		}
+
+		public function hairDescript():String
+		{
+			return Appearance.hairDescription(this);
+		}
+
+		public function growTits(amount:Number, rowsGrown:Number, display:Boolean, growthType:Number):void
+		{
+			if(breastRows.length == 0) return;
+			//GrowthType 1 = smallest grows
+			//GrowthType 2 = Top Row working downward
+			//GrowthType 3 = Only top row
+			var temp2:Number = 0;
+			var temp3:Number = 0;
+			//Chance for "big tits" perked characters to grow larger!
+			if(hasPerk("Big Tits") >= 0 && rand(3) == 0 && amount < 1) amount=1;
+			var temp:uint = breastRows.length;
+			if(growthType == 1) {
+				//Select smallest breast, grow it, move on
+				while(rowsGrown > 0) {
+					//Temp = counter
+					temp = breastRows.length;
+					//Temp2 = smallest tits index
+					temp2 = 0;
+					//Find smallest row
+					while(temp > 0) {
+						temp--;
+						if(breastRows[temp].breastRating < breastRows[temp2].breastRating) temp2 = temp;
+					}
+					//Temp 3 tracks total amount grown
+					temp3 += amount;
+					trace("Breastrow chosen for growth: " + String(temp2) + ".");
+					//Reuse temp to store growth amount for diminishing returns.
+					temp = amount;
+					//Diminishing returns!
+					if(breastRows[temp2].breastRating > 3) {
+						if(hasPerk("Big Tits") < 0) temp/=1.5;
+						else temp/=1.3;
+					}
+					if(breastRows[temp2].breastRating > 7) { 
+						if(hasPerk("Big Tits") < 0) temp/=2;
+						else temp /= 1.5;
+					}
+					if(breastRows[temp2].breastRating > 9) { 
+						if(hasPerk("Big Tits") < 0) temp/=2;
+						else temp /= 1.5;
+					}
+					if(breastRows[temp2].breastRating > 12) { 
+						if(hasPerk("Big Tits") < 0) temp/=2;
+						else temp /= 1.5;
+					}
+					//Grow!
+					breastRows[temp2].breastRating += temp;
+					rowsGrown--;
+				}
+			}
+			//Diminishing returns!
+			if(breastRows[0].breastRating > 3) {
+				if(hasPerk("Big Tits") < 0) amount/=1.5;
+				else amount/=1.3;
+			}
+			if(breastRows[0].breastRating > 7) { 
+				if(hasPerk("Big Tits") < 0) amount/=2;
+				else amount /= 1.5;
+			}
+			if(breastRows[0].breastRating > 12) { 
+				if(hasPerk("Big Tits") < 0) amount/=2;
+				else amount /= 1.5;
+			}
+			/*if(breastRows[0].breastRating > 12) { 
+				if(hasPerk("Big Tits") < 0) amount/=2;
+				else amount /= 1.5;
+			}*/
+			if(growthType == 2) {
+				temp = 0;
+				temp2 = 0;
+				//Start at top and keep growing down, back to top if hit bottom before done.
+				while(rowsGrown > 0) {
+					if(temp+1 > breastRows.length) temp = 0;
+					breastRows[temp].breastRating += amount;
+					trace("Breasts increased by " + amount + " on row " + temp);
+					temp++;
+					temp3 += amount;
+					rowsGrown--;
+				}
+			}
+			if(growthType == 3) {
+				while(rowsGrown > 0) {
+					rowsGrown--;
+					breastRows[0].breastRating += amount;
+					temp3 += amount;
+				}
+			}
+			//Breast Growth Finished...talk about changes.
+			if(display) {
+				if(growthType < 3) {
+					if(amount <= 2) {
+						if(breastRows.length > 1) outputText("Your rows of " + breastDescript(0) + " jiggle with added weight, growing a bit larger.", false); 
+						if(breastRows.length == 1) outputText("Your " + breastDescript(0) + " jiggle with added weight as they expand, growing a bit larger.", false);
+					}
+					if(amount > 2 && amount <= 4) {
+						if(breastRows.length > 1) outputText("You stagger as your chest gets much heavier.  Looking down, you watch with curiosity as your rows of " + breastDescript(0) + " expand significantly.", false);
+						if(breastRows.length == 1) outputText("You stagger as your chest gets much heavier.  Looking down, you watch with curiosity as your " + breastDescript(0) + " expand significantly.", false);
+					}
+					if(amount > 4) {
+						if(breastRows.length > 1) outputText("You drop to your knees from a massive change in your body's center of gravity.  Your " + breastDescript(0) + " tingle strongly, growing disturbingly large.", false);
+						if(breastRows.length == 1) outputText("You drop to your knees from a massive change in your center of gravity.  The tingling in your " + breastDescript(0) + " intensifies as they continue to grow at an obscene rate.", false);
+					}
+					if(biggestTitSize() >= 8.5 && nippleLength < 2) {
+						outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
+						nippleLength = 2;
+					}
+					if(biggestTitSize() >= 7 && nippleLength < 1) {
+						outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
+						nippleLength = 1;
+					}
+					if(biggestTitSize() >= 5 && nippleLength < .75) {
+						outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
+						nippleLength = .75;
+					}
+					if(biggestTitSize() >= 3 && nippleLength < .5) {
+						outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
+						nippleLength = .5;
+					}
+				}
+				else
+				{
+					if(amount <= 2) {
+						if(breastRows.length > 1) outputText("Your top row of " + breastDescript(0) + " jiggles with added weight as it expands, growing a bit larger.", false);
+						if(breastRows.length == 1) outputText("Your row of " + breastDescript(0) + " jiggles with added weight as it expands, growing a bit larger.", false);
+					}
+					if(amount > 2 && amount <= 4) {
+						if(breastRows.length > 1) outputText("You stagger as your chest gets much heavier.  Looking down, you watch with curiosity as your top row of " + breastDescript(0) + " expand significantly.", false);
+						if(breastRows.length == 1) outputText("You stagger as your chest gets much heavier.  Looking down, you watch with curiosity as your " + breastDescript(0) + " expand significantly.", false);
+					}
+					if(amount > 4) {
+						if(breastRows.length > 1) outputText("You drop to your knees from a massive change in your body's center of gravity.  Your top row of " + breastDescript(0) + " tingle strongly, growing disturbingly large.", false);
+						if(breastRows.length == 1) outputText("You drop to your knees from a massive change in your center of gravity.  The tinglng in your " + breastDescript(0) + " intensifies as they continue to grow at an obscene rate.", false);
+					}
+					if(biggestTitSize() >= 8.5 && nippleLength < 2) {
+						outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
+						nippleLength = 2;
+					}
+					if(biggestTitSize() >= 7 && nippleLength < 1) {
+						outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
+						nippleLength = 1;
+					}
+					if(biggestTitSize() >= 5 && nippleLength < .75) {
+						outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
+						nippleLength = .75;
+					}
+					if(biggestTitSize() >= 3 && nippleLength < .5) {
+						outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
+						nippleLength = .5;
+					}
+				}
+			}
 		}
 
 	}

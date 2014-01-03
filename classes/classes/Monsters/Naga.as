@@ -24,7 +24,7 @@
 			if(pcCameWorms){
 				outputText("\n\nThe naga's eyes go wide and she turns to leave, no longer interested in you.", false);
 				game.dynStats("lus=", 0);
-				game.doNext(game.cleanupAfterCombat);
+				doNext(game.cleanupAfterCombat);
 			} else {
 				game.nagaFUCKSJOOOOOO();
 			}

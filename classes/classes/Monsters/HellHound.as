@@ -50,7 +50,7 @@
 		{
 			if(pcCameWorms){
 				outputText("\n\nThe hellhound snorts and leaves you to your fate.", false);
-				game.doNext(game.cleanupAfterCombat);
+				doNext(game.cleanupAfterCombat);
 			} else {
 				game.eventParser(5069);
 			}

@@ -91,17 +91,36 @@
 		//include "../../includes/flagDefs.as";
 		include "../../includes/appearanceDefs.as";
 
-		public var testContent:TestContent = new TestContent();
+		// Named NPC Scenes (excluding dungeon bosses)
 		public var umasShop:UmasShop = new UmasShop();
 		public var akbalScene:AkbalScene = new AkbalScene();
 		public var amilyScene:AmilyScene = new AmilyScene();
+		public var ceraphScene:CeraphScene = new CeraphScene();
+		public var ceraphFollowerScene:CeraphFollowerScene = new CeraphFollowerScene();
+		// Nameless monster scenes
 		public var anemoneScene:AnemoneScene = new AnemoneScene();
 		public var basiliskScene:BasiliskScene = new BasiliskScene();
 		public var beeGirlScene:BeeGirlScene = new BeeGirlScene();
+		public var chameleonGirlScene:ChameleonGirlScene = new ChameleonGirlScene();
+		public var corruptedDriderScene:CorruptedDriderScene = new CorruptedDriderScene();
+		public var femaleSpiderMorphScene:FemaleSpiderMorphScene = new FemaleSpiderMorphScene();
+		public var gnollScene:GnollScene = new GnollScene();
+		public var gnollSpearThrowerScene:GnollSpearThrowerScene = new GnollSpearThrowerScene();
+		public var goblinScene:GoblinScene = new GoblinScene();
+		public var gooGirlScene:GooGirlScene = new GooGirlScene();
+		public var impScene:ImpScene = new ImpScene();
+		public var maleSpiderMorphScene:MaleSpiderMorphScene = new MaleSpiderMorphScene();
+		// Factory scenes
+		// Desert cave scenes
+		// Zetaz lair scenes
+		// Harpy Dungeon scenes
 		public var brigidScene:BrigidScene = new BrigidScene();
-		public var ceraphScene:CeraphScene = new CeraphScene();
-		public var ceraphFollowerScene:CeraphFollowerScene = new CeraphFollowerScene();
-		
+		// Exploration scenes
+		// Tel'Adre scenes
+		// Bazaar scenes
+		// Other scenes
+		public var testContent:TestContent = new TestContent();
+
 		include "../../includes/ants.as";
 		include "../../includes/april_fools.as";
 		include "../../includes/arian.as";
@@ -112,11 +131,9 @@
 		include "../../includes/brooke.as";
 		include "../../includes/bunbun.as";
 		include "../../includes/camp.as";
-		include "../../includes/chameleons.as";
 		include "../../includes/cinnabar.as";
 		include "../../includes/cotton.as";
 		include "../../includes/dreams.as";
-		include "../../includes/drider.as";
 		include "../../includes/dungeon2Supplimental.as";
 		include "../../includes/dungeonCore.as";
 		include "../../includes/dungeonEvents.as";
@@ -136,10 +153,6 @@
 		include "../../includes/fuckingTree.as";
 		include "../../includes/gangbangVillage.as";
 		include "../../includes/gargoyle.as";
-		include "../../includes/gnoll.as";
-		include "../../includes/gnoll_alternate.as";
-		include "../../includes/goblin.as";
-		include "../../includes/gooGirl.as";
 		include "../../includes/harpy.as";
 		include "../../includes/harpySophie.as";
 		include "../../includes/harpySophieBimbo.as";
@@ -150,7 +163,6 @@
 		include "../../includes/hellhound.as";
 		include "../../includes/hellhoundInfested.as";
 		include "../../includes/ifris.as";
-		include "../../includes/imp.as";
 		include "../../includes/isabella.as";
 		include "../../includes/isabellaFollower.as";
 		include "../../includes/items.as";
@@ -202,8 +214,6 @@
 		include "../../includes/sheila.as";
 		include "../../includes/shouldra.as";
 		include "../../includes/shouldraFollower.as";
-		include "../../includes/spiderMorph.as";
-		include "../../includes/spiderMorphMale.as";
 		include "../../includes/swordInStone.as";
 		include "../../includes/symGear.as";
 		include "../../includes/tamani.as";

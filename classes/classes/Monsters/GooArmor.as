@@ -25,7 +25,7 @@ package classes.Monsters
 		{
 			if (pcCameWorms){
 				outputText("\n\nThe armored goo sighs while you exhaust yourself...");
-				game.doNext(game.endLustLoss);
+				doNext(game.endLustLoss);
 			} else {
 				if(hasStatusAffect("spar") >= 0) game.pcWinsValeriaSparDefeat();
 				else game.gooArmorBeatsUpPC();

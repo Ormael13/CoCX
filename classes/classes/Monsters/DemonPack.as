@@ -31,7 +31,7 @@
 				outputText("The demons stop attacking, and reach out to touch your body. Some are already masturbating like it's the only thing in the world and you know that right now, if you wanted to, you could make each and every one of them fuck you.");
 			}
 			if(hasStatusAffect("phyllafight") >= 0) {
-				game.doNext(game.consolePhylla);
+				doNext(game.consolePhylla);
 			} else if (hpVictory){
 				game.cleanupAfterCombat();
 			} else {
@@ -51,7 +51,7 @@
 				game.cleanupAfterCombat();
 			} else if (hpVictory){
 				outputText("The demons finally beat you down and you collapse onto the sand of the oasis. Almost immediately you feel demonic hands pressing and probing your prone form. You hear the leader of the group say something in a strange tongue but you have a feeling you know what it means. The demons dive onto your inert body with intent and begin to press themselves against you...", true);
-				game.doNext(5048);
+				doNext(5048);
 			} else {
 				outputText("You struggle to keep your mind on the fight and fail to do so. ", true);
 				if (pcCameWorms){
@@ -68,7 +68,7 @@
 					outputText(game.vaginaDescript(0) + " burns ", false);
 				}
 				outputText("with arousal.  You make a grab for the nearest demon and catch a handful of jiggly breast. You try desperately to use your other arm to pull her closer to slake your thirst but you both go tumbling to the ground. The demonic leader laughs out loud and the rest of the tribe falls on you, grabbing for anything it can find.", false);
-				game.doNext(5048);
+				doNext(5048);
 			}
 		}
 

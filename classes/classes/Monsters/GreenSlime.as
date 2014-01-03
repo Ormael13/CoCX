@@ -44,9 +44,9 @@
 		{
 			if(pcCameWorms){
 				outputText("\n\nThe slime doesn't even seem to notice.\n\n", false);
-				game.doNext(5042);
+				doNext(5042);
 			} else {
-				game.doNext(5042);
+				doNext(5042);
 			}
 		}
 

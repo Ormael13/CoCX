@@ -58,7 +58,7 @@ package classes.Monsters
 				game.sparWithFriendlyKihaLose();
 			else if (pcCameWorms){
 				outputText("\n\nKiha seems visibly disturbed by your infection, enough that she turns to leave.");
-				game.doNext(game.endLustLoss);
+				doNext(game.endLustLoss);
 			} else {
 				game.kihaLossIntro();
 			}

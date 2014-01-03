@@ -37,7 +37,7 @@
 		{
 			if (pcCameWorms){
 				outputText("\n\nThe infested hellhound's heads both grin happily as it advances towards you...", false);
-				game.doNext(5108);
+				doNext(5108);
 			} else if (hpVictory){
 				game.eventParser(5108);
 			} else {

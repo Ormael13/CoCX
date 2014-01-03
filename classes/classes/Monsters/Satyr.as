@@ -29,7 +29,7 @@ package classes.Monsters
 		{
 			if (pcCameWorms) {
 				outputText("\n\nThe satyr laughs heartily at your eagerness...");
-				game.doNext(game.endLustLoss);
+				doNext(game.endLustLoss);
 			} else {
 				game.loseToSatyr();
 			}

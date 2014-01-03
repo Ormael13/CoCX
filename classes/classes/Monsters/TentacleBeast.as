@@ -53,7 +53,7 @@
 					outputText("...but an insistent voice rouses you from your stupor.  You manage to run into a nearby tunnel.  ");
 					game.phyllaTentaclePCLoss();
 				} else
-					game.doNext(5074);
+					doNext(5074);
 			}
 		}
 

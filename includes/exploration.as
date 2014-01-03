@@ -12,7 +12,7 @@ public function doExplore():void {
 	var deepwoods:Number = 0;
 	var plains:Number = 0;
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272] > 0) swamp = 111;
-	if(player.hasStatusAffect("exploredDeepwoods") >= 0) deepwoods = 80
+	if(player.hasStatusAffect("exploredDeepwoods") >= 0) deepwoods = 80;
 	if(player.exploredMountain > 0) mountain = 6;
 	if(player.exploredForest > 0) forest = 4;
 	
@@ -142,7 +142,7 @@ public function tryDiscover():void {
 			//Imptacular Encounter
 			if(rand(10) < impGob) {
 				if(player.level >= 8 && rand(2) == 0) {
-					impLordEncounter();
+					impScene.impLordEncounter();
 					spriteSelect(29);
 					return;
 				}
@@ -235,7 +235,6 @@ public function exploreDeepwoods():void {
 		if(player.gender > 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00247] = 0;
 		//Tentacle avoidance chance due to dangerous plants
 		if(player.hasKeyItem("Dangerous Plants") >= 0 && player.inte/2 > rand(50)) {
-			temp == rand(3) + 1;
 			trace("TENTACLE'S AVOIDED DUE TO BOOK!");
 			outputText("Using the knowledge contained in your 'Dangerous Plants' book, you determine a tentacle beast's lair is nearby, do you continue?  If not you could return to camp.\n\n", true);
 			simpleChoices("Continue",2009,"",0,"",0,"",0,"Leave", 13);
@@ -300,12 +299,10 @@ public function exploreDeepwoods():void {
 	}
 	if(chooser == 3) {
 		akbalScene.supahAkabalEdition();
-		return;
 	}
 	else if(chooser == 4) {
 		if(rand(3) == 0) kitsuneShrine();
 		else enterTheTrickster();
-		return;
 	}
 }
 
@@ -390,7 +387,7 @@ public function exploreForest():void {
 		//Imptacular Encounter
 		if(rand(10) < impGob) {
 			if(player.level >= 8 && rand(2) == 0) {
-				impLordEncounter();
+				impScene.impLordEncounter();
 			}
 			else {
 				outputText("An imp leaps out of the bushes and attacks!", true);
@@ -493,7 +490,6 @@ public function exploreForest():void {
 		if(temp == 0) {
 			//Tentacle avoidance chance due to dangerous plants
 			if(player.hasKeyItem("Dangerous Plants") >= 0 && player.inte/2 > rand(50)) {
-				temp == rand(3) + 1;
 				trace("TENTACLE'S AVOIDED DUE TO BOOK!");
 				outputText("Using the knowledge contained in your 'Dangerous Plants' book, you determine a tentacle beast's lair is nearby, do you continue?  If not you could return to camp.\n\n", false);
 				simpleChoices("Continue",2009,"",0,"",0,"",0,"Leave", 13);
@@ -656,9 +652,9 @@ public function exploreDesert():void {
 		bigJunkDesertScene();
 		return;
 	}
-	var choices:Array = new Array();
+	var choices:Array = [];
 	//-8008 is cheating for "no arg"
-	var args:Array = new Array();
+	var args:Array = [];
 
 	//Encounter Sandwitch
 	if(flags[kFLAGS.SAND_WITCH_LEAVE_ME_ALONE] == 0) {
@@ -701,7 +697,6 @@ public function mirageDesert():void {
 	outputText("While exploring the desert, you see a shimmering tower in the distance.  As you rush towards it, it vanishes completely.  It was a mirage!   You sigh, depressed at wasting your time.", true);
 	dynStats("lus", -15);
 	doNext(13);
-	return;
 }
 public function walkingDesertStatBoost():void {
 	clearOutput();
@@ -797,7 +792,6 @@ public function exploreHighMountain():void {
 			outputText("A harpy wings out of the sky and attacks!", true);
 			startCombat(new Harpy());
 			spriteSelect(26);
-			return;
 		}
 		else {
 			if(flags[kFLAGS.MET_SOPHIE_COUNTER] == 0) meetSophie();
@@ -906,7 +900,7 @@ public function exploreMountain():void {
 		//Imptacular Encounter
 		if(rand(10) < impGob) {
 			if(player.level >= 8 && rand(2) == 0) {
-				impLordEncounter();
+				impScene.impLordEncounter();
 			}
 			else {
 				outputText("An imp leaps out from behind a rock and attacks!", true);
@@ -1055,7 +1049,6 @@ public function exploreMountain():void {
 	//Hairdresser
 	if(chooser == 4) {
 		hairDresser();
-		return;
 	}
 }
 //Explore Lake
@@ -1082,7 +1075,7 @@ public function exploreLake():void {
 	}
 	//Did it already output something?
 	var displayed:Boolean = false;
-	var choice:Array = new Array();
+	var choice:Array = [];
 	var select:int = 0;
 	
 	//Build choice list.
@@ -1139,34 +1132,30 @@ public function exploreLake():void {
 	//Pre-emptive chance of discovering the Beautiful Sword
 	else if(select == 10) {
 		findSwordInStone();		
-		return;
 	}
 	//Pre-emptive chance of finding the boat
 	else if(select == 11) {
 		discoverBoat();
-		return;
 	}
 	//Meet Izma every 8 attempts
 	else if(select == 5) {
 		meetIzmaAtLake();
-		return;
 	}
 	//Chance of dick-dragging! 10% + 10% per two foot up to 30%
 	else if(select == 8) {
 		//True sets to use lake scene!
 		bigJunkForestScene(true);
-		return;
 	}
 	else if(select == 4){
 		//Chance of seeing ooze convert goo!
 		//More common if factory blew up
 		if(player.hasStatusAffect("FactoryOverload") >= 0 && rand(10) == 0) {
-			spyOnGooAndOozeSex();
+			gooGirlScene.spyOnGooAndOozeSex();
 			return;
 		}
 		//Else pretty rare.
 		else if(rand(25) == 0) {
-			spyOnGooAndOozeSex();
+			gooGirlScene.spyOnGooAndOozeSex();
 			return;
 		}
 		var girlOdds:Number = 50;
@@ -1177,8 +1166,7 @@ public function exploreLake():void {
 			girlOdds -= 25;
 		//Slimegirl!
 		if(rand(100) <= girlOdds) {
-			encounterGooGirl();
-			return;
+			gooGirlScene.encounterGooGirl();
 		}
 		//OOZE!
 		else {
@@ -1212,7 +1200,6 @@ public function exploreLake():void {
 			if(player.hasStatusAffect("DungeonShutDown") >= 0 && player.hasStatusAffect("FactoryOverload") < 0) outputText("\n\n<b>You are amazed to encounter a slime creature with the factory shut down - most of them have disappeared.</b>", false);
 			dynStats("lib", 1, "lus", 10);
 			startCombat(new GreenSlime());
-			return;
 		}
 	}
 	else if(select == 0) {
@@ -1253,17 +1240,16 @@ public function exploreLake():void {
 		{
 			if(rand(2) == 0) {
 				outputText("You find a long and oddly flared vial half-buried in the sand.  Written across the middle band of the vial is a single word: 'Equinum'.\n", true);
-				shortName = "Equinum"
+				shortName = "Equinum";
 				menuLoc = 2;
 				eventParser(1001);
 			}
 			else {
 				outputText("You find an odd, fruit-bearing tree growing near the lake shore.  One of the fruits has fallen on the ground in front of you.  You pick it up.\n", true);
-				shortName = "W.Fruit"
+				shortName = "W.Fruit";
 				menuLoc = 2;
 				eventParser(1001);
 			}
-			return;
 		}
 		//Find Whitney
 		else {
@@ -1274,17 +1260,16 @@ public function exploreLake():void {
 					//If so, find equinum or whisker fruit
 					if(rand(2) == 0) {
 						outputText("You find a long and oddly flared vial half-buried in the sand.   Written across the middle band of the vial is a single word, 'Equinum'.\n", true);
-						shortName = "Equinum"
+						shortName = "Equinum";
 						menuLoc = 2;
 						eventParser(1001);
 					}
 					else {
 						outputText("You find an odd, fruit-bearing tree growing near the lake shore.  One of the fruits has fallen on the ground in front of you.  You pick it up.\n", true);
-						shortName = "W.Fruit"
+						shortName = "W.Fruit";
 						menuLoc = 2;
 						eventParser(1001);
 					}
-					return;
 				}
 				//If you havent met whitney enough to know the farm....
 				else farmExploreEncounter();
@@ -1387,7 +1372,7 @@ public function exploreBog():void {
 		return;
 	}
 	if(player.buttPregnancyIncubation == 0 && rand(3) == 0) findTheFrogGirl();
-	else if(rand(2) == 0) encounterChameleon();
+	else if(rand(2) == 0) chameleonGirlScene.encounterChameleon();
 	else {
 		clearOutput();
 		outputText("You wander around through the humid muck, but you don't run into anything interesting.");
@@ -1419,7 +1404,7 @@ public function exploreSwamp():void {
 		return;
 	}
 	/*  STANDARD SCENE SELECTION  */
-	var choices:Array = new Array();
+	var choices:Array = [];
 	//Build the choice array
 	//M & F spidermorphs
 	choices[choices.length] = 0;
@@ -1436,13 +1421,13 @@ public function exploreSwamp():void {
 	var choice:Number = choices[rand(choices.length)];
 	switch(choice) {
 		case 0:
-			fSpiderMorphGreeting();
-			break
+			femaleSpiderMorphScene.fSpiderMorphGreeting();
+			break;
 		case 1:
-			greetMaleSpiderMorph();
+			maleSpiderMorphScene.greetMaleSpiderMorph();
 			break;
 		case 2:
-			driderEncounter();
+			corruptedDriderScene.driderEncounter();
 			break;
 		case 3:
 			encounterRogarSwamp();
@@ -1511,13 +1496,10 @@ public function explorePlains():void {
 		}
 	}
 	
-	var choices:Array = new Array();
-	choices[choices.length] = plainsLoot;
-	choices[choices.length] = plainsLoot;
-	choices[choices.length] = gnoll2Encounter;
-	choices[choices.length] = gnollEncounter;
-	choices[choices.length] = bunnbunbunMeet;
-	choices[choices.length] = bunnbunbunMeet;
+	var choices:Array = [plainsLoot,plainsLoot,
+		gnollSpearThrowerScene.gnoll2Encounter,
+		gnollScene.gnollEncounter,
+		bunnbunbunMeet,bunnbunbunMeet];
 	
 	if(flags[kFLAGS.ISABELLA_PLAINS_DISABLED] == 0) {
 		choices[choices.length] = isabellaGreeting;

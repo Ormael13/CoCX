@@ -22,6 +22,16 @@
 			
 		}
 
+		protected function inCombat():Boolean
+		{
+			return kGAMECLASS.inCombat();
+		}
+
+		protected function statScreenRefresh():void
+		{
+			kGAMECLASS.statScreenRefresh();
+		}
+
 		protected function cleanupAfterCombat():void
 		{
 			kGAMECLASS.cleanupAfterCombat();

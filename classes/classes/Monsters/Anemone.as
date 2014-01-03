@@ -72,7 +72,7 @@ package classes.Monsters
 		{
 			if(pcCameWorms){
 				outputText("\n\nYour foe doesn't seem to mind at all...");
-				game.doNext(game.endLustLoss);
+				doNext(game.endLustLoss);
 			} else {
 				game.anemoneScene.loseToAnemone();
 			}

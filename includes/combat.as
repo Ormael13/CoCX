@@ -106,1178 +106,1140 @@ public function doCombat(eventNum:Number):void
 	var tempText:String = "";
 	var attacks:Number = 5012;
 	var pSpecials:int = 5161;
-	
+
 	if(eventNum == 5000) {
-		flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 0;
-		mainView.hideMenuButton( MainView.MENU_DATA );
-		mainView.hideMenuButton( MainView.MENU_APPEARANCE );
-		mainView.hideMenuButton( MainView.MENU_PERKS );
-		mainView.setButton( 0, "Attack" );
-		var waitT:String = "Wait";
-		if(monster.hasStatusAffect("level") >= 0) waitT = "Climb";
-		outputText("", true);
-		hideUpDown();
-		//Update Combat Statuses
-		if(menuLoc != 3 && menuLoc != 1) combatStatusesUpdate();
-		//Enemy name, description, and status
-		display();
-		statScreenRefresh();
-		menuLoc = 0;
-		if(combatRoundOver()) return;
-		temp2 = magicMenu;
-		if(player.hasStatusAffect("Throat Punch") >= 0) temp2 = 0;
-		if(player.hasStatusAffect("Web-Silence") >= 0) temp2 = 0;
-		if(player.hasStatusAffect("GooArmorSilence") >= 0) temp2 = 0;
-		
-		if(player.hasStatusAffect("Attack Disabled") >= 0) {
-			outputText("\n<b>Chained up as you are, you can't manage any real physical attacks!</b>");
-			attacks = 0;
-		}
-		if(player.hasStatusAffect("Physical Disabled") >= 0) {
-			outputText("<b>  Even physical special attacks are out of the question.</b>");
-			pSpecials = 0;
-		}
-		else if(player.hasStatusAffect("Isabella Stunned") >= 0) {
-			outputText("\n<b>You're too stunned to attack!</b>  All you can do is wait and try to recover!", false);
-			simpleChoices("Recover",5071,"",0,"",0,"",0,"",0);
-		}
-		else if(player.hasStatusAffect("Stunned") >= 0) {
-			outputText("\n<b>You're too stunned to attack!</b>  All you can do is wait and try to recover!", false);
-			simpleChoices("Recover",5071,"",0,"",0,"",0,"",0);
-		}
-		else if(player.hasStatusAffect("Whispered") >= 0) {
-			outputText("\n<b>Your mind is too addled to focus on combat!</b>  All you can do is try and recover!");
-			simpleChoices("Recover",5071,"",0,"",0,"",0,"",0);
-		}
-		else if(player.hasStatusAffect("Confusion") >= 0) {
-			outputText("\nYou're too confused about who you are to try to attack!");
-			simpleChoices("Recover",5071,"",0,"",0,"",0,"",0);
-		}
-		else {
-			if(player.hasStatusAffect("HarpyBind") >= 0 || player.hasStatusAffect("GooBind") >= 0 || player.hasStatusAffect("TentacleBind") >= 0 || player.hasStatusAffect("Naga Bind") >= 0 || monster.hasStatusAffect("QueenBind") >= 0 || monster.hasStatusAffect("PCTailTangle") >= 0) {
-				choices("Struggle", 5077,"",0,"",0,"",0,"",0,"Wait",5071,"",0,"",0,"",0,"",0);
-			} else if(player.hasStatusAffect("Holli Constrict") >= 0) {
-				choices("Struggle", 5077,"",0,"",0,"",0,"",0,"Wait",5071,"",0,"",0,"",0,"",0);
-			} else if(monster.hasStatusAffect("Constricted") >= 0) {
-				simpleChoices("Squeeze", 5119,"Tease",5120,"",0,"",0,"Release",5121);
-			} else if(player.hasStatusAffect("Bound") >= 0) {
-				simpleChoices("Struggle",(monster as Ceraph).ceraphBindingStruggle,"Wait",(monster as Ceraph).ceraphBoundWait,"",0,"",0,"",0);
-			} else if(player.hasStatusAffect("GooArmorBind") >= 0) {
-				choices("Struggle", 5077,"",0,"",0,"",0,"",0,"Wait",5071,"",0,"",0,"",0,"",0);
-			} else if(monster.hasStatusAffect("Minotaur Entangled") >= 0) {
-				outputText("\n<b>You're bound up in the minotaur lord's chains!  All you can do is try to struggle free!</b>");
-				choices("Struggle", 5077,"",0,"",0,"",0,"",0,"Wait",5071,"",0,"",0,"",0,"",0);
-			} else if(player.hasStatusAffect("UBERWEB") >= 0) {
-				choices("Struggle", 5077, tempText, 0, "Spells", 0, "Items", 0, "Run", 0, "P. Specials",0,"M. Specials",5160,"Wait",0,"Fantasize",0,"",0);				
+			flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 0;
+			mainView.hideMenuButton(MainView.MENU_DATA);
+			mainView.hideMenuButton(MainView.MENU_APPEARANCE);
+			mainView.hideMenuButton(MainView.MENU_PERKS);
+			mainView.setButton(0, "Attack");
+			var waitT:String = "Wait";
+			if (monster.hasStatusAffect("level") >= 0) waitT = "Climb";
+			outputText("", true);
+			hideUpDown();
+			//Update Combat Statuses
+			if (menuLoc != 3 && menuLoc != 1) combatStatusesUpdate();
+			//Enemy name, description, and status
+			display();
+			statScreenRefresh();
+			menuLoc = 0;
+			if (combatRoundOver()) return;
+			temp2 = magicMenu;
+			if (player.hasStatusAffect("Throat Punch") >= 0) temp2 = 0;
+			if (player.hasStatusAffect("Web-Silence") >= 0) temp2 = 0;
+			if (player.hasStatusAffect("GooArmorSilence") >= 0) temp2 = 0;
+
+			if (player.hasStatusAffect("Attack Disabled") >= 0) {
+				outputText("\n<b>Chained up as you are, you can't manage any real physical attacks!</b>");
+				attacks = 0;
 			}
-			//REGULAR MENU
+			if (player.hasStatusAffect("Physical Disabled") >= 0) {
+				outputText("<b>  Even physical special attacks are out of the question.</b>");
+				pSpecials = 0;
+			}
+			else if (player.hasStatusAffect("Isabella Stunned") >= 0) {
+				outputText("\n<b>You're too stunned to attack!</b>  All you can do is wait and try to recover!", false);
+				simpleChoices("Recover", 5071, "", 0, "", 0, "", 0, "", 0);
+			}
+			else if (player.hasStatusAffect("Stunned") >= 0) {
+				outputText("\n<b>You're too stunned to attack!</b>  All you can do is wait and try to recover!", false);
+				simpleChoices("Recover", 5071, "", 0, "", 0, "", 0, "", 0);
+			}
+			else if (player.hasStatusAffect("Whispered") >= 0) {
+				outputText("\n<b>Your mind is too addled to focus on combat!</b>  All you can do is try and recover!");
+				simpleChoices("Recover", 5071, "", 0, "", 0, "", 0, "", 0);
+			}
+			else if (player.hasStatusAffect("Confusion") >= 0) {
+				outputText("\nYou're too confused about who you are to try to attack!");
+				simpleChoices("Recover", 5071, "", 0, "", 0, "", 0, "", 0);
+			}
 			else {
-				//Tease text should change based on perks!
-				choices("Attack", attacks, "Tease", 5005, "Spells", temp2, "Items", 1000, "Run", runAway, "P. Specials",pSpecials,"M. Specials",5160,waitT,5071,"Fantasize",5086,"Inspect",debug?5166:0);
+				if (player.hasStatusAffect("HarpyBind") >= 0 || player.hasStatusAffect("GooBind") >= 0 || player.hasStatusAffect("TentacleBind") >= 0 || player.hasStatusAffect("Naga Bind") >= 0 || monster.hasStatusAffect("QueenBind") >= 0 || monster.hasStatusAffect("PCTailTangle") >= 0) {
+					choices("Struggle", 5077, "", 0, "", 0, "", 0, "", 0, "Wait", 5071, "", 0, "", 0, "", 0, "", 0);
+				} else if (player.hasStatusAffect("Holli Constrict") >= 0) {
+					choices("Struggle", 5077, "", 0, "", 0, "", 0, "", 0, "Wait", 5071, "", 0, "", 0, "", 0, "", 0);
+				} else if (monster.hasStatusAffect("Constricted") >= 0) {
+					simpleChoices("Squeeze", 5119, "Tease", 5120, "", 0, "", 0, "Release", 5121);
+				} else if (player.hasStatusAffect("Bound") >= 0) {
+					simpleChoices("Struggle", (monster as Ceraph).ceraphBindingStruggle, "Wait", (monster as Ceraph).ceraphBoundWait, "", 0, "", 0, "", 0);
+				} else if (player.hasStatusAffect("GooArmorBind") >= 0) {
+					choices("Struggle", 5077, "", 0, "", 0, "", 0, "", 0, "Wait", 5071, "", 0, "", 0, "", 0, "", 0);
+				} else if (monster.hasStatusAffect("Minotaur Entangled") >= 0) {
+					outputText("\n<b>You're bound up in the minotaur lord's chains!  All you can do is try to struggle free!</b>");
+					choices("Struggle", 5077, "", 0, "", 0, "", 0, "", 0, "Wait", 5071, "", 0, "", 0, "", 0, "", 0);
+				} else if (player.hasStatusAffect("UBERWEB") >= 0) {
+					choices("Struggle", 5077, tempText, 0, "Spells", 0, "Items", 0, "Run", 0, "P. Specials", 0, "M. Specials", 5160, "Wait", 0, "Fantasize", 0, "", 0);
+				}
+				//REGULAR MENU
+				else {
+					//Tease text should change based on perks!
+					choices("Attack", attacks, "Tease", 5005, "Spells", temp2, "Items", 1000, "Run", runAway, "P. Specials", pSpecials, "M. Specials", 5160, waitT, 5071, "Fantasize", 5086, "Inspect", debug ? 5166 : 0);
+				}
 			}
-		}
 	}
-	//Special Menu
+			//Special Menu
 	if(eventNum == 5001) {
-		menuLoc = 3;
-		//Reset holding variables for special attacks
-		temp = 0;
-		temp2 = 0;
-		temp3 = 0;
-		temp4 = 0;
-		temp5 = 0;
-		var temp6:Number = 0;
-		var temp7:Number = 0;
-		var temp8:Number = 0;
-		var button3Text:String = "Constrict";
-		var button1Text:String = "Bite";
-		//Sting attack if bee butt
-		var buttText:String = "Sting";
-		if(player.tailType == TAIL_TYPE_BEE_ABDOMEN) temp = 5037;
-		if(player.tailType == TAIL_TYPE_SPIDER_ADBOMEN) {
-			temp = 5156;
-			buttText = "Web";
-		}
-		if(player.tailType == TAIL_TYPE_RACCOON || player.tailType == TAIL_TYPE_SHARK || player.tailType == TAIL_TYPE_LIZARD || player.tailType == TAIL_TYPE_DRACONIC || player.tailType == TAIL_TYPE_KANGAROO) {
-			temp = 5165;
-			buttText = "Tail Whip";
-		}
-		//Gore if mino horns
-		if(player.hornType == HORNS_COW_MINOTAUR && player.horns >= 6) temp2 = 5038;
-		//Infest if infested
-		if(player.hasStatusAffect("infested") >= 0 && player.hasCock()) {
-			if(player.statusAffects[player.hasStatusAffect("infested")].value1 == 5) {
-				temp3 = 5060;
+			menuLoc = 3;
+			//Reset holding variables for special attacks
+			temp = 0;
+			temp2 = 0;
+			temp3 = 0;
+			temp4 = 0;
+			temp5 = 0;
+			var temp6:Number = 0;
+			var temp7:Number = 0;
+			var temp8:Number = 0;
+			var button3Text:String = "Constrict";
+			var button1Text:String = "Bite";
+			//Sting attack if bee butt
+			var buttText:String = "Sting";
+			if (player.tailType == TAIL_TYPE_BEE_ABDOMEN) temp = 5037;
+			if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN) {
+				temp = 5156;
+				buttText = "Web";
 			}
-		}
-		//Bow attack
-		if(player.hasKeyItem("Bow") >= 0) {
-			temp4 = 5079;
-		}
-		//Bitez
-		if(player.faceType == FACE_SHARK_TEETH) temp5 = 5102;
-		if(player.faceType == FACE_SNAKE_FANGS) temp5 = 5117;
-		if(player.faceType == FACE_SPIDER_FANGS) temp5 = 5157;
-		//Kiss supercedes bite.
-		if(player.hasStatusAffect("Lust Stick Applied") >= 0) {
-			temp5 = 5158;
-			button1Text = "Kiss";
-		}
-		//Constrict
-		if(player.lowerBody == LOWER_BODY_TYPE_NAGA) temp6 = 5118;
-		//Kick attackuuuu
-		else if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR || player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_BUNNY || player.lowerBody == LOWER_BODY_TYPE_KANGAROO) {
-			temp6 = 5150;
-			button3Text = "Kick";
-		}
-		//Akbal shit
-		//fireballlz
-		var fireballs:int = 0;
-		if(player.hasPerk("Fire Lord") >= 0) {
-			fireballs++;
-			temp7 = 5123;
-		}
-		if(player.hasPerk("Hellfire") >= 0) {
-			fireballs++;
-			temp7 = 5143;
-		}
-		if(player.hasPerk("Dragonfire") >= 0) {
-			fireballs++;
-			temp7 = 5164;
-		}
-		if(fireballs > 1) temp7 = 5144;
-		if(player.hasPerk("Whispered") >= 0) temp8 = 5124;
-		choices(button1Text,temp5,"Bow",temp4,button3Text,temp6,"Firebreath",temp7,"Gore",temp2,"Infest", temp3,buttText,temp, tempText, 5005, "Whisper",temp8,"Back",5000);
+			if (player.tailType == TAIL_TYPE_RACCOON || player.tailType == TAIL_TYPE_SHARK || player.tailType == TAIL_TYPE_LIZARD || player.tailType == TAIL_TYPE_DRACONIC || player.tailType == TAIL_TYPE_KANGAROO) {
+				temp = 5165;
+				buttText = "Tail Whip";
+			}
+			//Gore if mino horns
+			if (player.hornType == HORNS_COW_MINOTAUR && player.horns >= 6) temp2 = 5038;
+			//Infest if infested
+			if (player.hasStatusAffect("infested") >= 0 && player.hasCock()) {
+				if (player.statusAffects[player.hasStatusAffect("infested")].value1 == 5) {
+					temp3 = 5060;
+				}
+			}
+			//Bow attack
+			if (player.hasKeyItem("Bow") >= 0) {
+				temp4 = 5079;
+			}
+			//Bitez
+			if (player.faceType == FACE_SHARK_TEETH) temp5 = 5102;
+			if (player.faceType == FACE_SNAKE_FANGS) temp5 = 5117;
+			if (player.faceType == FACE_SPIDER_FANGS) temp5 = 5157;
+			//Kiss supercedes bite.
+			if (player.hasStatusAffect("Lust Stick Applied") >= 0) {
+				temp5 = 5158;
+				button1Text = "Kiss";
+			}
+			//Constrict
+			if (player.lowerBody == LOWER_BODY_TYPE_NAGA) temp6 = 5118;
+			//Kick attackuuuu
+			else if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR || player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_BUNNY || player.lowerBody == LOWER_BODY_TYPE_KANGAROO) {
+				temp6 = 5150;
+				button3Text = "Kick";
+			}
+			//Akbal shit
+			//fireballlz
+			var fireballs:int = 0;
+			if (player.hasPerk("Fire Lord") >= 0) {
+				fireballs++;
+				temp7 = 5123;
+			}
+			if (player.hasPerk("Hellfire") >= 0) {
+				fireballs++;
+				temp7 = 5143;
+			}
+			if (player.hasPerk("Dragonfire") >= 0) {
+				fireballs++;
+				temp7 = 5164;
+			}
+			if (fireballs > 1) temp7 = 5144;
+			if (player.hasPerk("Whispered") >= 0) temp8 = 5124;
+			choices(button1Text, temp5, "Bow", temp4, button3Text, temp6, "Firebreath", temp7, "Gore", temp2, "Infest", temp3, buttText, temp, tempText, 5005, "Whisper", temp8, "Back", 5000);
 	}
-	//Defend
+			//Defend
 	//if(eventNum == 5004) {
 	//}
-	//Tease - fail, or 5-20 enemy lust.
+			//Tease - fail, or 5-20 enemy lust.
 	if(eventNum == 5005) {
-		if(monster.lustVuln == 0) {
-			outputText("You try to tease " + monster.a + monster.short + " with your body, but it doesn't have any effect on " + monster.pronoun2 + ".\n\n", true);
-			enemyAI();
+			if (monster.lustVuln == 0) {
+				outputText("You try to tease " + monster.a + monster.short + " with your body, but it doesn't have any effect on " + monster.pronoun2 + ".\n\n", true);
+				enemyAI();
+				return;
+			}
+			//Worms are immune!
+			if (monster.short == "worms") {
+				outputText("Thinking to take advantage of its humanoid form, you wave your cock and slap your ass in a rather lewd manner. However, the creature fails to react to your suggestive actions.\n\n", true);
+				enemyAI();
+				return;
+			}
+			tease();
+			if (!combatRoundOver()) enemyAI();
 			return;
-		}
-		//Worms are immune!
-		if(monster.short == "worms") {
-			outputText("Thinking to take advantage of its humanoid form, you wave your cock and slap your ass in a rather lewd manner. However, the creature fails to react to your suggestive actions.\n\n", true);
-			enemyAI();
-			return;
-		}
-		tease();
-		if(!combatRoundOver()) enemyAI();
-		return;
 	}
-	//Initiate Grapple 
+			//Initiate Grapple
 	//if(eventNum == 5006) {
 	//}
-	//Attack
+			//Attack
 	if(eventNum == 5012) {
-		outputText("", true);
-		attack();
+			outputText("", true);
+			attack();
 	}
-	//FUCK
+			//FUCK
 	if(eventNum == 5013) {
-		
+
 	}
-	//Oral
+			//Oral
 	if(eventNum == 5014) {
-		
+
 	}
-	//Handjob
+			//Handjob
 	if(eventNum == 5015) {
-		
+
 	}
-	//Run from Grapple
+			//Run from Grapple
 	if(eventNum == 5016) {
-		
-	}
-	//Lost to imp, get raaaaeeeped
-	if(eventNum == 5017) {
-		impRapesYou();
-	}
-	//You win via lust.  RAEEEEEP IMP
-	if(eventNum == 5018) {
-		rapeImpWithDick();
+
 	}
 	//Imp lust magic lust attack
 	if(eventNum == 5019) {
-		outputText("You see " + monster.a + monster.short + " make sudden arcane gestures at you!\n\n", false);
-		dynStats("lus", player.lib/10+player.cor/10+10);
-		if(player.lust < 30) outputText("You feel strangely warm.  ", false);
-		if(player.lust >= 30 && player.lust < 60) outputText("Blood rushes to your groin as a surge of arousal hits you, making your knees weak.  ", false);
-		if(player.lust >= 60) outputText("Images of yourself fellating and fucking the imp assault your mind, unnaturally arousing you.  ", false);
-		if(player.cocks.length > 0) {
-			if(player.lust >= 60 && player.cocks.length > 0) outputText("You feel your " + multiCockDescriptLight() + " dribble pre-cum.", false);
-			if(player.lust >= 30 && player.lust < 60 && player.cocks.length == 1) outputText("Your " + cockDescript(0) + " hardens, distracting you further.", false);
-			if(player.lust >= 30 && player.lust < 60 && player.cocks.length > 1) outputText("Your " + multiCockDescriptLight() + " harden uncomfortably.", false);
-			if(player.hasVagina()) outputText("  ", false);
-		}
-		if(player.vaginas.length > 0) {
-			if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL && player.vaginas.length == 1) outputText("Your " + allVaginaDescript() + " dampens perceptibly.", false);
-			if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL && player.vaginas.length > 1) outputText("Your " + allVaginaDescript() + " dampen perceptibly.", false);
-			if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET && player.vaginas.length > 0) outputText("Your crotch becomes sticky with girl-lust.", false);
-			if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK && player.vaginas.length == 1) outputText("Your " + allVaginaDescript() + " becomes sloppy and wet.", false);
-			if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK && player.vaginas.length > 1) outputText("Your " + allVaginaDescript() + " become sloppy and wet.", false);
-			if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING && player.vaginas.length > 0) outputText("Thick runners of girl-lube stream down the insides of your thighs.", false);
-			if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING && player.vaginas.length == 1) outputText("Your " + allVaginaDescript() + " instantly soaks your groin.", false);
-			if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING && player.vaginas.length > 1) outputText("Your " + allVaginaDescript() + " instantly soak your groin.", false);
-		}
-		outputText("\n", false);
-		if(player.lust > 99) doNext(endLustLoss)
-		else doNext(1);
+			outputText("You see " + monster.a + monster.short + " make sudden arcane gestures at you!\n\n", false);
+			dynStats("lus", player.lib / 10 + player.cor / 10 + 10);
+			if (player.lust < 30) outputText("You feel strangely warm.  ", false);
+			if (player.lust >= 30 && player.lust < 60) outputText("Blood rushes to your groin as a surge of arousal hits you, making your knees weak.  ", false);
+			if (player.lust >= 60) outputText("Images of yourself fellating and fucking the imp assault your mind, unnaturally arousing you.  ", false);
+			if (player.cocks.length > 0) {
+				if (player.lust >= 60 && player.cocks.length > 0) outputText("You feel your " + multiCockDescriptLight() + " dribble pre-cum.", false);
+				if (player.lust >= 30 && player.lust < 60 && player.cocks.length == 1) outputText("Your " + cockDescript(0) + " hardens, distracting you further.", false);
+				if (player.lust >= 30 && player.lust < 60 && player.cocks.length > 1) outputText("Your " + multiCockDescriptLight() + " harden uncomfortably.", false);
+				if (player.hasVagina()) outputText("  ", false);
+			}
+			if (player.vaginas.length > 0) {
+				if (player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL && player.vaginas.length == 1) outputText("Your " + allVaginaDescript() + " dampens perceptibly.", false);
+				if (player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL && player.vaginas.length > 1) outputText("Your " + allVaginaDescript() + " dampen perceptibly.", false);
+				if (player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET && player.vaginas.length > 0) outputText("Your crotch becomes sticky with girl-lust.", false);
+				if (player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK && player.vaginas.length == 1) outputText("Your " + allVaginaDescript() + " becomes sloppy and wet.", false);
+				if (player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK && player.vaginas.length > 1) outputText("Your " + allVaginaDescript() + " become sloppy and wet.", false);
+				if (player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING && player.vaginas.length > 0) outputText("Thick runners of girl-lube stream down the insides of your thighs.", false);
+				if (player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING && player.vaginas.length == 1) outputText("Your " + allVaginaDescript() + " instantly soaks your groin.", false);
+				if (player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING && player.vaginas.length > 1) outputText("Your " + allVaginaDescript() + " instantly soak your groin.", false);
+			}
+			outputText("\n", false);
+			if (player.lust > 99) doNext(endLustLoss);
+			else doNext(1);
 	}
-	//Sand which lust magic attack
+			//Sand which lust magic attack
 	if(eventNum == 5020) {
-		outputText("The sand witch points at you, drawing a circle in the air and mouthing strange words.\n\n", false);
-		if(player.hasStatusAffect("Stone Lust") >= 0) {
-			outputText("The orb inside you grows warm, almost hot, suffusing your body with heat and arousal.  ", false);
-			dynStats("lus", 8 + int(player.sens)/10);
-		}
-		else {
-			outputText("You feel the sands shift by your " + player.feet() + ", and look down to see something slip out of the sands and into your clothes!  It feels incredibly smooth and circular as it glides upward along your " + player.leg() + ", its progress unaffected by your frantic effort to dislodge it.  ", false);
-			if(player.vaginas.length > 0) outputText("It glides up your thighs to the entrance of your sex, and its intentions dawn on you!\n\nToo late! You reach to stop it, but it pushes against your lips and slips inside your " + vaginaDescript(0) + " in an instant.  You groan in frustration as it begins pulsing and vibrating, sometimes even seeming to change size.", false);
-			else outputText("It glides up your thighs, curving around your buttocks, and its intentions dawn on you.\n\nYou desperately grab for it, but are too late!  It pushes firmly against your rectum and slips inside instantaneously.  You groan in frustration as it begins pulsing and vibrating, sometimes even seeming to change size.", false);
-			player.createStatusAffect("Stone Lust", 0, 0, 0, 0);
-			dynStats("lus", 4 + int(player.sens)/10);
-		}
-		doNext(1);
+			outputText("The sand witch points at you, drawing a circle in the air and mouthing strange words.\n\n", false);
+			if (player.hasStatusAffect("Stone Lust") >= 0) {
+				outputText("The orb inside you grows warm, almost hot, suffusing your body with heat and arousal.  ", false);
+				dynStats("lus", 8 + int(player.sens) / 10);
+			}
+			else {
+				outputText("You feel the sands shift by your " + player.feet() + ", and look down to see something slip out of the sands and into your clothes!  It feels incredibly smooth and circular as it glides upward along your " + player.leg() + ", its progress unaffected by your frantic effort to dislodge it.  ", false);
+				if (player.vaginas.length > 0) outputText("It glides up your thighs to the entrance of your sex, and its intentions dawn on you!\n\nToo late! You reach to stop it, but it pushes against your lips and slips inside your " + vaginaDescript(0) + " in an instant.  You groan in frustration as it begins pulsing and vibrating, sometimes even seeming to change size.", false);
+				else outputText("It glides up your thighs, curving around your buttocks, and its intentions dawn on you.\n\nYou desperately grab for it, but are too late!  It pushes firmly against your rectum and slips inside instantaneously.  You groan in frustration as it begins pulsing and vibrating, sometimes even seeming to change size.", false);
+				player.createStatusAffect("Stone Lust", 0, 0, 0, 0);
+				dynStats("lus", 4 + int(player.sens) / 10);
+			}
+			doNext(1);
 	}
-	//Jojo Special - Self-Corruption
+			//Jojo Special - Self-Corruption
 	if(eventNum == 5021) {
-		if(monk == 2) {
-			outputText("Jojo looks lost in thought for a moment, and fails to attack.  ", false);
-			monster.lust += 4;
-		}
-		if(monk == 3) {
-			outputText("Jojo blushes as he fights you, distracted by a stray thought.  You think you see a bulge in the loose cloth of his pants.  ", false);
-			monster.lust += 8;
-		}
-		if(monk == 4) {
-			outputText("Jojo stumbles, shakes his head, and pulls one of his hands away from the stiff tent in his pants.  ", false);
-			monster.lust += 10;
-		}
-		if(monk == 5) {
-			outputText("Jojo frantically jerks his " + eCockDescript(0) + ", stroking the " + eCockDescript(0) + " as it leaks pre-cum at the sight of you.  ", false);
-			monster.lust += 15;
-		}
-		if(monster.lust > 50 && monster.lust < 60) outputText("The mouse's skin remains flushed with the beginnings of arousal.  ", false);
-		if(monster.lust >= 60 && monster.lust < 70) outputText("The mouse's eyes constantly dart over your most sexual parts, betraying his lust.  ", false);
-		if(monster.lust >= 70 && monster.lust < 85) outputText("The mouse is having trouble moving due to the rigid protrusion from his groin.  ", false);
-		if(monster.lust >= 85) outputText("The mouse is panting and softly whining, each movement seeming to make his bulge more pronounced.  You don't think he can hold out much longer.  ", false);
-		if(monster.lust >= 100) doNext(endLustVictory);
-		else doNext(1);
+			if (monk == 2) {
+				outputText("Jojo looks lost in thought for a moment, and fails to attack.  ", false);
+				monster.lust += 4;
+			}
+			if (monk == 3) {
+				outputText("Jojo blushes as he fights you, distracted by a stray thought.  You think you see a bulge in the loose cloth of his pants.  ", false);
+				monster.lust += 8;
+			}
+			if (monk == 4) {
+				outputText("Jojo stumbles, shakes his head, and pulls one of his hands away from the stiff tent in his pants.  ", false);
+				monster.lust += 10;
+			}
+			if (monk == 5) {
+				outputText("Jojo frantically jerks his " + eCockDescript(0) + ", stroking the " + eCockDescript(0) + " as it leaks pre-cum at the sight of you.  ", false);
+				monster.lust += 15;
+			}
+			if (monster.lust > 50 && monster.lust < 60) outputText("The mouse's skin remains flushed with the beginnings of arousal.  ", false);
+			if (monster.lust >= 60 && monster.lust < 70) outputText("The mouse's eyes constantly dart over your most sexual parts, betraying his lust.  ", false);
+			if (monster.lust >= 70 && monster.lust < 85) outputText("The mouse is having trouble moving due to the rigid protrusion from his groin.  ", false);
+			if (monster.lust >= 85) outputText("The mouse is panting and softly whining, each movement seeming to make his bulge more pronounced.  You don't think he can hold out much longer.  ", false);
+			if (monster.lust >= 100) doNext(endLustVictory);
+			else doNext(1);
 	}
-	//Jojo loses via lust
+			//Jojo loses via lust
 	if(eventNum == 5022) {
-		outputText("  You disrobe and prepare to ", false);
-		if(monk == 5) outputText("fuck your violent little slut senseless.  ", false);
-		else outputText("teach the uppity monk a lesson...\n\n", false);
-		doNext(5023);
+			outputText("  You disrobe and prepare to ", false);
+			if (monk == 5) outputText("fuck your violent little slut senseless.  ", false);
+			else outputText("teach the uppity monk a lesson...\n\n", false);
+			doNext(5023);
 	}
-	//Monk RAEP
+			//Monk RAEP
 	if(eventNum == 5023) {
-		jojoRape();
-		cleanupAfterCombat();
+			jojoRape();
+			cleanupAfterCombat();
 	}
-	//Lose to Jojo
+			//Lose to Jojo
 	if(eventNum == 5024) {
 		if(monk == 2 || monk == 3)
 		{
-			outputText("Jojo glares down at you, and begins praying, slowly laying prayer papers all over your battered form.  You feel rage that quickly dissipates, replaced with a calm sense of peace.  You quickly lose consciousness, but are happy he defeated you.\n\nWhen you wake, you discover a note:\n\"<i>The fighting allowed me to exorcise most of your inner demons.  A part of me wanted to seek revenge for what you had done to me, but I know it was the taint on your soul that was responsible.  If we meet again I would be happy to meditate with you.\n\n          -Jojo.</i>\"", true);
-			dynStats("lib", -10, "lus=", 0, "cor", -15);
-			if(player.lib < 10) {
-				player.lib = 0;
-				dynStats("lib", 15);
+				outputText("Jojo glares down at you, and begins praying, slowly laying prayer papers all over your battered form.  You feel rage that quickly dissipates, replaced with a calm sense of peace.  You quickly lose consciousness, but are happy he defeated you.\n\nWhen you wake, you discover a note:\n\"<i>The fighting allowed me to exorcise most of your inner demons.  A part of me wanted to seek revenge for what you had done to me, but I know it was the taint on your soul that was responsible.  If we meet again I would be happy to meditate with you.\n\n          -Jojo.</i>\"", true);
+				dynStats("lib", -10, "lus=", 0, "cor", -15);
+				if (player.lib < 10) {
+					player.lib = 0;
+					dynStats("lib", 15);
+				}
+				if (player.cockTotal() == 1) player.lib = 15;
+				if (player.vaginas.length == 1) player.lib += 10;
+				if (player.cockTotal() > 1) player.lib += 5;
+				if (player.horseCocks() > 0) player.lib += 3;
+				if (player.dogCocks() > 0) player.lib += 2;
+				if (player.biggestLactation() >= 1) player.lib += 2;
+				monk = 0;
 			}
-			if(player.cockTotal() == 1) player.lib = 15;
-			if(player.vaginas.length == 1) player.lib += 10;
-			if(player.cockTotal() > 1) player.lib +=5;
-			if(player.horseCocks() > 0) player.lib += 3;
-			if(player.dogCocks() > 0) player.lib += 2;
-			if(player.biggestLactation() >= 1) player.lib += 2;
-			monk = 0;
-		}
-		else {
-			outputText("Jojo grins wickedly as he senses your defeat, " + eCockDescript(0) + " throbbing hard.  ", true);
-			if(player.lust >= 100) {
-				if(player.gender == 1) {
-					outputText("Too aroused to think, you just bend over, displaying your bum and letting your " + multiCockDescriptLight() + " dangle freely.  The mouse doesn't hesitate, and he thrusts his " + eCockDescript(0) + " with painful force.  You stagger from the size and struggle to stay conscious as he fucks you like a mad beast, hammering your ass with incredible force.  ", false);
-					if(player.cockTotal() == 1) outputText("Pre and cum drip from your " + cockDescript(0) + ", forced out of your prostate by the rough beating it's taking.  You feel a flash of warm wetness inside you, and realize Jojo is cumming.  A sense of relief washes over you as the last burst of cum squirts out from your cheeks, only to be replaced with a dawning sense of horror as he continues fucking you harder than ever.\n\nYou black out after a few dozen of his orgasms and one or two of your own, your gut painfully distended with semen.", false);
-					if(player.cockTotal() > 1) outputText("Pre and cum drip from your " + cockDescript(0) + "s, forced out of your prostate by the rough beating it's taking.  You feel a flash of warm wetness inside you, and realize Jojo is cumming.  A sense of relief washes over you as the last burst of cum squirts out from your cheeks, only to be replaced with a dawning sense of horror as he continues fucking you harder than ever.\n\nYou black out after a few dozen of his orgasms and one or two of your own, your gut painfully distended with semen.", false);
-					buttChange(monster.cockArea(0), true);
-				}
-				if(player.gender >=  2) {
-					outputText("Too aroused to think, you bend over, displaying your bum and " + vaginaDescript(0) + " to Jojo as open targets.  The mouse obliges, plunging himself into you, hard.  He fucks you with abandon, pounding your wanton little pussy with no regard for your pleasure.  Despite yourself, you enjoy the rough treatment.  A spasm of warmth erupts inside you as Jojo cums.  You worry he might stop, but as the mouse's orgasm ends he resumes fucking with even greater energy. You cum powerfully, his jizz seeping down your thighs as you begin lose track of yourself.  ", false);
-					if(player.cockTotal() > 1) outputText("Your " + cockDescript(0) + " splatters the ground with cum repeatedly, until both your genders are raw and sore.  ", false);
-					else outputText("Your " + vaginaDescript(0) + " cums on him many more times it until it is sore and tender, dripping with spunk.  ", false);
-					outputText("You black out as Jojo cums AGAIN, forcing a river of spunk from your already over-filled uterus.", false);
-					cuntChange(monster.cocks[0].cockThickness, true);
-					//Preggers chance!
-					player.knockUp(4,432,101);
-				}
-				if(player.gender == 0) {
-					outputText("Too aroused to think, you just bend over, displaying your bum and wiggling enticingly.  The mouse doesn't hesitate, and he thrusts his " + eCockDescript(0) + " with painful force.  You stagger from the size and struggle to stay conscious as he fucks you like a mad beast, hammering your ass with incredible force.  ", false);
-					outputText("You feel a flash of warm wetness inside you, and realize Jojo is cumming.  A sense of relief washes over you as the last burst of cum squirts out from your cheeks, only to be replaced with a dawning sense of horror as he continues fucking you harder than ever.\n\nYou black out after a few dozen of his orgasms and one or two of your own, your gut painfully distended with semen.", false);
-				}
-				slimeFeed();
-				hideUpDown();
-				dynStats("lus=", 0, "cor", 1);
-				statScreenRefresh();
-			}
-			//HP Defeat
 			else {
-				outputText("You black out from the pain of your injuries.\n\n", false);
-				statScreenRefresh();
+				outputText("Jojo grins wickedly as he senses your defeat, " + eCockDescript(0) + " throbbing hard.  ", true);
+				if (player.lust >= 100) {
+					if (player.gender == 1) {
+						outputText("Too aroused to think, you just bend over, displaying your bum and letting your " + multiCockDescriptLight() + " dangle freely.  The mouse doesn't hesitate, and he thrusts his " + eCockDescript(0) + " with painful force.  You stagger from the size and struggle to stay conscious as he fucks you like a mad beast, hammering your ass with incredible force.  ", false);
+						if (player.cockTotal() == 1) outputText("Pre and cum drip from your " + cockDescript(0) + ", forced out of your prostate by the rough beating it's taking.  You feel a flash of warm wetness inside you, and realize Jojo is cumming.  A sense of relief washes over you as the last burst of cum squirts out from your cheeks, only to be replaced with a dawning sense of horror as he continues fucking you harder than ever.\n\nYou black out after a few dozen of his orgasms and one or two of your own, your gut painfully distended with semen.", false);
+						if (player.cockTotal() > 1) outputText("Pre and cum drip from your " + cockDescript(0) + "s, forced out of your prostate by the rough beating it's taking.  You feel a flash of warm wetness inside you, and realize Jojo is cumming.  A sense of relief washes over you as the last burst of cum squirts out from your cheeks, only to be replaced with a dawning sense of horror as he continues fucking you harder than ever.\n\nYou black out after a few dozen of his orgasms and one or two of your own, your gut painfully distended with semen.", false);
+						buttChange(monster.cockArea(0), true);
+					}
+					if (player.gender >= 2) {
+						outputText("Too aroused to think, you bend over, displaying your bum and " + vaginaDescript(0) + " to Jojo as open targets.  The mouse obliges, plunging himself into you, hard.  He fucks you with abandon, pounding your wanton little pussy with no regard for your pleasure.  Despite yourself, you enjoy the rough treatment.  A spasm of warmth erupts inside you as Jojo cums.  You worry he might stop, but as the mouse's orgasm ends he resumes fucking with even greater energy. You cum powerfully, his jizz seeping down your thighs as you begin lose track of yourself.  ", false);
+						if (player.cockTotal() > 1) outputText("Your " + cockDescript(0) + " splatters the ground with cum repeatedly, until both your genders are raw and sore.  ", false);
+						else outputText("Your " + vaginaDescript(0) + " cums on him many more times it until it is sore and tender, dripping with spunk.  ", false);
+						outputText("You black out as Jojo cums AGAIN, forcing a river of spunk from your already over-filled uterus.", false);
+						cuntChange(monster.cocks[0].cockThickness, true);
+						//Preggers chance!
+						player.knockUp(4, 432, 101);
+					}
+					if (player.gender == 0) {
+						outputText("Too aroused to think, you just bend over, displaying your bum and wiggling enticingly.  The mouse doesn't hesitate, and he thrusts his " + eCockDescript(0) + " with painful force.  You stagger from the size and struggle to stay conscious as he fucks you like a mad beast, hammering your ass with incredible force.  ", false);
+						outputText("You feel a flash of warm wetness inside you, and realize Jojo is cumming.  A sense of relief washes over you as the last burst of cum squirts out from your cheeks, only to be replaced with a dawning sense of horror as he continues fucking you harder than ever.\n\nYou black out after a few dozen of his orgasms and one or two of your own, your gut painfully distended with semen.", false);
+					}
+					slimeFeed();
+					hideUpDown();
+					dynStats("lus=", 0, "cor", 1);
+					statScreenRefresh();
+				}
+				//HP Defeat
+				else {
+					outputText("You black out from the pain of your injuries.\n\n", false);
+					statScreenRefresh();
+				}
 			}
-		}		
-		cleanupAfterCombat();
+			cleanupAfterCombat();
 	}
-	//Sand witch bad end
-	//GAME OVERS
-	if(eventNum == 5025) 
+			//Sand witch bad end
+			//GAME OVERS
+	if(eventNum == 5025)
 	{
 		if (!this.testingBlockExiting)
 		{
-			outputText("<b>GAME OVER</b>", true);
-			if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "",0,"NewGamePlus",10035,"",0,"CHEAT", 1);
-			else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus",10035, "BLAH", 0, "LULZ", 0);
-			mainView.showMenuButton( MainView.MENU_DATA );
-			mainView.hideMenuButton( MainView.MENU_APPEARANCE );
-			mainView.hideMenuButton( MainView.MENU_LEVEL );
-			mainView.hideMenuButton( MainView.MENU_PERKS );
+				outputText("<b>GAME OVER</b>", true);
+				if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "", 0, "NewGamePlus", 10035, "", 0, "CHEAT", 1);
+				else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus", 10035, "BLAH", 0, "LULZ", 0);
+				mainView.showMenuButton(MainView.MENU_DATA);
+				mainView.hideMenuButton(MainView.MENU_APPEARANCE);
+				mainView.hideMenuButton(MainView.MENU_LEVEL);
+				mainView.hideMenuButton(MainView.MENU_PERKS);
 
-			gameState = 0;
+				gameState = 0;
 
-			// Prevent ChaosMonkah instances from getting stuck
-		}
-		else
-		{
-			gameState = 0;
-			doNext(13);
+				// Prevent ChaosMonkah instances from getting stuck
+			}
+			else {
+				gameState = 0;
+				doNext(13);
 
-		}
+			}
 
-		inDungeon = false;
+			inDungeon = false;
 	}
-	//Soft Game Over - for when you want to leave the text on-screen
+			//Soft Game Over - for when you want to leave the text on-screen
 	if(eventNum == 5035) {
-		
-		if (!this.testingBlockExiting)
-		{
-			outputText("\n\n<b>GAME OVER</b>", false);
-			if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "",0,"NewGamePlus",10035,"",0,"Debug Cheat", 1);
-			else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus", 10035, "BLAH", 0, "LULZ", 0);
-			mainView.showMenuButton( MainView.MENU_NEW_MAIN );
-			mainView.showMenuButton( MainView.MENU_DATA );
-			mainView.hideMenuButton( MainView.MENU_APPEARANCE );
-			mainView.hideMenuButton( MainView.MENU_LEVEL );
-			mainView.hideMenuButton( MainView.MENU_PERKS );
-			
-			gameState = 0;
-		}
-		else
-		{
-			// Prevent ChaosMonkah instances from getting stuck
-			gameState = 0;
-			doNext(13);
-		}
-		inDungeon = false;
+
+			if (!this.testingBlockExiting) {
+				outputText("\n\n<b>GAME OVER</b>", false);
+				if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || debug) simpleChoices("Game Over", 9999, "", 0, "NewGamePlus", 10035, "", 0, "Debug Cheat", 1);
+				else simpleChoices("Game Over", 9999, "Blah", 0, "NewGamePlus", 10035, "BLAH", 0, "LULZ", 0);
+				mainView.showMenuButton(MainView.MENU_NEW_MAIN);
+				mainView.showMenuButton(MainView.MENU_DATA);
+				mainView.hideMenuButton(MainView.MENU_APPEARANCE);
+				mainView.hideMenuButton(MainView.MENU_LEVEL);
+				mainView.hideMenuButton(MainView.MENU_PERKS);
+
+				gameState = 0;
+			}
+			else {
+				// Prevent ChaosMonkah instances from getting stuck
+				gameState = 0;
+				doNext(13);
+			}
+			inDungeon = false;
 	}
-	//Sand which(lol) end Pt 1
+			//Sand which(lol) end Pt 1
 	if(eventNum == 5026)
 	{
-		outputText("You awaken in a candlelit stone shrine of some sort, resting naked and facedown on some warm, comfortable body pillows. Remembering your fight against the witch, you hurriedly try to get up, only to gasp with surprise when a painful weight pulls on your chest. Glancing down to find the source of the weight, you blink with shock, then fight rising panic – the \"pillows\" that you are lying on are your own breasts, swollen to such a size that you cannot possibly lift them!\n\n", true);
-		outputText("\"<i>Hello, my beautiful pet,</i>\" says a familiar voice. Looking to your front – and trying not to notice the vast expanse of cleavage that dominates the lower half of your vision – you see the Sand Witch sitting, nude, in a large granite basin set into the floor just in front of you. She smirks when she sees how your eyes avoid resting on your obscenely massive bust.\n\n", false);
-		outputText("\"<i>What's wrong? Don't you like them?</i>\" The witch leans toward you and roughly tugs on one huge nipple, causing you to yelp with surprise and pleasure. \"<i>I'm afraid that's too bad. You offered yourself to me, and now you are mine, all mine, forever.</i>\" She slowly rubs her hands over your colossal bosom, crooning with approval as you squirm and bite your lip. \"<i>Mmm, yes... first, you will give me a bath.</i>\"\n\nYou hardly have time to wonder what she means before a familiar, hugely intense pressure builds in your chest...", false);
-		doNext(5027);
+			outputText("You awaken in a candlelit stone shrine of some sort, resting naked and facedown on some warm, comfortable body pillows. Remembering your fight against the witch, you hurriedly try to get up, only to gasp with surprise when a painful weight pulls on your chest. Glancing down to find the source of the weight, you blink with shock, then fight rising panic – the \"pillows\" that you are lying on are your own breasts, swollen to such a size that you cannot possibly lift them!\n\n", true);
+			outputText("\"<i>Hello, my beautiful pet,</i>\" says a familiar voice. Looking to your front – and trying not to notice the vast expanse of cleavage that dominates the lower half of your vision – you see the Sand Witch sitting, nude, in a large granite basin set into the floor just in front of you. She smirks when she sees how your eyes avoid resting on your obscenely massive bust.\n\n", false);
+			outputText("\"<i>What's wrong? Don't you like them?</i>\" The witch leans toward you and roughly tugs on one huge nipple, causing you to yelp with surprise and pleasure. \"<i>I'm afraid that's too bad. You offered yourself to me, and now you are mine, all mine, forever.</i>\" She slowly rubs her hands over your colossal bosom, crooning with approval as you squirm and bite your lip. \"<i>Mmm, yes... first, you will give me a bath.</i>\"\n\nYou hardly have time to wonder what she means before a familiar, hugely intense pressure builds in your chest...", false);
+			doNext(5027);
 	}
-	//Sand which(lol) end Pt 2
+			//Sand which(lol) end Pt 2
 	if(eventNum == 5027) {
-		outputText("With an audible gurgling noise, your breasts begin to fill with prodigious quantities of milk. Your eyes widen in amazement when you feel your tits swelling, filling, pumping up to their limits. It feels shockingly pleasurable and somehow almost right, like you were meant to have these shamefully huge, milk-filled titties. As you watch the soft flesh stretch taut, your breasts fatten into a very round shape beneath you, and the pleasurable sensation becomes a painful feeling of urgency.\n\n", true);
-		outputText("For a moment nothing happens, and you are surprised that your nipples are not leaking milk. The Sand Witch smiles at you, leaning to rest her arms and chin on your overstressed tits, and speaks: \"<i>Ask to be milked, slave.</i>\" Appalled, you shake your head, then grit your teeth and moan as you realize that the pressure in your chest is still building up, becoming unbearably painful. The witch patiently repeats herself, staring directly into your eyes, and you are struck by the awful knowledge that you are likely to be trapped here forever.", false);
-		doNext(5028);
+			outputText("With an audible gurgling noise, your breasts begin to fill with prodigious quantities of milk. Your eyes widen in amazement when you feel your tits swelling, filling, pumping up to their limits. It feels shockingly pleasurable and somehow almost right, like you were meant to have these shamefully huge, milk-filled titties. As you watch the soft flesh stretch taut, your breasts fatten into a very round shape beneath you, and the pleasurable sensation becomes a painful feeling of urgency.\n\n", true);
+			outputText("For a moment nothing happens, and you are surprised that your nipples are not leaking milk. The Sand Witch smiles at you, leaning to rest her arms and chin on your overstressed tits, and speaks: \"<i>Ask to be milked, slave.</i>\" Appalled, you shake your head, then grit your teeth and moan as you realize that the pressure in your chest is still building up, becoming unbearably painful. The witch patiently repeats herself, staring directly into your eyes, and you are struck by the awful knowledge that you are likely to be trapped here forever.", false);
+			doNext(5028);
 	}
-	//Sand witch bad-end Pt3
+			//Sand witch bad-end Pt3
 	if(eventNum == 5028) {
-		outputText("Something breaks within your soul, accompanied by a strangled sob. Tears of humiliation trickle down your face as you part your quivering lips. \"<i>Please milk me, Mistress. Your slave needs to be milked.</i>\"\n\n", false);
-		if(player.hasPerk("Marble's Milk") >= 0) {
-			outputText("No sooner have you spoken before a torrent of milk spurts from each of your nipples, but the effect isn't as pleasurable as it used to be; in fact you're starting to feel very weak.  The Sand Witch looks at you in confusion as the stream of milk from your massive breasts quickly slows and your breasts start to shrivel up.\n\n", false);
-			outputText("Trying to figure out why you feel so incredibly weak, you think back on what might have caused this.  When was the last time you had some of Marble's milk?  Feeling your body start to wither away, the realization hits you.  You chuckle softly at your captor as the world starts to go dark; looks like you'll be the one to have the last laugh...\n\n", false);
-			outputText("The last thing you hear is the Sand Witch screaming \"<i>What the hell is going on?  I ALWAYS get what I want!</i>\"", false);
-		}
-		else {
-			outputText("No sooner have you spoken than a huge torrent of milk spurts from each of your nipples. Between the sudden alleviation of your pain and the sensitivity of your nipples, you orgasm almost instantly with a huge groan of relief. When you can focus your eyes again, you see that the Sand Witch... your new Mistress... is bathing languidly in the basin, relaxing in a pool of your fresh breastmilk.\n\n", false);
-			outputText("The dusky-skinned witch catches your eye and smiles, this time more warmly than before. \"<i>See? You'll enjoy yourself more if you obey your Mistress. After all, I <b>ALWAYS</b> get what I want...</i>\"\n\nAs much as you hate to admit it, you realize that she's right. You're trapped here on top of your bloated bust, at the mercy of this perverse spellcaster. She has all the time in the world to train you, and between the pain of overfilled breasts and the orgasmic joy of being drained, it won't take her long to turn you into a perfectly obedient, even eager, milk-slave...", false);
-		}
-		doNext(5025);
+			outputText("Something breaks within your soul, accompanied by a strangled sob. Tears of humiliation trickle down your face as you part your quivering lips. \"<i>Please milk me, Mistress. Your slave needs to be milked.</i>\"\n\n", false);
+			if (player.hasPerk("Marble's Milk") >= 0) {
+				outputText("No sooner have you spoken before a torrent of milk spurts from each of your nipples, but the effect isn't as pleasurable as it used to be; in fact you're starting to feel very weak.  The Sand Witch looks at you in confusion as the stream of milk from your massive breasts quickly slows and your breasts start to shrivel up.\n\n", false);
+				outputText("Trying to figure out why you feel so incredibly weak, you think back on what might have caused this.  When was the last time you had some of Marble's milk?  Feeling your body start to wither away, the realization hits you.  You chuckle softly at your captor as the world starts to go dark; looks like you'll be the one to have the last laugh...\n\n", false);
+				outputText("The last thing you hear is the Sand Witch screaming \"<i>What the hell is going on?  I ALWAYS get what I want!</i>\"", false);
+			}
+			else {
+				outputText("No sooner have you spoken than a huge torrent of milk spurts from each of your nipples. Between the sudden alleviation of your pain and the sensitivity of your nipples, you orgasm almost instantly with a huge groan of relief. When you can focus your eyes again, you see that the Sand Witch... your new Mistress... is bathing languidly in the basin, relaxing in a pool of your fresh breastmilk.\n\n", false);
+				outputText("The dusky-skinned witch catches your eye and smiles, this time more warmly than before. \"<i>See? You'll enjoy yourself more if you obey your Mistress. After all, I <b>ALWAYS</b> get what I want...</i>\"\n\nAs much as you hate to admit it, you realize that she's right. You're trapped here on top of your bloated bust, at the mercy of this perverse spellcaster. She has all the time in the world to train you, and between the pain of overfilled breasts and the orgasmic joy of being drained, it won't take her long to turn you into a perfectly obedient, even eager, milk-slave...", false);
+			}
+			doNext(5025);
 	}
-	//Mino special pheromone attack.
+			//Mino special pheromone attack.
 	if(eventNum == 5029) {
-		minoPheromones();
+			minoPheromones();
 	}
-	//Rape minotaur
+			//Rape minotaur
 	if(eventNum == 5030) {
-		//minoRape();
-		cleanupAfterCombat();
+			//minoRape();
+			cleanupAfterCombat();
 	}
-	//Get raped by minotaur 
+			//Get raped by minotaur
 	if(eventNum == 5031) {
-		getRapedByMinotaur();
+			getRapedByMinotaur();
 	}
 
-	//Sand witch gets raped
+			//Sand witch gets raped
 	if(eventNum == 5032) {
-		sandwitchRaped();
+			sandwitchRaped();
 	}
-	//Bewbage rape
+			//Bewbage rape
 	if(eventNum == 5033) {
-		sandwitchBewbs();
+			sandwitchBewbs();
 	}
-	//Fucky rape
+			//Fucky rape
 	if(eventNum == 5034) {
-		sandwitchSex();
+			sandwitchSex();
 	}
-	//Bee Sting Attack
+			//Bee Sting Attack
 	if(eventNum == 5036) {
-		//Blind dodge change
-		if(monster.hasStatusAffect("Blind") >= 0) {
-			outputText(monster.capitalA + monster.short + " completely misses you with a blind sting!!", false);
-			combatRoundOver();
-			return;
-		}
-		//Determine if dodged!
-		if(player.spe - monster.spe > 0 && int(Math.random()*(((player.spe-monster.spe)/4)+80)) > 80) {
-			if(player.spe - monster.spe < 8) outputText("You narrowly avoid " + monster.a + monster.short + "'s stinger!", false);
-			if(player.spe - monster.spe >= 8 && player.spe-monster.spe < 20) outputText("You dodge " + monster.a + monster.short + "'s stinger with superior quickness!", false);
-			if(player.spe - monster.spe >= 20) outputText("You deftly avoid " + monster.a + monster.short + "'s slow attempts to sting you.", false);
-			combatRoundOver();
-			return;
-		}
-		//determine if avoided with armor.
-		if(player.armorDef >= 10 && rand(4) > 0) {
-			outputText("Despite her best efforts, " + monster.a + monster.short + "'s sting attack can't penetrate your armor.", false);
-			combatRoundOver();
-			return;
-		}
-		//Sting successful!  Paralize or lust?
-		//Lust 50% of the time
-		if(rand(2) == 0) {
-			outputText("Searing pain lances through you as " + monster.a + monster.short + " manages to sting you!  You stagger back a step and nearly trip, flushing hotly.  ", false);
-			outputText("Oh no!  You've been injected with some kind of aphrodisiac.  You've got to keep focused, you can't think about... fucking... ", false);
-			if(player.gender == 1) outputText("or dripping honey-slicked cunts beckoning you. ", false);
-			if(player.gender == 2) outputText("planting your aching sex over her face while you lick her sweet honeypot. ", false);
-			if(player.gender == 3) outputText("or cocks, tits, and puffy nipples. ", false);
-			dynStats("lus", 25);
-			if(player.lust > 60) {
-				outputText(" You shake your head and struggle to stay focused,", false);
-				if(player.gender == 1 || player.gender == 3) outputText(" but it's difficult with the sensitive bulge in your groin.", false);
-				if(player.gender == 2) outputText(" but can't ignore the soaking wetness in your groin.", false);
-				if(player.sens > 50) outputText("  The sensitive nubs of your nipples rub tightly under your " + player.armorName + ".", false);
+			//Blind dodge change
+			if (monster.hasStatusAffect("Blind") >= 0) {
+				outputText(monster.capitalA + monster.short + " completely misses you with a blind sting!!", false);
+				combatRoundOver();
+				return;
 			}
-			else outputText(" You shake your head and clear the thoughts from your head, focusing on the task at hand.", false);
-			if(player.hasStatusAffect("lust venom") < 0) player.createStatusAffect("lust venom", 0, 0, 0, 0);
-		}
-		//Paralise the other 50%!
-		else {
-			outputText("Searing pain lances through you as " + monster.a + monster.short + " manages to sting you!  You stagger back a step and nearly trip, finding it hard to move yourself.", false);
-			//v1 - strenght penalty, v2 speed penalty
-			if(player.hasStatusAffect("paralyze venom") >= 0) {
-				temp = player.hasStatusAffect("paralyze venom");
-				player.statusAffects[temp].value1 += 2.9;
-				player.statusAffects[temp].value2 += 2.9;
-				dynStats("str", -3,"spe", -3);
-				outputText("  It's getting much harder to move, you're not sure how many more stings like that you can take!", false);
+			//Determine if dodged!
+			if (player.spe - monster.spe > 0 && int(Math.random() * (((player.spe - monster.spe) / 4) + 80)) > 80) {
+				if (player.spe - monster.spe < 8) outputText("You narrowly avoid " + monster.a + monster.short + "'s stinger!", false);
+				if (player.spe - monster.spe >= 8 && player.spe - monster.spe < 20) outputText("You dodge " + monster.a + monster.short + "'s stinger with superior quickness!", false);
+				if (player.spe - monster.spe >= 20) outputText("You deftly avoid " + monster.a + monster.short + "'s slow attempts to sting you.", false);
+				combatRoundOver();
+				return;
 			}
+			//determine if avoided with armor.
+			if (player.armorDef >= 10 && rand(4) > 0) {
+				outputText("Despite her best efforts, " + monster.a + monster.short + "'s sting attack can't penetrate your armor.", false);
+				combatRoundOver();
+				return;
+			}
+			//Sting successful!  Paralize or lust?
+			//Lust 50% of the time
+			if (rand(2) == 0) {
+				outputText("Searing pain lances through you as " + monster.a + monster.short + " manages to sting you!  You stagger back a step and nearly trip, flushing hotly.  ", false);
+				outputText("Oh no!  You've been injected with some kind of aphrodisiac.  You've got to keep focused, you can't think about... fucking... ", false);
+				if (player.gender == 1) outputText("or dripping honey-slicked cunts beckoning you. ", false);
+				if (player.gender == 2) outputText("planting your aching sex over her face while you lick her sweet honeypot. ", false);
+				if (player.gender == 3) outputText("or cocks, tits, and puffy nipples. ", false);
+				dynStats("lus", 25);
+				if (player.lust > 60) {
+					outputText(" You shake your head and struggle to stay focused,", false);
+					if (player.gender == 1 || player.gender == 3) outputText(" but it's difficult with the sensitive bulge in your groin.", false);
+					if (player.gender == 2) outputText(" but can't ignore the soaking wetness in your groin.", false);
+					if (player.sens > 50) outputText("  The sensitive nubs of your nipples rub tightly under your " + player.armorName + ".", false);
+				}
+				else outputText(" You shake your head and clear the thoughts from your head, focusing on the task at hand.", false);
+				if (player.hasStatusAffect("lust venom") < 0) player.createStatusAffect("lust venom", 0, 0, 0, 0);
+			}
+			//Paralise the other 50%!
 			else {
-				player.createStatusAffect("paralyze venom", 2, 2, 0, 0);
-				dynStats("str", -2,"spe", -2);
-				outputText("  You've fallen prey to paralyzation venom!  Better end this quick!", false);
+				outputText("Searing pain lances through you as " + monster.a + monster.short + " manages to sting you!  You stagger back a step and nearly trip, finding it hard to move yourself.", false);
+				//v1 - strenght penalty, v2 speed penalty
+				if (player.hasStatusAffect("paralyze venom") >= 0) {
+					temp = player.hasStatusAffect("paralyze venom");
+					player.statusAffects[temp].value1 += 2.9;
+					player.statusAffects[temp].value2 += 2.9;
+					dynStats("str", -3, "spe", -3);
+					outputText("  It's getting much harder to move, you're not sure how many more stings like that you can take!", false);
+				}
+				else {
+					player.createStatusAffect("paralyze venom", 2, 2, 0, 0);
+					dynStats("str", -2, "spe", -2);
+					outputText("  You've fallen prey to paralyzation venom!  Better end this quick!", false);
+				}
 			}
-		}
-		if(player.lust >= 100) doNext(endLustLoss);
-		else doNext(5000);
+			if (player.lust >= 100) doNext(endLustLoss);
+			else doNext(5000);
 	}
-	//Player sting attack
+			//Player sting attack
 	if(eventNum == 5037) {
-		//Keep logic sane if this attack brings victory
-		menuLoc = 0;
-		if(player.tailVenom < 33) {
-			outputText("You do not have enough venom to sting right now!", true);
-			doNext(5161);
-			return;
-		}
-		//Worms are immune!
-		if(monster.short == "worms") {
-			outputText("Taking advantage of your new natural weapons, you quickly thrust your stinger at the freak of nature. Sensing impending danger, the creature willingly drops its cohesion, causing the mass of worms to fall to the ground with a sick, wet 'thud', leaving you to stab only at air.\n\n", true);
-			enemyAI();
-			return;
-		}
-		playerStinger();
-	}
-	//Gore attack
-	if(eventNum == 5038) {
-		//Keep logic sane if this attack brings victory
-		menuLoc = 0;
-		if(monster.short == "worms") {
-			outputText("Taking advantage of your new natural weapons, you quickly charge at the freak of nature. Sensing impending danger, the creature willingly drops its cohesion, causing the mass of worms to fall to the ground with a sick, wet 'thud', leaving your horns to stab only at air.\n\n", true);
-			enemyAI();
-			return;
-		}
-		goreAttack();
-	}
-	//Green Slime Lust attack!
-	if(eventNum == 5039) {
-		outputText("The creature surges forward slowly with a swing that you easily manage to avoid.  You notice traces of green liquid spurt from the creature as it does, forming a thin mist that makes your skin tingle with excitement when you inhale it.", false);
-		dynStats("lus", player.lib/10 + 8);
-		doNext(1);
-	}
-	//Green Slime Lust lossssss!
-	if(eventNum == 5040) {
-		outputText("The creature collapses backwards as its cohesion begins to give out, and the faint outline of eyes and a mouth form on its face.  Its chest heaves as if it were gasping, and the bolt upright erection it sports visibly quivers and pulses before relaxing slightly.", false);
-		monster.lust -= 13;
-		doNext(1);
-	}
-	//Victory Sex (Slime)
-	if(eventNum == 5041) {
-		//Service for lower corruption
-		if(player.cor <= 33) {
-			outputText("", true);
-			if(player.lust < 60) serviceLowCorruption();
-			else serviceLowCorruptionHighLust();
-		}
-		//higher corruption raaaaeeeep
-		else
-		{
-			outputText("", true);
-			//male or futa
-			if(player.gender == 1 || (player.gender == 3 && rand(2) == 0)) maleRapesOoze();
-			//female or futa
-			else if(player.gender > 0) femaleRapesOoze();
-		}
-		cleanupAfterCombat();
-		return;
-	}
-	//Losing Sex (Slime)
-	if(eventNum == 5042) {
-		outputText("", true);
-		doNext(1);
-		if(player.gender == 2 || (player.gender == 3 && rand(2) == 0)) {
-			temp = rand(3);
-			if(temp == 0) oozeRapesYouVaginally();
-			if(temp == 1) oozeRapesYouOrally();
-			if(temp == 2) oozeButtRapesYou();
-		}
-		//Everybody else
-		else {
-			temp = rand(2);
-			if(temp == 0) oozeRapesYouOrally();
-			if(temp == 1) oozeButtRapesYou();
-		}
-		cleanupAfterCombat();
-		return;
-	}
-	//Demon pack attack
-	if(eventNum == 5043) {
-		//return to combat menu when finished
-		//Determine if dodged!
-		if(player.spe - monster.spe > 0 && int(Math.random()*(((player.spe-monster.spe)/4)+80)) > 80) {
-			outputText("You duck, weave, and dodge.  Despite their best efforts, the throng of demons only hit the air and each other.", false);
-			combatRoundOver();
-			return;
-		}
-		//Determine if evaded
-		if(player.hasPerk("Evade") >= 0 && rand(100) < 10) {
-			outputText("Using your skills at evading attacks, you anticipate and sidestep " + monster.a + monster.short + "' attacks.", false);
-			combatRoundOver();
-			return;
-		}
-		//("Misdirection"
-		if(player.hasPerk("Misdirection") >= 0 && rand(100) < 15 && player.armorName == "red, high-society bodysuit") {
-			outputText("Using Raphael's teachings, you anticipate and sidestep " + monster.a + monster.short + "' attacks.", false);
-			combatRoundOver();
-			return;
-		}
-		//Determine if cat'ed
-		if(player.hasPerk("Flexibility") >= 0 && rand(100) < 6) {
-			outputText("With your incredible flexibility, you squeeze out of the way of " + monster.a + monster.short + "' attacks.", false);
-			combatRoundOver();
-			return;
-		}
-		//Determine damage - str modified by enemy toughness!		
-		temp = int((monster.str + monster.weaponAttack) - rand(player.tou) - player.armorDef);
-		if(temp > 0) temp = takeDamage(temp);
-		if(temp <= 0) {
-			temp = 0;
-			if(!monster.plural) outputText("You deflect and block every " + monster.weaponVerb + " " + monster.a + monster.short + " throw at you.", false);
-			else outputText("You deflect " + monster.a + monster.short + " " + monster.weaponVerb + ".");
-		}
-		if(temp > 0 && temp < 6) {
-			outputText("You are struck a glancing blow by " + monster.a + monster.short + "! (" + temp + ")", false);
-		}
-		if(temp > 5 && temp < 11) {
-			outputText(monster.capitalA + monster.short + " wound you! (" + temp + ")", false);
-		}
-		if(temp > 10 && temp < 21) {
-			outputText(monster.capitalA + monster.short + " stagger you with the force of " + monster.pronoun3 + " " + monster.weaponVerb + "s! (" + temp + ")", false);
-		}
-		if(temp > 20) {
-			outputText(monster.capitalA + monster.short + " <b>mutilates</b> you with powerful fists and " + monster.weaponVerb + "s! (" + temp + ")", false);
-		}
-		statScreenRefresh();
-		outputText("\n", false);
-		combatRoundOver();
-		return;
-	}
-	//Demonic lust attack!
-	if(eventNum == 5044) {
-		if(player.lust < 35) outputText("The demons press in close against you and although they fail to hit you with an attack, the sensation of their skin rubbing against yours feels highly erotic.", false);
-		if(player.lust >= 35 && player.lust < 65) {
-			outputText("The push of the demons' sweaty, seductive bodies sliding over yours is deliciously arousing and you feel your ", false);
-			if(player.cocks.length > 0) outputText(multiCockDescriptLight() + " hardening ", false);
-			else if(player.vaginas.length > 0) outputText(vaginaDescript(0) + " get wetter ", false);
-			outputText("in response to all the friction.", false);
-		}
-		if(player.lust >= 65) {
-			outputText("As the demons mill around you, their bodies rub constantly over yours, and it becomes harder and harder to keep your thoughts on the fight or resist reaching out to touch a well lubricated cock or pussy as it slips past.  You keep subconsciously moving your ", false);
-			if(player.gender == 1) outputText(multiCockDescriptLight() + " towards the	nearest inviting demonic hole.", false);
-			if(player.gender == 2) outputText(vaginaDescript(0) + " towards the nearest swinging cock.", false);
-			if(player.gender == 3) outputText("aching cock and thirsty pussy towards the nearest thing willing to fuck it.", false);
-			if(player.gender == 0) outputText("groin, before remember there is nothing there to caress.", false);
-		}
-		dynStats("lus", 10+player.sens/10);
-		combatRoundOver();
-	}
-	//Raise demons lust to 100 & fuck them
-	if(eventNum == 5045) {
-		outputText("You open your arms and step into the throng of eager demons. They jump eagerly to touch you, becoming more and more lust-frenzied every second. You take the nearest demon and throw it to the ground and without a moment's thought the rest of the group leap to join you in a thoughtless madness of lust...", true);
-		doNext(5048);
-	}
-	//Chat with demon group
-	if(eventNum == 5046) {
-		oasisTalk();
-	}
-	//start combat
-	if(eventNum == 5047) {
-		startCombat(new DemonPack());
-		eventParser(1);
-		spriteSelect(46);
-	}
-	//Demonic orgy sex start
-	if(eventNum == 5048) {
-		oasisSexing();
-		return;
-	}
-	//Try to run after talking
-	if(eventNum == 5049) {
-		oasisTalkDecline();
-	}
-	//Accept orgy
-	if(eventNum == 5050) {
-		oasisTalkAccept();
-	}
-	//Run
-	if(eventNum == 5051) {
-		oasisRunAway();
-	}
-	//Encounte worms
-	if(eventNum == 5052) {
-		if(player.hasStatusAffect("metWorms") >= 0) {
-			if(player.gender == 1 || player.gender == 3) wormsMale();
-			else wormsFemale();
-		}
-		else wormsFirstTime();
-	}
-	//Run from worms
-	if(eventNum == 5053) {
-		wormsRun();
-	}
-	//Worm physical attack
-	if(eventNum == 5054) {
-		wormAttack();
-	}
-	//Worms entice attack!
-	if(eventNum == 5055) {
-		wormsEntice();
-	}
-	//confront worm combat
-	if(eventNum == 5056) {
-		outputText("You turn to confront the worms and combat begins!", true);
-		spriteSelect(76);
-		startCombat(new WormMass());
-	}
-	//Do nothing
-	if(eventNum == 5057) {
-		outputText("You do nothing, allowing the worms to enter combat range!", true);
-		startCombat(new WormMass());
-	}
-	//worm toggle on
-	if(eventNum == 5058) {
-		wormsOn();
-		outputText("You actually think it's kind of a hot idea, and wonder if such creatures actually exist in this land as you make your way back to camp.", true);
-		doNext(13);
-	}
-	//worm toggle off
-	if(eventNum == 5059) {
-		outputText("You shudder in revulsion and figure the sign to be the result of someone's perverted fantasy.", true);
-		wormsOff();
-		doNext(13);
-	}
-	//InfestAttack
-	if(eventNum == 5060) {
-		//Keep logic sane if this attack brings victory
-		menuLoc = 0;
-		playerInfest();
-	}
-	//Set worms to 'who cares'
-	if(eventNum == 5061) {
-		outputText("You shrug and keep walking, not sure how you feel about the strange sign.", true);
-		player.createStatusAffect("wormsOn",0,0,0,0);
-		player.createStatusAffect("wormsHalf",0,0,0,0);
-		doNext(13);
-	}
-	//Cultist Attack 1
-	if(eventNum == 5062) {
-		cultistRaisePlayerLust();
-	}
-	//Cultist Attack 2
-	if(eventNum == 5063) {
-		cultistLustTransfer();
-	}
-	//GET RAEPED BY CULTIST
-	if(eventNum == 5064) {
-		outputText("", true);
-		cultistRapesYou();
-	}
-	//RAEP CULTIST
-	if(eventNum == 5065) {
-		outputText("", true);
-		playerRapesCultist();
-	}
-	//Doggie Firebreath
-	if(eventNum == 5066) {
-		hellhoundFire();
-	}
-	//Hellhound Speed
-	if(eventNum == 5067) {
-		hellhoundScent();
-	}
-	//Hellhound gets raped
-	if(eventNum == 5068) {
-		hellHoundGetsRaped();
-	}
-	//Hellhound rapes player
-	if(eventNum == 5069) {
-		hellhoundRapesPlayer();
-	}
-	//Cultist bad end pt2
-	if(eventNum == 5070) {
-		cultistBadEnd2();
-	}
-	//Wait
-	if(eventNum == 5071) {
-		//Gain fatigue if not fighting sand tarps
-		if(monster.hasStatusAffect("level") < 0) fatigue(-5);
-		flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 1;
-		if(monster.hasStatusAffect("PCTailTangle") >= 0) {
-			kitsuneWait();
-			return;
-		}
-		else if(monster.hasStatusAffect("level") >= 0) {
-			sandTrapWait();
-			return;
-		}
-		else if(monster.hasStatusAffect("Minotaur Entangled") >= 0) {
-			clearOutput();
-			outputText("You sigh and relax in the chains, eying the well-endowed minotaur as you await whatever rough treatment he desires to give.  His musky, utterly male scent wafts your way on the wind, and you feel droplets of your lust dripping down your thighs.  You lick your lips as you watch the pre-cum drip from his balls, eager to get down there and worship them.  Why did you ever try to struggle against this fate?\n\n");
-			dynStats("lus", 30+rand(5), "resisted", false);
-			enemyAI();
-			return;
-		}
-		else if(player.hasStatusAffect("Whispered") >= 0) {
-			clearOutput();
-			outputText("You shake off the mental compulsions and ready yourself to fight!\n\n");
-			player.removeStatusAffect("Whispered");
-			enemyAI();
-			return;
-		}
-		else if(player.hasStatusAffect("HarpyBind") >= 0) {
-			clearOutput();
-			temp = 80 + rand(40);
-			temp = takeDamage(temp);
-			outputText("The brood continues to hammer away at your defenseless self. (" + temp + ")");
-			combatRoundOver();
-			return;
-		}
-		else if(monster.hasStatusAffect("QueenBind") >= 0) {
-			ropeStruggles(true);
-			return;
-		}
-		else if(player.hasStatusAffect("GooBind") >= 0) {
-			outputText("You writhe uselessly, trapped inside the goo girl's warm, seething body. Darkness creeps at the edge of your vision as you are lulled into surrendering by the rippling vibrations of the girl's pulsing body around yours.", true);
-			temp = takeDamage(.35 * maxHP());
-			outputText(" (" + temp + ")", false);
-			combatRoundOver();
-			return;
-		}
-		else if(player.hasStatusAffect("GooArmorBind") >= 0) {
-			clearOutput();
-			outputText("Suddenly, the goo-girl leaks half-way out of her heavy armor and lunges at you. You attempt to dodge her attack, but she doesn't try and hit you - instead, she wraps around you, pinning your arms to your chest. More and more goo latches onto you - you'll have to fight to get out of this.");
-			player.addStatusValue("GooArmorBind",1,1);
-			if(player.statusAffectv1("GooArmorBind") >= 5) {
-				if(monster.hasStatusAffect("spar") >= 0) pcWinsValeriaSparDefeat();
-				else gooArmorBeatsUpPC();
+			//Keep logic sane if this attack brings victory
+			menuLoc = 0;
+			if (player.tailVenom < 33) {
+				outputText("You do not have enough venom to sting right now!", true);
+				doNext(5161);
 				return;
 			}
-			combatRoundOver();
-			return;
-		}
-		else if(player.hasStatusAffect("Naga Bind") >= 0) {
-			outputText("The naga's grip on you tightens as you relax into the stimulating pressure.", true);
-			dynStats("lus", player.sens/5+5);
-			takeDamage(5+rand(5));
-			combatRoundOver();
-			return;
-		} else if(player.hasStatusAffect("Holli Constrict") >= 0) {
-			waitForHolliConstrict(true);
-			return;
-		}
-		else if(player.hasStatusAffect("TentacleBind") >= 0) {
-			if(player.cocks.length > 0) outputText("The creature continues spiraling around your cock, sending shivers up and down your body. You must escape or this creature will overwhelm you!", true);
-			else if(player.hasVagina()) outputText("The creature continues sucking your clit and now has latched two more suckers on your nipples, amplifying your growing lust. You must escape or you will become a mere toy to this thing!", true);
-			else outputText("The creature continues probing at your asshole and has now latched " + num2Text(player.totalNipples()) + " more suckers onto your nipples, amplifying your growing lust.  You must escape or you will become a mere toy to this thing!", true);
-			dynStats("lus", (8+player.sens/10));
-			combatRoundOver();
-			return;
-		}
-		else if(player.hasStatusAffect("Isabella Stunned") >= 0) {
-			player.removeStatusAffect("Isabella Stunned");
-			outputText("You wobble about for some time but manage to recover. Isabella capitalizes on your wasted time to act again.\n\n", true);
-		}
-		else if(player.hasStatusAffect("Stunned") >= 0) {
-			player.removeStatusAffect("Stunned");
-			outputText("You wobble about, stunned for a moment.  After shaking your head, you clear the stars from your vision, but by then you've squandered your chance to act.\n\n", true);
-		}
-		else if(player.hasStatusAffect("Confusion") >= 0) {
-			player.removeStatusAffect("Confusion");
-			outputText("You shake your head and file your memories in the past, where they belong.  It's time to fight!\n\n", true);
-		}
-		else outputText("You decide not to take any action this round.\n\n", true);
-		enemyAI();
-		return;
-	}
-	//Tentacle physical attack
-	if(eventNum == 5072) {
-		tentaclePhysicalAttack();
-		return;
-	}
-	//Tentacle entwine attack
-	if(eventNum == 5073) {
-		tentacleEntwine();
-		return;
-	}
-	//Tentacle rapes you
-	if(eventNum == 5074) {
-		outputText("", true);
-		tentacleLossRape();
-		return;
-	}
-	//Tentacle Bad End
-	if(eventNum == 5075) {
-		futaTentacleBadEnd();
-		return;
-	}
-	//Tentacle Bad End2
-	if(eventNum == 5076) {
-		futaTentacleEpilogue();
-		return;
-	}
-	//Tentacle Struggle
-	if(eventNum == 5077) {
-		if(monster.hasStatusAffect("Minotaur Entangled") >= 0) {
-			clearOutput();
-			if(player.str/9 + rand(20) + 1 >= 15) {
-				outputText("Utilizing every ounce of your strength and cunning, you squirm wildly, shrugging through weak spots in the chain's grip to free yourself!  Success!");
-				monster.removeStatusAffect("Minotaur Entangled");
-				outputText("\n\n\"<i>No!  You fool!  You let her get away!  Hurry up and finish her up!  I need my serving!</i>\"  The succubus spits out angrily.\n\n");
-				combatRoundOver();
-			}
-			//Struggle Free Fail*
-			else {
-				outputText("You wiggle and struggle with all your might, but the chains remain stubbornly tight, binding you in place.  Damnit!  You can't lose like this!\n\n");
+			//Worms are immune!
+			if (monster.short == "worms") {
+				outputText("Taking advantage of your new natural weapons, you quickly thrust your stinger at the freak of nature. Sensing impending danger, the creature willingly drops its cohesion, causing the mass of worms to fall to the ground with a sick, wet 'thud', leaving you to stab only at air.\n\n", true);
 				enemyAI();
+				return;
 			}
-			return;
-		}
-		if(monster.hasStatusAffect("PCTailTangle") >= 0) {
-			kitsuneStruggle();
-			return;
-		} else if(player.hasStatusAffect("Holli Constrict") >= 0) {
-			struggleOutOfHolli();
-			return;
-		}
-		else if(monster.hasStatusAffect("QueenBind") >= 0) {
-			ropeStruggles();
-			return;
-		}
-		else if(player.hasStatusAffect("GooBind") >= 0) {
-			//[Struggle](successful) : 
-			if(rand(3) == 0 || rand(80) < player.str) {
-				outputText("You claw your fingers wildly within the slime and manage to brush against her heart-shaped nucleus. The girl silently gasps and loses cohesion, allowing you to pull yourself free while she attempts to solidify.", true);
-				player.removeStatusAffect("GooBind");
+			playerStinger();
+	}
+			//Gore attack
+	if(eventNum == 5038) {
+			//Keep logic sane if this attack brings victory
+			menuLoc = 0;
+			if (monster.short == "worms") {
+				outputText("Taking advantage of your new natural weapons, you quickly charge at the freak of nature. Sensing impending danger, the creature willingly drops its cohesion, causing the mass of worms to fall to the ground with a sick, wet 'thud', leaving your horns to stab only at air.\n\n", true);
+				enemyAI();
+				return;
 			}
-			//Failed struggle
+			goreAttack();
+	}
+			//Green Slime Lust attack!
+	if(eventNum == 5039) {
+			outputText("The creature surges forward slowly with a swing that you easily manage to avoid.  You notice traces of green liquid spurt from the creature as it does, forming a thin mist that makes your skin tingle with excitement when you inhale it.", false);
+			dynStats("lus", player.lib / 10 + 8);
+			doNext(1);
+	}
+			//Green Slime Lust lossssss!
+	if(eventNum == 5040) {
+			outputText("The creature collapses backwards as its cohesion begins to give out, and the faint outline of eyes and a mouth form on its face.  Its chest heaves as if it were gasping, and the bolt upright erection it sports visibly quivers and pulses before relaxing slightly.", false);
+			monster.lust -= 13;
+			doNext(1);
+	}
+			//Victory Sex (Slime)
+	if(eventNum == 5041) {
+			//Service for lower corruption
+			if (player.cor <= 33) {
+				outputText("", true);
+				if (player.lust < 60) serviceLowCorruption();
+				else serviceLowCorruptionHighLust();
+			}
+			//higher corruption raaaaeeeep
 			else {
-				outputText("You writhe uselessly, trapped inside the goo girl's warm, seething body. Darkness creeps at the edge of your vision as you are lulled into surrendering by the rippling vibrations of the girl's pulsing body around yours.", true);
-				temp = takeDamage(.15 * maxHP());
-				outputText(" (" + temp + ")", false);
+				outputText("", true);
+				//male or futa
+				if (player.gender == 1 || (player.gender == 3 && rand(2) == 0)) maleRapesOoze();
+				//female or futa
+				else if (player.gender > 0) femaleRapesOoze();
 			}
-			combatRoundOver();
+			cleanupAfterCombat();
 			return;
-		}
-		else if(player.hasStatusAffect("HarpyBind") >= 0) {
-			harpyHordeGangBangStruggle();
-			return;
-		}
-		else if(player.hasStatusAffect("GooArmorBind") >= 0) {
-			struggleAtGooBind();
-			return;
-		}
-		else if(player.hasStatusAffect("UBERWEB") >= 0) {
-			outputText("You claw your way out of the webbing while Kiha does her best to handle the spiders single-handedly!\n\n", true);
-			player.removeStatusAffect("UBERWEB");
-			enemyAI();
-			return;
-		}
-		else if(player.hasStatusAffect("Naga Bind") >= 0) {
-			if(rand(3) == 0 || rand(80) < player.str/1.5) {
-				outputText("You wriggle and squirm violently, tearing yourself out from within the naga's coils.", true);
-				player.removeStatusAffect("Naga Bind");
+	}
+			//Losing Sex (Slime)
+	if(eventNum == 5042) {
+			outputText("", true);
+			doNext(1);
+			if (player.gender == 2 || (player.gender == 3 && rand(2) == 0)) {
+				temp = rand(3);
+				if (temp == 0) oozeRapesYouVaginally();
+				if (temp == 1) oozeRapesYouOrally();
+				if (temp == 2) oozeButtRapesYou();
 			}
+			//Everybody else
 			else {
-				outputText("The naga's grip on you tightens as you struggle to break free from the stimulating pressure.", true);
-				dynStats("lus", player.sens/10+2);
-				takeDamage(7+rand(5));
+				temp = rand(2);
+				if (temp == 0) oozeRapesYouOrally();
+				if (temp == 1) oozeButtRapesYou();
 			}
-			combatRoundOver();
+			cleanupAfterCombat();
 			return;
-		}
-		else {
-			outputText("You struggle with all of your might to free yourself from the tentacles before the creature can fulfill whatever unholy desire it has for you.\n", true);
-			//33% chance to break free + up to 50% chance for strength
-			if(rand(3) == 0 || rand(80) < player.str/2) {
-				outputText("As the creature attempts to adjust your position in its grip, you free one of your " + player.legs() + " and hit the beast in its beak, causing it to let out an inhuman cry and drop you to the ground smartly.\n\n", false);
-				player.removeStatusAffect("TentacleBind");
-				monster.createStatusAffect("TentacleCoolDown",3,0,0,0);
-			}
-			//Fail to break free
-			else {
-				outputText("Despite trying to escape, the creature only tightens its grip, making it difficult to breathe.\n\n", false);
-				takeDamage(5);
-				if(player.cocks.length > 0) outputText("The creature continues spiraling around your cock, sending shivers up and down your body. You must escape or this creature will overwhelm you!", false);
-				else if(player.hasVagina()) outputText("The creature continues sucking your clit and now has latched two more suckers on your nipples, amplifying your growing lust. You must escape or you will become a mere toy to this thing!", true);			
-				else outputText("The creature continues probing at your asshole and has now latched " + num2Text(player.totalNipples()) + " more suckers onto your nipples, amplifying your growing lust.  You must escape or you will become a mere toy to this thing!", true);
-				dynStats("lus", (3+player.sens/10+player.lib/20));
+	}
+			//Demon pack attack
+	if(eventNum == 5043) {
+			//return to combat menu when finished
+			//Determine if dodged!
+			if (player.spe - monster.spe > 0 && int(Math.random() * (((player.spe - monster.spe) / 4) + 80)) > 80) {
+				outputText("You duck, weave, and dodge.  Despite their best efforts, the throng of demons only hit the air and each other.", false);
 				combatRoundOver();
 				return;
 			}
-		}
-		enemyAI();
+			//Determine if evaded
+			if (player.hasPerk("Evade") >= 0 && rand(100) < 10) {
+				outputText("Using your skills at evading attacks, you anticipate and sidestep " + monster.a + monster.short + "' attacks.", false);
+				combatRoundOver();
+				return;
+			}
+			//("Misdirection"
+			if (player.hasPerk("Misdirection") >= 0 && rand(100) < 15 && player.armorName == "red, high-society bodysuit") {
+				outputText("Using Raphael's teachings, you anticipate and sidestep " + monster.a + monster.short + "' attacks.", false);
+				combatRoundOver();
+				return;
+			}
+			//Determine if cat'ed
+			if (player.hasPerk("Flexibility") >= 0 && rand(100) < 6) {
+				outputText("With your incredible flexibility, you squeeze out of the way of " + monster.a + monster.short + "' attacks.", false);
+				combatRoundOver();
+				return;
+			}
+			//Determine damage - str modified by enemy toughness!
+			temp = int((monster.str + monster.weaponAttack) - rand(player.tou) - player.armorDef);
+			if (temp > 0) temp = takeDamage(temp);
+			if (temp <= 0) {
+				temp = 0;
+				if (!monster.plural) outputText("You deflect and block every " + monster.weaponVerb + " " + monster.a + monster.short + " throw at you.", false);
+				else outputText("You deflect " + monster.a + monster.short + " " + monster.weaponVerb + ".");
+			}
+			if (temp > 0 && temp < 6) {
+				outputText("You are struck a glancing blow by " + monster.a + monster.short + "! (" + temp + ")", false);
+			}
+			if (temp > 5 && temp < 11) {
+				outputText(monster.capitalA + monster.short + " wound you! (" + temp + ")", false);
+			}
+			if (temp > 10 && temp < 21) {
+				outputText(monster.capitalA + monster.short + " stagger you with the force of " + monster.pronoun3 + " " + monster.weaponVerb + "s! (" + temp + ")", false);
+			}
+			if (temp > 20) {
+				outputText(monster.capitalA + monster.short + " <b>mutilates</b> you with powerful fists and " + monster.weaponVerb + "s! (" + temp + ")", false);
+			}
+			statScreenRefresh();
+			outputText("\n", false);
+			combatRoundOver();
+			return;
 	}
-	//Tentacle gets raped
+			//Demonic lust attack!
+	if(eventNum == 5044) {
+			if (player.lust < 35) outputText("The demons press in close against you and although they fail to hit you with an attack, the sensation of their skin rubbing against yours feels highly erotic.", false);
+			if (player.lust >= 35 && player.lust < 65) {
+				outputText("The push of the demons' sweaty, seductive bodies sliding over yours is deliciously arousing and you feel your ", false);
+				if (player.cocks.length > 0) outputText(multiCockDescriptLight() + " hardening ", false);
+				else if (player.vaginas.length > 0) outputText(vaginaDescript(0) + " get wetter ", false);
+				outputText("in response to all the friction.", false);
+			}
+			if (player.lust >= 65) {
+				outputText("As the demons mill around you, their bodies rub constantly over yours, and it becomes harder and harder to keep your thoughts on the fight or resist reaching out to touch a well lubricated cock or pussy as it slips past.  You keep subconsciously moving your ", false);
+				if (player.gender == 1) outputText(multiCockDescriptLight() + " towards the	nearest inviting demonic hole.", false);
+				if (player.gender == 2) outputText(vaginaDescript(0) + " towards the nearest swinging cock.", false);
+				if (player.gender == 3) outputText("aching cock and thirsty pussy towards the nearest thing willing to fuck it.", false);
+				if (player.gender == 0) outputText("groin, before remember there is nothing there to caress.", false);
+			}
+			dynStats("lus", 10 + player.sens / 10);
+			combatRoundOver();
+	}
+			//Raise demons lust to 100 & fuck them
+	if(eventNum == 5045) {
+			outputText("You open your arms and step into the throng of eager demons. They jump eagerly to touch you, becoming more and more lust-frenzied every second. You take the nearest demon and throw it to the ground and without a moment's thought the rest of the group leap to join you in a thoughtless madness of lust...", true);
+			doNext(5048);
+	}
+			//Chat with demon group
+	if(eventNum == 5046) {
+			oasisTalk();
+	}
+			//start combat
+	if(eventNum == 5047) {
+			startCombat(new DemonPack());
+			eventParser(1);
+			spriteSelect(46);
+	}
+			//Demonic orgy sex start
+	if(eventNum == 5048) {
+			oasisSexing();
+			return;
+	}
+			//Try to run after talking
+	if(eventNum == 5049) {
+			oasisTalkDecline();
+	}
+			//Accept orgy
+	if(eventNum == 5050) {
+			oasisTalkAccept();
+	}
+			//Run
+	if(eventNum == 5051) {
+			oasisRunAway();
+	}
+			//Encounte worms
+	if(eventNum == 5052) {
+			if (player.hasStatusAffect("metWorms") >= 0) {
+				if (player.gender == 1 || player.gender == 3) wormsMale();
+				else wormsFemale();
+			}
+			else wormsFirstTime();
+	}
+			//Run from worms
+	if(eventNum == 5053) {
+			wormsRun();
+	}
+			//Worm physical attack
+	if(eventNum == 5054) {
+			wormAttack();
+	}
+			//Worms entice attack!
+	if(eventNum == 5055) {
+			wormsEntice();
+	}
+			//confront worm combat
+	if(eventNum == 5056) {
+			outputText("You turn to confront the worms and combat begins!", true);
+			spriteSelect(76);
+			startCombat(new WormMass());
+	}
+			//Do nothing
+	if(eventNum == 5057) {
+			outputText("You do nothing, allowing the worms to enter combat range!", true);
+			startCombat(new WormMass());
+	}
+			//worm toggle on
+	if(eventNum == 5058) {
+			wormsOn();
+			outputText("You actually think it's kind of a hot idea, and wonder if such creatures actually exist in this land as you make your way back to camp.", true);
+			doNext(13);
+	}
+			//worm toggle off
+	if(eventNum == 5059) {
+			outputText("You shudder in revulsion and figure the sign to be the result of someone's perverted fantasy.", true);
+			wormsOff();
+			doNext(13);
+	}
+			//InfestAttack
+	if(eventNum == 5060) {
+			//Keep logic sane if this attack brings victory
+			menuLoc = 0;
+			playerInfest();
+	}
+			//Set worms to 'who cares'
+	if(eventNum == 5061) {
+			outputText("You shrug and keep walking, not sure how you feel about the strange sign.", true);
+			player.createStatusAffect("wormsOn", 0, 0, 0, 0);
+			player.createStatusAffect("wormsHalf", 0, 0, 0, 0);
+			doNext(13);
+	}
+			//Cultist Attack 1
+	if(eventNum == 5062) {
+			cultistRaisePlayerLust();
+	}
+			//Cultist Attack 2
+	if(eventNum == 5063) {
+			cultistLustTransfer();
+	}
+			//GET RAEPED BY CULTIST
+	if(eventNum == 5064) {
+			outputText("", true);
+			cultistRapesYou();
+	}
+			//RAEP CULTIST
+	if(eventNum == 5065) {
+			outputText("", true);
+			playerRapesCultist();
+	}
+			//Doggie Firebreath
+	if(eventNum == 5066) {
+			hellhoundFire();
+	}
+			//Hellhound Speed
+	if(eventNum == 5067) {
+			hellhoundScent();
+	}
+			//Hellhound gets raped
+	if(eventNum == 5068) {
+			hellHoundGetsRaped();
+	}
+			//Hellhound rapes player
+	if(eventNum == 5069) {
+			hellhoundRapesPlayer();
+	}
+			//Cultist bad end pt2
+	if(eventNum == 5070) {
+			cultistBadEnd2();
+	}
+			//Wait
+	if(eventNum == 5071) {
+			//Gain fatigue if not fighting sand tarps
+			if (monster.hasStatusAffect("level") < 0) fatigue(-5);
+			flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 1;
+			if (monster.hasStatusAffect("PCTailTangle") >= 0) {
+				kitsuneWait();
+				return;
+			}
+			else if (monster.hasStatusAffect("level") >= 0) {
+				sandTrapWait();
+				return;
+			}
+			else if (monster.hasStatusAffect("Minotaur Entangled") >= 0) {
+				clearOutput();
+				outputText("You sigh and relax in the chains, eying the well-endowed minotaur as you await whatever rough treatment he desires to give.  His musky, utterly male scent wafts your way on the wind, and you feel droplets of your lust dripping down your thighs.  You lick your lips as you watch the pre-cum drip from his balls, eager to get down there and worship them.  Why did you ever try to struggle against this fate?\n\n");
+				dynStats("lus", 30 + rand(5), "resisted", false);
+				enemyAI();
+				return;
+			}
+			else if (player.hasStatusAffect("Whispered") >= 0) {
+				clearOutput();
+				outputText("You shake off the mental compulsions and ready yourself to fight!\n\n");
+				player.removeStatusAffect("Whispered");
+				enemyAI();
+				return;
+			}
+			else if (player.hasStatusAffect("HarpyBind") >= 0) {
+				clearOutput();
+				temp = 80 + rand(40);
+				temp = takeDamage(temp);
+				outputText("The brood continues to hammer away at your defenseless self. (" + temp + ")");
+				combatRoundOver();
+				return;
+			}
+			else if (monster.hasStatusAffect("QueenBind") >= 0) {
+				ropeStruggles(true);
+				return;
+			}
+			else if (player.hasStatusAffect("GooBind") >= 0) {
+				outputText("You writhe uselessly, trapped inside the goo girl's warm, seething body. Darkness creeps at the edge of your vision as you are lulled into surrendering by the rippling vibrations of the girl's pulsing body around yours.", true);
+				temp = takeDamage(.35 * maxHP());
+				outputText(" (" + temp + ")", false);
+				combatRoundOver();
+				return;
+			}
+			else if (player.hasStatusAffect("GooArmorBind") >= 0) {
+				clearOutput();
+				outputText("Suddenly, the goo-girl leaks half-way out of her heavy armor and lunges at you. You attempt to dodge her attack, but she doesn't try and hit you - instead, she wraps around you, pinning your arms to your chest. More and more goo latches onto you - you'll have to fight to get out of this.");
+				player.addStatusValue("GooArmorBind", 1, 1);
+				if (player.statusAffectv1("GooArmorBind") >= 5) {
+					if (monster.hasStatusAffect("spar") >= 0) pcWinsValeriaSparDefeat();
+					else gooArmorBeatsUpPC();
+					return;
+				}
+				combatRoundOver();
+				return;
+			}
+			else if (player.hasStatusAffect("Naga Bind") >= 0) {
+				outputText("The naga's grip on you tightens as you relax into the stimulating pressure.", true);
+				dynStats("lus", player.sens / 5 + 5);
+				takeDamage(5 + rand(5));
+				combatRoundOver();
+				return;
+			} else if (player.hasStatusAffect("Holli Constrict") >= 0) {
+				waitForHolliConstrict(true);
+				return;
+			}
+			else if (player.hasStatusAffect("TentacleBind") >= 0) {
+				if (player.cocks.length > 0) outputText("The creature continues spiraling around your cock, sending shivers up and down your body. You must escape or this creature will overwhelm you!", true);
+				else if (player.hasVagina()) outputText("The creature continues sucking your clit and now has latched two more suckers on your nipples, amplifying your growing lust. You must escape or you will become a mere toy to this thing!", true);
+				else outputText("The creature continues probing at your asshole and has now latched " + num2Text(player.totalNipples()) + " more suckers onto your nipples, amplifying your growing lust.  You must escape or you will become a mere toy to this thing!", true);
+				dynStats("lus", (8 + player.sens / 10));
+				combatRoundOver();
+				return;
+			}
+			else if (player.hasStatusAffect("Isabella Stunned") >= 0) {
+				player.removeStatusAffect("Isabella Stunned");
+				outputText("You wobble about for some time but manage to recover. Isabella capitalizes on your wasted time to act again.\n\n", true);
+			}
+			else if (player.hasStatusAffect("Stunned") >= 0) {
+				player.removeStatusAffect("Stunned");
+				outputText("You wobble about, stunned for a moment.  After shaking your head, you clear the stars from your vision, but by then you've squandered your chance to act.\n\n", true);
+			}
+			else if (player.hasStatusAffect("Confusion") >= 0) {
+				player.removeStatusAffect("Confusion");
+				outputText("You shake your head and file your memories in the past, where they belong.  It's time to fight!\n\n", true);
+			}
+			else outputText("You decide not to take any action this round.\n\n", true);
+			enemyAI();
+			return;
+	}
+			//Tentacle physical attack
+	if(eventNum == 5072) {
+			tentaclePhysicalAttack();
+			return;
+	}
+			//Tentacle entwine attack
+	if(eventNum == 5073) {
+			tentacleEntwine();
+			return;
+	}
+			//Tentacle rapes you
+	if(eventNum == 5074) {
+			outputText("", true);
+			tentacleLossRape();
+			return;
+	}
+			//Tentacle Bad End
+	if(eventNum == 5075) {
+			futaTentacleBadEnd();
+			return;
+	}
+			//Tentacle Bad End2
+	if(eventNum == 5076) {
+			futaTentacleEpilogue();
+			return;
+	}
+			//Tentacle Struggle
+	if(eventNum == 5077) {
+			if (monster.hasStatusAffect("Minotaur Entangled") >= 0) {
+				clearOutput();
+				if (player.str / 9 + rand(20) + 1 >= 15) {
+					outputText("Utilizing every ounce of your strength and cunning, you squirm wildly, shrugging through weak spots in the chain's grip to free yourself!  Success!");
+					monster.removeStatusAffect("Minotaur Entangled");
+					outputText("\n\n\"<i>No!  You fool!  You let her get away!  Hurry up and finish her up!  I need my serving!</i>\"  The succubus spits out angrily.\n\n");
+					combatRoundOver();
+				}
+				//Struggle Free Fail*
+				else {
+					outputText("You wiggle and struggle with all your might, but the chains remain stubbornly tight, binding you in place.  Damnit!  You can't lose like this!\n\n");
+					enemyAI();
+				}
+				return;
+			}
+			if (monster.hasStatusAffect("PCTailTangle") >= 0) {
+				kitsuneStruggle();
+				return;
+			} else if (player.hasStatusAffect("Holli Constrict") >= 0) {
+				struggleOutOfHolli();
+				return;
+			}
+			else if (monster.hasStatusAffect("QueenBind") >= 0) {
+				ropeStruggles();
+				return;
+			}
+			else if (player.hasStatusAffect("GooBind") >= 0) {
+				//[Struggle](successful) :
+				if (rand(3) == 0 || rand(80) < player.str) {
+					outputText("You claw your fingers wildly within the slime and manage to brush against her heart-shaped nucleus. The girl silently gasps and loses cohesion, allowing you to pull yourself free while she attempts to solidify.", true);
+					player.removeStatusAffect("GooBind");
+				}
+				//Failed struggle
+				else {
+					outputText("You writhe uselessly, trapped inside the goo girl's warm, seething body. Darkness creeps at the edge of your vision as you are lulled into surrendering by the rippling vibrations of the girl's pulsing body around yours.", true);
+					temp = takeDamage(.15 * maxHP());
+					outputText(" (" + temp + ")", false);
+				}
+				combatRoundOver();
+				return;
+			}
+			else if (player.hasStatusAffect("HarpyBind") >= 0) {
+				harpyHordeGangBangStruggle();
+				return;
+			}
+			else if (player.hasStatusAffect("GooArmorBind") >= 0) {
+				struggleAtGooBind();
+				return;
+			}
+			else if (player.hasStatusAffect("UBERWEB") >= 0) {
+				outputText("You claw your way out of the webbing while Kiha does her best to handle the spiders single-handedly!\n\n", true);
+				player.removeStatusAffect("UBERWEB");
+				enemyAI();
+				return;
+			}
+			else if (player.hasStatusAffect("Naga Bind") >= 0) {
+				if (rand(3) == 0 || rand(80) < player.str / 1.5) {
+					outputText("You wriggle and squirm violently, tearing yourself out from within the naga's coils.", true);
+					player.removeStatusAffect("Naga Bind");
+				}
+				else {
+					outputText("The naga's grip on you tightens as you struggle to break free from the stimulating pressure.", true);
+					dynStats("lus", player.sens / 10 + 2);
+					takeDamage(7 + rand(5));
+				}
+				combatRoundOver();
+				return;
+			}
+			else {
+				outputText("You struggle with all of your might to free yourself from the tentacles before the creature can fulfill whatever unholy desire it has for you.\n", true);
+				//33% chance to break free + up to 50% chance for strength
+				if (rand(3) == 0 || rand(80) < player.str / 2) {
+					outputText("As the creature attempts to adjust your position in its grip, you free one of your " + player.legs() + " and hit the beast in its beak, causing it to let out an inhuman cry and drop you to the ground smartly.\n\n", false);
+					player.removeStatusAffect("TentacleBind");
+					monster.createStatusAffect("TentacleCoolDown", 3, 0, 0, 0);
+				}
+				//Fail to break free
+				else {
+					outputText("Despite trying to escape, the creature only tightens its grip, making it difficult to breathe.\n\n", false);
+					takeDamage(5);
+					if (player.cocks.length > 0) outputText("The creature continues spiraling around your cock, sending shivers up and down your body. You must escape or this creature will overwhelm you!", false);
+					else if (player.hasVagina()) outputText("The creature continues sucking your clit and now has latched two more suckers on your nipples, amplifying your growing lust. You must escape or you will become a mere toy to this thing!", true);
+					else outputText("The creature continues probing at your asshole and has now latched " + num2Text(player.totalNipples()) + " more suckers onto your nipples, amplifying your growing lust.  You must escape or you will become a mere toy to this thing!", true);
+					dynStats("lus", (3 + player.sens / 10 + player.lib / 20));
+					combatRoundOver();
+					return;
+				}
+			}
+			enemyAI();
+	}
+			//Tentacle gets raped
 	if(eventNum == 5078) {
-		tentacleVictoryRape();
-		return;
+			tentacleVictoryRape();
+			return;
 	}
-	//Fire bow - Requires 25 fatigue
+			//Fire bow - Requires 25 fatigue
 	if(eventNum == 5079) {
-		if(player.fatigue + physicalCost(25) > 100) {
-			outputText("You're too fatigued to fire the bow!", true);
-			doNext(5000);
-			return;
-		}
-		if(monster.hasStatusAffect("Bow Disabled") >= 0) {
-			outputText("You can't use your bow right now!", true);
-			doNext(5000);
-			return;
-		}
-		fatigue(25,2);
-		menuLoc = 0;
-		//Amily!
-		if(monster.hasStatusAffect("Concentration") >= 0) {
-			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n", true);
+			if (player.fatigue + physicalCost(25) > 100) {
+				outputText("You're too fatigued to fire the bow!", true);
+				doNext(5000);
+				return;
+			}
+			if (monster.hasStatusAffect("Bow Disabled") >= 0) {
+				outputText("You can't use your bow right now!", true);
+				doNext(5000);
+				return;
+			}
+			fatigue(25, 2);
+			menuLoc = 0;
+			//Amily!
+			if (monster.hasStatusAffect("Concentration") >= 0) {
+				outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n", true);
+				enemyAI();
+				return;
+			}
+			outputText("", true);
+			//Keep logic sane if this attack brings victory
+			menuLoc = 0;
+			//Prep messages vary by skill.
+			if (player.statusAffectv1("Kelt") < 30) {
+				outputText("Fumbling a bit, you nock an arrow and fire!\n", false);
+			}
+			else if (player.statusAffectv1("Kelt") < 50) {
+				outputText("You pull an arrow and fire it at " + monster.a + monster.short + "!\n", false);
+			}
+			else if (player.statusAffectv1("Kelt") < 80) {
+				outputText("With one smooth motion you draw, nock, and fire your deadly arrow at your opponent!\n", false);
+			}
+			else if (player.statusAffectv1("Kelt") <= 99) {
+				outputText("In the blink of an eye you draw and fire your bow directly at " + monster.a + monster.short + ".\n", false);
+			}
+			else {
+				outputText("You casually fire an arrow at " + monster.a + monster.short + " with supreme skill.\n", false);
+				//Keep it from going over 100
+				player.changeStatusValue("Kelt", 1, 100);
+			}
+			if (monster.hasStatusAffect("sandstorm") >= 0 && rand(10) > 1) {
+				outputText("Your shot is blown off target by the tornado of sand and wind.  Damn!\n\n");
+				enemyAI();
+				return;
+			}
+			//[Bow Response]
+			if (monster.short == "Isabella") {
+				if (monster.hasStatusAffect("Blind") >= 0) outputText("Isabella hears the shot and turns her shield towards it, completely blocking it with her wall of steel.\n\n", false);
+				else outputText("You arrow thunks into Isabella's shield, completely blocked by the wall of steel.\n\n", false);
+				outputText("\"<i>You remind me of ze horse-people.  They cannot deal vith mein shield either!</i>\" cheers Isabella.\n\n", false);
+				enemyAI();
+				return;
+			}
+			//worms are immune
+			if (monster.short == "worms") {
+				outputText("The arrow slips between the worms, sticking into the ground.\n\n", true);
+				enemyAI();
+				return;
+			}
+			//Vala miss chance!
+			if (monster.short == "Vala" && rand(10) < 7) {
+				outputText("Vala flaps her wings and twists her body. Between the sudden gust of wind and her shifting of position, the arrow goes wide.\n\n", false);
+				enemyAI();
+				return;
+			}
+			//Blind miss chance
+			if (player.hasStatusAffect("Blind") >= 0) {
+				outputText("The arrow hits something, but blind as you are, you don't have a chance in hell of hitting anything with a bow.\n\n", false);
+				enemyAI();
+				return;
+			}
+			//Miss chance 10% based on speed + 10% based on int + 20% based on skill
+			if (monster.short != "pod" && player.spe / 10 + player.inte / 10 + player.statusAffectv1("Kelt") / 5 + 60 < rand(101)) {
+				outputText("The arrow goes wide, disappearing behind your foe.\n\n", false);
+				enemyAI();
+				return;
+			}
+			//Hit!  Damage calc! 20 +
+			var damage:Number = 0;
+			damage = int((20 + player.str / 3 + player.statusAffectv1("Kelt") / 1.2) + player.spe / 3 - rand(monster.tou) - monster.armorDef);
+			if (damage < 0) damage = 0;
+			if (damage == 0) {
+				if (monster.inte > 0) outputText(monster.capitalA + monster.short + " shrugs as the arrow bounces off them harmlessly.\n\n", false);
+				else outputText("The arrow bounces harmlessly off " + monster.a + monster.short + ".\n\n", false);
+				enemyAI();
+				return;
+			}
+			if (monster.short == "pod") outputText("The arrow lodges deep into the pod's fleshy wall", false);
+			else if (monster.plural) outputText(monster.capitalA + monster.short + " look down at the arrow that now protrudes from one of " + monster.pronoun3 + " bodies", false);
+			else outputText(monster.capitalA + monster.short + " looks down at the arrow that now protrudes from " + monster.pronoun3 + " body", false);
+			if (player.hasPerk("History: Fighter") >= 0) damage *= 1.1;
+			damage = doDamage(damage);
+			monster.lust -= 20;
+			if (monster.lust < 0) monster.lust = 0;
+			if (monster.HP <= 0) {
+				if (monster.short == "pod") outputText(". (" + String(damage) + ")\n\n", false);
+				else if (monster.plural) outputText(" and stagger, collapsing onto each other from the wounds you've inflicted on " + monster.pronoun2 + ".  (" + String(damage) + ")\n\n", false);
+				else outputText(" and staggers, collapsing from the wounds you've inflicted on " + monster.pronoun2 + ".  (" + String(damage) + ")\n\n", false);
+				doNext(endHpVictory);
+				return;
+			}
+			else outputText(".  It's clearly very painful. (" + String(damage) + ")\n\n", false);
 			enemyAI();
 			return;
-		}
-		outputText("", true);
-		//Keep logic sane if this attack brings victory
-		menuLoc = 0;
-		//Prep messages vary by skill. 
-		if(player.statusAffectv1("Kelt") < 30) {
-			outputText("Fumbling a bit, you nock an arrow and fire!\n", false);
-		}
-		else if(player.statusAffectv1("Kelt") < 50) {
-			outputText("You pull an arrow and fire it at " + monster.a + monster.short + "!\n", false);
-		}
-		else if(player.statusAffectv1("Kelt") < 80) {
-			outputText("With one smooth motion you draw, nock, and fire your deadly arrow at your opponent!\n", false);
-		}
-		else if(player.statusAffectv1("Kelt") <= 99) {
-			outputText("In the blink of an eye you draw and fire your bow directly at " + monster.a + monster.short + ".\n", false);
-		}
-		else {
-			outputText("You casually fire an arrow at " + monster.a + monster.short + " with supreme skill.\n", false);
-			//Keep it from going over 100
-			player.changeStatusValue("Kelt",1,100);
-		}
-		if(monster.hasStatusAffect("sandstorm") >= 0 && rand(10) > 1) {
-			outputText("Your shot is blown off target by the tornado of sand and wind.  Damn!\n\n");
-			enemyAI();
-			return;
-		}
-		//[Bow Response] 
-		if(monster.short == "Isabella") {
-			if(monster.hasStatusAffect("Blind") >= 0) outputText("Isabella hears the shot and turns her shield towards it, completely blocking it with her wall of steel.\n\n", false);
-			else outputText("You arrow thunks into Isabella's shield, completely blocked by the wall of steel.\n\n", false);
-			outputText("\"<i>You remind me of ze horse-people.  They cannot deal vith mein shield either!</i>\" cheers Isabella.\n\n", false);
-			enemyAI();
-			return;
-		}
-		//worms are immune
-		if(monster.short == "worms") {
-			outputText("The arrow slips between the worms, sticking into the ground.\n\n", true);
-			enemyAI();
-			return;
-		}
-		//Vala miss chance!
-		if(monster.short == "Vala" && rand(10) < 7) {
-			outputText("Vala flaps her wings and twists her body. Between the sudden gust of wind and her shifting of position, the arrow goes wide.\n\n", false);
-			enemyAI();
-			return;
-		}
-		//Blind miss chance
-		if(player.hasStatusAffect("Blind") >= 0) {
-			outputText("The arrow hits something, but blind as you are, you don't have a chance in hell of hitting anything with a bow.\n\n", false);
-			enemyAI();
-			return;
-		}
-		//Miss chance 10% based on speed + 10% based on int + 20% based on skill
-		if(monster.short != "pod" && player.spe/10 + player.inte/10 + player.statusAffectv1("Kelt")/5 + 60 <  rand(101)) 
-		{
-			outputText("The arrow goes wide, disappearing behind your foe.\n\n", false);
-			enemyAI();
-			return;
-		}
-		//Hit!  Damage calc! 20 + 
-		var damage:Number = 0;
-		damage = int((20 + player.str/3 + player.statusAffectv1("Kelt")/1.2) + player.spe/3 - rand(monster.tou) - monster.armorDef);
-		if(damage < 0) damage = 0;
-		if(damage == 0) {
-			if(monster.inte > 0) outputText(monster.capitalA + monster.short + " shrugs as the arrow bounces off them harmlessly.\n\n", false);
-			else outputText("The arrow bounces harmlessly off " + monster.a + monster.short + ".\n\n", false);
-			enemyAI();
-			return;
-		}
-		if(monster.short == "pod") outputText("The arrow lodges deep into the pod's fleshy wall", false);
-		else if(monster.plural) outputText(monster.capitalA + monster.short + " look down at the arrow that now protrudes from one of " + monster.pronoun3 + " bodies", false);
-		else outputText(monster.capitalA + monster.short + " looks down at the arrow that now protrudes from " + monster.pronoun3 + " body", false);
-		if(player.hasPerk("History: Fighter") >= 0) damage *= 1.1;
-		damage = doDamage(damage);
-		monster.lust -= 20;
-		if(monster.lust < 0) monster.lust = 0;
-		if(monster.HP <= 0) {
-			if(monster.short == "pod") outputText(". (" + String(damage) + ")\n\n", false);
-			else if(monster.plural) outputText(" and stagger, collapsing onto each other from the wounds you've inflicted on " + monster.pronoun2 + ".  (" + String(damage) + ")\n\n", false);
-			else outputText(" and staggers, collapsing from the wounds you've inflicted on " + monster.pronoun2 + ".  (" + String(damage) + ")\n\n", false);
-			doNext(endHpVictory);
-			return;
-		}
-		else outputText(".  It's clearly very painful. (" + String(damage) + ")\n\n", false);
-		enemyAI();
-		return;
 	}
 	if(eventNum == 5080) {
-		doNext(5000);
-		spellArouse();
-		return;
+			doNext(5000);
+			spellArouse();
+			return;
 	}
 	if(eventNum == 5081) {
-		doNext(5000);
-		spellHeal();
-		return;
+			doNext(5000);
+			spellHeal();
+			return;
 	}
 	if(eventNum == 5082) {
-		doNext(5000);
-		spellMight();
-		return;
+			doNext(5000);
+			spellMight();
+			return;
 	}
 	if(eventNum == 5083) {
-		doNext(5000);
-		spellChargeWeapon();
-		return;
+			doNext(5000);
+			spellChargeWeapon();
+			return;
 	}
 	if(eventNum == 5084) {
-		doNext(5000);
-		spellBlind();
-		return;
+			doNext(5000);
+			spellBlind();
+			return;
 	}
 	if(eventNum == 5085) {
-		doNext(5000);
-		spellWhitefire();
-		return;
+			doNext(5000);
+			spellWhitefire();
+			return;
 	}
 	if(eventNum == 5086) {
-		doNext(5000);
-		fantasize();
-		return;
-	}
-	if(eventNum == 5087) {
-		goblinDrugAttack();
-		return;
-	}
-	if(eventNum == 5088) {
-		goblinTeaseAttack();
-		return;
-	}
-	if(eventNum == 5089) {
-		goblinRapesPlayer();
-		return;
-	}
-	if(eventNum == 5090) {
-		gobboGetsRapedMaleFits();
-		return;
-	}
-	if(eventNum == 5091) {
-		gobboGetsRapedFem();
-		return;
+			doNext(5000);
+			fantasize();
+			return;
 	}
 	if(eventNum == 5092) {
-		marbleSpecialAttackOne();
-		return;
+			marbleSpecialAttackOne();
+			return;
 	}
 	if(eventNum == 5093) {
-		marbleSpecialAttackTwo();
-		return;
+			marbleSpecialAttackTwo();
+			return;
 	}
 	if(eventNum == 5094) {
-		marbleFightWin();
-		return;
-	}
+			marbleFightWin();
+			return;
+		}
 	if(eventNum == 5095) {
 		marbleFightLose();
-		return;
-	}
-	//Gobbobuttsecks
-	if(eventNum == 5096) {
-		gobboButtSecks();
-		return;
-	}
+			return;
+		}
 	//Shark special attack
 	if(eventNum == 5097) {
 		sharkTease();
 		return;
-	}
+}
 	//Shark bad end
 	if(eventNum == 5098) {
 		sharkBadEnd();
@@ -1442,26 +1404,6 @@ public function doCombat(eventNum:Number):void
 		simpleChoices("Akbal's",5123,"Hellfire",5143,"Dragonfire",5164,"",0,"Back",1);
 		return;
 	}
-	if(eventNum == 5145) {
-		hyenaArousalAttack();
-		return;
-	}
-	if(eventNum == 5146) {
-		hyenaSnapKicku();
-		return;
-	}
-	if(eventNum == 5147) {
-		hyenaJavelinAttack();
-		return;
-	}
-	if(eventNum == 5148) {
-		hyenaVictoryRapeFellatio();
-		return;
-	}
-	if(eventNum == 5149) {
-		victoryRapeHyenaCunnilingus();
-		return;
-	}
 	if(eventNum == 5150) {
 		kick();
 		return;
@@ -1507,7 +1449,7 @@ public function doCombat(eventNum:Number):void
 		return;
 	}
 	if(eventNum == 5161) {
-		physicalSpecials();		
+		physicalSpecials();
 		return;
 	}
 	if(eventNum == 5162) {
@@ -1543,7 +1485,7 @@ public function fantasize():void {
 	}	
 	else if(player.balls > 0 && player.ballSize >= 10 && rand(2) == 0) {
 		outputText("You daydream about fucking " + monster.a + monster.short + ", feeling your balls swell with seed as you prepare to fuck " + monster.pronoun2 + " full of cum.\n", false);
-		temp2 = 5 + rand(player.lib/8+player.cor/8)
+		temp2 = 5 + rand(player.lib/8+player.cor/8);
 		outputText("You aren't sure if it's just the fantasy, but your " + ballsDescriptLight() + " do feel fuller than before...\n", false);
 		player.hoursSinceCum += 50;
 	}
@@ -1648,7 +1590,6 @@ public function fatigueRecovery():void {
 	fatigue(-1);
 	if(player.hasPerk("Enlightened Nine-tails") >= 0 || player.hasPerk("Corrupted Nine-tails") >= 0) fatigue(-(1+rand(3)));
 }
-
 
 //ATTACK
 public function attack():void {
@@ -2080,21 +2021,19 @@ public function playerStinger():void {
 	else doNext(endLustVictory);
 }
 public function combatMiss():Boolean {
-	if(player.spe - monster.spe > 0 && int(Math.random()*(((player.spe-monster.spe)/4)+80)) > 80) return true;
-	return false;
+	return player.spe - monster.spe > 0 && int(Math.random() * (((player.spe - monster.spe) / 4) + 80)) > 80;
+
 }
 public function combatEvade():Boolean {
-	if(monster.short != "Kiha" && player.hasPerk("Evade") >= 0 && rand(100) < 10) return true;
-	return false;
+	return monster.short != "Kiha" && player.hasPerk("Evade") >= 0 && rand(100) < 10;
+
 }
 public function combatFlexibility():Boolean {
-	if(player.hasPerk("Flexibility") >= 0 && rand(100) < 6) return true;
-	return false;
+	return player.hasPerk("Flexibility") >= 0 && rand(100) < 6;
+
 }
 public function combatMisdirect():Boolean {
-	if(player.hasPerk("Misdirection") >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") 
-		return true;
-	return false;
+	return player.hasPerk("Misdirection") >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit";
 }
 
 //DEAL DAMAGE
@@ -4418,8 +4357,6 @@ public function teaseXP(XP:Number = 0):void {
 	}
 }
 
-
-
 //VICTORY OR DEATH?
 public function combatRoundOver():Boolean {
 	statScreenRefresh();
@@ -4456,23 +4393,10 @@ public function combatRoundOver():Boolean {
 	return false;
 }
 public function hasSpells():Boolean {
-	if(player.hasStatusAffect("Knows Arouse") >= 0) return true;
-	if(player.hasStatusAffect("Knows Heal") >= 0) return true;
-	if(player.hasStatusAffect("Knows Might") >= 0) return true;
-	if(player.hasStatusAffect("Knows Charge") >= 0) return true;
-	if(player.hasStatusAffect("Knows Blind") >= 0) return true;
-	if(player.hasStatusAffect("Knows Whitefire") >= 0) return true;
-	return false;
+	return player.hasSpells();
 }
 public function spellCount():Number {
-	var count:Number = 0;
-	if(player.hasStatusAffect("Knows Arouse") >= 0) count++;
-	if(player.hasStatusAffect("Knows Heal") >= 0) count++;
-	if(player.hasStatusAffect("Knows Might") >= 0) count++;
-	if(player.hasStatusAffect("Knows Charge") >= 0) count++;
-	if(player.hasStatusAffect("Knows Blind") >= 0) count++;
-	if(player.hasStatusAffect("Knows Whitefire") >= 0) count++;
-	return count;
+	return player.spellCount();
 }
 public function magicMenu():void {
 	menuLoc = 3;
@@ -4800,7 +4724,6 @@ public function spellPerkUnlock():void {
 	}
 }
 
-
 //player gains hellfire perk.  
 //Hellfire deals physical damage to completely pure foes, 
 //lust damage to completely corrupt foes, and a mix for those in between.  Its power is based on the PC's corruption and level.  Appearance is slightly changed to mention that the PC's eyes and mouth occasionally show flicks of fire from within them, text could possibly vary based on corruption.
@@ -5127,7 +5050,6 @@ public function spiderBiteAttack():void {
 	else enemyAI();
 }
 
-
 //New Abilities and Items
 //[Abilities]
 //Whisper 
@@ -5270,8 +5192,6 @@ public function dragonBreath():void {
 	combatRoundOver();
 }
 
-
-
 //* Terrestrial Fire
 public function fireballuuuuu():void {
 	outputText("", true);
@@ -5312,8 +5232,7 @@ public function fireballuuuuu():void {
 		damage += 25;
 	}
 	else outputText("A growl rumbles deep with your chest as you charge the terrestrial fire.  When you can hold it no longer, you release an ear splitting roar and hurl a giant green conflagration at your enemy. ", false);
-	
-	
+
 	if(monster.short == "Isabella") {
 		outputText("Isabella shoulders her shield into the path of the emerald flames.  They burst over the wall of steel, splitting around the impenetrable obstruction and washing out harmlessly to sides.\n\n", false);
 		outputText("\"<i>Is zat all you've got?  It'll take more than a flashy magic trick to beat Izabella!</i>\" taunts the cow-girl.\n\n", false);
@@ -5915,11 +5834,6 @@ public function berzerk():void {
 	enemyAI();
 }
 
-	
-
-
-
-
 //Corrupted Fox Fire
 public function corruptedFoxFire():void {
 	clearOutput();
@@ -5937,8 +5851,7 @@ public function corruptedFoxFire():void {
 	fatigue(35,1);
 	//Deals direct damage and lust regardless of enemy defenses.  Especially effective against non-corrupted targets.
 	outputText("Holding out your palm, you conjure corrupted purple flame that dances across your fingertips.  You launch it at " + monster.a + monster.short + " with a ferocious throw, and it bursts on impact, showering dazzling lavender sparks everywhere.");
-	
-	
+
 	var dmg:int = int(10+(player.inte/3 + rand(player.inte/2)) * spellMod());
 	if(monster.cor >= 66) dmg = Math.round(dmg * .66);
 	else if(monster.cor >= 50) dmg = Math.round(dmg * .8);
@@ -6075,7 +5988,6 @@ public function kitsuneIllusion():void {
 	enemyAI();
 	return;
 }
-
 
 //special attack: tail whip? could unlock button for use by dagrons too
 //tiny damage and lower monster armor by ~75% for one turn

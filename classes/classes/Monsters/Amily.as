@@ -25,7 +25,7 @@ package classes.Monsters
 			var dodged:Number = 0;
 			var damage:Number;
 			//return to combat menu when finished
-			game.doNext(1);
+			doNext(1);
 			//Blind dodge change
 			if(hasStatusAffect("Blind") >= 0 && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
@@ -103,7 +103,7 @@ package classes.Monsters
 			var dodged:Number = 0;
 			var damage:Number = 0;
 			//return to combat menu when finished
-			game.doNext(1);
+			doNext(1);
 			//Blind dodge change
 			if(hasStatusAffect("Blind") >= 0 && rand(3) < 2) {
 				dodged++;

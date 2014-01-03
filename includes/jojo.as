@@ -10,12 +10,7 @@ public function jojoSprite():void {
 }
 
 public function assholeOrPussy():String {
-	if(player.hasVagina()) return vaginaDescript(0);
-	return assholeDescript();
-}
-public function assholeOrCunt():String {
-	if(player.hasVagina()) return vaginaDescript(0);
-	return assholeDescript();
+	return Appearance.assholeOrPussy(player);
 }
 public function assholeOrDP():String {
 	if(player.hasVagina()) return (vaginaDescript(0) + " and " + assholeDescript());

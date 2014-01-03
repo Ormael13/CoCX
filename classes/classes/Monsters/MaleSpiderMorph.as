@@ -12,24 +12,18 @@ package classes.Monsters
 	{
 
 
-		override protected function performCombatAction():void
-		{
-			game.spiderAI();
-		}
-
-
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.defeatSpiderBoy();
+			game.maleSpiderMorphScene.defeatSpiderBoy();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if(pcCameWorms){
 				outputText("\n\nThe spider flashes a predatory grin while she waits it out...");
-				game.doNext(game.endLustLoss);
+				doNext(game.endLustLoss);
 			} else {
-				game.loseToMaleSpiderMorph();
+				game.maleSpiderMorphScene.loseToMaleSpiderMorph();
 			}
 		}
 

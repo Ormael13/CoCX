@@ -19,6 +19,27 @@
 		protected final function combatRoundOver():void{
 			game.combatRoundOver();
 		}
+		protected final function showStatDown(a:String):void{
+			game.mainView.statsView.showStatDown(a);
+		}
+		protected final function statScreenRefresh():void {
+			game.statScreenRefresh();
+		}
+		protected final function doNext(eventNo:*):void {
+			game.doNext(eventNo);
+		}
+		protected final function combatMiss():Boolean {
+			return game.combatMiss();
+		}
+		protected final function combatEvade():Boolean {
+			return game.combatEvade();
+		}
+		protected final function combatFlexibility():Boolean {
+			return game.combatFlexibility();
+		}
+		protected final function combatMisdirect():Boolean {
+			return game.combatMisdirect();
+		}
 		//For enemies
 		public var bonusHP:Number = 0;
 		private var _long:String = "<b>You have encountered an unitialized  Please report this as a bug</b>.";

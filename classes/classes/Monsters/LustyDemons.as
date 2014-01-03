@@ -25,7 +25,7 @@ package classes.Monsters
 		{
 			if (pcCameWorms){
 				outputText("\n\nThe demons smile to one at another as they watch your display, then close in...");
-				game.doNext(game.endLustLoss);
+				doNext(game.endLustLoss);
 			} else {
 				game.loseOrSubmitToVapula();
 			}

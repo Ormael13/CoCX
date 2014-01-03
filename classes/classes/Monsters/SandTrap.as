@@ -29,7 +29,7 @@ package classes.Monsters
 		{
 			if (pcCameWorms) {
 				outputText("\n\nThe sand trap seems bemused by the insects your body houses...");
-				game.doNext(game.endLustLoss);
+				doNext(game.endLustLoss);
 			} else {
 				game.sandtrapmentLoss(true);
 			}

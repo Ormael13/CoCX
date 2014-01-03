@@ -29,7 +29,7 @@ package classes.Monsters
 		{
 			if (pcCameWorms){
 				outputText("\n\nKelt recoils for a moment before assuming a look of superiority...");
-				game.doNext(game.endLustLoss);
+				doNext(game.endLustLoss);
 			} else {
 				game.keltFucksShitUp();
 			}

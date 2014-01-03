@@ -36,7 +36,7 @@ package classes.Monsters
 		{
 			if(pcCameWorms){
 				outputText("\n\nYour foe doesn't seem to care...");
-				game.doNext(game.endLustLoss);
+				doNext(game.endLustLoss);
 			} else {
 				game.eventParser(11038);
 			}

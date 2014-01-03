@@ -1,4 +1,6 @@
-﻿//Used to jump the fuck out of pregnancy scenarios for menus.
+﻿import classes.GlobalFlags.kFLAGS;
+
+//Used to jump the fuck out of pregnancy scenarios for menus.
 //const EVENT_PARSER_ESCAPE:int = 800;
 //const PHYLLA_GEMS_HUNTED_TODAY:int = 893;
 
@@ -69,291 +71,328 @@ public function doSystem(eventNo:Number):void {
 		return;
 	}
 
-	if(eventNo != 1) 
+	if(eventNo != 1)
 	{
 		hideMenus();
 	}
-	if(eventNo == 1) {
-		mainView.nameBox.visible = false;
-		if(gameState == 1 || gameState == 2) {
+	switch (eventNo) {
+		case 1:
+			mainView.nameBox.visible = false;
+			if (gameState == 1 || gameState == 2) {
+				menuLoc = 0;
+				eventParser(5000);
+				return;
+			}
+			//Clear restriction on item overlaps if not in combat
+			plotFight = false;
+			if (inDungeon) {
+				menuLoc = 0;
+				dungeonRoom(dungeonLoc);
+				return;
+			}
 			menuLoc = 0;
-			eventParser(5000);
+			flags[kFLAGS.PLAYER_PREGGO_WITH_WORMS] = 0;
+			camp();
 			return;
-		}
-		//Clear restriction on item overlaps if not in combat
-		plotFight =false;
-		if(inDungeon) {
-			menuLoc = 0;
-			dungeonRoom(dungeonLoc);
-			return;
-		}
-		menuLoc = 0;
-		flags[kFLAGS.PLAYER_PREGGO_WITH_WORMS] = 0;
-		camp();
-		return;
-	}
-	if(eventNo == 2) 
-	{
-		doExplore();
-		return;
-	}
-	if(eventNo == 3) 
-	{
-		exploreDesert();
-		return;
-	}
-	if(eventNo == 4) 
-	{
-		exploreForest();
-		return;
-	}
-	if(eventNo == 5) 
-	{
-		exploreLake();
-		return;
-	}
-	if(eventNo == 6) 
-	{
-		exploreMountain();
-		return;
-	}
-	//Masturbate
-	if(eventNo == 10) {
-		if(player.hasStatusAffect("dysfunction") >= 0) {
-			outputText("You'd love to masturbate, but your sexual organs' numbness makes it impossible.  You'll have to find something to fuck to relieve your lust.", true); 
-			doNext(1);
-			return;
-		}
-		masturbateGo();
-		return;
-	}
-	//Rest
-	if(eventNo == 11) { 
-		rest();
-		return;
-	}
-	//Explore new zones
-	if(eventNo == 12)
-	{
-		tryDiscover();	
-		return;
-	}
-	//Pass an hour
-	if(eventNo == 13) {
-		outputText("An hour passes...\n", true);
-		timeQ = 1;
-		goNext(1, false);
-		return;
-	}
-	if(eventNo == 14) {
-		outputText("Two hours pass...\n", true);
-		timeQ = 2;
-		goNext(2, false);
-		return;
-	}
-	if(eventNo == 15) {
-		outputText("Four hours pass...\n", true);
-		timeQ = 4;
-		goNext(4, false);
-		return;
-	}
-	if(eventNo == 16) {
-		outputText("Eight hours pass...\n", true);
-		timeQ = 8;
-		goNext(8, false);
-		return;
-	}
-	if(eventNo == 17) {
-		outputText("", true);
-		goNext(24, false);
-		return;
-	}
-	//Load menu
-	if(eventNo == 19 ) {
-		loadScreen();
-		return;
-	}
-	//Save Menu
-	if(eventNo == 20) {
-		saveScreen();
-		return;
-	}
-	if(eventNo == -20)
-	{
-		saveGameObject(null, true);
-		return;
-	}
-	if(eventNo == -21)
-	{
-		openSave();
-		showStats();
-		statScreenRefresh();
-		return;
-	}
-	if(eventNo == 30) 	// I have NO idea what could call this. I don't see anything that passes 30 as an event number anywhere
-	{
-		var f:MouseEvent;
-		saveLoad(f);
-		return;
-	}
-	//Use wait command
-	if(eventNo == 40) {
-		//See camp.as
-		doWait();
-		return;
-	}
-	//Use sleep command
-	if(eventNo == 41) {
-		//in camp.as
-		doSleep();
-		return;
-	}
-	//Choose masturbate options
-	if(eventNo == 42) {
-		masturbateMenu();
-		return;
-	}
-	//Jojo as a cumsleeve
-	if(eventNo == 43) {
-		corruptCampJojo();
-		return;
-	}
-	//Gain +5 Str due to level
-	if(eventNo == 44) {
-		dynStats("str", 5);
-		outputText("Your muscles feel significantly stronger from your time adventuring.", true);
-		doNext(116);
-		return;
-	}
-	//Gain +5 Toughness due to level
-	if(eventNo == 45) {
-		dynStats("tou", 5);
-		trace("HP: " + player.HP + " MAX HP: " + maxHP());
-		statScreenRefresh();
-		outputText("You feel tougher from all the fights you have endured.", true);
-		doNext(116);
-		return;
-	}
-	//Gain +5 Intelligence due to level
-	if(eventNo == 46) {
-		dynStats("int", 5);
-		outputText("Your time spent fighting the creatures of this realm has sharpened your wit.", true);
-		doNext(116);
-		return;
-	}
-	//Gain +5 speed due to level
-	if(eventNo == 47) {
-		dynStats("spe", 5);
-		outputText("Your time in combat has driven you to move faster.", true);
-		doNext(116);
-		return;
-	}
-	//Use Onahole
-	if(eventNo == 48) {
-		onaholeUse();
-		return;
-	}
-	//Use Stimbelt
-	if(eventNo == 49) 
-	{
-		stimBeltUse();
-		return;
-	}
-	if(eventNo == 50) {
-		deluxeOnaholeUse();
-		return;
-	}
-	if(eventNo == 51) {
-		allNaturalOnaholeUse();
-		return;
-	}
-	if(eventNo == 52) {
-		allNaturalStimBeltUse();
-		return;
-	}
-	//turn on/off autosave
-	if(eventNo == 65) {
-		var e:MouseEvent;
-		if(player.autoSave) player.autoSave = false;
-		else player.autoSave = true;
-		saveLoad(e);
-		return;
-	}
-	//Places menu
-	if(eventNo == 71) 
-	{
-		places(true);
-		return;
-	}
-	//Camp followers screen
-	if(eventNo == 74) {
-		doNext(1);
-		campFollowers();
-		return;
-	}
-	if(eventNo == 79) {
-		deluxeDildo();
-		return;
-	}
-	if(eventNo == 80) {
-		exploreDeepwoods();
-		return;		
-	}
-	if(eventNo == 82) {
-		deleteScreen();
-		return;
-	}
-	if(eventNo == 94) {
-		//located in exploration.as
-		debugOptions();
-		return;
-	}
-	if(eventNo == 95) {
-		//located in exploration.as
-		exploreHighMountain();
-		return;
-	}
 
-	//located in exploration.as
-	if(eventNo == 97) {
-		explorePlains();
-		return;
-	}
-	if(eventNo == 111) {
-		exploreSwamp();
-		return;
-	}
-	if (eventNo == 114) {
-		stage.focus = null;
-		mainView.aCb.visible = false;
-		applyPerk(tempPerk);
-		return;
-	}
-	if (eventNo == 115) {
-		stage.focus = null;
-		mainView.aCb.visible = false;
-		eventParser(1);
-		return;
-	}
-	if(eventNo == 116) {
-		perkBuyMenu();
-		return;
-	}
-	if(eventNo == 118) {
-		if(!monster.hasVagina()) monster.createVagina();
-		monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING;
-		monster.ass.analLooseness = 3;
-		outputText(mainView.eventTestInput.text, true, true);
-		simpleChoices("Again",117,"",0,"",0,"",0,"Quit",mainMenu);
-		mainView.eventTestInput.x = -10207.5;
-		mainView.eventTestInput.y = -1055.1;
-		return;
-	}
-	if(eventNo == 119) {
-		mainView.eventTestInput.x = -10207.5;
-		mainView.eventTestInput.y = -1055.1;
-		mainMenu();
-		return;
+
+		case 2:
+			doExplore();
+			return;
+
+
+		case 3:
+			exploreDesert();
+			return;
+
+
+		case 4:
+			exploreForest();
+			return;
+
+
+		case 5:
+			exploreLake();
+			return;
+
+
+		case 6:
+			exploreMountain();
+			return;
+
+
+		case 10:
+			//Masturbate
+			if (player.hasStatusAffect("dysfunction") >= 0) {
+				outputText("You'd love to masturbate, but your sexual organs' numbness makes it impossible.  You'll have to find something to fuck to relieve your lust.", true);
+				doNext(1);
+				return;
+			}
+			masturbateGo();
+			return;
+
+
+		case 11:
+			//Rest
+			rest();
+			return;
+
+
+		case 12:
+			//Explore new zones
+			tryDiscover();
+			return;
+
+
+		case 13:
+			//Pass an hour
+			outputText("An hour passes...\n", true);
+			timeQ = 1;
+			goNext(1, false);
+			return;
+
+
+		case 14:
+			outputText("Two hours pass...\n", true);
+			timeQ = 2;
+			goNext(2, false);
+			return;
+
+
+		case 15:
+			outputText("Four hours pass...\n", true);
+			timeQ = 4;
+			goNext(4, false);
+			return;
+
+
+		case 16:
+			outputText("Eight hours pass...\n", true);
+			timeQ = 8;
+			goNext(8, false);
+			return;
+
+
+		case 17:
+			outputText("", true);
+			goNext(24, false);
+			return;
+
+
+		case 19:
+			//Load menu
+			loadScreen();
+			return;
+
+
+		case 20:
+			//Save Menu
+			saveScreen();
+			return;
+
+
+		case -20:
+			saveGameObject(null, true);
+			return;
+
+
+		case -21:
+			openSave();
+			showStats();
+			statScreenRefresh();
+			return;
+
+
+		case 30:
+			// I have NO idea what could call this. I don't see anything that passes 30 as an event number anywhere
+			var f:MouseEvent;
+			saveLoad(f);
+			return;
+
+
+		case 40:
+			//Use wait command
+			//See camp.as
+			doWait();
+			return;
+
+
+		case 41:
+			//Use sleep command
+			//in camp.as
+			doSleep();
+			return;
+
+
+		case 42:
+			//Choose masturbate options
+			masturbateMenu();
+			return;
+
+
+		case 43:
+			//Jojo as a cumsleeve
+			corruptCampJojo();
+			return;
+
+
+		case 44:
+			//Gain +5 Str due to level
+			dynStats("str", 5);
+			outputText("Your muscles feel significantly stronger from your time adventuring.", true);
+			doNext(116);
+			return;
+
+
+		case 45:
+			//Gain +5 Toughness due to level
+			dynStats("tou", 5);
+			trace("HP: " + player.HP + " MAX HP: " + maxHP());
+			statScreenRefresh();
+			outputText("You feel tougher from all the fights you have endured.", true);
+			doNext(116);
+			return;
+
+
+		case 46:
+			//Gain +5 Intelligence due to level
+			dynStats("int", 5);
+			outputText("Your time spent fighting the creatures of this realm has sharpened your wit.", true);
+			doNext(116);
+			return;
+
+
+		case 47:
+			//Gain +5 speed due to level
+			dynStats("spe", 5);
+			outputText("Your time in combat has driven you to move faster.", true);
+			doNext(116);
+			return;
+
+
+		case 48:
+			//Use Onahole
+			onaholeUse();
+			return;
+
+
+		case 49:
+			//Use Stimbelt
+			stimBeltUse();
+			return;
+
+
+		case 50:
+			deluxeOnaholeUse();
+			return;
+
+
+		case 51:
+			allNaturalOnaholeUse();
+			return;
+
+
+		case 52:
+			allNaturalStimBeltUse();
+			return;
+
+
+		case 65:
+			//turn on/off autosave
+			var e:MouseEvent;
+			if (player.autoSave) player.autoSave = false;
+			else player.autoSave = true;
+			saveLoad(e);
+			return;
+
+
+		case 71:
+			//Places menu
+			places(true);
+			return;
+
+
+		case 74:
+			//Camp followers screen
+			doNext(1);
+			campFollowers();
+			return;
+
+
+		case 79:
+			deluxeDildo();
+			return;
+
+
+		case 80:
+			exploreDeepwoods();
+			return;
+
+
+		case 82:
+			deleteScreen();
+			return;
+
+
+		case 94:
+			//located in exploration.as
+			debugOptions();
+			return;
+
+
+		case 95:
+			//located in exploration.as
+			exploreHighMountain();
+			return;
+
+
+		case 97:
+			//located in exploration.as
+			explorePlains();
+			return;
+
+
+		case 111:
+			exploreSwamp();
+			return;
+
+
+		case 114:
+			stage.focus = null;
+			mainView.aCb.visible = false;
+			applyPerk(tempPerk);
+			return;
+
+
+		case 115:
+			stage.focus = null;
+			mainView.aCb.visible = false;
+			eventParser(1);
+			return;
+
+
+		case 116:
+			perkBuyMenu();
+			return;
+
+
+		case 118:
+			if (!monster.hasVagina()) monster.createVagina();
+			monster.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING;
+			monster.ass.analLooseness = 3;
+			outputText(mainView.eventTestInput.text, true, true);
+			simpleChoices("Again", 117, "", 0, "", 0, "", 0, "Quit", mainMenu);
+			mainView.eventTestInput.x = -10207.5;
+			mainView.eventTestInput.y = -1055.1;
+			return;
+
+
+		case 119:
+			mainView.eventTestInput.x = -10207.5;
+			mainView.eventTestInput.y = -1055.1;
+			mainMenu();
+			return;
+
 	}
 
 	errorPrint(eventNo);		// Dump the system state to the window so the player can file a decent bug-report
@@ -2246,7 +2285,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 			else if(temp > rand(100) && player.hasStatusAffect("Defense: Canopy") < 0) {
 				if(player.gender > 0 && (player.hasStatusAffect("JojoNightWatch") < 0 || player.hasStatusAffect("PureCampJojo") < 0) && (flags[kFLAGS.HEL_GUARDING] == 0 || !followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.HOLLI_DEFENSE_ON] == 0 || flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) && (flags[kFLAGS.KIHA_CAMP_WATCH] == 0 || !followerKiha())) {
-					impGangabangaEXPLOSIONS();
+					impScene.impGangabangaEXPLOSIONS();
 					doNext(1);
 					return true;
 				}
