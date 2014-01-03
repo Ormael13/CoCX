@@ -15,8 +15,6 @@ package classes.Monsters.Scenes
 		{
 		}
 
-		private var akbal:Akbal;
-
 		public function akbalDefeated(hpVictory:Boolean):void{
 			flags[kFLAGS.AKBAL_SUBMISSION_STATE] = 1;
 			if (hpVictory) //[General Victory]
@@ -630,7 +628,7 @@ package classes.Monsters.Scenes
 
 					outputText("Akbal snarls as he slams his hips into you, obviously happy that you're able to take his massive length. The demon appears to forget he's raping you and begins licking the back of your horse like bottom half, sending shivers throughout your entire body as he roughly fucks you while painting your back with his saliva.", false);
 				}
-				player.buttChange(akbal.cockArea(0), true);
+				player.buttChange(new Akbal().cockArea(0), true);
 				outputText("\n\n", false);
 
 				//(Ending)
@@ -657,7 +655,7 @@ package classes.Monsters.Scenes
 			{
 				outputText("Akbal begins to push into you, the barbs on his massive cockhead causing you to wince.  He bottoms out near-instantly, and he looks up at you with a feral grin.  Akbal begins to pump his engorged sex organ in and out of your " + assholeDescript() + " with a steadily mounting force.  You release a groan as the barbs covering Akbal's long cat-dick start to vibrate and begin to feel more like humming sex beads than anything else.  You widen your " + player.legs() + " in response and Akbal snarls as he slams his hips into you, obviously happy that you're able to take his massive length.  The demon seems to forget that he's raping you; he starts giving your neck licks that send shivers throughout your entire body as he roughly fucks you into the forest floor.", false);
 			}
-			player.buttChange(akbal.cockArea(0), true);
+			player.buttChange(new Akbal().cockArea(0), true);
 			outputText("\n\n", false);
 
 			outputText("Akbal's embedded cock begins to hum inside you, causing you to cry out as he picks up the pace.  His every thrust is a hammer-like thump against your spread " + player.legs() + ".  Suddenly his thrusts become sloppy, and you feel his giant tool swelling inside you, stretching you out even more.  Akbal roars as he reaches his climax, and you feel his giant cock hosing down your insides, filling you with his corrupted demon seed as he rides out his orgasm.  His hips never stop.  You feel your own orgasm rising to the surface, only to suddenly fizzle out.  It is with horror that you realize that the corrupted seed inside you is actually stopping you from reaching climax.  Akbal, however, sprays his spunk into your " + assholeDescript() + " again and again, not slowing for even a moment.  Soon your stomach is obscenely swollen, and you even taste cat jizz in your throat.  Yet Akbal just keeps going, brutally fucking you into the ground.\n\n", false);

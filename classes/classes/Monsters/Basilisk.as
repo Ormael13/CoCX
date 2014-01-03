@@ -2,8 +2,10 @@ package classes.Monsters
 {
 	import classes.CoC;
 	import classes.Cock;
+	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Monster;
-	
+	import classes.Player;
+
 	/**
 	 * ...
 	 * @author ...
@@ -11,7 +13,7 @@ package classes.Monsters
 	public class Basilisk extends Monster 
 	{
 
-		public function basiliskSpeed(amount:Number = 0):void {
+		public static function basiliskSpeed(player:Player,amount:Number = 0):void {
 			if(player.spe - amount < 1) {
 				amount = player.spe - 1;
 				if(amount < 0) amount = 0;
@@ -19,7 +21,7 @@ package classes.Monsters
 			player.spe -= amount;
 			if(player.hasStatusAffect("BasiliskSlow") >= 0) player.addStatusValue("BasiliskSlow",1,amount);
 			else player.createStatusAffect("BasiliskSlow",amount,0,0,0);
-			game.mainView.statsView.showStatDown( 'spe' );
+			kGAMECLASS.mainView.statsView.showStatDown( 'spe' );
 			// speUp.visible = false;
 			// speDown.visible = true;
 		}
@@ -34,7 +36,7 @@ package classes.Monsters
 				outputText("You can't help yourself... you glimpse the reptile's grey, slit eyes. You look away quickly, but you can picture them in your mind's eye, staring in at your thoughts, making you feel sluggish and unable to coordinate. Something about the helplessness of it feels so good... you can't banish the feeling that really, you want to look in the basilisk's eyes forever, for it to have total control over you.", false);
 				game.dynStats("lus", 3);
 				//apply status here
-				basiliskSpeed(20);
+				basiliskSpeed(player,20);
 				player.createStatusAffect("Basilisk Compulsion",0,0,0,0);
 			}
 			//Failure:
