@@ -732,13 +732,12 @@ public function slavesCount():Number {
 	if(amilyScene.amilyFollower() && amilyScene.amilyCorrupt()) counter++;
 	//Bimbo sophie
 	if(bimboSophie()) counter++;
-	if(ceraphIsFollower()) counter++;
+	if(ceraphFollowerScene.ceraphIsFollower()) counter++;
 	if(milkSlave()) counter++;
 	return counter;
 }
 public function hasSlaves():Boolean {
-	if(slavesCount() > 0) return true;
-	return false;
+	return slavesCount() > 0;
 }
 public function loversCount():Number {
 	var counter:Number = 0;
@@ -933,7 +932,7 @@ public function campSlavesMenu():void {
 		outputText(flags[kFLAGS.GOO_NAME] + " lurks in a secluded section of rocks, only venturing out when called for or when she needs to gather water from the stream.\n\n");
 		goo = 3970;
 	}
-	if(ceraphIsFollower()) ceraph = 3041;
+	if(ceraphFollowerScene.ceraphIsFollower()) ceraph = 3041;
 	//JOJO
 	//If Jojo is corrupted, add him to the masturbate menu.
 	if(campCorruptJojo()) {

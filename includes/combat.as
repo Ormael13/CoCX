@@ -161,7 +161,7 @@ public function doCombat(eventNum:Number):void
 			} else if(monster.hasStatusAffect("Constricted") >= 0) {
 				simpleChoices("Squeeze", 5119,"Tease",5120,"",0,"",0,"Release",5121);
 			} else if(player.hasStatusAffect("Bound") >= 0) {
-				simpleChoices("Struggle",ceraphBindingStruggle,"Wait",ceraphBoundWait,"",0,"",0,"",0);
+				simpleChoices("Struggle",(monster as Ceraph).ceraphBindingStruggle,"Wait",(monster as Ceraph).ceraphBoundWait,"",0,"",0,"",0);
 			} else if(player.hasStatusAffect("GooArmorBind") >= 0) {
 				choices("Struggle", 5077,"",0,"",0,"",0,"",0,"Wait",5071,"",0,"",0,"",0,"",0);
 			} else if(monster.hasStatusAffect("Minotaur Entangled") >= 0) {
@@ -1405,18 +1405,6 @@ public function doCombat(eventNum:Number):void
 		takeMinoCumDirectly();
 		return;
 	}
-	if(eventNum == 5133) {
-		ceraphSpecial1();
-		return;
-	}
-	if(eventNum == 5134) {
-		ceraphSpecial2();
-		return;
-	}
-	if(eventNum == 5135) {
-		ceraphSpecial3();
-		return;
-	}
 	if(eventNum == 5136) {
 		harpyUberCharge();
 		return;
@@ -1714,7 +1702,7 @@ public function attack():void {
 		//basilisk counter attack (block attack, significant speed loss): 
 		if(player.inte/5 + rand(20) < 25) {
 			outputText("Holding the basilisk in your peripheral vision, you charge forward to strike it.  Before the moment of impact, the reptile shifts its posture, dodging and flowing backward skillfully with your movements, trying to make eye contact with you. You find yourself staring directly into the basilisk's face!  Quickly you snap your eyes shut and recoil backwards, swinging madly at the lizard to force it back, but the damage has been done; you can see the terrible grey eyes behind your closed lids, and you feel a great weight settle on your bones as it becomes harder to move.", false);
-			basiliskSpeed(20);
+			(monster as Basilisk).basiliskSpeed(20);
 			player.removeStatusAffect("FirstAttack");
 			combatRoundOver();
 			return;
@@ -2553,7 +2541,7 @@ public function combatStatusesUpdate():void {
 	}
 	//Basilisk compulsion
 	if(player.hasStatusAffect("Basilisk Compulsion") >= 0) {
-		basiliskSpeed(15);
+		(monster as Basilisk).basiliskSpeed(15);
 		//Continuing effect text: 
 		outputText("<b>You still feel the spell of those grey eyes, making your movements slow and difficult, the remembered words tempting you to look into its eyes again. You need to finish this fight as fast as your heavy limbs will allow.</b>\n\n", false);
 	}

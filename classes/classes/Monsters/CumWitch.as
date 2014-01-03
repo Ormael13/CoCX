@@ -43,7 +43,6 @@ package classes.Monsters
 			init11Armor("robes");
 			init12Combat(100,30,.8,TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(6,rand(15) + 5);
-			initX_Specials(5133,5134,5135);
 		}
 		
 	}

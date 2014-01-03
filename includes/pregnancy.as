@@ -1363,7 +1363,7 @@ public function updatePregnancy():Boolean {
 		player.pregnancyIncubation = 0;
 		player.pregnancyType = 0;
 		displayedUpdate = true;
-		basiliskBirth();
+		basiliskScene.basiliskBirth();
 	}
 	//Satyr vag preg
 	if(player.pregnancyType == 19 && player.pregnancyIncubation == 1) {

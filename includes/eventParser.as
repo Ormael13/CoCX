@@ -2188,7 +2188,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(model.time.hours == 3) {
 			//Plot dreams here
 			if(ceraph > 0 && model.time.days % ceraph == 0) {
-				ceraphBodyPartDreams();
+				ceraphScene.ceraphBodyPartDreams();
 				doNext(1);
 				return true;
 			}

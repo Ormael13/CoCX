@@ -589,8 +589,7 @@ public function exploreForest():void {
 			carapaceFind();
 			return;
 		}
-		eventParser(2051);
-		return;
+		eventParser(beeGirlScene.beeEncounter);
 	}
 }
 //Explore desert
@@ -789,7 +788,7 @@ public function exploreHighMountain():void {
 	}
 	//Basilisk!
 	if(chooser == 1) {
-		basiliskGreeting();
+		basiliskScene.basiliskGreeting();
 		return;
 	}
 	//Sophie
@@ -854,13 +853,13 @@ public function exploreMountain():void {
 	}
 	//Rarer 'nice' Ceraph encounter
 	//Overlaps half the old encounters once pierced.
-	if(!ceraphIsFollower() && player.level > 2 && (player.exploredMountain % 30 == 0) && flags[kFLAGS.PC_FETISH] > 0) {
-		friendlyNeighborhoodSpiderManCeraph();
+	if(!ceraphFollowerScene.ceraphIsFollower() && player.level > 2 && (player.exploredMountain % 30 == 0) && flags[kFLAGS.PC_FETISH] > 0) {
+		ceraphScene.friendlyNeighborhoodSpiderManCeraph();
 		return;
 	}
 	//15% chance of Ceraph
-	if(!ceraphIsFollower() && player.level > 2 && (player.exploredMountain % 15 == 0) && flags[kFLAGS.PC_FETISH] != 1) {
-		encounterCeraph();
+	if(!ceraphFollowerScene.ceraphIsFollower() && player.level > 2 && (player.exploredMountain % 15 == 0) && flags[kFLAGS.PC_FETISH] != 1) {
+		ceraphScene.encounterCeraph();
 		return;
 	}
 	//10% chance of hairdresser encounter if not found yet

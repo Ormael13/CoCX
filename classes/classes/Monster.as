@@ -16,6 +16,9 @@
 		protected final function outputText(text:String,clear:Boolean=false):void{
 			game.outputText(text,clear);
 		}
+		protected final function combatRoundOver():void{
+			game.combatRoundOver();
+		}
 		//For enemies
 		public var bonusHP:Number = 0;
 		private var _long:String = "<b>You have encountered an unitialized  Please report this as a bug</b>.";

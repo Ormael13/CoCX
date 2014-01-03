@@ -2443,5 +2443,124 @@
 			if (n<12) return n+"\"";
 			return n+"\" ("+feetsAndInches(n)+")";
 		}
+
+		public static function allBreastsDescript(creature:Creature):String
+		{
+			var storage:String = "";
+			if(creature.breastRows.length == 0) return "unremarkable chest muscles ";
+			if(creature.breastRows.length == 2) {
+				//if(player.totalBreasts() == 4) storage += "quartet of ";
+				storage += "two rows of ";
+			}
+			if(creature.breastRows.length == 3) {
+				if(rand(2) == 0) storage += "three rows of ";
+				else storage += "multi-layered ";
+			}
+			if(creature.breastRows.length == 4) {
+				if(rand(2) == 0) storage += "four rows of ";
+				else storage += "four-tiered ";
+			}
+			if(creature.breastRows.length == 5) {
+				if(rand(2) == 0) storage += "five rows of ";
+				else storage += "five-tiered ";
+			}
+			storage += biggestBreastSizeDescript(creature);
+			return storage;
+
+		}
+
+		public static function biggestBreastSizeDescript(creature:Creature):String
+		{
+			var temp14:int = Math.random()*3;
+			var descript:String = "";
+			var temp142:int = creature.biggestTitRow();
+			//ERROR PREVENTION
+			if(creature.breastRows.length - 1 < temp142)
+			{
+				if (CoC_Settings.haltOnErrors) throw new Error("");
+				return "<b>ERROR, biggestBreastSizeDescript() working with invalid breastRow</b>";
+			}
+			else if(temp142 < 0)
+			{
+				if (CoC_Settings.haltOnErrors) throw new Error("");
+				return "ERROR SHIT SON!  BIGGESTBREASTSIZEDESCRIPT PASSED NEGATIVE!";
+			}
+			if(creature.breastRows[temp142].breastRating < 1) return "flat breasts";
+			//50% of the time size-descript them
+			if(rand(2) == 0) descript += breastSize(creature.breastRows[temp142].breastRating);
+			//Nouns!
+			temp14 = rand(10);
+			if(temp14 == 0) descript += "breasts";
+			if(temp14 == 1) {
+				if(creature.breastRows[temp142].lactationMultiplier > 2) descript += "milk-udders";
+				else descript += "breasts";
+			}
+			if(temp14 == 2) {
+				if(creature.breastRows[temp142].lactationMultiplier > 1.5) descript += "milky ";
+				if(creature.breastRows[temp142].breastRating > 4) descript += "tits";
+				else descript += "breasts";
+			}
+			if(temp14 == 3) {
+				//if(player.breastRows[temp142].breastRating > 6) descript += "rack";
+				descript += "breasts";
+			}
+			if(temp14 == 4) descript += "tits";
+			if(temp14 == 5) descript += "tits";
+			if(temp14 == 6) descript += "tits";
+			if(temp14 == 7) {
+				if(creature.breastRows[temp142].lactationMultiplier >= 1 && creature.breastRows[temp142].lactationMultiplier < 2.5) descript += "milk jugs";
+				if(creature.breastRows[temp142].lactationMultiplier >= 2.5) descript += "udders";
+				if(creature.breastRows[temp142].lactationMultiplier < 1) descript += "jugs";
+			}
+			if(temp14 == 8) {
+				if(creature.breastRows[temp142].breastRating > 6) descript += "love-pillows";
+				else descript += "boobs";
+			}
+			if(temp14 == 9) {
+				if(creature.breastRows[temp142].breastRating > 6) descript += "tits";
+				else descript += "breasts";
+			}
+			return descript;
+		}
+
+		public static function breastSize(val:Number):String {
+			var descript:String = "";
+			//Catch all for dudes.
+			if(val < 1) return "manly ";
+			//Small - A->B
+			if(val <= 2)
+			{
+				descript += randomChoice("palmable ", "tight ", "perky ", "baseball-sized ");
+			}
+			//C-D
+			else if(val <= 4)
+			{
+				descript += randomChoice("nice ", "hand-filling ", "well-rounded ", "supple ", "softball-sized ");
+			}
+			//DD->big EE
+			else if(val < 11)
+			{
+				descript += randomChoice("big ", "large ", "pillowy ", "jiggly ", "volleyball-sized ");
+			}
+			//F->big FF
+			else if(val < 15)
+			{
+				descript += randomChoice("soccerball-sized ", "hand-overflowing ", "generous ", "jiggling ");
+			}
+			//G -> HHH
+			else if(val < 24) {
+				descript += randomChoice("basketball-sized ", "whorish ", "cushiony ", "wobbling ");
+			}
+			//I -> KK
+			else if(val < 35) {
+				descript += randomChoice("massive motherly ", "luscious ", "smothering ", "prodigious ");
+			}
+			//K- > MMM+
+			else {
+				descript += randomChoice("mountainous ", "monumental ", "back-breaking ", "exercise-ball-sized ", "immense ");
+			}
+			return descript;
+		}
+
 	}
 }

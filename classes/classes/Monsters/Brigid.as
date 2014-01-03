@@ -10,20 +10,57 @@ package classes.Monsters
 	public class Brigid extends Monster 
 	{
 
+		//Attack One: Hot Poker, Right Up Your Ass!
+		private function brigidPoke():void {
+			outputText("Brigid stalks forward with confidence, her shield absorbing your defensive blows until she's right on top of you. She bats your [weapon] aside and thrashes you with her hot poker, scalding your " + player.skin() + " and sending you reeling.");
+			//(Effect: Heavy Damage)
+			var damage:Number = Math.round((str + weaponAttack) - rand(player.tou) - player.armorDef);
+			if(damage < 30) damage = 30;
+			damage = player.takeDamage(damage);
+			outputText(" (" + damage + ")");
+			game.combatRoundOver();
+		}
+
+		//Attack Two: SHIELD BOP! OOM BOP!
+		private function brigidBop():void {
+			outputText("The harpy feints at you with her poker; you dodge the blow, but you leave yourself vulnerable as she spins around and slams her heavy shield into you, knocking you off balance.");
+			//(Effect: Stagger/Stun)
+			var damage:Number = 5;
+			damage = player.takeDamage(5);
+			outputText(" (" + damage + ")");
+			if(player.hasPerk("Resolute") >= 0) outputText("  Of course, your resolute posture prevents her from accomplishing much.");
+			else player.createStatusAffect("Stunned",0,0,0,0);
+			game.combatRoundOver();
+		}
+
+		//Attack Three: Harpy Ass Grind GO!
+		private function BrigidAssGrind():void {
+			outputText("Brigid grins as she approaches you.  She handily deflects a few defensive blows and grabs you by the shoulders.  She forces you onto your knees and before you can blink, has turned around and smashed your face into her ass!  \"<i>Mmm, you like that, don'tcha?</i>\" she growls, grinding her huge, soft ass across your face, giving you an up-close and personal feel of her egg-laying hips.");
+			game.dynStats("lus", 30);
+			game.combatRoundOver();
+		}
 		override protected function performCombatAction():void
 		{
-			game.BrigidAI();
+			if(player.hasStatusAffect("Stunned") >= 0) {
+				player.removeStatusAffect("Stunned");
+				if(rand(2) == 0) BrigidAssGrind();
+				else brigidPoke();
+				return;
+			}
+			if(rand(3) == 0) BrigidAssGrind();
+			else if(rand(2) == 0) brigidBop();
+			else brigidPoke();
 		}
 
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.pcDefeatsBrigid();
+			game.brigidScene.pcDefeatsBrigid();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.pcDefeatedByBrigid();
+			game.brigidScene.pcDefeatedByBrigid();
 		}
 
 		public function Brigid()

@@ -593,7 +593,7 @@ public function dropItem(monsterName:String):void {
 		shortName = "FoxJewl";
 	}
 	//Chance of armor if at level 1 pierce fetish
-	if(!plotFight && monster.short != "Ember" && monster.short != "Kiha" && monster.short != "Helia" && monster.short != "Isabella" && flags[kFLAGS.PC_FETISH] == 1 && rand(10) == 0 && !hasItem("SeductA", 1) && !ceraphIsFollower()) {
+	if(!plotFight && monster.short != "Ember" && monster.short != "Kiha" && monster.short != "Helia" && monster.short != "Isabella" && flags[kFLAGS.PC_FETISH] == 1 && rand(10) == 0 && !hasItem("SeductA", 1) && !ceraphFollowerScene.ceraphIsFollower()) {
 		shortName = "SeductA";
 	}
 	
@@ -980,7 +980,7 @@ public function applyArmorStats(armorName:String, output:Boolean = true):void {
 		player.armorDef = 0;
 		player.armorPerk = "";
 		player.armorValue = 0;
-		if(!ceraphIsFollower()) {
+		if(!ceraphFollowerScene.ceraphIsFollower()) {
 			if(output) {
 				outputText("After struggling to get it on, you feel a sudden shift in your scandalous new armor.  To your horror, it begins folding into itself, revealing more and more of your " + player.skinDesc + " and the comfortable underclothes you had on underneath it.  The transforming armor gradually covers less and less of you until it's little more than a pair of huge nipple-coverings and a silver chain.  A loud KA-CHUNK startles you, and then you're screaming as you feel something stabbing through your nipples.  Goosebumps cover your flesh as you twist in unexpected agony.\n\n", false);  
 				outputText("After you've had a chance to recover, you inspect your abused nipples and discover that your armor has totally disappeared.  The only thing left behind is a pair of seamless black nipple-studs, embedded into your vulnerable flesh.  There doesn't appear to be any way to remove them either.  Thankfully, your comfortable underclothes have been unaffected by the sudden disappearance of your armor.  The thought of having to run around naked stays stubbornly locked in your mind, and you mentally curse the demon for what she's done to you.\n\n", false);

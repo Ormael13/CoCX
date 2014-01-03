@@ -1301,7 +1301,7 @@ public function vapulaThreesomeMenu():void {
 	if(player.hasCock() || (player.hasVagina() && player.hasKeyItem("Demonic Strap-On") >= 0)) {
 		if(campCorruptJojo()) jojo = 3759;
 		if(amilyScene.amilyFollower() && amilyScene.amilyCorrupt() && player.hasCock()) amily = 3761;
-		if(ceraphIsFollower() && player.hasCock()) ceraph = 3767;
+		if(ceraphFollowerScene.ceraphIsFollower() && player.hasCock()) ceraph = 3767;
 		if(bimboSophie()) sophie = 3764;
 		if(izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0) izma = 3757;
 	}

@@ -30,7 +30,16 @@
 		protected function spriteSelect(choice:Number = 0):void
 		{
 			kGAMECLASS.spriteSelect(choice);
+		}
 
+		protected function hideUpDown():void
+		{
+			kGAMECLASS.hideUpDown();
+		}
+
+		protected function createCallBackFunction(func:Function, arg:*):Function
+		{
+			return kGAMECLASS.createCallBackFunction(func,arg);
 		}
 
 		protected function startCombat(monster_:Monster,plotFight_:Boolean=false):void{

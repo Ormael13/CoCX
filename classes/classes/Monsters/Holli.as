@@ -52,7 +52,6 @@ package classes.Monsters
 			init11Armor("bark",40);
 			init12Combat(1000,20,.2,Monster.TEMPERMENT_RANDOM_GRAPPLES);
 			init13Level(20,0);
-			initX_Specials(5133,5134,5135);
 
 		}
 		

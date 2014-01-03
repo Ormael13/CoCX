@@ -96,20 +96,22 @@
 		public var akbalScene:AkbalScene = new AkbalScene();
 		public var amilyScene:AmilyScene = new AmilyScene();
 		public var anemoneScene:AnemoneScene = new AnemoneScene();
+		public var basiliskScene:BasiliskScene = new BasiliskScene();
+		public var beeGirlScene:BeeGirlScene = new BeeGirlScene();
+		public var brigidScene:BrigidScene = new BrigidScene();
+		public var ceraphScene:CeraphScene = new CeraphScene();
+		public var ceraphFollowerScene:CeraphFollowerScene = new CeraphFollowerScene();
 		
 		include "../../includes/ants.as";
 		include "../../includes/april_fools.as";
 		include "../../includes/arian.as";
 		include "../../includes/auntNancy.as";
 		include "../../includes/bakery.as";
-		include "../../includes/basilisk.as";
-		include "../../includes/bee.as";
+
 		include "../../includes/benoit.as";
 		include "../../includes/brooke.as";
 		include "../../includes/bunbun.as";
 		include "../../includes/camp.as";
-		include "../../includes/ceraph.as";
-		include "../../includes/ceraphFollower.as";
 		include "../../includes/chameleons.as";
 		include "../../includes/cinnabar.as";
 		include "../../includes/cotton.as";
