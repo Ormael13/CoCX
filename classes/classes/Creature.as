@@ -2740,12 +2740,10 @@ package classes
 		public function createCock(clength:Number = 5.5, cthickness:Number = 1,ctype:CockTypesEnum=null):Boolean
 		{
 			if (ctype == null) ctype = CockTypesEnum.HUMAN;
-			trace("createCock called. clength = " + clength + ", cthickness = " + cthickness+", ctype = "+ctype);
 			if (cocks.length >= 10)
 				return false;
 			var newCock:Cock = new Cock(clength, cthickness,ctype);
 			//var newCock:cockClass = new cockClass();
-			trace("New cock info. Length = " + newCock.cockLength + ", Thickness = " + newCock.cockThickness + ", Type = " + newCock.cockType);
 			cocks.push(newCock);
 			cocks[cocks.length-1].cockThickness = cthickness;
 			cocks[cocks.length-1].cockLength = clength;

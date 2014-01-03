@@ -693,8 +693,7 @@ public function appearance(e:MouseEvent = null):void
 		//URTA PREG
 		else if(player.pregnancyType == 21) 
 		{
-			trace("Urta Pregnancy detected, outputting descriptivez" + player.pregnancyIncubation);
-			if(player.pregnancyIncubation <= 432 && player.pregnancyIncubation > 360) 
+			if(player.pregnancyIncubation <= 432 && player.pregnancyIncubation > 360)
 			{
 				outputText("<b>Your belly is larger than it used to be.</b>\n", false);
 			}
@@ -731,8 +730,7 @@ public function appearance(e:MouseEvent = null):void
 		}
 		else 
 		{
-			trace("Pregnancy detected, outputting descriptivez" + player.pregnancyIncubation);
-			if(player.pregnancyIncubation <= 336 && player.pregnancyIncubation > 280) 
+			if(player.pregnancyIncubation <= 336 && player.pregnancyIncubation > 280)
 			{
 				outputText("<b>Your belly is larger than it used to be.</b>", false);
 			}

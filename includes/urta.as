@@ -49,7 +49,6 @@ public function urtaCapacity():Number {
 }
 
 public function urtaLove(love:Number = 0):Boolean {
-	trace("URTA HORSECOCK COMFORT LEVEL: " + flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]);
 	if(flags[kFLAGS.URTA_PC_LOVE_COUNTER] == -1) return false;
 	if(love == 0) {
 		if(flags[kFLAGS.URTA_PC_LOVE_COUNTER] == 1) return true;

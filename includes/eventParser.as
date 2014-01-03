@@ -1636,7 +1636,6 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		else if(player.biggestLactation() > 0 && player.hasStatusAffect("Feeder") < 0 && player.pregnancyIncubation == 0) {
 			player.addStatusValue("Lactation Reduction",1,1);
-			trace("LACTATION REDUCTION" + player.statusAffectv1("Lactation Reduction") + " Biggest Lactation: " + player.biggestLactation() + ".");
 			if(player.statusAffectv1("Lactation Reduction") >= 48) {
 				if(player.hasStatusAffect("Lactation Reduc0") < 0) {
 					player.createStatusAffect("Lactation Reduc0",0,0,0,0);
@@ -1646,7 +1645,6 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					needNext = true;
 				}
 				player.boostLactation(-(.5*player.breastRows.length)/24);
-				trace(player.biggestLactation());
 				if(player.biggestLactation() <= 2.5 && player.hasStatusAffect("Lactation Reduc1") < 0) {
 					outputText("\n<b>Your breasts feel lighter as your body's milk production winds down.</b>\n", false);
 					player.createStatusAffect("Lactation Reduc1",0,0,0,0);
