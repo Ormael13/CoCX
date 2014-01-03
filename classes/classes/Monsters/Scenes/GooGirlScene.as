@@ -4,6 +4,7 @@
 package classes.Monsters.Scenes
 {
 	import classes.BaseContent;
+	import classes.CoC_Settings;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Monsters.GooGirl;
@@ -18,7 +19,18 @@ package classes.Monsters.Scenes
 //const GOOGIRL_BIRTHS:int = 384;
 //const GOOGIRL_CONSECUTIVE_LOSSES:int = 385;
 
-
+		private function gooGirl():GooGirl
+		{
+			var g:GooGirl = monster as GooGirl;
+			if (g == null) {
+				trace(monster.short+", not GooGirl!");
+				if (CoC_Settings.haltOnErrors){
+					throw new Error(monster.short+", not GooGirl!");
+				}
+				g = new GooGirl();
+			}
+			return g;
+		}
 //goo-girl encounter- 
 
 //[Lake]
@@ -48,17 +60,17 @@ package classes.Monsters.Scenes
 			}
 		}
 
-		private function gooColor():String { return (monster as GooGirl).gooColor(); }
-		private function gooColor2():String { return (monster as GooGirl).gooColor2(); }
-		private function gooColor3():String { return (monster as GooGirl).gooColor3(); }
-		private function gooColor4():String { return (monster as GooGirl).gooColor4(); }
-		private function gooColor5():String { return (monster as GooGirl).gooColor5(); }
-		private function gooColor6():String { return (monster as GooGirl).gooColor6(); }
-		private function gooColor7():String { return (monster as GooGirl).gooColor7(); }
-		private function gooColor8():String { return (monster as GooGirl).gooColor8(); }
-		private function gooColor9():String { return (monster as GooGirl).gooColor9(); }
-		private function gooColor10():String { return (monster as GooGirl).gooColor10(); }
-		private function gooColor11():String { return (monster as GooGirl).gooColor11(); }
+		private function gooColor():String { return gooGirl().gooColor(); }
+		private function gooColor2():String { return gooGirl().gooColor2(); }
+		private function gooColor3():String { return gooGirl().gooColor3(); }
+		private function gooColor4():String { return gooGirl().gooColor4(); }
+		private function gooColor5():String { return gooGirl().gooColor5(); }
+		private function gooColor6():String { return gooGirl().gooColor6(); }
+		private function gooColor7():String { return gooGirl().gooColor7(); }
+		private function gooColor8():String { return gooGirl().gooColor8(); }
+		private function gooColor9():String { return gooGirl().gooColor9(); }
+		private function gooColor10():String { return gooGirl().gooColor10(); }
+		private function gooColor11():String { return gooGirl().gooColor11(); }
 
 //goo-girl Bad End – If the player loses to 3-5 goo encounters while under full goo Transformation
 		private function gooGirlBadEnd():void
@@ -485,6 +497,7 @@ package classes.Monsters.Scenes
 //Ooze and Goo scene (one shot voyeur scene similar to the minotaur peep-show)– 
 		public function spyOnGooAndOozeSex():void
 		{
+			monster = new GooGirl();
 			outputText("", true);
 			outputText("As you are walking along the edge of the lake, the sound of splashing echoing across the shore catches your attention. At first, it is difficult to make sense of the confusing tableau of color, but before long you discern what's happening amid the chaotic waves. A girl-shaped mass of " + gooColor7() + " goo seems to be under attack by a swarm of smaller, vaguely masculine green slimes, all more or less male. Their limbs whip around the girl, trying to box her in from below, driving her to the surface of the water. Blunt, oozing limbs slap at her thighs and rump, sending cascading ripples through her body which seem to be causing her some distress. They're too far away to get a good look, but it almost seems like her mouth is open in a silent moan, her arms weakly trying to fend off the emerald men.\n\n", false);
 
