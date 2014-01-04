@@ -2581,7 +2581,7 @@
 			if(creature.cocks.length < 1)
 			{
 
-				if (CoC_Settings.haltOnErrors) throw new Error("");
+			if (CoC_Settings.haltOnErrors) throw new Error("");
 				return "<B>Error: multiCockDescriptLight() called with no penises present.</B>";
 
 			}

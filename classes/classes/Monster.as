@@ -984,5 +984,10 @@
 
 			return result;
 		}
+
+		protected function clearOutput():void
+		{
+			game.clearOutput();
+		}
 	}
 }

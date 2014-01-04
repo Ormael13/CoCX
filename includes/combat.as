@@ -843,22 +843,6 @@ public function doCombat(eventNum:Number):void
 			outputText("", true);
 			playerRapesCultist();
 	}
-			//Doggie Firebreath
-	if(eventNum == 5066) {
-			hellhoundFire();
-	}
-			//Hellhound Speed
-	if(eventNum == 5067) {
-			hellhoundScent();
-	}
-			//Hellhound gets raped
-	if(eventNum == 5068) {
-			hellHoundGetsRaped();
-	}
-			//Hellhound rapes player
-	if(eventNum == 5069) {
-			hellhoundRapesPlayer();
-	}
 			//Cultist bad end pt2
 	if(eventNum == 5070) {
 			cultistBadEnd2();
@@ -869,7 +853,7 @@ public function doCombat(eventNum:Number):void
 			if (monster.hasStatusAffect("level") < 0) fatigue(-5);
 			flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 1;
 			if (monster.hasStatusAffect("PCTailTangle") >= 0) {
-				kitsuneWait();
+				(monster as Kitsune).kitsuneWait();
 				return;
 			}
 			else if (monster.hasStatusAffect("level") >= 0) {
@@ -999,7 +983,7 @@ public function doCombat(eventNum:Number):void
 				return;
 			}
 			if (monster.hasStatusAffect("PCTailTangle") >= 0) {
-				kitsuneStruggle();
+				(monster as Kitsune).kitsuneStruggle();
 				return;
 			} else if (player.hasStatusAffect("Holli Constrict") >= 0) {
 				struggleOutOfHolli();
@@ -1285,16 +1269,6 @@ public function doCombat(eventNum:Number):void
 		zealotLossRape();
 		return;
 	}
-	//Hellhound attack
-	if(eventNum == 5107) {
-		hellHoundWormCannon();
-		return;
-	}
-	//Infested Hellhound Loss rape
-	if(eventNum == 5108) {
-		infestedHellhoundLossRape();
-		return;
-	}
 	if(eventNum == 5109) {
 		nagaPoisonBiteAttack();
 		return;
@@ -1365,14 +1339,6 @@ public function doCombat(eventNum:Number):void
 	}
 	if(eventNum == 5132) {
 		takeMinoCumDirectly();
-		return;
-	}
-	if(eventNum == 5136) {
-		harpyUberCharge();
-		return;
-	}
-	if(eventNum == 5137) {
-		harpyTease();
 		return;
 	}
 	if(eventNum == 5138) {

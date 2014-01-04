@@ -52,6 +52,11 @@
 			return kGAMECLASS.createCallBackFunction(func,arg);
 		}
 
+		protected function createCallBackFunction2(func:Function, ...args):Function
+		{
+			return kGAMECLASS.createCallBackFunction2.apply(null,[func].concat(args));
+		}
+
 		protected function startCombat(monster_:Monster,plotFight_:Boolean=false):void{
 			kGAMECLASS.startCombat(monster_,plotFight_);
 		}

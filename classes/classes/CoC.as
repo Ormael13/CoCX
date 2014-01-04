@@ -108,7 +108,11 @@
 		public var gnollSpearThrowerScene:GnollSpearThrowerScene = new GnollSpearThrowerScene();
 		public var goblinScene:GoblinScene = new GoblinScene();
 		public var gooGirlScene:GooGirlScene = new GooGirlScene();
+		public var harpyScene:HarpyScene = new HarpyScene();
+		public var hellHoundScene:HellHoundScene = new HellHoundScene();
 		public var impScene:ImpScene = new ImpScene();
+		public var infestedHellhoundScene:InfestedHellhoundScene = new InfestedHellhoundScene();
+		public var kitsuneScene:KitsuneScene = new KitsuneScene();
 		public var maleSpiderMorphScene:MaleSpiderMorphScene = new MaleSpiderMorphScene();
 		// Factory scenes
 		// Desert cave scenes
@@ -153,15 +157,12 @@
 		include "../../includes/fuckingTree.as";
 		include "../../includes/gangbangVillage.as";
 		include "../../includes/gargoyle.as";
-		include "../../includes/harpy.as";
 		include "../../includes/harpySophie.as";
 		include "../../includes/harpySophieBimbo.as";
 		include "../../includes/harpySophieFollower.as";
 		include "../../includes/heckel.as";
 		include "../../includes/heliaFollower.as";
 		include "../../includes/heliaPreggers.as";
-		include "../../includes/hellhound.as";
-		include "../../includes/hellhoundInfested.as";
 		include "../../includes/ifris.as";
 		include "../../includes/isabella.as";
 		include "../../includes/isabellaFollower.as";
@@ -175,7 +176,6 @@
 		include "../../includes/kelt.as";
 		include "../../includes/kiha.as";
 		include "../../includes/kihaFollower.as";
-		include "../../includes/kitsunes.as";
 		include "../../includes/latexy.as";
 		include "../../includes/library.as";
 		include "../../includes/lilium.as";

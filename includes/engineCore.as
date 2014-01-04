@@ -1972,10 +1972,9 @@ private function logFunctionInfo(func:Function, arg:* = null):void
 // returns a function that takes no arguments, and executes function `func` with argument `arg`
 public function createCallBackFunction(func:Function, arg:*):Function
 {
-
 	if( arg == -9000 || arg == null )
 	{
-		return function _addButtonCallback():* 
+		return function ():*
 		{ 
 			if (CoC_Settings.haltOnErrors) 
 				logFunctionInfo(func, arg);
@@ -1984,15 +1983,21 @@ public function createCallBackFunction(func:Function, arg:*):Function
 	}
 	else
 	{
-
-		return function _addButtonCallback():* 
+		return function ():*
 		{ 
 			if (CoC_Settings.haltOnErrors) 
 				logFunctionInfo(func, arg);
 			return func( arg ); 
 		};
 	}
-	
+}
+public function createCallBackFunction2(func:Function,...args):Function
+{
+	return function():*
+	{
+		if (CoC_Settings.haltOnErrors) logFunctionInfo(func,args);
+		return func();
+	}
 }
 
 

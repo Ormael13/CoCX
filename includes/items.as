@@ -347,7 +347,7 @@ public function itemUse(shortName1:String):void {
 	else if(shortName1 == "DrgnEgg") eatEmberEgg();
 	else if(shortName1 == "BimboSk") equipArmor("bimbo skirt");
 	else if(shortName1 == "PeppWht") peppermintWhite();
-	else if(shortName1 == "GldStat") kitsuneStatue();
+	else if(shortName1 == "GldStat") kitsuneScene.kitsuneStatue();
 	else if(shortName1 == "FoxJewl") foxJewel();
 	else if(shortName1 == "MystJwl") foxJewel(true);
 	else if(shortName1 == "KitGift") kitsunesGift();

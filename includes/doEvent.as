@@ -2612,21 +2612,6 @@ public function doEvent(eventNo:Number):void
 		BlameMarblezSweetVagoozle();
 		return;
 	}
-	else if (eventNo == 2514)
-	{
-		WinOnHarpyAndOralRape();
-		return;
-	}
-	else if (eventNo == 2515)
-	{
-		winAndRapeHarpyAnally();
-		return;
-	}
-	else if (eventNo == 2516)
-	{
-		victoryHarpyGetsHerPussyRaped();
-		return;
-	}
 	else if (eventNo == 2523)
 	{
 		shootDownSophieSex();
@@ -2926,11 +2911,6 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 2739)
 	{
 		fellatrixBarApproach();
-		return;
-	}
-	else if (eventNo == 2746)
-	{
-		hellHoundPropahRape();
 		return;
 	}
 	else if (eventNo == 2756)
@@ -4270,12 +4250,6 @@ public function doEvent(eventNo:Number):void
 		getANiamhBeer();
 		return;
 	}
-	
-	else if (eventNo == 3530)
-	{
-		harpyScissorSurprise();
-		return;
-	}
 	else if (eventNo == 3532)
 	{
 		maybeLaterNiamh();
@@ -4948,11 +4922,6 @@ public function doEvent(eventNo:Number):void
 		eggUpANagaSpiderLike();
 		return;
 	}
-	else if (eventNo == 3835)
-	{
-		spoidahsLegEggsInHarpeis();
-		return;
-	}
 	else if (eventNo == 3837)
 	{
 		tamaniBeaten();
@@ -5179,98 +5148,6 @@ public function doEvent(eventNo:Number):void
 		findBimboCheatster();
 		return;
 	}
-	else if (eventNo == 3920)
-	{
-		leaveKitsune(true);
-		return;
-	}
-	else if (eventNo == 3921)
-	{
-		mansion(true, false);
-		return;
-	}
-	else if (eventNo == 3922)
-	{
-		mansion(true, true);
-		return;
-	}
-	if (false == 3923)
-	{
-		mansion(false, false);
-		return;
-	}
-	if (false == 3924)
-	{
-		mansion(false, true);
-	}
-	else if (eventNo == 3925)
-	{
-		nonTentaclePCMansion(true);
-	}
-	else if (eventNo == 3926)
-	{
-		nonTentaclePCMansion(false);
-	}
-	else if (eventNo == 3927)
-	{
-		kitsuneMaleOrHermMansion(true);
-	}
-	else if (eventNo == 3928)
-	{
-		kitsuneMaleOrHermMansion(false);
-	}
-	else if (eventNo == 3929)
-	{
-		kitSuneLetHerMansion(true);
-	}
-	else if (eventNo == 3930)
-	{
-		kitSuneLetHerMansion(false);
-	}
-	else if (eventNo == 3931)
-	{
-		kitsuneShoveHerMansion(true);
-	}
-	else if (eventNo == 3932)
-	{
-		kitsuneShoveHerMansion(false);
-	}
-	else if (eventNo == 3934)
-	{
-		kitsuneFemaleOrGenderless(true);
-	}
-	else if (eventNo == 3935)
-	{
-		kitsuneFemaleOrGenderless(false);
-	}
-	else if (eventNo == 3936)
-	{
-		kitsunesGenderlessLetHer(true);
-	}
-	else if (eventNo == 3937)
-	{
-		kitsunesGenderlessLetHer(false);
-	}
-	else if (eventNo == 3938)
-	{
-		kitsunesGenderlessShoverHer(true);
-	}
-	else if (eventNo == 3939)
-	{
-		kitsunesGenderlessShoverHer(false);
-	}
-	else if (eventNo == 3940)
-	{
-		genderlessKitsuneStillHungry(true);
-	}
-	else if (eventNo == 3941)
-	{
-		genderlessKitsuneStillHungry(false);
-	}
-	else if (eventNo == 3947)
-	{
-		followTheWillOWisp(true);
-	}
 	else if (eventNo == 3950)
 	{
 		amilyScene.layEggsInAmily();
@@ -5305,10 +5182,6 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 3962)
 	{
 		sandwitchSpanking();
-	}
-	else if (eventNo == 3963)
-	{
-		clitFuckAHarpy();
 	}
 	else if (eventNo == 3964)
 	{

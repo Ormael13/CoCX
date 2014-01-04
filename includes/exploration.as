@@ -301,8 +301,8 @@ public function exploreDeepwoods():void {
 		akbalScene.supahAkabalEdition();
 	}
 	else if(chooser == 4) {
-		if(rand(3) == 0) kitsuneShrine();
-		else enterTheTrickster();
+		if(rand(3) == 0) kitsuneScene.kitsuneShrine();
+		else kitsuneScene.enterTheTrickster();
 	}
 }
 
@@ -834,12 +834,12 @@ public function exploreMountain():void {
 			if(player.faceType == FACE_DOG && (player.dogCocks() >= 2 || (player.hasVagina() && player.pregnancyType == 6 && player.pregnancyIncubation > 0)) && player.cor >= 60 && player.tailType == TAIL_TYPE_DOG && (player.lowerBody == LOWER_BODY_TYPE_DOG || player.hairColor == "midnight black")) {
 				trace("PASS BODYCHECK");
 				if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00141] == 0) {
-					HellHoundMasterEncounter();
+					hellHoundScene.HellHoundMasterEncounter();
 					return;
 				}
 				//Level 2 requires lethecite
 				else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00141] == 1 && player.hasKeyItem("Marae's Lethicite") >= 0 && player.keyItemv2("Marae's Lethicite") < 3) {
-					HellHoundMasterEncounter();
+					hellHoundScene.HellHoundMasterEncounter();
 					return;
 				}
 			}
@@ -1038,13 +1038,13 @@ public function exploreMountain():void {
 		if(player.hasStatusAffect("wormsOn") >= 0 && rand(2) == 0) {
 			//If lowered encounter rate, 25% chance, otherwise 50%.
 			if(player.hasStatusAffect("wormsHalf") >= 0 && rand(2) == 0) {
-				hellhoundEncounter();
+				hellHoundScene.hellhoundEncounter();
 				return;
 			}
-			infestedHellhoundEncounter();
+			infestedHellhoundScene.infestedHellhoundEncounter();
 			return;
 		}
-		hellhoundEncounter();
+		hellHoundScene.hellhoundEncounter();
 	}
 	//Hairdresser
 	if(chooser == 4) {
