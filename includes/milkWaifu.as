@@ -350,7 +350,7 @@ public function milkBathTime():void {
 	menu();
 	addButton(1,"Milk Girl",pullInZeMilkGirl);
 	if(player.gender > 0 && player.lust >= 33) addButton(0,"DrinkNFap",drinkAndFapturbate);
-	var count:int = 0
+	var count:int = 0;
 	if(sophieFollower()) count++;
 	if(player.hasStatusAffect("PureCampJojo") >= 0) count++;
 	if(latexGooFollower()) count++;
@@ -358,7 +358,7 @@ public function milkBathTime():void {
 	if(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) count++;
 	if(followerHel()) count++;
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) count++;
-	if(followerEmber()) count++;
+	if(emberScene.followerEmber()) count++;
 	if(followerKiha()) count++;
 	if(count >= 3) {
 		outputText("  Then again, if you're getting a bath, maybe the rest of your friends might like to join you?");
@@ -410,7 +410,7 @@ public function communalBath():void {
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("\n\nYou didn't even notice Izma getting into the pool.  The first sign of her is the sudden appearance of a bright red fin sticking above the water, closing in on you.  She breaches at the last moment, laughing gaily as she gives her alpha a kiss.");
 	
 	//{If PC has Ember:
-	if(followerEmber()) outputText("\n\nEmber approaches the pool, reptilian tail swishing eagerly.  " + emberMF("He","She") + " lowers " + emberMF("himself","herself") + " in with ease, sighing contentedly as milk washes over " + emberMF("his","her") + " scaled body.  \"<i>Is this how you humans bathe normally?</i>\"  " + emberMF("He","She") + " muses.  \"<i>How bizarre.</i>\"");
+	if(emberScene.followerEmber()) outputText("\n\nEmber approaches the pool, reptilian tail swishing eagerly.  " + emberScene.emberMF("He","She") + " lowers " + emberScene.emberMF("himself","herself") + " in with ease, sighing contentedly as milk washes over " + emberScene.emberMF("his","her") + " scaled body.  \"<i>Is this how you humans bathe normally?</i>\"  " + emberScene.emberMF("He","She") + " muses.  \"<i>How bizarre.</i>\"");
 	
 	//{If PC has Kiha:
 	if(followerKiha()) outputText("\n\nKiha, your dear dusky dragoness, wanders over to see what the commotion is, but turns her nose up at the sight of you bathing in breastmilk.  \"<i>Ew.  How the hell can you just...  wallow in that?  Disgusting!</i>\"");

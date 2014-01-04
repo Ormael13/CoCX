@@ -6,8 +6,11 @@ package classes.Monsters.Scenes
 	import classes.Appearance;
 	import classes.BaseContent;
 	import classes.CockTypesEnum;
+	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Monsters.ImpGang;
 	import classes.Monsters.ImpLord;
+
+	use namespace kGAMECLASS;
 
 	public class ImpScene extends BaseContent
 	{
@@ -25,13 +28,13 @@ package classes.Monsters.Scenes
 				cleanupAfterCombat();
 				return;
 			}
-			var maleRape:* = 0;
-			var femaleRape:* = 0;
-			var centaurGang:* = 0;
-			var feeder:* = 0;
-			var nipFuck:* = 0;
-			var bikiniTits:* = 0;
-			if(player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = 3988;
+			var maleRape:Function =null;
+			var femaleRape:Function =null;
+			var centaurGang:Function =null;
+			var feeder:Function =null;
+			var nipFuck:Function =null;
+			var bikiniTits:Function =null;
+			if(player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = kGAMECLASS.lustyMaidenPaizuri;
 			if(player.hasFuckableNipples() && player.lust >= 33) nipFuck = noogaisNippleRape;
 			if(player.hasStatusAffect("Feeder") >= 0) feeder = areImpsLactoseIntolerant;
 			//Taurs have different scenes
@@ -61,11 +64,11 @@ package classes.Monsters.Scenes
 			if(nipFuck + femaleRape  + maleRape + feeder + bikiniTits + eggDump <= 0) cleanupAfterCombat();
 			else {
 				menu();
-				if(maleRape > 0) addButton(0,"Male Fuck",eventParser,maleRape);
-				if(femaleRape > 0) addButton(1,"Female Fuck",eventParser,femaleRape);
-				if(nipFuck > 0) addButton(2,"NippleFuck",eventParser,nipFuck);
-				if(feeder > 0) addButton(3,"Breastfeed",eventParser,feeder);
-				if(bikiniTits > 0) addButton(4,"B.Titfuck",eventParser,bikiniTits);
+				if(maleRape) addButton(0,"Male Fuck",eventParser,maleRape);
+				if(femaleRape) addButton(1,"Female Fuck",eventParser,femaleRape);
+				if(nipFuck) addButton(2,"NippleFuck",eventParser,nipFuck);
+				if(feeder) addButton(3,"Breastfeed",eventParser,feeder);
+				if(bikiniTits) addButton(4,"B.Titfuck",eventParser,bikiniTits);
 				if(eggDump > 0) addButton(8,"Oviposit",putBeeEggsInAnImpYouMonster);
 				addButton(9,"Leave",eventParser,cleanupAfterCombat);
 				//choices("Male Rape",maleRape,"Female Rape",femaleRape,"NippleFuck",nipFuck,"Breastfeed",feeder,"B.Titfuck",bikiniTits,"",0,"",0,"",0,"",0,"Leave",cleanupAfterCombat);

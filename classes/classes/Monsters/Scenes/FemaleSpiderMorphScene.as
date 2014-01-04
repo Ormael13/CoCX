@@ -446,9 +446,9 @@ package classes.Monsters.Scenes
 			else outputText(", too wounded to fight back or run away.", false);
 			if (player.lust >= 33 && player.gender > 0) {
 				outputText("\n\nWhat do you do to her?", false);
-				var scissor:* = 0;
-				var pussyFuck:* = 0;
-				var analFuck:* = 0;
+				var scissor:Function =null;
+				var pussyFuck:Function =null;
+				var analFuck:Function =null;
 				if (player.hasVagina()) scissor = fSpiderMorphRape;
 				if (player.hasCock()) {
 					if (player.cockThatFits(monster.vaginalCapacity()) != -1) pussyFuck = fSpiderMorphRapeDude;

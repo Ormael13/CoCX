@@ -257,7 +257,7 @@ package classes.Monsters.Scenes
 				player.genderCheck();
 			}
 			outputText("There is a lurching in your belly that steals the breath from you. As seconds pass, the quivering kicks increase and you're forced to the ground as your womb feels like it's been set aflame by the heat pouring from your stowaway goo-girl. You pant and spread your labia with two fingers, the chill of your hands on your inflamed sex so sweet that you almost cum from the mere touch. Your cervix clenches involuntarily and you try to relax as much as possible, but the slime inside of you hardly needs the help. Squishing and slurping in gouts of syrupy fluid, she trickles from your uterus, sliding out of your tunnel in spurting gouts. You sigh and let her force her seething warmth from within you, the small puddle of ooze growing larger as it pools together. Finally, the small, red heart pops out of your tunnel and you allow yourself a big gulp of chill air to resuscitate your seared lungs.\n\n", false);
-
+			monster = new GooGirl();//because if we don't, the gooColor4() goes crazy.
 			outputText("The small " + gooColor4() + " sludge quivers, but seems unable to take a human shape. Extending pseudopods, it experimentally prods at your skin, trying to gets its bearings. You shiver as the goo slides over your flesh, poking you wetly from time to time. When it finds your breasts, the goo works up your mounds and slurps at your teats, milk filling the blob with a creamy tint that makes it larger and gives its membrane a firmer texture. It takes about ten minutes to flop its way across your entire body before sliding off of you and wriggling at your feet. It shifts again, but this time, manages to form a featureless head. Slowly, gradually, it adds more, morphing shoulders, arms, a waist, and even hips. Her body ripples and the blank slime morphs into a perfect miniature copy of you! It stares up at its mother with a happy expression before lurching away, toward the lake. Even though you were just her incubator and template, you can't help but feel a little pride at your goo child entering the wild world with a fearless sense of exploration.", false);
 			dynStats("lus", 50);
 		}
@@ -278,16 +278,16 @@ package classes.Monsters.Scenes
 			else {
 				outputText("With the goo-girl defeated, her unusual body is at your mercy.  What do you do?", false);
 				var sex1S:String = "";
-				var sex1N:* = 0;
+				var sex1N:Function =null;
 				var sex2S:String = "";
-				var sex2N:* = 0;
+				var sex2N:Function =null;
 				var sex3S:String = "";
-				var sex3N:* = 0;
+				var sex3N:Function =null;
 				var sex4S:String = "";
-				var sex4N:* = 0;
+				var sex4N:Function =null;
 				var valeria:* = kGAMECLASS.valeriaAndGooThreeStuff;
 				if (player.armorName != "goo armor" || player.hasStatusAffect("gooStuffed") >= 0) valeria = 0;
-				var eggs:* = 0;
+				var eggs:Function =null;
 				if (player.canOvipositBee()) eggs = layBeeEggsInGoo;
 				if (player.hasCock()) {
 					if (player.cocks[player.smallestCockIndex()].cockLength < 24) {

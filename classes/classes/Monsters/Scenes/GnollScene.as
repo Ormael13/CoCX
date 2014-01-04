@@ -103,7 +103,7 @@ package classes.Monsters.Scenes
 		public function defeatHyena():void
 		{
 			outputText("", true);
-			var dickDownClit:* = 0;
+			var dickDownClit:Function =null;
 			//Gnoll Defeat (HP)	
 			if (monster.HP < 1) outputText("The hyena girl collapses backwards onto the dusty ground, unable to continue the fight.", false);
 			//Gnoll Defeat (Lust)

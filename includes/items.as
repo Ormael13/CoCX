@@ -1547,8 +1547,8 @@ public function doItems(eventNo:Number):void {
 		}
 		if(!inCombat() && inDungeon == 0) {
 			if(player.hasKeyItem("Dragon Egg") >= 0) {
-				emberCampDesc();
-				ember = 3701;
+				emberScene.emberCampDesc();
+				ember = emberScene.emberEggInteraction;
 			}
 			if(nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5) {
 				if(flags[kFLAGS.NIEVE_STAGE] == 1) outputText("\nThere's some odd snow here that you could do something with...\n");

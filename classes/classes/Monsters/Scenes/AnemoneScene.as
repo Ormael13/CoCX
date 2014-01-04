@@ -115,18 +115,18 @@ package classes.Monsters.Scenes
 				outputText("You could always have your way with her.  If you do, which parts do you use to do the deed?", false);
 				//victory sex choice for males with cock fit 48 or females with clit >7": "her anus"
 				//(change "If you do, which of your parts" to "If you do, which part" in pre-sex choice menu)
-				var cockRape:* = 0;
-				var vaginaRape:* = 0;
-				var anal:* = 0;
-				var eggs:* = 0;
+				var cockRape:Function =null;
+				var vaginaRape:Function =null;
+				var anal:Function =null;
+				var eggs:Function =null;
 				if (player.canOviposit()) eggs = anemoneGetsLayedByBeePositor;
 				if (player.hasVagina() && player.clitLength >= 4) anal = anemoneButtPlugginz;
 				else if (player.hasCock() && player.cockThatFits(48) >= 0) anal = anemoneButtPlugginz;
 				//Normal male: -requires dick of area < 36
 				if (player.cockTotal() > 0) cockRape = rapeAnemoneWithDick;
 				if (player.hasVagina()) vaginaRape = rapeAnemoneWithPussy;
-				var bikiniTits:* = 0;
-				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = 3988;
+				var bikiniTits:Function =null;
+				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = kGAMECLASS.lustyMaidenPaizuri;
 				choices("Your Ass", victoryButtholeRape, "Your Cock", cockRape, "Your Vagina", vaginaRape, "Her Butt", anal, "Lay Egg", eggs, "", 0, "", 0, "", 0, "B.Titfuck", bikiniTits, "Leave", cleanupAfterCombat);
 			}
 			else cleanupAfterCombat();
@@ -626,8 +626,8 @@ package classes.Monsters.Scenes
 			else {
 				//(decrement MinoCum by 1, opens victory sex menu, uses win-by-lust context in ensuing scenes, increment corruption by 2 for getting a girl high just to fuck her)
 				outputText("As her fondling devolves into genuine masturbation you realize this would be a good opportunity to take care of your own lusts.  If you do, how will you do it?", false);
-				var cockRape:* = 0;
-				var vaginaRape:* = 0;
+				var cockRape:Function =null;
+				var vaginaRape:Function =null;
 				//Normal male: -requires dick of area < 36
 				if (player.cockTotal() > 0) cockRape = rapeAnemoneWithDick;
 				if (player.hasVagina()) vaginaRape = rapeAnemoneWithPussy;
@@ -691,7 +691,7 @@ package classes.Monsters.Scenes
 
 			outputText("\n\nWell, you've located her anus... what do you do now?");
 
-			var hotdog:* = 0;
+			var hotdog:Function =null;
 			if (!player.isTaur()) hotdog = hotdogTheAnemone;
 
 			simpleChoices("FUCK IT", anemoneQuoteUnquoteAnal, "Hotdog", hotdog, "", 0, "", 0, "Fuck Off", fuckingAssholelessAnemoneeeez);
@@ -1062,7 +1062,7 @@ package classes.Monsters.Scenes
 //[Barrel] button in [Stash] menu (appears whenever Kidswag flag >= 1)
 		public function approachAnemoneBarrel():void
 		{
-			var item:* = 0;
+			var item:Function =null;
 			var weaponT:String = "Give Weapon";
 			var weaponB:* = giveAnemoneWeapon;
 			clearOutput();
@@ -1091,7 +1091,7 @@ package classes.Monsters.Scenes
 
 			//Tutor, N.Watch, and Evict require the anemone to be present
 			menu();
-			if (item > 0) addButton(0, "Item", eventParser, item);
+			if (item) addButton(0, "Item", eventParser, item);
 			if (weaponB > 0) addButton(1, weaponT, eventParser, weaponB);
 			if (flags[kFLAGS.KID_SITTER] <= 1) {
 				if (flags[kFLAGS.ANEMONE_WEAPON] != 0 && player.fatigue <= 90) addButton(3, "Tutor", tutorAnemoneKid);

@@ -439,7 +439,7 @@ public function camp():void {
 	//Ember's anti-minotaur crusade!
 	if(flags[kFLAGS.EMBER_CURRENTLY_FREAKING_ABOUT_MINOCUM] == 1) {
 		//Modified Camp Description
-		outputText("Since Ember began " + emberMF("his","her") + " 'crusade' against the minotaur population, skulls have begun to pile up on either side of the entrance to " + emberMF("his","her") + " den.  There're quite a lot of them.\n\n");
+		outputText("Since Ember began " + emberScene.emberMF("his","her") + " 'crusade' against the minotaur population, skulls have begun to pile up on either side of the entrance to " + emberScene.emberMF("his","her") + " den.  There're quite a lot of them.\n\n");
 	}
 	//Dat tree!
 	if(flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0) {
@@ -607,10 +607,7 @@ public function stash(exists:Boolean = true):Boolean {
 	
 	//Use to know if to show/hide stash.
 	if(exists) {
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] > 0 || itemStorage.length > 0 || flags[kFLAGS.ANEMONE_KID] > 0)
-			return true;
-		else
-			return false;
+		return flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] > 0 || itemStorage.length > 0 || flags[kFLAGS.ANEMONE_KID] > 0;
 	}
 	/*Hacked in cheat to enable shit
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1;
@@ -640,7 +637,7 @@ public function stash(exists:Boolean = true):Boolean {
 		if(model.time.hours < 6) barrel = 0;
 	}
 	if(player.hasKeyItem("Camp - Chest") >= 0) outputText("You have a large wood and iron chest to help store excess items located near the portal entrance.\n\n", false);
-	var weaponNames:Array = new Array();
+	var weaponNames:Array = [];
 	//Weapon rack
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] > 0) {
 		outputText("There's a weapon rack set up here, set up to hold up to nine various weapons.", false);
@@ -669,7 +666,7 @@ public function stash(exists:Boolean = true):Boolean {
 		}
 		outputText(".\n\n", false);
 	}
-	var armorNames:Array = new Array();
+	var armorNames:Array = [];
 	//Armor Rack
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] > 0) {
 		outputText("Your camp has an armor rack set up to hold your various sets of gear.  It appears to be able to hold nine different types of armor.", false);
@@ -703,15 +700,14 @@ public function stash(exists:Boolean = true):Boolean {
 }
 	
 public function hasCompanions():Boolean {
-	if(companionsCount() > 0) return true;
-	return false;
+	return companionsCount() > 0;
 }
 public function companionsCount():Number {
 	return followersCount() + slavesCount() + loversCount();
 }
 public function followersCount():Number {
 	var counter:Number = 0;
-	if(followerEmber()) counter++;
+	if(emberScene.followerEmber()) counter++;
 	if(flags[kFLAGS.VALARIA_AT_CAMP] == 1) counter++;
 	if(player.hasStatusAffect("PureCampJojo") >= 0) counter++;
 	if(player.hasStatusAffect("Camp Rathazul") >= 0) counter++;
@@ -721,8 +717,7 @@ public function followersCount():Number {
 	return counter;
 }
 public function hasFollowers():Boolean {
-	if(followersCount() > 0) return true;
-	return false;
+	return followersCount() > 0;
 }
 public function slavesCount():Number {
 	var counter:Number = 0;
@@ -754,8 +749,7 @@ public function loversCount():Number {
 	return counter;
 }
 public function hasLovers():Boolean {
-	if(loversCount() > 0) return true;
-	return false;
+	return loversCount() > 0;
 }
 public function campLoversMenu():void {
 	var isabellaButt:Number = 0;
@@ -965,14 +959,14 @@ public function campFollowers():void {
 	var jojoEvent:Number = 0;
 	var valeria:Number = 0;
 	var shouldra:Number = 0;
-	var ember:Number = 0;
+	var ember:Function = null;
 	clearOutput();
 	gameState = 0;
 	//ADD MENU FLAGS/INDIVIDUAL FOLLOWER TEXTS
 	menu();
-	if(followerEmber()) {
-		emberCampDesc();
-		ember = 3691;
+	if(emberScene.followerEmber()) {
+		emberScene.emberCampDesc();
+		ember = emberScene.emberCampMenu;
 	}
 	if(followerShouldra()) {
 		shouldra = 3665;
@@ -1017,7 +1011,7 @@ public function campFollowers():void {
 	}
 	if(flags[kFLAGS.VALARIA_AT_CAMP] == 1) valeria = 3588;
 //choices("Ember",ember,"Jojo",jojoEvent,"Rathazul",rathazulEvent,"Shouldra",shouldra,"Valeria",valeria,"",0,"",0,"",0,"",0,"Back",1);	
-	if(ember > 0) addButton(0,"Ember",eventParser,ember);
+	if(ember) addButton(0,"Ember",eventParser,ember);
 	if(helspawnFollower()) addButton(1,flags[kFLAGS.HELSPAWN_NAME],helspawnsMainMenu);
 	if(jojoEvent > 0) addButton(2,"Jojo",eventParser,jojoEvent);
 	if(rathazulEvent > 0) addButton(3,"Rathazul",eventParser,rathazulEvent);

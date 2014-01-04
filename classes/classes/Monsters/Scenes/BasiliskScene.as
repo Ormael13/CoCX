@@ -62,8 +62,8 @@ package classes.Monsters.Scenes
 		public function defeatBasilisk():void {
 			spriteSelect(75);
 			outputText("", true);
-			var evil:* = 0;
-			var eggs:* = 0;
+			var evil:Function =null;
+			var eggs:Function =null;
 			if(player.canOvipositSpider()) eggs = driderPCEggLaysBasilisk;
 			if(player.canOvipositBee() && player.gender > 0) eggs = layBeeEggsInABasilisk;
 			if(player.cockThatFits(monster.analCapacity()) >= 0 && player.cor >= 66) evil = defeatBasiliskAndAnal;

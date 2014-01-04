@@ -5,7 +5,10 @@ package classes.Monsters.Scenes
 {
 	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Monsters.CorruptedDrider;
+
+	use namespace kGAMECLASS;
 
 	public class CorruptedDriderScene extends BaseContent
 	{
@@ -64,11 +67,11 @@ package classes.Monsters.Scenes
 			else outputText("to masturbate her swollen pussy-lips and the thick, juicy demon-cock that's sprouted in place of her clit.  She's so focused on getting off that she utterly gives up on the idea of fighting back, let alone dominating you as she seemed to plan originally.", false);
 			outputText("  The spider-herm lies in a miserable, defeated heap.", false);
 
-			var buttFuckBUTTFUCKBUTTTFUCKBUTTFUCK:* = 0;
+			var buttFuckBUTTFUCKBUTTTFUCKBUTTFUCK:Function =null;
 			if (player.cockThatFits(monster.analCapacity()) >= 0) buttFuckBUTTFUCKBUTTTFUCKBUTTFUCK = buttFuckADriderOhBaby;
-			var vagFuck:* = 0;
-			var fuckSpinner:* = 0;
-			var careful:* = 0;
+			var vagFuck:Function =null;
+			var fuckSpinner:Function =null;
+			var careful:Function =null;
 			if (player.hasCock() && player.lust >= 33) {
 				if (player.cockThatFits(monster.vaginalCapacity()) >= 0) {
 					outputText("\nYou could fuck her pussy, though you'd be within easy reach of her lips.  If she gets any crazy ideas, it'd be hard to stop her.", false);
@@ -85,16 +88,16 @@ package classes.Monsters.Scenes
 				}
 				else outputText("\n<b>You briefly consider shoving it in a spinneret, but there's no way you could fit inside the tight opening.</b>", false);
 			}
-			var rideCock:* = 0;
-			var rideOvi:* = 0;
-			var bikiniTits:* = 0;
-			if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = 3988;
+			var rideCock:Function =null;
+			var rideOvi:Function =null;
+			var bikiniTits:Function =null;
+			if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = kGAMECLASS.lustyMaidenPaizuri;
 			if (player.hasVagina() && player.lust >= 33) {
 				rideCock = winVSDriderTakeItsCockInCunt;
 				rideOvi = victoryVSDriderRideOviVaginal;
 				outputText("\nYou could ride the drider's retractible demon-cock or her ovipositor.", false);
 			}
-			var rideOviAss:* = 0;
+			var rideOviAss:Function =null;
 			if (player.lust >= 33) {
 				outputText("\nYou could always ride her ovipositor anally...", false);
 				rideOviAss = victoryVSDriderRideOviAnal;

@@ -779,22 +779,22 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			}
 		}
 		//EMBER STUFF
-		if(followerEmber() && player.hasStatusAffect("Ember Napping") < 0) {
+		if(emberScene.followerEmber() && player.hasStatusAffect("Ember Napping") < 0) {
 			//Mino cum freakout - PC partly addicted!
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 1 && player.hasPerk("Minotaur Cum Addict") < 0 && flags[kFLAGS.EMBER_CURRENTLY_FREAKING_ABOUT_MINOCUM] == 0) {
-				minotaurJizzFreakout();
+				emberScene.minotaurJizzFreakout();
 				needNext = true;
 			}
 			//Ember is freaking out about addiction, but PC no longer addicted!
 			else if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 0 && flags[kFLAGS.EMBER_CURRENTLY_FREAKING_ABOUT_MINOCUM] == 1) {
-				emberGetOverFreakingOutAboutMinoJizz();
+				emberScene.emberGetOverFreakingOutAboutMinoJizz();
 				needNext = true;
 			}
 			//At max lust, count up - if ten hours lusty, ember yells at ya!
 			if(player.lust >= 100 && player.gender > 0) {
 				flags[kFLAGS.EMBER_LUST_BITCHING_COUNTER]++;
 				if (flags[kFLAGS.EMBER_LUST_BITCHING_COUNTER] >= 10) {
-					emberBitchesAtYouAboutLustiness();
+					emberScene.emberBitchesAtYouAboutLustiness();
 					needNext = true;
 				}
 			}
@@ -2134,12 +2134,12 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		}
 		if(player.hasStatusAffect("Ember Napping") < 0) {
 			//Ember get's a whiff of fuckscent and knocks up PC!
-			if(followerEmber() && player.hasVagina() && player.hasStatusAffect("heat") >= 0 && player.pregnancyIncubation == 0 && player.hasStatusAffect("ember fuck cooldown") < 0 && rand(10) == 0 && (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3)) {
-				emberRapesYourHeatness();
+			if(emberScene.followerEmber() && player.hasVagina() && player.hasStatusAffect("heat") >= 0 && player.pregnancyIncubation == 0 && player.hasStatusAffect("ember fuck cooldown") < 0 && rand(10) == 0 && (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3)) {
+				emberScene.emberRapesYourHeatness();
 				return true;
 			}
-			else if(followerEmber() && player.hasCock() && player.hasStatusAffect("rut") >= 0 && flags[kFLAGS.EMBER_INCUBATION] == 0 && player.hasStatusAffect("ember fuck cooldown") < 0 && rand(10) == 0 && flags[kFLAGS.EMBER_GENDER] >= 2) {
-				emberRapesYourHeatness();
+			else if(emberScene.followerEmber() && player.hasCock() && player.hasStatusAffect("rut") >= 0 && flags[kFLAGS.EMBER_INCUBATION] == 0 && player.hasStatusAffect("ember fuck cooldown") < 0 && rand(10) == 0 && flags[kFLAGS.EMBER_GENDER] >= 2) {
+				emberScene.emberRapesYourHeatness();
 				return true;
 			}
 		}
@@ -2690,9 +2690,9 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			return true;
 		}
 		//Ember preg updates!
-		if(emberPregUpdate()) needNext = true;
+		if(emberScene.emberPregUpdate()) needNext = true;
 		if(flags[kFLAGS.EMBER_INCUBATION] == 1) {
-			emberGivesBirth();
+			emberScene.emberGivesBirth();
 			needNext = true;
 		}
 		//No diapause?  Normal!

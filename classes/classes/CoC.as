@@ -97,6 +97,7 @@
 		public var amilyScene:AmilyScene = new AmilyScene();
 		public var ceraphScene:CeraphScene = new CeraphScene();
 		public var ceraphFollowerScene:CeraphFollowerScene = new CeraphFollowerScene();
+		public var emberScene:EmberScene = new EmberScene();
 		// Nameless monster scenes
 		public var anemoneScene:AnemoneScene = new AnemoneScene();
 		public var basiliskScene:BasiliskScene = new BasiliskScene();
@@ -104,6 +105,8 @@
 		public var chameleonGirlScene:ChameleonGirlScene = new ChameleonGirlScene();
 		public var corruptedDriderScene:CorruptedDriderScene = new CorruptedDriderScene();
 		public var femaleSpiderMorphScene:FemaleSpiderMorphScene = new FemaleSpiderMorphScene();
+		public var fetishCultistScene:FetishCultistScene = new FetishCultistScene();
+		public var fetishZealotScene:FetishZealotScene = new FetishZealotScene();
 		public var gnollScene:GnollScene = new GnollScene();
 		public var gnollSpearThrowerScene:GnollSpearThrowerScene = new GnollSpearThrowerScene();
 		public var goblinScene:GoblinScene = new GoblinScene();
@@ -144,15 +147,12 @@
 		include "../../includes/dungeonHelSupplimental.as";
 		include "../../includes/dungeonSandwitch.as";
 		include "../../includes/edryn.as";
-		include "../../includes/ember.as";
 		include "../../includes/essrayle.as";
 		include "../../includes/exgartuan.as";
 		include "../../includes/faerie.as";
 		include "../../includes/fapArena.as";
 		include "../../includes/fellatrix.as";
 		include "../../includes/fera.as";
-		include "../../includes/fetishCultist.as";
-		include "../../includes/fetishZealot.as";
 		include "../../includes/froggirl.as";
 		include "../../includes/fuckingTree.as";
 		include "../../includes/gangbangVillage.as";
@@ -194,7 +194,6 @@
 		include "../../includes/niamh.as";
 		include "../../includes/oasis.as";
 		include "../../includes/ooze.as";
-		//include "../../includes/parser.as";
 		include "../../includes/perkPicker.as";
 		include "../../includes/pregnancy.as";
 		include "../../includes/Raphael.as";

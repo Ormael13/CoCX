@@ -53,9 +53,9 @@ package classes.Monsters.Scenes
 		{
 			outputText("", true);
 			spriteSelect(74);
-			var mount:* = 0;
-			var buttfuck:* = 0;
-			var frot:* = 0;
+			var mount:Function =null;
+			var buttfuck:Function =null;
+			var frot:Function =null;
 			if (player.hasVagina()) mount = victoryCowgirlRidingOnSpiderBoi;
 			if (player.hasCock()) {
 				if (player.cockThatFits(monster.analCapacity()) != -1) buttfuck = victoryButtFuck;

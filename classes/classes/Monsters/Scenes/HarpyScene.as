@@ -29,13 +29,13 @@ package classes.Monsters.Scenes
 				cleanupAfterCombat();
 				return;
 			}
-			var eggs:* = 0;
+			var eggs:Function =null;
 			if (player.canOvipositSpider() && (player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SPIDER_FANGS)) eggs = spoidahsLegEggsInHarpeis;
-			var anal:* = 0;
+			var anal:Function =null;
 			var oral:* = WinOnHarpyAndOralRape;
-			var pussy:* = 0;
-			var scissor:* = 0;
-			var clitFuck:* = 0;
+			var pussy:Function =null;
+			var scissor:Function =null;
+			var clitFuck:Function =null;
 
 			if (player.hasVagina() && player.clitLength >= 3.5) clitFuck = clitFuckAHarpy;
 			if (player.hasVagina()) {

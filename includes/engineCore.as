@@ -26,16 +26,7 @@
 // model.maxHP = maxHP;
 
 public function maxHP():Number {
-	var max:Number = 0;
-	max += int(player.tou*2 + 50);
-	if(player.hasPerk("Tank") >= 0) max += 50;
-	if (player.hasPerk("Tank 2") >= 0) max += Math.round(player.tou);
-	if (player.hasPerk(UmasShop.NEEDLEWORK_DEFENSE_PERK_NAME) >= 0) max += UmasShop.NEEDLEWORK_DEFENSE_EXTRA_HP;
-	if(player.level <= 20) max += player.level * 15;
-	else max += 20 * 15;
-	max = Math.round(max);
-	if(max > 999) max = 999;
-	return max;
+	return player.maxHP();
 }
 
 public function silly():Boolean {
@@ -2472,61 +2463,8 @@ public function fatigue(mod:Number,type:Number  = 0):void {
 public function changeFatigue(changeF:Number):void {
 	fatigue(changeF);
 }
-//Determine minimum lust
 public function minLust():Number {
-	var min:Number = 0;
-	//Bimbo body boosts minimum lust by 40
-	if(player.hasStatusAffect("Bimbo Champagne") >= 0 || player.hasPerk("Bimbo Body") >= 0 || player.hasPerk("Bro Body") >= 0 || player.hasPerk("Futa Form") >= 0) {
-		if(min > 40) min += 10;
-		else if(min > 0) min += 20;
-		else min += 40;
-	}
-	//Omnibus' Gift
-	if(player.hasPerk("Omnibus' Gift") >= 0) {
-		if(min > 40) min += 10;
-		else if(min > 0) min += 20;
-		else min += 35;                
-	}
-	//Nymph perk raises to 30
-	if(player.hasPerk("Nymphomania") >= 0) {
-		if(min >= 40) min += 10;
-		else if(min > 0) min += 15;
-		else min += 30;
-	}
-	//Oh noes anemone!
-	if(player.hasStatusAffect("Anemone Arousal") >= 0) {
-		if(min >= 40) min += 10;
-		else if(min > 0) min += 20;
-		else min += 30;
-	}
-	//Hot blooded perk raises min lust!
-	if(player.hasPerk("Hot Blooded") >= 0) {
-		if(min > 0) min += player.perks[player.hasPerk("Hot Blooded")].value1 / 2;
-		else min += player.perks[player.hasPerk("Hot Blooded")].value1;
-	}
-	if(player.hasPerk("Luststick Adapted") > 0) {
-		if(min < 50) min += 10;
-		else min += 5;                
-	}
-	//Add points for Crimstone
-	min += player.perkv1("Pierced: Crimstone");
-	min += player.perkv1("Pent Up");
-	//Harpy Lipstick status forces minimum lust to be at least 50.
-	if(min < 50 && player.hasStatusAffect("Luststick") >= 0) min = 50;
-	//SHOULDRA BOOSTS
-	//+20
-	if(flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -168) {
-		min += 20;
-		if(flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -216)
-			min += 30;
-	}
-	//SPOIDAH BOOSTS
-	if(player.eggs() >= 20) {
-		min += 10;
-		if(player.eggs() >= 40) min += 10;
-	}
-	if(min < 30 && player.armorName == "lusty maiden's armor") min = 30;
-	return min;
+	return player.minLust();
 }
 
 public function displayStats(e:MouseEvent = null):void
@@ -2617,8 +2555,8 @@ public function displayStats(e:MouseEvent = null):void
 	if(player.statusAffectv2("Tamani") > 0) outputText("<b>Children With Tamani: </b>" + player.statusAffectv2("Tamani") + " (after all forms of natural selection)\n", false);
 	if(urtaKids() > 0) outputText("<b>Children With Urta: </b>" + urtaKids() + "\n");
 	if(flags[kFLAGS.SOPHIE_EGGS_LAID] > 0) outputText("<b>Eggs Fertilized For Sophie: </b>" + (flags[kFLAGS.SOPHIE_EGGS_LAID] + sophie) + "\n", false);
-	if(emberAffection() > 0) outputText("<b>Ember Affection:</b> " + Math.round(emberAffection()) + "%\n");
-	if(emberChildren() > 0) {
+	if(emberScene.emberAffection() > 0) outputText("<b>Ember Affection:</b> " + Math.round(emberScene.emberAffection()) + "%\n");
+	if(emberScene.emberChildren() > 0) {
 		outputText("<b>Ember Offspring (Males): </b>" + flags[kFLAGS.EMBER_CHILDREN_MALES] + "\n");
 		outputText("<b>Ember Offspring (Females): </b>" + flags[kFLAGS.EMBER_CHILDREN_FEMALES] + "\n");
 		outputText("<b>Ember Offspring (Herms): </b>" + flags[kFLAGS.EMBER_CHILDREN_HERMS] + "\n");

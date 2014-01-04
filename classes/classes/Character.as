@@ -798,8 +798,21 @@
 				return false;
 			return (cocks[arg].cockType == CockTypesEnum.DOG || cocks[arg].cockType == CockTypesEnum.FOX || cocks[arg].cockType == CockTypesEnum.DISPLACER);
 		}
-		
-		
+
+
+		public function maxHP():Number
+		{
+			var max:Number = 0;
+			max += int(tou * 2 + 50);
+			if (hasPerk("Tank") >= 0) max += 50;
+			if (hasPerk("Tank 2") >= 0) max += Math.round(tou);
+			if (hasPerk(UmasShop.NEEDLEWORK_DEFENSE_PERK_NAME) >= 0) max += UmasShop.NEEDLEWORK_DEFENSE_EXTRA_HP;
+			if (level <= 20) max += level * 15;
+			else max += 20 * 15;
+			max = Math.round(max);
+			if (max > 999) max = 999;
+			return max;
+		}
 	}
 
 }

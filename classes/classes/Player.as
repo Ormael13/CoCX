@@ -1208,5 +1208,63 @@ package classes
 			}
 		}
 
+		//Determine minimum lust
+		public function minLust():Number
+		{
+			var min:Number = 0;
+			//Bimbo body boosts minimum lust by 40
+			if(hasStatusAffect("Bimbo Champagne") >= 0 || hasPerk("Bimbo Body") >= 0 || hasPerk("Bro Body") >= 0 || hasPerk("Futa Form") >= 0) {
+				if(min > 40) min += 10;
+				else if(min > 0) min += 20;
+				else min += 40;
+			}
+			//Omnibus' Gift
+			if(hasPerk("Omnibus' Gift") >= 0) {
+				if(min > 40) min += 10;
+				else if(min > 0) min += 20;
+				else min += 35;                
+			}
+			//Nymph perk raises to 30
+			if(hasPerk("Nymphomania") >= 0) {
+				if(min >= 40) min += 10;
+				else if(min > 0) min += 15;
+				else min += 30;
+			}
+			//Oh noes anemone!
+			if(hasStatusAffect("Anemone Arousal") >= 0) {
+				if(min >= 40) min += 10;
+				else if(min > 0) min += 20;
+				else min += 30;
+			}
+			//Hot blooded perk raises min lust!
+			if(hasPerk("Hot Blooded") >= 0) {
+				if(min > 0) min += perks[hasPerk("Hot Blooded")].value1 / 2;
+				else min += perks[hasPerk("Hot Blooded")].value1;
+			}
+			if(hasPerk("Luststick Adapted") > 0) {
+				if(min < 50) min += 10;
+				else min += 5;                
+			}
+			//Add points for Crimstone
+			min += perkv1("Pierced: Crimstone");
+			min += perkv1("Pent Up");
+			//Harpy Lipstick status forces minimum lust to be at least 50.
+			if(min < 50 && hasStatusAffect("Luststick") >= 0) min = 50;
+			//SHOULDRA BOOSTS
+			//+20
+			if(flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -168) {
+				min += 20;
+				if(flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -216)
+					min += 30;
+			}
+			//SPOIDAH BOOSTS
+			if(eggs() >= 20) {
+				min += 10;
+				if(eggs() >= 40) min += 10;
+			}
+			if(min < 30 && armorName == "lusty maiden's armor") min = 30;
+			return min;
+		}
+
 	}
 }

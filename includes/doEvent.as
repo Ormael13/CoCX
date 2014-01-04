@@ -2253,12 +2253,6 @@ public function doEvent(eventNo:Number):void
 		keltResistancePussyOut();
 		return;
 	}
-	
-	else if (eventNo == 2263)
-	{
-		beeGirlsGetsDildoed();
-		return;
-	}
 	else if (eventNo == 2264)
 	{
 		sharkGirlGetsDildoed();
@@ -2518,19 +2512,9 @@ public function doEvent(eventNo:Number):void
 		rapeOozeWithMilk();
 		return;
 	}
-	else if (eventNo == 2482)
-	{
-		giveGoblinAMilkMustache();
-		return;
-	}
 	else if (eventNo == 2483)
 	{
 		minotaurDrinksMilkNewsAtEleven();
-		return;
-	}
-	else if (eventNo == 2485)
-	{
-		fetishCultistHasAMilkFetish();
 		return;
 	}
 	else if (eventNo == 2486)
@@ -3995,17 +3979,6 @@ public function doEvent(eventNo:Number):void
 		disciplineEldestMinotaurSon();
 		return;
 	}
-	
-	else if (eventNo == 3392)
-	{
-		swimsuitVibrators();
-		return;
-	}
-	else if (eventNo == 3393)
-	{
-		plugSwimsuitVag();
-		return;
-	}
 	else if (eventNo == 3396)
 	{
 		amilyScene.urtaXAmilyCuntPussyVagSQUICK();
@@ -4034,11 +4007,6 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 3409)
 	{
 		meditate();
-		return;
-	}
-	else if (eventNo == 3410)
-	{
-		amilyScene.pureAmilyPutsItInYourRectumDamnNearKilledEm();
 		return;
 	}
 	else if (eventNo == 3414)
@@ -4567,129 +4535,9 @@ public function doEvent(eventNo:Number):void
 		pumpkinFuck();
 		return;
 	}
-	else if (eventNo == 3691)
-	{
-		emberCampMenu();
-		return;
-	}
-	else if (eventNo == 3697)
-	{
-		getSomeStuff();
-		return;
-	}
-	else if (eventNo == 3701)
-	{
-		emberEggInteraction();
-		return;
-	}
-	else if (eventNo == 3704)
-	{
-		useIncubusDraftOnEmber(false);
-		return;
-	}
-	else if (eventNo == 3705)
-	{
-		useIncubusDraftOnEmber(true);
-		return;
-	}
-	else if (eventNo == 3706)
-	{
-		useSuccubiMilkOnEmber(false);
-		return;
-	}
-	else if (eventNo == 3707)
-	{
-		useSuccubiMilkOnEmber(true);
-		return;
-	}
-	else if (eventNo == 3708)
-	{
-		useOviElixerOnEmber();
-		return;
-	}
-	else if (eventNo == 3709)
-	{
-		useLactaidOnEmber();
-		return;
-	}
-	else if (eventNo == 3710)
-	{
-		hairExtensionSerum();
-		return;
-	}
-	else if (eventNo == 3712)
-	{
-		masturbateOntoAnEgg();
-		return;
-	}
-	else if (eventNo == 3713)
-	{
-		hatchZeMuzzles();
-		return;
-	}
-	else if (eventNo == 3720)
-	{
-		emberIsAnEggFactory();
-		return;
-	}
-	else if (eventNo == 3721)
-	{
-		dontWatchEmberLayEgg();
-		return;
-	}
-	else if (eventNo == 3722)
-	{
-		watchMediumAffectionEmberEggLay();
-		return;
-	}
-	else if (eventNo == 3723)
-	{
-		getMilkFromEmber();
-		return;
-	}
 	else if (eventNo == 3727)
 	{
 		mountPumpkin();
-		return;
-	}
-	else if (eventNo == 3728)
-	{
-		catchAnal();
-		return;
-	}
-	else if (eventNo == 3729)
-	{
-		suckEmberCock();
-		return;
-	}
-	else if (eventNo == 3730)
-	{
-		stickDickInKnifeDrawer();
-		return;
-	}
-	else if (eventNo == 3731)
-	{
-		stickItInEmbersButt();
-		return;
-	}
-	else if (eventNo == 3732)
-	{
-		slurpDraggieCunnies();
-		return;
-	}
-	else if (eventNo == 3733)
-	{
-		getEatenOutByEmbra();
-		return;
-	}
-	else if (eventNo == 3734)
-	{
-		penetrateEmbrah();
-		return;
-	}
-	else if (eventNo == 3736)
-	{
-		getPenetratedByEmberLastSexSceneWoooo();
 		return;
 	}
 	else if (eventNo == 3748)
@@ -4779,17 +4627,6 @@ public function doEvent(eventNo:Number):void
 	}
 	
 	// See other comment about mxmlc shitting on big if-statements
-	
-	if (eventNo == 3776)
-	{
-		emberBreedingAfterMathWatchOutForRadioactiveFallout(true);
-		return;
-	}
-	else if (eventNo == 3777)
-	{
-		emberBreedingAfterMathWatchOutForRadioactiveFallout(false);
-		return;
-	}
 	else if (eventNo == 3786)
 	{
 		benoitIntro();

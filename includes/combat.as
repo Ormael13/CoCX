@@ -125,9 +125,9 @@ public function doCombat(eventNum:Number):void
 			menuLoc = 0;
 			if (combatRoundOver()) return;
 			temp2 = magicMenu;
-			if (player.hasStatusAffect("Throat Punch") >= 0) temp2 = 0;
-			if (player.hasStatusAffect("Web-Silence") >= 0) temp2 = 0;
-			if (player.hasStatusAffect("GooArmorSilence") >= 0) temp2 = 0;
+			if (player.hasStatusAffect("Throat Punch") >= 0) temp2 = null;
+			if (player.hasStatusAffect("Web-Silence") >= 0) temp2 = null;
+			if (player.hasStatusAffect("GooArmorSilence") >= 0) temp2 = null;
 
 			if (player.hasStatusAffect("Attack Disabled") >= 0) {
 				outputText("\n<b>Chained up as you are, you can't manage any real physical attacks!</b>");
@@ -825,28 +825,6 @@ public function doCombat(eventNum:Number):void
 			player.createStatusAffect("wormsHalf", 0, 0, 0, 0);
 			doNext(13);
 	}
-			//Cultist Attack 1
-	if(eventNum == 5062) {
-			cultistRaisePlayerLust();
-	}
-			//Cultist Attack 2
-	if(eventNum == 5063) {
-			cultistLustTransfer();
-	}
-			//GET RAEPED BY CULTIST
-	if(eventNum == 5064) {
-			outputText("", true);
-			cultistRapesYou();
-	}
-			//RAEP CULTIST
-	if(eventNum == 5065) {
-			outputText("", true);
-			playerRapesCultist();
-	}
-			//Cultist bad end pt2
-	if(eventNum == 5070) {
-			cultistBadEnd2();
-	}
 			//Wait
 	if(eventNum == 5071) {
 			//Gain fatigue if not fighting sand tarps
@@ -1247,26 +1225,6 @@ public function doCombat(eventNum:Number):void
 	//bite attack
 	if(eventNum == 5102) {
 		bite();
-		return;
-	}
-	//zealot attack1
-	if(eventNum == 5103) {
-		zealotSpecial1();
-		return;
-	}
-	//zealot attack2
-	if(eventNum == 5104) {
-		zealotSpecial2();
-		return;
-	}
-	//zealot gets raped
-	if(eventNum == 5105) {
-		zealotWinRape();
-		return;
-	}
-	//zealot rapes
-	if(eventNum == 5106) {
-		zealotLossRape();
 		return;
 	}
 	if(eventNum == 5109) {
@@ -5508,7 +5466,7 @@ public function runAway():void {
 		}
 		//Fail: 
 		else {
-			outputText("Despite some impressive jinking, " + emberMF("he","she") + " catches you, tackling you to the ground.\n\n");
+			outputText("Despite some impressive jinking, " + emberScene.emberMF("he","she") + " catches you, tackling you to the ground.\n\n");
 			enemyAI();
 		}
 		return;

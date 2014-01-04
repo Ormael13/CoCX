@@ -158,9 +158,9 @@ package classes.Monsters.Scenes
 			spriteSelect(54);
 			outputText("", true);
 			outputText("The gnoll draws one final javelin, the sharp point distinct as it points at you.  The javelin drops, sticking deep into the dry ground, as the amazon is too dazed and aroused to fight further.  One spotted paw holds tight to the shaft while the tawny warrior slowly falls to her knees, the will to fight completely gone.  Her head bows to you in submission as you slowly approach the defeated hyena.", false);
-			var vagoo:* = 0;
+			var vagoo:Function =null;
 			if (player.hasVagina()) vagoo = victoryRapeHyenaCunnilingus;
-			var penor:* = 0;
+			var penor:Function =null;
 			if (player.hasCock()) penor = hyenaVictoryRapeFellatio;
 			if (player.lust >= 33 && player.gender > 0) {
 				outputText("\n\nUsing the hyena to get off would be easy.  What do you do?", false);

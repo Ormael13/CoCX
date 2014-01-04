@@ -192,10 +192,10 @@ package classes.Monsters.Scenes
 				return;
 			}
 			//(Display Options: [Fuck Her Face] [Pussy Rub] [Herm Style Pussyrub] [Incubi Draft] [Succubi Milk] [Lust&Sens Drafts])
-			var dick:* = 0;
-			var pussy:* = 0;
-			var herm:* = 0;
-			var item:* = 0;
+			var dick:Function =null;
+			var pussy:Function =null;
+			var herm:Function =null;
+			var item:Function =null;
 			if (player.hasCock()) dick = manFucksChameleonWithBiggishWang;
 			if (player.hasVagina()) pussy = femaleHasWinSexWithChamCham;
 			if (player.gender == 3) herm = fuckDatChameleonAsACoolGuyGirlHerm;
@@ -298,8 +298,8 @@ package classes.Monsters.Scenes
 			//also incubi draft and succubi milk should probably have something of a corruption requirement
 			//(Display Options: [Incubus Draft] [Succubi Milk](PC must have cock) [Lust&SensDrafts]
 			//optionz go herez
-			var milk:* = 0;
-			var drafts:* = 0;
+			var milk:Function =null;
+			var drafts:Function =null;
 			if ((hasItem("SucMilk", 1) || hasItem("P.S.Mlk", 1)) && player.hasCock()) milk = giveTheChameleonASuccubiMilk;
 			if (hasItem("SensDrf", 1) && (hasItem("L.Draft", 1) || hasItem("F.Draft", 1))) drafts = doseDatChameleonWithLustAndSensitivityDrafts;
 

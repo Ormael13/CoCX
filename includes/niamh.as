@@ -93,7 +93,7 @@ public function getANiamhBeer():void {
 	player.gems -= 2;
 	statScreenRefresh();
 	//[Here][To Go]
-	var togo:* = 0;
+	var togo:Function =null;
 	if(player.gems >= 2) togo = blackCatBeerToGo;
 	else outputText("\n\n<b>You're too poor to buy the mug.</b>");
 	flags[kFLAGS.GOT_NIAMH_BEER]++;
@@ -205,7 +205,7 @@ public function talkToNiamh():void {
 		}
 	}
 	//[Beer] [Leave]
-	var beer:* = 0;
+	var beer:Function =null;
 	if(player.gems >= 2) 
 		beer = getANiamhBeer
 	simpleChoices("Beer",beer,"",0,"",0,"",0,"Leave",13);
@@ -286,7 +286,7 @@ public function corruptOrBimboNiamhIntro():void {
 public function maybeLaterNiamh():void {
 	clearOutput();
 	outputText("You chuckle nervously and shake your head, citing your ignorance of all things alcoholic.  Niamh sighs resignedly, reaching forward and grabbing one of her elongated nipples.  With practiced ease, she fills her flagon and takes a deep swig of it.  \"<i>Can't blame me for wantin' a change of pace,</i>\" she mutters.  \"<i>Now, would ye like your own glass of Black Cat Beer, or are ya gonna keep starin' at me tits?</i>\"");
-	var beer:* = 0;
+	var beer:Function =null;
 	if(player.gems >= 2) beer = getANiamhBeer;
 	else outputText("\n\n<b>You're too poor for beer.</b>");
 	//[Talk] [Get Beer] [Leave]
@@ -492,11 +492,11 @@ public function bazaarNiamh():void {
 	}
 	flags[kFLAGS.TIMES_NIAMH_BAZAAR_MET]++;
 	//[Bizarre Bazaar, beer purchase, bimbo and corrupted version]
-	var drink:* = 0;
+	var drink:Function =null;
 	if(player.gems >= 2) 
 		drink = bazaardNiamhDrink;
 	else outputText("\n\n<b>You're too poor to get a drink.</b>");
-	var fuck:* = 0;
+	var fuck:Function =null;
 	if(player.hasCock()) 
 		fuck = bazaarSex;
 	simpleChoices("Get A Drink",drink,"Tit-Fuck",fuck,"",0,"",0,"Back",2855);

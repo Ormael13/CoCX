@@ -213,15 +213,15 @@ package classes.Monsters.Scenes
 				cleanupAfterCombat();
 				return;
 			}
-			var buttseks:* = 0;
-			var feeder:* = 0;
-			var fitsFuck:* = 0;
-			var tooBig:* = 0;
-			var corruptTooBig:* = 0;
-			var cuntFuck:* = 0;
-			var spiderCondom:* = 0;
-			var jog:* = 0;
-			var eggs:* = 0;
+			var buttseks:Function =null;
+			var feeder:Function =null;
+			var fitsFuck:Function =null;
+			var tooBig:Function =null;
+			var corruptTooBig:Function =null;
+			var cuntFuck:Function =null;
+			var spiderCondom:Function =null;
+			var jog:Function =null;
+			var eggs:Function =null;
 			if (player.canOvipositSpider()) {
 				eggs = laySomeDriderEggsInGobboTwat;
 			}
@@ -248,15 +248,15 @@ package classes.Monsters.Scenes
 			}
 			//Breastfeed adds an option
 			if (player.hasStatusAffect("Feeder") >= 0) {
-				feeder = 2482;
+				feeder = kGAMECLASS.giveGoblinAMilkMustache;
 			}
 			if (player.lust >= 33 && player.gender > 0 && fitsFuck + cuntFuck + tooBig + corruptTooBig + buttseks + feeder + spiderCondom + eggs > 0) {
 				outputText("\n\n<b>What do you do to her, and if anything, which of your body parts do you use?</b>", false);
 				choices("Dick Fuck", fitsFuck, "DickTooBig", tooBig, "CorruptDick", corruptTooBig, "Dick In Ass", buttseks, "Jog Fuck", jog, "Breastfeed", feeder, "Web Condom", spiderCondom, "Pussies", cuntFuck, "Lay Eggs", eggs, "Leave", cleanupAfterCombat);
 			}
-			else if (feeder > 0 || eggs > 0) {
+			else if (feeder || eggs) {
 				outputText("\n\n<b>You aren't horny enough to rape her, but ");
-				if (feeder > 0) outputText("your nipples ache with the desire to feed her your milk.  Do you feed her milk or leave?</b>", false);
+				if (feeder) outputText("your nipples ache with the desire to feed her your milk.  Do you feed her milk or leave?</b>", false);
 				else outputText("your abdomen aches with the desire to impregnate her full of insect eggs.  Do you?</b>");
 				simpleChoices("Feed", feeder, "Lay Eggs", eggs, "", 0, "", 0, "Leave", cleanupAfterCombat);
 				//doYesNo(feeder,cleanupAfterCombat);

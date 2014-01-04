@@ -2508,12 +2508,12 @@ package classes.Monsters.Scenes
 		//Corrupt Amily Sex Options
 		private function amilyCorruptSexMenu():void {
 			amilySprite();
-			var anal:* = 0;
-			var penetrated:* = 0;
-			var fuckCunt:* = 0;
-			var oral:* = 0;
-			var oral2:* = 0;
-			var scissor:* = 0;
+			var anal:Function =null;
+			var penetrated:Function =null;
+			var fuckCunt:Function =null;
+			var oral:Function =null;
+			var oral2:Function =null;
+			var scissor:Function =null;
 
 			outputText("", true);
 			if(player.gender > 0) {
@@ -2698,15 +2698,15 @@ package classes.Monsters.Scenes
 		private function amilyTakesChargeSex():void {
 			amilySprite();
 			outputText("", true);
-			var fuck:* = 0;
-			var drinkMilk:* = 0;
-			var getSucked:* = 0;
-			var scissor:* = 0;
-			var mountHer:* = 0;
-			var buttFuckButtFUCKBUTTFUCK:* = 0;
-			var catchs:* = 0;
+			var fuck:Function =null;
+			var drinkMilk:Function =null;
+			var getSucked:Function =null;
+			var scissor:Function =null;
+			var mountHer:Function =null;
+			var buttFuckButtFUCKBUTTFUCK:Function =null;
+			var catchs:Function =null;
 			if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0)
-				catchs = 3410;
+				catchs = pureAmilyPutsItInYourRectumDamnNearKilledEm;
 			if(player.hasCock())
 			{
 				if(player.cockThatFits(50) >= 0)

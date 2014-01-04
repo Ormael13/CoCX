@@ -654,15 +654,15 @@ package classes.Monsters.Scenes
 			if (player.lust >= 33 && player.gender > 0) {
 				outputText("  Do you have your way with her? (And if so, which of your body parts do you do it with?)", false);
 
-				var dicking:* = 0;
-				var buttsmexing:* = 0;
+				var dicking:Function =null;
+				var buttsmexing:Function =null;
 				//Dickings ahoyu!
 				if (player.hasCock()) {
 					dicking = maleFuckCeraphsPussy;
 					if (player.cockThatFits(monster.analCapacity()) != -1) buttsmexing = buttRapeCeraph;
 					else outputText("  <b>There's no way you could fit inside her ass - you're too big.</b>", false);
 				}
-				var cunting:* = 0;
+				var cunting:Function =null;
 				if (player.hasVagina()) cunting = rideCeraphsCockLikeaBAWSSexclamation11eleven;
 				var bikiniTits:int = 0;
 				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = 3988;
@@ -909,9 +909,9 @@ package classes.Monsters.Scenes
 		{
 			outputText("", true);
 			spriteSelect(7);
-			var liqueur:* = 0;
-			var endowment:* = 0;
-			var armor:* = 0;
+			var liqueur:Function =null;
+			var endowment:Function =null;
+			var armor:Function =null;
 			outputText("Ceraph looks you up and down like an appraiser examining an antique, never stopping her languid masturbation.  You stand there, hands on your hips, waiting for her to finish while you try not to stare too long at her beading pre-cum or dripping twat-juice.\n\n", false);
 			//(BIMBO LIQUER) 
 			if (hasItem("BimboLq", 1)) {

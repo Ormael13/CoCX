@@ -45,13 +45,13 @@ package classes.Monsters.Scenes
 			var dickToggle:String = "";
 			if (flags[kFLAGS.CERAPH_HIDING_DICK] == 0) dickToggle = "Go Female";
 			else dickToggle = "Go Herm";
-			var gainFetish:* = 0;
-			var loseFetish:* = 0;
+			var gainFetish:Function =null;
+			var loseFetish:Function =null;
 			if (flags[kFLAGS.PC_FETISH] < 3) gainFetish = CeraphHandsOutNewFetishesLikePervCandy;
 			if (flags[kFLAGS.PC_FETISH] > 0) loseFetish = unfetishifyYourselfWithFollowerCeraph;
-			var rp:* = 0;
+			var rp:Function =null;
 			if (player.lust >= 33) rp = followerCeraphRoleplay;
-			var sexMenu:* = 0;
+			var sexMenu:Function =null;
 			if (player.lust < 33) {
 				if (output) outputText("\n\n<b>You aren't turned on enough for sex.</b>", false);
 			}
@@ -62,12 +62,12 @@ package classes.Monsters.Scenes
 		private function ceraphSexMenu():void
 		{
 			clearOutput();
-			var maleFuck:* = 0;
-			var femaleFuck:* = 0;
-			var hermFuck:* = 0;
-			var nipFuck:* = 0;
-			var portalFuck:* = 0;
-			var eggs:* = 0;
+			var maleFuck:Function =null;
+			var femaleFuck:Function =null;
+			var hermFuck:Function =null;
+			var nipFuck:Function =null;
+			var portalFuck:Function =null;
+			var eggs:Function =null;
 			if (player.canOviposit()) eggs = layEggsInSlaveCeraph;
 			if (player.hasCock() && player.lust >= 33) {
 				outputText("You could fuck her pussy.  ", false);
@@ -99,9 +99,9 @@ package classes.Monsters.Scenes
 			outputText("", true);
 			outputText("You tell Ceraph you'd like to do a little roleplaying.  Her nipples turn hard under their latex bindings as she asks, \"<i>What will it be, " + player.mf("Master", "Mistress") + "?  Shall I pretend you've just teased me into sexual submission, or would you like to switch things up and have your bottom play at being top again?  Or maybe... you'd like me to shapeshift into some other girl, and do all the dirty, depraved things she never would?</i>\"", false);
 			outputText("\n\nShe makes a gesture, and the surroundings take on a mountainous look.  Of course, she can probably change that on a whim.  What do you have Ceraph roleplay?", false);
-			var urta:* = 0;
-			var marbles:* = 0;
-			var dominika:* = 0;
+			var urta:Function =null;
+			var marbles:Function =null;
+			var dominika:Function =null;
 			if (flags[kFLAGS.TIMES_FUCKED_URTA] > 0 && (player.hasCock() || player.hasVagina()) && player.lust >= 33) urta = ceraphUrtaRoleplay;
 			if (player.hasCock() && player.cockThatFits(70) >= 0 && player.hasStatusAffect("Marble") >= 0 && player.lust >= 33) marbles = sweetieNOOOO;
 			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] > 0 && player.lust >= 33 && player.hasCock()) dominika = cerminika;
@@ -110,9 +110,9 @@ package classes.Monsters.Scenes
 			if (player.gender > 0) addButton(8, "Be A Pet", sumissivenessToCeraphFollower);
 			addButton(0, "Defeat Her", eventParser, kGAMECLASS.ceraphScene.winRapeChoices);
 			addButton(1, "Lose to Her", eventParser, kGAMECLASS.ceraphScene.ceraphRapesYouBADDAWGYODIGGITY);
-			if (dominika > 0) addButton(5, "Dominika", eventParser, dominika);
-			if (marbles > 0) addButton(6, "Marble Play", eventParser, marbles);
-			if (urta > 0) addButton(7, "Urta Play", eventParser, urta);
+			if (dominika) addButton(5, "Dominika", eventParser, dominika);
+			if (marbles) addButton(6, "Marble Play", eventParser, marbles);
+			if (urta) addButton(7, "Urta Play", eventParser, urta);
 			//choices("Defeat Her",winRapeChoices,"Lose to Her",ceraphRapesYouBADDAWGYODIGGITY,"",0,"",0,"",0,"",0,"Dominika P.",dominika,"Marble Play",marbles,"Urta Play",urta,"Back",ceraphFollowerAppearance);
 			addButton(9, "Back", ceraphFollowerAppearance);
 		}
@@ -142,15 +142,15 @@ package classes.Monsters.Scenes
 			if (player.gender > 0) {
 				outputText("Do you fuck her? (And if so, which of your body parts do you do it with?)", false);
 
-				var dicking:* = 0;
-				var buttsmexing:* = 0;
+				var dicking:Function =null;
+				var buttsmexing:Function =null;
 				//Dickings ahoyu!
 				if (player.hasCock()) {
 					dicking = kGAMECLASS.ceraphScene.maleFuckCeraphsPussy;
 					if (player.cockThatFits(monster.analCapacity()) != -1) buttsmexing = kGAMECLASS.ceraphScene.buttRapeCeraph;
 					else outputText("  <b>There's no way you could fit inside her ass - you're too big.</b>", false);
 				}
-				var cunting:* = 0;
+				var cunting:Function =null;
 				if (player.hasVagina()) cunting = kGAMECLASS.ceraphScene.rideCeraphsCockLikeaBAWSSexclamation11eleven;
 
 
@@ -204,15 +204,15 @@ package classes.Monsters.Scenes
 			if (player.gender > 0) {
 				outputText("Do you fuck her as a disobedient demon, one last time? (And if so, which of your body parts do you do it with?)", false);
 
-				var dicking:* = 0;
-				var buttsmexing:* = 0;
+				var dicking:Function =null;
+				var buttsmexing:Function =null;
 				//Dickings ahoyu!
 				if (player.hasCock()) {
 					dicking = kGAMECLASS.ceraphScene.maleFuckCeraphsPussy;
 					if (player.cockThatFits(monster.analCapacity()) != -1) buttsmexing = kGAMECLASS.ceraphScene.buttRapeCeraph;
 					else outputText("  <b>There's no way you could fit inside her ass - you're too big.</b>", false);
 				}
-				var cunting:* = 0;
+				var cunting:Function =null;
 				if (player.hasVagina()) cunting = kGAMECLASS.ceraphScene.rideCeraphsCockLikeaBAWSSexclamation11eleven;
 				simpleChoices("Fuck Her", dicking, "Ride Her", cunting, "FuckHerAss", buttsmexing, "", 0, "Leave", cleanupAfterCombat);
 			}
@@ -241,15 +241,15 @@ package classes.Monsters.Scenes
 			if (player.gender > 0) {
 				outputText("\n\nDo you fuck her as a disobedient demon, one last time? (And if so, which of your body parts do you do it with?)", false);
 
-				var dicking:* = 0;
-				var buttsmexing:* = 0;
+				var dicking:Function =null;
+				var buttsmexing:Function =null;
 				//Dickings ahoyu!
 				if (player.hasCock()) {
 					dicking = kGAMECLASS.ceraphScene.maleFuckCeraphsPussy;
 					if (player.cockThatFits(monster.analCapacity()) != -1) buttsmexing = kGAMECLASS.ceraphScene.buttRapeCeraph;
 					else outputText("  <b>There's no way you could fit inside her ass - you're too big.</b>", false);
 				}
-				var cunting:* = 0;
+				var cunting:Function =null;
 				if (player.hasVagina()) cunting = kGAMECLASS.ceraphScene.rideCeraphsCockLikeaBAWSSexclamation11eleven;
 				simpleChoices("Fuck Her", dicking, "Ride Her", cunting, "FuckHerAss", buttsmexing, "", 0, "Leave", cleanupAfterCombat);
 			}
@@ -721,9 +721,9 @@ package classes.Monsters.Scenes
 			outputText("\"<i>Oh! " + player.short + "! I, um, didn't expect to find you here! This... this isn't what it looks like,</i>\" she apologizes, flushing deeply, nervous shame sending humiliated shivers through her shoulders. She longingly eyes the bottle in her hand and, without lifting her head, raises her eyes to yours, silently asking what she should do.", false);
 
 			//[Drink][Sober]
-			var sober:* = 0;
+			var sober:Function =null;
 			if (player.hasCock()) sober = ceraphUrtaRoleplaySober;
-			var drunk:* = 0;
+			var drunk:Function =null;
 			if (player.hasVagina()) drunk = ceraphUrtaRoleplayDrunk;
 			simpleChoices("Sober", sober, "Drunk", drunk, "", 0, "", 0, "", 0);
 		}
@@ -1228,9 +1228,9 @@ package classes.Monsters.Scenes
 		{
 			outputText("", true);
 			flags[kFLAGS.ZETSUKO_MET]++;
-			var banana:* = 0;
-			var vag:* = 0;
-			var dick:* = 0;
+			var banana:Function =null;
+			var vag:Function =null;
+			var dick:Function =null;
 			//First time
 			if (flags[kFLAGS.ZETSUKO_MET] == 1) {
 				outputText("You call on Ceraph, but rather than the purple-skinned demoness you were expecting, you are surprised to see a fox-eared girl appear in a wash of corrupted violet flames.  She steps out of the portal and shakes off the flames as if they are water, and you take a moment to look her over.  The first thing you notice is that her arms are bound in a white straitjacket that is open at the chest, allowing her F-cup breasts to swing freely.  Four large fox tails twist erratically in the air behind her, and you can see a pair of small horns poking up from her hair in front of her large triangular ears.  Her body and face are covered in tribal tattoos, and her somewhat maniacal amber eyes are framed nicely by a head of messy auburn hair with black highlights.  Like many of Ceraph's harem members, she is adorned with numerous piercings and studs—almost too many to count them all—as well as a large studded collar.  Once you have had time to take it all in, she speaks.\n\n", false);
@@ -1418,12 +1418,12 @@ package classes.Monsters.Scenes
 			if (player.gender > 0 || player.biggestTitSize() > 0) {
 				outputText("\n\nYou scratch your head as she prattles on, growing more animated and a touch aroused. \"<i>Then, I can fly back to the harem and add them to my collection.  My pets do so love when I give them an exotic endowment and then spend all night teasing it.  Could you imagine it?  Going to bed at night and dreaming of all the debauched things my slaves and I are doing, over and over.</i>\"");
 				outputText("\n\nWell, that's quite the pitch she's put together.  Do you want to give her something?\n");
-				var wang:* = 0;
-				var smallestWang:* = 0;
-				var vag:* = 0;
-				var breasts:* = 0;
-				var breasts2:* = 0;
-				var breasts3:* = 0;
+				var wang:Function =null;
+				var smallestWang:Function =null;
+				var vag:Function =null;
+				var breasts:Function =null;
+				var breasts2:Function =null;
+				var breasts3:Function =null;
 				if (player.hasCock()) {
 					outputText("\nYou can give her your [if (cocks == 1) penis|biggest penis or smallest penis].");
 					wang = ceraphFollowerCockTaking;

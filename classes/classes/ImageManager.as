@@ -212,8 +212,7 @@ package classes
 			lineHeight += 4;
 			var padLines:int = Math.ceil((imgRefBottomY - totalTextHeight) / lineHeight);
 			
-			trace("Need " + padLines + " padding lines");
-			
+
 			// Generate the paddings
 			var padding:String = "";
 			for (var i:int = 0; i < padLines; i++)

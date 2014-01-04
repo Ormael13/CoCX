@@ -651,13 +651,13 @@ package classes.Monsters.Scenes
 			outputText("bee-girl with a devilish smile painted across your face.\n\nHow will you take her?\n\n", false);
 
 			//OPTIONS HERE!
-			var naga:* = 0;
-			var multiCock:* = 0;
-			var cock:* = 0;
-			var vagina:* = 0;
-			var herm:* = 0;
-			var gentleman:* = 0;
-			var eggs:* = 0;
+			var naga:Function =null;
+			var multiCock:Function =null;
+			var cock:Function =null;
+			var vagina:Function =null;
+			var herm:Function =null;
+			var gentleman:Function =null;
+			var eggs:Function =null;
 			if (player.canOvipositSpider() && (player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SPIDER_FANGS)) {
 				eggs = layEggsInABeeSpiderLike;
 				outputText("(You could dose her with venom and lay YOUR eggs in her.)\n");

@@ -33,10 +33,10 @@ package classes.Monsters.Scenes
 				if (player.lust >= 33 && player.gender > 0)
 				{
 					outputText("You walk around Akbal's beaten and lust crazed form with a smile on your face. The demon's growl continues as he awaits your judgment.", false);
-					var vagoo:* = 0;
-					var vagooLick:* = 0;
-					var buttFuck:* = 0;
-					var bikiniTits:* = 0;
+					var vagoo:Function =null;
+					var vagooLick:Function =null;
+					var buttFuck:Function =null;
+					var bikiniTits:Function =null;
 					if (player.hasVagina())
 					{
 						vagoo = girlsRapeAkbal;

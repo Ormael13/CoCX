@@ -1289,11 +1289,10 @@ public function exploreLake():void {
 			doNext(13);
 			return;
 		}
-		fetishCultistEncounter();		
+		fetishCultistScene.fetishCultistEncounter();
 	}
 	else if(select == 6) {
 		encounterRathazul();
-		return;
 	}
 	else {
 		outputText("OH SHIT! LAKE EXPLORE BE BROKED.  SELECT: " + select + ".  You should probably go to fenoxo.com and click the link to report a bug and tell Fen about it.");
@@ -1328,11 +1327,7 @@ public function boatExplore():void {
 		return;
 	}
 	//BUILD LIST OF CHOICES
-	var choice:Array = new Array();
-	choice[choice.length] = 0;
-	choice[choice.length] = 1;
-	choice[choice.length] = 2;
-	choice[choice.length] = 3;
+	var choice:Array = [0,1,2,3];
 	if(player.hasStatusAffect("DungeonShutDown") >= 0 && player.level > 2) 
 		choice[choice.length] = 4;
 	choice[choice.length] = 5;
@@ -1355,7 +1350,7 @@ public function boatExplore():void {
 			sharkGirlEncounter(1);
 			return;
 		case 4:
-			zealotBoat();
+			fetishZealotScene.zealotBoat();
 			return;
 		case 5: 
 			anemoneScene.mortalAnemoneeeeee();
@@ -1400,7 +1395,7 @@ public function exploreSwamp():void {
 		return;
 	}
 	if(flags[kFLAGS.TOOK_EMBER_EGG] == 0 && flags[kFLAGS.EGG_BROKEN] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272] > 0 && (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272] % 40 == 0)) {
-		findEmbersEgg();
+		emberScene.findEmbersEgg();
 		return;
 	}
 	/*  STANDARD SCENE SELECTION  */

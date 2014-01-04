@@ -262,40 +262,39 @@ public function processJackFrostEvent():void {
 		return;
 	}
 	//Tainted Ember
-	else if(followerEmber() && flags[kFLAGS.JACK_FROST_PROGRESS] <= 6) {
+	else if(emberScene.followerEmber() && flags[kFLAGS.JACK_FROST_PROGRESS] <= 6) {
 		flags[kFLAGS.JACK_FROST_PROGRESS] = 7;
-		outputText("The dragon is wandering your camp in open fascination.  \"<i>What is this weird white stuff?  It's cold and wet... but soft and fluffy, too,</i>\" " + emberMF("he","she") + " says, gently catching a snowflake.");
-		outputText("\n\nHaving heard " + emberMF("his","her") + " question, you approach Ember and tell " + emberMF("him","her") + " that's just snow.");
-		outputText("\n\n\"<i>Snow...?</i>\" " + emberMF("He","She") + " repeats in a curious, blatantly awed voice.  \"<i>...It's so pretty.</i>\" " + emberMF("he","she") + " tells you.");
-		outputText("\n\nYou ask if this is " + emberMF("his","her") + " first time seeing snow.  It always snowed back home around this time of the year.  Why... back when you were a child, you used to play all the time in the snow.");
+		outputText("The dragon is wandering your camp in open fascination.  \"<i>What is this weird white stuff?  It's cold and wet... but soft and fluffy, too,</i>\" " + emberScene.emberMF("he","she") + " says, gently catching a snowflake.");
+		outputText("\n\nHaving heard " + emberScene.emberMF("his","her") + " question, you approach Ember and tell " + emberScene.emberMF("him","her") + " that's just snow.");
+		outputText("\n\n\"<i>Snow...?</i>\" " + emberScene.emberMF("He","She") + " repeats in a curious, blatantly awed voice.  \"<i>...It's so pretty.</i>\" " + emberScene.emberMF("he","she") + " tells you.");
+		outputText("\n\nYou ask if this is " + emberScene.emberMF("his","her") + " first time seeing snow.  It always snowed back home around this time of the year.  Why... back when you were a child, you used to play all the time in the snow.");
 		
 		outputText("\n\n\"<i>So it's for kids,</i>\" Ember notes, sounding kind of depressed - and a little envious, especially given the way she still looks so eagerly at the snow all around you.");
-		outputText("\n\nPerhaps... would " + emberMF("he","she") + " like to play in the snow with you?");
+		outputText("\n\nPerhaps... would " + emberScene.emberMF("he","she") + " like to play in the snow with you?");
 		outputText("\n\n\"<i>I thought you said this was for little kids?  I'm no baby!</i>\" Ember protests.");
-		outputText("\n\nWho said it was just for kids?  You just said you used to play all the time when you were a child, there is no reason why you couldn't play now that you're grown up either... after all, back in your village, even adults played in the snow.  Unless... " + emberMF("he","she") + " doesn't like the idea of spending the day playing with you?  That would be a pity, since it's " + emberMF("his","her") + " first time seeing snow...");
+		outputText("\n\nWho said it was just for kids?  You just said you used to play all the time when you were a child, there is no reason why you couldn't play now that you're grown up either... after all, back in your village, even adults played in the snow.  Unless... " + emberScene.emberMF("he","she") + " doesn't like the idea of spending the day playing with you?  That would be a pity, since it's " + emberScene.emberMF("his","her") + " first time seeing snow...");
 		outputText("\n\n\"<i>What?  I... ooh, very well.  Teach me how you play with this stuff,</i>\" Ember says, blowing a thin trail of steam out of each nostril.");
-		outputText("\n\nYou smile and begin explaining to the dragon all about the games you used to play when it snowed back home.  Ember listens attentively with a gleam in " + emberMF("his","her") + " eyes.");
+		outputText("\n\nYou smile and begin explaining to the dragon all about the games you used to play when it snowed back home.  Ember listens attentively with a gleam in " + emberScene.emberMF("his","her") + " eyes.");
 		outputText("\n\nBy the time you're done Ember's tail is waving excitedly behind her.  You ask how she'd feel about a snowball fight?");
-		outputText("\n\n\"<i>All right, let's try it!</i>\" " + emberMF("he","she") + " agrees, as eager as any kid back in Ingnam.");
+		outputText("\n\n\"<i>All right, let's try it!</i>\" " + emberScene.emberMF("he","she") + " agrees, as eager as any kid back in Ingnam.");
 		
-		outputText("\n\nYou explain to " + emberMF("him","her") + " the rules and walk a short distance away... then declare the match started!  Ember is pretty good... but being " + emberMF("his","her") + " first time doing this, " + emberMF("he","she") + " ends up not being able to hit you as many times as you hit " + emberMF("him","her") + ", while you expertly dodge and roll her snowballs.");
+		outputText("\n\nYou explain to " + emberScene.emberMF("him","her") + " the rules and walk a short distance away... then declare the match started!  Ember is pretty good... but being " + emberScene.emberMF("his","her") + " first time doing this, " + emberScene.emberMF("he","she") + " ends up not being able to hit you as many times as you hit " + emberScene.emberMF("him","her") + ", while you expertly dodge and roll her snowballs.");
 		outputText("\n\n\"<i>Damn it, stand still, [name]!  You're slippier than the rabbits I go catching in the mornings!</i>\" the irate dragon complains.");
 		
-		outputText("\n\nRather than complaining " + emberMF("he","she") + " should be focusing on hitting you, otherwise you're going to end up crushing " + emberMF("him","her") + " in this match!  You tease " + emberMF("him","her") + ", throwing another snowball right on " + emberMF("his","her") + " belly.");
+		outputText("\n\nRather than complaining " + emberScene.emberMF("he","she") + " should be focusing on hitting you, otherwise you're going to end up crushing " + emberScene.emberMF("him","her") + " in this match!  You tease " + emberScene.emberMF("him","her") + ", throwing another snowball right on " + emberScene.emberMF("his","her") + " belly.");
 		
-		outputText("\n\nThe dragon promptly drops to " + emberMF("him","her") + " knees and starts sweeping together huge armfuls of snow, crushing and melding them together until " + emberMF("he","she") + " has made a snowball the size of a small boulder, which " + emberMF("he","she") + " promptly hurls at you.");
+		outputText("\n\nThe dragon promptly drops to " + emberScene.emberMF("him","her") + " knees and starts sweeping together huge armfuls of snow, crushing and melding them together until " + emberScene.emberMF("he","she") + " has made a snowball the size of a small boulder, which " + emberScene.emberMF("he","she") + " promptly hurls at you.");
 		
 		outputText("\n\nWoah!  The large ball of snow connects squarely with your face, bowling you over and burying you under the snow.  Having the air knocked out of you, you scramble to dig yourself off the snow.");
 		
-		outputText("\n\nA pair of claw-fingered hands promptly come clawing their way through the snow, grabbing you by the shoulders and pulling you bodily out of the snow.  \"<i>Well?  I think I won that round,</i>\" " + emberMF("he","she") + " gloats, a twinkle of delight in " + emberMF("his","her") + " eye.");
+		outputText("\n\nA pair of claw-fingered hands promptly come clawing their way through the snow, grabbing you by the shoulders and pulling you bodily out of the snow.  \"<i>Well?  I think I won that round,</i>\" " + emberScene.emberMF("he","she") + " gloats, a twinkle of delight in " + emberScene.emberMF("his","her") + " eye.");
 		
-		outputText("\n\nCoughing up some snow, you concede defeat, congratulating Ember on winning " + emberMF("his","her") + " first snowball fight... but then, you smirk and tell " + emberMF("him","her") + " this was all beginner's luck... and next time you'll beat " + emberMF("him","her") + " for sure.");
+		outputText("\n\nCoughing up some snow, you concede defeat, congratulating Ember on winning " + emberScene.emberMF("his","her") + " first snowball fight... but then, you smirk and tell " + emberScene.emberMF("him","her") + " this was all beginner's luck... and next time you'll beat " + emberScene.emberMF("him","her") + " for sure.");
 		
-		outputText("\n\n\"<i>So you say, but the truth is you know you'll never beat me,</i>\" Ember brags.  Then " + emberMF("he","she") + " lowers her eyelids and gives you a coy look.  \"<i>And now, for the victor, a prize,</i>\" " + emberMF("he","she") + " growls, then swoops in to kiss you passionately.  Several minutes pass before " + emberMF("he","she") + " breaks the kiss, a somewhat goofy smile on " + emberMF("his","her") + " face.  \"<i>I'm going to go and play in the snow some more.  See you, [name].</i>\"  " + emberMF("He","She") + " giggles, then ambles off.");
-		outputText("\n\nYou wave " + emberMF("him","her") + " away - maybe being beaten isn't so bad.  Your thoughts turn to Ember's passionate kiss...  It certainly is a nice sight, to see " + emberMF("him","her") + " so happy.  Having it snow on your camp was a great idea after all.");
+		outputText("\n\n\"<i>So you say, but the truth is you know you'll never beat me,</i>\" Ember brags.  Then " + emberScene.emberMF("he","she") + " lowers her eyelids and gives you a coy look.  \"<i>And now, for the victor, a prize,</i>\" " + emberScene.emberMF("he","she") + " growls, then swoops in to kiss you passionately.  Several minutes pass before " + emberScene.emberMF("he","she") + " breaks the kiss, a somewhat goofy smile on " + emberScene.emberMF("his","her") + " face.  \"<i>I'm going to go and play in the snow some more.  See you, [name].</i>\"  " + emberScene.emberMF("He","She") + " giggles, then ambles off.");
+		outputText("\n\nYou wave " + emberScene.emberMF("him","her") + " away - maybe being beaten isn't so bad.  Your thoughts turn to Ember's passionate kiss...  It certainly is a nice sight, to see " + emberScene.emberMF("him","her") + " so happy.  Having it snow on your camp was a great idea after all.");
 		menu();
 		addButton(0,"Next",processJackFrostEvent);
-		return;
 	}
 	//Marble (Written by TDM himself)
 	else if(flags[kFLAGS.JACK_FROST_PROGRESS] <= 7 && player.hasStatusAffect("Camp Marble") >= 0) {

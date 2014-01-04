@@ -1342,13 +1342,13 @@ public function armorShop():void {
 	//outputText("\"<i>Vat can Yvonne make for you?  Ze platemail?  Or someting a bit lighter?</i>\" she asks you.", false);
 	outputText("\"<i>What can I make for you?  Platemail?  Or something that breathes a little easier?</i>\" Yvonne asks, fanning herself.");
 	
-	var egg:Number = 0;
+	var egg:Function =null;
 	if(player.hasKeyItem("Dragon Eggshell") >= 0) {
 		outputText("\n\nThough the pieces on display have their arguable attractions, none of them really interest you.  Yvonne taps her foot impatiently.  \"<i>Well, I could make you something to order... if you have any decent materials, cutie.  200 gems.</i>\"");
 		if(player.gems < 200) {
 			outputText("\n\nYou can't afford that!");
 		}
-		else egg = 3697;
+		else egg = emberScene.getSomeStuff;
 	}
 	choices("ChBikni",2276,"FullChn",2277,"FullPlt",2278,"IndecSt",2279,"LthrRob",2280,"ScaleMl",2281,"",0,"Eggshell",egg,"Flirt",yvonneFlirt,"Leave",telAdreMenu);
 }
@@ -1473,16 +1473,16 @@ public function gymDesc():void {
 
 public function gymMenu():void {
 	
-	var membership:* = 0;
-	var cotton:* = 0;
+	var membership:Function =null;
+	var cotton:Function =null;
 	var cottonB:String = "Horsegirl";
-	var hyena:* = 0;
+	var hyena:Function =null;
 	var hyenaB:String = "Hyena";
-	var ifris:* = 0;
+	var ifris:Function =null;
 	var ifrisB:String = "Girl";
 	var lottie:* = lottieAppearance(false);
 	var lottieB:String = "Pig-Lady";
-	var loppe:* = 0;
+	var loppe:Function =null;
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0) 
 		lottieB = "Lottie";
 	if(ifrisIntro()) 

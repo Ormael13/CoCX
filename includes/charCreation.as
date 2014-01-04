@@ -844,7 +844,7 @@ public function createStorage():Boolean {
 //Clear storage slots
 public function clearStorage():void {
 	//Various Errors preventing action
-	if(itemStorage.length == 0) trace("ERROR: Cannot clear storage because storage does not exist.");
+	if(itemStorage == null) trace("ERROR: Cannot clear storage because storage does not exist.");
 	else {
 		trace("Attempted to remove " + itemStorage.length + " storage slots.");
 		itemStorage.splice(0, itemStorage.length);
@@ -852,7 +852,7 @@ public function clearStorage():void {
 }
 public function clearGearStorage():void {
 	//Various Errors preventing action
-	if(gearStorage.length == 0) trace("ERROR: Cannot clear storage because storage does not exist.");
+	if(gearStorage == null) trace("ERROR: Cannot clear storage because storage does not exist.");
 	else {
 		trace("Attempted to remove " + gearStorage.length + " storage slots.");
 		gearStorage.splice(0, gearStorage.length);
@@ -861,7 +861,7 @@ public function clearGearStorage():void {
 
 public function initializeGearStorage():void {
 	//Completely empty storage array
-	if(gearStorage.length == 0) trace("ERROR: Cannot clear gearStorage because storage does not exist.");
+	if(gearStorage == null) trace("ERROR: Cannot clear gearStorage because storage does not exist.");
 	else {
 		trace("Attempted to remove " + gearStorage.length + " gearStorage slots.");
 		gearStorage.splice(0, gearStorage.length);

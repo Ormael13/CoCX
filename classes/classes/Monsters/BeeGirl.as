@@ -3,6 +3,7 @@
 	import classes.Appearance;
 	import classes.CoC;
 	import classes.Creature;
+	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Monster;
 	import classes.CockTypesEnum;
 	
@@ -26,10 +27,10 @@
 				}
 				player.lust = 98;
 				game.dynStats("lus", 1);
-				var temp2:* = 0;
-				var temp3:* = 0;
+				var temp2:Function =null;
+				var temp3:Function =null;
 				if(player.hasStatusAffect("Feeder") >= 0) temp3 = game.beeGirlScene.milkAndHoneyAreKindaFunny;
-				if(player.hasKeyItem("Deluxe Dildo") >= 0) temp2 = 2263;
+				if(player.hasKeyItem("Deluxe Dildo") >= 0) temp2 = kGAMECLASS.beeGirlsGetsDildoed;
 				game.simpleChoices("Rape",game.beeGirlScene.rapeTheBeeGirl,"Dildo Rape",temp2,"",0,"B. Feed",temp3,"Leave",game.cleanupAfterCombat);
 			}
 			//Genderless can still breastfeed
