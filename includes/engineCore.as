@@ -798,183 +798,191 @@ public function perkBuyMenu():void {
 		doNext(115);
 		return;
 	}
-	outputText("Please select a perk from the drop-down list, then click 'Okay'.  You can press 'Skip' to save your perk point for later.\n\n", false);
-	mainView.aCb.x = 210;
-	mainView.aCb.y = 108;
-	mainView.aCb.visible = true;
-	mainView.hideMenuButton( MainView.MENU_NEW_MAIN );
-	simpleChoices("Okay",0,"Skip",115,"",0,"",0,"",0);	
+	if (testingBlockExiting){
+		tempPerk = perkList[rand(perkList.length)].label;
+		doNext(114);
+	} else {
+		outputText("Please select a perk from the drop-down list, then click 'Okay'.  You can press 'Skip' to save your perk point for later.\n\n", false);
+		mainView.aCb.x = 210;
+		mainView.aCb.y = 108;
+		mainView.aCb.visible = true;
+		mainView.hideMenuButton( MainView.MENU_NEW_MAIN );
+		simpleChoices("Okay",0,"Skip",115,"",0,"",0,"",0);
+	}
 }
 public function buildPerkList():void {
-	perkList = new Array();
+	perkList = [];
 	//STRENGTH PERKS
-	if(player.hasPerk("Strong Back") < 0 && player.str >= 25) {
-		perkList[perkList.length] = {label:"Strong Back"};
+	if(player.str >= 25) {
+		perkList.push({label:"Strong Back"});
 	}
-	if(player.hasPerk("Strong Back") >= 0 && player.hasPerk("Strong Back 2: Strong Harder") < 0 && player.str >= 50) {
-		perkList[perkList.length] = {label:"Strong Back 2: Strong Harder"};
+	if(player.hasPerk("Strong Back") >= 0 && player.str >= 50) {
+		perkList.push({label:"Strong Back 2: Strong Harder"});
 	}
 	//Tier 1 Strength Perks
 	if(player.level >= 6) {
 		//Thunderous Strikes - +20% basic attack damage while str > 80.
-		if(player.hasPerk("Thunderous Strikes") < 0 && player.str >= 80) {
-			perkList[perkList.length] = {label:"Thunderous Strikes"};
+		if(player.str >= 80) {
+			perkList.push({label:"Thunderous Strikes"});
 		}
 		//Weapon Mastery - Doubles weapon damage bonus of 'large' type weapons. (Minotaur Axe, M. Hammer, etc)
-		if(player.hasPerk("Weapon Mastery") < 0 && player.str > 60) {
-			perkList[perkList.length] = {label:"Weapon Mastery"};
+		if(player.str > 60) {
+			perkList.push({label:"Weapon Mastery"});
 		}
-		if(player.hasPerk("Brutal Blows") < 0 && player.str >= 75)
-			perkList[perkList.length] = {label:"Brutal Blows"}
+		if(player.str >= 75)
+			perkList.push({label:"Brutal Blows"});
 	}
 	//Tier 2 Strength Perks
 	if(player.level >= 12) {
-		if(player.hasPerk("Berzerker") < 0 && player.str >= 75)
-			perkList[perkList.length] = {label:"Berzerker"};
+		if(player.str >= 75)
+			perkList.push({label:"Berzerker"});
 	}
 	//slot 2 - toughness perk 1
 	if(player.hasPerk("Tank") < 0 && player.tou >= 25) {
-		perkList[perkList.length] = {label:"Tank"};
+		perkList.push({label:"Tank"});
 	}
 	//slot 2 - regeneration perk
-	if(player.hasPerk("Tank") >= 0 && player.hasPerk("Regeneration") < 0 && player.tou >= 50) {
-		perkList[perkList.length] = {label:"Regeneration"};
+	if(player.hasPerk("Tank") >= 0 && player.tou >= 50) {
+		perkList.push({label:"Regeneration"});
 	}
 	//Tier 1 Toughness Perks
 		if(player.level >= 6) {
-		if(player.hasPerk("Tank 2") < 0 && player.hasPerk("Tank") >= 0 && player.tou >= 60) {
-			perkList[perkList.length] = {label:"Tank 2"};
+		if(player.hasPerk("Tank") >= 0 && player.tou >= 60) {
+			perkList.push({label:"Tank 2"});
 		}
-		if(player.hasPerk("Regeneration 2") < 0 && player.hasPerk("Regeneration") >= 0 && player.tou >= 70) {
-			perkList[perkList.length] = {label:"Regeneration 2"};
+		if(player.hasPerk("Regeneration") >= 0 && player.tou >= 70) {
+			perkList.push({label:"Regeneration 2"});
 		}
-		if(player.hasPerk("Immovable Object") < 0 && player.tou >= 75) {
-			perkList[perkList.length] = {label:"Immovable Object"};
+		if(player.tou >= 75) {
+			perkList.push({label:"Immovable Object"});
 		}
 	}
 	//Tier 2 Toughness Perks
 	if(player.level >= 12) {
-		if(player.hasPerk("Resolute") < 0 && player.tou >= 75) {
-			perkList[perkList.length] = {label:"Resolute"};
+		if(player.tou >= 75) {
+			perkList.push({label:"Resolute"});
 		}
-		if(player.hasPerk("Iron Man") < 0 && player.tou >= 60) {
-			perkList[perkList.length] = {label:"Iron Man"};
+		if(player.tou >= 60) {
+			perkList.push({label:"Iron Man"});
 		}
 	}
 	//slot 3 - speed perk
-	if(player.hasPerk("Evade") < 0 && player.spe >= 25) {
-			perkList[perkList.length] = {label:"Evade"};
+	if(player.spe >= 25) {
+			perkList.push({label:"Evade"});
 	}
 	//slot 3 - run perk
-	if(player.hasPerk("Runner") < 0 && player.spe >= 25) {
-			perkList[perkList.length] = {label:"Runner"};
+	if(player.spe >= 25) {
+			perkList.push({label:"Runner"});
 	}
 	//slot 3 - Double Attack perk
-	if(player.hasPerk("Evade") >= 0 && player.hasPerk("Runner") >= 0 && player.hasPerk("Double Attack") < 0 && player.spe >= 50) {
-			perkList[perkList.length] = {label:"Double Attack"};
+	if(player.hasPerk("Evade") >= 0 && player.hasPerk("Runner") >= 0 && player.spe >= 50) {
+			perkList.push({label:"Double Attack"});
 	}
 	//Tier 1 Speed Perks
 	if(player.level >= 6) {
 		//Speedy Recovery - Regain Fatigue 50% faster speed.
-		if(player.hasPerk("Evade") >= 0 && player.hasPerk("Speedy Recovery") < 0 && player.spe >= 60) {
-			perkList[perkList.length] = {label:"Speedy Recovery"};
+		if(player.hasPerk("Evade") >= 0 && player.spe >= 60) {
+			perkList.push({label:"Speedy Recovery"});
 		}
 		//Agility - A small portion of your speed is applied to your defense rating when wearing light armors.
-		if(player.spe > 75 && player.hasPerk("Agility") < 0 && player.hasPerk("Runner") >= 0 && (player.armorPerk == "Light" || player.armorPerk == "Medium")) {
-			perkList[perkList.length] = {label:"Agility"};
+		if(player.spe > 75 && player.hasPerk("Runner") >= 0 && (player.armorPerk == "Light" || player.armorPerk == "Medium")) {
+			perkList.push({label:"Agility"});
 		}
-		if(player.hasPerk("Lightning Strikes") < 0 && player.spe >= 60) {
-			perkList[perkList.length] = {label:"Lightning Strikes"};
+		if(player.spe >= 60) {
+			perkList.push({label:"Lightning Strikes"});
 		}
 	}
 	//Tier 2 Speed Perks
 	if(player.level >= 12) {
-		if(player.hasPerk("Lunging Attacks") < 0 && player.spe >= 75) {
-			perkList[perkList.length] = {label:"Lunging Attacks"};
+		if(player.spe >= 75) {
+			perkList.push({label:"Lunging Attacks"});
 		}
 	}
 	//Slot 4 - precision - -10 enemy toughness for damage calc
-	if(player.hasPerk("Precision") < 0 && player.inte >= 25) {
-			perkList[perkList.length] = {label:"Precision"};
+	if(player.inte >= 25) {
+			perkList.push({label:"Precision"});
 	}
 	//Spellpower - boosts spell power
-	if(player.hasPerk("Spellpower") < 0 && player.inte >= 50) {
-			perkList[perkList.length] = {label:"Spellpower"};
+	if(player.inte >= 50) {
+			perkList.push({label:"Spellpower"});
 	}
-	if(player.hasPerk("Spellpower") >= 0 && player.hasPerk("Mage") < 0 && player.inte >= 50) {
-			perkList[perkList.length] = {label:"Mage"};
+	if(player.hasPerk("Spellpower") >= 0 && player.inte >= 50) {
+			perkList.push({label:"Mage"});
 	}
 	//Tier 1 Intelligence Perks
 	if(player.level >= 6) {
-		if(player.hasPerk("Tactician") < 0 && player.inte >= 50)
-			perkList[perkList.length] = {label:"Tactician"};
-		if(spellCount() > 0 && player.hasPerk("Channeling") < 0 && player.hasPerk("Spellpower") >= 0 && player.hasPerk("Mage") >= 0 && player.inte >= 60) {
-			perkList[perkList.length] = {label:"Channeling"};
+		if(player.inte >= 50)
+			perkList.push({label:"Tactician"});
+		if(spellCount() > 0 && player.hasPerk("Spellpower") >= 0 && player.hasPerk("Mage") >= 0 && player.inte >= 60) {
+			perkList.push({label:"Channeling"});
 		}
-		if(player.hasPerk("Medicine") < 0 && player.inte >= 60) {
-			perkList[perkList.length] = {label:"Medicine"};
+		if(player.inte >= 60) {
+			perkList.push({label:"Medicine"});
 		}
 	}
 	//Tier 2 Intelligence perks
 	if(player.level >= 12) {
-		if(player.hasPerk("Mage") >= 0 && player.hasPerk("Archmage") < 0 && player.inte >= 75) {
-			perkList[perkList.length] = {label:"Archmage"};
+		if(player.hasPerk("Mage") >= 0 && player.inte >= 75) {
+			perkList.push({label:"Archmage"});
 		}
 	}
 	//LIBIDO PERKZ
 	//slot 5 - libido perks
 	//Slot 5 - Fertile+ increases cum production and fertility (+15%)
-	if(player.hasPerk("Fertility+") < 0 && player.lib >= 25) {
-			perkList[perkList.length] = {label:"Fertility+"};
+	if(player.lib >= 25) {
+			perkList.push({label:"Fertility+"});
 	}
 	//Slot 5 - minimum libido
-	if(player.hasPerk("Hot Blooded") < 0 && player.lib >= 50) {
-			perkList[perkList.length] = {label:"Hot Blooded"};
+	if(player.lib >= 50) {
+			perkList.push({label:"Hot Blooded"});
 	}
 	//Tier 1 Libido Perks
 	if(player.level >= 6) {
 		//Slot 5 - minimum libido
-		if(player.hasPerk("Well Adjusted") < 0 && player.lib >= 60) {
-			perkList[perkList.length] = {label:"Well Adjusted"};
+		if(player.lib >= 60) {
+			perkList.push({label:"Well Adjusted"});
 		}
 		//Slot 5 - minimum libido
-		if(player.hasPerk("Masochist") < 0 && player.lib >= 60 && player.cor >= 50) {
-			perkList[perkList.length] = {label:"Masochist"};
+		if(player.lib >= 60 && player.cor >= 50) {
+			perkList.push({label:"Masochist"});
 		}
 	}
 	//Corruption Perks - slot 7
 	//Slot 7 - Corrupted Libido - lust raises 10% slower.
-	if(player.hasPerk("Corrupted Libido") < 0 && player.cor >= 25) {
-			perkList[perkList.length] = {label:"Corrupted Libido"};
+	if(player.cor >= 25) {
+			perkList.push({label:"Corrupted Libido"});
 	}
 	//Slot 7 - Seduction (Must have seduced Jojo
 	if(player.hasPerk("Seduction") < 0 && player.cor >= 50 && monk >= 5) {
-			perkList[perkList.length] = {label:"Seduction"};
+			perkList.push({label:"Seduction"});
 	}
 	//Slot 7 - Nymphomania
-	else if(player.hasPerk("Corrupted Libido") >= 0 && player.cor >= 75 && player.hasPerk("Nymphomania") < 0) {
-			perkList[perkList.length] = {label:"Nymphomania"};
+	else if(player.hasPerk("Corrupted Libido") >= 0 && player.cor >= 75) {
+			perkList.push({label:"Nymphomania"});
 	}
 	//Slot 7 - UNFINISHED :3
-	if(minLust() >= 20 && player.hasPerk("Acclimation") < 0 && player.hasPerk("Corrupted Libido") >= 0 && player.cor >= 50) {
-			perkList[perkList.length] = {label:"Acclimation"};
+	if(minLust() >= 20 && player.hasPerk("Corrupted Libido") >= 0 && player.cor >= 50) {
+			perkList.push({label:"Acclimation"});
 	}
 	//Tier 1 Corruption Perks - acclimation over-rides
 	else if(player.level >= 6)
 	{
-		if(player.hasPerk("Sadist") < 0 && player.cor >= 60 && player.hasPerk("Corrupted Libido") >= 0) {
-			perkList[perkList.length] = {label:"Sadist"};
+		if(player.cor >= 60 && player.hasPerk("Corrupted Libido") >= 0) {
+			perkList.push({label:"Sadist"});
 		}
-		if(player.hasPerk("Arousing Aura") < 0 && player.hasPerk("Corrupted Libido") >= 0 && player.cor >= 70) {
-			perkList[perkList.length] = {label:"Arousing Aura"};
+		if(player.hasPerk("Corrupted Libido") >= 0 && player.cor >= 70) {
+			perkList.push({label:"Arousing Aura"});
 		}
 	}
 	//Tier 1 Misc Perks
 	if(player.level >= 6) {
-		if(player.hasPerk("Resistance") < 0) {
-			perkList[perkList.length] = {label:"Resistance"};
-		}
+		perkList.push({label:"Resistance"});
 	}
+	// FILTER PERKS
+	perkList = perkList.filter(
+			function(perk:*,idx:int,array:Array){
+				return player.hasPerk(perk.label) < 0;
+			});
 	mainView.aCb.dataProvider = new DataProvider(perkList); 
 }
 
@@ -1996,7 +2004,7 @@ public function createCallBackFunction2(func:Function,...args):Function
 	return function():*
 	{
 		if (CoC_Settings.haltOnErrors) logFunctionInfo(func,args);
-		return func();
+		return func.apply(null,args);
 	}
 }
 
