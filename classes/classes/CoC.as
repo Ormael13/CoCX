@@ -14,6 +14,7 @@
 	import classes.Creature;
 	import classes.ItemSlotClass;
 	import classes.PerkClass;
+	import classes.Scenes.Dungeons.HelDungeon.BrigidScene;
 	import classes.StatusAffectClass;
 	import classes.VaginaClass;
 	import classes.ImageManager; // This line not necessary, but added because I'm pedantic like that.
@@ -21,8 +22,26 @@
 
 	import classes.Parser.Main.Parser; 	// import getting long enough yet?
 
-	import classes.Monsters.*;		// import all the various monsters
-	import classes.Monsters.Scenes.*;
+	import classes.Scenes.Areas.Bog.*
+	import classes.Scenes.Areas.Desert.*;
+	import classes.Scenes.Areas.Forest.*;
+	import classes.Scenes.Areas.HighMountains.*;
+	import classes.Scenes.Areas.Lake.*;
+	import classes.Scenes.Areas.Lake.Boat.*;
+	import classes.Scenes.Areas.Mountain.*;
+	import classes.Scenes.Areas.HighMountains.*;
+	import classes.Scenes.Areas.Plains.*;
+	import classes.Scenes.Areas.Swamp.*;
+	import classes.Scenes.Camp.*;
+	import classes.Scenes.Dungeons.DeepCave.*;
+	import classes.Scenes.Dungeons.DesetCave.*;
+	import classes.Scenes.Dungeons.Factory.*;
+	import classes.Scenes.Dungeons.HelDungeon.*;
+	import classes.Scenes.Monsters.*;
+	import classes.Scenes.NPCs.*;
+	import classes.Scenes.Places.Farm.*;
+	import classes.Scenes.Places.Owca.*;
+	import classes.Scenes.Quests.UrtaQuest.*;
 	import coc.view.MainView;
 
 	import coc.model.GameModel;

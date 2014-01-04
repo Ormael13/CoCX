@@ -1,5 +1,4 @@
 ﻿import classes.Monster;
-import classes.Monsters.*;
 
 import coc.view.MainView;
 

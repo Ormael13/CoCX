@@ -1,5 +1,3 @@
-import classes.GlobalFlags.kGAMECLASS;
-import classes.Monsters.MaleSpiderMorph;
 
 //Event No's 2000 4999 use this function
 

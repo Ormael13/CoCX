@@ -1,6 +1,4 @@
-﻿import classes.Monsters.DemonPack;
-import classes.Player;
-//  ANTS_PC_FAILED_PHYLLA:int = 467;
+﻿//  ANTS_PC_FAILED_PHYLLA:int = 467;
 //  ANT_COLONY_KEPT_HIDDEN:int = 468;
 //  PC_READY_FOR_ANT_COLONY_CHALLENGE:int = 469;
 //  PHYLLA_SAVED:int = 470;
