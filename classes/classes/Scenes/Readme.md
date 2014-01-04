@@ -11,7 +11,7 @@ A **Location** is either **Camp**, **Area**, **Place**, **Dungeon**, or **Quest*
 ## Notes
 
 1. **Locations** that share many common scenes could be joined in one package, like **Forest** and **Deepwoods**.
-2. Sub-**locations** are welcomed, like **Lake** and **Boat**. Areas that are directly explorable after they are found in other
+2. Sub-locations are welcomed, like **Lake** and **Boat**. Areas that are directly explorable after they are found in other
    areas (like **Mountain** and **High Mountain**) are <u>not</u> subareas.
 
 # NPCs
@@ -20,7 +20,7 @@ A **Location** is either **Camp**, **Area**, **Place**, **Dungeon**, or **Quest*
 2. If a **NPC** can be made a follower/slave/lover/etc, or contains highly detailed dialogue/scene,
    put it in _Scenes/NPCs_.
 1. If a **NPC** can be met in a specific **Place** or **Dungeon**, put it in its corresponding package.
-3. Else put it in corresponding **Area* package.
+3. Else put it in corresponding **Area** package.
 
 # Monsters
 
