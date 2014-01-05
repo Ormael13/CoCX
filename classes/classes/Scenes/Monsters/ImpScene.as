@@ -58,16 +58,16 @@ package classes.Scenes.Monsters
 				}
 				if(player.hasVagina()) femaleRape = rapeImpWithPussy;
 			}
-			var eggDump:int = 0;
-			if(player.canOvipositBee()) eggDump = 1;
-			if(nipFuck + femaleRape  + maleRape + feeder + bikiniTits + eggDump <= 0) cleanupAfterCombat();
+			var eggDump:Boolean = false;
+			if(player.canOvipositBee()) eggDump = true;
+			if(nipFuck==null && femaleRape==null && maleRape==null && feeder==null && bikiniTits==null && !eggDump) cleanupAfterCombat();
 			else {
 				menu();
-				if(maleRape) addButton(0,"Male Fuck",eventParser,maleRape);
-				if(femaleRape) addButton(1,"Female Fuck",eventParser,femaleRape);
-				if(nipFuck) addButton(2,"NippleFuck",eventParser,nipFuck);
-				if(feeder) addButton(3,"Breastfeed",eventParser,feeder);
-				if(bikiniTits) addButton(4,"B.Titfuck",eventParser,bikiniTits);
+				addButton(0,"Male Fuck",eventParser,maleRape);
+				addButton(1,"Female Fuck",eventParser,femaleRape);
+				addButton(2,"NippleFuck",eventParser,nipFuck);
+				addButton(3,"Breastfeed",eventParser,feeder);
+				addButton(4,"B.Titfuck",eventParser,bikiniTits);
 				if(eggDump > 0) addButton(8,"Oviposit",putBeeEggsInAnImpYouMonster);
 				addButton(9,"Leave",eventParser,cleanupAfterCombat);
 				//choices("Male Rape",maleRape,"Female Rape",femaleRape,"NippleFuck",nipFuck,"Breastfeed",feeder,"B.Titfuck",bikiniTits,"",0,"",0,"",0,"",0,"Leave",cleanupAfterCombat);

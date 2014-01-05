@@ -971,7 +971,7 @@ public function buildPerkList():void {
 	}
 	// FILTER PERKS
 	perkList = perkList.filter(
-			function(perk:*,idx:int,array:Array){
+			function(perk:*,idx:int,array:Array):Boolean{
 				return player.hasPerk(perk.label) < 0;
 			});
 	mainView.aCb.dataProvider = new DataProvider(perkList); 
@@ -2001,6 +2001,7 @@ public function createCallBackFunction2(func:Function,...args):Function
 
 
 public function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000):void {
+	if (func1==null) return;
 	var callback :Function,
 	toolTipText :String;
 

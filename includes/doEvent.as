@@ -1501,7 +1501,7 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 2079)
 	{
-		boatExplore();
+		exploration.boatExplore();
 		return;
 	}
 	else if (eventNo == 2080)

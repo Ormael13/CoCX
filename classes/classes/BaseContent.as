@@ -17,9 +17,19 @@
 		// TODO remove when we have proper enums for this
 		include "../../includes/appearanceDefs.as";
 
-		public function BaseContent() 
+		public function BaseContent()
 		{
 			
+		}
+
+		protected function isHolidays():Boolean
+		{
+			return kGAMECLASS.isHolidays();
+		}
+
+		protected function get date():Date
+		{
+			return kGAMECLASS.date;
 		}
 
 		protected function inCombat():Boolean

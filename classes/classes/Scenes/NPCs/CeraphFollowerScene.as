@@ -111,9 +111,9 @@ package classes.Scenes.NPCs
 			if (player.gender > 0) addButton(8, "Be A Pet", sumissivenessToCeraphFollower);
 			addButton(0, "Defeat Her", eventParser, kGAMECLASS.ceraphScene.winRapeChoices);
 			addButton(1, "Lose to Her", eventParser, kGAMECLASS.ceraphScene.ceraphRapesYouBADDAWGYODIGGITY);
-			if (dominika) addButton(5, "Dominika", eventParser, dominika);
-			if (marbles) addButton(6, "Marble Play", eventParser, marbles);
-			if (urta) addButton(7, "Urta Play", eventParser, urta);
+			addButton(5, "Dominika", eventParser, dominika);
+			addButton(6, "Marble Play", eventParser, marbles);
+			addButton(7, "Urta Play", eventParser, urta);
 			//choices("Defeat Her",winRapeChoices,"Lose to Her",ceraphRapesYouBADDAWGYODIGGITY,"",0,"",0,"",0,"",0,"Dominika P.",dominika,"Marble Play",marbles,"Urta Play",urta,"Back",ceraphFollowerAppearance);
 			addButton(9, "Back", ceraphFollowerAppearance);
 		}

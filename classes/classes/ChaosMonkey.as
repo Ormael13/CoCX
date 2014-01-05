@@ -42,7 +42,7 @@
 			  *                 properly synthesize fake key events
 		 * @param   debug       Emit debugging trace statements
 		 */
-		public function ChaosMonkey(mainClass:*, debug = false)
+		public function ChaosMonkey(mainClass:*, debug:Boolean = false)
 		{
 			this.debug = debug;
 			this._excludeMenuKeys = true;
@@ -59,7 +59,7 @@
 			return inArr[ Math.floor( Math.random() * inArr.length ) ];
 		}
 
-		private function initAvailableKeysList()
+		private function initAvailableKeysList():void
 		{
 			/*
 			 * 83	-- s				-- Display stats if main menu button displayed
@@ -88,7 +88,7 @@
 			 * 36	-- Home				-- Cycle the background of the maintext area
 			*/
 
-			var blockedButtons = new Array(112,     // Quicksave buttons
+			var blockedButtons:Array = new Array(112,     // Quicksave buttons
 											113,
 											114,
 											115,
@@ -270,7 +270,7 @@
 
 		}
 
-		public function createChaos(blockSaves:Boolean = true)
+		public function createChaos(blockSaves:Boolean = true):void
 		{
 
 			trace("Starting monkey")
@@ -289,7 +289,7 @@
 		}
 
 		private var oldTime:Number = 0;
-		private function checkTime()
+		private function checkTime():void
 		{
 			if (this._mainClassPtr.time.totalTime - this.oldTime < 0)
 			{
@@ -300,10 +300,10 @@
 		}
 
 		// KeyHandler(e:KeyboardEvent)
-		public function throwAMonkeyAtIt(e:*)
+		public function throwAMonkeyAtIt(e:*):void
 		{
 
-			this.checkTime()
+			this.checkTime();
 			
 			if (!(this._mainClassPtr.testingBlockExiting))
 			{

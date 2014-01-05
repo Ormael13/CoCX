@@ -254,9 +254,9 @@ package classes.Scenes.Monsters
 				outputText("\n\n<b>What do you do to her, and if anything, which of your body parts do you use?</b>", false);
 				choices("Dick Fuck", fitsFuck, "DickTooBig", tooBig, "CorruptDick", corruptTooBig, "Dick In Ass", buttseks, "Jog Fuck", jog, "Breastfeed", feeder, "Web Condom", spiderCondom, "Pussies", cuntFuck, "Lay Eggs", eggs, "Leave", cleanupAfterCombat);
 			}
-			else if (feeder || eggs) {
+			else if (feeder!=null || eggs!=null) {
 				outputText("\n\n<b>You aren't horny enough to rape her, but ");
-				if (feeder) outputText("your nipples ache with the desire to feed her your milk.  Do you feed her milk or leave?</b>", false);
+				if (feeder!=null) outputText("your nipples ache with the desire to feed her your milk.  Do you feed her milk or leave?</b>", false);
 				else outputText("your abdomen aches with the desire to impregnate her full of insect eggs.  Do you?</b>");
 				simpleChoices("Feed", feeder, "Lay Eggs", eggs, "", 0, "", 0, "Leave", cleanupAfterCombat);
 				//doYesNo(feeder,cleanupAfterCombat);

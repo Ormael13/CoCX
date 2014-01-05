@@ -1011,7 +1011,7 @@ public function campFollowers():void {
 	}
 	if(flags[kFLAGS.VALARIA_AT_CAMP] == 1) valeria = 3588;
 //choices("Ember",ember,"Jojo",jojoEvent,"Rathazul",rathazulEvent,"Shouldra",shouldra,"Valeria",valeria,"",0,"",0,"",0,"",0,"Back",1);	
-	if(ember) addButton(0,"Ember",eventParser,ember);
+	addButton(0,"Ember",ember);
 	if(helspawnFollower()) addButton(1,flags[kFLAGS.HELSPAWN_NAME],helspawnsMainMenu);
 	if(jojoEvent > 0) addButton(2,"Jojo",eventParser,jojoEvent);
 	if(rathazulEvent > 0) addButton(3,"Rathazul",eventParser,rathazulEvent);

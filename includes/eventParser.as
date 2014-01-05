@@ -97,27 +97,27 @@ public function doSystem(eventNo:Number):void {
 
 
 		case 2:
-			doExplore();
+			exploration.doExplore();
 			return;
 
 
 		case 3:
-			exploreDesert();
+			exploration.exploreDesert();
 			return;
 
 
 		case 4:
-			exploreForest();
+			exploration.exploreForest();
 			return;
 
 
 		case 5:
-			exploreLake();
+			exploration.exploreLake();
 			return;
 
 
 		case 6:
-			exploreMountain();
+			exploration.exploreMountain();
 			return;
 
 
@@ -140,7 +140,7 @@ public function doSystem(eventNo:Number):void {
 
 		case 12:
 			//Explore new zones
-			tryDiscover();
+			exploration.tryDiscover();
 			return;
 
 
@@ -300,8 +300,7 @@ public function doSystem(eventNo:Number):void {
 		case 65:
 			//turn on/off autosave
 			var e:MouseEvent;
-			if (player.autoSave) player.autoSave = false;
-			else player.autoSave = true;
+			player.autoSave = !player.autoSave;
 			saveLoad(e);
 			return;
 
@@ -325,7 +324,7 @@ public function doSystem(eventNo:Number):void {
 
 
 		case 80:
-			exploreDeepwoods();
+			exploration.exploreDeepwoods();
 			return;
 
 
@@ -335,25 +334,22 @@ public function doSystem(eventNo:Number):void {
 
 
 		case 94:
-			//located in exploration.as
-			debugOptions();
+			exploration.debugOptions();
 			return;
 
 
 		case 95:
-			//located in exploration.as
-			exploreHighMountain();
+			exploration.exploreHighMountain();
 			return;
 
 
 		case 97:
-			//located in exploration.as
-			explorePlains();
+			exploration.explorePlains();
 			return;
 
 
 		case 111:
-			exploreSwamp();
+			exploration.exploreSwamp();
 			return;
 
 

@@ -910,7 +910,7 @@ public function oswaldPawn():void {
 	}
 	else eventParser(1065);
 }
-function buyCarrotFromOswald():void {
+private function buyCarrotFromOswald():void {
 	player.gems -= 500;
 	statScreenRefresh();
 	player.createKeyItem("Carrot",0,0,0,0);

@@ -69,7 +69,7 @@
 				game.simpleChoices("Sex",game.fetishCultistScene.playerRapesCultist,"",0,"",0,"B. Feed",temp2,"Leave",game.cleanupAfterCombat);
 			}
 			else {
-				if(temp2) {
+				if(temp2!=null) {
 					outputText("  She looks like she might take some of your milk if you offered it to her.  What do you do?", false);
 					game.simpleChoices("B. Feed",temp2,"",0,"",0,"",0,"Leave",game.cleanupAfterCombat);
 				}

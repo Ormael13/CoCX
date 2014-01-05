@@ -210,14 +210,14 @@ package classes.Scenes.NPCs
 			//choices("Catch Anal",catchAnal,"Pitch Anal",pitchAnal,"Blow Ember",blowEmber,"Get Blown",getBlown,"Eat Her Out",eatOut,"Get Eaten Out",getEatenOut,"Penetrate Her",penetrateHer,"Get Penetrated",getPenetrated,"",0,"Leave",emberCampMenu);
 			menu();
 
-			if (catchAnal_) addButton(0, "Catch Anal", eventParser, catchAnal_);
-			if (pitchAnal) addButton(1, "Pitch Anal", eventParser, pitchAnal);
-			if (blowEmber) addButton(2, "Blow Ember", eventParser, blowEmber);
-			if (getBlown) addButton(3, "Get Blown", eventParser, getBlown);
-			if (eatOut) addButton(4, "Eat Her Out", eventParser, eatOut);
-			if (getEatenOut) addButton(5, "Get Eaten Out", eventParser, getEatenOut);
-			if (penetrateHer) addButton(6, "Penetrate Her", eventParser, penetrateHer);
-			if (getPenetrated) addButton(7, "Get Penetrated", eventParser, getPenetrated);
+			addButton(0, "Catch Anal", catchAnal_);
+			addButton(1, "Pitch Anal", pitchAnal);
+			addButton(2, "Blow Ember", blowEmber);
+			addButton(3, "Get Blown", getBlown);
+			addButton(4, "Eat Her Out", eatOut);
+			addButton(5, "Get Eaten Out", getEatenOut);
+			addButton(6, "Penetrate Her", penetrateHer);
+			addButton(7, "Get Penetrated", getPenetrated);
 			if (emberAffection() >= 95 && player.hasCock() && player.cockThatFits(emberVaginalCapacity()) >= 0 && (hasItem("L.Draft", 1) || player.lib >= 50 || player.minLust() >= 40))
 				addButton(8, "LustyFuck", highAffectionEmberLustFuck);
 			addButton(9, "Leave", emberCampMenu);
@@ -484,8 +484,8 @@ package classes.Scenes.NPCs
 				hatch = hatchZeMuzzles;
 				outputText("\n\n<b>The egg is ready to be hatched - if you're just as ready.</b>");
 			}
-			if (hatch) choices("Hatch", hatch, "Blood", giveEmberBludSausages, "IncubiDraft", draft, "Pure Draft", pDraft, "Succubi Milk", milk, "Pure Milk", pMilk, "Hair Serum", hair, "Ovi Elixir", ovi, "Lactaid", lactaid, "Back", leaveWithoutUsingAnEmberItem);
-			else if (fap) choices("Masturbate", fap, "Blood", giveEmberBludSausages, "IncubiDraft", draft, "Pure Draft", pDraft, "Succubi Milk", milk, "Pure Milk", pMilk, "Hair Serum", hair, "Ovi Elixir", ovi, "Lactaid", lactaid, "Back", leaveWithoutUsingAnEmberItem);
+			if (hatch!=null) choices("Hatch", hatch, "Blood", giveEmberBludSausages, "IncubiDraft", draft, "Pure Draft", pDraft, "Succubi Milk", milk, "Pure Milk", pMilk, "Hair Serum", hair, "Ovi Elixir", ovi, "Lactaid", lactaid, "Back", leaveWithoutUsingAnEmberItem);
+			else if (fap!=null) choices("Masturbate", fap, "Blood", giveEmberBludSausages, "IncubiDraft", draft, "Pure Draft", pDraft, "Succubi Milk", milk, "Pure Milk", pMilk, "Hair Serum", hair, "Ovi Elixir", ovi, "Lactaid", lactaid, "Back", leaveWithoutUsingAnEmberItem);
 			else choices("Hatch", hatch, "Blood", giveEmberBludSausages, "IncubiDraft", draft, "Pure Draft", pDraft, "Succubi Milk", milk, "Pure Milk", pMilk, "Hair Serum", hair, "Ovi Elixir", ovi, "Lactaid", lactaid, "Back", leaveWithoutUsingAnEmberItem);
 		}
 
@@ -517,10 +517,10 @@ package classes.Scenes.NPCs
 
 			outputText("  The egg's rhythm suddenly changes; as if it were excited by something - something that you have brought near it.");
 			outputText("\n\nYou start fishing through your pockets, holding up the various items you have; it doesn't react to some, while others make its flashes quicken.  These you set aside.  When you've finished testing the contents of your pouches, you look at the items the egg has selected.  As you rest your hand on the egg and consider your choices, it begins to excite once more, alarming you.  You pull away and it calms down... the egg considers <b>you</b> an item as well, apparently!");
-			if (hatch) outputText("\n\n<b>The egg is ready to be hatched - if you're just as ready.</b>");
+			if (hatch!=null) outputText("\n\n<b>The egg is ready to be hatched - if you're just as ready.</b>");
 
-			if (hatch) choices("Hatch", hatch, "Blood", giveEmberBludSausages, "IncubiDraft", draft, "Pure Draft", pDraft, "Succubi Milk", milk, "Pure Milk", pMilk, "Hair Serum", hair, "Ovi Elixir", ovi, "Lactaid", lactaid, "Back", leaveWithoutUsingAnEmberItem);
-			else if (fap) choices("Masturbate", fap, "Blood", giveEmberBludSausages, "IncubiDraft", draft, "Pure Draft", pDraft, "Succubi Milk", milk, "Pure Milk", pMilk, "Hair Serum", hair, "Ovi Elixir", ovi, "Lactaid", lactaid, "Back", leaveWithoutUsingAnEmberItem);
+			if (hatch!=null) choices("Hatch", hatch, "Blood", giveEmberBludSausages, "IncubiDraft", draft, "Pure Draft", pDraft, "Succubi Milk", milk, "Pure Milk", pMilk, "Hair Serum", hair, "Ovi Elixir", ovi, "Lactaid", lactaid, "Back", leaveWithoutUsingAnEmberItem);
+			else if (fap!=null) choices("Masturbate", fap, "Blood", giveEmberBludSausages, "IncubiDraft", draft, "Pure Draft", pDraft, "Succubi Milk", milk, "Pure Milk", pMilk, "Hair Serum", hair, "Ovi Elixir", ovi, "Lactaid", lactaid, "Back", leaveWithoutUsingAnEmberItem);
 			else choices("Hatch", hatch, "Blood", giveEmberBludSausages, "IncubiDraft", draft, "Pure Draft", pDraft, "Succubi Milk", milk, "Pure Milk", pMilk, "Hair Serum", hair, "Ovi Elixir", ovi, "Lactaid", lactaid, "Back", leaveWithoutUsingAnEmberItem);
 		}
 

@@ -22,6 +22,7 @@
 
 	import classes.Parser.Main.Parser; 	// import getting long enough yet?
 
+	import classes.Scenes.*;
 	import classes.Scenes.Areas.Bog.*
 	import classes.Scenes.Areas.Desert.*;
 	import classes.Scenes.Areas.Forest.*;
@@ -92,7 +93,6 @@
 		include "../../includes/doEvent.as";
 		include "../../includes/eventParser.as";
 		
-		include "../../includes/exploration.as";
 		include "../../includes/followerInteractions.as";
 		include "../../includes/telAdre.as";
 		
@@ -146,6 +146,7 @@
 		// Bazaar scenes
 		// Other scenes
 		public var testContent:TestContent = new TestContent();
+		public var exploration:Exploration = new Exploration();
 
 		include "../../includes/ants.as";
 		include "../../includes/april_fools.as";

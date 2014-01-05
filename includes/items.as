@@ -1639,7 +1639,7 @@ public function doItems(eventNo:Number):void {
 				slotTmp = itemSlot5;
 				break;
 		}
-		var shortName_ = slotTmp.shortName;
+		var shortName_:String = slotTmp.shortName;
 		if(!debug) slotTmp.removeOneItem();
 
 		itemUse(shortName_);

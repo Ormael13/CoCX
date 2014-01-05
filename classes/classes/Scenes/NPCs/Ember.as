@@ -12,7 +12,7 @@ package classes.Scenes.NPCs
 	 */
 	public class Ember extends Monster 
 	{
-		private function emberMF(male:String,female:String){
+		private function emberMF(male:String,female:String):String{
 			return game.emberScene.emberMF(male,female);
 		}
 		//The Actual Ember Fight (Z)

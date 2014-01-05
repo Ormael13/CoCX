@@ -494,7 +494,7 @@ public static const LYNNETTE_CARRYING_COUNT:int                                 
 */
 
 //Impregnate
-function fuckLynnette():void {
+private function fuckLynnette():void {
 	clearOutput();
 	//Checks to see if you've cum withint hte past 24 hours.
 	if(flags[kFLAGS.LYNNETTE_FUCK_COUNTER] == 0) {
@@ -661,7 +661,7 @@ function fuckLynnette():void {
 	flags[kFLAGS.LYNNETTE_PREGNANCY_CYCLE] = 0;
 	salonPurchaseMenu();
 }
-function lynnetteApproval(arg:int = 0):Number {
+private function lynnetteApproval(arg:int = 0):Number {
 	if(arg != 0) flags[kFLAGS.LYNNETTE_APPROVAL] += arg;
 	if(flags[kFLAGS.LYNNETTE_APPROVAL] < -100) flags[kFLAGS.LYNNETTE_APPROVAL] = -100;
 	else if(flags[kFLAGS.LYNNETTE_APPROVAL] > 100) flags[kFLAGS.LYNNETTE_APPROVAL] = 100;

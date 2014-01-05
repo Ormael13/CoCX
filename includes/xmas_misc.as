@@ -1206,7 +1206,7 @@ public function nieveIsOver():void {
 	doNext(1);
 }
 
-function fixNieve():void {
+private function fixNieve():void {
 	if(flags[kFLAGS.NIEVE_GENDER] == 0) {
 		clearOutput();
 		outputText("(There was an error with stat tracking that cleared Nieve's stats out at the end of last year's event. <b>What gender do you want Nieve to be?</b>)");
@@ -1224,11 +1224,11 @@ function fixNieve():void {
 	else nieveReturnsPartII();
 }
 
-function fixNieveGender(arg:int = 1):void {
+private function fixNieveGender(arg:int = 1):void {
 	flags[kFLAGS.NIEVE_GENDER] = arg;
 	fixNieve();
 }
-function fixNieveMouth(arg:int = 1):void {
+private function fixNieveMouth(arg:int = 1):void {
 	if(arg == 0) flags[kFLAGS.NIEVE_MOUTH] = "gems";
 	else flags[kFLAGS.NIEVE_MOUTH] = "coal";
 	fixNieve();
@@ -1236,7 +1236,7 @@ function fixNieveMouth(arg:int = 1):void {
 
 //The Return of Nieve
 //Occurs during winter if the PC has Nieve's tear.
-function returnOfNieve():void {
+private function returnOfNieve():void {
 	clearOutput();
 	outputText("As you awake in the morning you find yourself shivering slightly.  A cool breeze sweeps over your camp, while in the distance jingling bells can be heard.  How odd.  You haven't heard bells like that since...");
 	outputText("\n\nYour heart skips a beat.");
@@ -1250,7 +1250,7 @@ function returnOfNieve():void {
 	addButton(0,"Next",fixNieve);
 }
 
-function nieveReturnsPartII():void {
+private function nieveReturnsPartII():void {
 	clearOutput();
 	outputText("You sigh, resigning yourself to your companion's fate.  However, as you rise from the snow to return to camp, you hear a soft, muffled voice.  Perplexed, you crawl forward in the snow, frantically seeking out the source.");
 	outputText("\n\nThat's when you see it, a small mound of snow, practically invisible among the white mass surrounding it.  You plunge your hands into the freezing cold stuff and find something solid.  Something large.  Something about the size of a person.  You move to pull the person up and forward, but it doesn't take much.");

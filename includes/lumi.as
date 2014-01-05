@@ -136,7 +136,7 @@ public function lumiEnhance(justCheck:Boolean = false):Boolean {
 	if(hasItem("FoxJewl",1)) 
 		kitsune = lumiEnhanceFoxJewel;
 	if(justCheck) {
-		if(fox || kanga || seed || laBova || succuDelight || oviElix || lustDraft || kitsune)
+		if(fox!=null || kanga!=null || seed!=null || laBova!=null || succuDelight!=null || oviElix!=null || lustDraft!=null || kitsune!=null)
 			return true;
 		else 
 			return false;
