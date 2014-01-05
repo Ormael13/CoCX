@@ -1910,7 +1910,7 @@ private function buildFuncLookupDict(object:*=null,prefix:String=""):void
 {
 	import flash.sampler.*;
 	import flash.utils.*;
-	trace("Building function <-> function name mapping table");
+	trace("Building function <-> function name mapping table for "+((object==null)?"CoC.":prefix));
 	// get all methods contained
 	if (object == null) object = this;
 	var typeDesc:XML = describeType(object);
@@ -1928,7 +1928,7 @@ private function buildFuncLookupDict(object:*=null,prefix:String=""):void
 	}
 	for each (node in typeDesc..variable)
 	{
-		if (node.@type.toString().indexOf("classes.Scenes") == 0 ||
+		if (node.@type.toString().indexOf("classes.Scenes.") == 0 ||
 				node.metadata.@name.contains("Scene")){
 			if (object[node.@name]!=null){
 				buildFuncLookupDict(object[node.@name],node.@name+".");
@@ -1945,7 +1945,7 @@ public function getFunctionName(f:Function):String
 	if (this.funcLookups == null)
 	{
 		trace("Rebuilding lookup object");
-		this.funcLookups = new Dictionary()
+		this.funcLookups = new Dictionary();
 		this.buildFuncLookupDict();
 	}
 
@@ -1971,7 +1971,7 @@ private function logFunctionInfo(func:Function, arg:* = null):void
 		logStr += "Calling = " + getFunctionName(func) + " Param = " +  arg;
 	}
 	CoC_Settings.appendButtonEvent(logStr);
-	// trace(logStr)
+	trace(logStr)
 }
 
 // returns a function that takes no arguments, and executes function `func` with argument `arg`

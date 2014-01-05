@@ -9,7 +9,7 @@ package classes.Scenes.Places.TelAdre
 
 	use namespace kGAMECLASS;
 
-	public class TelAdreAbstractContent extends BaseContent
+	internal class TelAdreAbstractContent extends BaseContent
 	{
 		protected function get telAdre():TelAdre {
 			return kGAMECLASS.telAdre;

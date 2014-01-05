@@ -1496,7 +1496,7 @@ package classes.Scenes
 			}
 			//Bazaar!
 			if (flags[kFLAGS.TIMES_EXPLORED_PLAINS] % 10 == 0 && flags[kFLAGS.BAZAAR_ENTERED] == 0) {
-				kGAMECLASS.findBazaar();
+				kGAMECLASS.bazaar.findBazaar();
 				return;
 			}
 			//Chance of threesomes!

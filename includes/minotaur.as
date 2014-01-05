@@ -1,10 +1,8 @@
 ﻿public function minotaurAddicted():Boolean {
-	if(player.hasPerk("Minotaur Cum Addict") >= 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1) return true;
-	return false;
+	return player.minotaurAddicted();
 }
 public function minotaurNeed():Boolean {
-	if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 1) return true;
-	return false;
+	return player.minotaurNeed();
 }
 
 public function minoVictoryRapeChoices():void {

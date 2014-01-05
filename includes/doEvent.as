@@ -2561,19 +2561,11 @@ public function doEvent(eventNo:Number):void
 			flags[kFLAGS.COUNTDOWN_TO_NIGHT_RAPE]++;
 			if (flags[kFLAGS.COUNTDOWN_TO_NIGHT_RAPE] % 4 == 0 && player.gender == 1)
 			{
-				nightBazaarButtfuck();
+				bazaar.nightBazaarButtfuck();
 				return;
 			}
 		}
-		enterTheBazaarAndMenu();
-	}
-	else if (eventNo == 2856)
-	{
-		theSlipperySqueeze();
-	}
-	else if (eventNo == 2857)
-	{
-		joeyMassage();
+		bazaar.enterTheBazaarAndMenu();
 	}
 	else if (eventNo == 2860)
 	{
@@ -2607,10 +2599,6 @@ public function doEvent(eventNo:Number):void
 	{
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00226] = 1;
 		roxanneDrinkingContest();
-	}
-	else if (eventNo == 2887)
-	{
-		joeyAndrogyny();
 	}
 	else if (eventNo == 2889)
 	{
@@ -2845,10 +2833,6 @@ public function doEvent(eventNo:Number):void
 			ceraphFollowerScene.encounterZetsuko();
 		else
 			ceraphFollowerScene.ceraphFollowerAppearance();
-	}
-	else if (eventNo == 3058)
-	{
-		overHearDemonsAboutSyrena();
 	}
 	else if (eventNo == 3077)
 	{
@@ -3566,10 +3550,6 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 3571)
 	{
 		marbleKidsPlaytime();
-	}
-	else if (eventNo == 3572)
-	{
-		askJoeyAboutOffer();
 	}
 	else if (eventNo == 3587)
 	{

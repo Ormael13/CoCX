@@ -15,6 +15,7 @@
 	import classes.ItemSlotClass;
 	import classes.PerkClass;
 	import classes.Scenes.Dungeons.HelDungeon.BrigidScene;
+	import classes.Scenes.Places.Bazaar;
 	import classes.Scenes.Places.TelAdre;
 	import classes.StatusAffectClass;
 	import classes.VaginaClass;
@@ -96,8 +97,7 @@
 		include "../../includes/eventParser.as";
 		
 		include "../../includes/followerInteractions.as";
-		include "../../includes/bazaar.as";
-		
+
 		include "../../includes/eventTest.as";
 		
 		
@@ -116,6 +116,7 @@
 		public var frogGirlScene:FrogGirlScene = new FrogGirlScene();
 		public var chameleonGirlScene:ChameleonGirlScene = new ChameleonGirlScene();
 		// Scenes/Places/
+		public var bazaar:Bazaar = new Bazaar();
 		public var telAdre:TelAdre = new TelAdre();
 
 		// Named NPC Scenes (excluding dungeon bosses)

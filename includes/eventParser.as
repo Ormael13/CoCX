@@ -16,7 +16,7 @@ public function eventParser(eventNo:*):void {
 	}
 	else if (eventNo is int)
 	{
-		trace("Numeric eventNo "+eventNo+" replace it with function");
+		//trace("Numeric eventNo "+eventNo+" replace it with function");
 		//Clear sprite if not in combat
 		if(!inCombat() && eventNo != cleanupAfterCombat) spriteSelect(-1);
 		//Clear pic if not in combat

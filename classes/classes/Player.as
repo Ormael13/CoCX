@@ -1,7 +1,10 @@
 package classes
 {
 	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Places.TelAdre.UmasShop;
+
+	use namespace kGAMECLASS;
 
 	/**
 	 * ...
@@ -1266,5 +1269,11 @@ package classes
 			return min;
 		}
 
+		public function minotaurAddicted():Boolean {
+			return hasPerk("Minotaur Cum Addict") >= 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1;
+		}
+		public function minotaurNeed():Boolean {
+			return flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 1;
+		}
 	}
 }
