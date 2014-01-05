@@ -177,7 +177,7 @@ package classes.Scenes.Areas.Forest
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.kitsuneScene.defeatTheKitsunes();
+			game.forest.kitsuneScene.defeatTheKitsunes();
 		}
 
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
@@ -186,7 +186,7 @@ package classes.Scenes.Areas.Forest
 				outputText("\n\nThe kitsune recoils before running off, no longer interested in you...");
 				game.cleanupAfterCombat();
 			} else {
-				game.kitsuneScene.loseToKitsunes();
+				game.forest.kitsuneScene.loseToKitsunes();
 			}
 		}
 

@@ -69,7 +69,7 @@ package classes.Scenes.Areas.HighMountains
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.basiliskScene.defeatBasilisk();
+			game.highMountains.basiliskScene.defeatBasilisk();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -78,7 +78,7 @@ package classes.Scenes.Areas.HighMountains
 				outputText("\n\nThe basilisk smirks, but waits for you to finish...");
 				doNext(game.endLustLoss);
 			} else {
-				game.basiliskScene.loseToBasilisk();
+				game.highMountains.basiliskScene.loseToBasilisk();
 			}
 		}
 

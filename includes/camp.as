@@ -5,7 +5,7 @@ public function camp():void {
 	mainView.showMenuButton( MainView.MENU_NEW_MAIN );
 	if(player.hasStatusAffect("Post Akbal Submission") >= 0) {
 		player.removeStatusAffect("Post Akbal Submission");
-		akbalScene.akbalSubmissionFollowup();
+		forest.akbalScene.akbalSubmissionFollowup();
 		return;
 	}
 	if(player.hasStatusAffect("Post Anemone Beatdown") >= 0) {
@@ -525,7 +525,7 @@ public function camp():void {
 		outputText("\n\n", false);
 	}
 	//►[Added Campsite Description]
-	if(antsScene.phyllaWaifu()) {
+	if(desert.antsScene.phyllaWaifu()) {
 		outputText("You see Phylla's anthill in the distance.  Every now and then you see");
 		//If PC has children w/ Phylla:
 		if(flags[kFLAGS.ANT_KIDS] > 0) outputText(" one of your many children exit the anthill to unload some dirt before continuing back down into the colony.  It makes you feel good knowing your offspring are so productive.");
@@ -891,7 +891,7 @@ public function campLoversMenu():void {
 	if(kihaButt > 0) addButton(5,"Kiha",eventParser,kihaButt);
 	if(marbleEvent > 0) addButton(6,"Marble",eventParser,marbleEvent);
 	if(nieve > 0) addButton(7,"Nieve",eventParser,nieve);
-	if(flags[kFLAGS.ANT_WAIFU] > 0) addButton(8,"Phylla",antsScene.introductionToPhyllaFollower);
+	if(flags[kFLAGS.ANT_WAIFU] > 0) addButton(8,"Phylla",desert.antsScene.introductionToPhyllaFollower);
 	addButton(9,"Back",eventParser,1);
 }
 public function campSlavesMenu():void {
@@ -1371,7 +1371,7 @@ public function places(display:Boolean):Boolean {
 	var farmBarn:* = 0;
 	var farmHouse:* = 0;
 	var farm:* = 0;
-	var boat:* = 0;
+	var _boat:Function = null;
 	var barber:* = 0;
 	var telAdre2:* = 0;
 	var ruins:* = 0;
@@ -1389,7 +1389,7 @@ public function places(display:Boolean):Boolean {
 	if(player.statusAffectv1("Tel'Adre") >= 1) telAdre2 = telAdre.telAdreMenu;
 	if(player.hasStatusAffect("hairdresser meeting") >= 0) barber = 2169;
 	//turn on boat
-	if(player.hasStatusAffect("Boat Discovery") >= 0) boat = 2079;
+	if(player.hasStatusAffect("Boat Discovery") >= 0) _boat = boat.boatExplore;
 	
 	//Turn on main farm encounter!
 	if(player.hasStatusAffect("Met Whitney") >= 0) {
@@ -1399,10 +1399,10 @@ public function places(display:Boolean):Boolean {
 	if(flags[kFLAGS.BAZAAR_ENTERED] > 0) bazaar = 2855;
 	//Return if there is anything enabled in places
 	if(!display) {
-		return owca || flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] || telAdre2 || barber || farmBarn || farmHouse || farm || dungeonsArg || boat || ruins || flags[kFLAGS.BAZAAR_ENTERED];
+		return owca || flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] || telAdre2 || barber || farmBarn || farmHouse || farm || dungeonsArg || _boat || ruins || flags[kFLAGS.BAZAAR_ENTERED];
 	}
 	//Make choices
-	choices("Bazaar",bazaar,"Boat", boat,"Dungeons",dungeonsArg,"",0,"Farm",farm,"Owca",owca,"Salon", barber,"Tel'Adre", telAdre2, "TownRuins",ruins,"Back",1);
+	choices("Bazaar",bazaar,"Boat", _boat,"Dungeons",dungeonsArg,"",0,"Farm",farm,"Owca",owca,"Salon", barber,"Tel'Adre", telAdre2, "TownRuins",ruins,"Back",1);
 	return true;
 }
 

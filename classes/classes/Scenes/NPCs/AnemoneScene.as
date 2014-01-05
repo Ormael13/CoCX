@@ -1,13 +1,15 @@
 /**
  * Created by aimozg on 02.01.14.
  */
-package classes.Scenes.Areas.Lake.Boat
+package classes.Scenes.NPCs
 {
+	import classes.Scenes.Places.Boat.*;
 	import classes.Appearance;
 	import classes.BaseContent;
 	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Scenes.Areas.Lake.AbstractLakeContent;
 
 	public class AnemoneScene extends BaseContent
 	{
@@ -1183,19 +1185,24 @@ package classes.Scenes.Areas.Lake.Boat
 			clearOutput();
 			spriteSelect(71);
 			outputText("What do you want to give her?");
-			var temp2:Number = 0;
-			var temp1:Number = 0;
-			var temp3:Number = 0;
-			var temp4:Number = 0;
-			var temp5:Number = 0;
+			var temp2:Function = null;
+			var temp1:Function = null;
+			var temp3:Function = null;
+			var temp4:Function = null;
+			var temp5:Function = null;
 			var bonus:Number = 0;
 			kGAMECLASS.hideUpDown();
-			if (itemSlot1.quantity > 0 && (itemSlot1.shortName == "W. Book" || itemSlot1.shortName == "B. Book" || isWeapon(itemSlot1.shortName))) temp1 = 1117;
-			if (itemSlot2.quantity > 0 && (itemSlot2.shortName == "W. Book" || itemSlot2.shortName == "B. Book" || isWeapon(itemSlot2.shortName))) temp2 = 1118;
-			if (itemSlot3.quantity > 0 && (itemSlot3.shortName == "W. Book" || itemSlot3.shortName == "B. Book" || isWeapon(itemSlot3.shortName))) temp3 = 1119;
-			if (itemSlot4.unlocked && itemSlot4.quantity > 0 && (itemSlot4.shortName == "W. Book" || itemSlot4.shortName == "B. Book" || isWeapon(itemSlot4.shortName))) temp4 = 1120;
-			if (itemSlot5.unlocked && itemSlot5.quantity > 0 && (itemSlot5.shortName == "W. Book" || itemSlot5.shortName == "B. Book" || isWeapon(itemSlot5.shortName))) temp5 = 1121;
-			if (temp1 + temp2 + temp3 + temp4 + temp5 == 0) outputText("\n<b>You have no appropriate items to have your offspring hold.</b>", false);
+			if (itemSlot1.quantity > 0 && (itemSlot1.shortName == "W. Book" || itemSlot1.shortName == "B. Book" || isWeapon(itemSlot1.shortName)))
+				temp1 = createCallBackFunction(placeInAnemone,1);
+			if (itemSlot2.quantity > 0 && (itemSlot2.shortName == "W. Book" || itemSlot2.shortName == "B. Book" || isWeapon(itemSlot2.shortName)))
+				temp2 = createCallBackFunction(placeInAnemone,2);
+			if (itemSlot3.quantity > 0 && (itemSlot3.shortName == "W. Book" || itemSlot3.shortName == "B. Book" || isWeapon(itemSlot3.shortName)))
+				temp3 = createCallBackFunction(placeInAnemone,3);
+			if (itemSlot4.unlocked && itemSlot4.quantity > 0 && (itemSlot4.shortName == "W. Book" || itemSlot4.shortName == "B. Book" || isWeapon(itemSlot4.shortName)))
+				temp4 = createCallBackFunction(placeInAnemone,4);
+			if (itemSlot5.unlocked && itemSlot5.quantity > 0 && (itemSlot5.shortName == "W. Book" || itemSlot5.shortName == "B. Book" || isWeapon(itemSlot5.shortName)))
+				temp5 = createCallBackFunction(placeInAnemone,5);
+			if (temp1 != null || temp2 != null || temp3 != null || temp4 != null || temp5 != null) outputText("\n<b>You have no appropriate items to have your offspring hold.</b>", false);
 			choices((itemSlot1.shortName + " x" + itemSlot1.quantity), temp1, (itemSlot2.shortName + " x" + itemSlot2.quantity), temp2, (itemSlot3.shortName + " x" + itemSlot3.quantity), temp3, (itemSlot4.shortName + " x" + itemSlot4.quantity), temp4, (itemSlot5.shortName + " x" + itemSlot5.quantity), temp5, "", 0, "", 0, "", 0, "", 0, "Back", 2951);
 		}
 

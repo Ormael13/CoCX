@@ -13,6 +13,12 @@ scenes. In code referencing a "foreign" scene to call an event could be somethin
 from common superclass containing handy methods to access instance of their parent and other helpy stuff (see
 _Scenes/Places/TelAdre/TelAdreAbstractContent.as_ )
 
+Due to legacy reasons, if a NPC is combatable, its Monster subclass should be named after him (`Npcname`), and its BaseContent
+subclass should be named `Npcname+"Scene"`. However, if a non-combatable NPC (with BaseContent subclass named `npcname`)
+becomes combatable in future releases, its Monster subclass should be created and named `Npcname+"Monster"` or `Npcname+"Combat"`.
+
+In distant future we may rename all monster subclasses to `Monstername+"Monster"` and their scene classes to simple `Monstername`.
+
 ## Class members
 
 1. Remember that all variables declared in the Scene will not be saved/loaded in any way, or even resetted after save/load
@@ -39,9 +45,7 @@ A **Location** is either **Camp**, **Area**, **Place**, **Dungeon**, or **Quest*
 ### Notes
 
 1. **Locations** that share many common scenes could be joined in one package, like **Forest** and **Deepwoods**.
-2. Sub-locations are welcomed, like **Lake** and **Boat**. Areas that are directly explorable after they are found in other
-   areas (like **Mountain** and **High Mountain**) are <u>not</u> subareas.
-3. Events for **Explore** -> **Explore** could be placed directly into _Scenes/Areas_.
+2. Events for **Explore** -> **Explore** could be placed directly into _Scenes/Areas_.
 
 ## NPCs
 

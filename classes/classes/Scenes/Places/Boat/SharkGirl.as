@@ -1,4 +1,4 @@
-﻿package classes.Scenes.Areas.Lake.Boat
+﻿package classes.Scenes.Places.Boat
 {
 	import classes.CoC;
 	import classes.Creature;

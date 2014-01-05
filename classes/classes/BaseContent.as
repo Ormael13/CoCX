@@ -22,6 +22,11 @@
 			
 		}
 
+		protected  function isHalloween():Boolean
+		{
+			return kGAMECLASS.isHalloween();
+		}
+
 		protected function isValentine():Boolean
 		{
 			return kGAMECLASS.isValentine();
@@ -32,7 +37,7 @@
 			return kGAMECLASS.isHolidays();
 		}
 
-		protected function isEaster():Boolean
+		public function isEaster():Boolean
 		{
 			return kGAMECLASS.isEaster();
 		}

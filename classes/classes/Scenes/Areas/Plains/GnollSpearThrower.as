@@ -313,7 +313,7 @@ package classes.Scenes.Areas.Plains
 				game.addButton(1,"Succ Milk", game.useSuccubiMilkOnGnollPrincesses);
 				game.addButton(4,"Leave",game.urtaNightSleep);
 			} else {
-				game.gnollSpearThrowerScene.hyenaVictory();
+				game.plains.gnollSpearThrowerScene.hyenaVictory();
 			}
 		}
 
@@ -325,7 +325,7 @@ package classes.Scenes.Areas.Plains
 				outputText("\n\nYour foe doesn't seem put off enough to leave...");
 				doNext(game.endLustLoss);
 			} else {
-				game.gnollSpearThrowerScene.hyenaSpearLossAnal();
+				game.plains.gnollSpearThrowerScene.hyenaSpearLossAnal();
 			}
 		}
 

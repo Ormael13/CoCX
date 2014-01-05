@@ -1241,14 +1241,14 @@ public function updatePregnancy():Boolean {
 	}
 	//Give birf if its time... to ANAL EGGS
 	if(player.buttPregnancyIncubation == 1 && player.buttPregnancyType == 23) {
-		frogGirlScene.birthFrogEggsAnal();
+		bog.frogGirlScene.birthFrogEggsAnal();
 		displayedUpdate = true;
 		player.buttPregnancyIncubation = 0;
 		player.buttPregnancyType = 0;
 	}
 	//Give birf if its time... to ANAL EGGS
 	if(player.buttPregnancyIncubation == 1 && player.buttPregnancyType == 3) {
-		corruptedDriderScene.birthSpiderEggsFromAnusITSBLEEDINGYAYYYYY();
+		swamp.corruptedDriderScene.birthSpiderEggsFromAnusITSBLEEDINGYAYYYYY();
 		displayedUpdate = true;
 		player.buttPregnancyIncubation = 0;
 		player.buttPregnancyType = 0;
@@ -1337,14 +1337,14 @@ public function updatePregnancy():Boolean {
 		player.pregnancyIncubation = 0;
 		player.pregnancyType = 0;
 		displayedUpdate = true;
-		maleSpiderMorphScene.spiderPregVagBirth();
+		swamp.maleSpiderMorphScene.spiderPregVagBirth();
 	}
 	//DRIDER BIRF
 	if((player.pregnancyType == 15) && player.pregnancyIncubation == 1) {
 		player.pregnancyIncubation = 0;
 		player.pregnancyType = 0;
 		displayedUpdate = true;
-		corruptedDriderScene.driderPregVagBirth();
+		swamp.corruptedDriderScene.driderPregVagBirth();
 	}
 	if((player.pregnancyType == 20) && player.pregnancyIncubation == 1) {
 		player.pregnancyIncubation = 0;
@@ -1357,13 +1357,13 @@ public function updatePregnancy():Boolean {
 		player.pregnancyIncubation = 0;
 		player.pregnancyType = 0;
 		displayedUpdate = true;
-		gooGirlScene.gooPregVagBirth();
+		lake.gooGirlScene.gooPregVagBirth();
 	}
 	if(player.pregnancyType == 14 && player.pregnancyIncubation == 1) {
 		player.pregnancyIncubation = 0;
 		player.pregnancyType = 0;
 		displayedUpdate = true;
-		basiliskScene.basiliskBirth();
+		highMountains.basiliskScene.basiliskBirth();
 	}
 	//Satyr vag preg
 	if(player.pregnancyType == 19 && player.pregnancyIncubation == 1) {
@@ -1393,7 +1393,7 @@ public function updatePregnancy():Boolean {
 	}
 	//Give birf if its time... to FROG EGGS
 	if(player.pregnancyIncubation == 1 && player.pregnancyType == 23) {
-		frogGirlScene.layFrogEggs();
+		bog.frogGirlScene.layFrogEggs();
 		displayedUpdate = true;
 		player.pregnancyIncubation = 0;
 		player.pregnancyType = 0;

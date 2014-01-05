@@ -347,22 +347,22 @@ package classes.Scenes.Areas.Plains
 		{
 			if(hasStatusAffect("PhyllaFight") >= 0) {
 				removeStatusAffect("PhyllaFight");
-				game.antsScene.phyllaPCBeatsGnoll();
+				game.desert.antsScene.phyllaPCBeatsGnoll();
 				return;
 			}
-			game.gnollScene.defeatHyena();
+			game.plains.gnollScene.defeatHyena();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if(hasStatusAffect("PhyllaFight") >= 0) {
 				removeStatusAffect("PhyllaFight");
-				game.antsScene.phyllaGnollBeatsPC();
+				game.desert.antsScene.phyllaGnollBeatsPC();
 			} else if(pcCameWorms) {
 				outputText("\n\nYour foe doesn't seem put off enough to leave...");
 				doNext(game.endLustLoss);
 			} else {
-				game.gnollScene.getRapedByGnoll();
+				game.plains.gnollScene.getRapedByGnoll();
 			}
 		}
 

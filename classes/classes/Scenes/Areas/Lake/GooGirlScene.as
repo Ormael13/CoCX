@@ -8,7 +8,7 @@ package classes.Scenes.Areas.Lake
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 
-	public class GooGirlScene extends BaseContent
+	public class GooGirlScene extends AbstractLakeContent
 	{
 		public function GooGirlScene()
 		{

@@ -1,4 +1,4 @@
-package classes.Scenes.Dungeons.DesetCave
+package classes.Scenes.Dungeons.DesertCave
 {
 	import classes.CoC;
 	import classes.Monster;

@@ -66,7 +66,6 @@ public function encounterKiha():void {
 		//Clear 'won last fight' toggle
 		flags[kFLAGS.PC_WIN_LAST_KIHA_FIGHT] = 0;
 		startCombat(new Kiha());
-		return;
 	}
 	//Tribute Offer (1st Time) - Req's Kiha not be mad and PC suggested it at some point. 
 	else if(flags[kFLAGS.KIHA_TOLL] == 1 && rand(2) == 0) {

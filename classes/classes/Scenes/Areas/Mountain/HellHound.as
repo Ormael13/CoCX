@@ -105,7 +105,7 @@
 				//Rape if not naga, turned on, and girl that can fit!
 				if (player.hasVagina() && player.lust >= 33 && !player.isNaga()) {
 					outputText("  You find yourself musing that you could probably take advantage of the poor 'doggy'.  Do you fuck it?", false);
-					game.simpleChoices("Fuck it", game.hellHoundScene.hellHoundPropahRape, "", 0, "", 0, "", 0, "Leave", game.cleanupAfterCombat);
+					game.simpleChoices("Fuck it", game.mountain.hellHoundScene.hellHoundPropahRape, "", 0, "", 0, "", 0, "Leave", game.cleanupAfterCombat);
 				} else {
 					game.cleanupAfterCombat();
 				}
@@ -117,10 +117,10 @@
 					//Rape if not naga, turned on, and girl that can fit!
 					if (player.hasVagina() && player.lust >= 33 && !player.isNaga()) {
 						outputText(" or make it fuck you", false);
-						temp2 = game.hellHoundScene.hellHoundPropahRape;
+						temp2 = game.mountain.hellHoundScene.hellHoundPropahRape;
 					}
 					outputText(".  What do you do?", false);
-					game.simpleChoices("Lick", game.hellHoundScene.hellHoundGetsRaped, "Fuck", temp2, "", 0, "", 0, "Leave", game.cleanupAfterCombat);
+					game.simpleChoices("Lick", game.mountain.hellHoundScene.hellHoundGetsRaped, "Fuck", temp2, "", 0, "", 0, "Leave", game.cleanupAfterCombat);
 				}
 				else {
 					outputText("You turn away, not really turned on enough to be interested in such an offer.", false);
@@ -135,7 +135,7 @@
 				outputText("\n\nThe hellhound snorts and leaves you to your fate.", false);
 				doNext(game.cleanupAfterCombat);
 			} else {
-				game.eventParser(game.hellHoundScene.hellhoundRapesPlayer);
+				game.eventParser(game.mountain.hellHoundScene.hellhoundRapesPlayer);
 			}
 		}
 

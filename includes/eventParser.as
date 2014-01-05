@@ -103,22 +103,22 @@ public function doSystem(eventNo:Number):void {
 
 
 		case 3:
-			exploration.exploreDesert();
+			desert.exploreDesert();
 			return;
 
 
 		case 4:
-			exploration.exploreForest();
+			forest.exploreForest();
 			return;
 
 
 		case 5:
-			exploration.exploreLake();
+			lake.exploreLake();
 			return;
 
 
 		case 6:
-			exploration.exploreMountain();
+			mountain.exploreMountain();
 			return;
 
 
@@ -325,7 +325,7 @@ public function doSystem(eventNo:Number):void {
 
 
 		case 80:
-			exploration.exploreDeepwoods();
+			forest.exploreDeepwoods();
 			return;
 
 
@@ -340,17 +340,17 @@ public function doSystem(eventNo:Number):void {
 
 
 		case 95:
-			exploration.exploreHighMountain();
+			highMountains.exploreHighMountain();
 			return;
 
 
 		case 97:
-			exploration.explorePlains();
+			plains.explorePlains();
 			return;
 
 
 		case 111:
-			exploration.exploreSwamp();
+			swamp.exploreSwamp();
 			return;
 
 
@@ -631,7 +631,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				//Expire heat if impregged
 				if(flags[kFLAGS.SOPHIE_INCUBATION] > 0 && flags[kFLAGS.SOPHIE_HEAT_COUNTER] >= 552) {
 					if(bimboSophie()) sophieGotKnockedUp();
-					else sophieFertilityKnockedUpExpired()
+					else sophieFertilityKnockedUpExpired();
 					flags[kFLAGS.SOPHIE_HEAT_COUNTER] = 551;
 					needNext = true;
 				}
@@ -1436,7 +1436,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 					outputText("\nA sudden gush of semen-coated worms noisily slurps out of your womb.  It runs down your legs as the worms do their damnedest to escape.  The feeling of so many squiggling forms squirting through your cunt-lips turns you on more than you'd like to admit.  You wonder why they stayed as long as they did, and some part of you worries that their stay may have reduced your capacity to bear children, though in a place like this that might be a blessing.\n", false);
 					needNext = true;
 					dynStats("lus", 2+player.sens/10);
-					if(player.fertility > 5) player.fertility -= (1 + Math.round(player.fertility * 1/4));
+					if(player.fertility > 5) player.fertility -= (1 + Math.round(player.fertility/4));
 					//Lower chances
 					player.addStatusValue("worm plugged",1,-1);
 					//Remove if too low
@@ -1842,10 +1842,10 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 				flags[kFLAGS.KAIJU_BAD_END_COUNTER]--;
 				if(flags[kFLAGS.KAIJU_BAD_END_COUNTER] < 0) flags[kFLAGS.KAIJU_BAD_END_COUNTER] = 0;
 			}
-			if(antsScene.phyllaWaifu() && flags[kFLAGS.PHYLLA_EGG_LAYING] > 0) flags[kFLAGS.DAYS_PHYLLA_HAS_SPENT_BIRTHING]++;
+			if(desert.antsScene.phyllaWaifu() && flags[kFLAGS.PHYLLA_EGG_LAYING] > 0) flags[kFLAGS.DAYS_PHYLLA_HAS_SPENT_BIRTHING]++;
 			if(flags[kFLAGS.MIDAS_JERKED] > 0) flags[kFLAGS.MIDAS_JERKED] = 0;
 			if(flags[kFLAGS.PHYLLA_GEMS_HUNTED_TODAY] > 0) flags[kFLAGS.PHYLLA_GEMS_HUNTED_TODAY] = 0;
-			if(antsScene.phyllaWaifu()) flags[kFLAGS.DAYS_PHYLLA_IN_CAMP]++;
+			if(desert.antsScene.phyllaWaifu()) flags[kFLAGS.DAYS_PHYLLA_IN_CAMP]++;
 			if(flags[kFLAGS.SHEILA_CLOCK] < 0) flags[kFLAGS.SHEILA_CLOCK]++;
 			if(flags[kFLAGS.SHEILA_PREG] > 0) flags[kFLAGS.SHEILA_PREG]++;
 			if(flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] == 0) flags[kFLAGS.URTA_CUM_NO_CUM_DAYS]++;

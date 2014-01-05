@@ -512,7 +512,7 @@
 				text1 = "Sex";
 				choice1 = 11103;
 				text5 = "Valeria";
-				choice5 = valeria
+				choice5 = valeria;
 				text3 = "Go Upstairs";
 				choice3 = 11088;
 				text8 = "Go Downstairs";

@@ -1,5 +1,6 @@
-package classes.Scenes.Areas.Lake.Boat
+package classes.Scenes.NPCs
 {
+	import classes.Scenes.Places.Boat.*;
 	import classes.CoC;
 	import classes.Cock;
 	import classes.Monster;

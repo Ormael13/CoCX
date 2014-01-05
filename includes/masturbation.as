@@ -457,7 +457,7 @@ public function masturbateJojo():void {
 	outputText("", true);
 	dynStats("lus=", 0, "cor", .5);
 	if(player.totalCocks() > 0 && player.hasPerk("Whispered") >= 0 && rand(4) == 0) {
-		akbalScene.whisperJojobait();
+		forest.akbalScene.whisperJojobait();
 		return;
 	}
 	var storage:Number = 0;

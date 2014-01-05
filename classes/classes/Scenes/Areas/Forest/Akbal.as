@@ -81,12 +81,12 @@
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.akbalScene.akbalDefeated(hpVictory);
+			game.forest.akbalScene.akbalDefeated(hpVictory);
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.akbalScene.akbalWon(hpVictory,pcCameWorms);
+			game.forest.akbalScene.akbalWon(hpVictory,pcCameWorms);
 			game.cleanupAfterCombat();
 		}
 		

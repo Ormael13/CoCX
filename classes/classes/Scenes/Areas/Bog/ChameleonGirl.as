@@ -82,7 +82,7 @@ package classes.Scenes.Areas.Bog
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.chameleonGirlScene.defeatChameleonGirl();
+			game.bog.chameleonGirlScene.defeatChameleonGirl();
 		}
 
 
@@ -92,7 +92,7 @@ package classes.Scenes.Areas.Bog
 				outputText("\n\nThe chameleon girl recoils.  \"<i>Ew, gross!</i>\" she screetches as she runs away, leaving you to recover from your defeat alone.");
 				game.cleanupAfterCombat();
 			} else {
-				game.chameleonGirlScene.loseToChameleonGirl();
+				game.bog.chameleonGirlScene.loseToChameleonGirl();
 			}
 		}
 

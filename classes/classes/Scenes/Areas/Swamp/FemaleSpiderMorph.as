@@ -12,7 +12,7 @@ package classes.Scenes.Areas.Swamp
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.femaleSpiderMorphScene.defeatASpiderBitch();
+			game.swamp.femaleSpiderMorphScene.defeatASpiderBitch();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -21,7 +21,7 @@ package classes.Scenes.Areas.Swamp
 				outputText("\n\nThe spider flashes a predatory grin while she waits it out...");
 				doNext(game.endLustLoss);
 			} else {
-				game.femaleSpiderMorphScene.loseToFemaleSpiderMorph();
+				game.swamp.femaleSpiderMorphScene.loseToFemaleSpiderMorph();
 			}
 		}
 

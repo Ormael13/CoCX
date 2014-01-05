@@ -131,7 +131,7 @@ package classes.Scenes.Areas.Swamp
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.corruptedDriderScene.defeatDriderIntro();
+			game.swamp.corruptedDriderScene.defeatDriderIntro();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -140,7 +140,7 @@ package classes.Scenes.Areas.Swamp
 				outputText("\n\nThe drider licks her lips in anticipation...");
 				doNext(game.endLustLoss);
 			} else {
-				game.corruptedDriderScene.loseToDrider();
+				game.swamp.corruptedDriderScene.loseToDrider();
 			}
 		}
 

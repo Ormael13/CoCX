@@ -30,14 +30,14 @@ public function maxHP():Number {
 }
 
 public function silly():Boolean {
-	if(flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] == 1) return true;
-	return false
+	return flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] == 1;
+
 }
 
 public function clearList():void {
-	list = new Array();
+	list = [];
 }
-public var list:Array = new Array();
+public var list:Array = [];
 public function addToList(arg:*):void {
 	list[list.length] = arg;
 }
@@ -55,7 +55,7 @@ public function outputList():String {
 			stuff += ", and ";
 		}
 	}
-	list = new Array();
+	list = [];
 	return stuff;        
 }
 
@@ -255,7 +255,7 @@ public function perkLongDescription(perkName:String = ""):String {
 		case "Tank":
 			return "You choose the 'Tank' perk, giving you an additional 50 hp!";
 		case "Strong Back 2: Strong Harder":
-			return "You choose the 'Strong Back 2: Strong Harder' perk, enabling a fifth item slot."
+			return "You choose the 'Strong Back 2: Strong Harder' perk, enabling a fifth item slot.";
 		case "Strong Back":
 			return "You choose the 'Strong Back' perk, enabling a fourth item slot.";
 		case "Tactician":
@@ -277,13 +277,11 @@ public function perkLongDescription(perkName:String = ""):String {
 		default:
 			return "An error occurred when loading the long perk description.  Please post a bug report on the bug report forums at forum.fenoxo.com.";
 	}
-	return "broken.";
 }
 public function perkDescription(perkName:String = ""):String {
 	switch(perkName) {
 		case "History: Whore":
 			return "Seductive experience causes your tease attacks to be 15% more effective.";
-			break;
 		case "History: Slut":
 			return "Sexual experience has made you more able to handle large insertions and more resistant to stretching.";
 		case "Pure and Loving":
@@ -292,267 +290,180 @@ public function perkDescription(perkName:String = ""):String {
 			return "Your sensual attitude towards love and romance makes your tease ability slightly more effective.";
 		case "One Track Mind":
 			return "Your constant desire for sex causes your sexual organs to be able to take larger insertions and disgorge greater amounts of fluid.";
-			break;
 		case "Brawler":
 			return "Brawling experience allows you to make two unarmed attacks in a turn.";
-			break;
 		case "Corrupted Nine-tails":
 			return "The mystical energy of the nine-tails surges through you, filling you with phenomenal cosmic power!  Your boundless magic allows you to recover quickly after casting spells, but your method of attaining it has corrupted the transformation, preventing you from achieving true enlightenment.";
-			break;
 		case "Enlightened Nine-tails":
 			return "The mystical energy of the nine-tails surges through you, filling you with phenomenal cosmic power!  Your boundless magic allows you to recover quickly after casting spells.";
-			break;
 		case "History: Alchemist":
 			return "Alchemical experience makes items more reactive to your body.";
-			break;
 		case "History: Fighter":
 			return "Past full of conflict increases physical damage dealt by 10%.";
-			break;
 		case "History: Healer":
 			return "Healing experience increases HP gains by 20%.";
-			break;
 		case "History: Religious":
 			return "Replaces masturbate with meditate when corruption less than or equal to 66.";
-			break;
 		case "History: Scholar":
 			return "Time spent focusing your mind makes spellcasting 20% less fatiguing.";
-			break;
 		case "History: Smith":
 			return "Knowledge of armor and fitting increases armor effectiveness by roughly 10%.";
-			break;
 		case "History: Slacker":
 			return "Regenerate fatigue 20% faster.";
-			break;
 		case "Slime Core":
 			return "Grants more control over your slimy body, allowing you to go twice as long without fluids.";
-			break;
 		case "Flexibility":
 			return "Grants cat-like flexibility.  Useful for dodging and 'fun'.";
-			break;
 		case "Thick Skin":
 			return "Toughens your dermis to provide 2 points of armor.";
-			break;
 		case "Bunny Eggs":
 			return "Laying eggs has become a normal part of your bunny-body's routine.";
-			break;
 		case "Basilisk Womb":
 			return "Enables your eggs to be properly fertilized into basilisks of both genders!";
-			break;
 		case "Oviposition":
 			return "Causes you to regularly lay eggs when not otherwise pregnant.";
-			break;
 		case "Dragonfire":
 			return "Allows access to a dragon breath attack.";
-			break;
 		case "Futa Form":
 			return "Ensures that your body fits the Futa look (Tits DD+, Dick 8\"+, & Pussy).  Also keeps your lusts burning bright and improves the tease skill.";
-			break;
 		case "Futa Faculties":
-			return "It's super hard to think about stuff that like, isn't working out or fucking!"
-			break;
+			return "It's super hard to think about stuff that like, isn't working out or fucking!";
 		case "Bulge Armor":
 			return "Grants a 5 point damage bonus to dick-based tease attacks.";
-			break;
 		case "Slutty Seduction":
 			return "Increases odds of successfully teasing and lust damage of successful teases by " + player.perkv1("Slutty Seduction") + " points.";
-			break;
 		case "Blood Mage":
 			return "Spellcasting now consumes health instead of fatigue!";
-			break;
 		case "Purity Blessing":
 			return "Reduces the rate at which your corruption, libido, and lust increase.";
-			break;
 		case "Wizard's Endurance":
 			return "Reduces fatigue cost of spells by " + player.perkv1("Wizard's Endurance") + "%.";
-			break;
 		case "Wizard's Focus":
 			return "Increases your spell effect modifier by " + player.perkv1("Wizard's Focus") * 100 + "%.";
-			break;
 		case "Strong":
 			return "Gains strength 25% faster.";
-			break;
 		case "Tough":
 			return "Gains toughness 25% faster.";
-			break;
 		case "Fast":
 			return "Gains speed 25% faster.";
-			break;
 		case "Smart":
 			return "Gains intelligence 25% faster.";
-			break;
 		case "Lusty":
 			return "Gains lust 25% faster.";
-			break;
 		case "Sensitive":
 			return "Gains sensitivity 25% faster.";
-			break;
 		case "Big Cock":
 			return "Gains cock size 25% faster and with less limitations.";
-			break;
 		case "Messy Orgasms":
 			return "Produces 50% more cum volume.";
-			break;
 		case "Big Tits":
 			return "Makes your tits grow larger more easily.";
-			break;
 		case "Big Clit":
 			return "Allows your clit to grow larger more easily and faster.";
-			break;
 		case "Fertile":
 			return "Makes you 15% more likely to become pregnant.";
-			break;
 		case "Wet Pussy":
 			return "Keeps your pussy wet and provides a bonus to capacity.";
-			break;
 		case "Marble Resistant":
 			return "Provides resistance to the addictive effects of bottled LaBova milk.";
-			break;
 		case "Marble's Milk":
 			return "Requires you to drink LaBova milk frequently or eventually die.  You cannot shake this addiction.";
-			break;
 		case "Minotaur Cum Addict":
 			return "Causes you to crave minotaur cum frequently.  You cannot shake this addiction.";
-			break;
 		case "Misdirection":
 			return "Grants additional evasion chances while wearing Raphael's red bodysuit.";
-			break;
 		case "Omnibus' Gift":
 			return "Increases minimum lust but provides some lust resistance.";
-			break;
 		case "Pierced: Crimstone":
 			return "Increases minimum lust by " + Math.round(player.perkv1("Pierced: Crimstone")) + ".";
 		case "Pent Up":
 			return "Increases minimum lust by " + Math.round(player.perkv1("Pent Up")) + " and makes you more vulnerable to seduction.";
-			break;
 		case "Midas Cock":
 			return "Increases the gems awarded from victory in battle.";
-			break;
 		case "Phallic Potential":
 			return "Increases the effects of penis-enlarging transformations.";
-			break;
 		case "Phallic Restraint":
 			return "Reduces the effects of penis-enlarging transformations.";
-			break;
 		case "Lusty Regeneration":
 			return "Regenerates 1% of HP per round in combat and 2% of HP per hour.";
-			break;
 		case "Pierced: Fertite":
 			return "Increases cum production by " + Math.round(2*player.perkv1("Pierced: Fertite")) + "% and fertility by " + Math.round(player.perkv1("Pierced: Fertite")) + ".";
-			break;
 		case "Pierced: Furrite":
 			return "Increases chances of encountering 'furry' foes.";
-			break;
 		case "Pierced: Lethite":
 			return "Increases chances of encountering demonic foes.";
-			break;
 		case "Harpy Womb":
 			return "Increases all laid eggs to large size so long as you have harpy legs and a harpy tail.";
-			break;
 		case "Hellfire":
 			return "Grants a corrupted fire breath attack, like the hellhounds in the mountains.";
-			break;
 		case "Incorporeality":
 			return "Allows you to fade into a ghost-like state and temporarily possess others.";
-			break;
 		case "Luststick Adapted":
 			return "Grants immunity to the lust-increasing effects of lust-stick and allows its use.";
-			break;
 		case "Pilgrim's Bounty":
 			return "Causes you to always cum as hard as if you had max lust.";
-			break;
 		case "Cornucopia":
 			return "Vaginal and Anal capacities increased by 30.";
-			break;
 		case "Spider Ovipositor":
 			return "Allows you to lay eggs through a special organ on your arachnid abdomen, though you need at least 10 eggs to lay.";
-			break;
 		case "Bee Ovipositor":
 			return "Allows you to lay eggs through a special organ on your insect abdomen, though you need at least 10 eggs to lay.";
-			break;
 		case "Fera's Boon - Alpha":
 			return "Increases the rate your cum builds up and cum production in general.";
-			break;
 		case "Fera's Boon - Breeding Bitch":
 			return "Increases fertility and reduces the time it takes to birth young.";
-			break;
 		case "Marae's Gift - Stud":
 			return "Increases your cum production and potency greatly.";
-			break;
 		case "Marae's Gift - Fertility":
 			return "Greatly increases fertility and halves base pregnancy speed.";
-			break;
 		case "Marae's Gift - Profractory":
 			return "Causes your cum to build up at 3x the normal rate.";
-			break;
 		case "Marae's Gift - Buttslut":
 			return "Makes your anus provide lubrication when aroused.";
-			break;
 		case "Feeder":
 			return "Lactation does not decrease and gives a compulsion to breastfeed others.";
-			break;
 		case "Fire Lord":
 			return "Akbal's blessings grant the ability to breathe burning green flames.";
-			break;
 		case "Whispered":
 			return "Akbal's blessings grant limited telepathy that can induce fear.";
-			break;
 		case "Bro Brains":
 			return "Makes thou... thin... fuck, that shit's for nerds.";
-			break;
 		case "Bro Body":
 			return "Grants an ubermasculine body that's sure to impress.";
-			break;
 		case "Bimbo Body":
 			return "Gives the body of a bimbo.  Tits will never stay below a 'DD' cup, libido is raised, lust resistance is raised, and upgrades tease.";
-			break;
 		case "Bimbo Brains":
 			return "Now that you've drank bimbo liquer, you'll never, like, have the attention span and intelligence you once did!  But it's okay, 'cause you get to be so horny an' stuff!";
-			break;
 		case "Brood Mother":
 			return "Pregnancy moves twice as fast as a normal woman's.";
-			break;
 		case "Diapause":
 			return "Pregnancy does not advance normally, but develops quickly after taking in fluids.";
-			break;
 		case "Elven Bounty":
 			return "Increases fertility by " + player.perkv2("Elven Bounty") + "% and cum production by " + player.perkv1("Elven Bounty") + "mLs.";
-			break;
 		case "Androgyny":
 			return "No gender limits on facial masculinity or femininity.";
-			break;
 		case "Pretend Strength Perk":
 			return "Pretend I am telling you about how this works.";
-			break;
 		case "Resistance":
 			return "Reduces lust gain by 10%.";
-			break;
 		case "Arousing Aura":
 			return "Exude a lust-inducing aura (Req's corruption of 70 or more)";
-			break;
 		case "Sadist":
 			return "Deal 20% more damage, but gain lust at the same time.";
-			break;
 		case "Masochist":
 			return "Take 30% less physical damage but gain lust when damage.";
-			break;
 		case "Well Adjusted":
 			return "You gain half as much lust as time passes in Mareth.";
-			break;
 		case "Medicine":
 			return "Grants 15% chance per round of cleansing poisons/drugs from your body.";
-			break;
 		case "Channeling":
 			return "Increases base spell strength by 50%.";
-			break;
 		case "Agility":
 			return "Boosts armor points by a portion of your speed on light/medium armors.";
-			break;
 		case "Speedy Recovery":
 			return "Regain fatigue 50% faster.";
-			break;
 		case "Regeneration 2":
 			return "Gain 2% of max HP per round of combat and 4% of max HP per hour out of combat.";
-			break;
 		case "Fera's Boon - Seeder":
 			return "Increases cum output by 1,000 mLs.";
 		case "Fera's Boon - Wide Open":
@@ -561,107 +472,77 @@ public function perkDescription(perkName:String = ""):String {
 			return "Keeps your pussy from ever getting too loose and increases pregnancy speed.";
 		case "Spellcasting Affinity":
 			return "Reduces spell costs by " + player.perkv1("Spellcasting Affinity") + "%.";
-			break;
 		case "Tank 2":
 			return "+1 extra HP per point of toughness.";
-			break;
 		case "Weapon Mastery":
 			if(player.str > 60) return "Doubles damage bonus of weapons classified as 'Large'.";
 			else return "<b>You aren't strong enough to benefit from this anymore.</b>";
-			break;
 		case "Thunderous Strikes":
 			return "+20% 'Attack' damage while strength is at or above 80.";
-			break;
 		case "Acclimation":
 			return "Reduces lust gain by 15%.";
-			break;
 		case "Double Attack":
 			if(player.spe < 50) return "<b>You're too slow to double attack!</b>";
 			else if(player.str < 61) return "Allows you to perform two melee attacks per round.";
 			else return "<b>You are stronger than double attack allows.  Too choose between reduced strength double-attacks and a single strong attack, access \"Dbl Options\" in the perks menu.</b>";
-			break;
 		case "Mage":
 			return "Increases base spell strength by 50%.";
-			break;
 		case "Spellpower":
 			return "Increases base spell strength by 50%.";
-			break;
 		case "Nymphomania":
 			return "Raises minimum lust by up to 30.";
-			break;
 		case "Precision":
 			return "Reduces enemy armor by 10. (Req's 25+ Intelligence)";
-			break;
 		case "Seduction":
 			return "Upgrades your tease attack, making it more effective.";
-			break;
 		case "Corrupted Libido":
 			return "Reduces lust gain by 10%.";
-			break;
 		case "Hot Blooded":
 			return "Raises minimum lust by up to 20.";
-			break;
 		case "Fertility+":
 			return "Increases fertility rating by 15 and cum volume by up to 50%.";
-			break;
 		case "Magical Fertility":
 			return "10% higher chance of pregnancy and increased pregnancy speed.";
-			break;
 		case "Magical Virility":
 			return "200 mLs more cum per orgasm and enhanced virility.";
-			break;
 		case "Runner":
 			return "Increases chances of escaping combat.";
-			break;
 		case "Evade":
 			return "Increases chances of evading enemy attacks.";
-			break;
 		case "Regeneration":
 			return "Regenerates 2% of max HP/hour and 1% of max HP/round.";
-			break;
 		case "Iron Man":
 			return "Reduces the fatigue cost of physical specials by 50%.";
 		case "Tank":
 			return "Raises max HP by 50.";
-			break;
 		case "Strong Back 2: Strong Harder":
-			return "Enables fifth item slot."
-			break;
+			return "Enables fifth item slot.";
 		case "Strong Back":
 			return "Enables fourth item slot.";
-			break;
 		case "Tactician":
 			if(player.inte >= 50) return "Increases critical hit chance by up to 10% (Intelligence-based).";
 			else return "<b>You are too dumb to gain benefit from this perk.</b>";
-			break;
 		case "Archmage":
 			if(player.inte >= 75) return "Increases base spell strength by 50%.";
 			else return "<b>You are too dumb to gain benefit from this perk.</b>";
-			break;
 		case "Lunging Attacks":
 			if(player.spe >= 75) return "Grants 50% armor penetration for standard attacks.";
 			else return "<b>You are too slow to benefit from this perk.</b>";
-			break;
 		case "Lightning Strikes":
 			if(player.spe >= 60) return "Increases the attack damage for non-heavy weapons.</b>";
 			else return "<b>You are too slow to benefit from this perk.</b>";
-			break;
 		case "Immovable Object":
 			if(player.tou >= 75) return "Grants 20% physical damage reduction.</b>";
 			else return "<b>You aren't tough enough to benefit from this anymore.</b>";
-			break;
 		case "Resolute":
 			if(player.tou >= 75) return "Grants immunity to stuns and some statuses.</b>";
 			else return "<b>You aren't tough enough to benefit from this anymore.</b>";
-			break;
 		case "Berzerker":
 			if(player.str >= 75) return "Grants 'Berzerk' ability.";
 			else return "<b>You aren't strong enough to benefit from this anymore.</b>";
-			break;
 		case "Brutal Blows":
 			if(player.str >= 75) return "Reduces enemy armor with each hit.";
 			else return "<b>You aren't strong enough to benefit from this anymore.</b>";
-			break;
 		default:
 			var checkChildren:String;
 			
@@ -678,7 +559,6 @@ public function perkDescription(perkName:String = ""):String {
 			
 			break;
 	}
-	return "broken.";
 }
 public function displayPerks(e:MouseEvent = null):void {
 	temp = 0;
@@ -725,7 +605,7 @@ public function doubleAttackOptions():void {
 		addButton(0,"All Double",doubleAttackForce);
 		addButton(1,"Dynamic",doubleAttackDynamic);
 	}
-	var e:MouseEvent
+	var e:MouseEvent;
 	addButton(4,"Back",displayPerks,e);
 }
 
@@ -1901,14 +1781,12 @@ public function getButtonToolTipText( buttonText :String ) :String
 
 
 // Hah, finally a place where a dictionary is actually required!
-import classes.Character;
 import flash.utils.Dictionary;
 private var funcLookups:Dictionary = null;
 
 
 private function buildFuncLookupDict(object:*=null,prefix:String=""):void
 {
-	import flash.sampler.*;
 	import flash.utils.*;
 	trace("Building function <-> function name mapping table for "+((object==null)?"CoC.":prefix));
 	// get all methods contained

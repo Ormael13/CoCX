@@ -112,7 +112,6 @@ public function doEvent(eventNo:Number):void
 				outputText("turns crimson", false);
 			outputText(" as you yank your " + player.armorName + " back into place.  You're in charge here, not some possessed appendage!   Exgartuan yells something snide, but it's muffled too much to understand.  You look up in time to sidestep an attack from the Sand Witch.  It looks like you'll have to fight her!", false);
 			startCombat(new SandWitch());
-			return;
 		}
 		else
 			doYesNo(2006, 2007);
@@ -745,7 +744,6 @@ public function doEvent(eventNo:Number):void
 					doYesNo(2081, 2015);
 				}
 				player.createStatusAffect("WormOffer", 0, 0, 0, 0);
-				return;
 			}
 			else
 			{
@@ -1474,10 +1472,6 @@ public function doEvent(eventNo:Number):void
 		outputText("You turn and run for the boat, leaving the corrupt goddess behind.  High pitched laugher seems to chase you as you row away from the island.", true);
 		doNext(13);
 	}
-	else if (eventNo == 2079)
-	{
-		exploration.boatExplore();
-	}
 	else if (eventNo == 2080)
 	{
 		startCombat(new TentacleBeast());
@@ -1839,7 +1833,6 @@ public function doEvent(eventNo:Number):void
 			outputText("As you approach the serene monk, you see his nose twitch.\n\n", false);
 			outputText("\"<i>It seems that the agents of corruption have taken residence within the temple that is your body,</i>\" Jojo says flatly, \"<i>This is a most unfortunate development. There is no reason to despair as there are always ways to fight the corruption. However, great effort will be needed to combat this form of corruption and may have a lasting impact upon you. If you are ready, we can purge your being of the rogue creatures of lust.</i>\"\n\n", false);
 			simpleChoices("Meditate", 2151, jojoDefense, 2152, "Purge", 2083, "Rape", jojoRapeFuncNum, "Leave", 74);
-			return;
 		}
 		//normal menu
 		else
@@ -2458,18 +2451,6 @@ public function doEvent(eventNo:Number):void
 	{
 		spriteSelect(52);
 		incubusTransact();
-	}
-	else if (eventNo == 2649)
-	{
-		bunbunFucksYourVag();
-	}
-	else if (eventNo == 2651)
-	{
-		bunbunGetsFucked();
-	}
-	else if (eventNo == 2652)
-	{
-		bunbun69();
 	}
 	else if (eventNo == 2653)
 	{
@@ -4036,9 +4017,9 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 3951)
 	{
 		if (!player.canOvipositBee() || rand(2) == 0)
-			ovipositBunnyEaster();
+			plains.bunnyGirl.ovipositBunnyEaster();
 		else
-			layEggsInBunbuns();
+			plains.bunnyGirl.layEggsInBunbuns();
 	}
 	else if (eventNo == 3952)
 	{

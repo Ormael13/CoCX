@@ -14,6 +14,7 @@
 	import classes.Creature;
 	import classes.ItemSlotClass;
 	import classes.PerkClass;
+	import classes.Scenes.Areas.Plains;
 	import classes.Scenes.Dungeons.HelDungeon.BrigidScene;
 	import classes.Scenes.Places.Bazaar;
 	import classes.Scenes.Places.TelAdre;
@@ -25,26 +26,30 @@
 	import classes.Parser.Main.Parser; 	// import getting long enough yet?
 
 	import classes.Scenes.*;
+	import classes.Scenes.Areas.*;
 	import classes.Scenes.Areas.Bog.*
-	import classes.Scenes.Areas.Desert.*;
-	import classes.Scenes.Areas.Forest.*;
-	import classes.Scenes.Areas.HighMountains.*;
-	import classes.Scenes.Areas.Lake.*;
-	import classes.Scenes.Areas.Lake.Boat.*;
-	import classes.Scenes.Areas.Mountain.*;
-	import classes.Scenes.Areas.HighMountains.*;
-	import classes.Scenes.Areas.Plains.*;
-	import classes.Scenes.Areas.Swamp.*;
+	import classes.Scenes.Areas.Desert.*
+	import classes.Scenes.Areas.Forest.*
+	import classes.Scenes.Areas.HighMountains.*
+	import classes.Scenes.Areas.Lake.*
+	import classes.Scenes.Areas.Mountain.*
+	import classes.Scenes.Areas.Plains.*
+	import classes.Scenes.Areas.Swamp.*
 	import classes.Scenes.Camp.*;
+	import classes.Scenes.Dungeons.*;
 	import classes.Scenes.Dungeons.DeepCave.*;
-	import classes.Scenes.Dungeons.DesetCave.*;
+	import classes.Scenes.Dungeons.DesertCave.*;
 	import classes.Scenes.Dungeons.Factory.*;
 	import classes.Scenes.Dungeons.HelDungeon.*;
 	import classes.Scenes.Monsters.*;
 	import classes.Scenes.NPCs.*;
+	import classes.Scenes.Places.*;
+	import classes.Scenes.Places.Bazaar.*;
+	import classes.Scenes.Places.Boat.*;
 	import classes.Scenes.Places.Farm.*;
 	import classes.Scenes.Places.Owca.*;
 	import classes.Scenes.Places.TelAdre.*;
+	import classes.Scenes.Quests.*;
 	import classes.Scenes.Quests.UrtaQuest.*;
 	import coc.view.MainView;
 
@@ -112,38 +117,31 @@
 
 		// Scenes/
 		public var exploration:Exploration = new Exploration();
-		// Scenes/Areas/Bog/
-		public var frogGirlScene:FrogGirlScene = new FrogGirlScene();
-		public var chameleonGirlScene:ChameleonGirlScene = new ChameleonGirlScene();
+		// Scenes/Areas/
+		public var bog:Bog = new Bog();
+		public var desert:Desert = new Desert();
+		public var forest:Forest = new Forest();
+		public var highMountains:HighMountains = new HighMountains();
+		public var lake:Lake = new Lake();
+		public var mountain:Mountain = new Mountain();
+		public var plains:Plains = new Plains();
+		public var swamp:Swamp = new Swamp();
+		// Scenes/NPC/
+		public var anemoneScene:AnemoneScene = new AnemoneScene();
 		// Scenes/Places/
 		public var bazaar:Bazaar = new Bazaar();
+		public var boat:Boat = new Boat();
 		public var telAdre:TelAdre = new TelAdre();
 
 		// Named NPC Scenes (excluding dungeon bosses)
-		public var akbalScene:AkbalScene = new AkbalScene();
 		public var amilyScene:AmilyScene = new AmilyScene();
 		public var arianScene:ArianScene = new ArianScene();
 		public var ceraphScene:CeraphScene = new CeraphScene();
 		public var ceraphFollowerScene:CeraphFollowerScene = new CeraphFollowerScene();
 		public var emberScene:EmberScene = new EmberScene();
 		// Nameless monster scenes
-		public var anemoneScene:AnemoneScene = new AnemoneScene();
-		public var basiliskScene:BasiliskScene = new BasiliskScene();
-		public var beeGirlScene:BeeGirlScene = new BeeGirlScene();
-		public var corruptedDriderScene:CorruptedDriderScene = new CorruptedDriderScene();
-		public var femaleSpiderMorphScene:FemaleSpiderMorphScene = new FemaleSpiderMorphScene();
-		public var fetishCultistScene:FetishCultistScene = new FetishCultistScene();
-		public var fetishZealotScene:FetishZealotScene = new FetishZealotScene();
-		public var gnollScene:GnollScene = new GnollScene();
-		public var gnollSpearThrowerScene:GnollSpearThrowerScene = new GnollSpearThrowerScene();
 		public var goblinScene:GoblinScene = new GoblinScene();
-		public var gooGirlScene:GooGirlScene = new GooGirlScene();
-		public var harpyScene:HarpyScene = new HarpyScene();
-		public var hellHoundScene:HellHoundScene = new HellHoundScene();
 		public var impScene:ImpScene = new ImpScene();
-		public var infestedHellhoundScene:InfestedHellhoundScene = new InfestedHellhoundScene();
-		public var kitsuneScene:KitsuneScene = new KitsuneScene();
-		public var maleSpiderMorphScene:MaleSpiderMorphScene = new MaleSpiderMorphScene();
 		// Factory scenes
 		// Desert cave scenes
 		// Zetaz lair scenes
@@ -155,11 +153,9 @@
 		// Other scenes
 		[Scene]
 		public var testContent:TestContent = new TestContent();
-		public var antsScene:AntsScene = new AntsScene();
 
 		include "../../includes/april_fools.as";
 
-		include "../../includes/bunbun.as";
 		include "../../includes/camp.as";
 		include "../../includes/cinnabar.as";
 		include "../../includes/cotton.as";
@@ -321,6 +317,12 @@
 		public var testingBlockExiting:Boolean;
 
 		public var kFLAGS_REF:*;
+
+		// holidayz
+		public function isEaster():Boolean
+		{
+			return plains.bunnyGirl.isItEaster();
+		}
 
 		public function CoC()
 		{
@@ -520,8 +522,8 @@
 
 			itemSlots = [itemSlot1, itemSlot2, itemSlot3, itemSlot4, itemSlot5];
 
-			itemStorage = new Array();
-			gearStorage = new Array();
+			itemStorage = [];
+			gearStorage = [];
 			shortName = "";
 			//}endregion
 
@@ -541,8 +543,8 @@
 			temp = 0;
 
 			//Used to set what each action buttons displays and does.
-			args = new Array();
-			funcs = new Array();
+			args = [];
+			funcs = [];
 
 			//Used for stat tracking to keep up/down arrows correct.
 			oldStats = {};
@@ -596,11 +598,7 @@
 
 		public function run():void
 		{
-
-		
 			mainMenu();
-
-
 			this.stop();
 		}
 	}

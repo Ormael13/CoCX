@@ -73,7 +73,7 @@
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.fetishZealotScene.zealotDefeated();
+			game.lake.fetishZealotScene.zealotDefeated();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -81,9 +81,9 @@
 			if (pcCameWorms){
 				outputText("\n\nThe fetish cultist ignores the perverse display and continues on as if nothing had happened...", false);
 				game.dynStats("lus=", 0);
-				doNext(game.fetishZealotScene.zealotLossRape);
+				doNext(game.lake.fetishZealotScene.zealotLossRape);
 			} else {
-				game.fetishZealotScene.zealotLossRape();
+				game.lake.fetishZealotScene.zealotLossRape();
 			}
 		}
 

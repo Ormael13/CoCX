@@ -116,14 +116,14 @@ package classes.Scenes.Areas.Lake
 			//1/3 chance of base attack + bonus if in acid mode
 			if ((hasPerk("Acid") >= 0 && rand(3) == 0) || rand(3) == 0)
 				gooGalAttack();
-			else if (rand(5) == 0) gooEngulph()
+			else if (rand(5) == 0) gooEngulph();
 			else if (rand(3) == 0) gooPlay();
 			else gooThrow();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.gooGirlScene.beatUpGoo();
+			game.lake.gooGirlScene.beatUpGoo();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -132,7 +132,7 @@ package classes.Scenes.Areas.Lake
 				outputText("\n\nThe goo-girl seems confused but doesn't mind.");
 				doNext(game.endLustLoss);
 			} else {
-				game.gooGirlScene.getBeatByGooGirl();
+				game.lake.gooGirlScene.getBeatByGooGirl();
 			}
 		}
 

@@ -72,7 +72,7 @@
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.harpyScene.harpyVictoryuuuuu();
+			game.highMountains.harpyScene.harpyVictoryuuuuu();
 		}
 
 
@@ -82,7 +82,7 @@
 				outputText("\n\nYour foe doesn't seem disgusted enough to leave...");
 				doNext(game.endLustLoss);
 			} else {
-				game.harpyScene.harpyLossU();
+				game.highMountains.harpyScene.harpyLossU();
 			}
 		}
 

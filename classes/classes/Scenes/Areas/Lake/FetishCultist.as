@@ -58,7 +58,7 @@
 		override public function defeated(hpVictory:Boolean):void
 		{
 			var temp2:Function =null;
-			if(player.hasStatusAffect("Feeder") >= 0) temp2 = game.fetishCultistScene.fetishCultistHasAMilkFetish;
+			if(player.hasStatusAffect("Feeder") >= 0) temp2 = game.lake.fetishCultistScene.fetishCultistHasAMilkFetish;
 			if (hpVictory) {
 				outputText("Hurt too much to continue controlling her powers, the cultist collapses helplessly.", true);
 			} else {
@@ -66,7 +66,7 @@
 			}
 			if(player.lust >= 33 && player.gender > 0) {
 				outputText("  You realize she'd make a perfect receptacle for your lusts.  Do you have your way with her?", false);
-				game.simpleChoices("Sex",game.fetishCultistScene.playerRapesCultist,"",0,"",0,"B. Feed",temp2,"Leave",game.cleanupAfterCombat);
+				game.simpleChoices("Sex",game.lake.fetishCultistScene.playerRapesCultist,"",0,"",0,"B. Feed",temp2,"Leave",game.cleanupAfterCombat);
 			}
 			else {
 				if(temp2!=null) {
@@ -85,7 +85,7 @@
 				if (pcCameWorms){
 					outputText("\n\nThe cultist giggles as she watches you struggling.\n\n", false);
 				}
-				game.fetishCultistScene.cultistRapesYou();
+				game.lake.fetishCultistScene.cultistRapesYou();
 			}
 		}
 

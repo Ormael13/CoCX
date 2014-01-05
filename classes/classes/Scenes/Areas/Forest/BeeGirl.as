@@ -29,9 +29,9 @@
 				game.dynStats("lus", 1);
 				var temp2:Function =null;
 				var temp3:Function =null;
-				if(player.hasStatusAffect("Feeder") >= 0) temp3 = game.beeGirlScene.milkAndHoneyAreKindaFunny;
+				if(player.hasStatusAffect("Feeder") >= 0) temp3 = game.forest.beeGirlScene.milkAndHoneyAreKindaFunny;
 				if(player.hasKeyItem("Deluxe Dildo") >= 0) temp2 = kGAMECLASS.beeGirlsGetsDildoed;
-				game.simpleChoices("Rape",game.beeGirlScene.rapeTheBeeGirl,"Dildo Rape",temp2,"",0,"B. Feed",temp3,"Leave",game.cleanupAfterCombat);
+				game.simpleChoices("Rape",game.forest.beeGirlScene.rapeTheBeeGirl,"Dildo Rape",temp2,"",0,"B. Feed",temp3,"Leave",game.cleanupAfterCombat);
 			}
 			//Genderless can still breastfeed
 			else if(player.hasStatusAffect("Feeder") >= 0) {
@@ -40,7 +40,7 @@
 				} else {
 					outputText("You smile in satisfaction as the " + short + " spreads her legs and starts frigging her honey-soaked cunt.  The sweet scent oozing from between her legs is too much to bear, arousing you painfully.\n\nWhat do you do?", true);
 				}
-				game.simpleChoices("B. Feed", game.beeGirlScene.milkAndHoneyAreKindaFunny,"",0,"",0,"",0,"Leave",game.cleanupAfterCombat);
+				game.simpleChoices("B. Feed", game.forest.beeGirlScene.milkAndHoneyAreKindaFunny,"",0,"",0,"",0,"Leave",game.cleanupAfterCombat);
 			} else {
                 game.finishCombat();
             }
@@ -52,7 +52,7 @@
 				outputText("\n\nThe bee-girl goes white and backs away with a disgusted look on her face.\n\n", false);
 				game.cleanupAfterCombat();
 			} else {
-				game.beeGirlScene.beeRapesYou();
+				game.forest.beeGirlScene.beeRapesYou();
 			}
 		}
 

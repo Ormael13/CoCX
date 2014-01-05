@@ -347,7 +347,7 @@ public function itemUse(shortName1:String):void {
 	else if(shortName1 == "DrgnEgg") eatEmberEgg();
 	else if(shortName1 == "BimboSk") equipArmor("bimbo skirt");
 	else if(shortName1 == "PeppWht") peppermintWhite();
-	else if(shortName1 == "GldStat") kitsuneScene.kitsuneStatue();
+	else if(shortName1 == "GldStat") forest.kitsuneScene.kitsuneStatue();
 	else if(shortName1 == "FoxJewl") foxJewel();
 	else if(shortName1 == "MystJwl") foxJewel(true);
 	else if(shortName1 == "KitGift") kitsunesGift();
@@ -947,7 +947,6 @@ public function equipWeapon(weaponName:String):void {
 			takeItem();
 		}
 	}
-	return;
 }
 public function lootWeaponName(oldWeaponName:String):String {
 	var wName:String = "";	
@@ -1512,7 +1511,6 @@ public function equipArmor(armorName:String, output:Boolean = true):void {
 	if(oldArmorName == "comfortable underclothes") {
 		itemGoNext();
 	}
-	return;
 }
 public function doItems(eventNo:Number):void {
 	var temp1:* = 0;
@@ -2167,7 +2165,7 @@ public function doItems(eventNo:Number):void {
 		else 
 			outputText("You hand over " + itemLongName(slotTmp.shortName) + " to Oswald.  He nervously pulls out " + num2Text(itemValueTemp) + " gems and drops them into your waiting hand.", true);
 		
-		slotTmp.removeOneItem()
+		slotTmp.removeOneItem();
 
 		doNext(telAdre.oswaldPawn);
 		player.gems += itemValueTemp;
@@ -2302,21 +2300,6 @@ public function doItems(eventNo:Number):void {
 	if(eventNo == 1116) {
 		retrieveFromRacks(8, true);
 	}	
-	if(eventNo == 1117) {
-		anemoneScene.placeInAnemone(1);
-	}
-	if(eventNo == 1118) {
-		anemoneScene.placeInAnemone(2);
-	}
-	if(eventNo == 1119) {
-		anemoneScene.placeInAnemone(3);
-	}
-	if(eventNo == 1120) {
-		anemoneScene.placeInAnemone(4);
-	}
-	if(eventNo == 1121) {
-		anemoneScene.placeInAnemone(5);
-	}
 	if(eventNo == 1122) {
 		outputText("You smear the foul-smelling paste onto your [hips].  It feels cool at first but rapidly warms to an uncomfortable level of heat.\n\n", true);
 		if(player.hipRating >= 15) {
