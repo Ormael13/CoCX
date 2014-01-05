@@ -17,7 +17,8 @@ import classes.GlobalFlags.kFLAGS;
 public function Bazaar(){
 }
 
-public var benoit:Benoit = new Benoit();
+		public var benoit:Benoit = new Benoit();
+		public var cinnabar:Cinnabar = new Cinnabar();
 
 //[Find Travelling Bazaar]
 public function findBazaar():void {
@@ -95,7 +96,7 @@ public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 	choices(benoitT,benoit,rat,cinnabarAppearance(),"GripingDemons",demon,lilium,LiliumText(false),"Niamh",niamh,roxanneT,roxanne,"S. Squeeze",theSlipperySqueeze,"Tent",tent,"",0,"Leave",13);*/
 	menu();
 	addButton(0,benoitT,eventParser,benoit_);
-	if(kGAMECLASS.cinnabarAppearance() > 0) addButton(1,rat,eventParser,kGAMECLASS.cinnabarAppearance(false));
+	addButton(1,rat,cinnabar.cinnabarAppearance(false));
 	addButton(2,"Greta's",gretasGarments);
 	addButton(3,"GripingDemons",demon);
 	if(kGAMECLASS.LiliumText(false) > 0) addButton(4,lilium,eventParser,kGAMECLASS.LiliumText(false));

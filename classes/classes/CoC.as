@@ -157,7 +157,6 @@
 
 		include "../../includes/april_fools.as";
 
-		include "../../includes/cinnabar.as";
 		include "../../includes/cotton.as";
 		include "../../includes/dreams.as";
 		include "../../includes/dungeon2Supplimental.as";

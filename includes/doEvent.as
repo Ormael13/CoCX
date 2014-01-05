@@ -2548,18 +2548,6 @@ public function doEvent(eventNo:Number):void
 		}
 		bazaar.enterTheBazaarAndMenu();
 	}
-	else if (eventNo == 2860)
-	{
-		cinnabarGreeting();
-	}
-	else if (eventNo == 2862)
-	{
-		cinnabarGetsFUKKKKED();
-	}
-	else if (eventNo == 2866)
-	{
-		cinnabarMultiCockPortalFuckFest();
-	}
 	else if (eventNo == 2876)
 	{
 		Roxanne1stApproach();

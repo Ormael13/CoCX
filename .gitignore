@@ -9,8 +9,9 @@ Corruption-of-Champions.as3proj
 /obj
 
 *.pyc
-dist/CorruptionofChampionsAIR.apk
+/dist
 .idea/workspace.xml
 .idea/copyright/profiles_settings.xml
 *.sol
 *.swc
+/out
