@@ -315,12 +315,12 @@ public function loadGame(slot:String):void
 	
 	// Check the property count of the file
 	var numProps:int = 0;
-	for (var prop in saveFile.data)
+	for (var prop:String in saveFile.data)
 	{
 		numProps++;
 	}
 	
-	var sfVer:int;
+	var sfVer:*;
 	if (saveFile.data.version == undefined)
 	{
 		sfVer = versionProperties["legacy"];
@@ -330,9 +330,11 @@ public function loadGame(slot:String):void
 		sfVer = versionProperties[saveFile.data.version];
 	}
 	
-	if (sfVer == undefined)
+	if (!(sfVer is Number))
 	{
 		sfVer = versionProperties["latest"];
+	} else {
+		sfVer = sfVer as Number;
 	}
 	
 	trace("File version expects propNum " + sfVer);
@@ -799,11 +801,11 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		
 		// Reload it
 		saveFile = SharedObject.getLocal(slot, "/");
-		var backup:SharedObject = SharedObject.getLocal(slot + "_backup", "/");
+		backup = SharedObject.getLocal(slot + "_backup", "/");
 		var numProps:int = 0;
 		
 		// Copy the properties over to a new file object
-		for (var prop in saveFile.data)
+		for (var prop:String in saveFile.data)
 		{
 			numProps++;
 			backup.data[prop] = saveFile.data[prop];
@@ -855,7 +857,7 @@ public function restore(slotName:String):void
 	var backupFile:SharedObject = SharedObject.getLocal(slotName + "_backup", "/");
 	var overwriteFile:SharedObject = SharedObject.getLocal(slotName, "/");
 	
-	for (var prop in backupFile.data)
+	for (var prop:String in backupFile.data)
 	{
 		overwriteFile.data[prop] = backupFile.data[prop];
 	}

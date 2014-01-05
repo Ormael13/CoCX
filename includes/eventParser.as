@@ -1877,7 +1877,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			//if(flags[kFLAGS.RUBI_ORGASM_DENIAL] > 0) flags[kFLAGS.RUBI_BLU_BALLS]++;
 			if(flags[kFLAGS.RUBI_PROSTITUTION] > 0) flags[kFLAGS.RUBI_PROFIT] += 2 + rand(4);
 			flags[kFLAGS.BENOIT_TALKED_TODAY] = 0;
-			updateBenoitInventory();
+			bazaar.benoit.updateBenoitInventory();
 			if(player.pregnancyIncubation <= 0) flags[kFLAGS.EMBER_BITCHES_ABOUT_PREGNANT_PC] = 0;
 			if(vapulaSlave()) {
 				if(flags[kFLAGS.VAPULA_HAREM_FUCK] == 0) flags[kFLAGS.VAPULA_DAYS_SINCE_FED]++;
@@ -2378,7 +2378,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			//Exgartuan night time surprise!
 			else if(player.totalCocks() > 0 && player.statusAffectv1("Exgartuan") == 1 && rand(3) == 0 && player.hoursSinceCum >= 24) {
 				outputText("\n", false);
-				exgartuanSleepSurprise();;
+				exgartuanSleepSurprise();
 				return true;
 			}
 			//Boobgartuan night time surprise!

@@ -3808,54 +3808,6 @@ public function doEvent(eventNo:Number):void
 	{
 		teaseVapula();
 	}
-	else if (eventNo == 3786)
-	{
-		benoitIntro();
-	}
-	else if (eventNo == 3787)
-	{
-		benoitsBuyMenu();
-	}
-	else if (eventNo == 3788)
-	{
-		benoitSellMenu();
-	}
-	else if (eventNo == 3789)
-	{
-		benoitTransactBuy(1);
-	}
-	else if (eventNo == 3790)
-	{
-		benoitTransactBuy(2);
-	}
-	else if (eventNo == 3791)
-	{
-		benoitTransactBuy(3);
-	}
-	else if (eventNo == 3793)
-	{
-		benoitSellTransact(1);
-	}
-	else if (eventNo == 3794)
-	{
-		benoitSellTransact(2);
-	}
-	else if (eventNo == 3795)
-	{
-		benoitSellTransact(3);
-	}
-	else if (eventNo == 3796)
-	{
-		benoitSellTransact(4);
-	}
-	else if (eventNo == 3797)
-	{
-		benoitSellTransact(5);
-	}
-	else if (eventNo == 3798)
-	{
-		talkToBenoit();
-	}
 	else if (eventNo == 3803)
 	{
 		stuffDatTurkeyWithSpoo();
@@ -3867,19 +3819,6 @@ public function doEvent(eventNo:Number):void
 	else if (eventNo == 3805)
 	{
 		thatllDoTurkey();
-	}
-	else if (eventNo == 3809)
-	{
-		eggySuggest();
-	}
-	else if (eventNo == 3814)
-	{
-		tryToConvertToBassyWomb();
-	}
-	else if (eventNo == 3816)
-	{
-		//ARG: later:Boolean
-		suggestSexAfterBasiWombed(false);
 	}
 	else if (eventNo == 3822)
 	{

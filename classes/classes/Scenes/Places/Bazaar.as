@@ -2,8 +2,9 @@
 import classes.BaseContent;
 import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kGAMECLASS;
-public class Bazaar extends BaseContent {
+	import classes.Scenes.Places.Bazaar.*;
+
+	public class Bazaar extends BaseContent {
 // JOEY_OFFERED_MILKER:int = 466;
 // OWN_MAIDEN_BIKINI:int = 770;
 // COUNTDOWN_TO_NIGHT_RAPE:int = 872;
@@ -16,6 +17,7 @@ public class Bazaar extends BaseContent {
 public function Bazaar(){
 }
 
+public var benoit:Benoit = new Benoit();
 
 //[Find Travelling Bazaar]
 public function findBazaar():void {
@@ -61,15 +63,15 @@ public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 	var roxanneT:String = "Lizans";
 	var demon:Function = null;
 	var tent:Number = 0;
-	var benoit:Number = 0;
+	var benoit_:Function = null;
 	var benoitT:String = "MarketStall";
 	if(model.time.hours >= 9 && model.time.hours <= 17) {
 		if(flags[kFLAGS.TIMES_IN_BENOITS] == 0) outputText("\n\nYou notice a large market stall wedged between two wagons, swaddled in carpets and overflowing with all manner of objects.  On top of its looming fabric canopy is a wooden sign with the words \"<b>Geckos Garbidg</b>\" crudely scrawled upon them.  You wonder what that's all about.");
 		else {
-			outputText("\n\n" + kGAMECLASS.benoitMF("Benoit","Benoite") + " the basilisk's stall looks open for business.  You could go see what's on offer.");
+			outputText("\n\n" + benoit.benoitMF("Benoit","Benoite") + " the basilisk's stall looks open for business.  You could go see what's on offer.");
 			benoitT = "Benoit";
 		}
-		benoit = 3786;
+		benoit_ = benoit.benoitIntro;
 	}
 	tent = 3167;
 	kGAMECLASS.fapAppearance();
@@ -92,7 +94,7 @@ public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 	/*[S. Squeeze] [][][] [Leave]
 	choices(benoitT,benoit,rat,cinnabarAppearance(),"GripingDemons",demon,lilium,LiliumText(false),"Niamh",niamh,roxanneT,roxanne,"S. Squeeze",theSlipperySqueeze,"Tent",tent,"",0,"Leave",13);*/
 	menu();
-	if(benoit > 0) addButton(0,benoitT,eventParser,benoit);
+	addButton(0,benoitT,eventParser,benoit_);
 	if(kGAMECLASS.cinnabarAppearance() > 0) addButton(1,rat,eventParser,kGAMECLASS.cinnabarAppearance(false));
 	addButton(2,"Greta's",gretasGarments);
 	addButton(3,"GripingDemons",demon);
@@ -1008,7 +1010,6 @@ private function abuseHisAss():void {
 	//gtfo
 	menu();
 	addButton(0,"Next", enterTheBazaarAndMenu);
-	return;
 }
 
 //((If waited, or failed assault  //Pass go collect 200 rape))

@@ -1623,7 +1623,6 @@ public function doItems(eventNo:Number):void {
 
 	if ((eventNo == 1011) || (eventNo == 1012) || (eventNo == 1013) || (eventNo == 1014) || (eventNo == 1015))
 	{
-		var slotTmp:ItemSlotClass;
 		switch (eventNo)
 		{
 			case 1011:
@@ -2141,7 +2140,6 @@ public function doItems(eventNo:Number):void {
 	//   slot 1               slot 2                slot 3               slot 4               slot 5
 	{
 
-		var slotTmp:ItemSlotClass;
 
 		switch (eventNo)
 		{
@@ -2894,7 +2892,7 @@ public function takeItem():void {
 				"", 0,
 				"", 0, 
 				"Use Now", 1016, 
-				"Abandon", 3787);
+				"Abandon", bazaar.benoit.benoitsBuyMenu);
 	}
 	else if (menuLoc == 27)
 	{
@@ -6627,7 +6625,7 @@ public function itemGoNext():void {
 		return;
 	}
 	if(menuLoc == 26) {
-		doNext(benoitsBuyMenu);
+		doNext(bazaar.benoit.benoitsBuyMenu);
 		return;
 	}
 	if(menuLoc == 27) {

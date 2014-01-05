@@ -1388,7 +1388,7 @@ public function updatePregnancy():Boolean {
 			player.pregnancyIncubation = 0;
 			player.pregnancyType = 0;
 			displayedUpdate = true;
-			popOutBenoitEggs();
+			bazaar.benoit.popOutBenoitEggs();
 		}
 	}
 	//Give birf if its time... to FROG EGGS
