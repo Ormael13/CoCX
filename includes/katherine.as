@@ -803,7 +803,7 @@ public function letKatKnotYourCuntPussyFuck():void {
 	outputText("ou get dressed, thank her, and head back to your camp.", false);
 	//minus lust, slimefeed, Player returns to camp
 	dynStats("sen", -1, "lus=", 0);
-	slimeFeed();
+	player.slimeFeed();
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	doNext(13);
 }
@@ -897,7 +897,7 @@ public function getPenetrated():void {
 	outputText("About an hour later, she's deflated and you are able to get dressed, thank her, and head back to your camp.", false);
 	//minus lust, slimefeed, Player returns to camp
 	dynStats("sen", -1, "lus=", 0);
-	slimeFeed();
+	player.slimeFeed();
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	doNext(13);
 }
@@ -962,7 +962,7 @@ public function getDoublePennedByKat():void {
 	
 	outputText("About an hour later, she's deflated and you are finally able to rise off of her, get dressed, and head back to your camp.\n\n", false);
 	//minus lust, slimefeed, Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
-	slimeFeed();
+	player.slimeFeed();
 	dynStats("sen", -2, "lus=", 0);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	doNext(13);
@@ -1051,7 +1051,7 @@ public function suckedNFuckedByKat():void {
 	if(flags[kFLAGS.KATHERINE_DICK_COUNT] > 1 && player.hasVagina()) outputText("s", false);
 	outputText(" deflate and you detach, you clean yourself off, get dressed, and head back out into the street.", false);
 	//lust -100, slimefeed, Player returns to Tel'Adre Menu Screen or to camp, if code insists on it
-	slimeFeed();
+	player.slimeFeed();
 	dynStats("sen", -1, "lus=", 0);
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	doNext(13);
@@ -1291,7 +1291,7 @@ public function giveKatOralPenisWingWang():void {
 	}
 	//minus lust, slimefeed, Player returns to camp
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
-	slimeFeed();
+	player.slimeFeed();
 	dynStats("lus", 25);
 	doNext(13);
 }
@@ -1473,7 +1473,7 @@ public function katDoubleHelixCraziness():void {
 
 	outputText("Righting and redressing yourself, you say goodbye to the charming kitty, then head back to camp, still feeling rather drained.\n\n", false);
 	//Player returns to camp without his lust, slimefeed
-	slimeFeed();
+	player.slimeFeed();
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	dynStats("lib", -1, "sen", -1, "lus=", 0);
 	doNext(13);

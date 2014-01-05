@@ -1303,7 +1303,7 @@ public function kissRaphaelFirstTimeOrphanage():void {
 	outputText("\n\nYou begin to notice how his smooth tip nudges repeatedly into your cervix, massaging you deep from within.  Then you begin to notice how his pelvic bone and the soft fur on top, rubs into your " + clitDescript() + " at just the right angle.  The sensations are seperate at first, but Raphael keeps the steady rhythm steady enough to concentrate.  When you finally manage to focus, truly enjoy them both, it's like a subtle spark that grows into a relentless bolt of energy.  The pleasurable pinch at your cervix, always followed by the nod on your clitoris.  It builds.");
 	
 	outputText("\n\nFinally, you beg of him to stop as the growing crescendo and steady rhythm becomes too much, not by pulling out, but by jamming into you one last time and simply keeping his wonderful cock in the magic spot for long enough to ride the sensation to a climax.");
-	slimeFeed();
+	player.slimeFeed();
 	dynStats("sen", -1, "lus=", 0);
 	menu();
 	addButton(0,"Next",followupToFirstTimeOrphanageRaphSex);

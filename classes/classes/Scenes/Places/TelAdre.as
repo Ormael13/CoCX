@@ -8,15 +8,26 @@
  * The lovely town of Tel Adre
  * @author:
  */
-public class TelAdre extends BaseContent{
-	public var auntNancy:AuntNancy = new AuntNancy();
-	public var bakeryScene:BakeryScene = new BakeryScene();
-	public var umasShop:UmasShop = new UmasShop();
-	public var brooke:Brooke = new Brooke();
-
-	public function TelAdre()
+	public class TelAdre extends BaseContent
 	{
-	}
+		public var auntNancy:AuntNancy = new AuntNancy();
+		public var bakeryScene:BakeryScene = new BakeryScene();
+		public var brooke:Brooke = new Brooke();
+		public var cotton:Cotton = new Cotton();
+		public var dominika:Dominika = new Dominika();
+		public var edryn:Edryn = new Edryn();
+		public var heckel:Heckel = new Heckel();
+		public var ifris:Ifris = new Ifris();
+		public var loppe:Loppe = new Loppe();
+		public var lottie:Lottie = new Lottie();
+		public var maddie:Maddie = new Maddie();
+		public var niamh:Niamh = new Niamh();
+		public var rubi:Rubi = new Rubi();
+		public var umasShop:UmasShop = new UmasShop();
+
+		public function TelAdre()
+		{
+		}
 
 //const YVONNE_FUCK_COUNTER:int = 437;
 
@@ -156,7 +167,7 @@ public function telAdreMenu():void {
 		return;
 	}
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] == -1) {
-		kGAMECLASS.runAwayMaddieFollowup();
+		maddie.runAwayMaddieFollowup();
 		return;
 	}
 	outputText("Tel'Adre is a massive city, though most of its inhabitants tend to hang around the front few city blocks.  It seems the fall of Mareth did not leave the city of Tel'Adre totally unscathed.  A massive tower rises up in the center of the city, shimmering oddly.  From what you overhear in the streets, the covenant's magic-users slave away in that tower, working to keep the city veiled from outside dangers.  There does not seem to be a way to get into the unused portions of the city, but you'll keep your eyes open.\n\n", true);
@@ -735,10 +746,6 @@ private function normalPierceAssemble():void {
 	doNext(piercingStudio);
 }
 
-private function specialPierceAssemble():void {
-	
-	
-}
 
 private function piercingRemove():void {
 	spriteSelect(63);
@@ -956,7 +963,7 @@ public function barTelAdre():void {
 	var button:int = 0;
 	outputText("", true);
 	if(flags[kFLAGS.LOPPE_DISABLED] == 0 && flags[kFLAGS.LOPPE_MET] == 0 && rand(10) == 0) {
-		kGAMECLASS.loppeFirstMeeting();
+		loppe.loppeFirstMeeting();
 		return;
 	}	
 	outputText("The interior of The Wet Bitch is far different than the mental picture its name implied.  It looks like a normal tavern, complete with a large central hearth, numerous tables and chairs, and a polished dark wood bar.  The patrons all seem to be dressed and interacting like normal people, that is if normal people were mostly centaurs and dog-morphs of various sub-species.  The atmosphere is warm and friendly, and ", false);
@@ -970,15 +977,15 @@ public function barTelAdre():void {
 	}
 	//DOMINIKA
 	if(model.time.hours > 17 && model.time.hours < 20 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] != -1) {
-		button = anotherButton(button,"Dominika",kGAMECLASS.fellatrixBarApproach);
+		button = anotherButton(button,"Dominika",dominika.fellatrixBarApproach);
 	}
 	//EDRYN!
 	if(flags[kFLAGS.EDRYN_BIRF_COUNTDOWN] == 0) {
-		if(kGAMECLASS.edrynBar()) {
+		if(edryn.edrynBar()) {
 			//Edryn panic appearance!
 			if(flags[kFLAGS.EDRYN_PREGNAT_AND_NOT_TOLD_PC_YET] == 0 && flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] > 0 && flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] == 0) {
 				outputText("\n\nEdryn smiles when she sees you and beckons you towards her.  Fear and some kind of frantic need are painted across her face, imploring you to come immediately.  Whatever the problem is, it doesn't look like it can wait.", false);
-				doNext(kGAMECLASS.findOutEdrynIsPregnant);
+				doNext(edryn.findOutEdrynIsPregnant);
 				flags[kFLAGS.EDRYN_PREGNAT_AND_NOT_TOLD_PC_YET]++;
 				return;
 			}
@@ -1003,13 +1010,13 @@ public function barTelAdre():void {
 				outputText("\n\nEdryn, the centauress you met at the gate, is here, sitting down at her table alone and sipping on a glass of wine.  You suppose you could go talk to her a bit.", false);
 			}
 			else outputText("\n\nEdryn the centauress is here, sipping wine at a table by herself.  She looks up and spots you, her eyes lighting up with happiness.  She gives you a wink and asks if you'll join her.", false);
-			button = anotherButton(button,"Edryn",kGAMECLASS.edrynBarTalk);
+			button = anotherButton(button,"Edryn",edryn.edrynBarTalk);
 		}
 	}
 	//HELIA
 	if(player.gender > 0 && model.time.hours >= 14 && rand(2) == 0 && model.time.hours < 20 && flags[kFLAGS.HEL_FUCKBUDDY] == 1 && !(flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 1 && flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED]== 0)) {
-		kGAMECLASS.helAppearance();
-		button = anotherButton(button,"Helia",kGAMECLASS.approachHelAtZeBitch);
+		edryn.helAppearance();
+		button = anotherButton(button,"Helia",edryn.approachHelAtZeBitch);
 	}
 	//NANCY
 	if(auntNancy.auntNancy(false)) {
@@ -1021,9 +1028,9 @@ public function barTelAdre():void {
 	
 	//NIAMH
 	if(model.time.hours >= 8 && model.time.hours <= 16 && flags[kFLAGS.NIAMH_STATUS] == 0) {
-		kGAMECLASS.telAdreNiamh();
-		if(flags[kFLAGS.MET_NIAMH] == 0) button = anotherButton(button,"Beer Cat",kGAMECLASS.approachNiamh);
-		else button = anotherButton(button,"Niamh",kGAMECLASS.approachNiamh);
+		niamh.telAdreNiamh();
+		if(flags[kFLAGS.MET_NIAMH] == 0) button = anotherButton(button,"Beer Cat",niamh.approachNiamh);
+		else button = anotherButton(button,"Niamh",niamh.approachNiamh);
 	}
 	//ROGAR #1
 	if(flags[kFLAGS.ROGAR_PHASE] == 3 && flags[kFLAGS.ROGAR_DISABLED] == 0 && flags[kFLAGS.ROGAR_FUCKED_TODAY] == 0) {
@@ -1118,13 +1125,13 @@ public function barTelAdre():void {
 
 private function oldbarTelAdre():void {
 	hideUpDown();
-	var edryn:Number = 0;
+	var edryn2:Number = 0;
 	var urta:Number = 0;
 	var misc1:Number = 0;
 	var misc1Name:String = "";
 	outputText("", true);
 	if(flags[kFLAGS.LOPPE_DISABLED] == 0 && flags[kFLAGS.LOPPE_MET] == 0 && rand(10) == 0) {
-		kGAMECLASS.loppeFirstMeeting();
+		loppe.loppeFirstMeeting();
 		return;
 	}	
 	outputText("The interior of The Wet Bitch is far different than the mental picture its name implied.  It looks like a normal tavern, complete with a large central hearth, numerous tables and chairs, and a polished dark wood bar.  The patrons all seem to be dressed and interacting like normal people, that is if normal people were mostly centaurs and dog-morphs of various sub-species.  The atmosphere is warm and friendly, and ", false);
@@ -1132,11 +1139,11 @@ private function oldbarTelAdre():void {
 	outputText("you hardly get any odd stares.  There are a number of rooms towards the back, as well as a stairway leading up to an upper level.", false);
 	//Hours of operation decrease after birth
 	if(!kGAMECLASS.urtaBusy()) {
-		if(kGAMECLASS.edrynBar()) {
+		if(edryn.edrynBar()) {
 			//Edryn panic appearance!
 			if(flags[kFLAGS.EDRYN_PREGNAT_AND_NOT_TOLD_PC_YET] == 0 && flags[kFLAGS.EDRYN_PREGNANCY_INCUBATION] > 0 && flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] == 0) {
 				outputText("\n\nEdryn smiles when she sees you and beckons you towards her.  Fear and some kind of frantic need are painted across her face, imploring you to come immediately.  Whatever the problem is, it doesn't look like it can wait.", false);
-				doNext(kGAMECLASS.findOutEdrynIsPregnant);
+				doNext(edryn.findOutEdrynIsPregnant);
 				flags[kFLAGS.EDRYN_PREGNAT_AND_NOT_TOLD_PC_YET]++;
 				return;
 			}
@@ -1161,7 +1168,7 @@ private function oldbarTelAdre():void {
 				outputText("\n\nEdryn, the centauress you met at the gate, is here, sitting down at her table alone and sipping on a glass of wine.  You suppose you could go talk to her a bit.", false);
 			}
 			else outputText("\n\nEdryn the centauress is here, sipping wine at a table by herself.  She looks up and spots you, her eyes lighting up with happiness.  She gives you a wink and asks if you'll join her.", false);
-			if(edryn == 0) edryn = 2257;
+			if(edryn2 == 0) edryn2 = 2257;
 		}
 	}
 	//Nun cat stuff!
@@ -1216,14 +1223,14 @@ private function oldbarTelAdre():void {
 		}
 	}
 	if(model.time.hours >= 8 && model.time.hours <= 16 && (misc1 == 0 || (rand(2) == 0 && misc1 != 2705)) && flags[kFLAGS.NIAMH_STATUS] == 0) {
-		kGAMECLASS.telAdreNiamh();
+		niamh.telAdreNiamh();
 		if(flags[kFLAGS.MET_NIAMH] == 0) misc1Name = "Beer Cat";
 		else misc1Name = "Niamh";
 		misc1 = 3524;
 	}
 	var hel:Number = 0;
 	if(player.gender > 0 && model.time.hours >= 14 && rand(2) == 0 && model.time.hours < 20 && flags[kFLAGS.HEL_FUCKBUDDY] == 1 && (!kGAMECLASS.followerHel() || flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] == 1)) {
-		kGAMECLASS.helAppearance();
+		edryn.helAppearance();
 		hel = 3355;
 	}
 	//Everyone's favorite Vala!
@@ -1267,10 +1274,10 @@ private function oldbarTelAdre():void {
 		backroom = 3187;
 		backroomT = "Ask4Amily";
 	}
-	var dominika:Number = 0;
+	var dominika2:Number = 0;
 	if(model.time.hours > 17 && model.time.hours < 20 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] != -1) {
-		dominika = 2739;
-		kGAMECLASS.fellatrixBarAppearance();
+		dominika2 = 2739;
+		dominika.fellatrixBarAppearance();
 	}
 
 	var nancy:Function = null;
@@ -1296,7 +1303,7 @@ private function oldbarTelAdre():void {
 		outputText("\n\nRo'gar is here with his back turned to the door, wearing his usual obscuring cloak.", false);
 	}		
 	var kath:Number = 0;
-	choices("Dominika",dominika,"Edryn",edryn,"Hel",hel,misc1Name,misc1,nancyText,nancy,rogarT,rogarB,"Urta",urta,"Vala",vala,"Backroom",backroom,"Leave",telAdreMenu);
+	choices("Dominika",dominika2,"Edryn",edryn2,"Hel",hel,misc1Name,misc1,nancyText,nancy,rogarT,rogarB,"Urta",urta,"Vala",vala,"Backroom",backroom,"Leave",telAdreMenu);
 }
 
 public function tailorShoppe():void {
@@ -1480,7 +1487,7 @@ private function watchUrtaBeABadass():void {
 public function gymDesc():void {
 	//PREGGO ALERT!
 	if(flags[kFLAGS.PC_IS_A_GOOD_COTTON_DAD] + flags[kFLAGS.PC_IS_A_DEADBEAT_COTTON_DAD] == 0 && flags[kFLAGS.COTTON_PREGNANCY_INCUBATION] > 0) {
-		kGAMECLASS.cottonPregnantAlert();
+		cotton.cottonPregnantAlert();
 		return;
 	}
 
@@ -1504,57 +1511,57 @@ public function gymDesc():void {
 		doNext(telAdreMenu);
 		return;
 	}
-	kGAMECLASS.lottieAppearance();
+	lottie.lottieAppearance();
 	if(flags[kFLAGS.LOPPE_MET] > 0 && flags[kFLAGS.LOPPE_DISABLED] == 0) {
 		outputText("\n\nYou spot Loppe the laquine wandering around, towel slung over her shoulder.  When she sees you, she smiles and waves to you and you wave back.");
 	}
-	if(model.time.hours > 9 && model.time.hours < 14) kGAMECLASS.heckelAppearance();
+	if(model.time.hours > 9 && model.time.hours < 14) heckel.heckelAppearance();
 	gymMenu();
 }
 
 private function gymMenu():void {
 	
 	var membership:Function =null;
-	var cotton:Function =null;
+	var cotton2:Function =null;
 	var cottonB:String = "Horsegirl";
 	var hyena:Function =null;
 	var hyenaB:String = "Hyena";
-	var ifris:Function =null;
+	var ifris2:Function =null;
 	var ifrisB:String = "Girl";
-	var lottie:* = kGAMECLASS.lottieAppearance(false);
+	var lottie2:* = lottie.lottieAppearance(false);
 	var lottieB:String = "Pig-Lady";
-	var loppe:Function =null;
+	var loppe2:Function =null;
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0) 
 		lottieB = "Lottie";
-	if(kGAMECLASS.ifrisIntro())
-		ifris = kGAMECLASS.approachIfris;
+	if(ifris.ifrisIntro())
+		ifris2 = ifris.approachIfris;
 	if(flags[kFLAGS.MET_IFRIS] > 0) 
 		ifrisB = "Ifris";
 	if(model.time.hours > 9 && model.time.hours <= 15) {
-		hyena = kGAMECLASS.greetHeckel;
+		hyena = heckel.greetHeckel;
 		if(flags[kFLAGS.MET_HECKEL] > 0) 
 			hyenaB = "Heckel";
 	}
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00167] == 0 && player.gems >= 500) 
 		membership = buyGymLifeTimeMembership;
 	if(flags[kFLAGS.PC_IS_A_DEADBEAT_COTTON_DAD] == 0) {
-		if(kGAMECLASS.cottonsIntro())
-			cotton = kGAMECLASS.cottonGreeting;
+		if(cotton.cottonsIntro())
+			cotton2 = cotton.cottonGreeting;
 	}
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00177] > 0) 
 		cottonB = "Cotton";
 	if(flags[kFLAGS.LOPPE_MET] > 0 && flags[kFLAGS.LOPPE_DISABLED] == 0) 
-		loppe = kGAMECLASS.loppeGenericMeetings;
+		loppe2 = loppe.loppeGenericMeetings;
 	
 	choices("ChangeRoom",kGAMECLASS.changingRoom,
-			cottonB,cotton,
+			cottonB,cotton2,
 			hyenaB,hyena,
-			ifrisB,ifris,
+			ifrisB,ifris2,
 			"Jog",goJogging,
 			"LiftWeights",weightLifting,
 			"Life Member",membership,
-			"Lottie",lottie,
-			"Loppe",loppe,
+			"Lottie",lottie2,
+			"Loppe",loppe2,
 			"Leave",telAdreMenu);
 }
 

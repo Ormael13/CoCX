@@ -347,7 +347,7 @@ public function nonAddictMinotaurGangBang():void {
 	//Preggers chance!
 	player.knockUp(2,432,75);
 	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", -.5, "lus=", 0, "cor", 1);
-	slimeFeed();
+	player.slimeFeed();
 	minoCumAddiction(20);
 	if(inCombat()) cleanupAfterCombat();
 	else {
@@ -443,7 +443,7 @@ public function loseToMinoMobVeryPregnant():void {
 		outputText("  Look at her, she's smiling with a dick in her mouth while she passes out.  Mom's the best.</i>\"", false);
 	}
 	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", .5, "lus=", 0, "cor", 1);
-	slimeFeed();
+	player.slimeFeed();
 	minoCumAddiction(15);
 	if(inCombat()) cleanupAfterCombat();
 	else doNext(16);
@@ -546,7 +546,7 @@ public function analSpearSemiPregMinotaurGangbang():void {
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] >= 5) outputText(", but you're positioned with your ass in the air.  A voice calls out, \"<i>Okay, Mom's pretty out of it.  One at a time and don't damage her, okay?</i>\"\n\nGiggling dreamily, you're fucked repeatedly, spunk squirting from your anus with every thrust.  You pass out like that, feeling quite satisfied.", false);
 	else outputText(".  They step back and admire their handiwork while you float through your narcotic-infused haze.", false);
 	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", .5, "lus=", 0, "cor", 1);
-	slimeFeed();
+	player.slimeFeed();
 	minoCumAddiction(15);
 	if(inCombat()) cleanupAfterCombat();
 	else doNext(16);
@@ -674,7 +674,7 @@ public function victoryMinotaurGangTitFuck():void {
 	//Force cum bottle loot!
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00234] = "MinoCum";
 	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", .5, "lus=", 0, "cor", .5);
-	slimeFeed();
+	player.slimeFeed();
 	minoCumAddiction(15);
 	if(inCombat()) cleanupAfterCombat();
 	else {
@@ -772,7 +772,7 @@ public function victoryAllThePenetrationsMinotaurGangBang():void {
 	//Preggers chance!
 	player.knockUp(2,432,75);
 	dynStats("spe", -.5, "int", -.5, "lib", .5, "sen", -.5, "lus=", 0, "cor", 1);
-	slimeFeed();
+	player.slimeFeed();
 	minoCumAddiction(20);
 	if(inCombat()) cleanupAfterCombat();
 	else {
@@ -957,7 +957,7 @@ public function victoryBJNippleFuckMinotaurGang():void {
 	outputText(".  You re-dress sensually, giving them as much of a show as you dare, not even bothering to wipe the cum-coating from your " + player.skinFurScales() + " before you finish slipping into your " + player.armorName + " and depart.", false);
 	dynStats("spe", -.5, "int", -.5, "sen", -1, "lus=", 0, "cor", 1);
 	minoCumAddiction(10);
-	slimeFeed();
+	player.slimeFeed();
 	if(inCombat()) cleanupAfterCombat();
 	else {
 		doNext(13);

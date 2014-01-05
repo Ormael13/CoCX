@@ -406,7 +406,7 @@ public function drinkUrtasBoozeRun(): void{
 }
 public function drinkUrtasBoozeLetHer():void {
 	urtaSprite();
-	slimeFeed();
+	player.slimeFeed();
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 	flags[kFLAGS.TIMES_FUCKED_URTA]++;
 	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 5;
@@ -610,7 +610,7 @@ public function urtaFuckHer():void {
 	//(FUCK HER FEMALE/GENDERLESS)
 	if (player.totalCocks() == 0) {
 		outputText(images.showImage("urta-behindbar-female-fuckurta"), false);
-		slimeFeed();
+		player.slimeFeed();
 		outputText("You come out of the shadows, shedding your " + player.armorName + ".  ", false);
 		if(player.cor < 50) outputText("You blush furiously at exposing yourself in such a way.", false);
 		else outputText("Smiling seductively; you revel in exposing yourself so suddenly.", false);
@@ -776,7 +776,7 @@ public function urtaFuckHer():void {
 //[Under Table BJ]
 public function blowUrtaUnderTable():void {
 	urtaSprite();
-	slimeFeed();
+	player.slimeFeed();
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 	urtaLove(1);
 	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(4);
@@ -824,7 +824,7 @@ public function takeUrtaInTheButtPublically():void {
 		doNext(telAdre.barTelAdre);
 		return;
 	}
-	slimeFeed();
+	player.slimeFeed();
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 	flags[kFLAGS.TIMES_FUCKED_URTA]++;
 	urtaLove(2);
@@ -924,7 +924,7 @@ public function takeUrtaInTheButtPublically():void {
 //[PUBLIC FACIAL]
 public function getAPublicFacialFromUrta():void {
 	urtaSprite();
-	slimeFeed();
+	player.slimeFeed();
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 	urtaLove(2);
 	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 3 + rand(3);
@@ -977,7 +977,7 @@ public function getAPublicFacialFromUrta():void {
 
 public function optionalUrtaBukkake():void {
 	urtaSprite();
-	slimeFeed();
+	player.slimeFeed();
 	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME]-=2;
 	urtaLove(-1);
 	outputText("", true);
@@ -1545,7 +1545,7 @@ public function giveUrtaCumGlass():void {
 //[Drink Glass]
 public function drinkUrtasCumGlass():void {
 	urtaSprite();
-	slimeFeed();
+	player.slimeFeed();
 	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2;
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 	//(+Bonus luv)
@@ -1570,7 +1570,7 @@ public function setAsideUrtaCumGlass():void {
 //[Under Table BJ]
 public function blowUrtaUnderTheTableLuv():void {
 	urtaSprite();
-	slimeFeed();
+	player.slimeFeed();
 	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(3);
 	urtaLove(1);
 	outputText("", true);
@@ -3557,7 +3557,7 @@ public function pegUrtasAssMessy():void {
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] += 2;
 	urtaLove(2);
 	flags[kFLAGS.TIMES_FUCKED_URTA]++;
-	slimeFeed();
+	player.slimeFeed();
 	//[Next]
 	menu();
 	addButton(0,"Next",UrtaGetsPeggedCleanUp);
@@ -3680,7 +3680,7 @@ public function fillMeUpPleaseUrta():void {
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] += 2;
 	urtaLove(2);
 	flags[kFLAGS.TIMES_FUCKED_URTA]++;
-	slimeFeed();
+	player.slimeFeed();
 	if(flags[kFLAGS.URTA_FERTILE] == 1) player.knockUp(21,515,25);
 	dynStats("lib", .2, "sen", -3, "lus=", 0);
 }
@@ -4011,7 +4011,7 @@ public function lickOutUrtaAtHome():void {
 	urtaLove(3);
 	//Drain lust, slimefeed, reduce libido
 	dynStats("lus=", 0);
-	slimeFeed();
+	player.slimeFeed();
 	knockUpUrtaChance();
 	if(player.lib > 50) dynStats("lib", -1);
 	if(player.lib > 90) dynStats("lib", -1);
@@ -4055,7 +4055,7 @@ public function slurpFawkesCocksForFunAndInflation():void {
 	outputText("\n\nThe concept of taking in more fluids is a bit too much for you, making you cringe and nearly lose your... 'lunch'.  You shake your head and thank her, but refuse the drink.");
 	outputText("\n\nYou say goodbye to Urta as you head back towards camp, your stomach sloshing with each step.");
 	dynStats("lus", 10+player.lib/10);
-	slimeFeed();
+	player.slimeFeed();
 	flags[kFLAGS.URTA_CUM_NO_CUM_DAYS] = 0;
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] += 3;
 	flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 5;
@@ -4149,7 +4149,7 @@ public function raphaelAndUrtaPartTwo():void {
 	outputText("\n\nYou kiss her on the nose and press your cum-stuffed middle against her, pointing out that not only did she completely emasculate him in size alone, but she also got to make him dance on her fingertip like a puppet, all while cumming longer and harder than he could ever hope to.  The foxy fox curls her ebony lips in a rueful smile at that, running her hands over your middle in admiration of her work.  \"<i>I guess I did, huh?  Hopefully taught him a lesson!</i>\"");
 	outputText("\n\n(<b>Raphael probably won't fall for that again, but hey, it was fun!</b>)");
 	//Slimefeed
-	slimeFeed();
+	player.slimeFeed();
 	//-3 sensitivity, reset lust.
 	dynStats("sen", -3, "lus=", 0);
 	flags[kFLAGS.URTA_X_RAPHAEL_HAPPENED]++;

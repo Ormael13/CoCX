@@ -183,7 +183,7 @@ public function mutateJojo():void {
 //[POST TENTACLE DICKINGS]
 public function useTentacleJojo():void {
 	jojoSprite();
-	slimeFeed();
+	player.slimeFeed();
 	var nippleSucking:Boolean = false;
 	var clitSucking:Boolean = false;
 	var mouthFucking:Boolean = false;
@@ -851,7 +851,7 @@ public function jojoRape():void {
 	trace("jojoRape called");
 	
 	jojoSprite();
-	slimeFeed();
+	player.slimeFeed();
 	//Track Jojo rapeage
 	if(player.hasStatusAffect("Ever Raped Jojo") < 0) player.createStatusAffect("Ever Raped Jojo",1,0,0,0);
 	else player.addStatusValue("Ever Raped Jojo",1,1);

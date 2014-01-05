@@ -1,10 +1,17 @@
-﻿//VARS
+﻿package classes.Scenes.Places.TelAdre {
+	import classes.GlobalFlags.kFLAGS;
+
+	public class Maddie extends TelAdreAbstractContent {
+public function Maddie(){
+
+}
+//VARS
 // 240- first time meeting procced? 1 yes
 // 241- mino explained what he needs yet?
 // 242- baking happaned?  1 = yes, -1 = snuck out, -2 = seen her escorted out
 	//, 3 =stayed, 4 = epilogue'ed
 //[Bakery One Off – Madeleine's Creation]
-public function procMaddieOneIntro():void {
+internal function procMaddieOneIntro():void {
 	outputText("", true);
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00240] == 0) {
 		outputText("You enter the bakery, savoring the sweet smells of sugar and baked goods.  A burly, hairy figure steps up beside you and places a strong hand on your shoulder.   The gravelly voice of the stranger says, \"<i>You ain't from around here.  Come.  I need your help.  Show you something.</i>\"  You turn to look, and are quite surprised when you see the horned visage of a minotaur ", false);
@@ -21,7 +28,7 @@ public function procMaddieOneIntro():void {
 	doYesNo(followMinotaurIntoBackroom,telAdre.bakeryScene.bakeryuuuuuu);
 }
 //[Follow] 
-public function followMinotaurIntoBackroom():void {
+private function followMinotaurIntoBackroom():void {
 	outputText("", true);
 	//	(Not yet explained) 
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00241] == 0) {
@@ -75,7 +82,7 @@ public function handOverIngredientsItBeBakingTimeYo():void {
 }
 	
 //[Sneak Out]
-public function sneakAwayFromMaddie():void {
+private function sneakAwayFromMaddie():void {
 	outputText("", true);
 	outputText("You get out before he can find you again.  Whatever he's making is nothing you ever want to taste.", false);
 	//(No more mino chef)
@@ -83,7 +90,7 @@ public function sneakAwayFromMaddie():void {
 	doNext(13);
 }
 //[Wait/Next]
-public function waitForSlutCake():void {
+private function waitForSlutCake():void {
 	spriteSelect(39);
 	outputText("", true);
 	outputText("You walk back into the bakery proper, feeling more than a little ", false);
@@ -108,7 +115,7 @@ public function waitForSlutCake():void {
 	simpleChoices("Run Away",runAwayFromMaddiiiieee,"TryToTalk",talkToMaddie,"",0,"",0,"",0);
 }
 //[RUN DAFUQ AWAY]
-public function runAwayFromMaddiiiieee():void {
+private function runAwayFromMaddiiiieee():void {
 	spriteSelect(39);
 	outputText("", true);
 	outputText("You turn tail to run, evacuating the room before that culinary catastrophe can have her way with you.  A high-pitched whine chases you away as the cupcake-girl cries, \"<i>Nooooo... come back!  I'm making so much filling for you!</i>\"  Her words lend you even greater speed, and you vacate the city in record time.\n\n", false);
@@ -125,7 +132,7 @@ public function runAwayMaddieFollowup():void {
 }
 	
 //[TRY TO TALK]
-public function talkToMaddie():void {
+private function talkToMaddie():void {
 	spriteSelect(39);
 	outputText("",true);
 	outputText("You try to speak as calmly as you can in the face of a giant, jiggling sex-pastry, but she ignores your demands to 'wait', 'listen', or 'stop'.  Sponge-cake-soft fists envelop your arms, lifting you from the ground to pin you against some flour sacks.   The cherries covering the cupcake-girl's whipped-cream bra drop off, pushed away by two candy-pink nipples the size of water bottles.  As one, they discharge thick splorts of thick, gooey icing to splatter over the length of your exposed arms.  It hardens nigh-instantaneously in the comparatively cool air, and you're helpless to do anything but squirm as she applies the same treatment to your " + player.legs() + ", immobilizing you completely.\n\n", false);
@@ -224,11 +231,13 @@ public function talkToMaddie():void {
 }
 
 //[Next visit to the bakery...]
-public function bakeryEpilogue():void {
+internal function bakeryEpilogue():void {
 	outputText("", true);
 	outputText("As soon as you enter the bakery, one of the waitresses pulls you aside.  She positively beams as she hands you a note and says, \"<i>One of our chefs wanted me to give you this.  I didn't even know he could write!  I mean, where does a minotaur learn to handle a pen?</i>\"  You smirk, waving her away before you open up the minotaur's note.\n\n", false);  
 	outputText("\"<i>Thanks.  Figured out what went wrong with Maddie's help.  Made masterpiece.  Buy giant cupcake sometime.  Delicious!  Promise it's safe and non-addictive.  Expensive though.  Ingredients rare.\n\n", false);
 	outputText("-X</i>\"", false);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] = 4;
 	doNext(telAdre.bakeryScene.bakeryuuuuuu);
+}
+}
 }

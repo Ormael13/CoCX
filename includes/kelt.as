@@ -303,7 +303,7 @@ public function keltBlowjobRequirementNever(newl:Boolean = true):void {
 public function keltBlowjobRequirementShamefully(newl:Boolean = true):void {
 	spriteSelect(35);
 	if(newl) outputText("", true);
-	slimeFeed();
+	player.slimeFeed();
 	outputText(images.showImage("kelt-farm-shamefulbj"));
 	outputText("The thought of going through with it is appalling.  The thought of not wrapping your lips around that glorious member is equally unthinkable.\r\r", false);
 	outputText("Face flushed with lust and shame, you reach up hesitently to wrap your hand around the growing member, feeling its wondrous heat.  Kelt lets out a satisfied groan, his hips bucking forward involuntarily.  The flared head of his massive cock drools precum lewdly, and you hesitate once more, torn.  But with the warmth of his cock beneath your hand, there is no going back.\r\r", false);
@@ -332,7 +332,7 @@ public function keltBlowjobRequirementEagerly(newl:Boolean = true):void {
 	spriteSelect(35);
 	// This is never called with arguments, so newl will always be true. Can this be simplified?
 	if(newl) outputText("", true);
-	slimeFeed();
+	player.slimeFeed();
 	outputText(images.showImage("kelt-farm-eagerbj"));
 	outputText("It is like someone answered your prayers.  You eagerly agree, babbling your thanks to Kelt as you are faced with the massive cock, growing harder and harder.  He snorts scornfully.\r\r", false);
 	outputText("\"<i>I didn't ask for your thanks, slut,</i>\" he says cruelly.  \"<i>I asked for you to suck my cock.  Now open wide and choke it down, or I'm aiming for your ass.</i>\"\r\r", false);
@@ -520,7 +520,7 @@ public function keltMainEncounter3():void {
 			outputText("You feel a bloom of warmth as the centaur's cock bursts within you, pumping thick semen straight into your womb.  The quantity is unbelievable, and you orgasm again just from the sensation of his steaming spunk filling your belly.  Each little twitch of his cock sends sprays of seed and juices squelching from your overstuffed pussy, the majority of it being trapped inside.  Your stomach begins to swell slightly from the sheer quantity, and you all but dissolve into a puddle of satiated goo.\r\r", false);
 			outputText("Some time later, Kelt's enormous cock softens enough to slip out of your abused cunt, a virtual torrent of cum flowing out afterwards.  You lay on the bale of hay, panting tiredly, hands pressed to your full belly.  Kelt looks down at you, and snorts.\r\r", false);
 			outputText("\"<i>That's a good look for you.  Come back tomorrow if it doesn't take, slut.  I'll be glad to do the job again.</i>\"\r\r", false);
-			slimeFeed();
+			player.slimeFeed();
 			dynStats("lus=", 0);
 			outputText("He leaves you without another word.", false);
 			//(+5 Submissive)
@@ -650,7 +650,7 @@ public function keltMainEncounterPostBlowjob():void {
 			outputText("\"<i>Now stay there for a while, bitch.  Let it get good and stuck up there.  Come back tomorrow, and maybe, if you're lucky, I'll fuck you again.  You do, after all, make a pretty good cumdump.</i>\"\r\r", false);
 			outputText("It's some hours later before you rouse yourself, clenching your ass as best as you can to keep the tide inside.  Despite your efforts, a steady trail oozes down your leg, marking your path as you slowly, happily trudge back to your camp.", false);
 			doNext(14);
-			slimeFeed();
+			player.slimeFeed();
 			//(+10 Submissiveness)
 			if(buttChange(70,true)) outputText("\r\r", false);
 			player.addStatusValue("Kelt",2,10);
@@ -667,7 +667,7 @@ public function keltMainEncounterPostBlowjob():void {
 			outputText("Though he lasts some time, it is still too short before he groans aloud and begins spewing thick seed into your stomach.  Rapturous, you gulp it down eagerly, feeling it warm your insides and slide into your stuffed belly.  By the time he is finished, your stomach is so packed it aches... but the feeling of contentment at being full of his seed once more is far more satisfying.  Kelt allows you to clean his cock before pulling away.\r\r", false);
 			outputText("\"<i>Pretty good, slut.  I knew there was a reason I kept you around.  I've indulged you enough, though.  Get over there and shoot some arrows, before I get bored with you.</i>\"\r\r", false);
 			outputText("You hardly remember the rest of the training.  You're far too distracted by the fullness of your belly, and the thought of maybe getting a little more.  Kelt seems almost bored by the end, despite your attempts to entice him during the lesson, and leaves soon afterwards, to your chagrin.", false);
-			slimeFeed();
+			player.slimeFeed();
 			//(+5 Submissiveness)
 			player.addStatusValue("Kelt",2,5);
 			//player.addStatusValue("Kelt",1,3);
@@ -715,7 +715,7 @@ public function keltResistGivingBJ():void {
 //(Submit)
 public function keltSubmitGivingBJ():void {
 	spriteSelect(35);
-	slimeFeed();
+	player.slimeFeed();
 	outputText("", true);
 	outputText("\"<i>There we go.  Who's a good little whore?  Who's a hungry little slut?  Okay, bitch... time to fill that belly of yours.  Open wide.</i>\"\r\r", false);
 	outputText("Reluctantly, with shame burning in your cheeks and desire ravaging your mind, you lower yourself before him and do just that.\r\r", false);
@@ -734,7 +734,7 @@ public function continueAfterBJ():void {
 //(Reluctant Blowjob)
 public function keltReluctantGivingBJ():void {
 	spriteSelect(35);
-	slimeFeed();
+	player.slimeFeed();
 	outputText("", true);
 	outputText(images.showImage("kelt-farm-reluctantbj"));
 	outputText("Kelt immediately moves over you, grinding his cock forcefully into your face.  He seems to enjoy teasing you with it above anything else as you wait anxiously for his command, nuzzling his cock but unable to do more until he allows it.  The musky scent of it fills you with a desire you don't dare admit to... but is present all the same.\r\r", false);

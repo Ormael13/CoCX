@@ -342,7 +342,7 @@ public function doEvent(eventNo:Number):void
 				outputText("s", false);
 			outputText(" and your mouth. You are being inseminated by the abomination, but you do not care. The fucking is too good. The hot, musky fluids pour into your mouth. The taste crushes your last bit of resistance and you NEED MORE, not just to swallow, but to devour with your womb. You manage to free one hand, only to grasp the tentacle in your mouth to coax more semen inside you. You feel your stomach distend from the amount of cum you greedily swallow. The beast floods you with more cum than you can handle and proceeds to soak you from head to toe in its fluids as it runs from your overwhelmed orifices.", false);
 			doNext(2011);
-			slimeFeed();
+			player.slimeFeed();
 			//lactate more from the encounter.
 			player.boostLactation(.3);
 			return;
@@ -369,7 +369,7 @@ public function doEvent(eventNo:Number):void
 				outputText("The creature's milking tentacles stop moving and you feel the dick-tentacle press sharply against your womb. You feel the thunderous force of hot fluid lance into your body as the creature cums repeatedly inside you, triggering yet another orgasm. The creature cums in surges and shoots repeatedly inside you. Within moments, excess cum spews out of your " + vaginaDescript(0) + " as it cannot hold anymore, but the creature keeps cumming.\n\n", false);
 				outputText("After a while the creature withdraws its tentacles from you. It poises the tentacle-cock over your face and lets out one last load, covering your face in hot, thick sperm. You reflexively open your mouth and allow loads of the salty juice down your throat. Once spent, the creature shambles off, leaving you well milked and cum-soaked.", false);
 			}
-			slimeFeed();
+			player.slimeFeed();
 			//lactate more from the encounter.
 			player.boostLactation(.3);
 		}
@@ -428,7 +428,7 @@ public function doEvent(eventNo:Number):void
 			outputText("In time it returns to it's normal size, losing all the extra volume.", false);
 		if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_TIGHT)
 			player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
-		slimeFeed();
+		player.slimeFeed();
 		if (gameState > 0)
 			cleanupAfterCombat();
 		else
@@ -523,7 +523,7 @@ public function doEvent(eventNo:Number):void
 			outputText("Closing your eyes, it becomes easy to lose yourself in the feeling of plunging in and out of those petals, your tongue a tiny cock. You revel in the decadence of it all, your lips becoming equally sensitive and engorged, french kissing the pussy-flower with abandon, rubbing your puffy lips over it's clit, tongue-fucking the flower with abandon. The petals curl around your face, as a sudden gush of fluid rushes out from deep within the flower, flooding your mouth with tangy sweetness. Your tongue quivers in pleasure as you feel your over-sensitized mouth orgasming, pleasurable and unlike anything else you've experienced. Swallowing instinctively, you collapse back on your haunches, licking your lips and squirming in satisfaction.", false);
 			//Last PG
 			outputText("You walk away, your lips and tongue feeling slightly puffy and sensitive, but none the worse for the wear.", false);
-			slimeFeed();
+			player.slimeFeed();
 			dynStats("sen", 4, "lus=", 0, "cor", 1);
 		}
 		doNext(13);
@@ -612,7 +612,7 @@ public function doEvent(eventNo:Number):void
 			//New PG
 			outputText("An hour or two later, you wake feeling very sore, but satisfied.  The vine must have popped free at some point and the bulb now rests on your pussy lips.  You go to brush it off and nearly orgasm from touching your nether-lips, still sensitive and parted from the overlarge tentacle they so recently took.  A rush of white goop escapes from between your thighs as you stand, soaking back into the soil immediately.   A quick stretch later, you don your gear and head back to camp with a smile.\n\n", false);
 			//Normal stat changes
-			slimeFeed();
+			player.slimeFeed();
 			dynStats("sen", 5, "lus=", 0, "cor", 2);
 			//Xforms
 			//Change hair to green sometimes
@@ -666,7 +666,7 @@ public function doEvent(eventNo:Number):void
 			dynStats("lus", 25 + player.lib / 10, "cor", 2);
 			//Changes start, counted with temp
 			temp = 0;
-			slimeFeed();
+			player.slimeFeed();
 			//Change hair to green sometimes
 			if (rand(3) == 0 && player.hairColor != "green")
 			{
@@ -1322,7 +1322,7 @@ public function doEvent(eventNo:Number):void
 		outputText("As suddenly as it penetrated you, it shifts into a different phase of operation. It buries itself as deep as it can and begins short, rapid strokes. The toy hammers your insides faster than any man could ever hope to do. You orgasm immediately and produce successive climaxes. Your body loses what motor control it had and bucks and undulates wildly as the device pistons your cunt without end. You scream at the top of your lungs. Each yell calls to creation the depth of your pleasure and lust.\n\n", false);
 		outputText("The fiendish belt shifts again. It buries itself as deep as it can go and you feel pressure against the depths of your womanhood. You feel a hot fluid spray inside you. Reflexively, you shout, \"<b>IT'S CUMMING!!!! IT'S CUMMING INSIDE ME!!!</b>\" Indeed, each push of the prodding member floods your box with juice. It cums... and cums... and cums... and cums...\n\n", false);
 		outputText("An eternity passes, and your pussy is sore. It is stretched and filled completely with whatever this thing shoots for cum. It retracts itself from your hole and you feel one last pang of pressure as your body now has a chance to force out all of the spunk that it cannot handle. Ooze sprays out from the sides of the belt and leaves you in a smelly, sticky mess. You feel the belt's tension ease up as it loosens. The machine has run its course. You immediately pass out.", false);
-		slimeFeed();
+		player.slimeFeed();
 		dynStats("lib", 1, "sen", (-0.5), "lus=", 0);
 		doNext(13);
 	}
@@ -1549,7 +1549,7 @@ public function doEvent(eventNo:Number):void
 		outputText("You lean forwards and lick around the nipple's surface, sampling the sweetness of the trickling sap.   The stuff nearly overpowers you with a taste like syrupy cream as more sap drips free of the fully-erect tree-nipple.  Unable to resist testing this nonsensical oddity, you engulf the entire nipple between your lips, suckling hard.   The tree seems to oblige your efforts with a fresh discharge of the sticky sap.   Your tongue tingles and vibrates with the sinfully sweet taste in your mouth, dancing in circles around the nipple, coaxing yet more nectar from swollen plant-jug.  It's easy to lose yourself in that taste, falling into a rhythm of alternatively sucking, swallowing, and licking.\n\n", false);
 		outputText("In time you realize the breast has long since been emptied by your hungry mouth, and you pull free with a pop, letting your tongue run over your now over-sensitive lips.  It seems your entire mouth has been affected by the tree's sap, and is now as sensitive and receptive as a maiden's box.  You don't think you could drink any more sap with how full you feel, and you make ready to depart this perverted place.", false);
 		dynStats("sen", 1, "lus", 15, "cor", .5);
-		slimeFeed();
+		player.slimeFeed();
 		doNext(13);
 		if (player.hasStatusAffect("LustyTongue") < 0)
 		{
@@ -2054,7 +2054,7 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 2257)
 	{
-		edrynBarTalk();
+		telAdre.edryn.edrynBarTalk();
 	}
 	else if (eventNo == 2260)
 	{
@@ -2253,11 +2253,11 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 2493)
 	{
-		arousedByPregdryn();
+		telAdre.edryn.arousedByPregdryn();
 	}
 	else if (eventNo == 2495)
 	{
-		fuckPregEdryn();
+		telAdre.edryn.fuckPregEdryn();
 	}
 	
 	else if (eventNo == 2498)
@@ -2495,7 +2495,7 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 2739)
 	{
-		fellatrixBarApproach();
+		telAdre.dominika.fellatrixBarApproach();
 	}
 	else if (eventNo == 2756)
 	{
@@ -2520,7 +2520,7 @@ public function doEvent(eventNo:Number):void
 	
 	else if (eventNo == 2819)
 	{
-		cottonTantricSex();
+		telAdre.cotton.cottonTantricSex();
 	}
 	else if (eventNo == 2837)
 	{
@@ -2532,7 +2532,7 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 2844)
 	{
-		greetHeckel();
+		telAdre.heckel.greetHeckel();
 	}
 	
 	else if (eventNo == 2855)
@@ -2635,11 +2635,11 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 2933)
 	{
-		nopeAintGotNoneODemSpeculIngredimathings();
+		telAdre.maddie.nopeAintGotNoneODemSpeculIngredimathings();
 	}
 	else if (eventNo == 2934)
 	{
-		handOverIngredientsItBeBakingTimeYo();
+		telAdre.maddie.handOverIngredientsItBeBakingTimeYo();
 	}
 	else if (eventNo == 2940)
 	{
@@ -2805,91 +2805,91 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 3077)
 	{
-		gotInShapeComedyDeclineLottie();
+		telAdre.lottie.gotInShapeComedyDeclineLottie();
 	}
 	else if (eventNo == 3081)
 	{
-		analLottieMilkshake();
+		telAdre.lottie.analLottieMilkshake();
 	}
 	else if (eventNo == 3082)
 	{
-		getSuckedOffByAHamSandwich();
+		telAdre.lottie.getSuckedOffByAHamSandwich();
 	}
 	else if (eventNo == 3107)
 	{
-		lottieFatLoserCulminationLeaveComedyChoice();
+		telAdre.lottie.lottieFatLoserCulminationLeaveComedyChoice();
 	}
 	else if (eventNo == 3110)
 	{
-		ewLottieNo();
+		telAdre.lottie.ewLottieNo();
 	}
 	else if (eventNo == 3113)
 	{
-		charlottesWebComedyBullshit();
+		telAdre.lottie.charlottesWebComedyBullshit();
 	}
 	else if (eventNo == 3133)
 	{
-		giveLottieAnItem();
+		telAdre.lottie.giveLottieAnItem();
 	}
 	else if (eventNo == 3135)
 	{
-		feedLottieLaBova();
+		telAdre.lottie.feedLottieLaBova();
 	}
 	else if (eventNo == 3136)
 	{
-		giveLottieGroPlus();
+		telAdre.lottie.giveLottieGroPlus();
 	}
 	else if (eventNo == 3137)
 	{
-		giveLottieReducto();
+		telAdre.lottie.giveLottieReducto();
 	}
 	else if (eventNo == 3138)
 	{
-		hamSammitchTimeBIATCH();
+		telAdre.lottie.hamSammitchTimeBIATCH();
 	}
 	else if (eventNo == 3139)
 	{
-		lottieFuck();
+		telAdre.lottie.lottieFuck();
 	}
 	else if (eventNo == 3140)
 	{
-		lottieRepeatDoggieStyle();
+		telAdre.lottie.lottieRepeatDoggieStyle();
 	}
 	else if (eventNo == 3141)
 	{
-		lottieRepeatWalkies();
+		telAdre.lottie.lottieRepeatWalkies();
 	}
 	else if (eventNo == 3142)
 	{
-		lottieRepeatCowGirl();
+		telAdre.lottie.lottieRepeatCowGirl();
 	}
 	else if (eventNo == 3143)
 	{
-		lottieRepeatQuickie();
+		telAdre.lottie.lottieRepeatQuickie();
 	}
 	else if (eventNo == 3144)
 	{
-		lottieRepeatThreesome();
+		telAdre.lottie.lottieRepeatThreesome();
 	}
 	else if (eventNo == 3145)
 	{
-		lottieRepeatSUPERNEATORARES();
+		telAdre.lottie.lottieRepeatSUPERNEATORARES();
 	}
 	else if (eventNo == 3146)
 	{
-		lottieRepeatBackwardsAssCowgirl();
+		telAdre.lottie.lottieRepeatBackwardsAssCowgirl();
 	}
 	else if (eventNo == 3147)
 	{
-		lottieRepeatFEMDOMFEMFDOM();
+		telAdre.lottie.lottieRepeatFEMDOMFEMFDOM();
 	}
 	else if (eventNo == 3148)
 	{
-		hugTheShitOutOfYourHam();
+		telAdre.lottie.hugTheShitOutOfYourHam();
 	}
 	else if (eventNo == 3149)
 	{
-		encounterLottie(true);
+		telAdre.lottie.encounterLottie(true);
 	}
 	else if (eventNo == 3150)
 	{
@@ -3246,15 +3246,15 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 3355)
 	{
-		approachHelAtZeBitch();
+		telAdre.edryn.approachHelAtZeBitch();
 	}
 	else if (eventNo == 3357)
 	{
-		helEdrynThreeSomeStartYerEngines();
+		telAdre.edryn.helEdrynThreeSomeStartYerEngines();
 	}
 	else if (eventNo == 3359)
 	{
-		tentaDickLottieButtFuckbuttFuckButtFUCKBUTTFUCKBUTTFUCK();
+		telAdre.lottie.tentaDickLottieButtFuckbuttFuckButtFUCKBUTTFUCKBUTTFUCK();
 	}
 	else if (eventNo == 3360)
 	{
@@ -3262,7 +3262,7 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 3367)
 	{
-		ifrisAndLottieGetsNTRedLiftingWeights();
+		telAdre.lottie.ifrisAndLottieGetsNTRedLiftingWeights();
 	}
 	else if (eventNo == 3373)
 	{
@@ -3318,7 +3318,7 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 3416)
 	{
-		lottiesThirtyMinutePigGasm();
+		telAdre.lottie.lottiesThirtyMinutePigGasm();
 	}
 	else if (eventNo == 3426)
 	{
@@ -3470,31 +3470,31 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 3524)
 	{
-		approachNiamh();
+		telAdre.niamh.approachNiamh();
 	}
 	else if (eventNo == 3525)
 	{
-		getANiamhBeer();
+		telAdre.niamh.getANiamhBeer();
 	}
 	else if (eventNo == 3532)
 	{
-		maybeLaterNiamh();
+		telAdre.niamh.maybeLaterNiamh();
 	}
 	else if (eventNo == 3533)
 	{
-		taintNiamh(true);
+		telAdre.niamh.taintNiamh(true);
 	}
 	else if (eventNo == 3537)
 	{
-		bazaarNiamh();
+		telAdre.niamh.bazaarNiamh();
 	}
 	else if (eventNo == 3542)
 	{
-		seanBimboBrewing();
+		telAdre.niamh.seanBimboBrewing();
 	}
 	else if (eventNo == 3543)
 	{
-		yeahSeanLetsBimbooze();
+		telAdre.niamh.yeahSeanLetsBimbooze();
 	}
 	else if (eventNo == 3557)
 	{
@@ -3915,88 +3915,88 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 3879)
 	{
-		giveRubiClothes("ClssyCl");
+		telAdre.rubi.giveRubiClothes("ClssyCl");
 	}
 	else if (eventNo == 3880)
 	{
-		giveRubiClothes("RbbrClt");
+		telAdre.rubi.giveRubiClothes("RbbrClt");
 	}
 	else if (eventNo == 3881)
 	{
-		giveRubiClothes("AdvClth");
+		telAdre.rubi.giveRubiClothes("AdvClth");
 	}
 	else if (eventNo == 3882)
 	{
-		giveRubiClothes("TubeTop");
+		telAdre.rubi.giveRubiClothes("TubeTop");
 	}
 	else if (eventNo == 3883)
 	{
-		giveRubiClothes("T.BSuit");
+		telAdre.rubi.giveRubiClothes("T.BSuit");
 	}
 	else if (eventNo == 3884)
 	{
-		giveRubiClothes("B.Dress");
+		telAdre.rubi.giveRubiClothes("B.Dress");
 	}
 	else if (eventNo == 3885)
 	{
-		giveRubiClothes("LthrPnt");
+		telAdre.rubi.giveRubiClothes("LthrPnt");
 	}
 	else if (eventNo == 3886)
 	{
-		giveRubiClothes("NurseCl");
+		telAdre.rubi.giveRubiClothes("NurseCl");
 	}
 	else if (eventNo == 3887)
 	{
-		giveRubiClothes("S.Swmwr");
+		telAdre.rubi.giveRubiClothes("S.Swmwr");
 	}
 	else if (eventNo == 3893)
 	{
-		cheatingRubi();
+		telAdre.rubi.cheatingRubi();
 	}
 	else if (eventNo == 3894)
 	{
-		approachRubiScenes();
+		telAdre.rubi.approachRubiScenes();
 	}
 	else if (eventNo == 3895)
 	{
-		buyRubiMilk();
+		telAdre.rubi.buyRubiMilk();
 	}
 	else if (eventNo == 3896)
 	{
-		getTeaFromRubi();
+		telAdre.rubi.getTeaFromRubi();
 	}
 	else if (eventNo == 3897)
 	{
-		chatWithRubi();
+		telAdre.rubi.chatWithRubi();
 	}
 	else if (eventNo == 3898)
 	{
-		rubisFuckingHouseYouPervert();
+		telAdre.rubi.rubisFuckingHouseYouPervert();
 	}
 	else if (eventNo == 3899)
 	{
-		fuckRubi();
+		telAdre.rubi.fuckRubi();
 	}
 	else if (eventNo == 3900)
 	{
-		dildoFuckRubi();
+		telAdre.rubi.dildoFuckRubi();
 	}
 	else if (eventNo == 3901)
 	{
-		teaseRubi();
+		telAdre.rubi.teaseRubi();
 	}
 	else if (eventNo == 3902)
 	{
-		releaseRubi();
+		telAdre.rubi.releaseRubi();
 	}
 	
 	else if (eventNo == 3904)
 	{
-		dontCareAboutNoCheatingRubis();
+		telAdre.rubi.dontCareAboutNoCheatingRubis();
 	}
 	else if (eventNo == 3905)
 	{
-		findBimboCheatster();
+		telAdre.rubi.findBimboCheatster();
 	}
 	else if (eventNo == 3950)
 	{
@@ -4043,7 +4043,7 @@ public function doEvent(eventNo:Number):void
 	}
 	else if (eventNo == 3966)
 	{
-		dominateHeckel();
+		telAdre.heckel.dominateHeckel();
 	}
 	else if (eventNo == 3967)
 	{

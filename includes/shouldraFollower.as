@@ -139,7 +139,7 @@ public function pureMacroValaCont():void {
 public function pureValaAndShouldraMacroMax():void {
 	spriteSelect(67);
 	clearOutput();
-	slimeFeed();
+	player.slimeFeed();
 	outputText("Before she can do anything, you shout out a rather unusual suggestion, though to you it sounds quite exciting.  Vala or Shouldra, whoever she is, smiles wickedly and nods, lifting you up towards the glittering gash between her legs.");
 	outputText("\n\n\"<i>I didn't expect you to come up with such a great idea, Champ, but then again, great minds think alike!</i>\" you hear Shouldra comment through the faerie's soothing voice.");
 	outputText("\n\nUp higher, you can see her puffy labia on display, glistening with moisture that's already beginning to bead on the quickly-flushing skin.  Indeed, her rosy pussy stands in stark contrast to the creamy white skin around it, visibly pulsing and engorging as you close in on it.  A moment later, your nude body makes contact with Vala's honey-pot, pressing against her lips, into her slit and all over her mons.  A sweet, slightly musky smell smears across you as you bump into the gigantic snatch, growing dizzy as the aroma overpowers your senses.  Almost immediately, you give yourself over to that steamy muff, happily stuffing your arms through her curtain-like lips and pulling them wide.  The dripping moisture oozing from the pink chasm seems to fog the very air, and before you can do anything else, a fair hand is clamping around your [legs] and tilting you forward, up and in...");
@@ -1931,7 +1931,7 @@ public function goAlongWIthShouldrasEatingSpree():void {
 		doNext(13);
 	}
 	flags[kFLAGS.SHOULDRA_BAKERY_TIMES]++;
-	slimeFeed();
+	player.slimeFeed();
 }
 
 

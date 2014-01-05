@@ -287,7 +287,7 @@ public function dickwieldersLoseToSandTarps():void {
 	monster.createStatusAffect("Fertilized",0,0,0,0);
 	sandTrapPregChance();
 	dynStats("lib", 1, "lus=", 0);
-	slimeFeed();
+	player.slimeFeed();
 	//reduce lust, increase lib, slimefeed, reset hours since cum
 	cleanupAfterCombat();
 }
@@ -320,7 +320,7 @@ public function chicksLoseToSandTarp():void {
 	//buttpreg only if RNG decided trap was fertilized, reduce lust, increase lib, simefeed
 	if(monster.hasStatusAffect("Fertilized") >= 0) sandTrapPregChance();
 	dynStats("lib", 1, "lus=", 0);
-	slimeFeed();
+	player.slimeFeed();
 	//reduce lust, increase lib, slimefeed, reset hours since cum
 	cleanupAfterCombat();
 }
@@ -354,7 +354,7 @@ public function genderlessLoss():void {
 	sandTrapPregChance();
 	
 	dynStats("lib", 1, "lus=", 0);
-	slimeFeed();
+	player.slimeFeed();
 	//reduce lust, increase lib, slimefeed, reset hours since cum
 	cleanupAfterCombat();
 }

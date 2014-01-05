@@ -23,12 +23,12 @@ public function bakeryuuuuuu():void {
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00243] = Math.round(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00243]);
 	//Chef meetings
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00243] % 8 == 0) {
-		kGAMECLASS.procMaddieOneIntro();
+		telAdre.maddie.procMaddieOneIntro();
 		return;
 	}
 	//Maddie Epilogue trigger!
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] == 3) {
-		kGAMECLASS.bakeryEpilogue();
+		telAdre.maddie.bakeryEpilogue();
 		return;
 	}
 	outputText("", true);
@@ -276,7 +276,7 @@ private function talkBakeryMenu():void {
 	// I guess it just wouldn't do anything?
 	// FWIW, the flag that has to be set to get rubiIntros to return zero is set in a function that has the comment:
 	//(Will no longer encounter Rubi at the bakery.)
-	var rubiB:Number = kGAMECLASS.rubiIntros();
+	var rubiB:Number = telAdre.rubi.rubiIntros();
 	if (rubiB > 0)
 	{
 		addButton(1,rubiT,rubiWrapper,rubiB);
@@ -421,7 +421,7 @@ private function buyFoxBerry():void {
 private function easterBakeSale():void {
 	clearOutput();
 	outputText("You make your way to the bakery only to find that it's so full you can barely squeeze inside.  ");
-	if(kGAMECLASS.rubiAffection() >= 40) outputText("An extremely busy Rubi can only manage a wave in your direction before going back to attending customers.  ");
+	if(telAdre.rubi.rubiAffection() >= 40) outputText("An extremely busy Rubi can only manage a wave in your direction before going back to attending customers.  ");
 	outputText("Seeing all of the holiday bustle hits you with a pang of homesickness, remembering times from Ingnam.  Shaking these feelings off, you make your way to the front of the queue determined to see what the fuss is about.  The normally absent minotaurus chef greets you, adding fuel to your notion that they are understaffed.");
 	outputText("\n\n\"<i>Hello.  You come here often?  We busy.  Will try to do good.</i>\"");
 	//[Check Menu] [Offer Help]

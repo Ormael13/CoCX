@@ -60,7 +60,7 @@ public function oasisTalkAccept():void {
 }
 public function oasisSexing():void {
 	spriteSelect(46);
-	slimeFeed();
+	player.slimeFeed();
 	//New screen
 	outputText("", true);
 	//For manpartz

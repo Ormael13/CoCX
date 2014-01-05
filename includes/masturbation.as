@@ -448,7 +448,7 @@ public function allNaturalStimBeltUse():void {
 		}
 	}
 	cuntChange(1, true);
-	slimeFeed();
+	player.slimeFeed();
 }
 
 //Jojo masturbation!
@@ -1905,7 +1905,7 @@ public function titCum(cumQuantity:Number = 3):void
 
 //(D. Dildo) – a floppy pink dildo with aphrodisiac reservoir
 public function deluxeDildo():void {
-	slimeFeed();
+	player.slimeFeed();
 	outputText("", true);
 	//[USE FEMALE]
 	if(player.hasVagina()) {

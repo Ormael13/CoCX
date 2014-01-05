@@ -2,6 +2,7 @@
 	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.NPCs.*;
 
 	import coc.view.MainView;
@@ -302,7 +303,7 @@ public function doCamp():void {
 	//Cotton preg freakout
 	if(player.pregnancyIncubation <= 280 && player.pregnancyIncubation >= 0 && player.pregnancyType == 20 &&
 	   	flags[kFLAGS.COTTON_KNOCKED_UP_PC_AND_TALK_HAPPENED] == 0 && (model.time.hours == 6 || model.time.hours == 7)) {
-		kGAMECLASS.goTellCottonShesAMomDad();
+		kGAMECLASS.telAdre.cotton.goTellCottonShesAMomDad();
 		hideMenus();
 		return;
 	}

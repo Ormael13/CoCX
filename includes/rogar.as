@@ -321,7 +321,7 @@ public function okayBroLetsHaveAGayCarwash():void {
 	if(player.gender > 0) outputText(", drooling", false);
 	outputText(" parts against the fabric of your clothes.\n\n", false);
 	//<Lust increased, slimefeed,
-	slimeFeed();
+	player.slimeFeed();
 	dynStats("lus", 40);
 	// set Dirt Mc Girt flag = 2 and Ro'gar phase = 2>
 	flags[kFLAGS.ROGAR_DIRT] = 2;
@@ -586,7 +586,7 @@ public function loseButtGinity():void {
 		//<Lust sated, slimefeed>
 	}
 	dynStats("sen", 2, "lus=", 0);
-	slimeFeed();
+	player.slimeFeed();
 	doNext(13);
 }
 
@@ -776,7 +776,7 @@ public function takeDatBroBrewFromDaBigMeanOlOrc():void {
 		}
 	}
 	dynStats("lus=", 0);
-	slimeFeed();
+	player.slimeFeed();
 	doNext(13);
 }
 

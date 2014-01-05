@@ -1212,7 +1212,7 @@ public function postAddictionCampMornings(extra:Boolean = true):void {
 		dynStats("cor", 1);
 	}
 	if(player.lib < 40) dynStats("lib", .1);
-	slimeFeed();
+	player.slimeFeed();
 	if(!extra) return;
 	//(if the player has less than 5 bottles of milk in their inventory or storage containers)
 	if(!hasItem("M. Milk", 5)) {
@@ -1513,7 +1513,7 @@ public function marbleStatusChange(affection:Number, addiction:Number, isAddicte
 }
 
 public function applyMarblesMilk():void {
-	slimeFeed();
+	player.slimeFeed();
 	var str:Number = 5;
 	var tou:Number = 10;
 	//Marble's milk - effect
@@ -2080,7 +2080,7 @@ public function marbleCampSexNew():void {
 			outputText("\n\nObediently, you rise and sit next to her, bringing her other breast towards your mouth while squeezing it appreciatively.  Marble smiles widely and strokes your head as you start nursing from her; warm, sweet milk flows richly into your mouth.  She seems satisfied at pleasing you like this, and warm eyes look over you as you finish nursing from her.");
 			outputText("\n\nA few moments later, the milk flow diminishes somewhat, and your lover speaks.  \"<i>That is enough, sweetie.  Thank you.</i>\"  You move away from her breast, but she pulls you in and gives you a kiss.  \"<i>It was fun; we can try it again anytime.</i>\"");
 			//end scene, minus lust, Marblefeed, slimefeed, whatever other shit, plus Marble lust
-			slimeFeed();
+			player.slimeFeed();
 			flags[kFLAGS.MARBLE_LUST] += 20;
 		}
 		//ORAL
@@ -3055,7 +3055,7 @@ public function marbleNightSexChicks():void {
 	}
 	//PC is female, Marble is a herm
 	else {
-		slimeFeed();
+		player.slimeFeed();
 		outputText("You gently lift yourself up into the air and guide your " + vaginaDescript(0) + " to the tip of her waiting " + marbleCock() + ".  You slowly lower your " + vaginaDescript(0) + " onto her quivering " + marbleCock() + ", gaining inch by inch ", false);
 		//is she satisfied?
 		//If (player can fit all of her cock and PC is not a virgin) {
@@ -3164,7 +3164,7 @@ public function marbleNomNoms():void {
 	//outputText("You go to lie down and notice that Marble hasn't gone to bed yet.  You decide not worry about it too much until you hear Marble come clopping up beside you.  \"<i>Sweetie?</i>\" she calls out to you as she crawls in next to you.  \"<i>Sweetie, I'm feeling really horny and I know you really aren't in the mood, but could you please help me out?</i>\"  You sit up and ask her how you can help; you could never refuse her.  She looks at you slightly embarrassed before asking you, \"<i>Could you please ", false);
 	//If (Marble is a herm) {
 	if(flags[kFLAGS.MARBLE_DICK_TYPE] > 0) {
-		slimeFeed();
+		player.slimeFeed();
 		//outputText("suck my " + marbleCock() + "?  I really, really need it.</i>\"", false);
 		if(player.cor < 30) {
 			outputText("You aren't really comfortable about doing this, but you can't really turn Marble down.  Especially after you were the one to give her that " + marbleCock() + ".\n\n", false);
@@ -3418,7 +3418,7 @@ public function giveMarbleTailjobRelease():void {
 		if(player.tongueType == TONUGE_DEMONIC) outputText("  You decide to put a show for Marble, moving your tail as you drop out a large piece of your inhumanly long tongue, licking up her secretions sensuously while staring at her.  She quickly blushes under your gaze.");
 		outputText("\n\n\"<i>Sweetie, you wouldn't be trying to make me horny all over again, would you?</i>\"");
 		outputText("\n\n\"<i>Well... certainly, when you're not in the mood, repeating this would be very nice.  I hope we can both have fun together next time, though... Thank you, sweetie.</i>\"");
-		slimeFeed();
+		player.slimeFeed();
 	}
 	//teh end
 	//slimefeed if corruption, gain fuckin' lust n lower marble lust n' shit

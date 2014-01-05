@@ -340,7 +340,7 @@ public function wakeUpAfterDemonGangBangs():void {
 	outputText("When you wake up, you are alone, and your restraints are broken.  You are sloshing in a pool of stinky juices; your mouth and ears are still full of it.  Your whole body is covered with a thin white layer that must certainly be dried spooge.  Underneath, you're nothing but bruises and every movement seems to hurt.  A few meters away, outside the pit, you notice your items and your gear.  The village itself appears to be empty... your best assumption is that the residents are hiding, either from shame at having sacrificed you or from awkwardness at the prospect of talking to a sloshing, crusty cumdumpster.  Wearily, you head back to your camp.");
 	//+med-high corruption, - libido, - toughness, - strength, +20 fatigue, high imp preg chance, slimefeed
 	fatigue(20);
-	slimeFeed();
+	player.slimeFeed();
 	dynStats("str", -2,"tou", -2, "spe", -1, "int", -1, "lib", 1, "sen", 1, "lus=", 100, "cor", 3);
 	if(inCombat()) cleanupAfterCombat();
 	else doNext(13);
@@ -508,7 +508,7 @@ public function rapeZeVapula():void {
 		outputText("\n\nA few meters away, outside the pit, you notice your items and your " +player.armorName+ ". The village appears to be deserted. Considering these demons will have a hard time threatening anyone with white goo oozing out of their absurdly milked urethras, you let them rest, wallowing in their pool of mixed spunk.  You pick up your belongings and head back to camp.");
 		//+med-high corruption, + strength/cons, -10 libido, slimefeed, imp preg check
 		dynStats("str", 1,"tou", 1, "lib", -4, "lus=", 0, "cor", 4);
-		slimeFeed();
+		player.slimeFeed();
 		player.knockUp(1,432);
 	}
 	//PC is redirected to camp, next morning. No nightly camp scenes. 
@@ -702,7 +702,7 @@ public function rebeccBathScene():void {
 	outputText("\n\nHer hands stimulate and arouse you ever so slightly, until you tell her desperately you must be completely clean of any demon soiling by now.  You both laugh together awkwardly as you rise from the bathtub; she watches you greedily as you slowly don your [armor].  You eventually leave her, a little saddened.  Rebecc gives you a chaste kiss on your cheek before bidding you farewell.  \"<i>And be sure to come back, hero.  I can't wait to clean you up again.</i>\"");
 	//Lust +30, Corr -2, Lib +1, slimefeed
 	dynStats("lib", 1, "lus", 30, "cor", -2);
-	slimeFeed();
+	player.slimeFeed();
 	doNext(13);
 }
 //Rebecc Rape scene (for discerning penises) (Z)

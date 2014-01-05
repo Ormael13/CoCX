@@ -31,12 +31,12 @@ public function serviceLowCorruption():void
 	{
 		outputText("The throbbing of the slime's " + eCockDescript(0) + " continues to grow stronger until the creature surprises you by reforming its arms and reaching up to grab you as you grasp him, holding your hands at the tip of its cock.  A fraction of a moment later the thing visibly arches its back off the ground and erupts into your palm, a thick jet of its green fluid splashing fiercely against your hands and spilling down the length of its penis, soaking both of your hands and even splashing onto your nearby lap.  You watch the creature's face with a mixture of shock and a sudden surge of excitement, its erection and face both turning smooth and featureless, before its cock slowly recedes back into its body.  The slime slowly begins to retreat as you return to your senses, looking down at your hands covered in the creature's green fluids.  When you look up again the creature is gone.\n", false);
 	}
-	slimeFeed();
+	player.slimeFeed();
 	dynStats("sen", 2);
 }
 public function serviceLowCorruptionHighLust():void
 {
-	slimeFeed();
+	player.slimeFeed();
 	outputText("You find yourself unable to tear your eyes away from the creature as it undulates almost hypnotically in front of you, the heat in your crotch rising.  The rigid protrusion at its middle visibly pulses and throbs, and with a small grin you step closer to the ooze and strip off your clothing.\n\n", true);
 	outputText("You straddle the creature's chest and playfully run a hand over the tip of its featureless member, which is moist and soft to the touch.", false);
 	//Tall peeps
@@ -362,7 +362,7 @@ public function maleRapesOoze():void {
 }
 
 public function femaleRapesOoze():void {
-	slimeFeed();
+	player.slimeFeed();
 	outputText("You feel a stirring inside your feminine side as you eye the slime's throbbing erection, and decide to take advantage of its current state to satisfy your own urges.  You strip off your clothes and walk forward, straddling the creature's thighs and running a hand over its member.  You pull it in against your body and stroke the soft, velvety, and just slightly moist shaft,", false);
 	if(player.cocks.length > 0)
 	{
@@ -459,7 +459,7 @@ public function femaleRapesOoze():void {
 
 public function oozeButtRapesYou():void 
 {
-	slimeFeed();
+	player.slimeFeed();
 	outputText("You collapse under the beating from the slime's soft but heavy fists, dazed and disoriented.  You weakly try to resist as the slime rolls you onto your stomach and lifts your " + buttDescript() + " into the air as it takes up a position behind you.  It holds your head against the ground with one hand and strips off your clothes with the other, pressing its trunk up against you.  Its skin is soft, velvety, and firm, but it is also easily pliable.  You feel something grow out of its body and almost instantly realize whats going on.  The slime rubs its moist cock between your cheeks for a moment, before pulling back.  You realize with a tiny bit of fear that the creature's tool must be massive – over a foot, at least, and several inches wide!  It runs its tip over your ", false);
 	//Girls get fondled. 
 	if(player.vaginas.length > 0) outputText(vaginaDescript(0)+ " and " + assholeDescript(), false);
@@ -520,7 +520,7 @@ public function oozeButtRapesYou():void
 
 public function oozeRapesYouOrally():void
 {
-	slimeFeed();
+	player.slimeFeed();
 	outputText("You collapse under the beating from the slime's soft but heavy fists, dazed and disoriented.  The creature surges forward, covering you and forcing you to the ground as it rests on your gut, putting just enough of its apparently enormous weight onto you to keep you pinned.  It leans forward, it's massive upper body easily shadowing you, and ", false);
 	//Low corrupppppption blush!
 	if(player.cor < 20) outputText("you blush as ", false);
@@ -575,7 +575,7 @@ public function oozeRapesYouOrally():void
 
 public function oozeRapesYouVaginally():void
 {
-	slimeFeed();
+	player.slimeFeed();
 	outputText("You collapse under the beating from the slime's soft but heavy fists, dazed and disoriented.  The creature lunges at you with surprising speed, grabbing you by the ankles and pulling you towards it.  You try to pull away as it pulls you up against its trunk, momentarily fearful that it's going to try and absorb you.  ", false);
 	//shy result
 	if(player.cor <= 20)

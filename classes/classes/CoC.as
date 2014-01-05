@@ -157,19 +157,16 @@
 
 		include "../../includes/april_fools.as";
 
-		include "../../includes/cotton.as";
 		include "../../includes/dreams.as";
 		include "../../includes/dungeon2Supplimental.as";
 		include "../../includes/dungeonCore.as";
 		include "../../includes/dungeonEvents.as";
 		include "../../includes/dungeonHelSupplimental.as";
 		include "../../includes/dungeonSandwitch.as";
-		include "../../includes/edryn.as";
 		include "../../includes/essrayle.as";
 		include "../../includes/exgartuan.as";
 		include "../../includes/faerie.as";
 		include "../../includes/fapArena.as";
-		include "../../includes/fellatrix.as";
 		include "../../includes/fera.as";
 		include "../../includes/fuckingTree.as";
 		include "../../includes/gangbangVillage.as";
@@ -177,10 +174,8 @@
 		include "../../includes/harpySophie.as";
 		include "../../includes/harpySophieBimbo.as";
 		include "../../includes/harpySophieFollower.as";
-		include "../../includes/heckel.as";
 		include "../../includes/heliaFollower.as";
 		include "../../includes/heliaPreggers.as";
-		include "../../includes/ifris.as";
 		include "../../includes/isabella.as";
 		include "../../includes/isabellaFollower.as";
 		include "../../includes/items.as";
@@ -196,10 +191,7 @@
 		include "../../includes/latexy.as";
 		include "../../includes/library.as";
 		include "../../includes/lilium.as";
-		include "../../includes/loppe.as";
-		include "../../includes/lottie.as";
 		include "../../includes/lumi.as";
-		include "../../includes/maddie.as";
 		include "../../includes/marae.as";
 		include "../../includes/marble.as";
 		include "../../includes/masturbation.as";
@@ -208,7 +200,6 @@
 		include "../../includes/minotaur.as";
 		include "../../includes/minotaurGang.as";
 		include "../../includes/naga.as";
-		include "../../includes/niamh.as";
 		include "../../includes/oasis.as";
 		include "../../includes/ooze.as";
 		include "../../includes/perkPicker.as";
@@ -217,7 +208,6 @@
 		include "../../includes/rathazul.as";
 		include "../../includes/rogar.as";
 		include "../../includes/roxanne.as";
-		include "../../includes/rubi.as";
 		include "../../includes/runa.as";
 		include "../../includes/salamander.as";
 		include "../../includes/salon.as";

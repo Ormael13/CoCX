@@ -45,7 +45,7 @@ package classes.Scenes.Areas
 			}
 			//Find Niamh
 			if (flags[kFLAGS.NIAMH_MOVED_OUT_COUNTER] == 1) {
-				kGAMECLASS.niamhPostTelAdreMoveOut();
+				kGAMECLASS.telAdre.niamh.niamhPostTelAdreMoveOut();
 				return;
 			}
 			//Find Owca

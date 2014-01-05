@@ -1,4 +1,13 @@
-﻿//const RUBI_AFFECTION:int = 604;
+﻿package classes.Scenes.Places.TelAdre {
+	import classes.CockTypesEnum;
+	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
+
+	public class Rubi extends TelAdreAbstractContent {
+public function Rubi(){
+
+}
+//const RUBI_AFFECTION:int = 604;
 //const RUBI_DISABLED:int = 605;
 
 //0 = not admitted (she), 1 = "he", 2 = "she"
@@ -58,12 +67,12 @@
 //const RUBI_INQUISITORS_CORSET:int = 1013;
 //const RUBI_SETUP:int = 1014;
 
-public function rubiSprite():void {
+private function rubiSprite():void {
 	if(flags[kFLAGS.RUBI_HORNTYPE] > 0) spriteSelect(102);
 	spriteSelect(101);
 }
 
-public function initializeRubi():void {
+private function initializeRubi():void {
 	if(flags[kFLAGS.RUBI_BIMBO] == 0) {
 		flags[kFLAGS.RUBI_BREAST_SIZE] = 0;
 		flags[kFLAGS.RUBI_COCK_SIZE] = 5;
@@ -78,16 +87,16 @@ public function initializeRubi():void {
 	}
 	flags[kFLAGS.RUBI_SETUP] = 1;
 }
-public function rubiBalls():String {
+private function rubiBalls():String {
 	return "normal";
 	return "swollen";
 	return "massively engorged";
 }
 
-public function rubiBimbo():Boolean {
+private function rubiBimbo():Boolean {
 	return (flags[kFLAGS.RUBI_BIMBO] > 0);
 }
-public function rubiIncubus():Boolean {
+private function rubiIncubus():Boolean {
 	return (flags[kFLAGS.RUBI_INCUBUS_PROGRESS] == 3);
 }
 public function rubiAffection(delt:Number = 0):Number {
@@ -98,10 +107,10 @@ public function rubiAffection(delt:Number = 0):Number {
 	return flags[kFLAGS.RUBI_AFFECTION];
 }
 
-public function rubiCock():String {
-	return NPCCockDescript(flags[kFLAGS.RUBI_COCK_TYPE], flags[kFLAGS.RUBI_COCK_SIZE], 50);
+private function rubiCock():String {
+	return kGAMECLASS.NPCCockDescript(flags[kFLAGS.RUBI_COCK_TYPE], flags[kFLAGS.RUBI_COCK_SIZE], 50);
 }
-public function rubiBreasts():String {
+private function rubiBreasts():String {
 	var ret:String = "pair of ";
 
 
@@ -111,12 +120,12 @@ public function rubiBreasts():String {
 	{
 		ret += breastCup(flags[kFLAGS.RUBI_BREAST_SIZE]);
 		ret += " ";
-		ret += npcBreastDescript(flags[kFLAGS.RUBI_BREAST_SIZE]);
+		ret += kGAMECLASS.npcBreastDescript(flags[kFLAGS.RUBI_BREAST_SIZE]);
 	}
 
 	return ret;
 }
-public function rubiChest():String {
+private function rubiChest():String {
 	return rubiBreasts();
 }
 public function rubiCapacity():Number {
@@ -126,7 +135,7 @@ public function rubiCapacity():Number {
 		bonus += 200;		// MAKE IT FIT
 	return 24 + bonus;
 }
-public function rubiMF(man:String,woman:String):String {
+private function rubiMF(man:String,woman:String):String {
 	if(flags[kFLAGS.RUBI_ADMITTED_GENDER] < 1) return woman;
 	else {
 		if(flags[kFLAGS.RUBI_SHE] == 1) return woman;
@@ -146,7 +155,7 @@ public function rubiMF(man:String,woman:String):String {
 //Rubi can be found in the Tel'Adre bakery from 12:00 to 20:00.  He is available to everyone, regardless of gender, corruption or transformation.  Rubi, however, is not interested in Centaurs, Naga or Driders (as of yet), and such PCs won't be able to advance beyond Relationship 19.  If players gain such bodies after reaching this level, the option to go home with Rubi won't be available.
 
 //When the player reaches Relationship 50, a special scene is triggered.
-public function specialRelationship20scene():void {
+private function specialRelationship20scene():void {
 	clearOutput();
 	rubiSprite();
 	outputText("As you're leaving the bakery, you hear the clicking of heels behind you.  Turning back you see Rubi rushing towards you shouting, \"<i>Hey, wait a second!</i>\"  You do, and wait for her to catch up.  Stopping in front of you, she puts her hands on her dainty knees and catches her breath.");
@@ -165,7 +174,7 @@ public function specialRelationship20scene():void {
 	simpleChoices("Accept",acceptRubi,"Reject",rejectRubi,"",0,"",0,"",0);
 }
 //[If Accept]
-public function acceptRubi():void {
+private function acceptRubi():void {
 	clearOutput();
 	rubiSprite();
 	outputText("You wrap your arms around and pull him into a hug.  You declare that you like him no matter what sort of genitals he happened to be born with.");
@@ -182,7 +191,7 @@ public function acceptRubi():void {
 }
  
 //[If Reject]
-public function rejectRubi():void {
+private function rejectRubi():void {
 	clearOutput();
 	rubiSprite();
 	outputText("With your hands on his shoulders you carefully keep him at arm's length.  Putting it as delicately as you can, you tell him that you're just not interested in him <i>that</i> way, not anymore at least.");
@@ -195,7 +204,7 @@ public function rejectRubi():void {
  
 
 //Bakery Intro scenes
-public function rubiIntros():Number {
+internal function rubiIntros():Number {
 	if(flags[kFLAGS.RUBI_SETUP] == 0) {
 		initializeRubi();
 	}
@@ -233,8 +242,7 @@ public function approachRubiScenes():void {
 	}
 	//(Approach repeat, relationship 20+.  At this stage, randomly select an outfit from what the PC has given him, plus his waitress outfit.  Variants included for Bimbo /Incubus Rubi.)
 	else {
-		var choices:Array = new Array();
-		choices[choices.length] = 1;
+		var choices:Array = [1];
 		if(flags[kFLAGS.RUBI_SUITCLOTHES] == 1) choices[choices.length] = 2;
 		if(flags[kFLAGS.RUBI_FETISH_CLOTHES] == 1) choices[choices.length] = 3;
 		//(Green Adventurer's Clothing (Normal)
@@ -658,7 +666,7 @@ public function rubisFuckingHouseYouPervert():void {
 	addButton(9,"Leave",eventParser,13);
 }
 
-public function rubiSexMenu():void {
+private function rubiSexMenu():void {
 	//[Fuck Rubi (if player has cock, OR at least a 4</i>\" clit)] [Dildo Fuck (If player has Deluxe Dildo)] [Tease] [Release (Only if Normal or Incubus Rubi who has been teased)] [Titfuck (Bimbo Rubi only)] [Give Item]
 	var fuck:int = 0;
 	var dildo:int = 0;
@@ -697,7 +705,7 @@ public function rubiSexMenu():void {
 
 
 //Talk
-public function talkToRubiInHouse():void {
+private function talkToRubiInHouse():void {
 	clearOutput();
 	rubiSprite();
 	outputText("You just want to talk with Rubi for now.  What do you want to talk about?");
@@ -705,7 +713,7 @@ public function talkToRubiInHouse():void {
 	addButton(0,"Identity",rubiIdentity);
 }
 
-public function rubiIdentity():void {
+private function rubiIdentity():void {
 	clearOutput();
 	rubiSprite();
 	//Identity
@@ -735,7 +743,7 @@ public function rubiIdentity():void {
 }
 
 //He
-public function rubiIsAHe():void {
+private function rubiIsAHe():void {
 	clearOutput();
 	rubiSprite();
 	flags[kFLAGS.RUBI_SHE] = 0;
@@ -744,7 +752,7 @@ public function rubiIsAHe():void {
 	addButton(9,"Back",rubisFuckingHouseYouPervert);
 }
 //She
-public function rubiIsAShe():void {
+private function rubiIsAShe():void {
 	clearOutput();
 	rubiSprite();
 	flags[kFLAGS.RUBI_SHE] = 1;
@@ -942,7 +950,7 @@ public function dildoFuckRubi():void {
 	if(player.hasCock()) outputText("  Meanwhile, [eachCock] stiffens, throbbing as the drug overtakes it.");
 	if(player.lactationQ() > 0) outputText("  As the warmth spreads up your body, not even your breasts are left alone.  Your nipples harden and begin leaking milk, which pours down the sides of your body and is soaked up into the cushions beneath you.");
 	//(Virginity/stretch check!)
-	cuntChange(30,true,true,false);
+	player.cuntChange(30,true,true,false);
 	
 	outputText("\n\nYou let the dildo inch further inside the both of you as you wiggle your way closer to Rubi.  Your little demon partner \"<i>oohs</i>\" and \"<i>aahs</i>\" with every little movement.  You feel the thickness of the toy increasing as more of your bodily juices seep into it.  Wanting a little extra, you reach down and grab the middle of the toy, rocking it back and forth, fucking both you and Rubi at the same time.");
 	
@@ -1184,7 +1192,7 @@ public function findBimboCheatster():void {
 	simpleChoices("Interrupt",interruptTheNTRsYouCrazyFool,"Watch n Wait",waitAndGetNTRedLikeTheBoyBitchYouAre,"",0,"",0,"",0);
 }
 //(Interrupt)
-public function interruptTheNTRsYouCrazyFool():void {
+private function interruptTheNTRsYouCrazyFool():void {
 	clearOutput();
 	rubiSprite();
 	outputText("No one's sticking their dick in your ");
@@ -1214,7 +1222,7 @@ public function interruptTheNTRsYouCrazyFool():void {
 }
 
 //(Wait)
-public function waitAndGetNTRedLikeTheBoyBitchYouAre():void {
+private function waitAndGetNTRedLikeTheBoyBitchYouAre():void {
 	clearOutput();
 	rubiSprite();
 	outputText("You decide to wait and see how this plays out.  The man fully disrobes and it's not at all surprising to you that he's not fully human.  A pair of wolf-like ears are perched upon his head, while a fluffy white and grey tail extends from his waist.  The wolfman opens his mouth to speak, but you can't hear what he says from out here.  Whatever it was, it certainly got Rubi's attention.");
@@ -1241,7 +1249,7 @@ public function waitAndGetNTRedLikeTheBoyBitchYouAre():void {
 }
 
 //(Resolution)
-public function NTRbimboBitchResolution():void {
+private function NTRbimboBitchResolution():void {
 	clearOutput();
 	rubiSprite();
 	outputText("You look at Rubi and say that you're definitely going to have to talk about what just happened.");
@@ -1255,7 +1263,7 @@ public function NTRbimboBitchResolution():void {
 }
 
 //(No)
-public function noBimboNTR():void {
+private function noBimboNTR():void {
 	clearOutput();
 	rubiSprite();
 	outputText("Folding your arms, you shake your head.  You tell her that if this is going to work out, she has to remain faithful to you.  Sex toys and masturbation will have to do to keep her \"<i>urges</i>\" under control.  She looks a little sad, but nods as you speak.");
@@ -1265,7 +1273,7 @@ public function noBimboNTR():void {
 	doNext(13);
 }
 //(Yes)
-public function yesBimboNTR():void {
+private function yesBimboNTR():void {
 	clearOutput();
 	rubiSprite();
 	outputText("You contemplate it for a moment, and then slowly nod your head.  What's the harm in letting her blow off steam?  You know she'll always come back to you.  You assent to her wishes, to which she squeals and hugs you tightly, tossing the pink cushion aside.");
@@ -1276,7 +1284,7 @@ public function yesBimboNTR():void {
 }
 
 //(Break Up)
-public function breakUpWithRubi():void {
+private function breakUpWithRubi():void {
 	clearOutput();
 	rubiSprite();
 	outputText("You think about it for a long moment and then sigh sadly.  You look Rubi dead in the eyes and explain you can't be with a woman who wants to cheat on her partner.  Tears form in her eyes as she sniffles, but she nods with you.");
@@ -1287,7 +1295,7 @@ public function breakUpWithRubi():void {
 	doNext(13);
 }
 //(Pimp)
-public function pimpOutRubi():void {
+private function pimpOutRubi():void {
 	clearOutput();
 	rubiSprite();
 	outputText("You think about it for a long while, mulling over all the possibilities.  Then something else occurs to you. She wants help controlling her urges, why not make a little money in the meantime?  You explain that she's free to sleep with whoever she wants, but that she could charge them for her time.  After all, if you're going to do what you love, you may as well get paid for it.");
@@ -1310,7 +1318,7 @@ public function pimpOutRubi():void {
 //	Rubi nods towards the bottles and box in the corner and gives you a sly wink.  \"<i>Want another massage?</i>\"
 
 //Actual Scene:
-public function chocoRubiMassage():void {
+private function chocoRubiMassage():void {
 	clearOutput();
 	rubiSprite();
 	outputText("You look over his supplies and decide that a pampered day at Rubi's \"spa\" is just what you need.  Allowing him to escort you to his bed, you catch a few peeps of a pint-sized pup-tent in Rubi's bottoms.  He doesn't seem aware of your prying gaze, but he's blushing nonetheless, perhaps lost in his own less-than-pure thoughts as he guides you to the corner of his room.");
@@ -1342,7 +1350,7 @@ public function chocoRubiMassage():void {
 	outputText("\n\nDo you let him release or force him to stay all bottled up?  He has been awful nice...");
 	fatigue(-40);
 	dynStats("lib", -1, "lus", 5);
-	flags[kFLAGS.TIMES_RUBI_MASSAGED]++
+	flags[kFLAGS.TIMES_RUBI_MASSAGED]++;
 	//[Release] [Nope]
 	//{Not Pent Up: Go to release}
 	menu();
@@ -1351,7 +1359,7 @@ public function chocoRubiMassage():void {
 }
 
 //Bottle Up:
-public function bottleUpRubiMassage():void {
+private function bottleUpRubiMassage():void {
 	clearOutput();
 	rubiSprite();
 	outputText("You bite the strawberry in half and mouth, \"<i>No, not yet.  Just let it build up.</i>\"  He whines plaintively, but you cock your head to the side and say, \"<i>Come on, do it for me.  Just, don't let any out....  Here, come off of there and come into bed with me.  We can snuggle and let you relax a bit.</i>\"");
@@ -1363,7 +1371,7 @@ public function bottleUpRubiMassage():void {
 }
 
 //Release/Not Pent Up
-public function releaseRubiMassage():void {
+private function releaseRubiMassage():void {
 	clearOutput();
 	rubiSprite();
 	outputText("You figure after all the pampering he did, he deserves a treat.");
@@ -1391,7 +1399,7 @@ public function releaseRubiMassage():void {
 }
 	
 //Closet
-public function goInRubisClosetSoThatYouCanComeOutOfTheCloset():void {
+private function goInRubisClosetSoThatYouCanComeOutOfTheCloset():void {
 	clearOutput();
 	rubiSprite();
 	outputText("You ask to see Rubi's wardrobe.  [rubi Eir] eyes light up and [rubi ey] claps [rubi eir] hands together excitedly.  \"<i>");
@@ -1407,7 +1415,7 @@ public function goInRubisClosetSoThatYouCanComeOutOfTheCloset():void {
 }
 
 //Appearance
-public function rubiAppearance():void {
+private function rubiAppearance():void {
 	clearOutput();
 	rubiSprite();
 	outputText("You look over your naked, demon-morph lover.");
@@ -1483,13 +1491,13 @@ public function rubiAppearance():void {
 }
 
 //Get Dressed
-public function playDressUp():void {
+private function playDressUp():void {
 	clearOutput();
 	rubiSprite();
 	outputText("You look over Rubi's vast collection of clothes.  What outfit would you like Rubi to put on?\n\n");
 	menu();
-	var closet:Array = new Array();
-	var buttonNames:Array = new Array();
+	var closet:Array = [];
+	var buttonNames:Array = [];
 	if(flags[kFLAGS.RUBI_SUITCLOTHES] == 1) {
 		closet[closet.length] = "Suitclothes";
 		buttonNames[buttonNames.length] = "Suit";
@@ -1565,13 +1573,13 @@ public function playDressUp():void {
 	}
 	addButton(9,"Back",rubiAppearance);
 }
-public function playDressUp2():void {
+private function playDressUp2():void {
 	clearOutput();
 	rubiSprite();
 	outputText("You look over Rubi's vast collection of clothes.  What outfit would you like Rubi to put on?\n\n");
 	menu();
-	var closet:Array = new Array();
-	var buttonNames:Array = new Array();
+	var closet:Array = [];
+	var buttonNames:Array = [];
 	if(flags[kFLAGS.RUBI_SUITCLOTHES] == 1) {
 		closet[closet.length] = "Suitclothes";
 		buttonNames[buttonNames.length] = "Suit";
@@ -1644,7 +1652,7 @@ public function playDressUp2():void {
 	addButton(9,"Back",rubiAppearance);
 }
 
-public function dressUpRouter(arg:String):void {
+private function dressUpRouter(arg:String):void {
 	clearOutput();
 	rubiSprite();
 	if(arg == "Suitclothes") putOnASuitYouSlut();
@@ -1666,7 +1674,7 @@ public function dressUpRouter(arg:String):void {
 }
 
 //Waitress Uniform
-public function putRubiInAWaitressUniform():void {
+private function putRubiInAWaitressUniform():void {
 	clearOutput();
 	rubiSprite();
 	outputText("You tell Rubi you'd like to see [rubi em] in the waitress uniform.  \"<i>Hm, well all right, but it's just my work clothes,</i>\" [rubi ey] replies.");
@@ -1702,7 +1710,7 @@ public function putRubiInAWaitressUniform():void {
 	addButton(4,"Back",rubiAppearance);
 }
 //Dashing Outfit
-public function putOnADashingOutfitYouWhore():void {
+private function putOnADashingOutfitYouWhore():void {
 	clearOutput();
 	rubiSprite();
 	outputText("You tell Rubi you'd like to see [rubi em] in the dashing outfit.  \"<i>Ohh, feeling like plundering a little booty today?</i>\" [rubi ey] asks with a coy smile.");
@@ -1724,7 +1732,7 @@ public function putOnADashingOutfitYouWhore():void {
 }
 
 //Adventurer's Outfit
-public function goOnAnAnalAdventureRubiNotReallyJustAnAdventurersOutfit():void {
+private function goOnAnAnalAdventureRubiNotReallyJustAnAdventurersOutfit():void {
 	clearOutput();
 	rubiSprite();
 	outputText("You tell Rubi you'd like to see [rubi em] in the adventurer's outfit.  \"<i>Ah yes, am I going to be the Champion now?</i>\" Rubi asks, balling up [rubi eir] dainty hands and putting them on [rubi eir] hips.  \"<i>Rubi, Champion of Mareth!  Slayer of demons and ");
@@ -1753,7 +1761,7 @@ public function goOnAnAnalAdventureRubiNotReallyJustAnAdventurersOutfit():void {
 }
 
 //Long Dress
-public function giveRubiALongDressToHideHerHideousBody():void {
+private function giveRubiALongDressToHideHerHideousBody():void {
 	clearOutput();
 	rubiSprite();
 	outputText("You tell Rubi you'd like to see [rubi em] in the long dress.  \"<i>Oohh, I just </i>love<i> that one! One second!</i>\" [rubi ey] says as [rubi ey] pulls out the dress and several accessories.");
@@ -1779,7 +1787,7 @@ public function giveRubiALongDressToHideHerHideousBody():void {
 }
 
 //Nurse's Clothes
-public function rubiPutsOnNursesClothesSoSheCanCheckYourTemperature():void {
+private function rubiPutsOnNursesClothesSoSheCanCheckYourTemperature():void {
 	clearOutput();
 	rubiSprite();
 	outputText("You tell Rubi you'd like to see [rubi em] in the nurse's uniform.  \"<i>Ohh, coming down with a bit of a fever?  Do you need a sponge bath?</i>\" [rubi ey] says coyly, before gathering up the clothing.");
@@ -1805,7 +1813,7 @@ public function rubiPutsOnNursesClothesSoSheCanCheckYourTemperature():void {
 }
 
 //Rubber Fetish Clothes
-public function rubiHasARubberFetish():void {
+private function rubiHasARubberFetish():void {
 	clearOutput();
 	rubiSprite();
 	outputText("You tell Rubi you'd like to see [rubi em] in the rubber fetish outfit.  \"<i>Ohoh,</i>\" [rubi ey] giggles and quirks an eyebrow at you, \"</i>feeling a bit kinky are we?</i>\"");
@@ -1833,7 +1841,7 @@ public function rubiHasARubberFetish():void {
 }
 
 //Suitclothes
-public function putOnASuitYouSlut():void {
+private function putOnASuitYouSlut():void {
 	clearOutput();
 	rubiSprite();
 	outputText("You tell Rubi you'd like to see [rubi em] in the suit.  \"<i>Oh, really?  It looks nice, but you don't think it's too manly?</i>\"");
@@ -1855,7 +1863,7 @@ public function putOnASuitYouSlut():void {
 }
 
 //Tube-Top
-public function putOnATubeTopYouWhore():void {
+private function putOnATubeTopYouWhore():void {
 	clearOutput();
 	rubiSprite();
 	outputText("You tell Rubi you'd like to see [rubi em] in the tube top and shorts.  \"<i>Ooh, I like that one.  It's a little risque, but so cute!</i>\"");
@@ -1876,7 +1884,7 @@ public function putOnATubeTopYouWhore():void {
 }
 
 //Slutty Swimwear
-public function putOnSluttySwimwearYouSkank():void {
+private function putOnSluttySwimwearYouSkank():void {
 	clearOutput();
 	rubiSprite();
 	outputText("You tell Rubi you'd like to see [rubi em] in the swimsuit.  \"<i>Oh, but there's no pool or lake nearby.  Or do you just want to see me in a bikini?</i>\"  Rubi giggles a moment.");
@@ -1898,7 +1906,7 @@ public function putOnSluttySwimwearYouSkank():void {
 }	
 	
 //Bimbo Minidress
-public function putOnADressYouBimbo():void {
+private function putOnADressYouBimbo():void {
 	clearOutput();
 	rubiSprite();
 	outputText("You tell Rubi you'd like to see [rubi em] in the minidress.  \"<i>Oh that cute little thing we picked up together?  For sure!  It's so cute!</i>\"");
@@ -1917,7 +1925,7 @@ public function putOnADressYouBimbo():void {
 }	
 
 //Bodysuit
-public function putOnMyBodysuitYouWhore():void {
+private function putOnMyBodysuitYouWhore():void {
 	clearOutput();
 	rubiSprite();
 	outputText("You tell Rubi you'd like to see [rubi em] in the bodysuit.  \"<i>Oh, that thing is pretty cute,</i>\" [rubi ey] says, \"<i>Though there's not much to it.  But I suppose that's the point, huh?</i>\"");
@@ -1938,7 +1946,7 @@ public function putOnMyBodysuitYouWhore():void {
 	addButton(4,"Back",rubiAppearance);
 }
 //Bondage Straps
-public function putOnBondageStrapsYouBondageTrap():void {
+private function putOnBondageStrapsYouBondageTrap():void {
 	clearOutput();
 	rubiSprite();
 	outputText("You tell Rubi you'd like to see [rubi em] in the bondage straps.  \"<i>Oh!  That outfit, huh?</i>\"  Rubi blushes brightly");
@@ -1955,7 +1963,7 @@ public function putOnBondageStrapsYouBondageTrap():void {
 }
 
 //Inquisitor's Corset
-public function whyTheFuckIsRubiWearingAnInquisitorsCorset():void {
+private function whyTheFuckIsRubiWearingAnInquisitorsCorset():void {
 	clearOutput();
 	rubiSprite();
 	outputText("You tell Rubi you'd like to see [rubi em] in the inquisitor's corset.  \"<i>Oh my, I really love that one.  It's so pretty and lacy!</i>\"");
@@ -1978,7 +1986,7 @@ public function whyTheFuckIsRubiWearingAnInquisitorsCorset():void {
 }
 
 //Risque Waitress Uniform
-public function putOnAWaitressUniformYouWhore():void {
+private function putOnAWaitressUniformYouWhore():void {
 	clearOutput();
 	rubiSprite();
 	outputText("You tell Rubi you'd like to see [rubi em] in the risque version of [rubi eir] normal waitress uniform.  \"<i>Oh, you like that outfit, huh?  I thought you might,</i>\" Rubi says with a giggle.");
@@ -2000,13 +2008,13 @@ public function putOnAWaitressUniformYouWhore():void {
 	addButton(0,"Date",dateIntro,cookingDate);
 	addButton(4,"Back",rubiAppearance);
 }
-public function cookingDate():void {
+private function cookingDate():void {
 	outputText("\n\n<b>Third forgot to write this one!</b>");
 	doNext(13);
 }
 
 //Dates
-public function dateIntro(date:*):void {
+private function dateIntro(date:*):void {
 	clearOutput();
 	rubiSprite();
 	//(First Time)
@@ -2034,7 +2042,7 @@ public function dateIntro(date:*):void {
 //Ice-Cream Date
 //For Waitress Uniform, Dashing Outfit, Adventurer's Outfit, Nurse Uniform
 //Costs 2 gems.
-public function iceCreamDate():void {
+private function iceCreamDate():void {
 	player.gems -= 2;
 	statScreenRefresh();
 	rubiSprite();
@@ -2064,7 +2072,7 @@ public function iceCreamDate():void {
 
 //Fancy Dinner Date
 //For Suitclothes, Long Dress.
-public function fancyDate():void {
+private function fancyDate():void {
 	rubiSprite();
 	//Costs 10 gems
 	if(player.gems >= 10) {
@@ -2098,7 +2106,6 @@ public function fancyDate():void {
 		//[to sex menu]
 		rubiSexMenu();
 		addButton(9,"Leave",eventParser,13);
-		return;
 	}
 	//Can't Afford It?
 	else {
@@ -2111,7 +2118,7 @@ public function fancyDate():void {
 
 //Exhibitionist Date
 ///For Tube Top, Slutty Swimwear, Bimbo Minidress, Bondage Straps.
-public function exhibitionistDate():void {
+private function exhibitionistDate():void {
 	rubiSprite();
 	outputText("\n\nYou think carefully as to where you could go.  With [rubi em] dressed up as sluttily as [rubi ey] is, you think a nice dinner is out of the question.  However, perhaps you can have a bit of fun taking a walk around town.  You wrap your arm around your lover's waist and together the two of you strike out into the warm Tel'Adran air.");
 	outputText("\n\nYou head away from the more populated avenues of the city.  Rubi fidgets slightly, not used to being so… exposed on the streets.  You whisper words of encouragement in [rubi eir] ear, saying how sexy [rubi ey] is looking, that [rubi ey] shouldn't feel bad about flaunting it.  In fact, you suggest, [rubi ey] might even like to show off a bit more to the random people you pass.");
@@ -2138,7 +2145,7 @@ public function exhibitionistDate():void {
 
 //Bar Date
 //For Rubber Fetish Clothes, Bodysuit, Inquisitor's Corset.
-public function barDate():void {
+private function barDate():void {
 	rubiSprite();
 	outputText("\n\nYou think carefully about where you could go.  Your companion is not quite dressed well enough for any kind of fancy dinner, but you think you could head down to the local bar for a drink or two.  You wrap your arm around Rubi's waist and together the two of you head out onto the streets of Tel'Adre.  You head from street to street until you come upon the local bar, the \"Wet Bitch\".");
 	
@@ -2173,7 +2180,7 @@ public function barDate():void {
 //Repeatable
 //Must have a cock greater than Rubi's capacity.
 //Rubi's capacity won't go larger than 100.
-public function anallyTrainYourBitchBoySlutHowToBeAnalForDCL():void {
+private function anallyTrainYourBitchBoySlutHowToBeAnalForDCL():void {
 	clearOutput();
 	rubiSprite();
 	flags[kFLAGS.RUBI_TIMES_ANALLY_TRAINED]++;
@@ -2382,7 +2389,7 @@ public function anallyTrainYourBitchBoySlutHowToBeAnalForDCL():void {
 //PC gets fucked by Rubi
 //Rubi must have at least a 5" cock
 //Requires 75 Affection
-public function getFuckedByRubi():void {
+private function getFuckedByRubi():void {
 	clearOutput();
 	rubiSprite();
 	outputText("Rather than wait for you to initiate something, Rubi takes you by the hands and leads you into the bedroom.  [rubi Ey] puts one arm on your shoulder and runs [rubi eir] fingers up through the hair on the back of your head before pulling you into a deep kiss.  Rubi's ");
@@ -2424,8 +2431,8 @@ public function getFuckedByRubi():void {
 	outputText(" emerges from the foreskin surrounding it as [rubi eir] cock strains, aching for something, anything to fill.");
 
 	outputText("\n\nWith a look into your eyes, confirming [rubi eir] desires, [rubi ey] gives [rubi eir] cock what it wants.  One swift motion is all it takes as Rubi sinks [rubi eir] dick inside you several inches.  The feeling of penetration makes you moan suddenly, louder than you wanted to.  Rubi smiles, pulls out a few inches, and pushes back inside, just a little deeper.  This time it's your demonic lover's turn to moan as you clamp your [vagOrAss] around [rubi eir] invading member, tightening around [rubi em] like a vice.");
-	if(!player.hasVagina()) buttChange(flags[kFLAGS.RUBI_COCK_SIZE] * flags[kFLAGS.RUBI_COCK_SIZE]/6,true,true,false);
-	else cuntChange(flags[kFLAGS.RUBI_COCK_SIZE] * flags[kFLAGS.RUBI_COCK_SIZE]/6,true,true,false);
+	if(!player.hasVagina()) player.buttChange(flags[kFLAGS.RUBI_COCK_SIZE] * flags[kFLAGS.RUBI_COCK_SIZE]/6,true,true,false);
+	else player.cuntChange(flags[kFLAGS.RUBI_COCK_SIZE] * flags[kFLAGS.RUBI_COCK_SIZE]/6,true,true,false);
 
 	outputText("\n\nRubi takes hold of one of your legs, lifting it up onto [rubi eir] shoulder and thrusts in just a little bit deeper.  The movement is just right, rubbing your ");
 	if(!player.hasVagina()) outputText("prostate");
@@ -2485,7 +2492,7 @@ public function getFuckedByRubi():void {
 //PC must have a penis
 //If Rubi is being teased, adds +1 to blueballs
 //-100 arousal for PC
-public function rubiHotdogging():void {
+private function rubiHotdogging():void {
 	clearOutput();
 	rubiSprite();
 	outputText("You sit on the couch next to your sexy lover and pull [rubi em] onto your lap with one smooth motion.  Rubi giggles, wiggling in place for a moment before leaning down to kiss you on the lips.  You put one hand on [rubi eir] supple ass, and another on [rubi eir] back between [rubi eir] shoulders and pull [rubi em] close, pressing your [tongue] into [rubi eir] mouth.  You sensually explore your partner's mouth as [rubi ey] closes [rubi eir] eyes and moans.");
@@ -2547,7 +2554,7 @@ public function rubiHotdogging():void {
 }
 
 //Tease
-public function teaseButtjobs():void {
+private function teaseButtjobs():void {
 	clearOutput();
 	rubiSprite();
 	outputText("Grinning to yourself, you decide to tease the little demon " + rubiMF("boy","girl") + " a little further.  You plunge your thumb further into [rubi eir] ");
@@ -2581,7 +2588,7 @@ public function teaseButtjobs():void {
 }
 
 //Pop
-public function popButtjobs():void {
+private function popButtjobs():void {
 	clearOutput();
 	rubiSprite();
 	outputText("No, you figure Rubi has been so great lately [rubi ey] definitely deserves to cum.  You plunge your thumb further into [rubi eir] ");
@@ -2633,7 +2640,7 @@ public function popButtjobs():void {
 //(Can give him Purified Succubus Milk, grows boobs, shrinks penis.)
 //(Can give him Purified Incubus Draft, shrinks boobs, grows penis.)
 //(Can give him Gro+ to grow either one.)
-public function giveRubiATFItem(short:String):void {
+private function giveRubiATFItem(short:String):void {
 	clearOutput();
 	rubiSprite();
 	//First Time Giving a TF Item
@@ -3025,7 +3032,7 @@ public function giveRubiATFItem(short:String):void {
 }
 
 //GRO+/REDUCTO
-public function rubiGrowPlusBreasts():void {
+private function rubiGrowPlusBreasts():void {
 	clearOutput();
 	rubiSprite();
 	outputText("You hand over the vial of blueish liquid.  Rubi takes a moment to look it over, before taking a deep breath and injecting half of the vial into one breast and the rest into [rubi eir] other breast.");
@@ -3053,7 +3060,7 @@ public function rubiGrowPlusBreasts():void {
 	//Go back to give item menu.
 }
 //(If Penis)
-public function rubiPenisGroPlus():void {
+private function rubiPenisGroPlus():void {
 	clearOutput();
 	rubiSprite();
 	outputText("You hand over the vial of greenish liquid.  Rubi takes a moment to look it over before, before taking a deep breath and injecting the entire thing into the base of [rubi eir] [rubi cock].");
@@ -3093,7 +3100,7 @@ public function rubiPenisGroPlus():void {
 	//Go back to give item menu.
 }
 //(If Breasts)
-public function rubiBoobsReducto():void {
+private function rubiBoobsReducto():void {
 	clearOutput();
 	rubiSprite();
 	outputText("You hand over the jar of paste.  Rubi looks it over and, after giving it a sniff, uses two fingers to scoop up some of the pale substance, smearing it over [rubi eir] breasts.  Before long, the jar is empty and [rubi eir] [rubi breasts] are covered in the stuff.");
@@ -3108,7 +3115,7 @@ public function rubiBoobsReducto():void {
 }
 
 //(If Penis)
-public function rubiPenisReducto():void {
+private function rubiPenisReducto():void {
 	clearOutput();
 	rubiSprite();
 	outputText("You hand over the jar of paste.  Rubi looks it over and, after giving it a sniff, uses two fingers to scoop up some of the pale substance, smearing it over [rubi eir] penis.  Before long, the jar is empty and [rubi eir] [rubi cock] is covered in the stuff.");
@@ -3125,13 +3132,13 @@ public function rubiPenisReducto():void {
 }
 
 //Give Item.
-public function pickAnItemToFeedRubi():void {
+private function pickAnItemToFeedRubi():void {
 	clearOutput();
 	rubiSprite();
-	var closet:Array = new Array();
-	var gifts:Array = new Array();
+	var closet:Array = [];
+	var gifts:Array = [];
 	
-	var buttonNames:Array = new Array();
+	var buttonNames:Array = [];
 	if(flags[kFLAGS.RUBI_SUITCLOTHES] == 1) {
 		closet[closet.length] = "Suitclothes";
 		buttonNames[buttonNames.length] = "Suit";
@@ -3238,8 +3245,8 @@ public function pickAnItemToFeedRubi():void {
 	outputText("What will you give [rubi em]?");
 	//The following items can be given to Rubi at Relationship 20+: Suit Clothes, Rubber Fetish Outfit, Green Adventurer's Clothing, Tube Top, Bodysuit, Long Dress, Tight Leather Pants, Nurse Clothes, Slutty Swimwear.  Only once per item.
 	//The following items can be given to Rubi at Relationship 40+: Bimbo Liqueur (once), Incubus Draft (up to three times).  Incubus Rubi can't be given Bimbo Liqueur, and likewise Bimbo Rubi can't be given Incubus Draft.
-	var events:Array = new Array();
-	var functions:Array = new Array();
+	var events:Array = [];
+	var functions:Array = [];
 	if(hasItem("ClssyCl",1) && flags[kFLAGS.RUBI_SUITCLOTHES] == 0) {
 		events[events.length] = 3879;
 		functions[functions.length] = eventParser;
@@ -3332,7 +3339,7 @@ public function pickAnItemToFeedRubi():void {
 	while(events.length < 10) {
 		events[events.length] = 0;
 	}
-	var eventNames:Array = new Array();
+	var eventNames:Array = [];
 	temp = 0;
 	while(temp < 10) {
 		if(events[temp] == 3879) eventNames[eventNames.length] = "Suitclothes";
@@ -3396,4 +3403,6 @@ public function giveRubiClothes(short:String = ""):void {
 	else if(short == "BonStrp") flags[kFLAGS.RUBI_BONDAGE_STRAPS] = 1;
 	rubiAffection(20);
 	doNext(rubisFuckingHouseYouPervert);
+}
+}
 }

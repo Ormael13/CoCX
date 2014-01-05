@@ -1030,7 +1030,7 @@ public function succubusLossRape():void {
 	}
 }
 public function succubusVictoryRape():void {
-	slimeFeed();
+	player.slimeFeed();
 	outputText("", true);
 	//MALE
 	if(player.cocks.length > 0 && (player.gender != 3 || rand(2))) {
@@ -1164,7 +1164,7 @@ public function dungeonSuccubusForceFeed():void {
 	cleanupAfterCombat();
 }
 public function incubusLossRape():void {
-	slimeFeed();
+	player.slimeFeed();
 	outputText("", true);
 	//Nipplefuck city
 	if(player.hasFuckableNipples() && player.lust >= 100) {
@@ -1268,7 +1268,7 @@ public function incubusVictoryRapeBackdoor():void {
 	outputText("All too soon, he grunts and shivers as loads of his hot cum begin to squirt into you. He may be cumming, but you're not done yet; each squirt of seed only fans the flames of lust within you, making your increasingly wet and noisy thrusts even harder. Enjoying the ride and still nowhere near satisfied, you start sliding up and down on his slick pole even faster than before. He halfheartedly tries to push you off as you continue draining him of his seed, your lust seemingly unquenchable. But you cannot be stopped; his efforts only add to your pleasure as he struggles and unloads underneath you. With your belly beginning to swell with the cum you're relentlessly drawing from the incubus, you don't know how much longer either of you will last. Each movement of his tool inside you heightens the fire inside you until, with an unholy roar, the pleasure peaks and wave after wave of shuddering orgasm crashes over you. Each one hits hotter and harder than the last until finally, your senses are overcome and you lose consciousness entirely.\n\n", false);
 	outputText("You awaken moments later beside a sleeping, limp, and drained incubus. You have definitely come out on top from the encounter. Though you feel stretched, sticky and a little sore, for the moment at least the burning desire to fill your " + assholeDescript() + " is satisfied.", false);
 	buttChange(monster.cockArea(0), true);
-	slimeFeed();
+	player.slimeFeed();
 	dynStats("lus=", 0, "cor", 2);
 	cleanupAfterCombat();
 }
@@ -1312,7 +1312,7 @@ public function incubusVictoryRapeSex():void {
 	}
 	//(VAGINAL - Requires Vagina)
 	else {
-		slimeFeed();
+		player.slimeFeed();
 		outputText("With a few deft motions, you shift your " + player.armorName + " to expose your ", false);
 		//Herm
 		if(player.gender == 3) {
@@ -1344,7 +1344,7 @@ public function incubusVictoryRapeSex():void {
 
 //Service the incubus after winning (WHY DO THIS?  BECAUSE ITS HOT!)
 public function incubusVictoryService():void {
-	slimeFeed();
+	player.slimeFeed();
 	outputText("", true);
 	outputText("You lick your lips, moistening them as you decide that the demon will provide your next 'snack'.  Touching the defeated incubus' soft skin, you grab him by the wrists and yank him to his clawed feet. Leaning him back against the wall as he sways unsteadily, you tenderly slide down his body and take the measure of his monstrous meat with your hands. The smooth skin and tiny bumps slide between each finger as his manhood firms and twitches in response.  You glance up and grab his baseball size nuts, caressing the smooth hairless sack that contains them, watching the demon-man sigh and relax with equal parts desire and relief.\n\n", false);
 	outputText("You lean forwards, opening your mouth ", false);

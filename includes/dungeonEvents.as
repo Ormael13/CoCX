@@ -491,7 +491,7 @@ public function doDungeon(eventNo:Number):void {
 			dynStats("lus", 3);
 			if(player.hasStatusAffect("DemonSeed") < 0) player.createStatusAffect("DemonSeed",5,0,0,0);
 			else player.statusAffects[player.hasStatusAffect("DemonSeed")].value1 += 7;
-			slimeFeed();
+			player.slimeFeed();
 		}
 		//Chest
 		if(temp == 1) {
@@ -500,7 +500,7 @@ public function doDungeon(eventNo:Number):void {
 				dynStats("lus", 3);
 				if(player.hasStatusAffect("DemonSeed") < 0) player.createStatusAffect("DemonSeed",5,0,0,0);
 				else player.statusAffects[player.hasStatusAffect("DemonSeed")].value1 += 8;
-				slimeFeed();
+				player.slimeFeed();
 			}
 			else outputText(allBreastsDescript() + ".  Thankfully it doesn't seem to have much effect.", false);
 		}
@@ -511,7 +511,7 @@ public function doDungeon(eventNo:Number):void {
 				dynStats("lus", 3);
 				if(player.hasStatusAffect("DemonSeed") < 0) player.createStatusAffect("DemonSeed",5,0,0,0);
 				else player.statusAffects[player.hasStatusAffect("DemonSeed")].value1 += 8;
-				slimeFeed();
+				player.slimeFeed();
 			}
 			else outputText("crotch.  Thankfully, it doesn't seem to have much effect.", false);
 		}
@@ -546,7 +546,7 @@ public function doDungeon(eventNo:Number):void {
 			}
 			outputText("You glance over to the pile of glistening entwined bodies as they writhe in pleasure, and find yourself drawn in to the mass.  You spend the next four hours suckling tainted breast milk, fucking gaping pussies, and doing your damnedest to milk as much cum from the dick-girls around you.  Eventually the drugs work their way out of your system, leaving you to recover on the floor.  Cum, milk, and sweat drip from your nude form as you try to clean up and get dressed.", false);
 			dynStats("int", -2, "lib", 4, "lus=", 0, "cor", 4);
-			slimeFeed();
+			player.slimeFeed();
 			player.createStatusAffect("TensionReleased",0,0,0,0);
 		}
 		//Second/third times...
@@ -598,7 +598,7 @@ public function doDungeon(eventNo:Number):void {
 				dynStats("int", -2, "lib", 4, "lus=", 0, "cor", 4);
 				player.createStatusAffect("TensionReleased",0,0,0,0);
 				player.statusAffects[player.hasStatusAffect("TensionReleased")].value1++;
-				slimeFeed();
+				player.slimeFeed();
 			}
 			//Third time
 			else {

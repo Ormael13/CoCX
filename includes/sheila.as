@@ -1864,7 +1864,7 @@ public function consensualSheila69(cock:Boolean = true):void {
 		outputText("\n\nEr... well, there's definitely something to be said against tying up her friends and fucking them silly... without sharing them with you, anyway.  Ah, wait, that slippery thought you were trying to hold onto just got away from you again when Sheila's breast heaved in your hand.  Speaking of things to grab hold of and tie up...");
 		//minus lust, minus small libido; if PC corr > sheila corruption then -10 PC corr and +10 sheila corruption, else if PC corr < sheila corruption then +10 PC corr and -10 sheila corruption and slimefeed
 		dynStats("lib", -.5, "lus=", 0);
-		slimeFeed();	
+		player.slimeFeed();
 		//[Fondle Her][Listen to Her]
 		menu();
 		addButton(0,"Listen2Her",sheilaCorruptionWarningListenToHer);
@@ -1893,7 +1893,7 @@ public function consensualSheila69(cock:Boolean = true):void {
 		dynStats("cor", 10);
 		sheilaCorruption(-10);
 	}*/
-	slimeFeed();	
+	player.slimeFeed();
 	
 	outputText("\n\nShe unruffles for a moment, and then pulls in close beside you.  ");
 	//[(sheila xp = 3)
@@ -4571,7 +4571,7 @@ public function clitSwellingDemonSheilaClitSoundingAnal():void {
 	//reduce lust and libido, increase sensitivity, remove virgin vag if PC clit>12", slimefeed if PC clit>12" or PC corr <50, increase clit by 1" before perk mod; if PC corr <50 then +10 corr and -10 sheila corruption, else if PC corr >=50 then -10 corr and +10 sheila corruption
 	if(player.clitLength > 12 || player.cor < 50) {
 		cuntChange(12,false,false,false);
-		slimeFeed();
+		player.slimeFeed();
 	}
 	player.clitLength++;
 	if(player.hasPerk("Big Clit") >= 0) player.clitLength += .5;
@@ -4751,8 +4751,8 @@ public function missionaryForThePurposesOfCreatingImpsWithSheila():void {
 		//if long scene, sheilapreg check,  reduce lust, reduce libido, slimefeed if corr < 50; if PC corr <50 then +10 corr and -10 sheila corruption, else if PC corr >=50 then -10 corr and +10 sheila corruption
 		sheilaPreg();
 		dynStats("lib", -1, "lus=", 0);
-		slimeFeed();
-		if(player.cor < 50) slimeFeed();
+		player.slimeFeed();
+		if(player.cor < 50) player.slimeFeed();
 		if(player.cor < 50) {
 			dynStats("cor", 10);
 			sheilaCorruption(-10);
@@ -5198,7 +5198,7 @@ public function winAgainstDemoNSheilaForVaginas():void {
 		player.vaginas[0].vaginalWetness++;
 	}
 	//slimefeed, reduce lust, reduce libido, +10 corr and sheila corruption -10 if corr <50 or -10 corr and sheila corruption +10 if corr >= 50, also fertility and wetness increases as denoted in the text
-	slimeFeed();
+	player.slimeFeed();
 	dynStats("lib", -1, "lus=", 0);
 	if(player.cor < 50) {
 		sheilaCorruption(-10);

@@ -335,8 +335,8 @@ public function itemUse(shortName1:String):void {
 	else if(shortName1 == "I.Robes") equipArmor("inquisitor's robes");
 	else if(shortName1 == "I.Corst") equipArmor("inquisitor's corset");
 	else if(shortName1 == "S.Blade") equipWeapon("inscribed spellblade");
-	else if(shortName1 == "BC Beer") blackCatBeerEffects();
-	else if(shortName1 == "BimboCh") bimboChampagne(true,true);
+	else if(shortName1 == "BC Beer") telAdre.niamh.blackCatBeerEffects();
+	else if(shortName1 == "BimboCh") telAdre.niamh.bimboChampagne(true,true);
 	else if(shortName1 == "FoxBery") foxTF();
 	else if(shortName1 == "VixVigr") foxTF(true);
 	else if(shortName1 == "GooArmr") equipArmor("goo armor");
@@ -1786,7 +1786,7 @@ public function doItems(eventNo:Number):void {
 	}
 	//Gro+ Ballzzzz
 	if(eventNo == 1039) {
-		slimeFeed();
+		player.slimeFeed();
 		outputText("You sink the needle deep into your " + sackDescript() + ".  It hurts like hell, but you push down the plunger and the pain vanishes as the needles contents flow into you.\n\n", true);
 		//1 in 4 BIG growth.
 		if(rand(4) == 0) {
@@ -1804,7 +1804,7 @@ public function doItems(eventNo:Number):void {
 	}
 	//Gro+ Breasts
 	if(eventNo == 1040) {
-		slimeFeed();
+		player.slimeFeed();
 		outputText("You sink the needle into the flesh of your " + allBreastsDescript() + " injecting each with a portion of the needle.\n\n", true);
 		if(player.breastRows.length == 1) growTits((1+rand(5)),1,true,1);
 		else growTits(1+rand(2),player.breastRows.length,true,1);
@@ -1813,7 +1813,7 @@ public function doItems(eventNo:Number):void {
 	}
 	//Clit
 	if(eventNo == 1041) {
-		slimeFeed();
+		player.slimeFeed();
 		outputText("You sink the needle into your clit, nearly crying with how much it hurts.  You push down the plunger and the pain vanishes as your clit starts to grow.\n\n", true);
 		player.clitLength++;
 		outputText("Your " + clitDescript() + " stops growing after an inch of new flesh surges free of your netherlips.  It twitches, feeling incredibly sensitive.", false);
@@ -1822,7 +1822,7 @@ public function doItems(eventNo:Number):void {
 	}
 	//COCK!
 	if(eventNo == 1042) {
-		slimeFeed();
+		player.slimeFeed();
 		outputText("You sink the needle into the base of your " + multiCockDescriptLight() + ".  It hurts like hell, but as you depress the plunger, the pain vanishes, replaced by a tingling pleasure as the chemicals take effect.\n\n", true);
 		if(player.cocks.length == 1) {
 			outputText("Your " + cockDescript(0) + " twitches and thickens, pouring more than an inch of thick new length from your ", false);
@@ -1848,7 +1848,7 @@ public function doItems(eventNo:Number):void {
 	}
 	//NURPLES
 	if(eventNo == 1043) {
-		slimeFeed();
+		player.slimeFeed();
 		outputText("You sink the needle into each of your " + nippleDescript(0) + "s in turn, dividing the fluid evenly between them.  Though each injection hurts, the pain is quickly washed away by the potent chemical cocktail.\n\n", true);
 		//Grow nipples
 		outputText("Your nipples engorge, prodding hard against the inside of your " + player.armorName + ".  Abruptly you realize they've grown more than an additional quarter-inch.\n\n", false); 
@@ -3076,7 +3076,7 @@ public function destroyItems(itemName:String, numOfItemToRemove:Number):Boolean
 }
 //Cerulean P.
 public function ceruleanPotion():void {
-	slimeFeed();
+	player.slimeFeed();
 	//Repeat genderless encounters
 	if(player.gender == 0 && flags[kFLAGS.CERULEAN_POTION_NEUTER_ATTEMPTED] > 0) {
 		outputText("You take another sip of the Cerulean Potion.  You find it soothing and become very excited about the possibility of another visit from the succubus.", true);
@@ -3099,7 +3099,7 @@ public function ceruleanPotion():void {
 }
 //Vitality Tincture
 public function vitalityTincture():void {
-	slimeFeed();
+	player.slimeFeed();
 	outputText("You down the contents of the bottle. The liquid is thick and tastes remarkably like cherries. Within moments, you feel much more fit and healthy.", true);
 	//str change
 	temp = rand(3);
@@ -3118,7 +3118,7 @@ public function vitalityTincture():void {
 }
 //Scholar's Tea
 public function scholarsTea():void {
-	slimeFeed();
+	player.slimeFeed();
 	outputText("Following the merchant's instructions, you steep and drink the tea. Its sharp taste fires up your palate and in moments, you find yourself more alert and insightful. As your mind wanders, a creative, if somewhat sordid, story comes to mind. It is a shame that you do not have writing implements as you feel you could make a coin or two off what you have conceived. The strange seller was not lying about the power of the tea.", true);
 	if(rand(3) == 0) outputText(player.modTone(15,1), false);
 	dynStats("int", (2.5 + rand(5)));
@@ -3126,7 +3126,7 @@ public function scholarsTea():void {
 
 /* ITEMZZZZZ FUNCTIONS GO HERE */
 public function incubiDraft(tainted:Boolean):void {
-	slimeFeed();
+	player.slimeFeed();
 	var temp2:Number = 0;
 	var temp3:Number = 0;
 	var rando:Number = rand(100);
@@ -3361,11 +3361,11 @@ public function tatteredScroll():void {
 		spriteSelect(50);
 		outputText("\n\nYou hear the soft impact of clothes hitting the ground behind you, and turn to see that the sand witch has found you! You cannot resist a peek at your uninvited guest, beholding a curvy dark-skinned beauty, her form dominated by a quartet of lactating breasts.  Somewhere in your lust-fogged mind you register the top two as something close to double-Ds, and her lower pair to be about Cs.  She smiles and leans over you, pushing you to the ground violently.\n\nShe turns around and drops, planting her slick honey-pot firmly against your mouth.  Her scent is strong, overpowering in its intensity.  Your tongue darts out for a taste and finds a treasure trove of sticky sweetness.  Instinctively you tongue-fuck her, greedily devouring her cunny-juice, shoving your tongue in as far possible while suckling her clit.  Dimly you feel the milk spattering over you, splashing off you and into the cracked earth.  Everywhere the milk touches feels silky smooth and sensitive, and your hands begin stroking your body, rubbing it in as the witch sprays more and more of it.  You lose track of time, orgasming many times, slick and sticky with sexual fluids.", false);
 		dynStats("lib", 1, "sen", 5, "lus=", 0);
-		slimeFeed();
+		player.slimeFeed();
 	}
 }
 public function minotaurCum():void {
-	slimeFeed();
+	player.slimeFeed();
 	//Minotaur cum addiction
 	minoCumAddiction(7);
 	outputText("", true);
@@ -3415,7 +3415,7 @@ public function minotaurCum():void {
 	}
 }
 public function minotaurBlood():void {
-	slimeFeed();
+	player.slimeFeed();
 	//Changes done
 	var changes:Number = 0;
 	//Change limit
@@ -3827,7 +3827,7 @@ public function minotaurBlood():void {
 	
 }
 public function equinum():void {
-	slimeFeed();
+	player.slimeFeed();
 	//Changes done
 	var changes:Number = 0;
 	//Change limit
@@ -4340,7 +4340,7 @@ public function equinum():void {
 	
 }
 public function succubiMilk(tainted:Boolean):void {
-	slimeFeed();
+	player.slimeFeed();
 	var temp2:Number = 0;
 	var temp3:Number = 0;
 	var rando:Number = Math.random()*100;
@@ -5292,7 +5292,7 @@ public function impFood():void {
 	}	
 }
 public function pureHoney(pure:Boolean):void {
-	slimeFeed();
+	player.slimeFeed();
 	outputText("", true);
 	var changes:Number = 0;
 	var changeLimit:Number = 1;
@@ -5457,7 +5457,7 @@ public function pureHoney(pure:Boolean):void {
 }
 
 public function succubisDelight(tainted:Boolean):void {
-	slimeFeed();
+	player.slimeFeed();
 	var changes:Number = 0;
 	var crit:Number = 1;
 	//Determine crit multiplier (x2 or x3)
@@ -5530,7 +5530,7 @@ public function succubisDelight(tainted:Boolean):void {
 	}
 }
 public function succubisDream():void {
-	slimeFeed();
+	player.slimeFeed();
 	var changes:Number = 0;
 	var crit:Number = 1;
 	//Determine crit multiplier (x2 or x3)
@@ -5660,7 +5660,7 @@ EGG TYPES-
 6 - 
 */
 public function ovipositionElixer():void {
-	slimeFeed();
+	player.slimeFeed();
 	var changes:Number = 0;
 	//Females!
 	if(player.vaginas.length > 0) { 
@@ -6671,7 +6671,7 @@ public function reducto():void {
 
 
 public function lactaid():void {
-	slimeFeed();
+	player.slimeFeed();
 	var i:Number = 0
 	outputText("You gulp down the bottle of lactaid, easily swallowing the creamy liquid.", true);
 	//Bump up size!
@@ -6722,7 +6722,7 @@ public function eggShifter(eggCode:Number):void {
 }
 
 public function useMarbleMilk():void {
-	slimeFeed();
+	player.slimeFeed();
 	//Bottle of Marble's milk - item
 	//Description: "A clear bottle of milk from Marble's breasts.  It smells delicious.  "
 	outputText("", true);
@@ -6779,7 +6779,7 @@ If the player's nipples are larger than 1 inch in length, this item is guarantee
 Very small chance to increase fertility (normally this increase would only happen when the player forces a creature to drink their milk).
 */
 public function laBova(tainted:Boolean = true, enhanced:Boolean = false):void {
-	slimeFeed();
+	player.slimeFeed();
 	//Changes done
 	var changes:Number = 0;
 	//Change limit
@@ -7263,7 +7263,7 @@ public function whiteSpellbook():void {
 }
 
 public function lustDraft(fuck:Boolean = false):void {
-	slimeFeed();
+	player.slimeFeed();
 	outputText("You drink the ", true);
 	if(fuck) outputText("red", false);
 	else outputText("pink", false);
@@ -7335,7 +7335,7 @@ public function lustDraft(fuck:Boolean = false):void {
 	outputText("\n\n", false);
 }
 public function goblinAle():void {
-	slimeFeed();
+	player.slimeFeed();
 	var changes:Number = 0;
 	var changeLimit:Number = 1;
 	var counter:Number = 0;
@@ -7679,11 +7679,6 @@ public function slimeBadEnd():void {
 }
 
 
-//Slime feeding
-public function slimeFeed():void {
-	player.slimeFeed();
-}
-
 
 public function sharkTooth(type:Number = 0):void {
 	var changes:Number = 0;
@@ -7865,7 +7860,7 @@ This also means that someone who's already reached the maximum numbers of dicks 
 */
 
 public function snakeOil():void {
-	slimeFeed();
+	player.slimeFeed();
 	outputText("", true);
 	var changes:Number = 0;
 	var changeLimit:Number = 1;
@@ -8463,7 +8458,7 @@ public function catTransformation():void {
 }
 
 public function reptilum():void {
-	slimeFeed();
+	player.slimeFeed();
 	//init variables
 	var changes:Number = 0;
 	var changeLimit:Number = 1;
@@ -11765,7 +11760,7 @@ public function lustyMaidenPaizuri():void {
 	
 	outputText("\n\nThe stink of sperm slowly fades as you move, almost seeming to absorb into your skin.  It leaves you with a healthy glow and a surety to your movements, sure that your revealing armor is going to protect you.");
 	//Slimefeed, minus slight corruption if PC is a virgin, raise sensitivity
-	slimeFeed();
+	player.slimeFeed();
 	flags[kFLAGS.BIKINI_ARMOR_BONUS] += 2;
 	if(flags[kFLAGS.BIKINI_ARMOR_BONUS] > 8) flags[kFLAGS.BIKINI_ARMOR_BONUS] = 8;
 	dynStats("sen", 2, "lus=", 0);

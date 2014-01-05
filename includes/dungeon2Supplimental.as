@@ -2286,7 +2286,7 @@ public function incubusNoDeal():void {
 public function incubusShop():void {
 	spriteSelect(52);
 	if(flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] == 1) {
-		getBimboozeFromSean();
+		telAdre.niamh.getBimboozeFromSean();
 		return;
 	}
 	outputText("", true);
@@ -2469,7 +2469,7 @@ public function bigValaDomsPC():void {
 	outputText("\n\nShouldra pops out of Vala's belly, asking, \"<i>Like what I did with her pussy, Champ?  They're so much more fun when they're pulling you into their welcoming wetness, don't you think?</i>\"  She smirks at the look in your eyes and flies into you, her comforting, familiar presence reappearing in the back of your mind.  \"<i>Oh wow, Champ, did you get off on that?  You did - you horndog you!  I should've rode that one out inside you!</i>\"");
 	outputText("\n\nWhile you stand there, dripping sexual juices, Vala gradually starts to diminish in size.  Sadly, her breasts seem to return to normal faster than the rest, which leaves her disproportional while she journeys towards her normal shape.  She's still locked in climax, leaking an ever-shrinking amount of fluid.  The smaller she gets, the faster her change progresses.  Then, with an alarming abruptness, she flops down in the lake of lady-spunk she left behind, moaning pleasantly.");
 	outputText("\n\nYou lift her up out of the mess and carry her to the stream where you both clean up.  Vala murmurs, \"<i>My hero...</i>\" as you wash her, too wiped out to do it herself.  Vala recovers by the time you're getting re-dressed, and she gives you a surprisingly chaste, blushing kiss before she gets ready to depart.  The faerie seems to have some degree of magical affinity, as she's able to knit her dress back together with a bit of mental effort, and then she's fluttering away, calling out her goodbyes to you as she journeys back to Tel'Adre.");
-	slimeFeed();
+	player.slimeFeed();
 	dynStats("lus=", 0);
 	doNext(13);
 }
@@ -2587,7 +2587,7 @@ public function valaDommyVapula3Some():void {
 	outputText("\n\nVala climaxes, pulling you both out as a river of fem-spunk gushes out behind you, and you and your lust-locked demoness drag across the faerie's enhanced pleasure-buzzer, smearing her lusty juices across her pulsating, sensitive organ while you thoroughly feed your demoness's insatiable cum-hunger.");
 	outputText("\n\nEventually, you're dropped to the ground, panting for your breath while Vapula's tongue slowly withdraws.  You separate, realizing that during the lengthy cum Shouldra returned to you, and Vala is rapidly dwindling behind you.  The three of you have a playful swim in the stream to get cleaned up before Vala mends her clothing and goes on her way, thanking you for having the chance to feel what it's like to be in charge.");
 	dynStats("lus=", 0, "cor", 1);
-	slimeFeed();
+	player.slimeFeed();
 	doNext(13);
 }
 //Giant Vala + Vapula Threesome - Vala Lovey Dovey
@@ -2619,7 +2619,7 @@ public function valaLoveyVapula3Some():void {
 	outputText(", ensuring that every single drop is passed into her ravenous gash.");
 	outputText("\n\nYou aren't sure how long you stay like that, but eventually, Vala finishes with her own pleasure and sets the pair of you down on the ground, still joined together, groin-to-groin.  You're so sensitive from your recent orgasm that separation is almost painful.  Only after you're free do you realize that Shouldra slipped back into you, and Vala is shrinking down behind you.  The three of you bathe and get dressed together, Vala using some strange magic to repair her dress before she goes.");
 	dynStats("lus=", 0, "cor", 1);
-	slimeFeed();
+	player.slimeFeed();
 	doNext(13);
 }
 

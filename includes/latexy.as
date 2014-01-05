@@ -1437,7 +1437,7 @@ public function femalePCDomFucksLatexGooFuta():void {
 	}
 	outputText("  You get dressed and leave with a swagger in your step.  A smiling, solid goo-girl sits in your wake.");
 	dynStats("sen", -2, "lus=", 0);
-	slimeFeed();
+	player.slimeFeed();
 	flags[kFLAGS.LATEX_GOO_TIMES_FEMDOMMED_BY_PC]++;
 	gooFluid(5+player.wetness()*2);
 	gooObedience(4);

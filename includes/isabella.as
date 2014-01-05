@@ -483,7 +483,7 @@ public function nomOnMommaIzzysTits():void {
 	if(!isabellaFollower()) isabellaAffection(4);
 	//Decrease 'time since milked' count
 	else if(flags[kFLAGS.ISABELLA_MILKED_YET] > 0) flags[kFLAGS.ISABELLA_MILKED_YET] = 0;
-	slimeFeed();
+	player.slimeFeed();
 	//(Chance of thickening body to 75, chance of softening body if PC has a vag)
 	if(rand(2) == 0) outputText(player.modThickness(75,4), false);
 	if(rand(2) == 0 && player.hasVagina()) outputText(player.modTone(0,4), false);
@@ -576,7 +576,7 @@ public function izzyGivesSmallWangsFreeOral():void {
 		outputText("\n\n", false);
 		
 		outputText("Isabella pulls back and licks her lips, leaving you to realize that your " + player.legs() + " have been completely soaked with the cow-girl's own sweet cream.  ", false);
-		if(player.isGoo()) slimeFeed();
+		if(player.isGoo()) player.slimeFeed();
 		if(isabellaAccent()) {
 			outputText("She sighs and looks up at the sky, uttering a completely contented 'moo'.  Your own exhalation of pleasure is a bit more muted, but truly, you feel utterly satiated.  Isabella looks over and gleefully says, \"<i>You aren't a pervert!  Oh Izabella is so happy for you!  It's so much fun having someone who knows how to handle my tongue, particularly when they have such a succulent... compact little package for me to suck!</i>\"\n\n", false);
 	
@@ -614,7 +614,7 @@ public function izzyGivesSmallWangsFreeOral():void {
 		outputText("\n\n", false);
 		
 		outputText("Isabella pulls back and licks her lips, leaving you to realize that your " + player.legs() + " have been completely soaked with the cow-girl's own sweet cream.  ", false);
-		if(player.isGoo()) slimeFeed();
+		if(player.isGoo()) player.slimeFeed();
 		if(isabellaAccent()) {
 			outputText("You sigh nervelessly as the cow-girl waggles her tongue at you teasingly, making your " + cockDescript(x) + " jump from the memory of pleasure.  The redhead moans, \"<i>Oooh I knew it!  You are a pervert!  I just vanted to do a little licking and you got me all vet with your salty... mmm... cream.</i>\"  She pauses to lick her lips again before giving a gentle moo of contentment.  At least she doesn't seem mad at you!\n\n", false);
 		
@@ -1100,7 +1100,7 @@ public function victoryLactation69():void {
 	outputText(".  The two of you look each other over, licking the last of the milk from your lips and sharing a moment.  She speaks first, mouthing, \"<i>Zat vas nice... a good way to cool down angry hearts.  Let's... do zis next time ve fight!</i>\"  You nod as the blissed-out cow-girl closes her eyes, contented and cradling the slight paunch you've given her.  A moment later you've regained your strength, but you have trouble fitting back into your " + player.armorName + " with all the milk in your system.", false);
 	if(!isabellaFollower()) isabellaAffection(8);
 	//(slimefeed, -lust, +thickness & -tone?)
-	slimeFeed();
+	player.slimeFeed();
 	//You've now been milked, reset the timer for that
 	player.addStatusValue("Feeder",1,1);
 	player.changeStatusValue("Feeder",2,0);
@@ -1312,7 +1312,7 @@ public function victoryAgainstIzzzzzySixtyNine():void {
 	dynStats("lus=", 0);
 	if(!isabellaFollower()) isabellaAffection(9);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] = 0;
-	slimeFeed();
+	player.slimeFeed();
 	if(gameState == 1 || gameState == 2) cleanupAfterCombat();
 	else doNext(13);
 }

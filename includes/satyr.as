@@ -311,7 +311,7 @@ public function loseToSatyr():void {
 	else outputText("shamelessly ");
 	outputText(" gather and re-dress in your garments and head back to camp, cum still dribbling from you as you go.");
 	//reduce lust, slimefeed, pregnatize me cap'n
-	slimeFeed();
+	player.slimeFeed();
 	satyrPreggo();
 	dynStats("sen", 3, "lus=", 0);
 	if(player.cor < 50) dynStats("cor", 1);
@@ -482,7 +482,7 @@ public function willinglyBoneSatyr():void {
 	outputText("\n\nThe satyr gets up on unsteady hooves, visibly shaken after this session with you.  \"<i>Well, sorry for not sticking around.  But I have places to get and people to fuck, so I guess we'll bump into each other some other time.</i>\"  The goat-man gives your [butt] a friendly pat and begins packing away whatever leftovers he manages to find; then turns to blow you a kiss and dashes off.");
 	outputText("\n\nYou watch him as he goes, then manage to force yourself back to your feet and stagger off, lest something far less hospitable find you here.");
 	//slimefeed, reduce lust, impregnational geographic
-	slimeFeed();
+	player.slimeFeed();
 	dynStats("lus=", 0);
 	satyrPreggo();
 	doNext(13);

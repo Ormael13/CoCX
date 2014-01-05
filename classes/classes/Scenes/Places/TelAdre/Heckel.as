@@ -1,4 +1,13 @@
-﻿//const TIMES_LOST_HECKEL_DOM_CHALLENGE:int = 650;
+﻿package classes.Scenes.Places.TelAdre {
+	import classes.Appearance;
+	import classes.CockTypesEnum;
+	import classes.GlobalFlags.kFLAGS;
+
+	public class Heckel extends TelAdreAbstractContent {
+public function Heckel(){
+
+}
+//const TIMES_LOST_HECKEL_DOM_CHALLENGE:int = 650;
 //const TIMES_DOMMED_HECKEL:int = 651;
 
 /*By submitting content to Fenoxo for addition to Corruption of Champions, I agree to give up any
@@ -44,7 +53,7 @@ public function greetHeckel():void {
 }
 
 //First time Sex
-public function heckelTraining():void {
+private function heckelTraining():void {
 	outputText("", true);
 	var dom:int = 0;
 	//Rejection
@@ -110,7 +119,7 @@ public function heckelTraining():void {
 }
 
 //oral
-public function heckelOrallyFixated():void {
+private function heckelOrallyFixated():void {
 	outputText("", true);
 	if(flags[kFLAGS.TIMES_FUCKED_HECKEL_BLOWJOB] == 0) {
 		outputText("You walk over to Heckel and fall to your knees, already licking your lips. Heckel throws her head back in a barking laugh as she scoots forward, one paw coming around the back of your head. Without needing further encouragement, you grab the flaccid dog cock and give it an experimental pump.\n\n", false);
@@ -166,7 +175,7 @@ public function heckelOrallyFixated():void {
 	flags[kFLAGS.TIMES_FUCKED_HECKEL_BLOWJOB]++;
 }
 
-public function heckelOralFixationII():void {
+private function heckelOralFixationII():void {
 	outputText("", true);
 	outputText("You look up her body at her scowling face, wondering what you did wrong. \"<i>None of that, little meat. I'm top dog here, which means you don't go near there. But if you keep sucking this well, I might just let you keep that hand.</i>\" Heckel clearly isn't amused, but she hasn't pulled you away either. Whether from her threat or your lust, you aren't about to let this hard cock out of your mouth any time soon anyway. Your next bob is echoed by a thrust from Heckel, as is the next and the next after that. Her thrusts start coming faster than your head can keep up, and then her hands in your " + hairDescript() + " tighten their grip to hold your mouth in place. Before you know it she's fucking your throat more than you're giving her head. All you can do is watch her furry groin and stomach pumping towards you, and you have ample time to watch a knot start forming at the base of her dick. Your eyes begin to tear up as her cock pushes your throat open again and again, her thrusts getting faster and faster. It's all you can do to keep one hand stroking her shaft without gagging on her dick.\n\n", false);
 
@@ -180,7 +189,7 @@ public function heckelOralFixationII():void {
 }
 
 //anal
-public function heckelLovesDaAnal(loss:Boolean = false):void {
+private function heckelLovesDaAnal(loss:Boolean = false):void {
 	outputText("", true);
 	//rejection - ass not loose enough
 	if(player.analCapacity() <= 20 && !loss) {
@@ -220,16 +229,16 @@ public function heckelLovesDaAnal(loss:Boolean = false):void {
 	flags[kFLAGS.TIMES_FUCKED_HECKEL_ANAL]++;
 }
 
-public function heckelLovesAnal2():void {
+private function heckelLovesAnal2():void {
 	outputText("", true);
 	outputText("Her legs bump against yours as she pulls herself up, the contact sending shivers through your sensitive body. \"<i>Even better than I thought,</i>\" she mumbles as you hear the sound of her stroking herself. Before the wetness around your ass can dry up, you feel something hard and slightly pointed poking the entrance of your " + assholeDescript() + ".\n\n", false);
 
 	outputText("You open your mouth to gasp as she slides into you, but no sounds come out. You can feel inch after inch penetrate you, your asshole slowly stretching to accommodate her increasing thickness. She pushes as much as she can into you before pulling back slightly, then humping lightly as she works the rest in little by little.", false);
-	buttChange(28,true,true,false);
+	player.buttChange(28,true,true,false);
 	outputText("\n\n", false);
 
 	outputText("As more and more doggie dick is pushed into your ass, you find your estimations of her size more and more ridiculous. There has to be an entire foot of cock in you already, but she's still going! When she does finally bottom out, your mind reels at the impossibility. Her dick must grow the longer she stays aroused, because she's at least 15 inches right now! The base of her dick stretches your ass painfully open, and she gives you a moment to adjust to it.", false);
-	buttChange(35,true,true,false);
+	player.buttChange(35,true,true,false);
 	outputText("\n\n", false);
 	
 	outputText("Just as the sting begins to fade, she draws herself out to the tip in one motion. You bite your lip in anticipation, but you still moan like a whore when she slams all 15 inches back into you. She draws back before pounding your " + assholeDescript() + " again, making your " + buttDescript() + " shake with the impact.\n\n", false);
@@ -254,7 +263,7 @@ public function heckelLovesAnal2():void {
 
 	outputText("Heckel suddenly freezes up and bites down on your shoulder, throwing her hips forward. Her knot pushes against your backdoor as she tries to force it in, but your ass just won't expand that much. She growls and pushes again, making you yelp as it spreads you even further. It feels like she's shoving a melon up there! She growls even louder and bites down harder, and you can feel her dick flare inside you as her knot pushes you further and further apart. You cry out as it passes the midway point, your ass sucking the knot up greedily and contracting around the other side.", false);
 	//<ASS BECOMES VERY LOOSE>
-	buttChange(45,true,true,false);
+	player.buttChange(45,true,true,false);
 	outputText("\n\n", false);
 
 	//[<HERM PC>
@@ -318,7 +327,7 @@ public function dominateHeckel():void {
 }
 	
 //[Fuck Heckel]
-public function dominateHeckelConclusion():void {
+private function dominateHeckelConclusion():void {
 	clearOutput();
 	var x:int = player.cockThatFits(70);
 	if(x < 0) x = player.smallestCockIndex();
@@ -391,4 +400,6 @@ public function dominateHeckelConclusion():void {
 	}
 	dynStats("sen", -2, "lus=", 0);
 	doNext(13);
+}
+}
 }

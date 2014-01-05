@@ -1,5 +1,6 @@
 ﻿package classes 
 {
+	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Camp;
 
@@ -24,7 +25,17 @@
 			
 		}
 
-		public function get camp():Camp {
+		protected function cheatTime(time:Number):void
+		{
+			kGAMECLASS.cheatTime(time);
+		}
+
+		protected function Num2Text(number:int):String
+		{
+			return kGAMECLASS.Num2Text(number);
+		}
+
+		protected function get camp():Camp {
 			return kGAMECLASS.camp;
 		}
 
@@ -401,6 +412,11 @@
 		protected function breastCup(val:Number):String
 		{
 			return kGAMECLASS.breastCup(val);
+		}
+
+		protected function NPCCockDescript(cockType:*,cockLength:Number=0,lust:Number=50):String
+		{
+			return kGAMECLASS.NPCCockDescript(cockType,cockLength,lust);
 		}
 		
 		/**

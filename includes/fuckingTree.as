@@ -681,7 +681,7 @@ public function level4RideHollisTentacruels():void {
 	//empty lust, boost corruption, slimefeed(), +1 cor, -3 sens, +.5 libido
 	dynStats("lib", .5, "sen", 2, "lus=", 0, "cor", 1);
 	fertilizeHolli(false);
-	slimeFeed();
+	player.slimeFeed();
 	flags[kFLAGS.TIMES_RIDDEN_FLOWER]++;
 	doNext(13);
 }
@@ -945,7 +945,7 @@ public function vaginalDomHollisTentacruels():void {
 	outputText("\n\nYou give Holli a peck on her cheek, savoring the flavor and say, \"<i>Good girl.</i>\"  Then, you get dressed, trying to ignore the squishing wetness between your thighs.");
 	flags[kFLAGS.TIMES_RIDDEN_FLOWER]++;
 	fertilizeHolli(false);
-	slimeFeed()
+	player.slimeFeed();
 	dynStats("sen", -2, "lus=", 0, "cor", 1);
 	doNext(13);
 }

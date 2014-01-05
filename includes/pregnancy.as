@@ -1350,7 +1350,7 @@ public function updatePregnancy():Boolean {
 		player.pregnancyIncubation = 0;
 		player.pregnancyType = 0;
 		displayedUpdate = true;
-		birthingCottonsKids();
+		telAdre.cotton.birthingCottonsKids();
 	}
 	//GOO BIRF
 	if(player.pregnancyType == 16 && player.pregnancyIncubation == 1) {

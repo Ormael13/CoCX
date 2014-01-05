@@ -398,7 +398,7 @@ public function bumRapeaMinotaur():void {
 public function girlRapeAMinotaur():void {
 	spriteSelect(44);
 	minoRapeIntro();
-	slimeFeed();
+	player.slimeFeed();
 	minoCumAddiction(5);
 	outputText("\n\nWith a quick shove, you roll the panting minotaur onto his back, exposing his pulsing " + eCockDescript(0) + " to the open air.  A simple flourish later, you peel back your " + player.armorName + " to expose your " + vaginaDescript(0) + ", already wetter than usual from the scent in the air.   You walk forward, straddling the oblivious minotaur as he masturbates furiously, muscles bulging with exertion and covered in sweat.  Your eyes zero in as a dollop of pre escapes his ribbed horse-like member, locating the source of the scent.\n\n", false);
 	//Too small
@@ -441,7 +441,7 @@ public function minotaurGetsRapedByHerms():void {
 	spriteSelect(44);
 	minoRapeIntro();
 	minoCumAddiction(5);
-	slimeFeed();
+	player.slimeFeed();
 	outputText("\n\nWith little care for the beast's feelings, you grip his cock with both hands, pulling it towards yourself, bending it up at an awkward angle that makes him give a trembling moo of pain.   You edge closer, your own " + cockDescript(0) + " bumping into his pucker, his obscene equine-like cock dripping that wonderfully scented spunk as you pull it to your " + vaginaDescript(0) + ", smearing it against your cunt-lips.\n\n", false);
 	outputText("With a twisted grin and a grunt of pain, you push forward, slipping his " + eCockDescript(0) + " into your " + vaginaDescript(0) + " as your " + cockDescript(0) + " penetrates his tight but accommodating back-door.  You immediately feel a surge of his pre-cum squirt into you as you push forward, forcefully spearing yourself AND him at the same time.  The slick fluids spread warmth through your groin, making you feel light-headed and horny at the same time, spurring you to force the last of both cock-lengths into their respective holes.\n\n", false);
 	temp = player.vaginas[0].vaginalLooseness;
@@ -485,7 +485,7 @@ public function minoPheromones():void {
 }
 public function getRapedByMinotaur(autoRape:Boolean = false):void {
 	spriteSelect(44);
-	slimeFeed();
+	player.slimeFeed();
 	clearOutput();
 	//BY BUTTS MCGEE
 	//====================================================================
@@ -641,7 +641,7 @@ public function getOralRapedByMinotaur():void {
 
 public function minoGetsTitFucked():void {
 	spriteSelect(44);
-	slimeFeed();
+	player.slimeFeed();
 	if(player.isNaga()) {
 		AddictNagaOnMinotaur();
 		return;
@@ -1079,7 +1079,7 @@ public function getMinoHawtDawged():void {
 	outputText("your back, and even your hair with gushes of his sticky, musk-smothered seed. Your entire backside flushes with the heat of his orgasm as it starts to die down, a few last drools of the hot stuff spilling out of his cock, and he withdraws from your butt, leaving you one last gift of a single spurt lodged between your fat cheeks and slowly dripping out. The Minotaur's cum seems to make your head swim, and everything starts to go foggy...");
 	//{Loss message 'when you wake up you'll be missing gems' blah blah}
 	dynStats("lus", 15+rand(player.lib/2));
-	slimeFeed();
+	player.slimeFeed();
 	minoCumAddiction(5);
 	cleanupAfterCombat();
 }

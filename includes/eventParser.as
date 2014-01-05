@@ -689,7 +689,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(player.hasStatusAffect("Bimbo Champagne") >= 0) {
 			player.addStatusValue("Bimbo Champagne",1,-1);
 			if(player.statusAffectv1("Bimbo Champagne") <= 0) {
-				removeBimboChampagne();
+				telAdre.niamh.removeBimboChampagne();
 				needNext = true;
 			}
 		}
@@ -771,7 +771,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		if(player.statusAffectv1("Black Cat Beer") > 0) {
 			player.addStatusValue("Black Cat Beer",1,-1);
 			if(player.statusAffectv1("Black Cat Beer") <= 0) {
-				blackCatBeerExpires();
+				telAdre.niamh.blackCatBeerExpires();
 				needNext = true;
 			}
 		}
@@ -799,7 +799,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			else flags[kFLAGS.EMBER_LUST_BITCHING_COUNTER] = 0;
 			
 		}
-		cottonPregUpdates();
+		telAdre.cotton.cottonPregUpdates();
 		//Fix femininity ratings if out of whack!
 		if(player.hasPerk("Androgyny") < 0) 
 			textHolder = player.fixFemininity();
@@ -2229,7 +2229,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 			//Dominika Dream
 			else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00157] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00157] < 4) {
 				outputText("\n<b>Your rest is somewhat troubled with odd dreams...</b>\n", false);
-				fellatrixDream();
+				telAdre.dominika.fellatrixDream();
 				doNext(1);
 				return true;
 			}
@@ -2648,7 +2648,7 @@ public function goNext(time:Number, defNext:Boolean):Boolean  {
 		//Cotton's cereal overlapps marbleliciousness
 		if(model.time.hours == 6 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00245] == 1 && player.biggestLactation() >= 2) {
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00245] = 0;
-			nomSomeTitMilkCereal();
+			telAdre.cotton.nomSomeTitMilkCereal();
 			return true;
 		}
 		//Isabella's morning suckoffs!

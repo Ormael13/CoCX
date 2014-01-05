@@ -2464,8 +2464,8 @@ public function displayStats(e:MouseEvent = null):void
 	if(flags[kFLAGS.AMILY_MET] > 0) outputText("<b>Litters With Amily: </b>" + (flags[kFLAGS.AMILY_BIRTH_TOTAL]+ flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS]) + "\n", false);
 	//Lottie stuff
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0) {
-		outputText("<b>Lottie's Encouragement: </b>" + lottieMorale() + " (higher is better)\n", false);
-		outputText("<b>Lottie's Figure: </b>" + lottieTone() + " (higher is better)\n", false);
+		outputText("<b>Lottie's Encouragement: </b>" + telAdre.lottie.lottieMorale() + " (higher is better)\n", false);
+		outputText("<b>Lottie's Figure: </b>" + telAdre.lottie.lottieTone() + " (higher is better)\n", false);
 	}
 	if(lynnetteApproval() != 0) {
 		outputText("<b>Lynnette's Approval: </b>" + lynnetteApproval() + "\n");
@@ -2485,8 +2485,8 @@ public function displayStats(e:MouseEvent = null):void
 		if(player.statusAffectv2("Kelt") >= 130) outputText("<b>Submissiveness To Kelt:</b> " + 100 + "%\n", false);
 		else outputText("<b>Submissiveness To Kelt:</b> " + Math.round(player.statusAffectv2("Kelt")/130*100) + "%\n", false);
 	}
-	if(rubiAffection() > 0) outputText("<b>Rubi's Affection:</b> " + Math.round(rubiAffection()) + "%\n");
-	if(rubiAffection() > 0) outputText("<b>Rubi's Orifice Capacity:</b> " + Math.round(rubiCapacity()) + "%\n");
+	if(telAdre.rubi.rubiAffection() > 0) outputText("<b>Rubi's Affection:</b> " + Math.round(telAdre.rubi.rubiAffection()) + "%\n");
+	if(telAdre.rubi.rubiAffection() > 0) outputText("<b>Rubi's Orifice Capacity:</b> " + Math.round(telAdre.rubi.rubiCapacity()) + "%\n");
 	
 	if(flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] != 0) {
 		if(urtaLove()) outputText("<b>Urta Status: </b>Lover\n");

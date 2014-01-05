@@ -1,4 +1,13 @@
-﻿//const DOMINIKA_TIMES_MULTICOCK_SLOBBERED:int = 386;
+﻿package classes.Scenes.Places.TelAdre {
+	import classes.CockTypesEnum;
+	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
+
+	public class Dominika extends TelAdreAbstractContent {
+public function Dominika(){
+	
+}
+//const DOMINIKA_TIMES_MULTICOCK_SLOBBERED:int = 386;
 //const DOMINIKA_TIMES_HYPNO_BJ:int = 387;
 //const DOMINIKA_LAST_HYPNO_SUCK_COUNT:int = 388;
 
@@ -6,11 +15,10 @@ public function fellatrixBarAppearance():void {
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] == 0) outputText("\n\nYou spot a face you haven't seen before – or rather, eyes you haven't seen before. A woman sits at a table in the back, most of her features hidden beneath a white cloth wrapped around her head to form a turban and veil. The rest of her dress seems equally modest but loose, efficient for desert travel. She idly runs her finger and its accompanying black-painted fingernail over the top of an empty cup, staring off into the distance and thinking about some unknown detail. What skin you can see is pale but perhaps most notably for Tel'Adre, human. Blue eyes glance over and meet your own, and you are reminded of your village back home. Her reaction to your look is unreadable thanks to her veil, but she watches you for a few moments longer before turning away again.", false);
 	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00151] != -1) outputText("\n\nYou notice Dominika speaking to a city guard at one of the tables. You can't hear the conversation, but the guard leaves shortly after you arrive, and Dominika rests her chin on her hand, staring into the distance.", false);
 }
-public function fellatrixSucked():Boolean {
-	if(timesFellatrixSucked() > 0) return true;
-	else return false;
+private function fellatrixSucked():Boolean {
+	return timesFellatrixSucked() > 0;
 }
-public function timesFellatrixSucked():Number {
+private function timesFellatrixSucked():Number {
 	return (flags[kFLAGS.DOMINIKA_TIMES_HYPNO_BJ] + flags[kFLAGS.DOMINIKA_TIMES_MULTICOCK_SLOBBERED] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00156] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00151] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00152] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00153] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00174]);
 }
 public function fellatrixBarApproach():void {
@@ -19,7 +27,7 @@ public function fellatrixBarApproach():void {
 	//Get the emporerors new groove (sword)
 	//Req's d2 finished
 	if(fellatrixSucked() && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] > 0 && player.hasKeyItem("Zetaz's Map") >= 0 && flags[kFLAGS.DOMINIKAS_SWORD_GIVEN] == 0) {
-		dominikaSpellblade();
+		kGAMECLASS.dominikaSpellblade();
 		return;
 	}
 	//[First encounter, player is minotaur (If you lose minotaur characteristics and come back, Dominika will not recognize you and do a regular first encounter)]
@@ -87,7 +95,7 @@ public function fellatrixBarApproach():void {
 	doNext(13);
 }
 //[\"<i>No thanks</i>\"]
-public function turnDownDominikasKnowledge():void {
+private function turnDownDominikasKnowledge():void {
 	spriteSelect(10);
 	outputText("", true);
 	outputText("\"<i>Fair enough,</i>\" Dominika nods. \"<i>Let me know if you change your mind.</i>\" The two of you make small talk for a while longer, before you decide to get back to work and excuse yourself.\n\n", false);
@@ -95,7 +103,7 @@ public function turnDownDominikasKnowledge():void {
 	doNext(telAdre.barTelAdre);
 }
 //[\"<i>Sure</i>\"]
-public function acceptDominikasKnowledge():void {
+private function acceptDominikasKnowledge():void {
 	spriteSelect(58);
 	outputText("", true);
 	//Set that PC has received oral offer (its coming further down for sure)
@@ -126,7 +134,7 @@ public function acceptDominikasKnowledge():void {
 		outputText("\"<i>Now then,</i>\" she says. Her hands glow with a brief sense of power, and many of the tattoos shine with equal illumination. She gestures with her hand and the lamps all acquire an unearthly light, as green glowing circles appear interlinked on the floor. \"<i>How much do you know about magic?</i>\"\n\n", false);
 		
 		//[If player knows all spells]
-		if(spellCount() == 6) {
+		if(player.spellCount() == 6) {
 			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00154] == 0) {
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00154]++;
 				outputText("You blink, then casually mention that you actually know quite a bit about magic. Dominika listens to you explain your skill in white and black magic, then coughs awkwardly and glances to the side. \"<i>O-oh,</i>\" she says, \"<i>Well. Uhm. I guess we can talk about magical theory, maybe?</i>\"\n\n", false);
@@ -137,7 +145,7 @@ public function acceptDominikasKnowledge():void {
 			dynStats("int", 1+rand(4));
 		}
 		//[If player knows some spells]
-		else if(spellCount() > 0) {
+		else if(player.spellCount() > 0) {
 			outputText("You take a step backwards in surprise, but your experience with magic makes you realize that she's not doing anything dangerous. You explain that you've learned a bit of sorcery from books, and she nods thoughtfully. \"<i>I see,</i>\" she muses, stroking her chin. \"<i>I think I may be able to show you a thing or two. Let's see here...</i>\"\n\n", false);
 	
 			outputText("Dominika seems to be quite good at magic, and you find yourself picking up the spell she demonstrates fairly quickly.", false);
@@ -208,7 +216,7 @@ public function acceptDominikasKnowledge():void {
 	doNext(fellatrixSexWarmup);
 }
 //[All scenes lead to:]
-public function fellatrixSexWarmup():void {
+private function fellatrixSexWarmup():void {
 	spriteSelect(58);
 	outputText("", true);
 	//Cooldown ongoing!
@@ -244,7 +252,7 @@ public function fellatrixSexWarmup():void {
 }
 
 //If \"<i>No.</i>\"]
-public function declineFellatrixOral():void {
+private function declineFellatrixOral():void {
 	spriteSelect(58);
 	outputText("", true);
 	//No BJs yet.
@@ -268,7 +276,7 @@ public function declineFellatrixOral():void {
 	}
 }
 //[If \"<i>No.</i>\" twice]
-public function declineFellatrixOralHARDCORE():void {
+private function declineFellatrixOralHARDCORE():void {
 	spriteSelect(58);
 	outputText("", true);
 	outputText("\"<i>Really?</i>\" she asks again. \"<i>But, I mean... fucking look at these!</i>\" She purses her dark lips, running her tongue over them to emphasize how they glisten in the light. \"<i>Don't tell me you don't think these would feel fucking rad on you.</i>\"\n\nIt's VERY tempting.  Maybe one little round of fellatio?", false);
@@ -277,7 +285,7 @@ public function declineFellatrixOralHARDCORE():void {
 }	
 
 //[If \"<i>No.</i>\" three times]
-public function declineFellatrixOralSUPERHARDCORE():void {
+private function declineFellatrixOralSUPERHARDCORE():void {
 	spriteSelect(58);
 	outputText("", true);
 	outputText("Dominika stares at you incredulously, then turns away. \"<i>Fine. Just go then. You know where the door is.</i>\" She walks away into another room, closing the door behind her.\n\n", false);
@@ -290,7 +298,7 @@ public function declineFellatrixOralSUPERHARDCORE():void {
 }
 
 
-public function acceptFellatrixOral():void {
+private function acceptFellatrixOral():void {
 	spriteSelect(58);
 	outputText("", true);
 	var x:Number = player.cockThatFits(36);
@@ -564,7 +572,7 @@ public function acceptFellatrixOral():void {
 
 
 //[Agree with her]
-public function agreeWithDominika():void {
+private function agreeWithDominika():void {
 	spriteSelect(58);
 	outputText("", true);
 	//(Corruption increases)
@@ -596,7 +604,7 @@ public function agreeWithDominika():void {
 }
 
 //[Non-committal]
-public function ehhhhDominika():void {
+private function ehhhhDominika():void {
 	spriteSelect(58);
 	outputText("", true);
 	outputText("You make a small grunt, not even sitting up. Dominika's eyebrows lower after a time, and a bored but amused expression comes to her features. \"<i>I suppose I shouldn't bother asking you anything after we're done, mm?</i>\" She seems content to amuse herself with this telling of events, and you don't question it. \"<i>Well, you should get going soon,</i>\" she says, turning back to her mirror and adjusting her hair. \"<i>You don't want to walk through the desert too late at night. Do visit again.</i>\"\n\n", false);
@@ -608,7 +616,7 @@ public function ehhhhDominika():void {
 	doNext(13);
 }
 //[Disagree with her]
-public function disagreeDominika():void {
+private function disagreeDominika():void {
 	spriteSelect(58);
 	outputText("", true);
 	//(Corruption decrease)
@@ -647,7 +655,7 @@ public function fellatrixDream():void {
 
 
 //[After UNKNOWN CRITERIA, CAN TRIGGER AFTER POST-SCYLLA SCENE, ONE-SHOT, HAPPENS AFTER DOMI SCENE]
-public function dominidrama():void {
+private function dominidrama():void {
 	outputText("", true);
 	outputText("You yawn a little as you walk through Tel'Adre, heading back to the gate. It's been a little while, you should check on your campsite. For a little bit you're self-conscious about walking as funnily as you are (a part of you imagines you are hanging lower than ever after how hard Dominika sucked you), but you remind yourself of the reality of the city, and presume no one will really notice or care. The night is beginning, the stars blinking slowly into sight. Glancing up at the darkening sky you're briefly reminded of the cabalist's dark lips, though you're not entirely sure why. Or perhaps you were thinking of them anyway.\n\n", false);
 
@@ -665,7 +673,7 @@ public function dominidrama():void {
 }
 
 //[Yes]
-public function dominidramaYes():void {
+private function dominidramaYes():void {
 	spriteSelect(58);
 	outputText("", true);
 	outputText("You have a few guesses as to why the Covenant might be looking for Dominika, and you want to help them. You look back up the road to explain where she's living but as you look at the streets you have an odd feeling in the back of your head. Try as hard as you might, every time you try to picture the path you took to her home all that appears in your mind is her smirking lips. They are gorgeous, but this is not the time you want to be thinking about them.\n\n", false);
@@ -679,7 +687,7 @@ public function dominidramaYes():void {
 	doNext(13);
 }
 //[No]
-public function dominidramaNo():void {
+private function dominidramaNo():void {
 	outputText("", true);
 	outputText("You think about the woman you have laid with, about her soft form, her laughter, and most of all those deep, curving lips. There's only one action you feel you could take, and you calmly say that no, you have not heard of anything or anyone fitting the description given. \"<i>I see,</i>\" the plant woman says, though her glowing eyes seem to linger on you with an uncertain meaning. She shouldn't have any reason to disbelieve you, should she?\n\n", false);
 
@@ -695,7 +703,7 @@ public function dominidramaNo():void {
 
 //[Binding scene]
 //Occurs after 8 servicings
-public function dominikaBlowjobs():void {
+private function dominikaBlowjobs():void {
 	outputText("", true);
 	var x:Number = player.cockThatFits(36);
 	if(x < 0) x = player.biggestCockIndex();
@@ -839,7 +847,7 @@ public function dominikaBlowjobs():void {
 	doNext(dominikaBlowjobs2);
 }
 
-public function dominikaBlowjobs2():void {
+private function dominikaBlowjobs2():void {
 	spriteSelect(58);
 	outputText("", true);
 	outputText("Groaning, you roll over, sitting up in your bedroll.  The rays of the sun hitting your face feel particularly unwelcome.  You're not sure what you drank last night, but given your hangover you must have done so.\n\n", false);
@@ -856,4 +864,6 @@ public function dominikaBlowjobs2():void {
 	model.time.hours = 7;
 	statScreenRefresh();
 	doNext(13);
+}
+}
 }

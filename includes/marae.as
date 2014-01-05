@@ -176,7 +176,7 @@ public function maraeStealLethicite():void {
 	}
 	//(FAIL) 
 	else {
-		slimeFeed();
+		player.slimeFeed();
 		outputText("You dart to the side, diving into a roll that brings you up behind the tree.  You try to slip by the gauntlet of grabbing tentacles, but fail, getting tripped and ensnared in them like a fly in a spider's web.  You are pulled up and lifted to the other side of the tree, where you are slammed against it.  The tentacles pull your arms and legs wide, exposing you totally and locking you into a spread-eagle position.  You cringe as Marae strides around, free from the confines of her tree.\n\n", false);
 		outputText("\"<i>Awwww, what a nasty deceitful little ", false);
 		if(player.gender <= 1) outputText("boy ", false);

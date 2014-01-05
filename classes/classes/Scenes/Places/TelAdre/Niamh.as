@@ -1,4 +1,11 @@
-﻿//const MET_NIAMH:int = 446;
+﻿package classes.Scenes.Places.TelAdre {
+	import classes.GlobalFlags.kFLAGS;
+
+	public class Niamh extends TelAdreAbstractContent {
+public function Niamh(){
+
+}
+//const MET_NIAMH:int = 446;
 //const GOT_NIAMH_BEER:int = 447;
 //const TALKED_NIAMH:int = 448;
 //-1 = bazaar moved in, 0 = nothing, 1 = trigger time, otherwise time till trigger
@@ -101,7 +108,7 @@ public function getANiamhBeer():void {
 }
 
 //[Here]
-public function drinkNiamhsBeerInTelAdre():void {
+private function drinkNiamhsBeerInTelAdre():void {
 	clearOutput();
 	if(player.lactationQ() >= 300 && player.biggestTitSize() >= 5 && rand(2) == 0 && flags[kFLAGS.MET_NIAMH] > 0) {
 		outputText("\"<i>Skoal!</i>\" you cheer as you down the delicious mug of booze.  The incredibly potent beverage warms you down in to your chest and beyond.  The heat of the alcohol trailing like fire down in to your gut and warms your genitals, causing you to feel more aroused.  The buzz of the beverage makes you light headed, as if thinking had become a little more difficult.");
@@ -158,7 +165,7 @@ public function drinkNiamhsBeerInTelAdre():void {
 }
 	
 //[To Go]
-public function blackCatBeerToGo():void {
+private function blackCatBeerToGo():void {
 	clearOutput();
 	outputText("\"<i>That'll be two more gems, then,</i>\" the girl says.  \"<i>Though, if your hands get any more skillful I might have to pay you to take it,</i>\" she flirts.  You pass over two more gems, and she gratefully bags them and beams you a smile.");
 	player.gems -= 2;
@@ -181,7 +188,7 @@ public function blackCatBeerToGo():void {
 }
 
 //Talk
-public function talkToNiamh():void {
+private function talkToNiamh():void {
 	clearOutput();
 	//(first time only) 
 	if(flags[kFLAGS.TALKED_NIAMH] == 0) {
@@ -211,7 +218,7 @@ public function talkToNiamh():void {
 	simpleChoices("Beer",beer,"",0,"",0,"",0,"Leave",13);
 }
 //Leave
-public function leaveNiamh():void {
+private function leaveNiamh():void {
 	clearOutput();
 	outputText("You decide that you don't really want to talk to this strange cat-girl and, as politely as possible, excuse yourself.");
 	//Player returns to Wet Bitch menu
@@ -243,7 +250,7 @@ public function blackCatBeerEffects(clearScreen:Boolean = true,newLine:Boolean =
 		player.createStatusAffect("Black Cat Beer",8,lib,0,0);
 		dynStats("spe", -5, "int", -5, "lib", lib, "lus", 20+rand(player.lib/4));
 	}
-	slimeFeed();
+	player.slimeFeed();
 }
 
 //Black Cat Beer Wears Off: This message is displayed eight hours after the last drink.
@@ -253,12 +260,12 @@ public function blackCatBeerExpires():void {
 	outputText("\n<b>The warm, fuzzy feeling finally dissipates, leaving you thinking clearer, focusing better, and less horny.  It was nice while it lasted, but it's also good to be back to normal.  Still, a part of you kind of wants another beer.</b>\n");
 }
 
-public function giveNiamphBimboLiquer():void
+private function giveNiamphBimboLiquer():void
 {
 	taintNiamh(true);
 }
 
-public function giveNiamphSuccubiMilk():void
+private function giveNiamphSuccubiMilk():void
 {
 	taintNiamh(false);
 }
@@ -266,7 +273,7 @@ public function giveNiamphSuccubiMilk():void
 //Corruption Option 
 //20% chance of Nyam using this as her opening if PC has >= 90 corruption and either item in inventory
 //[corruption chance encounter]
-public function corruptOrBimboNiamhIntro():void {
+private function corruptOrBimboNiamhIntro():void {
 	clearOutput();
 	outputText("\"<i>Heya, favored customer,</i>\" the busty kitty greets as you approach.  \"<i>I have a favor to ask!  My drink's empty, and I get bored of me own brew,</i>\" Niamh explains.  \"<i>Would ya mind fetchin' me somethin', or are ye gonna force me to sample me own goods once more?</i>\"");
 	
@@ -361,13 +368,13 @@ public function niamhPostTelAdreMoveOut():void {
 }
 
 //[no]  
-public function niamhCorruptMobileSnackTurnDown():void {
+private function niamhCorruptMobileSnackTurnDown():void {
 	clearOutput();
 	outputText("You turn her down, fabricating a little tale about how you just got done drinking a delicious beverage, and you couldn't possibly have anything more.  She nods sagely, pauses, and loudly belches.  Even in her soused state, she retains some semblance of manners, so she chuckles nervously while moving a hand to her lips.  \"<i>Sorry 'bout tha'...</i>\" she mutters, slinking off.  You have a feeling you'll see her again.");
 	doNext(13);
 }
 //[yup]  
-public function niamhCorruptedMobileSnackDrinkTime():void {
+private function niamhCorruptedMobileSnackDrinkTime():void {
 	clearOutput();
 	outputText("Of course you do!  You went through the trouble of getting her boobs to their current condition; drinking from the tap is exactly what you had in mind.  A smile brightens Niamh's features, and she plops down heavily on the ground, waving you over to sit next to her.  ");
 	//[bimbo version]
@@ -428,7 +435,7 @@ public function bimboChampagne(clearScreen:Boolean,intro:Boolean):void {
 		//(Player does not have vagina: 
 		if(!player.hasVagina()) {
 			player.createVagina();
-			genderCheck();
+			player.genderCheck();
 			outputText("\n\nYou can feel ");
 			if(player.hasCock()) outputText("the flesh under your cock[if (hasBalls = true)  and behind your [balls]]");
 			else outputText("the blank expanse of flesh that is your crotch");
@@ -442,7 +449,7 @@ public function bimboChampagne(clearScreen:Boolean,intro:Boolean):void {
 			player.buttRating = 12;
 			if(player.hipRating < 10) player.hipRating = 10;
 		}
-		genderCheck();
+		player.genderCheck();
 		dynStats("spe", -10, "lib", 1, "lus", 25);
 	}
 }
@@ -463,7 +470,7 @@ public function removeBimboChampagne():void {
 		outputText("  Of course, the added junk in your trunk fades too, leaving you back to having a [butt].");
 	}
 	player.removeStatusAffect("Bimbo Champagne");
-	genderCheck();
+	player.genderCheck();
 	outputText("\n");
 }
 
@@ -503,7 +510,7 @@ public function bazaarNiamh():void {
 }
 
 //[bimbo/corrupted beer drink texts]
-public function bazaardNiamhDrink():void {
+private function bazaardNiamhDrink():void {
 	clearOutput();
 	player.gems -= 2;
 	outputText("Approaching the fallen-from-grace (yet completely content) catgirl, you toss her a couple gems and request a glass of the house drink.");
@@ -520,7 +527,7 @@ public function bazaardNiamhDrink():void {
 	}
 }
 //{If player drinks from the tap:}
-public function drinkFromZeTap():void {
+private function drinkFromZeTap():void {
 	clearOutput();
 	outputText("Your eyes lock onto her large, ever-dribbling nipples, the froth of spilt champagne caked on the table supporting her mammoth breasts, and you know you just have to have it from the source.  You push your way forward and seat yourself on a plush cushion that, from its many tears and suspicious-smelling stains, has seen better days, then grasp the huge boob in front of you, making the ditzy catgirl yowl in anticipation of pleasure.");
 	outputText("\n\nThe wonderful taste explodes into your mouth as her well-trained teat gushes forth its precious elixir.  Delightfully fizzy, the frothy fluid is a rich, sugary-sweet delicacy, with a strangely gooey texture that just makes it all the yummier to swallow.  You gulp and slurp and suckle, dimly aware that somebody else has taken advantage of Niamh's free nipple.  A strange tingling feeling sweeps through your body; like pins and needles, only wonderfully pleasurable, so much so that you can feel your mind starting to dim.  Desperate for greater pleasure you suck harder and harder, gorging yourself on as much fluid as you can get, as fast as you can make it pour into your mouth - everything seems to fade away into nothing except the wonderful taste of this fizzy booze and your insatiable thirst for more of it.  You just keep drinking and drinking and, like, it just feels better and better - you find your mind totally shutting down...");
@@ -533,7 +540,7 @@ public function drinkFromZeTap():void {
 }
 	
 //grabbing Bim Cham in a to-go box
-public function getBimboChampFromNiamh():void {
+private function getBimboChampFromNiamh():void {
 	clearOutput();
 	outputText("You explain your need for a bottle of her champagne; the ditzy kitty takes several moments to register your words, then nods idly.  \"<i>Works fer me!</i>\" she responds, reaching behind her and rummaging in a large burlap bag.  She produces a flask from the sack's depths, unscrewing the cap and attempting to line it up with a nipple.  Try as she might, she just can't quite reach all the way, and with an airy giggle, she passes it to you instead.");
 	outputText("\n\nWith a resigned sigh, you accept the flask and kneel, flicking both nipples experimentally.  Pressing her elbows against her boobs, Niamh moans, the combination of your stimulation and her pressure beginning a steady trickle of delicious-looking champagne.  The mere smell of the stuff makes you feel a bit dumber!");
@@ -546,7 +553,7 @@ public function getBimboChampFromNiamh():void {
 }
 
 //[Bazaar sex]
-public function bazaarSex():void {
+private function bazaarSex():void {
 	var x:Number = player.biggestCockIndex();
 	var y:Number = x + 1;
 	clearOutput();
@@ -618,17 +625,17 @@ public function getBimboozeFromSean():void {
 }
 
 // [LEAVE]
-public function leaveWithBeerTits():void {
+private function leaveWithBeerTits():void {
 	clearOutput();
 	outputText("The offer is tempting but right now you'd much rather deal with your boozy boobs privately.  You take off while trying to keep your [armor] modestly in place over your tits but it's difficult.  Your nipples constantly leak and drip a trail of alcohol all the way back to camp.  Thankfully by the time you arrive the effects seem to have mostly worn off.  Your nipples return to dripping milk, although they've shrunk back down a bit they don't quite shrink all the way, leaving you with somewhat larger endowments than you had before.");
-	growTits(2, player.bRows(), false, 2);
+	player.growTits(2, player.bRows(), false, 2);
 	doNext(13);
 }
 
 // [SELL YOUR BOOZE]
 // Non-holidays have small payout of gems proportional to lactation.  Boob rating increases by 1.
 // Holidays have larger payout of gems proportional to lactation.  Boob rating increases by 2.
-public function sellYourBooze():void {
+private function sellYourBooze():void {
 	clearOutput();
 	player.gems += 2;
 	temp = Math.round(player.lactationQ() / 100);
@@ -649,7 +656,7 @@ public function sellYourBooze():void {
 	outputText(".");	
 	//If lust is low
 	if(player.lust < 50 || player.gender == 0) {
-		growTits(2, player.bRows(), false, 2);
+		player.growTits(2, player.bRows(), false, 2);
 		outputText("\n\nYou feel flushed from the sensations, but finally you run dry.  Your breasts have shrunk back down, but they still feel a little larger than they were earlier.  As little droplets of milk instead of booze return to dripping from your nipples, Niamh hands you your cut of the gems you earned from the sales.");
 		//[LEAVE]
 		doNext(13);
@@ -671,7 +678,7 @@ public function sellYourBooze():void {
 //===============
 //First Paragraph
 //===============
-public function barBeerOrgyTits():void {
+private function barBeerOrgyTits():void {
 	clearOutput();
 	//If [player has pussy] 
 	if(player.hasVagina()) outputText("The drooling of your [vagina] gets worse as the constant \"tapping of your kegs\" drives your sense of self-restraint to its limits.  The hands of various drunks start moving more aggressively over your breasts, eventually winding their way down between your thighs.");
@@ -704,7 +711,7 @@ public function barBeerOrgyTits():void {
 	if(model.time.hours < 15 && flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] > 0 && player.hasVagina()) {
 		outputText("\n\nA pair of familiar paws grab your ankles and spread your legs wide.  Your labia practically spurt out girl cum in anticipation of what's about to happen.  \"<i>Oh, looks like someone's overly eager.</i>\"  You struggle to look over the mounds of your own tits to see who's standing between your legs.  The familiar sight of an oversized horse-cock waving in the air catches your attention shortly before the grinning smile of Urta comes in to view.  \"<i>My aren't you going to get reamed, lover.</i>\"  No sooner than she says that than the flared head of her cock plunges with a wet squish between your nether lips.  You feel her stretching your entrance apart as her massive horse meat bores into your body.  Blissful screams of pleasure are heard and it isn't until the head of Urta's cock breaks into your womb that you realize it's you that's screaming in ecstasy.");
 		if(player.pregnancyIncubation == 0) outputText("  Some folks give yelps and cheers when they see the bulge that repeatedly forms in your abdomen each time Urta thrusts herself inside you.");
-		cuntChange(60,true,true,false);
+		player.cuntChange(60,true,true,false);
 	}
 	//ELSE IF player has pussy and Urta is not in the bar.
 	else if(player.hasVagina()) {
@@ -793,7 +800,7 @@ public function barBeerOrgyTits():void {
 		outputText("\n\nThe next thing you're aware of is feeling an intense pressure in your gut.  As your vision returns you weakly make out the desert outside Tel'Adre passing you by.  As your senses return you realize you're riding on Edryn's back and Urta is sitting behind you.  \"<i>Hellooooo...</i>\"  A very drunk Urta whispers in your ear.  \"<i>Looks like you're awake.</i>\"  She reaches around and pats your bloated belly.  \"<i>You really took a lot.  We sort of felt we overdid it, so we decided to give you a lift back to your camp.</i>\"  Urta's cum is still spilling out of your crotch, soaking Edryn's sides.  Edryn's own hindquarters are leaking from the many loads you gave her.");
 		// IF [Player is pregnant but not with eggs] You pat your pregnant belly and silently hope Urta's ocean of cum hasn't drowned the child, if that's even possible.
 		outputText("\n\nThe two of them drop you off along with your clothes and gear back at camp.  Each of them winks and blows you a kiss as they travel back to Tel'Adre.  Your breasts are leaking milk again, and they appear to have grown permanently larger.");
-		growTits(2, player.bRows(), false, 2);
+		player.growTits(2, player.bRows(), false, 2);
 	}
 	// IF [Urta but not Edryn is present in the bar and sex with her is unlocked and character has pussy]
 	else if(player.hasVagina() && model.time.hours < 15 && flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] > 0) {
@@ -810,7 +817,7 @@ public function barBeerOrgyTits():void {
 		if(player.pregnancyIncubation == 0) outputText("  Urta's small ocean of sperm streams out from your pussy like a river down your legs as you try to stand.");
 		
 		outputText("\n\nWhen you're finally on your feet all the cum covering your body and filling your cleavage begins dripping down and pooling around your feet.  Milk is dripping from your nipples, signaling that the effects of Niamh's beer have finally worn off.  \"<i>Oi lass, I think ye be needin' a dip in a river.  Pity ye in a desert eh?</i>\"  She grins.  Still half drunk off booze and sex you haphazardly gather your things.  Urta graciously helps you out of the bar and through the streets of Tel'Adre until you've gathered your senses enough to find your way back to camp.  Your breasts ache from the pleasant ordeal, each one feeling fuller and larger than it was before this all began.");
-		growTits(2, player.bRows(), false, 2);
+		player.growTits(2, player.bRows(), false, 2);
 	}
 	//=====
 	//Generic ending if the first two don't trigger
@@ -818,7 +825,7 @@ public function barBeerOrgyTits():void {
 		outputText("\n\nFor what seems like forever your body is used as a cum dump and fuck toy.");
 		// IF [player has pussy]  
 		if(player.hasVagina()) outputText("  The giant knot of the dog morph finally breaks its way inside causing your pussy to become overstretched.  The pleasurable torture only gets worse as he begins unloading a river of his cum inside you.  It begins squirting out around his cock and soaks both of your thighs in the process.");
-		cuntChange(60,true,true,false);
+		player.cuntChange(60,true,true,false);
 		
 		outputText("  Niamh finally has her fill and dismounts you, but no sooner has her pussy left your face than a determined cock belonging to some sort of cat morph fills your mouth.  Your eyes bug out as it thrusts down your throat.");
 		// If [player has pussy] 
@@ -865,14 +872,14 @@ public function barBeerOrgyTits():void {
 					break;
 			}
 		}
-		growTits(2, player.bRows(), false, 2);
+		player.growTits(2, player.bRows(), false, 2);
 	}
 	dynStats("lus=", 0);
 	doNext(13);
 }
 
 
-public function boozeBoobsType():String {
+private function boozeBoobsType():String {
 	// New Years
 	if(isHolidays() && date.date >= 31) return "champagne";
 	// Saint Patrick's
@@ -883,4 +890,6 @@ public function boozeBoobsType():String {
 	else if(date.date == 14 && date.month == 1) return "wine";
 	// Non-Holiday, Generic
 	else return "beer";
+}
+}
 }

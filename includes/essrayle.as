@@ -216,7 +216,7 @@ public function plantsForMe2(BE:int = 0):void {
 	}
 	dynStats("lib", 1, "lus=", 0);
 	//Slimefeed!
-	slimeFeed();
+	player.slimeFeed();
 	doNext(13);
 }
 

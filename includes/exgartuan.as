@@ -59,7 +59,7 @@ public function fountainEncounter():void {
 public function drinkFountainEndowment():void {
 	outputText("", true);
 	var changed:Boolean = false
-	slimeFeed();
+	player.slimeFeed();
 	outputText("You cup your hands and bring the clear water to your lips, taking a long drink.  It's cool and refreshing, going down quite easily.  Weird.  You thought it would make you feel different somehow.", false);
 	//+300 xp):
 	if(rand(5) == 0) {
@@ -829,7 +829,7 @@ public function exgartuanSleepSurprise():void {
 		else dynStats("lib", .25);
 		dynStats("lus", 10);
 		flags[kFLAGS.TIMES_AUTOFELLATIOED_EXGARTUAN]++;
-		slimeFeed();
+		player.slimeFeed();
 	}
 	player.changeStatusValue("Exgartuan",2,25);
 	doNext(1);

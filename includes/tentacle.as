@@ -123,7 +123,7 @@ public function tentacleVictoryRape():void {
 	}
 	//Female:
 	else {
-		slimeFeed();
+		player.slimeFeed();
 		//High Corruption
 		if(player.cor >= 66) {
 			outputText("Seizing the opportunity, you rush the monster while it is stopped. You grab the fattest phallic tentacle you can find and summarily shit-kick the beast onto the ground. Holding the creature down with one foot, you take the tentacle-cock and poise it in front of your dripping cunt.\n\n", false);
@@ -258,7 +258,7 @@ public function tentacleLossRape():void {
 	//Centaur madness!
 	else if(player.isTaur()) {
 		outputText("Tentacles wrap around your legs before you can stop them.  They continue to coil up your legs, spreading an uncomfortable warmth through your equine half.  Another tentacle wraps around your torso, spreading that same warmth and fuzzing your mind.  You grab one you can reach and attempt to tear it off of you, but two thinner, translucent feelers immobilize your arms, pulling them up behind your head.\n\n", false);
-		slimeFeed();
+		player.slimeFeed();
 		outputText("They test your body, slipping about over your form.  A small tentacle finds its way into your mouth, coiling about your tongue and down your throat.  It's careful not to make you choke, seemingly as curious about your innards as it is about your shell.  You're given little time to think though, as a surge of fluid is deposited into your stomach, making your desire to cum grow even more.  The sharp spines coiled about you act similarly, spreading warmth about them wherever they touch your " + player.skin() + ".\n\n", false);
 		// has at least 1 cock, engulfable:
 		if(player.hasCock()) {
@@ -392,7 +392,7 @@ public function tentacleLossRape():void {
 	}
 	//Milk surprise!
 	if(player.biggestLactation() >= 3.5 && player.gender > 0) {
-		slimeFeed();
+		player.slimeFeed();
 		outputText("Before you can react the creature has wrapped a long, sinewy tendril around each leg.  A third tendril quickly circles your waist.  You can feel the creature's strength immediately and wince as it tightens its grip.  The constricting pain is followed by a tingling, almost burning sensation, which you quickly recognize means the beast has injected you with some kind of poison.  A warm sensation floods your body and you realize with a start the poison is actually an aphrodisiac.\n\n", false);
 		dynStats("lib", 2);
 		outputText("You feel light-headed as the drug spreads through your body quickly.  Your ", false);
@@ -462,7 +462,7 @@ public function tentacleLossRape():void {
 	}
 	if(player.gender == 2)
 	{
-		slimeFeed();
+		player.slimeFeed();
 		dynStats("spe", -1, "int", -1, "lib", 5, "sen", 3, "lus", 20, "cor", 1);
 		if(player.cor < 75) outputText("It grabs you before you can get away!\n\nWhile you struggle valiantly, the beast's raw might is more than a match for you. ", false);
 		outputText("Tentacles burst from the mass and bind your arms, legs, and midriff. ", false);
@@ -476,7 +476,7 @@ public function tentacleLossRape():void {
 	}
 	if(player.gender == 3) 
 	{
-		slimeFeed();
+		player.slimeFeed();
 		dynStats("spe", -1, "int", -1, "lib", 5, "sen", 4, "lus", 35, "cor", 2);
 		if(player.cor < 75) outputText("While you attempt to resist the abomination, its raw muscle mass is too much. ", false);
 		outputText("It pins you to the ground easily. You immediately feel a sharp, horrible pain at the base of your ", false);

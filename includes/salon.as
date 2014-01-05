@@ -191,7 +191,7 @@ public function hairDresserRepeatGreeting():void {
 	salonPaymentMenu();
 }
 public function gloryholeImp():void {
-	slimeFeed();
+	player.slimeFeed();
 	outputText("", true);
 	outputText("You walk over to the hole in the wall, looking at the erect demon-member you'll have to service.  Judging by the height and constant bobbling up it down it does, the imp must be hovering on the other side, trying pretty damn hard to stay in the hole.\n\n", true);
 	if(player.cor < 33) {
@@ -213,7 +213,7 @@ public function gloryholeImp():void {
 
 
 public function gloryholeDoggie():void {
-	slimeFeed();
+	player.slimeFeed();
 	outputText("", true);
 	outputText("You sigh and kneel down to bring yourself level with the dog-dick hanging out of the wall.  It's pointed at the tip with a swollen circular bulb at the base.  As a matter of fact, the dog-dick's owner must be pretty excited to be here - it's dripping cum and the knot has swollen so large that it can't fit back through the hole.\n\n", true);
 	if(player.cor < 33) {
@@ -232,7 +232,7 @@ public function gloryholeDoggie():void {
 	doNext(2168);
 }
 public function gloryholeIncubus():void {
-	slimeFeed();
+	player.slimeFeed();
 	outputText("", true);
 	outputText("You kneel down in front of the throbbing demonic dick, ready to earn your pay.\n\n", false);
 	if(player.cor < 33) {
@@ -251,7 +251,7 @@ public function gloryholeIncubus():void {
 }
 
 public function gloryholeMinotaur(): void {
-	slimeFeed();
+	player.slimeFeed();
 	outputText("Your eyes are drawn to the huge minotaur cock, and you instinctively kneel down in front of it.\n\n", true );
 	outputText("It's the largest available member in the room by a considerable margin, and from your position on your knees, it looks even more massive; it's over two feet long, and has three rings of prepuce spaced around its length. You can just barely span your entire hand around its thickness. You open your mouth wide and lean forward, taking the thick, spongy head into your mouth. The taste is incredibly strong, and its musk is as thick as the minotaur's dick itself. You moan in pleasure, and start bobbing your head back and forth, taking more and more of the dick into your mouth. You stroke the rest of the cock in time with your sucking. You can hear muffled grunting and snorting coming from the other side of the wall, obvious sounds of approval from your partner.\n\n", false);
 	outputText("Driven on by the minotaur's reactions, you take more and more of the minotaur cock into your mouth. As you work your mouth around the first ring, you open up the top section of your " + player.armorName + ", freeing up your " + allBreastsDescript() + ". With each pass, you're able to take more and more of the bull dick down your throat. You caress your " + biggestBreastSizeDescript() + " while moaning around the dick. When you get your mouth around the second ring, the minotaur's cock throbs sharply, and his cum explodes in your mouth. Your eyes bulge in shock, and you pull off the cock as quickly as you can. You swallow the first several shots of thick, rich minotaur cum, while the rest shoots all over your face and tits. You ");
@@ -370,7 +370,7 @@ public function giveGoblinAMilkMustache():void {
 public function minotaurCumBukkakeInSalon():void {
 	outputText("", true);
 	minoCumAddiction(10);
-	slimeFeed();
+	player.slimeFeed();
 	outputText("As the salon door swings closed behind you, a familiar, heavenly scent catches your nose and wicks into your brain, flooding you with need and molten-hot lust.  Lynnette saunters over with her lips slightly pursed and her body jiggling, but you brush her aside.  She's completely forgotten as you close in on the source of your olfactory bliss.  Your sigh dreamily while your pupils slowly dilate from the familiar chemicals pounding through your bloodstream", false);
 	if(player.hasVagina()) outputText(" and puffing up your twat with liquid arousal.\n\n", false);
 	else if(player.hasCock()) outputText(" and turning " + sMultiCockDesc() + " into a turgid, pulsating mass.\n\n", false);

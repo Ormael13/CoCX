@@ -531,7 +531,7 @@ public function sophieBlowsSixtyNine():void {
 	//Resets Displeasure Counter
 	flags[kFLAGS.SOPHIE_FOLLOWER_IRRITATION] = 0;
 	//Slimefeed
-	slimeFeed();
+	player.slimeFeed();
 	//8 hours lust stick
 	luststickApplication(8);
 	//+10 lust

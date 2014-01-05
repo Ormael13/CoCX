@@ -95,7 +95,7 @@ public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 	/*[S. Squeeze] [][][] [Leave]
 	choices(benoitT,benoit,rat,cinnabarAppearance(),"GripingDemons",demon,lilium,LiliumText(false),"Niamh",niamh,roxanneT,roxanne,"S. Squeeze",theSlipperySqueeze,"Tent",tent,"",0,"Leave",13);*/
 	menu();
-	addButton(0,benoitT,eventParser,benoit_);
+	addButton(0,benoitT,benoit_);
 	addButton(1,rat,cinnabar.cinnabarAppearance(false));
 	addButton(2,"Greta's",gretasGarments);
 	addButton(3,"GripingDemons",demon);
