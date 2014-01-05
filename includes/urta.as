@@ -44,8 +44,10 @@ public function urtaSprite():void {
 }
 
 public function urtaCapacity():Number {
+	var bonus:int = flags[kFLAGS.TIMES_RUT_FUCKED_URTAS_CUNT] * 5;
+	if(bonus > 40) bonus = 40;
 	if(flags[kFLAGS.URTA_TENTACLE_GAPED] > 0) return 500;
-	return 60;
+	return 60 + bonus;
 }
 
 public function urtaLove(love:Number = 0):Boolean {
@@ -240,6 +242,13 @@ public function urtaBarApproach():void {
 	//PREGNANT URTA
 	if(flags[kFLAGS.URTA_INCUBATION] > 0) {
 		urtaPreggoApproached();
+		return;
+	}
+	//HERE WE GOEZ!
+	if(((player.hasStatusAffect("rut") >= 0 && player.hasCock()) || (player.hasStatusAffect("heat") >= 0 && player.hasVagina() )))
+	{
+		if(urtaDrunk()) approachDrunkenUrta();
+		else approachSoberUrtaHeatRutProc();
 		return;
 	}
 	//[URTA FRIEND FUCKBUDDY BUT UNHORNY]
